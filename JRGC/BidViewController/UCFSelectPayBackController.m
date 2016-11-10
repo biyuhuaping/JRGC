@@ -784,7 +784,7 @@
             self.backInterestRate = [NSString stringWithFormat:@"%@",[dataDict objectForKey:@"backInterestRate"]];
         }
         self.touZiMoney = [headView.inputMoneyTextFieldLable.text doubleValue];
-        double repayBeans = self.touZiMoney * annualRate/100.0f * (repayPeriodDay/360.0f);
+        double repayBeans = self.touZiMoney * annualRate/100.0f * (repayPeriodDay/360.0f) * self.occupyRate;
         self.interestSum = round(repayBeans * 100)/100.0f;
         self.interestPrdaimSum = xuYaoTouZiMoney;
         [self.beansTableView reloadData];

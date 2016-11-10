@@ -531,8 +531,9 @@
     }
     double liLv = [annleRate doubleValue]/100.0f;
     double qiXian = [repayPeriodDay doubleValue];
+    double occupyRate = [[self.dataDict valueForKey:@"occupyRate"] doubleValue];
     //计算返息的工豆
-    double money1 = ((investAmtMoney * liLv)/360.0f) * qiXian;
+    double money1 = ((investAmtMoney * liLv)/360.0f) * qiXian * occupyRate;
     
     NSString *couponSum = [NSString stringWithFormat:@"%.2f",round(money1 * 100)/100.0f];
     return couponSum;
@@ -1220,6 +1221,7 @@
     }
     viewController.onlyMoney = moneyBalance;
     viewController.touZiMoney =investAmtMoney;
+    viewController.occupyRate = [[self.dataDict valueForKey:@"occupyRate"] doubleValue];
     //返息券有选中，再次进入选择页面
     if (self.coupDict) {
         viewController.backInterestRate = [self.coupDict objectForKey:@"backInterestRate"];
