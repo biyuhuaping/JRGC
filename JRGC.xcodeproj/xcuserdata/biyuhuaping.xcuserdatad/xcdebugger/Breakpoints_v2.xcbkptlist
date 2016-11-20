@@ -9,13 +9,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "JRGC/Setting/coupon(&#x4f18;&#x60e0;&#x5238;)/UCFCouponViewController.m"
-            timestampString = "502871959.395634"
+            filePath = "JRGC/UCFWebView/UCFWebViewJavascriptBridgeController.m"
+            timestampString = "503931441.224992"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "217"
-            endingLineNumber = "217"
-            landmarkName = "-listShowDidSelect:"
+            startingLineNumber = "773"
+            endingLineNumber = "773"
+            landmarkName = "-jsToNative:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "JRGC/UCFWebView/UCFWebViewJavascriptBridgeController.m"
+            timestampString = "503931444.467706"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "871"
+            endingLineNumber = "871"
+            landmarkName = "-jsToNative:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
