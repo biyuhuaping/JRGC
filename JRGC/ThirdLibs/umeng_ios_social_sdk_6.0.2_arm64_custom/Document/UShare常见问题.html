@@ -1,0 +1,55 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><link rel="stylesheet" type="text/css" href="markdown.css"></link></head><body>
+</body></html><blockquote>
+<p>反馈问题可邮件至social-support@umeng.com。</p>
+</blockquote>
+<h1>通用问题</h1>
+<h2>用了U-Share v5.x版本，现在加入6.x编译链接报错</h2>
+<p>U-Share SDK 5.x和6.x版本不相兼容，v6.x是完全重构的一个版本，升级到6.x时请完全移除v5.x或更早版本。</p>
+<h2>模拟器上很多平台没显示</h2>
+<p>这是U-Share SDK内部处理，对于未安装或不支持授权/分享的应用进行了隐藏。</p>
+<h2>腾讯开放平台注册有appID和appKey，该用哪个设置</h2>
+<p>U-Share SDK为了兼容大部分平台命名，统一用appKey和appSecret进行参数设置，而QQ平台仅需将appID作为U-Share的appKey参数传进即可。
+例如Demo中的示例代码：</p>
+<pre><code>    //设置分享到QQ互联的appKey
+    NSString *qqAppID = @&quot;100424468&quot;;
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_QQ appKey:qqAppID  appSecret:nil redirectURL:@&quot;http://mobile.umeng.com/social&quot;];
+</code></pre>
+
+<h2>U-Share返回错误码描述</h2>
+<pre><code>//平台的失败错误码
+/**
+ *  U-Share返回错误类型
+ */
+typedef NS_ENUM(NSInteger, UMSocialPlatformErrorType) {
+    UMSocialPlatformErrorType_Unknow            = 2000,            // 未知错误
+    UMSocialPlatformErrorType_NotSupport        = 2001,            // 不支持（url scheme 没配置，或者没有配置-ObjC， 或则SDK版本不支持或则客户端版本不支持）
+    UMSocialPlatformErrorType_AuthorizeFailed   = 2002,            // 授权失败
+    UMSocialPlatformErrorType_ShareFailed       = 2003,            // 分享失败
+    UMSocialPlatformErrorType_RequestForUserProfileFailed = 2004,  // 请求用户信息失败
+    UMSocialPlatformErrorType_ShareDataNil      = 2005,             // 分享内容为空
+    UMSocialPlatformErrorType_ShareDataTypeIllegal = 2006,          // 分享内容不支持
+    UMSocialPlatformErrorType_CheckUrlSchemaFail = 2007,            // schemaurl fail
+    UMSocialPlatformErrorType_NotInstall        = 2008,             // 应用未安装
+    UMSocialPlatformErrorType_Cancel            = 2009,             // 取消操作
+    UMSocialPlatformErrorType_NotNetWork        = 2010,             // 网络异常
+    UMSocialPlatformErrorType_SourceError       = 2011,             // 第三方错误
+
+    UMSocialPlatformErrorType_ProtocolNotOverride = 2013,   // 对应的  UMSocialPlatformProvider的方法没有实现
+
+};
+</code></pre>
+
+<h1>链接问题</h1>
+<h2>集成QQ，链接时报i386错误</h2>
+<p>QQ平台TencentOpenApi.framework不支持i386 CPU架构。</p>
+<h1>运行问题</h1>
+<h2>授权或分享未跳到目标App</h2>
+<p>可能在工程中配置iOS9以上白名单缺少对应平台参数，参考<a href="http://dev.umeng.com/social/ios/ios9#2">iOS9+ 应用跳转</a>。</p>
+<h2>在目标App授权或分享后未跳转回原App</h2>
+<p>未配置URL Types，参考<a href="http://dev.umeng.com/social/ios/quick-integration#2_1">添加URL Types</a>。</p>
+<h2>授权或分享结束后未回调数据</h2>
+<p>检查系统回调函数，参考<a href="http://dev.umeng.com/social/ios/quick-integration#3_1_2">设置系统回调</a>。</p>
+<h2>微博授权界面显示sso package error</h2>
+<p>微博SSO错误是项目的<code>bundle id</code>和在微博平台<code>bundle id</code>设置的不一致。</p>
+<h2>支付宝返回“-4”“鉴权失败”</h2>
+<p>检查一下<code>bundle id</code>是否和支付宝后台配置的<code>bundle id</code>一致。</p>

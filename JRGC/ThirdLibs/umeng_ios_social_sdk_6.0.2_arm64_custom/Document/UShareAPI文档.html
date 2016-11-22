@@ -1,0 +1,739 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><link rel="stylesheet" type="text/css" href="markdown.css"></link></head><body>
+</body></html><h1>U-Share API说明</h1>
+<h2>引用头文件</h2>
+<pre><code>#import &lt;UMSocialCore/UMSocialCore.h&gt;
+</code></pre>
+
+<h2>接口类UMSocialManager</h2>
+<h3>获取类实例</h3>
+<pre><code>[UMSocialManager defaultManager]
+</code></pre>
+
+<h3>打开日志</h3>
+<pre><code>/**
+ *  打开日志
+ *
+ *  @param isOpen YES代表打开，No代表关闭
+ */
+- (void)openLog:(BOOL)isOpen;
+</code></pre>
+
+<h3>设置平台的appkey</h3>
+<pre><code>/**
+ *  设置平台的appkey
+ *
+ *  @param platformType 平台类型 @see UMSocialPlatformType
+ *  @param appKey       appKey 
+ *  @param appSecret    appSecret （有些平台没有，可以不传）
+ *  @param redirectURL  redirectURL （回调地址）
+ */
+- (BOOL)setPlaform:(UMSocialPlatformType)platformType
+            appKey:(NSString *)appKey
+         appSecret:(NSString *)appSecret
+       redirectURL:(NSString *)redirectURL;
+
+</code></pre>
+
+<h3>分享接口</h3>
+<pre><code>/**
+ *  分享接口
+ *
+ *  @param platformType @see UMSocialPlatformType
+ *  @param shareObject
+ *  @param currentViewController 用于弹出类似邮件分享、短信分享等这样的系统页面
+ *  @param completion   回调
+ *  @discuss currentViewController 只正对sms,email等平台需要传入viewcontroller的平台，其他不需要的平台可以传入nil
+ */
+- (void)shareToPlatform:(UMSocialPlatformType)platformType
+          messageObject:(UMSocialMessageObject *)messageObject
+  currentViewController:(id)currentViewController
+             completion:(UMSocialRequestCompletionHandler)completion;
+</code></pre>
+
+<h3>授权接口</h3>
+<pre><code>/**
+ *  授权接口
+ *
+ *  @param platformType @see UMSocialPlatformType
+ *  @param currentViewController 用于弹出类似邮件分享、短信分享等这样的系统页面
+ *  @discuss currentViewController 只对sms,email等平台需要传入viewcontroller的平台，其他不需要的平台可以传入nil
+ *  @param completion   回调
+ */
+- (void)authWithPlatform:(UMSocialPlatformType)platformType
+   currentViewController:(id)currentViewController
+              completion:(UMSocialRequestCompletionHandler)completion;
+</code></pre>
+
+<h3>取消授权接口</h3>
+<pre><code>/**
+ *  取消授权
+ *
+ *  @param platformType @see UMSocialPlatformType
+ *  @param completion   回调
+ */
+- (void)cancelAuthWithPlatform:(UMSocialPlatformType)platformType
+                    completion:(UMSocialRequestCompletionHandler)completion;
+
+</code></pre>
+
+<h3>获取用户信息接口</h3>
+<pre><code>/**
+ *  获取用户信息
+ *  @param currentViewController 用于弹出类似邮件分享、短信分享等这样的系统页面
+ *  @param completion   回调
+ */
+- (void)getUserInfoWithPlatform:(UMSocialPlatformType)platformType
+          currentViewController:(id)currentViewController
+                     completion:(UMSocialRequestCompletionHandler)completion;
+</code></pre>
+
+<pre><code>/**
+ *  获得从sso或者web端回调到本app的回调
+ *
+ *  @param url 第三方sdk的打开本app的回调的url
+ *
+ *  @return 是否处理  YES代表处理成功，NO代表不处理
+ */
+-(BOOL)handleOpenURL:(NSURL *)url;
+</code></pre>
+
+<pre><code>/**
+ *  动态的增加用户自定义的PlatformProvider
+ *
+ *  @param userDefinePlatformProvider 用户自定义的userDefinePlatformProvider必须实现UMSocialPlatformProvider
+ *  @param platformType               @see platformType platformType的有效范围在 （UMSocialPlatformType_UserDefine_Begin,UMSocialPlatformType_UserDefine_End)之间
+ *
+ *  @return YES代表返回成功,NO代表失败
+ *  @disuss 在调用此函数前，必须先设置对应的平台的配置信息 @see - (BOOL)setPlaform:(UMSocialPlatformType)platformType appKey:(NSString *)appKey appSecret:(NSString *)appSecret redirectURL:(NSString *)redirectURL;
+ */
+-(BOOL)addAddUserDefinePlatformProvider:(id&lt;UMSocialPlatformProvider&gt;)userDefinePlatformProvider
+             withUserDefinePlatformType:(UMSocialPlatformType)platformType;
+</code></pre>
+
+<h3>动态的删除PlatformProvider，不管是预定义还是用户自定义的</h3>
+<pre><code>/**
+ *  动态的删除不想显示的平台，不管是预定义还是用户自定义的
+ *
+ *  @param platformTypeArray 平台类型数组
+ */
+-(void) removePlatformProviderWithPlatformTypes:(NSArray *)platformTypeArray;
+/**
+ *  动态的删除PlatformProvider，不管是预定义还是用户自定义的
+ *
+ *  @param platformType @see UMSocialPlatformType
+ */
+-(void) removePlatformProviderWithPlatformType:(UMSocialPlatformType)platformType;
+
+/**
+ *  获得对应的平台类型platformType的PlatformProvider
+ *
+ *  @param platformType @see platformType
+ *
+ *  @return 返回继承UMSocialPlatformProvider的handle
+ */
+-(id&lt;UMSocialPlatformProvider&gt;)platformProviderWithPlatformType:(UMSocialPlatformType)platformType;
+</code></pre>
+
+<h2>分享内容类</h2>
+<h3>分享消息类UMSocialMessageObject</h3>
+<pre><code>@interface UMSocialMessageObject : NSObject
+
+
+/**
+ * @param text 文本内容
+ * @note 非纯文本分享文本
+ */
+@property (nonatomic, copy) NSString  *text;
+
+/**
+ * 分享的所媒体内容对象
+ */
+@property (nonatomic, strong) UMShareObject *shareObject;
+
++ (UMSocialMessageObject *)messageObject;
+
++ (UMSocialMessageObject *)messageObjectWithMediaObject:(id)mediaObject;
+
+
+@end
+</code></pre>
+
+<h3>基本分享类型UMShareObject</h3>
+<p>UMShareObject是所有多媒体内容的基类，多媒体内容包括图片、音乐、视频、网页等。纯文本分享不属于多媒体，只需要设置UMSocialMessageObject的text属性就可以。</p>
+<pre><code>@interface UMShareObject : NSObject
+/**
+ * 标题
+ * @note 标题的长度依各个平台的要求而定
+ */
+@property (nonatomic, copy) NSString *title;
+
+/**
+ * 描述
+ * @note 描述内容的长度依各个平台的要求而定
+ */
+@property (nonatomic, copy) NSString *descr;
+
+/**
+ * 缩略图 UIImage或者NSData类型或者NSString类型（图片url）
+ */
+@property (nonatomic, strong) id thumbImage;
+
+
+/**
+ * @param title 标题
+ * @param descr 描述
+ * @param thumImage 缩略图（UIImage或者NSData类型，或者image_url）
+ *
+ */
++ (id)shareObjectWithTitle:(NSString *)title
+                     descr:(NSString *)descr
+                 thumImage:(id)thumImage;
++ (void)um_imageDataWithImage:(id)image completion:(void (^)(NSData *image))completion;
+@end
+</code></pre>
+
+<h3>分享图片类（参考父类UMShareObject）</h3>
+<pre><code>@interface UMShareImageObject : UMShareObject
+
+/** 图片内容 （可以是UIImage类对象，也可以是NSdata类对象，也可以是图片链接imageUrl NSString类对象）
+ * @note 图片大小根据各个平台限制而定
+ */
+@property (nonatomic, retain) id shareImage;
+
+@end
+</code></pre>
+
+<h3>分享音乐数据结构（参考父类UMShareObject）</h3>
+<pre><code>@interface UMShareMusicObject : UMShareObject
+
+/** 音乐网页的url地址
+ * @note 长度不能超过10K
+ */
+@property (nonatomic, retain) NSString *musicUrl;
+/** 音乐lowband网页的url地址
+ * @note 长度不能超过10K
+ */
+@property (nonatomic, retain) NSString *musicLowBandUrl;
+/** 音乐数据url地址
+ * @note 长度不能超过10K
+ */
+@property (nonatomic, retain) NSString *musicDataUrl;
+
+/**音乐lowband数据url地址
+ * @note 长度不能超过10K
+ */
+@property (nonatomic, retain) NSString *musicLowBandDataUrl;
+
+@end
+</code></pre>
+
+<h3>分享视频数据结构（参考父类UMShareObject）</h3>
+<pre><code>@interface UMShareVideoObject : UMShareObject
+
+/**
+ 视频网页的url
+
+ @warning 不能为空且长度不能超过255
+ */
+@property (nonatomic, strong) NSString *videoUrl;
+
+/**
+ 视频lowband网页的url
+
+ @warning 长度不能超过255
+ */
+@property (nonatomic, strong) NSString *videoLowBandUrl;
+
+/**
+ 视频数据流url
+
+ @warning 长度不能超过255
+ */
+@property (nonatomic, strong) NSString *videoStreamUrl;
+
+/**
+ 视频lowband数据流url
+
+ @warning 长度不能超过255
+ */
+@property (nonatomic, strong) NSString *videoLowBandStreamUrl;
+
+@end
+</code></pre>
+
+<h3>分享网页数据结构（参考父类UMShareObject）</h3>
+<pre><code>@interface UMShareWebpageObject : UMShareObject
+
+/** 网页的url地址
+ * @note 不能为空且长度不能超过10K
+ */
+@property (nonatomic, retain) NSString *webpageUrl;
+
+@end
+</code></pre>
+
+<h3>邮件分享数据结构（参考父类UMShareObject）</h3>
+<pre><code>/*! @brief 分享消息中的邮件分享对象
+ *
+ * @see UMShareObject
+ */
+@interface UMShareEmailObject : UMShareObject
+
+/**
+ * 接收人
+ */
+@property (nonatomic, strong) NSArray *toRecipients;
+
+/**
+ * 抄送人
+ */
+@property (nonatomic, strong) NSArray *ccRecipients;
+
+/**
+ * 密送人
+ */
+@property (nonatomic, strong) NSArray *bccRecipients;
+
+/**
+ * 文本内容
+ */
+@property (nonatomic, copy) NSString *emailContent;
+
+/**
+ * 图片
+ */
+@property (nonatomic, strong) id emailImage;
+
+/**
+ * 文件（NSData）
+ */
+@property (nonatomic, strong) NSData *emailSendData;
+
+/**
+ * 文件格式
+ */
+@property (nonatomic, copy) NSString *fileType;
+
+/**
+ * 文件名
+ */
+@property (nonatomic, copy) NSString *fileName;
+
+@end
+</code></pre>
+
+<h3>短信分享数据结构（参考父类UMShareObject）</h3>
+<pre><code>/*! @brief 分享消息中的短信分享对象
+ *
+ * @see UMSocialMessageObject
+ */
+@interface UMShareSmsObject : UMShareObject
+
+/**
+ * 接收人
+ */
+@property (nonatomic, strong) NSArray *recipients;
+
+/**
+ * 文本内容
+ */
+@property (nonatomic, copy) NSString *smsContent;
+
+/**
+ * 图片
+ */
+@property (nonatomic, strong) id smsImage;
+
+/**
+ * 文件数据（NSData）
+ */
+@property (nonatomic, strong) NSData *smsSendData;
+
+/**
+ * 文件格式
+ */
+@property (nonatomic, copy) NSString *fileType;
+
+/**
+ * 文件名称
+ */
+@property (nonatomic, copy) NSString *fileName;
+
+/**
+ * 文件地址url
+ */
+@property (nonatomic, copy) NSString *fileUrl;
+
+@end
+</code></pre>
+
+<h2>分享回调类</h2>
+<h3>接口返回数据结构基类</h3>
+<pre><code>@interface UMSocialResponse : NSObject
+
+@property (nonatomic, copy) NSString  *uid;//用户id
+@property (nonatomic, copy) NSString  *openid;//QQ，微信用户openid，其他平台没有
+@property (nonatomic, copy) NSString  *refreshToken;//
+@property (nonatomic, copy) NSDate    *expiration;//授权token（accessToken）过期时间
+@property (nonatomic, copy) NSString  *accessToken;
+
+@property (nonatomic, assign) UMSocialPlatformType  platformType;//对应的平台类型
+/**
+ * 第三方原始数据
+ */
+@property (nonatomic, strong) id  originalResponse;
+
+@end
+</code></pre>
+
+<h3>分享结果数据结构</h3>
+<pre><code>@interface UMSocialShareResponse : UMSocialResponse
+
+@property (nonatomic, copy) NSString  *message;//分享结果提示信息
+
++ (UMSocialShareResponse *)shareResponseWithMessage:(NSString *)message;
+
+@end
+</code></pre>
+
+<h3>授权结果数据结构</h3>
+<pre><code>@interface UMSocialAuthResponse : UMSocialResponse
+
+@end
+</code></pre>
+
+<h3>获取用户信息结果数据结构</h3>
+<pre><code>@interface UMSocialUserInfoResponse : UMSocialResponse
+@property (nonatomic, copy) NSString  *name;//用户名
+@property (nonatomic, copy) NSString  *iconurl;//头像地址
+@property (nonatomic, copy) NSString  *gender;//性别（m表示男，w表示女）
+
+@end
+</code></pre>
+
+<h1>代码示例</h1>
+<h2>授权登录</h2>
+<h3>微信</h3>
+<ul>
+<li>授权登录</li>
+</ul>
+<pre><code>- (void)getAuthInfoFromWechat
+{
+    [[UMSocialManager defaultManager] authWithPlatform:UMSocialPlatformType_WechatSession currentViewController:nil completion:^(id result, NSError *error) {
+        if (error) {
+
+        } else {
+            UMSocialAuthResponse *resp = result;
+
+            // 授权信息
+            NSLog(@&quot;Wechat uid: %@&quot;, resp.uid);
+            NSLog(@&quot;Wechat openid: %@&quot;, resp.openid);
+            NSLog(@&quot;Wechat accessToken: %@&quot;, resp.accessToken);
+            NSLog(@&quot;Wechat refreshToken: %@&quot;, resp.refreshToken);
+            NSLog(@&quot;Wechat expiration: %@&quot;, resp.expiration);
+
+
+            // 第三方平台SDK源数据
+            NSLog(@&quot;Wechat originalResponse: %@&quot;, resp.originalResponse);
+        }
+    }];
+}
+</code></pre>
+
+<ul>
+<li>获取用户信息</li>
+</ul>
+<pre><code>- (void)getUserInfoFromWechat
+{
+    [[UMSocialManager defaultManager] getUserInfoWithPlatform:UMSocialPlatformType_WechatSession currentViewController:nil completion:^(id result, NSError *error) {
+        if (error) {
+
+        } else {
+            UMSocialUserInfoResponse *resp = result;
+
+            // 授权信息
+            NSLog(@&quot;Wechat uid: %@&quot;, resp.uid);
+            NSLog(@&quot;Wechat openid: %@&quot;, resp.openid);
+            NSLog(@&quot;Wechat accessToken: %@&quot;, resp.accessToken);
+            NSLog(@&quot;Wechat refreshToken: %@&quot;, resp.refreshToken);
+            NSLog(@&quot;Wechat expiration: %@&quot;, resp.expiration);
+
+            // 用户信息
+            NSLog(@&quot;Wechat name: %@&quot;, resp.name);
+            NSLog(@&quot;Wechat iconurl: %@&quot;, resp.iconurl);
+            NSLog(@&quot;Wechat gender: %@&quot;, resp.gender);
+
+            // 第三方平台SDK源数据
+            NSLog(@&quot;Wechat originalResponse: %@&quot;, resp.originalResponse);
+        }
+    }];
+}
+</code></pre>
+
+<blockquote>
+<p>获取用户信息已包含授权流程，若需用户名/头像等数据，可以直接调用此方法获取所有授权及用户信息</p>
+</blockquote>
+<h3>新浪</h3>
+<ul>
+<li>授权登录</li>
+</ul>
+<pre><code>- (void)getAuthInfoFromSina
+{
+    [[UMSocialManager defaultManager] authWithPlatform:UMSocialPlatformType_Sina currentViewController:nil completion:^(id result, NSError *error) {
+        if (error) {
+
+        } else {
+            UMSocialAuthResponse *resp = result;
+
+            // 授权信息
+            NSLog(@&quot;Sina uid: %@&quot;, resp.uid);
+            NSLog(@&quot;Sina accessToken: %@&quot;, resp.accessToken);
+            NSLog(@&quot;Sina refreshToken: %@&quot;, resp.refreshToken);
+            NSLog(@&quot;Sina expiration: %@&quot;, resp.expiration);
+
+            // 第三方平台SDK源数据
+            NSLog(@&quot;Sina originalResponse: %@&quot;, resp.originalResponse);
+        }
+    }];
+}
+</code></pre>
+
+<ul>
+<li>获取用户信息</li>
+</ul>
+<pre><code>- (void)getUserInfoFromSina
+{
+    [[UMSocialManager defaultManager] getUserInfoWithPlatform:UMSocialPlatformType_Sina currentViewController:nil completion:^(id result, NSError *error) {
+        if (error) {
+
+        } else {
+            UMSocialUserInfoResponse *resp = result;
+
+            // 授权信息
+            NSLog(@&quot;Sina uid: %@&quot;, resp.uid);
+            NSLog(@&quot;Sina accessToken: %@&quot;, resp.accessToken);
+            NSLog(@&quot;Sina refreshToken: %@&quot;, resp.refreshToken);
+            NSLog(@&quot;Sina expiration: %@&quot;, resp.expiration);
+
+            // 用户信息
+            NSLog(@&quot;Sina name: %@&quot;, resp.name);
+            NSLog(@&quot;Sina iconurl: %@&quot;, resp.iconurl);
+            NSLog(@&quot;Sina gender: %@&quot;, resp.gender);
+
+            // 第三方平台SDK源数据
+            NSLog(@&quot;Sina originalResponse: %@&quot;, resp.originalResponse);
+        }
+    }];
+}
+</code></pre>
+
+<blockquote>
+<p>获取用户信息已包含授权流程，若需用户名/头像等数据，可以直接调用此方法获取所有授权及用户信息</p>
+</blockquote>
+<h3>QQ</h3>
+<ul>
+<li>授权登录</li>
+</ul>
+<pre><code>- (void)getAuthInfoFromQQ
+{
+    [[UMSocialManager defaultManager] authWithPlatform:UMSocialPlatformType_QQ currentViewController:nil completion:^(id result, NSError *error) {
+        if (error) {
+
+        } else {
+            UMSocialAuthResponse *resp = result;
+
+            // 授权信息
+            NSLog(@&quot;QQ uid: %@&quot;, resp.uid);
+            NSLog(@&quot;QQ openid: %@&quot;, resp.openid);
+            NSLog(@&quot;QQ accessToken: %@&quot;, resp.accessToken);
+            NSLog(@&quot;QQ expiration: %@&quot;, resp.expiration);
+
+            // 第三方平台SDK源数据
+            NSLog(@&quot;QQ originalResponse: %@&quot;, resp.originalResponse);
+        }
+    }];
+}
+</code></pre>
+
+<ul>
+<li>获取用户信息</li>
+</ul>
+<pre><code>- (void)getUserInfoFromQQ
+{
+    [[UMSocialManager defaultManager] getUserInfoWithPlatform:UMSocialPlatformType_QQ currentViewController:nil completion:^(id result, NSError *error) {
+        if (error) {
+
+        } else {
+            UMSocialUserInfoResponse *resp = result;
+
+            // 授权信息
+            NSLog(@&quot;QQ uid: %@&quot;, resp.uid);
+            NSLog(@&quot;QQ openid: %@&quot;, resp.openid);
+            NSLog(@&quot;QQ accessToken: %@&quot;, resp.accessToken);
+            NSLog(@&quot;QQ expiration: %@&quot;, resp.expiration);
+
+            // 用户信息
+            NSLog(@&quot;QQ name: %@&quot;, resp.name);
+            NSLog(@&quot;QQ iconurl: %@&quot;, resp.iconurl);
+            NSLog(@&quot;QQ gender: %@&quot;, resp.gender);
+
+            // 第三方平台SDK源数据
+            NSLog(@&quot;QQ originalResponse: %@&quot;, resp.originalResponse);
+        }
+    }];
+}
+</code></pre>
+
+<blockquote>
+<p>获取用户信息已包含授权流程，若需用户名/头像等数据，可以直接调用此方法获取所有授权及用户信息</p>
+</blockquote>
+<h2>分享</h2>
+<h3>分享文本</h3>
+<pre><code>- (void)shareTextToPlatformType:(UMSocialPlatformType)platformType
+{
+    //创建分享消息对象
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+    //设置文本
+    messageObject.text = @&quot;社会化组件UShare将各大社交平台接入您的应用，快速武装App。&quot;;
+
+    //调用分享接口
+    [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
+        if (error) {
+            NSLog(@&quot;************Share fail with error %@*********&quot;,error);
+        }else{
+            NSLog(@&quot;response data is %@&quot;,data);
+        }
+    }];
+}
+</code></pre>
+
+<h3>分享图片</h3>
+<pre><code>- (void)shareImageToPlatformType:(UMSocialPlatformType)platformType
+{
+    //创建分享消息对象
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+
+    //创建图片内容对象
+    UMShareImageObject *shareObject = [[UMShareImageObject alloc] init];
+    //如果有缩略图，则设置缩略图
+    shareObject.thumbImage = [UIImage imageNamed:@&quot;icon&quot;];
+    [shareObject setShareImage:@&quot;http://dev.umeng.com/images/tab2_1.png&quot;];
+
+    //分享消息对象设置分享内容对象
+    messageObject.shareObject = shareObject;
+
+    //调用分享接口
+    [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
+        if (error) {
+            NSLog(@&quot;************Share fail with error %@*********&quot;,error);
+        }else{
+            NSLog(@&quot;response data is %@&quot;,data);
+        }
+    }];
+}
+</code></pre>
+
+<h3>分享图文（新浪支持，微信/QQ仅支持图或文本分享）</h3>
+<pre><code>- (void)shareImageAndTextToPlatformType:(UMSocialPlatformType)platformType
+{
+    //创建分享消息对象
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+
+    //设置文本
+    messageObject.text = @&quot;社会化组件UShare将各大社交平台接入您的应用，快速武装App。&quot;;
+
+    //创建图片内容对象
+    UMShareImageObject *shareObject = [[UMShareImageObject alloc] init];
+    //如果有缩略图，则设置缩略图
+    shareObject.thumbImage = [UIImage imageNamed:@&quot;icon&quot;];
+    [shareObject setShareImage:@&quot;http://dev.umeng.com/images/tab2_1.png&quot;];
+
+    //分享消息对象设置分享内容对象
+    messageObject.shareObject = shareObject;
+
+    //调用分享接口
+    [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
+        if (error) {
+            NSLog(@&quot;************Share fail with error %@*********&quot;,error);
+        }else{
+            NSLog(@&quot;response data is %@&quot;,data);
+        }
+    }];
+}
+</code></pre>
+
+<h3>分享网页</h3>
+<pre><code>- (void)shareWebPageToPlatformType:(UMSocialPlatformType)platformType
+{
+    //创建分享消息对象
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+
+    //创建网页内容对象
+    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:@&quot;分享标题&quot; descr:@&quot;分享内容描述&quot; thumImage:[UIImage imageNamed:@&quot;icon&quot;]];
+    //设置网页地址
+    shareObject.webpageUrl =@&quot;http://mobile.umeng.com/social&quot;;
+
+    //分享消息对象设置分享内容对象
+    messageObject.shareObject = shareObject;
+
+    //调用分享接口
+    [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
+        if (error) {
+            NSLog(@&quot;************Share fail with error %@*********&quot;,error);
+        }else{
+            NSLog(@&quot;response data is %@&quot;,data);
+        }
+    }];
+}
+</code></pre>
+
+<h3>分享音乐</h3>
+<pre><code>- (void)shareMusicToPlatformType:(UMSocialPlatformType)platformType
+{
+    //创建分享消息对象
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+
+    //创建音乐内容对象
+    UMShareMusicObject *shareObject = [UMShareMusicObject shareObjectWithTitle:@&quot;分享标题&quot; descr:@&quot;分享内容描述&quot; thumImage:[UIImage imageNamed:@&quot;icon&quot;]];
+    //设置音乐网页播放地址
+    shareObject.musicUrl = @&quot;http://c.y.qq.com/v8/playsong.html?songid=108782194&amp;source=yqq#wechat_redirect&quot;;
+    //            shareObject.musicDataUrl = @&quot;这里设置音乐数据流地址（如果有的话，而且也要看所分享的平台支不支持）&quot;;
+    //分享消息对象设置分享内容对象
+    messageObject.shareObject = shareObject;
+
+    //调用分享接口
+    [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
+        if (error) {
+            NSLog(@&quot;************Share fail with error %@*********&quot;,error);
+        }else{
+            NSLog(@&quot;response data is %@&quot;,data);
+        }
+    }];
+}
+</code></pre>
+
+<h3>分享视频</h3>
+<pre><code>- (void)shareVedioToPlatformType:(UMSocialPlatformType)platformType
+{
+    //创建分享消息对象
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+
+    //创建视频内容对象
+    UMShareVideoObject *shareObject = [UMShareVideoObject shareObjectWithTitle:@&quot;分享标题&quot; descr:@&quot;分享内容描述&quot; thumImage:[UIImage imageNamed:@&quot;icon&quot;]];
+    //设置视频网页播放地址
+    shareObject.videoUrl = @&quot;http://video.sina.com.cn/p/sports/cba/v/2013-10-22/144463050817.html&quot;;
+    //            shareObject.videoStreamUrl = @&quot;这里设置视频数据流地址（如果有的话，而且也要看所分享的平台支不支持）&quot;;
+
+    //分享消息对象设置分享内容对象
+    messageObject.shareObject = shareObject;
+
+    //调用分享接口
+    [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
+        if (error) {
+            NSLog(@&quot;************Share fail with error %@*********&quot;,error);
+        }else{
+            NSLog(@&quot;response data is %@&quot;,data);
+        }
+    }];
+}
+</code></pre>

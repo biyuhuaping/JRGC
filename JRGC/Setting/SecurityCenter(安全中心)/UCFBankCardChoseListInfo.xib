@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="Kf5-ds-qfZ">
+            <rect key="frame" x="0.0" y="0.0" width="385" height="115"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vv9-O8-SRk">
+                    <rect key="frame" x="15" y="15" width="355" height="85"/>
+                    <string key="text">• 添加支持快捷支付的银行卡，可在金融工场对您的资金实现充值、提现操作。
+• 不支持的快捷支付的银行卡仅能提现，不能充值。</string>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="Vv9-O8-SRk" firstAttribute="top" secondItem="Kf5-ds-qfZ" secondAttribute="top" constant="15" id="Xq9-KJ-NpZ"/>
+                <constraint firstItem="Vv9-O8-SRk" firstAttribute="leading" secondItem="Kf5-ds-qfZ" secondAttribute="leading" constant="15" id="ig5-h3-cpa"/>
+                <constraint firstAttribute="trailing" secondItem="Vv9-O8-SRk" secondAttribute="trailing" constant="15" id="jrQ-pJ-EOL"/>
+                <constraint firstAttribute="bottom" secondItem="Vv9-O8-SRk" secondAttribute="bottom" constant="15" id="tIc-kY-yTJ"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="552.5" y="33.5"/>
+        </view>
+    </objects>
+</document>

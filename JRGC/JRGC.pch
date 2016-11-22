@@ -1,0 +1,210 @@
+//
+//  JRGC.pch
+//  JRGC
+//
+//  Created by HeJing on 15/3/30.
+//  Copyright (c) 2015年 qinwei. All rights reserved.
+//
+
+
+#ifndef JRGC_JRGC_pch
+#define JRGC_JRGC_pch
+
+#import <UIKit/UIKit.h>
+#import "EnvironmentalFile.h"
+#import "TypeDefine.h"
+#import "Common.h"
+#import "DBColor.h"
+#import "UserInfoSingle.h"
+#import "BlockUIAlertView.h"
+
+#define XPOS 15
+#define YPOS 25
+#define TEXTFIELDHEIGHT 37
+#define BTNHEIGHT 37
+#define SPACING 15
+
+//标详情一些宏定义
+#define HeadBkHeight 225
+#define FirstMarkYPos 8  //二级标签y位置
+#define MarkHeight 14   //二级标签高度
+#define MarkXSpacing 10 //二级标签间距
+#define MarkInSpacing 8 //二级标签内部间隙
+#define MarkLabelFont 11
+#define IconYPos 11
+#define IconXPos 13
+#define LabelWidTh 150
+#define TitleXDistance 5
+#define scrollViewHeight4S 503
+
+
+#define TABIMAGEVIEWTAG 100000
+
+typedef enum : NSUInteger {
+    PROJECTDETAILTYPENORMAL,
+    PROJECTDETAILTYPERIGHTINTEREST,
+    PROJECTDETAILTYPEBONDSRRANSFER,
+} PROJECTDETAILTYPE;
+
+#define GUIDE_OPEN @"1"
+#define OCRSerVer @"http://58.17.246.116:5005/icr/recognize_id_card?encoding=UTF8&head_portrait=0&crop_image=0"
+
+#define ScreenWidth     [[UIScreen mainScreen] bounds].size.width
+#define ScreenHeight    [[UIScreen mainScreen] bounds].size.height
+#define BidDetailScrollViewHeight    [[UIScreen mainScreen] bounds].size.height - 57 - 64
+#define TabBarHeight            49
+#define StatusBarHeight         80
+#define NavigationBarHeight     64
+#define TableViewHeight         (ScreenHeight - TabBarHeight - StatusBarHeight - NavigationBarHeight)
+#define kIS_IOS7        ([[[UIDevice currentDevice] systemVersion] intValue]>=7)
+#define kIS_IOS8        ([[[UIDevice currentDevice] systemVersion] intValue]>=8)
+#define kIS_IOS9        ([[[UIDevice currentDevice] systemVersion] intValue]>=9)
+#define kIS_Iphone5     CGSizeEqualToSize([UIScreen mainScreen].preferredMode.size, CGSizeMake(640, 1136))
+#define kIS_Iphone4     (ScreenHeight > 480)
+#define CGRECT_NO_NAV(x,y,w,h)      CGRectMake((x), (y + (kIS_IOS7 ? StatusBarHeight:0)), (w), (h))
+#define CGRECT_HAVE_NAV(x,y,w,h)    CGRectMake((x), (y + (kIS_IOS7 ? (NavigationBarHeight+StatusBarHeight):(NavigationBarHeight+StatusBarHeight))), (w), (h))
+
+
+//颜色
+#define UIColorWithRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+#define UIColorWithRGBA(r,g,b,a) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]
+
+
+//单例
+#define DEFINE_SINGLETON_FOR_HEADER(className) \
+\
++ (className *)shared##className;
+
+#define DEFINE_SINGLETON_FOR_CLASS(className) \
+\
++ (className *)shared##className { \
+static className *shared##className = nil; \
+static dispatch_once_t onceToken; \
+dispatch_once(&onceToken, ^{ \
+shared##className = [[self alloc] init]; \
+}); \
+return shared##className; \
+}
+
+
+#define UUID            @"userId"
+#define TIME            @"time"
+#define DOPA            @"dopa"
+#define DATADIC         @"dataDic" //数字字典
+#define BACK_TO_PERSON_CENTER   @"backOffNotice"
+#define SAFE_LOGIN_OUT          @"saveloginout"
+#define BACK_TO_LOGOUT          @"logoutMyCenter"
+#define BACK_TO_BANNER          @"logoutMyBanner"
+#define BACK_TO_LOGIN          @"logoutMyLogin"
+#define BACK_TO_HS              @"backToHS"
+//#define IDCARD_STATE    @"card_state"   //身份证认证状态
+
+//#define BANKCARD_STATE  @"bankcard_state"    //是否绑定银行卡
+
+
+#define REALNAME        @"userName1"//真实名字
+#define LOGINNAME       @"userLoginName"//用户名
+#define HEADURL         @"headerUrl"
+#define OPENSTATUS      @"openStatus"
+#define COMPANYAGENT    @"companyAgent" //是否是机构用户
+#define SEX             @"sex"//性别
+#define YeeBayTopSwitch @"yeepayflag"
+#define YeeBayPersonalSwitch @"yeepayflag_A"
+#define LOGOURL         @"http://fore.9888.cn/cms/index.php?m=content&c=index&a=lists&catid=122&page=1/"
+#define	APP_RATING_URL	@"https://itunes.apple.com/us/app/jin-rong-gong-chang/id939125881?mt=8&uo=4"
+#define APP_UPDATE_URL  @"http://itunes.apple.com/lookup?id=939125881"
+#define SIGNATUREAPP       @"signature"
+#define JSPATCH_RSA_PUBLICKEY @"-----BEGIN PUBLIC KEY-----\nMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCgdJNm85BAVjIiSXRziumME/Ss\nhTmTyxhB6wjyDrxFXw/nx0zMd3RWU6Z2PrbJrJsAI6QMjdc/YmDae/V6tEnzf6zW\n2hP2SVRUECml1sZ02vBucrHZsMRr+6cYinXdJy4dAyWfY/YC04svuDBS83rY3Q/k\nAm84Fsm2MsLVoFkOQQIDAQAB\n-----END PUBLIC KEY-----"
+#define JSPATCH_APPKEY      @"83b808e7b173b6c0"                                 //JSPatch key
+// 修改绑定手机
+#define MODIFYPHONE_SUCCESSED @"modifyphonesuccessed"
+// 修改绑定银行
+#define MODIBANKZONE_SUCCESSED @"modifybankzonesuccessed"
+
+// 检测是否首次登录
+#define CheckIsInitiaLogin      @"InitiaLogin"
+// 每天首次登录时间
+#define FirstLoginTimeEveryday      @"firstLoginEveryday"
+#define ISHASQIANDAOALERT           @"shifoutankuang"
+#define AddBrightness            @"Addbrightness"
+#define ReduceBrightness            @"Reducebrightness"
+#define EndBrightnessTimer          @"endTimer"
+#define CHECK_NEW_VERSION           @"checknewversion"
+
+#define GCODE           @"gesturecode" //手势密码
+#define GCODE_Swtich    @"gesturecode_Switch" //开关手势密码
+#define WRANGGCODENUMBER @"WrangGCodeNumber"  //输错手势密码的次数
+#define LOCKDATE        @"lockdate"           //锁住的时间
+
+#define USERINFO        @"userinfo"    //个人信息
+#define IDCARD          @"idCard"      //身份证号码
+#define EMAIL           @"email"
+#define NAME            @"realname"
+#define PHONENUM        @"phone"
+#define IDENTIFY        @"isidentity"
+#define FACCEURL        @"faceurl"
+#define ISSETPAYPWD     @"issetpaypwd"
+#define SEARCHHISTORY   @"searchHistory"
+#define APPFILE         @"searchHistory.plist"
+#define FACESWITCHSTATUS @"useValidFace" //刷脸登录的状态的key
+
+#define PRAISALERTISUP  @"praisalertup"     //个人中心好评框
+#define UPDATEWARNALERT @"updateWarnAlert"  //升级弹框
+#define REDALERTISHIDE  @"redpointcheck"    //调用红点接口，通知服务器红点标示倍查看
+#define CHECK_RED_POINT @"checkpointred"    //随时检测红点的接口
+#define REGIST_JPUSH    @"regist_jpush"
+#define CHECK_GOOD_COMMENT          @"checkGoodCommentAlert"
+#define IS_RELOADE_REQUEST @"isReloadRequest"  //是否重新加载因验签失效造成失败的接口
+
+
+#define BBSURL          @"http://bbs.9888.cn/appaction.php"
+#define MALLURL         @"http://mmall.9888.cn"
+#define LEVELURL        @"http://m.9888.cn/static/wap/user-level/index.html"  //会员等级
+#define LEVELURLTEQUAN  @"http://m.9888.cn/mpwap/app/vipTeQuan/qryVipTeQuanDetail.shtml"  // 特权详情
+#define LEVELURLSHENGJI @"http://m.9888.cn/mpwap/app/upgradeStategy/index.shtml"  //升级攻略
+#define LEVELURLXIANGQING   @"http://m.9888.cn/mpwap/app/upgradeStategy/scoreDetail.shtml"  //工分详情
+#define CMS_BANNER          @"http://fore.9888.cn/cms/api/appbanner_obj.php?key=0ca175b9c0f726a831d895e&p=10"//正式
+#define ANNUALCOMMOSIONURL @"http://m.9888.cn/static/wap/topic-annual-commision/index.html"//佣金返利
+//各种H5协议页面地址
+#define TRUSTEESHIP     @"http://m.9888.cn/static/wap/protocol-trusteeship/index.html"      //1.资管三方协议
+#define COUNSELING      @"http://m.9888.cn/static/wap/protocol-counseling/index.html"       //2.信息咨询服务协议
+#define RECHARGERUL     @"http://m.9888.cn/static/wap/protocol-special-recharge/index.html" //3、特殊用户充值提示信息
+#define CASHWIRHDRAWH5  @"http://m.9888.cn/static/wap/protocol-special-cash/index.html"     //4、特殊用户提现提示信息H5
+#define REMINDBANKH5    @"http://m.9888.cn/static/wap/protocol-special-bind/index.html"     //5、特殊用户绑卡提示信息H5
+#define BANKDEPOSITORYACCOUNTURL    @"http://m.9888.cn/static/wap/topic-hui-shang/index.html" //6、微商银行专题页面url
+#define HSAccountIllustrationURL    @"http://m.9888.cn/mpwap/bankAccountExplain.html"       //徽商存管账户说明
+#define HELPCENTERURL @"http://m.9888.cn/static/wap/faq/index.html"//帮助中心Url
+
+#define NOTICECORPORAT  @"http://m.9888.cn/static/wap/notice-corporate-structure/index.html" //查看披露信息
+
+#define NOTICERISKH5 @"http://m.9888.cn/static/wap/notice-risk-prompt/index.html"//风险揭示
+
+//================== 调试宏 ==================
+#ifdef DEBUG
+# define DBLOG(fmt, ...) NSLog((@"\n-—————函数名:%s"  "行号:%d\n-—————" fmt), __FUNCTION__, __LINE__, ##__VA_ARGS__);
+# define DBLog(fmt, ...) NSLog((@"\n-—————函数名:%s"  "行号:%d\n-—————" fmt), __FUNCTION__, __LINE__, ##__VA_ARGS__);
+#else
+# define DBLOG(...);
+# define DBLog(...);
+#endif
+
+
+
+#ifdef DEBUG
+#define DLog(...) NSLog(__VA_ARGS__)
+#else
+#define DLog(...) {}
+#endif
+
+
+
+
+#define SCREEN_WIDTH  [[UIScreen mainScreen] bounds].size.width
+
+#define SCREEN_HEIGHT  [[UIScreen mainScreen] bounds].size.height
+
+#define IpAdress @"120.24.63.174:7000" //服务器ip地址
+
+#define AuthCodeString @"MTAwNDE0bm9kZXZpY2Vjd2F1dGhvcml6Zb/m5+fi5+Lq3+bg5efm5ef/4ufi4Obg5Yjm5uvl5ubrkeXm5uvl5uai6+Xm5uvl5uTm6+Xm5ufi9ebn5+c="
+
+#endif

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="E1z-fr-erE" customClass="UCFBankCard">
+            <rect key="frame" x="0.0" y="0.0" width="290" height="192"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bankcard_bg" translatesAutoresizingMaskIntoConstraints="NO" id="Mpp-pD-XJa">
+                    <rect key="frame" x="0.0" y="0.0" width="290" height="192"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="IXt-uA-x7c">
+                    <rect key="frame" x="19" y="8" width="35" height="35"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="35" id="ud9-X8-Hdy"/>
+                        <constraint firstAttribute="width" constant="35" id="zFd-9a-xjg"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="abl-Fp-zUJ">
+                    <rect key="frame" x="60" y="26" width="0.0" height="0.0"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="借记卡" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vga-p2-bWh">
+                    <rect key="frame" x="225" y="17" width="45" height="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3EA-8B-DKO">
+                    <rect key="frame" x="20" y="165" width="0.0" height="0.0"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NSj-0n-6Co">
+                    <rect key="frame" x="20" y="175" width="0.0" height="0.0"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                    <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bankcard_icon_fast" translatesAutoresizingMaskIntoConstraints="NO" id="Qa9-a3-KEn">
+                    <rect key="frame" x="234" y="155" width="36" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="36" id="0VW-cA-d1e"/>
+                        <constraint firstAttribute="height" constant="20" id="rvp-FA-jGg"/>
+                    </constraints>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bindbankcard_invalid" translatesAutoresizingMaskIntoConstraints="NO" id="lMW-vG-tsZ">
+                    <rect key="frame" x="168" y="59" width="97" height="55"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="55" id="JEf-Je-bkK"/>
+                        <constraint firstAttribute="width" constant="97" id="iqS-0q-P7Z"/>
+                    </constraints>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="NSj-0n-6Co" firstAttribute="leading" secondItem="E1z-fr-erE" secondAttribute="leading" constant="20" id="1UR-dP-ksg"/>
+                <constraint firstItem="IXt-uA-x7c" firstAttribute="top" secondItem="E1z-fr-erE" secondAttribute="top" constant="8" id="5z7-0C-Spe"/>
+                <constraint firstItem="abl-Fp-zUJ" firstAttribute="leading" secondItem="IXt-uA-x7c" secondAttribute="trailing" constant="6" id="71o-x8-PjK"/>
+                <constraint firstAttribute="bottom" secondItem="Qa9-a3-KEn" secondAttribute="bottom" constant="17" id="AEz-Aa-A2R"/>
+                <constraint firstAttribute="trailing" secondItem="Mpp-pD-XJa" secondAttribute="trailing" id="BEb-iL-6Ds"/>
+                <constraint firstAttribute="bottom" secondItem="NSj-0n-6Co" secondAttribute="bottom" constant="17" id="CMg-OH-dos"/>
+                <constraint firstItem="IXt-uA-x7c" firstAttribute="centerY" secondItem="abl-Fp-zUJ" secondAttribute="centerY" constant="-0.5" id="EHq-mc-9a5"/>
+                <constraint firstAttribute="trailing" secondItem="vga-p2-bWh" secondAttribute="trailing" constant="20" id="JsZ-7S-IfC"/>
+                <constraint firstItem="NSj-0n-6Co" firstAttribute="top" secondItem="3EA-8B-DKO" secondAttribute="bottom" constant="10" id="Lzq-Je-ydt"/>
+                <constraint firstAttribute="bottom" secondItem="Mpp-pD-XJa" secondAttribute="bottom" id="Nnq-U5-YfY"/>
+                <constraint firstItem="Mpp-pD-XJa" firstAttribute="leading" secondItem="E1z-fr-erE" secondAttribute="leading" id="PPw-LP-VtM"/>
+                <constraint firstItem="vga-p2-bWh" firstAttribute="centerY" secondItem="abl-Fp-zUJ" secondAttribute="centerY" id="TQq-xf-Dyg"/>
+                <constraint firstItem="lMW-vG-tsZ" firstAttribute="top" secondItem="vga-p2-bWh" secondAttribute="bottom" constant="24" id="ZRd-HX-F6s"/>
+                <constraint firstItem="Mpp-pD-XJa" firstAttribute="top" secondItem="E1z-fr-erE" secondAttribute="top" id="egK-Ij-tlM"/>
+                <constraint firstItem="3EA-8B-DKO" firstAttribute="leading" secondItem="E1z-fr-erE" secondAttribute="leading" constant="20" id="naW-52-hZ6"/>
+                <constraint firstAttribute="trailing" secondItem="Qa9-a3-KEn" secondAttribute="trailing" constant="20" id="niL-KE-vKi"/>
+                <constraint firstItem="IXt-uA-x7c" firstAttribute="leading" secondItem="E1z-fr-erE" secondAttribute="leading" constant="19" id="ru4-GN-eR9"/>
+                <constraint firstAttribute="trailing" secondItem="lMW-vG-tsZ" secondAttribute="trailing" constant="25" id="uB0-mn-gfC"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="bankCardImageView" destination="IXt-uA-x7c" id="2aB-0V-VYj"/>
+                <outlet property="bankCardNoBottomSpace" destination="CMg-OH-dos" id="h2M-97-NXh"/>
+                <outlet property="bankCardNoLeftSpace" destination="1UR-dP-ksg" id="J01-xJ-lsf"/>
+                <outlet property="bankCardNoTopSpace" destination="Lzq-Je-ydt" id="Rkz-LY-1bC"/>
+                <outlet property="bankImageAndTitleSpace" destination="71o-x8-PjK" id="85l-Hb-Yzv"/>
+                <outlet property="bankImageViewHeight" destination="ud9-X8-Hdy" id="cJd-Py-qzq"/>
+                <outlet property="bankImageViewLeftSpace" destination="ru4-GN-eR9" id="qy0-Xb-XRJ"/>
+                <outlet property="bankImageViewTopSpace" destination="5z7-0C-Spe" id="xob-ds-RGS"/>
+                <outlet property="bankImageViewWidth" destination="zFd-9a-xjg" id="xfx-Di-Z1v"/>
+                <outlet property="bankNameLabel" destination="abl-Fp-zUJ" id="i9T-2x-8I4"/>
+                <outlet property="bankTypeTrailSpace" destination="JsZ-7S-IfC" id="kbf-6d-9Kd"/>
+                <outlet property="cardNoLabel" destination="NSj-0n-6Co" id="Rsi-IV-hgY"/>
+                <outlet property="image_bankCardValuable" destination="lMW-vG-tsZ" id="jt2-zz-xvp"/>
+                <outlet property="quickPayBottomSpace" destination="AEz-Aa-A2R" id="ZH8-Ij-IwL"/>
+                <outlet property="quickPayHeight" destination="rvp-FA-jGg" id="Hg7-b3-lkR"/>
+                <outlet property="quickPayImageView" destination="Qa9-a3-KEn" id="A7X-bL-aYP"/>
+                <outlet property="quickPayTrailSpace" destination="niL-KE-vKi" id="657-va-MTP"/>
+                <outlet property="quickPayWidth" destination="0VW-cA-d1e" id="L3E-fQ-W3T"/>
+                <outlet property="useNameLeftSpace" destination="naW-52-hZ6" id="KDh-NX-EAi"/>
+                <outlet property="userNameLabel" destination="3EA-8B-DKO" id="bRS-xc-3r5"/>
+            </connections>
+            <point key="canvasLocation" x="224" y="161"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="bankcard_bg" width="290" height="142"/>
+        <image name="bankcard_icon_fast" width="36" height="20"/>
+        <image name="bindbankcard_invalid" width="97" height="56"/>
+    </resources>
+</document>

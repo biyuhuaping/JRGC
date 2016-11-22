@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="RechargeFixedTelNumView">
+            <rect key="frame" x="0.0" y="0.0" width="300" height="213"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E0C-B3-AH8">
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="修改银行预留手机号" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y4s-Ff-aYZ">
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3pO-Pi-1cJ">
+                            <state key="normal" backgroundImage="calculator_close1"/>
+                            <connections>
+                                <action selector="closeView:" destination="iN0-l3-epB" eventType="touchUpInside" id="jRe-Zc-sUh"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="8I6-lA-0uU"/>
+                        <constraint firstItem="3pO-Pi-1cJ" firstAttribute="top" secondItem="E0C-B3-AH8" secondAttribute="top" id="8MI-vh-pQA"/>
+                        <constraint firstItem="Y4s-Ff-aYZ" firstAttribute="top" secondItem="E0C-B3-AH8" secondAttribute="top" id="Arn-M5-BQH"/>
+                        <constraint firstAttribute="trailing" secondItem="Y4s-Ff-aYZ" secondAttribute="trailing" constant="44" id="G2p-qI-UZD"/>
+                        <constraint firstAttribute="trailing" secondItem="3pO-Pi-1cJ" secondAttribute="trailing" id="QJf-ce-7j0"/>
+                        <constraint firstItem="Y4s-Ff-aYZ" firstAttribute="leading" secondItem="E0C-B3-AH8" secondAttribute="leading" constant="15" id="ZNf-z0-tfD"/>
+                        <constraint firstAttribute="bottom" secondItem="Y4s-Ff-aYZ" secondAttribute="bottom" id="dE6-Nx-Sso"/>
+                        <constraint firstItem="3pO-Pi-1cJ" firstAttribute="leading" secondItem="Y4s-Ff-aYZ" secondAttribute="trailing" id="gJk-fL-GhZ"/>
+                        <constraint firstAttribute="bottom" secondItem="3pO-Pi-1cJ" secondAttribute="bottom" id="jjX-hG-oxQ"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DBy-U2-N3D">
+                    <subviews>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入银行预留手机号" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4da-dV-FdF">
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                    </subviews>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="4da-dV-FdF" secondAttribute="trailing" constant="10" id="NSy-Ka-fP9"/>
+                        <constraint firstAttribute="bottom" secondItem="4da-dV-FdF" secondAttribute="bottom" id="WWi-sJ-76P"/>
+                        <constraint firstAttribute="height" constant="37" id="Y4d-mH-xaf"/>
+                        <constraint firstItem="4da-dV-FdF" firstAttribute="top" secondItem="DBy-U2-N3D" secondAttribute="top" id="fOV-5a-9JS"/>
+                        <constraint firstItem="4da-dV-FdF" firstAttribute="leading" secondItem="DBy-U2-N3D" secondAttribute="leading" constant="10" id="le8-5g-uZi"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                            <color key="value" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                            <real key="value" value="1"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="4"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uS6-Zb-MIp">
+                    <subviews>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入银行预留手机号" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Po5-23-kKa">
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                    </subviews>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="Po5-23-kKa" secondAttribute="bottom" id="10P-mJ-5dC"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="35" id="Asx-6t-QOe"/>
+                        <constraint firstAttribute="height" constant="37" id="OCP-r7-GMy"/>
+                        <constraint firstAttribute="trailing" secondItem="Po5-23-kKa" secondAttribute="trailing" constant="10" id="T3a-hK-jd4"/>
+                        <constraint firstItem="Po5-23-kKa" firstAttribute="leading" secondItem="uS6-Zb-MIp" secondAttribute="leading" constant="10" id="ZeN-MY-LSp"/>
+                        <constraint firstItem="Po5-23-kKa" firstAttribute="top" secondItem="uS6-Zb-MIp" secondAttribute="top" id="fip-vk-Uhx"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                            <color key="value" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                            <real key="value" value="1"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="4"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9e7-In-Ola">
+                    <color key="backgroundColor" red="0.24502758474378827" green="0.40288527478923664" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="107" id="bOK-Cj-IZf"/>
+                        <constraint firstAttribute="height" constant="35" id="pCt-cO-2Em"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <state key="normal" title="验证码"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OIo-zx-5gS">
+                    <constraints>
+                        <constraint firstAttribute="height" constant="37" id="nbR-JJ-IUU"/>
+                    </constraints>
+                    <state key="normal" title="Button">
+                        <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                    </state>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="9e7-In-Ola" secondAttribute="trailing" constant="15" id="3El-Tg-5nv"/>
+                <constraint firstItem="OIo-zx-5gS" firstAttribute="top" secondItem="uS6-Zb-MIp" secondAttribute="bottom" constant="15" id="C5H-Ev-iqe"/>
+                <constraint firstItem="DBy-U2-N3D" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="ETK-e0-xOA"/>
+                <constraint firstAttribute="trailing" secondItem="OIo-zx-5gS" secondAttribute="trailing" constant="15" id="JEU-lb-O14"/>
+                <constraint firstItem="uS6-Zb-MIp" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="JXc-u5-DUF"/>
+                <constraint firstAttribute="trailing" secondItem="E0C-B3-AH8" secondAttribute="trailing" id="SIU-Og-YTy"/>
+                <constraint firstItem="9e7-In-Ola" firstAttribute="top" secondItem="DBy-U2-N3D" secondAttribute="bottom" constant="10" id="SfO-eZ-9Og"/>
+                <constraint firstItem="OIo-zx-5gS" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="VpR-tm-pSe"/>
+                <constraint firstAttribute="trailing" secondItem="DBy-U2-N3D" secondAttribute="trailing" constant="15" id="Wxg-rX-Rrf"/>
+                <constraint firstItem="uS6-Zb-MIp" firstAttribute="top" secondItem="DBy-U2-N3D" secondAttribute="bottom" constant="10" id="Xfb-3T-FM0"/>
+                <constraint firstItem="DBy-U2-N3D" firstAttribute="top" secondItem="E0C-B3-AH8" secondAttribute="bottom" constant="15" id="Zv4-5y-yLg"/>
+                <constraint firstItem="E0C-B3-AH8" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="b6b-RB-hlQ"/>
+                <constraint firstItem="E0C-B3-AH8" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="fUV-t8-ZpL"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                    <real key="value" value="0.0"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
+            <connections>
+                <outlet property="closeBtn" destination="3pO-Pi-1cJ" id="y0k-U9-gZM"/>
+                <outlet property="getValidCodeBtn" destination="9e7-In-Ola" id="VH0-bU-YYh"/>
+                <outlet property="saveBtn" destination="OIo-zx-5gS" id="Voi-Yo-9tQ"/>
+                <outlet property="telBaseView" destination="DBy-U2-N3D" id="ixb-9J-2m1"/>
+                <outlet property="telTextField" destination="4da-dV-FdF" id="Yyx-5P-twL"/>
+                <outlet property="topBaseView" destination="E0C-B3-AH8" id="mlF-b6-ELX"/>
+                <outlet property="topLabel" destination="Y4s-Ff-aYZ" id="XGU-dJ-SQD"/>
+                <outlet property="validCodeBaseView" destination="uS6-Zb-MIp" id="zHO-K7-aAX"/>
+                <outlet property="validTextField" destination="Po5-23-kKa" id="pJE-WL-NEE"/>
+            </connections>
+            <point key="canvasLocation" x="-40" y="-88"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="calculator_close1" width="30" height="30"/>
+    </resources>
+</document>

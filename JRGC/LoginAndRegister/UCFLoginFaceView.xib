@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="UCFLoginFaceView">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="password_icon_head" translatesAutoresizingMaskIntoConstraints="NO" id="kDK-JR-lcw">
+                    <rect key="frame" x="260" y="25" width="80" height="80"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="80" id="q8E-wX-1TW"/>
+                        <constraint firstAttribute="width" constant="80" id="wDr-rZ-gfT"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TwJ-Hd-oQ0">
+                    <rect key="frame" x="300.5" y="115" width="0.0" height="16"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="16" id="Dsn-Jf-5gX"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zth-3P-IDp">
+                    <rect key="frame" x="15" y="161" width="570" height="37"/>
+                    <color key="backgroundColor" red="0.94117647059999998" green="0.23137254900000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="37" id="RAn-ma-ZG1"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <state key="normal">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="2"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="buttonPressLogin:" destination="iN0-l3-epB" eventType="touchUpInside" id="wqD-SJ-qVK"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FLh-9M-GeJ">
+                    <rect key="frame" x="15" y="213" width="570" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="L4r-Z7-ETZ"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <state key="normal" title="密码登录">
+                        <color key="titleColor" red="0.2901960784" green="0.63137254899999995" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="buttonPressChangeToPassword:" destination="iN0-l3-epB" eventType="touchUpInside" id="eDu-jG-3KX"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bs8-Ue-P9g" userLabel="刷脸登录 Beta">
+                    <rect key="frame" x="30" y="161" width="570" height="37"/>
+                    <attributedString key="attributedText">
+                        <fragment content="刷脸登录">
+                            <attributes>
+                                <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <font key="NSFont" size="17" name="PingFangSC-Regular"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                            </attributes>
+                        </fragment>
+                        <fragment content=" ">
+                            <attributes>
+                                <color key="NSColor" red="1" green="1" blue="1" alpha="0.49609375" colorSpace="calibratedRGB"/>
+                                <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                            </attributes>
+                        </fragment>
+                        <fragment content="Beta">
+                            <attributes>
+                                <color key="NSColor" red="1" green="1" blue="1" alpha="0.49609375" colorSpace="calibratedRGB"/>
+                                <font key="NSFont" size="12" name="HelveticaNeue"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                            </attributes>
+                        </fragment>
+                    </attributedString>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="FLh-9M-GeJ" secondAttribute="trailing" constant="15" id="6Yr-e8-5OZ"/>
+                <constraint firstItem="zth-3P-IDp" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="7lj-Zf-rbh"/>
+                <constraint firstItem="kDK-JR-lcw" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="H1A-4O-ikX"/>
+                <constraint firstItem="TwJ-Hd-oQ0" firstAttribute="centerX" secondItem="kDK-JR-lcw" secondAttribute="centerX" id="KfQ-2N-rdS"/>
+                <constraint firstItem="TwJ-Hd-oQ0" firstAttribute="top" secondItem="kDK-JR-lcw" secondAttribute="bottom" constant="10" id="LS4-SO-ebd"/>
+                <constraint firstAttribute="trailing" secondItem="zth-3P-IDp" secondAttribute="trailing" constant="15" id="aeh-O4-UrA"/>
+                <constraint firstItem="bs8-Ue-P9g" firstAttribute="centerY" secondItem="zth-3P-IDp" secondAttribute="centerY" id="bvP-k7-cFF"/>
+                <constraint firstItem="bs8-Ue-P9g" firstAttribute="centerX" secondItem="zth-3P-IDp" secondAttribute="centerX" constant="15" id="cHf-r9-LOx"/>
+                <constraint firstItem="bs8-Ue-P9g" firstAttribute="height" secondItem="zth-3P-IDp" secondAttribute="height" id="dce-Qc-yH2"/>
+                <constraint firstItem="bs8-Ue-P9g" firstAttribute="leading" secondItem="zth-3P-IDp" secondAttribute="leading" id="ek7-Uh-axK"/>
+                <constraint firstItem="FLh-9M-GeJ" firstAttribute="centerX" secondItem="kDK-JR-lcw" secondAttribute="centerX" id="iVK-VB-NFC"/>
+                <constraint firstItem="FLh-9M-GeJ" firstAttribute="top" secondItem="zth-3P-IDp" secondAttribute="bottom" constant="15" id="iwj-oR-pXK"/>
+                <constraint firstItem="kDK-JR-lcw" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="25" id="k66-ti-Flo"/>
+                <constraint firstItem="zth-3P-IDp" firstAttribute="top" secondItem="TwJ-Hd-oQ0" secondAttribute="bottom" constant="30" id="oVs-86-hee"/>
+                <constraint firstItem="FLh-9M-GeJ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="orQ-5Y-FBf"/>
+                <constraint firstItem="zth-3P-IDp" firstAttribute="centerX" secondItem="kDK-JR-lcw" secondAttribute="centerX" id="xZ0-UH-zQ8"/>
+                <constraint firstItem="bs8-Ue-P9g" firstAttribute="width" secondItem="zth-3P-IDp" secondAttribute="width" id="zQs-Gh-FJh"/>
+            </constraints>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="ek7-Uh-axK"/>
+                </mask>
+            </variation>
+            <connections>
+                <outlet property="constant_lableCenterMoreLeft" destination="cHf-r9-LOx" id="Xqz-5d-YGd"/>
+                <outlet property="imageHead" destination="kDK-JR-lcw" id="S7u-Pd-43D"/>
+                <outlet property="lable_username" destination="TwJ-Hd-oQ0" id="nbo-Si-qe7"/>
+            </connections>
+        </view>
+    </objects>
+    <resources>
+        <image name="password_icon_head" width="80" height="80"/>
+    </resources>
+</document>

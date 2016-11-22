@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="UCFCashAndTopUp">
+            <rect key="frame" x="0.0" y="0.0" width="461" height="57"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tec-hc-xSb">
+                    <rect key="frame" x="238" y="10" width="208" height="37"/>
+                    <state key="normal" title="充值">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="highlighted" backgroundImage="btn_red_highlight"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="4"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="topUp:" destination="iN0-l3-epB" eventType="touchUpInside" id="E3m-yA-llh"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="glF-8s-iBu">
+                    <rect key="frame" x="15" y="10" width="208" height="37"/>
+                    <state key="normal" title="提现"/>
+                    <state key="highlighted" backgroundImage="btn_bule_highlight"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="4"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="cash:" destination="iN0-l3-epB" eventType="touchUpInside" id="NlF-JM-bIj"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="tec-hc-xSb" firstAttribute="centerY" secondItem="glF-8s-iBu" secondAttribute="centerY" id="0hC-wf-Zf7"/>
+                <constraint firstItem="tec-hc-xSb" firstAttribute="height" secondItem="glF-8s-iBu" secondAttribute="height" id="CfE-07-SJZ"/>
+                <constraint firstItem="tec-hc-xSb" firstAttribute="width" secondItem="glF-8s-iBu" secondAttribute="width" id="HyR-fN-gJk"/>
+                <constraint firstItem="glF-8s-iBu" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="L9W-Tn-n7E"/>
+                <constraint firstItem="glF-8s-iBu" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="XWg-Bc-TmW"/>
+                <constraint firstAttribute="bottom" secondItem="glF-8s-iBu" secondAttribute="bottom" constant="10" id="duj-Wx-34q"/>
+                <constraint firstAttribute="trailing" secondItem="tec-hc-xSb" secondAttribute="trailing" constant="15" id="eSL-9O-MPq"/>
+                <constraint firstItem="tec-hc-xSb" firstAttribute="leading" secondItem="glF-8s-iBu" secondAttribute="trailing" constant="15" id="g7M-WE-xcX"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="cash" destination="glF-8s-iBu" id="APn-aD-7mW"/>
+                <outlet property="topUp" destination="tec-hc-xSb" id="fvQ-vN-AKi"/>
+            </connections>
+            <point key="canvasLocation" x="244.5" y="84.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="btn_bule_highlight" width="5" height="5"/>
+        <image name="btn_red_highlight" width="5" height="5"/>
+    </resources>
+</document>

@@ -1,0 +1,1295 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><link rel="stylesheet" type="text/css" href="markdown.css"></link></head><body>
+</body></html><h1>U-Share SDK平台通用说明</h1>
+<h3>选择社交平台进行下载</h3>
+<p>通过iOS社会化组件<a href="http://dev.umeng.com/social/ios/sdk-download">下载页面</a>选择所需的社交平台后进行下载。</p>
+<h3>下载目录简介</h3>
+<pre><code>1. Document     - U-Share SDK文档
+2. UMSocialDemo - U-Share SDK Demo（如点选下载）
+3. UMSocial     - U-Share SDK核心目录
+    UMSocialSDK       - U-Share SDK核心framework
+    UMSocialUI        - U-Share 分享UI资源、分享面板等
+    SocialLibraries   - 所选择下载的第三方平台SDK及U-Share链接库
+</code></pre>
+
+<h3>加入下载解压后的SDK</h3>
+<pre><code>+ 将U-Share SDK添加到工程
+</code></pre>
+<p><img src="http://dev.umeng.com/system/images/W1siZiIsIjIwMTYvMDkvMjIvMThfMjBfMzdfMjRfNDE0NzQ1MzkwOTJfLnBpY19oZC5qcGciXV0/41474539092_.pic_hd.jpg" width="550" height="330">  </p>
+<pre><code>+ 添加项目配置
+在Other Linker Flags加入-ObjC
+</code></pre>
+<p><img src="http://dev.umeng.com/system/images/W1siZiIsIjIwMTYvMDkvMjIvMThfMjBfNTBfNjQ0XzUxNDc0NTM5MjY5Xy5waWNfaGQuanBnIl1d/51474539269_.pic_hd.jpg" width="580" height="150"><br />
++ iOS9/10适配
+iOS9系统后Apple对HTTP请求及访问外部应用做了更加严格的要求，包括HTTP白名单、跳转第三方应用白名单等，具体设置第三方平台参数请参照<a href="http://dev.umeng.com/social/ios/ios9">适配iOS9/10系统</a>。</p>
+<h1>第三方平台SDK集成说明</h1>
+<h2>微信</h2>
+<h3>依赖系统库</h3>
+<ul>
+<li>依照图示加入依赖的系统库
+<img src="http://dev.umeng.com/system/images/W1siZiIsIjIwMTYvMDkvMjkvMTdfMDNfMjdfNjg0X1FRMjAxNjA5MjlfMF8yeC5wbmciXV0/QQ20160929-0@2x.png" width="635" height="320"> </li>
+<li>加入以下系统库</li>
+</ul>
+<pre><code>SystemConfiguration.framework
+CoreTelephony.framework
+libsqlite3.tbd
+libc++.tbd
+libz.tbd 
+</code></pre>
+
+<h3>配置URL Scheme</h3>
+<ul>
+<li>URL Scheme格式 <br />
+直接设置微信appkey即可，如wxdc1e388c3822c80b</li>
+<li>依照图示添加URL Types</li>
+</ul>
+<p><img src="http://dev.umeng.com/system/images/W1siZiIsIjIwMTYvMDkvMjkvMTdfMDNfMzZfNjE5X1FRMjAxNjA5MjlfMV8yeC5wbmciXV0/QQ20160929-1@2x.png" width="710" height="325"> </p>
+<ul>
+<li>依照图中输入框说明填入参数，如微信appkey为wxdc1e388c3822c80b <br />
+以下示例仅替换URL Scheme的参数appkey即可，identifier的参数都使用<code>weixin</code></li>
+</ul>
+<pre><code>identifier: weixin
+URL Schemes: wxdc1e388c3822c80b
+</code></pre>
+
+<blockquote>
+<p>请勿直接使用上述示例参数，多个App使用同样的URL Schemes参数会导致从第三方App跳转回原App时混乱。</p>
+</blockquote>
+<h3>代码设置</h3>
+<h4>设置初始化</h4>
+<pre><code>// 在AppDelegate.m中设置如下代码
+
+#import &lt;UMSocialCore/UMSocialCore.h&gt;
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+
+    //打开调试日志
+    [[UMSocialManager defaultManager] openLog:YES];
+
+    //设置友盟appkey
+    [[UMSocialManager defaultManager] setUmSocialAppkey:@&quot;57b432afe0f55a9832001a0a&quot;];
+
+    // 获取友盟social版本号
+    //NSLog(@&quot;UMeng social version: %@&quot;, [UMSocialGlobal umSocialSDKVersion]);
+
+    //设置微信的appKey和appSecret
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:@&quot;wxdc1e388c3822c80b&quot; appSecret:@&quot;3baf1193c85774b3fd9d18447d76cab0&quot; redirectURL:@&quot;http://mobile.umeng.com/social&quot;];
+
+    // 如果不想显示平台下的某些类型，可用以下接口设置
+//    [[UMSocialManager defaultManager] removePlatformProviderWithPlatformTypes:@[@(UMSocialPlatformType_WechatFavorite)]];
+    return YES;
+}
+</code></pre>
+
+<h4>设置U-Share SDK回调</h4>
+<pre><code>// 在AppDelegate.m中设置如下代码
+
+#import &lt;UMSocialCore/UMSocialCore.h&gt;
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url];
+    if (!result) {
+        // 其他如支付等SDK的回调
+    }
+    return result;
+}
+</code></pre>
+
+<h4>授权(获取uid、access token等)</h4>
+<pre><code>// 在需要进行授权的UIViewController中加入如下代码
+#import &lt;UMSocialCore/UMSocialCore.h&gt;
+
+-(void)getAuthInfoFromWechat
+{
+    [[UMSocialManager defaultManager]  authWithPlatform:UMSocialPlatformType_WechatSession currentViewController:self completion:^(id result, NSError *error) {
+        [self.tableView reloadData];
+        UMSocialAuthResponse *authresponse = result;
+        NSString *message = [NSString stringWithFormat:@&quot;result: %d\n uid: %@\n accessToken: %@\n&quot;,(int)error.code,authresponse.uid,authresponse.accessToken];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@&quot;Login&quot;
+                                                        message:message
+                                                       delegate:nil
+                                              cancelButtonTitle:NSLocalizedString(@&quot;确定&quot;, nil)
+                                              otherButtonTitles:nil];
+        [alert show];
+    }];
+}
+</code></pre>
+
+<h4>获取用户信息(获取用户名等)</h4>
+<pre><code>// 在需要进行获取用户信息的UIViewController中加入如下代码
+
+#import &lt;UMSocialCore/UMSocialCore.h&gt;
+- (void)getUserInfoFromWechat
+{
+    [[UMSocialManager defaultManager] getUserInfoWithPlatform:UMSocialPlatformType_WechatSession currentViewController:self completion:^(id result, NSError *error) {
+        UMSocialUserInfoResponse *userinfo =result;
+        NSString *message = [NSString stringWithFormat:@&quot;name: %@\n icon: %@\n gender: %@\n&quot;,userinfo.name,userinfo.iconurl,userinfo.gender];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@&quot;UserInfo&quot;
+                                                        message:message
+                                                       delegate:nil
+                                              cancelButtonTitle:NSLocalizedString(@&quot;确定&quot;, nil)
+                                              otherButtonTitles:nil];
+        [alert show];
+    }];
+}
+</code></pre>
+
+<h4>内容分享</h4>
+<ul>
+<li>分享文本：</li>
+</ul>
+<pre><code>#import &lt;UMSocialCore/UMSocialCore.h&gt;
+
+- (void)shareTextToWechat
+{
+    NSString *text = @&quot;社会化组件U-Share将各大社交平台接入您的应用，快速武装App。&quot;;
+
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+
+    messageObject.text = text;
+
+    [[UMSocialManager defaultManager] shareToPlatform:UMSocialPlatformType_WechatSession messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
+        NSString *message = nil;
+        if (!error) {
+            message = [NSString stringWithFormat:@&quot;分享成功&quot;];
+        } else {
+            message = [NSString stringWithFormat:@&quot;失败原因Code: %d\n&quot;,(int)error.code];
+
+        }
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@&quot;share&quot;
+                                                        message:message
+                                                       delegate:nil
+                                              cancelButtonTitle:NSLocalizedString(@&quot;确定&quot;, nil)
+                                              otherButtonTitles:nil];
+        [alert show];
+    }];
+}
+</code></pre>
+
+<h4>其他类型</h4>
+<p>分享类型示例请参考<a href="http://dev.umeng.com/social/ios/u-share-api%E6%96%87%E6%A1%A3">U-Share API文档</a></p>
+<blockquote>
+<p>微信朋友圈和微信收藏的操作和微信session一样，Platform类型为 <code>UMSocialPlatformType_WechatSession</code>和<code>UMSocialPlatformType_WechatFavorite</code></p>
+</blockquote>
+<hr />
+<h2>新浪微博</h2>
+<h3>依赖系统库</h3>
+<ul>
+<li>依照图示加入依赖的系统库
+<img src="http://dev.umeng.com/system/images/W1siZiIsIjIwMTYvMDkvMjkvMTdfMDNfMjdfNjg0X1FRMjAxNjA5MjlfMF8yeC5wbmciXV0/QQ20160929-0@2x.png" width="635" height="320"> </li>
+<li>加入以下系统库</li>
+</ul>
+<pre><code>SystemConfiguration.framework
+CoreTelephony.framework
+ImageIO.framework
+libsqlite3.tbd
+libz.tbd
+</code></pre>
+
+<h3>配置URL Scheme</h3>
+<ul>
+<li>URL Scheme格式 <br />
+“wb”+新浪appKey，如新浪微博appkey为3921700954，则实际设置参数为wb3921700954。</li>
+<li>依照图示添加URL Types</li>
+</ul>
+<p><img src="http://dev.umeng.com/system/images/W1siZiIsIjIwMTYvMDkvMjkvMTdfMDNfMzZfNjE5X1FRMjAxNjA5MjlfMV8yeC5wbmciXV0/QQ20160929-1@2x.png" width="710" height="325"> </p>
+<ul>
+<li>依照图中输入框说明填入参数，如参照上面的参数wb3921700954。</li>
+</ul>
+<pre><code>URL Schemes: wb3921700954
+</code></pre>
+
+<p>注：其他输入框可不填，如identifier等。</p>
+<blockquote>
+<p>请勿直接使用上述示例参数，多个App使用同样的URL Schemes参数会导致从第三方App跳转回原App时混乱。</p>
+</blockquote>
+<h3>代码设置</h3>
+<h4>设置初始化</h4>
+<pre><code>// 在AppDelegate.m中设置如下代码
+
+#import &lt;UMSocialCore/UMSocialCore.h&gt;
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+
+    //打开调试日志
+    [[UMSocialManager defaultManager] openLog:YES];
+
+    //设置友盟appkey
+    [[UMSocialManager defaultManager] setUmSocialAppkey:@&quot;57b432afe0f55a9832001a0a&quot;];
+
+    // 获取友盟social版本号
+    //NSLog(@&quot;UMeng social version: %@&quot;, [UMSocialGlobal umSocialSDKVersion]);
+
+    //设置新浪的appKey和appSecret
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Sina appKey:@&quot;3921700954&quot;  appSecret:@&quot;04b48b094faeb16683c32669824ebdad&quot; redirectURL:@&quot;http://sns.whalecloud.com/sina2/callback&quot;];
+
+    return YES;
+}
+</code></pre>
+
+<h4>设置U-Share SDK回调</h4>
+<pre><code>// 在AppDelegate.m中设置如下代码
+
+#import &lt;UMSocialCore/UMSocialCore.h&gt;
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url];
+    if (!result) {
+        // 其他如支付等SDK的回调
+    }
+    return result;
+}
+</code></pre>
+
+<h4>授权(获取uid、access token等)</h4>
+<pre><code>// 在需要进行授权的UIViewController中加入如下代码
+#import &lt;UMSocialCore/UMSocialCore.h&gt;
+
+-(void)getAuthInfoFromSina
+{
+    [[UMSocialManager defaultManager]  authWithPlatform:UMSocialPlatformType_Sina currentViewController:self completion:^(id result, NSError *error) {
+        [self.tableView reloadData];
+        UMSocialAuthResponse *authresponse = result;
+        NSString *message = [NSString stringWithFormat:@&quot;result: %d\n uid: %@\n accessToken: %@\n&quot;,(int)error.code,authresponse.uid,authresponse.accessToken];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@&quot;Login&quot;
+                                                        message:message
+                                                       delegate:nil
+                                              cancelButtonTitle:NSLocalizedString(@&quot;确定&quot;, nil)
+                                              otherButtonTitles:nil];
+        [alert show];
+    }];
+}
+</code></pre>
+
+<h4>获取用户信息(获取用户名等)</h4>
+<pre><code>// 在需要进行获取用户信息的UIViewController中加入如下代码
+
+#import &lt;UMSocialCore/UMSocialCore.h&gt;
+- (void)getUserInfoFromSina
+{
+    [[UMSocialManager defaultManager] getUserInfoWithPlatform:UMSocialPlatformType_Sina currentViewController:self completion:^(id result, NSError *error) {
+        UMSocialUserInfoResponse *userinfo =result;
+        NSString *message = [NSString stringWithFormat:@&quot;name: %@\n icon: %@\n gender: %@\n&quot;,userinfo.name,userinfo.iconurl,userinfo.gender];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@&quot;UserInfo&quot;
+                                                        message:message
+                                                       delegate:nil
+                                              cancelButtonTitle:NSLocalizedString(@&quot;确定&quot;, nil)
+                                              otherButtonTitles:nil];
+        [alert show];
+    }];
+}
+</code></pre>
+
+<h4>内容分享</h4>
+<ul>
+<li>分享文本：</li>
+</ul>
+<pre><code>#import &lt;UMSocialCore/UMSocialCore.h&gt;
+
+- (void)shareTextToSina
+{
+    NSString *text = @&quot;社会化组件U-Share将各大社交平台接入您的应用，快速武装App。&quot;;
+
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+
+    messageObject.text = text;
+
+    [[UMSocialManager defaultManager] shareToPlatform:UMSocialPlatformType_Sina messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
+        NSString *message = nil;
+        if (!error) {
+            message = [NSString stringWithFormat:@&quot;分享成功&quot;];
+        } else {
+            message = [NSString stringWithFormat:@&quot;失败原因Code: %d\n&quot;,(int)error.code];
+
+        }
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@&quot;share&quot;
+                                                        message:message
+                                                       delegate:nil
+                                              cancelButtonTitle:NSLocalizedString(@&quot;确定&quot;, nil)
+                                              otherButtonTitles:nil];
+        [alert show];
+    }];
+}
+</code></pre>
+
+<h4>其他类型</h4>
+<p>分享类型示例请参考<a href="http://dev.umeng.com/social/ios/u-share-api%E6%96%87%E6%A1%A3">U-Share API文档</a></p>
+<hr />
+<h2>QQ</h2>
+<h3>依赖系统库</h3>
+<ul>
+<li>依照图示加入依赖的系统库
+<img src="http://dev.umeng.com/system/images/W1siZiIsIjIwMTYvMDkvMjkvMTdfMDNfMjdfNjg0X1FRMjAxNjA5MjlfMF8yeC5wbmciXV0/QQ20160929-0@2x.png" width="635" height="320"> </li>
+<li>加入以下系统库</li>
+</ul>
+<pre><code>SystemConfiguration.framework
+libc++.tbd
+</code></pre>
+
+<h3>配置URL Scheme</h3>
+<blockquote>
+<p>QQ需增加两个URL Scheme</p>
+</blockquote>
+<ul>
+<li>
+<p>URL Scheme格式 </p>
+<ol>
+<li>"tencent"+腾讯QQ互联应用appID</li>
+<li>“QQ”+腾讯QQ互联应用appID转换成十六进制（不足8位前面补0）</li>
+</ol>
+</li>
+<li>
+<p>URL Scheme举例
+    如appID为：100424468</p>
+<ol>
+<li>tencent100424468</li>
+<li>QQ05fc5b14 <br />
+说明：100424468转十六进制为5fc5b14，因不足8位向前补0，结果为05fc5b14，加"QQ"前缀QQ05fc5b14</li>
+</ol>
+</li>
+<li>
+<p>依照图示添加URL Types</p>
+</li>
+</ul>
+<p><img src="http://dev.umeng.com/system/images/W1siZiIsIjIwMTYvMDkvMjkvMTdfMDNfMzZfNjE5X1FRMjAxNjA5MjlfMV8yeC5wbmciXV0/QQ20160929-1@2x.png" width="710" height="325"> </p>
+<ul>
+<li>依照图中输入框说明填入参数，如以上示例appID<ul>
+<li>添加第一个URL Types</li>
+</ul>
+</li>
+</ul>
+<pre><code>    URL Schemes: tencent100424468
+</code></pre>
+
+<pre><code>+ 添加第二个URL Types
+</code></pre>
+<pre><code>    URL Schemes: QQ05fc5b14
+</code></pre>
+
+<p>注：以上两项必须添加。其他输入框可不填，如identifier等。</p>
+<blockquote>
+<p>请勿直接使用上述示例参数，多个App使用同样的URL Schemes参数会导致从第三方App跳转回原App时混乱。</p>
+</blockquote>
+<h3>代码设置</h3>
+<h4>设置初始化</h4>
+<pre><code>// 在AppDelegate.m中设置如下代码
+
+#import &lt;UMSocialCore/UMSocialCore.h&gt;
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+
+    //打开调试日志
+    [[UMSocialManager defaultManager] openLog:YES];
+
+    //设置友盟appkey
+    [[UMSocialManager defaultManager] setUmSocialAppkey:@&quot;57b432afe0f55a9832001a0a&quot;];
+
+    // 获取友盟social版本号
+    //NSLog(@&quot;UMeng social version: %@&quot;, [UMSocialGlobal umSocialSDKVersion]);
+
+    //设置分享到QQ互联的appKey和appSecret
+     [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_QQ appKey:@&quot;100424468&quot;  appSecret:nil redirectURL:@&quot;http://mobile.umeng.com/social&quot;];
+
+    return YES;
+}
+</code></pre>
+
+<h4>设置U-Share SDK回调</h4>
+<pre><code>// 在AppDelegate.m中设置如下代码
+
+#import &lt;UMSocialCore/UMSocialCore.h&gt;
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url];
+    if (!result) {
+        // 其他如支付等SDK的回调
+    }
+    return result;
+}
+</code></pre>
+
+<h4>授权(获取uid、access token等)</h4>
+<pre><code>// 在需要进行授权的UIViewController中加入如下代码
+#import &lt;UMSocialCore/UMSocialCore.h&gt;
+
+-(void)getAuthInfoFromQQ
+{
+    [[UMSocialManager defaultManager]  authWithPlatform:UMSocialPlatformType_QQ currentViewController:self completion:^(id result, NSError *error) {
+        [self.tableView reloadData];
+        UMSocialAuthResponse *authresponse = result;
+        NSString *message = [NSString stringWithFormat:@&quot;result: %d\n uid: %@\n accessToken: %@\n&quot;,(int)error.code,authresponse.uid,authresponse.accessToken];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@&quot;Login&quot;
+                                                        message:message
+                                                       delegate:nil
+                                              cancelButtonTitle:NSLocalizedString(@&quot;确定&quot;, nil)
+                                              otherButtonTitles:nil];
+        [alert show];
+    }];
+}
+</code></pre>
+
+<h4>获取用户信息(获取用户名等)</h4>
+<pre><code>// 在需要进行获取用户信息的UIViewController中加入如下代码
+
+#import &lt;UMSocialCore/UMSocialCore.h&gt;
+- (void)getUserInfoFromQQ
+{
+    [[UMSocialManager defaultManager] getUserInfoWithPlatform:UMSocialPlatformType_QQ currentViewController:self completion:^(id result, NSError *error) {
+        UMSocialUserInfoResponse *userinfo =result;
+        NSString *message = [NSString stringWithFormat:@&quot;name: %@\n icon: %@\n gender: %@\n&quot;,userinfo.name,userinfo.iconurl,userinfo.gender];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@&quot;UserInfo&quot;
+                                                        message:message
+                                                       delegate:nil
+                                              cancelButtonTitle:NSLocalizedString(@&quot;确定&quot;, nil)
+                                              otherButtonTitles:nil];
+        [alert show];
+    }];
+}
+</code></pre>
+
+<h4>内容分享</h4>
+<ul>
+<li>分享文本：</li>
+</ul>
+<pre><code>#import &lt;UMSocialCore/UMSocialCore.h&gt;
+
+- (void)shareTextToQQ
+{
+    NSString *text = @&quot;社会化组件U-Share将各大社交平台接入您的应用，快速武装App。&quot;;
+
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+
+    messageObject.text = text;
+
+    [[UMSocialManager defaultManager] shareToPlatform:UMSocialPlatformType_QQ messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
+        NSString *message = nil;
+        if (!error) {
+            message = [NSString stringWithFormat:@&quot;分享成功&quot;];
+        } else {
+            message = [NSString stringWithFormat:@&quot;失败原因Code: %d\n&quot;,(int)error.code];
+
+        }
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@&quot;share&quot;
+                                                        message:message
+                                                       delegate:nil
+                                              cancelButtonTitle:NSLocalizedString(@&quot;确定&quot;, nil)
+                                              otherButtonTitles:nil];
+        [alert show];
+    }];
+}
+</code></pre>
+
+<h4>其他类型</h4>
+<p>分享类型示例请参考<a href="http://dev.umeng.com/social/ios/u-share-api%E6%96%87%E6%A1%A3">U-Share API文档</a></p>
+<blockquote>
+<p>QZone 操作和QQ一样，Platform类型为 <code>UMSocialPlatformType_Qzone</code></p>
+</blockquote>
+<h2>支付宝</h2>
+<h3>配置info.plist</h3>
+<h4>iOS9上info.plist的白名单配置.</h4>
+<p>iOS 9以后的系统需要添加支付宝分享的scheme到白名单中。</p>
+<p>按如下形式添加即可：</p>
+<pre><code>&lt;key&gt;LSApplicationQueriesSchemes&lt;/key&gt;
+&lt;array&gt;
+&lt;string&gt;alipay&lt;/string&gt;
+&lt;string&gt;alipayshare&lt;/string&gt;
+&lt;/array&gt;
+</code></pre>
+
+<h4>iOS9上info.plist的网络配置</h4>
+<p>在iOS9上苹果公司强制要求 https的网络请求，如果需要 http的请求，就需要配置一下请求。</p>
+<pre><code>    &lt;key&gt;NSAppTransportSecurity&lt;/key&gt;
+    &lt;dict&gt;
+         &lt;!-- 配置允许 http的任意网络Begin--&gt;
+        &lt;key&gt;NSAllowsArbitraryLoads&lt;/key&gt;
+        &lt;true/&gt;
+         &lt;!-- 配置允许 http的任意网络End--&gt;
+    &lt;dict&gt;
+</code></pre>
+
+<h3>配置URL Scheme</h3>
+<ul>
+<li>URL Scheme格式   <ol>
+<li>identifier必须为 <code>alipayShare</code></li>
+<li>URL Schemes 命名规则：<code>ap+AppID</code> </li>
+</ol>
+</li>
+<li>
+<p>URL Scheme举例
+    如在支付宝开发者网站<a href="https://doc.open.alipay.com/docs/doc.htm?spm=a219a.7629140.0.0.0JiOTg&amp;treeId=215&amp;articleId=105276&amp;docType=1#s1">https://doc.open.alipay.com/docs/doc.htm?spm=a219a.7629140.0.0.0JiOTg&amp;treeId=215&amp;articleId=105276&amp;docType=1#s1</a>的申请的AppID为：<code>2015111700822536</code></p>
+<p>实际参数:<code>ap2015111700822536</code></p>
+<p><strong>支付宝分享的URL Schemes 命名identifier为：<code>alipayshare</code></strong></p>
+</li>
+<li>
+<p>依照图示添加URL Types</p>
+</li>
+</ul>
+<p><img src="http://dev.umeng.com/system/images/W1siZiIsIjIwMTYvMDkvMjkvMTdfMDNfMzZfNjE5X1FRMjAxNjA5MjlfMV8yeC5wbmciXV0/QQ20160929-1@2x.png" width="710" height="325"> </p>
+<ul>
+<li>依照图中输入框说明填入参数，如以上示例App ID<ul>
+<li>URL Types</li>
+</ul>
+</li>
+</ul>
+<pre><code>    URL Schemes: ap2015111700822536
+</code></pre>
+
+<blockquote>
+<p>请勿直接使用上述示例参数，多个App使用同样的URL Schemes参数会导致从第三方App跳转回原App时混乱。</p>
+</blockquote>
+<h3>代码设置</h3>
+<h4>设置初始化</h4>
+<pre><code>// 在AppDelegate.m中设置如下代码
+
+#import &lt;UMSocialCore/UMSocialCore.h&gt;
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+
+    //打开调试日志
+    [[UMSocialManager defaultManager] openLog:YES];
+
+    //设置友盟appkey
+    [[UMSocialManager defaultManager] setUmSocialAppkey:@&quot;57b432afe0f55a9832001a0a&quot;];
+
+    // 获取友盟social版本号
+    //NSLog(@&quot;UMeng social version: %@&quot;, [UMSocialGlobal umSocialSDKVersion]);
+
+    //支付宝的appKey
+    [[UMSocialManager defaultManager] setPlaform: UMSocialPlatformType_AlipaySession appKey:@&quot;2015111700822536&quot; appSecret:nil redirectURL:@&quot;http://mobile.umeng.com/social&quot;];
+
+    return YES;
+}
+</code></pre>
+
+<h4>设置U-Share SDK回调</h4>
+<pre><code>// 在AppDelegate.m中设置如下代码
+
+#import &lt;UMSocialCore/UMSocialCore.h&gt;
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url];
+    if (!result) {
+        // 其他如支付等SDK的回调
+    }
+    return result;
+}
+</code></pre>
+
+<h4>内容分享</h4>
+<ul>
+<li>分享文本：</li>
+</ul>
+<pre><code>#import &lt;UMSocialCore/UMSocialCore.h&gt;
+
+- (void)shareText
+{
+    NSString *text = @&quot;社会化组件U-Share将各大社交平台接入您的应用，快速武装App。&quot;;
+
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+
+    messageObject.text = text;
+
+    [[UMSocialManager defaultManager] shareToPlatform:UMSocialPlatformType_AlipaySession messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
+        NSString *message = nil;
+        if (!error) {
+            message = [NSString stringWithFormat:@&quot;分享成功&quot;];
+        } else {
+            message = [NSString stringWithFormat:@&quot;失败原因Code: %d\n&quot;,(int)error.code];
+
+        }
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@&quot;share&quot;
+                                                        message:message
+                                                       delegate:nil
+                                              cancelButtonTitle:NSLocalizedString(@&quot;确定&quot;, nil)
+                                              otherButtonTitles:nil];
+        [alert show];
+    }];
+}
+</code></pre>
+
+<h3>支付宝的分享类型</h3>
+<p>1.分享纯文本</p>
+<p>2.分享图片(网络图片的url和本地图片)</p>
+<p>备注：
+<strong> 图文分享只会当做图片分享出去 </strong></p>
+<p>3.分享weburl</p>
+<p>4.分享音乐url</p>
+<p>5.分享视频url</p>
+<h4>分享类型示例</h4>
+<p>分享类型示例请参考<a href="http://dev.umeng.com/social/ios/u-share-api%E6%96%87%E6%A1%A3">U-Share API文档</a></p>
+<h2>领英</h2>
+<h3>配置info.plist</h3>
+<ul>
+<li>领英 SDK要求在info.plist文件中加入一项参数分别是：<ul>
+<li>LIAppId</li>
+</ul>
+</li>
+<li>以上参数值在<a href="https://developer.linkedin.com/docs/ios-sdk">https://developer.linkedin.com/docs/ios-sdk</a>linkedin开发者平台设置的获取的<code>AppId</code></li>
+<li>如U-Share Demo的测试AppID为4768945<ul>
+<li>LIAppId : 4768945</li>
+</ul>
+</li>
+</ul>
+<p>上面的例子如下：</p>
+<pre><code>&lt;key&gt;LIAppId&lt;/key&gt;
+&lt;string&gt;4768945&lt;/string&gt;
+
+</code></pre>
+
+<h4>iOS9上info.plist的白名单配置.</h4>
+<p>在ios9上需要配置白名单，防止打不开领英的客户端，无法授权。</p>
+<pre><code>&lt;key&gt;LSApplicationQueriesSchemes&lt;/key&gt;
+&lt;array&gt;
+    &lt;string&gt;linkedin&lt;/string&gt;
+    &lt;string&gt;linkedin-sdk2&lt;/string&gt;
+    &lt;string&gt;linkedin-sdk&lt;/string&gt;
+&lt;/array&gt;
+</code></pre>
+
+<h4>iOS9上info.plist的网络配置</h4>
+<p>在ios9上苹果公司强制要求 https的网络请求，如果需要 http的请求，就需要配置一下请求。</p>
+<pre><code>&lt;key&gt;NSAppTransportSecurity&lt;/key&gt;
+&lt;dict&gt;
+    &lt;key&gt;NSExceptionDomains&lt;/key&gt;
+    &lt;dict&gt;
+        &lt;key&gt;linkedin.com&lt;/key&gt;
+        &lt;dict&gt;
+            &lt;key&gt;NSExceptionAllowsInsecureHTTPLoads&lt;/key&gt;
+            &lt;true/&gt;
+            &lt;key&gt;NSIncludesSubdomains&lt;/key&gt;
+            &lt;true/&gt;                
+            &lt;key&gt;NSExceptionRequiresForwardSecrecy&lt;/key&gt;
+            &lt;false/&gt;
+        &lt;/dict&gt;
+    &lt;/dict&gt;
+&lt;/dict&gt;
+</code></pre>
+
+<p><strong>特别提醒:如果领英需要分享网络图片的 url的地址不是 https的时候，也需要配置 http的请求，以防止领英sdk下载图片崩溃。</strong></p>
+<pre><code>&lt;key&gt;NSAppTransportSecurity&lt;/key&gt;
+&lt;dict&gt;
+ &lt;key&gt;NSAllowsArbitraryLoads&lt;/key&gt;
+ &lt;true/&gt;
+&lt;/dict&gt;
+</code></pre>
+
+<h3>配置URL Scheme</h3>
+<ul>
+<li>URL Scheme格式   </li>
+<li>URL Schemes 命名规则：<code>li+AppID</code> </li>
+<li>
+<p>URL Scheme举例:</p>
+<p>如申请的AppID为：<code>4768945</code></p>
+<p>实际参数:<code>li4768945</code></p>
+</li>
+</ul>
+<p>上面的例子如下：</p>
+<pre><code>&lt;key&gt;CFBundleURLTypes&lt;/key&gt;
+&lt;array&gt;
+    &lt;dict&gt;
+        &lt;key&gt;CFBundleURLSchemes&lt;/key&gt;
+        &lt;array&gt;
+            &lt;string&gt;li4768945&lt;/string&gt;
+        &lt;/array&gt;
+    &lt;/dict&gt;
+&lt;/array&gt;
+</code></pre>
+
+<ul>
+<li>依照图示添加URL Types</li>
+</ul>
+<p><img src="http://dev.umeng.com/system/images/W1siZiIsIjIwMTYvMDkvMjkvMTdfMDNfMzZfNjE5X1FRMjAxNjA5MjlfMV8yeC5wbmciXV0/QQ20160929-1@2x.png" width="710" height="325"> </p>
+<ul>
+<li>依照图中输入框说明填入参数，如以上示例App ID<ul>
+<li>URL Types</li>
+</ul>
+</li>
+</ul>
+<pre><code>    URL Schemes: li4768945
+</code></pre>
+
+<blockquote>
+<p>请勿直接使用上述示例参数，多个App使用同样的URL Schemes参数会导致从第三方App跳转回原App时混乱。</p>
+</blockquote>
+<h3>代码设置</h3>
+<h4>设置初始化</h4>
+<pre><code>// 在AppDelegate.m中设置如下代码
+
+#import &lt;UMSocialCore/UMSocialCore.h&gt;
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+
+    //打开调试日志
+    [[UMSocialManager defaultManager] openLog:YES];
+
+    //设置友盟appkey
+    [[UMSocialManager defaultManager] setUmSocialAppkey:@&quot;57b432afe0f55a9832001a0a&quot;];
+
+    // 获取友盟social版本号
+    //NSLog(@&quot;UMeng social version: %@&quot;, [UMSocialGlobal umSocialSDKVersion]);
+
+    //设置领英的appKey和appSecret
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Linkedin appKey:@&quot;81t5eiem37d2sc&quot;  appSecret:@&quot;7dgUXPLH8kA8WHMV&quot; redirectURL:@&quot;https://api.linkedin.com/v1/people&quot;];
+
+    return YES;
+}
+</code></pre>
+
+<h4>设置U-Share SDK回调</h4>
+<pre><code>// 在AppDelegate.m中设置如下代码
+
+#import &lt;UMSocialCore/UMSocialCore.h&gt;
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url];
+    if (!result) {
+        // 其他如支付等SDK的回调
+    }
+    return result;
+}
+</code></pre>
+
+<h4>授权(获取uid、access token等)</h4>
+<pre><code>// 在需要进行授权的UIViewController中加入如下代码
+#import &lt;UMSocialCore/UMSocialCore.h&gt;
+
+-(void)getAuthInfo
+{
+    [[UMSocialManager defaultManager]  authWithPlatform:UMSocialPlatformType_Linkedin currentViewController:self completion:^(id result, NSError *error) {
+        [self.tableView reloadData];
+        UMSocialAuthResponse *authresponse = result;
+        NSString *message = [NSString stringWithFormat:@&quot;result: %d\n uid: %@\n accessToken: %@\n&quot;,(int)error.code,authresponse.uid,authresponse.accessToken];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@&quot;Login&quot;
+                                                        message:message
+                                                       delegate:nil
+                                              cancelButtonTitle:NSLocalizedString(@&quot;确定&quot;, nil)
+                                              otherButtonTitles:nil];
+        [alert show];
+    }];
+}
+</code></pre>
+
+<h4>获取用户信息(获取用户名等)</h4>
+<pre><code>// 在需要进行获取用户信息的UIViewController中加入如下代码
+
+#import &lt;UMSocialCore/UMSocialCore.h&gt;
+- (void)getUserInfo
+{
+    [[UMSocialManager defaultManager] getUserInfoWithPlatform:UMSocialPlatformType_Linkedin currentViewController:self completion:^(id result, NSError *error) {
+        UMSocialUserInfoResponse *userinfo =result;
+        NSString *message = [NSString stringWithFormat:@&quot;name: %@\n icon: %@\n gender: %@\n&quot;,userinfo.name,userinfo.iconurl,userinfo.gender];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@&quot;UserInfo&quot;
+                                                        message:message
+                                                       delegate:nil
+                                              cancelButtonTitle:NSLocalizedString(@&quot;确定&quot;, nil)
+                                              otherButtonTitles:nil];
+        [alert show];
+    }];
+}
+</code></pre>
+
+<h4>内容分享</h4>
+<ul>
+<li>分享文本：</li>
+</ul>
+<pre><code>#import &lt;UMSocialCore/UMSocialCore.h&gt;
+
+- (void)shareText
+{
+    NSString *text = @&quot;社会化组件U-Share将各大社交平台接入您的应用，快速武装App。&quot;;
+
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+
+    messageObject.text = text;
+
+    [[UMSocialManager defaultManager] shareToPlatform:UMSocialPlatformType_Linkedin messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
+        NSString *message = nil;
+        if (!error) {
+            message = [NSString stringWithFormat:@&quot;分享成功&quot;];
+        } else {
+            message = [NSString stringWithFormat:@&quot;失败原因Code: %d\n&quot;,(int)error.code];
+
+        }
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@&quot;share&quot;
+                                                        message:message
+                                                       delegate:nil
+                                              cancelButtonTitle:NSLocalizedString(@&quot;确定&quot;, nil)
+                                              otherButtonTitles:nil];
+        [alert show];
+    }];
+}
+</code></pre>
+
+<h3>领英的分享类型</h3>
+<p>1.分享纯文本</p>
+<p>2.分享图片(只能分享 网络图片的url)</p>
+<p>3.分享图文(只能分享 网络图片的url)</p>
+<p>4.分享weburl</p>
+<p>5.分享音乐url</p>
+<p>6.分享视频url</p>
+<h4>分享类型示例</h4>
+<p>分享类型示例请参考<a href="http://dev.umeng.com/social/ios/u-share-api%E6%96%87%E6%A1%A3">U-Share API文档</a></p>
+<h2>易信</h2>
+<h3>依赖系统库</h3>
+<ul>
+<li>依照图示加入依赖的系统库
+<img src="http://dev.umeng.com/system/images/W1siZiIsIjIwMTYvMDkvMjkvMTdfMDNfMjdfNjg0X1FRMjAxNjA5MjlfMF8yeC5wbmciXV0/QQ20160929-0@2x.png" width="635" height="320"> </li>
+<li>加入以下系统库</li>
+</ul>
+<pre><code>UIKit.framework
+Foundation.framework
+CoreGraphics.framework
+</code></pre>
+
+<h3>配置info.plist</h3>
+<p>使用易信帐号登录开放平台，转到应用管理页面,填写你的应用资料，完成后保存，你会获得一个AppID。
+例子如下：</p>
+<p>bundleID: com.Umeng.UMSocial</p>
+<p>Application ID:yx35664bdff4db42c2b7be1e29390c1a06</p>
+<p><strong> iOS平台可立即用该AppID进行开发。审核通过的应用将在内容来源处显示你填写的应用名称，否则显示“未审核应用”。</strong></p>
+<h4>iOS9上info.plist的白名单配置.</h4>
+<p>在ios9上需要配置白名单，防止打不开领音的客户端，无法授权。</p>
+<p>近期苹果公司iOS 9系统策略更新，应用需要在“Info.plist”中将要使用的URL Schemes列为白名单，才可正常检查其他应用是否安装。受此影响，当你的应用在iOS 9中需要使用易信SDK的相关能力（分享、收藏、登录等）时，需要在“Info.plist”里增加如下代码：</p>
+<pre><code>&lt;key&gt;LSApplicationQueriesSchemes&lt;/key&gt;
+&lt;array&gt;
+   &lt;string&gt;yixin&lt;/string&gt;
+   &lt;string&gt;yixinopenapi&lt;/string&gt;
+   &lt;string&gt;yixinoauth&lt;/string&gt;
+   &lt;string&gt;yixinfav&lt;/string&gt;
+&lt;/array&gt;
+</code></pre>
+
+<p>完成后需使用Xcode 7编译。</p>
+<h4>iOS9上info.plist的网络配置</h4>
+<p><strong>特别提醒:如果需要分享网络图片的 url的地址不是 https的时候，也需要配置 http的请求。</strong></p>
+<pre><code>&lt;key&gt;NSAppTransportSecurity&lt;/key&gt;
+&lt;dict&gt;
+ &lt;key&gt;NSAllowsArbitraryLoads&lt;/key&gt;
+ &lt;true/&gt;
+&lt;/dict&gt;
+</code></pre>
+
+<h3>配置URL Scheme</h3>
+<ul>
+<li>URL Scheme格式   </li>
+<li>URL Schemes 命名规则：<code>AppID</code> </li>
+<li>
+<p>URL Scheme举例:</p>
+<p>如申请的AppID为：<code>yx35664bdff4db42c2b7be1e29390c1a06</code></p>
+<p>实际参数:<code>yx35664bdff4db42c2b7be1e29390c1a06</code></p>
+</li>
+</ul>
+<p>上面的例子如下：</p>
+<pre><code>&lt;key&gt;CFBundleURLTypes&lt;/key&gt;
+&lt;array&gt;
+    &lt;dict&gt;
+    &lt;key&gt;CFBundleTypeRole&lt;/key&gt;
+            &lt;string&gt;Editor&lt;/string&gt;
+            &lt;key&gt;CFBundleURLName&lt;/key&gt;
+            &lt;string&gt;yixinSocialSDK&lt;/string&gt;
+            &lt;key&gt;CFBundleURLSchemes&lt;/key&gt;
+            &lt;array&gt;
+            &lt;string&gt;yx35664bdff4db42c2b7be1e29390c1a06&lt;/string&gt;
+            &lt;/array&gt;
+    &lt;/dict&gt;
+&lt;/array&gt;
+</code></pre>
+
+<ul>
+<li>依照图示添加URL Types</li>
+</ul>
+<p><img src="http://dev.umeng.com/system/images/W1siZiIsIjIwMTYvMDkvMjkvMTdfMDNfMzZfNjE5X1FRMjAxNjA5MjlfMV8yeC5wbmciXV0/QQ20160929-1@2x.png" width="710" height="325"> </p>
+<ul>
+<li>依照图中输入框说明填入参数，如以上示例App ID<ul>
+<li>URL Types</li>
+</ul>
+</li>
+</ul>
+<pre><code>    URL Schemes: yx35664bdff4db42c2b7be1e29390c1a06
+</code></pre>
+
+<blockquote>
+<p>请勿直接使用上述示例参数，多个App使用同样的URL Schemes参数会导致从第三方App跳转回原App时混乱。</p>
+</blockquote>
+<h3>代码设置</h3>
+<h4>设置初始化</h4>
+<pre><code>// 在AppDelegate.m中设置如下代码
+
+#import &lt;UMSocialCore/UMSocialCore.h&gt;
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+
+    //打开调试日志
+    [[UMSocialManager defaultManager] openLog:YES];
+
+    //设置友盟appkey
+    [[UMSocialManager defaultManager] setUmSocialAppkey:@&quot;57b432afe0f55a9832001a0a&quot;];
+
+    // 获取友盟social版本号
+    //NSLog(@&quot;UMeng social version: %@&quot;, [UMSocialGlobal umSocialSDKVersion]);
+
+    //设置易信的appKey
+    [[UMSocialManager defaultManager] setPlaform: UMSocialPlatformType_YixinSession appKey:@&quot;yx35664bdff4db42c2b7be1e29390c1a06&quot; appSecret:nil redirectURL:@&quot;http://mobile.umeng.com/social&quot;];
+
+    return YES;
+}
+</code></pre>
+
+<h4>设置U-Share SDK回调</h4>
+<pre><code>// 在AppDelegate.m中设置如下代码
+
+#import &lt;UMSocialCore/UMSocialCore.h&gt;
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url];
+    if (!result) {
+        // 其他如支付等SDK的回调
+    }
+    return result;
+}
+</code></pre>
+
+<h4>内容分享</h4>
+<ul>
+<li>分享文本：</li>
+</ul>
+<pre><code>#import &lt;UMSocialCore/UMSocialCore.h&gt;
+
+- (void)shareText
+{
+    NSString *text = @&quot;社会化组件U-Share将各大社交平台接入您的应用，快速武装App。&quot;;
+
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+
+    messageObject.text = text;
+
+    [[UMSocialManager defaultManager] shareToPlatform:UMSocialPlatformType_YixinSession messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
+        NSString *message = nil;
+        if (!error) {
+            message = [NSString stringWithFormat:@&quot;分享成功&quot;];
+        } else {
+            message = [NSString stringWithFormat:@&quot;失败原因Code: %d\n&quot;,(int)error.code];
+
+        }
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@&quot;share&quot;
+                                                        message:message
+                                                       delegate:nil
+                                              cancelButtonTitle:NSLocalizedString(@&quot;确定&quot;, nil)
+                                              otherButtonTitles:nil];
+        [alert show];
+    }];
+}
+</code></pre>
+
+<h3>易信的分享类型</h3>
+<p>1.普通文本。（文本分享小于10K）</p>
+<p>2.图片分享。 
+<strong> 图文分享被视为图片分享 </strong></p>
+<p>3.音乐分享。</p>
+<p>4.视频分享。</p>
+<p>5.webPageUrl分享。</p>
+<p>备注:
+<strong> 设置图片的thumbData的时候，小于64K </strong></p>
+<h4>分享类型示例</h4>
+<p>分享类型示例请参考<a href="http://dev.umeng.com/social/ios/u-share-api%E6%96%87%E6%A1%A3">U-Share API文档</a></p>
+<h2>Facebook</h2>
+<h3>配置info.plist</h3>
+<ul>
+<li>Facebook SDK要求在info.plist文件中加入两项参数分别是：<ul>
+<li>FacebookAppID</li>
+<li>FacebookDisplayName</li>
+</ul>
+</li>
+<li>以上参数值在<a href="https://developers.facebook.com/apps">https://developers.facebook.com/apps</a>Facebook开发者平台设置的获取的<code>AppID</code>和<code>Display Name</code></li>
+<li>如U-Share Demo的测试AppID为506027402887373， Display Name为UmengShare。则加入两项参数为<ul>
+<li>FacebookAppID : 506027402887373</li>
+<li>FacebookDisplayName : UmengShare</li>
+</ul>
+</li>
+</ul>
+<h3>配置URL Scheme</h3>
+<ul>
+<li>URL Scheme格式 <br />
+    fb + <code>Facebook ID</code>    </li>
+<li>
+<p>URL Scheme举例
+    如Facebook ID为：506027402887373
+    实际参数：fb506027402887373</p>
+</li>
+<li>
+<p>依照图示添加URL Types</p>
+</li>
+</ul>
+<p><img src="http://dev.umeng.com/system/images/W1siZiIsIjIwMTYvMDkvMjkvMTdfMDNfMzZfNjE5X1FRMjAxNjA5MjlfMV8yeC5wbmciXV0/QQ20160929-1@2x.png" width="710" height="325"> </p>
+<ul>
+<li>依照图中输入框说明填入参数，如以上示例Facebook ID<ul>
+<li>URL Types</li>
+</ul>
+</li>
+</ul>
+<pre><code>    URL Schemes: fb506027402887373
+</code></pre>
+
+<blockquote>
+<p>请勿直接使用上述示例参数，多个App使用同样的URL Schemes参数会导致从第三方App跳转回原App时混乱。</p>
+</blockquote>
+<h3>代码设置</h3>
+<h4>设置初始化</h4>
+<pre><code>// 在AppDelegate.m中设置如下代码
+
+#import &lt;UMSocialCore/UMSocialCore.h&gt;
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+
+    //打开调试日志
+    [[UMSocialManager defaultManager] openLog:YES];
+
+    //设置友盟appkey
+    [[UMSocialManager defaultManager] setUmSocialAppkey:@&quot;57b432afe0f55a9832001a0a&quot;];
+
+    // 获取友盟social版本号
+    //NSLog(@&quot;UMeng social version: %@&quot;, [UMSocialGlobal umSocialSDKVersion]);
+
+    //设置Facebook的appKey和UrlString
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Facebook appKey:@&quot;506027402887373&quot;  appSecret:nil redirectURL:@&quot;http://www.umeng.com/social&quot;];
+
+    return YES;
+}
+</code></pre>
+
+<h4>设置U-Share SDK回调</h4>
+<pre><code>// 在AppDelegate.m中设置如下代码
+
+#import &lt;UMSocialCore/UMSocialCore.h&gt;
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url];
+    if (!result) {
+        // 其他如支付等SDK的回调
+    }
+    return result;
+}
+</code></pre>
+
+<h4>授权(获取uid、access token等)</h4>
+<pre><code>// 在需要进行授权的UIViewController中加入如下代码
+#import &lt;UMSocialCore/UMSocialCore.h&gt;
+- (void)getAuthInfoFromFacebook
+{
+    [[UMSocialManager defaultManager] authWithPlatform:UMSocialPlatformType_Facebook currentViewController:nil completion:^(id result, NSError *error) {
+        if (error) {
+
+        } else {
+            UMSocialAuthResponse *resp = result;
+
+            // 授权信息
+            NSLog(@&quot;Facebook uid: %@&quot;, resp.uid);
+            NSLog(@&quot;Facebook accessToken: %@&quot;, resp.accessToken);
+            NSLog(@&quot;Facebook expiration: %@&quot;, resp.expiration);
+
+            // 第三方平台SDK源数据
+            NSLog(@&quot;Facebook originalResponse: %@&quot;, resp.originalResponse);
+        }
+    }];
+}
+</code></pre>
+
+<h4>获取用户信息(获取用户名等)</h4>
+<pre><code>// 在需要进行获取用户信息的UIViewController中加入如下代码
+
+#import &lt;UMSocialCore/UMSocialCore.h&gt;
+
+- (void)getUserInfoFromFacebook
+{
+    [[UMSocialManager defaultManager] getUserInfoWithPlatform:UMSocialPlatformType_Facebook currentViewController:nil completion:^(id result, NSError *error) {
+        if (error) {
+
+        } else {
+            UMSocialUserInfoResponse *resp = result;
+
+            // 授权信息
+            NSLog(@&quot;Facebook uid: %@&quot;, resp.uid);
+            NSLog(@&quot;Facebook accessToken: %@&quot;, resp.accessToken);
+            NSLog(@&quot;Facebook expiration: %@&quot;, resp.expiration);
+
+            // 用户信息
+            NSLog(@&quot;Facebook name: %@&quot;, resp.name);
+
+            // 第三方平台SDK源数据
+            NSLog(@&quot;Facebook originalResponse: %@&quot;, resp.originalResponse);
+        }
+    }];
+}
+
+</code></pre>
+
+<h4>内容分享</h4>
+<ul>
+<li>分享文本：</li>
+</ul>
+<pre><code>#import &lt;UMSocialCore/UMSocialCore.h&gt;
+
+- (void)shareTextToFacebook
+{
+    NSString *text = @&quot;社会化组件U-Share将各大社交平台接入您的应用，快速武装App。&quot;;
+
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+
+    messageObject.text = text;
+
+    [[UMSocialManager defaultManager] shareToPlatform:UMSocialPlatformType_Facebook messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
+        NSString *message = nil;
+        if (!error) {
+            message = [NSString stringWithFormat:@&quot;分享成功&quot;];
+        } else {
+            message = [NSString stringWithFormat:@&quot;失败原因Code: %d\n&quot;,(int)error.code];
+
+        }
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@&quot;share&quot;
+                                                        message:message
+                                                       delegate:nil
+                                              cancelButtonTitle:NSLocalizedString(@&quot;确定&quot;, nil)
+                                              otherButtonTitles:nil];
+        [alert show];
+    }];
+}
+</code></pre>
+
+<h4>其他类型</h4>
+<p>分享类型示例请参考<a href="http://dev.umeng.com/social/ios/u-share-api%E6%96%87%E6%A1%A3">U-Share API文档</a></p>
+<h2>Twitter</h2>
+<h3>加入Twitter bundle文件</h3>
+<p>将附带Twitter SDK的U-Share SDK加入工程后，还需导入Twitter的资源文件。
+1. 在Xcode项目中，右键U-Share SDK下的Twitter目录
+2. 找到TwitterKitResources.bundle并导入，其路径为</p>
+<pre><code>Twitter/TwitterKit.framework/Resources/TwitterKitResources.bundle
+</code></pre>
+
+<h3>代码设置</h3>
+<h4>设置初始化</h4>
+<pre><code>// 在AppDelegate.m中设置如下代码
+
+#import &lt;UMSocialCore/UMSocialCore.h&gt;
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+
+    //打开调试日志
+    [[UMSocialManager defaultManager] openLog:YES];
+
+    //设置友盟appkey
+    [[UMSocialManager defaultManager] setUmSocialAppkey:@&quot;57b432afe0f55a9832001a0a&quot;];
+
+    // 获取友盟social版本号
+    //NSLog(@&quot;UMeng social version: %@&quot;, [UMSocialGlobal umSocialSDKVersion]);
+
+    //设置Twitter的appKey和appSecret
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Twitter appKey:@&quot;fB5tvRpna1CKK97xZUslbxiet&quot;  appSecret:@&quot;YcbSvseLIwZ4hZg9YmgJPP5uWzd4zr6BpBKGZhf07zzh3oj62K&quot; redirectURL:nil];
+
+    return YES;
+}
+</code></pre>
+
+<h4>设置U-Share SDK回调</h4>
+<pre><code>// 在AppDelegate.m中设置如下代码
+
+#import &lt;UMSocialCore/UMSocialCore.h&gt;
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url];
+    if (!result) {
+        // 其他如支付等SDK的回调
+    }
+    return result;
+}
+</code></pre>
+
+<h4>授权(获取uid、access token等)</h4>
+<pre><code>// 在需要进行授权的UIViewController中加入如下代码
+#import &lt;UMSocialCore/UMSocialCore.h&gt;
+- (void)getAuthInfoFromTwitter
+{
+    [[UMSocialManager defaultManager] authWithPlatform:UMSocialPlatformType_Twitter currentViewController:nil completion:^(id result, NSError *error) {
+        if (error) {
+
+        } else {
+            UMSocialAuthResponse *resp = result;
+
+            // 授权信息
+            NSLog(@&quot;Twitter uid: %@&quot;, resp.uid);
+            NSLog(@&quot;Twitter accessToken: %@&quot;, resp.accessToken);
+
+            // 第三方平台SDK源数据
+            NSLog(@&quot;Twitter originalResponse: %@&quot;, resp.originalResponse);
+        }
+    }];
+}
+</code></pre>
+
+<h4>获取用户信息(获取用户名等)</h4>
+<pre><code>// 在需要进行获取用户信息的UIViewController中加入如下代码
+
+#import &lt;UMSocialCore/UMSocialCore.h&gt;
+- (void)getUserInfoFromTwitter
+{
+    [[UMSocialManager defaultManager] getUserInfoWithPlatform:UMSocialPlatformType_Twitter currentViewController:nil completion:^(id result, NSError *error) {
+        if (error) {
+
+        } else {
+            UMSocialUserInfoResponse *resp = result;
+
+            // 授权信息
+            NSLog(@&quot;Twitter uid: %@&quot;, resp.uid);
+            NSLog(@&quot;Twitter accessToken: %@&quot;, resp.accessToken);
+
+            // 用户信息
+            NSLog(@&quot;Twitter name: %@&quot;, resp.name);
+            NSLog(@&quot;Twitter iconurl: %@&quot;, resp.iconurl);
+
+            // 第三方平台SDK源数据
+            NSLog(@&quot;Twitter originalResponse: %@&quot;, resp.originalResponse);
+        }
+    }];
+}
+</code></pre>
+
+<h4>内容分享</h4>
+<ul>
+<li>分享文本：</li>
+</ul>
+<pre><code>#import &lt;UMSocialCore/UMSocialCore.h&gt;
+
+- (void)shareTextToTwitter
+{
+    NSString *text = @&quot;社会化组件U-Share将各大社交平台接入您的应用，快速武装App。&quot;;
+
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+
+    messageObject.text = text;
+
+    [[UMSocialManager defaultManager] shareToPlatform:UMSocialPlatformType_Twitter messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
+        NSString *message = nil;
+        if (!error) {
+            message = [NSString stringWithFormat:@&quot;分享成功&quot;];
+        } else {
+            message = [NSString stringWithFormat:@&quot;失败原因Code: %d\n&quot;,(int)error.code];
+
+        }
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@&quot;share&quot;
+                                                        message:message
+                                                       delegate:nil
+                                              cancelButtonTitle:NSLocalizedString(@&quot;确定&quot;, nil)
+                                              otherButtonTitles:nil];
+        [alert show];
+    }];
+}
+</code></pre>
+
+<h4>其他类型</h4>
+<p>分享类型示例请参考<a href="http://dev.umeng.com/social/ios/u-share-api%E6%96%87%E6%A1%A3">U-Share API文档</a></p>

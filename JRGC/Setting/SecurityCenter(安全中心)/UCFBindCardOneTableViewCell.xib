@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" restorationIdentifier="bindcardone" selectionStyle="none" indentationWidth="10" rowHeight="115" id="KGk-i7-Jjw" customClass="UCFBindCardOneTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="400" height="115"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="400" height="114.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入银行卡号" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="ezl-UE-PZj">
+                        <rect key="frame" x="15" y="41" width="370" height="37"/>
+                        <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="37" id="HjR-zx-nsl"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                    </textField>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="开户姓名" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g8x-5c-PXG">
+                        <rect key="frame" x="15" y="15" width="52" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="－－－－" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hVc-Yw-WWT">
+                        <rect key="frame" x="77" y="15" width="52" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请务必填写您当前已绑定的身份证号所开通的银行卡，否则无法提现" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RPg-jX-arO">
+                        <rect key="frame" x="10" y="78" width="380" height="29"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="29" id="C8g-st-N4F"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="9"/>
+                        <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="ezl-UE-PZj" firstAttribute="top" secondItem="hVc-Yw-WWT" secondAttribute="bottom" constant="10" id="H4Y-2C-tBZ"/>
+                    <constraint firstItem="ezl-UE-PZj" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="IHb-c9-aeQ"/>
+                    <constraint firstItem="RPg-jX-arO" firstAttribute="top" secondItem="ezl-UE-PZj" secondAttribute="bottom" id="NVG-E7-qge"/>
+                    <constraint firstItem="hVc-Yw-WWT" firstAttribute="leading" secondItem="g8x-5c-PXG" secondAttribute="trailing" constant="10" id="NdF-7e-sll"/>
+                    <constraint firstAttribute="trailing" secondItem="ezl-UE-PZj" secondAttribute="trailing" constant="15" id="Oo5-ao-56B"/>
+                    <constraint firstItem="RPg-jX-arO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="a2y-Ch-pWC"/>
+                    <constraint firstItem="g8x-5c-PXG" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="fKs-vo-bKm"/>
+                    <constraint firstItem="RPg-jX-arO" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="q0B-np-9Xm"/>
+                    <constraint firstItem="g8x-5c-PXG" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="xON-r0-iIt"/>
+                    <constraint firstItem="g8x-5c-PXG" firstAttribute="centerY" secondItem="hVc-Yw-WWT" secondAttribute="centerY" constant="0.5" id="xVG-zH-jMl"/>
+                    <constraint firstAttribute="right" secondItem="RPg-jX-arO" secondAttribute="right" constant="10" id="zxt-mg-Tis"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="bindCard" destination="ezl-UE-PZj" id="LbT-38-3nE"/>
+                <outlet property="userNameLabel" destination="hVc-Yw-WWT" id="l4T-5B-5FB"/>
+            </connections>
+            <point key="canvasLocation" x="330" y="317.5"/>
+        </tableViewCell>
+    </objects>
+</document>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="alertViewCS">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8tL-aE-gpK">
+                    <rect key="frame" x="15" y="15" width="570" height="518"/>
+                    <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
+                </webView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t9Y-Pf-fT7">
+                    <rect key="frame" x="15" y="548" width="570" height="37"/>
+                    <color key="backgroundColor" red="0.94117647059999998" green="0.23137254900000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <state key="normal" title="关闭">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="2"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="0.99607843137254903" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="8tL-aE-gpK" secondAttribute="trailing" constant="15" id="2it-6k-T2T"/>
+                <constraint firstItem="t9Y-Pf-fT7" firstAttribute="top" secondItem="8tL-aE-gpK" secondAttribute="bottom" constant="15" id="Jtz-7e-HQW"/>
+                <constraint firstAttribute="bottom" secondItem="t9Y-Pf-fT7" secondAttribute="bottom" constant="15" id="K76-R2-XDX"/>
+                <constraint firstItem="8tL-aE-gpK" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="15" id="NVZ-YT-iBx"/>
+                <constraint firstItem="8tL-aE-gpK" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="ZWT-Yy-QI8"/>
+                <constraint firstAttribute="bottom" secondItem="8tL-aE-gpK" secondAttribute="bottom" constant="67" id="eyE-Nw-jEs"/>
+                <constraint firstItem="t9Y-Pf-fT7" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="mJi-L2-Hd5"/>
+                <constraint firstAttribute="trailing" secondItem="t9Y-Pf-fT7" secondAttribute="trailing" constant="15" id="mqv-8Y-xpw"/>
+            </constraints>
+            <connections>
+                <outlet property="but_closeAlert" destination="t9Y-Pf-fT7" id="V7D-GH-QLZ"/>
+                <outlet property="webForAlert" destination="8tL-aE-gpK" id="uqP-Kf-pEZ"/>
+            </connections>
+        </view>
+    </objects>
+</document>

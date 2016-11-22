@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="bankInfo" id="KGk-i7-Jjw" customClass="UCFBankTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="招商银行" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cay-XU-kJP">
+                        <rect key="frame" x="52" y="14" width="52" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YrI-Qi-IIb">
+                        <rect key="frame" x="14" y="7" width="29" height="29"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="29" id="UMD-W5-kgg"/>
+                            <constraint firstAttribute="width" constant="29" id="qLp-Mr-yIJ"/>
+                        </constraints>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="bankInfo" image="bankcard_icon_fast_gary" translatesAutoresizingMaskIntoConstraints="NO" id="vXw-45-dOU">
+                        <rect key="frame" x="114" y="13" width="30" height="17"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="17" id="2zv-aI-jAI"/>
+                            <constraint firstAttribute="width" constant="30" id="sts-SZ-n4R"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="centerY" secondItem="Cay-XU-kJP" secondAttribute="centerY" id="8Hb-uH-tEq"/>
+                    <constraint firstItem="Cay-XU-kJP" firstAttribute="leading" secondItem="YrI-Qi-IIb" secondAttribute="trailing" constant="9" id="Seq-oN-New"/>
+                    <constraint firstItem="vXw-45-dOU" firstAttribute="leading" secondItem="Cay-XU-kJP" secondAttribute="trailing" constant="10" id="WvO-LE-HrE"/>
+                    <constraint firstAttribute="centerY" secondItem="YrI-Qi-IIb" secondAttribute="centerY" id="b5h-cC-X8l"/>
+                    <constraint firstItem="YrI-Qi-IIb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="14" id="r9v-uI-CgY"/>
+                    <constraint firstAttribute="centerY" secondItem="vXw-45-dOU" secondAttribute="centerY" id="ssl-cV-Fec"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="bankNameLabel" destination="Cay-XU-kJP" id="tZg-bl-oXe"/>
+                <outlet property="bankProfileImageView" destination="YrI-Qi-IIb" id="dfG-eE-X0B"/>
+                <outlet property="signForPayImageView" destination="vXw-45-dOU" id="vEv-7i-g0J"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="bankcard_icon_fast_gary" width="30" height="17"/>
+    </resources>
+</document>

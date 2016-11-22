@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="11542" systemVersion="16A323" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="CJ2-fK-mNR">
+    <device id="watch42" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="watchOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="11508"/>
+    </dependencies>
+    <scenes>
+        <!--金融工场-->
+        <scene sceneID="7ma-rM-dxS">
+            <objects>
+                <controller identifier="HomefaceController" title="金融工场" id="CJ2-fK-mNR" customClass="UCFHomefaceController">
+                    <items>
+                        <group width="1" height="1" alignment="left" layout="vertical" id="zGb-if-X1i">
+                            <items>
+                                <label width="151" alignment="right" text="累计收益(元)" textAlignment="left" id="IWI-Ig-GOX">
+                                    <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="font" type="system" pointSize="10"/>
+                                    <variation key="device=watch38mm" width="133.5"/>
+                                </label>
+                                <label width="151" height="25" alignment="right" text="0.00" textAlignment="left" id="y1f-dX-j34">
+                                    <color key="textColor" red="0.99215686274509807" green="0.30196078431372547" blue="0.29803921568627451" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="font" type="system" pointSize="22"/>
+                                    <variation key="device=watch38mm" height="22" width="133.5">
+                                        <fontDescription key="font" type="system" pointSize="21"/>
+                                    </variation>
+                                </label>
+                                <group width="151" alignment="right" verticalAlignment="center" id="RL4-lf-nF7">
+                                    <items>
+                                        <label width="0.5" alignment="left" verticalAlignment="bottom" text="总计资产(元)" textAlignment="left" id="JQX-wJ-ovy">
+                                            <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="font" type="system" pointSize="10"/>
+                                        </label>
+                                        <label width="0.5" height="12" alignment="left" verticalAlignment="bottom" text="可用余额(元)" textAlignment="right" id="Bhu-GP-VfE">
+                                            <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="font" type="system" pointSize="10"/>
+                                        </label>
+                                    </items>
+                                    <variation key="device=watch38mm" width="133.5"/>
+                                </group>
+                                <group width="151" alignment="right" verticalAlignment="center" id="PB2-if-8fl">
+                                    <items>
+                                        <label width="0.5" alignment="left" verticalAlignment="center" text="0.00" textAlignment="left" id="ex7-8r-hzQ">
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <fontDescription key="font" type="system" pointSize="14"/>
+                                            <variation key="device=watch38mm">
+                                                <fontDescription key="font" type="system" pointSize="13"/>
+                                            </variation>
+                                        </label>
+                                        <label width="0.5" alignment="left" verticalAlignment="center" text="0.00" textAlignment="right" id="14J-Pa-3jV">
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <fontDescription key="font" type="system" pointSize="14"/>
+                                            <variation key="device=watch38mm">
+                                                <fontDescription key="font" type="system" pointSize="13"/>
+                                            </variation>
+                                        </label>
+                                    </items>
+                                    <variation key="device=watch38mm" width="133.5"/>
+                                </group>
+                                <group width="1" alignment="left" verticalAlignment="center" id="Z5j-g6-Rbo">
+                                    <items>
+                                        <group width="0.5" alignment="left" layout="vertical" id="wi1-LY-JVY">
+                                            <items>
+                                                <button width="54" height="54" alignment="left" backgroundImage="payment_icon" id="akE-PZ-e5h">
+                                                    <variation key="device=watch38mm" height="45" width="45"/>
+                                                    <connections>
+                                                        <segue destination="kqd-R3-CxX" kind="push" id="gRb-hX-zxG"/>
+                                                    </connections>
+                                                </button>
+                                                <label width="54" alignment="left" text="回款" textAlignment="center" id="Frd-W3-RPY">
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="font" type="system" pointSize="10"/>
+                                                    <variation key="device=watch38mm" width="45"/>
+                                                </label>
+                                            </items>
+                                        </group>
+                                        <group width="0.5" alignment="left" layout="vertical" id="0a5-m7-dd4">
+                                            <items>
+                                                <button width="54" height="54" alignment="right" backgroundImage="capital_icon" id="KNq-Nq-aWq">
+                                                    <variation key="device=watch38mm" height="45" width="45"/>
+                                                    <connections>
+                                                        <segue destination="iRn-8N-gUc" kind="push" id="OAk-ML-LRj"/>
+                                                    </connections>
+                                                </button>
+                                                <label width="54" alignment="right" text="资金" textAlignment="center" id="Wlz-N8-Rut">
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="font" type="system" pointSize="10"/>
+                                                    <variation key="device=watch38mm" width="45"/>
+                                                </label>
+                                            </items>
+                                        </group>
+                                    </items>
+                                </group>
+                                <label width="1" alignment="left" verticalAlignment="center" text="用力按屏幕来显示签到，邀请码等功能" textAlignment="center" id="Ayu-GH-hhw">
+                                    <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="font" type="system" pointSize="9"/>
+                                    <variation key="device=watch38mm">
+                                        <fontDescription key="font" type="system" pointSize="8"/>
+                                    </variation>
+                                </label>
+                            </items>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="cashBalanceMoneyLabel" destination="14J-Pa-3jV" id="bDR-Ul-asw"/>
+                        <outlet property="interestsMoneyLabel" destination="y1f-dX-j34" id="6Ko-Kl-vZi"/>
+                        <outlet property="totalMoneyLabel" destination="ex7-8r-hzQ" id="Vny-wj-FES"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="-1622" y="-949"/>
+        </scene>
+        <!--金融工场-->
+        <scene sceneID="2dM-cq-hjO">
+            <objects>
+                <controller identifier="LoginController" title="金融工场" id="y8d-KY-WHI" customClass="UCFLoginController">
+                    <items>
+                        <imageView width="136" height="121" alignment="center" image="welcome" id="aVa-aP-GHf">
+                            <variation key="device=watch38mm" height="106" width="119"/>
+                        </imageView>
+                        <button width="140" height="37" alignment="center" verticalAlignment="center" title="请在iPhone上登录" enabled="NO" backgroundImage="login_btn" id="LnA-u5-RqA">
+                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.12941176469999999" green="0.41960784309999999" blue="0.79215686269999996" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="font" type="system" pointSize="11"/>
+                            <variation key="device=watch38mm" width="120"/>
+                        </button>
+                    </items>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="-1412" y="-553"/>
+        </scene>
+        <!--资金-->
+        <scene sceneID="weP-mT-nB4">
+            <objects>
+                <controller identifier="AssetList" title="资金" id="iRn-8N-gUc" customClass="UCFAssetListfaceController">
+                    <items>
+                        <group width="1" height="1" alignment="left" hidden="YES" layout="vertical" id="LCL-KQ-eSA">
+                            <items>
+                                <group width="101" height="101" alignment="center" verticalAlignment="center" backgroundImage="loading1" id="Hmn-Hr-0am">
+                                    <variation key="device=watch38mm" height="86" width="86"/>
+                                </group>
+                                <label width="1" alignment="center" verticalAlignment="center" hidden="YES" text="您似乎与互联网失去连接" textAlignment="center" id="1JF-qS-bNq">
+                                    <fontDescription key="font" type="system" pointSize="10"/>
+                                </label>
+                            </items>
+                        </group>
+                        <table alignment="left" id="bid-Kg-SAR">
+                            <items>
+                                <tableRow identifier="AssetListCell" id="svC-Cu-Hd6" customClass="UCFAssetListRowCell">
+                                    <group key="rootItem" width="1" height="46" alignment="left" layout="vertical" radius="6" id="1n6-yw-iDy">
+                                        <items>
+                                            <group width="148" alignment="left" verticalAlignment="center" layout="vertical" spacing="4" id="yV2-5Y-DUo">
+                                                <items>
+                                                    <label width="148" alignment="left" verticalAlignment="center" text="+100" textAlignment="left" id="BgE-Gc-33k">
+                                                        <color key="textColor" red="0.99215686270000003" green="0.30196078430000001" blue="0.29803921570000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <fontDescription key="font" type="system" pointSize="15"/>
+                                                        <variation key="device=watch38mm" width="128"/>
+                                                    </label>
+                                                </items>
+                                                <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
+                                            </group>
+                                            <group width="148" alignment="right" verticalAlignment="center" id="0ON-Hw-tV6">
+                                                <items>
+                                                    <label width="0.5" alignment="left" text="提现申请" textAlignment="left" id="Le0-c7-LHg">
+                                                        <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <fontDescription key="font" type="system" pointSize="10"/>
+                                                        <variation key="device=watch38mm">
+                                                            <fontDescription key="font" type="system" pointSize="9"/>
+                                                        </variation>
+                                                    </label>
+                                                    <label width="0.5" alignment="right" text="10-20 10:23" textAlignment="right" id="jqG-7q-SPW">
+                                                        <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <fontDescription key="font" type="system" pointSize="11"/>
+                                                        <variation key="device=watch38mm">
+                                                            <fontDescription key="font" type="system" pointSize="10"/>
+                                                        </variation>
+                                                    </label>
+                                                </items>
+                                                <variation key="device=watch38mm" width="128"/>
+                                            </group>
+                                        </items>
+                                        <color key="backgroundColor" red="0.1137254902" green="0.1137254902" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
+                                    </group>
+                                    <connections>
+                                        <outlet property="money" destination="BgE-Gc-33k" id="9C2-dP-iJf"/>
+                                        <outlet property="moneyDate" destination="jqG-7q-SPW" id="RqC-E3-fz4"/>
+                                        <outlet property="moneySouce" destination="Le0-c7-LHg" id="LU4-Nq-fxA"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                        </table>
+                        <imageView width="56" height="57" alignment="center" verticalAlignment="center" hidden="YES" image="no_data_icon" id="S3Z-PI-aex">
+                            <variation key="device=watch38mm" height="47" width="50"/>
+                        </imageView>
+                        <label alignment="center" verticalAlignment="center" text="仅显示最新10条回款记录" textAlignment="center" id="LkF-Cs-cm5">
+                            <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="font" type="system" pointSize="11"/>
+                        </label>
+                    </items>
+                    <connections>
+                        <outlet property="AssetListTableView" destination="bid-Kg-SAR" id="aXa-6Z-jIe"/>
+                        <outlet property="dataStatusLabel" destination="LkF-Cs-cm5" id="zAu-1f-1bL"/>
+                        <outlet property="loadingGroup" destination="Hmn-Hr-0am" id="CqI-3P-5ON"/>
+                        <outlet property="netStatusLabel" destination="1JF-qS-bNq" id="Hhq-vV-w9l"/>
+                        <outlet property="noDataImage" destination="S3Z-PI-aex" id="2IX-O9-7DW"/>
+                        <outlet property="tipGroup" destination="LCL-KQ-eSA" id="an3-LY-GQt"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="-1226.6153846153848" y="-612.43589743589746"/>
+        </scene>
+        <!--回款-->
+        <scene sceneID="xuW-Ek-Tal">
+            <objects>
+                <controller identifier="BackMoney" title="回款" id="kqd-R3-CxX" customClass="UCFBackMoneyController">
+                    <items>
+                        <table alignment="left" id="tBH-Jo-Vcq">
+                            <items>
+                                <tableRow identifier="BackMoneyCell" id="AWq-v5-qMh" customClass="UCFBackMoneyRowCell">
+                                    <group key="rootItem" width="1" height="46" alignment="left" layout="vertical" radius="6" id="v6N-an-udM">
+                                        <items>
+                                            <group width="148" height="15" alignment="right" verticalAlignment="center" id="B7V-cx-8Bu">
+                                                <items>
+                                                    <label alignment="left" verticalAlignment="center" text="总计资金:" textAlignment="left" id="uGo-jQ-DK1">
+                                                        <fontDescription key="font" type="system" pointSize="12"/>
+                                                    </label>
+                                                    <label height="1" alignment="left" verticalAlignment="center" text="100.00" textAlignment="left" id="pb2-XA-eDn">
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <fontDescription key="font" type="system" pointSize="13"/>
+                                                    </label>
+                                                </items>
+                                                <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
+                                                <variation key="device=watch38mm" width="128"/>
+                                            </group>
+                                            <group width="148" height="14" alignment="right" verticalAlignment="center" id="wMF-II-UKR">
+                                                <items>
+                                                    <label alignment="left" verticalAlignment="center" text="计划回款日:" textAlignment="left" id="K8z-yq-1fa">
+                                                        <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <fontDescription key="font" type="system" pointSize="10"/>
+                                                    </label>
+                                                    <label alignment="left" verticalAlignment="center" text="09-23" textAlignment="left" id="7sP-vv-l6i">
+                                                        <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <fontDescription key="font" type="system" pointSize="11"/>
+                                                    </label>
+                                                </items>
+                                                <variation key="device=watch38mm" width="128"/>
+                                            </group>
+                                        </items>
+                                        <color key="backgroundColor" red="0.1137254902" green="0.1137254902" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
+                                    </group>
+                                    <connections>
+                                        <outlet property="money" destination="pb2-XA-eDn" id="zwM-Bo-tk4"/>
+                                        <outlet property="moneyDate" destination="7sP-vv-l6i" id="0ri-36-Yz8"/>
+                                        <outlet property="moneySouce" destination="K8z-yq-1fa" id="Cwd-dq-Koy"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                        </table>
+                        <imageView width="56" height="57" alignment="center" verticalAlignment="center" hidden="YES" image="no_data_icon" id="kWe-lK-fFO">
+                            <variation key="device=watch38mm" height="47" width="50"/>
+                        </imageView>
+                        <label alignment="center" verticalAlignment="center" text="仅显示最新10条回款记录" textAlignment="center" id="NM4-m3-uQT">
+                            <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="font" type="system" pointSize="12"/>
+                            <variation key="device=watch38mm">
+                                <fontDescription key="font" type="system" pointSize="11"/>
+                            </variation>
+                        </label>
+                        <group width="1" height="1" alignment="left" hidden="YES" layout="vertical" id="3y9-lv-dIV">
+                            <items>
+                                <group width="101" height="101" alignment="center" verticalAlignment="center" backgroundImage="loading1" id="DVQ-ta-KjM">
+                                    <variation key="device=watch38mm" height="86" width="86"/>
+                                </group>
+                                <label width="136" height="20" alignment="center" verticalAlignment="center" hidden="YES" text="似乎已断开与互联网的连接。" textAlignment="center" id="Pfq-xc-Pmr">
+                                    <fontDescription key="font" type="system" pointSize="10"/>
+                                </label>
+                            </items>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="backMoneyTableview" destination="tBH-Jo-Vcq" id="KIH-vi-PT6"/>
+                        <outlet property="dataStatusLabel" destination="NM4-m3-uQT" id="qFt-9a-Ycu"/>
+                        <outlet property="loadingGroup" destination="DVQ-ta-KjM" id="iBu-wZ-Lkp"/>
+                        <outlet property="netStatusLabel" destination="Pfq-xc-Pmr" id="Q0F-L8-vuq"/>
+                        <outlet property="noDataImage" destination="kWe-lK-fFO" id="ipC-KI-HTu"/>
+                        <outlet property="tipGroup" destination="3y9-lv-dIV" id="R2B-vV-Wuy"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="-1712.2051282051284" y="-518.28205128205127"/>
+        </scene>
+        <!--工场码-->
+        <scene sceneID="hAr-MY-lWz">
+            <objects>
+                <controller identifier="gongChangMa" title="工场码" id="qI8-cR-PWw" customClass="UCFFactoryCodefaceController">
+                    <items>
+                        <group width="120" height="120" alignment="center" verticalAlignment="center" radius="4" id="0vA-wO-b4J">
+                            <items>
+                                <imageView width="105" height="105" alignment="center" verticalAlignment="center" id="j2W-Lm-xZ8">
+                                    <variation key="device=watch38mm" height="85" width="85"/>
+                                </imageView>
+                            </items>
+                            <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <variation key="device=watch38mm" height="100" width="100"/>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="factoryCodeImage" destination="j2W-Lm-xZ8" id="YhV-dL-vVy"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="-1704" y="-265"/>
+        </scene>
+        <!--签到-->
+        <scene sceneID="UQC-Gg-uyq">
+            <objects>
+                <controller identifier="qianDao" title="签到" id="o3U-KV-Qos" customClass="UCFSignfaceController">
+                    <items>
+                        <group width="110" height="110" alignment="center" verticalAlignment="center" backgroundImage="sign_round_bg" layout="vertical" id="JhD-H7-bCW">
+                            <items>
+                                <group width="33" height="23" alignment="center" verticalAlignment="center" hidden="YES" backgroundImage="already_sign_in" id="SXI-Gh-BBD">
+                                    <variation key="device=watch38mm" height="20" width="29"/>
+                                </group>
+                                <group width="1" height="25" alignment="center" verticalAlignment="center" id="v15-uZ-wU2">
+                                    <items>
+                                        <label width="0.45000000000000001" height="1" alignment="left" verticalAlignment="center" text="+" textAlignment="right" id="MuY-5s-aaV">
+                                            <fontDescription key="font" type="system" pointSize="12"/>
+                                            <variation key="device=watch38mm">
+                                                <fontDescription key="font" type="system" pointSize="10"/>
+                                            </variation>
+                                        </label>
+                                        <label width="0.5" height="1" alignment="left" text="0" id="Fct-UB-MzZ">
+                                            <fontDescription key="font" type="system" pointSize="30"/>
+                                            <variation key="device=watch38mm">
+                                                <fontDescription key="font" type="system" pointSize="28"/>
+                                            </variation>
+                                        </label>
+                                    </items>
+                                </group>
+                                <label width="1" alignment="center" verticalAlignment="center" text="签到成功" textAlignment="center" id="EP8-YR-aND">
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="font" type="system" pointSize="14"/>
+                                    <variation key="device=watch38mm">
+                                        <fontDescription key="font" type="system" pointSize="12"/>
+                                    </variation>
+                                </label>
+                            </items>
+                            <variation key="device=watch38mm" height="95" width="95"/>
+                        </group>
+                        <group alignment="center" verticalAlignment="center" layout="vertical" id="i9N-KV-6Ty">
+                            <items>
+                                <group alignment="center" id="wVB-q9-pMt">
+                                    <items>
+                                        <group width="1" alignment="center" verticalAlignment="center" id="YlX-xs-YgF">
+                                            <items>
+                                                <label alignment="left" verticalAlignment="center" text="您已连续签到" textAlignment="right" id="Iwv-aT-tEu">
+                                                    <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="font" type="system" pointSize="13"/>
+                                                    <variation key="device=watch38mm">
+                                                        <fontDescription key="font" type="system" pointSize="11"/>
+                                                    </variation>
+                                                </label>
+                                                <label alignment="center" verticalAlignment="center" text="0" textAlignment="center" id="avw-Mu-fqh">
+                                                    <color key="textColor" red="0.99215686270000003" green="0.30196078430000001" blue="0.29803921570000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="font" type="system" pointSize="13"/>
+                                                    <variation key="device=watch38mm">
+                                                        <fontDescription key="font" type="system" pointSize="11"/>
+                                                    </variation>
+                                                </label>
+                                                <label alignment="right" verticalAlignment="center" text="天" textAlignment="left" id="vpt-mC-MwI">
+                                                    <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="font" type="system" pointSize="13"/>
+                                                    <variation key="device=watch38mm">
+                                                        <fontDescription key="font" type="system" pointSize="11"/>
+                                                    </variation>
+                                                </label>
+                                            </items>
+                                        </group>
+                                    </items>
+                                </group>
+                                <group alignment="center" verticalAlignment="center" id="sd3-Ti-5qn">
+                                    <items>
+                                        <label alignment="center" verticalAlignment="center" text="明日签到奖励0工分" textAlignment="center" id="NhD-Ro-v6K">
+                                            <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="font" type="system" pointSize="10"/>
+                                            <variation key="device=watch38mm">
+                                                <fontDescription key="font" type="system" pointSize="8"/>
+                                            </variation>
+                                        </label>
+                                    </items>
+                                </group>
+                            </items>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="jiaHaoLabel" destination="MuY-5s-aaV" id="csi-44-raf"/>
+                        <outlet property="nextDayBeansLabel" destination="NhD-Ro-v6K" id="Xsj-vG-dSn"/>
+                        <outlet property="returnAmountGroup" destination="v15-uZ-wU2" id="IDn-sl-SYM"/>
+                        <outlet property="returnAmountLabel" destination="Fct-UB-MzZ" id="8qV-7T-luC"/>
+                        <outlet property="signDaysLabel" destination="avw-Mu-fqh" id="HP6-p4-IVO"/>
+                        <outlet property="signStatusLabel" destination="EP8-YR-aND" id="uhm-13-9gP"/>
+                        <outlet property="todaySignedGroup" destination="SXI-Gh-BBD" id="pIw-1r-9V0"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="-1117.6410256410256" y="-956.79487179487182"/>
+        </scene>
+        <!--Static Notification Interface Controller-->
+        <scene sceneID="AEw-b0-oYE">
+            <objects>
+                <notificationController id="YCC-NB-fut">
+                    <items>
+                        <label alignment="left" text="Alert Label" id="IdU-wH-bcW"/>
+                    </items>
+                    <notificationCategory key="notificationCategory" identifier="myCategory" id="JfB-70-Muf"/>
+                    <connections>
+                        <outlet property="notificationAlertLabel" destination="IdU-wH-bcW" id="JKC-fr-R95"/>
+                        <segue destination="4sK-HA-Art" kind="relationship" relationship="dynamicNotificationInterface" id="kXh-Jw-8B1"/>
+                    </connections>
+                </notificationController>
+            </objects>
+            <point key="canvasLocation" x="-1317" y="-6"/>
+        </scene>
+        <!--Notification Controller-->
+        <scene sceneID="ZPc-GJ-vnh">
+            <objects>
+                <controller id="4sK-HA-Art" customClass="NotificationController"/>
+            </objects>
+            <point key="canvasLocation" x="-1064" y="1"/>
+        </scene>
+    </scenes>
+</document>

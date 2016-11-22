@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="UCFCouponExchangeToFriendTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <frame key="frameInset" width="320" height="44"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jnN-Cm-gPB">
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="UCFCouponExchangeToFriendTableViewCell" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FiP-8G-WNV">
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="赠送" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rVR-5W-Y7t">
+                        <constraints>
+                            <constraint firstAttribute="width" constant="60" id="BG4-jN-x96"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.29019607843137252" green="0.63137254901960782" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sXv-ok-x9K" userLabel="line">
+                        <color key="backgroundColor" red="0.8901960784313725" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="0.5" id="fbt-2S-b29"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                <constraints>
+                    <constraint firstAttribute="right" secondItem="rVR-5W-Y7t" secondAttribute="right" constant="15" id="AwF-xk-mx2"/>
+                    <constraint firstAttribute="bottom" secondItem="rVR-5W-Y7t" secondAttribute="bottom" id="Jaf-VN-dGI"/>
+                    <constraint firstItem="FiP-8G-WNV" firstAttribute="leading" secondItem="jnN-Cm-gPB" secondAttribute="trailing" constant="11" id="P8G-I3-xw8"/>
+                    <constraint firstAttribute="bottom" secondItem="FiP-8G-WNV" secondAttribute="bottom" id="PzC-13-GKz"/>
+                    <constraint firstItem="jnN-Cm-gPB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="SjG-a9-xBI"/>
+                    <constraint firstItem="jnN-Cm-gPB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Tzj-Vd-u94"/>
+                    <constraint firstAttribute="trailing" secondItem="sXv-ok-x9K" secondAttribute="trailing" id="YyH-PN-Nwg"/>
+                    <constraint firstAttribute="bottom" secondItem="jnN-Cm-gPB" secondAttribute="bottom" id="aN3-k1-cic"/>
+                    <constraint firstAttribute="bottom" secondItem="sXv-ok-x9K" secondAttribute="bottom" id="jaL-og-SJ5"/>
+                    <constraint firstItem="sXv-ok-x9K" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="lZY-ub-Hce"/>
+                    <constraint firstItem="FiP-8G-WNV" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="mZn-Or-mAD"/>
+                    <constraint firstItem="rVR-5W-Y7t" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="uaj-7M-BrI"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <connections>
+                <outlet property="nameLabel" destination="jnN-Cm-gPB" id="KPa-c3-TMx"/>
+                <outlet property="phoneNumber" destination="FiP-8G-WNV" id="wvB-YP-9Ms"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+</document>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" restorationIdentifier="cell" selectionStyle="none" indentationWidth="10" reuseIdentifier="beancell" rowHeight="82" id="KGk-i7-Jjw" customClass="BeanTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="380" height="82"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <frame key="frameInset" width="380" height="81"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="haQ-B7-D2G">
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+300" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uFr-Hq-v4Y">
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" red="0.97724676132202148" green="0.20183229446411133" blue="0.23505187034606934" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="工豆个数" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OsY-Rw-hwo">
+                                <frame key="frameInset" minX="15" minY="13" width="56" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.26379796862602234" green="0.2637900710105896" blue="0.26379451155662537" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="OsY-Rw-hwo" firstAttribute="leading" secondItem="haQ-B7-D2G" secondAttribute="leading" constant="15" id="2zx-EN-6z9"/>
+                            <constraint firstItem="OsY-Rw-hwo" firstAttribute="centerY" secondItem="uFr-Hq-v4Y" secondAttribute="centerY" id="dgU-ma-wxf"/>
+                            <constraint firstAttribute="height" constant="44" id="gzi-GW-5wv"/>
+                            <constraint firstAttribute="centerY" secondItem="OsY-Rw-hwo" secondAttribute="centerY" id="tpF-c9-iph"/>
+                            <constraint firstAttribute="trailing" secondItem="uFr-Hq-v4Y" secondAttribute="trailing" constant="15" id="wuR-7F-1zS"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rcz-Up-bVy">
+                        <color key="backgroundColor" red="0.9215925931930542" green="0.92592698335647583" blue="0.94090938568115234" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="fdZ-Q3-8Oo"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gz5-jJ-NZ5">
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="有效期 2015-03-24" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hdN-ZY-LJA">
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="0.5296475887298584" green="0.52963173389434814" blue="0.52964073419570923" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" misplaced="YES" text="投资送工豆活动赠送" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iox-nN-03E">
+                                <frame key="frameInset" minX="15" minY="6" width="108" height="15"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="0.5296475887298584" green="0.52963173389434814" blue="0.52964073419570923" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.97037827968597412" green="0.97034925222396851" blue="0.97036570310592651" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="hdN-ZY-LJA" secondAttribute="trailing" constant="15" id="Iqp-Gx-61O"/>
+                            <constraint firstAttribute="centerY" secondItem="hdN-ZY-LJA" secondAttribute="centerY" id="cZb-Cb-z0B"/>
+                            <constraint firstItem="Iox-nN-03E" firstAttribute="leading" secondItem="gz5-jJ-NZ5" secondAttribute="leading" constant="15" id="vue-YS-PnW"/>
+                            <constraint firstAttribute="centerY" secondItem="Iox-nN-03E" secondAttribute="centerY" id="vwX-Tg-COt"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="20f-9p-Fj9" customClass="UCFAngleView">
+                        <constraints>
+                            <constraint firstAttribute="height" constant="17" id="MC4-L9-4hv"/>
+                            <constraint firstAttribute="width" constant="28" id="PK5-PI-0hy"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="gz5-jJ-NZ5" secondAttribute="trailing" id="15h-gX-AcH"/>
+                    <constraint firstAttribute="bottom" secondItem="gz5-jJ-NZ5" secondAttribute="bottom" constant="-1" id="3qR-ik-zxp"/>
+                    <constraint firstItem="gz5-jJ-NZ5" firstAttribute="top" secondItem="Rcz-Up-bVy" secondAttribute="bottom" id="B3V-lw-t2Y"/>
+                    <constraint firstItem="gz5-jJ-NZ5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="H6c-O0-Lcp"/>
+                    <constraint firstItem="20f-9p-Fj9" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="6" id="Pbs-vD-JGC"/>
+                    <constraint firstAttribute="trailing" secondItem="20f-9p-Fj9" secondAttribute="trailing" constant="12" id="Sbz-gf-neE"/>
+                    <constraint firstItem="Rcz-Up-bVy" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="bLn-xq-jPF"/>
+                    <constraint firstItem="haQ-B7-D2G" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="bhM-k5-VfU"/>
+                    <constraint firstItem="haQ-B7-D2G" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="hpd-0C-p5c"/>
+                    <constraint firstItem="Rcz-Up-bVy" firstAttribute="top" secondItem="haQ-B7-D2G" secondAttribute="bottom" id="pII-43-96v"/>
+                    <constraint firstAttribute="trailing" secondItem="haQ-B7-D2G" secondAttribute="trailing" id="ynE-nZ-iQi"/>
+                    <constraint firstAttribute="trailing" secondItem="Rcz-Up-bVy" secondAttribute="trailing" id="zNx-hw-jut"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+            <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+            <connections>
+                <outlet property="beanContentBgView" destination="gz5-jJ-NZ5" id="1cI-Wa-x6e"/>
+                <outlet property="beanInfoLabel" destination="Iox-nN-03E" id="Znn-fQ-91o"/>
+                <outlet property="beanNumBgView" destination="haQ-B7-D2G" id="g5i-Ej-ZhI"/>
+                <outlet property="beanNumLabel" destination="uFr-Hq-v4Y" id="veo-1N-LAi"/>
+                <outlet property="expireTimeLabel" destination="hdN-ZY-LJA" id="1cd-9e-AGX"/>
+                <outlet property="segLineHeight" destination="fdZ-Q3-8Oo" id="InC-eY-rbG"/>
+                <outlet property="signView" destination="20f-9p-Fj9" id="AWa-kE-e8I"/>
+            </connections>
+            <point key="canvasLocation" x="361" y="384"/>
+        </tableViewCell>
+    </objects>
+</document>
