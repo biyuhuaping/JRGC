@@ -18,6 +18,9 @@
 @property (weak, nonatomic) UCFBaseViewController *currentViewController;
 @property (nonatomic, strong) UCFHornerTransferViewController *hornerTransfer;
 @property (nonatomic, strong) UCFP2PTransferViewController *p2pTransfer;
+    
+@property (nonatomic, assign) BOOL isShowHornor;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *selectedHight;
 @end
 
 @implementation UCFTransferViewController
@@ -25,15 +28,23 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    if (![self.view.subviews containsObject:self.hornerTransfer.view]) {
-        [self.view addSubview:self.hornerTransfer.view];
-        [self.hornerTransfer didMoveToParentViewController:self];//确定关系建立
+//    if (![self.view.subviews containsObject:self.hornerTransfer.view]) {
+//        [self.view addSubview:self.hornerTransfer.view];
+//        self.itemSeletedView.segmentedControl.selectedSegmentIndex = 0;
+//        [self.hornerTransfer didMoveToParentViewController:self];//确定关系建立
+//    }
+    if (![self.view.subviews containsObject:self.currentViewController.view]) {
+        [self.view addSubview:self.currentViewController.view];
+        self.itemSeletedView.segmentedControl.selectedSegmentIndex = 0;
+        [self.currentViewController didMoveToParentViewController:self];//确定关系建立
     }
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.isShowHornor = [[NSUserDefaults standardUserDefaults] boolForKey:@"isShowHornor"];
+    
     self.itemSeletedView.sectionTitles = @[@"尊享转让", @"P2P转让"];
     self.itemSeletedView.delegate = self;
     
@@ -45,7 +56,16 @@
     self.p2pTransfer.view.frame = CGRectMake(0, 44, ScreenWidth, ScreenHeight - 64-49 -44);
     [self addChildViewController:self.p2pTransfer];
     
-    self.currentViewController = self.hornerTransfer;
+    if (self.isShowHornor) {
+        self.currentViewController = self.hornerTransfer;
+        self.selectedHight.constant = 44;
+    }
+    else {
+        self.currentViewController = self.p2pTransfer;
+        self.selectedHight.constant = 0;
+        self.p2pTransfer.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight - 64-49);
+    }
+    
 }
 
 // 选项的点击事件

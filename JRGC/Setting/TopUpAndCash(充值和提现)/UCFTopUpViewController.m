@@ -28,13 +28,15 @@
     NSString *telNum;               //客服电话
     NSString *minRecharge;          //最小充值金额
     NSString *fee;                  //提现费率
-    MjAlertView         *mjalert;
+    MjAlertView         *mjalert; //修改预留手机号弹框
     UITextField         *telTextField;
     UITextField         *codeTextField;
     UIButton            *getCodeBtn;
     UIView              *fixedBaseView;
     CGFloat              fixMaxYValue;
     BOOL                 isSpecial;//是否是特殊用户
+    MjAlertView         *moneylessAlertView; //账户余额不足弹框
+    NSString * _RechargeTokenStr;
 }
 //底部滚动视图
 @property (weak, nonatomic) IBOutlet UIScrollView *baseScrollView;
@@ -142,8 +144,6 @@
     
     _msgTipLabel.userInteractionEnabled = YES;
     _msgTipLabel.text = @"";
-    
-
 }
 
 
@@ -166,9 +166,11 @@
                           NSFontAttributeName:[UIFont systemFontOfSize:13],/*(字体)*/
                           NSParagraphStyleAttributeName:paragraph,/*(段落)*/
                           };
-    NSString *desStr = [NSString stringWithFormat:@"• 使用快捷支付充值最低金额应大于等于%@元。\n• 对首次充值后无投资的提现，平台收取%@%%的手续费。\n• 充值/提现必须为银行借记卡，不支持存折、信用卡充值。\n• 充值需开通银行卡网上支付功能，如有疑问请咨询开户行客服。\n• 单笔充值不可超过该银行充值限额。",minRecharge,fee];
+    NSString *desStr = [NSString stringWithFormat:@"• 使用快捷支付充值最低金额应大于等于%@元。\n• 对首次充值后无投资的提现，平台收取%@%%的手续费。\n• 充值/提现必须为银行借记卡，不支持存折、信用卡充值。\n• 充值需开通银行卡网上支付功能，如有疑问请咨询开户行客服。\n• 单笔充值不可超过该银行充值限额。\n• 如手机快捷支付充值失败，可尝试在电脑上进行网银转账，或使用支付宝进行转账操作。",minRecharge,fee];
     //查看各银行充值限额；
     _desLabel.attributedText = [NSString getNSAttributedString:desStr labelDict:dic];
+    [_desLabel setBoldFontToString:@"网银"];
+    [_desLabel setBoldFontToString:@"支付宝"];
 
     __weak typeof(self) weakSelf = self;
     self.telServiceLabel.text = @"• 如果充值金额没有及时到账，请拨打客服查询。";
@@ -207,6 +209,9 @@
     webController.sourceVc = @"topUpVC";//充值页面
     webController.baseTitleType = @"specialUser";
     [self.navigationController pushViewController:webController animated:YES];
+}
+- (void)mjalertView:(MjAlertView *)alertview didClickedButton:(UIButton *)clickedButton andClickedIndex:(NSInteger)index{
+    
 }
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -370,6 +375,7 @@
     [paraDict setValue:self.smsSerialNo forKey:@"validateNo"];
     [paraDict setValue:blackBox forKey:@"token_id"];
     [paraDict setValue:wanip forKey:@"ip"];
+    [paraDict setValue:_RechargeTokenStr forKey:@"rechargeToken"];
     [[NetworkModule sharedNetworkModule] newPostReq:paraDict tag:kSxTagHSPayMobile owner:self signature:YES];
 }
 
@@ -649,14 +655,23 @@
             alert1.tag = 1000;
             [alert1 show];
         } else {
-            NSString *titleStr = @"继续充值";
-            NSString *messageStr = dic[@"message"];
-            if ([dic[@"code"] intValue] == 21031) {
-                titleStr = @"确定";
+            NSString *errorMessage = [dic objectSafeForKey:@"message"];
+            if ([[dic objectSafeForKey:@"code"] intValue] == 31029) { //充值禁用时
+                UIAlertView *alert1 = [[UIAlertView alloc] initWithTitle:@"充值失败" message:errorMessage delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                alert1.tag = 1001;
+                [alert1 show];
+                return;
             }
-            UIAlertView *alert1 = [[UIAlertView alloc] initWithTitle:@"充值失败" message:messageStr delegate:self cancelButtonTitle:titleStr otherButtonTitles: nil];
-            alert1.tag = 1001;
-            [alert1 show];
+//          如手机快捷支付充值失败，可尝试在电脑上进行<font color='#fd4d4c'>网银转账</font>，或使用<font color='#fd4d4c'>支付宝</font>进行转账操作。
+            NSArray *array = [errorMessage componentsSeparatedByString:@"\n"];
+            NSString *errorMessageStr = [array firstObject];
+            NSString *message = [NSString stringWithFormat:@"<font color='#555555'>%@</font>",[array lastObject]];
+            if (array.count == 1) {
+                message = @"";
+            }
+            moneylessAlertView = [[MjAlertView alloc] initRechargeViewWithTitle:@"充值失败" errorMessage:errorMessageStr message:message delegate:self cancelButtonTitle:@"继续充值"];
+            moneylessAlertView.tag = 1001;
+            [moneylessAlertView show];
         }
         
     }else if (tag.intValue == kSXTagBankTopInfo) {
@@ -716,8 +731,10 @@
         }
     } else if (tag.intValue == kSXTagWithdrawalsSendPhone) {
         NSMutableDictionary *dic = [data objectFromJSONString];
+   
         if([dic[@"ret"] boolValue])
         {
+            _RechargeTokenStr = [[dic objectSafeDictionaryForKey:@"data"] objectSafeForKey:@"rechargeToken"];
             [MBProgressHUD displayHudError:@"已发送，请等待接收，60秒后可再次获取。"];
             _getCodeButton.userInteractionEnabled = NO;
             [_timer setFireDate:[NSDate distantPast]];

@@ -10,4 +10,5 @@
 
 @interface UCFProjectListController : UCFBaseViewController
 @property (nonatomic, copy) NSString *strStyle;
+- (void)changeViewWithConfigure:(NSString *)config;
 @end

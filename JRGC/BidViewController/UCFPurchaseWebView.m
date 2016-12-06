@@ -59,7 +59,10 @@
 //    } else {//***投资失败以后导航栏上的返回按钮返回的是投资填写页面
 //        [self.navigationController popViewControllerAnimated:YES];
 //    }
-    [self.navigationController popToRootViewControllerAnimated:YES];
+     [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadHonerPlanData" object:nil];
+     [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadP2PData" object:nil];
+     [[NSNotificationCenter defaultCenter] postNotificationName:@"LatestProjectUpdate" object:nil];
+     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 - (void)jsClose
 {

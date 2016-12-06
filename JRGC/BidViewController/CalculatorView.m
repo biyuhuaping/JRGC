@@ -14,11 +14,13 @@
 #import "JSONKit.h"
 @implementation CalculatorView
 {
-    UILabel *jrgcProfitLab;
-    UILabel *bankProfitLab;
-    UIView  *jrgcProfitView;
-    UIView  *bankProfitView;
-    UIButton *calculatorBtn;
+    UILabel     *jrgcProfitLab;
+    UILabel     *bankProfitLab;
+    UIView      *jrgcProfitView;
+    UIView      *bankProfitView;
+    UIButton    *calculatorBtn;
+    NSString    *normalBidID;
+    NSString    *preInvestMoney;  // 上次的投标金额
 }
 - (void)dealloc
 {
@@ -148,13 +150,11 @@
     preGetMoneyLabel = [[UILabel alloc] init];
     preGetMoneyLabel.frame = CGRectMake(15, CGRectGetMaxY(jrgcProfitLab.frame) + [Common calculateNewSizeBaseMachine:8] , CGRectGetWidth(blueHeadView.frame) - 30, [Common calculateNewSizeBaseMachine:28]);
     preGetMoneyLabel.textColor = [UIColor whiteColor];
-    preGetMoneyLabel.text = @"170.00";
+    preGetMoneyLabel.text = @"0.00";
     preGetMoneyLabel.font = [UIFont systemFontOfSize:[Common calculateNewSizeBaseMachine:26.0f]];
     preGetMoneyLabel.textAlignment = NSTextAlignmentLeft;
     preGetMoneyLabel.backgroundColor = [UIColor clearColor];
     [blueHeadView addSubview:preGetMoneyLabel];
-    
-
     
     UIView *bottomBaseView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(blueHeadView.frame) - [Common calculateNewSizeBaseMachine:10], CGRectGetWidth(blueHeadView.frame), [Common calculateNewSizeBaseMachine:10] )];
 //    bottomBaseView.backgroundColor = UIColorWithRGBA(78, 92, 129, 1);
@@ -203,7 +203,6 @@
 - (void)calculateBegin:(UIButton *)button
 {
 //    calculatorBtn.enabled = NO;
-    
     if (_isTransid) {
         NSString *annualRate = [[self.tranBidDataDict objectForKey:@"data"] objectForKey:@"transfereeYearRate"];
         NSString *repayMode = [[self.tranBidDataDict objectForKey:@"data"] objectForKey:@"repayMode"];
@@ -220,10 +219,16 @@
          NSString *parmStr = [NSString stringWithFormat:@"annualRate=%@&repayMode=%@&repayPeriod=%@&investAmt=%@",annualRate,repayMode,repayPeriod,investAmt];
         [[NetworkModule sharedNetworkModule] postReq:parmStr tag:kSXTagPrdClaimsComputeIntrest owner:self];
     } else {
+        
+        if ([preInvestMoney isEqualToString:[UCFToolsMehod  isNullOrNilWithString:moneyTextField.text]]) {
+            return;
+        }
+        preInvestMoney = [NSString stringWithFormat:@"%@",moneyTextField.text];
         double nowMoney = [moneyTextField.text doubleValue];
         moneyTextField.text =  [NSString stringWithFormat:@"%.2f",_normalMinInvest > nowMoney ? _normalMinInvest : nowMoney];
-        [self getMoney:moneyTextField.text];
-//        [self shouAnimation];
+        NSString *investAmt = moneyTextField.text;
+        NSString *parmStr = [NSString stringWithFormat:@"id=%@&investAmt=%@",normalBidID,investAmt];
+        [[NetworkModule sharedNetworkModule] postReq:parmStr tag:kSXTagNormalBidComputeIntrest owner:self];
     }
 }
 -(void)beginPost:(kSXTag)tag
@@ -233,15 +238,26 @@
 - (void)endPost:(id)result tag:(NSNumber *)tag
 {
     [MBProgressHUD hideAllHUDsForView:self animated:YES];
-    
-    NSString *data = (NSString *)result;
-    NSMutableDictionary *dic = [data objectFromJSONString];
-    NSString *rstcode = dic[@"status"];
-    if ([rstcode isEqualToString:@"1"]) {
-        NSString *taotalIntrest = [NSString stringWithFormat:@"%@",dic[@"taotalIntrest"]];
-        NSString *bankIntrest = [NSString stringWithFormat:@"%@",dic[@"bankBaseIntrest"]];
-        preGetMoneyLabel.text = [NSString stringWithFormat:@"%@",[UCFToolsMehod AddComma:taotalIntrest]];
-        bankGetMoneyLabel.text = [NSString stringWithFormat:@"¥%@",[UCFToolsMehod AddComma:bankIntrest]];
+    if (tag.integerValue ==  kSXTagNormalBidComputeIntrest) {
+        NSString *data = (NSString *)result;
+        NSMutableDictionary *dic = [data objectFromJSONString];
+        NSString *rstcode = dic[@"status"];
+        if ([rstcode isEqualToString:@"1"]) {
+            NSString *taotalIntrest = [NSString stringWithFormat:@"%@",dic[@"taotalIntrest"]];
+//            NSString *bankIntrest = [NSString stringWithFormat:@"%@",dic[@"bankBaseIntrest"]];
+            preGetMoneyLabel.text = [NSString stringWithFormat:@"%@",[UCFToolsMehod isNullOrNilWithString:taotalIntrest]];
+//            bankGetMoneyLabel.text = [NSString stringWithFormat:@"¥%@",[UCFToolsMehod isNullOrNilWithString:bankIntrest]];
+        }
+    } else {
+        NSString *data = (NSString *)result;
+        NSMutableDictionary *dic = [data objectFromJSONString];
+        NSString *rstcode = dic[@"status"];
+        if ([rstcode isEqualToString:@"1"]) {
+            NSString *taotalIntrest = [NSString stringWithFormat:@"%@",dic[@"taotalIntrest"]];
+//            NSString *bankIntrest = [NSString stringWithFormat:@"%@",dic[@"bankBaseIntrest"]];
+            preGetMoneyLabel.text = [NSString stringWithFormat:@"%@",[UCFToolsMehod isNullOrNilWithString:taotalIntrest]];
+//            bankGetMoneyLabel.text = [NSString stringWithFormat:@"¥%@",[UCFToolsMehod AddComma:bankIntrest]];
+        }
     }
 }
 -(void)errorPost:(NSError*)err tag:(NSNumber*)tag
@@ -354,11 +370,13 @@
 - (void)reloadViewWithData:(NSDictionary *)dataDict AndNowMoney:(NSString *)currentMoney
 {
     self.annleRate = [[dataDict objectForKey:@"data"] objectForKey:@"annualRate"];
+    normalBidID = [NSString stringWithFormat:@"%@",[[dataDict objectForKey:@"data"] objectForKey:@"id"]] ;
     self.repayPeriodDay = [[dataDict objectForKey:@"data"] objectForKey:@"repayPeriodDay"];
     moneyTextField.placeholder = [NSString stringWithFormat:@"%@元起投",[[dataDict objectForKey:@"data"] objectForKey:@"minInvest"]];
     moneyTextField.text = [NSString stringWithFormat:@"%.2f",[currentMoney doubleValue]];
     _normalMinInvest = [[[dataDict objectForKey:@"data"] objectForKey:@"minInvest"] doubleValue];
-    [self getMoney:currentMoney];
+//    [self getMoney:currentMoney];
+    [self calculateBegin:nil];
 }
 
 

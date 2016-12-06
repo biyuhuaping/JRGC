@@ -394,8 +394,9 @@
 //    id noInterests = dic[@"data"][@"noInterests"];//待收利息
 //    _noInterestsLab.text = [NSString stringWithFormat:@"￥%0.2f",[noInterests floatValue]];
     
-    BOOL hasNextPage = [dic[@"data"][@"pageData"][@"pagination"][@"hasNextPage"] boolValue];
+    BOOL hasNextPage = [dic[@"pageData"][@"pagination"][@"hasNextPage"] boolValue];
     NSArray *dataArr = dic[@"pageData"][@"result"];
+
     if (tag.intValue == kSXTagPrdOrderUinvest) {
         if ([rstcode intValue] == 1) {
             if (_setHeaderInfoBlock) {
@@ -407,19 +408,111 @@
             _listCountLab.text = [NSString stringWithFormat:@"共%@笔记录",_listCountArr[_index]];
             [_listCountLab setFont:[UIFont boldSystemFontOfSize:12] string:listCount];
             
-            switch (_index) {
+        switch (_index) {
                 case 0:{
-                    _dataArr1 = [self currentPage:_pageNum1 tableView:_tableView1 tempArr:dataArr :hasNextPage];
+                    if (_pageNum1 == 1) {
+                        [_dataArr1 removeAllObjects];
+                        _dataArr1 = [NSMutableArray arrayWithArray:dataArr];
+                        if (_dataArr1.count == 0) {
+                            [_tableView1.footer noticeNoMoreData];
+                            [_noDataView showInView:_tableView1];
+                        }else if(_dataArr1.count <= 20 && !hasNextPage){ //每页数据20条
+                            [self.noDataView hide];
+                            _tableView1.footer.hidden = NO;
+                            [_tableView1.footer noticeNoMoreData];
+                        }else{
+                            [self.noDataView hide];
+                            _tableView1.footer.hidden = NO;
+                            if (!hasNextPage) {
+                                [_tableView1.footer noticeNoMoreData];
+                            }
+                            else {
+//                                _pageNum1 ++;
+                                [_tableView1.footer resetNoMoreData];
+                            }
+                        };
+                    }else{
+                        [_dataArr1 addObjectsFromArray:dataArr];
+                        if (!hasNextPage) {
+                            [_tableView1.footer noticeNoMoreData];
+                        }
+                        else {
+//                            _pageNum1 ++;
+                            [_tableView1.footer resetNoMoreData];
+                        }
+                    }
+
                     [_tableView1 reloadData];
                 }
                     break;
                 case 1:{
-                    _dataArr2 = [self currentPage:_pageNum2 tableView:_tableView2 tempArr:dataArr :hasNextPage];
+                    if (_pageNum2 == 1) {
+                        [_dataArr2 removeAllObjects];
+                        _dataArr2 = [NSMutableArray arrayWithArray:dataArr];
+                        if (_dataArr2.count == 0) {
+                            [_tableView2.footer noticeNoMoreData];
+                            [_noDataView showInView:_tableView1];
+                        }else if(_dataArr2.count <= 20 && !hasNextPage){ //每页数据20条
+                            [self.noDataView hide];
+                            _tableView2.footer.hidden = NO;
+                            [_tableView2.footer noticeNoMoreData];
+                        }else{
+                            [self.noDataView hide];
+                            _tableView2.footer.hidden = NO;
+                            if (!hasNextPage) {
+                                [_tableView2.footer noticeNoMoreData];
+                            }
+                            else {
+//                                _pageNum2 ++;
+                                [_tableView2.footer resetNoMoreData];
+                            }
+                        };
+                    }else{
+                        [_dataArr2 addObjectsFromArray:dataArr];
+                        if (!hasNextPage) {
+                            [_tableView2.footer noticeNoMoreData];
+                        }
+                        else {
+//                            _pageNum2 ++;
+                            [_tableView2.footer resetNoMoreData];
+                        }
+                    }
+                    
                     [_tableView2 reloadData];
                 }
                     break;
                 case 2:{
-                    _dataArr3 = [self currentPage:_pageNum3 tableView:_tableView3 tempArr:dataArr :hasNextPage];
+                    if (_pageNum3 == 1) {
+                        [_dataArr3 removeAllObjects];
+                        _dataArr3 = [NSMutableArray arrayWithArray:dataArr];
+                        if (_dataArr3.count == 0) {
+                            [_tableView3.footer noticeNoMoreData];
+                            [_noDataView showInView:_tableView3];
+                        }else if(_dataArr3.count <= 20 && !hasNextPage){ //每页数据20条
+                            [self.noDataView hide];
+                            _tableView3.footer.hidden = NO;
+                            [_tableView3.footer noticeNoMoreData];
+                        }else{
+                            [self.noDataView hide];
+                            _tableView3.footer.hidden = NO;
+                            if (!hasNextPage) {
+                                [_tableView3.footer noticeNoMoreData];
+                            }
+                            else {
+//                                _pageNum3 ++;
+                                [_tableView3.footer resetNoMoreData];
+                            }
+                        };
+                    }else{
+                        [_dataArr3 addObjectsFromArray:dataArr];
+                        if (!hasNextPage) {
+                            [_tableView3.footer noticeNoMoreData];
+                        }
+                        else {
+//                            _pageNum3 ++;
+                            [_tableView3.footer resetNoMoreData];
+                        }
+                    }
                     [_tableView3 reloadData];
                 }
                     break;
@@ -442,37 +535,6 @@
     [_tableView3.header endRefreshing];
     [_tableView3.footer endRefreshing];
     [MBProgressHUD displayHudError:err.userInfo[@"NSLocalizedDescription"]];
-}
-
-- (NSMutableArray *)currentPage:(NSInteger)currentPage tableView:(UITableView *)tableView tempArr:(NSArray *)tempArr :(BOOL)hasNextPage{
-    NSMutableArray *dataArr = [[NSMutableArray alloc]init];
-    if (currentPage == 1) {
-        dataArr = [NSMutableArray arrayWithArray:tempArr];
-        if (dataArr.count == 0) {
-            [tableView.footer noticeNoMoreData];
-            [_noDataView showInView:tableView];
-        }else{
-            [self.noDataView hide];
-            tableView.footer.hidden = NO;
-            if (!hasNextPage) {
-                [tableView.footer noticeNoMoreData];
-            }
-            else {
-                currentPage ++;
-                [tableView.footer resetNoMoreData];
-            }
-        };
-    }else{
-        [dataArr addObjectsFromArray:tempArr];
-        if (!hasNextPage) {
-            [tableView.footer noticeNoMoreData];
-        }
-        else {
-            currentPage ++;
-            [tableView.footer resetNoMoreData];
-        }
-    }
-    return dataArr;
 }
 
 @end

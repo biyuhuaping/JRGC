@@ -10,7 +10,6 @@
 #import "AppDelegate.h"
 #import "Common.h"
 #import "NSString+URL.h"
-#import "UCF404ErrorView.h"
 #import "UCFContributionValueViewController.h"//工分详情
 #import "UCFCouponViewController.h"
 #import "UCFFacCodeViewController.h"
@@ -36,13 +35,9 @@
 #define SIGNATURETIME 30.0
 
 
-@interface UCFWebViewJavascriptBridgeController ()<FourOFourViewDelegate,UMSocialPlatformProvider>
+@interface UCFWebViewJavascriptBridgeController ()<UMSocialPlatformProvider>
 
 //@property (nonatomic, assign) JavascriptBridgeWebType webType;
-
-@property (nonatomic, strong) UCF404ErrorView *errorView;
-
-@property (nonatomic, copy) NSString *requestLastUrl;
 
 @property (strong, nonatomic) UIImage *shareImage;
 

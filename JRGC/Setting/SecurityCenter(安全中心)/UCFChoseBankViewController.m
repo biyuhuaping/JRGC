@@ -71,7 +71,7 @@
     
     
     //=========  下拉刷新、上拉加载更多  =========
-    __weak typeof(self) weakSelf = self;
+//    __weak typeof(self) weakSelf = self;
     
 //    // 下拉刷新
 //    [self.tableView addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(getDataRequset)];
@@ -415,7 +415,7 @@
 #pragma mark -方法-动态计算文字高度
 -(int)calculatHightOfWord:(NSString*)_str fontSize:(CGFloat)_size
 {
-    CGSize markContentSize = [self sizeWithText:_str font:[UIFont systemFontOfSize:_size] maxSize:CGSizeMake(ScreenWidth-30, 44)];//***暂时没用：因为按照设计要求table超出边界部分就换行，但如果2行的长度都无法完全显示则需要省略号。可如果按该方法算行高会存在当临界值加一个字时候会不换行而成省略号，次情况不符合设计要求。故改用计算字符串长度更加精准。
+//    CGSize markContentSize = [self sizeWithText:_str font:[UIFont systemFontOfSize:_size] maxSize:CGSizeMake(ScreenWidth-30, 44)];//***暂时没用：因为按照设计要求table超出边界部分就换行，但如果2行的长度都无法完全显示则需要省略号。可如果按该方法算行高会存在当临界值加一个字时候会不换行而成省略号，次情况不符合设计要求。故改用计算字符串长度更加精准。
     
     NSString *machineType = [Common machineName];
     if ([machineType isEqualToString:@"4"] || [machineType isEqualToString:@"5"]) {//***19个字

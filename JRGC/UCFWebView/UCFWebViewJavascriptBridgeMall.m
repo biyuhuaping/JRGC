@@ -37,4 +37,44 @@
     [self.navigationController setNavigationBarHidden:YES animated:animated];
 }
 
+
+#pragma mark - webViewDelegite
+- (void)webViewDidStartLoad:(UIWebView *)webView
+{
+    DBLOG(@"webViewDidStartLoad");
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    DBLOG(@"webViewDidFinishLoad");
+    [self.webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitUserSelect='none';"];
+    // Disable callout
+    [self.webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitTouchCallout='none';"];
+    [self.webView.scrollView.header endRefreshing];
+    
+    self.requestLastUrl = [NSString stringWithFormat:@"%@",self.webView.request.URL.absoluteString];
+    
+    DBLOG(@"%@",self.requestLastUrl);
+    
+    if (!self.errorView.hidden) {
+        self.errorView.hidden = YES;
+    }
+    
+}
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
+{
+    DBLOG(@"webViewdidFailLoadWithError");
+    [self.webView.scrollView.header endRefreshing];
+    if([error code] == NSURLErrorCancelled)
+    {
+        DBLOG(@"Canceled request: %@", [webView.request.URL absoluteString]);
+        return;
+    }
+    self.errorView.hidden = NO;
+    
+}
+
+
+
 @end

@@ -10,6 +10,7 @@
 #import "WebViewJavascriptBridge.h"
 #import "MJRefresh.h"
 #import "UCFCycleModel.h"
+#import "UCF404ErrorView.h"
 //typedef enum {
 //    //以下是枚举成员
 //    WebBBS = 0,
@@ -20,7 +21,7 @@
 //    WebBank,
 //    WebCash //提现页面
 //}JavascriptBridgeWebType;//枚举名称
-@interface UCFWebViewJavascriptBridgeController : UCFBaseViewController<UIWebViewDelegate>
+@interface UCFWebViewJavascriptBridgeController : UCFBaseViewController<FourOFourViewDelegate,UIWebViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UIWebView *webView;
 
@@ -34,6 +35,9 @@
 
 @property (strong, nonatomic) NSURLConnection *theConnection;
 
+@property (nonatomic, strong) UCF404ErrorView *errorView;
+
+@property (nonatomic, copy) NSString *requestLastUrl;
 
 
 ////------------------------------------------------------------------------------------qyy

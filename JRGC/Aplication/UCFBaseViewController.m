@@ -45,14 +45,14 @@
 - (void)setNavigationTitleView
 {
     if ([_baseTitleType isEqualToString:@"detail"]) {
-        baseTitleLabel.frame = CGRectMake(0, 0, [Common calculateNewSizeBaseMachine:100], 30);
-        UIView *titleBkView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [Common calculateNewSizeBaseMachine:170], 30)];
-        [titleBkView addSubview:baseTitleLabel];
-        baseTitleLabel.textAlignment = NSTextAlignmentCenter;
-        [baseTitleLabel setTextColor:[UIColor whiteColor]];
-        self.navigationItem.titleView = titleBkView;
-        [self.navigationController.navigationBar setBarTintColor:UIColorWithRGB(0xfd4d4c)];
-        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+//        baseTitleLabel.frame = CGRectMake(0, 0, [Common calculateNewSizeBaseMachine:100], 30);
+//        UIView *titleBkView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [Common calculateNewSizeBaseMachine:170], 30)];
+//        [titleBkView addSubview:baseTitleLabel];
+//        baseTitleLabel.textAlignment = NSTextAlignmentCenter;
+//        [baseTitleLabel setTextColor:[UIColor whiteColor]];
+//        self.navigationItem.titleView = titleBkView;
+//        [self.navigationController.navigationBar setBarTintColor:UIColorWithRGB(0xfd4d4c)];
+//        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     } else if ([_baseTitleType isEqualToString:@"list"]) {
         UIImageView *titleImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 152, 21)];
         titleImage.image = [UIImage imageNamed:@"logo.png"];

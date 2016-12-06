@@ -168,8 +168,25 @@
 {
     if (alertView.tag == 10000) {
         if (buttonIndex == 1) {
-            NSString *strParameters = [NSString stringWithFormat:@"userId=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
-            [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagUserLogout owner:self];
+//            NSString *strParameters = [NSString stringWithFormat:@"userId=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
+//            [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagUserLogout owner:self];
+            [[UCFSession sharedManager] transformBackgroundWithUserInfo:nil withState:UCFSessionStateUserLogout];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"setDefaultViewData" object:nil];
+            [[UserInfoSingle sharedManager] removeUserInfo];
+            [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"changScale"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            //安全退出后去首页
+            AppDelegate *delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+            [delegate.tabBarController setSelectedIndex:0];
+            [delegate.tabBarController.tabBar hideBadgeOnItemIndex:3];
+            [self.navigationController popToRootViewControllerAnimated:YES];
+            [[NSUserDefaults standardUserDefaults] setValue:@"0" forKey:@"personCenterClick"];
+            
+            //退出时清cookis
+            [Common deleteCookies];
+            [[NSNotificationCenter defaultCenter] postNotificationName:REGIST_JPUSH object:nil];
+            //通知首页隐藏tipView
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"LatestProjectUpdate" object:nil];
             [Common deleteCookies];
         }
 
@@ -306,30 +323,23 @@
         }else
             [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
     }  else if (tag.integerValue == kSXTagUserLogout) {
-        [[UCFSession sharedManager] transformBackgroundWithUserInfo:nil withState:UCFSessionStateUserLogout];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"setDefaultViewData" object:nil];
-        [[UserInfoSingle sharedManager] removeUserInfo];
-//        [[NSUserDefaults standardUserDefaults] setValue:nil forKey:UUID];
-//        [[NSUserDefaults standardUserDefaults] setValue:nil forKey:TIME];
-//        [[NSUserDefaults standardUserDefaults] setValue:nil forKey:IDCARD_STATE];
-//        [[NSUserDefaults standardUserDefaults] setValue:nil forKey:BANKCARD_STATE];
-        //        [[NSUserDefaults standardUserDefaults] setValue:nil forKey:GCODE];
-        [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"changScale"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        //[[NSNotificationCenter defaultCenter] postNotificationName:BACK_TO_LOGOUT object:nil];
-        //[LLLockPassword saveLockPassword:nil];
-        //安全退出后去首页
-        AppDelegate *delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-        [delegate.tabBarController setSelectedIndex:0];
-        [delegate.tabBarController.tabBar hideBadgeOnItemIndex:3];
-        [self.navigationController popToRootViewControllerAnimated:YES];
-        [[NSUserDefaults standardUserDefaults] setValue:@"0" forKey:@"personCenterClick"];
-        
-        //退出时清cookis
-        [Common deleteCookies];
-        [[NSNotificationCenter defaultCenter] postNotificationName:REGIST_JPUSH object:nil];
-        //通知首页隐藏tipView
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"LatestProjectUpdate" object:nil];
+//        [[UCFSession sharedManager] transformBackgroundWithUserInfo:nil withState:UCFSessionStateUserLogout];
+//        [[NSNotificationCenter defaultCenter] postNotificationName:@"setDefaultViewData" object:nil];
+//        [[UserInfoSingle sharedManager] removeUserInfo];
+//        [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"changScale"];
+//        [[NSUserDefaults standardUserDefaults] synchronize];
+//        //安全退出后去首页
+//        AppDelegate *delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+//        [delegate.tabBarController setSelectedIndex:0];
+//        [delegate.tabBarController.tabBar hideBadgeOnItemIndex:3];
+//        [self.navigationController popToRootViewControllerAnimated:YES];
+//        [[NSUserDefaults standardUserDefaults] setValue:@"0" forKey:@"personCenterClick"];
+//        
+//        //退出时清cookis
+//        [Common deleteCookies];
+//        [[NSNotificationCenter defaultCenter] postNotificationName:REGIST_JPUSH object:nil];
+//        //通知首页隐藏tipView
+//        [[NSNotificationCenter defaultCenter] postNotificationName:@"LatestProjectUpdate" object:nil];
     }else if(tag.integerValue == kSXTagFaceSwitchStatus){//刷脸登录状态开关
         if ([rstcode intValue] == 1) {
             NSString * faceIsOpen = [dic objectSafeForKey:@"isOpen"];// 1：关闭 0：开启

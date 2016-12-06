@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UCFTransferViewController">
             <connections>
                 <outlet property="itemSeletedView" destination="nZX-oD-l3m" id="gwE-Wm-HJI"/>
+                <outlet property="selectedHight" destination="bmO-qc-3SV" id="YNi-vV-DL4"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

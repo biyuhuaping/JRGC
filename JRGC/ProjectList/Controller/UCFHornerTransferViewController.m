@@ -65,7 +65,9 @@
     // 添加传统的下拉刷新
     [self.tableview addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(getNetDataFromNet)];
     [self.tableview.header beginRefreshing];
-    self.tableview.footer.hidden = YES;
+//    self.tableview.footer.hidden = YES;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadHonerTransferData) name:@"reloadHonerTransferData" object:nil];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -119,18 +121,26 @@
     UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
     [self presentViewController:loginNaviController animated:YES completion:nil];
 }
+-(void)reloadHonerTransferData{
+    [self.tableview.header beginRefreshing];
+}
 - (void)getNetDataFromNet{
+    NSString *uuid = [[NSUserDefaults standardUserDefaults]valueForKey:UUID];
     NSDictionary *strParameters;
     if ([self.tableview.header isRefreshing]) {
         self.currentPage = 1;
-//        [self.dataArray removeAllObjects];
         [self.tableview.footer resetNoMoreData];
     }
     else if ([self.tableview.footer isRefreshing]) {
         self.currentPage ++;
     }
     
-    strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:@"2", @"type", nil];
+    if (uuid) {
+        strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:uuid,@"userId", [NSString stringWithFormat:@"%ld", (long)self.currentPage], @"page", @"20", @"pageSize", @"2", @"type", nil];
+    }
+    else {
+        strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%ld", (long)self.currentPage], @"page", @"20", @"pageSize", @"2", @"type", nil];
+    }
     
     [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagTransferList owner:self signature:YES];
 }
@@ -153,7 +163,7 @@
         NSString *rstcode = dic[@"ret"];
         NSString *rsttext = dic[@"message"];
         if ([rstcode intValue] == 1) {
-            NSArray *list_result = [[[dic objectForKey:@"data"] objectForKey:@"pageData"] objectForKey:@"result"];
+            NSArray *list_result = [[[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"pageData"] objectSafeArrayForKey:@"result"];
             
             if ([self.tableview.header isRefreshing]) {
                 [self.dataArray removeAllObjects];
@@ -287,7 +297,7 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (alertView.tag == 7000) {
-        [self beginShowLoading];
+        [self reloadHonerTransferData];
     } else if (alertView.tag == 8000) {
         if (buttonIndex == 1) {
             switch ([UserInfoSingle sharedManager].openStatus)
@@ -311,8 +321,9 @@
         
     }
 }
-- (void)beginShowLoading {
-    [self.tableview.header beginRefreshing];
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"reloadHonerTransferData" object:nil];
+
 }
 
 @end

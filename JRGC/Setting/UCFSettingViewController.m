@@ -14,7 +14,7 @@
 #import "NZLabel.h"
 #import "UCFPersonalInfoModel.h"
 #import "UCFMenuTableCell.h"
-
+#import "UCFToolsMehod.h"
 #import "UCFAccountDetailViewController.h"
 #import "UCFBackMoneyDetailViewController.h"
 #import "UCFCouponViewController.h"
@@ -277,7 +277,7 @@
     
     if (![[NSUserDefaults standardUserDefaults] objectForKey:@"isShowFacPoint"]) {
         for (UCFMenuItemModel *model in self.menuItems) {
-            if ([model.itemId integerValue] == 6) {
+            if ([model.itemId integerValue] == 7) {
                 [self.actMenuItems removeObject:model];
             }
         }
@@ -515,6 +515,13 @@
         UCFFeedBackViewController *subVC = [[UCFFeedBackViewController alloc] initWithNibName:@"UCFFeedBackViewController" bundle:nil];
         [self.navigationController pushViewController:subVC animated:YES];
     }
+    else if ([item.customTitleLabel.text isEqualToString:@"游戏中心"]) {
+        UCFWebViewJavascriptBridgeLevel *subVC = [[UCFWebViewJavascriptBridgeLevel alloc] initWithNibName:@"UCFWebViewJavascriptBridgeLevel" bundle:nil];
+        subVC.url = GAMECENTERURL;
+        subVC.navTitle = @"游戏中心";
+        [self.navigationController pushViewController:subVC animated:YES];
+        
+    }
     else if ([item.customTitleLabel.text isEqualToString:@"会员等级"]) {
 //        UCFContributionValueViewController *subVC = [[UCFContributionValueViewController alloc]initWithNibName:@"UCFContributionValueViewController" bundle:nil];
 //        subVC.title = @"我的贡献值";
@@ -710,8 +717,8 @@
             //个人中心接口添加开户装填
             [UserInfoSingle sharedManager].openStatus = [openStatusStr integerValue];
             self.openStatus = [openStatusStr integerValue];
-            [UserInfoSingle sharedManager].realName = userName;
-            [UserInfoSingle sharedManager].mobile = mobile;
+            [UserInfoSingle sharedManager].realName = [UCFToolsMehod isNullOrNilWithString:userName];
+            [UserInfoSingle sharedManager].mobile = [UCFToolsMehod isNullOrNilWithString:mobile];
 
             BOOL isShowFacPoints = [dic[@"isOpen"] boolValue];
 //            BOOL isShowFacPoints = [@"0" boolValue];

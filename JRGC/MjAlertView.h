@@ -56,6 +56,7 @@ typedef enum : NSUInteger {
 - (instancetype)initTypeOneAlertViewWithBlock:(MyBlock)block;
 #pragma mark - 提现手续费弹框
 - (instancetype)initCashAlertViewWithCashMoney:(NSString *)cashMoney  ActualAccount:(NSString *)actualAccount FeeMoney:(NSString *)feemMoney  delegate:(id)delegate cancelButtonTitle:(NSString *)cancelButtonTitle withOtherButtonTitle:(NSString*)otherButtonTitle;
+-(instancetype)initRechargeViewWithTitle:(NSString *)title errorMessage:(NSString *)errorMessge message:(NSString *)message delegate:(id)delegate cancelButtonTitle:(NSString *)cancelButtonTitle;
 #pragma mark - 显示
 - (void)show;
 #pragma mark - 隐藏

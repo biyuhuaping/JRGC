@@ -39,6 +39,8 @@
     BOOL    isHaveCashNum;              //是否有返现券
     BOOL    isHaveCouponNum;            //是否有反息券
     BOOL    isCompanyAgent;             //是否是机构用户
+    NSString *_contractTitle;
+
 }
 @property (strong, nonatomic)NSMutableArray             *intelligenceArray;
 @property (weak, nonatomic) IBOutlet UITableView        *bidTableView;
@@ -708,6 +710,19 @@
             [AuxiliaryFunc showAlertViewWithMessage:[dic objectSafeForKey:@"message"]];
         }
 
+    }else if(tag.intValue == kSXTagGetContractMsg) {
+        NSString *Data = (NSString *)result;
+        NSDictionary * dic = [Data objectFromJSONString];
+        NSDictionary *dictionary =  [dic objectSafeDictionaryForKey:@"contractMess"];
+        NSString *status = [dic objectSafeForKey:@"status"];
+        if ([status intValue] == 1) {
+            NSString *contractMessStr = [dictionary objectSafeForKey:@"contractMess"];
+            FullWebViewController *controller = [[FullWebViewController alloc] initWithHtmlStr:contractMessStr title:_contractTitle];
+            controller.baseTitleType = @"detail_heTong";
+            [self.navigationController pushViewController:controller animated:YES];
+        }else{
+//            [self showHTAlertdidFinishGetUMSocialDataResponse];
+        }
     }
 //    if (self.bidTableView.header.isRefreshing) {
 //        [self.bidTableView.header endRefreshing];
@@ -1045,10 +1060,14 @@
 - (void)showCalutorView
 {
     [self.view endEditing:YES];
-    CalculatorView * view = [[CalculatorView alloc] init];
-    view.tag = 173924;
     MoneyBoardCell *cell = (MoneyBoardCell *)[_bidTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
     NSString *investMoney = cell.inputMoneyTextFieldLable.text;
+    if (cell.inputMoneyTextFieldLable.text.length == 0 || [cell.inputMoneyTextFieldLable.text isEqualToString:@"0"] || [cell.inputMoneyTextFieldLable.text isEqualToString:@"0.0"] || [cell.inputMoneyTextFieldLable.text isEqualToString:@"0.00"]) {
+        [MBProgressHUD displayHudError:@"请输入投资金额"];
+        return;
+    }
+    CalculatorView * view = [[CalculatorView alloc] init];
+    view.tag = 173924;
     [view reloadViewWithData:_dataDict AndNowMoney:investMoney];
     AppDelegate * app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     [app.window addSubview:view];
@@ -1313,90 +1332,38 @@
 {
     UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 98)];
     footView.backgroundColor = UIColorWithRGB(0xebebee);
-//    footView.backgroundColor = [UIColor whiteColor];
+    footView.userInteractionEnabled = YES;
     NSDictionary *userOtherMsg = [_dataDict objectForKey:@"userOtherMsg"];
-    NSString *borrowContractName = @"";
-    if ([UCFToolsMehod isNullOrNilWithString:[userOtherMsg objectForKey:@"borrowContractName"]] != 0) {
-        borrowContractName = [userOtherMsg objectForKey:@"borrowContractName"];
+    NSArray *contractMsgArr = [userOtherMsg valueForKey:@"contractMsg"];
+    NSString *totalStr = [NSString stringWithFormat:@"本人同意签署"];
+    for (int i = 0; i < contractMsgArr.count; i++) {
+        NSString *tmpStr = [[contractMsgArr objectAtIndex:i] valueForKey:@"contractName"];
+        totalStr = [totalStr stringByAppendingString:[NSString stringWithFormat:@"《%@》",tmpStr]];
     }
-    NSString *entrustGuaranteeName = @"";
-    if ([UCFToolsMehod isNullOrNilWithString:[userOtherMsg objectForKey:@"entrustGuaranteeName"]] != 0) {
-        entrustGuaranteeName = [userOtherMsg objectForKey:@"entrustGuaranteeName"];
-    }
-    NSString *borrowerConsultingName = @"";
-    if ([UCFToolsMehod isNullOrNilWithString:[userOtherMsg objectForKey:@"borrowerConsultingName"]] != 0) {
-        borrowerConsultingName = [userOtherMsg objectForKey:@"borrowerConsultingName"];
-    }
-    
-    NSArray *contractArray = [NSArray arrayWithObjects:borrowContractName,entrustGuaranteeName,borrowerConsultingName, nil];
-    NSString *str1 = [NSString stringWithFormat:@"《%@》",[contractArray objectAtIndex:0]];
-    UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(20,15, ScreenWidth-25, 12)];
-    label1.attributedText = [UCFToolsMehod getAcolorfulStringWithText1:@"本人同意签署" Color1:UIColorWithRGB(0x999999) Font1:[UIFont systemFontOfSize:12] Text2:str1 Color2:UIColorWithRGB(0x4aa1f9) Font2:[UIFont systemFontOfSize:12] AllText:[NSString stringWithFormat:@"本人同意签署%@",str1]];
-    label1.tag = 4000;
-    NSString *lengStr = [NSString stringWithFormat:@"本人同意签署%@",str1];
-    CGSize size = [Common getStrWitdth:lengStr TextFont:[UIFont systemFontOfSize:12]];
-    label1.frame = CGRectMake(23,15, size.width, 12);
-    [footView addSubview:label1];
-    label1.backgroundColor = [UIColor clearColor];
+    NZLabel *label1 = [[NZLabel alloc] init];
+    label1.font = [UIFont systemFontOfSize:12.0f];
+    CGSize size = [Common getStrHeightWithStr:totalStr AndStrFont:12 AndWidth:ScreenWidth-25];
+    label1.numberOfLines = 0;
+    label1.frame = CGRectMake(23, 15, ScreenWidth-25, size.height);
+    label1.text = totalStr;
     label1.userInteractionEnabled = YES;
+    label1.textColor = UIColorWithRGB(0x999999);
     
-    UITapGestureRecognizer *jieChu = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showHeTong:)];
-    [label1 addGestureRecognizer:jieChu];
-    
+    __weak typeof(self) weakSelf = self;
+    for (int i = 0; i < contractMsgArr.count; i++) {
+        NSString *tmpStr = [NSString stringWithFormat:@"《%@》",[[contractMsgArr objectAtIndex:i] valueForKey:@"contractName"]];
+        [label1 addLinkString:tmpStr block:^(ZBLinkLabelModel *linkModel) {
+            [weakSelf showHeTong:linkModel];
+        }];
+        [label1 setFontColor:UIColorWithRGB(0x4aa1f9) string:tmpStr];
+    }
+    [footView addSubview:label1];
     
     UIImageView * imageView1 = [[UIImageView alloc] init];
     imageView1.frame = CGRectMake(CGRectGetMinX(label1.frame) - 7, CGRectGetMinY(label1.frame) + 4, 5, 5);
     imageView1.image = [UIImage imageNamed:@"point.png"];
     [footView addSubview:imageView1];
-    
-    NSString *str2 = [NSString stringWithFormat:@"《%@》",[contractArray objectAtIndex:1]];
-    UILabel *label2 = [[UILabel alloc] init];
-    label2.tag = 4001;
-    label2.userInteractionEnabled = YES;
-    label2.textColor = UIColorWithRGB(0x4aa1f9);
-    [footView addSubview:label2];
-    label2.backgroundColor = [UIColor clearColor];
-    label2.text = str2;
-    if([[contractArray objectAtIndex:1] isEqualToString:@""])
-    {
-        label2.hidden = YES;
-        label2.userInteractionEnabled = NO;
-    }else{
-        label2.hidden = NO;
-        label2.userInteractionEnabled = YES;
-    }
-    label2.font = [UIFont systemFontOfSize:12];
-    label2.frame = CGRectMake(CGRectGetMaxX(label1.frame)+5,label1.frame.origin.y,[Common getStrWitdth:str2 TextFont:[UIFont systemFontOfSize:12]].width, 12);
-    UITapGestureRecognizer *baoZheng = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showHeTong:)];
-    [label2 addGestureRecognizer:baoZheng];
-    
-    NSString *str3 = [NSString stringWithFormat:@"《%@》",[contractArray objectAtIndex:2]];
-    UILabel *label3 = nil;
-    if(label2.hidden)
-    {
-        label3 = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(label1.frame)+5,label1.frame.origin.y, [Common getStrWitdth:str3 TextFont:[UIFont systemFontOfSize:12]].width, 12)];
-        CGFloat offX = str3.length * 12 + CGRectGetMinX(label3.frame);
-        if (offX >= ScreenWidth -10) {
-            label3.frame = CGRectMake(25/2.0,CGRectGetMaxY(label1.frame) + 10, ScreenWidth-25, 12);
-        }
-    }
-    else
-    {
-        label3 = [[UILabel alloc] initWithFrame:CGRectMake(25/2.0,CGRectGetMaxY(label1.frame) + 10, ScreenWidth-25, 12)];
-        label3.tag = 4002;
-    }
-    
-    label3.font = [UIFont systemFontOfSize:12.0f];
-    label3.text = str3;
-    [footView addSubview:label3];
-    label3.textColor = UIColorWithRGB(0x4aa1f9);
-    label3.backgroundColor = [UIColor clearColor];
-    label3.userInteractionEnabled = YES;
-    
-    UITapGestureRecognizer *chuJie = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showHeTong:)];
-    [label3 addGestureRecognizer:chuJie];
-    
-    UILabel *jieshouLabel = [[UILabel alloc] initWithFrame:CGRectMake(23, label3.frame.origin.y+label3.frame.size.height+10, ScreenWidth-25, 12)];
+    UILabel *jieshouLabel = [[UILabel alloc] initWithFrame:CGRectMake(23, label1.frame.origin.y+label1.frame.size.height+10, ScreenWidth-25, 12)];
     jieshouLabel.backgroundColor = [UIColor clearColor];
     jieshouLabel.text = @"本人接受筹标期内资金不计利息,投资意向不可撤销";
     jieshouLabel.font = [UIFont systemFontOfSize:12];
@@ -1413,26 +1380,28 @@
     
     return footView;
 }
-- (void)showHeTong:(UITapGestureRecognizer *)tap
+- (NSString *)valueIndex:(ZBLinkLabelModel *)linkModel
 {
-    UILabel *targetLabel = (UILabel *)tap.view;
-    NSInteger tag = targetLabel.tag;
+    NSString *contractStr = linkModel.linkString;
     NSDictionary *userOtherMsg = [_dataDict objectForKey:@"userOtherMsg"];
-    NSString *title = @"";
-    NSString *html = @"";
-    if(tag == 4000) {
-        title = [userOtherMsg objectForKey:@"borrowContractName"];
-        html = [userOtherMsg objectForKey:@"borrowContract"];
-    } else if (tag == 4001) {
-        title = [userOtherMsg objectForKey:@"entrustGuaranteeName"];
-        html = [userOtherMsg objectForKey:@"entrustGuarantee"];
-    } else {
-        title = [userOtherMsg objectForKey:@"borrowerConsultingName"];
-        html = [userOtherMsg objectForKey:@"borrowerConsulting"];
+    NSArray *contractMsgArr = [userOtherMsg valueForKey:@"contractMsg"];
+    NSString *type = @"";
+    for (int i = 0; i < contractMsgArr.count; i++) {
+        NSString *tmpStr = [NSString stringWithFormat:@"《%@》",[[contractMsgArr objectAtIndex:i] valueForKey:@"contractName"]];
+        if ([tmpStr isEqualToString:contractStr]) {
+            type = [[contractMsgArr objectAtIndex:i] valueForKey:@"contractType"];
+            _contractTitle = [[contractMsgArr objectAtIndex:i] valueForKey:@"contractName"];
+        }
     }
-    FullWebViewController *webController = [[FullWebViewController alloc] initWithHtmlStr:html title:title];
-    webController.baseTitleType = @"detail_heTong";
-    [self.navigationController pushViewController:webController animated:YES];
+    return type;
+}
+- (void)showHeTong:(ZBLinkLabelModel *)linkModel
+{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    NSString *contractTypeStr = [self valueIndex:linkModel];
+    NSString *projectId = [[self.dataDict objectForKey:@"data"] objectForKey:@"id"];
+    NSString *strParameters = [NSString stringWithFormat:@"userId=%@&prdClaimId=%@&contractType=%@&prdType=0",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],projectId,contractTypeStr];
+    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetContractMsg owner:self];
 }
 - (void)reloadMainView
 {

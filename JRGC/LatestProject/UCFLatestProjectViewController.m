@@ -352,6 +352,10 @@
     [appdelegate.tabBarController setSelectedIndex:1];
     UCFProjectListController *project = (UCFProjectListController *)[[appdelegate.tabBarController.viewControllers objectAtIndex:1].childViewControllers objectAtIndex:0];
     project.strStyle = strSellWay;
+    BOOL isLoad = [project isViewLoaded];
+    if (isLoad) {
+        [project changeViewWithConfigure:strSellWay];
+    }
 }
 
 - (void)investBtnClicked:(UIButton *)button{
@@ -791,13 +795,14 @@
                       {
                           if(p==0)
                           {
-                              InvestmentItemInfo *info = [[InvestmentItemInfo alloc]initWithDictionary:dictemp];
-                              [tempArrayone addObject:info];
+                              InvestmentItemInfo *infoTitl = [[InvestmentItemInfo alloc]initWithDictionary:dictemp];
+                              [tempArrayone addObject:infoTitl];
                           }
                           InvestmentItemInfo *info = [[InvestmentItemInfo alloc]initWithDictionary:arrylow[p]];
+                         
                           if([info.prdLabelsList isKindOfClass:[NSString class]])
                           {
-                              info.prdLabelsList = [NSArray array];
+                              info.prdLabelsList =[(NSDictionary*)arrylow[p] objectSafeForKey:@"prdLabelsList"];
                           }
                           info.isAnim = YES;
                           [tempArrayone addObject:info];

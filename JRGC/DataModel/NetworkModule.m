@@ -229,6 +229,9 @@ static NetworkModule *gInstance = NULL;
         case kSXTagPrdClaimsComputeIntrest:
             parameter = [SERVER_IP stringByAppendingString:COMPUTEINTREST];
             break;
+        case kSXTagNormalBidComputeIntrest:
+            parameter = [SERVER_IP stringByAppendingString:NORMALCOMPUTEINTREST];
+            break;
         case kSXTagPrdTransferComputeIntrest:
             parameter = [SERVER_IP stringByAppendingString:TRANSFERCOMPUTEINTREST];
             break;
@@ -364,9 +367,6 @@ static NetworkModule *gInstance = NULL;
         case kSXtagBeanOverdueBorrows:
             parameter = [SERVER_IP stringByAppendingString:GONGDOUGUOQI];
             break;
-        case kSXtagInviteRebate:
-            parameter = [SERVER_IP stringByAppendingString:INVITEREBATE];
-            break;
         case kSXtagHuoQuAllYOUHuiQuan:
             parameter = [SERVER_IP stringByAppendingString:ALLYOUHUIQUANLIST];
             break;
@@ -474,10 +474,14 @@ static NetworkModule *gInstance = NULL;
         case kSXTagRegistResult:
             parameter = [SERVER_IP stringByAppendingString:REGISTRESULT];
             break;
+        case kSXTagGetContractMsg:
+            parameter = [SERVER_IP stringByAppendingString:GETCONTRACTMSG];
+            break;
+            
 
     }
 
-    NSArray * array = [NSArray arrayWithObjects:@"newPrdClaims/dataList",@"newaccount/userLevelIsOpen",@"newPrdClaims/getDetail",@"newprdTransfer/dataList",@"newPrdTransfer/getDetail",@"newuser/login",@"newsendmessage",@"newuserregist/isexitpomocode",@"newuserregist/regist",@"userregist/verification",@"newgetSendMessageTicket",@"bankCard/baseBankMess",@"personalSettings/getTRegionList",@"sysDataDicItem/dicItemList",@"sysDataDicItem/allDicItemList",@"scratchCard/isExist",@"newuserregist/modifyUserpwd",@"newprdTransfer/newCompensateInterest",@"appInstallCount/save", nil];
+    NSArray * array = [NSArray arrayWithObjects:@"newPrdClaims/dataList",@"newaccount/userLevelIsOpen",@"newprdTransfer/dataList",@"newPrdTransfer/getDetail",@"newuser/login",@"newsendmessage",@"newuserregist/isexitpomocode",@"newuserregist/regist",@"userregist/verification",@"newgetSendMessageTicket",@"bankCard/baseBankMess",@"personalSettings/getTRegionList",@"sysDataDicItem/dicItemList",@"sysDataDicItem/allDicItemList",@"scratchCard/isExist",@"newuserregist/modifyUserpwd",@"newprdTransfer/newCompensateInterest",@"appInstallCount/save", nil];
 
     NSArray * strArray = [parameter componentsSeparatedByString:SERVER_IP];
     NSString *par = [strArray objectAtIndex:1];
@@ -905,7 +909,7 @@ static NetworkModule *gInstance = NULL;
             break;
     }
     
-    NSArray * array = [NSArray arrayWithObjects:@"prdClaims/dataList",@"newPrdClaims/getDetail",@"prdTransfer/dataList",@"newPrdTransfer/getDetail",@"newuser/login",@"newsendmessage",@"newuserregist/isexitpomocode",@"newuserregist/regist",@"userregist/verification",@"newgetSendMessageTicket",@"bankCard/baseBankMess",@"personalSettings/getTRegionList",@"sysDataDicItem/dicItemList",@"sysDataDicItem/allDicItemList",@"scratchCard/isExist",@"newuserregist/modifyUserpwd",@"newprdTransfer/newCompensateInterest", nil];
+    NSArray * array = [NSArray arrayWithObjects:@"prdClaims/dataList",@"prdTransfer/dataList",@"newPrdTransfer/getDetail",@"newuser/login",@"newsendmessage",@"newuserregist/isexitpomocode",@"newuserregist/regist",@"userregist/verification",@"newgetSendMessageTicket",@"bankCard/baseBankMess",@"personalSettings/getTRegionList",@"sysDataDicItem/dicItemList",@"sysDataDicItem/allDicItemList",@"scratchCard/isExist",@"newuserregist/modifyUserpwd",@"newprdTransfer/newCompensateInterest", nil];
     
     NSArray * strArray = [parameter componentsSeparatedByString:SERVER_IP];
     NSString *par = [strArray objectAtIndex:1];
@@ -969,6 +973,10 @@ static NetworkModule *gInstance = NULL;
         if (buttonIndex == 0) {
             NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"4000322988"];
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+            AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+            NSUInteger selectedIndex = appDelegate.tabBarController.selectedIndex;
+            UINavigationController *nav = [appDelegate.tabBarController.viewControllers objectAtIndex:selectedIndex];
+            [nav popToRootViewControllerAnimated:NO];
         } else {
             [self shouLoginView];
         }
@@ -1102,6 +1110,14 @@ static NetworkModule *gInstance = NULL;
         case kSXTagTransferList:
             parameter = [NEW_SERVER_IP stringByAppendingString:TRANSFERLIST];
             break;
+        case kSXtagInviteRebate:
+            parameter = [NEW_SERVER_IP stringByAppendingString:INVITEREBATE];
+            break;
+        case kSXTagIsShowHornor: {
+            parameter = [NEW_SERVER_IP stringByAppendingString:ISSHOWHORNOR];
+        }
+            break;
+
     }
     //给原有参数字典添加公共参数
     if (!data) {
@@ -1117,6 +1133,7 @@ static NetworkModule *gInstance = NULL;
         NSString *signature = [self getSinatureWithPar:[self newGetParStr:dict]];
         [dict setValue:signature forKey:@"signature"];
     }
+    
     //对整体参数加密
     NSString *encryptParam  = [Common AESWithKey2:AES_TESTKEY WithDic:dict];
     NSString *dataStr = [NSString stringWithFormat:@"encryptParam=%@",encryptParam];

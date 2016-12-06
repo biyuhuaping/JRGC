@@ -27,9 +27,9 @@
 //标详情一些宏定义
 #define HeadBkHeight 225
 #define FirstMarkYPos 8  //二级标签y位置
-#define MarkHeight 14   //二级标签高度
-#define MarkXSpacing 10 //二级标签间距
-#define MarkInSpacing 8 //二级标签内部间隙
+#define MarkHeight 13   //二级标签高度
+#define MarkXSpacing 12//二级标签间距
+#define MarkInSpacing 10 //二级标签内部间隙
 #define MarkLabelFont 11
 #define IconYPos 11
 #define IconXPos 13
@@ -92,8 +92,8 @@ return shared##className; \
 #define DOPA            @"dopa"
 #define DATADIC         @"dataDic" //数字字典
 #define BACK_TO_PERSON_CENTER   @"backOffNotice"
-#define SAFE_LOGIN_OUT          @"saveloginout"
-#define BACK_TO_LOGOUT          @"logoutMyCenter"
+//#define SAFE_LOGIN_OUT          @"saveloginout"
+//#define BACK_TO_LOGOUT          @"logoutMyCenter"
 #define BACK_TO_BANNER          @"logoutMyBanner"
 #define BACK_TO_LOGIN          @"logoutMyLogin"
 #define BACK_TO_HS              @"backToHS"
@@ -160,6 +160,7 @@ return shared##className; \
 #define BBSURL          @"http://bbs.9888.cn/appaction.php"
 #define MALLURL         @"http://mmall.9888.cn"
 #define LEVELURL        @"http://m.9888.cn/static/wap/user-level/index.html"  //会员等级
+#define GAMECENTERURL   @"http://game.9888.cn/index.php?r=polymerization/info&tag=tag1"  //游戏中心
 #define LEVELURLTEQUAN  @"http://m.9888.cn/mpwap/app/vipTeQuan/qryVipTeQuanDetail.shtml"  // 特权详情
 #define LEVELURLSHENGJI @"http://m.9888.cn/mpwap/app/upgradeStategy/index.shtml"  //升级攻略
 #define LEVELURLXIANGQING   @"http://m.9888.cn/mpwap/app/upgradeStategy/scoreDetail.shtml"  //工分详情

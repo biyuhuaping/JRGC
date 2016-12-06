@@ -16,7 +16,8 @@
 #import "UCFInvestmentView.h"
 #import "UIImage+Misc.h"
 #import "AppDelegate.h"
-
+#import "UIDic+Safe.h"
+#import "UIImageView+WebCache.h"
 @interface UCFMarkOfBondsRransferNewView () {
     UIView *_headerView;
 
@@ -45,13 +46,21 @@
     
     BOOL _oneScrollPull;
     NSString *_borrowerInformationStr;//借款人信息 或机构信息
+    BOOL _isP2P; // 是否P2P债转标
+    BOOL _isHideBorrowerInformation;//是否隐藏借款人信息
+    
+    NSArray *_auditRecordArray;
+    
+    BOOL _isHideBusinessLicense;// 是否隐藏营业执照认证 --对应尊享标的机构标而言 Yes 为隐藏 NO为不隐藏显示
+    
+    NSString *_licenseNumberStr;//营业执照Number
 }
 
 @end
 
 @implementation UCFMarkOfBondsRransferNewView
 
-- (id)initWithFrame:(CGRect)frame withDic:(NSDictionary*)dataDic prdList:(NSArray *)prdList contractMsg:(NSArray *)msgArr souceVc:(NSString *)source type:(NSString *)type
+- (id)initWithFrame:(CGRect)frame withDic:(NSDictionary*)dataDic prdList:(NSArray *)prdList contractMsg:(NSArray *)msgArr souceVc:(NSString *)source type:(NSString *)type isP2P:(BOOL)isP2PType
 {
     self = [super initWithFrame:frame];
     if (self) {
@@ -60,9 +69,9 @@
         _prdLabelsList = prdList;
         _sourceVc = source;
         _detailType = type;
+        _isP2P = isP2PType;
         _oneScrollPull = NO;
         _firstSectionArray = [NSArray arrayWithArray:msgArr];
-        
         [self initMainView];
     }
     return self;
@@ -278,17 +287,54 @@
     _infoDetailArray = [NSMutableArray arrayWithCapacity:[array count]];
     _infoDetailArray = [NSMutableArray arrayWithArray:array];
 }
+-(void)setAgencyInfoDetailValue{
+    
+    NSDictionary *prdGuaranteeMessDic = [_dataDic objectSafeDictionaryForKey:@"prdGuaranteeMess"];
+    //    机构名称
+    NSString *insName = [prdGuaranteeMessDic objectSafeForKey:@"insName"];
+    //    营业执照号
+    _licenseNumberStr = [prdGuaranteeMessDic objectSafeForKey:@"licenseNumber"];
+    //    法定代理人
+    NSString *legalRealName = [prdGuaranteeMessDic objectSafeForKey:@"legalRealName"];
+    //    联系人
+    NSString *contacts = [prdGuaranteeMessDic objectSafeForKey:@"contacts"];
+    //    机构地址
+    NSString *address = [prdGuaranteeMessDic objectSafeForKey:@"address"];
+    //    邮编
+    NSString *post = [prdGuaranteeMessDic objectSafeForKey:@"post"];
+    NSArray  *array = @[insName,_licenseNumberStr,legalRealName,contacts,address,post];
+    _infoDetailArray = [NSMutableArray arrayWithArray:array];
+}
 
 - (void)initTableViews
 {
     _titleArray = [[NSArray alloc] initWithObjects:@"原标详情", @"安全保障",@"转让记录", nil];
-    NSString *agencyCodeStr = [[_dataDic objectForKey:@"orderUser"] objectForKey:@"agencyCode"];
-    if (agencyCodeStr) {
+    //是否隐藏借款人信息一栏
+    _isHideBorrowerInformation = NO; //默认不隐藏
+    _borrowerInformationStr = @"借款人信息";
+    _auditRecordArray = @[@"身份认证",@"手机认证",@"工作认证",@"信用认证"];
+    NSArray *arrayJiBen = [NSArray arrayWithObjects:@"姓名／所在地",@"基本信息",@"入学年份",@"户口所在地",@"公司行业",@"公司规模",@"职位",@"工作收入",@"现单位工作时间",@"有无购房",@"有无房贷",@"有无购车",@"有无车贷", nil];
+    
+    NSString *agencyCodeStr = [[_dataDic objectSafeDictionaryForKey:@"orderUser"] objectSafeForKey:@"agencyCode"];
+    if (![agencyCodeStr isEqualToString:@""]) {
         _borrowerInformationStr = @"机构信息";
-    }else{
-        _borrowerInformationStr = @"借款人信息";
+        _licenseNumberStr = [[_dataDic objectSafeDictionaryForKey:@"prdGuaranteeMess"]
+                             objectSafeForKey:@"licenseNumber"]; //营业执照
+        _auditRecordArray = @[@"营业执照",@"手机认证",@"信用认证"];
     }
     [self setinfoDetailValue];
+    _isHideBusinessLicense =  _auditRecordArray.count == 4 ? YES :NO;
+    if (_isP2P) {
+        NSString *tradeMarkStr = [[_dataDic objectSafeDictionaryForKey:@"prdTransferFore"] objectSafeForKey: @"tradeMark"];
+        _isHideBorrowerInformation = [tradeMarkStr intValue] == 20 ? YES :NO;
+        if ([_detailType isEqualToString:@"1"] && ![agencyCodeStr isEqualToString:@""]) {
+            arrayJiBen= @[@"机构名称",@"营业执照",@"法定代理人",@"联系人",@"机构地址",@"邮编"];
+            [self setAgencyInfoDetailValue];
+        }
+    }else{
+        _isHideBorrowerInformation = YES; //如果是尊享标 则隐藏借款人信息
+    }
+    _borrowerInfo = [[NSArray alloc] initWithObjects:arrayJiBen, nil];
     _twoTableview = [[UITableView alloc] initWithFrame:CGRectMake(0, ScreenHeight, ScreenWidth, BidDetailScrollViewHeight) style:UITableViewStylePlain];
     _twoTableview.backgroundColor = [UIColor clearColor];
     //_tableView.separatorColor = UIColorWithRGB(0xeff0f3);
@@ -338,6 +384,14 @@
     bkFrame.origin.y = 12;
     topBkView.frame = bkFrame;
 }
+-(float)secondHeaderHeight:(NSInteger)section{
+    NSString *titleStr = [UCFToolsMehod isNullOrNilWithString:[[[[_dataDic objectForKey:@"prdClaimsReveal"] objectForKey:@"safetySecurityList"] objectAtIndex:(section - 1)] objectForKey:@"title"]];
+    titleStr = [titleStr stringByReplacingOccurrencesOfString:@"\t" withString:@""];
+    titleStr = [titleStr stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+    float titlelableWidth = ScreenWidth - 30 - 4 - 15;
+    float labelHeight = [Common getStrHeightWithStr:titleStr AndStrFont:14 AndWidth:titlelableWidth].height;
+    return labelHeight;
+}
 
 #pragma mark -tableview
 
@@ -374,35 +428,37 @@
     } else {
         if (_selectIndex == 1) {
             if (section != 0) {
-                UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 47)];
-                headView.backgroundColor = UIColorWithRGB(0xebebee);
-                UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 10, ScreenWidth, 37)];
-                view.backgroundColor = UIColorWithRGB(0xf9f9f9);
-                //[self viewAddLine:headView Up:YES];
-                [self viewAddLine:view Up:YES];
-                UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, view.frame.size.height - 0.5, ScreenWidth, 0.5)];
-                lineView.backgroundColor = UIColorWithRGB(0xeff0f3);
-                [view addSubview:lineView];
-                [headView addSubview:view];
                 
-                UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(13, 10, 17, 17)];
+                UIImageView * imageView = [[UIImageView alloc] init];
+                imageView.bounds = CGRectMake(0, 0, 17, 17);
                 imageView.image = [UIImage imageNamed:@"particular_icon_security.png"];
-                [view addSubview:imageView];
-                
-                UILabel *placehoderLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(imageView.frame) + 4, 10, 260, 17)];
-                placehoderLabel.font = [UIFont systemFontOfSize:14];
-                placehoderLabel.textColor = UIColorWithRGB(0x333333);
-                placehoderLabel.textAlignment = NSTextAlignmentLeft;
-                placehoderLabel.backgroundColor = [UIColor clearColor];
                 NSString *titleStr = [UCFToolsMehod isNullOrNilWithString:[[[[_dataDic objectForKey:@"prdClaimsReveal"] objectForKey:@"safetySecurityList"] objectAtIndex:(section - 1)] objectForKey:@"title"]];
                 titleStr = [titleStr stringByReplacingOccurrencesOfString:@"\t" withString:@""];
                 titleStr = [titleStr stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+                float titlelableWidth = ScreenWidth - 30 - 4- 15;
+                UILabel *placehoderLabel = [[UILabel alloc] initWithFrame:CGRectMake(34,8 , titlelableWidth, [self secondHeaderHeight:section])];
+                placehoderLabel.font = [UIFont systemFontOfSize:14];
+                placehoderLabel.textColor = UIColorWithRGB(0x333333);
+                placehoderLabel.textAlignment = NSTextAlignmentLeft;
+                placehoderLabel.numberOfLines = 0;
+                placehoderLabel.backgroundColor = [UIColor clearColor];
                 placehoderLabel.text = titleStr;
+                UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 10, ScreenWidth, CGRectGetHeight(placehoderLabel.frame) + 8*2)];
+                view.backgroundColor = UIColorWithRGB(0xf9f9f9);
+                [self viewAddLine:view Up:YES];
+                imageView.center = CGPointMake(13+8.5, CGRectGetHeight(view.frame)/2);
+                UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, view.frame.size.height - 0.5, ScreenWidth, 0.5)];
+                lineView.backgroundColor = UIColorWithRGB(0xeff0f3);
+                [view addSubview:lineView];
+                [view addSubview:imageView];
                 [view addSubview:placehoderLabel];
+                UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, CGRectGetHeight(view.frame)+10)];
+                 headView.backgroundColor = UIColorWithRGB(0xebebee);
+                [headView addSubview:view];
                 return headView;
             }
-        } else if (_selectIndex == 0) {
-            if ([_detailType isEqualToString:@"1"]) {
+        } else if (_selectIndex == 0) { //原标详情
+            if ([_detailType isEqualToString:@"1"]) {//1 普通标
                 if(section == 2) {
                     UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 50)];
                     headView.backgroundColor = UIColorWithRGB(0xebebee);
@@ -419,13 +475,14 @@
                     [self viewAddLine:headView Up:NO];
                     [self viewAddLine:view Up:YES];
                     return headView;
-                } else if(section == 3) {
+                } else if(section == 3 && !_isHideBorrowerInformation) {//如果不隐藏 显示该一栏
+                  
                     UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 50)];
                     headView.backgroundColor = UIColorWithRGB(0xebebee);
                     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 10, ScreenWidth, 40)];
                     view.backgroundColor = UIColorWithRGB(0xf7f7f7);
                     UILabel *labelTitle = [[UILabel alloc] initWithFrame:CGRectMake(25/2.0, 12, ScreenWidth/2, 16)];
-                    labelTitle.text = @"借款人信息";
+                    labelTitle.text = _borrowerInformationStr;
                     labelTitle.textColor = UIColorWithRGB(0x333333);
                     labelTitle.backgroundColor = [UIColor clearColor];
                     labelTitle.font = [UIFont systemFontOfSize:14];
@@ -435,7 +492,7 @@
                     [self viewAddLine:headView Up:NO];
                     [self viewAddLine:view Up:YES];
                     return headView;
-                } else if(section == 4) {
+                } else if((section == 3 && _isHideBorrowerInformation) || (section == 4 && !_isHideBorrowerInformation)) {//
                     UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 50)];
                     headView.backgroundColor = UIColorWithRGB(0xebebee);
                     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 10, ScreenWidth, 40)];
@@ -460,7 +517,7 @@
                     [headView addSubview:lineView];
                     return headView;
                 }
-            } else {
+            } else { // 2 权益标
                 if(section == 2) {
                     UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 50)];
                     headView.backgroundColor = UIColorWithRGB(0xebebee);
@@ -477,7 +534,7 @@
                     [self viewAddLine:headView Up:NO];
                     [self viewAddLine:view Up:YES];
                     return headView;
-                } else if(section == 4) {
+                } else if(section == 4 && !_isHideBorrowerInformation) {
                     UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 50)];
                     headView.backgroundColor = UIColorWithRGB(0xebebee);
                     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 10, ScreenWidth, 40)];
@@ -493,7 +550,7 @@
                     [self viewAddLine:headView Up:NO];
                     [self viewAddLine:view Up:YES];
                     return headView;
-                } else if(section == 3) {
+                } else if(section == 3 && !_isHideBorrowerInformation) {
                     UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 50)];
                     headView.backgroundColor = UIColorWithRGB(0xebebee);
                     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 10, ScreenWidth, 40)];
@@ -509,13 +566,13 @@
                     [self viewAddLine:headView Up:NO];
                     [self viewAddLine:view Up:YES];
                     return headView;
-                } else if(section == 5) {
+                } else if((section == 5 && !_isHideBorrowerInformation) || (section == 3 && _isHideBorrowerInformation)) {
                     UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 50)];
                     headView.backgroundColor = UIColorWithRGB(0xebebee);
                     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 10, ScreenWidth, 40)];
                     view.backgroundColor = UIColorWithRGB(0xf7f7f7);
                     UILabel *labelTitle = [[UILabel alloc] initWithFrame:CGRectMake(25/2.0, 12, ScreenWidth/2, 16)];
-                    labelTitle.text = @"代理人审核";
+                    labelTitle.text = @"审核记录";
                     labelTitle.textColor = UIColorWithRGB(0x333333);
                     labelTitle.backgroundColor = [UIColor clearColor];
                     labelTitle.font = [UIFont systemFontOfSize:14];
@@ -575,7 +632,7 @@
         {
             return 44;
         }
-        return 47;
+        return [self secondHeaderHeight:section] + 8 * 2 +10;
     } else {
         if(section == 0)
         {
@@ -610,7 +667,8 @@
     }
     else
     {
-        if ([_detailType isEqualToString:@"1"]) {
+        if ([_detailType isEqualToString:@"1"]) // 普通标转让
+        {
             if([indexPath section] == 1)
             {
                 return 44;
@@ -626,24 +684,25 @@
                                                     context:nil];
                 
                 return textRect.size.height + 28;
-            } else if([indexPath section] == 3) {
+            } else if([indexPath section] == 3 && !_isHideBorrowerInformation) {
+              
                 if ([indexPath row] == 0 || [indexPath row] == 10 - 1) {
                     return 27 + 8;
                 } else {
                     return 27;
                 }
-            } else if([indexPath section] == 4) {
+            } else if(([indexPath section] == 3 && _isHideBorrowerInformation) || ([indexPath section] == 4 && !_isHideBorrowerInformation)) {
                 if ([indexPath row] == 0 || [indexPath row] == 4 - 1) {
                     return 27 + 8;
                 } else {
                     return 27;
                 }
             }
-        } else {
+        } else { //权益表转让
             if([indexPath section] == 1)
             {
                 return 44;
-            } else if([indexPath section] == 2 || [indexPath section] == 3) {
+            } else if([indexPath section] == 2 || ([indexPath section] == 3 && !_isHideBorrowerInformation)) {
                 NSString *str;
                 if ([indexPath section] == 2) {
                     str = [UCFToolsMehod isNullOrNilWithString:[[_dataDic objectForKey:@"prdTransferFore"] objectForKey:@"borrowRemark"]];
@@ -661,13 +720,13 @@
                                                     context:nil];
                 
                 return textRect.size.height + 28;
-            } else if([indexPath section] == 4) {
+            } else if([indexPath section] == 4 && !_isHideBorrowerInformation) {
                 if ([indexPath row] == 0 || [indexPath row] == 10 - 1) {
                     return 27 + 8;
                 } else {
                     return 27;
                 }
-            } else if([indexPath section] == 5) {
+            } else if(([indexPath section] == 5 && !_isHideBorrowerInformation) || ([indexPath section] == 3 && _isHideBorrowerInformation)) {
                 if ([indexPath row] == 0 || [indexPath row] == 4 - 1) {
                     return 27 + 8;
                 } else {
@@ -683,39 +742,34 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if(_selectIndex == 0) {
-        if ([_detailType isEqualToString:@"1"]) {
-            if(section == 4)
-            {
-                return 4;
-            } else if(section == 1) {
+    if(_selectIndex == 0) { //原标详情
+        if ([_detailType isEqualToString:@"1"]) { //普通标
+            if(section == 1) {
                 return [_firstSectionArray count];
             } else if(section == 2) {
                 return 1;
-            } else if(section == 3) {
-                return [_borrowerInfo[0] count];;
-            } else {
-                return 0;
+            } else if(section == 3 && !_isHideBorrowerInformation) {
+                return [_borrowerInfo[0] count];
+            } else if((section == 3 && _isHideBorrowerInformation) || (section == 4 && !_isHideBorrowerInformation))
+            {
+                return _auditRecordArray.count;
             }
-        } else {
-            if(section == 5)
-            {
-                return 4;
-            } else if(section == 1) {
+        } else { // 权益标
+             if(section == 1) {
                 return [_firstSectionArray count];
             } else if(section == 2) {
                 return 1;
-            } else if(section == 4) {
+            } else if(section == 4 && !_isHideBorrowerInformation) {
                 return [[_dataDic objectForKey:@"originalList"] count];
-            } else if(section == 3) {
-                return 1;
-            } else {
-                return 0;
+            } else if(section == 3 ) {
+                return _isHideBorrowerInformation ? _auditRecordArray.count: 1;
+            } else if((section == 5 && !_isHideBorrowerInformation))
+            {
+                return _auditRecordArray.count;
             }
-            
         }
         
-    } else if (_selectIndex == 1) {
+    } else if (_selectIndex == 1) {//安全保障
         if(section == 0)
         {
             return 0;
@@ -731,19 +785,17 @@
             return [[_dataDic objectForKey:@"prdOrders"] count];
         }
     }
-    
     return 0;
-    
 }
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     if(_selectIndex == 0)
     {
-        if ([_detailType isEqualToString:@"2"]) {
-            return 6;
+        if ([_detailType isEqualToString:@"2"]) { //权益标
+            return _isHideBorrowerInformation ? 4:6;
+        }else{
+            return _isHideBorrowerInformation ? 4:5;
         }
-        return 5;
     } else if (_selectIndex == 1) {
         if ([[[_dataDic objectForKey:@"prdClaimsReveal"] objectForKey:@"safetySecurityList"] isEqual:[NSNull null]]) {
             return 1;
@@ -878,7 +930,7 @@
         lbl.text = [UCFToolsMehod isNullOrNilWithString:[[[[_dataDic objectForKey:@"prdClaimsReveal"] objectForKey:@"safetySecurityList"] objectAtIndex:([indexPath section] - 1)] objectForKey:@"content"]];
         
         return cell;
-    }  else if(_selectIndex == 0){
+    }  else if(_selectIndex == 0){ // 原标详情
         if ([_detailType isEqualToString:@"1"]) {
             if ([indexPath section] == 1) {
                 NSString *cellindifier = @"firstSectionCell";
@@ -886,20 +938,34 @@
                 if (!cell) {
                     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellindifier];
                     [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
-                    cell.textLabel.font = [UIFont systemFontOfSize:13];
-                    cell.textLabel.textColor = UIColorWithRGB(0x555555);
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    UIImageView *inconImageView = [[UIImageView alloc]initWithFrame:CGRectMake(13, 13, 18, 18)];
+                    inconImageView.tag = 11;
+                    UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(inconImageView.frame)+5, 13, 200, 18)];
+                    titleLabel.tag = 12;
+                    titleLabel.font = [UIFont systemFontOfSize:13];
+                    titleLabel.textColor = UIColorWithRGB(0x555555);
+                    [cell.contentView addSubview:inconImageView];
+                    [cell.contentView addSubview:titleLabel];
+                    
                 }
-                cell.imageView.image = [UIImage imageNamed:[[_firstSectionArray objectAtIndex:[indexPath row]] objectForKey:@"image"]];
-                tableView.separatorColor = UIColorWithRGB(0xe3e5ea);
-                NSString *title;
-                if ([[_firstSectionArray objectAtIndex:[indexPath row]] objectForKey:@"insName"] && ![[[_firstSectionArray objectAtIndex:[indexPath row]] objectForKey:@"insName"] isEqualToString:@""]) {
-                    title = [[_firstSectionArray objectAtIndex:[indexPath row]] objectForKey:@"insName"];
-                    //NSString *insStr = [[_dataDic objectForKey:@"prdClaims"] objectForKey:@"guaranteeCoverageNane"];
-                    title = [NSString stringWithFormat:@"%@,%@",title,[[_firstSectionArray objectAtIndex:[indexPath row]] objectForKey:@"guaranteeCoverageNane"]];
-                } else {
-                    title = [[_firstSectionArray objectAtIndex:[indexPath row]] objectForKey:@"title"];
-                }
-                cell.textLabel.text = title;
+                //            cell.imageView.image = [UIImage imageNamed:[[_firstSectionArray objectAtIndex:[indexPath row]] objectForKey:@"image"]];
+                //            tableView.separatorColor = UIColorWithRGB(0xe3e5ea);
+                //            NSString *title;
+                //            if ([[_firstSectionArray objectAtIndex:[indexPath row]] objectForKey:@"insName"] && ![[[_firstSectionArray objectAtIndex:[indexPath row]] objectForKey:@"insName"] isEqualToString:@""]) {
+                //                title = [[_firstSectionArray objectAtIndex:[indexPath row]] objectForKey:@"insName"];
+                //                //NSString *insStr = [[_dataDic objectForKey:@"prdClaims"] objectForKey:@"guaranteeCoverageNane"];
+                //                title = [NSString stringWithFormat:@"%@,%@",title,[[_firstSectionArray objectAtIndex:[indexPath row]] objectForKey:@"guaranteeCoverageNane"]];
+                //            } else {
+                //                title = [[_firstSectionArray objectAtIndex:[indexPath row]] objectForKey:@"title"];
+                //            }
+                //            cell.textLabel.text = title;
+                UIImageView  *inconImageView = (UIImageView*)[cell.contentView viewWithTag:11];
+                UILabel *titleLabel = (UILabel*)[cell.contentView viewWithTag:12];
+                NSDictionary *dict = [_firstSectionArray objectAtIndex:indexPath.row];
+                NSString * imageUrlStr = [dict objectSafeForKey:@"iconUrl"];
+                [inconImageView  sd_setImageWithURL:[NSURL URLWithString:imageUrlStr]];
+                titleLabel.text = [dict objectSafeForKey:@"contractName"];
                 return cell;
             } else if ([indexPath section] == 2) {
                 NSString *cellindifier = @"SectionCell";
@@ -924,7 +990,7 @@
                 UILabel *lbl = (UILabel*)[cell.contentView viewWithTag:100];
                 lbl.text = [UCFToolsMehod isNullOrNilWithString:[[_dataDic objectForKey:@"prdTransferFore"] objectForKey:@"borrowRemark"]];
                 return cell;
-            } else if ([indexPath section] == 3) {
+            } else if ([indexPath section] == 3  && !_isHideBorrowerInformation) { //如果不隐藏就显示该cell
                 NSString *cellindifier = @"thirdSectionCell";
                 UITableViewCell *cell = nil;
                 if (!cell) {
@@ -972,7 +1038,7 @@
                 
                 detailLbl.text = detailStr;
                 return cell;
-            } else if ([indexPath section] == 4) {
+            } else  if ((indexPath.section == 3 && _isHideBorrowerInformation) || (indexPath.section == 4 && !_isHideBorrowerInformation)){ //
                 NSString *cellindifier = @"fourSectionCell";
                 UITableViewCell *cell = nil;
                 if (!cell) {
@@ -1028,25 +1094,37 @@
                 UILabel *renzhengLabel = (UILabel*)[cell.contentView viewWithTag:103];
                 UIImageView *imageView = (UIImageView*)[cell.contentView viewWithTag:104];
                 UILabel *placehoderLabel = (UILabel*)[cell.contentView viewWithTag:105];
-                NSArray *titleArr = @[@"身份认证",@"手机认证",@"工作认证",@"信用认证"];
-                nameLbl.text = [titleArr objectAtIndex:[indexPath row]];
+//                NSArray *titleArr = @[@"身份认证",@"手机认证",@"工作认证",@"信用认证"];
+                nameLbl.text = [_auditRecordArray objectAtIndex:[indexPath row]];
                 if(indexPath.row == 0)
                 {
-                    if([[_dataDic objectForKey:@"orderUser"] objectForKey:@"joboauth"])
-                    {
-                        if([UCFToolsMehod isNullOrNilWithString:[[_dataDic objectForKey:@"orderUser"] objectForKey:@"idno"]].length == 0)
+                    if (!_isHideBusinessLicense) {
+                        imageView.hidden = NO;
+                        renzhengLabel.text = @"已认证";
+                        placehoderLabel.text = _isP2P ?_licenseNumberStr : @"";
+                    }else{
+                        if([[_dataDic objectForKey:@"orderUser"] objectForKey:@"joboauth"])
                         {
-                            imageView.hidden = YES;
-                            renzhengLabel.text = @"未认证";
-                        }
-                        else
-                        {
-                            imageView.hidden = NO;
-                            renzhengLabel.text = @"已认证";
-                            NSString *name = [[_dataDic objectForKey:@"orderUser"] objectForKey:@"realName"];
-                            NSString *idCardNum = [[_dataDic objectForKey:@"orderUser"] objectForKey:@"idno"];
-                            //                            idCardNum = [idCardNum stringByReplacingCharactersInRange:NSMakeRange(3, 13) withString:@"*************"];
-                            placehoderLabel.text = [NSString stringWithFormat:@"%@ %@",name,idCardNum];
+                            if([UCFToolsMehod isNullOrNilWithString:[[_dataDic objectForKey:@"orderUser"] objectForKey:@"idno"]].length == 0)
+                            {
+                                imageView.hidden = YES;
+                                renzhengLabel.text = @"未认证";
+                            }
+                            else
+                            {
+                                imageView.hidden = NO;
+                                renzhengLabel.text = @"已认证";
+                                NSString *name = [[_dataDic objectForKey:@"orderUser"] objectForKey:@"realName"];
+                                NSString *idCardNum = [[_dataDic objectForKey:@"orderUser"] objectForKey:@"idno"];
+                                //                            idCardNum = [idCardNum stringByReplacingCharactersInRange:NSMakeRange(3, 13) withString:@"*************"];
+                                if(_isP2P){
+                                    placehoderLabel.text = [NSString stringWithFormat:@"%@ %@",name,idCardNum];
+                                }else
+                                {
+                                    placehoderLabel.text = @"";
+                                }
+                                
+                            }
                         }
                     }
                 } else if(indexPath.row == 1) {
@@ -1062,9 +1140,14 @@
                         renzhengLabel.text = @"已认证";
                         NSString *phoneNum = [[_dataDic objectForKey:@"orderUser"] objectForKey:@"mobile"];
                         //                        phoneNum = [phoneNum stringByReplacingCharactersInRange:NSMakeRange(3, 5) withString:@"*****"];
-                        placehoderLabel.text = phoneNum;
+                        if(_isP2P){
+                            placehoderLabel.text = phoneNum;
+                        }else
+                        {
+                            placehoderLabel.text = @"";
+                        }
                     }
-                } else if(indexPath.row == 2) {
+                } else if(indexPath.row == 2 && _isHideBusinessLicense) {
                     if([[[_dataDic objectForKey:@"orderUser"] objectForKey:@"joboauth"] integerValue] == 1)
                     {
                         imageView.hidden = NO;
@@ -1078,14 +1161,19 @@
                         //                        } else if ([office length] > 1 && [office length] <= 3) {
                         //                            office = [office stringByReplacingCharactersInRange:NSMakeRange(1, 1) withString:@"*"];
                         //                        }
-                        placehoderLabel.text = office;
+                        if(_isP2P){
+                            placehoderLabel.text = office;
+                        }else
+                        {
+                            placehoderLabel.text = @"";
+                        }
                     }
                     else
                     {
                         imageView.hidden = YES;
                         renzhengLabel.text = @"未认证";
                     }
-                }else if(indexPath.row == 3) {
+                }else {
                     if([[[_dataDic objectForKey:@"orderUser"] objectForKey:@"creditAuth"] integerValue] == 1)
                     {
                         imageView.hidden = NO;
@@ -1101,29 +1189,41 @@
                 return cell;
             }
             
-        } else {
+        } else { // 权益标
             if ([indexPath section] == 1) {
                 NSString *cellindifier = @"firstSectionCell";
                 UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellindifier];
                 if (!cell) {
                     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellindifier];
                     [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
-                    cell.textLabel.font = [UIFont systemFontOfSize:13];
-                    cell.textLabel.textColor = UIColorWithRGB(0x555555);
+                    UIImageView *inconImageView = [[UIImageView alloc]initWithFrame:CGRectMake(13, 13, 18, 18)];
+                    inconImageView.tag = 11;
+                    UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(inconImageView.frame)+5, 13, 200, 18)];
+                    titleLabel.tag = 12;
+                    titleLabel.font = [UIFont systemFontOfSize:13];
+                    titleLabel.textColor = UIColorWithRGB(0x555555);
+                    [cell.contentView addSubview:inconImageView];
+                    [cell.contentView addSubview:titleLabel];
                 }
-                cell.imageView.image = [UIImage imageNamed:[[_firstSectionArray objectAtIndex:[indexPath row]] objectForKey:@"image"]];
-                tableView.separatorColor = UIColorWithRGB(0xe3e5ea);
-                NSString *title;
-                if ([[_firstSectionArray objectAtIndex:[indexPath row]] objectForKey:@"insName"] && ![[[_firstSectionArray objectAtIndex:[indexPath row]] objectForKey:@"insName"] isEqualToString:@""]) {
-                    title = [[_firstSectionArray objectAtIndex:[indexPath row]] objectForKey:@"insName"];
-                    //NSString *insStr = [[_dataDic objectForKey:@"prdClaims"] objectForKey:@"guaranteeCoverageNane"];
-                    title = [NSString stringWithFormat:@"%@,%@",title,[[_firstSectionArray objectAtIndex:[indexPath row]] objectForKey:@"guaranteeCoverageNane"]];
-                } else {
-                    title = [[_firstSectionArray objectAtIndex:[indexPath row]] objectForKey:@"title"];
-                }
-                cell.textLabel.text = title;
+                //            cell.imageView.image = [UIImage imageNamed:[[_firstSectionArray objectAtIndex:[indexPath row]] objectForKey:@"image"]];
+                //            tableView.separatorColor = UIColorWithRGB(0xe3e5ea);
+                //            NSString *title;
+                //            if ([[_firstSectionArray objectAtIndex:[indexPath row]] objectForKey:@"insName"] && ![[[_firstSectionArray objectAtIndex:[indexPath row]] objectForKey:@"insName"] isEqualToString:@""]) {
+                //                title = [[_firstSectionArray objectAtIndex:[indexPath row]] objectForKey:@"insName"];
+                //                //NSString *insStr = [[_dataDic objectForKey:@"prdClaims"] objectForKey:@"guaranteeCoverageNane"];
+                //                title = [NSString stringWithFormat:@"%@,%@",title,[[_firstSectionArray objectAtIndex:[indexPath row]] objectForKey:@"guaranteeCoverageNane"]];
+                //            } else {
+                //                title = [[_firstSectionArray objectAtIndex:[indexPath row]] objectForKey:@"title"];
+                //            }
+                //            cell.textLabel.text = title;
+                UIImageView  *inconImageView = (UIImageView*)[cell.contentView viewWithTag:11];
+                UILabel *titleLabel = (UILabel*)[cell.contentView viewWithTag:12];
+                NSDictionary *dict = [_firstSectionArray objectAtIndex:indexPath.row];
+                NSString * imageUrlStr = [dict objectSafeForKey:@"iconUrl"];
+                [inconImageView  sd_setImageWithURL:[NSURL URLWithString:imageUrlStr]];
+                titleLabel.text = [dict objectSafeForKey:@"contractName"];
                 return cell;
-            } else if ([indexPath section] == 2 || [indexPath section] == 3) {
+            } else if ([indexPath section] == 2 || ([indexPath section] == 3 && !_isHideBorrowerInformation)) {
                 NSString *cellindifier = @"twoSectionCell";
                 UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellindifier];
                 if (!cell) {
@@ -1145,14 +1245,14 @@
                 }
                 UILabel *lbl = (UILabel*)[cell.contentView viewWithTag:100];
                 
-                if ([indexPath section] == 3) {
+                if ([indexPath section] == 3 && !_isHideBorrowerInformation) {
                     lbl.text = [[_dataDic objectForKey:@"prdClaimsReveal"] objectForKey:@"transferorInfo"];
                 } else {
                     NSString *borrowRemark = [UCFToolsMehod isNullOrNilWithString:[[_dataDic objectForKey:@"prdTransferFore"] objectForKey:@"borrowRemark"]];
                     lbl.text = borrowRemark;
                 }
                 return cell;
-            } else if ([indexPath section] == 4) {
+            } else if ([indexPath section] == 4 && !_isHideBorrowerInformation) {
                 NSString *cellindifier = @"forthSectionCell";
                 UITableViewCell *cell = nil;
                 if (!cell) {
@@ -1195,7 +1295,7 @@
                 nameLbl.text = [[[_dataDic objectForKey:@"originalList"] objectAtIndex:[indexPath row]] objectForKey:@"title"];
                 detailLbl.text = [[[_dataDic objectForKey:@"originalList"] objectAtIndex:[indexPath row]] objectForKey:@"content"];
                 return cell;
-            } else if ([indexPath section] == 5) {
+            } else if (([indexPath section] == 5 && !_isHideBorrowerInformation) ||([indexPath section] == 3 && _isHideBorrowerInformation)) {
                 NSString *cellindifier = @"fourSectionCell";
                 UITableViewCell *cell = nil;
                 if (!cell) {
@@ -1248,26 +1348,34 @@
                 UILabel *renzhengLabel = (UILabel*)[cell.contentView viewWithTag:103];
                 UIImageView *imageView = (UIImageView*)[cell.contentView viewWithTag:104];
                 UILabel *placehoderLabel = (UILabel*)[cell.contentView viewWithTag:105];
-                NSArray *titleArr = @[@"身份认证",@"手机认证",@"工作认证",@"信用认证"];
-                nameLbl.text = [titleArr objectAtIndex:[indexPath row]];
+//                NSArray *titleArr = @[@"身份认证",@"手机认证",@"工作认证",@"信用认证"];
+                
+                nameLbl.text = [_auditRecordArray objectAtIndex:[indexPath row]];
                 if(indexPath.row == 0)
                 {
-                    if([[_dataDic objectForKey:@"orderUser"] objectForKey:@"joboauth"])
-                    {
-                        if([UCFToolsMehod isNullOrNilWithString:[[_dataDic objectForKey:@"orderUser"] objectForKey:@"idno"]].length == 0)
+                    if (!_isHideBusinessLicense) {
+                        imageView.hidden = NO;
+                        renzhengLabel.text = @"已认证";
+                        placehoderLabel.text = _isP2P ?_licenseNumberStr : @"";
+                    }else{
+                        if([[_dataDic objectForKey:@"orderUser"] objectForKey:@"joboauth"])
                         {
-                            imageView.hidden = YES;
-                            renzhengLabel.text = @"未认证";
+                            if([UCFToolsMehod isNullOrNilWithString:[[_dataDic objectForKey:@"orderUser"] objectForKey:@"idno"]].length == 0)
+                            {
+                                imageView.hidden = YES;
+                                renzhengLabel.text = @"未认证";
+                            }
+                            else
+                            {
+                                imageView.hidden = NO;
+                                renzhengLabel.text = @"已认证";
+                                NSString *name = [[_dataDic objectForKey:@"orderUser"] objectForKey:@"realName"];
+                                NSString *idCardNum = [[_dataDic objectForKey:@"orderUser"] objectForKey:@"idno"];
+                                idCardNum = [idCardNum stringByReplacingCharactersInRange:NSMakeRange(3, 13) withString:@"*************"];
+                                placehoderLabel.text = [NSString stringWithFormat:@"%@ %@",name,idCardNum];
+                            }
                         }
-                        else
-                        {
-                            imageView.hidden = NO;
-                            renzhengLabel.text = @"已认证";
-                            NSString *name = [[_dataDic objectForKey:@"orderUser"] objectForKey:@"realName"];
-                            NSString *idCardNum = [[_dataDic objectForKey:@"orderUser"] objectForKey:@"idno"];
-                            idCardNum = [idCardNum stringByReplacingCharactersInRange:NSMakeRange(3, 13) withString:@"*************"];
-                            placehoderLabel.text = [NSString stringWithFormat:@"%@ %@",name,idCardNum];
-                        }
+
                     }
                 } else if(indexPath.row == 1) {
                     
@@ -1284,7 +1392,7 @@
                         phoneNum = [phoneNum stringByReplacingCharactersInRange:NSMakeRange(3, 5) withString:@"*****"];
                         placehoderLabel.text = phoneNum;
                     }
-                } else if(indexPath.row == 2) {
+                } else if(indexPath.row == 2 && _isHideBusinessLicense) {
                     if([[[_dataDic objectForKey:@"orderUser"] objectForKey:@"joboauth"] integerValue] == 1)
                     {
                         imageView.hidden = NO;
@@ -1305,7 +1413,7 @@
                         imageView.hidden = YES;
                         renzhengLabel.text = @"未认证";
                     }
-                }else if(indexPath.row == 3) {
+                }else {
                     if([[[_dataDic objectForKey:@"orderUser"] objectForKey:@"creditAuth"] integerValue] == 1)
                     {
                         imageView.hidden = NO;

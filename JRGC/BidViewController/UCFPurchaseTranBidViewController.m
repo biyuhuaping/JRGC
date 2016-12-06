@@ -28,6 +28,7 @@
     UILabel     *tipLabel;
     double      needToRechare;
     BOOL        isSucessInvest;             //是否投资成功
+    NSString    *_contractTitle;
 
 }
 @property (weak, nonatomic) IBOutlet UITableView *bidTableView;
@@ -493,6 +494,19 @@
                 [self reloadMainView];
             });
         }
+    }else if(tag.intValue == kSXTagGetContractMsg) {
+        NSString *Data = (NSString *)result;
+        NSDictionary * dic = [Data objectFromJSONString];
+        NSDictionary *dictionary =  [dic objectSafeDictionaryForKey:@"contractMess"];
+        NSString *status = [dic objectSafeForKey:@"status"];
+        if ([status intValue] == 1) {
+            NSString *contractMessStr = [dictionary objectSafeForKey:@"contractMess"];
+            FullWebViewController *controller = [[FullWebViewController alloc] initWithHtmlStr:contractMessStr title:_contractTitle];
+            controller.baseTitleType = @"detail_heTong";
+            [self.navigationController pushViewController:controller animated:YES];
+        }else{
+            //            [self showHTAlertdidFinishGetUMSocialDataResponse];
+        }
     }
 
 }
@@ -505,72 +519,58 @@
 {
     UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 98)];
     footView.backgroundColor = UIColorWithRGB(0xf2f2f2);
-    NSString *transferConsultingName = @"";
-    if ([UCFToolsMehod isNullOrNilWithString:[_dataDict objectForKey:@"transferConsultingName"]] != 0) {
-        transferConsultingName = [_dataDict objectForKey:@"transferConsultingName"];
+    footView.userInteractionEnabled = YES;
+    NSArray *contractMsgArr = [_dataDict valueForKey:@"contractMsg"];
+    NSString *totalStr = [NSString stringWithFormat:@"本人同意签署"];
+    for (int i = 0; i < contractMsgArr.count; i++) {
+        NSString *tmpStr = [[contractMsgArr objectAtIndex:i] valueForKey:@"contractName"];
+        totalStr = [totalStr stringByAppendingString:[NSString stringWithFormat:@"《%@》",tmpStr]];
     }
-    NSString *buyerTransferConsultingName = @"";
-    if ([UCFToolsMehod isNullOrNilWithString:[_dataDict objectForKey:@"buyerTransferConsultingName"]] != 0) {
-        buyerTransferConsultingName = [_dataDict objectForKey:@"buyerTransferConsultingName"];
+    NZLabel *label1 = [[NZLabel alloc] init];
+    label1.font = [UIFont systemFontOfSize:12.0f];
+    CGSize size = [Common getStrWitdth:totalStr TextFont:[UIFont systemFontOfSize:12]];
+    label1.frame = CGRectMake(23, 15, ScreenWidth-25, size.height);
+    label1.text = totalStr;
+    label1.userInteractionEnabled = YES;
+    label1.textColor = UIColorWithRGB(0x999999);
+    
+    __weak typeof(self) weakSelf = self;
+    for (int i = 0; i < contractMsgArr.count; i++) {
+        NSString *tmpStr = [NSString stringWithFormat:@"《%@》",[[contractMsgArr objectAtIndex:i] valueForKey:@"contractName"]];
+        [label1 addLinkString:tmpStr block:^(ZBLinkLabelModel *linkModel) {
+            [weakSelf showHeTong:linkModel];
+        }];
+        [label1 setFontColor:UIColorWithRGB(0x4aa1f9) string:tmpStr];
     }
-    NSArray *contractArray = [NSArray arrayWithObjects:transferConsultingName,buyerTransferConsultingName,nil];
+    [footView addSubview:label1];
     
     UIImageView * imageView1 = [[UIImageView alloc] init];
-    imageView1.frame = CGRectMake(15, 19, 5, 5);
+    imageView1.frame = CGRectMake(CGRectGetMinX(label1.frame) - 7, CGRectGetMinY(label1.frame) + 4, 5, 5);
     imageView1.image = [UIImage imageNamed:@"point.png"];
     [footView addSubview:imageView1];
-    
-    NSString *str1 = [NSString stringWithFormat:@"《%@》",[contractArray objectAtIndex:0]];
-    UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(imageView1.frame),15, ScreenWidth-25, 12)];
-    label1.attributedText = [UCFToolsMehod getAcolorfulStringWithText1:@"本人同意签署" Color1:UIColorWithRGB(0x777777) Font1:[UIFont systemFontOfSize:12] Text2:str1 Color2:UIColorWithRGB(0x108bd8) Font2:[UIFont systemFontOfSize:12] AllText:[NSString stringWithFormat:@"本人同意签署%@",str1]];
-    label1.tag = 4000;
-    NSString *lengStr = [NSString stringWithFormat:@"本人同意签署%@",str1];
-    
-    label1.frame = CGRectMake(CGRectGetMaxX(imageView1.frame) + 5,15, [Common getStrWitdth:lengStr TextFont:[UIFont systemFontOfSize:12]].width, 12);
-    [footView addSubview:label1];
-    label1.backgroundColor = [UIColor clearColor];
-    label1.userInteractionEnabled = YES;
-
-    UITapGestureRecognizer *jieChu = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showHeTong:)];
-    [label1 addGestureRecognizer:jieChu];
-    
-
-    
-    NSString *str2 = [NSString stringWithFormat:@"《%@》",[contractArray objectAtIndex:1]];
-    UILabel *label2 = [[UILabel alloc] init];
-    label2.tag = 4001;
-    label2.userInteractionEnabled = YES;
-    label2.textColor = UIColorWithRGB(0x108bd8);
-    [footView addSubview:label2];
-    label2.backgroundColor = [UIColor clearColor];
-    label2.text = str2;
-    label2.font = [UIFont systemFontOfSize:12];
-    label2.frame = CGRectMake(CGRectGetMaxX(label1.frame),label1.frame.origin.y, [Common getStrWitdth:str2 TextFont:[UIFont systemFontOfSize:12]].width, 12);
-    if (CGRectGetMaxX(label2.frame) > ScreenWidth) {
-        label2.frame = CGRectMake(CGRectGetMinX(label1.frame) - 6, CGRectGetMaxY(label1.frame) + 5, CGRectGetWidth(label2.frame), CGRectGetHeight(label2.frame));
-    }
-    UITapGestureRecognizer *baoZheng = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showHeTong:)];
-    [label2 addGestureRecognizer:baoZheng];
-    
     return footView;
 }
-- (void)showHeTong:(UITapGestureRecognizer *)tap
+- (NSString *)valueIndex:(ZBLinkLabelModel *)linkModel
 {
-    UILabel *targetLabel = (UILabel *)tap.view;
-    NSInteger tag = targetLabel.tag;
-    NSString *title = @"";
-    NSString *html = @"";
-    if(tag == 4001) {
-        title = [_dataDict objectForKey:@"buyerTransferConsultingName"];
-        html = [_dataDict objectForKey:@"buyerTransferConsulting"];
-    } else if (tag == 4000) {
-        title = [_dataDict objectForKey:@"transferConsultingName"];
-        html = [_dataDict objectForKey:@"transferConsulting"];
+    NSString *contractStr = linkModel.linkString;
+    NSArray *contractMsgArr = [_dataDict valueForKey:@"contractMsg"];
+    NSString *type = @"";
+    for (int i = 0; i < contractMsgArr.count; i++) {
+        NSString *tmpStr = [NSString stringWithFormat:@"《%@》",[[contractMsgArr objectAtIndex:i] valueForKey:@"contractName"]];
+        if ([tmpStr isEqualToString:contractStr]) {
+            type = [[contractMsgArr objectAtIndex:i] valueForKey:@"contractType"];
+            _contractTitle = [[contractMsgArr objectAtIndex:i] valueForKey:@"contractName"];
+        }
     }
-    FullWebViewController *webController = [[FullWebViewController alloc] initWithHtmlStr:html title:title];
-    webController.baseTitleType = @"detail_heTong";
-
-    [self.navigationController pushViewController:webController animated:YES];
+    return type;
+}
+- (void)showHeTong:(ZBLinkLabelModel *)linkModel
+{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    NSString *contractTypeStr = [self valueIndex:linkModel];
+    NSString *projectId = [[self.dataDict objectForKey:@"data"] objectForKey:@"id"];
+    NSString *strParameters = [NSString stringWithFormat:@"userId=%@&prdClaimId=%@&contractType=%@&prdType=1",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],projectId,contractTypeStr];
+    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetContractMsg owner:self];
 }
 - (void)changeGongDouSwitchStatue:(UISwitch *)sender
 {

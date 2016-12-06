@@ -33,6 +33,7 @@
     CGFloat Progress;
     CGFloat curProcess;
     BOOL _isP2P;//YES 为P2P标，NO为尊享标
+    NSString *_contractTitle;
 }
 
 
@@ -141,10 +142,11 @@
     
     UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [leftButton setFrame:CGRectMake(10, 24, 25, 25)];
+    [leftButton setFrame:CGRectMake(0, 20, 44, 44)];
     [leftButton setBackgroundColor:[UIColor clearColor]];
     [leftButton.titleLabel setFont:[UIFont systemFontOfSize:14]];
     [leftButton setTitleColor:[UIColor colorWithWhite:1 alpha:0.7] forState:UIControlStateHighlighted];
-    //[leftButton setImageEdgeInsets:UIEdgeInsetsMake(0.0, -15, 0.0, 0.0)];
+    [leftButton setImageEdgeInsets:UIEdgeInsetsMake(4, 10, 6, 9)];
     [leftButton setImage:[UIImage imageNamed:@"btn_whiteback.png"]forState:UIControlStateNormal];
     [leftButton setImage:[UIImage imageNamed:@"btn_whiteback.png"]forState:UIControlStateHighlighted];
     [leftButton addTarget:self action:@selector(getBack) forControlEvents:UIControlEventTouchUpInside];
@@ -168,8 +170,10 @@
     [super viewDidLoad];
     //    self.navigationController.navigationBarHidden = YES;
     
-    if (_isTransfer) {
+    if (_isTransfer) { //如果是债转的标
         _detailType = PROJECTDETAILTYPEBONDSRRANSFER;
+        NSString *type = [[_dataDic objectSafeDictionaryForKey:@"prdTransferFore"] objectSafeForKey:@"type"];
+        _isP2P = [type isEqualToString:@"1"] ? YES : NO; //  Yes为 p2p债转
     } else {
         NSInteger busType = [[[_dataDic objectForKey:@"prdClaims"] objectForKey:@"busType"]integerValue];
         if (busType == 1) {
@@ -177,13 +181,10 @@
         } else {
             _detailType = PROJECTDETAILTYPENORMAL;
         }
+        NSString *type = [[_dataDic objectSafeDictionaryForKey:@"prdClaims"] objectSafeForKey:@"type"];
+       _isP2P = [type isEqualToString:@"1"] ? YES : NO; //  Yes为 p2p标
     }
-    NSString *type = [[_dataDic objectSafeDictionaryForKey:@"prdClaims"] objectSafeForKey:@"type"];
-    if ([type isEqualToString:@"1"]) {
-        _isP2P = YES;
-    }else{
-        _isP2P = NO;
-    }
+    
     [self addnavigationBar];
     [self setNavTitleView];
     
@@ -191,13 +192,15 @@
     NSString *tansType = @"1";
     switch (_detailType) {
         case PROJECTDETAILTYPENORMAL://普通标详情
-            [self makeContractMsg:[_dataDic objectForKey:@"contractMsg"] tp:@"1"];
+//            [self makeContractMsg:[_dataDic objectForKey:@"contractMsg"] tp:@"1"];
+            [self makeContractMsg:[_dataDic objectForKey:@"contractMsg"]];
             _normalMarkView = [[UCFNormalNewMarkView alloc] initWithFrame:CGRectMake(0, NavigationBarHeight, ScreenWidth, ScreenHeight - NavigationBarHeight) withDic:_dataDic prdList:_prdLabelsList contractMsg:_contractMsgArray souceVc:_sourceVc isP2P:_isP2P];
             _normalMarkView.delegate = self;
             [self.view addSubview:_normalMarkView];
             break;
         case PROJECTDETAILTYPERIGHTINTEREST://RightInterestNewView 权益表详情
-            [self makeContractMsg:[_dataDic objectForKey:@"contractMsg"] tp:@"2"];
+//            [self makeContractMsg:[_dataDic objectForKey:@"contractMsg"] tp:@"2"];
+             [self makeContractMsg:[_dataDic objectForKey:@"contractMsg"]];
             _normalMarkOfRightsInterestView = [[UCFRightInterestNewView alloc] initWithFrame:CGRectMake(0, 64, ScreenWidth, ScreenHeight - NavigationBarHeight) withDic:_dataDic prdList:_prdLabelsList contractMsg:_contractMsgArray souceVc:_sourceVc isP2P:_isP2P];
             _normalMarkOfRightsInterestView.delegate = self;
             [self.view addSubview:_normalMarkOfRightsInterestView];
@@ -205,11 +208,13 @@
         case PROJECTDETAILTYPEBONDSRRANSFER://债转标详情  tansType 债权转让原标类型 1 普通标 2 权益标
             if ([[[_dataDic objectForKey:@"prdTransferFore"] objectForKey:@"busType"] isEqualToString:@"1"]) {
                 tansType = @"2";
-                [self makeContractMsg:[_dataDic objectForKey:@"contractMsg"] tp:@"4"];
+//                [self makeContractMsg:[_dataDic objectForKey:@"contractMsg"] tp:@"4"];
+                [self makeContractMsg:[_dataDic objectForKey:@"contractMsg"]];
             } else {
-                [self makeContractMsg:[_dataDic objectForKey:@"contractMsg"] tp:@"3"];
+//                [self makeContractMsg:[_dataDic objectForKey:@"contractMsg"] tp:@"3"];
+                [self makeContractMsg:[_dataDic objectForKey:@"contractMsg"]];
             }
-            _markOfBondsRransferView = [[UCFMarkOfBondsRransferNewView alloc] initWithFrame:CGRectMake(0, NavigationBarHeight, ScreenWidth, ScreenHeight - NavigationBarHeight) withDic:_dataDic prdList:_prdLabelsList contractMsg:_contractMsgArray souceVc:_sourceVc type:tansType];
+            _markOfBondsRransferView = [[UCFMarkOfBondsRransferNewView alloc] initWithFrame:CGRectMake(0, NavigationBarHeight, ScreenWidth, ScreenHeight - NavigationBarHeight) withDic:_dataDic prdList:_prdLabelsList contractMsg:_contractMsgArray souceVc:_sourceVc type:tansType isP2P:_isP2P];
             _markOfBondsRransferView.delegate = self;
             [self.view addSubview:_markOfBondsRransferView];
             break;
@@ -365,6 +370,10 @@
 //        [UMSocialData defaultData].extConfig.wechatSessionData.url = @"http://www.9888.cn";
 //    }
 //}
+-(void)makeContractMsg:(NSArray*)msgArray{
+    
+    _contractMsgArray = [NSArray arrayWithArray:msgArray];
+}
 
 
 - (void)makeContractMsg:(NSDictionary*)msg tp:(NSString*)tp
@@ -466,44 +475,48 @@
 - (void)tableView:(UITableView *)tableView didSelectNormalMarkRowAtIndexPath:(NSIndexPath *)indexPath
 {
         if ([indexPath section] == 1) {
-            if([[_contractMsgArray objectAtIndex:[indexPath row]] objectForKey:@"content"]) {
-                NSString *title = [[_contractMsgArray objectAtIndex:[indexPath row]] objectForKey:@"title"];
-                FullWebViewController *controller = [[FullWebViewController alloc] initWithHtmlStr:[[_contractMsgArray objectAtIndex:[indexPath row]] objectForKey:@"content"] title:title];
-                controller.baseTitleType = @"detail_heTong";
-                [self.navigationController pushViewController:controller animated:YES];
-            } else {
-                [self showHTAlertdidFinishGetUMSocialDataResponse];
-
-            }
+            [self getContractMsgHttpRequest:indexPath.row];
         }
+}
+-(void)getContractMsgHttpRequest:(NSInteger)row{
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    NSString * strParameters= @"";
+    NSDictionary *contractDict = [_contractMsgArray objectAtIndex:row];
+    NSString *contractTypeStr =[contractDict objectSafeForKey:@"contractType"];
+    _contractTitle = [contractDict objectSafeForKey:@"contractName"];
+    if (_isTransfer) {
+        //转让标
+        NSString *projectId = [[_dataDic objectForKey:@"prdTransferFore"] objectForKey:@"id"];
+        strParameters = [NSString stringWithFormat:@"userId=%@&prdClaimId=%@&contractType=%@&prdType=1",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],projectId,contractTypeStr];//101943
+       
+    } else {
+        //普通标
+        NSString *projectId = [[_dataDic objectForKey:@"prdClaims"] objectForKey:@"id"];
+        strParameters = [NSString stringWithFormat:@"userId=%@&prdClaimId=%@&contractType=%@&prdType=0",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],projectId,contractTypeStr];
+    }
+     [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetContractMsg owner:self];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectNormalMarkOfRightRowAtIndexPath:(NSIndexPath *)indexPat
 {
     if ([indexPat section] == 1) {
-        if ([[_contractMsgArray objectAtIndex:[indexPat row]] objectForKey:@"content"]) {
-            NSString *title = [[_contractMsgArray objectAtIndex:[indexPat row]] objectForKey:@"title"];
-            FullWebViewController *controller = [[FullWebViewController alloc] initWithHtmlStr:[[_contractMsgArray objectAtIndex:[indexPat row]] objectForKey:@"content"] title:title];
-            controller.baseTitleType = @"detail_heTong";
-            [self.navigationController pushViewController:controller animated:YES];
-        } else {
-            [self showHTAlertdidFinishGetUMSocialDataResponse];
-        }
-
+//        if ([[_contractMsgArray objectAtIndex:[indexPat row]] objectForKey:@"content"]) {
+//            NSString *title = [[_contractMsgArray objectAtIndex:[indexPat row]] objectForKey:@"title"];
+//            FullWebViewController *controller = [[FullWebViewController alloc] initWithHtmlStr:[[_contractMsgArray objectAtIndex:[indexPat row]] objectForKey:@"content"] title:title];
+//            controller.baseTitleType = @"detail_heTong";
+//            [self.navigationController pushViewController:controller animated:YES];
+//        } else {
+//            [self showHTAlertdidFinishGetUMSocialDataResponse];
+//        }
+        [self getContractMsgHttpRequest:indexPat.row];
     }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectMarkOfBondsRransferViewRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([indexPath section] == 1) {
-        if ([[_contractMsgArray objectAtIndex:[indexPath row]] objectForKey:@"content"]) {
-            NSString *title = [[_contractMsgArray objectAtIndex:[indexPath row]] objectForKey:@"title"];
-            FullWebViewController *controller = [[FullWebViewController alloc] initWithHtmlStr:[[_contractMsgArray objectAtIndex:[indexPath row]] objectForKey:@"content"] title:title];
-            controller.baseTitleType = @"detail_heTong";
-            [self.navigationController pushViewController:controller animated:YES];
-        } else {
-            [self showHTAlertdidFinishGetUMSocialDataResponse];
-        }
+          [self getContractMsgHttpRequest:indexPath.row];
     }
 }
 
@@ -636,6 +649,19 @@
             [AuxiliaryFunc showAlertViewWithMessage:[dic objectForKey:@"statusdes"]];
         }
         
+    }else if(tag.intValue == kSXTagGetContractMsg) {
+        NSString *Data = (NSString *)result;
+        NSDictionary * dic = [Data objectFromJSONString];
+        NSDictionary *dictionary =  [dic objectSafeDictionaryForKey:@"contractMess"];
+        NSString *status = [dic objectSafeForKey:@"status"];
+        if ([status intValue] == 1) {
+          NSString *contractMessStr = [dictionary objectSafeForKey:@"contractMess"];
+            FullWebViewController *controller = [[FullWebViewController alloc] initWithHtmlStr:contractMessStr title:_contractTitle];
+            controller.baseTitleType = @"detail_heTong";
+            [self.navigationController pushViewController:controller animated:YES];
+        }else{
+            [self showHTAlertdidFinishGetUMSocialDataResponse];
+        }
     }
     
 }

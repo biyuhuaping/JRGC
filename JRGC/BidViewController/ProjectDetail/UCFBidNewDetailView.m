@@ -15,6 +15,7 @@
 #import "MDRadialProgressLabel.h"
 #import "SDLoopProgressView.h"
 #import "NSDateManager.h"
+#import "UIDic+Safe.h"
 
 #define shadeSpacingHeight 18 //遮罩label的上下间距
 #define shadeHeight 70 //遮罩高度
@@ -50,6 +51,7 @@
     UILabel *_fixedUpDateLabel;//固定起息日
     UILabel *_markTypeLabel;//类型
     UILabel *_investmentAmountLabel;//起投额
+    UILabel *_insNameLabel;//担保机构
     
     CGFloat bottomViewYPos;
 }
@@ -313,20 +315,28 @@
     }
     
     NSString *fixUpdate = [[_dic objectForKey:@"prdClaims"]objectForKey:@"fixedDate"];
+    NSString *guaranteeCompanyNameStr = [[_dic objectForKey:@"prdClaims"] objectSafeForKey:@"guaranteeCompanyName"];
+//    NSString *insNameStr = [_dic objectSafeForKey:@"insName"];
+    if (_type == PROJECTDETAILTYPEBONDSRRANSFER) { //债转不添加 担保机构
+      guaranteeCompanyNameStr  = @"";
+    }
     //如果没有固定起息日
     if ([fixUpdate isEqual:[NSNull null]] || [fixUpdate isEqualToString:@""] || !fixUpdate) {
-        [self drawType2bottomView];
+        [self drawType2bottomView:guaranteeCompanyNameStr];
     } else {
-        [self drawType1bottomView];
+        [self drawType1bottomView:guaranteeCompanyNameStr];
     }
-
-    
 }
 
 //固定起息日
-- (void)drawType1bottomView
+- (void)drawType1bottomView:(NSString *)insName
+
 {
-    bottomBkView = [[UIView alloc] initWithFrame:CGRectMake(0, 0 + [Common calculateNewSizeBaseMachine:HeadBkHeight] + bottomViewYPos, ScreenWidth, 44*3)];
+    int row = 3;
+    if (![insName isEqualToString:@""]) {
+        row = 4;
+    }
+    bottomBkView = [[UIView alloc] initWithFrame:CGRectMake(0, 0 + [Common calculateNewSizeBaseMachine:HeadBkHeight] + bottomViewYPos, ScreenWidth, 44*row)];
     bottomBkView.backgroundColor = [UIColor whiteColor];
     [self addSubview:bottomBkView];
     
@@ -390,16 +400,38 @@
     _investmentAmountLabel = [UILabel labelWithFrame:CGRectMake(ScreenWidth - 15 - LabelWidTh, 44*2 + IconYPos, LabelWidTh, 22) text:@"100元起" textColor:UIColorWithRGB(0x333333) font:[UIFont boldSystemFontOfSize:13]];
     _investmentAmountLabel.textAlignment = NSTextAlignmentRight;
     [bottomBkView addSubview:_investmentAmountLabel];
+    if (row == 4) {
+        //****************分隔线**************
+        UIView *line2 = [[UIView alloc] initWithFrame:CGRectMake(15, 44*3, ScreenWidth - 15, 0.5)];
+        line2.backgroundColor = UIColorWithRGB(0xe3e5ea);
+        [bottomBkView addSubview:line2];
+        //****************分隔线**************
+        
+        //起投金额
+        UIImageView *qitouImageV = [[UIImageView alloc] initWithFrame:CGRectMake(IconXPos,44*3 + IconYPos, 22, 22)];
+        qitouImageV.image = [UIImage imageNamed:@"particular_icon_guarantee.png"];
+        [bottomBkView addSubview:qitouImageV];
+        UILabel *qitouLabel = [UILabel labelWithFrame:CGRectMake(CGRectGetMaxX(qitouImageV.frame) + 5, 44*3 + IconYPos, 100 , 22) text:@"担保机构" textColor:UIColorWithRGB(0x555555) font:[UIFont systemFontOfSize:13]];
+        qitouLabel.textAlignment = NSTextAlignmentLeft;
+        [bottomBkView addSubview:qitouLabel];
+        _insNameLabel = [UILabel labelWithFrame:CGRectMake(CGRectGetMaxX(qitouLabel.frame) + 5, CGRectGetMinY(qitouLabel.frame), ScreenWidth -CGRectGetMaxX(qitouLabel.frame) - 5 - 15, 22) text:insName textColor:UIColorWithRGB(0x333333) font:[UIFont boldSystemFontOfSize:13]];
+        _insNameLabel.textAlignment = NSTextAlignmentRight;
+        [bottomBkView addSubview:_insNameLabel];
+    }
     
     [self drawPullingView];
 }
 
 // 无固定起息日 比如债权转让标
-- (void)drawType2bottomView
+- (void)drawType2bottomView:(NSString *)insName
 {
+    int row = 2;
+    if (![insName isEqualToString:@""]) {
+        row = 3;
+    }
     CGFloat bottomBeginYPos;
     bottomBeginYPos = 0 + [Common calculateNewSizeBaseMachine:HeadBkHeight] + bottomViewYPos;
-    bottomBkView = [[UIView alloc] initWithFrame:CGRectMake(0,bottomBeginYPos, ScreenWidth, 44*2)];
+    bottomBkView = [[UIView alloc] initWithFrame:CGRectMake(0,bottomBeginYPos, ScreenWidth, 44*row)];
     bottomBkView.backgroundColor = [UIColor whiteColor];
     [self addSubview:bottomBkView];
     
@@ -437,6 +469,25 @@
     _investmentAmountLabel = [UILabel labelWithFrame:CGRectMake(ScreenWidth - 15 - LabelWidTh, 44 + IconYPos, LabelWidTh, 22) text:@"100元起" textColor:UIColorWithRGB(0x333333) font:[UIFont boldSystemFontOfSize:13]];
     _investmentAmountLabel.textAlignment = NSTextAlignmentRight;
     [bottomBkView addSubview:_investmentAmountLabel];
+    if (row == 3) {
+        //****************分隔线**************
+        UIView *line2 = [[UIView alloc] initWithFrame:CGRectMake(15, 44*2, ScreenWidth - 15, 0.5)];
+        line2.backgroundColor = UIColorWithRGB(0xe3e5ea);
+        [bottomBkView addSubview:line2];
+        //****************分隔线**************
+        
+        //起投金额
+        UIImageView *qitouImageV = [[UIImageView alloc] initWithFrame:CGRectMake(IconXPos,44*2 + IconYPos, 22, 22)];
+        qitouImageV.image = [UIImage imageNamed:@"particular_icon_guarantee.png"];
+        [bottomBkView addSubview:qitouImageV];
+        UILabel *qitouLabel = [UILabel labelWithFrame:CGRectMake(CGRectGetMaxX(qitouImageV.frame) + 5, 44*2 + IconYPos, 100 , 22) text:@"担保机构" textColor:UIColorWithRGB(0x555555) font:[UIFont systemFontOfSize:13]];
+        qitouLabel.textAlignment = NSTextAlignmentLeft;
+        [bottomBkView addSubview:qitouLabel];
+        
+        _insNameLabel = [UILabel labelWithFrame:CGRectMake(CGRectGetMaxX(qitouLabel.frame) + 5, CGRectGetMinY(qitouLabel.frame), ScreenWidth -CGRectGetMaxX(qitouLabel.frame) - 5 - 15, 22) text:insName textColor:UIColorWithRGB(0x333333) font:[UIFont boldSystemFontOfSize:13]];
+        _insNameLabel.textAlignment = NSTextAlignmentRight;
+        [bottomBkView addSubview:_insNameLabel];
+    }
     
     [self drawPullingView];
 }

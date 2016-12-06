@@ -19,9 +19,9 @@
 #define PRDCLAIMS_LIST      @"newPrdClaims/dataList"//债券(最新项目)列表
 #define PRDCLAIMS_LISTNEWVERSION   @"api/prdClaims/v2/dataList.json"//首页数据列表
 #define PRDTRANSFER_LIST    @"newprdTransfer/dataList"//债券转让列表
-#define PRDCLAIMS_DETAIL    @"newPrdClaims/getDetail"//普通标详情
-#define PRDTRANSFER_DETAIL  @"newprdTransfer/showDetail"
-#define PRDCLAIMS_DEALBID   @"newPrdClaims/dealBid"
+#define PRDCLAIMS_DETAIL    @"newPrdClaims/getDetailTwo"//普通标详情
+#define PRDTRANSFER_DETAIL  @"newprdTransfer/showDetailTwo"//转让标详情
+#define PRDCLAIMS_DEALBID   @"newPrdClaims/dealBidTwo"
 #define PRDCLAIMS_SAVEDEALS @"api/invest/v2/submitTender.json"
 #define PERSON_CENTER       @"newaccount/center"
 #define MONEY_OVERVIEW      @"newaccount/overview"
@@ -38,7 +38,7 @@
 #define SEND_MESSAGE        @"newsendmessage"
 #define GET_MESSAGE_TICKET  @"newgetSendMessageTicket"  
 #define USER_LOGOUT         @"user/loginoutForCheck"
-#define DEALTRANSFERBID     @"newprdTransfer/dealTransferBid"
+#define DEALTRANSFERBID     @"newprdTransfer/dealTransferBidTwo"
 #define SAVETRANSFERDEALS   @"api/investTraClaims/v2/submitTender.json" //债权转让投资请求
 #define UPDATE_TEL          @"userInfor/updatetele"
 #define DICITEMLIST         @"sysDataDicItem/allDicItemList"
@@ -68,6 +68,7 @@
 #define PICKUPINTEREST      @"actWithdraw/pickUpInterest"
 #define ACCOUNTFUNDS        @"account/funds"
 #define COMPUTEINTREST      @"newprdTransfer/newCompensateInterest"
+#define NORMALCOMPUTEINTREST @"newPrdClaims/computeIntrest"
 #define TRANSFERCOMPUTEINTREST @"prdTransfer/computeIntrest"
 #define PRDCLAIMSFOREGUARANTORBORROWS @"prdClaimsFore/guarantorBorrows"
 #define PRDALLSUBROGATION             @"prdClaimsFore/allSubrogation"
@@ -82,7 +83,8 @@
 #define EXCAHGELIST                   @"scratchCard/exchangeList"
 #define APPLYCARD                     @"scratchCard/applyCard"
 #define RIGISTCHECK                   @"newuserregist/verification"
-#define INVITEREBATE                  @"newfactoryCodeController/info"          //邀请返利
+//#define INVITEREBATE                  @"newfactoryCodeController/info"          //邀请返利
+#define INVITEREBATE                  @"api/inviteRebate/v2/info.json"          //邀请返利
 #define FRIENDREGISTERLIST            @"newfactoryCodeController/recFriendList" //邀请注册记录
 #define AllInverstMoney               @"top/index"
 #define YouHuiTickt                   @"NewBeans/returnMoneyList" //优惠券列表
@@ -182,6 +184,8 @@
 
 #define PROJECTLIST         @"api/prdClaims/v2/more.json"     //项目标列表
 #define TRANSFERLIST        @"api/prdTransfer/v2/getTranPageList.json"     //转让列表
+#define GETCONTRACTMSG      @"newPrdClaims/getContractMsg" //查看合同详情
+#define ISSHOWHORNOR        @"api/prdClaims/v2/zxSwitch.json"   //是否显示尊享
 
 enum kPostStatus{
     kPostStatusNone=0,
@@ -245,6 +249,7 @@ enum kSXTag
     kSXTagActWithdrawPickUpInterest,//提取利息
     kSXTagAccountFunds,//资金情况
     kSXTagPrdClaimsComputeIntrest,//计算预期收益
+    kSXTagNormalBidComputeIntrest,//计算普通标的预期收益
     kSXTagPrdTransferComputeIntrest,//债券转让预期收益
     kSXTagPRDCLAIMSFOREGUARANTORBORROWS,//逾期欠款单
     kSXTagPrdClaimsForeAllSubrogation,//权益列表
@@ -362,6 +367,8 @@ enum kSXTag
     kSXTagPrdClaimsNewVersion,          //首页数据新接口
     kSXTagProjectList,                  //项目列表
     kSXTagTransferList,                 //转让列表
+    kSXTagGetContractMsg,               //查看合同详情
+    kSXTagIsShowHornor,                 //是否显示尊享
 };
 
 typedef enum kSXTag kSXTag;

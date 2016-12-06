@@ -1220,7 +1220,7 @@
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
 {
     self.currentSnapImageView.hidden = YES;
-    __weak __typeof(self)weakSelf = self;
+//    __weak __typeof(self)weakSelf = self;
     if (_isFromRegister) {
         [self dismissViewControllerAnimated:NO completion:^{
             userInfoDict = [[NSUserDefaults standardUserDefaults] objectForKey:@"regUserMsg"];
@@ -1342,7 +1342,7 @@
 //    }];
     
     
-    __weak typeof(self) weakSelf = self;
+//    __weak typeof(self) weakSelf = self;
     //UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SecuirtyCenter" bundle:nil];
     //IDAuthViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"idauth"];
     //controller.title = @"身份认证";

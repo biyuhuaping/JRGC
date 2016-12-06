@@ -245,7 +245,7 @@
             CGFloat stringWidth = 0;
             CGFloat stringHeight = 0;
             if([titleString respondsToSelector:@selector(sizeWithAttributes:)]) {
-                stringWidth = [titleString sizeWithAttributes:@{NSFontAttributeName: self.font}].width;
+                stringWidth = [titleString sizeWithAttributes:@{NSFontAttributeName: self.font}].width+1;
                 stringHeight = [titleString sizeWithAttributes:@{NSFontAttributeName: self.font}].height;
             }
             else {

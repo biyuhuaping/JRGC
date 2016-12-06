@@ -13,6 +13,7 @@
 #import "UCFTransferModel.h"
 #import "NZLabel.h"
 #import "UCFToolsMehod.h"
+#import "UCFProjectLabel.h"
 
 @interface UCFProjectListCell ()
 @property (weak, nonatomic) IBOutlet UIImageView *invest_bg_cell;
@@ -34,6 +35,11 @@
 @property (weak, nonatomic) IBOutlet CircleProgressView *circleProgressView;
 
 @property (nonatomic, strong) NSArray *status;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *iconW_01;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *iconW_02;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *iconW_03;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *iconW_04;
 
 @end
 
@@ -106,7 +112,12 @@
     }else
         str2 = [NSString stringWithFormat:@"%.2f万",total2];
     
-    return [NSString stringWithFormat:@"剩%@/%@",str1,str2];
+    //    return [NSString stringWithFormat:@"剩%@/%@",str1,str2];
+    //标未满的时候显示剩余 //满标的时候，显示总额
+    if (rem2 == 0) {
+        return [NSString stringWithFormat:@"%@",str2];
+    }
+    return [NSString stringWithFormat:@"剩%@",str1];
 }
 
 - (void)setModel:(UCFProjectListModel *)model
@@ -146,17 +157,23 @@
     switch (imaArr.count) {
         case 1: {
             _imgView1.image = imaArr[0];
+            self.iconW_01.constant = 18;
+            self.iconW_02.constant = self.iconW_03.constant = self.iconW_04.constant = 0;
         }
             break;
         case 2: {
             _imgView1.image = imaArr[0];
             _imgView2.image = imaArr[1];
+            self.iconW_01.constant = self.iconW_02.constant = 18;
+            self.iconW_03.constant = self.iconW_04.constant = 0;
         }
             break;
         case 3: {
             _imgView1.image = imaArr[0];
             _imgView2.image = imaArr[1];
             _imgView3.image = imaArr[2];
+            self.iconW_01.constant = self.iconW_02.constant = self.iconW_03.constant = 18;
+            self.iconW_04.constant = 0;
         }
             break;
         case 4: {
@@ -164,6 +181,7 @@
             _imgView2.image = imaArr[1];
             _imgView3.image = imaArr[2];
             _imgView4.image = imaArr[3];
+            self.iconW_01.constant = self.iconW_02.constant = self.iconW_03.constant = self.iconW_04.constant = 18;
         }
             break;
     }
@@ -172,8 +190,16 @@
     if (_type == UCFProjectListCellTypeProject) {
         self.circleProgressView.textStr = [self.status objectAtIndex:status];
     }
+    self.angleView.angleStatus = model.status;
+    DBLOG(@"%@", model.status);
+    if (model.prdLabelsList.count>0) {
+        for (UCFProjectLabel *projectLabel in model.prdLabelsList) {
+            if ([projectLabel.labelPriority integerValue] == 1) {
+                self.angleView.angleString = [NSString stringWithFormat:@"%@", projectLabel.labelName];
+            }
+        }
+    }
     
-    self.angleView.angleStatus = [NSString stringWithFormat:@"%@", model.status];
     
     float progress = [model.completeLoan floatValue]/[model.borrowAmount floatValue];
     progress = 1000*progress;
@@ -219,6 +245,11 @@
     //盾
     if ([transferModel.guaranteeCompany isEqualToString:@"1"]) {
         _imgView1.image = [UIImage imageNamed:@"particular_icon_guarantee"];
+        self.iconW_01.constant = 18;
+        self.iconW_02.constant = self.iconW_03.constant = self.iconW_04.constant = 0;
+    }
+    else {
+        self.iconW_01.constant = self.iconW_02.constant = self.iconW_03.constant = self.iconW_04.constant = 0;
     }
     
     NSInteger status = [transferModel.status integerValue];

@@ -32,8 +32,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self addLeftButton];
-    
-    _segmentedCtrl = [[UISegmentedControl alloc]initWithItems:@[@"我的项目",@"转入项目"]];
+    //尊享开关
+    BOOL isShowHornor =  [[NSUserDefaults standardUserDefaults] boolForKey:@"isShowHornor"];
+    NSString *titleStr = isShowHornor ? @"转入项目":@"我的债权" ;
+    _segmentedCtrl = [[UISegmentedControl alloc]initWithItems:@[@"我的项目",titleStr]];
     DBLOG(@"%@",NSStringFromCGRect(self.view.frame));
     _segmentedCtrl.frame = CGRectMake(0, 0, ScreenWidth*5/8, 30);
     [_segmentedCtrl setTintColor:UIColorWithRGB(0x5b6993)];

@@ -73,20 +73,15 @@
     
     if ([_sourceVC isEqualToString:@"errorNum"]) {
         [[UserInfoSingle sharedManager] removeUserInfo];
-//        [[NSUserDefaults standardUserDefaults] setValue:nil forKey:UUID];
-//        [[NSUserDefaults standardUserDefaults] setValue:nil forKey:TIME];
-//        [[NSUserDefaults standardUserDefaults] setValue:nil forKey:IDCARD_STATE];
-//        [[NSUserDefaults standardUserDefaults] setValue:nil forKey:BANKCARD_STATE];
         [[NSUserDefaults standardUserDefaults] setValue:nil forKey:GCODE];
         [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"changScale"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         [self.navigationController popViewControllerAnimated:NO];
     
-        //[self addLeftButton];
         AppDelegate *del = (AppDelegate *) [[UIApplication sharedApplication] delegate];
         [del.tabBarController setSelectedIndex:0];
-        NSString *strParameters = [NSString stringWithFormat:@"userId=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
-        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagUserLogout owner:self];
+//        NSString *strParameters = [NSString stringWithFormat:@"userId=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
+//        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagUserLogout owner:self];
     }
     //从切换用户和输错5次跳转过来
     if ([_sourceVC isEqualToString:@"changeUser"]) { 

@@ -40,6 +40,8 @@
 
 #import "JSPatch.h"
 #import "MD5Util.h"
+
+
 @interface AppDelegate () <UCFSessionDelegate>
 
 @property (assign, nonatomic) UIBackgroundTaskIdentifier backgroundUpdateTask;
@@ -57,10 +59,13 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+
+    
     //修改webView标识
     [self setWebViewUserAgent];
     [UCFSession sharedManager].delegate = self;
     [self checkUpdate];
+    [self checkIsShowHornor];
     //[self getHealthData];
 //    return YES;
     // Override point for customization after application launch.
@@ -159,7 +164,7 @@
             [self.lockVc openTouchidAlert];
         }
     }
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveLoginOut) name:SAFE_LOGIN_OUT object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveLoginOut) name:SAFE_LOGIN_OUT object:nil];
 
     if (launchOptions) {
         NSDictionary* message = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
@@ -223,9 +228,9 @@
     //[self performSelector:@selector(checkSwitchState) withObject:nil afterDelay:2];
     [self checkJSPatchUpdate];
     [[UserInfoSingle sharedManager] getUserData];
-    
-//    NSString *pwd = [Common AESWithKey2:@"JRGC" WithDic:[NSDictionary dictionaryWithObject:@"11" forKey:@"AAA"]];
-//    NSString *org = [Common JieAESWith:@"JRGC" WithData:pwd];
+
+//    YWFPSLabel *aaa = [[YWFPSLabel alloc] init];
+//    [[[UIApplication sharedApplication] keyWindow] addSubview:aaa];
     return YES;
 }
 - (void)setUMData
@@ -431,11 +436,11 @@
 {
     
 }
-- (void)saveLoginOut
-{
-    NSString *strParameters = [NSString stringWithFormat:@"userId=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagUserLogout owner:self];
-}
+//- (void)saveLoginOut
+//{
+//    NSString *strParameters = [NSString stringWithFormat:@"userId=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
+//    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagUserLogout owner:self];
+//}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
 //    恢复屏幕的亮度
@@ -651,6 +656,15 @@
     [self addLoadingBaseView];
     //[self showGCode];
 }
+    
+- (void)checkIsShowHornor
+{
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isShowHornor"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    //请求开关状态
+    [[NetworkModule sharedNetworkModule] newPostReq:nil tag:kSXTagIsShowHornor owner:self signature:NO];
+}
+
 - (void)checkSwitchState
 {
     //请求开关状态
@@ -720,7 +734,7 @@
         //        [[NSUserDefaults standardUserDefaults] setValue:nil forKey:GCODE];
         [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"changScale"];
         [[NSUserDefaults standardUserDefaults] synchronize];
-        [[NSNotificationCenter defaultCenter] postNotificationName:BACK_TO_LOGOUT object:nil];
+//        [[NSNotificationCenter defaultCenter] postNotificationName:BACK_TO_LOGOUT object:nil];
         [self.tabBarController setSelectedIndex:2];
         //安全退出后弹出登录框
 //        UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
@@ -750,6 +764,15 @@
         NSDictionary * dic = [Data objectFromJSONString];
         NSString *guideIsOpen = dic[@"isOpen"];
         [[NSUserDefaults standardUserDefaults] setValue:guideIsOpen forKey:@"guideIsOpen"];
+    }
+    else if (tag.integerValue == kSXTagIsShowHornor) {
+        NSString *Data = (NSString *)result;
+        NSDictionary * dic = [Data objectFromJSONString];
+#warning 测试项目列表显示项
+        NSString *zxSwitch = [[dic objectForKey:@"data"] objectForKey:@"zxSwitch"];
+        BOOL isShowHornor = (zxSwitch.intValue>0) ? YES:NO;
+        [[NSUserDefaults standardUserDefaults] setBool:isShowHornor forKey:@"isShowHornor"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }
 

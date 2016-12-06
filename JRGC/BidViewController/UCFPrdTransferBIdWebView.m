@@ -48,11 +48,8 @@
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 -(void)getToBack{
-    
-    if (self.flagInvestSuc) {
-        [self.navigationController popToRootViewControllerAnimated:YES];
-    }else{
-        [self.navigationController popViewControllerAnimated:YES];
-    }
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadHonerTransferData" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadP2PTransferData" object:nil];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 @end

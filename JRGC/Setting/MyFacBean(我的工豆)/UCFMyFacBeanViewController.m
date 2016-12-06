@@ -20,6 +20,7 @@
 @interface UCFMyFacBeanViewController () <UITableViewDataSource, UITableViewDelegate, UCFSelectedViewDelegate, FourOFourViewDelegate>
 @property (weak, nonatomic) IBOutlet UCFSelectedView *itemSelectedView;
 @property (weak, nonatomic) IBOutlet UIScrollView *bgScrollView;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *bgViewWidth;
 
 // 剩余资金
 @property (weak, nonatomic) IBOutlet UILabel *cashBalanceLabel;
@@ -45,11 +46,11 @@
 // 当前的选种状态
 @property (nonatomic, assign) MyFacBeanCurrentState currentState;
 // 可用工豆
-@property (nonatomic, weak) UITableView *tableViewForAvailable;
+@property (nonatomic, weak) IBOutlet UITableView *tableViewForAvailable;
 // 已用工豆
-@property (nonatomic, weak) UITableView *tableViewForHadUsed;
+@property (nonatomic, weak) IBOutlet UITableView *tableViewForHadUsed;
 // 即将过期
-@property (nonatomic, weak) UITableView *tableViewForOverduing;
+@property (nonatomic, weak) IBOutlet UITableView *tableViewForOverduing;
 // 已选中状态存储数组
 @property (nonatomic, strong) NSMutableArray *selectedStateArray;
 
@@ -61,24 +62,10 @@
 
 @implementation UCFMyFacBeanViewController
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)awakeFromNib
 {
-    [super viewWillAppear:animated];
-}
-
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // 从storyboard中加载界面
-//        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SettingStoryboard" bundle:nil];
-//        self = [storyboard instantiateViewControllerWithIdentifier:@"facbean"];
-        self.currentPageForUnusedBean = 1;
-        self.currentPageForUsedBean = 1;
-        self.currentPageForOverduingBean = 1;
-        self.currentState = UCFMyFacBeanStateOverduing;
-    }
-    return self;
+    [super awakeFromNib];
+    
 }
 
 // 已选中状态存储数组
@@ -133,45 +120,16 @@
     
     self.itemSelectedView.sectionTitles = @[@"按过期时间", @"工豆收入", @"工豆支出"];
     self.itemSelectedView.delegate = self;
+        
     
-    self.bgScrollView.contentSize = CGSizeMake(ScreenWidth * 3, 0);
-    
-    CGFloat tableW = ScreenWidth;
-    CGFloat tableH = ScreenHeight - 96 - 44;
-    
-    for (int i=0; i<3; i++) {
-        UITableView *tableview = [[UITableView alloc] initWithFrame:CGRectMake(tableW *i, 0, tableW, tableH) style:UITableViewStylePlain];
-        [self.bgScrollView addSubview:tableview];
-        tableview.separatorStyle = UITableViewCellSeparatorStyleNone;
-        [tableview setBackgroundColor:UIColorWithRGB(0xebebee)];//0xebebee
-        tableview.dataSource = self;
-        tableview.delegate = self;
-        switch (i) {
-            case 0: {
-                self.tableViewForOverduing = tableview;
-                UCFNoDataView *noDataViewThree = [[UCFNoDataView alloc] initWithFrame:tableview.bounds errorTitle:@"暂无数据"];
-                noDataViewThree.tag = 100 + i;
-                self.noDataViewThree = noDataViewThree;
-            }
-                break;
-                
-            case 1: {
-                self.tableViewForAvailable = tableview;
-                UCFNoDataView *noDataViewOne = [[UCFNoDataView alloc] initWithFrame:tableview.bounds errorTitle:@"暂无数据"];
-                noDataViewOne.tag = 100 + i;
-                self.noDataViewOne = noDataViewOne;
-            }
-                break;
-                
-            case 2: {
-                self.tableViewForHadUsed = tableview;
-                UCFNoDataView *noDataViewTwo = [[UCFNoDataView alloc] initWithFrame:tableview.bounds errorTitle:@"暂无数据"];
-                noDataViewTwo.tag = 100 + i;
-                self.noDataViewTwo = noDataViewTwo;
-            }
-                break;
-        }
-    }
+    self.tableViewForAvailable.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableViewForHadUsed.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableViewForOverduing.separatorStyle = UITableViewCellSeparatorStyleNone;
+
+    self.tableViewForAvailable.backgroundColor = UIColorWithRGB(0xebebee);
+    self.tableViewForHadUsed.backgroundColor = UIColorWithRGB(0xebebee);
+    self.tableViewForOverduing.backgroundColor = UIColorWithRGB(0xebebee);
+
 
     //=========  下拉刷新、上拉加载更多  =========
     __weak typeof(self) weakSelf = self;
@@ -208,6 +166,27 @@
     _tableViewForAvailable.scrollsToTop = NO;
     _tableViewForHadUsed.scrollsToTop = NO;
     _tableViewForOverduing.scrollsToTop = YES;
+    
+    self.currentPageForUnusedBean = 1;
+    self.currentPageForUsedBean = 1;
+    self.currentPageForOverduingBean = 1;
+    self.currentState = UCFMyFacBeanStateOverduing;
+    
+    if (!self.noDataViewThree) {
+        self.noDataViewThree = [[UCFNoDataView alloc] initWithFrame:self.tableViewForAvailable.bounds errorTitle:@"暂无数据"];
+    }
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+}
+
+- (void)updateViewConstraints{
+    [super updateViewConstraints];
+    _bgViewWidth.constant = 3*ScreenWidth;
+    self.bgScrollView.frame = CGRectMake(0, 140, ScreenWidth, ScreenHeight);
 }
 
 // 刷新可使用的工豆
@@ -252,11 +231,8 @@
 // 选项栏的点击方法
 - (void)SelectedView:(UCFSelectedView *)selectedView didClickSelectedItemWithSeg:(HMSegmentedControl *)sender
 {
-    [UIView animateWithDuration:0.3 animations:^{
-        [self.bgScrollView setContentOffset:CGPointMake(ScreenWidth*sender.selectedSegmentIndex, 0)];
-    } completion:^(BOOL finished) {
-        
-    }];
+    [self.bgScrollView setContentOffset:CGPointMake(ScreenWidth*sender.selectedSegmentIndex, 0) animated:YES];
+
     switch (sender.selectedSegmentIndex) {
         case 0: {
             // 是否支持点击状态栏回到最顶端
@@ -389,6 +365,9 @@
                         [self.tableViewForOverduing.footer resetNoMoreData];
                 }
                 else {
+                    if (!self.noDataViewThree) {
+                        self.noDataViewThree = [[UCFNoDataView alloc] initWithFrame:self.tableViewForAvailable.bounds errorTitle:@"暂无数据"];
+                    }
                     [self.noDataViewThree showInView:self.tableViewForOverduing];
                     [self.tableViewForOverduing.footer noticeNoMoreData];
                 }
@@ -411,7 +390,7 @@
         if ([self.tableViewForOverduing.footer isRefreshing]) {
             [self.tableViewForOverduing.footer endRefreshing];
         }
-        [[NSNotificationCenter defaultCenter]postNotificationName:REDALERTISHIDE object:@"1"];
+//        [[NSNotificationCenter defaultCenter]postNotificationName:REDALERTISHIDE object:@"1"];
     }
     else if (tag.intValue == kSxTagGongDouInCome) {
         NSInteger sign = [rstcode integerValue];
@@ -453,6 +432,9 @@
                         [self.tableViewForAvailable.footer resetNoMoreData];
                 }
                 else {
+                    if (!self.noDataViewOne) {
+                        self.noDataViewOne = [[UCFNoDataView alloc] initWithFrame:self.tableViewForAvailable.bounds errorTitle:@"暂无数据"];
+                    }
                     [self.noDataViewOne showInView:self.tableViewForAvailable];
                     [self.tableViewForAvailable.footer noticeNoMoreData];
                 }
@@ -517,6 +499,9 @@
                         [self.tableViewForHadUsed.footer resetNoMoreData];
                 }
                 else {
+                    if (!self.noDataViewTwo) {
+                        self.noDataViewTwo = [[UCFNoDataView alloc] initWithFrame:self.tableViewForAvailable.bounds errorTitle:@"暂无数据"];
+                    }
                     [self.noDataViewTwo showInView:self.tableViewForHadUsed];
                     [self.tableViewForHadUsed.footer noticeNoMoreData];
                 }

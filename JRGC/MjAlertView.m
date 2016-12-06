@@ -14,7 +14,10 @@
 #define SCREEN_WIDTH_6P ([UIScreen mainScreen].bounds.size.width == 414)
 
 #define CancelButtonTag 0
-@interface MjAlertView ()
+@interface MjAlertView ()<UIWebViewDelegate>
+{
+    UIWebView *_webView;
+}
 @property (nonatomic, strong) NSMutableArray *buttonArray;
 
 @end
@@ -173,8 +176,88 @@
     }
     return self;
 }
-
-
+-(instancetype)initRechargeViewWithTitle:(NSString *)title errorMessage:(NSString *)errorMessge message:(NSString *)message delegate:(id)delegate cancelButtonTitle:(NSString *)cancelButtonTitle{
+    self = [self init];
+    if (self) {
+        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 20, 300-30, 20)];
+        titleLabel.text = title;
+        titleLabel.font = [UIFont systemFontOfSize:16];
+        titleLabel.textColor = UIColorWithRGB(0x333333);
+        titleLabel.textAlignment = NSTextAlignmentCenter;
+        [self.showView addSubview:titleLabel];
+        
+        NZLabel  *errorMessagelabel = [[NZLabel alloc]init];
+        errorMessagelabel.textColor = UIColorWithRGB(0x555555);
+        errorMessagelabel.text =  errorMessge;
+        errorMessagelabel.frame =CGRectMake(15, CGRectGetMaxY(titleLabel.frame)+5, 300-30,[self getTextHight:errorMessagelabel.text withFont:12]);
+        errorMessagelabel.numberOfLines = 0;
+        errorMessagelabel.textAlignment = NSTextAlignmentCenter;
+        errorMessagelabel.font = [UIFont systemFontOfSize:12];
+        [self.showView addSubview:errorMessagelabel];
+//        NZLabel  *messageLabel = [[NZLabel alloc]init];
+//        messageLabel.textColor = UIColorWithRGB(0x555555);
+//         messageLabel.numberOfLines = 0;
+//        messageLabel.text =  message;
+//        messageLabel.frame =CGRectMake(26, CGRectGetMaxY(errorMessagelabel.frame)+10, 300-52,[self getTextHight:messageLabel.text labelWidth:300-52  withFont:12]);
+//        [messageLabel setFontColor:UIColorWithRGB(0xfd4d4c) string:@"网银转账"];
+//        [messageLabel setFontColor:UIColorWithRGB(0xfd4d4c) string:@"支付宝"];
+//        messageLabel.textAlignment = NSTextAlignmentLeft;
+//        messageLabel.font = [UIFont systemFontOfSize:12];
+//        [self.showView addSubview:messageLabel];
+        _webView = [[UIWebView alloc]initWithFrame:CGRectMake(15, CGRectGetMaxY(errorMessagelabel.frame)+9, 300-30, 40)];
+        [_webView setScalesPageToFit:YES];
+        _webView.delegate  = self;
+        _webView.userInteractionEnabled = NO;
+        _webView.scrollView.showsVerticalScrollIndicator = NO;
+        _webView.scrollView.showsHorizontalScrollIndicator = NO;
+        [_webView loadHTMLString:message baseURL:nil];
+        [self.showView addSubview:_webView];
+        UIButton *cancel = [UIButton buttonWithType:UIButtonTypeCustom];
+        if (cancelButtonTitle) {
+            cancel.frame = CGRectMake(15, CGRectGetMaxY(_webView.frame)+15, 300-30, 37);
+            if ([message isEqualToString:@""]) {
+            cancel.frame = CGRectMake(15, CGRectGetMaxY(errorMessagelabel.frame)+15, 300-30, 37);
+            }
+            cancel.backgroundColor  = UIColorWithRGB(0xfd4d4c);
+            cancel.titleLabel.textColor = [UIColor whiteColor];
+            cancel.titleLabel.font = [UIFont systemFontOfSize:16];
+            cancel.layer.cornerRadius = 2;
+            [cancel setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            [cancel setTitle:cancelButtonTitle forState:UIControlStateNormal];
+            [cancel addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];
+            cancel.tag = CancelButtonTag;
+            [self.showView  addSubview:cancel];
+        }
+        [self.showView  setFrame:CGRectMake(0, 0, 300, CGRectGetMaxY(cancel.frame)+15)];
+        self.showView.layer.cornerRadius = 5;
+        self.showView.layer.masksToBounds = YES;
+        self.showView.backgroundColor = [UIColor whiteColor];
+        self.alertviewType = MjAlertViewTypeCustom;
+        self.delegate = delegate;
+        // 默认显示动画类型
+        self.alertAnimateType = MjAlertViewAnimateTypeNone;
+    }
+    
+    
+    return self;
+    
+}
+- (void)webViewDidFinishLoad:(UIWebView*)webView{
+    //字体大小
+    [_webView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('body')[0].style.webkitTextSizeAdjust= '275%'"];
+    //字体颜色
+//        [webView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('body')[0].style.webkitTextFillColor= '#555555'"];
+    //页面背景色
+    [_webView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('body')[0].style.background='#FFFFF'"];
+//    float  _scrollViewHeight =  _webView.scrollView.contentSize.height;
+//
+//    CGRect rect = _webView.frame ;
+//    rect.size.height = _scrollViewHeight;
+//    
+//    _webView.frame = rect;
+    
+    
+}
 - (instancetype)initCustomAlertViewWithBlock:(MyBlock)block
 {
     self = [self init];
@@ -437,6 +520,14 @@
 -(float)getTextHight:(NSString *)string withFont:(CGFloat)font{
     CGRect rect = [string boundingRectWithSize:CGSizeMake(220, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:font]} context:nil];
     
+    float size = ceilf(rect.size.height);
+    return size;
+    
+    
+}
+#pragma mark - 计算字体所需高度
+-(float)getTextHight:(NSString *)string labelWidth:(float)width withFont:(CGFloat)font{
+    CGRect rect = [string boundingRectWithSize:CGSizeMake(width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:font]} context:nil];
     float size = ceilf(rect.size.height);
     return size;
     

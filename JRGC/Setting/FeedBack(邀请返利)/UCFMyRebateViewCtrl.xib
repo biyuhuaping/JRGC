@@ -32,7 +32,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Odf-Fc-SkH" userLabel="View">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Odf-Fc-SkH" userLabel="View" customClass="UIControl">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user_icon_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="f20-fM-0IW">
@@ -68,23 +68,11 @@
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RbT-Mx-iYb">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
-                            <state key="normal">
-                                <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </state>
-                            <connections>
-                                <action selector="toUCFRegistrationRecordView:" destination="-1" eventType="touchUpInside" id="K30-Nk-zti"/>
-                            </connections>
-                        </button>
                     </subviews>
                     <color key="backgroundColor" red="0.35686274509803922" green="0.41176470588235292" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="nIr-7E-ftR" firstAttribute="centerX" secondItem="VUb-gH-T0r" secondAttribute="centerX" id="0f8-Af-043"/>
-                        <constraint firstAttribute="trailing" secondItem="RbT-Mx-iYb" secondAttribute="trailing" id="1mD-CP-FGl"/>
-                        <constraint firstItem="RbT-Mx-iYb" firstAttribute="top" secondItem="Odf-Fc-SkH" secondAttribute="top" id="BMw-tz-7Sp"/>
                         <constraint firstAttribute="height" constant="100" id="Dg5-7d-9wp"/>
-                        <constraint firstAttribute="bottom" secondItem="RbT-Mx-iYb" secondAttribute="bottom" id="I52-ea-h1Q"/>
                         <constraint firstItem="dDS-TE-eac" firstAttribute="left" secondItem="Odf-Fc-SkH" secondAttribute="left" constant="15" id="Ie0-Cm-6Jq"/>
                         <constraint firstItem="nIr-7E-ftR" firstAttribute="bottom" secondItem="dDS-TE-eac" secondAttribute="bottom" constant="-1" id="PRZ-Ua-Fl9"/>
                         <constraint firstAttribute="trailing" secondItem="8wY-xs-38T" secondAttribute="trailing" constant="15" id="Uj1-gE-jcW"/>
@@ -99,7 +87,6 @@
                         <constraint firstItem="dDS-TE-eac" firstAttribute="top" secondItem="Odf-Fc-SkH" secondAttribute="top" constant="20" id="ntZ-gU-Ia9"/>
                         <constraint firstItem="nIr-7E-ftR" firstAttribute="top" secondItem="f20-fM-0IW" secondAttribute="top" id="qgE-z6-C3z"/>
                         <constraint firstItem="nIr-7E-ftR" firstAttribute="bottom" secondItem="VUb-gH-T0r" secondAttribute="bottom" constant="-4" id="vb9-a4-gMH"/>
-                        <constraint firstItem="RbT-Mx-iYb" firstAttribute="leading" secondItem="Odf-Fc-SkH" secondAttribute="leading" id="vch-sj-Uj4"/>
                         <constraint firstAttribute="bottom" secondItem="8wY-xs-38T" secondAttribute="bottom" constant="15" id="ya2-cC-kAx"/>
                     </constraints>
                     <variation key="default">
@@ -110,6 +97,9 @@
                             <exclude reference="vb9-a4-gMH"/>
                         </mask>
                     </variation>
+                    <connections>
+                        <action selector="toUCFRegistrationRecordView:" destination="-1" eventType="touchUpInside" id="7He-cK-SPR"/>
+                    </connections>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jfb-mU-9hd" userLabel="View（选项背景）">
                     <rect key="frame" x="0.0" y="100" width="375" height="44"/>
@@ -231,7 +221,7 @@
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="回款计划" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="50P-GZ-rqV">
-                            <rect key="frame" x="15" y="0.0" width="61.5" height="37"/>
+                            <rect key="frame" x="15" y="0.0" width="62" height="37"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>

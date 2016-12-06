@@ -62,6 +62,7 @@
     // 添加传统的下拉刷新
     [self.tableview addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(getNetDataFromNet)];
     [self.tableview.header beginRefreshing];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadP2PData) name:@"reloadP2PData" object:nil];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -87,13 +88,14 @@
 {
     return 110;
 }
-
+-(void)reloadP2PData{
+    [self.tableview.header beginRefreshing];
+}
 - (void)getNetDataFromNet{
     NSString *uuid = [[NSUserDefaults standardUserDefaults]valueForKey:UUID];
     NSDictionary *strParameters;
     if ([self.tableview.header isRefreshing]) {
         self.currentPage = 1;
-        [self.dataArray removeAllObjects];
         [self.tableview.footer resetNoMoreData];
     }
     else if ([self.tableview.footer isRefreshing]) {
@@ -129,8 +131,11 @@
         NSString *rstcode = dic[@"ret"];
         NSString *rsttext = dic[@"message"];
         if ([rstcode intValue] == 1) {
-            NSArray *list_result = [[[dic objectForKey:@"data"] objectForKey:@"pageData"] objectForKey:@"result"];
+            NSArray *list_result = [[[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"pageData"] objectSafeArrayForKey:@"result"];
             
+            if ([self.tableview.header isRefreshing]) {
+                [self.dataArray removeAllObjects];
+            }
             for (NSDictionary *dict in list_result) {
                 //                DBLOG(@"%@", dict);
                 UCFProjectListModel *model = [UCFProjectListModel projectListWithDict:dict];
@@ -140,7 +145,7 @@
             
             [self.tableview reloadData];
             
-            BOOL hasNext = [[[[[dic objectForKey:@"data"] objectForKey:@"pageData"] objectForKey:@"pagination"] objectForKey:@"hasNextPage"] boolValue];
+            BOOL hasNext = [[[[[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"pageData"] objectSafeDictionaryForKey:@"pagination"] objectForKey:@"hasNextPage"] boolValue];
             
             if (self.dataArray > 0) {
                 [self.noDataView hide];
@@ -296,7 +301,7 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (alertView.tag == 7000) {
-        [self beginShowLoading];
+        [self reloadP2PData];
     } else if (alertView.tag == 8000) {
         if (buttonIndex == 1) {
             switch ([UserInfoSingle sharedManager].openStatus)
@@ -319,9 +324,8 @@
         }
     }
 }
-- (void)beginShowLoading {
-    [self.tableview.header beginRefreshing];
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"reloadP2PData" object:nil];
 }
-
 
 @end

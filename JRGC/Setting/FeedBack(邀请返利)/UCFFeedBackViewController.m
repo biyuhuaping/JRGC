@@ -1,9 +1,9 @@
 //
 //  UCFFeedBackViewController.m
 //  JRGC
-//
+//  qinyangyue
 //  Created by NJW on 15/4/17.
-//  Copyright (c) 2015年 qinwei. All rights reserved.
+//  Copyright (c) 2015年 秦洋月. All rights reserved.
 //
 
 #import "UCFFeedBackViewController.h"
@@ -22,12 +22,12 @@
 @property (strong, nonatomic) IBOutlet NZLabel *friendCountLab;//邀请投资人数
 @property (strong, nonatomic) IBOutlet NZLabel *recCountLab;//邀请注册人数
 @property (strong, nonatomic) IBOutlet UILabel *gcmLab;//我的工场码
+//*********qyy
 @property (strong, nonatomic) IBOutlet UILabel *adviserAnnualRateLab;//基础年化佣金
-@property (strong, nonatomic) IBOutlet UILabel *yearRateLab;//奖励年化佣金
-@property (strong, nonatomic) IBOutlet UILabel *ownRateLab;//我的奖励比例
-@property (strong, nonatomic) IBOutlet UILabel *friendRateLab;//好友奖励比例
+@property (strong, nonatomic) IBOutlet NZLabel *ownRateLab;//我的奖励比例
+@property (strong, nonatomic) IBOutlet NZLabel *friendRateLab;//好友奖励比例
 @property (strong, nonatomic) NSString *recCount;//邀请注册人数;
-
+//*********qyy
 @property (strong, nonatomic) IBOutlet UIButton *shareBtn;
 @property (strong, nonatomic) IBOutlet UIButton *copBtn;
 @property (strong, nonatomic) UIImage *shareImage;
@@ -37,30 +37,30 @@
 
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *heightView;
 @property (strong, nonatomic) IBOutlet UIView *lingView;
-@property (strong, nonatomic) IBOutlet NSLayoutConstraint *yearRateViewHeight; //奖励年化佣金view的高度
-@property (strong, nonatomic) IBOutlet UILabel *myAnnualRateLab;//基础年化返利 标题 lab
-@property (strong, nonatomic) IBOutlet NSLayoutConstraint *yearRateAndShareHeight;//奖励年化佣金view与分享view的之间的距离
 
+//***************qyy
 @property (strong, nonatomic) IBOutlet UILabel *yearLab1;//基础年化返利 标题 lab
-@property (strong, nonatomic) IBOutlet UILabel *ownLab2;//我的奖励比例
 @property (strong, nonatomic) IBOutlet UILabel *friendLab3;//好友奖励比例
 @property (strong, nonatomic) IBOutlet UIButton *CheckInstructionBtn; //查看说明btn
+//***************qyy
 
 //调整横线高度
-@property (strong, nonatomic) IBOutlet NSLayoutConstraint *height1;
-@property (strong, nonatomic) IBOutlet NSLayoutConstraint *height2;
-@property (strong, nonatomic) IBOutlet NSLayoutConstraint *height3;
-@property (strong, nonatomic) IBOutlet NSLayoutConstraint *height4;
-@property (strong, nonatomic) IBOutlet NSLayoutConstraint *height5;
-@property (strong, nonatomic) IBOutlet NSLayoutConstraint *height6;
-@property (strong, nonatomic) IBOutlet NSLayoutConstraint *height7;
-@property (strong, nonatomic) IBOutlet NSLayoutConstraint *height8;
-@property (strong, nonatomic) IBOutlet NSLayoutConstraint *height9;
-@property (strong, nonatomic) IBOutlet NSLayoutConstraint *height10;
-
 @property (strong, nonatomic) IBOutlet UILabel *tipsLabel;//提示label
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *tipsViewHeight;//提示View的身高
 @property (strong, nonatomic) id recruitStatus;//值为3时，可以点击tipsview
+
+@property (strong, nonatomic) IBOutlet UILabel *label_moutheMoney;
+@property (strong, nonatomic) IBOutlet UILabel *label_p2pMoney;
+
+@property (strong, nonatomic) IBOutlet UILabel *label_titleone;//上月您和好友投尊享标年化额
+@property (strong, nonatomic) IBOutlet UILabel *label_titletow;//本月尊享标年化佣金
+
+@property (strong, nonatomic) IBOutlet UILabel *label_titlethree;//P2P标年化佣金
+
+@property (strong, nonatomic) IBOutlet UIView *view_Up;
+
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *view_secondHeight;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *view_upHeight;
 
 @end
 
@@ -71,23 +71,6 @@
     // Do any additional setup after loading the view.
     [self addLeftButton];
     baseTitleLabel.text = @"邀请返利";
-    _height1.constant = 0.5;
-    _height2.constant = 0.5;
-    _height3.constant = 0.5;
-    _height4.constant = 0.5;
-    _height5.constant = 0.5;
-    _height6.constant = 0.5;
-    _height7.constant = 0.5;
-    _height8.constant = 0.5;
-    _height9.constant = 0.5;
-    _height10.constant = 0.5;
-    _yearRateViewHeight.constant = 0;
-    _yearRateAndShareHeight.constant = 0;
-    _yearLab1.hidden = YES;
-    _ownLab2.hidden = YES;
-    _friendLab3.hidden = YES;
-     _myAnnualRateLab.text = @"";
-    _CheckInstructionBtn.hidden = YES;
     
     [_shareBtn setBackgroundImage:[[UIImage imageNamed:@"btn_red"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:2.5] forState:UIControlStateNormal];
     [_shareBtn setBackgroundImage:[[UIImage imageNamed:@"btn_red_highlight"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:2.5] forState:UIControlStateHighlighted];
@@ -96,14 +79,9 @@
     [_copBtn setBackgroundImage:[[UIImage imageNamed:@"btn_bule_highlight"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:2.5] forState:UIControlStateHighlighted];
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(getMyInvestDataList) name:@"getMyInvestDataList" object:nil];
-    
+    _CheckInstructionBtn.hidden = YES;
     [self getMyInvestDataList];
     [self getAppSetting];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 //复制到剪切板
@@ -131,8 +109,8 @@
         [weakSelf shareDataWithPlatform:platformType withObject:messageObject];
     }];
 }
-- (void)shareDataWithPlatform:(UMSocialPlatformType)platformType withObject:(UMSocialMessageObject *)object
-{
+
+- (void)shareDataWithPlatform:(UMSocialPlatformType)platformType withObject:(UMSocialMessageObject *)object {
     UMSocialMessageObject *messageObject = object;
     UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:_shareTitle descr:_shareContent thumImage:_shareImage];
     [shareObject setWebpageUrl:_shareUrl];
@@ -154,13 +132,6 @@
     }];
 }
 
-//-(void)didSelectSocialPlatform:(NSString *)platformName withSocialData:(UMSocialData *)socialData
-//{
-//    if (platformName == UMShareToSina || platformName == UMShareToTencent) {
-//        socialData.shareText = [NSString stringWithFormat:@"%@%@",_shareContent,_shareUrl];
-//    }
-//}
-
 //进入我的返利列表
 - (IBAction)toMyRebateView:(id)sender {
     //我的返利
@@ -174,7 +145,7 @@
     [self.navigationController pushViewController:mv animated:YES];
 }
 
-//去设置 奖励年化佣金比例
+//去设置 奖励年化佣金比例（废弃）
 - (IBAction)toNextView:(id)sender {
     if ([_gcmLab.text hasPrefix:@"C"] && [_recCount intValue] == 0) {//无下线好友的C码客户
         [AuxiliaryFunc showToastMessage:@"您暂无好友，不可调整默认比例" withView:self.view];
@@ -196,14 +167,29 @@
     }
 }
 
+//佣金说明 ***qyy
+- (IBAction)clickCheckInstructionBtn:(id)sender {
+    //FullWebViewController *webController = [[FullWebViewController alloc] initWithWebUrl:ANNUALCOMMOSIONURL title:@"年化佣金小贴士"];
+    //webController.baseTitleType = @"specialUser";
+    //webController.sourceVc = @"feedBackVC";
+    //[self.navigationController pushViewController:webController animated:YES];
+    
+    UCFWebViewJavascriptBridgeLevel *subVC = [[UCFWebViewJavascriptBridgeLevel alloc]initWithNibName:@"UCFWebViewJavascriptBridgeLevel" bundle:nil];
+//    subVC.navTitle = @"年化佣金小贴士"
+    subVC.url      = ANNUALCOMMOSIONURL;//请求地址;
+    [self.navigationController pushViewController:subVC animated:YES];
+}
+
 #pragma mark - 请求网络及回调
 //获取我的投资列表
 - (void)getMyInvestDataList
 {
     NSString *userId = [[NSUserDefaults standardUserDefaults] objectForKey:UUID];
-    NSString *strParameters = [NSString stringWithFormat:@"userId=%@",userId];//5644
-//     NSString *strParameters = [NSString stringWithFormat:@"userId=5644"];
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXtagInviteRebate owner:self];
+    
+    NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys:userId,@"userId",nil];
+    //*******qinyy
+    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXtagInviteRebate owner:self signature:YES];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 }
 
 //获取分享各种信息
@@ -214,84 +200,85 @@
 
 //开始请求
 - (void)beginPost:(kSXTag)tag{
-    if (tag == kSXtagInviteRebate)
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    if (tag == kSXtagInviteRebate){
+        [GiFHUD show];
+    }
 }
 
 //请求成功及结果
 - (void)endPost:(id)result tag:(NSNumber *)tag
 {
-    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    [GiFHUD dismiss];
     NSMutableDictionary *dic = [result objectFromJSONString];
-    NSString *rstcode = dic[@"status"];
-    NSString *rsttext = dic[@"statusdes"];
     
-//    _totalCountLab.text = [NSString stringWithFormat:@"共%@笔回款记录",dic[@"pageData"][@"pagination"][@"totalCount"]];
+    //    _totalCountLab.text = [NSString stringWithFormat:@"共%@笔回款记录",dic[@"pageData"][@"pagination"][@"totalCount"]];
     DBLOG(@"邀请返利页：%@",dic);
     if (tag.intValue == kSXtagInviteRebate) {
+        NSString *rstcode = dic[@"ret"];
+        NSString *rsttext = dic[@"message"];
+        NSDictionary* dictemp = [[dic objectSafeForKey:@"data"]objectSafeForKey:@"inviteRebateBasicInfo"];
         if ([rstcode intValue] == 1) {
-            _recCount = dic[@"recCount"];//邀请注册人数
-            _sumCommLab.text = [NSString stringWithFormat:@"¥%@",[UCFToolsMehod AddComma:dic[@"sumComm"]]];//我的返利
-            _friendCountLab.text = [NSString stringWithFormat:@"邀请投资人数:%@人",dic[@"friendCount"]];//邀请投资人数
+            _recCount = dictemp[@"recCount"];//邀请注册人数
+            _sumCommLab.text = [NSString stringWithFormat:@"¥%@",[UCFToolsMehod AddComma:dictemp[@"sumComm"]]];//我的返利
+            _friendCountLab.text = [NSString stringWithFormat:@"邀请投资人数:%@人",dictemp[@"friendCount"]];//邀请投资人数
             _recCountLab.text = [NSString stringWithFormat:@"邀请注册人数:%@人",_recCount];//邀请注册人数
-            _gcmLab.text = dic[@"gcm"];//我的工场码
-            _recruitStatus = dic[@"recruitStatus"];
-            NSString *tipsStr = dic[@"recruitDes"];
+            _gcmLab.text = dictemp[@"gcm"];//我的工场码
+            _recruitStatus = dictemp[@"recruitStatus"];
+            _label_titleone.text = dictemp[@"enjoyAnnualAmountText"];
+            _label_titletow.text = dictemp[@"enjoyCommissionProportionText"];
+            _label_titlethree.text = dictemp[@"p2pYearCommissionText"];
+            
+            NSString *tipsStr = dictemp[@"recruitDes"];
             if (tipsStr.length > 0) {
                 _tipsLabel.text = tipsStr;
                 _tipsViewHeight.constant = 35;
             }
-
-            NSString *adviserAnnualRate = @"--";
-            BOOL userSwith = [[dic objectSafeForKey:@"isOpen"] boolValue]; //大开关
-            BOOL feeGateIsOpen = [[dic objectSafeForKey:@"feeGateIsOpen"] boolValue];//邀请返利A码用户 查看说明详情 开关
-            if(userSwith)
-            {   _myAnnualRateLab.text = @"我的年化佣金";
-                _lingView.hidden = NO;
-                if ([[dic allKeys] containsObject:@"annual_commission_proportion"] ) {
-                    if ([dic[@"annual_commission_proportion"] floatValue] > 0)
-                        _adviserAnnualRateLab.text = [NSString stringWithFormat:@"%@",dic[@"annual_commission_proportion"]];//我的年化佣金
-                }else {
-                    _adviserAnnualRateLab.text = adviserAnnualRate;
-                }
-                if ([_gcmLab.text hasPrefix:@"A"] && feeGateIsOpen ){
-                    _CheckInstructionBtn.hidden = NO;
-                }
-            }else{
-                _myAnnualRateLab.text = @"基础年化佣金";
+            //**************************qyy**************
+            NSString *adviserAnnualRate = @"¥0.00";
             
-                if ([[dic allKeys] containsObject:@"adviserAnnualRate"] ) {
-                    if ([dic[@"adviserAnnualRate"] intValue] > 0)
-                        _adviserAnnualRateLab.text = [NSString stringWithFormat:@"%@%%",dic[@"adviserAnnualRate"]];//基础年化佣金
-                }else {
+            if ([[dictemp allKeys] containsObject:@"enjoyAnnualAmount"] ) {
+                if ([dictemp[@"enjoyAnnualAmount"] floatValue] > 0){
+                    _adviserAnnualRateLab.text = [NSString stringWithFormat:@"¥%@",dictemp[@"enjoyAnnualAmount"]];//我的年化佣金
+                }else{
                     _adviserAnnualRateLab.text = adviserAnnualRate;
-                } 
-               NSString *yearRate = @"--";
-               if ([[dic allKeys] containsObject:@"yearRate"]) {
-                   if ([dic[@"yearRate"] length] > 0)
-                       _yearRateLab.text = [NSString stringWithFormat:@"%@%%",dic[@"yearRate"]];//奖励年化佣金
-               }else {
-                   _yearRateLab.text = yearRate;
-               }
-               _yearRateViewHeight.constant = 100;
-               _yearRateAndShareHeight.constant = 10;
-               
-               _ownRateLab.text = [NSString stringWithFormat:@"%@%%",dic[@"ownRate"]];//我的奖励比例
-               _friendRateLab.text = [NSString stringWithFormat:@"%@%%",dic[@"friendRate"]];//好友奖励比例
-               if ([_gcmLab.text hasPrefix:@"C"]){
-                   _heightView.constant = 44;
-                   _lingView.hidden = YES;
-               }
-                _yearLab1.hidden = NO;
-                _ownLab2.hidden = NO;
-                _friendLab3.hidden = NO;
+                }
+            }else {
+                _adviserAnnualRateLab.text = adviserAnnualRate;
             }
+            
+
+            BOOL feeGateIsOpen = [[dictemp objectSafeForKey:@"feeGateIsOpen"] boolValue];//邀请返利A码用户 查看说明详情 开:1 关:0
+            if ([_gcmLab.text hasPrefix:@"A"] && feeGateIsOpen){
+                _CheckInstructionBtn.hidden = NO;
+                _view_secondHeight.constant = 88;
+            }else{
+//                if (kIS_IOS8) {
+//                    _view_upHeight.active = YES;//因为需要根据文字多少，来控制view的高度，所以让约束复活，限制高度，调整高度。
+//                    _view_upHeight.constant = 0;
+//                }else{
+//                    _view_upHeight.constant = 0;//为iOS8之前的版本临时适配。
+                    
+                    NSDictionary* views = NSDictionaryOfVariableBindings(_view_Up);
+                    //设置高度
+                    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_view_Up(0)]" options:0 metrics:nil views:views]];
+
+//                }
+            }
+            
+            _label_moutheMoney.text = dictemp[@"enjoyDescribe"];//***本月尊享标描述
+            _label_p2pMoney.text = dictemp[@"p2pCommissionDescribe"];//***p2p尊享标描述
+            _ownRateLab.text = dictemp[@"enjoyCommissionProportion"];//本月尊享标年化佣金;
+            _friendRateLab.text = dictemp[@"p2pYearCommission"];//P2P标年化佣金;
+            [_ownRateLab setFont:[UIFont systemFontOfSize:15] string:@"%"];
+            [_friendRateLab setFont:[UIFont systemFontOfSize:15] string:@"%"];
         }else {
             [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
         }
         [[NSNotificationCenter defaultCenter]postNotificationName:REDALERTISHIDE object:@"5"];
     }
     else if (tag.intValue == kSXTagGetAppSetting){
+        //        NSString *rstcode = dic[@"status"];
+        //        NSString *rsttext = dic[@"statusdes"];
         NSArray *temArr = [NSArray arrayWithArray:dic[@"result"]];
         //1:红包URL   2：红包文字描述    3：工场码图片URL    4:工场码文字描述   5：红包标题  6：工场码标题
         for (NSDictionary *result in temArr) {
@@ -309,6 +296,7 @@
 //请求失败
 - (void)errorPost:(NSError*)err tag:(NSNumber*)tag
 {
+    [GiFHUD dismiss];
     if (tag.intValue == kSXtagInviteRebate) {
         [MBProgressHUD displayHudError:err.userInfo[@"NSLocalizedDescription"]];
     }
@@ -316,15 +304,8 @@
 }
 
 - (void)dealloc{
-//    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    //    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [[NSNotificationCenter defaultCenter]removeObserver:self name:@"getMyInvestDataList" object:nil];
-}
-
-- (IBAction)clickCheckInstructionBtn:(id)sender {
-    FullWebViewController *webController = [[FullWebViewController alloc] initWithWebUrl:ANNUALCOMMOSIONURL title:@"年化佣金小贴士"];
-    webController.baseTitleType = @"specialUser";
-    webController.sourceVc = @"feedBackVC";
-    [self.navigationController pushViewController:webController animated:YES];
 }
 
 @end

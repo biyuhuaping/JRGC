@@ -106,7 +106,7 @@
         headView.backgroundColor = UIColorWithRGB(0xebebee);
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 10, ScreenWidth, 44)];
         view.backgroundColor = [UIColor whiteColor];
-        UILabel *labelTitle = [[UILabel alloc] initWithFrame:CGRectMake(15, 15, ScreenWidth/2, 14)];
+        UILabel *labelTitle = [[UILabel alloc] initWithFrame:CGRectMake(15, 12, ScreenWidth/2,20)];
         labelTitle.text = self.investDetailModel.prdName;
         labelTitle.textColor = UIColorWithRGB(0x333333);
         labelTitle.backgroundColor = [UIColor clearColor];
