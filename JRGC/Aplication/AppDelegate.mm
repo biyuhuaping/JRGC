@@ -60,7 +60,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
 
-    
+    @"JOJO";
     //修改webView标识
     [self setWebViewUserAgent];
     [UCFSession sharedManager].delegate = self;
