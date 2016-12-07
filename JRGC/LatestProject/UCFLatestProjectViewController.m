@@ -23,7 +23,6 @@
 #import "AppDelegate.h"
 #import "UILabel+Misc.h"
 #import "PraiseAlert.h"
-#import "UMFeedbackViewController.h"
 #import "PromptView.h"
 #import "UCFWebViewJavascriptBridgeBanner.h"
 #import "UCFWebViewJavascriptBridgeBBS.h"
@@ -36,7 +35,7 @@
 
 #import "UCFProjectListController.h"        //项目列表
 
-@interface UCFLatestProjectViewController ()<InvestmentCellDelegate,FourOFourViewDelegate,CycleViewDelegate,PraiseAlertDelegate,PromptViewDelegate,homeButtonPressedCellDelegate>
+@interface UCFLatestProjectViewController ()<InvestmentCellDelegate,FourOFourViewDelegate,CycleViewDelegate,PromptViewDelegate,homeButtonPressedCellDelegate>
 {
     UIView *_clickView;
     BOOL _refreshHead;
@@ -151,21 +150,6 @@
         AppDelegate * app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
         [app.tabBarController setSelectedIndex:selectIndex];
     }
-}
-
-- (void)popYouMengFeedBackViewController
-{
-    UMFeedbackViewController *modalViewController = [[UMFeedbackViewController alloc] init];
-    modalViewController.modalStyle = YES;
-    for (UIView *view in modalViewController.view.subviews) {
-        if ([view isKindOfClass:[UIButton class]]) {
-            view.hidden = YES;
-        }
-        if (view.frame.origin.y == 62) {
-            view.hidden = YES;
-        }
-    }
-    [self presentViewController:modalViewController animated:YES completion:nil];
 }
 
 - (void)addDragBtn

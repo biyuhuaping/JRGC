@@ -15,21 +15,27 @@
 
 #import "UCFAboutUsViewController.h"
 #import "UCFFAQViewController.h"
-#import "UCFProblemFeedBackViewController.h"
-#import "UMFeedback.h"//反馈界面
-#import "UMFeedbackViewController.h"
 #import "Common.h"
 #import "UIImageView+NetImageView.h"
 #import "BeansFamilyViewController.h"
 #import "AppDelegate.h"
 #import "UCFWebViewJavascriptBridgeBBS.h"
 #import "UINavigationController+FDFullscreenPopGesture.h"
+
+//反馈界面
+#import <YWFeedbackFMWK/YWFeedbackKit.h>
+#import <YWFeedbackFMWK/YWFeedbackViewController.h>
+
+static NSString * const kAppKey = @"23511571";
+
 @interface UCFMoreViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UIView *moreBannerBgView;
 @property (weak, nonatomic) IBOutlet UIImageView *moreBanner;
 // 选项表数据
 @property (nonatomic, strong) NSMutableArray *itemsData;
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
+
+@property (nonatomic, strong) YWFeedbackKit *feedbackKit;
 
 @end
 
@@ -54,41 +60,9 @@
             [alert show];
         };
         UCFSettingItem *problemFeedback = [UCFSettingArrowItem itemWithIcon:nil title:@"问题反馈" destVcClass:nil];
-        __weak typeof(self) weakSelf = self;
-        problemFeedback.option = ^{
-            UMFeedbackViewController *modalViewController = [[UMFeedbackViewController alloc] init];
-            modalViewController.modalStyle = YES;
-            for (UIView *view in modalViewController.view.subviews) {
-                if ([view isKindOfClass:[UIButton class]]) {
-                    view.hidden = YES;
-                }
-                if (view.frame.origin.y == 62) {
-                    view.hidden = YES;
-                }
-            }
-            [weakSelf presentViewController:modalViewController animated:YES completion:nil];
- 
-        };
-        
-//        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"BeansFamilyViewController" bundle:nil];
-//        UIViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"beansFamily"];
-//        UCFSettingItem *beansFamily = [UCFSettingArrowItem itemWithIcon:nil title:@"工豆之家" destVcClass:[controller class]];
-        
-//        UCFSettingItem *faq = [UCFSettingArrowItem itemWithIcon:nil title:@"帮助中心" destVcClass:[UCFFAQViewController class]];
-//        UCFSettingItem *aboutUs = [UCFSettingArrowItem itemWithIcon:nil title:@"关于我们" destVcClass:[UCFAboutUsViewController class]];
-  
-        
         UCFSettingItem *faq = [UCFSettingArrowItem itemWithIcon:nil title:@"帮助中心" destStoryBoardStr:@"UCFMoreViewController" storyIdStr:@"faq"];
         UCFSettingItem *aboutUs = [UCFSettingArrowItem itemWithIcon:nil title:@"关于我们" destStoryBoardStr:@"UCFMoreViewController" storyIdStr:@"aboutus"];
-        //UCFSettingItem *beansFamily = [UCFSettingArrowItem itemWithIcon:nil title:@"工友之家" destStoryBoardStr:@"BeansFamilyStoryboard" storyIdStr:@"beansFamily"];
         UCFSettingItem *beansFamily = [UCFSettingArrowItem itemWithIcon:nil title:@"工友之家" destVcClass:[UCFWebViewJavascriptBridgeBBS class]];
-
-        //UCFBBSWebViewController *mallWeb = [[UCFBBSWebViewController alloc] initWithNibName:@"UCFBBSWebViewController" bundle:nil];
-        //mallWeb.baseTitleType = @"list";
-        //controller = mallWeb;
-        
-        
-        
         UCFSettingGroup *group1 = [[UCFSettingGroup alloc] init];
         group1.items = [[NSMutableArray alloc]initWithArray: @[contactUs, problemFeedback,faq]];
         
@@ -109,6 +83,35 @@
     self.navigationController.fd_prefersNavigationBarHidden = YES;
 
 //    [self getBanner];
+}
+
+/** 打开用户反馈页面 */
+- (void)openFeedbackViewController {
+    //  初始化方式,或者参考下方的`- (YWFeedbackKit *)feedbackKit`方法。
+    self.feedbackKit = [[YWFeedbackKit alloc] initWithAppKey:kAppKey];
+    NSString *userId = [[NSUserDefaults standardUserDefaults] valueForKey:UUID];
+    userId = userId?userId:@"";
+    /** 设置App自定义扩展反馈数据 */
+    self.feedbackKit.extInfo = @{@"loginTime":[[NSDate date] description],
+                                 @"visitPath":@"登陆->关于->反馈",
+                                 @"userid":userId,
+                                 @"应用自定义扩展信息":@"开发者可以根据需要设置不同的自定义信息，方便在反馈系统中查看"};
+    
+    __weak typeof(self) weakSelf = self;
+    [self.feedbackKit makeFeedbackViewControllerWithCompletionBlock:^(YWFeedbackViewController *viewController, NSError *error) {
+        if (viewController != nil) {
+            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:viewController];
+            [weakSelf presentViewController:nav animated:YES completion:nil];
+            
+            [viewController setCloseBlock:^(UIViewController *aParentController){
+                [aParentController dismissViewControllerAnimated:YES completion:nil];
+            }];
+        } else {
+            /** 使用自定义的方式抛出error时，此部分可以注释掉 */
+//            NSString *title = [error.userInfo objectForKey:@"msg"]?:@"接口调用失败，请保持网络通畅！";
+//            [[TWMessageBarManager sharedInstance] showMessageWithTitle:title description:nil type:TWMessageBarMessageTypeError];
+        }
+    }];
 }
 
 - (void)getToBack
@@ -256,6 +259,9 @@
 //            [AuxiliaryFunc showToastMessage:@"已复制到剪切板" withView:self.view];
 //            return;
 //        }
+        if (indexPath.section == 0 && indexPath.row == 1) {//用户反馈
+            [self openFeedbackViewController];
+        }
         if (indexPath.section == 1 && indexPath.row == 0) {
             UCFWebViewJavascriptBridgeBBS *vc = [[UCFWebViewJavascriptBridgeBBS alloc] initWithNibName:@"UCFWebViewJavascriptBridgeBBS" bundle:nil];
             vc.navTitle = @"工友之家";
