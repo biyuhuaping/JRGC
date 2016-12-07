@@ -38,7 +38,6 @@
 #import "PraiseAlert.h"
 #import "UCFLoginViewController.h"
 #import "UCFMessageCenterViewController.h"
-#import "UMFeedbackViewController.h"
 #import "PromptView.h"
 #import "UCFRegisterStepOneViewController.h"
 #import "UCFMoreViewController.h"
@@ -190,17 +189,17 @@
 #pragma mark PraiseAlertDelegate
 - (void)popYouMengFeedBackViewController
 {
-    UMFeedbackViewController *modalViewController = [[UMFeedbackViewController alloc] init];
-    modalViewController.modalStyle = YES;
-    for (UIView *view in modalViewController.view.subviews) {
-        if ([view isKindOfClass:[UIButton class]]) {
-            view.hidden = YES;
-        }
-        if (view.frame.origin.y == 62) {
-            view.hidden = YES;
-        }
-    }
-    [self presentViewController:modalViewController animated:YES completion:nil];
+//    UMFeedbackViewController *modalViewController = [[UMFeedbackViewController alloc] init];
+//    modalViewController.modalStyle = YES;
+//    for (UIView *view in modalViewController.view.subviews) {
+//        if ([view isKindOfClass:[UIButton class]]) {
+//            view.hidden = YES;
+//        }
+//        if (view.frame.origin.y == 62) {
+//            view.hidden = YES;
+//        }
+//    }
+//    [self presentViewController:modalViewController animated:YES completion:nil];
 }
 #pragma ------------------------
 - (void)viewWillAppear:(BOOL)animated

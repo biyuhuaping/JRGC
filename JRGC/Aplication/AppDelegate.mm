@@ -15,8 +15,6 @@
 #import "UMSocialWechatHandler.h"
 #import "UMSocialQQHandler.h"
 #import "MobClick.h"
-#import "UMFeedback.h"//友盟意见反馈
-#import "UMOpus.h"
 #import "UCFToolsMehod.h"
 #import "CalculatorView.h"
 #import "Common.h"
@@ -105,9 +103,6 @@
     [[UINavigationBar appearance] setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
     [[UINavigationBar appearance] setShadowImage:[[UIImage alloc] init]];
     [self setUMData];
-    //友盟意见反馈
-    [UMFeedback setAppkey:@"544b0681fd98c525ad0372f2"];
-    [UMOpus setAudioEnable:YES];//使用语音输入
     
     //初始化手势密码失败次数
     [[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithInt:5] forKey:@"nRetryTimesRemain"];
@@ -235,9 +230,6 @@
 }
 - (void)setUMData
 {
-    //友盟意见反馈
-    [UMFeedback setAppkey:@"544b0681fd98c525ad0372f2"];
-    [UMOpus setAudioEnable:YES];//使用语音输
     [MobClick startWithAppkey:@"544b0681fd98c525ad0372f2" reportPolicy:BATCH channelId:nil];
     NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     [MobClick setAppVersion:version];
