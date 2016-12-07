@@ -41,13 +41,6 @@ static NSString * const kAppKey = @"23511571";
 
 @implementation UCFMoreViewController
 
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    self.tabBarController.tabBar.hidden = YES;
-    self.navigationController.navigationBarHidden = NO;
-}
 // 初始化选项数组
 - (NSMutableArray *)itemsData
 {
