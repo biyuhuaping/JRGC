@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "JRGC/More/UCFMoreViewController.m"
-            timestampString = "502793279.497395"
+            filePath = "JRGC/Setting/coupon(&#x4f18;&#x60e0;&#x5238;)/UCFCouponViewController.m"
+            timestampString = "502871959.395634"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "93"
-            endingLineNumber = "93"
-            landmarkName = "-openFeedbackViewController"
+            startingLineNumber = "217"
+            endingLineNumber = "217"
+            landmarkName = "-listShowDidSelect:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

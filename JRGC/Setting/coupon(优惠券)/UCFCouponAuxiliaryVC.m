@@ -11,7 +11,6 @@
 
 #import "UCFCouponReturn.h"
 #import "UCFCouponInterest.h"
-#import "UCFCouponExchange.h"
 
 @interface UCFCouponAuxiliaryVC ()<UCFSelectedViewDelegate>
 
@@ -20,7 +19,6 @@
 
 @property (strong, nonatomic) UCFCouponReturn   *couponReturnView;      //返现券
 @property (strong, nonatomic) UCFCouponInterest *couponInterestView;    //返息券
-@property (strong, nonatomic) UCFCouponExchange *couponExchangeView;    //兑换券
 @property (strong, nonatomic) UIViewController  *currentViewController; //当前viewCotl
 
 @end
@@ -31,13 +29,7 @@
     [super viewDidLoad];
     [self addLeftButton];
     _currentSelectedState = 0;
-
-    //因为 status == 4 -> ‘赠送记录’页面只有‘返现券’、‘返息券’两列，所以加此判断
-    if ([_status intValue] != 4) {
-        self.itemSelectView.sectionTitles = @[@"返现券", @"返息券", @"兑换券"];
-    }else{
-        self.itemSelectView.sectionTitles = @[@"返现券", @"返息券"];
-    }
+    self.itemSelectView.sectionTitles = @[@"返现券", @"返息券"];
     self.itemSelectView.delegate = self;
     [self initViewController];
 }
@@ -59,14 +51,6 @@
     _couponInterestView.view.frame = CGRectMake(0, 44, ScreenWidth, ScreenHeight - 108);
     [self addChildViewController:_couponInterestView];
     
-    if ([_status intValue] != 4) {
-        //兑换券
-        _couponExchangeView = [[UCFCouponExchange alloc]initWithNibName:@"UCFCouponExchange" bundle:nil];
-        _couponExchangeView.status = _status;
-        _couponExchangeView.view.frame = CGRectMake(0, 44, ScreenWidth, ScreenHeight - 108);
-        [self addChildViewController:_couponExchangeView];
-    }
-    
     // 需要显示的子ViewController，要将其View添加到父View中
     [self.view addSubview:_couponReturnView.view];
     _currentViewController = _couponReturnView;
@@ -86,13 +70,6 @@
         case 1: {
             [self transitionFromViewController:_currentViewController toViewController:_couponInterestView duration:0.25 options:UIViewAnimationOptionCurveEaseInOut animations:nil completion:^(BOOL finished) {
                 self.currentViewController = _couponInterestView;
-            }];
-        }
-            break;
-            
-        case 2: {
-            [self transitionFromViewController:_currentViewController toViewController:_couponExchangeView duration:0.25 options:UIViewAnimationOptionCurveEaseInOut animations:nil completion:^(BOOL finished) {
-                self.currentViewController = _couponExchangeView;
             }];
         }
             break;
