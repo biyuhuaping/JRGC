@@ -519,8 +519,6 @@
 		FB21732F1AF2362800649AA0 /* UCFBackMoneyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FB21732E1AF2362800649AA0 /* UCFBackMoneyModel.m */; };
 		FB2858CC1BAAB07C000EAA71 /* UCFBackMoneyDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB2858CB1BAAB07C000EAA71 /* UCFBackMoneyDetailViewController.xib */; };
 		FB2858CE1BAAB583000EAA71 /* UCFMyInvestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB2858CD1BAAB583000EAA71 /* UCFMyInvestViewController.xib */; };
-		FB377F801CCE227600F5DAF2 /* UCFExchangeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FB377F7E1CCE227600F5DAF2 /* UCFExchangeCell.m */; };
-		FB377F811CCE227600F5DAF2 /* UCFExchangeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB377F7F1CCE227600F5DAF2 /* UCFExchangeCell.xib */; };
 		FB377F841CCE480400F5DAF2 /* UCFExchangeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FB377F831CCE480400F5DAF2 /* UCFExchangeModel.m */; };
 		FB3A80211CC612B8004B56C3 /* UCFCouponReturn.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3A801F1CC612B8004B56C3 /* UCFCouponReturn.m */; };
 		FB3A80221CC612B8004B56C3 /* UCFCouponReturn.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB3A80201CC612B8004B56C3 /* UCFCouponReturn.xib */; };
@@ -561,8 +559,6 @@
 		FB576C201BA7C98A005DC159 /* ReturnedMoneyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FB576C1E1BA7C98A005DC159 /* ReturnedMoneyCell.m */; };
 		FB576C211BA7C98A005DC159 /* ReturnedMoneyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB576C1F1BA7C98A005DC159 /* ReturnedMoneyCell.xib */; };
 		FB65C9541D82995800476E67 /* libGrowing.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FB65C9531D82995800476E67 /* libGrowing.a */; };
-		FB66F1FF1CC48DEE00614511 /* UCFCouponExchange.m in Sources */ = {isa = PBXBuildFile; fileRef = FB66F1FD1CC48DEE00614511 /* UCFCouponExchange.m */; };
-		FB66F2001CC48DEE00614511 /* UCFCouponExchange.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB66F1FE1CC48DEE00614511 /* UCFCouponExchange.xib */; };
 		FB72B08D1D74233E00F4DC8E /* BaseNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB72B08C1D74233E00F4DC8E /* BaseNavigationViewController.m */; };
 		FB7A903D1D48A917005D64A1 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FB7A903C1D48A917005D64A1 /* libicucore.tbd */; };
 		FB7A903F1D48A924005D64A1 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FB7A903E1D48A924005D64A1 /* libsqlite3.tbd */; };
@@ -1598,9 +1594,6 @@
 		FB21732E1AF2362800649AA0 /* UCFBackMoneyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFBackMoneyModel.m; sourceTree = "<group>"; };
 		FB2858CB1BAAB07C000EAA71 /* UCFBackMoneyDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFBackMoneyDetailViewController.xib; sourceTree = "<group>"; };
 		FB2858CD1BAAB583000EAA71 /* UCFMyInvestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFMyInvestViewController.xib; sourceTree = "<group>"; };
-		FB377F7D1CCE227600F5DAF2 /* UCFExchangeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFExchangeCell.h; sourceTree = "<group>"; };
-		FB377F7E1CCE227600F5DAF2 /* UCFExchangeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFExchangeCell.m; sourceTree = "<group>"; };
-		FB377F7F1CCE227600F5DAF2 /* UCFExchangeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFExchangeCell.xib; sourceTree = "<group>"; };
 		FB377F821CCE480400F5DAF2 /* UCFExchangeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFExchangeModel.h; sourceTree = "<group>"; };
 		FB377F831CCE480400F5DAF2 /* UCFExchangeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFExchangeModel.m; sourceTree = "<group>"; };
 		FB3A801E1CC612B8004B56C3 /* UCFCouponReturn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFCouponReturn.h; sourceTree = "<group>"; };
@@ -1654,9 +1647,6 @@
 		FB576C1F1BA7C98A005DC159 /* ReturnedMoneyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReturnedMoneyCell.xib; sourceTree = "<group>"; };
 		FB65C9521D82995800476E67 /* Growing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Growing.h; sourceTree = "<group>"; };
 		FB65C9531D82995800476E67 /* libGrowing.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGrowing.a; sourceTree = "<group>"; };
-		FB66F1FC1CC48DEE00614511 /* UCFCouponExchange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFCouponExchange.h; sourceTree = "<group>"; };
-		FB66F1FD1CC48DEE00614511 /* UCFCouponExchange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFCouponExchange.m; sourceTree = "<group>"; };
-		FB66F1FE1CC48DEE00614511 /* UCFCouponExchange.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFCouponExchange.xib; sourceTree = "<group>"; };
 		FB72B08B1D74233E00F4DC8E /* BaseNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseNavigationViewController.h; sourceTree = "<group>"; };
 		FB72B08C1D74233E00F4DC8E /* BaseNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseNavigationViewController.m; sourceTree = "<group>"; };
 		FB7A903C1D48A917005D64A1 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
@@ -2389,7 +2379,7 @@
 			children = (
 				746BBEA71AF8E8DA00EBA0E7 /* View */,
 				FBD49C771DD3502F00A9726A /* 可用优惠券/使用记录/过期记录 */,
-				FBD49C761DD34FD200A9726A /* 返现券、反息券、兑换券 */,
+				FBD49C761DD34FD200A9726A /* 返现券、反息券 */,
 				FB82B8CD1DD9DB880080C099 /* 赠送好友 */,
 			);
 			path = "coupon(优惠券)";
@@ -2522,9 +2512,6 @@
 				746BBEA81AF8E93E00EBA0E7 /* UCFCouponUseCell.h */,
 				746BBEA91AF8E93E00EBA0E7 /* UCFCouponUseCell.m */,
 				746BBEAA1AF8E93E00EBA0E7 /* UCFCouponUseCell.xib */,
-				FB377F7D1CCE227600F5DAF2 /* UCFExchangeCell.h */,
-				FB377F7E1CCE227600F5DAF2 /* UCFExchangeCell.m */,
-				FB377F7F1CCE227600F5DAF2 /* UCFExchangeCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -4611,7 +4598,7 @@
 			path = "ThirdLibs/UIView+Border(View圆角)";
 			sourceTree = "<group>";
 		};
-		FBD49C761DD34FD200A9726A /* 返现券、反息券、兑换券 */ = {
+		FBD49C761DD34FD200A9726A /* 返现券、反息券 */ = {
 			isa = PBXGroup;
 			children = (
 				FB3A801E1CC612B8004B56C3 /* UCFCouponReturn.h */,
@@ -4620,11 +4607,8 @@
 				FB572C091C7C3000000031F1 /* UCFCouponInterest.h */,
 				FB572C0A1C7C3000000031F1 /* UCFCouponInterest.m */,
 				FB572C0B1C7C3000000031F1 /* UCFCouponInterest.xib */,
-				FB66F1FC1CC48DEE00614511 /* UCFCouponExchange.h */,
-				FB66F1FD1CC48DEE00614511 /* UCFCouponExchange.m */,
-				FB66F1FE1CC48DEE00614511 /* UCFCouponExchange.xib */,
 			);
-			name = "返现券、反息券、兑换券";
+			name = "返现券、反息券";
 			sourceTree = "<group>";
 		};
 		FBD49C771DD3502F00A9726A /* 可用优惠券/使用记录/过期记录 */ = {
@@ -4898,12 +4882,10 @@
 				83EB21E31D758EE50069EF95 /* UCFCashRecordListViewController.xib in Resources */,
 				74FC22841BA6AB6700D1660A /* UCFCouponViewController.xib in Resources */,
 				E3C1179F1D40CFCC0053A052 /* UCFContributionValueViewController.xib in Resources */,
-				FB66F2001CC48DEE00614511 /* UCFCouponExchange.xib in Resources */,
 				741EB1871D596EF2006C885F /* UCFTableCellOne.xib in Resources */,
 				258291351DD31F0F00AB1FD2 /* UCFGivingPointCell.xib in Resources */,
 				FBC375871ADB9C6D009615EC /* HomeStoryboard.storyboard in Resources */,
 				FB5149531D64441F00C26E7B /* guideImage6_2.png in Resources */,
-				FB377F811CCE227600F5DAF2 /* UCFExchangeCell.xib in Resources */,
 				4A42BB2F1C27A7D20084AB08 /* NewCalculator.xib in Resources */,
 				E311A6641D90E7FC00C5483E /* UCFWebViewJavascriptBridgeMall.xib in Resources */,
 				840A79461C2A7C160059A946 /* UCFMessageCenterCell.xib in Resources */,
@@ -5150,7 +5132,6 @@
 				E3C1179A1D40CFCC0053A052 /* UCFContributionValueCell.m in Sources */,
 				E3A96B091CBF837C00E8884F /* UCFWorkPointsViewController.m in Sources */,
 				740AC63F1DDC2AAE0058BC60 /* UCFProjectListController.m in Sources */,
-				FB377F801CCE227600F5DAF2 /* UCFExchangeCell.m in Sources */,
 				7BCE02401B833B7000F9D73F /* IPDetector.m in Sources */,
 				25950EBB1D7FB6EC00E4CCBA /* CWCommon.m in Sources */,
 				7BC8AA1D1AD4C74200BF4660 /* UCFMyArrears.m in Sources */,
@@ -5353,7 +5334,6 @@
 				4A9A813C1DC89ED1007EB477 /* UMShareMenuSelectionView.m in Sources */,
 				4A42BB321C27AC7B0084AB08 /* NewCalculator.m in Sources */,
 				74EB80EC1AE4FCC40071621E /* SecurityCell.m in Sources */,
-				FB66F1FF1CC48DEE00614511 /* UCFCouponExchange.m in Sources */,
 				74931A311B1326FE00143424 /* OHAttributedLabel.m in Sources */,
 				74DBAC741D585FFD00F6F6B1 /* UCFTipButton.m in Sources */,
 				25CCDA9C1DDAE28C002C0F6D /* UCFLatesProjectTableViewCell.m in Sources */,

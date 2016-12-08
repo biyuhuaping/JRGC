@@ -7,7 +7,6 @@
 //
 
 #import "UCFWebViewJavascriptBridgeMallDetails.h"
-#import "UCFCouponExchange.h"
 #import "UCFWebViewJavascriptBridgeMall.h"
 @interface UCFWebViewJavascriptBridgeMallDetails ()
 
@@ -36,14 +35,6 @@
     [self.navigationController setNavigationBarHidden:YES animated:animated];
 }
 
-- (void)dealloc
-{
-    if (self.navigationController.viewControllers.count >0 && [[self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count - 1] isKindOfClass:[UCFCouponExchange class]])
-    {
-        [[NSNotificationCenter defaultCenter]postNotificationName:@"fromeCouponExchange" object:nil];
-    }
-    
-}
 - (void)jsClose
 {
     if (![[self.navigationController.viewControllers firstObject] isKindOfClass:[UCFWebViewJavascriptBridgeMall class]])

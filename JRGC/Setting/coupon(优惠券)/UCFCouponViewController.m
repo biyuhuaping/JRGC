@@ -9,22 +9,18 @@
 #import "UCFCouponViewController.h"
 #import "UCFSelectedView.h"
 #import "UCFCouponUseCell.h"
-#import "UCFExchangeCell.h"
 #import "UCFCouponModel.h"
 #import "UCFToolsMehod.h"
-#import "UCFCouponExchangeToFriends.h"
 #import "UCFCouponAuxiliaryVC.h"
 
 #import "UCFCouponReturn.h"
 #import "UCFCouponInterest.h"
-#import "UCFCouponExchange.h"
 
 #import "NZLabel.h"
 #import "UCFWebViewJavascriptBridgeMallDetails.h"
 
 /// 错误界面
 #import "UCFNoDataView.h"
-
 
 #import "JRGCCustomGroupCell.h"//***下拉弹框中的自定义cell
 #import "MLMOptionSelectView.h"//***下拉弹框
@@ -42,7 +38,6 @@
 
 @property (strong, nonatomic) UCFCouponReturn   *couponReturnView;      //返现券
 @property (strong, nonatomic) UCFCouponInterest *couponInterestView;    //返息券
-@property (strong, nonatomic) UCFCouponExchange *couponExchangeView;    //兑换券
 //@property (strong, nonatomic) UIViewController  *currentViewController; //当前viewCotl
 
 @property (strong, nonatomic) NSMutableArray *listArray;
@@ -60,14 +55,12 @@
     baseTitleLabel.text = @"优惠券";
     _currentSelectedState = 0;
 
-    self.itemSelectView.sectionTitles = @[@"返现券", @"返息券", @"兑换券"];
+    self.itemSelectView.sectionTitles = @[@"返现券", @"返息券"];
     self.itemSelectView.delegate = self;
     
     //下拉选框
     self.listArray = [[NSMutableArray alloc]initWithObjects:@"使用记录",@"过期记录",@"赠送记录", nil];
-    _cellViewShowList = [[MLMOptionSelectView alloc] //***初始化下拉弹框
-                         initOptionView];
-        
+    _cellViewShowList = [[MLMOptionSelectView alloc] initOptionView];//***初始化下拉弹框
 
     __weak typeof(self) weakSelfList = self;
     //***下拉弹框点击事件
@@ -112,13 +105,6 @@
     _couponInterestView.view.frame = CGRectMake(0, 44, ScreenWidth, ScreenHeight - 108);
     [self addChildViewController:_couponInterestView];
     
-    //兑换券
-    _couponExchangeView = [[UCFCouponExchange alloc]initWithNibName:@"UCFCouponExchange" bundle:nil];
-    _couponExchangeView.status = @"1";
-    _couponExchangeView.view.frame = CGRectMake(0, 44, ScreenWidth, ScreenHeight - 108);
-    [self addChildViewController:_couponExchangeView];
-    
-    
     switch (_segmentIndex) {
         default: {//返现券
             // 需要显示的子ViewController，要将其View添加到父View中
@@ -130,12 +116,6 @@
             // 需要显示的子ViewController，要将其View添加到父View中
             [self.view addSubview:_couponInterestView.view];
             _currentViewController = _couponInterestView;
-        }
-            break;
-        case 2: {//兑换券
-            // 需要显示的子ViewController，要将其View添加到父View中
-            [self.view addSubview:_couponExchangeView.view];
-            _currentViewController = _couponExchangeView;
         }
             break;
     }
@@ -178,13 +158,6 @@
         case 1: {
             [self transitionFromViewController:_currentViewController toViewController:_couponInterestView duration:0.25 options:UIViewAnimationOptionCurveEaseInOut animations:nil completion:^(BOOL finished) {
                 self.currentViewController = _couponInterestView;
-            }];
-        }
-            break;
-            
-        case 2: {
-            [self transitionFromViewController:_currentViewController toViewController:_couponExchangeView duration:0.25 options:UIViewAnimationOptionCurveEaseInOut animations:nil completion:^(BOOL finished) {
-                self.currentViewController = _couponExchangeView;
             }];
         }
             break;
