@@ -27,6 +27,7 @@
 
 @property (copy, nonatomic)   NSString *url;
 
+
 @property (nonatomic,strong)  WebViewJavascriptBridge* bridge;
 
 @property (nonatomic, copy) NSString *navTitle;
@@ -39,6 +40,10 @@
 
 @property (nonatomic, copy) NSString *requestLastUrl;
 
+@property (nonatomic,assign) BOOL isTabbarfrom; //是否是从tabarController进入的
+
+
+@property (assign, nonatomic) NSUInteger loadCount;
 
 ////------------------------------------------------------------------------------------qyy
 @property (strong, nonatomic) NSDictionary *webDataDic;//***由于输入交易密码和设置交易密码页面需要验签，通过该变量传入相关数据--qyy
@@ -53,4 +58,5 @@
 - (void)setErrorViewFrame:(CGRect)newFrame;//设置错误页面frame
 - (void)removeRefresh;//移除下拉刷新
 - (void)addErrorViewButton;
+-(void)addProgressView;
 @end
