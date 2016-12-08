@@ -28,6 +28,7 @@
     
     [self setErrorViewFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
     [self addErrorViewButton];
+     [self addProgressView];
     [self gotoURL:self.url];
 }
 
@@ -75,11 +76,13 @@
 #pragma mark - webViewDelegite
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
+    self.loadCount ++;
     DBLOG(@"webViewDidStartLoad");
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
+    self.loadCount --;
     DBLOG(@"webViewDidFinishLoad");
     [self.webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitUserSelect='none';"];
     // Disable callout
@@ -98,6 +101,7 @@
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
+    self.loadCount --;
     DBLOG(@"webViewdidFailLoadWithError");
     [self.webView.scrollView.header endRefreshing];
     if([error code] == NSURLErrorCancelled)
