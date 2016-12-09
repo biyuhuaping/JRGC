@@ -9,9 +9,9 @@
 #import <Foundation/Foundation.h>
 
 @interface UCFProjectLabel : NSObject
-@property (nonatomic, strong) NSNumber *Id;
+@property (nonatomic, copy) NSString *Id;
 @property (nonatomic, copy) NSString *labelName;
-@property (nonatomic, strong) NSNumber *labelPriority;
+@property (nonatomic, copy) NSString *labelPriority;
 @property (nonatomic, copy) NSString *labelPrompt;
 
 
