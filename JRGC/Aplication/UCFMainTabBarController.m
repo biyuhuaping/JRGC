@@ -173,12 +173,9 @@
         mallWeb.isTabbarfrom = YES;
         mallWeb.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
         UINavigationController *mallWebNaviController = [[UINavigationController alloc] initWithRootViewController:mallWeb];
-//        SecondViewController *vc1 = [[SecondViewController alloc]init];
-//        UITableViewController *settingVC = [[UITableViewController alloc]init];
-        self.hidesBottomBarWhenPushed = YES;
+//        self.hidesBottomBarWhenPushed = YES;
         [self presentViewController:mallWebNaviController animated:YES completion:nil];
-        
-        return YES;
+        return NO;
      }
     
     if ([topView isKindOfClass:[UCFSettingViewController class]] ) {
