@@ -36,11 +36,11 @@
 	</dict>
 	<dict>
 		<key>itemId</key>
-		<integer>4</integer>
+		<integer>12</integer>
 		<key>name</key>
-		<string>会员等级</string>
+		<string>游戏中心</string>
 		<key>image</key>
-		<string>uesr_icon_class</string>
+		<string>uesr_icon_game</string>
 	</dict>
 	<dict>
 		<key>itemId</key>
@@ -60,11 +60,11 @@
 	</dict>
 	<dict>
 		<key>itemId</key>
-		<integer>7</integer>
+		<integer>4</integer>
 		<key>name</key>
-		<string>工豆</string>
+		<string>会员等级</string>
 		<key>image</key>
-		<string>uesr_icon_bean</string>
+		<string>uesr_icon_class</string>
 	</dict>
 	<dict>
 		<key>itemId</key>
@@ -84,11 +84,11 @@
 	</dict>
 	<dict>
 		<key>itemId</key>
-		<integer>10</integer>
+		<integer>7</integer>
 		<key>name</key>
-		<string>刮刮卡</string>
+		<string>工豆</string>
 		<key>image</key>
-		<string>uesr_icon_scratchcard</string>
+		<string>uesr_icon_bean</string>
 	</dict>
 	<dict>
 		<key>itemId</key>
