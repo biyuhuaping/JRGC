@@ -159,6 +159,7 @@
             _imgView1.image = imaArr[0];
             self.iconW_01.constant = 18;
             self.iconW_02.constant = 0;
+            //
             self.iconW_03.constant = 0;
             self.iconW_04.constant = 0;
         }
