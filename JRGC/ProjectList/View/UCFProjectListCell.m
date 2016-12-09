@@ -127,7 +127,7 @@
     
     //贴 盾 固 灵
     NSMutableArray *imaArr = [NSMutableArray array];
-    if (model.platformSubsidyExpense > 0) {//贴
+    if (model.platformSubsidyExpense.intValue > 0) {//贴
         [imaArr addObject:[UIImage imageNamed:@"invest_icon_buletie"]];
     }
     if (model.guaranteeCompany.length > 0) {//盾
@@ -158,21 +158,27 @@
         case 1: {
             _imgView1.image = imaArr[0];
             self.iconW_01.constant = 18;
-            self.iconW_02.constant = self.iconW_03.constant = self.iconW_04.constant = 0;
+            self.iconW_02.constant = 0;
+            self.iconW_03.constant = 0;
+            self.iconW_04.constant = 0;
         }
             break;
         case 2: {
             _imgView1.image = imaArr[0];
             _imgView2.image = imaArr[1];
-            self.iconW_01.constant = self.iconW_02.constant = 18;
-            self.iconW_03.constant = self.iconW_04.constant = 0;
+            self.iconW_01.constant = 18;
+            self.iconW_02.constant = 18;
+            self.iconW_03.constant = 0;
+            self.iconW_04.constant = 0;
         }
             break;
         case 3: {
             _imgView1.image = imaArr[0];
             _imgView2.image = imaArr[1];
             _imgView3.image = imaArr[2];
-            self.iconW_01.constant = self.iconW_02.constant = self.iconW_03.constant = 18;
+            self.iconW_01.constant = 18;
+            self.iconW_02.constant = 18;
+            self.iconW_03.constant = 18;
             self.iconW_04.constant = 0;
         }
             break;
@@ -181,7 +187,10 @@
             _imgView2.image = imaArr[1];
             _imgView3.image = imaArr[2];
             _imgView4.image = imaArr[3];
-            self.iconW_01.constant = self.iconW_02.constant = self.iconW_03.constant = self.iconW_04.constant = 18;
+            self.iconW_01.constant = 18;
+            self.iconW_02.constant = 18;
+            self.iconW_03.constant = 18;
+            self.iconW_04.constant = 18;
         }
             break;
     }
