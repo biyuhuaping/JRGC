@@ -35,7 +35,7 @@
 #define SIGNATURETIME 30.0
 
 
-@interface UCFWebViewJavascriptBridgeController ()<UMSocialPlatformProvider>
+@interface UCFWebViewJavascriptBridgeController ()<UMSocialPlatformProvider,UIScrollViewDelegate>
 
 //@property (nonatomic, assign) JavascriptBridgeWebType webType;
 
@@ -209,7 +209,7 @@
     _webView.backgroundColor=[UIColor clearColor];
     _webView.scalesPageToFit = YES;
     self.webView.delegate = self;
-    
+    self.webView.scrollView.delegate  = self;
     for (UIView *subView in [_webView subviews])
     {
         if ([subView isKindOfClass:[UIScrollView class]])
@@ -512,7 +512,7 @@
     UIProgressView *progressView = [[UIProgressView alloc] initWithFrame:CGRectMake(0, 20, self.view.frame.size.width, 2)];
     //progressView.tintColor = WebViewNav_TintColor;
     progressView.tintColor = UIColorWithRGB(0xfd4d4c);
-    progressView.trackTintColor = [UIColor whiteColor];
+    progressView.trackTintColor = [UIColor clearColor];
     [self.view addSubview:progressView];
     [self.view insertSubview:self.webView belowSubview:progressView];
     self.progressView = progressView;
@@ -623,6 +623,23 @@
     else
     {
         return YES;
+    }
+}
+#pragma mark - scrollView代理
+-(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerat
+{
+    if (scrollView.contentOffset.y <= 0) {
+        scrollView.contentOffset = CGPointMake(0, 0);
+    }else if (scrollView.contentOffset.y > scrollView.contentSize.height - ScreenHeight){
+        scrollView.contentOffset = CGPointMake(0, scrollView.contentSize.height - ScreenHeight);
+    }
+}
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (scrollView.contentOffset.y <= 0) {
+        scrollView.contentOffset = CGPointMake(0, 0);
+    }else if (scrollView.contentOffset.y > scrollView.contentSize.height - ScreenHeight){
+        scrollView.contentOffset = CGPointMake(0, scrollView.contentSize.height - ScreenHeight);
     }
 }
 
