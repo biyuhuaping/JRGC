@@ -9,10 +9,6 @@
 #import "UCFWebViewJavascriptBridgeMall.h"
 #import "UCFWebViewJavascriptBridgeMallDetails.h"
 @interface UCFWebViewJavascriptBridgeMall ()
-{
-    
-}
-
 @end
 
 @implementation UCFWebViewJavascriptBridgeMall
@@ -26,8 +22,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [self setErrorViewFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - 44)];
-    [self addProgressView];
+    [self setErrorViewFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
+    [self addErrorViewButton];
+    [self addProgressView];//添加进度条
     [self gotoURL:self.url];
 }
 
@@ -39,6 +36,7 @@
 //只要是豆哥商城的都去掉导航栏
 - (void)viewWillAppear:(BOOL)animated {
     [self.navigationController setNavigationBarHidden:YES animated:animated];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 }
 
 
@@ -81,7 +79,16 @@
     self.errorView.hidden = NO;
     
 }
+- (void)refreshBackBtnClicked:(id)sender fatherView:(UIView *)fhView
+{
+    [self dismissViewControllerAnimated:YES completion:^{
+//        if(self.isTabbarfrom){
+//            AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+//            [app.tabBarController  setSelectedViewController:self.rootVc];
+//        }
+    }];
 
+}
 
 
 @end

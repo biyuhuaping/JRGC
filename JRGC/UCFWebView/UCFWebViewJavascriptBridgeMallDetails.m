@@ -27,13 +27,14 @@
     
     [self setErrorViewFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
     [self addErrorViewButton];
-     [self addProgressView];
+     [self addProgressView];//添加进度条
     [self gotoURL:self.url];
 }
 
 //只要是豆哥商城的都去掉导航栏
 - (void)viewWillAppear:(BOOL)animated {
     [self.navigationController setNavigationBarHidden:YES animated:animated];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 }
 
 - (void)jsClose
