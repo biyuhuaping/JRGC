@@ -61,11 +61,8 @@
     [self setController];    //初始化当前控制器的一些属性
 //    [self addRefresh];       //添加下拉刷新
     [self tableViewAddTouch];//去掉长按手势
-//    [self addProgressView];
     [self setWebView];       //初始化webView 并加入js
-    [self subErrorView];     //添加404页面
-    [self setErrorViewFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight+64)];
-    [self addErrorViewButton]; //添加404页面返回按钮
+    [self subErrorView];     //添加404页
 
 }
 /*- (void)viewDidDisappear:(BOOL)animated
@@ -108,7 +105,7 @@
 {
     //[self endRefresh];//***qyy
     //添加404页面
-    self.errorView = [[UCF404ErrorView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight) errorTitle:@"网络不给力呀\n点击屏幕重新加载"];
+    self.errorView = [[UCF404ErrorView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - 64) errorTitle:@"网络不给力呀\n点击屏幕重新加载"];
     self.errorView.hidden = YES;
     self.errorView.delegate = self;
     [self.webView addSubview:self.errorView];
