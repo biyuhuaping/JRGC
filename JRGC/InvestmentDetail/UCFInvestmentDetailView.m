@@ -199,7 +199,8 @@
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 10, ScreenWidth, 38)];
         view.backgroundColor = UIColorWithRGB(0xf7f7f7);
         UILabel *labelTitle = [[UILabel alloc] initWithFrame:CGRectMake(15, 12, ScreenWidth/2, 14)];
-        labelTitle.text = @"加息奖励";
+//        labelTitle.text = @"加息奖励";
+        labelTitle.text = @"vip专享";
         labelTitle.textColor = UIColorWithRGB(0x333333);
         labelTitle.backgroundColor = [UIColor clearColor];
         labelTitle.font = [UIFont systemFontOfSize:14];
@@ -601,10 +602,12 @@
         UILabel *titleLabel = (UILabel*)[cell.contentView viewWithTag:1001];
         UILabel *amountLabel = (UILabel*)[cell.contentView viewWithTag:1002];
         
-        NSArray *titleArr = @[@"年化加息奖励",@"返还工豆"];
+//        NSArray *titleArr = @[@"年化加息奖励",@"返还工豆"];
+        NSArray *titleArr = @[@"会员等级加息奖励",@"返还工豆"];
         titleLabel.text = [titleArr objectAtIndex:[indexPath row]];
         if ([indexPath row] == 0) {
             amountLabel.text = [NSString stringWithFormat:@"%@%%",self.investDetailModel.gradeIncreases];//self.investDetailModel.gradeIncreases
+            amountLabel.textColor = UIColorWithRGB(0xfd4d4c);
         } else if ([indexPath row] == 1) {
             amountLabel.text = [NSString stringWithFormat:@"¥%@",self.investDetailModel.returnBeans];//self.investDetailModel.returnBeans
         }
