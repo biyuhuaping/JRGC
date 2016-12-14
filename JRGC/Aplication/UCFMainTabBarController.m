@@ -20,6 +20,7 @@
 #import "UCFWebViewJavascriptBridgeMall.h"
 #import "UCFOldUserGuideViewController.h"
 #import "UCFProjectListController.h"
+
 @interface UCFMainTabBarController ()
 
 @property (strong, nonatomic) UCFLatestProjectViewController *LatestView;
@@ -68,7 +69,7 @@
     NSArray *tabbarHighlightArray = @[@"tabbar_icon_homepage_highlight.png",
                                    @"tabbar_icon_project_highlight.png",//tabbar_icon_transfer_highlight.png
                                    @"tabbar_icon_shop_highlight.png",
-                                   @"tabbar_icon_user_highlight.png"];
+                                      @"tabbar_icon_user_highlight.png"];
     
     UIViewController *controller = nil;
     for (int i=0; i<4; i++) {
@@ -107,7 +108,6 @@
                 controller = [[UCFSettingViewController alloc] initWithNibName:@"UCFSettingViewController" bundle:nil];
             }
                 break;
-                
             default:
                 controller = nil;
                 break;
@@ -163,6 +163,20 @@
     if (contrl.viewControllers.count != 0) {
       topView = [contrl.viewControllers objectAtIndex:0];
     }
+    if ([topView isKindOfClass:[UCFWebViewJavascriptBridgeMall class]]) {
+        UCFWebViewJavascriptBridgeMall *mallWeb = [[UCFWebViewJavascriptBridgeMall alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
+        mallWeb.url = MALLURL;
+        mallWeb.rootVc = tabBarController.viewControllers[tabBarController.selectedIndex];
+        mallWeb.isHideNavigationBar = YES;
+        [self useragent:mallWeb.webView];
+        mallWeb.navTitle = @"豆哥商城";
+        mallWeb.isTabbarfrom = YES;
+        mallWeb.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+        UINavigationController *mallWebNaviController = [[UINavigationController alloc] initWithRootViewController:mallWeb];
+//        self.hidesBottomBarWhenPushed = YES;
+        [self presentViewController:mallWebNaviController animated:YES completion:nil];
+        return NO;
+     }
     
     if ([topView isKindOfClass:[UCFSettingViewController class]] ) {
         if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {

@@ -125,4 +125,12 @@
     self.viewLineHeight.constant = 0;
 }
 
+-(void)getToBack{
+    if ([self.baseTitleType isEqualToString:@"appDelegate"]) {
+        [self dismissViewControllerAnimated:YES completion:^{
+            
+        } ];
+    }
+}
+
 @end

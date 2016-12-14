@@ -220,6 +220,7 @@
             [self resetGetCodeButtonStuats];
             _topUpLabelTextField.text = @"";
             _verificationCodeField.text = @"";
+//            _RechargeTokenStr = @"";
             
             
         } else if (buttonIndex == 1) {

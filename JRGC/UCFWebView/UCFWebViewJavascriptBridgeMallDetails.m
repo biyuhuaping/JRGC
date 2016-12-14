@@ -27,12 +27,14 @@
     
     [self setErrorViewFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
     [self addErrorViewButton];
+     [self addProgressView];//添加进度条
     [self gotoURL:self.url];
 }
 
 //只要是豆哥商城的都去掉导航栏
 - (void)viewWillAppear:(BOOL)animated {
     [self.navigationController setNavigationBarHidden:YES animated:animated];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 }
 
 - (void)jsClose
@@ -66,11 +68,13 @@
 #pragma mark - webViewDelegite
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
+    self.loadCount ++;
     DBLOG(@"webViewDidStartLoad");
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
+    self.loadCount --;
     DBLOG(@"webViewDidFinishLoad");
     [self.webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitUserSelect='none';"];
     // Disable callout
@@ -89,6 +93,7 @@
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
+    self.loadCount --;
     DBLOG(@"webViewdidFailLoadWithError");
     [self.webView.scrollView.header endRefreshing];
     if([error code] == NSURLErrorCancelled)

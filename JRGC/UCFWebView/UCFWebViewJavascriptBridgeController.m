@@ -35,7 +35,7 @@
 #define SIGNATURETIME 30.0
 
 
-@interface UCFWebViewJavascriptBridgeController ()<UMSocialPlatformProvider>
+@interface UCFWebViewJavascriptBridgeController ()<UMSocialPlatformProvider,UIScrollViewDelegate>
 
 //@property (nonatomic, assign) JavascriptBridgeWebType webType;
 
@@ -47,7 +47,7 @@
 
 @property (strong, nonatomic) NSString *shareUrl;
 
-
+@property (strong, nonatomic) UIProgressView *progressView; //webView的进度条
 
 
 @end
@@ -59,13 +59,12 @@
     // Do any additional setup after loading the view from its nib.
 
     [self setController];    //初始化当前控制器的一些属性
-    [self addRefresh];       //添加下拉刷新
+//    [self addRefresh];       //添加下拉刷新
     [self tableViewAddTouch];//去掉长按手势
     [self setWebView];       //初始化webView 并加入js
-    [self subErrorView];     //添加404页面
+    [self subErrorView];     //添加404页
 
 }
-
 /*- (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
@@ -106,7 +105,7 @@
 {
     //[self endRefresh];//***qyy
     //添加404页面
-    self.errorView = [[UCF404ErrorView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight -64 ) errorTitle:@"网络不给力呀\n点击屏幕重新加载"];
+    self.errorView = [[UCF404ErrorView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - 64) errorTitle:@"网络不给力呀\n点击屏幕重新加载"];
     self.errorView.hidden = YES;
     self.errorView.delegate = self;
     [self.webView addSubview:self.errorView];
@@ -207,7 +206,7 @@
     _webView.backgroundColor=[UIColor clearColor];
     _webView.scalesPageToFit = YES;
     self.webView.delegate = self;
-    
+    self.webView.scrollView.delegate  = self;
     for (UIView *subView in [_webView subviews])
     {
         if ([subView isKindOfClass:[UIScrollView class]])
@@ -505,17 +504,55 @@
         //NSLog(@"-1009");
     //}
 }
+-(void)addProgressView{
+    // 进度条
+    UIProgressView *progressView = [[UIProgressView alloc] initWithFrame:CGRectMake(0, 20, self.view.frame.size.width, 2)];
+    //progressView.tintColor = WebViewNav_TintColor;
+    progressView.tintColor = UIColorWithRGB(0xfd4d4c);
+    progressView.trackTintColor = [UIColor clearColor];
+    [self.view addSubview:progressView];
+    [self.view insertSubview:self.webView belowSubview:progressView];
+    self.progressView = progressView;
+    self.webView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+}
+// 计算webView进度条
+- (void)setLoadCount:(NSUInteger)loadCount {
+    _loadCount = loadCount;
+    DBLOG(@"loadCount----->>>>>%ld",loadCount);
+    if (_loadCount == 0) {
+       
+        [self.progressView setProgress:1 animated:YES];
+        [self performSelector:@selector(hideProgressView) withObject:nil afterDelay:0.25];
+    }else {
+        self.progressView.hidden = NO;
+        CGFloat oldP = self.progressView.progress;
+        CGFloat newP = (1.0 - oldP) / (_loadCount + 1) + oldP;
+        if (newP > 0.95) {
+            newP = 0.95;
+        }
+        DBLOG(@"newP----->>>>>%f",newP);
+        [self.progressView setProgress:newP animated:YES];
+        
+    }
+}
+-(void)hideProgressView{
+    [self.progressView setProgress:0 animated:NO];
+    self.progressView.hidden = YES;
+}
+
 #pragma mark - webViewDelegite
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
+    self.loadCount ++;
     DBLOG(@"webViewDidStartLoad");
-    [self beginRefresh];
+//    [self beginRefresh];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
+    self.loadCount --;
     DBLOG(@"webViewDidFinishLoad");
-    [self endRefresh];
+//    [self endRefresh];
     [self.webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitUserSelect='none';"];
     // Disable callout
     [self.webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitTouchCallout='none';"];
@@ -533,7 +570,8 @@
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
-    [self endRefresh];
+    self.loadCount --;
+//    [self endRefresh];
     DBLOG(@"webViewdidFailLoadWithError");
     [self.webView.scrollView.header endRefreshing];
     if([error code] == NSURLErrorCancelled)
@@ -584,6 +622,23 @@
         return YES;
     }
 }
+#pragma mark - scrollView代理
+-(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerat
+{
+    if (scrollView.contentOffset.y <= 0) {
+        scrollView.contentOffset = CGPointMake(0, 0);
+    }else if (scrollView.contentOffset.y > scrollView.contentSize.height - ScreenHeight){
+        scrollView.contentOffset = CGPointMake(0, scrollView.contentSize.height - ScreenHeight);
+    }
+}
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (scrollView.contentOffset.y <= 0) {
+        scrollView.contentOffset = CGPointMake(0, 0);
+    }else if (scrollView.contentOffset.y > scrollView.contentSize.height - ScreenHeight){
+        scrollView.contentOffset = CGPointMake(0, scrollView.contentSize.height - ScreenHeight);
+    }
+}
 
 #pragma mark - 跳转到登录
 
@@ -602,7 +657,15 @@
     UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
     [self presentViewController:loginNaviController animated:YES completion:nil];
 }
-
+//跳转到App 原生界面 规则从哪来回哪去
+-(void)jsGotoAppBackNative{
+    [self dismissViewControllerAnimated:YES completion:^{
+        if(self.isTabbarfrom){
+            AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+            [app.tabBarController  setSelectedViewController:self.rootVc];
+        }
+    }];
+}
 
 - (void)jsGoto:(NSDictionary *)dic
 {
@@ -838,6 +901,11 @@
         //[self.navigationController popViewControllerAnimated:YES];
         [self jsInvestSuc:YES];
     }
+    else if ([controllerName  isEqualToString:@"app_back_native"])//回到
+    {
+        //[self.navigationController popViewControllerAnimated:YES];
+        [self jsGotoAppBackNative];
+    }
     
     //----------------------------------------------------------------------------------------------------qyy
     else
@@ -867,9 +935,19 @@
 #pragma mark - 跳转到商城
 - (void)jsRedirectMall
 {
-    [self.navigationController popToRootViewControllerAnimated:NO];
-    AppDelegate *del = (AppDelegate *) [[UIApplication sharedApplication] delegate];
-    [del.tabBarController setSelectedIndex:2];
+//    [self.navigationController popToRootViewControllerAnimated:NO];
+//    AppDelegate *del = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+//    [del.tabBarController setSelectedIndex:2];
+    UCFWebViewJavascriptBridgeMall *mallWeb = [[UCFWebViewJavascriptBridgeMall alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
+    mallWeb.url = MALLURL;
+    mallWeb.rootVc = self;
+    mallWeb.isHideNavigationBar = YES;
+    //    [self useragent:mallWeb.webView];
+//    mallWeb.navTitle = @"豆哥商城";
+    mallWeb.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    UINavigationController *mallWebNaviController = [[UINavigationController alloc] initWithRootViewController:mallWeb];
+    self.hidesBottomBarWhenPushed = YES;
+    [self presentViewController:mallWebNaviController animated:YES completion:nil];
 }
 
 - (void)dealloc

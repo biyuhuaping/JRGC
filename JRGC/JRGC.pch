@@ -160,7 +160,7 @@ return shared##className; \
 #define BBSURL          @"http://bbs.9888.cn/appaction.php"
 #define MALLURL         @"http://mmall.9888.cn"
 #define LEVELURL        @"http://m.9888.cn/static/wap/user-level/index.html"  //会员等级
-#define GAMECENTERURL   @"http://game.9888.cn/index.php?r=polymerization/info&tag=tag1"  //游戏中心
+#define GAMECENTERURL   @"https://mmall.9888.cn/static/mall/game/index.html"  //游戏中心
 #define LEVELURLTEQUAN  @"http://m.9888.cn/mpwap/app/vipTeQuan/qryVipTeQuanDetail.shtml"  // 特权详情
 #define LEVELURLSHENGJI @"http://m.9888.cn/mpwap/app/upgradeStategy/index.shtml"  //升级攻略
 #define LEVELURLXIANGQING   @"http://m.9888.cn/mpwap/app/upgradeStategy/scoreDetail.shtml"  //工分详情
