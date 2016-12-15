@@ -390,7 +390,9 @@
 		83EB21E21D758EE50069EF95 /* UCFCashRecordListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83EB21E01D758EE50069EF95 /* UCFCashRecordListViewController.m */; };
 		83EB21E31D758EE50069EF95 /* UCFCashRecordListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83EB21E11D758EE50069EF95 /* UCFCashRecordListViewController.xib */; };
 		83F2D4ED1DCB3F950041F913 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83F2D4EB1DCB3F950041F913 /* Interface.storyboard */; };
+		83F2D4EF1DCB3F950041F913 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83F2D4EE1DCB3F950041F913 /* Assets.xcassets */; };
 		83F2D4F61DCB3F950041F913 /* JRGCWatch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 83F2D4F51DCB3F950041F913 /* JRGCWatch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		83F2D5061DCB3F950041F913 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83F2D5051DCB3F950041F913 /* Assets.xcassets */; };
 		83F2D50A1DCB3F950041F913 /* JRGCWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 83F2D4E91DCB3F940041F913 /* JRGCWatch.app */; };
 		83F2D5731DCB4A780041F913 /* UCFAssetListfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F2D5191DCB4A780041F913 /* UCFAssetListfaceController.m */; };
 		83F2D5741DCB4A780041F913 /* UCFAssetListRowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F2D51D1DCB4A780041F913 /* UCFAssetListRowCell.m */; };
@@ -1364,9 +1366,11 @@
 		83EB21E11D758EE50069EF95 /* UCFCashRecordListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFCashRecordListViewController.xib; sourceTree = "<group>"; };
 		83F2D4E91DCB3F940041F913 /* JRGCWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JRGCWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83F2D4EC1DCB3F950041F913 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		83F2D4EE1DCB3F950041F913 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		83F2D4F01DCB3F950041F913 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		83F2D4F51DCB3F950041F913 /* JRGCWatch Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "JRGCWatch Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		83F2D4FB1DCB3F950041F913 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
+		83F2D5051DCB3F950041F913 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		83F2D5071DCB3F950041F913 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		83F2D5131DCB44230041F913 /* JRGCWatch Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "JRGCWatch Extension.entitlements"; sourceTree = "<group>"; };
 		83F2D5141DCB44330041F913 /* JRGCWatch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JRGCWatch.entitlements; sourceTree = "<group>"; };
@@ -3610,6 +3614,7 @@
 			children = (
 				83F2D5141DCB44330041F913 /* JRGCWatch.entitlements */,
 				83F2D4EB1DCB3F950041F913 /* Interface.storyboard */,
+				83F2D4EE1DCB3F950041F913 /* Assets.xcassets */,
 				83F2D4F01DCB3F950041F913 /* Info.plist */,
 			);
 			path = JRGCWatch;
@@ -3623,6 +3628,7 @@
 				83F2D55C1DCB4A780041F913 /* Other */,
 				83F2D5641DCB4A780041F913 /* Tool */,
 				83F2D5131DCB44230041F913 /* JRGCWatch Extension.entitlements */,
+				83F2D5051DCB3F950041F913 /* Assets.xcassets */,
 				83F2D5071DCB3F950041F913 /* Info.plist */,
 				83F2D4FA1DCB3F950041F913 /* Supporting Files */,
 			);
@@ -4967,6 +4973,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83F2D4EF1DCB3F950041F913 /* Assets.xcassets in Resources */,
 				83F2D4ED1DCB3F950041F913 /* Interface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4976,6 +4983,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7472A8591DCC5FD10051F9BE /* Interface.storyboard in Resources */,
+				83F2D5061DCB3F950041F913 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
