@@ -41,7 +41,7 @@
 //***************qyy
 @property (strong, nonatomic) IBOutlet UILabel *yearLab1;//基础年化返利 标题 lab
 @property (strong, nonatomic) IBOutlet UILabel *friendLab3;//好友奖励比例
-@property (strong, nonatomic) IBOutlet UIButton *CheckInstructionBtn; //查看说明btn
+@property (strong, nonatomic) IBOutlet UIButton *CheckInstructionBtn; //佣金说明btn
 //***************qyy
 
 //调整横线高度
@@ -167,7 +167,7 @@
     }
 }
 
-//佣金说明 ***qyy
+//佣金说明
 - (IBAction)clickCheckInstructionBtn:(id)sender {
     //FullWebViewController *webController = [[FullWebViewController alloc] initWithWebUrl:ANNUALCOMMOSIONURL title:@"年化佣金小贴士"];
     //webController.baseTitleType = @"specialUser";
@@ -247,9 +247,10 @@
             }
             
 
-            BOOL feeGateIsOpen = [[dictemp objectSafeForKey:@"feeGateIsOpen"] boolValue];//邀请返利A码用户 查看说明详情 开:1 关:0
-            if ([_gcmLab.text hasPrefix:@"A"] && feeGateIsOpen){
-                _CheckInstructionBtn.hidden = NO;
+            BOOL feeGateIsOpen = [[dictemp objectSafeForKey:@"feeGateIsOpen"] boolValue];//邀请返利A码用户 查看佣金说明 开:1 关:0
+            _CheckInstructionBtn.hidden = !feeGateIsOpen;
+            
+            if ([_gcmLab.text hasPrefix:@"A"]){
                 _view_secondHeight.constant = 88;
             }else{
 //                if (kIS_IOS8) {
