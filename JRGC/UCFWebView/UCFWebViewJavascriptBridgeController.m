@@ -35,7 +35,7 @@
 #define SIGNATURETIME 30.0
 
 
-@interface UCFWebViewJavascriptBridgeController ()<UMSocialPlatformProvider,UIScrollViewDelegate>
+@interface UCFWebViewJavascriptBridgeController ()<UMSocialPlatformProvider,UIScrollViewDelegate,NSURLConnectionDataDelegate>
 
 //@property (nonatomic, assign) JavascriptBridgeWebType webType;
 
@@ -49,7 +49,7 @@
 
 @property (strong, nonatomic) UIProgressView *progressView; //webView的进度条
 
-
+//@property(nonatomic,strong)NSMutableData *dataM; //存储data数据
 @end
 
 @implementation UCFWebViewJavascriptBridgeController
@@ -1154,4 +1154,46 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+#pragma mark - NSURLSessionDataDelegate代理方法
+//- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task
+//didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge
+// completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential * __nullable credential))completionHandler
+//{
+//    NSLog(@"challenge = %@",challenge.protectionSpace.serverTrust);
+//    //判断是否是信任服务器证书
+//    if (challenge.protectionSpace.authenticationMethod ==NSURLAuthenticationMethodServerTrust)
+//    {
+//        //创建一个凭据对象
+//        NSURLCredential *credential = [NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust];
+//        //告诉服务器客户端信任证书
+//        [challenge.sender useCredential:credential forAuthenticationChallenge:challenge];
+//        
+//    }
+//}
+/**
+*  接收到服务器返回的数据时调用
+*/
+//- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
+//{
+//    NSLog(@"接收到的数据%zd",data.length);
+//    [self.dataM appendData:data];
+//}
+/**
+ *  请求完毕
+ */
+//- (void)connectionDidFinishLoading:(NSURLConnection *)connection
+//{
+//    NSString *html = [[NSString alloc]initWithData:self.dataM encoding:NSUTF8StringEncoding];
+//    
+//    NSLog(@"请求完毕");
+////    [self.webView loadHTMLString:html baseURL:self.url];
+//}
+//- (NSMutableData *)dataM
+//{
+//    if (_dataM == nil)
+//    {
+//        _dataM = [[NSMutableData alloc]init];
+//    }
+//    return _dataM;
+//}
 @end
