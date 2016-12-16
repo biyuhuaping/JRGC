@@ -35,7 +35,7 @@
 #define SIGNATURETIME 30.0
 
 
-@interface UCFWebViewJavascriptBridgeController ()<UMSocialPlatformProvider,UIScrollViewDelegate>
+@interface UCFWebViewJavascriptBridgeController ()<UMSocialPlatformProvider>
 
 //@property (nonatomic, assign) JavascriptBridgeWebType webType;
 
@@ -206,12 +206,12 @@
     _webView.backgroundColor=[UIColor clearColor];
     _webView.scalesPageToFit = YES;
     self.webView.delegate = self;
-    self.webView.scrollView.delegate  = self;
+//    self.webView.scrollView.delegate  = self; //在类中去实现该代理
     for (UIView *subView in [_webView subviews])
     {
         if ([subView isKindOfClass:[UIScrollView class]])
         {
-            //((UIScrollView *)subView).bounces = YES; //去掉UIWebView的底图
+//            ((UIScrollView *)subView).bounces = YES; //去掉UIWebView的底图
             [(UIScrollView *)subView setShowsVerticalScrollIndicator:NO]; //右侧的滚动条
             [(UIScrollView *)subView setShowsHorizontalScrollIndicator:NO]; //底下的滚动条
             for (UIView *scrollview in subView.subviews)
@@ -518,7 +518,7 @@
 // 计算webView进度条
 - (void)setLoadCount:(NSUInteger)loadCount {
     _loadCount = loadCount;
-    DBLOG(@"loadCount----->>>>>%ld",loadCount);
+    DBLOG(@"loadCount----->>>>>%d",loadCount);
     if (_loadCount == 0) {
        
         [self.progressView setProgress:1 animated:YES];
@@ -622,23 +622,7 @@
         return YES;
     }
 }
-#pragma mark - scrollView代理
--(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerat
-{
-    if (scrollView.contentOffset.y <= 0) {
-        scrollView.contentOffset = CGPointMake(0, 0);
-    }else if (scrollView.contentOffset.y > scrollView.contentSize.height - ScreenHeight){
-        scrollView.contentOffset = CGPointMake(0, scrollView.contentSize.height - ScreenHeight);
-    }
-}
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    if (scrollView.contentOffset.y <= 0) {
-        scrollView.contentOffset = CGPointMake(0, 0);
-    }else if (scrollView.contentOffset.y > scrollView.contentSize.height - ScreenHeight){
-        scrollView.contentOffset = CGPointMake(0, scrollView.contentSize.height - ScreenHeight);
-    }
-}
+
 
 #pragma mark - 跳转到登录
 
