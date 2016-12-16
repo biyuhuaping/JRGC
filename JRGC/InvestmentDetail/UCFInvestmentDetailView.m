@@ -198,7 +198,7 @@
         headView.backgroundColor = UIColorWithRGB(0xebebee);
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 10, ScreenWidth, 38)];
         view.backgroundColor = UIColorWithRGB(0xf7f7f7);
-        UILabel *labelTitle = [[UILabel alloc] initWithFrame:CGRectMake(15, 12, ScreenWidth/2, 14)];
+        UILabel *labelTitle = [[UILabel alloc] initWithFrame:CGRectMake(15, 9, ScreenWidth/2,20)];
 //        labelTitle.text = @"加息奖励";
         labelTitle.text = @"vip专享";
         labelTitle.textColor = UIColorWithRGB(0x333333);

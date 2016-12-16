@@ -8,7 +8,7 @@
 
 #import "UCFWebViewJavascriptBridgeMall.h"
 #import "UCFWebViewJavascriptBridgeMallDetails.h"
-@interface UCFWebViewJavascriptBridgeMall ()<UIScrollViewDelegate>
+@interface UCFWebViewJavascriptBridgeMall ()
 @end
 
 @implementation UCFWebViewJavascriptBridgeMall
@@ -26,8 +26,7 @@
     [self addErrorViewButton];
     [self addProgressView];//添加进度条
     [self gotoURL:self.url];
-    self.webView.scrollView.delegate = self;
-//    self.webView.scrollView.bounces = YES;
+    self.webView.scrollView.bounces = NO; 
 }
 
 - (void)didReceiveMemoryWarning {
@@ -91,22 +90,4 @@
     }];
 
 }
-#pragma mark - scrollView代理
--(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerat
-{
-    if (scrollView.contentOffset.y <= 0) {
-        scrollView.contentOffset = CGPointMake(0, 0);
-    }else if (scrollView.contentOffset.y > scrollView.contentSize.height - ScreenHeight){
-        scrollView.contentOffset = CGPointMake(0, scrollView.contentSize.height - ScreenHeight);
-    }
-}
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    if (scrollView.contentOffset.y <= 0) {
-        scrollView.contentOffset = CGPointMake(0, 0);
-    }else if (scrollView.contentOffset.y > scrollView.contentSize.height - ScreenHeight){
-        scrollView.contentOffset = CGPointMake(0, scrollView.contentSize.height - ScreenHeight);
-    }
-}
-
 @end

@@ -8,7 +8,7 @@
 
 #import "UCFWebViewJavascriptBridgeMallDetails.h"
 #import "UCFWebViewJavascriptBridgeMall.h"
-@interface UCFWebViewJavascriptBridgeMallDetails ()<UIScrollViewDelegate>
+@interface UCFWebViewJavascriptBridgeMallDetails ()
 
 @end
 
@@ -29,8 +29,7 @@
     [self addErrorViewButton];
      [self addProgressView];//添加进度条
     [self gotoURL:self.url];
-    self.webView.scrollView.delegate = self;
-//     self.webView.scrollView.bounces = YES;
+     self.webView.scrollView.bounces = NO;
 }
 
 //只要是豆哥商城的都去掉导航栏
@@ -106,22 +105,4 @@
     self.errorView.hidden = NO;
     
 }
-#pragma mark - scrollView代理
--(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerat
-{
-    if (scrollView.contentOffset.y <= 0) {
-        scrollView.contentOffset = CGPointMake(0, 0);
-    }else if (scrollView.contentOffset.y > scrollView.contentSize.height - ScreenHeight){
-        scrollView.contentOffset = CGPointMake(0, scrollView.contentSize.height - ScreenHeight);
-    }
-}
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    if (scrollView.contentOffset.y <= 0) {
-        scrollView.contentOffset = CGPointMake(0, 0);
-    }else if (scrollView.contentOffset.y > scrollView.contentSize.height - ScreenHeight){
-        scrollView.contentOffset = CGPointMake(0, scrollView.contentSize.height - ScreenHeight);
-    }
-}
-
 @end
