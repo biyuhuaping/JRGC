@@ -550,10 +550,10 @@
         [MBProgressHUD displayHudError:[NSString stringWithFormat:@"单笔充值金额不低于%@元",minRecharge]];
         return;
     }
-    if (_phoneTextField.text.length != 11) {
-        [MBProgressHUD displayHudError:@"请输入正确手机号"];
-        return;
-    }
+//    if (_phoneTextField.text.length != 11) { //服务器校验手机号格式
+//        [MBProgressHUD displayHudError:@"请输入正确手机号"];
+//        return;
+//    }
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     _getCodeButton.userInteractionEnabled = NO;
