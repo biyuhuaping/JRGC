@@ -37,7 +37,8 @@
 #define MODIFI_PWD          @"api/user/v2/retrievePwd.json"  //找回密码
 #define SEND_MESSAGE        @"newsendmessage"
 #define GET_MESSAGE_TICKET  @"newgetSendMessageTicket"  
-#define USER_LOGOUT         @"user/loginoutForCheck"
+//#define USER_LOGOUT         @"user/loginoutForCheck"
+#define USER_LOGOUT         @"user/loginout"
 #define DEALTRANSFERBID     @"newprdTransfer/dealTransferBidTwo"
 #define SAVETRANSFERDEALS   @"api/investTraClaims/v2/submitTender.json" //债权转让投资请求
 #define UPDATE_TEL          @"userInfor/updatetele"
