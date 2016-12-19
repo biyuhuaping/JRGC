@@ -474,7 +474,7 @@
             telTextField.textColor = UIColorWithRGB(0x333333);
             telTextField.font = [UIFont systemFontOfSize:14.0f];
             telTextField.returnKeyType = UIReturnKeyDone;
-            telTextField.keyboardType = UIKeyboardTypePhonePad;
+            telTextField.keyboardType = UIKeyboardTypeNumberPad;
             telTextField.placeholder = @"请输入银行预留手机号";
             [telTextField addTarget:self action:@selector(textfieldLength:) forControlEvents:UIControlEventEditingChanged];
 
@@ -494,7 +494,7 @@
             telTextField.textColor = UIColorWithRGB(0x333333);
             codeTextField.font = [UIFont systemFontOfSize:14.0f];
             codeTextField.returnKeyType = UIReturnKeyDone;
-            codeTextField.keyboardType = UIKeyboardTypeEmailAddress;
+            codeTextField.keyboardType = UIKeyboardTypeNumberPad;
             codeTextField.placeholder = @"请输入验证码";
             [inputBaseView1 addSubview:codeTextField];
             
@@ -550,10 +550,10 @@
         [MBProgressHUD displayHudError:[NSString stringWithFormat:@"单笔充值金额不低于%@元",minRecharge]];
         return;
     }
-    if (_phoneTextField.text.length != 11) {
-        [MBProgressHUD displayHudError:@"请输入正确手机号"];
-        return;
-    }
+//    if (_phoneTextField.text.length != 11) { //服务器校验手机号格式
+//        [MBProgressHUD displayHudError:@"请输入正确手机号"];
+//        return;
+//    }
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     _getCodeButton.userInteractionEnabled = NO;
@@ -753,7 +753,11 @@
             self.smsSerialNo =[NSString stringWithFormat:@"%@",dic[@"data"][@"smsSerialNo"]];
         } else {
             _getCodeButton.userInteractionEnabled = YES;
-            [MBProgressHUD displayHudError:dic[@"message"]];
+            NSString *messageStr = [dic objectSafeForKey:@"message"];
+            UIAlertView *alerView = [[UIAlertView alloc]initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+            [alerView show];
+            
+//            [MBProgressHUD displayHudError:dic[@"message"]];
         }
         if (dic == nil) {
             _getCodeButton.userInteractionEnabled = YES;
