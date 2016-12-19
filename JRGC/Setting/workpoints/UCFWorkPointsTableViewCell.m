@@ -31,7 +31,7 @@
 {
     if ([dic isKindOfClass:[NSDictionary class]] && [dic count] > 0) {
         
-        if([[dic objectSafeForKey:@"cashAmount"]intValue]>0)
+        if([[dic objectSafeForKey:@"cashAmount"]intValue]>=0)
         {
             self.lable_point.textColor = UIColorWithRGB(0xfd4c4c);
             self.lable_point.text= [NSString stringWithFormat:@"+%@",[dic objectSafeForKey:@"cashAmount"]];
