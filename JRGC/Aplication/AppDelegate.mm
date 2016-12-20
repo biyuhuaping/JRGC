@@ -60,9 +60,7 @@
     [self setWebViewUserAgent];
     [UCFSession sharedManager].delegate = self;
     [self checkUpdate];
-    [self checkIsShowHornor];
-    //[self getHealthData];
-//    return YES;
+
     // Override point for customization after application launch.
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
@@ -221,8 +219,6 @@
     [self checkJSPatchUpdate];
     [[UserInfoSingle sharedManager] getUserData];
 
-//    YWFPSLabel *aaa = [[YWFPSLabel alloc] init];
-//    [[[UIApplication sharedApplication] keyWindow] addSubview:aaa];
     return YES;
 }
 - (void)setUMData
@@ -723,6 +719,7 @@
                 }
             }
         }
+        [self checkIsShowHornor];
     } else if (tag.integerValue == kSXTagCalulateInstallNum){
         
     } else if (tag.integerValue == kSXTagUserLogout){
