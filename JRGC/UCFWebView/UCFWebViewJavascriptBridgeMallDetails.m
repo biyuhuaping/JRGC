@@ -55,12 +55,10 @@
 //        [self.navigationController.navigationBar setHidden:NO];
 //    }
 //}
-
-
-
-
-
-
+#pragma mark - 返回豆哥商城
+- (void)jsRedirectMall{
+    [self jsClose]; //这里是返回豆哥商城
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
