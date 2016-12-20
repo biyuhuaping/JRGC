@@ -1213,7 +1213,6 @@
         }
         else {
             UCFCouponViewController *cpCtl = [[UCFCouponViewController alloc] init];
-            cpCtl.title = @"";//优惠券
             [self.navigationController pushViewController:cpCtl animated:YES];
         }
     }
