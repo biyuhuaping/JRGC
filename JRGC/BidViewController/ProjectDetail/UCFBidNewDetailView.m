@@ -720,6 +720,9 @@
         holdTime = [NSString stringWithFormat:@"%@~%d",holdTime,anInteger];
     }else{
         holdTime = [NSString stringWithFormat:@"%d",anInteger];
+        if ([markTimeStr isEqualToString:@""]) { //如果repayPeriodText为空情况下
+            holdTime =  [dic objectSafeForKey:@"repayPeriod"];
+        }
     }
     NSMutableAttributedString *newMarkTimeStr = [UCFToolsMehod getAcolorfulStringWithText1:[NSString stringWithFormat:@"%@",holdTime] Color1:[UIColor whiteColor] Font1:[UIFont systemFontOfSize:30] Text2:dateString Color2:[UIColor whiteColor] Font2:[UIFont systemFontOfSize:15] AllText:[holdTime stringByAppendingString:dateString]];
     _markTimeLabel.attributedText = newMarkTimeStr;
