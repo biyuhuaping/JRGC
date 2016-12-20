@@ -215,7 +215,6 @@
      name:kJPFNetworkDidLoginNotification
      object:nil];
      */
-    //[self performSelector:@selector(checkSwitchState) withObject:nil afterDelay:2];
     [self checkJSPatchUpdate];
     [[UserInfoSingle sharedManager] getUserData];
 
@@ -444,13 +443,6 @@
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-//    [[NSNotificationCenter defaultCenter] postNotificationName:EndBrightnessTimer object:nil];
-
-//    CGFloat  preScreenLight  = [[NSUserDefaults standardUserDefaults] floatForKey:@"preScreenLight"];
-//    [[UIScreen mainScreen] setBrightness:preScreenLight];
-//    [[NSNotificationCenter defaultCenter] postNotificationName:ReduceBrightness object:nil];
-
-//    DLog(@"DidEnterBackground preScreenLight ==  %lf",preScreenLight);
 
     CalculatorView * view =  (CalculatorView * )[self.window viewWithTag:173924];;
     [view removeFromSuperview];
@@ -661,11 +653,7 @@
     [[NetworkModule sharedNetworkModule] newPostReq:nil tag:kSXTagIsShowHornor owner:self signature:NO];
 }
 
-- (void)checkSwitchState
-{
-    //请求开关状态
-    [[NetworkModule sharedNetworkModule] postReq:@"" tag:kSXTagLevelIsOpen owner:self];
-}
+
 - (void)checkUpdate
 {
     [[NetworkModule sharedNetworkModule] postReq:@"" tag:kSXTagKicItemList owner:self];
