@@ -926,12 +926,32 @@
     mallWeb.url = MALLURL;
     mallWeb.rootVc = self;
     mallWeb.isHideNavigationBar = YES;
-    //    [self useragent:mallWeb.webView];
+    [self useragent:mallWeb.webView];
 //    mallWeb.navTitle = @"豆哥商城";
     mallWeb.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     UINavigationController *mallWebNaviController = [[UINavigationController alloc] initWithRootViewController:mallWeb];
     self.hidesBottomBarWhenPushed = YES;
     [self presentViewController:mallWebNaviController animated:YES completion:nil];
+}
+- (void)useragent:(UIWebView *)webView
+{
+    //我的需求是不光要能更改user-agent，而且要保留WebView 原来的user-agent 信息，也就是说我需要在其上追加信息。在stackOverflow上搜集了多方答案，最终汇总的解决方案如下：
+    
+    //在启动时，比如在AppDelegate 中添加如下代码：
+    
+    //get the original user-agent of webview
+    //UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectZero];
+    NSString *oldAgent = [webView stringByEvaluatingJavaScriptFromString:@"navigator.userAgent"];
+    NSLog(@"old agent :%@", oldAgent);
+    
+    //add my info to the new agent
+    NSString *newAgent = [oldAgent stringByAppendingString:@"FinancialWorkshop"];
+    NSLog(@"new agent :%@", newAgent);
+    
+    //regist the new agent
+    NSDictionary *dictionnary = [[NSDictionary alloc] initWithObjectsAndKeys:newAgent, @"UserAgent", nil];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:dictionnary];
+    //这样，WebView在请求时的user-agent 就是我们设置的这个了，如果需要在WebView 使用过程中再次变更user-agent，则需要再通过这种方式修改user-agent， 然后再重新实例化一个WebView。
 }
 
 - (void)dealloc

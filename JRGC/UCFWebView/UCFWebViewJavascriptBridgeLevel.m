@@ -39,6 +39,10 @@
     UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
     [self presentViewController:loginNaviController animated:YES completion:nil];
 }
+- (void)jsSetTitle:(NSString *)title
+{
+    
+}
 /*
 #pragma mark - Navigation
 

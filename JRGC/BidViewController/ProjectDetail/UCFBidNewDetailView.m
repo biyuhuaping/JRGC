@@ -690,11 +690,11 @@
     NSString *annualRate = @"";
     NSString *markTimeStr= @"";
     if (_type == PROJECTDETAILTYPEBONDSRRANSFER) {
-        annualRate = dic[@"transfereeYearRate"];
+        annualRate = [dic objectSafeForKey:@"transfereeYearRate"];
         markTimeStr = [NSString stringWithFormat:@"%d天",[dic[@"lastDays"] intValue]];
     } else {
-        annualRate = dic[@"annualRate"];
-        markTimeStr = dic[@"repayPeriodtext"];
+        annualRate = [dic objectSafeForKey:@"annualRate"];
+        markTimeStr = [dic objectSafeForKey:@"repayPeriodtext"];
     }
     NSString *annualEarningsStr = [NSString stringWithFormat:@"%@%%",annualRate];
     NSMutableAttributedString *newannualEarningsStr = [UCFToolsMehod getAcolorfulStringWithText1:annualRate Color1:[UIColor whiteColor] Font1:[UIFont systemFontOfSize:30] Text2:@"%" Color2:[UIColor whiteColor] Font2:[UIFont systemFontOfSize:15] AllText:annualEarningsStr];
