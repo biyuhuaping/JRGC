@@ -168,8 +168,9 @@
 {
     if (alertView.tag == 10000) {
         if (buttonIndex == 1) {
-//            NSString *strParameters = [NSString stringWithFormat:@"userId=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
-//            [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagUserLogout owner:self];
+            NSString *strParameters = [NSString stringWithFormat:@"userId=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
+            [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagUserLogout owner:self];
+            
             [[UCFSession sharedManager] transformBackgroundWithUserInfo:nil withState:UCFSessionStateUserLogout];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"setDefaultViewData" object:nil];
             [[UserInfoSingle sharedManager] removeUserInfo];
@@ -187,7 +188,6 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:REGIST_JPUSH object:nil];
             //通知首页隐藏tipView
             [[NSNotificationCenter defaultCenter] postNotificationName:@"LatestProjectUpdate" object:nil];
-            [Common deleteCookies];
         }
 
     }else if(alertView.tag == 10005){

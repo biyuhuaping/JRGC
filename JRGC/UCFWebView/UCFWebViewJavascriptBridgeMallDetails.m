@@ -29,6 +29,7 @@
     [self addErrorViewButton];
      [self addProgressView];//添加进度条
     [self gotoURL:self.url];
+     self.webView.scrollView.bounces = NO;
 }
 
 //只要是豆哥商城的都去掉导航栏
@@ -104,5 +105,4 @@
     self.errorView.hidden = NO;
     
 }
-
 @end

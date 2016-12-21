@@ -156,7 +156,7 @@
             [self.lockVc openTouchidAlert];
         }
     }
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveLoginOut) name:SAFE_LOGIN_OUT object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveLoginOut) name:USER_LOGOUT object:nil];
 
     if (launchOptions) {
         NSDictionary* message = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
@@ -425,11 +425,22 @@
 {
     
 }
-//- (void)saveLoginOut
-//{
-//    NSString *strParameters = [NSString stringWithFormat:@"userId=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
-//    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagUserLogout owner:self];
-//}
+- (void)saveLoginOut
+{
+    NSString *strParameters = [NSString stringWithFormat:@"userId=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
+    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagUserLogout owner:self];
+    
+    [[UCFSession sharedManager] transformBackgroundWithUserInfo:nil withState:UCFSessionStateUserLogout];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"setDefaultViewData" object:nil];
+    [[UserInfoSingle sharedManager] removeUserInfo];
+    [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"changScale"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    //退出时清cookis
+    [Common deleteCookies];
+    [[NSNotificationCenter defaultCenter] postNotificationName:REGIST_JPUSH object:nil];
+    //通知首页隐藏tipView
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"LatestProjectUpdate" object:nil];
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
 //    恢复屏幕的亮度
@@ -715,16 +726,16 @@
     } else if (tag.integerValue == kSXTagCalulateInstallNum){
         
     } else if (tag.integerValue == kSXTagUserLogout){
-        [[UserInfoSingle sharedManager] removeUserInfo];
+//        [[UserInfoSingle sharedManager] removeUserInfo];
 //        [[NSUserDefaults standardUserDefaults] setValue:nil forKey:UUID];
 //        [[NSUserDefaults standardUserDefaults] setValue:nil forKey:TIME];
 //        [[NSUserDefaults standardUserDefaults] setValue:nil forKey:IDCARD_STATE];
 //        [[NSUserDefaults standardUserDefaults] setValue:nil forKey:BANKCARD_STATE];
         //        [[NSUserDefaults standardUserDefaults] setValue:nil forKey:GCODE];
-        [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"changScale"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
+//        [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"changScale"];
+//        [[NSUserDefaults standardUserDefaults] synchronize];
 //        [[NSNotificationCenter defaultCenter] postNotificationName:BACK_TO_LOGOUT object:nil];
-        [self.tabBarController setSelectedIndex:2];
+//        [self.tabBarController setSelectedIndex:2];
         //安全退出后弹出登录框
 //        UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
 //        UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];

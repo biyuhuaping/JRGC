@@ -26,6 +26,7 @@
     [self addErrorViewButton];
     [self addProgressView];//添加进度条
     [self gotoURL:self.url];
+    self.webView.scrollView.bounces = NO; 
 }
 
 - (void)didReceiveMemoryWarning {
@@ -89,6 +90,4 @@
     }];
 
 }
-
-
 @end
