@@ -5552,6 +5552,9 @@
 					"$(PROJECT_DIR)/JRGC/ThirdLibs/umeng_ios_social_sdk_6.0.2_arm64_custom/UMSocial/SocialLibraries/QQ",
 					"$(PROJECT_DIR)/JRGC/ThirdLibs/umeng_ios_social_sdk_6.0.2_arm64_custom/UMSocial/UMSocialSDK",
 					"$(PROJECT_DIR)/JRGC/ThirdLibs/BCFeedback",
+					"$(PROJECT_DIR)/JRGC/ThirdLibs/AliHotFix",
+					"$(PROJECT_DIR)/JRGC/ThirdLibs/AliHotFix/Pods/BCUserTrack",
+					"$(PROJECT_DIR)/JRGC/ThirdLibs/AliHotFix/Pods/UTDID",
 				);
 				GCC_INPUT_FILETYPE = sourcecode.c.objc;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/JRGC/JRGC.pch";
@@ -5610,6 +5613,9 @@
 					"$(PROJECT_DIR)/JRGC/ThirdLibs/umeng_ios_social_sdk_6.0.2_arm64_custom/UMSocial/SocialLibraries/QQ",
 					"$(PROJECT_DIR)/JRGC/ThirdLibs/umeng_ios_social_sdk_6.0.2_arm64_custom/UMSocial/UMSocialSDK",
 					"$(PROJECT_DIR)/JRGC/ThirdLibs/BCFeedback",
+					"$(PROJECT_DIR)/JRGC/ThirdLibs/AliHotFix",
+					"$(PROJECT_DIR)/JRGC/ThirdLibs/AliHotFix/Pods/BCUserTrack",
+					"$(PROJECT_DIR)/JRGC/ThirdLibs/AliHotFix/Pods/UTDID",
 				);
 				GCC_INPUT_FILETYPE = sourcecode.c.objc;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/JRGC/JRGC.pch";
