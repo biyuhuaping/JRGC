@@ -33,7 +33,6 @@
 #import "UITabBar+TabBarBadge.h"
 #import "UIImage+GIF.h"
 #import "JPUSHService.h"//极光推送
-#import <AliHotFix/AliHotFix.h>//阿里百川热修复
 #import "Growing.h"
 
 
@@ -61,7 +60,6 @@
     [self setWebViewUserAgent];
     [UCFSession sharedManager].delegate = self;
     [self checkUpdate];
-    [self AliHotFix];//阿里百川热修复
     
     // Override point for customization after application launch.
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -242,24 +240,6 @@
     [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_QQ appKey:@"1104610513"  appSecret:@"RUImkrSeNaT0lxkV" redirectURL:@"http://mobile.umeng.com/social"];
     //设置新浪的appKey和appSecret
     [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Sina appKey:@"2022554825"  appSecret:@"e496f6f9df690579441c9ae4e26be6e4" redirectURL:@"http://sns.whalecloud.com/sina2/callback"];
-}
-
-//阿里百川热修复
-- (void)AliHotFix{
-    NSString * secret = @"07f68d34e3497cc297586059040deb8a";
-    //RSA密钥:
-    NSString * privateKey = @"MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCIWGSlPCN/Lk1Ul2Y1Ny/J3En5/kTCT8yw6+FQFTSg0QhPTKyOXmO6ihuQT975Tu7Mq1sylxae1xMJYiuPSKZoN9OjgqXfMo0AzdmIundBPUExfFAtfdIg0B1GMCvmQOFS6jlrZc8kGFfHAtDQS73L3zuBOkM4iMk6KUtrHr3GfMmtl1COKZKxwatf0KNXf7Y8IYiYl6gya48pVXdrZj8OKjYqMYhDg2vImrJYbiF1K4bz2DRaIutcKPua5mug+i7JdALuXa4ZViMLWGA0cSTtUZ4wcQTn/QxzIAeHlmLABh3zzVO31vLHveziRDCq2GXFwhZFo1y+oVxjTNVM5iUzAgMBAAECggEAEFzTT0UlWWj8HM/Ck1ZZJNeMBTVvmQYsoXrdYlf5JeeQILwp5TgMreFPJ4V+U9sWK3fRDQQ20b8r6K9gXOSyG8W/X1sZfuy5IUSS+6atEyY/wamSkbMM2aVALiEv04UrxWCYnXvtXP6S4i5DUwwT7fiPUpXkZU99Hr6/704UJlK7mAq8gym1oTtmyvfzuWiC/wgPYRnQnd66xLrXHUbPDBv4I5IizisJA5ps2hWqqDOv3eMWFvkxRh0xA1sptHK5gaEbmkzGZ0xXgN0YKNGZNfzmK4qThkBHTnqcqQefUmrh8CPTSyOPPUx4KEMFOsK58aSRvhu/Qhntam0vge96cQKBgQDn8o1JubLLjgdMII87zxUfmST8aX4xHCzRUf8Llh7ORj3e+OplV6VJOgeSUzJj9HlvpX7u9nN1SyC77h+yntzhgWgiXOQNmZfHCXKl7sTxlfFmZAJ01N5mjerxDrXf80SMuYrxJYvczGGs7cv06LwFoJ2SEdN1+N3ZMbtdEzAtGQKBgQCWe+pWlDRaAPbhXfUvHP7/+yDLSrHnEQ74k+Asv7OPBZqA74T3wEoYUNB/iTQqKA2FCyLRHxhLWhcWSXZ0RuCIrB2LPkynTKZHhvjM/aYlOnfw9P8cqRz4SRI5FW4GEdoADp5Sl0czP4+ABUq2q+GRk04iZv8FV1m+OfqbHUNiKwKBgQCGP5EfVufxgScgHMhKabVkMJODtNthOVmHXdosrprt8SHmaFPijDQSig/P1W+ZAus2f6dUUDjLbsxneY/HJsPZkbjgCrvEU13RydodyHEdExhBlykEziBbY1DUbRs/n+HRQaL1qDGnfnQaTxh5jCsnZqtM3Bx0b7KX/3zehjigIQKBgHhyppa1+VExBGpOsjkLlG9/qjgNiWfRl5IPipdGuYn4ijo5fMxw9N2RkdEDGOXFOU0MJMoNgXyOl3wXQODA+mdqnBsfumsORulpdytcuueBbQ9Iigl+stloY1WdeXsSPtNc4AxrWWoDrfBiS/L6kIncxeVzWxwDVqmT7qrJOW4RAoGAcYe2GcQM0bD+KdqGBrlXcfhQLBn1K7rgNhYpLTswcZP1Jft4YDpWwzGAx9h6qTxdJvCQ2/6xGxkL5YL2uSY9JAjDmpWXJNf5t9H55w5/qiusKNRkTVu0u3X8xux6KoUoDvM7VW7XOFehJ5gl44ey0pBLHoLv3VeVg2I+XosXNLg=";
-    
-    //本地自签名证书RSA公钥
-    char rsaPublicDerBytes[]={48,-126,2,1,48,-126,1,106,2,9,0,-79,22,-42,-112,86,-37,19,-31,48,13,6,9,42,-122,72,-122,-9,13,1,1,5,5,0,48,69,49,11,48,9,6,3,85,4,6,19,2,65,85,49,19,48,17,6,3,85,4,8,19,10,83,111,109,101,45,83,116,97,116,101,49,33,48,31,6,3,85,4,10,19,24,73,110,116,101,114,110,101,116,32,87,105,100,103,105,116,115,32,80,116,121,32,76,116,100,48,30,23,13,49,54,49,48,51,49,48,56,51,53,48,51,90,23,13,50,54,49,48,50,57,48,56,51,53,48,51,90,48,69,49,11,48,9,6,3,85,4,6,19,2,65,85,49,19,48,17,6,3,85,4,8,19,10,83,111,109,101,45,83,116,97,116,101,49,33,48,31,6,3,85,4,10,19,24,73,110,116,101,114,110,101,116,32,87,105,100,103,105,116,115,32,80,116,121,32,76,116,100,48,-127,-97,48,13,6,9,42,-122,72,-122,-9,13,1,1,1,5,0,3,-127,-115,0,48,-127,-119,2,-127,-127,0,-42,18,-126,-97,-3,105,-91,72,24,-128,-121,-53,-39,-111,-65,-128,114,101,109,52,-26,-65,-18,-42,-88,13,77,-86,-118,77,-12,42,5,-14,-100,43,-104,-74,-84,39,-51,-81,-48,16,-28,25,-66,66,29,60,-17,-115,-62,30,-19,-120,-127,72,115,59,126,-83,90,87,119,-125,24,75,-65,-85,-118,-59,89,37,51,-121,4,-95,88,-77,-108,-7,5,-32,115,61,-119,14,44,-90,-40,98,-123,96,-53,-38,-101,-128,-72,78,3,-122,-14,-40,-107,-77,-45,12,81,-78,99,-86,-3,22,-97,95,-54,-24,-96,0,14,-2,-57,-25,-2,-81,51,79,2,3,1,0,1,48,13,6,9,42,-122,72,-122,-9,13,1,1,5,5,0,3,-127,-127,0,-64,-63,-100,-76,-35,115,73,-28,40,-63,126,39,-91,109,48,47,19,113,11,60,85,24,75,123,-81,-41,90,37,-59,-82,-3,115,122,-95,-98,-84,-60,8,-12,36,124,-25,14,105,-108,-108,96,-44,-40,-126,-118,7,57,114,-53,-125,5,-125,111,53,-38,-57,80,-19,14,126,-76,-42,64,-31,52,-21,-121,-100,-109,-53,42,-9,-92,18,-94,-19,-49,55,62,-106,127,23,-23,68,-67,26,-1,39,-29,78,-63,-14,118,-11,-94,61,-67,62,-89,-107,-54,-24,31,86,-47,-63,-28,59,-116,62,48,-112,47,101,-3,114,-13,79,13,4,79,11};
-    NSData *rsaPublicDerData = [NSData dataWithBytes:rsaPublicDerBytes length:sizeof(rsaPublicDerBytes)];
-    
-    //加解密补丁文件的密钥(该密钥已加密)
-    char aesEncryptKeyBytes[] = {-106,0,-127,-95,-109,-44,-87,84,110,6,-108,-74,-58,-115,37,1,-52,-96,-102,70,-112,73,126,113,-82,120,-72,75,31,-87,-126,75};
-    NSData *aesEncryptKeyData = [NSData dataWithBytes:aesEncryptKeyBytes length:sizeof(aesEncryptKeyBytes)];
-    
-    // 百川平台申请的appid,secret,rsaKey.以及本地打包自签证书的RSA公钥&本地加密patch密钥
-    [AliHotFix startWithAppID:@"76676-2" secret:secret privateKey:privateKey publicKey:rsaPublicDerData encryptAESKey:aesEncryptKeyData];
 }
 
 //检测JSPatch 是否有更新
@@ -1014,9 +994,3 @@
 }
 
 @end
-//@implementation NSURLRequest(DataController)
-//+ (BOOL)allowsAnyHTTPSCertificateForHost:(NSString *)host
-//{
-//    return YES;
-//}
-//@end

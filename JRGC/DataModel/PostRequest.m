@@ -109,7 +109,6 @@
 
     [_request appendPostData:sourceData];
     [_request setDelegate:delegate];
-    [_request setValidatesSecureCertificate:NO];
     postStatus = kPostStatusBeging;
     if(self.owner)
         [self.owner beginPost:self.sxTag];

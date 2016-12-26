@@ -32,6 +32,7 @@
 @property (nonatomic, assign)NSInteger          listType;                       //0为返现券 1为反利息券
 @property (nonatomic, strong)NSDictionary       *bidDataDict;                   //投标页数据源
 @property (nonatomic, copy)NSString             *backInterestRate;              //选中返息券利息
+@property (nonatomic, assign) double            occupyRate;                     //按月/按季等额还款资金占用率
 @property (nonatomic, weak)UCFPurchaseBidViewController     *superViewController;
 - (void)reloadView;
 @end
