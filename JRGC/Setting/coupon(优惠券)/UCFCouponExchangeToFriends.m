@@ -12,6 +12,7 @@
 #import "UCFNoDataView.h"
 #import "UCFCouponUseCell.h"
 #import "UCFCouponViewController.h"
+
 @interface UCFCouponExchangeToFriends ()
 
 @property (strong, nonatomic) IBOutlet UIView *headView;
@@ -19,6 +20,9 @@
 @property (nonatomic, strong) UCFNoDataView *noDataView;
 @property (nonatomic, strong) NSString *targetUserId;//目标id
 @property int page;
+
+@property (strong, nonatomic) IBOutlet UITextField *textField;
+@property (strong, nonatomic) IBOutlet UIButton *searchBut;
 
 @end
 
@@ -52,9 +56,23 @@
     [self.myTableView addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(requestFriendListRefresh)];
     self.myTableView.footer.hidden = YES;
     [self.myTableView.header beginRefreshing];
+    
+    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
+    _textField.leftView = view;
+    _textField.leftViewMode = UITextFieldViewModeAlways; //此处用来设置leftview现实时机
 }
 
-
+//搜索
+- (IBAction)searchAction:(id)sender {
+    //请求接口
+    
+    //返回数据，刷新table
+    if(1){//有数据
+        //显示列表
+    } else{
+        //显示 无数据
+    }
+}
 
 #pragma mark - 请求处理
 //好友列表

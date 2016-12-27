@@ -60,7 +60,7 @@
     [self setWebViewUserAgent];
     [UCFSession sharedManager].delegate = self;
     [self checkUpdate];
-
+    
     // Override point for customization after application launch.
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
@@ -220,6 +220,8 @@
 
     return YES;
 }
+
+//友盟
 - (void)setUMData
 {
     [MobClick startWithAppkey:@"544b0681fd98c525ad0372f2" reportPolicy:BATCH channelId:nil];
@@ -239,10 +241,10 @@
     //设置新浪的appKey和appSecret
     [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Sina appKey:@"2022554825"  appSecret:@"e496f6f9df690579441c9ae4e26be6e4" redirectURL:@"http://sns.whalecloud.com/sina2/callback"];
 }
+
 //检测JSPatch 是否有更新
 - (void)checkJSPatchUpdate
 {
-    
     if(EnvironmentConfiguration == 1 || EnvironmentConfiguration == 2) { //线上或者灰度
          [JSPatch startWithAppKey:JSPATCH_APPKEY];
          [JSPatch setupRSAPublicKey:JSPATCH_RSA_PUBLICKEY];
@@ -992,9 +994,3 @@
 }
 
 @end
-//@implementation NSURLRequest(DataController)
-//+ (BOOL)allowsAnyHTTPSCertificateForHost:(NSString *)host
-//{
-//    return YES;
-//}
-//@end
