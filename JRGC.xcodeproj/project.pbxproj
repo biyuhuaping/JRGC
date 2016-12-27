@@ -465,7 +465,6 @@
 		E37086BF1D61BBB10041D293 /* DBCellConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = E37086BE1D61BBB10041D293 /* DBCellConfig.m */; };
 		E37086C71D61E3030041D293 /* UCFOldUserGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E37086C21D61E3030041D293 /* UCFOldUserGuideViewController.m */; };
 		E37086C81D61E3030041D293 /* UCFOldUserGuideViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E37086C31D61E3030041D293 /* UCFOldUserGuideViewController.xib */; };
-		E38039661DE5682200C031FF /* YWFPSLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38039651DE5682200C031FF /* YWFPSLabel.swift */; };
 		E3A6A4B31CC71D03003A3FED /* NSString+URL.m in Sources */ = {isa = PBXBuildFile; fileRef = E3A6A4B21CC71D03003A3FED /* NSString+URL.m */; };
 		E3A96B091CBF837C00E8884F /* UCFWorkPointsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3A96B071CBF837C00E8884F /* UCFWorkPointsViewController.m */; };
 		E3A96B0A1CBF837C00E8884F /* UCFWorkPointsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3A96B081CBF837C00E8884F /* UCFWorkPointsViewController.xib */; };
@@ -1504,7 +1503,6 @@
 		E37086C21D61E3030041D293 /* UCFOldUserGuideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFOldUserGuideViewController.m; sourceTree = "<group>"; };
 		E37086C31D61E3030041D293 /* UCFOldUserGuideViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFOldUserGuideViewController.xib; sourceTree = "<group>"; };
 		E38039641DE5682100C031FF /* JRGC-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JRGC-Bridging-Header.h"; sourceTree = "<group>"; };
-		E38039651DE5682200C031FF /* YWFPSLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YWFPSLabel.swift; sourceTree = "<group>"; };
 		E3A6A4B11CC71D03003A3FED /* NSString+URL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URL.h"; sourceTree = "<group>"; };
 		E3A6A4B21CC71D03003A3FED /* NSString+URL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+URL.m"; sourceTree = "<group>"; };
 		E3A96B061CBF837C00E8884F /* UCFWorkPointsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFWorkPointsViewController.h; sourceTree = "<group>"; };
@@ -3584,7 +3582,6 @@
 				FB55552F1BCE37570013894F /* UMAnalytics_Sdk_3.4.6 */,
 				7BCE023E1B833B7000F9D73F /* IPDetector.h */,
 				7BCE023F1B833B7000F9D73F /* IPDetector.m */,
-				E38039651DE5682200C031FF /* YWFPSLabel.swift */,
 				4AD6B4C31B32D33E00D94140 /* CycleView */,
 				74931A151B1326FE00143424 /* OHAttributedLabel */,
 				74931A111B1326B400143424 /* FisrtLetterAndOrder */,
@@ -5348,7 +5345,6 @@
 				E320200E1CC4BAD70065579C /* WebViewJavascriptBridgeBase.m in Sources */,
 				7BCE02371AC915720084C15C /* NSData+Base64.m in Sources */,
 				747AAEBB1AEF89F6007A518F /* FundsDetailModel.m in Sources */,
-				E38039661DE5682200C031FF /* YWFPSLabel.swift in Sources */,
 				E320200D1CC4BAD70065579C /* WebViewJavascriptBridge_JS.m in Sources */,
 				7BFE3E861AC55C98002A53A2 /* main.m in Sources */,
 				FBB685821AE4A76800F222B6 /* MJRefreshConst.m in Sources */,
@@ -5656,7 +5652,6 @@
 		7BFE3EAA1AC55C98002A53A2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -5678,7 +5673,6 @@
 		7BFE3EAB1AC55C98002A53A2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
