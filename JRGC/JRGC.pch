@@ -157,28 +157,28 @@ return shared##className; \
 #define IS_RELOADE_REQUEST @"isReloadRequest"  //是否重新加载因验签失效造成失败的接口
 
 
-#define BBSURL          @"http://bbs.9888.cn/appaction.php"
-#define MALLURL         @"http://mmall.9888.cn"
-#define LEVELURL        @"http://m.9888.cn/static/wap/user-level/index.html"  //会员等级
-#define GAMECENTERURL   @"http://mmall.9888.cn/static/mall/game/index.html"  //游戏中心
-#define LEVELURLTEQUAN  @"http://m.9888.cn/mpwap/app/vipTeQuan/qryVipTeQuanDetail.shtml"  // 特权详情
-#define LEVELURLSHENGJI @"http://m.9888.cn/mpwap/app/upgradeStategy/index.shtml"  //升级攻略
-#define LEVELURLXIANGQING   @"http://m.9888.cn/mpwap/app/upgradeStategy/scoreDetail.shtml"  //工分详情
-#define CMS_BANNER          @"http://fore.9888.cn/cms/api/appbanner_obj.php?key=0ca175b9c0f726a831d895e&p=10"//正式
-#define ANNUALCOMMOSIONURL @"http://m.9888.cn/static/wap/topic-annual-commision/index.html"//佣金返利
+#define BBSURL          @"https://bbs.9888.cn/appaction.php"
+#define MALLURL         @"https://mmall.9888.cn"
+#define LEVELURL        @"https://m.9888.cn/static/wap/user-level/index.html"  //会员等级
+#define GAMECENTERURL   @"https://mmall.9888.cn/static/mall/game/index.html"  //游戏中心
+#define LEVELURLTEQUAN  @"https://m.9888.cn/mpwap/app/vipTeQuan/qryVipTeQuanDetail.shtml"  // 特权详情
+#define LEVELURLSHENGJI @"https://m.9888.cn/mpwap/app/upgradeStategy/index.shtml"  //升级攻略
+#define LEVELURLXIANGQING   @"https://m.9888.cn/mpwap/app/upgradeStategy/scoreDetail.shtml"  //工分详情
+#define CMS_BANNER          @"https://fore.9888.cn/cms/api/appbanner_obj.php?key=0ca175b9c0f726a831d895e&p=10"//正式
+#define ANNUALCOMMOSIONURL @"https://m.9888.cn/static/wap/topic-annual-commision/index.html"//佣金返利
 //各种H5协议页面地址
-#define TRUSTEESHIP     @"http://m.9888.cn/static/wap/protocol-trusteeship/index.html"      //1.资管三方协议
-#define COUNSELING      @"http://m.9888.cn/static/wap/protocol-counseling/index.html"       //2.信息咨询服务协议
-#define RECHARGERUL     @"http://m.9888.cn/static/wap/protocol-special-recharge/index.html" //3、特殊用户充值提示信息
-#define CASHWIRHDRAWH5  @"http://m.9888.cn/static/wap/protocol-special-cash/index.html"     //4、特殊用户提现提示信息H5
-#define REMINDBANKH5    @"http://m.9888.cn/static/wap/protocol-special-bind/index.html"     //5、特殊用户绑卡提示信息H5
-#define BANKDEPOSITORYACCOUNTURL    @"http://m.9888.cn/static/wap/topic-hui-shang/index.html" //6、微商银行专题页面url
-#define HSAccountIllustrationURL    @"http://m.9888.cn/mpwap/bankAccountExplain.html"       //徽商存管账户说明
-#define HELPCENTERURL @"http://m.9888.cn/static/wap/faq/index.html"//帮助中心Url
+#define TRUSTEESHIP     @"https://m.9888.cn/static/wap/protocol-trusteeship/index.html"      //1.资管三方协议
+#define COUNSELING      @"https://m.9888.cn/static/wap/protocol-counseling/index.html"       //2.信息咨询服务协议
+#define RECHARGERUL     @"https://m.9888.cn/static/wap/protocol-special-recharge/index.html" //3、特殊用户充值提示信息
+#define CASHWIRHDRAWH5  @"https://m.9888.cn/static/wap/protocol-special-cash/index.html"     //4、特殊用户提现提示信息H5
+#define REMINDBANKH5    @"https://m.9888.cn/static/wap/protocol-special-bind/index.html"     //5、特殊用户绑卡提示信息H5
+#define BANKDEPOSITORYACCOUNTURL    @"https://m.9888.cn/static/wap/topic-hui-shang/index.html" //6、微商银行专题页面url
+#define HSAccountIllustrationURL    @"https://m.9888.cn/mpwap/bankAccountExplain.html"       //徽商存管账户说明
+#define HELPCENTERURL @"https://m.9888.cn/static/wap/faq/index.html"//帮助中心Url
 
-#define NOTICECORPORAT  @"http://m.9888.cn/static/wap/notice-corporate-structure/index.html" //查看披露信息
+#define NOTICECORPORAT  @"https://m.9888.cn/static/wap/notice-corporate-structure/index.html" //查看披露信息
 
-#define NOTICERISKH5 @"http://m.9888.cn/static/wap/notice-risk-prompt/index.html"//风险揭示
+#define NOTICERISKH5 @"https://m.9888.cn/static/wap/notice-risk-prompt/index.html"//风险揭示
 
 //================== 调试宏 ==================
 #ifdef DEBUG
