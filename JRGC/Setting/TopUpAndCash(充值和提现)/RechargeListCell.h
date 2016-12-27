@@ -13,6 +13,8 @@
 @property(nonatomic, strong)UILabel     *orderNumLabel;
 @property(nonatomic, strong)UILabel     *statueLabel;
 @property(nonatomic, strong)UILabel     *moneyTipLabel;
+@property(nonatomic, strong)UILabel     *withdrawalWayLabel;
+@property(nonatomic, strong)UILabel     *cashWayLabel;
 @property(nonatomic, strong)UILabel     *moneyLabel;
 @property(nonatomic, strong)UILabel     *beginLabel;
 @property(nonatomic, strong)UILabel     *timeValueLabel;

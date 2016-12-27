@@ -17,7 +17,9 @@
 #import "MjAlertView.h"
 #import "UCFCashRecordListViewController.h"
 #import "FullWebViewController.h"
-@interface UCFCashViewController ()<UCFChoseBankViewControllerDelegate,MjAlertViewDelegate>
+#import "UCFCashTableViewCell.h"
+#import "UCFSettingItem.h"
+@interface UCFCashViewController ()<UCFChoseBankViewControllerDelegate,MjAlertViewDelegate,UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate>
 {
     CGFloat orinalHeight;
     BOOL isSendSMS;
@@ -30,6 +32,10 @@
     NSString *_fee;//提现手续费 百分数
     NSString *_workingDay;//提现到账天数
     NSString *_criticalValueStr;//大额提现临界值
+    NSString *_accountAmountStr;//可提现金额
+    NSString *_perDayAmountLimit;//单日最大提现金额
+    NSString *_perDayRealTimeAmountLimit;//单日最大实时提现金额
+    NSArray  *_cashWayArray;//提现方式数组
 }
 @property (weak, nonatomic) IBOutlet UIScrollView *baseScrollView;
 @property (strong, nonatomic) IBOutlet UIImageView *bankIcon;
@@ -53,20 +59,20 @@
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *height5;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *height6;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *bankBranchViewHeight1;//开户行view的高度
-@property (strong, nonatomic) IBOutlet NSLayoutConstraint *codeViewHeight;//验证码和获取验证按钮背景view的高度
-@property (strong, nonatomic) IBOutlet UIButton *modifyWithdrawalMoneyBtn;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *cashWayTableViewHeigt;//实时提现View的高度
+@property (strong, nonatomic) IBOutlet UITableView *cashWayTableView;
+@property (strong, nonatomic) IBOutlet UIButton *allCashMoneyBtn;
 @property (strong, nonatomic) NSTimer *timer;
 @property (strong, nonatomic) NSString *cashBankNo;
 @property (assign, nonatomic) NSInteger counter;
-@property (assign,nonatomic) BOOL isShowGetCodeBtn;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *bankBranchViewHeight2;
 @property (strong, nonatomic) IBOutlet NZLabel *withdrawDescriptionLab;
-
+@property (strong, nonatomic) IBOutlet NZLabel *telServiceLabel;//联系客服
 - (IBAction)getMobileCheckCode:(id)sender;
 - (IBAction)sumitBtnClick:(id)sender;
 - (IBAction)clickChooseBankbranchVC:(UIButton *)sender;
 
-- (IBAction)clickModifyWithdrawCashBtn:(UIButton *)sender;
+- (IBAction)clickAllCashMoneyBtn:(UIButton *)sender;
 @end
 
 @implementation UCFCashViewController
@@ -84,11 +90,16 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self getMyBindCardMessage];
+    
+    
+   
+    
+    [self getMyBindCardMessage];//初始化数据
+    [self initCashStyle]; //初始化提现方式
     //_warnSendLabel.hidden = YES;
-    _timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerFired) userInfo:nil repeats:YES];
-    [_timer setFireDate:[NSDate distantFuture]];
-    _counter = 60;
+//    _timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerFired) userInfo:nil repeats:YES];
+//    [_timer setFireDate:[NSDate distantFuture]];
+//    _counter = 60;
     _height1.constant = 0.5;
     _height2.constant = 0.5;
     _height3.constant = 0.5;
@@ -96,20 +107,13 @@
     _height5.constant = 0.5;
     _height6.constant = 0.5;
     
-    _bankBranchViewHeight1.constant = 0;
-    _bankBranchViewHeight2.constant = 0;
-    _codeViewHeight.constant = 0;
     
-    _codeTextField.hidden = YES;
-    _getCodeBtn.hidden = YES;
-//    _getCodeBtn.userInteractionEnabled = NO;
-    _bankBrachLabel.hidden = YES;
-    _pleasechooseLabel.hidden  = YES;
+    
+//    _codeTextField.hidden = YES;
+//    _getCodeBtn.hidden = YES;
     
     isSendSMS = NO;
     self.getMoneyBtn.tag = 1010; //设置当前按钮tag 为 1010
-    
-    self.isShowGetCodeBtn = NO;
     
     baseTitleLabel.text = @"提现";
     [self addLeftButton];
@@ -126,15 +130,18 @@
     [_crachTextField addTarget:self action:@selector(textfieldLength:) forControlEvents:UIControlEventEditingChanged];
     [_crachTextField addTarget:self action:@selector(textFieldEditingDidEnd:) forControlEvents:UIControlEventEditingDidEnd];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(fradeTextField)];
+    tap.delegate = self;
     [_baseScrollView addGestureRecognizer:tap];
     self.view.backgroundColor = UIColorWithRGBA(230, 230, 234, 1);
     
     UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openURL)];
+    tap1.delegate = self;
     [_phoneLabel addGestureRecognizer:tap1];
     [_phoneLabel setFontColor:UIColorWithRGB(0x4aa1f9) string:@"400-0322-988"];
     //[_warnSendLabel setHidden:YES];
     
     UITapGestureRecognizer *tapGes = [[UITapGestureRecognizer alloc] init];
+    tapGes.delegate = self;
     [tapGes addTarget:self action:@selector(soudLabelClick:)];
     [_warnSendLabel addGestureRecognizer:tapGes];
     _warnSendLabel.userInteractionEnabled = YES;
@@ -223,21 +230,105 @@
 {
     if (height==0)
     {
-        if (ScreenHeight == 480) {
-            _baseScrollView.contentSize = CGSizeMake(ScreenWidth, ScreenHeight + 50);
+        if (ScreenHeight == 480 || ScreenHeight == 568) {
+            _baseScrollView.contentSize = CGSizeMake(ScreenWidth, ScreenHeight + 150);
             _baseScrollView.contentOffset = CGPointMake(0, 0);
         }
     }
     else
     {
-        if (ScreenHeight == 480 ) {
-            _baseScrollView.contentSize = CGSizeMake(ScreenWidth, ScreenHeight + 230);
+        if (ScreenHeight == 480 || ScreenHeight == 568) {
+            _baseScrollView.contentSize = CGSizeMake(ScreenWidth, ScreenHeight + 260);
             [UIView animateWithDuration:0.6 animations:^{
                 _baseScrollView.contentOffset = CGPointMake(0, 100);
             }];
         }
 
     }
+}
+#pragma mark - UITableViewDelegate
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    return 80;
+}
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return _cashWayArray.count;
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    static NSString *cellStr = @"CashTableViewCell";
+    UCFCashTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellStr];
+    if (cell == nil) {
+        cell = [[[NSBundle mainBundle] loadNibNamed:@"UCFCashTableViewCell" owner:nil options:nil] firstObject];
+    }
+    UCFSettingItem *item = _cashWayArray[indexPath.row];
+    cell.cashWayTitle.text = item.title;
+    cell.cashWayDetailTitle.text = item.subtitle;
+    cell.cashWayButton.selected = item.isSelect;
+    cell.cashWayButton.tag = indexPath.row +100;
+    [cell.cashWayButton addTarget:self action:@selector(clickcCashWayButton:) forControlEvents:UIControlEventTouchUpInside];
+    if ([item.title isEqualToString:@"大额提现"] && cell.cashWayButton.selected) {//大额提现
+        _bankBranchViewHeight2.constant = 44;
+        _bankBrachLabel.hidden = NO;
+        _pleasechooseLabel.hidden  = NO;
+        _height4.constant = 0;
+        _height5.constant = 0.5;
+    }else{
+        _bankBranchViewHeight2.constant = 0;
+        _bankBrachLabel.hidden = YES;
+        _pleasechooseLabel.hidden  = YES;
+        _height4.constant = 0.5;
+        _height5.constant = 0;
+    }
+    return cell;
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    // 1.取消选中这行
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
+    if (_cashWayArray.count == 1) {
+         UCFSettingItem *item = _cashWayArray[indexPath.row];
+        item.isSelect = YES;
+        
+    }else{
+        UCFSettingItem *item1 = [_cashWayArray firstObject];
+        UCFSettingItem *item2 = [_cashWayArray lastObject];
+
+        if (indexPath.row == 0) {
+            item1.isSelect = YES;
+            item2.isSelect = NO;
+        }else{
+            item1.isSelect = NO;
+            item2.isSelect = YES;
+        }
+    }
+    [tableView reloadData];
+}
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
+    // 若为UITableViewCellContentView（即点击了tableViewCell），则不截获Touch事件
+    if (touch.view.tag  == 1001) {//cell 上的所有子View的tag == 1001
+        return NO;
+    }
+    return  YES;
+}
+-(void)clickcCashWayButton:(UIButton *)button{
+    if (_cashWayArray.count == 2) {
+        UCFSettingItem *item1 = [_cashWayArray firstObject];
+        UCFSettingItem *item2 = [_cashWayArray lastObject];
+        if (button.tag == 100) {
+            item1.isSelect = YES;
+            item2.isSelect = NO;
+        }else{
+            item1.isSelect = NO;
+            item2.isSelect = YES;
+        }
+        [_cashWayTableView reloadData];
+        
+    }
+    
 }
 
 #pragma mark - UITextField
@@ -294,51 +385,39 @@
             textField.text = [NSString stringWithFormat:@"0%@",textField.text];
         }
     }
-    
     return textField;
 }
 -(void)textFieldEditingDidEnd:(UITextField *)textField{
-    double withdrawalMoney = [textField.text doubleValue];
-    if (![SharedSingleton isValidateMsg:_crachTextField.text]) {
-        return;
+    [self realTimeWithdrawalAmount:textField.text];
+}
+#pragma mark -实时监测提现金额
+-(void)realTimeWithdrawalAmount:(NSString *)cashMoneyStr{
+    double withdrawalMoney = [cashMoneyStr doubleValue];
+    
+    if (withdrawalMoney >[_accountAmountStr doubleValue]) {
+        _crachTextField.text = _accountAmountStr;
+        withdrawalMoney = [_accountAmountStr doubleValue];
     }
-    self.isShowGetCodeBtn = YES;
-    _crachTextField.userInteractionEnabled = NO;
-    if ([UserInfoSingle sharedManager].openStatus == 5 ) {//特殊用户不允许修改提现金额
-        _modifyWithdrawalMoneyBtn.hidden = YES;
-    }else{
-         _modifyWithdrawalMoneyBtn.hidden = NO;
-    }
-    _codeTextField.hidden = NO;
-    _getCodeBtn.hidden = NO;
-    double criticalValue = [[self.cashInfoDic[@"data"] objectForKey:@"criticalValue"] doubleValue];
-    if (withdrawalMoney /10000.00 > criticalValue || _isCompanyAgent || _isSpecial) { //临界值判断 10万
-        _bankBrachLabel.hidden = NO;
-        _pleasechooseLabel.hidden  = NO;
-        [UIView animateWithDuration:0.8 animations:^{
-            _bankBranchViewHeight1.constant = 44;
-            _bankBranchViewHeight2.constant = 44;
-            _height4.constant = 0;
-            _height5.constant = 0.5;
-            _codeViewHeight.constant = 47;
-        }];
-        _baseScrollView.contentSize = CGSizeMake(ScreenWidth, ScreenHeight + 130);
-    }else{
-        
-        _bankBrachLabel.hidden = YES;
-        _pleasechooseLabel.hidden  = YES;
-        
-        [UIView animateWithDuration:0.8 animations:^{
-            _bankBranchViewHeight1.constant = 0;
+    if(_isCompanyAgent || _isSpecial){//如果是机构用户 或 特殊用户
+        _bankBranchViewHeight2.constant = 44;
+    }else {
+        if ([_bankName.text isEqualToString:@""]) { //如果是无行别的用户
             _bankBranchViewHeight2.constant = 0;
-            _codeViewHeight.constant = 47;
-            _height4.constant = 0.5;
-        }];
-        _baseScrollView.contentSize = CGSizeMake(ScreenWidth, ScreenHeight + 90);
-
-       
+        }else{
+            UCFSettingItem *item1 = [_cashWayArray firstObject];
+            UCFSettingItem *item2 = [_cashWayArray lastObject];
+            if (withdrawalMoney /10000.00 > [_criticalValueStr doubleValue]) {//大额提现临界值
+                item1.isSelect = NO;
+                item2.isSelect = YES;
+            }else{
+                item1.isSelect = YES;
+                item2.isSelect = NO;
+            }
+            [_cashWayTableView reloadData];
+        }
     }
 }
+
 - (void)timerFired
 {
     [_getCodeBtn setTitle:[NSString stringWithFormat:@"%ld秒后重新获取",(long)_counter] forState:UIControlStateNormal];
@@ -383,12 +462,12 @@
         [self.bankIcon sd_setImageWithURL:[NSURL URLWithString:bankUrl]];
     }
     if (![[bankInfoDic objectForKey:@"bankName"] isEqual:[NSNull null]]) {
-        _bankName.text = [bankInfoDic objectForKey:@"bankName"];
+        _bankName.text = [bankInfoDic objectSafeForKey:@"bankName"];
     }
     
     _bankNum.text = [bankInfoDic objectForKey:@"bankCardNo"];
-    NSString *keTiXianMoney = [NSString stringWithFormat:@"%.2f",[dataDic[@"accountAmount"] doubleValue]];
-    _availableLabel.text = [NSString stringWithFormat:@"%@",[UCFToolsMehod AddComma:keTiXianMoney]];
+    _accountAmountStr = [NSString stringWithFormat:@"%.2f",[dataDic[@"accountAmount"] doubleValue]];
+    _availableLabel.text = [NSString stringWithFormat:@"%@",[UCFToolsMehod AddComma:_accountAmountStr]];
     NSString *bankBranchNameStr = [bankInfoDic objectSafeForKey:@"bankBranchName"];
     if([bankBranchNameStr isEqualToString:@""]){
          _bankBrachLabel.text = @"开户支行";
@@ -404,22 +483,81 @@
     _fee = [dataDic objectSafeForKey:@"fee"];
     _workingDay = [dataDic objectSafeForKey:@"workingDay"];
     _criticalValueStr =  [dataDic objectSafeForKey:@"criticalValue"];
+    _perDayAmountLimit =  [dataDic objectSafeForKey:@"perDayAmountLimit"];
+    _perDayRealTimeAmountLimit = [dataDic objectSafeForKey:@"perDayRealTimeAmountLimit"];
     
-    NSMutableParagraphStyle *paragraph = [[NSMutableParagraphStyle alloc] init];
-    paragraph.alignment = NSTextAlignmentLeft;
-    paragraph.lineSpacing = 1;
-    NSDictionary *dic = @{
-                          NSFontAttributeName:[UIFont systemFontOfSize:13],/*(字体)*/
-                          NSParagraphStyleAttributeName:paragraph,/*(段落)*/
-                          };
-    NSString *withdrawDescriptionStr = [NSString stringWithFormat: @"•对首次充值后无投资的提现，平台收取%@%%的手续费。\n•%@万及以下提现，7*24小时实时到账； %@万以上提现，工作日%@，最快30分钟内到账，实际到账时间以发卡行为准，其它时间或节假日发起的提现，不予受理；中国银行和南京银行，单笔仅支持5万及以下金额提现。\n• 单笔提现金额不低于%@元。\n• 填写的提现信息不正确导致提现失败，由此产生的提现费用不予退还。",_fee,_criticalValueStr,_criticalValueStr,_doTime,[dataDic  objectForKey:@"minAmt"]];
-    _withdrawDescriptionLab.attributedText =  [NSString getNSAttributedString:withdrawDescriptionStr labelDict:dic];
+//    NSMutableParagraphStyle *paragraph = [[NSMutableParagraphStyle alloc] init];
+//    paragraph.alignment = NSTextAlignmentLeft;
+//    paragraph.lineSpacing = 1;
+//    NSDictionary *dic = @{
+//                          NSFontAttributeName:[UIFont systemFontOfSize:13],/*(字体)*/
+//                          NSParagraphStyleAttributeName:paragraph,/*(段落)*/
+//                          };
+    NSString *withdrawDescriptionStr = [NSString stringWithFormat: @"•单笔提现金额不能低于%@元，提现申请成功后不可撤回；\n•对首次充值后无投资的提现，平台收取%@%%的手续费；\n•徽电子账户采用原卡进出设置，为了您的资金安全，只能提现至您绑定的银行卡；",[dataDic  objectForKey:@"minAmt"],_fee];
+    _withdrawDescriptionLab.text = withdrawDescriptionStr;
+    
+    __weak typeof(self) weakSelf = self;
+    self.telServiceLabel.text = @"•如遇问题请与客服联系400-0322-988。";
+    [self.telServiceLabel addLinkString:@"400-0322-988" block:^(ZBLinkLabelModel *linkModel) {
+        [weakSelf openURL];
+    }];
+    [self.telServiceLabel setFontColor:UIColorWithRGB(0x4aa1f9) string:@"400-0322-988"];
+
+   
+}
+#pragma mark --- 初始化提现方式
+-(void)initCashStyle{
+    NSString *realTimeCashStr = [NSString stringWithFormat:@"单笔金额≤%@万，单日≤%@万，7*24小时实时到账。",_criticalValueStr,_perDayRealTimeAmountLimit];
+    NSString *largeCashStr = [NSString stringWithFormat:@"单日金额≤%@万，工作日%@受理，最快30分钟之内到账。",_perDayAmountLimit,_doTime];
+
+    if(_isCompanyAgent || _isSpecial){//如果是机构用户 或 特殊用户
+        
+        
+        _bankBranchViewHeight2.constant = 44;
+        _height4.constant = 0;
+        _height5.constant = 0.5;
+        _bankBrachLabel.hidden = NO;
+        _pleasechooseLabel.hidden  = NO;
+        UCFSettingItem *item = [UCFSettingItem itemWithTitle:@"大额提现"];
+        item.subtitle = largeCashStr;
+        item.isSelect = YES;
+        _cashWayArray = @[item];
+        self.baseScrollView.contentSize = CGSizeMake(ScreenWidth, ScreenHeight + 180);
+    }else {
+        _bankBranchViewHeight2.constant = 0;
+        _bankBrachLabel.hidden = YES;
+        _pleasechooseLabel.hidden  = YES;
+        if ([_bankName.text isEqualToString:@""]) { //如果是无行别的用户
+            UCFSettingItem *item = [UCFSettingItem itemWithTitle:@"实时提现"];
+            item.subtitle = realTimeCashStr;
+            item.isSelect = YES;
+            _cashWayArray = @[item];
+            self.baseScrollView.contentSize = CGSizeMake(ScreenWidth, ScreenHeight + 180);
+            _height4.constant = 0.5;
+        }else{
+            UCFSettingItem *item1 = [UCFSettingItem itemWithTitle:@"实时提现"];
+            item1.subtitle = realTimeCashStr;
+            item1.isSelect = YES;
+            UCFSettingItem *item2 = [UCFSettingItem itemWithTitle:@"大额提现"];
+            item2.subtitle = largeCashStr;
+            item2.isSelect = NO;
+            _cashWayArray = @[item1,item2];
+            _height4.constant = 0;
+            _height5.constant = 0.5;
+            self.baseScrollView.contentSize = CGSizeMake(ScreenWidth, ScreenHeight + 300);
+        }
+    }
+    _baseScrollView.contentOffset = CGPointMake(0, 0);
+    _cashWayTableView.delegate = self;
+    _cashWayTableView.dataSource = self;
+    _cashWayTableViewHeigt.constant = _cashWayArray.count * 80;
+    
+    
 }
 #pragma mark --- 点击修改提现金额按钮
 - (IBAction)clickModifyWithdrawCashBtn:(UIButton *)sender{
     _crachTextField.userInteractionEnabled = YES;
     [_crachTextField becomeFirstResponder];
-    _modifyWithdrawalMoneyBtn.hidden = YES;
     _bankBrachLabel.hidden = YES;
     _pleasechooseLabel.hidden  = YES;
     _codeTextField.hidden = YES;
@@ -428,22 +566,16 @@
         _bankBranchViewHeight1.constant = 0;
         _bankBranchViewHeight2.constant = 0;
         _height4.constant = 0.5;
-        _codeViewHeight.constant = 0;
     }];
     //修改提现金额，重新设置发送验证码按钮的状态
     [self resetGetCodeButtonStuats];
     self.codeTextField.text = @"";
-    self.isShowGetCodeBtn = NO;
+//    self.isShowGetCodeBtn = NO;
 }
--(void)setIsShowGetCodeBtn:(BOOL)isShowGetCodeBtn{
-    _isShowGetCodeBtn = isShowGetCodeBtn;
-    if (isShowGetCodeBtn) {
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.28* NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self.getMoneyBtn setTitle:@"提现" forState:UIControlStateNormal];
-        });
-    }else{
-        [self.getMoneyBtn setTitle:@"下一步" forState:UIControlStateNormal];
-    }
+#pragma mark --- 点击全提按钮
+- (IBAction)clickAllCashMoneyBtn:(UIButton *)sender{
+    _crachTextField.text = _accountAmountStr;
+    [self realTimeWithdrawalAmount:_accountAmountStr];
 }
 #pragma mark - 请求网络
 -(void)errorPost:(NSError*)err tag:(NSNumber*)tag
@@ -455,7 +587,7 @@
 
 - (void)beginPost:(kSXTag)tag
 {
-   
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 }
 - (void)endPost:(id)result tag:(NSNumber *)tag
 {
@@ -564,12 +696,16 @@
         NSString *rstcode = dic[@"ret"];
         if([rstcode intValue] == 1)
         {
-            
-            NSDictionary *dataDic = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"userId",@"",@"destPhoneNo", _type,@"isVms",@"1",@"type",nil];
-            [[NetworkModule sharedNetworkModule] newPostReq:dataDic tag:kSXTagIdentifyCode owner:self signature:YES];
+//    原提现验证码网络请求。
+//            NSDictionary *dataDic = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"userId",@"",@"destPhoneNo", _type,@"isVms",@"1",@"type",nil];
+//            [[NetworkModule sharedNetworkModule] newPostReq:dataDic tag:kSXTagIdentifyCode owner:self signature:YES];
+            //同盾
+            // 获取设备管理器实例
+            FMDeviceManager_t *manager = [FMDeviceManager sharedManager];
+            manager->getDeviceInfoAsync(nil, self);
         }
         else{
-            _getCodeBtn.userInteractionEnabled = YES;
+             self.getMoneyBtn.userInteractionEnabled = YES;
             NSString *message =  [dic objectSafeForKey:@"message"];
             if(![message isEqualToString:@""]){
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:message delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
@@ -585,9 +721,6 @@
 
 - (void)sendVerifyCode:(NSString*)type
 {
-    if(!self.isShowGetCodeBtn){ //
-        return;
-    }
     _type = type;
     if (![SharedSingleton isValidateMsg:_crachTextField.text]) {
         [MBProgressHUD displayHudError:@"请输入提现金额"];
@@ -622,8 +755,7 @@
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     _getCodeBtn.userInteractionEnabled = NO;
     
-    NSDictionary *dataDic = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"userId",_crachTextField.text,@"reflectAmount",nil];
-    [[NetworkModule sharedNetworkModule] newPostReq:dataDic tag:kSXTagWithdrawMoneyValidate owner:self signature:YES];
+   
 }
 
 - (IBAction)sumitBtnClick:(UIButton *)sender {
@@ -644,13 +776,10 @@
         [MBProgressHUD displayHudError:@"可提现余额不足"];
         return;
     }
-    if ([self.getMoneyBtn.currentTitle isEqualToString:@"下一步"]) {
-        return;
-    }
-    if (![SharedSingleton isValidateMsg:_codeTextField.text]) {
-        [MBProgressHUD displayHudError:@"请输入验证码"];
-        return;
-    }
+//    if (![SharedSingleton isValidateMsg:_codeTextField.text]) {
+//        [MBProgressHUD displayHudError:@"请输入验证码"];
+//        return;
+//    }
     NSString *getMoney = [NSString stringWithFormat:@"%.2f",[_crachTextField.text doubleValue]];
     NSString *leastAmount = [NSString stringWithFormat:@"%@",[self.cashInfoDic[@"data"] objectForKey:@"minAmt"]];
     leastAmount = [NSString stringWithFormat:@"%.0f",[leastAmount doubleValue]];
@@ -665,6 +794,20 @@
         [alert show];
         return;
     }
+    if (_bankBranchViewHeight2.constant == 44) {
+        if ([self isWorkTimeCash] ||_isHoliday) {
+            NSString *str = [NSString stringWithFormat:@"%@万以上提现，仅在工作日%@间处理",[self.cashInfoDic[@"data"] objectForKey:@"criticalValue"],_doTime];
+            [MBProgressHUD displayHudError:str];
+            return;
+        }
+        //临界值判断10万  大额提现时判断联行号是否为空
+        if ( [self.bankBrachLabel.text  isEqualToString: @"开户支行"] || [_cashBankNo isEqualToString: @""] || _cashBankNo == nil ) {
+            [MBProgressHUD displayHudError:@"请选择开户支行"];
+            return;
+        }
+    }
+    
+    
     NSString *isFeeEnableStr = [NSString stringWithFormat:@"%@",[self.cashInfoDic[@"data"] objectSafeForKey:@"isFeeEnable"]];
     BOOL isFeeEnable = [isFeeEnableStr boolValue];
     if (isFeeEnable) {
@@ -682,10 +825,12 @@
         return;
     }
     sender.userInteractionEnabled = NO;
-    //同盾
-    // 获取设备管理器实例
-    FMDeviceManager_t *manager = [FMDeviceManager sharedManager];
-    manager->getDeviceInfoAsync(nil, self);
+    [self withdrawalAmountIsExceedsTheLimitHttPRequest];
+}
+#pragma mark-- 提现金额是否超过限制网络请求
+-(void)withdrawalAmountIsExceedsTheLimitHttPRequest{
+    NSDictionary *dataDic = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"userId",_crachTextField.text,@"reflectAmount",nil];
+    [[NetworkModule sharedNetworkModule] newPostReq:dataDic tag:kSXTagWithdrawMoneyValidate owner:self signature:YES];
 }
 -(BOOL)isWorkTimeCash{
     // 时间字符串
@@ -746,21 +891,18 @@
     double  criticalValue = [[self.cashInfoDic[@"data"] objectForKey:@"criticalValue"] doubleValue] ;
     NSDictionary *dataDic = @{};
     if([_crachTextField.text doubleValue] / 10000.00 > criticalValue  ||  _isSpecial ||_isCompanyAgent ){//提现金额大于或等于10万 特殊用户  机构用户 都走这个大额流程
-        dataDic = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:UUID],@"userId",_crachTextField.text,@"reflectAmount",_cashBankNo,@"bankNo",_codeTextField.text,@"validateCode",_withdrawToken,@"withdrawTicket",blackBox, @"token_id",wanip,@"ip",nil];
+        dataDic = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:UUID],@"userId",_crachTextField.text,@"reflectAmount",_cashBankNo,@"bankNo",@"",@"validateCode",_withdrawToken,@"withdrawTicket",blackBox, @"token_id",wanip,@"ip",nil];
     }else{
-        dataDic= [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:UUID],@"userId",_crachTextField.text,@"reflectAmount",@"",@"bankNo",_codeTextField.text,@"validateCode",_withdrawToken,@"withdrawTicket",blackBox, @"token_id",wanip,@"ip",nil];
+        dataDic= [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:UUID],@"userId",_crachTextField.text,@"reflectAmount",@"",@"bankNo",@"",@"validateCode",_withdrawToken,@"withdrawTicket",blackBox, @"token_id",wanip,@"ip",nil];
     }
     [[NetworkModule sharedNetworkModule] newPostReq:dataDic tag:kSXTagWithdrawSub owner:self signature:YES];
 }
 - (void)mjalertView:(MjAlertView *)alertview didClickedButton:(UIButton *)clickedButton andClickedIndex:(NSInteger)index{
-    
     if (index == 1) {
-        //同盾
-        // 获取设备管理器实例
-        FMDeviceManager_t *manager = [FMDeviceManager sharedManager];
-        manager->getDeviceInfoAsync(nil, self);
+          [self withdrawalAmountIsExceedsTheLimitHttPRequest];
     }
 }
+
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];

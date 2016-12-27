@@ -425,6 +425,8 @@
 		83F2D5A11DCB57CA0041F913 /* WatchConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83F2D5A01DCB57CA0041F913 /* WatchConnectivity.framework */; };
 		83F4DAF51D9561EC00A0632E /* UCFPrdTransferBIdWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F4DAF31D9561EC00A0632E /* UCFPrdTransferBIdWebView.m */; };
 		83F4DAF61D9561EC00A0632E /* UCFPrdTransferBIdWebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83F4DAF41D9561EC00A0632E /* UCFPrdTransferBIdWebView.xib */; };
+		83FF3E4A1E12159B00DFB99C /* UCFCashTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FF3E481E12159B00DFB99C /* UCFCashTableViewCell.m */; };
+		83FF3E4B1E12159C00DFB99C /* UCFCashTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83FF3E491E12159B00DFB99C /* UCFCashTableViewCell.xib */; };
 		840A79431C2A7C160059A946 /* UCFMessageCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 840A793D1C2A7C160059A946 /* UCFMessageCenterViewController.m */; };
 		840A79441C2A7C160059A946 /* UCFMessageCenterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 840A793E1C2A7C160059A946 /* UCFMessageCenterViewController.xib */; };
 		840A79451C2A7C160059A946 /* UCFMessageCenterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 840A79411C2A7C160059A946 /* UCFMessageCenterCell.m */; };
@@ -1437,6 +1439,9 @@
 		83F4DAF21D9561EC00A0632E /* UCFPrdTransferBIdWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFPrdTransferBIdWebView.h; sourceTree = "<group>"; };
 		83F4DAF31D9561EC00A0632E /* UCFPrdTransferBIdWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFPrdTransferBIdWebView.m; sourceTree = "<group>"; };
 		83F4DAF41D9561EC00A0632E /* UCFPrdTransferBIdWebView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFPrdTransferBIdWebView.xib; sourceTree = "<group>"; };
+		83FF3E471E12159B00DFB99C /* UCFCashTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFCashTableViewCell.h; sourceTree = "<group>"; };
+		83FF3E481E12159B00DFB99C /* UCFCashTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFCashTableViewCell.m; sourceTree = "<group>"; };
+		83FF3E491E12159B00DFB99C /* UCFCashTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFCashTableViewCell.xib; sourceTree = "<group>"; };
 		840A793C1C2A7C160059A946 /* UCFMessageCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFMessageCenterViewController.h; sourceTree = "<group>"; };
 		840A793D1C2A7C160059A946 /* UCFMessageCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFMessageCenterViewController.m; sourceTree = "<group>"; };
 		840A793E1C2A7C160059A946 /* UCFMessageCenterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFMessageCenterViewController.xib; sourceTree = "<group>"; };
@@ -2486,6 +2491,9 @@
 			children = (
 				4AF9C5E61B0B419600E3BE7D /* RechargeListCell.h */,
 				4AF9C5E71B0B419600E3BE7D /* RechargeListCell.m */,
+				83FF3E471E12159B00DFB99C /* UCFCashTableViewCell.h */,
+				83FF3E481E12159B00DFB99C /* UCFCashTableViewCell.m */,
+				83FF3E491E12159B00DFB99C /* UCFCashTableViewCell.xib */,
 				4A8D5F721B0C1DCF0053F045 /* RechargeListViewController.h */,
 				4A8D5F731B0C1DCF0053F045 /* RechargeListViewController.m */,
 				74F2911D1AE0DBF2003E0E86 /* UCFTopUpViewController.h */,
@@ -4889,6 +4897,7 @@
 				4A42BB2F1C27A7D20084AB08 /* NewCalculator.xib in Resources */,
 				E311A6641D90E7FC00C5483E /* UCFWebViewJavascriptBridgeMall.xib in Resources */,
 				840A79461C2A7C160059A946 /* UCFMessageCenterCell.xib in Resources */,
+				83FF3E4B1E12159C00DFB99C /* UCFCashTableViewCell.xib in Resources */,
 				7477BF911AFAFED900914BFB /* UCFRedEnvelopeTableViewCell.xib in Resources */,
 				FB21731A1AF20DFC00649AA0 /* UCFBackMoneyCell.xib in Resources */,
 				25950EC11D7FB6EC00E4CCBA /* CWLivessViewController.xib in Resources */,
@@ -5125,6 +5134,7 @@
 				E311A6631D90E7FC00C5483E /* UCFWebViewJavascriptBridgeMall.m in Sources */,
 				FBB685851AE4A76800F222B6 /* MJRefreshGifHeader.m in Sources */,
 				7BCE01F51AC8FC260084C15C /* ASIAuthenticationDialog.m in Sources */,
+				83FF3E4A1E12159B00DFB99C /* UCFCashTableViewCell.m in Sources */,
 				FB7EDE3E1D6BFCD700C3E924 /* AppDelegate.mm in Sources */,
 				25A9CC191D5213EB00209142 /* UCFTipCell.m in Sources */,
 				7BA6E46B1AD6691F00FE8C37 /* UCFLockHandleViewController.m in Sources */,
@@ -5579,7 +5589,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp299;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "39b131e8-ce26-4c8f-a39a-16c2ffb54c36";
+				PROVISIONING_PROFILE = "0ce353c9-748a-4307-9ccb-19c1a2dd7f16";
 				PROVISIONING_PROFILE_SPECIFIER = 2016_299Distribution;
 				SWIFT_OBJC_BRIDGING_HEADER = "JRGC/JRGC-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -5637,7 +5647,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp299;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "39b131e8-ce26-4c8f-a39a-16c2ffb54c36";
+				PROVISIONING_PROFILE = "0ce353c9-748a-4307-9ccb-19c1a2dd7f16";
 				PROVISIONING_PROFILE_SPECIFIER = 2016_299Distribution;
 				SWIFT_OBJC_BRIDGING_HEADER = "JRGC/JRGC-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
