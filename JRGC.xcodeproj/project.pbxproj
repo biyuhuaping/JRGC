@@ -107,6 +107,8 @@
 		4A9F15BA1B0EC9B1009A7365 /* CoupleHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A9F15B91B0EC9B1009A7365 /* CoupleHeadView.m */; };
 		4AB1260C1AEF8EA400E915F1 /* UCFPurchaseBidViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AB1260A1AEF8EA400E915F1 /* UCFPurchaseBidViewController.xib */; };
 		4AC08B471B09BE4000DF8075 /* CalculatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC08B461B09BE4000DF8075 /* CalculatorView.m */; };
+		4ACB399A1E1216DD00E9BA8C /* FestivalActivitiesWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACB39981E1216DD00E9BA8C /* FestivalActivitiesWebView.m */; };
+		4ACB399B1E1216DD00E9BA8C /* FestivalActivitiesWebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4ACB39991E1216DD00E9BA8C /* FestivalActivitiesWebView.xib */; };
 		4AD6B4C61B32D33E00D94140 /* CycleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD6B4C51B32D33E00D94140 /* CycleView.m */; };
 		4AD6F6901AF07EF500F1B490 /* MoneyBoardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD6F68E1AF07EF500F1B490 /* MoneyBoardCell.m */; };
 		4ADA3A301B0DBBEF000B29FD /* CoupleHeadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ADA3A2F1B0DBBEF000B29FD /* CoupleHeadCell.m */; };
@@ -118,7 +120,6 @@
 		4AF9C5E91B0B419600E3BE7D /* RechargeListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF9C5E71B0B419600E3BE7D /* RechargeListCell.m */; };
 		4AFAA8A71B0D76AB005C9BEC /* UCFSelectPayBackController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AFAA8A61B0D76AB005C9BEC /* UCFSelectPayBackController.m */; };
 		4AFE198D1CA0006200EE6768 /* TopUpAndCash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4AFE198C1CA0006200EE6768 /* TopUpAndCash.storyboard */; };
-		4B83AC1219AD5E647641ABCE /* libPods-JRGC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ABAC8AAE2C1A09445E3F6E8 /* libPods-JRGC.a */; };
 		740AC63F1DDC2AAE0058BC60 /* UCFProjectListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 740AC63D1DDC2AAE0058BC60 /* UCFProjectListController.m */; };
 		740AC6401DDC2AAE0058BC60 /* UCFProjectListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 740AC63E1DDC2AAE0058BC60 /* UCFProjectListController.xib */; };
 		741EB1861D596EF2006C885F /* UCFTableCellOne.m in Sources */ = {isa = PBXBuildFile; fileRef = 741EB1841D596EF2006C885F /* UCFTableCellOne.m */; };
@@ -426,6 +427,8 @@
 		83F2D5A11DCB57CA0041F913 /* WatchConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83F2D5A01DCB57CA0041F913 /* WatchConnectivity.framework */; };
 		83F4DAF51D9561EC00A0632E /* UCFPrdTransferBIdWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F4DAF31D9561EC00A0632E /* UCFPrdTransferBIdWebView.m */; };
 		83F4DAF61D9561EC00A0632E /* UCFPrdTransferBIdWebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83F4DAF41D9561EC00A0632E /* UCFPrdTransferBIdWebView.xib */; };
+		83FF3E4A1E12159B00DFB99C /* UCFCashTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FF3E481E12159B00DFB99C /* UCFCashTableViewCell.m */; };
+		83FF3E4B1E12159C00DFB99C /* UCFCashTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83FF3E491E12159B00DFB99C /* UCFCashTableViewCell.xib */; };
 		840A79431C2A7C160059A946 /* UCFMessageCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 840A793D1C2A7C160059A946 /* UCFMessageCenterViewController.m */; };
 		840A79441C2A7C160059A946 /* UCFMessageCenterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 840A793E1C2A7C160059A946 /* UCFMessageCenterViewController.xib */; };
 		840A79451C2A7C160059A946 /* UCFMessageCenterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 840A79411C2A7C160059A946 /* UCFMessageCenterCell.m */; };
@@ -466,7 +469,6 @@
 		E37086BF1D61BBB10041D293 /* DBCellConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = E37086BE1D61BBB10041D293 /* DBCellConfig.m */; };
 		E37086C71D61E3030041D293 /* UCFOldUserGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E37086C21D61E3030041D293 /* UCFOldUserGuideViewController.m */; };
 		E37086C81D61E3030041D293 /* UCFOldUserGuideViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E37086C31D61E3030041D293 /* UCFOldUserGuideViewController.xib */; };
-		E38039661DE5682200C031FF /* YWFPSLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38039651DE5682200C031FF /* YWFPSLabel.swift */; };
 		E3A6A4B31CC71D03003A3FED /* NSString+URL.m in Sources */ = {isa = PBXBuildFile; fileRef = E3A6A4B21CC71D03003A3FED /* NSString+URL.m */; };
 		E3A96B091CBF837C00E8884F /* UCFWorkPointsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3A96B071CBF837C00E8884F /* UCFWorkPointsViewController.m */; };
 		E3A96B0A1CBF837C00E8884F /* UCFWorkPointsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3A96B081CBF837C00E8884F /* UCFWorkPointsViewController.xib */; };
@@ -680,7 +682,6 @@
 /* Begin PBXFileReference section */
 		08E9A4E01B845E1200099F30 /* UCFTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFTextField.h; sourceTree = "<group>"; };
 		08E9A4E11B845E1200099F30 /* UCFTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFTextField.m; sourceTree = "<group>"; };
-		157E591EB96A64CF98C0536A /* Pods-JRGC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JRGC.release.xcconfig"; path = "Pods/Target Support Files/Pods-JRGC/Pods-JRGC.release.xcconfig"; sourceTree = "<group>"; };
 		2509C3BC1D6590C400D9F9B5 /* PulsingHaloLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PulsingHaloLayer.h; sourceTree = "<group>"; };
 		2509C3BD1D6590C400D9F9B5 /* PulsingHaloLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PulsingHaloLayer.m; sourceTree = "<group>"; };
 		2509C3C21D65A63100D9F9B5 /* GFWaterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFWaterView.h; sourceTree = "<group>"; };
@@ -866,6 +867,9 @@
 		4AB1260A1AEF8EA400E915F1 /* UCFPurchaseBidViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFPurchaseBidViewController.xib; sourceTree = "<group>"; };
 		4AC08B451B09BE4000DF8075 /* CalculatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalculatorView.h; sourceTree = "<group>"; };
 		4AC08B461B09BE4000DF8075 /* CalculatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalculatorView.m; sourceTree = "<group>"; };
+		4ACB39971E1216DD00E9BA8C /* FestivalActivitiesWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FestivalActivitiesWebView.h; sourceTree = "<group>"; };
+		4ACB39981E1216DD00E9BA8C /* FestivalActivitiesWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FestivalActivitiesWebView.m; sourceTree = "<group>"; };
+		4ACB39991E1216DD00E9BA8C /* FestivalActivitiesWebView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FestivalActivitiesWebView.xib; sourceTree = "<group>"; };
 		4AD6B4C41B32D33E00D94140 /* CycleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycleView.h; sourceTree = "<group>"; };
 		4AD6B4C51B32D33E00D94140 /* CycleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycleView.m; sourceTree = "<group>"; };
 		4AD6F68D1AF07EF500F1B490 /* MoneyBoardCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoneyBoardCell.h; sourceTree = "<group>"; };
@@ -885,8 +889,6 @@
 		4AFAA8A51B0D76AB005C9BEC /* UCFSelectPayBackController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFSelectPayBackController.h; sourceTree = "<group>"; };
 		4AFAA8A61B0D76AB005C9BEC /* UCFSelectPayBackController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFSelectPayBackController.m; sourceTree = "<group>"; };
 		4AFE198C1CA0006200EE6768 /* TopUpAndCash.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TopUpAndCash.storyboard; sourceTree = "<group>"; };
-		5E770FABDD1F68F580C4D56B /* Pods-JRGC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JRGC.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JRGC/Pods-JRGC.debug.xcconfig"; sourceTree = "<group>"; };
-		6ABAC8AAE2C1A09445E3F6E8 /* libPods-JRGC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JRGC.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		740AC63C1DDC2AAE0058BC60 /* UCFProjectListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFProjectListController.h; sourceTree = "<group>"; };
 		740AC63D1DDC2AAE0058BC60 /* UCFProjectListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFProjectListController.m; sourceTree = "<group>"; };
 		740AC63E1DDC2AAE0058BC60 /* UCFProjectListController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFProjectListController.xib; sourceTree = "<group>"; };
@@ -1441,6 +1443,9 @@
 		83F4DAF21D9561EC00A0632E /* UCFPrdTransferBIdWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFPrdTransferBIdWebView.h; sourceTree = "<group>"; };
 		83F4DAF31D9561EC00A0632E /* UCFPrdTransferBIdWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFPrdTransferBIdWebView.m; sourceTree = "<group>"; };
 		83F4DAF41D9561EC00A0632E /* UCFPrdTransferBIdWebView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFPrdTransferBIdWebView.xib; sourceTree = "<group>"; };
+		83FF3E471E12159B00DFB99C /* UCFCashTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFCashTableViewCell.h; sourceTree = "<group>"; };
+		83FF3E481E12159B00DFB99C /* UCFCashTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFCashTableViewCell.m; sourceTree = "<group>"; };
+		83FF3E491E12159B00DFB99C /* UCFCashTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFCashTableViewCell.xib; sourceTree = "<group>"; };
 		840A793C1C2A7C160059A946 /* UCFMessageCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFMessageCenterViewController.h; sourceTree = "<group>"; };
 		840A793D1C2A7C160059A946 /* UCFMessageCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFMessageCenterViewController.m; sourceTree = "<group>"; };
 		840A793E1C2A7C160059A946 /* UCFMessageCenterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFMessageCenterViewController.xib; sourceTree = "<group>"; };
@@ -1508,7 +1513,6 @@
 		E37086C21D61E3030041D293 /* UCFOldUserGuideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFOldUserGuideViewController.m; sourceTree = "<group>"; };
 		E37086C31D61E3030041D293 /* UCFOldUserGuideViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFOldUserGuideViewController.xib; sourceTree = "<group>"; };
 		E38039641DE5682100C031FF /* JRGC-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JRGC-Bridging-Header.h"; sourceTree = "<group>"; };
-		E38039651DE5682200C031FF /* YWFPSLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YWFPSLabel.swift; sourceTree = "<group>"; };
 		E3A6A4B11CC71D03003A3FED /* NSString+URL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URL.h"; sourceTree = "<group>"; };
 		E3A6A4B21CC71D03003A3FED /* NSString+URL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+URL.m"; sourceTree = "<group>"; };
 		E3A96B061CBF837C00E8884F /* UCFWorkPointsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFWorkPointsViewController.h; sourceTree = "<group>"; };
@@ -1755,13 +1759,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		4AAFB2A96B32A157BB06BF0A /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		7BFE3E7D1AC55C98002A53A2 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1824,7 +1821,6 @@
 				7BCE02401AC91A5E0084C15C /* SystemConfiguration.framework in Frameworks */,
 				4A9A812F1DC89ED1007EB477 /* TencentOpenAPI.framework in Frameworks */,
 				7BCE023E1AC91A050084C15C /* libxml2.dylib in Frameworks */,
-				4B83AC1219AD5E647641ABCE /* libPods-JRGC.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2278,15 +2274,6 @@
 			path = Tools/Singleton;
 			sourceTree = "<group>";
 		};
-		5FEBB3C5733FF1026DFA2205 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				5E770FABDD1F68F580C4D56B /* Pods-JRGC.debug.xcconfig */,
-				157E591EB96A64CF98C0536A /* Pods-JRGC.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		740AC6331DDC05120058BC60 /* ProjectList */ = {
 			isa = PBXGroup;
 			children = (
@@ -2507,6 +2494,9 @@
 			children = (
 				4AF9C5E61B0B419600E3BE7D /* RechargeListCell.h */,
 				4AF9C5E71B0B419600E3BE7D /* RechargeListCell.m */,
+				83FF3E471E12159B00DFB99C /* UCFCashTableViewCell.h */,
+				83FF3E481E12159B00DFB99C /* UCFCashTableViewCell.m */,
+				83FF3E491E12159B00DFB99C /* UCFCashTableViewCell.xib */,
 				4A8D5F721B0C1DCF0053F045 /* RechargeListViewController.h */,
 				4A8D5F731B0C1DCF0053F045 /* RechargeListViewController.m */,
 				74F2911D1AE0DBF2003E0E86 /* UCFTopUpViewController.h */,
@@ -3327,7 +3317,6 @@
 				7BCE02411AC91A680084C15C /* MobileCoreServices.framework */,
 				7BCE023F1AC91A5E0084C15C /* SystemConfiguration.framework */,
 				7BCE023D1AC91A050084C15C /* libxml2.dylib */,
-				6ABAC8AAE2C1A09445E3F6E8 /* libPods-JRGC.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -3498,7 +3487,6 @@
 				83F2D4F91DCB3F950041F913 /* JRGCWatch Extension */,
 				7BCE02651AC91CBE0084C15C /* Frameworks */,
 				7BFE3E811AC55C98002A53A2 /* Products */,
-				5FEBB3C5733FF1026DFA2205 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -3607,7 +3595,6 @@
 				FB55552F1BCE37570013894F /* UMAnalytics_Sdk_3.4.6 */,
 				7BCE023E1B833B7000F9D73F /* IPDetector.h */,
 				7BCE023F1B833B7000F9D73F /* IPDetector.m */,
-				E38039651DE5682200C031FF /* YWFPSLabel.swift */,
 				4AD6B4C31B32D33E00D94140 /* CycleView */,
 				74931A151B1326FE00143424 /* OHAttributedLabel */,
 				74931A111B1326B400143424 /* FisrtLetterAndOrder */,
@@ -4202,6 +4189,9 @@
 				E311415D1D92769E00FF880A /* UCFWebViewJavascriptBridgeBBS.h */,
 				E311415E1D92769E00FF880A /* UCFWebViewJavascriptBridgeBBS.m */,
 				E311415F1D92769E00FF880A /* UCFWebViewJavascriptBridgeBBS.xib */,
+				4ACB39971E1216DD00E9BA8C /* FestivalActivitiesWebView.h */,
+				4ACB39981E1216DD00E9BA8C /* FestivalActivitiesWebView.m */,
+				4ACB39991E1216DD00E9BA8C /* FestivalActivitiesWebView.xib */,
 			);
 			path = UCFWebView;
 			sourceTree = "<group>";
@@ -4675,13 +4665,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7BFE3EA61AC55C98002A53A2 /* Build configuration list for PBXNativeTarget "JRGC" */;
 			buildPhases = (
-				57C9D89DA3666131BCE36D38 /* [CP] Check Pods Manifest.lock */,
 				7BFE3E7C1AC55C98002A53A2 /* Sources */,
 				7BFE3E7D1AC55C98002A53A2 /* Frameworks */,
 				7BFE3E7E1AC55C98002A53A2 /* Resources */,
 				83F2D5121DCB3F950041F913 /* Embed Watch Content */,
-				D3E341332A94199232E9795B /* [CP] Embed Pods Frameworks */,
-				9B0B6F1CB1B8A7B451DB2BC2 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -4717,7 +4704,6 @@
 			buildPhases = (
 				83F2D4E71DCB3F940041F913 /* Resources */,
 				83F2D50E1DCB3F950041F913 /* Embed App Extensions */,
-				4AAFB2A96B32A157BB06BF0A /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -4916,6 +4902,7 @@
 				4A42BB2F1C27A7D20084AB08 /* NewCalculator.xib in Resources */,
 				E311A6641D90E7FC00C5483E /* UCFWebViewJavascriptBridgeMall.xib in Resources */,
 				840A79461C2A7C160059A946 /* UCFMessageCenterCell.xib in Resources */,
+				83FF3E4B1E12159C00DFB99C /* UCFCashTableViewCell.xib in Resources */,
 				7477BF911AFAFED900914BFB /* UCFRedEnvelopeTableViewCell.xib in Resources */,
 				FB21731A1AF20DFC00649AA0 /* UCFBackMoneyCell.xib in Resources */,
 				25950EC11D7FB6EC00E4CCBA /* CWLivessViewController.xib in Resources */,
@@ -4925,6 +4912,7 @@
 				74FC227E1BA6A5BB00D1660A /* UCFOverDueListViewController.xib in Resources */,
 				4AB1260C1AEF8EA400E915F1 /* UCFPurchaseBidViewController.xib in Resources */,
 				4AFE198D1CA0006200EE6768 /* TopUpAndCash.storyboard in Resources */,
+				4ACB399B1E1216DD00E9BA8C /* FestivalActivitiesWebView.xib in Resources */,
 				833603CE1D928F9200C3E435 /* UCFWithdrawCashResultWebView.xib in Resources */,
 				7477BF9B1AFB19B200914BFB /* UCFNormalRedEnvelopeTableViewCell.xib in Resources */,
 				25A9CC1A1D5213EB00209142 /* UCFTipCell.xib in Resources */,
@@ -5015,54 +5003,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		57C9D89DA3666131BCE36D38 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		9B0B6F1CB1B8A7B451DB2BC2 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-JRGC/Pods-JRGC-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D3E341332A94199232E9795B /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-JRGC/Pods-JRGC-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		7BFE3E7C1AC55C98002A53A2 /* Sources */ = {
@@ -5200,6 +5140,7 @@
 				E311A6631D90E7FC00C5483E /* UCFWebViewJavascriptBridgeMall.m in Sources */,
 				FBB685851AE4A76800F222B6 /* MJRefreshGifHeader.m in Sources */,
 				7BCE01F51AC8FC260084C15C /* ASIAuthenticationDialog.m in Sources */,
+				83FF3E4A1E12159B00DFB99C /* UCFCashTableViewCell.m in Sources */,
 				FB7EDE3E1D6BFCD700C3E924 /* AppDelegate.mm in Sources */,
 				25A9CC191D5213EB00209142 /* UCFTipCell.m in Sources */,
 				7BA6E46B1AD6691F00FE8C37 /* UCFLockHandleViewController.m in Sources */,
@@ -5423,7 +5364,6 @@
 				E320200E1CC4BAD70065579C /* WebViewJavascriptBridgeBase.m in Sources */,
 				7BCE02371AC915720084C15C /* NSData+Base64.m in Sources */,
 				747AAEBB1AEF89F6007A518F /* FundsDetailModel.m in Sources */,
-				E38039661DE5682200C031FF /* YWFPSLabel.swift in Sources */,
 				E320200D1CC4BAD70065579C /* WebViewJavascriptBridge_JS.m in Sources */,
 				7BFE3E861AC55C98002A53A2 /* main.m in Sources */,
 				FBB685821AE4A76800F222B6 /* MJRefreshConst.m in Sources */,
@@ -5440,6 +5380,7 @@
 				7B2E56911ADBBE77008B0F9E /* UCFRetrievePasswordStepTwoViewController.m in Sources */,
 				74F2910D1AE0DB92003E0E86 /* UCFFeedBackViewController.m in Sources */,
 				74EE33181AF707B100BDE197 /* UCFFundsDetailHeader.m in Sources */,
+				4ACB399A1E1216DD00E9BA8C /* FestivalActivitiesWebView.m in Sources */,
 				FB120BB51ADE462F00023365 /* CircleShapeLayer.m in Sources */,
 				7BA6E4C71AD6731900FE8C37 /* UIView+WebCacheOperation.m in Sources */,
 				74931A141B1326B400143424 /* pinyin.c in Sources */,
@@ -5608,7 +5549,6 @@
 		};
 		7BFE3EA71AC55C98002A53A2 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5E770FABDD1F68F580C4D56B /* Pods-JRGC.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -5658,7 +5598,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp299;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "39b131e8-ce26-4c8f-a39a-16c2ffb54c36";
+				PROVISIONING_PROFILE = "0ce353c9-748a-4307-9ccb-19c1a2dd7f16";
 				PROVISIONING_PROFILE_SPECIFIER = 2016_299Distribution;
 				SWIFT_OBJC_BRIDGING_HEADER = "JRGC/JRGC-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -5671,7 +5611,6 @@
 		};
 		7BFE3EA81AC55C98002A53A2 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 157E591EB96A64CF98C0536A /* Pods-JRGC.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -5720,7 +5659,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp299;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "39b131e8-ce26-4c8f-a39a-16c2ffb54c36";
+				PROVISIONING_PROFILE = "0ce353c9-748a-4307-9ccb-19c1a2dd7f16";
 				PROVISIONING_PROFILE_SPECIFIER = 2016_299Distribution;
 				SWIFT_OBJC_BRIDGING_HEADER = "JRGC/JRGC-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
@@ -5733,7 +5672,6 @@
 		7BFE3EAA1AC55C98002A53A2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -5755,7 +5693,6 @@
 		7BFE3EAB1AC55C98002A53A2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (

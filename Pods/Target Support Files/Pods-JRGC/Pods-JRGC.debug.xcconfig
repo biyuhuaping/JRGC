@@ -1,9 +1,0 @@
-FRAMEWORK_SEARCH_PATHS = $(inherited) $(PODS_ROOT)/UTDID "${PODS_ROOT}/BCUserTrack" "${PODS_ROOT}/UTDID"
-GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = ${SDK_DIR}/usr/include/libxml2 $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/BCUserTrack" "${PODS_ROOT}/Headers/Public/UTDID" "${PODS_ROOT}/Headers/Public/ZipArchive" "${PODS_ROOT}/Headers/Public/wax"
-LIBRARY_SEARCH_PATHS = $(inherited) "$PODS_CONFIGURATION_BUILD_DIR/ZipArchive" "$PODS_CONFIGURATION_BUILD_DIR/wax"
-OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/BCUserTrack" -isystem "${PODS_ROOT}/Headers/Public/UTDID" -isystem "${PODS_ROOT}/Headers/Public/ZipArchive" -isystem "${PODS_ROOT}/Headers/Public/wax"
-OTHER_LDFLAGS = $(inherited) -ObjC -l"ZipArchive" -l"sqlite3" -l"wax" -l"xml2" -l"z" -framework "CFNetwork" -framework "CoreGraphics" -framework "CoreTelephony" -framework "SystemConfiguration" -framework "UTDID" -framework "UTMini"
-PODS_BUILD_DIR = $BUILD_DIR
-PODS_CONFIGURATION_BUILD_DIR = $PODS_BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
-PODS_ROOT = ${SRCROOT}/Pods
