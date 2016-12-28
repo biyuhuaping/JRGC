@@ -250,8 +250,6 @@
          [JSPatch setupRSAPublicKey:JSPATCH_RSA_PUBLICKEY];
          [JSPatch sync];
     } else { //测试
-         [JSPatch startWithAppKey:@"1d0e92fa182f2874"];
-         [JSPatch setupRSAPublicKey:JSPATCH_RSA_PUBLICKEY];
          [JSPatch testScriptInBundle];
     }
 
@@ -745,12 +743,6 @@
             // 通知个人中心刷新，之所以加这个通知，是因为投标成功页查看我的奖励，跟个人中心都要刷新个人中心数据，保持统一（但会造成一次网络浪费，从投标成功页查看我的奖励列表，点击tab的时候也会请求一次这个接口）
             [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
         }
-    } else if (tag.intValue == kSXTagLevelIsOpen) {
-        //请求大开关 目前大开关已经废弃
-        NSString *Data = (NSString *)result;
-        NSDictionary * dic = [Data objectFromJSONString];
-        NSString *guideIsOpen = dic[@"isOpen"];
-        [[NSUserDefaults standardUserDefaults] setValue:guideIsOpen forKey:@"guideIsOpen"];
     }
     else if (tag.integerValue == kSXTagIsShowHornor) {
         NSString *Data = (NSString *)result;

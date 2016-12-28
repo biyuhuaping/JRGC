@@ -107,6 +107,8 @@
 		4A9F15BA1B0EC9B1009A7365 /* CoupleHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A9F15B91B0EC9B1009A7365 /* CoupleHeadView.m */; };
 		4AB1260C1AEF8EA400E915F1 /* UCFPurchaseBidViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AB1260A1AEF8EA400E915F1 /* UCFPurchaseBidViewController.xib */; };
 		4AC08B471B09BE4000DF8075 /* CalculatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC08B461B09BE4000DF8075 /* CalculatorView.m */; };
+		4ACB399A1E1216DD00E9BA8C /* FestivalActivitiesWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACB39981E1216DD00E9BA8C /* FestivalActivitiesWebView.m */; };
+		4ACB399B1E1216DD00E9BA8C /* FestivalActivitiesWebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4ACB39991E1216DD00E9BA8C /* FestivalActivitiesWebView.xib */; };
 		4AD6B4C61B32D33E00D94140 /* CycleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD6B4C51B32D33E00D94140 /* CycleView.m */; };
 		4AD6F6901AF07EF500F1B490 /* MoneyBoardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD6F68E1AF07EF500F1B490 /* MoneyBoardCell.m */; };
 		4ADA3A301B0DBBEF000B29FD /* CoupleHeadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ADA3A2F1B0DBBEF000B29FD /* CoupleHeadCell.m */; };
@@ -863,6 +865,9 @@
 		4AB1260A1AEF8EA400E915F1 /* UCFPurchaseBidViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFPurchaseBidViewController.xib; sourceTree = "<group>"; };
 		4AC08B451B09BE4000DF8075 /* CalculatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalculatorView.h; sourceTree = "<group>"; };
 		4AC08B461B09BE4000DF8075 /* CalculatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalculatorView.m; sourceTree = "<group>"; };
+		4ACB39971E1216DD00E9BA8C /* FestivalActivitiesWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FestivalActivitiesWebView.h; sourceTree = "<group>"; };
+		4ACB39981E1216DD00E9BA8C /* FestivalActivitiesWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FestivalActivitiesWebView.m; sourceTree = "<group>"; };
+		4ACB39991E1216DD00E9BA8C /* FestivalActivitiesWebView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FestivalActivitiesWebView.xib; sourceTree = "<group>"; };
 		4AD6B4C41B32D33E00D94140 /* CycleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycleView.h; sourceTree = "<group>"; };
 		4AD6B4C51B32D33E00D94140 /* CycleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycleView.m; sourceTree = "<group>"; };
 		4AD6F68D1AF07EF500F1B490 /* MoneyBoardCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoneyBoardCell.h; sourceTree = "<group>"; };
@@ -4176,6 +4181,9 @@
 				E311415D1D92769E00FF880A /* UCFWebViewJavascriptBridgeBBS.h */,
 				E311415E1D92769E00FF880A /* UCFWebViewJavascriptBridgeBBS.m */,
 				E311415F1D92769E00FF880A /* UCFWebViewJavascriptBridgeBBS.xib */,
+				4ACB39971E1216DD00E9BA8C /* FestivalActivitiesWebView.h */,
+				4ACB39981E1216DD00E9BA8C /* FestivalActivitiesWebView.m */,
+				4ACB39991E1216DD00E9BA8C /* FestivalActivitiesWebView.xib */,
 			);
 			path = UCFWebView;
 			sourceTree = "<group>";
@@ -4895,6 +4903,7 @@
 				74FC227E1BA6A5BB00D1660A /* UCFOverDueListViewController.xib in Resources */,
 				4AB1260C1AEF8EA400E915F1 /* UCFPurchaseBidViewController.xib in Resources */,
 				4AFE198D1CA0006200EE6768 /* TopUpAndCash.storyboard in Resources */,
+				4ACB399B1E1216DD00E9BA8C /* FestivalActivitiesWebView.xib in Resources */,
 				833603CE1D928F9200C3E435 /* UCFWithdrawCashResultWebView.xib in Resources */,
 				7477BF9B1AFB19B200914BFB /* UCFNormalRedEnvelopeTableViewCell.xib in Resources */,
 				25A9CC1A1D5213EB00209142 /* UCFTipCell.xib in Resources */,
@@ -5361,6 +5370,7 @@
 				7B2E56911ADBBE77008B0F9E /* UCFRetrievePasswordStepTwoViewController.m in Sources */,
 				74F2910D1AE0DB92003E0E86 /* UCFFeedBackViewController.m in Sources */,
 				74EE33181AF707B100BDE197 /* UCFFundsDetailHeader.m in Sources */,
+				4ACB399A1E1216DD00E9BA8C /* FestivalActivitiesWebView.m in Sources */,
 				FB120BB51ADE462F00023365 /* CircleShapeLayer.m in Sources */,
 				7BA6E4C71AD6731900FE8C37 /* UIView+WebCacheOperation.m in Sources */,
 				74931A141B1326B400143424 /* pinyin.c in Sources */,
