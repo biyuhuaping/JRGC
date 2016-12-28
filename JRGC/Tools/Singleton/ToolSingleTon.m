@@ -13,7 +13,8 @@
 #import "AuxiliaryFunc.h"
 #import "NZLabel.h"
 #import "MjAlertView.h"
-
+#import "FestivalActivitiesWebView.h"
+#import "AppDelegate.h"
 @interface ToolSingleTon () <NetworkModuleDelegate, UIAlertViewDelegate, MjAlertViewDelegate>
 @property (strong, nonatomic) UIView *alertView;
 @property (strong, nonatomic) UIView *background;
@@ -73,8 +74,26 @@
         }
     }
 }
+- (void)showFestivalActivitiesWebView
+{
+    FestivalActivitiesWebView *festivalView = [[FestivalActivitiesWebView alloc] initWithNibName:@"FestivalActivitiesWebView" bundle:nil];
+//    UIViewController *festivalView = [[UIViewController alloc] init];
+    festivalView.url = MALLURL;
+    festivalView.isHideNavigationBar = YES;
+    festivalView.definesPresentationContext = YES;
+    festivalView.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    festivalView.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.4];
+    festivalView.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+
+//    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:festivalView];
+    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    [app.tabBarController presentViewController:festivalView animated:YES completion:nil];
+
+}
 // 检测是否签到
 - (void)checkIsSign {
+    [self showFestivalActivitiesWebView];
+
     NSString *uuid = [[NSUserDefaults standardUserDefaults] objectForKey:UUID];
     if (uuid) {
         NSDate *lastFirstLoginTime = [[NSUserDefaults standardUserDefaults] objectForKey:FirstLoginTimeEveryday];
@@ -101,6 +120,7 @@
     if (tag.intValue == kSXTagSignDaysAndIsSign) {
         NSInteger flag = [dic[@"flag"] integerValue];
         self.apptzticket = dic[@"apptzticket"];
+        [self showFestivalActivitiesWebView];
         if (flag == 1) {
             NSInteger signFlags = [dic[@"signflags"] integerValue];
             if (signFlags == 0) {

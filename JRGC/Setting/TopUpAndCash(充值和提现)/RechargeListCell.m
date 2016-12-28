@@ -77,9 +77,28 @@
     UIView * sepView1 = [Common addSepateViewWithRect:CGRectMake(15, CGRectGetMaxY(_moneyLabel.frame), ScreenWidth, 0.5f) WithColor:UIColorWithRGB(0xeff0f3)];
     [self addSubview:sepView1];
     
+    _withdrawalWayLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(_moneyTipLabel.frame), 14 * 4, 27)];
+    _withdrawalWayLabel.text = @"提现方式";
+    _withdrawalWayLabel.textColor = UIColorWithRGB(0x555555);
+    _withdrawalWayLabel.font = [UIFont systemFontOfSize:12.0f];
+    _withdrawalWayLabel.backgroundColor = [UIColor clearColor];
+    [self addSubview:_withdrawalWayLabel];
+    
+    _cashWayLabel = [[UILabel alloc] init];
+    _cashWayLabel.text = @"实时提现";
+    _cashWayLabel.frame = CGRectMake(CGRectGetMaxX(_withdrawalWayLabel.frame) + 10,CGRectGetMaxY(_moneyLabel.frame),ScreenWidth - CGRectGetMaxX(_withdrawalWayLabel.frame) - 10 - 15, 27);
+    _cashWayLabel.textColor = UIColorWithRGB(0x555555);
+    _cashWayLabel.textAlignment = NSTextAlignmentRight;
+    _cashWayLabel.font = [UIFont boldSystemFontOfSize:12.0f];
+    _cashWayLabel.backgroundColor = [UIColor clearColor];
+    [self addSubview:_cashWayLabel];
+    
+    UIView * sepView2 = [Common addSepateViewWithRect:CGRectMake(15, CGRectGetMaxY(_cashWayLabel.frame), ScreenWidth, 0.5f) WithColor:UIColorWithRGB(0xeff0f3)];
+    [self addSubview:sepView2];
+    
     _beginLabel = [[UILabel alloc] init];
     _beginLabel.text = @"发生时间";
-    _beginLabel.frame = CGRectMake(15, CGRectGetMaxY(sepView1.frame), 14 * 4, 27);
+    _beginLabel.frame = CGRectMake(15, CGRectGetMaxY(sepView2.frame), 14 * 4, 27);
     _beginLabel.textColor = UIColorWithRGB(0x555555);
     _beginLabel.font = [UIFont systemFontOfSize:12.0f];
     _beginLabel.backgroundColor = [UIColor clearColor];
@@ -87,15 +106,15 @@
     
     _timeValueLabel = [[UILabel alloc] init];
     _timeValueLabel.text = @"2015-11-28 12:20:17";
-    _timeValueLabel.frame = CGRectMake(CGRectGetMaxX(_beginLabel.frame) + 10,CGRectGetMaxY(sepView1.frame),ScreenWidth - CGRectGetMaxX(_beginLabel.frame) - 10 - 15, 27);
+    _timeValueLabel.frame = CGRectMake(CGRectGetMaxX(_beginLabel.frame) + 10,CGRectGetMaxY(sepView2.frame),ScreenWidth - CGRectGetMaxX(_beginLabel.frame) - 10 - 15, 27);
     _timeValueLabel.textColor = UIColorWithRGB(0x555555);
     _timeValueLabel.textAlignment = NSTextAlignmentRight;
     _timeValueLabel.font = [UIFont systemFontOfSize:12.0f];
     _timeValueLabel.backgroundColor = [UIColor clearColor];
     [self addSubview:_timeValueLabel];
     
-    UIView * sepView2 = [Common addSepateViewWithRect:CGRectMake(0, CGRectGetMaxY(_timeValueLabel.frame)-0.5, ScreenWidth, 0.5f) WithColor:UIColorWithRGB(0xd8d8d8)];
-    [self addSubview:sepView2];
+    UIView * sepView3 = [Common addSepateViewWithRect:CGRectMake(0, CGRectGetMaxY(_timeValueLabel.frame)-0.5, ScreenWidth, 0.5f) WithColor:UIColorWithRGB(0xd8d8d8)];
+    [self addSubview:sepView3];
 
 }
 -(void)setDataDict:(NSDictionary *)dataDict{
