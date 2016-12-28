@@ -60,6 +60,7 @@
 
     _textField.leftView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
     _textField.leftViewMode = UITextFieldViewModeAlways; //此处用来设置leftview现实时机
+    [_textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
 }
 
 //搜索
@@ -73,6 +74,12 @@
     self.page = 1;
     //请求接口
     [self requestFriendListWithKeyword:_textField.text];
+}
+
+- (void)textFieldDidChange:(UITextField *)textField {
+    if (_textField.text.length == 0) {
+        _errorView.hidden = YES;
+    }
 }
 
 #pragma mark - 请求处理
