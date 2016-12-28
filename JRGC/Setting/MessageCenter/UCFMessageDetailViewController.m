@@ -124,13 +124,7 @@
     [_noDataView showInView:self.messageScrollView];
     self.viewLineHeight.constant = 0;
 }
-
 -(void)getToBack{
-    if ([self.baseTitleType isEqualToString:@"appDelegate"]) {
-        [self dismissViewControllerAnimated:YES completion:^{
-            
-        } ];
-    }
+    [self.navigationController popViewControllerAnimated:YES];
 }
-
 @end

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell tag="1001" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CashTableViewCell" rowHeight="80" id="KGk-i7-Jjw" customClass="UCFCashTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" tag="1001" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="79"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button opaque="NO" tag="1001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hks-Zr-sM9">
+                        <rect key="frame" x="14" y="28" width="22" height="22"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="22" id="YGt-dM-z1n"/>
+                            <constraint firstAttribute="width" constant="22" id="thw-1W-Pfx"/>
+                        </constraints>
+                        <state key="normal" title="Button" image="cash_unselected_icon"/>
+                        <state key="selected" image="cash_selected_icon"/>
+                    </button>
+                    <label opaque="NO" tag="1001" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="单笔金额&lt;=5万，单日&lt;=20万，7*24小时实时到账。" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="reD-xi-usm">
+                        <rect key="frame" x="46" y="34" width="259" height="30.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" tag="1001" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="实时提现" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VPZ-x5-9xz">
+                        <rect key="frame" x="46" y="15" width="58" height="12"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="12" id="GDT-Of-ryy"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="reD-xi-usm" firstAttribute="leading" secondItem="hks-Zr-sM9" secondAttribute="trailing" constant="10" id="5tE-Dy-Pld"/>
+                    <constraint firstItem="reD-xi-usm" firstAttribute="top" secondItem="VPZ-x5-9xz" secondAttribute="bottom" constant="7" id="I9B-Fx-JkT"/>
+                    <constraint firstItem="VPZ-x5-9xz" firstAttribute="leading" secondItem="hks-Zr-sM9" secondAttribute="trailing" constant="10" id="Pob-IA-dxu"/>
+                    <constraint firstItem="VPZ-x5-9xz" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="RUI-uP-bLc"/>
+                    <constraint firstItem="hks-Zr-sM9" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="6" id="Tok-oK-BcA"/>
+                    <constraint firstAttribute="bottom" secondItem="reD-xi-usm" secondAttribute="bottom" constant="15" id="dD9-Pj-YTS"/>
+                    <constraint firstItem="hks-Zr-sM9" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="mpg-qI-Gfi"/>
+                    <constraint firstAttribute="trailing" secondItem="reD-xi-usm" secondAttribute="trailing" constant="15" id="uDT-0g-dbv"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="cashWayButton" destination="hks-Zr-sM9" id="TR3-11-rRy"/>
+                <outlet property="cashWayDetailTitle" destination="reD-xi-usm" id="eHP-RO-1rG"/>
+                <outlet property="cashWayTitle" destination="VPZ-x5-9xz" id="eIP-o1-rmU"/>
+            </connections>
+            <point key="canvasLocation" x="-1442" y="158"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="cash_selected_icon" width="22" height="22"/>
+        <image name="cash_unselected_icon" width="22" height="22"/>
+    </resources>
+</document>
