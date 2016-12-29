@@ -986,3 +986,10 @@
 }
 
 @end
+// iOS10.2 之后如果info.plist里面的ATS 为YES 的情况下，也需要加这个
+//@implementation NSURLRequest(DataController)
+//+ (BOOL)allowsAnyHTTPSCertificateForHost:(NSString *)host
+//{
+//    return YES;
+//}
+//@end

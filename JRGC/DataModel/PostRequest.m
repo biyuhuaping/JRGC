@@ -113,6 +113,8 @@
     if(self.owner)
         [self.owner beginPost:self.sxTag];
     [_request startAsynchronous];
+//    [_request setAuthenticationScheme:@"https"];//设置验证方式
+//    [_request setValidatesSecureCertificate:NO];//设置验证证书
 //    [authStr release];
     
 //    BOOL dataWasCompressed = [_request isResponseCompressed];
