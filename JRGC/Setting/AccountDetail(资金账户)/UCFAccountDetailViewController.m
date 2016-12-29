@@ -179,7 +179,7 @@
             @{@"ItemName": @"待收利息", @"ItemData": [result[@"interestsDetail"] isKindOfClass:[NSNull class]] ? @"0.00" :result[@"interestsDetail"][@"writReceived"] },
             @{@"ItemName": @"已用返现券", @"ItemData":[result[@"interestsDetail"] isKindOfClass:[NSNull class]] ? @"0.00" :result[@"interestsDetail"][@"beanRecord"]},
             @{@"ItemName": @"已用工豆", @"ItemData": [result[@"interestsDetail"] isKindOfClass:[NSNull class]] ? @"0.00" :result[@"interestsDetail"][@"bean"]},
-            @{@"ItemName": @"余额利息", @"ItemData": @"0.00"}
+            @{@"ItemName": @"余额利息", @"ItemData": [result[@"interestsDetail"] isKindOfClass:[NSNull class]] ? @"0.00" :result[@"interestsDetail"][@"balanceIncome"]}
         ]};
             NSDictionary *dict1 = @{@"name": @"总计资产", @"opened": @(NO), @"content": result[@"total"], @"fundlist": @[@{@"ItemName": @"待收本息", @"ItemData": result[@"principalAndInterest"]},@{@"ItemName": @"账户余额", @"ItemData": result[@"cashBalance"]}]};
             NSDictionary *dict2 = @{@"name": @"待收本息", @"opened": @(NO), @"content": result[@"principalAndInterest"], @"fundlist": @[@{@"ItemName": @"待收本金", @"ItemData": result[@"principal"]}, @{@"ItemName": @"待收利息", @"ItemData": result[@"Interest"]}]};
