@@ -21,7 +21,8 @@
 #import "RechargeFixedTelNumView.h"
 #import "UCFHuiShangBankViewController.h"
 #import "FMDeviceManager.h"
-@interface UCFTopUpViewController () <UITextFieldDelegate,FMDeviceManagerDelegate>
+#import "UCFModifyReservedBankNumberViewController.h"
+@interface UCFTopUpViewController () <UITextFieldDelegate,FMDeviceManagerDelegate,UCFModifyReservedBankNumberDelegate>
 {
     NSString *curCodeType;          //当前验证码的状态
     NSString *rechargeLimiteUrl;    //产看银行限额的地址
@@ -424,8 +425,17 @@
     [[NetworkModule sharedNetworkModule] newPostReq:dic tag:kSXTagIdentifyCode owner:self signature:YES];
 
 }
+-(void)modifyReservedBankNumberSuccess:(NSString *)reservedBankNumber{
+    _phoneTextField.text = reservedBankNumber;
+}
 - (IBAction)clickModiyPhoneButton:(UIButton *)sender {
     [self.view endEditing:YES];
+    UCFModifyReservedBankNumberViewController *modifyBankNumberVC = [[UCFModifyReservedBankNumberViewController alloc]initWithNibName:@"UCFModifyReservedBankNumberViewController" bundle:nil];
+    modifyBankNumberVC.title = @"修改银行预留手机号";
+    modifyBankNumberVC.tellNumber = telNum;
+    modifyBankNumberVC.delegate = self;
+    [self.navigationController pushViewController:modifyBankNumberVC animated:YES];
+/*
     if ([sender.currentTitle isEqualToString:@"修改"]) {
             mjalert = [[MjAlertView alloc] initCustomAlertViewWithBlock:^(id blockContent) {
             fixedBaseView = (UIView *)blockContent;
@@ -524,6 +534,7 @@
         fixMaxYValue = mjalert.center.y + CGRectGetHeight(fixedBaseView.frame)/2;
         [telTextField becomeFirstResponder];
     }
+*/
 }
 
 
@@ -537,7 +548,6 @@
         [self sendVerifyCode:@"VMS"];
         curCodeType = @"VMS";
     }
-    
 }
 - (void)sendVerifyCode:(NSString*)type
 {
