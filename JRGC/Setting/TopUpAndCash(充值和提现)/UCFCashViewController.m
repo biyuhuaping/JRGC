@@ -202,6 +202,12 @@
     [super viewDidAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    //设置ScrollView总高度
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        float scrollViewHeight = CGRectGetMaxY(_telServiceLabel.frame);
+        self.baseScrollView.contentSize = CGSizeMake(ScreenWidth, scrollViewHeight + 50);
+        DLog(@"%@",self.baseScrollView);
+    });
 #ifdef __IPHONE_5_0
     float version = [[[UIDevice currentDevice] systemVersion] floatValue];
     if (version >= 5.0) {
@@ -888,13 +894,10 @@
 #pragma mark - 同盾
 - (void) didReceiveDeviceBlackBox: (NSString *) blackBox {
     NSString *wanip = [[NSUserDefaults standardUserDefaults] valueForKey:@"curWanIp"];
-    double  criticalValue = [[self.cashInfoDic[@"data"] objectForKey:@"criticalValue"] doubleValue] ;
-    NSDictionary *dataDic = @{};
-    if([_crachTextField.text doubleValue] / 10000.00 > criticalValue  ||  _isSpecial ||_isCompanyAgent ){//提现金额大于或等于10万 特殊用户  机构用户 都走这个大额流程
-        dataDic = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:UUID],@"userId",_crachTextField.text,@"reflectAmount",_cashBankNo,@"bankNo",@"",@"validateCode",_withdrawToken,@"withdrawTicket",blackBox, @"token_id",wanip,@"ip",nil];
-    }else{
-        dataDic= [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:UUID],@"userId",_crachTextField.text,@"reflectAmount",@"",@"bankNo",@"",@"validateCode",_withdrawToken,@"withdrawTicket",blackBox, @"token_id",wanip,@"ip",nil];
+    if(_bankBranchViewHeight2.constant != 44){//开户支行未选择的用户 就是实时提现
+        _cashBankNo = @"";//联行号为空 意味着用户选择的是实时提现 不为空 则为大额提现
     }
+    NSDictionary *dataDic = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:UUID],@"userId",_crachTextField.text,@"reflectAmount",_cashBankNo,@"bankNo",@"",@"validateCode",_withdrawToken,@"withdrawTicket",blackBox, @"token_id",wanip,@"ip",nil];
     [[NetworkModule sharedNetworkModule] newPostReq:dataDic tag:kSXTagWithdrawSub owner:self signature:YES];
 }
 - (void)mjalertView:(MjAlertView *)alertview didClickedButton:(UIButton *)clickedButton andClickedIndex:(NSInteger)index{
