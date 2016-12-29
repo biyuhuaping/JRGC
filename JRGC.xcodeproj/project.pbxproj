@@ -189,6 +189,13 @@
 		74956EB11D66E2BC00D68B61 /* BindPhoneNumViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74956EB01D66E2BC00D68B61 /* BindPhoneNumViewController.xib */; };
 		74956EB31D66E87F00D68B61 /* UCFModifyPhoneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74956EB21D66E87F00D68B61 /* UCFModifyPhoneViewController.xib */; };
 		74956EB51D66F33D00D68B61 /* UCFAccountDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74956EB41D66F33D00D68B61 /* UCFAccountDetailViewController.xib */; };
+		74D337B91E1390E800386853 /* UCFDataStatisticsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74D337B71E1390E800386853 /* UCFDataStatisticsViewController.m */; };
+		74D337BA1E1390E800386853 /* UCFDataStatisticsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74D337B81E1390E800386853 /* UCFDataStatisticsViewController.xib */; };
+		74D337C11E13C72D00386853 /* UCFDataStaticsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74D337BF1E13C72D00386853 /* UCFDataStaticsCell.m */; };
+		74D337C21E13C72D00386853 /* UCFDataStaticsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74D337C01E13C72D00386853 /* UCFDataStaticsCell.xib */; };
+		74D337C91E13C9BB00386853 /* CircleMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74D337C41E13C9BB00386853 /* CircleMapView.m */; };
+		74D337CA1E13C9BB00386853 /* CircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74D337C61E13C9BB00386853 /* CircleView.m */; };
+		74D337CB1E13C9BB00386853 /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 74D337C81E13C9BB00386853 /* UIColor+Hex.m */; };
 		74D7FCCC1AE8F72700653B8F /* FundAccountGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 74D7FCC91AE8F72700653B8F /* FundAccountGroup.m */; };
 		74D7FCCD1AE8F72700653B8F /* FundAccountItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 74D7FCCB1AE8F72700653B8F /* FundAccountItem.m */; };
 		74D7FCD51AE8F75000653B8F /* UCFHeadrView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74D7FCD21AE8F75000653B8F /* UCFHeadrView.m */; };
@@ -1008,6 +1015,18 @@
 		74956EB01D66E2BC00D68B61 /* BindPhoneNumViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BindPhoneNumViewController.xib; sourceTree = "<group>"; };
 		74956EB21D66E87F00D68B61 /* UCFModifyPhoneViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFModifyPhoneViewController.xib; sourceTree = "<group>"; };
 		74956EB41D66F33D00D68B61 /* UCFAccountDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFAccountDetailViewController.xib; sourceTree = "<group>"; };
+		74D337B61E1390E800386853 /* UCFDataStatisticsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFDataStatisticsViewController.h; sourceTree = "<group>"; };
+		74D337B71E1390E800386853 /* UCFDataStatisticsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFDataStatisticsViewController.m; sourceTree = "<group>"; };
+		74D337B81E1390E800386853 /* UCFDataStatisticsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFDataStatisticsViewController.xib; sourceTree = "<group>"; };
+		74D337BE1E13C72D00386853 /* UCFDataStaticsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFDataStaticsCell.h; sourceTree = "<group>"; };
+		74D337BF1E13C72D00386853 /* UCFDataStaticsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFDataStaticsCell.m; sourceTree = "<group>"; };
+		74D337C01E13C72D00386853 /* UCFDataStaticsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFDataStaticsCell.xib; sourceTree = "<group>"; };
+		74D337C31E13C9BB00386853 /* CircleMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleMapView.h; sourceTree = "<group>"; };
+		74D337C41E13C9BB00386853 /* CircleMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleMapView.m; sourceTree = "<group>"; };
+		74D337C51E13C9BB00386853 /* CircleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleView.h; sourceTree = "<group>"; };
+		74D337C61E13C9BB00386853 /* CircleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleView.m; sourceTree = "<group>"; };
+		74D337C71E13C9BB00386853 /* UIColor+Hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Hex.h"; sourceTree = "<group>"; };
+		74D337C81E13C9BB00386853 /* UIColor+Hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Hex.m"; sourceTree = "<group>"; };
 		74D7FCC81AE8F72700653B8F /* FundAccountGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FundAccountGroup.h; sourceTree = "<group>"; };
 		74D7FCC91AE8F72700653B8F /* FundAccountGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FundAccountGroup.m; sourceTree = "<group>"; };
 		74D7FCCA1AE8F72700653B8F /* FundAccountItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FundAccountItem.h; sourceTree = "<group>"; };
@@ -2396,6 +2415,7 @@
 		74541C7E1ADF95ED0009D27D /* FeedBack(邀请返利) */ = {
 			isa = PBXGroup;
 			children = (
+				74D337B51E13906500386853 /* 统计数据 */,
 				74F2910B1AE0DB92003E0E86 /* UCFFeedBackViewController.h */,
 				74F2910C1AE0DB92003E0E86 /* UCFFeedBackViewController.m */,
 				FB8B77DE1BA67C0D0007D5C5 /* UCFFeedBackViewController.xib */,
@@ -2675,6 +2695,49 @@
 				74931A2C1B1326FE00143424 /* OHASMarkupParserBase.m */,
 			);
 			path = TagParsers;
+			sourceTree = "<group>";
+		};
+		74D337B51E13906500386853 /* 统计数据 */ = {
+			isa = PBXGroup;
+			children = (
+				74D337BD1E13910100386853 /* Model */,
+				74D337BC1E1390F500386853 /* Controller */,
+				74D337BB1E1390ED00386853 /* View */,
+			);
+			name = "统计数据";
+			sourceTree = "<group>";
+		};
+		74D337BB1E1390ED00386853 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				74D337C31E13C9BB00386853 /* CircleMapView.h */,
+				74D337C41E13C9BB00386853 /* CircleMapView.m */,
+				74D337C51E13C9BB00386853 /* CircleView.h */,
+				74D337C61E13C9BB00386853 /* CircleView.m */,
+				74D337BE1E13C72D00386853 /* UCFDataStaticsCell.h */,
+				74D337BF1E13C72D00386853 /* UCFDataStaticsCell.m */,
+				74D337C01E13C72D00386853 /* UCFDataStaticsCell.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		74D337BC1E1390F500386853 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				74D337B61E1390E800386853 /* UCFDataStatisticsViewController.h */,
+				74D337B71E1390E800386853 /* UCFDataStatisticsViewController.m */,
+				74D337B81E1390E800386853 /* UCFDataStatisticsViewController.xib */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		74D337BD1E13910100386853 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				74D337C71E13C9BB00386853 /* UIColor+Hex.h */,
+				74D337C81E13C9BB00386853 /* UIColor+Hex.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 		74D7FCC61AE8F6EE00653B8F /* PersonalCenterModel */ = {
@@ -4892,6 +4955,7 @@
 				E31141611D92769E00FF880A /* UCFWebViewJavascriptBridgeBBS.xib in Resources */,
 				FB4F9E741D62A6F800CCB492 /* TradePasswordVC.xib in Resources */,
 				FB039DC61B60F31C00B24B47 /* UCFFriendRecCell.xib in Resources */,
+				74D337C21E13C72D00386853 /* UCFDataStaticsCell.xib in Resources */,
 				83EB21E31D758EE50069EF95 /* UCFCashRecordListViewController.xib in Resources */,
 				74FC22841BA6AB6700D1660A /* UCFCouponViewController.xib in Resources */,
 				E3C1179F1D40CFCC0053A052 /* UCFContributionValueViewController.xib in Resources */,
@@ -4969,6 +5033,7 @@
 				74FD355C1ADF58710083D52C /* UCFSettingMainCell.xib in Resources */,
 				25950EBF1D7FB6EC00E4CCBA /* CWFinishedView.xib in Resources */,
 				FB5149541D64441F00C26E7B /* guideImage6_3.png in Resources */,
+				74D337BA1E1390E800386853 /* UCFDataStatisticsViewController.xib in Resources */,
 				FB5149451D64403100C26E7B /* mask56_2.jpg in Resources */,
 				74FC22801BA6A7FA00D1660A /* UCFSecurityCenterViewController.xib in Resources */,
 				FBB0D4F91DF8009000D2C280 /* YWFeedbackBundle.bundle in Resources */,
@@ -5211,6 +5276,7 @@
 				FBB362481B036D7D000DD1B6 /* UCFRebateCell1.m in Sources */,
 				7BC304901ACBC26D007767F1 /* EGORefreshTableFooterView.m in Sources */,
 				74E89FF61DDD8D5D000B0AFF /* UCFP2PViewController.m in Sources */,
+				74D337C11E13C72D00386853 /* UCFDataStaticsCell.m in Sources */,
 				74F2911F1AE0DBF2003E0E86 /* UCFTopUpViewController.m in Sources */,
 				EDEF5E921CBF761700592B20 /* PromptView.m in Sources */,
 				4A9016871AFB12FE0049A9E0 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
@@ -5225,10 +5291,12 @@
 				4AF9C5E91B0B419600E3BE7D /* RechargeListCell.m in Sources */,
 				7470EC091B036B71006DDCEF /* UIImage+zhang.m in Sources */,
 				7BD180231B0EC7D30003A953 /* UCFNoDataView.m in Sources */,
+				74D337C91E13C9BB00386853 /* CircleMapView.m in Sources */,
 				7BD2BFD61B5DF9CC0046687C /* UCFGuaPopViewController.m in Sources */,
 				4A9016821AFB12FE0049A9E0 /* MASConstraintMaker.m in Sources */,
 				FB1E7F801D8E4230009CBE2C /* UCFInvestmentView.m in Sources */,
 				4AFAA8A71B0D76AB005C9BEC /* UCFSelectPayBackController.m in Sources */,
+				74D337B91E1390E800386853 /* UCFDataStatisticsViewController.m in Sources */,
 				7BA6E4C31AD6731900FE8C37 /* UIImage+MultiFormat.m in Sources */,
 				FBE265DA1B26CAB100240A79 /* UCFMyClaimCtrl.m in Sources */,
 				E3B26F481CA136F9002E87F4 /* DBColor.m in Sources */,
@@ -5248,6 +5316,7 @@
 				FBB685811AE4A76800F222B6 /* MJRefreshComponent.m in Sources */,
 				7BC8AA1E1AD4C74200BF4660 /* UCFMyBackMny.m in Sources */,
 				FB88C90C1AF9F92E00D2EE93 /* UIDic+Safe.m in Sources */,
+				74D337CA1E13C9BB00386853 /* CircleView.m in Sources */,
 				25950EC51D7FB6EC00E4CCBA /* FaceRectKeyPointView.m in Sources */,
 				E37086BF1D61BBB10041D293 /* DBCellConfig.m in Sources */,
 				7BC8A9FB1AD4C0A100BF4660 /* UCFLatestProjectViewController.m in Sources */,
@@ -5366,6 +5435,7 @@
 				747AAEBB1AEF89F6007A518F /* FundsDetailModel.m in Sources */,
 				E320200D1CC4BAD70065579C /* WebViewJavascriptBridge_JS.m in Sources */,
 				7BFE3E861AC55C98002A53A2 /* main.m in Sources */,
+				74D337CB1E13C9BB00386853 /* UIColor+Hex.m in Sources */,
 				FBB685821AE4A76800F222B6 /* MJRefreshConst.m in Sources */,
 				25950EBA1D7FB6EC00E4CCBA /* CWCamera.m in Sources */,
 				7BC8AA221AD4C74200BF4660 /* UCFRepayment.m in Sources */,
