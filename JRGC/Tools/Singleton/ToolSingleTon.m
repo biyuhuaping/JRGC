@@ -92,7 +92,7 @@
 }
 // 检测是否签到
 - (void)checkIsSign {
-    [self showFestivalActivitiesWebView];
+//    [self showFestivalActivitiesWebView];
 
     NSString *uuid = [[NSUserDefaults standardUserDefaults] objectForKey:UUID];
     if (uuid) {
