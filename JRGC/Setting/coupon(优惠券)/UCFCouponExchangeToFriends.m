@@ -23,6 +23,7 @@
 
 @property (strong, nonatomic) IBOutlet UITextField *textField;
 @property (strong, nonatomic) IBOutlet UIButton *searchBut;
+@property (strong, nonatomic) IBOutlet UIView *errorView;
 
 @end
 
@@ -56,42 +57,57 @@
     [self.myTableView addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(requestFriendListRefresh)];
     self.myTableView.footer.hidden = YES;
     [self.myTableView.header beginRefreshing];
-    
-    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
-    _textField.leftView = view;
+
+    _textField.leftView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
     _textField.leftViewMode = UITextFieldViewModeAlways; //此处用来设置leftview现实时机
+    [_textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
 }
 
 //搜索
 - (IBAction)searchAction:(id)sender {
+    if (_textField.text.length == 0) {
+        BlockUIAlertView *alert= [[BlockUIAlertView alloc]initWithTitle:@"提示" message:@"请输入搜索关键字" cancelButtonTitle:nil clickButton:^(NSInteger index) {
+        } otherButtonTitles:@"确定"];
+        [alert show];
+        return;
+    }
+    self.page = 1;
     //请求接口
-    
-    //返回数据，刷新table
-    if(1){//有数据
-        //显示列表
-    } else{
-        //显示 无数据
+    [self requestFriendListWithKeyword:_textField.text];
+}
+
+- (void)textFieldDidChange:(UITextField *)textField {
+    if (_textField.text.length == 0) {
+        _errorView.hidden = YES;
     }
 }
 
 #pragma mark - 请求处理
-//好友列表
 //重新请求
-- (void)requestFriendListRefresh
-{
+- (void)requestFriendListRefresh {
     self.page = 1;
-    [self requestFriendList];
+    [self requestFriendListWithKeyword:@""];
 }
-- (void)requestFriendListMore
-{
-    [self requestFriendList];
+
+- (void)requestFriendListMore {
+    [self requestFriendListWithKeyword:@""];
 }
-- (void)requestFriendList {
-    [[NetworkModule sharedNetworkModule] newPostReq:[NSDictionary dictionaryWithObjectsAndKeys:self.quanData.couponId ,@"couponId",self.couponType,@"couponType",[NSString stringWithFormat:@"%d", self.page],@"page",@"20",@"pageSize",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"userId",nil] tag:kSXTagPresentFriend owner:self signature:YES];
+
+//优惠券赠送好友列表 && 精确搜索
+- (void)requestFriendListWithKeyword:(NSString *)keyword {
+    NSDictionary *dicData = @{@"couponId":self.quanData.couponId,
+                              @"couponType":self.couponType,
+                              @"page":[NSString stringWithFormat:@"%d", self.page],
+                              @"pageSize":@"20",
+                              @"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],
+                              @"keyword":keyword
+                              };
+    [[NetworkModule sharedNetworkModule] newPostReq:dicData tag:kSXTagPresentFriend owner:self signature:YES];
 }
-//赠送接口
+
+//赠送好友券
 - (void)requestComplimentary {
-    [self beginRefresh];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [[NetworkModule sharedNetworkModule] newPostReq:[NSDictionary dictionaryWithObjectsAndKeys:self.quanData.couponId ,@"couponId",self.couponType,@"couponType",self.targetUserId,@"targetUserId",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"userId", nil] tag:kSXTagPresentCoupon owner:self signature:YES];
 }
 
@@ -100,68 +116,69 @@
 //    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 }
 
-- (void)endPost:(id)result tag:(NSNumber *)tag
-{
+- (void)endPost:(id)result tag:(NSNumber *)tag {
     [self.myTableView.header endRefreshing];
     [self.myTableView.footer endRefreshing];
-    [self endRefresh];
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    
+    //优惠券赠送好友列表
     if ([tag intValue] == kSXTagPresentFriend) {
-        //好友列表
         NSMutableDictionary *dic = [result objectFromJSONString];
         BOOL ret = [dic[@"ret"] boolValue];
         BOOL hasNextPage = [dic[@"data"][@"pageData"][@"pagination"][@"hasNextPage"] boolValue];
+        
         if (ret) {
+            NSArray *resultData = dic[@"data"][@"pageData"][@"result"];
+            //返回数据，刷新table
+            if(resultData.count > 0){//有数据
+                //显示列表
+                _errorView.hidden = YES;
+            } else{
+                //显示 无数据
+                _errorView.hidden = NO;
+            }
             
-            if(self.page == 1)
-            {
-                //第一页数据
-                self.dataList = [NSMutableArray arrayWithArray:dic[@"data"][@"pageData"][@"result"]];
-                if (self.dataList.count == 0)
-                {
+            if(self.page == 1) {//第一页数据
+                self.dataList = [NSMutableArray arrayWithArray:resultData];
+                if (self.dataList.count == 0) {
                     self.myTableView.footer.hidden = YES;
                     [self.noDataView showInView:self.myTableView];
                 }
-                else
-                {
+                else {
                     [self.noDataView hide];
                     self.myTableView.footer.hidden = NO;
-                    if (!hasNextPage)
-                    {
+                    if (!hasNextPage) {
                         [self.myTableView.footer noticeNoMoreData];
                     }
-                    else
-                    {
-                        
+                    else {
                         [self.myTableView.footer resetNoMoreData];
                         self.page ++;
                     }
                 }
             }
-            else
-            {
-                 //加载更多页数据
-                [self.dataList addObjectsFromArray:dic[@"data"][@"pageData"][@"result"]];
-                if (!hasNextPage)
-                {
+            else {//加载更多页数据
+                [self.dataList addObjectsFromArray:resultData];
+                if (!hasNextPage) {
                     [self.myTableView.footer noticeNoMoreData];
                     self.page = 1;
                 }
-                else
-                {
+                else {
                     self.page ++;
                     [self.myTableView.footer resetNoMoreData];
                 }
             }
             [self.myTableView reloadData];
         }
-        else
-        {
+        else {
+            if (_textField.text.length > 0) {
+                _errorView.hidden = NO;
+                return;
+            }
             BlockUIAlertView *alert_bankbrach= [[BlockUIAlertView alloc]initWithTitle:@"提示" message:dic[@"message"] cancelButtonTitle:nil clickButton:^(NSInteger index) {
                 //此页面已经存在于self.navigationController.viewControllers中,并且是当前页面的前一页面
                 UIViewController *setPrizeVC = [self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count-2];
                 
-                if ([setPrizeVC isKindOfClass:[UCFCouponViewController class]])
-                {
+                if ([setPrizeVC isKindOfClass:[UCFCouponViewController class]]) {
                     if ([((UCFCouponViewController *)setPrizeVC).currentViewController respondsToSelector:@selector(refreshingData)]) {
                         [((UCFCouponViewController *)setPrizeVC).currentViewController performSelector:@selector(refreshingData)];
                     }
@@ -169,18 +186,17 @@
                 [self.navigationController popViewControllerAnimated:YES];
             } otherButtonTitles:@"确定"];
             [alert_bankbrach show];
-
         }
     }
-    else {
-        //赠送券
+    
+    //赠送好友券
+    else if ([tag intValue] == kSXTagPresentCoupon){
         NSMutableDictionary *dic = [result objectFromJSONString];
         BlockUIAlertView *alert_bankbrach= [[BlockUIAlertView alloc]initWithTitle:@"提示" message:dic[@"message"] cancelButtonTitle:nil clickButton:^(NSInteger index) {
             //此页面已经存在于self.navigationController.viewControllers中,并且是当前页面的前一页面
             UIViewController *setPrizeVC = [self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count-2];
             
-            if ([setPrizeVC isKindOfClass:[UCFCouponViewController class]])
-            {
+            if ([setPrizeVC isKindOfClass:[UCFCouponViewController class]]) {
                 if ([((UCFCouponViewController *)setPrizeVC).currentViewController respondsToSelector:@selector(refreshingData)]) {
                     [((UCFCouponViewController *)setPrizeVC).currentViewController performSelector:@selector(refreshingData)];
                 }
@@ -191,26 +207,14 @@
     }
 }
 
-- (void)errorPost:(NSError *)err tag:(NSNumber *)tag
-{
+- (void)errorPost:(NSError *)err tag:(NSNumber *)tag {
     [self.myTableView.header endRefreshing];
-    [self endRefresh];
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     [AuxiliaryFunc showToastMessage:err.userInfo[@"NSLocalizedDescription"] withView:self.view];
 }
 
-- (void)beginRefresh
-{
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-}
-
-- (void)endRefresh
-{
-    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-}
-
 #pragma mark - tableView的delegate
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 44;
 }
 
@@ -218,32 +222,26 @@
     return self.dataList.count;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSDictionary *dic = [self.dataList objectAtIndex:indexPath.row];
     NSString *moneyStr;
-    if ([self.couponType intValue] == 1)
-    {
+    if ([self.couponType intValue] == 1) {
         moneyStr = [NSString stringWithFormat:@"确认将￥%@元返现券,赠送给%@吗？",self.quanData.useInvest,[dic[@"userName"] isEqualToString:@"未认证"] ? [NSString stringWithFormat:@"用户%@",dic[@"mobile"]]:dic[@"userName"]];
     }
-    else
-    {
+    else {
         moneyStr = [NSString stringWithFormat:@"确认将+%@返息券,赠送给%@吗？",self.quanData.backIntrestRate,[dic[@"userName"] isEqualToString:@"未认证"] ? [NSString stringWithFormat:@"用户%@",dic[@"mobile"]]:dic[@"userName"]];
     }
     
     BlockUIAlertView *alert_bankbrach= [[BlockUIAlertView alloc]initWithTitle:@"提示" message:moneyStr cancelButtonTitle:@"取消" clickButton:^(NSInteger index) {
-        if (index == 1)
-        {
+        if (index == 1) {
             self.targetUserId = [[self.dataList objectAtIndex:indexPath.row] objectForKey:@"userId"];
             [self requestComplimentary];
         }
-     
     } otherButtonTitles:@"确定"];
     [alert_bankbrach show];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 //    [tableView setSeparatorColor:UIColorWithRGB(0xe3e5ea)];
 //    static  NSString  *CellIdentiferId = @"UCFCouponExchangeToFriendTableViewCell";
 //    UITableViewCell  *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentiferId];
@@ -276,15 +274,13 @@
     };
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     NSMutableString *str = [[NSMutableString alloc] initWithString:[[self.dataList objectAtIndex:indexPath.row] objectSafeForKey:@"userName"]];
-    if (str.length < 3 && str)
-    {
+    if (str.length < 3 && str) {
         [str insertString:@"    "atIndex:1];
     }
     cell.nameLabel.text = str;
     NSString *mobile = [[self.dataList objectAtIndex:indexPath.row] objectSafeForKey:@"mobile"];
     cell.phoneNumber.text = mobile;
     return cell;
-
 }
 
 - (void)didReceiveMemoryWarning {
