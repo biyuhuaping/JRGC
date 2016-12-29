@@ -170,7 +170,7 @@
 #define BANK_INFO_New       @"api/userInfo/v2/showBankCardMess.json"  //获取银行卡信息（新）
 #define CASHCODEVALIDATE    @"api/withdraw/v2/validate.json" //提现页面校验验证码
 #define REGISTERSENDCODE    @"api/sendMsgRegister/v2/sendCode.json" //注册发送验证码
-#define MODIYRESERVEMOBILE  @"api/userInfo/v2/reserveMobileChange.json" //修改充值预留手机号码
+#define MODIYRESERVEMOBILE  @"api/userInfo/v2/reserveMobileChange2.json" //修改充值预留手机号码
 #define WITHDRAWSUB         @"api/withdraw/v2/withdrawSub.json"   //提现webView确认接口
 #define INVESTSUBMIT        @"api/invest/v2/submit.json"          //投资webView确认接口
 #define TRACLAIMSSUBMIT     @"api/investTraClaims/v2/submit.json" //债转webView确认接口
@@ -187,6 +187,7 @@
 #define TRANSFERLIST        @"api/prdTransfer/v2/getTranPageList.json"     //转让列表
 #define GETCONTRACTMSG      @"newPrdClaims/getContractMsg" //查看合同详情
 #define ISSHOWHORNOR        @"api/prdClaims/v2/zxSwitch.json"   //是否显示尊享
+#define VALIDATEOLDPHONENO   @"/api/userInfo/v2/validateOldPhoneNo.json"//校验注册手机号
 
 enum kPostStatus{
     kPostStatusNone=0,
@@ -370,6 +371,8 @@ enum kSXTag
     kSXTagTransferList,                 //转让列表
     kSXTagGetContractMsg,               //查看合同详情
     kSXTagIsShowHornor,                 //是否显示尊享
+    kSXTagValidateOldPhoneNo,            //校验注册手机号
+    
 };
 
 typedef enum kSXTag kSXTag;

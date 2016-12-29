@@ -1118,6 +1118,10 @@ static NetworkModule *gInstance = NULL;
             parameter = [NEW_SERVER_IP stringByAppendingString:ISSHOWHORNOR];
         }
             break;
+        case kSXTagValidateOldPhoneNo: {
+            parameter = [NEW_SERVER_IP stringByAppendingString:VALIDATEOLDPHONENO];
+        }
+            break;
 
     }
     //给原有参数字典添加公共参数

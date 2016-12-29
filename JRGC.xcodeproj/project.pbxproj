@@ -394,6 +394,8 @@
 		7BFE3E861AC55C98002A53A2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BFE3E851AC55C98002A53A2 /* main.m */; };
 		7BFE3E8C1AC55C98002A53A2 /* JRGC.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7BFE3E8A1AC55C98002A53A2 /* JRGC.xcdatamodeld */; };
 		7BFE3EA31AC55C98002A53A2 /* JRGCTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BFE3EA21AC55C98002A53A2 /* JRGCTests.m */; };
+		8300100D1E1356870088C707 /* UCFModifyReservedBankNumberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8300100B1E1356870088C707 /* UCFModifyReservedBankNumberViewController.m */; };
+		8300100E1E1356870088C707 /* UCFModifyReservedBankNumberViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8300100C1E1356870088C707 /* UCFModifyReservedBankNumberViewController.xib */; };
 		832D521F1D8FE5EA0060F1F7 /* UCFWithdrawCashResultWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 832D521E1D8FE5EA0060F1F7 /* UCFWithdrawCashResultWebView.m */; };
 		833603CE1D928F9200C3E435 /* UCFWithdrawCashResultWebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 833603CD1D928F9200C3E435 /* UCFWithdrawCashResultWebView.xib */; };
 		83EB21E21D758EE50069EF95 /* UCFCashRecordListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83EB21E01D758EE50069EF95 /* UCFCashRecordListViewController.m */; };
@@ -1383,6 +1385,9 @@
 		7BFE3E9C1AC55C98002A53A2 /* JRGCTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JRGCTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BFE3EA11AC55C98002A53A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7BFE3EA21AC55C98002A53A2 /* JRGCTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JRGCTests.m; sourceTree = "<group>"; };
+		8300100A1E1356870088C707 /* UCFModifyReservedBankNumberViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFModifyReservedBankNumberViewController.h; sourceTree = "<group>"; };
+		8300100B1E1356870088C707 /* UCFModifyReservedBankNumberViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFModifyReservedBankNumberViewController.m; sourceTree = "<group>"; };
+		8300100C1E1356870088C707 /* UCFModifyReservedBankNumberViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFModifyReservedBankNumberViewController.xib; sourceTree = "<group>"; };
 		832D521D1D8FE5EA0060F1F7 /* UCFWithdrawCashResultWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFWithdrawCashResultWebView.h; sourceTree = "<group>"; };
 		832D521E1D8FE5EA0060F1F7 /* UCFWithdrawCashResultWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFWithdrawCashResultWebView.m; sourceTree = "<group>"; };
 		833603CD1D928F9200C3E435 /* UCFWithdrawCashResultWebView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFWithdrawCashResultWebView.xib; sourceTree = "<group>"; };
@@ -2521,6 +2526,9 @@
 				4A8D5F731B0C1DCF0053F045 /* RechargeListViewController.m */,
 				74F2911D1AE0DBF2003E0E86 /* UCFTopUpViewController.h */,
 				74F2911E1AE0DBF2003E0E86 /* UCFTopUpViewController.m */,
+				8300100A1E1356870088C707 /* UCFModifyReservedBankNumberViewController.h */,
+				8300100B1E1356870088C707 /* UCFModifyReservedBankNumberViewController.m */,
+				8300100C1E1356870088C707 /* UCFModifyReservedBankNumberViewController.xib */,
 				74F291201AE0DBFC003E0E86 /* UCFCashViewController.h */,
 				74F291211AE0DBFC003E0E86 /* UCFCashViewController.m */,
 				832D521D1D8FE5EA0060F1F7 /* UCFWithdrawCashResultWebView.h */,
@@ -4938,6 +4946,7 @@
 				FB3A80221CC612B8004B56C3 /* UCFCouponReturn.xib in Resources */,
 				746FD82E1D9BB84400C5BEB6 /* MenuList.plist in Resources */,
 				746FD8271D9B71E700C5BEB6 /* UCFSettingViewController.xib in Resources */,
+				8300100E1E1356870088C707 /* UCFModifyReservedBankNumberViewController.xib in Resources */,
 				FBEDF1E01CB5171500116E12 /* MyViewController.xib in Resources */,
 				840A794B1C2A80B60059A946 /* UCFMessageSettingViewController.xib in Resources */,
 				FB8007E51C2A6B1300A33C90 /* AssignmentCell.xib in Resources */,
@@ -5432,6 +5441,7 @@
 				74DBAC7D1D587AEB00F6F6B1 /* UCFHuiBuinessBankView.m in Sources */,
 				E320200E1CC4BAD70065579C /* WebViewJavascriptBridgeBase.m in Sources */,
 				7BCE02371AC915720084C15C /* NSData+Base64.m in Sources */,
+				8300100D1E1356870088C707 /* UCFModifyReservedBankNumberViewController.m in Sources */,
 				747AAEBB1AEF89F6007A518F /* FundsDetailModel.m in Sources */,
 				E320200D1CC4BAD70065579C /* WebViewJavascriptBridge_JS.m in Sources */,
 				7BFE3E861AC55C98002A53A2 /* main.m in Sources */,
