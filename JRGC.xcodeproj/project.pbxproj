@@ -134,7 +134,6 @@
 		742D0CA81DE2D50E000FA676 /* UCFProjectLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 742D0CA71DE2D50E000FA676 /* UCFProjectLabel.m */; };
 		7440FD961E16567B00491BC5 /* UCFDataStaticsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7440FD951E16567B00491BC5 /* UCFDataStaticsModel.m */; };
 		7440FD991E16582600491BC5 /* UCFDataDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7440FD981E16582600491BC5 /* UCFDataDetailModel.m */; };
-		7440FD9B1E166A4200491BC5 /* test.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7440FD9A1E166A4200491BC5 /* test.plist */; };
 		74541C901ADFD6350009D27D /* UCFSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74541C8F1ADFD6350009D27D /* UCFSettingViewController.m */; };
 		746BBEA41AF8AEC700EBA0E7 /* UCFSelectedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 746BBEA31AF8AEC700EBA0E7 /* UCFSelectedView.m */; };
 		746BBEAB1AF8E93E00EBA0E7 /* UCFCouponUseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 746BBEA91AF8E93E00EBA0E7 /* UCFCouponUseCell.m */; };
@@ -928,7 +927,6 @@
 		7440FD951E16567B00491BC5 /* UCFDataStaticsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFDataStaticsModel.m; sourceTree = "<group>"; };
 		7440FD971E16582600491BC5 /* UCFDataDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFDataDetailModel.h; sourceTree = "<group>"; };
 		7440FD981E16582600491BC5 /* UCFDataDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFDataDetailModel.m; sourceTree = "<group>"; };
-		7440FD9A1E166A4200491BC5 /* test.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = test.plist; sourceTree = "<group>"; };
 		74541C8E1ADFD6350009D27D /* UCFSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFSettingViewController.h; sourceTree = "<group>"; };
 		74541C8F1ADFD6350009D27D /* UCFSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFSettingViewController.m; sourceTree = "<group>"; };
 		746BBEA21AF8AEC700EBA0E7 /* UCFSelectedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFSelectedView.h; sourceTree = "<group>"; };
@@ -3618,7 +3616,6 @@
 				7BFE3E851AC55C98002A53A2 /* main.m */,
 				7BCE020C1AC8FF3A0084C15C /* JRGC.pch */,
 				746FD82D1D9BB84400C5BEB6 /* MenuList.plist */,
-				7440FD9A1E166A4200491BC5 /* test.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -4985,7 +4982,6 @@
 				E31141611D92769E00FF880A /* UCFWebViewJavascriptBridgeBBS.xib in Resources */,
 				FB4F9E741D62A6F800CCB492 /* TradePasswordVC.xib in Resources */,
 				FB039DC61B60F31C00B24B47 /* UCFFriendRecCell.xib in Resources */,
-				7440FD9B1E166A4200491BC5 /* test.plist in Resources */,
 				74D337C21E13C72D00386853 /* UCFDataStaticsCell.xib in Resources */,
 				83EB21E31D758EE50069EF95 /* UCFCashRecordListViewController.xib in Resources */,
 				74FC22841BA6AB6700D1660A /* UCFCouponViewController.xib in Resources */,
