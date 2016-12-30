@@ -398,6 +398,8 @@
 		8300100E1E1356870088C707 /* UCFModifyReservedBankNumberViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8300100C1E1356870088C707 /* UCFModifyReservedBankNumberViewController.xib */; };
 		832D521F1D8FE5EA0060F1F7 /* UCFWithdrawCashResultWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 832D521E1D8FE5EA0060F1F7 /* UCFWithdrawCashResultWebView.m */; };
 		833603CE1D928F9200C3E435 /* UCFWithdrawCashResultWebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 833603CD1D928F9200C3E435 /* UCFWithdrawCashResultWebView.xib */; };
+		8366BFB91E151745008D027F /* UCFCashRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8366BFB71E151745008D027F /* UCFCashRecordCell.m */; };
+		8366BFBA1E151745008D027F /* UCFCashRecordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8366BFB81E151745008D027F /* UCFCashRecordCell.xib */; };
 		83EB21E21D758EE50069EF95 /* UCFCashRecordListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83EB21E01D758EE50069EF95 /* UCFCashRecordListViewController.m */; };
 		83EB21E31D758EE50069EF95 /* UCFCashRecordListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83EB21E11D758EE50069EF95 /* UCFCashRecordListViewController.xib */; };
 		83F2D4ED1DCB3F950041F913 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83F2D4EB1DCB3F950041F913 /* Interface.storyboard */; };
@@ -1391,6 +1393,9 @@
 		832D521D1D8FE5EA0060F1F7 /* UCFWithdrawCashResultWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFWithdrawCashResultWebView.h; sourceTree = "<group>"; };
 		832D521E1D8FE5EA0060F1F7 /* UCFWithdrawCashResultWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFWithdrawCashResultWebView.m; sourceTree = "<group>"; };
 		833603CD1D928F9200C3E435 /* UCFWithdrawCashResultWebView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFWithdrawCashResultWebView.xib; sourceTree = "<group>"; };
+		8366BFB61E151745008D027F /* UCFCashRecordCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFCashRecordCell.h; sourceTree = "<group>"; };
+		8366BFB71E151745008D027F /* UCFCashRecordCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFCashRecordCell.m; sourceTree = "<group>"; };
+		8366BFB81E151745008D027F /* UCFCashRecordCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFCashRecordCell.xib; sourceTree = "<group>"; };
 		83EB21DF1D758EE50069EF95 /* UCFCashRecordListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFCashRecordListViewController.h; sourceTree = "<group>"; };
 		83EB21E01D758EE50069EF95 /* UCFCashRecordListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFCashRecordListViewController.m; sourceTree = "<group>"; };
 		83EB21E11D758EE50069EF95 /* UCFCashRecordListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFCashRecordListViewController.xib; sourceTree = "<group>"; };
@@ -2537,6 +2542,9 @@
 				83EB21DF1D758EE50069EF95 /* UCFCashRecordListViewController.h */,
 				83EB21E01D758EE50069EF95 /* UCFCashRecordListViewController.m */,
 				83EB21E11D758EE50069EF95 /* UCFCashRecordListViewController.xib */,
+				8366BFB61E151745008D027F /* UCFCashRecordCell.h */,
+				8366BFB71E151745008D027F /* UCFCashRecordCell.m */,
+				8366BFB81E151745008D027F /* UCFCashRecordCell.xib */,
 				4AFE198C1CA0006200EE6768 /* TopUpAndCash.storyboard */,
 				4A3FDBCF1D5C5A7D00279CA2 /* RechargeStoryBorard.storyboard */,
 			);
@@ -4977,6 +4985,7 @@
 				840A79461C2A7C160059A946 /* UCFMessageCenterCell.xib in Resources */,
 				83FF3E4B1E12159C00DFB99C /* UCFCashTableViewCell.xib in Resources */,
 				7477BF911AFAFED900914BFB /* UCFRedEnvelopeTableViewCell.xib in Resources */,
+				8366BFBA1E151745008D027F /* UCFCashRecordCell.xib in Resources */,
 				FB21731A1AF20DFC00649AA0 /* UCFBackMoneyCell.xib in Resources */,
 				25950EC11D7FB6EC00E4CCBA /* CWLivessViewController.xib in Resources */,
 				83F4DAF61D9561EC00A0632E /* UCFPrdTransferBIdWebView.xib in Resources */,
@@ -5189,6 +5198,7 @@
 				FB8007E41C2A6B1300A33C90 /* AssignmentCell.m in Sources */,
 				7BCBF1201ADB611600C874FC /* UCFRegisterStepOneViewController.m in Sources */,
 				E37086C71D61E3030041D293 /* UCFOldUserGuideViewController.m in Sources */,
+				8366BFB91E151745008D027F /* UCFCashRecordCell.m in Sources */,
 				7BCE02141AC9025A0084C15C /* Common.m in Sources */,
 				2526ADDA1DD08CB800114D9A /* MLMOptionSelectView.m in Sources */,
 				7BC789091B04555F00D50494 /* UCFXieYiViewController.m in Sources */,
