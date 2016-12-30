@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UCFDataStaticsModel.h"
 
 @interface CircleView : UIView
 //饼状图数据array
-@property (nonatomic,strong)NSMutableArray *dataArray;
+@property (nonatomic,strong)UCFDataStaticsModel *model;
 
 @end

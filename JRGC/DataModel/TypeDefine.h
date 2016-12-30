@@ -182,6 +182,7 @@
 #define COUPONCERTIFICATE   @"api/discountCoupon/v2/couponCertificateList.json" //兑换券列表
 #define PRESENTFRIEND       @"api/discountCoupon/v2/presentFriendList.json"     //优惠券赠送好友列表
 #define PRESENTCOUPON       @"api/discountCoupon/v2/presentCoupon.json"         //赠送好友券
+#define DATASTATICS         @"api/inviteRebate/v2/rebateStatistic.json"         // 数据统计
 
 #define PROJECTLIST         @"api/prdClaims/v2/more.json"     //项目标列表
 #define TRANSFERLIST        @"api/prdTransfer/v2/getTranPageList.json"     //转让列表
@@ -372,6 +373,7 @@ enum kSXTag
     kSXTagGetContractMsg,               //查看合同详情
     kSXTagIsShowHornor,                 //是否显示尊享
     kSXTagValidateOldPhoneNo,            //校验注册手机号
+    kSXTagDataStatics,                  //数据统计
     
 };
 
