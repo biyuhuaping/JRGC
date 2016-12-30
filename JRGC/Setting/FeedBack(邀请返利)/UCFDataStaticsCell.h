@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UCFDataStaticsModel.h"
 
 @interface UCFDataStaticsCell : UITableViewCell
 
-@property (nonatomic, strong) NSMutableArray *array;
+@property (nonatomic, strong) UCFDataStaticsModel *model;
 
 @end

@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UCFDataStaticsModel.h"
 
 @interface CircleMapView : UIView
 @property(nonatomic , assign) CGRect fFrame;
-@property(nonatomic , strong) NSMutableArray *dataArray; //数据数组
+@property(nonatomic , strong) UCFDataStaticsModel *model; //数据数组
 @property(nonatomic , assign) CGFloat circleRadius;//半径
 
 @end

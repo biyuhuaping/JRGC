@@ -41,7 +41,7 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    self.circleMapView.dataArray = self.dataArray;
+    self.circleMapView.model = self.model;
 }
 
 

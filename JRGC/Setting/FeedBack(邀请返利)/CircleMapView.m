@@ -13,20 +13,42 @@
 #define degreesToRadian(x) ( 180.0 / PI * (x))
 
 #define radiu 32.5 //中心白色圆的半径
+
+@interface CircleMapView ()
+@property (nonatomic, strong) NSArray *colors;
+@property (nonatomic, strong) NSArray *signs;
+@end
+
 @implementation CircleMapView
+
+- (NSArray *)colors
+{
+    if (!_colors) {
+        _colors = [[NSArray alloc] initWithObjects:@"ff9897", @"93aaf2", nil];
+    }
+    return _colors;
+}
+- (NSArray *)signs
+{
+    if (!_signs) {
+        _signs = [[NSArray alloc] initWithObjects:@"本人", @"全体", nil];
+    }
+    return _signs;
+}
+
 //初始化
 -(instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
-        _dataArray = [[NSMutableArray alloc] init];
         _circleRadius = self.frame.size.height * 0.5;
     }
     return self;
 }
 
--(CGFloat)getShareNumber:(NSMutableArray *)arr{  //比例
+-(CGFloat)getShareNumber:(UCFDataStaticsModel *)model{  //比例
     CGFloat f = 0.0;
-    for (int  i = 0; i < arr.count; i++) {
-        f += [arr[i][@"number"] floatValue];
+    for (int  i = 0; i < model.chartDetail.count; i++) {
+        UCFDataDetailModel *detail = [model.chartDetail objectAtIndex:i];
+        f += [detail.amount doubleValue];
     }
     NSLog(@"总量：%.2f  比例:%.2f",f,360.0 / f);
     return M_PI*2 / f;
@@ -36,34 +58,49 @@
     
     //获取上下文
     CGContextRef ctx = UIGraphicsGetCurrentContext();
-    [self drawArcWithCGContextRef:ctx andWithPoint:CGPointMake(self.frame.size.height * 0.5, self.frame.size.height / 2) andWithAngle_start:0 andWithAngle_end:360 andWithColor:[UIColor colorWithHexString:@"e3e5ea"] andInt:0];
-   
-    
-    CGFloat bl = [self getShareNumber:_dataArray]; //得到比例
-    
-       //float angle_start = radians(0.0); //开始
-    CGFloat angle_start =0; //开始时的弧度  －－－－－ 旋转200度
-    CGFloat ff = 0;  //记录偏转的角度 －－－－－ 旋转200度
-    for (int i = 0; i < _dataArray.count; i++) {
-        //float angle_end = radians([_dataArray[i] floatValue] *bl + ff);  //结束
-        CGFloat angle_end =([_dataArray[i][@"number"]  floatValue] *bl + ff);  //结束
-        ff += [_dataArray[i][@"number"] floatValue] *bl;  //开始之前的角度
-        
-        //drawArc(ctx, self.center, angle_start, angle_end, _colorArray[i]);
-        
-        // 1.上下文
-        // 2.中心点
-        // 3.开始
-        // 4.结束
-        // 5.颜色
-        
-        [self drawArcWithCGContextRef:ctx andWithPoint:CGPointMake(self.frame.size.height * 0.5, self.frame.size.height / 2) andWithAngle_start:angle_start andWithAngle_end:angle_end andWithColor:[UIColor colorWithHexString: _dataArray[i][@"color"]] andInt:i];
-        
-        
-//        NSLog(@"开始:%.2f  数据:%.2f  加值:%.2f  结束: %.2f   AAA:%.2f",angle_start,[_dataArray[i] floatValue],[_dataArray[i] floatValue] *bl,angle_end,[_dataArray[i] floatValue] *bl + angle_start);
-        
-        
-        angle_start = angle_end;
+    if ([self.model.totalAmount doubleValue] == 0) {
+        [self drawArcWithCGContextRef:ctx andWithPoint:CGPointMake(self.frame.size.height * 0.5, self.frame.size.height / 2) andWithAngle_start:0 andWithAngle_end:360 andWithColor:[UIColor colorWithHexString:@"e3e5ea"] andInt:0];
+        for (int i = 0; i < self.model.chartDetail.count; i++) {
+            //小圆的中心点
+            CGFloat xx = _circleRadius * 2 + 30;
+            CGFloat yy = 50 + i*(50+2.5);
+            [self addInstructionsAndnumber:[UIColor colorWithHexString: self.colors[i]] andCGContextRef:ctx andX:xx andY:yy andInt:i];
+        }
+    }
+    else {
+        CGFloat bl = [self getShareNumber:self.model]; //得到比例
+        CGFloat angle_start =0; //开始时的弧度  －－－－－ 旋转200度
+        CGFloat ff = 0;  //记录偏转的角度 －－－－－ 旋转200度
+        for (int i = 0; i < self.model.chartDetail.count; i++) {
+            UCFDataDetailModel *detail = [self.model.chartDetail objectAtIndex:i];
+            //float angle_end = radians([_dataArray[i] floatValue] *bl + ff);  //结束
+            CGFloat angle_end =([detail.amount  doubleValue] *bl + ff);  //结束
+            ff += [detail.amount doubleValue] *bl;  //开始之前的角度
+            
+            //drawArc(ctx, self.center, angle_start, angle_end, _colorArray[i]);
+            
+            // 1.上下文
+            // 2.中心点
+            // 3.开始
+            // 4.结束
+            // 5.颜色
+            
+            [self drawArcWithCGContextRef:ctx andWithPoint:CGPointMake(self.frame.size.height * 0.5, self.frame.size.height / 2) andWithAngle_start:angle_start andWithAngle_end:angle_end andWithColor:[UIColor colorWithHexString: self.colors[i]] andInt:i];
+            
+            
+            //        NSLog(@"开始:%.2f  数据:%.2f  加值:%.2f  结束: %.2f   AAA:%.2f",angle_start,[_dataArray[i] floatValue],[_dataArray[i] floatValue] *bl,angle_end,[_dataArray[i] floatValue] *bl + angle_start);
+            
+            
+            angle_start = angle_end;
+            
+            //小圆的中心点
+            CGFloat xx = _circleRadius * 2 + 30;
+            CGFloat yy = 50 + i*(50+2.5);
+            
+            //添加说明
+            [self addInstructionsAndnumber:[UIColor colorWithHexString: self.colors[i]] andCGContextRef:ctx andX:xx andY:yy andInt:i];
+            }
+
     }
     
     [self addCenterCircle];//添加中心圆
@@ -94,14 +131,8 @@
     CGContextSetFillColor(ctx, CGColorGetComponents( color.CGColor));
     CGContextAddArc(ctx, point.x, point.y, self.bounds.size.height * 0.5,  angle_start, angle_end, 0);
     CGContextFillPath(ctx);
-    
-    //小圆的中心点
-    CGFloat xx = _circleRadius * 2 + 30;
-    CGFloat yy = 50 + n*(30+2.5);
-    
-    //添加说明
-    [self addInstructionsAndnumber:color andCGContextRef:ctx andX:xx andY:yy andInt:n];
 }
+
 /**
  * @color 颜色
  * @ctx CGContextRef
@@ -130,29 +161,40 @@
     [color set];
     [arcPath fill];
     [arcPath stroke];
-    
+
     // 数字的长度
-    CGSize itemSizeNumber = [[NSString stringWithFormat:@"%@",_dataArray[n][@"number"]] sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16.0]}];
+    CGSize itemSizeNumber;
+    UCFDataDetailModel * detail = [self.model.chartDetail objectAtIndex:n];
+    NSString *tempStr;
+    if ([self.model.totalAmount doubleValue] == 0) {
+        tempStr = [NSString stringWithFormat:@"%@", self.signs[n]];
+    }
+    else {
+        float rate = [detail.amount doubleValue] / [self.model.totalAmount doubleValue] * 100;
+        tempStr = [NSString stringWithFormat:@"%@%d%%", self.signs[n], (int)rate];
+    }
+    itemSizeNumber = [tempStr sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16.0]}];
     
 //    数字的起点
     CGFloat numberStartX = x + 7;
     CGFloat numberStartY = y - itemSizeNumber.height * 0.5;
     
     //指引线上面的数字
-    [[NSString stringWithFormat:@"%@",_dataArray[n][@"number"]] drawAtPoint:CGPointMake(numberStartX, numberStartY) withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16.0],NSForegroundColorAttributeName:color}];
+    [tempStr drawAtPoint:CGPointMake(numberStartX, numberStartY) withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16.0],NSForegroundColorAttributeName:color}];
     
     //文字的起点
     CGFloat textStartX = numberStartX;
-    CGFloat textStartY = numberStartY + itemSizeNumber.height;
+    CGFloat textStartY = numberStartY + itemSizeNumber.height+10;
     
     //指引线下面的text
     NSMutableParagraphStyle * paragraph = [[NSMutableParagraphStyle alloc]init];
      paragraph.alignment = NSTextAlignmentLeft;
    
-    [_dataArray[n][@"name"] drawInRect:CGRectMake(textStartX, textStartY, 150, 50) withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:10.0],NSForegroundColorAttributeName:color,NSParagraphStyleAttributeName:paragraph}];
+    [[NSString stringWithFormat:@"¥%.2f", [detail.amount doubleValue]] drawInRect:CGRectMake(textStartX, textStartY, 150, 50) withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:10.0],NSForegroundColorAttributeName:color,NSParagraphStyleAttributeName:paragraph}];
+    
 }
-- (void)setDataArray:(NSMutableArray *)dataArray{
-    _dataArray = dataArray;
+- (void)setModel:(UCFDataStaticsModel *)model {
+    _model = model;
     [self setNeedsDisplay];
 }
 @end
