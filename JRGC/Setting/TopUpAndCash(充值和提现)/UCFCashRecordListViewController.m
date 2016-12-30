@@ -12,6 +12,7 @@
 #import "UCFSettingGroup.h"
 #import "Common.h"
 #import "UCFToolsMehod.h"
+#import "UCFCashRecordCell.h"
 @interface UCFCashRecordListViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
     int pageNum;
@@ -116,7 +117,14 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 128.5f;
+    UCFSettingGroup *group = self.sectionItemArray[indexPath.section];
+    NSDictionary *dataDict = [group.items objectAtIndex:indexPath.row];
+    NSString *withdrawModeStr = [dataDict objectSafeForKey:@"withdrawMode"];
+    if ([withdrawModeStr isEqualToString:@""]) {
+        return 129-27;
+    }else{
+        return 129;
+    }
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     if (section == 0) {
@@ -136,8 +144,10 @@
     headTitleLab.textColor = UIColorWithRGB(0x333333);
     [view addSubview:headTitleLab];
     [headerView addSubview:view];
+    
     if (section == 0) {
         headerView.frame = CGRectMake(0, 0, ScreenWidth, 30);
+        
     }else{
         headerView.frame = CGRectMake(0, 0, ScreenWidth, 40);
         view.frame = CGRectMake(0, 10, ScreenWidth, 30);
@@ -148,58 +158,15 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *cellStr = @"cell";
-    RechargeListCell *cell = [tableView dequeueReusableCellWithIdentifier:cellStr];
+    static NSString *cellStr = @"UCFCashRecordCell";
+    UCFCashRecordCell *cell = [tableView dequeueReusableCellWithIdentifier:cellStr];
     if (cell == nil) {
-        cell = [[RechargeListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellStr];
+        cell = [[[NSBundle mainBundle]loadNibNamed:@"UCFCashRecordCell" owner:nil options:nil]firstObject];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     UCFSettingGroup *group = self.sectionItemArray[indexPath.section];
-    NSDictionary *itemDic = [group.items objectAtIndex:indexPath.row];
-    cell.orderNumLabel.text = [itemDic objectSafeForKey:@"indentNo"];
-    NSString *reflectAmount = [itemDic objectSafeForKey:@"reflectAmount"];
-    NSString *reflectAmountStr = [UCFToolsMehod AddComma:[NSString stringWithFormat:@"%.2lf",[reflectAmount doubleValue]]];
-    cell.moneyLabel.text = [NSString stringWithFormat:@"¥%@",reflectAmountStr];
-    cell.timeValueLabel.text = [itemDic objectSafeForKey:@"happenTime"];
-    NSInteger statue = [[itemDic objectForKey:@"handleState"] integerValue];
-//  0：未处理；7：已退款；9：提现成功；10：提现失败；11：处理中
-    if (statue == 9) { // 9:提现成功
-        cell.statueLabel.textColor = UIColorWithRGB(0x4aa1f9);
-    }else if(statue == 11 || statue == 10) // 10：提现失败；11：处理中
-    {
-        cell.statueLabel.textColor = UIColorWithRGB(0xfd4d4c);
-    }else{ //0：未处理；7：已退款；
-        cell.statueLabel.textColor = UIColorWithRGB(0x999999);
-    }
-    switch (statue) {
-        case 0:
-        {
-            cell.statueLabel.text = @"未处理";
-        }
-            break;
-        case 7:
-        {
-            cell.statueLabel.text = @"已退款";
-        }
-            break;
-        case 9:
-        {
-            cell.statueLabel.text = @"提现成功";
-        }
-            break;
-        case 10:
-        {
-            cell.statueLabel.text = @"提现失败";
-        }
-            break;
-        case 11:
-        {
-            cell.statueLabel.text = @"处理中";
-        }
-        default:
-            break;
-    }
-        return cell;
+    cell.dataDict = [group.items objectAtIndex:indexPath.row];
+    return cell;
 }
 //更新分组
 -(void)updateSectionItemArray:(NSMutableArray *)array{
