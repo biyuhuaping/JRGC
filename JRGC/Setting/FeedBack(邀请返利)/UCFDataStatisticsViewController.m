@@ -189,8 +189,8 @@
         
         if ([rstcode intValue] == 1) {
             NSArray *result = [[dictotal objectForKey:@"data"] objectForKey:@"resultData"];
-            NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"test" ofType:@"plist"];
-            result = [[NSArray alloc] initWithContentsOfFile:plistPath];
+//            NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"test" ofType:@"plist"];
+//            result = [[NSArray alloc] initWithContentsOfFile:plistPath];
             [self.dataArray removeAllObjects];
             for (NSDictionary *dic in result) {
                 UCFDataStaticsModel *model = [UCFDataStaticsModel dataStaticsModelWithDict:dic];
