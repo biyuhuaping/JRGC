@@ -11,6 +11,8 @@
 
 @interface UCFDataStaticsCell ()
 @property (weak, nonatomic) IBOutlet CircleView *circleView;
+@property (weak, nonatomic) IBOutlet UILabel *title;
+@property (weak, nonatomic) IBOutlet UILabel *value;
 
 @end
 
@@ -24,6 +26,13 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    self.circleView.dataArray = self.array;
+    self.circleView.model = self.model;
+}
+
+- (void)setModel:(UCFDataStaticsModel *)model
+{
+    _model = model;
+    self.title.text = model.searchMonth;
+    self.value.text = [NSString stringWithFormat:@"¥%@", model.totalAmount];
 }
 @end
