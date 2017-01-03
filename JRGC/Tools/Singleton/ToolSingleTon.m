@@ -120,7 +120,7 @@
     if (tag.intValue == kSXTagSignDaysAndIsSign) {
         NSInteger flag = [dic[@"flag"] integerValue];
         self.apptzticket = dic[@"apptzticket"];
-        [self showFestivalActivitiesWebView];
+//        [self showFestivalActivitiesWebView];
         if (flag == 1) {
             NSInteger signFlags = [dic[@"signflags"] integerValue];
             if (signFlags == 0) {
