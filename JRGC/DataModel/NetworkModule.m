@@ -778,7 +778,7 @@ static NetworkModule *gInstance = NULL;
         self.isShowSingleAlert = NO;
     }
     else {
-        [MBProgressHUD displayHudError:req.result];
+//        [MBProgressHUD displayHudError:req.result];
         [req.owner performSelector:sel withObject:req.result withObject:[NSNumber numberWithInt: req.sxTag]];
         req.owner = nil;
     }
