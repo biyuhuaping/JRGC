@@ -146,7 +146,7 @@
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
     self.touZiMoney = [headView.inputMoneyTextFieldLable.text doubleValue];
-    double repayBeans = self.touZiMoney * annualRate/100.0f * (repayPeriodDay/360.0f);
+    double repayBeans = self.touZiMoney * annualRate/100.0f * (repayPeriodDay/360.0f) *self.occupyRate;
     self.interestSum = round(repayBeans * 100)/100.0f;
     [self checkIsLegal];
 }
@@ -183,14 +183,37 @@
 - (void)changeFootViewShow
 {
     if (self.listType == 1) {
+        NSString *showStr = @"投资按月/季等额还款项目，最终返息获得工豆需要乘以0.56。0.56为借款方占用投资方自己的使用率";
+        CGSize size = [Common getStrHeightWithStr:showStr AndStrFont:13 AndWidth:ScreenWidth - 30];
+        slectView.keYongBaseView.frame = CGRectMake(0, 0, ScreenWidth, 40 + size.height);
+        self.beansTableView.frame = CGRectMake(ScreenWidth, 0, ScreenWidth, ScreenHeight - 64 - 162 - CGRectGetHeight(slectView.frame));
+        [Common addLineViewColor:UIColorWithRGB(0xeff0f3) With:slectView.keYongBaseView isTop:NO];
+
         slectView.selectedBtn.hidden = YES;
         slectView.tipLabel.hidden = YES;
-        slectView.showNumSelectLabe.textAlignment = NSTextAlignmentCenter;
-        slectView.showNumSelectLabe.frame = CGRectMake(0, CGRectGetMinY(slectView.tipLabel.frame) - 2, ScreenWidth, 17);
+        slectView.showNumTipLab.hidden = NO;
+
+        slectView.showNumSelectLabe.textAlignment = NSTextAlignmentLeft;
+        slectView.showNumSelectLabe.frame = CGRectMake(15, 10, ScreenWidth - 30, 15);
+//        slectView.showNumSelectLabe.backgroundColor = [UIColor redColor];
         slectView.showNumSelectLabe.text = @"投资¥0.00，可返息工豆¥0.00";
+        slectView.showNumTipLab.frame = CGRectMake(15, CGRectGetMaxY(slectView.showNumSelectLabe.frame) + 5 , ScreenWidth - 30, size.height);
+        slectView.showNumTipLab.text = showStr;
+//        slectView.showNumTipLab.backgroundColor = [UIColor blueColor];
+        
+        slectView.sureBtn.frame = CGRectMake(15, CGRectGetMaxY(slectView.keYongBaseView.frame) + 10, ScreenWidth - 30, 37);
+        slectView.frame = CGRectMake(0, ScreenHeight - 95 - size.height - NavigationBarHeight, ScreenWidth, CGRectGetMaxY(slectView.sureBtn.frame) + 10);
+        
+
     } else {
+        slectView.frame = CGRectMake(0, ScreenHeight - 95 - NavigationBarHeight, ScreenWidth, 95);
+        slectView.keYongBaseView.frame = CGRectMake(0, 0, ScreenWidth, 37.5);
+        slectView.sureBtn.frame = CGRectMake(15, CGRectGetMaxY(slectView.keYongBaseView.frame) + 10, ScreenWidth - 30, 37);
         slectView.selectedBtn.hidden = NO;
         slectView.tipLabel.hidden = NO;
+        slectView.showNumTipLab.hidden = YES;
+        
+        slectView.tipLabel.frame = CGRectMake(CGRectGetMaxX(slectView.selectedBtn.frame) + 8,(37.5 - 13)/2, 30, 13);
         slectView.showNumSelectLabe.textAlignment = NSTextAlignmentRight;
         slectView.showNumSelectLabe.frame = CGRectMake(CGRectGetMaxX(slectView.tipLabel.frame) + 10, CGRectGetMinY(slectView.tipLabel.frame) - 2, ScreenWidth - CGRectGetMaxX(slectView.tipLabel.frame) - 10 - 15, 17);
     }
