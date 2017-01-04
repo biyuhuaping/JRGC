@@ -10,7 +10,7 @@
 #import "UCFRedEnvelopeTableViewCell.h"
 #import "UCFNormalRedEnvelopeTableViewCell.h"
 #import "UCFRedEnvelopeModel.h"
-#import "UMSocialUIManager.h"
+#import <UShareUI/UShareUI.h>
 
 //#import "UMSocialSnsService.h"
 #import "WXApi.h"
@@ -333,19 +333,23 @@
     UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:title descr:shareText thumImage:self.sendRedBagImage];
     [shareObject setWebpageUrl:urlStr];
     messageObject.shareObject = shareObject;
-    [[UMSocialManager defaultManager] removePlatformProviderWithPlatformType:UMSocialPlatformType_Sina];
-    [[UMSocialManager defaultManager] removePlatformProviderWithPlatformType:UMSocialPlatformType_Qzone];
-    [[UMSocialManager defaultManager] removePlatformProviderWithPlatformType:UMSocialPlatformType_QQ];
-    [[UMSocialManager defaultManager] removePlatformProviderWithPlatformType:UMSocialPlatformType_WechatFavorite];
+    [UMSocialUIManager setPreDefinePlatforms:@[@(UMSocialPlatformType_WechatSession),@(UMSocialPlatformType_WechatTimeLine)]];
     __weak typeof(self) weakSelf = self;
-    //显示分享面板 （自定义UI可以忽略）
-    [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMShareMenuSelectionView *shareSelectionView,UMSocialPlatformType platformType) {
-        if (platformType == UMSocialPlatformType_WechatSession || platformType == UMSocialPlatformType_WechatTimeLine || platformType ==UMSocialPlatformType_WechatFavorite) {
-            [weakSelf shareDataWithPlatform:platformType withObject:messageObject];
-        } else {
-            [MBProgressHUD displayHudError:@"红包暂不支持该平台"];
-        }
+
+    [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
+        // 根据获取的platformType确定所选平台进行下一步操作
+        [weakSelf shareDataWithPlatform:platformType withObject:messageObject];
+
     }];
+    
+//    //显示分享面板 （自定义UI可以忽略）
+//    [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMShareMenuSelectionView *shareSelectionView,UMSocialPlatformType platformType) {
+//        if (platformType == UMSocialPlatformType_WechatSession || platformType == UMSocialPlatformType_WechatTimeLine || platformType ==UMSocialPlatformType_WechatFavorite) {
+//            [weakSelf shareDataWithPlatform:platformType withObject:messageObject];
+//        } else {
+//            [MBProgressHUD displayHudError:@"红包暂不支持该平台"];
+//        }
+//    }];
 }
 //直接分享
 - (void)shareDataWithPlatform:(UMSocialPlatformType)platformType withObject:(UMSocialMessageObject *)object

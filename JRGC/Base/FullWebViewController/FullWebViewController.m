@@ -7,7 +7,7 @@
 //
 
 #import "FullWebViewController.h"
-#import "UMSocialUIManager.h"
+#import <UShareUI/UShareUI.h>
 
 
 @interface FullWebViewController ()<UMSocialPlatformProvider>
@@ -160,14 +160,12 @@
     _shareContent = self.dicForShare.desc;
     
     UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
-    [[UMSocialManager defaultManager] addAddUserDefinePlatformProvider:self withUserDefinePlatformType:UMSocialPlatformType_Qzone];
-    [[UMSocialManager defaultManager] addAddUserDefinePlatformProvider:self withUserDefinePlatformType:UMSocialPlatformType_QQ];
-    [[UMSocialManager defaultManager] addAddUserDefinePlatformProvider:self withUserDefinePlatformType:UMSocialPlatformType_WechatFavorite];
-    [[UMSocialManager defaultManager] addAddUserDefinePlatformProvider:self withUserDefinePlatformType:UMSocialPlatformType_WechatFavorite];
+    [UMSocialUIManager setPreDefinePlatforms:@[@(UMSocialPlatformType_WechatSession),@(UMSocialPlatformType_WechatTimeLine),@(UMSocialPlatformType_Sina),@(UMSocialPlatformType_QQ),@(UMSocialPlatformType_Qzone)]];
+
 
     __weak typeof(self) weakSelf = self;
     //显示分享面板 （自定义UI可以忽略）
-    [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMShareMenuSelectionView *shareSelectionView, UMSocialPlatformType platformType) {
+    [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
         [weakSelf shareDataWithPlatform:platformType withObject:messageObject];
     }];
 }
