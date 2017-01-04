@@ -18,4 +18,6 @@
 @property(nonatomic, strong)UIButton    *selectedBtn;
 @property(nonatomic, strong)UILabel     *tipLabel;
 @property(nonatomic, strong)UIButton    *sureBtn;
+@property(nonatomic, strong)UILabel     *showNumTipLab;
+@property(nonatomic, strong)UIView      *keYongBaseView;
 @end

@@ -1239,7 +1239,7 @@
         double qiXian = [repayPeriodDay doubleValue];
         //计算返息的工豆
         money1 = ((money1 * liLv)/360.0f) * qiXian;
-        viewController.interestSum = round(money1 *100.0f)/100.0f;
+        viewController.interestSum = round(money1 *100.0f)/100.0f * [[self.dataDict valueForKey:@"occupyRate"] doubleValue];
         viewController.interestPrdaimSum = [[self.coupDict objectForKey:@"manzuMoney"] doubleValue];
         viewController.tmpSelectCounpArray = [self.coupDict objectForKey:@"selectArray"];
     }
