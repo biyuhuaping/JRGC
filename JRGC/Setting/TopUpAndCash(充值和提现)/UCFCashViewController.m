@@ -19,6 +19,7 @@
 #import "FullWebViewController.h"
 #import "UCFCashTableViewCell.h"
 #import "UCFSettingItem.h"
+#define CASHWAYCELLHIGHT  70.0 //提现方式cell 的高度
 @interface UCFCashViewController ()<UCFChoseBankViewControllerDelegate,MjAlertViewDelegate,UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate>
 {
     CGFloat orinalHeight;
@@ -258,7 +259,7 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    return 80;
+    return CASHWAYCELLHIGHT;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return _cashWayArray.count;
@@ -269,6 +270,7 @@
     if (cell == nil) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"UCFCashTableViewCell" owner:nil options:nil] firstObject];
     }
+    
     UCFSettingItem *item = _cashWayArray[indexPath.row];
     cell.cashWayTitle.text = item.title;
     cell.cashWayDetailTitle.text = item.subtitle;
@@ -287,6 +289,11 @@
         _pleasechooseLabel.hidden  = YES;
         _height4.constant = 0.5;
         _height5.constant = 0;
+    }
+    if (_cashWayArray.count == 2 && indexPath.row == 0) {
+        UIView *lineview = [[UIView alloc]initWithFrame:CGRectMake(50, CGRectGetMaxY(cell.frame) - 0.5,ScreenWidth - 50, 0.5)];
+        lineview.backgroundColor = UIColorWithRGB(0xE3E5EA);
+        [cell addSubview:lineview];
     }
     return cell;
 }
@@ -513,8 +520,10 @@
 }
 #pragma mark --- 初始化提现方式
 -(void)initCashStyle{
-    NSString *realTimeCashStr = [NSString stringWithFormat:@"单笔金额≤%@万，单日≤%@万，7*24小时实时到账。",_criticalValueStr,_perDayRealTimeAmountLimit];
-    NSString *largeCashStr = [NSString stringWithFormat:@"单日金额≤%@万，工作日%@受理，最快30分钟之内到账。",_perDayAmountLimit,_doTime];
+    NSString *realTimeCashStr = [NSString stringWithFormat:@"单笔金额≤%@万，单日≤%@万，7*24小时实时到账",_criticalValueStr,_perDayRealTimeAmountLimit];
+    
+//    单日金额≤%@万， _perDayAmountLimit
+    NSString *largeCashStr = [NSString stringWithFormat:@"工作日%@受理，最快30分钟之内到账",_doTime];
 
     if(_isCompanyAgent || _isSpecial){//如果是机构用户 或 特殊用户
         
@@ -556,9 +565,7 @@
     _baseScrollView.contentOffset = CGPointMake(0, 0);
     _cashWayTableView.delegate = self;
     _cashWayTableView.dataSource = self;
-    _cashWayTableViewHeigt.constant = _cashWayArray.count * 80;
-    
-    
+    _cashWayTableViewHeigt.constant = _cashWayArray.count * CASHWAYCELLHIGHT;
 }
 #pragma mark --- 点击修改提现金额按钮
 - (IBAction)clickModifyWithdrawCashBtn:(UIButton *)sender{

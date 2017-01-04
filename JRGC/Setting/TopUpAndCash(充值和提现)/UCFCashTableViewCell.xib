@@ -12,15 +12,15 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell tag="1001" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CashTableViewCell" rowHeight="80" id="KGk-i7-Jjw" customClass="UCFCashTableViewCell">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
+        <tableViewCell tag="1001" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CashTableViewCell" rowHeight="70" id="KGk-i7-Jjw" customClass="UCFCashTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" tag="1001" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="79"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="69"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button opaque="NO" tag="1001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hks-Zr-sM9">
-                        <rect key="frame" x="14" y="28" width="22" height="22"/>
+                        <rect key="frame" x="14" y="24" width="22" height="22"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="22" id="YGt-dM-z1n"/>
                             <constraint firstAttribute="width" constant="22" id="thw-1W-Pfx"/>
@@ -28,9 +28,9 @@
                         <state key="normal" title="Button" image="cash_unselected_icon"/>
                         <state key="selected" image="cash_selected_icon"/>
                     </button>
-                    <label opaque="NO" tag="1001" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="单笔金额&lt;=5万，单日&lt;=20万，7*24小时实时到账。" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="reD-xi-usm">
-                        <rect key="frame" x="46" y="34" width="259" height="30.5"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <label opaque="NO" tag="1001" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="单笔金额&lt;=100万，单日&lt;=100万，7*24小时实时到账" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="reD-xi-usm">
+                        <rect key="frame" x="46" y="34" width="274" height="20.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -52,7 +52,7 @@
                     <constraint firstItem="hks-Zr-sM9" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="6" id="Tok-oK-BcA"/>
                     <constraint firstAttribute="bottom" secondItem="reD-xi-usm" secondAttribute="bottom" constant="15" id="dD9-Pj-YTS"/>
                     <constraint firstItem="hks-Zr-sM9" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="mpg-qI-Gfi"/>
-                    <constraint firstAttribute="trailing" secondItem="reD-xi-usm" secondAttribute="trailing" constant="15" id="uDT-0g-dbv"/>
+                    <constraint firstAttribute="trailing" secondItem="reD-xi-usm" secondAttribute="trailing" id="uDT-0g-dbv"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
