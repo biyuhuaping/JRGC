@@ -520,10 +520,13 @@
 }
 #pragma mark --- 初始化提现方式
 -(void)initCashStyle{
-    NSString *realTimeCashStr = [NSString stringWithFormat:@"单笔金额≤%@万，单日≤%@万，7*24小时实时到账",_criticalValueStr,_perDayRealTimeAmountLimit];
-    
-//    单日金额≤%@万， _perDayAmountLimit
-    NSString *largeCashStr = [NSString stringWithFormat:@"工作日%@受理，最快30分钟之内到账",_doTime];
+    NSString *realTimeCashStr = @"";
+    if ([_perDayRealTimeAmountLimit isEqualToString:@""]) { //如果实时提现单日限额为空，则不展示
+        realTimeCashStr = [NSString stringWithFormat:@"单笔金额≤%@万，7*24小时实时到账。",_criticalValueStr];
+    }else{
+        realTimeCashStr = [NSString stringWithFormat:@"单笔金额≤%@万，单日≤%@万，7*24小时实时到账。",_criticalValueStr,_perDayRealTimeAmountLimit];
+    }
+    NSString *largeCashStr = [NSString stringWithFormat:@"工作日%@受理，最快30分钟之内到账。",_doTime];
 
     if(_isCompanyAgent || _isSpecial){//如果是机构用户 或 特殊用户
         
@@ -718,7 +721,7 @@
             manager->getDeviceInfoAsync(nil, self);
         }
         else{
-             self.getMoneyBtn.userInteractionEnabled = YES;
+            self.getMoneyBtn.userInteractionEnabled = YES;
             NSString *message =  [dic objectSafeForKey:@"message"];
             if(![message isEqualToString:@""]){
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:message delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
@@ -808,11 +811,12 @@
         return;
     }
     if (_bankBranchViewHeight2.constant == 44) {
-        if ([self isWorkTimeCash] ||_isHoliday) {
-            NSString *str = [NSString stringWithFormat:@"%@万以上提现，仅在工作日%@间处理",[self.cashInfoDic[@"data"] objectForKey:@"criticalValue"],_doTime];
-            [MBProgressHUD displayHudError:str];
-            return;
-        }
+//        if ([self isWorkTimeCash] ||_isHoliday) {
+//            NSString *messageStr = [NSString stringWithFormat:@"大额提现仅在工作日%@间处理，请耐心等待。",_doTime];
+//            UIAlertView *alert1 = [[UIAlertView alloc] initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+//            [alert1 show];
+//            return;
+//        }
         //临界值判断10万  大额提现时判断联行号是否为空
         if ( [self.bankBrachLabel.text  isEqualToString: @"开户支行"] || [_cashBankNo isEqualToString: @""] || _cashBankNo == nil ) {
             [MBProgressHUD displayHudError:@"请选择开户支行"];
