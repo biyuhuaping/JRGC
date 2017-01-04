@@ -195,12 +195,9 @@
 
         slectView.showNumSelectLabe.textAlignment = NSTextAlignmentLeft;
         slectView.showNumSelectLabe.frame = CGRectMake(15, 10, ScreenWidth - 30, 15);
-//        slectView.showNumSelectLabe.backgroundColor = [UIColor redColor];
         slectView.showNumSelectLabe.text = @"投资¥0.00，可返息工豆¥0.00";
         slectView.showNumTipLab.frame = CGRectMake(15, CGRectGetMaxY(slectView.showNumSelectLabe.frame) + 5 , ScreenWidth - 30, size.height);
         slectView.showNumTipLab.text = showStr;
-//        slectView.showNumTipLab.backgroundColor = [UIColor blueColor];
-        
         slectView.sureBtn.frame = CGRectMake(15, CGRectGetMaxY(slectView.keYongBaseView.frame) + 10, ScreenWidth - 30, 37);
         slectView.frame = CGRectMake(0, ScreenHeight - 95 - size.height - NavigationBarHeight, ScreenWidth, CGRectGetMaxY(slectView.sureBtn.frame) + 10);
         
@@ -209,6 +206,7 @@
         slectView.frame = CGRectMake(0, ScreenHeight - 95 - NavigationBarHeight, ScreenWidth, 95);
         slectView.keYongBaseView.frame = CGRectMake(0, 0, ScreenWidth, 37.5);
         slectView.sureBtn.frame = CGRectMake(15, CGRectGetMaxY(slectView.keYongBaseView.frame) + 10, ScreenWidth - 30, 37);
+        
         slectView.selectedBtn.hidden = NO;
         slectView.tipLabel.hidden = NO;
         slectView.showNumTipLab.hidden = YES;
