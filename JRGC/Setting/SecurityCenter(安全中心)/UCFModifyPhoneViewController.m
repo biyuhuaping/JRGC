@@ -267,6 +267,8 @@
         if (rstcode.intValue == 7) {
             [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
+            [[NSUserDefaults standardUserDefaults] setObject:self.modifyPhoneTextField.text forKey:@"lastLoginName"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
             [self performSelector:@selector(backLastView) withObject:nil afterDelay:1];
         }
         else {

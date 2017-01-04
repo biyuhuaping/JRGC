@@ -8,6 +8,7 @@
 
 #import "UserInfoSingle.h"
 #import <objc/runtime.h>
+#import "Growing.h"
 @implementation UserInfoSingle
 
 + (UserInfoSingle *)sharedManager
@@ -67,6 +68,16 @@
     [[NSUserDefaults standardUserDefaults] setValue:dict[@"openStatus"] forKey:OPENSTATUS];
     [[NSUserDefaults standardUserDefaults] setValue:dict[@"isCompanyAgent"] forKey:COMPANYAGENT];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    //  GrowingIO添加字段
+    [Growing setCS1Value:dict[@"userId"] forKey:@"user_Id"];
+    [Growing setCS2Value:[[NSUserDefaults standardUserDefaults] objectForKey:@"gcmCode"] forKey:@"user_gcm"];
+    if (dict[@"realName"] == nil || [dict[@"realName"] isEqualToString:@""]) {
+        [Growing setCS3Value:@"" forKey:@"user_name"];
+    }
+    else {
+        [Growing setCS3Value:dict[@"realName"] forKey:@"user_name"];
+    }
 }
 - (void)removeUserInfo
 {
@@ -80,6 +91,11 @@
     [[NSUserDefaults standardUserDefaults] setValue:nil forKey:OPENSTATUS];
     [[NSUserDefaults standardUserDefaults] setValue:nil forKey:COMPANYAGENT];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    //  GrowingIO删除字段
+    [Growing setCS1Value:nil forKey:@"user_Id"];
+    [Growing setCS2Value:nil forKey:@"user_gcm"];
+    [Growing setCS3Value:nil forKey:@"user_name"];
     
     self.userId = nil;
     self.time = -1;
@@ -130,5 +146,6 @@
     }
     return ret;
 }
+
 
 @end
