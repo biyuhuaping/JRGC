@@ -78,12 +78,14 @@
 {
     FestivalActivitiesWebView *festivalView = [[FestivalActivitiesWebView alloc] initWithNibName:@"FestivalActivitiesWebView" bundle:nil];
 //    UIViewController *festivalView = [[UIViewController alloc] init];
-    festivalView.url = MALLURL;
+    festivalView.url = REDRAINURL;
     festivalView.isHideNavigationBar = YES;
     festivalView.definesPresentationContext = YES;
     festivalView.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    festivalView.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.4];
-    festivalView.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    festivalView.view.backgroundColor = [UIColor clearColor];
+    if (kIS_IOS8) {
+        festivalView.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    }
 
 //    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:festivalView];
     AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
