@@ -44,7 +44,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    baseTitleLabel.text = @"数据统计";
+    baseTitleLabel.text = @"统计数据";
     [self addLeftButton];
     
     NSDate *now = [NSDate date];
@@ -68,7 +68,7 @@
     [self addRightButton];
     
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(ScreenWidth - 100, 1, 100, 0) style:UITableViewStylePlain];
-    tableView.backgroundColor = [UIColor redColor];
+    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     tableView.hidden = YES;
     tableView.delegate = self;
     tableView.dataSource = self;

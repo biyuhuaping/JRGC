@@ -112,17 +112,22 @@
     [_closeBtn setBackgroundImage:[[UIImage imageNamed:@"btn_red"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:2.5] forState:UIControlStateNormal];
     [_closeBtn setBackgroundImage:[[UIImage imageNamed:@"btn_red_highlight"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:2.5] forState:UIControlStateHighlighted];
     
-    [self addRightButton];
     
+    NSString *gcmCode = [[NSUserDefaults standardUserDefaults] objectForKey:@"gcmCode"];
+    if ([gcmCode hasPrefix:@"A"]) {
+        [self addRightButton];
+    }
+    else {
+        self.navigationItem.rightBarButtonItem = nil;
+    }
 }
 
 - (void)addRightButton
 {
     UIButton *rightbutton = [UIButton buttonWithType:UIButtonTypeCustom];
     rightbutton.frame = CGRectMake(0, 0, 75, 44);
-//    rightbutton.backgroundColor = [UIColor redColor];
     [rightbutton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [rightbutton setTitle:@"数据统计" forState:UIControlStateNormal];
+    [rightbutton setTitle:@"统计数据" forState:UIControlStateNormal];
     rightbutton.titleLabel.font = [UIFont systemFontOfSize:15.0];
     [rightbutton addTarget:self action:@selector(clickRightBtn) forControlEvents:UIControlEventTouchUpInside];
     [rightbutton setTitleColor:[UIColor colorWithWhite:1 alpha:0.7] forState:UIControlStateHighlighted];
