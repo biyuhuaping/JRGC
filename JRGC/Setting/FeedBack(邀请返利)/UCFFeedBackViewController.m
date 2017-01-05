@@ -281,7 +281,7 @@
         //1:红包URL   2：红包文字描述    3：工场码图片URL    4:工场码文字描述   5：红包标题  6：工场码标题
         for (NSDictionary *result in temArr) {
             if ([result[@"rank"] intValue] == 3) {//3：工场码图片URL
-                _shareImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:result[@"desvalue"]]]];
+                _shareImage = [Common getImageFromURL:result[@"desvalue"]];
             }else if ([result[@"rank"] intValue] == 4) {//4：工场码文字描述
                 _shareContent = result[@"desvalue"];
             }else if ([result[@"rank"] intValue] == 6) {//6：工场码标题

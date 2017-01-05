@@ -1097,4 +1097,23 @@
     CGImageRelease(bitmapImage);
     return [UIImage imageWithCGImage:scaledImage];
 }
++(UIImage *) getImageFromURL:(NSString *)fileURL{
+    
+    ASIFormDataRequest * innerRequest = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:fileURL]];
+    [innerRequest setRequestMethod:@"GET"];
+    [innerRequest setValidatesSecureCertificate:NO];
+    [innerRequest setDelegate:self];
+    [innerRequest setTimeOutSeconds:20.0];
+    // 开始同步请求
+    [innerRequest startSynchronous];
+    NSError *error = [innerRequest error];
+    UIImage * result;
+    if (!error)
+    {
+        NSData *data=[innerRequest responseData];
+        result = [UIImage imageWithData:data];
+    }
+    return result;
+    
+}
 @end

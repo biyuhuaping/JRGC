@@ -199,7 +199,7 @@
                 NSInteger rank = [dict[@"rank"] integerValue];
                 switch (rank) {
                     case 1: {
-                        UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:dict[@"desvalue"]]]];
+                        UIImage *image = [Common getImageFromURL:dict[@"desvalue"]];
                         if (image) {
                             self.sendRedBagImage = image;//分享内嵌图片
                         }else
