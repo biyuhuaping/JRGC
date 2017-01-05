@@ -112,8 +112,14 @@
     [_closeBtn setBackgroundImage:[[UIImage imageNamed:@"btn_red"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:2.5] forState:UIControlStateNormal];
     [_closeBtn setBackgroundImage:[[UIImage imageNamed:@"btn_red_highlight"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:2.5] forState:UIControlStateHighlighted];
     
-    [self addRightButton];
     
+    NSString *gcmCode = [[NSUserDefaults standardUserDefaults] objectForKey:@"gcmCode"];
+    if ([gcmCode hasPrefix:@"A"]) {
+        [self addRightButton];
+    }
+    else {
+        self.navigationItem.rightBarButtonItem = nil;
+    }
 }
 
 - (void)addRightButton
@@ -129,14 +135,6 @@
 //
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightbutton];
     self.navigationItem.rightBarButtonItem = rightItem;
-    
-    NSString *gcmCode = [[NSUserDefaults standardUserDefaults] objectForKey:@"gcmCode"];
-    if ([gcmCode hasPrefix:@"A"]) {
-        rightbutton.hidden = NO;
-    }
-    else {
-        rightbutton.hidden = YES;
-    }
 }
 
 - (void)clickRightBtn
