@@ -19,6 +19,7 @@
 #import "FullWebViewController.h"
 #import "UCFCashTableViewCell.h"
 #import "UCFSettingItem.h"
+#define CASHWAYCELLHIGHT  70.0 //提现方式cell 的高度
 @interface UCFCashViewController ()<UCFChoseBankViewControllerDelegate,MjAlertViewDelegate,UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate>
 {
     CGFloat orinalHeight;
@@ -258,7 +259,7 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    return 80;
+    return CASHWAYCELLHIGHT;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return _cashWayArray.count;
@@ -269,6 +270,7 @@
     if (cell == nil) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"UCFCashTableViewCell" owner:nil options:nil] firstObject];
     }
+    
     UCFSettingItem *item = _cashWayArray[indexPath.row];
     cell.cashWayTitle.text = item.title;
     cell.cashWayDetailTitle.text = item.subtitle;
@@ -287,6 +289,11 @@
         _pleasechooseLabel.hidden  = YES;
         _height4.constant = 0.5;
         _height5.constant = 0;
+    }
+    if (_cashWayArray.count == 2 && indexPath.row == 0) {
+        UIView *lineview = [[UIView alloc]initWithFrame:CGRectMake(50, CGRectGetMaxY(cell.frame) - 0.5,ScreenWidth - 50, 0.5)];
+        lineview.backgroundColor = UIColorWithRGB(0xE3E5EA);
+        [cell addSubview:lineview];
     }
     return cell;
 }
@@ -513,8 +520,13 @@
 }
 #pragma mark --- 初始化提现方式
 -(void)initCashStyle{
-    NSString *realTimeCashStr = [NSString stringWithFormat:@"单笔金额≤%@万，单日≤%@万，7*24小时实时到账。",_criticalValueStr,_perDayRealTimeAmountLimit];
-    NSString *largeCashStr = [NSString stringWithFormat:@"单日金额≤%@万，工作日%@受理，最快30分钟之内到账。",_perDayAmountLimit,_doTime];
+    NSString *realTimeCashStr = @"";
+    if ([_perDayRealTimeAmountLimit isEqualToString:@""]) { //如果实时提现单日限额为空，则不展示
+        realTimeCashStr = [NSString stringWithFormat:@"单笔金额≤%@万，7*24小时实时到账。",_criticalValueStr];
+    }else{
+        realTimeCashStr = [NSString stringWithFormat:@"单笔金额≤%@万，单日≤%@万，7*24小时实时到账。",_criticalValueStr,_perDayRealTimeAmountLimit];
+    }
+    NSString *largeCashStr = [NSString stringWithFormat:@"工作日%@受理，最快30分钟之内到账。",_doTime];
 
     if(_isCompanyAgent || _isSpecial){//如果是机构用户 或 特殊用户
         
@@ -556,9 +568,7 @@
     _baseScrollView.contentOffset = CGPointMake(0, 0);
     _cashWayTableView.delegate = self;
     _cashWayTableView.dataSource = self;
-    _cashWayTableViewHeigt.constant = _cashWayArray.count * 80;
-    
-    
+    _cashWayTableViewHeigt.constant = _cashWayArray.count * CASHWAYCELLHIGHT;
 }
 #pragma mark --- 点击修改提现金额按钮
 - (IBAction)clickModifyWithdrawCashBtn:(UIButton *)sender{
@@ -711,7 +721,7 @@
             manager->getDeviceInfoAsync(nil, self);
         }
         else{
-             self.getMoneyBtn.userInteractionEnabled = YES;
+            self.getMoneyBtn.userInteractionEnabled = YES;
             NSString *message =  [dic objectSafeForKey:@"message"];
             if(![message isEqualToString:@""]){
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:message delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
@@ -801,11 +811,12 @@
         return;
     }
     if (_bankBranchViewHeight2.constant == 44) {
-        if ([self isWorkTimeCash] ||_isHoliday) {
-            NSString *str = [NSString stringWithFormat:@"%@万以上提现，仅在工作日%@间处理",[self.cashInfoDic[@"data"] objectForKey:@"criticalValue"],_doTime];
-            [MBProgressHUD displayHudError:str];
-            return;
-        }
+//        if ([self isWorkTimeCash] ||_isHoliday) {
+//            NSString *messageStr = [NSString stringWithFormat:@"大额提现仅在工作日%@间处理，请耐心等待。",_doTime];
+//            UIAlertView *alert1 = [[UIAlertView alloc] initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+//            [alert1 show];
+//            return;
+//        }
         //临界值判断10万  大额提现时判断联行号是否为空
         if ( [self.bankBrachLabel.text  isEqualToString: @"开户支行"] || [_cashBankNo isEqualToString: @""] || _cashBankNo == nil ) {
             [MBProgressHUD displayHudError:@"请选择开户支行"];
