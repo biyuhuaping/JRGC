@@ -13,7 +13,7 @@
 #import "UCFCouponUseCell.h"
 #import "UCFCouponViewController.h"
 
-@interface UCFCouponExchangeToFriends ()
+@interface UCFCouponExchangeToFriends ()<UIGestureRecognizerDelegate>
 
 @property (strong, nonatomic) IBOutlet UIView *headView;
 @property (nonatomic, strong) NSMutableArray *dataList;
@@ -62,10 +62,15 @@
     _textField.leftView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
     _textField.leftViewMode = UITextFieldViewModeAlways; //此处用来设置leftview现实时机
     [_textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+    
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hideKeyboard)];
+    tapGesture.delegate  = self;
+    [self.myTableView addGestureRecognizer:tapGesture];
 }
 
 //搜索
 - (IBAction)searchAction:(id)sender {
+    [self.textField resignFirstResponder]; //键盘下落
     if (_textField.text.length == 0) {
         BlockUIAlertView *alert= [[BlockUIAlertView alloc]initWithTitle:@"提示" message:@"请输入搜索关键字" cancelButtonTitle:nil clickButton:^(NSInteger index) {
         } otherButtonTitles:@"确定"];
@@ -264,7 +269,7 @@
 //    NSString *mobile = [[self.dataList objectAtIndex:indexPath.row] objectSafeForKey:@"mobile"];
 //    cell.detailTextLabel.text = mobile;
 //    return cell;
-
+    
     [tableView setSeparatorColor:UIColorWithRGB(0xe3e5ea)];
     static  NSString  *CellIdentiferId = @"UCFCouponExchangeToFriendTableViewCell";
     UCFCouponExchangeToFriendTableViewCell  *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentiferId];
@@ -272,6 +277,7 @@
         NSArray *nibs = [[NSBundle mainBundle]loadNibNamed:@"UCFCouponExchangeToFriendTableViewCell" owner:nil options:nil];
         cell = [nibs lastObject];
         cell.backgroundColor = [UIColor clearColor];
+        cell.contentView.tag = 1010;
     };
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     NSMutableString *str = [[NSMutableString alloc] initWithString:[[self.dataList objectAtIndex:indexPath.row] objectSafeForKey:@"userName"]];
@@ -282,6 +288,18 @@
     NSString *mobile = [[self.dataList objectAtIndex:indexPath.row] objectSafeForKey:@"mobile"];
     cell.phoneNumber.text = mobile;
     return cell;
+}
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
+    // 若为UITableViewCellContentView（即点击了tableViewCell），则不截获Touch事件
+    if (touch.view.tag == 1010) {
+        return NO;
+    }
+    return  YES;
+}
+//键盘下落
+-(void)hideKeyboard{
+    [self.textField resignFirstResponder];
 }
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];

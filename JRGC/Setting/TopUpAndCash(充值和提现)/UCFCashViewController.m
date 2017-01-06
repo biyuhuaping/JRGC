@@ -298,6 +298,7 @@
     return cell;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [self.crachTextField  resignFirstResponder];
     // 1.取消选中这行
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 
@@ -402,7 +403,8 @@
     return textField;
 }
 -(void)textFieldEditingDidEnd:(UITextField *)textField{
-    [self realTimeWithdrawalAmount:textField.text];
+
+//    [self realTimeWithdrawalAmount:textField.text];
 }
 #pragma mark -实时监测提现金额
 -(void)realTimeWithdrawalAmount:(NSString *)cashMoneyStr{
@@ -937,7 +939,7 @@
         if([_bankName.text isEqualToString:@""]){
             [_crachTextField becomeFirstResponder];
         }else{
-           [self realTimeWithdrawalAmount:_accountAmountStr];
+           [self realTimeWithdrawalAmount:_crachTextField.text];
         }
     }
 }
