@@ -20,7 +20,7 @@
 #import "UCFCashTableViewCell.h"
 #import "UCFSettingItem.h"
 #define CASHWAYCELLHIGHT  70.0 //提现方式cell 的高度
-@interface UCFCashViewController ()<UCFChoseBankViewControllerDelegate,MjAlertViewDelegate,UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate>
+@interface UCFCashViewController ()<UCFChoseBankViewControllerDelegate,MjAlertViewDelegate,UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate,UIAlertViewDelegate>
 {
     CGFloat orinalHeight;
     BOOL isSendSMS;
@@ -398,6 +398,7 @@
             textField.text = [NSString stringWithFormat:@"0%@",textField.text];
         }
     }
+    [self realTimeWithdrawalAmount:textField.text];
     return textField;
 }
 -(void)textFieldEditingDidEnd:(UITextField *)textField{
@@ -487,7 +488,7 @@
          _cashBankNo  = @"" ;
     }else{
         _bankBrachLabel.text = bankBranchNameStr;
-        _cashBankNo = [bankInfoDic objectSafeForKey:@"bankCardNo"];
+        _cashBankNo = [bankInfoDic objectSafeForKey:@"bankNo"];
     }
     _withdrawToken = [dataDic objectSafeForKey:@"withdrawToken"];
     _isSpecial = [[bankInfoDic objectSafeForKey:@"isSpecial"] boolValue];
@@ -823,7 +824,22 @@
             return;
         }
     }
-    
+    if (_bankBranchViewHeight2.constant == 0) { //选择 实时提现
+        UCFSettingItem *item = [_cashWayArray firstObject];
+        if ([item.title isEqualToString:@"实时提现"] && item.isSelect) {
+            if ([_crachTextField.text doubleValue] /10000.0 > [_criticalValueStr doubleValue]) { // 提现金额大于实时提现金额单笔限额
+        
+                NSString *messageStr = [NSString stringWithFormat:@"您实时提现单笔已超过%@万限制，请使用大额提现！",_criticalValueStr];
+                if([_bankName.text isEqualToString:@""]){//无行别 实时提现
+                    messageStr = [NSString stringWithFormat:@"您实时提现单笔已超过%@万限制，请修改提现金额！",_criticalValueStr];
+                }
+                UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                alertView.tag = 1011;
+                [alertView show];
+                return;
+            }
+        }
+    }
     
     NSString *isFeeEnableStr = [NSString stringWithFormat:@"%@",[self.cashInfoDic[@"data"] objectSafeForKey:@"isFeeEnable"]];
     BOOL isFeeEnable = [isFeeEnableStr boolValue];
@@ -916,7 +932,15 @@
           [self withdrawalAmountIsExceedsTheLimitHttPRequest];
     }
 }
-
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (alertView.tag == 1011) {
+        if([_bankName.text isEqualToString:@""]){
+            [_crachTextField becomeFirstResponder];
+        }else{
+           [self realTimeWithdrawalAmount:_accountAmountStr];
+        }
+    }
+}
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];

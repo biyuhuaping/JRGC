@@ -42,6 +42,7 @@
 //    cell.signForOverDue.hidden = NO;
     cell.donateButton.hidden = YES;
     [self.headView addSubview:cell];
+    self.headView.userInteractionEnabled = NO;
     
 //    =========  下拉刷新、上拉加载更多  =========
     self.myTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -281,6 +282,9 @@
     NSString *mobile = [[self.dataList objectAtIndex:indexPath.row] objectSafeForKey:@"mobile"];
     cell.phoneNumber.text = mobile;
     return cell;
+}
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
 }
 
 - (void)didReceiveMemoryWarning {
