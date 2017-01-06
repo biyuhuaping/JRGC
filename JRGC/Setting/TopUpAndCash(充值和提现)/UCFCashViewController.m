@@ -829,9 +829,9 @@
         if ([item.title isEqualToString:@"实时提现"] && item.isSelect) {
             if ([_crachTextField.text doubleValue] /10000.0 > [_criticalValueStr doubleValue]) { // 提现金额大于实时提现金额单笔限额
         
-                NSString *messageStr = [NSString stringWithFormat:@"您实时提现已超过%@万限制，请使用大额提现！",_criticalValueStr];
+                NSString *messageStr = [NSString stringWithFormat:@"您实时提现单笔已超过%@万限制，请使用大额提现！",_criticalValueStr];
                 if([_bankName.text isEqualToString:@""]){//无行别 实时提现
-                    messageStr = [NSString stringWithFormat:@"您实时提现已超过%@万限制，请修改提现金额！",_criticalValueStr];
+                    messageStr = [NSString stringWithFormat:@"您实时提现单笔已超过%@万限制，请修改提现金额！",_criticalValueStr];
                 }
                 UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
                 alertView.tag = 1011;
