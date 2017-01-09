@@ -1057,7 +1057,7 @@
     // 2.恢复默认
     [filter setDefaults];
     // 3.给过滤器添加数据
-    NSString *dataString = [NSString stringWithFormat:@"http://m.9888.cn/mpwap/orderuser/toRegister.shtml?gcm=%@",gcmStr];
+    NSString *dataString = [NSString stringWithFormat:@"https://m.9888.cn/mpwap/orderuser/toRegister.shtml?gcm=%@",gcmStr];
     NSData *data = [dataString dataUsingEncoding:NSUTF8StringEncoding];
     // 4.通过KVO设置滤镜inputMessage数据
     [filter setValue:data forKeyPath:@"inputMessage"];
