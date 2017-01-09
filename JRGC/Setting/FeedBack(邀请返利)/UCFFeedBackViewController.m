@@ -87,7 +87,7 @@
 //复制到剪切板
 - (IBAction)copy:(id)sender {
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-    pasteboard.string = [NSString stringWithFormat:@"http://passport.9888.cn/pp-web2/register/phone.do?gcm=%@",_gcmLab.text];
+    pasteboard.string = _shareUrl;
     [AuxiliaryFunc showToastMessage:@"已复制到剪切板" withView:self.view];
 }
 
@@ -96,7 +96,7 @@
     //分享
     //微信分享链接
     //    NSString *urlStr = @"http://fore.9888.cn/cms/ggk/";
-    _shareUrl = [NSString stringWithFormat:@"http://passport.9888.cn/pp-web2/register/phone.do?gcm=%@",_gcmLab.text];
+//    _shareUrl = [NSString stringWithFormat:@"http://passport.9888.cn/pp-web2/register/phone.do?gcm=%@",_gcmLab.text];
     UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
 
     __weak typeof(self) weakSelf = self;
@@ -215,6 +215,7 @@
         NSString *rsttext = dic[@"message"];
         NSDictionary* dictemp = [[dic objectSafeForKey:@"data"]objectSafeForKey:@"inviteRebateBasicInfo"];
         if ([rstcode intValue] == 1) {
+            _shareUrl = [[dic objectSafeDictionaryForKey:@"data"] objectSafeForKey:@"inviteUrl"];
             _recCount = dictemp[@"recCount"];//邀请注册人数
             _sumCommLab.text = [NSString stringWithFormat:@"¥%@",[UCFToolsMehod AddComma:dictemp[@"sumComm"]]];//我的返利
             _friendCountLab.text = [NSString stringWithFormat:@"邀请投资人数:%@人",dictemp[@"friendCount"]];//邀请投资人数
