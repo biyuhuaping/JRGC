@@ -923,10 +923,13 @@
 #pragma mark - 同盾
 - (void) didReceiveDeviceBlackBox: (NSString *) blackBox {
     NSString *wanip = [[NSUserDefaults standardUserDefaults] valueForKey:@"curWanIp"];
+    NSString *bankNoStr = @"";
     if(_bankBranchViewHeight2.constant != 44){//开户支行未选择的用户 就是实时提现
-        _cashBankNo = @"";//联行号为空 意味着用户选择的是实时提现 不为空 则为大额提现
+        bankNoStr = @"";//联行号为空 意味着用户选择的是实时提现 不为空 则为大额提现
+    }else{
+        bankNoStr = _cashBankNo;
     }
-    NSDictionary *dataDic = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:UUID],@"userId",_crachTextField.text,@"reflectAmount",_cashBankNo,@"bankNo",@"",@"validateCode",_withdrawToken,@"withdrawTicket",blackBox, @"token_id",wanip,@"ip",nil];
+    NSDictionary *dataDic = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:UUID],@"userId",_crachTextField.text,@"reflectAmount",bankNoStr,@"bankNo",@"",@"validateCode",_withdrawToken,@"withdrawTicket",blackBox, @"token_id",wanip,@"ip",nil];
     [[NetworkModule sharedNetworkModule] newPostReq:dataDic tag:kSXTagWithdrawSub owner:self signature:YES];
 }
 - (void)mjalertView:(MjAlertView *)alertview didClickedButton:(UIButton *)clickedButton andClickedIndex:(NSInteger)index{

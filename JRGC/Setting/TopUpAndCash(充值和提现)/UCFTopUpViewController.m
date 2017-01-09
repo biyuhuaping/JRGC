@@ -221,7 +221,7 @@
             [self resetGetCodeButtonStuats];
             _topUpLabelTextField.text = @"";
             _verificationCodeField.text = @"";
-//            _RechargeTokenStr = @"";
+            _RechargeTokenStr = @"";
             
             
         } else if (buttonIndex == 1) {
@@ -245,6 +245,10 @@
             UCFHuiShangBankViewController *subVC = [[UCFHuiShangBankViewController alloc] initWithNibName:@"UCFHuiShangBankViewController" bundle:nil];
             subVC.rootVc = _uperViewController;
             [self.navigationController pushViewController:subVC animated:YES];
+        }
+    } else if (alertView.tag == 1003) {//验证码次数用完弹框
+        if (buttonIndex == 1) {
+           [self tappedTelePhone];    //联系客服
         }
     } else {
         if (buttonIndex == 1) {
@@ -742,11 +746,9 @@
         }
     } else if (tag.intValue == kSXTagWithdrawalsSendPhone) {
         NSMutableDictionary *dic = [data objectFromJSONString];
-   
         if([dic[@"ret"] boolValue])
         {
             _RechargeTokenStr = [[dic objectSafeDictionaryForKey:@"data"] objectSafeForKey:@"rechargeToken"];
-            [MBProgressHUD displayHudError:@"已发送，请等待接收，60秒后可再次获取。"];
             _getCodeButton.userInteractionEnabled = NO;
             [_timer setFireDate:[NSDate distantPast]];
             [_getCodeButton setBackgroundColor:[UIColor lightGrayColor]];
@@ -761,13 +763,27 @@
             _msgTipLabel.text = tempText;
             _msgTipLabel.font = [UIFont systemFontOfSize:12.0f];
             self.smsSerialNo =[NSString stringWithFormat:@"%@",dic[@"data"][@"smsSerialNo"]];
+           BOOL  isInThreeNum = [[[dic objectSafeDictionaryForKey:@"data"] objectSafeForKey:@"isInThreeNum"] boolValue];
+            if (isInThreeNum){//验证码次数剩下最后三次
+                NSString *messageStr = [dic objectSafeForKey:@"message"];
+                UIAlertView *alerView = [[UIAlertView alloc]initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                [alerView show];
+            }else{
+                [MBProgressHUD displayHudError:@"已发送，请等待接收，60秒后可再次获取。"];
+            }
         } else {
+            
             _getCodeButton.userInteractionEnabled = YES;
             NSString *messageStr = [dic objectSafeForKey:@"message"];
-            UIAlertView *alerView = [[UIAlertView alloc]initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
-            [alerView show];
+            if([[dic objectSafeForKey:@"code"] intValue] == 41003){
+                UIAlertView *alerView = [[UIAlertView alloc]initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"明天再试" otherButtonTitles:@"联系客服",nil];
+                alerView.tag = 1003;
+                [alerView show];
+            }else{ //其他失败情况
+                UIAlertView *alerView = [[UIAlertView alloc]initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                [alerView show];
+            }
             
-//            [MBProgressHUD displayHudError:dic[@"message"]];
         }
         if (dic == nil) {
             _getCodeButton.userInteractionEnabled = YES;
