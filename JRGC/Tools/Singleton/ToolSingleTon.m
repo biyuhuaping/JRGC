@@ -95,7 +95,7 @@
 - (void)checkIsSign {
     
     NSString *uuid = [[NSUserDefaults standardUserDefaults] objectForKey:UUID];
-    [[NetworkModule sharedNetworkModule] newPostReq:[NSDictionary dictionaryWithObject:uuid forKey:@"userId"] tag:kSXTagRedBagRainSwitch owner:self signature:YES];
+//    [[NetworkModule sharedNetworkModule] newPostReq:[NSDictionary dictionaryWithObject:uuid forKey:@"userId"] tag:kSXTagRedBagRainSwitch owner:self signature:YES];
 
     if (uuid) {
         NSDate *lastFirstLoginTime = [[NSUserDefaults standardUserDefaults] objectForKey:FirstLoginTimeEveryday];
