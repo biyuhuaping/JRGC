@@ -582,7 +582,6 @@
 }
 - (void)dealWithrunBtn:(id)sender
 {
-//    [[NSNotificationCenter defaultCenter] postNotificationName:CheckIsInitiaLogin object:nil];
     [self dismissViewControllerAnimated:NO completion:^{
         if (_isFromRegister) {
             userInfoDict = [[NSUserDefaults standardUserDefaults] objectForKey:@"regUserMsg"];
@@ -1370,7 +1369,6 @@
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-    //[[NSNotificationCenter defaultCenter] postNotificationName:CheckIsInitiaLogin object:nil];
 
     if (self.nLockViewType == LLLockViewTypeModify) return;
     if (self.nLockViewType == LLLockViewTypeCreate && self.isFromRegister) return;
