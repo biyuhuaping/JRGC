@@ -14,7 +14,7 @@
 #define AES_TESTKEY @"awejfij124321aweg@##$!*&+=-13123j24325"
 
 #if EnvironmentConfiguration == 1
-#define SERVER_IP   @"http://app.9888.cn/"      //正式网
+#define SERVER_IP   @"https://app.9888.cn/"      //正式网
 #define JPUSHKEY    @"d3fa655cc616a27b694fa9cb" //极光推送正式key
 #else
 // 老接口下的服务器IP
