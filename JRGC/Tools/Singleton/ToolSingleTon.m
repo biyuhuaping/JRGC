@@ -77,7 +77,7 @@
 - (void)showFestivalActivitiesWebView:(NSString *)redBagUrl
 {
     FestivalActivitiesWebView *festivalView = [[FestivalActivitiesWebView alloc] initWithNibName:@"FestivalActivitiesWebView" bundle:nil];
-    festivalView.url = redBagUrl;
+    festivalView.url = @"https://mmall.9888.cn/static/mall/game-red-rain/index.html";
     festivalView.isHideNavigationBar = YES;
     festivalView.definesPresentationContext = YES;
     festivalView.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
@@ -86,17 +86,16 @@
         festivalView.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     }
 
-//    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:festivalView];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:festivalView];
+    
     AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    [app.tabBarController presentViewController:festivalView animated:YES completion:nil];
+    [app.tabBarController presentViewController:nav animated:YES completion:nil];
 
 }
 // 检测是否签到
 - (void)checkIsSign {
     
     NSString *uuid = [[NSUserDefaults standardUserDefaults] objectForKey:UUID];
-//    [[NetworkModule sharedNetworkModule] newPostReq:[NSDictionary dictionaryWithObject:uuid forKey:@"userId"] tag:kSXTagRedBagRainSwitch owner:self signature:YES];
-
     if (uuid) {
         NSDate *lastFirstLoginTime = [[NSUserDefaults standardUserDefaults] objectForKey:FirstLoginTimeEveryday];
         BOOL b = [NSDate isBelongToTodayWithDate:lastFirstLoginTime];

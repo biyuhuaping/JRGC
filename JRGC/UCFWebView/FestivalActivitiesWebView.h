@@ -9,6 +9,6 @@
 #import "UCFWebViewJavascriptBridgeController.h"
 
 @interface FestivalActivitiesWebView : UCFWebViewJavascriptBridgeController
-- (void)hideView;
-- (void)showPopView:(UIViewController *)controller;
+//- (void)hideView;
+//- (void)showPopView:(UIViewController *)controller;
 @end
