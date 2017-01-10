@@ -77,7 +77,7 @@
 - (void)showFestivalActivitiesWebView:(NSString *)redBagUrl
 {
     FestivalActivitiesWebView *festivalView = [[FestivalActivitiesWebView alloc] initWithNibName:@"FestivalActivitiesWebView" bundle:nil];
-    festivalView.url = @"https://mmall.9888.cn/static/mall/game-red-rain/index.html";
+    festivalView.url = redBagUrl;
     festivalView.isHideNavigationBar = YES;
     festivalView.definesPresentationContext = YES;
     festivalView.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
@@ -103,8 +103,6 @@
             if ([self checkHasCheckIn:uuid]) {
                 [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:FirstLoginTimeEveryday];
                 [[NetworkModule sharedNetworkModule] newPostReq:[NSDictionary dictionaryWithObject:uuid forKey:@"userId"] tag:kSXTagRedBagRainSwitch owner:self signature:YES];
-//                NSString *parStr = [NSString stringWithFormat:@"userId=%@", uuid];
-//                [[NetworkModule sharedNetworkModule] postReq:parStr tag:kSXTagRedBagRainSwitch owner:self];
             }
         }
     }
@@ -199,8 +197,6 @@
 //        }
     } else if (tag.integerValue == kSXTagRedBagRainSwitch) {
         if ([dic[@"ret"] boolValue]) {
-            [self showFestivalActivitiesWebView:dic[@"data"][@"redBagRainAddress"]];
-
             if ([dic[@"data"][@"redBagRainOnOff"] boolValue] && [dic[@"data"][@"goInRedBagRainNum"] integerValue] == 0) {
                 [self showFestivalActivitiesWebView:dic[@"data"][@"redBagRainAddress"]];
             }
