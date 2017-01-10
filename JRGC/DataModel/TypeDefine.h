@@ -183,6 +183,7 @@
 #define PRESENTFRIEND       @"api/discountCoupon/v2/presentFriendList.json"     //优惠券赠送好友列表
 #define PRESENTCOUPON       @"api/discountCoupon/v2/presentCoupon.json"         //赠送好友券
 #define DATASTATICS         @"api/inviteRebate/v2/rebateStatistic.json"         // 数据统计
+#define REDBAGRAIN          @"api/homePage/v2/getRedBagRainInfo.json"
 
 #define PROJECTLIST         @"api/prdClaims/v2/more.json"     //项目标列表
 #define TRANSFERLIST        @"api/prdTransfer/v2/getTranPageList.json"     //转让列表
@@ -314,6 +315,7 @@ enum kSXTag
     kSXTagTransfersOrder,               //我的债券列表
     kSXTagIsBetaVerSion,                //校验当前版本是不是beta版
     kSXTagSignDaysAndIsSign,             //签到天数和是否签到
+    kSXTagRedBagRainSwitch,             //红包雨开关
     kSXTagGuaGuaPost,                   //刮刮卡
     kSRecommendRefund,                  //好友回款
     kSXTagCheckCardBelongToBank,        //判断银行卡所属行别

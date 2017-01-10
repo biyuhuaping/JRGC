@@ -74,11 +74,10 @@
         }
     }
 }
-- (void)showFestivalActivitiesWebView
+- (void)showFestivalActivitiesWebView:(NSString *)redBagUrl
 {
     FestivalActivitiesWebView *festivalView = [[FestivalActivitiesWebView alloc] initWithNibName:@"FestivalActivitiesWebView" bundle:nil];
-//    UIViewController *festivalView = [[UIViewController alloc] init];
-    festivalView.url = REDRAINURL;
+    festivalView.url = redBagUrl;
     festivalView.isHideNavigationBar = YES;
     festivalView.definesPresentationContext = YES;
     festivalView.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
@@ -94,17 +93,19 @@
 }
 // 检测是否签到
 - (void)checkIsSign {
-//    [self showFestivalActivitiesWebView];
-
+    
     NSString *uuid = [[NSUserDefaults standardUserDefaults] objectForKey:UUID];
+//    [[NetworkModule sharedNetworkModule] newPostReq:[NSDictionary dictionaryWithObject:uuid forKey:@"userId"] tag:kSXTagRedBagRainSwitch owner:self signature:YES];
+
     if (uuid) {
         NSDate *lastFirstLoginTime = [[NSUserDefaults standardUserDefaults] objectForKey:FirstLoginTimeEveryday];
         BOOL b = [NSDate isBelongToTodayWithDate:lastFirstLoginTime];
         if (lastFirstLoginTime == nil || !b) {
             if ([self checkHasCheckIn:uuid]) {
-                NSString *parStr = [NSString stringWithFormat:@"userId=%@", uuid];
                 [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:FirstLoginTimeEveryday];
-                [[NetworkModule sharedNetworkModule] postReq:parStr tag:kSXTagSignDaysAndIsSign owner:self];
+                [[NetworkModule sharedNetworkModule] newPostReq:[NSDictionary dictionaryWithObject:uuid forKey:@"userId"] tag:kSXTagRedBagRainSwitch owner:self signature:YES];
+//                NSString *parStr = [NSString stringWithFormat:@"userId=%@", uuid];
+//                [[NetworkModule sharedNetworkModule] postReq:parStr tag:kSXTagRedBagRainSwitch owner:self];
             }
         }
     }
@@ -122,7 +123,6 @@
     if (tag.intValue == kSXTagSignDaysAndIsSign) {
         NSInteger flag = [dic[@"flag"] integerValue];
         self.apptzticket = dic[@"apptzticket"];
-//        [self showFestivalActivitiesWebView];
         if (flag == 1) {
             NSInteger signFlags = [dic[@"signflags"] integerValue];
             if (signFlags == 0) {
@@ -198,6 +198,14 @@
 //        } else if ([flag isEqualToString:@"already"]) {
 ////            [AuxiliaryFunc showToastMessage:@"今日已签到" withView:self.view];
 //        }
+    } else if (tag.integerValue == kSXTagRedBagRainSwitch) {
+        if ([dic[@"ret"] boolValue]) {
+            [self showFestivalActivitiesWebView:dic[@"data"][@"redBagRainAddress"]];
+
+            if ([dic[@"data"][@"redBagRainOnOff"] boolValue] && [dic[@"data"][@"goInRedBagRainNum"] integerValue] == 0) {
+                [self showFestivalActivitiesWebView:dic[@"data"][@"redBagRainAddress"]];
+            }
+        }
     }
 }
 

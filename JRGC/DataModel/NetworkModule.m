@@ -1126,7 +1126,10 @@ static NetworkModule *gInstance = NULL;
             parameter = [NEW_SERVER_IP stringByAppendingString:DATASTATICS];
         }
             break;
-
+        case kSXTagRedBagRainSwitch: {
+            parameter = [NEW_SERVER_IP stringByAppendingString:REDBAGRAIN];
+        }
+            break;
     }
     //给原有参数字典添加公共参数
     if (!data) {
