@@ -109,9 +109,16 @@
 
 - (void)shareDataWithPlatform:(UMSocialPlatformType)platformType withObject:(UMSocialMessageObject *)object {
     UMSocialMessageObject *messageObject = object;
-    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:_shareTitle descr:_shareContent thumImage:_shareImage];
-    [shareObject setWebpageUrl:_shareUrl];
-    messageObject.shareObject = shareObject;
+    if (platformType == UMSocialPlatformType_Sina) {
+        UMShareImageObject *shareObject = [UMShareImageObject shareObjectWithTitle:_shareTitle descr:_shareContent thumImage:[UIImage imageNamed:@"AppIcon"]];
+        [shareObject setShareImage:_shareImage];
+        messageObject.shareObject = shareObject;
+        messageObject.text = [NSString stringWithFormat:@"%@%@",_shareContent,_shareUrl];
+    } else {
+        UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:_shareTitle descr:_shareContent thumImage:_shareImage];
+        [shareObject setWebpageUrl:_shareUrl];
+        messageObject.shareObject = shareObject;
+    }
     //调用分享接口
     [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
         NSString *message = nil;

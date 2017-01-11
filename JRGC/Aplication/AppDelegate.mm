@@ -968,7 +968,7 @@
     [[NSUserDefaults standardUserDefaults] registerDefaults:infoAgentDic];
     [[NSUserDefaults standardUserDefaults] synchronize];
     [Common setHTMLCookies:[[NSUserDefaults standardUserDefaults] objectForKey:DOPA]];
-    #warning 灰度测试重新加cookies
+//    #warning 灰度测试重新加cookies
     [Common addTestCookies];
 }
 
