@@ -1337,7 +1337,7 @@
     footView.userInteractionEnabled = YES;
     NSDictionary *userOtherMsg = [_dataDict objectForKey:@"userOtherMsg"];
     NSArray *contractMsgArr = [userOtherMsg valueForKey:@"contractMsg"];
-    NSString *totalStr = [NSString stringWithFormat:@"本人同意签署"];
+    NSString *totalStr = [NSString stringWithFormat:@"同意并确认"];
     for (int i = 0; i < contractMsgArr.count; i++) {
         NSString *tmpStr = [[contractMsgArr objectAtIndex:i] valueForKey:@"contractName"];
         totalStr = [totalStr stringByAppendingString:[NSString stringWithFormat:@"《%@》",tmpStr]];
@@ -1365,7 +1365,63 @@
     imageView1.frame = CGRectMake(CGRectGetMinX(label1.frame) - 7, CGRectGetMinY(label1.frame) + 4, 5, 5);
     imageView1.image = [UIImage imageNamed:@"point.png"];
     [footView addSubview:imageView1];
-    UILabel *jieshouLabel = [[UILabel alloc] initWithFrame:CGRectMake(23, label1.frame.origin.y+label1.frame.size.height+10, ScreenWidth-25, 12)];
+    
+    CGFloat height1 = CGRectGetMaxY(label1.frame);
+    NSArray *downContractList = [_dataDict objectForKey:@"downContractList"];
+    if (downContractList.count > 0) {
+        
+        NSString *totalStr1 = [NSString stringWithFormat:@"同意并认可"];
+        for (int i = 0; i < downContractList.count; i++) {
+            NSString *tmpStr = [[downContractList objectAtIndex:i] valueForKey:@"contractName"];
+            totalStr1 = [totalStr1 stringByAppendingString:[NSString stringWithFormat:@"《%@》",tmpStr]];
+        }
+        
+        NZLabel *label2 = [[NZLabel alloc] init];
+        label2.font = [UIFont systemFontOfSize:12.0f];
+        CGSize size1 = [Common getStrHeightWithStr:totalStr1 AndStrFont:12 AndWidth:ScreenWidth-25];
+        label2.numberOfLines = 0;
+        label2.frame = CGRectMake(23, height1 + 10, ScreenWidth-25, size1.height);
+        label2.text = totalStr1;
+        label2.userInteractionEnabled = YES;
+        label2.textColor = UIColorWithRGB(0x999999);
+        
+        height1 = CGRectGetMaxY(label2.frame);
+        
+        UIImageView * imageView3 = [[UIImageView alloc] init];
+        imageView3.frame = CGRectMake(CGRectGetMinX(label2.frame) - 7, CGRectGetMinY(label2.frame) + 4, 5, 5);
+        imageView3.image = [UIImage imageNamed:@"point.png"];
+        [footView addSubview:imageView3];
+        
+        //    __weak typeof(self) weakSelf = self;
+        for (int i = 0; i < downContractList.count; i++) {
+            NSString *tmpStr = [NSString stringWithFormat:@"《%@》",[[downContractList objectAtIndex:i] valueForKey:@"contractName"]];
+            [label2 addLinkString:tmpStr block:^(ZBLinkLabelModel *linkModel) {
+                [weakSelf showPDF:linkModel];
+            }];
+            [label2 setFontColor:UIColorWithRGB(0x4aa1f9) string:tmpStr];
+        }
+        [footView addSubview:label2];
+        
+        UILabel *jieshouLabel0 = [[UILabel alloc] initWithFrame:CGRectMake(23, height1+10, ScreenWidth-25, 12)];
+        jieshouLabel0.backgroundColor = [UIColor clearColor];
+        jieshouLabel0.text = @"同意在大连金融资产交易所开户";
+        jieshouLabel0.font = [UIFont systemFontOfSize:12];
+        jieshouLabel0.textColor = UIColorWithRGB(0x999999);
+        [footView addSubview:jieshouLabel0];
+        
+        UIImageView * imageView4 = [[UIImageView alloc] init];
+        imageView4.frame = CGRectMake(CGRectGetMinX(jieshouLabel0.frame) - 7, CGRectGetMinY(jieshouLabel0.frame) + 4, 5, 5);
+        imageView4.image = [UIImage imageNamed:@"point.png"];
+        [footView addSubview:imageView4];
+        
+        height1 = CGRectGetMaxY(jieshouLabel0.frame);
+
+    }
+    
+    
+    
+
+    UILabel *jieshouLabel = [[UILabel alloc] initWithFrame:CGRectMake(23, height1+10, ScreenWidth-25, 12)];
     jieshouLabel.backgroundColor = [UIColor clearColor];
     jieshouLabel.text = @"本人接受筹标期内资金不计利息,投资意向不可撤销";
     jieshouLabel.font = [UIFont systemFontOfSize:12];
@@ -1382,17 +1438,17 @@
     
     return footView;
 }
-- (NSString *)valueIndex:(ZBLinkLabelModel *)linkModel
+- (NSString *)valueIndex:(ZBLinkLabelModel *)linkModel WithDataArr:(NSArray *)contractMsgArr typeKey:(NSString *)key
 {
     NSString *contractStr = linkModel.linkString;
-    NSDictionary *userOtherMsg = [_dataDict objectForKey:@"userOtherMsg"];
-    NSArray *contractMsgArr = [userOtherMsg valueForKey:@"contractMsg"];
+
     NSString *type = @"";
     for (int i = 0; i < contractMsgArr.count; i++) {
         NSString *tmpStr = [NSString stringWithFormat:@"《%@》",[[contractMsgArr objectAtIndex:i] valueForKey:@"contractName"]];
         if ([tmpStr isEqualToString:contractStr]) {
-            type = [[contractMsgArr objectAtIndex:i] valueForKey:@"contractType"];
+            type = [[contractMsgArr objectAtIndex:i] valueForKey:key];
             _contractTitle = [[contractMsgArr objectAtIndex:i] valueForKey:@"contractName"];
+            break;
         }
     }
     return type;
@@ -1400,10 +1456,24 @@
 - (void)showHeTong:(ZBLinkLabelModel *)linkModel
 {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    NSString *contractTypeStr = [self valueIndex:linkModel];
+    NSDictionary *userOtherMsg = [_dataDict objectForKey:@"userOtherMsg"];
+    NSArray *contractMsgArr = [userOtherMsg valueForKey:@"contractMsg"];
+    NSString *contractTypeStr = [self valueIndex:linkModel WithDataArr:contractMsgArr typeKey:@"contractType"];
+    
     NSString *projectId = [[self.dataDict objectForKey:@"data"] objectForKey:@"id"];
     NSString *strParameters = [NSString stringWithFormat:@"userId=%@&prdClaimId=%@&contractType=%@&prdType=0",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],projectId,contractTypeStr];
     [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetContractMsg owner:self];
+}
+
+- (void)showPDF:(ZBLinkLabelModel *)linkModel
+{
+    NSArray *contractMsgArr = [_dataDict objectForKey:@"downContractList"];
+    NSString *key = @"contractDownUrl";
+    NSString *url = [self valueIndex:linkModel WithDataArr:contractMsgArr typeKey:key];
+    NSString *urlStringUTF8 = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    FullWebViewController *controller = [[FullWebViewController alloc] initWithWebUrl:urlStringUTF8 title:_contractTitle];
+    controller.baseTitleType = @"detail_heTong";
+    [self.navigationController pushViewController:controller animated:YES];
 }
 - (void)reloadMainView
 {
