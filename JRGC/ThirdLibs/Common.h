@@ -219,5 +219,6 @@ typedef NS_ENUM(NSInteger, PicType) {
 + (UIImage *)getTheLaunchImage;
 //创建工场二维码图片
 +(NSData *)createImageCode:(NSString *)gcmStr;
-
+// 获取网络图片
++(UIImage *) getImageFromURL:(NSString *)fileURL;
 @end

@@ -1057,7 +1057,7 @@
     // 2.恢复默认
     [filter setDefaults];
     // 3.给过滤器添加数据
-    NSString *dataString = [NSString stringWithFormat:@"http://m.9888.cn/mpwap/orderuser/toRegister.shtml?gcm=%@",gcmStr];
+    NSString *dataString = [NSString stringWithFormat:@"https://m.9888.cn/mpwap/orderuser/toRegister.shtml?gcm=%@",gcmStr];
     NSData *data = [dataString dataUsingEncoding:NSUTF8StringEncoding];
     // 4.通过KVO设置滤镜inputMessage数据
     [filter setValue:data forKeyPath:@"inputMessage"];
@@ -1096,5 +1096,24 @@
     CGContextRelease(bitmapRef);
     CGImageRelease(bitmapImage);
     return [UIImage imageWithCGImage:scaledImage];
+}
++(UIImage *) getImageFromURL:(NSString *)fileURL{
+    
+    ASIFormDataRequest * innerRequest = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:fileURL]];
+    [innerRequest setRequestMethod:@"GET"];
+    [innerRequest setValidatesSecureCertificate:NO];
+    [innerRequest setDelegate:self];
+    [innerRequest setTimeOutSeconds:20.0];
+    // 开始同步请求
+    [innerRequest startSynchronous];
+    NSError *error = [innerRequest error];
+    UIImage * result;
+    if (!error)
+    {
+        NSData *data=[innerRequest responseData];
+        result = [UIImage imageWithData:data];
+    }
+    return result;
+    
 }
 @end

@@ -74,35 +74,35 @@
         }
     }
 }
-- (void)showFestivalActivitiesWebView
+- (void)showFestivalActivitiesWebView:(NSString *)redBagUrl
 {
     FestivalActivitiesWebView *festivalView = [[FestivalActivitiesWebView alloc] initWithNibName:@"FestivalActivitiesWebView" bundle:nil];
-//    UIViewController *festivalView = [[UIViewController alloc] init];
-    festivalView.url = MALLURL;
+    festivalView.url = redBagUrl;
     festivalView.isHideNavigationBar = YES;
     festivalView.definesPresentationContext = YES;
     festivalView.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    festivalView.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.4];
-    festivalView.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    festivalView.view.backgroundColor = [UIColor clearColor];
+    if (kIS_IOS8) {
+        festivalView.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    }
 
-//    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:festivalView];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:festivalView];
+    
     AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    [app.tabBarController presentViewController:festivalView animated:YES completion:nil];
+    [app.tabBarController presentViewController:nav animated:YES completion:nil];
 
 }
 // 检测是否签到
 - (void)checkIsSign {
-//    [self showFestivalActivitiesWebView];
-
+    
     NSString *uuid = [[NSUserDefaults standardUserDefaults] objectForKey:UUID];
     if (uuid) {
         NSDate *lastFirstLoginTime = [[NSUserDefaults standardUserDefaults] objectForKey:FirstLoginTimeEveryday];
         BOOL b = [NSDate isBelongToTodayWithDate:lastFirstLoginTime];
         if (lastFirstLoginTime == nil || !b) {
             if ([self checkHasCheckIn:uuid]) {
-                NSString *parStr = [NSString stringWithFormat:@"userId=%@", uuid];
                 [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:FirstLoginTimeEveryday];
-                [[NetworkModule sharedNetworkModule] postReq:parStr tag:kSXTagSignDaysAndIsSign owner:self];
+                [[NetworkModule sharedNetworkModule] newPostReq:[NSDictionary dictionaryWithObject:uuid forKey:@"userId"] tag:kSXTagRedBagRainSwitch owner:self signature:YES];
             }
         }
     }
@@ -120,7 +120,6 @@
     if (tag.intValue == kSXTagSignDaysAndIsSign) {
         NSInteger flag = [dic[@"flag"] integerValue];
         self.apptzticket = dic[@"apptzticket"];
-//        [self showFestivalActivitiesWebView];
         if (flag == 1) {
             NSInteger signFlags = [dic[@"signflags"] integerValue];
             if (signFlags == 0) {
@@ -196,6 +195,12 @@
 //        } else if ([flag isEqualToString:@"already"]) {
 ////            [AuxiliaryFunc showToastMessage:@"今日已签到" withView:self.view];
 //        }
+    } else if (tag.integerValue == kSXTagRedBagRainSwitch) {
+        if ([dic[@"ret"] boolValue]) {
+            if ([dic[@"data"][@"redBagRainOnOff"] boolValue] && [dic[@"data"][@"goInRedBagRainNum"] integerValue] == 0) {
+                [self showFestivalActivitiesWebView:dic[@"data"][@"redBagRainAddress"]];
+            }
+        }
     }
 }
 
