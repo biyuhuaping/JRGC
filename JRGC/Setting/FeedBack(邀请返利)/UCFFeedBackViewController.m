@@ -113,7 +113,7 @@
         UMShareImageObject *shareObject = [UMShareImageObject shareObjectWithTitle:_shareTitle descr:_shareContent thumImage:[UIImage imageNamed:@"AppIcon"]];
         [shareObject setShareImage:_shareImage];
         messageObject.shareObject = shareObject;
-        messageObject.text = [NSString stringWithFormat:@"%@%@",_shareContent,_shareUrl];
+        messageObject.text = [NSString stringWithFormat:@"%@%@%@",_shareTitle,_shareContent,_shareUrl];
     } else {
         UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:_shareTitle descr:_shareContent thumImage:_shareImage];
         [shareObject setWebpageUrl:_shareUrl];
