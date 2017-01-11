@@ -160,22 +160,20 @@
         return;
     }
     
-    if (sender.tag == 1001) {
-         [self verifyRigisterPhoneNunmberHttpRequst];
+    if (sender.tag == 1001) { //下一步
+        [self verifyRigisterPhoneNunmberHttpRequst];
     }else{
-        NSDictionary *dataDict = @{@"phoneNum":[Common deleteStrSpace:_phoneNumberTextField.text],@"validateCode":_codeTextField.text,@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"updatePhoneNoTicket":_updatePhoneNoTicketStr};
-        [[NetworkModule sharedNetworkModule] newPostReq:dataDict tag:kSXTagChangeReserveMobileNumber owner:self signature:YES];
-        
+        [self modifyBankReservePhoneNunmberHttpRequst];
     }
 }
 #pragma mark -获取验证注册验证码与新手机号验证码的网络请求
 -(void)getVerificationCodeNetworkRequest:(BOOL)isFirst  isVmsType:(NSString *)vmsType{
     _isfirstSendCode = isFirst;
     if (isFirst) {
-        NSDictionary *dataDic =@{@"destPhoneNo":@"",@"isVms":vmsType ,@"userId":[UserInfoSingle sharedManager].userId,@"type":@"4"};
+        NSDictionary *dataDic =@{@"destPhoneNo":@"",@"isVms":vmsType ,@"userId":[UserInfoSingle sharedManager].userId,@"type":@"10"};
         [[NetworkModule sharedNetworkModule] newPostReq:dataDic tag:kSXTagIdentifyCode owner:self signature:YES];
     }else{
-        NSDictionary *dic = @{@"destPhoneNo":[Common deleteStrSpace:_phoneNumberTextField.text],@"isVms":vmsType,@"type":@"4",@"userId":[UserInfoSingle sharedManager].userId};
+        NSDictionary *dic = @{@"destPhoneNo":[Common deleteStrSpace:_phoneNumberTextField.text],@"isVms":vmsType,@"type":@"9",@"userId":[UserInfoSingle sharedManager].userId};
         [[NetworkModule sharedNetworkModule] newPostReq:dic tag:kSXTagIdentifyCode owner:self signature:YES];
     }
 }
@@ -186,9 +184,8 @@
 }
 #pragma mark -修改银行预留手机号网络请求
 -(void)modifyBankReservePhoneNunmberHttpRequst{
-    NSDictionary *dataDic =@{@"userId":[UserInfoSingle sharedManager].userId,@"validateCode":_codeTextField.text};
-    [[NetworkModule sharedNetworkModule] newPostReq:dataDic tag:kSXTagValidateOldPhoneNo owner:self signature:YES];
-    
+    NSDictionary *dataDict = @{@"phoneNum":[Common deleteStrSpace:_phoneNumberTextField.text],@"validateCode":_codeTextField.text,@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"updatePhoneNoTicket":_updatePhoneNoTicketStr};
+    [[NetworkModule sharedNetworkModule] newPostReq:dataDict tag:kSXTagChangeReserveMobileNumber owner:self signature:YES];
 }
 - (void)beginPost:(kSXTag)tag
 {
