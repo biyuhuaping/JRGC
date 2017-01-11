@@ -45,7 +45,7 @@
     // Do any additional setup after loading the view from its nib.
     self.isShowHornor = [[NSUserDefaults standardUserDefaults] boolForKey:@"isShowHornor"];
     
-    self.itemSeletedView.sectionTitles = @[@"尊享转让", @"P2P转让"];
+    self.itemSeletedView.sectionTitles = @[@"P2P转让", @"尊享转让"];
     self.itemSeletedView.delegate = self;
     
     self.hornerTransfer = [[UCFHornerTransferViewController alloc]initWithNibName:@"UCFHornerTransferViewController" bundle:nil];
@@ -57,7 +57,7 @@
     [self addChildViewController:self.p2pTransfer];
     
     if (self.isShowHornor) {
-        self.currentViewController = self.hornerTransfer;
+        self.currentViewController = self.p2pTransfer;
         self.selectedHight.constant = 44;
     }
     else {
@@ -72,21 +72,21 @@
 - (void)SelectedView:(UCFSelectedView *)selectedView didClickSelectedItemWithSeg:(HMSegmentedControl *)sender{
     switch (sender.selectedSegmentIndex) {
         case 0:{
-            if ([self.currentViewController isEqual:self.hornerTransfer]) {
-                return;
-            }
-            [self transitionFromViewController:self.currentViewController toViewController:self.hornerTransfer duration:0.25 options:UIViewAnimationOptionCurveEaseInOut animations:nil completion:^(BOOL finished) {
-                self.currentViewController = self.hornerTransfer;
-            }];
-        }
-            break;
-            
-        case 1: {
             if ([self.currentViewController isEqual:self.p2pTransfer]) {
                 return;
             }
             [self transitionFromViewController:self.currentViewController toViewController:self.p2pTransfer duration:0.25 options:UIViewAnimationOptionCurveEaseInOut animations:nil completion:^(BOOL finished) {
                 self.currentViewController = self.p2pTransfer;
+            }];
+        }
+            break;
+            
+        case 1: {
+            if ([self.currentViewController isEqual:self.hornerTransfer]) {
+                return;
+            }
+            [self transitionFromViewController:self.currentViewController toViewController:self.hornerTransfer duration:0.25 options:UIViewAnimationOptionCurveEaseInOut animations:nil completion:^(BOOL finished) {
+                self.currentViewController = self.hornerTransfer;
             }];
         }
             break;

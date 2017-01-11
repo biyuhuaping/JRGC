@@ -32,7 +32,7 @@
     self.isShowHornor = [[NSUserDefaults standardUserDefaults] boolForKey:@"isShowHornor"];
     UISegmentedControl *segmentContrl = nil;
     if (self.isShowHornor) {
-        segmentContrl = [[UISegmentedControl alloc]initWithItems:@[@"尊享计划",@"P2P专区",@"转让专区"]];
+        segmentContrl = [[UISegmentedControl alloc]initWithItems:@[@"P2P专区",@"尊享计划",@"转让专区"]];
     }
     else {
         segmentContrl = [[UISegmentedControl alloc]initWithItems:@[@"P2P专区",@"债权转让"]];
@@ -46,13 +46,13 @@
     self.segmentedCtrl = segmentContrl;
     self.navigationItem.titleView = segmentContrl;
     
-    self.hornerPlan = [[UCFHonerPlanViewController alloc]initWithNibName:@"UCFHonerPlanViewController" bundle:nil];
-    self.hornerPlan.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight - 64-49);
-    [self addChildViewController:self.hornerPlan];
-    
     self.p2p = [[UCFP2PViewController alloc]initWithNibName:@"UCFP2PViewController" bundle:nil];
     self.p2p.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight - 64-49);
     [self addChildViewController:self.p2p];
+    
+    self.hornerPlan = [[UCFHonerPlanViewController alloc]initWithNibName:@"UCFHonerPlanViewController" bundle:nil];
+    self.hornerPlan.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight - 64-49);
+    [self addChildViewController:self.hornerPlan];
     
     self.transfer = [[UCFTransferViewController alloc]initWithNibName:@"UCFTransferViewController" bundle:nil];
     self.transfer.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight - 64-49);
@@ -60,7 +60,7 @@
     
     if ([self.strStyle isEqualToString:@"11"]) {
         if (self.isShowHornor) {
-            self.segmentedCtrl.selectedSegmentIndex = 1;
+            self.segmentedCtrl.selectedSegmentIndex = 0;
             self.currentViewController = self.p2p;
             [self.view addSubview:self.p2p.view];
             _currentViewController = self.p2p;
@@ -74,7 +74,7 @@
         
     }
     else if ([self.strStyle isEqualToString:@"12"]) {
-        self.segmentedCtrl.selectedSegmentIndex = 0;
+        self.segmentedCtrl.selectedSegmentIndex = 1;
         self.currentViewController = self.hornerPlan;
         [self.view addSubview:self.hornerPlan.view];
         _currentViewController = self.hornerPlan;
@@ -87,9 +87,9 @@
     }
     else {
         if (self.isShowHornor) {
-            self.currentViewController = self.hornerPlan;
-            [self.view addSubview:self.hornerPlan.view];
-            _currentViewController = self.hornerPlan;
+            self.currentViewController = self.p2p;
+            [self.view addSubview:self.p2p.view];
+            _currentViewController = self.p2p;
         }
         else {
             self.currentViewController = self.p2p;
@@ -129,8 +129,8 @@
         case 0:{
             
             if (self.isShowHornor) {
-                [self transitionFromViewController:self.currentViewController toViewController:self.hornerPlan duration:0.25 options:UIViewAnimationOptionCurveEaseInOut animations:nil completion:^(BOOL finished) {
-                    self.currentViewController = self.hornerPlan;
+                [self transitionFromViewController:self.currentViewController toViewController:self.p2p duration:0.25 options:UIViewAnimationOptionCurveEaseInOut animations:nil completion:^(BOOL finished) {
+                    self.currentViewController = self.p2p;
                 }];
                 
             }
@@ -148,8 +148,8 @@
         case 1: {
             
             if (self.isShowHornor) {
-                [self transitionFromViewController:self.currentViewController toViewController:self.p2p duration:0.25 options:UIViewAnimationOptionCurveEaseInOut animations:nil completion:^(BOOL finished) {
-                    self.currentViewController = self.p2p;
+                [self transitionFromViewController:self.currentViewController toViewController:self.hornerPlan duration:0.25 options:UIViewAnimationOptionCurveEaseInOut animations:nil completion:^(BOOL finished) {
+                    self.currentViewController = self.hornerPlan;
                 }];
                 
             }
