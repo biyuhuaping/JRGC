@@ -971,7 +971,7 @@
     }
     _shareUrl = self.dicForShare.url;
     
-    _shareImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:self.dicForShare.thumb]]];
+    _shareImage = [Common getImageFromURL:self.dicForShare.thumb];
     _shareTitle = self.dicForShare.title;
     _shareContent = self.dicForShare.desc;
     
@@ -990,7 +990,7 @@
     UMSocialMessageObject *messageObject = object;
     if (platformType == UMSocialPlatformType_Sina) {
         UMShareImageObject *shareObject = [UMShareImageObject shareObjectWithTitle:_shareTitle descr:_shareContent thumImage:[UIImage imageNamed:@"AppIcon"]];
-        [shareObject setShareImage:self.dicForShare.thumb];
+        [shareObject setShareImage:_shareImage];
         messageObject.shareObject = shareObject;
         messageObject.text = [NSString stringWithFormat:@"%@%@",_shareContent,_shareUrl];
     } else {

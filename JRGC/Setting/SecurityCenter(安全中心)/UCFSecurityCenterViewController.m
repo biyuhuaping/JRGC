@@ -32,6 +32,7 @@
 #import "UCFBankDepositoryAccountViewController.h"
 #import "FullWebViewController.h"
 #import "UCFSession.h"
+#import "UCFWebViewJavascriptBridgeMall.h"
 @interface UCFSecurityCenterViewController () <UITableViewDataSource, UITableViewDelegate, SecurityCellDelegate, UCFLockHandleDelegate>
 
 // 选项表数据
@@ -78,6 +79,9 @@
         UCFSettingItem *bundlePhoneNum = [UCFSettingArrowItem itemWithIcon:@"login_icon_phone" title:@"绑定手机号" destVcClass:[BindPhoneNumViewController class]];
         //先前是绑卡页面，因为删除绑卡页面，所以暂时用TradePasswordVC这个类替代，整体调试的时候改过来，zrc fixed
         UCFSettingItem *bundleCard = [UCFSettingArrowItem itemWithIcon:@"safecenter_icon_bankcard" title:@"绑定银行卡" destVcClass:[UCFBankCardInfoViewController class]];
+        
+        UCFSettingItem *riskAssessment = [UCFSettingArrowItem itemWithIcon:@"safecenter_icon_assessment" title:@"风险承担能力" destVcClass:[UCFWebViewJavascriptBridgeMall class]];
+        
         UCFSettingItem *activeGestureCode  = [UCFSettingSwitchItem itemWithIcon:@"safecenter_icon_gesture" title:@"启用手势密码"];
         UCFSettingItem *activeFaceValid  = [UCFSettingSwitchItem itemWithIcon:@"uesr_icon_face" title:@"启用刷脸登录" withSwitchType:2];
         UCFSettingItem *modifyPassword = [UCFSettingArrowItem itemWithIcon:@"login_icon_password" title:@"修改登录密码" destVcClass:[ModifyPasswordViewController class]];
@@ -85,7 +89,7 @@
 //        self.setChangePassword.isShowOrHide  = YES;//显示该信息 对应的cell可以点击
         
         UCFSettingGroup *group1 = [[UCFSettingGroup alloc] init];//用户信息
-        group1.items = [[NSMutableArray alloc]initWithArray: @[self.userLevel,idauth, bundlePhoneNum, bundleCard]];
+        group1.items = [[NSMutableArray alloc]initWithArray: @[self.userLevel,idauth, bundlePhoneNum, bundleCard,riskAssessment]];
 
         UCFSettingGroup *group2 = [[UCFSettingGroup alloc] init];//账户安全
         
@@ -246,6 +250,7 @@
             NSString *authId = [result objectForKey:@"state"];
             NSString *bindPhone = [result objectForKey:@"bindMobile"];
             NSString *oldPhone = [[NSUserDefaults standardUserDefaults] valueForKey:PHONENUM];
+            NSString *gradeResult = dic[@"gradeResult"];
             self.isCompanyAgent = dic[@"isCompanyAgent"];
             
             //新请求的手机号和本地存储手机号不一样则更新本地
@@ -314,6 +319,9 @@
                     
                     case 3:
                         userItem.subtitle = [bindCard isEqualToString:@""] ? @"未绑定" : bindCard;
+                        break;
+                    case 4:
+                        userItem.subtitle = gradeResult;
                         break;
                     default:
                         break;
@@ -787,6 +795,13 @@
 //                    vc = [[UCFBankCardInfoViewController alloc] init];
                     vc.title = @"绑定银行卡";
                 }
+            }
+                break;
+            case 4: {
+                vc = [[arrowItem.destVcClass alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
+                vc.title = arrowItem.title;
+                ((UCFWebViewJavascriptBridgeMall *)vc).url = @"https://m.9888.cn/static/wap/user-evaluate/index.html";
+                ((UCFWebViewJavascriptBridgeMall *)vc).isHideNavigationBar = YES;
             }
                 break;
           }
