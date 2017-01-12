@@ -111,17 +111,14 @@
 		<true/>
 		<key>NSExceptionDomains</key>
 		<dict>
-			<key>Exception Domains</key>
+			<key>onlineuat.cupdata.com</key>
 			<dict>
-				<key>onlineuat.cupdata.com</key>
-				<dict>
-					<key>NSIncludesSubdomains</key>
-					<true/>
-					<key>NSThirdPartyExceptionAllowsInsecureHTTPLoads</key>
-					<true/>
-					<key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
-					<false/>
-				</dict>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+				<key>NSThirdPartyExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+				<key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
+				<false/>
 			</dict>
 		</dict>
 	</dict>
