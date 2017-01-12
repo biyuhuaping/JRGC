@@ -8,6 +8,7 @@
 
 #import "CircleMapView.h"
 #import "UIColor+Hex.h"
+#import <math.h>
 #define PI 3.14159265358979323846
 //#define degreesToRadian(x) (M_PI * (x) / 180.0)
 #define degreesToRadian(x) ( 180.0 / PI * (x))
@@ -31,7 +32,7 @@
 - (NSArray *)signs
 {
     if (!_signs) {
-        _signs = [[NSArray alloc] initWithObjects:@"本人", @"全体", nil];
+        _signs = [[NSArray alloc] initWithObjects:@"本人", @"C1全体", nil];
     }
     return _signs;
 }
@@ -76,6 +77,7 @@
             //float angle_end = radians([_dataArray[i] floatValue] *bl + ff);  //结束
             CGFloat angle_end =([detail.amount  doubleValue] *bl + ff);  //结束
             ff += [detail.amount doubleValue] *bl;  //开始之前的角度
+            DBLog(@"angle-end:%f", angle_end);
             
             //drawArc(ctx, self.center, angle_start, angle_end, _colorArray[i]);
             
@@ -164,13 +166,19 @@
 
     // 数字的长度
     CGSize itemSizeNumber;
-    UCFDataDetailModel * detail = [self.model.chartDetail objectAtIndex:n];
+    UCFDataDetailModel * detail = [self.model.chartDetail objectAtIndex:0];
     NSString *tempStr;
     if ([self.model.totalAmount doubleValue] == 0) {
         tempStr = [NSString stringWithFormat:@"%@", self.signs[n]];
     }
     else {
-        float rate = [detail.amount doubleValue] / [self.model.totalAmount doubleValue] * 100;
+        float rate =0;
+        if (n==0) {
+            rate = round([detail.amount doubleValue] / [self.model.totalAmount doubleValue] * 100);
+        }
+        else {
+            rate = 100 - (int)(round([detail.amount doubleValue] / [self.model.totalAmount doubleValue] * 100));
+        }
         tempStr = [NSString stringWithFormat:@"%@%d%%", self.signs[n], (int)rate];
     }
     itemSizeNumber = [tempStr sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16.0]}];
@@ -190,6 +198,7 @@
     NSMutableParagraphStyle * paragraph = [[NSMutableParagraphStyle alloc]init];
      paragraph.alignment = NSTextAlignmentLeft;
    
+    detail = [self.model.chartDetail objectAtIndex:n];
     [[NSString stringWithFormat:@"¥%.2f", [detail.amount doubleValue]] drawInRect:CGRectMake(textStartX, textStartY, 150, 50) withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:10.0],NSForegroundColorAttributeName:color,NSParagraphStyleAttributeName:paragraph}];
     
 }

@@ -33,6 +33,7 @@
 @property (nonatomic, copy) NSString *tradeMark;
 @property (nonatomic, copy) NSString *repayPeriodtext;
 @property (nonatomic, copy) NSString *status;
+@property (nonatomic, copy) NSString *type;
 @property (nonatomic, assign) BOOL isAnim;
 
 

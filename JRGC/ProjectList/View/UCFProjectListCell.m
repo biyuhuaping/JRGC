@@ -198,8 +198,13 @@
 
     NSInteger status = [model.status integerValue];
     if (_type == UCFProjectListCellTypeProject) {
-        self.circleProgressView.textStr = [self.status objectAtIndex:status];
+        if ([model.type isEqualToString:@"2"] && status == 2) {
+            self.circleProgressView.textStr = @"认购";
+        }
+        else
+            self.circleProgressView.textStr = [self.status objectAtIndex:status];
     }
+    
     self.angleView.angleStatus = model.status;
     DBLOG(@"%@", model.status);
     if (model.prdLabelsList.count>0) {
@@ -263,7 +268,12 @@
     }
     
     NSInteger status = [transferModel.status integerValue];
-    self.circleProgressView.textStr = status == 0?@"购买":@"已转完";
+    if ([transferModel.type isEqualToString:@"2"]) {
+        self.circleProgressView.textStr = status == 0?@"认购":@"已转完";
+    }
+    else
+        self.circleProgressView.textStr = status == 0?@"购买":@"已转完";
+    
     
     float progress = [transferModel.completeRate floatValue];//[aItemInfo.realPrincipalAmt floatValue]/[aItemInfo.planPrincipalAmt floatValue];
     if (status == 0) {
