@@ -19,6 +19,7 @@
 #import "UIImage+Misc.h"
 #import "UCFBankDepositoryAccountViewController.h"
 #import "UCFOldUserGuideViewController.h"
+#import "RiskAssessmentViewController.h"
 @interface UCFProjectDetailViewController ()
 {
     UCFNormalNewMarkView *_normalMarkView;// 普通标
@@ -621,7 +622,12 @@
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:[dic objectForKey:@"statusdes"] delegate:self cancelButtonTitle:@"返回列表" otherButtonTitles: nil];
                 alert.tag =7000;
                 [alert show];
-            } else {
+            } else if ([[dic objectForKey:@"status"] integerValue] == 30) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:[dic objectForKey:@"statusdes"] delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                alert.tag =9000;
+                [alert show];
+            }
+            else {
                 [AuxiliaryFunc showAlertViewWithMessage:[dic objectForKey:@"statusdes"]];
             }
             
@@ -709,6 +715,11 @@
                     break;
             }
         }
+    } else if (alertView.tag == 9000) {
+        RiskAssessmentViewController *vc = [[RiskAssessmentViewController alloc] initWithNibName:@"RiskAssessmentViewController" bundle:nil];
+        vc.url = GRADELURL;
+        vc.isHideNavigationBar = YES;
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 

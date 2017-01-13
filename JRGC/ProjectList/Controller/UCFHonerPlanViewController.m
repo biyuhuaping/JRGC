@@ -17,6 +17,7 @@
 #import "UCFPurchaseBidViewController.h"
 #import "UCFBankDepositoryAccountViewController.h"
 #import "UCFOldUserGuideViewController.h"
+#import "RiskAssessmentViewController.h"
 @interface UCFHonerPlanViewController () <UITableViewDelegate, UITableViewDataSource, UCFProjectListCellDelegate>
 {
     UCFProjectListModel *_projectListModel;
@@ -197,7 +198,13 @@
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:dic[@"statusdes"] delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
                 alert.tag =7000;
                 [alert show];
-            } else {
+            } else if ([dic[@"status"] integerValue] == 30) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:dic[@"statusdes"] delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                alert.tag =9000;
+                [alert show];
+
+            }
+            else {
                 [AuxiliaryFunc showAlertViewWithMessage:dic[@"statusdes"]];
             }
         }
@@ -322,6 +329,11 @@
                     break;
             }
         }
+    } else if (alertView.tag == 9000) {
+        RiskAssessmentViewController *vc = [[RiskAssessmentViewController alloc] initWithNibName:@"RiskAssessmentViewController" bundle:nil];
+        vc.url = GRADELURL;
+        vc.isHideNavigationBar = YES;
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 -(void)dealloc{
