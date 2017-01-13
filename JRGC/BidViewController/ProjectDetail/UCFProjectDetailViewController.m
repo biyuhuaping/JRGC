@@ -373,6 +373,11 @@
 -(void)makeContractMsg:(NSArray*)msgArray{
     
     _contractMsgArray = [NSArray arrayWithArray:msgArray];
+    //如果有downContractList字段
+    NSArray *downContractListArray = [_dataDic objectSafeArrayForKey:@"downContractList"];
+    if (downContractListArray.count != 0) {
+        _contractMsgArray = [_contractMsgArray arrayByAddingObjectsFromArray:downContractListArray];
+    }
 }
 
 
@@ -480,11 +485,18 @@
 }
 -(void)getContractMsgHttpRequest:(NSInteger)row{
     
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSString * strParameters= @"";
     NSDictionary *contractDict = [_contractMsgArray objectAtIndex:row];
     NSString *contractTypeStr =[contractDict objectSafeForKey:@"contractType"];
     _contractTitle = [contractDict objectSafeForKey:@"contractName"];
+    NSString *contractDownUrl = [contractDict objectSafeForKey:@"contractDownUrl"];
+    if (![contractDownUrl isEqualToString:@""]) {
+        NSString *contractDownUrlUTF8 = [contractDownUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        FullWebViewController *controller = [[FullWebViewController alloc] initWithWebUrl:contractDownUrlUTF8  title:_contractTitle];
+        controller.baseTitleType = @"detail_heTong";
+        [self.navigationController pushViewController:controller animated:YES];
+        return;
+    }
     if (_isTransfer) {
         //转让标
         NSString *projectId = [[_dataDic objectForKey:@"prdTransferFore"] objectForKey:@"id"];
@@ -495,6 +507,7 @@
         NSString *projectId = [[_dataDic objectForKey:@"prdClaims"] objectForKey:@"id"];
         strParameters = [NSString stringWithFormat:@"userId=%@&prdClaimId=%@&contractType=%@&prdType=0",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],projectId,contractTypeStr];
     }
+     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
      [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetContractMsg owner:self];
 }
 
