@@ -29,7 +29,7 @@
 
 - (IBAction)investmentClick:(id)sender {
     if ([self.delegate isKindOfClass:[UCFLatestProjectViewController class]]) {
-        if (self.delegate && [self.delegate respondsToSelector:@selector(investBtnClicked:)] && [self.progressView.textStr isEqualToString:@"投资"]) {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(investBtnClicked:)] && ([self.progressView.textStr isEqualToString:@"投资"] || [self.progressView.textStr isEqualToString:@"认购"])) {
             [self.delegate investBtnClicked:sender];
         }
     } else if ([self.delegate isKindOfClass:[UCFAssignmentCreditorViewController class]]){
