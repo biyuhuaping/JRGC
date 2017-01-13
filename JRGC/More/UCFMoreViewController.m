@@ -88,7 +88,6 @@ static NSString * const kAppKey = @"23511571";
     NSString *currentVersion = infoDic[@"CFBundleShortVersionString"];
     /** 设置App自定义扩展反馈数据 */
     self.feedbackKit.extInfo = @{@"loginTime":[[NSDate date] description],
-                                 @"visitPath":@"登陆->关于->反馈",
                                  @"userid":userId,
                                  @"客户端版本":currentVersion};
     
