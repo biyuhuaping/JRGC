@@ -41,6 +41,8 @@
 @property (nonatomic, strong) NSString *homeType;//标类型
 @property (nonatomic, strong) NSString *homeTile;//标类型名称
 @property (nonatomic, strong) NSString *homeIconUrl;//标类型icon
+@property (nonatomic, copy) NSString *type;//判断是否是尊享的标识
+
 //初始化方法
 - (id)initWithDictionary:(NSDictionary *)dicJson;
 

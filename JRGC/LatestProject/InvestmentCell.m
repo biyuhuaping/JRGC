@@ -118,7 +118,11 @@
 //    NSArray *statusArr = @[@"投资",@"满标",@"还款中",@"已还清"];//app端只有这几个状态
     NSArray *statusArr = @[@"未审核",@"等待确认",@"投资",@"流标",@"满标",@"回款中",@"已回款"];
     NSInteger status = [aItemInfo.status integerValue];
-    self.progressView.textStr = statusArr[status];
+    if ([aItemInfo.type isEqualToString:@"2"] && status == 2) {
+        self.progressView.textStr = @"认购";
+    }
+    else
+        self.progressView.textStr = statusArr[status];
     self.angleView.angleStatus = aItemInfo.status;
 
     float progress = [aItemInfo.completeLoan floatValue]/[aItemInfo.borrowAmount floatValue];

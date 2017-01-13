@@ -10,6 +10,7 @@
 #import <objc/runtime.h>
 
 @implementation UCFDataStaticsModel
+
 - (NSArray*)propertyKeys
 {
     unsigned int outCount;
@@ -33,7 +34,12 @@
                 NSMutableArray *arry = [NSMutableArray array];
                 for (NSDictionary *dic in propertyValue) {
                     UCFDataDetailModel *detail = [UCFDataDetailModel dataDetailModelWithDict:dic];
-                    [arry addObject:detail];
+                    if ([detail.promotionCodeType isEqualToString:@"A"]) {
+                        [arry insertObject:detail atIndex:0];
+                    }
+                    else {
+                        [arry addObject:detail];
+                    }
                 }
                 self.chartDetail = arry;
             }

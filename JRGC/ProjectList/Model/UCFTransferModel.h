@@ -39,6 +39,7 @@
 @property (nonatomic, copy) NSString *tradeMark;
 @property (nonatomic, copy) NSString *transfereeYearRate;
 @property (nonatomic, copy) NSString *validDays;
+@property (nonatomic, copy) NSString *type;
 
 @property (nonatomic, assign) BOOL isAnim;
 

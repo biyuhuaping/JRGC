@@ -748,7 +748,7 @@
 - (void)endPost:(id)result tag:(NSNumber *)tag
 {
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-//    DBLOG(@"首页获取最新项目列表：%@",data);
+    DBLOG(@"首页获取最新项目列表：%@",result);
 
     NSMutableDictionary *dic = [result objectFromJSONString];
     
