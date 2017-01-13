@@ -33,7 +33,7 @@
 #import "FullWebViewController.h"
 #import "UCFSession.h"
 #import "UCFWebViewJavascriptBridgeMall.h"
-
+#import "RiskAssessmentViewController.h"
 @interface UCFSecurityCenterViewController () <UITableViewDataSource, UITableViewDelegate, SecurityCellDelegate, UCFLockHandleDelegate>
 
 // 选项表数据
@@ -81,7 +81,7 @@
         //先前是绑卡页面，因为删除绑卡页面，所以暂时用TradePasswordVC这个类替代，整体调试的时候改过来，zrc fixed
         UCFSettingItem *bundleCard = [UCFSettingArrowItem itemWithIcon:@"safecenter_icon_bankcard" title:@"绑定银行卡" destVcClass:[UCFBankCardInfoViewController class]];
         
-        UCFSettingItem *riskAssessment = [UCFSettingArrowItem itemWithIcon:@"safecenter_icon_assessment" title:@"风险承担能力" destVcClass:[UCFWebViewJavascriptBridgeMall class]];
+        UCFSettingItem *riskAssessment = [UCFSettingArrowItem itemWithIcon:@"safecenter_icon_assessment" title:@"风险承担能力" destVcClass:[RiskAssessmentViewController class]];
         
         UCFSettingItem *activeGestureCode  = [UCFSettingSwitchItem itemWithIcon:@"safecenter_icon_gesture" title:@"启用手势密码"];
         UCFSettingItem *activeFaceValid  = [UCFSettingSwitchItem itemWithIcon:@"uesr_icon_face" title:@"启用刷脸登录" withSwitchType:2];
@@ -109,6 +109,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    self.navigationController.navigationBar.hidden = NO;
     [self reloadUI];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 }
@@ -799,10 +800,10 @@
             }
                 break;
             case 4: {
-                vc = [[arrowItem.destVcClass alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
+                vc = [[arrowItem.destVcClass alloc] initWithNibName:@"RiskAssessmentViewController" bundle:nil];
                 vc.title = arrowItem.title;
-                ((UCFWebViewJavascriptBridgeMall *)vc).url = GRADELURL;
-                ((UCFWebViewJavascriptBridgeMall *)vc).isHideNavigationBar = YES;
+                ((RiskAssessmentViewController *)vc).url = GRADELURL;
+                ((RiskAssessmentViewController *)vc).isHideNavigationBar = YES;
             }
                 break;
           }
