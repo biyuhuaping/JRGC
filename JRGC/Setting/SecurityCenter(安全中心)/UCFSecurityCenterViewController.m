@@ -33,6 +33,7 @@
 #import "FullWebViewController.h"
 #import "UCFSession.h"
 #import "UCFWebViewJavascriptBridgeMall.h"
+
 @interface UCFSecurityCenterViewController () <UITableViewDataSource, UITableViewDelegate, SecurityCellDelegate, UCFLockHandleDelegate>
 
 // 选项表数据
@@ -800,7 +801,7 @@
             case 4: {
                 vc = [[arrowItem.destVcClass alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
                 vc.title = arrowItem.title;
-                ((UCFWebViewJavascriptBridgeMall *)vc).url = @"https://m.9888.cn/static/wap/user-evaluate/index.html";
+                ((UCFWebViewJavascriptBridgeMall *)vc).url = GRADELURL;
                 ((UCFWebViewJavascriptBridgeMall *)vc).isHideNavigationBar = YES;
             }
                 break;
