@@ -81,6 +81,18 @@
         [footerView addSubview:titleLabel];
         titleLabel.frame = CGRectMake(15, 7, ScreenWidth - 30, 30);
         return footerView;
+    }else if(section == 0){
+        UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 30)];
+        footerView.backgroundColor = UIColorWithRGB(0xebebee);
+        UILabel *titleLabel = [UILabel labelWithFrame:CGRectZero text:self.investDetailModel.interestMode  textColor:UIColorWithRGB(0x999999) font:[UIFont systemFontOfSize:11]];
+        titleLabel.textAlignment = NSTextAlignmentLeft;
+        titleLabel.tag = 1001;
+        titleLabel.numberOfLines = 0;
+        [footerView addSubview:titleLabel];
+        titleLabel.frame = CGRectMake(15, 5, ScreenWidth - 30, 15);
+        [self viewAddLine:footerView Up:YES withColor:UIColorWithRGB(0xd8d8d8)];
+        
+        return footerView;
     }
     return nil;
 }
@@ -93,6 +105,13 @@
             return 0;
         } else {
             return 44;
+        }
+    }if (section == 0) {
+        //该借款标还款日计不计息的判断条件
+        if ([self.investDetailModel.interestMode isEqualToString:@""] || self.investDetailModel.interestMode == nil) {
+            return 0;
+        } else {
+            return 30;
         }
     }
     return 0;
@@ -166,9 +185,18 @@
         [self viewAddLine:headView Up:NO withColor:UIColorWithRGB(0xeff0f3)];
         return headView;
     } if(section == 1) {
-        UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 48)];
+        CGFloat headviewHeight;
+        CGFloat viewYPos;
+        if ([self.investDetailModel.interestMode isEqualToString:@""] || self.investDetailModel.interestMode == nil) {
+            headviewHeight = 48;
+            viewYPos = 10;
+        } else {
+            headviewHeight = 38;
+            viewYPos = 0;
+        }
+        UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, headviewHeight)];
         headView.backgroundColor = UIColorWithRGB(0xebebee);
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 10, ScreenWidth, 38)];
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, viewYPos, ScreenWidth, 38)];
         view.backgroundColor = UIColorWithRGB(0xf7f7f7);
         UILabel *labelTitle = [[UILabel alloc] initWithFrame:CGRectMake(15, 12, ScreenWidth/2, 14)];
         labelTitle.text = @"应收本息";
@@ -404,6 +432,12 @@
             return 0;
         }
         return 48;
+    }else if(section == 1){
+        if ([self.investDetailModel.interestMode isEqualToString:@""] || self.investDetailModel.interestMode == nil) {
+            return 48;
+        } else {
+            return 38;
+        }
     }
     return 48;
 }
