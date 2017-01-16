@@ -84,11 +84,12 @@ static NSString * const kAppKey = @"23511571";
     self.feedbackKit = [[YWFeedbackKit alloc] initWithAppKey:kAppKey];
     NSString *userId = [[NSUserDefaults standardUserDefaults] valueForKey:UUID];
     userId = userId?userId:@"";
+    NSDictionary *infoDic = [[NSBundle mainBundle] infoDictionary];
+    NSString *currentVersion = infoDic[@"CFBundleShortVersionString"];
     /** 设置App自定义扩展反馈数据 */
     self.feedbackKit.extInfo = @{@"loginTime":[[NSDate date] description],
-                                 @"visitPath":@"登陆->关于->反馈",
                                  @"userid":userId,
-                                 @"应用自定义扩展信息":@"开发者可以根据需要设置不同的自定义信息，方便在反馈系统中查看"};
+                                 @"客户端版本":currentVersion};
     
     __weak typeof(self) weakSelf = self;
     [self.feedbackKit makeFeedbackViewControllerWithCompletionBlock:^(YWFeedbackViewController *viewController, NSError *error) {

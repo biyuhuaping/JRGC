@@ -19,6 +19,7 @@
 #import "UIImage+Misc.h"
 #import "UCFBankDepositoryAccountViewController.h"
 #import "UCFOldUserGuideViewController.h"
+#import "RiskAssessmentViewController.h"
 @interface UCFProjectDetailViewController ()
 {
     UCFNormalNewMarkView *_normalMarkView;// 普通标
@@ -373,6 +374,11 @@
 -(void)makeContractMsg:(NSArray*)msgArray{
     
     _contractMsgArray = [NSArray arrayWithArray:msgArray];
+    //如果有downContractList字段
+    NSArray *downContractListArray = [_dataDic objectSafeArrayForKey:@"downContractList"];
+    if (downContractListArray.count != 0) {
+        _contractMsgArray = [_contractMsgArray arrayByAddingObjectsFromArray:downContractListArray];
+    }
 }
 
 
@@ -480,11 +486,18 @@
 }
 -(void)getContractMsgHttpRequest:(NSInteger)row{
     
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSString * strParameters= @"";
     NSDictionary *contractDict = [_contractMsgArray objectAtIndex:row];
     NSString *contractTypeStr =[contractDict objectSafeForKey:@"contractType"];
     _contractTitle = [contractDict objectSafeForKey:@"contractName"];
+    NSString *contractDownUrl = [contractDict objectSafeForKey:@"contractDownUrl"];
+    if (![contractDownUrl isEqualToString:@""]) {
+        NSString *contractDownUrlUTF8 = [contractDownUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        FullWebViewController *controller = [[FullWebViewController alloc] initWithWebUrl:contractDownUrlUTF8  title:_contractTitle];
+        controller.baseTitleType = @"detail_heTong";
+        [self.navigationController pushViewController:controller animated:YES];
+        return;
+    }
     if (_isTransfer) {
         //转让标
         NSString *projectId = [[_dataDic objectForKey:@"prdTransferFore"] objectForKey:@"id"];
@@ -495,6 +508,7 @@
         NSString *projectId = [[_dataDic objectForKey:@"prdClaims"] objectForKey:@"id"];
         strParameters = [NSString stringWithFormat:@"userId=%@&prdClaimId=%@&contractType=%@&prdType=0",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],projectId,contractTypeStr];
     }
+     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
      [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetContractMsg owner:self];
 }
 
@@ -608,7 +622,12 @@
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:[dic objectForKey:@"statusdes"] delegate:self cancelButtonTitle:@"返回列表" otherButtonTitles: nil];
                 alert.tag =7000;
                 [alert show];
-            } else {
+            } else if ([[dic objectForKey:@"status"] integerValue] == 30) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:[dic objectForKey:@"statusdes"] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"测试",nil];
+                alert.tag = 9000;
+                [alert show];
+            }
+            else {
                 [AuxiliaryFunc showAlertViewWithMessage:[dic objectForKey:@"statusdes"]];
             }
             
@@ -695,6 +714,13 @@
                 }
                     break;
             }
+        }
+    } else if (alertView.tag == 9000) {
+        if(buttonIndex == 1){
+            RiskAssessmentViewController *vc = [[RiskAssessmentViewController alloc] initWithNibName:@"RiskAssessmentViewController" bundle:nil];
+            vc.url = GRADELURL;
+            vc.sourceVC = @"ProjectDetailVC";
+            [self.navigationController pushViewController:vc animated:YES];
         }
     }
 }

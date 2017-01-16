@@ -10,6 +10,7 @@
 
 @interface FestivalActivitiesWebView ()<UIWebViewDelegate>
 @property (nonatomic, strong) UIView *shadowView;
+@property (nonatomic, assign) BOOL    isAutoClose;
 
 @end
 
@@ -48,21 +49,18 @@
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-//- (void)initChildViews
-//{
-//    // Shadow View
-//    self.shadowView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
-//    self.shadowView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-//    self.shadowView.backgroundColor = [UIColor blackColor];
-//    
-//    UITapGestureRecognizer *shadowTapGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(shadowClicked:)];
-//    [_shadowView addGestureRecognizer:shadowTapGes];
-//    
-//}
-//- (void)shadowClicked:(UITapGestureRecognizer *)tap
-//{
-//    [self hideView];
-//}
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    if (_isAutoClose) {
+        [self jsClose];
+    }
+}
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    _isAutoClose = YES;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

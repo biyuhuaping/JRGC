@@ -27,7 +27,7 @@
     return self;
 }
 
--(id)initWithFrame:(CGRect)frame target:(id) aTaget action:(SEL) action investmentState:(NSString*)state  souceVc:(NSString*)source
+-(id)initWithFrame:(CGRect)frame target:(id) aTaget action:(SEL) action investmentState:(NSString*)state  souceVc:(NSString*)source isP2P:(BOOL)isP2P
 {
     self = [self initWithFrame:frame];
     if(self)
@@ -68,11 +68,14 @@
             if ([_sourceVc isEqualToString:@"investmentDetail"]) {
                 [investmentButton setTitle:@"招标中" forState:UIControlStateNormal];
             } else {
+                
                 if ([_sourceVc isEqualToString:@"transiBid"]) {
-                    [investmentButton setTitle:@"立即购买" forState:UIControlStateNormal];
+                    NSString *buttonTitle = isP2P ? @"立即购买":@"立即认购";
+                    [investmentButton setTitle:buttonTitle forState:UIControlStateNormal];
 
                 }else {
-                    [investmentButton setTitle:@"立即投资" forState:UIControlStateNormal];
+                    NSString *buttonTitle = isP2P ? @"立即投资":@"立即认购";
+                    [investmentButton setTitle:buttonTitle forState:UIControlStateNormal];
                 }
                 investmentButton.backgroundColor = UIColorWithRGB(0xfd4d4c);
                 [investmentButton setUserInteractionEnabled:YES];
@@ -97,10 +100,12 @@
 
         } else {
             if ([_sourceVc isEqualToString:@"transiBid"]) {
-                [investmentButton setTitle:@"立即购买" forState:UIControlStateNormal];
+                NSString *buttonTitle = isP2P ? @"立即购买":@"立即认购";
+                [investmentButton setTitle:buttonTitle forState:UIControlStateNormal];
                 
             }else {
-                [investmentButton setTitle:@"立即投资" forState:UIControlStateNormal];
+                NSString *buttonTitle = isP2P ? @"立即投资":@"立即认购";
+                [investmentButton setTitle:buttonTitle forState:UIControlStateNormal];
             }
         }
         

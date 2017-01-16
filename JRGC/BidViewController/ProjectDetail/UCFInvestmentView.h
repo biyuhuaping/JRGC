@@ -12,6 +12,6 @@
 {
     
 }
--(id)initWithFrame:(CGRect)frame target:(id) aTaget action:(SEL) action investmentState:(NSString*)state souceVc:(NSString*)source;
+-(id)initWithFrame:(CGRect)frame target:(id) aTaget action:(SEL) action investmentState:(NSString*)state souceVc:(NSString*)source  isP2P:(BOOL)isP2P;
 
 @end
