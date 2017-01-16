@@ -803,7 +803,6 @@
                 vc = [[arrowItem.destVcClass alloc] initWithNibName:@"RiskAssessmentViewController" bundle:nil];
                 vc.title = arrowItem.title;
                 ((RiskAssessmentViewController *)vc).url = GRADELURL;
-                ((RiskAssessmentViewController *)vc).isHideNavigationBar = YES;
             }
                 break;
           }

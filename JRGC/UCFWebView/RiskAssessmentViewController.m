@@ -22,15 +22,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    baseTitleLabel.text = @"风险评估测试题";
       [self addErrorViewButton];
       [self gotoURL:self.url];
     // Do any additional setup after loading the view from its nib.
 }
 //只要是豆哥商城的都去掉导航栏
-- (void)viewWillAppear:(BOOL)animated {
-    [self.navigationController setNavigationBarHidden:YES animated:animated];
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
-}
+//- (void)viewWillAppear:(BOOL)animated {
+//    [self.navigationController setNavigationBarHidden:YES animated:animated];
+//    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+//}
 
 - (void)jsClose
 {

@@ -718,7 +718,6 @@
     } else if (alertView.tag == 9000) {
         RiskAssessmentViewController *vc = [[RiskAssessmentViewController alloc] initWithNibName:@"RiskAssessmentViewController" bundle:nil];
         vc.url = GRADELURL;
-        vc.isHideNavigationBar = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
