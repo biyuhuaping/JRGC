@@ -33,9 +33,6 @@
 - (NSMutableArray *)dataArray
 {
     if (_dataArray == nil) {
-//        _dataArray = [[NSMutableArray alloc]initWithArray:@[@[
-//                                                                @{@"number":@"200",@"color":@"00b0ec",@"name":@"信托产品(买的+收益)"},
-//                                                                @{@"number":@"200",@"color":@"e94f25",@"name":@"粤财汇(代收/冻结/可用金额+收益)"},@{@"number":@"200",@"color":@"006db8",@"name":@"投资(三个公司投资总额+收益)"}]]];
         _dataArray = [NSMutableArray array];
     }
     return _dataArray;
@@ -176,9 +173,6 @@
                 [self.currentMonths addObjectsFromArray:monthList];
                 [self.selectList reloadData];
             }
-//
-//            NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"test" ofType:@"plist"];
-//            result = [[NSArray alloc] initWithContentsOfFile:plistPath];
             [self.dataArray removeAllObjects];
             for (NSDictionary *dic in result) {
                 UCFDataStaticsModel *model = [UCFDataStaticsModel dataStaticsModelWithDict:dic];

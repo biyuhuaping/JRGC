@@ -142,8 +142,7 @@
     [self.view addSubview:_navigationStyleBar];
     
     UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [leftButton setFrame:CGRectMake(10, 24, 25, 25)];
-    [leftButton setFrame:CGRectMake(0, 20, 44, 44)];
+    [leftButton setFrame:CGRectMake(0, 16, 44, 44)];
     [leftButton setBackgroundColor:[UIColor clearColor]];
     [leftButton.titleLabel setFont:[UIFont systemFontOfSize:14]];
     [leftButton setTitleColor:[UIColor colorWithWhite:1 alpha:0.7] forState:UIControlStateHighlighted];
