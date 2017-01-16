@@ -199,7 +199,7 @@
      paragraph.alignment = NSTextAlignmentLeft;
    
     detail = [self.model.chartDetail objectAtIndex:n];
-    [[NSString stringWithFormat:@"¥%.2f", [detail.amount doubleValue]] drawInRect:CGRectMake(textStartX, textStartY, 150, 50) withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:10.0],NSForegroundColorAttributeName:color,NSParagraphStyleAttributeName:paragraph}];
+    [[NSString stringWithFormat:@"¥%.2f", [detail.amount doubleValue]] drawInRect:CGRectMake(textStartX, textStartY, 150, 50) withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12.0],NSForegroundColorAttributeName:[UIColor blackColor],NSParagraphStyleAttributeName:paragraph}];
     
 }
 - (void)setModel:(UCFDataStaticsModel *)model {
