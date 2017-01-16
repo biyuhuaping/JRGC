@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="215"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="214.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="214"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gCt-Ib-vQC">
@@ -33,19 +33,53 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sev-xO-Y8J">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
+                                <color key="backgroundColor" red="0.8901960784313725" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="wdR-Bj-fvn"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MYc-yW-8VC">
+                                <rect key="frame" x="0.0" y="29" width="320" height="1"/>
+                                <color key="backgroundColor" red="0.8901960784313725" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="SrI-o3-GLY"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="7OE-zw-1zB"/>
                             <constraint firstItem="IGT-VV-3Vw" firstAttribute="centerY" secondItem="gCt-Ib-vQC" secondAttribute="centerY" id="J97-f2-Z6j"/>
+                            <constraint firstItem="MYc-yW-8VC" firstAttribute="leading" secondItem="gCt-Ib-vQC" secondAttribute="leading" id="Lig-so-I0c"/>
+                            <constraint firstAttribute="bottom" secondItem="MYc-yW-8VC" secondAttribute="bottom" id="Rld-cb-kZP"/>
                             <constraint firstItem="IGT-VV-3Vw" firstAttribute="leading" secondItem="gCt-Ib-vQC" secondAttribute="leading" constant="15" id="UjC-YL-NAS"/>
                             <constraint firstItem="dxD-pw-LIv" firstAttribute="centerY" secondItem="gCt-Ib-vQC" secondAttribute="centerY" id="bHY-nb-Nvk"/>
+                            <constraint firstItem="sev-xO-Y8J" firstAttribute="leading" secondItem="gCt-Ib-vQC" secondAttribute="leading" id="cFs-jA-JyB"/>
+                            <constraint firstItem="sev-xO-Y8J" firstAttribute="top" secondItem="gCt-Ib-vQC" secondAttribute="top" id="hip-vW-w1A"/>
+                            <constraint firstAttribute="trailing" secondItem="MYc-yW-8VC" secondAttribute="trailing" id="hwf-Un-qtQ"/>
+                            <constraint firstAttribute="trailing" secondItem="sev-xO-Y8J" secondAttribute="trailing" id="nzx-y7-IJ3"/>
                             <constraint firstAttribute="trailing" secondItem="dxD-pw-LIv" secondAttribute="trailing" constant="15" id="xIX-N7-Xyh"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1ca-fy-6Nk" customClass="CircleView">
                         <rect key="frame" x="0.0" y="30" width="320" height="184.5"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AYQ-3U-jlR">
+                                <rect key="frame" x="0.0" y="183" width="320" height="1"/>
+                                <color key="backgroundColor" red="0.8901960784313725" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="o12-ax-cNI"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="AYQ-3U-jlR" firstAttribute="leading" secondItem="1ca-fy-6Nk" secondAttribute="leading" id="fh8-Hh-tEN"/>
+                            <constraint firstAttribute="trailing" secondItem="AYQ-3U-jlR" secondAttribute="trailing" id="hw1-MO-q11"/>
+                            <constraint firstAttribute="bottom" secondItem="AYQ-3U-jlR" secondAttribute="bottom" constant="0.5" id="qPl-RB-6TB"/>
+                        </constraints>
                     </view>
                 </subviews>
                 <constraints>
@@ -60,6 +94,9 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="circleView" destination="1ca-fy-6Nk" id="NuP-fG-edh"/>
+                <outlet property="firstLineHeight" destination="wdR-Bj-fvn" id="9dM-4p-cOr"/>
+                <outlet property="secondLineHeight" destination="SrI-o3-GLY" id="38u-bq-C58"/>
+                <outlet property="thirdLineHeight" destination="o12-ax-cNI" id="c9X-jK-UqP"/>
                 <outlet property="title" destination="IGT-VV-3Vw" id="U74-TP-HIZ"/>
                 <outlet property="value" destination="dxD-pw-LIv" id="NC6-Sz-emO"/>
             </connections>

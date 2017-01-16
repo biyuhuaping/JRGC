@@ -26,6 +26,7 @@
 {
     if (!_colors) {
         _colors = [[NSArray alloc] initWithObjects:@"ff9897", @"93aaf2", nil];
+
     }
     return _colors;
 }
@@ -88,7 +89,6 @@
             // 5.颜色
             
             [self drawArcWithCGContextRef:ctx andWithPoint:CGPointMake(self.frame.size.height * 0.5, self.frame.size.height / 2) andWithAngle_start:angle_start andWithAngle_end:angle_end andWithColor:[UIColor colorWithHexString: self.colors[i]] andInt:i];
-            
             
             //        NSLog(@"开始:%.2f  数据:%.2f  加值:%.2f  结束: %.2f   AAA:%.2f",angle_start,[_dataArray[i] floatValue],[_dataArray[i] floatValue] *bl,angle_end,[_dataArray[i] floatValue] *bl + angle_start);
             
@@ -182,14 +182,14 @@
         tempStr = [NSString stringWithFormat:@"%@%d%%", self.signs[n], (int)rate];
     }
     itemSizeNumber = [tempStr sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16.0]}];
-    
+  
 //    数字的起点
     CGFloat numberStartX = x + 7;
     CGFloat numberStartY = y - itemSizeNumber.height * 0.5;
     
     //指引线上面的数字
     [tempStr drawAtPoint:CGPointMake(numberStartX, numberStartY) withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16.0],NSForegroundColorAttributeName:color}];
-    
+   
     //文字的起点
     CGFloat textStartX = numberStartX;
     CGFloat textStartY = numberStartY + itemSizeNumber.height+10;
@@ -199,8 +199,8 @@
      paragraph.alignment = NSTextAlignmentLeft;
    
     detail = [self.model.chartDetail objectAtIndex:n];
-    [[NSString stringWithFormat:@"¥%.2f", [detail.amount doubleValue]] drawInRect:CGRectMake(textStartX, textStartY, 150, 50) withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12.0],NSForegroundColorAttributeName:[UIColor blackColor],NSParagraphStyleAttributeName:paragraph}];
-    
+    [[NSString stringWithFormat:@"¥%.2f", [detail.amount doubleValue]] drawInRect:CGRectMake(textStartX, textStartY, 150, 50) withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12.0],NSForegroundColorAttributeName:[UIColor colorWithHexString:@"0x555555"],NSParagraphStyleAttributeName:paragraph}];
+
 }
 - (void)setModel:(UCFDataStaticsModel *)model {
     _model = model;
