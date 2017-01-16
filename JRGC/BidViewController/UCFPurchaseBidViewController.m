@@ -1404,7 +1404,7 @@
         
         UILabel *jieshouLabel0 = [[UILabel alloc] initWithFrame:CGRectMake(23, height1+10, ScreenWidth-25, 12)];
         jieshouLabel0.backgroundColor = [UIColor clearColor];
-        jieshouLabel0.text = @"同意在大连金融资产交易所开户";
+        jieshouLabel0.text = [_dataDict objectForKey:@"openTypeMess"];
         jieshouLabel0.font = [UIFont systemFontOfSize:12];
         jieshouLabel0.textColor = UIColorWithRGB(0x999999);
         [footView addSubview:jieshouLabel0];
