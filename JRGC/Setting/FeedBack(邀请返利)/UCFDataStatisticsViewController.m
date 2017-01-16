@@ -47,24 +47,6 @@
     baseTitleLabel.text = @"统计数据";
     [self addLeftButton];
     
-    NSDate *now = [NSDate date];
-    
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSUInteger unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit;
-    NSDateComponents *dateComponent = [calendar components:unitFlags fromDate:now];
-    
-    NSInteger year = [dateComponent year];
-    NSInteger month =  [dateComponent month];
-    
-    for (int i=0; i<3; i++) {
-        if (month-i <= 0) {
-            [self.currentMonths addObject:@{@"title": [NSString stringWithFormat:@"%ld-%02ld", year-1, month-i+12], @"year" : @(year-1), @"month": @(month-i+12)}];
-        }
-        else {
-            [self.currentMonths addObject:@{@"title": [NSString stringWithFormat:@"%ld-%02ld", year, month-i], @"year" : @(year), @"month": @(month-i)}];
-        }
-    }
-    
     [self addRightButton];
     
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(ScreenWidth - 100, 1, 100, 0) style:UITableViewStylePlain];
@@ -75,7 +57,7 @@
     [self.view addSubview:tableView];
     self.selectList = tableView;
     
-    [self getDataStaticFromNetWithTime:[[self.currentMonths objectAtIndex:0] objectForKey:@"title"]];
+    [self getDataStaticFromNetWithTime:@""];
 }
 
 - (void)addRightButton
@@ -84,7 +66,6 @@
     rightbutton.frame = CGRectMake(0, 0, 75, 44);
     //    rightbutton.backgroundColor = [UIColor redColor];
     [rightbutton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [rightbutton setTitle:[[self.currentMonths objectAtIndex:0] objectForKey:@"title"] forState:UIControlStateNormal];
     rightbutton.titleLabel.font = [UIFont systemFontOfSize:15.0];
     [rightbutton addTarget:self action:@selector(clickRightBtn) forControlEvents:UIControlEventTouchUpInside];
     [rightbutton setTitleColor:[UIColor colorWithWhite:1 alpha:0.7] forState:UIControlStateHighlighted];
@@ -127,7 +108,7 @@
         if (nil == cell) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
         }
-        cell.textLabel.text = [[self.currentMonths objectAtIndex:indexPath.row] objectForKey:@"title"];
+        cell.textLabel.text = [self.currentMonths objectAtIndex:indexPath.row];
         return cell;
     }
     else if (tableView == self.dataTableView) {
@@ -150,16 +131,16 @@
         return 44;
     }
     else
-        return 215;
+        return 215+10;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (tableView == self.selectList) {
-        [self.rightButton setTitle:[[self.currentMonths objectAtIndex:indexPath.row] objectForKey:@"title"] forState:UIControlStateNormal];
+        [self.rightButton setTitle:[self.currentMonths objectAtIndex:indexPath.row] forState:UIControlStateNormal];
         [self clickRightBtn];
-        [self getDataStaticFromNetWithTime:[[self.currentMonths objectAtIndex:indexPath.row] objectForKey:@"title"]];
-        [self.dataTableView reloadData];
+        [self getDataStaticFromNetWithTime:[self.currentMonths objectAtIndex:indexPath.row]];
+        [self.selectList reloadData];
     }
 }
 
@@ -189,6 +170,13 @@
         
         if ([rstcode intValue] == 1) {
             NSArray *result = [[dictotal objectForKey:@"data"] objectForKey:@"resultData"];
+            NSArray *monthList = [[dictotal objectForKey:@"data"] objectForKey:@"monthList"];
+            if (!self.currentMonths.count) {
+                [self.rightButton setTitle:[monthList objectAtIndex:0] forState:UIControlStateNormal];
+                [self.currentMonths addObjectsFromArray:monthList];
+                [self.selectList reloadData];
+            }
+//
 //            NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"test" ofType:@"plist"];
 //            result = [[NSArray alloc] initWithContentsOfFile:plistPath];
             [self.dataArray removeAllObjects];

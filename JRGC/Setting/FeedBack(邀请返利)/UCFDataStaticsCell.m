@@ -35,4 +35,11 @@
     self.title.text = model.searchMonth;
     self.value.text = [NSString stringWithFormat:@"¥%@", model.totalAmount];
 }
+
+- (void)setFrame:(CGRect)frame
+{
+    frame.size.height -=10;
+    frame.origin.y += 10;
+    [super setFrame:frame];
+}
 @end
