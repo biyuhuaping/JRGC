@@ -13,6 +13,10 @@
 @property (weak, nonatomic) IBOutlet CircleView *circleView;
 @property (weak, nonatomic) IBOutlet UILabel *title;
 @property (weak, nonatomic) IBOutlet UILabel *value;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *firstLineHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *secondLineHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *thirdLineHeight;
+
 
 @end
 
@@ -20,7 +24,9 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    
+    self.firstLineHeight.constant = 0.5;
+    self.secondLineHeight.constant = 0.5;
+    self.thirdLineHeight.constant = 0.5;
 }
 
 - (void)layoutSubviews
