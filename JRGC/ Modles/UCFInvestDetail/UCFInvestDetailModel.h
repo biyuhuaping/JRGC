@@ -78,6 +78,9 @@
 //返还工豆
 @property (nonatomic, strong) NSString *returnBeans;
 
+//计息方式
+@property (nonatomic, strong) NSString *interestMode;
+
 
 
 -(id)initWithDictionary:(NSDictionary *)dicJson;
