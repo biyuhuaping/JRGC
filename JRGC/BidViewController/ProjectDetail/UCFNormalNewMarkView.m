@@ -145,7 +145,7 @@
     _oneScroll.showsVerticalScrollIndicator = NO;
     [_oneScroll setBackgroundColor:UIColorWithRGB(0xebebee)];
     
-    detailView = [[UCFBidNewDetailView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, BidDetailScrollViewHeight) WithProjectType:PROJECTDETAILTYPENORMAL prdList:_prdLabelsList dataDic:_dataDic];
+    detailView = [[UCFBidNewDetailView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, BidDetailScrollViewHeight) WithProjectType:PROJECTDETAILTYPENORMAL prdList:_prdLabelsList dataDic:_dataDic isP2P:_isP2P];
     detailView.delegate = self;
     [self addSubview:_oneScroll];
     [_oneScroll addSubview:detailView];
@@ -174,7 +174,7 @@
 {
     NSString *state = [[_dataDic objectForKey:@"prdClaims"] objectForKey:@"status"];
     if (!_investmentView) {
-        _investmentView = [[UCFInvestmentView alloc] initWithFrame:CGRectMake(0, ScreenHeight - 67 - 64, ScreenWidth, 67) target:self action:@selector(investmentViewClick:) investmentState:state souceVc:_sourceVc];
+        _investmentView = [[UCFInvestmentView alloc] initWithFrame:CGRectMake(0, ScreenHeight - 67 - 64, ScreenWidth, 67) target:self action:@selector(investmentViewClick:) investmentState:state souceVc:_sourceVc isP2P:_isP2P];
         //AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
         [self addSubview:_investmentView];
     }
@@ -210,12 +210,12 @@
     _borrowerInfo = [[NSArray alloc] initWithObjects:arrayJiBen, nil];
     
     if (_isP2P) {
-       _titleArray = [[NSArray alloc] initWithObjects:@"基础详情", @"安全保障",@"投标记录", nil];
+        _titleArray = [[NSArray alloc] initWithObjects:@"基础详情", @"安全保障",@"投标记录", nil];
         NSString *tradeMarkStr = [[_dataDic objectSafeDictionaryForKey:@"prdClaims"] objectSafeForKey: @"tradeMark"];
         _isHideBorrowerInformation = [tradeMarkStr intValue] == 20 ? YES :NO;
     }else{
         _isHideBorrowerInformation = YES; //如果是尊享标 则隐藏借款人信息
-        _titleArray = [[NSArray alloc] initWithObjects:@"基础详情", @"安全保障",@"风险揭示",@"投标记录", nil];
+        _titleArray = [[NSArray alloc] initWithObjects:@"基础详情", @"安全保障",@"认购记录", nil];
     }
     _isHideBusinessLicense =  _auditRecordArray.count == 4 ? YES :NO;
     _twoTableview = [[UITableView alloc] initWithFrame:CGRectMake(0, ScreenHeight, ScreenWidth, ScreenHeight - 64) style:UITableViewStylePlain];
@@ -601,7 +601,8 @@
                 placehoderLabel.textColor = UIColorWithRGB(0x333333);
                 placehoderLabel.textAlignment = NSTextAlignmentLeft;
                 placehoderLabel.backgroundColor = [UIColor clearColor];
-                placehoderLabel.text = [NSString stringWithFormat:@"共%lu笔投标纪录",(unsigned long)[[_dataDic objectForKey:@"prdOrders"] count]];
+                NSString *str = _isP2P ? @"投标记录" :@"认购记录";
+                placehoderLabel.text = [NSString stringWithFormat:@"共%lu笔%@",(unsigned long)[[_dataDic objectForKey:@"prdOrders"] count],str];
                 [headView addSubview:placehoderLabel];
                 return headView;
             }
@@ -704,11 +705,12 @@
                 return 27;
             }
         }
-    }else if((_selectIndex == 2 && _isP2P) || (_selectIndex == 3 && !_isP2P)) {
+    }else if(_selectIndex == 2) {
         return 52;
-    }else if(_selectIndex == 2 && !_isP2P){ //风险揭示
-        return ScreenHeight -NavigationBarHeight - 44 - 57;
     }
+//    else if(_selectIndex == 2 && !_isP2P){ //风险揭示
+//        return ScreenHeight -NavigationBarHeight - 44 - 57;
+//    }
     return 0;
 }
 
@@ -733,7 +735,7 @@
         }  else {
             return 1;
         }
-    }else if((_selectIndex == 2 && _isP2P) || (_selectIndex == 3 && !_isP2P)) {
+    }else if(_selectIndex == 2) {
         if(section == 0)
         {
             return 0;
@@ -741,9 +743,10 @@
             return [[_dataDic objectForKey:@"prdOrders"] count];
         }
 
-    }else if(_selectIndex == 2 && !_isP2P){
-        return 1;
     }
+//    else if(_selectIndex == 2 && !_isP2P){
+//        return 1;
+//    }
     return 0;
 }
 
@@ -765,11 +768,12 @@
         //            sectionCount = [[[_dataDic objectForKey:@"prdClaimsReveal"] objectForKey:@"safetySecurityList"] count];
         //        }
         return [[[_dataDic objectForKey:@"prdClaimsReveal"] objectSafeArrayForKey:@"safetySecurityList"] count] + 1;
-    } else if((_selectIndex == 2 && _isP2P) || (_selectIndex == 3 && !_isP2P)) {
+    } else if(_selectIndex == 2) {
         return 2;
-    }else if(_selectIndex == 2 && !_isP2P){
-        return 1;
     }
+//    else if(_selectIndex == 2 && !_isP2P){
+//        return 1;
+//    }
     return 1;
 }
 
@@ -777,7 +781,7 @@
 {
     UITableViewCell *reCell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     tableView.separatorColor = UIColorWithRGB(0xeff0f3);
-    if((_selectIndex == 2 && _isP2P) || (_selectIndex == 3 && !_isP2P)) {
+    if(_selectIndex == 2) {
         NSString *cellindifier = @"thirdSegmentCell";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellindifier];
         if (!cell) {
@@ -1145,26 +1149,27 @@
 
             return cell;
         }
-    }else if(_selectIndex == 2 && !_isP2P){ //风险揭示
-        tableView.separatorColor = [UIColor clearColor];
-        NSString *cellindifier = @"fourSegmentCell";
-        reCell = [tableView dequeueReusableCellWithIdentifier:cellindifier];
-        if (!reCell) {
-            reCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellindifier];
-            reCell.selectionStyle = UITableViewCellSelectionStyleNone;
-            
-
-        }
-        UIWebView *web  = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - NavigationBarHeight - 44 - 57)];
-        [web.scrollView setShowsHorizontalScrollIndicator:NO];
-        [web.scrollView setShowsVerticalScrollIndicator:NO];
-        [web setScalesPageToFit:YES];
-        web.scrollView.tag = 1002;
-        web.scrollView.delegate = self;
-        [web loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:NOTICERISKH5]]];
-        [reCell addSubview:web];
-        return reCell;
     }
+//    else if(_selectIndex == 2 && !_isP2P){ //风险揭示
+//        tableView.separatorColor = [UIColor clearColor];
+//        NSString *cellindifier = @"fourSegmentCell";
+//        reCell = [tableView dequeueReusableCellWithIdentifier:cellindifier];
+//        if (!reCell) {
+//            reCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellindifier];
+//            reCell.selectionStyle = UITableViewCellSelectionStyleNone;
+//            
+//
+//        }
+//        UIWebView *web  = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - NavigationBarHeight - 44 - 57)];
+//        [web.scrollView setShowsHorizontalScrollIndicator:NO];
+//        [web.scrollView setShowsVerticalScrollIndicator:NO];
+//        [web setScalesPageToFit:YES];
+//        web.scrollView.tag = 1002;
+//        web.scrollView.delegate = self;
+//        [web loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:NOTICERISKH5]]];
+//        [reCell addSubview:web];
+//        return reCell;
+//    }
     return reCell;
 }
 

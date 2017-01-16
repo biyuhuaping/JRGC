@@ -9,5 +9,5 @@
 #import "UCFWebViewJavascriptBridgeController.h"
 
 @interface RiskAssessmentViewController : UCFWebViewJavascriptBridgeController
-
+@property (nonatomic,copy) NSString *sourceVC;//从哪个页面过来的
 @end

@@ -20,7 +20,7 @@
 
 @property(nonatomic,weak) id<BidNewDetailViewDelegate>delegate;
 
-- (id)initWithFrame:(CGRect)frame WithProjectType:(PROJECTDETAILTYPE)type prdList:(NSArray *)prdList dataDic:(NSDictionary*)dic;
+- (id)initWithFrame:(CGRect)frame WithProjectType:(PROJECTDETAILTYPE)type prdList:(NSArray *)prdList dataDic:(NSDictionary*)dic  isP2P:(BOOL)isP2P;
 - (void)setProcessViewProcess:(CGFloat)process;
 
 @end

@@ -34,7 +34,7 @@
 #import "UCFLatesProjectTableViewCell.h"
 
 #import "UCFProjectListController.h"        //项目列表
-
+#import "RiskAssessmentViewController.h"    //风险评估
 @interface UCFLatestProjectViewController ()<InvestmentCellDelegate,FourOFourViewDelegate,CycleViewDelegate,PromptViewDelegate,homeButtonPressedCellDelegate>
 {
     UIView *_clickView;
@@ -881,6 +881,10 @@
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:dic[@"statusdes"] delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
                 alert.tag =7000;
                 [alert show];
+            }else if ([dic[@"status"] integerValue] == 30) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:dic[@"statusdes"] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"测试",nil];
+                alert.tag = 9000;
+                [alert show];
             } else {
                  [AuxiliaryFunc showAlertViewWithMessage:dic[@"statusdes"]];
             }
@@ -984,6 +988,12 @@
                 }
                     break;
             }
+        }
+    }else if (alertView.tag == 9000) {
+        if(buttonIndex == 1){ //测试
+            RiskAssessmentViewController *vc = [[RiskAssessmentViewController alloc] initWithNibName:@"RiskAssessmentViewController" bundle:nil];
+            vc.url = GRADELURL;
+            [self.navigationController pushViewController:vc animated:YES];
         }
     }
 }

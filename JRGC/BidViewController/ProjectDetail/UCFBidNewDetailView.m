@@ -54,6 +54,7 @@
     UILabel *_insNameLabel;//担保机构
     
     CGFloat bottomViewYPos;
+    BOOL _isP2P;//是否是P2P标
 }
 
 @end
@@ -70,13 +71,14 @@
     return self;
 }
 
-- (id)initWithFrame:(CGRect)frame WithProjectType:(PROJECTDETAILTYPE)type prdList:(NSArray *)prdList dataDic:(NSDictionary *)dic
+- (id)initWithFrame:(CGRect)frame WithProjectType:(PROJECTDETAILTYPE)type prdList:(NSArray *)prdList dataDic:(NSDictionary *)dic isP2P:(BOOL)isP2P
 {
     self = [super initWithFrame:frame];
     if (self) {
         _type = type;
         _prdLabelsList = prdList;
         _dic = dic;
+        _isP2P = isP2P;
         [self initViews];
     }
     return self;
@@ -135,7 +137,8 @@
     [_headBkView addSubview:_subsidizedInterestLabel];
     
     
-    UILabel *markLabel = [UILabel labelWithFrame:CGRectMake([Common calculateNewSizeBaseMachine:15],0 + [Common calculateNewSizeBaseMachine:155]-[Common calculateNewSizeBaseMachine:45] - 11,0,11) text:@"投资期限" textColor:[UIColor whiteColor] font:[UIFont systemFontOfSize:11]];
+    NSString *markLabelStr =_isP2P ? @"投资期限" : @"认购期限";
+    UILabel *markLabel = [UILabel labelWithFrame:CGRectMake([Common calculateNewSizeBaseMachine:15],0 + [Common calculateNewSizeBaseMachine:155]-[Common calculateNewSizeBaseMachine:45] - 11,0,11) text:markLabelStr textColor:[UIColor whiteColor] font:[UIFont systemFontOfSize:11]];
     [_headBkView addSubview:markLabel];
     
     CGRect markLabelFrame = markLabel.frame;
@@ -152,6 +155,8 @@
     bottomBk.alpha = 0.6;
     [_headBkView addSubview:bottomBk];
     
+    
+    
     UILabel *remainLabel = [UILabel labelWithFrame:CGRectMake([Common calculateNewSizeBaseMachine:15],bottomBk.frame.origin.y + [Common calculateNewSizeBaseMachine:shadeSpacingHeight],0,12) text:@"可投金额" textColor:[UIColor whiteColor] font:[UIFont systemFontOfSize:11]];
     [_headBkView addSubview:remainLabel];
     CGRect remainLabelFrame = remainLabel.frame;
@@ -160,9 +165,9 @@
     if (_type == PROJECTDETAILTYPEBONDSRRANSFER) {
         remainLabel.text = @"剩余额度";
     } else {
-        remainLabel.text = @"可投金额";
+        NSString *remainLabelStr = _isP2P ? @"可投金额" : @"认购金额";
+        remainLabel.text = remainLabelStr;
     }
-    
     _remainMoneyLabel = [UILabel labelWithFrame:CGRectMake(CGRectGetMaxX(remainLabel.frame) + 10,remainLabel.frame.origin.y - 1,150,14) text:@"" textColor:[UIColor whiteColor] font:[UIFont systemFontOfSize:14]];
     _remainMoneyLabel.textAlignment = NSTextAlignmentLeft;
     [_headBkView addSubview:_remainMoneyLabel];

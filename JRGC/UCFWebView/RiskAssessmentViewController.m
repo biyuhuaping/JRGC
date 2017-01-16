@@ -19,7 +19,18 @@
     self = [super initWithNibName:NSStringFromClass([self.superclass class]) bundle:nibBundleOrNil];
     return self;
 }
-
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    if ([self.sourceVC isEqualToString:@"ProjectDetailVC"]) {
+         [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+    }
+}
+-(void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    if ([self.sourceVC isEqualToString:@"ProjectDetailVC"]) {
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    }
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     baseTitleLabel.text = @"风险评估测试题";
@@ -43,7 +54,7 @@
 }
 - (void)dealloc
 {
-    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
