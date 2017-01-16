@@ -46,7 +46,7 @@
     
     BOOL _oneScrollPull;
     
-    BOOL _isP2P; //是否是权益标
+    BOOL _isP2P; //是否是P2P标 
     
     NSString *_borrowerInformationStr;//借款人信息 或机构信息
     
@@ -146,7 +146,7 @@
     _oneScroll.showsVerticalScrollIndicator = NO;
     [_oneScroll setBackgroundColor:UIColorWithRGB(0xebebee)];
     
-    detailView = [[UCFBidNewDetailView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, BidDetailScrollViewHeight) WithProjectType:PROJECTDETAILTYPERIGHTINTEREST prdList:_prdLabelsList dataDic:_dataDic];
+    detailView = [[UCFBidNewDetailView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, BidDetailScrollViewHeight) WithProjectType:PROJECTDETAILTYPERIGHTINTEREST prdList:_prdLabelsList dataDic:_dataDic isP2P:_isP2P];
     detailView.delegate = self;
     [self addSubview:_oneScroll];
     [_oneScroll addSubview:detailView];
@@ -174,7 +174,7 @@
 {
     NSString *state = [[_dataDic objectForKey:@"prdClaims"] objectForKey:@"status"];
     if (!_investmentView) {
-        _investmentView = [[UCFInvestmentView alloc] initWithFrame:CGRectMake(0, ScreenHeight - 67- 64, ScreenWidth, 67) target:self action:@selector(investmentViewClick:) investmentState:state souceVc:_sourceVc];
+        _investmentView = [[UCFInvestmentView alloc] initWithFrame:CGRectMake(0, ScreenHeight - 67- 64, ScreenWidth, 67) target:self action:@selector(investmentViewClick:) investmentState:state souceVc:_sourceVc isP2P:_isP2P];
         //AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
         _investmentView.tag = 1000;
         [self addSubview:_investmentView];
@@ -222,7 +222,7 @@
         _isHideBorrowerInformation = [tradeMarkStr intValue] == 20 ? YES :NO;
     }else{
         _isHideBorrowerInformation = YES; //如果是尊享标 则隐藏借款人信息
-        _titleArray = [[NSArray alloc] initWithObjects:@"基础详情", @"安全保障",@"风险揭示",@"投标记录", nil];
+        _titleArray = [[NSArray alloc] initWithObjects:@"基础详情", @"安全保障",@"认购记录", nil];
     }
     
 
@@ -435,7 +435,8 @@
                 placehoderLabel.textColor = UIColorWithRGB(0x333333);
                 placehoderLabel.textAlignment = NSTextAlignmentLeft;
                 placehoderLabel.backgroundColor = [UIColor clearColor];
-                placehoderLabel.text = [NSString stringWithFormat:@"共%lu笔投标纪录",(unsigned long)[[_dataDic objectForKey:@"prdOrders"] count]];
+                NSString *str = _isP2P ? @"投标记录" : @"认购记录";
+                placehoderLabel.text = [NSString stringWithFormat:@"共%lu笔%@",(unsigned long)[[_dataDic objectForKey:@"prdOrders"] count],str];
                 [headView addSubview:placehoderLabel];
                 return headView;
             }
@@ -558,13 +559,14 @@
                 return 27;
             }
         }
-    }else if((_selectIndex == 2 && _isP2P ) || (_selectIndex == 3 && !_isP2P)) //投资记录
+    }else if(_selectIndex == 2) //投资记录
     {
         return 52;
-    }else if((_selectIndex == 2 && !_isP2P )) //风险揭示
-    {
-        return ScreenHeight - NavigationBarHeight - 44 - 57;
     }
+//    else if((_selectIndex == 2 && !_isP2P )) //风险揭示
+//    {
+//        return ScreenHeight - NavigationBarHeight - 44 - 57;
+//    }
     return 0;
     
 }
@@ -592,16 +594,17 @@
             return 1;
         }
     }
-    else if((_selectIndex == 2 && _isP2P ) || (_selectIndex == 3 && !_isP2P)) { //投资记录
+    else if(_selectIndex == 2) { //投资记录
         if(section == 0)
         {
             return 0;
         }  else {
             return [[_dataDic objectForKey:@"prdOrders"] count];
         }
-    }else if((_selectIndex == 2 && !_isP2P )) { //风险揭示
-        return 1;
     }
+//    else if((_selectIndex == 2 && !_isP2P )) { //风险揭示
+//        return 1;
+//    }
     
     return 0;
     
@@ -624,11 +627,12 @@
         }
         //        sectionCount = [[[_dataDic objectForKey:@"prdClaimsReveal"] objectForKey:@"safetySecurityList"] count];
         return sectionCount + 1;
-    } else if((_selectIndex == 2 && _isP2P ) || (_selectIndex == 3 && !_isP2P)) { //投资记录
+    } else if(_selectIndex == 2) { //投资记录
         return 2;
-    }else if((_selectIndex == 2 && !_isP2P )) { //风险揭示
-        return 1;
     }
+//    else if((_selectIndex == 2 && !_isP2P )) { //风险揭示
+//        return 1;
+//    }
     return 1;
     
 }
@@ -637,7 +641,7 @@
 {
     UITableViewCell *reCell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     tableView.separatorColor = UIColorWithRGB(0xeff0f3);
-    if((_selectIndex == 2 && _isP2P ) || (_selectIndex == 3 && !_isP2P)) {
+    if(_selectIndex == 2) {
         NSString *cellindifier = @"thirdSegmentCell";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellindifier];
         if (!cell) {
@@ -1018,24 +1022,25 @@
                
                return cell;
            }
-    }else if (_selectIndex == 2 && !_isP2P) { //尊享标的 风险揭示
-        tableView.separatorColor = [UIColor clearColor];
-        NSString *cellindifier = @"fourSegmentCell";
-        reCell = [tableView dequeueReusableCellWithIdentifier:cellindifier];
-        if (!reCell) {
-            reCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellindifier];
-            reCell.selectionStyle = UITableViewCellSelectionStyleNone;
-        }
-        UIWebView *web  = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight -NavigationBarHeight - 44 - 57)];
-        [web.scrollView setShowsHorizontalScrollIndicator:NO];
-        [web.scrollView setShowsVerticalScrollIndicator:NO];
-        [web setScalesPageToFit:YES];
-        web.scrollView.tag = 1002;
-        web.scrollView.delegate = self;
-        [web loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:NOTICERISKH5]]];
-        [reCell addSubview:web];
-        return reCell;
     }
+//    else if (_selectIndex == 2 && !_isP2P) { //尊享标的 风险揭示
+//        tableView.separatorColor = [UIColor clearColor];
+//        NSString *cellindifier = @"fourSegmentCell";
+//        reCell = [tableView dequeueReusableCellWithIdentifier:cellindifier];
+//        if (!reCell) {
+//            reCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellindifier];
+//            reCell.selectionStyle = UITableViewCellSelectionStyleNone;
+//        }
+//        UIWebView *web  = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight -NavigationBarHeight - 44 - 57)];
+//        [web.scrollView setShowsHorizontalScrollIndicator:NO];
+//        [web.scrollView setShowsVerticalScrollIndicator:NO];
+//        [web setScalesPageToFit:YES];
+//        web.scrollView.tag = 1002;
+//        web.scrollView.delegate = self;
+//        [web loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:NOTICERISKH5]]];
+//        [reCell addSubview:web];
+//        return reCell;
+//    }
     return reCell;
 }
 

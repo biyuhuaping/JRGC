@@ -150,7 +150,7 @@
     _oneScroll.showsVerticalScrollIndicator = NO;
     [_oneScroll setBackgroundColor:UIColorWithRGB(0xebebee)];
     
-    detailView = [[UCFBidNewDetailView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, BidDetailScrollViewHeight) WithProjectType:PROJECTDETAILTYPEBONDSRRANSFER prdList:_prdLabelsList dataDic:_dataDic];
+    detailView = [[UCFBidNewDetailView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, BidDetailScrollViewHeight) WithProjectType:PROJECTDETAILTYPEBONDSRRANSFER prdList:_prdLabelsList dataDic:_dataDic isP2P:_isP2P];
     detailView.delegate = self;
     [self addSubview:_oneScroll];
     [_oneScroll addSubview:detailView];
@@ -200,7 +200,7 @@
         state = @"12";
     }
     if (!_investmentView) {
-        _investmentView = [[UCFInvestmentView alloc] initWithFrame:CGRectMake(0, ScreenHeight - 67 - 64, ScreenWidth, 67) target:self action:@selector(investmentViewClick:) investmentState:state souceVc:_sourceVc];
+        _investmentView = [[UCFInvestmentView alloc] initWithFrame:CGRectMake(0, ScreenHeight - 67 - 64, ScreenWidth, 67) target:self action:@selector(investmentViewClick:) investmentState:state souceVc:_sourceVc isP2P:_isP2P];
         //AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
         [self addSubview:_investmentView];
     }
@@ -607,7 +607,8 @@
                 placehoderLabel.textColor = UIColorWithRGB(0x333333);
                 placehoderLabel.textAlignment = NSTextAlignmentLeft;
                 placehoderLabel.backgroundColor = [UIColor clearColor];
-                placehoderLabel.text = [NSString stringWithFormat:@"共%lu笔投标纪录",(unsigned long)[[_dataDic objectForKey:@"prdOrders"] count]];
+                NSString *str = _isP2P ? @"投标记录" :@"认购记录";
+                placehoderLabel.text = [NSString stringWithFormat:@"共%lu笔%@",(unsigned long)[[_dataDic objectForKey:@"prdOrders"] count],str];
                 [headView addSubview:placehoderLabel];
                 return headView;
             }
