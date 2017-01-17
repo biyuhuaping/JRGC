@@ -167,6 +167,7 @@
 		748D77671ADE44D300910FF7 /* UCFSettingItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 748D77661ADE44D300910FF7 /* UCFSettingItem.m */; };
 		748D776C1ADE51C900910FF7 /* UCFSettingGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 748D776B1ADE51C900910FF7 /* UCFSettingGroup.m */; };
 		748D77A41ADE6D5A00910FF7 /* UCFSettingArrowItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 748D77A31ADE6D5A00910FF7 /* UCFSettingArrowItem.m */; };
+		748E6F8A1E2DFCA9006B61ED /* UCFPullDownButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 748E6F891E2DFCA9006B61ED /* UCFPullDownButton.m */; };
 		748ED7981CC7304100690215 /* UCFCashAndTopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 748ED7971CC7304100690215 /* UCFCashAndTopUp.xib */; };
 		748ED79B1CC7312000690215 /* UCFCashAndTopUp.m in Sources */ = {isa = PBXBuildFile; fileRef = 748ED79A1CC7312000690215 /* UCFCashAndTopUp.m */; };
 		748ED7A11CC74B9800690215 /* UCFMenuItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 748ED7A01CC74B9800690215 /* UCFMenuItemModel.m */; };
@@ -980,6 +981,8 @@
 		748D776B1ADE51C900910FF7 /* UCFSettingGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFSettingGroup.m; sourceTree = "<group>"; };
 		748D77A21ADE6D5A00910FF7 /* UCFSettingArrowItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFSettingArrowItem.h; sourceTree = "<group>"; };
 		748D77A31ADE6D5A00910FF7 /* UCFSettingArrowItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFSettingArrowItem.m; sourceTree = "<group>"; };
+		748E6F881E2DFCA9006B61ED /* UCFPullDownButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFPullDownButton.h; sourceTree = "<group>"; };
+		748E6F891E2DFCA9006B61ED /* UCFPullDownButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFPullDownButton.m; sourceTree = "<group>"; };
 		748ED7971CC7304100690215 /* UCFCashAndTopUp.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFCashAndTopUp.xib; sourceTree = "<group>"; };
 		748ED7991CC7312000690215 /* UCFCashAndTopUp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFCashAndTopUp.h; sourceTree = "<group>"; };
 		748ED79A1CC7312000690215 /* UCFCashAndTopUp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFCashAndTopUp.m; sourceTree = "<group>"; };
@@ -2713,6 +2716,8 @@
 		74D337BB1E1390ED00386853 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				748E6F881E2DFCA9006B61ED /* UCFPullDownButton.h */,
+				748E6F891E2DFCA9006B61ED /* UCFPullDownButton.m */,
 				74D337C31E13C9BB00386853 /* CircleMapView.h */,
 				74D337C41E13C9BB00386853 /* CircleMapView.m */,
 				74D337C51E13C9BB00386853 /* CircleView.h */,
@@ -5404,6 +5409,7 @@
 				7BCCA8B61ACA97EB0089DAAC /* UCFLoginView.m in Sources */,
 				840A79451C2A7C160059A946 /* UCFMessageCenterCell.m in Sources */,
 				4A9F15BA1B0EC9B1009A7365 /* CoupleHeadView.m in Sources */,
+				748E6F8A1E2DFCA9006B61ED /* UCFPullDownButton.m in Sources */,
 				7BCA18621AD7813E0077C2A6 /* UCFInvestmentDetailViewController.m in Sources */,
 				FBEDF1DF1CB5171500116E12 /* MyViewController.m in Sources */,
 				FBC234731B31678800C783A8 /* UCFBackMoneyCell1.m in Sources */,
