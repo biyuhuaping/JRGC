@@ -34,8 +34,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     baseTitleLabel.text = @"风险评估测试题";
-      [self addErrorViewButton];
-      [self gotoURL:self.url];
+    [self addErrorViewButton];
+    [self gotoURL:self.url];
     // Do any additional setup after loading the view from its nib.
 }
 //只要是豆哥商城的都去掉导航栏
@@ -46,10 +46,6 @@
 
 - (void)jsClose
 {
-//    if (![[self.navigationController.viewControllers firstObject] isKindOfClass:[UCFWebViewJavascriptBridgeMall class]])
-//    {
-        [self.navigationController.navigationBar setHidden:NO];
-//    }
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (void)dealloc

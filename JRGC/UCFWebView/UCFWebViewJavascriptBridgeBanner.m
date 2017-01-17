@@ -24,9 +24,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
   
-    [self subShar];          //添加导航右侧按钮的分享，目前只有banner图有
-
-    [self gotoURL:self.url];
+//    [self subShar];          //添加导航右侧按钮的分享，目前只有banner图有
+//
+//    [self gotoURL:self.url];
     
     
 }
