@@ -626,7 +626,6 @@
         [view addSubview:lineView];
     }
 }
-
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     if(_selectIndex == 0) {
@@ -635,8 +634,13 @@
             return 44;
         } else if (section == 1) {
             return 10;
+        }else{
+            if(_isHideBorrowerInformation){
+                return section == 4 ? 10 :50;
+            }else{
+                return section == 5 ? 10 :50;
+            }
         }
-        return 50;
     } else if (_selectIndex == 1) {
         if(section == 0)
         {
@@ -727,6 +731,8 @@
         {
             
             return _auditRecordArray.count;
+        }else{
+            return 0;
         }
     } else if (_selectIndex == 1) {
         if(section == 0)
@@ -755,9 +761,9 @@
     if(_selectIndex == 0) //基础详情
     {
         if(_isHideBorrowerInformation){
-            return 4;
+            return 5;
         }
-        return 5;
+        return 6;
     } else if (_selectIndex == 1) { //安全保障
         if ([[_dataDic objectForKey:@"prdClaimsReveal"] isEqual:[NSNull null]]) {
             return 1;

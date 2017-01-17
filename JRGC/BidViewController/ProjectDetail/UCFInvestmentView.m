@@ -70,9 +70,7 @@
             } else {
                 
                 if ([_sourceVc isEqualToString:@"transiBid"]) {
-                    NSString *buttonTitle = isP2P ? @"立即购买":@"立即认购";
-                    [investmentButton setTitle:buttonTitle forState:UIControlStateNormal];
-
+                    [investmentButton setTitle:@"立即购买" forState:UIControlStateNormal];
                 }else {
                     NSString *buttonTitle = isP2P ? @"立即投资":@"立即认购";
                     [investmentButton setTitle:buttonTitle forState:UIControlStateNormal];
@@ -100,9 +98,7 @@
 
         } else {
             if ([_sourceVc isEqualToString:@"transiBid"]) {
-                NSString *buttonTitle = isP2P ? @"立即购买":@"立即认购";
-                [investmentButton setTitle:buttonTitle forState:UIControlStateNormal];
-                
+                [investmentButton setTitle:@"立即购买" forState:UIControlStateNormal];
             }else {
                 NSString *buttonTitle = isP2P ? @"立即投资":@"立即认购";
                 [investmentButton setTitle:buttonTitle forState:UIControlStateNormal];

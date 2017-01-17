@@ -40,6 +40,7 @@
     BOOL    isHaveCouponNum;            //是否有反息券
     BOOL    isCompanyAgent;             //是否是机构用户
     NSString *_contractTitle;
+    BOOL  _isP2P;//是否P2p标，yes 为是 NO 为尊享
 
 }
 @property (strong, nonatomic)NSMutableArray             *intelligenceArray;
@@ -62,8 +63,6 @@
     [self addLeftButton];
     [[NSNotificationCenter defaultCenter]  addObserver:self selector:@selector(updateYouHuiCell:) name:@"updateYouHuiQuanCell" object:nil];
     [[NSNotificationCenter defaultCenter]  addObserver:self selector:@selector(reloadMainView) name:@"UPDATEINVESTDATA" object:nil];
-
-    baseTitleLabel.text = @"投标";
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     [self makeMainView];
     self.apptzticket = [NSString stringWithFormat:@"%@",[_dataDict objectForKey:@"apptzticket"]];
@@ -184,6 +183,14 @@
     self.bidArray = [NSMutableArray array];
     [self.bidArray addObject:info1];
     
+    if (self.bidType == 0 && [info1.type isEqualToString:@"2"]) {
+        _isP2P = NO;
+        baseTitleLabel.text = @"认购";
+    }else{
+        _isP2P = YES;
+        baseTitleLabel.text = @"投标";
+    }
+    
     double gondDouBalance = [[[_dataDict objectForKey:@"beanUser"] objectForKey:@"availableBalance"] doubleValue];
     if ((int)gondDouBalance > 0) {
         isGongDouSwitch = YES;
@@ -268,7 +275,9 @@
     investmentButton.backgroundColor = UIColorWithRGB(0xfd4d4c);
     investmentButton.layer.cornerRadius = 2.0;
     investmentButton.layer.masksToBounds = YES;
-    [investmentButton setTitle:@"立即投资" forState:UIControlStateNormal];
+    
+    NSString *buttonTitle = _isP2P ? @"立即投资":@"立即认购";
+    [investmentButton setTitle:buttonTitle forState:UIControlStateNormal];
     [investmentButton addTarget:self action:@selector(checkIsCanInvest) forControlEvents:UIControlEventTouchUpInside];
     [investBaseView addSubview:investmentButton];
     
@@ -557,7 +566,8 @@
     } else {
         showStr = [NSString stringWithFormat:@"投资金额¥%@,确认投资吗?",[UCFToolsMehod AddComma:investMoney]];
     }
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:showStr delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"立即投资", nil];
+    NSString *buttonTitle = _isP2P ? @"立即投资":@"立即认购";
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:showStr delegate:self cancelButtonTitle:@"取消" otherButtonTitles:buttonTitle, nil];
     alert.tag = 3000;
     [alert show];
 }
@@ -1404,7 +1414,7 @@
         
         UILabel *jieshouLabel0 = [[UILabel alloc] initWithFrame:CGRectMake(23, height1+10, ScreenWidth-25, 12)];
         jieshouLabel0.backgroundColor = [UIColor clearColor];
-        jieshouLabel0.text = @"同意在大连金融资产交易所开户";
+        jieshouLabel0.text = [_dataDict objectForKey:@"openTypeMess"];
         jieshouLabel0.font = [UIFont systemFontOfSize:12];
         jieshouLabel0.textColor = UIColorWithRGB(0x999999);
         [footView addSubview:jieshouLabel0];

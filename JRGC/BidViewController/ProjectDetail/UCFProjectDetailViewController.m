@@ -142,8 +142,7 @@
     [self.view addSubview:_navigationStyleBar];
     
     UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [leftButton setFrame:CGRectMake(10, 24, 25, 25)];
-    [leftButton setFrame:CGRectMake(0, 20, 44, 44)];
+    [leftButton setFrame:CGRectMake(0, 16, 44, 44)];
     [leftButton setBackgroundColor:[UIColor clearColor]];
     [leftButton.titleLabel setFont:[UIFont systemFontOfSize:14]];
     [leftButton setTitleColor:[UIColor colorWithWhite:1 alpha:0.7] forState:UIControlStateHighlighted];
@@ -662,6 +661,10 @@
         }else if ([[dic objectForKey:@"status"] integerValue] == 3 || [[dic objectForKey:@"status"] integerValue] == 4) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:[dic objectForKey:@"statusdes"] delegate:self cancelButtonTitle:@"返回列表" otherButtonTitles: nil];
             alert.tag =7001;
+            [alert show];
+        }else if ([[dic objectForKey:@"status"] integerValue] == 30) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:[dic objectForKey:@"statusdes"] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"测试",nil];
+            alert.tag = 9000;
             [alert show];
         }
         else {
