@@ -60,7 +60,9 @@
 - (void)addRightButton
 {
     UIButton *rightbutton = [UIButton buttonWithType:UIButtonTypeCustom];
-    rightbutton.frame = CGRectMake(0, 0, 75, 44);
+    rightbutton.frame = CGRectMake(0, 0, 90, 44);
+    [rightbutton.titleLabel setFrame:CGRectMake(0, 0, 75, 44)];
+    [rightbutton.titleLabel setBackgroundColor:[UIColor greenColor]];
     //    rightbutton.backgroundColor = [UIColor redColor];
     [rightbutton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     rightbutton.titleLabel.font = [UIFont systemFontOfSize:15.0];
