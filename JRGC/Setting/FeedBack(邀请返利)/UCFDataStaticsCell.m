@@ -39,7 +39,7 @@
 {
     _model = model;
     self.title.text = model.searchMonth;
-    self.value.text = [NSString stringWithFormat:@"¥%@", model.totalAmount];
+    self.value.text = [NSString stringWithFormat:@"¥%.2f", [model.totalAmount doubleValue]];
 }
 
 - (void)setFrame:(CGRect)frame

@@ -168,18 +168,53 @@
     CGSize itemSizeNumber;
     UCFDataDetailModel * detail = [self.model.chartDetail objectAtIndex:0];
     NSString *tempStr;
+    double rate =0;
     if ([self.model.totalAmount doubleValue] == 0) {
         tempStr = [NSString stringWithFormat:@"%@", self.signs[n]];
     }
-    else {
-        float rate =0;
+    else if ([detail.amount doubleValue]==0) {
+        
         if (n==0) {
-            rate = round([detail.amount doubleValue] / [self.model.totalAmount doubleValue] * 100);
+            rate = [detail.amount doubleValue] / [self.model.totalAmount doubleValue] * 100;
         }
         else {
-            rate = 100 - (int)(round([detail.amount doubleValue] / [self.model.totalAmount doubleValue] * 100));
+            rate = 100 - [detail.amount doubleValue] / [self.model.totalAmount doubleValue] * 100;
         }
         tempStr = [NSString stringWithFormat:@"%@%d%%", self.signs[n], (int)rate];
+    }
+    else {
+        if (n==0) {
+            rate = [detail.amount doubleValue] / [self.model.totalAmount doubleValue] * 100;
+            if (rate < 0.01) {
+                rate = 0.01;
+                tempStr = [NSString stringWithFormat:@"%@%.2f%%", self.signs[n], rate];
+            }
+            else if (rate > 99.99) {
+                rate = 99.99;
+                tempStr = [NSString stringWithFormat:@"%@%.2f%%", self.signs[n], rate];
+            }
+            else {
+                rate = [self roundCashValue:rate];
+                tempStr = [NSString stringWithFormat:@"%@%@%%", self.signs[n], [self removeZero:rate]];
+            }
+        }
+        else {
+            rate = 100 - [detail.amount doubleValue] / [self.model.totalAmount doubleValue] * 100;
+            if (rate < 0.01) {
+                rate = 0.01;
+                tempStr = [NSString stringWithFormat:@"%@%.2f%%", self.signs[n], rate];
+            }
+            else if (rate > 99.99) {
+                rate = 99.99;
+                tempStr = [NSString stringWithFormat:@"%@%.2f%%", self.signs[n], rate];
+            }
+            else {
+                rate = 100 - [self roundCashValue:([detail.amount doubleValue] / [self.model.totalAmount doubleValue] * 100)];
+                tempStr = [NSString stringWithFormat:@"%@%@%%", self.signs[n], [self removeZero:rate]];
+            }
+        }
+//        [self roundCashValue:rate];
+        
     }
     itemSizeNumber = [tempStr sizeWithAttributes:@{NSFontAttributeName:[UIFont boldSystemFontOfSize:16.0]}];
   
@@ -205,5 +240,34 @@
 - (void)setModel:(UCFDataStaticsModel *)model {
     _model = model;
     [self setNeedsDisplay];
+}
+
+- (double)roundCashValue:(double)value
+{
+    NSArray *array = [[NSString stringWithFormat:@"%f", value] componentsSeparatedByString:@"."];
+    
+    NSInteger pointBefore = [[array firstObject] integerValue];
+    double pointAfter = value-pointBefore;
+    
+    if (pointAfter < 0.004) {
+        return pointBefore;
+    }
+    else return pointBefore + pointAfter + 0.01;
+}
+
+
+- (NSString *)removeZero:(double)value
+{
+    NSArray *array = [[NSString stringWithFormat:@"%f", value] componentsSeparatedByString:@"."];
+    NSString *pointAfter = [[array lastObject] substringToIndex:1];
+    if ([pointAfter hasPrefix:@"0"]) {
+        pointAfter = [pointAfter substringToIndex:0];
+        return [NSString stringWithFormat:@"%@.%@",[array firstObject], pointAfter];
+    }
+    else if ([pointAfter isEqualToString:@"00"]) {
+        return [array firstObject];
+    }
+    else
+        return [NSString stringWithFormat:@"%.2f",value];
 }
 @end
