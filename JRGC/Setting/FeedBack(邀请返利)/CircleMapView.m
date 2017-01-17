@@ -181,14 +181,14 @@
         }
         tempStr = [NSString stringWithFormat:@"%@%d%%", self.signs[n], (int)rate];
     }
-    itemSizeNumber = [tempStr sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16.0]}];
+    itemSizeNumber = [tempStr sizeWithAttributes:@{NSFontAttributeName:[UIFont boldSystemFontOfSize:16.0]}];
   
 //    数字的起点
     CGFloat numberStartX = x + 7;
     CGFloat numberStartY = y - itemSizeNumber.height * 0.5;
     
     //指引线上面的数字
-    [tempStr drawAtPoint:CGPointMake(numberStartX, numberStartY) withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16.0],NSForegroundColorAttributeName:color}];
+    [tempStr drawAtPoint:CGPointMake(numberStartX, numberStartY) withAttributes:@{NSFontAttributeName:[UIFont boldSystemFontOfSize:16.0],NSForegroundColorAttributeName:color}];
    
     //文字的起点
     CGFloat textStartX = numberStartX;
@@ -199,7 +199,7 @@
      paragraph.alignment = NSTextAlignmentLeft;
    
     detail = [self.model.chartDetail objectAtIndex:n];
-    [[NSString stringWithFormat:@"¥%.2f", [detail.amount doubleValue]] drawInRect:CGRectMake(textStartX, textStartY, 150, 50) withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12.0],NSForegroundColorAttributeName:[UIColor colorWithHexString:@"0x555555"],NSParagraphStyleAttributeName:paragraph}];
+    [[NSString stringWithFormat:@"¥%.2f", [detail.amount doubleValue]] drawInRect:CGRectMake(textStartX, textStartY, 150, 50) withAttributes:@{NSFontAttributeName:[UIFont boldSystemFontOfSize:12.0],NSForegroundColorAttributeName:[UIColor colorWithHexString:@"0x555555"],NSParagraphStyleAttributeName:paragraph}];
 
 }
 - (void)setModel:(UCFDataStaticsModel *)model {
