@@ -268,21 +268,33 @@
     }
     
     NSInteger status = [transferModel.status integerValue];
-    if ([transferModel.type isEqualToString:@"2"]) {
+    NSInteger stopStatus = [transferModel.stopStatus integerValue];
+    if (status == 0 && stopStatus != 0) {
+        self.circleProgressView.textStr = @"转让终止";
+    }
+    else if ([transferModel.type isEqualToString:@"2"]) {
         self.circleProgressView.textStr = status == 0?@"认购":@"已转完";
     }
     else
         self.circleProgressView.textStr = status == 0?@"购买":@"已转完";
     
     
+    
     float progress = [transferModel.completeRate floatValue];//[aItemInfo.realPrincipalAmt floatValue]/[aItemInfo.planPrincipalAmt floatValue];
     if (status == 0) {
-        self.circleProgressView.tintColor = UIColorWithRGB(0xfa4d4c);
-        if (transferModel.isAnim) {
-            [self animateCircle:10*progress isAnim:YES];
-            transferModel.isAnim = NO;
-        }else{
-            [self animateCircle:10*progress isAnim:NO];
+        if (stopStatus != 0) {
+            self.circleProgressView.tintColor = UIColorWithRGB(0xe2e2e2);//未绘制的进度条颜色
+            self.circleProgressView.progressLabel.textColor = UIColorWithRGB(0x909dae);
+            self.circleProgressView.progressLabel.font = [UIFont systemFontOfSize:13];
+        }
+        else {
+            self.circleProgressView.tintColor = UIColorWithRGB(0xfa4d4c);
+            if (transferModel.isAnim) {
+                [self animateCircle:10*progress isAnim:YES];
+                transferModel.isAnim = NO;
+            }else{
+                [self animateCircle:10*progress isAnim:NO];
+            }
         }
     }else{
         self.circleProgressView.tintColor = UIColorWithRGB(0xe2e2e2);//未绘制的进度条颜色
