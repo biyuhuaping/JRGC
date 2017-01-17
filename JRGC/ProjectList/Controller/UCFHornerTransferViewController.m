@@ -107,7 +107,7 @@
            _transferModel = [self.dataArray objectAtIndex:[indexPath row]];
             NSInteger status = [_transferModel.status integerValue];
             NSString *strParameters = [NSString stringWithFormat:@"tranid=%@&userId=%@",_transferModel.Id,[UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]]];
-            if (status != 0) {
+            if (status == 0 && [_transferModel.stopStatus intValue] != 0) {
                 UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前债权转让的详情只对投资人开放"];
                 [self.navigationController pushViewController:controller animated:YES];
             } else {
