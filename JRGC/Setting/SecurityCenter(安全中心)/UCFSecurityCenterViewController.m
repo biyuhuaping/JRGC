@@ -726,8 +726,8 @@
         if (arrowItem.destVcClass == nil) return;
         
         UCFBaseViewController *vc ;
-        
-        if ( ![NSStringFromClass(arrowItem.destVcClass) isEqualToString:@"UCFWebViewJavascriptBridgeLevel"])
+        //如果集成UCFWebViewJavascriptBridgeController 需要在这里添加
+        if (!([NSStringFromClass(arrowItem.destVcClass) isEqualToString:@"UCFWebViewJavascriptBridgeLevel"] || [NSStringFromClass(arrowItem.destVcClass) isEqualToString:@"RiskAssessmentViewController"]))
         {
             vc = [[arrowItem.destVcClass alloc] init];
         }
@@ -800,9 +800,12 @@
             }
                 break;
             case 4: {
-                vc = [[arrowItem.destVcClass alloc] initWithNibName:@"RiskAssessmentViewController" bundle:nil];
+                vc = [[RiskAssessmentViewController alloc] initWithNibName:@"RiskAssessmentViewController" bundle:nil];
                 vc.title = arrowItem.title;
                 ((RiskAssessmentViewController *)vc).url = GRADELURL;
+                [self.navigationController pushViewController:vc  animated:YES];
+                return;
+
             }
                 break;
           }
