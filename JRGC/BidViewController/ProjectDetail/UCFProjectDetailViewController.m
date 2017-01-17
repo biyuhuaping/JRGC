@@ -662,6 +662,10 @@
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:[dic objectForKey:@"statusdes"] delegate:self cancelButtonTitle:@"返回列表" otherButtonTitles: nil];
             alert.tag =7001;
             [alert show];
+        }else if ([[dic objectForKey:@"status"] integerValue] == 30) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:[dic objectForKey:@"statusdes"] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"测试",nil];
+            alert.tag = 9000;
+            [alert show];
         }
         else {
             [AuxiliaryFunc showAlertViewWithMessage:[dic objectForKey:@"statusdes"]];
