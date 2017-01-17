@@ -9,11 +9,12 @@
 #import "UCFDataStatisticsViewController.h"
 #import "UCFDataStaticsCell.h"
 #import "UCFDataStaticsModel.h"
+#import "UCFPullDownButton.h"
 
 @interface UCFDataStatisticsViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, weak) UITableView *selectList;
 @property (nonatomic, strong) NSMutableArray *currentMonths;
-@property (nonatomic, weak) UIButton *rightButton;
+@property (nonatomic, weak) UCFPullDownButton *rightButton;
 @property (weak, nonatomic) IBOutlet UITableView *dataTableView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
 
@@ -46,7 +47,7 @@
     
     [self addRightButton];
     
-    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(ScreenWidth - 100, 1, 100, 0) style:UITableViewStylePlain];
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(ScreenWidth - 100-15, 1, 100, 0) style:UITableViewStylePlain];
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     tableView.hidden = YES;
     tableView.delegate = self;
@@ -59,23 +60,21 @@
 
 - (void)addRightButton
 {
-    UIButton *rightbutton = [UIButton buttonWithType:UIButtonTypeCustom];
+    UCFPullDownButton *rightbutton = [UCFPullDownButton buttonWithType:UIButtonTypeCustom];
     rightbutton.frame = CGRectMake(0, 0, 90, 44);
-    [rightbutton.titleLabel setFrame:CGRectMake(0, 0, 75, 44)];
-    [rightbutton.titleLabel setBackgroundColor:[UIColor greenColor]];
-    //    rightbutton.backgroundColor = [UIColor redColor];
     [rightbutton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     rightbutton.titleLabel.font = [UIFont systemFontOfSize:15.0];
-    [rightbutton addTarget:self action:@selector(clickRightBtn) forControlEvents:UIControlEventTouchUpInside];
+    [rightbutton addTarget:self action:@selector(clickRightBtn:) forControlEvents:UIControlEventTouchUpInside];
     [rightbutton setTitleColor:[UIColor colorWithWhite:1 alpha:0.7] forState:UIControlStateHighlighted];
     [rightbutton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
+    [rightbutton setImage:[UIImage imageNamed:@"fanli_loadown"] forState:UIControlStateNormal];
     //
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightbutton];
     self.navigationItem.rightBarButtonItem = rightItem;
     self.rightButton = rightbutton;
 }
 
-- (void)clickRightBtn
+- (void)clickRightBtn:(UCFPullDownButton *)btn
 {
     CGRect frame = self.selectList.frame;
     if (!self.selectList.hidden) {
@@ -88,6 +87,15 @@
         [self.selectList setFrame:frame];
     }];
     self.selectList.hidden = !self.selectList.hidden;
+    
+    btn.selected = !btn.selected;
+    if (!btn.selected) {
+        self.rightButton.imageView.transform = CGAffineTransformMakeRotation(0);
+    }
+    else {
+        self.rightButton.imageView.transform = CGAffineTransformMakeRotation(M_PI);
+        
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -137,7 +145,7 @@
 {
     if (tableView == self.selectList) {
         [self.rightButton setTitle:[self.currentMonths objectAtIndex:indexPath.row] forState:UIControlStateNormal];
-        [self clickRightBtn];
+        [self clickRightBtn:self.rightButton];
         [self getDataStaticFromNetWithTime:[self.currentMonths objectAtIndex:indexPath.row]];
         [self.selectList reloadData];
     }
