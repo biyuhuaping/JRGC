@@ -549,7 +549,7 @@
         //我的工场码
         fixedScreenLight = [UIScreen mainScreen].brightness;
         UCFFacCodeViewController *subVC = [[UCFFacCodeViewController alloc] initWithNibName:@"UCFFacCodeViewController" bundle:nil];
-        subVC.urlStr = [NSString stringWithFormat:@"http://m.9888.cn/mpwap/mycode.jsp?pcode=%@&sex=%@",_gcm,_sex];
+        subVC.urlStr = [NSString stringWithFormat:@"https://m.9888.cn/mpwap/mycode.jsp?pcode=%@&sex=%@",_gcm,_sex];
         [self.navigationController pushViewController:subVC animated:YES];
     }
     else if ([item.customTitleLabel.text isEqualToString:@"刮刮卡"]) {
