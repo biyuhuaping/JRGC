@@ -864,7 +864,13 @@
 }
 #pragma mark-- 提现金额是否超过限制网络请求
 -(void)withdrawalAmountIsExceedsTheLimitHttPRequest{
-    NSDictionary *dataDic = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"userId",_crachTextField.text,@"reflectAmount",nil];
+    NSString *bankNoStr = @"";
+    if(_bankBranchViewHeight2.constant != 44){//开户支行未选择的用户 就是实时提现
+        bankNoStr = @"";//联行号为空 意味着用户选择的是实时提现 不为空 则为大额提现
+    }else{
+        bankNoStr = _cashBankNo;
+    }
+    NSDictionary *dataDic = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"userId",_crachTextField.text,@"reflectAmount",bankNoStr,@"bankNo",nil];
     [[NetworkModule sharedNetworkModule] newPostReq:dataDic tag:kSXTagWithdrawMoneyValidate owner:self signature:YES];
 }
 -(BOOL)isWorkTimeCash{
