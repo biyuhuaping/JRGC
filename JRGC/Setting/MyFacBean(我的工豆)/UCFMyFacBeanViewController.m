@@ -187,6 +187,7 @@
     [super updateViewConstraints];
     _bgViewWidth.constant = 3*ScreenWidth;
     self.bgScrollView.frame = CGRectMake(0, 140, ScreenWidth, ScreenHeight);
+    self.tableViewForOverduing.frame = CGRectMake(0, 140, ScreenWidth, ScreenHeight);
 }
 
 // 刷新可使用的工豆
