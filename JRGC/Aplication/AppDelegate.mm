@@ -509,7 +509,7 @@
         }
     }
     else {
-//        [self checkInitiaLogin];
+        [self checkInitiaLogin];
     }
     [self checkIsGongChaView];
     [self checkIsLockView];
