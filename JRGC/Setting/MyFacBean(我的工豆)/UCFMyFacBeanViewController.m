@@ -173,14 +173,13 @@
     self.currentState = UCFMyFacBeanStateOverduing;
     
     if (!self.noDataViewThree) {
-        self.noDataViewThree = [[UCFNoDataView alloc] initWithFrame:self.tableViewForAvailable.bounds errorTitle:@"暂无数据"];
+        self.noDataViewThree = [[UCFNoDataView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-140) errorTitle:@"暂无数据"];
     }
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    
 }
 
 - (void)updateViewConstraints{
