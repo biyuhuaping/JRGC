@@ -173,21 +173,19 @@
     self.currentState = UCFMyFacBeanStateOverduing;
     
     if (!self.noDataViewThree) {
-        self.noDataViewThree = [[UCFNoDataView alloc] initWithFrame:self.tableViewForAvailable.bounds errorTitle:@"暂无数据"];
+        self.noDataViewThree = [[UCFNoDataView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-140) errorTitle:@"暂无数据"];
     }
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    
 }
 
 - (void)updateViewConstraints{
     [super updateViewConstraints];
     _bgViewWidth.constant = 3*ScreenWidth;
     self.bgScrollView.frame = CGRectMake(0, 140, ScreenWidth, ScreenHeight);
-    self.tableViewForOverduing.frame = CGRectMake(0, 140, ScreenWidth, ScreenHeight);
 }
 
 // 刷新可使用的工豆
