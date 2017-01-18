@@ -51,7 +51,7 @@
     //=========  下拉刷新、上拉加载更多  =========
     __weak typeof(self) weakSelf = self;
     
-    self.noDataView = [[UCFNoDataView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-64-49) errorTitle:@"暂无数据"];
+    self.noDataView = [[UCFNoDataView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-64-49) errorTitle:@"敬请期待..."];
     
     self.currentPage = 1;
     // 添加上拉加载更多
@@ -145,9 +145,9 @@
             
             [self.tableview reloadData];
             
-            BOOL hasNext = [[[[[dic objectForKey:@"data"] objectForKey:@"pageData"] objectForKey:@"pagination"] objectForKey:@"hasNextPage"] boolValue];
+            BOOL hasNext = [[[[[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"pageData"] objectSafeDictionaryForKey:@"pagination"] objectForKey:@"hasNextPage"] boolValue];
             
-            if (self.dataArray > 0) {
+            if (self.dataArray.count > 0) {
                 [self.noDataView hide];
                 if (!hasNext) {
                     [self.tableview.footer noticeNoMoreData];

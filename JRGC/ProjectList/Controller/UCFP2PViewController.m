@@ -147,7 +147,7 @@
             
             BOOL hasNext = [[[[[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"pageData"] objectSafeDictionaryForKey:@"pagination"] objectForKey:@"hasNextPage"] boolValue];
             
-            if (self.dataArray > 0) {
+            if (self.dataArray.count > 0) {
                 [self.noDataView hide];
                 if (!hasNext) {
                     [self.tableview.footer noticeNoMoreData];
