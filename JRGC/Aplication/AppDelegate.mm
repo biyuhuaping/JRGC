@@ -298,6 +298,7 @@
 */
 - (void)registJush
 {
+   //////////////////
     if ([[NSUserDefaults standardUserDefaults] objectForKey:UUID]) {
         [JPUSHService setAlias:[[NSUserDefaults standardUserDefaults] objectForKey:UUID] callbackSelector:@selector(tagsAliasCallback:tags:alias:) object:self];
     } else {
