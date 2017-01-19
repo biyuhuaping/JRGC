@@ -32,15 +32,18 @@
 #import "PraiseAlert.h"
 #import "UITabBar+TabBarBadge.h"
 #import "UIImage+GIF.h"
-#import "JPUSHService.h"//极光推送
 #import "Growing.h"
 
 
 #import "JSPatch.h"
 #import "MD5Util.h"
 
-
-@interface AppDelegate () <UCFSessionDelegate>
+#import "JPUSHService.h"//极光推送
+// iOS10注册APNs所需头文件
+#ifdef NSFoundationVersionNumber_iOS_9_x_Max
+#import <UserNotifications/UserNotifications.h>
+#endif
+@interface AppDelegate () <UCFSessionDelegate,JPUSHRegisterDelegate>
 
 @property (assign, nonatomic) UIBackgroundTaskIdentifier backgroundUpdateTask;
 @property (strong, nonatomic) UIImageView *advertisementView;
@@ -184,19 +187,30 @@
 //    [Growing setEnableLog:NO];
     
     // ------------ 极光推送 ------------
+//    if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
+//        //       categories
+//        [JPUSHService registerForRemoteNotificationTypes:(UIUserNotificationTypeBadge |
+//                                                          UIUserNotificationTypeSound |
+//                                                          UIUserNotificationTypeAlert)
+//                                              categories:nil];
+//    } else {
+//        //categories    nil
+//        [JPUSHService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
+//                                                          UIRemoteNotificationTypeSound |
+//                                                          UIRemoteNotificationTypeAlert)
+//                                              categories:nil];
+//    }
+    
+    JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
+    entity.types = JPAuthorizationOptionAlert|JPAuthorizationOptionBadge|JPAuthorizationOptionSound;
     if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
-        //       categories
-        [JPUSHService registerForRemoteNotificationTypes:(UIUserNotificationTypeBadge |
-                                                          UIUserNotificationTypeSound |
-                                                          UIUserNotificationTypeAlert)
-                                              categories:nil];
-    } else {
-        //categories    nil
-        [JPUSHService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
-                                                          UIRemoteNotificationTypeSound |
-                                                          UIRemoteNotificationTypeAlert)
-                                              categories:nil];
+        // 可以添加自定义categories
+        // NSSet<UNNotificationCategory *> *categories for iOS10 or later
+        // NSSet<UIUserNotificationCategory *> *categories for iOS8 and iOS9
     }
+    [JPUSHService registerForRemoteNotificationConfig:entity delegate:self];
+
+
     [JPUSHService setupWithOption:launchOptions appKey:JPUSHKEY channel:nil apsForProduction:YES];
     [JPUSHService setAlias:[[NSUserDefaults standardUserDefaults] objectForKey:UUID] callbackSelector:@selector(tagsAliasCallback:tags:alias:) object:self];
     [JPUSHService setBadge:0];
@@ -295,8 +309,8 @@
 - (void)tagsAliasCallback:(int)iResCode
                      tags:(NSSet *)tags
                     alias:(NSString *)alias {
-//    NSString *callbackString = [NSString stringWithFormat:@"%d, \ntags: %@, \nalias: %@\n", iResCode,tags,alias];
-//    DLog(@"%@",callbackString);
+    NSString *callbackString = [NSString stringWithFormat:@"%d, \ntags: %@, \nalias: %@\n", iResCode,tags,alias];
+    DLog(@"%@",callbackString);
 }
 // 之所以把这个红点提到这里，是因为启动APP之后，没有点击个人中心页面的话，未初始化这个api，直接投资查看奖励列表，不能通知服务端把这个红点去掉
 - (void)checkRedPointShouldHide:(NSNotification *)noti

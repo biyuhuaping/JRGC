@@ -91,6 +91,10 @@
 		4AB1260C1AEF8EA400E915F1 /* UCFPurchaseBidViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AB1260A1AEF8EA400E915F1 /* UCFPurchaseBidViewController.xib */; };
 		4AB3EF231E287CD6007A6AF8 /* RiskAssessmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB3EF211E287CD6007A6AF8 /* RiskAssessmentViewController.m */; };
 		4AB3EF241E287CD6007A6AF8 /* RiskAssessmentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AB3EF221E287CD6007A6AF8 /* RiskAssessmentViewController.xib */; };
+		4ABED3A61E2FABAF006B3F62 /* jcore-ios-1.1.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ABED3A31E2FABAF006B3F62 /* jcore-ios-1.1.0.a */; };
+		4ABED3A71E2FABAF006B3F62 /* jpush-ios-3.0.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ABED3A41E2FABAF006B3F62 /* jpush-ios-3.0.1.a */; };
+		4ABED3A91E2FACE3006B3F62 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ABED3A81E2FACE3006B3F62 /* UserNotifications.framework */; };
+		4ABED3AB1E2FB28E006B3F62 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ABED3AA1E2FB28E006B3F62 /* libresolv.tbd */; };
 		4AC08B471B09BE4000DF8075 /* CalculatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC08B461B09BE4000DF8075 /* CalculatorView.m */; };
 		4ACB399A1E1216DD00E9BA8C /* FestivalActivitiesWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACB39981E1216DD00E9BA8C /* FestivalActivitiesWebView.m */; };
 		4ACB399B1E1216DD00E9BA8C /* FestivalActivitiesWebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4ACB39991E1216DD00E9BA8C /* FestivalActivitiesWebView.xib */; };
@@ -458,7 +462,6 @@
 		84FAB60C1C7C575300D0942F /* MGSwipeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FAB6091C7C575300D0942F /* MGSwipeButton.m */; };
 		84FAB60D1C7C575300D0942F /* MGSwipeTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FAB60B1C7C575300D0942F /* MGSwipeTableCell.m */; };
 		84FFA5301C7EAA9200ACD835 /* UIScrollView+TouchScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FFA52F1C7EAA9200ACD835 /* UIScrollView+TouchScrollView.m */; };
-		AEABBF491DD5C2A20019AA47 /* jpush-ios-2.2.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AEABBF471DD5C2A20019AA47 /* jpush-ios-2.2.0.a */; };
 		AEC5EEC01D9B6594000C0321 /* RechargeFixedTelNumView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEC5EEBF1D9B6594000C0321 /* RechargeFixedTelNumView.xib */; };
 		AEC5EEC31D9B65BA000C0321 /* RechargeFixedTelNumView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC5EEC21D9B65BA000C0321 /* RechargeFixedTelNumView.m */; };
 		E31141601D92769E00FF880A /* UCFWebViewJavascriptBridgeBBS.m in Sources */ = {isa = PBXBuildFile; fileRef = E311415E1D92769E00FF880A /* UCFWebViewJavascriptBridgeBBS.m */; };
@@ -787,7 +790,6 @@
 		4A42BB2E1C27A7D20084AB08 /* NewCalculator.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewCalculator.xib; sourceTree = "<group>"; };
 		4A42BB301C27AC7B0084AB08 /* NewCalculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewCalculator.h; sourceTree = "<group>"; };
 		4A42BB311C27AC7B0084AB08 /* NewCalculator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewCalculator.m; sourceTree = "<group>"; };
-		4A44BB071CE1B27900726228 /* JPUSHService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPUSHService.h; sourceTree = "<group>"; };
 		4A4C792B1D6EA41E007F268E /* UserInfoSingle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoSingle.h; sourceTree = "<group>"; };
 		4A4C792C1D6EA41E007F268E /* UserInfoSingle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoSingle.m; sourceTree = "<group>"; };
 		4A6678BF1D61C2E900469826 /* UINavigationController+FDFullscreenPopGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+FDFullscreenPopGesture.h"; sourceTree = "<group>"; };
@@ -843,6 +845,11 @@
 		4AB3EF201E287CD6007A6AF8 /* RiskAssessmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RiskAssessmentViewController.h; sourceTree = "<group>"; };
 		4AB3EF211E287CD6007A6AF8 /* RiskAssessmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RiskAssessmentViewController.m; sourceTree = "<group>"; };
 		4AB3EF221E287CD6007A6AF8 /* RiskAssessmentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RiskAssessmentViewController.xib; sourceTree = "<group>"; };
+		4ABED3A31E2FABAF006B3F62 /* jcore-ios-1.1.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jcore-ios-1.1.0.a"; sourceTree = "<group>"; };
+		4ABED3A41E2FABAF006B3F62 /* jpush-ios-3.0.1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jpush-ios-3.0.1.a"; sourceTree = "<group>"; };
+		4ABED3A51E2FABAF006B3F62 /* JPUSHService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPUSHService.h; sourceTree = "<group>"; };
+		4ABED3A81E2FACE3006B3F62 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		4ABED3AA1E2FB28E006B3F62 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
 		4AC08B451B09BE4000DF8075 /* CalculatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalculatorView.h; sourceTree = "<group>"; };
 		4AC08B461B09BE4000DF8075 /* CalculatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalculatorView.m; sourceTree = "<group>"; };
 		4ACB39971E1216DD00E9BA8C /* FestivalActivitiesWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FestivalActivitiesWebView.h; sourceTree = "<group>"; };
@@ -1507,7 +1514,6 @@
 		84FFA52E1C7EAA9200ACD835 /* UIScrollView+TouchScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+TouchScrollView.h"; sourceTree = "<group>"; };
 		84FFA52F1C7EAA9200ACD835 /* UIScrollView+TouchScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+TouchScrollView.m"; sourceTree = "<group>"; };
 		AE43B84F1DD2D8BE001D0BD0 /* JRGC.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JRGC.entitlements; sourceTree = "<group>"; };
-		AEABBF471DD5C2A20019AA47 /* jpush-ios-2.2.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jpush-ios-2.2.0.a"; sourceTree = "<group>"; };
 		AEC5EEBF1D9B6594000C0321 /* RechargeFixedTelNumView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RechargeFixedTelNumView.xib; sourceTree = "<group>"; };
 		AEC5EEC11D9B65BA000C0321 /* RechargeFixedTelNumView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RechargeFixedTelNumView.h; sourceTree = "<group>"; };
 		AEC5EEC21D9B65BA000C0321 /* RechargeFixedTelNumView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RechargeFixedTelNumView.m; sourceTree = "<group>"; };
@@ -1796,6 +1802,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4ABED3AB1E2FB28E006B3F62 /* libresolv.tbd in Frameworks */,
+				4ABED3A91E2FACE3006B3F62 /* UserNotifications.framework in Frameworks */,
 				25950EC61D7FB6EC00E4CCBA /* libCloudwalkFaceSDK.a in Frameworks */,
 				2517E56C1D618FAA00EAA05F /* CoreMedia.framework in Frameworks */,
 				FBB0D4FA1DF8009000D2C280 /* YWFeedbackFMWK.framework in Frameworks */,
@@ -1807,11 +1815,11 @@
 				EDF1067B1D07F6A500DA1C46 /* CoreMotion.framework in Frameworks */,
 				ED0647FD1C7ABFA400311AA1 /* CoreImage.framework in Frameworks */,
 				ED0647FB1C7ABF7300311AA1 /* AssetsLibrary.framework in Frameworks */,
-				AEABBF491DD5C2A20019AA47 /* jpush-ios-2.2.0.a in Frameworks */,
 				4AE1E9681E1CDB9900587CE6 /* libSocialWeChat.a in Frameworks */,
 				ED0647F91C7ABE1E00311AA1 /* libc++.tbd in Frameworks */,
 				FBAEDA001C191A08000C0AA1 /* CoreFoundation.framework in Frameworks */,
 				4AE1E9661E1CDB9900587CE6 /* libWeiboSDK.a in Frameworks */,
+				4ABED3A71E2FABAF006B3F62 /* jpush-ios-3.0.1.a in Frameworks */,
 				FBB0D4F31DF8009000D2C280 /* BCHybridWebViewFMWK.framework in Frameworks */,
 				FBB0D4F61DF8009000D2C280 /* UTDID.framework in Frameworks */,
 				4AE1E9651E1CDB9900587CE6 /* libSocialSina.a in Frameworks */,
@@ -1831,6 +1839,7 @@
 				7BCE02641AC91C760084C15C /* libicucore.dylib in Frameworks */,
 				FB1E7F8B1D8E4BEA009CBE2C /* JSPatch.framework in Frameworks */,
 				7BCE02621AC91C5D0084C15C /* libiconv.dylib in Frameworks */,
+				4ABED3A61E2FABAF006B3F62 /* jcore-ios-1.1.0.a in Frameworks */,
 				7BCE70F01B79D03000F9DD14 /* libFMDeviceManager_without_IDFA.a in Frameworks */,
 				FBB0D4F51DF8009000D2C280 /* SGMain.framework in Frameworks */,
 				7BCE02601AC91C550084C15C /* libsqlite3.dylib in Frameworks */,
@@ -3353,6 +3362,8 @@
 		7BCE02651AC91CBE0084C15C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4ABED3AA1E2FB28E006B3F62 /* libresolv.tbd */,
+				4ABED3A81E2FACE3006B3F62 /* UserNotifications.framework */,
 				83F2D5A01DCB57CA0041F913 /* WatchConnectivity.framework */,
 				2517E56F1D61961900EAA05F /* libCloudwalkFaceSDK.a */,
 				2517E56B1D618FAA00EAA05F /* CoreMedia.framework */,
@@ -4593,8 +4604,9 @@
 		FBA0A2FC1C183B0F000E1C7A /* JPush_lib */ = {
 			isa = PBXGroup;
 			children = (
-				AEABBF471DD5C2A20019AA47 /* jpush-ios-2.2.0.a */,
-				4A44BB071CE1B27900726228 /* JPUSHService.h */,
+				4ABED3A31E2FABAF006B3F62 /* jcore-ios-1.1.0.a */,
+				4ABED3A41E2FABAF006B3F62 /* jpush-ios-3.0.1.a */,
+				4ABED3A51E2FABAF006B3F62 /* JPUSHService.h */,
 			);
 			name = JPush_lib;
 			path = ThirdLibs/JPush_lib;
