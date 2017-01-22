@@ -78,8 +78,9 @@
         if (ret) {
 //            DBLOG(@"%@",dic[@"data"]);
             NSDictionary *dataDic  = [dic objectSafeDictionaryForKey:@"data"];
-            NSArray *resultListArr = [[dic objectSafeDictionaryForKey:@"pageData"] objectSafeForKey:@"result"];
-            BOOL hasNextP = [[[[dataDic objectSafeDictionaryForKey:@"pageData"] objectSafeDictionaryForKey:@"pagination"] objectSafeForKey:@"hasNextPage"] boolValue];
+            NSArray *resultListArr = [[dataDic objectSafeDictionaryForKey:@"pageData"] objectSafeArrayForKey:@"result"];
+//            BOOL hasNextP = [[[[dataDic objectSafeDictionaryForKey:@"pageData"] objectSafeDictionaryForKey:@"pagination"] objectSafeForKey:@"hasNextPage"] boolValue];
+            BOOL hasNextP = [dataDic[@"pageData"][@"pagination"][@"hasNextPage"] boolValue];
             
             if (_currentPage == 1) {
                 [_dataArray removeAllObjects];
