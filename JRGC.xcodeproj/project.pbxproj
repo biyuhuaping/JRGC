@@ -91,9 +91,10 @@
 		4AB1260C1AEF8EA400E915F1 /* UCFPurchaseBidViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AB1260A1AEF8EA400E915F1 /* UCFPurchaseBidViewController.xib */; };
 		4AB3EF231E287CD6007A6AF8 /* RiskAssessmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB3EF211E287CD6007A6AF8 /* RiskAssessmentViewController.m */; };
 		4AB3EF241E287CD6007A6AF8 /* RiskAssessmentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AB3EF221E287CD6007A6AF8 /* RiskAssessmentViewController.xib */; };
+		4AB56E3F1E35A92E008BE8F0 /* JSPatchPlatform.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AB56E3E1E35A92E008BE8F0 /* JSPatchPlatform.framework */; };
 		4ABED3A61E2FABAF006B3F62 /* jcore-ios-1.1.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ABED3A31E2FABAF006B3F62 /* jcore-ios-1.1.0.a */; };
 		4ABED3A71E2FABAF006B3F62 /* jpush-ios-3.0.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ABED3A41E2FABAF006B3F62 /* jpush-ios-3.0.1.a */; };
-		4ABED3A91E2FACE3006B3F62 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ABED3A81E2FACE3006B3F62 /* UserNotifications.framework */; };
+		4ABED3A91E2FACE3006B3F62 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ABED3A81E2FACE3006B3F62 /* UserNotifications.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		4ABED3AB1E2FB28E006B3F62 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ABED3AA1E2FB28E006B3F62 /* libresolv.tbd */; };
 		4AC08B471B09BE4000DF8075 /* CalculatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC08B461B09BE4000DF8075 /* CalculatorView.m */; };
 		4ACB399A1E1216DD00E9BA8C /* FestivalActivitiesWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACB39981E1216DD00E9BA8C /* FestivalActivitiesWebView.m */; };
@@ -532,7 +533,6 @@
 		FB1E7F831D8E4230009CBE2C /* UCFProjectDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB1E7F7C1D8E4230009CBE2C /* UCFProjectDetailViewController.m */; };
 		FB1E7F841D8E4230009CBE2C /* UCFRightInterestNewView.m in Sources */ = {isa = PBXBuildFile; fileRef = FB1E7F7E1D8E4230009CBE2C /* UCFRightInterestNewView.m */; };
 		FB1E7F881D8E43A0009CBE2C /* BlockUIAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = FB1E7F871D8E43A0009CBE2C /* BlockUIAlertView.m */; };
-		FB1E7F8B1D8E4BEA009CBE2C /* JSPatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB1E7F8A1D8E4BEA009CBE2C /* JSPatch.framework */; };
 		FB2173191AF20DFC00649AA0 /* UCFBackMoneyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FB2173171AF20DFC00649AA0 /* UCFBackMoneyCell.m */; };
 		FB21731A1AF20DFC00649AA0 /* UCFBackMoneyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB2173181AF20DFC00649AA0 /* UCFBackMoneyCell.xib */; };
 		FB21732F1AF2362800649AA0 /* UCFBackMoneyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FB21732E1AF2362800649AA0 /* UCFBackMoneyModel.m */; };
@@ -845,6 +845,7 @@
 		4AB3EF201E287CD6007A6AF8 /* RiskAssessmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RiskAssessmentViewController.h; sourceTree = "<group>"; };
 		4AB3EF211E287CD6007A6AF8 /* RiskAssessmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RiskAssessmentViewController.m; sourceTree = "<group>"; };
 		4AB3EF221E287CD6007A6AF8 /* RiskAssessmentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RiskAssessmentViewController.xib; sourceTree = "<group>"; };
+		4AB56E3E1E35A92E008BE8F0 /* JSPatchPlatform.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = JSPatchPlatform.framework; sourceTree = "<group>"; };
 		4ABED3A31E2FABAF006B3F62 /* jcore-ios-1.1.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jcore-ios-1.1.0.a"; sourceTree = "<group>"; };
 		4ABED3A41E2FABAF006B3F62 /* jpush-ios-3.0.1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jpush-ios-3.0.1.a"; sourceTree = "<group>"; };
 		4ABED3A51E2FABAF006B3F62 /* JPUSHService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPUSHService.h; sourceTree = "<group>"; };
@@ -1633,7 +1634,6 @@
 		FB1E7F7E1D8E4230009CBE2C /* UCFRightInterestNewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFRightInterestNewView.m; sourceTree = "<group>"; };
 		FB1E7F861D8E43A0009CBE2C /* BlockUIAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockUIAlertView.h; sourceTree = "<group>"; };
 		FB1E7F871D8E43A0009CBE2C /* BlockUIAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockUIAlertView.m; sourceTree = "<group>"; };
-		FB1E7F8A1D8E4BEA009CBE2C /* JSPatch.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = JSPatch.framework; sourceTree = "<group>"; };
 		FB2173161AF20DFC00649AA0 /* UCFBackMoneyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFBackMoneyCell.h; sourceTree = "<group>"; };
 		FB2173171AF20DFC00649AA0 /* UCFBackMoneyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFBackMoneyCell.m; sourceTree = "<group>"; };
 		FB2173181AF20DFC00649AA0 /* UCFBackMoneyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFBackMoneyCell.xib; sourceTree = "<group>"; };
@@ -1837,7 +1837,6 @@
 				7BA6E48F1AD6721600FE8C37 /* ImageIO.framework in Frameworks */,
 				7BC304991ACBC4FD007767F1 /* QuartzCore.framework in Frameworks */,
 				7BCE02641AC91C760084C15C /* libicucore.dylib in Frameworks */,
-				FB1E7F8B1D8E4BEA009CBE2C /* JSPatch.framework in Frameworks */,
 				7BCE02621AC91C5D0084C15C /* libiconv.dylib in Frameworks */,
 				4ABED3A61E2FABAF006B3F62 /* jcore-ios-1.1.0.a in Frameworks */,
 				7BCE70F01B79D03000F9DD14 /* libFMDeviceManager_without_IDFA.a in Frameworks */,
@@ -1848,6 +1847,7 @@
 				4AE1E9621E1CDB9900587CE6 /* libSocialQQ.a in Frameworks */,
 				7BCE025A1AC91BEF0084C15C /* Foundation.framework in Frameworks */,
 				7BCE02581AC91BD60084C15C /* UIKit.framework in Frameworks */,
+				4AB56E3F1E35A92E008BE8F0 /* JSPatchPlatform.framework in Frameworks */,
 				7BCE02541AC91BA20084C15C /* CoreTelephony.framework in Frameworks */,
 				FB5555331BCE37570013894F /* libMobClickLibrary.a in Frameworks */,
 				4AE1E9691E1CDB9900587CE6 /* libWeChatSDK.a in Frameworks */,
@@ -4402,7 +4402,7 @@
 		FB1E7F891D8E4BEA009CBE2C /* JSPatch */ = {
 			isa = PBXGroup;
 			children = (
-				FB1E7F8A1D8E4BEA009CBE2C /* JSPatch.framework */,
+				4AB56E3E1E35A92E008BE8F0 /* JSPatchPlatform.framework */,
 			);
 			name = JSPatch;
 			path = ThirdLibs/JSPatch;
