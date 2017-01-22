@@ -361,7 +361,7 @@
         {
             //跳转到徽商开户流程
             UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:2];
-            [self.navigationController pushViewController:vc animated:YES];
+            [weakSelf.navigationController pushViewController:vc animated:YES];
             
         }
         //----------------------------------------------------------------------------------------------------qyy
@@ -608,7 +608,7 @@
         //[self pushWebView:LEVELURLXIANGQING withTitle:@"玩转工分"];
         return NO;
     }
-    else if ([requestString newRangeOfString:@"http://m.9888.cn/static/wap/reset-deal-password/index.html"])
+    else if ([requestString newRangeOfString:@"https://m.9888.cn/static/wap/reset-deal-password/index.html"])
     {
         DBLOG(@"这个字符串中有\n");
         TradePasswordVC * tradePasswordVC = [[TradePasswordVC alloc]initWithNibName:@"TradePasswordVC" bundle:nil];
@@ -816,7 +816,7 @@
         //跳转到工场码
         //#import "UCFFacCodeViewController.h"
         UCFFacCodeViewController *code = [[UCFFacCodeViewController alloc] initWithNibName:@"UCFFacCodeViewController" bundle:nil];
-        code.urlStr = [NSString stringWithFormat:@"http://m.9888.cn/mpwap/mycode.jsp?pcode=%@&sex=%@",[[[NSUserDefaults standardUserDefaults] valueForKey:@"loginUserMsg"]valueForKey:@"promotioncode"],[[[NSUserDefaults standardUserDefaults] valueForKey:@"loginUserMsg"]valueForKey:@"sex"]];
+        code.urlStr = [NSString stringWithFormat:@"https://m.9888.cn/mpwap/mycode.jsp?pcode=%@&sex=%@",[[[NSUserDefaults standardUserDefaults] valueForKey:@"loginUserMsg"]valueForKey:@"promotioncode"],[[[NSUserDefaults standardUserDefaults] valueForKey:@"loginUserMsg"]valueForKey:@"sex"]];
 //        code.isGoBackShowNavBar = YES;
         [self.navigationController pushViewController:code animated:YES];
     }
@@ -1057,7 +1057,7 @@
     NSURLSession *session = [NSURLSession sharedSession];
     
     //2.根据会话对象创建task
-    NSURL *url = [NSURL URLWithString:@"http://wx.9888.cn/weixin/share/index"];
+    NSURL *url = [NSURL URLWithString:@"https://wx.9888.cn/weixin/share/index"];
     
     //3.创建可变的请求对象
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];

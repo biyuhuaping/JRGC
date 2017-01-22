@@ -25,6 +25,7 @@
          [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     }
 }
+
 -(void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
     if ([self.sourceVC isEqualToString:@"ProjectDetailVC"]) {
