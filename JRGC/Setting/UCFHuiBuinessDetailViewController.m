@@ -34,11 +34,12 @@
     
     
     __weak UCFHuiBuinessDetailViewController *weakSelf = self;
-    [self.tableView addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(getHuiBuinessListDataFromNet)];
+    [self.tableView addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(refreshData)];
     
     // 添加上拉加载更多
     [self.tableView addLegendFooterWithRefreshingBlock:^{
-        [weakSelf getHuiBuinessListDataFromNet];
+        _currentPage++;
+        [weakSelf getHuiBuinessListDataFromNetWithPage:_currentPage];
     }];
     
 //    self.tableView.footer.hidden = YES;
@@ -47,13 +48,16 @@
      _noDataView = [[UCFNoDataView alloc] initWithFrame:CGRectMake(0,0,ScreenWidth, ScreenHeight-NavigationBarHeight) errorTitle:@"暂无数据"];
 }
 
-- (void)getHuiBuinessListDataFromNet
+- (void)refreshData
 {
-    if (self.tableView.header.isRefreshing) {
-        _currentPage = 1;
-    }
+    _currentPage = 1;
+    [self getHuiBuinessListDataFromNetWithPage:_currentPage];
+}
+
+- (void)getHuiBuinessListDataFromNetWithPage:(NSInteger)page;
+{
     NSString *userId = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
-    NSString *pageStr = [NSString stringWithFormat:@"%d",_currentPage];
+    NSString *pageStr = [NSString stringWithFormat:@"%ld",(long)page];
     [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":userId, @"page":pageStr, @"pageSize":@"20"} tag:kSXTagGetHSAccountList owner:self signature:YES];
 }
 //开始请求
@@ -73,14 +77,13 @@
     if (tag.intValue == kSXTagGetHSAccountList) {
         if (ret) {
 //            DBLOG(@"%@",dic[@"data"]);
-            NSDictionary *dataDic  = dic[@"data"];
-            NSArray *resultListArr = dataDic[@"pageData"][@"result"];
-            BOOL hasNextP = dataDic[@"pagination"][@"hasNextPage"];
+            NSDictionary *dataDic  = [dic objectSafeDictionaryForKey:@"data"];
+            NSArray *resultListArr = [[dataDic objectSafeDictionaryForKey:@"pageData"] objectSafeArrayForKey:@"result"];
+//            BOOL hasNextP = [[[[dataDic objectSafeDictionaryForKey:@"pageData"] objectSafeDictionaryForKey:@"pagination"] objectSafeForKey:@"hasNextPage"] boolValue];
+            BOOL hasNextP = [dataDic[@"pageData"][@"pagination"][@"hasNextPage"] boolValue];
             
             if (_currentPage == 1) {
                 [_dataArray removeAllObjects];
-            }else{
-                _currentPage++;
             }
             for (NSDictionary *data in resultListArr) {
                 UCFHuiBuinessListModel *listModel = [UCFHuiBuinessListModel hsAssetBeanWithDict:data];
