@@ -166,7 +166,7 @@
     if ([_recruitStatus integerValue] == 3) {
         UCFWebViewJavascriptBridgeLevel *subVC = [[UCFWebViewJavascriptBridgeLevel alloc]initWithNibName:@"UCFWebViewJavascriptBridgeLevel" bundle:nil];
         //    subVC.navTitle = _actionArr[i][@"title"];
-        subVC.url      = @"http://m.9888.cn/static/wap/topic-recommender-recruitment/index.html";//请求地址;
+        subVC.url      = @"https://m.9888.cn/static/wap/topic-recommender-recruitment/index.html";//请求地址;
         [self.navigationController pushViewController:subVC animated:YES];
     }
 }
