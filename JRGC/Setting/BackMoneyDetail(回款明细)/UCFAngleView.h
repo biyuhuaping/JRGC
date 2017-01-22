@@ -10,7 +10,7 @@
 
 @interface UCFAngleView : UIView
 
-@property (weak, nonatomic) NSString *angleString;// 显示文字
-@property (weak, nonatomic) NSString *angleStatus;// 显示状态
+@property (copy, nonatomic) NSString *angleString;// 显示文字
+@property (copy, nonatomic) NSString *angleStatus;// 显示状态
 
 @end

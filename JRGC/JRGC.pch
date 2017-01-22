@@ -110,9 +110,8 @@ return shared##className; \
 #define SEX             @"sex"//性别
 #define YeeBayTopSwitch @"yeepayflag"
 #define YeeBayPersonalSwitch @"yeepayflag_A"
-#define LOGOURL         @"http://fore.9888.cn/cms/index.php?m=content&c=index&a=lists&catid=122&page=1/"
 #define	APP_RATING_URL	@"https://itunes.apple.com/us/app/jin-rong-gong-chang/id939125881?mt=8&uo=4"
-#define APP_UPDATE_URL  @"http://itunes.apple.com/lookup?id=939125881"
+#define APP_UPDATE_URL  @"https://itunes.apple.com/lookup?id=939125881"
 #define SIGNATUREAPP       @"signature"
 #define JSPATCH_RSA_PUBLICKEY @"-----BEGIN PUBLIC KEY-----\nMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCgdJNm85BAVjIiSXRziumME/Ss\nhTmTyxhB6wjyDrxFXw/nx0zMd3RWU6Z2PrbJrJsAI6QMjdc/YmDae/V6tEnzf6zW\n2hP2SVRUECml1sZ02vBucrHZsMRr+6cYinXdJy4dAyWfY/YC04svuDBS83rY3Q/k\nAm84Fsm2MsLVoFkOQQIDAQAB\n-----END PUBLIC KEY-----"
 #define JSPATCH_APPKEY      @"83b808e7b173b6c0"                                 //JSPatch key
@@ -160,7 +159,6 @@ return shared##className; \
 #define BBSURL          @"https://bbs.9888.cn/appaction.php"
 #define MALLURL         @"https://mmall.9888.cn"
 #define GRADELURL       @"https://m.9888.cn/static/wap/user-evaluate/index.html"
-#define REDRAINURL      @"http://mmall.9888.cn/static/mall/game-red-rain/index.html"
 #define LEVELURL        @"https://m.9888.cn/static/wap/user-level/index.html"  //会员等级
 #define GAMECENTERURL   @"https://mmall.9888.cn/static/mall/game/index.html"  //游戏中心
 #define LEVELURLTEQUAN  @"https://m.9888.cn/mpwap/app/vipTeQuan/qryVipTeQuanDetail.shtml"  // 特权详情

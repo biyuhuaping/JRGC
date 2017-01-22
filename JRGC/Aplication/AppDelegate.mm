@@ -255,7 +255,7 @@
     //设置分享到QQ互联的appKey和appSecret
     [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_QQ appKey:@"1104610513"  appSecret:@"RUImkrSeNaT0lxkV" redirectURL:@"http://mobile.umeng.com/social"];
     //设置新浪的appKey和appSecret
-    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Sina appKey:@"2022554825"  appSecret:@"e496f6f9df690579441c9ae4e26be6e4" redirectURL:@"http://sns.whalecloud.com/sina2/callback"];
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Sina appKey:@"2022554825"  appSecret:@"e496f6f9df690579441c9ae4e26be6e4" redirectURL:@"https://sns.whalecloud.com/sina2/callback"];
 }
 
 //检测JSPatch 是否有更新
@@ -866,7 +866,7 @@
 - (void)getAdversementImageStyle:(int)style
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSString *URL = [NSString stringWithFormat:@"http://fore.9888.cn/cms/api/appbanners.php?key=0ca175b9c0f726a831d895e&id=19&p=%d",style];
+        NSString *URL = [NSString stringWithFormat:@"https://fore.9888.cn/cms/api/appbanners.php?key=0ca175b9c0f726a831d895e&id=19&p=%d",style];
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
         [request setURL:[NSURL URLWithString:URL]];
         [request setHTTPMethod:@"GET"];
