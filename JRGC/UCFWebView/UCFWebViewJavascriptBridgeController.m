@@ -361,7 +361,7 @@
         {
             //跳转到徽商开户流程
             UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:2];
-            [self.navigationController pushViewController:vc animated:YES];
+            [weakSelf.navigationController pushViewController:vc animated:YES];
             
         }
         //----------------------------------------------------------------------------------------------------qyy

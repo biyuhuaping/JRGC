@@ -35,7 +35,7 @@
 #import "Growing.h"
 
 
-#import "JSPatch.h"
+#import <JSPatchPlatform/JSPatch.h>
 #import "MD5Util.h"
 
 #import "JPUSHService.h"//极光推送
@@ -261,14 +261,6 @@
 //检测JSPatch 是否有更新
 - (void)checkJSPatchUpdate
 {
-    if(EnvironmentConfiguration == 1 || EnvironmentConfiguration == 2) { //线上或者灰度
-         [JSPatch startWithAppKey:JSPATCH_APPKEY];
-         [JSPatch setupRSAPublicKey:JSPATCH_RSA_PUBLICKEY];
-         [JSPatch sync];
-    } else { //测试
-         [JSPatch testScriptInBundle];
-    }
-
     [JSPatch setupCallback:^(JPCallbackType type, NSDictionary *data, NSError *error) {
         switch (type) {
             case JPCallbackTypeUpdate: {
@@ -283,6 +275,15 @@
                 break;
         }
     }];
+    if(EnvironmentConfiguration == 1 || EnvironmentConfiguration == 2) { //线上或者灰度
+         [JSPatch startWithAppKey:JSPATCH_APPKEY];
+         [JSPatch setupRSAPublicKey:JSPATCH_RSA_PUBLICKEY];
+         [JSPatch sync];
+    } else { //测试
+         [JSPatch testScriptInBundle];
+    }
+
+
 }
 /**  自定义消息的回调
 - (void)networkDidLogin:(NSNotification *)notification {

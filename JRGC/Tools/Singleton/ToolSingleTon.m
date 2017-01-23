@@ -92,6 +92,7 @@
     [app.tabBarController presentViewController:nav animated:YES completion:nil];
 
 }
+
 // 检测是否签到
 - (void)checkIsSign {
     
