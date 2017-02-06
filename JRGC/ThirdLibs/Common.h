@@ -221,4 +221,6 @@ typedef NS_ENUM(NSInteger, PicType) {
 +(NSData *)createImageCode:(NSString *)gcmStr;
 // 获取网络图片
 +(UIImage *) getImageFromURL:(NSString *)fileURL;
+
++ (void)storeImage:(NSURL *)imagePath2;
 @end
