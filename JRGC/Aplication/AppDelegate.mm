@@ -861,6 +861,7 @@
 }
 
 
+
 #pragma mark -
 
 - (void)getAdversementImageStyle:(int)style
@@ -884,7 +885,15 @@
             }
             [[NSUserDefaults standardUserDefaults] setValue:imageStr forKey:@"adversementImageUrl"];
             [[NSUserDefaults standardUserDefaults] synchronize];
-            [_advertisementView sd_setImageWithURL:[NSURL URLWithString:imageStr] placeholderImage:nil];
+            
+            SDImageCache *cache = [[SDImageCache alloc] init];
+            NSURL * url = [NSURL URLWithString:imageStr];
+            BOOL hasImage = [cache diskImageExistsWithKey:imageStr];
+            if (!hasImage) {
+                [Common storeImage:url];
+            }
+            
+//            [_advertisementView sd_setImageWithURL:[NSURL URLWithString:imageStr] placeholderImage:nil];
         });
     });
 }

@@ -30,6 +30,7 @@
 #define IP_ADDR_IPv4    @"ipv4"
 #define IP_ADDR_IPv6    @"ipv6"
 #import "AppDelegate.h"
+#import "SDWebImageManager.h"
 @implementation Common
 
 + (CGFloat)calculateNewSizeBaseMachine:(CGFloat)inputFloat
@@ -1115,5 +1116,18 @@
     }
     return result;
     
+}
++ (void)storeImage:(NSURL *)imagePath2
+{
+    //覆盖方法，指哪打哪，这个方法是下载imagePath2的时候响应
+    SDWebImageManager *manager = [SDWebImageManager sharedManager];
+    [manager downloadImageWithURL:imagePath2 options:SDWebImageRetryFailed progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+        DLog(@"当前%ld 总共 %ld",receivedSize,expectedSize);
+        
+    } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+        DLog(@"下载完成");
+        SDImageCache *cache = [[[SDImageCache alloc] init] autorelease];
+        [cache storeImage:image forKey:imagePath2.absoluteString];
+    }];
 }
 @end
