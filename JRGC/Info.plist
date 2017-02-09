@@ -116,6 +116,15 @@
 				<key>NSIncludesSubdomains</key>
 				<true/>
 			</dict>
+			<key>mp.weixin.qq.com</key>
+            <dict>
+                <key> NSIncludesSubdomains </key>
+                <true/>
+                <key> NSExceptionRequiresForwardSecrecy </key>
+                <false/>
+                <key>NSExceptionAllowsInsecureHTTPLoads</key>
+                <true/>
+            </dict>
 		</dict>
 	</dict>
 	<key>NSCameraUsageDescription</key>
