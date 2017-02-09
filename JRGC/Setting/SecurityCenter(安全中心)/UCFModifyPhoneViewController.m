@@ -13,6 +13,7 @@
 #import "WPAttributedStyleAction.h"
 #import "WPHotspotLabel.h"
 #import "HWWeakTimer.h"
+#import "UCFToolsMehod.h"
 
 @interface UCFModifyPhoneViewController () <UITextFieldDelegate, UIAlertViewDelegate>
 // 新绑定的手机号
@@ -107,7 +108,8 @@
                                     return;
                                 }
                                 weakSelf.isUsingVoiceCode = YES;
-                                [weakSelf getSendMessageTicketFromNet];
+//                                [weakSelf getSendMessageTicketFromNet];
+                                [weakSelf getValidCode];
                             }]],
                             @"link": UIColorWithRGB(0x4aa1f9)};
     tipLabel.attributedText = [@"收不到短信？点击获取 <help>语音验证码</help>" attributedStringWithStyleBook:style];
@@ -126,7 +128,8 @@
     }
     else {
         if ([SharedSingleton checkPhoneNumber:self.modifyPhoneTextField.text]) {
-            [self getSendMessageTicketFromNet];
+//            [self getSendMessageTicketFromNet];
+            [self getValidCode];
         }
         else {
 
@@ -147,8 +150,9 @@
     if (_validTime == 0) {
         [_validTimer  setFireDate:[NSDate distantFuture]];
         _validTime = 60;
+        [_getValidCodeButton setTitle:[NSString stringWithFormat:@"%ld秒后重新获取",(long)_validTime] forState:UIControlStateDisabled];
         _getValidCodeButton.enabled = YES;
-        _getValidCodeButton.titleLabel.font = [UIFont systemFontOfSize:16.0f];
+        _getValidCodeButton.titleLabel.font = [UIFont systemFontOfSize:13.0f];
         [_getValidCodeButton setTitle:[NSString stringWithFormat:@"获取验证码"] forState:UIControlStateNormal];
         _getValidCodeButton.backgroundColor = UIColorWithRGBA(111, 131, 159, 1);
         if (!self.tipLabel.hidden) {
@@ -179,30 +183,43 @@
     }
 }
 
-// 获取token
-- (void)getSendMessageTicketFromNet
-{
-    [[NetworkModule sharedNetworkModule] postReq:nil tag:kSXTagSendMessageforTicket owner:self];
-}
+//// 获取token
+//- (void)getSendMessageTicketFromNet
+//{
+//    [[NetworkModule sharedNetworkModule] postReq:nil tag:kSXTagSendMessageforTicket owner:self];
+//}
 
 // 从服务端获取验证码
-- (void)getValidCodeWithTicket:(NSString *)ticket
+//- (void)getValidCodeWithTicket:(NSString *)ticket
+- (void)getValidCode
 {
     
     if (self.isUsingVoiceCode) {
-        NSString *strParameters = [NSString stringWithFormat:@"dest=%@&remotIp=%@&type=2&sendmessageticket=%@&isVms=VMS", self.modifyPhoneTextField.text, @"", ticket];
-        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagSendMessage owner:self];
+//        NSString *strParameters = [NSString stringWithFormat:@"dest=%@&remotIp=%@&type=2&sendmessageticket=%@&isVms=VMS", self.modifyPhoneTextField.text, @"", ticket];
+//        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagSendMessage owner:self];
+        
+        NSString *userId = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
+        //type: 1:提现    2:注册    3:修改绑定银行卡   5:设置交易密码    6:开户    7:换卡
+        NSDictionary *dic = @{@"isVms":@"VMS",@"type":@"4",@"userId":userId, @"destPhoneNo":self.modifyPhoneTextField.text};
+        [[NetworkModule sharedNetworkModule] newPostReq:dic tag:kSXTagIdentifyCode owner:self signature:YES];
         return;
     }
-    NSString *strParameters = [NSString stringWithFormat:@"dest=%@&remotIp=%@&type=2&sendmessageticket=%@", self.modifyPhoneTextField.text, @"", ticket];
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagSendMessage owner:self];
+//    NSString *strParameters = [NSString stringWithFormat:@"dest=%@&remotIp=%@&type=2&sendmessageticket=%@", self.modifyPhoneTextField.text, @"", ticket];
+//    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagSendMessage owner:self];
+    NSString *userId = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
+    //type: 1:提现    2:注册    3:修改绑定银行卡   5:设置交易密码    6:开户    7:换卡
+    NSDictionary *dic = @{@"isVms":@"SMS",@"type":@"4",@"userId":userId, @"destPhoneNo":self.modifyPhoneTextField.text};
+    [[NetworkModule sharedNetworkModule] newPostReq:dic tag:kSXTagIdentifyCode owner:self signature:YES];
 }
 
 // 提交新绑定的手机号
 - (void)submitNewPhoneForBindingWithTelePhone:(NSString *)telephone andValidCode:(NSString *)code
 {
-    NSString *strParameters = [NSString stringWithFormat:@"userId=%@&telephone=%@&telecode=%@", [[NSUserDefaults standardUserDefaults] valueForKey:UUID], telephone, code];
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagUpdateMobile owner:self];
+//    NSString *strParameters = [NSString stringWithFormat:@"userId=%@&telephone=%@&telecode=%@", [[NSUserDefaults standardUserDefaults] valueForKey:UUID], telephone, code];
+//    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagUpdateMobile owner:self];
+    NSString *userId = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
+    NSDictionary *dic = @{@"phoneNum": self.modifyPhoneTextField.text, @"userId":userId, @"validateCode":self.validCodeTextField.text};
+    [[NetworkModule sharedNetworkModule] newPostReq:dic tag:kSXTagUpdateMobile owner:self signature:YES];
 }
 
 //开始请求
@@ -237,45 +254,77 @@
     NSString *rstcode = dic[@"status"];
     NSString *rsttext = dic[@"statusdes"];
     
-    if (tag.intValue == kSXTagSendMessageforTicket) {
-        [self getValidCodeWithTicket:dic[@"sendmessageticket"]];
-    }
-    if (tag.intValue == kSXTagSendMessage) {
-        if (rstcode.intValue == 1) {
-            self.getValidCodeButton.enabled = NO;
-            [_validTimer setFireDate:[NSDate distantPast]];
-            [MBProgressHUD displayHudError:rsttext];
+//    if (tag.intValue == kSXTagSendMessageforTicket) {
+//        [self getValidCodeWithTicket:dic[@"sendmessageticket"]];
+//    }
+    if (tag.intValue == kSXTagIdentifyCode) {
+        bool ret = [dic[@"ret"] boolValue];
+        if (ret) {
+            DBLOG(@"%@",dic[@"data"]);
+//            [_getValidCodeButton setTitle:@"60秒后重新获取" forState:UIControlStateDisabled];
+            _getValidCodeButton.enabled = NO;
+            
+//            [_getValidCodeButton setTitleColor:UIColorWithRGB(0xcccccc) forState:UIControlStateNormal];
+            _validTimer = [HWWeakTimer scheduledTimerWithTimeInterval:(1.0) target:self selector:@selector(timerfuc) userInfo:nil repeats:YES];
+            _tipLabel.text = [NSString stringWithFormat:@"已向手机%@发送短信验证码。",self.modifyPhoneTextField.text];
+            if (self.isUsingVoiceCode) {
+                self.voiceTipLabel.hidden = YES;
+            }
+            else {
+                self.voiceTipLabel.hidden = YES;
+            }
+            _tipLabel.hidden = NO;
+        }else {
+            [AuxiliaryFunc showToastMessage:dic[@"message"] withView:self.view];
+        }
+        
+//        if (rstcode.intValue == 1) {
+//            self.getValidCodeButton.enabled = NO;
+//            [_validTimer setFireDate:[NSDate distantPast]];
+//            [MBProgressHUD displayHudError:rsttext];
+////            [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
+//            self.tipLabel.hidden = !self.voiceTipLabel.hidden;
+//            self.tipLabel.text = [NSString stringWithFormat:@"已向您输入的手机号码 %@ 发送短信验证码", self.modifyPhoneTextField.text];
+//        }
+//        else {
+//            if (!self.tipLabel.hidden) {
+//                self.tipLabel.hidden = YES;
+//            }
+//            self.voiceTipLabel.hidden = NO;
+//            if (rstcode.intValue == 6) {
+//                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:rsttext delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"联系客服", nil];
+//                alertView.tag = 200;
+//                [alertView show];
+//                
+//            }
 //            [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
-            self.tipLabel.hidden = !self.voiceTipLabel.hidden;
-            self.tipLabel.text = [NSString stringWithFormat:@"已向您输入的手机号码 %@ 发送短信验证码", self.modifyPhoneTextField.text];
-        }
-        else {
-            if (!self.tipLabel.hidden) {
-                self.tipLabel.hidden = YES;
-            }
-            self.voiceTipLabel.hidden = NO;
-            if (rstcode.intValue == 6) {
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:rsttext delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"联系客服", nil];
-                alertView.tag = 200;
-                [alertView show];
-                
-            }
-            [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
-        }
+//        }
     }
     if (tag.intValue == kSXTagUpdateMobile) {
-        if (rstcode.intValue == 7) {
+        bool ret = [dic[@"ret"] boolValue];
+        if (ret) {
             [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
             [[NSUserDefaults standardUserDefaults] setObject:self.modifyPhoneTextField.text forKey:@"lastLoginName"];
+            NSString *mobile  = [_modifyPhoneTextField.text stringByReplacingCharactersInRange:NSMakeRange(3, 4) withString:@"****"];
+            [[NSUserDefaults standardUserDefaults] setObject:mobile forKey:@"mobile"];
             [[NSUserDefaults standardUserDefaults] synchronize];
             [self performSelector:@selector(backLastView) withObject:nil afterDelay:1];
+        }else {
+            [AuxiliaryFunc showToastMessage:dic[@"message"] withView:self.view];
         }
-        else {
-            UIAlertView *alertview = [[UIAlertView alloc] initWithTitle:@"提示" message:rsttext delegate:self cancelButtonTitle:@"重新输入" otherButtonTitles: nil];
-            alertview.tag = [rstcode integerValue];
-            [alertview show];
-        }
+//        if (rstcode.intValue == 7) {
+//            [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
+//            [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
+//            [[NSUserDefaults standardUserDefaults] setObject:self.modifyPhoneTextField.text forKey:@"lastLoginName"];
+//            [[NSUserDefaults standardUserDefaults] synchronize];
+//            [self performSelector:@selector(backLastView) withObject:nil afterDelay:1];
+//        }
+//        else {
+//            UIAlertView *alertview = [[UIAlertView alloc] initWithTitle:@"提示" message:rsttext delegate:self cancelButtonTitle:@"重新输入" otherButtonTitles: nil];
+//            alertview.tag = [rstcode integerValue];
+//            [alertview show];
+//        }
     }
 }
 // 返回上个界面
@@ -332,7 +381,10 @@
 //请求失败
 - (void)errorPost:(NSError*)err tag:(NSNumber*)tag
 {
-    if (tag.intValue == kSXTagSendMessageforTicket || tag.intValue == kSXTagSendMessage || tag.intValue == kSXTagUpdateMobile) {
+//    if (tag.intValue == kSXTagSendMessageforTicket || tag.intValue == kSXTagSendMessage || tag.intValue == kSXTagUpdateMobile) {
+//        [MBProgressHUD displayHudError:err.userInfo[@"NSLocalizedDescription"]];
+//    }
+    if (tag.intValue == kSXTagIdentifyCode || tag.intValue == kSXTagUpdateMobile) {
         [MBProgressHUD displayHudError:err.userInfo[@"NSLocalizedDescription"]];
     }
 //    [MBProgressHUD hideAllHUDsForView:self.settingBaseBgView animated:YES];

@@ -1130,6 +1130,10 @@ static NetworkModule *gInstance = NULL;
             parameter = [NEW_SERVER_IP stringByAppendingString:REDBAGRAIN];
         }
             break;
+        case kSXTagUpdateMobile: {
+            parameter = [SERVER_IP stringByAppendingString:UPDATE_TEL];
+        }
+            break;
     }
     //给原有参数字典添加公共参数
     if (!data) {
