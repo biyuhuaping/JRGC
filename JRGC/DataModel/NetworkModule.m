@@ -485,7 +485,13 @@ static NetworkModule *gInstance = NULL;
 
     NSArray * strArray = [parameter componentsSeparatedByString:SERVER_IP];
     NSString *par = [strArray objectAtIndex:1];
-
+    if ([[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
+        if (data.length > 0) {
+            data = [data stringByAppendingString:[NSString stringWithFormat:@"&jg_ckie=%@",[UserInfoSingle sharedManager].jg_ckie]];
+        } else {
+            data = [data stringByAppendingString:[NSString stringWithFormat:@"jg_ckie=%@",[UserInfoSingle sharedManager].jg_ckie]];
+        }
+    }
     if([array containsObject:par])
     {
         if (tag == kSXTagUserRegist || tag == kSXTagChangedPwd) {
@@ -1139,6 +1145,9 @@ static NetworkModule *gInstance = NULL;
     [dict setValue:@"1" forKey:@"sourceType"];
     [dict setValue:[Common getKeychain] forKey:@"imei"];
     [dict setValue:[Common getIOSVersion] forKey:@"version"];
+    if([[NSUserDefaults standardUserDefaults] valueForKey:UUID]){
+        [dict setValue:[UserInfoSingle sharedManager].jg_ckie forKey:@"jg_ckie"];
+    }
     DLog(@"新接口请求参数%@",dict);
     if(isSignature) //是否需要验签
     {

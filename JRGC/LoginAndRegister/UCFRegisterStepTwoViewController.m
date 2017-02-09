@@ -349,7 +349,6 @@
     [parDic setValue:wanip forKey:@"ip"];
     [parDic setValue:_registerTokenStr forKey:@"registTicket"];
     [parDic setValue:@"1" forKey:@"userId"];
-   // [[NetworkModule sharedNetworkModule] postReq2:parDic tag:kSXTagUserRegist owner:self];
     [[NetworkModule sharedNetworkModule] newPostReq:parDic tag:kSXTagUserRegist owner:self signature:NO];
 }
 
