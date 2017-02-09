@@ -14,12 +14,14 @@
 #import "Common.h"
 #import "UIImageView+WebCache.h"
 #import "UIImageView+NetImageView.h"
-@interface UCFRegisterOneView ()
+@interface UCFRegisterOneView ()<UITextFieldDelegate>
 {
     UIImageView *_headImageView;//手机号上面的图片
     UITextField *_userPhoneNumField;//手机号输入框
     UIButton *_readBtn;
     UIButton *_nextStepBtn;
+    NSString    *previousTextFieldContent;
+    UITextRange *previousSelection;
 }
 
 @end
@@ -38,7 +40,8 @@
 
 - (NSString*)phoneNumberText
 {
-    return _userPhoneNumField.text;
+    NSString* nStr = [_userPhoneNumField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    return nStr;
 }
 
 - (void)setFirstResponder
@@ -71,6 +74,7 @@
     _userPhoneNumField.keyboardType = UIKeyboardTypeNumberPad;
     [_userPhoneNumField becomeFirstResponder];
     _userPhoneNumField.delegate = self;
+    [_userPhoneNumField addTarget:self action:@selector(formatPhoneNumber:) forControlEvents:UIControlEventEditingChanged];
     [self addSubview:_userPhoneNumField];
     
     UILabel *label1 = [UILabel labelWithFrame:CGRectMake(XPOS, CGRectGetMaxY(_userPhoneNumField.frame) + 8, ScreenWidth - XPOS*2, 20) text:[NSString stringWithFormat:@"*注册即视为我已阅读并同意"] textColor:UIColorWithRGB(0x777777) font:[UIFont systemFontOfSize:13]];
@@ -114,13 +118,14 @@
 
 - (void)nextBtnClicked:(id)sender
 {
+    NSString* userPhoneStr = [_userPhoneNumField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
     [_userPhoneNumField resignFirstResponder];
-    if ([_userPhoneNumField.text isEqualToString:@""]) {
+    if ([userPhoneStr isEqualToString:@""]) {
         [AuxiliaryFunc showToastMessage:@"请输入手机号" withView:self];
         [_userPhoneNumField becomeFirstResponder];
         return;
     }
-    BOOL isPhoneNum = [SharedSingleton checkPhoneNumber:_userPhoneNumField.text];
+    BOOL isPhoneNum = [SharedSingleton checkPhoneNumber:userPhoneStr];
     if (!isPhoneNum) {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"手机号不正确" delegate:nil cancelButtonTitle:@"重新输入" otherButtonTitles:nil, nil];
         [alertView show];
@@ -146,19 +151,6 @@
 }
 
 #pragma mark -textFeildDelegate
-
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
-{
-    NSInteger existedLength = textField.text.length;
-    NSInteger selectedLength = range.length;
-    NSInteger replaceLength = string.length;
-    if (existedLength - selectedLength + replaceLength > 11) {
-        return NO;
-    }
-    
-    return YES;
-}
-
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
     NSString *machineName = [Common machineName];
@@ -177,6 +169,105 @@
             self.frame = CGRectMake (0,0,self.frame.size.width, self.frame.size.height);
         }];
     }
+}
+
+//1.在UITextField的代理方法中实现手机号只能输入数字并满足我们的要求（首位只能是1，第二位只能是3，4，5，7，8其它不限制）
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    previousTextFieldContent = textField.text;
+    previousSelection = textField.selectedTextRange;
+    
+    
+    if (range.location == 0){
+        NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:@"1"] invertedSet];
+        NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+        BOOL basicTest = [string isEqualToString:filtered];
+        if (!basicTest){
+            //[self showMyMessage:@"只能输入数字"];
+            return NO;
+        }
+    }
+    else {
+        NSCharacterSet *characterSet = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789"] invertedSet];
+        string = [string stringByReplacingOccurrencesOfString:@" " withString:@""];
+        if ([string rangeOfCharacterFromSet:characterSet].location != NSNotFound) {
+            return NO;
+        }
+    }
+    if (range.location > 12){
+        return NO;
+    }
+    return YES;
+}
+
+//3.实现formatPhoneNumber:方法以来让手机号实现344格式
+- (void)formatPhoneNumber:(UITextField*)textField{
+    NSUInteger targetCursorPosition = [textField offsetFromPosition:textField.beginningOfDocument toPosition:textField.selectedTextRange.start];
+    NSLog(@"targetCursorPosition:%li", (long)targetCursorPosition);
+    NSString* nStr = [textField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSString* preTxt = [previousTextFieldContent stringByReplacingOccurrencesOfString:@" " withString:@""];
+    char editFlag = 0;// 正在执行删除操作时为0，否则为1
+    if (nStr.length <= preTxt.length) {
+        editFlag = 0;
+    }else{
+        editFlag = 1;
+    }
+    if (nStr.length > 11) {
+        textField.text = previousTextFieldContent;
+        textField.selectedTextRange = previousSelection;
+        return;
+    }
+    NSString* spaceStr = @" ";
+    NSMutableString *mStrTemp = [NSMutableString string];
+    int spaceCount = 0;
+    if (nStr.length < 3 && nStr.length > -1) {
+        spaceCount = 0;
+    }else if (nStr.length < 7&& nStr.length > 2){
+        spaceCount = 1;
+    }else if (nStr.length < 12&& nStr.length > 6){
+        spaceCount = 2;
+    }
+    for (int i = 0; i < spaceCount; i++){
+        if (i == 0) {
+            [mStrTemp appendFormat:@"%@%@", [nStr substringWithRange:NSMakeRange(0, 3)],spaceStr];
+        }else if (i == 1){
+            [mStrTemp appendFormat:@"%@%@", [nStr substringWithRange:NSMakeRange(3, 4)], spaceStr];
+        }else if (i == 2){
+            [mStrTemp appendFormat:@"%@%@", [nStr substringWithRange:NSMakeRange(7, 4)], spaceStr];
+        }
+    }
+    
+    if (nStr.length == 11){
+        [mStrTemp appendFormat:@"%@%@", [nStr substringWithRange:NSMakeRange(7, 4)], spaceStr];
+    }
+    
+    if (nStr.length < 4 && nStr.length > 0){
+        [mStrTemp appendString:[nStr substringWithRange:NSMakeRange(nStr.length-nStr.length % 3,nStr.length % 3)]];
+    }else if(nStr.length > 3){
+        NSString *str = [nStr substringFromIndex:3];
+        [mStrTemp appendString:[str substringWithRange:NSMakeRange(str.length-str.length % 4,str.length % 4)]];
+        if (nStr.length == 11){
+            [mStrTemp deleteCharactersInRange:NSMakeRange(13, 1)];
+        }
+    }
+    NSLog(@"=======mstrTemp=%@",mStrTemp);
+    textField.text = mStrTemp;
+    // textField设置selectedTextRange
+    NSUInteger curTargetCursorPosition = targetCursorPosition;// 当前光标的偏移位置
+    if (editFlag == 0){
+        //删除
+        if (targetCursorPosition == 9 || targetCursorPosition == 4){
+            curTargetCursorPosition = targetCursorPosition - 1;
+        }
+    }
+    else {
+        //添加
+        if (nStr.length == 8 || nStr.length == 3){
+            curTargetCursorPosition = targetCursorPosition + 1;
+        }
+    }
+    
+    UITextPosition *targetPosition = [textField positionFromPosition:[textField beginningOfDocument] offset:curTargetCursorPosition];
+    [textField setSelectedTextRange:[textField textRangeFromPosition:targetPosition toPosition :targetPosition]];
 }
 
 @end
