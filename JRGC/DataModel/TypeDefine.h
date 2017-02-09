@@ -41,7 +41,8 @@
 #define USER_LOGOUT         @"user/loginout"
 #define DEALTRANSFERBID     @"newprdTransfer/dealTransferBidTwo"
 #define SAVETRANSFERDEALS   @"api/investTraClaims/v2/submitTender.json" //债权转让投资请求
-#define UPDATE_TEL          @"userInfor/updatetele"
+//#define UPDATE_TEL          @"userInfor/updatetele"
+#define UPDATE_TEL          @"api/userInfo/v2/registMobileChange.json"
 #define DICITEMLIST         @"sysDataDicItem/allDicItemList"
 #define BANK_TOP_INFO       @"api/recharge/v2/getRechargeInfo.json"
 #define DrawalsSendPhone    @"api/recharge/v2/getRechargeCode.json"
