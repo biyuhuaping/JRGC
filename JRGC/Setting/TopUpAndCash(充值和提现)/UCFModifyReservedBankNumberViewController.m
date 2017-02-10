@@ -292,7 +292,7 @@
 }
 
 #pragma mark - UITextFieldDelegate
-//1.在UITextField的代理方法中实现手机号只能输入数字并满足我们的要求（首位只能是1，第二位只能是3，4，5，7，8其它不限制）
+//1.在UITextField的代理方法中实现手机号只能输入数字并满足我们的要求（首位只能是1，其他必须是0~9的纯数字）
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     previousTextFieldContent = textField.text;
     previousSelection = textField.selectedTextRange;
