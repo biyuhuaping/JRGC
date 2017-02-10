@@ -69,6 +69,7 @@
 //    [self addSubview:_userNameTfd];
     
     _phoneNumTfd = [UITextFieldFactory getTextFieldObjectWithFrame:CGRectMake(XPOS, YPOS, ScreenWidth - XPOS*2, TEXTFIELDHEIGHT) delegate:self placeholder:@"请输入绑定手机号" returnKeyType:UIReturnKeyDefault];
+    _phoneNumTfd.keyboardType = UIKeyboardTypeNumberPad;
     _phoneNumTfd.backgroundColor = [UIColor whiteColor];
     _phoneNumTfd.layer.borderColor = UIColorWithRGB(0xdddddd).CGColor;
     _phoneNumTfd.layer.borderWidth = 0.5;

@@ -143,7 +143,8 @@
 #define MSGREOMETMSG                  @"tMsgList/removeTMsg" //删除消息
 #define MSGSIGNREAD                   @"tMsgList/signRead" //单条消息标记为已读
 #define GETREDPOINTMDSSAGE            @"newaccount/getRedPointMessage"  //获取所有红点状态
-#define GETWORKPOINT                  @"userScore/queryScoreList"       //工分请求
+//#define GETWORKPOINT                  @"userScore/queryScoreList"       //工分请求
+#define GETWORKPOINT                  @"api/userScore/v2/queryScoreList.json"       //工分请求
 #define COUPONLIST                    @"beansMall/couponList"           //兑换券列表
 
 #define GETCONTRIBUTIONVALUEINVOT     @"userLevel/contributeSource"//投资贡献值
