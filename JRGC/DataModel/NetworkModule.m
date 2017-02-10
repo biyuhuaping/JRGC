@@ -1140,6 +1140,10 @@ static NetworkModule *gInstance = NULL;
             parameter = [SERVER_IP stringByAppendingString:UPDATE_TEL];
         }
             break;
+        case kSXTagGetWorkPoint: {
+            parameter = [SERVER_IP stringByAppendingString:GETWORKPOINT];
+        }
+            break;
     }
     //给原有参数字典添加公共参数
     if (!data) {

@@ -14,6 +14,7 @@
 #import "UCFWebViewJavascriptBridgeLevel.h"
 #import "AppDelegate.h"
 #import "UCFWebViewJavascriptBridgeMall.h"
+#import "UCFToolsMehod.h"
 @interface UCFWorkPointsViewController ()<UITableViewDataSource, UITableViewDelegate,NoDataViewDelegate,UIAlertViewDelegate>
 {
     NSString* Nstr_beansMallUrl;	//工豆商城首页地址	string	工豆商城首页地址
@@ -32,6 +33,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *lable_pointShow;//显示工分
 @property (weak, nonatomic) IBOutlet UIView *view_Lock;//锁view 默认hidden ＝ YES；
 @property (weak, nonatomic) IBOutlet UILabel *lable_showMyPoint;
+@property (weak, nonatomic) IBOutlet UILabel *frozenWorkPoint;  //冻结工分数量
+@property (weak, nonatomic) IBOutlet UILabel *overduingWorkPoint;   //即将过期工分
 
 @end
 
@@ -144,8 +147,13 @@
 //    [self.dataSource removeAllObjects];
        self.currentPage = 1;
    
-    NSString *strParameters = [NSString stringWithFormat:@"userId=%@&&page=%lu&rows=%@", [[NSUserDefaults standardUserDefaults] valueForKey:UUID], (unsigned long)self.currentPage, PAGESIZE];
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetWorkPoint owner:self];
+//    NSString *strParameters = [NSString stringWithFormat:@"userId=%@&&page=%lu&rows=%@", [[NSUserDefaults standardUserDefaults] valueForKey:UUID], (unsigned long)self.currentPage, PAGESIZE];
+//    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetWorkPoint owner:self];
+    
+    NSString *userId = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
+    //type: 1:提现    2:注册    3:修改绑定银行卡   5:设置交易密码    6:开户    7:换卡
+    NSDictionary *dic = @{@"page":[NSString stringWithFormat:@"%lu", (unsigned long)self.currentPage],@"rows":@"20",@"userId":userId};
+    [[NetworkModule sharedNetworkModule] newPostReq:dic tag:kSXTagGetWorkPoint owner:self signature:YES];
 //    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 
 }
@@ -173,21 +181,25 @@
     
     NSString *data = (NSString *)result;
     NSDictionary *dic = [data objectFromJSONString];
-    NSString *rstcode = [dic objectSafeForKey:@"status"];
-    NSString *rsttext = [dic objectSafeForKey:@"statusdes"];
+    NSString *rstcode = [dic objectSafeForKey:@"ret"];
+    NSString *rsttext = [dic objectSafeForKey:@"message"];
+    NSDictionary *dat = [dic objectSafeDictionaryForKey:@"data"];
 
     if (tag.intValue == kSXTagGetWorkPoint) {
         if([rstcode intValue] == 1){
 
-        Nstr_beansMallUrl =[dic objectSafeForKey:@"beansMallUrl"];//工豆商城首页地址	string	工豆商城首页地址
+        Nstr_beansMallUrl =[dat objectSafeForKey:@"beansMallUrl"];//工豆商城首页地址	string	工豆商城首页地址
        
 
-        Nstr_iintegralDesUrl =[dic objectSafeForKey:@"iintegralDesUrl"]; //工分说明地址	string	工分介绍的Url
+        Nstr_iintegralDesUrl =[dat objectSafeForKey:@"iintegralDesUrl"]; //工分说明地址	string	工分介绍的Url
        
-        Nstr_iintegralNum =[NSString stringWithFormat:@"%@",[dic objectSafeForKey:@"iintegralNum"]]; //我的积分	number	当前用户可用工分总和
+        Nstr_iintegralNum =[NSString stringWithFormat:@"%@",[dat objectSafeForKey:@"iintegralNum"]]; //我的积分	number	当前用户可用工分总和
         
         self.lable_pointShow.text = Nstr_iintegralNum;
-        Nstr_jurisdiction =[NSString stringWithFormat:@"%@",[dic objectSafeForKey:@"jurisdiction"]];//工分账户是否被禁用	boolean	用户是否有使用工分的权限
+        Nstr_jurisdiction =[NSString stringWithFormat:@"%@",[dat objectSafeForKey:@"jurisdiction"]];//工分账户是否被禁用	boolean	用户是否有使用工分的权限
+            
+        self.frozenWorkPoint.text = [NSString stringWithFormat:@"%@", [dat objectSafeForKey:@"frozenAmount"]];
+        self.overduingWorkPoint.text = [NSString stringWithFormat:@"%@", [dat objectSafeForKey:@"willExpireAmount"]];
         if([Nstr_jurisdiction isEqualToString:@"0"])//工分账户无效
         {
             self.view_Lock.hidden = NO;
@@ -202,14 +214,14 @@
         
         
 //        NSString *str_msg = [(NSDictionary*)[dic objectSafeForKey:@"pageData"]objectSafeForKey:@"msg"];//主要是异常状态的描述
-            if(dic[@"pageData"]!=nil)
+            if(dat[@"pageData"]!=nil)
             {
-              NSDictionary*dictemp = dic[@"pageData"];
+              NSDictionary*dictemp = dat[@"pageData"];
                 if(dictemp!=nil)
                 {
               NSDictionary *dic_pagination =[dictemp objectForKey:@"pagination"];//
               totalPage = [((NSString*)[dic_pagination objectSafeForKey:@"totalPage"])intValue];
-              NSArray *arry_result= [(NSDictionary*)dic[@"pageData"]objectForKey:@"result"];//每个cell的信息
+              NSArray *arry_result= [(NSDictionary*)dat[@"pageData"]objectForKey:@"result"];//每个cell的信息
                    if(![arry_result isEqual:[NSNull null]])
                    {
                        if([arry_result count]>0)
