@@ -193,79 +193,77 @@
             return NO;
         }
     }
-    if (range.location > 12){
-        return NO;
-    }
     return YES;
 }
 
 //3.实现formatPhoneNumber:方法以来让手机号实现344格式
 - (void)formatPhoneNumber:(UITextField*)textField{
+    //限制手机账号长度（有两个空格）
+    if (textField.text.length > 13) {
+        textField.text = [textField.text substringToIndex:13];
+    }
+    
     NSUInteger targetCursorPosition = [textField offsetFromPosition:textField.beginningOfDocument toPosition:textField.selectedTextRange.start];
-    NSLog(@"targetCursorPosition:%li", (long)targetCursorPosition);
-    NSString* nStr = [textField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
-    NSString* preTxt = [previousTextFieldContent stringByReplacingOccurrencesOfString:@" " withString:@""];
-    char editFlag = 0;// 正在执行删除操作时为0，否则为1
-    if (nStr.length <= preTxt.length) {
+    
+    NSString *currentStr = [textField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSString *preStr = [previousTextFieldContent stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
+    //正在执行删除操作时为0，否则为1
+    char editFlag = 0;
+    if (currentStr.length <= preStr.length) {
         editFlag = 0;
-    }else{
+    } else {
         editFlag = 1;
     }
-    if (nStr.length > 11) {
-        textField.text = previousTextFieldContent;
-        textField.selectedTextRange = previousSelection;
-        return;
-    }
-    NSString* spaceStr = @" ";
-    NSMutableString *mStrTemp = [NSMutableString string];
+    
+    NSMutableString *tempStr = [NSMutableString new];
+    
     int spaceCount = 0;
-    if (nStr.length < 3 && nStr.length > -1) {
+    if (currentStr.length < 3 && currentStr.length > -1) {
         spaceCount = 0;
-    }else if (nStr.length < 7&& nStr.length > 2){
+    }else if (currentStr.length < 7 && currentStr.length > 2) {
         spaceCount = 1;
-    }else if (nStr.length < 12&& nStr.length > 6){
+    }else if (currentStr.length < 12 && currentStr.length > 6) {
         spaceCount = 2;
     }
-    for (int i = 0; i < spaceCount; i++){
+    
+    for (int i = 0; i < spaceCount; i++) {
         if (i == 0) {
-            [mStrTemp appendFormat:@"%@%@", [nStr substringWithRange:NSMakeRange(0, 3)],spaceStr];
-        }else if (i == 1){
-            [mStrTemp appendFormat:@"%@%@", [nStr substringWithRange:NSMakeRange(3, 4)], spaceStr];
-        }else if (i == 2){
-            [mStrTemp appendFormat:@"%@%@", [nStr substringWithRange:NSMakeRange(7, 4)], spaceStr];
+            [tempStr appendFormat:@"%@%@", [currentStr substringWithRange:NSMakeRange(0, 3)], @" "];
+        }else if (i == 1) {
+            [tempStr appendFormat:@"%@%@", [currentStr substringWithRange:NSMakeRange(3, 4)], @" "];
+        }else if (i == 2) {
+            [tempStr appendFormat:@"%@%@", [currentStr substringWithRange:NSMakeRange(7, 4)], @" "];
         }
     }
     
-    if (nStr.length == 11){
-        [mStrTemp appendFormat:@"%@%@", [nStr substringWithRange:NSMakeRange(7, 4)], spaceStr];
+    if (currentStr.length == 11) {
+        [tempStr appendFormat:@"%@%@", [currentStr substringWithRange:NSMakeRange(7, 4)], @" "];
     }
-    
-    if (nStr.length < 4 && nStr.length > 0){
-        [mStrTemp appendString:[nStr substringWithRange:NSMakeRange(nStr.length-nStr.length % 3,nStr.length % 3)]];
-    }else if(nStr.length > 3){
-        NSString *str = [nStr substringFromIndex:3];
-        [mStrTemp appendString:[str substringWithRange:NSMakeRange(str.length-str.length % 4,str.length % 4)]];
-        if (nStr.length == 11){
-            [mStrTemp deleteCharactersInRange:NSMakeRange(13, 1)];
+    if (currentStr.length < 4) {
+        [tempStr appendString:[currentStr substringWithRange:NSMakeRange(currentStr.length - currentStr.length % 3, currentStr.length % 3)]];
+    }else if(currentStr.length > 3 && currentStr.length < 12) {
+        NSString *str = [currentStr substringFromIndex:3];
+        [tempStr appendString:[str substringWithRange:NSMakeRange(str.length - str.length % 4, str.length % 4)]];
+        if (currentStr.length == 11) {
+            [tempStr deleteCharactersInRange:NSMakeRange(13, 1)];
         }
     }
-    NSLog(@"=======mstrTemp=%@",mStrTemp);
-    textField.text = mStrTemp;
-    // textField设置selectedTextRange
-    NSUInteger curTargetCursorPosition = targetCursorPosition;// 当前光标的偏移位置
-    if (editFlag == 0){
+    textField.text = tempStr;
+    // 当前光标的偏移位置
+    NSUInteger curTargetCursorPosition = targetCursorPosition;
+    
+    if (editFlag == 0) {
         //删除
-        if (targetCursorPosition == 9 || targetCursorPosition == 4){
+        if (targetCursorPosition == 9 || targetCursorPosition == 4) {
             curTargetCursorPosition = targetCursorPosition - 1;
         }
-    }
-    else {
+    }else {
         //添加
-        if (nStr.length == 8 || nStr.length == 3){
+        if (currentStr.length == 8 || currentStr.length == 4) {
             curTargetCursorPosition = targetCursorPosition + 1;
         }
     }
-    
     UITextPosition *targetPosition = [textField positionFromPosition:[textField beginningOfDocument] offset:curTargetCursorPosition];
     [textField setSelectedTextRange:[textField textRangeFromPosition:targetPosition toPosition :targetPosition]];
 }
