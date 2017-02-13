@@ -304,6 +304,7 @@
     }
     if (tag.intValue == kSXTagUpdateMobile) {
         bool ret = [dic[@"ret"] boolValue];
+        rsttext = [dic objectSafeForKey:@"message"];
         if (ret) {
             NSString* str = [self.modifyPhoneTextField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
             [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
