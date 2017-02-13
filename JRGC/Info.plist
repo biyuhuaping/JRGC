@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>2.3.51</string>
+	<string>2.3.60</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -119,14 +119,14 @@
 				<true/>
 			</dict>
 			<key>mp.weixin.qq.com</key>
-            <dict>
-                <key> NSIncludesSubdomains </key>
-                <true/>
-                <key> NSExceptionRequiresForwardSecrecy </key>
-                <false/>
-                <key>NSExceptionAllowsInsecureHTTPLoads</key>
-                <true/>
-            </dict>
+			<dict>
+				<key> NSExceptionRequiresForwardSecrecy </key>
+				<false/>
+				<key> NSIncludesSubdomains </key>
+				<true/>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+			</dict>
 		</dict>
 	</dict>
 	<key>NSCameraUsageDescription</key>
