@@ -105,7 +105,7 @@
     {
         NSMutableDictionary *dic = [result objectFromJSONString];
         BOOL ret = [dic[@"ret"] boolValue];
-        if (ret && [dic[@"data"][@"bankList"]count] > 0 && [dic[@"data"][@"quickBankList"]count] > 0)
+        if (ret)//&& [dic[@"data"][@"bankList"]count] > 0 && [dic[@"data"][@"quickBankList"]count] > 0
         {
             //请求成功
             [self.noDataView hide];
