@@ -10,7 +10,11 @@
 #import "UCFModifyPhoneViewController.h"
 #import "SharedSingleton.h"
 
-@interface BindPhoneNumViewController () <UITextFieldDelegate, UIAlertViewDelegate>
+@interface BindPhoneNumViewController () <UITextFieldDelegate, UIAlertViewDelegate>{
+    NSString    *previousTextFieldContent;
+    UITextRange *previousSelection;
+}
+
 // 已绑定的手机号
 @property (weak, nonatomic) IBOutlet UILabel *bindedPhoneLabel;
 // 新手机号
@@ -80,7 +84,7 @@
     [self.moddifyPhoneTextField becomeFirstResponder];
     
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardFrameChanged:) name:UIKeyboardWillChangeFrameNotification object:nil];
-    [self.moddifyPhoneTextField addTarget:self action:@selector(textfieldLength:) forControlEvents:UIControlEventEditingChanged];
+    [self.moddifyPhoneTextField addTarget:self action:@selector(formatPhoneNumber:) forControlEvents:UIControlEventEditingChanged];
 }
 
 // 键盘通知
@@ -101,28 +105,122 @@
         }];
     }
 }
-// textfield代理
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
-{
-    NSInteger existedLength = textField.text.length;
-    NSInteger selectedLength = range.length;
-    NSInteger replaceLength = string.length;
-    if ((existedLength - selectedLength + replaceLength > 11)  && textField == self.moddifyPhoneTextField) {
-        return NO;
+
+#pragma mark - UITextField
+//1.在UITextField的代理方法中实现手机号只能输入数字并满足我们的要求（首位只能是1，其他必须是0~9的纯数字）
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    if (textField == _moddifyPhoneTextField) {
+        previousTextFieldContent = textField.text;
+        previousSelection = textField.selectedTextRange;
+        
+        
+        if (range.location == 0){
+            NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:@"1"] invertedSet];
+            NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+            BOOL basicTest = [string isEqualToString:filtered];
+            if (!basicTest){
+                //[self showMyMessage:@"只能输入数字"];
+                return NO;
+            }
+        }
+        else {
+            NSCharacterSet *characterSet = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789"] invertedSet];
+            string = [string stringByReplacingOccurrencesOfString:@" " withString:@""];
+            if ([string rangeOfCharacterFromSet:characterSet].location != NSNotFound) {
+                return NO;
+            }
+        }
+        if (range.location > 12){
+            return NO;
+        }
     }
     return YES;
 }
-- (UITextField *)textfieldLength:(UITextField *)textField
-{
-    if (textField.text.length == 11) {
-        [self.loginPwdTextField becomeFirstResponder];
+
+//3.实现formatPhoneNumber:方法以来让手机号实现344格式
+- (void)formatPhoneNumber:(UITextField*)textField{
+    NSUInteger targetCursorPosition = [textField offsetFromPosition:textField.beginningOfDocument toPosition:textField.selectedTextRange.start];
+    NSLog(@"targetCursorPosition:%li", (long)targetCursorPosition);
+    NSString* nStr = [textField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSString* preTxt = [previousTextFieldContent stringByReplacingOccurrencesOfString:@" " withString:@""];
+    char editFlag = 0;// 正在执行删除操作时为0，否则为1
+    if (nStr.length <= preTxt.length) {
+        editFlag = 0;
+    }else{
+        editFlag = 1;
     }
-    return textField;
+    if (nStr.length > 11) {
+        textField.text = previousTextFieldContent;
+        textField.selectedTextRange = previousSelection;
+        return;
+    }
+    NSString* spaceStr = @" ";
+    NSMutableString *mStrTemp = [NSMutableString string];
+    int spaceCount = 0;
+    if (nStr.length < 3 && nStr.length > -1) {
+        spaceCount = 0;
+    }else if (nStr.length < 7&& nStr.length > 2){
+        spaceCount = 1;
+    }else if (nStr.length < 12&& nStr.length > 6){
+        spaceCount = 2;
+    }
+    for (int i = 0; i < spaceCount; i++){
+        if (i == 0) {
+            [mStrTemp appendFormat:@"%@%@", [nStr substringWithRange:NSMakeRange(0, 3)],spaceStr];
+        }else if (i == 1){
+            [mStrTemp appendFormat:@"%@%@", [nStr substringWithRange:NSMakeRange(3, 4)], spaceStr];
+        }else if (i == 2){
+            [mStrTemp appendFormat:@"%@%@", [nStr substringWithRange:NSMakeRange(7, 4)], spaceStr];
+        }
+    }
+    
+    if (nStr.length == 11){
+        [mStrTemp appendFormat:@"%@%@", [nStr substringWithRange:NSMakeRange(7, 4)], spaceStr];
+    }
+    
+    if (nStr.length < 4 && nStr.length > 0){
+        [mStrTemp appendString:[nStr substringWithRange:NSMakeRange(nStr.length-nStr.length % 3,nStr.length % 3)]];
+    }else if(nStr.length > 3){
+        NSString *str = [nStr substringFromIndex:3];
+        [mStrTemp appendString:[str substringWithRange:NSMakeRange(str.length-str.length % 4,str.length % 4)]];
+        if (nStr.length == 11){
+            [mStrTemp deleteCharactersInRange:NSMakeRange(13, 1)];
+        }
+    }
+    NSLog(@"=======mstrTemp=%@",mStrTemp);
+    textField.text = mStrTemp;
+    // textField设置selectedTextRange
+    NSUInteger curTargetCursorPosition = targetCursorPosition;// 当前光标的偏移位置
+    if (editFlag == 0){
+        //删除
+        if (targetCursorPosition == 9 || targetCursorPosition == 4){
+            curTargetCursorPosition = targetCursorPosition - 1;
+        }
+    }
+    else {
+        //添加
+        if (nStr.length == 8 || nStr.length == 3){
+            curTargetCursorPosition = targetCursorPosition + 1;
+        }
+    }
+    
+    UITextPosition *targetPosition = [textField positionFromPosition:[textField beginningOfDocument] offset:curTargetCursorPosition];
+    [textField setSelectedTextRange:[textField textRangeFromPosition:targetPosition toPosition :targetPosition]];
 }
+
+
+//- (UITextField *)textfieldLength:(UITextField *)textField
+//{
+//    if (textField.text.length == 11) {
+//        [self.loginPwdTextField becomeFirstResponder];
+//    }
+//    return textField;
+//}
 //  下一步按钮的点击事件
 - (IBAction)nextStep:(id)sender {
     [self.view endEditing:YES];
-    NSString *oldPhoneNum = [Common deleteStrHeadAndTailSpace:self.moddifyPhoneTextField.text];
+    NSString* str = [self.moddifyPhoneTextField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSString *oldPhoneNum = [Common deleteStrHeadAndTailSpace:str];
     if (oldPhoneNum.length == 0) {
         [AuxiliaryFunc showToastMessage:@"请输入原绑定手机号" withView:self.view];
 //        [self.moddifyPhoneTextField becomeFirstResponder];
@@ -134,7 +232,7 @@
 //        [self.loginPwdTextField becomeFirstResponder];
         return;
     }
-    BOOL isPhoneNum = [SharedSingleton checkPhoneNumber:self.moddifyPhoneTextField.text];
+    BOOL isPhoneNum = [SharedSingleton checkPhoneNumber:str];
     if (!isPhoneNum) {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"手机号格式错误" delegate:self cancelButtonTitle:@"重新输入" otherButtonTitles: nil];
         alertView.tag = 99;
@@ -158,7 +256,8 @@
 // 获取网络数据
 - (void)getIsValidPhoneNumAndPasswordFromNetData
 {
-    NSDictionary *param = @{@"phone": self.moddifyPhoneTextField.text, @"pwd": self.loginPwdTextField.text};
+    NSString* str = [self.moddifyPhoneTextField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSDictionary *param = @{@"phone": str, @"pwd": self.loginPwdTextField.text};
     [[NetworkModule sharedNetworkModule] postReq2:param tag:kSXTagValidBindedPhone owner:self];
 }
 

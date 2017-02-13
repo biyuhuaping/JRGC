@@ -142,7 +142,8 @@
 #pragma mark -获取手机验证码
 - (IBAction)getPhoneCode:(UIButton *)sender {
     [self.view endEditing:YES];
-    if ([Common deleteStrSpace:_phoneNumberTextField.text].length != 11) {
+    NSString* str = [self.phoneNumberTextField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    if ([Common deleteStrSpace:str].length != 11) {
         [MBProgressHUD displayHudError:@"请输入正确的手机号"];
         return;
     }
@@ -155,7 +156,8 @@
 #pragma mark -点击下一步或保存按钮的事件
 - (IBAction)gotoStepNext:(UIButton *)sender {
     [self.view endEditing:YES];
-    if ([Common deleteStrSpace:_phoneNumberTextField.text].length != 11) {
+    NSString* str = [self.phoneNumberTextField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    if ([Common deleteStrSpace:str].length != 11) {
         [MBProgressHUD displayHudError:@"请输入正确的手机号"];
         return;
     }
@@ -177,7 +179,8 @@
         NSDictionary *dataDic =@{@"destPhoneNo":@"",@"isVms":vmsType ,@"userId":[UserInfoSingle sharedManager].userId,@"type":@"10"};
         [[NetworkModule sharedNetworkModule] newPostReq:dataDic tag:kSXTagIdentifyCode owner:self signature:YES];
     }else{
-        NSDictionary *dic = @{@"destPhoneNo":[Common deleteStrSpace:_phoneNumberTextField.text],@"isVms":vmsType,@"type":@"9",@"userId":[UserInfoSingle sharedManager].userId};
+        NSString* str = [self.phoneNumberTextField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+        NSDictionary *dic = @{@"destPhoneNo":[Common deleteStrSpace:str],@"isVms":vmsType,@"type":@"9",@"userId":[UserInfoSingle sharedManager].userId};
         [[NetworkModule sharedNetworkModule] newPostReq:dic tag:kSXTagIdentifyCode owner:self signature:YES];
     }
 }
@@ -188,7 +191,8 @@
 }
 #pragma mark -修改银行预留手机号网络请求
 -(void)modifyBankReservePhoneNunmberHttpRequst{
-    NSDictionary *dataDict = @{@"phoneNum":[Common deleteStrSpace:_phoneNumberTextField.text],@"validateCode":_codeTextField.text,@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"updatePhoneNoTicket":_updatePhoneNoTicketStr};
+    NSString* str = [self.phoneNumberTextField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSDictionary *dataDict = @{@"phoneNum":[Common deleteStrSpace:str],@"validateCode":_codeTextField.text,@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"updatePhoneNoTicket":_updatePhoneNoTicketStr};
     [[NetworkModule sharedNetworkModule] newPostReq:dataDict tag:kSXTagChangeReserveMobileNumber owner:self signature:YES];
 }
 - (void)beginPost:(kSXTag)tag
@@ -225,7 +229,8 @@
                 _getCodeBtn.userInteractionEnabled = NO;
                 [_timer setFireDate:[NSDate distantPast]];
                 [_getCodeBtn setBackgroundColor:UIColorWithRGB(0xd4d4d4)];
-                _newMobileNumberStr = [_phoneNumberTextField.text stringByReplacingCharactersInRange:NSMakeRange(3, 4) withString:@"****"];
+                NSString* str = [self.phoneNumberTextField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+                _newMobileNumberStr = [str stringByReplacingCharactersInRange:NSMakeRange(3, 4) withString:@"****"];
                 NSString *tempText = [NSString stringWithFormat:@"已向手机%@发送短信验证码，若收不到请点击这里获取语音验证码",_newMobileNumberStr];
                 if (!isSendSMS) {
                     _telServerLabel.text = tempText;
@@ -287,11 +292,10 @@
 }
 
 #pragma mark - UITextFieldDelegate
-//1.在UITextField的代理方法中实现手机号只能输入数字并满足我们的要求（首位只能是1，第二位只能是3，4，5，7，8其它不限制）
+//1.在UITextField的代理方法中实现手机号只能输入数字并满足我们的要求（首位只能是1，其他必须是0~9的纯数字）
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     previousTextFieldContent = textField.text;
     previousSelection = textField.selectedTextRange;
-    
     
     if (range.location == 0){
         NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:@"1"] invertedSet];
