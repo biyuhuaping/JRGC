@@ -302,6 +302,7 @@
     }
     if (tag.intValue == kSXTagUpdateMobile) {
         bool ret = [dic[@"ret"] boolValue];
+        rsttext = [dic objectSafeForKey:@"message"];
         if (ret) {
             [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
