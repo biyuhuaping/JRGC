@@ -381,7 +381,6 @@
 - (void)showAdvertisement
 {
     UIImage *placehoderImage = [Common getTheLaunchImage];
-
     _advertisementView.contentMode = UIViewContentModeScaleToFill;
     [_lockVc.view setUserInteractionEnabled:NO];
     //self.window.userInteractionEnabled = NO;
