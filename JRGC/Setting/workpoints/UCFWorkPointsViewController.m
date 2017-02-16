@@ -89,11 +89,7 @@
 
     // 上拉刷新
     [self.tableView addLegendFooterWithRefreshingBlock:^{
-        if(weakSelf.currentPage > totalPage)
-        {
-            [weakSelf.tableView.footer noticeNoMoreData];
-            return;
-        }
+
         [weakSelf getDataRequsetWithPageNo: weakSelf.currentPage];
     }];
 
@@ -154,18 +150,16 @@
     //type: 1:提现    2:注册    3:修改绑定银行卡   5:设置交易密码    6:开户    7:换卡
     NSDictionary *dic = @{@"page":[NSString stringWithFormat:@"%lu", (unsigned long)self.currentPage],@"rows":@"20",@"userId":userId};
     [[NetworkModule sharedNetworkModule] newPostReq:dic tag:kSXTagGetWorkPoint owner:self signature:YES];
-//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-
+    
 }
 
 // 网络请求-列表下拉
 - (void)getDataRequsetWithPageNo:(NSUInteger)currentPageNo{
     
-   
-
-    NSString *strParameters = [NSString stringWithFormat:@"userId=%@&&page=%lu&rows=%@", [[NSUserDefaults standardUserDefaults] valueForKey:UUID], (unsigned long)currentPageNo, PAGESIZE];
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetWorkPoint owner:self];
-//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    NSString *userId = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
+    //type: 1:提现    2:注册    3:修改绑定银行卡   5:设置交易密码    6:开户    7:换卡
+    NSDictionary *dic = @{@"page":[NSString stringWithFormat:@"%lu", (unsigned long)self.currentPage],@"rows":@"20",@"userId":userId};
+    [[NetworkModule sharedNetworkModule] newPostReq:dic tag:kSXTagGetWorkPoint owner:self signature:YES];
 }
 //请求成功及结果
 - (void)endPost:(id)result tag:(NSNumber *)tag{
@@ -181,13 +175,16 @@
     
     NSString *data = (NSString *)result;
     NSDictionary *dic = [data objectFromJSONString];
-    NSString *rstcode = [dic objectSafeForKey:@"ret"];
+//    NSString *rstcode = [dic objectSafeForKey:@"ret"];
     NSString *rsttext = [dic objectSafeForKey:@"message"];
     NSDictionary *dat = [dic objectSafeDictionaryForKey:@"data"];
 
     if (tag.intValue == kSXTagGetWorkPoint) {
-        if([rstcode intValue] == 1){
-
+        if([dic[@"ret"] boolValue] == 1){
+        
+            if (self.currentPage < [[[[dat objectSafeDictionaryForKey:@"pageData"] objectSafeDictionaryForKey:@"pagination"] objectSafeForKey:@"totalPage"] integerValue]) {
+                self.currentPage++;
+            }
         Nstr_beansMallUrl =[dat objectSafeForKey:@"beansMallUrl"];//工豆商城首页地址	string	工豆商城首页地址
        
 
@@ -221,6 +218,10 @@
                 {
               NSDictionary *dic_pagination =[dictemp objectForKey:@"pagination"];//
               totalPage = [((NSString*)[dic_pagination objectSafeForKey:@"totalPage"])intValue];
+              BOOL hasNextPage = [[dic_pagination objectForKey:@"hasNextPage"] boolValue];
+                    if (!hasNextPage) {
+                        [self.tableView.footer noticeNoMoreData];
+                    }
               NSArray *arry_result= [(NSDictionary*)dat[@"pageData"]objectForKey:@"result"];//每个cell的信息
                    if(![arry_result isEqual:[NSNull null]])
                    {
@@ -238,7 +239,7 @@
             [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
 
     }
-        [self setNoDataView]; 
+        [self setNoDataView];
     }
     
 }
@@ -270,15 +271,13 @@
     }
 
     
-    if(self.currentPage >= totalPage)
+    if(self.currentPage > totalPage)
     {
         [self.tableView.footer noticeNoMoreData];
         //        return;
     }
 
     self.tableView.footer.hidden= NO;
-    
-    self.currentPage++;
 
     [self.tableView reloadData];
  }
