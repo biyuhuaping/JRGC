@@ -40,7 +40,7 @@
     
     segmentContrl.frame = CGRectMake(0, 0, ScreenWidth*5/8, 30);
     [segmentContrl setTintColor:UIColorWithRGB(0x5b6993)];
-    [segmentContrl setTitleTextAttributes:@{[UIFont systemFontOfSize:15]:NSFontAttributeName} forState:UIControlStateNormal];
+//    [segmentContrl setTitleTextAttributes:@{[UIFont systemFontOfSize:15]:NSFontAttributeName} forState:UIControlStateNormal];
     segmentContrl.selectedSegmentIndex = 0;
     [segmentContrl addTarget:self action:@selector(segmentedValueChanged:) forControlEvents:UIControlEventValueChanged];
     self.segmentedCtrl = segmentContrl;
