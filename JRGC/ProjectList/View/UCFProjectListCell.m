@@ -14,6 +14,7 @@
 #import "NZLabel.h"
 #import "UCFToolsMehod.h"
 #import "UCFProjectLabel.h"
+#import "UCFBatchBidModel.h"
 
 @interface UCFProjectListCell ()
 @property (weak, nonatomic) IBOutlet UIImageView *invest_bg_cell;
@@ -300,6 +301,34 @@
         self.circleProgressView.tintColor = UIColorWithRGB(0xe2e2e2);//未绘制的进度条颜色
         self.circleProgressView.progressLabel.textColor = UIColorWithRGB(0x909dae);
         self.circleProgressView.progressLabel.font = [UIFont systemFontOfSize:13];
+    }
+}
+
+- (void)setBatchBidModel:(UCFBatchBidModel *)batchBidModel
+{
+    _batchBidModel = batchBidModel;
+    _prdNameLab.text = batchBidModel.colName;//批量标名称
+    _progressLab.text = [NSString stringWithFormat:@"%@%%",batchBidModel.colRate];//批量标年化收益
+     _repayPeriodLab.text = batchBidModel.colPeriodTxt;//投资期限
+    _minInvestLab.text = [NSString stringWithFormat:@"%d元起",[batchBidModel.colMinInvest intValue]];//起投金额
+    _remainingLab.text = batchBidModel.colRepayModeTxt;
+    
+//    float progress = ([batchBidModel.totalAmt floatValue]-[batchBidModel.canBuyAmt floatValue])/[batchBidModel.totalAmt floatValue];
+//    progress = 1000*progress;
+//    
+//    if (progress > 0 && progress < 1) {
+//        progress = 1;
+//    }
+    
+    if (batchBidModel.full) {
+        self.circleProgressView.textStr = @"满标";
+        self.circleProgressView.tintColor = UIColorWithRGB(0xe2e2e2);//未绘制的进度条颜色
+        self.circleProgressView.progressLabel.textColor = UIColorWithRGB(0x909dae);
+    }
+    else {
+        self.circleProgressView.tintColor = UIColorWithRGB(0xfa4d4c);
+        self.circleProgressView.progressLabel.textColor = UIColorWithRGB(0x555555);
+        self.circleProgressView.textStr = @"批量投资";
     }
 }
 
