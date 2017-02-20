@@ -5772,7 +5772,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = JRGC/JRGC.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Phoenix Credit Management CO., Ltd.";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = EZRWM7P5C6;
@@ -5822,10 +5822,8 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp299;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-
 				PROVISIONING_PROFILE = "0ce353c9-748a-4307-9ccb-19c1a2dd7f16";
 				PROVISIONING_PROFILE_SPECIFIER = 2016_299Distribution;
-
 				SWIFT_OBJC_BRIDGING_HEADER = "JRGC/JRGC-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -5844,9 +5842,9 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = JRGC/JRGC.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Phoenix Credit Management CO., Ltd.";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = EZRWM7P5C6;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5893,8 +5891,8 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp299;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "0ce353c9-748a-4307-9ccb-19c1a2dd7f16";
+				PROVISIONING_PROFILE_SPECIFIER = 2016_299Distribution;
 				SWIFT_OBJC_BRIDGING_HEADER = "JRGC/JRGC-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -6018,7 +6016,7 @@
 				INFOPLIST_FILE = JRGCWatch/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp299.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "01f3a798-87f4-4065-b677-065ffd504df2";
+				PROVISIONING_PROFILE = "3897abfa-f2db-414d-8147-2c702dd5bc18";
 				PROVISIONING_PROFILE_SPECIFIER = 299WatchKitDistribution;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -6047,7 +6045,7 @@
 				INFOPLIST_FILE = JRGCWatch/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp299.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "01f3a798-87f4-4065-b677-065ffd504df2";
+				PROVISIONING_PROFILE = "3897abfa-f2db-414d-8147-2c702dd5bc18";
 				PROVISIONING_PROFILE_SPECIFIER = 299WatchKitDistribution;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;

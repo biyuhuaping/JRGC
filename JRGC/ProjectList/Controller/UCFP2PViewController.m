@@ -50,7 +50,6 @@
     self.ordinaryBid = [[UCFOrdinaryBidController alloc]initWithNibName:@"UCFOrdinaryBidController" bundle:nil];
     self.ordinaryBid.view.frame = CGRectMake(0, 44, ScreenWidth, ScreenHeight - 64-49 -44);
     [self addChildViewController:self.ordinaryBid];
-    
     self.batchBid = [[UCFBatchBidController alloc]initWithNibName:@"UCFBatchBidController" bundle:nil];
     self.batchBid.view.frame = CGRectMake(0, 44, ScreenWidth, ScreenHeight - 64-49 -44);
     [self addChildViewController:self.batchBid];
