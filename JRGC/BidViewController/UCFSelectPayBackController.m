@@ -115,7 +115,7 @@
     _segmentedCtrl.frame = CGRectMake(0, 0, ScreenWidth*5/8, 30);
     _segmentedCtrl.center = CGPointMake(ScreenWidth/2, 20);
     [_segmentedCtrl setTintColor:UIColorWithRGB(0x5b6993)];
-    [_segmentedCtrl setTitleTextAttributes:@{[UIFont systemFontOfSize:15]:NSFontAttributeName} forState:UIControlStateNormal];
+//    [_segmentedCtrl setTitleTextAttributes:@{[UIFont systemFontOfSize:15]:NSFontAttributeName} forState:UIControlStateNormal];
     _segmentedCtrl.selectedSegmentIndex = _listType;
     [_segmentedCtrl addTarget:self action:@selector(segmentedValueChanged:) forControlEvents:UIControlEventValueChanged];
     self.navigationItem.titleView = _segmentedCtrl;
