@@ -17,6 +17,7 @@
 #import "UCFPurchaseBidViewController.h"
 #import "UCFBankDepositoryAccountViewController.h"
 #import "UCFOldUserGuideViewController.h"
+#import "UCFCollectionDetailViewController.h"
 @interface UCFP2PViewController () <UITableViewDelegate, UITableViewDataSource, UCFProjectListCellDelegate>
 {
     UCFProjectListModel *_projectListModel;
@@ -163,11 +164,18 @@
         NSString *rstcode = dic[@"status"];
         NSString *rsttext = dic[@"statusdes"];
         if ([rstcode intValue] == 1) {
-            NSArray *prdLabelsListTemp = [NSArray arrayWithArray:(NSArray*)_projectListModel.prdLabelsList];
-            UCFProjectDetailViewController *controller = [[UCFProjectDetailViewController alloc] initWithDataDic:dic isTransfer:NO withLabelList:prdLabelsListTemp];
-            CGFloat platformSubsidyExpense = [_projectListModel.platformSubsidyExpense floatValue];
-            [[NSUserDefaults standardUserDefaults] setValue:[NSString stringWithFormat:@"%.1f",platformSubsidyExpense] forKey:@"platformSubsidyExpense"];
-            [self.navigationController pushViewController:controller animated:YES];
+//            NSArray *prdLabelsListTemp = [NSArray arrayWithArray:(NSArray*)_projectListModel.prdLabelsList];
+//            UCFProjectDetailViewController *controller = [[UCFProjectDetailViewController alloc] initWithDataDic:dic isTransfer:NO withLabelList:prdLabelsListTemp];
+//            CGFloat platformSubsidyExpense = [_projectListModel.platformSubsidyExpense floatValue];
+//            [[NSUserDefaults standardUserDefaults] setValue:[NSString stringWithFormat:@"%.1f",platformSubsidyExpense] forKey:@"platformSubsidyExpense"];
+//            [self.navigationController pushViewController:controller animated:YES];
+            
+            
+//            NSArray *prdLabelsListTemp = [NSArray arrayWithArray:(NSArray*)_projectListModel.prdLabelsList];
+            UCFCollectionDetailViewController *controllerVC = [[UCFCollectionDetailViewController alloc] initWithNibName:@"UCFCollectionDetailViewController" bundle:nil];
+            controllerVC.souceVC = @"P2PVC";
+            [self.navigationController pushViewController:controllerVC animated:YES];
+            
         }else {
             [AuxiliaryFunc showAlertViewWithMessage:rsttext];
         }
