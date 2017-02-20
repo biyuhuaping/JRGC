@@ -13,12 +13,15 @@
 #import "UCFMyInvestViewController.h"       //我的项目
 #import "UCFMyClaimCtrl.h"                  //我的债转
 #import "UCFBackMoneyDetailViewController.h"//项目详情
+#import "UCFBatchProjectController.h"       //批量项目
 
 @interface MyViewController ()
 
 @property (strong, nonatomic) UISegmentedControl *segmentedCtrl;
 @property (strong, nonatomic) UCFMyInvestViewController *myInvest;//我的债权
 @property (strong, nonatomic) UCFMyClaimCtrl *myClaimCtrl;//我的债权
+@property (strong, nonatomic) UCFBatchProjectController *batchProject;//批量项目
+@property (weak, nonatomic)   UIViewController *currentController;//当前控制器
 
 @property (strong, nonatomic) IBOutlet UILabel *interestsLab;//累计收益
 @property (strong, nonatomic) IBOutlet UILabel *noPrincipalLab;//待收本金
@@ -35,7 +38,7 @@
     //尊享开关
     BOOL isShowHornor =  [[NSUserDefaults standardUserDefaults] boolForKey:@"isShowHornor"];
     NSString *titleStr = isShowHornor ? @"转入项目":@"我的债权" ;
-    _segmentedCtrl = [[UISegmentedControl alloc]initWithItems:@[@"我的项目",titleStr]];
+    _segmentedCtrl = [[UISegmentedControl alloc]initWithItems:@[@"我的项目",@"批量项目",titleStr]];
     DBLOG(@"%@",NSStringFromCGRect(self.view.frame));
     _segmentedCtrl.frame = CGRectMake(0, 0, ScreenWidth*5/8, 30);
     [_segmentedCtrl setTintColor:UIColorWithRGB(0x5b6993)];
@@ -51,9 +54,15 @@
     _myClaimCtrl = [[UCFMyClaimCtrl alloc]initWithNibName:@"UCFMyClaimCtrl" bundle:nil];
     _myClaimCtrl.view.frame = CGRectMake(0, 100, ScreenWidth, ScreenHeight - 164);
     [self addChildViewController:_myClaimCtrl];
+    
+    _batchProject = [[UCFBatchProjectController alloc]initWithNibName:@"UCFBatchProjectController" bundle:nil];
+    _batchProject.view.frame = CGRectMake(0, 100, ScreenWidth, ScreenHeight - 164);
+    [self addChildViewController:_batchProject];
 
     [self.view addSubview:_myInvest.view];
     [_myInvest didMoveToParentViewController:self];//确定关系建立
+    
+    self.currentController = self.myInvest;
     
     __weak typeof(self) weakSelf = self;
     _myInvest.setHeaderInfoBlock = ^(NSDictionary *data){
@@ -68,26 +77,32 @@
     };
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 - (void)segmentedValueChanged:(UISegmentedControl *)sender{
     DBLOG(@"%ld",(long)sender.selectedSegmentIndex);
-    if (sender.selectedSegmentIndex) {
-        [self transitionFromViewController:_myInvest toViewController:_myClaimCtrl duration:0 options:UIViewAnimationOptionLayoutSubviews animations:nil completion:^(BOOL finished) {
+    __weak typeof(self)weakSelf = self;
+    if (sender.selectedSegmentIndex==2) {
+        [self transitionFromViewController:self.currentController toViewController:_myClaimCtrl duration:0 options:UIViewAnimationOptionLayoutSubviews animations:nil completion:^(BOOL finished) {
             if (finished) {
-                [_myClaimCtrl didMoveToParentViewController:self];//确认关系
+                [weakSelf.myClaimCtrl didMoveToParentViewController:weakSelf];//确认关系
+                weakSelf.currentController = weakSelf.myClaimCtrl;
             }
         }];
-    }else{
-        [self transitionFromViewController:_myClaimCtrl toViewController:_myInvest duration:0 options:UIViewAnimationOptionLayoutSubviews animations:nil completion:^(BOOL finished) {
+    }else if (sender.selectedSegmentIndex==0) {
+        [self transitionFromViewController:self.currentController toViewController:_myInvest duration:0 options:UIViewAnimationOptionLayoutSubviews animations:nil completion:^(BOOL finished) {
             if (finished) {
-                [_myInvest didMoveToParentViewController:self];//确认关系
+                [weakSelf.myInvest didMoveToParentViewController:weakSelf];//确认关系
+                weakSelf.currentController = weakSelf.myInvest;
+            }
+        }];
+    }else if (sender.selectedSegmentIndex==1) {
+        [self transitionFromViewController:self.currentController toViewController:self.batchProject duration:0 options:UIViewAnimationOptionLayoutSubviews animations:nil completion:^(BOOL finished) {
+            if (finished) {
+                [weakSelf.batchProject didMoveToParentViewController:weakSelf];//确认关系
+                weakSelf.currentController = weakSelf.batchProject;
             }
         }];
     }
+    
 }
 //to回款明细页面
 - (IBAction)toBackMoneyDetailView:(id)sender {
