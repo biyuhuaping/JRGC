@@ -64,6 +64,7 @@
 		4A42BB2F1C27A7D20084AB08 /* NewCalculator.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A42BB2E1C27A7D20084AB08 /* NewCalculator.xib */; };
 		4A42BB321C27AC7B0084AB08 /* NewCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A42BB311C27AC7B0084AB08 /* NewCalculator.m */; };
 		4A4C792D1D6EA41E007F268E /* UserInfoSingle.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A4C792C1D6EA41E007F268E /* UserInfoSingle.m */; };
+		4A5552981E54413E00E69DA4 /* UCFBatchInvestmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A5552971E54413E00E69DA4 /* UCFBatchInvestmentViewController.m */; };
 		4A6678C11D61C2E900469826 /* UINavigationController+FDFullscreenPopGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A6678C01D61C2E900469826 /* UINavigationController+FDFullscreenPopGesture.m */; };
 		4A675E3E1C5F484400F21DDA /* SelectPayMoneyOrbeansCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A675E3C1C5F484400F21DDA /* SelectPayMoneyOrbeansCell.m */; };
 		4A675E3F1C5F484400F21DDA /* SelectPayMoneyOrbeansCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A675E3D1C5F484400F21DDA /* SelectPayMoneyOrbeansCell.xib */; };
@@ -799,6 +800,8 @@
 		4A42BB311C27AC7B0084AB08 /* NewCalculator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewCalculator.m; sourceTree = "<group>"; };
 		4A4C792B1D6EA41E007F268E /* UserInfoSingle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoSingle.h; sourceTree = "<group>"; };
 		4A4C792C1D6EA41E007F268E /* UserInfoSingle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoSingle.m; sourceTree = "<group>"; };
+		4A5552961E54413E00E69DA4 /* UCFBatchInvestmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFBatchInvestmentViewController.h; sourceTree = "<group>"; };
+		4A5552971E54413E00E69DA4 /* UCFBatchInvestmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFBatchInvestmentViewController.m; sourceTree = "<group>"; };
 		4A6678BF1D61C2E900469826 /* UINavigationController+FDFullscreenPopGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+FDFullscreenPopGesture.h"; sourceTree = "<group>"; };
 		4A6678C01D61C2E900469826 /* UINavigationController+FDFullscreenPopGesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+FDFullscreenPopGesture.m"; sourceTree = "<group>"; };
 		4A675E3B1C5F484400F21DDA /* SelectPayMoneyOrbeansCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectPayMoneyOrbeansCell.h; sourceTree = "<group>"; };
@@ -2543,6 +2546,8 @@
 				25F445C01D66E276006813BB /* UCFChoseBankViewController.h */,
 				25F445C11D66E276006813BB /* UCFChoseBankViewController.m */,
 				25F445C21D66E276006813BB /* UCFChoseBankViewController.xib */,
+				4A5552961E54413E00E69DA4 /* UCFBatchInvestmentViewController.h */,
+				4A5552971E54413E00E69DA4 /* UCFBatchInvestmentViewController.m */,
 			);
 			path = "SecurityCenter(安全中心)";
 			sourceTree = "<group>";
@@ -5139,6 +5144,7 @@
 				FBB685891AE4A76800F222B6 /* UIScrollView+MJExtension.m in Sources */,
 				FB4F9E731D62A6F800CCB492 /* TradePasswordVC.m in Sources */,
 				7B2E568E1ADBBE5F008B0F9E /* UCFRetrievePasswordStepOneViewController.m in Sources */,
+				4A5552981E54413E00E69DA4 /* UCFBatchInvestmentViewController.m in Sources */,
 				7477BF951AFB0F4C00914BFB /* UCFRedEnvelopeTableViewCell.m in Sources */,
 				7BC8A8A01AFB4EB0003A8D89 /* RegisterSuccessAlert.m in Sources */,
 				EDEC8C021CB3BAB300815228 /* NSMutableString+TagReplace.m in Sources */,
