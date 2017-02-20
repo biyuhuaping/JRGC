@@ -9,7 +9,8 @@
 #import "UCFBaseViewController.h"
 
 @interface UCFCollectionDetailViewController : UCFBaseViewController
-
+@property (nonatomic,strong) NSString *colPrdClaimId;//从哪个页面过来的
+@property (nonatomic,strong) NSDictionary *detailDataDict;
 @property (nonatomic,strong) NSString *souceVC;//从哪个页面过来的
 - (void)setProcessViewProcess:(CGFloat)process;
 @end

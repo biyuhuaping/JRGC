@@ -9,5 +9,6 @@
 #import "UCFBaseViewController.h"
 
 @interface UCFCollectionListViewController : UCFBaseViewController
-
+@property (nonatomic,strong) NSString *colPrdClaimId;//标id
+@property (nonatomic,strong) NSString *souceVC;//从哪个页面过来的
 @end

@@ -1148,15 +1148,15 @@ static NetworkModule *gInstance = NULL;
         }
             break;
         case kSXTagChildPrdclaimsList: {
-            parameter = [SERVER_IP stringByAppendingString:CHILDPRDCLAIMSLIST];
+            parameter = [NEW_SERVER_IP stringByAppendingString:CHILDPRDCLAIMSLIST];
         }
             break;
         case kSXTagColPrdclaimsDetail: {
-            parameter = [SERVER_IP stringByAppendingString:COLPRDCLAIMSDETAIL];
+            parameter = [NEW_SERVER_IP stringByAppendingString:COLPRDCLAIMSDETAIL];
         }
             break;
         case kSXTagColPrdclaimsList: {
-            parameter = [SERVER_IP stringByAppendingString:COLPRDCLAIMSLIST];
+            parameter = [NEW_SERVER_IP stringByAppendingString:COLPRDCLAIMSLIST];
         }
             break;
     }
