@@ -20,6 +20,8 @@
 }
 @property (nonatomic, strong) NSMutableArray *buttonArray;
 
+@property (nonatomic, assign) NSInteger currentSelectSortBtnTag;
+
 @end
 
 @implementation MjAlertView
@@ -241,6 +243,91 @@
     
     return self;
     
+}
+#pragma 集合标详情里的排序弹框
+-(instancetype)initCollectionViewWithTitle:(NSString *)title sortArray:(NSArray *)sortArray selectedSortButtonTag:(NSInteger)tag delegate:(id)delegate cancelButtonTitle:(NSString *)cancelButtonTitle withOtherButtonTitle:(NSString*)otherButtonTitle{
+    self = [self init];
+    if (self) {
+        
+        UIView * headerView  = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 250, 37)];
+        headerView.backgroundColor = UIColorWithRGB(0xf9f9f9);
+        [self.showView addSubview:headerView];
+        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 8, 100, 20)];
+        titleLabel.text = title ;
+        titleLabel.font = [UIFont systemFontOfSize:14];
+        titleLabel.textColor = UIColorWithRGB(0x333333);
+        titleLabel.textAlignment = NSTextAlignmentLeft;
+        [headerView addSubview:titleLabel];
+        UIView * lineView  = [[UIView alloc]initWithFrame:CGRectMake(0,CGRectGetMaxY(headerView.frame)-0.5 , CGRectGetWidth(headerView.frame), 0.5)];
+        lineView.backgroundColor = UIColorWithRGB(0xe3e5ea);
+        [headerView addSubview:lineView];
+        
+        float buttonWidth = 62.0f;
+        float buttonHeight = 27.0f;
+        
+        for (int i=0; i<sortArray.count; i++) {
+            UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+            button.frame = CGRectMake(15+(10+buttonWidth)*i, CGRectGetMaxY(headerView.frame)+20, buttonWidth, buttonHeight);
+            button.tag = i;
+            button.layer.cornerRadius = 2;
+            button.layer.borderWidth = 0.5;
+            button.layer.borderColor = [UIColor whiteColor].CGColor;
+            if (i == tag ) {
+                _currentSelectSortBtnTag = tag;
+                [button setSelected:YES];
+                 button.layer.borderColor = UIColorWithRGB(0xfd4d4c).CGColor;
+            }
+            button.titleLabel.font = [UIFont systemFontOfSize:12];
+            [button setTitleColor:UIColorWithRGB(0x55555) forState:UIControlStateNormal];
+            [button setTitleColor:UIColorWithRGB(0xfd4d4c) forState:UIControlStateSelected];
+            [button setTitle:(NSString *)sortArray[i] forState:UIControlStateNormal];
+            [button addTarget:self action:@selector(clickSortButton:) forControlEvents:UIControlEventTouchUpInside];
+            [self.showView addSubview:button];
+            [self.buttonArray addObject:button];
+        }
+        UIButton *cancel = [UIButton buttonWithType:UIButtonTypeCustom];
+        if (cancelButtonTitle) {
+            cancel.frame = CGRectMake(CGRectGetWidth(headerView.frame)-15-13,8.5,13, 13);
+            [cancel setBackgroundImage:[UIImage imageNamed:@"calculator_close1.png"] forState:UIControlStateNormal];
+            [cancel addTarget:self action:@selector(clickConfirmButton:) forControlEvents:UIControlEventTouchUpInside];
+            cancel.tag = CancelButtonTag;
+            [self.showView  addSubview:cancel];
+        }
+        UIButton *otherButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        if (otherButtonTitle) {
+            otherButton.frame = CGRectMake(15, CGRectGetMaxY(headerView.frame)+20*2+buttonHeight, 250-30, 37);;
+            otherButton.backgroundColor = UIColorWithRGB(0xfd4d4c);
+            otherButton.titleLabel.font = [UIFont systemFontOfSize:16];
+            otherButton.layer.cornerRadius = 2;
+            [otherButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            [otherButton setTitle:otherButtonTitle forState:UIControlStateNormal];
+            otherButton.tag =CancelButtonTag +1;
+            [otherButton addTarget:self action:@selector(clickConfirmButton:) forControlEvents:UIControlEventTouchUpInside];
+            [self.showView  addSubview:otherButton];
+        }
+
+        [self.showView  setFrame:CGRectMake(0, 0, 250, CGRectGetMaxY(otherButton.frame)+15)];
+        self.showView.layer.cornerRadius = 5;
+        self.showView.layer.masksToBounds = YES;
+        self.showView.backgroundColor = [UIColor whiteColor];
+        self.alertviewType = MjAlertViewTypeCustom;
+        self.delegate = delegate;
+        // 默认显示动画类型
+        self.alertAnimateType = MjAlertViewAnimateTypeNone;
+    }
+    return self;
+}
+-(void)clickSortButton:(UIButton*)sortButton{
+    if (_currentSelectSortBtnTag != sortButton.tag) {
+        //置灰上一个选择的button
+        UIButton *beforeBtn = _buttonArray[_currentSelectSortBtnTag];
+        [beforeBtn setSelected:NO];
+        beforeBtn.layer.borderColor = [UIColor whiteColor].CGColor;
+        //设置当前选择的button
+        [sortButton setSelected:YES];
+        sortButton.layer.borderColor = UIColorWithRGB(0xfd4d4c).CGColor;
+        _currentSelectSortBtnTag = sortButton.tag;
+    }
 }
 - (void)webViewDidFinishLoad:(UIWebView*)webView{
     //字体大小
@@ -493,6 +580,14 @@
         [self hide];
     }
     else if (button == self.cancelButton) {
+        [self hide];
+    }
+}
+//集合标详情 项目排序弹框 点击确认 按钮 触发该事件
+- (void)clickConfirmButton:(UIButton *)button
+{
+    if ([self.delegate respondsToSelector:@selector(mjalertView:didClickedButton:andClickedIndex:)]) {
+        [self.delegate mjalertView:self didClickedButton:button andClickedIndex:_currentSelectSortBtnTag];
         [self hide];
     }
 }
