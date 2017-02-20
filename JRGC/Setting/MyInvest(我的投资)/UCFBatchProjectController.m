@@ -8,26 +8,15 @@
 
 #import "UCFBatchProjectController.h"
 #import "UCFInvestmentDetailViewController.h"
-
-#import "UCFSelectItemView.h"
 #import "UCFNoDataView.h"
+#import "UCFMyInvestBatchBidModel.h"
+#import "UCFMyInvestBatchCell.h"
 
-@interface UCFBatchProjectController () <UITableViewDelegate, UITableViewDataSource, UCFSelectItemViewDelegate>
-@property (strong, nonatomic) UITableView *tableView1;
-@property (strong, nonatomic) UITableView *tableView2;
-@property (strong, nonatomic) UITableView *tableView3;
-@property (weak, nonatomic) IBOutlet UCFSelectItemView *selectItemView;
-@property (weak, nonatomic) IBOutlet UIScrollView *bgScrollView;
+@interface UCFBatchProjectController () <UITableViewDelegate, UITableViewDataSource>
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
 
-@property (strong, nonatomic) NSMutableArray *dataArr1;
-@property (strong, nonatomic) NSMutableArray *dataArr2;
-@property (strong, nonatomic) NSMutableArray *dataArr3;
-
-@property (assign, nonatomic) NSInteger pageNum1;
-@property (assign, nonatomic) NSInteger pageNum2;
-@property (assign, nonatomic) NSInteger pageNum3;
-
-@property (strong, nonatomic) NSMutableArray *didClickBtns;
+@property (strong, nonatomic) NSMutableArray *dataArray;
+@property (assign, nonatomic) NSInteger pageNum;
 
 // 无数据界面
 @property (strong, nonatomic) UCFNoDataView *noDataView;
@@ -41,142 +30,60 @@
     
 #pragma mark - set scrollview
     
-    CGFloat height = ScreenHeight -240 ;
-    self.bgScrollView.contentSize = CGSizeMake(ScreenWidth*3, height);
-#pragma mark - init tableview
-    [self addAndSetTablesWithHeight:height andWidth:ScreenWidth];
-#pragma mark - setting selectItem
-    self.selectItemView.delegate = self;
+    CGFloat height = ScreenHeight -240+44;
+    self.tableView.backgroundColor = UIColorWithRGB(0xebebee);
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 #pragma mark - init no data view
-    self.noDataView = [[UCFNoDataView alloc] initWithFrame:self.tableView1.bounds errorTitle:@"暂无数据"];
-#pragma mark - init item did click array 
-    [self.didClickBtns addObject:@(0)];
+    self.noDataView = [[UCFNoDataView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, height) errorTitle:@"暂无数据"];
 #pragma mark - init Net request
     [self initNetRequest];
-    
     // 马上进入刷新状态
-    [_tableView1.header beginRefreshing];
-}
-
-#pragma mark - add and set tableviews
-
-- (void)addAndSetTablesWithHeight:(CGFloat)height andWidth:(CGFloat)width
-{
-    UITableView *tableView1 = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, width, height) style:UITableViewStylePlain];
-    tableView1.delegate = self;
-    tableView1.dataSource = self;
-    [self.bgScrollView addSubview:tableView1];
-    self.tableView1 = tableView1;
-    
-    UITableView *tableView2 = [[UITableView alloc]initWithFrame:CGRectMake(width, 0, width, height) style:UITableViewStylePlain];
-    tableView2.delegate = self;
-    tableView2.dataSource = self;
-    [self.bgScrollView addSubview:tableView2];
-    self.tableView2 = tableView2;
-    
-    UITableView *tableView3 = [[UITableView alloc]initWithFrame:CGRectMake(width*2, 0, width, height) style:UITableViewStylePlain];
-    tableView3.delegate = self;
-    tableView3.dataSource = self;
-    [self.bgScrollView addSubview:tableView3];
-    self.tableView3 = tableView3;
-    
-    tableView1.separatorStyle = UITableViewCellSeparatorStyleNone;
-    tableView2.separatorStyle = UITableViewCellSeparatorStyleNone;
-    tableView3.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
-    tableView1.backgroundColor = UIColorWithRGB(0xebebee);
-    tableView2.backgroundColor = UIColorWithRGB(0xebebee);
-    tableView3.backgroundColor = UIColorWithRGB(0xebebee);
-    
-    // 是否支持点击状态栏回到最顶端
-    tableView1.scrollsToTop = YES;
-    tableView2.scrollsToTop = NO;
-    tableView3.scrollsToTop = NO;
+    [self.tableView.header beginRefreshing];
 }
 
 #pragma mark - init Net request
 - (void)initNetRequest
 {
-    self.pageNum1 = 1;
-    self.pageNum2 = 1;
-    self.pageNum3 = 1;
-    
+    self.pageNum = 1;
     //=========  下拉刷新、上拉加载更多  =========
     __weak typeof(self) weakSelf = self;
     
     // 添加上拉加载更多
-    [_tableView1 addLegendFooterWithRefreshingBlock:^{
+    [self.tableView addLegendFooterWithRefreshingBlock:^{
         [weakSelf getBatchInvestDataList];
     }];
     
-    // 添加上拉加载更多
-    [_tableView2 addLegendFooterWithRefreshingBlock:^{
-        [weakSelf getBatchInvestDataList];
-    }];
-    
-    // 添加上拉加载更多
-    [_tableView3 addLegendFooterWithRefreshingBlock:^{
-        [weakSelf getBatchInvestDataList];
-    }];
-    
-    [_tableView1 addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(getBatchInvestDataList)];
-    [_tableView2 addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(getBatchInvestDataList)];
-    [_tableView3 addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(getBatchInvestDataList)];
-    
-    _tableView1.footer.hidden = YES;
-    _tableView2.footer.hidden = YES;
-    _tableView3.footer.hidden = YES;
+    [self.tableView addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(getBatchInvestDataList)];
+    self.tableView.footer.hidden = YES;
 }
 
 #pragma mark - tableview delegate and datasource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (tableView == self.tableView1) {
-        return 2;
-    }
-    else if (tableView == self.tableView2) {
-        return 3;
-    }
-    else if (tableView == self.tableView3) {
-        return 4;
-    }
-    return 0;
+    return self.dataArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    if (self.tableView1 == tableView) {
-//
-//    }
-//    else if (self.tableView2 == tableView) {
-//        
-//    }
-//    else if (self.tableView3 == tableView) {
-//        
-//    }
-    static NSString *cellID = @"cel";
-    UITableViewCell  *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+    static NSString *cellID = @"myInvestBatchBid";
+    UCFMyInvestBatchCell  *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+        cell = [[[NSBundle mainBundle] loadNibNamed:@"UCFMyInvestBatchCell" owner:self options:nil] lastObject];
     }
-    cell.textLabel.text = [NSString stringWithFormat:@"%ld", (long)indexPath.row];
+    UCFMyInvestBatchBidModel *model = [self.dataArray objectAtIndex:indexPath.row];
+    cell.model = model;
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 155;
 }
 
 // 选中某cell时。
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    //    [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    NSMutableArray *temp = nil;
-    if (_tableView1 == tableView) {
-        temp = _dataArr1;
-    }
-    else if (_tableView2 == tableView) {
-        temp = _dataArr2;
-    }
-    else if (_tableView3 == tableView) {
-        temp = _dataArr3;
-    }
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
 //    NSDictionary *dict = temp[indexPath.row];
     UCFInvestmentDetailViewController *controller = [[UCFInvestmentDetailViewController alloc] init];
 //    controller.billId = dict[@"prdOrderId"];
@@ -187,87 +94,100 @@
 #pragma mark - net request
 - (void)getBatchInvestDataList
 {
+    if (self.tableView.header.isRefreshing) {
+        _pageNum = 1;
+    }else if (self.tableView.footer.isRefreshing){
+        _pageNum ++;
+    }
     
+    NSString *uuid = [[NSUserDefaults standardUserDefaults]valueForKey:UUID];
+    NSDictionary *strParameters;
+    if ([self.tableView.header isRefreshing]) {
+        self.pageNum = 1;
+        [self.tableView.footer resetNoMoreData];
+    }
+    strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:uuid,@"userId", [NSString stringWithFormat:@"%ld", (long)self.pageNum], @"page", @"20", @"pageSize", nil];
+    
+    
+    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagMyInvestBatchBid owner:self signature:YES];
 }
 
-#pragma mark - selectItem delegate
-- (void)selectItemView:(UCFSelectItemView *)selectItemView selectedButton:(UIButton *)button
+//开始请求
+- (void)beginPost:(kSXTag)tag
 {
-    NSInteger index = button.tag - 110;
-    CGFloat offset = ScreenWidth*index;
-    [self.bgScrollView setContentOffset:CGPointMake(offset, 0) animated:YES];
+    //    [GiFHUD show];
+}
+
+//请求成功及结果
+- (void)endPost:(id)result tag:(NSNumber *)tag
+{
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    //    DBLOG(@"首页获取最新项目列表：%@",data);
     
-    // 是否支持点击状态栏回到最顶端
-    _tableView1.scrollsToTop = NO;
-    _tableView2.scrollsToTop = NO;
-    _tableView3.scrollsToTop = NO;
+    NSMutableDictionary *dic = [result objectFromJSONString];
     
-    // 是否支持点击状态栏回到最顶端
-    switch (index) {
-        case 0:{
-            self.tableView1.scrollsToTop = YES;
+    if (tag.intValue == kSXTagMyInvestBatchBid) {
+        NSString *rstcode = dic[@"ret"];
+        NSString *rsttext = dic[@"message"];
+        if ([rstcode intValue] == 1) {
+            NSArray *list_result = [[[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"pageData"] objectSafeArrayForKey:@"result"];
+            
+            if ([self.tableView.header isRefreshing]) {
+                [self.dataArray removeAllObjects];
+            }
+            self.pageNum ++;
+            for (NSDictionary *dict in list_result) {
+                UCFMyInvestBatchBidModel *model = [UCFMyInvestBatchBidModel investBatchListWithDict:dict];
+                [self.dataArray addObject:model];
+            }
+            
+            [self.tableView reloadData];
+            
+            BOOL hasNext = [[[[[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"pageData"] objectSafeDictionaryForKey:@"pagination"] objectForKey:@"hasNextPage"] boolValue];
+            
+            if (self.dataArray.count > 0) {
+                [self.noDataView hide];
+                if (!hasNext) {
+                    [self.tableView.footer noticeNoMoreData];
+                }
+            }
+            else {
+                [self.noDataView showInView:self.tableView];
+            }
+        }else {
+            [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
         }
-            break;
-        case 1:{
-            self.tableView2.scrollsToTop = YES;
-        }
-            break;
-        case 2:{
-            self.tableView3.scrollsToTop = YES;
-        }
-            break;
     }
-    
-    if (![_didClickBtns containsObject:@(index)]) {
-        [_didClickBtns addObject:@(index)];
-        switch (index) {
-            case 0:{
-                [self.tableView1.header beginRefreshing];
-            }
-                break;
-            case 1:{
-                [self.tableView2.header beginRefreshing];
-            }
-                break;
-            case 2:{
-                [self.tableView3.header beginRefreshing];
-            }
-                break;
-        }
+    if ([self.tableView.header isRefreshing]) {
+        [self.tableView.header endRefreshing];
+    }
+    if ([self.tableView.footer isRefreshing]) {
+        [self.tableView.footer endRefreshing];
     }
 }
+
+//请求失败
+- (void)errorPost:(NSError*)err tag:(NSNumber*)tag
+{
+    [MBProgressHUD displayHudError:err.userInfo[@"NSLocalizedDescription"]];
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    if ([self.tableView.header isRefreshing]) {
+        [self.tableView.header endRefreshing];
+    }
+    if ([self.tableView.footer isRefreshing]) {
+        [self.tableView.footer endRefreshing];
+    }
+}
+
+
 
 #pragma mark - lazying load 
-- (NSMutableArray *)dataArr1
+- (NSMutableArray *)dataArray
 {
-    if (!_dataArr1) {
-        _dataArr1 = [NSMutableArray array];
+    if (!_dataArray) {
+        _dataArray = [NSMutableArray array];
     }
-    return _dataArr1;
-}
-
-- (NSMutableArray *)dataArr2
-{
-    if (!_dataArr2) {
-        _dataArr2 = [NSMutableArray array];
-    }
-    return _dataArr2;
-}
-
-- (NSMutableArray *)dataArr3
-{
-    if (!_dataArr3) {
-        _dataArr3 = [NSMutableArray array];
-    }
-    return _dataArr3;
-}
-
-- (NSMutableArray *)didClickBtns
-{
-    if (!_didClickBtns) {
-        _didClickBtns = [NSMutableArray array];
-    }
-    return _didClickBtns;
+    return _dataArray;
 }
 
 @end

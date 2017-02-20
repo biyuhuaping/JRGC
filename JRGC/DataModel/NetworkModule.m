@@ -1147,6 +1147,14 @@ static NetworkModule *gInstance = NULL;
             parameter = [SERVER_IP stringByAppendingString:GETWORKPOINT];
         }
             break;
+        case kSXTagProjectListBatchBid: {
+            parameter = [SERVER_IP stringByAppendingString:PROJECTLISTBATCHBID];
+        }
+            break;
+        case kSXTagMyInvestBatchBid: {
+            parameter = [SERVER_IP stringByAppendingString:MYINVESTBATCHBID];
+        }
+            break;
         case kSXTagChildPrdclaimsList: {
             parameter = [SERVER_IP stringByAppendingString:CHILDPRDCLAIMSLIST];
         }

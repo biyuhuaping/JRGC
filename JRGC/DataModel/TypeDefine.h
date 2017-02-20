@@ -186,6 +186,8 @@
 #define PRESENTCOUPON       @"api/discountCoupon/v2/presentCoupon.json"         //赠送好友券
 #define DATASTATICS         @"api/inviteRebate/v2/rebateStatistic.json"         // 数据统计
 #define REDBAGRAIN          @"api/homePage/v2/getRedBagRainInfo.json"
+#define PROJECTLISTBATCHBID @"api/prdClaims/v2/colPrdclaimsList.json"  //项目列表中的批量列表
+#define MYINVESTBATCHBID    @"api/myInvest/v2/myBatchInvest.json"     //我的投资的批量投资列表
 
 #define PROJECTLIST         @"api/prdClaims/v2/more.json"     //项目标列表
 #define TRANSFERLIST        @"api/prdTransfer/v2/getTranPageList.json"     //转让列表
@@ -382,10 +384,11 @@ enum kSXTag
     kSXTagIsShowHornor,                 //是否显示尊享
     kSXTagValidateOldPhoneNo,            //校验注册手机号
     kSXTagDataStatics,                  //数据统计
+    kSXTagProjectListBatchBid,          //项目列表中的批量投资列表
+    kSXTagMyInvestBatchBid,             //我的投资中的批量投资列表
     kSXTagChildPrdclaimsList,           //集合标子标列表
     kSXTagColPrdclaimsDetail,           //集合标详情
     kSXTagColPrdclaimsList              //集合标列表
-    
 };
 
 typedef enum kSXTag kSXTag;
