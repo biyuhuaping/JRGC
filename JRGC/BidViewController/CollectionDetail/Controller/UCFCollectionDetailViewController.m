@@ -390,10 +390,8 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
     _listTableView.backgroundColor = UIColorWithRGB(0xebebee);
     _listTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [_listTableView registerNib:[UINib nibWithNibName:@"UCFCollectionListCell" bundle:nil] forCellReuseIdentifier:ListCellID];
-    UIView *tableBackgroundView = [[UIView alloc]initWithFrame:_listTableView.frame];
-    tableBackgroundView.backgroundColor = UIColorWithRGB(0xebebee);
-    [tableBackgroundView addSubview:_listTableView];
-    [self.collectionScrollView addSubview: tableBackgroundView];
+
+    [self.collectionScrollView addSubview:_listTableView];
     
     
     __weak typeof(self)  weakSelf = self;
@@ -418,10 +416,11 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
     [sortAlertView show];
 }
 -(void)mjalertView:(MjAlertView *)alertview didClickedButton:(UIButton *)clickedButton andClickedIndex:(NSInteger)index{
-    
-    _currentSelectSortTag = index;
-    
-    
+    if (clickedButton.tag != 0) {
+       _currentSelectSortTag = index;
+        [self.listTableView.header isRefreshing];
+        [self getCollectionDetailHttpRequest];
+    }
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -585,12 +584,16 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
     NSString *prdClaimsOrderStr = @"";
     switch (_currentSelectSortTag) {
         case 1:
+            self.currentPage = 1;
             prdClaimsOrderStr = @"32";//
             break;
         case 2:
+            self.currentPage = 1;
             prdClaimsOrderStr = @"31";
             break;
+          
         default:
+            self.currentPage = 1;
             prdClaimsOrderStr = @"00";
             break;
     }
@@ -618,13 +621,12 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
             NSArray *list_result = [[[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"pageData"] objectSafeArrayForKey:@"result"];
              BOOL hasNext = [[[[dic objectSafeDictionaryForKey:@"pageData"] objectSafeDictionaryForKey:@"pagination"] objectSafeForKey:@"hasNextPage"] boolValue];
             
-            if ([self.listTableView.header isRefreshing]) {
-                if (_selectIndex == 0) {
+    
+            if (_selectIndex == 0 && self.currentPage == 1) {
                       [self.investmentProjectDataArray removeAllObjects];
-                }else{
+                }else if (_selectIndex == 1 && self.currentPage == 1) {
                      [self.fullProjectDataArray removeAllObjects];
                 }
-            }
             
             for (NSDictionary *dict in list_result)
             {

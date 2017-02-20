@@ -203,6 +203,9 @@
 #define COLPRDCLAIMSDETAIL   @"api/prdClaims/v2/colPrdclaimsDetail.json" //集合标详情
 #define COLPRDCLAIMSLIST     @"api/prdClaims/v2/colPrdclaimsList.json"   //集合标列表
 
+#define MYBATCHINVESTDETAIL   @"api/myInvest/v2/myBatchInvestDetail.json" //我的投资-集合标明细
+
+
 
 enum kPostStatus{
     kPostStatusNone=0,
@@ -395,7 +398,8 @@ enum kSXTag
     kSXTagMyInvestBatchBid,             //我的投资中的批量投资列表
     kSXTagChildPrdclaimsList,           //集合标子标列表
     kSXTagColPrdclaimsDetail,           //集合标详情
-    kSXTagColPrdclaimsList              //集合标列表
+    kSXTagColPrdclaimsList,           //集合标列表
+    kSXTagMyBatchInvestDetail            //我的投资-集合标明细
 
 };
 
