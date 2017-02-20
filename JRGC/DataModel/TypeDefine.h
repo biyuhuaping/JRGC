@@ -192,7 +192,8 @@
 #define GETCONTRACTMSG      @"newPrdClaims/getContractMsg" //查看合同详情
 #define ISSHOWHORNOR        @"api/prdClaims/v2/zxSwitch.json"   //是否显示尊享
 #define VALIDATEOLDPHONENO   @"/api/userInfo/v2/validateOldPhoneNo.json"//校验注册手机号
-
+#define GetBatchInvestLimit  @"api/userAccount/v2/getBatchInvestLimit.json" //查询批量投标最大额
+#define SetBatchInvestNum    @"api/userAccount/v2/openBatchInvest.json"  //设置批量投标最大额
 enum kPostStatus{
     kPostStatusNone=0,
     kPostStatusBeging=1,
@@ -378,7 +379,8 @@ enum kSXTag
     kSXTagIsShowHornor,                 //是否显示尊享
     kSXTagValidateOldPhoneNo,            //校验注册手机号
     kSXTagDataStatics,                  //数据统计
-    
+    kSXTagBatchNumList,                  //查询批量投标最大值额度列表
+    kSXTagSetBatchNum,                   //设置投标最大值额度
 };
 
 typedef enum kSXTag kSXTag;

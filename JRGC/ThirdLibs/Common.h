@@ -223,4 +223,7 @@ typedef NS_ENUM(NSInteger, PicType) {
 +(UIImage *) getImageFromURL:(NSString *)fileURL;
 
 + (void)storeImage:(NSURL *)imagePath2;
+//batch按钮的背景图片获取方法
++ (UIImage *)batchImageSelectedState:(CGRect)rect;
++ (UIImage *)batchImageNormalState:(CGRect)rect;
 @end

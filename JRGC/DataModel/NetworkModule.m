@@ -1147,6 +1147,16 @@ static NetworkModule *gInstance = NULL;
             parameter = [SERVER_IP stringByAppendingString:GETWORKPOINT];
         }
             break;
+        case kSXTagBatchNumList: {
+            parameter = [SERVER_IP stringByAppendingString:GetBatchInvestLimit];
+        }
+            break;
+        case kSXTagSetBatchNum: {
+            parameter = [SERVER_IP stringByAppendingString:SetBatchInvestNum];
+        }
+            break;
+            
+            
     }
     //给原有参数字典添加公共参数
     if (!data) {
