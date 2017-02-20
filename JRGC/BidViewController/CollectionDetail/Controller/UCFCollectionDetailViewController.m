@@ -501,7 +501,7 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
 #pragma mark 网络请求
 -(void)getCollectionDetailHttpRequest{
     NSString *uuid = [[NSUserDefaults standardUserDefaults]valueForKey:UUID];
-    NSDictionary *strParameters;
+    NSDictionary *dataDict;
     if ([self.listTableView.header isRefreshing]) {
         self.currentPage = 1;
         [self.listTableView.footer resetNoMoreData];
@@ -509,19 +509,44 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
     else if ([self.listTableView.footer isRefreshing]) {
         self.currentPage ++;
     }
+    
+    
+    /*
+     colPrdClaimId	集合标id	string
+     page	页码	string
+     pageSize	每页条数	string
+     prdClaimsOrder	排序	string	00默认排序,31可投资额降序,32可投资额度升序
+     status	标状态	string	0可投,1已满
+     
+     
+     
+     */
+    NSString *prdClaimsOrderStr = @"";
+    switch (_currentSelectSortTag) {
+        case 1:
+            prdClaimsOrderStr = @"32";
+            break;
+        case 2:
+            prdClaimsOrderStr = @"31";
+            break;
+        default:
+            prdClaimsOrderStr = @"00";
+            break;
+    }
     if (uuid) {
-        strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:uuid,@"userId", [NSString stringWithFormat:@"%ld", (long)self.currentPage], @"page", @"20", @"pageSize", @"11", @"type", nil];
+
+        dataDict  = @{@"colPrdClaimId":@"",@"page":@(self.currentPage),@"pageSize":@"20",@"prdClaimsOrder":prdClaimsOrderStr,@"status":@(_selectIndex)};
     }
     else {
-        strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%ld", (long)self.currentPage], @"page", @"20", @"pageSize", @"11", @"type", nil];
+        dataDict  = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%ld", (long)self.currentPage], @"page", @"20", @"pageSize", @"11", @"type", nil];
     }
-    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagProjectList owner:self signature:YES];
+    [[NetworkModule sharedNetworkModule] newPostReq:dataDict tag:kSXTagChildPrdclaimsList owner:self signature:YES];
 }
 -(void)getCollectionListHttpRequest{
     
 }
 -(void)beginPost:(kSXTag)tag{
-    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 }
 -(void)endPost:(id)result tag:(NSNumber *)tag{
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
@@ -529,7 +554,7 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
     
     NSMutableDictionary *dic = [result objectFromJSONString];
     
-    if (tag.intValue == kSXTagProjectList) {
+    if (tag.intValue == kSXTagChildPrdclaimsList){
         NSString *rstcode = dic[@"ret"];
         NSString *rsttext = dic[@"message"];
         if ([rstcode intValue] == 1) {
