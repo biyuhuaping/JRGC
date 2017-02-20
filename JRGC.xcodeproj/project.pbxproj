@@ -89,6 +89,8 @@
 		4A9016881AFB12FE0049A9E0 /* View+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A90167C1AFB12FE0049A9E0 /* View+MASAdditions.m */; };
 		4A9230451B68B2D800E5844C /* UIImageView+NetImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A9230441B68B2D800E5844C /* UIImageView+NetImageView.m */; };
 		4A9F15BA1B0EC9B1009A7365 /* CoupleHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A9F15B91B0EC9B1009A7365 /* CoupleHeadView.m */; };
+		4AA2AA801E5B17B7006E83F8 /* UCFBatchSetNumWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AA2AA7E1E5B17B7006E83F8 /* UCFBatchSetNumWebViewController.m */; };
+		4AA2AA811E5B17B7006E83F8 /* UCFBatchSetNumWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AA2AA7F1E5B17B7006E83F8 /* UCFBatchSetNumWebViewController.xib */; };
 		4AB1260C1AEF8EA400E915F1 /* UCFPurchaseBidViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AB1260A1AEF8EA400E915F1 /* UCFPurchaseBidViewController.xib */; };
 		4AB3EF231E287CD6007A6AF8 /* RiskAssessmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB3EF211E287CD6007A6AF8 /* RiskAssessmentViewController.m */; };
 		4AB3EF241E287CD6007A6AF8 /* RiskAssessmentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AB3EF221E287CD6007A6AF8 /* RiskAssessmentViewController.xib */; };
@@ -98,6 +100,7 @@
 		4ABED3A91E2FACE3006B3F62 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ABED3A81E2FACE3006B3F62 /* UserNotifications.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		4ABED3AB1E2FB28E006B3F62 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ABED3AA1E2FB28E006B3F62 /* libresolv.tbd */; };
 		4AC08B471B09BE4000DF8075 /* CalculatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC08B461B09BE4000DF8075 /* CalculatorView.m */; };
+		4AC947D71E5598F600354CF8 /* BatchSetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC947D61E5598F600354CF8 /* BatchSetView.m */; };
 		4ACB399A1E1216DD00E9BA8C /* FestivalActivitiesWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACB39981E1216DD00E9BA8C /* FestivalActivitiesWebView.m */; };
 		4ACB399B1E1216DD00E9BA8C /* FestivalActivitiesWebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4ACB39991E1216DD00E9BA8C /* FestivalActivitiesWebView.xib */; };
 		4AD6B4C61B32D33E00D94140 /* CycleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD6B4C51B32D33E00D94140 /* CycleView.m */; };
@@ -129,7 +132,6 @@
 		740AC6401DDC2AAE0058BC60 /* UCFProjectListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 740AC63E1DDC2AAE0058BC60 /* UCFProjectListController.xib */; };
 		740DAEC11E56E2D100CD7C8F /* UCFBatchProjectController.m in Sources */ = {isa = PBXBuildFile; fileRef = 740DAEBF1E56E2D100CD7C8F /* UCFBatchProjectController.m */; };
 		740DAEC21E56E2D100CD7C8F /* UCFBatchProjectController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 740DAEC01E56E2D100CD7C8F /* UCFBatchProjectController.xib */; };
-		740DAEC51E56F84A00CD7C8F /* UCFSelectItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 740DAEC41E56F84A00CD7C8F /* UCFSelectItemView.m */; };
 		741EB1861D596EF2006C885F /* UCFTableCellOne.m in Sources */ = {isa = PBXBuildFile; fileRef = 741EB1841D596EF2006C885F /* UCFTableCellOne.m */; };
 		741EB1871D596EF2006C885F /* UCFTableCellOne.xib in Resources */ = {isa = PBXBuildFile; fileRef = 741EB1851D596EF2006C885F /* UCFTableCellOne.xib */; };
 		741EB18A1D59829E006C885F /* UCFTableCellTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = 741EB1891D59829E006C885F /* UCFTableCellTwo.m */; };
@@ -265,6 +267,10 @@
 		74F2911F1AE0DBF2003E0E86 /* UCFTopUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F2911E1AE0DBF2003E0E86 /* UCFTopUpViewController.m */; };
 		74F291221AE0DBFC003E0E86 /* UCFCashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F291211AE0DBFC003E0E86 /* UCFCashViewController.m */; };
 		74F2AF891D616924008C433C /* UCFHuiBuinessListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F2AF881D616924008C433C /* UCFHuiBuinessListModel.m */; };
+		74F490DF1E5ACAB70057AC62 /* UCFBatchBidModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F490DE1E5ACAB70057AC62 /* UCFBatchBidModel.m */; };
+		74F490E51E5AF2660057AC62 /* UCFMyInvestBatchBidModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F490E41E5AF2660057AC62 /* UCFMyInvestBatchBidModel.m */; };
+		74F490E91E5B0BD70057AC62 /* UCFMyInvestBatchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F490E71E5B0BD70057AC62 /* UCFMyInvestBatchCell.m */; };
+		74F490EA1E5B0BD70057AC62 /* UCFMyInvestBatchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74F490E81E5B0BD70057AC62 /* UCFMyInvestBatchCell.xib */; };
 		74FBC1BD1B84721400B8DD7E /* UCFBindCardTwoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74FBC1BB1B84721400B8DD7E /* UCFBindCardTwoTableViewCell.m */; };
 		74FBC1BE1B84721400B8DD7E /* UCFBindCardTwoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74FBC1BC1B84721400B8DD7E /* UCFBindCardTwoTableViewCell.xib */; };
 		74FC227E1BA6A5BB00D1660A /* UCFOverDueListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74FC227D1BA6A5BB00D1660A /* UCFOverDueListViewController.xib */; };
@@ -858,6 +864,9 @@
 		4A9230441B68B2D800E5844C /* UIImageView+NetImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+NetImageView.m"; sourceTree = "<group>"; };
 		4A9F15B81B0EC9B1009A7365 /* CoupleHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoupleHeadView.h; sourceTree = "<group>"; };
 		4A9F15B91B0EC9B1009A7365 /* CoupleHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoupleHeadView.m; sourceTree = "<group>"; };
+		4AA2AA7D1E5B17B7006E83F8 /* UCFBatchSetNumWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFBatchSetNumWebViewController.h; sourceTree = "<group>"; };
+		4AA2AA7E1E5B17B7006E83F8 /* UCFBatchSetNumWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFBatchSetNumWebViewController.m; sourceTree = "<group>"; };
+		4AA2AA7F1E5B17B7006E83F8 /* UCFBatchSetNumWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFBatchSetNumWebViewController.xib; sourceTree = "<group>"; };
 		4AB126081AEF8EA400E915F1 /* UCFPurchaseBidViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFPurchaseBidViewController.h; sourceTree = "<group>"; };
 		4AB1260A1AEF8EA400E915F1 /* UCFPurchaseBidViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFPurchaseBidViewController.xib; sourceTree = "<group>"; };
 		4AB3EF201E287CD6007A6AF8 /* RiskAssessmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RiskAssessmentViewController.h; sourceTree = "<group>"; };
@@ -871,6 +880,8 @@
 		4ABED3AA1E2FB28E006B3F62 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
 		4AC08B451B09BE4000DF8075 /* CalculatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalculatorView.h; sourceTree = "<group>"; };
 		4AC08B461B09BE4000DF8075 /* CalculatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalculatorView.m; sourceTree = "<group>"; };
+		4AC947D51E5598F600354CF8 /* BatchSetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BatchSetView.h; sourceTree = "<group>"; };
+		4AC947D61E5598F600354CF8 /* BatchSetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BatchSetView.m; sourceTree = "<group>"; };
 		4ACB39971E1216DD00E9BA8C /* FestivalActivitiesWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FestivalActivitiesWebView.h; sourceTree = "<group>"; };
 		4ACB39981E1216DD00E9BA8C /* FestivalActivitiesWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FestivalActivitiesWebView.m; sourceTree = "<group>"; };
 		4ACB39991E1216DD00E9BA8C /* FestivalActivitiesWebView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FestivalActivitiesWebView.xib; sourceTree = "<group>"; };
@@ -930,8 +941,6 @@
 		740DAEBE1E56E2D100CD7C8F /* UCFBatchProjectController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFBatchProjectController.h; sourceTree = "<group>"; };
 		740DAEBF1E56E2D100CD7C8F /* UCFBatchProjectController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFBatchProjectController.m; sourceTree = "<group>"; };
 		740DAEC01E56E2D100CD7C8F /* UCFBatchProjectController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFBatchProjectController.xib; sourceTree = "<group>"; };
-		740DAEC31E56F84A00CD7C8F /* UCFSelectItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFSelectItemView.h; sourceTree = "<group>"; };
-		740DAEC41E56F84A00CD7C8F /* UCFSelectItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFSelectItemView.m; sourceTree = "<group>"; };
 		741EB1831D596EF2006C885F /* UCFTableCellOne.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFTableCellOne.h; sourceTree = "<group>"; };
 		741EB1841D596EF2006C885F /* UCFTableCellOne.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFTableCellOne.m; sourceTree = "<group>"; };
 		741EB1851D596EF2006C885F /* UCFTableCellOne.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFTableCellOne.xib; sourceTree = "<group>"; };
@@ -1164,6 +1173,13 @@
 		74F291211AE0DBFC003E0E86 /* UCFCashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFCashViewController.m; sourceTree = "<group>"; };
 		74F2AF871D616924008C433C /* UCFHuiBuinessListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFHuiBuinessListModel.h; sourceTree = "<group>"; };
 		74F2AF881D616924008C433C /* UCFHuiBuinessListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFHuiBuinessListModel.m; sourceTree = "<group>"; };
+		74F490DD1E5ACAB70057AC62 /* UCFBatchBidModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFBatchBidModel.h; sourceTree = "<group>"; };
+		74F490DE1E5ACAB70057AC62 /* UCFBatchBidModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFBatchBidModel.m; sourceTree = "<group>"; };
+		74F490E31E5AF2660057AC62 /* UCFMyInvestBatchBidModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFMyInvestBatchBidModel.h; sourceTree = "<group>"; };
+		74F490E41E5AF2660057AC62 /* UCFMyInvestBatchBidModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFMyInvestBatchBidModel.m; sourceTree = "<group>"; };
+		74F490E61E5B0BD70057AC62 /* UCFMyInvestBatchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFMyInvestBatchCell.h; sourceTree = "<group>"; };
+		74F490E71E5B0BD70057AC62 /* UCFMyInvestBatchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFMyInvestBatchCell.m; sourceTree = "<group>"; };
+		74F490E81E5B0BD70057AC62 /* UCFMyInvestBatchCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFMyInvestBatchCell.xib; sourceTree = "<group>"; };
 		74FBC1BA1B84721400B8DD7E /* UCFBindCardTwoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFBindCardTwoTableViewCell.h; sourceTree = "<group>"; };
 		74FBC1BB1B84721400B8DD7E /* UCFBindCardTwoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFBindCardTwoTableViewCell.m; sourceTree = "<group>"; };
 		74FBC1BC1B84721400B8DD7E /* UCFBindCardTwoTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFBindCardTwoTableViewCell.xib; sourceTree = "<group>"; };
@@ -2394,6 +2410,8 @@
 				742D0CA71DE2D50E000FA676 /* UCFProjectLabel.m */,
 				748FAF601DE32D4900A7A973 /* UCFTransferModel.h */,
 				748FAF611DE32D4900A7A973 /* UCFTransferModel.m */,
+				74F490DD1E5ACAB70057AC62 /* UCFBatchBidModel.h */,
+				74F490DE1E5ACAB70057AC62 /* UCFBatchBidModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2512,23 +2530,9 @@
 		74541C811ADF95ED0009D27D /* MyInvest(我的投资) */ = {
 			isa = PBXGroup;
 			children = (
-				FBEDF1DC1CB5171500116E12 /* MyViewController.h */,
-				FBEDF1DD1CB5171500116E12 /* MyViewController.m */,
-				FBEDF1DE1CB5171500116E12 /* MyViewController.xib */,
-				FBE5A0501AE8BEDD0095B2ED /* UCFMyInvestViewCell.h */,
-				FBE5A0511AE8BEDD0095B2ED /* UCFMyInvestViewCell.m */,
-				FBE5A0521AE8BEDD0095B2ED /* UCFMyInvestViewCell.xib */,
-				74F291141AE0DBC1003E0E86 /* UCFMyInvestViewController.h */,
-				74F291151AE0DBC1003E0E86 /* UCFMyInvestViewController.m */,
-				FB2858CD1BAAB583000EAA71 /* UCFMyInvestViewController.xib */,
-				FBE265D71B26CAB100240A79 /* UCFMyClaimCtrl.h */,
-				FBE265D81B26CAB100240A79 /* UCFMyClaimCtrl.m */,
-				FBE265D91B26CAB100240A79 /* UCFMyClaimCtrl.xib */,
-				740DAEBE1E56E2D100CD7C8F /* UCFBatchProjectController.h */,
-				740DAEBF1E56E2D100CD7C8F /* UCFBatchProjectController.m */,
-				740DAEC01E56E2D100CD7C8F /* UCFBatchProjectController.xib */,
-				740DAEC31E56F84A00CD7C8F /* UCFSelectItemView.h */,
-				740DAEC41E56F84A00CD7C8F /* UCFSelectItemView.m */,
+				74F490E21E5AF0C30057AC62 /* Model */,
+				74F490E11E5AF0B70057AC62 /* View */,
+				74F490E01E5AF0A30057AC62 /* Controller */,
 			);
 			path = "MyInvest(我的投资)";
 			sourceTree = "<group>";
@@ -2569,6 +2573,9 @@
 				25F445C21D66E276006813BB /* UCFChoseBankViewController.xib */,
 				4A5552961E54413E00E69DA4 /* UCFBatchInvestmentViewController.h */,
 				4A5552971E54413E00E69DA4 /* UCFBatchInvestmentViewController.m */,
+				4AA2AA7D1E5B17B7006E83F8 /* UCFBatchSetNumWebViewController.h */,
+				4AA2AA7E1E5B17B7006E83F8 /* UCFBatchSetNumWebViewController.m */,
+				4AA2AA7F1E5B17B7006E83F8 /* UCFBatchSetNumWebViewController.xib */,
 			);
 			path = "SecurityCenter(安全中心)";
 			sourceTree = "<group>";
@@ -2964,6 +2971,8 @@
 				AEC5EEC11D9B65BA000C0321 /* RechargeFixedTelNumView.h */,
 				AEC5EEC21D9B65BA000C0321 /* RechargeFixedTelNumView.m */,
 				AEC5EEBF1D9B6594000C0321 /* RechargeFixedTelNumView.xib */,
+				4AC947D51E5598F600354CF8 /* BatchSetView.h */,
+				4AC947D61E5598F600354CF8 /* BatchSetView.m */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -2973,6 +2982,47 @@
 			children = (
 				74F2AF871D616924008C433C /* UCFHuiBuinessListModel.h */,
 				74F2AF881D616924008C433C /* UCFHuiBuinessListModel.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		74F490E01E5AF0A30057AC62 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				FBEDF1DC1CB5171500116E12 /* MyViewController.h */,
+				FBEDF1DD1CB5171500116E12 /* MyViewController.m */,
+				FBEDF1DE1CB5171500116E12 /* MyViewController.xib */,
+				74F291141AE0DBC1003E0E86 /* UCFMyInvestViewController.h */,
+				74F291151AE0DBC1003E0E86 /* UCFMyInvestViewController.m */,
+				FB2858CD1BAAB583000EAA71 /* UCFMyInvestViewController.xib */,
+				FBE265D71B26CAB100240A79 /* UCFMyClaimCtrl.h */,
+				FBE265D81B26CAB100240A79 /* UCFMyClaimCtrl.m */,
+				FBE265D91B26CAB100240A79 /* UCFMyClaimCtrl.xib */,
+				740DAEBE1E56E2D100CD7C8F /* UCFBatchProjectController.h */,
+				740DAEBF1E56E2D100CD7C8F /* UCFBatchProjectController.m */,
+				740DAEC01E56E2D100CD7C8F /* UCFBatchProjectController.xib */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		74F490E11E5AF0B70057AC62 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				FBE5A0501AE8BEDD0095B2ED /* UCFMyInvestViewCell.h */,
+				FBE5A0511AE8BEDD0095B2ED /* UCFMyInvestViewCell.m */,
+				FBE5A0521AE8BEDD0095B2ED /* UCFMyInvestViewCell.xib */,
+				74F490E61E5B0BD70057AC62 /* UCFMyInvestBatchCell.h */,
+				74F490E71E5B0BD70057AC62 /* UCFMyInvestBatchCell.m */,
+				74F490E81E5B0BD70057AC62 /* UCFMyInvestBatchCell.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		74F490E21E5AF0C30057AC62 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				74F490E31E5AF2660057AC62 /* UCFMyInvestBatchBidModel.h */,
+				74F490E41E5AF2660057AC62 /* UCFMyInvestBatchBidModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -5135,10 +5185,12 @@
 				740DAEC21E56E2D100CD7C8F /* UCFBatchProjectController.xib in Resources */,
 				25BAE2B21D804E6B001B6E01 /* JRGCViewForCWRresult.xib in Resources */,
 				FBB362491B036D7D000DD1B6 /* UCFRebateCell1.xib in Resources */,
+				4AA2AA811E5B17B7006E83F8 /* UCFBatchSetNumWebViewController.xib in Resources */,
 				FB5149561D64441F00C26E7B /* guideImage7_2.png in Resources */,
 				746BBEAC1AF8E93E00EBA0E7 /* UCFCouponUseCell.xib in Resources */,
 				74FC22881BA6AE2100D1660A /* UCFFacCodeViewController.xib in Resources */,
 				74FC22821BA6A90E00D1660A /* UCFMyFacBeanViewController.xib in Resources */,
+				74F490EA1E5B0BD70057AC62 /* UCFMyInvestBatchCell.xib in Resources */,
 				FB5149471D64403100C26E7B /* mask56_4.jpg in Resources */,
 				E3E05C5D1DD07D710066B65C /* UCFCouponExchangeToFriends.xib in Resources */,
 				FB5149571D64441F00C26E7B /* guideImage7_3.png in Resources */,
@@ -5227,6 +5279,7 @@
 				7470EC081B036B71006DDCEF /* PrintView.m in Sources */,
 				74EB80DA1AE4EDB80071621E /* UCFSettingSwitchItem.m in Sources */,
 				7BE51D8C1ADE1B8F007600AB /* UCFInvestmentDetailView.m in Sources */,
+				74F490E91E5B0BD70057AC62 /* UCFMyInvestBatchCell.m in Sources */,
 				746BBEAB1AF8E93E00EBA0E7 /* UCFCouponUseCell.m in Sources */,
 				25950EBE1D7FB6EC00E4CCBA /* CWFinishedView.m in Sources */,
 				847103BA1D59AD7500935B19 /* UCFBankDepositoryAccountViewController.m in Sources */,
@@ -5286,7 +5339,6 @@
 				08E9A4E21B845E1200099F30 /* UCFTextField.m in Sources */,
 				7BC8A9F51AD4BFF600BF4660 /* UCFMoreViewController.m in Sources */,
 				7BA6E4C21AD6731900FE8C37 /* UIImage+GIF.m in Sources */,
-				740DAEC51E56F84A00CD7C8F /* UCFSelectItemView.m in Sources */,
 				4A6FAFC51D743CF300AD4DF8 /* CJLabel.m in Sources */,
 				EDEC8BFA1CB3BA6300815228 /* WPAttributedStyleAction.m in Sources */,
 				4A0DA1551B26D8C4004E84F6 /* UCFPurchaseBidViewController.m in Sources */,
@@ -5518,10 +5570,12 @@
 				7BDD8FD91AE1043C007A5CE8 /* SDLoopProgressView.m in Sources */,
 				7BA6E4C41AD6731900FE8C37 /* UIImage+WebP.m in Sources */,
 				7BCBF1261ADB616D00C874FC /* UCFRegisterOneView.m in Sources */,
+				74F490DF1E5ACAB70057AC62 /* UCFBatchBidModel.m in Sources */,
 				83F2D59F1DCB508F0041F913 /* UCFSession.m in Sources */,
 				ED44558E1C112BCF00823DF3 /* UCFLoginShaowView.m in Sources */,
 				ED70C8791C7C581E00F45AC4 /* ChooseFaceOrGesAlertView.m in Sources */,
 				74EB30731B0E0EC900D27BA9 /* UCFBankTableViewCell.m in Sources */,
+				4AA2AA801E5B17B7006E83F8 /* UCFBatchSetNumWebViewController.m in Sources */,
 				7459EE021E5552FE005A6FF7 /* UCFBatchBidController.m in Sources */,
 				7BD588031B098E12005091D3 /* UCFNoPermissionViewController.m in Sources */,
 				74931A061B13267600143424 /* NZLabel.m in Sources */,
@@ -5559,6 +5613,7 @@
 				7BC8AA241AD4C74200BF4660 /* UCFTransterBidHeadDetail.m in Sources */,
 				83F2D59E1DCB508F0041F913 /* UCFAccountTool.m in Sources */,
 				7BC8AA1A1AD4C74200BF4660 /* UCFCycleModel.m in Sources */,
+				74F490E51E5AF2660057AC62 /* UCFMyInvestBatchBidModel.m in Sources */,
 				74541C901ADFD6350009D27D /* UCFSettingViewController.m in Sources */,
 				74E8A0051DDDA142000B0AFF /* UCFP2PTransferViewController.m in Sources */,
 				FB21732F1AF2362800649AA0 /* UCFBackMoneyModel.m in Sources */,
@@ -5581,6 +5636,7 @@
 				E320200D1CC4BAD70065579C /* WebViewJavascriptBridge_JS.m in Sources */,
 				7440FD991E16582600491BC5 /* UCFDataDetailModel.m in Sources */,
 				7BFE3E861AC55C98002A53A2 /* main.m in Sources */,
+				4AC947D71E5598F600354CF8 /* BatchSetView.m in Sources */,
 				74D337CB1E13C9BB00386853 /* UIColor+Hex.m in Sources */,
 				FBB685821AE4A76800F222B6 /* MJRefreshConst.m in Sources */,
 				25950EBA1D7FB6EC00E4CCBA /* CWCamera.m in Sources */,
@@ -5891,8 +5947,9 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp299;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0ce353c9-748a-4307-9ccb-19c1a2dd7f16";
-				PROVISIONING_PROFILE_SPECIFIER = 2016_299Distribution;
+				PROVISIONING_PROFILE = "3b26ab52-df5d-455b-948c-bd48635edb4c";
+				PROVISIONING_PROFILE_SPECIFIER = JRGC299Distribution;
+
 				SWIFT_OBJC_BRIDGING_HEADER = "JRGC/JRGC-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;

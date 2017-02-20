@@ -11,7 +11,9 @@
 #import "UCFProjectListCell.h"
 #import "UCFCollectionDetailViewController.h"
 
-@interface UCFBatchBidController () <UITableViewDataSource, UITableViewDelegate>
+#import "UCFBatchBidModel.h"
+
+@interface UCFBatchBidController () <UITableViewDataSource, UITableViewDelegate, UCFProjectListCellDelegate>
 {
     NSString *_colPrdClaimIdStr;
 }
@@ -42,7 +44,8 @@
     [self addNoDataView];
     // add refreshing and load more
     [self addRefreshingAndLoadMore];
-    
+
+    [self.tableview.header beginRefreshing];
 }
 
 #pragma mark - setting tableview
@@ -63,22 +66,20 @@
 {
     //=========  下拉刷新、上拉加载更多  =========
     __weak typeof(self) weakSelf = self;
-    self.currentPage = 1;
     // 添加上拉加载更多
     [self.tableview addLegendFooterWithRefreshingBlock:^{
         [weakSelf getNetDataFromNet];
     }];
-    
+    self.currentPage = 1;
     // 添加传统的下拉刷新
     [self.tableview addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(getNetDataFromNet)];
-    [self.tableview.header beginRefreshing];
 }
 
 #pragma mark - tableView method
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 3;
+    return self.dataArray.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -93,10 +94,10 @@
     if (cell == nil) {
         cell = [[NSBundle mainBundle]loadNibNamed:@"UCFProjectListCell" owner:self options:nil][0];
     }
-//    UCFProjectListModel *model = [self.dataArray objectAtIndex:indexPath.row];
-//    cell.model = model;
-//    cell.delegate = self;
-    cell.type = UCFProjectListCellTypeProject;
+    UCFBatchBidModel *model = [self.dataArray objectAtIndex:indexPath.row];
+    cell.batchBidModel = model;
+    cell.delegate = self;
+    cell.type = UCFProjectListCellTypeBatchBid;
     return cell;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -111,25 +112,24 @@
      [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagColPrdclaimsDetail owner:self signature:YES];
     
 }
-- (void)getNetDataFromNet{
+#pragma mark - net request
+- (void)getNetDataFromNet
+{
     NSString *uuid = [[NSUserDefaults standardUserDefaults]valueForKey:UUID];
     NSDictionary *strParameters;
     if ([self.tableview.header isRefreshing]) {
         self.currentPage = 1;
         [self.tableview.footer resetNoMoreData];
     }
-    else if ([self.tableview.footer isRefreshing]) {
-        self.currentPage ++;
-    }
-    
     if (uuid) {
-        strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:uuid,@"userId", [NSString stringWithFormat:@"%ld", (long)self.currentPage], @"page", @"20", @"pageSize", @"1", @"type", nil];
+        strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:uuid,@"userId", [NSString stringWithFormat:@"%ld", (long)self.currentPage], @"page", @"20", @"pageSize", nil];
     }
     else {
-        strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%ld", (long)self.currentPage], @"page", @"20", @"pageSize", @"1", @"type", nil];
+        strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%ld", (long)self.currentPage], @"page", @"20", @"pageSize", nil];
     }
-
-    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagColPrdclaimsList owner:self signature:YES];
+    
+    
+    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagProjectListBatchBid owner:self signature:YES];
 }
 
 //开始请求
@@ -146,26 +146,24 @@
     
     NSMutableDictionary *dic = [result objectFromJSONString];
     
-    if (tag.intValue == kSXTagColPrdclaimsList) {
+    if (tag.intValue == kSXTagProjectListBatchBid) {
         NSString *rstcode = dic[@"ret"];
         NSString *rsttext = dic[@"message"];
         if ([rstcode intValue] == 1) {
             NSArray *list_result = [[[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"pageData"] objectSafeArrayForKey:@"result"];
+            
             if ([self.tableview.header isRefreshing]) {
                 [self.dataArray removeAllObjects];
             }
+            self.currentPage ++;
             for (NSDictionary *dict in list_result) {
-                //                DBLOG(@"%@", dict);
-//                UCFTransferModel *model = [UCFTransferModel transferWithDict:dict];
-//                model.isAnim = YES;
-                [self.dataArray addObject:dict];
+                UCFBatchBidModel *model = [UCFBatchBidModel batchWithDict:dict];
+                [self.dataArray addObject:model];
             }
-            
-            _colPrdClaimIdStr = [NSString stringWithFormat:@"%@",(NSString *)[[list_result firstObject] objectSafeForKey:@"id"]];
             
             [self.tableview reloadData];
             
-            BOOL hasNext = [[[[[dic objectForKey:@"data"] objectForKey:@"pageData"] objectForKey:@"pagination"] objectForKey:@"hasNextPage"] boolValue];
+            BOOL hasNext = [[[[[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"pageData"] objectSafeDictionaryForKey:@"pagination"] objectForKey:@"hasNextPage"] boolValue];
             
             if (self.dataArray.count > 0) {
                 [self.noDataView hide];
@@ -179,22 +177,7 @@
         }else {
             [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
         }
-    }  else if (tag.intValue == kSXTagColPrdclaimsDetail){
-        NSString *data = (NSString *)result;
-        NSMutableDictionary *dic = [data objectFromJSONString];
-        bool rstcode = [dic[@"ret"] boolValue];
-        NSString *rsttext = dic[@"message"];
-        if (rstcode) {
-            UCFCollectionDetailViewController *controller = [[UCFCollectionDetailViewController alloc] initWithNibName:@"UCFCollectionDetailViewController" bundle:nil];
-            controller.souceVC = @"P2PVC";
-            controller.colPrdClaimId = _colPrdClaimIdStr;
-            controller.detailDataDict = [dic objectSafeDictionaryForKey:@"data"];
-            [self.navigationController pushViewController:controller animated:YES];
-        }else {
-            [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
-        }
     }
-    
     if ([self.tableview.header isRefreshing]) {
         [self.tableview.header endRefreshing];
     }
@@ -215,7 +198,5 @@
         [self.tableview.footer endRefreshing];
     }
 }
-
-
 
 @end

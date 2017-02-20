@@ -7,6 +7,9 @@
 //
 
 #import "UCFBatchInvestmentViewController.h"
+#import "BatchSetView.h"
+#import "NZLabel.h"
+#import "UCFBatchSetNumWebViewController.h"
 #define TITLEHEIGHT 44
 #define TITLEWIDTH  SCREEN_WIDTH/3
 #define IMAGEVIEWWIDTH 15
@@ -14,22 +17,180 @@
 #define WORDCOLORBLUE UIColorWithRGB(0x6280a8)
 #define WORDCOLORGRAY UIColorWithRGB(0x999999)
 #define TITLECOLORGRAY UIColorWithRGB(0xf9f9f9)
+static NSString *firstStr = @"批量投资授权开启后可一次性投资多个小额项目";
+static NSString *secondStr = @"为保证您的资金安全，请合理选择";
+
 @interface UCFBatchInvestmentViewController ()
+{
+    UIButton *selectButton;
+    UIButton *investmentButton;
+}
 @property (nonatomic, strong) UIView *firstView;    //标题注册view
 @property (nonatomic, strong) UIView *secondView;   //标题徽商view
 @property (nonatomic, strong) UIView *thirdView;    //标题密码view
+@property (nonatomic, strong) UILabel *tipLabel;    //蓝色提醒lable
+@property (nonatomic, strong) UIScrollView *baseScrollView;
+@property (nonatomic, strong) NSArray *quotaArr;    //额度数组
 @end
 
 @implementation UCFBatchInvestmentViewController
-
+- (void)addRightButtonWithImage:(UIImage *)rightButtonimage;
+{
+    UIButton *rightbutton = [UIButton buttonWithType:UIButtonTypeCustom];
+    rightbutton.frame = CGRectMake(0, 0, 25, 25);
+    rightbutton.backgroundColor = [UIColor clearColor];
+    [rightbutton setImage:rightButtonimage forState:UIControlStateNormal];
+    [rightbutton addTarget:self action:@selector(clickRightBtn) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightbutton];
+    self.navigationItem.rightBarButtonItem = rightItem;
+}
+- (void)clickRightBtn
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"批量投资是金融工场为方便投资人投资小额项目特推出的，一次可投资多个项目。批量投资后系统会自动匹配，直至完成所有投资为止" delegate:self cancelButtonTitle:@"我知道了" otherButtonTitles: nil];
+    [alert show];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
+    baseTitleLabel.text = @"自动投标授权";
+    [self addRightButtonWithImage:[UIImage imageNamed:@"icon_question.png"]];
+
     [self addLeftButton];
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor colorWithRed:234/255.0 green:235.0/255.0 blue:239.0/255.0 alpha:1];
     [self createHeadTitleView];
-    _isStep = 1;
+    [self initTipView];
+    [self initScrollView];
+    [self cretateInvestmentView];
     [self initView];
+
     // Do any additional setup after loading the view.
+}
+//蓝底提醒图
+- (void)initTipView
+{
+    UIView *tipView = [[UIView alloc] initWithFrame:CGRectMake(0, TITLEHEIGHT, ScreenWidth, 35)];
+    tipView.backgroundColor = UIColorWithRGB(0x5B6993);
+    [self.view addSubview:tipView];
+    
+    _tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, ScreenWidth - 15, 35)];
+    _tipLabel.font = [UIFont systemFontOfSize:15.0f];
+    _tipLabel.text = @"批量投资授权开启后可一次性投资多个小额项目";
+    _tipLabel.textColor = [UIColor whiteColor];
+    [tipView addSubview:_tipLabel];
+
+}
+//主要内容下面是个滚动视图
+- (void)initScrollView
+{
+    _baseScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, TITLEHEIGHT + 35, ScreenWidth, ScreenHeight - TITLEHEIGHT - 35 -67)];
+    _baseScrollView.contentSize = CGSizeMake(ScreenWidth * 2, ScreenHeight - TITLEHEIGHT - 35 - 67);
+    _baseScrollView.backgroundColor = [UIColor clearColor];
+    _baseScrollView.bounces = NO;
+    _baseScrollView.scrollEnabled = NO;
+    [self.view addSubview:_baseScrollView];
+    [self initFirstSectionView];
+    
+    
+}
+- (void)initFirstSectionView
+{
+    BatchSetView *view1= [[BatchSetView alloc] initWithFrame:CGRectMake(0, 10, SCREEN_WIDTH, 80)];
+    view1.backgroundColor = [UIColor whiteColor];
+    view1.iconName = @"auto_fast";
+    view1.title = @"投标更快捷";
+    view1.des = @"开启自动投标授权，即可在批量投标中使用批量投资功能，快速投资多个小额项目。";
+    [_baseScrollView addSubview:view1];
+    [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:view1 isTop:YES];
+    
+    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(15, CGRectGetHeight(view1.frame) - 1, CGRectGetWidth(view1.frame) , 1)];
+    lineView.backgroundColor = UIColorWithRGB(0xe3e5ea);
+    [view1 addSubview:lineView];
+    
+    BatchSetView *view2= [[BatchSetView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(view1.frame), SCREEN_WIDTH, 80)];
+    view2.backgroundColor = [UIColor whiteColor];
+    view2.frame = CGRectMake(0, CGRectGetMaxY(view1.frame), ScreenWidth, 80);
+    view2.iconName = @"auto_safe";
+    view2.title = @"安全有保障";
+    view2.des = @"依托徽商银行存管账户，您的账户资金更有保障。";
+    [_baseScrollView addSubview:view2];
+    [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:view2 isTop:NO];
+    
+    NSString *totalStr = [NSString stringWithFormat:@"同意并确认《自动投标授权协议》"];
+    NZLabel *label1 = [[NZLabel alloc] init];
+    label1.font = [UIFont systemFontOfSize:12.0f];
+    CGSize size = [Common getStrHeightWithStr:totalStr AndStrFont:12 AndWidth:ScreenWidth - 25];
+    label1.numberOfLines = 0;
+    label1.frame = CGRectMake(23, CGRectGetMaxY(view2.frame) + 15, ScreenWidth-25, size.height);
+    label1.text = totalStr;
+    label1.userInteractionEnabled = YES;
+    label1.textColor = UIColorWithRGB(0x999999);
+    
+    __weak typeof(self) weakSelf = self;
+    [label1 addLinkString:@"《自动投标授权协议》" block:^(ZBLinkLabelModel *linkModel) {
+        [weakSelf showHeTong];
+    }];
+    [label1 setFontColor:UIColorWithRGB(0x4aa1f9) string:@"《自动投标授权协议》"];
+    
+    [_baseScrollView addSubview:label1];
+    
+    UIImageView * imageView1 = [[UIImageView alloc] init];
+    imageView1.frame = CGRectMake(CGRectGetMinX(label1.frame) - 7, CGRectGetMinY(label1.frame) + 4, 5, 5);
+    imageView1.image = [UIImage imageNamed:@"point.png"];
+    [_baseScrollView addSubview:imageView1];
+    
+
+}
+- (void)showHeTong
+{
+
+    
+}
+- (void)initSecondSectionView
+{
+    NSString *totalStr = [NSString stringWithFormat:@"批量投资单次最高限额"];
+    CGSize size = [Common getStrHeightWithStr:totalStr AndStrFont:12 AndWidth:ScreenWidth - 25];
+    NZLabel *label1 = [[NZLabel alloc] init];
+    label1.font = [UIFont systemFontOfSize:12.0f];
+    label1.numberOfLines = 0;
+    label1.frame = CGRectMake(ScreenWidth + 15, 15, ScreenWidth-25, size.height);
+    label1.text = totalStr;
+    label1.userInteractionEnabled = YES;
+    label1.textColor = UIColorWithRGB(0x4aa1f9);
+    [_baseScrollView addSubview:label1];
+    
+    [self initSecondBtnView:CGRectGetMaxY(label1.frame) + 15];
+}
+- (void)initSecondBtnView:(CGFloat)offY
+{
+//    self.quotaArr = @[@"100万",@"50万",@"10万",@"5万",@"1万"];
+    CGFloat intervalLength = 10.0f;
+    CGFloat statrOrendLength = ScreenWidth + 15.0f;
+    CGFloat btnWidth = (ScreenWidth - 15.0f * 2 - 10.0f * 2)/3;
+    CGFloat btnHeight = (btnWidth * 7) / 9;
+    for (int i = 0; i < self.quotaArr.count; i++) {
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        button.frame = CGRectMake(statrOrendLength + (btnWidth + intervalLength) * (i%3) ,offY + (i/3) * (btnHeight + intervalLength), btnWidth, btnHeight);
+        [button setBackgroundImage:[Common batchImageNormalState:button.frame] forState:UIControlStateNormal];
+        [button setBackgroundImage:[Common batchImageSelectedState:button.frame] forState:UIControlStateSelected];
+        button.tag = 1000 + [[self.quotaArr[i] valueForKey:@"id"] integerValue];
+        [button addTarget:self action:@selector(changeBtnState:) forControlEvents:UIControlEventTouchUpInside];
+        [button setTitle:[self.quotaArr[i] valueForKey:@"title"] forState:UIControlStateNormal];
+        button.titleLabel.font = [UIFont systemFontOfSize:13.0f];
+        [button setTitleColor:UIColorWithRGB(0x666666) forState:UIControlStateNormal];
+        [_baseScrollView addSubview:button];
+    }
+}
+- (void)changeBtnState:(UIButton *)button
+{
+    if (selectButton == button) {
+        selectButton.selected = !button.selected;
+        if (!selectButton.selected) {
+            selectButton = nil;
+        }
+    } else {
+        selectButton.selected = NO;
+        button.selected = YES;
+        selectButton = button;
+    }
 }
 //初始化titleView
 - (void)createHeadTitleView
@@ -113,7 +274,7 @@
     topLineView.backgroundColor = UIColorWithRGB(0xd8d8d8);
     [bottomView addSubview:topLineView];
     
-    UIView *bottmLineView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(bottomView.frame) - 0.5, ScreenWidth, 0.5)];
+    UIView *bottmLineView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(bottomView.frame) - 1, ScreenWidth, 1)];
     bottmLineView.backgroundColor = UIColorWithRGB(0xd8d8d8);
     [bottomView addSubview:bottmLineView];
 }
@@ -121,18 +282,23 @@
 - (void)initView {
     switch (self.isStep) {
         case 1:{
+            _tipLabel.text = firstStr;
+            _baseScrollView.contentOffset = CGPointMake(0, 0);
+
             //显示注册成功页面
             [self showApplyView];
         }
             break;
         case 2:{
+            _tipLabel.text = secondStr;
+            _baseScrollView.contentOffset = CGPointMake(SCREEN_WIDTH, 0);
             //显示徽商绑定页面
-            [self changeTitleViewController:SetQuota];
+            [self showDepositoryView];
         }
             break;
         case 3:{
             //显示设置交易密码
-            [self changeTitleViewController:BachEnd];
+            [self showPassWordView];
         }
             break;
     }
@@ -204,14 +370,12 @@
 }
 
 - (void)showDepositoryView {
-    baseTitleLabel.text = @"开通徽商存管";
     [self registerFinshView];
     [self saveView];
     [self passWordBeforeView];
 }
 
 - (void)showPassWordView {
-    baseTitleLabel.text = @"设置交易密码";
     [self registerFinshView];
     [self saveViewFinsh];
     [self passWordView];
@@ -280,7 +444,80 @@
         }
     }
 }
-
+- (void)cretateInvestmentView
+{
+    UIView *investBaseView = [[UIView alloc] initWithFrame:CGRectMake(0, ScreenHeight -NavigationBarHeight - 67, ScreenWidth, 67)];
+    investBaseView.backgroundColor = [UIColor clearColor];
+    investBaseView.tag = 9000;
+    [self.view addSubview:investBaseView];
+    
+    UIView *bkView = [[UIView alloc] initWithFrame:CGRectMake(0, 10, ScreenWidth, 57)];
+    bkView.backgroundColor = [UIColor whiteColor];
+    [investBaseView addSubview:bkView];
+    
+    investmentButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    investmentButton.frame = CGRectMake(XPOS, 20,ScreenWidth - XPOS*2, 37);
+    investmentButton.titleLabel.font = [UIFont systemFontOfSize:16];
+    investmentButton.backgroundColor = UIColorWithRGB(0xfd4d4c);
+    investmentButton.layer.cornerRadius = 2.0;
+    investmentButton.layer.masksToBounds = YES;
+    NSString *buttonTitle = @"";
+    if (self.isStep == 1) {
+        buttonTitle = @"申请开通";
+    } else if (self.isStep == 2) {
+        buttonTitle = @"提交";
+    }
+    [investmentButton setTitle:buttonTitle forState:UIControlStateNormal];
+    [investmentButton addTarget:self action:@selector(checkIsCanInvest) forControlEvents:UIControlEventTouchUpInside];
+    [investBaseView addSubview:investmentButton];
+    
+    UIImageView *shadowView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0, ScreenWidth, 10)];
+    UIImage *tabImag = [UIImage imageNamed:@"tabbar_shadow.png"];
+    shadowView.image = [tabImag resizableImageWithCapInsets:UIEdgeInsetsMake(2, 1, 2, 1) resizingMode:UIImageResizingModeStretch];
+    [investBaseView addSubview:shadowView];
+}
+- (void)checkIsCanInvest
+{
+    NSString *title = [investmentButton titleForState:UIControlStateNormal];
+    if ([title isEqualToString:@"申请开通"]) {
+        [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID]} tag:kSXTagBatchNumList owner:self signature:YES];
+    } else if ([title isEqualToString:@"提交"]) {
+        if (selectButton) {
+            NSDictionary *dict = @{@"investLimitId":[NSString stringWithFormat:@"%ld",selectButton.tag - 1000],@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID]};
+            [[NetworkModule sharedNetworkModule] newPostReq:dict tag:kSXTagSetBatchNum owner:self signature:YES];
+        } else {
+            [MBProgressHUD displayHudError:@"请选择额度"];
+        }
+    }
+}
+- (void)endPost:(id)result tag:(NSNumber *)tag
+{
+    NSMutableDictionary *dic = [result objectFromJSONString];
+    if (tag.integerValue == kSXTagBatchNumList) {
+        if ([dic[@"ret"] boolValue]) {
+            
+            self.quotaArr = [[dic objectSafeArrayForKey:@"data"] objectSafeArrayForKey:@"BatchNumList"];
+            [self initSecondSectionView];
+            [investmentButton setTitle:@"提交" forState:UIControlStateNormal];
+            self.isStep = 2;
+            [self initView];
+        } else {
+            [MBProgressHUD displayHudError:dic[@"message"]];
+        }
+    } else if (tag.integerValue == kSXTagSetBatchNum) {
+         if ([dic[@"ret"] boolValue]) {
+             NSDictionary  *dataDict = dic[@"data"][@"params"];
+             NSString *urlStr = dic[@"data"][@"url"];
+             UCFBatchSetNumWebViewController *webView = [[UCFBatchSetNumWebViewController alloc]initWithNibName:@"UCFBatchSetNumWebViewController" bundle:nil];
+             webView.url = urlStr;
+             webView.webDataDic =dataDict;
+             webView.navTitle = @"自动投标授权";
+             [self.navigationController pushViewController:webView animated:YES];
+         } else {
+             [MBProgressHUD displayHudError:dic[@"message"]];
+         }
+    }
+}
 /*
 #pragma mark - Navigation
 

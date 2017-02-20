@@ -43,7 +43,7 @@
     if([_dic[@"action"] isEqualToString:@"app_invest_detail"])
     {
        UCFInvestmentDetailViewController *controller = [[UCFInvestmentDetailViewController alloc] init];
-       controller.billId = [NSString stringWithFormat:@"%d",[_dic[@"value"]integerValue]];
+       controller.billId = [NSString stringWithFormat:@"%ld",[_dic[@"value"]integerValue]];
        controller.detailType = @"1";
        controller.flagGoRoot = NO;
        [self.navigationController pushViewController:controller animated:YES];
