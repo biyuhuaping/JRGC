@@ -1155,8 +1155,26 @@ static NetworkModule *gInstance = NULL;
             parameter = [SERVER_IP stringByAppendingString:SetBatchInvestNum];
         }
             break;
-            
-            
+        case kSXTagProjectListBatchBid: {
+            parameter = [SERVER_IP stringByAppendingString:PROJECTLISTBATCHBID];
+        }
+            break;
+        case kSXTagMyInvestBatchBid: {
+            parameter = [SERVER_IP stringByAppendingString:MYINVESTBATCHBID];
+        }
+            break;
+        case kSXTagChildPrdclaimsList: {
+            parameter = [SERVER_IP stringByAppendingString:CHILDPRDCLAIMSLIST];
+        }
+            break;
+        case kSXTagColPrdclaimsDetail: {
+            parameter = [SERVER_IP stringByAppendingString:COLPRDCLAIMSDETAIL];
+        }
+            break;
+        case kSXTagColPrdclaimsList: {
+            parameter = [SERVER_IP stringByAppendingString:COLPRDCLAIMSLIST];
+        }
+            break;
     }
     //给原有参数字典添加公共参数
     if (!data) {

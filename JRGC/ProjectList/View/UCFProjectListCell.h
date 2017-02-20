@@ -11,9 +11,10 @@
 typedef enum : NSUInteger {
     UCFProjectListCellTypeProject = 0,
     UCFProjectListCellTypeTransfer,
+    UCFProjectListCellTypeBatchBid,
 } UCFProjectListCellType;
 
-@class UCFProjectListCell, UCFProjectListModel, UCFTransferModel;
+@class UCFProjectListCell, UCFProjectListModel, UCFTransferModel, UCFBatchBidModel;
 @protocol UCFProjectListCellDelegate <NSObject>
 @optional
 - (void)cell:(UCFProjectListCell*)cell clickInvestBtn:(UIButton *)button withModel:(UCFProjectListModel*)model;
@@ -24,6 +25,7 @@ typedef enum : NSUInteger {
 @interface UCFProjectListCell : UITableViewCell
 @property (nonatomic, strong) UCFProjectListModel *model;
 @property (nonatomic, strong) UCFTransferModel *transferModel;
+@property (nonatomic, strong) UCFBatchBidModel *batchBidModel;
 @property (nonatomic, weak) id<UCFProjectListCellDelegate> delegate;
 @property (weak, nonatomic) IBOutlet UIButton *investButton;
 @property (nonatomic, assign) UCFProjectListCellType type;
