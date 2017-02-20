@@ -21,6 +21,7 @@
 @interface UCFP2PViewController () <UITableViewDelegate, UITableViewDataSource, UCFProjectListCellDelegate>
 {
     UCFProjectListModel *_projectListModel;
+    NSString *_colPrdClaimIdStr;
 }
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 
@@ -79,9 +80,9 @@
         cell = [[NSBundle mainBundle]loadNibNamed:@"UCFProjectListCell" owner:self options:nil][0];
     }
     UCFProjectListModel *model = [self.dataArray objectAtIndex:indexPath.row];
-    cell.model = model;
+//    cell.model = model;
     cell.delegate = self;
-    cell.type = UCFProjectListCellTypeProject;
+//    cell.type = UCFProjectListCellTypeProject;
     return cell;
 }
 
@@ -103,15 +104,26 @@
         self.currentPage ++;
     }
     
+//    if (uuid) {
+//        strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:uuid,@"userId", [NSString stringWithFormat:@"%ld", (long)self.currentPage], @"page", @"20", @"pageSize", @"11", @"type", nil];
+//    }
+//    else {
+//        strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%ld", (long)self.currentPage], @"page", @"20", @"pageSize", @"11", @"type", nil];
+//    }
+//    
+//    
+//    
+//    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagProjectList owner:self signature:YES];
     if (uuid) {
-        strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:uuid,@"userId", [NSString stringWithFormat:@"%ld", (long)self.currentPage], @"page", @"20", @"pageSize", @"11", @"type", nil];
-    }
-    else {
-        strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%ld", (long)self.currentPage], @"page", @"20", @"pageSize", @"11", @"type", nil];
-    }
-    
-    
-    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagProjectList owner:self signature:YES];
+                strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:uuid,@"userId", [NSString stringWithFormat:@"%ld", (long)self.currentPage], @"page", @"20", @"pageSize", @"11", @"type", nil];
+            }
+            else {
+                strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%ld", (long)self.currentPage], @"page", @"20", @"pageSize", @"11", @"type", nil];
+            }
+        
+        
+        
+            [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagColPrdclaimsList owner:self signature:YES];
 }
 
 //开始请求
@@ -128,7 +140,7 @@
     
     NSMutableDictionary *dic = [result objectFromJSONString];
     
-    if (tag.intValue == kSXTagProjectList) {
+    if (tag.intValue == kSXTagColPrdclaimsList) {
         NSString *rstcode = dic[@"ret"];
         NSString *rsttext = dic[@"message"];
         if ([rstcode intValue] == 1) {
@@ -144,7 +156,18 @@
                 [self.dataArray addObject:model];
             }
             
+            
+            NSDictionary * dataDict = [list_result firstObject];
+            _colPrdClaimIdStr =[dataDict objectSafeForKey:@"id"];
+            
             [self.tableview reloadData];
+            
+//            UCFCollectionDetailViewController *controllerVC = [[UCFCollectionDetailViewController alloc] initWithNibName:@"UCFCollectionDetailViewController" bundle:nil];
+//            controllerVC.souceVC = @"P2PVC";
+//            [self.navigationController pushViewController:controllerVC animated:YES];
+            
+            
+            
             
             BOOL hasNext = [[[[[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"pageData"] objectSafeDictionaryForKey:@"pagination"] objectForKey:@"hasNextPage"] boolValue];
             
@@ -172,9 +195,9 @@
             
             
 //            NSArray *prdLabelsListTemp = [NSArray arrayWithArray:(NSArray*)_projectListModel.prdLabelsList];
-            UCFCollectionDetailViewController *controllerVC = [[UCFCollectionDetailViewController alloc] initWithNibName:@"UCFCollectionDetailViewController" bundle:nil];
-            controllerVC.souceVC = @"P2PVC";
-            [self.navigationController pushViewController:controllerVC animated:YES];
+//            UCFCollectionDetailViewController *controllerVC = [[UCFCollectionDetailViewController alloc] initWithNibName:@"UCFCollectionDetailViewController" bundle:nil];
+//            controllerVC.souceVC = @"P2PVC";
+//            [self.navigationController pushViewController:controllerVC animated:YES];
             
         }else {
             [AuxiliaryFunc showAlertViewWithMessage:rsttext];
@@ -206,6 +229,28 @@
             }
         }
     }
+    else if (tag.intValue == kSXTagColPrdclaimsDetail){
+        NSString *rstcode = dic[@"status"];
+        NSString *rsttext = dic[@"statusdes"];
+        if ([rstcode intValue] == 1) {
+            //            NSArray *prdLabelsListTemp = [NSArray arrayWithArray:(NSArray*)_projectListModel.prdLabelsList];
+            //            UCFProjectDetailViewController *controller = [[UCFProjectDetailViewController alloc] initWithDataDic:dic isTransfer:NO withLabelList:prdLabelsListTemp];
+            //            CGFloat platformSubsidyExpense = [_projectListModel.platformSubsidyExpense floatValue];
+            //            [[NSUserDefaults standardUserDefaults] setValue:[NSString stringWithFormat:@"%.1f",platformSubsidyExpense] forKey:@"platformSubsidyExpense"];
+            //            [self.navigationController pushViewController:controller animated:YES];
+            
+            
+            //            NSArray *prdLabelsListTemp = [NSArray arrayWithArray:(NSArray*)_projectListModel.prdLabelsList];
+            UCFCollectionDetailViewController *controllerVC = [[UCFCollectionDetailViewController alloc] initWithNibName:@"UCFCollectionDetailViewController" bundle:nil];
+            controllerVC.souceVC = @"P2PVC";
+            [self.navigationController pushViewController:controllerVC animated:YES];
+            
+        }else {
+            [AuxiliaryFunc showAlertViewWithMessage:rsttext];
+        }
+    }
+    
+    
     if ([self.tableview.header isRefreshing]) {
         [self.tableview.header endRefreshing];
     }
@@ -236,12 +281,15 @@
         if ([self checkUserCanInvestIsDetail:YES]) {
             _projectListModel = [self.dataArray objectAtIndex:indexPath.row];
             NSString *userid = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
-            NSString *strParameters = [NSString stringWithFormat:@"id=%@&userId=%@", _projectListModel.Id,userid];
+//            NSString *strParameters = [NSString stringWithFormat:@"id=%@&userId=%@", _projectListModel.Id,userid];
+             NSString *strParameters = [NSString stringWithFormat:@"colPrdClaimId=%@&userId=%@", _colPrdClaimIdStr,userid];
+            
+            
             if ([_projectListModel.status intValue ] != 2) {
                 NSInteger isOrder = [_projectListModel.isOrder integerValue];
-                if (isOrder > 0) {
+                if (isOrder == 0) {  // 原来  isOrder >0
                     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-                    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self];
+                    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagColPrdclaimsDetail owner:self];
                 } else {
                     UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前标的详情只对投资人开放"];
                     [self.navigationController pushViewController:controller animated:YES];
