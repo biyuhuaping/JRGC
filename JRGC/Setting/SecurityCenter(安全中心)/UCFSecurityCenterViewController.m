@@ -34,6 +34,7 @@
 #import "UCFSession.h"
 #import "UCFWebViewJavascriptBridgeMall.h"
 #import "RiskAssessmentViewController.h"
+#import "UCFBatchInvestmentViewController.h"
 @interface UCFSecurityCenterViewController () <UITableViewDataSource, UITableViewDelegate, SecurityCellDelegate, UCFLockHandleDelegate>
 
 // 选项表数据
@@ -83,6 +84,9 @@
         
         UCFSettingItem *riskAssessment = [UCFSettingArrowItem itemWithIcon:@"safecenter_icon_assessment" title:@"风险承担能力" destVcClass:[RiskAssessmentViewController class]];
         
+
+        UCFSettingItem *batchInvest = [UCFSettingArrowItem itemWithIcon:@"safecenter_icon_auto" title:@"自动投标" destVcClass:[UCFBatchInvestmentViewController class]];
+
         UCFSettingItem *activeGestureCode  = [UCFSettingSwitchItem itemWithIcon:@"safecenter_icon_gesture" title:@"启用手势密码"];
         UCFSettingItem *activeFaceValid  = [UCFSettingSwitchItem itemWithIcon:@"uesr_icon_face" title:@"启用刷脸登录" withSwitchType:2];
         UCFSettingItem *modifyPassword = [UCFSettingArrowItem itemWithIcon:@"login_icon_password" title:@"修改登录密码" destVcClass:[ModifyPasswordViewController class]];
@@ -96,9 +100,9 @@
         
         if ([self checkTouchIdIsOpen]) {
             UCFSettingItem *zhiWenSwith  = [UCFSettingSwitchItem itemWithIcon:@"safecenter_icon_touch" title:@"启用指纹解锁" withSwitchType:1];
-            group2.items = [[NSMutableArray alloc]initWithArray:@[activeGestureCode,zhiWenSwith, activeFaceValid,modifyPassword,_setChangePassword]];
+            group2.items = [[NSMutableArray alloc]initWithArray:@[batchInvest,activeGestureCode,zhiWenSwith, activeFaceValid,modifyPassword,_setChangePassword]];
         } else {
-            group2.items =[[NSMutableArray alloc]initWithArray: @[activeGestureCode,activeFaceValid,modifyPassword,_setChangePassword]];
+            group2.items =[[NSMutableArray alloc]initWithArray: @[batchInvest,activeGestureCode,activeFaceValid,modifyPassword,_setChangePassword]];
 
         }
         _itemsData = [[NSMutableArray alloc] initWithObjects:group1,group2,nil];
@@ -113,12 +117,26 @@
     [self reloadUI];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 }
-
+- (void)addRightButtonWithName:(NSString *)rightButtonName
+{
+    UIButton *rightbutton = [UIButton buttonWithType:UIButtonTypeCustom];
+    rightbutton.frame = CGRectMake(0, 0, 66, 44);
+    rightbutton.backgroundColor = [UIColor clearColor];
+    [rightbutton setTitle:rightButtonName forState:UIControlStateNormal];
+    rightbutton.titleLabel.font = [UIFont systemFontOfSize:15.0];
+    [rightbutton addTarget:self action:@selector(logOutClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [rightbutton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [rightbutton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
+    
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightbutton];
+    self.navigationItem.rightBarButtonItem = rightItem;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self addLeftButton];
-    
+    [self addRightButtonWithName:@"退出登录"];
+
     baseTitleLabel.text = @"个人信息";
   
     self.tableview.contentInset = UIEdgeInsetsMake(10, 0, 0, 0);
@@ -129,21 +147,23 @@
     self.tableview.tableFooterView = footerview;
     [footerview setBackgroundColor:UIColorWithRGB(0xebebee)];
     
-    UIButton *logOutButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [logOutButton addTarget:self action:@selector(logOutClicked:) forControlEvents:UIControlEventTouchUpInside];
-    logOutButton.translatesAutoresizingMaskIntoConstraints = NO;
-    [logOutButton.titleLabel setFont:[UIFont systemFontOfSize:16]];
-    [logOutButton setTitle:@"退出登录" forState:UIControlStateNormal];
-    [footerview addSubview:logOutButton];
-
-    // 添加约束
-    NSArray *constraints1H=[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[logOutButton]-15-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(logOutButton)];
-    NSArray *constraints1V=[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-5-[logOutButton]-5-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(logOutButton)];
-    [footerview addConstraints:constraints1H];
-    [footerview addConstraints:constraints1V];
     
-    [logOutButton setBackgroundImage:[[UIImage imageNamed:@"btn_red"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:2.5] forState:UIControlStateNormal];
-    [logOutButton setBackgroundImage:[[UIImage imageNamed:@"btn_red_highlight"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:2.5] forState:UIControlStateHighlighted];
+    
+//    UIButton *logOutButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [logOutButton addTarget:self action:@selector(logOutClicked:) forControlEvents:UIControlEventTouchUpInside];
+//    logOutButton.translatesAutoresizingMaskIntoConstraints = NO;
+//    [logOutButton.titleLabel setFont:[UIFont systemFontOfSize:16]];
+//    [logOutButton setTitle:@"退出登录" forState:UIControlStateNormal];
+//    [footerview addSubview:logOutButton];
+//
+//    // 添加约束
+//    NSArray *constraints1H=[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[logOutButton]-15-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(logOutButton)];
+//    NSArray *constraints1V=[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-5-[logOutButton]-5-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(logOutButton)];
+//    [footerview addConstraints:constraints1H];
+//    [footerview addConstraints:constraints1V];
+//    
+//    [logOutButton setBackgroundImage:[[UIImage imageNamed:@"btn_red"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:2.5] forState:UIControlStateNormal];
+//    [logOutButton setBackgroundImage:[[UIImage imageNamed:@"btn_red_highlight"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:2.5] forState:UIControlStateHighlighted];
     
     self.tableview.separatorColor = UIColorWithRGB(0xe3e5ea);
     
@@ -253,6 +273,7 @@
             NSString *bindPhone = [result objectForKey:@"bindMobile"];
             NSString *oldPhone = [[NSUserDefaults standardUserDefaults] valueForKey:PHONENUM];
             NSString *gradeResult = dic[@"gradeResult"];
+            NSString *batchInvestStatus = dic[@"batchInvestStatus"];
             self.isCompanyAgent = dic[@"isCompanyAgent"];
             
             //新请求的手机号和本地存储手机号不一样则更新本地
@@ -271,28 +292,13 @@
                  [[NSUserDefaults standardUserDefaults] setBool:NO forKey:FACESWITCHSTATUS];
             }
             
-            
-//            if (![[UCFToolsMehod isNullOrNilWithString:authId] isEqualToString:@"未认证"]) {
-//                [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:IDCARD_STATE];
-//            }
-//            else {
-//                [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:IDCARD_STATE];
-//            }
-//            if (![[UCFToolsMehod isNullOrNilWithString:bindCard] isEqualToString:@"未绑定"]) {
-//                [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:BANKCARD_STATE];
-//            }
-//            else {
-//                [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:BANKCARD_STATE];
-//            }
             [UserInfoSingle sharedManager].openStatus = [[dic objectSafeForKey: @"openStatus"] integerValue] ;
             if ([UserInfoSingle sharedManager].openStatus == 4) {
                 _setChangePassword.title = @"修改交易密码";
             }else{
                 _setChangePassword.title = @"设置交易密码";
             }
-//            if ([UserInfoSingle sharedManager].openStatus == 5) { //特殊用户 设置交易密码不可的点击
-//                _setChangePassword.isShowOrHide = NO;
-//            }
+
             [[NSUserDefaults standardUserDefaults] setObject:realName forKey:REALNAME];
             [[NSUserDefaults standardUserDefaults] synchronize];
             if (self.userGradeSwitch) {
@@ -329,6 +335,12 @@
                         break;
                 }
             }
+            
+            UCFSettingGroup *group2 = [self.itemsData lastObject];
+            UCFSettingItem *userItem = group2.items.firstObject;
+            userItem.subtitle = batchInvestStatus.length == 0 ? @"未开启" : batchInvestStatus;
+            userItem.title = batchInvestStatus.length == 0 ? @"自动投标(开启后才可进行批量投资)" : @"自动投标";
+
             [self.tableview reloadData];
         }else
             [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
@@ -832,6 +844,12 @@
                     tradePasswordVC.isCompanyAgent = [self.isCompanyAgent boolValue];
                     [self.navigationController pushViewController:tradePasswordVC  animated:YES];
                 }
+            } else if ([NSStringFromClass(arrowItem.destVcClass)  isEqualToString: @"UCFBatchInvestmentViewController"]) {
+                UCFBatchInvestmentViewController *batchInvestment = [[UCFBatchInvestmentViewController alloc] init];
+                UCFSettingGroup *group2 = [self.itemsData lastObject];
+                UCFSettingItem *userItem = group2.items.firstObject;
+                batchInvestment.isStep = [userItem.subtitle isEqualToString:@"未开启"] ? 1 : 2;
+                [self.navigationController pushViewController:batchInvestment animated:YES];
             }
         }
     }

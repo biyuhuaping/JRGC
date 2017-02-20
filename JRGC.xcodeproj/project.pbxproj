@@ -89,6 +89,8 @@
 		4A9016881AFB12FE0049A9E0 /* View+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A90167C1AFB12FE0049A9E0 /* View+MASAdditions.m */; };
 		4A9230451B68B2D800E5844C /* UIImageView+NetImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A9230441B68B2D800E5844C /* UIImageView+NetImageView.m */; };
 		4A9F15BA1B0EC9B1009A7365 /* CoupleHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A9F15B91B0EC9B1009A7365 /* CoupleHeadView.m */; };
+		4AA2AA801E5B17B7006E83F8 /* UCFBatchSetNumWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AA2AA7E1E5B17B7006E83F8 /* UCFBatchSetNumWebViewController.m */; };
+		4AA2AA811E5B17B7006E83F8 /* UCFBatchSetNumWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AA2AA7F1E5B17B7006E83F8 /* UCFBatchSetNumWebViewController.xib */; };
 		4AB1260C1AEF8EA400E915F1 /* UCFPurchaseBidViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AB1260A1AEF8EA400E915F1 /* UCFPurchaseBidViewController.xib */; };
 		4AB3EF231E287CD6007A6AF8 /* RiskAssessmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB3EF211E287CD6007A6AF8 /* RiskAssessmentViewController.m */; };
 		4AB3EF241E287CD6007A6AF8 /* RiskAssessmentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AB3EF221E287CD6007A6AF8 /* RiskAssessmentViewController.xib */; };
@@ -98,6 +100,7 @@
 		4ABED3A91E2FACE3006B3F62 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ABED3A81E2FACE3006B3F62 /* UserNotifications.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		4ABED3AB1E2FB28E006B3F62 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ABED3AA1E2FB28E006B3F62 /* libresolv.tbd */; };
 		4AC08B471B09BE4000DF8075 /* CalculatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC08B461B09BE4000DF8075 /* CalculatorView.m */; };
+		4AC947D71E5598F600354CF8 /* BatchSetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC947D61E5598F600354CF8 /* BatchSetView.m */; };
 		4ACB399A1E1216DD00E9BA8C /* FestivalActivitiesWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACB39981E1216DD00E9BA8C /* FestivalActivitiesWebView.m */; };
 		4ACB399B1E1216DD00E9BA8C /* FestivalActivitiesWebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4ACB39991E1216DD00E9BA8C /* FestivalActivitiesWebView.xib */; };
 		4AD6B4C61B32D33E00D94140 /* CycleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD6B4C51B32D33E00D94140 /* CycleView.m */; };
@@ -861,6 +864,9 @@
 		4A9230441B68B2D800E5844C /* UIImageView+NetImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+NetImageView.m"; sourceTree = "<group>"; };
 		4A9F15B81B0EC9B1009A7365 /* CoupleHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoupleHeadView.h; sourceTree = "<group>"; };
 		4A9F15B91B0EC9B1009A7365 /* CoupleHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoupleHeadView.m; sourceTree = "<group>"; };
+		4AA2AA7D1E5B17B7006E83F8 /* UCFBatchSetNumWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFBatchSetNumWebViewController.h; sourceTree = "<group>"; };
+		4AA2AA7E1E5B17B7006E83F8 /* UCFBatchSetNumWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFBatchSetNumWebViewController.m; sourceTree = "<group>"; };
+		4AA2AA7F1E5B17B7006E83F8 /* UCFBatchSetNumWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFBatchSetNumWebViewController.xib; sourceTree = "<group>"; };
 		4AB126081AEF8EA400E915F1 /* UCFPurchaseBidViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFPurchaseBidViewController.h; sourceTree = "<group>"; };
 		4AB1260A1AEF8EA400E915F1 /* UCFPurchaseBidViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFPurchaseBidViewController.xib; sourceTree = "<group>"; };
 		4AB3EF201E287CD6007A6AF8 /* RiskAssessmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RiskAssessmentViewController.h; sourceTree = "<group>"; };
@@ -874,6 +880,8 @@
 		4ABED3AA1E2FB28E006B3F62 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
 		4AC08B451B09BE4000DF8075 /* CalculatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalculatorView.h; sourceTree = "<group>"; };
 		4AC08B461B09BE4000DF8075 /* CalculatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalculatorView.m; sourceTree = "<group>"; };
+		4AC947D51E5598F600354CF8 /* BatchSetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BatchSetView.h; sourceTree = "<group>"; };
+		4AC947D61E5598F600354CF8 /* BatchSetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BatchSetView.m; sourceTree = "<group>"; };
 		4ACB39971E1216DD00E9BA8C /* FestivalActivitiesWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FestivalActivitiesWebView.h; sourceTree = "<group>"; };
 		4ACB39981E1216DD00E9BA8C /* FestivalActivitiesWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FestivalActivitiesWebView.m; sourceTree = "<group>"; };
 		4ACB39991E1216DD00E9BA8C /* FestivalActivitiesWebView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FestivalActivitiesWebView.xib; sourceTree = "<group>"; };
@@ -2565,6 +2573,9 @@
 				25F445C21D66E276006813BB /* UCFChoseBankViewController.xib */,
 				4A5552961E54413E00E69DA4 /* UCFBatchInvestmentViewController.h */,
 				4A5552971E54413E00E69DA4 /* UCFBatchInvestmentViewController.m */,
+				4AA2AA7D1E5B17B7006E83F8 /* UCFBatchSetNumWebViewController.h */,
+				4AA2AA7E1E5B17B7006E83F8 /* UCFBatchSetNumWebViewController.m */,
+				4AA2AA7F1E5B17B7006E83F8 /* UCFBatchSetNumWebViewController.xib */,
 			);
 			path = "SecurityCenter(安全中心)";
 			sourceTree = "<group>";
@@ -2960,6 +2971,8 @@
 				AEC5EEC11D9B65BA000C0321 /* RechargeFixedTelNumView.h */,
 				AEC5EEC21D9B65BA000C0321 /* RechargeFixedTelNumView.m */,
 				AEC5EEBF1D9B6594000C0321 /* RechargeFixedTelNumView.xib */,
+				4AC947D51E5598F600354CF8 /* BatchSetView.h */,
+				4AC947D61E5598F600354CF8 /* BatchSetView.m */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -5172,6 +5185,7 @@
 				740DAEC21E56E2D100CD7C8F /* UCFBatchProjectController.xib in Resources */,
 				25BAE2B21D804E6B001B6E01 /* JRGCViewForCWRresult.xib in Resources */,
 				FBB362491B036D7D000DD1B6 /* UCFRebateCell1.xib in Resources */,
+				4AA2AA811E5B17B7006E83F8 /* UCFBatchSetNumWebViewController.xib in Resources */,
 				FB5149561D64441F00C26E7B /* guideImage7_2.png in Resources */,
 				746BBEAC1AF8E93E00EBA0E7 /* UCFCouponUseCell.xib in Resources */,
 				74FC22881BA6AE2100D1660A /* UCFFacCodeViewController.xib in Resources */,
@@ -5561,6 +5575,7 @@
 				ED44558E1C112BCF00823DF3 /* UCFLoginShaowView.m in Sources */,
 				ED70C8791C7C581E00F45AC4 /* ChooseFaceOrGesAlertView.m in Sources */,
 				74EB30731B0E0EC900D27BA9 /* UCFBankTableViewCell.m in Sources */,
+				4AA2AA801E5B17B7006E83F8 /* UCFBatchSetNumWebViewController.m in Sources */,
 				7459EE021E5552FE005A6FF7 /* UCFBatchBidController.m in Sources */,
 				7BD588031B098E12005091D3 /* UCFNoPermissionViewController.m in Sources */,
 				74931A061B13267600143424 /* NZLabel.m in Sources */,
@@ -5621,6 +5636,7 @@
 				E320200D1CC4BAD70065579C /* WebViewJavascriptBridge_JS.m in Sources */,
 				7440FD991E16582600491BC5 /* UCFDataDetailModel.m in Sources */,
 				7BFE3E861AC55C98002A53A2 /* main.m in Sources */,
+				4AC947D71E5598F600354CF8 /* BatchSetView.m in Sources */,
 				74D337CB1E13C9BB00386853 /* UIColor+Hex.m in Sources */,
 				FBB685821AE4A76800F222B6 /* MJRefreshConst.m in Sources */,
 				25950EBA1D7FB6EC00E4CCBA /* CWCamera.m in Sources */,
@@ -5931,8 +5947,9 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp299;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0ce353c9-748a-4307-9ccb-19c1a2dd7f16";
-				PROVISIONING_PROFILE_SPECIFIER = 2016_299Distribution;
+				PROVISIONING_PROFILE = "3b26ab52-df5d-455b-948c-bd48635edb4c";
+				PROVISIONING_PROFILE_SPECIFIER = JRGC299Distribution;
+
 				SWIFT_OBJC_BRIDGING_HEADER = "JRGC/JRGC-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
