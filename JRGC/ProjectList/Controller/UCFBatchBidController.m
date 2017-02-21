@@ -102,9 +102,10 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
+    UCFBatchBidModel *model = [self.dataArray objectAtIndex:indexPath.row];
     NSString *uuid = [[NSUserDefaults standardUserDefaults]valueForKey:UUID];
     NSDictionary *strParameters;
+    _colPrdClaimIdStr = [NSString stringWithFormat:@"%@",model.batchBidId];
     
     if (uuid) {
         strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:uuid,@"userId", _colPrdClaimIdStr, @"colPrdClaimId", nil];
@@ -158,6 +159,7 @@
             self.currentPage ++;
             for (NSDictionary *dict in list_result) {
                 UCFBatchBidModel *model = [UCFBatchBidModel batchWithDict:dict];
+                model.isAnim = YES;
                 [self.dataArray addObject:model];
             }
             
@@ -174,6 +176,20 @@
             else {
                 [self.noDataView showInView:self.tableview];
             }
+        }else {
+            [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
+        }
+    }else if (tag.intValue == kSXTagColPrdclaimsDetail) {
+        NSString *rstcode = dic[@"ret"];
+        NSString *rsttext = dic[@"message"];
+        if ([rstcode intValue] == 1) {
+           
+            UCFCollectionDetailViewController *collectionDetailVC = [[UCFCollectionDetailViewController alloc]initWithNibName:@"UCFCollectionDetailViewController" bundle:nil];
+            collectionDetailVC.souceVC = @"P2PVC";
+            collectionDetailVC.colPrdClaimId = _colPrdClaimIdStr;
+            collectionDetailVC.detailDataDict = [dic objectSafeDictionaryForKey:@"data"];
+            [self.navigationController pushViewController:collectionDetailVC  animated:YES];
+        
         }else {
             [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
         }

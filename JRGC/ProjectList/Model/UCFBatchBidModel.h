@@ -11,6 +11,7 @@
 @interface UCFBatchBidModel : NSObject
 @property (nonatomic, strong) NSNumber *canBuyAmt;
 @property (nonatomic, strong) NSNumber *colMinInvest;
+@property (nonatomic, copy) NSString *canBuyCount;
 @property (nonatomic, copy) NSString *colName;
 @property (nonatomic, copy) NSString *colPeriod;
 @property (nonatomic, copy) NSString *colPeriodTxt;
@@ -19,7 +20,9 @@
 @property (nonatomic, copy) NSString *colRepayModeTxt;
 @property (nonatomic, assign) BOOL full;
 @property (nonatomic, strong) NSNumber *batchBidId;
-
+@property (nonatomic, strong) NSNumber *Id;
+@property (nonatomic, strong) NSNumber *totalAmt;
+@property (nonatomic, assign) BOOL isAnim;
 
 + (instancetype)batchWithDict:(NSDictionary *)dict;
 - (instancetype)initWithDict:(NSDictionary *)dict;

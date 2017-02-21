@@ -12,6 +12,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UCFCollectionDetailViewController">
             <connections>
                 <outlet property="collectionScrollView" destination="dCg-HU-7Ze" id="aRD-yZ-Eky"/>
+                <outlet property="investmentBtn" destination="h3c-uw-e1h" id="oGN-UN-Jj8"/>
+                <outlet property="investmentBtnViewHeight" destination="hM4-yp-Gzh" id="Ggy-vO-GiI"/>
                 <outlet property="navTitleLabel" destination="zBQ-V6-lov" id="p7d-Po-x91"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>

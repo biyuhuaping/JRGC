@@ -308,6 +308,16 @@
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <connections>
+                <outlet property="addRateLab" destination="M5J-bx-7bF" id="V0C-fB-NH1"/>
+                <outlet property="createDateLab" destination="qMY-YE-BCL" id="Afd-Hr-I4J"/>
+                <outlet property="investAmtLab" destination="VSd-C7-AtY" id="GAT-e0-tt5"/>
+                <outlet property="loanAnnualRateLab" destination="D8L-2N-9vU" id="YR0-MC-V6c"/>
+                <outlet property="loanDateLab" destination="pfh-IL-fCL" id="iXf-KI-1jP"/>
+                <outlet property="prdNameLab" destination="Vuy-Cl-v6v" id="flT-h7-xiN"/>
+                <outlet property="repayTimeLab" destination="ffM-DT-Rxx" id="XEd-Md-5f0"/>
+                <outlet property="statusLab" destination="2uH-ju-xDU" id="Qpc-wz-KnZ"/>
+            </connections>
             <point key="canvasLocation" x="-207" y="28.5"/>
         </tableViewCell>
     </objects>
