@@ -19,11 +19,12 @@
 #define TITLECOLORGRAY UIColorWithRGB(0xf9f9f9)
 static NSString *firstStr = @"批量投资授权开启后可一次性投资多个小额项目";
 static NSString *secondStr = @"为保证您的资金安全，请合理选择";
-
+static NSString *thirdStr = @"批量投资已经开启";
 @interface UCFBatchInvestmentViewController ()
 {
     UIButton *selectButton;
     UIButton *investmentButton;
+    BOOL      isFirstFixed;   //是否第一次修改最大限投金额
 }
 @property (nonatomic, strong) UIView *firstView;    //标题注册view
 @property (nonatomic, strong) UIView *secondView;   //标题徽商view
@@ -82,12 +83,16 @@ static NSString *secondStr = @"为保证您的资金安全，请合理选择";
 - (void)initScrollView
 {
     _baseScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, TITLEHEIGHT + 35, ScreenWidth, ScreenHeight - TITLEHEIGHT - 35 -67)];
-    _baseScrollView.contentSize = CGSizeMake(ScreenWidth * 2, ScreenHeight - TITLEHEIGHT - 35 - 67);
+    _baseScrollView.contentSize = CGSizeMake(ScreenWidth * 3, ScreenHeight - TITLEHEIGHT - 35 - 67);
     _baseScrollView.backgroundColor = [UIColor clearColor];
     _baseScrollView.bounces = NO;
     _baseScrollView.scrollEnabled = NO;
     [self.view addSubview:_baseScrollView];
-    [self initFirstSectionView];
+    if (self.isStep == 1) {
+        [self initFirstSectionView];
+    } else if (self.isStep == 2) {
+        [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID]} tag:kSXTagBatchNumList owner:self signature:YES];
+    }
     
     
 }
@@ -159,6 +164,21 @@ static NSString *secondStr = @"为保证您的资金安全，请合理选择";
     
     [self initSecondBtnView:CGRectGetMaxY(label1.frame) + 15];
 }
+- (void)initThirdSectionView
+{
+    UIImageView *sucessImageView = [[UIImageView alloc] initWithFrame:CGRectMake(ScreenWidth * 2 + (ScreenWidth - 220)/2, (CGRectGetHeight(_baseScrollView.frame) - 99 - 30)/2 - 50, 220, 99)];
+    sucessImageView.image = [UIImage imageNamed:@"automatic_success"];
+    [_baseScrollView addSubview:sucessImageView];
+    
+    UILabel *tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth * 2, CGRectGetMaxY(sucessImageView.frame), ScreenWidth, 30)];
+    tipLabel.text = [NSString stringWithFormat:@"批量投资单次最高限额：%@",[selectButton titleForState:UIControlStateNormal]];
+    tipLabel.textAlignment = NSTextAlignmentCenter;
+    tipLabel.font = [UIFont systemFontOfSize:16.0f];
+    tipLabel.textColor = UIColorWithRGB(0x5b6993);
+    [_baseScrollView addSubview:tipLabel];
+    
+    
+}
 - (void)initSecondBtnView:(CGFloat)offY
 {
 //    self.quotaArr = @[@"100万",@"50万",@"10万",@"5万",@"1万"];
@@ -173,9 +193,16 @@ static NSString *secondStr = @"为保证您的资金安全，请合理选择";
         [button setBackgroundImage:[Common batchImageSelectedState:button.frame] forState:UIControlStateSelected];
         button.tag = 1000 + [[self.quotaArr[i] valueForKey:@"id"] integerValue];
         [button addTarget:self action:@selector(changeBtnState:) forControlEvents:UIControlEventTouchUpInside];
-        [button setTitle:[self.quotaArr[i] valueForKey:@"title"] forState:UIControlStateNormal];
-        button.titleLabel.font = [UIFont systemFontOfSize:13.0f];
+        [button setTitle:[NSString stringWithFormat:@"%@万",[self.quotaArr[i] valueForKey:@"title"]] forState:UIControlStateNormal];
+        button.titleLabel.font = [UIFont systemFontOfSize:20.0f];
         [button setTitleColor:UIColorWithRGB(0x666666) forState:UIControlStateNormal];
+        
+        NSString * title = [NSString stringWithFormat:@"%@万",[self.quotaArr[i] valueForKey:@"title"]];
+        NSRange range = [title rangeOfString:@"万"];
+        NSMutableAttributedString *attrituteString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@万",[self.quotaArr[i] valueForKey:@"title"]]];
+        [attrituteString setAttributes:@{NSForegroundColorAttributeName:UIColorWithRGB(0x999999), NSFontAttributeName: [UIFont systemFontOfSize:12]} range:range];
+        button.titleLabel.attributedText = attrituteString;
+
         [_baseScrollView addSubview:button];
     }
 }
@@ -297,6 +324,8 @@ static NSString *secondStr = @"为保证您的资金安全，请合理选择";
         }
             break;
         case 3:{
+            _tipLabel.text = thirdStr;
+            _baseScrollView.contentOffset = CGPointMake(SCREEN_WIDTH * 2, 0);
             //显示设置交易密码
             [self showPassWordView];
         }
@@ -482,12 +511,17 @@ static NSString *secondStr = @"为保证您的资金安全，请合理选择";
     if ([title isEqualToString:@"申请开通"]) {
         [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID]} tag:kSXTagBatchNumList owner:self signature:YES];
     } else if ([title isEqualToString:@"提交"]) {
+
         if (selectButton) {
+            
             NSDictionary *dict = @{@"investLimitId":[NSString stringWithFormat:@"%ld",selectButton.tag - 1000],@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID]};
             [[NetworkModule sharedNetworkModule] newPostReq:dict tag:kSXTagSetBatchNum owner:self signature:YES];
+
         } else {
             [MBProgressHUD displayHudError:@"请选择额度"];
         }
+    } else {
+        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 - (void)endPost:(id)result tag:(NSNumber *)tag
@@ -495,7 +529,7 @@ static NSString *secondStr = @"为保证您的资金安全，请合理选择";
     NSMutableDictionary *dic = [result objectFromJSONString];
     if (tag.integerValue == kSXTagBatchNumList) {
         if ([dic[@"ret"] boolValue]) {
-            
+            isFirstFixed = [dic[@"data"][@"openOrEdit"] isEqualToString:@"1"] ? NO : YES;
             self.quotaArr = [[dic objectSafeArrayForKey:@"data"] objectSafeArrayForKey:@"BatchNumList"];
             [self initSecondSectionView];
             [investmentButton setTitle:@"提交" forState:UIControlStateNormal];
@@ -505,18 +539,30 @@ static NSString *secondStr = @"为保证您的资金安全，请合理选择";
             [MBProgressHUD displayHudError:dic[@"message"]];
         }
     } else if (tag.integerValue == kSXTagSetBatchNum) {
+
          if ([dic[@"ret"] boolValue]) {
-             NSDictionary  *dataDict = dic[@"data"][@"params"];
-             NSString *urlStr = dic[@"data"][@"url"];
-             UCFBatchSetNumWebViewController *webView = [[UCFBatchSetNumWebViewController alloc]initWithNibName:@"UCFBatchSetNumWebViewController" bundle:nil];
-             webView.url = urlStr;
-             webView.webDataDic =dataDict;
-             webView.navTitle = @"自动投标授权";
-             [self.navigationController pushViewController:webView animated:YES];
+             if (isFirstFixed) {
+                 NSMutableDictionary  *dataDict = [NSMutableDictionary dictionaryWithDictionary:dic[@"data"][@"params"]];
+                 NSString *urlStr = dic[@"data"][@"url"];
+                 UCFBatchSetNumWebViewController *webView = [[UCFBatchSetNumWebViewController alloc]initWithNibName:@"UCFBatchSetNumWebViewController" bundle:nil];
+                 webView.url = urlStr;
+                 webView.webDataDic =dataDict;
+                 webView.navTitle = @"自动投标授权";
+                 [self.navigationController pushViewController:webView animated:YES];
+             } else {
+                 [self initThirdSectionView];
+                 self.isStep = 3;
+                 [self initView];
+                 [investmentButton setTitle:@"返回" forState:UIControlStateNormal];
+             }
          } else {
              [MBProgressHUD displayHudError:dic[@"message"]];
          }
     }
+}
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
 }
 /*
 #pragma mark - Navigation
