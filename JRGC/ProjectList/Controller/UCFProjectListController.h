@@ -8,7 +8,11 @@
 
 #import "UCFBaseViewController.h"
 
+@class UCFP2PViewController;
 @interface UCFProjectListController : UCFBaseViewController
 @property (nonatomic, copy) NSString *strStyle;
+@property (nonatomic, copy) NSString *viewType;
+
+
 - (void)changeViewWithConfigure:(NSString *)config;
 @end
