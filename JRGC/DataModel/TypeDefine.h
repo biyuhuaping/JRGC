@@ -195,9 +195,14 @@
 #define ISSHOWHORNOR        @"api/prdClaims/v2/zxSwitch.json"   //是否显示尊享
 #define VALIDATEOLDPHONENO   @"/api/userInfo/v2/validateOldPhoneNo.json"//校验注册手机号
 
+#define GetBatchInvestLimit  @"api/userAccount/v2/getBatchInvestLimit.json" //查询批量投标最大额
+#define SetBatchInvestNum    @"api/userAccount/v2/openBatchInvest.json"  //设置批量投标最大额
+
+
 #define CHILDPRDCLAIMSLIST   @"api/prdClaims/v2/childPrdclaimsList.json"  //集合标子标列表
 #define COLPRDCLAIMSDETAIL   @"api/prdClaims/v2/colPrdclaimsDetail.json" //集合标详情
 #define COLPRDCLAIMSLIST     @"api/prdClaims/v2/colPrdclaimsList.json"   //集合标列表
+
 
 enum kPostStatus{
     kPostStatusNone=0,
@@ -384,11 +389,14 @@ enum kSXTag
     kSXTagIsShowHornor,                 //是否显示尊享
     kSXTagValidateOldPhoneNo,            //校验注册手机号
     kSXTagDataStatics,                  //数据统计
+    kSXTagBatchNumList,                  //查询批量投标最大值额度列表
+    kSXTagSetBatchNum,                   //设置投标最大值额度
     kSXTagProjectListBatchBid,          //项目列表中的批量投资列表
     kSXTagMyInvestBatchBid,             //我的投资中的批量投资列表
     kSXTagChildPrdclaimsList,           //集合标子标列表
     kSXTagColPrdclaimsDetail,           //集合标详情
     kSXTagColPrdclaimsList              //集合标列表
+
 };
 
 typedef enum kSXTag kSXTag;

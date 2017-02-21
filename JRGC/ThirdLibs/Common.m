@@ -1130,4 +1130,34 @@
         [cache storeImage:image forKey:imagePath2.absoluteString];
     }];
 }
++ (UIImage *)batchImageSelectedState:(CGRect)rect
+{
+    UIView *view = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, rect.size.width, rect.size.height)] autorelease];
+    view.backgroundColor = [UIColor whiteColor];
+    view.layer.borderWidth = 1;
+    view.layer.borderColor = [[UIColor redColor] CGColor];
+    
+    UIImageView *leftDownView = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetWidth(view.frame) - 28 , CGRectGetHeight(view.frame) -25, 28, 25)];
+    leftDownView.image = [UIImage imageNamed:@"investment_selected"];
+    leftDownView.backgroundColor = [UIColor clearColor];
+    [view addSubview:leftDownView];
+    return [self getImageFromView:view];
+}
++ (UIImage *)batchImageNormalState:(CGRect)rect
+{
+    UIView *view = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, rect.size.width, rect.size.height)] autorelease];
+    view.backgroundColor = [UIColor whiteColor];
+    view.layer.borderWidth = 1;
+    view.layer.borderColor = [UIColorWithRGB(0xd8d8d8) CGColor];
+    return [self getImageFromView:view];
+}
++ (UIImage *)getImageFromView:(UIView *)theView
+{
+    //UIGraphicsBeginImageContext(theView.bounds.size);
+    UIGraphicsBeginImageContextWithOptions(theView.bounds.size, NO, theView.layer.contentsScale);
+    [theView.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *image=UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+}
 @end
