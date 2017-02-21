@@ -12,12 +12,14 @@
 #import "UCFMyInvestBatchBidModel.h"
 #import "UCFMyInvestBatchCell.h"
 #import "UCFCollectionDetailViewController.h"
+#import "NZLabel.h"
 @interface UCFBatchProjectController () <UITableViewDelegate, UITableViewDataSource>
 {
     NSString *_colPrdClaimIdStr;
     NSString *_batchOrderIdStr;
 }
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet NZLabel *totalCountLabel;
 
 @property (strong, nonatomic) NSMutableArray *dataArray;
 @property (assign, nonatomic) NSInteger pageNum;
@@ -37,6 +39,7 @@
     CGFloat height = ScreenHeight -240+44;
     self.tableView.backgroundColor = UIColorWithRGB(0xebebee);
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.contentInset = UIEdgeInsetsMake(5, 0, 5, 0);
 #pragma mark - init no data view
     self.noDataView = [[UCFNoDataView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, height) errorTitle:@"暂无数据"];
 #pragma mark - init Net request
@@ -151,6 +154,10 @@
             [self.tableView reloadData];
             
             BOOL hasNext = [[[[[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"pageData"] objectSafeDictionaryForKey:@"pagination"] objectForKey:@"hasNextPage"] boolValue];
+            NSNumber *totalCount = [[[[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"pageData"] objectSafeDictionaryForKey:@"pagination"] objectForKey:@"totalCount"];
+            
+            self.totalCountLabel.text = [NSString stringWithFormat:@"共%@笔记录",totalCount];
+            [self.totalCountLabel setFont:[UIFont boldSystemFontOfSize:12] string:[totalCount stringValue]];
             
             if (self.dataArray.count > 0) {
                 [self.noDataView hide];

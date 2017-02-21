@@ -1178,6 +1178,7 @@ static NetworkModule *gInstance = NULL;
         case kSXTagMyBatchInvestDetail: {
             parameter = [NEW_SERVER_IP stringByAppendingString:MYBATCHINVESTDETAIL];
         }
+            break;
         case kSXTagColIntoDealBatch: {
             parameter = [NEW_SERVER_IP stringByAppendingString:INTODEALBATCH];
         }

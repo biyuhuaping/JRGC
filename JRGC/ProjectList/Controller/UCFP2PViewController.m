@@ -32,8 +32,24 @@
     [self addChildControllers];
     // setting current controller
     self.currentViewController = self.ordinaryBid;
-}
 
+}
+- (void)setCurrentViewForBatchBid
+{
+    NSString *viewType = self.viewType;
+    if ([viewType isEqualToString:@"2"]) {
+        self.itemSeletedView.segmentedControl.selectedSegmentIndex = 1;
+        self.currentViewController = self.batchBid;
+        [self.view addSubview:self.batchBid.view];
+        _currentViewController = self.batchBid;
+    }
+    else {
+        self.itemSeletedView.segmentedControl.selectedSegmentIndex = 0;
+        self.currentViewController = self.ordinaryBid;
+        [self.view addSubview:self.ordinaryBid.view];
+        _currentViewController = self.ordinaryBid;
+    }
+}
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];

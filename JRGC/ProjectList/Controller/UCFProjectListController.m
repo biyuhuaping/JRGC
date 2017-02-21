@@ -48,6 +48,8 @@
     
     self.p2p = [[UCFP2PViewController alloc]initWithNibName:@"UCFP2PViewController" bundle:nil];
     self.p2p.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight - 64-49);
+    self.p2p.viewType = self.viewType;
+    [self.p2p setCurrentViewForBatchBid];
     [self addChildViewController:self.p2p];
     
     self.hornerPlan = [[UCFHonerPlanViewController alloc]initWithNibName:@"UCFHonerPlanViewController" bundle:nil];
@@ -105,6 +107,9 @@
         self.segmentedCtrl.selectedSegmentIndex = 0;
         [self transitionFromViewController:self.currentViewController toViewController:self.p2p duration:0.25 options:UIViewAnimationOptionCurveEaseInOut animations:nil completion:^(BOOL finished) {
             self.currentViewController = self.p2p;
+            if ([self.p2p isViewLoaded]) {
+                [self.p2p setCurrentViewForBatchBid];
+            }
         }];
     }
     else if ([self.strStyle isEqualToString:@"12"]  && self.currentViewController != self.hornerPlan) {
@@ -112,6 +117,11 @@
         [self transitionFromViewController:self.currentViewController toViewController:self.hornerPlan duration:0.25 options:UIViewAnimationOptionCurveEaseInOut animations:nil completion:^(BOOL finished) {
             self.currentViewController = self.hornerPlan;
         }];
+    }
+    else if ([self.strStyle isEqualToString:@"11"] && [self.viewType isEqualToString:@"2"])
+    {
+        self.p2p.viewType = @"2";
+        [self.p2p setCurrentViewForBatchBid];
     }
 }
 
@@ -127,7 +137,8 @@
 {
     switch (segmentCtrl.selectedSegmentIndex) {
         case 0:{
-            
+            self.p2p.viewType = @"1";
+            [self.p2p setCurrentViewForBatchBid];
             if (self.isShowHornor) {
                 [self transitionFromViewController:self.currentViewController toViewController:self.p2p duration:0.25 options:UIViewAnimationOptionCurveEaseInOut animations:nil completion:^(BOOL finished) {
                     self.currentViewController = self.p2p;

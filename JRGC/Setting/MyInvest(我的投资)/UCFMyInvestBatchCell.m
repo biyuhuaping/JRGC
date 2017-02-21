@@ -36,7 +36,7 @@
 - (void)setModel:(UCFMyInvestBatchBidModel *)model
 {
     _model = model;
-    self.bidName.text = model.collName;
+    self.bidName.text = [NSString stringWithFormat:@"%@(批量投资)", model.collName];
     NSInteger status = [model.status integerValue];
     switch (status) {
         case 0:
