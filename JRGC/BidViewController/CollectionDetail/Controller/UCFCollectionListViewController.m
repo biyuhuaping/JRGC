@@ -167,9 +167,12 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
         }
     }
     
-    [self.listTableView.header endRefreshing];
-    [self.listTableView.footer endRefreshing];
-    
+    if ([self.listTableView.header isRefreshing]) {
+        [self.listTableView.header endRefreshing];
+    }
+    if ([self.listTableView.footer isRefreshing]) {
+        [self.listTableView.footer endRefreshing];
+    }
 }
 -(void)errorPost:(NSError *)err tag:(NSNumber *)tag{
     [MBProgressHUD displayHudError:err.userInfo[@"NSLocalizedDescription"]];

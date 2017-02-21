@@ -45,6 +45,7 @@
 - (void)setTransterInfo:(UCFTransterBid *)aItemInfo;
 - (void)setInvestItemInfo:(InvestmentItemInfo *)aItemInfo;
 - (void)setTransInvestItemInfo:(NSDictionary *)aItemInfo;
+- (void)setCollectionKeyBidInvestItemInfo:(NSDictionary *)aItemInfo;
 /**
  *  投标页表头
  *

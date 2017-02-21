@@ -25,7 +25,7 @@
 #import "UCFNoPermissionViewController.h"
 #import "UCFProjectDetailViewController.h"
 #import "UCFNoDataView.h"
-#import "UCFPurchaseBidViewController.h"
+#import "UCFCollctionKeyBidViewController.h"
 #define shadeSpacingHeight 18 //遮罩label的上下间距
 #define shadeHeight 70 //遮罩高度
 static NSString * const DetailCellID = @"UCFCollectionDetailCell";
@@ -339,7 +339,7 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
 }
 #pragma mark - 添加无数据页面
 - (void)addNoDataView {
-    self.noDataView = [[UCFNoDataView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - 64 - 57 - 74) errorTitle:@"暂无数据"];
+    self.noDataView = [[UCFNoDataView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - 64 - 57 - _headerViewHeight) errorTitle:@"暂无数据"];
 }
 - (void)addTableHeaderView
 {
@@ -541,21 +541,29 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
     }
 }
 -(void)cell:(UCFCollectionDetailCell *)cell clickInvestBtn:(UIButton *)button withModel:(NSDictionary *)dataDict{
-    NSString *status = [dataDict objectSafeForKey:@"status"];
-    if ([status intValue] == 2) {
+    
+    if(_selectIndex == 0){
+        
         NSString *idStr =[dataDict objectSafeForKey:@"childPrdClaimId"];
         NSString *strParameters = [NSString stringWithFormat:@"id=%@&userId=%@", idStr,[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
         
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self];
-
-    } else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"目前标的详情只对投资人开放" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
-        [alert show];
         
-//    UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前标的详情只对投资人开放"];
-//    [self.navigationController pushViewController:controller animated:YES];
-}
+    }else{
+        
+        NSString *isOrder = [dataDict objectSafeForKey:@"isOrder"];
+        if ([isOrder intValue] == 0) {
+            NSString *idStr =[dataDict objectSafeForKey:@"childPrdClaimId"];
+            NSString *strParameters = [NSString stringWithFormat:@"id=%@&userId=%@", idStr,[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
+            
+            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self];
+        } else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"目前标的详情只对投资人开放" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+            [alert show];
+        }
+    }
 
 
 
@@ -658,11 +666,6 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
             }
         }else {
             
-            
-            
-            
-            
-            
             [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
         }
     }else if (tag.intValue == kSXTagPrdClaimsDetail){
@@ -682,39 +685,24 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
     {
         NSString *Data = (NSString *)result;
         NSDictionary * dic = [Data objectFromJSONString];
-        if([[dic objectForKey:@"status"] integerValue] != 1)
+        NSString *messageStr = [dic objectSafeForKey:@"message"];
+        if([[dic objectForKey:@"ret"] boolValue])
         {
-            UCFPurchaseBidViewController *purchaseViewController = [[UCFPurchaseBidViewController alloc] initWithNibName:@"UCFPurchaseBidViewController" bundle:nil];
-            purchaseViewController.dataDict = dic;
+            UCFCollctionKeyBidViewController *purchaseViewController = [[UCFCollctionKeyBidViewController alloc] init];
+            purchaseViewController.dataDict = [dic objectSafeDictionaryForKey:@"data"];
             purchaseViewController.bidType = 0;
             [self.navigationController pushViewController:purchaseViewController animated:YES];
-            
-        }else if ([[dic objectForKey:@"status"] integerValue] == 21 || [dic[@"status"] integerValue] == 22){
-//            [self checkUserCanInvest];
-            
-        } else {
-            if ([[dic objectForKey:@"status"] integerValue] == 15) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:[dic objectForKey:@"statusdes"] delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
-                [alert show];
-            } else if ([[dic objectForKey:@"status"] integerValue] == 19) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:[dic objectForKey:@"statusdes"] delegate:self cancelButtonTitle:@"返回列表" otherButtonTitles: nil];
-                alert.tag =7000;
-                [alert show];
-            } else if ([[dic objectForKey:@"status"] integerValue] == 30) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:[dic objectForKey:@"statusdes"] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"测试",nil];
-                alert.tag = 9000;
-                [alert show];
-            }
-            else {
-                [AuxiliaryFunc showAlertViewWithMessage:[dic objectForKey:@"statusdes"]];
-            }
-            
+        }else
+        {
+            [AuxiliaryFunc showAlertViewWithMessage:messageStr];
         }
     }
-    
-    [self.listTableView.header endRefreshing];
-    [self.listTableView.footer endRefreshing];
-
+    if ([self.listTableView.header isRefreshing]) {
+        [self.listTableView.header endRefreshing];
+    }
+    if ([self.listTableView.footer isRefreshing]) {
+        [self.listTableView.footer endRefreshing];
+    }
 }
 -(void)errorPost:(NSError *)err tag:(NSNumber *)tag{
     [MBProgressHUD displayHudError:err.userInfo[@"NSLocalizedDescription"]];

@@ -12,7 +12,9 @@
 #import "UCFCollectionDetailViewController.h"
 
 #import "UCFBatchBidModel.h"
-
+#import "UCFOldUserGuideViewController.h"
+#import "UCFBankDepositoryAccountViewController.h"
+#import "UCFLoginViewController.h"
 @interface UCFBatchBidController () <UITableViewDataSource, UITableViewDelegate, UCFProjectListCellDelegate>
 {
     NSString *_colPrdClaimIdStr;
@@ -102,16 +104,20 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    UCFBatchBidModel *model = [self.dataArray objectAtIndex:indexPath.row];
-    NSString *uuid = [[NSUserDefaults standardUserDefaults]valueForKey:UUID];
-    NSDictionary *strParameters;
-    _colPrdClaimIdStr = [NSString stringWithFormat:@"%@",model.batchBidId];
     
-    if (uuid) {
-        strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:uuid,@"userId", _colPrdClaimIdStr, @"colPrdClaimId", nil];
+    if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
+        //如果未登录，展示登录页面
+        [self showLoginView];
+    } else {
+        if ([self checkUserCanInvestIsDetail:YES]) {
+            UCFBatchBidModel *model = [self.dataArray objectAtIndex:indexPath.row];
+            NSString *uuid = [[NSUserDefaults standardUserDefaults]valueForKey:UUID];
+            NSDictionary *strParameters;
+            _colPrdClaimIdStr = [NSString stringWithFormat:@"%@",model.batchBidId];
+            strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:uuid,@"userId", _colPrdClaimIdStr, @"colPrdClaimId", nil];
+            [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagColPrdclaimsDetail owner:self signature:YES];
+        }
     }
-     [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagColPrdclaimsDetail owner:self signature:YES];
-    
 }
 #pragma mark - net request
 - (void)getNetDataFromNet
@@ -201,7 +207,74 @@
         [self.tableview.footer endRefreshing];
     }
 }
-
+- (void)showLoginView
+{
+    UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
+    UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
+    [self presentViewController:loginNaviController animated:YES completion:nil];
+}
+- (BOOL)checkUserCanInvestIsDetail:(BOOL)isDetail
+{
+    switch ([UserInfoSingle sharedManager].openStatus)
+    {// ***hqy添加
+        case 1://未开户-->>>新用户开户
+        case 2://已开户 --->>>老用户(白名单)开户
+        {
+            [self showHSAlert:@"请先开通徽商存管账户"];
+            return NO;
+            break;
+        }
+        case 3://已绑卡-->>>去设置交易密码页面
+        {
+            if (isDetail) {
+                return YES;
+            }else
+            {
+                [self showHSAlert:@"请先设置交易密码"];
+                return NO;
+            }
+        }
+            break;
+        default:
+            return YES;
+            break;
+    }
+}
+- (void)showHSAlert:(NSString *)alertMessage
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:alertMessage delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    alert.tag = 8000;
+    [alert show];
+}
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == 7000) {
+        [self reloadBatchBidData];
+    } else if (alertView.tag == 8000) {
+        if (buttonIndex == 1) {
+            switch ([UserInfoSingle sharedManager].openStatus)
+            {// ***hqy添加
+                case 1://未开户-->>>新用户开户
+                case 2://已开户 --->>>老用户(白名单)开户
+                {
+                    UCFBankDepositoryAccountViewController * bankDepositoryAccountVC =[[UCFBankDepositoryAccountViewController alloc ]initWithNibName:@"UCFBankDepositoryAccountViewController" bundle:nil];
+                    bankDepositoryAccountVC.openStatus = [UserInfoSingle sharedManager].openStatus;
+                    [self.navigationController pushViewController:bankDepositoryAccountVC animated:YES];
+                }
+                    break;
+                case 3://已绑卡-->>>去设置交易密码页面
+                {
+                    UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:3];
+                    [self.navigationController pushViewController:vc animated:YES];
+                }
+                    break;
+            }
+        }
+    }
+}
+-(void)reloadBatchBidData{
+    [self.tableview.header beginRefreshing];
+}
 //请求失败
 - (void)errorPost:(NSError*)err tag:(NSNumber*)tag
 {

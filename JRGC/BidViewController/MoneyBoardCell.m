@@ -166,6 +166,39 @@
 - (void)layoutSubviews
 {
     if (!_isTransid) {
+        
+        if (_isCollctionkeyBid) {
+            
+            NSString *minInvestStr = [NSString stringWithFormat:@"%@",[[_dataDict objectForKey:@"colPrdClaimDetail"] objectForKey:@"colMinInvest"]];
+      
+            NSString *palceText = [NSString stringWithFormat:@"%@元起投", minInvestStr];
+            if ([[_dataDict objectForKey:@"batchAmount"] intValue ] > 0) {
+                palceText = [palceText stringByAppendingString:[NSString stringWithFormat:@",限投%@元",[_dataDict objectForKey:@"batchAmount"]] ];
+            }
+            _inputMoneyTextFieldLable.font = [UIFont systemFontOfSize:15.0f];
+            _inputMoneyTextFieldLable.placeholder = palceText;
+            double availableBalance = [[_dataDict objectForKey:@"availableBalance"]  doubleValue];
+            NSString *availableStr = [UCFToolsMehod AddComma:[NSString stringWithFormat:@"%.2f",availableBalance]];
+            self.myMoneyLabel.text = [NSString stringWithFormat:@"¥%@",availableStr];
+            double gondDouBalance = [[_dataDict objectForKey:@"beanAmount"] doubleValue];
+            NSString *gondDouBalancStr = [UCFToolsMehod AddComma:[NSString stringWithFormat:@"%.2f",gondDouBalance/100.0f]];
+            
+            self.gongDouCountLabel.text = [NSString stringWithFormat:@"¥%@",gondDouBalancStr];
+            if (self.gongDouSwitch.on == NO) {
+                gondDouBalance = 0;
+            }
+            NSString *totalMoney = [UCFToolsMehod AddComma:[NSString stringWithFormat:@"%.2lf",availableBalance + gondDouBalance/100.0f]];
+            self.KeYongMoneyLabel.text = [NSString stringWithFormat:@"¥%@",totalMoney];
+            CGSize size = [Common getStrWitdth:self.KeYongMoneyLabel.text TextFont:_KeYongMoneyLabel.font];
+            self.KeYongMoneyLabel.frame = CGRectMake(CGRectGetMinX(self.KeYongMoneyLabel.frame), CGRectGetMinY(self.KeYongMoneyLabel.frame), size.width, CGRectGetHeight(self.KeYongMoneyLabel.frame));
+            _totalKeYongTipLabel.frame = CGRectMake(CGRectGetMaxX(_KeYongMoneyLabel.frame) + 5, CGRectGetMaxY(_KeYongMoneyLabel.frame) - 12, 11 * 12, 12);
+            if (_isCompanyAgent) {
+                _gongDouAccout.hidden = YES;
+                _gongDouCountLabel.hidden = YES;
+                _gongDouSwitch.hidden = YES;
+            }
+        }else{
+    
         NSString *palceText = [NSString stringWithFormat:@"%@元起投",[[_dataDict objectForKey:@"data"] objectForKey:@"minInvest"]];
         if ([[[_dataDict objectForKey:@"data"] objectForKey:@"maxInvest"] length] != 0) {
             NSString *maxInvest = [[_dataDict objectForKey:@"data"] objectForKey:@"maxInvest"];
@@ -192,27 +225,27 @@
             _gongDouAccout.hidden = YES;
             _gongDouCountLabel.hidden = YES;
             _gongDouSwitch.hidden = YES;
-        }
+         }
+      }
     } else{
-        _keYongTipLabel.text = @"我的余额";
-        _rechargeBtn.frame = CGRectMake(ScreenWidth - 15 - 44 , CGRectGetMaxY(_topView.frame), 44, 37);
-
-        _totalKeYongTipLabel.hidden = YES;
-        _inputMoneyTextFieldLable.placeholder = [NSString stringWithFormat:@"%@起投",[[_dataDict objectForKey:@"data"] objectForKey:@"investAmt"]];
-        double availableBalance = [[[_dataDict objectForKey:@"data"] objectForKey:@"actBalance"] doubleValue];
-        NSString *availableStr = [UCFToolsMehod AddComma:[NSString stringWithFormat:@"%.2f",availableBalance]];
-        self.myMoneyLabel.text = [NSString stringWithFormat:@"¥%@",availableStr];
-        double gondDouBalance = [[[_dataDict objectForKey:@"data"] objectForKey:@"beanBalance"] doubleValue];
-        self.gongDouCountLabel.text = [NSString stringWithFormat:@"¥%.2lf",gondDouBalance];
-        if (self.gongDouSwitch.on == NO) {
-            gondDouBalance = 0;
-        }
-        NSString *totalMoney = [UCFToolsMehod AddComma:[NSString stringWithFormat:@"%.2lf",availableBalance + gondDouBalance]];
-        self.KeYongMoneyLabel.text = [NSString stringWithFormat:@"¥%@",totalMoney];
-        CGSize size = [Common getStrWitdth:self.KeYongMoneyLabel.text TextFont:_KeYongMoneyLabel.font];
-        self.KeYongMoneyLabel.frame = CGRectMake(CGRectGetMinX(self.KeYongMoneyLabel.frame), CGRectGetMinY(self.KeYongMoneyLabel.frame), size.width, CGRectGetHeight(self.KeYongMoneyLabel.frame));
-        _totalKeYongTipLabel.frame = CGRectMake(CGRectGetMaxX(_KeYongMoneyLabel.frame) + 5, CGRectGetMaxY(_KeYongMoneyLabel.frame) - 12, 11 * 12, 12);
-
+            _keYongTipLabel.text = @"我的余额";
+            _rechargeBtn.frame = CGRectMake(ScreenWidth - 15 - 44 , CGRectGetMaxY(_topView.frame), 44, 37);
+            
+            _totalKeYongTipLabel.hidden = YES;
+            _inputMoneyTextFieldLable.placeholder = [NSString stringWithFormat:@"%@起投",[[_dataDict objectForKey:@"data"] objectForKey:@"investAmt"]];
+            double availableBalance = [[[_dataDict objectForKey:@"data"] objectForKey:@"actBalance"] doubleValue];
+            NSString *availableStr = [UCFToolsMehod AddComma:[NSString stringWithFormat:@"%.2f",availableBalance]];
+            self.myMoneyLabel.text = [NSString stringWithFormat:@"¥%@",availableStr];
+            double gondDouBalance = [[[_dataDict objectForKey:@"data"] objectForKey:@"beanBalance"] doubleValue];
+            self.gongDouCountLabel.text = [NSString stringWithFormat:@"¥%.2lf",gondDouBalance];
+            if (self.gongDouSwitch.on == NO) {
+                gondDouBalance = 0;
+            }
+            NSString *totalMoney = [UCFToolsMehod AddComma:[NSString stringWithFormat:@"%.2lf",availableBalance + gondDouBalance]];
+            self.KeYongMoneyLabel.text = [NSString stringWithFormat:@"¥%@",totalMoney];
+            CGSize size = [Common getStrWitdth:self.KeYongMoneyLabel.text TextFont:_KeYongMoneyLabel.font];
+            self.KeYongMoneyLabel.frame = CGRectMake(CGRectGetMinX(self.KeYongMoneyLabel.frame), CGRectGetMinY(self.KeYongMoneyLabel.frame), size.width, CGRectGetHeight(self.KeYongMoneyLabel.frame));
+            _totalKeYongTipLabel.frame = CGRectMake(CGRectGetMaxX(_KeYongMoneyLabel.frame) + 5, CGRectGetMaxY(_KeYongMoneyLabel.frame) - 12, 11 * 12, 12);
     }
 
 

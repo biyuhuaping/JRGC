@@ -424,5 +424,55 @@
     }
     return [NSString stringWithFormat:@"剩%@",str1];
 }
+- (void)setCollectionKeyBidInvestItemInfo:(NSDictionary *)aItemInfo{
+    
+    _investButton.userInteractionEnabled = NO;
+    _prdNameLab.text =  [aItemInfo objectSafeForKey:@"colName"] ;//名称
+    _prdNameLab.textColor = UIColorWithRGB(0x333333);
+    _prdNameLab.font = [UIFont systemFontOfSize:14.0];
+    _progressLab.text = [NSString stringWithFormat:@"%@%%",[aItemInfo objectSafeForKey:@"colRate"]];//年化收益率
+    [_progressLab setFont:[UIFont systemFontOfSize:13] string:@"%"];
+    
+    
+    _repayPeriodLab.text = [aItemInfo objectSafeForKey:@"colPeriodTxt"];//投资期限
+    //还款方式
+    _repayModeLab.text = [aItemInfo objectSafeForKey:@"colRepayModeTxt"];
+    
+    _minInvestLab.text = [NSString stringWithFormat:@"%@元起",[aItemInfo objectSafeForKey:@"colMinInvest"]];//起投金额
+    
+    //可投金额
+    NSString *remainStr = [NSString stringWithFormat:@"%.2f",[[aItemInfo objectSafeForKey:@"canBuyAmt"] doubleValue] ];
+    _remainingLab.text = [NSString stringWithFormat:@"剩¥%@",[UCFToolsMehod AddComma:remainStr]];//剩余钱数
+    
+    //总金额
+    NSString *totalAmtStr =[NSString stringWithFormat:@"%.2f",[[aItemInfo objectSafeForKey:@"totalAmt"] doubleValue]];
+    
+    CGFloat temp = 100 * (([totalAmtStr  doubleValue] - [remainStr doubleValue] )/[totalAmtStr doubleValue]);
+    int temp1 = (int)(temp);
+    if (temp1 == 0) {
+        temp1 = 1;
+    }
+    self.angleView.angleStatus = @"2";
+    self.progressView.textStr = [NSString stringWithFormat:@"%d%%",temp1];
+    
+    float progress = ([totalAmtStr  doubleValue] - [remainStr doubleValue] )/[totalAmtStr doubleValue];
+    progress = 1000*progress;
+    if (progress > 0 && progress < 1) {
+        progress = 1;
+    }
+    NSInteger status = 2;
+    //控制进度视图显示
+    if (status < 3) {
+        self.progressView.tintColor = UIColorWithRGB(0xfa4d4c);
+        self.progressView.progressLabel.textColor = UIColorWithRGB(0x333333);
+        self.progressView.progressLabel.font = [UIFont systemFontOfSize:14.0f];
+        [self animateCircle:progress isAnim:NO];
+    }else {
+        self.progressView.tintColor = UIColorWithRGB(0xcfd5d7);
+    }
+
+    
+    
+}
 
 @end
