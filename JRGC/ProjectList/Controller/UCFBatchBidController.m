@@ -158,6 +158,7 @@
             self.currentPage ++;
             for (NSDictionary *dict in list_result) {
                 UCFBatchBidModel *model = [UCFBatchBidModel batchWithDict:dict];
+                model.isAnim = YES;
                 [self.dataArray addObject:model];
             }
             

@@ -34,9 +34,8 @@
                                 <color key="textColor" red="0.97647058819999999" green="0.20000000000000001" blue="0.23529411759999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="利润分析369" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OP5-5f-s4e">
-                                <rect key="frame" x="15" y="8" width="84" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="利润分析369" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OP5-5f-s4e">
+                                <rect key="frame" x="15" y="12" width="84" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -56,7 +55,9 @@
                             <constraint firstItem="gYG-fR-vhO" firstAttribute="centerY" secondItem="ly8-Kc-d4J" secondAttribute="centerY" id="8Mf-d3-Zhy"/>
                             <constraint firstAttribute="trailing" secondItem="gYG-fR-vhO" secondAttribute="trailing" constant="15" id="O1x-s6-OaQ"/>
                             <constraint firstItem="ON8-Qs-lmj" firstAttribute="leading" secondItem="ly8-Kc-d4J" secondAttribute="leading" id="WZL-We-1J9"/>
+                            <constraint firstItem="OP5-5f-s4e" firstAttribute="leading" secondItem="ly8-Kc-d4J" secondAttribute="leading" constant="15" id="ZYK-ZV-hnt"/>
                             <constraint firstItem="6iU-bx-kqJ" firstAttribute="leading" secondItem="ly8-Kc-d4J" secondAttribute="leading" id="afX-Oi-eCG"/>
+                            <constraint firstItem="OP5-5f-s4e" firstAttribute="centerY" secondItem="ly8-Kc-d4J" secondAttribute="centerY" id="k9G-Cv-Emx"/>
                             <constraint firstAttribute="trailing" secondItem="6iU-bx-kqJ" secondAttribute="trailing" id="qFN-ba-AX1"/>
                             <constraint firstAttribute="bottom" secondItem="6iU-bx-kqJ" secondAttribute="bottom" id="uFH-t5-oQ7"/>
                         </constraints>

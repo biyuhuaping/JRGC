@@ -140,6 +140,18 @@
                             <constraint firstAttribute="trailing" secondItem="oiJ-Zm-qhC" secondAttribute="trailing" constant="3" id="yvp-wD-tFl"/>
                         </constraints>
                     </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0天" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FEv-hx-DlN">
+                        <rect key="frame" x="71" y="108.5" width="20.5" height="14.5"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                        <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="剩100万" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p7Q-zC-2N7">
+                        <rect key="frame" x="229" y="108.5" width="47.5" height="14.5"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                        <color key="textColor" red="0.99215686270000003" green="0.30196078430000001" blue="0.29803921570000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="2wj-6f-akI" firstAttribute="centerY" secondItem="XaH-6L-FPl" secondAttribute="centerY" id="0NQ-qV-pHm"/>
@@ -149,19 +161,27 @@
                     <constraint firstItem="84q-lg-x6c" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="Csd-wS-xen"/>
                     <constraint firstAttribute="bottom" secondItem="7Qr-PB-Od8" secondAttribute="bottom" constant="15" id="Grn-IL-3uu"/>
                     <constraint firstAttribute="trailing" secondItem="7Qr-PB-Od8" secondAttribute="trailing" constant="45" id="K3W-Zu-vYv"/>
+                    <constraint firstItem="84q-lg-x6c" firstAttribute="leading" secondItem="FEv-hx-DlN" secondAttribute="trailing" constant="40" id="Vch-UQ-nOP"/>
                     <constraint firstAttribute="trailing" secondItem="2wj-6f-akI" secondAttribute="trailing" constant="15" id="Wtq-z5-NRK"/>
                     <constraint firstItem="XaH-6L-FPl" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="dlM-8f-Gdw"/>
+                    <constraint firstItem="FEv-hx-DlN" firstAttribute="centerY" secondItem="84q-lg-x6c" secondAttribute="centerY" id="gbY-o5-aWT"/>
                     <constraint firstItem="Fwn-OR-uAY" firstAttribute="top" secondItem="XaH-6L-FPl" secondAttribute="bottom" constant="30" id="haX-OB-Ju1"/>
+                    <constraint firstItem="p7Q-zC-2N7" firstAttribute="leading" secondItem="84q-lg-x6c" secondAttribute="trailing" constant="40" id="l9b-11-Gwa"/>
                     <constraint firstItem="84q-lg-x6c" firstAttribute="top" secondItem="Fwn-OR-uAY" secondAttribute="bottom" constant="8" id="nLs-9T-psb"/>
+                    <constraint firstItem="p7Q-zC-2N7" firstAttribute="centerY" secondItem="84q-lg-x6c" secondAttribute="centerY" id="s0o-Gd-uzA"/>
                     <constraint firstItem="Fwn-OR-uAY" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="y2r-UX-jCF"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="batchBidButton" destination="Tdc-Hn-FAo" id="R2R-wW-7gq"/>
                 <outlet property="collectionBidName" destination="XaH-6L-FPl" id="ZrN-Rg-xpm"/>
+                <outlet property="leftAmtLabel" destination="p7Q-zC-2N7" id="MqU-rn-T6D"/>
                 <outlet property="moreBgView" destination="2wj-6f-akI" id="Dqz-v4-aVN"/>
                 <outlet property="moreValueLabel" destination="oiJ-Zm-qhC" id="1SJ-Om-PSA"/>
+                <outlet property="periodLabel" destination="FEv-hx-DlN" id="P3A-I1-1HH"/>
                 <outlet property="preYearRateLabel" destination="Fwn-OR-uAY" id="yYu-lR-StF"/>
                 <outlet property="progressBgView" destination="yBH-Wa-xBA" id="wha-K1-4im"/>
+                <outlet property="progressValueTrailSpace" destination="Pal-g4-SbG" id="Bt2-xC-Lo7"/>
                 <outlet property="progressValueView" destination="1Sb-I7-tNy" id="lw0-2r-WeC"/>
                 <outlet property="returnModeLabel" destination="84q-lg-x6c" id="lNQ-1D-tNn"/>
             </connections>

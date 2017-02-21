@@ -808,6 +808,7 @@
                 
                 NSDictionary *collectionBid = [[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"colPrdClaim"];
                 self.collectionBidModel = [UCFCollectionBidModel collectionBidWithDict:collectionBid];
+                self.totalCount = [[dic objectSafeDictionaryForKey:@"data"] objectSafeForKey:@"totalCount"];
                 
                 [_investmentArr removeAllObjects];
                 NSMutableArray *tempArray = [[NSMutableArray alloc]init];

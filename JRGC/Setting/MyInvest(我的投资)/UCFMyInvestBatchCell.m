@@ -61,9 +61,10 @@
             self.statusLabel.text = @"已回款";
             break;
     }
-    self.bidCycleLabel.text = model.collPeriod;
+    self.bidCycleLabel.text = model.colPeriodTxt;
     self.preYearRateLabel.text = [NSString stringWithFormat:@"%@%%", model.collRate];
     self.hasInvested.text = [NSString stringWithFormat:@"¥%@", model.investSuccessTotal];
+    self.tradeDateLabel.text = model.investTime;
 }
 
 @end

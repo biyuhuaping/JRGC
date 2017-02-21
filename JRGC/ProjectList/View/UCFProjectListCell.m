@@ -312,14 +312,11 @@
      _repayPeriodLab.text = batchBidModel.colPeriodTxt;//投资期限
     _minInvestLab.text = [NSString stringWithFormat:@"%d元起",[batchBidModel.colMinInvest intValue]];//起投金额
     _remainingLab.text = batchBidModel.colRepayModeTxt;
+    _repayModeLab.text = [self moneywithRemaining:batchBidModel.canBuyAmt total:batchBidModel.totalAmt];
     
-//    float progress = ([batchBidModel.totalAmt floatValue]-[batchBidModel.canBuyAmt floatValue])/[batchBidModel.totalAmt floatValue];
-//    progress = 1000*progress;
-//    
-//    if (progress > 0 && progress < 1) {
-//        progress = 1;
-//    }
-    
+
+
+    float progress = ([batchBidModel.totalAmt floatValue] - [batchBidModel.canBuyAmt floatValue])/[batchBidModel.totalAmt floatValue];
     if (batchBidModel.full) {
         self.circleProgressView.textStr = @"满标";
         self.circleProgressView.tintColor = UIColorWithRGB(0xe2e2e2);//未绘制的进度条颜色
@@ -329,6 +326,12 @@
         self.circleProgressView.tintColor = UIColorWithRGB(0xfa4d4c);
         self.circleProgressView.progressLabel.textColor = UIColorWithRGB(0x555555);
         self.circleProgressView.textStr = @"批量投资";
+        if (batchBidModel.isAnim) {
+            [self animateCircle:10*progress isAnim:YES];
+            batchBidModel.isAnim = NO;
+        }else{
+            [self animateCircle:10*progress isAnim:NO];
+        }
     }
 }
 
