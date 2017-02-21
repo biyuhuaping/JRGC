@@ -11,9 +11,13 @@
 #import "UCFNoDataView.h"
 #import "UCFMyInvestBatchBidModel.h"
 #import "UCFMyInvestBatchCell.h"
+#import "UCFCollectionDetailViewController.h"
 #import "NZLabel.h"
-
 @interface UCFBatchProjectController () <UITableViewDelegate, UITableViewDataSource>
+{
+    NSString *_colPrdClaimIdStr;
+    NSString *_batchOrderIdStr;
+}
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet NZLabel *totalCountLabel;
 
@@ -87,11 +91,15 @@
 // 选中某cell时。
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-//    NSDictionary *dict = temp[indexPath.row];
-    UCFInvestmentDetailViewController *controller = [[UCFInvestmentDetailViewController alloc] init];
-//    controller.billId = dict[@"prdOrderId"];
-//    controller.detailType = @"2";
-    [self.navigationController pushViewController:controller animated:YES];
+
+    UCFMyInvestBatchBidModel *model = [self.dataArray objectAtIndex:indexPath.row];
+    _colPrdClaimIdStr = [NSString stringWithFormat:@"%@",model.colId ];
+    _batchOrderIdStr = [NSString stringWithFormat:@"%@",model.Id ];
+    NSString *uuid = [[NSUserDefaults standardUserDefaults]valueForKey:UUID];
+    NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:uuid,@"userId",_colPrdClaimIdStr, @"colPrdClaimsId", _batchOrderIdStr, @"batchOrderId",@"1",@"page", @"20", @"pageSize",nil];
+    
+    
+    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagMyBatchInvestDetail owner:self signature:YES];
 }
 
 #pragma mark - net request
@@ -110,7 +118,6 @@
         [self.tableView.footer resetNoMoreData];
     }
     strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:uuid,@"userId", [NSString stringWithFormat:@"%ld", (long)self.pageNum], @"page", @"20", @"pageSize", nil];
-    
     
     [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagMyInvestBatchBid owner:self signature:YES];
 }
@@ -165,6 +172,20 @@
             [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
         }
     }
+    else if (tag.intValue == kSXTagMyBatchInvestDetail) {
+            NSString *rstcode = dic[@"ret"];
+            NSString *rsttext = dic[@"message"];
+            if ([rstcode intValue] == 1) {
+                UCFCollectionDetailViewController *collectionDetailVC = [[UCFCollectionDetailViewController alloc]initWithNibName:@"UCFCollectionDetailViewController" bundle:nil];
+                collectionDetailVC.souceVC = @"BatchProjectVC";
+                collectionDetailVC.colPrdClaimId = _colPrdClaimIdStr;
+                collectionDetailVC.batchOrderIdStr = _batchOrderIdStr;
+                collectionDetailVC.detailDataDict = [[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"colPrdClaimDetail"];
+                [self.navigationController pushViewController:collectionDetailVC  animated:YES];
+            }else {
+                [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
+            }
+        }
     if ([self.tableView.header isRefreshing]) {
         [self.tableView.header endRefreshing];
     }

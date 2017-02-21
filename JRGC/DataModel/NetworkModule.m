@@ -1175,6 +1175,18 @@ static NetworkModule *gInstance = NULL;
             parameter = [NEW_SERVER_IP stringByAppendingString:COLPRDCLAIMSLIST];
         }
             break;
+        case kSXTagMyBatchInvestDetail: {
+            parameter = [NEW_SERVER_IP stringByAppendingString:MYBATCHINVESTDETAIL];
+        }
+            break;
+        case kSXTagColIntoDealBatch: {
+            parameter = [NEW_SERVER_IP stringByAppendingString:INTODEALBATCH];
+        }
+            break;
+        case kSXTagColBatchInvestUrl: {
+            parameter = [NEW_SERVER_IP stringByAppendingString:BATCHINVESTURL];
+        }
+            break;
     }
     //给原有参数字典添加公共参数
     if (!data) {
