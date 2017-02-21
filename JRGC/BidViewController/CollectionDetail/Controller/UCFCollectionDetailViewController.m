@@ -24,6 +24,8 @@
 #import "UCFCollectionListViewController.h"
 #import "UCFNoPermissionViewController.h"
 #import "UCFProjectDetailViewController.h"
+#import "UCFNoDataView.h"
+#import "UCFPurchaseBidViewController.h"
 #define shadeSpacingHeight 18 //遮罩label的上下间距
 #define shadeHeight 70 //遮罩高度
 static NSString * const DetailCellID = @"UCFCollectionDetailCell";
@@ -51,16 +53,20 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
     NSInteger _selectIndex;//segmentselect
     
     NSInteger _currentSelectSortTag;//当前选择排序tag
+    NSInteger _lastSelectSortTag;//最后一次选择排序tag
 }
 @property (weak, nonatomic) IBOutlet UIScrollView *collectionScrollView;
 @property (weak, nonatomic) IBOutlet UILabel *navTitleLabel;
 @property (assign, nonatomic)float headerViewHeight;
 @property (strong,nonatomic) UITableView *listTableView;
 @property (strong,nonatomic) UIButton *sortButton;   //排序按钮
-@property (assign,nonatomic) int currentPage;
+@property (assign,nonatomic) int investmentCurrentPage; //可投项目当前页数
+@property (assign,nonatomic) int fullCurrentPage; //已满项目当前页数
 @property (strong,nonatomic)NSMutableArray *investmentProjectDataArray;//可投项目数组
 @property (strong,nonatomic)NSMutableArray *fullProjectDataArray;//已满项目数组
-@property (strong,nonatomic)NSMutableArray *investmentDetailDataArray;//投资详情数组
+@property (strong,nonatomic) UCFNoDataView *noDataView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *investmentBtnViewHeight;
+@property (weak, nonatomic) IBOutlet UIButton *investmentBtn;
 
 - (IBAction)goBackVC:(UIButton *)sender;
 - (IBAction)ClickBatchInvestment:(UIButton *)sender;
@@ -79,21 +85,28 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
 - (void)viewDidLoad {
 
     [super viewDidLoad];
+    [self progressAnimiation];
     [self drawTopView];
-    [self.collectionScrollView setContentSize:CGSizeMake(ScreenWidth, ScreenHeight +_headerViewHeight - 64 - 57)];
+    if([self.souceVC isEqualToString:@"P2PVC"]){
+         [self.collectionScrollView setContentSize:CGSizeMake(ScreenWidth, ScreenHeight +_headerViewHeight - 64 - 57)];
+    }else{
+         [self.collectionScrollView setContentSize:CGSizeMake(ScreenWidth, ScreenHeight +_headerViewHeight - 64)];
+    }
+   
     self.collectionScrollView.delegate = self;
     self.collectionScrollView.tag = 1010;
     self.collectionScrollView.bounces = YES;
     self.collectionScrollView.alwaysBounceVertical = YES;
-    [self progressAnimiation];
+  
     
     if([_souceVC isEqualToString:@"P2PVC"]){
         [self drawBottomBgView];
     }else{
-        [self drawCollectionListView];
+        [self drawCollectionDelitailListView];//我的投资页面的项目详情
     }
    
 }
+
 #pragma mark
 #pragma mark 绘制顶部视图
 - (void)drawTopView
@@ -118,7 +131,7 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
     annualLabelFrame.size.width = stringWidth;
     annualLabel.frame = annualLabelFrame;
     
-    NSString *annualStr = [NSString stringWithFormat:@"%@%%",[_detailDataDict objectSafeForKey:@"colRate"]];
+    NSString *annualStr = [NSString stringWithFormat:@"%.1f%%",[[_detailDataDict objectSafeForKey:@"colRate"] floatValue]];
     CGSize size = [annualStr sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:25]}];
     _annualEarningsLabel = [[NZLabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(annualLabel.frame) + 10,CGRectGetMaxY(annualLabel.frame) - 25,size.width,size.height)];
     _annualEarningsLabel.text = annualStr;
@@ -137,7 +150,12 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
     markLabelFrame.size.width = stringWidth;
     markLabel.frame = markLabelFrame;
     
+    
+    
     NSString *colPeriodStr = [_detailDataDict objectSafeForKey:@"colPeriod"];
+    if (![self.souceVC isEqualToString:@"P2PVC"]) {
+        colPeriodStr = [NSString stringWithFormat:@"%@",[_detailDataDict objectSafeForKey:@"colPeriodTxt"] ];
+    }
     CGSize colPeriodsize = [colPeriodStr sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:25]}];
     _markTimeLabel = [[NZLabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(markLabel.frame) + 10,CGRectGetMaxY(markLabel.frame) - 25,colPeriodsize.width,colPeriodsize.height)];
     _markTimeLabel.text = colPeriodStr;
@@ -156,7 +174,12 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
     _activitylabel1.layer.cornerRadius = 2.0;
     _activitylabel1.layer.masksToBounds = YES;
     [_headerBgView addSubview:_activitylabel1];
-    NSString *colRepayModeStr = [NSString stringWithFormat:@"%@",[_detailDataDict objectSafeForKey:@"colRepayMode"] ];
+    NSString *colRepayModeStr = @"";
+    if ([self.souceVC isEqualToString:@"P2PVC"]) {
+         colRepayModeStr = [NSString stringWithFormat:@"%@",[_detailDataDict objectSafeForKey:@"colRepayMode"] ];
+    }else{
+         colRepayModeStr = [NSString stringWithFormat:@"%@",[_detailDataDict objectSafeForKey:@"colRepayModeTxt"] ];
+    }
     CGSize activitylabel2Size =[Common getStrWitdth:colRepayModeStr TextFont:[UIFont systemFontOfSize:11]];
     _activitylabel2 = [UILabel labelWithFrame:CGRectMake(CGRectGetMaxX(_activitylabel1.frame)+15, CGRectGetMaxY(markLabel.frame)+25, activitylabel2Size.width+10, 15) text:colRepayModeStr textColor:UIColorWithRGB(0x28335c) font:[UIFont systemFontOfSize:MarkLabelFont]];
     _activitylabel2.backgroundColor = [UIColor whiteColor];
@@ -178,7 +201,8 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
     
    
     NSString *canBuyAmtStr =[NSString stringWithFormat:@"%@",[_detailDataDict objectSafeForKey:@"canBuyAmt"] ];
-    canBuyAmtStr = [NSString stringWithFormat:@"¥%@",[UCFToolsMehod dealmoneyFormartForDetailView:[NSString stringWithFormat:@"%@",[UCFToolsMehod isNullOrNilWithString:canBuyAmtStr]]]];//可投额度
+    
+    canBuyAmtStr = [NSString stringWithFormat:@"¥%@",[UCFToolsMehod AddComma:[NSString stringWithFormat:@"%@",[UCFToolsMehod isNullOrNilWithString:canBuyAmtStr]]]];//可投额度
     _remainMoneyLabel = [UILabel labelWithFrame:CGRectMake(CGRectGetMaxX(remainLabel.frame) + 10,remainLabel.frame.origin.y - 1,150,14) text:canBuyAmtStr textColor:[UIColor whiteColor] font:[UIFont systemFontOfSize:14]];
     _remainMoneyLabel.textAlignment = NSTextAlignmentLeft;
     [_headerBgView addSubview:_remainMoneyLabel];
@@ -190,7 +214,7 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
     totalLabel.frame = totalLabelFrame;
     
      NSString *canBuyCountStr = [NSString stringWithFormat:@"%@个",[_detailDataDict objectSafeForKey:@"canBuyCount"] ];
-    
+
     _totalMoneyLabel = [UILabel labelWithFrame:CGRectMake(CGRectGetMaxX(totalLabel.frame) + 10,totalLabel.frame.origin.y - 1,150,14) text:canBuyCountStr textColor:UIColorWithRGB(0x7e96c4) font:[UIFont systemFontOfSize:14]];
     [_headerBgView addSubview:_totalMoneyLabel];
     _totalMoneyLabel.textAlignment = NSTextAlignmentLeft;
@@ -212,12 +236,13 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
     proressView.progress = 0;
     [_headerBgView addSubview:proressView];
     //进度条中间的百分比label
-    NSString* percentageStr = [NSString stringWithFormat:@"%@",[_detailDataDict objectSafeForKey:@"percentage"]];
-    Progress = [percentageStr floatValue] / 100.0;
-    if (Progress > 0 && Progress < 0.01) {
-        percentageStr = @"1";
+    
+    int progressInt = (int)(Progress *100);
+    if (progressInt == 0) {
+        progressInt = 1;
     }
-    percentageStr =[NSString stringWithFormat:@"%@%%",percentageStr];
+    NSString* percentageStr =[NSString stringWithFormat:@"%d%%",progressInt];
+
     CGSize percentageStrSize = [percentageStr sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:25]}];
     NZLabel* rateLabel = [[NZLabel alloc]initWithFrame:CGRectMake(0,0,percentageStrSize.width ,percentageStrSize.height)];
     rateLabel.text = percentageStr;
@@ -235,12 +260,18 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
 #pragma mark 设置进度条的动画
 - (void)progressAnimiation
 {
-    NSString* percentageStr = [NSString stringWithFormat:@"%@",[_detailDataDict objectSafeForKey:@"percentage"]];
-    Progress = [percentageStr floatValue] / 100.0;
+    
+    NSString *canBuyAmtStr = [NSString stringWithFormat:@"%@",[_detailDataDict objectSafeForKey:@"canBuyAmt"]];
+    NSString *totalAmtStr = [NSString stringWithFormat:@"%@",[_detailDataDict objectSafeForKey:@"totalAmt"]];
+    
+    Progress = ([totalAmtStr floatValue] - [canBuyAmtStr floatValue]) / [totalAmtStr floatValue];
     if (Progress > 0.98 && Progress < 1.0) {
         Progress = 0.98;
     } else if (Progress > 0.97 && Progress < 0.99) {
         Progress = 0.97;
+    }
+    if (Progress > 0 && Progress < 0.01) {
+        Progress = 0.01;
     }
     [self performSelector:@selector(beginUpdatingProgressView) withObject:nil afterDelay:0.1];
 }
@@ -258,24 +289,32 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
         curProcess = curProcess + 0.01;
     }
 }
--(void)drawBottomBgView2{
+#pragma mark
+#pragma mark 初始化底部--即项目列表
+-(void)drawCollectionDelitailListView{
+    
+    self.investmentBtnViewHeight.constant = 0;
+    self.investmentBtn.hidden = YES;
     UCFCollectionListViewController *collectionListVC = [[UCFCollectionListViewController alloc]initWithNibName:@"UCFCollectionListViewController" bundle:nil];
-    collectionListVC.view.frame = CGRectMake(0, _headerViewHeight, ScreenWidth, ScreenHeight - 64 - 57-_headerViewHeight);
-    collectionListVC.souceVC = @"P2PVC";
+    collectionListVC.view.frame = CGRectMake(0, _headerViewHeight, ScreenWidth, ScreenHeight - 64);
+    collectionListVC.souceVC = _souceVC;
     collectionListVC.colPrdClaimId = _colPrdClaimId;
+    collectionListVC.batchOrderIdStr = _batchOrderIdStr;
     [self.collectionScrollView addSubview:collectionListVC.view];
     [self addChildViewController:collectionListVC];
     [collectionListVC didMoveToParentViewController:self];
 }
 #pragma mark
-#pragma mark 初始化底部--即项目列表
+#pragma mark 初始化底部-- 批量投标专区
 -(void)drawBottomBgView{
     //初始化数组
+    self.investmentBtnViewHeight.constant = 57;
+    self.investmentBtn.hidden = NO;
     self.investmentProjectDataArray = [NSMutableArray arrayWithCapacity:0];
     self.fullProjectDataArray = [NSMutableArray arrayWithCapacity:0];
     [self addTableHeaderView];
     
-    _listTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, _headerViewHeight+74, ScreenWidth, ScreenHeight - 64 - 57 - 74 ) style:UITableViewStylePlain];
+    _listTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, _headerViewHeight+74, ScreenWidth, ScreenHeight- 64 - 57 - 74 ) style:UITableViewStylePlain];
     _listTableView.delegate = self;
     _listTableView.dataSource = self;
     _listTableView.indicatorStyle = UIScrollViewIndicatorStyleDefault;
@@ -296,6 +335,11 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
         [weakSelf getCollectionDetailHttpRequest];
     }];
     [self.listTableView.header beginRefreshing];
+    [self addNoDataView];
+}
+#pragma mark - 添加无数据页面
+- (void)addNoDataView {
+    self.noDataView = [[UCFNoDataView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - 64 - 57 - 74) errorTitle:@"暂无数据"];
 }
 - (void)addTableHeaderView
 {
@@ -349,63 +393,17 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
     _topSegmentedControl.selectedSegmentIndex = control.selectedSegmentIndex;
     _selectIndex = control.selectedSegmentIndex;
     if (_selectIndex == 0) {
+        [self.fullProjectDataArray removeAllObjects];
         [_sortButton setTitleColor:UIColorWithRGB(0x4aa1f9) forState:UIControlStateNormal];
         _sortButton.userInteractionEnabled = YES;
     }else{
+        [self.investmentProjectDataArray removeAllObjects];
         [_sortButton setTitleColor:UIColorWithRGB(0x333333) forState:UIControlStateNormal];
         _sortButton.userInteractionEnabled = NO;
     }
-    [_listTableView setContentInset:UIEdgeInsetsZero];
-    [_listTableView setContentOffset:CGPointZero];
     [_listTableView reloadData];
-}
-#pragma mark 
-#pragma mark 项目详情
--(void)drawCollectionListView{
-    
-    self.investmentDetailDataArray  = [NSMutableArray arrayWithCapacity:0];
-    UIView *listHeaderView = [[UIView  alloc] initWithFrame:CGRectMake(0, _headerViewHeight, ScreenWidth, 30)];
-    listHeaderView.backgroundColor = UIColorWithRGB(0xf9f9f9);
-    
-    [self.collectionScrollView addSubview:listHeaderView];
-    UILabel *headerTitleLabel = [[UILabel alloc]initWithFrame:CGRectMake(15, 5, 60, 20)];
-    headerTitleLabel.text = @"投资详情";
-    headerTitleLabel.textColor = UIColorWithRGB(0x333333);
-    headerTitleLabel.font = [UIFont systemFontOfSize:13];
-    headerTitleLabel.textAlignment = NSTextAlignmentLeft;
-    [listHeaderView  addSubview:headerTitleLabel];
-    
-    UILabel *listCountLabel= [[UILabel alloc]initWithFrame:CGRectMake(ScreenWidth - 15 - 100 , 5, 100, 20)];
-    listCountLabel.text = @"10个标";
-    listCountLabel.textColor = UIColorWithRGB(0x555555);
-    listCountLabel.font = [UIFont systemFontOfSize:13];
-    listCountLabel.textAlignment = NSTextAlignmentRight;
-    [listHeaderView  addSubview:listCountLabel];
-                                                                         
-    _listTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, _headerViewHeight + 30, ScreenWidth, ScreenHeight - 64 - 57 - 30 ) style:UITableViewStylePlain];
-    _listTableView.delegate = self;
-    _listTableView.dataSource = self;
-    _listTableView.indicatorStyle = UIScrollViewIndicatorStyleDefault;
-    _listTableView.tag = 1020;
-    _listTableView.backgroundColor = UIColorWithRGB(0xebebee);
-    _listTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [_listTableView registerNib:[UINib nibWithNibName:@"UCFCollectionListCell" bundle:nil] forCellReuseIdentifier:ListCellID];
-
-    [self.collectionScrollView addSubview:_listTableView];
-    
-    
-    __weak typeof(self)  weakSelf = self;
-    [self.listTableView addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(getCollectionListHttpRequest)];
-    
-    // 添加上拉加载更多
-    
-    [self.listTableView addLegendFooterWithRefreshingBlock:^{
-        [weakSelf getCollectionListHttpRequest];
-    }];
-    [self.listTableView.header beginRefreshing];
-    
-    
-    
+    [_listTableView.header beginRefreshing];
+  
 }
 #pragma mark 点击排序button响应事件
 -(void)clickSortButton:(UIButton *)button{
@@ -417,9 +415,12 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
 }
 -(void)mjalertView:(MjAlertView *)alertview didClickedButton:(UIButton *)clickedButton andClickedIndex:(NSInteger)index{
     if (clickedButton.tag != 0) {
-       _currentSelectSortTag = index;
-        [self.listTableView.header isRefreshing];
-        [self getCollectionDetailHttpRequest];
+        if(_lastSelectSortTag != index){
+            _investmentCurrentPage = 1;
+            _lastSelectSortTag = _currentSelectSortTag;
+            _currentSelectSortTag = index;
+        }
+        [self.listTableView.header beginRefreshing];
     }
 }
 - (void)didReceiveMemoryWarning {
@@ -464,25 +465,16 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
             [_collectionScrollView setContentOffset:CGPointMake(0, _headerViewHeight)];
         }
     }else{
-//        if (scrollView.contentOffset.y <= -40){
-//            __weak typeof(self) weakSelf = self;
-//            [UIView animateWithDuration:0.25 animations:^{
-//                [weakSelf.collectionScrollView setContentOffset:CGPointZero];
-//            } completion:^(BOOL finished) {
-//                
-//            }];
-//        }
+        if (scrollView.contentOffset.y <= -40){
+            __weak typeof(self) weakSelf = self;
+            [UIView animateWithDuration:0.25 animations:^{
+                [weakSelf.collectionScrollView setContentOffset:CGPointZero];
+            } completion:^(BOOL finished) {
+                
+            }];
+        }
     }
 }
-//-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-//    
-//    return [self addTableHeaderView];
-//    
-//}
-//-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-//    
-//    return 74.f;
-//}
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
     
     UIView *footerView =[[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 10)];
@@ -551,7 +543,7 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
 -(void)cell:(UCFCollectionDetailCell *)cell clickInvestBtn:(UIButton *)button withModel:(NSDictionary *)dataDict{
     NSString *status = [dataDict objectSafeForKey:@"status"];
     if ([status intValue] == 2) {
-        NSString *idStr =[dataDict objectSafeForKey:@"id"];
+        NSString *idStr =[dataDict objectSafeForKey:@"childPrdClaimId"];
         NSString *strParameters = [NSString stringWithFormat:@"id=%@&userId=%@", idStr,[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
         
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -573,37 +565,42 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
 #pragma mark 网络请求
 -(void)getCollectionDetailHttpRequest{
     NSString *uuid = [[NSUserDefaults standardUserDefaults]valueForKey:UUID];
-    NSDictionary *dataDict;
-    if ([self.listTableView.header isRefreshing]) {
-        self.currentPage = 1;
-        [self.listTableView.footer resetNoMoreData];
+    NSString *prdClaimsOrderStr = @"00";
+    if (_selectIndex == 0) {
+        if ([self.listTableView.header isRefreshing]) {
+            self.investmentCurrentPage = 1;
+            [self.listTableView.footer resetNoMoreData];
+        }
+        else if ([self.listTableView.footer isRefreshing]) {
+            self.investmentCurrentPage ++;
+        }
+        switch (_currentSelectSortTag) {
+            case 1:
+                prdClaimsOrderStr = @"32";//
+                break;
+            case 2:
+                prdClaimsOrderStr = @"31";
+                break;
+            default:
+                prdClaimsOrderStr = @"00";
+                break;
+        }
+    }else{
+        if ([self.listTableView.header isRefreshing]) {
+            self.fullCurrentPage = 1;
+            [self.listTableView.footer resetNoMoreData];
+        }
+        else if ([self.listTableView.footer isRefreshing]) {
+            self.fullCurrentPage ++;
+        }
     }
-    else if ([self.listTableView.footer isRefreshing]) {
-        self.currentPage ++;
+    NSString *currentPageStr = [NSString stringWithFormat:@"%d",_investmentCurrentPage];
+    if (_selectIndex == 1) {
+        currentPageStr =[NSString stringWithFormat:@"%d",_fullCurrentPage];
     }
-    NSString *prdClaimsOrderStr = @"";
-    switch (_currentSelectSortTag) {
-        case 1:
-            self.currentPage = 1;
-            prdClaimsOrderStr = @"32";//
-            break;
-        case 2:
-            self.currentPage = 1;
-            prdClaimsOrderStr = @"31";
-            break;
-          
-        default:
-            self.currentPage = 1;
-            prdClaimsOrderStr = @"00";
-            break;
-    }
-    NSString *currentPageStr = [NSString stringWithFormat:@"%d",_currentPage];
-    NSString *statusStr = [NSString stringWithFormat:@"%ld",_selectIndex];
-    dataDict  = @{@"userId":uuid,@"colPrdClaimId":_colPrdClaimId,@"page":currentPageStr,@"pageSize":@"20",@"prdClaimsOrder":prdClaimsOrderStr,@"status":statusStr};
+    NSString *statusStr = [NSString stringWithFormat:@"%ld",(long)_selectIndex];
+    NSDictionary *dataDict  = @{@"userId":uuid,@"colPrdClaimId":_colPrdClaimId,@"page":currentPageStr,@"pageSize":@"20",@"prdClaimsOrder":prdClaimsOrderStr,@"status":statusStr};
     [[NetworkModule sharedNetworkModule] newPostReq:dataDict tag:kSXTagChildPrdclaimsList owner:self signature:YES];
-}
--(void)getCollectionListHttpRequest{
-    
 }
 -(void)beginPost:(kSXTag)tag{
 //    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -622,9 +619,9 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
              BOOL hasNext = [[[[dic objectSafeDictionaryForKey:@"pageData"] objectSafeDictionaryForKey:@"pagination"] objectSafeForKey:@"hasNextPage"] boolValue];
             
     
-            if (_selectIndex == 0 && self.currentPage == 1) {
+            if (_selectIndex == 0 && self.investmentCurrentPage == 1) {
                       [self.investmentProjectDataArray removeAllObjects];
-                }else if (_selectIndex == 1 && self.currentPage == 1) {
+                }else if (_selectIndex == 1 && self.fullCurrentPage == 1) {
                      [self.fullProjectDataArray removeAllObjects];
                 }
             
@@ -640,53 +637,57 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
             [self.listTableView reloadData];
             if (_selectIndex == 0) {
                 if (self.investmentProjectDataArray.count > 0) {
-                    //                [self.noDataView hide];
+                   [self.noDataView hide];
                     if (!hasNext) {
-                        self.listTableView.footer.state = MJRefreshFooterStateNoMoreData;
                         [self.listTableView.footer noticeNoMoreData];
-                    }else{
-                        self.listTableView.footer.hidden = NO;
                     }
+                } else {
+                    [self.noDataView showInView:self.listTableView];
                 }
 
             }else{
                 if (self.fullProjectDataArray.count > 0) {
-                    //                [self.noDataView hide];
+                    [self.noDataView hide];
                     if (!hasNext) {
-                        self.listTableView.footer.state = MJRefreshFooterStateNoMoreData;
                         [self.listTableView.footer noticeNoMoreData];
-                    }else{
-                        self.listTableView.footer.hidden = NO;
                     }
                 }
-
+                else {
+                    [self.noDataView showInView:self.listTableView];
+                }
             }
         }else {
+            
+            
+            
+            
+            
+            
             [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
         }
     }else if (tag.intValue == kSXTagPrdClaimsDetail){
         NSString *rstcode = dic[@"status"];
         NSString *rsttext = dic[@"statusdes"];
         if ([rstcode intValue] == 1) {
-//            NSArray *prdLabelsListTemp = [NSArray arrayWithArray:(NSArray*)_projectListModel.prdLabelsList];
-//            UCFProjectDetailViewController *controller = [[UCFProjectDetailViewController alloc] initWithDataDic:dic isTransfer:NO withLabelList:prdLabelsListTemp];
+            NSArray *prdLabelsListTemp = [dic objectSafeArrayForKey:@"prdLabelsList"];
+            UCFProjectDetailViewController *controller = [[UCFProjectDetailViewController alloc] initWithDataDic:dic isTransfer:NO withLabelList:prdLabelsListTemp];
 //            CGFloat platformSubsidyExpense = [_projectListModel.platformSubsidyExpense floatValue];
 //            [[NSUserDefaults standardUserDefaults] setValue:[NSString stringWithFormat:@"%.1f",platformSubsidyExpense] forKey:@"platformSubsidyExpense"];
-//            [self.navigationController pushViewController:controller animated:YES];
+            [self.navigationController pushViewController:controller animated:YES];
         }else {
             [AuxiliaryFunc showAlertViewWithMessage:rsttext];
         }
     }
-    else if(tag.intValue == kSXTagPrdClaimsDealBid)
+    else if(tag.intValue == kSXTagColIntoDealBatch)
     {
         NSString *Data = (NSString *)result;
         NSDictionary * dic = [Data objectFromJSONString];
-        if([[dic objectForKey:@"status"] integerValue] == 1)
+        if([[dic objectForKey:@"status"] integerValue] != 1)
         {
-//            UCFPurchaseBidViewController *purchaseViewController = [[UCFPurchaseBidViewController alloc] initWithNibName:@"UCFPurchaseBidViewController" bundle:nil];
-//            purchaseViewController.dataDict = dic;
-//            purchaseViewController.bidType = 0;
-//            [self.navigationController pushViewController:purchaseViewController animated:YES];
+            UCFPurchaseBidViewController *purchaseViewController = [[UCFPurchaseBidViewController alloc] initWithNibName:@"UCFPurchaseBidViewController" bundle:nil];
+            purchaseViewController.dataDict = dic;
+            purchaseViewController.bidType = 0;
+            [self.navigationController pushViewController:purchaseViewController animated:YES];
             
         }else if ([[dic objectForKey:@"status"] integerValue] == 21 || [dic[@"status"] integerValue] == 22){
 //            [self checkUserCanInvest];
@@ -716,7 +717,14 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
 
 }
 -(void)errorPost:(NSError *)err tag:(NSNumber *)tag{
-    
+    [MBProgressHUD displayHudError:err.userInfo[@"NSLocalizedDescription"]];
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    if ([self.listTableView.header isRefreshing]) {
+        [self.listTableView.header endRefreshing];
+    }
+    if ([self.listTableView.footer isRefreshing]) {
+        [self.listTableView.footer endRefreshing];
+    }
 }
 - (IBAction)goBackVC:(UIButton *)sender {
     if (kIS_IOS7) {
@@ -732,7 +740,7 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
 - (IBAction)ClickBatchInvestment:(UIButton *)sender {
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    NSString *strParameters = strParameters = [NSString stringWithFormat:@"userId=%@&id=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],_colPrdClaimId];//101943
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDealBid owner:self];
+    NSDictionary *dataDict = @{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"tenderId":_colPrdClaimId};
+        [[NetworkModule sharedNetworkModule] newPostReq:dataDict tag:kSXTagColIntoDealBatch owner:self signature:YES];
 }
 @end

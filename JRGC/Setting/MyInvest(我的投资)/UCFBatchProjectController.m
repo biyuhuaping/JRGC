@@ -15,6 +15,7 @@
 @interface UCFBatchProjectController () <UITableViewDelegate, UITableViewDataSource>
 {
     NSString *_colPrdClaimIdStr;
+    NSString *_batchOrderIdStr;
 }
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
@@ -90,9 +91,9 @@
 
     UCFMyInvestBatchBidModel *model = [self.dataArray objectAtIndex:indexPath.row];
     _colPrdClaimIdStr = [NSString stringWithFormat:@"%@",model.colId ];
-    NSString *batchOrderIdStr = [NSString stringWithFormat:@"%@",model.Id ];
+    _batchOrderIdStr = [NSString stringWithFormat:@"%@",model.Id ];
     NSString *uuid = [[NSUserDefaults standardUserDefaults]valueForKey:UUID];
-    NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:uuid,@"userId",_colPrdClaimIdStr, @"colPrdClaimsId", batchOrderIdStr, @"batchOrderId", nil];
+    NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:uuid,@"userId",_colPrdClaimIdStr, @"colPrdClaimsId", _batchOrderIdStr, @"batchOrderId",@"1",@"page", @"20", @"pageSize",nil];
     
     
     [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagMyBatchInvestDetail owner:self signature:YES];
@@ -171,6 +172,7 @@
                 UCFCollectionDetailViewController *collectionDetailVC = [[UCFCollectionDetailViewController alloc]initWithNibName:@"UCFCollectionDetailViewController" bundle:nil];
                 collectionDetailVC.souceVC = @"BatchProjectVC";
                 collectionDetailVC.colPrdClaimId = _colPrdClaimIdStr;
+                collectionDetailVC.batchOrderIdStr = _batchOrderIdStr;
                 collectionDetailVC.detailDataDict = [[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"colPrdClaimDetail"];
                 [self.navigationController pushViewController:collectionDetailVC  animated:YES];
             }else {

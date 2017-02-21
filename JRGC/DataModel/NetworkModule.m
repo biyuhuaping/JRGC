@@ -1176,7 +1176,14 @@ static NetworkModule *gInstance = NULL;
         }
             break;
         case kSXTagMyBatchInvestDetail: {
-            parameter = [SERVER_IP stringByAppendingString:MYBATCHINVESTDETAIL];
+            parameter = [NEW_SERVER_IP stringByAppendingString:MYBATCHINVESTDETAIL];
+        }
+        case kSXTagColIntoDealBatch: {
+            parameter = [NEW_SERVER_IP stringByAppendingString:INTODEALBATCH];
+        }
+            break;
+        case kSXTagColBatchInvestUrl: {
+            parameter = [NEW_SERVER_IP stringByAppendingString:BATCHINVESTURL];
         }
             break;
     }

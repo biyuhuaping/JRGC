@@ -205,6 +205,9 @@
 
 #define MYBATCHINVESTDETAIL   @"api/myInvest/v2/myBatchInvestDetail.json" //我的投资-集合标明细
 
+#define  INTODEALBATCH    @"api/invest/v2/intoDealBatch.json" //进入一键投资页面
+#define  BATCHINVESTURL       @"api/invest/v2/batchInvest.json"   //一键投标
+
 
 
 enum kPostStatus{
@@ -398,8 +401,10 @@ enum kSXTag
     kSXTagMyInvestBatchBid,             //我的投资中的批量投资列表
     kSXTagChildPrdclaimsList,           //集合标子标列表
     kSXTagColPrdclaimsDetail,           //集合标详情
-    kSXTagColPrdclaimsList,           //集合标列表
-    kSXTagMyBatchInvestDetail            //我的投资-集合标明细
+    kSXTagColPrdclaimsList,             //集合标列表
+    kSXTagMyBatchInvestDetail,          //我的投资-集合标明细
+    kSXTagColIntoDealBatch,              //进入一键投资页面
+    kSXTagColBatchInvestUrl,                //一键投标
 
 };
 
