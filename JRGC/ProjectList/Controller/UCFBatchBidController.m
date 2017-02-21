@@ -9,9 +9,14 @@
 #import "UCFBatchBidController.h"
 #import "UCFNoDataView.h"
 #import "UCFProjectListCell.h"
+#import "UCFCollectionDetailViewController.h"
+
 #import "UCFBatchBidModel.h"
 
 @interface UCFBatchBidController () <UITableViewDataSource, UITableViewDelegate, UCFProjectListCellDelegate>
+{
+    NSString *_colPrdClaimIdStr;
+}
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 
 @property (nonatomic, strong) NSMutableArray *dataArray;
@@ -39,6 +44,7 @@
     [self addNoDataView];
     // add refreshing and load more
     [self addRefreshingAndLoadMore];
+
     [self.tableview.header beginRefreshing];
 }
 
@@ -94,7 +100,18 @@
     cell.type = UCFProjectListCellTypeBatchBid;
     return cell;
 }
-
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    NSString *uuid = [[NSUserDefaults standardUserDefaults]valueForKey:UUID];
+    NSDictionary *strParameters;
+    
+    if (uuid) {
+        strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:uuid,@"userId", _colPrdClaimIdStr, @"colPrdClaimId", nil];
+    }
+     [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagColPrdclaimsDetail owner:self signature:YES];
+    
+}
 #pragma mark - net request
 - (void)getNetDataFromNet
 {

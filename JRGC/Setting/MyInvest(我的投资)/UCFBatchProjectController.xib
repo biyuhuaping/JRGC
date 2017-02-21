@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UCFBatchProjectController">
             <connections>
                 <outlet property="tableView" destination="mzS-Lt-C3Y" id="8RO-aU-voL"/>
+                <outlet property="totalCountLabel" destination="xRb-Ub-QKQ" id="97z-EG-KRW"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
