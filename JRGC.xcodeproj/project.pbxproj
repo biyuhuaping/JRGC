@@ -168,6 +168,7 @@
 		7477BF9A1AFB19B200914BFB /* UCFNormalRedEnvelopeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7477BF981AFB19B200914BFB /* UCFNormalRedEnvelopeTableViewCell.m */; };
 		7477BF9B1AFB19B200914BFB /* UCFNormalRedEnvelopeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7477BF991AFB19B200914BFB /* UCFNormalRedEnvelopeTableViewCell.xib */; };
 		7477BF9D1AFB4BF400914BFB /* SecuirtyCenter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7477BF9C1AFB4BF400914BFB /* SecuirtyCenter.storyboard */; };
+		747980861E5C082A00C6389C /* UCFCollectionBidModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 747980851E5C082A00C6389C /* UCFCollectionBidModel.m */; };
 		747A91151B01A46300FE2334 /* UCFInvestDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 747A91141B01A46300FE2334 /* UCFInvestDetailModel.m */; };
 		747A911E1B01B0FB00FE2334 /* UCFRefundDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 747A911D1B01B0FB00FE2334 /* UCFRefundDetailModel.m */; };
 		747A91211B01B11100FE2334 /* UCFConstractModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 747A91201B01B11100FE2334 /* UCFConstractModel.m */; };
@@ -1002,6 +1003,8 @@
 		7477BF981AFB19B200914BFB /* UCFNormalRedEnvelopeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFNormalRedEnvelopeTableViewCell.m; sourceTree = "<group>"; };
 		7477BF991AFB19B200914BFB /* UCFNormalRedEnvelopeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFNormalRedEnvelopeTableViewCell.xib; sourceTree = "<group>"; };
 		7477BF9C1AFB4BF400914BFB /* SecuirtyCenter.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SecuirtyCenter.storyboard; sourceTree = "<group>"; };
+		747980841E5C082A00C6389C /* UCFCollectionBidModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFCollectionBidModel.h; sourceTree = SOURCE_ROOT; };
+		747980851E5C082A00C6389C /* UCFCollectionBidModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFCollectionBidModel.m; sourceTree = SOURCE_ROOT; };
 		747A91131B01A46300FE2334 /* UCFInvestDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFInvestDetailModel.h; sourceTree = "<group>"; };
 		747A91141B01A46300FE2334 /* UCFInvestDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFInvestDetailModel.m; sourceTree = "<group>"; };
 		747A911C1B01B0FB00FE2334 /* UCFRefundDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFRefundDetailModel.h; sourceTree = "<group>"; };
@@ -2651,6 +2654,15 @@
 			path = PrintView;
 			sourceTree = "<group>";
 		};
+		747980831E5C080E00C6389C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				747980841E5C082A00C6389C /* UCFCollectionBidModel.h */,
+				747980851E5C082A00C6389C /* UCFCollectionBidModel.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		747A91121B01A44300FE2334 /* UCFInvestDetail */ = {
 			isa = PBXGroup;
 			children = (
@@ -3547,6 +3559,7 @@
 		7BCE028D1AC948710084C15C /* LatestProject */ = {
 			isa = PBXGroup;
 			children = (
+				747980831E5C080E00C6389C /* Model */,
 				EDEE0D3F1C5F42D200021CCC /* BJGridItem.h */,
 				EDEE0D401C5F42D200021CCC /* BJGridItem.m */,
 				FBE9B7EC1ADCC3FB0060FC4D /* InvestmentCell.h */,
@@ -3750,12 +3763,12 @@
 		7BFE3EAE1AC56315002A53A2 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				7BCE028D1AC948710084C15C /* LatestProject */,
 				740AC6331DDC05120058BC60 /* ProjectList */,
 				E3C117A01D40D0520053A052 /* UCFWebView */,
 				4AB126071AEF8EA400E915F1 /* BidViewController */,
 				7BCE02171AC902FD0084C15C /* Base */,
 				7BCE028F1AC949090084C15C /* LoginAndRegister */,
-				7BCE028D1AC948710084C15C /* LatestProject */,
 				7BCE028B1AC948710084C15C /* AssignmentCreditor */,
 				7BCE028E1AC948710084C15C /* Setting */,
 				7BCE028C1AC948710084C15C /* More */,
@@ -5471,6 +5484,7 @@
 				4AD6F6901AF07EF500F1B490 /* MoneyBoardCell.m in Sources */,
 				FB4E7D691B0B1C180009DB9D /* UCFModifyProportion.m in Sources */,
 				4A675E3E1C5F484400F21DDA /* SelectPayMoneyOrbeansCell.m in Sources */,
+				747980861E5C082A00C6389C /* UCFCollectionBidModel.m in Sources */,
 				2509C3BE1D6590C400D9F9B5 /* PulsingHaloLayer.m in Sources */,
 				7BC304811ACBC22D007767F1 /* NSString+Misc.m in Sources */,
 				E311A6681D90E83800C5483E /* UCFWebViewJavascriptBridgeMallDetails.m in Sources */,
@@ -5959,7 +5973,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "3b26ab52-df5d-455b-948c-bd48635edb4c";
 				PROVISIONING_PROFILE_SPECIFIER = JRGC299Distribution;
-
 				SWIFT_OBJC_BRIDGING_HEADER = "JRGC/JRGC-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;

@@ -9,5 +9,6 @@
 #import "UCFBaseViewController.h"
 
 @interface UCFP2PViewController : UCFBaseViewController
-
+@property (nonatomic, copy) NSString *viewType;
+- (void)setCurrentViewForBatchBid;
 @end

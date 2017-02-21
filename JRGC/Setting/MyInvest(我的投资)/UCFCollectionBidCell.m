@@ -7,12 +7,11 @@
 //
 
 #import "UCFCollectionBidCell.h"
+#import "UCFCollectionBidModel.h"
 
 @interface UCFCollectionBidCell ()
 @property (weak, nonatomic) IBOutlet UIView *progressBgView;
-@property (weak, nonatomic) IBOutlet UIView *progressValueView;
 @property (weak, nonatomic) IBOutlet UIView *moreBgView;
-@property (weak, nonatomic) IBOutlet UILabel *moreValueLabel;
 
 @end
 
@@ -49,5 +48,12 @@
     }
 }
 
+- (void)setCollectionBidModel:(UCFCollectionBidModel *)collectionBidModel
+{
+    _collectionBidModel = collectionBidModel;
+    _collectionBidName.text = collectionBidModel.colName;
+    _preYearRateLabel.text = [NSString stringWithFormat:@"%@%%", collectionBidModel.colRate];
+    _returnModeLabel.text = collectionBidModel.colRepayModeTxt;
+}
 
 @end

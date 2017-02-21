@@ -34,10 +34,11 @@
 #import "UCFLatesProjectTableViewCell.h"
 
 #import "UCFCollectionBidCell.h"
+#import "UCFCollectionBidModel.h"
 
 #import "UCFProjectListController.h"        //项目列表
 #import "RiskAssessmentViewController.h"    //风险评估
-@interface UCFLatestProjectViewController ()<InvestmentCellDelegate,FourOFourViewDelegate,CycleViewDelegate,PromptViewDelegate,homeButtonPressedCellDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface UCFLatestProjectViewController ()<InvestmentCellDelegate,FourOFourViewDelegate,CycleViewDelegate,PromptViewDelegate,homeButtonPressedCellDelegate, UITableViewDataSource, UITableViewDelegate, UCFCollectionBidCellDelegate>
 {
     UIView *_clickView;
     BOOL _refreshHead;
@@ -82,6 +83,11 @@
 @property (strong, nonatomic) IBOutlet UILabel *titleLab2;
 @property (strong, nonatomic) IBOutlet UILabel *titleLab3;
 @property (strong, nonatomic) IBOutlet UILabel *titleLab4;
+
+
+@property (strong, nonatomic) UCFCollectionBidModel *collectionBidModel;
+
+@property (nonatomic, copy) NSString *totalCount;
 
 @end
 
@@ -638,7 +644,10 @@
 // 每组几行，默认为1
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section==0) {
-        return 1;
+        if (self.collectionBidModel.colName.length > 0) {
+            return 1;
+        }
+        return 0;
     }
     return _investmentArr.count;
 }
@@ -650,8 +659,10 @@
         UCFCollectionBidCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
         if (!cell) {
             cell = [[[NSBundle mainBundle] loadNibNamed:@"UCFCollectionBidCell" owner:self options:nil] lastObject];
+            cell.delegate = self;
         }
-//        cell.textLabel.text = @"集合标";
+        cell.collectionBidModel = self.collectionBidModel;
+        cell.moreValueLabel.text = self.totalCount;
         return cell;
     }
     else {
@@ -794,6 +805,9 @@
             _tableView.footer.hidden = YES;
             //        [_errorView hide];
             if ([rstcode intValue] == 1) {
+                
+                NSDictionary *collectionBid = [[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"colPrdClaim"];
+                self.collectionBidModel = [UCFCollectionBidModel collectionBidWithDict:collectionBid];
                 
                 [_investmentArr removeAllObjects];
                 NSMutableArray *tempArray = [[NSMutableArray alloc]init];
@@ -1046,6 +1060,25 @@
 // 404错误界面的代理方法
 - (void)refreshBtnClicked:(id)sender fatherView:(UIView*)fhView{
     [self getPrdClaimsDataList];
+}
+
+#pragma mark - collectionBidCellDelegate
+- (void)collectionCell:(UCFCollectionBidCell *)currentView didClickedBatchBidButton:(UIButton *)batchBidButton
+{
+    
+}
+
+- (void)collectionCell:(UCFCollectionBidCell *)currentView didClickedMoreButton:(UIButton *)MoreButton
+{
+    AppDelegate *appdelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    [appdelegate.tabBarController setSelectedIndex:1];
+    UCFProjectListController *project = (UCFProjectListController *)[[appdelegate.tabBarController.viewControllers objectAtIndex:1].childViewControllers objectAtIndex:0];
+    project.strStyle = @"11";
+    project.viewType = @"2";
+    BOOL isLoad = [project isViewLoaded];
+    if (isLoad) {
+        [project changeViewWithConfigure:@"11"];
+    }
 }
 
 @end

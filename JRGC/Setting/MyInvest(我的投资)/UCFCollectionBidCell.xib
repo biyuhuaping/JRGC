@@ -157,10 +157,13 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="collectionBidName" destination="XaH-6L-FPl" id="ZrN-Rg-xpm"/>
                 <outlet property="moreBgView" destination="2wj-6f-akI" id="Dqz-v4-aVN"/>
                 <outlet property="moreValueLabel" destination="oiJ-Zm-qhC" id="1SJ-Om-PSA"/>
+                <outlet property="preYearRateLabel" destination="Fwn-OR-uAY" id="yYu-lR-StF"/>
                 <outlet property="progressBgView" destination="yBH-Wa-xBA" id="wha-K1-4im"/>
                 <outlet property="progressValueView" destination="1Sb-I7-tNy" id="lw0-2r-WeC"/>
+                <outlet property="returnModeLabel" destination="84q-lg-x6c" id="lNQ-1D-tNn"/>
             </connections>
             <point key="canvasLocation" x="32" y="11"/>
         </tableViewCell>
