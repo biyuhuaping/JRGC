@@ -33,9 +33,11 @@
 #import "TradePasswordVC.h"//设置交易密码
 #import "UCFLatesProjectTableViewCell.h"
 
+#import "UCFCollectionBidCell.h"
+
 #import "UCFProjectListController.h"        //项目列表
 #import "RiskAssessmentViewController.h"    //风险评估
-@interface UCFLatestProjectViewController ()<InvestmentCellDelegate,FourOFourViewDelegate,CycleViewDelegate,PromptViewDelegate,homeButtonPressedCellDelegate>
+@interface UCFLatestProjectViewController ()<InvestmentCellDelegate,FourOFourViewDelegate,CycleViewDelegate,PromptViewDelegate,homeButtonPressedCellDelegate, UITableViewDataSource, UITableViewDelegate>
 {
     UIView *_clickView;
     BOOL _refreshHead;
@@ -611,101 +613,133 @@
 #pragma mark - UITableViewDelegate
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //************************************************qyy 2016-11-17首页接口改造
-    InvestmentItemInfo *info = _investmentArr[indexPath.row];
-    if(![info.homeType isEqualToString:@""])
-    {
-        return 50;
-    }else{
-        return 100;
+    if (indexPath.section == 0) {
+        return 210;
     }
+    else {
+        //************************************************qyy 2016-11-17首页接口改造
+        InvestmentItemInfo *info = _investmentArr[indexPath.row];
+        if(![info.homeType isEqualToString:@""])
+        {
+            return 50;
+        }else{
+            return 100;
+        }
+    }
+    return 0;
 }
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 2;
+}
+
 
 // 每组几行，默认为1
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    if (section==0) {
+        return 1;
+    }
     return _investmentArr.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //************************************************qyy 2016-11-17首页接口改造
-    InvestmentItemInfo *info = _investmentArr[indexPath.row];
-    if(![info.homeType isEqualToString:@""])
-    {
-        static NSString *cellStr = @"LatestCell";
-        UCFLatesProjectTableViewCell *cellt = [tableView dequeueReusableCellWithIdentifier:cellStr];
-        if (cellt == nil) {
-            cellt = [[NSBundle mainBundle]loadNibNamed:@"UCFLatesProjectTableViewCell" owner:self options:nil][0];
-            cellt.delegate = self;
+    if (indexPath.section == 0) {
+        static NSString *cellId = @"collectionBidCell";
+        UCFCollectionBidCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+        if (!cell) {
+            cell = [[[NSBundle mainBundle] loadNibNamed:@"UCFCollectionBidCell" owner:self options:nil] lastObject];
         }
-        cellt.but_press.tag = 100 + indexPath.row;
-        cellt.typeSellWay = info.homeType;
-        cellt.label_title.text = info.homeTile;
-        
-        if (![info.homeIconUrl isEqualToString:@""]) {
-            [cellt.image_ahead sd_setImageWithURL:[NSURL URLWithString:info.homeIconUrl] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL){
-                
-           }];
-        }else{
-            cellt.image_ahead.image = [UIImage imageNamed:@"tabbar_icon_project_normal.png"];
-        }
-        return cellt;
-    }else{
-    //************************************************qyy 2016-11-17首页接口改造
-    static  NSString *indentifier = @"LatestCell";
-    
-    InvestmentCell *cell = [tableView dequeueReusableCellWithIdentifier:indentifier];
-    if (!cell) {
-        cell = [[NSBundle mainBundle]loadNibNamed:@"InvestmentCell" owner:self options:nil][0];
-        cell.delegate = self;
-//        UIView *view = [[UIView alloc] initWithFrame:cell.frame];
-//        view.backgroundColor = [UIColorWithRGB(0x2b3655) colorWithAlphaComponent:0.2];
-//        cell.selectedBackgroundView = view;//选中后cell的背景颜色
+//        cell.textLabel.text = @"集合标";
+        return cell;
     }
-    InvestmentItemInfo *info = [_investmentArr objectSafeAtIndex:indexPath.row];
-    cell.investButton.tag = 100 + indexPath.row;
-    [cell setItemInfo:info];
-    NSArray *prdLabelsList = [NSArray arrayWithArray:(NSArray*)info.prdLabelsList];
-    
-     if (![prdLabelsList isEqual:@""])
-    {
-         for (NSDictionary *dic in prdLabelsList)
-         {
-            NSString *labelPriority = dic[@"labelPriority"];
-            if ([labelPriority isEqual:@"1"])
-            {
-                cell.angleView.angleString = dic[@"labelName"];
+    else {
+        //************************************************qyy 2016-11-17首页接口改造
+        InvestmentItemInfo *info = _investmentArr[indexPath.row];
+        if(![info.homeType isEqualToString:@""])
+        {
+            static NSString *cellStr = @"LatestCell";
+            UCFLatesProjectTableViewCell *cellt = [tableView dequeueReusableCellWithIdentifier:cellStr];
+            if (cellt == nil) {
+                cellt = [[NSBundle mainBundle]loadNibNamed:@"UCFLatesProjectTableViewCell" owner:self options:nil][0];
+                cellt.delegate = self;
             }
-         }
+            cellt.but_press.tag = 100 + indexPath.row;
+            cellt.typeSellWay = info.homeType;
+            cellt.label_title.text = info.homeTile;
+            
+            if (![info.homeIconUrl isEqualToString:@""]) {
+                [cellt.image_ahead sd_setImageWithURL:[NSURL URLWithString:info.homeIconUrl] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL){
+                    
+                }];
+            }else{
+                cellt.image_ahead.image = [UIImage imageNamed:@"tabbar_icon_project_normal.png"];
+            }
+            return cellt;
+        }else{
+            //************************************************qyy 2016-11-17首页接口改造
+            static  NSString *indentifier = @"LatestCell";
+            
+            InvestmentCell *cell = [tableView dequeueReusableCellWithIdentifier:indentifier];
+            if (!cell) {
+                cell = [[NSBundle mainBundle]loadNibNamed:@"InvestmentCell" owner:self options:nil][0];
+                cell.delegate = self;
+                //        UIView *view = [[UIView alloc] initWithFrame:cell.frame];
+                //        view.backgroundColor = [UIColorWithRGB(0x2b3655) colorWithAlphaComponent:0.2];
+                //        cell.selectedBackgroundView = view;//选中后cell的背景颜色
+            }
+            InvestmentItemInfo *info = [_investmentArr objectSafeAtIndex:indexPath.row];
+            cell.investButton.tag = 100 + indexPath.row;
+            [cell setItemInfo:info];
+            NSArray *prdLabelsList = [NSArray arrayWithArray:(NSArray*)info.prdLabelsList];
+            
+            if (![prdLabelsList isEqual:@""])
+            {
+                for (NSDictionary *dic in prdLabelsList)
+                {
+                    NSString *labelPriority = dic[@"labelPriority"];
+                    if ([labelPriority isEqual:@"1"])
+                    {
+                        cell.angleView.angleString = dic[@"labelName"];
+                    }
+                }
+            }
+            return cell;
+        }
     }
-      return cell;
-    }
+    return nil;
 }
 
 // 选中某cell时。
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
-        //如果未登录，展示登录页面
-        [self showLoginView];
-    } else {
-        if ([self checkUserCanInvestIsDetail:YES]) {
-            _indexPath = indexPath;
-            InvestmentItemInfo * info = [_investmentArr objectAtIndex:_indexPath.row];
-            NSString *userid = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
-            NSString *strParameters = [NSString stringWithFormat:@"id=%@&userId=%@",info.idStr,userid];
-            if ([info.status intValue ] != 2) {
-                NSInteger isOrder = [info.isOrder integerValue];
-                if (isOrder > 0) {
+    if (indexPath.section == 0) {
+        
+    }
+    else {
+        if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
+            //如果未登录，展示登录页面
+            [self showLoginView];
+        } else {
+            if ([self checkUserCanInvestIsDetail:YES]) {
+                _indexPath = indexPath;
+                InvestmentItemInfo * info = [_investmentArr objectAtIndex:_indexPath.row];
+                NSString *userid = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
+                NSString *strParameters = [NSString stringWithFormat:@"id=%@&userId=%@",info.idStr,userid];
+                if ([info.status intValue ] != 2) {
+                    NSInteger isOrder = [info.isOrder integerValue];
+                    if (isOrder > 0) {
+                        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self];
+                    } else {
+                        UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前标的详情只对投资人开放"];
+                        [self.navigationController pushViewController:controller animated:YES];
+                    }
+                } else {
                     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
                     [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self];
-                } else {
-                    UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前标的详情只对投资人开放"];
-                    [self.navigationController pushViewController:controller animated:YES];
                 }
-            } else {
-                [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-                [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self];
             }
         }
     }

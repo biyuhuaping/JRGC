@@ -268,6 +268,8 @@
 		74F490E51E5AF2660057AC62 /* UCFMyInvestBatchBidModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F490E41E5AF2660057AC62 /* UCFMyInvestBatchBidModel.m */; };
 		74F490E91E5B0BD70057AC62 /* UCFMyInvestBatchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F490E71E5B0BD70057AC62 /* UCFMyInvestBatchCell.m */; };
 		74F490EA1E5B0BD70057AC62 /* UCFMyInvestBatchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74F490E81E5B0BD70057AC62 /* UCFMyInvestBatchCell.xib */; };
+		74F490EE1E5B2AAA0057AC62 /* UCFCollectionBidCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F490EC1E5B2AAA0057AC62 /* UCFCollectionBidCell.m */; };
+		74F490EF1E5B2AAA0057AC62 /* UCFCollectionBidCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74F490ED1E5B2AAA0057AC62 /* UCFCollectionBidCell.xib */; };
 		74FBC1BD1B84721400B8DD7E /* UCFBindCardTwoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74FBC1BB1B84721400B8DD7E /* UCFBindCardTwoTableViewCell.m */; };
 		74FBC1BE1B84721400B8DD7E /* UCFBindCardTwoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74FBC1BC1B84721400B8DD7E /* UCFBindCardTwoTableViewCell.xib */; };
 		74FC227E1BA6A5BB00D1660A /* UCFOverDueListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74FC227D1BA6A5BB00D1660A /* UCFOverDueListViewController.xib */; };
@@ -1172,6 +1174,9 @@
 		74F490E61E5B0BD70057AC62 /* UCFMyInvestBatchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFMyInvestBatchCell.h; sourceTree = "<group>"; };
 		74F490E71E5B0BD70057AC62 /* UCFMyInvestBatchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFMyInvestBatchCell.m; sourceTree = "<group>"; };
 		74F490E81E5B0BD70057AC62 /* UCFMyInvestBatchCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFMyInvestBatchCell.xib; sourceTree = "<group>"; };
+		74F490EB1E5B2AAA0057AC62 /* UCFCollectionBidCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UCFCollectionBidCell.h; path = "JRGC/Setting/MyInvest(我的投资)/UCFCollectionBidCell.h"; sourceTree = SOURCE_ROOT; };
+		74F490EC1E5B2AAA0057AC62 /* UCFCollectionBidCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UCFCollectionBidCell.m; path = "JRGC/Setting/MyInvest(我的投资)/UCFCollectionBidCell.m"; sourceTree = SOURCE_ROOT; };
+		74F490ED1E5B2AAA0057AC62 /* UCFCollectionBidCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UCFCollectionBidCell.xib; path = "JRGC/Setting/MyInvest(我的投资)/UCFCollectionBidCell.xib"; sourceTree = SOURCE_ROOT; };
 		74FBC1BA1B84721400B8DD7E /* UCFBindCardTwoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFBindCardTwoTableViewCell.h; sourceTree = "<group>"; };
 		74FBC1BB1B84721400B8DD7E /* UCFBindCardTwoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFBindCardTwoTableViewCell.m; sourceTree = "<group>"; };
 		74FBC1BC1B84721400B8DD7E /* UCFBindCardTwoTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFBindCardTwoTableViewCell.xib; sourceTree = "<group>"; };
@@ -3534,6 +3539,9 @@
 				FBE9B7EC1ADCC3FB0060FC4D /* InvestmentCell.h */,
 				FBE9B7ED1ADCC3FB0060FC4D /* InvestmentCell.m */,
 				FB7E51B11ADE5E4000878C9F /* InvestmentCell.xib */,
+				74F490EB1E5B2AAA0057AC62 /* UCFCollectionBidCell.h */,
+				74F490EC1E5B2AAA0057AC62 /* UCFCollectionBidCell.m */,
+				74F490ED1E5B2AAA0057AC62 /* UCFCollectionBidCell.xib */,
 				7BC8A9F91AD4C0A100BF4660 /* UCFLatestProjectViewController.h */,
 				7BC8A9FA1AD4C0A100BF4660 /* UCFLatestProjectViewController.m */,
 				FBC375861ADB9C6D009615EC /* HomeStoryboard.storyboard */,
@@ -5110,6 +5118,7 @@
 				74956EB51D66F33D00D68B61 /* UCFAccountDetailViewController.xib in Resources */,
 				4A90167F1AFB12FE0049A9E0 /* LICENSE in Resources */,
 				7459EE031E5552FE005A6FF7 /* UCFBatchBidController.xib in Resources */,
+				74F490EF1E5B2AAA0057AC62 /* UCFCollectionBidCell.xib in Resources */,
 				FB8B77DD1BA674F70007D5C5 /* UCFMyRebateViewCtrl.xib in Resources */,
 				FB51491A1D6438A700C26E7B /* Images.xcassets in Resources */,
 				FB5149421D64403100C26E7B /* mask4s_4.jpg in Resources */,
@@ -5365,6 +5374,7 @@
 				74931A2D1B1326FE00143424 /* CoreTextUtils.m in Sources */,
 				74F2910A1AE0DB82003E0E86 /* UCFCouponViewController.m in Sources */,
 				748ED79B1CC7312000690215 /* UCFCashAndTopUp.m in Sources */,
+				74F490EE1E5B2AAA0057AC62 /* UCFCollectionBidCell.m in Sources */,
 				FBE9B7EF1ADCC3FB0060FC4D /* InvestmentCell.m in Sources */,
 				74F291071AE0DB72003E0E86 /* UCFBackMoneyDetailViewController.m in Sources */,
 				74931A321B1326FE00143424 /* OHParagraphStyle.m in Sources */,
