@@ -65,7 +65,7 @@
 {
     UIView *titleBkView = [[UIView alloc] initWithFrame:CGRectZero];
     
-    UILabel *baseTitleLabel1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
+    UILabel *baseTitleLabel1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 32)];
     baseTitleLabel1.textAlignment = NSTextAlignmentCenter;
     [baseTitleLabel1 setTextColor:[UIColor whiteColor]];
     [baseTitleLabel1 setBackgroundColor:[UIColor clearColor]];
@@ -108,11 +108,11 @@
     CGFloat bkTitleWidth;
     if (childStringWidth != 0) {
         bkTitleWidth = stringWidth + childStringWidth + TitleXDistance + MarkInSpacing;
-        baseTitleLabel1.frame = CGRectMake(0, 0, stringWidth, 18);
+        baseTitleLabel1.frame = CGRectMake(0, 0, stringWidth, 20);
         baseChildTitleLabel1.frame = CGRectMake(stringWidth + TitleXDistance, 0, childStringWidth + MarkInSpacing, 18);
     } else {
         bkTitleWidth = stringWidth;
-        baseTitleLabel1.frame = CGRectMake(0, 0, stringWidth, 18);
+        baseTitleLabel1.frame = CGRectMake(0, 0, stringWidth, 20);
         baseChildTitleLabel1.frame = CGRectMake(stringWidth, 0, childStringWidth, 18);
     }
     bkFrame.size.width = bkTitleWidth;

@@ -38,6 +38,8 @@
 
 #import "UCFProjectListController.h"        //项目列表
 #import "RiskAssessmentViewController.h"    //风险评估
+
+#import "UCFCollectionDetailViewController.h" //集合详情
 @interface UCFLatestProjectViewController ()<InvestmentCellDelegate,FourOFourViewDelegate,CycleViewDelegate,PromptViewDelegate,homeButtonPressedCellDelegate, UITableViewDataSource, UITableViewDelegate, UCFCollectionBidCellDelegate>
 {
     UIView *_clickView;
@@ -45,6 +47,7 @@
     BOOL _bringFooterToClick;
     BJGridItem *_dragBtn;
     PraiseAlert     *alertTool;
+    NSString *_colPrdClaimIdStr;//集合标Id
 }
 
 @property (strong, nonatomic) IBOutlet UIView *headerView;
@@ -976,6 +979,20 @@
             webView.dicForShare = banInfo;
             [self.navigationController pushViewController:webView animated:YES];
         }
+    }else if (tag.intValue == kSXTagColPrdclaimsDetail) {
+        NSString *rstcode = dic[@"ret"];
+        NSString *rsttext = dic[@"message"];
+        if ([rstcode intValue] == 1) {
+            
+            UCFCollectionDetailViewController *collectionDetailVC = [[UCFCollectionDetailViewController alloc]initWithNibName:@"UCFCollectionDetailViewController" bundle:nil];
+            collectionDetailVC.souceVC = @"P2PVC";
+            collectionDetailVC.colPrdClaimId = _colPrdClaimIdStr;
+            collectionDetailVC.detailDataDict = [dic objectSafeDictionaryForKey:@"data"];
+            [self.navigationController pushViewController:collectionDetailVC  animated:YES];
+            
+        }else {
+            [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
+        }
     }
     [_tableView.header endRefreshing];
 //    [_tableView.footer endRefreshing];
@@ -1065,7 +1082,21 @@
 #pragma mark - collectionBidCellDelegate
 - (void)collectionCell:(UCFCollectionBidCell *)currentView didClickedBatchBidButton:(UIButton *)batchBidButton
 {
+
+    NSString *uuid = [[NSUserDefaults standardUserDefaults]valueForKey:UUID];
+
     
+    if (!uuid) {
+        //如果未登录，展示登录页面
+        [self showLoginView];
+    } else {
+        if ([self checkUserCanInvestIsDetail:YES]) {
+            UCFCollectionBidModel *model = currentView.collectionBidModel;
+            _colPrdClaimIdStr = [NSString stringWithFormat:@"%@",model.Id];
+            NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys:uuid,@"userId", _colPrdClaimIdStr, @"colPrdClaimId", nil];
+            [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagColPrdclaimsDetail owner:self signature:YES];
+            }
+    }
 }
 
 - (void)collectionCell:(UCFCollectionBidCell *)currentView didClickedMoreButton:(UIButton *)MoreButton

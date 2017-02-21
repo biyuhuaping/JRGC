@@ -39,4 +39,5 @@
 
 @property (nonatomic, strong)NSDictionary   *dataDict;
 @property (nonatomic, assign)BOOL           isTransid;
+@property (nonatomic, assign)BOOL           isCollctionkeyBid;//是否是一键投资标 
 @end

@@ -208,6 +208,8 @@
 #define  INTODEALBATCH    @"api/invest/v2/intoDealBatch.json" //进入一键投资页面
 #define  BATCHINVESTURL       @"api/invest/v2/batchInvest.json"   //一键投标
 
+#define BATCHINVESTSTATUS    @"api/userAccount/v2/batchInvestStatus.json"//一键投资结果页面
+
 
 
 enum kPostStatus{
@@ -405,7 +407,7 @@ enum kSXTag
     kSXTagMyBatchInvestDetail,          //我的投资-集合标明细
     kSXTagColIntoDealBatch,              //进入一键投资页面
     kSXTagColBatchInvestUrl,                //一键投标
-
+    kSXTagBatchInvestStatus,                //一键投资结果页面
 };
 
 typedef enum kSXTag kSXTag;
