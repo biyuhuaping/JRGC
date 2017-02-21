@@ -273,7 +273,7 @@
             NSString *bindPhone = [result objectForKey:@"bindMobile"];
             NSString *oldPhone = [[NSUserDefaults standardUserDefaults] valueForKey:PHONENUM];
             NSString *gradeResult = dic[@"gradeResult"];
-            NSString *batchInvestStatus = dic[@"batchInvestStatus"];
+            NSString *batchInvestStatus = [NSString stringWithFormat:@"%@",dic[@"data"][@"batchInvestStatus"]];
             self.isCompanyAgent = dic[@"isCompanyAgent"];
             
             //新请求的手机号和本地存储手机号不一样则更新本地

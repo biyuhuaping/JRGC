@@ -88,7 +88,11 @@ static NSString *thirdStr = @"批量投资已经开启";
     _baseScrollView.bounces = NO;
     _baseScrollView.scrollEnabled = NO;
     [self.view addSubview:_baseScrollView];
-    [self initFirstSectionView];
+    if (self.isStep == 1) {
+        [self initFirstSectionView];
+    } else if (self.isStep == 2) {
+        [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID]} tag:kSXTagBatchNumList owner:self signature:YES];
+    }
     
     
 }
@@ -516,6 +520,8 @@ static NSString *thirdStr = @"批量投资已经开启";
         } else {
             [MBProgressHUD displayHudError:@"请选择额度"];
         }
+    } else {
+        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 - (void)endPost:(id)result tag:(NSNumber *)tag
@@ -547,11 +553,16 @@ static NSString *thirdStr = @"批量投资已经开启";
                  [self initThirdSectionView];
                  self.isStep = 3;
                  [self initView];
+                 [investmentButton setTitle:@"返回" forState:UIControlStateNormal];
              }
          } else {
              [MBProgressHUD displayHudError:dic[@"message"]];
          }
     }
+}
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
 }
 /*
 #pragma mark - Navigation
