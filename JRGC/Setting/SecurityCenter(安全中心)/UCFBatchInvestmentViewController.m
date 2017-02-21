@@ -173,9 +173,16 @@ static NSString *secondStr = @"为保证您的资金安全，请合理选择";
         [button setBackgroundImage:[Common batchImageSelectedState:button.frame] forState:UIControlStateSelected];
         button.tag = 1000 + [[self.quotaArr[i] valueForKey:@"id"] integerValue];
         [button addTarget:self action:@selector(changeBtnState:) forControlEvents:UIControlEventTouchUpInside];
-        [button setTitle:[self.quotaArr[i] valueForKey:@"title"] forState:UIControlStateNormal];
-        button.titleLabel.font = [UIFont systemFontOfSize:13.0f];
+        [button setTitle:[NSString stringWithFormat:@"%@万",[self.quotaArr[i] valueForKey:@"title"]] forState:UIControlStateNormal];
+        button.titleLabel.font = [UIFont systemFontOfSize:20.0f];
         [button setTitleColor:UIColorWithRGB(0x666666) forState:UIControlStateNormal];
+        
+        NSString * title = [NSString stringWithFormat:@"%@万",[self.quotaArr[i] valueForKey:@"title"]];
+        NSRange range = [title rangeOfString:@"万"];
+        NSMutableAttributedString *attrituteString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@万",[self.quotaArr[i] valueForKey:@"title"]]];
+        [attrituteString setAttributes:@{NSForegroundColorAttributeName:UIColorWithRGB(0x999999), NSFontAttributeName: [UIFont systemFontOfSize:12]} range:range];
+        button.titleLabel.attributedText = attrituteString;
+
         [_baseScrollView addSubview:button];
     }
 }

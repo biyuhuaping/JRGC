@@ -483,13 +483,17 @@
     cell.item = group.items[indexPath.row];
     cell.delegate = self;
     
-//    if (indexPath.section == 1 ) {
-//      NSInteger index = [group.items indexOfObject:_setChangePassword];
-//        if (indexPath.row == index && !_setChangePassword.isShowOrHide &&  [UserInfoSingle sharedManager].openStatus == 5 ) {//如果是特殊用户，则设置交易密码 不可点击 --需求取消
-//            cell.itemNameLabel.textColor = UIColorWithRGB(0xcccccc);
-//            cell.userInteractionEnabled = NO ;
-//        }
-//    }
+    if (indexPath.section == 1 ) {
+        UCFSettingGroup *group = self.itemsData[indexPath.section];
+        UCFSettingArrowItem *item = group.items[indexPath.row];
+        NSRange range = [item.title rangeOfString:@"(开启后才可进行批量投资)"];
+        if (range.location != NSNotFound) {
+                NSMutableAttributedString *attrituteString = [[NSMutableAttributedString alloc] initWithString:item.title];
+                [attrituteString setAttributes:@{NSForegroundColorAttributeName:UIColorWithRGB(0x999999), NSFontAttributeName: [UIFont systemFontOfSize:11]} range:range];
+                cell.itemNameLabel.attributedText = attrituteString;
+            }
+        }
+    
     return cell;
 }
 //检查touchiID是否打开
