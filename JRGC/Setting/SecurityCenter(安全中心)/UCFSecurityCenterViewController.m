@@ -117,25 +117,12 @@
     [self reloadUI];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 }
-- (void)addRightButtonWithName:(NSString *)rightButtonName
-{
-    UIButton *rightbutton = [UIButton buttonWithType:UIButtonTypeCustom];
-    rightbutton.frame = CGRectMake(0, 0, 66, 44);
-    rightbutton.backgroundColor = [UIColor clearColor];
-    [rightbutton setTitle:rightButtonName forState:UIControlStateNormal];
-    rightbutton.titleLabel.font = [UIFont systemFontOfSize:15.0];
-    [rightbutton addTarget:self action:@selector(logOutClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [rightbutton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [rightbutton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
-    
-    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightbutton];
-    self.navigationItem.rightBarButtonItem = rightItem;
-}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self addLeftButton];
-    [self addRightButtonWithName:@"退出登录"];
+
 
     baseTitleLabel.text = @"个人信息";
   
@@ -149,21 +136,21 @@
     
     
     
-//    UIButton *logOutButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//    [logOutButton addTarget:self action:@selector(logOutClicked:) forControlEvents:UIControlEventTouchUpInside];
-//    logOutButton.translatesAutoresizingMaskIntoConstraints = NO;
-//    [logOutButton.titleLabel setFont:[UIFont systemFontOfSize:16]];
-//    [logOutButton setTitle:@"退出登录" forState:UIControlStateNormal];
-//    [footerview addSubview:logOutButton];
-//
-//    // 添加约束
-//    NSArray *constraints1H=[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[logOutButton]-15-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(logOutButton)];
-//    NSArray *constraints1V=[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-5-[logOutButton]-5-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(logOutButton)];
-//    [footerview addConstraints:constraints1H];
-//    [footerview addConstraints:constraints1V];
-//    
-//    [logOutButton setBackgroundImage:[[UIImage imageNamed:@"btn_red"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:2.5] forState:UIControlStateNormal];
-//    [logOutButton setBackgroundImage:[[UIImage imageNamed:@"btn_red_highlight"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:2.5] forState:UIControlStateHighlighted];
+    UIButton *logOutButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [logOutButton addTarget:self action:@selector(logOutClicked:) forControlEvents:UIControlEventTouchUpInside];
+    logOutButton.translatesAutoresizingMaskIntoConstraints = NO;
+    [logOutButton.titleLabel setFont:[UIFont systemFontOfSize:16]];
+    [logOutButton setTitle:@"退出登录" forState:UIControlStateNormal];
+    [footerview addSubview:logOutButton];
+
+    // 添加约束
+    NSArray *constraints1H=[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[logOutButton]-15-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(logOutButton)];
+    NSArray *constraints1V=[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-5-[logOutButton]-5-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(logOutButton)];
+    [footerview addConstraints:constraints1H];
+    [footerview addConstraints:constraints1V];
+    
+    [logOutButton setBackgroundImage:[[UIImage imageNamed:@"btn_red"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:2.5] forState:UIControlStateNormal];
+    [logOutButton setBackgroundImage:[[UIImage imageNamed:@"btn_red_highlight"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:2.5] forState:UIControlStateHighlighted];
     
     self.tableview.separatorColor = UIColorWithRGB(0xe3e5ea);
     
@@ -853,6 +840,7 @@
                 UCFSettingGroup *group2 = [self.itemsData lastObject];
                 UCFSettingItem *userItem = group2.items.firstObject;
                 batchInvestment.isStep = [userItem.subtitle isEqualToString:@"未开启"] ? 1 : 2;
+                batchInvestment.batchInvestment = userItem.subtitle;
                 [self.navigationController pushViewController:batchInvestment animated:YES];
             }
         }

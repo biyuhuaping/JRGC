@@ -20,6 +20,10 @@
 	<string>2.3.70</string>
 	<key>CFBundleVersion</key>
 	<string>10</string>
+	<key>CLKComplicationSupportedFamilies</key>
+	<array>
+		<string>CLKComplicationFamilyModularLarge</string>
+	</array>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
