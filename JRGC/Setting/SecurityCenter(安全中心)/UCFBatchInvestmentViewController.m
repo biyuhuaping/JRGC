@@ -10,6 +10,7 @@
 #import "BatchSetView.h"
 #import "NZLabel.h"
 #import "UCFBatchSetNumWebViewController.h"
+#import "FullWebViewController.h"
 #define TITLEHEIGHT 44
 #define TITLEWIDTH  SCREEN_WIDTH/3
 #define IMAGEVIEWWIDTH 15
@@ -119,7 +120,7 @@ static NSString *thirdStr = @"批量投资已经开启";
     [_baseScrollView addSubview:view2];
     [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:view2 isTop:NO];
     
-    NSString *totalStr = [NSString stringWithFormat:@"同意并确认《自动投标授权协议》"];
+    NSString *totalStr = [NSString stringWithFormat:@"本人同意签署《自动投标授权协议》"];
     NZLabel *label1 = [[NZLabel alloc] init];
     label1.font = [UIFont systemFontOfSize:12.0f];
     CGSize size = [Common getStrHeightWithStr:totalStr AndStrFont:12 AndWidth:ScreenWidth - 25];
@@ -146,8 +147,8 @@ static NSString *thirdStr = @"批量投资已经开启";
 }
 - (void)showHeTong
 {
-
-    
+    NSString *strParameters = [NSString stringWithFormat:@"userId=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
+    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetBatchContractMsg owner:self];
 }
 - (void)initSecondSectionView
 {
@@ -193,15 +194,27 @@ static NSString *thirdStr = @"批量投资已经开启";
         [button setBackgroundImage:[Common batchImageSelectedState:button.frame] forState:UIControlStateSelected];
         button.tag = 1000 + [[self.quotaArr[i] valueForKey:@"id"] integerValue];
         [button addTarget:self action:@selector(changeBtnState:) forControlEvents:UIControlEventTouchUpInside];
-        [button setTitle:[NSString stringWithFormat:@"%@万",[self.quotaArr[i] valueForKey:@"title"]] forState:UIControlStateNormal];
+        NSString *title = [self.quotaArr[i] valueForKey:@"title"];
+        [button setTitle:[NSString stringWithFormat:@"%@",title] forState:UIControlStateNormal];
         button.titleLabel.font = [UIFont systemFontOfSize:20.0f];
         [button setTitleColor:UIColorWithRGB(0x666666) forState:UIControlStateNormal];
         
-        NSString * title = [NSString stringWithFormat:@"%@万",[self.quotaArr[i] valueForKey:@"title"]];
         NSRange range = [title rangeOfString:@"万"];
-        NSMutableAttributedString *attrituteString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@万",[self.quotaArr[i] valueForKey:@"title"]]];
-        [attrituteString setAttributes:@{NSForegroundColorAttributeName:UIColorWithRGB(0x999999), NSFontAttributeName: [UIFont systemFontOfSize:12]} range:range];
-        button.titleLabel.attributedText = attrituteString;
+        if (range.location != NSNotFound) {
+            NSMutableAttributedString *attrituteString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@万",[self.quotaArr[i] valueForKey:@"title"]]];
+            [attrituteString setAttributes:@{NSForegroundColorAttributeName:UIColorWithRGB(0x999999), NSFontAttributeName: [UIFont systemFontOfSize:12]} range:range];
+            button.titleLabel.attributedText = attrituteString;
+        }
+        
+        if ([self.batchInvestment isEqualToString:@"未开启"] && i== 0) {
+            button.selected = YES;
+            selectButton = button;
+        } else {
+            if ([self.batchInvestment isEqualToString:title]) {
+                button.selected = YES;
+                selectButton = button;
+            }
+        }
 
         [_baseScrollView addSubview:button];
     }
@@ -558,6 +571,17 @@ static NSString *thirdStr = @"批量投资已经开启";
          } else {
              [MBProgressHUD displayHudError:dic[@"message"]];
          }
+    } else if (tag.integerValue == kSXTagGetBatchContractMsg) {
+        NSString *Data = (NSString *)result;
+        NSDictionary * dic = [Data objectFromJSONString];
+        NSString *status = [dic objectSafeForKey:@"status"];
+        if ([status intValue] == 1) {
+            NSString *contractMessStr = [dic objectSafeForKey:@"contractContent"];
+            FullWebViewController *controller = [[FullWebViewController alloc] initWithHtmlStr:contractMessStr title:[dic objectSafeForKey:@"contractName"]];
+            controller.baseTitleType = @"detail_heTong";
+            [self.navigationController pushViewController:controller animated:YES];
+        }
+
     }
 }
 - (void)dealloc
