@@ -810,8 +810,15 @@
             if ([rstcode intValue] == 1) {
                 
                 NSDictionary *collectionBid = [[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"colPrdClaim"];
-                self.collectionBidModel = [UCFCollectionBidModel collectionBidWithDict:collectionBid];
-                self.totalCount = [[dic objectSafeDictionaryForKey:@"data"] objectSafeForKey:@"totalCount"];
+                if (collectionBid) {
+                    self.collectionBidModel = [UCFCollectionBidModel collectionBidWithDict:collectionBid];
+                    self.totalCount = [[dic objectSafeDictionaryForKey:@"data"] objectSafeForKey:@"totalCount"];
+                }
+                else {
+                    self.collectionBidModel = nil;
+                    self.totalCount = @"0";
+                }
+                
                 
                 [_investmentArr removeAllObjects];
                 NSMutableArray *tempArray = [[NSMutableArray alloc]init];
