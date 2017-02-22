@@ -63,7 +63,7 @@
     [super viewDidLoad];
     self.intelligenceArray = [NSMutableArray arrayWithCapacity:1];
     [self addLeftButton];
-    [[NSNotificationCenter defaultCenter]  addObserver:self selector:@selector(updateYouHuiCell:) name:@"updateYouHuiQuanCell" object:nil];
+    
     [[NSNotificationCenter defaultCenter]  addObserver:self selector:@selector(reloadMainView) name:@"UPDATEINVESTDATA" object:nil];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     [self makeMainView];
@@ -200,7 +200,7 @@
         isHasOverdueGongDou = NO;
     }
     
-    _bidTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - 67) style:UITableViewStylePlain];
+    _bidTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - 64-67) style:UITableViewStylePlain];
     
     _bidTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _bidTableView.delegate = self;
@@ -223,33 +223,6 @@
     _bidTableView.backgroundColor = UIColorWithRGB(0xebebee);
     
 }
-
-//- (void)updateYouHuiCell:(NSNotification *)noti
-//{
-//    MoneyBoardCell *cell = (MoneyBoardCell *)[_bidTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
-//    NSDictionary  *discountDict = [noti object];
-//    if ([[discountDict valueForKey:@"cash"] isEqual:[NSNull null]]) {
-//        self.cashDict = nil;
-//    } else {
-//        self.cashDict = [NSMutableDictionary dictionaryWithDictionary:[discountDict valueForKey:@"cash"]];
-//        cell.inputMoneyTextFieldLable.text = [self.cashDict objectForKey:@"coupMoney"];
-//        isHaveCashNum = YES;
-//    }
-//    if ([[discountDict valueForKey:@"coup"] isEqual:[NSNull null]]) {
-//        self.coupDict = nil;
-//    } else {
-//        self.coupDict = [NSMutableDictionary dictionaryWithDictionary:[discountDict valueForKey:@"coup"]];
-//        NSString *showInputStr = [self.coupDict objectForKey:@"coupMoney"];
-//        cell.inputMoneyTextFieldLable.text = showInputStr;
-//        self.tmpTextFieldTextValue = showInputStr;
-//        isHaveCouponNum = YES;
-//    }
-//    if ( self.coupDict == nil && self.cashDict == nil) {
-//        NSString *showInputStr =  [discountDict valueForKey:@"coupMoney"];
-//        cell.inputMoneyTextFieldLable.text = showInputStr;
-//    }
-//    [_bidTableView reloadData];
-//}
 - (void)fadeKeyboard
 {
     [self.view endEditing:YES];
@@ -346,14 +319,14 @@
         return;
     }
     
-//    BOOL isOpenBatchStr = [[_dataDict objectSafeForKey:@"isOpenBatch"] boolValue];
-//    if(!isOpenBatchStr){ //是否开启一键投标
-//        
-//        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您还未开启批量投资，暂不能投资" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"开启", nil];
-//        alertView.tag = 5001;
-//        [alertView show];
-//        return;
-//    }
+    BOOL isOpenBatchStr = [[_dataDict objectSafeForKey:@"isOpenBatch"] boolValue];
+    if(!isOpenBatchStr){ //是否开启一键投标
+        
+        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您还未开启批量投资，暂不能投资" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"开启", nil];
+        alertView.tag = 5001;
+        [alertView show];
+        return;
+    }
     
     
     
@@ -471,27 +444,21 @@
 {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
-    
-    /*investAmount	投资金额	number
-     investBeans	投资用工豆数	number
-     tenderId	集合标id	string
-     userId	用户id	string*/
-    
-    
     NSMutableDictionary *paramDict = [NSMutableDictionary dictionaryWithCapacity:1];
     NSString *userID = [[NSUserDefaults standardUserDefaults] objectForKey:UUID];
     NSString *prdClaimsId = [NSString stringWithFormat:@"%@",[[_dataDict objectForKey:@"colPrdClaimDetail"] objectForKey:@"id"]] ;
     MoneyBoardCell *cell = (MoneyBoardCell *)[_bidTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
     NSString *investAmt = [UCFToolsMehod isNullOrNilWithString:cell.inputMoneyTextFieldLable.text];
+
     
     [paramDict setValue:userID forKey:@"userId"];
     [paramDict setValue:prdClaimsId forKey:@"tenderId"];
     [paramDict setValue:investAmt forKey:@"investAmount"];
     
+    
     if (isGongDouSwitch) {
         double gondDouBalance = [[[_dataDict objectForKey:@"beanUser"] objectForKey:@"availableBalance"] doubleValue];
         [paramDict setValue:[NSString stringWithFormat:@"%@",[NSNumber numberWithFloat:gondDouBalance]] forKey:@"investBeans"];
-        
     }
     
     if (isFirstInvest) {
@@ -517,7 +484,6 @@
         //使用返现券
         NSString *beanIds = [self.cashDict valueForKey:@"idStr"];
         [paramDict setValue:beanIds forKey:@"cashBackIds"];
-        
     }
     NSString *apptzticket =  [self.dataDict objectSafeForKey:@"apptzticket"];
     [paramDict setValue:apptzticket forKey:@"investClaimsTicket"];
@@ -588,7 +554,7 @@
     }else if (tag.intValue == kSXTagColBatchInvestUrl){
         NSMutableDictionary *dic = [data objectFromJSONString];
         NSString *rstcode = dic[@"ret"];
-        if([rstcode intValue] == 1)
+        if([rstcode intValue] != 1)
         {
             
             //一键投资结果页面
@@ -606,8 +572,7 @@
             NSString *applyAmount = [NSString stringWithFormat:@"%@",[dataDict objectSafeForKey:@"applyAmount"]];
             
             NSString *investAmount = [NSString stringWithFormat:@"%@",[dataDict objectSafeForKey:@"investAmount"]];
-            NSString *orderIds = [NSString stringWithFormat:@"%@",[dataDict objectSafeForKey:@"orderIds"]];
-            
+            NSArray *orderIds = [dataDict objectSafeArrayForKey:@"orderIds"];
             
             NSDictionary *reqDict =  @{@"userId":[[NSUserDefaults standardUserDefaults] objectForKey:UUID],@"applyAmount":applyAmount,@"investAmount":investAmount,@"orderIds":orderIds};
             NSString *urlStr =[NSString stringWithFormat:@"%@%@",SERVER_IP,BATCHINVESTSTATUS];
@@ -734,7 +699,6 @@
         if (cell == nil) {
             cell = [[NSBundle mainBundle]loadNibNamed:@"SubInvestmentCell" owner:self options:nil][0];
         }
-//        InvestmentItemInfo *info =  self.bidArray[0];
         [cell setCollectionKeyBidInvestItemInfo:[_dataDict objectSafeDictionaryForKey:@"colPrdClaimDetail"]];
         return cell;
     } else if (indexPath.section == 0 && indexPath.row == 1) {
@@ -964,7 +928,7 @@
 {
     
 }
-#pragma mark - MoneyBoardCellDelegate
+#pragma mark - MoneyBoardCellDelegate 计算器点击事件
 - (void)showCalutorView
 {
     [self.view endEditing:YES];
