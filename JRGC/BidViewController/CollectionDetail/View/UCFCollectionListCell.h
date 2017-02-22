@@ -11,6 +11,8 @@
 @interface UCFCollectionListCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *addRateLab;//	年化加息
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *addRateViewHeight;//年后加息奖励View高度
+@property (weak, nonatomic) IBOutlet UILabel *addRateLabText;
 @property (weak, nonatomic) IBOutlet UILabel *borrowAmountLab;//	总金额
 @property (weak, nonatomic) IBOutlet UILabel *completeLoanLab;	//完成额
 @property (weak, nonatomic) IBOutlet UILabel *createDateLab;//发标时间

@@ -33,6 +33,7 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
 @interface UCFCollectionDetailViewController ()<UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource,MjAlertViewDelegate,UCFCollectionDetailCellDelegare>
 {
     UIImageView *_headerBgView; //上面的视图
+    UIView *_tableHeaderView;//tableView上面的视图
     MDRadialProgressView *_circleProgress;
     SDLoopProgressView *proressView;
     UIView *bottomBkView;//下部view
@@ -54,6 +55,8 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
     
     NSInteger _currentSelectSortTag;//当前选择排序tag
     NSInteger _lastSelectSortTag;//最后一次选择排序tag
+    
+    UCFCollectionListViewController *_collectionListVC;//标详情页面
 }
 @property (weak, nonatomic) IBOutlet UIScrollView *collectionScrollView;
 @property (weak, nonatomic) IBOutlet UILabel *navTitleLabel;
@@ -67,6 +70,7 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
 @property (strong,nonatomic) UCFNoDataView *noDataView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *investmentBtnViewHeight;
 @property (weak, nonatomic) IBOutlet UIButton *investmentBtn;
+@property (weak, nonatomic) IBOutlet UIImageView *shadowImageView;
 
 - (IBAction)goBackVC:(UIButton *)sender;
 - (IBAction)ClickBatchInvestment:(UIButton *)sender;
@@ -89,14 +93,16 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
     [self drawTopView];
     if([self.souceVC isEqualToString:@"P2PVC"]){
          [self.collectionScrollView setContentSize:CGSizeMake(ScreenWidth, ScreenHeight +_headerViewHeight - 64 - 57)];
+        self.collectionScrollView.scrollIndicatorInsets = UIEdgeInsetsMake(_headerViewHeight + 74, 0, 0, 0);
+
     }else{
          [self.collectionScrollView setContentSize:CGSizeMake(ScreenWidth, ScreenHeight +_headerViewHeight - 64)];
+         self.collectionScrollView.scrollIndicatorInsets = UIEdgeInsetsMake(_headerViewHeight + 30, 0, 0, 0);
     }
-   
     self.collectionScrollView.delegate = self;
     self.collectionScrollView.tag = 1010;
     self.collectionScrollView.bounces = YES;
-    self.collectionScrollView.alwaysBounceVertical = YES;
+//    self.collectionScrollView.alwaysBounceVertical = YES;
   
     
     if([_souceVC isEqualToString:@"P2PVC"]){
@@ -295,14 +301,15 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
     
     self.investmentBtnViewHeight.constant = 0;
     self.investmentBtn.hidden = YES;
-    UCFCollectionListViewController *collectionListVC = [[UCFCollectionListViewController alloc]initWithNibName:@"UCFCollectionListViewController" bundle:nil];
-    collectionListVC.view.frame = CGRectMake(0, _headerViewHeight, ScreenWidth, ScreenHeight - 64);
-    collectionListVC.souceVC = _souceVC;
-    collectionListVC.colPrdClaimId = _colPrdClaimId;
-    collectionListVC.batchOrderIdStr = _batchOrderIdStr;
-    [self.collectionScrollView addSubview:collectionListVC.view];
-    [self addChildViewController:collectionListVC];
-    [collectionListVC didMoveToParentViewController:self];
+    self.shadowImageView.hidden = YES;
+    _collectionListVC = [[UCFCollectionListViewController alloc]initWithNibName:@"UCFCollectionListViewController" bundle:nil];
+    _collectionListVC.view.frame = CGRectMake(0, _headerViewHeight, ScreenWidth, ScreenHeight - 64);
+    _collectionListVC.souceVC = _souceVC;
+    _collectionListVC.colPrdClaimId = _colPrdClaimId;
+    _collectionListVC.batchOrderIdStr = _batchOrderIdStr;
+    [self.collectionScrollView addSubview:_collectionListVC.view];
+    [self addChildViewController:_collectionListVC];
+    [_collectionListVC didMoveToParentViewController:self];
 }
 #pragma mark
 #pragma mark 初始化底部-- 批量投标专区
@@ -324,7 +331,10 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
     [_listTableView registerNib:[UINib nibWithNibName:@"UCFCollectionDetailCell" bundle:nil] forCellReuseIdentifier:DetailCellID];
     [self.collectionScrollView addSubview:_listTableView];
     
-    
+    //添加阴影图片
+    UIImage *tabImag = [UIImage imageNamed:@"tabbar_shadow.png"];
+    self.shadowImageView.image = [tabImag resizableImageWithCapInsets:UIEdgeInsetsMake(2, 1, 2, 1) resizingMode:UIImageResizingModeStretch];
+    self.shadowImageView.hidden = NO;
     
     __weak typeof(self)  weakSelf = self;
     [self.listTableView addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(getCollectionDetailHttpRequest)];
@@ -343,15 +353,15 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
 }
 - (void)addTableHeaderView
 {
-    UIView *tableHeaderView = [[UIView  alloc] initWithFrame:CGRectMake(0, _headerViewHeight, ScreenWidth, 74)];
-    tableHeaderView.backgroundColor = UIColorWithRGB(0xf9f9f9);
+    _tableHeaderView= [[UIView  alloc] initWithFrame:CGRectMake(0, _headerViewHeight, ScreenWidth, 74)];
+    _tableHeaderView.backgroundColor = UIColorWithRGB(0xf9f9f9);
     UILabel *headerTitleLabel = [[UILabel alloc]initWithFrame:CGRectMake([Common calculateNewSizeBaseMachine:15], 5, 60, 20)];
     headerTitleLabel.text = @"项目列表";
     headerTitleLabel.textColor = UIColorWithRGB(0x333333);
     headerTitleLabel.font = [UIFont systemFontOfSize:13];
     headerTitleLabel.textAlignment = NSTextAlignmentLeft;
  
-    [tableHeaderView  addSubview:headerTitleLabel];
+    [_tableHeaderView  addSubview:headerTitleLabel];
     
     self.sortButton = [UIButton buttonWithType:UIButtonTypeSystem];
     _sortButton.frame = CGRectMake(ScreenWidth - 15 - 30 , 5, 30, 20);
@@ -360,7 +370,7 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
     _sortButton.titleLabel.textColor = UIColorWithRGB(0x4aa1f9);
     [_sortButton setTitle:@"排序" forState:UIControlStateNormal];
     [_sortButton addTarget:self action:@selector(clickSortButton:) forControlEvents:UIControlEventTouchUpInside];
-    [tableHeaderView addSubview:_sortButton];
+    [_tableHeaderView addSubview:_sortButton];
     NSArray *titleArray = @[@"可投项目",@"已满项目"];
     _topSegmentedControl = [[HMSegmentedControl alloc] initWithSectionTitles:titleArray];
     [_topSegmentedControl setFrame:CGRectMake(0, 30, ScreenWidth, 44)];
@@ -377,7 +387,7 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
     [_topSegmentedControl addTarget:self action:@selector(topSegmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
     [Common addLineViewColor:UIColorWithRGB(0xeff0f3) With:_topSegmentedControl isTop:YES];
     [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:_topSegmentedControl isTop:NO];
-    [tableHeaderView addSubview:_topSegmentedControl];
+    [_tableHeaderView addSubview:_topSegmentedControl];
     for (int i = 0 ; i < titleArray.count - 1 ; i++) {
         UIImageView *linebk = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"particular_tabline.png"]];
         linebk.frame = CGRectMake(ScreenWidth/titleArray.count * (i + 1), 16, 1, 12);
@@ -386,7 +396,7 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
     if (_selectIndex != 0) {
         _topSegmentedControl.selectedSegmentIndex = _selectIndex;
     }
-  [self.collectionScrollView addSubview:tableHeaderView];
+  [self.collectionScrollView addSubview:_tableHeaderView];
 
 }
 -(void)topSegmentedControlChangedValue:(HMSegmentedControl *)control{
@@ -419,8 +429,10 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
             _investmentCurrentPage = 1;
             _lastSelectSortTag = _currentSelectSortTag;
             _currentSelectSortTag = index;
+            [self.listTableView.header beginRefreshing];
+        }else{
+            [self.listTableView reloadData];
         }
-        [self.listTableView.header beginRefreshing];
     }
 }
 - (void)didReceiveMemoryWarning {
@@ -432,47 +444,60 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
-      DLog(@"DidEndDragging .y---->>>>>%f ----tag--->>>%ld",scrollView.contentOffset.y,scrollView.tag);
-    if (scrollView.tag == 1010) {
-        if (scrollView.contentOffset.y <0){
-            [_collectionScrollView setContentOffset:CGPointZero];
+    CGFloat y = scrollView.contentOffset.y;
+    if (y < - 54) {
+        if ([_souceVC isEqualToString:@"P2PVC"]) {
+            [self.listTableView.header beginRefreshing];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self.listTableView.header endRefreshing];
+            });
+        }else{
+            [_collectionListVC.listTableView.header beginRefreshing];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [_collectionListVC.listTableView.header endRefreshing];
+            });
         }
-        if (scrollView.contentOffset.y >_headerViewHeight) {
-            [_collectionScrollView setContentOffset:CGPointMake(0, _headerViewHeight)];
-        }
-    }else{
-        if (scrollView.contentOffset.y <= -50) {
-            __weak typeof(self) weakSelf = self;
-            [UIView animateWithDuration:0.25 animations:^{
-                [weakSelf.collectionScrollView setContentOffset:CGPointZero];
-            } completion:^(BOOL finished) {
-               
-            }];
-        }
-        
     }
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    DLog(@"DidScroll .y---->>>>>%f ----tag--->>>%ld",scrollView.contentOffset.y,scrollView.tag);
 
+    CGFloat off_y = scrollView.contentOffset.y;
     
     if (scrollView.tag == 1010) {
-        if (scrollView.contentOffset.y < 0){
-            [_collectionScrollView setContentOffset:CGPointZero];
-        }
-        if (scrollView.contentOffset.y >_headerViewHeight) {
-            [_collectionScrollView setContentOffset:CGPointMake(0, _headerViewHeight)];
+        if (off_y < 0){
+            
+            CGRect rect =   _headerBgView.frame;
+            rect.origin.y = off_y;
+            _headerBgView.frame = rect;
+            
+            
+            
+            
+            if ([_souceVC isEqualToString:@"P2PVC"]) {
+                rect = _tableHeaderView.frame;
+                rect.origin.y = off_y +_headerViewHeight;
+                _tableHeaderView.frame = rect;
+                
+                rect = _listTableView.frame;
+                rect.origin.y = off_y + _headerViewHeight+74;
+                _listTableView.frame = rect;
+                //偏移量给到tableview，tableview自己来滑动
+                //self.listTableView.contentOffset = CGPointMake(0, off_y);
+            }else{
+                rect = _collectionListVC.view.frame;
+                rect.origin.y = off_y + _headerViewHeight;
+                _collectionListVC.view.frame = rect;
+            }
+            
+        }else{
+            
         }
     }else{
-        if (scrollView.contentOffset.y <= -40){
-            __weak typeof(self) weakSelf = self;
-            [UIView animateWithDuration:0.25 animations:^{
-                [weakSelf.collectionScrollView setContentOffset:CGPointZero];
-            } completion:^(BOOL finished) {
-                
-            }];
-        }
+        
+        
+        
+        
     }
 }
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
@@ -533,15 +558,19 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
     }
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if(_selectIndex == 0){
-//        NSDictionary *dataDict = [self.investmentProjectDataArray objectAtIndex:indexPath.row];
-//        dataDict  = @{@"userId":uuid,@"colPrdClaimId":_colPrdClaimId,@"page":currentPageStr,@"pageSize":@"20",@"prdClaimsOrder":prdClaimsOrderStr,@"status":statusStr};
-//        [[NetworkModule sharedNetworkModule] newPostReq:dataDict tag:kSXTagChildPrdclaimsList owner:self signature:YES];
-        
+    if (_selectIndex == 0) {
+        NSDictionary *dataDict = [_investmentProjectDataArray objectAtIndex:indexPath.row];
+        [self gotoProjectDetailVC:dataDict];
+    }else{
+        NSDictionary *dataDict = [_fullProjectDataArray objectAtIndex:indexPath.row];
+         [self gotoProjectDetailVC:dataDict];
     }
 }
 -(void)cell:(UCFCollectionDetailCell *)cell clickInvestBtn:(UIButton *)button withModel:(NSDictionary *)dataDict{
     
+    [self gotoProjectDetailVC:dataDict];
+}
+-(void)gotoProjectDetailVC:(NSDictionary *)dataDict{
     if(_selectIndex == 0){
         
         NSString *idStr =[dataDict objectSafeForKey:@"childPrdClaimId"];
@@ -564,9 +593,7 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
             [alert show];
         }
     }
-
-
-
+    
 }
 
 #pragma mark
@@ -584,13 +611,13 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
         }
         switch (_currentSelectSortTag) {
             case 1:
-                prdClaimsOrderStr = @"32";//
+                prdClaimsOrderStr = @"32";//@"金额递增"
                 break;
             case 2:
-                prdClaimsOrderStr = @"31";
+                prdClaimsOrderStr = @"31";//@"金额递减"
                 break;
             default:
-                prdClaimsOrderStr = @"00";
+                prdClaimsOrderStr = @"00";//@"综合排序"
                 break;
         }
     }else{

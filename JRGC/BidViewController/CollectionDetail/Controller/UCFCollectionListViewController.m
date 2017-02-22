@@ -13,7 +13,9 @@
 static NSString * const ListCellID = @"UCFCollectionListCell";
 
 @interface UCFCollectionListViewController ()<UITableViewDelegate,UITableViewDataSource>
-@property (strong,nonatomic) UITableView *listTableView;
+{
+    UILabel *_listCountLabel;//子标个数
+}
 @property (assign,nonatomic) int currentPage;
 @property (strong,nonatomic)NSMutableArray *investmentDetailDataArray;//投资详情数组
 @property (strong,nonatomic)UCFNoDataView *noDataView;
@@ -36,23 +38,23 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
 -(void)drawCollectionListView{
     
     self.investmentDetailDataArray  = [NSMutableArray arrayWithCapacity:0];
-    UIView *listHeaderView = [[UIView  alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 30)];
-    listHeaderView.backgroundColor = UIColorWithRGB(0xf9f9f9);
+    _listHeaderView = [[UIView  alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 30)];
+    _listHeaderView.backgroundColor = UIColorWithRGB(0xf9f9f9);
     
-    [self.view addSubview:listHeaderView];
+    [self.view addSubview:_listHeaderView];
     UILabel *headerTitleLabel = [[UILabel alloc]initWithFrame:CGRectMake(15, 5, 60, 20)];
     headerTitleLabel.text = @"投资详情";
     headerTitleLabel.textColor = UIColorWithRGB(0x333333);
     headerTitleLabel.font = [UIFont systemFontOfSize:13];
     headerTitleLabel.textAlignment = NSTextAlignmentLeft;
-    [listHeaderView  addSubview:headerTitleLabel];
+    [_listHeaderView  addSubview:headerTitleLabel];
     
-    UILabel *listCountLabel= [[UILabel alloc]initWithFrame:CGRectMake(ScreenWidth - 15 - 100 , 5, 100, 20)];
-    listCountLabel.text = @"10个标";
-    listCountLabel.textColor = UIColorWithRGB(0x555555);
-    listCountLabel.font = [UIFont systemFontOfSize:13];
-    listCountLabel.textAlignment = NSTextAlignmentRight;
-    [listHeaderView  addSubview:listCountLabel];
+    _listCountLabel= [[UILabel alloc]initWithFrame:CGRectMake(ScreenWidth - 15 - 100 , 5, 100, 20)];
+    _listCountLabel.text = @"0个标";
+    _listCountLabel.textColor = UIColorWithRGB(0x555555);
+    _listCountLabel.font = [UIFont systemFontOfSize:13];
+    _listCountLabel.textAlignment = NSTextAlignmentRight;
+    [_listHeaderView  addSubview:_listCountLabel];
     
     _listTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 30 , ScreenWidth, ScreenHeight - 64 - 30 ) style:UITableViewStylePlain];
     _listTableView.delegate = self;
@@ -97,6 +99,16 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
 
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    NSDictionary *data =[self.investmentDetailDataArray objectAtIndex:indexPath.row];
+    NSString *addRateStr = [data objectSafeForKey:@"addRate"];
+    if (indexPath.row < self.investmentDetailDataArray.count) {
+        if ([addRateStr floatValue] == 0.0) {
+            return 202 - 27;
+        }else{
+            return 202;
+        }
+    }
     return 202;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -145,6 +157,8 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
         if ([rstcode intValue] == 1) {
             NSArray *list_result = [[[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"pageData"] objectSafeArrayForKey:@"result"];
             BOOL hasNext = [[[[[dic objectSafeDictionaryForKey:@"data"]  objectSafeDictionaryForKey:@"pageData"] objectSafeDictionaryForKey:@"pagination"] objectSafeForKey:@"hasNextPage"] boolValue];
+            int totalCount = [[[[[dic objectSafeDictionaryForKey:@"data"]  objectSafeDictionaryForKey:@"pageData"] objectSafeDictionaryForKey:@"pagination"] objectSafeForKey:@"totalCount"] intValue];
+            _listCountLabel.text = [NSString stringWithFormat:@"%d个标",totalCount];
             if (self.currentPage == 1) {
                 [self.investmentDetailDataArray removeAllObjects];
             }
@@ -185,15 +199,5 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
     }
 
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
