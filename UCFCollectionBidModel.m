@@ -23,7 +23,9 @@
         {
             return self;
         }
-        [self refletDataFromOtherObject:dict];
+        if (![dict isEqual:@{}] && dict != nil) {
+            [self refletDataFromOtherObject:dict];
+        }
     }
     
     return self;
@@ -55,11 +57,8 @@
             [self setValue:propertyValue forKey:key];
         }
         else {
-            if ([key isEqualToString:@"full"]) {
-                [self setFull:NO];
-            }
-            else
-                [self setValue:@"" forKey:key];
+            
+            [self setValue:@"" forKey:key];
             DLog(@"%@",[NSString stringWithFormat:@"字段值%@读取异常(字段不存在或者值为空)",key]);
         }
         
