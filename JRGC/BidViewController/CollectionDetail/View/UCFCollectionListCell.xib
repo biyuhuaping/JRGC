@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="203"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="202"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="202.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZNM-Rk-lcT">
@@ -310,6 +310,8 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
                 <outlet property="addRateLab" destination="M5J-bx-7bF" id="V0C-fB-NH1"/>
+                <outlet property="addRateLabText" destination="3OC-Tc-4Rt" id="0we-jt-o1r"/>
+                <outlet property="addRateViewHeight" destination="PF6-a1-kGZ" id="add-oL-rgM"/>
                 <outlet property="createDateLab" destination="qMY-YE-BCL" id="Afd-Hr-I4J"/>
                 <outlet property="investAmtLab" destination="VSd-C7-AtY" id="GAT-e0-tt5"/>
                 <outlet property="loanAnnualRateLab" destination="D8L-2N-9vU" id="YR0-MC-V6c"/>
@@ -318,7 +320,7 @@
                 <outlet property="repayTimeLab" destination="ffM-DT-Rxx" id="XEd-Md-5f0"/>
                 <outlet property="statusLab" destination="2uH-ju-xDU" id="Qpc-wz-KnZ"/>
             </connections>
-            <point key="canvasLocation" x="-207" y="28.5"/>
+            <point key="canvasLocation" x="-626" y="12"/>
         </tableViewCell>
     </objects>
 </document>

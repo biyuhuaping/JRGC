@@ -728,8 +728,12 @@
 // 选中某cell时。
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    if (indexPath.section == 0) {
+    if (indexPath.section == 0 && indexPath.row == 0) {
         
+        UCFCollectionBidCell *cell = (UCFCollectionBidCell *)[tableView cellForRowAtIndexPath:indexPath];
+        if (cell.collectionBidModel) {
+           [self gotoCollectionDetailViewContoller:cell.collectionBidModel];
+        }
     }
     else {
         if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
@@ -810,8 +814,15 @@
             if ([rstcode intValue] == 1) {
                 
                 NSDictionary *collectionBid = [[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"colPrdClaim"];
-                self.collectionBidModel = [UCFCollectionBidModel collectionBidWithDict:collectionBid];
-                self.totalCount = [[dic objectSafeDictionaryForKey:@"data"] objectSafeForKey:@"totalCount"];
+                if (collectionBid) {
+                    self.collectionBidModel = [UCFCollectionBidModel collectionBidWithDict:collectionBid];
+                    self.totalCount = [[dic objectSafeDictionaryForKey:@"data"] objectSafeForKey:@"totalCount"];
+                }
+                else {
+                    self.collectionBidModel = nil;
+                    self.totalCount = @"0";
+                }
+                
                 
                 [_investmentArr removeAllObjects];
                 NSMutableArray *tempArray = [[NSMutableArray alloc]init];
@@ -1083,20 +1094,21 @@
 #pragma mark - collectionBidCellDelegate
 - (void)collectionCell:(UCFCollectionBidCell *)currentView didClickedBatchBidButton:(UIButton *)batchBidButton
 {
-
+    [self gotoCollectionDetailViewContoller:currentView.collectionBidModel];
+}
+//去批量投资集合详情
+-(void)gotoCollectionDetailViewContoller:(UCFCollectionBidModel *)model{
     NSString *uuid = [[NSUserDefaults standardUserDefaults]valueForKey:UUID];
-
-    
     if (!uuid) {
         //如果未登录，展示登录页面
         [self showLoginView];
     } else {
         if ([self checkUserCanInvestIsDetail:YES]) {
-            UCFCollectionBidModel *model = currentView.collectionBidModel;
+            
             _colPrdClaimIdStr = [NSString stringWithFormat:@"%@",model.Id];
             NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys:uuid,@"userId", _colPrdClaimIdStr, @"colPrdClaimId", nil];
             [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagColPrdclaimsDetail owner:self signature:YES];
-            }
+        }
     }
 }
 
