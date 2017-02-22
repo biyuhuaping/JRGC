@@ -55,7 +55,11 @@
             [self setValue:propertyValue forKey:key];
         }
         else {
-            [self setValue:@"" forKey:key];
+            if ([key isEqualToString:@"full"]) {
+                [self setFull:NO];
+            }
+            else
+                [self setValue:@"" forKey:key];
             DLog(@"%@",[NSString stringWithFormat:@"字段值%@读取异常(字段不存在或者值为空)",key]);
         }
         
