@@ -169,7 +169,7 @@
     {
         [self.dataSourceForAll removeAllObjects];
         [self.tableView reloadData];
-//        [self.tableView.footer resetNoMoreData];
+        [self.tableView.footer resetNoMoreData];
 
     }
     
