@@ -20,10 +20,13 @@
     self = [super initWithNibName:NSStringFromClass([self.superclass class]) bundle:nibBundleOrNil];
     return self;
 }
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib
+    self.webView.frame  = CGRectMake(0, 64, ScreenWidth, ScreenHeight -64);
     self.flagInvestSuc = NO;
     self.fd_interactivePopDisabled = YES;
     [self removeRefresh];
@@ -35,19 +38,19 @@
     // Dispose of any resources that can be recreated.
 }
 #pragma mark - 初始化webView 并加入js
-//***有验签跳转页面走该方法
-- (void)jsToInvestDetail:(NSDictionary *)_dic
-{
-    if([_dic[@"action"] isEqualToString:@"myOrder"])
+
+
+- (void)jsToNative:(NSString *)controllerName{
+    
+    if([controllerName isEqualToString:@"myOrder"])
     {
         MyViewController *subVC = [[MyViewController alloc] initWithNibName:@"MyViewController" bundle:nil];
         subVC.title = @"我的投资";
         [self.navigationController pushViewController:subVC animated:YES];
     }
-    
 }
 
-- (void)getToBack {//***根据你投资或者提现的成功的返回标识来判断是poptoroot 还是popviewcontroller（现在由于后台还没有调好暂时不加上）
+-(void)getToBack {//***根据你投资或者提现的成功的返回标识来判断是poptoroot 还是popviewcontroller（现在由于后台还没有调好暂时不加上）
     //    if(self.flagInvestSuc == YES)//***投资成功以后导航栏上的返回按钮返回的是投资列表页面
     //    {
     //        [[NSNotificationCenter defaultCenter] postNotificationName:@"LatestProjectUpdate" object:nil];
