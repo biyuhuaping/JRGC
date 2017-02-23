@@ -160,6 +160,11 @@
 - (void)endPost:(id)result tag:(NSNumber *)tag{
 //    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
 
+    if ([self.tableView.header isRefreshing]) {
+        [self.tableView.header endRefreshing];
+    }else if ([self.tableView.footer isRefreshing]) {
+        [self.tableView.footer endRefreshing];
+    }
     if(self.currentPage==1)
     {
         [self.dataSourceForAll removeAllObjects];
@@ -251,11 +256,11 @@
    
     
     
-    if ([self.tableView.header isRefreshing]) {
-        [self.tableView.header endRefreshing];
-    }else if ([self.tableView.footer isRefreshing]) {
-        [self.tableView.footer endRefreshing];
-    }
+//    if ([self.tableView.header isRefreshing]) {
+//        [self.tableView.header endRefreshing];
+//    }else if ([self.tableView.footer isRefreshing]) {
+//        [self.tableView.footer endRefreshing];
+//    }
     if (self.dataSourceForAll.count == 0) {//无数据：显示“暂无数据”、隐藏“已无更多数据”
         
         //        [self.tableView.footer noticeNoMoreData];
