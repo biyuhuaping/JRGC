@@ -174,7 +174,7 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
     [_markTimeLabel setFont: [UIFont systemFontOfSize:15] string:@"个月"];
     [_headerBgView addSubview:_markTimeLabel];
     
-    NSString *colMinInvestStr = [NSString stringWithFormat:@"%@元",[_detailDataDict objectSafeForKey:@"colMinInvest"] ];
+    NSString *colMinInvestStr = [NSString stringWithFormat:@"%@元起",[_detailDataDict objectSafeForKey:@"colMinInvest"] ];
     CGSize activitylabel1Size =[Common getStrWitdth:colMinInvestStr TextFont:[UIFont systemFontOfSize:11]];
     //最多2个标签
     _activitylabel1 = [UILabel labelWithFrame:CGRectMake([Common calculateNewSizeBaseMachine:15], CGRectGetMaxY(markLabel.frame)+25, activitylabel1Size.width+10, 15) text:colMinInvestStr textColor:UIColorWithRGB(0x28335c) font:[UIFont systemFontOfSize:MarkLabelFont]];
