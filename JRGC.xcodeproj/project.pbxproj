@@ -158,6 +158,7 @@
 		746FFE251B0059BB00FF927F /* UCFBindCardOneTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 746FFE231B0059BB00FF927F /* UCFBindCardOneTableViewCell.m */; };
 		746FFE261B0059BB00FF927F /* UCFBindCardOneTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 746FFE241B0059BB00FF927F /* UCFBindCardOneTableViewCell.xib */; };
 		746FFE2C1B007FA100FF927F /* UCFBindBankCardNormalTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 746FFE2B1B007FA100FF927F /* UCFBindBankCardNormalTableViewCell.m */; };
+		7470C8481E5E7CDE007D52F4 /* UCFCollectionBidModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7470C8471E5E7CDE007D52F4 /* UCFCollectionBidModel.m */; };
 		7470EBFC1B031DDD006DDCEF /* UCFCouponModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7470EBFB1B031DDD006DDCEF /* UCFCouponModel.m */; };
 		7470EC021B033080006DDCEF /* NSString+FormatForThousand.m in Sources */ = {isa = PBXBuildFile; fileRef = 7470EC011B033080006DDCEF /* NSString+FormatForThousand.m */; };
 		7470EC081B036B71006DDCEF /* PrintView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7470EC051B036B71006DDCEF /* PrintView.m */; };
@@ -168,7 +169,6 @@
 		7477BF9A1AFB19B200914BFB /* UCFNormalRedEnvelopeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7477BF981AFB19B200914BFB /* UCFNormalRedEnvelopeTableViewCell.m */; };
 		7477BF9B1AFB19B200914BFB /* UCFNormalRedEnvelopeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7477BF991AFB19B200914BFB /* UCFNormalRedEnvelopeTableViewCell.xib */; };
 		7477BF9D1AFB4BF400914BFB /* SecuirtyCenter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7477BF9C1AFB4BF400914BFB /* SecuirtyCenter.storyboard */; };
-		747980861E5C082A00C6389C /* UCFCollectionBidModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 747980851E5C082A00C6389C /* UCFCollectionBidModel.m */; };
 		747A91151B01A46300FE2334 /* UCFInvestDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 747A91141B01A46300FE2334 /* UCFInvestDetailModel.m */; };
 		747A911E1B01B0FB00FE2334 /* UCFRefundDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 747A911D1B01B0FB00FE2334 /* UCFRefundDetailModel.m */; };
 		747A91211B01B11100FE2334 /* UCFConstractModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 747A91201B01B11100FE2334 /* UCFConstractModel.m */; };
@@ -991,6 +991,8 @@
 		746FFE241B0059BB00FF927F /* UCFBindCardOneTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFBindCardOneTableViewCell.xib; sourceTree = "<group>"; };
 		746FFE2A1B007FA100FF927F /* UCFBindBankCardNormalTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFBindBankCardNormalTableViewCell.h; sourceTree = "<group>"; };
 		746FFE2B1B007FA100FF927F /* UCFBindBankCardNormalTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFBindBankCardNormalTableViewCell.m; sourceTree = "<group>"; };
+		7470C8461E5E7CDE007D52F4 /* UCFCollectionBidModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UCFCollectionBidModel.h; path = JRGC/LatestProject/UCFCollectionBidModel.h; sourceTree = SOURCE_ROOT; };
+		7470C8471E5E7CDE007D52F4 /* UCFCollectionBidModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UCFCollectionBidModel.m; path = JRGC/LatestProject/UCFCollectionBidModel.m; sourceTree = SOURCE_ROOT; };
 		7470EBFA1B031DDD006DDCEF /* UCFCouponModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFCouponModel.h; sourceTree = "<group>"; };
 		7470EBFB1B031DDD006DDCEF /* UCFCouponModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFCouponModel.m; sourceTree = "<group>"; };
 		7470EC001B033080006DDCEF /* NSString+FormatForThousand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+FormatForThousand.h"; sourceTree = "<group>"; };
@@ -1006,8 +1008,6 @@
 		7477BF981AFB19B200914BFB /* UCFNormalRedEnvelopeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFNormalRedEnvelopeTableViewCell.m; sourceTree = "<group>"; };
 		7477BF991AFB19B200914BFB /* UCFNormalRedEnvelopeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFNormalRedEnvelopeTableViewCell.xib; sourceTree = "<group>"; };
 		7477BF9C1AFB4BF400914BFB /* SecuirtyCenter.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SecuirtyCenter.storyboard; sourceTree = "<group>"; };
-		747980841E5C082A00C6389C /* UCFCollectionBidModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFCollectionBidModel.h; sourceTree = SOURCE_ROOT; };
-		747980851E5C082A00C6389C /* UCFCollectionBidModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFCollectionBidModel.m; sourceTree = SOURCE_ROOT; };
 		747A91131B01A46300FE2334 /* UCFInvestDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFInvestDetailModel.h; sourceTree = "<group>"; };
 		747A91141B01A46300FE2334 /* UCFInvestDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFInvestDetailModel.m; sourceTree = "<group>"; };
 		747A911C1B01B0FB00FE2334 /* UCFRefundDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFRefundDetailModel.h; sourceTree = "<group>"; };
@@ -2665,8 +2665,8 @@
 		747980831E5C080E00C6389C /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				747980841E5C082A00C6389C /* UCFCollectionBidModel.h */,
-				747980851E5C082A00C6389C /* UCFCollectionBidModel.m */,
+				7470C8461E5E7CDE007D52F4 /* UCFCollectionBidModel.h */,
+				7470C8471E5E7CDE007D52F4 /* UCFCollectionBidModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -5298,6 +5298,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FBB685891AE4A76800F222B6 /* UIScrollView+MJExtension.m in Sources */,
+				7470C8481E5E7CDE007D52F4 /* UCFCollectionBidModel.m in Sources */,
 				FB4F9E731D62A6F800CCB492 /* TradePasswordVC.m in Sources */,
 				7B2E568E1ADBBE5F008B0F9E /* UCFRetrievePasswordStepOneViewController.m in Sources */,
 				4A5552981E54413E00E69DA4 /* UCFBatchInvestmentViewController.m in Sources */,
@@ -5500,7 +5501,6 @@
 				4AD6F6901AF07EF500F1B490 /* MoneyBoardCell.m in Sources */,
 				FB4E7D691B0B1C180009DB9D /* UCFModifyProportion.m in Sources */,
 				4A675E3E1C5F484400F21DDA /* SelectPayMoneyOrbeansCell.m in Sources */,
-				747980861E5C082A00C6389C /* UCFCollectionBidModel.m in Sources */,
 				2509C3BE1D6590C400D9F9B5 /* PulsingHaloLayer.m in Sources */,
 				7BC304811ACBC22D007767F1 /* NSString+Misc.m in Sources */,
 				E311A6681D90E83800C5483E /* UCFWebViewJavascriptBridgeMallDetails.m in Sources */,
