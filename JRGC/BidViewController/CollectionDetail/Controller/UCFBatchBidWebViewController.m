@@ -8,6 +8,7 @@
 
 #import "UCFBatchBidWebViewController.h"
 #import "UINavigationController+FDFullscreenPopGesture.h"
+#import "MyViewController.h"
 @interface UCFBatchBidWebViewController ()
 @property (nonatomic, assign) BOOL flagInvestSuc;
 @end
@@ -26,7 +27,7 @@
     self.flagInvestSuc = NO;
     self.fd_interactivePopDisabled = YES;
     [self removeRefresh];
-    [self gotoURLWithSignature:self.url];
+    [self gotoURLWithSignature2:self.url];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -37,13 +38,11 @@
 //***有验签跳转页面走该方法
 - (void)jsToInvestDetail:(NSDictionary *)_dic
 {
-    if([_dic[@"action"] isEqualToString:@"app_invest_detail"])
+    if([_dic[@"action"] isEqualToString:@"myOrder"])
     {
-//        UCFInvestmentDetailViewController *controller = [[UCFInvestmentDetailViewController alloc] init];
-//        controller.billId = [NSString stringWithFormat:@"%ld",[_dic[@"value"]integerValue]];
-//        controller.detailType = @"1";
-//        controller.flagGoRoot = NO;
-//        [self.navigationController pushViewController:controller animated:YES];
+        MyViewController *subVC = [[MyViewController alloc] initWithNibName:@"MyViewController" bundle:nil];
+        subVC.title = @"我的投资";
+        [self.navigationController pushViewController:subVC animated:YES];
     }
     
 }

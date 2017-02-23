@@ -554,19 +554,8 @@
     }else if (tag.intValue == kSXTagColBatchInvestUrl){
         NSMutableDictionary *dic = [data objectFromJSONString];
         NSString *rstcode = dic[@"ret"];
-        if([rstcode intValue] != 1)
+        if([rstcode intValue] == 1)
         {
-            
-            //一键投资结果页面
-        
-//            applyAmount	申请金额	number
-//            investAmount	成功投资金额	number
-////            orderIds	投资成功的订单id	array<string
-//            applyAmount	申请金额	number
-//            investAmount	成功投资金额	number
-//            orderIds	投资成功的订单id	array<string>
-//            userId	用户ID
-            
             NSDictionary *dataDict  = [dic objectSafeDictionaryForKey:@"data"];
             
             NSString *applyAmount = [NSString stringWithFormat:@"%@",[dataDict objectSafeForKey:@"applyAmount"]];
@@ -574,7 +563,20 @@
             NSString *investAmount = [NSString stringWithFormat:@"%@",[dataDict objectSafeForKey:@"investAmount"]];
             NSArray *orderIds = [dataDict objectSafeArrayForKey:@"orderIds"];
             
-            NSDictionary *reqDict =  @{@"userId":[[NSUserDefaults standardUserDefaults] objectForKey:UUID],@"applyAmount":applyAmount,@"investAmount":investAmount,@"orderIds":orderIds};
+            NSMutableString *orderIdsArryStr = [[NSMutableString alloc] initWithCapacity:0];
+            [orderIdsArryStr setString:@"["];
+            for ( int i = 0 ;i < orderIds.count;i++) {
+                NSString *orderIdStr =  [NSString stringWithFormat:@"%@",orderIds[i]];
+                if (i == 0) {
+                    [orderIdsArryStr appendFormat:@"%@",orderIdStr];
+                }else{
+                    [orderIdsArryStr appendFormat:@",%@",orderIdStr];
+                }
+            }
+            [orderIdsArryStr appendString:@"]"];
+            
+            NSDictionary *reqDict =  @{@"userId":[[NSUserDefaults standardUserDefaults] objectForKey:UUID],@"applyAmount":applyAmount,@"investAmount":investAmount,@"orderIds":orderIdsArryStr};
+            
             NSString *urlStr =[NSString stringWithFormat:@"%@%@",SERVER_IP,BATCHINVESTSTATUS];
             UCFBatchBidWebViewController *webView = [[UCFBatchBidWebViewController alloc]initWithNibName:@"UCFBatchBidWebViewController" bundle:nil];
             webView.url =  urlStr;

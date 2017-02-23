@@ -386,6 +386,13 @@
     NSString * requestStr = [Common getParameterByDictionary:self.webDataDic];
     [self createUrlRequest:requestStr withNSURL:url];
 }
+- (void)gotoURLWithSignature2:(NSString *)requestUrl
+{
+    NSURL *url = [NSURL URLWithString: requestUrl];
+    
+    NSString * requestStr = [self signatureString];
+    [self createUrlRequest:requestStr withNSURL:url];
+}
 //创建请求
 
 - (void)createUrlRequest:(NSString *)isSignature withNSURL:(NSURL *)url
@@ -1103,22 +1110,27 @@
 
 #pragma mark - 投标、设置交易密码、输入交易密码 - 验签方法
 //----------------------------------------------------------------------------------------------------qyy
-//- (NSString *)signatureString
-//{
-//    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:self.webDataDic];
-//    [dict setValue:@"1" forKey:@"sourceType"];
-//    [dict setValue:[Common getKeychain] forKey:@"imei"];
-//    [dict setValue:[Common getIOSVersion] forKey:@"version"];
+- (NSString *)signatureString
+{
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:self.webDataDic];
+    [dict setValue:@"1" forKey:@"sourceType"];
+    [dict setValue:[Common getKeychain] forKey:@"imei"];
+    [dict setValue:[Common getIOSVersion] forKey:@"version"];
     
-    //是否需要验签
-//    NSString *signature = [self getSinatureWithPar:[self newGetParStr:dict]];
-//    [dict setValue:signature forKey:@"signature"];
-    //对整体参数加密
-//    NSString * encryptParam  = [Common AESWithKey2:AES_TESTKEY WithDic:dict];
-//    NSString *  dataStr = [NSString stringWithFormat:@"encryptParam=%@",encryptParam];
-//    
-//    return [Common getParameterByDictionary:self.webDataDic];
-//}
+    if([[NSUserDefaults standardUserDefaults] valueForKey:UUID]){
+        [dict setValue:[UserInfoSingle sharedManager].jg_ckie forKey:@"jg_nyscclnjsygjr"];
+    }
+    
+//    是否需要验签
+    NSString *signature = [self getSinatureWithPar:[self newGetParStr:dict]];
+    [dict setValue:signature forKey:@"signature"];
+    DLog(@"批量投标请求参数 ---->>>%@",dict);
+//    对整体参数加密
+    NSString * encryptParam  = [Common AESWithKey2:AES_TESTKEY WithDic:dict];
+    NSString *  dataStr = [NSString stringWithFormat:@"encryptParam=%@",encryptParam];
+    
+    return dataStr;
+}
 //***新版通过字典获取值拼成的字符串 新增函数-qyy-002
 - (NSString *)newGetParStr:(NSDictionary *)dataDict
 {

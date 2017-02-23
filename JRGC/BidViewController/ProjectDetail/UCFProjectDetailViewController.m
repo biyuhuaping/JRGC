@@ -12,8 +12,7 @@
 #import "FullWebViewController.h"
 #import "UCFToolsMehod.h"
 #import "UCFPurchaseTranBidViewController.h"
-
-//#import "BindBankCardViewController.h"
+#import "UINavigationController+FDFullscreenPopGesture.h"
 #import "AppDelegate.h"
 #import "UCFInvestmentView.h"
 #import "UIImage+Misc.h"
@@ -168,7 +167,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //    self.navigationController.navigationBarHidden = YES;
+//        self.navigationController.navigationBarHidden = YES;
+    
+    self.navigationController.fd_prefersNavigationBarHidden = YES;
     
     if (_isTransfer) { //如果是债转的标
         _detailType = PROJECTDETAILTYPEBONDSRRANSFER;

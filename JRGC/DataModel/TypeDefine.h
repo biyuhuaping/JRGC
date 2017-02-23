@@ -209,7 +209,8 @@
 #define  INTODEALBATCH    @"api/invest/v2/intoDealBatch.json" //进入一键投资页面
 #define  BATCHINVESTURL       @"api/invest/v2/batchInvest.json"   //一键投标
 
-#define BATCHINVESTSTATUS    @"api/userAccount/v2/batchInvestStatus.json"//一键投资结果页面
+#define BATCHINVESTSTATUS    @"api/invest/v2/getBatchInvestStatus.json"//一键投资结果页面
+
 
 
 

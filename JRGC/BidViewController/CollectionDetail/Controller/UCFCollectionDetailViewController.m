@@ -7,6 +7,7 @@
 //
 
 #import "UCFCollectionDetailViewController.h"
+#import "UINavigationController+FDFullscreenPopGesture.h"
 #import "UILabel+Misc.h"
 #import "Common.h"
 #import "UCFToolsMehod.h"
@@ -81,14 +82,15 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
 @implementation UCFCollectionDetailViewController
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-  
     self.navigationController.navigationBar.translucent = NO;
-    self.navigationController.navigationBarHidden = YES;
+    [self.navigationController setNavigationBarHidden:YES animated:animated];
+
 }
 
 - (void)viewDidLoad {
 
     [super viewDidLoad];
+    self.navigationController.fd_prefersNavigationBarHidden = YES;
     [self progressAnimiation];
     [self drawTopView];
     if([self.souceVC isEqualToString:@"P2PVC"]){
@@ -571,29 +573,25 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
     [self gotoProjectDetailVC:dataDict];
 }
 -(void)gotoProjectDetailVC:(NSDictionary *)dataDict{
-    if(_selectIndex == 0){
-        
+    
+        NSInteger isOrder = [[dataDict objectSafeForKey:@"isOrder"] integerValue];
+        NSInteger status = [[dataDict objectSafeForKey:@"status"] integerValue];
         NSString *idStr =[dataDict objectSafeForKey:@"childPrdClaimId"];
         NSString *strParameters = [NSString stringWithFormat:@"id=%@&userId=%@", idStr,[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
         
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self];
-        
-    }else{
-        
-        NSString *isOrder = [dataDict objectSafeForKey:@"isOrder"];
-        if ([isOrder intValue] == 0) {
-            NSString *idStr =[dataDict objectSafeForKey:@"childPrdClaimId"];
-            NSString *strParameters = [NSString stringWithFormat:@"id=%@&userId=%@", idStr,[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
-            
+        if (status != 2) {
+            if (isOrder == 0) {//0可看,1不可看
+                [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self];
+            } else {
+                UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前标的详情只对投资人开放"];
+                [self.navigationController pushViewController:controller animated:YES];
+            }
+        }
+        else {
             [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self];
-        } else {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"目前标的详情只对投资人开放" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
-            [alert show];
         }
-    }
-    
 }
 
 #pragma mark
