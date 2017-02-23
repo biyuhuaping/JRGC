@@ -480,7 +480,9 @@ static NetworkModule *gInstance = NULL;
         case kSXTagGetContractMsg:
             parameter = [SERVER_IP stringByAppendingString:GETCONTRACTMSG];
             break;
-            
+        case kSXTagGetBatchContractMsg:
+            parameter = [SERVER_IP stringByAppendingString:GetBatchContractMsg];
+            break;
 
     }
 

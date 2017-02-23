@@ -15,6 +15,7 @@
                 <outlet property="investmentBtn" destination="h3c-uw-e1h" id="oGN-UN-Jj8"/>
                 <outlet property="investmentBtnViewHeight" destination="hM4-yp-Gzh" id="Ggy-vO-GiI"/>
                 <outlet property="navTitleLabel" destination="zBQ-V6-lov" id="p7d-Po-x91"/>
+                <outlet property="shadowImageView" destination="nBF-xe-g2e" id="fI0-6a-7F6"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -89,12 +90,22 @@
                                 <action selector="ClickBatchInvestment:" destination="-1" eventType="touchUpInside" id="WXF-eM-qQu"/>
                             </connections>
                         </button>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nBF-xe-g2e">
+                            <rect key="frame" x="0.0" y="-10" width="367" height="10"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="10" id="m18-B4-thl"/>
+                            </constraints>
+                        </imageView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="h3c-uw-e1h" secondAttribute="bottom" constant="10" id="BkD-cg-iLu"/>
                         <constraint firstItem="h3c-uw-e1h" firstAttribute="leading" secondItem="zGT-9D-Hp8" secondAttribute="leading" constant="15" id="FwX-zY-fY9"/>
+                        <constraint firstItem="nBF-xe-g2e" firstAttribute="leading" secondItem="zGT-9D-Hp8" secondAttribute="leading" id="K11-8F-y7u"/>
                         <constraint firstAttribute="height" constant="57" id="hM4-yp-Gzh"/>
+                        <constraint firstItem="h3c-uw-e1h" firstAttribute="top" secondItem="nBF-xe-g2e" secondAttribute="bottom" constant="10" id="kCm-ea-fri"/>
+                        <constraint firstAttribute="trailing" secondItem="nBF-xe-g2e" secondAttribute="trailing" constant="8" id="xy8-qT-cox"/>
                         <constraint firstAttribute="trailing" secondItem="h3c-uw-e1h" secondAttribute="trailing" constant="15" id="y0S-FC-IM0"/>
                     </constraints>
                 </view>
@@ -112,7 +123,7 @@
                 <constraint firstItem="PW4-3N-a24" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="ohR-mD-cL6"/>
                 <constraint firstAttribute="bottom" secondItem="zGT-9D-Hp8" secondAttribute="bottom" id="yCR-nt-82M"/>
             </constraints>
-            <point key="canvasLocation" x="-1032" y="-1003"/>
+            <point key="canvasLocation" x="-1032.5" y="-1003.5"/>
         </view>
     </objects>
     <resources>

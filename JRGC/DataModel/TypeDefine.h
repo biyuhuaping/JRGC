@@ -192,6 +192,7 @@
 #define PROJECTLIST         @"api/prdClaims/v2/more.json"     //项目标列表
 #define TRANSFERLIST        @"api/prdTransfer/v2/getTranPageList.json"     //转让列表
 #define GETCONTRACTMSG      @"newPrdClaims/getContractMsg" //查看合同详情
+#define GetBatchContractMsg @"newsafe/getAutoInvestRight"
 #define ISSHOWHORNOR        @"api/prdClaims/v2/zxSwitch.json"   //是否显示尊享
 #define VALIDATEOLDPHONENO   @"/api/userInfo/v2/validateOldPhoneNo.json"//校验注册手机号
 
@@ -394,6 +395,7 @@ enum kSXTag
     kSXTagProjectList,                  //项目列表
     kSXTagTransferList,                 //转让列表
     kSXTagGetContractMsg,               //查看合同详情
+    kSXTagGetBatchContractMsg,          //获取批零投标协议
     kSXTagIsShowHornor,                 //是否显示尊享
     kSXTagValidateOldPhoneNo,            //校验注册手机号
     kSXTagDataStatics,                  //数据统计

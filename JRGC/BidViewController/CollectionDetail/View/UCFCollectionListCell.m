@@ -35,12 +35,23 @@
 //    repayTime	计划回款日
 //    status	状态	string
      self.loanAnnualRateLab.text = [NSString stringWithFormat:@"%@%%",[dataDict objectSafeForKey:@"loanAnnualRate"]];
-    self.addRateLab.text = [NSString stringWithFormat:@"%@%%",[dataDict objectSafeForKey:@"addRate"]];
+    
+     float addRate =   [[dataDict objectSafeForKey:@"addRate"] floatValue];
+    if (addRate > 0) {
+        self.addRateViewHeight.constant = 27;
+        self.addRateLab.text = [NSString stringWithFormat:@"%@%%",[dataDict objectSafeForKey:@"addRate"]];
+        self.addRateLabText.hidden = NO;
+    }else{
+        self.addRateViewHeight.constant = 0;
+        self.addRateLab.text = @"";
+        self.addRateLabText.hidden = YES;
+    }
+    
     NSString *loanDateStr  = [dataDict objectSafeForKey:@"loanDate"];
     if ([loanDateStr isEqualToString:@""]) {
         loanDateStr = @"--";
     }
-    self.loanDateLab.text = [NSString stringWithFormat:@"%@",[dataDict objectSafeForKey:@"loanDate"]];
+    self.loanDateLab.text = loanDateStr;
     
     NSString *repayTimeStr  = [dataDict objectSafeForKey:@"repayTime"];
     if ([repayTimeStr isEqualToString:@""]) {
@@ -50,11 +61,57 @@
     
     
     self.investAmtLab.text = [NSString stringWithFormat:@"¥%@",[dataDict objectSafeForKey:@"investAmt"]];
-    self.statusLab.text = [NSString stringWithFormat:@"%@",[dataDict objectSafeForKey:@"status"]];
+
+    self.createDateLab.text = [dataDict objectSafeForKey:@"createDate"];
     [self.loanAnnualRateLab setFont:[UIFont boldSystemFontOfSize:12.5]];
     [self.addRateLab setFont:[UIFont boldSystemFontOfSize:12.5]];
     
+    NSInteger status = [[dataDict objectSafeForKey:@"status"] integerValue];
+     self.statusLab.text = [self getPrdStatus:status];
+    if (status == 2 || status == 4) {//招标中或者满标
+        self.statusLab.textColor = UIColorWithRGB(0xfd4d4c);
+    }
+    else if (status == 5) {//回款中
+        self.statusLab.textColor = UIColorWithRGB(0x4aa1f9);
+    }else{
+        self.statusLab.textColor = UIColorWithRGB(0x999999);
+    }
+
+}
+// _statusArr = @[@"未审核", @"待确认", @"招标中", @"流标", @"满标", @"回款中", @"已回款"];
+-(NSString *)getPrdStatus:(NSInteger )status{
     
+    NSString *statusStr = @"满标";
+    switch (status) {
+        case 0:
+            statusStr = @"未审核";
+            break;
+        case 1:
+            statusStr = @"待确认";
+            break;
+        case 2:
+            statusStr = @"招标中";
+            break;
+        case 3:
+            statusStr = @"流标";
+            break;
+        case 4:
+            statusStr = @"满标";
+            break;
+        case 5:
+            statusStr = @"回款中";
+            break;
+        case 6:
+            statusStr = @"已回款";
+            break;
+        case 7:
+            statusStr = @"未审核";
+            break;
+            
+        default:
+            break;
+    }
+    return statusStr;
 }
 
 @end

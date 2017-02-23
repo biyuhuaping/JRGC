@@ -14,5 +14,6 @@ typedef enum {
     BachEnd,    //开户成功web页
 } BachStep;
 @interface UCFBatchInvestmentViewController : UCFBaseViewController
-@property (nonatomic, assign) NSInteger isStep;
+@property (nonatomic, assign) NSInteger isStep; //徽商开通第几步
+@property (nonatomic, copy)   NSString  *batchInvestment;//先前选中的金额
 @end
