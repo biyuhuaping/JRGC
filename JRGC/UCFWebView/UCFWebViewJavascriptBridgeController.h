@@ -54,7 +54,8 @@
 
 - (void)subShar;
 - (void)gotoURL:(NSString *)url; //加载URL无需验签
-- (void)gotoURLWithSignature:(NSString *)requestUrl;//加载URL需验签
+- (void)gotoURLWithSignature:(NSString *)requestUrl;//加载URL无验签
+- (void)gotoURLWithSignature2:(NSString *)requestUrl;//加载URL需验签
 - (void)setErrorViewFrame:(CGRect)newFrame;//设置错误页面frame
 - (void)removeRefresh;//移除下拉刷新
 - (void)addErrorViewButton;
