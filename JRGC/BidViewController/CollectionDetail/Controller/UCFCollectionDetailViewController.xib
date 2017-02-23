@@ -91,7 +91,7 @@
                             </connections>
                         </button>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nBF-xe-g2e">
-                            <rect key="frame" x="0.0" y="-10" width="367" height="10"/>
+                            <rect key="frame" x="0.0" y="-10" width="375" height="10"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="10" id="m18-B4-thl"/>
@@ -105,7 +105,7 @@
                         <constraint firstItem="nBF-xe-g2e" firstAttribute="leading" secondItem="zGT-9D-Hp8" secondAttribute="leading" id="K11-8F-y7u"/>
                         <constraint firstAttribute="height" constant="57" id="hM4-yp-Gzh"/>
                         <constraint firstItem="h3c-uw-e1h" firstAttribute="top" secondItem="nBF-xe-g2e" secondAttribute="bottom" constant="10" id="kCm-ea-fri"/>
-                        <constraint firstAttribute="trailing" secondItem="nBF-xe-g2e" secondAttribute="trailing" constant="8" id="xy8-qT-cox"/>
+                        <constraint firstAttribute="trailing" secondItem="nBF-xe-g2e" secondAttribute="trailing" id="xy8-qT-cox"/>
                         <constraint firstAttribute="trailing" secondItem="h3c-uw-e1h" secondAttribute="trailing" constant="15" id="y0S-FC-IM0"/>
                     </constraints>
                 </view>
@@ -123,7 +123,8 @@
                 <constraint firstItem="PW4-3N-a24" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="ohR-mD-cL6"/>
                 <constraint firstAttribute="bottom" secondItem="zGT-9D-Hp8" secondAttribute="bottom" id="yCR-nt-82M"/>
             </constraints>
-            <point key="canvasLocation" x="-1032.5" y="-1003.5"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <point key="canvasLocation" x="-1877" y="-1117"/>
         </view>
     </objects>
     <resources>
