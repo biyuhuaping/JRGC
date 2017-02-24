@@ -27,6 +27,7 @@
 #import "UCFProjectDetailViewController.h"
 #import "UCFNoDataView.h"
 #import "UCFCollctionKeyBidViewController.h"
+#import "UCFLoginViewController.h"
 #define shadeSpacingHeight 18 //遮罩label的上下间距
 #define shadeHeight 70 //遮罩高度
 static NSString * const DetailCellID = @"UCFCollectionDetailCell";
@@ -246,9 +247,6 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
     //进度条中间的百分比label
     
     int progressInt = (int)(Progress *100);
-    if (progressInt == 0) {
-        progressInt = 1;
-    }
     NSString* percentageStr =[NSString stringWithFormat:@"%d%%",progressInt];
 
     CGSize percentageStrSize = [percentageStr sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:25]}];
@@ -271,16 +269,18 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
     
     NSString *canBuyAmtStr = [NSString stringWithFormat:@"%@",[_detailDataDict objectSafeForKey:@"canBuyAmt"]];
     NSString *totalAmtStr = [NSString stringWithFormat:@"%@",[_detailDataDict objectSafeForKey:@"totalAmt"]];
+    curProcess = 0;
     
     Progress = ([totalAmtStr floatValue] - [canBuyAmtStr floatValue]) / [totalAmtStr floatValue];
-    if (Progress > 0.98 && Progress < 1.0) {
-        Progress = 0.98;
-    } else if (Progress > 0.97 && Progress < 0.99) {
-        Progress = 0.97;
-    }
-    if (Progress > 0 && Progress < 0.01) {
-        Progress = 0.01;
-    }
+    Progress = (int)(Progress *100) / 100.00;
+//    if (Progress > 0.99 && Progress < 1.0) {
+//        Progress = 0.99;
+//    } else if (Progress > 0.98 && Progress < 0.99) {
+//        Progress = 0.98;
+//    }
+//    if (Progress > 0 && Progress < 0.01) {
+//        Progress = 0;
+//    }
     [self performSelector:@selector(beginUpdatingProgressView) withObject:nil afterDelay:0.1];
 }
 - (void)beginUpdatingProgressView
@@ -598,6 +598,11 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
 #pragma mark 网络请求
 -(void)getCollectionDetailHttpRequest{
     NSString *uuid = [[NSUserDefaults standardUserDefaults]valueForKey:UUID];
+    if (uuid == nil || [uuid isEqualToString:@""]) { //如果为空 去登录页面
+        [self showLoginView];
+        [self.listTableView.header endRefreshing];
+        return;
+    }
     NSString *prdClaimsOrderStr = @"00";
     if (_selectIndex == 0) {
         if ([self.listTableView.header isRefreshing]) {
@@ -632,8 +637,17 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
         currentPageStr =[NSString stringWithFormat:@"%d",_fullCurrentPage];
     }
     NSString *statusStr = [NSString stringWithFormat:@"%ld",(long)_selectIndex];
-    NSDictionary *dataDict  = @{@"userId":uuid,@"colPrdClaimId":_colPrdClaimId,@"page":currentPageStr,@"pageSize":@"20",@"prdClaimsOrder":prdClaimsOrderStr,@"status":statusStr};
+    NSDictionary *dataDict = @{};
+    if (uuid) {
+       dataDict  = @{@"userId":uuid,@"colPrdClaimId":_colPrdClaimId,@"page":currentPageStr,@"pageSize":@"20",@"prdClaimsOrder":prdClaimsOrderStr,@"status":statusStr};
+    }
     [[NetworkModule sharedNetworkModule] newPostReq:dataDict tag:kSXTagChildPrdclaimsList owner:self signature:YES];
+}
+- (void)showLoginView
+{
+    UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
+    UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
+    [self presentViewController:loginNaviController animated:YES completion:nil];
 }
 -(void)beginPost:(kSXTag)tag{
 //    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
