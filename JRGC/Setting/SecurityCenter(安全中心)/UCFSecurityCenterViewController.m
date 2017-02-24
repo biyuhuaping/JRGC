@@ -836,15 +836,32 @@
                     [self.navigationController pushViewController:tradePasswordVC  animated:YES];
                 }
             } else if ([NSStringFromClass(arrowItem.destVcClass)  isEqualToString: @"UCFBatchInvestmentViewController"]) {
-                UCFBatchInvestmentViewController *batchInvestment = [[UCFBatchInvestmentViewController alloc] init];
-                UCFSettingGroup *group2 = [self.itemsData lastObject];
-                UCFSettingItem *userItem = group2.items.firstObject;
-                batchInvestment.isStep = [userItem.subtitle isEqualToString:@"未开启"] ? 1 : 2;
-                batchInvestment.batchInvestment = userItem.subtitle;
-                [self.navigationController pushViewController:batchInvestment animated:YES];
+                if([self checkHSIsLegitimate]) {
+                    UCFBatchInvestmentViewController *batchInvestment = [[UCFBatchInvestmentViewController alloc] init];
+                    UCFSettingGroup *group2 = [self.itemsData lastObject];
+                    UCFSettingItem *userItem = group2.items.firstObject;
+                    batchInvestment.isStep = [userItem.subtitle isEqualToString:@"未开启"] ? 1 : 2;
+                    [self.navigationController pushViewController:batchInvestment animated:YES];
+                }
             }
         }
     }
+}
+- (BOOL) checkHSIsLegitimate {
+    NSInteger openStatus = [UserInfoSingle sharedManager].openStatus;
+    if(openStatus < 3){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请先开通徽商存管账户" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        alert.tag = 10005;
+        [alert show];
+        return NO;
+    }else if(openStatus == 3){
+        UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:3];
+        [self.navigationController pushViewController:vc animated:YES];
+        return NO;
+    }else{
+        return YES;
+    }
+
 }
 #pragma mark 徽商资金存管专题页面
 -(void)gotoBankDepositoryAccountVC{
