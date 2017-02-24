@@ -27,12 +27,14 @@ static NSString *thirdStr = @"批量投资已经开启";
     UIButton *investmentButton;
     BOOL      isFirstFixed;   //是否第一次修改最大限投金额
 }
-@property (nonatomic, strong) UIView *firstView;    //标题注册view
-@property (nonatomic, strong) UIView *secondView;   //标题徽商view
-@property (nonatomic, strong) UIView *thirdView;    //标题密码view
+@property (nonatomic, strong) UIView *firstView;    //申请view
+@property (nonatomic, strong) UIView *secondView;   //设置额度view
+@property (nonatomic, strong) UIView *thirdView;    //成功view
 @property (nonatomic, strong) UILabel *tipLabel;    //蓝色提醒lable
 @property (nonatomic, strong) UIScrollView *baseScrollView;
 @property (nonatomic, strong) NSArray *quotaArr;    //额度数组
+@property (nonatomic, copy)   NSString  *batchInvestment;//先前选中的金额
+
 @end
 
 @implementation UCFBatchInvestmentViewController
@@ -206,7 +208,7 @@ static NSString *thirdStr = @"批量投资已经开启";
             button.titleLabel.attributedText = attrituteString;
         }
         
-        if ([self.batchInvestment isEqualToString:@"未开启"] && i== 0) {
+        if (self.batchInvestment.length == 0 && i== 0) {
             button.selected = YES;
             selectButton = button;
         } else {
@@ -543,6 +545,7 @@ static NSString *thirdStr = @"批量投资已经开启";
     if (tag.integerValue == kSXTagBatchNumList) {
         if ([dic[@"ret"] boolValue]) {
             isFirstFixed = [dic[@"data"][@"openOrEdit"] isEqualToString:@"1"] ? NO : YES;
+            self.batchInvestment =  [[dic objectSafeArrayForKey:@"data"] objectSafeArrayForKey:@"currentLimit"];
             self.quotaArr = [[dic objectSafeArrayForKey:@"data"] objectSafeArrayForKey:@"BatchNumList"];
             [self initSecondSectionView];
             [investmentButton setTitle:@"提交" forState:UIControlStateNormal];
