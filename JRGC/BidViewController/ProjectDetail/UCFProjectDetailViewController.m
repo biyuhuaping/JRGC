@@ -170,7 +170,7 @@
 //        self.navigationController.navigationBarHidden = YES;
     
     self.navigationController.fd_prefersNavigationBarHidden = YES;
-    
+
     if (_isTransfer) { //如果是债转的标
         _detailType = PROJECTDETAILTYPEBONDSRRANSFER;
         NSString *type = [[_dataDic objectSafeDictionaryForKey:@"prdTransferFore"] objectSafeForKey:@"type"];
@@ -283,7 +283,12 @@
 {
     [super viewWillAppear:animated];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    [self.navigationController setNavigationBarHidden:YES animated:animated];
+    if ([_sourceVc isEqualToString:@"collection"]) {
+        [self.navigationController setNavigationBarHidden:YES animated:NO];
+
+    } else {
+        [self.navigationController setNavigationBarHidden:YES animated:animated];
+    }
     
 }
 - (void)viewDidAppear:(BOOL)animated
