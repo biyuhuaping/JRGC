@@ -579,9 +579,11 @@
             
             NSString *urlStr =[NSString stringWithFormat:@"%@%@",SERVER_IP,BATCHINVESTSTATUS];
             UCFBatchBidWebViewController *webView = [[UCFBatchBidWebViewController alloc]initWithNibName:@"UCFBatchBidWebViewController" bundle:nil];
+//            UCFPurchaseWebView *webView = [[UCFPurchaseWebView alloc]initWithNibName:@"UCFPurchaseWebView" bundle:nil];
             webView.url =  urlStr;
             webView.webDataDic = reqDict;
             webView.navTitle = @"即将跳转";
+//            webView.rootVc = @"collctionKeyBidVC";
             [self.navigationController pushViewController:webView animated:YES];
             NSMutableArray *navVCArray = [[NSMutableArray alloc] initWithArray:self.navigationController.viewControllers];
             [navVCArray removeObjectAtIndex:navVCArray.count-2];
@@ -1331,16 +1333,21 @@
     }
     return type;
 }
+//展示合同
 - (void)showHeTong:(ZBLinkLabelModel *)linkModel
 {
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    NSDictionary *userOtherMsg = [_dataDict objectForKey:@"userOtherMsg"];
-    NSArray *contractMsgArr = [userOtherMsg valueForKey:@"contractMsg"];
-    NSString *contractTypeStr = [self valueIndex:linkModel WithDataArr:contractMsgArr typeKey:@"contractType"];
+//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//    NSDictionary *userOtherMsg = [_dataDict objectForKey:@"userOtherMsg"];
+//    NSArray *contractMsgArr = [userOtherMsg valueForKey:@"contractMsg"];
+//    NSString *contractTypeStr = [self valueIndex:linkModel WithDataArr:contractMsgArr typeKey:@"contractType"];
+//    
+//    NSString *projectId = [[self.dataDict objectForKey:@"data"] objectForKey:@"id"];
+//    NSString *strParameters = [NSString stringWithFormat:@"userId=%@&prdClaimId=%@&contractType=%@&prdType=0",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],projectId,contractTypeStr];
+//    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetContractMsg owner:self];
+    FullWebViewController *controller = [[FullWebViewController alloc] initWithWebUrl:@"https://www.9888.cn/batch_invest_terms.html" title:@"批量投资协议"];
+    controller.baseTitleType = @"detail_heTong";
+    [self.navigationController pushViewController:controller animated:YES];
     
-    NSString *projectId = [[self.dataDict objectForKey:@"data"] objectForKey:@"id"];
-    NSString *strParameters = [NSString stringWithFormat:@"userId=%@&prdClaimId=%@&contractType=%@&prdType=0",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],projectId,contractTypeStr];
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetContractMsg owner:self];
 }
 
 - (void)showPDF:(ZBLinkLabelModel *)linkModel
