@@ -1103,8 +1103,7 @@
         //如果未登录，展示登录页面
         [self showLoginView];
     } else {
-        if ([self checkUserCanInvestIsDetail:YES]) {
-            
+        if ([self checkUserCanInvestIsDetail:NO]) {
             _colPrdClaimIdStr = [NSString stringWithFormat:@"%@",model.Id];
             NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys:uuid,@"userId", _colPrdClaimIdStr, @"colPrdClaimId", nil];
             [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagColPrdclaimsDetail owner:self signature:YES];
