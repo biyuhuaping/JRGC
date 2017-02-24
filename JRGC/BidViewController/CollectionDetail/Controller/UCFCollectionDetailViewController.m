@@ -82,8 +82,8 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
 @implementation UCFCollectionDetailViewController
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    self.navigationController.navigationBar.translucent = NO;
-    [self.navigationController setNavigationBarHidden:YES animated:animated];
+//    self.navigationController.navigationBar.translucent = NO;
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
 
 }
 
@@ -91,6 +91,7 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
 
     [super viewDidLoad];
     self.navigationController.fd_prefersNavigationBarHidden = YES;
+
     [self progressAnimiation];
     [self drawTopView];
     if([self.souceVC isEqualToString:@"P2PVC"]){
@@ -112,9 +113,13 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
     }else{
         [self drawCollectionDelitailListView];//我的投资页面的项目详情
     }
-   
-}
+//    [self.navigationController.navigationBar addObserver:self forKeyPath:@"hidden" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:NULL];
 
+}
+//-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+//{
+//    NSLog(@"object === %@",object);
+//}
 #pragma mark
 #pragma mark 绘制顶部视图
 - (void)drawTopView
@@ -701,6 +706,8 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
             UCFProjectDetailViewController *controller = [[UCFProjectDetailViewController alloc] initWithDataDic:dic isTransfer:NO withLabelList:prdLabelsListTemp];
 //            CGFloat platformSubsidyExpense = [_projectListModel.platformSubsidyExpense floatValue];
 //            [[NSUserDefaults standardUserDefaults] setValue:[NSString stringWithFormat:@"%.1f",platformSubsidyExpense] forKey:@"platformSubsidyExpense"];
+            controller.sourceVc = @"collection";
+//            controller.isHideNavigationBar = YES;
             [self.navigationController pushViewController:controller animated:YES];
         }else {
             [AuxiliaryFunc showAlertViewWithMessage:rsttext];
@@ -755,5 +762,9 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSDictionary *dataDict = @{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"tenderId":_colPrdClaimId};
         [[NetworkModule sharedNetworkModule] newPostReq:dataDict tag:kSXTagColIntoDealBatch owner:self signature:YES];
+}
+- (void)dealloc
+{
+    
 }
 @end
