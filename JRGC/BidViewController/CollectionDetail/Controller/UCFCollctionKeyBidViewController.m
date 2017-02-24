@@ -1198,14 +1198,14 @@
 - (NSString *)checkBeyondLimit:(NSString *)investMoney
 {
 
-    NSString *maxIn = [NSString stringWithFormat:@"%@",[_dataDict objectForKey:@"batchAmount"]];
-    if (maxIn.length != 0) {
-        if ([Common stringA:investMoney ComparedStringB:maxIn] == 1) {
-            return maxIn;
-        } else {
-            return investMoney;
-        }
-    }
+//    NSString *maxIn = [NSString stringWithFormat:@"%@",[_dataDict objectForKey:@"batchAmount"]];
+//    if (maxIn.length != 0) {
+//        if ([Common stringA:investMoney ComparedStringB:maxIn] == 1) {
+//            return maxIn;
+//        } else {
+//            return investMoney;
+//        }
+//    }
     return investMoney;
 }
 - (UIView *)createFootView
