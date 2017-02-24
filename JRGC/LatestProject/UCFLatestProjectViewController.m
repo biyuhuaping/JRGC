@@ -794,6 +794,9 @@
 - (void)beginPost:(kSXTag)tag
 {
 //    [GiFHUD show];
+    if (tag == kSXTagColPrdclaimsDetail){
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    }
 }
 
 //请求成功及结果

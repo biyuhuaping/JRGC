@@ -50,7 +50,7 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
     [_listHeaderView  addSubview:headerTitleLabel];
     
     _listCountLabel= [[UILabel alloc]initWithFrame:CGRectMake(ScreenWidth - 15 - 100 , 5, 100, 20)];
-    _listCountLabel.text = @"0个标";
+    _listCountLabel.text = @"0个子标";
     _listCountLabel.textColor = UIColorWithRGB(0x555555);
     _listCountLabel.font = [UIFont systemFontOfSize:13];
     _listCountLabel.textAlignment = NSTextAlignmentRight;
@@ -158,7 +158,7 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
             NSArray *list_result = [[[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"pageData"] objectSafeArrayForKey:@"result"];
             BOOL hasNext = [[[[[dic objectSafeDictionaryForKey:@"data"]  objectSafeDictionaryForKey:@"pageData"] objectSafeDictionaryForKey:@"pagination"] objectSafeForKey:@"hasNextPage"] boolValue];
             int totalCount = [[[[[dic objectSafeDictionaryForKey:@"data"]  objectSafeDictionaryForKey:@"pageData"] objectSafeDictionaryForKey:@"pagination"] objectSafeForKey:@"totalCount"] intValue];
-            _listCountLabel.text = [NSString stringWithFormat:@"%d个标",totalCount];
+            _listCountLabel.text = [NSString stringWithFormat:@"%d个子标",totalCount];
             if (self.currentPage == 1) {
                 [self.investmentDetailDataArray removeAllObjects];
             }
