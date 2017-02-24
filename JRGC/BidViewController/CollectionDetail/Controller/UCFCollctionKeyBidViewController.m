@@ -944,7 +944,7 @@
     }
     CalculatorView * view = [[CalculatorView alloc] init];
     view.tag = 173924;
-    [view reloadViewWithData:_dataDict AndNowMoney:investMoney];
+    [view reloadViewWithData:_dataDict AndNowMoney:investMoney AndChildPrdClaimId:_childPrdClaimId];
     AppDelegate * app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     [app.window addSubview:view];
 }
