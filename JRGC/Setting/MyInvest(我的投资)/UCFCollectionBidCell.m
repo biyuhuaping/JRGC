@@ -68,7 +68,7 @@
     self.leftAmtLabel.text = [self moneywithRemaining:collectionBidModel.canBuyAmt total:collectionBidModel.totalAmt];
     
     CGFloat progressValue = [collectionBidModel.canBuyAmt floatValue]/[collectionBidModel.totalAmt floatValue];
-    if (progressValue>1) {
+    if (progressValue>1 || collectionBidModel.full == YES) {
         _progressValueTrailSpace.constant = 0;
     }
     else if (progressValue<0) {
