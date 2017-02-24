@@ -315,22 +315,32 @@
     _repayModeLab.text = [self moneywithRemaining:batchBidModel.canBuyAmt total:batchBidModel.totalAmt];
     
 
-
-    float progress = ([batchBidModel.totalAmt floatValue] - [batchBidModel.canBuyAmt floatValue])/[batchBidModel.totalAmt floatValue];
+    float totalAmt = [batchBidModel.totalAmt floatValue];
+    float canBuyAmt = [batchBidModel.canBuyAmt floatValue];
+    DBLOG(@"%f=====%f", totalAmt, canBuyAmt);
+    
+    float progress = (totalAmt - canBuyAmt) / totalAmt * 1000;
     if (batchBidModel.full) {
         self.circleProgressView.textStr = @"满标";
-        self.circleProgressView.tintColor = UIColorWithRGB(0xe2e2e2);//未绘制的进度条颜色
+//        self.circleProgressView.tintColor = UIColorWithRGB(0xe2e2e2);//未绘制的进度条颜色
+        self.circleProgressView.tintColor = UIColorWithRGB(0xfa4d4c);
         self.circleProgressView.progressLabel.textColor = UIColorWithRGB(0x909dae);
+        if (batchBidModel.isAnim) {
+            [self animateCircle:1000 isAnim:YES];
+            batchBidModel.isAnim = NO;
+        }else{
+            [self animateCircle:1000 isAnim:NO];
+        }
     }
     else {
         self.circleProgressView.tintColor = UIColorWithRGB(0xfa4d4c);
         self.circleProgressView.progressLabel.textColor = UIColorWithRGB(0x555555);
         self.circleProgressView.textStr = @"批量投资";
         if (batchBidModel.isAnim) {
-            [self animateCircle:10*progress isAnim:YES];
+            [self animateCircle:progress isAnim:YES];
             batchBidModel.isAnim = NO;
         }else{
-            [self animateCircle:10*progress isAnim:NO];
+            [self animateCircle:progress isAnim:NO];
         }
     }
 }
