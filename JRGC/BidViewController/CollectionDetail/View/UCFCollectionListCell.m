@@ -8,6 +8,7 @@
 
 #import "UCFCollectionListCell.h"
 #import "UIDic+Safe.h"
+#import "UCFToolsMehod.h"
 
 @implementation UCFCollectionListCell
 
@@ -34,10 +35,12 @@
 //    prdName	标名称	string
 //    repayTime	计划回款日
 //    status	状态	string
-     self.loanAnnualRateLab.text = [NSString stringWithFormat:@"%@%%",[dataDict objectSafeForKey:@"loanAnnualRate"]];
+      self.prdNameLab.text = [dataDict objectSafeForKey:@"prdName"];
+      self.loanAnnualRateLab.text = [NSString stringWithFormat:@"%@%%",[dataDict objectSafeForKey:@"loanAnnualRate"]];
+ 
     
      float addRate =   [[dataDict objectSafeForKey:@"addRate"] floatValue];
-    if (addRate > 0) {
+     if (addRate > 0) {
         self.addRateViewHeight.constant = 27;
         self.addRateLab.text = [NSString stringWithFormat:@"%@%%",[dataDict objectSafeForKey:@"addRate"]];
         self.addRateLabText.hidden = NO;
@@ -59,8 +62,11 @@
     }
     self.repayTimeLab.text = [NSString stringWithFormat:@"%@",repayTimeStr];
     
+    NSString *investAmtStr =[NSString stringWithFormat:@"%.2f",[[dataDict objectSafeForKey:@"investAmt" ] floatValue]];
     
-    self.investAmtLab.text = [NSString stringWithFormat:@"¥%@",[dataDict objectSafeForKey:@"investAmt"]];
+    investAmtStr = [NSString stringWithFormat:@"¥%@",[UCFToolsMehod AddComma:[NSString stringWithFormat:@"%@",[UCFToolsMehod isNullOrNilWithString:investAmtStr]]]];
+    
+    self.investAmtLab.text = investAmtStr;
 
     self.createDateLab.text = [dataDict objectSafeForKey:@"createDate"];
     [self.loanAnnualRateLab setFont:[UIFont boldSystemFontOfSize:12.5]];

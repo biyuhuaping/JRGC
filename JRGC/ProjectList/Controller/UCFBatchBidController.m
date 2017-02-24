@@ -109,7 +109,7 @@
         //如果未登录，展示登录页面
         [self showLoginView];
     } else {
-        if ([self checkUserCanInvestIsDetail:YES]) {
+        if ([self checkUserCanInvestIsDetail:NO]) {
             UCFBatchBidModel *model = [self.dataArray objectAtIndex:indexPath.row];
             NSString *uuid = [[NSUserDefaults standardUserDefaults]valueForKey:UUID];
             NSDictionary *strParameters;
