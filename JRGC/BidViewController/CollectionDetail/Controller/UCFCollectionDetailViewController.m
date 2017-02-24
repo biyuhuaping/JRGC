@@ -218,7 +218,7 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
     remainLabel.frame = remainLabelFrame;
     
    
-    NSString *canBuyAmtStr =[NSString stringWithFormat:@"%@",[_detailDataDict objectSafeForKey:@"canBuyAmt"] ];
+    NSString *canBuyAmtStr =[NSString stringWithFormat:@"%.2f",[[_detailDataDict objectSafeForKey:@"canBuyAmt"] floatValue]];
     
     canBuyAmtStr = [NSString stringWithFormat:@"¥%@",[UCFToolsMehod AddComma:[NSString stringWithFormat:@"%@",[UCFToolsMehod isNullOrNilWithString:canBuyAmtStr]]]];//可投额度
     _remainMoneyLabel = [UILabel labelWithFrame:CGRectMake(CGRectGetMaxX(remainLabel.frame) + 10,remainLabel.frame.origin.y - 1,150,14) text:canBuyAmtStr textColor:[UIColor whiteColor] font:[UIFont systemFontOfSize:14]];

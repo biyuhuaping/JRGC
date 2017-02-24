@@ -64,6 +64,10 @@
         if ([self.delegate respondsToSelector:@selector(cell:clickInvestBtn1:withModel:)]) {
             [self.delegate cell:self clickInvestBtn1:sender withModel:self.transferModel];
         }
+    }else if (self.type == UCFProjectListCellTypeBatchBid) {
+        if ([self.delegate respondsToSelector:@selector(cell:clickInvestBtn2:withModel:)]) {
+            [self.delegate cell:self clickInvestBtn2:sender withModel:self.batchBidModel];
+        }
     }
 }
 
