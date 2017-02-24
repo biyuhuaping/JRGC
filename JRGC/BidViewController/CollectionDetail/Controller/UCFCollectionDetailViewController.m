@@ -73,7 +73,7 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *investmentBtnViewHeight;
 @property (weak, nonatomic) IBOutlet UIButton *investmentBtn;
 @property (weak, nonatomic) IBOutlet UIImageView *shadowImageView;
-
+@property (strong,nonatomic) NSString *intoViewControllerStr;
 - (IBAction)goBackVC:(UIButton *)sender;
 - (IBAction)ClickBatchInvestment:(UIButton *)sender;
 
@@ -84,8 +84,12 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
 //    self.navigationController.navigationBar.translucent = NO;
-    [self.navigationController setNavigationBarHidden:YES animated:NO];
-
+    if([_souceVC isEqualToString:@"BatchProjectVC"] || [_intoViewControllerStr isEqualToString:@"CollctionKeyBidVC"])
+    {
+         [self.navigationController setNavigationBarHidden:YES animated:YES];
+    }else {
+         [self.navigationController setNavigationBarHidden:YES animated:NO];
+    }
 }
 
 - (void)viewDidLoad {
@@ -721,6 +725,7 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
 //            CGFloat platformSubsidyExpense = [_projectListModel.platformSubsidyExpense floatValue];
 //            [[NSUserDefaults standardUserDefaults] setValue:[NSString stringWithFormat:@"%.1f",platformSubsidyExpense] forKey:@"platformSubsidyExpense"];
             controller.sourceVc = @"collection";
+            self.intoViewControllerStr = @"ProjectDetailVC";
 //            controller.isHideNavigationBar = YES;
             [self.navigationController pushViewController:controller animated:YES];
         }else {
@@ -737,6 +742,7 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
             UCFCollctionKeyBidViewController *purchaseViewController = [[UCFCollctionKeyBidViewController alloc] init];
             purchaseViewController.dataDict = [dic objectSafeDictionaryForKey:@"data"];
             purchaseViewController.bidType = 0;
+            self.intoViewControllerStr = @"CollctionKeyBidVC";
             [self.navigationController pushViewController:purchaseViewController animated:YES];
         }else
         {
