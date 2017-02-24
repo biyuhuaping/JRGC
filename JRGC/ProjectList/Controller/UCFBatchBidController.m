@@ -102,15 +102,26 @@
     cell.type = UCFProjectListCellTypeBatchBid;
     return cell;
 }
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    UCFBatchBidModel *model = [self.dataArray objectAtIndex:indexPath.row];
+      [self  gotoCollectionDetailVC:model];
+    
+}
+-(void)cell:(UCFProjectListCell *)cell clickInvestBtn2:(UIButton *)button withModel:(UCFBatchBidModel *)model
+{
+    [self  gotoCollectionDetailVC:model];
+ 
+}
+-(void)gotoCollectionDetailVC:(UCFBatchBidModel *)model{
     
     if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
         //如果未登录，展示登录页面
         [self showLoginView];
     } else {
         if ([self checkUserCanInvestIsDetail:NO]) {
-            UCFBatchBidModel *model = [self.dataArray objectAtIndex:indexPath.row];
+            
             NSString *uuid = [[NSUserDefaults standardUserDefaults]valueForKey:UUID];
             NSDictionary *strParameters;
             _colPrdClaimIdStr = [NSString stringWithFormat:@"%@",model.batchBidId];
@@ -119,6 +130,7 @@
         }
     }
 }
+
 #pragma mark - net request
 - (void)getNetDataFromNet
 {

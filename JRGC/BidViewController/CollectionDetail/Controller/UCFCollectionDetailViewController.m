@@ -218,7 +218,7 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
     remainLabel.frame = remainLabelFrame;
     
    
-    NSString *canBuyAmtStr =[NSString stringWithFormat:@"%@",[_detailDataDict objectSafeForKey:@"canBuyAmt"] ];
+    NSString *canBuyAmtStr =[NSString stringWithFormat:@"%.2f",[[_detailDataDict objectSafeForKey:@"canBuyAmt"] floatValue]];
     
     canBuyAmtStr = [NSString stringWithFormat:@"¥%@",[UCFToolsMehod AddComma:[NSString stringWithFormat:@"%@",[UCFToolsMehod isNullOrNilWithString:canBuyAmtStr]]]];//可投额度
     _remainMoneyLabel = [UILabel labelWithFrame:CGRectMake(CGRectGetMaxX(remainLabel.frame) + 10,remainLabel.frame.origin.y - 1,150,14) text:canBuyAmtStr textColor:[UIColor whiteColor] font:[UIFont systemFontOfSize:14]];
@@ -256,6 +256,15 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
     //进度条中间的百分比label
     
     int progressInt = (int)(Progress *100);
+    if([_souceVC isEqualToString:@"P2PVC"]){
+        if (progressInt == 100) {
+            [self.investmentBtn setBackgroundColor:UIColorWithRGB(0xd4d4d4)];
+            [self.investmentBtn setUserInteractionEnabled:NO];
+        }else{
+            [self.investmentBtn setBackgroundColor:UIColorWithRGB(0xfd4d4c)];
+            [self.investmentBtn setUserInteractionEnabled:YES];
+        }
+    }
     NSString* percentageStr =[NSString stringWithFormat:@"%d%%",progressInt];
 
     CGSize percentageStrSize = [percentageStr sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:25]}];
@@ -743,6 +752,8 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
             purchaseViewController.dataDict = [dic objectSafeDictionaryForKey:@"data"];
             purchaseViewController.bidType = 0;
             self.intoViewControllerStr = @"CollctionKeyBidVC";
+            NSDictionary *dataDict = [self.investmentProjectDataArray firstObject];
+            purchaseViewController.childPrdClaimId = [dataDict objectSafeForKey:@"childPrdClaimId"];
             [self.navigationController pushViewController:purchaseViewController animated:YES];
         }else
         {

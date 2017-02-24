@@ -378,8 +378,25 @@
 //    [self getMoney:currentMoney];
     [self calculateBegin:nil];
 }
+/**
+ *  批量投资标收益入口
+ *
+ *  @param dataDict     源数据（投资页数据源）
+ *  @param currentMoney 本金
+ *  @param childPrdClaimId 子标id
+ */
 
-
+- (void)reloadViewWithData:(NSDictionary *)dataDict AndNowMoney:(NSString *)currentMoney AndChildPrdClaimId:(NSString *)childPrdClaimId;
+{
+    self.annleRate = [[dataDict objectForKey:@"colPrdClaimDetail"] objectForKey:@"colRate"];
+    normalBidID = childPrdClaimId;
+    self.repayPeriodDay = [[dataDict objectForKey:@"colPrdClaimDetail"] objectForKey:@"repayPeriodDay"];
+    moneyTextField.placeholder = [NSString stringWithFormat:@"%@元起投",[[dataDict objectForKey:@"colPrdClaimDetail"] objectForKey:@"colMinInvest"]];
+    moneyTextField.text = [NSString stringWithFormat:@"%.2f",[currentMoney doubleValue]];
+    _normalMinInvest = [[[dataDict objectForKey:@"colPrdClaimDetail"] objectForKey:@"colMinInvest"] doubleValue];
+    //    [self getMoney:currentMoney];
+    [self calculateBegin:nil];
+}
 
 
 

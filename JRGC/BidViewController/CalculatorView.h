@@ -29,4 +29,5 @@
 @property(nonatomic,strong) NSDictionary *tranBidDataDict;
 - (void)reloadViewWithData:(NSDictionary *)dataDict AndNowMoney:(NSString *)currentMoney;
 - (void)reloadViewWithData:(NSDictionary *)dataDict AndNowMoney:(NSString *)currentMoney AndPreMoney:(NSString *)preMoney BankMoney:(NSString *)bankMoney;
+- (void)reloadViewWithData:(NSDictionary *)dataDict AndNowMoney:(NSString *)currentMoney AndChildPrdClaimId:(NSString *)childPrdClaimId;
 @end

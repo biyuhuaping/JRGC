@@ -19,6 +19,7 @@ typedef enum : NSUInteger {
 @optional
 - (void)cell:(UCFProjectListCell*)cell clickInvestBtn:(UIButton *)button withModel:(UCFProjectListModel*)model;
 - (void)cell:(UCFProjectListCell*)cell clickInvestBtn1:(UIButton *)button withModel:(UCFTransferModel *)model;
+- (void)cell:(UCFProjectListCell*)cell clickInvestBtn2:(UIButton *)button withModel:(UCFBatchBidModel *)model;
 
 @end
 
