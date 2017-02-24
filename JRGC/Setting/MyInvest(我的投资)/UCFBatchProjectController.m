@@ -61,7 +61,7 @@
     }];
     
     [self.tableView addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(getBatchInvestDataList)];
-    self.tableView.footer.hidden = YES;
+//    self.tableView.footer.hidden = YES;
 }
 
 #pragma mark - tableview delegate and datasource
