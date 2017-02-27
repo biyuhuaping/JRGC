@@ -39,31 +39,37 @@
     self.bidName.text = [NSString stringWithFormat:@"%@", model.collName];
     NSInteger status = [model.status integerValue];
     switch (status) {
+//            0、匹配中 1、匹配成功 2、匹配失败
         case 0:
-            self.statusLabel.text = @"未审核";
+            self.statusLabel.text = @"匹配中";
             break;
         case 1:
-            self.statusLabel.text = @"待确认";
+            self.statusLabel.text = @"";
             break;
         case 2:
-            self.statusLabel.text = @"招标中";
+            self.statusLabel.text = @"匹配失败";
             break;
-        case 3:
-            self.statusLabel.text = @"流标";
-            break;
-        case 4:
-            self.statusLabel.text = @"满标";
-            break;
-        case 5:
-            self.statusLabel.text = @"回款中";
-            break;
-        case 6:
-            self.statusLabel.text = @"已回款";
-            break;
+//        case 3:
+//            self.statusLabel.text = @"流标";
+////            break;
+//        case 4:
+//            self.statusLabel.text = @"满标";
+//            break;
+//        case 5:
+//            self.statusLabel.text = @"回款中";
+//            break;
+//        case 6:
+//            self.statusLabel.text = @"已回款";
+//            break;
     }
     self.bidCycleLabel.text = model.colPeriodTxt;
     self.preYearRateLabel.text = [NSString stringWithFormat:@"%@%%", model.collRate];
-    self.hasInvested.text = [NSString stringWithFormat:@"¥%.2f", [model.investSuccessTotal floatValue]];
+    NSString *investSuccessTotalStr = [NSString stringWithFormat:@"¥%.2f", [model.investSuccessTotal floatValue]];
+    if([investSuccessTotalStr floatValue] == 0 || [investSuccessTotalStr isEqualToString:@""]){
+       self.hasInvested.text  = @"--";
+    }else{
+       self.hasInvested.text = investSuccessTotalStr;
+    }
     self.tradeDateLabel.text = model.investTime;
 }
 

@@ -56,7 +56,7 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
     _listCountLabel.textAlignment = NSTextAlignmentRight;
     [_listHeaderView  addSubview:_listCountLabel];
     
-    _listTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 30 , ScreenWidth, ScreenHeight - 64 - 30 ) style:UITableViewStylePlain];
+    _listTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 30 , ScreenWidth, ScreenHeight - 64 - 30 - 57) style:UITableViewStylePlain];
     _listTableView.delegate = self;
     _listTableView.dataSource = self;
     _listTableView.indicatorStyle = UIScrollViewIndicatorStyleDefault;
@@ -80,7 +80,7 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
 }
 #pragma mark - 添加无数据页面
 - (void)addNoDataView {
-    self.noDataView = [[UCFNoDataView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - 64 - 207 ) errorTitle:@"暂无数据"];
+    self.noDataView = [[UCFNoDataView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - 64 - 207 - 57 ) errorTitle:@"暂无数据"];
 }
 #pragma mark -scrollViewScroll代理
 
