@@ -157,10 +157,10 @@ return shared##className; \
 
 
 #define BBSURL          @"https://bbs.9888.cn/appaction.php"
-#define MALLURL         @"https://dougemall.com"
+#define MALLURL         @"https://mmall.9888.cn"
 #define GRADELURL       @"https://m.9888.cn/static/wap/user-evaluate/index.html"
 #define LEVELURL        @"https://m.9888.cn/static/wap/user-level/index.html"  //会员等级
-#define GAMECENTERURL   @"https://dougemall.com/static/mall/game/index.html"  //游戏中心
+#define GAMECENTERURL   @"https://mmall.9888.cn/static/mall/game/index.html"  //游戏中心
 #define LEVELURLTEQUAN  @"https://m.9888.cn/mpwap/app/vipTeQuan/qryVipTeQuanDetail.shtml"  // 特权详情
 #define LEVELURLSHENGJI @"https://m.9888.cn/mpwap/app/upgradeStategy/index.shtml"  //升级攻略
 #define LEVELURLXIANGQING   @"https://m.9888.cn/static/wap/topic-score/index.html"//工分说明(玩转工分)
