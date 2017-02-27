@@ -33,7 +33,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tdc-Hn-FAo">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tdc-Hn-FAo" customClass="UCFBatchButton">
                                         <rect key="frame" x="1" y="1" width="228" height="30"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
                                         <size key="titleShadowOffset" width="-1" height="-1"/>
@@ -50,16 +50,26 @@
                                             <action selector="batchBidButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Fku-kF-wa3"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="批量投资" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OkH-js-ug8" customClass="UCFLabel">
+                                        <rect key="frame" x="0.0" y="0.0" width="230" height="32"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <color key="textColor" red="0.99215686274509807" green="0.30196078431372547" blue="0.29803921568627451" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="1Sb-I7-tNy" firstAttribute="top" secondItem="yBH-Wa-xBA" secondAttribute="top" constant="1" id="0H1-Rf-J3t"/>
                                     <constraint firstItem="Tdc-Hn-FAo" firstAttribute="leading" secondItem="yBH-Wa-xBA" secondAttribute="leading" constant="1" id="1FI-iN-7Wl"/>
                                     <constraint firstItem="Tdc-Hn-FAo" firstAttribute="top" secondItem="yBH-Wa-xBA" secondAttribute="top" constant="1" id="4Es-CN-f3M"/>
+                                    <constraint firstItem="OkH-js-ug8" firstAttribute="top" secondItem="yBH-Wa-xBA" secondAttribute="top" id="BwE-XI-7OL"/>
                                     <constraint firstAttribute="trailing" secondItem="Tdc-Hn-FAo" secondAttribute="trailing" constant="1" id="GnI-Wh-d7G"/>
+                                    <constraint firstAttribute="bottom" secondItem="OkH-js-ug8" secondAttribute="bottom" id="Onf-LF-hFn"/>
                                     <constraint firstAttribute="trailing" secondItem="1Sb-I7-tNy" secondAttribute="trailing" constant="8" id="Pal-g4-SbG"/>
                                     <constraint firstAttribute="bottom" secondItem="Tdc-Hn-FAo" secondAttribute="bottom" constant="1" id="R1D-Wg-3Cn"/>
                                     <constraint firstItem="1Sb-I7-tNy" firstAttribute="leading" secondItem="yBH-Wa-xBA" secondAttribute="leading" constant="1" id="Rfd-Ns-2Mx"/>
+                                    <constraint firstItem="OkH-js-ug8" firstAttribute="leading" secondItem="yBH-Wa-xBA" secondAttribute="leading" id="aCY-Qd-Bss"/>
                                     <constraint firstAttribute="bottom" secondItem="1Sb-I7-tNy" secondAttribute="bottom" constant="1" id="ohD-74-wr9"/>
+                                    <constraint firstAttribute="trailing" secondItem="OkH-js-ug8" secondAttribute="trailing" id="wnT-u5-gsQ"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
