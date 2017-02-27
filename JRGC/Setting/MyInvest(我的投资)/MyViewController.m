@@ -31,6 +31,16 @@
 
 @implementation MyViewController
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    if (![self.view.subviews containsObject:self.currentController.view]) {
+        [self.view addSubview:self.currentController.view];
+        [self.currentController.view setFrame:CGRectMake(0, 100, self.view.frame.size.width, ScreenHeight - 164)];
+        [self.currentController didMoveToParentViewController:self];//确定关系建立
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -62,7 +72,17 @@
     [self.view addSubview:_myInvest.view];
     [_myInvest didMoveToParentViewController:self];//确定关系建立
     
-    self.currentController = self.myInvest;
+    if (self.selectedSegmentIndex == 1) {
+        self.currentController = self.batchProject;
+    }
+    else if (self.selectedSegmentIndex == 0)
+    {
+        self.currentController = self.myInvest;
+    }
+    else if (self.selectedSegmentIndex == 2) {
+        self.currentController = self.myClaimCtrl;
+    }
+    
     
     __weak typeof(self) weakSelf = self;
     _myInvest.setHeaderInfoBlock = ^(NSDictionary *data){
@@ -119,10 +139,5 @@
     vc.title = @"回款明细";
     [self.navigationController pushViewController:vc animated:YES];
 }
-
-//- (void)setCurrentViewController
-//{
-//    [self segmentedValueChanged:self.segmentedCtrl];
-//}
 
 @end

@@ -47,7 +47,7 @@
         MyViewController *subVC = [[MyViewController alloc] initWithNibName:@"MyViewController" bundle:nil];
         subVC.title = @"我的投资";
         subVC.selectedSegmentIndex = 1;
-//        [subVC setCurrentViewController];
+
         [self.navigationController pushViewController:subVC animated:YES];
     }
 }
