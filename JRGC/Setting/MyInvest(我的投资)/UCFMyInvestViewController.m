@@ -43,6 +43,8 @@
 
 // 无数据界面
 @property (strong, nonatomic) UCFNoDataView *noDataView;
+@property (strong, nonatomic) UCFNoDataView *noDataView2;
+@property (strong, nonatomic) UCFNoDataView *noDataView3;
 
 @end
 
@@ -69,11 +71,8 @@
     [self initTableView];
     
     _noDataView = [[UCFNoDataView alloc] initWithFrame:_tableView1.bounds errorTitle:@"暂无数据"];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    _noDataView2 = [[UCFNoDataView alloc] initWithFrame:_tableView2.bounds errorTitle:@"暂无数据"];
+    _noDataView3 = [[UCFNoDataView alloc] initWithFrame:_tableView3.bounds errorTitle:@"暂无数据"];
 }
 
 - (void)initTableView{
@@ -265,7 +264,15 @@
     }
   
     int status = [tempArr[indexPath.row][@"status"]intValue];
-    cell.prdName.text = tempArr[indexPath.row][@"prdName"];//标的名称
+    
+    int batchInvestStatus = [[tempArr[indexPath.row] objectSafeForKey:@"batchInvestStatus"] intValue];
+    if (batchInvestStatus) {
+        cell.prdName.text = [NSString stringWithFormat:@"%@(批量投资)", tempArr[indexPath.row][@"prdName"]];//标的名称
+    }
+    else {
+        cell.prdName.text = tempArr[indexPath.row][@"prdName"];//标的名称
+    }
+    
     cell.status.text = _statusArr[status];//标状态
     cell.annualRate.text = [[tempArr[indexPath.row] objectSafeForKey:@"annualRate"] stringByAppendingString:@"%"];//年化收益率
     
@@ -451,13 +458,13 @@
                         _dataArr2 = [NSMutableArray arrayWithArray:dataArr];
                         if (_dataArr2.count == 0) {
                             [_tableView2.footer noticeNoMoreData];
-                            [_noDataView showInView:_tableView1];
+                            [_noDataView2 showInView:_tableView2];
                         }else if(_dataArr2.count <= 20 && !hasNextPage){ //每页数据20条
-                            [self.noDataView hide];
+                            [self.noDataView2 hide];
                             _tableView2.footer.hidden = NO;
                             [_tableView2.footer noticeNoMoreData];
                         }else{
-                            [self.noDataView hide];
+                            [self.noDataView2 hide];
                             _tableView2.footer.hidden = NO;
                             if (!hasNextPage) {
                                 [_tableView2.footer noticeNoMoreData];
@@ -487,9 +494,9 @@
                         _dataArr3 = [NSMutableArray arrayWithArray:dataArr];
                         if (_dataArr3.count == 0) {
                             [_tableView3.footer noticeNoMoreData];
-                            [_noDataView showInView:_tableView3];
+                            [_noDataView3 showInView:_tableView3];
                         }else if(_dataArr3.count <= 20 && !hasNextPage){ //每页数据20条
-                            [self.noDataView hide];
+                            [self.noDataView3 hide];
                             _tableView3.footer.hidden = NO;
                             [_tableView3.footer noticeNoMoreData];
                         }else{

@@ -64,6 +64,10 @@
         if ([self.delegate respondsToSelector:@selector(cell:clickInvestBtn1:withModel:)]) {
             [self.delegate cell:self clickInvestBtn1:sender withModel:self.transferModel];
         }
+    }else if (self.type == UCFProjectListCellTypeBatchBid) {
+        if ([self.delegate respondsToSelector:@selector(cell:clickInvestBtn2:withModel:)]) {
+            [self.delegate cell:self clickInvestBtn2:sender withModel:self.batchBidModel];
+        }
     }
 }
 
@@ -322,6 +326,7 @@
     float progress = (totalAmt - canBuyAmt) / totalAmt * 1000;
     if (batchBidModel.full) {
         self.circleProgressView.textStr = @"满标";
+        self.circleProgressView.progressLabel.font = [UIFont systemFontOfSize:14];
 //        self.circleProgressView.tintColor = UIColorWithRGB(0xe2e2e2);//未绘制的进度条颜色
         self.circleProgressView.tintColor = UIColorWithRGB(0xfa4d4c);
         self.circleProgressView.progressLabel.textColor = UIColorWithRGB(0x909dae);
@@ -336,6 +341,7 @@
         self.circleProgressView.tintColor = UIColorWithRGB(0xfa4d4c);
         self.circleProgressView.progressLabel.textColor = UIColorWithRGB(0x555555);
         self.circleProgressView.textStr = @"批量投资";
+        self.circleProgressView.progressLabel.font = [UIFont systemFontOfSize:12];
         if (batchBidModel.isAnim) {
             [self animateCircle:progress isAnim:YES];
             batchBidModel.isAnim = NO;

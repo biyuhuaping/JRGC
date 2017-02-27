@@ -944,7 +944,7 @@
     }
     CalculatorView * view = [[CalculatorView alloc] init];
     view.tag = 173924;
-    [view reloadViewWithData:_dataDict AndNowMoney:investMoney];
+    [view reloadViewWithData:_dataDict AndNowMoney:investMoney AndChildPrdClaimId:_childPrdClaimId];
     AppDelegate * app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     [app.window addSubview:view];
 }
@@ -1198,14 +1198,14 @@
 - (NSString *)checkBeyondLimit:(NSString *)investMoney
 {
 
-    NSString *maxIn = [NSString stringWithFormat:@"%@",[_dataDict objectForKey:@"batchAmount"]];
-    if (maxIn.length != 0) {
-        if ([Common stringA:investMoney ComparedStringB:maxIn] == 1) {
-            return maxIn;
-        } else {
-            return investMoney;
-        }
-    }
+//    NSString *maxIn = [NSString stringWithFormat:@"%@",[_dataDict objectForKey:@"batchAmount"]];
+//    if (maxIn.length != 0) {
+//        if ([Common stringA:investMoney ComparedStringB:maxIn] == 1) {
+//            return maxIn;
+//        } else {
+//            return investMoney;
+//        }
+//    }
     return investMoney;
 }
 - (UIView *)createFootView

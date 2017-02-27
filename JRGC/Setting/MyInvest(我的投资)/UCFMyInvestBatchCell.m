@@ -36,7 +36,7 @@
 - (void)setModel:(UCFMyInvestBatchBidModel *)model
 {
     _model = model;
-    self.bidName.text = [NSString stringWithFormat:@"%@(批量投资)", model.collName];
+    self.bidName.text = [NSString stringWithFormat:@"%@", model.collName];
     NSInteger status = [model.status integerValue];
     switch (status) {
         case 0:
@@ -63,7 +63,7 @@
     }
     self.bidCycleLabel.text = model.colPeriodTxt;
     self.preYearRateLabel.text = [NSString stringWithFormat:@"%@%%", model.collRate];
-    self.hasInvested.text = [NSString stringWithFormat:@"¥%@", model.investSuccessTotal];
+    self.hasInvested.text = [NSString stringWithFormat:@"¥%.2f", [model.investSuccessTotal floatValue]];
     self.tradeDateLabel.text = model.investTime;
 }
 

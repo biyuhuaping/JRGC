@@ -46,6 +46,8 @@
 
 // 无数据界面
 @property (strong, nonatomic) UCFNoDataView *noDataView;
+@property (strong, nonatomic) UCFNoDataView *noDataView2;
+@property (strong, nonatomic) UCFNoDataView *noDataView3;
 
 @end
 
@@ -72,6 +74,8 @@
     
     [self initTableView];
     _noDataView = [[UCFNoDataView alloc] initWithFrame:_tableView1.bounds errorTitle:@"暂无数据"];
+    _noDataView2 = [[UCFNoDataView alloc] initWithFrame:_tableView1.bounds errorTitle:@"暂无数据"];
+    _noDataView3 = [[UCFNoDataView alloc] initWithFrame:_tableView1.bounds errorTitle:@"暂无数据"];
 }
 
 - (void)initTableView{
@@ -443,9 +447,35 @@
         dataArr = [NSMutableArray arrayWithArray:tempArr];
         if (dataArr.count == 0) {
             [tableView.footer noticeNoMoreData];
-            [_noDataView showInView:tableView];
+            switch (_index) {
+                case 0:
+                    [_noDataView showInView:tableView];
+                    break;
+                    
+                case 1:
+                    [_noDataView2 showInView:tableView];
+                    break;
+                    
+                case 2:
+                    [_noDataView3 showInView:tableView];
+                    break;
+            }
+           
         }else{
-            [self.noDataView hide];
+            switch (_index) {
+                case 0:
+                    [self.noDataView hide];
+                    break;
+                    
+                case 1:
+                   [self.noDataView2 hide];
+                    break;
+                    
+                case 2:
+                    [self.noDataView3 hide];
+                    break;
+            }
+            
             tableView.footer.hidden = NO;
             if (!hasNextPage) {
                 [tableView.footer noticeNoMoreData];
