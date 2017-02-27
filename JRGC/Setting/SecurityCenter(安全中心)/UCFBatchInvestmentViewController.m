@@ -50,7 +50,7 @@ static NSString *thirdStr = @"批量投资已经开启";
 }
 - (void)clickRightBtn
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"批量投资是金融工场为方便投资人投资小额项目特推出的，一次可投资多个项目。批量投资后系统会自动匹配，直至完成所有投资为止" delegate:self cancelButtonTitle:@"我知道了" otherButtonTitles: nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"\"自动投标\"是金融工场为方便投资人投资小额项目特推出的，一次可投资多个项目。批量投资后系统会自动匹配，直至完成所有投资为止" delegate:self cancelButtonTitle:@"我知道了" otherButtonTitles: nil];
     [alert show];
 }
 - (void)viewDidLoad {
@@ -154,7 +154,7 @@ static NSString *thirdStr = @"批量投资已经开启";
 }
 - (void)initSecondSectionView
 {
-    NSString *totalStr = [NSString stringWithFormat:@"批量投资单次最高限额"];
+    NSString *totalStr = [NSString stringWithFormat:@"单次最高限额："];
     CGSize size = [Common getStrHeightWithStr:totalStr AndStrFont:12 AndWidth:ScreenWidth - 25];
     NZLabel *label1 = [[NZLabel alloc] init];
     label1.font = [UIFont systemFontOfSize:12.0f];
@@ -359,7 +359,7 @@ static NSString *thirdStr = @"批量投资已经开启";
     }
 }
 - (void)showApplyView {
-    baseTitleLabel.text = @"开通批量投资";
+    baseTitleLabel.text = @"自动投标授权";
     [self registerView];
     [self saveBeforeView];
     [self passWordBeforeView];
