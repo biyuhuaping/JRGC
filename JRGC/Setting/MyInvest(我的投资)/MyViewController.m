@@ -37,7 +37,7 @@
     if (![self.view.subviews containsObject:self.currentController.view]) {
         [self.view addSubview:self.currentController.view];
         [self.currentController.view setFrame:CGRectMake(0, 100, self.view.frame.size.width, ScreenHeight - 164)];
-        [self.currentController didMoveToParentViewController:self];//确定关系建立
+//        [self.currentController didMoveToParentViewController:self];//确定关系建立
     }
 }
 
@@ -99,33 +99,33 @@
 
 - (void)segmentedValueChanged:(UISegmentedControl *)sender{
     DBLOG(@"%ld",(long)sender.selectedSegmentIndex);
-    __weak typeof(self)weakSelf = self;
+//    __weak typeof(self)weakSelf = self;
     switch (sender.selectedSegmentIndex) {
         case 0: {
-            [self transitionFromViewController:self.currentController toViewController:self.myInvest duration:0 options:UIViewAnimationOptionLayoutSubviews animations:nil completion:^(BOOL finished) {
+            [self transitionFromViewController:self.currentController toViewController:self.myInvest duration:0.25 options:UIViewAnimationOptionLayoutSubviews animations:nil completion:^(BOOL finished) {
                 if (finished) {
-                    [weakSelf.myInvest didMoveToParentViewController:weakSelf];//确认关系
-                    weakSelf.currentController = weakSelf.myInvest;
+                    [self.myInvest didMoveToParentViewController:self];//确认关系
+                    self.currentController = self.myInvest;
                 }
             }];
         }
             break;
          
         case 1: {
-            [self transitionFromViewController:self.currentController toViewController:self.batchProject duration:0 options:UIViewAnimationOptionLayoutSubviews animations:nil completion:^(BOOL finished) {
+            [self transitionFromViewController:self.currentController toViewController:self.batchProject duration:0.25 options:UIViewAnimationOptionLayoutSubviews animations:nil completion:^(BOOL finished) {
                 if (finished) {
-                    [weakSelf.batchProject didMoveToParentViewController:weakSelf];//确认关系
-                    weakSelf.currentController = weakSelf.batchProject;
+                    [self.batchProject didMoveToParentViewController:self];//确认关系
+                    self.currentController = self.batchProject;
                 }
             }];
         }
             break;
         
         case 2: {
-            [self transitionFromViewController:self.currentController toViewController:self.myClaimCtrl duration:0 options:UIViewAnimationOptionLayoutSubviews animations:nil completion:^(BOOL finished) {
+            [self transitionFromViewController:self.currentController toViewController:self.myClaimCtrl duration:0.25 options:UIViewAnimationOptionLayoutSubviews animations:nil completion:^(BOOL finished) {
                 if (finished) {
-                    [weakSelf.myClaimCtrl didMoveToParentViewController:weakSelf];//确认关系
-                    weakSelf.currentController = weakSelf.myClaimCtrl;
+                    [self.myClaimCtrl didMoveToParentViewController:self];//确认关系
+                    self.currentController = self.myClaimCtrl;
                 }
             }];
         }
