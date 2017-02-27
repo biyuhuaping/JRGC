@@ -9,5 +9,7 @@
 #import "UCFBaseViewController.h"
 
 @interface MyViewController : UCFBaseViewController
+//@property (strong, nonatomic) UISegmentedControl *segmentedCtrl;
+@property(nonatomic,assign) NSUInteger selectedSegmentIndex;
 
 @end

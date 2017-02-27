@@ -513,7 +513,7 @@
 }
 -(void)addProgressView{
     // 进度条
-    UIProgressView *progressView = [[UIProgressView alloc] initWithFrame:CGRectMake(0, 20, self.view.frame.size.width, 2)];
+    UIProgressView *progressView = [[UIProgressView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 2)];
     //progressView.tintColor = WebViewNav_TintColor;
     progressView.tintColor = UIColorWithRGB(0xfd4d4c);
     progressView.trackTintColor = [UIColor clearColor];

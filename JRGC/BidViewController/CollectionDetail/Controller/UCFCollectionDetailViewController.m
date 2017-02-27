@@ -440,7 +440,7 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
     
     DLog(@"点击了排序button事件");
     
-    MjAlertView *sortAlertView = [[MjAlertView alloc]initCollectionViewWithTitle:@"项目排序" sortArray:@[@"综合排序",@"金额递增",@"金额递减"]  selectedSortButtonTag:_currentSelectSortTag delegate:self cancelButtonTitle:@"" withOtherButtonTitle:@"确定"];
+    MjAlertView *sortAlertView = [[MjAlertView alloc]initCollectionViewWithTitle:@"项目排序" sortArray:@[@"综合排序",@"可投额递减",@"可投额递增"]  selectedSortButtonTag:_currentSelectSortTag delegate:self cancelButtonTitle:@"" withOtherButtonTitle:@"确定"];
     [sortAlertView show];
 }
 -(void)mjalertView:(MjAlertView *)alertview didClickedButton:(UIButton *)clickedButton andClickedIndex:(NSInteger)index{
@@ -632,10 +632,10 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
         }
         switch (_currentSelectSortTag) {
             case 1:
-                prdClaimsOrderStr = @"32";//@"金额递增"
+                prdClaimsOrderStr = @"31";//@"金额递减"
                 break;
             case 2:
-                prdClaimsOrderStr = @"31";//@"金额递减"
+                prdClaimsOrderStr = @"32";//@"金额递增"
                 break;
             default:
                 prdClaimsOrderStr = @"00";//@"综合排序"

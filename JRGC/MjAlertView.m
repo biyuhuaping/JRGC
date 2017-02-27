@@ -262,7 +262,7 @@
         lineView.backgroundColor = UIColorWithRGB(0xe3e5ea);
         [headerView addSubview:lineView];
         
-        float buttonWidth = 62.0f;
+        float buttonWidth = 67.0f;
         float buttonHeight = 27.0f;
         
         for (int i=0; i<sortArray.count; i++) {

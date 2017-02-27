@@ -180,6 +180,8 @@ return shared##className; \
 
 #define NOTICERISKH5 @"https://m.9888.cn/static/wap/notice-risk-prompt/index.html"//风险揭示
 
+#define  BATHCHINVESTPROTOCOL  @"https://m.9888.cn/static/wap/protocol-batch-invest/index.html"//批量投资协议
+
 //================== 调试宏 ==================
 #ifdef DEBUG
 # define DBLOG(fmt, ...) NSLog((@"\n-—————函数名:%s"  "行号:%d\n-—————" fmt), __FUNCTION__, __LINE__, ##__VA_ARGS__);
