@@ -64,11 +64,10 @@
     }
     self.bidCycleLabel.text = model.colPeriodTxt;
     self.preYearRateLabel.text = [NSString stringWithFormat:@"%@%%", model.collRate];
-    NSString *investSuccessTotalStr = [NSString stringWithFormat:@"¥%.2f", [model.investSuccessTotal floatValue]];
-    if([investSuccessTotalStr floatValue] == 0 || [investSuccessTotalStr isEqualToString:@""]){
+    if([model.investSuccessTotal floatValue] == 0){
        self.hasInvested.text  = @"--";
     }else{
-       self.hasInvested.text = investSuccessTotalStr;
+       self.hasInvested.text = [NSString stringWithFormat:@"¥%.2f", [model.investSuccessTotal floatValue]];;
     }
     self.tradeDateLabel.text = model.investTime;
 }

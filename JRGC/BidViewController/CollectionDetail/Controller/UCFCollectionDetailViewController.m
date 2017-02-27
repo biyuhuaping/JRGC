@@ -326,6 +326,10 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
     [self.investmentBtn setTitle:@"查看奖励" forState:UIControlStateNormal];
     [self.investmentBtn setBackgroundColor:UIColorWithRGB(0xfd4d4c)];
     [self.investmentBtn setUserInteractionEnabled:YES];
+    //添加阴影图片
+    UIImage *tabImag = [UIImage imageNamed:@"tabbar_shadow.png"];
+    self.shadowImageView.image = [tabImag resizableImageWithCapInsets:UIEdgeInsetsMake(2, 1, 2, 1) resizingMode:UIImageResizingModeStretch];
+    self.shadowImageView.hidden = NO;
     _collectionListVC = [[UCFCollectionListViewController alloc]initWithNibName:@"UCFCollectionListViewController" bundle:nil];
     _collectionListVC.view.frame = CGRectMake(0, _headerViewHeight, ScreenWidth, ScreenHeight - 64 - 57);
     _collectionListVC.souceVC = _souceVC;
