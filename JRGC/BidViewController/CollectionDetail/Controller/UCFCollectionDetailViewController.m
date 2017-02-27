@@ -28,6 +28,7 @@
 #import "UCFNoDataView.h"
 #import "UCFCollctionKeyBidViewController.h"
 #import "UCFLoginViewController.h"
+#import "UCFBatchBidWebViewController.h"
 #define shadeSpacingHeight 18 //遮罩label的上下间距
 #define shadeHeight 70 //遮罩高度
 static NSString * const DetailCellID = @"UCFCollectionDetailCell";
@@ -104,7 +105,7 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
         self.collectionScrollView.scrollIndicatorInsets = UIEdgeInsetsMake(_headerViewHeight + 74, 0, 0, 0);
 
     }else{
-         [self.collectionScrollView setContentSize:CGSizeMake(ScreenWidth, ScreenHeight +_headerViewHeight - 64)];
+         [self.collectionScrollView setContentSize:CGSizeMake(ScreenWidth, ScreenHeight +_headerViewHeight - 64-57)];
          self.collectionScrollView.scrollIndicatorInsets = UIEdgeInsetsMake(_headerViewHeight + 30, 0, 0, 0);
     }
     self.collectionScrollView.delegate = self;
@@ -319,11 +320,14 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
 #pragma mark 初始化底部--即项目列表
 -(void)drawCollectionDelitailListView{
     
-    self.investmentBtnViewHeight.constant = 0;
-    self.investmentBtn.hidden = YES;
-    self.shadowImageView.hidden = YES;
+    self.investmentBtnViewHeight.constant = 57;
+    self.investmentBtn.hidden = NO;
+    self.shadowImageView.hidden = NO;
+    [self.investmentBtn setTitle:@"查看奖励" forState:UIControlStateNormal];
+    [self.investmentBtn setBackgroundColor:UIColorWithRGB(0xfd4d4c)];
+    [self.investmentBtn setUserInteractionEnabled:YES];
     _collectionListVC = [[UCFCollectionListViewController alloc]initWithNibName:@"UCFCollectionListViewController" bundle:nil];
-    _collectionListVC.view.frame = CGRectMake(0, _headerViewHeight, ScreenWidth, ScreenHeight - 64);
+    _collectionListVC.view.frame = CGRectMake(0, _headerViewHeight, ScreenWidth, ScreenHeight - 64 - 57);
     _collectionListVC.souceVC = _souceVC;
     _collectionListVC.colPrdClaimId = _colPrdClaimId;
     _collectionListVC.batchOrderIdStr = _batchOrderIdStr;
@@ -490,9 +494,6 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
             CGRect rect =   _headerBgView.frame;
             rect.origin.y = off_y;
             _headerBgView.frame = rect;
-            
-            
-            
             
             if ([_souceVC isEqualToString:@"P2PVC"]) {
                 rect = _tableHeaderView.frame;
@@ -752,8 +753,6 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
             purchaseViewController.dataDict = [dic objectSafeDictionaryForKey:@"data"];
             purchaseViewController.bidType = 0;
             self.intoViewControllerStr = @"CollctionKeyBidVC";
-            NSDictionary *dataDict = [self.investmentProjectDataArray firstObject];
-            purchaseViewController.childPrdClaimId = [dataDict objectSafeForKey:@"childPrdClaimId"];
             [self.navigationController pushViewController:purchaseViewController animated:YES];
         }else
         {
@@ -790,9 +789,21 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
 
 - (IBAction)ClickBatchInvestment:(UIButton *)sender {
     
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    NSDictionary *dataDict = @{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"tenderId":_colPrdClaimId};
-        [[NetworkModule sharedNetworkModule] newPostReq:dataDict tag:kSXTagColIntoDealBatch owner:self signature:YES];
+    if ([self.souceVC isEqualToString:@"P2PVC"]) {
+         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+         NSDictionary *dataDict = @{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"tenderId":_colPrdClaimId};
+         [[NetworkModule sharedNetworkModule] newPostReq:dataDict tag:kSXTagColIntoDealBatch owner:self signature:YES];
+    }else{
+        NSDictionary *reqDict =  @{@"userId":[[NSUserDefaults standardUserDefaults] objectForKey:UUID],@"colOrderId":_colPrdClaimId};
+        NSString *urlStr =[NSString stringWithFormat:@"%@%@",SERVER_IP,GETBACHINVESTAWARD];
+        UCFBatchBidWebViewController *webView = [[UCFBatchBidWebViewController alloc]initWithNibName:@"UCFBatchBidWebViewController" bundle:nil];
+        webView.url =  urlStr;
+        webView.webDataDic = reqDict;
+        webView.navTitle = @"投资成功";
+        [self.navigationController pushViewController:webView animated:YES];
+    }
+    
+    
 }
 - (void)dealloc
 {

@@ -93,13 +93,14 @@
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
 
     UCFMyInvestBatchBidModel *model = [self.dataArray objectAtIndex:indexPath.row];
-    _colPrdClaimIdStr = [NSString stringWithFormat:@"%@",model.colId ];
-    _batchOrderIdStr = [NSString stringWithFormat:@"%@",model.Id ];
-    NSString *uuid = [[NSUserDefaults standardUserDefaults]valueForKey:UUID];
-    NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:uuid,@"userId",_colPrdClaimIdStr, @"colPrdClaimsId", _batchOrderIdStr, @"batchOrderId",@"1",@"page", @"20", @"pageSize",nil];
     
-    
-    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagMyBatchInvestDetail owner:self signature:YES];
+    if([model.status intValue] == 1){ //等于1 匹配成功
+        _colPrdClaimIdStr = [NSString stringWithFormat:@"%@",model.colId];
+        _batchOrderIdStr = [NSString stringWithFormat:@"%@",model.Id ];
+        NSString *uuid = [[NSUserDefaults standardUserDefaults]valueForKey:UUID];
+        NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:uuid,@"userId",_colPrdClaimIdStr, @"colPrdClaimsId", _batchOrderIdStr, @"batchOrderId",@"1",@"page", @"20", @"pageSize",nil];
+        [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagMyBatchInvestDetail owner:self signature:YES];
+    }
 }
 
 #pragma mark - net request

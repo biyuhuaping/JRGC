@@ -13,7 +13,6 @@
 @property (nonatomic, strong)NSDictionary    *dataDict;
 @property (nonatomic, strong)NSMutableArray  *bidArray;
 @property (nonatomic, copy)NSString          *beanIds;
-@property (nonatomic, copy)NSString          *childPrdClaimId;//子标Id
 
 - (void)reloadMainView;
 @end
