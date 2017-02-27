@@ -457,7 +457,7 @@
     
     
     if (isGongDouSwitch) {
-        double gondDouBalance = [[[_dataDict objectForKey:@"beanUser"] objectForKey:@"availableBalance"] doubleValue];
+        double gondDouBalance = [[_dataDict objectForKey:@"beanAmount"] doubleValue];
         [paramDict setValue:[NSString stringWithFormat:@"%@",[NSNumber numberWithFloat:gondDouBalance]] forKey:@"investBeans"];
     }
     
@@ -582,7 +582,7 @@
 //            UCFPurchaseWebView *webView = [[UCFPurchaseWebView alloc]initWithNibName:@"UCFPurchaseWebView" bundle:nil];
             webView.url =  urlStr;
             webView.webDataDic = reqDict;
-            webView.navTitle = @"即将跳转";
+            webView.navTitle = @"集合标匹配中";
 //            webView.rootVc = @"collctionKeyBidVC";
             [self.navigationController pushViewController:webView animated:YES];
             NSMutableArray *navVCArray = [[NSMutableArray alloc] initWithArray:self.navigationController.viewControllers];
@@ -1344,7 +1344,7 @@
 //    NSString *projectId = [[self.dataDict objectForKey:@"data"] objectForKey:@"id"];
 //    NSString *strParameters = [NSString stringWithFormat:@"userId=%@&prdClaimId=%@&contractType=%@&prdType=0",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],projectId,contractTypeStr];
 //    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetContractMsg owner:self];
-    FullWebViewController *controller = [[FullWebViewController alloc] initWithWebUrl:@"https://www.9888.cn/batch_invest_terms.html" title:@"批量投资协议"];
+    FullWebViewController *controller = [[FullWebViewController alloc] initWithWebUrl:BATHCHINVESTPROTOCOL title:@"批量投资协议"];
     controller.baseTitleType = @"detail_heTong";
     [self.navigationController pushViewController:controller animated:YES];
     
