@@ -104,9 +104,9 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
     NSString *addRateStr = [data objectSafeForKey:@"addRate"];
     if (indexPath.row < self.investmentDetailDataArray.count) {
         if ([addRateStr floatValue] == 0.0) {
-            return 202 - 27;
+            return 209 - 27;
         }else{
-            return 202;
+            return 209;
         }
     }
     return 202;

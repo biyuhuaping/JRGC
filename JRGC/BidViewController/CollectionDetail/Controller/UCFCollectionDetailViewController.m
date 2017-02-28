@@ -271,10 +271,10 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
     CGSize percentageStrSize = [percentageStr sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:25]}];
     NZLabel* rateLabel = [[NZLabel alloc]initWithFrame:CGRectMake(0,0,percentageStrSize.width ,percentageStrSize.height)];
     rateLabel.text = percentageStr;
-    rateLabel.center = _circleProgress.center;
+    rateLabel.center = proressView.center;
     rateLabel.font = [UIFont systemFontOfSize:25];
     rateLabel.textColor = [UIColor whiteColor];
-    rateLabel.textAlignment = NSTextAlignmentLeft;
+    rateLabel.textAlignment = NSTextAlignmentCenter;
     [rateLabel setFont: [UIFont systemFontOfSize:15] string:@"%"];
     [_headerBgView addSubview:rateLabel];
 }

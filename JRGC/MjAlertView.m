@@ -278,7 +278,7 @@
                  button.layer.borderColor = UIColorWithRGB(0xfd4d4c).CGColor;
             }
             button.titleLabel.font = [UIFont systemFontOfSize:12];
-            [button setTitleColor:UIColorWithRGB(0x55555) forState:UIControlStateNormal];
+            [button setTitleColor:UIColorWithRGB(0x555555) forState:UIControlStateNormal];
             [button setTitleColor:UIColorWithRGB(0xfd4d4c) forState:UIControlStateSelected];
             [button setTitle:(NSString *)sortArray[i] forState:UIControlStateNormal];
             [button addTarget:self action:@selector(clickSortButton:) forControlEvents:UIControlEventTouchUpInside];
@@ -287,8 +287,8 @@
         }
         UIButton *cancel = [UIButton buttonWithType:UIButtonTypeCustom];
         if (cancelButtonTitle) {
-            cancel.frame = CGRectMake(CGRectGetWidth(headerView.frame)-15-13,8.5,13, 13);
-            [cancel setBackgroundImage:[UIImage imageNamed:@"calculator_close1.png"] forState:UIControlStateNormal];
+            cancel.frame = CGRectMake(CGRectGetWidth(headerView.frame)- 8 - 30,3.5,30, 30);
+            [cancel setBackgroundImage:[UIImage imageNamed:@"calculator_gray_close.png"] forState:UIControlStateNormal];
             [cancel addTarget:self action:@selector(clickConfirmButton:) forControlEvents:UIControlEventTouchUpInside];
             cancel.tag = CancelButtonTag;
             [self.showView  addSubview:cancel];
