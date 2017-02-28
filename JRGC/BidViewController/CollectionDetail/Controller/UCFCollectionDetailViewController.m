@@ -685,8 +685,9 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
         NSString *rstcode = dic[@"ret"];
         NSString *rsttext = dic[@"message"];
         if ([rstcode intValue] == 1) {
-            NSArray *list_result = [[[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"pageData"] objectSafeArrayForKey:@"result"];
-             BOOL hasNext = [[[[dic objectSafeDictionaryForKey:@"pageData"] objectSafeDictionaryForKey:@"pagination"] objectSafeForKey:@"hasNextPage"] boolValue];
+            NSDictionary *dataDict = [dic objectSafeDictionaryForKey:@"data"];
+            NSArray *list_result = [[dataDict objectSafeDictionaryForKey:@"pageData"] objectSafeArrayForKey:@"result"];
+             BOOL hasNext = [[[[dataDict objectSafeDictionaryForKey:@"pageData"] objectSafeDictionaryForKey:@"pagination"] objectSafeForKey:@"hasNextPage"] boolValue];
             
     
             if (_selectIndex == 0 && self.investmentCurrentPage == 1) {
