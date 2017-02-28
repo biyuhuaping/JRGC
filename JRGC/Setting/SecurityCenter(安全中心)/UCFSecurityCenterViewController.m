@@ -843,6 +843,7 @@
             } else if ([NSStringFromClass(arrowItem.destVcClass)  isEqualToString: @"UCFBatchInvestmentViewController"]) {
                 if([self checkHSIsLegitimate]) {
                     UCFBatchInvestmentViewController *batchInvestment = [[UCFBatchInvestmentViewController alloc] init];
+                    batchInvestment.sourceType = @"personCenter";
                     UCFSettingGroup *group2 = [self.itemsData lastObject];
                     UCFSettingItem *userItem = group2.items.firstObject;
                     batchInvestment.isStep = [userItem.subtitle isEqualToString:@"未开启"] ? 1 : 2;
