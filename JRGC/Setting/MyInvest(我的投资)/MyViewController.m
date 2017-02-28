@@ -31,12 +31,12 @@
 
 @implementation MyViewController
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    
-    [self.currentController.view setFrame:CGRectMake(0, 100, SCREEN_WIDTH, ScreenHeight - 164)];
-}
+//- (void)viewDidAppear:(BOOL)animated
+//{
+//    [super viewDidAppear:animated];
+//    
+//    [self.currentController.view setFrame:CGRectMake(0, 100, SCREEN_WIDTH, ScreenHeight - 164)];
+//}
 
 
 - (void)viewDidLoad {
@@ -103,6 +103,11 @@
         id noInterests = data[@"noInterests"];
         weakSelf.noInterestsLab.text = [NSString stringWithFormat:@"¥%@",[UCFToolsMehod AddComma:noInterests]];//待收利息
     };
+}
+
+- (void)viewWillLayoutSubviews
+{
+    [self.currentController.view setFrame:CGRectMake(0, 100, SCREEN_WIDTH, ScreenHeight - 164)];
 }
 
 - (void)segmentedValueChanged:(UISegmentedControl *)sender{
