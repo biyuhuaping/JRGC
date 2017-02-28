@@ -758,6 +758,7 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
             purchaseViewController.dataDict = [dic objectSafeDictionaryForKey:@"data"];
             purchaseViewController.bidType = 0;
             self.intoViewControllerStr = @"CollctionKeyBidVC";
+            purchaseViewController.colPrdClaimId =_colPrdClaimId;
             [self.navigationController pushViewController:purchaseViewController animated:YES];
         }else
         {
@@ -805,6 +806,7 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
         webView.url =  urlStr;
         webView.webDataDic = reqDict;
         webView.navTitle = @"投资成功";
+        webView.rootVc = @"collectionDetailVC";
         [self.navigationController pushViewController:webView animated:YES];
     }
     

@@ -63,7 +63,11 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadHonerPlanData" object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadP2PData" object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"LatestProjectUpdate" object:nil];
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    if ([self.rootVc isEqualToString:@"collectionDetailVC"]) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }else{
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
 }
 - (void)jsClose
 {
