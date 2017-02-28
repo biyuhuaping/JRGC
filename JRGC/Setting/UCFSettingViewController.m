@@ -503,7 +503,7 @@
     else if ([item.customTitleLabel.text isEqualToString:@"我的投资"]) {
         MyViewController *subVC = [[MyViewController alloc] initWithNibName:@"MyViewController" bundle:nil];
         subVC.title = @"我的投资";
-        subVC.selectedSegmentIndex = 1;
+        subVC.selectedSegmentIndex = 0;
         [self.navigationController pushViewController:subVC animated:YES];
     }
     else if ([item.customTitleLabel.text isEqualToString:@"回款明细"]) {
