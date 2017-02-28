@@ -614,6 +614,7 @@
             UCFPurchaseBidViewController *purchaseViewController = [[UCFPurchaseBidViewController alloc] initWithNibName:@"UCFPurchaseBidViewController" bundle:nil];
             purchaseViewController.dataDict = dic;
             purchaseViewController.bidType = 0;
+            self.sourceVc = @"";
             [self.navigationController pushViewController:purchaseViewController animated:YES];
             
         }else if ([[dic objectForKey:@"status"] integerValue] == 21 || [dic[@"status"] integerValue] == 22){
