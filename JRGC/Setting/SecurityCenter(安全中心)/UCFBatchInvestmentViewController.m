@@ -127,7 +127,7 @@ static NSString *thirdStr = @"批量投资已经开启";
     label1.font = [UIFont systemFontOfSize:12.0f];
     CGSize size = [Common getStrHeightWithStr:totalStr AndStrFont:12 AndWidth:ScreenWidth - 25];
     label1.numberOfLines = 0;
-    label1.frame = CGRectMake(23, CGRectGetMaxY(view2.frame) + 15, ScreenWidth-25, size.height);
+    label1.frame = CGRectMake(23, CGRectGetMaxY(view2.frame) + 10, ScreenWidth-25, size.height);
     label1.text = totalStr;
     label1.userInteractionEnabled = YES;
     label1.textColor = UIColorWithRGB(0x999999);
@@ -141,7 +141,7 @@ static NSString *thirdStr = @"批量投资已经开启";
     [_baseScrollView addSubview:label1];
     
     UIImageView * imageView1 = [[UIImageView alloc] init];
-    imageView1.frame = CGRectMake(CGRectGetMinX(label1.frame) - 7, CGRectGetMinY(label1.frame) + 4, 5, 5);
+    imageView1.frame = CGRectMake(CGRectGetMinX(label1.frame) - 7, CGRectGetMinY(label1.frame) + 5, 5, 5);
     imageView1.image = [UIImage imageNamed:@"point.png"];
     [_baseScrollView addSubview:imageView1];
     

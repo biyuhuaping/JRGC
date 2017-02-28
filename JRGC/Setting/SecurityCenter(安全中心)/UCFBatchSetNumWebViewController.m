@@ -46,8 +46,10 @@
 - (void)goToTarget
 {
     NSArray *arr = self.navigationController.viewControllers;
-    UIViewController *target = [arr objectAtIndex:arr.count - 3];
-    [self.navigationController popToViewController:target animated:YES];
+    if (arr.count >= 3) {
+        UIViewController *target = [arr objectAtIndex:arr.count - 3];
+        [self.navigationController popToViewController:target animated:YES];
+    }
 }
 - (void)jsClose
 {
