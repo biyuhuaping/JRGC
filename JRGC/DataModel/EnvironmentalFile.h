@@ -7,7 +7,7 @@
 //
 
 
-#define EnvironmentConfiguration  0// 0测试 1正式 2灰度测试
+#define EnvironmentConfiguration  1// 0测试 1正式 2灰度测试
 
 #define AES_TESTKEY @"awejfij124321aweg@##$!*&+=-13123j24325"
 
@@ -20,7 +20,7 @@
 
 #else
 // 老接口下的服务器IP
-#define SERVER_IP   @"https://app.9888.cn/"              //TestA
+#define SERVER_IP   @"http://app.9888.cn/"              //TestA
 //#define SERVER_IP   @"http://10.10.100.42:8080/mpapp/"  //测试网
 //#define SERVER_IP   @"http://10.105.6.69:8080/mpapp/"   //薛林
 //#define SERVER_IP   @"http://10.105.6.222:8090/mpappOld/"  //洪东
@@ -28,7 +28,7 @@
 //#define SERVER_IP   @"http://10.105.6.219:8087/mpapp/"  //刘丹
 
 // 新接口下的服务器IP
-#define NEW_SERVER_IP   @"https://app.9888.cn/"              //TestA
+#define NEW_SERVER_IP   @"http://app.9888.cn/"              //TestA
 //#define NEW_SERVER_IP   @"http://10.105.6.222:8080/mpapp/"  //洪东
 //#define NEW_SERVER_IP   @"http://10.105.6.203:8080/mpapp/"  //薛林
 //#define NEW_SERVER_IP   @"http://10.105.6.219:8087/mpapp/"  //刘丹

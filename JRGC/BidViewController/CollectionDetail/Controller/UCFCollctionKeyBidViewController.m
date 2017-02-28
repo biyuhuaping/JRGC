@@ -55,6 +55,7 @@
 @property (strong, nonatomic) NSMutableDictionary       *cashDict;                  //从优惠券页面选择过来的选中数据
 @property (strong, nonatomic) NSMutableDictionary       *coupDict;                  //从优惠券页面选择过来的选中数据
 @property (copy, nonatomic) NSString                    *tmpTextFieldTextValue;     //选中
+@property (strong ,nonatomic)NSString *maxBatchAmount;
 @end
 
 @implementation UCFCollctionKeyBidViewController
@@ -396,20 +397,20 @@
         return;
     }
     
-    NSString *maxIn =[NSString stringWithFormat:@"%@",[_dataDict objectSafeForKey:@"batchAmount"]];
+    self.maxBatchAmount =[NSString stringWithFormat:@"%@",[self.dataDict objectSafeForKey:@"batchAmount"]];
     
-    if (maxIn.length != 0) {
-        if ([Common stringA:investMoney ComparedStringB:maxIn] == 1) {
+    if (self.maxBatchAmount.length != 0) {
+        if ([Common stringA:investMoney ComparedStringB:self.maxBatchAmount] == 1) {
             
-            NSString *mesageStr = [NSString stringWithFormat:@"投资金额超过批量投资单笔限额，您设置的批量投资金额单笔限额为%@元",maxIn];
+            NSString *mesageStr = [NSString stringWithFormat:@"投资金额超过批量投资单笔限额，您设置的批量投资金额单笔限额为%@元",self.maxBatchAmount];
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:mesageStr delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"修改", nil];
             alert.tag = 5002;
             [alert show];
             return;
         }
     }
-    
-    if(isFirstInvest){
+    BOOL isNewUser = [[_dataDict objectSafeForKey:@"isNewUser"] boolValue];
+    if(isNewUser){
         NSString *mesageStr = [NSString stringWithFormat:@"批量投资可能会导致用户无法获得首次奖励，确认继续支付吗？"];
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:mesageStr delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"继续投资", nil];
         alert.tag = 4000;
@@ -520,7 +521,9 @@
 
 - (void)endPost:(id)result tag:(NSNumber *)tag
 {
-    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    if(tag.intValue != kSXTagColIntoDealBatch){
+         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    }
     NSString *data = (NSString *)result;
     NSMutableDictionary *dic = [data objectFromJSONString];
     NSString *rstcode = dic[@"status"];
@@ -546,8 +549,11 @@
             }
         }
     } else if (tag.intValue == kSXTagColIntoDealBatch){
+        DLog(@"dic---->>>>%@",dic);
+        [self performSelector:@selector(hideAllHUDsForView) withObject:nil afterDelay:2];
         if ([[dic valueForKey:@"ret"] integerValue] == 1) {
             self.dataDict = [dic objectSafeDictionaryForKey:@"data"];
+            self.maxBatchAmount = [[dic objectSafeDictionaryForKey:@"data"] objectSafeForKey:@"BatchAmount"];
             self.apptzticket = [NSString stringWithFormat:@"%@",[_dataDict objectForKey:@"apptzticket"]];
 //            InvestmentItemInfo * info1 = [[InvestmentItemInfo alloc] initWithDictionary:[_dataDict objectForKey:@"data"]];
 //            self.bidArray = [NSMutableArray array];
@@ -629,6 +635,9 @@
     //    if (self.bidTableView.header.isRefreshing) {
     //        [self.bidTableView.header endRefreshing];
     //    }
+}
+-(void)hideAllHUDsForView{
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
 }
 
 #pragma mark - tableViewMethod
@@ -1164,7 +1173,8 @@
 - (BOOL)checkIsFirstInvest
 {
     NSString *recommendCode = [_dataDict objectForKey:@"recomendFactoryCode"];
-    if ([recommendCode isEqualToString:@""]) {
+    BOOL isNewUser = [[_dataDict objectSafeForKey:@"isNewUser"] boolValue];
+    if ([recommendCode isEqualToString:@""] && isNewUser) {
         return YES;
     } else {
         return NO;
