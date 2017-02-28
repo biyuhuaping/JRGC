@@ -1148,7 +1148,7 @@
 {
     UIView *view = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, rect.size.width, rect.size.height)] autorelease];
     view.backgroundColor = [UIColor whiteColor];
-    view.layer.borderWidth = 1;
+    view.layer.borderWidth = 0.8;
     view.layer.borderColor = [UIColorWithRGB(0xd8d8d8) CGColor];
     return [self getImageFromView:view];
 }

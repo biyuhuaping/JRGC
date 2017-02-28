@@ -76,7 +76,7 @@ static NSString *thirdStr = @"批量投资已经开启";
     [self.view addSubview:tipView];
     
     _tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, ScreenWidth - 15, 35)];
-    _tipLabel.font = [UIFont systemFontOfSize:15.0f];
+    _tipLabel.font = [UIFont systemFontOfSize:13.0f];
     _tipLabel.text = @"批量投资授权开启后可一次性投资多个小额项目";
     _tipLabel.textColor = [UIColor whiteColor];
     [tipView addSubview:_tipLabel];
@@ -157,7 +157,7 @@ static NSString *thirdStr = @"批量投资已经开启";
     NSString *totalStr = [NSString stringWithFormat:@"单次最高限额："];
     CGSize size = [Common getStrHeightWithStr:totalStr AndStrFont:12 AndWidth:ScreenWidth - 25];
     NZLabel *label1 = [[NZLabel alloc] init];
-    label1.font = [UIFont systemFontOfSize:12.0f];
+    label1.font = [UIFont systemFontOfSize:13.0f];
     label1.numberOfLines = 0;
     label1.frame = CGRectMake(ScreenWidth + 15, 15, ScreenWidth-25, size.height);
     label1.text = totalStr;
@@ -173,10 +173,10 @@ static NSString *thirdStr = @"批量投资已经开启";
     sucessImageView.image = [UIImage imageNamed:@"automatic_success"];
     [_baseScrollView addSubview:sucessImageView];
     
-    UILabel *tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth * 2, CGRectGetMaxY(sucessImageView.frame), ScreenWidth, 30)];
+    UILabel *tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth * 2, CGRectGetMaxY(sucessImageView.frame) + 20, ScreenWidth, 16)];
     tipLabel.text = [NSString stringWithFormat:@"批量投资单次最高限额：%@",[selectButton titleForState:UIControlStateNormal]];
     tipLabel.textAlignment = NSTextAlignmentCenter;
-    tipLabel.font = [UIFont systemFontOfSize:16.0f];
+    tipLabel.font = [UIFont systemFontOfSize:13.0f];
     tipLabel.textColor = UIColorWithRGB(0x5b6993);
     [_baseScrollView addSubview:tipLabel];
     
@@ -203,8 +203,8 @@ static NSString *thirdStr = @"批量投资已经开启";
         
         NSRange range = [title rangeOfString:@"万"];
         if (range.location != NSNotFound) {
-            NSMutableAttributedString *attrituteString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@万",[self.quotaArr[i] valueForKey:@"title"]]];
-            [attrituteString setAttributes:@{NSForegroundColorAttributeName:UIColorWithRGB(0x999999), NSFontAttributeName: [UIFont systemFontOfSize:12]} range:range];
+            NSMutableAttributedString *attrituteString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@",[self.quotaArr[i] valueForKey:@"title"]]];
+            [attrituteString setAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12]} range:range];
             button.titleLabel.attributedText = attrituteString;
         }
         
@@ -589,6 +589,7 @@ static NSString *thirdStr = @"批量投资已经开启";
 }
 - (void)dealloc
 {
+     [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadMianViewData" object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
 }
 /*
