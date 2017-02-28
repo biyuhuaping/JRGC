@@ -326,6 +326,10 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
     [self.investmentBtn setTitle:@"查看奖励" forState:UIControlStateNormal];
     [self.investmentBtn setBackgroundColor:UIColorWithRGB(0xfd4d4c)];
     [self.investmentBtn setUserInteractionEnabled:YES];
+    //添加阴影图片
+    UIImage *tabImag = [UIImage imageNamed:@"tabbar_shadow.png"];
+    self.shadowImageView.image = [tabImag resizableImageWithCapInsets:UIEdgeInsetsMake(2, 1, 2, 1) resizingMode:UIImageResizingModeStretch];
+    self.shadowImageView.hidden = NO;
     _collectionListVC = [[UCFCollectionListViewController alloc]initWithNibName:@"UCFCollectionListViewController" bundle:nil];
     _collectionListVC.view.frame = CGRectMake(0, _headerViewHeight, ScreenWidth, ScreenHeight - 64 - 57);
     _collectionListVC.souceVC = _souceVC;
@@ -681,8 +685,9 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
         NSString *rstcode = dic[@"ret"];
         NSString *rsttext = dic[@"message"];
         if ([rstcode intValue] == 1) {
-            NSArray *list_result = [[[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"pageData"] objectSafeArrayForKey:@"result"];
-             BOOL hasNext = [[[[dic objectSafeDictionaryForKey:@"pageData"] objectSafeDictionaryForKey:@"pagination"] objectSafeForKey:@"hasNextPage"] boolValue];
+            NSDictionary *dataDict = [dic objectSafeDictionaryForKey:@"data"];
+            NSArray *list_result = [[dataDict objectSafeDictionaryForKey:@"pageData"] objectSafeArrayForKey:@"result"];
+             BOOL hasNext = [[[[dataDict objectSafeDictionaryForKey:@"pageData"] objectSafeDictionaryForKey:@"pagination"] objectSafeForKey:@"hasNextPage"] boolValue];
             
     
             if (_selectIndex == 0 && self.investmentCurrentPage == 1) {
