@@ -13,6 +13,7 @@
 @property (nonatomic, strong)NSDictionary    *dataDict;
 @property (nonatomic, strong)NSMutableArray  *bidArray;
 @property (nonatomic, copy)NSString          *beanIds;
+@property (nonatomic, copy)NSString          *colPrdClaimId;//上一个页面的集合标id
 
-- (void)reloadMainView;
+- (void)reloadMainViewData;
 @end
