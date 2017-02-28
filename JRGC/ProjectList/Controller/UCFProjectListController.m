@@ -99,8 +99,13 @@
             _currentViewController = self.p2p;
         }
     }
+    
+    [self.view addObserver:self forKeyPath:@"frame" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
 }
-
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    NSLog(@"object === %@",object);
+}
 - (void)changeViewWithConfigure:(NSString *)config
 {
     if ([self.strStyle isEqualToString:@"11"] && self.currentViewController != self.p2p) {
@@ -129,6 +134,7 @@
 {
     [super viewWillAppear:animated];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+    [self.view setFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-64-49)];
     [self.currentViewController.view setFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-64-49)];
 }
 
