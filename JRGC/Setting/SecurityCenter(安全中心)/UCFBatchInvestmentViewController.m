@@ -589,8 +589,11 @@ static NSString *thirdStr = @"批量投资已经开启";
 }
 - (void)dealloc
 {
-     [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadMianViewData" object:nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
+    if ([self.sourceType isEqualToString:@"personCenter"]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
+    } else {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadMianViewData" object:nil];
+    }
 }
 /*
 #pragma mark - Navigation
