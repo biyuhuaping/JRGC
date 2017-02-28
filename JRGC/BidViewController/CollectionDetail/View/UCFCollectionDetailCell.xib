@@ -59,7 +59,7 @@
                         <rect key="frame" x="0.0" y="37" width="320" height="58"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¥5,000.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vvN-AK-tLA">
-                                <rect key="frame" x="15" y="15" width="63" height="16"/>
+                                <rect key="frame" x="15" y="14" width="63" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -71,7 +71,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¥4,600.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CFv-4l-vNI">
-                                <rect key="frame" x="120" y="15" width="63" height="14"/>
+                                <rect key="frame" x="120" y="14" width="63" height="14"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="14" id="FNi-Vp-b9R"/>
                                 </constraints>
@@ -96,11 +96,11 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TrH-zK-M8F">
-                                <rect key="frame" x="240" y="18" width="65" height="23"/>
+                                <rect key="frame" x="240" y="16.5" width="65" height="25"/>
                                 <color key="backgroundColor" red="0.99215686270000003" green="0.30196078430000001" blue="0.29803921570000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="65" id="Zxc-tY-jkn"/>
-                                    <constraint firstAttribute="height" constant="22.5" id="mID-Q3-YgX"/>
+                                    <constraint firstAttribute="height" constant="25" id="mID-Q3-YgX"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <state key="normal" title="投资">
@@ -121,17 +121,17 @@
                             <constraint firstItem="CFv-4l-vNI" firstAttribute="leading" secondItem="jLT-f3-TGU" secondAttribute="leading" constant="120" id="1nM-IR-3ef"/>
                             <constraint firstAttribute="trailing" secondItem="TrH-zK-M8F" secondAttribute="trailing" constant="15" id="5A0-dC-WOd"/>
                             <constraint firstItem="0eI-b3-oB5" firstAttribute="leading" secondItem="jLT-f3-TGU" secondAttribute="leading" constant="15" id="6kF-S6-0Fp"/>
-                            <constraint firstItem="CFv-4l-vNI" firstAttribute="top" secondItem="jLT-f3-TGU" secondAttribute="top" constant="15" id="L8U-rv-k1w"/>
+                            <constraint firstItem="CFv-4l-vNI" firstAttribute="top" secondItem="jLT-f3-TGU" secondAttribute="top" constant="14" id="L8U-rv-k1w"/>
                             <constraint firstItem="hOl-2h-Q2B" firstAttribute="leading" secondItem="jLT-f3-TGU" secondAttribute="leading" id="R5A-uN-IbL"/>
                             <constraint firstItem="vvN-AK-tLA" firstAttribute="leading" secondItem="jLT-f3-TGU" secondAttribute="leading" constant="15" id="XSb-CJ-hNl"/>
-                            <constraint firstItem="vvN-AK-tLA" firstAttribute="top" secondItem="jLT-f3-TGU" secondAttribute="top" constant="15" id="d3w-gX-wml"/>
+                            <constraint firstItem="vvN-AK-tLA" firstAttribute="top" secondItem="jLT-f3-TGU" secondAttribute="top" constant="14" id="d3w-gX-wml"/>
                             <constraint firstItem="TrH-zK-M8F" firstAttribute="centerY" secondItem="jLT-f3-TGU" secondAttribute="centerY" id="gpU-je-H7r"/>
                             <constraint firstItem="jL9-wd-H5w" firstAttribute="leading" secondItem="CFv-4l-vNI" secondAttribute="leading" id="hsz-yw-joE"/>
                             <constraint firstItem="hOl-2h-Q2B" firstAttribute="top" secondItem="0eI-b3-oB5" secondAttribute="bottom" constant="11" id="iHL-LN-fDx"/>
                             <constraint firstAttribute="height" constant="58" id="ir3-U7-hYn"/>
                             <constraint firstAttribute="bottom" secondItem="hOl-2h-Q2B" secondAttribute="bottom" id="lWx-Co-5ky"/>
                             <constraint firstAttribute="trailing" secondItem="hOl-2h-Q2B" secondAttribute="trailing" id="qhV-Ly-44V"/>
-                            <constraint firstItem="jL9-wd-H5w" firstAttribute="top" secondItem="CFv-4l-vNI" secondAttribute="bottom" constant="1" id="uge-wZ-TwX"/>
+                            <constraint firstItem="jL9-wd-H5w" firstAttribute="top" secondItem="CFv-4l-vNI" secondAttribute="bottom" constant="2" id="uge-wZ-TwX"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -152,7 +152,7 @@
                 <outlet property="statusBtn" destination="TrH-zK-M8F" id="hr6-rl-mgd"/>
                 <outlet property="totalAmtLab" destination="vvN-AK-tLA" id="HrU-Ia-mFL"/>
             </connections>
-            <point key="canvasLocation" x="-795" y="81"/>
+            <point key="canvasLocation" x="-986" y="79"/>
         </tableViewCell>
     </objects>
 </document>

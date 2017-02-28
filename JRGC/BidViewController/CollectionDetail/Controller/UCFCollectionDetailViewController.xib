@@ -25,7 +25,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PW4-3N-a24">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                    <rect key="frame" x="0.0" y="-1" width="375" height="64"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="particular_bg_1" translatesAutoresizingMaskIntoConstraints="NO" id="5el-dl-UsO">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
@@ -34,7 +34,7 @@
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zBQ-V6-lov">
-                            <rect key="frame" x="165.5" y="22" width="44" height="21.5"/>
+                            <rect key="frame" x="165.5" y="26" width="44" height="21.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
@@ -58,13 +58,13 @@
                         <constraint firstItem="zBQ-V6-lov" firstAttribute="centerX" secondItem="PW4-3N-a24" secondAttribute="centerX" id="bem-zF-vQo"/>
                         <constraint firstAttribute="height" constant="64" id="hji-EJ-p24"/>
                         <constraint firstItem="5el-dl-UsO" firstAttribute="top" secondItem="PW4-3N-a24" secondAttribute="top" id="ktq-58-mYm"/>
-                        <constraint firstItem="zBQ-V6-lov" firstAttribute="top" secondItem="PW4-3N-a24" secondAttribute="top" constant="22" id="lhp-U4-zDE"/>
+                        <constraint firstItem="zBQ-V6-lov" firstAttribute="top" secondItem="PW4-3N-a24" secondAttribute="top" constant="26" id="lhp-U4-zDE"/>
                         <constraint firstItem="PGH-FF-mBb" firstAttribute="leading" secondItem="PW4-3N-a24" secondAttribute="leading" constant="10" id="ltD-J5-ujB"/>
                         <constraint firstAttribute="trailing" secondItem="5el-dl-UsO" secondAttribute="trailing" id="qOL-tx-fzF"/>
                     </constraints>
                 </view>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dCg-HU-7Ze">
-                    <rect key="frame" x="0.0" y="64" width="375" height="546"/>
+                    <rect key="frame" x="0.0" y="63" width="375" height="547"/>
                     <color key="backgroundColor" red="0.93725490199999995" green="0.94117647059999998" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
                         <outlet property="delegate" destination="-1" id="X8k-BP-TfH"/>
@@ -120,11 +120,11 @@
                 <constraint firstItem="PW4-3N-a24" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="dFm-NA-uCK"/>
                 <constraint firstAttribute="trailing" secondItem="dCg-HU-7Ze" secondAttribute="trailing" id="dQP-le-H3v"/>
                 <constraint firstItem="zGT-9D-Hp8" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="h9Z-2p-aLc"/>
-                <constraint firstItem="PW4-3N-a24" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="ohR-mD-cL6"/>
+                <constraint firstItem="PW4-3N-a24" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="-1" id="ohR-mD-cL6"/>
                 <constraint firstAttribute="bottom" secondItem="zGT-9D-Hp8" secondAttribute="bottom" id="yCR-nt-82M"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
-            <point key="canvasLocation" x="-1877" y="-1117"/>
+            <point key="canvasLocation" x="-2105" y="-1126"/>
         </view>
     </objects>
     <resources>
