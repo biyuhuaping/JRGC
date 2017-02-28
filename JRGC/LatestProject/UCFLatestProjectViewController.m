@@ -623,7 +623,7 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
-        return 210;
+        return 204;
     }
     else {
         //************************************************qyy 2016-11-17首页接口改造
