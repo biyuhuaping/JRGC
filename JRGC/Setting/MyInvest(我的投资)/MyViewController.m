@@ -31,15 +31,13 @@
 
 @implementation MyViewController
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)viewDidAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
-    if (![self.view.subviews containsObject:self.currentController.view]) {
-        [self.view addSubview:self.currentController.view];
-        [self.currentController.view setFrame:CGRectMake(0, 100, self.view.frame.size.width, ScreenHeight - 164)];
-//        [self.currentController didMoveToParentViewController:self];//确定关系建立
-    }
+    [super viewDidAppear:animated];
+    
+    [self.currentController.view setFrame:CGRectMake(0, 100, SCREEN_WIDTH, ScreenHeight - 164)];
 }
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -57,32 +55,42 @@
     [_segmentedCtrl addTarget:self action:@selector(segmentedValueChanged:) forControlEvents:UIControlEventValueChanged];
     self.navigationItem.titleView = _segmentedCtrl;
 
-    _myInvest = [[UCFMyInvestViewController alloc]initWithNibName:@"UCFMyInvestViewController" bundle:nil];
-    _myInvest.view.frame = CGRectMake(0, 100, ScreenWidth, ScreenHeight - 164);
-    [self addChildViewController:_myInvest];
+    self.myInvest = [[UCFMyInvestViewController alloc]initWithNibName:@"UCFMyInvestViewController" bundle:nil];
+    self.myInvest.view.frame = CGRectMake(0, 100, ScreenWidth, ScreenHeight - 164);
+    [self addChildViewController:self.myInvest];
+    
+    self.batchProject = [[UCFBatchProjectController alloc]initWithNibName:@"UCFBatchProjectController" bundle:nil];
+    self.batchProject.view.frame = CGRectMake(0, 100, ScreenWidth, ScreenHeight - 164);
+    [self addChildViewController:self.batchProject];
 
-    _myClaimCtrl = [[UCFMyClaimCtrl alloc]initWithNibName:@"UCFMyClaimCtrl" bundle:nil];
-    _myClaimCtrl.view.frame = CGRectMake(0, 100, ScreenWidth, ScreenHeight - 164);
-    [self addChildViewController:_myClaimCtrl];
+    self.myClaimCtrl = [[UCFMyClaimCtrl alloc]initWithNibName:@"UCFMyClaimCtrl" bundle:nil];
+    self.myClaimCtrl.view.frame = CGRectMake(0, 100, ScreenWidth, ScreenHeight - 164);
+    [self addChildViewController:self.myClaimCtrl];
     
-    _batchProject = [[UCFBatchProjectController alloc]initWithNibName:@"UCFBatchProjectController" bundle:nil];
-    _batchProject.view.frame = CGRectMake(0, 100, ScreenWidth, ScreenHeight - 164);
-    [self addChildViewController:_batchProject];
-
-    [self.view addSubview:_myInvest.view];
-    [_myInvest didMoveToParentViewController:self];//确定关系建立
-    
-    if (self.selectedSegmentIndex == 1) {
-        self.currentController = self.batchProject;
+    self.segmentedCtrl.selectedSegmentIndex = self.selectedSegmentIndex;
+    switch (self.selectedSegmentIndex) {
+        case 0: {
+            [_myInvest didMoveToParentViewController:self];//确定关系建立
+            self.currentController = self.myInvest;
+            [self.view addSubview:_myInvest.view];
+        }
+            break;
+        
+        case 1: {
+            [_batchProject didMoveToParentViewController:self];//确定关系建立
+            
+            self.currentController = self.batchProject;
+            [self.view addSubview:_batchProject.view];
+        }
+            break;
+        
+        case 2: {
+            [_myClaimCtrl didMoveToParentViewController:self];//确定关系建立
+            self.currentController = self.myClaimCtrl;
+            [self.view addSubview:_myClaimCtrl.view];
+        }
+            break;
     }
-    else if (self.selectedSegmentIndex == 0)
-    {
-        self.currentController = self.myInvest;
-    }
-    else if (self.selectedSegmentIndex == 2) {
-        self.currentController = self.myClaimCtrl;
-    }
-    
     
     __weak typeof(self) weakSelf = self;
     _myInvest.setHeaderInfoBlock = ^(NSDictionary *data){

@@ -222,7 +222,13 @@
         if ([total intValue] > 1) {
             str = [NSString stringWithFormat:@"(第%@期/共%@期)",_dataArr1[indexPath.row][@"repayPerNo"],total];
         }
-        cell.prdName.text = [NSString stringWithFormat:@"%@%@",_dataArr1[indexPath.row][@"prdName"],str];        //投标名称
+        int batchInvestStatus = [[_dataArr1[indexPath.row] objectSafeForKey:@"batchInvestStatus"] intValue];
+        if (batchInvestStatus) {
+            cell.prdName.text = [NSString stringWithFormat:@"%@%@(批量投资)",_dataArr1[indexPath.row][@"prdName"],str];//标的名称
+        }
+        else {
+            cell.prdName.text = [NSString stringWithFormat:@"%@%@",_dataArr1[indexPath.row][@"prdName"],str];        //投标名称
+        }
         [cell.prdName setFontColor:UIColorWithRGB(0x999999) string:str];
         
         cell.orderTime.text = _dataArr1[indexPath.row][@"orderTime"];      //投标时间
@@ -254,7 +260,14 @@
         if ([total intValue] > 1) {
             str = [NSString stringWithFormat:@"(第%@期/共%@期)",_dataArr2[indexPath.row][@"repayPerNo"],total];
         }
-        cell1.prdName.text = [NSString stringWithFormat:@"%@%@",_dataArr2[indexPath.row][@"prdName"],str];        //投标名称
+        int batchInvestStatus = [[_dataArr1[indexPath.row] objectSafeForKey:@"batchInvestStatus"] intValue];
+        if (batchInvestStatus) {
+            cell1.prdName.text = [NSString stringWithFormat:@"%@%@(批量投资)",_dataArr2[indexPath.row][@"prdName"],str];//标的名称
+        }
+        else {
+            cell1.prdName.text = [NSString stringWithFormat:@"%@%@",_dataArr2[indexPath.row][@"prdName"],str];        //投标名称
+        }
+        
         [cell1.prdName setFontColor:UIColorWithRGB(0x999999) string:str];
         
         cell1.orderTime.text = _dataArr2[indexPath.row][@"orderTime"];      //投标时间
