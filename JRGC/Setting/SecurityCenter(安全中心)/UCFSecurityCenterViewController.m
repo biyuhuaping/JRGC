@@ -207,6 +207,11 @@
         if (buttonIndex == 1) {
             [self gotoBankDepositoryAccountVC];
         }
+    }else if(alertView.tag == 10003){
+        if (buttonIndex == 1) {
+            UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:3];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
     }
 }
 
@@ -855,8 +860,10 @@
         [alert show];
         return NO;
     }else if(openStatus == 3){
-        UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:3];
-        [self.navigationController pushViewController:vc animated:YES];
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请先设置交易密码" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        alert.tag = 10003;
+        [alert show];
         return NO;
     }else{
         return YES;

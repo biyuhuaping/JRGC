@@ -32,8 +32,11 @@
     [self addChildControllers];
     // setting current controller
     self.currentViewController = self.ordinaryBid;
+    
+    
 
 }
+
 - (void)setCurrentViewForBatchBid
 {
     NSString *viewType = self.viewType;

@@ -64,7 +64,7 @@
     self.intelligenceArray = [NSMutableArray arrayWithCapacity:1];
     [self addLeftButton];
     
-    [[NSNotificationCenter defaultCenter]  addObserver:self selector:@selector(reloadMainView) name:@"UPDATEINVESTDATA" object:nil];
+    [[NSNotificationCenter defaultCenter]  addObserver:self selector:@selector(reloadMianViewData) name:@"reloadMianViewData" object:nil];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     [self makeMainView];
     self.apptzticket = [NSString stringWithFormat:@"%@",[_dataDict objectForKey:@"apptzticket"]];
@@ -303,6 +303,11 @@
             batchInvestment.isStep = 1 ;
             [self.navigationController pushViewController:batchInvestment animated:YES];
         }
+        if (alertView.tag == 5002) {//开通批量投资限额页面第二步
+            UCFBatchInvestmentViewController *batchInvestment = [[UCFBatchInvestmentViewController alloc] init];
+            batchInvestment.isStep = 2 ;
+            [self.navigationController pushViewController:batchInvestment animated:YES];
+        }
     }
 }
 - (void)checkIsCanInvest
@@ -319,14 +324,7 @@
         return;
     }
     
-    BOOL isOpenBatchStr = [[_dataDict objectSafeForKey:@"isOpenBatch"] boolValue];
-    if(!isOpenBatchStr){ //是否开启一键投标
-        
-        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您还未开启批量投资，暂不能投资" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"开启", nil];
-        alertView.tag = 5001;
-        [alertView show];
-        return;
-    }
+   
     
     
     
@@ -350,16 +348,7 @@
         return;
     }
 
-    NSString *maxIn =[NSString stringWithFormat:@"%@",[colPrdClaimDetailDict objectSafeForKey:@"batchAmount"]];
- 
-    if (maxIn.length != 0) {
-        if ([Common stringA:investMoney ComparedStringB:maxIn] == 1) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:[NSString stringWithFormat:@"该项目限投¥%@",maxIn] delegate:self cancelButtonTitle:nil otherButtonTitles:@"重新输入", nil];
-            alert.tag = 1000;
-            [alert show];
-            return;
-        }
-    }
+    
     if([Common stringA:investMoney ComparedStringB:keTouJinE] == 1)
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"不可以这么任性哟，投资金额已超过剩余可投金额了" delegate:self cancelButtonTitle:@"重新输入" otherButtonTitles: nil];
@@ -396,7 +385,37 @@
         [alert show];
         return;
     }
-
+    
+    
+    BOOL isOpenBatchStr = [[_dataDict objectSafeForKey:@"isOpenBatch"] boolValue];
+    if(!isOpenBatchStr){ //是否开启一键投标
+        
+        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您还未开启批量投资，暂不能投资" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"开启", nil];
+        alertView.tag = 5001;
+        [alertView show];
+        return;
+    }
+    
+    NSString *maxIn =[NSString stringWithFormat:@"%@",[_dataDict objectSafeForKey:@"batchAmount"]];
+    
+    if (maxIn.length != 0) {
+        if ([Common stringA:investMoney ComparedStringB:maxIn] == 1) {
+            
+            NSString *mesageStr = [NSString stringWithFormat:@"投资金额超过批量投资单笔限额，您设置的批量投资金额单笔限额为%@元",maxIn];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:mesageStr delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"修改", nil];
+            alert.tag = 5002;
+            [alert show];
+            return;
+        }
+    }
+    
+    if(isFirstInvest){
+        NSString *mesageStr = [NSString stringWithFormat:@"批量投资可能会导致用户无法获得首次奖励，确认继续支付吗？"];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:mesageStr delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"继续投资", nil];
+        alert.tag = 4000;
+        [alert show];
+        return;
+    }
     
     int compare = [Common stringA:investMoney ComparedStringB:@"1000.00"];
     if (compare == 1 || compare == 0 ) {
@@ -522,19 +541,18 @@
                 alert.tag = 10023;
                 [alert show];
             } else {
-                [self reloadMainView];
+                [self reloadMianViewData];
                 [AuxiliaryFunc showAlertViewWithMessage:dic[@"statusdes"]];
             }
         }
-    } else if (tag.intValue == kSXTagPrdClaimsDealBid){
-        if ([[dic valueForKey:@"status"] integerValue] == 1) {
-            self.dataDict = dic;
+    } else if (tag.intValue == kSXTagColIntoDealBatch){
+        if ([[dic valueForKey:@"ret"] integerValue] == 1) {
+            self.dataDict = [dic objectSafeDictionaryForKey:@"data"];
             self.apptzticket = [NSString stringWithFormat:@"%@",[_dataDict objectForKey:@"apptzticket"]];
-            
-            InvestmentItemInfo * info1 = [[InvestmentItemInfo alloc] initWithDictionary:[_dataDict objectForKey:@"data"]];
-            self.bidArray = [NSMutableArray array];
-            [self.bidArray addObject:info1];
-            [_bidTableView reloadData];
+//            InvestmentItemInfo * info1 = [[InvestmentItemInfo alloc] initWithDictionary:[_dataDict objectForKey:@"data"]];
+//            self.bidArray = [NSMutableArray array];
+//            [self.bidArray addObject:info1];
+            [self.bidTableView reloadData];
         } else {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:dic[@"statusdes"] delegate:self cancelButtonTitle:@"返回列表" otherButtonTitles: nil];
             alert.tag = 10023;
@@ -1361,13 +1379,17 @@
     controller.baseTitleType = @"detail_heTong";
     [self.navigationController pushViewController:controller animated:YES];
 }
-- (void)reloadMainView
+- (void)reloadMianViewData
 {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    NSString *strParameters = nil;
-    NSString *projectId = [[_dataDict objectForKey:@"data"] objectForKey:@"id"];
-    strParameters = [NSString stringWithFormat:@"userId=%@&id=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],projectId];//101943
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDealBid owner:self];
+//    NSString *strParameters = nil;
+//    NSString *projectId = [[_dataDict objectForKey:@"data"] objectForKey:@"id"];
+//    strParameters = [NSString stringWithFormat:@"userId=%@&id=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],projectId];//101943
+//    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDealBid owner:self];
+    
+    NSDictionary *dataDict = @{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"tenderId":_colPrdClaimId};
+    [[NetworkModule sharedNetworkModule] newPostReq:dataDict tag:kSXTagColIntoDealBatch owner:self signature:YES];
+
 }
 
 - (void)dealloc

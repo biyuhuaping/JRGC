@@ -17,7 +17,7 @@
     CGContextSetTextDrawingMode(c, kCGTextStroke);
     self.textColor = [UIColor whiteColor];
     [super drawTextInRect:rect];
-    self.textColor = [UIColor redColor];
+    self.textColor = UIColorWithRGB(0xfd4d4c);
     CGContextSetTextDrawingMode(c, kCGTextFill);
     [super drawTextInRect:rect];
 }

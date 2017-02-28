@@ -48,7 +48,11 @@
     [self addRefreshingAndLoadMore];
 
     [self.tableview.header beginRefreshing];
+    
+
 }
+
+
 
 #pragma mark - setting tableview
 - (void)settingTableViewStyle
