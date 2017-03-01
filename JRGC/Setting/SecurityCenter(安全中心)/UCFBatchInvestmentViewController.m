@@ -20,7 +20,7 @@
 #define TITLECOLORGRAY UIColorWithRGB(0xf9f9f9)
 static NSString *firstStr = @"批量投资授权开启后可一次性投资多个小额项目";
 static NSString *secondStr = @"为保证您的资金安全，请合理选择";
-static NSString *thirdStr = @"批量投资已经开启";
+static NSString *thirdStr = @"自动投标授权已经开启";
 @interface UCFBatchInvestmentViewController ()
 {
     UIButton *selectButton;
@@ -174,7 +174,7 @@ static NSString *thirdStr = @"批量投资已经开启";
     [_baseScrollView addSubview:sucessImageView];
     
     UILabel *tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth * 2, CGRectGetMaxY(sucessImageView.frame) + 20, ScreenWidth, 16)];
-    tipLabel.text = [NSString stringWithFormat:@"批量投资单次最高限额：%@",[selectButton titleForState:UIControlStateNormal]];
+    tipLabel.text = [NSString stringWithFormat:@"单次最高限额：%@",[selectButton titleForState:UIControlStateNormal]];
     tipLabel.textAlignment = NSTextAlignmentCenter;
     tipLabel.font = [UIFont systemFontOfSize:13.0f];
     tipLabel.textColor = UIColorWithRGB(0x5b6993);
