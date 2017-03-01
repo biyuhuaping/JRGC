@@ -115,6 +115,9 @@
 }
 -(void)cell:(UCFProjectListCell *)cell clickInvestBtn2:(UIButton *)button withModel:(UCFBatchBidModel *)model
 {
+    if (model.full) {
+        return;
+    }
     [self  gotoCollectionDetailVC:model];
  
 }

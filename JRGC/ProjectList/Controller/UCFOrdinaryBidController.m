@@ -253,6 +253,9 @@
         [self showLoginView];
     } else {
         if ([self checkUserCanInvestIsDetail:NO]) {
+            if ([model.status integerValue] != 2) {
+                return;
+            }
             [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             _projectListModel = model;
             NSString *strParameters = [NSString stringWithFormat:@"userId=%@&id=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],_projectListModel.Id];
