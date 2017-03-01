@@ -9,5 +9,5 @@
 #import "UCFWebViewJavascriptBridgeController.h"
 
 @interface UCFBatchSetNumWebViewController : UCFWebViewJavascriptBridgeController
-
+@property (nonatomic, copy) NSString *sourceType;
 @end
