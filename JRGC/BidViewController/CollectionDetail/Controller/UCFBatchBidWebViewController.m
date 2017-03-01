@@ -59,8 +59,8 @@
     //    } else {//***投资失败以后导航栏上的返回按钮返回的是投资填写页面
     //        [self.navigationController popViewControllerAnimated:YES];
     //    }
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadHonerPlanData" object:nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadP2PData" object:nil];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadHonerPlanData" object:nil];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadP2PData" object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"LatestProjectUpdate" object:nil];
     if ([self.rootVc isEqualToString:@"collectionDetailVC"]) {
         [self.navigationController popViewControllerAnimated:YES];
@@ -70,7 +70,11 @@
 }
 - (void)jsClose
 {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    if ([self.rootVc isEqualToString:@"collectionDetailVC"]) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }else{
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
 }
 - (void)jsInvestSuc:(BOOL)isSuc
 {
