@@ -254,6 +254,9 @@
 
 - (void)cell:(UCFProjectListCell *)cell clickInvestBtn:(UIButton *)button withModel:(UCFProjectListModel *)model
 {
+    if ([model.status integerValue]!=2) {
+        return;
+    }
     if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
         //如果未登录，展示登录页面
         [self showLoginView];

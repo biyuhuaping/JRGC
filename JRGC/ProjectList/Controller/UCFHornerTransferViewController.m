@@ -253,6 +253,9 @@
 
 - (void)cell:(UCFProjectListCell*)cell clickInvestBtn1:(UIButton *)button withModel:(UCFTransferModel *)model
 {
+    if ([model.status integerValue]!=2) {
+        return;
+    }
     if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
         UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
         UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
