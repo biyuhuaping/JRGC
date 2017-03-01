@@ -800,7 +800,7 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
          NSDictionary *dataDict = @{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"tenderId":_colPrdClaimId};
          [[NetworkModule sharedNetworkModule] newPostReq:dataDict tag:kSXTagColIntoDealBatch owner:self signature:YES];
     }else{
-        NSDictionary *reqDict =  @{@"userId":[[NSUserDefaults standardUserDefaults] objectForKey:UUID],@"colOrderId":_colPrdClaimId};
+        NSDictionary *reqDict =  @{@"userId":[[NSUserDefaults standardUserDefaults] objectForKey:UUID],@"colOrderId":_batchOrderIdStr};
         NSString *urlStr =[NSString stringWithFormat:@"%@%@",SERVER_IP,GETBACHINVESTAWARD];
         UCFBatchBidWebViewController *webView = [[UCFBatchBidWebViewController alloc]initWithNibName:@"UCFBatchBidWebViewController" bundle:nil];
         webView.url =  urlStr;

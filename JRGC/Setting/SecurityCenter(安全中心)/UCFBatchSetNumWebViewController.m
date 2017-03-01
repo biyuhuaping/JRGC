@@ -50,6 +50,7 @@
         UIViewController *target = [arr objectAtIndex:arr.count - 3];
         [self.navigationController popToViewController:target animated:YES];
     }
+    
 }
 - (void)jsClose
 {
@@ -57,7 +58,11 @@
 }
 - (void)dealloc
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
+    if ([self.sourceType isEqualToString:@"personCenter"]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
+    } else {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadMianViewData" object:nil];
+    }
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

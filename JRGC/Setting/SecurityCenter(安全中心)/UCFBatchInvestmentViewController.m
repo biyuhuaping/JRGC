@@ -564,6 +564,7 @@ static NSString *thirdStr = @"批量投资已经开启";
                  webView.url = urlStr;
                  webView.webDataDic =dataDict;
                  webView.navTitle = @"自动投标授权";
+                 webView.sourceType = _sourceType;
                  [self.navigationController pushViewController:webView animated:YES];
              } else {
                  [self initThirdSectionView];
