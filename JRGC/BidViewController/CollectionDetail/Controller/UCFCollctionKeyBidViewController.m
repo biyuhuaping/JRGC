@@ -486,7 +486,7 @@
         [paramDict setValue:recommendCode forKey:@"recomendFactoryCode"];
         
     } else {
-        NSString *recommendCode = [NSString stringWithFormat:@"%@",[UCFToolsMehod isNullOrNilWithString:[[self.dataDict objectForKey:@"adviserUser"] objectForKey:@"promotioncode"]]];
+        NSString *recommendCode = [NSString stringWithFormat:@"%@",[UCFToolsMehod isNullOrNilWithString:[self.dataDict objectForKey:@"recomendFactoryCode"]]];
         [paramDict setValue:recommendCode forKey:@"recomendFactoryCode"];
     }
     
