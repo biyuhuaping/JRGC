@@ -178,7 +178,7 @@
     //是否有返现券
     isHaveCashNum = NO;    //是否有返息券
     isHaveCouponNum =  NO;
-    isCompanyAgent = NO;// [[_dataDict objectForKey:@"isCompanyAgent"] boolValue];
+    isCompanyAgent = YES;// [[_dataDict objectForKey:@"isCompanyAgent"] boolValue];
     
     
     InvestmentItemInfo * info1 = [[InvestmentItemInfo alloc] initWithDictionary:[_dataDict objectForKey:@"data"]];
