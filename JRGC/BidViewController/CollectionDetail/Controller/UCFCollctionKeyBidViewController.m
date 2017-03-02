@@ -178,7 +178,7 @@
     //是否有返现券
     isHaveCashNum = NO;    //是否有返息券
     isHaveCouponNum =  NO;
-    isCompanyAgent = NO;// [[_dataDict objectForKey:@"isCompanyAgent"] boolValue];
+    isCompanyAgent = YES;// [[_dataDict objectForKey:@"isCompanyAgent"] boolValue];
     
     
     InvestmentItemInfo * info1 = [[InvestmentItemInfo alloc] initWithDictionary:[_dataDict objectForKey:@"data"]];
@@ -486,7 +486,7 @@
         [paramDict setValue:recommendCode forKey:@"recomendFactoryCode"];
         
     } else {
-        NSString *recommendCode = [NSString stringWithFormat:@"%@",[UCFToolsMehod isNullOrNilWithString:[[self.dataDict objectForKey:@"adviserUser"] objectForKey:@"promotioncode"]]];
+        NSString *recommendCode = [NSString stringWithFormat:@"%@",[UCFToolsMehod isNullOrNilWithString:[self.dataDict objectForKey:@"recomendFactoryCode"]]];
         [paramDict setValue:recommendCode forKey:@"recomendFactoryCode"];
     }
     

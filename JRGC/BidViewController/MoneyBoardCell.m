@@ -168,7 +168,8 @@
     if (!_isTransid) {
         
         if (_isCollctionkeyBid) {
-            
+          
+            _totalKeYongTipLabel.text = @"(我的余额)";
             NSString *minInvestStr = [NSString stringWithFormat:@"%@",[[_dataDict objectForKey:@"colPrdClaimDetail"] objectForKey:@"colMinInvest"]];
       
             NSString *palceText = [NSString stringWithFormat:@"%@元起投", minInvestStr];
