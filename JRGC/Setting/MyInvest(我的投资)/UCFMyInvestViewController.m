@@ -369,6 +369,7 @@
 
 //开始请求
 - (void)beginPost:(kSXTag)tag{
+    
 }
 
 //请求成功及结果
@@ -406,9 +407,9 @@
 
     if (tag.intValue == kSXTagPrdOrderUinvest) {
         if ([rstcode intValue] == 1) {
-            if (_setHeaderInfoBlock) {
-                _setHeaderInfoBlock(dic[@"data"]);
-            }
+//            if (_setHeaderInfoBlock) {
+//                _setHeaderInfoBlock(dic[@"data"]);
+//            }
             
             NSString *listCount = [NSString stringWithFormat:@"%@",dic[@"data"][@"listCount"]];//投资笔数
             [_listCountArr setObject:listCount atIndexedSubscript:_index];
