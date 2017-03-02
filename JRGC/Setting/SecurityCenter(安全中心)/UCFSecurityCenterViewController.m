@@ -502,7 +502,7 @@
 {
     NSIndexPath *indexPath = [_tableview indexPathForCell:securityCell];
     UCFSettingGroup *group = self.itemsData[1];
-    if (indexPath.row == 0) {
+    if (indexPath.row == 1) {
         if (gestureState) {
             UCFVerifyLoginViewController *controller = [[UCFVerifyLoginViewController alloc] init];
             controller.sourceVC = @"securityCenter";
@@ -528,10 +528,10 @@
             [alert show];
         }
     } else {
-        if ([group.items count] == 4) {
+        if ([group.items count] == 5) {//没有指纹解锁一栏 一共5栏
             [self validFaceLogin:gestureState WithCell:securityCell];
-        } else {
-            if (indexPath.row == 1) {
+        } else {//有指纹解锁一栏  一共5栏
+            if (indexPath.row == 2) { //开启指纹解锁
             [self touchIDVerificationSwitchState:gestureState WithCell:securityCell];
             } else {
                 [self validFaceLogin:gestureState WithCell:securityCell];
