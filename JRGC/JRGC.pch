@@ -158,6 +158,9 @@ return shared##className; \
 #define FirstAlertViewShowTime     @"InviteFriendsEveryday"
 
 
+// 每天首次弹出邀请返利开关
+#define FirstAlertViewShowTime     @"InviteFriendsEveryday"
+
 
 #define BBSURL          @"https://bbs.9888.cn/appaction.php"
 #define MALLURL         @"https://mmall.9888.cn"
