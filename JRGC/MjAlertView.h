@@ -16,6 +16,7 @@ typedef enum : NSUInteger {
     MjAlertViewTypeRedBag,
     MjAlertViewTypeSign,
     MjAlertViewTypeCustom,
+    MjAlertViewTypeInviteFriends,
     MjAlertViewTypeTypeOne
 } MjAlertViewType;
 
@@ -60,6 +61,9 @@ typedef enum : NSUInteger {
 -(instancetype)initRechargeViewWithTitle:(NSString *)title errorMessage:(NSString *)errorMessge message:(NSString *)message delegate:(id)delegate cancelButtonTitle:(NSString *)cancelButtonTitle;
 #pragma 集合标详情里的排序弹框
 -(instancetype)initCollectionViewWithTitle:(NSString *)title sortArray:(NSArray *)sortArray  selectedSortButtonTag:(NSInteger)tag delegate:(id)delegate cancelButtonTitle:(NSString *)cancelButtonTitle withOtherButtonTitle:(NSString*)otherButtonTitle;
+
+#pragma  首页邀请新政策弹框
+-(instancetype)initInviteFriendsToMakeMoneyDelegate:(id)delegate;
 #pragma mark - 显示
 - (void)show;
 #pragma mark - 隐藏
