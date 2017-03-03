@@ -12,7 +12,9 @@
 @interface UCFProjectListController : UCFBaseViewController
 @property (nonatomic, copy) NSString *strStyle;
 @property (nonatomic, copy) NSString *viewType;
+@property (nonatomic, assign) BOOL isShowHornor;
 
 
 - (void)changeViewWithConfigure:(NSString *)config;
+
 @end

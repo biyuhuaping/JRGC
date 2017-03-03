@@ -26,5 +26,8 @@
 // 退出应用
 - (void)exitApplication;
 
+//检查是否显示尊享
+- (void)checkIsShowHornor;
+
 @end
 

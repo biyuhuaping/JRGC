@@ -19,7 +19,6 @@
 @property (nonatomic, strong) UCFTransferViewController *transfer;
 
 @property (nonatomic, weak) UCFBaseViewController *currentViewController;
-@property (nonatomic, assign) BOOL isShowHornor;
 
 @end
 
@@ -28,9 +27,26 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadView:) name:@"userisloginandcheckgrade" object:nil];
+    
     // 添加标题然选项卡
     self.isShowHornor = [[NSUserDefaults standardUserDefaults] boolForKey:@"isShowHornor"];
     UISegmentedControl *segmentContrl = nil;
+    
+    NSString *userId = [UserInfoSingle sharedManager].userId;
+    if (userId) {
+        NSInteger userLevel = [[UserInfoSingle sharedManager].userLevel integerValue];
+        BOOL isShowHornor = [[NSUserDefaults standardUserDefaults] boolForKey:@"isShowHornor"];
+        if (userLevel>1 || isShowHornor) {
+            self.isShowHornor = YES;
+        }
+        else
+            self.isShowHornor = NO;
+    }
+    else {
+        self.isShowHornor = NO;
+    }
+    
     if (self.isShowHornor) {
         segmentContrl = [[UISegmentedControl alloc]initWithItems:@[@"P2P专区",@"尊享专区",@"转让专区"]];
     }
@@ -186,6 +202,42 @@
         }
             break;
     }
+}
+
+- (void)reloadView:(NSNotification *)noty
+{
+    BOOL islogin = [noty.object boolValue];
+    UISegmentedControl *segmentCtrl = nil;
+    if (islogin) {
+        NSInteger userLevel = [[UserInfoSingle sharedManager].userLevel integerValue];
+        BOOL isShowHornor = [[NSUserDefaults standardUserDefaults] boolForKey:@"isShowHornor"];
+        if (userLevel>1 || isShowHornor) {
+            self.isShowHornor = YES;
+            segmentCtrl = [[UISegmentedControl alloc]initWithItems:@[@"P2P专区",@"尊享专区",@"转让专区"]];
+        }
+        else {
+            self.isShowHornor = NO;
+            segmentCtrl = [[UISegmentedControl alloc]initWithItems:@[@"P2P专区",@"转让专区"]];
+        }
+    }
+    else {
+        self.isShowHornor = NO;
+        segmentCtrl = [[UISegmentedControl alloc]initWithItems:@[@"P2P专区",@"转让专区"]];
+    }
+    self.segmentedCtrl = segmentCtrl;
+    self.segmentedCtrl.selectedSegmentIndex = 0;
+    segmentCtrl.frame = CGRectMake(0, 0, ScreenWidth*5/8, 30);
+    [segmentCtrl setTintColor:UIColorWithRGB(0x5b6993)];
+    //    [segmentContrl setTitleTextAttributes:@{[UIFont systemFontOfSize:15]:NSFontAttributeName} forState:UIControlStateNormal];
+    [segmentCtrl addTarget:self action:@selector(segmentedValueChanged:) forControlEvents:UIControlEventValueChanged];
+    self.navigationItem.titleView = segmentCtrl;
+}
+
+
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end
