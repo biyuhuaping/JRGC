@@ -112,6 +112,8 @@
     
     _lineHigh1.constant = 0.5;
     _lineHigh2.constant = 0.5;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadHomeData:) name:@"userisloginandcheckgrade" object:nil];
         
     if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
         [self.tableView setSeparatorInset: UIEdgeInsetsZero];
@@ -1161,6 +1163,17 @@
     if (isLoad) {
         [project changeViewWithConfigure:@"11"];
     }
+}
+
+#pragma mark - 刷新首页数据
+- (void)reloadHomeData:(NSNotification *)noty
+{
+    [self.tableView.header beginRefreshing];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

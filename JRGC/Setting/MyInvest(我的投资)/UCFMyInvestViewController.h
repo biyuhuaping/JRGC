@@ -10,6 +10,6 @@
 
 @interface UCFMyInvestViewController : UIViewController
 
-@property (nonatomic, copy) void(^setHeaderInfoBlock)(NSDictionary *);
+//@property (nonatomic, copy) void(^setHeaderInfoBlock)(NSDictionary *);
 
 @end

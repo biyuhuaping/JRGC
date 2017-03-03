@@ -37,11 +37,12 @@
     [[NSUserDefaults standardUserDefaults] setValue:mobile forKey:PHONENUM];
 }
 
-
 - (void)setUserData:(NSDictionary *)dict {
     [self reflectDataFromOtherObject:dict];
     [self storeUserCache:dict];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"userisloginandcheckgrade" object:@(YES)];
 }
+
 //程序启动的时候 获取用户对象数据
 - (void)getUserData
 {
@@ -54,6 +55,7 @@
     _realName = [[NSUserDefaults standardUserDefaults] valueForKey:REALNAME];
     _openStatus = [[[NSUserDefaults standardUserDefaults] valueForKey:OPENSTATUS] integerValue];
     self.companyAgent = [[[NSUserDefaults standardUserDefaults] valueForKey:COMPANYAGENT] boolValue];
+    self.userLevel = [[NSUserDefaults standardUserDefaults] valueForKey:USER_LEVEL];
 }
 //存储用户信息
 - (void)storeUserCache:(NSDictionary *)dict
@@ -79,6 +81,14 @@
         [Growing setCS3Value:dict[@"realName"] forKey:@"user_name"];
     }
 }
+
+- (void)setUserLevel:(NSString *)userLevel
+{
+    _userLevel = userLevel;
+    [[NSUserDefaults standardUserDefaults] setValue:userLevel forKey:USER_LEVEL];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 - (void)removeUserInfo
 {
     [[NSUserDefaults standardUserDefaults] setValue:nil forKey:UUID];
@@ -90,6 +100,7 @@
     [[NSUserDefaults standardUserDefaults] setValue:nil forKey:REALNAME];
     [[NSUserDefaults standardUserDefaults] setValue:nil forKey:OPENSTATUS];
     [[NSUserDefaults standardUserDefaults] setValue:nil forKey:COMPANYAGENT];
+    [[NSUserDefaults standardUserDefaults] setValue:nil forKey:USER_LEVEL];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     //  GrowingIO删除字段
@@ -106,6 +117,8 @@
     _realName = nil;
     _openStatus = -1;
     self.companyAgent = NO;
+    self.userLevel = nil;
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"userisloginandcheckgrade" object:@(NO)];
 }
 - (void)updateOpenStatus:(NSInteger)openStatus
 {

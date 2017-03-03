@@ -71,6 +71,7 @@
     [self.window makeKeyAndVisible];
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(forceUpdateVersion) name:CHECK_NEW_VERSION object:nil];
+   
     // 获取设备管理器实例
     FMDeviceManager_t *manager = [FMDeviceManager sharedManager];
     NSMutableDictionary *options = [NSMutableDictionary dictionary];
@@ -236,7 +237,11 @@
     [self checkJSPatchUpdate];
     [[UserInfoSingle sharedManager] getUserData];
     
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isShowHornor"];
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isShowHornor"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+#warning 测试代码 是否显示尊享 在投资成功后调用
+    [self checkIsShowHornor];
 
     return YES;
 }
@@ -678,10 +683,18 @@
     //[self showGCode];
 }
     
-//- (void)checkIsShowHornor
-//{
+- (void)checkIsShowHornor
+{
 //    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isShowHornor"];
 //    [[NSUserDefaults standardUserDefaults] synchronize];
+    NSString *userId = [UserInfoSingle sharedManager].userId;
+    if (nil==userId) {
+        return;
+    }
+    //请求开关状态
+    [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":userId} tag:kSXTagIsShowHornor owner:self signature:YES];
+}
+
 //    //请求开关状态
 //    [[NetworkModule sharedNetworkModule] newPostReq:nil tag:kSXTagIsShowHornor owner:self signature:NO];
 //}
@@ -797,15 +810,22 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:@"CheckInviteFriendsAlertView" object:nil];
         }
     }
-//    else if (tag.integerValue == kSXTagIsShowHornor) {
-//        NSString *Data = (NSString *)result;
-//        NSDictionary * dic = [Data objectFromJSONString];
-//#warning 测试项目列表显示项
-//        NSString *zxSwitch = [[dic objectForKey:@"data"] objectForKey:@"zxSwitch"];
-//        BOOL isShowHornor = (zxSwitch.intValue>0) ? YES:NO;
-//        [[NSUserDefaults standardUserDefaults] setBool:isShowHornor forKey:@"isShowHornor"];
-//        [[NSUserDefaults standardUserDefaults] synchronize];
-//    }
+    else if (tag.integerValue == kSXTagIsShowHornor) {
+        NSString *Data = (NSString *)result;
+        NSDictionary * dic = [Data objectFromJSONString];
+#warning 测试项目列表显示项
+        
+        NSString *zxSwitch = [[dic objectForKey:@"data"] objectForKey:@"zxSwitch"];
+        if (zxSwitch.integerValue > 0) {
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isShowHornor"];
+        }
+        else
+            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isShowHornor"];
+        
+        
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"userisloginandcheckgrade" object:@(YES)];
+    }
 }
 
 - (void)errorPost:(NSError*)err tag:(NSNumber*)tag
