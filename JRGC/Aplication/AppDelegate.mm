@@ -33,7 +33,7 @@
 #import "UITabBar+TabBarBadge.h"
 #import "UIImage+GIF.h"
 #import "Growing.h"
-
+#import "UCFLatestProjectViewController.h"
 
 #import <JSPatchPlatform/JSPatch.h>
 #import "MD5Util.h"
@@ -63,6 +63,7 @@
     [self setWebViewUserAgent];
     [UCFSession sharedManager].delegate = self;
     [self checkUpdate];
+    [self checkNovicePoliceOnOff];//监测2017新手奖励政策开关。
     
     // Override point for customization after application launch.
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -528,6 +529,7 @@
     }
     else {
         [self checkInitiaLogin];
+        [self checkFirstViewController];
     }
     [self checkIsGongChaView];
     [self checkIsLockView];
@@ -560,6 +562,17 @@
                 [tmpController checkSystemTouchIdisOpen];
             }
         }
+}
+//进入前台的时候，判断是否是首页页面,如果是 通知邀友弹框
+- (void)checkFirstViewController
+{
+    NSInteger selectIndex = self.tabBarController.selectedIndex;
+    if (selectIndex == 0) {
+        UINavigationController *nav = [self.tabBarController.viewControllers objectAtIndex:0];
+        if ([nav.visibleViewController isKindOfClass:[UCFLatestProjectViewController class]]) {
+         [[NSNotificationCenter defaultCenter] postNotificationName:@"CheckInviteFriendsAlertView" object:nil];
+        }
+    }
 }
 - (void)checkIsLockView
 {
@@ -672,7 +685,15 @@
 //    //请求开关状态
 //    [[NetworkModule sharedNetworkModule] newPostReq:nil tag:kSXTagIsShowHornor owner:self signature:NO];
 //}
-
+#pragma <#arguments#>
+- (void)checkNovicePoliceOnOff
+{
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:GETINFOFORONOFF];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [ToolSingleTon sharedManager].checkIsInviteFriendsAlert = NO;
+    //请求开关状态
+    [[NetworkModule sharedNetworkModule] newPostReq:@{} tag:kSXTagGetInfoForOnOff owner:self signature:NO];
+}
 
 - (void)checkUpdate
 {
@@ -762,6 +783,18 @@
         if ([dic[@"status"] intValue] == 1) {
             // 通知个人中心刷新，之所以加这个通知，是因为投标成功页查看我的奖励，跟个人中心都要刷新个人中心数据，保持统一（但会造成一次网络浪费，从投标成功页查看我的奖励列表，点击tab的时候也会请求一次这个接口）
             [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
+        }
+    }else if (tag.intValue == kSXTagGetInfoForOnOff) {
+        NSString *Data = (NSString *)result;
+        NSDictionary * dic = [Data objectFromJSONString];
+        if ([dic[@"ret"] intValue] == 1) {
+            
+            int  novicePoliceOnOff = [[[dic objectSafeDictionaryForKey:@"data"] objectSafeForKey:@"novicePoliceOnOff"] intValue];
+            BOOL policeOnOff = novicePoliceOnOff > 0 ? YES:NO;
+            [[NSUserDefaults standardUserDefaults] setBool:policeOnOff forKey:NOVICEPOLICEONOFF];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            [ToolSingleTon sharedManager].checkIsInviteFriendsAlert = policeOnOff;
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"CheckInviteFriendsAlertView" object:nil];
         }
     }
 //    else if (tag.integerValue == kSXTagIsShowHornor) {

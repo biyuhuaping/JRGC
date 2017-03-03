@@ -434,8 +434,7 @@
 -(void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-     [ToolSingleTon sharedManager].checkIsInviteFriendsAlert = YES;
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"CheckInviteFriendsAlertView" object:nil];
+     [ToolSingleTon sharedManager].checkIsInviteFriendsAlert = [[NSUserDefaults standardUserDefaults] boolForKey:NOVICEPOLICEONOFF];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"UPDATEINVESTDATA" object:nil];
 }
 // 绘制有touchID 的界面

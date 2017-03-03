@@ -156,10 +156,8 @@ return shared##className; \
 #define IS_RELOADE_REQUEST @"isReloadRequest"  //是否重新加载因验签失效造成失败的接口
 // 每天首次弹出邀请返利开关
 #define FirstAlertViewShowTime     @"InviteFriendsEveryday"
-
-
-// 每天首次弹出邀请返利开关
-#define FirstAlertViewShowTime     @"InviteFriendsEveryday"
+// 新手政策开关（0：关，1：开）
+#define NOVICEPOLICEONOFF     @"novicePoliceOnOff"
 
 
 #define BBSURL          @"https://bbs.9888.cn/appaction.php"

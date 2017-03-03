@@ -354,7 +354,7 @@
     [button addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];
     [headerView addSubview:button];
         
-    NZLabel *detailLab = [[NZLabel alloc] initWithFrame:CGRectMake(ScreenWidth /2 - 100, CGRectGetMidY(button.frame)-34-20, 200, 20)];
+    NZLabel *detailLab = [[NZLabel alloc] initWithFrame:CGRectMake(ScreenWidth /2 - 100, CGRectGetMidY(button.frame)-44-20, 200, 20)];
     detailLab.text = @"每邀请一位奖励50-2400元";
     detailLab.font = [UIFont systemFontOfSize:15];
     detailLab.textColor = UIColorWithRGB(0x333333);
@@ -362,7 +362,7 @@
     detailLab.textAlignment = NSTextAlignmentCenter;
     [headerView addSubview:detailLab];
         
-    NZLabel *titleLab = [[NZLabel alloc] initWithFrame:CGRectMake(ScreenWidth /2 - 75, CGRectGetMidY(detailLab.frame)-15 - 20, 150, 20)];
+    NZLabel *titleLab = [[NZLabel alloc] initWithFrame:CGRectMake(ScreenWidth /2 - 75, CGRectGetMidY(detailLab.frame)-20 - 20, 150, 20)];
     titleLab.text = @"2017邀友赚钱新政策";
     titleLab.font = [UIFont systemFontOfSize:15];
     titleLab.textColor = UIColorWithRGB(0x333333);

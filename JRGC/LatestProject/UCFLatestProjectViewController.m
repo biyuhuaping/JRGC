@@ -139,7 +139,7 @@
     [self.tableView.header beginRefreshing];
     _tableView.footer.hidden = YES;
     
-    [ToolSingleTon sharedManager].checkIsInviteFriendsAlert = NO;
+//    [ToolSingleTon sharedManager].checkIsInviteFriendsAlert = NO;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(choicePrdDetailCon2:) name:@"choiceCon" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(beginShowLoading) name:@"LatestProjectUpdate" object:nil];
@@ -309,7 +309,9 @@
     
     NSDate *lastFirstLoginTime = [[NSUserDefaults standardUserDefaults] objectForKey:FirstAlertViewShowTime];
     BOOL isBelongToToday = [NSDate isBelongToTodayWithDate:lastFirstLoginTime]; //是不是每天第一次弹
-    if(!isBelongToToday && [ToolSingleTon sharedManager].checkIsInviteFriendsAlert){
+    
+    BOOL policeOnOff = [ToolSingleTon sharedManager].checkIsInviteFriendsAlert ;
+    if(!isBelongToToday && policeOnOff){
         
         MjAlertView *alertView = [[MjAlertView alloc]initInviteFriendsToMakeMoneyDelegate:self];
         [alertView show];
