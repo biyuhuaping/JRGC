@@ -1192,6 +1192,10 @@ static NetworkModule *gInstance = NULL;
             parameter = [NEW_SERVER_IP stringByAppendingString:BATCHINVESTURL];
         }
             break;
+        case kSXTagGetInfoForOnOff: {
+            parameter = [NEW_SERVER_IP stringByAppendingString:GETINFOFORONOFF];
+        }
+            break;
     }
     //给原有参数字典添加公共参数
     if (!data) {

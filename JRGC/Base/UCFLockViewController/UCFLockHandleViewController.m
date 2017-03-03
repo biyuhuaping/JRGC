@@ -24,6 +24,7 @@
 #import "Touch3DSingle.h"
 #import "UCFOldUserGuideViewController.h"
 #import "BaseNavigationViewController.h"
+#import "ToolSingleTon.h"
 #define kTipColorNormal [UIColor blackColor]
 #define kTipColorError [UIColor redColor]
 @interface UCFLockHandleViewController ()
@@ -433,6 +434,7 @@
 -(void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+     [ToolSingleTon sharedManager].checkIsInviteFriendsAlert = [[NSUserDefaults standardUserDefaults] boolForKey:NOVICEPOLICEONOFF];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"UPDATEINVESTDATA" object:nil];
 }
 // 绘制有touchID 的界面
@@ -734,6 +736,8 @@
 #endif
     
     [super viewWillAppear:animated];
+    
+    [ToolSingleTon sharedManager].checkIsInviteFriendsAlert = NO;
     
     if ([UIApplication sharedApplication].statusBarStyle == UIStatusBarStyleDefault) {
         [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
