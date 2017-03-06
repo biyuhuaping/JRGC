@@ -62,6 +62,8 @@
     //修改webView标识
     [self setWebViewUserAgent];
     [UCFSession sharedManager].delegate = self;
+    [self checkJSPatchUpdate];
+
     [self checkUpdate];
     
     // Override point for customization after application launch.
@@ -232,7 +234,6 @@
      name:kJPFNetworkDidLoginNotification
      object:nil];
      */
-    [self checkJSPatchUpdate];
     [[UserInfoSingle sharedManager] getUserData];
     
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isShowHornor"];
