@@ -62,6 +62,8 @@
     //修改webView标识
     [self setWebViewUserAgent];
     [UCFSession sharedManager].delegate = self;
+    [self checkJSPatchUpdate];
+
     [self checkUpdate];
     [self checkNovicePoliceOnOff];//监测2017新手奖励政策开关。
     
@@ -234,7 +236,6 @@
      name:kJPFNetworkDidLoginNotification
      object:nil];
      */
-    [self checkJSPatchUpdate];
     [[UserInfoSingle sharedManager] getUserData];
     
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isShowHornor"];
