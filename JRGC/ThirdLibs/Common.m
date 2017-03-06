@@ -71,7 +71,7 @@
     [cookieProperties setObject:@"jg_nyscclnjsygjr" forKey:NSHTTPCookieName];
     [cookieProperties setObject:value forKey:NSHTTPCookieValue];//dic[@"jg_ckie"]
     [cookieProperties setObject:@".9888.cn" forKey:NSHTTPCookieDomain];
-//    [cookieProperties setObject:@".dougemall.com" forKey:NSHTTPCookieDomain];
+    [cookieProperties setObject:@"m.dougemall.com" forKey:NSHTTPCookieDomain];
     [cookieProperties setObject:@"/" forKey:NSHTTPCookiePath];
     [cookieProperties setObject:@"0" forKey:NSHTTPCookieVersion];
     [cookieProperties setObject:@"true" forKey:@"HttpOnly"];
