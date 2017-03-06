@@ -143,7 +143,7 @@
         strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%ld", (long)self.currentPage], @"page", @"20", @"pageSize", @"2", @"type", nil];
     }
     
-    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagTransferList owner:self signature:YES];
+    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagHornerTransferList owner:self signature:YES];
 }
 
 //开始请求
@@ -160,7 +160,7 @@
     
     NSMutableDictionary *dic = [result objectFromJSONString];
     
-    if (tag.intValue == kSXTagTransferList) {
+    if (tag.intValue == kSXTagHornerTransferList) {
         NSString *rstcode = dic[@"ret"];
         NSString *rsttext = dic[@"message"];
         if ([rstcode intValue] == 1) {

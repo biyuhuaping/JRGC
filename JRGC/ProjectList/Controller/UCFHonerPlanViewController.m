@@ -111,7 +111,7 @@
     }
     
     
-    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagProjectList owner:self signature:YES];
+    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagProjectHonerPlanList owner:self signature:YES];
 }
 
 //开始请求
@@ -128,7 +128,7 @@
     
     NSMutableDictionary *dic = [result objectFromJSONString];
     
-    if (tag.intValue == kSXTagProjectList) {
+    if (tag.intValue == kSXTagProjectHonerPlanList) {
         NSString *rstcode = dic[@"ret"];
         NSString *rsttext = dic[@"message"];
         if ([rstcode intValue] == 1) {

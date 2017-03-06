@@ -213,6 +213,7 @@
 #define BATCHINVESTSTATUS    @"api/invest/v2/getBatchInvestStatus.json"//一键投资结果页面
 #define GETBACHINVESTAWARD    @"api/invest/v2/getBatchInvestAward.json" //查看批量投资奖励
 #define GETINFOFORONOFF @"api/dataDicItem/v2/getInfoForOnOff.json"    // 新手政策开关（0：关，1：开）
+#define GETSHAREMESSAGE  @"api/dataDicItem/v2/getShareMess.json" //首页2017新手政策分享注册链接
 
 
 
@@ -415,6 +416,9 @@ enum kSXTag
     kSXTagColBatchInvestUrl,                //一键投标
     kSXTagMyInvestHeaderInfo,            //我的投资头部数据
     kSXTagGetInfoForOnOff,                 // 新手政策开关（0：关，1：开）
+    kSXTagProjectHonerPlanList,            //项目列表--尊享计划
+    kSXTagHornerTransferList,               //转让列表--尊享转让
+    kSXTagGetShareMessage,                  //首页2017新手政策分享注册链接
 };
 
 typedef enum kSXTag kSXTag;

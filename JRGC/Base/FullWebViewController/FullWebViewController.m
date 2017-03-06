@@ -19,6 +19,7 @@
 
 }
 @property (strong, nonatomic) UIImage  *shareImage;
+@property (strong, nonatomic) NSString  *shareImageUrl;
 @property (strong, nonatomic) NSString *shareTitle;
 @property (strong, nonatomic) NSString *shareContent;
 @property (strong, nonatomic) NSString *shareUrl;
@@ -112,6 +113,18 @@
         [self addRightButtonWithName:@"分享"];
         [self addRightButtonWithImage:[UIImage imageNamed:@"btn_share"]];
     }
+    
+    if(self.dicForShare != nil)
+    {
+        _shareUrl = self.dicForShare.url;
+        _shareImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:self.dicForShare.thumb]]];
+        _shareImageUrl = self.dicForShare.thumb;
+        _shareTitle = self.dicForShare.title;
+        _shareContent = self.dicForShare.desc;
+    }
+    if ([_sourceVc isEqualToString:@"UCFLatestProjectViewController"]) {//首页2017新手政策分享
+        [self getAppSetting];//获取邀请链接的详细信息
+    }
 }
 -(void)addheaderView{
     
@@ -146,18 +159,7 @@
 }
 -(void)clickRightBtn{
     
-    if(self.dicForShare == nil)
-    {
-        return;
-    }
     
-    //    _shareUrl = [NSString stringWithFormat:@"http://passport.9888.cn/pp-web2/register/phone.do?gcm=C463022"];
-    
-    _shareUrl = self.dicForShare.url;
-    
-    _shareImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:self.dicForShare.thumb]]];
-    _shareTitle = self.dicForShare.title;
-    _shareContent = self.dicForShare.desc;
     
     UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
     [UMSocialUIManager setPreDefinePlatforms:@[@(UMSocialPlatformType_WechatSession),@(UMSocialPlatformType_WechatTimeLine),@(UMSocialPlatformType_Sina),@(UMSocialPlatformType_QQ),@(UMSocialPlatformType_Qzone)]];
@@ -174,7 +176,7 @@
     UMSocialMessageObject *messageObject = object;
     if (platformType == UMSocialPlatformType_Sina) {
         UMShareImageObject *shareObject = [UMShareImageObject shareObjectWithTitle:_shareTitle descr:_shareContent thumImage:[UIImage imageNamed:@"AppIcon"]];
-        [shareObject setShareImage:self.dicForShare.thumb];
+        [shareObject setShareImage:_shareImageUrl];
         messageObject.shareObject = shareObject;
         messageObject.text = [NSString stringWithFormat:@"%@%@",_shareContent,_shareUrl];
     } else {
@@ -205,47 +207,58 @@
 //    }
 //}
 
-////获取分享各种信息
-//- (void)getAppSetting{
-//    NSString *strParameters = [NSString stringWithFormat:@"gcm=C463022"];//5644
-//    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetAppSetting owner:self];
-//}
+//获取分享各种信息
+- (void)getAppSetting{
+    NSString *uuid = [[NSUserDefaults standardUserDefaults] objectForKey:UUID];
+    NSDictionary *dataDict = @{};
+    if (uuid != nil ) {
+        dataDict = @{@"userId":uuid};
+    }
+    [[NetworkModule sharedNetworkModule]  newPostReq:dataDict tag:kSXTagGetShareMessage owner:self signature:YES];
+}
 //
-////开始请求
-//- (void)beginPost:(kSXTag)tag{
-//    //    if (tag == kSXTagGetAppSetting)
-//    //        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-//}
-//
-////请求成功及结果
-//- (void)endPost:(id)result tag:(NSNumber *)tag
-//{
-//    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-//    NSMutableDictionary *dic = [result objectFromJSONString];
-//    NSString *rstcode = dic[@"status"];
-//    NSString *rsttext = dic[@"statusdes"];
-//    if (tag.intValue == kSXTagGetAppSetting){
-//        NSArray *temArr = [NSArray arrayWithArray:dic[@"result"]];
-//        //1:红包URL   2：红包文字描述    3：工场码图片URL    4:工场码文字描述   5：红包标题  6：工场码标题
-//        for (NSDictionary *result in temArr) {
-//            if ([result[@"rank"] intValue] == 3) {//3：工场码图片URL
-//                _shareImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:result[@"desvalue"]]]];
-//            }else if ([result[@"rank"] intValue] == 4) {//4：工场码文字描述
-//                _shareContent = result[@"desvalue"];
-//            }else if ([result[@"rank"] intValue] == 6) {//6：工场码标题
-//                _shareTitle = result[@"desvalue"];
-//            }
-//        }
-//    }
-//}
-////请求失败
-//- (void)errorPost:(NSError*)err tag:(NSNumber*)tag
-//{
-//    //    if (tag.intValue == kSXTagGetAppSetting) {
-//    //        [MBProgressHUD displayHudError:err.userInfo[@"NSLocalizedDescription"]];
-//    //    }
-//    //    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-//}
+//开始请求
+- (void)beginPost:(kSXTag)tag{
+    //    if (tag == kSXTagGetAppSetting)
+    //        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+}
+
+//请求成功及结果
+- (void)endPost:(id)result tag:(NSNumber *)tag
+{
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    NSMutableDictionary *dic = [result objectFromJSONString];
+    
+    
+    /*
+     data		object
+     gcmDes	工场码描述	string
+     gcmImg	工场码图片	string
+     gcmTitle	工场码标题	string
+     inviteUrl	邀请链接	string
+     */
+    BOOL rstcode = [dic[@"ret"] boolValue];
+    if (tag.intValue == kSXTagGetShareMessage){
+        if (rstcode) {
+            NSDictionary *dataDict = [dic objectSafeDictionaryForKey:@"data"];
+            //1:红包URL   2：红包文字描述    3：工场码图片URL    4:工场码文字描述   5：红包标题  6：工场码标题
+            
+            _shareImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[dataDict objectSafeForKey:@"gcmImg"]]]];//工场码图片URL
+            _shareImageUrl = [dataDict objectSafeForKey:@"gcmImg"];//工场码图片URL
+            _shareContent = [dataDict objectSafeForKey:@"gcmDes"];///工场码文字描述
+            _shareTitle = [dataDict objectSafeForKey:@"gcmTitle"];//工场码标题
+            _shareUrl = [dataDict objectSafeForKey:@"inviteUrl"];
+        }
+    }
+}
+//请求失败
+- (void)errorPost:(NSError*)err tag:(NSNumber*)tag
+{
+    if (tag.intValue == kSXTagGetAppSetting) {
+        [MBProgressHUD displayHudError:err.userInfo[@"NSLocalizedDescription"]];
+    }
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
