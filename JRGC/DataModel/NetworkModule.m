@@ -1122,7 +1122,13 @@ static NetworkModule *gInstance = NULL;
         case kSXTagProjectList:
             parameter = [NEW_SERVER_IP stringByAppendingString:PROJECTLIST];
             break;
+        case kSXTagProjectHonerPlanList:
+            parameter = [NEW_SERVER_IP stringByAppendingString:PROJECTLIST];
+            break;
         case kSXTagTransferList:
+            parameter = [NEW_SERVER_IP stringByAppendingString:TRANSFERLIST];
+            break;
+        case kSXTagHornerTransferList:
             parameter = [NEW_SERVER_IP stringByAppendingString:TRANSFERLIST];
             break;
         case kSXtagInviteRebate:
@@ -1194,6 +1200,10 @@ static NetworkModule *gInstance = NULL;
             break;
         case kSXTagGetInfoForOnOff: {
             parameter = [NEW_SERVER_IP stringByAppendingString:GETINFOFORONOFF];
+        }
+            break;
+        case kSXTagGetShareMessage: {
+            parameter = [NEW_SERVER_IP stringByAppendingString:GETSHAREMESSAGE];
         }
             break;
     }

@@ -327,7 +327,7 @@
         FullWebViewController *webView = [[FullWebViewController alloc] initWithWebUrl:banInfo.url title:banInfo.title];
 //        webView.baseTitleType = @"lunbotuhtml";
         webView.flageHaveShareBut = @"分享";
-        webView.dicForShare = banInfo;
+        webView.sourceVc = @"UCFLatestProjectViewController";
         [self.navigationController pushViewController:webView animated:YES];
         
     }
