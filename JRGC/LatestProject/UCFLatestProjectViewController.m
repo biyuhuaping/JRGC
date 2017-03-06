@@ -40,7 +40,9 @@
 #import "RiskAssessmentViewController.h"    //风险评估
 
 #import "UCFCollectionDetailViewController.h" //集合详情
-@interface UCFLatestProjectViewController ()<InvestmentCellDelegate,FourOFourViewDelegate,CycleViewDelegate,PromptViewDelegate,homeButtonPressedCellDelegate, UITableViewDataSource, UITableViewDelegate, UCFCollectionBidCellDelegate>
+#import "MjAlertView.h"
+#import "NSDate+IsBelongToToday.h"
+@interface UCFLatestProjectViewController ()<InvestmentCellDelegate,FourOFourViewDelegate,CycleViewDelegate,PromptViewDelegate,homeButtonPressedCellDelegate, UITableViewDataSource, UITableViewDelegate, UCFCollectionBidCellDelegate,MjAlertViewDelegate>
 {
     UIView *_clickView;
     BOOL _refreshHead;
@@ -110,6 +112,8 @@
     
     _lineHigh1.constant = 0.5;
     _lineHigh2.constant = 0.5;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadHomeData:) name:@"userisloginandcheckgrade" object:nil];
         
     if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
         [self.tableView setSeparatorInset: UIEdgeInsetsZero];
@@ -137,8 +141,11 @@
     [self.tableView.header beginRefreshing];
     _tableView.footer.hidden = YES;
     
+//    [ToolSingleTon sharedManager].checkIsInviteFriendsAlert = NO;
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(choicePrdDetailCon2:) name:@"choiceCon" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(beginShowLoading) name:@"LatestProjectUpdate" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(alertViewInviteFriendsVC) name:@"CheckInviteFriendsAlertView" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showGoodCommentAlert:) name:CHECK_GOOD_COMMENT object:nil];
 
     _timer2 = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(updateLabH) userInfo:nil repeats:YES];
@@ -295,6 +302,35 @@
         }
         return imageName;
     } isFirstPage:YES];
+    [self alertViewInviteFriendsVC];
+}
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+}
+-(void)alertViewInviteFriendsVC{
+    
+    NSDate *lastFirstLoginTime = [[NSUserDefaults standardUserDefaults] objectForKey:FirstAlertViewShowTime];
+    BOOL isBelongToToday = [NSDate isBelongToTodayWithDate:lastFirstLoginTime]; //是不是每天第一次弹
+    
+    BOOL policeOnOff = [ToolSingleTon sharedManager].checkIsInviteFriendsAlert ;
+    if(!isBelongToToday && policeOnOff){
+        
+        MjAlertView *alertView = [[MjAlertView alloc]initInviteFriendsToMakeMoneyDelegate:self];
+        [alertView show];
+    }
+}
+#pragma 去邀请奖励页面
+- (void)mjalertView:(MjAlertView *)alertview didClickedButton:(UIButton *)clickedButton andClickedIndex:(NSInteger)index{
+    if (index == 1) { //点击了立即查看详情
+        NSDictionary *dataDict = _actionArr[2];
+        UCFCycleModel *banInfo = [UCFCycleModel getCycleModelByDataDict:dataDict];
+        FullWebViewController *webView = [[FullWebViewController alloc] initWithWebUrl:banInfo.url title:banInfo.title];
+//        webView.baseTitleType = @"lunbotuhtml";
+        webView.flageHaveShareBut = @"分享";
+        webView.dicForShare = banInfo;
+        [self.navigationController pushViewController:webView animated:YES];
+        
+    }
 }
 
 #pragma mark - bander
@@ -407,7 +443,9 @@
             }
             [self.bannerView  setContentImages:_banderArr];
             
-            _actionArr  = [NSMutableArray arrayWithArray:modelDic[@"icon"]];
+            self.actionArr  = [NSMutableArray arrayWithArray:modelDic[@"icon"]];
+            
+            
             [self setActionStyle];
         });
     });
@@ -1125,6 +1163,17 @@
     if (isLoad) {
         [project changeViewWithConfigure:@"11"];
     }
+}
+
+#pragma mark - 刷新首页数据
+- (void)reloadHomeData:(NSNotification *)noty
+{
+    [self.tableView.header beginRefreshing];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

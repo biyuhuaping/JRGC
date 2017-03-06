@@ -56,6 +56,7 @@
     self.p2pTransfer.view.frame = CGRectMake(0, 44, ScreenWidth, ScreenHeight - 64-49 -44);
     [self addChildViewController:self.p2pTransfer];
     
+    self.isShowHornor = NO;
     if (self.isShowHornor) {
         self.currentViewController = self.p2pTransfer;
         self.selectedHight.constant = 44;

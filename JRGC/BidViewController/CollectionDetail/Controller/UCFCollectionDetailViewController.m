@@ -452,11 +452,12 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
     [sortAlertView show];
 }
 -(void)mjalertView:(MjAlertView *)alertview didClickedButton:(UIButton *)clickedButton andClickedIndex:(NSInteger)index{
+    DLog(@"_lastSelectSortTag --->>>%d,_currentSelectSortTag--->>>>%d,index--->>>%d",_lastSelectSortTag,_currentSelectSortTag,index);
     if (clickedButton.tag != 0) {
         if(_lastSelectSortTag != index){
             _investmentCurrentPage = 1;
-            _lastSelectSortTag = _currentSelectSortTag;
             _currentSelectSortTag = index;
+             _lastSelectSortTag = _currentSelectSortTag;
             [self.listTableView.header beginRefreshing];
         }else{
             [self.listTableView reloadData];

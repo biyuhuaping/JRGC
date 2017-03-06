@@ -329,6 +329,69 @@
         _currentSelectSortBtnTag = sortButton.tag;
     }
 }
+#pragma  首页邀请新政策弹框
+-(instancetype)initInviteFriendsToMakeMoneyDelegate:(id)delegate{
+    self = [self init];
+    if (self) {
+    
+    [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:FirstAlertViewShowTime];
+    [[NSUserDefaults standardUserDefaults]  synchronize];
+    UIImageView *headerView  = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 373)];
+    headerView.userInteractionEnabled = YES;
+    headerView.image = [UIImage imageNamed:@"new_friend_bg.png"];
+    
+    [self.showView addSubview:headerView];
+
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.frame = CGRectMake((ScreenWidth - 194)/2.0, CGRectGetMaxY(headerView.frame)-15-37, 194, 37);
+    button.layer.cornerRadius = 17.5;
+    button.userInteractionEnabled = YES;
+    button.titleLabel.font = [UIFont systemFontOfSize:15];
+    button.backgroundColor = UIColorWithRGB(0xfd4d4c);
+    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [button setTitle:@"立即查看详情" forState:UIControlStateNormal];
+    button.tag = CancelButtonTag + 1;
+    [button addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [headerView addSubview:button];
+        
+    NZLabel *detailLab = [[NZLabel alloc] initWithFrame:CGRectMake(ScreenWidth /2 - 100, CGRectGetMidY(button.frame)-44-20, 200, 20)];
+    detailLab.text = @"每邀请一位奖励50-2400元";
+    detailLab.font = [UIFont systemFontOfSize:15];
+    detailLab.textColor = UIColorWithRGB(0x333333);
+    [detailLab setFontColor:UIColorWithRGB(0xfd4d4c) string:@"50-2400元"];
+    detailLab.textAlignment = NSTextAlignmentCenter;
+    [headerView addSubview:detailLab];
+        
+    NZLabel *titleLab = [[NZLabel alloc] initWithFrame:CGRectMake(ScreenWidth /2 - 75, CGRectGetMidY(detailLab.frame)-20 - 20, 150, 20)];
+    titleLab.text = @"2017邀友赚钱新政策";
+    titleLab.font = [UIFont systemFontOfSize:15];
+    titleLab.textColor = UIColorWithRGB(0x333333);
+    titleLab.textAlignment = NSTextAlignmentCenter;
+    [headerView addSubview:titleLab];
+
+    
+    UIButton *cancelbutton = [UIButton buttonWithType:UIButtonTypeCustom];
+    cancelbutton.frame = CGRectMake(ScreenWidth - 34 - 19, CGRectGetMaxY(headerView.frame)-228-34,34, 34);
+    [cancelbutton setBackgroundImage:[UIImage imageNamed:@"new_friend_close"] forState:UIControlStateNormal];
+    cancelbutton.tag = CancelButtonTag;
+    [cancelbutton addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [headerView addSubview:cancelbutton];
+        
+        
+    [self.showView  setFrame:CGRectMake(0, 0, ScreenWidth, 373)];
+    self.showView.center = CGPointMake(ScreenWidth /2, ScreenHeight /2 - 72);
+//    self.showView.layer.cornerRadius = 5;
+//    self.showView.layer.masksToBounds = YES;
+    self.showView.backgroundColor = [UIColor clearColor];
+//    self.alertviewType = MjAlertViewTypeCustom;
+    self.alertviewType = MjAlertViewTypeInviteFriends;
+    self.delegate =  delegate;
+    // 默认显示动画类型
+    self.alertAnimateType = MjAlertViewAnimateTypeNone;
+       
+    }
+    return self;
+}
 - (void)webViewDidFinishLoad:(UIWebView*)webView{
     //字体大小
     [_webView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('body')[0].style.webkitTextSizeAdjust= '275%'"];
@@ -493,7 +556,12 @@
             }
             break;
     }
-    self.showView.center = self.center;
+    if(self.alertviewType == MjAlertViewTypeInviteFriends){
+        self.showView.center = CGPointMake(ScreenWidth/2, 373/2);
+    }else{
+        self.showView.center = self.center;
+    }
+    
 }
 
 #pragma mark - 设置显示类型

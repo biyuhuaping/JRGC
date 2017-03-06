@@ -188,6 +188,7 @@
 #define REDBAGRAIN          @"api/homePage/v2/getRedBagRainInfo.json"
 #define PROJECTLISTBATCHBID @"api/prdClaims/v2/colPrdclaimsList.json"  //项目列表中的批量列表
 #define MYINVESTBATCHBID    @"api/myInvest/v2/myBatchInvest.json"     //我的投资的批量投资列表
+#define MYINVESTHEADERINFO  @"newprdOrder/incomeInterest"             //我的投资头部信息
 
 #define PROJECTLIST         @"api/prdClaims/v2/more.json"     //项目标列表
 #define TRANSFERLIST        @"api/prdTransfer/v2/getTranPageList.json"     //转让列表
@@ -211,6 +212,7 @@
 
 #define BATCHINVESTSTATUS    @"api/invest/v2/getBatchInvestStatus.json"//一键投资结果页面
 #define GETBACHINVESTAWARD    @"api/invest/v2/getBatchInvestAward.json" //查看批量投资奖励
+#define GETINFOFORONOFF @"api/dataDicItem/v2/getInfoForOnOff.json"    // 新手政策开关（0：关，1：开）
 
 
 
@@ -411,6 +413,8 @@ enum kSXTag
     kSXTagMyBatchInvestDetail,          //我的投资-集合标明细
     kSXTagColIntoDealBatch,              //进入一键投资页面
     kSXTagColBatchInvestUrl,                //一键投标
+    kSXTagMyInvestHeaderInfo,            //我的投资头部数据
+    kSXTagGetInfoForOnOff,                 // 新手政策开关（0：关，1：开）
 };
 
 typedef enum kSXTag kSXTag;

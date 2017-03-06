@@ -92,17 +92,13 @@
             break;
     }
     
-    __weak typeof(self) weakSelf = self;
-    _myInvest.setHeaderInfoBlock = ^(NSDictionary *data){
-        id interests = data[@"interests"];
-        weakSelf.interestsLab.text = [NSString stringWithFormat:@"¥%@",[UCFToolsMehod AddComma:interests]];//累计收益
-
-        id principal = data[@"noPrincipal"];
-        weakSelf.noPrincipalLab.text = [NSString stringWithFormat:@"¥%@",[UCFToolsMehod AddComma:principal]];//待收本金
-
-        id noInterests = data[@"noInterests"];
-        weakSelf.noInterestsLab.text = [NSString stringWithFormat:@"¥%@",[UCFToolsMehod AddComma:noInterests]];//待收利息
-    };
+    [self getHeaderInfoRequest];
+    
+//    __weak typeof(self) weakSelf = self;
+//    _setHeaderInfoBlock = ^(NSDictionary *data){
+//        
+//        
+//    };
 }
 
 - (void)viewWillLayoutSubviews
@@ -153,4 +149,39 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+- (void)getHeaderInfoRequest
+{
+    NSString *strParameters = [NSString stringWithFormat:@"userId=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
+    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagMyInvestHeaderInfo owner:self];
+}
+
+- (void)beginPost:(kSXTag)tag
+{
+    
+}
+
+- (void)endPost:(id)result tag:(NSNumber*)tag
+{
+    if (tag.integerValue == kSXTagMyInvestHeaderInfo) {
+        NSString *Data = (NSString *)result;
+        NSDictionary * dic = [Data objectFromJSONString];
+        if([dic[@"status"] intValue] == 1)
+        {
+            NSDictionary *data = [dic objectSafeDictionaryForKey:@"data"];
+            id interests = data[@"interests"];
+            self.interestsLab.text = [NSString stringWithFormat:@"¥%@",[UCFToolsMehod AddComma:interests]];//累计收益
+            
+            id principal = data[@"noPrincipal"];
+            self.noPrincipalLab.text = [NSString stringWithFormat:@"¥%@",[UCFToolsMehod AddComma:principal]];//待收本金
+            
+            id noInterests = data[@"noInterests"];
+            self.noInterestsLab.text = [NSString stringWithFormat:@"¥%@",[UCFToolsMehod AddComma:noInterests]];//待收利息
+        }
+    }
+}
+
+- (void)errorPost:(NSError*)err tag:(NSNumber*)tag
+{
+    [MBProgressHUD displayHudError:@"网络连接异常"];
+}
 @end

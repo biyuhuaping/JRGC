@@ -200,6 +200,7 @@
             dic = dic[@"data"][@"userInfo"];
             
             [[UserInfoSingle sharedManager] setUserData:dic];
+            [[UserInfoSingle sharedManager] setUserLevel:dic[@"data"][@"userLevel"]];
             [Common setHTMLCookies:dic[@"jg_ckie"]];//html免登录的cookies
 
             [self saveInfoDic:dic];

@@ -483,6 +483,9 @@ static NetworkModule *gInstance = NULL;
         case kSXTagGetBatchContractMsg:
             parameter = [SERVER_IP stringByAppendingString:GetBatchContractMsg];
             break;
+        case kSXTagMyInvestHeaderInfo:
+            parameter = [SERVER_IP stringByAppendingString:MYINVESTHEADERINFO];
+            break;
 
     }
 
@@ -1187,6 +1190,10 @@ static NetworkModule *gInstance = NULL;
             break;
         case kSXTagColBatchInvestUrl: {
             parameter = [NEW_SERVER_IP stringByAppendingString:BATCHINVESTURL];
+        }
+            break;
+        case kSXTagGetInfoForOnOff: {
+            parameter = [NEW_SERVER_IP stringByAppendingString:GETINFOFORONOFF];
         }
             break;
     }

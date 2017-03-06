@@ -10,6 +10,8 @@
 
 @interface MyViewController : UCFBaseViewController
 //@property (strong, nonatomic) UISegmentedControl *segmentedCtrl;
+//@property (nonatomic, copy) void(^setHeaderInfoBlock)(NSDictionary *);
+
 @property(nonatomic,assign) NSUInteger selectedSegmentIndex;
 - (void)segmentedValueChanged:(UISegmentedControl *)sender;
 @end
