@@ -128,6 +128,7 @@
         self.segmentedCtrl.selectedSegmentIndex = 0;
         [self transitionFromViewController:self.currentViewController toViewController:self.p2p duration:0.25 options:UIViewAnimationOptionCurveEaseInOut animations:nil completion:^(BOOL finished) {
             self.currentViewController = self.p2p;
+            self.p2p.viewType = self.viewType;
             if ([self.p2p isViewLoaded]) {
                 [self.p2p setCurrentViewForBatchBid];
             }
@@ -139,9 +140,9 @@
             self.currentViewController = self.hornerPlan;
         }];
     }
-    else if ([self.strStyle isEqualToString:@"11"] && [self.viewType isEqualToString:@"2"])
+    else if ([self.strStyle isEqualToString:@"11"])
     {
-        self.p2p.viewType = @"2";
+        self.p2p.viewType = self.viewType;
         [self.p2p setCurrentViewForBatchBid];
     }
 }
