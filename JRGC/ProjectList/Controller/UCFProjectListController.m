@@ -224,13 +224,14 @@
         self.isShowHornor = NO;
         segmentCtrl = [[UISegmentedControl alloc]initWithItems:@[@"P2P专区",@"转让专区"]];
     }
+    NSInteger preSelectedIndex = self.segmentedCtrl.selectedSegmentIndex;
     self.segmentedCtrl = segmentCtrl;
-    self.segmentedCtrl.selectedSegmentIndex = 0;
+    self.segmentedCtrl.selectedSegmentIndex = preSelectedIndex;
     segmentCtrl.frame = CGRectMake(0, 0, ScreenWidth*5/8, 30);
     [segmentCtrl setTintColor:UIColorWithRGB(0x5b6993)];
-    //    [segmentContrl setTitleTextAttributes:@{[UIFont systemFontOfSize:15]:NSFontAttributeName} forState:UIControlStateNormal];
     [segmentCtrl addTarget:self action:@selector(segmentedValueChanged:) forControlEvents:UIControlEventValueChanged];
     self.navigationItem.titleView = segmentCtrl;
+    
 }
 
 

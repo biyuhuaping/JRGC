@@ -55,7 +55,7 @@
     _realName = [[NSUserDefaults standardUserDefaults] valueForKey:REALNAME];
     _openStatus = [[[NSUserDefaults standardUserDefaults] valueForKey:OPENSTATUS] integerValue];
     self.companyAgent = [[[NSUserDefaults standardUserDefaults] valueForKey:COMPANYAGENT] boolValue];
-    self.userLevel = [[NSUserDefaults standardUserDefaults] valueForKey:USER_LEVEL];
+//    self.userLevel = [[NSUserDefaults standardUserDefaults] valueForKey:USER_LEVEL];
 }
 //存储用户信息
 - (void)storeUserCache:(NSDictionary *)dict
@@ -82,12 +82,12 @@
     }
 }
 
-- (void)setUserLevel:(NSString *)userLevel
-{
-    _userLevel = userLevel;
-    [[NSUserDefaults standardUserDefaults] setValue:userLevel forKey:USER_LEVEL];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-}
+//- (void)setUserLevel:(NSString *)userLevel
+//{
+//    _userLevel = userLevel;
+//    [[NSUserDefaults standardUserDefaults] setValue:userLevel forKey:USER_LEVEL];
+//    [[NSUserDefaults standardUserDefaults] synchronize];
+//}
 
 - (void)removeUserInfo
 {
@@ -117,7 +117,7 @@
     _realName = nil;
     _openStatus = -1;
     self.companyAgent = NO;
-    self.userLevel = nil;
+//    self.userLevel = nil;
     [[NSNotificationCenter defaultCenter] postNotificationName:@"userisloginandcheckgrade" object:@(NO)];
 }
 - (void)updateOpenStatus:(NSInteger)openStatus
