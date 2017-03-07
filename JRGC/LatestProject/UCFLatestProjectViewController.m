@@ -673,7 +673,7 @@
         InvestmentItemInfo *info = _investmentArr[indexPath.row];
         if(![info.homeType isEqualToString:@""])
         {
-            return 50;
+            return 31;
         }else{
             return 100;
         }

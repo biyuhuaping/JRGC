@@ -54,7 +54,7 @@
     seg.selectionIndicatorHeight = 2.0f;
     seg.backgroundColor = [UIColor clearColor];
     seg.font = [UIFont systemFontOfSize:14];
-//    seg.textColor = UIColorWithRGB(0x3c3c3c);
+    seg.textColor = UIColorWithRGB(0x3c3c3c);
 //    seg.selectedTextColor = UIColorWithRGB(0xf03b43);
     seg.selectedTextColor = UIColorWithRGB(0xfd4d4c);
 //    seg.selectionIndicatorColor = UIColorWithRGB(0xf03b43);

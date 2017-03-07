@@ -57,6 +57,7 @@
     _collectionBidModel = collectionBidModel;
     _collectionBidName.text = collectionBidModel.colName;
     _preYearRateLabel.text = [NSString stringWithFormat:@"%@%%", collectionBidModel.colRate];
+    [_preYearRateLabel setFont:[UIFont systemFontOfSize:24] string:@"%"];
     _returnModeLabel.text = collectionBidModel.colRepayModeTxt;
     _periodLabel.text = collectionBidModel.colPeriodTxt;
     if (collectionBidModel.full) {
