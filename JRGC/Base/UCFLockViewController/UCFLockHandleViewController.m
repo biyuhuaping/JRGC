@@ -434,8 +434,8 @@
 -(void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-     [ToolSingleTon sharedManager].checkIsInviteFriendsAlert = [[NSUserDefaults standardUserDefaults] boolForKey:NOVICEPOLICEONOFF];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"UPDATEINVESTDATA" object:nil];
+//     [ToolSingleTon sharedManager].checkIsInviteFriendsAlert = [[NSUserDefaults standardUserDefaults] boolForKey:NOVICEPOLICEONOFF];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:@"UPDATEINVESTDATA" object:nil];
 }
 // 绘制有touchID 的界面
 - (void)initTouchIDLockView
@@ -737,7 +737,7 @@
     
     [super viewWillAppear:animated];
     
-    [ToolSingleTon sharedManager].checkIsInviteFriendsAlert = NO;
+//    [ToolSingleTon sharedManager].checkIsInviteFriendsAlert = NO;
     
     if ([UIApplication sharedApplication].statusBarStyle == UIStatusBarStyleDefault) {
         [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];

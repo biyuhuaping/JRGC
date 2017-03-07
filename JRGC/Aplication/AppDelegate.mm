@@ -535,10 +535,10 @@
     }
     else {
         [self checkInitiaLogin];
-        [self checkFirstViewController];
     }
     [self checkIsGongChaView];
     [self checkIsLockView];
+    [self checkFirstViewController];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
@@ -573,7 +573,9 @@
 - (void)checkFirstViewController
 {
     NSInteger selectIndex = self.tabBarController.selectedIndex;
-    if (selectIndex == 0) {
+    BOOL isOpenTouchIdLock = [[NSUserDefaults standardUserDefaults] boolForKey:@"isUserShowTouchIdLockView"];
+    BOOL isOpenLockView = [[NSUserDefaults standardUserDefaults] boolForKey:@"useLockView"];
+    if (selectIndex == 0 && !isOpenTouchIdLock && !isOpenLockView) {
         UINavigationController *nav = [self.tabBarController.viewControllers objectAtIndex:0];
         if ([nav.visibleViewController isKindOfClass:[UCFLatestProjectViewController class]]) {
          [[NSNotificationCenter defaultCenter] postNotificationName:@"CheckInviteFriendsAlertView" object:nil];
@@ -699,10 +701,10 @@
 //    //请求开关状态
 //    [[NetworkModule sharedNetworkModule] newPostReq:nil tag:kSXTagIsShowHornor owner:self signature:NO];
 //}
-#pragma <#arguments#>
+#pragma 新手政策弹框
 - (void)checkNovicePoliceOnOff
 {
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:GETINFOFORONOFF];
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:NOVICEPOLICEONOFF];
     [[NSUserDefaults standardUserDefaults] synchronize];
     [ToolSingleTon sharedManager].checkIsInviteFriendsAlert = NO;
     //请求开关状态
