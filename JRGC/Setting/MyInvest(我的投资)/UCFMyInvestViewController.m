@@ -268,6 +268,8 @@
     int batchInvestStatus = [[tempArr[indexPath.row] objectSafeForKey:@"batchInvestStatus"] intValue];
     if (batchInvestStatus) {
         cell.prdName.text = [NSString stringWithFormat:@"%@(批量投资)", tempArr[indexPath.row][@"prdName"]];//标的名称
+        [cell.prdName setFont:[UIFont systemFontOfSize:11] string:@"(批量投资)"];
+        [cell.prdName setFontColor:UIColorWithRGB(0x999999) string:@"(批量投资)"];
     }
     else {
         cell.prdName.text = tempArr[indexPath.row][@"prdName"];//标的名称

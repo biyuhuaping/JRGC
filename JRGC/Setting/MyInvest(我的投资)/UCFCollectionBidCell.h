@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+#import "NZLabel.h"
 @class UCFCollectionBidCell, UCFCollectionBidModel;
 @protocol UCFCollectionBidCellDelegate <NSObject>
 
@@ -19,7 +20,7 @@
 @interface UCFCollectionBidCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *collectionBidName;
 @property (weak, nonatomic) IBOutlet UIView *progressValueView;
-@property (weak, nonatomic) IBOutlet UILabel *preYearRateLabel;
+@property (weak, nonatomic) IBOutlet NZLabel *preYearRateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *returnModeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *moreValueLabel;
 @property (nonatomic, weak) id<UCFCollectionBidCellDelegate> delegate;
