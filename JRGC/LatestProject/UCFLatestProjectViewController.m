@@ -322,15 +322,16 @@
 #pragma 去邀请奖励页面
 - (void)mjalertView:(MjAlertView *)alertview didClickedButton:(UIButton *)clickedButton andClickedIndex:(NSInteger)index{
     if (index == 1) { //点击了立即查看详情
-        NSDictionary *dataDict = _actionArr[2];
-        UCFCycleModel *banInfo = [UCFCycleModel getCycleModelByDataDict:dataDict];
-        FullWebViewController *webView = [[FullWebViewController alloc] initWithWebUrl:banInfo.url title:banInfo.title];
-//        webView.baseTitleType = @"lunbotuhtml";
-        webView.flageHaveShareBut = @"分享";
-        webView.sourceVc = @"UCFLatestProjectViewController";
-        [self.navigationController pushViewController:webView animated:YES];
-        
+        [self gotoInviteFriendsWebVC];
     }
+}
+-(void)gotoInviteFriendsWebVC{
+     NSDictionary *dataDict = _actionArr[2];
+    UCFCycleModel *banInfo = [UCFCycleModel getCycleModelByDataDict:dataDict];
+    FullWebViewController *webView = [[FullWebViewController alloc] initWithWebUrl:banInfo.url title:banInfo.title];
+    webView.flageHaveShareBut = @"分享";
+    webView.sourceVc = @"UCFLatestProjectViewController";
+    [self.navigationController pushViewController:webView animated:YES];
 }
 
 #pragma mark - bander
@@ -557,11 +558,15 @@
         if ([view isKindOfClass:[UILabel class]]) {
             UILabel *lab = (UILabel *)view;
             for (int i = 0; i < _actionArr.count; i++) {
-                if ([lab.text isEqualToString:_actionArr[i][@"title"]]) {
-                    UCFWebViewJavascriptBridgeLevel *subVC = [[UCFWebViewJavascriptBridgeLevel alloc]initWithNibName:@"UCFWebViewJavascriptBridgeLevel" bundle:nil];
-                    subVC.navTitle = _actionArr[i][@"title"];
-                    subVC.url      = _actionArr[i][@"url"];//请求地址;
-                    [self.navigationController pushViewController:subVC animated:YES];
+                if (i == 2) {
+                    [self gotoInviteFriendsWebVC];
+                }else{
+                    if ([lab.text isEqualToString:_actionArr[i][@"title"]]) {
+                        UCFWebViewJavascriptBridgeLevel *subVC = [[UCFWebViewJavascriptBridgeLevel alloc]initWithNibName:@"UCFWebViewJavascriptBridgeLevel" bundle:nil];
+                        subVC.navTitle = _actionArr[i][@"title"];
+                        subVC.url      = _actionArr[i][@"url"];//请求地址;
+                        [self.navigationController pushViewController:subVC animated:YES];
+                    }
                 }
             }
         }
