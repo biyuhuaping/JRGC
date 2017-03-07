@@ -89,7 +89,7 @@
     rightbutton.backgroundColor = [UIColor clearColor];
     [rightbutton setTitle:rightButtonName forState:UIControlStateNormal];
     rightbutton.titleLabel.font = [UIFont systemFontOfSize:13.0];
-    [rightbutton addTarget:self action:@selector(getToBack) forControlEvents:UIControlEventTouchUpInside];
+    [rightbutton addTarget:self action:@selector(getToBack:) forControlEvents:UIControlEventTouchUpInside];
     [rightbutton setTitleColor:WORDCOLORGRAY forState:UIControlStateNormal];
     //rightbutton.titleLabel.textColor = TITLECOLORGRAY;
     //[rightbutton setTitleColor:[UIColor colorWithWhite:1 alpha:0.7] forState:UIControlStateHighlighted];
@@ -103,7 +103,8 @@
     self.navigationItem.rightBarButtonItem = rightItem;
 }
 
-- (void)getToBack {
+- (void)getToBack:(UIButton *)button {
+    button.userInteractionEnabled = NO;
     [self.upgradeVC.view endEditing:YES];
     [self.passWordVC.view endEditing:YES];
     
@@ -121,7 +122,9 @@
     }
 
     BlockUIAlertView *alert = [[BlockUIAlertView alloc]initWithTitle:@"提示" message:messege cancelButtonTitle:@"取消" clickButton:^(NSInteger index) {
+        button.userInteractionEnabled = YES;
         if (index == 1) {
+            
             if (self.isPresentViewController) {
                 //视图是弹出来的，那么要
                 [self.navigationController dismissViewControllerAnimated:YES completion:nil];
@@ -131,7 +134,7 @@
             }
         }
     } otherButtonTitles:@"确定"];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)( 0.1* NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [alert show];
     });
 }
