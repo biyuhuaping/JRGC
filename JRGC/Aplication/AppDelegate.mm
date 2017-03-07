@@ -241,8 +241,8 @@
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isShowHornor"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
-#warning 测试代码 是否显示尊享 在投资成功后调用
-    [self checkIsShowHornor];
+//#warning 测试代码 是否显示尊享 在投资成功后调用
+    
 
     return YES;
 }
@@ -717,6 +717,7 @@
 - (void)endPost:(id)result tag:(NSNumber*)tag
 {
     if (tag.integerValue == kSXTagKicItemList) {
+        [self checkIsShowHornor];
         NSString *Data = (NSString *)result;
         NSDictionary * dic = [Data objectFromJSONString];
         if([dic[@"status"] intValue] == 1)
@@ -762,7 +763,6 @@
                 }
             }
         }
-//        [self checkIsShowHornor];
     } else if (tag.integerValue == kSXTagCalulateInstallNum){
         
     } else if (tag.integerValue == kSXTagUserLogout){
@@ -816,12 +816,13 @@
         NSDictionary * dic = [Data objectFromJSONString];
 #warning 测试项目列表显示项
         
-        NSString *zxSwitch = [[dic objectForKey:@"data"] objectForKey:@"zxSwitch"];
-        if (zxSwitch.integerValue > 0) {
+        BOOL zxSwitch = [[[dic objectForKey:@"data"] objectForKey:@"zxSwitch"] boolValue];
+        if (zxSwitch) {
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isShowHornor"];
         }
-        else
+        else {
             [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isShowHornor"];
+        }
         
         
         [[NSUserDefaults standardUserDefaults] synchronize];

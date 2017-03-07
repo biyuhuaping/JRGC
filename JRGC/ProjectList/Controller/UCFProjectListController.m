@@ -33,19 +33,19 @@
     self.isShowHornor = [[NSUserDefaults standardUserDefaults] boolForKey:@"isShowHornor"];
     UISegmentedControl *segmentContrl = nil;
     
-    NSString *userId = [UserInfoSingle sharedManager].userId;
-    if (userId) {
-        NSInteger userLevel = [[UserInfoSingle sharedManager].userLevel integerValue];
-        BOOL isShowHornor = [[NSUserDefaults standardUserDefaults] boolForKey:@"isShowHornor"];
-        if (userLevel>1 || isShowHornor) {
-            self.isShowHornor = YES;
-        }
-        else
-            self.isShowHornor = NO;
-    }
-    else {
-        self.isShowHornor = NO;
-    }
+//    NSString *userId = [UserInfoSingle sharedManager].userId;
+//    if (userId) {
+//        NSInteger userLevel = [[UserInfoSingle sharedManager].userLevel integerValue];
+//        BOOL isShowHornor = [[NSUserDefaults standardUserDefaults] boolForKey:@"isShowHornor"];
+//        if (userLevel>1 || isShowHornor) {
+//            self.isShowHornor = YES;
+//        }
+//        else
+//            self.isShowHornor = NO;
+//    }
+//    else {
+//        self.isShowHornor = NO;
+//    }
     
     if (self.isShowHornor) {
         segmentContrl = [[UISegmentedControl alloc]initWithItems:@[@"P2P专区",@"尊享专区",@"转让专区"]];
@@ -209,9 +209,9 @@
     BOOL islogin = [noty.object boolValue];
     UISegmentedControl *segmentCtrl = nil;
     if (islogin) {
-        NSInteger userLevel = [[UserInfoSingle sharedManager].userLevel integerValue];
+//        NSInteger userLevel = [[UserInfoSingle sharedManager].userLevel integerValue];
         BOOL isShowHornor = [[NSUserDefaults standardUserDefaults] boolForKey:@"isShowHornor"];
-        if (userLevel>1 || isShowHornor) {
+        if (isShowHornor) {
             self.isShowHornor = YES;
             segmentCtrl = [[UISegmentedControl alloc]initWithItems:@[@"P2P专区",@"尊享专区",@"转让专区"]];
         }
