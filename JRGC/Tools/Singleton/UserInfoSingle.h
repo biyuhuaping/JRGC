@@ -30,7 +30,7 @@
 
 @property(nonatomic, assign) BOOL companyAgent;
 
-@property(nonatomic, copy) NSString *userLevel;
+//@property(nonatomic, copy) NSString *userLevel;
 //获取用户信息单利对象
 + (UserInfoSingle *)sharedManager;
 //赋值

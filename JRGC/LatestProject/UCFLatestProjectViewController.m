@@ -113,7 +113,7 @@
     _lineHigh1.constant = 0.5;
     _lineHigh2.constant = 0.5;
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadHomeData:) name:@"userisloginandcheckgrade" object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadHomeData:) name:@"userisloginandcheckgrade" object:nil];
         
     if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
         [self.tableView setSeparatorInset: UIEdgeInsetsZero];
