@@ -253,7 +253,7 @@
 
 - (void)cell:(UCFProjectListCell*)cell clickInvestBtn1:(UIButton *)button withModel:(UCFTransferModel *)model
 {
-    if ([model.status integerValue]!=2) {
+    if ([model.stopStatus intValue] != 0) {
         return;
     }
     if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
