@@ -124,26 +124,28 @@
 //}
 - (void)changeViewWithConfigure:(NSString *)config
 {
-    if ([self.strStyle isEqualToString:@"11"] && self.currentViewController != self.p2p) {
+    if ([self.strStyle isEqualToString:@"11"]) {
         self.segmentedCtrl.selectedSegmentIndex = 0;
-        [self transitionFromViewController:self.currentViewController toViewController:self.p2p duration:0.25 options:UIViewAnimationOptionCurveEaseInOut animations:nil completion:^(BOOL finished) {
-            self.currentViewController = self.p2p;
+        if (self.currentViewController != self.p2p) {
+            [self transitionFromViewController:self.currentViewController toViewController:self.p2p duration:0.25 options:UIViewAnimationOptionCurveEaseInOut animations:nil completion:^(BOOL finished) {
+                self.currentViewController = self.p2p;
+                self.p2p.viewType = self.viewType;
+                if ([self.p2p isViewLoaded]) {
+                    [self.p2p setCurrentViewForBatchBid];
+                }
+            }];
+        }
+        else {
             self.p2p.viewType = self.viewType;
-            if ([self.p2p isViewLoaded]) {
-                [self.p2p setCurrentViewForBatchBid];
-            }
-        }];
+            [self.p2p setCurrentViewForBatchBid];
+        }
+        
     }
     else if ([self.strStyle isEqualToString:@"12"]  && self.currentViewController != self.hornerPlan) {
         self.segmentedCtrl.selectedSegmentIndex = 1;
         [self transitionFromViewController:self.currentViewController toViewController:self.hornerPlan duration:0.25 options:UIViewAnimationOptionCurveEaseInOut animations:nil completion:^(BOOL finished) {
             self.currentViewController = self.hornerPlan;
         }];
-    }
-    else if ([self.strStyle isEqualToString:@"11"])
-    {
-        self.p2p.viewType = self.viewType;
-        [self.p2p setCurrentViewForBatchBid];
     }
 }
 
