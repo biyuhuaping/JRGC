@@ -58,11 +58,11 @@
 }
 - (void)dealloc
 {
-    if ([self.sourceType isEqualToString:@"personCenter"]) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
-    } else {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadMianViewData" object:nil];
-    }
+//    if ([self.sourceType isEqualToString:@"personCenter"]) {
+//        [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
+//    } else {
+//        [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadMianViewData" object:nil];
+//    }
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
