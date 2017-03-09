@@ -1379,7 +1379,9 @@
     if (isClickCgAndCertiBtn) {
         return;
     }
-    
+    if ([[NSUserDefaults standardUserDefaults] valueForKey:@"fistPage1"]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"CheckInviteFriendsAlertView" object:nil];
+    }
     [[NSNotificationCenter defaultCenter] postNotificationName:CheckIsInitiaLogin object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"setindecatorbtnnofication" object:nil];
 }

@@ -256,7 +256,10 @@
 {
     
 }
-
+- (void)handlePromptViewEndView
+{
+    [self alertViewInviteFriendsVC];
+}
 - (UIView*)drawguildView :(UIImage*)image
 {
     UIView *baseView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
@@ -302,7 +305,7 @@
         }
         return imageName;
     } isFirstPage:YES];
-    [self alertViewInviteFriendsVC];
+
 }
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
@@ -313,6 +316,7 @@
     BOOL isBelongToToday = [NSDate isBelongToTodayWithDate:lastFirstLoginTime]; //是不是同一天
 //    BOOL policeOnOff = [ToolSingleTon sharedManager].checkIsInviteFriendsAlert ;
     BOOL onoff  =  [[NSUserDefaults standardUserDefaults] boolForKey:NOVICEPOLICEONOFF];
+    onoff = YES;
     if(!isBelongToToday && onoff){
         
         MjAlertView *alertView = [[MjAlertView alloc]initInviteFriendsToMakeMoneyDelegate:self];

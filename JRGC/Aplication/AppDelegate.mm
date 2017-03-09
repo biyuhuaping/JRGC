@@ -153,6 +153,9 @@
             _isShowAdversement = YES;
         } else {
             _isShowAdversement = NO;
+            if (!self.lockVc && ![[NSUserDefaults standardUserDefaults] valueForKey:@"fistPage1"]) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"CheckInviteFriendsAlertView" object:nil];
+            }
         }
         //显示广告
         if (_isShowAdversement) {
@@ -421,6 +424,9 @@
     [_advertisementView removeFromSuperview];
     _advertisementView = nil;
     [_lockVc.view setUserInteractionEnabled:YES];
+    if (!self.lockVc && [[NSUserDefaults standardUserDefaults] valueForKey:@"fistPage1"]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"CheckInviteFriendsAlertView" object:nil];
+    }
     //添加一个通知 知道广告业退出了 去触发touchid 的事件
     [self.lockVc openTouchidAlert];
 }
@@ -810,7 +816,6 @@
             [[NSUserDefaults standardUserDefaults] setBool:policeOnOff forKey:NOVICEPOLICEONOFF];
             [[NSUserDefaults standardUserDefaults] synchronize];
             [ToolSingleTon sharedManager].checkIsInviteFriendsAlert = policeOnOff;
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"CheckInviteFriendsAlertView" object:nil];
         }
     }
     else if (tag.integerValue == kSXTagIsShowHornor) {
