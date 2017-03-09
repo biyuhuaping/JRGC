@@ -262,9 +262,11 @@
         if ([total intValue] > 1) {
             str = [NSString stringWithFormat:@"(第%@期/共%@期)",_dataArr2[indexPath.row][@"repayPerNo"],total];
         }
-        int batchInvestStatus = [[_dataArr1[indexPath.row] objectSafeForKey:@"batchInvestStatus"] intValue];
+        int batchInvestStatus = [[_dataArr2[indexPath.row] objectSafeForKey:@"batchInvestStatus"] intValue];
         if (batchInvestStatus) {
             cell1.prdName.text = [NSString stringWithFormat:@"%@%@(批量投资)",_dataArr2[indexPath.row][@"prdName"],str];//标的名称
+            [cell1.prdName setFont:[UIFont systemFontOfSize:11] string:@"(批量投资)"];
+            [cell1.prdName setFontColor:UIColorWithRGB(0x999999) string:@"(批量投资)"];
         }
         else {
             cell1.prdName.text = [NSString stringWithFormat:@"%@%@",_dataArr2[indexPath.row][@"prdName"],str];        //投标名称
