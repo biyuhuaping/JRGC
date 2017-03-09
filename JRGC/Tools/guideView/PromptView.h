@@ -17,6 +17,8 @@ typedef UIImage *(^GetImageBlock)(void);
 
 - (void)handlePromptViewRemovedEvent:(PromptView *)promptView;
 
+- (void)handlePromptViewEndView;
+
 @end
 
 @interface PromptView : UIView {
