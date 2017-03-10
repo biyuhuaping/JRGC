@@ -167,7 +167,7 @@
             [self.navigationController pushViewController:twoController animated:YES];
         }
     } else if (tag.integerValue == kSXTagRegistCheckQUDAO) {
-        if ([rstcode isEqualToString:@"1"]) {
+        if ([[dic objectForKey:@"islimit"] boolValue]) {
             isLimitFactoryCode = YES;
         } else {
             isLimitFactoryCode = NO;
