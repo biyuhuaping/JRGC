@@ -486,10 +486,13 @@ static NetworkModule *gInstance = NULL;
         case kSXTagMyInvestHeaderInfo:
             parameter = [SERVER_IP stringByAppendingString:MYINVESTHEADERINFO];
             break;
+        case kSXTagRegistCheckQUDAO:
+            parameter = [SERVER_IP stringByAppendingString:RegistCheckQdIsLimit];
+            break;
 
     }
 
-    NSArray * array = [NSArray arrayWithObjects:@"newPrdClaims/dataList",@"newaccount/userLevelIsOpen",@"newprdTransfer/dataList",@"newPrdTransfer/getDetail",@"newuser/login",@"newsendmessage",@"newuserregist/isexitpomocode",@"newuserregist/regist",@"userregist/verification",@"newgetSendMessageTicket",@"bankCard/baseBankMess",@"personalSettings/getTRegionList",@"sysDataDicItem/dicItemList",@"sysDataDicItem/allDicItemList",@"scratchCard/isExist",@"newuserregist/modifyUserpwd",@"newprdTransfer/newCompensateInterest",@"appInstallCount/save", nil];
+    NSArray * array = [NSArray arrayWithObjects:@"newPrdClaims/dataList",@"newaccount/userLevelIsOpen",@"newprdTransfer/dataList",@"newPrdTransfer/getDetail",@"newuser/login",@"newsendmessage",@"newuserregist/isexitpomocode",@"newuserregist/regist",@"userregist/verification",@"newgetSendMessageTicket",@"bankCard/baseBankMess",@"personalSettings/getTRegionList",@"sysDataDicItem/dicItemList",@"sysDataDicItem/allDicItemList",@"scratchCard/isExist",@"newuserregist/modifyUserpwd",@"newprdTransfer/newCompensateInterest",@"appInstallCount/save",@"newuserregist/checkQdIslimit", nil];
 
     NSArray * strArray = [parameter componentsSeparatedByString:SERVER_IP];
     NSString *par = [strArray objectAtIndex:1];

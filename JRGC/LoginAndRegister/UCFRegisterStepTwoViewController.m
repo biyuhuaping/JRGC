@@ -44,7 +44,7 @@
     [super viewDidLoad];
     baseTitleLabel.text = @"注册";
     [self addLeftButton];
-    _registerTwoView = [[UCFRegisterTwoView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - NavigationBarHeight) phoneNumber:_phoneNumber];
+    _registerTwoView = [[UCFRegisterTwoView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - NavigationBarHeight) phoneNumber:_phoneNumber isLimitFactoryCode:_isLimitFactoryCode];
     _registerTwoView.delegate = self;
     [self.view addSubview:_registerTwoView];
     
@@ -350,6 +350,9 @@
     [parDic setValue:wanip forKey:@"ip"];
     [parDic setValue:_registerTokenStr forKey:@"registTicket"];
     [parDic setValue:@"1" forKey:@"userId"];
+    if (![QDCODE isEqualToString:@""]) {
+        [parDic setValue:QDCODE forKey:@"channelCode"];
+    }
     [[NetworkModule sharedNetworkModule] newPostReq:parDic tag:kSXTagUserRegist owner:self signature:NO];
 }
 

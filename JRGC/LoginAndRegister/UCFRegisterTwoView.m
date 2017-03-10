@@ -39,13 +39,14 @@
 
 @implementation UCFRegisterTwoView
 
-- (id)initWithFrame:(CGRect)frame phoneNumber:(NSString *)number
+- (id)initWithFrame:(CGRect)frame phoneNumber:(NSString *)number isLimitFactoryCode:(BOOL)isLimit
 {
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = UIColorWithRGB(0xebebee);
         _phoneNumber = number;
         _isSecureTextEntry = YES;
+        _isLimitFactoryCode = isLimit;
         [self initRegisterTwoView];
     }
     return self;
@@ -227,6 +228,11 @@
     
     [self resetAllControlFrame];
     [self showVatiLabelText];
+    
+    if (_isLimitFactoryCode) {
+        _refereesCodeField.hidden = YES;
+        label3.hidden = YES;
+    }
 }
 
 - (void)setVatiLabelHide:(BOOL)isHide

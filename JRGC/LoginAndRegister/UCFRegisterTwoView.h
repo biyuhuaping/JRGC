@@ -22,8 +22,8 @@
 
 
 @property(nonatomic,weak) id<RegisterTwoViewDelegate>delegate;
-
-- (id)initWithFrame:(CGRect)frame phoneNumber:(NSString*)number;
+@property(nonatomic,assign) BOOL isLimitFactoryCode;
+- (id)initWithFrame:(CGRect)frame phoneNumber:(NSString *)number isLimitFactoryCode:(BOOL)isLimit;
 - (NSString*)getVerficationCode;
 - (NSString*)getUserName;
 - (NSString*)getPassword;

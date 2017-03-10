@@ -214,7 +214,7 @@
 #define GETBACHINVESTAWARD    @"api/invest/v2/getBatchInvestAward.json" //查看批量投资奖励
 #define GETINFOFORONOFF @"api/dataDicItem/v2/getInfoForOnOff.json"    // 新手政策开关（0：关，1：开）
 #define GETSHAREMESSAGE  @"api/dataDicItem/v2/getShareMess.json" //首页2017新手政策分享注册链接
-
+#define RegistCheckQdIsLimit @"newuserregist/checkQdIslimit"
 
 
 
@@ -419,6 +419,7 @@ enum kSXTag
     kSXTagProjectHonerPlanList,            //项目列表--尊享计划
     kSXTagHornerTransferList,               //转让列表--尊享转让
     kSXTagGetShareMessage,                  //首页2017新手政策分享注册链接
+    kSXTagRegistCheckQUDAO,                 //检查该渠道是否用工场码
 };
 
 typedef enum kSXTag kSXTag;
