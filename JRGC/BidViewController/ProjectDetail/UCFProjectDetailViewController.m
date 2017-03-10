@@ -291,6 +291,14 @@
     }
     
 }
+-(void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+}
+-(void)stopTimer:(NSTimer *)timer{
+    [timer setFireDate:[NSDate  distantFuture]];
+    [timer invalidate];
+    timer = nil;
+}
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];

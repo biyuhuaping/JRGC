@@ -23,6 +23,8 @@
 #import "UCFSelectPayBackController.h"
 #import "UINavigationController+FDFullscreenPopGesture.h"
 
+#import "MinuteCountDownView.h"
+
 #import "UCFPurchaseWebView.h"
 @interface UCFPurchaseBidViewController ()<UITableViewDataSource,UITableViewDelegate,MoneyBoardCellDelegate>
 {
@@ -769,11 +771,11 @@
         if (indexPath.row == 0) {
             return 109.0f;
         } else if (indexPath.row == 1) {
+            float height = 202.0f+37.0f;//37为倒计时view的高度
             if (isCompanyAgent) { //机构用户需要把工豆隐藏
-                return 202 - 44.0f;
-            } else {
-                return 202.0f;
+                height = height - 44.0f;
             }
+            return height;
         } else if (indexPath.row == 2) {
             return 30;
         }
@@ -856,7 +858,7 @@
                 cell.gongDouSwitch.userInteractionEnabled = NO;
             }
             cell.inputMoneyTextFieldLable.text = [self GetDefaultText];
-
+            cell.minuteCountDownView.timeInterval = [[_dataDict objectSafeForKey:@"intervalMilli"] integerValue];
         }
         cell.isCompanyAgent = isCompanyAgent;
         if (isGongDouSwitch) {

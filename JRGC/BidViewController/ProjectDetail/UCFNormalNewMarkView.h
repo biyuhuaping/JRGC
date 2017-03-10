@@ -16,6 +16,7 @@
 - (void)toDownView;
 - (void)toUpView;
 - (void)styleGetToBack;
+-(void)stopTimer:(NSTimer *)timer;
 
 @end
 

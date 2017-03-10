@@ -16,7 +16,7 @@
 - (void)reloadSuperView:(UITextField *)textField;
 @end
 #import <UIKit/UIKit.h>
-
+#import "MinuteCountDownView.h"
 @interface MoneyBoardCell : UITableViewCell <UITextFieldDelegate>
 @property (nonatomic, strong)UIView     *topView;
 @property (nonatomic, strong)UIView     *keYongBaseView;
@@ -36,6 +36,7 @@
 @property (nonatomic, strong)UIButton       *allTouziBtn;
 @property (nonatomic, assign)id<MoneyBoardCellDelegate> delegate;
 @property (nonatomic, assign)BOOL isCompanyAgent; //是否为机构用户
+@property (nonatomic, strong)MinuteCountDownView     *minuteCountDownView;//倒计时view
 
 @property (nonatomic, strong)NSDictionary   *dataDict;
 @property (nonatomic, assign)BOOL           isTransid;
