@@ -389,15 +389,19 @@
 //***qyy 标类型type cell按钮的回调方法delegate
 -(void)homeButtonPressed:(UIButton *)button withCelltypeSellWay:(NSString *)strSellWay
 {
-    AppDelegate *appdelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    [appdelegate.tabBarController setSelectedIndex:1];
-    UCFProjectListController *project = (UCFProjectListController *)[[appdelegate.tabBarController.viewControllers objectAtIndex:1].childViewControllers objectAtIndex:0];
+//    AppDelegate *appdelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+//    [appdelegate.tabBarController setSelectedIndex:1];
+//    UCFProjectListController *project = (UCFProjectListController *)[[appdelegate.tabBarController.viewControllers objectAtIndex:1].childViewControllers objectAtIndex:0];
+//    project.strStyle = strSellWay;
+//    project.viewType = @"1";
+//    BOOL isLoad = [project isViewLoaded];
+//    if (isLoad) {
+//        [project changeViewWithConfigure:strSellWay];
+//    }
+    UCFProjectListController *project = [[UCFProjectListController alloc] initWithNibName:@"UCFProjectListController" bundle:nil];
     project.strStyle = strSellWay;
     project.viewType = @"1";
-    BOOL isLoad = [project isViewLoaded];
-    if (isLoad) {
-        [project changeViewWithConfigure:strSellWay];
-    }
+    [self.navigationController pushViewController:project animated:YES];
 }
 
 - (void)investBtnClicked:(UIButton *)button{
@@ -1172,15 +1176,20 @@
 
 - (void)collectionCell:(UCFCollectionBidCell *)currentView didClickedMoreButton:(UIButton *)MoreButton
 {
-    AppDelegate *appdelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    [appdelegate.tabBarController setSelectedIndex:1];
-    UCFProjectListController *project = (UCFProjectListController *)[[appdelegate.tabBarController.viewControllers objectAtIndex:1].childViewControllers objectAtIndex:0];
+//    AppDelegate *appdelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+//    [appdelegate.tabBarController setSelectedIndex:1];
+//    UCFProjectListController *project = (UCFProjectListController *)[[appdelegate.tabBarController.viewControllers objectAtIndex:1].childViewControllers objectAtIndex:0];
+//    project.strStyle = @"11";
+//    project.viewType = @"2";
+//    BOOL isLoad = [project isViewLoaded];
+//    if (isLoad) {
+//        [project changeViewWithConfigure:@"11"];
+//    }
+    
+    UCFProjectListController *project = [[UCFProjectListController alloc] initWithNibName:@"UCFProjectListController" bundle:nil];
     project.strStyle = @"11";
     project.viewType = @"2";
-    BOOL isLoad = [project isViewLoaded];
-    if (isLoad) {
-        [project changeViewWithConfigure:@"11"];
-    }
+    [self.navigationController pushViewController:project animated:YES];
 }
 
 #pragma mark - 刷新首页数据

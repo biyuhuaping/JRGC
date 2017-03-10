@@ -132,6 +132,10 @@
 		740AC6401DDC2AAE0058BC60 /* UCFProjectListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 740AC63E1DDC2AAE0058BC60 /* UCFProjectListController.xib */; };
 		740DAEC11E56E2D100CD7C8F /* UCFBatchProjectController.m in Sources */ = {isa = PBXBuildFile; fileRef = 740DAEBF1E56E2D100CD7C8F /* UCFBatchProjectController.m */; };
 		740DAEC21E56E2D100CD7C8F /* UCFBatchProjectController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 740DAEC01E56E2D100CD7C8F /* UCFBatchProjectController.xib */; };
+		741CA7A21E724C44006056A8 /* UCFLoanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 741CA7A01E724C44006056A8 /* UCFLoanViewController.m */; };
+		741CA7A31E724C44006056A8 /* UCFLoanViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 741CA7A11E724C44006056A8 /* UCFLoanViewController.xib */; };
+		741CA7A71E724C64006056A8 /* UCFDiscoveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 741CA7A51E724C64006056A8 /* UCFDiscoveryViewController.m */; };
+		741CA7A81E724C64006056A8 /* UCFDiscoveryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 741CA7A61E724C64006056A8 /* UCFDiscoveryViewController.xib */; };
 		741EB1861D596EF2006C885F /* UCFTableCellOne.m in Sources */ = {isa = PBXBuildFile; fileRef = 741EB1841D596EF2006C885F /* UCFTableCellOne.m */; };
 		741EB1871D596EF2006C885F /* UCFTableCellOne.xib in Resources */ = {isa = PBXBuildFile; fileRef = 741EB1851D596EF2006C885F /* UCFTableCellOne.xib */; };
 		741EB18A1D59829E006C885F /* UCFTableCellTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = 741EB1891D59829E006C885F /* UCFTableCellTwo.m */; };
@@ -948,6 +952,12 @@
 		740DAEBE1E56E2D100CD7C8F /* UCFBatchProjectController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFBatchProjectController.h; sourceTree = "<group>"; };
 		740DAEBF1E56E2D100CD7C8F /* UCFBatchProjectController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFBatchProjectController.m; sourceTree = "<group>"; };
 		740DAEC01E56E2D100CD7C8F /* UCFBatchProjectController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFBatchProjectController.xib; sourceTree = "<group>"; };
+		741CA79F1E724C44006056A8 /* UCFLoanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFLoanViewController.h; sourceTree = "<group>"; };
+		741CA7A01E724C44006056A8 /* UCFLoanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFLoanViewController.m; sourceTree = "<group>"; };
+		741CA7A11E724C44006056A8 /* UCFLoanViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFLoanViewController.xib; sourceTree = "<group>"; };
+		741CA7A41E724C64006056A8 /* UCFDiscoveryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFDiscoveryViewController.h; sourceTree = "<group>"; };
+		741CA7A51E724C64006056A8 /* UCFDiscoveryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFDiscoveryViewController.m; sourceTree = "<group>"; };
+		741CA7A61E724C64006056A8 /* UCFDiscoveryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFDiscoveryViewController.xib; sourceTree = "<group>"; };
 		741EB1831D596EF2006C885F /* UCFTableCellOne.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFTableCellOne.h; sourceTree = "<group>"; };
 		741EB1841D596EF2006C885F /* UCFTableCellOne.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFTableCellOne.m; sourceTree = "<group>"; };
 		741EB1851D596EF2006C885F /* UCFTableCellOne.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFTableCellOne.xib; sourceTree = "<group>"; };
@@ -2445,6 +2455,74 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		741CA7971E724B8E006056A8 /* loan */ = {
+			isa = PBXGroup;
+			children = (
+				741CA79C1E724BE7006056A8 /* Controller */,
+				741CA79D1E724BE7006056A8 /* Model */,
+				741CA79E1E724BE7006056A8 /* View */,
+			);
+			path = loan;
+			sourceTree = "<group>";
+		};
+		741CA7981E724B8E006056A8 /* discovery */ = {
+			isa = PBXGroup;
+			children = (
+				741CA7991E724BDA006056A8 /* Controller */,
+				741CA79A1E724BDA006056A8 /* Model */,
+				741CA79B1E724BDA006056A8 /* View */,
+			);
+			path = discovery;
+			sourceTree = "<group>";
+		};
+		741CA7991E724BDA006056A8 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				741CA7A41E724C64006056A8 /* UCFDiscoveryViewController.h */,
+				741CA7A51E724C64006056A8 /* UCFDiscoveryViewController.m */,
+				741CA7A61E724C64006056A8 /* UCFDiscoveryViewController.xib */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		741CA79A1E724BDA006056A8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		741CA79B1E724BDA006056A8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		741CA79C1E724BE7006056A8 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				741CA79F1E724C44006056A8 /* UCFLoanViewController.h */,
+				741CA7A01E724C44006056A8 /* UCFLoanViewController.m */,
+				741CA7A11E724C44006056A8 /* UCFLoanViewController.xib */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		741CA79D1E724BE7006056A8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		741CA79E1E724BE7006056A8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		741EB1821D596ECB006C885F /* view */ = {
 			isa = PBXGroup;
 			children = (
@@ -3776,6 +3854,8 @@
 		7BFE3EAE1AC56315002A53A2 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				741CA7971E724B8E006056A8 /* loan */,
+				741CA7981E724B8E006056A8 /* discovery */,
 				7BCE028D1AC948710084C15C /* LatestProject */,
 				740AC6331DDC05120058BC60 /* ProjectList */,
 				E3C117A01D40D0520053A052 /* UCFWebView */,
@@ -5145,6 +5225,7 @@
 				74EAF5B61B0ED78700807C1C /* UCFSelectedBankTableViewCell.xib in Resources */,
 				74E89FF71DDD8D5D000B0AFF /* UCFP2PViewController.xib in Resources */,
 				FBE5A0541AE8BEDD0095B2ED /* UCFMyInvestViewCell.xib in Resources */,
+				741CA7A31E724C44006056A8 /* UCFLoanViewController.xib in Resources */,
 				74E8A0061DDDA142000B0AFF /* UCFP2PTransferViewController.xib in Resources */,
 				748ED7A61CC74F3200690215 /* SettingMainButton.xib in Resources */,
 				7477BF9D1AFB4BF400914BFB /* SecuirtyCenter.storyboard in Resources */,
@@ -5177,6 +5258,7 @@
 				FBE265DB1B26CAB100240A79 /* UCFMyClaimCtrl.xib in Resources */,
 				E31141611D92769E00FF880A /* UCFWebViewJavascriptBridgeBBS.xib in Resources */,
 				FB4F9E741D62A6F800CCB492 /* TradePasswordVC.xib in Resources */,
+				741CA7A81E724C64006056A8 /* UCFDiscoveryViewController.xib in Resources */,
 				FB039DC61B60F31C00B24B47 /* UCFFriendRecCell.xib in Resources */,
 				74D337C21E13C72D00386853 /* UCFDataStaticsCell.xib in Resources */,
 				83EB21E31D758EE50069EF95 /* UCFCashRecordListViewController.xib in Resources */,
@@ -5386,6 +5468,7 @@
 				4A6FAFC51D743CF300AD4DF8 /* CJLabel.m in Sources */,
 				EDEC8BFA1CB3BA6300815228 /* WPAttributedStyleAction.m in Sources */,
 				4A0DA1551B26D8C4004E84F6 /* UCFPurchaseBidViewController.m in Sources */,
+				741CA7A21E724C44006056A8 /* UCFLoanViewController.m in Sources */,
 				FB7EDE3F1D6BFCD700C3E924 /* UCFBaseViewController.m in Sources */,
 				4A809CCF1B40F4DF00164EE5 /* SubInvestmentCell.m in Sources */,
 				74F291191AE0DBD5003E0E86 /* UCFRedEnvelopeViewController.m in Sources */,
@@ -5437,6 +5520,7 @@
 				FB88C90D1AF9F92E00D2EE93 /* YcArray.m in Sources */,
 				7BA6E4C61AD6731900FE8C37 /* UIImageView+WebCache.m in Sources */,
 				7BD35A981AD61E4200389D6B /* LLLockPassword.m in Sources */,
+				741CA7A71E724C64006056A8 /* UCFDiscoveryViewController.m in Sources */,
 				74EE331E1AF7209600BDE197 /* UCFFundDetialTableViewCell.m in Sources */,
 				748A3CD31AF1FE9800D7FAF1 /* FundsDetailFrame.m in Sources */,
 				7BA6E4BF1AD6731900FE8C37 /* SDWebImageManager.m in Sources */,

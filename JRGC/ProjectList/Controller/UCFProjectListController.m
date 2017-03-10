@@ -29,6 +29,8 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadView:) name:@"userisloginandcheckgrade" object:nil];
     
+    [self addLeftButton];
+    
     // 添加标题然选项卡
     self.isShowHornor = [[NSUserDefaults standardUserDefaults] boolForKey:@"isShowHornor"];
     UISegmentedControl *segmentContrl = nil;
@@ -46,6 +48,7 @@
 //    else {
 //        self.isShowHornor = NO;
 //    }
+    self.isShowHornor = NO;
     
     if (self.isShowHornor) {
         segmentContrl = [[UISegmentedControl alloc]initWithItems:@[@"P2P专区",@"尊享专区",@"转让专区"]];
@@ -63,7 +66,7 @@
     self.navigationItem.titleView = segmentContrl;
     
     self.p2p = [[UCFP2PViewController alloc]initWithNibName:@"UCFP2PViewController" bundle:nil];
-    self.p2p.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight - 64-49);
+    self.p2p.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight - 64);
     self.p2p.viewType = self.viewType;
     [self.p2p setCurrentViewForBatchBid];
     [self addChildViewController:self.p2p];
@@ -73,7 +76,7 @@
     [self addChildViewController:self.hornerPlan];
     
     self.transfer = [[UCFTransferViewController alloc]initWithNibName:@"UCFTransferViewController" bundle:nil];
-    self.transfer.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight - 64-49);
+    self.transfer.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight - 64);
     [self addChildViewController:self.transfer];
     
     if ([self.strStyle isEqualToString:@"11"]) {
@@ -162,8 +165,6 @@
 {
     switch (segmentCtrl.selectedSegmentIndex) {
         case 0:{
-            self.p2p.viewType = @"1";
-            [self.p2p setCurrentViewForBatchBid];
             if (self.isShowHornor) {
                 [self transitionFromViewController:self.currentViewController toViewController:self.p2p duration:0.25 options:UIViewAnimationOptionCurveEaseInOut animations:nil completion:^(BOOL finished) {
                     self.currentViewController = self.p2p;

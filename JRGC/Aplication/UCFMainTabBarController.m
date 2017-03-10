@@ -20,7 +20,9 @@
 #import "UCFWebViewJavascriptBridgeMall.h"
 #import "UCFOldUserGuideViewController.h"
 #import "UCFProjectListController.h"
-
+#import "UCFLoanViewController.h"
+#import "UCFDiscoveryViewController.h"
+#import "UCFWebViewJavascriptBridgeLevel.h"
 @interface UCFMainTabBarController ()
 
 @property (strong, nonatomic) UCFLatestProjectViewController *LatestView;
@@ -58,21 +60,24 @@
 - (void)initAllTabbarItems
 {
     NSMutableArray *vcArray = [NSMutableArray array];
-    NSArray *tabbarTitleArray = @[@"首页",
-                                  @"产品列表",
-                                  @"豆哥商城",
-                                  @"个人中心"];
+    NSArray *tabbarTitleArray = @[@"投资",
+                                  @"借款",
+                                  @"发现",
+                                  @"商城",
+                                  @"我的"];
     NSArray *tabbarNormalArray = @[@"tabbar_icon_homepage_normal.png",
                                    @"tabbar_icon_project_normal.png",//tabbar_icon_transfer_normal.png
                                    @"tabbar_icon_shop_normal.png",
+                                   @"tabbar_icon_user_normal.png",
                                    @"tabbar_icon_user_normal.png"];
     NSArray *tabbarHighlightArray = @[@"tabbar_icon_homepage_highlight.png",
                                    @"tabbar_icon_project_highlight.png",//tabbar_icon_transfer_highlight.png
                                    @"tabbar_icon_shop_highlight.png",
+                                      @"tabbar_icon_user_highlight.png",
                                       @"tabbar_icon_user_highlight.png"];
     
     UIViewController *controller = nil;
-    for (int i=0; i<4; i++) {
+    for (int i=0; i<5; i++) {
         switch (i) {
             case 0:{
                 UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"HomeStoryboard" bundle:nil];
@@ -82,16 +87,25 @@
             }
                 break;
             case 1:{
-//                UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"UCFAssignmentCreditor" bundle:nil];
-//                self.AssignmentView = [storyBoard instantiateViewControllerWithIdentifier:@"UCFAssignmentCreditorStoryboard"];
-//                self.AssignmentView.baseTitleType = @"list";
-//                controller = _AssignmentView;
-                self.AssignmentView = [[UCFProjectListController alloc] initWithNibName:@"UCFProjectListController" bundle:nil];
-                self.AssignmentView.baseTitleType = @"list";
-                controller = _AssignmentView;
+                
+                UCFLoanViewController *loanWeb = [[UCFLoanViewController alloc] initWithNibName:@"UCFLoanViewController" bundle:nil];
+//                loanWeb.url = MALLURL;
+                loanWeb.isHideNavigationBar = YES;
+                [self useragent:loanWeb.webView];
+                controller = loanWeb;
+                loanWeb.navTitle = @"借款";
+                
+            }
+            case 2:{
+                UCFDiscoveryViewController *discoveryWeb = [[UCFDiscoveryViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
+                discoveryWeb.isHideNavigationBar = YES;
+                discoveryWeb.url      = DISCOVERYURL;//请求地址;
+                discoveryWeb.navTitle = @"发现";
+                controller = discoveryWeb;
+//                [self.navigationController pushViewController:subVC animated:YES];
             }
                 break;
-            case 2:{
+            case 3:{
                
                 UCFWebViewJavascriptBridgeMall *mallWeb = [[UCFWebViewJavascriptBridgeMall alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
                 mallWeb.url = MALLURL;
@@ -102,9 +116,7 @@
     
             }
                 break;
-            case 3:{
-//                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SettingStoryboard" bundle:nil];
-//                controller = [storyboard instantiateViewControllerWithIdentifier:@"settinghome"];
+            case 4:{
                 controller = [[UCFSettingViewController alloc] initWithNibName:@"UCFSettingViewController" bundle:nil];
             }
                 break;
