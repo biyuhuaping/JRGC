@@ -350,6 +350,9 @@
     [parDic setValue:wanip forKey:@"ip"];
     [parDic setValue:_registerTokenStr forKey:@"registTicket"];
     [parDic setValue:@"1" forKey:@"userId"];
+    if (![QDCODE isEqualToString:@""]) {
+        [parDic setValue:QDCODE forKey:@"channelCode"];
+    }
     [[NetworkModule sharedNetworkModule] newPostReq:parDic tag:kSXTagUserRegist owner:self signature:NO];
 }
 
