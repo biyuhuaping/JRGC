@@ -49,11 +49,11 @@
     self.itemSeletedView.delegate = self;
     
     self.hornerTransfer = [[UCFHornerTransferViewController alloc]initWithNibName:@"UCFHornerTransferViewController" bundle:nil];
-    self.hornerTransfer.view.frame = CGRectMake(0, 44, ScreenWidth, ScreenHeight - 64-49 -44);
+    self.hornerTransfer.view.frame = CGRectMake(0, 44, ScreenWidth, ScreenHeight - 64-44);
     [self addChildViewController:self.hornerTransfer];
     
     self.p2pTransfer = [[UCFP2PTransferViewController alloc]initWithNibName:@"UCFP2PTransferViewController" bundle:nil];
-    self.p2pTransfer.view.frame = CGRectMake(0, 44, ScreenWidth, ScreenHeight - 64-49 -44);
+    self.p2pTransfer.view.frame = CGRectMake(0, 44, ScreenWidth, ScreenHeight - 64-44);
     [self addChildViewController:self.p2pTransfer];
     
     self.isShowHornor = NO;
@@ -64,7 +64,7 @@
     else {
         self.currentViewController = self.p2pTransfer;
         self.selectedHight.constant = 0;
-        self.p2pTransfer.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight - 64-49);
+        self.p2pTransfer.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight - 64);
     }
     
 }

@@ -215,6 +215,8 @@
 #define GETINFOFORONOFF @"api/dataDicItem/v2/getInfoForOnOff.json"    // 新手政策开关（0：关，1：开）
 #define GETSHAREMESSAGE  @"api/dataDicItem/v2/getShareMess.json" //首页2017新手政策分享注册链接
 
+#define DISCOVERYURL    @"https://m.9888.cn/static/wap/fa-xian/index.html"     //发现
+
 
 
 
