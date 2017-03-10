@@ -216,7 +216,7 @@
 #define GETSHAREMESSAGE  @"api/dataDicItem/v2/getShareMess.json" //首页2017新手政策分享注册链接
 
 #define DISCOVERYURL    @"https://m.9888.cn/static/wap/fa-xian/index.html"     //发现
-
+#define RegistCheckQdIsLimit @"newuserregist/checkQdIslimit"
 
 
 
@@ -421,6 +421,7 @@ enum kSXTag
     kSXTagProjectHonerPlanList,            //项目列表--尊享计划
     kSXTagHornerTransferList,               //转让列表--尊享转让
     kSXTagGetShareMessage,                  //首页2017新手政策分享注册链接
+    kSXTagRegistCheckQUDAO,                 //检查该渠道是否用工场码
 };
 
 typedef enum kSXTag kSXTag;

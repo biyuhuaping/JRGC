@@ -151,6 +151,12 @@
     } completion:^(BOOL finished) {
         [self removeFromSuperview];
         [_delegate handlePromptViewRemovedEvent:self];
+        
+        if ([_key isEqualToString:@"fistPage1"]) {
+            if (_delegate && [_delegate respondsToSelector:@selector(handlePromptViewEndView)]) {
+                [_delegate handlePromptViewEndView];
+            }
+        }
     }];
 }
 
