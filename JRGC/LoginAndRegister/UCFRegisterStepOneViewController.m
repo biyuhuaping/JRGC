@@ -16,6 +16,7 @@
 @interface UCFRegisterStepOneViewController ()
 {
     UCFRegisterOneView *_registerOneView;
+    BOOL            isLimitFactoryCode;
 }
 
 @end
@@ -34,6 +35,7 @@
     UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 0.5)];
     lineView.backgroundColor = UIColorWithRGB(0xd8d8d8);
     [self.view addSubview:lineView];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -85,11 +87,20 @@
 
 - (void)nextBtnClicked:(id)sender
 {
-    //点下一步前先验证手机号
-    NSString *strParameters = [NSString stringWithFormat:@"vString=%@&type=%@",[_registerOneView phoneNumberText],@"1"];
-    if (strParameters) {
-        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSxTagRegistMobileCheck owner:self];
+    if([QDCODE isEqualToString:@""]){
+        //点下一步前先验证手机号
+        NSString *strParameters = [NSString stringWithFormat:@"vString=%@&type=%@",[_registerOneView phoneNumberText],@"1"];
+        if (strParameters) {
+            [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSxTagRegistMobileCheck owner:self];
+        }
+    } else {
+        //点下一步前先验证手机号
+        NSString *strParameters = [NSString stringWithFormat:@"qd=%@",QDCODE];
+        if (strParameters) {
+            [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagRegistCheckQUDAO owner:self];
+        }
     }
+
 }
 
 - (void)readBtnClicked:(id)sender
@@ -130,7 +141,6 @@
 
 - (void)endPost:(id)result tag:(NSNumber *)tag
 {
-    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     NSString *data = (NSString *)result;
     NSMutableDictionary *dic = [data objectFromJSONString];
     NSString *rstcode = dic[@"status"];
@@ -149,10 +159,23 @@
             [alertView show];
         }
     }else if (tag.integerValue == kSXTagGetRegisterToken){
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         if([[dic objectSafeForKey:@"ret"] boolValue]){
             UCFRegisterStepTwoViewController *twoController = [[UCFRegisterStepTwoViewController alloc] initWithPhoneNumber:[_registerOneView phoneNumberText]];
+            twoController.isLimitFactoryCode = isLimitFactoryCode;
             twoController.registerTokenStr = [[dic objectSafeDictionaryForKey:@"data"] objectSafeForKey:@"registTicket"];
             [self.navigationController pushViewController:twoController animated:YES];
+        }
+    } else if (tag.integerValue == kSXTagRegistCheckQUDAO) {
+        if ([rstcode isEqualToString:@"1"]) {
+            isLimitFactoryCode = YES;
+        } else {
+            isLimitFactoryCode = NO;
+        }
+        //点下一步前先验证手机号
+        NSString *strParameters = [NSString stringWithFormat:@"vString=%@&type=%@",[_registerOneView phoneNumberText],@"1"];
+        if (strParameters) {
+            [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSxTagRegistMobileCheck owner:self];
         }
     }
 }

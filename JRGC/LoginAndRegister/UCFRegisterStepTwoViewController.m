@@ -44,7 +44,7 @@
     [super viewDidLoad];
     baseTitleLabel.text = @"注册";
     [self addLeftButton];
-    _registerTwoView = [[UCFRegisterTwoView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - NavigationBarHeight) phoneNumber:_phoneNumber];
+    _registerTwoView = [[UCFRegisterTwoView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - NavigationBarHeight) phoneNumber:_phoneNumber isLimitFactoryCode:_isLimitFactoryCode];
     _registerTwoView.delegate = self;
     [self.view addSubview:_registerTwoView];
     

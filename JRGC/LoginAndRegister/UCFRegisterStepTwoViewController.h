@@ -12,6 +12,7 @@
 
 @interface UCFRegisterStepTwoViewController : UCFBaseViewController<RegisterTwoViewDelegate,UIAlertViewDelegate,FMDeviceManagerDelegate>
 @property(nonatomic,strong) NSString *registerTokenStr;
+@property(nonatomic,assign) BOOL      isLimitFactoryCode; //是否隐藏工场码
 - (id)initWithPhoneNumber:(NSString*)phoneNum;
 
 
