@@ -51,11 +51,16 @@
     
     BOOL _isHideBorrowerInformation;//是否隐藏借款人信息
     
-    NSArray *_auditRecordArray;
+    NSMutableArray *_auditRecordArray;
     
     BOOL _isHideBusinessLicense;// 是否隐藏营业执照认证 --对应尊享标的机构标而言 Yes 为隐藏 NO为不隐藏显示
     
     NSString *_licenseNumberStr;//营业执照Number
+    
+    
+    BOOL _isShow;//是否显示逾期信息	string	0不显示,1显示
+    NSString *_overdueCount;	//逾期次数
+    NSString *_overdueInvest;	//逾期金额
 }
 
 @end
@@ -72,6 +77,7 @@
         _sourceVc = source;
         _oneScrollPull = NO;
         _isP2P = isP2Ptype;
+        _isShow = [[dataDic objectSafeForKey:@"isShow"] boolValue];
         _firstSectionArray = [NSArray arrayWithArray:msgArr];
         [self initMainView];
     }
@@ -196,12 +202,12 @@
     //是否隐藏借款人信息一栏
     _isHideBorrowerInformation = YES; //默认不隐藏
     _borrowerInformationStr = @"借款人信息";
-    _auditRecordArray = @[@"身份认证",@"手机认证",@"工作认证",@"信用认证"];
+    _auditRecordArray = [NSMutableArray arrayWithArray:@[@"身份认证",@"手机认证",@"工作认证",@"信用认证"]];
     NSString *agencyCodeStr = [[_dataDic objectSafeDictionaryForKey:@"orderUser"] objectSafeForKey:@"agencyCode"];
     NSArray *arrayJiBen = [NSArray arrayWithObjects:@"姓名／所在地",@"基本信息",@"入学年份",@"户口所在地",@"公司行业",@"公司规模",@"职位",@"工作收入",@"现单位工作时间",@"有无购房",@"有无房贷",@"有无购车",@"有无车贷", nil];
     if (![agencyCodeStr isEqualToString:@""]) {
         _borrowerInformationStr = @"机构信息";
-        _auditRecordArray = @[@"营业执照",@"手机认证",@"信用认证"];
+        _auditRecordArray =[NSMutableArray arrayWithArray:@[@"营业执照",@"手机认证",@"信用认证"]];
         arrayJiBen= @[@"机构名称",@"营业执照",@"法定代理人",@"联系人",@"机构地址",@"邮编"];
         [self setAgencyInfoDetailValue];
     }else{
@@ -217,7 +223,13 @@
         _isHideBorrowerInformation = YES; //如果是尊享标 则隐藏借款人信息
         _titleArray = [[NSArray alloc] initWithObjects:@"基础详情", @"安全保障",@"认购记录", nil];
     }
-    _isHideBusinessLicense =  _auditRecordArray.count == 4 ? YES :NO;
+    _isShow = YES;
+    if (_isShow) {
+        _overdueCount = [NSString stringWithFormat:@"%@次",[_dataDic objectSafeForKey:@"overdueCount"]];
+        _overdueInvest = [NSString stringWithFormat:@"%@元",[_dataDic objectSafeForKey:@"overdueInvest"]];
+        [_auditRecordArray addObjectsFromArray:@[@"平台逾期次数",@"平台逾期总金额"]];
+    }
+     _isHideBusinessLicense =  _auditRecordArray.count == 6 ? YES :NO;
     _twoTableview = [[UITableView alloc] initWithFrame:CGRectMake(0, ScreenHeight, ScreenWidth, ScreenHeight - 64) style:UITableViewStylePlain];
     _twoTableview.backgroundColor = [UIColor clearColor];
     //_tableView.separatorColor = UIColorWithRGB(0xeff0f3);
@@ -438,6 +450,9 @@
         [bottomView setHidden:YES];
         [self hideAllTopSegment:NO];
     }];
+}
+-(void)stopMinuteCountDownViewTimer:(NSTimer *)timer{
+    [_delegate stopTimer:timer];
 }
 
 - (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentCtrl
@@ -1151,7 +1166,14 @@
                     imageView.hidden = YES;
                     renzhengLabel.text = @"未认证";
                 }
+            }else if((indexPath.row == 4 && _isHideBusinessLicense ) || (indexPath.row == 3 && !_isHideBusinessLicense )) {
+                     imageView.hidden = YES;
+                     renzhengLabel.text = _overdueCount;
+            }else if((indexPath.row == 5 && _isHideBusinessLicense ) || (indexPath.row == 4 && !_isHideBusinessLicense )) {
+                imageView.hidden = YES;
+                renzhengLabel.text = _overdueInvest;
             }
+        
 
             return cell;
         }

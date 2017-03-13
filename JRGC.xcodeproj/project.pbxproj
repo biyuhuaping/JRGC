@@ -425,6 +425,8 @@
 		7BFE3EA31AC55C98002A53A2 /* JRGCTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BFE3EA21AC55C98002A53A2 /* JRGCTests.m */; };
 		8300100D1E1356870088C707 /* UCFModifyReservedBankNumberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8300100B1E1356870088C707 /* UCFModifyReservedBankNumberViewController.m */; };
 		8300100E1E1356870088C707 /* UCFModifyReservedBankNumberViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8300100C1E1356870088C707 /* UCFModifyReservedBankNumberViewController.xib */; };
+		831B98AB1E728ECC009E46EA /* MinuteCountDownView.m in Sources */ = {isa = PBXBuildFile; fileRef = 831B98A81E728ECC009E46EA /* MinuteCountDownView.m */; };
+		831B98AC1E728ECC009E46EA /* MinuteCountDownView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 831B98AA1E728ECC009E46EA /* MinuteCountDownView.xib */; };
 		832D521F1D8FE5EA0060F1F7 /* UCFWithdrawCashResultWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 832D521E1D8FE5EA0060F1F7 /* UCFWithdrawCashResultWebView.m */; };
 		833603CE1D928F9200C3E435 /* UCFWithdrawCashResultWebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 833603CD1D928F9200C3E435 /* UCFWithdrawCashResultWebView.xib */; };
 		833A6EAB1E55466B00C8A494 /* UCFCollectionDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 833A6EA41E55466B00C8A494 /* UCFCollectionDetailViewController.m */; };
@@ -1471,6 +1473,9 @@
 		8300100A1E1356870088C707 /* UCFModifyReservedBankNumberViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFModifyReservedBankNumberViewController.h; sourceTree = "<group>"; };
 		8300100B1E1356870088C707 /* UCFModifyReservedBankNumberViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFModifyReservedBankNumberViewController.m; sourceTree = "<group>"; };
 		8300100C1E1356870088C707 /* UCFModifyReservedBankNumberViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFModifyReservedBankNumberViewController.xib; sourceTree = "<group>"; };
+		831B98A81E728ECC009E46EA /* MinuteCountDownView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinuteCountDownView.m; sourceTree = "<group>"; };
+		831B98A91E728ECC009E46EA /* MinuteCountDownView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinuteCountDownView.h; sourceTree = "<group>"; };
+		831B98AA1E728ECC009E46EA /* MinuteCountDownView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MinuteCountDownView.xib; sourceTree = "<group>"; };
 		832D521D1D8FE5EA0060F1F7 /* UCFWithdrawCashResultWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFWithdrawCashResultWebView.h; sourceTree = "<group>"; };
 		832D521E1D8FE5EA0060F1F7 /* UCFWithdrawCashResultWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFWithdrawCashResultWebView.m; sourceTree = "<group>"; };
 		833603CD1D928F9200C3E435 /* UCFWithdrawCashResultWebView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFWithdrawCashResultWebView.xib; sourceTree = "<group>"; };
@@ -4640,6 +4645,9 @@
 		FB1E7F721D8E4230009CBE2C /* ProjectDetail */ = {
 			isa = PBXGroup;
 			children = (
+				831B98A91E728ECC009E46EA /* MinuteCountDownView.h */,
+				831B98A81E728ECC009E46EA /* MinuteCountDownView.m */,
+				831B98AA1E728ECC009E46EA /* MinuteCountDownView.xib */,
 				FB1E7F731D8E4230009CBE2C /* UCFBidNewDetailView.h */,
 				FB1E7F741D8E4230009CBE2C /* UCFBidNewDetailView.m */,
 				FB1E7F751D8E4230009CBE2C /* UCFInvestmentView.h */,
@@ -5260,6 +5268,7 @@
 				FB4F9E741D62A6F800CCB492 /* TradePasswordVC.xib in Resources */,
 				741CA7A81E724C64006056A8 /* UCFDiscoveryViewController.xib in Resources */,
 				FB039DC61B60F31C00B24B47 /* UCFFriendRecCell.xib in Resources */,
+				831B98AC1E728ECC009E46EA /* MinuteCountDownView.xib in Resources */,
 				74D337C21E13C72D00386853 /* UCFDataStaticsCell.xib in Resources */,
 				83EB21E31D758EE50069EF95 /* UCFCashRecordListViewController.xib in Resources */,
 				74FC22841BA6AB6700D1660A /* UCFCouponViewController.xib in Resources */,
@@ -5753,6 +5762,7 @@
 				74DBAC741D585FFD00F6F6B1 /* UCFTipButton.m in Sources */,
 				25CCDA9C1DDAE28C002C0F6D /* UCFLatesProjectTableViewCell.m in Sources */,
 				7BC3047F1ACBC22D007767F1 /* NSDateManager.m in Sources */,
+				831B98AB1E728ECC009E46EA /* MinuteCountDownView.m in Sources */,
 				7BC8AA201AD4C74200BF4660 /* UCFNormalBid.m in Sources */,
 				7BCE01F81AC8FC260084C15C /* ASIDownloadCache.m in Sources */,
 				74FBC1BD1B84721400B8DD7E /* UCFBindCardTwoTableViewCell.m in Sources */,
