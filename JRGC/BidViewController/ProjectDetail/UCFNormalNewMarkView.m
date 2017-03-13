@@ -451,10 +451,6 @@
         [self hideAllTopSegment:NO];
     }];
 }
--(void)stopMinuteCountDownViewTimer:(NSTimer *)timer{
-    [_delegate stopTimer:timer];
-}
-
 - (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentCtrl
 {
     

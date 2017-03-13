@@ -345,7 +345,7 @@
     
     float y_pos = 0 + [Common calculateNewSizeBaseMachine:HeadBkHeight] + bottomViewYPos;
     _minuteCountDownView =[[MinuteCountDownView alloc]initWithFrame:CGRectMake(0, y_pos, ScreenWidth, MinuteDownViewHeight)];
-    
+    _minuteCountDownView.sourceVC = @"UCFProjectDetailVC";//标详情页面
 //    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 //    
 //    [formatter setDateStyle:NSDateFormatterMediumStyle];
@@ -354,13 +354,14 @@
 //    
 //    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss.SSS"];
 //    
-//    NSDate* date = [formatter dateFromString:@"1970-01-01 08:01:00.000"];
+//    NSDate* date = [formatter dateFromString:@"1970-01-01 08:11:00.000"];
 //    //将日期转换成时间戳
-//    NSInteger timeSp = [[NSNumber numberWithDouble:[date timeIntervalSince1970]] integerValue];
+//    NSInteger timeSp = [[NSNumber numberWithDouble:[date timeIntervalSince1970]] integerValue]*1000;
     NSString *stopStatusStr = [_dic objectSafeForKey:@"stopStatus"];// 0投标中,1满标
     _minuteCountDownView.isStop = stopStatusStr;
     if ([stopStatusStr intValue] == 0) {
         _minuteCountDownView.timeInterval= [[_dic objectSafeForKey:@"intervalMilli"]  integerValue];
+//        _minuteCountDownView.timeInterval= timeSp;
         [_minuteCountDownView startTimer];
         _minuteCountDownView.tipLabel.text = @"距结束";//
     }else{
@@ -820,9 +821,6 @@
         _investmentAmountLabel.text = [NSString stringWithFormat:@"%d元起",[dic[@"minInvest"] intValue]];
         _markTypeLabel.text = [repayModeArr objectAtIndex:([dic[@"repayMode"] intValue] - 1)];
     }
-}
--(void)stopMinuteCountDownViewTimer:(NSTimer*)timer{
-    [_delegate stopMinuteCountDownViewTimer:_minuteCountDownView.timer];
 }
 
 @end

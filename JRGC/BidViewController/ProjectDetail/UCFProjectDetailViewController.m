@@ -294,11 +294,6 @@
 -(void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
 }
--(void)stopTimer:(NSTimer *)timer{
-    [timer setFireDate:[NSDate  distantFuture]];
-    [timer invalidate];
-    timer = nil;
-}
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
@@ -759,5 +754,10 @@
         scaleFlot =  1.29375;
     }
     _navigationStyleBar.image = [UIImage imageNamed:@"particular_bg_1"];
+}
+-(void)dealloc{
+    
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"StopMinuteCountDownTimer1" object:nil];
 }
 @end
