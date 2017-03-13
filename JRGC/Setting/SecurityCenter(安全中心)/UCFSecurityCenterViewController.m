@@ -192,7 +192,7 @@
             //安全退出后去首页
             AppDelegate *delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
             [delegate.tabBarController setSelectedIndex:0];
-            [delegate.tabBarController.tabBar hideBadgeOnItemIndex:3];
+            [delegate.tabBarController.tabBar hideBadgeOnItemIndex:4];
             [self.navigationController popToRootViewControllerAnimated:YES];
             [[NSUserDefaults standardUserDefaults] setValue:@"0" forKey:@"personCenterClick"];
             
