@@ -358,7 +358,7 @@
 //    //将日期转换成时间戳
 //    NSInteger timeSp = [[NSNumber numberWithDouble:[date timeIntervalSince1970]] integerValue]*1000;
     NSString *stopStatusStr = [_dic objectSafeForKey:@"stopStatus"];// 0投标中,1满标
-    _minuteCountDownView.isStop = stopStatusStr;
+    _minuteCountDownView.isStopStatus = stopStatusStr;
     if ([stopStatusStr intValue] == 0) {
         _minuteCountDownView.timeInterval= [[_dic objectSafeForKey:@"intervalMilli"]  integerValue];
 //        _minuteCountDownView.timeInterval= timeSp;
@@ -367,7 +367,13 @@
     }else{
         NSString *startTimeStr = [_dic objectSafeForKey:@"startTime"];
         NSString *endTimeStr = [_dic objectSafeForKey:@"fullTime"];
-        _minuteCountDownView.tipLabel.text = [NSString stringWithFormat:@"筹标期: %@ 至 %@",startTimeStr,endTimeStr];
+        if (_type == PROJECTDETAILTYPEBONDSRRANSFER){//债权转让
+            startTimeStr = [_dic objectSafeForKey:@"putawaytime"];
+            endTimeStr = [_dic objectSafeForKey:@"soldOutTime"];
+            _minuteCountDownView.tipLabel.text = [NSString stringWithFormat:@"转让期: %@ 至 %@",startTimeStr,endTimeStr];
+        }else{
+            _minuteCountDownView.tipLabel.text = [NSString stringWithFormat:@"筹标期: %@ 至 %@",startTimeStr,endTimeStr];
+        }
     }
     [self addSubview:_minuteCountDownView];
 }
