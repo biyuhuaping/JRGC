@@ -623,7 +623,7 @@
 //             alert.delegate = delegate.tabBarController;
             NSInteger personInt = [[[NSUserDefaults standardUserDefaults] valueForKey:@"personCenterClick"] integerValue];
             if (personInt == 1) {
-                [delegate.tabBarController setSelectedIndex:3];
+                [delegate.tabBarController setSelectedIndex:4];
                 [[NSUserDefaults standardUserDefaults] setValue:@"0" forKey:@"personCenterClick"];
             }
 //            [alert showAlert:delegate.tabBarController];
@@ -1272,7 +1272,7 @@
             //             alert.delegate = delegate.tabBarController;
             NSInteger personInt = [[[NSUserDefaults standardUserDefaults] valueForKey:@"personCenterClick"] integerValue];
             if (personInt == 1) {
-                [delegate.tabBarController setSelectedIndex:3];
+                [delegate.tabBarController setSelectedIndex:4];
                 [[NSUserDefaults standardUserDefaults] setValue:@"0" forKey:@"personCenterClick"];
             }
             //            [alert showAlert:delegate.tabBarController];

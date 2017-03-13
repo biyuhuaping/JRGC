@@ -86,15 +86,14 @@
             }
                 break;
             case 1:{
-                
-                UCFLoanViewController *loanWeb = [[UCFLoanViewController alloc] initWithNibName:@"UCFLoanViewController" bundle:nil];
-//                loanWeb.url = MALLURL;
+                UCFLoanViewController *loanWeb = [[UCFLoanViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
+                loanWeb.url = EASYLOAN_URL;
                 loanWeb.isHideNavigationBar = YES;
-                [self useragent:loanWeb.webView];
+//                [self useragent:loanWeb.webView];
                 controller = loanWeb;
                 loanWeb.navTitle = @"借款";
-                
             }
+                break;
             case 2:{
                 UCFDiscoveryViewController *discoveryWeb = [[UCFDiscoveryViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
                 discoveryWeb.isHideNavigationBar = YES;
@@ -188,6 +187,20 @@
         [self presentViewController:mallWebNaviController animated:YES completion:nil];
         return NO;
      }
+    if ([topView isKindOfClass:[UCFLoanViewController class]]) {
+        NSString *jg_ckie = [UserInfoSingle sharedManager].jg_ckie;
+        NSString *userId = [UserInfoSingle sharedManager].userId;
+        if (nil == jg_ckie || nil == userId) {
+            UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
+            BaseNavigationViewController *loginNaviController = [[BaseNavigationViewController alloc] initWithRootViewController:loginViewController];
+            loginViewController.sourceVC = @"homePage";
+//            [[NSUserDefaults standardUserDefaults] setValue:@"1" forKey:@"personCenterClick"];
+            [self presentViewController:loginNaviController animated:YES completion:nil];
+            [Touch3DSingle sharedTouch3DSingle].isLoad = NO;
+            return NO;
+        }
+        return YES;
+    }
     
     if ([topView isKindOfClass:[UCFSettingViewController class]] ) {
         if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {

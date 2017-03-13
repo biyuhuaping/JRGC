@@ -209,6 +209,7 @@
 
 #define  INTODEALBATCH    @"api/invest/v2/intoDealBatch.json" //进入一键投资页面
 #define  BATCHINVESTURL       @"api/invest/v2/batchInvest.json"   //一键投标
+#define GETTOKENID          @"api/userInfo/v2/getIdentityTokenId.json" //获取放心花的tokenId
 
 #define BATCHINVESTSTATUS    @"api/invest/v2/getBatchInvestStatus.json"//一键投资结果页面
 #define GETBACHINVESTAWARD    @"api/invest/v2/getBatchInvestAward.json" //查看批量投资奖励
@@ -217,6 +218,7 @@
 
 #define DISCOVERYURL    @"https://m.9888.cn/static/wap/fa-xian/index.html"     //发现
 #define RegistCheckQdIsLimit @"newuserregist/checkQdIslimit"
+#define EASYLOAN_URL    @"http://m.easyloan888.cn/static/loan/user-jrgcLogin/index.html"
 
 
 
@@ -422,6 +424,7 @@ enum kSXTag
     kSXTagHornerTransferList,               //转让列表--尊享转让
     kSXTagGetShareMessage,                  //首页2017新手政策分享注册链接
     kSXTagRegistCheckQUDAO,                 //检查该渠道是否用工场码
+    kSXTagGetTokenId,                       //获取放心花界面的token
 };
 
 typedef enum kSXTag kSXTag;

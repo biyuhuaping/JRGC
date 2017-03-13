@@ -362,10 +362,10 @@
         if (_isAfter) {
             _isAfter = NO;
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                self.tabBarController.selectedIndex = 3;
+                self.tabBarController.selectedIndex = 4;
             });
         }else{
-            self.tabBarController.selectedIndex = 3;
+            self.tabBarController.selectedIndex = 4;
         }
         
         //没有手势密码时并且进程还在后台运行，进入个人中心不会重新请求接口
@@ -794,9 +794,9 @@
         if ([dic[@"status"] intValue] == 1) {
             NSString *has = dic[@"has"];
             if ([has isEqualToString:@"1"]) {
-                [self.tabBarController.tabBar showBadgeOnItemIndex:3];
+                [self.tabBarController.tabBar showBadgeOnItemIndex:4];
             } else {
-                [self.tabBarController.tabBar hideBadgeOnItemIndex:3];
+                [self.tabBarController.tabBar hideBadgeOnItemIndex:4];
             }
         }
     } else if (tag.intValue == kSXTagRedPointCheck) {
