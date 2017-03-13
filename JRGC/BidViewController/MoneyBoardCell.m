@@ -44,7 +44,7 @@
 
     if (!isKeyBid) {
         _minuteCountDownView =[[MinuteCountDownView alloc]initWithFrame:CGRectMake(0, 10, ScreenWidth, 37)];
-        _minuteCountDownView.isStop = @"0";
+        _minuteCountDownView.isStopStatus = @"0";
         [_minuteCountDownView startTimer];
         _minuteCountDownView.sourceVC = @"UCFPurchaseBidVC";//投资页面
         [self addSubview:_minuteCountDownView];
