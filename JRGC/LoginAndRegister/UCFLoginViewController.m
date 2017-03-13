@@ -114,7 +114,7 @@
     if ([_sourceVC isEqualToString:@"fromPersonCenter"]) {
         //个人中心跳到登录页
         AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
-        [appDelegate.tabBarController setSelectedIndex:3];
+        [appDelegate.tabBarController setSelectedIndex:4];
         [self dismissViewControllerAnimated:YES completion:nil];
     } else if ([_sourceVC isEqualToString:@"changeUser"]) {
         //切换用户跳到登录页
@@ -258,7 +258,7 @@
     if (buttonIndex == 0) {
         if ([[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
             AppDelegate *del = (AppDelegate *) [[UIApplication sharedApplication] delegate];
-            [del.tabBarController setSelectedIndex:3];
+            [del.tabBarController setSelectedIndex:4];
         }
         [self dismissViewControllerAnimated:NO completion:^{
             //[[NSNotificationCenter defaultCenter] postNotificationName:BACK_TO_PERSON_CENTER object:nil];

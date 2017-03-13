@@ -50,7 +50,7 @@
     if ([_sourceVC isEqualToString:@"fromPersonCenter"]) {
         //个人中心跳到登录页
         AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
-        [appDelegate.tabBarController setSelectedIndex:3];
+        [appDelegate.tabBarController setSelectedIndex:4];
         [self dismissViewControllerAnimated:YES completion:nil];
     }
     else if ([_sourceVC isEqualToString:@"webView"])

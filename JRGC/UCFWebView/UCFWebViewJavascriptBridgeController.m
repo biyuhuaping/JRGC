@@ -31,6 +31,9 @@
 #import "UCFWebViewJavascriptBridgeLevel.h"
 #import "UCFFeedBackViewController.h"//邀请返利
 #import "TradePasswordVC.h"
+
+#import "UserInfoSingle.h"
+
 #define MALLTIME  12.0
 #define SIGNATURETIME 30.0
 
@@ -364,6 +367,10 @@
             [weakSelf.navigationController pushViewController:vc animated:YES];
             
         }
+        else if ([nativeData[@"action"] isEqualToString:@"refresh_loan_token"])
+        {
+            [weakSelf getTokenId];
+        }
         //----------------------------------------------------------------------------------------------------qyy
         
        /* else if ([nativeData[@"action"] isEqualToString:@"app_invest_error"]) //投标成功 跳转到 投资详情
@@ -371,6 +378,45 @@
             [weakSelf jsToNativeHomeWithDic:nativeData];//跳入订单详情页面qyy
         }*/
     }];
+}
+
+- (void)getTokenId
+{
+    NSString *jg_ckie = [UserInfoSingle sharedManager].jg_ckie;
+    NSString *userId = [UserInfoSingle sharedManager].userId;
+    if (nil == jg_ckie || nil == userId) {
+        return;
+    }
+    NSDictionary *parameter = @{@"jg_cookies":jg_ckie, @"userId": userId};
+    [[NetworkModule sharedNetworkModule] newPostReq:parameter tag:kSXTagGetTokenId owner:self signature:YES];
+}
+
+#pragma mark - 网络请求回调
+
+- (void)beginPost:(kSXTag)tag
+{
+    
+}
+
+- (void)endPost:(id)result tag:(NSNumber *)tag
+{
+    NSMutableDictionary *dic = [result objectFromJSONString];
+    
+    if (tag.intValue == kSXTagGetTokenId) {
+        NSString *rstcode = dic[@"ret"];
+
+        if ([rstcode boolValue] == YES) {
+            NSString *token = [[dic objectSafeDictionaryForKey:@"data"] objectForKey:@"tokenId"] ;
+            [_bridge callHandler:@"jsHandler" data:@{@"token": token} responseCallback:^(id responseData) {
+                DBLOG(@".......");
+            }];
+        }
+    }
+}
+
+- (void)errorPost:(NSError *)err tag:(NSNumber *)tag
+{
+    
 }
 
 #pragma mark - 加载地址
@@ -482,6 +528,8 @@
 }
 
 -(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error{
+    
+    [self getTokenId];
     
     if (self.theConnection) {
         //        SAFE_RELEASE(theConnection);
