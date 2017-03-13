@@ -736,7 +736,7 @@
         static NSString *cellStr2 = @"cell2";
         MoneyBoardCell *cell = [self.bidTableView dequeueReusableCellWithIdentifier:cellStr2];
         if (cell == nil) {
-            cell = [[MoneyBoardCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellStr2];
+            cell = [[MoneyBoardCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellStr2 isCollctionKeyBid:YES];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.delegate = self;
             double gondDouBalance = [[_dataDict objectForKey:@"beanAmount"] doubleValue];
