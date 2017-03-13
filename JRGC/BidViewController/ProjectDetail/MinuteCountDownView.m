@@ -66,9 +66,9 @@ CGFloat _passTime;
        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopTimer) name:@"StopMinuteCountDownTimer2" object:nil];
     }
 }
--(void)setIsStop:(NSString *)isStop{
-    _isStop = isStop;
-    if ([isStop intValue] == 1) {
+-(void)setIsStopStatus:(NSString *)isStopStatus{
+    _isStopStatus = isStopStatus;
+    if ([isStopStatus intValue] == 1) {
         for (UILabel *label in self.subviews) {
             if (label.tag == 101) {
                 label.hidden = NO;
@@ -111,6 +111,9 @@ CGFloat _passTime;
     NSString *minute = [NSString stringWithFormat:@"%ld", (NSInteger)((timeInterval-_passTime)/1000/60)%60];
     //秒数
     NSString *second = [NSString stringWithFormat:@"%ld", ((NSInteger)(timeInterval-_passTime)/1000)%60];
+    if ([second floatValue] <= 0) {
+        second = @"0";
+    }
     self.daysLabel.text = [NSString stringWithFormat:@"%02d",[hours intValue]/24];
     self.hoursLabel.text = [NSString stringWithFormat:@"%02d",[hours intValue]%24];
     self.minutesLabel.text = [NSString stringWithFormat:@"%02d",[minute intValue]];
@@ -120,7 +123,7 @@ CGFloat _passTime;
 //    [self.minutesLabel setFontColor:UIColorWithRGB(0x333333) string:@"分"];
 //    [self.secondsLabel setFontColor:UIColorWithRGB(0x333333) string:@"秒"];
     
-    DLog(@"%@天%@时%@分%@秒",self.daysLabel.text,
+    DLog(@"距结束 %@天%@时%@分%@秒",self.daysLabel.text,
          self.hoursLabel.text,
          self.minutesLabel.text,
          self.secondsLabel.text );
