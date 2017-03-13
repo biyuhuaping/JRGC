@@ -12,6 +12,7 @@
 
 - (void)bottomBtnClicked:(id)sender;
 - (void)styleGetToBack;
+-(void)stopMinuteCountDownViewTimer:(NSTimer *)timer;
 
 @end
 

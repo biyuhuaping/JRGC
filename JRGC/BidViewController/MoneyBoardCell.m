@@ -26,17 +26,26 @@
 }
 - (void)initView
 {
-    CGFloat height = 0.0f;
     _topView = [[UIView alloc] init];
     _topView.backgroundColor = UIColorWithRGB(0xebebee);
-
+    
     _topView.frame = CGRectMake(0, 0, ScreenWidth, 10.0f);
     [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:_topView isTop:YES];
     [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:_topView isTop:NO];
     [self addSubview:_topView];
+    
+    CGFloat height = 37.0f;
+    
+    _minuteCountDownView =[[MinuteCountDownView alloc]initWithFrame:CGRectMake(0, 10, ScreenWidth, 37)];
+    _minuteCountDownView.isStop = @"0";
+    [_minuteCountDownView startTimer];
+    [self addSubview:_minuteCountDownView];
+    
+    [Common addLineViewColor:UIColorWithRGB(0xeff0f3) With:_minuteCountDownView isTop:NO];
+    
     height += 10;
     _keYongBaseView = [[UIView alloc] init];
-    _keYongBaseView.frame = CGRectMake(0, CGRectGetMaxY(_topView.frame), ScreenWidth, 37);
+    _keYongBaseView.frame = CGRectMake(0,height , ScreenWidth, 37);
     _keYongBaseView.backgroundColor = UIColorWithRGB(0xf9f9f9);
     [self addSubview:_keYongBaseView];
     [Common addLineViewColor:UIColorWithRGB(0xeff0f3) With:_keYongBaseView isTop:NO];
@@ -78,6 +87,7 @@
     [_inputMoneyTextFieldLable addTarget:self action:@selector(textfieldLength:) forControlEvents:UIControlEventEditingChanged];
     _inputMoneyTextFieldLable.textColor = UIColorWithRGB(0x555555);
     _inputMoneyTextFieldLable.placeholder = @"100元起投";
+    _inputMoneyTextFieldLable.hidden = NO;
 //    _inputMoneyTextFieldLable.backgroundColor = [UIColor redColor];
     [_inputBaseView addSubview:_inputMoneyTextFieldLable];
     

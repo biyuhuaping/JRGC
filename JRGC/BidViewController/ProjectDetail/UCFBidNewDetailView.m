@@ -16,11 +16,11 @@
 #import "SDLoopProgressView.h"
 #import "NSDateManager.h"
 #import "UIDic+Safe.h"
-
+#import "MinuteCountDownView.h"
 #define shadeSpacingHeight 18 //遮罩label的上下间距
 #define shadeHeight 70 //遮罩高度
 
-
+#define MinuteDownViewHeight 37 //遮罩高度
 @interface UCFBidNewDetailView () {
     UIImageView *_headBkView;
     MDRadialProgressView *_circleProgress;
@@ -55,6 +55,7 @@
     
     CGFloat bottomViewYPos;
     BOOL _isP2P;//是否是P2P标
+    MinuteCountDownView *_minuteCountDownView;//倒计时View
 }
 
 @end
@@ -330,12 +331,44 @@
     if (_type == PROJECTDETAILTYPEBONDSRRANSFER) { //债转不添加 担保机构
       guaranteeCompanyNameStr  = @"";
     }
+    [self drawMinuteCountDownView];//创建倒计时view
+    
     //如果没有固定起息日
     if ([fixUpdate isEqual:[NSNull null]] || [fixUpdate isEqualToString:@""] || !fixUpdate) {
         [self drawType2bottomView:guaranteeCompanyNameStr];
     } else {
         [self drawType1bottomView:guaranteeCompanyNameStr];
     }
+}
+// 创建倒计时view
+-(void)drawMinuteCountDownView{
+    
+    float y_pos = 0 + [Common calculateNewSizeBaseMachine:HeadBkHeight] + bottomViewYPos;
+    _minuteCountDownView =[[MinuteCountDownView alloc]initWithFrame:CGRectMake(0, y_pos, ScreenWidth, MinuteDownViewHeight)];
+    
+//    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+//    
+//    [formatter setDateStyle:NSDateFormatterMediumStyle];
+//    
+//    [formatter setTimeStyle:NSDateFormatterShortStyle];
+//    
+//    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss.SSS"];
+//    
+//    NSDate* date = [formatter dateFromString:@"1970-01-01 08:01:00.000"];
+//    //将日期转换成时间戳
+//    NSInteger timeSp = [[NSNumber numberWithDouble:[date timeIntervalSince1970]] integerValue];
+    NSString *stopStatusStr = [_dic objectSafeForKey:@"stopStatus"];// 0投标中,1满标
+    _minuteCountDownView.isStop = stopStatusStr;
+    if ([stopStatusStr intValue] == 0) {
+        _minuteCountDownView.timeInterval= [[_dic objectSafeForKey:@"intervalMilli"]  integerValue];
+        [_minuteCountDownView startTimer];
+        _minuteCountDownView.tipLabel.text = @"距结束";//
+    }else{
+        NSString *startTimeStr = [_dic objectSafeForKey:@"startTime"];
+        NSString *endTimeStr = [_dic objectSafeForKey:@"fullTime"];
+        _minuteCountDownView.tipLabel.text = [NSString stringWithFormat:@"筹标期: %@ 至 %@",startTimeStr,endTimeStr];
+    }
+    [self addSubview:_minuteCountDownView];
 }
 
 //固定起息日
@@ -346,7 +379,8 @@
     if (![insName isEqualToString:@""]) {
         row = 4;
     }
-    bottomBkView = [[UIView alloc] initWithFrame:CGRectMake(0, 0 + [Common calculateNewSizeBaseMachine:HeadBkHeight] + bottomViewYPos, ScreenWidth, 44*row)];
+    float view_y = 0 + [Common calculateNewSizeBaseMachine:HeadBkHeight] + bottomViewYPos+MinuteDownViewHeight;
+    bottomBkView = [[UIView alloc] initWithFrame:CGRectMake(0, view_y, ScreenWidth, 44*row+MinuteDownViewHeight)];
     bottomBkView.backgroundColor = [UIColor whiteColor];
     [self addSubview:bottomBkView];
     
@@ -428,10 +462,8 @@
         _insNameLabel.textAlignment = NSTextAlignmentRight;
         [bottomBkView addSubview:_insNameLabel];
     }
-    
     [self drawPullingView];
 }
-
 // 无固定起息日 比如债权转让标
 - (void)drawType2bottomView:(NSString *)insName
 {
@@ -440,7 +472,7 @@
         row = 3;
     }
     CGFloat bottomBeginYPos;
-    bottomBeginYPos = 0 + [Common calculateNewSizeBaseMachine:HeadBkHeight] + bottomViewYPos;
+    bottomBeginYPos = 0 + [Common calculateNewSizeBaseMachine:HeadBkHeight] + bottomViewYPos+MinuteDownViewHeight;
     bottomBkView = [[UIView alloc] initWithFrame:CGRectMake(0,bottomBeginYPos, ScreenWidth, 44*row)];
     bottomBkView.backgroundColor = [UIColor whiteColor];
     [self addSubview:bottomBkView];
@@ -788,6 +820,9 @@
         _investmentAmountLabel.text = [NSString stringWithFormat:@"%d元起",[dic[@"minInvest"] intValue]];
         _markTypeLabel.text = [repayModeArr objectAtIndex:([dic[@"repayMode"] intValue] - 1)];
     }
+}
+-(void)stopMinuteCountDownViewTimer:(NSTimer*)timer{
+    [_delegate stopMinuteCountDownViewTimer:_minuteCountDownView.timer];
 }
 
 @end
