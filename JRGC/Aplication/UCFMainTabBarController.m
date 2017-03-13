@@ -65,16 +65,15 @@
                                   @"发现",
                                   @"商城",
                                   @"我的"];
-    NSArray *tabbarNormalArray = @[@"tabbar_icon_homepage_normal.png",
-                                   @"tabbar_icon_project_normal.png",//tabbar_icon_transfer_normal.png
-                                   @"tabbar_icon_shop_normal.png",
-                                   @"tabbar_icon_user_normal.png",
-                                   @"tabbar_icon_user_normal.png"];
-    NSArray *tabbarHighlightArray = @[@"tabbar_icon_homepage_highlight.png",
-                                   @"tabbar_icon_project_highlight.png",//tabbar_icon_transfer_highlight.png
-                                   @"tabbar_icon_shop_highlight.png",
-                                      @"tabbar_icon_user_highlight.png",
-                                      @"tabbar_icon_user_highlight.png"];
+    NSArray *tabbarNormalArray = @[@"tabbar_icon_project_normal",
+                                   @"tabbar_icon_loan_normal",                                  @"tabbar_icon_find_normal",
+                                   @"tabbar_icon_shop_normal",
+                                   @"tabbar_icon_user_normal"];
+    NSArray *tabbarHighlightArray = @[@"tabbar_icon_project_highlight",
+                                   @"tabbar_icon_loan_highlight",//tabbar_icon_transfer_highlight.png
+                                   @"tabbar_icon_find_highlight",
+                                      @"tabbar_icon_shop_highlight",
+                                      @"tabbar_icon_user_highlight"];
     
     UIViewController *controller = nil;
     for (int i=0; i<5; i++) {
