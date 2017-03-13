@@ -16,15 +16,23 @@
      [super awakeFromNib];
 
 }
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier isCollctionKeyBid:(BOOL)isKeyBid{
+     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
+        [self initView:isKeyBid];
+    }
+
+    return self;
+}
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
-        [self initView];
-    }
+//    if (self) {
+//        [self initView];
+//    }
     return self;
 }
-- (void)initView
+- (void)initView:(BOOL)isKeyBid
 {
     _topView = [[UIView alloc] init];
     _topView.backgroundColor = UIColorWithRGB(0xebebee);
@@ -33,17 +41,16 @@
     [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:_topView isTop:YES];
     [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:_topView isTop:NO];
     [self addSubview:_topView];
-    
-    CGFloat height = 37.0f;
-    
-    _minuteCountDownView =[[MinuteCountDownView alloc]initWithFrame:CGRectMake(0, 10, ScreenWidth, 37)];
-    _minuteCountDownView.isStop = @"0";
-    [_minuteCountDownView startTimer];
-    [self addSubview:_minuteCountDownView];
-    
-    [Common addLineViewColor:UIColorWithRGB(0xeff0f3) With:_minuteCountDownView isTop:NO];
-    
-    height += 10;
+
+    if (!isKeyBid) {
+        _minuteCountDownView =[[MinuteCountDownView alloc]initWithFrame:CGRectMake(0, 10, ScreenWidth, 37)];
+        _minuteCountDownView.isStop = @"0";
+        [_minuteCountDownView startTimer];
+        _minuteCountDownView.sourceVC = @"UCFPurchaseBidVC";//投资页面
+        [self addSubview:_minuteCountDownView];
+        [Common addLineViewColor:UIColorWithRGB(0xeff0f3) With:_minuteCountDownView isTop:NO];
+    }
+    CGFloat height = isKeyBid ? 10 :CGRectGetMaxY(_minuteCountDownView.frame);
     _keYongBaseView = [[UIView alloc] init];
     _keYongBaseView.frame = CGRectMake(0,height , ScreenWidth, 37);
     _keYongBaseView.backgroundColor = UIColorWithRGB(0xf9f9f9);
@@ -126,7 +133,7 @@
     _myMoneyLabel.backgroundColor = [UIColor clearColor];
     _myMoneyLabel.textColor = UIColorWithRGB(0x555555);
     _myMoneyLabel.text = @"¥10000";
-    _myMoneyLabel.backgroundColor = [UIColor whiteColor];
+//    _myMoneyLabel.backgroundColor = [UIColor whiteColor];
     _myMoneyLabel.font = [UIFont systemFontOfSize:14.0f];
     [self  addSubview:_myMoneyLabel];
     
@@ -157,7 +164,7 @@
     _gongDouCountLabel.backgroundColor = [UIColor clearColor];
     _gongDouCountLabel.textColor = UIColorWithRGB(0x555555);
     _gongDouCountLabel.text = @"¥10000";
-    _gongDouCountLabel.backgroundColor = [UIColor whiteColor];
+//    _gongDouCountLabel.backgroundColor = [UIColor whiteColor];
     _gongDouCountLabel.font = [UIFont systemFontOfSize:14.0f];
     [self  addSubview:_gongDouCountLabel];
     
@@ -178,6 +185,8 @@
     if (!_isTransid) {
         
         if (_isCollctionkeyBid) {
+            
+//            _minuteCountDownView.frame = CGRectZero;
           
             _totalKeYongTipLabel.text = @"(我的余额)";
             NSString *minInvestStr = [NSString stringWithFormat:@"%@",[[_dataDict objectForKey:@"colPrdClaimDetail"] objectForKey:@"colMinInvest"]];
@@ -209,7 +218,7 @@
                 _gongDouSwitch.hidden = YES;
             }
         }else{
-    
+            
         NSString *palceText = [NSString stringWithFormat:@"%@元起投",[[_dataDict objectForKey:@"data"] objectForKey:@"minInvest"]];
         if ([[[_dataDict objectForKey:@"data"] objectForKey:@"maxInvest"] length] != 0) {
             NSString *maxInvest = [[_dataDict objectForKey:@"data"] objectForKey:@"maxInvest"];

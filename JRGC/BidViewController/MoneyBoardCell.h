@@ -40,5 +40,6 @@
 
 @property (nonatomic, strong)NSDictionary   *dataDict;
 @property (nonatomic, assign)BOOL           isTransid;
-@property (nonatomic, assign)BOOL           isCollctionkeyBid;//是否是一键投资标 
+@property (nonatomic, assign)BOOL           isCollctionkeyBid;//是否是一键投资标
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier isCollctionKeyBid:(BOOL)isKeyBid;
 @end

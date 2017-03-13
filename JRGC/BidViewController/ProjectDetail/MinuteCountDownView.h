@@ -13,6 +13,8 @@
 @property(nonatomic, assign)double timeInterval;
 @property(nonatomic, strong)NSTimer *timer ; //定时器
 @property(nonatomic, strong)NSString *isStop ; //该标是否结束
+
+@property(nonatomic, strong)NSString *sourceVC ; //那个页面进来的
 -(void)stopTimer;
 -(void)startTimer;
 @end

@@ -771,7 +771,7 @@
         if (indexPath.row == 0) {
             return 109.0f;
         } else if (indexPath.row == 1) {
-            float height = 202.0f+37.0f;//37为倒计时view的高度
+            float height = 200.5f+36.0f;//36为倒计时view的高度
             if (isCompanyAgent) { //机构用户需要把工豆隐藏
                 height = height - 44.0f;
             }
@@ -848,7 +848,7 @@
         static NSString *cellStr2 = @"cell2";
         MoneyBoardCell *cell = [self.bidTableView dequeueReusableCellWithIdentifier:cellStr2];
         if (cell == nil) {
-            cell = [[MoneyBoardCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellStr2];
+            cell = [[MoneyBoardCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellStr2 isCollctionKeyBid:NO];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.delegate = self;
             double gondDouBalance = [[[_dataDict objectForKey:@"beanUser"] objectForKey:@"availableBalance"] doubleValue];
@@ -858,6 +858,19 @@
                 cell.gongDouSwitch.userInteractionEnabled = NO;
             }
             cell.inputMoneyTextFieldLable.text = [self GetDefaultText];
+//            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+//            
+//            [formatter setDateStyle:NSDateFormatterMediumStyle];
+//            
+//            [formatter setTimeStyle:NSDateFormatterShortStyle];
+//            
+//            [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss.SSS"];
+//            
+//            NSDate* date = [formatter dateFromString:@"1970-01-01 08:21:00.000"];
+//            //将日期转换成时间戳
+//            NSInteger timeSp = [[NSNumber numberWithDouble:[date timeIntervalSince1970]] integerValue]*1000;
+//            cell.minuteCountDownView.timeInterval = timeSp;
+
             cell.minuteCountDownView.timeInterval = [[_dataDict objectSafeForKey:@"intervalMilli"] integerValue];
         }
         cell.isCompanyAgent = isCompanyAgent;
@@ -1498,6 +1511,7 @@
 
 - (void)dealloc
 {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"StopMinuteCountDownTimer2" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 

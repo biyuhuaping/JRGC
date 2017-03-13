@@ -57,8 +57,15 @@ CGFloat _passTime;
 //        [self stopTimer];
 //    }
 //}
-// 每间隔100毫秒定时器触发执行该方法
 
+-(void)setSourceVC:(NSString *)sourceVC{
+    _sourceVC = sourceVC;
+    if ([_sourceVC isEqualToString:@"UCFProjectDetailVC"]) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopTimer) name:@"StopMinuteCountDownTimer1" object:nil];
+    }else{
+       [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopTimer) name:@"StopMinuteCountDownTimer2" object:nil];
+    }
+}
 -(void)setIsStop:(NSString *)isStop{
     _isStop = isStop;
     if ([isStop intValue] == 1) {
@@ -81,6 +88,7 @@ CGFloat _passTime;
         }
     }
 }
+// 每间隔1000毫秒定时器触发执行该方法
 - (void)timerAction
 {
     [self getTimeFromTimeInterval:_timeInterval] ;
