@@ -49,11 +49,15 @@
     BOOL _isP2P; // 是否P2P债转标
     BOOL _isHideBorrowerInformation;//是否隐藏借款人信息
     
-    NSArray *_auditRecordArray;
+    NSMutableArray *_auditRecordArray;
     
     BOOL _isHideBusinessLicense;// 是否隐藏营业执照认证 --对应尊享标的机构标而言 Yes 为隐藏 NO为不隐藏显示
     
     NSString *_licenseNumberStr;//营业执照Number
+    
+    BOOL _isShow;//是否显示逾期信息	string	0不显示,1显示
+    NSString *_overdueCount;	//逾期次数
+    NSString *_overdueInvest;	//逾期金额
 }
 
 @end
@@ -71,6 +75,7 @@
         _detailType = type;
         _isP2P = isP2PType;
         _oneScrollPull = NO;
+        _isShow = [[_dataDic objectSafeForKey:@"isShow"] boolValue];
         _firstSectionArray = [NSArray arrayWithArray:msgArr];
         [self initMainView];
     }
@@ -312,7 +317,7 @@
     //是否隐藏借款人信息一栏
     _isHideBorrowerInformation = NO; //默认不隐藏
     _borrowerInformationStr = @"借款人信息";
-    _auditRecordArray = @[@"身份认证",@"手机认证",@"工作认证",@"信用认证"];
+    _auditRecordArray = [[NSMutableArray alloc]initWithArray: @[@"身份认证",@"手机认证",@"工作认证",@"信用认证"]];
     NSArray *arrayJiBen = [NSArray arrayWithObjects:@"姓名／所在地",@"基本信息",@"入学年份",@"户口所在地",@"公司行业",@"公司规模",@"职位",@"工作收入",@"现单位工作时间",@"有无购房",@"有无房贷",@"有无购车",@"有无车贷", nil];
     
     NSString *agencyCodeStr = [[_dataDic objectSafeDictionaryForKey:@"orderUser"] objectSafeForKey:@"agencyCode"];
@@ -320,10 +325,17 @@
         _borrowerInformationStr = @"机构信息";
         _licenseNumberStr = [[_dataDic objectSafeDictionaryForKey:@"prdGuaranteeMess"]
                              objectSafeForKey:@"licenseNumber"]; //营业执照
-        _auditRecordArray = @[@"营业执照",@"手机认证",@"信用认证"];
+        _auditRecordArray = [[NSMutableArray alloc]initWithArray: @[@"营业执照",@"手机认证",@"信用认证"]];
     }
     [self setinfoDetailValue];
-    _isHideBusinessLicense =  _auditRecordArray.count == 4 ? YES :NO;
+    
+    _isShow = YES;
+    if (_isShow) {
+        _overdueCount = [NSString stringWithFormat:@"%@次",[_dataDic objectSafeForKey:@"overdueCount"]];
+        _overdueInvest = [NSString stringWithFormat:@"%@元",[_dataDic objectSafeForKey:@"overdueInvest"]];
+        [_auditRecordArray addObjectsFromArray:@[@"平台逾期次数",@"平台逾期总金额"]];
+    }
+    _isHideBusinessLicense =  _auditRecordArray.count == 6 ? YES :NO;
     if (_isP2P) {
         NSString *tradeMarkStr = [[_dataDic objectSafeDictionaryForKey:@"prdTransferFore"] objectSafeForKey: @"tradeMark"];
         _isHideBorrowerInformation = [tradeMarkStr intValue] == 20 ? YES :NO;
@@ -692,7 +704,7 @@
                     return 27;
                 }
             } else if(([indexPath section] == 3 && _isHideBorrowerInformation) || ([indexPath section] == 4 && !_isHideBorrowerInformation)) {
-                if ([indexPath row] == 0 || [indexPath row] == 4 - 1) {
+                if ([indexPath row] == 0 || [indexPath row] == _auditRecordArray.count - 1) {
                     return 27 + 8;
                 } else {
                     return 27;
@@ -727,7 +739,7 @@
                     return 27;
                 }
             } else if(([indexPath section] == 5 && !_isHideBorrowerInformation) || ([indexPath section] == 3 && _isHideBorrowerInformation)) {
-                if ([indexPath row] == 0 || [indexPath row] == 4 - 1) {
+                if ([indexPath row] == 0 || [indexPath row] == _auditRecordArray.count - 1) {
                     return 27 + 8;
                 } else {
                     return 27;
@@ -1173,7 +1185,7 @@
                         imageView.hidden = YES;
                         renzhengLabel.text = @"未认证";
                     }
-                }else {
+                }else if((indexPath.row == 3 && _isHideBusinessLicense ) || (indexPath.row == 2 && !_isHideBusinessLicense )){
                     if([[[_dataDic objectForKey:@"orderUser"] objectForKey:@"creditAuth"] integerValue] == 1)
                     {
                         imageView.hidden = NO;
@@ -1184,7 +1196,14 @@
                         imageView.hidden = YES;
                         renzhengLabel.text = @"未认证";
                     }
+                }else if((indexPath.row == 4 && _isHideBusinessLicense ) || (indexPath.row == 3 && !_isHideBusinessLicense )) {
+                    imageView.hidden = YES;
+                    renzhengLabel.text = _overdueCount;
+                }else if((indexPath.row == 5 && _isHideBusinessLicense ) || (indexPath.row == 4 && !_isHideBusinessLicense )) {
+                    imageView.hidden = YES;
+                    renzhengLabel.text = _overdueInvest;
                 }
+
 
                 return cell;
             }
@@ -1413,7 +1432,7 @@
                         imageView.hidden = YES;
                         renzhengLabel.text = @"未认证";
                     }
-                }else {
+                }else if((indexPath.row == 3 && _isHideBusinessLicense ) || (indexPath.row == 2 && !_isHideBusinessLicense )) {
                     if([[[_dataDic objectForKey:@"orderUser"] objectForKey:@"creditAuth"] integerValue] == 1)
                     {
                         imageView.hidden = NO;
@@ -1424,7 +1443,14 @@
                         imageView.hidden = YES;
                         renzhengLabel.text = @"未认证";
                     }
+                }else if((indexPath.row == 4 && _isHideBusinessLicense ) || (indexPath.row == 3 && !_isHideBusinessLicense )) {
+                    imageView.hidden = YES;
+                    renzhengLabel.text = _overdueCount;
+                }else if((indexPath.row == 5 && _isHideBusinessLicense ) || (indexPath.row == 4 && !_isHideBusinessLicense )) {
+                    imageView.hidden = YES;
+                    renzhengLabel.text = _overdueInvest;
                 }
+
 
                 
                 return cell;
