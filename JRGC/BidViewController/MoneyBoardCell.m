@@ -43,7 +43,8 @@
     [self addSubview:_topView];
 
     if (!isKeyBid) {
-        _minuteCountDownView =[[MinuteCountDownView alloc]initWithFrame:CGRectMake(0, 10, ScreenWidth, 37)];
+        _minuteCountDownView = [[[NSBundle mainBundle] loadNibNamed:@"MinuteCountDownView" owner:nil options:nil] firstObject];
+        _minuteCountDownView.frame = CGRectMake(0, 10, ScreenWidth, 37);
         _minuteCountDownView.isStopStatus = @"0";
         [_minuteCountDownView startTimer];
         _minuteCountDownView.sourceVC = @"UCFPurchaseBidVC";//投资页面

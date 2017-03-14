@@ -66,6 +66,9 @@
         [_retTwoStepView.timer invalidate];
     }
 }
+-(void)codeBtnClicked:(id)sender{
+     [self sendFindPwdCode:@"SMS"];//普通短信渠道
+}
 
 -(void)getToBack
 {

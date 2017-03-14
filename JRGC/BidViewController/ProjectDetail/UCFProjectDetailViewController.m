@@ -755,9 +755,4 @@
     }
     _navigationStyleBar.image = [UIImage imageNamed:@"particular_bg_1"];
 }
--(void)dealloc{
-    
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"StopMinuteCountDownTimer1" object:nil];
-}
 @end
