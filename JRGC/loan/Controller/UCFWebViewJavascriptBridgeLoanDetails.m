@@ -25,7 +25,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    [self setErrorViewFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
+    [self setErrorViewFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - NavigationBarHeight)];
     [self addErrorViewButton];
     [self addProgressView];//添加进度条
     [self gotoURL:self.url];
