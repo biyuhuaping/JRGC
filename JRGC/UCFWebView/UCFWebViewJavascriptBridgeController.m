@@ -529,7 +529,6 @@
 
 -(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error{
     
-    [self getTokenId];
     
     if (self.theConnection) {
         //        SAFE_RELEASE(theConnection);
