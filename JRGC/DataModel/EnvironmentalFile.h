@@ -10,7 +10,7 @@
 #define EnvironmentConfiguration  1// 0测试 1正式 2灰度测试
 
 #define AES_TESTKEY @"awejfij124321aweg@##$!*&+=-13123j24325"
-#define QDCODE      @"ANQU"
+#define QDCODE      @""
 
 #if EnvironmentConfiguration == 1
 
