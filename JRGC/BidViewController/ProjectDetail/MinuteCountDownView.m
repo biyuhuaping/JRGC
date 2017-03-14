@@ -7,7 +7,7 @@
 //
 
 #import "MinuteCountDownView.h"
-
+#import "HWWeakTimer.h"
 @interface MinuteCountDownView (){
 CGFloat _passTime;
 }
@@ -21,17 +21,17 @@ CGFloat _passTime;
 
 @implementation MinuteCountDownView
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    
-    if (self) {
-        self =  [[[NSBundle mainBundle] loadNibNamed:@"MinuteCountDownView" owner:nil options:nil] firstObject];
-        self.frame = frame;
-        _passTime=0.0;
-    }
-    return self;
-}
+//- (instancetype)initWithFrame:(CGRect)frame
+//{
+//    self = [super initWithFrame:frame];
+//    
+//    if (self) {
+//        self =  [[[NSBundle mainBundle] loadNibNamed:@"MinuteCountDownView" owner:nil options:nil] firstObject];
+//        self.frame = frame;
+//        _passTime=0.0;
+//    }
+//    return self;
+//}
 -(void)stopTimer{
     [self.timer setFireDate:[NSDate  distantFuture]];
     [self.timer invalidate];
@@ -39,32 +39,34 @@ CGFloat _passTime;
     
 }
 -(void)startTimer{
-    [self.timer setFireDate:[NSDate distantPast]];
+    _passTime=0.0;
+//    [self.timer setFireDate:[NSDate distantPast]];
     //时间间隔是1秒
-    _timer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(timerAction) userInfo:nil repeats:YES];
-    [[NSRunLoop currentRunLoop] addTimer:_timer forMode:UITrackingRunLoopMode];
+    _timer = [HWWeakTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(timerAction) userInfo:nil repeats:YES];
+//    [[NSRunLoop mainRunLoop] addTimer:_timer forMode:UITrackingRunLoopMode];
+      [[NSRunLoop mainRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
 }
-//- (void)setTimeInterval:(double)timeInterval
-//{
-//    _timeInterval = timeInterval ;
-//    if (_timeInterval!=0)
-//    {
+- (void)setTimeInterval:(double)timeInterval
+{
+    _timeInterval = timeInterval ;
+    if (_timeInterval!=0)
+    {
 //        //时间间隔是1秒
 //        _timer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(timerAction) userInfo:nil repeats:YES];
 //        
 //        [[NSRunLoop currentRunLoop] addTimer:_timer forMode:UITrackingRunLoopMode];
-//    }else{
-//        [self stopTimer];
-//    }
-//}
+    }else{
+        [self stopTimer];
+    }
+}
 
 -(void)setSourceVC:(NSString *)sourceVC{
     _sourceVC = sourceVC;
-    if ([_sourceVC isEqualToString:@"UCFProjectDetailVC"]) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopTimer) name:@"StopMinuteCountDownTimer1" object:nil];
-    }else{
-       [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopTimer) name:@"StopMinuteCountDownTimer2" object:nil];
-    }
+//    if ([_sourceVC isEqualToString:@"UCFProjectDetailVC"]) {
+//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopTimer) name:@"StopMinuteCountDownTimer1" object:nil];
+//    }else{
+//       [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopTimer) name:@"StopMinuteCountDownTimer2" object:nil];
+//    }
 }
 -(void)setIsStopStatus:(NSString *)isStopStatus{
     _isStopStatus = isStopStatus;
@@ -131,7 +133,6 @@ CGFloat _passTime;
         [self stopTimer];
     }
 }
-
  
 @end
 
