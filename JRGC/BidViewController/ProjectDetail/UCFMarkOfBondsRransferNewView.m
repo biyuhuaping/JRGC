@@ -328,8 +328,6 @@
         _auditRecordArray = [[NSMutableArray alloc]initWithArray: @[@"营业执照",@"手机认证",@"信用认证"]];
     }
     [self setinfoDetailValue];
-    
-    _isShow = YES;
     if (_isShow) {
         _overdueCount = [NSString stringWithFormat:@"%@次",[_dataDic objectSafeForKey:@"overdueCount"]];
         _overdueInvest = [NSString stringWithFormat:@"%@元",[_dataDic objectSafeForKey:@"overdueInvest"]];
@@ -1081,7 +1079,7 @@
                     
                     UILabel *renzhengLabel = [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth - XPOS - 14*3, yPos, 14*3, 15)];
                     renzhengLabel.font = [UIFont boldSystemFontOfSize:12];
-                    renzhengLabel.textAlignment = NSTextAlignmentCenter;
+                    renzhengLabel.textAlignment = NSTextAlignmentRight;
                     renzhengLabel.textColor = UIColorWithRGB(0x555555);
                     renzhengLabel.backgroundColor = [UIColor clearColor];
                     renzhengLabel.text = @"已认证";
@@ -1201,6 +1199,8 @@
                     renzhengLabel.text = _overdueCount;
                 }else if((indexPath.row == 5 && _isHideBusinessLicense ) || (indexPath.row == 4 && !_isHideBusinessLicense )) {
                     imageView.hidden = YES;
+                    renzhengLabel.frame = CGRectMake(ScreenWidth - XPOS - 150, 6, 150, 15);
+                    renzhengLabel.textAlignment = NSTextAlignmentRight;
                     renzhengLabel.text = _overdueInvest;
                 }
 
@@ -1343,7 +1343,7 @@
                     
                     UILabel *renzhengLabel = [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth - XPOS - 14*3, yPos, 14*3, 15)];
                     renzhengLabel.font = [UIFont boldSystemFontOfSize:12];
-                    renzhengLabel.textAlignment = NSTextAlignmentCenter;
+                    renzhengLabel.textAlignment = NSTextAlignmentRight;
                     renzhengLabel.textColor = UIColorWithRGB(0x555555);
                     renzhengLabel.backgroundColor = [UIColor clearColor];
                     renzhengLabel.text = @"已认证";
@@ -1448,6 +1448,7 @@
                     renzhengLabel.text = _overdueCount;
                 }else if((indexPath.row == 5 && _isHideBusinessLicense ) || (indexPath.row == 4 && !_isHideBusinessLicense )) {
                     imageView.hidden = YES;
+                    renzhengLabel.frame = CGRectMake(ScreenWidth - XPOS - 150, 6, 150, 15);
                     renzhengLabel.text = _overdueInvest;
                 }
 
