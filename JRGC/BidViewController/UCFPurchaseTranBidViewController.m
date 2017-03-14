@@ -97,7 +97,7 @@
     if (indexPath.row == 0) {
         return 109.0f;
     } else if (indexPath.row == 1) {
-        return 202.0f - 43 - 54;
+        return 202.0f - 43 - 54 + 36;
     } else if (indexPath.row == 2) {
         return 30;
     }
@@ -125,11 +125,12 @@
         static NSString *cellStr2 = @"cell2";
         MoneyBoardCell *cell = [self.bidTableView dequeueReusableCellWithIdentifier:cellStr2];
         if (cell == nil) {
-            cell = [[MoneyBoardCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellStr2];
+            cell = [[MoneyBoardCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellStr2 isCollctionKeyBid:NO];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.delegate = self;
             cell.dataDict = _dataDict;
             cell.isTransid = YES;
+            cell.minuteCountDownView.timeInterval = [[_dataDict objectSafeForKey:@"intervalMilli"] integerValue];
             /*
             double gondDouBalance = [[[_dataDict objectForKey:@"data"] objectForKey:@"beanBalance"] doubleValue];
             if (gondDouBalance > 0.0) {
@@ -597,6 +598,10 @@
     if (isSucessInvest) {
         [self.navigationController popToRootViewControllerAnimated:NO];
     }
+}
+-(void)dealloc
+{
+      [[NSNotificationCenter defaultCenter] postNotificationName:@"StopMinuteCountDownTimer2" object:nil];
 }
 /*
 #pragma mark - Navigation

@@ -27,9 +27,9 @@
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-//    if (self) {
-//        [self initView];
-//    }
+    if (self) {
+        [self initView:YES];
+    }
     return self;
 }
 - (void)initView:(BOOL)isKeyBid
@@ -249,7 +249,7 @@
       }
     } else{
             _keYongTipLabel.text = @"我的余额";
-            _rechargeBtn.frame = CGRectMake(ScreenWidth - 15 - 44 , CGRectGetMaxY(_topView.frame), 44, 37);
+            _rechargeBtn.frame = CGRectMake(ScreenWidth - 15 - 44 , 47, 44, 37);
             
             _totalKeYongTipLabel.hidden = YES;
             _inputMoneyTextFieldLable.placeholder = [NSString stringWithFormat:@"%@起投",[[_dataDict objectForKey:@"data"] objectForKey:@"investAmt"]];
