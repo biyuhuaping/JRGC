@@ -223,7 +223,6 @@
         _isHideBorrowerInformation = YES; //如果是尊享标 则隐藏借款人信息
         _titleArray = [[NSArray alloc] initWithObjects:@"基础详情", @"安全保障",@"认购记录", nil];
     }
-    _isShow = YES;
     if (_isShow) {
         _overdueCount = [NSString stringWithFormat:@"%@次",[_dataDic objectSafeForKey:@"overdueCount"]];
         _overdueInvest = [NSString stringWithFormat:@"%@元",[_dataDic objectSafeForKey:@"overdueInvest"]];
@@ -1052,7 +1051,7 @@
                 UILabel *renzhengLabel = [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth - XPOS - 14*3, yPos, 14*3, 15)];
                 renzhengLabel.font = [UIFont boldSystemFontOfSize:12];
                 renzhengLabel.textColor = UIColorWithRGB(0x555555);
-                renzhengLabel.textAlignment = NSTextAlignmentCenter;
+                renzhengLabel.textAlignment = NSTextAlignmentRight;
                 renzhengLabel.backgroundColor = [UIColor clearColor];
                 renzhengLabel.text = @"已认证";
                 renzhengLabel.tag = 103;
@@ -1167,6 +1166,7 @@
                      renzhengLabel.text = _overdueCount;
             }else if((indexPath.row == 5 && _isHideBusinessLicense ) || (indexPath.row == 4 && !_isHideBusinessLicense )) {
                 imageView.hidden = YES;
+                renzhengLabel.frame = CGRectMake(ScreenWidth - XPOS - 150, 6, 150, 15);
                 renzhengLabel.text = _overdueInvest;
             }
         
