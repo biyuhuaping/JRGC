@@ -88,7 +88,7 @@
             case 1:{
                 UCFLoanViewController *loanWeb = [[UCFLoanViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
                 loanWeb.url = EASYLOAN_URL;
-                loanWeb.isHideNavigationBar = YES;
+//                loanWeb.isHideNavigationBar = YES;
 //                [self useragent:loanWeb.webView];
                 controller = loanWeb;
                 loanWeb.navTitle = @"借款";
