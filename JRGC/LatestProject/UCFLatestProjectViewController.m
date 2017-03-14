@@ -323,7 +323,6 @@
     BOOL isBelongToToday = [NSDate isBelongToTodayWithDate:lastFirstLoginTime]; //是不是同一天
 //    BOOL policeOnOff = [ToolSingleTon sharedManager].checkIsInviteFriendsAlert ;
     BOOL onoff  =  [[NSUserDefaults standardUserDefaults] boolForKey:NOVICEPOLICEONOFF];
-    onoff = YES;
     if(!isBelongToToday && onoff){
         
         MjAlertView *alertView = [[MjAlertView alloc]initInviteFriendsToMakeMoneyDelegate:self];
