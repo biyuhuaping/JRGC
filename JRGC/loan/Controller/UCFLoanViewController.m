@@ -19,6 +19,10 @@
     self = [super initWithNibName:NSStringFromClass([self.superclass class]) bundle:nibBundleOrNil];
     return self;
 }
+- (void)refreshWebContent
+{
+    [self gotoURL:self.url];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
