@@ -54,7 +54,7 @@
         segmentContrl = [[UISegmentedControl alloc]initWithItems:@[@"P2P专区",@"尊享专区",@"转让专区"]];
     }
     else {
-        segmentContrl = [[UISegmentedControl alloc]initWithItems:@[@"P2P专区",@"债权转让"]];
+        segmentContrl = [[UISegmentedControl alloc]initWithItems:@[@"P2P专区",@"转让专区"]];
     }
     
     segmentContrl.frame = CGRectMake(0, 0, ScreenWidth*5/8, 30);
