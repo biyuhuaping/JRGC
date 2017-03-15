@@ -35,7 +35,7 @@
 #import "Growing.h"
 #import "UCFLatestProjectViewController.h"
 
-#import <JSPatchPlatform/JSPatch.h>
+
 #import "MD5Util.h"
 
 #import "JPUSHService.h"//极光推送
@@ -62,7 +62,6 @@
     //修改webView标识
     [self setWebViewUserAgent];
     [UCFSession sharedManager].delegate = self;
-    [self checkJSPatchUpdate];
 
     [self checkUpdate];
     [self checkNovicePoliceOnOff];//监测2017新手奖励政策开关。
@@ -271,33 +270,7 @@
     [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Sina appKey:@"2022554825"  appSecret:@"e496f6f9df690579441c9ae4e26be6e4" redirectURL:@"https://sns.whalecloud.com/sina2/callback"];
 }
 
-//检测JSPatch 是否有更新
-- (void)checkJSPatchUpdate
-{
-    [JSPatch setupCallback:^(JPCallbackType type, NSDictionary *data, NSError *error) {
-        switch (type) {
-            case JPCallbackTypeUpdate: {
-                DBLog(@"updated %@ %@", data, error);
-                break;
-            }
-            case JPCallbackTypeRunScript: {
-                DBLog(@"run script %@ %@", data, error);
-                break;
-            }
-            default:
-                break;
-        }
-    }];
-    if(EnvironmentConfiguration == 1 || EnvironmentConfiguration == 2) { //线上或者灰度
-         [JSPatch startWithAppKey:JSPATCH_APPKEY];
-         [JSPatch setupRSAPublicKey:JSPATCH_RSA_PUBLICKEY];
-         [JSPatch sync];
-    } else { //测试
-         [JSPatch testScriptInBundle];
-    }
 
-
-}
 /**  自定义消息的回调
 - (void)networkDidLogin:(NSNotification *)notification {
     DLog(@"%@", [APService registrationID]);

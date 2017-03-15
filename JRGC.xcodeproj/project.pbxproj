@@ -94,7 +94,6 @@
 		4AB1260C1AEF8EA400E915F1 /* UCFPurchaseBidViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AB1260A1AEF8EA400E915F1 /* UCFPurchaseBidViewController.xib */; };
 		4AB3EF231E287CD6007A6AF8 /* RiskAssessmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB3EF211E287CD6007A6AF8 /* RiskAssessmentViewController.m */; };
 		4AB3EF241E287CD6007A6AF8 /* RiskAssessmentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AB3EF221E287CD6007A6AF8 /* RiskAssessmentViewController.xib */; };
-		4AB56E3F1E35A92E008BE8F0 /* JSPatchPlatform.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AB56E3E1E35A92E008BE8F0 /* JSPatchPlatform.framework */; };
 		4ABED3A61E2FABAF006B3F62 /* jcore-ios-1.1.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ABED3A31E2FABAF006B3F62 /* jcore-ios-1.1.0.a */; };
 		4ABED3A71E2FABAF006B3F62 /* jpush-ios-3.0.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ABED3A41E2FABAF006B3F62 /* jpush-ios-3.0.1.a */; };
 		4ABED3A91E2FACE3006B3F62 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ABED3A81E2FACE3006B3F62 /* UserNotifications.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -885,7 +884,6 @@
 		4AB3EF201E287CD6007A6AF8 /* RiskAssessmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RiskAssessmentViewController.h; sourceTree = "<group>"; };
 		4AB3EF211E287CD6007A6AF8 /* RiskAssessmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RiskAssessmentViewController.m; sourceTree = "<group>"; };
 		4AB3EF221E287CD6007A6AF8 /* RiskAssessmentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RiskAssessmentViewController.xib; sourceTree = "<group>"; };
-		4AB56E3E1E35A92E008BE8F0 /* JSPatchPlatform.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = JSPatchPlatform.framework; sourceTree = "<group>"; };
 		4ABED3A31E2FABAF006B3F62 /* jcore-ios-1.1.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jcore-ios-1.1.0.a"; sourceTree = "<group>"; };
 		4ABED3A41E2FABAF006B3F62 /* jpush-ios-3.0.1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jpush-ios-3.0.1.a"; sourceTree = "<group>"; };
 		4ABED3A51E2FABAF006B3F62 /* JPUSHService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPUSHService.h; sourceTree = "<group>"; };
@@ -1938,7 +1936,6 @@
 				4AE1E9621E1CDB9900587CE6 /* libSocialQQ.a in Frameworks */,
 				7BCE025A1AC91BEF0084C15C /* Foundation.framework in Frameworks */,
 				7BCE02581AC91BD60084C15C /* UIKit.framework in Frameworks */,
-				4AB56E3F1E35A92E008BE8F0 /* JSPatchPlatform.framework in Frameworks */,
 				7BCE02541AC91BA20084C15C /* CoreTelephony.framework in Frameworks */,
 				FB5555331BCE37570013894F /* libMobClickLibrary.a in Frameworks */,
 				4AE1E9691E1CDB9900587CE6 /* libWeChatSDK.a in Frameworks */,
@@ -3891,7 +3888,6 @@
 			children = (
 				FBB0D4E81DF8009000D2C280 /* BCFeedback */,
 				2526ADD21DD08CB800114D9A /* MLMOptionSelectView */,
-				FB1E7F891D8E4BEA009CBE2C /* JSPatch */,
 				FB65C94B1D8294E600476E67 /* GrowingIO-iOS-SDK */,
 				25950E971D7FB6EB00E4CCBA /* CWFaceSDK */,
 				4A6FAFC01D743CF300AD4DF8 /* CJLabel */,
@@ -4672,15 +4668,6 @@
 			);
 			name = BlockUIAlertView;
 			path = Tools/BlockUIAlertView;
-			sourceTree = "<group>";
-		};
-		FB1E7F891D8E4BEA009CBE2C /* JSPatch */ = {
-			isa = PBXGroup;
-			children = (
-				4AB56E3E1E35A92E008BE8F0 /* JSPatchPlatform.framework */,
-			);
-			name = JSPatch;
-			path = ThirdLibs/JSPatch;
 			sourceTree = "<group>";
 		};
 		FB21732C1AF2360D00649AA0 /* UCFBackMoneyModel */ = {
