@@ -26,7 +26,14 @@
     [self addErrorViewButton];
     [self addProgressView];//添加进度条
     [self gotoURL:self.url];
-    self.webView.scrollView.bounces = NO; 
+    self.webView.scrollView.bounces = NO;
+    
+    [[UIApplication sharedApplication]  addObserver:self forKeyPath:@"statusBarStyle" options:NSKeyValueObservingOptionNew context:nil];
+}
+
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    DBLOG(@"-----");
 }
 
 - (void)didReceiveMemoryWarning {
