@@ -1511,7 +1511,6 @@
 
 - (void)dealloc
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"StopMinuteCountDownTimer2" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
