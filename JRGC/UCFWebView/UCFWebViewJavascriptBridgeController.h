@@ -60,4 +60,5 @@
 - (void)removeRefresh;//移除下拉刷新
 - (void)addErrorViewButton;
 -(void)addProgressView;
+- (void)addRefresh;
 @end
