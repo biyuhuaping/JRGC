@@ -96,7 +96,7 @@
                 break;
             case 2:{
                 UCFDiscoveryViewController *discoveryWeb = [[UCFDiscoveryViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
-                discoveryWeb.isHideNavigationBar = YES;
+//                discoveryWeb.isHideNavigationBar = YES;
                 discoveryWeb.url      = DISCOVERYURL;//请求地址;
                 discoveryWeb.navTitle = @"发现";
                 controller = discoveryWeb;
@@ -191,7 +191,7 @@
         UCFLoanViewController *loan = (UCFLoanViewController *)topView;
         bool isLoad = [loan isViewLoaded];
         if (isLoad) {
-            [loan.webView reload];
+            [loan refreshWebContent];
         }
         NSString *jg_ckie = [UserInfoSingle sharedManager].jg_ckie;
         NSString *userId = [UserInfoSingle sharedManager].userId;

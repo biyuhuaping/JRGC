@@ -58,6 +58,12 @@
     }
     //缓存  清除
     [[NSURLCache sharedURLCache] removeAllCachedResponses];
+    
+    NSURLCache * cache = [NSURLCache sharedURLCache];
+    [cache removeAllCachedResponses];
+    [cache setDiskCapacity:0];
+    [cache setMemoryCapacity:0];
+    
     [self addTestCookies];
 }
 

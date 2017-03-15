@@ -211,20 +211,20 @@
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     if ([[NSUserDefaults standardUserDefaults] objectForKey:UUID]) {
         [self hideShadowView];
-        [PromptView addGuideViewWithKey:@"personerCenter1" isHorizontal:NO delegate:self imageBlock:^NSString *{
-            NSString *imageName = @"mask4s_4.jpg";
-            if (ScreenHeight > 480) {
-                imageName = @"mask56_4.jpg";
-            }
-            return imageName;
-        } isFirstPage:NO];
-        [PromptView addGuideViewWithKey:@"personerCenter2" isHorizontal:NO delegate:self imageBlock:^NSString *{
-            NSString *imageName = @"mask4s_5.jpg";
-            if (ScreenHeight > 480) {
-                imageName = @"mask56_5.jpg";
-            }
-            return imageName;
-        } isFirstPage:NO];
+//        [PromptView addGuideViewWithKey:@"personerCenter1" isHorizontal:NO delegate:self imageBlock:^NSString *{
+//            NSString *imageName = @"mask4s_4.jpg";
+//            if (ScreenHeight > 480) {
+//                imageName = @"mask56_4.jpg";
+//            }
+//            return imageName;
+//        } isFirstPage:NO];
+//        [PromptView addGuideViewWithKey:@"personerCenter2" isHorizontal:NO delegate:self imageBlock:^NSString *{
+//            NSString *imageName = @"mask4s_5.jpg";
+//            if (ScreenHeight > 480) {
+//                imageName = @"mask56_5.jpg";
+//            }
+//            return imageName;
+//        } isFirstPage:NO];
     } else {
         [self addShadowViewAndLoginBtn];
     }

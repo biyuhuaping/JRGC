@@ -284,31 +284,34 @@
     [self.navigationController.navigationBar setHidden:NO];
     [self.navigationController.navigationBar setBarTintColor:[UIColor whiteColor]];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
-    // 该标识为首页是否加载过有引导页，Yes为 加载过，NO为 未加载过
-    if ([[NSUserDefaults standardUserDefaults] valueForKey:@"fistPage1"]) {
-        [self alertViewInviteFriendsVC];// 加载过  去检测2017年邀请好友弹框提示
-    }
-    [PromptView addGuideViewWithKey:@"fistPage1" isHorizontal:NO delegate:self imageBlock:^NSString *{
-        NSString *imageName = @"mask4s_2.jpg";
-        if (ScreenHeight > 480) {
-            imageName = @"mask56_2.jpg";
-        }
-        return imageName;
-    } isFirstPage:YES];
-    [PromptView addGuideViewWithKey:@"fistPage2" isHorizontal:NO delegate:self imageBlock:^NSString *{
-        NSString *imageName = @"mask4s_1.jpg";
-        if (ScreenHeight > 480) {
-            imageName = @"mask56_1.jpg";
-        }
-        return imageName;
-    } isFirstPage:YES];
-    [PromptView addGuideViewWithKey:@"fistPage3" isHorizontal:NO delegate:self imageBlock:^NSString *{
-        NSString *imageName = @"mask4s_3.jpg";
-        if (ScreenHeight > 480) {
-            imageName = @"mask56_3.jpg";
-        }
-        return imageName;
-    } isFirstPage:YES];
+//    // 该标识为首页是否加载过有引导页，Yes为 加载过，NO为 未加载过
+//    if ([[NSUserDefaults standardUserDefaults] valueForKey:@"fistPage1"]) {
+//        [self alertViewInviteFriendsVC];// 加载过  去检测2017年邀请好友弹框提示
+//    }
+    // 首页引导页去掉的情况，
+    [self alertViewInviteFriendsVC];//去检测2017年邀请好友弹框提示
+//    
+//    [PromptView addGuideViewWithKey:@"fistPage1" isHorizontal:NO delegate:self imageBlock:^NSString *{
+//        NSString *imageName = @"mask4s_2.jpg";
+//        if (ScreenHeight > 480) {
+//            imageName = @"mask56_2.jpg";
+//        }
+//        return imageName;
+//    } isFirstPage:YES];
+//    [PromptView addGuideViewWithKey:@"fistPage2" isHorizontal:NO delegate:self imageBlock:^NSString *{
+//        NSString *imageName = @"mask4s_1.jpg";
+//        if (ScreenHeight > 480) {
+//            imageName = @"mask56_1.jpg";
+//        }
+//        return imageName;
+//    } isFirstPage:YES];
+//    [PromptView addGuideViewWithKey:@"fistPage3" isHorizontal:NO delegate:self imageBlock:^NSString *{
+//        NSString *imageName = @"mask4s_3.jpg";
+//        if (ScreenHeight > 480) {
+//            imageName = @"mask56_3.jpg";
+//        }
+//        return imageName;
+//    } isFirstPage:YES];
 
 }
 -(void)viewDidAppear:(BOOL)animated{
