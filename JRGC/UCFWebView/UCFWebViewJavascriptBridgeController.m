@@ -26,6 +26,7 @@
 #import <UShareUI/UShareUI.h>
 //#import "UMSocialManager.h"
 #import "UCFLoanViewController.h"
+#import "UCFDiscoveryViewController.h"
 
 #import "UCFWebViewJavascriptBridgeMall.h"
 #import "UCFWebViewJavascriptBridgeMallDetails.h"
@@ -77,7 +78,7 @@
 
 - (void)setController
 {
-    if (![self isKindOfClass:[UCFLoanViewController class]]) {
+    if (![self isKindOfClass:[UCFLoanViewController class]] && ![self isKindOfClass:[UCFDiscoveryViewController class]]) {
         [self addLeftButton];
     }
     
@@ -723,7 +724,7 @@
     else
     {
         UCFWebViewJavascriptBridgeMallDetails *web = [[UCFWebViewJavascriptBridgeMallDetails alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMallDetails" bundle:nil];
-        if ([self isKindOfClass:[UCFLoanViewController class]]) {
+        if ([self isKindOfClass:[UCFLoanViewController class]] ||  [self isKindOfClass:[UCFDiscoveryViewController class]]) {
             web.isHidenNavigationbar = YES;
         }
         web.url = [dic objectSafeForKey:@"value"];
