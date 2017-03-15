@@ -258,6 +258,7 @@
 }
 - (void)handlePromptViewEndView
 {
+//    用户未加载过引导页 去检测2017年邀请好友弹框提示
     [self alertViewInviteFriendsVC];
 }
 - (UIView*)drawguildView :(UIImage*)image
@@ -283,7 +284,10 @@
     [self.navigationController.navigationBar setHidden:NO];
     [self.navigationController.navigationBar setBarTintColor:[UIColor whiteColor]];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
-    
+    // 该标识为首页是否加载过有引导页，Yes为 加载过，NO为 未加载过
+    if ([[NSUserDefaults standardUserDefaults] valueForKey:@"fistPage1"]) {
+        [self alertViewInviteFriendsVC];// 加载过  去检测2017年邀请好友弹框提示
+    }
     [PromptView addGuideViewWithKey:@"fistPage1" isHorizontal:NO delegate:self imageBlock:^NSString *{
         NSString *imageName = @"mask4s_2.jpg";
         if (ScreenHeight > 480) {
