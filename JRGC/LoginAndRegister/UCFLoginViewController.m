@@ -193,6 +193,8 @@
                     [del.tabBarController setSelectedIndex:0];
                     UINavigationController *contoller = (UINavigationController*)del.tabBarController.selectedViewController;
                     [contoller popToRootViewControllerAnimated:YES];
+                    //切换用户重新请求放心花页面
+                    [[NSNotificationCenter defaultCenter] postNotificationName:IS_RELOADE_URL object:nil];
                 } else {
                     _sameUser = YES;
                     //同一个用户

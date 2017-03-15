@@ -130,6 +130,7 @@ return shared##className; \
 #define ReduceBrightness            @"Reducebrightness"
 #define EndBrightnessTimer          @"endTimer"
 #define CHECK_NEW_VERSION           @"checknewversion"
+#define IS_RELOADE_URL              @"isReLauchWebUrl"
 
 #define GCODE           @"gesturecode" //手势密码
 #define GCODE_Swtich    @"gesturecode_Switch" //开关手势密码
