@@ -87,7 +87,9 @@
     if (!self.errorView.hidden) {
         self.errorView.hidden = YES;
     }
-    
+    if (baseTitleLabel.text.length == 0) {
+        baseTitleLabel.text = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+    }
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
