@@ -283,28 +283,28 @@
     [self.navigationController.navigationBar setHidden:NO];
     [self.navigationController.navigationBar setBarTintColor:[UIColor whiteColor]];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
-    
-    [PromptView addGuideViewWithKey:@"fistPage1" isHorizontal:NO delegate:self imageBlock:^NSString *{
-        NSString *imageName = @"mask4s_2.jpg";
-        if (ScreenHeight > 480) {
-            imageName = @"mask56_2.jpg";
-        }
-        return imageName;
-    } isFirstPage:YES];
-    [PromptView addGuideViewWithKey:@"fistPage2" isHorizontal:NO delegate:self imageBlock:^NSString *{
-        NSString *imageName = @"mask4s_1.jpg";
-        if (ScreenHeight > 480) {
-            imageName = @"mask56_1.jpg";
-        }
-        return imageName;
-    } isFirstPage:YES];
-    [PromptView addGuideViewWithKey:@"fistPage3" isHorizontal:NO delegate:self imageBlock:^NSString *{
-        NSString *imageName = @"mask4s_3.jpg";
-        if (ScreenHeight > 480) {
-            imageName = @"mask56_3.jpg";
-        }
-        return imageName;
-    } isFirstPage:YES];
+//    
+//    [PromptView addGuideViewWithKey:@"fistPage1" isHorizontal:NO delegate:self imageBlock:^NSString *{
+//        NSString *imageName = @"mask4s_2.jpg";
+//        if (ScreenHeight > 480) {
+//            imageName = @"mask56_2.jpg";
+//        }
+//        return imageName;
+//    } isFirstPage:YES];
+//    [PromptView addGuideViewWithKey:@"fistPage2" isHorizontal:NO delegate:self imageBlock:^NSString *{
+//        NSString *imageName = @"mask4s_1.jpg";
+//        if (ScreenHeight > 480) {
+//            imageName = @"mask56_1.jpg";
+//        }
+//        return imageName;
+//    } isFirstPage:YES];
+//    [PromptView addGuideViewWithKey:@"fistPage3" isHorizontal:NO delegate:self imageBlock:^NSString *{
+//        NSString *imageName = @"mask4s_3.jpg";
+//        if (ScreenHeight > 480) {
+//            imageName = @"mask56_3.jpg";
+//        }
+//        return imageName;
+//    } isFirstPage:YES];
 
 }
 -(void)viewDidAppear:(BOOL)animated{
