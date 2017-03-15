@@ -28,13 +28,13 @@
     [self gotoURL:self.url];
     self.webView.scrollView.bounces = NO;
     
-    [[UIApplication sharedApplication]  addObserver:self forKeyPath:@"statusBarStyle" options:NSKeyValueObservingOptionNew context:nil];
+//    [[UIApplication sharedApplication]  addObserver:self forKeyPath:@"statusBarStyle" options:NSKeyValueObservingOptionNew context:nil];
 }
 
--(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
-    DBLOG(@"-----");
-}
+//-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+//{
+//    DBLOG(@"-----");
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
