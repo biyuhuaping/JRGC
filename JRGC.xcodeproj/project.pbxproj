@@ -588,16 +588,6 @@
 		FB4F9E7F1D62A83000CCB492 /* AccountWebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB4F9E7D1D62A83000CCB492 /* AccountWebView.xib */; };
 		FB51491A1D6438A700C26E7B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB5149191D6438A700C26E7B /* Images.xcassets */; };
 		FB5149341D64403100C26E7B /* gif@3x.gif in Resources */ = {isa = PBXBuildFile; fileRef = FB51491B1D64403000C26E7B /* gif@3x.gif */; };
-		FB51493F1D64403100C26E7B /* mask4s_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FB5149281D64403100C26E7B /* mask4s_1.jpg */; };
-		FB5149401D64403100C26E7B /* mask4s_2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FB5149291D64403100C26E7B /* mask4s_2.jpg */; };
-		FB5149411D64403100C26E7B /* mask4s_3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FB51492A1D64403100C26E7B /* mask4s_3.jpg */; };
-		FB5149421D64403100C26E7B /* mask4s_4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FB51492B1D64403100C26E7B /* mask4s_4.jpg */; };
-		FB5149431D64403100C26E7B /* mask4s_5.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FB51492C1D64403100C26E7B /* mask4s_5.jpg */; };
-		FB5149441D64403100C26E7B /* mask56_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FB51492D1D64403100C26E7B /* mask56_1.jpg */; };
-		FB5149451D64403100C26E7B /* mask56_2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FB51492E1D64403100C26E7B /* mask56_2.jpg */; };
-		FB5149461D64403100C26E7B /* mask56_3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FB51492F1D64403100C26E7B /* mask56_3.jpg */; };
-		FB5149471D64403100C26E7B /* mask56_4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FB5149301D64403100C26E7B /* mask56_4.jpg */; };
-		FB5149481D64403100C26E7B /* mask56_5.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FB5149311D64403100C26E7B /* mask56_5.jpg */; };
 		FB5149491D64403100C26E7B /* touch_id@2x.gif in Resources */ = {isa = PBXBuildFile; fileRef = FB5149321D64403100C26E7B /* touch_id@2x.gif */; };
 		FB51494A1D64403100C26E7B /* touch_id@3x.gif in Resources */ = {isa = PBXBuildFile; fileRef = FB5149331D64403100C26E7B /* touch_id@3x.gif */; };
 		FB5149521D64441F00C26E7B /* guideImage6_1.png in Resources */ = {isa = PBXBuildFile; fileRef = FB51494C1D64441F00C26E7B /* guideImage6_1.png */; };
@@ -1754,16 +1744,6 @@
 		FB4F9E7D1D62A83000CCB492 /* AccountWebView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AccountWebView.xib; path = olduserguide/AccountWebView.xib; sourceTree = "<group>"; };
 		FB5149191D6438A700C26E7B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		FB51491B1D64403000C26E7B /* gif@3x.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "gif@3x.gif"; path = "Images/gif@3x.gif"; sourceTree = "<group>"; };
-		FB5149281D64403100C26E7B /* mask4s_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = mask4s_1.jpg; sourceTree = "<group>"; };
-		FB5149291D64403100C26E7B /* mask4s_2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = mask4s_2.jpg; sourceTree = "<group>"; };
-		FB51492A1D64403100C26E7B /* mask4s_3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = mask4s_3.jpg; sourceTree = "<group>"; };
-		FB51492B1D64403100C26E7B /* mask4s_4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = mask4s_4.jpg; sourceTree = "<group>"; };
-		FB51492C1D64403100C26E7B /* mask4s_5.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = mask4s_5.jpg; sourceTree = "<group>"; };
-		FB51492D1D64403100C26E7B /* mask56_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = mask56_1.jpg; sourceTree = "<group>"; };
-		FB51492E1D64403100C26E7B /* mask56_2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = mask56_2.jpg; sourceTree = "<group>"; };
-		FB51492F1D64403100C26E7B /* mask56_3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = mask56_3.jpg; sourceTree = "<group>"; };
-		FB5149301D64403100C26E7B /* mask56_4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = mask56_4.jpg; sourceTree = "<group>"; };
-		FB5149311D64403100C26E7B /* mask56_5.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = mask56_5.jpg; sourceTree = "<group>"; };
 		FB5149321D64403100C26E7B /* touch_id@2x.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "touch_id@2x.gif"; path = "Images/touch_id@2x.gif"; sourceTree = "<group>"; };
 		FB5149331D64403100C26E7B /* touch_id@3x.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "touch_id@3x.gif"; path = "Images/touch_id@3x.gif"; sourceTree = "<group>"; };
 		FB51494C1D64441F00C26E7B /* guideImage6_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guideImage6_1.png; sourceTree = "<group>"; };
@@ -4693,16 +4673,6 @@
 		FB5149271D64403100C26E7B /* PromptView */ = {
 			isa = PBXGroup;
 			children = (
-				FB5149281D64403100C26E7B /* mask4s_1.jpg */,
-				FB5149291D64403100C26E7B /* mask4s_2.jpg */,
-				FB51492A1D64403100C26E7B /* mask4s_3.jpg */,
-				FB51492B1D64403100C26E7B /* mask4s_4.jpg */,
-				FB51492C1D64403100C26E7B /* mask4s_5.jpg */,
-				FB51492D1D64403100C26E7B /* mask56_1.jpg */,
-				FB51492E1D64403100C26E7B /* mask56_2.jpg */,
-				FB51492F1D64403100C26E7B /* mask56_3.jpg */,
-				FB5149301D64403100C26E7B /* mask56_4.jpg */,
-				FB5149311D64403100C26E7B /* mask56_5.jpg */,
 			);
 			name = PromptView;
 			path = Images/PromptView;
@@ -5173,7 +5143,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FB5149441D64403100C26E7B /* mask56_1.jpg in Resources */,
 				7BC7890A1B04569300D50494 /* jianjie.docx in Resources */,
 				83FB3F5F1E5C4D2A0094C9BA /* UCFBatchBidWebViewController.xib in Resources */,
 				7BC7890B1B04569300D50494 /* xinxizixunxieyi.docx in Resources */,
@@ -5187,15 +5156,12 @@
 				FB8403421D12964E0042FED8 /* UCFFriendRecCell1.xib in Resources */,
 				FBE438EB1ADF590800F80B53 /* UCFAssignmentCreditor.storyboard in Resources */,
 				FBB362441B034906000DD1B6 /* UCFRebateCell.xib in Resources */,
-				FB51493F1D64403100C26E7B /* mask4s_1.jpg in Resources */,
 				25950EC71D7FB6EC00E4CCBA /* CWResource.bundle in Resources */,
 				25F445C41D66E276006813BB /* UCFChoseBankViewController.xib in Resources */,
 				FB576C211BA7C98A005DC159 /* ReturnedMoneyCell.xib in Resources */,
 				746FFE261B0059BB00FF927F /* UCFBindCardOneTableViewCell.xib in Resources */,
-				FB5149481D64403100C26E7B /* mask56_5.jpg in Resources */,
 				74EB80F01AE500A50071621E /* SecurityCell.xib in Resources */,
 				E3A96B0F1CBF83CE00E8884F /* UCFWorkPointsTableViewCell.xib in Resources */,
-				FB5149401D64403100C26E7B /* mask4s_2.jpg in Resources */,
 				FB7E51B21ADE5E4000878C9F /* InvestmentCell.xib in Resources */,
 				FB4F9E4B1D62A6C400CCB492 /* UpgradeAccountVC.xib in Resources */,
 				74EB30741B0E0EC900D27BA9 /* UCFBankTableViewCell.xib in Resources */,
@@ -5242,7 +5208,6 @@
 				74F490EF1E5B2AAA0057AC62 /* UCFCollectionBidCell.xib in Resources */,
 				FB8B77DD1BA674F70007D5C5 /* UCFMyRebateViewCtrl.xib in Resources */,
 				FB51491A1D6438A700C26E7B /* Images.xcassets in Resources */,
-				FB5149421D64403100C26E7B /* mask4s_4.jpg in Resources */,
 				847103BB1D59AD7500935B19 /* UCFBankDepositoryAccountViewController.xib in Resources */,
 				833A6EAE1E55466B00C8A494 /* UCFCollectionListViewController.xib in Resources */,
 				833A6EAC1E55466B00C8A494 /* UCFCollectionDetailViewController.xib in Resources */,
@@ -5310,21 +5275,17 @@
 				74FC22881BA6AE2100D1660A /* UCFFacCodeViewController.xib in Resources */,
 				74FC22821BA6A90E00D1660A /* UCFMyFacBeanViewController.xib in Resources */,
 				74F490EA1E5B0BD70057AC62 /* UCFMyInvestBatchCell.xib in Resources */,
-				FB5149471D64403100C26E7B /* mask56_4.jpg in Resources */,
 				E3E05C5D1DD07D710066B65C /* UCFCouponExchangeToFriends.xib in Resources */,
 				FB5149571D64441F00C26E7B /* guideImage7_3.png in Resources */,
 				FB2858CC1BAAB07C000EAA71 /* UCFBackMoneyDetailViewController.xib in Resources */,
 				E311A66E1D90E85B00C5483E /* UCFWebViewJavascriptBridgeLevel.xib in Resources */,
 				FB51494A1D64403100C26E7B /* touch_id@3x.gif in Resources */,
 				E3C1179B1D40CFCC0053A052 /* UCFContributionValueCell.xib in Resources */,
-				FB5149461D64403100C26E7B /* mask56_3.jpg in Resources */,
-				FB5149411D64403100C26E7B /* mask4s_3.jpg in Resources */,
 				74E89FF21DDD8D44000B0AFF /* UCFHonerPlanViewController.xib in Resources */,
 				FB4F9E461D62A6B600CCB492 /* OpeningMerchantsVC.xib in Resources */,
 				AEC5EEC01D9B6594000C0321 /* RechargeFixedTelNumView.xib in Resources */,
 				4A675E3F1C5F484400F21DDA /* SelectPayMoneyOrbeansCell.xib in Resources */,
 				25314C0C1D8FD7FA0066F446 /* UCFDirectCell.xib in Resources */,
-				FB5149431D64403100C26E7B /* mask4s_5.jpg in Resources */,
 				74DBAC7A1D5864C200F6F6B1 /* UCFHuiShangBankViewController.xib in Resources */,
 				E3C1179D1D40CFCC0053A052 /* UCFContributionValueTypeTowCell.xib in Resources */,
 				74EB80F21AE51F660071621E /* UCFMoreViewController.storyboard in Resources */,
@@ -5340,7 +5301,6 @@
 				25950EBF1D7FB6EC00E4CCBA /* CWFinishedView.xib in Resources */,
 				FB5149541D64441F00C26E7B /* guideImage6_3.png in Resources */,
 				74D337BA1E1390E800386853 /* UCFDataStatisticsViewController.xib in Resources */,
-				FB5149451D64403100C26E7B /* mask56_2.jpg in Resources */,
 				74FC22801BA6A7FA00D1660A /* UCFSecurityCenterViewController.xib in Resources */,
 				4AE1E9671E1CDB9900587CE6 /* WeiboSDK.bundle in Resources */,
 				FBB0D4F91DF8009000D2C280 /* YWFeedbackBundle.bundle in Resources */,
