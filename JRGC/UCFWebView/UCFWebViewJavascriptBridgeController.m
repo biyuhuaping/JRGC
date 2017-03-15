@@ -25,6 +25,7 @@
 //#import "UMSocial.h"
 #import <UShareUI/UShareUI.h>
 //#import "UMSocialManager.h"
+#import "UCFLoanViewController.h"
 
 #import "UCFWebViewJavascriptBridgeMall.h"
 #import "UCFWebViewJavascriptBridgeMallDetails.h"
@@ -76,8 +77,9 @@
 
 - (void)setController
 {
-    
-    [self addLeftButton];
+    if (![self isKindOfClass:[UCFLoanViewController class]]) {
+        [self addLeftButton];
+    }
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(webViewReload) name:BACK_TO_BANNER object:nil];
      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(webViewLoginBack) name:BACK_TO_LOGIN object:nil];
@@ -573,6 +575,9 @@
 - (void)setLoadCount:(NSUInteger)loadCount {
     _loadCount = loadCount;
     DBLOG(@"loadCount----->>>>>%d",loadCount);
+    
+    DBLOG(@"%@", self);
+    
     if (_loadCount == 0) {
        
         [self.progressView setProgress:1 animated:YES];
@@ -718,6 +723,9 @@
     else
     {
         UCFWebViewJavascriptBridgeMallDetails *web = [[UCFWebViewJavascriptBridgeMallDetails alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMallDetails" bundle:nil];
+        if ([self isKindOfClass:[UCFLoanViewController class]]) {
+            web.isHidenNavigationbar = YES;
+        }
         web.url = [dic objectSafeForKey:@"value"];
         [self.navigationController pushViewController:web animated:YES];
         

@@ -25,7 +25,7 @@
     [self setErrorViewFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
     [self addErrorViewButton];
     [self addProgressView];//添加进度条
-    self.url = @"http://m.easyloan888.cn/static/loan/user-jrgcLogin/index.html";
+//    self.url = @"http://m.easyloan888.cn/static/loan/user-jrgcLogin/index.html";
     [self gotoURL:self.url];
     self.webView.scrollView.bounces = NO;
 }

@@ -34,7 +34,7 @@
 
 //只要是豆哥商城的都去掉导航栏
 - (void)viewWillAppear:(BOOL)animated {
-    [self.navigationController setNavigationBarHidden:YES animated:animated];
+    [self.navigationController setNavigationBarHidden:!_isHidenNavigationbar animated:animated];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 }
 
