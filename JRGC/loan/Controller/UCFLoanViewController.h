@@ -9,5 +9,6 @@
 #import "UCFWebViewJavascriptBridgeController.h"
 
 @interface UCFLoanViewController : UCFWebViewJavascriptBridgeController
-
+//退出登录重新刷
+- (void)refreshWebContent;
 @end

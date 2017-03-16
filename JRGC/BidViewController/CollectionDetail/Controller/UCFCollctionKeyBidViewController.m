@@ -1173,8 +1173,8 @@
 - (BOOL)checkIsFirstInvest
 {
     NSString *recommendCode = [_dataDict objectForKey:@"recomendFactoryCode"];
-    BOOL isNewUser = [[_dataDict objectSafeForKey:@"isNewUser"] boolValue];
-    if ([recommendCode isEqualToString:@""] && isNewUser) {
+    BOOL isLimit = [[_dataDict objectSafeForKey:@"isLimit"] boolValue];
+    if ([recommendCode isEqualToString:@""] && !isLimit) {
         return YES;
     } else {
         return NO;
