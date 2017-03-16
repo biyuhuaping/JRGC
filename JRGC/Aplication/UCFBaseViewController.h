@@ -45,6 +45,8 @@
 - (void)addRightButtonWithImage:(UIImage *)rightButtonimage;
 - (void)setNavigationTitleView;
 
+- (void)addLeftButtons;
+
 -(void)getToBack;
 
 //- (void)clickRightBtn;
