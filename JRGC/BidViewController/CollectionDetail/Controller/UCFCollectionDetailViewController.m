@@ -85,7 +85,7 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
 //    self.navigationController.navigationBar.translucent = NO;
-    if([_souceVC isEqualToString:@"BatchProjectVC"] || [_intoViewControllerStr isEqualToString:@"CollctionKeyBidVC"])
+    if([_souceVC isEqualToString:@"BatchProjectVC"] || [_intoViewControllerStr isEqualToString:@"CollctionKeyBidVC"] || [_intoViewControllerStr isEqualToString:@"NoPermissionVC"])
     {
          [self.navigationController setNavigationBarHidden:YES animated:YES];
     }else {
@@ -604,11 +604,13 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
         NSString *strParameters = [NSString stringWithFormat:@"id=%@&userId=%@", idStr,[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
         
         if (status != 2) {
-            if (isOrder == 0) {//0可看,1不可看
+            if (isOrder == 1) {//0不可看,1可看
                 [MBProgressHUD showHUDAddedTo:self.view animated:YES];
                 [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self];
             } else {
                 UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前标的详情只对投资人开放"];
+                self.intoViewControllerStr = @"NoPermissionVC";
+                controller.souceVC = @"CollectionDetailVC";
                 [self.navigationController pushViewController:controller animated:YES];
             }
         }

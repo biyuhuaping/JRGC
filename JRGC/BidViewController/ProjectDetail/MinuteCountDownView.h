@@ -10,7 +10,7 @@
 #import "NZLabel.h"
 @interface MinuteCountDownView : UIView
 @property(nonatomic, strong) IBOutlet UILabel *tipLabel;
-@property(nonatomic, assign)double timeInterval;
+@property(nonatomic, assign) NSInteger timeInterval;
 @property(nonatomic, strong)NSTimer *timer ; //定时器
 @property(nonatomic, strong)NSString *isStopStatus ; //该标是否结束
 

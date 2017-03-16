@@ -10,7 +10,7 @@
 
 @interface UCFNoPermissionViewController : UCFBaseViewController
 
-
+@property (nonatomic,strong) NSString *souceVC;//从哪个页面过来的
 
 - (id)initWithTitle:(NSString*)title noPermissionTitle:(NSString *)infoStr;
 
