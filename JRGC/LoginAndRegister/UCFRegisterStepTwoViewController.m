@@ -222,6 +222,8 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:REGIST_JPUSH object:nil];
             [[NSNotificationCenter defaultCenter] postNotificationName:BACK_TO_BANNER object:nil];//返回banner时刷新
             AppDelegate *delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+            [[NSNotificationCenter defaultCenter] postNotificationName:IS_RELOADE_URL object:nil];
+
             [delegate.tabBarController dismissViewControllerAnimated:NO completion:^{
                 [LLLockPassword saveLockPassword:nil];
                 [self showGestureCode];
