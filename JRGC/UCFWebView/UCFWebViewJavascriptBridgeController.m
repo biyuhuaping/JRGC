@@ -27,6 +27,7 @@
 //#import "UMSocialManager.h"
 #import "UCFLoanViewController.h"
 #import "UCFDiscoveryViewController.h"
+#import "UCFWebViewJavascriptBridgeLoanDetails.h"
 
 #import "UCFWebViewJavascriptBridgeMall.h"
 #import "UCFWebViewJavascriptBridgeMallDetails.h"
@@ -79,7 +80,11 @@
 - (void)setController
 {
     if (![self isKindOfClass:[UCFLoanViewController class]] && ![self isKindOfClass:[UCFDiscoveryViewController class]]) {
-        [self addLeftButton];
+        if ([self isKindOfClass:[UCFWebViewJavascriptBridgeLoanDetails class]]) {
+            [self addLeftButtons];
+        }
+        else
+            [self addLeftButton];
     }
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(webViewReload) name:BACK_TO_BANNER object:nil];
@@ -723,8 +728,16 @@
     }
     else
     {
+        if ([self isKindOfClass:[UCFLoanViewController class]]) {
+            
+            UCFWebViewJavascriptBridgeLoanDetails *loan = [[UCFWebViewJavascriptBridgeLoanDetails alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMallDetails" bundle:nil];
+            loan.isHidenNavigationbar = YES;
+            loan.url = [dic objectSafeForKey:@"value"];
+            [self.navigationController pushViewController:loan animated:YES];
+            return;
+        }
         UCFWebViewJavascriptBridgeMallDetails *web = [[UCFWebViewJavascriptBridgeMallDetails alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMallDetails" bundle:nil];
-        if ([self isKindOfClass:[UCFLoanViewController class]] ||  [self isKindOfClass:[UCFDiscoveryViewController class]]) {
+        if ([self isKindOfClass:[UCFDiscoveryViewController class]]) {
             web.isHidenNavigationbar = YES;
         }
         web.url = [dic objectSafeForKey:@"value"];

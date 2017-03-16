@@ -306,7 +306,7 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:BACK_TO_BANNER object:nil];
             //[[NSNotificationCenter defaultCenter] postNotificationName:BACK_TO_BANNER object:nil];
         }];
-//        return;
+        return;
     }
     [self dismissViewControllerAnimated:NO completion:^{
         [self showGestureCode];

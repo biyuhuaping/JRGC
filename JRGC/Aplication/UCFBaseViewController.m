@@ -99,6 +99,38 @@
     self.navigationItem.leftBarButtonItem = leftItem;
 }
 
+- (void)addLeftButtons
+{
+    UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [leftButton setFrame:CGRectMake(0, 0, 25, 25)];
+    [leftButton setBackgroundColor:[UIColor clearColor]];
+    [leftButton.titleLabel setFont:[UIFont systemFontOfSize:14]];
+    [leftButton setTitleColor:[UIColor colorWithWhite:1 alpha:0.7] forState:UIControlStateHighlighted];
+    [leftButton setImageEdgeInsets:UIEdgeInsetsMake(0.0, -15, 0.0, 0.0)];
+    if ([_baseTitleType isEqualToString:@"detail"] || [_baseTitleType isEqualToString:@"Transdetail"]||[_baseTitleType isEqualToString:@"camera"]) {
+        [leftButton setImage:[UIImage imageNamed:@"btn_whiteback.png"]forState:UIControlStateNormal];
+        [leftButton setImage:[UIImage imageNamed:@"btn_whiteback.png"]forState:UIControlStateHighlighted];
+    }else {
+        [leftButton setImage:[UIImage imageNamed:@"icon_back.png"]forState:UIControlStateNormal];
+    }
+    //[leftButton setImage:[UIImage imageNamed:@"icon_back"] forState:UIControlStateHighlighted];
+    [leftButton addTarget:self action:@selector(getToBack) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
+    
+    UIButton *leftButton1 = [UIButton buttonWithType:UIButtonTypeCustom];
+    [leftButton1 setFrame:CGRectMake(0, 0, 25, 25)];
+    [leftButton1 setBackgroundColor:[UIColor clearColor]];
+    [leftButton1 setImage:[UIImage imageNamed:@"button_close"] forState:UIControlStateNormal];
+    [leftButton1 addTarget:self action:@selector(getToRoot) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *leftItem1 = [[UIBarButtonItem alloc] initWithCustomView:leftButton1];
+    self.navigationItem.leftBarButtonItems = @[leftItem, leftItem1];
+}
+
+- (void)getToRoot
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 - (void)addLeftButtonWithName:(NSString *)leftButtonName
 {
     UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
