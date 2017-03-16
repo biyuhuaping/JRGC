@@ -9,7 +9,7 @@
 #import "MinuteCountDownView.h"
 #import "HWWeakTimer.h"
 @interface MinuteCountDownView (){
-CGFloat _passTime;
+  NSInteger _passTime;
 }
 
 @property (strong, nonatomic) IBOutlet NZLabel *daysLabel;
@@ -39,26 +39,26 @@ CGFloat _passTime;
     
 }
 -(void)startTimer{
-    _passTime=0.0;
+    _passTime= 0;
 //    [self.timer setFireDate:[NSDate distantPast]];
     //时间间隔是1秒
     _timer = [HWWeakTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(timerAction) userInfo:nil repeats:YES];
 //    [[NSRunLoop mainRunLoop] addTimer:_timer forMode:UITrackingRunLoopMode];
       [[NSRunLoop mainRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
 }
-- (void)setTimeInterval:(double)timeInterval
-{
-    _timeInterval = timeInterval ;
-    if (_timeInterval!=0)
-    {
-//        //时间间隔是1秒
-//        _timer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(timerAction) userInfo:nil repeats:YES];
-//        
-//        [[NSRunLoop currentRunLoop] addTimer:_timer forMode:UITrackingRunLoopMode];
-    }else{
-        [self stopTimer];
-    }
-}
+//- (void)setTimeInterval:(double)timeInterval
+//{
+//    _timeInterval = timeInterval ;
+//    if (_timeInterval!=0)
+//    {
+////        //时间间隔是1秒
+////        _timer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(timerAction) userInfo:nil repeats:YES];
+////        
+////        [[NSRunLoop currentRunLoop] addTimer:_timer forMode:UITrackingRunLoopMode];
+//    }else{
+//        [self stopTimer];
+//    }
+//}
 
 -(void)setSourceVC:(NSString *)sourceVC{
     _sourceVC = sourceVC;
@@ -103,7 +103,7 @@ CGFloat _passTime;
     }
 }
 // 通过时间间隔计算具体时间(小时,分,秒)
-- (void)getTimeFromTimeInterval : (double)timeInterval
+- (void)getTimeFromTimeInterval:(NSInteger)timeInterval
 {
     //1s
     _passTime += 1000.f;//所以每次过去1秒
@@ -113,9 +113,11 @@ CGFloat _passTime;
     NSString *minute = [NSString stringWithFormat:@"%ld", (NSInteger)((timeInterval-_passTime)/1000/60)%60];
     //秒数
     NSString *second = [NSString stringWithFormat:@"%ld", ((NSInteger)(timeInterval-_passTime)/1000)%60];
-    if ([second floatValue] <= 0) {
-        second = @"0";
-    }
+    
+    //防止有乱数据
+    hours = [self getCurrentStr:hours];
+    minute = [self getCurrentStr:minute];
+    second = [self getCurrentStr:second];
     self.daysLabel.text = [NSString stringWithFormat:@"%02d",[hours intValue]/24];
     self.hoursLabel.text = [NSString stringWithFormat:@"%02d",[hours intValue]%24];
     self.minutesLabel.text = [NSString stringWithFormat:@"%02d",[minute intValue]];
@@ -132,6 +134,12 @@ CGFloat _passTime;
     if (timeInterval - _passTime <= 0) {
         [self stopTimer];
     }
+}
+-(NSString *)getCurrentStr:(NSString *)str{
+    if ([str floatValue] <= 0) {
+        str = @"0";
+    }
+    return str;
 }
  
 @end

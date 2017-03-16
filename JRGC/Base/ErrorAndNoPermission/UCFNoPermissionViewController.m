@@ -29,6 +29,21 @@
     }
     return self;
 }
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    if ([_souceVC isEqualToString:@"CollectionDetailVC"]) {
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+    }
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    if([_souceVC isEqualToString:@"CollectionDetailVC"]){//集合标详情里
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    }
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
