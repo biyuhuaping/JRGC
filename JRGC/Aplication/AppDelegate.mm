@@ -309,16 +309,16 @@
 }
 - (void) createItem {
     //自定义icon 的初始化方法
-    UIApplicationShortcutIcon *icon0 = [UIApplicationShortcutIcon iconWithTemplateImageName:@"刮刮卡"];
+//    UIApplicationShortcutIcon *icon0 = [UIApplicationShortcutIcon iconWithTemplateImageName:@"刮刮卡"];
     UIApplicationShortcutIcon *icon1 = [UIApplicationShortcutIcon iconWithTemplateImageName:@"邀请返利"];
     UIApplicationShortcutIcon *icon2 = [UIApplicationShortcutIcon iconWithTemplateImageName:@"工场码"];
     UIApplicationShortcutIcon *icon3 = [UIApplicationShortcutIcon iconWithTemplateImageName:@"签到"];
     
-    UIMutableApplicationShortcutItem *item0 = [[UIMutableApplicationShortcutItem alloc]initWithType:@"0" localizedTitle:@"我的刮刮卡" localizedSubtitle:nil icon:icon0 userInfo:nil];
+//    UIMutableApplicationShortcutItem *item0 = [[UIMutableApplicationShortcutItem alloc]initWithType:@"0" localizedTitle:@"我的刮刮卡" localizedSubtitle:nil icon:icon0 userInfo:nil];
     UIMutableApplicationShortcutItem *item1 = [[UIMutableApplicationShortcutItem alloc]initWithType:@"1" localizedTitle:@"我的邀请返利" localizedSubtitle:nil icon:icon1 userInfo:nil];
     UIMutableApplicationShortcutItem *item2 = [[UIMutableApplicationShortcutItem alloc]initWithType:@"2" localizedTitle:@"我的工场码" localizedSubtitle:nil icon:icon2 userInfo:nil];
     UIMutableApplicationShortcutItem *item3 = [[UIMutableApplicationShortcutItem alloc]initWithType:@"3" localizedTitle:@"签到抽红包" localizedSubtitle:nil icon:icon3 userInfo:nil];
-    [UIApplication sharedApplication].shortcutItems = @[item0,item1,item2,item3];
+    [UIApplication sharedApplication].shortcutItems = @[item1,item2,item3];
 }
 
 - (void)application:(UIApplication *)application performActionForShortcutItem:(UIApplicationShortcutItem *)shortcutItem completionHandler:(void (^)(BOOL))completionHandler {
@@ -326,7 +326,7 @@
     // react to shortcut item selections
     DBLOG(@"title:%@,type:%@,userInfo:%@",shortcutItem.localizedTitle,shortcutItem.type,shortcutItem.userInfo);
     if ([[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"guaguakaHide" object:nil];//清理一下个人中心刮刮卡的弹出层
+//        [[NSNotificationCenter defaultCenter] postNotificationName:@"guaguakaHide" object:nil];//清理一下个人中心刮刮卡的弹出层
         
         [Touch3DSingle sharedTouch3DSingle].isLoad = YES;
         [Touch3DSingle sharedTouch3DSingle].type = shortcutItem.type;
@@ -508,7 +508,7 @@
     if (useLockView == 1) {
         if (_backTime > 60) {
             [[ToolSingleTon sharedManager] hideAlertAction:nil];
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"guaguakaHide" object:nil];
+//            [[NSNotificationCenter defaultCenter] postNotificationName:@"guaguakaHide" object:nil];
             [self showGCode];
         }
     }
