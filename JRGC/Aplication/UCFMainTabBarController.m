@@ -191,7 +191,7 @@
         UCFLoanViewController *loan = (UCFLoanViewController *)topView;
         bool isLoad = [loan isViewLoaded];
         if (isLoad) {
-            [loan.webView reload];
+            [loan refreshWebContent];
         }
         NSString *jg_ckie = [UserInfoSingle sharedManager].jg_ckie;
         NSString *userId = [UserInfoSingle sharedManager].userId;
