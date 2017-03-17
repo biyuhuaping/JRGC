@@ -218,7 +218,7 @@
 
 #define DISCOVERYURL    @"https://m.9888.cn/static/wap/fa-xian/index.html"     //发现
 #define RegistCheckQdIsLimit @"newuserregist/checkQdIslimit"
-#define EASYLOAN_URL    @"http://m.easyloan888.com/static/loan/user-jrgcLogin/index.html"
+#define EASYLOAN_URL    @"http://m.easyloan888.com/static/loan/user-jrgc-login/index.html" //借款URL
 
 
 
