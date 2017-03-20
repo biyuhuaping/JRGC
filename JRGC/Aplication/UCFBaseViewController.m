@@ -118,9 +118,9 @@
     UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
     
     UIButton *leftButton1 = [UIButton buttonWithType:UIButtonTypeCustom];
-    [leftButton1 setFrame:CGRectMake(0, 0, 25, 25)];
+    [leftButton1 setFrame:CGRectMake(0, 0, 30, 30)];
     [leftButton1 setBackgroundColor:[UIColor clearColor]];
-    [leftButton1 setImage:[UIImage imageNamed:@"button_close"] forState:UIControlStateNormal];
+    [leftButton1 setImage:[UIImage imageNamed:@"icon_close"] forState:UIControlStateNormal];
     [leftButton1 addTarget:self action:@selector(getToRoot) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *leftItem1 = [[UIBarButtonItem alloc] initWithCustomView:leftButton1];
     self.navigationItem.leftBarButtonItems = @[leftItem, leftItem1];
