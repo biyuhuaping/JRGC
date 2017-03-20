@@ -379,6 +379,28 @@
         {
             [weakSelf getTokenId];
         }
+        else if ([nativeData[@"action"] isEqualToString:@"share"])//放心花添加分享点击事件
+        {
+            NSDictionary *dic = [nativeData[@"value"] objectFromJSONString];
+            self.dicForShare = [UCFCycleModel  getCycleModelByDataDict:dic];
+            self.dicForShare.thumb = [dic objectSafeForKey:@"image"];
+            self.dicForShare.url = [dic objectSafeForKey:@"link"];
+            [weakSelf clickRightBtn]; //放心花中的分享
+        }
+        else if ([nativeData[@"action"] isEqualToString:@"clipboard"])//放心花---复制到剪切板上
+        {
+            UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+            [pasteboard setString:[nativeData objectSafeForKey:@"value"]];
+            [AuxiliaryFunc showToastMessage:@"已复制到剪切板" withView:self.view];
+        }else if([nativeData[@"action"] isEqualToString:@"get_factory_code"]){ //放心花---返回数据 工场码
+            
+            NSString *uuid = [[NSUserDefaults standardUserDefaults] objectForKey: UUID] ;
+            if(uuid){ //返回数据 工场码
+                [_bridge callHandler:@"jsHandler" data:@{@"type": @"factory_code",@"value":uuid} responseCallback:^(id responseData) {
+                    DBLOG(@"工场码返回成功");
+                }];
+            }
+        }
         //----------------------------------------------------------------------------------------------------qyy
         
        /* else if ([nativeData[@"action"] isEqualToString:@"app_invest_error"]) //投标成功 跳转到 投资详情
