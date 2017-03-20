@@ -45,6 +45,7 @@
     [self addLeftButton];
     //尊享开关
     BOOL isShowHornor =  [[NSUserDefaults standardUserDefaults] boolForKey:@"isShowHornor"];
+    isShowHornor = YES;
     NSString *titleStr = isShowHornor ? @"转入项目":@"我的债权" ;
     _segmentedCtrl = [[UISegmentedControl alloc]initWithItems:@[@"我的项目",@"批量项目",titleStr]];
     DBLOG(@"%@",NSStringFromCGRect(self.view.frame));
