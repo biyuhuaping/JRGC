@@ -441,7 +441,7 @@
         [request setURL:[NSURL URLWithString:CMS_BANNER]];
         [request setHTTPMethod:@"GET"];
         AppDelegate * app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-        if (EnvironmentConfiguration == 2 || (app.isSubmitAppStoreTestTime)) {
+        if (EnvironmentConfiguration == 2 || (app.isSubmitAppStoreTestTime && [[[NSUserDefaults standardUserDefaults] valueForKey:UUID] isEqualToString:@"108027"])) {
             [request setValue:@"1" forHTTPHeaderField:@"jrgc-umark"];
         }
         NSHTTPURLResponse *urlResponse = nil;
