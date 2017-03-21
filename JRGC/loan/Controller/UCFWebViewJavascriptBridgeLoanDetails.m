@@ -47,6 +47,18 @@
     }
     [self.navigationController popViewControllerAnimated:YES];
 }
+- (void)getToBack {
+    if([baseTitleLabel.text isEqualToString:@"借款结果"]){
+        [self.navigationController popViewControllerAnimated:YES];
+        return;
+    }
+    if (self.webView.canGoBack) {
+        [self.webView goBack];
+    }
+    else {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
 
 //- (void)viewWillDisappear:(BOOL)animated
 //{
