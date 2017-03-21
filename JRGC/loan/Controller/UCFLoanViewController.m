@@ -27,8 +27,8 @@
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshWebContent) name:IS_RELOADE_URL object:nil];
     // Do any additional setup after loading the view from its nib.
-    [self setErrorViewFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
-    [self addErrorViewButton];
+    [self setErrorViewFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight -NavigationBarHeight-TabBarHeight)];
+//    [self addErrorViewButton];
     [self addProgressView];//添加进度条
     [self gotoURL:self.url];
 //    self.webView.scrollView.bounces = NO;
