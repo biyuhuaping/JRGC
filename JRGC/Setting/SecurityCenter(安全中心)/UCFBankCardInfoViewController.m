@@ -105,20 +105,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-     baseTitleLabel.text =@"绑定银行卡";
+    if(self.typeOfbuiss==0)
+    {
+     baseTitleLabel.text =@"p2p绑定银行卡";
+    }else{
+     baseTitleLabel.text =@"尊享绑定银行卡";
+    }
     [self addLeftButton];
     rowInSecionOne = 0;//***第一section里的Row的个数初始化为0；需要显示tips时就动态+1；不现实就动态-1；
     self.isNeedAlert = NO;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(renewDataForPage) name:MODIBANKZONE_SUCCESSED object:nil];//***修改绑定银行卡成功后返回该页面需要刷新数据
-
-    
     [self.view setBackgroundColor:[UIColor whiteColor]];
     self.tableview.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     self.tableview.backgroundColor = UIColorWithRGB(0xebebee);
-
     [self getBankCardInfoFromNet];
-
-    
 }
 
 
