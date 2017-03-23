@@ -34,7 +34,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    baseTitleLabel.text = @"风险评估测试题";
+    baseTitleLabel.text = self.title;
     [self addErrorViewButton];
     [self gotoURL:self.url];
     // Do any additional setup after loading the view from its nib.

@@ -15,9 +15,18 @@
 #import "RiskAssessmentViewController.h"
 #import "Common.h"
 #import "UCFBatchInvestmentViewController.h"
+#import "UCFAccountDetailViewController.h"
+#import "MyViewController.h"
+#import "UCFBackMoneyDetailViewController.h"
+#import "UCFCashViewController.h"
+#import "ToolSingleTon.h"
+#import "UCFTopUpViewController.h"
+#import "UCFHuiShangBankViewController.h"
+#import "UCFHuiBuinessDetailViewController.h"
 @interface UCFP2POrHonerAccoutViewController ()<UITableViewDelegate,UITableViewDataSource,UCFP2POrHornerTabHeaderViewDelete>
 {
     UCFP2POrHornerTabHeaderView *_headerView;
+    BOOL _isShowOrHideAccoutMoney;
 }
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property(strong,nonatomic) NSMutableArray *cellItemsData;
@@ -25,6 +34,7 @@
 @property (weak, nonatomic) IBOutlet UIView *loadingView;
 
 @property (weak, nonatomic) IBOutlet UIImageView *loadingImageView;
+@property (strong, nonatomic) NSString *isCompanyAgent;//是否是机构用户
 - (IBAction)clickCashBtn:(UIButton *)sender;
 - (IBAction)clickRechargeBtn:(UIButton *)sender;
 
@@ -51,16 +61,18 @@
     [self addRightButton];
 }
 -(void)createUIInfoView{
-    
+ 
     if (self.accoutType ==  SelectAccoutTypeHoner) {
         [self.view bringSubviewToFront:self.loadingView];
-        [self performSelector:@selector(removeLoadingView) withObject:nil afterDelay:3.0];
+        [self performSelector:@selector(removeLoadingView) withObject:nil afterDelay:.25];
         baseTitleLabel.text = @"尊享账户";
+         _isShowOrHideAccoutMoney = YES;
     }else{
         self.loadingView.hidden = YES;
         [self.view sendSubviewToBack:self.loadingView];
         [self performSelector:@selector(removeLoadingView) withObject:nil afterDelay:0.0];
         baseTitleLabel.text = @"P2P账户";
+        _isShowOrHideAccoutMoney = YES;
     }
     //添加阴影图片
     UIImage *tabImag = [UIImage imageNamed:@"tabbar_shadow.png"];
@@ -81,15 +93,12 @@
 #pragma mark -点击查看流水页面
 -(void)rightClicked
 {
-    if (self.accoutType == SelectAccoutTypeHoner) {//尊享账户的资金流水
-       
-        
-        
-    }else{ //P2P账户的资金流水
-        
-    }
+    UCFHuiBuinessDetailViewController *buinessDetail = [[UCFHuiBuinessDetailViewController alloc] initWithNibName:@"UCFHuiBuinessDetailViewController" bundle:nil];
+    buinessDetail.title = @"徽商资金流水";
+    buinessDetail.accoutType = self.accoutType;
+    [self.navigationController pushViewController:buinessDetail animated:YES];
 }
-#pragma mark - 网络请求
+
 
 #pragma mark -
 #pragma mark 懒加载
@@ -154,6 +163,8 @@
         _headerView = [[[NSBundle mainBundle]loadNibNamed:@"UCFP2POrHornerTabHeaderView" owner:nil options:nil] firstObject];
         _headerView.frame = CGRectMake(0, 0, ScreenWidth, 155);
         _headerView.delegate = self;
+        _headerView.accoutTpye = self.accoutType;
+        _headerView.isShowOrHideAccoutMoney = _isShowOrHideAccoutMoney;
         if(self.accoutType == SelectAccoutTypeHoner){
             _headerView.totalIncomeTitleLab.text = @"尊享总资产";
         }else{
@@ -214,58 +225,107 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-
+    
+//    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    
+    
+    UCFSettingGroup * group = self.cellItemsData[indexPath.section];
+    UCFSettingItem *item = group.items[indexPath.row];
+    
+    NSString *titleStr = item.title;
+    
+    if ([titleStr isEqualToString:@"我的投资"]) {
+        MyViewController *myInvestVC = [[MyViewController alloc] initWithNibName:@"MyViewController" bundle:nil];
+        myInvestVC.title = @"我的投资";
+        myInvestVC.selectedSegmentIndex = 0;
+        myInvestVC.accoutType = self.accoutType;
+        [self.navigationController pushViewController:myInvestVC animated:YES];
+    }
+    else if ([titleStr isEqualToString:@"回款明细"]) {
+        UCFBackMoneyDetailViewController *backMoneyDetailVC = [[UCFBackMoneyDetailViewController alloc] initWithNibName:@"UCFBackMoneyDetailViewController" bundle:nil];
+//        backMoneyDetailVC.superViewController = self;
+        backMoneyDetailVC.accoutType = self.accoutType;
+        [self.navigationController pushViewController:backMoneyDetailVC animated:YES];
+    }
+    else if([titleStr hasSuffix:@"徽商银行存管账户"]){//
+        UCFHuiShangBankViewController *huiShangBankVC = [[UCFHuiShangBankViewController alloc] initWithNibName:@"UCFHuiShangBankViewController" bundle:nil];
+        //        subVC.title = @"徽商存管账户";
+        huiShangBankVC.accoutType = self.accoutType;
+        [self.navigationController pushViewController:huiShangBankVC animated:YES];
+    }
+    else if([titleStr isEqualToString:@"修改银行卡"]){
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SecuirtyCenter" bundle:nil];
+         UCFBankCardInfoViewController *bankCardInfoVC = [storyboard instantiateViewControllerWithIdentifier:@"bankcardinfo"];
+         bankCardInfoVC.accoutType = self.accoutType;
+         [self.navigationController pushViewController:bankCardInfoVC animated:YES];
+    }
+    else if([titleStr hasSuffix:@"交易密码"]){
+         NSInteger openStatus = [UserInfoSingle sharedManager].openStatus;
+        if(openStatus < 3){
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请先开通徽商存管账户" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+            alert.tag = 10005;
+            [alert show];
+        }else if(openStatus == 3){//设置交易密码
+            UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:3];
+            [self.navigationController pushViewController:vc animated:YES];
+        }else{
+            //修改交易密码
+            TradePasswordVC * tradePasswordVC = [[TradePasswordVC alloc]initWithNibName:@"TradePasswordVC" bundle:nil];
+            tradePasswordVC.title = titleStr;
+            tradePasswordVC.isCompanyAgent = [self.isCompanyAgent boolValue];
+            [self.navigationController pushViewController:tradePasswordVC  animated:YES];
+        }
+    }
+    else if([titleStr hasSuffix:@"风险承担能力"]){
+      RiskAssessmentViewController *riskAssessmentVC = [[RiskAssessmentViewController alloc] initWithNibName:@"RiskAssessmentViewController" bundle:nil];
+        riskAssessmentVC.title = titleStr;
+        riskAssessmentVC.url = GRADELURL;
+        riskAssessmentVC.accoutType = self.accoutType;
+        [self.navigationController pushViewController:riskAssessmentVC  animated:YES];
+    }
+    else if([titleStr isEqualToString:@"自动投标"]){
+        if ([self checkHSIsLegitimate]) {
+            UCFBatchInvestmentViewController *batchInvestment = [[UCFBatchInvestmentViewController alloc] init];
+            batchInvestment.sourceType = @"personCenter";
+            batchInvestment.isStep = [item.subtitle isEqualToString:@"未开启"] ? 1 : 2;
+            [self.navigationController pushViewController:batchInvestment animated:YES];
+        }
+    }
 }
-
+- (BOOL) checkHSIsLegitimate {
+    NSInteger openStatus = [UserInfoSingle sharedManager].openStatus;
+    if(openStatus < 3){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请先开通徽商存管账户" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        alert.tag = 10005;
+        [alert show];
+        return NO;
+    }else if(openStatus == 3){
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请先设置交易密码" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        alert.tag = 10003;
+        [alert show];
+        return NO;
+    }else{
+        return YES;
+    }
+    
+}
+//-(void)is {
+//    [urlStr rangeOfString:@"toReturnMoneyList.shtml"].location != NSNotFound
+//}
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     [self.view endEditing:YES];
 }
 
 #pragma mark -
 #pragma mark  UCFP2POrHornerTabHeaderViewDelete代理
-//隐藏或者显示账户金额
-- (void)cilckShowOrHideAccoutMoney:(UIButton *)btn
-{
-    if(self.accoutType == SelectAccoutTypeHoner)
-    {
-        btn.selected = !btn.selected;
-//        BOOL isShowHonerAccoutMoney = [[NSUserDefaults standardUserDefaults] boolForKey:@""];
-        if (!btn.selected){
-            [btn setImage:[UIImage imageNamed:@"account_invisible"] forState:UIControlStateNormal];
-            _headerView.accumulatedIncomeLab.text = @"¥0.00";//累计收益
-            _headerView.totalIncomeTitleLab.text = @"¥0.00";//总资产
-            _headerView.availableAmountLab.text = @"¥0.00";//可用金额
-            [self.tableView reloadData];
-        }else{
-            [btn setImage:[UIImage imageNamed:@"account_visible"] forState:UIControlStateSelected];
-            _headerView.accumulatedIncomeLab.text = @"***";//累计收益
-            _headerView.totalIncomeTitleLab.text = @"***";//总资产
-            _headerView.availableAmountLab.text = @"***";//可用金额
-            [self.tableView reloadData];
-        }
-        
-        
-    }else{
-        
-    }
-    
-    
-}
 //查看P2P或者尊享账户
 - (void)checkP2POrHonerAccout
 {
-    if(self.accoutType == SelectAccoutTypeHoner)
-    {
-        
-        
-    }else{
-        
-    }
+    UCFAccountDetailViewController *accountDetailVC = [[UCFAccountDetailViewController alloc] initWithNibName:@"UCFAccountDetailViewController" bundle:nil];
+    accountDetailVC.accoutType = self.accoutType;
+    [self.navigationController pushViewController:accountDetailVC animated:YES];
 }
-
-
-
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -284,26 +344,104 @@
 #pragma mark 提现点击事件
 - (IBAction)clickCashBtn:(UIButton *)sender {
     
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    NSString *userSatues = [NSString stringWithFormat:@"%ld",(long)[UserInfoSingle sharedManager].openStatus];
+    NSDictionary *parametersDict = @{};
     if (self.accoutType == SelectAccoutTypeHoner) {//尊享账户的提现
-        
-        
-        
+        parametersDict = @{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"userSatues":userSatues};
     }else{ //P2P账户的提现
-        
+       parametersDict = @{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"userSatues":userSatues};
     }
-    
-    
+    [[NetworkModule sharedNetworkModule] newPostReq:parametersDict tag:kSXTagCashAdvance owner:self signature:YES];
 }
 #pragma mark 充值点击事件
 - (IBAction)clickRechargeBtn:(UIButton *)sender {
     
-    if (self.accoutType == SelectAccoutTypeHoner) {//尊享账户的充值
-        
-        
-        
-    }else{ //P2P账户的充值
-        
-    }
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"RechargeStoryBorard" bundle:nil];
+    UCFTopUpViewController * rechargeVC = [storyboard instantiateViewControllerWithIdentifier:@"topup"];
+    rechargeVC.title = @"充值";
+    rechargeVC.uperViewController = self;
+    rechargeVC.accoutType = self.accoutType;
+    [self.navigationController pushViewController:rechargeVC animated:YES];
 
+}
+#pragma mark -
+#pragma mark  网络请求
+-(void)getP2POrHonerAccoutHttpRequest{
+    
+    
+    
+}
+#pragma mark - 网络请求结果
+-(void)beginPost:(kSXTag)tag{
+    
+}
+
+
+-(void)endPost:(id)result tag:(NSNumber *)tag{
+    
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    NSString *data = (NSString *)result;
+    NSMutableDictionary *dic = [data objectFromJSONString];
+    DBLOG(@"UCFSettingViewController : %@",dic);
+    NSString *rstcode = dic[@"status"];
+    NSString *rsttext = dic[@"statusdes"];
+    int isSucess = [rstcode intValue];
+    
+    switch (tag.integerValue) {
+        case kSXTagCashAdvance://提现请求
+        {
+            rstcode = dic[@"ret"];
+            rsttext = dic[@"message"];
+            isSucess = [rstcode intValue];
+            if (isSucess == 1) {
+                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"TopUpAndCash" bundle:nil];
+                UCFCashViewController *crachViewController  = [storyboard instantiateViewControllerWithIdentifier:@"cash"];
+                [ToolSingleTon sharedManager].apptzticket = dic[@"apptzticket"];
+                crachViewController.title = @"提现";
+//                crachViewController.isCompanyAgent = _isCompanyAgent;
+                crachViewController.cashInfoDic = dic;
+                crachViewController.accoutType = self.accoutType;
+                [self.navigationController pushViewController:crachViewController animated:YES];
+                return;
+            } else {
+                [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
+            }
+
+        }
+            break;
+//        case kSXTagCashAdvance://提现请求
+//        {
+//            rstcode = dic[@"ret"];
+//            rsttext = dic[@"message"];
+//            isSucess = [rstcode intValue];
+//            if (isSucess == 1) {
+//                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"TopUpAndCash" bundle:nil];
+//                UCFCashViewController *crachViewController  = [storyboard instantiateViewControllerWithIdentifier:@"cash"];
+//                [ToolSingleTon sharedManager].apptzticket = dic[@"apptzticket"];
+//                crachViewController.title = @"提现";
+//                crachViewController.isCompanyAgent = _isCompanyAgent;
+//                crachViewController.cashInfoDic = dic;
+//                [self.navigationController pushViewController:crachViewController animated:YES];
+//                return;
+//            } else {
+//                [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
+//            }
+//            
+//        }
+//            break;
+            
+        default:
+            break;
+    }
+    
+}
+-(void)errorPost:(NSError *)err tag:(NSNumber *)tag{
+    [MBProgressHUD displayHudError:err.userInfo[@"NSLocalizedDescription"]];
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    if (self.tableView.header.isRefreshing){
+        [self.tableView.header endRefreshing];
+    }
 }
 @end
