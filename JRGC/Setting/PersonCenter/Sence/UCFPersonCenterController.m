@@ -18,6 +18,7 @@
 #import "UCFFeedBackViewController.h"
 #import "UCFRedEnvelopeViewController.h"
 #import "UCFMoreViewController.h"
+#import "UCFSecurityCenterViewController.h"
 
 @interface UCFPersonCenterController () <UCFPCListViewControllerCallBack>
 
@@ -54,10 +55,12 @@
     self.pcListVC = [UCFPCListViewController instanceWithPresenter:[UCFPCListViewPresenter presenter]];
     self.pcListVC.delegate = self;//BlogViewController走的是Protocol绑定方式
 
-    self.userInfoVC = [UCFUserInfoController userInfo];
-//    [self.userInfoVC setVCGenerator:^UIViewController *(id params) {
-//        return [UserDetailViewController instanceWithUser:params];
-//    }];
+    self.userInfoVC = [UCFUserInfoController instanceWithPresenter:[UCFPCListViewPresenter presenter]];
+    [self.userInfoVC setUserInfoVCGenerator:^UIViewController *(id params) {
+        UCFSecurityCenterViewController *personMessageVC = [[UCFSecurityCenterViewController alloc] initWithNibName:@"UCFSecurityCenterViewController" bundle:nil];
+        personMessageVC.title = @"个人信息";
+        return personMessageVC;
+    }];
     [self addChildViewController:self.userInfoVC];//userInfo还是用的MVC 毕竟上面把block和protocol都交代过了
 }
 

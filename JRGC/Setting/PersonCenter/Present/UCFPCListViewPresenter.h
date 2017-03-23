@@ -18,9 +18,15 @@
 
 @end
 
+@protocol UserInfoViewPresenterCallBack <NSObject>
+
+
+@end
+
 @interface UCFPCListViewPresenter : NSObject
 
 @property (weak, nonatomic) id<PCListViewPresenterCallBack> view;
+@property (weak, nonatomic) id<UserInfoViewPresenterCallBack> userInvoView;
 
 +(instancetype)presenter;
 - (NSArray *)allDatas;

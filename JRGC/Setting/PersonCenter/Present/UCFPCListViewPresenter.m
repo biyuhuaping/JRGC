@@ -45,6 +45,11 @@
     return self.pcListCells;
 }
 
+- (BOOL)isHonorUser
+{
+    return _isHonorUser;
+}
+
 - (void)initData
 {
     UCFPCGroupPresenter *group0 = [[UCFPCGroupPresenter alloc] init];
@@ -86,8 +91,9 @@
     
     if (self.userId.length>0) {
         [self.apiManager fetchUserInfoWithUserId:self.userId completionHandler:^(NSError *error, id result) {
-            
-            
+//            self.isHonorUser = YES;
+            [self.pcListCells removeAllObjects];
+            [self initData];
             if ([self.view respondsToSelector:@selector(pcListViewPresenter:didRefreshDataWithResult:error:)]) {
                 [self.view pcListViewPresenter:self didRefreshDataWithResult:result error:error];
             }

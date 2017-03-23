@@ -10,6 +10,7 @@
 
 @interface UCFPCListCell ()
 @property (weak, nonatomic) IBOutlet UILabel *itemTitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *describeLabel;
 
 @end
 
@@ -27,6 +28,7 @@
     _presenter = presenter;
     
     self.itemTitleLabel.text = presenter.itemTitle;
+    self.describeLabel.text = presenter.itemDescribe;
 //    presenter.view = self;
 //    self.titleLabel.text = presenter.blogTitleText;
 //    self.summaryLabel.text = presenter.blogSummaryText;

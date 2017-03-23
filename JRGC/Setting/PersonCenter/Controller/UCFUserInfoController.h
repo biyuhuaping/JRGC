@@ -8,8 +8,11 @@
 
 #import "UCFBaseViewController.h"
 
+#import "UCFPCListViewPresenter.h"
 @interface UCFUserInfoController : UCFBaseViewController
-+ (instancetype)userInfo;
++ (instancetype)instanceWithPresenter:(UCFPCListViewPresenter *)presenter;
 + (CGFloat)viewHeight;
 
+- (UCFPCListViewPresenter *)presenter;
+- (void)setUserInfoVCGenerator:(ViewControllerGenerator)userInfoVCGenerator;
 @end
