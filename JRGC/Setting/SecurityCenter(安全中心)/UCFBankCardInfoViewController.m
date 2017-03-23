@@ -105,7 +105,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    if(self.typeOfbuiss==0)
+    if(self.fromSite==1)
     {
      baseTitleLabel.text =@"p2p绑定银行卡";
     }else{
@@ -384,7 +384,7 @@
 - (void)getBankCardInfoFromNet
 {
 
-    NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:UUID],@"userId", nil];
+    NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:UUID],@"userId",self.fromSite,@"fromSite", nil];
     [[NetworkModule sharedNetworkModule]newPostReq:strParameters tag:kSXTagBankInfoNew owner:self signature:YES];
 }
 
