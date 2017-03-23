@@ -21,7 +21,7 @@
 @property(nonatomic, copy) NSString *mobile;
 //用户P2P开户状态 1：未开户 2：已开户 3：已绑卡 4：已设交易密码 5：特殊用户
 @property(nonatomic, assign) NSInteger openStatus;
-//尊享账号开户状体啊
+//尊享账号开户状态啊
 @property(nonatomic, assign) NSInteger enjoyOpenStatus;
 //用户真是姓名
 @property(nonatomic, copy) NSString *realName;
