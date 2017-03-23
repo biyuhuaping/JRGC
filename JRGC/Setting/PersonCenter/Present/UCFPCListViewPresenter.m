@@ -97,6 +97,9 @@
             if ([self.view respondsToSelector:@selector(pcListViewPresenter:didRefreshDataWithResult:error:)]) {
                 [self.view pcListViewPresenter:self didRefreshDataWithResult:result error:error];
             }
+            if ([self.userInvoView respondsToSelector:@selector(pcListViewPresenter:didRefreshUserInfoWithResult:error:)]) {
+                [self.userInvoView pcListViewPresenter:self didRefreshUserInfoWithResult:result error:error];
+            }
             
             !completionHander ?: completionHander(error, result);
         }];
