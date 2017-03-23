@@ -66,13 +66,13 @@
         [self.view bringSubviewToFront:self.loadingView];
         [self performSelector:@selector(removeLoadingView) withObject:nil afterDelay:.25];
         baseTitleLabel.text = @"尊享账户";
-         _isShowOrHideAccoutMoney = YES;
+         _isShowOrHideAccoutMoney = [[NSUserDefaults standardUserDefaults] boolForKey:@"IsShowHonerAccoutMoney"];
     }else{
         self.loadingView.hidden = YES;
         [self.view sendSubviewToBack:self.loadingView];
         [self performSelector:@selector(removeLoadingView) withObject:nil afterDelay:0.0];
         baseTitleLabel.text = @"P2P账户";
-        _isShowOrHideAccoutMoney = YES;
+        _isShowOrHideAccoutMoney = [[NSUserDefaults standardUserDefaults] boolForKey:@"IsShowP2PAccoutMoney"];
     }
     //添加阴影图片
     UIImage *tabImag = [UIImage imageNamed:@"tabbar_shadow.png"];
