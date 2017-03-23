@@ -42,6 +42,7 @@
     
     if (tag.intValue == kSXTagPersonCenter) {
         self.completionHandler(nil, dic);
+        self.completionHandler = nil;
     }
 }
 //请求失败
@@ -49,6 +50,7 @@
 {
     if (tag.intValue == kSXTagPersonCenter) {
         self.completionHandler(err, nil);
+        self.completionHandler = nil;
     }
 }
 @end
