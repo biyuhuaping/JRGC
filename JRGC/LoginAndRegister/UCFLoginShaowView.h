@@ -18,8 +18,6 @@
 
 @interface UCFLoginShaowView : UIView
 
-
-
 @property(nonatomic,weak) id<LoginShadowDelegate>delegate;
 
 @end

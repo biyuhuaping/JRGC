@@ -8,7 +8,7 @@
 
 #import "UCFUserInfoController.h"
 
-@interface UCFUserInfoController ()
+@interface UCFUserInfoController () <UserInfoViewPresenterCallBack>
 @property (weak, nonatomic) IBOutlet UIView *userIconBackView;
 @property (copy, nonatomic) ViewControllerGenerator userInfoVCGenerator;
 @property (copy, nonatomic) ViewControllerGenerator messageVCGenerator;
@@ -27,7 +27,7 @@
 - (instancetype)initWithPresenter:(UCFPCListViewPresenter *)presenter {
     if (self = [super init]) {
         self.presenter = presenter;
-//        self.presenter.view = self;//将V和P进行绑定(这里因为V是系统的TableView 无法简单的声明一个view属性 所以就绑定到TableView的持有者上面)
+        self.presenter.userInvoView = self;//将V和P进行绑定(这里因为V是系统的TableView 无法简单的声明一个view属性 所以就绑定到TableView的持有者上面)
         
     }
     return self;
@@ -35,11 +35,6 @@
 
 + (CGFloat)viewHeight {
     return 177;
-}
-
-- (UCFPCListViewPresenter *)presenter
-{
-    return self.presenter;
 }
 
 - (void)viewDidLoad {
@@ -62,17 +57,47 @@
 }
 
 - (IBAction)messageClicked:(UIButton *)sender {
-    
+    if (self.messageVCGenerator) {
+        
+        UIViewController *targetVC = self.messageVCGenerator(nil);
+        if (targetVC) {
+            [self.parentViewController.navigationController pushViewController:targetVC animated:YES];
+        }
+    }
 }
 
 - (IBAction)factoryBeanClicked:(UIButton *)sender {
-    
+    if (self.beansVCGenerator) {
+        
+        UIViewController *targetVC = self.beansVCGenerator(nil);
+        if (targetVC) {
+            [self.parentViewController.navigationController pushViewController:targetVC animated:YES];
+        }
+    }
 }
 
 - (IBAction)couponClicked:(UIButton *)sender {
+    if (self.couponVCGenerator) {
+        
+        UIViewController *targetVC = self.couponVCGenerator(nil);
+        if (targetVC) {
+            [self.parentViewController.navigationController pushViewController:targetVC animated:YES];
+        }
+    }
 }
 
 - (IBAction)workPoint:(UIButton *)sender {
+    if (self.workPointInfoVCGenerator) {
+        
+        UIViewController *targetVC = self.workPointInfoVCGenerator(nil);
+        if (targetVC) {
+            [self.parentViewController.navigationController pushViewController:targetVC animated:YES];
+        }
+    }
+}
+
+- (void)pcListViewPresenter:(UCFPCListViewPresenter *)presenter didRefreshUserInfoWithResult:(id)result error:(NSError *)error
+{
     
 }
 

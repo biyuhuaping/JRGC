@@ -20,6 +20,7 @@
 
 @protocol UserInfoViewPresenterCallBack <NSObject>
 
+- (void)pcListViewPresenter:(UCFPCListViewPresenter *)presenter didRefreshUserInfoWithResult:(id)result error:(NSError *)error;
 
 @end
 

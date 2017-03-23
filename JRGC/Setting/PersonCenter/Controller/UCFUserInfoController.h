@@ -15,4 +15,8 @@
 
 - (UCFPCListViewPresenter *)presenter;
 - (void)setUserInfoVCGenerator:(ViewControllerGenerator)userInfoVCGenerator;
+- (void)setMessageVCGenerator:(ViewControllerGenerator)messageVCGenerator;
+- (void)setBeansVCGenerator:(ViewControllerGenerator)beansVCGenerator;
+- (void)setCouponVCGenerator:(ViewControllerGenerator)couponVCGenerator;
+- (void)setWorkPointInfoVCGenerator:(ViewControllerGenerator)workPointInfoVCGenerator;
 @end
