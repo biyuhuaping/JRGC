@@ -578,18 +578,14 @@
 }
 //点击提示View调用方法
 - (IBAction)touchTipsView:(id)sender {
+    //首页默认跳转开户夜
     switch ([UserInfoSingle sharedManager].openStatus) {// ***hqy添加
         case 1://未开户-->>>新用户开户
         case 2://已开户 --->>>老用户(白名单)开户
-        {
-            UCFBankDepositoryAccountViewController * bankDepositoryAccountVC =[[UCFBankDepositoryAccountViewController alloc ]initWithNibName:@"UCFBankDepositoryAccountViewController" bundle:nil];
-            [self.navigationController pushViewController:bankDepositoryAccountVC animated:YES];
-        }
-            break;
         case 3://已绑卡-->>>去设置交易密码页面
         {
-            UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:3];
-            vc.site = @"1";//等于1 还是 2 由具体模块定 
+            UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:[UserInfoSingle sharedManager].openStatus];
+            vc.site = @"1";//等于1 还是 2 由具体模块定
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;
@@ -1066,15 +1062,10 @@
             {// ***hqy添加
                 case 1://未开户-->>>新用户开户
                 case 2://已开户 --->>>老用户(白名单)开户
-                {
-                    UCFBankDepositoryAccountViewController * bankDepositoryAccountVC =[[UCFBankDepositoryAccountViewController alloc ]initWithNibName:@"UCFBankDepositoryAccountViewController" bundle:nil];
-                    bankDepositoryAccountVC.openStatus = [UserInfoSingle sharedManager].openStatus;
-                    [self.navigationController pushViewController:bankDepositoryAccountVC animated:YES];
-                }
-                    break;
                 case 3://已绑卡-->>>去设置交易密码页面
                 {
-                    UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:3];
+                    UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:[UserInfoSingle sharedManager].openStatus];
+                    vc.site = @"1";//等于1 还是 2 由具体模块定
                     [self.navigationController pushViewController:vc animated:YES];
                 }
                     break;
@@ -1126,17 +1117,7 @@
 }
 
 - (void)collectionCell:(UCFCollectionBidCell *)currentView didClickedMoreButton:(UIButton *)MoreButton
-{
-//    AppDelegate *appdelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-//    [appdelegate.tabBarController setSelectedIndex:1];
-//    UCFProjectListController *project = (UCFProjectListController *)[[appdelegate.tabBarController.viewControllers objectAtIndex:1].childViewControllers objectAtIndex:0];
-//    project.strStyle = @"11";
-//    project.viewType = @"2";
-//    BOOL isLoad = [project isViewLoaded];
-//    if (isLoad) {
-//        [project changeViewWithConfigure:@"11"];
-//    }
-    
+{    
     UCFProjectListController *project = [[UCFProjectListController alloc] initWithNibName:@"UCFProjectListController" bundle:nil];
     project.strStyle = @"11";
     project.viewType = @"2";
