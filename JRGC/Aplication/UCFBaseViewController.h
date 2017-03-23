@@ -38,7 +38,7 @@
 @property (strong, nonatomic) NSString *baseTitleText;
 @property (strong, nonatomic) id rootVc;
 
-@property(assign,nonatomic) selectAccout selectedAccout;//选择的账户 默认是P2P账户 hqy添加
+@property(assign,nonatomic) SelectAccoutType accoutType;//选择的账户 默认是P2P账户 hqy添加
 
 //添加左上角返回按钮
 - (void)addLeftButton;
