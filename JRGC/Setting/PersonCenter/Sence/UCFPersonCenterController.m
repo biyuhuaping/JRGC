@@ -19,6 +19,10 @@
 #import "UCFRedEnvelopeViewController.h"
 #import "UCFMoreViewController.h"
 #import "UCFSecurityCenterViewController.h"
+#import "UCFMessageCenterViewController.h"
+#import "UCFMyFacBeanViewController.h"
+#import "UCFCouponViewController.h"
+#import "UCFWorkPointsViewController.h"
 
 @interface UCFPersonCenterController () <UCFPCListViewControllerCallBack>
 
@@ -61,6 +65,28 @@
         personMessageVC.title = @"个人信息";
         return personMessageVC;
     }];
+    [self.userInfoVC setMessageVCGenerator:^UIViewController *(id params) {
+        UCFMessageCenterViewController *messagecenterVC = [[UCFMessageCenterViewController alloc]initWithNibName:@"UCFMessageCenterViewController" bundle:nil];
+        messagecenterVC.title =@"消息中心";
+        return messagecenterVC;
+    }];
+    [self.userInfoVC setBeansVCGenerator:^UIViewController *(id params) {
+         UCFMyFacBeanViewController *bean = [[UCFMyFacBeanViewController alloc] initWithNibName:@"UCFMyFacBeanViewController" bundle:nil];
+         bean.title = @"我的工豆";
+        return bean;
+    }];
+    
+    [self.userInfoVC setCouponVCGenerator:^UIViewController *(id params) {
+        UCFCouponViewController *coupon = [[UCFCouponViewController alloc] initWithNibName:@"UCFCouponViewController" bundle:nil];
+        return coupon;
+    }];
+    
+    [self.userInfoVC setWorkPointInfoVCGenerator:^UIViewController *(id params) {
+        UCFWorkPointsViewController *workPoint = [[UCFWorkPointsViewController alloc]initWithNibName:@"UCFWorkPointsViewController" bundle:nil];
+        workPoint.title = @"我的工分";
+        return workPoint;
+    }];
+    
     [self addChildViewController:self.userInfoVC];//userInfo还是用的MVC 毕竟上面把block和protocol都交代过了
 }
 

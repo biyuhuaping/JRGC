@@ -62,18 +62,43 @@
 }
 
 - (IBAction)messageClicked:(UIButton *)sender {
-    
+    if (self.messageVCGenerator) {
+        
+        UIViewController *targetVC = self.messageVCGenerator(nil);
+        if (targetVC) {
+            [self.parentViewController.navigationController pushViewController:targetVC animated:YES];
+        }
+    }
 }
 
 - (IBAction)factoryBeanClicked:(UIButton *)sender {
-    
+    if (self.beansVCGenerator) {
+        
+        UIViewController *targetVC = self.beansVCGenerator(nil);
+        if (targetVC) {
+            [self.parentViewController.navigationController pushViewController:targetVC animated:YES];
+        }
+    }
 }
 
 - (IBAction)couponClicked:(UIButton *)sender {
+    if (self.couponVCGenerator) {
+        
+        UIViewController *targetVC = self.couponVCGenerator(nil);
+        if (targetVC) {
+            [self.parentViewController.navigationController pushViewController:targetVC animated:YES];
+        }
+    }
 }
 
 - (IBAction)workPoint:(UIButton *)sender {
-    
+    if (self.workPointInfoVCGenerator) {
+        
+        UIViewController *targetVC = self.workPointInfoVCGenerator(nil);
+        if (targetVC) {
+            [self.parentViewController.navigationController pushViewController:targetVC animated:YES];
+        }
+    }
 }
 
 @end
