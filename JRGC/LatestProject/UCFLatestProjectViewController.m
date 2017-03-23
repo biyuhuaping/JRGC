@@ -638,7 +638,9 @@
         case 2://已开户 --->>>老用户(白名单)开户
         {
             UCFBankDepositoryAccountViewController * bankDepositoryAccountVC =[[UCFBankDepositoryAccountViewController alloc ]initWithNibName:@"UCFBankDepositoryAccountViewController" bundle:nil];
-            bankDepositoryAccountVC.openStatus = [UserInfoSingle sharedManager].openStatus;
+            BOOL fromSite = 1;
+            bankDepositoryAccountVC.openStatus = (fromSite == 1 ? [UserInfoSingle sharedManager].openStatus :[UserInfoSingle sharedManager].enjoyOpenStatus);
+            
             [self.navigationController pushViewController:bankDepositoryAccountVC animated:YES];
         }
             break;

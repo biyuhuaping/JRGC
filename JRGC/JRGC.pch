@@ -49,6 +49,11 @@ typedef enum : NSUInteger {
     PROJECTDETAILTYPEBONDSRRANSFER,
 } PROJECTDETAILTYPE;
 
+typedef NS_ENUM(NSInteger, SelectAccoutType) {
+    SelectAccoutTypeP2P = 1, //P2P账户 默认是P2P账户
+    SelectAccoutTypeHoner //尊享账号
+};
+
 #define GUIDE_OPEN @"1"
 #define OCRSerVer @"http://58.17.246.116:5005/icr/recognize_id_card?encoding=UTF8&head_portrait=0&crop_image=0"
 
