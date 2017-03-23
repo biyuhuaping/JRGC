@@ -14,5 +14,5 @@
 @property (assign, nonatomic) UCFOldUserGuideViewController *db;
 @property (strong, nonatomic) NSString *idCardNo;//身份证号
 @property (assign, nonatomic) BOOL isFromeBankCardInfo;//是否是从修改绑定银行卡页面进来
-
+@property (copy, nonatomic)NSString     *site; //徽商还是p2p
 @end

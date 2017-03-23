@@ -347,7 +347,7 @@
 - (void)sendVerifyCode:(NSString*)isVms{
     NSString *userId = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
     //type: 1:提现    2:注册    3:修改绑定银行卡   5:设置交易密码    6:开户    7:换卡
-    NSDictionary *dic = @{@"isVms":isVms,@"type":@"5",@"userId":userId};
+    NSDictionary *dic = @{@"isVms":isVms,@"type":@"5",@"userId":userId,@"fromSite":_site};
     [[NetworkModule sharedNetworkModule] newPostReq:dic tag:kSXTagIdentifyCode owner:self signature:YES];
 }
 
@@ -369,7 +369,7 @@
     //因为开通徽商流程和修改交易密码共用，所以要区分开
     
     NSString *userId = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
-    NSDictionary *dic = @{@"idCardNo":self.idCardNo, @"validateCode":_textField4.text, @"userId":userId};
+    NSDictionary *dic = @{@"idCardNo":self.idCardNo, @"validateCode":_textField4.text, @"userId":userId,@"fromSite":_site};
     [[NetworkModule sharedNetworkModule] newPostReq:dic tag:kSXTagSetHsPwdReturnJson owner:self signature:YES];
 }
 
