@@ -46,9 +46,9 @@ typedef enum : NSUInteger {
     PROJECTDETAILTYPEBONDSRRANSFER,
 } PROJECTDETAILTYPE;
 
-typedef NS_ENUM(NSInteger, selectAccout) {
-    selectAccoutP2P = 1, //P2P账户 默认是P2P账户
-    selectAccoutHoner //尊享账号
+typedef NS_ENUM(NSInteger, SelectAccoutType) {
+    SelectAccoutTypeP2P = 1, //P2P账户 默认是P2P账户
+    SelectAccoutTypeHoner //尊享账号
 };
 
 #define GUIDE_OPEN @"1"

@@ -52,7 +52,7 @@
 }
 -(void)createUIInfoView{
     
-    if (self.selectedAccout == selectAccoutHoner) {
+    if (self.accoutType ==  SelectAccoutTypeHoner) {
         [self.view bringSubviewToFront:self.loadingView];
         [self performSelector:@selector(removeLoadingView) withObject:nil afterDelay:3.0];
         baseTitleLabel.text = @"尊享账户";
@@ -81,7 +81,7 @@
 #pragma mark -点击查看流水页面
 -(void)rightClicked
 {
-    if (self.selectedAccout == selectAccoutHoner) {//尊享账户的资金流水
+    if (self.accoutType == SelectAccoutTypeHoner) {//尊享账户的资金流水
        
         
         
@@ -102,7 +102,7 @@
         UCFSettingItem *backMoneyDetail = [UCFSettingArrowItem itemWithIcon:nil title:@"回款明细" destVcClass:nil];
         UCFSettingItem *p2pOrHonerAccout = nil;
 
-        if (self.selectedAccout == selectAccoutHoner) {
+        if (self.accoutType == SelectAccoutTypeHoner) {
             p2pOrHonerAccout = [UCFSettingArrowItem itemWithIcon:nil title:@"尊享徽商银行存管账户" destVcClass:nil];
         }else{
             p2pOrHonerAccout = [UCFSettingArrowItem itemWithIcon:nil title:@"P2P徽商银行存管账户" destVcClass:nil];
@@ -112,7 +112,7 @@
         UCFSettingItem *setChangePassword = [UCFSettingArrowItem itemWithIcon:@"safecenter_icon_transaction" title:@"修改交易密码" destVcClass:[TradePasswordVC class]];
         
         UCFSettingItem *riskAssessment = nil;
-        if (self.selectedAccout == selectAccoutHoner) {
+        if (self.accoutType == SelectAccoutTypeHoner) {
             riskAssessment= [UCFSettingArrowItem itemWithIcon:nil title:@"尊享风险承担能力" destVcClass:[RiskAssessmentViewController class]];
         }else{
             riskAssessment = [UCFSettingArrowItem itemWithIcon:nil title:@"P2P风险承担能力" destVcClass:[RiskAssessmentViewController class]];
@@ -125,7 +125,7 @@
         
         UCFSettingGroup *group2 = [[UCFSettingGroup alloc] init];//账户安全
         
-        if (self.selectedAccout == selectAccoutHoner) {
+        if (self.accoutType == SelectAccoutTypeHoner) {
             group2.items = [[NSMutableArray alloc]initWithArray:@[p2pOrHonerAccout, bundleCard ,setChangePassword,riskAssessment]];
         }else{
             group2.items = [[NSMutableArray alloc]initWithArray:@[p2pOrHonerAccout, bundleCard ,setChangePassword,riskAssessment,batchInvest]];
@@ -154,7 +154,7 @@
         _headerView = [[[NSBundle mainBundle]loadNibNamed:@"UCFP2POrHornerTabHeaderView" owner:nil options:nil] firstObject];
         _headerView.frame = CGRectMake(0, 0, ScreenWidth, 155);
         _headerView.delegate = self;
-        if(self.selectedAccout == selectAccoutHoner){
+        if(self.accoutType == SelectAccoutTypeHoner){
             _headerView.totalIncomeTitleLab.text = @"尊享总资产";
         }else{
             _headerView.totalIncomeTitleLab.text = @"P2P总资产";
@@ -226,7 +226,7 @@
 //隐藏或者显示账户金额
 - (void)cilckShowOrHideAccoutMoney:(UIButton *)btn
 {
-    if(self.selectedAccout == selectAccoutHoner)
+    if(self.accoutType == SelectAccoutTypeHoner)
     {
         btn.selected = !btn.selected;
 //        BOOL isShowHonerAccoutMoney = [[NSUserDefaults standardUserDefaults] boolForKey:@""];
@@ -254,7 +254,7 @@
 //查看P2P或者尊享账户
 - (void)checkP2POrHonerAccout
 {
-    if(self.selectedAccout == selectAccoutHoner)
+    if(self.accoutType == SelectAccoutTypeHoner)
     {
         
         
@@ -284,7 +284,7 @@
 #pragma mark 提现点击事件
 - (IBAction)clickCashBtn:(UIButton *)sender {
     
-    if (self.selectedAccout == selectAccoutHoner) {//尊享账户的提现
+    if (self.accoutType == SelectAccoutTypeHoner) {//尊享账户的提现
         
         
         
@@ -297,7 +297,7 @@
 #pragma mark 充值点击事件
 - (IBAction)clickRechargeBtn:(UIButton *)sender {
     
-    if (self.selectedAccout == selectAccoutHoner) {//尊享账户的充值
+    if (self.accoutType == SelectAccoutTypeHoner) {//尊享账户的充值
         
         
         
