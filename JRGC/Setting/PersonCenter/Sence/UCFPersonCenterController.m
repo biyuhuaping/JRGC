@@ -10,6 +10,8 @@
 
 #import "UCFPCListModel.h"
 
+#import "UCFLoginShaowView.h"
+
 #import "UCFUserInfoController.h"
 #import "UCFPCListViewController.h"
 
@@ -24,7 +26,10 @@
 #import "UCFCouponViewController.h"
 #import "UCFWorkPointsViewController.h"
 
-@interface UCFPersonCenterController () <UCFPCListViewControllerCallBack>
+#import "UCFLoginViewController.h"
+#import "UCFRegisterStepOneViewController.h"
+
+@interface UCFPersonCenterController () <UCFPCListViewControllerCallBack,LoginShadowDelegate>
 
 @property (nonatomic, strong) UCFUserInfoController *userInfoVC;
 @property (strong, nonatomic) UCFPCListViewController *pcListVC;
@@ -46,6 +51,11 @@
 {
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = YES;
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:UUID]) {
+        [self hideShadowView];
+    } else {
+        [self addShadowViewAndLoginBtn];
+    }
 }
 
 #pragma mark - Utils
@@ -54,12 +64,12 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     
-  
+    UCFPCListViewPresenter *listViewPresenter = [UCFPCListViewPresenter presenter];
     
-    self.pcListVC = [UCFPCListViewController instanceWithPresenter:[UCFPCListViewPresenter presenter]];
+    self.pcListVC = [UCFPCListViewController instanceWithPresenter:listViewPresenter];
     self.pcListVC.delegate = self;//BlogViewController走的是Protocol绑定方式
 
-    self.userInfoVC = [UCFUserInfoController instanceWithPresenter:[UCFPCListViewPresenter presenter]];
+    self.userInfoVC = [UCFUserInfoController instanceWithPresenter:listViewPresenter];
     [self.userInfoVC setUserInfoVCGenerator:^UIViewController *(id params) {
         UCFSecurityCenterViewController *personMessageVC = [[UCFSecurityCenterViewController alloc] initWithNibName:@"UCFSecurityCenterViewController" bundle:nil];
         personMessageVC.title = @"个人信息";
@@ -151,6 +161,64 @@
         moreVC.sourceVC = @"UCFSettingViewController";
         [self.navigationController pushViewController:moreVC animated:YES];
     }
+}
+
+#pragma mark - 无奈的代码
+
+//未登录状态添加阴影和登录按钮
+- (void)addShadowViewAndLoginBtn
+{
+    BOOL hasHideView = NO;
+    for (UIView *view in [self.view subviews]) {
+        if ([view isKindOfClass:[UCFLoginShaowView class]]) {
+            hasHideView = YES;
+        }
+    }
+    //遍历当前view的所有子view 没有loginshashow才add
+    if (!hasHideView) {
+        UCFLoginShaowView *shadowView = [[UCFLoginShaowView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
+        shadowView.delegate = self;
+        [self.view addSubview:shadowView];
+    }
+}
+
+//移除shadowview
+- (void)hideShadowView
+{
+    for (UIView *view in [self.view subviews]) {
+        if ([view isKindOfClass:[UCFLoginShaowView class]]) {
+            [view setHidden:YES];
+            [view removeFromSuperview];
+        }
+    }
+}
+
+#pragma mark -loginbtnClicked
+
+- (void)btnShadowClicked:(id)sender
+{
+    UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
+    loginViewController.sourceVC = @"fromPersonCenter";
+    UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
+    [self presentViewController:loginNaviController animated:YES completion:nil];
+}
+
+
+- (void)regBtnclicked:(id)sender
+{
+    UCFRegisterStepOneViewController *registerControler = [[UCFRegisterStepOneViewController alloc] init];
+    registerControler.sourceVC = @"fromPersonCenter";
+    UINavigationController *regNaviController = [[UINavigationController alloc] initWithRootViewController:registerControler];
+    [self presentViewController:regNaviController animated:YES completion:nil];
+}
+
+- (void)moreBtnclicked:(id)sender
+{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"UCFMoreViewController" bundle:nil];
+    UCFMoreViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"more_main"];
+    controller.sourceVC = @"fromPersonCenter";
+    UINavigationController *moreNaviController = [[UINavigationController alloc] initWithRootViewController:controller];
+    [self presentViewController:moreNaviController animated:YES completion:nil];
 }
 
 @end
