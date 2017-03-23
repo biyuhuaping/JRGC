@@ -163,18 +163,20 @@
 //创建控制器
 - (void)createViewController
 {
+    //徽商结果承载页
     self.openVC = [[OpeningMerchantsVC alloc] initWithNibName:@"OpeningMerchantsVC" bundle:nil];
     self.openVC.db = self;
     [self addChildViewController:self.openVC];
     [self.scrollView addSubview:self.openVC.view];
     self.currentVC = self.openVC;
-
     self.upgradeVC = [[UpgradeAccountVC alloc] initWithNibName:@"UpgradeAccountVC" bundle:nil];
     self.upgradeVC.db = self;
+    self.upgradeVC.site = _site;
     [self addChildViewController:self.upgradeVC];
     
     self.passWordVC = [[TradePasswordVC alloc] initWithNibName:@"TradePasswordVC" bundle:nil];
     self.passWordVC.db = self;
+    self.passWordVC.site = _site;
     [self addChildViewController:self.passWordVC];
 }
 

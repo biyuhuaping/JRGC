@@ -12,5 +12,6 @@
 @interface AccountSuccessVC : UIViewController
 
 @property (assign, nonatomic) UCFOldUserGuideViewController *db;
+@property (copy, nonatomic) NSString *site;
 
 @end
