@@ -17,6 +17,7 @@
 #import "DBColor.h"
 #import "UserInfoSingle.h"
 #import "BlockUIAlertView.h"
+#import "UIView+Extension.h"
 
 #define XPOS 15
 #define YPOS 25
@@ -39,6 +40,8 @@
 
 
 #define TABIMAGEVIEWTAG 100000
+
+typedef UIViewController *(^ViewControllerGenerator)(id params);
 
 typedef enum : NSUInteger {
     PROJECTDETAILTYPENORMAL,
