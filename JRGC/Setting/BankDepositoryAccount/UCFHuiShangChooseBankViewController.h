@@ -19,5 +19,5 @@
 
 @property (nonatomic,assign) id<UCFHuiShangChooseBankViewControllerDelegate> bankDelegate;
 
-@property (nonnull, nonatomic, copy) NSString *site;
+@property (nonatomic, copy) NSString *site;
 @end

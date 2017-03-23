@@ -151,10 +151,12 @@
         {
             [self getRegisterTokenHttpRequst];
         } else if([rstcode intValue] == 3) {
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:rsttext delegate:self cancelButtonTitle:@"重新输入" otherButtonTitles:@"立即拨打", nil];
             [alertView show];
         } else
         {
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:rsttext delegate:nil cancelButtonTitle:@"重新输入" otherButtonTitles:nil, nil];
             [alertView show];
         }
@@ -165,7 +167,7 @@
             twoController.isLimitFactoryCode = isLimitFactoryCode;
             twoController.registerTokenStr = [[dic objectSafeDictionaryForKey:@"data"] objectSafeForKey:@"registTicket"];
             [self.navigationController pushViewController:twoController animated:YES];
-        }
+        } 
     } else if (tag.integerValue == kSXTagRegistCheckQUDAO) {
         if ([[dic objectForKey:@"islimit"] boolValue]) {
             isLimitFactoryCode = YES;
