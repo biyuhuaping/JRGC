@@ -154,12 +154,13 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="accountVisibleBtn" destination="MFn-OY-8pr" id="aGx-eQ-QFi"/>
                 <outlet property="accumulatedIncomeLab" destination="AX0-Sj-nAX" id="nga-6P-Dh7"/>
                 <outlet property="availableAmountLab" destination="SEf-MS-9Qq" id="ynN-6S-pVI"/>
                 <outlet property="totalIncomeLab" destination="v1c-6a-upd" id="hqe-1R-orD"/>
                 <outlet property="totalIncomeTitleLab" destination="bYu-nd-nVA" id="3Qy-b9-7xT"/>
             </connections>
-            <point key="canvasLocation" x="-798" y="-391"/>
+            <point key="canvasLocation" x="-1099" y="-429"/>
         </view>
     </objects>
     <resources>

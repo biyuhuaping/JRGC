@@ -10,9 +10,7 @@
 
 @protocol UCFP2POrHornerTabHeaderViewDelete <NSObject>
 
-@optional
-
-- (void)cilckShowOrHideAccoutMoney:(UIButton *)btn;
+@optional 
 - (void)checkP2POrHonerAccout;
 @end
 
@@ -21,6 +19,9 @@
 @property (strong, nonatomic) IBOutlet UILabel *totalIncomeLab;//累计收益
 @property (strong, nonatomic) IBOutlet UILabel *totalIncomeTitleLab;//累计收益标题
 @property (strong, nonatomic) IBOutlet UILabel *availableAmountLab;//累计收益
+
+@property (assign,nonatomic) SelectAccoutType accoutTpye;
+@property (assign,nonatomic) BOOL isShowOrHideAccoutMoney;
 ;
 @property (nonatomic,assign) id<UCFP2POrHornerTabHeaderViewDelete> delegate;
 @end

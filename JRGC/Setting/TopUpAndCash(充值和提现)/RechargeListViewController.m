@@ -26,7 +26,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    baseTitleLabel.text = @"充值记录";
+    if (self.accoutType == SelectAccoutTypeHoner) {
+          baseTitleLabel.text = @"尊享充值记录";
+    }else{
+          baseTitleLabel.text = @"P2P充值记录";
+    }
     [self addLeftButton];
     self.dataArray = [NSMutableArray array];
     self.sectionItemArray = [NSMutableArray array];

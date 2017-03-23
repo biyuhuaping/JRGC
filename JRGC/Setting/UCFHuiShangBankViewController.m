@@ -45,7 +45,11 @@
       self.fd_interactivePopDisabled = NO;
     }
     [self.navigationController setNavigationBarHidden:NO animated:YES];
-    baseTitleLabel.text = @"徽商银行存管账户";
+    if (self.accoutType == SelectAccoutTypeHoner) {
+        baseTitleLabel.text = @"尊享徽商银行存管账户";
+    }else{
+        baseTitleLabel.text = @"P2P徽商银行存管账户";
+    }
     UCFHuiBuinessBankView *huishangView = [[[NSBundle mainBundle] loadNibNamed:@"UCFHuiBuinessBankView" owner:self options:nil] lastObject];
     huishangView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 182.0/320.0*SCREEN_WIDTH);
     UIView *headerBackView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 182.0/320.0*SCREEN_WIDTH)];

@@ -109,7 +109,11 @@
 //初始化界面信息
 - (void)createUI
 {
-    baseTitleLabel.text = @"充值";
+    if (self.accoutType == SelectAccoutTypeHoner) {
+         baseTitleLabel.text = @"尊享充值";
+    }else{
+       baseTitleLabel.text = @"P2P充值";
+    }
     [self addLeftButton];
     [self addRightButtonWithName:@"充值记录"];
     _getCodeButton.titleLabel.font = [UIFont systemFontOfSize:15.0f];
@@ -314,6 +318,7 @@
 - (void)clickRightBtn
 {
     RechargeListViewController *viewController = [[RechargeListViewController alloc] init];
+    viewController.accoutType = self.accoutType;
     [self.navigationController pushViewController:viewController animated:YES];
 }
 - (void)telNumTimerFired

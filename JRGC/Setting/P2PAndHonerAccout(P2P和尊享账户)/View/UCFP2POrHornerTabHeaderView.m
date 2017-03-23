@@ -11,6 +11,7 @@
 @interface UCFP2POrHornerTabHeaderView ()
 - (IBAction)CilckShowOrHideAccoutMoney:(UIButton *)sender;
 - (IBAction)checkP2POrHonerAccout:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *accountVisibleBtn;
 
 @end
 
@@ -25,9 +26,42 @@
 */
 
 - (IBAction)CilckShowOrHideAccoutMoney:(UIButton *)sender {
-    [self.delegate cilckShowOrHideAccoutMoney:sender];
+    _isShowOrHideAccoutMoney = !_isShowOrHideAccoutMoney;
+    [self setNeedsLayout];
 }
 - (IBAction)checkP2POrHonerAccout:(id)sender {
     [self.delegate checkP2POrHonerAccout];
+}
+-(void)layoutSubviews{
+    if (_accoutTpye == SelectAccoutTypeHoner) { //尊享账户
+        
+        if (_isShowOrHideAccoutMoney){ //显示账户金额
+            [self.accountVisibleBtn setImage:[UIImage imageNamed:@"account_invisible"] forState:UIControlStateNormal];
+            self.accumulatedIncomeLab.text = @"¥0.00";//累计收益
+            self.totalIncomeLab.text = @"¥0.00";//总资产
+            self.availableAmountLab.text = @"¥0.00";//可用金额
+
+        }else{//隐藏账户金额
+            [self.accountVisibleBtn  setImage:[UIImage imageNamed:@"account_visible"] forState:UIControlStateNormal];
+            self.accumulatedIncomeLab.text = @"***";//累计收益
+            self.totalIncomeLab.text = @"***";//总资产
+            self.availableAmountLab.text = @"***";//可用金额
+
+        }
+    }else{ //p2p账户
+        if (_isShowOrHideAccoutMoney){ //显示账户金额
+            [self.accountVisibleBtn setImage:[UIImage imageNamed:@"account_invisible"] forState:UIControlStateNormal];
+            self.accumulatedIncomeLab.text = @"¥0.00";//累计收益
+            self.totalIncomeLab.text = @"¥0.00";//总资产
+            self.availableAmountLab.text = @"¥0.00";//可用金额
+            
+        }else{//隐藏账户金额
+            [self.accountVisibleBtn  setImage:[UIImage imageNamed:@"account_visible"] forState:UIControlStateNormal];
+            self.accumulatedIncomeLab.text = @"***";//累计收益
+            self.totalIncomeLab.text = @"***";//总资产
+            self.availableAmountLab.text = @"***";//可用金额
+            
+        }
+    }
 }
 @end
