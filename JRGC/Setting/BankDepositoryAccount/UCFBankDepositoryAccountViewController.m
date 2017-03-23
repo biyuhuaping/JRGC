@@ -52,6 +52,7 @@
 }
 - (IBAction)goToEnjoyOpenHSAccount:(id)sender {
     UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:2];
+    vc.site = @"2";
     [self.navigationController pushViewController:vc animated:YES];
     NSMutableArray *navVCArray = [[NSMutableArray alloc] initWithArray:self.navigationController.viewControllers];
     [navVCArray removeObjectAtIndex:navVCArray.count-2];

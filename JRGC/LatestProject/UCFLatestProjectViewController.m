@@ -42,7 +42,7 @@
 #import "UCFCollectionDetailViewController.h" //集合详情
 #import "MjAlertView.h"
 #import "NSDate+IsBelongToToday.h"
-@interface UCFLatestProjectViewController ()<InvestmentCellDelegate,FourOFourViewDelegate,CycleViewDelegate,PromptViewDelegate,homeButtonPressedCellDelegate, UITableViewDataSource, UITableViewDelegate, UCFCollectionBidCellDelegate,MjAlertViewDelegate>
+@interface UCFLatestProjectViewController ()<InvestmentCellDelegate,FourOFourViewDelegate,CycleViewDelegate,PromptViewDelegate,homeButtonPressedCellDelegate, UITableViewDataSource, UITableViewDelegate, UCFCollectionBidCellDelegate,MjAlertViewDelegate,PraiseAlertDelegate>
 {
     UIView *_clickView;
     BOOL _refreshHead;
@@ -350,26 +350,7 @@
 }
 
 #pragma mark - bander
-//- (void)updateLab{
-//    static int i = 0;
-//    if (_rollPrdOrderArr.count == 0) {
-//        return;
-//    }
-//    if (i == _rollPrdOrderArr.count - 1) {
-//        i = 0;
-//    }else{
-//        i ++;
-//    }
-//    NSDictionary *dic = _rollPrdOrderArr[i];
-//    _lab.text = [NSString stringWithFormat:@"%@(%@) 投资%@   ¥%@   %@",dic[@"loginName"],dic[@"realName"],dic[@"prdName"],dic[@"investAmt"],dic[@"times"]];
-//    CATransition *animation = [CATransition animation];
-//    animation.delegate = self;
-//    animation.duration = 0.7;
-//    animation.timingFunction = UIViewAnimationCurveEaseInOut;
-//    animation.type = @"cube";
-//    animation.subtype = kCATransitionFromTop;
-//    [[_lab layer] addAnimation:animation forKey:@"animation"];
-//}
+
 
 //刷新数据
 - (void)beginShowLoading{
@@ -395,15 +376,6 @@
 //***qyy 标类型type cell按钮的回调方法delegate
 -(void)homeButtonPressed:(UIButton *)button withCelltypeSellWay:(NSString *)strSellWay
 {
-//    AppDelegate *appdelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-//    [appdelegate.tabBarController setSelectedIndex:1];
-//    UCFProjectListController *project = (UCFProjectListController *)[[appdelegate.tabBarController.viewControllers objectAtIndex:1].childViewControllers objectAtIndex:0];
-//    project.strStyle = strSellWay;
-//    project.viewType = @"1";
-//    BOOL isLoad = [project isViewLoaded];
-//    if (isLoad) {
-//        [project changeViewWithConfigure:strSellWay];
-//    }
     UCFProjectListController *project = [[UCFProjectListController alloc] initWithNibName:@"UCFProjectListController" bundle:nil];
     project.strStyle = strSellWay;
     project.viewType = @"1";
@@ -501,33 +473,6 @@
         webView.navTitle = banInfo.title;
         webView.dicForShare = banInfo;
         [self.navigationController pushViewController:webView animated:YES];
-        
-        //if ([banInfo.dumps isEqualToString:@"1"])
-        //{    //活动 先获取toke
-            //if ([[NSUserDefaults standardUserDefaults] valueForKey:UUID])
-            //{
-                //[MBProgressHUD showHUDAddedTo:self.view animated:YES];
-                //_scrollViewIndex = index;
-                //NSString *strParameters = nil;
-                //strParameters = [NSString stringWithFormat:@"userId=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];//101943
-                //[[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetIgnorgeLogin owner:self];
-            //} else {
-                //FullWebViewController *webView = [[FullWebViewController alloc]initWithWebUrl:banInfo.url title:banInfo.title];
-                //webView.baseTitleType = @"lunbotuhtml";
-                //webView.flageHaveShareBut = @"分享";
-                //webView.dicForShare = banInfo;
-                //[self.navigationController pushViewController:webView animated:YES];
-  
-            //}
-        //}
-        //else
-        //{
-            //FullWebViewController *webView = [[FullWebViewController alloc]initWithWebUrl:banInfo.url title:banInfo.title];
-            //webView.baseTitleType = @"lunbotuhtml";
-            //webView.dicForShare = banInfo;
-            //[self.navigationController pushViewController:webView animated:YES];
-            
-        //}
     }
 }
 
@@ -638,15 +583,13 @@
         case 2://已开户 --->>>老用户(白名单)开户
         {
             UCFBankDepositoryAccountViewController * bankDepositoryAccountVC =[[UCFBankDepositoryAccountViewController alloc ]initWithNibName:@"UCFBankDepositoryAccountViewController" bundle:nil];
-            BOOL fromSite = 1;
-            bankDepositoryAccountVC.openStatus = (fromSite == 1 ? [UserInfoSingle sharedManager].openStatus :[UserInfoSingle sharedManager].enjoyOpenStatus);
-            
             [self.navigationController pushViewController:bankDepositoryAccountVC animated:YES];
         }
             break;
         case 3://已绑卡-->>>去设置交易密码页面
         {
             UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:3];
+            vc.site = @"1";//等于1 还是 2 由具体模块定 
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;

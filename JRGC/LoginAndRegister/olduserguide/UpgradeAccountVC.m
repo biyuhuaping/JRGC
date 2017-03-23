@@ -399,6 +399,7 @@
     if (indexPath.row == 3) {
         UCFHuiShangChooseBankViewController *vc = [[UCFHuiShangChooseBankViewController alloc] initWithNibName:@"UCFHuiShangChooseBankViewController" bundle:nil];
         vc.bankDelegate = self;
+        vc.site = _site;
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
@@ -407,7 +408,8 @@
 //获取用户信息
 - (void)getHSAccountInfo{
     NSString *userId = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
-    [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":userId} tag:kSXTagGetOpenAccountInfo owner:self signature:YES];
+
+    [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":userId,@"fromSite":_site} tag:kSXTagGetOpenAccountInfo owner:self signature:YES];
 }
 
 //修改绑定银行卡接口
@@ -461,7 +463,7 @@
     
     NSString *userId = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
     //type: 1:提现    2:注册    3:修改绑定银行卡   5:设置交易密码    6:开户    7:换卡
-    NSDictionary *dic = @{@"destPhoneNo":_phoneNum,@"isVms":isVms,@"type":_isFromeBankCardInfo?@"3":@"6",@"userId":userId};
+    NSDictionary *dic = @{@"destPhoneNo":_phoneNum,@"isVms":isVms,@"type":_isFromeBankCardInfo?@"3":@"6",@"userId":userId,@"fromSite":_site};
     [[NetworkModule sharedNetworkModule] newPostReq:dic tag:kSXTagIdentifyCode owner:self signature:YES];
 }
 
@@ -504,6 +506,7 @@
                                           @"openStatus":_openStatus,         //获取到的用户信息的状态，对应接口getOpenAccountInfo
                                           @"validateCode":_textField4.text,  //手机验证码
                                           @"userId":userId,                  //用户id
+                                          @"fromSite":_site                  //站点
                                           };
         [self replaceBankCardInformation:encryptParamDic];
 }
@@ -516,6 +519,7 @@
                                           @"openStatus":_openStatus,        //获取到的用户信息的状态，对应接口getOpenAccountInfo
                                           @"validateCode":_textField4.text, //手机验证码
                                           @"userId":userId,                 //用户id
+                                          @"fromSite":_site                 //站点
                                           };
 
         [[NetworkModule sharedNetworkModule] newPostReq:encryptParamDic tag:kSXTagOpenAccount owner:self signature:YES];
@@ -651,6 +655,7 @@
             [self addChildViewController:acVC];
             acVC.view.frame = self.view.bounds;
             acVC.db = self.db;
+            acVC.site = self.site;
             [self.view addSubview:acVC.view];
             [acVC didMoveToParentViewController:self];
             self.db.isOpenAccount = YES;

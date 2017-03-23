@@ -23,6 +23,8 @@ typedef enum {
 //@property (nonatomic, assign) BOOL isTradePwdSet;   //是否设置交易密码
 @property int isStep;                               //步骤流程
 @property BOOL isPresentViewController; //是否弹出视图
+@property (copy, nonatomic)NSString     *site; //徽商还是p2p
+
 //创建徽商存管的方法
 + (UCFOldUserGuideViewController *)createGuideHeadSetp:(int) step;
 //切换title方法

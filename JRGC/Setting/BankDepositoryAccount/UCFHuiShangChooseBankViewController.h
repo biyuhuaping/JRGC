@@ -18,4 +18,6 @@
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @property (nonatomic,assign) id<UCFHuiShangChooseBankViewControllerDelegate> bankDelegate;
+
+@property (nonatomic, copy) NSString *site;
 @end
