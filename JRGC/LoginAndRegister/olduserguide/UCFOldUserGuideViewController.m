@@ -41,7 +41,7 @@
 
 @implementation UCFOldUserGuideViewController
 
-+ (UCFOldUserGuideViewController *)createGuideHeadSetp:(int) step
++ (UCFOldUserGuideViewController *)createGuideHeadSetp:(NSInteger) step
 {
     UCFOldUserGuideViewController *vc = [[UCFOldUserGuideViewController alloc] initWithNibName:@"UCFOldUserGuideViewController" bundle:nil];
     //vc.isRegister = isRegister;
