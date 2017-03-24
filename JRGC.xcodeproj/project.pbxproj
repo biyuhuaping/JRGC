@@ -534,6 +534,8 @@
 		E320200E1CC4BAD70065579C /* WebViewJavascriptBridgeBase.m in Sources */ = {isa = PBXBuildFile; fileRef = E320200C1CC4BAD70065579C /* WebViewJavascriptBridgeBase.m */; };
 		E32020121CC4BCE60065579C /* WebViewJavascriptBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = E32020111CC4BCE60065579C /* WebViewJavascriptBridge.m */; };
 		E32020151CC4BCEF0065579C /* WKWebViewJavascriptBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = E32020141CC4BCEF0065579C /* WKWebViewJavascriptBridge.m */; };
+		E32B8F4E1E85188D00B7871F /* UCFRegisterFinshViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E32B8F4C1E85188D00B7871F /* UCFRegisterFinshViewController.m */; };
+		E32B8F4F1E85188D00B7871F /* UCFRegisterFinshViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E32B8F4D1E85188D00B7871F /* UCFRegisterFinshViewController.xib */; };
 		E37086B51D61A6CD0041D293 /* UCFHuiShangChooseBankViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E37086B31D61A6CD0041D293 /* UCFHuiShangChooseBankViewController.m */; };
 		E37086B61D61A6CD0041D293 /* UCFHuiShangChooseBankViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E37086B41D61A6CD0041D293 /* UCFHuiShangChooseBankViewController.xib */; };
 		E37086BA1D61BA5B0041D293 /* UCFHuiShangChooseBankViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E37086B81D61BA5B0041D293 /* UCFHuiShangChooseBankViewCell.m */; };
@@ -1676,6 +1678,9 @@
 		E32020111CC4BCE60065579C /* WebViewJavascriptBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewJavascriptBridge.m; sourceTree = "<group>"; };
 		E32020131CC4BCEF0065579C /* WKWebViewJavascriptBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKWebViewJavascriptBridge.h; sourceTree = "<group>"; };
 		E32020141CC4BCEF0065579C /* WKWebViewJavascriptBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKWebViewJavascriptBridge.m; sourceTree = "<group>"; };
+		E32B8F4B1E85188D00B7871F /* UCFRegisterFinshViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFRegisterFinshViewController.h; sourceTree = "<group>"; };
+		E32B8F4C1E85188D00B7871F /* UCFRegisterFinshViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFRegisterFinshViewController.m; sourceTree = "<group>"; };
+		E32B8F4D1E85188D00B7871F /* UCFRegisterFinshViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFRegisterFinshViewController.xib; sourceTree = "<group>"; };
 		E37086B21D61A6CD0041D293 /* UCFHuiShangChooseBankViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UCFHuiShangChooseBankViewController.h; path = BankDepositoryAccount/UCFHuiShangChooseBankViewController.h; sourceTree = "<group>"; };
 		E37086B31D61A6CD0041D293 /* UCFHuiShangChooseBankViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UCFHuiShangChooseBankViewController.m; path = BankDepositoryAccount/UCFHuiShangChooseBankViewController.m; sourceTree = "<group>"; };
 		E37086B41D61A6CD0041D293 /* UCFHuiShangChooseBankViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UCFHuiShangChooseBankViewController.xib; path = BankDepositoryAccount/UCFHuiShangChooseBankViewController.xib; sourceTree = "<group>"; };
@@ -3579,6 +3584,9 @@
 				7BC8A89F1AFB4EB0003A8D89 /* RegisterSuccessAlert.m */,
 				ED70C8771C7C581E00F45AC4 /* ChooseFaceOrGesAlertView.h */,
 				ED70C8781C7C581E00F45AC4 /* ChooseFaceOrGesAlertView.m */,
+				E32B8F4B1E85188D00B7871F /* UCFRegisterFinshViewController.h */,
+				E32B8F4C1E85188D00B7871F /* UCFRegisterFinshViewController.m */,
+				E32B8F4D1E85188D00B7871F /* UCFRegisterFinshViewController.xib */,
 			);
 			name = Register;
 			sourceTree = "<group>";
@@ -5453,6 +5461,7 @@
 				74FC22821BA6A90E00D1660A /* UCFMyFacBeanViewController.xib in Resources */,
 				74F490EA1E5B0BD70057AC62 /* UCFMyInvestBatchCell.xib in Resources */,
 				E3E05C5D1DD07D710066B65C /* UCFCouponExchangeToFriends.xib in Resources */,
+				E32B8F4F1E85188D00B7871F /* UCFRegisterFinshViewController.xib in Resources */,
 				FB5149571D64441F00C26E7B /* guideImage7_3.png in Resources */,
 				FB2858CC1BAAB07C000EAA71 /* UCFBackMoneyDetailViewController.xib in Resources */,
 				E311A66E1D90E85B00C5483E /* UCFWebViewJavascriptBridgeLevel.xib in Resources */,
@@ -5808,6 +5817,7 @@
 				FB572C0C1C7C3000000031F1 /* UCFCouponInterest.m in Sources */,
 				EDEC8BFC1CB3BA6300815228 /* WPTappableLabel.m in Sources */,
 				7BCE01FC1AC8FC260084C15C /* ASINetworkQueue.m in Sources */,
+				E32B8F4E1E85188D00B7871F /* UCFRegisterFinshViewController.m in Sources */,
 				7BA6E4BE1AD6731900FE8C37 /* SDWebImageDownloaderOperation.m in Sources */,
 				746FFE251B0059BB00FF927F /* UCFBindCardOneTableViewCell.m in Sources */,
 				E37086BA1D61BA5B0041D293 /* UCFHuiShangChooseBankViewCell.m in Sources */,
