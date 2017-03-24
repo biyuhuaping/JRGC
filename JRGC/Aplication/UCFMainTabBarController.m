@@ -10,7 +10,8 @@
 #import "UCFLoginViewController.h"
 #import "UCFLatestProjectViewController.h"
 #import "UCFAssignmentCreditorViewController.h"
-#import "UCFSettingViewController.h"
+//#import "UCFSettingViewController.h"
+#import "UCFPersonCenterController.h"
 #import "UCFMoreViewController.h"
 #import "AppDelegate.h"
 
@@ -115,7 +116,7 @@
             }
                 break;
             case 4:{
-                controller = [[UCFSettingViewController alloc] initWithNibName:@"UCFSettingViewController" bundle:nil];
+                controller = [[UCFPersonCenterController alloc] initWithNibName:@"UCFPersonCenterController" bundle:nil];
             }
                 break;
             default:
@@ -207,7 +208,7 @@
         return YES;
     }
     
-    if ([topView isKindOfClass:[UCFSettingViewController class]] ) {
+    if ([topView isKindOfClass:[UCFPersonCenterController class]] ) {
         if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
 //            UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
 //            loginViewController.sourceVC = @"fromPersonCenter";

@@ -115,8 +115,11 @@
     
     isSendSMS = NO;
     self.getMoneyBtn.tag = 1010; //设置当前按钮tag 为 1010
-    
-    baseTitleLabel.text = @"提现";
+    if (self.accoutType == SelectAccoutTypeHoner) {
+         baseTitleLabel.text = @"尊享提现";
+    }else{
+         baseTitleLabel.text = @"P2P提现";
+    }
     [self addLeftButton];
     [self addRightButtonWithName:@"提现记录"];
     _crachTextField.keyboardType = UIKeyboardTypeDecimalPad;
@@ -165,6 +168,7 @@
 - (void)clickRightBtn
 {
     UCFCashRecordListViewController *viewController = [[UCFCashRecordListViewController alloc] init];
+    viewController.accoutType = self.accoutType;
     [self.navigationController pushViewController:viewController animated:YES];
 }
 //点击语音验证码
