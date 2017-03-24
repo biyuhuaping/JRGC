@@ -63,10 +63,11 @@ static NetworkModule *gInstance = NULL;
 }
 - (void)postReq:(NSString*)data tag:(kSXTag)tag owner:(id<NetworkModuleDelegate>)owner Type:(SelectAccoutType)type
 {
-    NSString *serverIP = @"https://app.9888.cn/mpappP2P/";
+    NSString *serverIP = @"http://app.9888.cn/mpappP2P/";
     if (type == SelectAccoutTypeHoner) {
-        serverIP = @"https://app.9888.cn/mpappZX/";
+        serverIP = @"http://app.9888.cn/mpappZX/";
     }
+//    serverIP = @"http://192.168.2.189:8090/mpappOld/";
     NSString *parameter = nil;
     switch ((int)tag) {
         case kSXTagValidLogin:
@@ -469,7 +470,7 @@ static NetworkModule *gInstance = NULL;
 
     NSArray * array = [NSArray arrayWithObjects:@"newPrdClaims/dataList",@"newaccount/userLevelIsOpen",@"newprdTransfer/dataList",@"newPrdTransfer/getDetail",@"newuser/login",@"newsendmessage",@"newuserregist/isexitpomocode",@"newuserregist/regist",@"userregist/verification",@"newgetSendMessageTicket",@"bankCard/baseBankMess",@"personalSettings/getTRegionList",@"sysDataDicItem/dicItemList",@"sysDataDicItem/allDicItemList",@"scratchCard/isExist",@"newuserregist/modifyUserpwd",@"newprdTransfer/newCompensateInterest",@"appInstallCount/save",@"newuserregist/checkQdIslimit", nil];
 
-    NSArray * strArray = [parameter componentsSeparatedByString:SERVER_IP];
+    NSArray * strArray = [parameter componentsSeparatedByString:serverIP];
     NSString *par = [strArray objectAtIndex:1];
     if ([[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
         if (data.length > 0) {
@@ -970,7 +971,7 @@ static NetworkModule *gInstance = NULL;
 }
 
 #pragma mark - V3_NewPostMethod
-- (void)newPostReq:(NSDictionary*)data tag:(kSXTag)tag owner:(id<NetworkModuleDelegate>)owner signature:(BOOL)isSignature
+- (void)newPostReq:(NSDictionary*)data tag:(kSXTag)tag owner:(id<NetworkModuleDelegate>)owner signature:(BOOL)isSignature Type:(SelectAccoutType)type
 {
     NSString *parameter = nil;
     switch ((int)tag) {
@@ -1115,27 +1116,27 @@ static NetworkModule *gInstance = NULL;
         }
             break;
         case kSXTagUpdateMobile: {
-            parameter = [SERVER_IP stringByAppendingString:UPDATE_TEL];
+            parameter = [NEW_SERVER_IP stringByAppendingString:UPDATE_TEL];
         }
             break;
         case kSXTagGetWorkPoint: {
-            parameter = [SERVER_IP stringByAppendingString:GETWORKPOINT];
+            parameter = [NEW_SERVER_IP stringByAppendingString:GETWORKPOINT];
         }
             break;
         case kSXTagBatchNumList: {
-            parameter = [SERVER_IP stringByAppendingString:GetBatchInvestLimit];
+            parameter = [NEW_SERVER_IP stringByAppendingString:GetBatchInvestLimit];
         }
             break;
         case kSXTagSetBatchNum: {
-            parameter = [SERVER_IP stringByAppendingString:SetBatchInvestNum];
+            parameter = [NEW_SERVER_IP stringByAppendingString:SetBatchInvestNum];
         }
             break;
         case kSXTagProjectListBatchBid: {
-            parameter = [SERVER_IP stringByAppendingString:PROJECTLISTBATCHBID];
+            parameter = [NEW_SERVER_IP stringByAppendingString:PROJECTLISTBATCHBID];
         }
             break;
         case kSXTagMyInvestBatchBid: {
-            parameter = [SERVER_IP stringByAppendingString:MYINVESTBATCHBID];
+            parameter = [NEW_SERVER_IP stringByAppendingString:MYINVESTBATCHBID];
         }
             break;
         case kSXTagChildPrdclaimsList: {
@@ -1183,10 +1184,22 @@ static NetworkModule *gInstance = NULL;
     [dict setValue:@"1" forKey:@"sourceType"];
     [dict setValue:[Common getKeychain] forKey:@"imei"];
     [dict setValue:[Common getIOSVersion] forKey:@"version"];
+    switch (type) {
+        case SelectAccoutTypeP2P:
+             [dict setValue:@"1" forKey:@"fromSite"];
+            break;
+        case SelectAccoutTypeHoner:
+             [dict setValue:@"2" forKey:@"fromSite"];
+            break;
+        case SelectAccoutDefault:
+            break;
+        default:
+            break;
+    }
     if([[NSUserDefaults standardUserDefaults] valueForKey:UUID]){
         [dict setValue:[UserInfoSingle sharedManager].jg_ckie forKey:@"jg_nyscclnjsygjr"];
     }
-    DLog(@"新接口请求参数%@",dict);
+    DLog(@"%@类新接口请求参数%@",owner,dict);
     if(isSignature) //是否需要验签
     {
         NSString *signature = [self getSinatureWithPar:[self newGetParStr:dict]];

@@ -35,7 +35,11 @@
  *  @param owner 当前VC
  *
  *  @param isSignature 当前接口是否需要验签
+ *   
+ *  @param type   当前接口类型 P2P类型 1 或者尊享类型  2  默认无类型
  *
  */
-- (void)newPostReq:(NSDictionary*)data tag:(kSXTag)tag owner:(id<NetworkModuleDelegate>)owner signature:(BOOL)isSignature;
+//- (void)newPostReq:(NSDictionary*)data tag:(kSXTag)tag owner:(id<NetworkModuleDelegate>)owner signature:(BOOL)isSignature;
+
+- (void)newPostReq:(NSDictionary*)data tag:(kSXTag)tag owner:(id<NetworkModuleDelegate>)owner signature:(BOOL)isSignature Type:(SelectAccoutType)type;
 @end

@@ -52,11 +52,11 @@
 {
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = YES;
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:UUID]) {
-        [self hideShadowView];
-    } else {
-        [self addShadowViewAndLoginBtn];
-    }
+//    if ([[NSUserDefaults standardUserDefaults] objectForKey:UUID]) {
+//        [self hideShadowView];
+//    } else {
+//        [self addShadowViewAndLoginBtn];
+//    }
 }
 
 #pragma mark - Utils
@@ -116,7 +116,7 @@
     
 //    [self.userInfoVC fetchData];
     
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];;//上层交互逻辑
+//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];;//上层交互逻辑
     [self.pcListVC.presenter fetchDataWithCompletionHandler:^(NSError *error, id result) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];;//上层交互逻辑
     }];

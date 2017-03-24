@@ -111,7 +111,7 @@
     }
     
     
-    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagProjectList owner:self signature:YES];
+    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagProjectList owner:self signature:YES Type:SelectAccoutTypeP2P];
 }
 
 //开始请求

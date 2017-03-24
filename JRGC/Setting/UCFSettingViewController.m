@@ -583,7 +583,7 @@
         NSDictionary *parametersDict = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"userId",userSatues,@"userSatues",nil];
 //        NSString *strParameters = [NSString stringWithFormat:@"userId=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
 //        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagCashAdvance owner:self];
-        [[NetworkModule sharedNetworkModule] newPostReq:parametersDict tag:kSXTagCashAdvance owner:self signature:YES];
+        [[NetworkModule sharedNetworkModule] newPostReq:parametersDict tag:kSXTagCashAdvance owner:self signature:YES Type:SelectAccoutDefault];
     }
 }
 

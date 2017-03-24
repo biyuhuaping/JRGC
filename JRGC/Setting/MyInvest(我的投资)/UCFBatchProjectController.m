@@ -99,7 +99,7 @@
         _batchOrderIdStr = [NSString stringWithFormat:@"%@",model.Id ];
         NSString *uuid = [[NSUserDefaults standardUserDefaults]valueForKey:UUID];
         NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:uuid,@"userId",_colPrdClaimIdStr, @"colPrdClaimsId", _batchOrderIdStr, @"batchOrderId",@"1",@"page", @"20", @"pageSize",nil];
-        [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagMyBatchInvestDetail owner:self signature:YES];
+        [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagMyBatchInvestDetail owner:self signature:YES Type:SelectAccoutDefault];
     }
 }
 
@@ -120,7 +120,7 @@
     }
     strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:uuid,@"userId", [NSString stringWithFormat:@"%ld", (long)self.pageNum], @"page", @"20", @"pageSize", nil];
     
-    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagMyInvestBatchBid owner:self signature:YES];
+    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagMyInvestBatchBid owner:self signature:YES Type:SelectAccoutDefault];
 }
 
 //开始请求

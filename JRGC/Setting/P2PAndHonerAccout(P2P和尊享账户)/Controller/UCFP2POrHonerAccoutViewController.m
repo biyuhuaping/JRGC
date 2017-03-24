@@ -64,7 +64,7 @@
  
     if (self.accoutType ==  SelectAccoutTypeHoner) {
         [self.view bringSubviewToFront:self.loadingView];
-        [self performSelector:@selector(removeLoadingView) withObject:nil afterDelay:.25];
+        [self performSelector:@selector(removeLoadingView) withObject:nil afterDelay:3];
         baseTitleLabel.text = @"尊享账户";
          _isShowOrHideAccoutMoney = [[NSUserDefaults standardUserDefaults] boolForKey:@"IsShowHonerAccoutMoney"];
     }else{
@@ -273,6 +273,7 @@
             TradePasswordVC * tradePasswordVC = [[TradePasswordVC alloc]initWithNibName:@"TradePasswordVC" bundle:nil];
             tradePasswordVC.title = titleStr;
             tradePasswordVC.isCompanyAgent = [self.isCompanyAgent boolValue];
+            tradePasswordVC.site = [NSString stringWithFormat:@"%d",self.accoutType];
             [self.navigationController pushViewController:tradePasswordVC  animated:YES];
         }
     }
@@ -288,6 +289,7 @@
             UCFBatchInvestmentViewController *batchInvestment = [[UCFBatchInvestmentViewController alloc] init];
             batchInvestment.sourceType = @"personCenter";
             batchInvestment.isStep = [item.subtitle isEqualToString:@"未开启"] ? 1 : 2;
+            batchInvestment.accoutType = self.accoutType;
             [self.navigationController pushViewController:batchInvestment animated:YES];
         }
     }
@@ -348,12 +350,8 @@
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSString *userSatues = [NSString stringWithFormat:@"%ld",(long)[UserInfoSingle sharedManager].openStatus];
     NSDictionary *parametersDict = @{};
-    if (self.accoutType == SelectAccoutTypeHoner) {//尊享账户的提现
-        parametersDict = @{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"userSatues":userSatues};
-    }else{ //P2P账户的提现
-       parametersDict = @{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"userSatues":userSatues};
-    }
-    [[NetworkModule sharedNetworkModule] newPostReq:parametersDict tag:kSXTagCashAdvance owner:self signature:YES];
+      parametersDict = @{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"userSatues":userSatues};
+    [[NetworkModule sharedNetworkModule] newPostReq:parametersDict tag:kSXTagCashAdvance owner:self signature:YES Type:self.accoutType];
 }
 #pragma mark 充值点击事件
 - (IBAction)clickRechargeBtn:(UIButton *)sender {

@@ -67,6 +67,9 @@
 //充值说明介绍
 @property (weak, nonatomic) IBOutlet NZLabel *desLabel;
 
+//充值出借人协议
+@property (weak, nonatomic) IBOutlet NZLabel *deleagateLabel;
+
 @property (weak, nonatomic) IBOutlet NZLabel *telServiceLabel;
 //充值说明介绍
 @property (weak, nonatomic) IBOutlet UILabel *msgTipLabel;
@@ -149,6 +152,12 @@
     
     _msgTipLabel.userInteractionEnabled = YES;
     _msgTipLabel.text = @"";
+    
+    
+    
+}
+-(void)showDeleagateView{
+    
 }
 
 
@@ -184,6 +193,14 @@
     }];
     [self.telServiceLabel setFontColor:UIColorWithRGB(0x4aa1f9) string:@"拨打客服"];
     
+    
+    self.deleagateLabel.text = @"我同意签署《出借人委托划款授权书》";
+    self.deleagateLabel.textColor = UIColorWithRGB(0x999999);
+    NSString *tmpStr = @"《出借人委托划款授权书》";
+    [self.deleagateLabel addLinkString:tmpStr block:^(ZBLinkLabelModel *linkModel) {
+        [weakSelf showDeleagateView];
+    }];
+    [self.deleagateLabel setFontColor:UIColorWithRGB(0x4aa1f9) string:tmpStr];
 //    _serviceLabel.text =[NSString stringWithFormat:@"如果您绑定的银行卡暂不支持手机一键支付请联系客服%@",telNum];
 //    [_serviceLabel addLinkString:telNum block:^(ZBLinkLabelModel *linkModel){
 //        [weakSelf telServiceNo];
@@ -387,7 +404,7 @@
     [paraDict setValue:blackBox forKey:@"token_id"];
     [paraDict setValue:wanip forKey:@"ip"];
     [paraDict setValue:_RechargeTokenStr forKey:@"rechargeToken"];
-    [[NetworkModule sharedNetworkModule] newPostReq:paraDict tag:kSxTagHSPayMobile owner:self signature:YES];
+    [[NetworkModule sharedNetworkModule] newPostReq:paraDict tag:kSxTagHSPayMobile owner:self signature:YES Type:self.accoutType];
 }
 
 //判断订单状态，提交充值表单
@@ -422,7 +439,7 @@
         return;
     }
     NSDictionary *dataDict = @{@"phoneNum":[Common deleteStrSpace:telTextField.text],@"validateCode":codeTextField.text,@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID]};
-    [[NetworkModule sharedNetworkModule] newPostReq:dataDict tag:kSXTagChangeReserveMobileNumber owner:self signature:YES];
+    [[NetworkModule sharedNetworkModule] newPostReq:dataDict tag:kSXTagChangeReserveMobileNumber owner:self signature:YES Type:self.accoutType];
 }
 - (void)getPhoneCode
 {
@@ -431,7 +448,7 @@
         return;
     }
     NSDictionary *dic = @{@"destPhoneNo":[Common deleteStrSpace:telTextField.text],@"isVms":@"SMS",@"type":@"4",@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID]};
-    [[NetworkModule sharedNetworkModule] newPostReq:dic tag:kSXTagIdentifyCode owner:self signature:YES];
+    [[NetworkModule sharedNetworkModule] newPostReq:dic tag:kSXTagIdentifyCode owner:self signature:YES Type:self.accoutType];
 
 }
 -(void)modifyReservedBankNumberSuccess:(NSString *)reservedBankNumber{
@@ -580,7 +597,7 @@
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:1];
     [dict setValue:_phoneTextField.text forKey:@"phoneNo"];
     [dict setValue:[[NSUserDefaults standardUserDefaults] objectForKey:UUID] forKey:@"userId"];
-    [[NetworkModule sharedNetworkModule] newPostReq:dict tag:kSXTagWithdrawalsSendPhone owner:self signature:YES];
+    [[NetworkModule sharedNetworkModule] newPostReq:dict tag:kSXTagWithdrawalsSendPhone owner:self signature:YES Type:self.accoutType];
 //    [[NetworkModule sharedNetworkModule] postReq:[NSString stringWithFormat:@"userId=%@&isVms=%@",[[NSUserDefaults standardUserDefaults] objectForKey:UUID],type] tag:kSXTagActWithdrawSendPhoneVerifyCode owner:self];
 }
 //检查订单状态是否合法
@@ -653,7 +670,14 @@
 - (void)getMyBindCardMessage
 {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [[NetworkModule sharedNetworkModule] newPostReq:[NSDictionary dictionaryWithObject:[[NSUserDefaults standardUserDefaults] valueForKey:UUID] forKey:@"userId"] tag:kSXTagBankTopInfo owner:self signature:YES];
+    NSString *uuid = [[NSUserDefaults standardUserDefaults] valueForKey:UUID];
+    NSDictionary *dataDict =@{};
+    if (self.accoutType == SelectAccoutTypeHoner) {
+        dataDict =@{@"userId":uuid,@"formSite":@"2"};
+    }else{
+        dataDict =@{@"userId":uuid,@"formSite":@"1"};
+    }
+    [[NetworkModule sharedNetworkModule] newPostReq:dataDict tag:kSXTagBankTopInfo owner:self signature:YES Type:self.accoutType];
 }
 
 
