@@ -52,7 +52,7 @@
 {
     NSDictionary *dataDic =@{@"phoneNum":[_retPassView getPhoneFieldText]};
     if (dataDic) {
-        [[NetworkModule sharedNetworkModule] newPostReq:dataDic tag:KSXTAGVERFIUSERNAMEANDPHONE owner:self signature:NO];
+        [[NetworkModule sharedNetworkModule] newPostReq:dataDic tag:KSXTAGVERFIUSERNAMEANDPHONE owner:self signature:NO Type:SelectAccoutDefault];
     }
 }
 

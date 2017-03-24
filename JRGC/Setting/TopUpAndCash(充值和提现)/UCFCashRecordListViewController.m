@@ -63,7 +63,7 @@
     }
     NSString *pageStr = [NSString stringWithFormat:@"%d",pageNum];
     NSDictionary *dataDic = [NSDictionary dictionaryWithObjectsAndKeys:@"20",@"pageSize",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"userId",pageStr, @"page",nil];
-    [[NetworkModule sharedNetworkModule] newPostReq:dataDic tag:kSXTagCashRecordList owner:self signature:YES];
+    [[NetworkModule sharedNetworkModule] newPostReq:dataDic tag:kSXTagCashRecordList owner:self signature:YES Type:self.accoutType];
 }
 -(void)endPost:(id)result tag:(NSNumber *)tag
 {

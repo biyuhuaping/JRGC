@@ -144,7 +144,7 @@
     NSString *userId = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
     //type: 1:提现    2:注册    3:修改绑定银行卡   5:设置交易密码    6:开户    7:换卡
     NSDictionary *dic = @{@"page":[NSString stringWithFormat:@"%lu", (unsigned long)self.currentPage],@"rows":@"20",@"userId":userId};
-    [[NetworkModule sharedNetworkModule] newPostReq:dic tag:kSXTagGetWorkPoint owner:self signature:YES];
+    [[NetworkModule sharedNetworkModule] newPostReq:dic tag:kSXTagGetWorkPoint owner:self signature:YES Type:SelectAccoutDefault];
     
 }
 
@@ -154,7 +154,7 @@
     NSString *userId = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
     //type: 1:提现    2:注册    3:修改绑定银行卡   5:设置交易密码    6:开户    7:换卡
     NSDictionary *dic = @{@"page":[NSString stringWithFormat:@"%lu", (unsigned long)self.currentPage],@"rows":@"20",@"userId":userId};
-    [[NetworkModule sharedNetworkModule] newPostReq:dic tag:kSXTagGetWorkPoint owner:self signature:YES];
+    [[NetworkModule sharedNetworkModule] newPostReq:dic tag:kSXTagGetWorkPoint owner:self signature:YES Type:SelectAccoutDefault];
 }
 //请求成功及结果
 - (void)endPost:(id)result tag:(NSNumber *)tag{

@@ -103,7 +103,7 @@
         if (lastFirstLoginTime == nil || !b) {
             if ([self checkHasCheckIn:uuid]) {
                 [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:FirstLoginTimeEveryday];
-                [[NetworkModule sharedNetworkModule] newPostReq:[NSDictionary dictionaryWithObject:uuid forKey:@"userId"] tag:kSXTagRedBagRainSwitch owner:self signature:YES];
+                [[NetworkModule sharedNetworkModule] newPostReq:[NSDictionary dictionaryWithObject:uuid forKey:@"userId"] tag:kSXTagRedBagRainSwitch owner:self signature:YES Type:SelectAccoutDefault];
             }
         }
     }

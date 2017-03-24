@@ -410,7 +410,7 @@
 //      [[NetworkModule sharedNetworkModule] postReq:parmStr tag:kSXTagSaveTransferDeals owner:self];
     NSString *investTranTicketStr = [self.dataDict objectSafeForKey:@"apptzticket"];
     NSDictionary *dataDic = @{@"userId": [[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"prdTransferId":prdTransferId,@"investAmt":investMoney,@"investBeans":investBeans,@"investTranTicket":investTranTicketStr};
-     [[NetworkModule sharedNetworkModule] newPostReq:dataDic tag:kSXTagTraClaimsSubmit owner:self signature:YES];
+     [[NetworkModule sharedNetworkModule] newPostReq:dataDic tag:kSXTagTraClaimsSubmit owner:self signature:YES Type:self.accoutType];
 }
 - (void)endPost:(id)result tag:(NSNumber *)tag
 {

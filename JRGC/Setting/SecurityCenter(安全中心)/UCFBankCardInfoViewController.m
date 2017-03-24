@@ -385,7 +385,7 @@
 {
 
     NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:UUID],@"userId", nil];
-    [[NetworkModule sharedNetworkModule]newPostReq:strParameters tag:kSXTagBankInfoNew owner:self signature:YES];
+    [[NetworkModule sharedNetworkModule]newPostReq:strParameters tag:kSXTagBankInfoNew owner:self signature:YES Type:self.accoutType];
 }
 
 //开始请求
@@ -685,7 +685,7 @@
     
     NSDictionary * dic = _dicBranchBank;
     NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys: [[NSUserDefaults standardUserDefaults] objectForKey:UUID],@"userId",[dic objectForKey:@"bankNo"] ,@"relevBankCard",nil];
-    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagChosenBranchBank owner:self signature:YES];
+    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagChosenBranchBank owner:self signature:YES Type:self.accoutType];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 }
 #pragma mark -方法-修改绑定银行卡成功后返回该页面刷新数据同时提示修改开户支行

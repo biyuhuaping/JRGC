@@ -845,7 +845,7 @@
         bankNoStr = _cashBankNo;
     }
     NSDictionary *dataDic = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"userId",_crachTextField.text,@"reflectAmount",bankNoStr,@"bankNo",nil];
-    [[NetworkModule sharedNetworkModule] newPostReq:dataDic tag:kSXTagWithdrawMoneyValidate owner:self signature:YES];
+    [[NetworkModule sharedNetworkModule] newPostReq:dataDic tag:kSXTagWithdrawMoneyValidate owner:self signature:YES Type:self.accoutType];
 }
 -(BOOL)isWorkTimeCash{
     // 时间字符串
@@ -910,7 +910,7 @@
         bankNoStr = _cashBankNo;
     }
     NSDictionary *dataDic = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:UUID],@"userId",_crachTextField.text,@"reflectAmount",bankNoStr,@"bankNo",@"",@"validateCode",_withdrawToken,@"withdrawTicket",blackBox, @"token_id",wanip,@"ip",nil];
-    [[NetworkModule sharedNetworkModule] newPostReq:dataDic tag:kSXTagWithdrawSub owner:self signature:YES];
+    [[NetworkModule sharedNetworkModule] newPostReq:dataDic tag:kSXTagWithdrawSub owner:self signature:YES Type:self.accoutType];
 }
 - (void)mjalertView:(MjAlertView *)alertview didClickedButton:(UIButton *)clickedButton andClickedIndex:(NSInteger)index{
     if (index == 1) {

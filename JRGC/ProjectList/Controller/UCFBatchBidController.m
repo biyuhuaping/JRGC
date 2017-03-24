@@ -133,7 +133,7 @@
             NSDictionary *strParameters;
             _colPrdClaimIdStr = [NSString stringWithFormat:@"%@",model.batchBidId];
             strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:uuid,@"userId", _colPrdClaimIdStr, @"colPrdClaimId", nil];
-            [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagColPrdclaimsDetail owner:self signature:YES];
+            [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagColPrdclaimsDetail owner:self signature:YES Type:SelectAccoutTypeP2P] ;
         }
     }
 }
@@ -155,7 +155,7 @@
     }
     
     
-    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagProjectListBatchBid owner:self signature:YES];
+    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagProjectListBatchBid owner:self signature:YES Type:SelectAccoutTypeP2P];
 }
 
 //开始请求

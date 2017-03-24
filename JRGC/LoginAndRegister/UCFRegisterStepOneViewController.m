@@ -130,7 +130,7 @@
 
 -(void)getRegisterTokenHttpRequst{
     NSDictionary *dataDic = @{ @"phoneNo":[_registerOneView phoneNumberText],@"userId":@"1"};
-    [[NetworkModule sharedNetworkModule] newPostReq:dataDic tag:kSXTagGetRegisterToken owner:self signature:NO];
+    [[NetworkModule sharedNetworkModule] newPostReq:dataDic tag:kSXTagGetRegisterToken owner:self signature:NO Type:SelectAccoutDefault];
 }
 #pragma mark -RequsetDelegate
 
