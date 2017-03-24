@@ -418,7 +418,7 @@
         return;
     }
     NSDictionary *parameter = @{@"jg_cookies":jg_ckie, @"userId": userId};
-    [[NetworkModule sharedNetworkModule] newPostReq:parameter tag:kSXTagGetTokenId owner:self signature:YES];
+    [[NetworkModule sharedNetworkModule] newPostReq:parameter tag:kSXTagGetTokenId owner:self signature:YES Type:SelectAccoutDefault];
 }
 
 #pragma mark - 网络请求回调

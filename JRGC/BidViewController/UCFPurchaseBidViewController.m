@@ -637,7 +637,7 @@
     }
     NSString *apptzticket =  [self.dataDict objectSafeForKey:@"apptzticket"];
     [paramDict setValue:apptzticket forKey:@"investClaimsTicket"];
-    [[NetworkModule sharedNetworkModule] newPostReq:paramDict tag:kSXTagInvestSubmit owner:self signature:YES];
+    [[NetworkModule sharedNetworkModule] newPostReq:paramDict tag:kSXTagInvestSubmit owner:self signature:YES Type:self.accoutType];
 }
 
 -(void)errorPost:(NSError*)err tag:(NSNumber*)tag

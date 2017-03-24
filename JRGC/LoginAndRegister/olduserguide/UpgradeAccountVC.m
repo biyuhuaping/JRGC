@@ -409,7 +409,7 @@
 - (void)getHSAccountInfo{
     NSString *userId = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
 
-    [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":userId,@"fromSite":_site} tag:kSXTagGetOpenAccountInfo owner:self signature:YES];
+    [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":userId,@"fromSite":_site} tag:kSXTagGetOpenAccountInfo owner:self signature:YES Type:self.accoutType];
 }
 
 //修改绑定银行卡接口
@@ -418,13 +418,13 @@
         BlockUIAlertView *alert = [[BlockUIAlertView alloc]initWithTitle:@"提示" message:@"您填写的银行卡不能充值，只能用于提现，确认要提交吗" cancelButtonTitle:@"确定" clickButton:^(NSInteger index) {
             if (index == 0) {
                 //qinyangyue
-                [[NetworkModule sharedNetworkModule] newPostReq:encryptParamDic tag:kSXTagReplaceBankCardInformation owner:self signature:YES];
+                [[NetworkModule sharedNetworkModule] newPostReq:encryptParamDic tag:kSXTagReplaceBankCardInformation owner:self signature:YES Type:self.accoutType];
             }
         } otherButtonTitles:@"返回修改"];
         [alert show];
     }else{
         //qinyangyue
-        [[NetworkModule sharedNetworkModule] newPostReq:encryptParamDic tag:kSXTagReplaceBankCardInformation owner:self signature:YES];
+        [[NetworkModule sharedNetworkModule] newPostReq:encryptParamDic tag:kSXTagReplaceBankCardInformation owner:self signature:YES Type:self.accoutType] ;
     }
 }
 
@@ -464,7 +464,7 @@
     NSString *userId = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
     //type: 1:提现    2:注册    3:修改绑定银行卡   5:设置交易密码    6:开户    7:换卡
     NSDictionary *dic = @{@"destPhoneNo":_phoneNum,@"isVms":isVms,@"type":_isFromeBankCardInfo?@"3":@"6",@"userId":userId,@"fromSite":_site};
-    [[NetworkModule sharedNetworkModule] newPostReq:dic tag:kSXTagIdentifyCode owner:self signature:YES];
+    [[NetworkModule sharedNetworkModule] newPostReq:dic tag:kSXTagIdentifyCode owner:self signature:YES Type:self.accoutType];
 }
 
 //徽商绑定银行卡
@@ -522,7 +522,7 @@
                                           @"fromSite":_site                 //站点
                                           };
 
-        [[NetworkModule sharedNetworkModule] newPostReq:encryptParamDic tag:kSXTagOpenAccount owner:self signature:YES];
+        [[NetworkModule sharedNetworkModule] newPostReq:encryptParamDic tag:kSXTagOpenAccount owner:self signature:YES Type:self.accoutType];
     }
 }
 

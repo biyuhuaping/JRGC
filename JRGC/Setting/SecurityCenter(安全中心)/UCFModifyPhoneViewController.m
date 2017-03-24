@@ -206,13 +206,13 @@
         NSString *userId = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
         //type: 1:提现    2:注册    3:修改绑定银行卡   5:设置交易密码    6:开户    7:换卡
         NSDictionary *dic = @{@"isVms":@"VMS",@"type":@"4",@"userId":userId, @"destPhoneNo":str};
-        [[NetworkModule sharedNetworkModule] newPostReq:dic tag:kSXTagIdentifyCode owner:self signature:YES];
+        [[NetworkModule sharedNetworkModule] newPostReq:dic tag:kSXTagIdentifyCode owner:self signature:YES Type:SelectAccoutDefault];
         return;
     }
     NSString *userId = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
     //type: 1:提现    2:注册    3:修改绑定银行卡   5:设置交易密码    6:开户    7:换卡
     NSDictionary *dic = @{@"isVms":@"SMS",@"type":@"4",@"userId":userId, @"destPhoneNo":str};
-    [[NetworkModule sharedNetworkModule] newPostReq:dic tag:kSXTagIdentifyCode owner:self signature:YES];
+    [[NetworkModule sharedNetworkModule] newPostReq:dic tag:kSXTagIdentifyCode owner:self signature:YES Type:SelectAccoutDefault];
 }
 
 // 提交新绑定的手机号
@@ -221,7 +221,7 @@
     NSString* str = [self.modifyPhoneTextField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSString *userId = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
     NSDictionary *dic = @{@"phoneNum": str, @"userId":userId, @"validateCode":self.validCodeTextField.text};
-    [[NetworkModule sharedNetworkModule] newPostReq:dic tag:kSXTagUpdateMobile owner:self signature:YES];
+    [[NetworkModule sharedNetworkModule] newPostReq:dic tag:kSXTagUpdateMobile owner:self signature:YES Type:SelectAccoutDefault];
 }
 
 //开始请求

@@ -674,7 +674,7 @@
         return;
     }
     //请求开关状态
-    [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":userId} tag:kSXTagIsShowHornor owner:self signature:YES];
+    [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":userId} tag:kSXTagIsShowHornor owner:self signature:YES Type:SelectAccoutDefault];
 }
 
 //    //请求开关状态
@@ -687,7 +687,7 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
     [ToolSingleTon sharedManager].checkIsInviteFriendsAlert = NO;
     //请求开关状态
-    [[NetworkModule sharedNetworkModule] newPostReq:@{} tag:kSXTagGetInfoForOnOff owner:self signature:NO];
+    [[NetworkModule sharedNetworkModule] newPostReq:@{} tag:kSXTagGetInfoForOnOff owner:self signature:NO Type:SelectAccoutDefault];
 }
 
 - (void)checkUpdate

@@ -108,13 +108,13 @@
                               @"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],
                               @"keyword":keyword
                               };
-    [[NetworkModule sharedNetworkModule] newPostReq:dicData tag:kSXTagPresentFriend owner:self signature:YES];
+    [[NetworkModule sharedNetworkModule] newPostReq:dicData tag:kSXTagPresentFriend owner:self signature:YES Type:self.accoutType];
 }
 
 //赠送好友券
 - (void)requestComplimentary {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [[NetworkModule sharedNetworkModule] newPostReq:[NSDictionary dictionaryWithObjectsAndKeys:self.quanData.couponId ,@"couponId",self.couponType,@"couponType",self.targetUserId,@"targetUserId",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"userId", nil] tag:kSXTagPresentCoupon owner:self signature:YES];
+    [[NetworkModule sharedNetworkModule] newPostReq:[NSDictionary dictionaryWithObjectsAndKeys:self.quanData.couponId ,@"couponId",self.couponType,@"couponType",self.targetUserId,@"targetUserId",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"userId", nil] tag:kSXTagPresentCoupon owner:self signature:YES Type:self.accoutType];
 }
 
 //开始请求

@@ -793,7 +793,7 @@
     
     //************************************************qyy 2016-11-17首页接口改造
     NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys:[UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults]valueForKey:UUID]],@"userId", nil];
-    [[NetworkModule sharedNetworkModule]newPostReq:strParameters tag:kSXTagPrdClaimsNewVersion owner:self signature:YES];
+    [[NetworkModule sharedNetworkModule]newPostReq:strParameters tag:kSXTagPrdClaimsNewVersion owner:self signature:YES Type:SelectAccoutDefault];
 
 }
 
@@ -1072,7 +1072,7 @@
         if ([self checkUserCanInvestIsDetail:NO]) {
             _colPrdClaimIdStr = [NSString stringWithFormat:@"%@",model.Id];
             NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys:uuid,@"userId", _colPrdClaimIdStr, @"colPrdClaimId", nil];
-            [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagColPrdclaimsDetail owner:self signature:YES];
+            [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagColPrdclaimsDetail owner:self signature:YES Type:SelectAccoutTypeP2P];
         }
     }
 }

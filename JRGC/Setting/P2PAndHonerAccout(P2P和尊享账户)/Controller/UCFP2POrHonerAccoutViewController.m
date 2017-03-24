@@ -289,6 +289,7 @@
             UCFBatchInvestmentViewController *batchInvestment = [[UCFBatchInvestmentViewController alloc] init];
             batchInvestment.sourceType = @"personCenter";
             batchInvestment.isStep = [item.subtitle isEqualToString:@"未开启"] ? 1 : 2;
+            batchInvestment.accoutType = self.accoutType;
             [self.navigationController pushViewController:batchInvestment animated:YES];
         }
     }
@@ -349,12 +350,8 @@
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSString *userSatues = [NSString stringWithFormat:@"%ld",(long)[UserInfoSingle sharedManager].openStatus];
     NSDictionary *parametersDict = @{};
-    if (self.accoutType == SelectAccoutTypeHoner) {//尊享账户的提现
-        parametersDict = @{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"userSatues":userSatues};
-    }else{ //P2P账户的提现
-       parametersDict = @{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"userSatues":userSatues};
-    }
-    [[NetworkModule sharedNetworkModule] newPostReq:parametersDict tag:kSXTagCashAdvance owner:self signature:YES];
+      parametersDict = @{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"userSatues":userSatues};
+    [[NetworkModule sharedNetworkModule] newPostReq:parametersDict tag:kSXTagCashAdvance owner:self signature:YES Type:self.accoutType];
 }
 #pragma mark 充值点击事件
 - (IBAction)clickRechargeBtn:(UIButton *)sender {

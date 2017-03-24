@@ -62,7 +62,7 @@
 {
     NSString *userId = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
     NSString *pageStr = [NSString stringWithFormat:@"%ld",(long)page];
-    [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":userId, @"page":pageStr, @"pageSize":@"20"} tag:kSXTagGetHSAccountList owner:self signature:YES];
+    [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":userId, @"page":pageStr, @"pageSize":@"20"} tag:kSXTagGetHSAccountList owner:self signature:YES Type:self.accoutType];
 }
 //开始请求
 - (void)beginPost:(kSXTag)tag
