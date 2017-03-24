@@ -112,13 +112,13 @@
         currentPageNo = 1;
     }
     NSString *strParameters = [NSString stringWithFormat:@"userId=%@&page=%lu&rows=%@", [[NSUserDefaults standardUserDefaults] valueForKey:UUID], (unsigned long)currentPageNo, PAGESIZE];
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSxTagMyRedPackage owner:self];
+    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSxTagMyRedPackage owner:self Type:SelectAccoutDefault];
 }
 
 //    //获取分享各种信息
 - (void)getAppSetting{
 //    NSString *strParameters = [NSString stringWithFormat:@"gcm=%@",_gcmLab.text];//5644
-    [[NetworkModule sharedNetworkModule] postReq:nil tag:kSXTagGetAppSetting owner:self];
+    [[NetworkModule sharedNetworkModule] postReq:nil tag:kSXTagGetAppSetting owner:self Type:SelectAccoutDefault];
 }
 
 //开始请求
@@ -226,7 +226,7 @@
 //请求失败
 - (void)errorPost:(NSError*)err tag:(NSNumber*)tag
 {
-    if (tag.intValue == kSxTagMyRedPackage || tag.intValue == kSxTagKnockedRedPackage || tag.intValue == kSXTagGetAppSetting) {
+    if (tag.intValue == kSxTagMyRedPackage || tag.intValue == kSXTagGetAppSetting) {
         [MBProgressHUD displayHudError:err.userInfo[@"NSLocalizedDescription"]];
     }
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];

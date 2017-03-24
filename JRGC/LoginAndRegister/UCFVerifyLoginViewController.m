@@ -147,7 +147,7 @@
         return;
     }
     NSString *strParameters = [NSString stringWithFormat:@"userId=%@&username=%@&pwd=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],[[NSUserDefaults standardUserDefaults] objectForKey:LOGINNAME],_passWordTfd.text];
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagValidLogin owner:self];
+    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagValidLogin owner:self Type:SelectAccoutDefault];
 }
 
 

@@ -634,37 +634,7 @@
         } else {
             [MBProgressHUD displayHudError:dic[@"statusdes"]];
         }
-    } else if (tag.intValue == kSXTagActWithdrawApply){
-        NSMutableDictionary *dic = [data objectFromJSONString];
-        NSString *rstcode = dic[@"status"];
-        if([rstcode intValue] == 1)
-        {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
-            [MBProgressHUD displayHudError:@"提现申请成功"];
-            self.getMoneyBtn.userInteractionEnabled = YES;
-            [_timer  setFireDate:[NSDate distantFuture]];
-            _counter = 60;
-            _getCodeBtn.userInteractionEnabled = YES;
-            [_getCodeBtn setTitle:[NSString stringWithFormat:@"获取验证码"] forState:UIControlStateNormal];
-            _getCodeBtn.backgroundColor = UIColorWithRGBA(111, 131, 159, 1);
-            _crachTextField.text = @"";
-            _codeTextField.text = @"";
-            //_warnSendLabel.hidden = YES;
-            [self.navigationController popToRootViewControllerAnimated:YES];
-        }
-        else
-        {
-            if ([rstcode intValue] == 6) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:dic[@"statusdes"] delegate:self cancelButtonTitle:@"重新输入" otherButtonTitles: nil];
-                [alert show];
-            } else {
-                [MBProgressHUD displayHudError:dic[@"statusdes"]];
-  
-            }
-            self.getMoneyBtn.userInteractionEnabled = YES;
-        }
-
-    } else if (tag.intValue == kSXTagIdentifyCode) {
+    }else if (tag.intValue == kSXTagIdentifyCode) {
 //        {"ret":true,"code":10000,"message":"获取成功","ver":1,"data":null}
         NSMutableDictionary *dic = [data objectFromJSONString];
         NSString *rstcode = dic[@"ret"];
