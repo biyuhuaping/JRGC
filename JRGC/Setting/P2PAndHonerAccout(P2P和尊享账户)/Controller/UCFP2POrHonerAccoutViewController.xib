@@ -90,24 +90,24 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kmQ-Tv-sM9">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <rect key="frame" x="0.0" y="-64" width="375" height="731"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="transform" translatesAutoresizingMaskIntoConstraints="NO" id="8C9-Ge-nQq">
-                            <rect key="frame" x="122.5" y="248.5" width="130" height="170"/>
+                            <rect key="frame" x="122.5" y="280.5" width="130" height="170"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="130" id="Bd3-iM-aHg"/>
                                 <constraint firstAttribute="height" constant="170" id="pe7-gn-awW"/>
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="即将跳转工场尊享" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hEU-Jq-muT">
-                            <rect key="frame" x="114.5" y="430.5" width="147" height="21.5"/>
+                            <rect key="frame" x="114.5" y="462.5" width="147" height="21.5"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                             <color key="textColor" red="0.52156862749999999" green="0.56862745100000001" blue="0.70196078429999997" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="可直接访问www.gongchangzx.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LAV-sT-0Wu">
-                            <rect key="frame" x="74.5" y="457" width="225.5" height="17"/>
+                            <rect key="frame" x="74.5" y="489" width="225.5" height="17"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <color key="textColor" red="0.52156862749999999" green="0.56862745100000001" blue="0.70196078429999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -131,7 +131,7 @@
                 <constraint firstAttribute="trailing" secondItem="kmQ-Tv-sM9" secondAttribute="trailing" id="8aU-ei-b81"/>
                 <constraint firstItem="kmQ-Tv-sM9" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ARK-pl-DKF"/>
                 <constraint firstItem="D0d-2v-fC4" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="CC7-HV-hcn"/>
-                <constraint firstItem="kmQ-Tv-sM9" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="CCx-rL-la7"/>
+                <constraint firstItem="kmQ-Tv-sM9" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="-64" id="CCx-rL-la7"/>
                 <constraint firstItem="Yxq-SM-Ka2" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="L0j-8j-LYB"/>
                 <constraint firstItem="Yxq-SM-Ka2" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Ogp-xj-s89"/>
                 <constraint firstAttribute="trailing" secondItem="D0d-2v-fC4" secondAttribute="trailing" id="dkg-c8-aw4"/>

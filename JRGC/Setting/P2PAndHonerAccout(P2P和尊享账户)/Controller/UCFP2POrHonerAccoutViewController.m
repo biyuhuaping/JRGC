@@ -64,7 +64,7 @@
  
     if (self.accoutType ==  SelectAccoutTypeHoner) {
         [self.view bringSubviewToFront:self.loadingView];
-        [self performSelector:@selector(removeLoadingView) withObject:nil afterDelay:.25];
+        [self performSelector:@selector(removeLoadingView) withObject:nil afterDelay:3];
         baseTitleLabel.text = @"尊享账户";
          _isShowOrHideAccoutMoney = [[NSUserDefaults standardUserDefaults] boolForKey:@"IsShowHonerAccoutMoney"];
     }else{
@@ -273,6 +273,7 @@
             TradePasswordVC * tradePasswordVC = [[TradePasswordVC alloc]initWithNibName:@"TradePasswordVC" bundle:nil];
             tradePasswordVC.title = titleStr;
             tradePasswordVC.isCompanyAgent = [self.isCompanyAgent boolValue];
+            tradePasswordVC.site = [NSString stringWithFormat:@"%d",self.accoutType];
             [self.navigationController pushViewController:tradePasswordVC  animated:YES];
         }
     }
