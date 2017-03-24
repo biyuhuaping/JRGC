@@ -21,6 +21,7 @@
 #import "UCFRedEnvelopeViewController.h"
 #import "UCFMoreViewController.h"
 #import "UCFSecurityCenterViewController.h"
+#import "UCFP2POrHonerAccoutViewController.h"
 #import "UCFMessageCenterViewController.h"
 #import "UCFMyFacBeanViewController.h"
 #import "UCFCouponViewController.h"
@@ -127,10 +128,14 @@
 {
     NSString *title = pcListModel.title;
     if ([title isEqualToString:@"P2P账户"]) {
-        
+        UCFP2POrHonerAccoutViewController *subVC = [[UCFP2POrHonerAccoutViewController alloc] initWithNibName:@"UCFP2POrHonerAccoutViewController" bundle:nil];
+        subVC.accoutType =  SelectAccoutTypeP2P;
+        [self.navigationController pushViewController:subVC animated:YES];
     }
     else if ([title isEqualToString:@"尊享账户"]) {
-        
+        UCFP2POrHonerAccoutViewController *subVC = [[UCFP2POrHonerAccoutViewController alloc] initWithNibName:@"UCFP2POrHonerAccoutViewController" bundle:nil];
+        subVC.accoutType =  SelectAccoutTypeHoner;
+        [self.navigationController pushViewController:subVC animated:YES];
     }
     else if ([title isEqualToString:@"会员等级"]) {
         UCFWebViewJavascriptBridgeLevel *subVC = [[UCFWebViewJavascriptBridgeLevel alloc] initWithNibName:@"UCFWebViewJavascriptBridgeLevel" bundle:nil];
