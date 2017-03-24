@@ -375,7 +375,365 @@
 
     NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:UUID],@"userId",self.fromSite,@"fromSite",nil];
     [[NetworkModule sharedNetworkModule]newPostReq:strParameters tag:kSXTagBankInfoNew owner:self signature:YES Type:self.accoutType];
+ 
+}
+
+
+//开始请求
+- (void)beginPost:(kSXTag)tag
+{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+}
+
+//请求成功及结果
+- (void)endPost:(id)result tag:(NSNumber *)tag
+{
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    NSString *data = (NSString *)result;
+    //    DBLOG(@"首页获取最新项目列表：%@",data);
+    
+    //    bankCard		string	@mock=6210***********6236
+    //    bankCardStatus		string	1：银行卡有效 0：银行卡失效
+    //    bankId		string	@mock=6
+    //    bankName		string	@mock=中国邮政储蓄银行
+    //    bankzone		string	@mock=邮政储蓄银行
+    //    cjflag		string	@mock=1
+    //    isCompanyAgent		string	true: 是机构 false :非机构
+    //    isUpdateBank		string	@mock=1
+    //    isUpdateBankDeposit		string	@mock=0
+    //    openStatus1：未开户 2：已开户 3：已邦卡 4：已设置交易密码 5：特殊用
+    //    realName		string	@mock=李奇迹
+    //    status		string	@mock=1
+    //    statusdes		string	@mock=充值查询银行卡信息成功
+    //    tipsDes		string	提示信息
+    //    url		string	@mock=http://10.10.100.42:8080/mpapp/staticRe/images/bankicons/6.png
+    
+    
+    if (tag.intValue == kSXTagBankInfoNew) {
+        
+        NSDictionary *dictotal = [data objectFromJSONString];
+        NSString *rstcode = [dictotal objectSafeForKey:@"ret"];
+        NSString *rsttext = [dictotal objectSafeForKey:@"message"];
+        
+        if ([rstcode intValue] == 1) {
+            [self dataForDecode:dictotal];//***数据解析
+            [self.tableview reloadData];//***刷新tableview数据
+            dispatch_async(dispatch_get_main_queue(), ^{ [self changeBankBranch]; });//***提示alert修改开户行支行
+        }else{
+            [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
+        }
+    }else if(tag.integerValue == kSXTagChosenBranchBank){
+        NSMutableDictionary *dic = [data objectFromJSONString];
+        NSString *rstcode = dic[@"ret"];
+        NSString *rsttext = dic[@"message"];
+        if([rstcode intValue]==1)
+        {
+            [self getBankCardInfoFromNet];
+        }else{
+            [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
+        }
+    }
+}
+
+//请求失败
+- (void)errorPost:(NSError*)err tag:(NSNumber*)tag
+{
+    if (tag.intValue == kSXTagBankInfoNew||tag.intValue == kSXTagChosenBranchBank) {
+        [MBProgressHUD displayHudError:err.userInfo[@"NSLocalizedDescription"]];
+    }
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    //    self.settingBaseBgView.hidden = YES;
+}
+#pragma mark -方法- 数据解析
+-(void)dataForDecode:(NSDictionary*)_dictotal
+{
+    
+    NSDictionary *dic = [[_dictotal objectSafeForKey:@"data"]objectSafeForKey:@"bankInfoDetail"];
+    [self.itemsData removeObjectAtIndex:1];//***将第二section中row数组移除，以下步骤重新组装
+    UCFSettingItem *setting = [UCFSettingArrowItem itemWithIcon:nil title:nil destVcClass:nil];
+    setting.subtitle = @"申请修改";//***第一个row 申请修改绑定银行卡
+    UCFSettingItem *setting2 = [UCFSettingArrowItem itemWithIcon:nil title:nil destVcClass:nil];
+    setting2.subtitle = @"请选择";//***第二个row 修改支行信息
+    UCFSettingGroup *group2 = [[UCFSettingGroup alloc] init];
+    group2.items = [[NSMutableArray alloc]init];
+    
+    self.isUpdateBank =  [[[_dictotal objectSafeForKey:@"data"]objectSafeForKey:@"isUpdateBank"]integerValue];
+    self.isUpdateBankDeposit =[[[_dictotal objectSafeForKey:@"data"]objectSafeForKey:@"isUpdateBankDeposit"]integerValue];
+    
+    
+    self.tipsText = [UCFToolsMehod isNullOrNilWithString:dic[@"tipDes"]];
+    self.bankCardImageViewUrl = dic[@"bankLogo"];
+    self.bankName = [UCFToolsMehod isNullOrNilWithString:dic[@"bankName"]];
+    self.userName = [UCFToolsMehod isNullOrNilWithString:dic[@"realName"]];
+    self.bankCardNo = [UCFToolsMehod isNullOrNilWithString:dic[@"bankCard"]];
+    self.isCompanyAgent = [dic[@"isCompanyAgent"]boolValue];
+    self.quickPaySign = [[dic objectSafeForKey: @"isShortcut"]boolValue];
+    self.openStatus = [[UCFToolsMehod isNullOrNilWithString:dic[@"openStatus"]] integerValue];
+    self.bankCardIdNo = [UCFToolsMehod isNullOrNilWithString:dic[@"lianHangNo"]];
+    
+    
+    switch (_openStatus) {//1：未开户 2：已开户 3：已邦卡 4：已设置交易密码 5：特殊用
+        case 1:
+        {
+            self.isNeedAlert = NO;
+            [self tipsShow];
+        }
+            break;
+        case 2:
+        {
+            self.isNeedAlert = NO;
+            [self tipsShow];
+            if(_isCompanyAgent==NO)//***非机构-支行信息不显示true: 是机构 false :非机构
+            {
+                //                if([[UCFToolsMehod isNullOrNilWithString:dic[@"bankzone"]]isEqualToString:@""])
+                //                {
+                //                    setting2.title = @"开户支行";
+                //                }else{
+                //                    setting2.title = [UCFToolsMehod isNullOrNilWithString:dic[@"bankzone"]];
+                //                }
+                //                setting2.isSelect = NO;
+                //                [group2.items addObject:setting2];
+            }
+        }
+            break;
+        case 3:
+        {
+            [self tipsShow];
+            if(_isCompanyAgent==NO)//***非机构-支行信息不显示true: 是机构 false :非机构
+            {
+                setting.title = @"修改绑定银行卡";
+                if (_isUpdateBank == 1) {//***是否修改绑定银行卡信息
+                    setting.isSelect = YES;
+                    [group2.items addObject:setting];
+                }
+                if ([[UCFToolsMehod isNullOrNilWithString:dic[@"bankzone"]]isEqualToString:@""])
+                {
+                    setting2.title = @"开户支行";
+                }else{
+                    setting2.title = [UCFToolsMehod isNullOrNilWithString:dic[@"bankzone"]];
+                }
+                if (_isUpdateBankDeposit == 1) {//***是否可以修改开户行信息
+                    setting2.isSelect = YES;
+                    [group2.items addObject:setting2];
+                }
+            }else{
+                
+                if(self.isNeedAlert == YES)
+                {
+                    self.isNeedAlert = NO;
+                }
+                
+                //                if (_isUpdateBank == 1) {//***是否修改绑定银行卡信息
+                //                    self.bankZone = @"修改绑定银行卡";
+                //                    setting.isSelect = YES;
+                //                    [group2.items addObject:setting];
+                //                }
+            }
+        }
+            break;
+        case 4:
+        {
+            [self tipsHidden];
+            if(_isCompanyAgent==NO)//***非机构-支行信息不显示true: 是机构 false :非机构
+            {
+                setting.title = @"修改绑定银行卡";
+                if (_isUpdateBank == 1) {//***是否修改绑定银行卡信息
+                    setting.isSelect = YES;
+                    [group2.items addObject:setting];
+                }
+                if ([[UCFToolsMehod isNullOrNilWithString:dic[@"bankzone"]]isEqualToString:@""])
+                {
+                    setting2.title = @"开户支行";
+                }else{
+                    setting2.title = [UCFToolsMehod isNullOrNilWithString:dic[@"bankzone"]];
+                }
+                if (_isUpdateBankDeposit == 1) {//***是否可以修改开户行信息
+                    setting2.isSelect = YES;
+                    [group2.items addObject:setting2];
+                }
+            }else{
+                //                if (_isUpdateBank == 1) {//***是否修改绑定银行卡信息
+                //                    self.bankZone = @"修改绑定银行卡";
+                //                    setting.isSelect = YES;
+                //                    [group2.items addObject:setting];
+                //                }
+                if(self.isNeedAlert == YES)
+                {
+                    self.isNeedAlert = NO;
+                }
+                
+            }
+            
+        }
+            break;
+        case 5:
+        {
+            //            setting.title = @"修改绑定银行卡";
+            //            if (_isUpdateBank == 1) {//***是否修改绑定银行卡信息
+            //                setting.isSelect = YES;
+            //            }else{
+            //                setting.isSelect = NO;
+            //            }
+            //            if(_isCompanyAgent==NO)//***非机构-支行信息不显示true: 是机构 false :非机构
+            //            {
+            //                if([[UCFToolsMehod isNullOrNilWithString:dic[@"bankzone"]]isEqualToString:@""])
+            //                {
+            //                    setting2.title = @"开户支行";
+            //                }else{
+            //                    setting2.title = [UCFToolsMehod isNullOrNilWithString:dic[@"bankzone"]];
+            //                }
+            //
+            //                if (_isUpdateBankDeposit == 1) {//***是否可以修改开户行信息
+            //                    setting2.isSelect = YES;
+            //                }else{
+            //                    setting2.isSelect = NO;
+            //                }
+            //                [group2.items addObject:setting2];
+            //            }else{
+            //
+            //            }
+            //            [group2.items addObject:setting];
+            //            //***自定义弹出警告框
+            //            alert = [[MjAlertView alloc] initCustomAlertViewWithBlock:^(id blockContent) {
+            //                UIView*view = (UIView *)blockContent;
+            //
+            //                view.frame = CGRectMake(15,15,ScreenWidth-30,ScreenHeight-30);
+            //                view.backgroundColor = [UIColor whiteColor];
+            //                alertViewCS * viewal = [[[NSBundle mainBundle] loadNibNamed:@"alertViewCS" owner:self options:nil] lastObject];
+            //                viewal.frame = CGRectMake(0,0,view.frame.size.width,view.frame.size.height);
+            //
+            //                [view addSubview:viewal];
+            //
+            //                [viewal.but_closeAlert addTarget:self action:@selector(chosenBranchBank:) forControlEvents:UIControlEventTouchUpInside];
+            //
+            //            }];
+            //            [alert show];
+            //
+        }
+            break;
+            
+        default:
+            break;
+    }
+    [_itemsData addObject:group2];//***第二个section载入数组
+}
+#pragma mark -方法- 拨打电话
+- (void)tappedTelePhone
+{
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"telprompt://400-0322-988"]];
+}
+/**
+ *  计算文字尺寸
+ *
+ *  @param text    需要计算尺寸的文字
+ *  @param font    文字的字体
+ *  @param maxSize 文字的最大尺寸
+ */
+#pragma mark -方法- 计算文字尺寸
+- (CGSize)sizeWithText:(NSString *)text font:(UIFont *)font maxSize:(CGSize)maxSize
+{
+    NSDictionary *attrs = @{NSFontAttributeName : font};
+    return [text boundingRectWithSize:maxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:attrs context:nil].size;
+}
+#pragma mark -方法-动态计算文字高度
+-(CGFloat)calculatHightOfWord:(NSString*)_str fontSize:(CGFloat)_size
+{
+    CGSize markContentSize = [self sizeWithText:_str font:[UIFont systemFontOfSize:_size] maxSize:CGSizeMake(ScreenWidth-30, MAXFLOAT)];
+    CGFloat height = 0;
+    NSString *machineType = [Common machineName];
+    if ([machineType isEqualToString:@"4"] || [machineType isEqualToString:@"5"]) {
+        height = 188 + markContentSize.height + 14;
+    }
+    else if ([machineType isEqualToString:@"6"]) {
+        height = 215 + markContentSize.height;
+    }
+    else if ([machineType isEqualToString:@"6Plus"]) {
+        height = 231 + markContentSize.height;
+    }
+    
+    return height;
+}
+
+#pragma mark -方法-tips显示
+-(void)tipsShow
+{
+    rowInSecionOne=1;
+}
+#pragma mark -方法-tips隐藏
+-(void)tipsHidden
+{
+    rowInSecionOne=0;
+}
+
+-(void)colseAlertView
+{
+    [alert hide];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+#pragma mark -请求-当选择支行信息后请求服务器修改
+-(void)chosenBranchBank:(NSDictionary *)_dicBranchBank
+{
+    
+    NSDictionary * dic = _dicBranchBank;
+    NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys: [[NSUserDefaults standardUserDefaults] objectForKey:UUID],@"userId",[dic objectForKey:@"bankNo"] ,@"relevBankCard",nil];
+    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagChosenBranchBank owner:self signature:YES Type:self.accoutType];
+   
+
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+}
+#pragma mark -方法-修改绑定银行卡成功后返回该页面刷新数据同时提示修改开户支行
+-(void)renewDataForPage
+{
+    self.isNeedAlert = YES;
+    [self getBankCardInfoFromNet];
+    
+}
+#pragma mark -方法-提示框弹出，提示修改开户行支行
+-(void)changeBankBranch
+{
+    if(self.isNeedAlert==YES)
+    {
+        BlockUIAlertView *alert_bankbrach= [[BlockUIAlertView alloc]initWithTitle:@"提示" message:@"是否需要修改开户支行" cancelButtonTitle:@"暂不" clickButton:^(NSInteger index) {
+            if (index == 1) {
+                //***选择更改支行信息
+                UCFChoseBankViewController *choseBankVC = [[UCFChoseBankViewController alloc]initWithNibName:@"UCFChoseBankViewController" bundle:nil];
+                choseBankVC.delegate = self;
+                choseBankVC.bankName = self.bankName;
+                [self.navigationController pushViewController:choseBankVC animated:YES];            }
+        } otherButtonTitles:@"修改"];
+        [alert_bankbrach show];
+        self.isNeedAlert = NO;
+    }
+}
+
+#pragma mark -方法-动态计算文字高度
+-(int)calculatLineOfWord:(NSString*)_str
+{
+    //***因为按照设计要求table超出边界部分就换行，但如果2行的长度都无法完全显示则需要省略号。可如果按该方法算行高会存在当临界值加一个字时候会不换行而成省略号，次情况不符合设计要求。故改用计算字符串长度更加精准。
+    
+    NSString *machineType = [Common machineName];
+    if ([machineType isEqualToString:@"4"] || [machineType isEqualToString:@"5"]) {//***19个字
+        if( _str.length > 19 )
+        {
+            return 2;
+        }
+    }
+    else if ([machineType isEqualToString:@"6"]) {//***23个字
+        if( _str.length > 23 )
+        {
+            return 2;
+        }
+    }
+    else if ([machineType isEqualToString:@"6Plus"]) {//***25个字
+        if( _str.length > 25 )
+        {
+            return 2;
+        }
+        
+    }
+    
     return 1;
 }
+
 
 @end
