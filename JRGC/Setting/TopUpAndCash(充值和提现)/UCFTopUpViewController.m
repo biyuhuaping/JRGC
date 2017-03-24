@@ -67,6 +67,9 @@
 //充值说明介绍
 @property (weak, nonatomic) IBOutlet NZLabel *desLabel;
 
+//充值出借人协议
+@property (weak, nonatomic) IBOutlet NZLabel *deleagateLabel;
+
 @property (weak, nonatomic) IBOutlet NZLabel *telServiceLabel;
 //充值说明介绍
 @property (weak, nonatomic) IBOutlet UILabel *msgTipLabel;
@@ -149,6 +152,12 @@
     
     _msgTipLabel.userInteractionEnabled = YES;
     _msgTipLabel.text = @"";
+    
+    
+    
+}
+-(void)showDeleagateView{
+    
 }
 
 
@@ -184,6 +193,14 @@
     }];
     [self.telServiceLabel setFontColor:UIColorWithRGB(0x4aa1f9) string:@"拨打客服"];
     
+    
+    self.deleagateLabel.text = @"我同意签署《出借人委托划款授权书》";
+    self.deleagateLabel.textColor = UIColorWithRGB(0x999999);
+    NSString *tmpStr = @"《出借人委托划款授权书》";
+    [self.deleagateLabel addLinkString:tmpStr block:^(ZBLinkLabelModel *linkModel) {
+        [weakSelf showDeleagateView];
+    }];
+    [self.deleagateLabel setFontColor:UIColorWithRGB(0x4aa1f9) string:tmpStr];
 //    _serviceLabel.text =[NSString stringWithFormat:@"如果您绑定的银行卡暂不支持手机一键支付请联系客服%@",telNum];
 //    [_serviceLabel addLinkString:telNum block:^(ZBLinkLabelModel *linkModel){
 //        [weakSelf telServiceNo];
