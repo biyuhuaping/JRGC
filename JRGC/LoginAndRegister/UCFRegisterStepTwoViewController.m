@@ -51,11 +51,7 @@
     UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 0.5)];
     lineView.backgroundColor = UIColorWithRGB(0xd8d8d8);
     [self.view addSubview:lineView];
-    
-//    NSString *strParameters = [NSString stringWithFormat:@""];
-//    if (strParameters) {
-//        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetTikit owner:self];
-//    }
+
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -98,7 +94,7 @@
         [AuxiliaryFunc showToastMessage:[NSString stringWithFormat:@"%d秒后重新获取",_timeNum] withView:self.view];
         return;
     } else {
-        [[NetworkModule sharedNetworkModule] postReq:nil tag:kSXTagSendMessageforTicket owner:self];
+        [[NetworkModule sharedNetworkModule] postReq:nil tag:kSXTagSendMessageforTicket owner:self Type:SelectAccoutDefault];
     }
 }
 
@@ -114,7 +110,7 @@
     if (![_registerTwoView.getRefereesCode isEqualToString:@""]) {
         NSString *strParameters = [NSString stringWithFormat:@"pomoCode=%@",_registerTwoView.getRefereesCode];
         if (strParameters) {
-            [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagValidpomoCode owner:self];
+            [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagValidpomoCode owner:self Type:SelectAccoutDefault];
         }
     } else {
         //同盾
@@ -150,37 +146,7 @@
     NSMutableDictionary *dic = [data objectFromJSONString];
     NSString *rstcode = dic[@"status"];
     NSString *rsttext = dic[@"statusdes"];
-    if (tag.intValue == kSXTagGetTikit) {
-//       _apptzticket = dic[@"apptzticket"];
-        
-    }else if (tag.intValue == kSXTagRegisterSendCodeAndFindPwd) {
-        if ([[dic objectForKey:@"ret"] boolValue]) {
-            [MBProgressHUD displayHudError:rsttext];
-            [self performSelector:@selector(veriFieldFstRepder:) withObject:nil afterDelay:2.5];
-            [self verificatioCodeSend];
-        }
-        else {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:dic[@"message"] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"联系客服", nil];
-            alertView.tag = 1001;
-            [NSTimer scheduledTimerWithTimeInterval:55.0f target:self selector:@selector(performDismiss:) userInfo:alertView repeats:NO];
-            [alertView show];
-        }
-//        if([rstcode intValue] == 1)
-//        {
-//            [MBProgressHUD displayHudError:rsttext];
-//            [self performSelector:@selector(veriFieldFstRepder:) withObject:nil afterDelay:2.5];
-//            [self verificatioCodeSend];
-//        } else if ([rstcode intValue] == 6) {
-//            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:rsttext delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"联系客服", nil];
-//            alertView.tag = 1001;
-//            [NSTimer scheduledTimerWithTimeInterval:55.0f target:self selector:@selector(performDismiss:) userInfo:alertView repeats:NO];
-//            [alertView show];
-//        } else if ([rstcode intValue] == 3) {
-//            [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
-//        } else {
-//            [AuxiliaryFunc showAlertViewWithMessage:rsttext];
-//        }
-    } else if (tag.intValue == kSXTagValidpomoCode) {
+    if (tag.intValue == kSXTagValidpomoCode) {
         if (rstcode && [rstcode intValue] == 1) {
             //同盾
             // 获取设备管理器实例

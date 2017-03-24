@@ -60,7 +60,7 @@
 -(void)getFaceSwitchStatusNetData
 {
     NSString *strParameters = [NSString stringWithFormat:@"loginName=%@", self.lable_username.text];
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagFaceInfoStore owner:self];
+    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagFaceInfoStore owner:self Type:SelectAccoutDefault];
     [MBProgressHUD showHUDAddedTo:self animated:YES];
 }
 - (void)beginPost:(kSXTag)tag

@@ -600,7 +600,7 @@
     
     NSString *userId = [[NSUserDefaults standardUserDefaults] objectForKey:UUID];
     NSString *strParameters = [NSString stringWithFormat:@"userId=%@&odrclaimsid=%@",userId,_dataArr1[indexPath.section][indexPath.row][@"id"]];//5644
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kAppQueryByManyList owner:self];
+    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kAppQueryByManyList owner:self Type:SelectAccoutDefault];
 }
 
 #pragma mark - 请求网络及回调
@@ -617,7 +617,7 @@
                 _pageNum1 ++;
             }
             NSString *strParameters = [NSString stringWithFormat:@"userId=%@&page=%ld&rows=20",userId, (long)_pageNum1];//@"1674"(long)pageNum
-            [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagFriendsList owner:self];
+            [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagFriendsList owner:self Type:SelectAccoutDefault];
         }
             break;
             
@@ -629,7 +629,7 @@
                 _pageNum2 ++;
             }
             NSString *strParameters = [NSString stringWithFormat:@"userId=%@&page=%ld&rows=20&status=0",userId, (long)_pageNum2];//5644
-            [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSRecommendRefund owner:self];
+            [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSRecommendRefund owner:self Type:SelectAccoutDefault];
         }
             break;
         case 2://（邀请返利-好友已回款）
@@ -640,7 +640,7 @@
                 _pageNum3 ++;
             }
             NSString *strParameters = [NSString stringWithFormat:@"userId=%@&page=%ld&rows=20&status=1",userId, (long)_pageNum3];//5644
-            [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSRecommendRefund owner:self];
+            [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSRecommendRefund owner:self Type:SelectAccoutDefault];
         }
             break;
     }

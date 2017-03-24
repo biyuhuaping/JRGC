@@ -606,7 +606,7 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
         if (status != 2) {
             if (isOrder == 1) {//0不可看,1可看
                 [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-                [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self];
+                [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self Type:SelectAccoutDefault];
             } else {
                 UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前标的详情只对投资人开放"];
                 self.intoViewControllerStr = @"NoPermissionVC";
@@ -616,7 +616,7 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
         }
         else {
             [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-            [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self];
+            [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self Type:SelectAccoutDefault];
         }
 }
 

@@ -131,7 +131,7 @@
         NSString *strParameters = nil;
         strParameters = [NSString stringWithFormat:@"equipment=%@&remark=%@&serialNumber=%@&sourceType=%@",[Common platformString],@"1",[Common getKeychain],@"1"];
         //统计用户数量
-        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagCalulateInstallNum owner:self];
+        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagCalulateInstallNum owner:self Type:SelectAccoutDefault];
         _advertisementView = nil;
     } else {
         [self showTabbarController];
@@ -305,7 +305,7 @@
 {
     NSString *upFlag = noti.object;
     NSString *strParameters = [NSString stringWithFormat:@"userId=%@&updFlag=%@", [[NSUserDefaults standardUserDefaults] objectForKey:UUID],upFlag];
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagRedPointCheck owner:self];
+    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagRedPointCheck owner:self Type:SelectAccoutDefault];
 }
 - (void) createItem {
     //自定义icon 的初始化方法
@@ -429,7 +429,7 @@
 - (void)saveLoginOut
 {
     NSString *strParameters = [NSString stringWithFormat:@"userId=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagUserLogout owner:self];
+    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagUserLogout owner:self Type:SelectAccoutDefault];
     
     [[UCFSession sharedManager] transformBackgroundWithUserInfo:nil withState:UCFSessionStateUserLogout];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"setDefaultViewData" object:nil];
@@ -692,7 +692,7 @@
 
 - (void)checkUpdate
 {
-    [[NetworkModule sharedNetworkModule] postReq:@"" tag:kSXTagKicItemList owner:self];
+    [[NetworkModule sharedNetworkModule] postReq:@"" tag:kSXTagKicItemList owner:self Type:SelectAccoutDefault];
 }
 
 - (void)endPost:(id)result tag:(NSNumber*)tag
@@ -1043,7 +1043,7 @@
 {
     if ([[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
         NSString *strParameters = [NSString stringWithFormat:@"userId=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
-        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagCheckPersonRedPoint owner:self];
+        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagCheckPersonRedPoint owner:self Type:SelectAccoutDefault];
     }
 }
 
