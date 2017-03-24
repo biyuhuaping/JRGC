@@ -517,7 +517,7 @@
         strParameters = [NSString stringWithFormat:@"userId=%@&prdClaimId=%@&contractType=%@&prdType=0",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],projectId,contractTypeStr];
     }
      [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-     [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetContractMsg owner:self];
+     [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetContractMsg owner:self Type:SelectAccoutDefault];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectNormalMarkOfRightRowAtIndexPath:(NSIndexPath *)indexPat
@@ -557,14 +557,14 @@
                 NSString *projectId = [[_dataDic objectForKey:@"prdTransferFore"] objectForKey:@"id"];
                 NSString *strParameters = nil;
                 strParameters = [NSString stringWithFormat:@"userId=%@&tranId=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],projectId];//101943
-                [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagDealTransferBid owner:self];
+                [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagDealTransferBid owner:self Type:SelectAccoutDefault];
             } else {
                 //普通表
                 [MBProgressHUD showHUDAddedTo:self.view animated:YES];
                 NSString *projectId = [[_dataDic objectForKey:@"prdClaims"] objectForKey:@"id"];
                 NSString *strParameters = nil;
                 strParameters = [NSString stringWithFormat:@"userId=%@&id=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],projectId];//101943
-                [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDealBid owner:self];
+                [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDealBid owner:self Type:SelectAccoutDefault];
             }
         }
     }

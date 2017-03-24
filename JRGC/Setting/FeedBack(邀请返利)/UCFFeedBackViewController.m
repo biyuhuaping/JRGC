@@ -199,7 +199,7 @@
 //获取分享各种信息
 - (void)getAppSetting{
     NSString *strParameters = [NSString stringWithFormat:@"gcm=%@",_gcmLab.text];//5644
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetAppSetting owner:self];
+    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetAppSetting owner:self Type:SelectAccoutDefault];
 }
 
 //开始请求

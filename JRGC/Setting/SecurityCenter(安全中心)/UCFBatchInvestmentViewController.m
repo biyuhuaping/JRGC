@@ -150,7 +150,7 @@ static NSString *thirdStr = @"自动投标授权已经开启";
 - (void)showHeTong
 {
     NSString *strParameters = [NSString stringWithFormat:@"userId=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetBatchContractMsg owner:self];
+    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetBatchContractMsg owner:self Type:SelectAccoutDefault];
 }
 - (void)initSecondSectionView
 {

@@ -16,7 +16,7 @@
     NSMutableDictionary* queue;
 }
 + (NetworkModule*)sharedNetworkModule;
-- (void)postReq:(NSString*)data tag:(kSXTag)tag owner:(id<NetworkModuleDelegate>)owner;
+- (void)postReq:(NSString*)data tag:(kSXTag)tag owner:(id<NetworkModuleDelegate>)owner Type:(SelectAccoutType)type;
 - (void)postReq2:(NSDictionary*)data tag:(kSXTag)tag owner:(id<NetworkModuleDelegate>)owner;
 - (void)postData:(NSString*)data tag:(kSXTag)tag owner:(id<NetworkModuleDelegate>)owner url:(NSString*)url;
 - (void)cancel:(kSXTag)tag;

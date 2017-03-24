@@ -459,18 +459,18 @@
 -(void)setAllMessageReadedHttpRequest{
   
     NSString *strParameters = [NSString stringWithFormat:@"userId=%@",[[NSUserDefaults standardUserDefaults] objectForKey:UUID]];
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:KSXTagMsgListSignAllRead owner:self];
+    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:KSXTagMsgListSignAllRead owner:self Type:SelectAccoutDefault];
 }
 #pragma mark 单个数据设置为已读的网络请求
 -(void)setSignMessageReadedHttpRequest:(NSString *)messageId{
     
     NSString *strParameters = [NSString stringWithFormat:@"userId=%@&id=%@",[[NSUserDefaults standardUserDefaults] objectForKey:UUID],messageId];
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:KSXTagMsgListSignRead owner:self];
+    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:KSXTagMsgListSignRead owner:self Type:SelectAccoutDefault];
 }
 #pragma mark 量批删除消息的网络请求
 -(void)mutableDeleteMessageHttpRequest:(NSString *)messageIdStr{
     NSString *strParameters = [NSString stringWithFormat:@"userId=%@&tMsgIds=%@",[[NSUserDefaults standardUserDefaults] objectForKey:UUID],messageIdStr];
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:KSXTagMsgListRemoveTMsg owner:self];
+    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:KSXTagMsgListRemoveTMsg owner:self Type:SelectAccoutDefault];
 }
 #pragma mark 消息中心网络数据请求
 -(void)getMessageDataList{
@@ -478,7 +478,7 @@
       _pageNumber = 1;
     }
     NSString *strParameters = [NSString stringWithFormat:@"userId=%@&page=%d&rows=10",[[NSUserDefaults standardUserDefaults] objectForKey:UUID],_pageNumber];
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetMSGCenter owner:self];
+    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetMSGCenter owner:self Type:SelectAccoutDefault];
 }
 #pragma mark - 开始请求
 - (void)beginPost:(kSXTag)tag{
