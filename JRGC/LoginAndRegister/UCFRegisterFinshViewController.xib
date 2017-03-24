@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UCFRegisterFinshViewController">
+            <connections>
+                <outlet property="customLabel" destination="sWl-BJ-cjD" id="PZs-vE-eYg"/>
+                <outlet property="openButton" destination="tEL-UW-3Ub" id="g21-UA-Ww0"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_successful_img" translatesAutoresizingMaskIntoConstraints="NO" id="TXM-ev-KvE">
+                    <rect key="frame" x="103" y="215" width="168" height="99"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="注册成功" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gEW-zR-ttf">
+                    <rect key="frame" x="146" y="321.5" width="82" height="24"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                    <color key="textColor" red="0.3411764706" green="0.59999999999999998" blue="0.90980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tEL-UW-3Ub">
+                    <rect key="frame" x="15" y="401.5" width="345" height="37"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="37" id="RqX-ey-tpJ"/>
+                    </constraints>
+                    <state key="normal" title="立即投资"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="4"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="openButton:" destination="-1" eventType="touchUpInside" id="oha-V1-Fms"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="xx已经转入您的账户中" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sWl-BJ-cjD" customClass="NZLabel">
+                    <rect key="frame" x="43" y="355.5" width="289" height="16"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" red="0.66274509800000003" green="0.69411764710000001" blue="0.70980392160000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="tEL-UW-3Ub" secondAttribute="trailing" constant="15" id="3Fo-Kv-fXe"/>
+                <constraint firstItem="TXM-ev-KvE" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" constant="-69" id="7Up-rN-FXX"/>
+                <constraint firstItem="gEW-zR-ttf" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="EdS-ZZ-d9Z"/>
+                <constraint firstItem="tEL-UW-3Ub" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="GFT-gp-pT5"/>
+                <constraint firstItem="gEW-zR-ttf" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="I7H-RQ-9xv"/>
+                <constraint firstItem="TXM-ev-KvE" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Tcf-mt-0OT"/>
+                <constraint firstItem="sWl-BJ-cjD" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="43" id="Uh8-FZ-V6w"/>
+                <constraint firstAttribute="trailing" secondItem="sWl-BJ-cjD" secondAttribute="trailing" constant="43" id="Y7S-vI-qmx"/>
+                <constraint firstItem="sWl-BJ-cjD" firstAttribute="top" secondItem="gEW-zR-ttf" secondAttribute="bottom" constant="10" id="cHs-XJ-4G4"/>
+                <constraint firstItem="gEW-zR-ttf" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="kYo-wF-esf"/>
+                <constraint firstItem="gEW-zR-ttf" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="n6h-y7-ylV"/>
+                <constraint firstItem="tEL-UW-3Ub" firstAttribute="top" secondItem="sWl-BJ-cjD" secondAttribute="bottom" constant="30" id="o7f-zc-IBi"/>
+            </constraints>
+        </view>
+    </objects>
+    <resources>
+        <image name="login_successful_img" width="168" height="99"/>
+    </resources>
+</document>
