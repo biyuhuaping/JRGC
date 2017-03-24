@@ -63,15 +63,16 @@ static NetworkModule *gInstance = NULL;
 }
 - (void)postReq:(NSString*)data tag:(kSXTag)tag owner:(id<NetworkModuleDelegate>)owner Type:(SelectAccoutType)type
 {
-    NSString *serverIP = @"https://app.9888.cn/mpappP2P/";
+    NSString *serverIP = @"http://app.9888.cn/mpappP2P/";
 
     if (type == SelectAccoutDefault) {
-        serverIP = @"https://app.9888.cn/mpappP2P/";
+        serverIP = @"http://app.9888.cn/mpappP2P/";
     }
     
     if (type == SelectAccoutTypeHoner) {
-        serverIP = @"https://app.9888.cn/mpappZX/";
+        serverIP = @"http://app.9888.cn/mpappZX/";
     }
+//    serverIP = @"http://192.168.2.189:8090/mpappOld/";
     NSString *parameter = nil;
     switch ((int)tag) {
         case kSXTagValidLogin:
@@ -474,7 +475,7 @@ static NetworkModule *gInstance = NULL;
 
     NSArray * array = [NSArray arrayWithObjects:@"newPrdClaims/dataList",@"newaccount/userLevelIsOpen",@"newprdTransfer/dataList",@"newPrdTransfer/getDetail",@"newuser/login",@"newsendmessage",@"newuserregist/isexitpomocode",@"newuserregist/regist",@"userregist/verification",@"newgetSendMessageTicket",@"bankCard/baseBankMess",@"personalSettings/getTRegionList",@"sysDataDicItem/dicItemList",@"sysDataDicItem/allDicItemList",@"scratchCard/isExist",@"newuserregist/modifyUserpwd",@"newprdTransfer/newCompensateInterest",@"appInstallCount/save",@"newuserregist/checkQdIslimit", nil];
 
-    NSArray * strArray = [parameter componentsSeparatedByString:SERVER_IP];
+    NSArray * strArray = [parameter componentsSeparatedByString:serverIP];
     NSString *par = [strArray objectAtIndex:1];
     if ([[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
         if (data.length > 0) {
