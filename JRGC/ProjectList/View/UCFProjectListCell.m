@@ -255,6 +255,7 @@
     _transferModel = transferModel;
     _prdNameLab.text = transferModel.name;//转让标名称
     _progressLab.text = [NSString stringWithFormat:@"%@%%",transferModel.transfereeYearRate];//受让人年化收益
+    [_progressLab setFont:[UIFont systemFontOfSize:13] string:@"%"];
     _repayPeriodLab.text = [NSString stringWithFormat:@"%@天",transferModel.lastDays];//天数
     _repayModeLab.text = transferModel.repayModeText;//还款方式
     _minInvestLab.text = [NSString stringWithFormat:@"%@元起",transferModel.investAmt];//起投金额
@@ -313,6 +314,7 @@
     _batchBidModel = batchBidModel;
     _prdNameLab.text = batchBidModel.colName;//批量标名称
     _progressLab.text = [NSString stringWithFormat:@"%@%%",batchBidModel.colRate];//批量标年化收益
+    [_progressLab setFont:[UIFont systemFontOfSize:13] string:@"%"];
      _repayPeriodLab.text = batchBidModel.colPeriodTxt;//投资期限
     _minInvestLab.text = [NSString stringWithFormat:@"%d元起",[batchBidModel.colMinInvest intValue]];//起投金额
     _remainingLab.text = batchBidModel.colRepayModeTxt;

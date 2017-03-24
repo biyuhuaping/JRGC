@@ -95,7 +95,7 @@
 {
     NSString *userId = [[NSUserDefaults standardUserDefaults] valueForKey:UUID];
 
-    [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":userId,@"fromSite":_site} tag:kSXTagChooseBankList owner:self signature:YES];
+    [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":userId,@"fromSite":_site} tag:kSXTagChooseBankList owner:self signature:YES Type:self.accoutType];
     [self beginRefresh];
 }
 

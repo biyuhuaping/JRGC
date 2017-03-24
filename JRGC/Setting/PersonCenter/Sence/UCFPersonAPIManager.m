@@ -19,7 +19,7 @@
 {
     if ([[NSUserDefaults standardUserDefaults] objectForKey:UUID]) {
         NSString *strParameters = [NSString stringWithFormat:@"userId=%@", [[NSUserDefaults standardUserDefaults] objectForKey:UUID]];
-        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPersonCenter owner:self];
+        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPersonCenter owner:self Type:SelectAccoutDefault];
         self.completionHandler = completionHandler;
     }
 }

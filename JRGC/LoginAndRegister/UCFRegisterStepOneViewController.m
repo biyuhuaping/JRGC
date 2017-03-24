@@ -91,13 +91,13 @@
         //点下一步前先验证手机号
         NSString *strParameters = [NSString stringWithFormat:@"vString=%@&type=%@",[_registerOneView phoneNumberText],@"1"];
         if (strParameters) {
-            [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSxTagRegistMobileCheck owner:self];
+            [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSxTagRegistMobileCheck owner:self Type:SelectAccoutDefault];
         }
     } else {
         //点下一步前先验证手机号
         NSString *strParameters = [NSString stringWithFormat:@"qd=%@",QDCODE];
         if (strParameters) {
-            [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagRegistCheckQUDAO owner:self];
+            [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagRegistCheckQUDAO owner:self Type:SelectAccoutDefault];
         }
     }
 
@@ -130,7 +130,7 @@
 
 -(void)getRegisterTokenHttpRequst{
     NSDictionary *dataDic = @{ @"phoneNo":[_registerOneView phoneNumberText],@"userId":@"1"};
-    [[NetworkModule sharedNetworkModule] newPostReq:dataDic tag:kSXTagGetRegisterToken owner:self signature:NO];
+    [[NetworkModule sharedNetworkModule] newPostReq:dataDic tag:kSXTagGetRegisterToken owner:self signature:NO Type:SelectAccoutDefault];
 }
 #pragma mark -RequsetDelegate
 
@@ -177,7 +177,7 @@
         //点下一步前先验证手机号
         NSString *strParameters = [NSString stringWithFormat:@"vString=%@&type=%@",[_registerOneView phoneNumberText],@"1"];
         if (strParameters) {
-            [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSxTagRegistMobileCheck owner:self];
+            [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSxTagRegistMobileCheck owner:self Type:SelectAccoutDefault];
         }
     }
 }

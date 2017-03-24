@@ -256,7 +256,7 @@
    
     
 //    NSString *strParameters = [NSString stringWithFormat:@"userId=%@&status=%lu&page=%lu&rows=%@", [[NSUserDefaults standardUserDefaults] valueForKey:UUID],(long)_currentSelectedState, (long)pageNum, @"20"];
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagContributionValueInvot owner:self];
+    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagContributionValueInvot owner:self Type:SelectAccoutDefault];
     
    
     

@@ -89,10 +89,10 @@
     NSString *strParameters;
     if ([_detailType isEqualToString:@"1"]) {
         strParameters = [NSString stringWithFormat:@"userId=%@&id=%@", userId, self.billId];
-        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdOrderInvestDetail owner:self];
+        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdOrderInvestDetail owner:self Type:SelectAccoutDefault];
     } else {
         strParameters = [NSString stringWithFormat:@"userId=%@&orderId=%@",userId,self.billId];
-        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdMyTransferDetail owner:self];
+        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdMyTransferDetail owner:self Type:SelectAccoutDefault];
     }
 }
 
@@ -240,10 +240,10 @@
 {
     if ([_detailType isEqualToString:@"1"]) {
         NSString *strParameters = [NSString stringWithFormat:@"id=%@&userId=%@",uuid,[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
-        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self];
+        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self Type:SelectAccoutDefault];
     } else {
         NSString *strParameters = [NSString stringWithFormat:@"tranid=%@&userId=%@",uuid,[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
-        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdTransferDetail owner:self];
+        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdTransferDetail owner:self Type:SelectAccoutDefault];
     }
 }
 

@@ -112,7 +112,7 @@
 - (void)getBeanNetworkDataWithPageNo:(NSUInteger)currentPageNo
 {
     NSString *strParameters = [NSString stringWithFormat:@"userId=%@&page=%lu&rows=%@", [[NSUserDefaults standardUserDefaults] valueForKey:UUID], (unsigned long)currentPageNo, PAGESIZE];
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSxTagGongDouOverDue owner:self];
+    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSxTagGongDouOverDue owner:self Type:SelectAccoutDefault];
 }
 
 //开始请求

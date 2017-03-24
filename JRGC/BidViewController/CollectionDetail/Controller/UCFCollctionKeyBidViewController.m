@@ -440,7 +440,7 @@
 - (void)checkGongchangCode:(NSString *)string
 {
     NSString *parStr = [NSString stringWithFormat:@"pomoCode=%@",string];
-    [[NetworkModule sharedNetworkModule] postReq:parStr tag:kSXTagCheckPomoCode owner:self];
+    [[NetworkModule sharedNetworkModule] postReq:parStr tag:kSXTagCheckPomoCode owner:self Type:SelectAccoutDefault];
 }
 - (void)getNormalBidNetData
 {
@@ -507,7 +507,7 @@
     }
     NSString *apptzticket =  [self.dataDict objectSafeForKey:@"apptzticket"];
     [paramDict setValue:apptzticket forKey:@"investClaimsTicket"];
-    [[NetworkModule sharedNetworkModule] newPostReq:paramDict tag:kSXTagColBatchInvestUrl owner:self signature:YES];
+    [[NetworkModule sharedNetworkModule] newPostReq:paramDict tag:kSXTagColBatchInvestUrl owner:self signature:YES Type:self.accoutType];
 }
 
 -(void)errorPost:(NSError*)err tag:(NSNumber*)tag
@@ -1398,7 +1398,7 @@
 //    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDealBid owner:self];
     
     NSDictionary *dataDict = @{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"tenderId":_colPrdClaimId};
-    [[NetworkModule sharedNetworkModule] newPostReq:dataDict tag:kSXTagColIntoDealBatch owner:self signature:YES];
+    [[NetworkModule sharedNetworkModule] newPostReq:dataDict tag:kSXTagColIntoDealBatch owner:self signature:YES Type:self.accoutType];
 
 }
 

@@ -151,7 +151,7 @@
                           @"pageSize":@"20",
                           @"status":_status,   //status：1：未使用 2：已使用 3：已过期 4：已赠送
                           @"userId":userId};
-    [[NetworkModule sharedNetworkModule] newPostReq:dic tag:kSXTagReturnCouponList owner:self signature:YES];
+    [[NetworkModule sharedNetworkModule] newPostReq:dic tag:kSXTagReturnCouponList owner:self signature:YES Type:SelectAccoutDefault];
 }
 
 //开始请求

@@ -354,7 +354,7 @@
     [parDic setValue:blockId forKey:@"token_id"];
     [parDic setValue:wanip forKey:@"ip"];
     
-    [[NetworkModule sharedNetworkModule] newPostReq:parDic tag:kSXTagLogin owner:self signature:NO];
+    [[NetworkModule sharedNetworkModule] newPostReq:parDic tag:kSXTagLogin owner:self signature:NO Type:SelectAccoutDefault];
 }
 #pragma mark - 刷脸登陆后反回的数据处理
 - (void)transformCloudWalkReconise:(id)_data{
