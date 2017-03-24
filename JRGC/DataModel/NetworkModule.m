@@ -64,11 +64,6 @@ static NetworkModule *gInstance = NULL;
 - (void)postReq:(NSString*)data tag:(kSXTag)tag owner:(id<NetworkModuleDelegate>)owner Type:(SelectAccoutType)type
 {
     NSString *serverIP = @"http://app.9888.cn/mpappP2P/";
-
-    if (type == SelectAccoutDefault) {
-        serverIP = @"http://app.9888.cn/mpappP2P/";
-    }
-    
     if (type == SelectAccoutTypeHoner) {
         serverIP = @"http://app.9888.cn/mpappZX/";
     }
