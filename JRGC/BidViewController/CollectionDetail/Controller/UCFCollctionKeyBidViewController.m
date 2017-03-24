@@ -440,7 +440,7 @@
 - (void)checkGongchangCode:(NSString *)string
 {
     NSString *parStr = [NSString stringWithFormat:@"pomoCode=%@",string];
-    [[NetworkModule sharedNetworkModule] postReq:parStr tag:kSXTagCheckPomoCode owner:self];
+    [[NetworkModule sharedNetworkModule] postReq:parStr tag:kSXTagCheckPomoCode owner:self Type:SelectAccoutDefault];
 }
 - (void)getNormalBidNetData
 {

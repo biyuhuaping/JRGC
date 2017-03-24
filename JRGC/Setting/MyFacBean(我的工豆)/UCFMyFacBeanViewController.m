@@ -288,21 +288,21 @@
 - (void)getBeanInComeFromNetworkWithCurrentPage:(NSInteger)currentPageNo
 {
     NSString *strParameters = [NSString stringWithFormat:@"userId=%@&page=%lu&rows=%@", [[NSUserDefaults standardUserDefaults] valueForKey:UUID], (unsigned long)currentPageNo, PAGESIZE];
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSxTagGongDouInCome owner:self];
+    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSxTagGongDouInCome owner:self Type:SelectAccoutDefault];
 }
 
 // 请求工豆收入
 - (void)getBeanExpendFromNetworkWithCurrentPage:(NSInteger)currentPageNo
 {
     NSString *strParameters = [NSString stringWithFormat:@"userId=%@&page=%lu&rows=%@", [[NSUserDefaults standardUserDefaults] valueForKey:UUID], (unsigned long)currentPageNo, PAGESIZE];
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSxTagGongDouExpend owner:self];
+    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSxTagGongDouExpend owner:self Type:SelectAccoutDefault];
 }
 
 // 请求工豆收入
 - (void)getOverduingBeanFromNetworkWithCurrentPage:(NSInteger)currentPageNo
 {
     NSString *strParameters = [NSString stringWithFormat:@"userId=%@&page=%lu&rows=%@", [[NSUserDefaults standardUserDefaults] valueForKey:UUID], (unsigned long)currentPageNo, PAGESIZE];
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGongDouOverDuing owner:self];
+    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGongDouOverDuing owner:self Type:SelectAccoutDefault];
 }
 
 //开始请求

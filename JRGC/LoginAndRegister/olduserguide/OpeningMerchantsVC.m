@@ -41,7 +41,7 @@
 - (void)getRegistResultData{
     NSString *userId = [UserInfoSingle sharedManager].userId;
     NSString *strParameters = [NSString stringWithFormat:@"userId=%@",userId];//5644
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagRegistResult owner:self];
+    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagRegistResult owner:self Type:SelectAccoutDefault];
 }
 
 //开始请求

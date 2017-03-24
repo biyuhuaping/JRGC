@@ -76,7 +76,7 @@
 #pragma mark - 网络请求
 -(void)messageDetailHttpRequest{
     NSString *parmStr = [NSString stringWithFormat:@"userId=%@&id=%@",self.userId,self.messageId];
-    [[NetworkModule sharedNetworkModule] postReq:parmStr tag:kSXTagGetMSGDetail owner:self];
+    [[NetworkModule sharedNetworkModule] postReq:parmStr tag:kSXTagGetMSGDetail owner:self Type:SelectAccoutDefault];
 }
 
 - (void)beginPost:(kSXTag)tag{

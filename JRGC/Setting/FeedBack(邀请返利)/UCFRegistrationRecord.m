@@ -142,7 +142,7 @@
         _pageNum ++;
     }
     NSString *strParameters = [NSString stringWithFormat:@"userId=%@&page=%ld&rows=20",userId, (long)_pageNum];//5644
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:KSxtagFriendsRegisterList owner:self];
+    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:KSxtagFriendsRegisterList owner:self Type:SelectAccoutDefault];
 }
 
 //开始请求

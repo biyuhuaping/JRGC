@@ -236,7 +236,7 @@
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSString *parmStr = [NSString stringWithFormat:@"annualRate=%@&repayMode=%@&repayPeriod=%@&investAmt=%@",annualRate,repayMode,repayPeriod,investAmt];
     
-    [[NetworkModule sharedNetworkModule] postReq:parmStr tag:kSXTagPrdClaimsComputeIntrest owner:self];
+    [[NetworkModule sharedNetworkModule] postReq:parmStr tag:kSXTagPrdClaimsComputeIntrest owner:self Type:SelectAccoutDefault];
 }
 - (void)cretateInvestmentView
 {
@@ -419,26 +419,7 @@
     NSMutableDictionary *dic = [data objectFromJSONString];
     NSString *rstcode = dic[@"status"];
     
-    if (tag.intValue == kSXTagSaveTransferDeals) {
-        if ([rstcode intValue] == 1) {
-            //跳转投标成功页
-            DBLOG(@"投标成功页的数据字典:%@",dic);
-            UCFCompleteBidViewCtrl *compl = [[UCFCompleteBidViewCtrl alloc]initWithNibName:@"UCFCompleteBidViewCtrl" bundle:nil];
-            compl.isTransid = YES;
-            compl.dataDict = [NSMutableDictionary dictionaryWithDictionary:dic];
-            [self.navigationController pushViewController:compl animated:YES];
-            isSucessInvest = YES;
-        } else {
-            if ([rstcode intValue] == 2) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:dic[@"statusdes"] delegate:self cancelButtonTitle:@"返回列表" otherButtonTitles: nil];
-                alert.tag = 10023;
-                [alert show];
-            } else {
-                [self reloadMainView];
-                [AuxiliaryFunc showAlertViewWithMessage:dic[@"statusdes"]];
-            }
-        }
-    } else if (tag.intValue == kSXTagPrdClaimsComputeIntrest) {
+    if (tag.intValue == kSXTagPrdClaimsComputeIntrest) {
         
         if ([rstcode isEqualToString:@"1"]) {
             CalculatorView * view = [[CalculatorView alloc] init];
@@ -571,7 +552,7 @@
     NSString *contractTypeStr = [self valueIndex:linkModel];
     NSString *projectId = [[self.dataDict objectForKey:@"data"] objectForKey:@"id"];
     NSString *strParameters = [NSString stringWithFormat:@"userId=%@&prdClaimId=%@&contractType=%@&prdType=1",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],projectId,contractTypeStr];
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetContractMsg owner:self];
+    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetContractMsg owner:self Type:SelectAccoutDefault];
 }
 - (void)changeGongDouSwitchStatue:(UISwitch *)sender
 {
@@ -583,7 +564,7 @@
 {
     NSString *strParameters = nil;
     strParameters = [NSString stringWithFormat:@"userId=%@&tranId=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],[[_dataDict objectForKey:@"data"] objectForKey:@"id"]];//101943
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagDealTransferBid owner:self];
+    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagDealTransferBid owner:self Type:SelectAccoutDefault];
 }
 - (void)viewWillAppear:(BOOL)animated
 {

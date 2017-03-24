@@ -120,7 +120,7 @@
 - (void)getIdInfoFromNet
 {
     NSString *strParameters = [NSString stringWithFormat:@"userId=%@", [[NSUserDefaults standardUserDefaults] objectForKey:UUID]];
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagIdentifyCard owner:self];
+    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagIdentifyCard owner:self Type:SelectAccoutDefault];
 }
 
 //开始请求

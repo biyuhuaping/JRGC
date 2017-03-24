@@ -182,7 +182,7 @@
     if (alertView.tag == 10000) {
         if (buttonIndex == 1) {
             NSString *strParameters = [NSString stringWithFormat:@"userId=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
-            [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagUserLogout owner:self];
+            [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagUserLogout owner:self Type:SelectAccoutDefault];
             
             [[UCFSession sharedManager] transformBackgroundWithUserInfo:nil withState:UCFSessionStateUserLogout];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"setDefaultViewData" object:nil];
@@ -219,20 +219,20 @@
 -(void)getFaceSwitchStatusNetData
 {
     NSString *strParameters = [NSString stringWithFormat:@"userId=%@", [[NSUserDefaults standardUserDefaults] objectForKey:UUID]];
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagFaceSwitchStatus owner:self];
+    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagFaceSwitchStatus owner:self Type:SelectAccoutDefault];
 }
 //更新 人脸识别开关状态查询网络请求 注意更新请求上传 当前刷脸状态
 -(void)updateFaceSwitchSwipNetData
 {
     BOOL faceSwichSwip = ![[NSUserDefaults standardUserDefaults] boolForKey:FACESWITCHSTATUS];
     NSString *strParameters = [NSString stringWithFormat:@"userId=%@&status=%d", [[NSUserDefaults standardUserDefaults] objectForKey:UUID],faceSwichSwip];
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagFaceSwitchSwip owner:self];
+    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagFaceSwitchSwip owner:self Type:SelectAccoutDefault];
 }
 // 获取网络数据
 - (void)getSecurityCenterNetData
 {
     NSString *strParameters = [NSString stringWithFormat:@"userId=%@", [[NSUserDefaults standardUserDefaults] objectForKey:UUID]];
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagAccountSafe owner:self];
+    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagAccountSafe owner:self Type:SelectAccoutDefault];
 }
 
 //开始请求

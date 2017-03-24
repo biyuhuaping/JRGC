@@ -66,7 +66,7 @@
 - (void)getData
 {
     NSString *strParameters = [NSString stringWithFormat:@"userId=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagWorkshopCode owner:self];
+    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagWorkshopCode owner:self Type:SelectAccoutDefault];
 }
 
 //开始请求

@@ -329,7 +329,7 @@
     }
     NSString *userId = [[NSUserDefaults standardUserDefaults] objectForKey:UUID];
     NSString *strParameters = [NSString stringWithFormat:@"userId=%@&status=%ld&page=%ld&rows=20",userId, (long)_index, (long)pageNum];
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdOrderRefundLsit owner:self];
+    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdOrderRefundLsit owner:self Type:SelectAccoutDefault];
 }
 
 //开始请求

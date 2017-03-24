@@ -217,7 +217,7 @@
         }
         [MBProgressHUD showHUDAddedTo:self animated:YES];
          NSString *parmStr = [NSString stringWithFormat:@"annualRate=%@&repayMode=%@&repayPeriod=%@&investAmt=%@",annualRate,repayMode,repayPeriod,investAmt];
-        [[NetworkModule sharedNetworkModule] postReq:parmStr tag:kSXTagPrdClaimsComputeIntrest owner:self];
+        [[NetworkModule sharedNetworkModule] postReq:parmStr tag:kSXTagPrdClaimsComputeIntrest owner:self Type:SelectAccoutDefault];
     } else {
         
         if ([preInvestMoney isEqualToString:[UCFToolsMehod  isNullOrNilWithString:moneyTextField.text]]) {
@@ -228,7 +228,7 @@
         moneyTextField.text =  [NSString stringWithFormat:@"%.2f",_normalMinInvest > nowMoney ? _normalMinInvest : nowMoney];
         NSString *investAmt = moneyTextField.text;
         NSString *parmStr = [NSString stringWithFormat:@"id=%@&investAmt=%@",normalBidID,investAmt];
-        [[NetworkModule sharedNetworkModule] postReq:parmStr tag:kSXTagNormalBidComputeIntrest owner:self];
+        [[NetworkModule sharedNetworkModule] postReq:parmStr tag:kSXTagNormalBidComputeIntrest owner:self Type:SelectAccoutDefault];
     }
 }
 -(void)beginPost:(kSXTag)tag
