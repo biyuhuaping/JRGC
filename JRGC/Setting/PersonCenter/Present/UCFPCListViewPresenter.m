@@ -88,7 +88,9 @@
 }
 
 - (void)fetchDataWithCompletionHandler:(NetworkCompletionHandler)completionHander {
-    
+//    self.userId= @"930334";
+//    [[NSUserDefaults standardUserDefaults] setValue:self.userId forKey:UUID];
+//    [[NSUserDefaults standardUserDefaults]  synchronize];
     if (self.userId.length>0) {
         [self.apiManager fetchUserInfoWithUserId:self.userId completionHandler:^(NSError *error, id result) {
 //            self.isHonorUser = YES;
