@@ -15,7 +15,7 @@
     BOOL haveNextPage;//是否有下一页 YES:有 NO:没有
     NSString *str_tempRecod;//***由于函数textFieldChanged遇到中文会走两次，为了避免重复请求所以添加次变量作为判断依据
 }
-@property (nonatomic, assign) int currentPC; //当前从第几条开始请求
+@property NSInteger currentPC; //当前从第几条开始请求
 //@property (nonatomic, strong) NSMutableArray *dataSource; //
 @property (nonatomic, strong) NSMutableArray *dataSourceForAll; //
 // 无数据视图
