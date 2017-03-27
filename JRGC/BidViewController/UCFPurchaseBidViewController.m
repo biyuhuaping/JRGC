@@ -193,7 +193,7 @@
         baseTitleLabel.text = @"投标";
     }
     
-    double gondDouBalance = [[[_dataDict objectForKey:@"beanUser"] objectForKey:@"availableBalance"] doubleValue];
+    double gondDouBalance = [[[_dataDict objectSafeDictionaryForKey:@"beanUser"] objectForKey:@"availableBalance"] doubleValue];
     if ((int)gondDouBalance > 0) {
         isGongDouSwitch = YES;
     }
@@ -376,7 +376,7 @@
         return;
     }
     double availableBala= [[[_dataDict objectForKey:@"actUser"] objectForKey:@"availableBalance"] doubleValue];
-    double gondDouBalance = [[[_dataDict objectForKey:@"beanUser"] objectForKey:@"availableBalance"] doubleValue]/100.0f;
+    double gondDouBalance = [[[_dataDict objectSafeDictionaryForKey:@"beanUser"] objectForKey:@"availableBalance"] doubleValue]/100.0f;
     NSString *availableBalance = nil;
     if (cell.gongDouSwitch.on) {
         availableBalance = [NSString stringWithFormat:@"%.2f",availableBala + gondDouBalance];
@@ -605,7 +605,7 @@
     [paramDict setValue:investAmt forKey:@"investAmount"];
 
     if (isGongDouSwitch) {
-        double gondDouBalance = [[[_dataDict objectForKey:@"beanUser"] objectForKey:@"availableBalance"] doubleValue];
+        double gondDouBalance = [[[_dataDict objectSafeDictionaryForKey:@"beanUser"] objectForKey:@"availableBalance"] doubleValue];
         [paramDict setValue:[NSString stringWithFormat:@"%@",[NSNumber numberWithFloat:gondDouBalance]] forKey:@"investBeans"];
 
     }
@@ -851,7 +851,7 @@
             cell = [[MoneyBoardCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellStr2 isCollctionKeyBid:NO];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.delegate = self;
-            double gondDouBalance = [[[_dataDict objectForKey:@"beanUser"] objectForKey:@"availableBalance"] doubleValue];
+            double gondDouBalance = [[[_dataDict objectSafeDictionaryForKey:@"beanUser"] objectForKey:@"availableBalance"] doubleValue];
             if (gondDouBalance > 0.0f) {
                 cell.gongDouSwitch.on = YES;
             } else {
@@ -1314,7 +1314,7 @@
     InvestmentItemInfo * info1 = [[InvestmentItemInfo alloc] initWithDictionary:[_dataDict objectForKey:@"data"]];
     long long int keTouJinE = round(([info1.borrowAmount doubleValue] - [info1.completeLoan doubleValue])* 100);
     long long int keYongZiJin = round([[[self.dataDict objectForKey:@"actUser"] objectForKey:@"availableBalance"] doubleValue] * 100);
-    NSInteger gongDouCount = [[[_dataDict objectForKey:@"beanUser"] objectForKey:@"availableBalance"] integerValue];
+    NSInteger gongDouCount = [[[_dataDict objectSafeDictionaryForKey:@"beanUser"] objectForKey:@"availableBalance"] integerValue];
     if (!isGongDouSwitch) {
         gongDouCount = 0;
     }
