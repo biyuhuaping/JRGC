@@ -7,13 +7,13 @@
 //
 
 #import "UCFPCListViewController.h"
-
+#import "MJRefresh.h"
 #import "UCFPCListCell.h"
 #import "UCFPCFunctionCell.h"
 #import "UCFPCGroupPresenter.h"
 
 @interface UCFPCListViewController () <PCListViewPresenterCallBack>
-@property (strong, nonatomic) UITableView *tableView;
+
 @property (strong, nonatomic) UCFPCListViewPresenter *presenter;
 @end
 
@@ -36,10 +36,11 @@
         self.presenter = presenter;
         self.presenter.view = self;//将V和P进行绑定(这里因为V是系统的TableView 无法简单的声明一个view属性 所以就绑定到TableView的持有者上面)
         
-        __weak typeof(self) weakSelf = self;
+//        __weak typeof(self) weakSelf = self;
 //        self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
 //            [weakSelf.presenter refreshData];
 //        }];
+//         [self.tableView addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(refreshData)];
 //        self.tableView.footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
 //            [weakSelf.presenter loadMoreData];
 //        }];
