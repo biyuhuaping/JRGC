@@ -37,8 +37,10 @@
 //获取注册成功活动反的数据
 - (void)getRegistResultData{
     NSString *userId = [UserInfoSingle sharedManager].userId;
-    NSString *strParameters = [NSString stringWithFormat:@"userId=%@",userId];//5644
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagRegistResult owner:self];
+//    NSString *strParameters = [NSString stringWithFormat:@"userId=%@",userId];//5644
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:userId,@"userId", nil];
+    
+    [[NetworkModule sharedNetworkModule] newPostReq:dic tag:kSXTagRegistResult owner:self signature:NO Type:SelectAccoutDefault];
 }
 
 //开始请求
