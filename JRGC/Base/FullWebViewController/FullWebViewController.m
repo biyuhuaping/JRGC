@@ -214,7 +214,7 @@
     if (uuid != nil ) {
         dataDict = @{@"userId":uuid};
     }
-    [[NetworkModule sharedNetworkModule]  newPostReq:dataDict tag:kSXTagGetShareMessage owner:self signature:YES];
+    [[NetworkModule sharedNetworkModule]  newPostReq:dataDict tag:kSXTagGetShareMessage owner:self signature:YES Type:SelectAccoutDefault];
 }
 //
 //开始请求

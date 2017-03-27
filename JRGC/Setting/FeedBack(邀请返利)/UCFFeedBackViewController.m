@@ -192,7 +192,7 @@
     
     NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys:userId,@"userId",nil];
     //*******qinyy
-    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXtagInviteRebate owner:self signature:YES];
+    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXtagInviteRebate owner:self signature:YES Type:SelectAccoutDefault];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 }
 

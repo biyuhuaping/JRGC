@@ -102,7 +102,7 @@
 {
     _curVerifyType = @"SMS";
     NSDictionary *dataDic = [NSDictionary dictionaryWithObjectsAndKeys:_phoneNumber,@"destPhoneNo", _curVerifyType,@"isVms",@"2",@"type",@"1",@"userId", nil];
-    [[NetworkModule sharedNetworkModule] newPostReq:dataDic tag:kSXTagRegisterSendCodeAndFindPwd owner:self signature:NO];
+    [[NetworkModule sharedNetworkModule] newPostReq:dataDic tag:kSXTagRegisterSendCodeAndFindPwd owner:self signature:NO Type:SelectAccoutDefault];
 }
 
 - (void)submitBtnClicked:(id)sender
@@ -321,7 +321,7 @@
     if (![QDCODE isEqualToString:@""]) {
         [parDic setValue:QDCODE forKey:@"channelCode"];
     }
-    [[NetworkModule sharedNetworkModule] newPostReq:parDic tag:kSXTagUserRegist owner:self signature:NO];
+    [[NetworkModule sharedNetworkModule] newPostReq:parDic tag:kSXTagUserRegist owner:self signature:NO Type:SelectAccoutDefault];
 }
 
 

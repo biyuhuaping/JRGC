@@ -177,23 +177,23 @@
     _isfirstSendCode = isFirst;
     if (isFirst) {
         NSDictionary *dataDic =@{@"destPhoneNo":@"",@"isVms":vmsType ,@"userId":[UserInfoSingle sharedManager].userId,@"type":@"10"};
-        [[NetworkModule sharedNetworkModule] newPostReq:dataDic tag:kSXTagIdentifyCode owner:self signature:YES];
+        [[NetworkModule sharedNetworkModule] newPostReq:dataDic tag:kSXTagIdentifyCode owner:self signature:YES Type:self.accoutType];
     }else{
         NSString* str = [self.phoneNumberTextField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
         NSDictionary *dic = @{@"destPhoneNo":[Common deleteStrSpace:str],@"isVms":vmsType,@"type":@"9",@"userId":[UserInfoSingle sharedManager].userId};
-        [[NetworkModule sharedNetworkModule] newPostReq:dic tag:kSXTagIdentifyCode owner:self signature:YES];
+        [[NetworkModule sharedNetworkModule] newPostReq:dic tag:kSXTagIdentifyCode owner:self signature:YES Type:self.accoutType];
     }
 }
 #pragma mark -验证注册手机号验证码网络请求
 -(void)verifyRigisterPhoneNunmberHttpRequst{
     NSDictionary *dataDic =@{@"userId":[UserInfoSingle sharedManager].userId,@"validateCode":_codeTextField.text};
-    [[NetworkModule sharedNetworkModule] newPostReq:dataDic tag:kSXTagValidateOldPhoneNo owner:self signature:YES];
+    [[NetworkModule sharedNetworkModule] newPostReq:dataDic tag:kSXTagValidateOldPhoneNo owner:self signature:YES Type:self.accoutType];
 }
 #pragma mark -修改银行预留手机号网络请求
 -(void)modifyBankReservePhoneNunmberHttpRequst{
     NSString* str = [self.phoneNumberTextField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSDictionary *dataDict = @{@"phoneNum":[Common deleteStrSpace:str],@"validateCode":_codeTextField.text,@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"updatePhoneNoTicket":_updatePhoneNoTicketStr};
-    [[NetworkModule sharedNetworkModule] newPostReq:dataDict tag:kSXTagChangeReserveMobileNumber owner:self signature:YES];
+    [[NetworkModule sharedNetworkModule] newPostReq:dataDict tag:kSXTagChangeReserveMobileNumber owner:self signature:YES Type:self.accoutType];
 }
 - (void)beginPost:(kSXTag)tag
 {

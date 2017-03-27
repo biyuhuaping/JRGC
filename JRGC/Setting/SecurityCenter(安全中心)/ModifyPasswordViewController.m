@@ -116,7 +116,7 @@
     [parDic setValue:[MD5Util MD5Pwd:_lastPasswordTextField.text] forKey:@"newPwd"];
 
     if (parDic) {
-        [[NetworkModule sharedNetworkModule] newPostReq:parDic tag:kSXTagUpdatePwd owner:self signature:YES];
+        [[NetworkModule sharedNetworkModule] newPostReq:parDic tag:kSXTagUpdatePwd owner:self signature:YES Type:SelectAccoutDefault];
     }
 }
 

@@ -140,7 +140,7 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
     }
     NSString *currentPageStr = [NSString stringWithFormat:@"%d",_currentPage];
     NSDictionary* dataDict  = @{@"userId":uuid,@"colPrdClaimsId":_colPrdClaimId, @"batchOrderId":_batchOrderIdStr,@"page":currentPageStr,@"pageSize":@"20"};//我的投资页面 订单id};
-    [[NetworkModule sharedNetworkModule] newPostReq:dataDict tag:kSXTagMyBatchInvestDetail owner:self signature:YES];
+    [[NetworkModule sharedNetworkModule] newPostReq:dataDict tag:kSXTagMyBatchInvestDetail owner:self signature:YES Type:self.accoutType];
 }
 -(void)beginPost:(kSXTag)tag{
     //    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
