@@ -255,6 +255,7 @@
     if (self.dataArray.count>0) {
         UCFHuiBuinessDetailViewController *buinessDetail = [[UCFHuiBuinessDetailViewController alloc] initWithNibName:@"UCFHuiBuinessDetailViewController" bundle:nil];
         buinessDetail.title = @"徽商资金流水";
+        buinessDetail.accoutType = self.accoutType;
         [self.navigationController pushViewController:buinessDetail animated:YES];
     }
     else {

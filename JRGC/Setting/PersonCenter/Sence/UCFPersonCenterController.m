@@ -29,8 +29,13 @@
 
 #import "UCFLoginViewController.h"
 #import "UCFRegisterStepOneViewController.h"
+#import "MJRefresh.h"
+#import "AuxiliaryFunc.h"
 
 @interface UCFPersonCenterController () <UCFPCListViewControllerCallBack,LoginShadowDelegate>
+{
+    NSDictionary *_dataDict;
+}
 
 @property (nonatomic, strong) UCFUserInfoController *userInfoVC;
 @property (strong, nonatomic) UCFPCListViewController *pcListVC;
@@ -45,7 +50,10 @@
     
     [self addUI];
     
-    [self fetchData];
+//    [self fetchData];
+    
+    [_pcListVC.tableView
+      addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(fetchData)];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -116,9 +124,47 @@
     
 //    [self.userInfoVC fetchData];
     
-//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];;//上层交互逻辑
+    /* 返回数据
+     data =     {
+     beanAmount = 0;
+     couponNumber = 0;
+     enjoyAmount = 0;
+     enjoyOpenStatus = "";
+     enjoyRepayPerDate = "2017-04-21";
+     gcm = C0700WR;
+     headurl = "https://www.9888.cn/img/app/man.png";
+     isCompanyAgent = 0;
+     loginName = BA0070;
+     memberLever = 0;
+     mobile = "185****0070";
+     p2pAmount = "550819.05";
+     p2pOpenStatus = 4;
+     p2pRepayPerDate = "2017-04-21";
+     score = "2.9\U4e07";
+     sex = "\U7537";
+     unReadMsgCount = 0;
+     userId = 918332;
+     userName = "\U97e9\U5148\U751f";
+     };
+     */
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];;//上层交互逻辑
+    
+    __weak typeof(self) weakSelf = self;
     [self.pcListVC.presenter fetchDataWithCompletionHandler:^(NSError *error, id result) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];;//上层交互逻辑
+        
+        if (weakSelf.pcListVC.tableView.header.isRefreshing) {
+               [weakSelf.pcListVC.tableView.header endRefreshing];
+        }
+        BOOL rstcode = [result[@"ret"] boolValue];
+        NSString *messageStr = result[@"message"];
+        if (rstcode) { //返回成功
+            _dataDict = (NSDictionary *)result[@"data"];
+
+        }else{
+             [AuxiliaryFunc showToastMessage:messageStr withView:self.view];
+        }
     }];
 }
 
@@ -133,6 +179,14 @@
         [self.navigationController pushViewController:subVC animated:YES];
     }
     else if ([title isEqualToString:@"尊享账户"]) {
+        /*
+         UN_OPEN:1,未开户；OPEN：2,开户；BIND_CARD:3,已绑定银行卡；HAS_PWD:4,设置交易密码；
+         */
+        if([_dataDict objectSafeForKey:@"enjoyOpenStatus"]){ //尊享开户状态判断
+            
+            
+            return;
+        }
         UCFP2POrHonerAccoutViewController *subVC = [[UCFP2POrHonerAccoutViewController alloc] initWithNibName:@"UCFP2POrHonerAccoutViewController" bundle:nil];
         subVC.accoutType =  SelectAccoutTypeHoner;
         [self.navigationController pushViewController:subVC animated:YES];

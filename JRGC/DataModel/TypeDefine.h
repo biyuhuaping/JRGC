@@ -23,7 +23,7 @@
 #define PRDTRANSFER_DETAIL  @"newprdTransfer/showDetailTwo"//转让标详情
 #define PRDCLAIMS_DEALBID   @"newPrdClaims/dealBidTwo"
 #define PRDCLAIMS_SAVEDEALS @"api/invest/v2/submitTender.json"
-#define PERSON_CENTER       @"newaccount/center"
+#define PERSON_CENTER       @"api/homePage/v2/userCenter.json"  // @"newaccount/center" 个人中心
 #define MONEY_OVERVIEW      @"newaccount/overview"
 #define FUNDS_DETAIL        @"newaccount/funds"
 #define ACCOUNT_SAFE        @"newsafe/accountSafe"
