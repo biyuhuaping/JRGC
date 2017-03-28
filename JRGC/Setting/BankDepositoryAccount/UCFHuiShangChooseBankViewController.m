@@ -93,7 +93,9 @@
 #pragma mark - 请求处理
 - (void)request
 {
-     [[NetworkModule sharedNetworkModule] newPostReq:[NSDictionary dictionaryWithObject:[[NSUserDefaults standardUserDefaults] valueForKey:UUID] forKey:@"userId"] tag:kSXTagChooseBankList owner:self signature:YES];
+    NSString *userId = [[NSUserDefaults standardUserDefaults] valueForKey:UUID];
+
+    [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":userId,@"fromSite":_site} tag:kSXTagChooseBankList owner:self signature:YES Type:self.accoutType];
     [self beginRefresh];
 }
 

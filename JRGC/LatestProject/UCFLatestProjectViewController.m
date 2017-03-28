@@ -42,7 +42,7 @@
 #import "UCFCollectionDetailViewController.h" //集合详情
 #import "MjAlertView.h"
 #import "NSDate+IsBelongToToday.h"
-@interface UCFLatestProjectViewController ()<InvestmentCellDelegate,FourOFourViewDelegate,CycleViewDelegate,PromptViewDelegate,homeButtonPressedCellDelegate, UITableViewDataSource, UITableViewDelegate, UCFCollectionBidCellDelegate,MjAlertViewDelegate>
+@interface UCFLatestProjectViewController ()<InvestmentCellDelegate,FourOFourViewDelegate,CycleViewDelegate,PromptViewDelegate,homeButtonPressedCellDelegate, UITableViewDataSource, UITableViewDelegate, UCFCollectionBidCellDelegate,MjAlertViewDelegate,PraiseAlertDelegate>
 {
     UIView *_clickView;
     BOOL _refreshHead;
@@ -100,7 +100,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self drawPullingView];//点击加载更多
+//    [self drawPullingView];//点击加载更多
     _investmentArr = [NSMutableArray new];
 //    _dataArr = [NSMutableArray new];
     self.baseTitleType = @"list";
@@ -350,26 +350,7 @@
 }
 
 #pragma mark - bander
-//- (void)updateLab{
-//    static int i = 0;
-//    if (_rollPrdOrderArr.count == 0) {
-//        return;
-//    }
-//    if (i == _rollPrdOrderArr.count - 1) {
-//        i = 0;
-//    }else{
-//        i ++;
-//    }
-//    NSDictionary *dic = _rollPrdOrderArr[i];
-//    _lab.text = [NSString stringWithFormat:@"%@(%@) 投资%@   ¥%@   %@",dic[@"loginName"],dic[@"realName"],dic[@"prdName"],dic[@"investAmt"],dic[@"times"]];
-//    CATransition *animation = [CATransition animation];
-//    animation.delegate = self;
-//    animation.duration = 0.7;
-//    animation.timingFunction = UIViewAnimationCurveEaseInOut;
-//    animation.type = @"cube";
-//    animation.subtype = kCATransitionFromTop;
-//    [[_lab layer] addAnimation:animation forKey:@"animation"];
-//}
+
 
 //刷新数据
 - (void)beginShowLoading{
@@ -389,21 +370,12 @@
         // 权益标
         NSString *userid = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
         NSString *strParameters = [NSString stringWithFormat:@"id=%@&userId=%@",prdId,userid];
-        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self];
+        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self Type:SelectAccoutDefault];
     }
 }
 //***qyy 标类型type cell按钮的回调方法delegate
 -(void)homeButtonPressed:(UIButton *)button withCelltypeSellWay:(NSString *)strSellWay
 {
-//    AppDelegate *appdelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-//    [appdelegate.tabBarController setSelectedIndex:1];
-//    UCFProjectListController *project = (UCFProjectListController *)[[appdelegate.tabBarController.viewControllers objectAtIndex:1].childViewControllers objectAtIndex:0];
-//    project.strStyle = strSellWay;
-//    project.viewType = @"1";
-//    BOOL isLoad = [project isViewLoaded];
-//    if (isLoad) {
-//        [project changeViewWithConfigure:strSellWay];
-//    }
     UCFProjectListController *project = [[UCFProjectListController alloc] initWithNibName:@"UCFProjectListController" bundle:nil];
     project.strStyle = strSellWay;
     project.viewType = @"1";
@@ -426,7 +398,7 @@
                 //方法
                 NSString *strParameters = nil;
                 strParameters = [NSString stringWithFormat:@"userId=%@&id=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],projectId];//101943
-                [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDealBid owner:self];
+                [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDealBid owner:self Type:SelectAccoutDefault];
             }
         }
     }
@@ -501,33 +473,6 @@
         webView.navTitle = banInfo.title;
         webView.dicForShare = banInfo;
         [self.navigationController pushViewController:webView animated:YES];
-        
-        //if ([banInfo.dumps isEqualToString:@"1"])
-        //{    //活动 先获取toke
-            //if ([[NSUserDefaults standardUserDefaults] valueForKey:UUID])
-            //{
-                //[MBProgressHUD showHUDAddedTo:self.view animated:YES];
-                //_scrollViewIndex = index;
-                //NSString *strParameters = nil;
-                //strParameters = [NSString stringWithFormat:@"userId=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];//101943
-                //[[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetIgnorgeLogin owner:self];
-            //} else {
-                //FullWebViewController *webView = [[FullWebViewController alloc]initWithWebUrl:banInfo.url title:banInfo.title];
-                //webView.baseTitleType = @"lunbotuhtml";
-                //webView.flageHaveShareBut = @"分享";
-                //webView.dicForShare = banInfo;
-                //[self.navigationController pushViewController:webView animated:YES];
-  
-            //}
-        //}
-        //else
-        //{
-            //FullWebViewController *webView = [[FullWebViewController alloc]initWithWebUrl:banInfo.url title:banInfo.title];
-            //webView.baseTitleType = @"lunbotuhtml";
-            //webView.dicForShare = banInfo;
-            //[self.navigationController pushViewController:webView animated:YES];
-            
-        //}
     }
 }
 
@@ -633,20 +578,14 @@
 }
 //点击提示View调用方法
 - (IBAction)touchTipsView:(id)sender {
+    //首页默认跳转开户夜
     switch ([UserInfoSingle sharedManager].openStatus) {// ***hqy添加
         case 1://未开户-->>>新用户开户
         case 2://已开户 --->>>老用户(白名单)开户
-        {
-            UCFBankDepositoryAccountViewController * bankDepositoryAccountVC =[[UCFBankDepositoryAccountViewController alloc ]initWithNibName:@"UCFBankDepositoryAccountViewController" bundle:nil];
-            BOOL fromSite = 1;
-            bankDepositoryAccountVC.openStatus = (fromSite == 1 ? [UserInfoSingle sharedManager].openStatus :[UserInfoSingle sharedManager].enjoyOpenStatus);
-            
-            [self.navigationController pushViewController:bankDepositoryAccountVC animated:YES];
-        }
-            break;
         case 3://已绑卡-->>>去设置交易密码页面
         {
-            UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:3];
+            UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:[UserInfoSingle sharedManager].openStatus];
+            vc.site = @"1";//等于1 还是 2 由具体模块定
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;
@@ -661,30 +600,30 @@
 }
 
 #pragma mark - tableFooterView
-- (void)drawPullingView
-{
-    _clickView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 42)];
-    _clickView.backgroundColor = [UIColor clearColor];
-    
-    UIImageView *iconView = [[UIImageView alloc] initWithFrame:CGRectMake((ScreenWidth - 15) / 2, 10, 15, 15)];
-    iconView.image = [UIImage imageNamed:@"particular_icon_up.png"];
-    [_clickView addSubview:iconView];
-    
-    UILabel *pullingLabel = [UILabel labelWithFrame:CGRectMake(0, CGRectGetMaxY(iconView.frame) + 5, ScreenWidth, 12) text:@"点击加载更多" textColor:UIColorWithRGB(0x999999) font:[UIFont systemFontOfSize:12]];
-    [_clickView addSubview:pullingLabel];
-    
-    UIButton *bottomBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [bottomBtn addTarget:self action:@selector(bottomBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-    bottomBtn.frame = CGRectMake(0, 0, ScreenWidth, 42);
-    [_clickView addSubview:bottomBtn];
-    [_clickView setUserInteractionEnabled:YES];
-}
+//- (void)drawPullingView
+//{
+//    _clickView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 42)];
+//    _clickView.backgroundColor = [UIColor clearColor];
+//    
+//    UIImageView *iconView = [[UIImageView alloc] initWithFrame:CGRectMake((ScreenWidth - 15) / 2, 10, 15, 15)];
+//    iconView.image = [UIImage imageNamed:@"particular_icon_up.png"];
+//    [_clickView addSubview:iconView];
+//    
+//    UILabel *pullingLabel = [UILabel labelWithFrame:CGRectMake(0, CGRectGetMaxY(iconView.frame) + 5, ScreenWidth, 12) text:@"点击加载更多" textColor:UIColorWithRGB(0x999999) font:[UIFont systemFontOfSize:12]];
+//    [_clickView addSubview:pullingLabel];
+//    
+//    UIButton *bottomBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [bottomBtn addTarget:self action:@selector(bottomBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+//    bottomBtn.frame = CGRectMake(0, 0, ScreenWidth, 42);
+//    [_clickView addSubview:bottomBtn];
+//    [_clickView setUserInteractionEnabled:YES];
+//}
 
 - (void)bottomBtnClicked:(id)sender
 {
-    _pageNum++;
-    NSString *strParameters = [NSString stringWithFormat:@"page=%d&rows=20&userId=%@",_pageNum,[UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]]];
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaims owner:self];
+//    _pageNum++;
+//    NSString *strParameters = [NSString stringWithFormat:@"page=%d&rows=20&userId=%@",_pageNum,[UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]]];
+//    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaims owner:self];
 }
 
 #pragma mark - UITableViewDelegate
@@ -817,14 +756,14 @@
                     NSInteger isOrder = [info.isOrder integerValue];
                     if (isOrder > 0) {
                         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-                        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self];
+                        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self Type:SelectAccoutDefault];
                     } else {
                         UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前标的详情只对投资人开放"];
                         [self.navigationController pushViewController:controller animated:YES];
                     }
                 } else {
                     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-                    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self];
+                    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self Type:SelectAccoutDefault];
                 }
             }
         }
@@ -854,7 +793,7 @@
     
     //************************************************qyy 2016-11-17首页接口改造
     NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys:[UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults]valueForKey:UUID]],@"userId", nil];
-    [[NetworkModule sharedNetworkModule]newPostReq:strParameters tag:kSXTagPrdClaimsNewVersion owner:self signature:YES];
+    [[NetworkModule sharedNetworkModule]newPostReq:strParameters tag:kSXTagPrdClaimsNewVersion owner:self signature:YES Type:SelectAccoutDefault];
 
 }
 
@@ -1023,46 +962,7 @@
                  [AuxiliaryFunc showAlertViewWithMessage:dic[@"statusdes"]];
             }
         }
-    } else if(tag.intValue == kSXTagGetIgnorgeLogin) {
-        if([dic[@"status"] integerValue] == 1) {
-            self.wapActToken = dic[@"wapActToken"];
-            NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-            [dict setValue:self.wapActToken forKey:@"token"];
-            [dict setValue:[Common getIOSVersion] forKey:@"version"];
-            [dict setValue:[[NSUserDefaults standardUserDefaults] valueForKey:REALNAME] forKey:@"realName"];
-            [dict setValue:[[NSUserDefaults standardUserDefaults] valueForKey:UUID] forKey:@"userId"];
-            [dict setValue:[[NSUserDefaults standardUserDefaults] valueForKey:PHONENUM] forKey:@"mobile"];
-            [dict setValue:[[NSUserDefaults standardUserDefaults] valueForKey:LOGINNAME] forKey:@"username"];
-            
-            NSString *tmpfinalStr = @""; //仅仅就是为了获取验签串
-            NSString *finalStr = @"";
-            //加两个临时变量为了协调与服务之间的encryptParam这个是传给服务器，encryptParam1这个是用于加密验签的 直接给服务器 解析报错（注意！）
-            
-            //传递给服务器的AES把+号，转换为%2B;
-            NSString * encryptParam  = [Common AESWithKey2:[Common getKeychain] WithDic:dict];
-            //参与验签的AES加密串，不转换+号的
-            NSString * encryptParam1 = [Common AESWithKeyWithNoTranscode2:[Common getKeychain] WithData:dict];
-            
-            tmpfinalStr = [NSString stringWithFormat:@"encryptParam=%@",encryptParam1];
-            tmpfinalStr = [tmpfinalStr stringByAppendingString:@"&sourceType=1"];
-            tmpfinalStr = [tmpfinalStr stringByAppendingString:[NSString stringWithFormat:@"&imei=%@",[Common getKeychain]]];
-            NSString *signature = [Common getSinatureWithPar:[Common getParStr:tmpfinalStr]];
-            
-            finalStr = [NSString stringWithFormat:@"encryptParam=%@",encryptParam];
-            finalStr = [finalStr stringByAppendingString:@"&sourceType=1"];
-            finalStr = [finalStr stringByAppendingString:[NSString stringWithFormat:@"&imei=%@",[Common getKeychain]]];
-            finalStr = [finalStr stringByAppendingString:[NSString stringWithFormat:@"&signature=%@",signature]];
-            finalStr = [finalStr stringByAppendingString:[NSString stringWithFormat:@"&userId=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID]]];
-            
-            UCFCycleModel *banInfo = _banderArr[_scrollViewIndex];
-            NSString *fin = [NSString stringWithFormat:@"%@?%@",banInfo.url,finalStr];
-            FullWebViewController *webView = [[FullWebViewController alloc] initWithWebUrl:fin title:banInfo.title];
-            webView.baseTitleType = @"lunbotuhtml";
-            webView.flageHaveShareBut = @"分享";
-            webView.dicForShare = banInfo;
-            [self.navigationController pushViewController:webView animated:YES];
-        }
-    }else if (tag.intValue == kSXTagColPrdclaimsDetail) {
+    } else if (tag.intValue == kSXTagColPrdclaimsDetail) {
         NSString *rstcode = dic[@"ret"];
         NSString *rsttext = dic[@"message"];
         if ([rstcode intValue] == 1) {
@@ -1123,15 +1023,10 @@
             {// ***hqy添加
                 case 1://未开户-->>>新用户开户
                 case 2://已开户 --->>>老用户(白名单)开户
-                {
-                    UCFBankDepositoryAccountViewController * bankDepositoryAccountVC =[[UCFBankDepositoryAccountViewController alloc ]initWithNibName:@"UCFBankDepositoryAccountViewController" bundle:nil];
-                    bankDepositoryAccountVC.openStatus = [UserInfoSingle sharedManager].openStatus;
-                    [self.navigationController pushViewController:bankDepositoryAccountVC animated:YES];
-                }
-                    break;
                 case 3://已绑卡-->>>去设置交易密码页面
                 {
-                    UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:3];
+                    UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:[UserInfoSingle sharedManager].openStatus];
+                    vc.site = @"1";//等于1 还是 2 由具体模块定
                     [self.navigationController pushViewController:vc animated:YES];
                 }
                     break;
@@ -1177,23 +1072,13 @@
         if ([self checkUserCanInvestIsDetail:NO]) {
             _colPrdClaimIdStr = [NSString stringWithFormat:@"%@",model.Id];
             NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys:uuid,@"userId", _colPrdClaimIdStr, @"colPrdClaimId", nil];
-            [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagColPrdclaimsDetail owner:self signature:YES];
+            [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagColPrdclaimsDetail owner:self signature:YES Type:SelectAccoutTypeP2P];
         }
     }
 }
 
 - (void)collectionCell:(UCFCollectionBidCell *)currentView didClickedMoreButton:(UIButton *)MoreButton
-{
-//    AppDelegate *appdelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-//    [appdelegate.tabBarController setSelectedIndex:1];
-//    UCFProjectListController *project = (UCFProjectListController *)[[appdelegate.tabBarController.viewControllers objectAtIndex:1].childViewControllers objectAtIndex:0];
-//    project.strStyle = @"11";
-//    project.viewType = @"2";
-//    BOOL isLoad = [project isViewLoaded];
-//    if (isLoad) {
-//        [project changeViewWithConfigure:@"11"];
-//    }
-    
+{    
     UCFProjectListController *project = [[UCFProjectListController alloc] initWithNibName:@"UCFProjectListController" bundle:nil];
     project.strStyle = @"11";
     project.viewType = @"2";

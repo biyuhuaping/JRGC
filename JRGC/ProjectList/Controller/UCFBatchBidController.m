@@ -133,7 +133,7 @@
             NSDictionary *strParameters;
             _colPrdClaimIdStr = [NSString stringWithFormat:@"%@",model.batchBidId];
             strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:uuid,@"userId", _colPrdClaimIdStr, @"colPrdClaimId", nil];
-            [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagColPrdclaimsDetail owner:self signature:YES];
+            [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagColPrdclaimsDetail owner:self signature:YES Type:SelectAccoutTypeP2P] ;
         }
     }
 }
@@ -155,7 +155,7 @@
     }
     
     
-    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagProjectListBatchBid owner:self signature:YES];
+    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagProjectListBatchBid owner:self signature:YES Type:SelectAccoutTypeP2P];
 }
 
 //开始请求
@@ -278,15 +278,10 @@
             {// ***hqy添加
                 case 1://未开户-->>>新用户开户
                 case 2://已开户 --->>>老用户(白名单)开户
-                {
-                    UCFBankDepositoryAccountViewController * bankDepositoryAccountVC =[[UCFBankDepositoryAccountViewController alloc ]initWithNibName:@"UCFBankDepositoryAccountViewController" bundle:nil];
-                    bankDepositoryAccountVC.openStatus = [UserInfoSingle sharedManager].openStatus;
-                    [self.navigationController pushViewController:bankDepositoryAccountVC animated:YES];
-                }
-                    break;
                 case 3://已绑卡-->>>去设置交易密码页面
                 {
-                    UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:3];
+                    UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:[UserInfoSingle sharedManager].openStatus];
+                    vc.site = @"1";//等于1 还是 2 由具体模块定
                     [self.navigationController pushViewController:vc animated:YES];
                 }
                     break;

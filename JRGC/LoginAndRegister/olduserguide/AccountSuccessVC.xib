@@ -1,13 +1,17 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AccountSuccessVC">
             <connections>
+                <outlet property="showLabel" destination="fQa-if-1Lf" id="Owl-Wk-pGk"/>
                 <outlet property="submitDataButton" destination="0Mo-FR-p0b" id="Kby-SW-oha"/>
                 <outlet property="view" destination="WDZ-8b-Fjz" id="cbY-en-8U9"/>
             </connections>
@@ -17,20 +21,23 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="account_successful_img" translatesAutoresizingMaskIntoConstraints="NO" id="hEK-lL-JjE"/>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="成功开通徽商银行存管账户" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UlW-Sh-Kdp">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="account_successful_img" translatesAutoresizingMaskIntoConstraints="NO" id="hEK-lL-JjE">
+                    <rect key="frame" x="77.5" y="163" width="220" height="99"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="成功开通" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UlW-Sh-Kdp">
+                    <rect key="frame" x="146.5" y="282" width="82" height="24"/>
                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                     <color key="textColor" red="0.3411764706" green="0.59999999999999998" blue="0.90980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UEV-uH-MC1">
-                    <string key="text">交易密码用于投标、提现等操作，为了您的
-账户安全，资金操作前请先设置交易密码。</string>
-                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                    <color key="textColor" red="0.66274509800000003" green="0.69411764710000001" blue="0.70980392160000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="P2P徽商存管账户" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fQa-if-1Lf">
+                    <rect key="frame" x="108" y="316" width="159" height="24"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                    <color key="textColor" red="0.3411764706" green="0.59999999999999998" blue="0.90980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Mo-FR-p0b">
+                    <rect key="frame" x="15" y="411.5" width="345" height="37"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="37" id="k57-Zu-ij2"/>
                     </constraints>
@@ -39,16 +46,26 @@
                         <action selector="submitDataButton:" destination="-1" eventType="touchUpInside" id="ZpR-cp-0KF"/>
                     </connections>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UEV-uH-MC1">
+                    <rect key="frame" x="61.5" y="350" width="252" height="31.5"/>
+                    <string key="text">交易密码用于投标、提现等操作，为了您的
+账户安全，资金操作前请先设置交易密码。</string>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" red="0.66274509800000003" green="0.69411764710000001" blue="0.70980392160000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="UlW-Sh-Kdp" firstAttribute="top" secondItem="hEK-lL-JjE" secondAttribute="bottom" constant="20" id="1Lf-K6-Lzr"/>
+                <constraint firstItem="fQa-if-1Lf" firstAttribute="top" secondItem="UlW-Sh-Kdp" secondAttribute="bottom" constant="10" id="3Ln-Br-NwL"/>
                 <constraint firstItem="hEK-lL-JjE" firstAttribute="centerY" secondItem="WDZ-8b-Fjz" secondAttribute="centerY" constant="-121" id="5Tg-KA-n8d"/>
                 <constraint firstItem="0Mo-FR-p0b" firstAttribute="top" secondItem="UEV-uH-MC1" secondAttribute="bottom" constant="30" id="7aS-ol-hvv"/>
                 <constraint firstItem="hEK-lL-JjE" firstAttribute="centerX" secondItem="WDZ-8b-Fjz" secondAttribute="centerX" id="EI4-we-GnK"/>
-                <constraint firstItem="UEV-uH-MC1" firstAttribute="top" secondItem="UlW-Sh-Kdp" secondAttribute="bottom" constant="10" id="KEH-bl-nNM"/>
+                <constraint firstItem="UEV-uH-MC1" firstAttribute="top" secondItem="fQa-if-1Lf" secondAttribute="bottom" constant="10" id="S7e-CZ-eIf"/>
                 <constraint firstItem="UEV-uH-MC1" firstAttribute="centerX" secondItem="hEK-lL-JjE" secondAttribute="centerX" id="WuM-nk-GUi"/>
                 <constraint firstAttribute="trailing" secondItem="0Mo-FR-p0b" secondAttribute="trailing" constant="15" id="Xzp-cn-T5q"/>
+                <constraint firstItem="fQa-if-1Lf" firstAttribute="centerX" secondItem="UlW-Sh-Kdp" secondAttribute="centerX" id="YQ8-GZ-Xqc"/>
                 <constraint firstItem="UlW-Sh-Kdp" firstAttribute="centerX" secondItem="hEK-lL-JjE" secondAttribute="centerX" id="ezN-8n-5GG"/>
                 <constraint firstItem="0Mo-FR-p0b" firstAttribute="leading" secondItem="WDZ-8b-Fjz" secondAttribute="leading" constant="15" id="nx9-yi-ltX"/>
             </constraints>

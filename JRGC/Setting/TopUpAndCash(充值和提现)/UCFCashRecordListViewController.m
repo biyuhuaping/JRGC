@@ -28,7 +28,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    baseTitleLabel.text = @"提现记录";
+    
+    if (self.accoutType == SelectAccoutTypeHoner) {
+        baseTitleLabel.text = @"尊享提现记录";
+    }else{
+        baseTitleLabel.text = @"P2P提现记录";
+    }
     [self addLeftButton];
     self.dataArray = [NSMutableArray array];
     self.sectionItemArray = [NSMutableArray array];
@@ -58,7 +63,7 @@
     }
     NSString *pageStr = [NSString stringWithFormat:@"%d",pageNum];
     NSDictionary *dataDic = [NSDictionary dictionaryWithObjectsAndKeys:@"20",@"pageSize",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"userId",pageStr, @"page",nil];
-    [[NetworkModule sharedNetworkModule] newPostReq:dataDic tag:kSXTagCashRecordList owner:self signature:YES];
+    [[NetworkModule sharedNetworkModule] newPostReq:dataDic tag:kSXTagCashRecordList owner:self signature:YES Type:self.accoutType];
 }
 -(void)endPost:(id)result tag:(NSNumber *)tag
 {

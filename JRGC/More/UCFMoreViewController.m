@@ -123,24 +123,19 @@ static NSString * const kAppKey = @"23511571";
     }
 }
 
-// 获取banner图
-- (void)getBanner
-{
-    [[NetworkModule sharedNetworkModule] postReq:nil tag:kSXTagGetBannerMore owner:self];
-}
 
 //请求成功及结果
 - (void)endPost:(id)result tag:(NSNumber *)tag
 {
-    NSString *data = (NSString *)result;
-    NSMutableDictionary *dic = [data objectFromJSONString];
-    DBLOG(@"UCFSettingViewController : %@",dic);
-    NSString *pictimes = dic[@"picTimes"];
-    if ([pictimes length] > 0) {
-        [Common checkCachePicIsNeedsClear:pictimes PicType:BannerMorePic];
-    }
-    NSString *bannerUrl = dic[@"banner"];
-    [self.moreBanner sd_setImageWithURL:[NSURL URLWithString:bannerUrl] placeholderImage:[UIImage imageNamed:@"banner_default"]];
+//    NSString *data = (NSString *)result;
+//    NSMutableDictionary *dic = [data objectFromJSONString];
+//    DBLOG(@"UCFSettingViewController : %@",dic);
+//    NSString *pictimes = dic[@"picTimes"];
+//    if ([pictimes length] > 0) {
+//        [Common checkCachePicIsNeedsClear:pictimes PicType:BannerMorePic];
+//    }
+//    NSString *bannerUrl = dic[@"banner"];
+//    [self.moreBanner sd_setImageWithURL:[NSURL URLWithString:bannerUrl] placeholderImage:[UIImage imageNamed:@"banner_default"]];
 //    if([bannerUrl hasPrefix:@"http://"]){
 //        _moreBanner.contentMode = UIViewContentModeScaleToFill;
 //    }else{

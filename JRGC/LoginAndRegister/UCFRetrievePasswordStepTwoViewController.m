@@ -89,12 +89,12 @@
     [parDic setValue:_retTwoStepView.getVerficationCode forKey:@"validateCode"];//validateCode
     [parDic setValue:[MD5Util MD5Pwd:_retTwoStepView.getPassword] forKey:@"pwd"];
     [parDic setValue:_phoneNumber forKey:@"phoneNum"];
-    [[NetworkModule sharedNetworkModule] newPostReq:parDic tag:kSXTagChangedPwd owner:self signature:NO];
+    [[NetworkModule sharedNetworkModule] newPostReq:parDic tag:kSXTagChangedPwd owner:self signature:NO Type:SelectAccoutDefault];
 }
 -(void)sendFindPwdCode:(NSString *)type{
     
     NSDictionary *dataDic = [NSDictionary dictionaryWithObjectsAndKeys:_phoneNumber,@"destPhoneNo", type,@"isVms",@"8",@"type",@"1",@"userId", nil];
-    [[NetworkModule sharedNetworkModule] newPostReq:dataDic tag:kSXTagRegisterSendCodeAndFindPwd owner:self signature:NO];
+    [[NetworkModule sharedNetworkModule] newPostReq:dataDic tag:kSXTagRegisterSendCodeAndFindPwd owner:self signature:NO Type:SelectAccoutDefault];
 }
 
 //语音验证码

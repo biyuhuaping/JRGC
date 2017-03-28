@@ -111,7 +111,7 @@
     }
     
     
-    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagProjectList owner:self signature:YES];
+    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagProjectList owner:self signature:YES Type:SelectAccoutTypeP2P];
 }
 
 //开始请求
@@ -234,14 +234,14 @@
                 NSInteger isOrder = [_projectListModel.isOrder integerValue];
                 if (isOrder > 0) {
                     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-                    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self];
+                    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self Type:SelectAccoutDefault];
                 } else {
                     UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前标的详情只对投资人开放"];
                     [self.navigationController pushViewController:controller animated:YES];
                 }
             } else {
                 [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-                [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self];
+                [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self Type:SelectAccoutDefault];
             }
         }
     }
@@ -259,7 +259,7 @@
             [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             _projectListModel = model;
             NSString *strParameters = [NSString stringWithFormat:@"userId=%@&id=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],_projectListModel.Id];
-            [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDealBid owner:self];
+            [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDealBid owner:self Type:SelectAccoutDefault];
         }
     }
 }
@@ -312,15 +312,10 @@
             {// ***hqy添加
                 case 1://未开户-->>>新用户开户
                 case 2://已开户 --->>>老用户(白名单)开户
-                {
-                    UCFBankDepositoryAccountViewController * bankDepositoryAccountVC =[[UCFBankDepositoryAccountViewController alloc ]initWithNibName:@"UCFBankDepositoryAccountViewController" bundle:nil];
-                    bankDepositoryAccountVC.openStatus = [UserInfoSingle sharedManager].openStatus;
-                    [self.navigationController pushViewController:bankDepositoryAccountVC animated:YES];
-                }
-                    break;
                 case 3://已绑卡-->>>去设置交易密码页面
                 {
-                    UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:3];
+                    UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:[UserInfoSingle sharedManager].openStatus];
+                    vc.site = @"1";//等于1 还是 2 由具体模块定
                     [self.navigationController pushViewController:vc animated:YES];
                 }
                     break;

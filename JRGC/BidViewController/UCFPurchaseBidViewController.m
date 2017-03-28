@@ -576,7 +576,7 @@
 - (void)checkGongchangCode:(NSString *)string
 {
     NSString *parStr = [NSString stringWithFormat:@"pomoCode=%@",string];
-    [[NetworkModule sharedNetworkModule] postReq:parStr tag:kSXTagCheckPomoCode owner:self];
+    [[NetworkModule sharedNetworkModule] postReq:parStr tag:kSXTagCheckPomoCode owner:self Type:SelectAccoutDefault];
 }
 - (void)getNormalBidNetData
 {
@@ -637,7 +637,7 @@
     }
     NSString *apptzticket =  [self.dataDict objectSafeForKey:@"apptzticket"];
     [paramDict setValue:apptzticket forKey:@"investClaimsTicket"];
-    [[NetworkModule sharedNetworkModule] newPostReq:paramDict tag:kSXTagInvestSubmit owner:self signature:YES];
+    [[NetworkModule sharedNetworkModule] newPostReq:paramDict tag:kSXTagInvestSubmit owner:self signature:YES Type:self.accoutType];
 }
 
 -(void)errorPost:(NSError*)err tag:(NSNumber*)tag
@@ -1487,7 +1487,7 @@
     
     NSString *projectId = [[self.dataDict objectForKey:@"data"] objectForKey:@"id"];
     NSString *strParameters = [NSString stringWithFormat:@"userId=%@&prdClaimId=%@&contractType=%@&prdType=0",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],projectId,contractTypeStr];
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetContractMsg owner:self];
+    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetContractMsg owner:self Type:SelectAccoutDefault];
 }
 
 - (void)showPDF:(ZBLinkLabelModel *)linkModel
@@ -1506,7 +1506,7 @@
     NSString *strParameters = nil;
     NSString *projectId = [[_dataDict objectForKey:@"data"] objectForKey:@"id"];
     strParameters = [NSString stringWithFormat:@"userId=%@&id=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],projectId];//101943
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDealBid owner:self];
+    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDealBid owner:self Type:SelectAccoutDefault];
 }
 
 - (void)dealloc

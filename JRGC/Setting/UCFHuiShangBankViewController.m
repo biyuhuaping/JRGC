@@ -45,7 +45,11 @@
       self.fd_interactivePopDisabled = NO;
     }
     [self.navigationController setNavigationBarHidden:NO animated:YES];
-    baseTitleLabel.text = @"徽商银行存管账户";
+    if (self.accoutType == SelectAccoutTypeHoner) {
+        baseTitleLabel.text = @"尊享徽商银行存管账户";
+    }else{
+        baseTitleLabel.text = @"P2P徽商银行存管账户";
+    }
     UCFHuiBuinessBankView *huishangView = [[[NSBundle mainBundle] loadNibNamed:@"UCFHuiBuinessBankView" owner:self options:nil] lastObject];
     huishangView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 182.0/320.0*SCREEN_WIDTH);
     UIView *headerBackView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 182.0/320.0*SCREEN_WIDTH)];
@@ -80,7 +84,7 @@
 - (void)getHuiBuinessDataFromNet
 {
     NSString *userId = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
-    [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":userId} tag:kSXTagGetHSAccountInfo owner:self signature:YES];
+    [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":userId} tag:kSXTagGetHSAccountInfo owner:self signature:YES Type:self.accoutType];
 }
 //开始请求
 - (void)beginPost:(kSXTag)tag
@@ -251,6 +255,7 @@
     if (self.dataArray.count>0) {
         UCFHuiBuinessDetailViewController *buinessDetail = [[UCFHuiBuinessDetailViewController alloc] initWithNibName:@"UCFHuiBuinessDetailViewController" bundle:nil];
         buinessDetail.title = @"徽商资金流水";
+        buinessDetail.accoutType = self.accoutType;
         [self.navigationController pushViewController:buinessDetail animated:YES];
     }
     else {

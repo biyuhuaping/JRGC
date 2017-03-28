@@ -115,8 +115,11 @@
     
     isSendSMS = NO;
     self.getMoneyBtn.tag = 1010; //设置当前按钮tag 为 1010
-    
-    baseTitleLabel.text = @"提现";
+    if (self.accoutType == SelectAccoutTypeHoner) {
+         baseTitleLabel.text = @"尊享提现";
+    }else{
+         baseTitleLabel.text = @"P2P提现";
+    }
     [self addLeftButton];
     [self addRightButtonWithName:@"提现记录"];
     _crachTextField.keyboardType = UIKeyboardTypeDecimalPad;
@@ -165,6 +168,7 @@
 - (void)clickRightBtn
 {
     UCFCashRecordListViewController *viewController = [[UCFCashRecordListViewController alloc] init];
+    viewController.accoutType = self.accoutType;
     [self.navigationController pushViewController:viewController animated:YES];
 }
 //点击语音验证码
@@ -630,37 +634,7 @@
         } else {
             [MBProgressHUD displayHudError:dic[@"statusdes"]];
         }
-    } else if (tag.intValue == kSXTagActWithdrawApply){
-        NSMutableDictionary *dic = [data objectFromJSONString];
-        NSString *rstcode = dic[@"status"];
-        if([rstcode intValue] == 1)
-        {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
-            [MBProgressHUD displayHudError:@"提现申请成功"];
-            self.getMoneyBtn.userInteractionEnabled = YES;
-            [_timer  setFireDate:[NSDate distantFuture]];
-            _counter = 60;
-            _getCodeBtn.userInteractionEnabled = YES;
-            [_getCodeBtn setTitle:[NSString stringWithFormat:@"获取验证码"] forState:UIControlStateNormal];
-            _getCodeBtn.backgroundColor = UIColorWithRGBA(111, 131, 159, 1);
-            _crachTextField.text = @"";
-            _codeTextField.text = @"";
-            //_warnSendLabel.hidden = YES;
-            [self.navigationController popToRootViewControllerAnimated:YES];
-        }
-        else
-        {
-            if ([rstcode intValue] == 6) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:dic[@"statusdes"] delegate:self cancelButtonTitle:@"重新输入" otherButtonTitles: nil];
-                [alert show];
-            } else {
-                [MBProgressHUD displayHudError:dic[@"statusdes"]];
-  
-            }
-            self.getMoneyBtn.userInteractionEnabled = YES;
-        }
-
-    } else if (tag.intValue == kSXTagIdentifyCode) {
+    }else if (tag.intValue == kSXTagIdentifyCode) {
 //        {"ret":true,"code":10000,"message":"获取成功","ver":1,"data":null}
         NSMutableDictionary *dic = [data objectFromJSONString];
         NSString *rstcode = dic[@"ret"];
@@ -871,7 +845,7 @@
         bankNoStr = _cashBankNo;
     }
     NSDictionary *dataDic = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"userId",_crachTextField.text,@"reflectAmount",bankNoStr,@"bankNo",nil];
-    [[NetworkModule sharedNetworkModule] newPostReq:dataDic tag:kSXTagWithdrawMoneyValidate owner:self signature:YES];
+    [[NetworkModule sharedNetworkModule] newPostReq:dataDic tag:kSXTagWithdrawMoneyValidate owner:self signature:YES Type:self.accoutType];
 }
 -(BOOL)isWorkTimeCash{
     // 时间字符串
@@ -936,7 +910,7 @@
         bankNoStr = _cashBankNo;
     }
     NSDictionary *dataDic = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:UUID],@"userId",_crachTextField.text,@"reflectAmount",bankNoStr,@"bankNo",@"",@"validateCode",_withdrawToken,@"withdrawTicket",blackBox, @"token_id",wanip,@"ip",nil];
-    [[NetworkModule sharedNetworkModule] newPostReq:dataDic tag:kSXTagWithdrawSub owner:self signature:YES];
+    [[NetworkModule sharedNetworkModule] newPostReq:dataDic tag:kSXTagWithdrawSub owner:self signature:YES Type:self.accoutType];
 }
 - (void)mjalertView:(MjAlertView *)alertview didClickedButton:(UIButton *)clickedButton andClickedIndex:(NSInteger)index{
     if (index == 1) {

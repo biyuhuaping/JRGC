@@ -15,7 +15,7 @@
     BOOL haveNextPage;//是否有下一页 YES:有 NO:没有
     NSString *str_tempRecod;//***由于函数textFieldChanged遇到中文会走两次，为了避免重复请求所以添加次变量作为判断依据
 }
-@property (nonatomic, assign) int currentPC; //当前从第几条开始请求
+@property NSInteger currentPC; //当前从第几条开始请求
 //@property (nonatomic, strong) NSMutableArray *dataSource; //
 @property (nonatomic, strong) NSMutableArray *dataSourceForAll; //
 // 无数据视图
@@ -238,7 +238,7 @@
     }else{
     NSString *keywordStr = [NSString stringWithFormat:@"%@%@",self.textField_searchBar.text,self.bankName]; ////***hqy添加
     NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%d",self.currentPC],@"index",keywordStr,@"keyword",PAGESIZE,@"size",[[NSUserDefaults standardUserDefaults] objectForKey:UUID],@"userId",nil];
-    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagChoseBranchBank owner:self signature:YES];
+    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagChoseBranchBank owner:self signature:YES Type:self.accoutType];
     }
     //    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
@@ -248,7 +248,7 @@
 - (void)getDataRequsetWithPageNo:(NSUInteger)currentPageNo{
     NSString *keywordStr = [NSString stringWithFormat:@"%@%@",self.textField_searchBar.text,self.bankName]; ////***hqy添加  
     NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%d",self.currentPC],@"index",keywordStr,@"keyword",PAGESIZE,@"size",[[NSUserDefaults standardUserDefaults] objectForKey:UUID],@"userId",nil];
-    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagChoseBranchBank owner:self signature:YES];
+    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagChoseBranchBank owner:self signature:YES Type:self.accoutType];
 
     //    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 }

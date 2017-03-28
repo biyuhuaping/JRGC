@@ -606,7 +606,7 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
         if (status != 2) {
             if (isOrder == 1) {//0不可看,1可看
                 [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-                [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self];
+                [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self Type:SelectAccoutDefault];
             } else {
                 UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前标的详情只对投资人开放"];
                 self.intoViewControllerStr = @"NoPermissionVC";
@@ -616,7 +616,7 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
         }
         else {
             [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-            [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self];
+            [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self Type:SelectAccoutDefault];
         }
 }
 
@@ -667,7 +667,7 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
     if (uuid) {
        dataDict  = @{@"userId":uuid,@"colPrdClaimId":_colPrdClaimId,@"page":currentPageStr,@"pageSize":@"20",@"prdClaimsOrder":prdClaimsOrderStr,@"status":statusStr};
     }
-    [[NetworkModule sharedNetworkModule] newPostReq:dataDict tag:kSXTagChildPrdclaimsList owner:self signature:YES];
+    [[NetworkModule sharedNetworkModule] newPostReq:dataDict tag:kSXTagChildPrdclaimsList owner:self signature:YES Type:self.accoutType];
 }
 - (void)showLoginView
 {
@@ -801,7 +801,7 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
     if ([self.souceVC isEqualToString:@"P2PVC"]) {
          [MBProgressHUD showHUDAddedTo:self.view animated:YES];
          NSDictionary *dataDict = @{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"tenderId":_colPrdClaimId};
-         [[NetworkModule sharedNetworkModule] newPostReq:dataDict tag:kSXTagColIntoDealBatch owner:self signature:YES];
+         [[NetworkModule sharedNetworkModule] newPostReq:dataDict tag:kSXTagColIntoDealBatch owner:self signature:YES Type:self.accoutType];
     }else{
         NSDictionary *reqDict =  @{@"userId":[[NSUserDefaults standardUserDefaults] objectForKey:UUID],@"colOrderId":_batchOrderIdStr};
         NSString *urlStr =[NSString stringWithFormat:@"%@%@",SERVER_IP,GETBACHINVESTAWARD];

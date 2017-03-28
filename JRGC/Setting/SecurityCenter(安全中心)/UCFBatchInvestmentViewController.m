@@ -94,7 +94,7 @@ static NSString *thirdStr = @"自动投标授权已经开启";
     if (self.isStep == 1) {
         [self initFirstSectionView];
     } else if (self.isStep == 2) {
-        [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID]} tag:kSXTagBatchNumList owner:self signature:YES];
+        [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID]} tag:kSXTagBatchNumList owner:self signature:YES Type:self.accoutType];
     }
     
     
@@ -150,7 +150,7 @@ static NSString *thirdStr = @"自动投标授权已经开启";
 - (void)showHeTong
 {
     NSString *strParameters = [NSString stringWithFormat:@"userId=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetBatchContractMsg owner:self];
+    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetBatchContractMsg owner:self Type:SelectAccoutDefault];
 }
 - (void)initSecondSectionView
 {
@@ -524,13 +524,13 @@ static NSString *thirdStr = @"自动投标授权已经开启";
 {
     NSString *title = [investmentButton titleForState:UIControlStateNormal];
     if ([title isEqualToString:@"申请开通"]) {
-        [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID]} tag:kSXTagBatchNumList owner:self signature:YES];
+        [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID]} tag:kSXTagBatchNumList owner:self signature:YES Type:self.accoutType];
     } else if ([title isEqualToString:@"提交"]) {
 
         if (selectButton) {
             
             NSDictionary *dict = @{@"investLimitId":[NSString stringWithFormat:@"%ld",selectButton.tag - 1000],@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID]};
-            [[NetworkModule sharedNetworkModule] newPostReq:dict tag:kSXTagSetBatchNum owner:self signature:YES];
+            [[NetworkModule sharedNetworkModule] newPostReq:dict tag:kSXTagSetBatchNum owner:self signature:YES Type:self.accoutType];
 
         } else {
             [MBProgressHUD displayHudError:@"请选择额度"];

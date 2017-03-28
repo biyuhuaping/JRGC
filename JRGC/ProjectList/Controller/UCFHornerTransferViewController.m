@@ -111,7 +111,7 @@
                 UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前债权转让的详情只对投资人开放"];
                 [self.navigationController pushViewController:controller animated:YES];
             } else {
-                [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdTransferDetail owner:self];
+                [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdTransferDetail owner:self Type:SelectAccoutDefault];
             }
         }
     }
@@ -143,7 +143,7 @@
         strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%ld", (long)self.currentPage], @"page", @"20", @"pageSize", @"2", @"type", nil];
     }
     
-    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagHornerTransferList owner:self signature:YES];
+    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagHornerTransferList owner:self signature:YES Type:SelectAccoutTypeHoner];
 }
 
 //开始请求
@@ -265,7 +265,7 @@
             [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             _transferModel = model  ;          //普通表
             NSString *strParameters = [NSString stringWithFormat:@"userId=%@&tranId=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],_transferModel.Id];
-            [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagDealTransferBid owner:self];
+            [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagDealTransferBid owner:self Type:SelectAccoutDefault];
             }
         }
 }

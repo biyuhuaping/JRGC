@@ -27,7 +27,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    baseTitleLabel.text = @"徽商资金流水";
+    if (self.accoutType == SelectAccoutTypeHoner ) {
+         baseTitleLabel.text = @"尊享徽商资金流水";
+    }else{
+         baseTitleLabel.text = @"P2P徽商资金流水";
+    }
     [self addLeftButton];
     _dataArray = [[NSMutableArray alloc]initWithCapacity:0];
     
@@ -58,7 +62,7 @@
 {
     NSString *userId = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
     NSString *pageStr = [NSString stringWithFormat:@"%ld",(long)page];
-    [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":userId, @"page":pageStr, @"pageSize":@"20"} tag:kSXTagGetHSAccountList owner:self signature:YES];
+    [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":userId, @"page":pageStr, @"pageSize":@"20"} tag:kSXTagGetHSAccountList owner:self signature:YES Type:self.accoutType];
 }
 //开始请求
 - (void)beginPost:(kSXTag)tag

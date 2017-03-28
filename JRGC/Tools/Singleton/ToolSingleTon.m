@@ -103,7 +103,7 @@
         if (lastFirstLoginTime == nil || !b) {
             if ([self checkHasCheckIn:uuid]) {
                 [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:FirstLoginTimeEveryday];
-                [[NetworkModule sharedNetworkModule] newPostReq:[NSDictionary dictionaryWithObject:uuid forKey:@"userId"] tag:kSXTagRedBagRainSwitch owner:self signature:YES];
+                [[NetworkModule sharedNetworkModule] newPostReq:[NSDictionary dictionaryWithObject:uuid forKey:@"userId"] tag:kSXTagRedBagRainSwitch owner:self signature:YES Type:SelectAccoutDefault];
             }
         }
     }
@@ -231,7 +231,7 @@
     if (index == 1) {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             NSString *strParameters = [NSString stringWithFormat:@"userId=%@&apptzticket=%@", [[NSUserDefaults standardUserDefaults] objectForKey:UUID],self.apptzticket];
-            [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagSingMenthod owner:self];
+            [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagSingMenthod owner:self Type:SelectAccoutDefault];
         });
     }
 }

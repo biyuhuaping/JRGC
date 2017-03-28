@@ -10,11 +10,13 @@
 #define EnvironmentConfiguration  1// 0测试 1正式 2灰度测试
 
 #define AES_TESTKEY @"awejfij124321aweg@##$!*&+=-13123j24325"
-#define QDCODE      @"ANQU"
+#define QDCODE      @""
 
 #if EnvironmentConfiguration == 1
 
-#define SERVER_IP   @"https://app.9888.cn/"      //正式网
+#define SERVER_IP       @"https://app.9888.cn/"      //正式网
+#define ZX_SERVER_IP    @"https://app.9888.cn/mpappZX/"  // 尊享地址链接
+#define P2P_SERVER_IP   @"https://app.9888.cn/mpappP2P/"
 #define JPUSHKEY    @"d3fa655cc616a27b694fa9cb" //极光推送正式key
 #define NEW_SERVER_IP   @"https://app.9888.cn/"
 

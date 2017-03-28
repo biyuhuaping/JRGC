@@ -583,7 +583,7 @@
         NSDictionary *parametersDict = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"userId",userSatues,@"userSatues",nil];
 //        NSString *strParameters = [NSString stringWithFormat:@"userId=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
 //        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagCashAdvance owner:self];
-        [[NetworkModule sharedNetworkModule] newPostReq:parametersDict tag:kSXTagCashAdvance owner:self signature:YES];
+        [[NetworkModule sharedNetworkModule] newPostReq:parametersDict tag:kSXTagCashAdvance owner:self signature:YES Type:SelectAccoutDefault];
     }
 }
 
@@ -641,7 +641,7 @@
 }
 -(void)requestSignHttpData:(NSString *)apptzticketStr{
     NSString *strParameters = [NSString stringWithFormat:@"userId=%@&apptzticket=%@", [[NSUserDefaults standardUserDefaults] objectForKey:UUID],apptzticketStr];
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagSingMenthod owner:self];
+    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagSingMenthod owner:self Type:SelectAccoutDefault];
 }
 
 // 跳转至个人信息界面
@@ -670,12 +670,12 @@
     }
     if ([[NSUserDefaults standardUserDefaults] objectForKey:UUID]) {
         NSString *strParameters = [NSString stringWithFormat:@"userId=%@", [[NSUserDefaults standardUserDefaults] objectForKey:UUID]];
-        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPersonCenter owner:self];
+        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPersonCenter owner:self Type:SelectAccoutDefault];
     }
 }
 -(void)getSinanApptzticket{
     NSString *parStr = [NSString stringWithFormat:@"userId=%@", [[NSUserDefaults standardUserDefaults] objectForKey:UUID]];
-    [[NetworkModule sharedNetworkModule] postReq:parStr tag:kSXTagSignDaysAndIsSign owner:self];
+    [[NetworkModule sharedNetworkModule] postReq:parStr tag:kSXTagSignDaysAndIsSign owner:self Type:SelectAccoutDefault];
 }
 //开始请求
 - (void)beginPost:(kSXTag)tag
@@ -1190,7 +1190,7 @@
 - (void)submitBtnClicked:(id)sender
 {
     NSString *strParameters = [NSString stringWithFormat:@"userId=%@&cardNum=%@&password=%@", [[NSUserDefaults standardUserDefaults] objectForKey:UUID],_popView.cardNumField.text,_popView.passwordField.text];
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGuaGuaPost owner:self];
+    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGuaGuaPost owner:self Type:SelectAccoutDefault];
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex

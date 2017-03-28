@@ -1,14 +1,3 @@
-//
-//  UCFBankCardInfoViewController.m
-//  JRGC
-//  qinyangyue---已经帮卡
-//  注意事项：
-//  现在只有一种UI界面：
-//  只有一个section（section1:1Row section2:2Row）.
-//  需要通过itemsData对应来控制section个数
-//  Created by 秦 on 16/8/22.
-//  Copyright (c) 2015年 qinwei. All rights reserved.
-//
 
 #import "UCFBankCardInfoViewController.h"
 #import "UCFBankCard.h"
@@ -105,20 +94,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-     baseTitleLabel.text =@"绑定银行卡";
+    if(self.fromSite==1)
+    {
+     baseTitleLabel.text =@"p2p绑定银行卡";
+    }else{
+     baseTitleLabel.text =@"尊享绑定银行卡";
+    }
     [self addLeftButton];
     rowInSecionOne = 0;//***第一section里的Row的个数初始化为0；需要显示tips时就动态+1；不现实就动态-1；
     self.isNeedAlert = NO;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(renewDataForPage) name:MODIBANKZONE_SUCCESSED object:nil];//***修改绑定银行卡成功后返回该页面需要刷新数据
-
-    
     [self.view setBackgroundColor:[UIColor whiteColor]];
     self.tableview.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     self.tableview.backgroundColor = UIColorWithRGB(0xebebee);
-
     [self getBankCardInfoFromNet];
-
-    
 }
 
 
@@ -384,9 +373,11 @@
 - (void)getBankCardInfoFromNet
 {
 
-    NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:UUID],@"userId", nil];
-    [[NetworkModule sharedNetworkModule]newPostReq:strParameters tag:kSXTagBankInfoNew owner:self signature:YES];
+    NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:UUID],@"userId",self.fromSite,@"fromSite",nil];
+    [[NetworkModule sharedNetworkModule]newPostReq:strParameters tag:kSXTagBankInfoNew owner:self signature:YES Type:self.accoutType];
+ 
 }
+
 
 //开始请求
 - (void)beginPost:(kSXTag)tag
@@ -401,21 +392,21 @@
     NSString *data = (NSString *)result;
     //    DBLOG(@"首页获取最新项目列表：%@",data);
     
-//    bankCard		string	@mock=6210***********6236
-//    bankCardStatus		string	1：银行卡有效 0：银行卡失效
-//    bankId		string	@mock=6
-//    bankName		string	@mock=中国邮政储蓄银行
-//    bankzone		string	@mock=邮政储蓄银行
-//    cjflag		string	@mock=1
-//    isCompanyAgent		string	true: 是机构 false :非机构
-//    isUpdateBank		string	@mock=1
-//    isUpdateBankDeposit		string	@mock=0
-//    openStatus1：未开户 2：已开户 3：已邦卡 4：已设置交易密码 5：特殊用
-//    realName		string	@mock=李奇迹
-//    status		string	@mock=1
-//    statusdes		string	@mock=充值查询银行卡信息成功
-//    tipsDes		string	提示信息
-//    url		string	@mock=http://10.10.100.42:8080/mpapp/staticRe/images/bankicons/6.png
+    //    bankCard		string	@mock=6210***********6236
+    //    bankCardStatus		string	1：银行卡有效 0：银行卡失效
+    //    bankId		string	@mock=6
+    //    bankName		string	@mock=中国邮政储蓄银行
+    //    bankzone		string	@mock=邮政储蓄银行
+    //    cjflag		string	@mock=1
+    //    isCompanyAgent		string	true: 是机构 false :非机构
+    //    isUpdateBank		string	@mock=1
+    //    isUpdateBankDeposit		string	@mock=0
+    //    openStatus1：未开户 2：已开户 3：已邦卡 4：已设置交易密码 5：特殊用
+    //    realName		string	@mock=李奇迹
+    //    status		string	@mock=1
+    //    statusdes		string	@mock=充值查询银行卡信息成功
+    //    tipsDes		string	提示信息
+    //    url		string	@mock=http://10.10.100.42:8080/mpapp/staticRe/images/bankicons/6.png
     
     
     if (tag.intValue == kSXTagBankInfoNew) {
@@ -451,7 +442,7 @@
         [MBProgressHUD displayHudError:err.userInfo[@"NSLocalizedDescription"]];
     }
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-//    self.settingBaseBgView.hidden = YES;
+    //    self.settingBaseBgView.hidden = YES;
 }
 #pragma mark -方法- 数据解析
 -(void)dataForDecode:(NSDictionary*)_dictotal
@@ -494,14 +485,14 @@
             [self tipsShow];
             if(_isCompanyAgent==NO)//***非机构-支行信息不显示true: 是机构 false :非机构
             {
-//                if([[UCFToolsMehod isNullOrNilWithString:dic[@"bankzone"]]isEqualToString:@""])
-//                {
-//                    setting2.title = @"开户支行";
-//                }else{
-//                    setting2.title = [UCFToolsMehod isNullOrNilWithString:dic[@"bankzone"]];
-//                }
-//                setting2.isSelect = NO;
-//                [group2.items addObject:setting2];
+                //                if([[UCFToolsMehod isNullOrNilWithString:dic[@"bankzone"]]isEqualToString:@""])
+                //                {
+                //                    setting2.title = @"开户支行";
+                //                }else{
+                //                    setting2.title = [UCFToolsMehod isNullOrNilWithString:dic[@"bankzone"]];
+                //                }
+                //                setting2.isSelect = NO;
+                //                [group2.items addObject:setting2];
             }
         }
             break;
@@ -531,12 +522,12 @@
                 {
                     self.isNeedAlert = NO;
                 }
-
-//                if (_isUpdateBank == 1) {//***是否修改绑定银行卡信息
-//                    self.bankZone = @"修改绑定银行卡";
-//                    setting.isSelect = YES;
-//                    [group2.items addObject:setting];
-//                }
+                
+                //                if (_isUpdateBank == 1) {//***是否修改绑定银行卡信息
+                //                    self.bankZone = @"修改绑定银行卡";
+                //                    setting.isSelect = YES;
+                //                    [group2.items addObject:setting];
+                //                }
             }
         }
             break;
@@ -560,64 +551,64 @@
                     setting2.isSelect = YES;
                     [group2.items addObject:setting2];
                 }
-             }else{
-//                if (_isUpdateBank == 1) {//***是否修改绑定银行卡信息
-//                    self.bankZone = @"修改绑定银行卡";
-//                    setting.isSelect = YES;
-//                    [group2.items addObject:setting];
-//                }
-                 if(self.isNeedAlert == YES)
-                 {
-                     self.isNeedAlert = NO;
-                 }
-
-             }
+            }else{
+                //                if (_isUpdateBank == 1) {//***是否修改绑定银行卡信息
+                //                    self.bankZone = @"修改绑定银行卡";
+                //                    setting.isSelect = YES;
+                //                    [group2.items addObject:setting];
+                //                }
+                if(self.isNeedAlert == YES)
+                {
+                    self.isNeedAlert = NO;
+                }
+                
+            }
             
         }
             break;
         case 5:
         {
-//            setting.title = @"修改绑定银行卡";
-//            if (_isUpdateBank == 1) {//***是否修改绑定银行卡信息
-//                setting.isSelect = YES;
-//            }else{
-//                setting.isSelect = NO;
-//            }
-//            if(_isCompanyAgent==NO)//***非机构-支行信息不显示true: 是机构 false :非机构
-//            {
-//                if([[UCFToolsMehod isNullOrNilWithString:dic[@"bankzone"]]isEqualToString:@""])
-//                {
-//                    setting2.title = @"开户支行";
-//                }else{
-//                    setting2.title = [UCFToolsMehod isNullOrNilWithString:dic[@"bankzone"]];
-//                }
-//                
-//                if (_isUpdateBankDeposit == 1) {//***是否可以修改开户行信息
-//                    setting2.isSelect = YES;
-//                }else{
-//                    setting2.isSelect = NO;
-//                }
-//                [group2.items addObject:setting2];
-//            }else{
-//                
-//            }
-//            [group2.items addObject:setting];
-//            //***自定义弹出警告框
-//            alert = [[MjAlertView alloc] initCustomAlertViewWithBlock:^(id blockContent) {
-//                UIView*view = (UIView *)blockContent;
-//                
-//                view.frame = CGRectMake(15,15,ScreenWidth-30,ScreenHeight-30);
-//                view.backgroundColor = [UIColor whiteColor];
-//                alertViewCS * viewal = [[[NSBundle mainBundle] loadNibNamed:@"alertViewCS" owner:self options:nil] lastObject];
-//                viewal.frame = CGRectMake(0,0,view.frame.size.width,view.frame.size.height);
-//                
-//                [view addSubview:viewal];
-//                
-//                [viewal.but_closeAlert addTarget:self action:@selector(chosenBranchBank:) forControlEvents:UIControlEventTouchUpInside];
-//                
-//            }];
-//            [alert show];
-//            
+            //            setting.title = @"修改绑定银行卡";
+            //            if (_isUpdateBank == 1) {//***是否修改绑定银行卡信息
+            //                setting.isSelect = YES;
+            //            }else{
+            //                setting.isSelect = NO;
+            //            }
+            //            if(_isCompanyAgent==NO)//***非机构-支行信息不显示true: 是机构 false :非机构
+            //            {
+            //                if([[UCFToolsMehod isNullOrNilWithString:dic[@"bankzone"]]isEqualToString:@""])
+            //                {
+            //                    setting2.title = @"开户支行";
+            //                }else{
+            //                    setting2.title = [UCFToolsMehod isNullOrNilWithString:dic[@"bankzone"]];
+            //                }
+            //
+            //                if (_isUpdateBankDeposit == 1) {//***是否可以修改开户行信息
+            //                    setting2.isSelect = YES;
+            //                }else{
+            //                    setting2.isSelect = NO;
+            //                }
+            //                [group2.items addObject:setting2];
+            //            }else{
+            //
+            //            }
+            //            [group2.items addObject:setting];
+            //            //***自定义弹出警告框
+            //            alert = [[MjAlertView alloc] initCustomAlertViewWithBlock:^(id blockContent) {
+            //                UIView*view = (UIView *)blockContent;
+            //
+            //                view.frame = CGRectMake(15,15,ScreenWidth-30,ScreenHeight-30);
+            //                view.backgroundColor = [UIColor whiteColor];
+            //                alertViewCS * viewal = [[[NSBundle mainBundle] loadNibNamed:@"alertViewCS" owner:self options:nil] lastObject];
+            //                viewal.frame = CGRectMake(0,0,view.frame.size.width,view.frame.size.height);
+            //
+            //                [view addSubview:viewal];
+            //
+            //                [viewal.but_closeAlert addTarget:self action:@selector(chosenBranchBank:) forControlEvents:UIControlEventTouchUpInside];
+            //
+            //            }];
+            //            [alert show];
+            //
         }
             break;
             
@@ -685,7 +676,9 @@
     
     NSDictionary * dic = _dicBranchBank;
     NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys: [[NSUserDefaults standardUserDefaults] objectForKey:UUID],@"userId",[dic objectForKey:@"bankNo"] ,@"relevBankCard",nil];
-    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagChosenBranchBank owner:self signature:YES];
+    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagChosenBranchBank owner:self signature:YES Type:self.accoutType];
+   
+
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 }
 #pragma mark -方法-修改绑定银行卡成功后返回该页面刷新数据同时提示修改开户支行
@@ -716,7 +709,7 @@
 #pragma mark -方法-动态计算文字高度
 -(int)calculatLineOfWord:(NSString*)_str
 {
-   //***因为按照设计要求table超出边界部分就换行，但如果2行的长度都无法完全显示则需要省略号。可如果按该方法算行高会存在当临界值加一个字时候会不换行而成省略号，次情况不符合设计要求。故改用计算字符串长度更加精准。
+    //***因为按照设计要求table超出边界部分就换行，但如果2行的长度都无法完全显示则需要省略号。可如果按该方法算行高会存在当临界值加一个字时候会不换行而成省略号，次情况不符合设计要求。故改用计算字符串长度更加精准。
     
     NSString *machineType = [Common machineName];
     if ([machineType isEqualToString:@"4"] || [machineType isEqualToString:@"5"]) {//***19个字
@@ -741,5 +734,6 @@
     
     return 1;
 }
+
 
 @end

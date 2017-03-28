@@ -954,7 +954,7 @@
     NSData *imageData= [bestFaceData copy];
     NSString *imagestr=[(NSString*)[imageData base64EncodedString] stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet whitespaceCharacterSet]];
     NSString *strParameters = [NSString stringWithFormat:@"loginName=%@&photoStream=%@", [[NSUserDefaults standardUserDefaults] objectForKey:LOGINNAME],imagestr];
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagFaceInfoCollection owner:self];
+    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagFaceInfoCollection owner:self Type:SelectAccoutDefault];
 }
 #pragma mark 网络请求-人脸登陆
 - (void)getDataRequsetLandIn{
@@ -962,7 +962,7 @@
     NSString *imagestr=[(NSString*)[bestFaceData base64EncodedString] stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet whitespaceCharacterSet]];
 
     NSString *strParameters = [NSString stringWithFormat:@"loginName=%@&photoStream=%@&remotIp=%@", self.ForwardPageuserName,imagestr,@""];
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagFaceInfoLanding owner:self];
+    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagFaceInfoLanding owner:self Type:SelectAccoutDefault];
 }
 //请求成功及结果
 - (void)endPost:(id)result tag:(NSNumber *)tag{
