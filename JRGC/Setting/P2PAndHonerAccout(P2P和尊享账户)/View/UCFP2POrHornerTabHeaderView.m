@@ -69,9 +69,9 @@
         }
         return;
     }
-    cashBalanceStr = [NSString stringWithFormat:@"¥%@",[self.dataDict objectSafeForKey:@"cashBalance"]];//可用金额
-    interestsStr = [NSString stringWithFormat:@"¥%@",[self.dataDict  objectSafeForKey:@"interests"]];//累计收益
-    totalStr = [NSString stringWithFormat:@"¥%@",[self.dataDict  objectSafeForKey:@"total"]];//累计收益
+    cashBalanceStr = [NSString stringWithFormat:@"¥%.2lf",[[self.dataDict objectSafeForKey:@"cashBalance"] doubleValue]];//可用金额
+    interestsStr = [NSString stringWithFormat:@"¥%.2f",[[self.dataDict  objectSafeForKey:@"interests"] doubleValue]];//累计收益
+    totalStr = [NSString stringWithFormat:@"¥%.2f",[[self.dataDict  objectSafeForKey:@"total"]doubleValue]];//累计收益
     if (!_isShowOrHideAccoutMoney){ //显示账户金额
         [self.accountVisibleBtn setImage:[UIImage imageNamed:@"account_invisible"] forState:UIControlStateNormal];
         self.accumulatedIncomeLab.text =  [self checkNullStr:interestsStr];//累计收益
@@ -90,7 +90,7 @@
     if ([nullStr isKindOfClass:[NSNull class]]|| nullStr==nil || [nullStr isEqualToString:@""] || [nullStr floatValue] == 0) {
         return @"¥0.00";
     }else{
-        return nullStr;
+        return [NSString stringWithFormat:@"¥%@",nullStr];
     }
 }
 @end

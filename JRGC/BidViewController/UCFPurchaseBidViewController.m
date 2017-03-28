@@ -797,7 +797,7 @@
         if (indexPath.row == 0) {
             return 109.0f;
         } else if (indexPath.row == 1) {
-            float height = 200.5f+36.0f+[self getSectionHight];//36为倒计时view的高度
+            float height = 201.0f+36.0f+[self getSectionHight];//36为倒计时view的高度
             if (isCompanyAgent) { //机构用户需要把工豆隐藏
                 height = height - 44.0f;
             }
@@ -1532,7 +1532,7 @@
     NSString *strParameters = nil;
     NSString *projectId = [[_dataDict objectForKey:@"data"] objectForKey:@"id"];
     strParameters = [NSString stringWithFormat:@"userId=%@&id=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],projectId];//101943
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDealBid owner:self Type:SelectAccoutDefault];
+    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDealBid owner:self Type:self.accoutType];
 }
 
 - (void)dealloc
