@@ -36,9 +36,6 @@
     NSString *data = (NSString *)result;
     NSMutableDictionary *dic = [data objectFromJSONString];
     DBLOG(@"UCFSettingViewController : %@",dic);
-    NSString *rstcode = dic[@"status"];
-    NSString *rsttext = dic[@"statusdes"];
-    int isSucess = [rstcode intValue];
     
     if (tag.intValue == kSXTagPersonCenter) {
         self.completionHandler(nil, dic);

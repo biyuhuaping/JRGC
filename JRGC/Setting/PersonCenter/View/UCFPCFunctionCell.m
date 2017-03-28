@@ -9,6 +9,7 @@
 #import "UCFPCFunctionCell.h"
 
 @interface UCFPCFunctionCell ()
+@property (weak, nonatomic) IBOutlet UIImageView *itemIconImage;
 @property (weak, nonatomic) IBOutlet UILabel *itemTitleLabel;
 
 @end
@@ -26,6 +27,7 @@
     _presenter = presenter;
     
     self.itemTitleLabel.text = presenter.itemTitle;
+    self.itemIconImage.image = [UIImage imageNamed:presenter.itemIcon];
     
 }
 
