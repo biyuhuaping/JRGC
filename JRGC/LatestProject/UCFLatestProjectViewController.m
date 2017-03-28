@@ -584,7 +584,7 @@
         case 2://已开户 --->>>老用户(白名单)开户
         case 3://已绑卡-->>>去设置交易密码页面
         {
-            UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:[UserInfoSingle sharedManager].openStatus];
+            UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:3];
             vc.site = @"1";//等于1 还是 2 由具体模块定
             [self.navigationController pushViewController:vc animated:YES];
         }

@@ -74,6 +74,7 @@
 		4A809CCF1B40F4DF00164EE5 /* SubInvestmentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A809CCE1B40F4DF00164EE5 /* SubInvestmentCell.m */; };
 		4A809CD11B40F7A200164EE5 /* SubInvestmentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A809CD01B40F7A200164EE5 /* SubInvestmentCell.xib */; };
 		4A837B7E1D0E5B70007DCE69 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A837B7D1D0E5B70007DCE69 /* JavaScriptCore.framework */; };
+		4A87CBAB1E8A48CA00D21AC2 /* HSHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A87CBAA1E8A48CA00D21AC2 /* HSHelper.m */; };
 		4A8884B51BFA039F001A6909 /* BeansFamilyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A8884B41BFA039F001A6909 /* BeansFamilyViewController.m */; };
 		4A8D5F741B0C1DCF0053F045 /* RechargeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A8D5F731B0C1DCF0053F045 /* RechargeListViewController.m */; };
 		4A8E10001B9FE09D00ABBD4F /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A8E0FFF1B9FE09D00ABBD4F /* LocalAuthentication.framework */; };
@@ -854,6 +855,8 @@
 		4A809CCE1B40F4DF00164EE5 /* SubInvestmentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubInvestmentCell.m; sourceTree = "<group>"; };
 		4A809CD01B40F7A200164EE5 /* SubInvestmentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubInvestmentCell.xib; sourceTree = "<group>"; };
 		4A837B7D1D0E5B70007DCE69 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		4A87CBA91E8A48CA00D21AC2 /* HSHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSHelper.h; sourceTree = "<group>"; };
+		4A87CBAA1E8A48CA00D21AC2 /* HSHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSHelper.m; sourceTree = "<group>"; };
 		4A8884B31BFA039F001A6909 /* BeansFamilyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeansFamilyViewController.h; sourceTree = "<group>"; };
 		4A8884B41BFA039F001A6909 /* BeansFamilyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BeansFamilyViewController.m; sourceTree = "<group>"; };
 		4A8D5F721B0C1DCF0053F045 /* RechargeListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RechargeListViewController.h; sourceTree = "<group>"; };
@@ -2230,6 +2233,15 @@
 			);
 			name = CJLabel;
 			path = ThirdLibs/CJLabel;
+			sourceTree = "<group>";
+		};
+		4A87CBA81E8A486000D21AC2 /* HSHelper */ = {
+			isa = PBXGroup;
+			children = (
+				4A87CBA91E8A48CA00D21AC2 /* HSHelper.h */,
+				4A87CBAA1E8A48CA00D21AC2 /* HSHelper.m */,
+			);
+			path = HSHelper;
 			sourceTree = "<group>";
 		};
 		4A9016641AFB12FE0049A9E0 /* Masonry */ = {
@@ -4092,6 +4104,7 @@
 		835B887E1E821F5700C8F0AB /* P2PAndHonerAccout(P2P和尊享账户) */ = {
 			isa = PBXGroup;
 			children = (
+				4A87CBA81E8A486000D21AC2 /* HSHelper */,
 				835B887F1E821F5700C8F0AB /* Controller */,
 				835B88801E821F5700C8F0AB /* Model */,
 				835B88811E821F5700C8F0AB /* View */,
@@ -5774,6 +5787,7 @@
 				74931A351B1326FE00143424 /* OHASBasicMarkupParser.m in Sources */,
 				84FFA5301C7EAA9200ACD835 /* UIScrollView+TouchScrollView.m in Sources */,
 				740DAEC11E56E2D100CD7C8F /* UCFBatchProjectController.m in Sources */,
+				4A87CBAB1E8A48CA00D21AC2 /* HSHelper.m in Sources */,
 				833A6EB71E554B8700C8A494 /* UCFCollectionDetailCell.m in Sources */,
 				7BCE02261AC902FD0084C15C /* UCFToolsMehod.m in Sources */,
 				7BCE01FB1AC8FC260084C15C /* ASIInputStream.m in Sources */,
