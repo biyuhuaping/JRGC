@@ -42,6 +42,7 @@
 #import "UCFCollectionDetailViewController.h" //集合详情
 #import "MjAlertView.h"
 #import "NSDate+IsBelongToToday.h"
+#import "HSHelper.h"
 @interface UCFLatestProjectViewController ()<InvestmentCellDelegate,FourOFourViewDelegate,CycleViewDelegate,PromptViewDelegate,homeButtonPressedCellDelegate, UITableViewDataSource, UITableViewDelegate, UCFCollectionBidCellDelegate,MjAlertViewDelegate,PraiseAlertDelegate>
 {
     UIView *_clickView;
@@ -1019,18 +1020,8 @@
         [self beginShowLoading];
     } else if (alertView.tag == 8000) {
         if (buttonIndex == 1) {
-            switch ([UserInfoSingle sharedManager].openStatus)
-            {// ***hqy添加
-                case 1://未开户-->>>新用户开户
-                case 2://已开户 --->>>老用户(白名单)开户
-                case 3://已绑卡-->>>去设置交易密码页面
-                {
-                    UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:[UserInfoSingle sharedManager].openStatus];
-                    vc.site = @"1";//等于1 还是 2 由具体模块定
-                    [self.navigationController pushViewController:vc animated:YES];
-                }
-                    break;
-            }
+            HSHelper *helper = [HSHelper new];
+            [helper pushOpenHSType:SelectAccoutTypeP2P Step:[UserInfoSingle sharedManager].openStatus nav:self.navigationController];
         }
     }else if (alertView.tag == 9000) {
         if(buttonIndex == 1){ //测试
