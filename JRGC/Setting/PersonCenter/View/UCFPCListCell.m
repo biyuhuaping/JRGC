@@ -11,6 +11,8 @@
 @interface UCFPCListCell ()
 @property (weak, nonatomic) IBOutlet UILabel *itemTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *describeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *itemSubT1Label;
+@property (weak, nonatomic) IBOutlet UILabel *itemSubT2Label;
 
 @end
 
@@ -29,11 +31,20 @@
     
     self.itemTitleLabel.text = presenter.itemTitle;
     self.describeLabel.text = presenter.itemDescribe;
-//    presenter.view = self;
-//    self.titleLabel.text = presenter.blogTitleText;
-//    self.summaryLabel.text = presenter.blogSummaryText;
-//    self.likeButton.selected = presenter.isLiked;
-//    [self.likeButton setTitle:presenter.blogLikeCountText forState:UIControlStateNormal];
-//    [self.shareButton setTitle:presenter.blogShareCountText forState:UIControlStateNormal];
+    self.itemSubT1Label.text = presenter.itemSubtitle;
 }
+
+- (void)setIndexPath:(NSIndexPath *)indexPath
+{
+    _indexPath = indexPath;
+    if (indexPath.row == 0) {
+        self.itemSubT2Label.hidden = NO;
+        self.itemSubT2Label.text = _presenter.itemSubtitle;
+        self.itemSubT1Label.text = @"用户余额";
+    }
+    else if (indexPath.row == 1) {
+        self.itemSubT2Label.hidden = YES;
+    }
+}
+
 @end

@@ -11,6 +11,7 @@
 @interface UCFPCFunctionCell ()
 @property (weak, nonatomic) IBOutlet UIImageView *itemIconImage;
 @property (weak, nonatomic) IBOutlet UILabel *itemTitleLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *itemIconImageWidth;
 
 @end
 
@@ -29,6 +30,16 @@
     self.itemTitleLabel.text = presenter.itemTitle;
     self.itemIconImage.image = [UIImage imageNamed:presenter.itemIcon];
     
+}
+
+- (void)setIndexPath:(NSIndexPath *)indexPath
+{
+    _indexPath = indexPath;
+    if (indexPath.row == 0) {
+        self.itemIconImageWidth.constant = 0;
+        self.itemTitleLabel.font = [UIFont systemFontOfSize:14];
+        self.itemTitleLabel.textColor = UIColorWithRGB(0x333333);
+    }
 }
 
 @end
