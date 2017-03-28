@@ -10,6 +10,8 @@
 @protocol homeButtonPressedCellDelegate <NSObject>
 
 - (void)homeButtonPressed:(UIButton *)button withCelltypeSellWay:(NSString*)strSellWay;
+- (void)homeButtonPressedP2PButton:(UIButton *)button;
+- (void)homeButtonPressedHornorButton:(UIButton *)button;
 @end
 
 @interface UCFLatesProjectTableViewCell : UITableViewCell

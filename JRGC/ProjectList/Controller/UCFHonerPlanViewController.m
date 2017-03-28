@@ -45,10 +45,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+
     baseTitleLabel.text = @"工场尊享";
     [self addLeftButton];
     [self.view bringSubviewToFront:self.loadingView];
     [self performSelector:@selector(removeLoadingView) withObject:nil afterDelay:3];
+
     
     self.tableview.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableview.backgroundColor = UIColorWithRGB(0xebebee);
