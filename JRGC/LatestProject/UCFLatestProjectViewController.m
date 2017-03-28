@@ -39,6 +39,9 @@
 #import "UCFProjectListController.h"        //项目列表
 #import "RiskAssessmentViewController.h"    //风险评估
 
+#import "UCFP2PViewController.h"
+#import "UCFHonerPlanViewController.h"
+
 #import "UCFCollectionDetailViewController.h" //集合详情
 #import "MjAlertView.h"
 #import "NSDate+IsBelongToToday.h"
@@ -396,12 +399,16 @@
 
 - (void)homeButtonPressedP2PButton:(UIButton *)button
 {
-    
+    UCFP2PViewController *p2p = [[UCFP2PViewController alloc] initWithNibName:@"UCFP2PViewController" bundle:nil];
+    p2p.baseTitleText = @"工场P2P";
+    [self.navigationController pushViewController:p2p animated:YES];
 }
 
 - (void)homeButtonPressedHornorButton:(UIButton *)button
 {
-    
+    UCFHonerPlanViewController *horner = [[UCFHonerPlanViewController alloc] initWithNibName:@"UCFHonerPlanViewController" bundle:nil];
+    horner.baseTitleText = @"工场尊享";
+    [self.navigationController pushViewController:horner animated:YES];
 }
 
 - (void)investBtnClicked:(UIButton *)button{
