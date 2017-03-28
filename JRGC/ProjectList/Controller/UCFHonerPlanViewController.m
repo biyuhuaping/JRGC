@@ -44,6 +44,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self addLeftButton];
+    
     self.tableview.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableview.backgroundColor = UIColorWithRGB(0xebebee);
     self.tableview.contentInset = UIEdgeInsetsMake(5, 0, 5, 0);
