@@ -32,7 +32,7 @@
 #import "UCFRegisterStepOneViewController.h"
 #import "MJRefresh.h"
 #import "AuxiliaryFunc.h"
-
+#import "HSHelper.h"
 @interface UCFPersonCenterController () <UCFPCListViewControllerCallBack,LoginShadowDelegate>
 
 @property (nonatomic, strong) UCFUserInfoController *userInfoVC;
@@ -178,22 +178,22 @@
 {
     NSString *title = pcListModel.title;
     if ([title isEqualToString:@"P2P账户"]) {
-        UCFP2POrHonerAccoutViewController *subVC = [[UCFP2POrHonerAccoutViewController alloc] initWithNibName:@"UCFP2POrHonerAccoutViewController" bundle:nil];
-        subVC.accoutType =  SelectAccoutTypeP2P;
-        [self.navigationController pushViewController:subVC animated:YES];
+        
+        if ([self checkIDAAndBankBlindState:SelectAccoutTypeP2P]) {
+            UCFP2POrHonerAccoutViewController *subVC = [[UCFP2POrHonerAccoutViewController alloc] initWithNibName:@"UCFP2POrHonerAccoutViewController" bundle:nil];
+            subVC.accoutType =  SelectAccoutTypeP2P;
+            [self.navigationController pushViewController:subVC animated:YES];
+        }
     }
     else if ([title isEqualToString:@"尊享账户"]) {
-        /*
-         UN_OPEN:1,未开户；OPEN：2,开户；BIND_CARD:3,已绑定银行卡；HAS_PWD:4,设置交易密码；
-         */
-//        if([_dataDict objectSafeForKey:@"enjoyOpenStatus"]){ //尊享开户状态判断
-//        
-//            
-//            return;
-//        }
-        UCFP2POrHonerAccoutViewController *subVC = [[UCFP2POrHonerAccoutViewController alloc] initWithNibName:@"UCFP2POrHonerAccoutViewController" bundle:nil];
-        subVC.accoutType =  SelectAccoutTypeHoner;
-        [self.navigationController pushViewController:subVC animated:YES];
+        HSHelper *helper = [HSHelper new];
+        if ([self checkIDAAndBankBlindState:SelectAccoutTypeHoner]) {
+            UCFP2POrHonerAccoutViewController *subVC = [[UCFP2POrHonerAccoutViewController alloc] initWithNibName:@"UCFP2POrHonerAccoutViewController" bundle:nil];
+            subVC.accoutType =  SelectAccoutTypeHoner;
+            [self.navigationController pushViewController:subVC animated:YES];
+        } else {
+            [helper pushOpenHSType:SelectAccoutTypeP2P Step:[_personModel.enjoyOpenStatus integerValue] nav:self.navigationController];
+        }
     }
     else if ([title isEqualToString:@"会员等级"]) {
         UCFWebViewJavascriptBridgeLevel *subVC = [[UCFWebViewJavascriptBridgeLevel alloc] initWithNibName:@"UCFWebViewJavascriptBridgeLevel" bundle:nil];
@@ -227,7 +227,24 @@
 }
 
 #pragma mark - 无奈的代码
-
+- (BOOL)checkIDAAndBankBlindState:(SelectAccoutType)type
+{
+    NSUInteger openStatus = (type == SelectAccoutTypeP2P ? [_personModel.p2pOpenStatus integerValue] : [_personModel.enjoyOpenStatus integerValue]);
+    __weak typeof(self) weakSelf = self;
+    if (openStatus == 1 || openStatus == 2) {
+       NSString *message = (type == SelectAccoutTypeP2P ? @"请先开通P2P徽商存管账户" : @"请先开通尊享徽商存管账户");
+       NSInteger step = (type == SelectAccoutTypeP2P ? [_personModel.p2pOpenStatus integerValue] : [_personModel.enjoyOpenStatus integerValue]);
+        BlockUIAlertView *alert = [[BlockUIAlertView alloc] initWithTitle:@"提示" message:message cancelButtonTitle:@"确定" clickButton:^(NSInteger index){
+            if (index == 0) {
+                HSHelper *helper = [HSHelper new];
+                [helper pushOpenHSType:type Step:step nav:weakSelf.navigationController];
+            }
+        } otherButtonTitles:@"取消"];
+        [alert show];
+        return NO;
+    }
+    return YES;
+}
 //未登录状态添加阴影和登录按钮
 - (void)addShadowViewAndLoginBtn
 {
