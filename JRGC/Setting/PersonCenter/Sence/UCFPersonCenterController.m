@@ -9,6 +9,7 @@
 #import "UCFPersonCenterController.h"
 
 #import "UCFPCListModel.h"
+#import "UCFPersonCenterModel.h"
 
 #import "UCFLoginShaowView.h"
 
@@ -33,12 +34,10 @@
 #import "AuxiliaryFunc.h"
 
 @interface UCFPersonCenterController () <UCFPCListViewControllerCallBack,LoginShadowDelegate>
-{
-    NSDictionary *_dataDict;
-}
 
 @property (nonatomic, strong) UCFUserInfoController *userInfoVC;
 @property (strong, nonatomic) UCFPCListViewController *pcListVC;
+@property (strong, nonatomic)  UCFPersonCenterModel *personModel;
 @end
 
 @implementation UCFPersonCenterController
@@ -50,7 +49,7 @@
     
     [self addUI];
     
-//    [self fetchData];
+    [self fetchData];
     
     [_pcListVC.tableView
       addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(fetchData)];
@@ -60,11 +59,11 @@
 {
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = YES;
-//    if ([[NSUserDefaults standardUserDefaults] objectForKey:UUID]) {
-//        [self hideShadowView];
-//    } else {
-//        [self addShadowViewAndLoginBtn];
-//    }
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:UUID]) {
+        [self hideShadowView];
+    } else {
+        [self addShadowViewAndLoginBtn];
+    }
 }
 
 #pragma mark - Utils
@@ -148,23 +147,28 @@
      };
      */
     
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];;//上层交互逻辑
+//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];;//上层交互逻辑
     
     __weak typeof(self) weakSelf = self;
     [self.pcListVC.presenter fetchDataWithCompletionHandler:^(NSError *error, id result) {
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];;//上层交互逻辑
-        
-        if (weakSelf.pcListVC.tableView.header.isRefreshing) {
-               [weakSelf.pcListVC.tableView.header endRefreshing];
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];//上层交互逻辑
+        if ([result isKindOfClass:[UCFPersonCenterModel class]]) {
+            weakSelf.personModel = result;
         }
-        BOOL rstcode = [result[@"ret"] boolValue];
-        NSString *messageStr = result[@"message"];
-        if (rstcode) { //返回成功
-            _dataDict = (NSDictionary *)result[@"data"];
-
-        }else{
-             [AuxiliaryFunc showToastMessage:messageStr withView:self.view];
+        else if ([result isKindOfClass:[NSString class]]) {
+            [AuxiliaryFunc showToastMessage:result withView:self.view];
         }
+//        if (weakSelf.pcListVC.tableView.header.isRefreshing) {
+//               [weakSelf.pcListVC.tableView.header endRefreshing];
+//        }
+//        BOOL rstcode = [result[@"ret"] boolValue];
+//        NSString *messageStr = result[@"message"];
+//        if (rstcode) { //返回成功
+//            _dataDict = (NSDictionary *)result[@"data"];
+//
+//        }else{
+//             [AuxiliaryFunc showToastMessage:messageStr withView:self.view];
+//        }
     }];
 }
 
@@ -182,11 +186,11 @@
         /*
          UN_OPEN:1,未开户；OPEN：2,开户；BIND_CARD:3,已绑定银行卡；HAS_PWD:4,设置交易密码；
          */
-        if([_dataDict objectSafeForKey:@"enjoyOpenStatus"]){ //尊享开户状态判断
-            
-            
-            return;
-        }
+//        if([_dataDict objectSafeForKey:@"enjoyOpenStatus"]){ //尊享开户状态判断
+//        
+//            
+//            return;
+//        }
         UCFP2POrHonerAccoutViewController *subVC = [[UCFP2POrHonerAccoutViewController alloc] initWithNibName:@"UCFP2POrHonerAccoutViewController" bundle:nil];
         subVC.accoutType =  SelectAccoutTypeHoner;
         [self.navigationController pushViewController:subVC animated:YES];
