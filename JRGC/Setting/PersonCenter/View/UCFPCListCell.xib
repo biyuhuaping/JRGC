@@ -36,28 +36,43 @@
                         <color key="textColor" red="0.99215686274509807" green="0.30196078431372547" blue="0.29803921568627451" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EC5-Pc-XO9">
-                        <rect key="frame" x="164" y="22" width="140" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EC5-Pc-XO9">
+                        <rect key="frame" x="261" y="25.5" width="31" height="14.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="list_icon_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="D6d-I2-dkD">
+                        <rect key="frame" x="297" y="25" width="8" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="9Nj-d8-EW6"/>
+                            <constraint firstAttribute="width" constant="8" id="O5F-nz-1Eu"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="9wo-X3-Ddb" firstAttribute="leading" secondItem="tj8-Ai-mJI" secondAttribute="trailing" id="1uI-sU-kYb"/>
+                    <constraint firstItem="EC5-Pc-XO9" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="49j-yq-QGf"/>
                     <constraint firstAttribute="bottom" secondItem="tj8-Ai-mJI" secondAttribute="bottom" constant="15" id="BAg-LV-8aK"/>
                     <constraint firstItem="tj8-Ai-mJI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="FG7-xh-OS1"/>
+                    <constraint firstItem="D6d-I2-dkD" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="L9d-fc-UnX"/>
+                    <constraint firstItem="D6d-I2-dkD" firstAttribute="leading" secondItem="EC5-Pc-XO9" secondAttribute="trailing" constant="5" id="cfF-rI-Dzh"/>
                     <constraint firstItem="q7u-r4-wKn" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="hRj-WS-mZ7"/>
                     <constraint firstItem="q7u-r4-wKn" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="pAL-JV-XYk"/>
                     <constraint firstItem="9wo-X3-Ddb" firstAttribute="centerY" secondItem="tj8-Ai-mJI" secondAttribute="centerY" id="rZG-Gl-e7v"/>
+                    <constraint firstAttribute="trailing" secondItem="D6d-I2-dkD" secondAttribute="trailing" constant="15" id="usn-Eu-SBO"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="describeLabel" destination="EC5-Pc-XO9" id="aW1-dv-lEM"/>
+                <outlet property="itemSubT1Label" destination="tj8-Ai-mJI" id="R5N-UW-yIy"/>
+                <outlet property="itemSubT2Label" destination="9wo-X3-Ddb" id="fQb-ki-DI8"/>
                 <outlet property="itemTitleLabel" destination="q7u-r4-wKn" id="3mH-JF-a2C"/>
             </connections>
             <point key="canvasLocation" x="33" y="85.5"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="list_icon_arrow" width="8" height="13"/>
+    </resources>
 </document>
