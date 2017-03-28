@@ -9,6 +9,6 @@
 #import "UCFBaseViewController.h"
 
 @interface UCFBankCardInfoViewController : UCFBaseViewController
-@property  int fromSite;//***设置导航title 1.p2p绑定银行卡 2.尊享绑定银行卡
+
 
 @end
