@@ -309,7 +309,7 @@
             }
         }
     }
-    
+    [[NSUserDefaults standardUserDefaults]setBool:NO forKey:@"isShowLabels"];
     if (_type == PROJECTDETAILTYPEBONDSRRANSFER){
         UIView *markBg = [[UIView alloc] initWithFrame:CGRectMake(0, 0 + [Common calculateNewSizeBaseMachine:HeadBkHeight], ScreenWidth, 10)];
         [self addSubview:markBg];
@@ -321,9 +321,11 @@
             bottomViewYPos = 10;
         } else {
             bottomViewYPos = 30;
+          [[NSUserDefaults standardUserDefaults]setBool:YES forKey:@"isShowLabels"];
            [self drawMarkView];
         }
     }
+    [[NSUserDefaults standardUserDefaults]synchronize];
     
     NSString *fixUpdate = [[_dic objectForKey:@"prdClaims"]objectForKey:@"fixedDate"];
     NSString *guaranteeCompanyNameStr = [[_dic objectForKey:@"prdClaims"] objectSafeForKey:@"guaranteeCompanyName"];

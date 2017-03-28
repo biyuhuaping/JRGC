@@ -18,6 +18,13 @@
 #import <UIKit/UIKit.h>
 #import "MinuteCountDownView.h"
 @interface MoneyBoardCell : UITableViewCell <UITextFieldDelegate>
+{
+    UILabel *_activitylabel1;//二级标签
+    UILabel *_activitylabel2;//三级标签
+    UILabel *_activitylabel3;//四级标签
+    UILabel *_activitylabel4;//五级标签
+    NSArray *_prdLabelsList;//标签数组
+}
 @property (nonatomic, strong)UIView     *topView;
 @property (nonatomic, strong)UIView     *keYongBaseView;
 @property (nonatomic, strong)UILabel    *keYongTipLabel;
