@@ -149,6 +149,7 @@
 		742D0CA81DE2D50E000FA676 /* UCFProjectLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 742D0CA71DE2D50E000FA676 /* UCFProjectLabel.m */; };
 		7440FD961E16567B00491BC5 /* UCFDataStaticsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7440FD951E16567B00491BC5 /* UCFDataStaticsModel.m */; };
 		7440FD991E16582600491BC5 /* UCFDataDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7440FD981E16582600491BC5 /* UCFDataDetailModel.m */; };
+		7446EBA91E8A071A007CE790 /* UCFPersonCenterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7446EBA81E8A0719007CE790 /* UCFPersonCenterModel.m */; };
 		744A5FAA1E79512C008921F9 /* UCFWebViewJavascriptBridgeLoanDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 744A5FA81E79512C008921F9 /* UCFWebViewJavascriptBridgeLoanDetails.m */; };
 		744A5FAB1E79512C008921F9 /* UCFWebViewJavascriptBridgeLoanDetails.xib in Resources */ = {isa = PBXBuildFile; fileRef = 744A5FA91E79512C008921F9 /* UCFWebViewJavascriptBridgeLoanDetails.xib */; };
 		74541C901ADFD6350009D27D /* UCFSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74541C8F1ADFD6350009D27D /* UCFSettingViewController.m */; };
@@ -174,7 +175,6 @@
 		746BBEAC1AF8E93E00EBA0E7 /* UCFCouponUseCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 746BBEAA1AF8E93E00EBA0E7 /* UCFCouponUseCell.xib */; };
 		746FD8271D9B71E700C5BEB6 /* UCFSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 746FD8261D9B71E700C5BEB6 /* UCFSettingViewController.xib */; };
 		746FD82B1D9BB51200C5BEB6 /* UCFMenuTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 746FD8291D9BB51200C5BEB6 /* UCFMenuTableCell.m */; };
-		746FD82E1D9BB84400C5BEB6 /* MenuList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 746FD82D1D9BB84400C5BEB6 /* MenuList.plist */; };
 		746FFE251B0059BB00FF927F /* UCFBindCardOneTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 746FFE231B0059BB00FF927F /* UCFBindCardOneTableViewCell.m */; };
 		746FFE261B0059BB00FF927F /* UCFBindCardOneTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 746FFE241B0059BB00FF927F /* UCFBindCardOneTableViewCell.xib */; };
 		746FFE2C1B007FA100FF927F /* UCFBindBankCardNormalTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 746FFE2B1B007FA100FF927F /* UCFBindBankCardNormalTableViewCell.m */; };
@@ -994,6 +994,8 @@
 		7440FD951E16567B00491BC5 /* UCFDataStaticsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFDataStaticsModel.m; sourceTree = "<group>"; };
 		7440FD971E16582600491BC5 /* UCFDataDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFDataDetailModel.h; sourceTree = "<group>"; };
 		7440FD981E16582600491BC5 /* UCFDataDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFDataDetailModel.m; sourceTree = "<group>"; };
+		7446EBA71E8A0719007CE790 /* UCFPersonCenterModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFPersonCenterModel.h; sourceTree = "<group>"; };
+		7446EBA81E8A0719007CE790 /* UCFPersonCenterModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFPersonCenterModel.m; sourceTree = "<group>"; };
 		744A5FA71E79512C008921F9 /* UCFWebViewJavascriptBridgeLoanDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFWebViewJavascriptBridgeLoanDetails.h; sourceTree = "<group>"; };
 		744A5FA81E79512C008921F9 /* UCFWebViewJavascriptBridgeLoanDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFWebViewJavascriptBridgeLoanDetails.m; sourceTree = "<group>"; };
 		744A5FA91E79512C008921F9 /* UCFWebViewJavascriptBridgeLoanDetails.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFWebViewJavascriptBridgeLoanDetails.xib; sourceTree = "<group>"; };
@@ -1036,7 +1038,6 @@
 		746FD8261D9B71E700C5BEB6 /* UCFSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFSettingViewController.xib; sourceTree = "<group>"; };
 		746FD8281D9BB51200C5BEB6 /* UCFMenuTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFMenuTableCell.h; sourceTree = "<group>"; };
 		746FD8291D9BB51200C5BEB6 /* UCFMenuTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFMenuTableCell.m; sourceTree = "<group>"; };
-		746FD82D1D9BB84400C5BEB6 /* MenuList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MenuList.plist; sourceTree = "<group>"; };
 		746FFE221B0059BB00FF927F /* UCFBindCardOneTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFBindCardOneTableViewCell.h; sourceTree = "<group>"; };
 		746FFE231B0059BB00FF927F /* UCFBindCardOneTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFBindCardOneTableViewCell.m; sourceTree = "<group>"; };
 		746FFE241B0059BB00FF927F /* UCFBindCardOneTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFBindCardOneTableViewCell.xib; sourceTree = "<group>"; };
@@ -2779,6 +2780,8 @@
 			children = (
 				7456D3D31E8289BE00207349 /* UCFPCListModel.h */,
 				7456D3D41E8289BE00207349 /* UCFPCListModel.m */,
+				7446EBA71E8A0719007CE790 /* UCFPersonCenterModel.h */,
+				7446EBA81E8A0719007CE790 /* UCFPersonCenterModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3945,7 +3948,6 @@
 				7BFE3E841AC55C98002A53A2 /* Info.plist */,
 				7BFE3E851AC55C98002A53A2 /* main.m */,
 				7BCE020C1AC8FF3A0084C15C /* JRGC.pch */,
-				746FD82D1D9BB84400C5BEB6 /* MenuList.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -5370,7 +5372,6 @@
 				742D0CA21DE29E99000FA676 /* UCFProjectListCell.xib in Resources */,
 				FB3A80221CC612B8004B56C3 /* UCFCouponReturn.xib in Resources */,
 				4AE1E9641E1CDB9900587CE6 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
-				746FD82E1D9BB84400C5BEB6 /* MenuList.plist in Resources */,
 				746FD8271D9B71E700C5BEB6 /* UCFSettingViewController.xib in Resources */,
 				8300100E1E1356870088C707 /* UCFModifyReservedBankNumberViewController.xib in Resources */,
 				FBEDF1E01CB5171500116E12 /* MyViewController.xib in Resources */,
@@ -5566,6 +5567,7 @@
 				FB1A6A961BE8BD1E004C73B8 /* Touch3DSingle.m in Sources */,
 				833A6EAD1E55466B00C8A494 /* UCFCollectionListViewController.m in Sources */,
 				EDEC8BFB1CB3BA6300815228 /* WPHotspotLabel.m in Sources */,
+				7446EBA91E8A071A007CE790 /* UCFPersonCenterModel.m in Sources */,
 				E3C1179C1D40CFCC0053A052 /* UCFContributionValueTypeTowCell.m in Sources */,
 				E32020121CC4BCE60065579C /* WebViewJavascriptBridge.m in Sources */,
 				74EAF5C31B0F293D00807C1C /* UCFBankCard.m in Sources */,
