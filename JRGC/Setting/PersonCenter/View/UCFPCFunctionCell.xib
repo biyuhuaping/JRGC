@@ -49,6 +49,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="arrowImageView" destination="8bV-aM-dWa" id="I1J-GF-cNH"/>
                 <outlet property="itemIconImage" destination="mqJ-IH-BLx" id="yn1-5B-NcH"/>
                 <outlet property="itemIconImageWidth" destination="upi-Oa-npb" id="8oj-44-ysh"/>
                 <outlet property="itemTitleLabel" destination="Y6a-pX-2yp" id="d0y-77-OoO"/>

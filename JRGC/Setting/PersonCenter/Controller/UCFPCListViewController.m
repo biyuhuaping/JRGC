@@ -34,20 +34,22 @@
         self.tableView.delegate = self;
         self.tableView.dataSource = self;
         
+        self.tableView.backgroundColor = UIColorWithRGB(0xebebee);
+        
         self.presenter = presenter;
         self.presenter.view = self;//将V和P进行绑定(这里因为V是系统的TableView 无法简单的声明一个view属性 所以就绑定到TableView的持有者上面)
         
         UILabel *tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 20)];
         tipLabel.font = [UIFont systemFontOfSize:12];
-        tipLabel.backgroundColor = [UIColor redColor];
+        tipLabel.text = @"市场有风险 投资需谨慎";
         tipLabel.textColor = UIColorWithRGB(0x999999);
         tipLabel.textAlignment = NSTextAlignmentCenter;
+        self.tipLabel = tipLabel;
         
         UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 50)];
-        footer.backgroundColor = [UIColor greenColor];
+        [footer addSubview:tipLabel];
         self.tableView.tableFooterView = footer;
         
-        [footer addSubview:tipLabel];
         tipLabel.center = footer.center;
         
          [self.tableView addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(refreshData)];
@@ -75,17 +77,12 @@
     return 10;
 }
 
-//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-//{
-//    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 30)];
-//    [view setBackgroundColor:[UIColor grayColor]];
-//    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, view.width-30, view.height)];
-//    label.text = @"常用工具";
-//    label.font = [UIFont systemFontOfSize:14];
-//    label.textColor = UIColorWithRGB(0x333333);
-//    [view addSubview:label];
-//    return view;
-//}
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 10)];
+    [view setBackgroundColor:UIColorWithRGB(0xebebee)];
+    return view;
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 //    return self.presenter.allDatas.count;

@@ -12,6 +12,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *itemIconImage;
 @property (weak, nonatomic) IBOutlet UILabel *itemTitleLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *itemIconImageWidth;
+@property (weak, nonatomic) IBOutlet UIImageView *arrowImageView;
 
 @end
 
@@ -39,6 +40,7 @@
         self.itemIconImageWidth.constant = 0;
         self.itemTitleLabel.font = [UIFont systemFontOfSize:14];
         self.itemTitleLabel.textColor = UIColorWithRGB(0x333333);
+        self.arrowImageView.hidden = YES;
     }
 }
 
