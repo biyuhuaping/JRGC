@@ -765,13 +765,39 @@
     }
     return 3;
 }
+-(float)getSectionHight{
+    NSArray *prdLabelsList =  [[_dataDict objectSafeDictionaryForKey:@"data"] objectSafeArrayForKey:@"prdLabelsList"];
+    NSMutableArray *labelPriorityArr = [NSMutableArray arrayWithCapacity:4];
+    if (![prdLabelsList isEqual:[NSNull null]]) {
+        for (NSDictionary *dic in prdLabelsList) {
+            NSInteger labelPriority = [dic[@"labelPriority"] integerValue];
+            if (labelPriority > 1) {
+                if ([dic[@"labelName"] rangeOfString:@"起投"].location == NSNotFound) {
+                    [labelPriorityArr addObject:dic[@"labelName"]];
+                }
+            }
+        }
+    }
+    float bottomViewYPos = 0;
+    if (_bidType == 1){
+        bottomViewYPos = 0;
+    } else{
+        if ([labelPriorityArr count] == 0) {
+            bottomViewYPos = 0;
+
+        } else {
+            bottomViewYPos = 20;
+        }
+    }
+    return bottomViewYPos;
+}
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
             return 109.0f;
         } else if (indexPath.row == 1) {
-            float height = 200.5f+36.0f;//36为倒计时view的高度
+            float height = 200.5f+36.0f+[self getSectionHight];//36为倒计时view的高度
             if (isCompanyAgent) { //机构用户需要把工豆隐藏
                 height = height - 44.0f;
             }
