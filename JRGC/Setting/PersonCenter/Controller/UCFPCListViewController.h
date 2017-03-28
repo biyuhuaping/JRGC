@@ -18,7 +18,7 @@
 @end
 
 @interface UCFPCListViewController : NSObject<UITableViewDelegate, UITableViewDataSource>
-@property (strong, nonatomic) UITableView *tableView;
+
 @property (weak, nonatomic) id<UCFPCListViewControllerCallBack> delegate;
 + (instancetype)instanceWithPresenter:(UCFPCListViewPresenter *)presenter;
 

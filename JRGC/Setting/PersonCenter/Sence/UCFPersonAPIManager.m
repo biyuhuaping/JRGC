@@ -9,6 +9,8 @@
 #import "UCFPersonAPIManager.h"
 #import "NetworkModule.h"
 #import "JSONKit.h"
+#import "UCFPersonCenterModel.h"
+#import "UIDic+Safe.h"
 
 @interface UCFPersonAPIManager () <NetworkModuleDelegate>
 @property (copy, nonatomic) NetworkCompletionHandler completionHandler;
@@ -34,10 +36,21 @@
 {
     NSString *data = (NSString *)result;
     NSMutableDictionary *dic = [data objectFromJSONString];
+    NSString *rstcode = dic[@"ret"];
+    NSString *rsttext = dic[@"message"];
     DBLOG(@"UCFSettingViewController : %@",dic);
     
     if (tag.intValue == kSXTagPersonCenter) {
-        self.completionHandler(nil, dic);
+        if ([rstcode boolValue]) {
+            
+            NSDictionary *result = [dic objectSafeDictionaryForKey:@"data"];
+            UCFPersonCenterModel *personCenterModel = [UCFPersonCenterModel personCenterWithDict:result];
+            self.completionHandler(nil, personCenterModel);
+        }
+        else {
+            self.completionHandler(nil, rsttext);
+        }
+        
         self.completionHandler = nil;
     }
 }

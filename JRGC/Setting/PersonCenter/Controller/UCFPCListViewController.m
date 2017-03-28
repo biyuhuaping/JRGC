@@ -13,7 +13,7 @@
 #import "UCFPCGroupPresenter.h"
 
 @interface UCFPCListViewController () <PCListViewPresenterCallBack>
-
+@property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) UCFPCListViewPresenter *presenter;
 @end
 
@@ -40,7 +40,7 @@
 //        self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
 //            [weakSelf.presenter refreshData];
 //        }];
-//         [self.tableView addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(refreshData)];
+         [self.tableView addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(refreshData)];
 //        self.tableView.footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
 //            [weakSelf.presenter loadMoreData];
 //        }];
@@ -142,6 +142,8 @@
     }
 }
 
+#pragma mark - 禁止tableview的section 随cell移动
+
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     CGFloat sectionHeaderHeight = 40;
     if (scrollView.contentOffset.y<=sectionHeaderHeight&&scrollView.contentOffset.y>=0) {
@@ -154,10 +156,9 @@
 #pragma mark - BlogViewPresenterCallBack
 
 - (void)pcListViewPresenter:(UCFPCListViewPresenter *)presenter didRefreshDataWithResult:(id)result error:(NSError *)error{
-//    [self.tableView.header endRefreshing];
+    [self.tableView.header endRefreshing];
     
     if (!error) {
-        
         [self.tableView reloadData];
 //        [self.tableView.footer resetNoMoreData];
     } else if (self.presenter.allDatas.count == 0) {
