@@ -26,10 +26,15 @@
             [nav pushViewController:bankDepositoryAccountVC animated:YES];
         } else {
             UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:step];
+            vc.site = @"2";
             [nav pushViewController:vc animated:YES];
         }
     } else {
+        if (step == 1) {
+            step = 2;
+        }
         UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:step];
+        vc.site = @"1";
         [nav pushViewController:vc animated:YES];
     }
 }

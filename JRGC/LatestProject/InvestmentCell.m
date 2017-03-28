@@ -10,7 +10,6 @@
 #import "NSString+FormatForThousand.h"
 #import "UCFToolsMehod.h"
 #import "UCFLatestProjectViewController.h"
-#import "UCFAssignmentCreditorViewController.h"
 
 @implementation InvestmentCell
 
@@ -32,11 +31,7 @@
         if (self.delegate && [self.delegate respondsToSelector:@selector(investBtnClicked:)] && ([self.progressView.textStr isEqualToString:@"投资"] || [self.progressView.textStr isEqualToString:@"认购"])) {
             [self.delegate investBtnClicked:sender];
         }
-    } else if ([self.delegate isKindOfClass:[UCFAssignmentCreditorViewController class]]){
-        if (self.delegate && [self.delegate respondsToSelector:@selector(investBtnClicked:)] && [self.progressView.textStr isEqualToString:@"购买"]) {
-            [self.delegate investBtnClicked:sender];
-        }
-    }
+    } 
 
 }
 

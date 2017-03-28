@@ -9,7 +9,6 @@
 #import "UCFMainTabBarController.h"
 #import "UCFLoginViewController.h"
 #import "UCFLatestProjectViewController.h"
-#import "UCFAssignmentCreditorViewController.h"
 //#import "UCFSettingViewController.h"
 #import "UCFPersonCenterController.h"
 #import "UCFMoreViewController.h"

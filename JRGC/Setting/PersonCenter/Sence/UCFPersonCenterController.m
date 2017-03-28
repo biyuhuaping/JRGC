@@ -149,14 +149,15 @@
         }
     }
     else if ([title isEqualToString:@"尊享账户"]) {
-        HSHelper *helper = [HSHelper new];
+//        HSHelper *helper = [HSHelper new];
         if ([self checkIDAAndBankBlindState:SelectAccoutTypeHoner]) {
             UCFP2POrHonerAccoutViewController *subVC = [[UCFP2POrHonerAccoutViewController alloc] initWithNibName:@"UCFP2POrHonerAccoutViewController" bundle:nil];
             subVC.accoutType =  SelectAccoutTypeHoner;
             [self.navigationController pushViewController:subVC animated:YES];
-        } else {
-            [helper pushOpenHSType:SelectAccoutTypeP2P Step:[_personModel.enjoyOpenStatus integerValue] nav:self.navigationController];
         }
+//        else {
+//            [helper pushOpenHSType:SelectAccoutTypeP2P Step:[_personModel.enjoyOpenStatus integerValue] nav:self.navigationController];
+//        }
     }
     else if ([title isEqualToString:@"会员等级"]) {
         UCFWebViewJavascriptBridgeLevel *subVC = [[UCFWebViewJavascriptBridgeLevel alloc] initWithNibName:@"UCFWebViewJavascriptBridgeLevel" bundle:nil];

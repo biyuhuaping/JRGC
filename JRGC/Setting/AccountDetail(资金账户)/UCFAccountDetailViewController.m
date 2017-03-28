@@ -560,7 +560,7 @@
 {
     if (alertView.tag == 1009 && buttonIndex == 1) {
         UCFOldUserGuideViewController *vc = [[UCFOldUserGuideViewController alloc] initWithNibName:@"UCFOldUserGuideViewController" bundle:nil];
-        vc.isStep     = 2;
+        vc.isStep = 2;
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
