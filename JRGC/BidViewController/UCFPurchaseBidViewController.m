@@ -193,7 +193,7 @@
         baseTitleLabel.text = @"投标";
     }
     
-    double gondDouBalance = [[[_dataDict objectForKey:@"beanUser"] objectForKey:@"availableBalance"] doubleValue];
+    double gondDouBalance = [[[_dataDict objectSafeDictionaryForKey:@"beanUser"] objectForKey:@"availableBalance"] doubleValue];
     if ((int)gondDouBalance > 0) {
         isGongDouSwitch = YES;
     }
@@ -376,7 +376,7 @@
         return;
     }
     double availableBala= [[[_dataDict objectForKey:@"actUser"] objectForKey:@"availableBalance"] doubleValue];
-    double gondDouBalance = [[[_dataDict objectForKey:@"beanUser"] objectForKey:@"availableBalance"] doubleValue]/100.0f;
+    double gondDouBalance = [[[_dataDict objectSafeDictionaryForKey:@"beanUser"] objectForKey:@"availableBalance"] doubleValue]/100.0f;
     NSString *availableBalance = nil;
     if (cell.gongDouSwitch.on) {
         availableBalance = [NSString stringWithFormat:@"%.2f",availableBala + gondDouBalance];
@@ -605,7 +605,7 @@
     [paramDict setValue:investAmt forKey:@"investAmount"];
 
     if (isGongDouSwitch) {
-        double gondDouBalance = [[[_dataDict objectForKey:@"beanUser"] objectForKey:@"availableBalance"] doubleValue];
+        double gondDouBalance = [[[_dataDict objectSafeDictionaryForKey:@"beanUser"] objectForKey:@"availableBalance"] doubleValue];
         [paramDict setValue:[NSString stringWithFormat:@"%@",[NSNumber numberWithFloat:gondDouBalance]] forKey:@"investBeans"];
 
     }
@@ -765,13 +765,39 @@
     }
     return 3;
 }
+-(float)getSectionHight{
+    NSArray *prdLabelsList =  [[_dataDict objectSafeDictionaryForKey:@"data"] objectSafeArrayForKey:@"prdLabelsList"];
+    NSMutableArray *labelPriorityArr = [NSMutableArray arrayWithCapacity:4];
+    if (![prdLabelsList isEqual:[NSNull null]]) {
+        for (NSDictionary *dic in prdLabelsList) {
+            NSInteger labelPriority = [dic[@"labelPriority"] integerValue];
+            if (labelPriority > 1) {
+                if ([dic[@"labelName"] rangeOfString:@"起投"].location == NSNotFound) {
+                    [labelPriorityArr addObject:dic[@"labelName"]];
+                }
+            }
+        }
+    }
+    float bottomViewYPos = 0;
+    if (_bidType == 1){
+        bottomViewYPos = 0;
+    } else{
+        if ([labelPriorityArr count] == 0) {
+            bottomViewYPos = 0;
+
+        } else {
+            bottomViewYPos = 20;
+        }
+    }
+    return bottomViewYPos;
+}
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
             return 109.0f;
         } else if (indexPath.row == 1) {
-            float height = 200.5f+36.0f;//36为倒计时view的高度
+            float height = 200.5f+36.0f+[self getSectionHight];//36为倒计时view的高度
             if (isCompanyAgent) { //机构用户需要把工豆隐藏
                 height = height - 44.0f;
             }
@@ -851,7 +877,7 @@
             cell = [[MoneyBoardCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellStr2 isCollctionKeyBid:NO];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.delegate = self;
-            double gondDouBalance = [[[_dataDict objectForKey:@"beanUser"] objectForKey:@"availableBalance"] doubleValue];
+            double gondDouBalance = [[[_dataDict objectSafeDictionaryForKey:@"beanUser"] objectForKey:@"availableBalance"] doubleValue];
             if (gondDouBalance > 0.0f) {
                 cell.gongDouSwitch.on = YES;
             } else {
@@ -1314,7 +1340,7 @@
     InvestmentItemInfo * info1 = [[InvestmentItemInfo alloc] initWithDictionary:[_dataDict objectForKey:@"data"]];
     long long int keTouJinE = round(([info1.borrowAmount doubleValue] - [info1.completeLoan doubleValue])* 100);
     long long int keYongZiJin = round([[[self.dataDict objectForKey:@"actUser"] objectForKey:@"availableBalance"] doubleValue] * 100);
-    NSInteger gongDouCount = [[[_dataDict objectForKey:@"beanUser"] objectForKey:@"availableBalance"] integerValue];
+    NSInteger gongDouCount = [[[_dataDict objectSafeDictionaryForKey:@"beanUser"] objectForKey:@"availableBalance"] integerValue];
     if (!isGongDouSwitch) {
         gongDouCount = 0;
     }
