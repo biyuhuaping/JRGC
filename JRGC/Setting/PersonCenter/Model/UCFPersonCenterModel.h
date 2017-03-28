@@ -10,22 +10,22 @@
 
 @interface UCFPersonCenterModel : NSObject
 @property (copy, nonatomic) NSString *beanAmount;
-@property (strong, nonatomic) NSString *couponNumber;
+@property (strong, nonatomic) NSNumber *couponNumber;
 @property (copy, nonatomic) NSString *enjoyAmount;
 @property (copy, nonatomic) NSString *enjoyOpenStatus;
 @property (copy, nonatomic) NSString *enjoyRepayPerDate;
 @property (copy, nonatomic) NSString *gcm;
 @property (copy, nonatomic) NSString *headurl;
-@property (assign, nonatomic) NSString *isCompanyAgent;
+@property (assign, nonatomic) BOOL *isCompanyAgent;
 @property (copy, nonatomic) NSString *loginName;
-@property (strong, nonatomic) NSString *memberLever;
+@property (strong, nonatomic) NSNumber *memberLever;
 @property (copy, nonatomic) NSString *mobile;
 @property (copy, nonatomic) NSString *p2pAmount;
 @property (copy, nonatomic) NSString *p2pOpenStatus;
 @property (copy, nonatomic) NSString *p2pRepayPerDate;
-@property (strong, nonatomic) NSString *score;
+@property (strong, nonatomic) NSNumber *score;
 @property (copy, nonatomic) NSString *sex;
-@property (strong, nonatomic) NSString *unReadMsgCount;
+@property (strong, nonatomic) NSNumber *unReadMsgCount;
 @property (copy, nonatomic) NSString *userCenterTicket;
 @property (copy, nonatomic) NSString *userId;
 @property (copy, nonatomic) NSString *userName;

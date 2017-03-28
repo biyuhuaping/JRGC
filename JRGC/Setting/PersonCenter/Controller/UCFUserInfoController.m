@@ -41,8 +41,8 @@
     if (self = [super init]) {
         self.presenter = presenter;
         self.presenter.userInvoView = self;//将V和P进行绑定(这里因为V是系统的TableView 无法简单的声明一个view属性 所以就绑定到TableView的持有者上面)
-        self.segLineView1_width.constant = 0.5;
-        self.segLineView2_width.constant = 0.5;
+        
+        
     }
     return self;
 }
@@ -54,6 +54,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.segLineView1_width.constant = 0.5;
+    self.segLineView2_width.constant = 0.5;
+    self.userIconImageView.layer.cornerRadius = self.userIconImageView.width*0.5;
+    self.userIconImageView.clipsToBounds = YES;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapUserIcon:)];
     [self.userIconBackView addGestureRecognizer:tap];
     
@@ -113,7 +117,14 @@
 - (void)pcListViewPresenter:(UCFPCListViewPresenter *)presenter didRefreshUserInfoWithResult:(id)result error:(NSError *)error
 {
     if (!error) {
-        
+        UCFPersonCenterModel *personCenter = result;
+        [self.userIconImageView sd_setImageWithURL:[NSURL URLWithString:personCenter.headurl] placeholderImage:[UIImage imageNamed:@"password_icon_head"]];
+        self.userNameLabel.text = personCenter.userName;
+        self.userLevelImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"usercenter_vip%@_icon", personCenter.memberLever]];
+        self.unreadMessageImageView.hidden = ([personCenter.unReadMsgCount integerValue] == 0) ? YES : NO;
+        self.facBeanLabel.text = personCenter.beanAmount;
+        self.couponLabel.text = [NSString stringWithFormat:@"%@", personCenter.couponNumber];
+        self.workPointLabel.text = [NSString stringWithFormat:@"%@", personCenter.score];
     }
 }
 

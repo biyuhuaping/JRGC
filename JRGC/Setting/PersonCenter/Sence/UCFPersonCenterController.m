@@ -123,32 +123,6 @@
     
 //    [self.userInfoVC fetchData];
     
-    /* 返回数据
-     data =     {
-     beanAmount = 0;
-     couponNumber = 0;
-     enjoyAmount = 0;
-     enjoyOpenStatus = "";
-     enjoyRepayPerDate = "2017-04-21";
-     gcm = C0700WR;
-     headurl = "https://www.9888.cn/img/app/man.png";
-     isCompanyAgent = 0;
-     loginName = BA0070;
-     memberLever = 0;
-     mobile = "185****0070";
-     p2pAmount = "550819.05";
-     p2pOpenStatus = 4;
-     p2pRepayPerDate = "2017-04-21";
-     score = "2.9\U4e07";
-     sex = "\U7537";
-     unReadMsgCount = 0;
-     userId = 918332;
-     userName = "\U97e9\U5148\U751f";
-     };
-     */
-    
-//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];;//上层交互逻辑
-    
     __weak typeof(self) weakSelf = self;
     [self.pcListVC.presenter fetchDataWithCompletionHandler:^(NSError *error, id result) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];//上层交互逻辑
@@ -158,17 +132,6 @@
         else if ([result isKindOfClass:[NSString class]]) {
             [AuxiliaryFunc showToastMessage:result withView:self.view];
         }
-//        if (weakSelf.pcListVC.tableView.header.isRefreshing) {
-//               [weakSelf.pcListVC.tableView.header endRefreshing];
-//        }
-//        BOOL rstcode = [result[@"ret"] boolValue];
-//        NSString *messageStr = result[@"message"];
-//        if (rstcode) { //返回成功
-//            _dataDict = (NSDictionary *)result[@"data"];
-//
-//        }else{
-//             [AuxiliaryFunc showToastMessage:messageStr withView:self.view];
-//        }
     }];
 }
 
