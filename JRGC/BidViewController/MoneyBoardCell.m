@@ -10,7 +10,9 @@
 #import "Masonry.h"
 #import "Common.h"
 #import "UCFToolsMehod.h"
-@implementation MoneyBoardCell 
+#import "UILabel+Misc.h"
+#import "UIDic+Safe.h"
+@implementation MoneyBoardCell
 
 - (void)awakeFromNib {
      [super awakeFromNib];
@@ -34,24 +36,56 @@
 }
 - (void)initView:(BOOL)isKeyBid
 {
-    _topView = [[UIView alloc] init];
-    _topView.backgroundColor = UIColorWithRGB(0xebebee);
-    
-    _topView.frame = CGRectMake(0, 0, ScreenWidth, 10.0f);
+   BOOL isShowLabels =  [[NSUserDefaults standardUserDefaults]boolForKey:@"isShowLabels"];
+    if (isShowLabels) {
+        _topView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 30.0f)];
+        _topView.backgroundColor = UIColorWithRGB(0xebebee);
+        _activitylabel1 = [UILabel labelWithFrame:CGRectZero text:@"" textColor:UIColorWithRGB(0x5b7aa4) font:[UIFont systemFontOfSize:MarkLabelFont]];
+        _activitylabel1.backgroundColor = [UIColor whiteColor];
+        _activitylabel1.layer.borderWidth = 0.5;
+        _activitylabel1.layer.cornerRadius = 2.0;
+        _activitylabel1.layer.borderColor = UIColorWithRGB(0x5b7aa4).CGColor;
+        [_topView addSubview:_activitylabel1];
+        
+        _activitylabel2 = [UILabel labelWithFrame:CGRectZero text:@"" textColor:UIColorWithRGB(0x5b7aa4) font:[UIFont systemFontOfSize:MarkLabelFont]];
+        _activitylabel2.backgroundColor = [UIColor whiteColor];
+        _activitylabel2.layer.borderWidth = 0.5;
+        _activitylabel2.layer.cornerRadius = 2.0;
+        _activitylabel2.layer.borderColor = UIColorWithRGB(0x5b7aa4).CGColor;
+        [_topView addSubview:_activitylabel2];
+        
+        _activitylabel3 = [UILabel labelWithFrame:CGRectZero text:@"" textColor:UIColorWithRGB(0x5b7aa4) font:[UIFont systemFontOfSize:MarkLabelFont]];
+        _activitylabel3.backgroundColor = [UIColor whiteColor];
+        _activitylabel3.layer.borderWidth = 0.5;
+        _activitylabel3.layer.cornerRadius = 2.0;
+        _activitylabel3.layer.borderColor = UIColorWithRGB(0x5b7aa4).CGColor;
+        [_topView addSubview:_activitylabel3];
+        
+        _activitylabel4 = [UILabel labelWithFrame:CGRectZero text:@"" textColor:UIColorWithRGB(0x5b7aa4) font:[UIFont systemFontOfSize:MarkLabelFont]];
+        _activitylabel4.backgroundColor = [UIColor whiteColor];
+        _activitylabel4.layer.borderWidth = 0.5;
+        _activitylabel4.layer.cornerRadius = 2.0;
+        _activitylabel4.layer.borderColor = UIColorWithRGB(0x5b7aa4).CGColor;
+        [_topView addSubview:_activitylabel4];
+    }else{
+         _topView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 10.0f)];
+    }
     [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:_topView isTop:YES];
     [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:_topView isTop:NO];
+     //标签数组
+    _topView.backgroundColor = UIColorWithRGB(0xf2f2f2);
     [self addSubview:_topView];
 
     if (!isKeyBid) {
         _minuteCountDownView = [[[NSBundle mainBundle] loadNibNamed:@"MinuteCountDownView" owner:nil options:nil] firstObject];
-        _minuteCountDownView.frame = CGRectMake(0, 10, ScreenWidth, 37);
+        _minuteCountDownView.frame = CGRectMake(0, CGRectGetMaxY(_topView.frame), ScreenWidth, 37);
         _minuteCountDownView.isStopStatus = @"0";
         [_minuteCountDownView startTimer];
         _minuteCountDownView.sourceVC = @"UCFPurchaseBidVC";//投资页面
         [self addSubview:_minuteCountDownView];
         [Common addLineViewColor:UIColorWithRGB(0xeff0f3) With:_minuteCountDownView isTop:NO];
     }
-    CGFloat height = isKeyBid ? 10 :CGRectGetMaxY(_minuteCountDownView.frame);
+    CGFloat height = isKeyBid ? CGRectGetMaxY(_topView.frame) :CGRectGetMaxY(_minuteCountDownView.frame);
     _keYongBaseView = [[UIView alloc] init];
     _keYongBaseView.frame = CGRectMake(0,height , ScreenWidth, 37);
     _keYongBaseView.backgroundColor = UIColorWithRGB(0xf9f9f9);
@@ -79,13 +113,19 @@
     _totalKeYongTipLabel.backgroundColor = [UIColor clearColor];
     [_keYongBaseView addSubview:_totalKeYongTipLabel];
     
+    
+    
+    
+    
+    
+    
     _inputBaseView = [[UIView alloc] initWithFrame:CGRectMake(15.0f, CGRectGetMaxY(_keYongBaseView.frame) + 10, ScreenWidth - 69.0f, 37.0f)];
     _inputBaseView.backgroundColor = UIColorWithRGB(0xf2f2f2);
     _inputBaseView.layer.borderColor = UIColorWithRGB(0xd8d8d8).CGColor;
     _inputBaseView.layer.borderWidth = 0.5f;
     _inputBaseView.layer.cornerRadius = 4.0f;
     _inputBaseView.userInteractionEnabled = YES;
-//    _inputBaseView.backgroundColor = [UIColor ];
+    _inputBaseView.backgroundColor = [UIColor blueColor];
     [self addSubview:_inputBaseView];
 
     _inputMoneyTextFieldLable = [[UITextField alloc] initWithFrame:CGRectMake(10.0f, 0, CGRectGetWidth(_inputBaseView.frame) - 70, CGRectGetHeight(_inputBaseView.frame))];
@@ -96,7 +136,7 @@
     _inputMoneyTextFieldLable.textColor = UIColorWithRGB(0x555555);
     _inputMoneyTextFieldLable.placeholder = @"100元起投";
     _inputMoneyTextFieldLable.hidden = NO;
-//    _inputMoneyTextFieldLable.backgroundColor = [UIColor redColor];
+    _inputMoneyTextFieldLable.backgroundColor = [UIColor redColor];
     [_inputBaseView addSubview:_inputMoneyTextFieldLable];
     
     _allTouziBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -220,6 +260,25 @@
             }
         }else{
             
+//            _prdLabelsList =  [[_dataDict objectSafeDictionaryForKey:@"data"] objectSafeArrayForKey:@"prdLabelsList"];;
+//            NSMutableArray *labelPriorityArr = [NSMutableArray arrayWithCapacity:4];
+//            if (![_prdLabelsList isEqual:[NSNull null]]) {
+//                for (NSDictionary *dic in _prdLabelsList) {
+//                    NSInteger labelPriority = [dic[@"labelPriority"] integerValue];
+//                    if (labelPriority > 1) {
+//                        if ([dic[@"labelName"] rangeOfString:@"起投"].location == NSNotFound) {
+//                            [labelPriorityArr addObject:dic[@"labelName"]];
+//                        }
+//                    }
+//                }
+//            }
+              BOOL isShowLabels =  [[NSUserDefaults standardUserDefaults]boolForKey:@"isShowLabels"];
+            if (isShowLabels) {
+                    [self drawMarkView];
+            }
+//        _minuteCountDownView.frame = CGRectMake(0, CGRectGetMaxY(_topView.frame), ScreenWidth, 37);
+//        _keYongBaseView.frame = CGRectMake(0,CGRectGetMaxY(_minuteCountDownView.frame) , ScreenWidth, 37);
+//         _inputBaseView.frame = CGRectMake(15.0f, CGRectGetMaxY(_keYongBaseView.frame) + 10, ScreenWidth - 69.0f, 37.0f);
         NSString *palceText = [NSString stringWithFormat:@"%@元起投",[[_dataDict objectForKey:@"data"] objectForKey:@"minInvest"]];
         if ([[[_dataDict objectForKey:@"data"] objectForKey:@"maxInvest"] length] != 0) {
             NSString *maxInvest = [[_dataDict objectForKey:@"data"] objectForKey:@"maxInvest"];
@@ -240,6 +299,13 @@
         NSString *totalMoney = [UCFToolsMehod AddComma:[NSString stringWithFormat:@"%.2lf",availableBalance + gondDouBalance/100.0f]];
         self.KeYongMoneyLabel.text = [NSString stringWithFormat:@"¥%@",totalMoney];
         CGSize size = [Common getStrWitdth:self.KeYongMoneyLabel.text TextFont:_KeYongMoneyLabel.font];
+            
+//        _inputMoneyTextFieldLable.frame = CGRectMake(10.0f, 0, CGRectGetWidth(_inputBaseView.frame) - 70, CGRectGetHeight(_inputBaseView.frame));
+//
+//        _allTouziBtn.frame = CGRectMake(CGRectGetWidth(_inputBaseView.frame) - 50 , 0, 44, CGRectGetHeight(_inputBaseView.frame));
+//        _calulatorBtn.frame = CGRectMake(CGRectGetMaxX(_inputBaseView.frame) + 10, CGRectGetMidY(_inputBaseView.frame) - 29/2.0, 29, 29);
+//        _midSepView.frame = CGRectMake(0, CGRectGetMaxY(_inputBaseView.frame) + 10, ScreenWidth, 10.0f);
+//        _rechargeBtn.frame = CGRectMake(ScreenWidth - 15 - 44 , CGRectGetMaxY(_midSepView.frame), 44, 44);
         self.KeYongMoneyLabel.frame = CGRectMake(CGRectGetMinX(self.KeYongMoneyLabel.frame), CGRectGetMinY(self.KeYongMoneyLabel.frame), size.width, CGRectGetHeight(self.KeYongMoneyLabel.frame));
         _totalKeYongTipLabel.frame = CGRectMake(CGRectGetMaxX(_KeYongMoneyLabel.frame) + 5, CGRectGetMaxY(_KeYongMoneyLabel.frame) - 12, 11 * 12, 12);
         if (_isCompanyAgent) {
@@ -270,6 +336,99 @@
     }
 
 
+}
+- (void)drawMarkView
+{
+    //标签数组
+    _prdLabelsList = [[_dataDict objectSafeDictionaryForKey:@"data" ] objectSafeArrayForKey:@"prdLabelsList"];
+    NSMutableArray *labelPriorityArr = [NSMutableArray arrayWithCapacity:4];
+    if (![_prdLabelsList isEqual:[NSNull null]]) {
+        for (NSDictionary *dic in _prdLabelsList) {
+            NSInteger labelPriority = [dic[@"labelPriority"] integerValue];
+            if (labelPriority > 1) {
+                if ([dic[@"labelName"] rangeOfString:@"起投"].location == NSNotFound) {
+                    [labelPriorityArr addObject:dic[@"labelName"]];
+                }
+            }
+        }
+    }
+    //重设标签位置
+    if ([labelPriorityArr count] == 0) {
+        [_activitylabel1 setHidden:YES];
+        [_activitylabel2 setHidden:YES];
+        [_activitylabel3 setHidden:YES];
+        [_activitylabel4 setHidden:YES];
+    } else if ([labelPriorityArr count] == 1) {
+        [_activitylabel1 setHidden:NO];
+        [_activitylabel2 setHidden:YES];
+        [_activitylabel3 setHidden:YES];
+        [_activitylabel4 setHidden:YES];
+        CGFloat stringWidth = [labelPriorityArr[0] sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:MarkLabelFont]}].width;
+        _activitylabel1.frame = CGRectMake(15, FirstMarkYPos, stringWidth + MarkInSpacing, MarkHeight);
+        _activitylabel1.text = labelPriorityArr[0];
+    } else if ([labelPriorityArr count] == 2) {
+        [_activitylabel1 setHidden:NO];
+        [_activitylabel2 setHidden:NO];
+        [_activitylabel3 setHidden:YES];
+        [_activitylabel4 setHidden:YES];
+        _activitylabel1.text = labelPriorityArr[0];
+        _activitylabel2.text = labelPriorityArr[1];
+        CGFloat stringWidth = [labelPriorityArr[0] sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:MarkLabelFont]}].width;
+        CGFloat stringWidth2 = [labelPriorityArr[1] sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:MarkLabelFont]}].width;
+        _activitylabel1.frame = CGRectMake(15, FirstMarkYPos, stringWidth + MarkInSpacing, MarkHeight);
+        _activitylabel2.frame = CGRectMake(CGRectGetMaxX(_activitylabel1.frame) + MarkXSpacing, FirstMarkYPos, stringWidth2 + MarkInSpacing, MarkHeight);
+    } else if ([labelPriorityArr count] == 3) {
+        [_activitylabel1 setHidden:NO];
+        [_activitylabel2 setHidden:NO];
+        [_activitylabel3 setHidden:NO];
+        [_activitylabel4 setHidden:YES];
+        _activitylabel1.text = labelPriorityArr[0];
+        _activitylabel2.text = labelPriorityArr[1];
+        _activitylabel3.text = labelPriorityArr[2];
+        CGFloat stringWidth = [labelPriorityArr[0] sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:MarkLabelFont]}].width;
+        CGFloat stringWidth2 = [labelPriorityArr[1] sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:MarkLabelFont]}].width;
+        CGFloat stringWidth3 = [labelPriorityArr[2] sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:MarkLabelFont]}].width;
+        _activitylabel1.frame = CGRectMake(15, FirstMarkYPos, stringWidth + MarkInSpacing, MarkHeight);
+        _activitylabel2.frame = CGRectMake(CGRectGetMaxX(_activitylabel1.frame) + MarkXSpacing, FirstMarkYPos, stringWidth2 + MarkInSpacing, MarkHeight);
+        _activitylabel3.frame = CGRectMake(CGRectGetMaxX(_activitylabel2.frame) + MarkXSpacing, FirstMarkYPos, stringWidth3 + MarkInSpacing, MarkHeight);
+        
+        //如果标签长度超过屏幕宽度 重新布局2级标签
+        if (stringWidth + stringWidth2 + stringWidth3 + MarkXSpacing*2 + MarkInSpacing*3 + 15*2 > ScreenWidth) {
+            _activitylabel1.frame = CGRectMake(15, 2, stringWidth + MarkInSpacing, 12);
+            _activitylabel2.frame = CGRectMake(CGRectGetMaxX(_activitylabel1.frame) + MarkXSpacing, 2, stringWidth2 + MarkInSpacing, 12);
+            _activitylabel3.frame = CGRectMake(15, 16, stringWidth3 + 10, 12);
+        }
+    } else {
+        [_activitylabel1 setHidden:NO];
+        [_activitylabel2 setHidden:NO];
+        [_activitylabel3 setHidden:NO];
+        [_activitylabel4 setHidden:NO];
+        _activitylabel1.text = labelPriorityArr[0];
+        _activitylabel2.text = labelPriorityArr[1];
+        _activitylabel3.text = labelPriorityArr[2];
+        _activitylabel4.text = labelPriorityArr[3];
+        CGFloat stringWidth = [labelPriorityArr[0] sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:MarkLabelFont]}].width;
+        CGFloat stringWidth2 = [labelPriorityArr[1] sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:MarkLabelFont]}].width;
+        CGFloat stringWidth3 = [labelPriorityArr[2] sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:MarkLabelFont]}].width;
+        CGFloat stringWidth4 = [labelPriorityArr[3] sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:MarkLabelFont]}].width;
+        _activitylabel1.frame = CGRectMake(15, FirstMarkYPos, stringWidth + MarkInSpacing, MarkHeight);
+        _activitylabel2.frame = CGRectMake(CGRectGetMaxX(_activitylabel1.frame) + MarkXSpacing, FirstMarkYPos, stringWidth2 + MarkInSpacing, MarkHeight);
+        _activitylabel3.frame = CGRectMake(CGRectGetMaxX(_activitylabel2.frame) + MarkXSpacing, FirstMarkYPos, stringWidth3 + MarkInSpacing, MarkHeight);
+        _activitylabel4.frame = CGRectMake(CGRectGetMaxX(_activitylabel3.frame) + MarkXSpacing, FirstMarkYPos, stringWidth4 + MarkInSpacing, MarkHeight);
+        
+        //如果标签长度超过屏幕宽度 重新布局2级标签
+        if (stringWidth + stringWidth2 + stringWidth3 + MarkXSpacing*2 + MarkInSpacing*3 + 15*2 > ScreenWidth) {
+            _activitylabel1.frame = CGRectMake(15, 2, stringWidth + MarkInSpacing, 12);
+            _activitylabel2.frame = CGRectMake(CGRectGetMaxX(_activitylabel1.frame) + MarkXSpacing, 2, stringWidth2 + MarkInSpacing, 12);
+            _activitylabel3.frame = CGRectMake(15, 16, stringWidth3 + 10, 12);
+            _activitylabel4.frame = CGRectMake(CGRectGetMaxX(_activitylabel3.frame) + MarkXSpacing, 16, stringWidth3 + 10, 12);
+        } else if (stringWidth + stringWidth2 + stringWidth3 + stringWidth4 + MarkXSpacing*3 + MarkInSpacing*4 + 15*2 > ScreenWidth) {
+            _activitylabel1.frame = CGRectMake(15, 2, stringWidth + MarkInSpacing, 12);
+            _activitylabel2.frame = CGRectMake(CGRectGetMaxX(_activitylabel1.frame) + MarkXSpacing, 2, stringWidth2 + MarkInSpacing, 12);
+            _activitylabel3.frame = CGRectMake(CGRectGetMaxX(_activitylabel2.frame) + MarkXSpacing, 2, stringWidth3 + MarkInSpacing, 12);
+            _activitylabel4.frame = CGRectMake(15, 16, stringWidth4 + MarkInSpacing, 12);
+        }
+    }
 }
 
 - (UITextField *)textfieldLength:(UITextField *)textField
