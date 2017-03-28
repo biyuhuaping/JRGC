@@ -24,4 +24,5 @@
 
 - (UITableView *)tableView;
 - (UCFPCListViewPresenter *)presenter;
+- (UILabel *)tipLabel;
 @end

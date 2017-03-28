@@ -116,6 +116,10 @@
     self.pcListVC.tableView.frame = CGRectMake(0, 0, SCREEN_WIDTH, ScreenHeight-49);
     [self.view addSubview:self.pcListVC.tableView];
     
+    self.pcListVC.tipLabel.frame = CGRectMake(0, 5, SCREEN_WIDTH, 20);
+    [self.pcListVC.tableView.tableFooterView addSubview:self.pcListVC.tipLabel];
+//    self.pcListVC.tipLabel.center = self.pcListVC.tableView.tableFooterView.center;
+    
     self.pcListVC.tableView.tableHeaderView = self.userInfoVC.view;
 }
 

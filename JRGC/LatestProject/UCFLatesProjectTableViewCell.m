@@ -8,6 +8,12 @@
 
 #import "UCFLatesProjectTableViewCell.h"
 
+@interface UCFLatesProjectTableViewCell ()
+- (IBAction)p2p:(UIButton *)sender;
+- (IBAction)hornor:(UIButton *)sender;
+
+@end
+
 @implementation UCFLatesProjectTableViewCell
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -20,7 +26,6 @@
 }
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
    
 }
 - (IBAction)buttonPress:(id)sender {
@@ -55,4 +60,15 @@
     
 }
 
+- (IBAction)p2p:(UIButton *)sender {
+    if ([self.delegate respondsToSelector:@selector(homeButtonPressedP2PButton:)]) {
+        [self.delegate homeButtonPressedP2PButton:sender];
+    }
+}
+
+- (IBAction)hornor:(UIButton *)sender {
+    if ([self.delegate respondsToSelector:@selector(homeButtonPressedHornorButton:)]) {
+        [self.delegate homeButtonPressedHornorButton:sender];
+    }
+}
 @end
