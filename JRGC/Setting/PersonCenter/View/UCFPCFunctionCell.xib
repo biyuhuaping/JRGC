@@ -18,19 +18,45 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y6a-pX-2yp">
-                        <rect key="frame" x="33" y="11" width="80" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mqJ-IH-BLx">
+                        <rect key="frame" x="13" y="7.5" width="27" height="27"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="27" id="Kef-pw-maC"/>
+                            <constraint firstAttribute="width" constant="27" id="upi-Oa-npb"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y6a-pX-2yp">
+                        <rect key="frame" x="49" y="11" width="42" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="list_icon_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="8bV-aM-dWa">
+                        <rect key="frame" x="297" y="14.5" width="8" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="koh-se-V0I"/>
+                            <constraint firstAttribute="width" constant="8" id="olk-9d-OoG"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="mqJ-IH-BLx" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="0Pq-zA-ZcW"/>
+                    <constraint firstItem="8bV-aM-dWa" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Nmh-Al-3UQ"/>
+                    <constraint firstItem="Y6a-pX-2yp" firstAttribute="centerY" secondItem="mqJ-IH-BLx" secondAttribute="centerY" id="OH5-jO-3eB"/>
+                    <constraint firstItem="mqJ-IH-BLx" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="13" id="QA9-P8-vuS"/>
+                    <constraint firstItem="Y6a-pX-2yp" firstAttribute="leading" secondItem="mqJ-IH-BLx" secondAttribute="trailing" constant="9" id="arm-a4-8Fu"/>
+                    <constraint firstAttribute="trailing" secondItem="8bV-aM-dWa" secondAttribute="trailing" constant="15" id="rn9-H1-5zY"/>
+                </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="itemIconImage" destination="mqJ-IH-BLx" id="yn1-5B-NcH"/>
+                <outlet property="itemIconImageWidth" destination="upi-Oa-npb" id="8oj-44-ysh"/>
                 <outlet property="itemTitleLabel" destination="Y6a-pX-2yp" id="d0y-77-OoO"/>
             </connections>
             <point key="canvasLocation" x="87" y="89"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="list_icon_arrow" width="8" height="13"/>
+    </resources>
 </document>

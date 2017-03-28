@@ -94,7 +94,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    if(self.fromSite==1)
+    //***设置导航title 1.p2p绑定银行卡 2.尊享绑定银行卡
+    if(self.accoutType==1)
     {
      baseTitleLabel.text =@"p2p绑定银行卡";
     }else{
@@ -373,7 +374,7 @@
 - (void)getBankCardInfoFromNet
 {
 
-    NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:UUID],@"userId",self.fromSite,@"fromSite",nil];
+    NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:UUID],@"userId",nil];
     [[NetworkModule sharedNetworkModule]newPostReq:strParameters tag:kSXTagBankInfoNew owner:self signature:YES Type:self.accoutType];
  
 }

@@ -13,8 +13,9 @@
 #import "UCFPCGroupPresenter.h"
 
 @interface UCFPCListViewController () <PCListViewPresenterCallBack>
-
+@property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) UCFPCListViewPresenter *presenter;
+@property (strong, nonatomic) UILabel *tipLabel;
 @end
 
 #define RowHeight0 65
@@ -36,11 +37,20 @@
         self.presenter = presenter;
         self.presenter.view = self;//将V和P进行绑定(这里因为V是系统的TableView 无法简单的声明一个view属性 所以就绑定到TableView的持有者上面)
         
-//        __weak typeof(self) weakSelf = self;
-//        self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-//            [weakSelf.presenter refreshData];
-//        }];
-//         [self.tableView addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(refreshData)];
+        UILabel *tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 20)];
+        tipLabel.font = [UIFont systemFontOfSize:12];
+        tipLabel.backgroundColor = [UIColor redColor];
+        tipLabel.textColor = UIColorWithRGB(0x999999);
+        tipLabel.textAlignment = NSTextAlignmentCenter;
+        
+        UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 50)];
+        footer.backgroundColor = [UIColor greenColor];
+        self.tableView.tableFooterView = footer;
+        
+        [footer addSubview:tipLabel];
+        tipLabel.center = footer.center;
+        
+         [self.tableView addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(refreshData)];
 //        self.tableView.footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
 //            [weakSelf.presenter loadMoreData];
 //        }];
@@ -57,11 +67,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    if (section==0) {
-        return 0;
-    }
-    else
-        return 30;
+    return 0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -69,17 +75,17 @@
     return 10;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 30)];
-    [view setBackgroundColor:[UIColor grayColor]];
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, view.width-30, view.height)];
-    label.text = @"常用工具";
-    label.font = [UIFont systemFontOfSize:14];
-    label.textColor = UIColorWithRGB(0x333333);
-    [view addSubview:label];
-    return view;
-}
+//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+//{
+//    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 30)];
+//    [view setBackgroundColor:[UIColor grayColor]];
+//    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, view.width-30, view.height)];
+//    label.text = @"常用工具";
+//    label.font = [UIFont systemFontOfSize:14];
+//    label.textColor = UIColorWithRGB(0x333333);
+//    [view addSubview:label];
+//    return view;
+//}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 //    return self.presenter.allDatas.count;
@@ -91,8 +97,14 @@
     if (indexPath.section == 0) {
         return RowHeight0;
     }
-    else
-        return RowHeight1;
+    else {
+        if (indexPath.row == 0) {
+            return 30;
+        }
+        else
+            return RowHeight1;
+    }
+    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -104,7 +116,7 @@
         }
         UCFPCGroupPresenter *groupPresenter = [self.presenter.allDatas objectAtIndex:indexPath.section];
         cell.presenter = [groupPresenter.items objectAtIndex:indexPath.row];
-        
+        cell.indexPath = indexPath;
         return cell;
     }
     else if (indexPath.section == 1) {
@@ -114,6 +126,7 @@
         }
         UCFPCGroupPresenter *groupPresenter = [self.presenter.allDatas objectAtIndex:indexPath.section];
         cell.presenter = [groupPresenter.items objectAtIndex:indexPath.row];
+        cell.indexPath = indexPath;
         return cell;
     }
     
@@ -134,7 +147,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
+    if (indexPath.section == 1 && indexPath.row == 0) {
+        return;
+    }
     if ([self.delegate respondsToSelector:@selector(pcListViewControllerdidSelectItem:)]) {
         UCFPCGroupPresenter *groupPresenter = [self.presenter.allDatas objectAtIndex:indexPath.section];
         UCFPCListCellPresenter *cellPresenter = [groupPresenter.items objectAtIndex:indexPath.row];
@@ -142,22 +157,23 @@
     }
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    CGFloat sectionHeaderHeight = 40;
-    if (scrollView.contentOffset.y<=sectionHeaderHeight&&scrollView.contentOffset.y>=0) {
-        scrollView.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, 0, 0);
-    } else if (scrollView.contentOffset.y>=sectionHeaderHeight) {
-        scrollView.contentInset = UIEdgeInsetsMake(-sectionHeaderHeight, 0, 0, 0);
-    }
-}
+#pragma mark - 禁止tableview的section 随cell移动
+
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+//    CGFloat sectionHeaderHeight = 40;
+//    if (scrollView.contentOffset.y<=sectionHeaderHeight&&scrollView.contentOffset.y>=0) {
+//        scrollView.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, 0, 0);
+//    } else if (scrollView.contentOffset.y>=sectionHeaderHeight) {
+//        scrollView.contentInset = UIEdgeInsetsMake(-sectionHeaderHeight, 0, 0, 0);
+//    }
+//}
 
 #pragma mark - BlogViewPresenterCallBack
 
 - (void)pcListViewPresenter:(UCFPCListViewPresenter *)presenter didRefreshDataWithResult:(id)result error:(NSError *)error{
-//    [self.tableView.header endRefreshing];
+    [self.tableView.header endRefreshing];
     
     if (!error) {
-        
         [self.tableView reloadData];
 //        [self.tableView.footer resetNoMoreData];
     } else if (self.presenter.allDatas.count == 0) {

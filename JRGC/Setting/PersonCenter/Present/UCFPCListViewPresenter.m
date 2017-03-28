@@ -8,6 +8,7 @@
 
 #import "UCFPCListViewPresenter.h"
 #import "UCFPCGroupPresenter.h"
+#import "UCFPersonCenterModel.h"
 
 @interface UCFPCListViewPresenter ()
 @property (strong, nonatomic) NSMutableArray *pcListCells;
@@ -54,7 +55,7 @@
 {
     UCFPCGroupPresenter *group0 = [[UCFPCGroupPresenter alloc] init];
     UCFPCListModel *listModel0_0 = [UCFPCListModel itemWithTitle:@"P2P账户" destVcClass:nil];
-    listModel0_0.subtitle = self.balanceMoney.length > 0 ? [NSString stringWithFormat:@"可用余额%@元", self.balanceMoney] : @"可用余额0.00元";
+    listModel0_0.subtitle = self.balanceMoney.length > 0 ? [NSString stringWithFormat:@"%@元", self.balanceMoney] : @"0.00元";
     listModel0_0.describeWord = self.lastBackMoneyDate.length > 0 ? [NSString stringWithFormat:@"最近回款日%@", self.lastBackMoneyDate] : @"";
     UCFPCListCellPresenter *presenter0_0 = [UCFPCListCellPresenter presenterWithItem:listModel0_0];
     UCFPCListModel *listModel0_1 = [UCFPCListModel itemWithTitle:@"尊享账户" destVcClass:nil];
@@ -66,15 +67,15 @@
     [group0.items addObject:presenter0_1];
     
     UCFPCGroupPresenter *group1 = [[UCFPCGroupPresenter alloc] init];
-    UCFPCListModel *listModel1_0 = [UCFPCListModel itemWithIcon:@"" title:@"会员等级" destVcClass:nil];
+    UCFPCListModel *listModel1_0 = [UCFPCListModel itemWithIcon:@"" title:@"常用工具" destVcClass:nil];
     UCFPCListCellPresenter *presenter1_0 = [UCFPCListCellPresenter presenterWithItem:listModel1_0];
-    UCFPCListModel *listModel1_1 = [UCFPCListModel itemWithIcon:@"" title:@"邀请返利" destVcClass:nil];
+    UCFPCListModel *listModel1_1 = [UCFPCListModel itemWithIcon:@"uesr_icon_class" title:@"会员等级" destVcClass:nil];
     UCFPCListCellPresenter *presenter1_1 = [UCFPCListCellPresenter presenterWithItem:listModel1_1];
-    UCFPCListModel *listModel1_2 = [UCFPCListModel itemWithIcon:@"" title:@"工场码" destVcClass:nil];
+    UCFPCListModel *listModel1_2 = [UCFPCListModel itemWithIcon:@"uesr_icon_number" title:@"工场码" destVcClass:nil];
     UCFPCListCellPresenter *presenter1_2 = [UCFPCListCellPresenter presenterWithItem:listModel1_2];
-    UCFPCListModel *listModel1_3 = [UCFPCListModel itemWithIcon:@"" title:@"红包" destVcClass:nil];
+    UCFPCListModel *listModel1_3 = [UCFPCListModel itemWithIcon:@"uesr_icon_redbag" title:@"红包" destVcClass:nil];
     UCFPCListCellPresenter *presenter1_3 = [UCFPCListCellPresenter presenterWithItem:listModel1_3];
-    UCFPCListModel *listModel1_4 = [UCFPCListModel itemWithIcon:@"" title:@"更多" destVcClass:nil];
+    UCFPCListModel *listModel1_4 = [UCFPCListModel itemWithIcon:@"uesr_icon_more" title:@"更多" destVcClass:nil];
     UCFPCListCellPresenter *presenter1_4 = [UCFPCListCellPresenter presenterWithItem:listModel1_4];
     group1.items = [NSMutableArray array];
     [group1.items addObject:presenter1_0];
@@ -94,8 +95,20 @@
     if (self.userId.length>0) {
         [self.apiManager fetchUserInfoWithUserId:self.userId completionHandler:^(NSError *error, id result) {
 //            self.isHonorUser = YES;
-            [self.pcListCells removeAllObjects];
-            [self initData];
+            
+            if ([result isKindOfClass:[UCFPersonCenterModel class]]) {
+                UCFPersonCenterModel *personCenter = result;
+                self.isHonorUser = [personCenter.enjoyOpenStatus isEqualToString:@"1"] ? NO : YES;
+                self.balanceMoney = personCenter.p2pAmount;
+                self.lastBackMoneyDate = personCenter.p2pRepayPerDate;
+                [self.pcListCells removeAllObjects];
+                [self initData];
+            }
+            else if ([result isKindOfClass:[NSString class]]) {
+                
+            }
+            
+            
             if ([self.view respondsToSelector:@selector(pcListViewPresenter:didRefreshDataWithResult:error:)]) {
                 [self.view pcListViewPresenter:self didRefreshDataWithResult:result error:error];
             }
