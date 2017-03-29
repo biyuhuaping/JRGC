@@ -38,4 +38,9 @@
     return self.item.icon;
 }
 
+- (BOOL)isShow
+{
+    return self.item.isShow;
+}
+
 @end

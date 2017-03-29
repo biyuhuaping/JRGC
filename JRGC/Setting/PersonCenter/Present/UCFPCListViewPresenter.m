@@ -15,12 +15,18 @@
 @property (copy, nonatomic) NSString *userId;
 @property (strong, nonatomic) UCFPersonAPIManager *apiManager;
 
-// 可用余额
-@property (copy, nonatomic) NSString *balanceMoney;
-// 最近回款日
-@property (copy, nonatomic) NSString *lastBackMoneyDate;
+// p2p账户可用余额
+@property (copy, nonatomic) NSString *p2pBalanceMoney;
+// 尊享账户可用余额
+@property (copy, nonatomic) NSString *hornerBalanceMoney;
+// p2p账户最近回款日
+@property (copy, nonatomic) NSString *p2pLastBackMoneyDate;
+// 尊享账户最近回款日
+@property (copy, nonatomic) NSString *hornerLastBackMoneyDate;
 // 尊享是否开户
 @property (assign, nonatomic) BOOL isHonorUser;
+// P2P账户是否开户
+@property (assign, nonatomic) BOOL isP2PUser;
 @end
 
 @implementation UCFPCListViewPresenter
@@ -55,12 +61,29 @@
 {
     UCFPCGroupPresenter *group0 = [[UCFPCGroupPresenter alloc] init];
     UCFPCListModel *listModel0_0 = [UCFPCListModel itemWithTitle:@"P2P账户" destVcClass:nil];
-    listModel0_0.subtitle = self.balanceMoney.length > 0 ? [NSString stringWithFormat:@"%@元", self.balanceMoney] : @"0.00元";
-    listModel0_0.describeWord = self.lastBackMoneyDate.length > 0 ? [NSString stringWithFormat:@"最近回款日%@", self.lastBackMoneyDate] : @"";
+    listModel0_0.isShow = self.isP2PUser;
+    if (self.isP2PUser) {
+        listModel0_0.subtitle = self.p2pBalanceMoney.length > 0 ? [NSString stringWithFormat:@"%@元", self.p2pBalanceMoney] : @"0.00元";
+        listModel0_0.describeWord = self.p2pLastBackMoneyDate.length > 0 ? [NSString stringWithFormat:@"最近回款日%@", self.p2pLastBackMoneyDate] : @"";
+    }
+    else {
+        listModel0_0.subtitle = @"小额分散、安全合规";
+        listModel0_0.describeWord = @"未开户";
+    }
     UCFPCListCellPresenter *presenter0_0 = [UCFPCListCellPresenter presenterWithItem:listModel0_0];
+    
+    
     UCFPCListModel *listModel0_1 = [UCFPCListModel itemWithTitle:@"尊享账户" destVcClass:nil];
-    listModel0_1.subtitle = @"委托投资、多重保障";
-    listModel0_1.describeWord = self.isHonorUser ? @"已开户" : @"未开户";
+    listModel0_1.isShow = self.isHonorUser;
+    if (self.isHonorUser) {
+        listModel0_1.subtitle = @"委托投资、多重保障";
+        listModel0_1.describeWord = self.hornerLastBackMoneyDate.length > 0 ? [NSString stringWithFormat:@"最近回款日%@", self.hornerLastBackMoneyDate] : @"";
+    }
+    else {
+        listModel0_1.subtitle = @"委托投资、多重保障";
+        listModel0_1.describeWord = @"未开户";
+    }
+    
     UCFPCListCellPresenter *presenter0_1 = [UCFPCListCellPresenter presenterWithItem:listModel0_1];
     group0.items = [NSMutableArray array];
     [group0.items addObject:presenter0_0];
@@ -89,18 +112,22 @@
 }
 
 - (void)fetchDataWithCompletionHandler:(NetworkCompletionHandler)completionHander {
-//    self.userId= @"930334";
-//    [[NSUserDefaults standardUserDefaults] setValue:self.userId forKey:UUID];
-//    [[NSUserDefaults standardUserDefaults]  synchronize];
+    
     if (self.userId.length>0) {
         [self.apiManager fetchUserInfoWithUserId:self.userId completionHandler:^(NSError *error, id result) {
 //            self.isHonorUser = YES;
             
             if ([result isKindOfClass:[UCFPersonCenterModel class]]) {
                 UCFPersonCenterModel *personCenter = result;
+                
+                self.isP2PUser = [personCenter.p2pOpenStatus isEqualToString:@"1"] ? NO : YES;
+                self.p2pBalanceMoney = personCenter.p2pAmount;
+                self.p2pLastBackMoneyDate = personCenter.p2pRepayPerDate;
+                
                 self.isHonorUser = [personCenter.enjoyOpenStatus isEqualToString:@"1"] ? NO : YES;
-                self.balanceMoney = personCenter.p2pAmount;
-                self.lastBackMoneyDate = personCenter.p2pRepayPerDate;
+                self.hornerBalanceMoney = personCenter.enjoyAmount;
+                self.hornerLastBackMoneyDate = personCenter.enjoyRepayPerDate;
+                
                 [self.pcListCells removeAllObjects];
                 [self initData];
             }
@@ -119,28 +146,25 @@
             !completionHander ?: completionHander(error, result);
         }];
     }
-    
-    
-//    [self.apiManager refreshUserBlogsWithUserId:self.userId completionHandler:^(NSError *error, id result) {
-//        
-//        if (!error) {
-//            
-//            [self.blogs removeAllObjects];
-//            [self formatResult:result];
-//        }
-//        
-//        if ([self.view respondsToSelector:@selector(blogViewPresenter:didRefreshDataWithResult:error:)]) {
-//            [self.view blogViewPresenter:self didRefreshDataWithResult:result error:error];
-//        }
-//        
-//        !completionHander ?: completionHander(error, result);
-//    }];
 }
 
 - (void)refreshData {
     [self fetchDataWithCompletionHandler:nil];
 }
 
-
+#pragma mark - 恢复初始数据
+- (void)setDefaultState
+{
+    self.isHonorUser = NO;
+    self.isP2PUser = NO;
+    [self.pcListCells removeAllObjects];
+    [self initData];
+    if ([self.view respondsToSelector:@selector(setDefaultState)]) {
+        [self.view setDefaultState];
+    }
+    if ([self.userInvoView respondsToSelector:@selector(setDefaultState)]) {
+        [self.userInvoView setDefaultState];
+    }
+}
 
 @end

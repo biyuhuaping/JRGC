@@ -49,6 +49,9 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(responds3DTouchClick) name:@"responds3DTouchClick" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popShadowView:) name:@"popPersonCenterShadowView" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setDefaultViewData) name:@"setDefaultViewData" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fetchData) name:@"getPersonalCenterNetData" object:nil];
     }
     return self;
 }
@@ -59,6 +62,8 @@
     [self configuration];
     
     [self addUI];
+    
+    [self.userInfoVC.presenter setDefaultState];
     
     [self fetchData];
     
@@ -107,6 +112,17 @@
     } else {
         [self addShadowViewAndLoginBtn];
     }
+}
+
+- (void)popShadowView:(NSNotification*)info
+{
+    [self.userInfoVC.presenter setDefaultState];
+    [self addShadowViewAndLoginBtn];
+}
+
+- (void)setDefaultViewData
+{
+    [self.userInfoVC.presenter setDefaultState];
 }
 
 #pragma mark - Utils
@@ -161,15 +177,11 @@
     
     self.pcListVC.tipLabel.frame = CGRectMake(0, 5, SCREEN_WIDTH, 20);
     [self.pcListVC.tableView.tableFooterView addSubview:self.pcListVC.tipLabel];
-//    self.pcListVC.tipLabel.center = self.pcListVC.tableView.tableFooterView.center;
     
     self.pcListVC.tableView.tableHeaderView = self.userInfoVC.view;
 }
 
 - (void)fetchData {
-    
-//    [self.userInfoVC fetchData];
-    
     __weak typeof(self) weakSelf = self;
     [self.pcListVC.presenter fetchDataWithCompletionHandler:^(NSError *error, id result) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];//上层交互逻辑
@@ -202,9 +214,6 @@
             subVC.accoutType =  SelectAccoutTypeHoner;
             [self.navigationController pushViewController:subVC animated:YES];
         }
-//        else {
-//            [helper pushOpenHSType:SelectAccoutTypeP2P Step:[_personModel.enjoyOpenStatus integerValue] nav:self.navigationController];
-//        }
     }
     else if ([title isEqualToString:@"会员等级"]) {
         UCFWebViewJavascriptBridgeLevel *subVC = [[UCFWebViewJavascriptBridgeLevel alloc] initWithNibName:@"UCFWebViewJavascriptBridgeLevel" bundle:nil];
