@@ -25,18 +25,29 @@
 - (void)setOpenStatus:(NSInteger)states {
     _openStatus = states;
     [[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithInteger:states] forKey:OPENSTATUS];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (void)setRealName:(NSString *)realName {
     _realName = realName;
     [[NSUserDefaults standardUserDefaults] setValue:realName forKey:REALNAME];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+
 }
 
 - (void)setMobile:(NSString *)mobile {
     _mobile = mobile;
     [[NSUserDefaults standardUserDefaults] setValue:mobile forKey:PHONENUM];
-}
+    [[NSUserDefaults standardUserDefaults] synchronize];
 
+}
+- (void)setEnjoyOpenStatus:(NSInteger)states
+{
+    _enjoyOpenStatus = states;
+    [[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithInteger:states] forKey:EnjoyState];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+
+}
 - (void)setUserData:(NSDictionary *)dict {
     [self reflectDataFromOtherObject:dict];
     [self storeUserCache:dict];
@@ -55,6 +66,7 @@
     _realName = [[NSUserDefaults standardUserDefaults] valueForKey:REALNAME];
     _openStatus = [[[NSUserDefaults standardUserDefaults] valueForKey:OPENSTATUS] integerValue];
     self.companyAgent = [[[NSUserDefaults standardUserDefaults] valueForKey:COMPANYAGENT] boolValue];
+    self.enjoyOpenStatus = [[[NSUserDefaults standardUserDefaults] valueForKey:EnjoyState] integerValue];
 //    self.userLevel = [[NSUserDefaults standardUserDefaults] valueForKey:USER_LEVEL];
 }
 //存储用户信息
@@ -69,6 +81,7 @@
     [[NSUserDefaults standardUserDefaults] setValue:dict[@"realName"] forKey:REALNAME];
     [[NSUserDefaults standardUserDefaults] setValue:dict[@"openStatus"] forKey:OPENSTATUS];
     [[NSUserDefaults standardUserDefaults] setValue:dict[@"isCompanyAgent"] forKey:COMPANYAGENT];
+    [[NSUserDefaults standardUserDefaults] setValue:dict[@"enjoyOpenStatus"] forKey:EnjoyState];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     //  GrowingIO添加字段
