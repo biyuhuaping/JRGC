@@ -275,7 +275,6 @@
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SecuirtyCenter" bundle:nil];
          UCFBankCardInfoViewController *bankCardInfoVC = [storyboard instantiateViewControllerWithIdentifier:@"bankcardinfo"];
          bankCardInfoVC.accoutType = self.accoutType;
-//          bankCardInfoVC.fromSite = self.accoutType;
          [self.navigationController pushViewController:bankCardInfoVC animated:YES];
     }
     else if([titleStr hasSuffix:@"交易密码"]){

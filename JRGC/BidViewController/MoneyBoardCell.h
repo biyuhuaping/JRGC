@@ -41,6 +41,8 @@
 @property (nonatomic, strong)UISwitch       *gongDouSwitch;
 @property (nonatomic, strong)UIButton       *rechargeBtn;
 @property (nonatomic, strong)UIButton       *allTouziBtn;
+@property (nonatomic, strong)UIView       *lineView;
+@property (nonatomic, strong)UIView       *lineView1;
 @property (nonatomic, assign)id<MoneyBoardCellDelegate> delegate;
 @property (nonatomic, assign)BOOL isCompanyAgent; //是否为机构用户
 @property (nonatomic, strong)MinuteCountDownView     *minuteCountDownView;//倒计时view

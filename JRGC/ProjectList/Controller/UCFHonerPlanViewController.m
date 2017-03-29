@@ -23,6 +23,7 @@
     UCFProjectListModel *_projectListModel;
 }
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
+@property (weak, nonatomic) IBOutlet UIView *loadingView;
 
 @property (nonatomic, strong) NSMutableArray *dataArray;
 // 无数据界面
@@ -44,7 +45,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+
+    baseTitleLabel.text = @"工场尊享";
     [self addLeftButton];
+    [self.view bringSubviewToFront:self.loadingView];
+    [self performSelector:@selector(removeLoadingView) withObject:nil afterDelay:3];
+
     
     self.tableview.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableview.backgroundColor = UIColorWithRGB(0xebebee);
@@ -63,11 +69,18 @@
     
     // 添加传统的下拉刷新
     [self.tableview addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(getNetDataFromNet)];
-    [self.tableview.header beginRefreshing];
+//    [self.tableview.header beginRefreshing];
 //    self.tableview.footer.hidden = YES;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadHonerPlanData) name:@"reloadHonerPlanData" object:nil];
 }
-
+-(void)removeLoadingView
+{
+    for (UIView *view in self.loadingView.subviews) {
+        [view removeFromSuperview];
+    }
+    [self.loadingView removeFromSuperview];
+    [self.tableview.header beginRefreshing];
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.dataArray.count;
@@ -112,7 +125,7 @@
         strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%ld", (long)self.currentPage], @"page", @"20", @"pageSize", @"12", @"type", nil];
     }
     
-    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagProjectHonerPlanList owner:self signature:YES Type:SelectAccoutTypeHoner];
+    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagProjectHonerPlanList owner:self signature:YES Type:self.accoutType];
 }
 
 //开始请求
@@ -173,6 +186,7 @@
             NSArray *prdLabelsListTemp = [NSArray arrayWithArray:(NSArray*)_projectListModel.prdLabelsList];
             UCFProjectDetailViewController *controller = [[UCFProjectDetailViewController alloc] initWithDataDic:dic isTransfer:NO withLabelList:prdLabelsListTemp];
             CGFloat platformSubsidyExpense = [_projectListModel.platformSubsidyExpense floatValue];
+            controller.accoutType = self.accoutType;
             [[NSUserDefaults standardUserDefaults] setValue:[NSString stringWithFormat:@"%.1f",platformSubsidyExpense] forKey:@"platformSubsidyExpense"];
             [self.navigationController pushViewController:controller animated:YES];
         }else {
@@ -187,6 +201,7 @@
             purchaseViewController.dataDict = dic;
             purchaseViewController.bidType = 0;
             purchaseViewController.baseTitleType = @"detail_heTong";
+            purchaseViewController.accoutType = self.accoutType;
             [self.navigationController pushViewController:purchaseViewController animated:YES];
             
         }else if ([dic[@"status"] integerValue] == 21 || [dic[@"status"] integerValue] == 22){
@@ -239,14 +254,14 @@
                 NSInteger isOrder = [_projectListModel.isOrder integerValue];
                 if (isOrder > 0) {
                     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-                    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self Type:SelectAccoutDefault];
+                    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self Type:self.accoutType];
                 } else {
                     UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前标的详情只对投资人开放"];
                     [self.navigationController pushViewController:controller animated:YES];
                 }
             } else {
                 [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-                [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self Type:SelectAccoutDefault];
+                [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self Type:self.accoutType];
             }
         }
         
@@ -266,7 +281,7 @@
              [MBProgressHUD showHUDAddedTo:self.view animated:YES];
              _projectListModel = model;
              NSString *strParameters = [NSString stringWithFormat:@"userId=%@&id=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],_projectListModel.Id];//101943
-             [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDealBid owner:self Type:SelectAccoutDefault];
+             [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDealBid owner:self Type:self.accoutType];
          }
          
          }
