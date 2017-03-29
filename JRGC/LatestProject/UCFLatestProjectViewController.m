@@ -408,6 +408,7 @@
 {
     UCFHonerPlanViewController *horner = [[UCFHonerPlanViewController alloc] initWithNibName:@"UCFHonerPlanViewController" bundle:nil];
     horner.baseTitleText = @"工场尊享";
+    horner.accoutType = SelectAccoutTypeHoner;
     [self.navigationController pushViewController:horner animated:YES];
 }
 
