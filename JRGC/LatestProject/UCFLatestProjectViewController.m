@@ -39,7 +39,7 @@
 #import "UCFProjectListController.h"        //项目列表
 #import "RiskAssessmentViewController.h"    //风险评估
 
-#import "UCFP2PViewController.h"
+#import "UCFProjectListController.h"
 #import "UCFHonerPlanViewController.h"
 
 #import "UCFCollectionDetailViewController.h" //集合详情
@@ -399,9 +399,9 @@
 
 - (void)homeButtonPressedP2PButton:(UIButton *)button
 {
-    UCFP2PViewController *p2p = [[UCFP2PViewController alloc] initWithNibName:@"UCFP2PViewController" bundle:nil];
-    p2p.baseTitleText = @"工场P2P";
-    [self.navigationController pushViewController:p2p animated:YES];
+    UCFProjectListController *projectList = [[UCFProjectListController alloc] initWithNibName:@"UCFProjectListController" bundle:nil];
+//    p2p.baseTitleText = @"工场P2P";
+    [self.navigationController pushViewController:projectList animated:YES];
 }
 
 - (void)homeButtonPressedHornorButton:(UIButton *)button
