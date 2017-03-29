@@ -9,5 +9,5 @@
 #import "UCFBaseViewController.h"
 
 @interface UCFRegisterFinshViewController : UCFBaseViewController
-
+@property BOOL isPresentViewController; //是否弹出视图
 @end

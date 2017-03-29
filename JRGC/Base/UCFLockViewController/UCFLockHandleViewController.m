@@ -613,6 +613,7 @@
             
             
             UCFRegisterFinshViewController * VC = [[UCFRegisterFinshViewController alloc] initWithNibName:@"UCFRegisterFinshViewController" bundle:nil];
+            VC.isPresentViewController = YES;
             AppDelegate *delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
             VC.rootVc = delegate.tabBarController;
             BaseNavigationViewController *nav = [[BaseNavigationViewController alloc] initWithRootViewController:VC];
@@ -1256,6 +1257,7 @@
             
             //设置手势密码后弹出徽商流程
             UCFRegisterFinshViewController * VC = [[UCFRegisterFinshViewController alloc] initWithNibName:@"UCFRegisterFinshViewController" bundle:nil];
+            VC.isPresentViewController = YES;
             AppDelegate *delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
             VC.rootVc = delegate.tabBarController;
             BaseNavigationViewController *nav = [[BaseNavigationViewController alloc] initWithRootViewController:VC];

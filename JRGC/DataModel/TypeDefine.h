@@ -177,7 +177,7 @@
 #define TRACLAIMSSUBMIT     @"api/investTraClaims/v2/submit.json" //债转webView确认接口
 #define SETHSPWDRETNRNJSON  @"api/userAccount/v2/setHsPwdReturnJson.json"//设置、修改交易密码通用
 #define WITHDRAWMONEYVALIDATE @"api/withdraw/v2/validate.json" //提现金额是否超额接口
-#define REGISTRESULT        @"newuserregist/registResult"            //注册成功活动反的数据
+#define REGISTRESULT        @"api/register/v2/registResult.json"            //注册成功活动反的数据
 #define GETREGISTERTOKEN    @"api/register/v2/getRegisterInfo.json"  //获取注册token
 #define REURNCOUPONLIST     @"api/discountCoupon/v2/returnCouponList.json"      //返现券&返息券列表
 #define COUPONCERTIFICATE   @"api/discountCoupon/v2/couponCertificateList.json" //兑换券列表
