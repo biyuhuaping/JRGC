@@ -170,6 +170,8 @@ return shared##className; \
 // 新手政策开关（0：关，1：开）
 #define NOVICEPOLICEONOFF     @"novicePoliceOnOff"
 
+#define RELOADP2PORHONERACCOTDATA  @"ReloadP2POrHonerAccoutData" //刷新p2p或尊享账户数据
+
 
 #define BBSURL          @"https://bbs.9888.cn/appaction.php"
 #define MALLURL         @"https://m.dougemall.com"

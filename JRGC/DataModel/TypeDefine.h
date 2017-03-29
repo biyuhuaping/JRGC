@@ -147,7 +147,7 @@
 #define GETWORKPOINT                  @"api/userScore/v2/queryScoreList.json"       //工分请求
 #define COUPONLIST                    @"beansMall/couponList"           //兑换券列表
 
-#define GETCONTRIBUTIONVALUEINVOT     @"userLevel/contributeSource"//投资贡献值
+#define GETCONTRIBUTIONVALUEINVOT     @"api/userLevel/v2/contributeSource.json"//投资贡献值
 
 #define FACEINFOCOLLECTION  @"faceRecordInfo/collectFaceMess"//人脸识别-人脸信息录入
 #define FACESWITCHSTAUS               @"faceRecordInfo/showFaceSwitchStatus"//人脸识别开关状态查询
