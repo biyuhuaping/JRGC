@@ -23,11 +23,14 @@
 #import "UCFTopUpViewController.h"
 #import "UCFHuiShangBankViewController.h"
 #import "UCFHuiBuinessDetailViewController.h"
-@interface UCFP2POrHonerAccoutViewController ()<UITableViewDelegate,UITableViewDataSource,UCFP2POrHornerTabHeaderViewDelete>
+#import "UILabel+Misc.h"
+#import "HSHelper.h"
+@interface UCFP2POrHonerAccoutViewController ()<UITableViewDelegate,UITableViewDataSource,UCFP2POrHornerTabHeaderViewDelete,UIAlertViewDelegate>
 {
     UCFP2POrHornerTabHeaderView *_headerView;
     BOOL _isShowOrHideAccoutMoney;
     NSDictionary *_dataDict;
+    int _openState;
 }
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property(strong,nonatomic) NSMutableArray *cellItemsData;
@@ -50,10 +53,10 @@
 
 -(void)viewDidLoad{
     [super viewDidLoad];
-    [self addLeftButton];
+    
     [self createUIInfoView];//初始化UI
     
-   
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getP2POrHonerAccoutHttpRequest) name:RELOADP2PORHONERACCOTDATA object:nil];
 }
 -(void)removeLoadingView
 {
@@ -72,7 +75,9 @@
         [self performSelector:@selector(removeLoadingView) withObject:nil afterDelay:3];
         baseTitleLabel.text = @"尊享账户";
          _isShowOrHideAccoutMoney = [[NSUserDefaults standardUserDefaults] boolForKey:@"IsShowHonerAccoutMoney"];
+     
     }else{
+        [self addLeftButton];
         self.loadingView.hidden = YES;
         [self.view sendSubviewToBack:self.loadingView];
         [self performSelector:@selector(removeLoadingView) withObject:nil afterDelay:0.0];
@@ -115,13 +120,6 @@
         
         UCFSettingItem *myInVest = [UCFSettingArrowItem itemWithIcon:nil title:@"我的投资" destVcClass:[MyViewController class]];
         UCFSettingItem *backMoneyDetail = [UCFSettingArrowItem itemWithIcon:nil title:@"回款明细" destVcClass:[MyViewController class]];
-      
-
-        if (self.accoutType == SelectAccoutTypeHoner) {
-          
-        }else{
-           
-        }
         UCFSettingItem *bundleCard = [UCFSettingArrowItem itemWithIcon:@"safecenter_icon_bankcard" title:@"修改银行卡" destVcClass:[UCFBankCardInfoViewController class]];
         
         UCFSettingItem *setChangePassword = [UCFSettingArrowItem itemWithIcon:@"safecenter_icon_transaction" title:@"修改交易密码" destVcClass:[TradePasswordVC class]];
@@ -231,6 +229,10 @@
     UCFSettingItem *item = group.items[indexPath.row];
     cell.textLabel.text = item.title;
     cell.detailTextLabel.text =item.subtitle;
+    if ([cell.textLabel.text rangeOfString:@"(开启后才可进行批量投资)"].location != NSNotFound ) {
+        [cell.textLabel setFont:[UIFont systemFontOfSize:13] string:@"(开启后才可进行批量投资)"];
+        [cell.textLabel setFontColor:UIColorWithRGB(0x999999) string:@"(开启后才可进行批量投资)"];
+    }
     
     DLog(@"item.subtitle----?>>>>%@", item.subtitle);
     return cell;
@@ -278,15 +280,8 @@
          [self.navigationController pushViewController:bankCardInfoVC animated:YES];
     }
     else if([titleStr hasSuffix:@"交易密码"]){
-         NSInteger openStatus = [UserInfoSingle sharedManager].openStatus;
-        if(openStatus < 3){
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请先开通徽商存管账户" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-            alert.tag = 10005;
-            [alert show];
-        }else if(openStatus == 3){//设置交易密码
-            UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:3];
-            [self.navigationController pushViewController:vc animated:YES];
-        }else{
+        
+        if([self checkIDAAndBankBlindState:self.accoutType]){
             //修改交易密码
             TradePasswordVC * tradePasswordVC = [[TradePasswordVC alloc]initWithNibName:@"TradePasswordVC" bundle:nil];
             tradePasswordVC.title = titleStr;
@@ -352,20 +347,40 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark - 无奈的代码
+- (BOOL)checkIDAAndBankBlindState:(SelectAccoutType)type
+{
+ 
+    __weak typeof(self) weakSelf = self;
+    if (_openState == 1 || _openState == 2) {
+        NSString *message =  @"请先设置交易密码";
+        BlockUIAlertView *alert = [[BlockUIAlertView alloc] initWithTitle:@"提示" message:message cancelButtonTitle:@"确定" clickButton:^(NSInteger index){
+            if (index == 0) {
+                HSHelper *helper = [HSHelper new];
+                [helper pushOpenHSType:type Step:3 nav:weakSelf.navigationController];
+            }
+        } otherButtonTitles:@"取消"];
+        [alert show];
+        return NO;
+    }
+    return YES;
 }
-*/
 #pragma mark -
 #pragma mark 提现点击事件
 - (IBAction)clickCashBtn:(UIButton *)sender {
     
-    
+    if (self.accoutType == SelectAccoutTypeHoner) { //尊享账户
+        if(_openState < 3)//未设置交易密码
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请先设置交易密码" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+            alert.tag = 1010;
+            [alert show];
+            return ;
+        }
+    }else {
+        
+        
+    }
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSString *userSatues = [NSString stringWithFormat:@"%ld",(long)[UserInfoSingle sharedManager].openStatus];
     NSDictionary *parametersDict = @{};
@@ -382,6 +397,13 @@
     rechargeVC.accoutType = self.accoutType;
     [self.navigationController pushViewController:rechargeVC animated:YES];
 
+}
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (alertView.tag == 1010) {
+        UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:3];
+        vc.accoutType = self.accoutType;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 #pragma mark -
 #pragma mark  网络请求
@@ -432,6 +454,7 @@
             if (ret)
             {
                 _dataDict = dataDict;
+                _openState = [[dataDict objectSafeForKey:@"openState"] intValue];
                 _headerView.availableAmountLab.text = [NSString stringWithFormat:@"¥%@",[dataDict objectSafeForKey:@"cashBalance"]];//可用金额
                 _headerView.accumulatedIncomeLab.text= [NSString stringWithFormat:@"¥%@",[dataDict objectSafeForKey:@"interests"]];//累计收益
                 _headerView.totalIncomeLab.text= [NSString stringWithFormat:@"¥%@",[dataDict objectSafeForKey:@"total"]];//总收益
@@ -520,5 +543,8 @@
     if (self.tableView.header.isRefreshing){
         [self.tableView.header endRefreshing];
     }
+}
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 @end

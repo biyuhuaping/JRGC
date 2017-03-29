@@ -251,12 +251,13 @@
             break;
     }
     
-    NSString *strParameters = [NSString stringWithFormat:@"userId=%@&type=%lu&page=%lu&rows=%@", [[NSUserDefaults standardUserDefaults] valueForKey:UUID],(long)_currentSelectedState,(long)pageNum,@"20"];
- 
-   
+//    NSString *strParameters = [NSString stringWithFormat:@"userId=%@&type=%lu&page=%lu&rows=%@", [[NSUserDefaults standardUserDefaults] valueForKey:UUID],(long)_currentSelectedState,(long)pageNum,@"20"];
     
-//    NSString *strParameters = [NSString stringWithFormat:@"userId=%@&status=%lu&page=%lu&rows=%@", [[NSUserDefaults standardUserDefaults] valueForKey:UUID],(long)_currentSelectedState, (long)pageNum, @"20"];
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagContributionValueInvot owner:self Type:SelectAccoutDefault];
+    NSString *typeStr = [NSString stringWithFormat:@"%ld",_currentSelectedState];
+    NSString *pageStr = [NSString stringWithFormat:@"%ld",pageNum];
+    
+    NSDictionary *paramerDict = @{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"type":typeStr,@"page":pageStr,@"rows":@"20"};
+    [[NetworkModule sharedNetworkModule] newPostReq:paramerDict tag:kSXTagContributionValueInvot owner:self signature:YES Type:SelectAccoutDefault];
     
    
     
@@ -274,14 +275,14 @@
     NSString *data = (NSString *)result;
 
     NSMutableDictionary *dic = [data objectFromJSONString];
-    NSString *rstcode = dic[@"status"];
-    NSString *rsttext = dic[@"statusdes"];
+    BOOL rstcode = [dic[@"ret"] boolValue];
+    NSString *rsttext = dic[@"message"];
   
     
-    DBLOG(@"兑换券列表：%@",dic);
+    DBLOG(@"UCFContributionValueViewController贡献值列表：%@",dic);
     
     if (tag.intValue == kSXTagContributionValueInvot) {
-        if ([rstcode intValue] == 1) {
+        if (rstcode) {
             
             self.lable_invotValue.text = [NSString stringWithFormat:@"投资贡献值%@",[dic objectSafeForKey:@"investmentContribution"]];//***投资贡献值
             self.lable_investValue.text = [NSString stringWithFormat:@"邀友贡献值%@",[dic objectSafeForKey:@"inviteFriendContribution"]];//***邀友贡献值
