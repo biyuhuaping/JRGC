@@ -19,5 +19,6 @@
 - (NSString *)itemSubtitle;
 - (NSString *)itemDescribe;
 - (NSString *)itemIcon;
+- (BOOL)isShow;
 //- (NSIndexPath *)indexPath;
 @end

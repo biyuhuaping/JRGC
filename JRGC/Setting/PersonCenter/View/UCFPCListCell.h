@@ -12,4 +12,5 @@
 @interface UCFPCListCell : UITableViewCell
 @property (strong, nonatomic) UCFPCListCellPresenter *presenter;
 @property (strong, nonatomic) NSIndexPath *indexPath;
+@property (weak, nonatomic) UITableView *tableView;
 @end
