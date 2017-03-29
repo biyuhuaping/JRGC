@@ -1175,12 +1175,10 @@ static NetworkModule *gInstance = NULL;
             parameter = [NEW_SERVER_IP stringByAppendingString:GETTOKENID];
         }
             break;
-<<<<<<< HEAD
         case kSXTagRegistResult: {
             parameter = [NEW_SERVER_IP stringByAppendingString:REGISTRESULT];
         }
             break;
-=======
         case kSXTagPersonCenter: {
             parameter = [NEW_SERVER_IP stringByAppendingString:PERSON_CENTER];
         }
@@ -1192,7 +1190,6 @@ static NetworkModule *gInstance = NULL;
         case kSXTagContributionValueInvot:
             parameter = [NEW_SERVER_IP stringByAppendingString:GETCONTRIBUTIONVALUEINVOT];
             break;
->>>>>>> master
     }
     //给原有参数字典添加公共参数
     if (!data) {
