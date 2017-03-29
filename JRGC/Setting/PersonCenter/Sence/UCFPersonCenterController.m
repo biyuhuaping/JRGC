@@ -33,6 +33,8 @@
 #import "MJRefresh.h"
 #import "AuxiliaryFunc.h"
 #import "HSHelper.h"
+
+#import "Touch3DSingle.h"
 @interface UCFPersonCenterController () <UCFPCListViewControllerCallBack,LoginShadowDelegate>
 
 @property (nonatomic, strong) UCFUserInfoController *userInfoVC;
@@ -41,6 +43,15 @@
 @end
 
 @implementation UCFPersonCenterController
+
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(responds3DTouchClick) name:@"responds3DTouchClick" object:nil];
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -53,6 +64,38 @@
     
     [_pcListVC.tableView
       addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(fetchData)];
+    
+}
+
+- (void)responds3DTouchClick
+{
+    if ([Touch3DSingle sharedTouch3DSingle].isLoad) {
+        [Touch3DSingle sharedTouch3DSingle].isLoad = NO;
+    }else
+        return;
+    int type = [[Touch3DSingle sharedTouch3DSingle].type intValue];
+    [self.navigationController popToRootViewControllerAnimated:NO];
+    switch (type) {
+        case 0:{//邀请返利
+            UCFFeedBackViewController *subVC = [[UCFFeedBackViewController alloc] initWithNibName:@"UCFFeedBackViewController" bundle:nil];
+            subVC.title = @"邀请返利";
+            [self.navigationController pushViewController:subVC animated:YES];
+        }
+            break;
+        case 1:{//工场码
+//            fixedScreenLight = [UIScreen mainScreen].brightness;
+            UCFFacCodeViewController *subVC = [[UCFFacCodeViewController alloc] init];
+            subVC.title = @"我的工场码";
+//            subVC.urlStr = [NSString stringWithFormat:@"https://m.9888.cn/mpwap/mycode.jsp?pcode=%@&sex=%@",_gcm,_sex];
+            [self.navigationController pushViewController:subVC animated:YES];
+        }
+            break;
+        case 2:{//签到
+//            [self signedButton:nil];
+        }
+            break;
+    }
+
 }
 
 - (void)viewWillAppear:(BOOL)animated

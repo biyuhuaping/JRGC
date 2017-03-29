@@ -921,17 +921,18 @@
                 NSString *openStatusStr = [[dic objectSafeForKey:@"data" ] objectSafeForKey:@"openStatus"];
                 [UserInfoSingle sharedManager].openStatus = [openStatusStr integerValue];
                 //暂时添加，未调试接口 *** hqy
-                if([openStatusStr intValue] > 3 ){
-                    _tipsViewHeight.constant = 0;
-                }else{
-                    _tipsViewHeight.constant = 35.0f;
-                }
-                NSString *tipsDesStr = [[dic objectSafeForKey:@"data" ] objectSafeForKey:@"tipsDes"];//tips提示
-                if (![tipsDesStr isEqualToString:@""]) {
-                    _tipsLabel.text = tipsDesStr;
-                }
+//                if([openStatusStr intValue] > 3 ){
+//                    _tipsViewHeight.constant = 0;
+//                }else{
+//                    _tipsViewHeight.constant = 35.0f;
+//                }
+//                NSString *tipsDesStr = [[dic objectSafeForKey:@"data" ] objectSafeForKey:@"tipsDes"];//tips提示
+//                if (![tipsDesStr isEqualToString:@""]) {
+//                    _tipsLabel.text = tipsDesStr;
+//                    _tipsViewHeight.constant = 0;
+//                }
             }else{
-               _tipsViewHeight.constant = 0;
+//               _tipsViewHeight.constant = 0;
             }
             //============ 公告 ============
             _noticId = dic[@"data"][@"noticId"];
