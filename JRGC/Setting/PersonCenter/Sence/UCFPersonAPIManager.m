@@ -45,6 +45,8 @@
             
             NSDictionary *result = [dic objectSafeDictionaryForKey:@"data"];
             UCFPersonCenterModel *personCenterModel = [UCFPersonCenterModel personCenterWithDict:result];
+            [UserInfoSingle sharedManager].enjoyOpenStatus = [personCenterModel.enjoyOpenStatus integerValue];
+            [UserInfoSingle sharedManager].openStatus = [personCenterModel.p2pOpenStatus integerValue];
             self.completionHandler(nil, personCenterModel);
         }
         else {

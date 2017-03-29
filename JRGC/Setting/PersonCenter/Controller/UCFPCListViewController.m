@@ -35,6 +35,7 @@
         self.tableView.dataSource = self;
         
         self.tableView.backgroundColor = UIColorWithRGB(0xebebee);
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         
         self.presenter = presenter;
         self.presenter.view = self;//将V和P进行绑定(这里因为V是系统的TableView 无法简单的声明一个view属性 所以就绑定到TableView的持有者上面)
@@ -111,6 +112,7 @@
         if (!cell) {
             cell = [[[NSBundle mainBundle] loadNibNamed:ReuseIdentifier1 owner:self options:nil] lastObject];
         }
+        cell.tableView = tableView;
         UCFPCGroupPresenter *groupPresenter = [self.presenter.allDatas objectAtIndex:indexPath.section];
         cell.presenter = [groupPresenter.items objectAtIndex:indexPath.row];
         cell.indexPath = indexPath;
@@ -121,6 +123,7 @@
         if (!cell) {
             cell = [[[NSBundle mainBundle] loadNibNamed:ReuseIdentifier2 owner:self options:nil] lastObject];
         }
+        cell.tableView = tableView;
         UCFPCGroupPresenter *groupPresenter = [self.presenter.allDatas objectAtIndex:indexPath.section];
         cell.presenter = [groupPresenter.items objectAtIndex:indexPath.row];
         cell.indexPath = indexPath;
@@ -176,6 +179,12 @@
     } else if (self.presenter.allDatas.count == 0) {
         //        show error view
     }
+}
+
+#pragma mark - 恢复初始数据
+- (void)setDefaultState
+{
+    [self.tableView reloadData];
 }
 
 @end

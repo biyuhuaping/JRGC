@@ -105,7 +105,6 @@
     [self initTableView];
     _noDataView = [[UCFNoDataView alloc] initWithFrame:_tableView1.bounds errorTitle:@"暂无数据"];
     
-    
     _alertView.frame = CGRectMake(0, 0, 265, 274);
     _alertView.layer.cornerRadius = 8;
 
@@ -115,7 +114,7 @@
     
     NSString *gcmCode = [[NSUserDefaults standardUserDefaults] objectForKey:@"gcmCode"];
     if ([gcmCode hasPrefix:@"A"]) {
-        [self addRightButton];
+//        [self addRightButton];
     }
     else {
         self.navigationItem.rightBarButtonItem = nil;

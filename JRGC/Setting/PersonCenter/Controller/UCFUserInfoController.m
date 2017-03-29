@@ -61,8 +61,6 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapUserIcon:)];
     [self.userIconBackView addGestureRecognizer:tap];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(responds3DTouchClick) name:@"responds3DTouchClick" object:nil];
-    
 }
 
 - (void)tapUserIcon:(UIGestureRecognizer *)gesture
@@ -132,8 +130,19 @@
 
 #pragma mrak - 签到按钮点击
 - (IBAction)signClicked:(UIButton *)sender {
+    
 }
 
-
+#pragma mark - 恢复初始数据
+- (void)setDefaultState
+{
+    self.userIconImageView.image = [UIImage imageNamed:@"password_icon_head"];
+    self.userNameLabel.text = @"未实名";
+    self.userLevelImageView.image = [UIImage imageNamed:@"usercenter_vip0_icon"];
+    self.unreadMessageImageView.hidden = YES;
+    self.facBeanLabel.text = @"0";
+    self.couponLabel.text = @"0";
+    self.workPointLabel.text = @"0";
+}
 
 @end

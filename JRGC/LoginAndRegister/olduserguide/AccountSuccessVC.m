@@ -12,6 +12,7 @@
 
 @property (strong, nonatomic) IBOutlet UIButton *submitDataButton;
 @property (strong, nonatomic) IBOutlet UILabel  *showLabel; //显示徽商或者P2P的文案
+@property (weak, nonatomic) IBOutlet UIImageView *successTipView;
 @end
 
 @implementation AccountSuccessVC
@@ -22,6 +23,8 @@
     [_submitDataButton setBackgroundImage:[[UIImage imageNamed:@"btn_red"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:2.5] forState:UIControlStateNormal];
     [_submitDataButton setBackgroundImage:[[UIImage imageNamed:@"btn_red_highlight"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:2.5] forState:UIControlStateHighlighted];
     _showLabel.text = [_site isEqualToString:@"1"] ? @"P2P徽商存管账户":@"尊享徽商存管账户";
+    NSString *imageStr = [_site isEqualToString:@"1"] ? @"account_successful_img":@"account_successful_zunxiang";
+    _successTipView.image = [UIImage imageNamed:imageStr];
 }
 
 - (void)didReceiveMemoryWarning {
