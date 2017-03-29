@@ -53,9 +53,11 @@
     
     if (self.flagInvestSuc) { //提现成功返回个人中心
         [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
+     
         [self.navigationController popToRootViewControllerAnimated:YES];
     }else{
         [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:RELOADP2PORHONERACCOTDATA object:nil];
         [self.navigationController popViewControllerAnimated:YES];
     }
 }

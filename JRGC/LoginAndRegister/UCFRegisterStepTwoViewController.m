@@ -212,6 +212,18 @@
             }
         }
 
+    } else if (tag.intValue == kSXTagRegisterSendCodeAndFindPwd) {
+        if ([[dic objectForKey:@"ret"] boolValue]) {
+            [MBProgressHUD displayHudError:rsttext];
+            [self performSelector:@selector(veriFieldFstRepder:) withObject:nil afterDelay:2.5];
+            [self verificatioCodeSend];
+        }
+        else {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:dic[@"message"] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"联系客服", nil];
+            alertView.tag = 1001;
+            [NSTimer scheduledTimerWithTimeInterval:55.0f target:self selector:@selector(performDismiss:) userInfo:alertView repeats:NO];
+            [alertView show];
+        }
     }
 }
 #pragma mark  注册成功之后向iOS发送数据 验签串 和工场码Data

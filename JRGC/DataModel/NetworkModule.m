@@ -424,9 +424,9 @@ static NetworkModule *gInstance = NULL;
 //        case kSXTagGetWorkPoint:
 //            parameter = [SERVER_IP stringByAppendingString:GETWORKPOINT];
 //             break;
-        case kSXTagContributionValueInvot:
-            parameter = [serverIP stringByAppendingString:GETCONTRIBUTIONVALUEINVOT];
-            break;
+//        case kSXTagContributionValueInvot:
+//            parameter = [serverIP stringByAppendingString:GETCONTRIBUTIONVALUEINVOT];
+//            break;
         case kSXTagFaceInfoCollection:
             parameter = [serverIP stringByAppendingString:FACEINFOCOLLECTION];
             break;
@@ -1182,6 +1182,9 @@ static NetworkModule *gInstance = NULL;
         case kSXTagUserAccountInfo: {
             parameter = [NEW_SERVER_IP stringByAppendingString:USERACOUNTINFOURL];
         }
+            break;
+        case kSXTagContributionValueInvot:
+            parameter = [NEW_SERVER_IP stringByAppendingString:GETCONTRIBUTIONVALUEINVOT];
             break;
     }
     //给原有参数字典添加公共参数
