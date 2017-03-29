@@ -8,6 +8,7 @@
 
 #import "UCFUserInfoController.h"
 #import "UCFPersonCenterModel.h"
+#import "HWWeakTimer.h"
 
 @interface UCFUserInfoController () <UserInfoViewPresenterCallBack>
 @property (weak, nonatomic) IBOutlet UIView *userIconBackView;
@@ -28,6 +29,11 @@
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *segLineView1_width;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *segLineView2_width;
+
+@property (nonatomic, weak) NSTimer *cycleTimer;
+@property (nonatomic, assign) BOOL isAddScreenLight;
+@property (nonatomic, assign) CGFloat preScreenLight;
+
 
 @end
 
@@ -144,5 +150,52 @@
     self.couponLabel.text = @"0";
     self.workPointLabel.text = @"0";
 }
+
+- (void)addTimerNotification
+{
+    //增加界面亮度通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(beginAddTimer) name:AddBrightness object:nil];
+    //降低亮度通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(beginReduceTimer) name:ReduceBrightness object:nil];
+    //结束亮度通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(endTimer) name:EndBrightnessTimer object:nil];
+    //添加一个计时器，使亮度渐增亮
+    self.cycleTimer = [HWWeakTimer scheduledTimerWithTimeInterval:0.01f target:self selector:@selector(changeWindowBrightness) userInfo:nil repeats:YES];
+    //让计时器停止运行
+    [self.cycleTimer setFireDate:[NSDate distantFuture]];
+}
+
+- (void)changeWindowBrightness
+{
+    if (_isAddScreenLight) {
+        _preScreenLight += 0.003;
+        if (_preScreenLight >= 1) {
+            [_cycleTimer setFireDate:[NSDate distantFuture]];
+        }
+    } else {
+        _preScreenLight -= 0.003;
+        if (_preScreenLight <= _fixedScreenLight) {
+            [_cycleTimer setFireDate:[NSDate distantFuture]];
+        }
+    }
+    [[UIScreen mainScreen] setBrightness:_preScreenLight];
+}
+
+//TODO:timer
+- (void)endTimer
+{
+    [_cycleTimer setFireDate:[NSDate distantPast]];
+}
+- (void)beginAddTimer
+{
+    _isAddScreenLight = YES;
+    [_cycleTimer setFireDate:[NSDate distantPast]];
+}
+- (void)beginReduceTimer
+{
+    _isAddScreenLight = NO;
+    [_cycleTimer setFireDate:[NSDate distantPast]];
+}
+
 
 @end

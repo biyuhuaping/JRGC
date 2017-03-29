@@ -88,7 +88,7 @@
         }
             break;
         case 1:{//工场码
-//            fixedScreenLight = [UIScreen mainScreen].brightness;
+            self.userInfoVC.fixedScreenLight = [UIScreen mainScreen].brightness;
             UCFFacCodeViewController *subVC = [[UCFFacCodeViewController alloc] init];
             subVC.title = @"我的工场码";
 //            subVC.urlStr = [NSString stringWithFormat:@"https://m.9888.cn/mpwap/mycode.jsp?pcode=%@&sex=%@",_gcm,_sex];
