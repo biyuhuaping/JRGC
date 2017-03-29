@@ -23,7 +23,7 @@
 #define PRDTRANSFER_DETAIL  @"newprdTransfer/showDetailTwo"//转让标详情
 #define PRDCLAIMS_DEALBID   @"newPrdClaims/dealBidTwo"
 #define PRDCLAIMS_SAVEDEALS @"api/invest/v2/submitTender.json"
-#define PERSON_CENTER       @"newaccount/center"
+#define PERSON_CENTER       @"api/homePage/v2/userCenter.json"  // @"newaccount/center" 个人中心
 #define MONEY_OVERVIEW      @"newaccount/overview"
 #define FUNDS_DETAIL        @"newaccount/funds"
 #define ACCOUNT_SAFE        @"newsafe/accountSafe"
@@ -147,7 +147,7 @@
 #define GETWORKPOINT                  @"api/userScore/v2/queryScoreList.json"       //工分请求
 #define COUPONLIST                    @"beansMall/couponList"           //兑换券列表
 
-#define GETCONTRIBUTIONVALUEINVOT     @"userLevel/contributeSource"//投资贡献值
+#define GETCONTRIBUTIONVALUEINVOT     @"api/userLevel/v2/contributeSource.json"//投资贡献值
 
 #define FACEINFOCOLLECTION  @"faceRecordInfo/collectFaceMess"//人脸识别-人脸信息录入
 #define FACESWITCHSTAUS               @"faceRecordInfo/showFaceSwitchStatus"//人脸识别开关状态查询
@@ -218,6 +218,8 @@
 #define DISCOVERYURL    @"https://m.9888.cn/static/wap/fa-xian/index.html"     //发现
 #define RegistCheckQdIsLimit @"newuserregist/checkQdIslimit"
 #define EASYLOAN_URL    @"https://m.easyloan888.com/static/loan/user-jrgc-login/index.html" //借款URL
+
+#define USERACOUNTINFOURL  @"api/userAccount/v2/userAccountInfo.json" //P2P或尊享账户信息
 
 
 
@@ -419,6 +421,7 @@ enum kSXTag
     kSXTagGetShareMessage,                  //首页2017新手政策分享注册链接
     kSXTagRegistCheckQUDAO,                 //检查该渠道是否用工场码
     kSXTagGetTokenId,                       //获取放心花界面的token
+    kSXTagUserAccountInfo                   //P2P或尊享账户信息
 };
 
 typedef enum kSXTag kSXTag;

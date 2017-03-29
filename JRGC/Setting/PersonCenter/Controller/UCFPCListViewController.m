@@ -7,7 +7,7 @@
 //
 
 #import "UCFPCListViewController.h"
-
+#import "MJRefresh.h"
 #import "UCFPCListCell.h"
 #import "UCFPCFunctionCell.h"
 #import "UCFPCGroupPresenter.h"
@@ -15,6 +15,7 @@
 @interface UCFPCListViewController () <PCListViewPresenterCallBack>
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) UCFPCListViewPresenter *presenter;
+@property (strong, nonatomic) UILabel *tipLabel;
 @end
 
 #define RowHeight0 65
@@ -33,13 +34,26 @@
         self.tableView.delegate = self;
         self.tableView.dataSource = self;
         
+        self.tableView.backgroundColor = UIColorWithRGB(0xebebee);
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        
         self.presenter = presenter;
         self.presenter.view = self;//将V和P进行绑定(这里因为V是系统的TableView 无法简单的声明一个view属性 所以就绑定到TableView的持有者上面)
         
-        __weak typeof(self) weakSelf = self;
-//        self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-//            [weakSelf.presenter refreshData];
-//        }];
+        UILabel *tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 20)];
+        tipLabel.font = [UIFont systemFontOfSize:12];
+        tipLabel.text = @"市场有风险 投资需谨慎";
+        tipLabel.textColor = UIColorWithRGB(0x999999);
+        tipLabel.textAlignment = NSTextAlignmentCenter;
+        self.tipLabel = tipLabel;
+        
+        UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 50)];
+        [footer addSubview:tipLabel];
+        self.tableView.tableFooterView = footer;
+        
+        tipLabel.center = footer.center;
+        
+         [self.tableView addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(refreshData)];
 //        self.tableView.footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
 //            [weakSelf.presenter loadMoreData];
 //        }];
@@ -56,11 +70,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    if (section==0) {
-        return 0;
-    }
-    else
-        return 30;
+    return 0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -68,15 +78,10 @@
     return 10;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 30)];
-    [view setBackgroundColor:[UIColor grayColor]];
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, view.width-30, view.height)];
-    label.text = @"常用工具";
-    label.font = [UIFont systemFontOfSize:14];
-    label.textColor = UIColorWithRGB(0x333333);
-    [view addSubview:label];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 10)];
+    [view setBackgroundColor:UIColorWithRGB(0xebebee)];
     return view;
 }
 
@@ -90,8 +95,14 @@
     if (indexPath.section == 0) {
         return RowHeight0;
     }
-    else
-        return RowHeight1;
+    else {
+        if (indexPath.row == 0) {
+            return 30;
+        }
+        else
+            return RowHeight1;
+    }
+    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -101,9 +112,10 @@
         if (!cell) {
             cell = [[[NSBundle mainBundle] loadNibNamed:ReuseIdentifier1 owner:self options:nil] lastObject];
         }
+        cell.tableView = tableView;
         UCFPCGroupPresenter *groupPresenter = [self.presenter.allDatas objectAtIndex:indexPath.section];
         cell.presenter = [groupPresenter.items objectAtIndex:indexPath.row];
-        
+        cell.indexPath = indexPath;
         return cell;
     }
     else if (indexPath.section == 1) {
@@ -111,8 +123,10 @@
         if (!cell) {
             cell = [[[NSBundle mainBundle] loadNibNamed:ReuseIdentifier2 owner:self options:nil] lastObject];
         }
+        cell.tableView = tableView;
         UCFPCGroupPresenter *groupPresenter = [self.presenter.allDatas objectAtIndex:indexPath.section];
         cell.presenter = [groupPresenter.items objectAtIndex:indexPath.row];
+        cell.indexPath = indexPath;
         return cell;
     }
     
@@ -133,7 +147,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
+    if (indexPath.section == 1 && indexPath.row == 0) {
+        return;
+    }
     if ([self.delegate respondsToSelector:@selector(pcListViewControllerdidSelectItem:)]) {
         UCFPCGroupPresenter *groupPresenter = [self.presenter.allDatas objectAtIndex:indexPath.section];
         UCFPCListCellPresenter *cellPresenter = [groupPresenter.items objectAtIndex:indexPath.row];
@@ -141,27 +157,34 @@
     }
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    CGFloat sectionHeaderHeight = 40;
-    if (scrollView.contentOffset.y<=sectionHeaderHeight&&scrollView.contentOffset.y>=0) {
-        scrollView.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, 0, 0);
-    } else if (scrollView.contentOffset.y>=sectionHeaderHeight) {
-        scrollView.contentInset = UIEdgeInsetsMake(-sectionHeaderHeight, 0, 0, 0);
-    }
-}
+#pragma mark - 禁止tableview的section 随cell移动
+
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+//    CGFloat sectionHeaderHeight = 40;
+//    if (scrollView.contentOffset.y<=sectionHeaderHeight&&scrollView.contentOffset.y>=0) {
+//        scrollView.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, 0, 0);
+//    } else if (scrollView.contentOffset.y>=sectionHeaderHeight) {
+//        scrollView.contentInset = UIEdgeInsetsMake(-sectionHeaderHeight, 0, 0, 0);
+//    }
+//}
 
 #pragma mark - BlogViewPresenterCallBack
 
 - (void)pcListViewPresenter:(UCFPCListViewPresenter *)presenter didRefreshDataWithResult:(id)result error:(NSError *)error{
-//    [self.tableView.header endRefreshing];
+    [self.tableView.header endRefreshing];
     
     if (!error) {
-        
         [self.tableView reloadData];
 //        [self.tableView.footer resetNoMoreData];
     } else if (self.presenter.allDatas.count == 0) {
         //        show error view
     }
+}
+
+#pragma mark - 恢复初始数据
+- (void)setDefaultState
+{
+    [self.tableView reloadData];
 }
 
 @end

@@ -22,6 +22,8 @@
 
 @property (assign,nonatomic) SelectAccoutType accoutTpye;
 @property (assign,nonatomic) BOOL isShowOrHideAccoutMoney;
+
+@property (strong,nonatomic) NSDictionary *dataDict;
 ;
 @property (nonatomic,assign) id<UCFP2POrHornerTabHeaderViewDelete> delegate;
 @end

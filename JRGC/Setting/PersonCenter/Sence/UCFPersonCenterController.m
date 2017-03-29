@@ -9,6 +9,7 @@
 #import "UCFPersonCenterController.h"
 
 #import "UCFPCListModel.h"
+#import "UCFPersonCenterModel.h"
 
 #import "UCFLoginShaowView.h"
 
@@ -29,14 +30,31 @@
 
 #import "UCFLoginViewController.h"
 #import "UCFRegisterStepOneViewController.h"
+#import "MJRefresh.h"
+#import "AuxiliaryFunc.h"
+#import "HSHelper.h"
 
+#import "Touch3DSingle.h"
 @interface UCFPersonCenterController () <UCFPCListViewControllerCallBack,LoginShadowDelegate>
 
 @property (nonatomic, strong) UCFUserInfoController *userInfoVC;
 @property (strong, nonatomic) UCFPCListViewController *pcListVC;
+@property (strong, nonatomic)  UCFPersonCenterModel *personModel;
 @end
 
 @implementation UCFPersonCenterController
+
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(responds3DTouchClick) name:@"responds3DTouchClick" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popShadowView:) name:@"popPersonCenterShadowView" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setDefaultViewData) name:@"setDefaultViewData" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fetchData) name:@"getPersonalCenterNetData" object:nil];
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -45,18 +63,66 @@
     
     [self addUI];
     
+    [self.userInfoVC.presenter setDefaultState];
+    
     [self fetchData];
+    
+    [_pcListVC.tableView
+      addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(fetchData)];
+    
+}
+
+- (void)responds3DTouchClick
+{
+    if ([Touch3DSingle sharedTouch3DSingle].isLoad) {
+        [Touch3DSingle sharedTouch3DSingle].isLoad = NO;
+    }else
+        return;
+    int type = [[Touch3DSingle sharedTouch3DSingle].type intValue];
+    [self.navigationController popToRootViewControllerAnimated:NO];
+    switch (type) {
+        case 0:{//邀请返利
+            UCFFeedBackViewController *subVC = [[UCFFeedBackViewController alloc] initWithNibName:@"UCFFeedBackViewController" bundle:nil];
+            subVC.title = @"邀请返利";
+            [self.navigationController pushViewController:subVC animated:YES];
+        }
+            break;
+        case 1:{//工场码
+//            fixedScreenLight = [UIScreen mainScreen].brightness;
+            UCFFacCodeViewController *subVC = [[UCFFacCodeViewController alloc] init];
+            subVC.title = @"我的工场码";
+//            subVC.urlStr = [NSString stringWithFormat:@"https://m.9888.cn/mpwap/mycode.jsp?pcode=%@&sex=%@",_gcm,_sex];
+            [self.navigationController pushViewController:subVC animated:YES];
+        }
+            break;
+        case 2:{//签到
+//            [self signedButton:nil];
+        }
+            break;
+    }
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = YES;
-//    if ([[NSUserDefaults standardUserDefaults] objectForKey:UUID]) {
-//        [self hideShadowView];
-//    } else {
-//        [self addShadowViewAndLoginBtn];
-//    }
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:UUID]) {
+        [self hideShadowView];
+    } else {
+        [self addShadowViewAndLoginBtn];
+    }
+}
+
+- (void)popShadowView:(NSNotification*)info
+{
+    [self.userInfoVC.presenter setDefaultState];
+    [self addShadowViewAndLoginBtn];
+}
+
+- (void)setDefaultViewData
+{
+    [self.userInfoVC.presenter setDefaultState];
 }
 
 #pragma mark - Utils
@@ -109,16 +175,22 @@
     self.pcListVC.tableView.frame = CGRectMake(0, 0, SCREEN_WIDTH, ScreenHeight-49);
     [self.view addSubview:self.pcListVC.tableView];
     
+    self.pcListVC.tipLabel.frame = CGRectMake(0, 5, SCREEN_WIDTH, 20);
+    [self.pcListVC.tableView.tableFooterView addSubview:self.pcListVC.tipLabel];
+    
     self.pcListVC.tableView.tableHeaderView = self.userInfoVC.view;
 }
 
 - (void)fetchData {
-    
-//    [self.userInfoVC fetchData];
-    
-//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];;//上层交互逻辑
+    __weak typeof(self) weakSelf = self;
     [self.pcListVC.presenter fetchDataWithCompletionHandler:^(NSError *error, id result) {
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];;//上层交互逻辑
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];//上层交互逻辑
+        if ([result isKindOfClass:[UCFPersonCenterModel class]]) {
+            weakSelf.personModel = result;
+        }
+        else if ([result isKindOfClass:[NSString class]]) {
+            [AuxiliaryFunc showToastMessage:result withView:self.view];
+        }
     }];
 }
 
@@ -128,14 +200,20 @@
 {
     NSString *title = pcListModel.title;
     if ([title isEqualToString:@"P2P账户"]) {
-        UCFP2POrHonerAccoutViewController *subVC = [[UCFP2POrHonerAccoutViewController alloc] initWithNibName:@"UCFP2POrHonerAccoutViewController" bundle:nil];
-        subVC.accoutType =  SelectAccoutTypeP2P;
-        [self.navigationController pushViewController:subVC animated:YES];
+        
+        if ([self checkIDAAndBankBlindState:SelectAccoutTypeP2P]) {
+            UCFP2POrHonerAccoutViewController *subVC = [[UCFP2POrHonerAccoutViewController alloc] initWithNibName:@"UCFP2POrHonerAccoutViewController" bundle:nil];
+            subVC.accoutType =  SelectAccoutTypeP2P;
+            [self.navigationController pushViewController:subVC animated:YES];
+        }
     }
     else if ([title isEqualToString:@"尊享账户"]) {
-        UCFP2POrHonerAccoutViewController *subVC = [[UCFP2POrHonerAccoutViewController alloc] initWithNibName:@"UCFP2POrHonerAccoutViewController" bundle:nil];
-        subVC.accoutType =  SelectAccoutTypeHoner;
-        [self.navigationController pushViewController:subVC animated:YES];
+//        HSHelper *helper = [HSHelper new];
+        if ([self checkIDAAndBankBlindState:SelectAccoutTypeHoner]) {
+            UCFP2POrHonerAccoutViewController *subVC = [[UCFP2POrHonerAccoutViewController alloc] initWithNibName:@"UCFP2POrHonerAccoutViewController" bundle:nil];
+            subVC.accoutType =  SelectAccoutTypeHoner;
+            [self.navigationController pushViewController:subVC animated:YES];
+        }
     }
     else if ([title isEqualToString:@"会员等级"]) {
         UCFWebViewJavascriptBridgeLevel *subVC = [[UCFWebViewJavascriptBridgeLevel alloc] initWithNibName:@"UCFWebViewJavascriptBridgeLevel" bundle:nil];
@@ -169,7 +247,24 @@
 }
 
 #pragma mark - 无奈的代码
-
+- (BOOL)checkIDAAndBankBlindState:(SelectAccoutType)type
+{
+    NSUInteger openStatus = (type == SelectAccoutTypeP2P ? [_personModel.p2pOpenStatus integerValue] : [_personModel.enjoyOpenStatus integerValue]);
+    __weak typeof(self) weakSelf = self;
+    if (openStatus == 1 || openStatus == 2) {
+       NSString *message = (type == SelectAccoutTypeP2P ? @"请先开通P2P徽商存管账户" : @"请先开通尊享徽商存管账户");
+       NSInteger step = (type == SelectAccoutTypeP2P ? [_personModel.p2pOpenStatus integerValue] : [_personModel.enjoyOpenStatus integerValue]);
+        BlockUIAlertView *alert = [[BlockUIAlertView alloc] initWithTitle:@"提示" message:message cancelButtonTitle:@"确定" clickButton:^(NSInteger index){
+            if (index == 0) {
+                HSHelper *helper = [HSHelper new];
+                [helper pushOpenHSType:type Step:step nav:weakSelf.navigationController];
+            }
+        } otherButtonTitles:@"取消"];
+        [alert show];
+        return NO;
+    }
+    return YES;
+}
 //未登录状态添加阴影和登录按钮
 - (void)addShadowViewAndLoginBtn
 {

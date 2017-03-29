@@ -39,9 +39,13 @@
 #import "UCFProjectListController.h"        //项目列表
 #import "RiskAssessmentViewController.h"    //风险评估
 
+#import "UCFProjectListController.h"
+#import "UCFHonerPlanViewController.h"
+
 #import "UCFCollectionDetailViewController.h" //集合详情
 #import "MjAlertView.h"
 #import "NSDate+IsBelongToToday.h"
+#import "HSHelper.h"
 @interface UCFLatestProjectViewController ()<InvestmentCellDelegate,FourOFourViewDelegate,CycleViewDelegate,PromptViewDelegate,homeButtonPressedCellDelegate, UITableViewDataSource, UITableViewDelegate, UCFCollectionBidCellDelegate,MjAlertViewDelegate,PraiseAlertDelegate>
 {
     UIView *_clickView;
@@ -112,6 +116,17 @@
     
     _lineHigh1.constant = 0.5;
     _lineHigh2.constant = 0.5;
+    
+    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 50)];
+    self.tableView.tableFooterView = footerView;
+    UILabel *tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 15, SCREEN_WIDTH, 20)];
+    tipLabel.font = [UIFont systemFontOfSize:12];
+    tipLabel.text = @"市场有风险 投资需谨慎";
+    tipLabel.textColor = UIColorWithRGB(0x999999);
+    tipLabel.textAlignment = NSTextAlignmentCenter;
+    [footerView addSubview:tipLabel];
+//    tipLabel.center = footerView.center;
+    
     
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadHomeData:) name:@"userisloginandcheckgrade" object:nil];
         
@@ -382,6 +397,21 @@
     [self.navigationController pushViewController:project animated:YES];
 }
 
+- (void)homeButtonPressedP2PButton:(UIButton *)button
+{
+    UCFProjectListController *projectList = [[UCFProjectListController alloc] initWithNibName:@"UCFProjectListController" bundle:nil];
+//    p2p.baseTitleText = @"工场P2P";
+    [self.navigationController pushViewController:projectList animated:YES];
+}
+
+- (void)homeButtonPressedHornorButton:(UIButton *)button
+{
+    UCFHonerPlanViewController *horner = [[UCFHonerPlanViewController alloc] initWithNibName:@"UCFHonerPlanViewController" bundle:nil];
+    horner.baseTitleText = @"工场尊享";
+    horner.accoutType = SelectAccoutTypeHoner;
+    [self.navigationController pushViewController:horner animated:YES];
+}
+
 - (void)investBtnClicked:(UIButton *)button{
     if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
         //如果未登录，展示登录页面
@@ -578,18 +608,18 @@
 }
 //点击提示View调用方法
 - (IBAction)touchTipsView:(id)sender {
-    //首页默认跳转开户夜
-    switch ([UserInfoSingle sharedManager].openStatus) {// ***hqy添加
-        case 1://未开户-->>>新用户开户
-        case 2://已开户 --->>>老用户(白名单)开户
-        case 3://已绑卡-->>>去设置交易密码页面
-        {
-            UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:[UserInfoSingle sharedManager].openStatus];
-            vc.site = @"1";//等于1 还是 2 由具体模块定
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-            break;
-    }
+//    //首页默认跳转开户夜
+//    switch ([UserInfoSingle sharedManager].openStatus) {// ***hqy添加
+//        case 1://未开户-->>>新用户开户
+//        case 2://已开户 --->>>老用户(白名单)开户
+//        case 3://已绑卡-->>>去设置交易密码页面
+//        {
+//            UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:3];
+//            vc.site = @"1";//等于1 还是 2 由具体模块定
+//            [self.navigationController pushViewController:vc animated:YES];
+//        }
+//            break;
+//    }
 }
 
 //查看活动详情
@@ -629,7 +659,7 @@
 #pragma mark - UITableViewDelegate
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0) {
+    if (indexPath.section == 1) {
         return 204;
     }
     else {
@@ -637,7 +667,7 @@
         InvestmentItemInfo *info = _investmentArr[indexPath.row];
         if(![info.homeType isEqualToString:@""])
         {
-            return 31;
+            return 62;
         }else{
             return 100;
         }
@@ -653,7 +683,7 @@
 
 // 每组几行，默认为1
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if (section==0) {
+    if (section==1) {
         if (self.collectionBidModel.colName.length > 0) {
             return 1;
         }
@@ -664,7 +694,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0) {
+    if (indexPath.section == 1) {
         static NSString *cellId = @"collectionBidCell";
         UCFCollectionBidCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
         if (!cell) {
@@ -686,17 +716,17 @@
                 cellt = [[NSBundle mainBundle]loadNibNamed:@"UCFLatesProjectTableViewCell" owner:self options:nil][0];
                 cellt.delegate = self;
             }
-            cellt.but_press.tag = 100 + indexPath.row;
-            cellt.typeSellWay = info.homeType;
-            cellt.label_title.text = info.homeTile;
+//            cellt.but_press.tag = 100 + indexPath.row;
+//            cellt.typeSellWay = info.homeType;
+//            cellt.label_title.text = info.homeTile;
             
-            if (![info.homeIconUrl isEqualToString:@""]) {
-                [cellt.image_ahead sd_setImageWithURL:[NSURL URLWithString:info.homeIconUrl] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL){
-                    
-                }];
-            }else{
-                cellt.image_ahead.image = [UIImage imageNamed:@"tabbar_icon_project_normal.png"];
-            }
+//            if (![info.homeIconUrl isEqualToString:@""]) {
+//                [cellt.image_ahead sd_setImageWithURL:[NSURL URLWithString:info.homeIconUrl] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL){
+//                    
+//                }];
+//            }else{
+//                cellt.image_ahead.image = [UIImage imageNamed:@"tabbar_icon_project_normal.png"];
+//            }
             return cellt;
         }else{
             //************************************************qyy 2016-11-17首页接口改造
@@ -892,17 +922,18 @@
                 NSString *openStatusStr = [[dic objectSafeForKey:@"data" ] objectSafeForKey:@"openStatus"];
                 [UserInfoSingle sharedManager].openStatus = [openStatusStr integerValue];
                 //暂时添加，未调试接口 *** hqy
-                if([openStatusStr intValue] > 3 ){
-                    _tipsViewHeight.constant = 0;
-                }else{
-                    _tipsViewHeight.constant = 35.0f;
-                }
-                NSString *tipsDesStr = [[dic objectSafeForKey:@"data" ] objectSafeForKey:@"tipsDes"];//tips提示
-                if (![tipsDesStr isEqualToString:@""]) {
-                    _tipsLabel.text = tipsDesStr;
-                }
+//                if([openStatusStr intValue] > 3 ){
+//                    _tipsViewHeight.constant = 0;
+//                }else{
+//                    _tipsViewHeight.constant = 35.0f;
+//                }
+//                NSString *tipsDesStr = [[dic objectSafeForKey:@"data" ] objectSafeForKey:@"tipsDes"];//tips提示
+//                if (![tipsDesStr isEqualToString:@""]) {
+//                    _tipsLabel.text = tipsDesStr;
+//                    _tipsViewHeight.constant = 0;
+//                }
             }else{
-               _tipsViewHeight.constant = 0;
+//               _tipsViewHeight.constant = 0;
             }
             //============ 公告 ============
             _noticId = dic[@"data"][@"noticId"];
@@ -1019,18 +1050,8 @@
         [self beginShowLoading];
     } else if (alertView.tag == 8000) {
         if (buttonIndex == 1) {
-            switch ([UserInfoSingle sharedManager].openStatus)
-            {// ***hqy添加
-                case 1://未开户-->>>新用户开户
-                case 2://已开户 --->>>老用户(白名单)开户
-                case 3://已绑卡-->>>去设置交易密码页面
-                {
-                    UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:[UserInfoSingle sharedManager].openStatus];
-                    vc.site = @"1";//等于1 还是 2 由具体模块定
-                    [self.navigationController pushViewController:vc animated:YES];
-                }
-                    break;
-            }
+            HSHelper *helper = [HSHelper new];
+            [helper pushOpenHSType:SelectAccoutTypeP2P Step:[UserInfoSingle sharedManager].openStatus nav:self.navigationController];
         }
     }else if (alertView.tag == 9000) {
         if(buttonIndex == 1){ //测试

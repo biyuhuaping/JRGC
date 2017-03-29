@@ -652,13 +652,13 @@
             
             //提交信息成功之后，显示开户成功页面
             AccountSuccessVC *acVC = [[AccountSuccessVC alloc]initWithNibName:@"AccountSuccessVC" bundle:nil];
-            [self addChildViewController:acVC];
+            acVC.site = self.site;
             acVC.view.frame = self.view.bounds;
             acVC.db = self.db;
-            acVC.site = self.site;
-            [self.view addSubview:acVC.view];
             [acVC didMoveToParentViewController:self];
             self.db.isOpenAccount = YES;
+            [self.view addSubview:acVC.view];
+            [self addChildViewController:acVC];
         }else {
             [AuxiliaryFunc showToastMessage:dic[@"message"] withView:self.view];
         }

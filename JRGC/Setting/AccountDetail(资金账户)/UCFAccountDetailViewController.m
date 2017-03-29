@@ -288,9 +288,11 @@
     [rightbutton addTarget:self action:@selector(rightClicked:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightbutton];
     self.navigationItem.rightBarButtonItem = rightItem;
-    
-    baseTitleLabel.text = @"资金帐户";
-    
+    if (self.accoutType == SelectAccoutTypeHoner) {
+       baseTitleLabel.text = @"尊享资金帐户";
+    }else if (self.accoutType == SelectAccoutTypeP2P){
+        baseTitleLabel.text = @"P2P资金帐户";
+    }
     self.bgScrollview.contentSize = CGSizeMake(self.view.frame.size.width *2, 0);
     self.bgScrollview.scrollEnabled = NO;
     
@@ -383,6 +385,7 @@
     }
     
     UCFHuiShangBankViewController *huiShangBank = [[UCFHuiShangBankViewController alloc] initWithNibName:@"UCFHuiShangBankViewController" bundle:nil];
+    huiShangBank.accoutType = self.accoutType;
     [self.navigationController pushViewController:huiShangBank animated:YES];
 }
 
@@ -557,7 +560,7 @@
 {
     if (alertView.tag == 1009 && buttonIndex == 1) {
         UCFOldUserGuideViewController *vc = [[UCFOldUserGuideViewController alloc] initWithNibName:@"UCFOldUserGuideViewController" bundle:nil];
-        vc.isStep     = 2;
+        vc.isStep = 2;
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

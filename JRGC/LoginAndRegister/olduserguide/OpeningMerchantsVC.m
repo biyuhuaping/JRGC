@@ -24,7 +24,7 @@
     
     [_openButton setBackgroundImage:[[UIImage imageNamed:@"btn_red"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:2.5] forState:UIControlStateNormal];
     [_openButton setBackgroundImage:[[UIImage imageNamed:@"btn_red_highlight"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:2.5] forState:UIControlStateHighlighted];
-    [self getRegistResultData];
+//    [self getRegistResultData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -39,9 +39,9 @@
 #pragma mark - 请求网络及回调
 //获取注册成功活动反的数据
 - (void)getRegistResultData{
-    NSString *userId = [UserInfoSingle sharedManager].userId;
-    NSString *strParameters = [NSString stringWithFormat:@"userId=%@",userId];//5644
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagRegistResult owner:self Type:SelectAccoutDefault];
+//    NSString *userId = [UserInfoSingle sharedManager].userId;
+//    NSString *strParameters = [NSString stringWithFormat:@"userId=%@",userId];//5644
+//    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagRegistResult owner:self Type:SelectAccoutDefault];
 }
 
 //开始请求

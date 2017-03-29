@@ -25,7 +25,7 @@
     [super viewDidLoad];
     
 #pragma mark - create UI
-    
+    [self addLeftButton];
     // add SegmentControl
     [self addSegmentControl];
     // add child controllers
@@ -60,6 +60,8 @@
         [self.view addSubview:self.currentViewController.view];
         self.itemSeletedView.segmentedControl.selectedSegmentIndex = 0;
         [self.currentViewController didMoveToParentViewController:self];//确定关系建立
+        [self.view setFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-64-49)];
+        [self.currentViewController.view setFrame:CGRectMake(0, 44, ScreenWidth, ScreenHeight-64-49 - 44)];
     }
 }
 

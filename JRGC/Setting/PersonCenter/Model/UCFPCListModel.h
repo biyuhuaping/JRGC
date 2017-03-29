@@ -10,7 +10,7 @@
 
 @interface UCFPCListModel : UCFSettingItem
 @property (nonatomic, assign) Class destVcClass;
-
+@property (nonatomic, assign) BOOL isShow;
 @property (nonatomic, copy) NSString    *describeWord;
 
 

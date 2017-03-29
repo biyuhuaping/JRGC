@@ -9,6 +9,8 @@
 #import "UCFPersonAPIManager.h"
 #import "NetworkModule.h"
 #import "JSONKit.h"
+#import "UCFPersonCenterModel.h"
+#import "UIDic+Safe.h"
 
 @interface UCFPersonAPIManager () <NetworkModuleDelegate>
 @property (copy, nonatomic) NetworkCompletionHandler completionHandler;
@@ -18,8 +20,7 @@
 - (void)fetchUserInfoWithUserId:(NSString *)userId completionHandler:(NetworkCompletionHandler)completionHandler
 {
     if ([[NSUserDefaults standardUserDefaults] objectForKey:UUID]) {
-        NSString *strParameters = [NSString stringWithFormat:@"userId=%@", [[NSUserDefaults standardUserDefaults] objectForKey:UUID]];
-        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPersonCenter owner:self Type:SelectAccoutDefault];
+        [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":[[NSUserDefaults standardUserDefaults] objectForKey:UUID]} tag:kSXTagPersonCenter owner:self signature:YES Type:SelectAccoutDefault];
         self.completionHandler = completionHandler;
     }
 }
@@ -35,13 +36,23 @@
 {
     NSString *data = (NSString *)result;
     NSMutableDictionary *dic = [data objectFromJSONString];
+    NSString *rstcode = dic[@"ret"];
+    NSString *rsttext = dic[@"message"];
     DBLOG(@"UCFSettingViewController : %@",dic);
-    NSString *rstcode = dic[@"status"];
-    NSString *rsttext = dic[@"statusdes"];
-    int isSucess = [rstcode intValue];
     
     if (tag.intValue == kSXTagPersonCenter) {
-        self.completionHandler(nil, dic);
+        if ([rstcode boolValue]) {
+            
+            NSDictionary *result = [dic objectSafeDictionaryForKey:@"data"];
+            UCFPersonCenterModel *personCenterModel = [UCFPersonCenterModel personCenterWithDict:result];
+            [UserInfoSingle sharedManager].enjoyOpenStatus = [personCenterModel.enjoyOpenStatus integerValue];
+            [UserInfoSingle sharedManager].openStatus = [personCenterModel.p2pOpenStatus integerValue];
+            self.completionHandler(nil, personCenterModel);
+        }
+        else {
+            self.completionHandler(nil, rsttext);
+        }
+        
         self.completionHandler = nil;
     }
 }

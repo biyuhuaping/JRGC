@@ -460,6 +460,7 @@
     modifyBankNumberVC.title = @"修改银行预留手机号";
     modifyBankNumberVC.tellNumber = telNum;
     modifyBankNumberVC.delegate = self;
+    modifyBankNumberVC.accoutType = self.accoutType;
     [self.navigationController pushViewController:modifyBankNumberVC animated:YES];
 /*
     if ([sender.currentTitle isEqualToString:@"修改"]) {
@@ -671,12 +672,7 @@
 {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSString *uuid = [[NSUserDefaults standardUserDefaults] valueForKey:UUID];
-    NSDictionary *dataDict =@{};
-    if (self.accoutType == SelectAccoutTypeHoner) {
-        dataDict =@{@"userId":uuid,@"formSite":@"2"};
-    }else{
-        dataDict =@{@"userId":uuid,@"formSite":@"1"};
-    }
+    NSDictionary *dataDict =@{@"userId":uuid};
     [[NetworkModule sharedNetworkModule] newPostReq:dataDict tag:kSXTagBankTopInfo owner:self signature:YES Type:self.accoutType];
 }
 
@@ -695,6 +691,7 @@
         if ([dic[@"ret"] boolValue]) {
             DLog(@"%@",dic);
             [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:RELOADP2PORHONERACCOTDATA object:nil];
             UIAlertView *alert1 = [[UIAlertView alloc] initWithTitle:@"充值成功" message:@""delegate:self cancelButtonTitle:@"继续充值" otherButtonTitles:@"去投资", nil];
             alert1.tag = 1000;
             [alert1 show];

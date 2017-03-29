@@ -18,9 +18,11 @@
 @end
 
 @interface UCFPCListViewController : NSObject<UITableViewDelegate, UITableViewDataSource>
+
 @property (weak, nonatomic) id<UCFPCListViewControllerCallBack> delegate;
 + (instancetype)instanceWithPresenter:(UCFPCListViewPresenter *)presenter;
 
 - (UITableView *)tableView;
 - (UCFPCListViewPresenter *)presenter;
+- (UILabel *)tipLabel;
 @end

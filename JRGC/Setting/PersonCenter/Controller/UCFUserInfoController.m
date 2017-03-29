@@ -7,6 +7,7 @@
 //
 
 #import "UCFUserInfoController.h"
+#import "UCFPersonCenterModel.h"
 
 @interface UCFUserInfoController () <UserInfoViewPresenterCallBack>
 @property (weak, nonatomic) IBOutlet UIView *userIconBackView;
@@ -16,6 +17,18 @@
 @property (copy, nonatomic) ViewControllerGenerator couponVCGenerator;
 @property (copy, nonatomic) ViewControllerGenerator workPointInfoVCGenerator;
 @property (strong, nonatomic) UCFPCListViewPresenter *presenter;
+
+@property (weak, nonatomic) IBOutlet UIImageView *userIconImageView;
+@property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *userLevelImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *unreadMessageImageView;
+@property (weak, nonatomic) IBOutlet UILabel *facBeanLabel;
+@property (weak, nonatomic) IBOutlet UILabel *couponLabel;
+@property (weak, nonatomic) IBOutlet UILabel *workPointLabel;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *segLineView1_width;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *segLineView2_width;
+
 @end
 
 @implementation UCFUserInfoController
@@ -29,6 +42,7 @@
         self.presenter = presenter;
         self.presenter.userInvoView = self;//将V和P进行绑定(这里因为V是系统的TableView 无法简单的声明一个view属性 所以就绑定到TableView的持有者上面)
         
+        
     }
     return self;
 }
@@ -40,6 +54,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.segLineView1_width.constant = 0.5;
+    self.segLineView2_width.constant = 0.5;
+    self.userIconImageView.layer.cornerRadius = self.userIconImageView.width*0.5;
+    self.userIconImageView.clipsToBounds = YES;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapUserIcon:)];
     [self.userIconBackView addGestureRecognizer:tap];
     
@@ -98,7 +116,33 @@
 
 - (void)pcListViewPresenter:(UCFPCListViewPresenter *)presenter didRefreshUserInfoWithResult:(id)result error:(NSError *)error
 {
+    if (!error) {
+        UCFPersonCenterModel *personCenter = result;
+        [self.userIconImageView sd_setImageWithURL:[NSURL URLWithString:personCenter.headurl] placeholderImage:[UIImage imageNamed:@"password_icon_head"]];
+        self.userNameLabel.text = personCenter.userName;
+        self.userLevelImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"usercenter_vip%@_icon", personCenter.memberLever]];
+        self.unreadMessageImageView.hidden = ([personCenter.unReadMsgCount integerValue] == 0) ? YES : NO;
+        self.facBeanLabel.text = personCenter.beanAmount;
+        self.couponLabel.text = [NSString stringWithFormat:@"%@", personCenter.couponNumber];
+        self.workPointLabel.text = [NSString stringWithFormat:@"%@", personCenter.score];
+    }
+}
+
+#pragma mrak - 签到按钮点击
+- (IBAction)signClicked:(UIButton *)sender {
     
+}
+
+#pragma mark - 恢复初始数据
+- (void)setDefaultState
+{
+    self.userIconImageView.image = [UIImage imageNamed:@"password_icon_head"];
+    self.userNameLabel.text = @"未实名";
+    self.userLevelImageView.image = [UIImage imageNamed:@"usercenter_vip0_icon"];
+    self.unreadMessageImageView.hidden = YES;
+    self.facBeanLabel.text = @"0";
+    self.couponLabel.text = @"0";
+    self.workPointLabel.text = @"0";
 }
 
 @end
