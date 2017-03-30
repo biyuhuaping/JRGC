@@ -9,7 +9,8 @@
 #import "UCFRegisterFinshViewController.h"
 #import "NZLabel.h"
 #import "UCFToolsMehod.h"
-
+#import "AppDelegate.h"
+#import "BaseNavigationViewController.h"
 @interface UCFRegisterFinshViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *openButton;
 @property (weak, nonatomic) IBOutlet NZLabel *customLabel;
@@ -52,8 +53,23 @@
 {
     [self backHome];
 }
-- (IBAction)openButton:(id)sender {
-    [self backHome];
+- (IBAction)openButton:(id)sender
+{
+    AppDelegate *delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    [delegate.tabBarController setSelectedIndex:0];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self backHome];
+    });
+
+    
+//    VC.rootVc = delegate.tabBarController;
+//    BaseNavigationViewController *nav = [[BaseNavigationViewController alloc] initWithRootViewController:VC];
+//    NSInteger personInt = [[[NSUserDefaults standardUserDefaults] valueForKey:@"personCenterClick"] integerValue];
+//    if (personInt == 1) {
+//        [delegate.tabBarController setSelectedIndex:4];
+//        [[NSUserDefaults standardUserDefaults] setValue:@"0" forKey:@"personCenterClick"];
+//    }
+
 }
 - (void)backHome
 {
