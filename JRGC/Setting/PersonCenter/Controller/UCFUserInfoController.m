@@ -67,6 +67,9 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapUserIcon:)];
     [self.userIconBackView addGestureRecognizer:tap];
     
+    [lineViewAA removeFromSuperview];
+    lineViewAA = nil;
+    
 }
 
 - (void)tapUserIcon:(UIGestureRecognizer *)gesture
@@ -124,7 +127,16 @@
 {
     if (!error) {
         UCFPersonCenterModel *personCenter = result;
-        [self.userIconImageView sd_setImageWithURL:[NSURL URLWithString:personCenter.headurl] placeholderImage:[UIImage imageNamed:@"password_icon_head"]];
+//        [self.userIconImageView sd_setImageWithURL:[NSURL URLWithString:personCenter.headurl] placeholderImage:[UIImage imageNamed:@"password_icon_head"]];
+        if ([personCenter.sex isEqualToString:@"0"]) {
+            self.userIconImageView.image = [UIImage imageNamed:@"user_icon_head_female"];
+        }
+        else if ([personCenter.sex isEqualToString:@"1"]) {
+            self.userIconImageView.image = [UIImage imageNamed:@"user_icon_head_male"];
+        }
+        else {
+            self.userIconImageView.image = [UIImage imageNamed:@"password_icon_head"];
+        }
         self.userNameLabel.text = personCenter.userName;
         self.userLevelImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"usercenter_vip%@_icon", personCenter.memberLever]];
         self.unreadMessageImageView.hidden = ([personCenter.unReadMsgCount integerValue] == 0) ? YES : NO;
