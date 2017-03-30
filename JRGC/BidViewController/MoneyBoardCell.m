@@ -42,28 +42,28 @@
         _topView.backgroundColor = UIColorWithRGB(0xebebee);
         _activitylabel1 = [UILabel labelWithFrame:CGRectZero text:@"" textColor:UIColorWithRGB(0x5b7aa4) font:[UIFont systemFontOfSize:MarkLabelFont]];
         _activitylabel1.backgroundColor = [UIColor whiteColor];
-        _activitylabel1.layer.borderWidth = 0.5;
+        _activitylabel1.layer.borderWidth = 1;
         _activitylabel1.layer.cornerRadius = 2.0;
         _activitylabel1.layer.borderColor = UIColorWithRGB(0x5b7aa4).CGColor;
         [_topView addSubview:_activitylabel1];
         
         _activitylabel2 = [UILabel labelWithFrame:CGRectZero text:@"" textColor:UIColorWithRGB(0x5b7aa4) font:[UIFont systemFontOfSize:MarkLabelFont]];
         _activitylabel2.backgroundColor = [UIColor whiteColor];
-        _activitylabel2.layer.borderWidth = 0.5;
+        _activitylabel2.layer.borderWidth = 1;
         _activitylabel2.layer.cornerRadius = 2.0;
         _activitylabel2.layer.borderColor = UIColorWithRGB(0x5b7aa4).CGColor;
         [_topView addSubview:_activitylabel2];
         
         _activitylabel3 = [UILabel labelWithFrame:CGRectZero text:@"" textColor:UIColorWithRGB(0x5b7aa4) font:[UIFont systemFontOfSize:MarkLabelFont]];
         _activitylabel3.backgroundColor = [UIColor whiteColor];
-        _activitylabel3.layer.borderWidth = 0.5;
+        _activitylabel3.layer.borderWidth = 1;
         _activitylabel3.layer.cornerRadius = 2.0;
         _activitylabel3.layer.borderColor = UIColorWithRGB(0x5b7aa4).CGColor;
         [_topView addSubview:_activitylabel3];
         
         _activitylabel4 = [UILabel labelWithFrame:CGRectZero text:@"" textColor:UIColorWithRGB(0x5b7aa4) font:[UIFont systemFontOfSize:MarkLabelFont]];
         _activitylabel4.backgroundColor = [UIColor whiteColor];
-        _activitylabel4.layer.borderWidth = 0.5;
+        _activitylabel4.layer.borderWidth = 1;
         _activitylabel4.layer.cornerRadius = 2.0;
         _activitylabel4.layer.borderColor = UIColorWithRGB(0x5b7aa4).CGColor;
         [_topView addSubview:_activitylabel4];
@@ -83,30 +83,31 @@
         [_minuteCountDownView startTimer];
         _minuteCountDownView.sourceVC = @"UCFPurchaseBidVC";//投资页面
         [self addSubview:_minuteCountDownView];
-        [Common addLineViewColor:UIColorWithRGB(0xeff0f3) With:_minuteCountDownView isTop:NO];
+        [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:_minuteCountDownView isTop:YES];
+        [Common addLineViewColor:UIColorWithRGB(0xe3e5ea) With:_minuteCountDownView isTop:NO];
     }
     CGFloat height = isKeyBid ? CGRectGetMaxY(_topView.frame) :CGRectGetMaxY(_minuteCountDownView.frame);
     _keYongBaseView = [[UIView alloc] init];
     _keYongBaseView.frame = CGRectMake(0,height , ScreenWidth, 37);
-    _keYongBaseView.backgroundColor = UIColorWithRGB(0xf9f9f9);
+//    _keYongBaseView.backgroundColor = UIColorWithRGB(0xf9f9f9);
     [self addSubview:_keYongBaseView];
-    [Common addLineViewColor:UIColorWithRGB(0xeff0f3) With:_keYongBaseView isTop:NO];
+//    [Common addLineViewColor:UIColorWithRGB(0xeff0f3) With:_keYongBaseView isTop:NO];
 
-    _keYongTipLabel = [[UILabel alloc] initWithFrame:CGRectMake(15.0f, 10.5, [Common getStrWitdth:@"可用金额" TextFont:[UIFont systemFontOfSize:14]].width, 16)];
+    _keYongTipLabel = [[UILabel alloc] initWithFrame:CGRectMake(15.0f, 14, [Common getStrWitdth:@"可用金额" TextFont:[UIFont systemFontOfSize:14]].width, 16)];
     _keYongTipLabel.font = [UIFont systemFontOfSize:14.0f];
     _keYongTipLabel.text = @"可用金额";
     _keYongTipLabel.backgroundColor = [UIColor clearColor];
     _keYongTipLabel.textColor = UIColorWithRGB(0x333333);
     [_keYongBaseView addSubview:_keYongTipLabel];
     
-    _KeYongMoneyLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_keYongTipLabel.frame) + 5, 10, 100, 17)];
+    _KeYongMoneyLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_keYongTipLabel.frame) + 5, 14, 100, 17)];
     _KeYongMoneyLabel.backgroundColor = [UIColor clearColor];
     _KeYongMoneyLabel.textColor = UIColorWithRGB(0xfd4d4c);
     _KeYongMoneyLabel.text = @"¥10000";
-    _KeYongMoneyLabel.font = [UIFont boldSystemFontOfSize:14.0f];
+    _KeYongMoneyLabel.font = [UIFont boldSystemFontOfSize:16.0f];
     [_keYongBaseView addSubview:_KeYongMoneyLabel];
     
-    _totalKeYongTipLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_KeYongMoneyLabel.frame), CGRectGetMaxY(_KeYongMoneyLabel.frame) - 12, [Common getStrWitdth:@"(我的余额+我的工豆)" TextFont:[UIFont systemFontOfSize:10]].width, 12)];
+    _totalKeYongTipLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_KeYongMoneyLabel.frame), CGRectGetMaxY(_KeYongMoneyLabel.frame) - 14, [Common getStrWitdth:@"(我的余额+我的工豆)" TextFont:[UIFont systemFontOfSize:10]].width, 14)];
     _totalKeYongTipLabel.font = [UIFont systemFontOfSize:10.0f];
     _totalKeYongTipLabel.textColor = UIColorWithRGB(0x999999);
     _totalKeYongTipLabel.text = @"(我的余额+我的工豆)";
@@ -211,10 +212,10 @@
     [_gongDouSwitch addTarget:self action:@selector(changeSwitchStatue:) forControlEvents:UIControlEventValueChanged];
     [self addSubview:_gongDouSwitch];
     
-    _lineView1 = [[UIView alloc] initWithFrame:CGRectMake(0,CGRectGetMaxY(_lineView.frame) + 43, ScreenWidth, 0.5)];
-    _lineView1.backgroundColor = UIColorWithRGB(0xd8d8d8);
+//    _lineView1 = [[UIView alloc] initWithFrame:CGRectMake(0,CGRectGetMaxY(_lineView.frame) + 42.5, ScreenWidth, 0.5)];
+//    _lineView1.backgroundColor = UIColorWithRGB(0xd8d8d8);
     //    lineView1.backgroundColor = [UIColor whiteColor];
-    [self addSubview:_lineView1];
+//    [self addSubview:_lineView1];
     
 }
 - (void)layoutSubviews
@@ -310,7 +311,7 @@
         _gongDouCountLabel.frame =  CGRectMake(CGRectGetMaxX(_gongDouAccout.frame) + 5,CGRectGetMaxY(_lineView.frame) + 14,ScreenWidth - CGRectGetMaxX(_gongDouAccout.frame) - 5 - 80 , 16);
         _gongDouSwitch.frame = CGRectMake(ScreenWidth - 66, CGRectGetMaxY(_lineView.frame) + 7, 51, 100);
           
-        _lineView1.frame =  CGRectMake(0,CGRectGetMaxY(_lineView.frame) + 43, ScreenWidth, 0.5);
+//        _lineView1.frame =  CGRectMake(0,CGRectGetMaxY(_lineView.frame) + 42.5, ScreenWidth, 0.5);
         self.KeYongMoneyLabel.frame = CGRectMake(CGRectGetMinX(self.KeYongMoneyLabel.frame), CGRectGetMinY(self.KeYongMoneyLabel.frame), size.width, CGRectGetHeight(self.KeYongMoneyLabel.frame));
         _totalKeYongTipLabel.frame = CGRectMake(CGRectGetMaxX(_KeYongMoneyLabel.frame) + 5, CGRectGetMaxY(_KeYongMoneyLabel.frame) - 12, 11 * 12, 12);
         if (_isCompanyAgent) {
