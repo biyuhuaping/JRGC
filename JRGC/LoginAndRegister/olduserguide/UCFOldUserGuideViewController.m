@@ -473,6 +473,7 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"LatestProjectUpdate" object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"AssignmentUpdate" object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:RELOADP2PORHONERACCOTDATA object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:BACK_TO_HS object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:MODIBANKZONE_SUCCESSED object:nil];//返回绑定银行卡页面刷刷新数据
  }
