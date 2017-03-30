@@ -65,6 +65,9 @@
     
     [self.userInfoVC.presenter setDefaultState];
     
+    [lineViewAA removeFromSuperview];
+    lineViewAA = nil;
+    
     [self fetchData];
     
     [_pcListVC.tableView
@@ -88,7 +91,7 @@
         }
             break;
         case 1:{//工场码
-//            fixedScreenLight = [UIScreen mainScreen].brightness;
+            self.userInfoVC.fixedScreenLight = [UIScreen mainScreen].brightness;
             UCFFacCodeViewController *subVC = [[UCFFacCodeViewController alloc] init];
             subVC.title = @"我的工场码";
 //            subVC.urlStr = [NSString stringWithFormat:@"https://m.9888.cn/mpwap/mycode.jsp?pcode=%@&sex=%@",_gcm,_sex];
@@ -106,12 +109,19 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     self.navigationController.navigationBarHidden = YES;
     if ([[NSUserDefaults standardUserDefaults] objectForKey:UUID]) {
         [self hideShadowView];
     } else {
         [self addShadowViewAndLoginBtn];
     }
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 }
 
 - (void)popShadowView:(NSNotification*)info
@@ -175,7 +185,7 @@
     self.pcListVC.tableView.frame = CGRectMake(0, 0, SCREEN_WIDTH, ScreenHeight-49);
     [self.view addSubview:self.pcListVC.tableView];
     
-    self.pcListVC.tipLabel.frame = CGRectMake(0, 5, SCREEN_WIDTH, 20);
+    self.pcListVC.tipLabel.frame = CGRectMake(0, 15, SCREEN_WIDTH, 20);
     [self.pcListVC.tableView.tableFooterView addSubview:self.pcListVC.tipLabel];
     
     self.pcListVC.tableView.tableHeaderView = self.userInfoVC.view;

@@ -37,7 +37,7 @@
                         </connections>
                     </button>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IAI-BL-Gh2">
-                        <rect key="frame" x="187" y="8" width="1" height="47.5"/>
+                        <rect key="frame" x="187" y="14" width="1" height="35.5"/>
                         <color key="backgroundColor" red="0.8901960784313725" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="1" id="8yA-eg-Dgm"/>
@@ -46,7 +46,7 @@
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yri-ax-6Ag">
                         <rect key="frame" x="0.0" y="2" width="187" height="59.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <inset key="titleEdgeInsets" minX="7" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <inset key="titleEdgeInsets" minX="6" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="6" maxY="0.0"/>
                         <state key="normal" title="工场P2P" image="home_icon_p2p">
                             <color key="titleColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -55,26 +55,36 @@
                             <action selector="p2p:" destination="kbd-KW-4YB" eventType="touchUpInside" id="ZWM-1g-Koh"/>
                         </connections>
                     </button>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DBm-9O-gzT">
+                        <rect key="frame" x="0.0" y="61.5" width="375" height="0.5"/>
+                        <color key="backgroundColor" red="0.84705882352941175" green="0.84705882352941175" blue="0.84705882352941175" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="0.5" id="Xdc-If-5j1"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="IAI-BL-Gh2" firstAttribute="top" secondItem="ZLA-8h-fh1" secondAttribute="bottom" constant="6" id="23G-fg-mgf"/>
+                    <constraint firstItem="IAI-BL-Gh2" firstAttribute="top" secondItem="ZLA-8h-fh1" secondAttribute="bottom" constant="12" id="23G-fg-mgf"/>
                     <constraint firstItem="IAI-BL-Gh2" firstAttribute="centerX" secondItem="WSU-qO-j5j" secondAttribute="centerX" id="BEx-42-xqA"/>
+                    <constraint firstAttribute="bottom" secondItem="DBm-9O-gzT" secondAttribute="bottom" id="EC2-qN-TmW"/>
                     <constraint firstItem="Yri-ax-6Ag" firstAttribute="leading" secondItem="WSU-qO-j5j" secondAttribute="leading" id="NM5-eg-M1V"/>
                     <constraint firstItem="ZLA-8h-fh1" firstAttribute="leading" secondItem="WSU-qO-j5j" secondAttribute="leading" id="R0L-Lp-j6y"/>
-                    <constraint firstAttribute="bottom" secondItem="IAI-BL-Gh2" secondAttribute="bottom" constant="6" id="R2x-af-9Qm"/>
+                    <constraint firstAttribute="bottom" secondItem="IAI-BL-Gh2" secondAttribute="bottom" constant="12" id="R2x-af-9Qm"/>
                     <constraint firstItem="ZLA-8h-fh1" firstAttribute="top" secondItem="WSU-qO-j5j" secondAttribute="top" id="T6A-Qu-9fa"/>
                     <constraint firstAttribute="bottom" secondItem="Tdb-em-Upf" secondAttribute="bottom" id="bqk-oN-MAW"/>
                     <constraint firstItem="Yri-ax-6Ag" firstAttribute="top" secondItem="ZLA-8h-fh1" secondAttribute="bottom" id="cNg-lw-BWD"/>
                     <constraint firstItem="Tdb-em-Upf" firstAttribute="top" secondItem="ZLA-8h-fh1" secondAttribute="bottom" id="eBy-ck-Z0P"/>
+                    <constraint firstItem="DBm-9O-gzT" firstAttribute="leading" secondItem="WSU-qO-j5j" secondAttribute="leading" id="kUf-m4-i7P"/>
                     <constraint firstItem="IAI-BL-Gh2" firstAttribute="leading" secondItem="Yri-ax-6Ag" secondAttribute="trailing" id="lO8-gT-hyD"/>
                     <constraint firstAttribute="bottom" secondItem="Yri-ax-6Ag" secondAttribute="bottom" id="n3V-et-S4U"/>
                     <constraint firstItem="Tdb-em-Upf" firstAttribute="leading" secondItem="IAI-BL-Gh2" secondAttribute="trailing" id="oqd-qE-6Ts"/>
                     <constraint firstAttribute="trailing" secondItem="Tdb-em-Upf" secondAttribute="trailing" id="pZN-La-YYx"/>
                     <constraint firstAttribute="trailing" secondItem="ZLA-8h-fh1" secondAttribute="trailing" id="sCz-UY-m0h"/>
+                    <constraint firstAttribute="trailing" secondItem="DBm-9O-gzT" secondAttribute="trailing" id="xwK-IL-cA1"/>
                 </constraints>
             </tableViewCellContentView>
             <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-            <point key="canvasLocation" x="-52.5" y="-44"/>
+            <point key="canvasLocation" x="26.5" y="-50"/>
         </tableViewCell>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="32" id="KGk-i7-Jjw">
             <rect key="frame" x="0.0" y="0.0" width="320" height="32"/>
