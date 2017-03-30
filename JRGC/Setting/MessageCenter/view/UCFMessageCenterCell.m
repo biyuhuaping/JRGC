@@ -82,7 +82,7 @@
     }
     self.messageTitleLab.text =messageCenterModel.title;
     self.messageDetailLab.text = messageCenterModel.content;
-    self.messageDateLab.text =messageCenterModel.createTime;
+//    self.messageDateLab.text =messageCenterModel.createTime;
 }
 #pragma mark -点击编辑状态按钮
 - (void)clickEditButton:(UIButton *)sender {

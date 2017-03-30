@@ -40,7 +40,20 @@
     
     //404页面
     _noDataView = [[UCFNoDataView alloc] initWithFrame:CGRectMake(0,0,ScreenWidth, ScreenHeight-NavigationBarHeight) errorTitle:@"暂无数据"];
-    [self messageDetailHttpRequest];//消息详情请求
+//    [self messageDetailHttpRequest];//消息详情请求
+    [self setDataModel];
+}
+-(void)setDataModel{
+    if(self.model){
+        [self.noDataView hide];
+        self.lineView.hidden = NO;
+        self.messaeCreateTime.text =  self.model.createTime;
+        self.messageDetailTitle.text= self.model.title ;
+        [self.textContextView loadHTMLString:self.model.content baseURL:nil];
+    }else{
+        [_noDataView showInView:self.messageScrollView];
+        self.viewLineHeight.constant = 0;
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -75,8 +88,8 @@
 
 #pragma mark - 网络请求
 -(void)messageDetailHttpRequest{
-    NSString *parmStr = [NSString stringWithFormat:@"userId=%@&id=%@",self.userId,self.messageId];
-    [[NetworkModule sharedNetworkModule] postReq:parmStr tag:kSXTagGetMSGDetail owner:self Type:SelectAccoutDefault];
+//    NSString *parmStr = [NSString stringWithFormat:@"userId=%@&id=%@",self.userId,self.messageId];
+//    [[NetworkModule sharedNetworkModule] postReq:parmStr tag:kSXTagGetMSGDetail owner:self Type:SelectAccoutDefault];
 }
 
 - (void)beginPost:(kSXTag)tag{
