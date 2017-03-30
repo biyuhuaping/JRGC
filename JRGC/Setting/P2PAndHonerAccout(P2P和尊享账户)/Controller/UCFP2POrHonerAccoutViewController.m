@@ -25,6 +25,7 @@
 #import "UCFHuiBuinessDetailViewController.h"
 #import "UILabel+Misc.h"
 #import "HSHelper.h"
+#import "UCFFeedBackViewController.h"
 @interface UCFP2POrHonerAccoutViewController ()<UITableViewDelegate,UITableViewDataSource,UCFP2POrHornerTabHeaderViewDelete,UIAlertViewDelegate>
 {
     UCFP2POrHornerTabHeaderView *_headerView;
@@ -68,7 +69,7 @@
     [self.tableView.header beginRefreshing];
 }
 -(void)createUIInfoView{
- 
+    [self addLeftButton];
     [self.tableView addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(getP2POrHonerAccoutHttpRequest)];
     if (self.accoutType ==  SelectAccoutTypeHoner) {
         [self.view bringSubviewToFront:self.loadingView];
@@ -77,7 +78,6 @@
          _isShowOrHideAccoutMoney = [[NSUserDefaults standardUserDefaults] boolForKey:@"IsShowHonerAccoutMoney"];
      
     }else{
-        [self addLeftButton];
         self.loadingView.hidden = YES;
         [self.view sendSubviewToBack:self.loadingView];
         [self performSelector:@selector(removeLoadingView) withObject:nil afterDelay:0.0];
@@ -88,6 +88,7 @@
     //添加阴影图片
     UIImage *tabImag = [UIImage imageNamed:@"tabbar_shadow.png"];
     self.shadowImageView.image = [tabImag resizableImageWithCapInsets:UIEdgeInsetsMake(2, 1, 2, 1) resizingMode:UIImageResizingModeStretch];
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 10, 0);
     self.tableView.separatorColor = UIColorWithRGB(0xe3e5ea);
     self.tableView.separatorInset =  UIEdgeInsetsMake(0, 15, 0, 0);
 }
@@ -119,7 +120,11 @@
     if (_cellItemsData == nil) {
         
         UCFSettingItem *myInVest = [UCFSettingArrowItem itemWithIcon:nil title:@"我的投资" destVcClass:[MyViewController class]];
-        UCFSettingItem *backMoneyDetail = [UCFSettingArrowItem itemWithIcon:nil title:@"回款明细" destVcClass:[MyViewController class]];
+        UCFSettingItem *backMoneyDetail = [UCFSettingArrowItem itemWithIcon:nil title:@"回款明细" destVcClass:[UCFBackMoneyDetailViewController class]];
+        UCFSettingItem *feedBackVC = [UCFSettingArrowItem itemWithIcon:nil title:@"邀请返利" destVcClass:[UCFFeedBackViewController class]];
+        
+        
+        
         UCFSettingItem *bundleCard = [UCFSettingArrowItem itemWithIcon:@"safecenter_icon_bankcard" title:@"修改银行卡" destVcClass:[UCFBankCardInfoViewController class]];
         
         UCFSettingItem *setChangePassword = [UCFSettingArrowItem itemWithIcon:@"safecenter_icon_transaction" title:@"修改交易密码" destVcClass:[TradePasswordVC class]];
@@ -127,6 +132,7 @@
         UCFSettingItem *p2pOrHonerAccout = nil;
         UCFSettingItem *riskAssessment = nil;
         if (self.accoutType == SelectAccoutTypeHoner) {
+
               p2pOrHonerAccout = [UCFSettingArrowItem itemWithIcon:nil title:@"尊享徽商银行存管账户" destVcClass:nil];
               riskAssessment= [UCFSettingArrowItem itemWithIcon:nil title:@"尊享风险承担能力" destVcClass:[RiskAssessmentViewController class]];
         }else{
@@ -142,7 +148,7 @@
         
         
         UCFSettingGroup *group1 = [[UCFSettingGroup alloc] init];//第一栏
-        group1.items = [[NSMutableArray alloc]initWithArray: @[myInVest,backMoneyDetail]];
+        group1.items = [[NSMutableArray alloc]initWithArray: @[myInVest,backMoneyDetail,feedBackVC]];
         
         UCFSettingGroup *group2 = [[UCFSettingGroup alloc] init];//第二栏
         
@@ -183,11 +189,11 @@
             _headerView.totalIncomeTitleLab.text = @"P2P总资产";
         }
         _headerView.dataDict = _dataDict;
-        [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:_headerView isTop:NO];
         return _headerView;
     }else{
         UIView *headerView = [[UIView alloc]initWithFrame: CGRectMake(0, 0, ScreenWidth, 10)];
         headerView.backgroundColor = [UIColor clearColor];
+//        [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:headerView isTop:YES];
         [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:headerView isTop:NO];
         return headerView;
     }
@@ -266,6 +272,12 @@
 //        backMoneyDetailVC.superViewController = self;
         backMoneyDetailVC.accoutType = self.accoutType;
         [self.navigationController pushViewController:backMoneyDetailVC animated:YES];
+    }else if ([titleStr isEqualToString:@"邀请返利"]){
+        
+        UCFFeedBackViewController *feedBackVC = [[UCFFeedBackViewController alloc] initWithNibName:@"UCFFeedBackViewController" bundle:nil];
+        feedBackVC.title = @"邀请返利";
+        feedBackVC.accoutType = self.accoutType;
+        [self.navigationController pushViewController:feedBackVC animated:YES];
     }
     else if([titleStr hasSuffix:@"徽商银行存管账户"]){//
         UCFHuiShangBankViewController *huiShangBankVC = [[UCFHuiShangBankViewController alloc] initWithNibName:@"UCFHuiShangBankViewController" bundle:nil];
@@ -299,7 +311,7 @@
         [self.navigationController pushViewController:riskAssessmentVC  animated:YES];
     }
     else if([titleStr hasPrefix:@"自动投标"]){
-        if ([self checkHSIsLegitimate]) {
+        if ([self checkIDAAndBankBlindState:self.accoutType]) {
             UCFBatchInvestmentViewController *batchInvestment = [[UCFBatchInvestmentViewController alloc] init];
             batchInvestment.sourceType = @"personCenter";
             batchInvestment.isStep = [item.subtitle isEqualToString:@"未开启"] ? 1 : 2;
@@ -347,19 +359,19 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - 无奈的代码
+#pragma mark - 是否设置交易密码
 - (BOOL)checkIDAAndBankBlindState:(SelectAccoutType)type
 {
  
     __weak typeof(self) weakSelf = self;
-    if (_openState == 1 || _openState == 2) {
-        NSString *message =  @"请先设置交易密码";
-        BlockUIAlertView *alert = [[BlockUIAlertView alloc] initWithTitle:@"提示" message:message cancelButtonTitle:@"确定" clickButton:^(NSInteger index){
-            if (index == 0) {
+    if (_openState <= 3) {
+        NSString *message = type == SelectAccoutTypeHoner ? @"请先设置尊享徽商资金账户交易密码":@"请先设置P2P徽商存管账户交易密码";
+        BlockUIAlertView *alert = [[BlockUIAlertView alloc] initWithTitle:@"提示" message:message cancelButtonTitle:@"取消" clickButton:^(NSInteger index){
+            if (index == 1) {
                 HSHelper *helper = [HSHelper new];
                 [helper pushOpenHSType:type Step:3 nav:weakSelf.navigationController];
             }
-        } otherButtonTitles:@"取消"];
+        } otherButtonTitles:@"确定"];
         [alert show];
         return NO;
     }
@@ -369,23 +381,12 @@
 #pragma mark 提现点击事件
 - (IBAction)clickCashBtn:(UIButton *)sender {
     
-    if (self.accoutType == SelectAccoutTypeHoner) { //尊享账户
-        if(_openState < 3)//未设置交易密码
-        {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请先设置交易密码" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-            alert.tag = 1010;
-            [alert show];
-            return ;
-        }
-    }else {
-        
-        
+    if( [self checkIDAAndBankBlindState:self.accoutType]){ //判断是否设置交易密码
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        NSString *userSatues = [NSString stringWithFormat:@"%ld",(long)[UserInfoSingle sharedManager].openStatus];
+        NSDictionary *parametersDict =  @{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"userSatues":userSatues};
+        [[NetworkModule sharedNetworkModule] newPostReq:parametersDict tag:kSXTagCashAdvance owner:self signature:YES Type:self.accoutType];
     }
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    NSString *userSatues = [NSString stringWithFormat:@"%ld",(long)[UserInfoSingle sharedManager].openStatus];
-    NSDictionary *parametersDict = @{};
-      parametersDict = @{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"userSatues":userSatues};
-    [[NetworkModule sharedNetworkModule] newPostReq:parametersDict tag:kSXTagCashAdvance owner:self signature:YES Type:self.accoutType];
 }
 #pragma mark 充值点击事件
 - (IBAction)clickRechargeBtn:(UIButton *)sender {
@@ -499,7 +500,10 @@
                                         item.subtitle = [bankCardNum isEqualToString:@""] ? @"" : bankCardNum;
                                         break;
                                     case 2:
-                                        item.subtitle = @"";
+                                    {
+                                        
+                                        item.title = _openState <= 3 ? @"设置交易密码" : @"修改交易密码";
+                                    }
                                         break;
                                     case 3:
                                         item.subtitle = riskLevel;

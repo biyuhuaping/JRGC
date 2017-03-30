@@ -8,6 +8,7 @@
 
 #import "UCFP2POrHornerTabHeaderView.h"
 #import "UIDic+Safe.h"
+#import "UCFToolsMehod.h"
 @interface UCFP2POrHornerTabHeaderView ()
 {
     NSString *cashBalanceStr;
@@ -69,12 +70,12 @@
         }
         return;
     }
-    cashBalanceStr = [NSString stringWithFormat:@"¥%.2lf",[[self.dataDict objectSafeForKey:@"cashBalance"] doubleValue]];//可用金额
-    interestsStr = [NSString stringWithFormat:@"¥%.2f",[[self.dataDict  objectSafeForKey:@"interests"] doubleValue]];//累计收益
-    totalStr = [NSString stringWithFormat:@"¥%.2f",[[self.dataDict  objectSafeForKey:@"total"]doubleValue]];//累计收益
+    cashBalanceStr = [NSString stringWithFormat:@"%.2lf",[[self.dataDict objectSafeForKey:@"cashBalance"] doubleValue]];//可用金额
+    interestsStr = [NSString stringWithFormat:@"%.2f",[[self.dataDict  objectSafeForKey:@"interests"] doubleValue]];//累计收益
+    totalStr = [NSString stringWithFormat:@"%.2f",[[self.dataDict  objectSafeForKey:@"total"]doubleValue]];//累计收益
     if (!_isShowOrHideAccoutMoney){ //显示账户金额
         [self.accountVisibleBtn setImage:[UIImage imageNamed:@"account_invisible"] forState:UIControlStateNormal];
-        self.accumulatedIncomeLab.text =  [self checkNullStr:interestsStr];//累计收益
+        self.accumulatedIncomeLab.text = [self checkNullStr:interestsStr];//累计收益
         self.totalIncomeLab.text = [self checkNullStr:totalStr];//总资产
         self.availableAmountLab.text = [self checkNullStr:cashBalanceStr];//可用金额
     }else{//隐藏账户金额
@@ -86,11 +87,10 @@
 }
 -(NSString *)checkNullStr:(NSString *)nullStr
 {
-    nullStr = [nullStr substringFromIndex:1];
     if ([nullStr isKindOfClass:[NSNull class]]|| nullStr==nil || [nullStr isEqualToString:@""] || [nullStr floatValue] == 0) {
         return @"¥0.00";
     }else{
-        return [NSString stringWithFormat:@"¥%@",nullStr];
+        return [NSString stringWithFormat:@"¥%@", [UCFToolsMehod AddComma:nullStr]];
     }
 }
 @end
