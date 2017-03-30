@@ -26,9 +26,9 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y6a-pX-2yp">
-                        <rect key="frame" x="49" y="11" width="42" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
+                        <rect key="frame" x="49" y="12.5" width="35.5" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="list_icon_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="8bV-aM-dWa">
@@ -76,6 +76,7 @@
                 <outlet property="itemIconImage" destination="mqJ-IH-BLx" id="yn1-5B-NcH"/>
                 <outlet property="itemIconImageWidth" destination="upi-Oa-npb" id="8oj-44-ysh"/>
                 <outlet property="itemTitleLabel" destination="Y6a-pX-2yp" id="d0y-77-OoO"/>
+                <outlet property="titleLeftSpace" destination="arm-a4-8Fu" id="shm-dS-xRH"/>
                 <outlet property="upLine" destination="ldr-Ka-yEi" id="j5D-cz-dBm"/>
                 <outlet property="upLineHeight" destination="2Q1-t7-V5j" id="B3k-Fo-dkZ"/>
                 <outlet property="upLineLeftSpace" destination="qfh-xi-JlW" id="5G1-pY-FaA"/>

@@ -65,6 +65,9 @@
     
     [self.userInfoVC.presenter setDefaultState];
     
+    [lineViewAA removeFromSuperview];
+    lineViewAA = nil;
+    
     [self fetchData];
     
     [_pcListVC.tableView
@@ -106,12 +109,19 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     self.navigationController.navigationBarHidden = YES;
     if ([[NSUserDefaults standardUserDefaults] objectForKey:UUID]) {
         [self hideShadowView];
     } else {
         [self addShadowViewAndLoginBtn];
     }
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 }
 
 - (void)popShadowView:(NSNotification*)info
@@ -175,7 +185,7 @@
     self.pcListVC.tableView.frame = CGRectMake(0, 0, SCREEN_WIDTH, ScreenHeight-49);
     [self.view addSubview:self.pcListVC.tableView];
     
-    self.pcListVC.tipLabel.frame = CGRectMake(0, 5, SCREEN_WIDTH, 20);
+    self.pcListVC.tipLabel.frame = CGRectMake(0, 15, SCREEN_WIDTH, 20);
     [self.pcListVC.tableView.tableFooterView addSubview:self.pcListVC.tipLabel];
     
     self.pcListVC.tableView.tableHeaderView = self.userInfoVC.view;

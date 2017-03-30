@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UIView *downLine;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *upLineLeftSpace;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *downLineLeftSpace;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *titleLeftSpace;
 @end
 
 @implementation UCFPCFunctionCell
@@ -68,6 +69,7 @@
         self.downLine.backgroundColor = UIColorWithRGB(0xe3e5ea);
         self.upLineLeftSpace.constant = 0;
         self.downLineLeftSpace.constant = 0;
+        self.titleLeftSpace.constant = 0;
     } else if (indexPath.row == 1) { // 这组的末行(最后1行)
         self.upLine.hidden = YES;
         self.downLine.hidden = NO;
