@@ -234,8 +234,12 @@
 // 获取网络数据
 - (void)getSecurityCenterNetData
 {
-    NSString *strParameters = [NSString stringWithFormat:@"userId=%@", [[NSUserDefaults standardUserDefaults] objectForKey:UUID]];
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagAccountSafe owner:self Type:SelectAccoutDefault];
+//    NSString *strParameters = [NSString stringWithFormat:@"userId=%@", [[NSUserDefaults standardUserDefaults] objectForKey:UUID]];
+    
+    
+    [[NetworkModule sharedNetworkModule] newPostReq:[NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:UUID],@"userId", nil] tag:kSXTagAccountSafe owner:self signature:YES Type:SelectAccoutDefault];
+
+//    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagAccountSafe owner:self Type:SelectAccoutDefault];
 }
 
 //开始请求
@@ -256,20 +260,24 @@
     DBLOG(@"个人信息数据：%@",data);
     
     NSMutableDictionary *dic = [data objectFromJSONString];
-    NSString *rstcode = dic[@"status"];
+    NSString *rstcode = dic[@"ret"];
     NSString *rsttext = dic[@"statusdes"];
     
     if (tag.intValue == kSXTagAccountSafe) {
-        if ([rstcode intValue] == 1) {
-            NSDictionary *result = dic[@"data"];
+        
+        BOOL ret = dic[@"ret"];
+        NSString *message = dic[@"message"];
+        
+        if (ret) {
+            NSDictionary *result = dic[@"data"][@"data"];
             UCFSettingGroup *group = [self.itemsData firstObject];
             NSNumber *memberLever = [dic objectSafeForKey:@"memberLever"];
             NSString *authId = [result objectForKey:@"state"];
             NSString *bindPhone = [result objectForKey:@"bindMobile"];
             NSString *oldPhone = [[NSUserDefaults standardUserDefaults] valueForKey:PHONENUM];
-            NSString *gradeResult = dic[@"gradeResult"];
-            NSString *batchInvestStatus = [NSString stringWithFormat:@"%@",dic[@"data"][@"batchInvestStatus"]];
-            self.isCompanyAgent = dic[@"isCompanyAgent"];
+            NSString *gradeResult = dic[@"data"][@"gradeResult"];
+            NSString *batchInvestStatus = [NSString stringWithFormat:@"%@",result[@"batchInvestStatus"]];
+            self.isCompanyAgent = dic[@"data"][@"isCompanyAgent"];
             
             //新请求的手机号和本地存储手机号不一样则更新本地
             if (![oldPhone isEqualToString:bindPhone]) {
@@ -278,16 +286,16 @@
             }
             NSString *bindCard = [result objectForKey:@"card"];
             NSString *realName = [result objectForKey:@"realName"];
-            self.userGradeSwitch = [dic[@"isOpen"]  boolValue];
+            self.userGradeSwitch = [dic[@"data"][@"isOpen"]  boolValue];
             //保存 刷脸登录开关
           
-            if([dic isExistenceforKey:@"faceIsOpen"] && ![[dic objectSafeForKey:@"faceIsOpen"] isEqualToString:@""]){
-                 [[NSUserDefaults standardUserDefaults] setBool:![dic[@"faceIsOpen"]  boolValue] forKey:FACESWITCHSTATUS];
+            if([dic[@"data"] isExistenceforKey:@"faceIsOpen"] && ![[dic[@"data"] objectSafeForKey:@"faceIsOpen"] isEqualToString:@""]){
+                 [[NSUserDefaults standardUserDefaults] setBool:![dic[@"data"][@"faceIsOpen"]  boolValue] forKey:FACESWITCHSTATUS];
             }else{
                  [[NSUserDefaults standardUserDefaults] setBool:NO forKey:FACESWITCHSTATUS];
             }
             
-            [UserInfoSingle sharedManager].openStatus = [[dic objectSafeForKey: @"openStatus"] integerValue] ;
+            [UserInfoSingle sharedManager].openStatus = [dic[@"data"][@"openStatus"] integerValue] ;
             if ([UserInfoSingle sharedManager].openStatus == 4) {
                 _setChangePassword.title = @"修改交易密码";
             }else{
@@ -338,7 +346,7 @@
 
             [self.tableview reloadData];
         }else
-            [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
+            [AuxiliaryFunc showToastMessage:message withView:self.view];
     }  else if (tag.integerValue == kSXTagUserLogout) {
 //        [[UCFSession sharedManager] transformBackgroundWithUserInfo:nil withState:UCFSessionStateUserLogout];
 //        [[NSNotificationCenter defaultCenter] postNotificationName:@"setDefaultViewData" object:nil];
