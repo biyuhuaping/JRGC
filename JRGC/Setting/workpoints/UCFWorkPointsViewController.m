@@ -35,6 +35,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *lable_showMyPoint;
 @property (weak, nonatomic) IBOutlet UILabel *frozenWorkPoint;  //冻结工分数量
 @property (weak, nonatomic) IBOutlet UILabel *overduingWorkPoint;   //即将过期工分
+@property (weak, nonatomic) IBOutlet UIView *upView;
+@property (weak, nonatomic) IBOutlet UIView *downView;
 
 @end
 
@@ -99,6 +101,9 @@
 //     [self getDataRequset];
     
     // Do any additional setup after loading the view from its nib.
+    
+    [self.upView setBackgroundColor:UIColorWithRGB(0x5b6993)];
+    [self.downView setBackgroundColor:UIColorWithRGB(0x505e87)];
 }
 
 

@@ -114,8 +114,8 @@
 
     _bannerView.delegate = self;
     
-    _lineHigh1.constant = 0.5;
-    _lineHigh2.constant = 0.5;
+    _lineHigh1.constant = 0;
+    _lineHigh2.constant = 0;
     
     UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 50)];
     self.tableView.tableFooterView = footerView;
@@ -1018,7 +1018,7 @@
         case 1://未开户-->>>新用户开户
         case 2://已开户 --->>>老用户(白名单)开户
         {
-            [self showHSAlert:@"请先开通徽商存管账户"];
+            [self showHSAlert:P2PTIP1];
             return NO;
             break;
         }
@@ -1028,7 +1028,7 @@
                 return YES;
             }else
             {
-              [self showHSAlert:@"请先设置交易密码"];
+              [self showHSAlert:P2PTIP2];
                 return NO;
             }
         }

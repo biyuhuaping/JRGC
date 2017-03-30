@@ -12,7 +12,7 @@
 @interface UCFUserInfoController : UCFBaseViewController
 + (instancetype)instanceWithPresenter:(UCFPCListViewPresenter *)presenter;
 + (CGFloat)viewHeight;
-
+@property (nonatomic, assign) CGFloat fixedScreenLight;
 - (UCFPCListViewPresenter *)presenter;
 - (void)setUserInfoVCGenerator:(ViewControllerGenerator)userInfoVCGenerator;
 - (void)setMessageVCGenerator:(ViewControllerGenerator)messageVCGenerator;

@@ -350,6 +350,9 @@
     _minuteCountDownView.frame = CGRectMake(0, y_pos, ScreenWidth, MinuteDownViewHeight);
 //    _minuteCountDownView =[[MinuteCountDownView alloc]initWithFrame:CGRectMake(0, y_pos, ScreenWidth, MinuteDownViewHeight)];
     _minuteCountDownView.sourceVC = @"UCFProjectDetailVC";//标详情页面
+    
+    [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:_minuteCountDownView isTop:YES];
+    [Common addLineViewColor:UIColorWithRGB(0xe3e5ea) With:_minuteCountDownView isTop:NO];
 //    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 //    
 //    [formatter setDateStyle:NSDateFormatterMediumStyle];
@@ -395,7 +398,7 @@
     bottomBkView.backgroundColor = [UIColor whiteColor];
     [self addSubview:bottomBkView];
     
-    [UCFToolsMehod viewAddLine:bottomBkView Up:YES];
+//    [UCFToolsMehod viewAddLine:bottomBkView Up:YES];
     [UCFToolsMehod viewAddLine:bottomBkView Up:NO];
     
     //固定起息日
@@ -488,7 +491,7 @@
     bottomBkView.backgroundColor = [UIColor whiteColor];
     [self addSubview:bottomBkView];
     
-    [UCFToolsMehod viewAddLine:bottomBkView Up:YES];
+//    [UCFToolsMehod viewAddLine:bottomBkView Up:YES];
     [UCFToolsMehod viewAddLine:bottomBkView Up:NO];
     
     //还款方式
@@ -580,28 +583,28 @@
     
     _activitylabel1 = [UILabel labelWithFrame:CGRectZero text:@"" textColor:UIColorWithRGB(0x5b7aa4) font:[UIFont systemFontOfSize:MarkLabelFont]];
     _activitylabel1.backgroundColor = [UIColor whiteColor];
-    _activitylabel1.layer.borderWidth = 0.5;
+    _activitylabel1.layer.borderWidth = 1;
     _activitylabel1.layer.cornerRadius = 2.0;
     _activitylabel1.layer.borderColor = UIColorWithRGB(0x5b7aa4).CGColor;
     [markBg addSubview:_activitylabel1];
     
     _activitylabel2 = [UILabel labelWithFrame:CGRectZero text:@"" textColor:UIColorWithRGB(0x5b7aa4) font:[UIFont systemFontOfSize:MarkLabelFont]];
     _activitylabel2.backgroundColor = [UIColor whiteColor];
-    _activitylabel2.layer.borderWidth = 0.5;
+    _activitylabel2.layer.borderWidth = 1;
     _activitylabel2.layer.cornerRadius = 2.0;
     _activitylabel2.layer.borderColor = UIColorWithRGB(0x5b7aa4).CGColor;
     [markBg addSubview:_activitylabel2];
     
     _activitylabel3 = [UILabel labelWithFrame:CGRectZero text:@"" textColor:UIColorWithRGB(0x5b7aa4) font:[UIFont systemFontOfSize:MarkLabelFont]];
     _activitylabel3.backgroundColor = [UIColor whiteColor];
-    _activitylabel3.layer.borderWidth = 0.5;
+    _activitylabel3.layer.borderWidth = 1;
     _activitylabel3.layer.cornerRadius = 2.0;
     _activitylabel3.layer.borderColor = UIColorWithRGB(0x5b7aa4).CGColor;
     [markBg addSubview:_activitylabel3];
     
     _activitylabel4 = [UILabel labelWithFrame:CGRectZero text:@"" textColor:UIColorWithRGB(0x5b7aa4) font:[UIFont systemFontOfSize:MarkLabelFont]];
     _activitylabel4.backgroundColor = [UIColor whiteColor];
-    _activitylabel4.layer.borderWidth = 0.5;
+    _activitylabel4.layer.borderWidth = 1;
     _activitylabel4.layer.cornerRadius = 2.0;
     _activitylabel4.layer.borderColor = UIColorWithRGB(0x5b7aa4).CGColor;
     [markBg addSubview:_activitylabel4];

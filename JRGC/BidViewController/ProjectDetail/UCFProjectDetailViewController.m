@@ -16,9 +16,10 @@
 #import "AppDelegate.h"
 #import "UCFInvestmentView.h"
 #import "UIImage+Misc.h"
-#import "UCFBankDepositoryAccountViewController.h"
+//#import "UCFBankDepositoryAccountViewController.h"
 #import "UCFOldUserGuideViewController.h"
 #import "RiskAssessmentViewController.h"
+#import "HSHelper.h"
 @interface UCFProjectDetailViewController ()
 {
     UCFNormalNewMarkView *_normalMarkView;// 普通标
@@ -571,17 +572,18 @@
 }
 - (BOOL)checkUserCanInvest
 {
-    switch ([UserInfoSingle sharedManager].openStatus)
+    NSInteger step = _isP2P == YES ? [UserInfoSingle sharedManager].openStatus : [UserInfoSingle sharedManager].enjoyOpenStatus;
+    switch (step)
     {// ***hqy添加
         case 1://未开户-->>>新用户开户
         case 2://已开户 --->>>老用户(白名单)开户
         {
-            [self showHSAlert:@"请先开通徽商存管账户"];
+            [self showHSAlert:_isP2P == YES ? P2PTIP1 : ZXTIP1];
             return NO;
         }
         case 3://已绑卡-->>>去设置交易密码页面
         {
-            [self showHSAlert:@"请先设置交易密码"];
+            [self showHSAlert:_isP2P == YES ? P2PTIP2 : ZXTIP2];
             return NO;
         }
             break;
@@ -651,23 +653,11 @@
             purchaseViewController.dataDict = dic;
             [self.navigationController pushViewController:purchaseViewController animated:YES];
         }else if ([[dic objectForKey:@"status"] integerValue] == 21){
-            switch ([UserInfoSingle sharedManager].openStatus) {// ***hqy添加
-                case 1://未开户-->>>新用户开户
-                case 2://已开户 --->>>老用户(白名单)开户
-                {
-                    UCFBankDepositoryAccountViewController * bankDepositoryAccountVC =[[UCFBankDepositoryAccountViewController alloc ]initWithNibName:@"UCFBankDepositoryAccountViewController" bundle:nil];
-                    bankDepositoryAccountVC.openStatus = [UserInfoSingle sharedManager].openStatus;
-                    [self.navigationController pushViewController:bankDepositoryAccountVC animated:YES];
-                }
-                    break;
-                case 3://已绑卡-->>>去设置交易密码页面
-                {
-                    UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:3];
-                    [self.navigationController pushViewController:vc animated:YES];
-                }
-                    break;
-            }
-
+            
+            HSHelper *helper = [HSHelper new];
+            NSInteger step = _isP2P == YES ? [UserInfoSingle sharedManager].openStatus : [UserInfoSingle sharedManager].enjoyOpenStatus;
+            SelectAccoutType type = _isP2P == YES ? SelectAccoutTypeP2P : SelectAccoutTypeHoner;
+            [helper pushOpenHSType:type Step:step nav:self.navigationController];
             
         }else if ([[dic objectForKey:@"status"] integerValue] == 3 || [[dic objectForKey:@"status"] integerValue] == 4) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:[dic objectForKey:@"statusdes"] delegate:self cancelButtonTitle:@"返回列表" otherButtonTitles: nil];
@@ -711,23 +701,10 @@
     }
     if (alertView.tag == 8000) {
         if (buttonIndex == 1) {
-            switch ([UserInfoSingle sharedManager].openStatus)
-            {// ***hqy添加
-                case 1://未开户-->>>新用户开户
-                case 2://已开户 --->>>老用户(白名单)开户
-                {
-                    UCFBankDepositoryAccountViewController * bankDepositoryAccountVC =[[UCFBankDepositoryAccountViewController alloc ]initWithNibName:@"UCFBankDepositoryAccountViewController" bundle:nil];
-                    bankDepositoryAccountVC.openStatus = [UserInfoSingle sharedManager].openStatus;
-                    [self.navigationController pushViewController:bankDepositoryAccountVC animated:YES];
-                }
-                    break;
-                case 3://已绑卡-->>>去设置交易密码页面
-                {
-                    UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:3];
-                    [self.navigationController pushViewController:vc animated:YES];
-                }
-                    break;
-            }
+            HSHelper *helper = [HSHelper new];
+            NSInteger step = _isP2P == YES ? [UserInfoSingle sharedManager].openStatus : [UserInfoSingle sharedManager].enjoyOpenStatus;
+            SelectAccoutType type = _isP2P == YES ? SelectAccoutTypeP2P : SelectAccoutTypeHoner;
+            [helper pushOpenHSType:type Step:step nav:self.navigationController];            
         }
     } else if (alertView.tag == 9000) {
         if(buttonIndex == 1){

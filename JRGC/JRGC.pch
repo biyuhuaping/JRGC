@@ -31,7 +31,7 @@
 #define MarkHeight 13   //二级标签高度
 #define MarkXSpacing 12//二级标签间距
 #define MarkInSpacing 10 //二级标签内部间隙
-#define MarkLabelFont 11
+#define MarkLabelFont 10
 #define IconYPos 11
 #define IconXPos 13
 #define LabelWidTh 150
@@ -199,7 +199,10 @@ return shared##className; \
 #define NOTICERISKH5 @"https://m.9888.cn/static/wap/notice-risk-prompt/index.html"//风险揭示
 
 #define  BATHCHINVESTPROTOCOL  @"https://m.9888.cn/static/wap/protocol-batch-invest/index.html"//批量投资协议
-
+#define ZXTIP1 @"请先开通尊享徽商资金账户"
+#define ZXTIP2 @"请先设置尊享徽商资金账户交易密码"
+#define P2PTIP1 @"请先开通P2P徽商存管账户"
+#define P2PTIP2 @"请先设置P2P徽商存管账户交易密码"
 //================== 调试宏 ==================
 #ifdef DEBUG
 # define DBLOG(fmt, ...) NSLog((@"\n-—————函数名:%s"  "行号:%d\n-—————" fmt), __FUNCTION__, __LINE__, ##__VA_ARGS__);

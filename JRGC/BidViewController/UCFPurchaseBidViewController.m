@@ -151,7 +151,7 @@
 - (BOOL)checkOverdueGongDou
 {
     NSString *beancount = [UCFToolsMehod isNullOrNilWithString:[NSString stringWithFormat:@"%@",[_dataDict objectForKey:@"beancount"]]];
-    if (beancount.length == 0 ||[beancount isEqualToString:@"0"]) {
+    if (beancount.length == 0 || [beancount floatValue] == 0 ) {
         return NO;
     } else {
         return YES;

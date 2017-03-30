@@ -63,10 +63,9 @@
     [self setWebViewUserAgent];
     [UCFSession sharedManager].delegate = self;
 
-    [self checkUpdate];
+//    [self checkUpdate];
     [self checkNovicePoliceOnOff];//监测2017新手奖励政策开关。
     
-    // Override point for customization after application launch.
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
@@ -676,10 +675,6 @@
     //请求开关状态
     [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":userId} tag:kSXTagIsShowHornor owner:self signature:YES Type:SelectAccoutDefault];
 }
-
-//    //请求开关状态
-//    [[NetworkModule sharedNetworkModule] newPostReq:nil tag:kSXTagIsShowHornor owner:self signature:NO];
-//}
 #pragma 新手政策弹框
 - (void)checkNovicePoliceOnOff
 {
@@ -692,21 +687,46 @@
 
 - (void)checkUpdate
 {
-    [[NetworkModule sharedNetworkModule] postReq:@"" tag:kSXTagKicItemList owner:self Type:SelectAccoutDefault];
+//    [[NetworkModule sharedNetworkModule] postReq:@"" tag:kSXTagKicItemList owner:self Type:SelectAccoutDefault];
+    [[NetworkModule sharedNetworkModule] newPostReq:@{} tag:kSXTagKicItemList owner:self signature:NO Type:SelectAccoutDefault];
 }
-
+//新手政策弹框
+- (void)novicecheck:(NSDictionary *)dic
+{
+    int  novicePoliceOnOff = [[dic objectSafeForKey:@"novicePoliceOnOff"] intValue];
+    BOOL policeOnOff = novicePoliceOnOff > 0 ? YES:NO;
+    [[NSUserDefaults standardUserDefaults] setBool:policeOnOff forKey:NOVICEPOLICEONOFF];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [ToolSingleTon sharedManager].checkIsInviteFriendsAlert = policeOnOff;
+}
+- (void)zxSwitchCheck:(NSDictionary *)dic
+{
+    //尊享开关
+    BOOL zxSwitch = [[dic objectForKey:@"showZXOnOff"] boolValue];
+    if (zxSwitch) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isShowHornor"];
+    }
+    else {
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isShowHornor"];
+    }
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"userisloginandcheckgrade" object:@(YES)];
+}
 - (void)endPost:(id)result tag:(NSNumber*)tag
 {
-    if (tag.integerValue == kSXTagKicItemList) {
-        [self checkIsShowHornor];
+    if (tag.integerValue == kSXTagGetInfoForOnOff) {
         NSString *Data = (NSString *)result;
         NSDictionary * dic = [Data objectFromJSONString];
-        if([dic[@"status"] intValue] == 1)
+        if([dic[@"ret"] boolValue] == 1)
         {
-            NSString *netVersion = dic[@"result"][@"iosmaxversion"];
+            dic = dic[@"data"];
+            [self novicecheck:dic];
+            [self zxSwitchCheck:dic];
+            //以下是升级信息
+            NSString *netVersion = dic[@"lastVersion"];
             [LockFlagSingle sharedManager].netVersion = netVersion;
             //是否强制更新 0强制 1随便 2不稳定
-            NSInteger versionMark = [dic[@"result"][@"iosupdate"] integerValue];
+            NSInteger versionMark = [dic[@"forceUpdateOnOff"] integerValue];
       
             NSDictionary *infoDic = [[NSBundle mainBundle] infoDictionary];
             NSString *currentVersion = infoDic[@"CFBundleShortVersionString"];
@@ -718,12 +738,7 @@
                 }
                 return;
             } else {
-                NSString *des = @"";
-                if ([dic[@"result"][@"iosdes"] isEqual:[NSNull null]]) {
-                    des = @"";
-                } else {
-                    des =dic[@"result"][@"iosdes"];
-                }
+                NSString *des = dic[@"updateInfo"];
                 if (versionMark == 0) {
                     if (_isComeForceUpdate) {
                         //服务器版本和appstore版本一致
@@ -744,24 +759,7 @@
                 }
             }
         }
-    } else if (tag.integerValue == kSXTagCalulateInstallNum){
-        
-    } else if (tag.integerValue == kSXTagUserLogout){
-//        [[UserInfoSingle sharedManager] removeUserInfo];
-//        [[NSUserDefaults standardUserDefaults] setValue:nil forKey:UUID];
-//        [[NSUserDefaults standardUserDefaults] setValue:nil forKey:TIME];
-//        [[NSUserDefaults standardUserDefaults] setValue:nil forKey:IDCARD_STATE];
-//        [[NSUserDefaults standardUserDefaults] setValue:nil forKey:BANKCARD_STATE];
-        //        [[NSUserDefaults standardUserDefaults] setValue:nil forKey:GCODE];
-//        [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"changScale"];
-//        [[NSUserDefaults standardUserDefaults] synchronize];
-//        [[NSNotificationCenter defaultCenter] postNotificationName:BACK_TO_LOGOUT object:nil];
-//        [self.tabBarController setSelectedIndex:2];
-        //安全退出后弹出登录框
-//        UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
-//        UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
-//        [self.tabBarController presentViewController:loginNaviController animated:YES completion:nil];
-    } else if (tag.intValue == kSXTagCheckPersonRedPoint) {
+    }else if (tag.intValue == kSXTagCheckPersonRedPoint) {
         NSString *Data = (NSString *)result;
         NSDictionary * dic = [Data objectFromJSONString];
         if ([dic[@"status"] intValue] == 1) {
@@ -779,34 +777,6 @@
             // 通知个人中心刷新，之所以加这个通知，是因为投标成功页查看我的奖励，跟个人中心都要刷新个人中心数据，保持统一（但会造成一次网络浪费，从投标成功页查看我的奖励列表，点击tab的时候也会请求一次这个接口）
             [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
         }
-    }else if (tag.intValue == kSXTagGetInfoForOnOff) {
-        NSString *Data = (NSString *)result;
-        NSDictionary * dic = [Data objectFromJSONString];
-        if ([dic[@"ret"] intValue] == 1) {
-            
-            int  novicePoliceOnOff = [[[dic objectSafeDictionaryForKey:@"data"] objectSafeForKey:@"novicePoliceOnOff"] intValue];
-            BOOL policeOnOff = novicePoliceOnOff > 0 ? YES:NO;
-            [[NSUserDefaults standardUserDefaults] setBool:policeOnOff forKey:NOVICEPOLICEONOFF];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-            [ToolSingleTon sharedManager].checkIsInviteFriendsAlert = policeOnOff;
-        }
-    }
-    else if (tag.integerValue == kSXTagIsShowHornor) {
-        NSString *Data = (NSString *)result;
-        NSDictionary * dic = [Data objectFromJSONString];
-#warning 测试项目列表显示项
-        
-        BOOL zxSwitch = [[[dic objectForKey:@"data"] objectForKey:@"zxSwitch"] boolValue];
-        if (zxSwitch) {
-            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isShowHornor"];
-        }
-        else {
-            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isShowHornor"];
-        }
-        
-        
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"userisloginandcheckgrade" object:@(YES)];
     }
 }
 
