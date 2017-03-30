@@ -133,15 +133,18 @@
 #define CHECKREDPOINTHIDE             @"newaccount/updatePointUpdTime"  //检测工豆 返现券 红包 回款明细
 #define CHECKPERSONCENTERREDALERT     @"newaccount/isHasPoint"
 //#define GETIGNORGELOGINTOKEN          @"newWapActivity/wapActGetToken"
-#define MSGCENTER                     @"tMsgList/queryAllTMsgList"    //消息中心列表
+//#define MSGCENTER                     @"tMsgList/queryAllTMsgList"    //消息中心列表
+#define MSGCENTER                     @"api/messageCenter/v2/queryAllTMsgList.json"    //消息中心列表
 #define MSGCENTERDETAIL               @"tMsgList/readInms"           //消息详情
 #define USERDISPERMISSIONISOPEN       @"newUserDisPermission/userDisPermissionIsOpen" //消息设置-- 用户是否接收短信通知
 #define VALIDLOGIN                    @"safeCenter/validLogin"
 #define UPDATEUSERDISPERMISSION       @"newUserDisPermission/userDisPermission"//消息设置-- 更新用户是否接收短信通知
 //#define USERCOUPONFXCOUNT             @"newBeanRecordCon/quereyCouponFxCount"
-#define MSGSIGNALLREAD                @"tMsgList/signAllRead" //全部设置为已读
-#define MSGREOMETMSG                  @"tMsgList/removeTMsg" //删除消息
-#define MSGSIGNREAD                   @"tMsgList/signRead" //单条消息标记为已读
+#define MSGSIGNALLREAD              @"api/messageCenter/v2/signAllRead.json"// 全部设置为已读 @"tMsgList/signAllRead"
+//#define MSGREOMETMSG                  @"tMsgList/removeTMsg" //删除消息
+#define MSGREOMETMSG                  @"api/messageCenter/v2/removeTMsg.json" //删除消息
+//#define MSGSIGNREAD                   @"tMsgList/signRead" //单条消息标记为已读
+#define MSGSIGNREAD                   @"api/messageCenter/v2/signRead.json" //单条消息标记为已读
 //#define GETREDPOINTMDSSAGE            @"newaccount/getRedPointMessage"  //获取所有红点状态
 //#define GETWORKPOINT                  @"userScore/queryScoreList"       //工分请求
 #define GETWORKPOINT                  @"api/userScore/v2/queryScoreList.json"       //工分请求
