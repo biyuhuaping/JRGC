@@ -1175,6 +1175,10 @@ static NetworkModule *gInstance = NULL;
             parameter = [NEW_SERVER_IP stringByAppendingString:GETTOKENID];
         }
             break;
+        case kSXTagRegistResult: {
+            parameter = [NEW_SERVER_IP stringByAppendingString:REGISTRESULT];
+        }
+            break;
         case kSXTagPersonCenter: {
             parameter = [NEW_SERVER_IP stringByAppendingString:PERSON_CENTER];
         }
