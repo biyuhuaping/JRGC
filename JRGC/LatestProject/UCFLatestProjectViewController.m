@@ -114,8 +114,8 @@
 
     _bannerView.delegate = self;
     
-    _lineHigh1.constant = 0.5;
-    _lineHigh2.constant = 0.5;
+    _lineHigh1.constant = 0;
+    _lineHigh2.constant = 0;
     
     UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 50)];
     self.tableView.tableFooterView = footerView;
