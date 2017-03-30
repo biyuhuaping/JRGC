@@ -26,7 +26,7 @@
 #define PERSON_CENTER       @"api/homePage/v2/userCenter.json"  // @"newaccount/center" 个人中心
 #define MONEY_OVERVIEW      @"newaccount/overview"
 #define FUNDS_DETAIL        @"newaccount/funds"
-#define ACCOUNT_SAFE        @"newsafe/accountSafe"
+#define ACCOUNT_SAFE        @"api/userInfo/v2/personalInfo.json" //个人信息页面
 #define VALID_BINDED_PHONE  @"newuserregist/bindNewPhone" //修改绑定手机号验证一绑定号码
 #define IDNO_CHECKINFO      @"newsafe/idnoCheckInfo"   // 个人身份证信息
 
