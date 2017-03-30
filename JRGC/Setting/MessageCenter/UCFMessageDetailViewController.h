@@ -7,11 +7,8 @@
 //
 
 #import "UCFBaseViewController.h"
-
+#import "UCFMessageCenterModel.h"
 @interface UCFMessageDetailViewController : UCFBaseViewController
 
-@property (nonatomic,strong)NSString * messageId;
-@property (nonatomic,strong)NSString * userId;
-
-
+@property (nonatomic,strong)UCFMessageCenterModel *model;
 @end
