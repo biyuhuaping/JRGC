@@ -15,8 +15,9 @@
 #import "UCFPurchaseTranBidViewController.h"
 #import "UCFNoPermissionViewController.h"
 #import "UCFLoginViewController.h"
-#import "UCFBankDepositoryAccountViewController.h"
+//#import "UCFBankDepositoryAccountViewController.h"
 #import "UCFOldUserGuideViewController.h"
+#import "HSHelper.h"
 @interface UCFP2PTransferViewController () <UITableViewDataSource, UITableViewDelegate, UCFProjectListCellDelegate>
 {
     UCFTransferModel *_transferModel;
@@ -297,23 +298,8 @@
         [self reloadP2PTransferData];
     } else if (alertView.tag == 8000) {
         if (buttonIndex == 1) {
-            switch ([UserInfoSingle sharedManager].openStatus)
-            {// ***hqy添加
-                case 1://未开户-->>>新用户开户
-                case 2://已开户 --->>>老用户(白名单)开户
-                {
-                    UCFBankDepositoryAccountViewController * bankDepositoryAccountVC =[[UCFBankDepositoryAccountViewController alloc ]initWithNibName:@"UCFBankDepositoryAccountViewController" bundle:nil];
-                    bankDepositoryAccountVC.openStatus = [UserInfoSingle sharedManager].openStatus;
-                    [self.navigationController pushViewController:bankDepositoryAccountVC animated:YES];
-                }
-                    break;
-                case 3://已绑卡-->>>去设置交易密码页面
-                {
-                    UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:3];
-                    [self.navigationController pushViewController:vc animated:YES];
-                }
-                    break;
-            }
+           HSHelper *helper = [HSHelper new];
+            [helper pushOpenHSType:SelectAccoutTypeP2P Step:[UserInfoSingle sharedManager].openStatus nav:self.navigationController];
         }
         
     }

@@ -70,7 +70,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self addLeftButton];
-    baseTitleLabel.text = @"邀请返利";
+    
+    if (self.accoutType == SelectAccoutTypeHoner) {
+        baseTitleLabel.text = @"尊享邀请返利";
+    }else{
+        baseTitleLabel.text = @"P2P邀请返利";
+    }
+   
     
     [_shareBtn setBackgroundImage:[[UIImage imageNamed:@"btn_red"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:2.5] forState:UIControlStateNormal];
     [_shareBtn setBackgroundImage:[[UIImage imageNamed:@"btn_red_highlight"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:2.5] forState:UIControlStateHighlighted];

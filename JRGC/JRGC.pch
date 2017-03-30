@@ -31,7 +31,7 @@
 #define MarkHeight 13   //二级标签高度
 #define MarkXSpacing 12//二级标签间距
 #define MarkInSpacing 10 //二级标签内部间隙
-#define MarkLabelFont 11
+#define MarkLabelFont 10
 #define IconYPos 11
 #define IconXPos 13
 #define LabelWidTh 150

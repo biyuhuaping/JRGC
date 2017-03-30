@@ -92,7 +92,7 @@
     [rightbutton addTarget:self action:@selector(getToBack:) forControlEvents:UIControlEventTouchUpInside];
     [rightbutton setTitleColor:WORDCOLORGRAY forState:UIControlStateNormal];
     //rightbutton.titleLabel.textColor = TITLECOLORGRAY;
-    //[rightbutton setTitleColor:[UIColor colorWithWhite:1 alpha:0.7] forState:UIControlStateHighlighted];
+    [rightbutton setTitleColor:UIColorWithRGB(0x333333) forState:UIControlStateNormal];
     
     if (kIS_IOS7) {
         [rightbutton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
@@ -473,6 +473,7 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"LatestProjectUpdate" object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"AssignmentUpdate" object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:RELOADP2PORHONERACCOTDATA object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:BACK_TO_HS object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:MODIBANKZONE_SUCCESSED object:nil];//返回绑定银行卡页面刷刷新数据
  }
