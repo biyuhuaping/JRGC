@@ -87,7 +87,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 110;
+    return 98;
 }
 -(void)reloadP2PData{
     [self.tableview.header beginRefreshing];
