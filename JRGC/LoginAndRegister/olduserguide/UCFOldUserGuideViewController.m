@@ -92,7 +92,7 @@
     [rightbutton addTarget:self action:@selector(getToBack:) forControlEvents:UIControlEventTouchUpInside];
     [rightbutton setTitleColor:WORDCOLORGRAY forState:UIControlStateNormal];
     //rightbutton.titleLabel.textColor = TITLECOLORGRAY;
-    //[rightbutton setTitleColor:[UIColor colorWithWhite:1 alpha:0.7] forState:UIControlStateHighlighted];
+    [rightbutton setTitleColor:UIColorWithRGB(0x333333) forState:UIControlStateNormal];
     
     if (kIS_IOS7) {
         [rightbutton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
