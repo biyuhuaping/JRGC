@@ -119,8 +119,9 @@
 // 获取身份证信息
 - (void)getIdInfoFromNet
 {
-    NSString *strParameters = [NSString stringWithFormat:@"userId=%@", [[NSUserDefaults standardUserDefaults] objectForKey:UUID]];
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagIdentifyCard owner:self Type:SelectAccoutDefault];
+    NSString *struserId = [NSString stringWithFormat:@"%@", [[NSUserDefaults standardUserDefaults] objectForKey:UUID]];
+    NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys:struserId,@"userId",nil];
+    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagIdentifyCard owner:self signature:YES Type:SelectAccoutDefault];
 }
 
 //开始请求
@@ -138,23 +139,25 @@
     if (tag.intValue == kSXTagIdentifyCard) {
         NSMutableDictionary *dic = [data objectFromJSONString];
         DBLOG(@"UCFSettingViewController : %@",dic);
-        NSString *rstcode = dic[@"status"];
-        NSString *rsttext = dic[@"statusdes"];
-        BOOL isCompanyAgent = [[dic objectSafeForKey:@"isCompanyAgent"] boolValue];
-        int isSucess = [rstcode intValue];
+//        NSString *ret = dic[@"ret"];
+        NSString *message = dic[@"message"];
+        BOOL isCompanyAgent = [[dic objectSafeForKey:@"isCompanyAgent"] boolValue];//true:是机构 false:不是机构
+
+        int isSucess = [dic[@"ret"]intValue];
         if (isSucess == 1) {
             if (isCompanyAgent) {
-                self.realNameLabel.text = [NSString stringWithFormat:@"企业名称：%@", dic[@"realName"]];
+                self.realNameLabel.text = [NSString stringWithFormat:@"企业名称：%@", dic[@"data"][@"realName"]];
                 self.genderLabel.text =@"性别：X";
-                self.idNoLabel.text = [NSString stringWithFormat:@"证件号：%@", dic[@"idno"]];
+                self.idNoLabel.text = [NSString stringWithFormat:@"证件号：%@", dic[@"data"][@"idno"]];
             }else{
-                self.realNameLabel.text = [NSString stringWithFormat:@"姓名：%@", dic[@"realName"]];
-                self.genderLabel.text = [NSString stringWithFormat:@"性别：%@", ([dic[@"sex"] integerValue] == 0 ? @"女" : @"男")];
-                self.idNoLabel.text = [NSString stringWithFormat:@"身份证号：%@", dic[@"idno"]];
+                self.realNameLabel.text = [NSString stringWithFormat:@"姓名：%@", dic[@"data"][@"realName"]];
+                self.genderLabel.text = [NSString stringWithFormat:@"性别：%@", ([dic[@"data"][@"sex"] integerValue] == 0 ? @"女" : @"男")];
+                self.idNoLabel.text = [NSString stringWithFormat:@"身份证号：%@", dic[@"data"][@"idno"]];
+//                state
             }
         }
         else {
-            [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
+            [AuxiliaryFunc showToastMessage:message withView:self.view];
         }
     }
 }

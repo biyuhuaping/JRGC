@@ -82,10 +82,10 @@
         //先前是绑卡页面，因为删除绑卡页面，所以暂时用TradePasswordVC这个类替代，整体调试的时候改过来，zrc fixed
 //        UCFSettingItem *bundleCard = [UCFSettingArrowItem itemWithIcon:@"safecenter_icon_bankcard" title:@"绑定银行卡" destVcClass:[UCFBankCardInfoViewController class]];//***qyy
         
-        UCFSettingItem *riskAssessment = [UCFSettingArrowItem itemWithIcon:@"safecenter_icon_assessment" title:@"风险承担能力" destVcClass:[RiskAssessmentViewController class]];
+//        UCFSettingItem *riskAssessment = [UCFSettingArrowItem itemWithIcon:@"safecenter_icon_assessment" title:@"风险承担能力" destVcClass:[RiskAssessmentViewController class]];
         
 
-        UCFSettingItem *batchInvest = [UCFSettingArrowItem itemWithIcon:@"safecenter_icon_auto" title:@"自动投标" destVcClass:[UCFBatchInvestmentViewController class]];
+//        UCFSettingItem *batchInvest = [UCFSettingArrowItem itemWithIcon:@"safecenter_icon_auto" title:@"自动投标" destVcClass:[UCFBatchInvestmentViewController class]];//qyy
 
         UCFSettingItem *activeGestureCode  = [UCFSettingSwitchItem itemWithIcon:@"safecenter_icon_gesture" title:@"启用手势密码"];
         UCFSettingItem *activeFaceValid  = [UCFSettingSwitchItem itemWithIcon:@"uesr_icon_face" title:@"启用刷脸登录" withSwitchType:2];
@@ -95,17 +95,17 @@
         
         UCFSettingGroup *group1 = [[UCFSettingGroup alloc] init];//用户信息
 //        group1.items = [[NSMutableArray alloc]initWithArray: @[self.userLevel,idauth, bundlePhoneNum, bundleCard,riskAssessment]];//qyy
-        group1.items = [[NSMutableArray alloc]initWithArray: @[idauth, bundlePhoneNum, riskAssessment]];//qyy
+        group1.items = [[NSMutableArray alloc]initWithArray: @[idauth, bundlePhoneNum]];//qyy
 
         UCFSettingGroup *group2 = [[UCFSettingGroup alloc] init];//账户安全
         
         if ([self checkTouchIdIsOpen]) {
             UCFSettingItem *zhiWenSwith  = [UCFSettingSwitchItem itemWithIcon:@"safecenter_icon_touch" title:@"启用指纹解锁" withSwitchType:1];
 //            group2.items = [[NSMutableArray alloc]initWithArray:@[batchInvest,activeGestureCode,zhiWenSwith, activeFaceValid,modifyPassword,_setChangePassword]];
-             group2.items = [[NSMutableArray alloc]initWithArray:@[batchInvest,activeGestureCode,zhiWenSwith, activeFaceValid,modifyPassword]];
+             group2.items = [[NSMutableArray alloc]initWithArray:@[activeGestureCode,zhiWenSwith, activeFaceValid,modifyPassword]];
         } else {
 //            group2.items =[[NSMutableArray alloc]initWithArray: @[batchInvest,activeGestureCode,activeFaceValid,modifyPassword,_setChangePassword]];
-             group2.items =[[NSMutableArray alloc]initWithArray: @[batchInvest,activeGestureCode,activeFaceValid,modifyPassword,]];
+             group2.items =[[NSMutableArray alloc]initWithArray: @[activeGestureCode,activeFaceValid,modifyPassword,]];
 
         }
         _itemsData = [[NSMutableArray alloc] initWithObjects:group1,group2,nil];
@@ -260,8 +260,8 @@
     DBLOG(@"个人信息数据：%@",data);
     
     NSMutableDictionary *dic = [data objectFromJSONString];
-    NSString *rstcode = dic[@"ret"];
-    NSString *rsttext = dic[@"statusdes"];
+    NSString *rstcode = dic[@"status"];
+//    NSString *rsttext = dic[@"statusdes"];
     
     if (tag.intValue == kSXTagAccountSafe) {
         
@@ -295,7 +295,7 @@
                  [[NSUserDefaults standardUserDefaults] setBool:NO forKey:FACESWITCHSTATUS];
             }
             
-            [UserInfoSingle sharedManager].openStatus = [dic[@"data"][@"openStatus"] integerValue] ;
+//            [UserInfoSingle sharedManager].openStatus = [dic[@"data"][@"openStatus"] integerValue] ;
             if ([UserInfoSingle sharedManager].openStatus == 4) {
                 _setChangePassword.title = @"修改交易密码";
             }else{
@@ -339,10 +339,10 @@
                 }
             }
             
-            UCFSettingGroup *group2 = [self.itemsData lastObject];
-            UCFSettingItem *userItem = group2.items.firstObject;
-            userItem.subtitle = batchInvestStatus.length == 0 ? @"未开启" : batchInvestStatus;
-            userItem.title = batchInvestStatus.length == 0 ? @"自动投标(开启后才可进行批量投资)" : @"自动投标";
+//            UCFSettingGroup *group2 = [self.itemsData lastObject];
+//            UCFSettingItem *userItem = group2.items.firstObject;
+//            userItem.subtitle = batchInvestStatus.length == 0 ? @"未开启" : batchInvestStatus;
+//            userItem.title = batchInvestStatus.length == 0 ? @"自动投标(开启后才可进行批量投资)" : @"自动投标";
 
             [self.tableview reloadData];
         }else
@@ -370,7 +370,7 @@
             NSString * faceIsOpen = [dic objectSafeForKey:@"isOpen"];// 1：关闭 0：开启
             [self validFaceLogin:faceIsOpen];
         }else{
-            [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
+//            [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
             [self.tableview reloadData];
         }
     }else if(tag.integerValue == kSXTagFaceSwitchSwip){//刷脸登录状态更新
@@ -380,7 +380,7 @@
             [[NSUserDefaults standardUserDefaults] synchronize];
             [self.tableview reloadData];
         }else{
-            [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
+//            [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:FACESWITCHSTATUS];
             [[NSUserDefaults standardUserDefaults] synchronize];
             [self.tableview reloadData];
@@ -486,16 +486,16 @@
     cell.item = group.items[indexPath.row];
     cell.delegate = self;
     
-    if (indexPath.section == 1 ) {
-        UCFSettingGroup *group = self.itemsData[indexPath.section];
-        UCFSettingArrowItem *item = group.items[indexPath.row];
-        NSRange range = [item.title rangeOfString:@"(开启后才可进行批量投资)"];
-        if (range.location != NSNotFound) {
-                NSMutableAttributedString *attrituteString = [[NSMutableAttributedString alloc] initWithString:item.title];
-                [attrituteString setAttributes:@{NSForegroundColorAttributeName:UIColorWithRGB(0x999999), NSFontAttributeName: [UIFont systemFontOfSize:11]} range:range];
-                cell.itemNameLabel.attributedText = attrituteString;
-            }
-        }
+//    if (indexPath.section == 1 ) {
+//        UCFSettingGroup *group = self.itemsData[indexPath.section];
+//        UCFSettingArrowItem *item = group.items[indexPath.row];
+//        NSRange range = [item.title rangeOfString:@"(开启后才可进行批量投资)"];
+//        if (range.location != NSNotFound) {
+//                NSMutableAttributedString *attrituteString = [[NSMutableAttributedString alloc] initWithString:item.title];
+//                [attrituteString setAttributes:@{NSForegroundColorAttributeName:UIColorWithRGB(0x999999), NSFontAttributeName: [UIFont systemFontOfSize:11]} range:range];
+//                cell.itemNameLabel.attributedText = attrituteString;
+//            }
+//        }
     
     return cell;
 }
@@ -513,7 +513,7 @@
 {
     NSIndexPath *indexPath = [_tableview indexPathForCell:securityCell];
     UCFSettingGroup *group = self.itemsData[1];
-    if (indexPath.row == 1) {
+    if (indexPath.row == 0) {
         if (gestureState) {
             UCFVerifyLoginViewController *controller = [[UCFVerifyLoginViewController alloc] init];
             controller.sourceVC = @"securityCenter";
@@ -523,7 +523,7 @@
         else {
             //关闭手势密码
             BlockUIAlertView *alert = [[BlockUIAlertView alloc] initWithTitle:@"取消设置手势密码会增加账户信息安全风险，确认关闭吗？" message:@"" cancelButtonTitle:@"确定" clickButton:^(NSInteger index){
-                if (index == 1) {
+                if (index == 0) {
                     //不做任何操作 并设置开启状态
                     [securityCell.switchView setOn:YES animated:YES];
                 }
@@ -539,10 +539,10 @@
             [alert show];
         }
     } else {
-        if ([group.items count] == 4) {//没有指纹解锁一栏 一共5栏
+        if ([group.items count] == 3) {//没有指纹解锁一栏 一共5栏
             [self validFaceLogin:gestureState WithCell:securityCell];
         } else {//有指纹解锁一栏  一共5栏
-            if (indexPath.row == 2) { //开启指纹解锁
+            if (indexPath.row == 1) { //开启指纹解锁
             [self touchIDVerificationSwitchState:gestureState WithCell:securityCell];
             } else {
                 [self validFaceLogin:gestureState WithCell:securityCell];
@@ -851,16 +851,17 @@
                     tradePasswordVC.isCompanyAgent = [self.isCompanyAgent boolValue];
                     [self.navigationController pushViewController:tradePasswordVC  animated:YES];
                 }
-            } else if ([NSStringFromClass(arrowItem.destVcClass)  isEqualToString: @"UCFBatchInvestmentViewController"]) {
-                if([self checkHSIsLegitimate]) {
-                    UCFBatchInvestmentViewController *batchInvestment = [[UCFBatchInvestmentViewController alloc] init];
-                    batchInvestment.sourceType = @"personCenter";
-                    UCFSettingGroup *group2 = [self.itemsData lastObject];
-                    UCFSettingItem *userItem = group2.items.firstObject;
-                    batchInvestment.isStep = [userItem.subtitle isEqualToString:@"未开启"] ? 1 : 2;
-                    [self.navigationController pushViewController:batchInvestment animated:YES];
-                }
             }
+//            else if ([NSStringFromClass(arrowItem.destVcClass)  isEqualToString: @"UCFBatchInvestmentViewController"]) {
+//                if([self checkHSIsLegitimate]) {
+//                    UCFBatchInvestmentViewController *batchInvestment = [[UCFBatchInvestmentViewController alloc] init];
+//                    batchInvestment.sourceType = @"personCenter";
+//                    UCFSettingGroup *group2 = [self.itemsData lastObject];
+//                    UCFSettingItem *userItem = group2.items.firstObject;
+//                    batchInvestment.isStep = [userItem.subtitle isEqualToString:@"未开启"] ? 1 : 2;
+//                    [self.navigationController pushViewController:batchInvestment animated:YES];
+//                }
+//            }
         }
     }
 }

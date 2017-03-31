@@ -110,7 +110,7 @@
 {
     [super viewWillAppear:animated];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    self.navigationController.navigationBarHidden = YES;
+    [self.navigationController setNavigationBarHidden:YES animated:animated];
     if ([[NSUserDefaults standardUserDefaults] objectForKey:UUID]) {
         [self hideShadowView];
     } else {
@@ -239,7 +239,7 @@
         //我的工场码
 //        fixedScreenLight = [UIScreen mainScreen].brightness;
         UCFFacCodeViewController *subVC = [[UCFFacCodeViewController alloc] initWithNibName:@"UCFFacCodeViewController" bundle:nil];
-//        subVC.urlStr = [NSString stringWithFormat:@"https://m.9888.cn/mpwap/mycode.jsp?pcode=%@&sex=%@",_gcm,_sex];
+        subVC.urlStr = [NSString stringWithFormat:@"https://m.9888.cn/mpwap/mycode.jsp?pcode=%@&sex=%@",_personModel.gcm,_personModel.sex];
         [self.navigationController pushViewController:subVC animated:YES];
     }
     else if ([title isEqualToString:@"红包"]) {
