@@ -206,6 +206,7 @@
 //to回款明细页面
 - (IBAction)toBackMoneyDetailView:(id)sender {
     UCFBackMoneyDetailViewController *vc = [[UCFBackMoneyDetailViewController alloc]initWithNibName:@"UCFBackMoneyDetailViewController" bundle:nil];
+    vc.accoutType = self.accoutType;
     vc.title = @"回款明细";
     [self.navigationController pushViewController:vc animated:YES];
 }

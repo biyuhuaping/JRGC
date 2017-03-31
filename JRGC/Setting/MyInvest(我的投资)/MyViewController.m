@@ -174,13 +174,14 @@
 - (IBAction)toBackMoneyDetailView:(id)sender {
     UCFBackMoneyDetailViewController *vc = [[UCFBackMoneyDetailViewController alloc]initWithNibName:@"UCFBackMoneyDetailViewController" bundle:nil];
     vc.title = @"回款明细";
+    vc.accoutType = self.accoutType;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)getHeaderInfoRequest
 {
     NSString *strParameters = [NSString stringWithFormat:@"userId=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagMyInvestHeaderInfo owner:self Type:SelectAccoutDefault];
+    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagMyInvestHeaderInfo owner:self Type:self.accoutType];
 }
 
 - (void)beginPost:(kSXTag)tag
