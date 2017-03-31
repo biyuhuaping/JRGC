@@ -113,39 +113,37 @@
 
 - (void)fetchDataWithCompletionHandler:(NetworkCompletionHandler)completionHander {
     
-    if (self.userId.length>0) {
-        [self.apiManager fetchUserInfoWithUserId:self.userId completionHandler:^(NSError *error, id result) {
+    [self.apiManager fetchUserInfoWithUserId:self.userId completionHandler:^(NSError *error, id result) {
 //            self.isHonorUser = YES;
+        
+        if ([result isKindOfClass:[UCFPersonCenterModel class]]) {
+            UCFPersonCenterModel *personCenter = result;
             
-            if ([result isKindOfClass:[UCFPersonCenterModel class]]) {
-                UCFPersonCenterModel *personCenter = result;
-                
-                self.isP2PUser = [personCenter.p2pOpenStatus isEqualToString:@"1"] ? NO : YES;
-                self.p2pBalanceMoney = personCenter.p2pAmount;
-                self.p2pLastBackMoneyDate = personCenter.p2pRepayPerDate;
-                
-                self.isHonorUser = [personCenter.enjoyOpenStatus isEqualToString:@"1"] ? NO : YES;
-                self.hornerBalanceMoney = personCenter.enjoyAmount;
-                self.hornerLastBackMoneyDate = personCenter.enjoyRepayPerDate;
-                
-                [self.pcListCells removeAllObjects];
-                [self initData];
-            }
-            else if ([result isKindOfClass:[NSString class]]) {
-                
-            }
+            self.isP2PUser = [personCenter.p2pOpenStatus isEqualToString:@"1"] ? NO : YES;
+            self.p2pBalanceMoney = personCenter.p2pAmount;
+            self.p2pLastBackMoneyDate = personCenter.p2pRepayPerDate;
             
+            self.isHonorUser = [personCenter.enjoyOpenStatus isEqualToString:@"1"] ? NO : YES;
+            self.hornerBalanceMoney = personCenter.enjoyAmount;
+            self.hornerLastBackMoneyDate = personCenter.enjoyRepayPerDate;
             
-            if ([self.view respondsToSelector:@selector(pcListViewPresenter:didRefreshDataWithResult:error:)]) {
-                [self.view pcListViewPresenter:self didRefreshDataWithResult:result error:error];
-            }
-            if ([self.userInvoView respondsToSelector:@selector(pcListViewPresenter:didRefreshUserInfoWithResult:error:)]) {
-                [self.userInvoView pcListViewPresenter:self didRefreshUserInfoWithResult:result error:error];
-            }
+            [self.pcListCells removeAllObjects];
+            [self initData];
+        }
+        else if ([result isKindOfClass:[NSString class]]) {
             
-            !completionHander ?: completionHander(error, result);
-        }];
-    }
+        }
+        
+        
+        if ([self.view respondsToSelector:@selector(pcListViewPresenter:didRefreshDataWithResult:error:)]) {
+            [self.view pcListViewPresenter:self didRefreshDataWithResult:result error:error];
+        }
+        if ([self.userInvoView respondsToSelector:@selector(pcListViewPresenter:didRefreshUserInfoWithResult:error:)]) {
+            [self.userInvoView pcListViewPresenter:self didRefreshUserInfoWithResult:result error:error];
+        }
+        
+        !completionHander ?: completionHander(error, result);
+    }];
 }
 
 - (void)refreshData {
