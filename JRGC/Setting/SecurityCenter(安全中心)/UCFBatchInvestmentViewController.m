@@ -592,7 +592,9 @@ static NSString *thirdStr = @"自动投标授权已经开启";
 {
     if ([self.sourceType isEqualToString:@"personCenter"]) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
-    } else {
+    } else if([self.sourceType isEqualToString:@"P2POrHonerAccoutVC"]){
+                [[NSNotificationCenter defaultCenter] postNotificationName:RELOADP2PORHONERACCOTDATA object:nil];
+    }else{
         [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadMianViewData" object:nil];
     }
 }
