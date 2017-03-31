@@ -470,7 +470,7 @@
 }
 #pragma mark 量批删除消息的网络请求
 -(void)mutableDeleteMessageHttpRequest:(NSString *)messageIdStr{
-    NSDictionary *paraDict = @{@"userId":[[NSUserDefaults standardUserDefaults] objectForKey:UUID],@"id":messageIdStr};
+    NSDictionary *paraDict = @{@"userId":[[NSUserDefaults standardUserDefaults] objectForKey:UUID],@"tMsgIds":messageIdStr};
     [[NetworkModule sharedNetworkModule] newPostReq:paraDict tag:KSXTagMsgListRemoveTMsg owner:self signature:YES Type:SelectAccoutDefault];
 }
 #pragma mark 消息中心网络数据请求

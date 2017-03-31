@@ -558,14 +558,16 @@
                 NSString *projectId = [[_dataDic objectForKey:@"prdTransferFore"] objectForKey:@"id"];
                 NSString *strParameters = nil;
                 strParameters = [NSString stringWithFormat:@"userId=%@&tranId=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],projectId];//101943
-                [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagDealTransferBid owner:self Type:SelectAccoutDefault];
+                self.accoutType = _isP2P ? SelectAccoutTypeP2P :SelectAccoutTypeHoner;
+                [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagDealTransferBid owner:self Type:self.accoutType];
             } else {
                 //普通表
                 [MBProgressHUD showHUDAddedTo:self.view animated:YES];
                 NSString *projectId = [[_dataDic objectForKey:@"prdClaims"] objectForKey:@"id"];
                 NSString *strParameters = nil;
                 strParameters = [NSString stringWithFormat:@"userId=%@&id=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],projectId];//101943
-                [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDealBid owner:self Type:SelectAccoutDefault];
+                self.accoutType = _isP2P ? SelectAccoutTypeP2P :SelectAccoutTypeHoner;
+                [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDealBid owner:self Type:self.accoutType];
             }
         }
     }
