@@ -295,7 +295,7 @@
                  [[NSUserDefaults standardUserDefaults] setBool:NO forKey:FACESWITCHSTATUS];
             }
             
-            [UserInfoSingle sharedManager].openStatus = [dic[@"data"][@"openStatus"] integerValue] ;
+//            [UserInfoSingle sharedManager].openStatus = [dic[@"data"][@"openStatus"] integerValue] ;
             if ([UserInfoSingle sharedManager].openStatus == 4) {
                 _setChangePassword.title = @"修改交易密码";
             }else{

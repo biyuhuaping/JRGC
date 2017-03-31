@@ -890,13 +890,13 @@ static NetworkModule *gInstance = NULL;
     NSString *parameter = nil;
     switch ((int)tag) {
         case kSXTagValidBindedPhone:
-            parameter = [SERVER_IP stringByAppendingString:VALID_BINDED_PHONE];
+            parameter = [P2P_SERVER_IP stringByAppendingString:VALID_BINDED_PHONE];
             break;
     }
     
     NSArray * array = [NSArray arrayWithObjects:@"prdClaims/dataList",@"prdTransfer/dataList",@"newPrdTransfer/getDetail",@"newuser/login",@"newsendmessage",@"newuserregist/isexitpomocode",@"newuserregist/regist",@"userregist/verification",@"newgetSendMessageTicket",@"bankCard/baseBankMess",@"personalSettings/getTRegionList",@"sysDataDicItem/dicItemList",@"sysDataDicItem/allDicItemList",@"scratchCard/isExist",@"newuserregist/modifyUserpwd",@"newprdTransfer/newCompensateInterest", nil];
     
-    NSArray * strArray = [parameter componentsSeparatedByString:SERVER_IP];
+    NSArray * strArray = [parameter componentsSeparatedByString:P2P_SERVER_IP];
     NSString *par = [strArray objectAtIndex:1];
     
     if([array containsObject:par])
