@@ -48,7 +48,7 @@
 }
 - (void)showHeTong:(ZBLinkLabelModel *)model
 {
-    FullWebViewController *webController = [[FullWebViewController alloc] initWithWebUrl:ZXREGISTURL title:@"信息咨询服务协议"];
+    FullWebViewController *webController = [[FullWebViewController alloc] initWithWebUrl:ZXREGISTURL title:@"注册协议"];
     webController.baseTitleType = @"specialUser";
     [self.navigationController pushViewController:webController animated:YES];
 }
