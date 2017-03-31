@@ -8,7 +8,7 @@
 
 #import "UCFBankDepositoryAccountViewController.h"
 #import "NZLabel.h"
-
+#import "FullWebViewController.h"
 #import "UCFOldUserGuideViewController.h"
 @interface UCFBankDepositoryAccountViewController ()
 @property (weak, nonatomic) IBOutlet UIView *whiteBaseView;
@@ -48,7 +48,9 @@
 }
 - (void)showHeTong:(ZBLinkLabelModel *)model
 {
-    
+    FullWebViewController *webController = [[FullWebViewController alloc] initWithWebUrl:ZXREGISTURL title:@"注册协议"];
+    webController.baseTitleType = @"specialUser";
+    [self.navigationController pushViewController:webController animated:YES];
 }
 - (IBAction)goToEnjoyOpenHSAccount:(id)sender {
     UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:2];

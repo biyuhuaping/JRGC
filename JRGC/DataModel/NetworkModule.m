@@ -394,8 +394,8 @@ static NetworkModule *gInstance = NULL;
 //        case kSXTagGetIgnorgeLogin:
 //            parameter = [SERVER_IP stringByAppendingString:GETIGNORGELOGINTOKEN];
 //            break;
-        case kSXTagGetMSGCenter:
-            parameter = [serverIP stringByAppendingString:MSGCENTER];
+//        case kSXTagGetMSGCenter:
+//            parameter = [serverIP stringByAppendingString:MSGCENTER];
             break;
         case kSXTagGetMSGDetail:
             parameter = [serverIP stringByAppendingString:MSGCENTERDETAIL];
@@ -409,9 +409,9 @@ static NetworkModule *gInstance = NULL;
 //        case kSXTagGetUserCouponFxCount:
 //            parameter = [SERVER_IP stringByAppendingString:USERCOUPONFXCOUNT];
 //            break;
-        case KSXTagMsgListSignAllRead:
-            parameter = [serverIP stringByAppendingString:MSGSIGNALLREAD];
-            break;
+//        case KSXTagMsgListSignAllRead:
+//            parameter = [serverIP stringByAppendingString:MSGSIGNALLREAD];
+//            break;
         case KSXTagMsgListSignRead:
             parameter = [serverIP stringByAppendingString:MSGSIGNREAD];
             break;
@@ -1193,6 +1193,18 @@ static NetworkModule *gInstance = NULL;
         case kSXTagAccountSafe:{
             parameter = [NEW_SERVER_IP stringByAppendingString:ACCOUNT_SAFE];
         }
+            break;
+        case KSXTagMsgListSignAllRead:
+            parameter = [NEW_SERVER_IP stringByAppendingString:MSGSIGNALLREAD];
+            break;
+        case KSXTagMsgListSignRead:
+            parameter = [NEW_SERVER_IP stringByAppendingString:MSGSIGNREAD];
+            break;
+        case KSXTagMsgListRemoveTMsg:
+            parameter = [NEW_SERVER_IP stringByAppendingString:MSGREOMETMSG];
+            break;
+        case kSXTagGetMSGCenter:
+            parameter = [NEW_SERVER_IP stringByAppendingString:MSGCENTER];
             break;
     }
     //给原有参数字典添加公共参数

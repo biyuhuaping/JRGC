@@ -181,6 +181,8 @@
     if (section == 0) {
         _headerView = [[[NSBundle mainBundle]loadNibNamed:@"UCFP2POrHornerTabHeaderView" owner:nil options:nil] firstObject];
         _headerView.frame = CGRectMake(0, 0, ScreenWidth, 155);
+        _headerView.upView.backgroundColor = UIColorWithRGB(0x5b6993);
+        _headerView.downView.backgroundColor = UIColorWithRGB(0x505e87);
         _headerView.delegate = self;
         _headerView.accoutTpye = self.accoutType;
         _headerView.isShowOrHideAccoutMoney = _isShowOrHideAccoutMoney;

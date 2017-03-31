@@ -394,9 +394,9 @@
             [AuxiliaryFunc showToastMessage:@"已复制到剪切板" withView:self.view];
         }else if([nativeData[@"action"] isEqualToString:@"get_factory_code"]){ //放心花---返回数据 工场码
             
-            NSString *uuid = [[NSUserDefaults standardUserDefaults] objectForKey: UUID] ;
-            if(uuid){ //返回数据 工场码
-                [_bridge callHandler:@"jsHandler" data:@{@"type": @"factory_code",@"value":uuid} responseCallback:^(id responseData) {
+            NSString *gcmCode = [[NSUserDefaults standardUserDefaults] objectForKey:@"gcmCode"];
+            if(gcmCode){ //返回数据 工场码
+                [_bridge callHandler:@"jsHandler" data:@{@"type": @"factory_code",@"value":gcmCode} responseCallback:^(id responseData) {
                     DBLOG(@"工场码返回成功");
                 }];
             }
