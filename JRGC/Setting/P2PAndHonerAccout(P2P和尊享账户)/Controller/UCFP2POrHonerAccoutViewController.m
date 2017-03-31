@@ -316,9 +316,9 @@
     else if([titleStr hasPrefix:@"自动投标"]){
         if ([self checkIDAAndBankBlindState:self.accoutType]) {
             UCFBatchInvestmentViewController *batchInvestment = [[UCFBatchInvestmentViewController alloc] init];
-            batchInvestment.sourceType = @"personCenter";
             batchInvestment.isStep = [item.subtitle isEqualToString:@"未开启"] ? 1 : 2;
             batchInvestment.accoutType = self.accoutType;
+            batchInvestment.sourceType = @"P2POrHonerAccoutVC";
             [self.navigationController pushViewController:batchInvestment animated:YES];
         }
     }
@@ -459,6 +459,7 @@
             {
                 _dataDict = dataDict;
                 _openState = [[dataDict objectSafeForKey:@"openState"] intValue];
+                int  isRisk = [[dataDict objectSafeForKey:@"isRisk"] intValue];
                 _headerView.availableAmountLab.text = [NSString stringWithFormat:@"¥%@",[dataDict objectSafeForKey:@"cashBalance"]];//可用金额
                 _headerView.accumulatedIncomeLab.text= [NSString stringWithFormat:@"¥%@",[dataDict objectSafeForKey:@"interests"]];//累计收益
                 _headerView.totalIncomeLab.text= [NSString stringWithFormat:@"¥%@",[dataDict objectSafeForKey:@"total"]];//总收益
@@ -509,7 +510,7 @@
                                     }
                                         break;
                                     case 3:
-                                        item.subtitle = riskLevel;
+                                        item.subtitle = isRisk == 0 ? @"未评估":riskLevel;
                                         break;
                                     case 4:
                                     {
