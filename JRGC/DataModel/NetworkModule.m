@@ -416,9 +416,9 @@ static NetworkModule *gInstance = NULL;
         case KSXTagMsgListSignRead:
             parameter = [serverIP stringByAppendingString:MSGSIGNREAD];
             break;
-        case KSXTagMsgListRemoveTMsg:
-            parameter = [serverIP stringByAppendingString:MSGREOMETMSG];
-            break;
+//        case KSXTagMsgListRemoveTMsg:
+//            parameter = [serverIP stringByAppendingString:MSGREOMETMSG];
+//            break;
 //        case kSXTagGetRedPointMessage:
 //            parameter = [SERVER_IP stringByAppendingString:GETREDPOINTMDSSAGE];
 //            break;
