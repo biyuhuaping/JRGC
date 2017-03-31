@@ -110,7 +110,7 @@
 {
     [super viewWillAppear:animated];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    self.navigationController.navigationBarHidden = YES;
+    [self.navigationController setNavigationBarHidden:YES animated:animated];
     if ([[NSUserDefaults standardUserDefaults] objectForKey:UUID]) {
         [self hideShadowView];
     } else {
