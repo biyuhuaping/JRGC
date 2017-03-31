@@ -46,8 +46,15 @@
     //尊享开关
     BOOL isShowHornor =  [[NSUserDefaults standardUserDefaults] boolForKey:@"isShowHornor"];
     isShowHornor = YES;
+    
     NSString *titleStr = isShowHornor ? @"转入项目":@"我的债权" ;
-    _segmentedCtrl = [[UISegmentedControl alloc]initWithItems:@[@"我的项目",@"批量项目",titleStr]];
+    if (self.accoutType == SelectAccoutTypeP2P) {
+        _segmentedCtrl = [[UISegmentedControl alloc]initWithItems:@[@"我的项目",@"批量项目",titleStr]];
+    }
+    else if (self.accoutType == SelectAccoutTypeHoner) {
+        _segmentedCtrl = [[UISegmentedControl alloc]initWithItems:@[@"我的项目", titleStr]];
+    }
+//    _segmentedCtrl = [[UISegmentedControl alloc]initWithItems:@[@"我的项目",@"批量项目",titleStr]];
     DBLOG(@"%@",NSStringFromCGRect(self.view.frame));
     _segmentedCtrl.frame = CGRectMake(0, 0, ScreenWidth*5/8, 30);
     [_segmentedCtrl setTintColor:UIColorWithRGB(0x5b6993)];
@@ -57,15 +64,18 @@
     self.navigationItem.titleView = _segmentedCtrl;
 
     self.myInvest = [[UCFMyInvestViewController alloc]initWithNibName:@"UCFMyInvestViewController" bundle:nil];
+    self.myInvest.accoutType = self.accoutType;
     self.myInvest.view.frame = CGRectMake(0, 100, ScreenWidth, ScreenHeight - 164);
     [self addChildViewController:self.myInvest];
     
     self.batchProject = [[UCFBatchProjectController alloc]initWithNibName:@"UCFBatchProjectController" bundle:nil];
+    self.batchProject.accoutType = self.accoutType;
     self.batchProject.view.frame = CGRectMake(0, 100, ScreenWidth, ScreenHeight - 164);
     [self addChildViewController:self.batchProject];
 
     self.myClaimCtrl = [[UCFMyClaimCtrl alloc]initWithNibName:@"UCFMyClaimCtrl" bundle:nil];
     self.myClaimCtrl.view.frame = CGRectMake(0, 100, ScreenWidth, ScreenHeight - 164);
+    self.myClaimCtrl.accoutType = self.accoutType;
     [self addChildViewController:self.myClaimCtrl];
     
     self.segmentedCtrl.selectedSegmentIndex = self.selectedSegmentIndex;
@@ -78,10 +88,17 @@
             break;
         
         case 1: {
-            [_batchProject didMoveToParentViewController:self];//确定关系建立
-            
-            self.currentController = self.batchProject;
-            [self.view addSubview:_batchProject.view];
+            if (self.accoutType == SelectAccoutTypeP2P) {
+                [_batchProject didMoveToParentViewController:self];//确定关系建立
+                
+                self.currentController = self.batchProject;
+                [self.view addSubview:_batchProject.view];
+            }
+            else if (self.accoutType == SelectAccoutTypeHoner) {
+                [_myClaimCtrl didMoveToParentViewController:self];//确定关系建立
+                self.currentController = self.myClaimCtrl;
+                [self.view addSubview:_myClaimCtrl.view];
+            }
         }
             break;
         
@@ -122,12 +139,22 @@
             break;
          
         case 1: {
-            [self transitionFromViewController:self.currentController toViewController:self.batchProject duration:0.25 options:UIViewAnimationOptionLayoutSubviews animations:nil completion:^(BOOL finished) {
-                if (finished) {
-                    [self.batchProject didMoveToParentViewController:self];//确认关系
-                    self.currentController = self.batchProject;
-                }
-            }];
+            if (self.accoutType == SelectAccoutTypeP2P) {
+                [self transitionFromViewController:self.currentController toViewController:self.batchProject duration:0.25 options:UIViewAnimationOptionLayoutSubviews animations:nil completion:^(BOOL finished) {
+                    if (finished) {
+                        [self.batchProject didMoveToParentViewController:self];//确认关系
+                        self.currentController = self.batchProject;
+                    }
+                }];
+            }
+            else if (self.accoutType == SelectAccoutTypeHoner) {
+                [self transitionFromViewController:self.currentController toViewController:self.myClaimCtrl duration:0.25 options:UIViewAnimationOptionLayoutSubviews animations:nil completion:^(BOOL finished) {
+                    if (finished) {
+                        [self.myClaimCtrl didMoveToParentViewController:self];//确认关系
+                        self.currentController = self.myClaimCtrl;
+                    }
+                }];
+            }
         }
             break;
         
