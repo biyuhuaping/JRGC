@@ -263,8 +263,7 @@
         UCFMessageCenterModel *messageCenterModel = [_messageDataArray objectAtIndex:indexPath.row];
         UCFMessageDetailViewController * messageDatailVC = [[UCFMessageDetailViewController alloc]initWithNibName:@"UCFMessageDetailViewController" bundle:nil];
         messageDatailVC.title = @"消息详情";
-        messageDatailVC.messageId = messageCenterModel.messageId;
-        messageDatailVC.userId = messageCenterModel.userId;
+        messageDatailVC.model = messageCenterModel;
         if([messageCenterModel.isUse isEqualToString:@"N"]){ //如果是未读消息 才标记已读状态
             [self setMessageReaded:indexPath];
         }
@@ -458,27 +457,30 @@
 #pragma mark 全部设置已读的网络请求
 -(void)setAllMessageReadedHttpRequest{
   
-    NSString *strParameters = [NSString stringWithFormat:@"userId=%@",[[NSUserDefaults standardUserDefaults] objectForKey:UUID]];
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:KSXTagMsgListSignAllRead owner:self Type:SelectAccoutDefault];
+    NSDictionary *paraDict = @{@"userId":[[NSUserDefaults standardUserDefaults] objectForKey:UUID]};
+    [[NetworkModule sharedNetworkModule] newPostReq:paraDict tag:KSXTagMsgListSignAllRead owner:self signature:YES Type:SelectAccoutDefault];
+    
+    
 }
 #pragma mark 单个数据设置为已读的网络请求
 -(void)setSignMessageReadedHttpRequest:(NSString *)messageId{
     
-    NSString *strParameters = [NSString stringWithFormat:@"userId=%@&id=%@",[[NSUserDefaults standardUserDefaults] objectForKey:UUID],messageId];
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:KSXTagMsgListSignRead owner:self Type:SelectAccoutDefault];
+    NSDictionary *paraDict = @{@"userId":[[NSUserDefaults standardUserDefaults] objectForKey:UUID],@"id":messageId};
+    [[NetworkModule sharedNetworkModule] newPostReq:paraDict tag:KSXTagMsgListSignRead owner:self signature:YES Type:SelectAccoutDefault];
 }
 #pragma mark 量批删除消息的网络请求
 -(void)mutableDeleteMessageHttpRequest:(NSString *)messageIdStr{
-    NSString *strParameters = [NSString stringWithFormat:@"userId=%@&tMsgIds=%@",[[NSUserDefaults standardUserDefaults] objectForKey:UUID],messageIdStr];
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:KSXTagMsgListRemoveTMsg owner:self Type:SelectAccoutDefault];
+    NSDictionary *paraDict = @{@"userId":[[NSUserDefaults standardUserDefaults] objectForKey:UUID],@"id":messageIdStr};
+    [[NetworkModule sharedNetworkModule] newPostReq:paraDict tag:KSXTagMsgListRemoveTMsg owner:self signature:YES Type:SelectAccoutDefault];
 }
 #pragma mark 消息中心网络数据请求
 -(void)getMessageDataList{
     if (self.messageTableView.header.isRefreshing) {
       _pageNumber = 1;
     }
-    NSString *strParameters = [NSString stringWithFormat:@"userId=%@&page=%d&rows=10",[[NSUserDefaults standardUserDefaults] objectForKey:UUID],_pageNumber];
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetMSGCenter owner:self Type:SelectAccoutDefault];
+    NSString *pageStr = [NSString stringWithFormat:@"%d",_pageNumber];
+    NSDictionary *paraDict = @{@"userId":[[NSUserDefaults standardUserDefaults] objectForKey:UUID],@"page":pageStr,@"rows":@"10"};
+    [[NetworkModule sharedNetworkModule] newPostReq:paraDict tag:kSXTagGetMSGCenter owner:self signature:YES Type:SelectAccoutDefault];
 }
 #pragma mark - 开始请求
 - (void)beginPost:(kSXTag)tag{
@@ -493,12 +495,12 @@
     [self endRefreshing];
     NSMutableDictionary *dic = [result objectFromJSONString];
     DBLOG(@"dic ===>>>> %@",dic);
-    NSString *rstcode = [dic objectSafeForKey:@"status"];
-    NSString *rsttext = [dic objectSafeForKey:@"statusdes"];
+    BOOL rstcode = [[dic objectSafeForKey:@"ret"] boolValue];
+    NSString *rsttext = [dic objectSafeForKey:@"message"];
     
     if (tag.intValue == kSXTagGetMSGCenter) {
         
-        if(![dic isExistenceforKey:@"tMsgList"]){
+        if(![dic isExistenceforKey:@"data"]){
             [self endRefreshing];
             [self setNoDataView];
             _menuView.isFirstClick = YES;
@@ -506,7 +508,9 @@
             [_menuView.tableView reloadData];
             return;
         }
-        NSString *unReadMsgCount = [dic objectSafeForKey:@"unReadMsgCount"];
+        NSDictionary *pageDataDic = [[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"pageData"];
+        
+        NSString *unReadMsgCount = [pageDataDic objectSafeForKey:@"unReadMsgCount"];
         if ([unReadMsgCount intValue] == 0) {
             _menuView.isFirstClick = YES;
         }else{
@@ -514,11 +518,11 @@
         }
         _menuView.isSecondClick = NO;
         [_menuView.tableView reloadData];
-        if([rstcode intValue] == 1){
-            NSDictionary *tMsgListDic = [dic objectSafeForKey:@"tMsgList"];
-            NSDictionary *paginationDic = [tMsgListDic objectSafeForKey:@"pagination"];
+        if(rstcode){
+//            NSDictionary *tMsgListDic = [dic objectSafeDictionaryForKey:@"data"];
+            NSDictionary *paginationDic = [pageDataDic objectSafeForKey:@"pagination"];
             int totalPage = [[paginationDic objectSafeForKey:@"totalPage"] intValue];//总页数
-            NSArray *resultArr = [tMsgListDic objectSafeForKey:@"result"];
+            NSArray *resultArr = [pageDataDic objectSafeForKey:@"result"];
             self.messageTableView.footer.hidden = NO;
             if(_pageNumber == 1)
             {
@@ -546,7 +550,7 @@
         [self setNoDataView];
     }
     if (tag.intValue == KSXTagMsgListSignAllRead)  {
-        if ([rstcode intValue] == 1) {//全部设置已读成功
+        if (rstcode) {//全部设置已读成功
             self.pageNumber = 1;
             [self.messageTableView.header beginRefreshing];
         }else{
@@ -555,14 +559,14 @@
     }
     
     if (tag.intValue == KSXTagMsgListSignRead)  {
-        if ([rstcode intValue] == 1) {//单个消息标记已读成功
+        if (rstcode) {//单个消息标记已读成功
             [self setMessageReaded:self.setMessageReadedIndexPath];
         }else{
             [AuxiliaryFunc showToastMessage:@"获取信息超时，请重试" withView:self.view];
         }
     }
     if (tag.intValue == KSXTagMsgListRemoveTMsg)  {
-        if ([rstcode intValue] == 1) {//删除消息 成功
+        if (rstcode) {//删除消息 成功
             [self mutableDeleteChoooseMessage];
             if (!self.isSingleDelete) {
                 self.pageNumber = 1;
