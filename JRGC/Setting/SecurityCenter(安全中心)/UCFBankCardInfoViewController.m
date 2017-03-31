@@ -1,4 +1,4 @@
-
+//----qinyangye--修改绑定银行卡
 #import "UCFBankCardInfoViewController.h"
 #import "UCFBankCard.h"
 #import "UCFToolsMehod.h"

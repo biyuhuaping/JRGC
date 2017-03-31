@@ -113,9 +113,9 @@ static NetworkModule *gInstance = NULL;
         case kSXTagAccountSafe:
             parameter = [serverIP stringByAppendingString:ACCOUNT_SAFE];
             break;
-        case kSXTagIdentifyCard:
-            parameter = [serverIP stringByAppendingString:IDNO_CHECKINFO];
-            break;
+//        case kSXTagIdentifyCard:
+//            parameter = [serverIP stringByAppendingString:IDNO_CHECKINFO];
+//            break;
 //        case kSXTagSendMessage:
 //            parameter = [SERVER_IP stringByAppendingString:SEND_MESSAGE];
 //            break;
@@ -1206,6 +1206,10 @@ static NetworkModule *gInstance = NULL;
         case kSXTagGetMSGCenter:
             parameter = [NEW_SERVER_IP stringByAppendingString:MSGCENTER];
             break;
+        case kSXTagIdentifyCard:
+            parameter = [NEW_SERVER_IP stringByAppendingString:IDNO_CHECKINFO];
+            break;
+
     }
     //给原有参数字典添加公共参数
     if (!data) {

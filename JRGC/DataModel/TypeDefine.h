@@ -28,7 +28,9 @@
 #define FUNDS_DETAIL        @"newaccount/funds"
 #define ACCOUNT_SAFE        @"api/userInfo/v2/personalInfo.json" //个人信息页面
 #define VALID_BINDED_PHONE  @"newuserregist/bindNewPhone" //修改绑定手机号验证一绑定号码
-#define IDNO_CHECKINFO      @"newsafe/idnoCheckInfo"   // 个人身份证信息
+//#define IDNO_CHECKINFO      @"newsafe/idnoCheckInfo"   // 个人身份证信息
+#define IDNO_CHECKINFO      @"api/userInfo/v2/idnoCheckInfo.json"// 个人身份证信息
+
 
 #define CHANGE_PWD          @"api/userInfo/v2/updatePwd.json" //修改登录密码
 #define MYTRANSFER_DETAIL   @"newPrdTransferOrder/transferOrderDetail"
