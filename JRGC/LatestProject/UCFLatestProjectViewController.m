@@ -549,25 +549,16 @@
 
 //四个功能图标
 - (IBAction)functionBtn:(UIControl *)sender {
-    for (UIView *view in sender.subviews) {
-        if ([view isKindOfClass:[UILabel class]]) {
-            UILabel *lab = (UILabel *)view;
-            for (int i = 0; i < _actionArr.count; i++) {
-                if ([lab.text isEqualToString:@"邀请返利"]) {
-                    NSDictionary *dataDict = _actionArr[i];
-                    [self gotoInviteFriendsWebVC:dataDict];
-                    break;
-                }else{
-                    if ([lab.text isEqualToString:_actionArr[i][@"title"]]) {
-                        UCFWebViewJavascriptBridgeLevel *subVC = [[UCFWebViewJavascriptBridgeLevel alloc]initWithNibName:@"UCFWebViewJavascriptBridgeLevel" bundle:nil];
-                        subVC.navTitle = _actionArr[i][@"title"];
-                        subVC.url      = _actionArr[i][@"url"];//请求地址;
-                        [self.navigationController pushViewController:subVC animated:YES];
-                        break;
-                    }
-                }
-            }
-        }
+    NSInteger index = sender.tag - 100;
+    if (index == 2) {
+        NSDictionary *dataDict = _actionArr[index];
+        [self gotoInviteFriendsWebVC:dataDict];
+    }
+    else {
+        UCFWebViewJavascriptBridgeLevel *subVC = [[UCFWebViewJavascriptBridgeLevel alloc]initWithNibName:@"UCFWebViewJavascriptBridgeLevel" bundle:nil];
+        subVC.navTitle = _actionArr[index][@"title"];
+        subVC.url      = _actionArr[index][@"url"];//请求地址;
+        [self.navigationController pushViewController:subVC animated:YES];
     }
 }
 

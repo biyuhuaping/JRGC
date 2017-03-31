@@ -206,6 +206,7 @@
 //to回款明细页面
 - (IBAction)toBackMoneyDetailView:(id)sender {
     UCFBackMoneyDetailViewController *vc = [[UCFBackMoneyDetailViewController alloc]initWithNibName:@"UCFBackMoneyDetailViewController" bundle:nil];
+    vc.accoutType = self.accoutType;
     vc.title = @"回款明细";
     [self.navigationController pushViewController:vc animated:YES];
 }
@@ -366,7 +367,7 @@
     NSArray *tempArr = @[@"100",@"3",@"4"];
     NSString *userId = [[NSUserDefaults standardUserDefaults] objectForKey:UUID];
     NSString *strParameters = [NSString stringWithFormat:@"page=%ld&rows=20&userId=%@&flag=%@&typeFlag=", (long)pageNum,userId,tempArr[_index]];
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdOrderUinvest owner:self Type:SelectAccoutDefault];
+    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdOrderUinvest owner:self Type:self.accoutType];
 }
 
 //开始请求

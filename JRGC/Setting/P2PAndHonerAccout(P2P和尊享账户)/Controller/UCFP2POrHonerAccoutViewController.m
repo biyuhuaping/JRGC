@@ -56,6 +56,7 @@
     [super viewDidLoad];
     
     [self createUIInfoView];//初始化UI
+    [self addLeftButton];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getP2POrHonerAccoutHttpRequest) name:RELOADP2PORHONERACCOTDATA object:nil];
 }
