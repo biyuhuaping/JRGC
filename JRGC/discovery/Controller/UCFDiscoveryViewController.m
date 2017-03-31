@@ -19,7 +19,12 @@
     self = [super initWithNibName:NSStringFromClass([self.superclass class]) bundle:nibBundleOrNil];
     return self;
 }
-
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.webView.frame = CGRectMake(0, 0.5, CGRectGetWidth(self.webView.frame), CGRectGetHeight(self.webView.frame));
+    self.view.backgroundColor = UIColorWithRGB(0xeeeeee);
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -27,7 +32,7 @@
     [self addErrorViewButton];
     [self addProgressView];//添加进度条
     [self gotoURL:self.url];
-    self.webView.scrollView.bounces = NO;
+//    self.webView.scrollView.bounces = NO;
 }
 
 - (void)didReceiveMemoryWarning {
