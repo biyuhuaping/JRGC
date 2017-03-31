@@ -61,6 +61,7 @@ static NetworkModule *gInstance = NULL;
 {
     return [UCFToolsMehod connectedToNetwork];
 }
+
 - (void)postReq:(NSString*)data tag:(kSXTag)tag owner:(id<NetworkModuleDelegate>)owner Type:(SelectAccoutType)type
 {
     NSString *serverIP = @"http://app.9888.cn/mpappP2P/";

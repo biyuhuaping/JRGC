@@ -134,7 +134,7 @@
 - (void)getAccountOverallNetData
 {
     NSString *strParameters = [NSString stringWithFormat:@"userId=%@", [[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagMoneyOverview owner:self Type:SelectAccoutDefault];
+    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagMoneyOverview owner:self Type:self.accoutType];
 }
 
 - (void)getFundsDetailNetData
@@ -146,7 +146,7 @@
         self.page ++;
     }
     NSString *strParameters = [NSString stringWithFormat:@"userId=%@&page=%@&rows=%@", [[NSUserDefaults standardUserDefaults] valueForKey:UUID], [NSString stringWithFormat:@"%lu", (unsigned long)self.page], NUMOFPAGE];
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagFundsDetail owner:self Type:SelectAccoutDefault];
+    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagFundsDetail owner:self Type:self.accoutType];
 }
 
 //开始请求
