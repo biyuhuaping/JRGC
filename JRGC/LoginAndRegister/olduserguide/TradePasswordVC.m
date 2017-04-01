@@ -89,6 +89,7 @@
 //点击获取短信验证码
 - (void)getCodeBtn:(id)sender {
     [self.view endEditing:YES];
+    _getCodeBtn.userInteractionEnabled = NO;
     [self sendVerifyCode:@"SMS"];
 }
 
@@ -400,6 +401,7 @@
             [_label setFontColor:UIColorWithRGB(0x4aa1f9) string:@"点击这里"];
             _label.hidden = NO;
         }else {
+             _getCodeBtn.userInteractionEnabled = YES;
             [AuxiliaryFunc showToastMessage:dic[@"message"] withView:self.view];
         }
     }
@@ -428,6 +430,7 @@
 //请求失败
 - (void)errorPost:(NSError*)err tag:(NSNumber*)tag
 {
+     _getCodeBtn.userInteractionEnabled = YES;
     [MBProgressHUD displayHudError:err.userInfo[@"NSLocalizedDescription"]];
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
 }
