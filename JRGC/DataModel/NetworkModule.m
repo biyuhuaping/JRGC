@@ -122,9 +122,9 @@ static NetworkModule *gInstance = NULL;
         case kSXTagSendMessageforTicket:
             parameter = [serverIP stringByAppendingString:GET_MESSAGE_TICKET];
             break;
-        case kSXTagUserLogout:
-            parameter = [serverIP stringByAppendingString:USER_LOGOUT];
-            break;
+//        case kSXTagUserLogout:
+//            parameter = [serverIP stringByAppendingString:USER_LOGOUT];
+//            break;
         case kSXTagDealTransferBid:
             parameter = [serverIP stringByAppendingString:DEALTRANSFERBID];
             break;
@@ -1209,6 +1209,11 @@ static NetworkModule *gInstance = NULL;
         case kSXTagIdentifyCard:
             parameter = [NEW_SERVER_IP stringByAppendingString:IDNO_CHECKINFO];
             break;
+            
+        case kSXTagUserLogout:
+            parameter = [NEW_SERVER_IP stringByAppendingString:USER_LOGOUT];
+            break;
+
 
     }
     //给原有参数字典添加公共参数
