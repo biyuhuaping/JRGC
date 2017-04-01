@@ -75,14 +75,14 @@
 }
 -(void)setMessageCenterModel:(UCFMessageCenterModel *)messageCenterModel{
     _messageCenterModel = messageCenterModel;
-    if ([messageCenterModel.isUse isEqualToString:@"Y"]) {
+    if ([messageCenterModel.isUse isEqualToString:@"1"]) {
         self.unreadOrReadVIew.hidden = YES;
     }else {
         self.unreadOrReadVIew.hidden = NO;
     }
     self.messageTitleLab.text =messageCenterModel.title;
     self.messageDetailLab.text = messageCenterModel.content;
-//    self.messageDateLab.text =messageCenterModel.createTime;
+    self.messageDateLab.text =messageCenterModel.createTime;
 }
 #pragma mark -点击编辑状态按钮
 - (void)clickEditButton:(UIButton *)sender {
