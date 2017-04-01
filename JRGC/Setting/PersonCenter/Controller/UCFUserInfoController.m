@@ -137,7 +137,7 @@
         else {
             self.userIconImageView.image = [UIImage imageNamed:@"password_icon_head"];
         }
-        self.userNameLabel.text = personCenter.userName;
+        self.userNameLabel.text = personCenter.userName.length > 0 ? personCenter.userName : @"未实名";
         self.userLevelImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"usercenter_vip%@_icon", personCenter.memberLever]];
         self.unreadMessageImageView.hidden = ([personCenter.unReadMsgCount integerValue] == 0) ? YES : NO;
         self.facBeanLabel.text = personCenter.beanAmount;

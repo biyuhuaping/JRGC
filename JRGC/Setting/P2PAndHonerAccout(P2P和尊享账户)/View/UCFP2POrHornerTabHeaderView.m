@@ -53,6 +53,7 @@
     [self checkData];
 }
 -(void)layoutSubviews{
+    [super layoutSubviews];
     [self dataDict];
 }
 -(void)checkData{

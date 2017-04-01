@@ -40,7 +40,8 @@
 //#define SEND_MESSAGE        @"newsendmessage"
 #define GET_MESSAGE_TICKET  @"newgetSendMessageTicket"  
 //#define USER_LOGOUT         @"user/loginoutForCheck"
-#define USER_LOGOUT         @"user/loginout"
+//#define USER_LOGOUT         @"user/loginout"
+#define USER_LOGOUT  @"api/userInfo/v2/loginOut.json"
 #define DEALTRANSFERBID     @"newprdTransfer/dealTransferBidTwo"
 //#define SAVETRANSFERDEALS   @"api/investTraClaims/v2/submitTender.json" //债权转让投资请求
 //#define UPDATE_TEL          @"userInfor/updatetele"

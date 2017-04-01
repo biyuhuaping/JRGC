@@ -192,14 +192,18 @@
 }
 
 - (void)fetchData {
+    NSString *userId = [UserInfoSingle sharedManager].userId;
+    if (nil == userId) {
+        return;
+    }
     __weak typeof(self) weakSelf = self;
     [self.pcListVC.presenter fetchDataWithCompletionHandler:^(NSError *error, id result) {
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];//上层交互逻辑
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];//上层交互逻辑
         if ([result isKindOfClass:[UCFPersonCenterModel class]]) {
             weakSelf.personModel = result;
         }
         else if ([result isKindOfClass:[NSString class]]) {
-            [AuxiliaryFunc showToastMessage:result withView:self.view];
+            [AuxiliaryFunc showToastMessage:result withView:weakSelf.view];
         }
     }];
 }

@@ -184,8 +184,9 @@
 {
     if (alertView.tag == 10000) {
         if (buttonIndex == 1) {
-            NSString *strParameters = [NSString stringWithFormat:@"userId=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
-            [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagUserLogout owner:self Type:SelectAccoutDefault];
+            NSString *useridstr = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
+            NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys:useridstr,@"userId",nil];
+            [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagUserLogout owner:self signature:YES Type:SelectAccoutDefault];
             
             [[UCFSession sharedManager] transformBackgroundWithUserInfo:nil withState:UCFSessionStateUserLogout];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"setDefaultViewData" object:nil];
