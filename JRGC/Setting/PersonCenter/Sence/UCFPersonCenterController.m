@@ -40,6 +40,7 @@
 @property (nonatomic, strong) UCFUserInfoController *userInfoVC;
 @property (strong, nonatomic) UCFPCListViewController *pcListVC;
 @property (strong, nonatomic)  UCFPersonCenterModel *personModel;
+@property (nonatomic, assign)  BOOL enableClick;
 @end
 
 @implementation UCFPersonCenterController
@@ -196,9 +197,11 @@
     if (nil == userId) {
         return;
     }
+    self.enableClick = NO;
     __weak typeof(self) weakSelf = self;
     [self.pcListVC.presenter fetchDataWithCompletionHandler:^(NSError *error, id result) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];//上层交互逻辑
+        weakSelf.enableClick = YES;
         if ([result isKindOfClass:[UCFPersonCenterModel class]]) {
             weakSelf.personModel = result;
         }
@@ -212,6 +215,9 @@
 
 - (void)pcListViewControllerdidSelectItem:(UCFPCListModel *)pcListModel
 {
+    if (!self.enableClick) {
+        return;
+    }
     NSString *title = pcListModel.title;
     if ([title isEqualToString:@"P2P账户"]) {
         
