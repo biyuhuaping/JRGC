@@ -157,7 +157,10 @@
     
 }
 -(void)showDeleagateView{
-    
+    FullWebViewController *webController = [[FullWebViewController alloc] initWithWebUrl:@"https://m.9888.cn/static/wap/protocol-entrust-transfer/index.html" title:@"出借人委托划款授权书"];
+    webController.sourceVc = @"topUpVC";//充值页面
+    webController.baseTitleType = @"specialUser";
+    [self.navigationController pushViewController:webController animated:YES];
 }
 
 
@@ -779,7 +782,7 @@
             [_timer setFireDate:[NSDate distantPast]];
             [_getCodeButton setBackgroundColor:[UIColor lightGrayColor]];
             NSString *tempText = @"";
-            if([_phoneTextField.text rangeOfString:@"****"].length != NSNotFound ){
+            if([_phoneTextField.text rangeOfString:@"****"].location != NSNotFound ){
                 tempText = [NSString stringWithFormat:@"已向您绑定的手机号码%@发送短信验证码",_phoneTextField.text];
             }else{
                 tempText = [_phoneTextField.text stringByReplacingCharactersInRange:NSMakeRange(3, 4) withString:@"****"];
