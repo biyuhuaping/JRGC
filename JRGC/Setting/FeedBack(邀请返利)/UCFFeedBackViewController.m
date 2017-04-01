@@ -198,14 +198,14 @@
     
     NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys:userId,@"userId",nil];
     //*******qinyy
-    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXtagInviteRebate owner:self signature:YES Type:SelectAccoutDefault];
+    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXtagInviteRebate owner:self signature:YES Type:self.accoutType];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 }
 
 //获取分享各种信息
 - (void)getAppSetting{
     NSString *strParameters = [NSString stringWithFormat:@"gcm=%@",_gcmLab.text];//5644
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetAppSetting owner:self Type:SelectAccoutDefault];
+    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetAppSetting owner:self Type:self.accoutType];
 }
 
 //开始请求
