@@ -23,7 +23,7 @@
     [self.navigationController.navigationBar setBarStyle:UIBarStyleBlackTranslucent];
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.navigationController.navigationBar.translucent = NO;
-    baseTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 150, 30)];
+    baseTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 30)];
     baseTitleLabel.textAlignment = NSTextAlignmentCenter;
     [baseTitleLabel setTextColor:UIColorWithRGB(0x333333)];
     [baseTitleLabel setBackgroundColor:[UIColor clearColor]];

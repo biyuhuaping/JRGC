@@ -29,7 +29,7 @@
                         <outlet property="delegate" destination="-1" id="S6D-aR-itH"/>
                     </connections>
                 </tableView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="37U-L4-Fsu">
+                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="37U-L4-Fsu">
                     <rect key="frame" x="0.0" y="-64" width="375" height="731"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="transform" translatesAutoresizingMaskIntoConstraints="NO" id="DvJ-44-P50">

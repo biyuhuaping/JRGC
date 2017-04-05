@@ -32,14 +32,20 @@
     BOOL _isShowOrHideAccoutMoney;
     NSDictionary *_dataDict;
     int _openState;
+    
 }
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) IBOutlet UITableView *loadingView;
 @property(strong,nonatomic) NSMutableArray *cellItemsData;
 @property (weak, nonatomic) IBOutlet UIImageView *shadowImageView;
-@property (weak, nonatomic) IBOutlet UIView *loadingView;
+@property (strong, nonatomic) NSString *fromIntoVCStr;
 
 @property (weak, nonatomic) IBOutlet UIImageView *loadingImageView;
 @property (strong, nonatomic) NSString *isCompanyAgent;//是否是机构用户
+
+
+
+
 - (IBAction)clickCashBtn:(UIButton *)sender;
 - (IBAction)clickRechargeBtn:(UIButton *)sender;
 
@@ -50,6 +56,9 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    if ([self.fromIntoVCStr isEqualToString:@"riskAssessmentVC"]) {
+        [self getP2POrHonerAccoutHttpRequest];
+    }
 }
 
 -(void)viewDidLoad{
@@ -68,10 +77,13 @@
     [self.loadingView removeFromSuperview];
     [self addRightButton];
     [self.tableView.header beginRefreshing];
+    self.tableView.userInteractionEnabled = YES;
 }
 -(void)createUIInfoView{
     [self addLeftButton];
     [self.tableView addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(getP2POrHonerAccoutHttpRequest)];
+    self.loadingView.userInteractionEnabled = NO;
+    self.tableView.userInteractionEnabled = NO;
     if (self.accoutType ==  SelectAccoutTypeHoner) {
         [self.view bringSubviewToFront:self.loadingView];
         [self performSelector:@selector(removeLoadingView) withObject:nil afterDelay:3];
@@ -311,6 +323,8 @@
         riskAssessmentVC.title = titleStr;
         riskAssessmentVC.url = GRADELURL;
         riskAssessmentVC.accoutType = self.accoutType;
+        riskAssessmentVC.sourceVC = @"P2POrHonerAccoutVC";
+        self.fromIntoVCStr = @"riskAssessmentVC";
         [self.navigationController pushViewController:riskAssessmentVC  animated:YES];
     }
     else if([titleStr hasPrefix:@"自动投标"]){

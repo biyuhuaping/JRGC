@@ -131,7 +131,7 @@
     UIView *headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, NavigationBarHeight)];
     headerView.backgroundColor = [UIColor whiteColor];
     UILabel *titleLabel = [[UILabel alloc]init];
-    titleLabel.bounds = CGRectMake(0, 0, 150, 30);
+    titleLabel.bounds = CGRectMake(0, 0, 200, 30);
     titleLabel.center = CGPointMake(ScreenWidth/2,44);
     titleLabel.textAlignment = NSTextAlignmentCenter;
     [titleLabel setTextColor:UIColorWithRGB(0x333333)];
