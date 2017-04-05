@@ -337,24 +337,6 @@
         }
     }
 }
-- (BOOL) checkHSIsLegitimate {
-    NSInteger openStatus = [UserInfoSingle sharedManager].openStatus;
-    if(openStatus < 3){
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请先开通徽商存管账户" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-        alert.tag = 10005;
-        [alert show];
-        return NO;
-    }else if(openStatus == 3){
-        
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请先设置交易密码" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-        alert.tag = 10003;
-        [alert show];
-        return NO;
-    }else{
-        return YES;
-    }
-    
-}
 //-(void)is {
 //    [urlStr rangeOfString:@"toReturnMoneyList.shtml"].location != NSNotFound
 //}
