@@ -653,6 +653,7 @@
         {
             UCFPurchaseTranBidViewController *purchaseViewController = [[UCFPurchaseTranBidViewController alloc] initWithNibName:@"UCFPurchaseTranBidViewController" bundle:nil];
             purchaseViewController.dataDict = dic;
+            purchaseViewController.accoutType = self.accoutType;
             [self.navigationController pushViewController:purchaseViewController animated:YES];
         }else if ([[dic objectForKey:@"status"] integerValue] == 21){
             
