@@ -211,7 +211,7 @@
 #pragma mark - UITextFieldDelegate
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     if (textField == _textField2) {
-        if (textField.text.length > 18 && ![string isEqualToString:@""]) {
+        if (textField.text.length >= 18 && ![string isEqualToString:@""]) {
             return NO;
         }
         NSCharacterSet *characterSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789xX\b"];

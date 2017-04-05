@@ -1493,9 +1493,6 @@
 
     }
     
-    
-    
-
     UILabel *jieshouLabel = [[UILabel alloc] initWithFrame:CGRectMake(23, height1+10, ScreenWidth-25, 12)];
     jieshouLabel.backgroundColor = [UIColor clearColor];
     jieshouLabel.text = @"本人接受筹标期内资金不计利息,投资意向不可撤销";
@@ -1532,24 +1529,29 @@
 {
     NSString *contractStr = linkModel.linkString;
     if ([contractStr isEqualToString:@"《网络借贷出借风险提示》"]) {
-        FullWebViewController *controller = [[FullWebViewController alloc] initWithWebUrl:@"https://m.9888.cn/static/wap/protocol-risk-prompt/index.html" title:@"网络借贷出借风险提示"];
-        controller.baseTitleType = @"detail_heTong";
-        [self.navigationController pushViewController:controller animated:YES];
-        return;
+        [self showContractWebViewUrl:PROTOCOLRISKPROMPT withTitle:@"网络借贷出借风险提示"];
+    }else if([contractStr isEqualToString:@"《出借人承诺书》"]){
+        [self showContractWebViewUrl:PROTOCOLENDERPROMISE withTitle:@"出借人承诺书"];
+    }else if([contractStr isEqualToString:@"《履行反洗钱义务的承诺书》"]){
+        [self showContractWebViewUrl:PROTOCOLENTUSTTRANSFER withTitle:@"履行反洗钱义务的承诺书"];
+    }else{
+        
+        NSDictionary *userOtherMsg = [_dataDict objectForKey:@"userOtherMsg"];
+        NSArray *contractMsgArr = [userOtherMsg valueForKey:@"contractMsg"];
+        NSString *contractTypeStr = [self valueIndex:linkModel WithDataArr:contractMsgArr typeKey:@"contractType"];
+        
+        NSString *projectId = [[self.dataDict objectForKey:@"data"] objectForKey:@"id"];
+        NSString *strParameters = [NSString stringWithFormat:@"userId=%@&prdClaimId=%@&contractType=%@&prdType=0",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],projectId,contractTypeStr];
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetContractMsg owner:self Type:SelectAccoutDefault];
     }
-   
-    NSDictionary *userOtherMsg = [_dataDict objectForKey:@"userOtherMsg"];
-    NSArray *contractMsgArr = [userOtherMsg valueForKey:@"contractMsg"];
-    NSString *contractTypeStr = [self valueIndex:linkModel WithDataArr:contractMsgArr typeKey:@"contractType"];
-    
-    
-    
-    NSString *projectId = [[self.dataDict objectForKey:@"data"] objectForKey:@"id"];
-    NSString *strParameters = [NSString stringWithFormat:@"userId=%@&prdClaimId=%@&contractType=%@&prdType=0",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],projectId,contractTypeStr];
-     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetContractMsg owner:self Type:SelectAccoutDefault];
+  
 }
-
+-(void)showContractWebViewUrl:(NSString *)urlStr withTitle:(NSString *)title{
+    FullWebViewController *controller = [[FullWebViewController alloc] initWithWebUrl:urlStr    title:title];
+    controller.baseTitleType = @"detail_heTong";
+    [self.navigationController pushViewController:controller animated:YES];
+}
 - (void)showPDF:(ZBLinkLabelModel *)linkModel
 {
     NSArray *contractMsgArr = [_dataDict objectForKey:@"downContractList"];

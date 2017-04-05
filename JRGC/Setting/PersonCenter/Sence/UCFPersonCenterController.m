@@ -272,14 +272,14 @@
     NSUInteger openStatus = (type == SelectAccoutTypeP2P ? [_personModel.p2pOpenStatus integerValue] : [_personModel.enjoyOpenStatus integerValue]);
     __weak typeof(self) weakSelf = self;
     if (openStatus == 1 || openStatus == 2) {
-       NSString *message = (type == SelectAccoutTypeP2P ? @"请先开通P2P徽商存管账户" : @"请先开通尊享徽商存管账户");
+       NSString *message = (type == SelectAccoutTypeP2P ? P2PTIP1 : ZXTIP1);
        NSInteger step = (type == SelectAccoutTypeP2P ? [_personModel.p2pOpenStatus integerValue] : [_personModel.enjoyOpenStatus integerValue]);
-        BlockUIAlertView *alert = [[BlockUIAlertView alloc] initWithTitle:@"提示" message:message cancelButtonTitle:@"确定" clickButton:^(NSInteger index){
-            if (index == 0) {
+        BlockUIAlertView *alert = [[BlockUIAlertView alloc] initWithTitle:@"提示" message:message cancelButtonTitle:@"取消" clickButton:^(NSInteger index){
+            if (index == 1) {
                 HSHelper *helper = [HSHelper new];
                 [helper pushOpenHSType:type Step:step nav:weakSelf.navigationController];
             }
-        } otherButtonTitles:@"取消"];
+        } otherButtonTitles:@"确定"];
         [alert show];
         return NO;
     }
