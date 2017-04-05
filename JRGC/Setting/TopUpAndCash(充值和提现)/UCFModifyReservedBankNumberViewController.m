@@ -110,10 +110,11 @@
 }
 -(void)telServerOpenUrl{
     [self.view endEditing:YES];
-    NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",[_tellNumber  stringByReplacingOccurrencesOfString:@"-" withString:@""]];
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+//    NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",[_tellNumber  stringByReplacingOccurrencesOfString:@"-" withString:@""]];
+//    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+       [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"telprompt://400-0322-988"]];
 
-//    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"telprompt://4000322988"]];
+//    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"telprompt://4000322988"]];DZWD
 }
 #pragma mark 获取验证码的timer倒计时
 - (void)timerFired
