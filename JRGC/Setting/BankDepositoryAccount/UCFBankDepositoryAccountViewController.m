@@ -11,26 +11,34 @@
 #import "FullWebViewController.h"
 #import "UCFOldUserGuideViewController.h"
 @interface UCFBankDepositoryAccountViewController ()
+{
+    BOOL isFirstLaunch;
+}
 @property (weak, nonatomic) IBOutlet UIView *whiteBaseView;
 @property (weak, nonatomic) IBOutlet UILabel *bottomLab;
 @property (weak, nonatomic) IBOutlet NZLabel *registLabel;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *whiteBaseHeight;
+
 @end
 
 @implementation UCFBankDepositoryAccountViewController
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    _whiteBaseHeight.constant = CGRectGetMaxY(_bottomLab.frame) + 15;
-
+    if (!isFirstLaunch) {
+        _whiteBaseHeight.constant = CGRectGetMaxY(_bottomLab.frame) + 15;
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:_whiteBaseView isTop:YES];
-    [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:_whiteBaseView isTop:NO];
+    if (!isFirstLaunch) {
+        [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:_whiteBaseView isTop:YES];
+        [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:_whiteBaseView isTop:NO];
+        isFirstLaunch = YES;
+    }
     self.scrollView.contentSize = CGSizeMake(0, ScreenHeight);
 }
 
@@ -53,6 +61,7 @@
 - (void)showHeTong:(ZBLinkLabelModel *)model
 {
     FullWebViewController *webController = [[FullWebViewController alloc] initWithWebUrl:ZXREGISTURL title:@"注册协议"];
+    
     webController.baseTitleType = @"specialUser";
     [self.navigationController pushViewController:webController animated:YES];
 }
