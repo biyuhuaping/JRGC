@@ -44,14 +44,22 @@
 //    [self.navigationController setNavigationBarHidden:YES animated:animated];
 //    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 //}
-
+-(void)getToBack{
+    [self jsClose];
+}
 - (void)jsClose
 {
+//    if ([_sourceVC isEqualToString:@"P2POrHonerAccoutVC"]) {
+//        [[NSNotificationCenter defaultCenter] postNotificationName:RELOADP2PORHONERACCOTDATA object:nil];
+//    }
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (void)dealloc
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
+//    if ([_sourceVC isEqualToString:@"P2POrHonerAccoutVC"]) {
+//            [[NSNotificationCenter defaultCenter] postNotificationName:RELOADP2PORHONERACCOTDATA object:nil];
+//    }
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

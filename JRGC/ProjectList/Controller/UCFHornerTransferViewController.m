@@ -215,6 +215,7 @@
             UCFPurchaseTranBidViewController *purchaseViewController = [[UCFPurchaseTranBidViewController alloc] initWithNibName:@"UCFPurchaseTranBidViewController" bundle:nil];
             purchaseViewController.dataDict = dic;
             purchaseViewController.baseTitleType = @"detail_heTong";
+            purchaseViewController.accoutType = self.accoutType;
             [self.navigationController pushViewController:purchaseViewController animated:YES];
         } else if ([dic[@"status"] integerValue] == 3 || [dic[@"status"] integerValue] == 4) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:dic[@"statusdes"] delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
@@ -277,7 +278,7 @@
         case 1://未开户-->>>新用户开户
         case 2://已开户 --->>>老用户(白名单)开户
         {
-            [self showHSAlert:@"请先开通徽商存管账户"];
+            [self showHSAlert:ZXTIP1];
             return NO;
              break;
         }
@@ -287,7 +288,7 @@
                 return YES;
             }else
             {
-                [self showHSAlert:@"请先设置交易密码"];
+                [self showHSAlert:ZXTIP2];
                 return NO;
             }
         }

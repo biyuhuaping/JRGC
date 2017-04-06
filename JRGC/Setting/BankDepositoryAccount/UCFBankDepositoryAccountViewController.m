@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UIView *whiteBaseView;
 @property (weak, nonatomic) IBOutlet UILabel *bottomLab;
 @property (weak, nonatomic) IBOutlet NZLabel *registLabel;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *whiteBaseHeight;
 @end
 
@@ -22,12 +23,15 @@
 {
     [super viewWillAppear:animated];
     _whiteBaseHeight.constant = CGRectGetMaxY(_bottomLab.frame) + 15;
+
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
     [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:_whiteBaseView isTop:YES];
     [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:_whiteBaseView isTop:NO];
+    self.scrollView.contentSize = CGSizeMake(0, ScreenHeight);
 }
 
 - (void)viewDidLoad {

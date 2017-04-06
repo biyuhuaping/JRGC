@@ -40,6 +40,8 @@
 
 @property (strong, nonatomic) NSString *openStatus;//开户状态:1：未开户 2：已开户 3：已绑卡 4：已设交易密码 5：特殊用户
 @property (assign, nonatomic) BOOL isNotFirstCome;//不是第一次进入本页面
+
+@property (assign, nonatomic) BOOL isSendVoiceMessage;//是否发送语音验证码 默认为没有发送
 @property (strong, nonatomic) NSString *phoneNum;//手机号
 
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *height1;
@@ -51,7 +53,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    _isSendVoiceMessage = NO;
     _height1.constant = 0.5;
     _height2.constant = 0.5;
     
@@ -166,6 +168,7 @@
     [_getCodeBtn setTitle:str forState:UIControlStateNormal];
     _counter--;
     if (_counter < 0) {
+        _isSendVoiceMessage = NO;
         [_timer invalidate];
         [_getCodeBtn setTitle:@"获取短信验证码" forState:UIControlStateNormal];
         _getCodeBtn.userInteractionEnabled = YES;
@@ -183,10 +186,13 @@
 - (void)soudLabelClick:(UITapGestureRecognizer *)tap
 {
     if (_counter > 0 && _counter < 60) {
+        
         [AuxiliaryFunc showToastMessage:_getCodeBtn.titleLabel.text withView:self.view];
         return;
     } else {
-        [self sendVerifyCode:@"VMS"];
+        if (!_isSendVoiceMessage) {
+            [self sendVerifyCode:@"VMS"];
+        }
     }
 }
 
@@ -211,7 +217,7 @@
 #pragma mark - UITextFieldDelegate
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     if (textField == _textField2) {
-        if (textField.text.length > 18 && ![string isEqualToString:@""]) {
+        if (textField.text.length >= 18 && ![string isEqualToString:@""]) {
             return NO;
         }
         NSCharacterSet *characterSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789xX\b"];
@@ -638,6 +644,7 @@
     }
     else if (tag.intValue == kSXTagIdentifyCode) {//发送验证码
         if ([ret boolValue]) {
+            _isSendVoiceMessage = YES;
             DBLOG(@"%@",dic[@"data"]);
             [_getCodeBtn setTitle:@"60秒后重新获取" forState:UIControlStateNormal];
             _getCodeBtn.userInteractionEnabled = NO;
@@ -649,6 +656,7 @@
             [_customLabel1 setFontColor:UIColorWithRGB(0x4aa1f9) string:@"点击这里"];
             _customLabel1.hidden = NO;
         }else {
+            _isSendVoiceMessage = NO;
             [AuxiliaryFunc showToastMessage:dic[@"message"] withView:self.view];
         }
     }
@@ -696,6 +704,7 @@
 //请求失败
 - (void)errorPost:(NSError*)err tag:(NSNumber*)tag
 {
+    _isSendVoiceMessage = NO;
     [MBProgressHUD displayHudError:err.userInfo[@"NSLocalizedDescription"]];
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
 }

@@ -200,8 +200,14 @@ return shared##className; \
 #define NOTICERISKH5 @"https://m.9888.cn/static/wap/notice-risk-prompt/index.html"//风险揭示
 
 #define  BATHCHINVESTPROTOCOL  @"https://m.9888.cn/static/wap/protocol-batch-invest/index.html"//批量投资协议
-#define ZXTIP1 @"请先开通尊享徽商资金账户"
-#define ZXTIP2 @"请先设置尊享徽商资金账户交易密码"
+
+#define PROTOCOLRISKPROMPT  @"https://m.9888.cn/static/wap/protocol-risk-prompt/index.html"//网络借贷出借风险提示
+
+#define PROTOCOLENDERPROMISE  @"https://m.9888.cn/static/wap/protocol-lender-promise/index.html"//出借人承诺书
+
+#define PROTOCOLENTUSTTRANSFER  @"https://m.9888.cn/static/wap/protocol-entrust-transfer/index.html"//履行反洗钱义务的承诺书
+#define ZXTIP1 @"请先开通尊享徽商存管账户"
+#define ZXTIP2 @"请先设置尊享徽商存管账户交易密码"
 #define P2PTIP1 @"请先开通P2P徽商存管账户"
 #define P2PTIP2 @"请先设置P2P徽商存管账户交易密码"
 //================== 调试宏 ==================

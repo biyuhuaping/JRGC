@@ -151,6 +151,11 @@
 }
 
 #pragma mark -textFeildDelegate
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    return YES;
+}
+
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
     NSString *machineName = [Common machineName];
@@ -264,8 +269,16 @@
             curTargetCursorPosition = targetCursorPosition + 1;
         }
     }
-    UITextPosition *targetPosition = [textField positionFromPosition:[textField beginningOfDocument] offset:curTargetCursorPosition];
-    [textField setSelectedTextRange:[textField textRangeFromPosition:targetPosition toPosition :targetPosition]];
+    
+    UITextRange *range = textField.selectedTextRange;
+    UITextPosition* start = [textField positionFromPosition:range.start inDirection:UITextLayoutDirectionRight offset:textField.text.length];
+    if (start)
+    {
+        [textField setSelectedTextRange:[textField textRangeFromPosition:start toPosition:start]];
+    }
+    
+//    UITextPosition *targetPosition = [textField positionFromPosition:[textField beginningOfDocument] offset:curTargetCursorPosition];
+//    [textField setSelectedTextRange:[textField textRangeFromPosition:targetPosition toPosition :targetPosition]];
 }
 
 @end

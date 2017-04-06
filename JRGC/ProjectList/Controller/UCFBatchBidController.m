@@ -15,6 +15,7 @@
 #import "UCFOldUserGuideViewController.h"
 #import "UCFBankDepositoryAccountViewController.h"
 #import "UCFLoginViewController.h"
+#import "HSHelper.h"
 @interface UCFBatchBidController () <UITableViewDataSource, UITableViewDelegate, UCFProjectListCellDelegate>
 {
     NSString *_colPrdClaimIdStr;
@@ -242,7 +243,7 @@
         case 1://未开户-->>>新用户开户
         case 2://已开户 --->>>老用户(白名单)开户
         {
-            [self showHSAlert:@"请先开通徽商存管账户"];
+            [self showHSAlert:P2PTIP1];
             return NO;
             break;
         }
@@ -252,7 +253,7 @@
                 return YES;
             }else
             {
-                [self showHSAlert:@"请先设置交易密码"];
+                [self showHSAlert:P2PTIP2];
                 return NO;
             }
         }
@@ -274,18 +275,8 @@
         [self reloadBatchBidData];
     } else if (alertView.tag == 8000) {
         if (buttonIndex == 1) {
-            switch ([UserInfoSingle sharedManager].openStatus)
-            {// ***hqy添加
-                case 1://未开户-->>>新用户开户
-                case 2://已开户 --->>>老用户(白名单)开户
-                case 3://已绑卡-->>>去设置交易密码页面
-                {
-                    UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:[UserInfoSingle sharedManager].openStatus];
-                    vc.site = @"1";//等于1 还是 2 由具体模块定
-                    [self.navigationController pushViewController:vc animated:YES];
-                }
-                    break;
-            }
+            HSHelper *helper = [HSHelper new];
+            [helper pushOpenHSType:SelectAccoutTypeP2P Step:[UserInfoSingle sharedManager].openStatus nav:self.navigationController];
         }
     }
 }

@@ -450,7 +450,11 @@
 }
 
 - (void)showDepositoryView {
-    baseTitleLabel.text = @"开通徽商存管";
+    if ([self.site intValue] == 1) {
+        baseTitleLabel.text = @"开通P2P徽商存管";
+    }else{
+        baseTitleLabel.text = @"开通尊享徽商存管";
+    }
     [self registerFinshView];
     [self saveView];
     [self passWordBeforeView];

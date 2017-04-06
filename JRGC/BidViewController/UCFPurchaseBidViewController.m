@@ -315,6 +315,7 @@
             topUpView.title = @"充值";
             //topUpView.isGoBackShowNavBar = YES;
             topUpView.uperViewController = self;
+            topUpView.accoutType = self.accoutType;
             [self.navigationController pushViewController:topUpView animated:YES];
         }
         if (alertView.tag == 4000) {
@@ -1148,6 +1149,7 @@
         //topUpView.isGoBackShowNavBar = YES;
         topUpView.title = @"充值";
         topUpView.uperViewController = self;
+        topUpView.accoutType = self.accoutType;
         [self.navigationController pushViewController:topUpView animated:YES];
     }
 }
@@ -1386,9 +1388,34 @@
     UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 98)];
     footView.backgroundColor = UIColorWithRGB(0xebebee);
     footView.userInteractionEnabled = YES;
+    __weak typeof(self) weakSelf = self;
+    //https://m.9888.cn/static/wap/protocol-risk-prompt/index.html
+    NZLabel *riskProtocolLabel = [[NZLabel alloc] init];
+    riskProtocolLabel.font = [UIFont systemFontOfSize:12.0f];
+    CGSize size1 = [Common getStrHeightWithStr:@"本人阅读并悉知《网络借贷出借风险提示》中风险" AndStrFont:12 AndWidth:ScreenWidth-25];
+    riskProtocolLabel.numberOfLines = 0;
+    riskProtocolLabel.frame = CGRectMake(23, 15, ScreenWidth-25, size1.height);
+    riskProtocolLabel.text = @"本人阅读并悉知《网络借贷出借风险提示》中风险";
+    riskProtocolLabel.userInteractionEnabled = YES;
+    riskProtocolLabel.textColor = UIColorWithRGB(0x999999);
+
+    [riskProtocolLabel addLinkString:@"《网络借贷出借风险提示》" block:^(ZBLinkLabelModel *linkModel) {
+        [weakSelf showHeTong:linkModel];
+    }];
+    [riskProtocolLabel setFontColor:UIColorWithRGB(0x4aa1f9) string:@"《网络借贷出借风险提示》"];
+    [footView addSubview:riskProtocolLabel];
+    UIImageView * imageView = [[UIImageView alloc] init];
+    imageView.frame = CGRectMake(CGRectGetMinX(riskProtocolLabel.frame) - 7, CGRectGetMinY(riskProtocolLabel.frame) + 4, 5, 5);
+    imageView.image = [UIImage imageNamed:@"point.png"];
+    [footView addSubview:imageView];
+
+    
+    
+    
+    
     NSDictionary *userOtherMsg = [_dataDict objectForKey:@"userOtherMsg"];
     NSArray *contractMsgArr = [userOtherMsg valueForKey:@"contractMsg"];
-    NSString *totalStr = [NSString stringWithFormat:@"同意并确认"];
+    NSString *totalStr = [NSString stringWithFormat:@"本人已阅读并同意签署"];
     for (int i = 0; i < contractMsgArr.count; i++) {
         NSString *tmpStr = [[contractMsgArr objectAtIndex:i] valueForKey:@"contractName"];
         totalStr = [totalStr stringByAppendingString:[NSString stringWithFormat:@"《%@》",tmpStr]];
@@ -1397,12 +1424,11 @@
     label1.font = [UIFont systemFontOfSize:12.0f];
     CGSize size = [Common getStrHeightWithStr:totalStr AndStrFont:12 AndWidth:ScreenWidth-25];
     label1.numberOfLines = 0;
-    label1.frame = CGRectMake(23, 15, ScreenWidth-25, size.height);
+    label1.frame = CGRectMake(23, CGRectGetMaxY(riskProtocolLabel.frame)+10, ScreenWidth-25, size.height);
     label1.text = totalStr;
     label1.userInteractionEnabled = YES;
     label1.textColor = UIColorWithRGB(0x999999);
     
-    __weak typeof(self) weakSelf = self;
     for (int i = 0; i < contractMsgArr.count; i++) {
         NSString *tmpStr = [NSString stringWithFormat:@"《%@》",[[contractMsgArr objectAtIndex:i] valueForKey:@"contractName"]];
         [label1 addLinkString:tmpStr block:^(ZBLinkLabelModel *linkModel) {
@@ -1469,9 +1495,6 @@
 
     }
     
-    
-    
-
     UILabel *jieshouLabel = [[UILabel alloc] initWithFrame:CGRectMake(23, height1+10, ScreenWidth-25, 12)];
     jieshouLabel.backgroundColor = [UIColor clearColor];
     jieshouLabel.text = @"本人接受筹标期内资金不计利息,投资意向不可撤销";
@@ -1506,16 +1529,31 @@
 }
 - (void)showHeTong:(ZBLinkLabelModel *)linkModel
 {
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    NSDictionary *userOtherMsg = [_dataDict objectForKey:@"userOtherMsg"];
-    NSArray *contractMsgArr = [userOtherMsg valueForKey:@"contractMsg"];
-    NSString *contractTypeStr = [self valueIndex:linkModel WithDataArr:contractMsgArr typeKey:@"contractType"];
-    
-    NSString *projectId = [[self.dataDict objectForKey:@"data"] objectForKey:@"id"];
-    NSString *strParameters = [NSString stringWithFormat:@"userId=%@&prdClaimId=%@&contractType=%@&prdType=0",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],projectId,contractTypeStr];
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetContractMsg owner:self Type:SelectAccoutDefault];
+    NSString *contractStr = linkModel.linkString;
+    if ([contractStr isEqualToString:@"《网络借贷出借风险提示》"]) {
+        [self showContractWebViewUrl:PROTOCOLRISKPROMPT withTitle:@"网络借贷出借风险提示"];
+    }else if([contractStr isEqualToString:@"《出借人承诺书》"]){
+        [self showContractWebViewUrl:PROTOCOLENDERPROMISE withTitle:@"出借人承诺书"];
+    }else if([contractStr isEqualToString:@"《履行反洗钱义务的承诺书》"]){
+        [self showContractWebViewUrl:PROTOCOLENTUSTTRANSFER withTitle:@"履行反洗钱义务的承诺书"];
+    }else{
+        
+        NSDictionary *userOtherMsg = [_dataDict objectForKey:@"userOtherMsg"];
+        NSArray *contractMsgArr = [userOtherMsg valueForKey:@"contractMsg"];
+        NSString *contractTypeStr = [self valueIndex:linkModel WithDataArr:contractMsgArr typeKey:@"contractType"];
+        
+        NSString *projectId = [[self.dataDict objectForKey:@"data"] objectForKey:@"id"];
+        NSString *strParameters = [NSString stringWithFormat:@"userId=%@&prdClaimId=%@&contractType=%@&prdType=0",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],projectId,contractTypeStr];
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetContractMsg owner:self Type:SelectAccoutDefault];
+    }
+  
 }
-
+-(void)showContractWebViewUrl:(NSString *)urlStr withTitle:(NSString *)title{
+    FullWebViewController *controller = [[FullWebViewController alloc] initWithWebUrl:urlStr    title:title];
+    controller.baseTitleType = @"detail_heTong";
+    [self.navigationController pushViewController:controller animated:YES];
+}
 - (void)showPDF:(ZBLinkLabelModel *)linkModel
 {
     NSArray *contractMsgArr = [_dataDict objectForKey:@"downContractList"];
