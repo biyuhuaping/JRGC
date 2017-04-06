@@ -226,7 +226,7 @@
 #define EASYLOAN_URL    @"https://m.easyloan888.com/static/loan/user-jrgc-login/index.html" //借款URL
 
 #define USERACOUNTINFOURL  @"api/userAccount/v2/userAccountInfo.json" //P2P或尊享账户信息
-
+#define USERGETZUNXIANGAGREE @"api/userInfo/v2/zxAuthorization.json"
 
 
 enum kPostStatus{
@@ -427,7 +427,8 @@ enum kSXTag
     kSXTagGetShareMessage,                  //首页2017新手政策分享注册链接
     kSXTagRegistCheckQUDAO,                 //检查该渠道是否用工场码
     kSXTagGetTokenId,                       //获取放心花界面的token
-    kSXTagUserAccountInfo                   //P2P或尊享账户信息
+    kSXTagUserAccountInfo,                   //P2P或尊享账户信息
+    kSXTagGetUserAgree                      //尊享授权
 };
 
 typedef enum kSXTag kSXTag;

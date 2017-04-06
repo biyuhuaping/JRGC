@@ -66,12 +66,28 @@
     [self.navigationController pushViewController:webController animated:YES];
 }
 - (IBAction)goToEnjoyOpenHSAccount:(id)sender {
-    UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:2];
-    vc.site = @"2";
-    [self.navigationController pushViewController:vc animated:YES];
-    NSMutableArray *navVCArray = [[NSMutableArray alloc] initWithArray:self.navigationController.viewControllers];
-    [navVCArray removeObjectAtIndex:navVCArray.count-2];
-    [self.navigationController setViewControllers:navVCArray animated:NO];
+    
+    NSString *userID = [[NSUserDefaults standardUserDefaults] objectForKey:UUID];
+    [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":userID} tag:kSXTagGetUserAgree owner:self signature:YES Type:SelectAccoutTypeHoner];;
+}
+- (void)endPost:(id)result tag:(NSNumber *)tag
+{
+    NSString *Data = (NSString *)result;
+    NSDictionary * dic = [Data objectFromJSONString];
+    if([dic[@"ret"] boolValue] == 1){
+        UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:2];
+        vc.site = @"2";
+        [self.navigationController pushViewController:vc animated:YES];
+        NSMutableArray *navVCArray = [[NSMutableArray alloc] initWithArray:self.navigationController.viewControllers];
+        [navVCArray removeObjectAtIndex:navVCArray.count-2];
+        [self.navigationController setViewControllers:navVCArray animated:NO];
+    } else {
+        [MBProgressHUD displayHudError:dic[@"msg"]];
+    }
+}
+- (void)errorPost:(NSError *)err tag:(NSNumber *)tag
+{
+    
 }
 - (void)dealloc
 {
