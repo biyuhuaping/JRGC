@@ -45,7 +45,7 @@
     if (presenter.isShow && [presenter.itemTitle isEqualToString:@"P2P账户"]) {
         self.itemSubT2Label.hidden = NO;
         self.itemSubT2Label.text = presenter.itemSubtitle;
-        self.itemSubT1Label.text = @"用户余额";
+        self.itemSubT1Label.text = @"可用余额";
     }
     else {
         self.itemSubT2Label.hidden = YES;
