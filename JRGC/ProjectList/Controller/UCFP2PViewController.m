@@ -80,7 +80,7 @@
 
 - (void)addSegmentControl
 {
-    self.itemSeletedView.sectionTitles = @[@"普通标", @"批量投资标"];
+    self.itemSeletedView.sectionTitles = @[@"普通标", @"批量集合标"];
     self.itemSeletedView.delegate = self;
 }
 

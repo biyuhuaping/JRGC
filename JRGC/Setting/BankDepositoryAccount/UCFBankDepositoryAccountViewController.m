@@ -50,7 +50,7 @@
 - (void)initUI
 {
     [self addLeftButton];
-    baseTitleLabel.text = @"徽商存管账户";
+    baseTitleLabel.text = @"确认授权";
     __weak typeof(self) weakSelf = self;
     _registLabel.userInteractionEnabled = YES;
     [_registLabel addLinkString:@"《注册协议》" block:^(ZBLinkLabelModel *linkModel) {

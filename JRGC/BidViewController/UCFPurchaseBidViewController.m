@@ -711,6 +711,7 @@
             NSString *urlStr = dic[@"data"][@"url"];
             UCFPurchaseWebView *webView = [[UCFPurchaseWebView alloc]initWithNibName:@"UCFPurchaseWebView" bundle:nil];
             webView.url = urlStr;
+            webView.rootVc = self.rootVc;
             webView.webDataDic =dataDict;
             webView.navTitle = @"即将跳转";
             [self.navigationController pushViewController:webView animated:YES];
