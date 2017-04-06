@@ -1220,7 +1220,12 @@ static NetworkModule *gInstance = NULL;
         case kSXTagUserLogout:
             parameter = [NEW_SERVER_IP stringByAppendingString:USER_LOGOUT];
             break;
-
+        case kSXTagGetUserAgree:
+            parameter = [NEW_SERVER_IP stringByAppendingString:USERGETZUNXIANGAGREE];
+            break;
+        case kSXTagGetUserAgreeState:
+            parameter = [NEW_SERVER_IP stringByAppendingString:USERZUNXIANGSTATE];
+            break;
 
     }
     //给原有参数字典添加公共参数

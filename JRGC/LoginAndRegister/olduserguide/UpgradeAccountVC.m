@@ -671,7 +671,11 @@
     else if (tag.intValue == kSXTagOpenAccount) {//徽商绑定银行卡
         if ([ret boolValue]) {
             DBLOG(@"%@",dic[@"data"]);
-            
+            if ([_site isEqualToString:@"1"]) {
+                [UserInfoSingle sharedManager].openStatus = 3;
+            } else {
+                [UserInfoSingle sharedManager].enjoyOpenStatus = 3;
+            }
             NSString *realName = _textField1.text;//姓名
             NSString *idCardNo = _textField2.text;//身份证号
             if (realName.length == 0) {

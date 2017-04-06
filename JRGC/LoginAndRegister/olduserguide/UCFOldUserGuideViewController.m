@@ -477,7 +477,7 @@
     //刷新首页、债券转让、个人中心数据
     [[NSNotificationCenter defaultCenter] postNotificationName:@"LatestProjectUpdate" object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadP2PTransferData" object:nil];
-//    [[NSNotificationCenter defaultCenter] postNotificationName:@"AssignmentUpdate" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadHonerPlanData" object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:RELOADP2PORHONERACCOTDATA object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:BACK_TO_HS object:nil];
