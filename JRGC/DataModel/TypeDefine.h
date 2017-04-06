@@ -228,6 +228,7 @@
 
 #define USERACOUNTINFOURL  @"api/userAccount/v2/userAccountInfo.json" //P2P或尊享账户信息
 #define USERGETZUNXIANGAGREE @"api/userInfo/v2/zxAuthorization.json"
+#define USERZUNXIANGSTATE    @"api/userInfo/v2/zxIsAuthorization.json"
 
 
 enum kPostStatus{
@@ -429,7 +430,8 @@ enum kSXTag
     kSXTagRegistCheckQUDAO,                 //检查该渠道是否用工场码
     kSXTagGetTokenId,                       //获取放心花界面的token
     kSXTagUserAccountInfo,                   //P2P或尊享账户信息
-    kSXTagGetUserAgree                      //尊享授权
+    kSXTagGetUserAgree,                      //尊享授权
+    kSXTagGetUserAgreeState                 //获取尊享授权状态
 };
 
 typedef enum kSXTag kSXTag;
