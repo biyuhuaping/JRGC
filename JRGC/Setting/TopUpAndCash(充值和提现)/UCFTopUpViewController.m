@@ -250,7 +250,7 @@
             
         } else if (buttonIndex == 1) {
            NSString *className = [NSString stringWithUTF8String:object_getClassName(_uperViewController)];
-            if ([className isEqualToString:@"UCFPurchaseBidViewController"] || [className isEqualToString:@"UCFPurchaseTranBidViewController"]) {
+            if ([className hasSuffix:@"UCFPurchaseBidViewController"] || [className hasSuffix:@"UCFPurchaseTranBidViewController"]) {
                 [self.navigationController popToViewController:_uperViewController animated:YES];
             } else {
                 [self.navigationController popToRootViewControllerAnimated:NO];
@@ -691,10 +691,16 @@
     NSString *data = (NSString *)result;
     if (tag.intValue == kSxTagHSPayMobile){
         NSMutableDictionary *dic = [data objectFromJSONString];
-        if ([dic[@"ret"] boolValue]) {
+        if ([dic[@"ret"] boolValue]){
             DLog(@"%@",dic);
             [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
             [[NSNotificationCenter defaultCenter] postNotificationName:RELOADP2PORHONERACCOTDATA object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"UPDATEINVESTDATA" object:nil];
+            _phoneTextField.text = [_phoneTextField.text stringByReplacingCharactersInRange:NSMakeRange(3, 4) withString:@"****"];;
+            self.modiyPhoneButton.hidden = NO;
+            self.phoneTextField.textColor = UIColorWithRGB(0x999999);
+            self.phoneTextField.backgroundColor = UIColorWithRGB(0xf4f4f4);
+            self.phoneTextField.userInteractionEnabled = NO;
             UIAlertView *alert1 = [[UIAlertView alloc] initWithTitle:@"充值成功" message:@""delegate:self cancelButtonTitle:@"继续充值" otherButtonTitles:@"去投资", nil];
             alert1.tag = 1000;
             [alert1 show];

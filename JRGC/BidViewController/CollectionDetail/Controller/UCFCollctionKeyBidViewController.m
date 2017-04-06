@@ -1160,6 +1160,7 @@
     viewController.prdclaimid = [[_dataDict objectForKey:@"data"] objectForKey:@"id"];
     viewController.bidDataDict = _dataDict;
     viewController.superViewController = self;
+    viewController.accoutType =self.accoutType;
     [self.navigationController pushViewController:viewController animated:YES];
 }
 

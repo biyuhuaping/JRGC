@@ -215,7 +215,7 @@
     button2.buttonWidth = 55;
     [button2.titleLabel setFont:[UIFont systemFontOfSize:13]];
     [button2 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    if ([messageCenterModel.isUse isEqualToString:@"0"]) {
+    if ([messageCenterModel.isUse isEqualToString:@"1"]) {
         [result addObject:button2];
     }
     return result;

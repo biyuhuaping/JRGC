@@ -559,11 +559,11 @@
     if (_listType == 0) {
         pageNum = 1;
         NSString *strParameters = [NSString stringWithFormat:@"prdclaimid=%@&userId=%@&page=%d&&rows=10&investAmt=%.2f",self.prdclaimid,[[NSUserDefaults standardUserDefaults] valueForKey:UUID],pageNum,self.touZiMoney];
-        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXtagSelectBeanRecord owner:self Type:SelectAccoutDefault];
+        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXtagSelectBeanRecord owner:self Type:self.accoutType];
     } else if (_listType == 1) {
         beansPageNum = 1;
         NSString *strParameters = [NSString stringWithFormat:@"prdclaimid=%@&userId=%@&page=%d&&rows=10",self.prdclaimid,[[NSUserDefaults standardUserDefaults] valueForKey:UUID],beansPageNum];
-        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXtagSelectBeansInterest owner:self Type:SelectAccoutDefault];
+        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXtagSelectBeansInterest owner:self Type:self.accoutType];
     }
 
 }

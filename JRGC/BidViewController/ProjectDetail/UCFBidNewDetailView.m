@@ -333,8 +333,9 @@
     if (_type == PROJECTDETAILTYPEBONDSRRANSFER) { //债转不添加 担保机构
       guaranteeCompanyNameStr  = @"";
     }
-    [self drawMinuteCountDownView];//创建倒计时view
-    
+    if(_isP2P){
+       [self drawMinuteCountDownView];//创建倒计时view
+    }
     //如果没有固定起息日
     if ([fixUpdate isEqual:[NSNull null]] || [fixUpdate isEqualToString:@""] || !fixUpdate) {
         [self drawType2bottomView:guaranteeCompanyNameStr];
@@ -348,7 +349,6 @@
     float y_pos = 0 + [Common calculateNewSizeBaseMachine:HeadBkHeight] + bottomViewYPos;
    _minuteCountDownView = [[[NSBundle mainBundle] loadNibNamed:@"MinuteCountDownView" owner:nil options:nil] firstObject];
     _minuteCountDownView.frame = CGRectMake(0, y_pos, ScreenWidth, MinuteDownViewHeight);
-//    _minuteCountDownView =[[MinuteCountDownView alloc]initWithFrame:CGRectMake(0, y_pos, ScreenWidth, MinuteDownViewHeight)];
     _minuteCountDownView.sourceVC = @"UCFProjectDetailVC";//标详情页面
     
     [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:_minuteCountDownView isTop:YES];
@@ -393,12 +393,19 @@
     if (![insName isEqualToString:@""]) {
         row = 4;
     }
-    float view_y = 0 + [Common calculateNewSizeBaseMachine:HeadBkHeight] + bottomViewYPos+MinuteDownViewHeight;
-    bottomBkView = [[UIView alloc] initWithFrame:CGRectMake(0, view_y, ScreenWidth, 44*row+MinuteDownViewHeight)];
+    float view_y = 0;
+    if (_isP2P) {
+       view_y = 0 + [Common calculateNewSizeBaseMachine:HeadBkHeight] + bottomViewYPos+MinuteDownViewHeight;
+    }else{
+        view_y = 0 + [Common calculateNewSizeBaseMachine:HeadBkHeight] + bottomViewYPos;
+    }
+     bottomBkView = [[UIView alloc] initWithFrame:CGRectMake(0, view_y, ScreenWidth, 44*row)];
     bottomBkView.backgroundColor = [UIColor whiteColor];
     [self addSubview:bottomBkView];
     
-//    [UCFToolsMehod viewAddLine:bottomBkView Up:YES];
+    if (_isP2P) {
+        [UCFToolsMehod viewAddLine:bottomBkView Up:YES];
+    }
     [UCFToolsMehod viewAddLine:bottomBkView Up:NO];
     
     //固定起息日
@@ -485,13 +492,19 @@
     if (![insName isEqualToString:@""]) {
         row = 3;
     }
-    CGFloat bottomBeginYPos;
-    bottomBeginYPos = 0 + [Common calculateNewSizeBaseMachine:HeadBkHeight] + bottomViewYPos+MinuteDownViewHeight;
+     CGFloat bottomBeginYPos;
+    if (_isP2P) {
+        bottomBeginYPos = 0 + [Common calculateNewSizeBaseMachine:HeadBkHeight] + bottomViewYPos+MinuteDownViewHeight;
+    }else{
+        bottomBeginYPos = 0 + [Common calculateNewSizeBaseMachine:HeadBkHeight] + bottomViewYPos;
+    }
     bottomBkView = [[UIView alloc] initWithFrame:CGRectMake(0,bottomBeginYPos, ScreenWidth, 44*row)];
     bottomBkView.backgroundColor = [UIColor whiteColor];
     [self addSubview:bottomBkView];
     
-//    [UCFToolsMehod viewAddLine:bottomBkView Up:YES];
+    if (_isP2P) {
+       [UCFToolsMehod viewAddLine:bottomBkView Up:YES];
+    }
     [UCFToolsMehod viewAddLine:bottomBkView Up:NO];
     
     //还款方式

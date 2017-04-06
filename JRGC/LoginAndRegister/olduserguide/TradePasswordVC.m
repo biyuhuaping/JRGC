@@ -396,7 +396,7 @@
             [_getCodeBtn setTitleColor:UIColorWithRGB(0xcccccc) forState:UIControlStateNormal];
             _timer = [HWWeakTimer scheduledTimerWithTimeInterval:(1.0) target:self selector:@selector(updateLabel) userInfo:nil repeats:YES];
             _counter = 59;
-            
+             [AuxiliaryFunc showToastMessage:@"已发送,请等待接收，60秒后可再次获取" withView:self.view];
             _label.text = [NSString stringWithFormat:@"已向手机%@发送短信验证码，若收不到，请点击这里获取语音验证码。",[UserInfoSingle sharedManager].mobile];
             [_label setFontColor:UIColorWithRGB(0x4aa1f9) string:@"点击这里"];
             _label.hidden = NO;
