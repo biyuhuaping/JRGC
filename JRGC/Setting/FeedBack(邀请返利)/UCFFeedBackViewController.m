@@ -146,6 +146,7 @@
 - (IBAction)toMyRebateView:(id)sender {
     //我的返利
     UCFMyRebateViewCtrl *mv = [[UCFMyRebateViewCtrl alloc]initWithNibName:@"UCFMyRebateViewCtrl" bundle:nil];
+    mv.accoutType = self.accoutType;
     __weak typeof(self) weakSelf = self;
     mv.headerInfoBlock = ^(NSDictionary *dic){
         weakSelf.sumCommLab.text = [NSString stringWithFormat:@"¥%@",dic[@"sumComm"]];//我的返利

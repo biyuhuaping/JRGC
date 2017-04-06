@@ -37,6 +37,8 @@
 - (void)refreshData;
 - (void)fetchDataWithCompletionHandler:(NetworkCompletionHandler)completionHander;
 
+- (void)fetchSignInfoWithUserId:(NSString *)userId withToken:(NSString *)token CompletionHandler:(NetworkCompletionHandler)completionHander;
+
 #pragma mark - 恢复初始数据
 - (void)setDefaultState;
 @end
