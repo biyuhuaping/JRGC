@@ -176,7 +176,8 @@ return shared##className; \
 
 #define BBSURL          @"https://bbs.9888.cn/appaction.php"
 #define MALLURL         @"https://m.dougemall.com"
-#define GRADELURL       @"https://m.9888.cn/static/wap/user-evaluate/index.html"
+#define GRADELURL       @"https://m.9888.cn/static/wap/user-evaluate/index.html" //尊享评估
+#define USEREVALUATEP2P @"https://m.9888.cn/static/wap/user-evaluate-p2p/index.html"//p2p 的用户风险能力测评地址
 #define LEVELURL        @"https://m.9888.cn/static/wap/user-level/index.html"  //会员等级
 #define GAMECENTERURL   @"https://m.dougemall.com/static/mall/game/index.html?mallHead=true"  //游戏中心
 #define LEVELURLTEQUAN  @"https://m.9888.cn/mpwap/app/vipTeQuan/qryVipTeQuanDetail.shtml"  // 特权详情

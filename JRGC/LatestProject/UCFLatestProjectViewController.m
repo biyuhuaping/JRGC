@@ -1012,7 +1012,7 @@
     }else if (alertView.tag == 9000) {
         if(buttonIndex == 1){ //测试
             RiskAssessmentViewController *vc = [[RiskAssessmentViewController alloc] initWithNibName:@"RiskAssessmentViewController" bundle:nil];
-            vc.url = GRADELURL;
+            vc.accoutType = SelectAccoutTypeP2P;
             [self.navigationController pushViewController:vc animated:YES];
         }
     }
