@@ -41,7 +41,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    baseTitleLabel.text = @"修改银行预留手机号";
+    
+    if(self.accoutType  == SelectAccoutTypeHoner){
+          baseTitleLabel.text = @"尊享修改银行预留手机号";
+    }else{
+          baseTitleLabel.text = @"P2P修改银行预留手机号";
+    }
     [self addLeftButton];
     [self initFirstViewUI];
 }

@@ -321,7 +321,6 @@
     else if([titleStr hasSuffix:@"风险承担能力"]){
       RiskAssessmentViewController *riskAssessmentVC = [[RiskAssessmentViewController alloc] initWithNibName:@"RiskAssessmentViewController" bundle:nil];
         riskAssessmentVC.title = titleStr;
-        riskAssessmentVC.url = GRADELURL;
         riskAssessmentVC.accoutType = self.accoutType;
         riskAssessmentVC.sourceVC = @"P2POrHonerAccoutVC";
         self.fromIntoVCStr = @"riskAssessmentVC";

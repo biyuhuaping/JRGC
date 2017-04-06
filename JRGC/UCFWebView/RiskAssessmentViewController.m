@@ -34,7 +34,14 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    baseTitleLabel.text = self.title;
+    if (self.accoutType == SelectAccoutTypeHoner) {
+        self.url = GRADELURL;
+        baseTitleLabel.text = @"尊享风险承担能力";
+    }else{
+        self.url = USEREVALUATEP2P;
+        baseTitleLabel.text = @"P2P风险承担能力";
+    }
+//    baseTitleLabel.text = self.title;
     [self addErrorViewButton];
     [self gotoURL:self.url];
     // Do any additional setup after loading the view from its nib.
