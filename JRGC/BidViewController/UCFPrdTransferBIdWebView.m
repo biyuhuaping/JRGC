@@ -45,11 +45,21 @@
 }
 - (void)jsClose
 {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    UCFBaseViewController *vc = self.rootVc;
+    if (vc) {
+        [self.navigationController popToViewController:vc animated:YES];
+    }
+    else
+        [self.navigationController popToRootViewControllerAnimated:YES];
 }
 -(void)getToBack{
     [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadHonerTransferData" object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadP2PTransferData" object:nil];
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    UCFBaseViewController *vc = self.rootVc;
+    if (vc) {
+        [self.navigationController popToViewController:vc animated:YES];
+    }
+    else
+        [self.navigationController popToRootViewControllerAnimated:YES];
 }
 @end

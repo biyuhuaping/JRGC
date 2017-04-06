@@ -179,6 +179,7 @@
         if([dic[@"status"] integerValue] == 1)
         {
             UCFPurchaseBidViewController *purchaseViewController = [[UCFPurchaseBidViewController alloc] initWithNibName:@"UCFPurchaseBidViewController" bundle:nil];
+            purchaseViewController.rootVc = self.parentViewController.parentViewController;
             purchaseViewController.dataDict = dic;
             purchaseViewController.bidType = 0;
             purchaseViewController.baseTitleType = @"detail_heTong";

@@ -207,6 +207,7 @@
         if([dic[@"status"] integerValue] == 1)
         {
             UCFPurchaseTranBidViewController *purchaseViewController = [[UCFPurchaseTranBidViewController alloc] initWithNibName:@"UCFPurchaseTranBidViewController" bundle:nil];
+            purchaseViewController.rootVc = self.parentViewController.parentViewController;
             purchaseViewController.dataDict = dic;
             purchaseViewController.baseTitleType = @"detail_heTong";
             [self.navigationController pushViewController:purchaseViewController animated:YES];
