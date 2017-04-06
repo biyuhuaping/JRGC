@@ -803,6 +803,9 @@
             if (isCompanyAgent) { //机构用户需要把工豆隐藏
                 height = height - 44.0f;
             }
+            if(!_isP2P){
+                height = height - 36.0f;
+            }
             return height;
         } else if (indexPath.row == 2) {
             return 30;
@@ -876,7 +879,7 @@
         static NSString *cellStr2 = @"cell2";
         MoneyBoardCell *cell = [self.bidTableView dequeueReusableCellWithIdentifier:cellStr2];
         if (cell == nil) {
-            cell = [[MoneyBoardCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellStr2 isCollctionKeyBid:NO];
+            cell = [[MoneyBoardCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellStr2 isCollctionKeyBid:!_isP2P];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.delegate = self;
             double gondDouBalance = [[[_dataDict objectSafeDictionaryForKey:@"beanUser"] objectForKey:@"availableBalance"] doubleValue];
@@ -886,20 +889,9 @@
                 cell.gongDouSwitch.userInteractionEnabled = NO;
             }
             cell.inputMoneyTextFieldLable.text = [self GetDefaultText];
-//            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-//            
-//            [formatter setDateStyle:NSDateFormatterMediumStyle];
-//            
-//            [formatter setTimeStyle:NSDateFormatterShortStyle];
-//            
-//            [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss.SSS"];
-//            
-//            NSDate* date = [formatter dateFromString:@"1970-01-01 08:21:00.000"];
-//            //将日期转换成时间戳
-//            NSInteger timeSp = [[NSNumber numberWithDouble:[date timeIntervalSince1970]] integerValue]*1000;
-//            cell.minuteCountDownView.timeInterval = timeSp;
-
-            cell.minuteCountDownView.timeInterval = [[_dataDict objectSafeForKey:@"intervalMilli"] integerValue];
+            if (_isP2P) {
+                cell.minuteCountDownView.timeInterval = [[_dataDict objectSafeForKey:@"intervalMilli"] integerValue];
+            }
         }
         cell.isCompanyAgent = isCompanyAgent;
         if (isGongDouSwitch) {
@@ -1311,6 +1303,7 @@
     viewController.prdclaimid = [[_dataDict objectForKey:@"data"] objectForKey:@"id"];
     viewController.bidDataDict = _dataDict;
     viewController.superViewController = self;
+    viewController.accoutType =self.accoutType;
     [self.navigationController pushViewController:viewController animated:YES];
 }
 

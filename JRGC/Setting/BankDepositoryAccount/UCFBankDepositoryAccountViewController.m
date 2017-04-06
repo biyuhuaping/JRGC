@@ -19,13 +19,14 @@
 @property (weak, nonatomic) IBOutlet NZLabel *registLabel;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *whiteBaseHeight;
-
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *btnButtom;//按钮与底部的距离
 @end
 
 @implementation UCFBankDepositoryAccountViewController
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    self.btnButtom.constant = 30;
     if (!isFirstLaunch) {
         _whiteBaseHeight.constant = CGRectGetMaxY(_bottomLab.frame) + 15;
     }
