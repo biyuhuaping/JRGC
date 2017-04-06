@@ -162,6 +162,7 @@
         NSString *rsttext = dic[@"message"];
         if ([rstcode intValue] == 1) {
             NSArray *list_result = [[[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"pageData"] objectSafeArrayForKey:@"result"];
+            [UserInfoSingle sharedManager].openStatus = [[[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"openStatus"] integerValue];
             if ([self.tableview.header isRefreshing]) {
                 [self.dataArray removeAllObjects];
             }
@@ -207,6 +208,7 @@
         if([dic[@"status"] integerValue] == 1)
         {
             UCFPurchaseTranBidViewController *purchaseViewController = [[UCFPurchaseTranBidViewController alloc] initWithNibName:@"UCFPurchaseTranBidViewController" bundle:nil];
+            purchaseViewController.rootVc = self.parentViewController.parentViewController;
             purchaseViewController.dataDict = dic;
             purchaseViewController.baseTitleType = @"detail_heTong";
             purchaseViewController.accoutType = self.accoutType;

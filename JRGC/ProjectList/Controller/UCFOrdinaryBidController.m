@@ -133,6 +133,8 @@
         NSString *rstcode = dic[@"ret"];
         NSString *rsttext = dic[@"message"];
         if ([rstcode intValue] == 1) {
+            [UserInfoSingle sharedManager].openStatus = [[[dic objectSafeDictionaryForKey:@"data"]objectSafeDictionaryForKey:@"openStatus"] integerValue];
+
             NSArray *list_result = [[[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"pageData"] objectSafeArrayForKey:@"result"];
             
             if ([self.tableview.header isRefreshing]) {
@@ -180,6 +182,7 @@
         if([dic[@"status"] integerValue] == 1)
         {
             UCFPurchaseBidViewController *purchaseViewController = [[UCFPurchaseBidViewController alloc] initWithNibName:@"UCFPurchaseBidViewController" bundle:nil];
+            purchaseViewController.rootVc = self.parentViewController.parentViewController;
             purchaseViewController.dataDict = dic;
             purchaseViewController.bidType = 0;
             purchaseViewController.baseTitleType = @"detail_heTong";

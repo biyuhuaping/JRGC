@@ -79,6 +79,7 @@
     [_getCodeBtn setTitle:str forState:UIControlStateNormal];
     _counter--;
     if (_counter < 0) {
+        self.label.userInteractionEnabled = YES;
         [_timer invalidate];
         [_getCodeBtn setTitle:@"获取短信验证码" forState:UIControlStateNormal];
         _getCodeBtn.userInteractionEnabled = YES;
@@ -96,9 +97,10 @@
 //点击语音验证码
 - (void)soudLabelClick {
     if (_counter > 0 && _counter < 60) {
-        [AuxiliaryFunc showToastMessage:_getCodeBtn.titleLabel.text withView:self.view];
+        [AuxiliaryFunc showToastMessage:[NSString stringWithFormat:@"%ld秒后可重新获取",_counter] withView:self.view];
         return;
     } else {
+        self.label.userInteractionEnabled = NO;
         [self sendVerifyCode:@"VMS"];
     }
 }
@@ -346,6 +348,7 @@
 #pragma mark - 请求网络及回调
 //获取验证码
 - (void)sendVerifyCode:(NSString*)isVms{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSString *userId = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
     //type: 1:提现    2:注册    3:修改绑定银行卡   5:设置交易密码    6:开户    7:换卡
     NSDictionary *dic = @{@"isVms":isVms,@"type":@"5",@"userId":userId,@"fromSite":_site};
@@ -400,8 +403,12 @@
             _label.text = [NSString stringWithFormat:@"已向手机%@发送短信验证码，若收不到，请点击这里获取语音验证码。",[UserInfoSingle sharedManager].mobile];
             [_label setFontColor:UIColorWithRGB(0x4aa1f9) string:@"点击这里"];
             _label.hidden = NO;
+            self.label.userInteractionEnabled = YES;
+            [AuxiliaryFunc showToastMessage:@"已发送，请等待接收，60秒后可再次获取" withView:self.view];
+
         }else {
              _getCodeBtn.userInteractionEnabled = YES;
+            self.label.userInteractionEnabled = YES;
             [AuxiliaryFunc showToastMessage:dic[@"message"] withView:self.view];
         }
     }
@@ -431,6 +438,7 @@
 - (void)errorPost:(NSError*)err tag:(NSNumber*)tag
 {
      _getCodeBtn.userInteractionEnabled = YES;
+    self.label.userInteractionEnabled = YES;
     [MBProgressHUD displayHudError:err.userInfo[@"NSLocalizedDescription"]];
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
 }

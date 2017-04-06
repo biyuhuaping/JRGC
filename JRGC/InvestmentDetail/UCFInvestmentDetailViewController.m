@@ -89,10 +89,10 @@
     NSString *strParameters;
     if ([_detailType isEqualToString:@"1"]) {
         strParameters = [NSString stringWithFormat:@"userId=%@&id=%@", userId, self.billId];
-        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdOrderInvestDetail owner:self Type:SelectAccoutDefault];
+        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdOrderInvestDetail owner:self Type:self.accoutType];
     } else {
         strParameters = [NSString stringWithFormat:@"userId=%@&orderId=%@",userId,self.billId];
-        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdMyTransferDetail owner:self Type:SelectAccoutDefault];
+        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdMyTransferDetail owner:self Type:self.accoutType];
     }
 }
 

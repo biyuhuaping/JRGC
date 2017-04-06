@@ -192,7 +192,7 @@ return shared##className; \
 #define REMINDBANKH5    @"https://m.9888.cn/static/wap/protocol-special-bind/index.html"     //5、特殊用户绑卡提示信息H5
 #define BANKDEPOSITORYACCOUNTURL    @"https://m.9888.cn/static/wap/topic-hui-shang/index.html" //6、微商银行专题页面url
 #define HSAccountIllustrationURL    @"https://m.9888.cn/mpwap/bankAccountExplain.html"       //徽商存管账户说明
-#define ZXREGISTURL     @""
+#define ZXREGISTURL     @"https://m.9888.cn/static/wap/protocol-register/index.html"
 #define HELPCENTERURL @"https://m.9888.cn/static/wap/faq/index.html"//帮助中心Url
 
 #define NOTICECORPORAT  @"https://m.9888.cn/static/wap/notice-corporate-structure/index.html" //查看披露信息

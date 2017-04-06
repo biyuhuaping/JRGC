@@ -11,6 +11,9 @@
 #import "FullWebViewController.h"
 #import "UCFOldUserGuideViewController.h"
 @interface UCFBankDepositoryAccountViewController ()
+{
+    BOOL isFirstLaunch;
+}
 @property (weak, nonatomic) IBOutlet UIView *whiteBaseView;
 @property (weak, nonatomic) IBOutlet UILabel *bottomLab;
 @property (weak, nonatomic) IBOutlet NZLabel *registLabel;
@@ -23,16 +26,21 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.whiteBaseHeight.constant = CGRectGetMaxY(self.bottomLab.frame) + 15;
     self.btnButtom.constant = 30;
+    if (!isFirstLaunch) {
+        _whiteBaseHeight.constant = CGRectGetMaxY(_bottomLab.frame) + 15;
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:_whiteBaseView isTop:YES];
-    [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:_whiteBaseView isTop:NO];
-    
+    if (!isFirstLaunch) {
+        [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:_whiteBaseView isTop:YES];
+        [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:_whiteBaseView isTop:NO];
+        isFirstLaunch = YES;
+    }
+    self.scrollView.contentSize = CGSizeMake(0, ScreenHeight);
 }
 
 - (void)viewDidLoad {
@@ -43,7 +51,7 @@
 - (void)initUI
 {
     [self addLeftButton];
-    baseTitleLabel.text = @"徽商存管账户";
+    baseTitleLabel.text = @"确认授权";
     __weak typeof(self) weakSelf = self;
     _registLabel.userInteractionEnabled = YES;
     [_registLabel addLinkString:@"《注册协议》" block:^(ZBLinkLabelModel *linkModel) {
@@ -54,6 +62,7 @@
 - (void)showHeTong:(ZBLinkLabelModel *)model
 {
     FullWebViewController *webController = [[FullWebViewController alloc] initWithWebUrl:ZXREGISTURL title:@"注册协议"];
+    
     webController.baseTitleType = @"specialUser";
     [self.navigationController pushViewController:webController animated:YES];
 }

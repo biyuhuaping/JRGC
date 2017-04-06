@@ -22,6 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
     [self setErrorViewFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
     [self addErrorViewButton];
     [self addProgressView];//添加进度条
@@ -59,9 +60,9 @@
 {
     self.loadCount --;
     DBLOG(@"webViewDidFinishLoad");
-    [self.webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitUserSelect='none';"];
-    // Disable callout
-    [self.webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitTouchCallout='none';"];
+//    [self.webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitUserSelect='none';"];
+//    // Disable callout
+//    [self.webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitTouchCallout='none';"];
     [self.webView.scrollView.header endRefreshing];
     
     self.requestLastUrl = [NSString stringWithFormat:@"%@",self.webView.request.URL.absoluteString];
