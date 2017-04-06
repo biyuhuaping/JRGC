@@ -98,7 +98,8 @@
         return;
     } else {
         if(!_isSendVoiceMessage){
-            [[NetworkModule sharedNetworkModule] postReq:nil tag:kSXTagSendMessageforTicket owner:self Type:SelectAccoutDefault];
+            NSDictionary *dataDic = [NSDictionary dictionaryWithObjectsAndKeys:_phoneNumber,@"destPhoneNo", _curVerifyType,@"isVms",@"2",@"type",@"1",@"userId", nil];
+            [[NetworkModule sharedNetworkModule] newPostReq:dataDic tag:kSXTagRegisterSendCodeAndFindPwd owner:self signature:NO Type:SelectAccoutDefault];
         }
     }
 }
