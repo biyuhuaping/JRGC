@@ -154,6 +154,7 @@
         NSString *rsttext = dic[@"message"];
         if ([rstcode intValue] == 1) {
             NSArray *list_result = [[[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"pageData"] objectSafeArrayForKey:@"result"];
+            [UserInfoSingle sharedManager].enjoyOpenStatus = [[[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"openStatus"] integerValue];
             if ([self.tableview.header isRefreshing]) {
                 [self.dataArray removeAllObjects];
             }
@@ -301,6 +302,7 @@
 }
 - (BOOL)checkUserCanInvestIsDetail:(BOOL)isDetail
 {
+//    return YES;
     switch ([UserInfoSingle sharedManager].enjoyOpenStatus)
     {// ***hqy添加
         case 1://未开户-->>>新用户开户

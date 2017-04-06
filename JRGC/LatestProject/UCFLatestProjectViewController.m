@@ -599,18 +599,7 @@
 }
 //点击提示View调用方法
 - (IBAction)touchTipsView:(id)sender {
-//    //首页默认跳转开户夜
-//    switch ([UserInfoSingle sharedManager].openStatus) {// ***hqy添加
-//        case 1://未开户-->>>新用户开户
-//        case 2://已开户 --->>>老用户(白名单)开户
-//        case 3://已绑卡-->>>去设置交易密码页面
-//        {
-//            UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:3];
-//            vc.site = @"1";//等于1 还是 2 由具体模块定
-//            [self.navigationController pushViewController:vc animated:YES];
-//        }
-//            break;
-//    }
+
 }
 
 //查看活动详情
@@ -895,36 +884,12 @@
                 }
                  [_tableView reloadData];
             }
-            //============ 新街口解析方法2016年11月16日 ============
-            //============ 新手活动 ============
-//            _activitiesList = dic[@"activitiesList"];
-//            if (_activitiesList.count) {
-//                _activitiesLab.text = _activitiesList[0][@"title"];
-//                id oldActId = [[NSUserDefaults standardUserDefaults]objectForKey:@"activitiesId"];
-//                id newActId = _activitiesList[0][@"id"];
-//                if (![oldActId isEqual:newActId]) {
-//                    [[NSUserDefaults standardUserDefaults]setObject:newActId forKey:@"activitiesId"];
-//                    [self activitiesAction:YES];
-//                }
-//            }
+
             //============ tips提示 ============
             if([[NSUserDefaults standardUserDefaults] objectForKey:UUID]){//登录状态下，显示tipView
                 //个人中心接口添加开户装填
                 NSString *openStatusStr = [[dic objectSafeForKey:@"data" ] objectSafeForKey:@"openStatus"];
                 [UserInfoSingle sharedManager].openStatus = [openStatusStr integerValue];
-                //暂时添加，未调试接口 *** hqy
-//                if([openStatusStr intValue] > 3 ){
-//                    _tipsViewHeight.constant = 0;
-//                }else{
-//                    _tipsViewHeight.constant = 35.0f;
-//                }
-//                NSString *tipsDesStr = [[dic objectSafeForKey:@"data" ] objectSafeForKey:@"tipsDes"];//tips提示
-//                if (![tipsDesStr isEqualToString:@""]) {
-//                    _tipsLabel.text = tipsDesStr;
-//                    _tipsViewHeight.constant = 0;
-//                }
-            }else{
-//               _tipsViewHeight.constant = 0;
             }
             //============ 公告 ============
             _noticId = dic[@"data"][@"noticId"];

@@ -109,7 +109,8 @@
     [self.passWordVC.view endEditing:YES];
     
     NSString *messege = @"确定返回？";
-    switch ([UserInfoSingle sharedManager].openStatus) {
+    NSInteger step = [_site isEqualToString:@"1"] ? [UserInfoSingle sharedManager].openStatus : [UserInfoSingle sharedManager].enjoyOpenStatus;
+    switch (step) {
         case 1://未开户-->>>新用户开户
         case 2:{//已开户 --->>>老用户(白名单)开户
             messege = @"未开通徽商存管不能投标、提现、充值。";
@@ -475,10 +476,12 @@
 - (void)dealloc{
     //刷新首页、债券转让、个人中心数据
     [[NSNotificationCenter defaultCenter] postNotificationName:@"LatestProjectUpdate" object:nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"AssignmentUpdate" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadP2PTransferData" object:nil];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:@"AssignmentUpdate" object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:RELOADP2PORHONERACCOTDATA object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:BACK_TO_HS object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadP2PData" object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:MODIBANKZONE_SUCCESSED object:nil];//返回绑定银行卡页面刷刷新数据
  }
 

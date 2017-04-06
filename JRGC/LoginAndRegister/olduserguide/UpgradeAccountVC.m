@@ -43,6 +43,7 @@
 
 @property (assign, nonatomic) BOOL isSendVoiceMessage;//是否发送语音验证码 默认为没有发送
 @property (strong, nonatomic) NSString *phoneNum;//手机号
+@property (copy,nonatomic) NSString *currentMSGRoute; //当前发送形式
 
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *height1;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *height2;
@@ -191,6 +192,7 @@
         return;
     } else {
         if (!_isSendVoiceMessage) {
+            self.customLabel1.userInteractionEnabled = NO;
             [self sendVerifyCode:@"VMS"];
         }
     }
@@ -453,7 +455,6 @@
 //获取验证码
 - (void)sendVerifyCode:(NSString*)isVms{
     [self.view endEditing:YES];
-    
     NSString *realName = _textField1.text;
     NSString *idCardNo = _textField2.text;
     NSString *bankCard = _textField3.text;
@@ -486,7 +487,9 @@
     NSString *userId = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
     //type: 1:提现    2:注册    3:修改绑定银行卡   5:设置交易密码    6:开户    7:换卡
     NSDictionary *dic = @{@"destPhoneNo":_phoneNum,@"isVms":isVms,@"type":_isFromeBankCardInfo?@"3":@"6",@"userId":userId,@"fromSite":_site};
+    self.currentMSGRoute = isVms;
     [[NetworkModule sharedNetworkModule] newPostReq:dic tag:kSXTagIdentifyCode owner:self signature:YES Type:self.accoutType];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 }
 
 //徽商绑定银行卡
@@ -655,8 +658,13 @@
             _customLabel1.text = [NSString stringWithFormat:@"已向手机%@发送短信验证码，若收不到，请点击这里获取语音验证码。",[UserInfoSingle sharedManager].mobile];
             [_customLabel1 setFontColor:UIColorWithRGB(0x4aa1f9) string:@"点击这里"];
             _customLabel1.hidden = NO;
+            _customLabel1.userInteractionEnabled = YES;
+            if ([self.currentMSGRoute isEqualToString:@"VMS"]) {
+                [AuxiliaryFunc showToastMessage:@"系统正在准备外呼，请保持手机信号畅通" withView:self.view];
+            }
         }else {
             _isSendVoiceMessage = NO;
+            _customLabel1.userInteractionEnabled = YES;
             [AuxiliaryFunc showToastMessage:dic[@"message"] withView:self.view];
         }
     }
@@ -705,6 +713,7 @@
 - (void)errorPost:(NSError*)err tag:(NSNumber*)tag
 {
     _isSendVoiceMessage = NO;
+    _customLabel1.userInteractionEnabled = YES;
     [MBProgressHUD displayHudError:err.userInfo[@"NSLocalizedDescription"]];
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
 }

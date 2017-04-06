@@ -699,7 +699,7 @@
         [self getToBack];
     }
     if (alertView.tag == 7001) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"AssignmentUpdate" object:nil];
+//        [[NSNotificationCenter defaultCenter] postNotificationName:@"AssignmentUpdate" object:nil];
         [self getToBack];
     }
     if (alertView.tag == 8000) {

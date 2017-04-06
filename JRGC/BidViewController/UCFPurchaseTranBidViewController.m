@@ -285,7 +285,7 @@
             
         } else if (alertView.tag == 10023) {
             [self.navigationController popToRootViewControllerAnimated:YES];
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"AssignmentUpdate" object:nil];
+//            [[NSNotificationCenter defaultCenter] postNotificationName:@"AssignmentUpdate" object:nil];
 
         }
     } else if (buttonIndex == 1) {

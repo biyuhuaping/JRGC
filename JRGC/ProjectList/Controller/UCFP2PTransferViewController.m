@@ -162,6 +162,7 @@
         NSString *rsttext = dic[@"message"];
         if ([rstcode intValue] == 1) {
             NSArray *list_result = [[[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"pageData"] objectSafeArrayForKey:@"result"];
+            [UserInfoSingle sharedManager].openStatus = [[[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"openStatus"] integerValue];
             if ([self.tableview.header isRefreshing]) {
                 [self.dataArray removeAllObjects];
             }
