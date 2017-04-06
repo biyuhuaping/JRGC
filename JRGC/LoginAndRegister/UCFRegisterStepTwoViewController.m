@@ -213,6 +213,9 @@
         }
 
     } else if (tag.intValue == kSXTagRegisterSendCodeAndFindPwd) {
+        
+
+        NSString *rsttext = dic[@"message"];
         if ([[dic objectForKey:@"ret"] boolValue]) {
             [MBProgressHUD displayHudError:rsttext];
             [self performSelector:@selector(veriFieldFstRepder:) withObject:nil afterDelay:2.5];
