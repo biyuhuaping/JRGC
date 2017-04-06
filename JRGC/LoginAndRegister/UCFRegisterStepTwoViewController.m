@@ -23,6 +23,8 @@
     int _timeNum;
 //    NSString *_apptzticket;
     NSString *_curVerifyType;
+    
+    BOOL _isSendVoiceMessage;
 }
 
 @property(nonatomic,retain) NSTimer *timer;
@@ -51,7 +53,8 @@
     UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 0.5)];
     lineView.backgroundColor = UIColorWithRGB(0xd8d8d8);
     [self.view addSubview:lineView];
-
+    
+    _isSendVoiceMessage = NO;//默认没有发送
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -90,11 +93,13 @@
 - (void)soudLabelClick:(UITapGestureRecognizer *)tap
 {
     _curVerifyType = @"VMS";
-    if (_timeNum > 0 && _timeNum < 60) {
+    if (_timeNum > 0 && _timeNum <60) {
         [AuxiliaryFunc showToastMessage:[NSString stringWithFormat:@"%d秒后重新获取",_timeNum] withView:self.view];
         return;
     } else {
-        [[NetworkModule sharedNetworkModule] postReq:nil tag:kSXTagSendMessageforTicket owner:self Type:SelectAccoutDefault];
+        if(!_isSendVoiceMessage){
+            [[NetworkModule sharedNetworkModule] postReq:nil tag:kSXTagSendMessageforTicket owner:self Type:SelectAccoutDefault];
+        }
     }
 }
 

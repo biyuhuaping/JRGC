@@ -264,9 +264,9 @@
         UCFMessageDetailViewController * messageDatailVC = [[UCFMessageDetailViewController alloc]initWithNibName:@"UCFMessageDetailViewController" bundle:nil];
         messageDatailVC.title = @"消息详情";
         messageDatailVC.model = messageCenterModel;
-        if([messageCenterModel.isUse isEqualToString:@"0"]){ //如果是未读消息 才标记已读状态
+        if([messageCenterModel.isUse isEqualToString:@"1"]){ //如果是未读消息 才标记已读状态
             [self setMessageReaded:indexPath];
-//            [self setSignMessageReadedHttpRequest:messageCenterModel.messageId];
+            [self setSignMessageReadedHttpRequest:messageCenterModel.messageId];
         }
         [self.navigationController pushViewController:messageDatailVC animated:YES];
     }
@@ -316,7 +316,7 @@
 #pragma mark 标记单个消息已读状态
 -(void)setMessageReaded:(NSIndexPath *)indexPath{
     UCFMessageCenterModel *messageCenterModel = [_messageDataArray objectAtIndex:indexPath.row];
-    messageCenterModel.isUse = @"1";
+    messageCenterModel.isUse = @"0";
     [_messageTableView reloadData];
 }
 #pragma mark 取消量批删除
@@ -511,7 +511,7 @@
         }
         NSDictionary *pageDataDic = [[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"pageData"];
         
-        NSString *unReadMsgCount = [pageDataDic objectSafeForKey:@"unReadMsgCount"];
+        NSString *unReadMsgCount = [[dic objectSafeDictionaryForKey:@"data"]  objectSafeForKey:@"unReadMsgCount"];
         if ([unReadMsgCount intValue] == 0) {
             _menuView.isFirstClick = YES;
         }else{
