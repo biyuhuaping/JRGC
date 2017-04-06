@@ -9,6 +9,7 @@
 #import "UCFUserInfoController.h"
 #import "UCFPersonCenterModel.h"
 #import "HWWeakTimer.h"
+#import "UCFPersonAPIManager.h"
 
 @interface UCFUserInfoController () <UserInfoViewPresenterCallBack>
 @property (weak, nonatomic) IBOutlet UIView *userIconBackView;
@@ -33,6 +34,7 @@
 @property (nonatomic, weak) NSTimer *cycleTimer;
 @property (nonatomic, assign) BOOL isAddScreenLight;
 @property (nonatomic, assign) CGFloat preScreenLight;
+@property (nonatomic, copy) NSString *token;
 
 
 @end
@@ -143,12 +145,16 @@
         self.facBeanLabel.text = personCenter.beanAmount;
         self.couponLabel.text = [NSString stringWithFormat:@"%@", personCenter.couponNumber];
         self.workPointLabel.text = [NSString stringWithFormat:@"%@", personCenter.score];
+        self.token = personCenter.userCenterTicket;
     }
 }
 
 #pragma mrak - 签到按钮点击
 - (IBAction)signClicked:(UIButton *)sender {
-    
+    NSString *userId  = [UserInfoSingle sharedManager].userId;
+    [self.presenter fetchSignInfoWithUserId:userId withToken:self.token CompletionHandler:^(NSError *error, id result) {
+        
+    }];
 }
 
 #pragma mark - 恢复初始数据

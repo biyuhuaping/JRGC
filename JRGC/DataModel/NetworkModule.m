@@ -1211,6 +1211,12 @@ static NetworkModule *gInstance = NULL;
             parameter = [NEW_SERVER_IP stringByAppendingString:IDNO_CHECKINFO];
             break;
             
+        case kSXTagSingMenthod: {
+            NSString *url = @"http://10.105.6.203:8080/mpapp/";
+            parameter = [url stringByAppendingString:SingMenthod];
+        }
+            break;
+            
         case kSXTagUserLogout:
             parameter = [NEW_SERVER_IP stringByAppendingString:USER_LOGOUT];
             break;
