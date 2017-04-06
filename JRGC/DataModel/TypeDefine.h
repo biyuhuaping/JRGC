@@ -119,7 +119,8 @@
 //#define GONGDOUGUOQI                  @"beanRecordCon/overdueBorrows"
 #define ALLYOUHUIQUANLIST             @"beanRecordCon/quereyBeanRecordIds"
 //#define YIBAOCHECKBANKSTATE           @"yeepay/bankCardCheck"   //易付宝判断银行卡号是否通过
-#define SingMenthod                   @"singmethod/newsign"//签到
+//#define SingMenthod                   @"singmethod/newsign"//签到
+#define SingMenthod                   @"api/homePage/v2/newsign.json"//签到
 //#define MODIFYBANKCARDZONE            @"newbankCard/updateBankZone"  //修改银行卡网点
 //#define REDBAG_ADDRESS                @"NewBeans/redPackageUrl"     //红包地址
 #define CHECKMYMONEY                  @"newaccount/getAvailable"    //选择反息券列表查询余额

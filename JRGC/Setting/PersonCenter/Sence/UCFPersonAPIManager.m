@@ -11,9 +11,11 @@
 #import "JSONKit.h"
 #import "UCFPersonCenterModel.h"
 #import "UIDic+Safe.h"
+#import "UCFSession.h"
 
 @interface UCFPersonAPIManager () <NetworkModuleDelegate>
 @property (copy, nonatomic) NetworkCompletionHandler completionHandler;
+@property (copy, nonatomic) NetworkCompletionHandler signCompletionHandler;
 @end
 
 @implementation UCFPersonAPIManager
@@ -22,6 +24,14 @@
     if ([[NSUserDefaults standardUserDefaults] objectForKey:UUID]) {
         [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":[[NSUserDefaults standardUserDefaults] objectForKey:UUID]} tag:kSXTagPersonCenter owner:self signature:YES Type:SelectAccoutDefault];
         self.completionHandler = completionHandler;
+    }
+}
+
+- (void)fetchSignInfo:(NSString *)userId token:(NSString *)token completionHandler:(NetworkCompletionHandler)completionHandler
+{
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:UUID]) {
+        [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":[[NSUserDefaults standardUserDefaults] objectForKey:UUID], @"apptzticket":token} tag:kSXTagSingMenthod owner:self signature:YES Type:SelectAccoutDefault];
+        self.signCompletionHandler = completionHandler;
     }
 }
 
@@ -45,6 +55,7 @@
             
             NSDictionary *result = [dic objectSafeDictionaryForKey:@"data"];
             UCFPersonCenterModel *personCenterModel = [UCFPersonCenterModel personCenterWithDict:result];
+            [[UCFSession sharedManager] transformBackgroundWithUserInfo:@{} withState:UCFSessionStateUserRefresh];
             [UserInfoSingle sharedManager].enjoyOpenStatus = [personCenterModel.enjoyOpenStatus integerValue];
             [UserInfoSingle sharedManager].openStatus = [personCenterModel.p2pOpenStatus integerValue];
             self.completionHandler(nil, personCenterModel);
@@ -55,6 +66,9 @@
         
         self.completionHandler = nil;
     }
+    else if (tag.intValue == kSXTagSingMenthod) {
+        
+    }
 }
 //请求失败
 - (void)errorPost:(NSError*)err tag:(NSNumber*)tag
@@ -62,6 +76,10 @@
     if (tag.intValue == kSXTagPersonCenter) {
         self.completionHandler(err, nil);
         self.completionHandler = nil;
+    }
+    else if (tag.intValue == kSXTagSingMenthod) {
+        self.signCompletionHandler(err, nil);
+        self.signCompletionHandler = nil;
     }
 }
 @end
