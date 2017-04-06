@@ -462,6 +462,7 @@
             NSDictionary  *dataDict = dic[@"data"][@"tradeReq"];
             NSString *urlStr = dic[@"data"][@"url"];
             UCFPrdTransferBIdWebView *webView = [[UCFPrdTransferBIdWebView alloc]initWithNibName:@"UCFPrdTransferBIdWebView" bundle:nil];
+            webView.rootVc = self.rootVc;
             webView.url = urlStr;
             webView.webDataDic = dataDict;
             webView.navTitle = @"即将跳转";

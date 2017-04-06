@@ -63,7 +63,7 @@
     UCFPCListModel *listModel0_0 = [UCFPCListModel itemWithTitle:@"P2P账户" destVcClass:nil];
     listModel0_0.isShow = self.isP2PUser;
     if (self.isP2PUser) {
-        listModel0_0.subtitle = self.p2pBalanceMoney.length > 0 ? [NSString stringWithFormat:@"¥%@", self.p2pBalanceMoney] : @"¥0.00";
+        listModel0_0.subtitle = self.p2pBalanceMoney.length > 0 ? [NSString stringWithFormat:@"%@元", self.p2pBalanceMoney] : @"0.00元";
         listModel0_0.describeWord = self.p2pLastBackMoneyDate.length > 0 ? [NSString stringWithFormat:@"最近回款日%@", self.p2pLastBackMoneyDate] : @"";
     }
     else {
@@ -142,6 +142,13 @@
             [self.userInvoView pcListViewPresenter:self didRefreshUserInfoWithResult:result error:error];
         }
         
+        !completionHander ?: completionHander(error, result);
+    }];
+}
+
+- (void)fetchSignInfoWithUserId:(NSString *)userId withToken:(NSString *)token CompletionHandler:(NetworkCompletionHandler)completionHander
+{
+    [self.apiManager fetchSignInfo:userId token:token completionHandler:^(NSError *error, id result) {
         !completionHander ?: completionHander(error, result);
     }];
 }

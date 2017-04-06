@@ -62,11 +62,28 @@
      [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadHonerPlanData" object:nil];
      [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadP2PData" object:nil];
      [[NSNotificationCenter defaultCenter] postNotificationName:@"LatestProjectUpdate" object:nil];
-     [self.navigationController popToRootViewControllerAnimated:YES];
+    UCFBaseViewController *vc = self.rootVc;
+//    if(self.flagInvestSuc == YES)//***投资成功以后导航栏上的返回按钮返回的是投资列表页面
+//    {
+//        [[NSNotificationCenter defaultCenter] postNotificationName:@"LatestProjectUpdate" object:nil];
+//         [self.navigationController popToRootViewControllerAnimated:YES];
+//    } else {//***投资失败以后导航栏上的返回按钮返回的是投资填写页面
+//        [self.navigationController popViewControllerAnimated:YES];
+//    }
+    if (vc) {
+        [self.navigationController popToViewController:vc animated:YES];
+    }
+    else
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    
 }
 - (void)jsClose
 {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    if (self.rootVc) {
+        [self.navigationController popToViewController:self.rootVc animated:YES];
+    }
+    else
+        [self.navigationController popToRootViewControllerAnimated:YES];
 }
 - (void)jsInvestSuc:(BOOL)isSuc
 {
