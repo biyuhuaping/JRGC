@@ -142,18 +142,17 @@
 //        NSString *ret = dic[@"ret"];
         NSString *message = dic[@"message"];
         BOOL isCompanyAgent = [[dic objectSafeForKey:@"isCompanyAgent"] boolValue];//true:是机构 false:不是机构
-
+        NSDictionary *dataDict = [dic objectSafeDictionaryForKey:@"data"];
         int isSucess = [dic[@"ret"]intValue];
         if (isSucess == 1) {
             if (isCompanyAgent) {
-                self.realNameLabel.text = [NSString stringWithFormat:@"企业名称：%@", dic[@"data"][@"realName"]];
+                self.realNameLabel.text = [NSString stringWithFormat:@"企业名称：%@", [dataDict objectSafeForKey:@"realName"]];
                 self.genderLabel.text =@"性别：X";
-                self.idNoLabel.text = [NSString stringWithFormat:@"证件号：%@", dic[@"data"][@"idno"]];
+                self.idNoLabel.text = [NSString stringWithFormat:@"证件号：%@", [dataDict objectSafeForKey:@"idno"]];
             }else{
-                self.realNameLabel.text = [NSString stringWithFormat:@"姓名：%@", dic[@"data"][@"realName"]];
-                self.genderLabel.text = [NSString stringWithFormat:@"性别：%@", ([dic[@"data"][@"sex"] integerValue] == 0 ? @"女" : @"男")];
-                self.idNoLabel.text = [NSString stringWithFormat:@"身份证号：%@", dic[@"data"][@"idno"]];
-//                state
+                self.realNameLabel.text = [NSString stringWithFormat:@"姓名：%@", [dataDict   objectSafeForKey:@"realName"]];
+                self.genderLabel.text = [NSString stringWithFormat:@"性别：%@", ([[dataDict  objectSafeForKey:@"sex"] integerValue] == 0 ? @"女" : @"男")];
+                self.idNoLabel.text = [NSString stringWithFormat:@"证件号：%@", [dataDict objectSafeForKey:@"idno"]];
             }
         }
         else {
