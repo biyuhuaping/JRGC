@@ -185,21 +185,15 @@
       topView = [contrl.viewControllers objectAtIndex:0];
     }
     if ([topView isKindOfClass:[UCFWebViewJavascriptBridgeMall class]]) {
-        
-        UCFWebViewJavascriptBridgeMall *mallWeb = [[UCFWebViewJavascriptBridgeMall alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
-        mallWeb.url = MALLURL;
-        mallWeb.rootVc = tabBarController.viewControllers[tabBarController.selectedIndex];
-        mallWeb.isHideNavigationBar = YES;
-        [self useragent:mallWeb.webView];
-        mallWeb.navTitle = @"豆哥商城";
-        mallWeb.isTabbarfrom = YES;
-        [UIView transitionWithView:self.navigationController.view
-                          duration:1.0f
-                           options:UIViewAnimationOptionTransitionFlipFromRight
-                        animations:^{
-                            [self.navigationController pushViewController:mallWeb animated:NO];
-                        } 
-                        completion:nil];
+        [self hideTabBar];
+//        UCFWebViewJavascriptBridgeMall *mallWeb = [[UCFWebViewJavascriptBridgeMall alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
+//        mallWeb.url = MALLURL;
+//        mallWeb.rootVc = tabBarController.viewControllers[tabBarController.selectedIndex];
+//        mallWeb.isHideNavigationBar = YES;
+//        [self useragent:mallWeb.webView];
+//        mallWeb.navTitle = @"豆哥商城";
+//        mallWeb.isTabbarfrom = YES;
+
         return NO;
      }
     if ([topView isKindOfClass:[UCFLoanViewController class]]) {
@@ -303,5 +297,30 @@
     [[NSUserDefaults standardUserDefaults] registerDefaults:dictionnary];
     //这样，WebView在请求时的user-agent 就是我们设置的这个了，如果需要在WebView 使用过程中再次变更user-agent，则需要再通过这种方式修改user-agent， 然后再重新实例化一个WebView。
 }
-
+- (void)showTabBar
+{
+    if (self.tabBar.frame.origin.y == ScreenHeight - CGRectGetHeight(self.tabBar.frame)) {
+        return;
+    }
+    [UIView animateWithDuration:0.25 animations:^{
+        self.tabBar.frame = CGRectMake(0, ScreenHeight - CGRectGetHeight(self.tabBar.frame), CGRectGetWidth(self.tabBar.frame), CGRectGetHeight(self.tabBar.frame));
+    }];
+}
+- (void)hideTabBar
+{
+    if (self.tabBar.frame.origin.y == ScreenHeight) {
+        return;
+    }
+    self.tabBar.frame = CGRectMake(0, ScreenHeight, CGRectGetWidth(self.tabBar.frame), CGRectGetHeight(self.tabBar.frame));
+    UINavigationController *nav = [self.viewControllers objectAtIndex:3];
+    UCFWebViewJavascriptBridgeMall *mallWeb = [nav.viewControllers objectAtIndex:0];
+    mallWeb.preSelectIndex = self.selectedIndex;
+    [UIView transitionWithView:self.view
+                      duration:1.0f
+                       options:UIViewAnimationOptionTransitionFlipFromRight
+                    animations:^{
+                        [self setSelectedIndex:3];
+                    }
+                    completion:nil];
+}
 @end

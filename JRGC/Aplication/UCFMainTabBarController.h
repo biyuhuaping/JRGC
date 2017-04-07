@@ -13,5 +13,6 @@
 
 - (void)initAllTabbarItems;
 - (void)choiceConWithIndex:(int)index webview:(UIWebView*)webview;
-
+- (void)showTabBar;
+- (void)hideTabBar;
 @end

@@ -48,9 +48,14 @@
 - (void)viewWillAppear:(BOOL)animated {
     [self.navigationController setNavigationBarHidden:YES animated:animated];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+    self.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
 }
 
-
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    self.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
+}
 #pragma mark - webViewDelegite
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {

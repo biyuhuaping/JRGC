@@ -51,7 +51,7 @@
 //
 //@property  BOOL flagInvestSuc;//***判断投资是否成功-成功：要改变返回按钮的返回到nav的标列表-失败：要改变返回按钮的返回到nav的投标页（输入金额页面）
 ////------------------------------------------------------------------------------------qyy
-
+@property (assign, nonatomic) NSInteger preSelectIndex;
 - (void)subShar;
 - (void)gotoURL:(NSString *)url; //加载URL无需验签
 - (void)gotoURLWithSignature:(NSString *)requestUrl;//加载URL无验签
