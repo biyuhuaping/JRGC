@@ -100,7 +100,7 @@
         }
             break;
         case 2:{//签到
-//            [self signedButton:nil];
+            [self.userInfoVC sign];
         }
             break;
     }

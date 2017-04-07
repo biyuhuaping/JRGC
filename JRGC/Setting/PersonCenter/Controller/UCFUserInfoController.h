@@ -19,4 +19,5 @@
 - (void)setBeansVCGenerator:(ViewControllerGenerator)beansVCGenerator;
 - (void)setCouponVCGenerator:(ViewControllerGenerator)couponVCGenerator;
 - (void)setWorkPointInfoVCGenerator:(ViewControllerGenerator)workPointInfoVCGenerator;
+- (void)sign;
 @end

@@ -10,6 +10,9 @@
 #import "UCFPersonCenterModel.h"
 #import "HWWeakTimer.h"
 #import "UCFPersonAPIManager.h"
+#import "MjAlertView.h"
+#import "UCFSignView.h"
+#import "UCFSignModel.h"
 
 @interface UCFUserInfoController () <UserInfoViewPresenterCallBack>
 @property (weak, nonatomic) IBOutlet UIView *userIconBackView;
@@ -152,9 +155,34 @@
 #pragma mrak - 签到按钮点击
 - (IBAction)signClicked:(UIButton *)sender {
     NSString *userId  = [UserInfoSingle sharedManager].userId;
+    if (!self.token) {
+        return;
+    }
+    __weak typeof(self) weakSelf = self;
     [self.presenter fetchSignInfoWithUserId:userId withToken:self.token CompletionHandler:^(NSError *error, id result) {
-        
+        if (!error) {
+            if ([result isKindOfClass:[UCFSignModel class]]) {
+                MjAlertView *alert = [[MjAlertView alloc] initRedBagAlertViewWithBlock:^(id blockContent) {
+                    UIView *view = (UIView *)blockContent;
+                    UCFSignView *signView = [[UCFSignView alloc] initWithFrame:view.bounds];
+                    [view addSubview:signView];
+                    [view sendSubviewToBack:signView];
+                    signView.signModel = result;
+                    DBLOG(@"---->%@", view.subviews);
+                } delegate:self cancelButtonTitle:@"关闭"];
+                alert.showViewbackImage = [UIImage imageNamed:@"checkin_bg"];
+                [alert show];
+            }
+            else if ([result isKindOfClass:[NSString class]]) {
+                [AuxiliaryFunc showToastMessage:result withView:weakSelf.parentViewController.view];
+            }
+        }
     }];
+}
+
+- (void)sign
+{
+    [self signClicked:nil];
 }
 
 #pragma mark - 恢复初始数据

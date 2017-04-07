@@ -505,8 +505,19 @@
             curTargetCursorPosition = targetCursorPosition + 1;
         }
     }
-    UITextPosition *targetPosition = [textField positionFromPosition:[textField beginningOfDocument] offset:curTargetCursorPosition];
-    [textField setSelectedTextRange:[textField textRangeFromPosition:targetPosition toPosition :targetPosition]];
+    if (editFlag) {
+        UITextRange *range = textField.selectedTextRange;
+        UITextPosition* start = [textField positionFromPosition:range.start inDirection:UITextLayoutDirectionRight offset:textField.text.length];
+        if (start)
+        {
+            [textField setSelectedTextRange:[textField textRangeFromPosition:start toPosition:start]];
+        }
+        
+    }
+    else {
+        UITextPosition *targetPosition = [textField positionFromPosition:[textField beginningOfDocument] offset:curTargetCursorPosition];
+        [textField setSelectedTextRange:[textField textRangeFromPosition:targetPosition toPosition :targetPosition]];
+    }
 }
 
 @end

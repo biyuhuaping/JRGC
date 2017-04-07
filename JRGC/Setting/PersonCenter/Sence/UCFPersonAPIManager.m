@@ -12,6 +12,7 @@
 #import "UCFPersonCenterModel.h"
 #import "UIDic+Safe.h"
 #import "UCFSession.h"
+#import "UCFSignModel.h"
 
 @interface UCFPersonAPIManager () <NetworkModuleDelegate>
 @property (copy, nonatomic) NetworkCompletionHandler completionHandler;
@@ -48,7 +49,7 @@
     NSMutableDictionary *dic = [data objectFromJSONString];
     NSString *rstcode = dic[@"ret"];
     NSString *rsttext = dic[@"message"];
-    DBLOG(@"UCFSettingViewController : %@",dic);
+    DBLOG(@"UCFPersonAPIManager : %@",dic);
     
     if (tag.intValue == kSXTagPersonCenter) {
         if ([rstcode boolValue]) {
@@ -67,7 +68,19 @@
         self.completionHandler = nil;
     }
     else if (tag.intValue == kSXTagSingMenthod) {
+        if ([rstcode boolValue]) {
+            
+            NSDictionary *result = [dic objectSafeDictionaryForKey:@"data"];
+            if (result) {
+                UCFSignModel *signModel = [UCFSignModel signWithDict:result];
+                self.signCompletionHandler(nil, signModel);
+            }
+        }
+        else {
+            self.signCompletionHandler(nil, rsttext);
+        }
         
+        self.signCompletionHandler = nil;
     }
 }
 //请求失败
