@@ -9,5 +9,5 @@
 #import "UCFBaseViewController.h"
 
 @interface UCFPersonCenterController : UCFBaseViewController
-
+- (void)hideShadowView;
 @end

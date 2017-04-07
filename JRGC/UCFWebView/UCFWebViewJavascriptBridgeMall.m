@@ -8,6 +8,8 @@
 
 #import "UCFWebViewJavascriptBridgeMall.h"
 #import "UCFWebViewJavascriptBridgeMallDetails.h"
+#import "UINavigationController+FDFullscreenPopGesture.h"
+
 @interface UCFWebViewJavascriptBridgeMall ()
 @end
 
@@ -22,7 +24,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
+    self.fd_interactivePopDisabled = YES;
     [self setErrorViewFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
     [self addErrorViewButton];
     [self addProgressView];//添加进度条
