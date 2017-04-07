@@ -893,6 +893,7 @@
     choseBankVC.delegate = self;
     choseBankVC.bankName = _bankName.text;
     choseBankVC.title = @"选择开户支行";
+    choseBankVC.accoutType = self.accoutType;
     [self.navigationController pushViewController:choseBankVC  animated:YES];
 }
 #pragma mark -选择开户支行支行回调函数

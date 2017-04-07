@@ -359,11 +359,13 @@
         {
            UpgradeAccountVC *ugVC = [[UpgradeAccountVC alloc]initWithNibName:@"UpgradeAccountVC" bundle:nil];
             ugVC.isFromeBankCardInfo = YES;
+            ugVC.accoutType = self.accoutType;
            [self.navigationController pushViewController:ugVC animated:YES];
         }else if ([item.subtitle isEqualToString:@"请选择"]){//***选择更改支行信息
            UCFChoseBankViewController *choseBankVC = [[UCFChoseBankViewController alloc]initWithNibName:@"UCFChoseBankViewController" bundle:nil];
             choseBankVC.delegate = self;
             choseBankVC.bankName = self.bankName;
+            choseBankVC.accoutType = self.accoutType;
            [self.navigationController pushViewController:choseBankVC animated:YES];
         }
       }
@@ -700,6 +702,7 @@
                 UCFChoseBankViewController *choseBankVC = [[UCFChoseBankViewController alloc]initWithNibName:@"UCFChoseBankViewController" bundle:nil];
                 choseBankVC.delegate = self;
                 choseBankVC.bankName = self.bankName;
+                choseBankVC.accoutType = self.accoutType;
                 [self.navigationController pushViewController:choseBankVC animated:YES];            }
         } otherButtonTitles:@"修改"];
         [alert_bankbrach show];

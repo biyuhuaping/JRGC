@@ -433,7 +433,7 @@
 - (void)getHSAccountInfo{
     NSString *userId = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
 
-    [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":userId,@"fromSite":_site} tag:kSXTagGetOpenAccountInfo owner:self signature:YES Type:self.accoutType];
+    [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":userId} tag:kSXTagGetOpenAccountInfo owner:self signature:YES Type:self.accoutType];
 }
 
 //修改绑定银行卡接口
@@ -486,7 +486,7 @@
     
     NSString *userId = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
     //type: 1:提现    2:注册    3:修改绑定银行卡   5:设置交易密码    6:开户    7:换卡
-    NSDictionary *dic = @{@"destPhoneNo":_phoneNum,@"isVms":isVms,@"type":_isFromeBankCardInfo?@"3":@"6",@"userId":userId,@"fromSite":_site};
+    NSDictionary *dic = @{@"destPhoneNo":_phoneNum,@"isVms":isVms,@"type":_isFromeBankCardInfo?@"3":@"6",@"userId":userId};
     self.currentMSGRoute = isVms;
     [[NetworkModule sharedNetworkModule] newPostReq:dic tag:kSXTagIdentifyCode owner:self signature:YES Type:self.accoutType];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -531,7 +531,6 @@
                                           @"openStatus":_openStatus,         //获取到的用户信息的状态，对应接口getOpenAccountInfo
                                           @"validateCode":_textField4.text,  //手机验证码
                                           @"userId":userId,                  //用户id
-                                          @"fromSite":_site                  //站点
                                           };
         [self replaceBankCardInformation:encryptParamDic];
 }
@@ -544,7 +543,6 @@
                                           @"openStatus":_openStatus,        //获取到的用户信息的状态，对应接口getOpenAccountInfo
                                           @"validateCode":_textField4.text, //手机验证码
                                           @"userId":userId,                 //用户id
-                                          @"fromSite":_site                 //站点
                                           };
 
         [[NetworkModule sharedNetworkModule] newPostReq:encryptParamDic tag:kSXTagOpenAccount owner:self signature:YES Type:self.accoutType];
