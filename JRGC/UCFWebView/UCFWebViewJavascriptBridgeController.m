@@ -730,13 +730,17 @@
 }
 //跳转到App 原生界面 规则从哪来回哪去
 -(void)jsGotoAppBackNative{
-    [self.navigationController popViewControllerAnimated:YES];
-//    [self dismissViewControllerAnimated:YES completion:^{
-//        if(self.isTabbarfrom){
-//            AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
-//            [app.tabBarController  setSelectedViewController:self.rootVc];
-//        }
-//    }];
+    AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    app.tabBarController.tabBar.frame = CGRectMake(0, ScreenHeight - CGRectGetHeight(app.tabBarController.tabBar.frame), CGRectGetWidth(app.tabBarController.tabBar.frame), CGRectGetHeight(app.tabBarController.tabBar.frame));
+    [app.tabBarController  setSelectedIndex:_preSelectIndex];
+//    [UIView transitionWithView:self.view
+//                      duration:1.0f
+//                       options:UIViewAnimationOptionTransitionFlipFromRight
+//                    animations:^{
+//                    }
+//                    completion:^(BOOL finished){
+//               
+//                    }];
 }
 
 - (void)jsGoto:(NSDictionary *)dic
