@@ -730,12 +730,13 @@
 }
 //跳转到App 原生界面 规则从哪来回哪去
 -(void)jsGotoAppBackNative{
-    [self dismissViewControllerAnimated:YES completion:^{
-        if(self.isTabbarfrom){
-            AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
-            [app.tabBarController  setSelectedViewController:self.rootVc];
-        }
-    }];
+    [self.navigationController popViewControllerAnimated:YES];
+//    [self dismissViewControllerAnimated:YES completion:^{
+//        if(self.isTabbarfrom){
+//            AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+//            [app.tabBarController  setSelectedViewController:self.rootVc];
+//        }
+//    }];
 }
 
 - (void)jsGoto:(NSDictionary *)dic

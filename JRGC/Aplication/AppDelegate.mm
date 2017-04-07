@@ -583,7 +583,8 @@
 - (void)showTabbarController
 {
     self.tabBarController = [[UCFMainTabBarController alloc] init];
-    self.window.rootViewController = _tabBarController;
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:self.tabBarController];
+    self.window.rootViewController = nav;
 }
 
 // 展示引导页
