@@ -16,7 +16,7 @@
         self.userId = [dict objectSafeForKey:@"userId"];
         self.isUse = [dict objectSafeForKey:@"isUse"];
         self.title = [[[dict objectSafeForKey:@"title"] stringByReplacingOccurrencesOfString:@"（"withString:@"(" ] stringByReplacingOccurrencesOfString:@"）"withString:@")"];
-        self.createTime = [dict objectSafeForKey:@"createTimeString"];
+        self.createTime = [dict objectSafeForKey:@"createTime"];
         self.messageId =[NSString stringWithFormat:@"%@",[dict objectSafeForKey:@"id"]];
         self.content = [[[dict objectSafeForKey:@"content"]  stringByReplacingOccurrencesOfString:@"<a href=\"/newBeans/toReturnMoneyList.shtml\" style=\"color:blue\">"withString:@"" ] stringByReplacingOccurrencesOfString:@"</a>" withString:@""];
     }

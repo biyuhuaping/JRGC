@@ -10,5 +10,4 @@
 
 @interface UCFBankCardInfoViewController : UCFBaseViewController
 
-@property (nonatomic, assign) NSInteger fromSite;
 @end

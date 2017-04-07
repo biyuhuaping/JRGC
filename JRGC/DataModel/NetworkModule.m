@@ -934,6 +934,12 @@ static NetworkModule *gInstance = NULL;
     UCFLoginViewController *loginViewController = [[[UCFLoginViewController alloc] init] autorelease];
     UINavigationController *loginNaviController = [[[UINavigationController alloc] initWithRootViewController:loginViewController] autorelease];
     AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    if (app.tabBarController.selectedIndex == 4) {
+        UINavigationController *nav = [app.tabBarController.childViewControllers objectAtIndex:4];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [nav popToRootViewControllerAnimated:NO];
+        });
+    }
     [app.tabBarController presentViewController:loginNaviController animated:YES completion:nil];
 }
 
