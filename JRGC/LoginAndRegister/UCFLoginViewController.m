@@ -93,6 +93,10 @@
     [self.view addSubview:lineView];
 }
 #pragma mark - 按钮-刷脸登陆界面
+- (void)keyBoardPushOut
+{
+    
+}
 - (void)rightBtnClicked:(id)sender
 {
 }
