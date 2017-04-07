@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "UCFOldUserGuideViewController.h"
 #import "UCFBankDepositoryAccountViewController.h"
-@interface HSHelper : NSObject
+@interface HSHelper : NSObject <NetworkModuleDelegate>
 - (BOOL)checkHSState:(SelectAccoutType)type withValue:(NSInteger)vlaue;
 - (void)pushOpenHSType:(SelectAccoutType)type Step:(NSInteger)step nav:(UINavigationController *)nav;
 @end
