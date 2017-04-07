@@ -154,7 +154,10 @@
         NSString *rsttext = dic[@"message"];
         if ([rstcode intValue] == 1) {
             NSArray *list_result = [[[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"pageData"] objectSafeArrayForKey:@"result"];
-            [UserInfoSingle sharedManager].enjoyOpenStatus = [[[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"openStatus"] integerValue];
+            NSString *oepnState =  [[dic objectSafeDictionaryForKey:@"data"] objectSafeForKey:@"openStatus"];
+            if (oepnState.length > 0) {
+                [UserInfoSingle sharedManager].enjoyOpenStatus = [oepnState integerValue];
+            }
             if ([self.tableview.header isRefreshing]) {
                 [self.dataArray removeAllObjects];
             }

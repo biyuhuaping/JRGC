@@ -31,17 +31,17 @@
 @end
 
 @implementation UCFMainTabBarController
-- (void)viewWillAppear:(BOOL)animated
-{
-    self.navigationController.navigationBarHidden = YES;
-    if ([[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
-        BaseNavigationViewController *hander = [self.viewControllers objectAtIndex:4];
-        if (hander.topViewController) {
-            UCFPersonCenterController *person = (UCFPersonCenterController *)hander.topViewController;
-            [person hideShadowView];
-        }
-    }
-}
+//- (void)viewWillAppear:(BOOL)animated
+//{
+//    self.navigationController.navigationBarHidden = YES;
+//    if ([[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
+//        BaseNavigationViewController *hander = [self.viewControllers objectAtIndex:4];
+//        if (hander.topViewController) {
+//            UCFPersonCenterController *person = (UCFPersonCenterController *)hander.topViewController;
+//            [person hideShadowView];
+//        }
+//    }
+//}
 - (void)viewDidLoad
 {   
     [super viewDidLoad];

@@ -35,9 +35,8 @@
 #import "Growing.h"
 #import "UCFLatestProjectViewController.h"
 
-
 #import "MD5Util.h"
-
+//#import "BaseNavigationViewController.h"
 #import "JPUSHService.h"//极光推送
 // iOS10注册APNs所需头文件
 #ifdef NSFoundationVersionNumber_iOS_9_x_Max
@@ -583,8 +582,8 @@
 - (void)showTabbarController
 {
     self.tabBarController = [[UCFMainTabBarController alloc] init];
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:self.tabBarController];
-    self.window.rootViewController = nav;
+//    BaseNavigationViewController *nav = [[BaseNavigationViewController alloc] initWithRootViewController:self.tabBarController];
+    self.window.rootViewController = self.tabBarController;
 }
 
 // 展示引导页

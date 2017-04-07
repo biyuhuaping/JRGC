@@ -102,7 +102,11 @@
     [super viewWillAppear:animated];
    
 }
-
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self.view endEditing:YES];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -368,7 +372,7 @@
     [self.navigationController pushViewController:self.controller animated:YES];//---qyy0815
 }
 #pragma mark - 选择密码登陆后-将键盘弹出的回调用
--(void)keyBoardPushOut
+-(void)setFirstResponder
 {
      [_loginView setFirstResponder];//***弹出键盘
 }
