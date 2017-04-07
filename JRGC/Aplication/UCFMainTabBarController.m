@@ -31,6 +31,17 @@
 @end
 
 @implementation UCFMainTabBarController
+//- (void)viewWillAppear:(BOOL)animated
+//{
+//    self.navigationController.navigationBarHidden = YES;
+//    if ([[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
+//        BaseNavigationViewController *hander = [self.viewControllers objectAtIndex:4];
+//        if (hander.topViewController) {
+//            UCFPersonCenterController *person = (UCFPersonCenterController *)hander.topViewController;
+//            [person hideShadowView];
+//        }
+//    }
+//}
 - (void)viewDidLoad
 {   
     [super viewDidLoad];
@@ -174,6 +185,7 @@
       topView = [contrl.viewControllers objectAtIndex:0];
     }
     if ([topView isKindOfClass:[UCFWebViewJavascriptBridgeMall class]]) {
+        
         UCFWebViewJavascriptBridgeMall *mallWeb = [[UCFWebViewJavascriptBridgeMall alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
         mallWeb.url = MALLURL;
         mallWeb.rootVc = tabBarController.viewControllers[tabBarController.selectedIndex];
@@ -181,10 +193,13 @@
         [self useragent:mallWeb.webView];
         mallWeb.navTitle = @"豆哥商城";
         mallWeb.isTabbarfrom = YES;
-        mallWeb.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-        UINavigationController *mallWebNaviController = [[UINavigationController alloc] initWithRootViewController:mallWeb];
-//        self.hidesBottomBarWhenPushed = YES;
-        [self presentViewController:mallWebNaviController animated:YES completion:nil];
+        [UIView transitionWithView:self.navigationController.view
+                          duration:1.0f
+                           options:UIViewAnimationOptionTransitionFlipFromRight
+                        animations:^{
+                            [self.navigationController pushViewController:mallWeb animated:NO];
+                        } 
+                        completion:nil];
         return NO;
      }
     if ([topView isKindOfClass:[UCFLoanViewController class]]) {
@@ -209,14 +224,6 @@
     
     if ([topView isKindOfClass:[UCFPersonCenterController class]] ) {
         if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
-//            UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
-//            loginViewController.sourceVC = @"fromPersonCenter";
-//            BaseNavigationViewController *loginNaviController = [[BaseNavigationViewController alloc] initWithRootViewController:loginViewController];
-//            loginViewController.sourceVC = @"homePage";
-//            [[NSUserDefaults standardUserDefaults] setValue:@"1" forKey:@"personCenterClick"];
-//            [self presentViewController:loginNaviController animated:YES completion:nil];
-//            [Touch3DSingle sharedTouch3DSingle].isLoad = NO;
-//            return NO;
             self.selectedViewController = viewController;
             return YES;
         } else {
@@ -230,24 +237,6 @@
     }
     return YES;
 }
-
-//- (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item
-//{
-//    NSInteger index = item.tag;
-//    if (index == 2) {
-//        if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
-//            UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
-//            loginViewController.sourceVC = @"fromPersonCenter";
-//            BaseNavigationViewController *loginNaviController = [[BaseNavigationViewController alloc] initWithRootViewController:loginViewController];
-//            [self presentViewController:loginNaviController animated:YES completion:nil];
-//        } else {
-//            [[NSNotificationCenter defaultCenter] postNotificationName:UCFGETPERSONALNETWORKINFO object:nil];
-//            return;
-//        }
-//    }
-//}
-
-
 - (void)tabBar:(UITabBar *)tabBar willBeginCustomizingItems:(NSArray *)items
 {
 
@@ -284,25 +273,11 @@
 
 - (void)certificationBtnClicked:(id)sender
 {
-//    __weak typeof(self) weakSelf = self;
-    //UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SecuirtyCenter" bundle:nil];
-    //IDAuthViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"idauth"];
-    //controller.title = @"身份认证";
-    //AppDelegate *delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-    //controller.rootVc = delegate.tabBarController;
-    //BaseNavigationViewController *nav = [[BaseNavigationViewController alloc] initWithRootViewController:controller];
-    //nav.navigationBarHidden = YES;
-    //[delegate.tabBarController presentViewController:nav animated:YES completion:^{
-    //
-    //    }];
     UCFOldUserGuideViewController * VC = [UCFOldUserGuideViewController createGuideHeadSetp:1];
     VC.isPresentViewController = YES; //弹出视图
     AppDelegate *delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
     VC.rootVc = delegate.tabBarController;
     BaseNavigationViewController *nav = [[BaseNavigationViewController alloc] initWithRootViewController:VC];
-    //[delegate.tabBarController addChildViewController:nav];
-    //delegate.tabBarController.viewControllers = @[nav];
-    //[nav pushViewController:VC animated:YES];
     [delegate.tabBarController presentViewController:nav animated:YES completion:^{
         
     }];

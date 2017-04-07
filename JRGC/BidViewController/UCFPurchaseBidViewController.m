@@ -24,7 +24,7 @@
 #import "UINavigationController+FDFullscreenPopGesture.h"
 
 #import "MinuteCountDownView.h"
-
+#import "NSString+CJString.h"
 #import "UCFPurchaseWebView.h"
 @interface UCFPurchaseBidViewController ()<UITableViewDataSource,UITableViewDelegate,MoneyBoardCellDelegate>
 {
@@ -1379,7 +1379,7 @@
 }
 - (UIView *)createFootView
 {
-    UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 98)];
+    UIView *footView =[[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 98)];
     footView.backgroundColor = UIColorWithRGB(0xebebee);
     footView.userInteractionEnabled = YES;
     __weak typeof(self) weakSelf = self;
@@ -1397,16 +1397,20 @@
         [weakSelf showHeTong:linkModel];
     }];
     [riskProtocolLabel setFontColor:UIColorWithRGB(0x4aa1f9) string:@"《网络借贷出借风险提示》"];
-    [footView addSubview:riskProtocolLabel];
+  
     UIImageView * imageView = [[UIImageView alloc] init];
     imageView.frame = CGRectMake(CGRectGetMinX(riskProtocolLabel.frame) - 7, CGRectGetMinY(riskProtocolLabel.frame) + 4, 5, 5);
     imageView.image = [UIImage imageNamed:@"point.png"];
-    [footView addSubview:imageView];
-
     
     
-    
-    
+    if(_isP2P){
+        [footView addSubview:riskProtocolLabel];
+        [footView addSubview:imageView];
+    }else{
+        footView.frame  = CGRectMake(0, 0, ScreenWidth, 98 - size1.height - 10);
+        riskProtocolLabel.frame = CGRectZero;
+        imageView.frame = CGRectZero;
+    }
     NSDictionary *userOtherMsg = [_dataDict objectForKey:@"userOtherMsg"];
     NSArray *contractMsgArr = [userOtherMsg valueForKey:@"contractMsg"];
     NSString *totalStr = [NSString stringWithFormat:@"本人已阅读并同意签署"];
@@ -1418,8 +1422,19 @@
     label1.font = [UIFont systemFontOfSize:12.0f];
     CGSize size = [Common getStrHeightWithStr:totalStr AndStrFont:12 AndWidth:ScreenWidth-25];
     label1.numberOfLines = 0;
-    label1.frame = CGRectMake(23, CGRectGetMaxY(riskProtocolLabel.frame)+10, ScreenWidth-25, size.height);
-    label1.text = totalStr;
+    if (_isP2P) {
+        label1.frame = CGRectMake(23, CGRectGetMaxY(riskProtocolLabel.frame)+10, ScreenWidth-25, size.height);
+    }else{
+        label1.frame = CGRectMake(23, 15, ScreenWidth-25, size.height);
+    }
+    NSMutableParagraphStyle *paragraph = [[NSMutableParagraphStyle alloc] init];
+    paragraph.alignment = NSTextAlignmentLeft;
+    paragraph.lineSpacing = 1;
+    NSDictionary *dic = @{
+                          NSFontAttributeName:[UIFont systemFontOfSize:11],/*(字体)*/
+                          NSParagraphStyleAttributeName:paragraph,/*(段落)*/
+                          };
+    label1.attributedText = [NSString getNSAttributedString:totalStr labelDict:dic];
     label1.userInteractionEnabled = YES;
     label1.textColor = UIColorWithRGB(0x999999);
     

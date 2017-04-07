@@ -102,7 +102,11 @@
     [super viewWillAppear:animated];
    
 }
-
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self.view endEditing:YES];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -299,23 +303,13 @@
     }
     else if ([_sourceVC isEqualToString:@"webViewLongin"])
     {
-        
         [self dismissViewControllerAnimated:YES completion:^{
-            
-//            [self showGestureCode];
             [[NSNotificationCenter defaultCenter] postNotificationName:BACK_TO_BANNER object:nil];
-            //[[NSNotificationCenter defaultCenter] postNotificationName:BACK_TO_BANNER object:nil];
         }];
         return;
     }
     [self dismissViewControllerAnimated:NO completion:^{
         [self showGestureCode];
-//        if ([[NSUserDefaults standardUserDefaults] valueForKey: UUID]) {
-//            if ([_sourceVC isEqualToString:@"homePage"] || [_sourceVC isEqualToString:@"otherPage"]) {
-//                AppDelegate *del = (AppDelegate *) [[UIApplication sharedApplication] delegate];
-//                [del.tabBarController setSelectedIndex:3];
-//            }
-//        }
     }];
 }
 
@@ -336,10 +330,10 @@
 {
     AppDelegate *del = (AppDelegate *) [[UIApplication sharedApplication] delegate];
     if(del.window.rootViewController.presentingViewController == nil){
-        UCFLockHandleViewController *lockVc = [[UCFLockHandleViewController alloc] init];
-        lockVc.nLockViewType = type;
-        lockVc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-        [del.window.rootViewController presentViewController:lockVc animated:NO completion:^{
+            UCFLockHandleViewController *lockVc = [[UCFLockHandleViewController alloc] init];
+            lockVc.nLockViewType = type;
+            lockVc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+            [del.window.rootViewController presentViewController:lockVc animated:NO completion:^{
         }];
     }
 }
@@ -378,7 +372,7 @@
     [self.navigationController pushViewController:self.controller animated:YES];//---qyy0815
 }
 #pragma mark - 选择密码登陆后-将键盘弹出的回调用
--(void)keyBoardPushOut
+-(void)setFirstResponder
 {
      [_loginView setFirstResponder];//***弹出键盘
 }

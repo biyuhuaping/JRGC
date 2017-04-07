@@ -49,7 +49,7 @@
     NSString *data = (NSString *)result;
     NSMutableDictionary *dic = [data objectFromJSONString];
     if ([dic[@"ret"] boolValue]) {
-        if ([dic[@"data"][@"zxIsAuthorization"] isEqualToString:@"false"]) {
+        if ([dic[@"data"][@"zxIsAuthorization"] boolValue]) {
             UCFBankDepositoryAccountViewController * bankDepositoryAccountVC =[[UCFBankDepositoryAccountViewController alloc ]initWithNibName:@"UCFBankDepositoryAccountViewController" bundle:nil];
             bankDepositoryAccountVC.openStatus = [UserInfoSingle sharedManager].openStatus;
             [tmpNav pushViewController:bankDepositoryAccountVC animated:YES];
@@ -57,9 +57,6 @@
             UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:2];
             vc.site = @"2";
             [tmpNav pushViewController:vc animated:YES];
-//            NSMutableArray *navVCArray = [[NSMutableArray alloc] initWithArray:tmpNav.viewControllers];
-//            [navVCArray removeObjectAtIndex:navVCArray.count-2];
-//            [tmpNav setViewControllers:navVCArray animated:NO];
         }
     } else {
         [MBProgressHUD displayHudError:dic[@"message"]];

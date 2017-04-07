@@ -30,6 +30,7 @@
     if (!isFirstLaunch) {
         _whiteBaseHeight.constant = CGRectGetMaxY(_bottomLab.frame) + 15;
     }
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 }
 
 - (void)viewDidAppear:(BOOL)animated
