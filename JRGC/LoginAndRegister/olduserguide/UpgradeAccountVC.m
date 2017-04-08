@@ -424,6 +424,7 @@
         UCFHuiShangChooseBankViewController *vc = [[UCFHuiShangChooseBankViewController alloc] initWithNibName:@"UCFHuiShangChooseBankViewController" bundle:nil];
         vc.bankDelegate = self;
         vc.site = _site;
+        vc.accoutType = self.accoutType;
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

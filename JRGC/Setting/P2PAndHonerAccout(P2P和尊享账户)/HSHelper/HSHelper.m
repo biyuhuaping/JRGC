@@ -33,6 +33,7 @@
         } else {
             UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:step];
             vc.site = @"2";
+            vc.accoutType = SelectAccoutTypeHoner;
             [nav pushViewController:vc animated:YES];
         }
     } else {
@@ -41,6 +42,7 @@
         }
         UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:step];
         vc.site = @"1";
+        vc.accoutType = SelectAccoutTypeP2P;
         [nav pushViewController:vc animated:YES];
     }
 }
@@ -49,13 +51,14 @@
     NSString *data = (NSString *)result;
     NSMutableDictionary *dic = [data objectFromJSONString];
     if ([dic[@"ret"] boolValue]) {
-        if ([dic[@"data"][@"zxIsAuthorization"] boolValue]) {
+        if (![dic[@"data"][@"zxIsAuthorization"] boolValue]) {
             UCFBankDepositoryAccountViewController * bankDepositoryAccountVC =[[UCFBankDepositoryAccountViewController alloc ]initWithNibName:@"UCFBankDepositoryAccountViewController" bundle:nil];
             bankDepositoryAccountVC.openStatus = [UserInfoSingle sharedManager].openStatus;
             [tmpNav pushViewController:bankDepositoryAccountVC animated:YES];
         } else {
             UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:2];
             vc.site = @"2";
+            vc.accoutType = SelectAccoutTypeHoner;
             [tmpNav pushViewController:vc animated:YES];
         }
     } else {

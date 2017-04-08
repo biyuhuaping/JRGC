@@ -79,6 +79,7 @@
     if([dic[@"ret"] boolValue] == 1){
         UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:2];
         vc.site = @"2";
+        vc.accoutType = SelectAccoutTypeHoner;
         [self.navigationController pushViewController:vc animated:YES];
         NSMutableArray *navVCArray = [[NSMutableArray alloc] initWithArray:self.navigationController.viewControllers];
         [navVCArray removeObjectAtIndex:navVCArray.count-2];
