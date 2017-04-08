@@ -198,6 +198,7 @@
             UCFProjectDetailViewController *controller = [[UCFProjectDetailViewController alloc] initWithDataDic:dic isTransfer:NO withLabelList:prdLabelsListTemp];
             CGFloat platformSubsidyExpense = [_projectListModel.platformSubsidyExpense floatValue];
             controller.accoutType = self.accoutType;
+            controller.rootVc = self;
             [[NSUserDefaults standardUserDefaults] setValue:[NSString stringWithFormat:@"%.1f",platformSubsidyExpense] forKey:@"platformSubsidyExpense"];
             [self.navigationController pushViewController:controller animated:YES];
         }else {
@@ -209,7 +210,7 @@
         if([dic[@"status"] integerValue] == 1)
         {
             UCFPurchaseBidViewController *purchaseViewController = [[UCFPurchaseBidViewController alloc] initWithNibName:@"UCFPurchaseBidViewController" bundle:nil];
-            purchaseViewController.rootVc = self.parentViewController.parentViewController;
+            purchaseViewController.rootVc = self;
             purchaseViewController.dataDict = dic;
             purchaseViewController.bidType = 0;
             purchaseViewController.baseTitleType = @"detail_heTong";
