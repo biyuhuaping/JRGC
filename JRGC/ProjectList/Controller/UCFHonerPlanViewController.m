@@ -154,10 +154,11 @@
         NSString *rsttext = dic[@"message"];
         if ([rstcode intValue] == 1) {
             NSArray *list_result = [[[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"pageData"] objectSafeArrayForKey:@"result"];
-            NSString *oepnState =  [[dic objectSafeDictionaryForKey:@"data"] objectSafeForKey:@"openStatus"];
-            if (oepnState.length > 0) {
+            if ([[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
+                NSString *oepnState =  [[dic objectSafeDictionaryForKey:@"data"] objectSafeForKey:@"openStatus"];
                 [UserInfoSingle sharedManager].enjoyOpenStatus = [oepnState integerValue];
             }
+            
             if ([self.tableview.header isRefreshing]) {
                 [self.dataArray removeAllObjects];
             }
@@ -198,6 +199,7 @@
             UCFProjectDetailViewController *controller = [[UCFProjectDetailViewController alloc] initWithDataDic:dic isTransfer:NO withLabelList:prdLabelsListTemp];
             CGFloat platformSubsidyExpense = [_projectListModel.platformSubsidyExpense floatValue];
             controller.accoutType = self.accoutType;
+            controller.rootVc = self;
             [[NSUserDefaults standardUserDefaults] setValue:[NSString stringWithFormat:@"%.1f",platformSubsidyExpense] forKey:@"platformSubsidyExpense"];
             [self.navigationController pushViewController:controller animated:YES];
         }else {
@@ -209,7 +211,7 @@
         if([dic[@"status"] integerValue] == 1)
         {
             UCFPurchaseBidViewController *purchaseViewController = [[UCFPurchaseBidViewController alloc] initWithNibName:@"UCFPurchaseBidViewController" bundle:nil];
-            purchaseViewController.rootVc = self.parentViewController.parentViewController;
+            purchaseViewController.rootVc = self;
             purchaseViewController.dataDict = dic;
             purchaseViewController.bidType = 0;
             purchaseViewController.baseTitleType = @"detail_heTong";

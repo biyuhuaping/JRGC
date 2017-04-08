@@ -291,7 +291,7 @@
             //保存 刷脸登录开关
           
             if([dic[@"data"] isExistenceforKey:@"faceIsOpen"] && ![[dic[@"data"] objectSafeForKey:@"faceIsOpen"] isEqualToString:@""]){
-                 [[NSUserDefaults standardUserDefaults] setBool:![dic[@"data"][@"faceIsOpen"]  boolValue] forKey:FACESWITCHSTATUS];
+                 [[NSUserDefaults standardUserDefaults] setBool:[dic[@"data"][@"faceIsOpen"]  boolValue] forKey:FACESWITCHSTATUS];
             }else{
                  [[NSUserDefaults standardUserDefaults] setBool:NO forKey:FACESWITCHSTATUS];
             }
