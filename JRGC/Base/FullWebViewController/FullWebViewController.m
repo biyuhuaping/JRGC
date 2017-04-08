@@ -175,7 +175,7 @@
 {
     UMSocialMessageObject *messageObject = object;
     if (platformType == UMSocialPlatformType_Sina) {
-        UMShareImageObject *shareObject = [UMShareImageObject shareObjectWithTitle:_shareTitle descr:_shareContent thumImage:[UIImage imageNamed:@"AppIcon"]];
+        UMShareImageObject *shareObject = [UMShareImageObject shareObjectWithTitle:_shareTitle descr:_shareContent thumImage:[UIImage imageNamed:@"icon29"]];
         [shareObject setShareImage:_shareImageUrl];
         messageObject.shareObject = shareObject;
         messageObject.text = [NSString stringWithFormat:@"%@%@",_shareContent,_shareUrl];
@@ -189,13 +189,16 @@
         NSString *message = nil;
         if (!error) {
             message = [NSString stringWithFormat:@"分享成功"];
+            [MBProgressHUD displayHudError:@"分享成功"];
         }
         else{
+            [MBProgressHUD displayHudError:@"分享失败"];
             if (error) {
                 message = [NSString stringWithFormat:@"失败原因Code: %d\n",(int)error.code];
             }
             else{
                 message = [NSString stringWithFormat:@"分享失败"];
+                [MBProgressHUD displayHudError:@"分享失败"];
             }
         }
     }];

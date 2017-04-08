@@ -221,9 +221,9 @@
     } else if (tag.intValue == kSXTagRegisterSendCodeAndFindPwd) {
         
 
-        NSString *rsttext = dic[@"message"];
+//        NSString *rsttext = dic[@"message"];
         if ([[dic objectForKey:@"ret"] boolValue]) {
-            [MBProgressHUD displayHudError:rsttext];
+            [MBProgressHUD displayHudError:@"已发送,请等待接收，60秒后可再次获取"];
             [self performSelector:@selector(veriFieldFstRepder:) withObject:nil afterDelay:2.5];
             [self verificatioCodeSend];
         }
@@ -314,11 +314,11 @@
 {
     AppDelegate *del = (AppDelegate *) [[UIApplication sharedApplication] delegate];
     if(del.window.rootViewController.presentingViewController == nil){
-        UCFLockHandleViewController *lockVc = [[UCFLockHandleViewController alloc] init];
-        lockVc.nLockViewType = type;
-        lockVc.isFromRegister = YES;
-        lockVc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-        [del.window.rootViewController presentViewController:lockVc animated:NO completion:^{
+            UCFLockHandleViewController *lockVc = [[UCFLockHandleViewController alloc] init];
+            lockVc.nLockViewType = type;
+            lockVc.isFromRegister = YES;
+            lockVc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+            [del.window.rootViewController presentViewController:lockVc animated:NO completion:^{
         }];
     }
 }

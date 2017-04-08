@@ -179,6 +179,10 @@
 
 //点击获取短信验证码
 - (void)getCodeBtn:(id)sender {
+    if (_counter > 0 && _counter < 60) {
+        [AuxiliaryFunc showToastMessage:[NSString stringWithFormat:@"%02ld秒后可重新获取",(long)_counter] withView:self.view];
+        return;
+    }
     [self sendVerifyCode:@"SMS"];
 }
 
@@ -187,8 +191,7 @@
 - (void)soudLabelClick:(UITapGestureRecognizer *)tap
 {
     if (_counter > 0 && _counter < 60) {
-        
-        [AuxiliaryFunc showToastMessage:_getCodeBtn.titleLabel.text withView:self.view];
+        [AuxiliaryFunc showToastMessage:[NSString stringWithFormat:@"%02ld秒后可重新获取",(long)_counter] withView:self.view];
         return;
     } else {
         if (!_isSendVoiceMessage) {
@@ -649,7 +652,7 @@
             _isSendVoiceMessage = YES;
             DBLOG(@"%@",dic[@"data"]);
             [_getCodeBtn setTitle:@"60秒后重新获取" forState:UIControlStateNormal];
-            _getCodeBtn.userInteractionEnabled = NO;
+            _getCodeBtn.userInteractionEnabled = YES;
             [_getCodeBtn setTitleColor:UIColorWithRGB(0xcccccc) forState:UIControlStateNormal];
             _timer = [HWWeakTimer scheduledTimerWithTimeInterval:(1.0) target:self selector:@selector(updateLabel) userInfo:nil repeats:YES];
             _counter = 59;
@@ -660,6 +663,8 @@
             _customLabel1.userInteractionEnabled = YES;
             if ([self.currentMSGRoute isEqualToString:@"VMS"]) {
                 [AuxiliaryFunc showToastMessage:@"系统正在准备外呼，请保持手机信号畅通" withView:self.view];
+            } else {
+                
             }
         }else {
             _isSendVoiceMessage = NO;
