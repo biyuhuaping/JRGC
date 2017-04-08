@@ -173,11 +173,13 @@
     self.upgradeVC = [[UpgradeAccountVC alloc] initWithNibName:@"UpgradeAccountVC" bundle:nil];
     self.upgradeVC.db = self;
     self.upgradeVC.site = _site;
+    self.upgradeVC.accoutType = self.accoutType;
     [self addChildViewController:self.upgradeVC];
     
     self.passWordVC = [[TradePasswordVC alloc] initWithNibName:@"TradePasswordVC" bundle:nil];
     self.passWordVC.db = self;
     self.passWordVC.site = _site;
+    self.passWordVC.accoutType = self.accoutType;
     [self addChildViewController:self.passWordVC];
 }
 
