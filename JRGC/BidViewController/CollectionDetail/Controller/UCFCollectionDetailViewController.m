@@ -29,11 +29,12 @@
 #import "UCFCollctionKeyBidViewController.h"
 #import "UCFLoginViewController.h"
 #import "UCFBatchBidWebViewController.h"
+#import "RiskAssessmentViewController.h"
 #define shadeSpacingHeight 18 //遮罩label的上下间距
 #define shadeHeight 70 //遮罩高度
 static NSString * const DetailCellID = @"UCFCollectionDetailCell";
 static NSString * const ListCellID = @"UCFCollectionListCell";
-@interface UCFCollectionDetailViewController ()<UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource,MjAlertViewDelegate,UCFCollectionDetailCellDelegare>
+@interface UCFCollectionDetailViewController ()<UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource,MjAlertViewDelegate,UCFCollectionDetailCellDelegare,UIAlertViewDelegate>
 {
     UIImageView *_headerBgView; //上面的视图
     UIView *_tableHeaderView;//tableView上面的视图
@@ -746,7 +747,7 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
             self.intoViewControllerStr = @"ProjectDetailVC";
 //            controller.isHideNavigationBar = YES;
             [self.navigationController pushViewController:controller animated:YES];
-        }else {
+        }else  {
             [AuxiliaryFunc showAlertViewWithMessage:rsttext];
         }
     }
@@ -763,6 +764,10 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
             self.intoViewControllerStr = @"CollctionKeyBidVC";
             purchaseViewController.colPrdClaimId =_colPrdClaimId;
             [self.navigationController pushViewController:purchaseViewController animated:YES];
+        }else if ([dic[@"status"] integerValue] == 30) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:dic[@"statusdes"] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"测试",nil];
+            alert.tag = 9000;
+            [alert show];
         }else
         {
             [AuxiliaryFunc showAlertViewWithMessage:messageStr];
@@ -812,8 +817,15 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
         webView.rootVc = @"collectionDetailVC";
         [self.navigationController pushViewController:webView animated:YES];
     }
-    
-    
+}
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (alertView.tag == 9000) {
+        if(buttonIndex == 1){ //测试
+            RiskAssessmentViewController *vc = [[RiskAssessmentViewController alloc] initWithNibName:@"RiskAssessmentViewController" bundle:nil];
+            vc.accoutType = SelectAccoutTypeP2P;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+    }
 }
 - (void)dealloc
 {
