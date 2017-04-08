@@ -133,8 +133,9 @@
         NSString *rstcode = dic[@"ret"];
         NSString *rsttext = dic[@"message"];
         if ([rstcode intValue] == 1) {
-            [UserInfoSingle sharedManager].openStatus = [[[dic objectSafeDictionaryForKey:@"data"] objectSafeForKey:@"openStatus"] integerValue];
-
+            if ([[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
+                [UserInfoSingle sharedManager].openStatus = [[[dic objectSafeDictionaryForKey:@"data"] objectSafeForKey:@"openStatus"] integerValue];
+            }
             NSArray *list_result = [[[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"pageData"] objectSafeArrayForKey:@"result"];
             
             if ([self.tableview.header isRefreshing]) {
