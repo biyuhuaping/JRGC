@@ -623,6 +623,7 @@
             purchaseViewController.bidType = 0;
             self.sourceVc = @"";
             purchaseViewController.accoutType = self.accoutType;
+            purchaseViewController.rootVc = self.rootVc;
             [self.navigationController pushViewController:purchaseViewController animated:YES];
             
         }else if ([[dic objectForKey:@"status"] integerValue] == 21 || [dic[@"status"] integerValue] == 22){
