@@ -106,6 +106,10 @@
 
 - (void)codeBtnClicked:(id)sender
 {
+    if (_timeNum > 0 && _timeNum <60) {
+        [AuxiliaryFunc showToastMessage:[NSString stringWithFormat:@"%d秒后重新获取",_timeNum] withView:self.view];
+        return;
+    }
     _curVerifyType = @"SMS";
     NSDictionary *dataDic = [NSDictionary dictionaryWithObjectsAndKeys:_phoneNumber,@"destPhoneNo", _curVerifyType,@"isVms",@"2",@"type",@"1",@"userId", nil];
     [[NetworkModule sharedNetworkModule] newPostReq:dataDic tag:kSXTagRegisterSendCodeAndFindPwd owner:self signature:NO Type:SelectAccoutDefault];
@@ -223,7 +227,10 @@
 
 //        NSString *rsttext = dic[@"message"];
         if ([[dic objectForKey:@"ret"] boolValue]) {
-            [MBProgressHUD displayHudError:@"已发送,请等待接收，60秒后可再次获取"];
+            if ([_curVerifyType isEqualToString:@"VMS"])
+            {
+                [MBProgressHUD displayHudError:@"系统正在准备外呼，请保持手机信号畅通"];
+            }
             [self performSelector:@selector(veriFieldFstRepder:) withObject:nil afterDelay:2.5];
             [self verificatioCodeSend];
         }
