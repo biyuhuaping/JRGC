@@ -228,7 +228,7 @@
         btn.selected = !btn.selected;
         if (btn.selected) {
             NSString *strParameters = [NSString stringWithFormat:@"userId=%@&prdclaimid=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],_prdclaimid];
-            [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXtagHuoQuAllYOUHuiQuan owner:self Type:SelectAccoutDefault];
+            [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXtagHuoQuAllYOUHuiQuan owner:self Type:self.accoutType];
         } else {
             self.couponSum = 0.0f;
             self.couponPrdaimSum = 0.0f;
@@ -409,7 +409,7 @@
 - (void)reloadView
 {
     NSString *strParameters = [NSString stringWithFormat:@"userId=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagCheckMyMoney owner:self Type:SelectAccoutDefault];
+    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagCheckMyMoney owner:self Type:self.accoutType];
 }
 - (void)initWithTableView
 {
@@ -571,10 +571,10 @@
 {
     if (_listType == 0) {
         NSString *strParameters = [NSString stringWithFormat:@"prdclaimid=%@&userId=%@&page=%d&&rows=10&investAmt=%.2f",self.prdclaimid,[[NSUserDefaults standardUserDefaults] valueForKey:UUID],pageNum,self.touZiMoney];
-        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXtagSelectBeanRecord owner:self Type:SelectAccoutDefault];
+        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXtagSelectBeanRecord owner:self Type:self.accoutType];
     } else if (_listType == 1) {
         NSString *strParameters = [NSString stringWithFormat:@"prdclaimid=%@&userId=%@&page=%d&&rows=10",self.prdclaimid,[[NSUserDefaults standardUserDefaults] valueForKey:UUID],beansPageNum];
-        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXtagSelectBeansInterest owner:self Type:SelectAccoutDefault];
+        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXtagSelectBeansInterest owner:self Type:self.accoutType];
     }
 }
 - (void)endPost:(id)result tag:(NSNumber *)tag
