@@ -89,8 +89,14 @@
 
 //点击获取短信验证码
 - (void)getCodeBtn:(id)sender {
+    
     [self.view endEditing:YES];
-    _getCodeBtn.userInteractionEnabled = NO;
+    
+    if (_counter > 0 && _counter < 60) {
+        [AuxiliaryFunc showToastMessage:[NSString stringWithFormat:@"%ld秒后可重新获取",_counter] withView:self.view];
+        return;
+    }
+    _getCodeBtn.userInteractionEnabled = YES;
     [self sendVerifyCode:@"SMS"];
 }
 
@@ -395,7 +401,7 @@
         if ([ret boolValue]) {
             DBLOG(@"%@",dic[@"data"]);
             [_getCodeBtn setTitle:@"60秒后重新获取" forState:UIControlStateNormal];
-            _getCodeBtn.userInteractionEnabled = NO;
+            _getCodeBtn.userInteractionEnabled = YES;
             [_getCodeBtn setTitleColor:UIColorWithRGB(0xcccccc) forState:UIControlStateNormal];
             _timer = [HWWeakTimer scheduledTimerWithTimeInterval:(1.0) target:self selector:@selector(updateLabel) userInfo:nil repeats:YES];
             _counter = 59;
