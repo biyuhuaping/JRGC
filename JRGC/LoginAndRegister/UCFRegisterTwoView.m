@@ -55,7 +55,7 @@
 - (void)setVatifacationBtnVisible:(BOOL)isVisible
 {
     if (!isVisible) {
-        [_verificationCodeBtn setUserInteractionEnabled:NO];
+        [_verificationCodeBtn setUserInteractionEnabled:YES];
         _verificationCodeBtn.backgroundColor = UIColorWithRGB(0xd4d4d4);
     } else {
         [_verificationCodeBtn setUserInteractionEnabled:YES];
