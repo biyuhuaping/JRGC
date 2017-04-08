@@ -18,7 +18,7 @@
 #import "UCFBankDepositoryAccountViewController.h"
 #import "UCFOldUserGuideViewController.h"
 #import "HSHelper.h"
-
+#import "RiskAssessmentViewController.h"
 @interface UCFOrdinaryBidController () <UITableViewDelegate, UITableViewDataSource, UCFProjectListCellDelegate>
 {
     UCFProjectListModel *_projectListModel;
@@ -199,7 +199,11 @@
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:dic[@"statusdes"] delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
                 alert.tag =7000;
                 [alert show];
-            } else {
+            }else if ([dic[@"status"] integerValue] == 30) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:dic[@"statusdes"] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"测试",nil];
+                alert.tag = 9000;
+                [alert show];
+            }else {
                 [AuxiliaryFunc showAlertViewWithMessage:dic[@"statusdes"]];
             }
         }
@@ -315,6 +319,12 @@
         if (buttonIndex == 1) {
             HSHelper *helper = [HSHelper new];
             [helper pushOpenHSType:SelectAccoutTypeP2P Step:[UserInfoSingle sharedManager].openStatus nav:self.navigationController];
+        }
+    }else if (alertView.tag == 9000) {
+        if(buttonIndex == 1){ //测试
+            RiskAssessmentViewController *vc = [[RiskAssessmentViewController alloc] initWithNibName:@"RiskAssessmentViewController" bundle:nil];
+            vc.accoutType = SelectAccoutTypeP2P;
+            [self.navigationController pushViewController:vc animated:YES];
         }
     }
 }
