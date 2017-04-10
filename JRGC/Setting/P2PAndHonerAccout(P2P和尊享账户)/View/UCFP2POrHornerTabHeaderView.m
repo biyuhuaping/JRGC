@@ -15,6 +15,8 @@
     NSString *interestsStr;
     NSString *totalStr;
 }
+@property (weak, nonatomic) IBOutlet UIView *lineView1;
+//@property (weak, nonatomic) IBOutlet UIView *lineView2;
 - (IBAction)CilckShowOrHideAccoutMoney:(UIButton *)sender;
 - (IBAction)checkP2POrHonerAccout:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *accountVisibleBtn;
@@ -54,6 +56,8 @@
 }
 -(void)layoutSubviews{
     [super layoutSubviews];
+    self.lineView1.backgroundColor = UIColorWithRGB(0x434F74);
+//    self.lineView2.backgroundColor = UIColorWithRGB(0xd8d8d8);
     [self dataDict];
 }
 -(void)checkData{
