@@ -18,6 +18,7 @@
 #import "AppDelegate.h"
 #import "UIDic+Safe.h"
 #import "UIImageView+WebCache.h"
+#import "NSString+CJString.h"
 @interface UCFNormalNewMarkView ()
 {
     UIView *_headerView;
@@ -673,9 +674,10 @@
     {
         NSString *str = [[[[_dataDic objectForKey:@"prdClaimsReveal"] objectForKey:@"safetySecurityList"] objectAtIndex:([indexPath section] - 1)] objectForKey:@"content"];
         str = [UCFToolsMehod isNullOrNilWithString:str];
+        
         CGSize maximumLabelSize = CGSizeMake(ScreenWidth - 30, 9999);
         CGRect textRect = [str boundingRectWithSize:maximumLabelSize
-                                            options:NSStringDrawingUsesLineFragmentOrigin
+                                            options:NSStringDrawingTruncatesLastVisibleLine |NSStringDrawingUsesLineFragmentOrigin |NSStringDrawingUsesFontLeading
                                          attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]}
                                             context:nil];
         if ([indexPath section] == 0) {
@@ -699,10 +701,15 @@
             if ([str isEqualToString:@""]) {
                 return 0;
             }
+
+            NSMutableParagraphStyle *paraghStyle =[[NSMutableParagraphStyle alloc] init];
+            [paraghStyle setLineSpacing:3];
+            //在这传进去字体和行距
+            NSDictionary *attribute =@{NSFontAttributeName:[UIFont systemFontOfSize:12],NSParagraphStyleAttributeName:paraghStyle};
             CGSize maximumLabelSize = CGSizeMake(ScreenWidth - 30, 9999);
             CGRect textRect = [str boundingRectWithSize:maximumLabelSize
-                                                options:NSStringDrawingUsesLineFragmentOrigin
-                                             attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]}
+                                                options:NSStringDrawingTruncatesLastVisibleLine |NSStringDrawingUsesLineFragmentOrigin |NSStringDrawingUsesFontLeading
+                                             attributes:attribute
                                                 context:nil];
             
             return textRect.size.height + 28;
@@ -972,7 +979,16 @@
                 [cell.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:vfl2 options:0 metrics:metrics views:views]];
             }
             UILabel *lbl = (UILabel*)[cell.contentView viewWithTag:100];
+            NSMutableParagraphStyle *paragraph = [[NSMutableParagraphStyle alloc] init];
+            paragraph.alignment = NSTextAlignmentLeft;
+            paragraph.lineSpacing = 3;
+            NSDictionary *dic = @{
+                                  NSFontAttributeName:[UIFont systemFontOfSize:12],/*(字体)*/
+                                  NSParagraphStyleAttributeName:paragraph,/*(段落)*/
+                                  };
             lbl.text = [UCFToolsMehod isNullOrNilWithString:[[_dataDic objectForKey:@"prdClaims"] objectForKey:@"remark"]];
+            lbl.attributedText = [NSString getNSAttributedString:lbl.text labelDict:dic];
+            
             return cell;
         } else if ([indexPath section] == 3  && !_isHideBorrowerInformation) { //如果不隐藏就显示该cell
             NSString *cellindifier = @"thirdSectionCell";
