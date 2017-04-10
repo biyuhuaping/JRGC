@@ -314,6 +314,7 @@
     self.tabBar.frame = CGRectMake(0, ScreenHeight, CGRectGetWidth(self.tabBar.frame), CGRectGetHeight(self.tabBar.frame));
     UINavigationController *nav = [self.viewControllers objectAtIndex:3];
     UCFWebViewJavascriptBridgeMall *mallWeb = [nav.viewControllers objectAtIndex:0];
+    mallWeb.isTabbarfrom = YES;
     mallWeb.preSelectIndex = self.selectedIndex;
     [UIView transitionWithView:self.view
                       duration:1.0f
