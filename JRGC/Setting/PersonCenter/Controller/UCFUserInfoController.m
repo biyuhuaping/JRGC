@@ -171,6 +171,7 @@
                     [view sendSubviewToBack:signView];
                     signView.signModel = result;
                     DBLOG(@"---->%@", view.subviews);
+                    [weakSelf.presenter refreshData];
                 } delegate:self cancelButtonTitle:@"关闭"];
                 alert.showViewbackImage = [UIImage imageNamed:@"checkin_bg"];
                 [alert show];
