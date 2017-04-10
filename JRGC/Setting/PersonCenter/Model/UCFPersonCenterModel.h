@@ -16,7 +16,7 @@
 @property (copy, nonatomic) NSString *enjoyRepayPerDate;
 @property (copy, nonatomic) NSString *gcm;
 @property (copy, nonatomic) NSString *headurl;
-@property (assign, nonatomic) BOOL *isCompanyAgent;
+@property (assign, nonatomic) BOOL isCompanyAgent;
 @property (copy, nonatomic) NSString *loginName;
 @property (strong, nonatomic) NSNumber *memberLever;
 @property (copy, nonatomic) NSString *mobile;

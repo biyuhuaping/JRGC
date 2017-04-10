@@ -283,7 +283,7 @@
     
     if (tag.intValue == kSXTagContributionValueInvot) {
         if (rstcode) {
-            
+            dic = [dic objectSafeDictionaryForKey:@"data"];
             self.lable_invotValue.text = [NSString stringWithFormat:@"投资贡献值%@",[dic objectSafeForKey:@"investmentContribution"]];//***投资贡献值
             self.lable_investValue.text = [NSString stringWithFormat:@"邀友贡献值%@",[dic objectSafeForKey:@"inviteFriendContribution"]];//***邀友贡献值
             self.lable_totalContributionValue.text = [dic objectSafeForKey:@"totalContribution"];//***总贡献值

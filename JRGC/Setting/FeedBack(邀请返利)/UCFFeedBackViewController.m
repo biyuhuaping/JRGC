@@ -130,8 +130,10 @@
         NSString *message = nil;
         if (!error) {
             message = [NSString stringWithFormat:@"分享成功"];
+            [MBProgressHUD displayHudError:message];
         }
         else{
+            [MBProgressHUD displayHudError:@"分享失败"];
             if (error) {
                 message = [NSString stringWithFormat:@"失败原因Code: %d\n",(int)error.code];
             }

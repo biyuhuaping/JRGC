@@ -1105,6 +1105,7 @@
     [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
         NSString *message = nil;
         if (!error) {
+            [MBProgressHUD displayHudError:@"分享成功"];
             message = [NSString stringWithFormat:@"分享成功"];
             if (platformType == UMSocialPlatformType_Sina) {
                 if ([messageObject.text newRangeOfString:@"appmercyparameter"]) {
@@ -1118,6 +1119,7 @@
             }
         }
         else{
+            [MBProgressHUD displayHudError:@"分享失败"];
             if (error) {
                 message = [NSString stringWithFormat:@"失败原因Code: %d\n",(int)error.code];
             }

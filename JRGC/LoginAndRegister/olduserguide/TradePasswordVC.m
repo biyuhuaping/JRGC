@@ -26,7 +26,7 @@
 @property (strong, nonatomic) UITextField *textField2;
 @property (strong, nonatomic) UITextField *textField3;
 @property (strong, nonatomic) UITextField *textField4;
-
+@property (assign, nonatomic) BOOL         isVoiceMsg;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *tableViewHeight;
 
 @end
@@ -97,6 +97,7 @@
         return;
     }
     _getCodeBtn.userInteractionEnabled = YES;
+    _isVoiceMsg = NO;
     [self sendVerifyCode:@"SMS"];
 }
 
@@ -107,6 +108,7 @@
         return;
     } else {
         self.label.userInteractionEnabled = NO;
+        _isVoiceMsg = YES;
         [self sendVerifyCode:@"VMS"];
     }
 }
@@ -405,12 +407,14 @@
             [_getCodeBtn setTitleColor:UIColorWithRGB(0xcccccc) forState:UIControlStateNormal];
             _timer = [HWWeakTimer scheduledTimerWithTimeInterval:(1.0) target:self selector:@selector(updateLabel) userInfo:nil repeats:YES];
             _counter = 59;
-             [AuxiliaryFunc showToastMessage:@"已发送,请等待接收，60秒后可再次获取" withView:self.view];
+//             [AuxiliaryFunc showToastMessage:@"已发送,请等待接收，60秒后可再次获取" withView:self.view];
             _label.text = [NSString stringWithFormat:@"已向手机%@发送短信验证码，若收不到，请点击这里获取语音验证码。",[UserInfoSingle sharedManager].mobile];
             [_label setFontColor:UIColorWithRGB(0x4aa1f9) string:@"点击这里"];
             _label.hidden = NO;
             self.label.userInteractionEnabled = YES;
-            [AuxiliaryFunc showToastMessage:@"已发送，请等待接收，60秒后可再次获取" withView:self.view];
+            if (_isVoiceMsg) {
+                [AuxiliaryFunc showToastMessage:@"系统正在准备外呼，请保持手机信号畅通" withView:self.view];
+            }
 
         }else {
              _getCodeBtn.userInteractionEnabled = YES;

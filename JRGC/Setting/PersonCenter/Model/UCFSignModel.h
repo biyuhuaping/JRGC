@@ -16,7 +16,7 @@
 @property (nonatomic, copy) NSString *rewardAmt;
 @property (nonatomic, copy) NSString *signDays;
 @property (nonatomic, copy) NSString *totalCanUseScore;
-@property (nonatomic, copy) NSString *win;
+@property (nonatomic, assign) BOOL win;
 @property (nonatomic, copy) NSString *winAmount;
 
 -(id)initWithDictionary:(NSDictionary *)dicJson;
