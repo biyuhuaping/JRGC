@@ -135,7 +135,8 @@
 
 #define GETAppQueryByManyList         @"/newfactoryCodeController/appQueryByManyList"//多期回款明细
 #define CHECKREDPOINTHIDE             @"newaccount/updatePointUpdTime"  //检测工豆 返现券 红包 回款明细
-#define CHECKPERSONCENTERREDALERT     @"newaccount/isHasPoint"
+//#define CHECKPERSONCENTERREDALERT     @"newaccount/isHasPoint"
+#define CHECKPERSONCENTERREDALERT     @"api/messageCenter/v2/unReadMsgCount.json"
 //#define GETIGNORGELOGINTOKEN          @"newWapActivity/wapActGetToken"
 //#define MSGCENTER                     @"tMsgList/queryAllTMsgList"    //消息中心列表
 #define MSGCENTER                     @"api/messageCenter/v2/queryAllTMsgList.json"    //消息中心列表

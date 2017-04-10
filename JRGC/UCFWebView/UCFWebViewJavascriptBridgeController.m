@@ -730,9 +730,14 @@
 }
 //跳转到App 原生界面 规则从哪来回哪去
 -(void)jsGotoAppBackNative{
-    AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
-    app.tabBarController.tabBar.frame = CGRectMake(0, ScreenHeight - CGRectGetHeight(app.tabBarController.tabBar.frame), CGRectGetWidth(app.tabBarController.tabBar.frame), CGRectGetHeight(app.tabBarController.tabBar.frame));
-    [app.tabBarController  setSelectedIndex:_preSelectIndex];
+    if (_isTabbarfrom) {
+        AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+        app.tabBarController.tabBar.frame = CGRectMake(0, ScreenHeight - CGRectGetHeight(app.tabBarController.tabBar.frame), CGRectGetWidth(app.tabBarController.tabBar.frame), CGRectGetHeight(app.tabBarController.tabBar.frame));
+        [app.tabBarController  setSelectedIndex:_preSelectIndex];
+    } else {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+
 //    [UIView transitionWithView:self.view
 //                      duration:1.0f
 //                       options:UIViewAnimationOptionTransitionFlipFromRight
@@ -1028,13 +1033,15 @@
     UCFWebViewJavascriptBridgeMall *mallWeb = [[UCFWebViewJavascriptBridgeMall alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
     mallWeb.url = MALLURL;
     mallWeb.rootVc = self;
+    mallWeb.hidesBottomBarWhenPushed = YES;
     mallWeb.isHideNavigationBar = YES;
     [self useragent:mallWeb.webView];
+    [self.navigationController pushViewController:mallWeb animated:YES];
 //    mallWeb.navTitle = @"豆哥商城";
-    mallWeb.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-    UINavigationController *mallWebNaviController = [[UINavigationController alloc] initWithRootViewController:mallWeb];
-    self.hidesBottomBarWhenPushed = YES;
-    [self presentViewController:mallWebNaviController animated:YES completion:nil];
+//    mallWeb.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+//    UINavigationController *mallWebNaviController = [[UINavigationController alloc] initWithRootViewController:mallWeb];
+//    self.hidesBottomBarWhenPushed = YES;
+//    [self presentViewController:mallWebNaviController animated:YES completion:nil];
 }
 - (void)useragent:(UIWebView *)webView
 {

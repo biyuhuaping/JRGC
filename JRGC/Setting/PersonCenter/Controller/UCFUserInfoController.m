@@ -16,6 +16,7 @@
 
 @interface UCFUserInfoController () <UserInfoViewPresenterCallBack>
 @property (weak, nonatomic) IBOutlet UIView *userIconBackView;
+@property (weak, nonatomic) IBOutlet UIButton *signButton;
 @property (copy, nonatomic) ViewControllerGenerator userInfoVCGenerator;
 @property (copy, nonatomic) ViewControllerGenerator messageVCGenerator;
 @property (copy, nonatomic) ViewControllerGenerator beansVCGenerator;
@@ -149,6 +150,7 @@
         self.couponLabel.text = [NSString stringWithFormat:@"%@", personCenter.couponNumber];
         self.workPointLabel.text = [NSString stringWithFormat:@"%@", personCenter.score];
         self.token = personCenter.userCenterTicket;
+        self.signButton.hidden = personCenter.isCompanyAgent;
     }
 }
 

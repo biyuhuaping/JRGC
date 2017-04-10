@@ -274,12 +274,12 @@
         if (ret) {
             NSDictionary *result = dic[@"data"][@"data"];
             UCFSettingGroup *group = [self.itemsData firstObject];
-            NSNumber *memberLever = [dic objectSafeForKey:@"memberLever"];
+//            NSNumber *memberLever = [dic objectSafeForKey:@"memberLever"];
             NSString *authId = [result objectForKey:@"state"];
             NSString *bindPhone = [result objectForKey:@"bindMobile"];
             NSString *oldPhone = [[NSUserDefaults standardUserDefaults] valueForKey:PHONENUM];
             NSString *gradeResult = dic[@"data"][@"gradeResult"];
-            NSString *batchInvestStatus = [NSString stringWithFormat:@"%@",result[@"batchInvestStatus"]];
+//            NSString *batchInvestStatus = [NSString stringWithFormat:@"%@",result[@"batchInvestStatus"]];
             self.isCompanyAgent = dic[@"data"][@"isCompanyAgent"];
             
             //新请求的手机号和本地存储手机号不一样则更新本地
@@ -287,13 +287,13 @@
                 [[NSUserDefaults standardUserDefaults] setValue:bindPhone forKey:PHONENUM];
                 [[NSUserDefaults standardUserDefaults] synchronize];
             }
-            NSString *bindCard = [result objectForKey:@"card"];
+//            NSString *bindCard = [result objectForKey:@"card"];
             NSString *realName = [result objectForKey:@"realName"];
             self.userGradeSwitch = [dic[@"data"][@"isOpen"]  boolValue];
             //保存 刷脸登录开关
           
-            if([dic[@"data"] isExistenceforKey:@"faceIsOpen"] && ![[dic[@"data"] objectSafeForKey:@"faceIsOpen"] isEqualToString:@""]){
-                 [[NSUserDefaults standardUserDefaults] setBool:[dic[@"data"][@"faceIsOpen"]  boolValue] forKey:FACESWITCHSTATUS];
+            if( [[dic[@"data"] objectSafeForKey:@"faceIsOpen"] isEqualToString:@"0"]){
+                 [[NSUserDefaults standardUserDefaults] setBool:YES forKey:FACESWITCHSTATUS];
             }else{
                  [[NSUserDefaults standardUserDefaults] setBool:NO forKey:FACESWITCHSTATUS];
             }
@@ -481,24 +481,9 @@
           bottomLine.backgroundColor = UIColorWithRGB(0xd8d8d8);
         [cell.contentView addSubview:bottomLine];
     }
-//    if ( indexPath.section == 0  && indexPath.row == 0) {
-//        cell.itemSubTitleLabel.hidden = YES;
-//        [cell addSubview:_userLevelImage];
-//        cell.hidden = !self.userGradeSwitch;//此判断会员等级一栏 是否隐藏
-//    }
     cell.item = group.items[indexPath.row];
     cell.delegate = self;
-    
-//    if (indexPath.section == 1 ) {
-//        UCFSettingGroup *group = self.itemsData[indexPath.section];
-//        UCFSettingArrowItem *item = group.items[indexPath.row];
-//        NSRange range = [item.title rangeOfString:@"(开启后才可进行批量投资)"];
-//        if (range.location != NSNotFound) {
-//                NSMutableAttributedString *attrituteString = [[NSMutableAttributedString alloc] initWithString:item.title];
-//                [attrituteString setAttributes:@{NSForegroundColorAttributeName:UIColorWithRGB(0x999999), NSFontAttributeName: [UIFont systemFontOfSize:11]} range:range];
-//                cell.itemNameLabel.attributedText = attrituteString;
-//            }
-//        }
+
     
     return cell;
 }
