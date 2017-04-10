@@ -35,6 +35,7 @@
 #import "UCFWebViewJavascriptBridgeMall.h"
 #import "RiskAssessmentViewController.h"
 #import "UCFBatchInvestmentViewController.h"
+#import "HSHelper.h"
 @interface UCFSecurityCenterViewController () <UITableViewDataSource, UITableViewDelegate, SecurityCellDelegate, UCFLockHandleDelegate>
 
 // 选项表数据
@@ -209,7 +210,8 @@
 
     }else if(alertView.tag == 10005){
         if (buttonIndex == 1) {
-            [self gotoBankDepositoryAccountVC];
+            HSHelper *helper = [HSHelper new];
+            [helper pushOpenHSType:SelectAccoutTypeP2P Step:[UserInfoSingle sharedManager].openStatus nav:self.navigationController];
         }
     }else if(alertView.tag == 10003){
         if (buttonIndex == 1) {
@@ -771,7 +773,7 @@
                 vc.rootVc = self;
                 if ([item.subtitle isEqualToString:@"未认证"]) {
                     if (openStatus < 3) {
-                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请先开通徽商存管账户" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:P2PTIP1 delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
                         alert.tag = 10005;
                         [alert show];
                         return;
@@ -869,7 +871,7 @@
 - (BOOL) checkHSIsLegitimate {
     NSInteger openStatus = [UserInfoSingle sharedManager].openStatus;
     if(openStatus < 3){
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请先开通徽商存管账户" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:P2PTIP1 delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
         alert.tag = 10005;
         [alert show];
         return NO;
@@ -883,15 +885,6 @@
         return YES;
     }
 
-}
-#pragma mark 徽商资金存管专题页面
--(void)gotoBankDepositoryAccountVC{
-     NSInteger openStatus = [UserInfoSingle sharedManager].openStatus;
-    if (openStatus < 3) {
-        UCFBankDepositoryAccountViewController * bankDepositoryAccountVC =[[UCFBankDepositoryAccountViewController alloc ]initWithNibName:@"UCFBankDepositoryAccountViewController" bundle:nil];
-        bankDepositoryAccountVC.openStatus = openStatus;
-        [self.navigationController pushViewController:bankDepositoryAccountVC animated:YES];
-    }
 }
 - (void)dealloc
 {

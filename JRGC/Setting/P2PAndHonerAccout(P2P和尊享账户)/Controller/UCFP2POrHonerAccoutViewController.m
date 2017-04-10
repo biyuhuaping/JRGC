@@ -185,7 +185,7 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    return 0.5f;
+    return 0.01f;
 
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -208,17 +208,21 @@
     }else{
         UIView *headerView = [[UIView alloc]initWithFrame: CGRectMake(0, 0, ScreenWidth, 10)];
         headerView.backgroundColor = [UIColor clearColor];
-//        [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:headerView isTop:YES];
-        [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:headerView isTop:NO];
+        UIView *lineView1 = [[UIView alloc]initWithFrame:CGRectMake(0,0.5, ScreenWidth, 0.5)];
+        lineView1.backgroundColor = UIColorWithRGB(0xd8d8d8);
+        UIView *lineView2 = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(headerView.frame)-0.5, ScreenWidth, 0.5)];
+        lineView2.backgroundColor = UIColorWithRGB(0xd8d8d8);
+        [headerView addSubview:lineView1];
+        [headerView addSubview:lineView2];
         return headerView;
     }
 }
--(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
-{
-    UIView *footView = [[UIView alloc]initWithFrame: CGRectMake(0, 0, ScreenWidth, 0.5)];
-    footView.backgroundColor = UIColorWithRGB(0xd8d8d8);
-    return footView;
-}
+//-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+//{
+//    UIView *footView = [[UIView alloc]initWithFrame: CGRectMake(0, 0, ScreenWidth, 0.5)];
+//    footView.backgroundColor = UIColorWithRGB(0xd8d8d8);
+//    return footView;
+//}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     if (self.cellItemsData.count > 0) {
