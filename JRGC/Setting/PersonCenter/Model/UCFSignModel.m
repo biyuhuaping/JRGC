@@ -30,7 +30,11 @@
     for (NSString *key in [self propertyKeys]) {
         id propertyValue = [dataSource valueForKey:key];
         if (![propertyValue isKindOfClass:[NSNull class]] && propertyValue != nil) {
-            [self setValue:propertyValue forKey:key];
+            if ([key isEqualToString:@"win"]) {
+                [self setWin:[propertyValue boolValue]];
+            }
+            else
+                [self setValue:propertyValue forKey:key];
         } else {
             [self setValue:@"" forKey:key];
             DLog(@"%@",[NSString stringWithFormat:@"字段值%@读取异常(字段不存在或者值为空)",key]);

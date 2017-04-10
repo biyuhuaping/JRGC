@@ -31,7 +31,7 @@
         if (![propertyValue isKindOfClass:[NSNull class]] && propertyValue != nil) {
 //            [self setValue:[NSString stringWithFormat:@"%@",propertyValue] forKey:key];
             if ([key isEqualToString:@"isCompanyAgent"]) {
-                
+                [self setIsCompanyAgent:[propertyValue boolValue]];
             }
             else
                 [self setValue:propertyValue forKey:key];
