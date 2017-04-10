@@ -294,19 +294,18 @@
 }
 //按钮动作-跳转工豆商城WHL
 - (IBAction)buttonGoToMarket:(id)sender {
-    if (_superView) {
-        [_superView changeBackActionMark];
-        [self.navigationController popToRootViewControllerAnimated:YES];
-    } else {
+//    if (_superView) {
+//        [_superView changeBackActionMark];
+//        [self.navigationController popToRootViewControllerAnimated:YES];
+//    } else {
         [self goBackbeansMall];
-    }
+//    }
 }
 - (void)goBackbeansMall
 {
 //    [self.navigationController popToRootViewControllerAnimated:NO];
 //    AppDelegate *del = (AppDelegate *) [[UIApplication sharedApplication] delegate];
-//    [del.tabBarController setSelectedIndex:2];
-
+//    [del.tabBarController setSelectedIndex:3];
     
     UCFWebViewJavascriptBridgeMall *mallWeb = [[UCFWebViewJavascriptBridgeMall alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
     mallWeb.url = MALLURL;
@@ -314,12 +313,13 @@
     mallWeb.isHideNavigationBar = YES;
 //    [self useragent:mallWeb.webView];
     mallWeb.navTitle = @"豆哥商城";
-    mallWeb.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-    UINavigationController *mallWebNaviController = [[UINavigationController alloc] initWithRootViewController:mallWeb];
+//    mallWeb.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+//    UINavigationController *mallWebNaviController = [[UINavigationController alloc] initWithRootViewController:mallWeb];
     //        SecondViewController *vc1 = [[SecondViewController alloc]init];
     //        UITableViewController *settingVC = [[UITableViewController alloc]init];
-    self.hidesBottomBarWhenPushed = YES;
-    [self presentViewController:mallWebNaviController animated:YES completion:nil];
+//    self.hidesBottomBarWhenPushed = YES;
+//    [self presentViewController:mallWebNaviController animated:YES completion:nil];
+    [self.navigationController pushViewController:mallWeb animated:YES];
 
     
 }
