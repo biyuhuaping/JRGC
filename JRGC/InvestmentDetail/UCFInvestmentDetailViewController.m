@@ -240,10 +240,10 @@
 {
     if ([_detailType isEqualToString:@"1"]) {
         NSString *strParameters = [NSString stringWithFormat:@"id=%@&userId=%@",uuid,[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
-        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self Type:SelectAccoutDefault];
+        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self Type:self.accoutType];
     } else {
         NSString *strParameters = [NSString stringWithFormat:@"tranid=%@&userId=%@",uuid,[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
-        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdTransferDetail owner:self Type:SelectAccoutDefault];
+        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdTransferDetail owner:self Type:self.accoutType];
     }
 }
 

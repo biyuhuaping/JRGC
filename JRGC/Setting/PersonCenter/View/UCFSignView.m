@@ -100,7 +100,7 @@
     }
     [self.lab2 setFontColor:[UIColor redColor] string:self.signModel.returnAmount];
 
-    if ([self.signModel.win isEqualToString:@"true"]) {//有红包时
+    if (self.signModel.win) {//有红包时
         self.lab3.frame = CGRectMake(0, self.height/2+73, self.width, 30);
         self.lab.frame = CGRectMake(0, self.height/2+32, self.width, 20);
         self.lab.text = [NSString stringWithFormat:@"人品爆表！抽到%@元红包",self.signModel.winAmount];

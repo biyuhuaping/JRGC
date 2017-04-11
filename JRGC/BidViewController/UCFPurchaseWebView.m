@@ -46,6 +46,7 @@
        controller.billId = [NSString stringWithFormat:@"%ld",[_dic[@"value"]integerValue]];
        controller.detailType = @"1";
        controller.flagGoRoot = NO;
+        controller.accoutType = [[NSString stringWithFormat:@"%@",[_dic objectSafeForKey:@"fromSite"]] integerValue];
        [self.navigationController pushViewController:controller animated:YES];
     }
 

@@ -268,6 +268,7 @@
         }else{ //查看电子账户
             UCFHuiShangBankViewController *subVC = [[UCFHuiShangBankViewController alloc] initWithNibName:@"UCFHuiShangBankViewController" bundle:nil];
             subVC.rootVc = _uperViewController;
+            subVC.accoutType = self.accoutType;
             [self.navigationController pushViewController:subVC animated:YES];
         }
     } else if (alertView.tag == 1003) {//验证码次数用完弹框
@@ -748,7 +749,8 @@
             fee = [NSString stringWithFormat:@"%@",dic[@"data"][@"fee"]];
             NSString *bankPhone =  [dic[@"data"][@"bankInfo"] objectSafeForKey:@"bankPhone"];
             isSpecial = [[dic[@"data"][@"bankInfo"] objectSafeForKey:@"isSpecial"] boolValue];
-            if (isSpecial) {
+          BOOL isCompanyAgent  = [[dic[@"data"][@"bankInfo"] objectSafeForKey:@"isCompanyAgent"] boolValue];
+            if (isSpecial || isCompanyAgent) {
                 //***以下方式为ios8 以上的方法可以用
 //                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"请直接转账至徽商电子账户"  preferredStyle:UIAlertControllerStyleAlert];
 //                UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {

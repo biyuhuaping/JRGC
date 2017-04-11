@@ -90,7 +90,7 @@
     [group0.items addObject:presenter0_1];
     
     UCFPCGroupPresenter *group1 = [[UCFPCGroupPresenter alloc] init];
-    UCFPCListModel *listModel1_0 = [UCFPCListModel itemWithIcon:@"" title:@"常用工具" destVcClass:nil];
+    UCFPCListModel *listModel1_0 = [UCFPCListModel itemWithIcon:@"" title:@"常用功能" destVcClass:nil];
     UCFPCListCellPresenter *presenter1_0 = [UCFPCListCellPresenter presenterWithItem:listModel1_0];
     UCFPCListModel *listModel1_1 = [UCFPCListModel itemWithIcon:@"uesr_icon_class" title:@"会员等级" destVcClass:nil];
     UCFPCListCellPresenter *presenter1_1 = [UCFPCListCellPresenter presenterWithItem:listModel1_1];

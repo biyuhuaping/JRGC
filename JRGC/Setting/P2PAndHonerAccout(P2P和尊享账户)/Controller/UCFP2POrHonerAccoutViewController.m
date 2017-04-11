@@ -42,7 +42,8 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *loadingImageView;
 @property (strong, nonatomic) NSString *isCompanyAgent;//是否是机构用户
-
+@property (weak, nonatomic) IBOutlet UIButton *cashButton;
+@property (weak, nonatomic) IBOutlet UIButton *rechargeButton;
 
 
 
@@ -68,6 +69,7 @@
     [self addLeftButton];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getP2POrHonerAccoutHttpRequest) name:RELOADP2PORHONERACCOTDATA object:nil];
+
 }
 -(void)removeLoadingView
 {
@@ -102,8 +104,10 @@
     UIImage *tabImag = [UIImage imageNamed:@"tabbar_shadow.png"];
     self.shadowImageView.image = [tabImag resizableImageWithCapInsets:UIEdgeInsetsMake(2, 1, 2, 1) resizingMode:UIImageResizingModeStretch];
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 10, 0);
-    self.tableView.separatorColor = UIColorWithRGB(0xe3e5ea);
-    self.tableView.separatorInset =  UIEdgeInsetsMake(0, 15, 0, 0);
+    self.tableView.separatorColor = [UIColor clearColor];
+//    self.tableView.separatorInset =  UIEdgeInsetsMake(0, 15, 0, 0);
+    self.cashButton.backgroundColor = UIColorWithRGB(0x7D9EC5);
+    self.rechargeButton.backgroundColor = UIColorWithRGB(0xFA4F4C );
 }
 -(void)addRightButton{
     UIButton *rightbutton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -185,7 +189,7 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    return 0.5f;
+    return 0.01f;
 
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -203,22 +207,29 @@
         }else{
             _headerView.totalIncomeTitleLab.text = @"P2P总资产";
         }
+        UIView *lineView1 = [[UIView alloc]initWithFrame:CGRectMake(0,154.5, ScreenWidth, 0.5)];
+        lineView1.backgroundColor = UIColorWithRGB(0xd8d8d8);
+        [_headerView addSubview:lineView1];
         _headerView.dataDict = _dataDict;
         return _headerView;
     }else{
         UIView *headerView = [[UIView alloc]initWithFrame: CGRectMake(0, 0, ScreenWidth, 10)];
         headerView.backgroundColor = [UIColor clearColor];
-//        [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:headerView isTop:YES];
-        [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:headerView isTop:NO];
+//        UIView *lineView1 = [[UIView alloc]initWithFrame:CGRectMake(0,0.5, ScreenWidth, 0.5)];
+//        lineView1.backgroundColor = UIColorWithRGB(0xd8d8d8);
+        UIView *lineView2 = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(headerView.frame)-0.5, ScreenWidth, 0.5)];
+        lineView2.backgroundColor = UIColorWithRGB(0xd8d8d8);
+//        [headerView addSubview:lineView1];
+        [headerView addSubview:lineView2];
         return headerView;
     }
 }
--(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
-{
-    UIView *footView = [[UIView alloc]initWithFrame: CGRectMake(0, 0, ScreenWidth, 0.5)];
-    footView.backgroundColor = UIColorWithRGB(0xd8d8d8);
-    return footView;
-}
+//-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+//{
+//    UIView *footView = [[UIView alloc]initWithFrame: CGRectMake(0, 0, ScreenWidth, 0.5)];
+//    footView.backgroundColor = UIColorWithRGB(0xd8d8d8);
+//    return footView;
+//}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     if (self.cellItemsData.count > 0) {
@@ -245,7 +256,13 @@
         cell.detailTextLabel.textColor =  UIColorWithRGB(0x999999);
         [cell.detailTextLabel setFont:[UIFont systemFontOfSize:13]];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.selectionStyle = UITableViewCellSeparatorStyleNone;
+//        cell.
+        UIView *cellLineView = [[UIView alloc]initWithFrame:CGRectMake(15, 43.5, ScreenWidth-15, 0.5)];
+        cellLineView.tag = 101;
+        [cell.contentView addSubview:cellLineView];
     }
+    UIView *cellLineView = (UIView *)[cell.contentView viewWithTag:101];
     UCFSettingGroup * group = self.cellItemsData[indexPath.section];
     UCFSettingItem *item = group.items[indexPath.row];
     cell.textLabel.text = item.title;
@@ -254,13 +271,18 @@
         [cell.textLabel setFont:[UIFont systemFontOfSize:13] string:@"(开启后才可进行批量投资)"];
         [cell.textLabel setFontColor:UIColorWithRGB(0x999999) string:@"(开启后才可进行批量投资)"];
     }
-    
-    DLog(@"item.subtitle----?>>>>%@", item.subtitle);
+    if(indexPath.section == [self.cellItemsData indexOfObject:group] && indexPath.row == group.items.count-1){
+       cellLineView.backgroundColor  = UIColorWithRGB(0xd8d8d8);
+       cellLineView.frame =  CGRectMake(0, 43.5, ScreenWidth, 0.5);
+    }else{
+        cellLineView.backgroundColor  = UIColorWithRGB(0xe3e5ea);
+        cellLineView.frame =  CGRectMake(15, 43.5, ScreenWidth-15, 0.5);
+    }
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 44;
+    return 44.0f;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

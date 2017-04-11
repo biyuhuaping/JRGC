@@ -343,7 +343,7 @@
     [self.showView addSubview:headerView];
 
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.frame = CGRectMake((ScreenWidth - 194)/2.0, CGRectGetMaxY(headerView.frame)-15-37, 194, 37);
+    button.frame = CGRectMake((ScreenWidth - 194)/2.0, CGRectGetMaxY(headerView.frame)-20-37, 194, 37);
     button.layer.cornerRadius = 17.5;
     button.userInteractionEnabled = YES;
     button.titleLabel.font = [UIFont systemFontOfSize:15];
