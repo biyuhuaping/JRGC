@@ -67,7 +67,7 @@
     [self initWithTableView];
     [self addHeadView];
     [self addFootView];
-    self.view.backgroundColor = UIColorWithRGB(0xeeeeee);
+    self.view.backgroundColor = UIColorWithRGB(0xebebee);
 
 }
 - (void)viewDidAppear:(BOOL)animated
