@@ -359,8 +359,9 @@
     }else{
         _twoTableview.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     }
+    _twoTableview.contentInset = UIEdgeInsetsMake(0, 0, 10, 0);
     [self addSubview:_twoTableview];
-    _twoTableview.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
+//    _twoTableview.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     
     UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 0.5)];
     lineView.backgroundColor = UIColorWithRGB(0xd8d8d8);

@@ -399,11 +399,11 @@
     }else{
         view_y = 0 + [Common calculateNewSizeBaseMachine:HeadBkHeight] + bottomViewYPos;
     }
-     bottomBkView = [[UIView alloc] initWithFrame:CGRectMake(0, view_y, ScreenWidth, 44*row)];
+    bottomBkView = [[UIView alloc] initWithFrame:CGRectMake(0, view_y, ScreenWidth, 44*row)];
     bottomBkView.backgroundColor = [UIColor whiteColor];
     [self addSubview:bottomBkView];
     
-    if (_isP2P) {
+    if (!_isP2P) {
         [UCFToolsMehod viewAddLine:bottomBkView Up:YES];
     }
     [UCFToolsMehod viewAddLine:bottomBkView Up:NO];
@@ -502,7 +502,7 @@
     bottomBkView.backgroundColor = [UIColor whiteColor];
     [self addSubview:bottomBkView];
     
-    if (_isP2P) {
+    if (!_isP2P) {
        [UCFToolsMehod viewAddLine:bottomBkView Up:YES];
     }
     [UCFToolsMehod viewAddLine:bottomBkView Up:NO];
