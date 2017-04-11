@@ -576,13 +576,13 @@
             NSDictionary *userInfoDic = dic[@"data"][@"userInfo"];
             _openStatus = dic[@"data"][@"openStatus"];
             _bankId = [NSString stringWithFormat:@"%@",userInfoDic[@"bankId"]];//[userInfoDic objectSafeForKey:@"bankId"];//
-            NSString *realName = userInfoDic[@"realName"];
-            NSString *idCardNo = userInfoDic[@"idCardNo"];
-            NSString *bankCard = userInfoDic[@"bankCard"];
-            NSString *bankName = userInfoDic[@"bankName"];
-            NSString *bankLogo = userInfoDic[@"bankLogo"];
-            self.phoneNum = userInfoDic[@"phoneNum"];
-            self.notSupportDes = userInfoDic[@"notSupportDes"];
+            NSString *realName = [userInfoDic objectSafeForKey:@"realName"];
+            NSString *idCardNo = [userInfoDic objectSafeForKey:@"idCardNo"];
+            NSString *bankCard = [userInfoDic objectSafeForKey:@"bankCard"];
+            NSString *bankName = [userInfoDic objectSafeForKey:@"bankName"];
+            NSString *bankLogo = [userInfoDic objectSafeForKey:@"bankLogo"];
+            self.phoneNum = [userInfoDic objectSafeForKey:@"phoneNum"];
+            self.notSupportDes = [userInfoDic objectSafeForKey:@"notSupportDes"];
             
             if (realName.length > 0) {
                 _textField1.placeholder = realName;
