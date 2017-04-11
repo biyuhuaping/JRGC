@@ -1386,9 +1386,9 @@
     //https://m.9888.cn/static/wap/protocol-risk-prompt/index.html
     NZLabel *riskProtocolLabel = [[NZLabel alloc] init];
     riskProtocolLabel.font = [UIFont systemFontOfSize:12.0f];
-    CGSize size1 = [Common getStrHeightWithStr:@"本人阅读并悉知《网络借贷出借风险提示》中风险" AndStrFont:12 AndWidth:ScreenWidth-25];
+    CGSize size1 = [Common getStrHeightWithStr:@"本人阅读并悉知《网络借贷出借风险提示》中风险" AndStrFont:12 AndWidth:ScreenWidth- 23 -15];
     riskProtocolLabel.numberOfLines = 0;
-    riskProtocolLabel.frame = CGRectMake(23, 15, ScreenWidth-25, size1.height);
+    riskProtocolLabel.frame = CGRectMake(23, 15, ScreenWidth- 23 -15, size1.height);
     riskProtocolLabel.text = @"本人阅读并悉知《网络借贷出借风险提示》中风险";
     riskProtocolLabel.userInteractionEnabled = YES;
     riskProtocolLabel.textColor = UIColorWithRGB(0x999999);
@@ -1420,12 +1420,12 @@
     }
     NZLabel *label1 = [[NZLabel alloc] init];
     label1.font = [UIFont systemFontOfSize:12.0f];
-    CGSize size = [Common getStrHeightWithStr:totalStr AndStrFont:12 AndWidth:ScreenWidth-25];
+    CGSize size = [Common getStrHeightWithStr:totalStr AndStrFont:12 AndWidth:ScreenWidth- 23 -15];
     label1.numberOfLines = 0;
     if (_isP2P) {
         label1.frame = CGRectMake(23, CGRectGetMaxY(riskProtocolLabel.frame)+10, ScreenWidth-25, size.height);
     }else{
-        label1.frame = CGRectMake(23, 15, ScreenWidth-25, size.height);
+        label1.frame = CGRectMake(23, 15, ScreenWidth- 23 -15, size.height);
     }
     NSMutableParagraphStyle *paragraph = [[NSMutableParagraphStyle alloc] init];
     paragraph.alignment = NSTextAlignmentLeft;
@@ -1464,9 +1464,9 @@
         
         NZLabel *label2 = [[NZLabel alloc] init];
         label2.font = [UIFont systemFontOfSize:12.0f];
-        CGSize size1 = [Common getStrHeightWithStr:totalStr1 AndStrFont:12 AndWidth:ScreenWidth-25];
+        CGSize size1 = [Common getStrHeightWithStr:totalStr1 AndStrFont:12 AndWidth:ScreenWidth- 23 -15];
         label2.numberOfLines = 0;
-        label2.frame = CGRectMake(23, height1 + 10, ScreenWidth-25, size1.height);
+        label2.frame = CGRectMake(23, height1 + 10, ScreenWidth- 23 -15, size1.height);
         label2.text = totalStr1;
         label2.userInteractionEnabled = YES;
         label2.textColor = UIColorWithRGB(0x999999);
@@ -1488,7 +1488,7 @@
         }
         [footView addSubview:label2];
         
-        UILabel *jieshouLabel0 = [[UILabel alloc] initWithFrame:CGRectMake(23, height1+10, ScreenWidth-25, 12)];
+        UILabel *jieshouLabel0 = [[UILabel alloc] initWithFrame:CGRectMake(23, height1+10, ScreenWidth- 23 -15, 12)];
         jieshouLabel0.backgroundColor = [UIColor clearColor];
         jieshouLabel0.text = [_dataDict objectForKey:@"openTypeMess"];
         jieshouLabel0.font = [UIFont systemFontOfSize:12];
@@ -1504,7 +1504,7 @@
 
     }
     
-    UILabel *jieshouLabel = [[UILabel alloc] initWithFrame:CGRectMake(23, height1+10, ScreenWidth-25, 12)];
+    UILabel *jieshouLabel = [[UILabel alloc] initWithFrame:CGRectMake(23, height1+10, ScreenWidth- 23 - 15, 12)];
     jieshouLabel.backgroundColor = [UIColor clearColor];
     jieshouLabel.text = @"本人接受筹标期内资金不计利息,投资意向不可撤销";
     jieshouLabel.font = [UIFont systemFontOfSize:12];

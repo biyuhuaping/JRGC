@@ -513,7 +513,7 @@
     NZLabel *label1 = [[NZLabel alloc] init];
     label1.font = [UIFont systemFontOfSize:12.0f];
     CGSize size = [Common getStrWitdth:totalStr TextFont:[UIFont systemFontOfSize:12]];
-    label1.frame = CGRectMake(23, 15, ScreenWidth-25, size.height);
+    label1.frame = CGRectMake(23, 15, ScreenWidth- 23 - 15, size.height);
     label1.text = totalStr;
     label1.userInteractionEnabled = YES;
     label1.textColor = UIColorWithRGB(0x999999);
