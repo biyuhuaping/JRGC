@@ -37,6 +37,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *overduingWorkPoint;   //即将过期工分
 @property (weak, nonatomic) IBOutlet UIView *upView;
 @property (weak, nonatomic) IBOutlet UIView *downView;
+@property (weak, nonatomic) IBOutlet UIView *segLine;
 
 @end
 
@@ -62,6 +63,9 @@
     [super viewDidLoad];
     [self addLeftButton];
     [self addRightButtonWithName:@"工分说明"];
+    
+    self.segLine.backgroundColor = UIColorWithRGB(0x434F73);
+    
     baseTitleLabel.text = @"我的工分";
     Nstr_beansMallUrl =@"";
     Nstr_iintegralDesUrl =@"";

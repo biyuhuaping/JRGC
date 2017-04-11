@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12106.1" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12074.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -16,6 +16,7 @@
                 <outlet property="lable_pointShow" destination="6D9-EJ-S5f" id="gNQ-t0-KeC"/>
                 <outlet property="lable_showMyPoint" destination="HYb-kR-Jid" id="B7t-Hh-sFi"/>
                 <outlet property="overduingWorkPoint" destination="cJy-cp-xEb" id="e7Q-q3-cLI"/>
+                <outlet property="segLine" destination="6bl-pe-Zhg" id="WFq-at-uz4"/>
                 <outlet property="tableView" destination="YpF-lf-z7G" id="Qvj-KB-PFY"/>
                 <outlet property="upView" destination="dhQ-EH-Yxh" id="fJ0-c6-oNb"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>

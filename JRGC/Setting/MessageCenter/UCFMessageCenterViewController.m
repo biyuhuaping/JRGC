@@ -72,7 +72,7 @@
     __weak typeof(self) weakSelf = self;
     //下拉刷新
     
-    _messageTableView = [[UITableView alloc]initWithFrame:CGRectMake(0,0,ScreenWidth,ScreenHeight - NavigationBarHeight) style:UITableViewStylePlain];
+    _messageTableView = [[UITableView alloc]initWithFrame:CGRectMake(0,1,ScreenWidth,ScreenHeight - NavigationBarHeight-1) style:UITableViewStylePlain];
     _messageTableView.delegate = self;
     _messageTableView.dataSource = self;
     _messageTableView.backgroundColor = UIColorWithRGB(0xEBEBEE);
