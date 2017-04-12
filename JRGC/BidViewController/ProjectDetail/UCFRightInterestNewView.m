@@ -251,8 +251,9 @@
     }else{
         _twoTableview.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     }
+    _twoTableview.contentInset = UIEdgeInsetsMake(0, 0, 10, 0);
     [self addSubview:_twoTableview];
-    _twoTableview.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
+//    _twoTableview.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     
     UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 0.5)];
     lineView.backgroundColor = UIColorWithRGB(0xd8d8d8);
@@ -624,7 +625,6 @@
 {
     if(_selectIndex == 0)// 基础详情
     {
-     
         return _isHideBorrowerInformation ? 4:6;
     } else if (_selectIndex == 1) { //安全保障
         if ([[_dataDic objectForKey:@"prdClaimsReveal"] isEqual:[NSNull null]]) {

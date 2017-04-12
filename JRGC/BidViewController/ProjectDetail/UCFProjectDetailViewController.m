@@ -713,7 +713,7 @@
     } else if (alertView.tag == 9000) {
         if(buttonIndex == 1){
             RiskAssessmentViewController *vc = [[RiskAssessmentViewController alloc] initWithNibName:@"RiskAssessmentViewController" bundle:nil];
-            vc.accoutType = SelectAccoutTypeHoner;
+            vc.accoutType = self.accoutType;
             vc.sourceVC = @"ProjectDetailVC";
             [self.navigationController pushViewController:vc animated:YES];
         }

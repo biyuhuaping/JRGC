@@ -1253,7 +1253,7 @@
     label1.font = [UIFont systemFontOfSize:12.0f];
     CGSize size = [Common getStrHeightWithStr:totalStr AndStrFont:12 AndWidth:ScreenWidth-25];
     label1.numberOfLines = 0;
-    label1.frame = CGRectMake(23, 15, ScreenWidth-25, size.height);
+    label1.frame = CGRectMake(23, 15, ScreenWidth- 23 -15, size.height);
     label1.text = totalStr;
     label1.userInteractionEnabled = YES;
     label1.textColor = UIColorWithRGB(0x999999);
@@ -1274,20 +1274,21 @@
     [footView addSubview:imageView1];
     
     CGFloat height1 = CGRectGetMaxY(label1.frame);
-    NSArray *downContractList = [_dataDict objectForKey:@"downContractList"];
+    NSArray *downContractList = @[@"网络借贷出借风险提示"];
+    NZLabel *label2 = [[NZLabel alloc] init];
     if (downContractList.count > 0) {
         
-        NSString *totalStr1 = [NSString stringWithFormat:@"同意并认可"];
+        NSString *totalStr1 = [NSString stringWithFormat:@"本人已阅读并知悉"];
         for (int i = 0; i < downContractList.count; i++) {
-            NSString *tmpStr = [[downContractList objectAtIndex:i] valueForKey:@"contractName"];
+            NSString *tmpStr = [downContractList objectAtIndex:i] ;
             totalStr1 = [totalStr1 stringByAppendingString:[NSString stringWithFormat:@"《%@》",tmpStr]];
         }
         
-        NZLabel *label2 = [[NZLabel alloc] init];
+        
         label2.font = [UIFont systemFontOfSize:12.0f];
         CGSize size1 = [Common getStrHeightWithStr:totalStr1 AndStrFont:12 AndWidth:ScreenWidth-25];
         label2.numberOfLines = 0;
-        label2.frame = CGRectMake(23, height1 + 10, ScreenWidth-25, size1.height);
+        label2.frame = CGRectMake(23, height1 + 10,ScreenWidth- 23 -15, size1.height);
         label2.text = totalStr1;
         label2.userInteractionEnabled = YES;
         label2.textColor = UIColorWithRGB(0x999999);
@@ -1301,32 +1302,57 @@
         
         //    __weak typeof(self) weakSelf = self;
         for (int i = 0; i < downContractList.count; i++) {
-            NSString *tmpStr = [NSString stringWithFormat:@"《%@》",[[downContractList objectAtIndex:i] valueForKey:@"contractName"]];
+            NSString *tmpStr = [NSString stringWithFormat:@"《%@》",[downContractList objectAtIndex:i] ];
             [label2 addLinkString:tmpStr block:^(ZBLinkLabelModel *linkModel) {
-                [weakSelf showPDF:linkModel];
+                [weakSelf showHeTong:linkModel];
             }];
             [label2 setFontColor:UIColorWithRGB(0x4aa1f9) string:tmpStr];
         }
         [footView addSubview:label2];
         
-        UILabel *jieshouLabel0 = [[UILabel alloc] initWithFrame:CGRectMake(23, height1+10, ScreenWidth-25, 12)];
-        jieshouLabel0.backgroundColor = [UIColor clearColor];
-        jieshouLabel0.text = [_dataDict objectForKey:@"openTypeMess"];
-        jieshouLabel0.font = [UIFont systemFontOfSize:12];
-        jieshouLabel0.textColor = UIColorWithRGB(0x999999);
-        [footView addSubview:jieshouLabel0];
-        
-        UIImageView * imageView4 = [[UIImageView alloc] init];
-        imageView4.frame = CGRectMake(CGRectGetMinX(jieshouLabel0.frame) - 7, CGRectGetMinY(jieshouLabel0.frame) + 4, 5, 5);
-        imageView4.image = [UIImage imageNamed:@"point.png"];
-        [footView addSubview:imageView4];
-        
-        height1 = CGRectGetMaxY(jieshouLabel0.frame);
-        
     }
     
+    CGFloat height2 = CGRectGetMaxY(label2.frame);
+    NSArray *contractList = @[@"出借人承诺书",@"反洗钱义务的承诺书"];
     
+    NZLabel *label3 = [[NZLabel alloc] init];
+    if (contractList.count > 0) {
+        
+        NSString *totalStr1 = [NSString stringWithFormat:@"本人已阅读并同意签署"];
+        for (int i = 0; i < contractList.count; i++) {
+            NSString *tmpStr = [contractList objectAtIndex:i];
+            totalStr1 = [totalStr1 stringByAppendingString:[NSString stringWithFormat:@"《%@》",tmpStr]];
+            if (i==0) {
+                totalStr1 = [totalStr1 stringByAppendingString:@"和"];
+            }
+        }
+        
     
+        label3.font = [UIFont systemFontOfSize:12.0f];
+        CGSize size1 = [Common getStrHeightWithStr:totalStr1 AndStrFont:12 AndWidth:ScreenWidth-25];
+        label3.numberOfLines = 0;
+        label3.frame = CGRectMake(23, height2 + 10, ScreenWidth-25, size1.height);
+        label3.text = totalStr1;
+        label3.userInteractionEnabled = YES;
+        label3.textColor = UIColorWithRGB(0x999999);
+        
+        height1 = CGRectGetMaxY(label3.frame);
+        
+        UIImageView * imageView3 = [[UIImageView alloc] init];
+        imageView3.frame = CGRectMake(CGRectGetMinX(label3.frame) - 7, CGRectGetMinY(label3.frame) + 4, 5, 5);
+        imageView3.image = [UIImage imageNamed:@"point.png"];
+        [footView addSubview:imageView3];
+        
+        //    __weak typeof(self) weakSelf = self;
+        for (int i = 0; i < contractList.count; i++) {
+            NSString *tmpStr = [NSString stringWithFormat:@"《%@》",[contractList objectAtIndex:i]];
+            [label3 addLinkString:tmpStr block:^(ZBLinkLabelModel *linkModel) {
+                [weakSelf showHeTong:linkModel];
+            }];
+            [label3 setFontColor:UIColorWithRGB(0x4aa1f9) string:tmpStr];
+        }
+        [footView addSubview:label3];
+    }
     
     UILabel *jieshouLabel = [[UILabel alloc] initWithFrame:CGRectMake(23, height1+10, ScreenWidth-25, 12)];
     jieshouLabel.backgroundColor = [UIColor clearColor];
@@ -1374,10 +1400,22 @@
 //    NSString *projectId = [[self.dataDict objectForKey:@"data"] objectForKey:@"id"];
 //    NSString *strParameters = [NSString stringWithFormat:@"userId=%@&prdClaimId=%@&contractType=%@&prdType=0",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],projectId,contractTypeStr];
 //    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetContractMsg owner:self];
-    FullWebViewController *controller = [[FullWebViewController alloc] initWithWebUrl:BATHCHINVESTPROTOCOL title:@"批量投资协议"];
+    
+    NSString *contractStr = linkModel.linkString;
+    if ([contractStr isEqualToString:@"《网络借贷出借风险提示》"]) {
+        [self showContractWebViewUrl:PROTOCOLRISKPROMPT withTitle:@"网络借贷出借风险提示"];
+    }else if([contractStr isEqualToString:@"《出借人承诺书》"]){
+        [self showContractWebViewUrl:PROTOCOLENDERPROMISE withTitle:@"出借人承诺书"];
+    }else if([contractStr isEqualToString:@"《履行反洗钱义务的承诺书》"]){
+        [self showContractWebViewUrl:PROTOCOLENTUSTTRANSFER withTitle:@"履行反洗钱义务的承诺书"];
+    }else{
+        [self showContractWebViewUrl:BATHCHINVESTPROTOCOL withTitle:@"批量投资协议"];
+    }
+}
+-(void)showContractWebViewUrl:(NSString *)urlStr withTitle:(NSString *)title{
+    FullWebViewController *controller = [[FullWebViewController alloc] initWithWebUrl:urlStr    title:title];
     controller.baseTitleType = @"detail_heTong";
     [self.navigationController pushViewController:controller animated:YES];
-    
 }
 
 - (void)showPDF:(ZBLinkLabelModel *)linkModel

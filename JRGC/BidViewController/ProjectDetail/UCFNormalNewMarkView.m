@@ -245,7 +245,8 @@
         _twoTableview.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     }
     [self addSubview:_twoTableview];
-    _twoTableview.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
+    _twoTableview.contentInset = UIEdgeInsetsMake(0, 0, 10, 0);
+//    _twoTableview.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     
     UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 0.5)];
     lineView.backgroundColor = UIColorWithRGB(0xd8d8d8);
@@ -778,9 +779,9 @@
     if(_selectIndex == 0) //基础详情
     {
         if(_isHideBorrowerInformation){
-            return 5;
+            return 4;
         }
-        return 6;
+        return 5;
     } else if (_selectIndex == 1) { //安全保障
         if ([[_dataDic objectForKey:@"prdClaimsReveal"] isEqual:[NSNull null]]) {
             return 1;
@@ -1002,13 +1003,13 @@
                 
                 NSInteger yPos,imgYPos,placeHolderYPos;
                 if ([indexPath row] == 0) {
-                    yPos = 6 + 8;
-                    imgYPos = 5 + 8;
-                    placeHolderYPos = 9 + 8;
+                    yPos = 8 + 8;
+                    imgYPos = 7 + 8;
+                    placeHolderYPos = 11 + 8;
                 } else {
-                    yPos = 6;
-                    imgYPos = 5;
-                    placeHolderYPos = 9;
+                    yPos = 8;
+                    imgYPos = 7;
+                    placeHolderYPos = 11;
                 }
                 UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(XPOS, yPos, 160, 12)];
                 nameLabel.font = [UIFont systemFontOfSize:12];
