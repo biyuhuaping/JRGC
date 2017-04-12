@@ -65,8 +65,8 @@
 -(void)createUI
 {
     //初始化数组
-    _messageDataArray = [[NSMutableArray alloc]initWithCapacity:0];
-    _deleteDataArray = [[NSMutableArray alloc]initWithCapacity:0];
+    _messageDataArray = [[NSMutableArray alloc] initWithCapacity:0];
+    _deleteDataArray = [[NSMutableArray alloc] initWithCapacity:0];
     
      //=========  下拉刷新、上拉加载更多  =========
     __weak typeof(self) weakSelf = self;
