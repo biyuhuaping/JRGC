@@ -549,8 +549,9 @@
 
 //四个功能图标
 - (IBAction)functionBtn:(UIControl *)sender {
+    UILabel *label = [sender viewWithTag:200];
     NSInteger index = sender.tag - 100;
-    if (index == 2) {
+    if ([label.text isEqualToString:@"邀请返利"]) {
         NSDictionary *dataDict = _actionArr[index];
         [self gotoInviteFriendsWebVC:dataDict];
     }
