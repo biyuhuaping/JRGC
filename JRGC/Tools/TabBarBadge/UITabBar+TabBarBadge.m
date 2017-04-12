@@ -7,7 +7,7 @@
 //
 
 #import "UITabBar+TabBarBadge.h"
-#define TabbarItemNums 4.0    //tabbar的数量 如果是5个设置为5.0
+#define TabbarItemNums 5.0    //tabbar的数量 如果是5个设置为5.0
 
 @implementation UITabBar (TabBarBadge)
 //显示小红点
