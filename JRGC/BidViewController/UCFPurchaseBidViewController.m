@@ -1420,20 +1420,14 @@
     }
     NZLabel *label1 = [[NZLabel alloc] init];
     label1.font = [UIFont systemFontOfSize:12.0f];
-    CGSize size = [Common getStrHeightWithStr:totalStr AndStrFont:12 AndWidth:ScreenWidth- 23 -15];
+    CGSize size = [Common getStrHeightWithStr:totalStr AndStrFont:12 AndWidth:ScreenWidth- 23 -15 AndlineSpacing:1.0f];
     label1.numberOfLines = 0;
     if (_isP2P) {
-        label1.frame = CGRectMake(23, CGRectGetMaxY(riskProtocolLabel.frame)+10, ScreenWidth-25, size.height);
+        label1.frame = CGRectMake(23, CGRectGetMaxY(riskProtocolLabel.frame)+10, ScreenWidth-23 - 15, size.height);
     }else{
-        label1.frame = CGRectMake(23, 15, ScreenWidth- 23 -15, size.height);
+        label1.frame = CGRectMake(23, 15, ScreenWidth - 23 -15, size.height);
     }
-    NSMutableParagraphStyle *paragraph = [[NSMutableParagraphStyle alloc] init];
-    paragraph.alignment = NSTextAlignmentLeft;
-    paragraph.lineSpacing = 1;
-    NSDictionary *dic = @{
-                          NSFontAttributeName:[UIFont systemFontOfSize:11],/*(字体)*/
-                          NSParagraphStyleAttributeName:paragraph,/*(段落)*/
-                          };
+    NSDictionary *dic = [Common getParagraphStyleDictWithStrFont:12 WithlineSpacing:1.0f];
     label1.attributedText = [NSString getNSAttributedString:totalStr labelDict:dic];
     label1.userInteractionEnabled = YES;
     label1.textColor = UIColorWithRGB(0x999999);

@@ -71,7 +71,6 @@
 //         _topView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 10.0f)];
 //    }
     [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:_topView isTop:YES];
-//    [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:_topView isTop:NO];
      //标签数组
     _topView.backgroundColor = UIColorWithRGB(0xf2f2f2);
     [self addSubview:_topView];
@@ -85,13 +84,22 @@
         [self addSubview:_minuteCountDownView];
         [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:_minuteCountDownView isTop:YES];
         [Common addLineViewColor:UIColorWithRGB(0xe3e5ea) With:_minuteCountDownView isTop:NO];
+    }else{
+       [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:_topView isTop:NO];
     }
     CGFloat height = isKeyBid ? CGRectGetMaxY(_topView.frame) :CGRectGetMaxY(_minuteCountDownView.frame);
+    
+
+
     _keYongBaseView = [[UIView alloc] init];
     _keYongBaseView.frame = CGRectMake(0,height , ScreenWidth, 37);
-//    _keYongBaseView.backgroundColor = UIColorWithRGB(0xf9f9f9);
+    if (isKeyBid) {
+      _keYongBaseView.backgroundColor = UIColorWithRGB(0xf9f9f9);
+      [Common addLineViewColor:UIColorWithRGB(0xeff0f3) With:_keYongBaseView isTop:NO];
+    }
+
     [self addSubview:_keYongBaseView];
-//    [Common addLineViewColor:UIColorWithRGB(0xeff0f3) With:_keYongBaseView isTop:NO];
+
 
     _keYongTipLabel = [[UILabel alloc] initWithFrame:CGRectMake(15.0f, 14, [Common getStrWitdth:@"可用金额" TextFont:[UIFont systemFontOfSize:14]].width, 16)];
     _keYongTipLabel.font = [UIFont systemFontOfSize:14.0f];
@@ -191,7 +199,7 @@
     [self addSubview:_lineView];
     
 
-    _gongDouAccout = [[UILabel alloc] initWithFrame:CGRectMake(15.0f, CGRectGetMaxY(_lineView.frame) + 14,[Common getStrWitdth:@"我的工豆" TextFont:[UIFont systemFontOfSize:14]].width, 16)];
+    _gongDouAccout = [[UILabel alloc] initWithFrame:CGRectMake(15.0f, CGRectGetMaxY(_lineView.frame) + 13,[Common getStrWitdth:@"我的工豆" TextFont:[UIFont systemFontOfSize:14]].width, 16)];
     _gongDouAccout.font = [UIFont systemFontOfSize:14.0f];
     _gongDouAccout.text = @"我的工豆";
     _gongDouAccout.backgroundColor = [UIColor clearColor];
@@ -207,7 +215,7 @@
     [self  addSubview:_gongDouCountLabel];
     
     _gongDouSwitch = [[UISwitch alloc] init];
-    _gongDouSwitch.frame = CGRectMake(ScreenWidth - 66, CGRectGetMaxY(_lineView.frame) + 7, 51, 100);
+    _gongDouSwitch.frame = CGRectMake(ScreenWidth - 66, CGRectGetMaxY(_lineView.frame) + 6, 51, 100);
     _gongDouSwitch.onTintColor = UIColorWithRGB(0xfd4d4c);
     [_gongDouSwitch addTarget:self action:@selector(changeSwitchStatue:) forControlEvents:UIControlEventValueChanged];
     [self addSubview:_gongDouSwitch];
@@ -249,7 +257,7 @@
             self.KeYongMoneyLabel.text = [NSString stringWithFormat:@"¥%@",totalMoney];
             CGSize size = [Common getStrWitdth:self.KeYongMoneyLabel.text TextFont:_KeYongMoneyLabel.font];
             self.KeYongMoneyLabel.frame = CGRectMake(CGRectGetMinX(self.KeYongMoneyLabel.frame), CGRectGetMinY(self.KeYongMoneyLabel.frame), size.width, CGRectGetHeight(self.KeYongMoneyLabel.frame));
-            _totalKeYongTipLabel.frame = CGRectMake(CGRectGetMaxX(_KeYongMoneyLabel.frame) + 5, CGRectGetMaxY(_KeYongMoneyLabel.frame) - 10, 11 * 12, 12);
+            _totalKeYongTipLabel.frame = CGRectMake(CGRectGetMaxX(_KeYongMoneyLabel.frame) + 5, CGRectGetMinY(_KeYongMoneyLabel.frame) + 5, 11 * 12, 12);
             if (_isCompanyAgent) {
                 _gongDouAccout.hidden = YES;
                 _gongDouCountLabel.hidden = YES;
@@ -312,9 +320,9 @@
         _myMoneyLabel.frame = CGRectMake(CGRectGetMaxX(_myMoneyAccountLabel.frame) + 5,CGRectGetMaxY(_midSepView.frame) + 14, ScreenWidth - CGRectGetMaxX(_myMoneyAccountLabel.frame) - 5 - 44 - 20, 16);
             
         _lineView.frame = CGRectMake(15,CGRectGetMaxY(_midSepView.frame) + 44, ScreenWidth - 15, 0.5);
-        _gongDouAccout.frame =  CGRectMake(15.0f, CGRectGetMaxY(_lineView.frame) + 14,[Common getStrWitdth:@"我的工豆" TextFont:[UIFont systemFontOfSize:14]].width, 16);
+        _gongDouAccout.frame =  CGRectMake(15.0f, CGRectGetMaxY(_lineView.frame) + 13,[Common getStrWitdth:@"我的工豆" TextFont:[UIFont systemFontOfSize:14]].width, 16);
         _gongDouCountLabel.frame =  CGRectMake(CGRectGetMaxX(_gongDouAccout.frame) + 5,CGRectGetMaxY(_lineView.frame) + 14,ScreenWidth - CGRectGetMaxX(_gongDouAccout.frame) - 5 - 80 , 16);
-        _gongDouSwitch.frame = CGRectMake(ScreenWidth - 66, CGRectGetMaxY(_lineView.frame) + 7, 51, 100);
+        _gongDouSwitch.frame = CGRectMake(ScreenWidth - 66, CGRectGetMaxY(_lineView.frame) + 6, 51, 100);
           
 //        _lineView1.frame =  CGRectMake(0,CGRectGetMaxY(_lineView.frame) + 42.5, ScreenWidth, 0.5);
         self.KeYongMoneyLabel.frame = CGRectMake(CGRectGetMinX(self.KeYongMoneyLabel.frame), CGRectGetMinY(self.KeYongMoneyLabel.frame), size.width, CGRectGetHeight(self.KeYongMoneyLabel.frame));
@@ -343,7 +351,7 @@
             self.KeYongMoneyLabel.text = [NSString stringWithFormat:@"¥%@",totalMoney];
             CGSize size = [Common getStrWitdth:self.KeYongMoneyLabel.text TextFont:_KeYongMoneyLabel.font];
             self.KeYongMoneyLabel.frame = CGRectMake(CGRectGetMinX(self.KeYongMoneyLabel.frame), CGRectGetMinY(self.KeYongMoneyLabel.frame), size.width, CGRectGetHeight(self.KeYongMoneyLabel.frame));
-            _totalKeYongTipLabel.frame = CGRectMake(CGRectGetMaxX(_KeYongMoneyLabel.frame) + 5, CGRectGetMaxY(_KeYongMoneyLabel.frame) - 12, 11 * 12, 12);
+            _totalKeYongTipLabel.frame = CGRectMake(CGRectGetMaxX(_KeYongMoneyLabel.frame) + 5, CGRectGetMinY(_KeYongMoneyLabel.frame) + 5, 11 * 12, 12);
     }
 
 

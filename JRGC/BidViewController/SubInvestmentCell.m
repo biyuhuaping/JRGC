@@ -20,11 +20,12 @@
     // Drawing code
 }
 */
-//- (void)layoutSubviews
-//{
-//    [super layoutSubviews];
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
 //    self.progressLab.textColor = UIColorWithRGB(0x333333);
 //    self.progressLab.frame = CGRectMake(CGRectGetMinX(self.progressLab.frame), CGRectGetMinY(self.repayPeriodLab.frame), CGRectGetWidth(self.progressLab.frame), CGRectGetHeight(self.repayPeriodLab.frame));
 //    self.progressLab.font = [UIFont systemFontOfSize:13.0f];
-//}
+    self.remainingLab.font = [UIFont boldSystemFontOfSize:12.0f];
+}
 @end

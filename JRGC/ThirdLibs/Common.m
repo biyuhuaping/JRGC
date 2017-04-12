@@ -388,6 +388,25 @@
     CGSize nameSize = [str boundingRectWithSize:CGSizeMake(width, 9999) options:NSStringDrawingUsesLineFragmentOrigin attributes:attrs context:nil].size;
     return nameSize;
 }
+//获取字符串 添加段落 字号的高度
++ (CGSize)getStrHeightWithStr:(NSString *)str AndStrFont:(CGFloat)font AndWidth:(CGFloat)width AndlineSpacing:(CGFloat)lineSpacing
+{
+    NSDictionary *attrsDic = [Common getParagraphStyleDictWithStrFont:font WithlineSpacing:lineSpacing];
+    CGSize nameSize = [str boundingRectWithSize:CGSizeMake(width, 9999) options:NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin |NSStringDrawingUsesFontLeading  attributes:attrsDic context:nil].size;
+    return nameSize;
+}
+//获取 添加段落 字号的 字典
++(NSDictionary *)getParagraphStyleDictWithStrFont:(CGFloat)font WithlineSpacing:(CGFloat )lineSpacing{
+    NSMutableParagraphStyle *paragraph = [[NSMutableParagraphStyle alloc] init];
+    paragraph.alignment = NSTextAlignmentLeft;
+    paragraph.lineSpacing = lineSpacing;
+    NSDictionary *dic = @{
+                          NSFontAttributeName:[UIFont systemFontOfSize:font],/*(字体)*/
+                          NSParagraphStyleAttributeName:paragraph,/*(段落)*/
+                          };
+    return dic;
+}
+
 + (CGSize)getStrWitdth:(NSString *)str TextFont:(UIFont *)font {
     return [str sizeWithAttributes:@{NSFontAttributeName :font}];
 }
