@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *periodLabel;
 @property (weak, nonatomic) IBOutlet UILabel *leftAmtLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *progressValueTrailSpace;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *moreBgViewWidth;
 
 @end
 
@@ -106,6 +107,24 @@
         return [NSString stringWithFormat:@"%@",str2];
     }
     return [NSString stringWithFormat:@"剩%@",str1];
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    if ([self.moreValueLabel.text isEqualToString:@"99+"]) {
+        self.moreBgViewWidth.constant = 69;
+    }
+    else {
+        NSInteger number = [self.moreValueLabel.text integerValue];
+        if (number>10) {
+            self.moreBgViewWidth.constant = 64;
+        }
+        else {
+            self.moreBgViewWidth.constant = 55;
+        }
+    }
+    
 }
 
 @end
