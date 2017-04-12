@@ -201,6 +201,11 @@ typedef NS_ENUM(NSInteger, PicType) {
 
 //获取字体宽度
 + (CGSize)getStrWitdth:(NSString *)str TextFont:(UIFont *)font;
+
+//获取字符串 添加段落 字号的高度
++ (CGSize)getStrHeightWithStr:(NSString *)str AndStrFont:(CGFloat)font AndWidth:(CGFloat)width AndlineSpacing:(CGFloat)lineSpacing;
+//获取 添加段落 字号的 字典
++(NSDictionary *)getParagraphStyleDictWithStrFont:(CGFloat)font WithlineSpacing:(CGFloat )lineSpacing;
 //验签
 + (NSString *) getSinatureWithPar:(NSString *) p;
 + (NSString *) getParStr:(NSString *) str;

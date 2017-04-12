@@ -18,7 +18,7 @@
 #import "AppDelegate.h"
 #import "UIDic+Safe.h"
 #import "UIImageView+WebCache.h"
-
+#import "NSString+CJString.h"
 @interface UCFRightInterestNewView ()
 {
     UIView *_headerView;
@@ -519,19 +519,15 @@
     if(_selectIndex == 1)
     {
         NSString *str = [[[[_dataDic objectForKey:@"prdClaimsReveal"] objectForKey:@"safetySecurityList"] objectAtIndex:([indexPath section] - 1)] objectForKey:@"content"];
-        CGSize maximumLabelSize = CGSizeMake(ScreenWidth - 30, 9999);
         str = [UCFToolsMehod isNullOrNilWithString:str];
-        CGRect textRect = [str boundingRectWithSize:maximumLabelSize
-                                            options:NSStringDrawingUsesLineFragmentOrigin
-                                         attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]}
-                                            context:nil];
+        CGSize size =  [Common getStrHeightWithStr:str AndStrFont:12 AndWidth:ScreenWidth - 30 AndlineSpacing:3];
         if ([indexPath section] == 0) {
             return 1;
         } else {
             if ([str isEqualToString:@""]) {
                 return 0;
             }
-            return textRect.size.height + 20;
+            return size.height + 20;
         }
     }
     else if(_selectIndex == 0)
@@ -550,13 +546,8 @@
             if ([str isEqualToString:@""]) {
                 return 0;
             }
-            CGSize maximumLabelSize = CGSizeMake(ScreenWidth - 30, 9999);
-            CGRect textRect = [str boundingRectWithSize:maximumLabelSize
-                                                options:NSStringDrawingUsesLineFragmentOrigin
-                                             attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]}
-                                                context:nil];
-            
-            return textRect.size.height + 28;
+           CGSize size =  [Common getStrHeightWithStr:str AndStrFont:12 AndWidth:ScreenWidth - 30 AndlineSpacing:3];
+            return size.height + 28;
         } else if([indexPath section] == 4 && !_isHideBorrowerInformation) {
             if ([indexPath row] == 0 || [indexPath row] == [_infoDetailArray count] - 1) {
                 return 27 + 8;
@@ -765,7 +756,9 @@
             }
         }
         UILabel *lbl = (UILabel*)[cell.contentView viewWithTag:101];
-        lbl.text = [UCFToolsMehod isNullOrNilWithString:[[[[_dataDic objectForKey:@"prdClaimsReveal"] objectForKey:@"safetySecurityList"] objectAtIndex:([indexPath section] - 1)] objectForKey:@"content"]];
+        NSDictionary *dic = [Common getParagraphStyleDictWithStrFont:12.0f WithlineSpacing:3.0];
+        NSString *remarkStr = [UCFToolsMehod isNullOrNilWithString:[[[[_dataDic objectForKey:@"prdClaimsReveal"] objectForKey:@"safetySecurityList"] objectAtIndex:([indexPath section] - 1)] objectForKey:@"content"]];
+        lbl.attributedText = [NSString getNSAttributedString:remarkStr labelDict:dic];
         
         return cell;
     }  else if (_selectIndex == 0){
@@ -831,6 +824,9 @@
             } else {
                 lbl.text = [UCFToolsMehod isNullOrNilWithString:[[_dataDic objectForKey:@"prdClaims"] objectForKey:@"remark"]];
             }
+            
+            NSDictionary *dic = [Common getParagraphStyleDictWithStrFont:12.0f WithlineSpacing:3.0];
+            lbl.attributedText = [NSString getNSAttributedString:lbl.text labelDict:dic];
             return cell;
         } /*else if ([indexPath section] == 3) {
            NSString *cellindifier = @"threeSectionCell";
