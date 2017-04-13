@@ -152,7 +152,7 @@
         self.token = personCenter.userCenterTicket;
         self.signButton.hidden = personCenter.isCompanyAgent;
         
-        if (personCenter.unReadMsgCount == 0) {
+        if ([personCenter.unReadMsgCount intValue] == 0) {
             [self.tabBarController.tabBar hideBadgeOnItemIndex:4];
         } else {
             [self.tabBarController.tabBar showBadgeOnItemIndex:4];
