@@ -331,7 +331,7 @@
     }
     else if([titleStr hasSuffix:@"交易密码"]){
         
-        if([self checkIDAAndBankBlindState:self.accoutType]){
+        if(_openState > 3){
             //修改交易密码
             TradePasswordVC * tradePasswordVC = [[TradePasswordVC alloc]initWithNibName:@"TradePasswordVC" bundle:nil];
             tradePasswordVC.title = titleStr;
@@ -339,6 +339,10 @@
             tradePasswordVC.site = [NSString stringWithFormat:@"%d",self.accoutType];
             tradePasswordVC.accoutType = self.accoutType;
             [self.navigationController pushViewController:tradePasswordVC  animated:YES];
+        }else{//设置交易密码
+            HSHelper *helper = [HSHelper new];
+            [helper pushOpenHSType:self.accoutType Step:3 nav:self.navigationController];
+
         }
     }
     else if([titleStr hasSuffix:@"风险承担能力"]){
@@ -372,7 +376,7 @@
 - (void)checkP2POrHonerAccout
 {
     UCFAccountDetailViewController *accountDetailVC = [[UCFAccountDetailViewController alloc] initWithNibName:@"UCFAccountDetailViewController" bundle:nil];
-    accountDetailVC.accoutType = self.accoutType;
+    accountDetailVC.accoutType = self.accoutType; 
     [self.navigationController pushViewController:accountDetailVC animated:YES];
 }
 - (void)didReceiveMemoryWarning {
