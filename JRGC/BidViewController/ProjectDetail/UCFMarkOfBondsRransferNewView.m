@@ -691,7 +691,7 @@
                 return size.height + 28;
             } else if([indexPath section] == 3 && !_isHideBorrowerInformation) {
               
-                if ([indexPath row] == 0 || [indexPath row] == 10 - 1) {
+                if ([indexPath row] == 0 || [indexPath row] == [[_dataDic objectForKey:@"originalList"] count] - 1) {
                     return 27 + 8;
                 } else {
                     return 27;
@@ -721,7 +721,7 @@
                 CGSize size = [Common getStrHeightWithStr:str AndStrFont:12 AndWidth:ScreenWidth - 30  AndlineSpacing:3];
                 return size.height + 28;
             } else if([indexPath section] == 4 && !_isHideBorrowerInformation) {
-                if ([indexPath row] == 0 || [indexPath row] == 10 - 1) {
+                if ([indexPath row] == 0 || [indexPath row] == [[_dataDic objectForKey:@"originalList"] count] - 1) {
                     return 27 + 8;
                 } else {
                     return 27;
