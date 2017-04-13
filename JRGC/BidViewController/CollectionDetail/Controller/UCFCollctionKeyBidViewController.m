@@ -1112,6 +1112,7 @@
 {
     UCFSelectPayBackController *viewController = [[UCFSelectPayBackController alloc] init];
     MoneyBoardCell *cell = (MoneyBoardCell *)[_bidTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+//    viewController.accoutType = self.accoutType;
     double investAmtMoney = [cell.inputMoneyTextFieldLable.text doubleValue];
     //工豆数
     double gondDouBalance = [[[_dataDict objectForKey:@"beanUser"] objectForKey:@"availableBalance"] doubleValue];

@@ -85,6 +85,7 @@
 - (void)textFieldDidChange:(UITextField *)textField {
     if (_textField.text.length == 0) {
         _errorView.hidden = YES;
+        [self requestFriendListRefresh];
     }
 }
 

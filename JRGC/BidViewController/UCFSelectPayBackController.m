@@ -162,6 +162,7 @@
     UCFTopUpViewController *topUpView  = [storyboard instantiateViewControllerWithIdentifier:@"topup"];
     //topUpView.isGoBackShowNavBar = YES;
     topUpView.title = @"充值";
+    topUpView.accoutType = self.accoutType;
     topUpView.uperViewController = self;
     [self.navigationController pushViewController:topUpView animated:YES];
 }
