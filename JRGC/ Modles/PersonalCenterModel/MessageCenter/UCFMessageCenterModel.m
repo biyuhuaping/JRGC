@@ -19,8 +19,8 @@
         self.createTime = [dict objectSafeForKey:@"createTime"];
         self.messageId =[NSString stringWithFormat:@"%@",[dict objectSafeForKey:@"id"]];
 //        self.content = [[[dict objectSafeForKey:@"content"]  stringByReplacingOccurrencesOfString:@"<a href=\"/mpwap/newBeans/toReturnMoneyList.shtml?status=0\" style=\"color:blue\">"withString:@""] stringByReplacingOccurrencesOfString:@"</a>" withString:@""];
-        self.content = [dict objectSafeForKey:@"content"];
-        self.delHTMLTagContent = [[dict objectSafeForKey:@"delHTMLTagContent"]  stringByReplacingOccurrencesOfString:@"blue" withString:@"#4aaef9"];
+        self.content = [[dict objectSafeForKey:@"content"]stringByReplacingOccurrencesOfString:@"blue" withString:@"#4aaef9"]; //有点击查看 链接
+        self.delHTMLTagContent = [dict objectSafeForKey:@"delHTMLTagContent"];// //无 点击查看 链接
     }
     return self;
 

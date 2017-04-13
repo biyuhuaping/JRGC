@@ -16,9 +16,9 @@
 @property(nonatomic, copy)NSString *isUse;
 // 消息标题
 @property(nonatomic, copy)NSString *title;
-// 消息内容
+// 消息内容有链接 
 @property(nonatomic, copy)NSString *content;
-// 消息内容+点击查看链接
+// 消息内容删除点击查看链接
 @property(nonatomic, copy)NSString *delHTMLTagContent;
 // 创建时间
 @property(nonatomic, copy)NSString *createTime;
