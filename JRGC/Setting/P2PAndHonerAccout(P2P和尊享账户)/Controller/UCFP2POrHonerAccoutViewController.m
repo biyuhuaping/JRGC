@@ -26,6 +26,7 @@
 #import "UILabel+Misc.h"
 #import "HSHelper.h"
 #import "UCFFeedBackViewController.h"
+#import "UCFSession.h"
 @interface UCFP2POrHonerAccoutViewController ()<UITableViewDelegate,UITableViewDataSource,UCFP2POrHornerTabHeaderViewDelete,UIAlertViewDelegate>
 {
     UCFP2POrHornerTabHeaderView *_headerView;
@@ -474,6 +475,9 @@
             NSDictionary *dataDict = [dic objectSafeDictionaryForKey:@"data"];
             if (ret)
             {
+                if(self.accoutType == SelectAccoutTypeP2P){
+                    [[UCFSession sharedManager] transformBackgroundWithUserInfo:@{} withState:UCFSessionStateUserRefresh];
+                }
                 _dataDict = dataDict;
                 _openState = [[dataDict objectSafeForKey:@"openState"] intValue];
                 int  isRisk = [[dataDict objectSafeForKey:@"isRisk"] intValue];
