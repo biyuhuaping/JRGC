@@ -282,9 +282,9 @@
     };
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     NSMutableString *str = [[NSMutableString alloc] initWithString:[[self.dataList objectAtIndex:indexPath.row] objectSafeForKey:@"userName"]];
-    if (str.length < 3 && str) {
-        [str insertString:@"    "atIndex:1];
-    }
+//    if (str.length < 3 && str) {
+//        [str insertString:@"    "atIndex:1];
+//    }
     cell.nameLabel.text = str;
     NSString *mobile = [[self.dataList objectAtIndex:indexPath.row] objectSafeForKey:@"mobile"];
     cell.phoneNumber.text = mobile;
