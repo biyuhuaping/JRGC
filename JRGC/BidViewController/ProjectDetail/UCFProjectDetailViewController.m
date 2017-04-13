@@ -641,6 +641,10 @@
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:[dic objectForKey:@"statusdes"] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"测试",nil];
                 alert.tag = 9000;
                 [alert show];
+            }else if ([dic[@"status"] integerValue] == 40) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:dic[@"statusdes"] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定",nil];
+                alert.tag = 9001;
+                [alert show];
             }
             else {
                 [AuxiliaryFunc showAlertViewWithMessage:[dic objectForKey:@"statusdes"]];
@@ -670,6 +674,10 @@
         }else if ([[dic objectForKey:@"status"] integerValue] == 30) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:[dic objectForKey:@"statusdes"] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"测试",nil];
             alert.tag = 9000;
+            [alert show];
+        }else if ([dic[@"status"] integerValue] == 40) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:dic[@"statusdes"] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定",nil];
+            alert.tag = 9001;
             [alert show];
         }
         else {
