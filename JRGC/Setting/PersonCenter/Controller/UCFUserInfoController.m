@@ -13,7 +13,7 @@
 #import "MjAlertView.h"
 #import "UCFSignView.h"
 #import "UCFSignModel.h"
-
+#import "UITabBar+TabBarBadge.h"
 @interface UCFUserInfoController () <UserInfoViewPresenterCallBack>
 @property (weak, nonatomic) IBOutlet UIView *userIconBackView;
 @property (weak, nonatomic) IBOutlet UIButton *signButton;
@@ -151,6 +151,12 @@
         self.workPointLabel.text = [NSString stringWithFormat:@"%@", personCenter.score];
         self.token = personCenter.userCenterTicket;
         self.signButton.hidden = personCenter.isCompanyAgent;
+        
+        if (personCenter.unReadMsgCount == 0) {
+            [self.tabBarController.tabBar hideBadgeOnItemIndex:4];
+        } else {
+            [self.tabBarController.tabBar showBadgeOnItemIndex:4];
+        }
     }
 }
 
