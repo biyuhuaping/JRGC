@@ -377,12 +377,12 @@
 
 - (void)rightClicked:(UIButton *)button
 {
-    if ([UserInfoSingle sharedManager].openStatus <= 3) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"请先开通徽商存管账户" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-        alert.tag = 1009;
-        [alert show];
-        return;
-    }
+//    if ([UserInfoSingle sharedManager].openStatus <= 3) {
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"请先开通徽商存管账户" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+//        alert.tag = 1009;
+//        [alert show];
+//        return;
+//    }
     
     UCFHuiShangBankViewController *huiShangBank = [[UCFHuiShangBankViewController alloc] initWithNibName:@"UCFHuiShangBankViewController" bundle:nil];
     huiShangBank.accoutType = self.accoutType;
