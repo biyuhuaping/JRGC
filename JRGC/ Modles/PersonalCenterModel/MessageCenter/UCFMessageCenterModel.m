@@ -18,7 +18,9 @@
         self.title = [[[dict objectSafeForKey:@"title"] stringByReplacingOccurrencesOfString:@"（"withString:@"(" ] stringByReplacingOccurrencesOfString:@"）"withString:@")"];
         self.createTime = [dict objectSafeForKey:@"createTime"];
         self.messageId =[NSString stringWithFormat:@"%@",[dict objectSafeForKey:@"id"]];
-        self.content = [[[dict objectSafeForKey:@"content"]  stringByReplacingOccurrencesOfString:@"<a href=\"/newBeans/toReturnMoneyList.shtml\" style=\"color:blue\">"withString:@"" ] stringByReplacingOccurrencesOfString:@"</a>" withString:@""];
+//        self.content = [[[dict objectSafeForKey:@"content"]  stringByReplacingOccurrencesOfString:@"<a href=\"/mpwap/newBeans/toReturnMoneyList.shtml?status=0\" style=\"color:blue\">"withString:@""] stringByReplacingOccurrencesOfString:@"</a>" withString:@""];
+        self.content = [dict objectSafeForKey:@"content"];
+        self.delHTMLTagContent = [[dict objectSafeForKey:@"delHTMLTagContent"]  stringByReplacingOccurrencesOfString:@"blue" withString:@"#4aaef9"];
     }
     return self;
 
