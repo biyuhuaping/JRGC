@@ -18,6 +18,8 @@
 @property(nonatomic, copy)NSString *title;
 // 消息内容
 @property(nonatomic, copy)NSString *content;
+// 消息内容+点击查看链接
+@property(nonatomic, copy)NSString *delHTMLTagContent;
 // 创建时间
 @property(nonatomic, copy)NSString *createTime;
 // 消息id

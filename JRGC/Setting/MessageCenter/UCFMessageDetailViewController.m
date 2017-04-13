@@ -49,7 +49,7 @@
         self.lineView.hidden = NO;
         self.messaeCreateTime.text =  self.model.createTime;
         self.messageDetailTitle.text= self.model.title ;
-        [self.textContextView loadHTMLString:self.model.content baseURL:nil];
+        [self.textContextView loadHTMLString:self.model.delHTMLTagContent baseURL:nil];
     }else{
         [_noDataView showInView:self.messageScrollView];
         self.viewLineHeight.constant = 0;
