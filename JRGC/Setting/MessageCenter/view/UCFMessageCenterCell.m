@@ -81,7 +81,7 @@
         self.unreadOrReadVIew.hidden = NO;
     }
     self.messageTitleLab.text =messageCenterModel.title;
-    self.messageDetailLab.text = messageCenterModel.content;
+    self.messageDetailLab.text = messageCenterModel.delHTMLTagContent;
     self.messageDateLab.text =messageCenterModel.createTime;
 }
 #pragma mark -点击编辑状态按钮
