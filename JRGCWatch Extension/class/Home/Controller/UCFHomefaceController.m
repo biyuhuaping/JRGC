@@ -39,7 +39,7 @@
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadPersonData) name:@"reloadPersonData" object:nil];
     [self addMenuItemWithImageNamed:@"qr_code_icon" title:@"工场码" action:@selector(gotoGongChangma)];
-    [self addMenuItemWithImageNamed:@"sign_icon" title:@"签到" action:@selector(gotoQiandao)];
+//    [self addMenuItemWithImageNamed:@"sign_icon" title:@"签到" action:@selector(gotoQiandao)];
     [self.tipGroup setHidden:NO];
     [self.viewGroup setHidden:YES];
     [self.loadingGroup startAnimating];
@@ -69,7 +69,7 @@
     if (!account.userId) {
         return;
     }
-    [UCFNetwork POSTWithUrl:url parameters:@{@"userId":account.userId} isNew:NO success:^(id json) {
+    [UCFNetwork POSTWithUrl:url parameters:@{@"userId":account.userId} isNew:YES success:^(id json) {
         
         [self.loadingGroup stopAnimating];
         [self.loadingGroup setHidden:YES];
@@ -79,10 +79,10 @@
         NSDictionary * dataDic = [(NSDictionary *)json objectForKey:@"data"];
 //        NSLog(@"dataDic -----首页返回数据--->>>>%@",dataDic);
         if(dataDic){
-            NSString *interests = [dataDic objectForKey:@"interests"];
-            NSString *total = [dataDic objectForKey:@"total"];
+            NSString *interests = [NSString stringWithFormat:@"%@", [dataDic objectForKey:@"interests"]];
+            NSString *total = [NSString stringWithFormat:@"%@", [dataDic objectForKey:@"total"]];
              total = [self moneyChangeFromValue:total];
-            NSString *cashBalance = [dataDic objectForKey:@"cashBalance"];
+            NSString *cashBalance = [NSString stringWithFormat:@"%@", [dataDic objectForKey:@"cashBalance"]];
              cashBalance = [self moneyChangeFromValue:cashBalance];
             [self.interestsMoneyLabel setText: interests] ;//累计收益
             [self.totalMoneyLabel setText:total];//总计资产
@@ -93,7 +93,7 @@
 //        NSLog(@"succ: %@", json);
     } fail:^(id json){
         
-        NSDictionary *ditc = (NSDictionary *)json;
+//        NSDictionary *ditc = (NSDictionary *)json;
         
         [self.loadingGroup stopAnimating];
         [self.loadingGroup setHidden:YES];

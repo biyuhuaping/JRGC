@@ -45,7 +45,7 @@
 //    status = 0 为未回款
     
     __weak typeof(self) weakself = self;
-    NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_IP, REDUNDLIST];
+    NSString *url = [NSString stringWithFormat:@"%@%@", OLD_SERVER_IP, REDUNDLIST];
     UCFAccount *account = [UCFAccountTool account];
     [UCFNetwork POSTWithUrl:url parameters:@{@"userId":account.userId, @"page":@"1", @"rows":@"10",@"status":@"0"} isNew:NO success:^(id json) {
 //        NSLog(@"succ: %@", json);
