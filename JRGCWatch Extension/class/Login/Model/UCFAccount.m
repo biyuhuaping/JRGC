@@ -14,7 +14,7 @@
 #define UCFAppVersion @"appviersion"
 #define UCFAccountSignature @"accountSignature"
 #define UCFisSubmitAppStoreAndTestTime @"isSubmitAppStoreAndTestTime"
-
+#define UCFJg_nyscclnjsygjr  @"jg_nyscclnjsygjr"
 #define UCFApptzticket @"apptzticket"
 
 @implementation UCFAccount
@@ -36,7 +36,8 @@
            @"imei" : account.imei != nil ? account.imei : @"",
            @"version" : account.version != nil ? account.version : @"",
            @"signature" : account.signature != nil ? account.signature : @"",
-           @"isSubmitAppStoreAndTestTime" :account.isSubmitAppStoreAndTestTime !=nil ? account.isSubmitAppStoreAndTestTime : @""
+           @"isSubmitAppStoreAndTestTime" :account.isSubmitAppStoreAndTestTime !=nil ? account.isSubmitAppStoreAndTestTime : @"",
+           @"jg_nyscclnjsygjr": account.jg_nyscclnjsygjr != nil ? account.jg_nyscclnjsygjr :@""
            };
     return dic;
 }
@@ -48,6 +49,7 @@
     [aCoder encodeObject:_version forKey:UCFAppVersion];
     [aCoder encodeObject:_signature forKey:UCFAccountSignature];
     [aCoder encodeObject:_isSubmitAppStoreAndTestTime forKey:UCFisSubmitAppStoreAndTestTime];
+    [aCoder encodeObject:_jg_nyscclnjsygjr forKey:UCFJg_nyscclnjsygjr];
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder{
@@ -58,6 +60,7 @@
         _version = [aDecoder decodeObjectForKey:UCFAppVersion];
         _signature = [aDecoder decodeObjectForKey:UCFAccountSignature];
         _isSubmitAppStoreAndTestTime = [aDecoder decodeObjectForKey:UCFisSubmitAppStoreAndTestTime];
+        _jg_nyscclnjsygjr = [aDecoder decodeObjectForKey:UCFJg_nyscclnjsygjr];
     }
     return self;
 }

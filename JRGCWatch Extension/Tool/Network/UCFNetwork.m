@@ -93,27 +93,30 @@
         return;
     }
     else {
-        [param setValue:account.source_type forKey:@"source_type"];
-        [param setValue:account.imei forKey:@"imei"];
-        [param setValue:account.version forKey:@"version"];
-        NSString *signature = [UCFTool getSinatureWithPar:[self newGetParStr:param]];
-        [param setValue:signature forKey:@"signature"];
-//        [param setValue:account.signature forKey:@"signature"];
-    }
-    
-    if (isNew) {
-        NSMutableDictionary *dict_v = [NSMutableDictionary dictionaryWithDictionary:dict];
-        [dict_v setValue:@"1" forKey:@"sourceType"];
-        [dict_v setValue:account.imei forKey:@"imei"];
-        [dict_v setValue:account.version forKey:@"version"];
-//        NSLog(@"新接口请求参数%@",dict_v);
-        NSString *signature = [UCFTool getSinatureWithPar:[self newGetParStr:dict_v]];
-        [dict_v setValue:signature forKey:@"signature"];
-        //对整体参数加密
-        NSString *encryptParam = [UCFTool AESWithKey2:AES_TESTKEY WithDic:dict_v];
-        [param removeAllObjects];
-        [param setValue:encryptParam forKey:@"encryptParam"];
-        
+        if (isNew) {
+            NSMutableDictionary *dict_v = [NSMutableDictionary dictionaryWithDictionary:dict];
+            [dict_v setValue:@"1" forKey:@"sourceType"];
+            [dict_v setValue:account.imei forKey:@"imei"];
+            [dict_v setValue:account.version forKey:@"version"];
+            [dict_v setValue:@"1" forKey:@"fromSite"];
+            [dict_v setValue:account.jg_nyscclnjsygjr forKey:@"jg_nyscclnjsygjr"];
+            //        NSLog(@"新接口请求参数%@",dict_v);
+            NSString *signature = [UCFTool getSinatureWithPar:[self newGetParStr:dict_v]];
+            [dict_v setValue:signature forKey:@"signature"];
+            //对整体参数加密
+            NSString *encryptParam = [UCFTool AESWithKey2:AES_TESTKEY WithDic:dict_v];
+            [param removeAllObjects];
+            [param setValue:encryptParam forKey:@"encryptParam"];
+            
+        }
+        else {
+            [param setValue:account.source_type forKey:@"source_type"];
+            [param setValue:account.imei forKey:@"imei"];
+            [param setValue:account.version forKey:@"version"];
+            NSString *signature = [UCFTool getSinatureWithPar:[self newGetParStr:param]];
+            [param setValue:signature forKey:@"signature"];
+    //        [param setValue:account.signature forKey:@"signature"];
+        }
     }
     
     

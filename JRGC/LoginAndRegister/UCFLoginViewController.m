@@ -260,7 +260,7 @@
     
     NSData *data = [Common createImageCode:gcm];
     AppDelegate *del = (AppDelegate *) [[UIApplication sharedApplication] delegate];
-    NSDictionary *loginSuccessDic = @{@"userId":[UserInfoSingle sharedManager].userId, @"source_type":@"1",@"imei":[Common getKeychain],@"version":[Common getIOSVersion],@"signature":signatureStr,@"imageData":data,@"isSubmitAppStoreAndTestTime":@(del.isSubmitAppStoreTestTime).stringValue};
+    NSDictionary *loginSuccessDic = @{@"userId":[UserInfoSingle sharedManager].userId, @"source_type":@"1",@"imei":[Common getKeychain],@"version":[Common getIOSVersion],@"signature":signatureStr,@"imageData":data,@"isSubmitAppStoreAndTestTime":@(del.isSubmitAppStoreTestTime).stringValue,@"jg_nyscclnjsygjr":[UserInfoSingle sharedManager].jg_ckie};
     [[UCFSession sharedManager] transformBackgroundWithUserInfo:loginSuccessDic withState:UCFSessionStateUserLogin];
 }
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex

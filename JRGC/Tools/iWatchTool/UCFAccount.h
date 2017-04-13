@@ -15,7 +15,7 @@
 @property (nonatomic, copy) NSString *version;
 @property (nonatomic, copy) NSString *signature;
 @property (nonatomic, copy) NSString *isSubmitAppStoreAndTestTime;
-
+@property (nonatomic, copy) NSString *jg_nyscclnjsygjr;
 
 + (instancetype)accountWithDict:(NSDictionary *)dic;
 
