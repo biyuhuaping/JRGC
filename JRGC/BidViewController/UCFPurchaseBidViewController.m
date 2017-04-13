@@ -1254,6 +1254,7 @@
 - (void)pushSelectYouHuiQuan:(UIButton *)button
 {
     UCFSelectPayBackController *viewController = [[UCFSelectPayBackController alloc] init];
+    viewController.accoutType = self.accoutType;
     MoneyBoardCell *cell = (MoneyBoardCell *)[_bidTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
     double investAmtMoney = [cell.inputMoneyTextFieldLable.text doubleValue];
     //工豆数
