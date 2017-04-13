@@ -763,13 +763,15 @@
     }else if (tag.intValue == kSXTagCheckPersonRedPoint) {
         NSString *Data = (NSString *)result;
         NSDictionary * dic = [Data objectFromJSONString];
-        if ([dic[@"status"] intValue] == 1) {
-            NSString *has = dic[@"has"];
-            if ([has isEqualToString:@"1"]) {
+        if ([dic[@"ret"] boolValue]) {
+            NSString *unReadMsgCount = [dic[@"data"] objectSafeForKey:@"unReadMsgCount"];
+            if ([unReadMsgCount intValue] > 0) {
                 [self.tabBarController.tabBar showBadgeOnItemIndex:4];
             } else {
                 [self.tabBarController.tabBar hideBadgeOnItemIndex:4];
             }
+        }else{
+            [self.tabBarController.tabBar hideBadgeOnItemIndex:4];
         }
     } else if (tag.intValue == kSXTagRedPointCheck) {
         NSString *Data = (NSString *)result;
@@ -1013,8 +1015,8 @@
 - (void)checkPersonCenterRedPoint
 {
     if ([[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
-        NSString *strParameters = [NSString stringWithFormat:@"userId=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
-        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagCheckPersonRedPoint owner:self Type:SelectAccoutDefault];
+        NSDictionary *paraDict = @{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID]};
+        [[NetworkModule sharedNetworkModule] newPostReq:paraDict tag:kSXTagCheckPersonRedPoint owner:self signature:YES Type:SelectAccoutDefault];
     }
 }
 
