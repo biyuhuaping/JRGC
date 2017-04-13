@@ -63,7 +63,7 @@
 {
     _facBean = facBean;
     if (facBean.state == UCFMyFacBeanStateOverduing) {
-        if (facBean.flag.intValue ==0) {
+        if (facBean.flag.intValue ==1) {
             self.signView.hidden = NO;
             self.signView.alpha = 1;
         }
