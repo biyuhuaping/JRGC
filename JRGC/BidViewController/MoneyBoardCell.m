@@ -334,8 +334,8 @@
          }
       }
     } else{
-            _keYongTipLabel.text = @"我的余额";
-            _rechargeBtn.frame = CGRectMake(ScreenWidth - 15 - 44 , 47, 44, 37);
+            _keYongTipLabel.text = @"可用金额";
+            _rechargeBtn.frame = CGRectMake(ScreenWidth - 15 - 44 , 50, 44, 37);
             
             _totalKeYongTipLabel.hidden = YES;
             _inputMoneyTextFieldLable.placeholder = [NSString stringWithFormat:@"%@起投",[[_dataDict objectForKey:@"data"] objectForKey:@"investAmt"]];
@@ -352,9 +352,10 @@
             CGSize size = [Common getStrWitdth:self.KeYongMoneyLabel.text TextFont:_KeYongMoneyLabel.font];
             self.KeYongMoneyLabel.frame = CGRectMake(CGRectGetMinX(self.KeYongMoneyLabel.frame), CGRectGetMinY(self.KeYongMoneyLabel.frame), size.width, CGRectGetHeight(self.KeYongMoneyLabel.frame));
             _totalKeYongTipLabel.frame = CGRectMake(CGRectGetMaxX(_KeYongMoneyLabel.frame) + 5, CGRectGetMinY(_KeYongMoneyLabel.frame) + 5, 11 * 12, 12);
+            _gongDouAccout.hidden = YES;
+            _gongDouCountLabel.hidden = YES;
+            _gongDouSwitch.hidden = YES;
     }
-
-
 }
 - (void)drawMarkView
 {
