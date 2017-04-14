@@ -73,7 +73,7 @@
         }
         
     }
-    if (facBean.state == UCFMyFacBeanStateUsed) {
+    if (facBean.state == UCFMyFacBeanStateUsed || facBean.state == UCFMyFacBeanStateOverdue) {
         self.beanNumLabel.text = [NSString stringWithFormat:@"%@", facBean.useInvest];
     }
     else self.beanNumLabel.text = [NSString stringWithFormat:@"+%@", facBean.useInvest];
