@@ -46,6 +46,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *cashButton;
 @property (weak, nonatomic) IBOutlet UIButton *rechargeButton;
 
+@property (assign,nonatomic) int otherNum;//风险评估剩余次数
+
 
 
 - (IBAction)clickCashBtn:(UIButton *)sender;
@@ -331,7 +333,7 @@
     }
     else if([titleStr hasSuffix:@"交易密码"]){
         
-        if([self checkIDAAndBankBlindState:self.accoutType]){
+        if(_openState > 3){
             //修改交易密码
             TradePasswordVC * tradePasswordVC = [[TradePasswordVC alloc]initWithNibName:@"TradePasswordVC" bundle:nil];
             tradePasswordVC.title = titleStr;
@@ -339,15 +341,26 @@
             tradePasswordVC.site = [NSString stringWithFormat:@"%d",self.accoutType];
             tradePasswordVC.accoutType = self.accoutType;
             [self.navigationController pushViewController:tradePasswordVC  animated:YES];
+        }else{//设置交易密码
+            HSHelper *helper = [HSHelper new];
+            [helper pushOpenHSType:self.accoutType Step:3 nav:self.navigationController];
+
         }
     }
     else if([titleStr hasSuffix:@"风险承担能力"]){
-      RiskAssessmentViewController *riskAssessmentVC = [[RiskAssessmentViewController alloc] initWithNibName:@"RiskAssessmentViewController" bundle:nil];
-        riskAssessmentVC.title = titleStr;
-        riskAssessmentVC.accoutType = self.accoutType;
-        riskAssessmentVC.sourceVC = @"P2POrHonerAccoutVC";
-        self.fromIntoVCStr = @"riskAssessmentVC";
-        [self.navigationController pushViewController:riskAssessmentVC  animated:YES];
+            if (_otherNum <= 0) { //风险承担能力评估剩余次数
+                
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您的评估次数已用完" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                [alert show];
+            }else{
+                RiskAssessmentViewController *riskAssessmentVC = [[RiskAssessmentViewController alloc] initWithNibName:@"RiskAssessmentViewController" bundle:nil];
+                riskAssessmentVC.title = titleStr;
+                riskAssessmentVC.accoutType = self.accoutType;
+                riskAssessmentVC.sourceVC = @"P2POrHonerAccoutVC";
+                self.fromIntoVCStr = @"riskAssessmentVC";
+                [self.navigationController pushViewController:riskAssessmentVC  animated:YES];
+            }
+ 
     }
     else if([titleStr hasPrefix:@"自动投标"]){
         if ([self checkIDAAndBankBlindState:self.accoutType]) {
@@ -359,9 +372,6 @@
         }
     }
 }
-//-(void)is {
-//    [urlStr rangeOfString:@"toReturnMoneyList.shtml"].location != NSNotFound
-//}
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     [self.view endEditing:YES];
 }
@@ -372,7 +382,7 @@
 - (void)checkP2POrHonerAccout
 {
     UCFAccountDetailViewController *accountDetailVC = [[UCFAccountDetailViewController alloc] initWithNibName:@"UCFAccountDetailViewController" bundle:nil];
-    accountDetailVC.accoutType = self.accoutType;
+    accountDetailVC.accoutType = self.accoutType; 
     [self.navigationController pushViewController:accountDetailVC animated:YES];
 }
 - (void)didReceiveMemoryWarning {
@@ -479,6 +489,7 @@
                     [[UCFSession sharedManager] transformBackgroundWithUserInfo:@{} withState:UCFSessionStateUserRefresh];
                 }
                 _dataDict = dataDict;
+                _otherNum = [[dataDict objectSafeForKey:@"otherNum"] intValue];
                 _openState = [[dataDict objectSafeForKey:@"openState"] intValue];
                 int  isRisk = [[dataDict objectSafeForKey:@"isRisk"] intValue];
                 _headerView.availableAmountLab.text = [NSString stringWithFormat:@"¥%@",[dataDict objectSafeForKey:@"cashBalance"]];//可用金额

@@ -21,6 +21,7 @@
 #import "SubInvestmentCell.h"
 #import "ToolSingleTon.h"
 #import "UCFPrdTransferBIdWebView.h"
+#import "NSString+CJString.h"
 @interface UCFPurchaseTranBidViewController ()<MoneyBoardCellDelegate,UITableViewDataSource,UITableViewDelegate>
 {
     BOOL        isHasOverdueGongDou;        //是否有过期工豆
@@ -504,21 +505,57 @@
     UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 98)];
     footView.backgroundColor = UIColorWithRGB(0xf2f2f2);
     footView.userInteractionEnabled = YES;
+
+    __weak typeof(self) weakSelf = self;
+    
+    NZLabel *riskProtocolLabel = [[NZLabel alloc] init];
+    riskProtocolLabel.font = [UIFont systemFontOfSize:12.0f];
+    CGSize size1 = [Common getStrHeightWithStr:@"本人阅读并悉知《网络借贷出借风险提示》中风险" AndStrFont:12 AndWidth:ScreenWidth- 23 -15];
+    riskProtocolLabel.numberOfLines = 0;
+    riskProtocolLabel.frame = CGRectMake(23, 15, ScreenWidth- 23 -15, size1.height);
+    riskProtocolLabel.text = @"本人阅读并悉知《网络借贷出借风险提示》中风险";
+    riskProtocolLabel.userInteractionEnabled = YES;
+    riskProtocolLabel.textColor = UIColorWithRGB(0x999999);
+    
+    [riskProtocolLabel addLinkString:@"《网络借贷出借风险提示》" block:^(ZBLinkLabelModel *linkModel) {
+        [weakSelf showHeTong:linkModel];
+    }];
+    [riskProtocolLabel setFontColor:UIColorWithRGB(0x4aa1f9) string:@"《网络借贷出借风险提示》"];
+    UIImageView * imageView = [[UIImageView alloc] init];
+    imageView.frame = CGRectMake(CGRectGetMinX(riskProtocolLabel.frame) - 7, CGRectGetMinY(riskProtocolLabel.frame) + 4, 5, 5);
+    imageView.image = [UIImage imageNamed:@"point.png"];
+    
+    if(self.accoutType == SelectAccoutTypeP2P){
+        [footView addSubview:riskProtocolLabel];
+        [footView addSubview:imageView];
+    }else{
+        footView.frame  = CGRectMake(0, 0, ScreenWidth, 98 - size1.height - 10);
+        riskProtocolLabel.frame = CGRectZero;
+        imageView.frame = CGRectZero;
+    }
     NSArray *contractMsgArr = [_dataDict valueForKey:@"contractMsg"];
-    NSString *totalStr = [NSString stringWithFormat:@"本人同意签署"];
+    NSString *totalStr = [NSString stringWithFormat:@"本人已阅读并同意签署"];
     for (int i = 0; i < contractMsgArr.count; i++) {
         NSString *tmpStr = [[contractMsgArr objectAtIndex:i] valueForKey:@"contractName"];
         totalStr = [totalStr stringByAppendingString:[NSString stringWithFormat:@"《%@》",tmpStr]];
     }
     NZLabel *label1 = [[NZLabel alloc] init];
     label1.font = [UIFont systemFontOfSize:12.0f];
-    CGSize size = [Common getStrWitdth:totalStr TextFont:[UIFont systemFontOfSize:12]];
-    label1.frame = CGRectMake(23, 15, ScreenWidth- 23 - 15, size.height);
-    label1.text = totalStr;
+//    CGSize size = [Common getStrWitdth:totalStr TextFont:[UIFont systemFontOfSize:12]];
+//    label1.frame = CGRectMake(23, 15, ScreenWidth - 23 - 15, size.height);
+    
+    CGSize size = [Common getStrHeightWithStr:totalStr AndStrFont:12 AndWidth:ScreenWidth- 23 - 15 AndlineSpacing:1.0f];
+    label1.numberOfLines = 0;
+    if (self.accoutType == SelectAccoutTypeP2P) {
+        label1.frame = CGRectMake(23, CGRectGetMaxY(riskProtocolLabel.frame)+10, ScreenWidth-23 - 15, size.height);
+    }else{
+        label1.frame = CGRectMake(23, 15, ScreenWidth - 23 -15, size.height);
+    }
+    NSDictionary *dic = [Common getParagraphStyleDictWithStrFont:12 WithlineSpacing:1.0f];
+    label1.attributedText = [NSString getNSAttributedString:totalStr labelDict:dic];
     label1.userInteractionEnabled = YES;
     label1.textColor = UIColorWithRGB(0x999999);
     
-    __weak typeof(self) weakSelf = self;
     for (int i = 0; i < contractMsgArr.count; i++) {
         NSString *tmpStr = [NSString stringWithFormat:@"《%@》",[[contractMsgArr objectAtIndex:i] valueForKey:@"contractName"]];
         [label1 addLinkString:tmpStr block:^(ZBLinkLabelModel *linkModel) {
@@ -550,11 +587,21 @@
 }
 - (void)showHeTong:(ZBLinkLabelModel *)linkModel
 {
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    NSString *contractTypeStr = [self valueIndex:linkModel];
-    NSString *projectId = [[self.dataDict objectForKey:@"data"] objectForKey:@"id"];
-    NSString *strParameters = [NSString stringWithFormat:@"userId=%@&prdClaimId=%@&contractType=%@&prdType=1",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],projectId,contractTypeStr];
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetContractMsg owner:self Type:SelectAccoutDefault];
+    NSString *contractStr = linkModel.linkString;
+    if ([contractStr isEqualToString:@"《网络借贷出借风险提示》"]) {
+        [self showContractWebViewUrl:PROTOCOLRISKPROMPT withTitle:@"网络借贷出借风险提示"];
+    }else{
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        NSString *contractTypeStr = [self valueIndex:linkModel];
+        NSString *projectId = [[self.dataDict objectForKey:@"data"] objectForKey:@"id"];
+        NSString *strParameters = [NSString stringWithFormat:@"userId=%@&prdClaimId=%@&contractType=%@&prdType=1",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],projectId,contractTypeStr];
+        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetContractMsg owner:self Type:SelectAccoutDefault];
+    }
+}
+-(void)showContractWebViewUrl:(NSString *)urlStr withTitle:(NSString *)title{
+    FullWebViewController *controller = [[FullWebViewController alloc] initWithWebUrl:urlStr    title:title];
+    controller.baseTitleType = @"detail_heTong";
+    [self.navigationController pushViewController:controller animated:YES];
 }
 - (void)changeGongDouSwitchStatue:(UISwitch *)sender
 {

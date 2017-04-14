@@ -333,8 +333,10 @@
         _overdueCount = [NSString stringWithFormat:@"%@次",[_dataDic objectSafeForKey:@"overdueCount"]];
         _overdueInvest = [NSString stringWithFormat:@"%@元",[_dataDic objectSafeForKey:@"overdueInvest"]];
         [_auditRecordArray addObjectsFromArray:@[@"平台逾期次数",@"平台逾期总金额"]];
+        _isHideBusinessLicense =  _auditRecordArray.count == 6 ? YES :NO;
+    }else{
+        _isHideBusinessLicense =  _auditRecordArray.count == 4 ? YES :NO;
     }
-    _isHideBusinessLicense =  _auditRecordArray.count == 6 ? YES :NO;
     if (_isP2P) {
         NSString *tradeMarkStr = [[_dataDic objectSafeDictionaryForKey:@"prdTransferFore"] objectSafeForKey: @"tradeMark"];
         _isHideBorrowerInformation = [tradeMarkStr intValue] == 20 ? YES :NO;
@@ -691,7 +693,7 @@
                 return size.height + 28;
             } else if([indexPath section] == 3 && !_isHideBorrowerInformation) {
               
-                if ([indexPath row] == 0 || [indexPath row] == 10 - 1) {
+                if ([indexPath row] == 0 || [indexPath row] == [[_dataDic objectForKey:@"originalList"] count] - 1) {
                     return 27 + 8;
                 } else {
                     return 27;
@@ -721,7 +723,7 @@
                 CGSize size = [Common getStrHeightWithStr:str AndStrFont:12 AndWidth:ScreenWidth - 30  AndlineSpacing:3];
                 return size.height + 28;
             } else if([indexPath section] == 4 && !_isHideBorrowerInformation) {
-                if ([indexPath row] == 0 || [indexPath row] == 10 - 1) {
+                if ([indexPath row] == 0 || [indexPath row] == [[_dataDic objectForKey:@"originalList"] count] - 1) {
                     return 27 + 8;
                 } else {
                     return 27;

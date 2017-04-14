@@ -1232,6 +1232,9 @@ static NetworkModule *gInstance = NULL;
         case kSXTagGetUserAgreeState:
             parameter = [NEW_SERVER_IP stringByAppendingString:USERZUNXIANGSTATE];
             break;
+        case kSXTagCheckPersonRedPoint:
+            parameter = [NEW_SERVER_IP stringByAppendingString:CHECKPERSONCENTERREDALERT];
+            break;
 
     }
     //给原有参数字典添加公共参数

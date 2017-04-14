@@ -228,8 +228,10 @@
         _overdueCount = [NSString stringWithFormat:@"%@次",[_dataDic objectSafeForKey:@"overdueCount"]];
         _overdueInvest = [NSString stringWithFormat:@"%@元",[_dataDic objectSafeForKey:@"overdueInvest"]];
         [_auditRecordArray addObjectsFromArray:@[@"平台逾期次数",@"平台逾期总金额"]];
+        _isHideBusinessLicense =  _auditRecordArray.count == 6 ? YES :NO;
+    }else{
+        _isHideBusinessLicense =  _auditRecordArray.count == 4 ? YES :NO;
     }
-     _isHideBusinessLicense =  _auditRecordArray.count == 6 ? YES :NO;
     _twoTableview = [[UITableView alloc] initWithFrame:CGRectMake(0, ScreenHeight, ScreenWidth, ScreenHeight - 64) style:UITableViewStylePlain];
     _twoTableview.backgroundColor = [UIColor clearColor];
     //_tableView.separatorColor = UIColorWithRGB(0xeff0f3);
