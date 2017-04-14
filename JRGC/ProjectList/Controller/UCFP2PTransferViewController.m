@@ -18,6 +18,7 @@
 //#import "UCFBankDepositoryAccountViewController.h"
 #import "UCFOldUserGuideViewController.h"
 #import "HSHelper.h"
+#import "RiskAssessmentViewController.h"
 @interface UCFP2PTransferViewController () <UITableViewDataSource, UITableViewDelegate, UCFProjectListCellDelegate>
 {
     UCFTransferModel *_transferModel;
@@ -197,6 +198,7 @@
         if ([rstcode intValue] == 1) {
             UCFProjectDetailViewController *controller = [[UCFProjectDetailViewController alloc] initWithDataDic:dic isTransfer:YES withLabelList:nil];
             controller.sourceVc = @"transiBid";
+            controller.accoutType = SelectAccoutTypeP2P;
             [self.navigationController pushViewController:controller animated:YES];
         }else {
             [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
@@ -211,11 +213,19 @@
             purchaseViewController.rootVc = self.parentViewController.parentViewController;
             purchaseViewController.dataDict = dic;
             purchaseViewController.baseTitleType = @"detail_heTong";
-            purchaseViewController.accoutType = self.accoutType;
+            purchaseViewController.accoutType = SelectAccoutTypeP2P;
             [self.navigationController pushViewController:purchaseViewController animated:YES];
         } else if ([dic[@"status"] integerValue] == 3 || [dic[@"status"] integerValue] == 4) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:dic[@"statusdes"] delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
             alert.tag = 7000;
+            [alert show];
+        } else if ([dic[@"status"] integerValue] == 30) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:dic[@"statusdes"] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"测试",nil];
+            alert.tag = 9000;
+            [alert show];
+        }else if ([dic[@"status"] integerValue] == 40) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:dic[@"statusdes"] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定",nil];
+            alert.tag = 9001;
             [alert show];
         } else {
             [AuxiliaryFunc showAlertViewWithMessage:rsttext];
@@ -305,6 +315,12 @@
             [helper pushOpenHSType:SelectAccoutTypeP2P Step:[UserInfoSingle sharedManager].openStatus nav:self.navigationController];
         }
         
+    }else if (alertView.tag == 9000) {
+        if(buttonIndex == 1){ //测试
+            RiskAssessmentViewController *vc = [[RiskAssessmentViewController alloc] initWithNibName:@"RiskAssessmentViewController" bundle:nil];
+            vc.accoutType = SelectAccoutTypeP2P;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
     }
 }
 -(void)dealloc{
