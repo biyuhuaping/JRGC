@@ -215,7 +215,7 @@
     button2.buttonWidth = 55;
     [button2.titleLabel setFont:[UIFont systemFontOfSize:13]];
     [button2 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    if ([messageCenterModel.isUse isEqualToString:@"0"]) {
+    if ([messageCenterModel.isUse isEqualToString:@"N"]) {
         [result addObject:button2];
     }
     return result;
@@ -264,7 +264,7 @@
         UCFMessageDetailViewController * messageDatailVC = [[UCFMessageDetailViewController alloc]initWithNibName:@"UCFMessageDetailViewController" bundle:nil];
         messageDatailVC.title = @"消息详情";
         messageDatailVC.model = messageCenterModel;
-        if([messageCenterModel.isUse isEqualToString:@"0"]){ //如果是未读消息 才标记已读状态
+        if([messageCenterModel.isUse isEqualToString:@"N"]){ //如果是未读消息 才标记已读状态
             [self setMessageReaded:indexPath];
             [self setSignMessageReadedHttpRequest:messageCenterModel.messageId];
         }
@@ -316,7 +316,7 @@
 #pragma mark 标记单个消息已读状态
 -(void)setMessageReaded:(NSIndexPath *)indexPath{
     UCFMessageCenterModel *messageCenterModel = [_messageDataArray objectAtIndex:indexPath.row];
-    messageCenterModel.isUse = @"1";
+    messageCenterModel.isUse = @"Y";
     [_messageTableView reloadData];
 }
 #pragma mark 取消量批删除
