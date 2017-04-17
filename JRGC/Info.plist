@@ -134,7 +134,7 @@
 	<key>NSMicrophoneUsageDescription</key>
 	<string>microphoneDesciption</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>此 App 需要您的同意才能读取媒体资料库</string>
+	<string>“金融工场”需要您的同意才能读取媒体资料库</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
