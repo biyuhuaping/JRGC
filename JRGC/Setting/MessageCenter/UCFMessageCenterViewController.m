@@ -550,6 +550,8 @@
         }
         [self setNoDataView];
     }
+    
+    rstcode = [[[dic objectSafeDictionaryForKey:@"data"] objectSafeForKey:@"status"]boolValue];
     if (tag.intValue == KSXTagMsgListSignAllRead)  {
         if (rstcode) {//全部设置已读成功
             self.pageNumber = 1;
