@@ -349,7 +349,7 @@
 - (void)forceUpdateVersion
 {
     _isComeForceUpdate = YES;
-    [self checkUpdate];
+    [self checkNovicePoliceOnOff];
 }
 // 检测是否首次登录
 - (void)checkInitiaLogin
