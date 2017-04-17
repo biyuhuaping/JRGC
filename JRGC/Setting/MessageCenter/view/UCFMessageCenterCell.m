@@ -75,7 +75,7 @@
 }
 -(void)setMessageCenterModel:(UCFMessageCenterModel *)messageCenterModel{
     _messageCenterModel = messageCenterModel;
-    if ([messageCenterModel.isUse isEqualToString:@"1"]) {
+    if ([messageCenterModel.isUse isEqualToString:@"Y"]) {
         self.unreadOrReadVIew.hidden = YES;
     }else {
         self.unreadOrReadVIew.hidden = NO;

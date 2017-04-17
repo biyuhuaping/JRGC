@@ -764,11 +764,11 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
             self.intoViewControllerStr = @"CollctionKeyBidVC";
             purchaseViewController.colPrdClaimId =_colPrdClaimId;
             [self.navigationController pushViewController:purchaseViewController animated:YES];
-        }else if ([dic[@"status"] integerValue] == 30) {
+        }else if ([dic[@"code"] integerValue] == 30) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:dic[@"statusdes"] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"测试",nil];
             alert.tag = 9000;
             [alert show];
-        }else if ([dic[@"status"] integerValue] == 40) {
+        }else if ([dic[@"code"] integerValue] == 40) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:dic[@"statusdes"] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"联系客服",nil];
             alert.tag = 9001;
             [alert show];
