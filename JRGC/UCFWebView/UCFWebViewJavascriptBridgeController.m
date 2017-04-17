@@ -401,6 +401,10 @@
                 }];
             }
         }
+        else if([nativeData[@"action"] isEqualToString:@"save_fxh_qrcode"]){ //放心花---保存 工场码
+            UIImage *savedImage = [UIImage imageNamed:@"loanCode"];
+            UIImageWriteToSavedPhotosAlbum(savedImage, self, @selector(image:didFinishSavingWithError:contextInfo:), (__bridge void *)self);
+        }
         //----------------------------------------------------------------------------------------------------qyy
         
        /* else if ([nativeData[@"action"] isEqualToString:@"app_invest_error"]) //投标成功 跳转到 投资详情
@@ -408,6 +412,12 @@
             [weakSelf jsToNativeHomeWithDic:nativeData];//跳入订单详情页面qyy
         }*/
     }];
+}
+
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
+{
+    
+    NSLog(@"image = %@, error = %@, contextInfo = %@", image, error, contextInfo);
 }
 
 - (void)getTokenId
