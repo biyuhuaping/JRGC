@@ -148,7 +148,7 @@
         self.unreadMessageImageView.hidden = ([personCenter.unReadMsgCount integerValue] == 0) ? YES : NO;
         self.facBeanLabel.text = personCenter.beanAmount ==nil ?@"0":personCenter.beanAmount;
         self.couponLabel.text = [NSString stringWithFormat:@"%@", personCenter.couponNumber == nil ? @"0":personCenter.couponNumber];
-        self.workPointLabel.text = [NSString stringWithFormat:@"%@", personCenter.score == nil ?@"0":personCenter.couponNumber];
+        self.workPointLabel.text = [NSString stringWithFormat:@"%@", personCenter.score == nil ?@"0":personCenter.score];
         self.token = personCenter.userCenterTicket;
         self.signButton.hidden = personCenter.isCompanyAgent;
         
