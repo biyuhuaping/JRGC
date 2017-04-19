@@ -396,7 +396,7 @@
  
     __weak typeof(self) weakSelf = self;
     if (_openState <= 3) {
-        NSString *message = type == SelectAccoutTypeHoner ? @"请先设置尊享徽商资金账户交易密码":@"请先设置P2P徽商存管账户交易密码";
+        NSString *message = type == SelectAccoutTypeHoner ? ZXTIP2:P2PTIP2;
         BlockUIAlertView *alert = [[BlockUIAlertView alloc] initWithTitle:@"提示" message:message cancelButtonTitle:@"取消" clickButton:^(NSInteger index){
             if (index == 1) {
                 HSHelper *helper = [HSHelper new];
