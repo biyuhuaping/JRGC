@@ -804,7 +804,7 @@
     
     //************************************************qyy 2016-11-17首页接口改造
     NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys:[UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults]valueForKey:UUID]],@"userId", nil];
-    [[NetworkModule sharedNetworkModule]newPostReq:strParameters tag:kSXTagPrdClaimsNewVersion owner:self signature:YES Type:SelectAccoutDefault];
+    [[NetworkModule sharedNetworkModule]newPostReq:strParameters tag:kSXTagPrdClaimsNewVersion owner:self signature:YES Type:SelectAccoutTypeP2P];
 
 }
 
