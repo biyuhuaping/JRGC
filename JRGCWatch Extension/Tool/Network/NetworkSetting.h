@@ -9,11 +9,11 @@
 #ifndef NetworkSetting_h
 #define NetworkSetting_h
 
-#define EnvironmentConfiguration  1// 0测试 1正式
+#define EnvironmentConfiguration  2// 0测试 1正式
 
 #define AES_TESTKEY @"awejfij124321aweg@##$!*&+=-13123j24325"
 
-#if EnvironmentConfiguration == 1
+#if EnvironmentConfiguration == 2
 #define SERVER_IP   @"https://app.9888.cn/"      //正式网
 #define OLD_SERVER_IP   @"http://app.9888.cn/mpappP2P/"
 #define JPUSHKEY    @"d3fa655cc616a27b694fa9cb" //极光推送正式key
