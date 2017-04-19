@@ -1314,7 +1314,7 @@
     }
     
     CGFloat height2 = CGRectGetMaxY(label2.frame);
-    NSArray *contractList = @[@"出借人承诺书",@"反洗钱义务的承诺书"];
+    NSArray *contractList = @[@"出借人承诺书",@"履行反洗钱义务的承诺书"];
     
     NZLabel *label3 = [[NZLabel alloc] init];
     if (contractList.count > 0) {
