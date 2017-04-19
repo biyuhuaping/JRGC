@@ -146,9 +146,9 @@
         self.userNameLabel.text = personCenter.userName.length > 0 ? personCenter.userName : @"未实名";
         self.userLevelImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"usercenter_vip%@_icon", personCenter.memberLever]];
         self.unreadMessageImageView.hidden = ([personCenter.unReadMsgCount integerValue] == 0) ? YES : NO;
-        self.facBeanLabel.text = personCenter.beanAmount;
-        self.couponLabel.text = [NSString stringWithFormat:@"%@", personCenter.couponNumber];
-        self.workPointLabel.text = [NSString stringWithFormat:@"%@", personCenter.score];
+        self.facBeanLabel.text = personCenter.beanAmount ==nil ?@"0":personCenter.beanAmount;
+        self.couponLabel.text = [NSString stringWithFormat:@"%@", personCenter.couponNumber == nil ? @"0":personCenter.couponNumber];
+        self.workPointLabel.text = [NSString stringWithFormat:@"%@", personCenter.score == nil ?@"0":personCenter.couponNumber];
         self.token = personCenter.userCenterTicket;
         self.signButton.hidden = personCenter.isCompanyAgent;
         
