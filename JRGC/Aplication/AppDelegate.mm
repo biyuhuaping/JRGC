@@ -518,8 +518,16 @@
     [self checkIsLockView];
     [self checkFirstViewController];
 }
-
+- (void)checkCurrentTabBar
+{
+    if (self.tabBarController.selectedIndex == 3) {
+        UINavigationController *nav = [self.tabBarController.viewControllers objectAtIndex:3];
+        UIViewController *view1 = nav.visibleViewController;
+        view1.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
+    }
+}
 - (void)applicationDidBecomeActive:(UIApplication *)application {
+    [self checkCurrentTabBar];
      //进入前台之后，获取当前屏幕亮度，并保存更新屏幕亮
     NSInteger selectIndex = self.tabBarController.selectedIndex;
     if (selectIndex == 2) {
