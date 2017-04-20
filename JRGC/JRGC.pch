@@ -187,6 +187,7 @@ return shared##className; \
 #define ANNUALCOMMOSIONURL @"https://m.9888.cn/static/wap/topic-annual-commision/index.html"//佣金返利
 //各种H5协议页面地址
 #define TRUSTEESHIP     @"https://m.9888.cn/static/wap/protocol-trusteeship/index.html"      //1.资管三方协议
+#define ZXTRUSTEESHIP   @"https://m.9888.cn/static/wap/protocol-trade-service/index.html"    //尊享第三方协议
 #define COUNSELING      @"https://m.9888.cn/static/wap/protocol-counseling/index.html"       //2.信息咨询服务协议
 #define RECHARGERUL     @"https://m.9888.cn/static/wap/protocol-special-recharge/index.html" //3、特殊用户充值提示信息
 #define CASHWIRHDRAWH5  @"https://m.9888.cn/static/wap/protocol-special-cash/index.html"     //4、特殊用户提现提示信息H5
