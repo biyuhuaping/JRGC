@@ -68,7 +68,6 @@ static NetworkModule *gInstance = NULL;
     if (type == SelectAccoutTypeHoner) {
         serverIP = @"https://app.9888.cn/mpappZX/";
     }
-//    serverIP = @"http://192.168.2.189:8090/mpappOld/";
     NSString *parameter = nil;
     switch ((int)tag) {
         case kSXTagValidLogin:
