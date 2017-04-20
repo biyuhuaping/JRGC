@@ -23,6 +23,11 @@
 {
     [self gotoURL:self.url];
 }
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self refreshWebContent];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshWebContent) name:IS_RELOADE_URL object:nil];
