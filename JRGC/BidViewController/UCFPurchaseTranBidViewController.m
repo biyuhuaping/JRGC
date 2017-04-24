@@ -596,7 +596,7 @@
         NSString *contractTypeStr = [self valueIndex:linkModel];
         NSString *projectId = [[self.dataDict objectForKey:@"data"] objectForKey:@"id"];
         NSString *strParameters = [NSString stringWithFormat:@"userId=%@&prdClaimId=%@&contractType=%@&prdType=1",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],projectId,contractTypeStr];
-        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetContractMsg owner:self Type:SelectAccoutDefault];
+        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetContractMsg owner:self Type:self.accoutType];
     }
 }
 -(void)showContractWebViewUrl:(NSString *)urlStr withTitle:(NSString *)title{

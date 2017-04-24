@@ -518,7 +518,7 @@
         strParameters = [NSString stringWithFormat:@"userId=%@&prdClaimId=%@&contractType=%@&prdType=0",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],projectId,contractTypeStr];
     }
      [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-     [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetContractMsg owner:self Type:SelectAccoutDefault];
+     [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetContractMsg owner:self Type:self.accoutType];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectNormalMarkOfRightRowAtIndexPath:(NSIndexPath *)indexPat
