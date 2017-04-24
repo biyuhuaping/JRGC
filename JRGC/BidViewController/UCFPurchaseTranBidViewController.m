@@ -429,6 +429,7 @@
             NSString *taotalIntrest = [NSString stringWithFormat:@"%@",dic[@"taotalIntrest"]];
             view.tag = 173924;
             view.isTransid = YES;
+            view.accoutType = self.accoutType;
             [view reloadViewWithData:_dataDict AndNowMoney:cell.inputMoneyTextFieldLable.text AndPreMoney:taotalIntrest BankMoney:dic[@"bankBaseIntrest"]];
             AppDelegate * app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
             [app.window addSubview:view];

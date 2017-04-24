@@ -971,6 +971,7 @@
     }
     CalculatorView * view = [[CalculatorView alloc] init];
     view.tag = 173924;
+    view.accoutType = self.accoutType;
     NSString *prdClaimIdStr = [self.dataDict objectSafeForKey:@"prdClaimId"];
     [view reloadViewWithData:_dataDict AndNowMoney:investMoney AndChildPrdClaimId:prdClaimIdStr];
     AppDelegate * app = (AppDelegate *)[[UIApplication sharedApplication] delegate];

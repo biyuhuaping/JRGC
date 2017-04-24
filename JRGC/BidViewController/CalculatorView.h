@@ -27,6 +27,7 @@
 @property(nonatomic,copy)   NSString *bankBaseRate;
 @property(nonatomic,assign) double    normalMinInvest;
 @property(nonatomic,strong) NSDictionary *tranBidDataDict;
+@property(nonatomic,assign) SelectAccoutType accoutType;
 - (void)reloadViewWithData:(NSDictionary *)dataDict AndNowMoney:(NSString *)currentMoney;
 - (void)reloadViewWithData:(NSDictionary *)dataDict AndNowMoney:(NSString *)currentMoney AndPreMoney:(NSString *)preMoney BankMoney:(NSString *)bankMoney;
 - (void)reloadViewWithData:(NSDictionary *)dataDict AndNowMoney:(NSString *)currentMoney AndChildPrdClaimId:(NSString *)childPrdClaimId;
