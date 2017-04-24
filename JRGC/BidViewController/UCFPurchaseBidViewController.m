@@ -1114,7 +1114,9 @@
     }
     CalculatorView * view = [[CalculatorView alloc] init];
     view.tag = 173924;
+    view.accoutType = self.accoutType;
     [view reloadViewWithData:_dataDict AndNowMoney:investMoney];
+    
     AppDelegate * app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     [app.window addSubview:view];
 }
