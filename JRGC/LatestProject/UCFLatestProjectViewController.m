@@ -425,11 +425,19 @@
 //    
 //}
 
-- (void)investBtnClicked:(UIButton *)button{
+- (void)investBtnClicked:(UIButton *)button withType:(NSString *)type{
     if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
         //如果未登录，展示登录页面
         [self showLoginView];
     } else {
+        
+        
+        if ([type isEqualToString:@"认购"]) { //尊享标
+            self.accoutType = SelectAccoutTypeHoner;
+        }else{
+            self.accoutType = SelectAccoutTypeP2P;
+        }
+
         if ([self checkUserCanInvestIsDetail:NO]) {
             [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             NSInteger tag = button.tag - 100;
@@ -441,7 +449,7 @@
                 //方法
                 NSString *strParameters = nil;
                 strParameters = [NSString stringWithFormat:@"userId=%@&id=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],projectId];//101943
-                [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDealBid owner:self Type:SelectAccoutDefault];
+                [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDealBid owner:self Type:self.accoutType];
             }
         }
     }
@@ -771,6 +779,13 @@
             //如果未登录，展示登录页面
             [self showLoginView];
         } else {
+            
+             InvestmentCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+            if ([cell.progressView.textStr isEqualToString:@"认购"]) {
+                self.accoutType  = SelectAccoutTypeHoner;
+            }else if ([cell.progressView.textStr isEqualToString:@"投资"]){
+                self.accoutType  = SelectAccoutTypeP2P;
+            }
             if ([self checkUserCanInvestIsDetail:YES]) {
                 _indexPath = indexPath;
                 InvestmentItemInfo * info = [_investmentArr objectAtIndex:_indexPath.row];
@@ -780,20 +795,19 @@
                     NSInteger isOrder = [info.isOrder integerValue];
                     if (isOrder > 0) {
                         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-                        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self Type:SelectAccoutDefault];
+                        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self Type:self.accoutType];
                     } else {
                         UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前标的详情只对投资人开放"];
                         [self.navigationController pushViewController:controller animated:YES];
                     }
                 } else {
                     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-                    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self Type:SelectAccoutDefault];
+                    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self Type:self.accoutType];
                 }
             }
         }
     }
 }
-
 #pragma mark - 请求网络及回调
 //获取prdClaims/dataList
 - (void)getPrdClaimsDataList
@@ -903,7 +917,9 @@
             if([[NSUserDefaults standardUserDefaults] objectForKey:UUID]){//登录状态下，显示tipView
                 //个人中心接口添加开户装填
                 NSString *openStatusStr = [[dic objectSafeForKey:@"data" ] objectSafeForKey:@"openStatus"];
+                NSString *zxOpenStatusStr = [[dic objectSafeForKey:@"data" ] objectSafeForKey:@"zxOpenStatus"];
                 [UserInfoSingle sharedManager].openStatus = [openStatusStr integerValue];
+                [UserInfoSingle sharedManager].enjoyOpenStatus = [zxOpenStatusStr integerValue];
             }
             //============ 公告 ============
             _noticId = dic[@"data"][@"noticId"];
@@ -943,6 +959,7 @@
             purchaseViewController.dataDict = dic;
             purchaseViewController.bidType = 0;
             purchaseViewController.baseTitleType = @"detail_heTong";
+            purchaseViewController.accoutType = self.accoutType;
             [self.navigationController pushViewController:purchaseViewController animated:YES];
             
         }else if ([dic[@"status"] integerValue] == 21 || [dic[@"status"] integerValue] == 22){
@@ -976,6 +993,7 @@
             collectionDetailVC.souceVC = @"P2PVC";
             collectionDetailVC.colPrdClaimId = _colPrdClaimIdStr;
             collectionDetailVC.detailDataDict = [dic objectSafeDictionaryForKey:@"data"];
+            collectionDetailVC.accoutType = SelectAccoutTypeP2P;
             [self.navigationController pushViewController:collectionDetailVC  animated:YES];
             
         }else {
@@ -987,12 +1005,18 @@
 }
 - (BOOL)checkUserCanInvestIsDetail:(BOOL)isDetail
 {
-    switch ([UserInfoSingle sharedManager].openStatus)
+    
+    NSString *tipStr1 = self.accoutType == SelectAccoutTypeP2P ? P2PTIP1:ZXTIP1;
+    NSString *tipStr2 = self.accoutType == SelectAccoutTypeP2P ? P2PTIP2:ZXTIP2;
+
+    NSInteger openStatus = self.accoutType == SelectAccoutTypeP2P ? [UserInfoSingle sharedManager].openStatus :[UserInfoSingle sharedManager].enjoyOpenStatus;
+    
+    switch (openStatus)
     {// ***hqy添加
         case 1://未开户-->>>新用户开户
         case 2://已开户 --->>>老用户(白名单)开户
         {
-            [self showHSAlert:P2PTIP1];
+            [self showHSAlert:tipStr1];
             return NO;
             break;
         }
@@ -1002,7 +1026,7 @@
                 return YES;
             }else
             {
-              [self showHSAlert:P2PTIP2];
+              [self showHSAlert:tipStr2];
                 return NO;
             }
         }
@@ -1015,9 +1039,10 @@
 - (void)showHSAlert:(NSString *)alertMessage
 {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:alertMessage delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-    alert.tag = 8000;
+    alert.tag = self.accoutType == SelectAccoutTypeP2P ?  8000 :8010 ;
     [alert show];
 }
+
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (alertView.tag == 7000) {
@@ -1027,10 +1052,16 @@
             HSHelper *helper = [HSHelper new];
             [helper pushOpenHSType:SelectAccoutTypeP2P Step:[UserInfoSingle sharedManager].openStatus nav:self.navigationController];
         }
-    }else if (alertView.tag == 9000) {
+    }else if (alertView.tag == 8010) {
+        if (buttonIndex == 1) {
+            HSHelper *helper = [HSHelper new];
+            [helper pushOpenHSType:SelectAccoutTypeHoner Step:[UserInfoSingle sharedManager].enjoyOpenStatus nav:self.navigationController];
+        }
+    }
+    else if (alertView.tag == 9000) {
         if(buttonIndex == 1){ //测试
             RiskAssessmentViewController *vc = [[RiskAssessmentViewController alloc] initWithNibName:@"RiskAssessmentViewController" bundle:nil];
-            vc.accoutType = SelectAccoutTypeP2P;
+            vc.accoutType = self.accoutType;
             [self.navigationController pushViewController:vc animated:YES];
         }
     }else if(alertView.tag == 9001){
@@ -1069,6 +1100,7 @@
         //如果未登录，展示登录页面
         [self showLoginView];
     } else {
+        self.accoutType = SelectAccoutTypeP2P;
         if ([self checkUserCanInvestIsDetail:NO]) {
             _colPrdClaimIdStr = [NSString stringWithFormat:@"%@",model.Id];
             NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys:uuid,@"userId", _colPrdClaimIdStr, @"colPrdClaimId", nil];
