@@ -391,26 +391,39 @@
 //***qyy 标类型type cell按钮的回调方法delegate
 -(void)homeButtonPressed:(UIButton *)button withCelltypeSellWay:(NSString *)strSellWay
 {
+    if ([strSellWay isEqualToString:@"12"]) {
+        UCFHonerPlanViewController *horner = [[UCFHonerPlanViewController alloc] initWithNibName:@"UCFHonerPlanViewController" bundle:nil];
+        horner.baseTitleText = @"工场尊享";
+        horner.accoutType = SelectAccoutTypeHoner;
+        [self.navigationController pushViewController:horner animated:YES];
+        return;
+    }
     UCFProjectListController *project = [[UCFProjectListController alloc] initWithNibName:@"UCFProjectListController" bundle:nil];
     project.strStyle = strSellWay;
     project.viewType = @"1";
     [self.navigationController pushViewController:project animated:YES];
 }
-
-- (void)homeButtonPressedP2PButton:(UIButton *)button
-{
+- (IBAction)homeButtonPressedP2PButton:(UIButton *)sender {
     UCFProjectListController *projectList = [[UCFProjectListController alloc] initWithNibName:@"UCFProjectListController" bundle:nil];
-//    p2p.baseTitleText = @"工场P2P";
+    //    p2p.baseTitleText = @"工场P2P";
     [self.navigationController pushViewController:projectList animated:YES];
 }
 
-- (void)homeButtonPressedHornorButton:(UIButton *)button
-{
+//- (void)homeButtonPressedP2PButton:(UIButton *)button
+//{
+//    
+//}
+- (IBAction)homeButtonPressedHornorButton:(UIButton *)sender {
     UCFHonerPlanViewController *horner = [[UCFHonerPlanViewController alloc] initWithNibName:@"UCFHonerPlanViewController" bundle:nil];
     horner.baseTitleText = @"工场尊享";
     horner.accoutType = SelectAccoutTypeHoner;
     [self.navigationController pushViewController:horner animated:YES];
 }
+
+//- (void)homeButtonPressedHornorButton:(UIButton *)button
+//{
+//    
+//}
 
 - (void)investBtnClicked:(UIButton *)button{
     if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
@@ -593,7 +606,7 @@
     
     // 2秒后刷新表格UI
     [UIView animateWithDuration:0.25 animations:^{
-        _headerView.frame = CGRectMake(0, 0, ScreenWidth, CGRectGetHeight(_bannerView.frame) + _tipsViewHeight.constant + labHight + functionBtnViewHight);
+        _headerView.frame = CGRectMake(0, 0, ScreenWidth, CGRectGetHeight(_bannerView.frame) + _tipsViewHeight.constant + labHight + functionBtnViewHight + 62);
         _tableView.tableHeaderView = _headerView;
         DBLOG(@"===%@",NSStringFromCGRect(_headerView.frame));
     }];
@@ -648,7 +661,7 @@
         InvestmentItemInfo *info = _investmentArr[indexPath.row];
         if(![info.homeType isEqualToString:@""])
         {
-            return 62;
+            return 32;
         }else{
             return 100;
         }
@@ -697,17 +710,17 @@
                 cellt = [[NSBundle mainBundle]loadNibNamed:@"UCFLatesProjectTableViewCell" owner:self options:nil][0];
                 cellt.delegate = self;
             }
-//            cellt.but_press.tag = 100 + indexPath.row;
-//            cellt.typeSellWay = info.homeType;
-//            cellt.label_title.text = info.homeTile;
+            cellt.but_press.tag = 100 + indexPath.row;
+            cellt.typeSellWay = info.homeType;
+            cellt.label_title.text = info.homeTile;
             
-//            if (![info.homeIconUrl isEqualToString:@""]) {
-//                [cellt.image_ahead sd_setImageWithURL:[NSURL URLWithString:info.homeIconUrl] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL){
-//                    
-//                }];
-//            }else{
-//                cellt.image_ahead.image = [UIImage imageNamed:@"tabbar_icon_project_normal.png"];
-//            }
+            if (![info.homeIconUrl isEqualToString:@""]) {
+                [cellt.image_ahead sd_setImageWithURL:[NSURL URLWithString:info.homeIconUrl] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL){
+                    
+                }];
+            }else{
+                cellt.image_ahead.image = [UIImage imageNamed:@"tabbar_icon_project_normal.png"];
+            }
             return cellt;
         }else{
             //************************************************qyy 2016-11-17首页接口改造
