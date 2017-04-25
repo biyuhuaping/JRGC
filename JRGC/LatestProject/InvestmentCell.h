@@ -16,7 +16,7 @@
 @class InvestmentCellDelegate;
 @protocol InvestmentCellDelegate <NSObject>
 
-- (void)investBtnClicked:(UIButton *)button;
+- (void)investBtnClicked:(UIButton *)button withType:(NSString *)type;
 
 @end
 @interface InvestmentCell : UITableViewCell
