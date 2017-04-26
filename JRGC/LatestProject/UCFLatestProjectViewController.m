@@ -431,11 +431,11 @@
         [self showLoginView];
     } else {
         
-        
-        if ([type isEqualToString:@"认购"]) { //尊享标
-            self.accoutType = SelectAccoutTypeHoner;
+        if([type isEqualToString:@"2"])
+        {
+            self.accoutType  = SelectAccoutTypeHoner;
         }else{
-            self.accoutType = SelectAccoutTypeP2P;
+            self.accoutType  = SelectAccoutTypeP2P;
         }
 
         if ([self checkUserCanInvestIsDetail:NO]) {
@@ -780,11 +780,12 @@
             [self showLoginView];
         } else {
             
-             InvestmentCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-            if ([cell.progressView.textStr isEqualToString:@"认购"]) {
+            InvestmentItemInfo *info = _investmentArr[indexPath.row];
+            if([info.type isEqualToString:@"2"])
+            {
                 self.accoutType  = SelectAccoutTypeHoner;
-            }else if ([cell.progressView.textStr isEqualToString:@"投资"]){
-                self.accoutType  = SelectAccoutTypeP2P;
+            }else{
+                 self.accoutType  = SelectAccoutTypeP2P;
             }
             if ([self checkUserCanInvestIsDetail:YES]) {
                 _indexPath = indexPath;
