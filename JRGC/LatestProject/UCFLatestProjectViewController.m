@@ -121,7 +121,7 @@
     self.tableView.tableFooterView = footerView;
     UILabel *tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 15, SCREEN_WIDTH, 20)];
     tipLabel.font = [UIFont systemFontOfSize:12];
-    tipLabel.text = @"市场有风险 投资需谨慎";
+    tipLabel.text = @"市场有风险  投资需谨慎";
     tipLabel.textColor = UIColorWithRGB(0x999999);
     tipLabel.textAlignment = NSTextAlignmentCenter;
     [footerView addSubview:tipLabel];
@@ -669,7 +669,7 @@
         InvestmentItemInfo *info = _investmentArr[indexPath.row];
         if(![info.homeType isEqualToString:@""])
         {
-            return 32;
+            return 27;
         }else{
             return 100;
         }

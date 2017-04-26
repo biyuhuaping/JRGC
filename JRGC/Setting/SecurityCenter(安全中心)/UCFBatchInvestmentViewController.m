@@ -565,6 +565,7 @@ static NSString *thirdStr = @"自动投标授权已经开启";
                  webView.webDataDic =dataDict;
                  webView.navTitle = @"自动投标授权";
                  webView.sourceType = _sourceType;
+                 webView.accoutType = self.accoutType;
                  [self.navigationController pushViewController:webView animated:YES];
              } else {
                  [self initThirdSectionView];
