@@ -714,6 +714,7 @@
             webView.rootVc = self.rootVc;
             webView.webDataDic =dataDict;
             webView.navTitle = @"即将跳转";
+            webView.accoutType = self.accoutType;
             [self.navigationController pushViewController:webView animated:YES];
             
             NSMutableArray *navVCArray = [[NSMutableArray alloc] initWithArray:self.navigationController.viewControllers];

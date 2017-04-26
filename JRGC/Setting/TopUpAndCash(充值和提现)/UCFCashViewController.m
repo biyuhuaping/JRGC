@@ -676,6 +676,7 @@
             webVC.webDataDic = dataDict;
             webVC.navTitle = @"即将跳转";
             webVC.url = urlStr;
+            webVC.accoutType = self.accoutType;
             [self.navigationController pushViewController:webVC animated:YES];
         }
         else{
