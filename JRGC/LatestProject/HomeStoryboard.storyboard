@@ -350,16 +350,16 @@
                                         </view>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="aQc-Oy-zro" secondAttribute="bottom" id="2uJ-ro-G0b"/>
                                         <constraint firstItem="aQc-Oy-zro" firstAttribute="leading" secondItem="PnW-Jo-fnU" secondAttribute="leading" id="3tZ-8F-maV"/>
                                         <constraint firstItem="ydc-Zu-zEq" firstAttribute="top" secondItem="PnW-Jo-fnU" secondAttribute="top" id="8zZ-7h-y4k"/>
-                                        <constraint firstAttribute="trailing" secondItem="RPJ-ko-laS" secondAttribute="trailing" id="C6O-HZ-nJz"/>
                                         <constraint firstAttribute="trailing" secondItem="aQc-Oy-zro" secondAttribute="trailing" id="I4x-hG-td0"/>
                                         <constraint firstItem="r5c-yl-xjX" firstAttribute="top" secondItem="PnW-Jo-fnU" secondAttribute="top" id="KVk-lX-xBd"/>
-                                        <constraint firstItem="RPJ-ko-laS" firstAttribute="top" secondItem="r5c-yl-xjX" secondAttribute="bottom" id="NCP-H6-BGl"/>
+                                        <constraint firstAttribute="bottom" secondItem="RPJ-ko-laS" secondAttribute="bottom" constant="60" id="NyO-S1-baF"/>
                                         <constraint firstItem="r5c-yl-xjX" firstAttribute="leading" secondItem="PnW-Jo-fnU" secondAttribute="leading" id="OJr-75-aq5"/>
-                                        <constraint firstItem="aQc-Oy-zro" firstAttribute="top" secondItem="RPJ-ko-laS" secondAttribute="bottom" id="Sqp-Dt-kI2"/>
-                                        <constraint firstItem="RPJ-ko-laS" firstAttribute="leading" secondItem="PnW-Jo-fnU" secondAttribute="leading" id="Wqt-5c-mBd"/>
                                         <constraint firstAttribute="trailing" secondItem="ydc-Zu-zEq" secondAttribute="trailing" id="b6c-53-fcP"/>
+                                        <constraint firstAttribute="trailing" secondItem="RPJ-ko-laS" secondAttribute="trailing" id="bMG-eT-nTQ"/>
+                                        <constraint firstItem="RPJ-ko-laS" firstAttribute="leading" secondItem="PnW-Jo-fnU" secondAttribute="leading" id="iCu-1E-rns"/>
                                         <constraint firstItem="ydc-Zu-zEq" firstAttribute="leading" secondItem="PnW-Jo-fnU" secondAttribute="leading" id="oe5-Wj-NyM"/>
                                         <constraint firstAttribute="trailing" secondItem="r5c-yl-xjX" secondAttribute="trailing" id="whA-qK-J3N"/>
                                         <constraint firstItem="r5c-yl-xjX" firstAttribute="top" secondItem="ydc-Zu-zEq" secondAttribute="bottom" id="ydh-Ag-vLr"/>
