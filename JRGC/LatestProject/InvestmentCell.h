@@ -30,7 +30,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *repayModeLab;   //还款方式
 @property (strong, nonatomic) IBOutlet UILabel *minInvestLab;   //起投金额
 @property (strong, nonatomic) IBOutlet UILabel *remainingLab;   //可投金额
-
+@property (strong, nonatomic) NSString *type; //标类型，1为P2P 2为尊享
 
 @property (strong, nonatomic) IBOutlet UIImageView *imgView1;
 @property (strong, nonatomic) IBOutlet UIImageView *imgView2;
@@ -41,6 +41,7 @@
 
 @property (weak, nonatomic) IBOutlet CircleProgressView *progressView;
 @property (assign, nonatomic)id<InvestmentCellDelegate> delegate;
+
 - (void)setItemInfo:(InvestmentItemInfo *)aItemInfo;
 - (void)setTransterInfo:(UCFTransterBid *)aItemInfo;
 - (void)setInvestItemInfo:(InvestmentItemInfo *)aItemInfo;
