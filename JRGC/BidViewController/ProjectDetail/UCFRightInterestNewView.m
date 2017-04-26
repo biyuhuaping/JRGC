@@ -557,7 +557,7 @@
                 return 27;
             }
         } else if(([indexPath section] == 5  && !_isHideBorrowerInformation)|| ([indexPath section] == 3 && _isHideBorrowerInformation)) {
-            if ([indexPath row] == 0 || [indexPath row] == 4 - 1) {
+            if ([indexPath row] == 0 || [indexPath row] == _auditRecordArray.count - 1) {
                 return 27 + 8;
             } else {
                 return 27;

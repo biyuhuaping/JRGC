@@ -28,11 +28,10 @@
 
 - (IBAction)investmentClick:(id)sender {
     if ([self.delegate isKindOfClass:[UCFLatestProjectViewController class]]) {
-        if (self.delegate && [self.delegate respondsToSelector:@selector(investBtnClicked:)] && ([self.progressView.textStr isEqualToString:@"投资"] || [self.progressView.textStr isEqualToString:@"认购"])) {
-            [self.delegate investBtnClicked:sender];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(investBtnClicked:withType:)] ) {
+            [self.delegate investBtnClicked:sender withType:self.type]; //标类型];
         }
-    } 
-
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -56,6 +55,7 @@
 
 //设置最新项目cell数据
 - (void)setItemInfo:(InvestmentItemInfo *)aItemInfo{
+    self.type = aItemInfo.type; //标类型
     _prdNameLab.text = aItemInfo.prdName;//债权名称
     _progressLab.text = [NSString stringWithFormat:@"%@%%",aItemInfo.annualRate];//年化收益率
     [_progressLab setFont:[UIFont systemFontOfSize:13] string:@"%"];
@@ -149,6 +149,7 @@
 
 //设置债权转让cell数据
 - (void)setTransterInfo:(UCFTransterBid *)aItemInfo{
+
     _prdNameLab.text = aItemInfo.name;//转让标名称
     _progressLab.text = [NSString stringWithFormat:@"%@%%",aItemInfo.transfereeYearRate];//受让人年化收益
     _repayPeriodLab.text = [NSString stringWithFormat:@"%@天",aItemInfo.lastDays];//天数
@@ -184,6 +185,7 @@
 
 //最新投标页表头
 - (void)setBidItemInfo:(InvestmentItemInfo *)aItemInfo{
+    self.type = aItemInfo.type; //标类型
     _prdNameLab.text = aItemInfo.prdName;//债权名称
     _progressLab.text = [NSString stringWithFormat:@"%@%%",aItemInfo.annualRate];//年化收益率
     [_progressLab setFont:[UIFont systemFontOfSize:13] string:@"%"];
@@ -266,6 +268,7 @@
 
 // 投资页普通表头
 - (void)setInvestItemInfo:(InvestmentItemInfo *)aItemInfo{
+    self.type = aItemInfo.type; //标类型
     _investButton.userInteractionEnabled = NO;
     _prdNameLab.text = aItemInfo.prdName;//债权名称
     _prdNameLab.textColor = UIColorWithRGB(0x333333);
