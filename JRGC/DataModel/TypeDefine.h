@@ -17,7 +17,8 @@
 #define LOGIn_ARGU          @"api/user/v2/login.json"
 #define USER_REGIST         @"api/register/v2/register.json"
 #define PRDCLAIMS_LIST      @"newPrdClaims/dataList"//债券(最新项目)列表
-#define PRDCLAIMS_LISTNEWVERSION   @"api/prdClaims/v2/dataList.json"//首页数据列表
+//#define PRDCLAIMS_LISTNEWVERSION   @"api/prdClaims/v2/dataList.json"//首页数据列表
+#define PRDCLAIMS_LISTNEWVERSION   @"api/prdClaims/v2/dataListNew.json"//首页数据列表
 #define PRDTRANSFER_LIST    @"newprdTransfer/dataList"//债券转让列表
 #define PRDCLAIMS_DETAIL    @"newPrdClaims/getDetailTwo"//普通标详情
 #define PRDTRANSFER_DETAIL  @"newprdTransfer/showDetailTwo"//转让标详情
