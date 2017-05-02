@@ -403,22 +403,22 @@
     project.viewType = @"1";
     [self.navigationController pushViewController:project animated:YES];
 }
-//- (IBAction)homeButtonPressedP2PButton:(UIButton *)sender {
-//    UCFProjectListController *projectList = [[UCFProjectListController alloc] initWithNibName:@"UCFProjectListController" bundle:nil];
-//    //    p2p.baseTitleText = @"工场P2P";
-//    [self.navigationController pushViewController:projectList animated:YES];
-//}
+- (IBAction)homeButtonPressedP2PButton:(UIButton *)sender {
+    UCFProjectListController *projectList = [[UCFProjectListController alloc] initWithNibName:@"UCFProjectListController" bundle:nil];
+    //    p2p.baseTitleText = @"工场P2P";
+    [self.navigationController pushViewController:projectList animated:YES];
+}
 
 //- (void)homeButtonPressedP2PButton:(UIButton *)button
 //{
 //    
 //}
-//- (IBAction)homeButtonPressedHornorButton:(UIButton *)sender {
-//    UCFHonerPlanViewController *horner = [[UCFHonerPlanViewController alloc] initWithNibName:@"UCFHonerPlanViewController" bundle:nil];
-//    horner.baseTitleText = @"工场尊享";
-//    horner.accoutType = SelectAccoutTypeHoner;
-//    [self.navigationController pushViewController:horner animated:YES];
-//}
+- (IBAction)homeButtonPressedHornorButton:(UIButton *)sender {
+    UCFHonerPlanViewController *horner = [[UCFHonerPlanViewController alloc] initWithNibName:@"UCFHonerPlanViewController" bundle:nil];
+    horner.baseTitleText = @"工场尊享";
+    horner.accoutType = SelectAccoutTypeHoner;
+    [self.navigationController pushViewController:horner animated:YES];
+}
 
 //- (void)homeButtonPressedHornorButton:(UIButton *)button
 //{
@@ -614,7 +614,7 @@
     
     // 2秒后刷新表格UI
     [UIView animateWithDuration:0.25 animations:^{
-        _headerView.frame = CGRectMake(0, 0, ScreenWidth, CGRectGetHeight(_bannerView.frame) + _tipsViewHeight.constant + labHight + functionBtnViewHight);
+        _headerView.frame = CGRectMake(0, 0, ScreenWidth, CGRectGetHeight(_bannerView.frame) + _tipsViewHeight.constant + labHight + functionBtnViewHight + 62);
         _tableView.tableHeaderView = _headerView;
         DBLOG(@"===%@",NSStringFromCGRect(_headerView.frame));
     }];
