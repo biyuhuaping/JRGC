@@ -70,9 +70,9 @@
             } else {
                 
                 if ([_sourceVc isEqualToString:@"transiBid"]) {
-                    [investmentButton setTitle:@"立即购买" forState:UIControlStateNormal];
+                    [investmentButton setTitle:@"立即出借" forState:UIControlStateNormal];
                 }else {
-                    NSString *buttonTitle = isP2P ? @"立即投资":@"立即认购";
+                    NSString *buttonTitle = isP2P ? @"立即出借":@"立即认购";
                     [investmentButton setTitle:buttonTitle forState:UIControlStateNormal];
                 }
                 investmentButton.backgroundColor = UIColorWithRGB(0xfd4d4c);
@@ -98,9 +98,9 @@
 
         } else {
             if ([_sourceVc isEqualToString:@"transiBid"]) {
-                [investmentButton setTitle:@"立即购买" forState:UIControlStateNormal];
+                [investmentButton setTitle:@"立即出借" forState:UIControlStateNormal];
             }else {
-                NSString *buttonTitle = isP2P ? @"立即投资":@"立即认购";
+                NSString *buttonTitle = isP2P ? @"立即出借":@"立即认购";
                 [investmentButton setTitle:buttonTitle forState:UIControlStateNormal];
             }
         }

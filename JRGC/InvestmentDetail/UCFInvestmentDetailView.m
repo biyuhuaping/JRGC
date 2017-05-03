@@ -706,7 +706,7 @@
             UILabel *tarnsBidLabel2 = (UILabel*)[cell.contentView viewWithTag:0x1001];
             UILabel *tarnsBidLabel3 = (UILabel*)[cell.contentView viewWithTag:0x1002];
             UILabel *tarnsBidLabel4 = (UILabel*)[cell.contentView viewWithTag:0x1003];
-            NSMutableAttributedString *str1 = [SharedSingleton getAcolorfulStringWithText1:@"预期年化：" Color1:UIColorWithRGB(0x999999) Text2:[NSString stringWithFormat:@"%@%%", self.investDetailModel.oldPrdClaimAnnualRate] Color2:UIColorWithRGB(0x555555) AllText:[NSString stringWithFormat:@"预期年化：%@%%", self.investDetailModel.oldPrdClaimAnnualRate]];
+            NSMutableAttributedString *str1 = [SharedSingleton getAcolorfulStringWithText1:@"预期年化利率：" Color1:UIColorWithRGB(0x999999) Text2:[NSString stringWithFormat:@"%@%%", self.investDetailModel.oldPrdClaimAnnualRate] Color2:UIColorWithRGB(0x555555) AllText:[NSString stringWithFormat:@"预期年化利率：%@%%", self.investDetailModel.oldPrdClaimAnnualRate]];
             tarnsBidLabel1.attributedText = str1;
             
             NSMutableAttributedString *str2 = [SharedSingleton getAcolorfulStringWithText1:@"原标期限：" Color1:UIColorWithRGB(0x999999) Text2:[NSString stringWithFormat:@"%@", self.investDetailModel.oldPrdClaimRepayPeriod] Color2:UIColorWithRGB(0x555555) AllText:[NSString stringWithFormat:@"原标期限：%@", self.investDetailModel.oldPrdClaimRepayPeriod]];

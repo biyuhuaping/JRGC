@@ -119,10 +119,11 @@
 //标准表头
 - (void)drawHeadView
 {
-    CGFloat stringWidth = [@"预期年化" sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:11]}].width;
+    CGFloat stringWidth = [@"预期年化利率" sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:11]}].width;
     
     //顶部年化收益 投资期限
-    UILabel *annualLabel = [UILabel labelWithFrame:CGRectMake([Common calculateNewSizeBaseMachine:15],0 + [Common calculateNewSizeBaseMachine:50],0,11) text:@"预期年化" textColor:[UIColor whiteColor] font:[UIFont systemFontOfSize:11]];
+    UILabel *annualLabel = [UILabel labelWithFrame:CGRectMake([Common calculateNewSizeBaseMachine:15],0 + [Common calculateNewSizeBaseMachine:50],0,11) text:@"预期年化利率" textColor:[UIColor whiteColor] font:[UIFont systemFontOfSize:11]];
+    annualLabel.textAlignment = NSTextAlignmentLeft;
     [_headBkView addSubview:annualLabel];
     
     CGRect annualLabelFrame = annualLabel.frame;
@@ -138,15 +139,16 @@
     [_headBkView addSubview:_subsidizedInterestLabel];
     
     
-   
-    UILabel *markLabel = [UILabel labelWithFrame:CGRectMake([Common calculateNewSizeBaseMachine:15],0 + [Common calculateNewSizeBaseMachine:155]-[Common calculateNewSizeBaseMachine:45] - 11,0,11) text:@"投资期限" textColor:[UIColor whiteColor] font:[UIFont systemFontOfSize:11]];
+    
+    UILabel *markLabel = [UILabel labelWithFrame:CGRectMake([Common calculateNewSizeBaseMachine:15],0 + [Common calculateNewSizeBaseMachine:155]-[Common calculateNewSizeBaseMachine:45] - 11,0,11) text:@"出借期限" textColor:[UIColor whiteColor] font:[UIFont systemFontOfSize:11]];
     [_headBkView addSubview:markLabel];
     if (_type == PROJECTDETAILTYPEBONDSRRANSFER) {
-        markLabel.text = @"投资期限";
+        markLabel.text = @"债权期限";
     } else {
-        NSString *markLabelStr =_isP2P ? @"投资期限" : @"认购期限";
+        NSString *markLabelStr =_isP2P ? @"出借期限" : @"认购期限";
         markLabel.text = markLabelStr;
     }
+    markLabel.textAlignment = NSTextAlignmentLeft;
     CGRect markLabelFrame = markLabel.frame;
     markLabelFrame.size.width = stringWidth;
     markLabel.frame = markLabelFrame;
@@ -168,6 +170,7 @@
     CGRect remainLabelFrame = remainLabel.frame;
     remainLabelFrame.size.width = stringWidth;
     remainLabel.frame = remainLabelFrame;
+    remainLabel.textAlignment = NSTextAlignmentLeft;
     if (_type == PROJECTDETAILTYPEBONDSRRANSFER) {
         remainLabel.text = @"剩余额度";
     } else {
@@ -188,6 +191,7 @@
     CGRect totalLabelFrame = totalLabel.frame;
     totalLabelFrame.size.width = stringWidth;
     totalLabel.frame = totalLabelFrame;
+    totalLabel.textAlignment = NSTextAlignmentLeft;
     
     _totalMoneyLabel = [UILabel labelWithFrame:CGRectMake(CGRectGetMaxX(totalLabel.frame) + 10,totalLabel.frame.origin.y - 1,150,14) text:@"" textColor:UIColorWithRGB(0x7e96c4) font:[UIFont systemFontOfSize:14]];
     [_headBkView addSubview:_totalMoneyLabel];
