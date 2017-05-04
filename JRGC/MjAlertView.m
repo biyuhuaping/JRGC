@@ -392,6 +392,56 @@
     }
     return self;
 }
+-(instancetype)initPlatformUpgradeNotice:(id)delegate{
+    self = [self init];
+    if (self) {
+
+        
+        UIImageView *headerView  = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 250, 80)];
+        headerView.userInteractionEnabled = YES;
+        headerView.image = [UIImage imageNamed:@"level_up"];
+        [self.showView addSubview:headerView];
+        
+        UIView *whiteBaseView = [[UIView alloc] initWithFrame:CGRectMake(0, 70, 250, 300)];
+        whiteBaseView.backgroundColor = [UIColor whiteColor];
+        whiteBaseView.layer.cornerRadius = 5;
+        whiteBaseView.layer.masksToBounds = YES;
+        [self.showView addSubview:whiteBaseView];
+        
+        UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(10, 15, CGRectGetWidth(whiteBaseView.frame) - 20, 220)];
+        textView.backgroundColor = [UIColor whiteColor];
+//        textView.textColor = UIColorWithRGB(0x666666);
+//        textView.font = [UIFont systemFontOfSize:11.0f];
+        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+        paragraphStyle.lineSpacing = 5;// 字体的行间距
+        NSDictionary *attributes = @{
+                                     NSFontAttributeName:[UIFont systemFontOfSize:11.2],
+                                     NSParagraphStyleAttributeName:paragraphStyle,
+                                     NSForegroundColorAttributeName :UIColorWithRGB(0x555555)
+                                     };
+        textView.attributedText = [[NSAttributedString alloc] initWithString:@"尊敬的用户：\n       感谢您一直以来对金融工场平台的大力支持，为了给您提供更优质专业的服务，金融工场平台品牌将作如下调整：\n1、现由北京凤凰信用管理有限公司运营的金融工场品牌自2017年8月9日起由北京豆哥投资管理有限公司负责运营与使用。\n2、金融工场平台原用户的权益不受影响，北京凤凰信用管理有限公司运营的工场微金（网址:www.gongchangp2p.com）平台将继续履行金融工场与原用户订立的服务协议，继续根据相关协议向原用户提供相关服务，直至相关协议履行完毕。\n感谢您对金融工场平台的信任和支持！\n\n\t\t北京豆哥投资管理有限公司" attributes:attributes];
+        textView.editable = NO;
+        [whiteBaseView addSubview:textView];
+        
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        button.frame = CGRectMake((CGRectGetWidth(whiteBaseView.frame) - 135)/2,CGRectGetMaxY(textView.frame) + 15, 135, 32);
+        [button setBackgroundColor:UIColorWithRGB(0xfd4d4c)];
+        button.layer.cornerRadius = 16.0f;
+        [button addTarget:self action:@selector(readAndConfirm:) forControlEvents:UIControlEventTouchUpInside];
+        button.titleLabel.font = [UIFont systemFontOfSize:14.0f];
+        [button setTitle:@"阅读并确认" forState:UIControlStateNormal];
+        [whiteBaseView addSubview:button];
+
+        [self.showView bringSubviewToFront:headerView];
+        self.showView.frame = CGRectMake(0, 0, 250, 380);
+        self.showView.backgroundColor = [UIColor clearColor];
+        self.delegate =  delegate;
+        // 默认显示动画类型
+        self.alertAnimateType = MjAlertViewAnimateTypeNone;
+        
+    }
+    return self;
+}
 - (void)webViewDidFinishLoad:(UIWebView*)webView{
     //字体大小
     [_webView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('body')[0].style.webkitTextSizeAdjust= '275%'"];
@@ -641,6 +691,13 @@
 }
 
 #pragma mark - 按钮点击事件处理
+- (void)readAndConfirm:(UIButton *)button
+{
+    if ([self.delegate respondsToSelector:@selector(mjalertView:didClickedButton:andClickedIndex:)]) {
+        [self.delegate mjalertView:self didClickedButton:button andClickedIndex:0];
+        [self hide];
+    }
+}
 - (void)btnClicked:(UIButton *)button
 {
     if ([self.delegate respondsToSelector:@selector(mjalertView:didClickedButton:andClickedIndex:)]) {

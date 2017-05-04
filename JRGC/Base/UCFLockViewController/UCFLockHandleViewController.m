@@ -25,6 +25,7 @@
 #import "BaseNavigationViewController.h"
 #import "ToolSingleTon.h"
 #import "UCFRegisterFinshViewController.h"
+#import "MongoliaLayerCenter.h"
 #define kTipColorNormal [UIColor blackColor]
 #define kTipColorError [UIColor redColor]
 @interface UCFLockHandleViewController ()
@@ -434,8 +435,7 @@
 -(void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-//     [ToolSingleTon sharedManager].checkIsInviteFriendsAlert = [[NSUserDefaults standardUserDefaults] boolForKey:NOVICEPOLICEONOFF];
-//    [[NSNotificationCenter defaultCenter] postNotificationName:@"UPDATEINVESTDATA" object:nil];
+    [[MongoliaLayerCenter sharedManager] showLogic];
 }
 // 绘制有touchID 的界面
 - (void)initTouchIDLockView
