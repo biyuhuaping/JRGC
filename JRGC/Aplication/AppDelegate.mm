@@ -38,6 +38,7 @@
 #import "MD5Util.h"
 //#import "BaseNavigationViewController.h"
 #import "JPUSHService.h"//极光推送
+#import "MongoliaLayerCenter.h"
 // iOS10注册APNs所需头文件
 #ifdef NSFoundationVersionNumber_iOS_9_x_Max
 #import <UserNotifications/UserNotifications.h>
@@ -151,8 +152,8 @@
             _isShowAdversement = YES;
         } else {
             _isShowAdversement = NO;
-            if (!self.lockVc && ![[NSUserDefaults standardUserDefaults] valueForKey:@"fistPage1"]) {
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"CheckInviteFriendsAlertView" object:nil];
+            if (!self.lockVc) {
+                [[MongoliaLayerCenter sharedManager] showLogic];
             }
         }
         //显示广告
@@ -191,21 +192,6 @@
     // 开启Growing调试日志 可以开启日志
 //    [Growing setEnableLog:NO];
     
-    // ------------ 极光推送 ------------
-//    if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
-//        //       categories
-//        [JPUSHService registerForRemoteNotificationTypes:(UIUserNotificationTypeBadge |
-//                                                          UIUserNotificationTypeSound |
-//                                                          UIUserNotificationTypeAlert)
-//                                              categories:nil];
-//    } else {
-//        //categories    nil
-//        [JPUSHService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
-//                                                          UIRemoteNotificationTypeSound |
-//                                                          UIRemoteNotificationTypeAlert)
-//                                              categories:nil];
-//    }
-    
     JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
     entity.types = JPAuthorizationOptionAlert|JPAuthorizationOptionBadge|JPAuthorizationOptionSound;
     if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
@@ -214,10 +200,7 @@
 //         NSSet<UIUserNotificationCategory *> *categories for iOS8 and iOS9
     }
     [JPUSHService registerForRemoteNotificationConfig:entity delegate:self];
-//    [JPUSHService setupWithOption:launchOptions appKey:JPUSHKEY
-//                          channel:nil
-//                 apsForProduction:YES
-//            advertisingIdentifier:nil];
+
 
     [JPUSHService setupWithOption:launchOptions appKey:JPUSHKEY channel:nil apsForProduction:YES];
     [JPUSHService setAlias:[[NSUserDefaults standardUserDefaults] objectForKey:UUID] callbackSelector:@selector(tagsAliasCallback:tags:alias:) object:self];
@@ -241,10 +224,6 @@
     
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isShowHornor"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    
-//#warning 测试代码 是否显示尊享 在投资成功后调用
-    
-
     return YES;
 }
 
@@ -361,7 +340,7 @@
           [[ToolSingleTon sharedManager] checkIsSign];
     });
 }
-
+#pragma mark - 广告页
 //显示广告
 - (void)showAdvertisement
 {
@@ -396,8 +375,8 @@
     [_advertisementView removeFromSuperview];
     _advertisementView = nil;
     [_lockVc.view setUserInteractionEnabled:YES];
-    if (!self.lockVc && [[NSUserDefaults standardUserDefaults] valueForKey:@"fistPage1"]) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"CheckInviteFriendsAlertView" object:nil];
+    if (!self.lockVc) {
+        [[MongoliaLayerCenter sharedManager] showLogic];
     }
     //添加一个通知 知道广告业退出了 去触发touchid 的事件
     [self.lockVc openTouchidAlert];
@@ -414,13 +393,8 @@
         }];
     }
 }
+#pragma mark ----------
 
-
-//- (void)checkIsBeta
-//{
-//    NSString *strParameters = [NSString stringWithFormat:@"type=%@",@"BETA"];
-//    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagIsBetaVerSion owner:self];
-//}
 -(void)beginPost:(kSXTag)tag
 {
     
@@ -453,14 +427,11 @@
     CalculatorView * view =  (CalculatorView * )[self.window viewWithTag:173924];;
     [view removeFromSuperview];
     _isFirstStart = YES;
-
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     _backTime = 0;
     
     _backgroundUpdateTask = [application beginBackgroundTaskWithExpirationHandler:^{
         // 10分钟后执行这里，应该进行一些清理工作，如断开和服务器的连接等
-        // ...
-        // stopped or ending the task outright.
         [application endBackgroundTask:_backgroundUpdateTask];
         _backgroundUpdateTask = UIBackgroundTaskInvalid;
     }];
@@ -559,26 +530,24 @@
 //进入前台的时候，判断是否是首页页面,如果是 通知邀友弹框
 - (void)checkFirstViewController
 {
-    NSInteger selectIndex = self.tabBarController.selectedIndex;
-    BOOL isOpenTouchIdLock = [[NSUserDefaults standardUserDefaults] boolForKey:@"isUserShowTouchIdLockView"];
-    BOOL isOpenLockView = [[NSUserDefaults standardUserDefaults] boolForKey:@"useLockView"];
-    if (selectIndex == 0 && !isOpenTouchIdLock && !isOpenLockView) {
-        UINavigationController *nav = [self.tabBarController.viewControllers objectAtIndex:0];
-        if ([nav.visibleViewController isKindOfClass:[UCFLatestProjectViewController class]]) {
-         [[NSNotificationCenter defaultCenter] postNotificationName:@"CheckInviteFriendsAlertView" object:nil];
+    dispatch_queue_t queue= dispatch_get_main_queue();
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), queue, ^{
+        DBLog(@"主队列--延迟执行------%@",[NSThread currentThread]);
+        NSInteger selectIndex = self.tabBarController.selectedIndex;
+        if (selectIndex == 0 && !self.lockVc) {
+            UINavigationController *nav = [self.tabBarController.viewControllers objectAtIndex:0];
+            if ([nav.visibleViewController isKindOfClass:[UCFLatestProjectViewController class]]) {
+                [[MongoliaLayerCenter sharedManager] showLogic];
+            }
         }
-    }
+    });
 }
 - (void)checkIsLockView
 {
-    //判断当前页是否解锁页
-//    if (_advertisementView == nil) {
-//        if ([Common deveiceIsHaveTouchId]) {
-            if ([LockFlagSingle sharedManager].disappearType == DisHome && [LockFlagSingle sharedManager].showSection == LockFingerprint) {
-                 [self.lockVc openTouchidAlert];
-            }
-//        }
-//    }
+    //判断当前页是否解锁
+    if ([LockFlagSingle sharedManager].disappearType == DisHome && [LockFlagSingle sharedManager].showSection == LockFingerprint) {
+         [self.lockVc openTouchidAlert];
+    }
 }
 - (void)applicationWillTerminate:(UIApplication *)application {
     //   将要杀死进程，删除保存的亮度数据和工场码标示符
@@ -591,7 +560,6 @@
 - (void)showTabbarController
 {
     self.tabBarController = [[UCFMainTabBarController alloc] init];
-//    BaseNavigationViewController *nav = [[BaseNavigationViewController alloc] initWithRootViewController:self.tabBarController];
     self.window.rootViewController = self.tabBarController;
 }
 
@@ -688,9 +656,9 @@
 #pragma 新手政策弹框
 - (void)checkNovicePoliceOnOff
 {
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:NOVICEPOLICEONOFF];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    [ToolSingleTon sharedManager].checkIsInviteFriendsAlert = NO;
+//    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:NOVICEPOLICEONOFF];
+//    [[NSUserDefaults standardUserDefaults] synchronize];
+//    [ToolSingleTon sharedManager].checkIsInviteFriendsAlert = NO;
     //请求开关状态
     [[NetworkModule sharedNetworkModule] newPostReq:@{} tag:kSXTagGetInfoForOnOff owner:self signature:NO Type:SelectAccoutDefault];
 }
@@ -704,10 +672,7 @@
 - (void)novicecheck:(NSDictionary *)dic
 {
     int  novicePoliceOnOff = [[dic objectSafeForKey:@"novicePoliceOnOff"] intValue];
-    BOOL policeOnOff = novicePoliceOnOff > 0 ? YES:NO;
-    [[NSUserDefaults standardUserDefaults] setBool:policeOnOff forKey:NOVICEPOLICEONOFF];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    [ToolSingleTon sharedManager].checkIsInviteFriendsAlert = policeOnOff;
+    [[MongoliaLayerCenter sharedManager].mongoliaLayerDic setValue:[NSNumber numberWithInt:novicePoliceOnOff] forKey:@"novicePoliceOnOff"];
 }
 - (void)zxSwitchCheck:(NSDictionary *)dic
 {

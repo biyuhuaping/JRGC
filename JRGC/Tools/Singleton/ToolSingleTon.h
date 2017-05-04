@@ -11,7 +11,7 @@
 @interface ToolSingleTon : NSObject
 @property(nonatomic, copy)NSString      *apptzticket;
 
-@property(nonatomic,assign) BOOL checkIsInviteFriendsAlert;//监测是否邀友赚钱弹框
+//@property(nonatomic,assign) BOOL checkIsInviteFriendsAlert;//监测是否邀友赚钱弹框
 + (ToolSingleTon *)sharedManager;
 
 //检测是否已签到

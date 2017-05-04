@@ -46,13 +46,15 @@
 #import "MjAlertView.h"
 #import "NSDate+IsBelongToToday.h"
 #import "HSHelper.h"
+#import "MongoliaLayerCenter.h"
+#import "MaskView.h"
 @interface UCFLatestProjectViewController ()<InvestmentCellDelegate,FourOFourViewDelegate,CycleViewDelegate,PromptViewDelegate,homeButtonPressedCellDelegate, UITableViewDataSource, UITableViewDelegate, UCFCollectionBidCellDelegate,MjAlertViewDelegate,PraiseAlertDelegate>
 {
     UIView *_clickView;
     BOOL _refreshHead;
     BOOL _bringFooterToClick;
     BJGridItem *_dragBtn;
-    PraiseAlert     *alertTool;
+//    PraiseAlert     *alertTool;
     NSString *_colPrdClaimIdStr;//集合标Id
 }
 
@@ -162,7 +164,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(beginShowLoading) name:@"LatestProjectUpdate" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(alertViewInviteFriendsVC) name:@"CheckInviteFriendsAlertView" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showGoodCommentAlert:) name:CHECK_GOOD_COMMENT object:nil];
-
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showPlatformUpgradeNotice) name:CHECK_UPDATE_ALERT object:nil];
     _timer2 = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(updateLabH) userInfo:nil repeats:YES];
     //[self addDragBtn];
 }
@@ -170,12 +172,12 @@
 //此版本第一次投标成功后需要弹框引导用户去给好评
 - (void)showGoodCommentAlert:(NSNotification *)noti
 {
-    if (!alertTool) {
-        alertTool = [[PraiseAlert alloc]init];
-        alertTool.delegate = self;
-    }
-    [alertTool checkPraiseAlertIsEjectWithGoodCommentAlertType:FirstInvestSuceess WithRollBack:^{
-    }];
+//    if (!alertTool) {
+//        alertTool = [[PraiseAlert alloc]init];
+//        alertTool.delegate = self;
+//    }
+//    [alertTool checkPraiseAlertIsEjectWithGoodCommentAlertType:FirstInvestSuceess WithRollBack:^{
+//    }];
     NSNumber *boolNum = noti.object;
     NSInteger   selectIndex = 0;
     if ([boolNum boolValue]) {
@@ -299,12 +301,14 @@
     [self.navigationController.navigationBar setHidden:NO];
     [self.navigationController.navigationBar setBarTintColor:[UIColor whiteColor]];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+//    [self showPlatformUpgradeNotice];
+//    [[MongoliaLayerCenter sharedManager] showLogic];
 //    // 该标识为首页是否加载过有引导页，Yes为 加载过，NO为 未加载过
 //    if ([[NSUserDefaults standardUserDefaults] valueForKey:@"fistPage1"]) {
 //        [self alertViewInviteFriendsVC];// 加载过  去检测2017年邀请好友弹框提示
 //    }
     // 首页引导页去掉的情况，
-    [self alertViewInviteFriendsVC];//去检测2017年邀请好友弹框提示
+//    [self alertViewInviteFriendsVC];//去检测2017年邀请好友弹框提示
 //    
 //    [PromptView addGuideViewWithKey:@"fistPage1" isHorizontal:NO delegate:self imageBlock:^NSString *{
 //        NSString *imageName = @"mask4s_2.jpg";
@@ -332,29 +336,33 @@
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
 }
--(void)alertViewInviteFriendsVC{
-    
-    NSDate *lastFirstLoginTime = [[NSUserDefaults standardUserDefaults] objectForKey:FirstAlertViewShowTime];
-    BOOL isBelongToToday = [NSDate isBelongToTodayWithDate:lastFirstLoginTime]; //是不是同一天
-//    BOOL policeOnOff = [ToolSingleTon sharedManager].checkIsInviteFriendsAlert ;
-    BOOL onoff  =  [[NSUserDefaults standardUserDefaults] boolForKey:NOVICEPOLICEONOFF];
-    if(!isBelongToToday && onoff){
-        
-        MjAlertView *alertView = [[MjAlertView alloc]initInviteFriendsToMakeMoneyDelegate:self];
-        [alertView show];
-    }
+-(void)alertViewInviteFriendsVC {
+    MjAlertView *alertView = [[MjAlertView alloc]initInviteFriendsToMakeMoneyDelegate:self];
+    [alertView show];
+}
+- (void)showPlatformUpgradeNotice
+{
+    MjAlertView *alertView = [[MjAlertView alloc] initPlatformUpgradeNotice:self];
+    alertView.tag = 1000;
+    [alertView show];
 }
 #pragma 去邀请奖励页面
-- (void)mjalertView:(MjAlertView *)alertview didClickedButton:(UIButton *)clickedButton andClickedIndex:(NSInteger)index{
-    if (index == 1) { //点击了立即查看详情
-        for (int i = 0; i < _actionArr.count; i++) {
-            if ([_actionArr[i][@"title"] isEqualToString:@"邀请返利"]) {
-                NSDictionary *dataDict = _actionArr[i];
-                [self gotoInviteFriendsWebVC:dataDict];
-                break;
+- (void)mjalertView:(MjAlertView *)alertview didClickedButton:(UIButton *)clickedButton andClickedIndex:(NSInteger)index {
+    if (alertview.tag == 1000) {
+        //请求接口已经阅读ddd
+        MaskView *view = [MaskView makeViewWithMask:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
+    } else {
+        if (index == 1) { //点击了立即查看详情
+            for (int i = 0; i < _actionArr.count; i++) {
+                if ([_actionArr[i][@"title"] isEqualToString:@"邀请返利"]) {
+                    NSDictionary *dataDict = _actionArr[i];
+                    [self gotoInviteFriendsWebVC:dataDict];
+                    break;
+                }
             }
         }
     }
+
 }
 -(void)gotoInviteFriendsWebVC:(NSDictionary *)dataDict{
     UCFCycleModel *banInfo = [UCFCycleModel getCycleModelByDataDict:dataDict];
