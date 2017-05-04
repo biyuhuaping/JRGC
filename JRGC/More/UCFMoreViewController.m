@@ -117,7 +117,7 @@ static NSString * const kAppKey = @"23511571";
         [appDelegate.tabBarController setSelectedIndex:4];
         [self dismissViewControllerAnimated:YES completion:nil];
     }
-    if ([_sourceVC isEqualToString:@"UCFSettingViewController"]) {
+    if ([_sourceVC isEqualToString:@"UCFSecurityCenterViewController"]) {
         //更多跳到个人中心
         [self.navigationController popViewControllerAnimated:YES];
     }

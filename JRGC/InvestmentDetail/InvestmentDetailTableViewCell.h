@@ -10,7 +10,7 @@
 
 @class UCFInvestDetailModel;
 @interface InvestmentDetailTableViewCell : UITableViewCell
-
+@property(assign,nonatomic) SelectAccoutType accoutType;//选择的账户 默认是P2P账户 hqy添加
 
 - (void)setValueOfTableViewCellLabel:(UCFInvestDetailModel *)model type:(NSString*)tp;
 

@@ -23,6 +23,7 @@
 
 @property (nonatomic, strong) UCFInvestDetailModel *investDetailModel;
 @property(nonatomic,retain) id<InvestmentDetailDelegate>delegate;
+@property(assign,nonatomic) SelectAccoutType accoutType;//选择的账户 默认是P2P账户 hqy添加
 
 - (id) initWithFrame:(CGRect)frame detailType:(NSString*)tp;
 
