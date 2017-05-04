@@ -43,7 +43,7 @@
     }else{
      [self  addLeftButtonTypeTwoPopRootVC];
     }
-    baseTitleLabel.text = @"投资详情";
+    baseTitleLabel.text = @"出借详情";
     self.baseTitleType = @"investmentDetail";
     _investmentDetailView = [[UCFInvestmentDetailView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - NavigationBarHeight) detailType:_detailType];
     _investmentDetailView.delegate = self;

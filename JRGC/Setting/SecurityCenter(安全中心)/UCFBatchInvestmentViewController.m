@@ -18,7 +18,7 @@
 #define WORDCOLORBLUE UIColorWithRGB(0x6280a8)
 #define WORDCOLORGRAY UIColorWithRGB(0x999999)
 #define TITLECOLORGRAY UIColorWithRGB(0xf9f9f9)
-static NSString *firstStr = @"批量投资授权开启后可一次性投资多个小额项目";
+static NSString *firstStr = @"批量出借授权开启后可一次性出借多个小额项目";
 static NSString *secondStr = @"为保证您的资金安全，请合理选择";
 static NSString *thirdStr = @"自动投标授权已经开启";
 @interface UCFBatchInvestmentViewController ()
@@ -50,7 +50,7 @@ static NSString *thirdStr = @"自动投标授权已经开启";
 }
 - (void)clickRightBtn
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"\"自动投标\"是金融工场为方便投资人投资小额项目特推出的，一次可投资多个项目。批量投资后系统会自动匹配，直至完成所有投资为止" delegate:self cancelButtonTitle:@"我知道了" otherButtonTitles: nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"\"自动投标\"是金融工场为方便出借人出借小额项目特推出的，一次可出借多个项目。批量出借后系统会自动匹配，直至完成所有出借为止" delegate:self cancelButtonTitle:@"我知道了" otherButtonTitles: nil];
     [alert show];
 }
 - (void)viewDidLoad {
@@ -77,7 +77,7 @@ static NSString *thirdStr = @"自动投标授权已经开启";
     
     _tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, ScreenWidth - 15, 35)];
     _tipLabel.font = [UIFont systemFontOfSize:13.0f];
-    _tipLabel.text = @"批量投资授权开启后可一次性投资多个小额项目";
+    _tipLabel.text = @"批量出借授权开启后可一次性出借多个小额项目";
     _tipLabel.textColor = [UIColor whiteColor];
     [tipView addSubview:_tipLabel];
 
@@ -105,7 +105,7 @@ static NSString *thirdStr = @"自动投标授权已经开启";
     view1.backgroundColor = [UIColor whiteColor];
     view1.iconName = @"auto_fast";
     view1.title = @"投标更快捷";
-    view1.des = @"开启自动投标授权，即可在批量投标中使用批量投资功能，快速投资多个小额项目。";
+    view1.des = @"开启自动投标授权，即可在批量投标中使用批量出借功能，快速出借多个小额项目。";
     [_baseScrollView addSubview:view1];
     [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:view1 isTop:YES];
     

@@ -224,9 +224,9 @@
         }
         int batchInvestStatus = [[_dataArr1[indexPath.row] objectSafeForKey:@"batchInvestStatus"] intValue];
         if (batchInvestStatus) {
-            cell.prdName.text = [NSString stringWithFormat:@"%@%@(批量投资)",_dataArr1[indexPath.row][@"prdName"],str];//标的名称
-            [cell.prdName setFont:[UIFont systemFontOfSize:11] string:@"(批量投资)"];
-            [cell.prdName setFontColor:UIColorWithRGB(0x999999) string:@"(批量投资)"];
+            cell.prdName.text = [NSString stringWithFormat:@"%@%@(批量出借)",_dataArr1[indexPath.row][@"prdName"],str];//标的名称
+            [cell.prdName setFont:[UIFont systemFontOfSize:11] string:@"(批量出借)"];
+            [cell.prdName setFontColor:UIColorWithRGB(0x999999) string:@"(批量出借)"];
         }
         else {
             cell.prdName.text = [NSString stringWithFormat:@"%@%@",_dataArr1[indexPath.row][@"prdName"],str];        //投标名称
@@ -264,9 +264,9 @@
         }
         int batchInvestStatus = [[_dataArr2[indexPath.row] objectSafeForKey:@"batchInvestStatus"] intValue];
         if (batchInvestStatus) {
-            cell1.prdName.text = [NSString stringWithFormat:@"%@%@(批量投资)",_dataArr2[indexPath.row][@"prdName"],str];//标的名称
-            [cell1.prdName setFont:[UIFont systemFontOfSize:11] string:@"(批量投资)"];
-            [cell1.prdName setFontColor:UIColorWithRGB(0x999999) string:@"(批量投资)"];
+            cell1.prdName.text = [NSString stringWithFormat:@"%@%@(批量出借)",_dataArr2[indexPath.row][@"prdName"],str];//标的名称
+            [cell1.prdName setFont:[UIFont systemFontOfSize:11] string:@"(批量出借)"];
+            [cell1.prdName setFontColor:UIColorWithRGB(0x999999) string:@"(批量出借)"];
         }
         else {
             cell1.prdName.text = [NSString stringWithFormat:@"%@%@",_dataArr2[indexPath.row][@"prdName"],str];        //投标名称

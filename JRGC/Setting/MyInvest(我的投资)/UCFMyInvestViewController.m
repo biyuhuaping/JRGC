@@ -268,14 +268,14 @@
     
     int batchInvestStatus = [[tempArr[indexPath.row] objectSafeForKey:@"batchInvestStatus"] intValue];
     if (batchInvestStatus) {
-        cell.prdName.text = [NSString stringWithFormat:@"%@(批量投资)", tempArr[indexPath.row][@"prdName"]];//标的名称
-        [cell.prdName setFont:[UIFont systemFontOfSize:11] string:@"(批量投资)"];
-        [cell.prdName setFontColor:UIColorWithRGB(0x999999) string:@"(批量投资)"];
+        cell.prdName.text = [NSString stringWithFormat:@"%@(批量出借)", tempArr[indexPath.row][@"prdName"]];//标的名称
+        [cell.prdName setFont:[UIFont systemFontOfSize:11] string:@"(批量出借)"];
+        [cell.prdName setFontColor:UIColorWithRGB(0x999999) string:@"(批量出借)"];
     }
     else {
         cell.prdName.text = tempArr[indexPath.row][@"prdName"];//标的名称
     }
-    
+    cell.labText.text = self.accoutType == SelectAccoutTypeP2P ? @"出借金额":@"认购金额";
     cell.status.text = _statusArr[status];//标状态
     cell.annualRate.text = [[tempArr[indexPath.row] objectSafeForKey:@"annualRate"] stringByAppendingString:@"%"];//年化收益率
     

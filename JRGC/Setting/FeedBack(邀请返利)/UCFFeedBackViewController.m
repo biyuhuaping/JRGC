@@ -74,7 +74,7 @@
     if (self.accoutType == SelectAccoutTypeHoner) {
         baseTitleLabel.text = @"尊享邀请返利";
     }else{
-        baseTitleLabel.text = @"P2P邀请返利";
+        baseTitleLabel.text = @"微金邀请返利";
     }
    
     

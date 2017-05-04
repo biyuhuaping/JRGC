@@ -141,10 +141,11 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
     self.navTitleLabel.text = [_detailDataDict objectSafeForKey:@"colName"];
     
 //    年化收益
-    CGFloat stringWidth = [@"年化收益" sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:11]}].width;
+    CGFloat stringWidth = [@"预计年化利率" sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:11]}].width;
     
     //顶部年化收益 投资期限
-    UILabel *annualLabel = [UILabel labelWithFrame:CGRectMake([Common calculateNewSizeBaseMachine:15],0 + [Common calculateNewSizeBaseMachine:20],0,11) text:@"年化收益" textColor:[UIColor whiteColor] font:[UIFont systemFontOfSize:11]];
+    UILabel *annualLabel = [UILabel labelWithFrame:CGRectMake([Common calculateNewSizeBaseMachine:15],0 + [Common calculateNewSizeBaseMachine:20],0,11) text:@"预计年化利率" textColor:[UIColor whiteColor] font:[UIFont systemFontOfSize:11]];
+    annualLabel.textAlignment = NSTextAlignmentLeft;
     [_headerBgView addSubview:annualLabel];
     
     CGRect annualLabelFrame = annualLabel.frame;
@@ -163,13 +164,13 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
     
     
 //    投资期限
-    UILabel *markLabel = [UILabel labelWithFrame:CGRectMake([Common calculateNewSizeBaseMachine:15],0 + CGRectGetMaxY(annualLabel.frame)+30,0,11) text:@"投资期限" textColor:[UIColor whiteColor] font:[UIFont systemFontOfSize:11]];
+    UILabel *markLabel = [UILabel labelWithFrame:CGRectMake([Common calculateNewSizeBaseMachine:15],0 + CGRectGetMaxY(annualLabel.frame)+30,0,11) text:@"出借期限" textColor:[UIColor whiteColor] font:[UIFont systemFontOfSize:11]];
     [_headerBgView addSubview:markLabel];
     
     CGRect markLabelFrame = markLabel.frame;
     markLabelFrame.size.width = stringWidth;
     markLabel.frame = markLabelFrame;
-    
+    markLabel.textAlignment = NSTextAlignmentLeft;
     
     
     NSString *colPeriodStr = [_detailDataDict objectSafeForKey:@"colPeriod"];
@@ -218,7 +219,7 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
     CGRect remainLabelFrame = remainLabel.frame;
     remainLabelFrame.size.width = stringWidth;
     remainLabel.frame = remainLabelFrame;
-    
+    remainLabel.textAlignment = NSTextAlignmentLeft;
    
     NSString *canBuyAmtStr =[NSString stringWithFormat:@"%.2f",[[_detailDataDict objectSafeForKey:@"canBuyAmt"] floatValue]];
     
@@ -232,7 +233,7 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
     CGRect totalLabelFrame = totalLabel.frame;
     totalLabelFrame.size.width = stringWidth;
     totalLabel.frame = totalLabelFrame;
-    
+    totalLabel.textAlignment = NSTextAlignmentLeft;
      NSString *canBuyCountStr = [NSString stringWithFormat:@"%@个",[_detailDataDict objectSafeForKey:@"canBuyCount"] ];
 
     _totalMoneyLabel = [UILabel labelWithFrame:CGRectMake(CGRectGetMaxX(totalLabel.frame) + 10,totalLabel.frame.origin.y - 1,150,14) text:canBuyCountStr textColor:UIColorWithRGB(0x7e96c4) font:[UIFont systemFontOfSize:14]];

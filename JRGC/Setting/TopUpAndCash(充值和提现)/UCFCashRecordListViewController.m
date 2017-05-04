@@ -32,7 +32,7 @@
     if (self.accoutType == SelectAccoutTypeHoner) {
         baseTitleLabel.text = @"尊享提现记录";
     }else{
-        baseTitleLabel.text = @"P2P提现记录";
+        baseTitleLabel.text = @"微金提现记录";
     }
     [self addLeftButton];
     self.dataArray = [NSMutableArray array];

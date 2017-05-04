@@ -217,7 +217,7 @@
     _borrowerInfo = [[NSArray alloc] initWithObjects:arrayJiBen, nil];
     
     if (_isP2P) {
-        _titleArray = [[NSArray alloc] initWithObjects:@"基础详情", @"安全保障",@"投标记录", nil];
+        _titleArray = [[NSArray alloc] initWithObjects:@"基础详情", @"安全保障",@"出借记录", nil];
         NSString *tradeMarkStr = [[_dataDic objectSafeDictionaryForKey:@"prdClaims"] objectSafeForKey: @"tradeMark"];
         _isHideBorrowerInformation = [tradeMarkStr intValue] == 20 ? YES :NO;
     }else{
