@@ -251,7 +251,7 @@
     investmentButton.layer.cornerRadius = 2.0;
     investmentButton.layer.masksToBounds = YES;
     
-    NSString *buttonTitle =  @"批量投资";
+    NSString *buttonTitle =  @"批量出借";
     [investmentButton setTitle:buttonTitle forState:UIControlStateNormal];
     [investmentButton addTarget:self action:@selector(checkIsCanInvest) forControlEvents:UIControlEventTouchUpInside];
     [investBaseView addSubview:investmentButton];
@@ -321,7 +321,7 @@
     }
     investMoney = [NSString stringWithFormat:@"%.2f",[investMoney doubleValue]];
     if ([Common stringA:@"0.01" ComparedStringB:investMoney] == 1) {
-        [MBProgressHUD displayHudError:@"请输入投资金额"];
+        [MBProgressHUD displayHudError:@"请输入出借金额"];
         return;
     }
     
@@ -343,7 +343,7 @@
     
     
     if([Common stringA:minInVestNum ComparedStringB:investMoney] == 1){
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"投资金额不可低于起投金额" delegate:self cancelButtonTitle:@"重新输入" otherButtonTitles: nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"出借金额不可低于起投金额" delegate:self cancelButtonTitle:@"重新输入" otherButtonTitles: nil];
         alert.tag = 1000;
         [alert show];
         return;
@@ -352,7 +352,7 @@
     
     if([Common stringA:investMoney ComparedStringB:keTouJinE] == 1)
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"不可以这么任性哟，投资金额已超过剩余可投金额了" delegate:self cancelButtonTitle:@"重新输入" otherButtonTitles: nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"不可以这么任性哟，出借金额已超过剩余可投金额了" delegate:self cancelButtonTitle:@"重新输入" otherButtonTitles: nil];
         alert.tag = 1000;
         [alert show];
         return;
@@ -380,7 +380,7 @@
     {
         NSString *keyongMoney = availableBalance;
         needToRechare = [investMoney doubleValue] - [keyongMoney doubleValue];
-        NSString *showStr = [NSString stringWithFormat:@"总计投资金额¥%@\n可用金额%@\n另需充值金额¥%.2f",cell.inputMoneyTextFieldLable.text,cell.KeYongMoneyLabel.text,needToRechare];
+        NSString *showStr = [NSString stringWithFormat:@"总计出借金额¥%@\n可用金额%@\n另需充值金额¥%.2f",cell.inputMoneyTextFieldLable.text,cell.KeYongMoneyLabel.text,needToRechare];
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"可用金额不足" message:showStr delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"立即充值", nil];
         alert.tag = 2000;
         [alert show];
@@ -391,7 +391,7 @@
     BOOL isOpenBatchStr = [[_dataDict objectSafeForKey:@"isOpenBatch"] boolValue];
     if(!isOpenBatchStr){ //是否开启一键投标
         
-        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您还未开启批量投资，暂不能投资" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"开启", nil];
+        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您还未开启批量出借，暂不能出借" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"开启", nil];
         alertView.tag = 5001;
         [alertView show];
         return;
@@ -402,7 +402,7 @@
     if (self.maxBatchAmount.length != 0) {
         if ([Common stringA:investMoney ComparedStringB:self.maxBatchAmount] == 1) {
             
-            NSString *mesageStr = [NSString stringWithFormat:@"投资金额超过批量投资单笔限额，您设置的批量投资金额单笔限额为%@元",self.maxBatchAmount];
+            NSString *mesageStr = [NSString stringWithFormat:@"出借金额超过批量出借单笔限额，您设置的批量出借金额单笔限额为%@元",self.maxBatchAmount];
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:mesageStr delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"修改", nil];
             alert.tag = 5002;
             [alert show];
@@ -411,8 +411,8 @@
     }
     BOOL isNewUser = [[_dataDict objectSafeForKey:@"isNewUser"] boolValue];
     if(isNewUser){
-        NSString *mesageStr = [NSString stringWithFormat:@"批量投资可能会导致用户无法获得首次奖励，确认继续支付吗？"];
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:mesageStr delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"继续投资", nil];
+        NSString *mesageStr = [NSString stringWithFormat:@"批量出借可能会导致用户无法获得首次奖励，确认继续支付吗？"];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:mesageStr delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"继续出借", nil];
         alert.tag = 4000;
         [alert show];
         return;
@@ -430,9 +430,9 @@
 - (void)showLastAlert:(NSString *)investMoney
 {
     NSString *showStr = @"";
-    showStr = [NSString stringWithFormat:@"投资金额¥%@,确认投资吗?",[UCFToolsMehod AddComma:investMoney]];
+    showStr = [NSString stringWithFormat:@"出借金额¥%@,确认出借吗?",[UCFToolsMehod AddComma:investMoney]];
     
-    NSString *buttonTitle = @"批量投资";
+    NSString *buttonTitle = @"批量出借";
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:showStr delegate:self cancelButtonTitle:@"取消" otherButtonTitles:buttonTitle, nil];
     alert.tag = 3000;
     [alert show];
@@ -966,7 +966,7 @@
     MoneyBoardCell *cell = (MoneyBoardCell *)[_bidTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
     NSString *investMoney = cell.inputMoneyTextFieldLable.text;
     if (cell.inputMoneyTextFieldLable.text.length == 0 || [cell.inputMoneyTextFieldLable.text isEqualToString:@"0"] || [cell.inputMoneyTextFieldLable.text isEqualToString:@"0.0"] || [cell.inputMoneyTextFieldLable.text isEqualToString:@"0.00"]) {
-        [MBProgressHUD displayHudError:@"请输入投资金额"];
+        [MBProgressHUD displayHudError:@"请输入出借金额"];
         return;
     }
     CalculatorView * view = [[CalculatorView alloc] init];
@@ -1001,6 +1001,7 @@
         //topUpView.isGoBackShowNavBar = YES;
         topUpView.title = @"充值";
         topUpView.uperViewController = self;
+        topUpView.accoutType = SelectAccoutTypeP2P;
         [self.navigationController pushViewController:topUpView animated:YES];
     }
 }
@@ -1245,7 +1246,7 @@
     UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 98)];
     footView.backgroundColor = UIColorWithRGB(0xebebee);
     footView.userInteractionEnabled = YES;
-    NSArray *contractMsgArr = @[@"批量投资协议"];
+    NSArray *contractMsgArr = @[@"批量出借协议"];
     NSString *totalStr = [NSString stringWithFormat:@"同意并确认"];
     for (int i = 0; i < contractMsgArr.count; i++) {
         NSString *tmpStr = [contractMsgArr objectAtIndex:i];
@@ -1358,7 +1359,7 @@
     
     UILabel *jieshouLabel = [[UILabel alloc] initWithFrame:CGRectMake(23, height1+10, ScreenWidth-25, 12)];
     jieshouLabel.backgroundColor = [UIColor clearColor];
-    jieshouLabel.text = @"本人接受筹标期内资金不计利息,投资意向不可撤销";
+    jieshouLabel.text = @"本人接受筹标期内资金不计利息,出借意向不可撤销";
     jieshouLabel.font = [UIFont systemFontOfSize:12];
     jieshouLabel.textColor = UIColorWithRGB(0x999999);
     [footView addSubview:jieshouLabel];
@@ -1411,7 +1412,7 @@
     }else if([contractStr isEqualToString:@"《履行反洗钱义务的承诺书》"]){
         [self showContractWebViewUrl:PROTOCOLENTUSTTRANSFER withTitle:@"履行反洗钱义务的承诺书"];
     }else{
-        [self showContractWebViewUrl:BATHCHINVESTPROTOCOL withTitle:@"批量投资协议"];
+        [self showContractWebViewUrl:BATHCHINVESTPROTOCOL withTitle:@"批量出借协议"];
     }
 }
 -(void)showContractWebViewUrl:(NSString *)urlStr withTitle:(NSString *)title{

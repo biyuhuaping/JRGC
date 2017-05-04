@@ -56,7 +56,7 @@
             statusStr = @"待确认";
             break;
         case 2:
-            statusStr = @"投资";
+            statusStr = @"出借";
             break;
         case 3:
             statusStr = @"流标";

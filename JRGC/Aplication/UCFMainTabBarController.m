@@ -75,20 +75,30 @@
 - (void)initAllTabbarItems
 {
     NSMutableArray *vcArray = [NSMutableArray array];
-    NSArray *tabbarTitleArray = @[@"投资",
+    NSArray *tabbarTitleArray = @[@"我的",
+                                  @"投资",
                                   @"借款",
-                                  @"发现",
                                   @"商城",
-                                  @"我的"];
-    NSArray *tabbarNormalArray = @[@"tabbar_icon_project_normal",
-                                   @"tabbar_icon_loan_normal",                                  @"tabbar_icon_find_normal",
+                                  @"发现"];
+    
+    NSArray *tabbarNormalArray = @[@"tabbar_icon_user_normal",
+                                   @"tabbar_icon_project_normal",                                  @"tabbar_icon_loan_normal",
                                    @"tabbar_icon_shop_normal",
-                                   @"tabbar_icon_user_normal"];
-    NSArray *tabbarHighlightArray = @[@"tabbar_icon_project_highlight",
-                                   @"tabbar_icon_loan_highlight",//tabbar_icon_transfer_highlight.png
-                                   @"tabbar_icon_find_highlight",
+                                   @"tabbar_icon_find_normal"];
+//    NSArray *tabbarNormalArray = @[@"tabbar_icon_project_normal",
+//                                   @"tabbar_icon_loan_normal",                                  @"tabbar_icon_find_normal",
+//                                   @"tabbar_icon_shop_normal",
+//                                   @"tabbar_icon_user_normal"];
+    NSArray *tabbarHighlightArray = @[@"tabbar_icon_user_highlight",
+                                      @"tabbar_icon_project_highlight",//tabbar_icon_transfer_highlight.png
+                                      @"tabbar_icon_loan_highlight",
                                       @"tabbar_icon_shop_highlight",
-                                      @"tabbar_icon_user_highlight"];
+                                      @"tabbar_icon_find_highlight"];
+//    NSArray *tabbarHighlightArray = @[@"tabbar_icon_project_highlight",
+//                                   @"tabbar_icon_loan_highlight",//tabbar_icon_transfer_highlight.png
+//                                   @"tabbar_icon_find_highlight",
+//                                      @"tabbar_icon_shop_highlight",
+//                                      @"tabbar_icon_user_highlight"];
     
     UIViewController *controller = nil;
     for (int i=0; i<5; i++) {
@@ -103,21 +113,20 @@
             }
                 break;
             case 1:{
-                UCFLoanViewController *loanWeb = [[UCFLoanViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
-                loanWeb.url = EASYLOAN_URL;
-//                loanWeb.isHideNavigationBar = YES;
-//                [self useragent:loanWeb.webView];
-                controller = loanWeb;
-                loanWeb.navTitle = @"借款";
+                UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"HomeStoryboard" bundle:nil];
+                controller = [storyBoard instantiateViewControllerWithIdentifier:@"home"];
+                _LatestView.baseTitleType = @"list";
+//                controller = _LatestView;
             }
                 break;
             case 2:{
-                UCFDiscoveryViewController *discoveryWeb = [[UCFDiscoveryViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
-//                discoveryWeb.isHideNavigationBar = YES;
-                discoveryWeb.url      = DISCOVERYURL;//请求地址;
-                discoveryWeb.navTitle = @"发现";
-                controller = discoveryWeb;
-//                [self.navigationController pushViewController:subVC animated:YES];
+                
+                UCFLoanViewController *loanWeb = [[UCFLoanViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
+                loanWeb.url = EASYLOAN_URL;
+                controller = loanWeb;
+                loanWeb.navTitle = @"借款";
+                
+
             }
                 break;
             case 3:{
@@ -132,7 +141,11 @@
             }
                 break;
             case 4:{
-                controller = [[UCFPersonCenterController alloc] initWithNibName:@"UCFPersonCenterController" bundle:nil];
+                
+                UCFDiscoveryViewController *discoveryWeb = [[UCFDiscoveryViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
+                discoveryWeb.url      = DISCOVERYURL;//请求地址;
+                discoveryWeb.navTitle = @"发现";
+                controller = discoveryWeb;
             }
                 break;
             default:

@@ -47,7 +47,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *rechargeButton;
 
 @property (assign,nonatomic) int otherNum;//风险评估剩余次数
+@property (weak, nonatomic) IBOutlet UILabel *loadingLabel1;
 
+@property (weak, nonatomic) IBOutlet UILabel *loadingLabel2;
 
 
 - (IBAction)clickCashBtn:(UIButton *)sender;
@@ -83,25 +85,25 @@
     [self addRightButton];
     [self.tableView.header beginRefreshing];
     self.tableView.userInteractionEnabled = YES;
+    baseTitleLabel.text =  self.accoutType==SelectAccoutTypeHoner ? @"尊享账户":@"微金账户";
 }
 -(void)createUIInfoView{
     [self addLeftButton];
+     baseTitleLabel.text = @"正在跳转";
     [self.tableView addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(getP2POrHonerAccoutHttpRequest)];
     self.loadingView.userInteractionEnabled = NO;
     self.tableView.userInteractionEnabled = NO;
+    [self.view bringSubviewToFront:self.loadingView];
+    [self performSelector:@selector(removeLoadingView) withObject:nil afterDelay:2.0f];
     if (self.accoutType ==  SelectAccoutTypeHoner) {
-        [self.view bringSubviewToFront:self.loadingView];
-        [self performSelector:@selector(removeLoadingView) withObject:nil afterDelay:3];
-        baseTitleLabel.text = @"尊享账户";
+      
+       self.loadingLabel1.text = @"即将跳转工场尊享";
+        self.loadingLabel2.text = @"可直接访问www.gongchangzx.com";
          _isShowOrHideAccoutMoney = [[NSUserDefaults standardUserDefaults] boolForKey:@"IsShowHonerAccoutMoney"];
-     
     }else{
-        self.loadingView.hidden = YES;
-        [self.view sendSubviewToBack:self.loadingView];
-        [self performSelector:@selector(removeLoadingView) withObject:nil afterDelay:0.0];
-        baseTitleLabel.text = @"P2P账户";
+        self.loadingLabel1.text = @"即将跳转工场微金";
+        self.loadingLabel2.text = @"可直接访问www.gongchangp2p.com";
         _isShowOrHideAccoutMoney = [[NSUserDefaults standardUserDefaults] boolForKey:@"IsShowP2PAccoutMoney"];
-        [self.tableView.header beginRefreshing];
     }
     //添加阴影图片
     UIImage *tabImag = [UIImage imageNamed:@"tabbar_shadow.png"];
@@ -139,7 +141,7 @@
 {
     if (_cellItemsData == nil) {
         
-        UCFSettingItem *myInVest = [UCFSettingArrowItem itemWithIcon:nil title:@"我的投资" destVcClass:[MyViewController class]];
+        UCFSettingItem *myInVest = [UCFSettingArrowItem itemWithIcon:nil title:@"我的出借" destVcClass:[MyViewController class]];
         UCFSettingItem *backMoneyDetail = [UCFSettingArrowItem itemWithIcon:nil title:@"回款明细" destVcClass:[UCFBackMoneyDetailViewController class]];
         UCFSettingItem *feedBackVC = [UCFSettingArrowItem itemWithIcon:nil title:@"邀请返利" destVcClass:[UCFFeedBackViewController class]];
         
@@ -161,8 +163,8 @@
             }else{
                 setChangePassword.title = @"设置交易密码";
             }
-            p2pOrHonerAccout = [UCFSettingArrowItem itemWithIcon:nil title:@"P2P徽商银行存管账户" destVcClass:nil];
-            riskAssessment = [UCFSettingArrowItem itemWithIcon:nil title:@"P2P风险承担能力" destVcClass:[RiskAssessmentViewController class]];
+            p2pOrHonerAccout = [UCFSettingArrowItem itemWithIcon:nil title:@"微金徽商银行存管账户" destVcClass:nil];
+            riskAssessment = [UCFSettingArrowItem itemWithIcon:nil title:@"微金风险承担能力" destVcClass:[RiskAssessmentViewController class]];
         }
         UCFSettingItem *batchInvest = [UCFSettingArrowItem itemWithIcon:nil title:@"自动投标" destVcClass:[UCFBatchInvestmentViewController class]];
         
@@ -208,7 +210,7 @@
         if(self.accoutType == SelectAccoutTypeHoner){
             _headerView.totalIncomeTitleLab.text = @"尊享总资产";
         }else{
-            _headerView.totalIncomeTitleLab.text = @"P2P总资产";
+            _headerView.totalIncomeTitleLab.text = @"微金总资产";
         }
         UIView *lineView1 = [[UIView alloc]initWithFrame:CGRectMake(0,154.5, ScreenWidth, 0.5)];
         lineView1.backgroundColor = UIColorWithRGB(0xd8d8d8);
@@ -300,9 +302,9 @@
     
     NSString *titleStr = item.title;
 //    && [NSStringFromClass(item.destVcClass) isEqualToString:@"MyViewController"]
-    if ([titleStr isEqualToString:@"我的投资"]  ) {
+    if ([titleStr isEqualToString:@"我的出借"]  ) {
         MyViewController *myInvestVC = [[MyViewController alloc] initWithNibName:@"MyViewController" bundle:nil];
-        myInvestVC.title = @"我的投资";
+        myInvestVC.title = @"我的出借";
         myInvestVC.selectedSegmentIndex = 0;
         myInvestVC.accoutType = self.accoutType;
         [self.navigationController pushViewController:myInvestVC animated:YES];
@@ -542,7 +544,10 @@
                                     }
                                         break;
                                     case 3:
-                                        item.subtitle = isRisk == 0 ? @"未评估":riskLevel;
+                                    {
+                                      NSString *riskLevelStr = [NSString stringWithFormat:@"%@(剩%d次)",riskLevel,_otherNum];
+                                      item.subtitle = isRisk == 0 ? @"未评估":riskLevelStr;
+                                    }
                                         break;
                                     case 4:
                                     {

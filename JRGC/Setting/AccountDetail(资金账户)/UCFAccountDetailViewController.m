@@ -290,8 +290,8 @@
     self.navigationItem.rightBarButtonItem = rightItem;
     if (self.accoutType == SelectAccoutTypeHoner) {
        baseTitleLabel.text = @"尊享资金帐户";
-    }else if (self.accoutType == SelectAccoutTypeP2P){
-        baseTitleLabel.text = @"P2P资金帐户";
+    }else{
+        baseTitleLabel.text = @"微金资金帐户";
     }
     self.bgScrollview.contentSize = CGSizeMake(self.view.frame.size.width *2, 0);
     self.bgScrollview.scrollEnabled = NO;

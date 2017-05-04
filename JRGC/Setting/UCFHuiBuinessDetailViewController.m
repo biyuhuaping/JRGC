@@ -30,7 +30,7 @@
     if (self.accoutType == SelectAccoutTypeHoner ) {
          baseTitleLabel.text = @"尊享徽商资金流水";
     }else{
-         baseTitleLabel.text = @"P2P徽商资金流水";
+         baseTitleLabel.text = @"微金徽商资金流水";
     }
     [self addLeftButton];
     _dataArray = [[NSMutableArray alloc]initWithCapacity:0];

@@ -522,6 +522,8 @@
 		84FAB60C1C7C575300D0942F /* MGSwipeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FAB6091C7C575300D0942F /* MGSwipeButton.m */; };
 		84FAB60D1C7C575300D0942F /* MGSwipeTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FAB60B1C7C575300D0942F /* MGSwipeTableCell.m */; };
 		84FFA5301C7EAA9200ACD835 /* UIScrollView+TouchScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FFA52F1C7EAA9200ACD835 /* UIScrollView+TouchScrollView.m */; };
+		A8AD2E3E1EB979760013DB7C /* MongoliaLayerCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = A8AD2E3D1EB979760013DB7C /* MongoliaLayerCenter.m */; };
+		A8D2DE781EB9E1CF00D61AD0 /* MaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = A8D2DE771EB9E1CF00D61AD0 /* MaskView.m */; };
 		AEC5EEC01D9B6594000C0321 /* RechargeFixedTelNumView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEC5EEBF1D9B6594000C0321 /* RechargeFixedTelNumView.xib */; };
 		AEC5EEC31D9B65BA000C0321 /* RechargeFixedTelNumView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC5EEC21D9B65BA000C0321 /* RechargeFixedTelNumView.m */; };
 		E31141601D92769E00FF880A /* UCFWebViewJavascriptBridgeBBS.m in Sources */ = {isa = PBXBuildFile; fileRef = E311415E1D92769E00FF880A /* UCFWebViewJavascriptBridgeBBS.m */; };
@@ -1660,6 +1662,10 @@
 		84FAB60B1C7C575300D0942F /* MGSwipeTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSwipeTableCell.m; sourceTree = "<group>"; };
 		84FFA52E1C7EAA9200ACD835 /* UIScrollView+TouchScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+TouchScrollView.h"; sourceTree = "<group>"; };
 		84FFA52F1C7EAA9200ACD835 /* UIScrollView+TouchScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+TouchScrollView.m"; sourceTree = "<group>"; };
+		A8AD2E3C1EB979760013DB7C /* MongoliaLayerCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MongoliaLayerCenter.h; sourceTree = "<group>"; };
+		A8AD2E3D1EB979760013DB7C /* MongoliaLayerCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MongoliaLayerCenter.m; sourceTree = "<group>"; };
+		A8D2DE761EB9E1CF00D61AD0 /* MaskView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaskView.h; sourceTree = "<group>"; };
+		A8D2DE771EB9E1CF00D61AD0 /* MaskView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MaskView.m; sourceTree = "<group>"; };
 		AE43B84F1DD2D8BE001D0BD0 /* JRGC.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JRGC.entitlements; sourceTree = "<group>"; };
 		AEC5EEBF1D9B6594000C0321 /* RechargeFixedTelNumView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RechargeFixedTelNumView.xib; sourceTree = "<group>"; };
 		AEC5EEC11D9B65BA000C0321 /* RechargeFixedTelNumView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RechargeFixedTelNumView.h; sourceTree = "<group>"; };
@@ -3433,6 +3439,7 @@
 		7BC304311ACB9CDB007767F1 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				A8AD2E381EB979240013DB7C /* MongoliaLayer */,
 				7456D3C51E82700500207349 /* UIView+Extension.h */,
 				7456D3C61E82700500207349 /* UIView+Extension.m */,
 				83F2D5961DCB508F0041F913 /* iWatchTool */,
@@ -4676,6 +4683,18 @@
 			path = MGSwipeTableCell;
 			sourceTree = "<group>";
 		};
+		A8AD2E381EB979240013DB7C /* MongoliaLayer */ = {
+			isa = PBXGroup;
+			children = (
+				A8AD2E3C1EB979760013DB7C /* MongoliaLayerCenter.h */,
+				A8AD2E3D1EB979760013DB7C /* MongoliaLayerCenter.m */,
+				A8D2DE761EB9E1CF00D61AD0 /* MaskView.h */,
+				A8D2DE771EB9E1CF00D61AD0 /* MaskView.m */,
+			);
+			name = MongoliaLayer;
+			path = Tools/MongoliaLayer;
+			sourceTree = "<group>";
+		};
 		E32020081CC4BAB80065579C /* webViewJavascripBridge */ = {
 			isa = PBXGroup;
 			children = (
@@ -5836,6 +5855,7 @@
 				E3B26F481CA136F9002E87F4 /* DBColor.m in Sources */,
 				74E8042D1AE78B8F00E7250E /* BindPhoneNumViewController.m in Sources */,
 				FB927C161B00897100252112 /* UCFMyRebateViewCtrl.m in Sources */,
+				A8AD2E3E1EB979760013DB7C /* MongoliaLayerCenter.m in Sources */,
 				74931A351B1326FE00143424 /* OHASBasicMarkupParser.m in Sources */,
 				84FFA5301C7EAA9200ACD835 /* UIScrollView+TouchScrollView.m in Sources */,
 				740DAEC11E56E2D100CD7C8F /* UCFBatchProjectController.m in Sources */,
@@ -5907,6 +5927,7 @@
 				7BD35A991AD61E4200389D6B /* LLLockView.m in Sources */,
 				FBB685861AE4A76800F222B6 /* MJRefreshHeader.m in Sources */,
 				84FAB60C1C7C575300D0942F /* MGSwipeButton.m in Sources */,
+				A8D2DE781EB9E1CF00D61AD0 /* MaskView.m in Sources */,
 				7BCE02381AC915720084C15C /* NSString+Base64.m in Sources */,
 				7BDD8FD91AE1043C007A5CE8 /* SDLoopProgressView.m in Sources */,
 				7BA6E4C41AD6731900FE8C37 /* UIImage+WebP.m in Sources */,
@@ -6226,7 +6247,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp299;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0ce353c9-748a-4307-9ccb-19c1a2dd7f16";
+				PROVISIONING_PROFILE = "aaaf1335-9564-4b24-89a0-419b90fbe72c";
 				PROVISIONING_PROFILE_SPECIFIER = 2016_299Distribution;
 				SWIFT_OBJC_BRIDGING_HEADER = "JRGC/JRGC-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -6295,7 +6316,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp299;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0ce353c9-748a-4307-9ccb-19c1a2dd7f16";
+				PROVISIONING_PROFILE = "aaaf1335-9564-4b24-89a0-419b90fbe72c";
 				PROVISIONING_PROFILE_SPECIFIER = 2016_299Distribution;
 				SWIFT_OBJC_BRIDGING_HEADER = "JRGC/JRGC-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;

@@ -64,6 +64,9 @@ typedef enum : NSUInteger {
 
 #pragma  首页邀请新政策弹框
 -(instancetype)initInviteFriendsToMakeMoneyDelegate:(id)delegate;
+
+-(instancetype)initPlatformUpgradeNotice:(id)delegate;
+
 #pragma mark - 显示
 - (void)show;
 #pragma mark - 隐藏

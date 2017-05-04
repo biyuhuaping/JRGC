@@ -45,7 +45,7 @@
     if(self.accoutType  == SelectAccoutTypeHoner){
           baseTitleLabel.text = @"尊享修改银行预留手机号";
     }else{
-          baseTitleLabel.text = @"P2P修改银行预留手机号";
+          baseTitleLabel.text = @"微金修改银行预留手机号";
     }
     [self addLeftButton];
     [self initFirstViewUI];
