@@ -95,9 +95,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     //***设置导航title 1.p2p绑定银行卡 2.尊享绑定银行卡
-    if(self.accoutType==1)
+    if(self.accoutType == SelectAccoutTypeP2P)
     {
-     baseTitleLabel.text =@"p2p绑定银行卡";
+     baseTitleLabel.text =@"微金绑定银行卡";
     }else{
      baseTitleLabel.text =@"尊享绑定银行卡";
     }

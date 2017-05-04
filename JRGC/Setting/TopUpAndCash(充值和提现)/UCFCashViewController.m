@@ -118,7 +118,7 @@
     if (self.accoutType == SelectAccoutTypeHoner) {
          baseTitleLabel.text = @"尊享提现";
     }else{
-         baseTitleLabel.text = @"P2P提现";
+         baseTitleLabel.text = @"微金提现";
     }
     [self addLeftButton];
     [self addRightButtonWithName:@"提现记录"];

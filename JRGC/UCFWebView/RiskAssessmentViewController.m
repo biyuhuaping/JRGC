@@ -39,7 +39,7 @@
         baseTitleLabel.text = @"尊享风险承担能力";
     }else{
         self.url = USEREVALUATEP2P;
-        baseTitleLabel.text = @"P2P风险承担能力";
+        baseTitleLabel.text = @"微金风险承担能力";
     }
 //    baseTitleLabel.text = self.title;
     [self addErrorViewButton];
