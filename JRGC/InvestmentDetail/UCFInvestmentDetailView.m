@@ -564,6 +564,7 @@
             cell.backgroundColor = UIColorWithRGB(0xf7f7f7);
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
+        cell.accoutType = self.accoutType;
         if ([_detailType isEqualToString:@"1"]) {
             [cell setValueOfTableViewCellLabel:self.investDetailModel type:@"1"];
         } else {
