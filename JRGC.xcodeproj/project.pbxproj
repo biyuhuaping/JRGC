@@ -148,6 +148,8 @@
 		742D0CA21DE29E99000FA676 /* UCFProjectListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 742D0CA01DE29E99000FA676 /* UCFProjectListCell.xib */; };
 		742D0CA51DE2B6EB000FA676 /* UCFProjectListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 742D0CA41DE2B6EB000FA676 /* UCFProjectListModel.m */; };
 		742D0CA81DE2D50E000FA676 /* UCFProjectLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 742D0CA71DE2D50E000FA676 /* UCFProjectLabel.m */; };
+		742E28021EBACDE400FF6D4E /* UCFHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 742E28001EBACDE400FF6D4E /* UCFHomeViewController.m */; };
+		742E28031EBACDE400FF6D4E /* UCFHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 742E28011EBACDE400FF6D4E /* UCFHomeViewController.xib */; };
 		7440FD961E16567B00491BC5 /* UCFDataStaticsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7440FD951E16567B00491BC5 /* UCFDataStaticsModel.m */; };
 		7440FD991E16582600491BC5 /* UCFDataDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7440FD981E16582600491BC5 /* UCFDataDetailModel.m */; };
 		7446EBA91E8A071A007CE790 /* UCFPersonCenterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7446EBA81E8A0719007CE790 /* UCFPersonCenterModel.m */; };
@@ -993,6 +995,9 @@
 		742D0CA41DE2B6EB000FA676 /* UCFProjectListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFProjectListModel.m; sourceTree = "<group>"; };
 		742D0CA61DE2D50E000FA676 /* UCFProjectLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFProjectLabel.h; sourceTree = "<group>"; };
 		742D0CA71DE2D50E000FA676 /* UCFProjectLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFProjectLabel.m; sourceTree = "<group>"; };
+		742E27FF1EBACDE400FF6D4E /* UCFHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFHomeViewController.h; sourceTree = "<group>"; };
+		742E28001EBACDE400FF6D4E /* UCFHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFHomeViewController.m; sourceTree = "<group>"; };
+		742E28011EBACDE400FF6D4E /* UCFHomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFHomeViewController.xib; sourceTree = "<group>"; };
 		7440FD941E16567B00491BC5 /* UCFDataStaticsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFDataStaticsModel.h; sourceTree = "<group>"; };
 		7440FD951E16567B00491BC5 /* UCFDataStaticsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFDataStaticsModel.m; sourceTree = "<group>"; };
 		7440FD971E16582600491BC5 /* UCFDataDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFDataDetailModel.h; sourceTree = "<group>"; };
@@ -2600,6 +2605,57 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		742E27F41EBACAA200FF6D4E /* HomeViewController(最新项目) */ = {
+			isa = PBXGroup;
+			children = (
+				742E27F91EBACB6600FF6D4E /* Sence */,
+				742E27F81EBACB6600FF6D4E /* Controller */,
+				742E27F71EBACB6600FF6D4E /* Present */,
+				742E27F51EBACB6600FF6D4E /* View */,
+				742E27F61EBACB6600FF6D4E /* Model */,
+			);
+			name = "HomeViewController(最新项目)";
+			path = HomeViewController;
+			sourceTree = "<group>";
+		};
+		742E27F51EBACB6600FF6D4E /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		742E27F61EBACB6600FF6D4E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		742E27F71EBACB6600FF6D4E /* Present */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Present;
+			sourceTree = "<group>";
+		};
+		742E27F81EBACB6600FF6D4E /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		742E27F91EBACB6600FF6D4E /* Sence */ = {
+			isa = PBXGroup;
+			children = (
+				742E27FF1EBACDE400FF6D4E /* UCFHomeViewController.h */,
+				742E28001EBACDE400FF6D4E /* UCFHomeViewController.m */,
+				742E28011EBACDE400FF6D4E /* UCFHomeViewController.xib */,
+			);
+			path = Sence;
+			sourceTree = "<group>";
+		};
 		74541C7B1ADF95ED0009D27D /* AccountDetail(资金账户) */ = {
 			isa = PBXGroup;
 			children = (
@@ -3979,6 +4035,7 @@
 		7BFE3EAE1AC56315002A53A2 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				742E27F41EBACAA200FF6D4E /* HomeViewController(最新项目) */,
 				741CA7971E724B8E006056A8 /* loan */,
 				741CA7981E724B8E006056A8 /* discovery */,
 				7BCE028D1AC948710084C15C /* LatestProject */,
@@ -5435,6 +5492,7 @@
 				7BA6E4C81AD6731900FE8C37 /* Info.plist in Resources */,
 				25950EBD1D7FB6EC00E4CCBA /* CWFaceViewController.xib in Resources */,
 				FB4F9E7F1D62A83000CCB492 /* AccountWebView.xib in Resources */,
+				742E28031EBACDE400FF6D4E /* UCFHomeViewController.xib in Resources */,
 				74EAF5C51B0F36D100807C1C /* UCFBankCard.xib in Resources */,
 				FB2858CE1BAAB583000EAA71 /* UCFMyInvestViewController.xib in Resources */,
 				747BE9D31D5B0F48007DEF32 /* UCFHuiBuinessDetailViewController.xib in Resources */,
@@ -5752,6 +5810,7 @@
 				EDEF5E921CBF761700592B20 /* PromptView.m in Sources */,
 				4A9016871AFB12FE0049A9E0 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				25F538B41D881B0A0039262F /* UCFPurchaseWebView.m in Sources */,
+				742E28021EBACDE400FF6D4E /* UCFHomeViewController.m in Sources */,
 				74D7FCD51AE8F75000653B8F /* UCFHeadrView.m in Sources */,
 				7456D3B21E82278A00207349 /* UCFUserInfoController.m in Sources */,
 				7456D3C71E82700500207349 /* UIView+Extension.m in Sources */,
