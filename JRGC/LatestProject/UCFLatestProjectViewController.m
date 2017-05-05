@@ -393,10 +393,9 @@
 -(void)homeButtonPressed:(UIButton *)button withCelltypeSellWay:(NSString *)strSellWay
 {
     if ([strSellWay isEqualToString:@"12"]) {
-        UCFHonerPlanViewController *horner = [[UCFHonerPlanViewController alloc] initWithNibName:@"UCFHonerPlanViewController" bundle:nil];
-        horner.baseTitleText = @"工场尊享";
-        horner.accoutType = SelectAccoutTypeHoner;
-        [self.navigationController pushViewController:horner animated:YES];
+        UCFHonerContainerViewController *contaier = [[UCFHonerContainerViewController alloc] initWithNibName:@"UCFHonerContainerViewController" bundle:nil];
+        contaier.accoutType = SelectAccoutTypeHoner;
+        [self.navigationController pushViewController:contaier animated:YES];
         return;
     }
     UCFProjectListController *project = [[UCFProjectListController alloc] initWithNibName:@"UCFProjectListController" bundle:nil];
