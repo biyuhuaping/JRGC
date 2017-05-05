@@ -121,6 +121,7 @@
         }
         NSDictionary *info =  self.bidArray[0];
         [cell setTransInvestItemInfo:info];
+        cell.accoutType = self.accoutType;
         return cell;
     } else if(indexPath.row == 1){
         static NSString *cellStr2 = @"cell2";
@@ -143,6 +144,7 @@
             */
             cell.inputMoneyTextFieldLable.text = [self GetDefaultText];
         }
+        cell.accoutType = self.accoutType;
         cell.dataDict = _dataDict;
         cell.isTransid = YES;
         /*
@@ -543,8 +545,6 @@
     }
     NZLabel *label1 = [[NZLabel alloc] init];
     label1.font = [UIFont systemFontOfSize:12.0f];
-//    CGSize size = [Common getStrWitdth:totalStr TextFont:[UIFont systemFontOfSize:12]];
-//    label1.frame = CGRectMake(23, 15, ScreenWidth - 23 - 15, size.height);
     
     CGSize size = [Common getStrHeightWithStr:totalStr AndStrFont:12 AndWidth:ScreenWidth- 23 - 15 AndlineSpacing:1.0f];
     label1.numberOfLines = 0;
@@ -571,6 +571,23 @@
     imageView1.frame = CGRectMake(CGRectGetMinX(label1.frame) - 7, CGRectGetMinY(label1.frame) + 4, 5, 5);
     imageView1.image = [UIImage imageNamed:@"point.png"];
     [footView addSubview:imageView1];
+ 
+    
+    if (self.accoutType == SelectAccoutTypeHoner) {
+        UILabel *jieshouLabel = [[UILabel alloc] initWithFrame:CGRectMake(23, CGRectGetMaxY(label1.frame)+10, ScreenWidth- 23 - 15, 12)];
+        jieshouLabel.backgroundColor = [UIColor clearColor];
+        jieshouLabel.text = @"单笔尊享项目仅支持一对一转让，不支持部分购买。";
+        jieshouLabel.font = [UIFont systemFontOfSize:12];
+        jieshouLabel.textColor = UIColorWithRGB(0x999999);
+        [footView addSubview:jieshouLabel];
+        
+        footView.frame = CGRectMake(0, 0, ScreenWidth, CGRectGetMaxY(jieshouLabel.frame) + 15);
+        [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:footView isTop:YES];
+        
+        UIImageView * imageView2 = [[UIImageView alloc] init];
+        imageView2.frame = CGRectMake(CGRectGetMinX(jieshouLabel.frame) - 7, CGRectGetMinY(jieshouLabel.frame) + 4, 5, 5);
+        imageView2.image = [UIImage imageNamed:@"point.png"];
+    }
     return footView;
 }
 - (NSString *)valueIndex:(ZBLinkLabelModel *)linkModel

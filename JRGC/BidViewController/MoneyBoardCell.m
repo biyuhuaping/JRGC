@@ -355,6 +355,15 @@
             _gongDouAccout.hidden = YES;
             _gongDouCountLabel.hidden = YES;
             _gongDouSwitch.hidden = YES;
+        
+           _allTouziBtn.hidden = self.accoutType == SelectAccoutTypeHoner;//如果是尊享债转 则隐藏全投按钮
+        if (self.accoutType == SelectAccoutTypeHoner) {
+           _inputMoneyTextFieldLable.text = [NSString stringWithFormat:@"%.2f",availableBalance];
+           _inputMoneyTextFieldLable.userInteractionEnabled = NO;
+        }else{
+            _inputMoneyTextFieldLable.userInteractionEnabled = YES;
+        }
+        
     }
 }
 - (void)drawMarkView
