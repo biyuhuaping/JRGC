@@ -1234,6 +1234,9 @@ static NetworkModule *gInstance = NULL;
         case kSXTagCheckPersonRedPoint:
             parameter = [NEW_SERVER_IP stringByAppendingString:CHECKPERSONCENTERREDALERT];
             break;
+        case kSXTagProductList:
+            parameter = [NEW_SERVER_IP stringByAppendingString:USERPRODUTLIST];
+            break;
 
     }
     //给原有参数字典添加公共参数

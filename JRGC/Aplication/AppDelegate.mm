@@ -698,10 +698,10 @@
             [self novicecheck:dic];
             [self zxSwitchCheck:dic];
             //以下是升级信息
-            NSString *netVersion = dic[@"lastVersion"];
+            NSString *netVersion = [dic objectSafeForKey: @"lastVersion"];
             [LockFlagSingle sharedManager].netVersion = netVersion;
             //是否强制更新 0强制 1随便 2不稳定
-            NSInteger versionMark = [dic[@"forceUpdateOnOff"] integerValue];
+            NSInteger versionMark = [[dic objectSafeForKey:@"forceUpdateOnOff"] integerValue];
       
             NSDictionary *infoDic = [[NSBundle mainBundle] infoDictionary];
             NSString *currentVersion = infoDic[@"CFBundleShortVersionString"];
