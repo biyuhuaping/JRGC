@@ -231,6 +231,7 @@
 #define USERACOUNTINFOURL  @"api/userAccount/v2/userAccountInfo.json" //P2P或尊享账户信息
 #define USERGETZUNXIANGAGREE @"api/userInfo/v2/zxAuthorization.json"
 #define USERZUNXIANGSTATE    @"api/userInfo/v2/zxIsAuthorization.json"
+#define USERPRODUTLIST        @"api/prdClaims/v2/productList.json" //产品列表
 
 
 enum kPostStatus{
@@ -433,7 +434,8 @@ enum kSXTag
     kSXTagGetTokenId,                       //获取放心花界面的token
     kSXTagUserAccountInfo,                   //P2P或尊享账户信息
     kSXTagGetUserAgree,                      //尊享授权
-    kSXTagGetUserAgreeState                 //获取尊享授权状态
+    kSXTagGetUserAgreeState,                 //获取尊享授权状态
+    kSXTagProductList                        //产品列表
 };
 
 typedef enum kSXTag kSXTag;

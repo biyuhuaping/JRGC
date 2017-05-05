@@ -615,7 +615,7 @@
                 placehoderLabel.textColor = UIColorWithRGB(0x333333);
                 placehoderLabel.textAlignment = NSTextAlignmentLeft;
                 placehoderLabel.backgroundColor = [UIColor clearColor];
-                NSString *str = _isP2P ? @"投标记录" :@"认购记录";
+                NSString *str = _isP2P ? @"出借记录" :@"认购记录";
                 placehoderLabel.text = [NSString stringWithFormat:@"共%lu笔%@",(unsigned long)[[_dataDic objectForKey:@"prdOrders"] count],str];
                 [headView addSubview:placehoderLabel];
                 return headView;

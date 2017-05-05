@@ -48,6 +48,9 @@
 #import "HSHelper.h"
 #import "MongoliaLayerCenter.h"
 #import "MaskView.h"
+#import "UCFSecurityCenterViewController.h"
+#import "UCFProductListCell.h"
+#import "UCFProductListModel.h"
 @interface UCFLatestProjectViewController ()<InvestmentCellDelegate,FourOFourViewDelegate,CycleViewDelegate,PromptViewDelegate,homeButtonPressedCellDelegate, UITableViewDataSource, UITableViewDelegate, UCFCollectionBidCellDelegate,MjAlertViewDelegate,PraiseAlertDelegate>
 {
     UIView *_clickView;
@@ -64,6 +67,7 @@
 @property (strong, nonatomic) NSMutableArray *banderArr;
 @property (strong, nonatomic) NSMutableArray *actionArr;
 @property (strong, nonatomic) NSMutableArray *investmentArr;
+@property (strong, nonatomic) NSMutableArray *groupArray;
 @property (strong, nonatomic) NSMutableArray *dataArr;
 
 @property (strong, nonatomic) NSIndexPath *indexPath;//选中了哪一行
@@ -108,6 +112,7 @@
     [super viewDidLoad];
 //    [self drawPullingView];//点击加载更多
     _investmentArr = [NSMutableArray new];
+    self.groupArray = [NSMutableArray arrayWithCapacity:2];
 //    _dataArr = [NSMutableArray new];
     self.baseTitleType = @"list";
     _pageNum = 1;
@@ -119,6 +124,7 @@
     _lineHigh1.constant = 0;
     _lineHigh2.constant = 0;
     
+    baseTitleLabel.text = @"产品列表";
     UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 50)];
     self.tableView.tableFooterView = footerView;
     UILabel *tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 15, SCREEN_WIDTH, 20)];
@@ -132,12 +138,14 @@
     
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadHomeData:) name:@"userisloginandcheckgrade" object:nil];
         
-    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
-        [self.tableView setSeparatorInset: UIEdgeInsetsZero];
-    }
-    if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
-        [self.tableView setLayoutMargins: UIEdgeInsetsZero];
-    }
+//    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+//        [self.tableView setSeparatorInset: UIEdgeInsetsZero];
+//    }
+//    if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
+//        [self.tableView setLayoutMargins: UIEdgeInsetsZero];
+//    }
+    self.tableView.separatorColor = UIColorWithRGB(0xe3e5ea);
+    self.tableView.separatorInset = UIEdgeInsetsMake(0,15, 0, 0);
 
     //=========  下拉刷新、上拉加载更多  =========
     __weak typeof(self) weakSelf = self;
@@ -667,155 +675,247 @@
 }
 
 #pragma mark - UITableViewDelegate
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 10)];
+    view.backgroundColor = [UIColor clearColor];
+    [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:view isTop:YES];
+    return view;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 10;
+}
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 1) {
-        return 204;
-    }
-    else {
-        //************************************************qyy 2016-11-17首页接口改造
-        InvestmentItemInfo *info = _investmentArr[indexPath.row];
-        if(![info.homeType isEqualToString:@""])
-        {
-            return 27;
-        }else{
-            return 100;
-        }
-    }
-    return 0;
+    return 60;
+    
+//    if (indexPath.section == 1) {
+//        return 204;
+//    }
+//    else {
+//        //************************************************qyy 2016-11-17首页接口改造
+//        InvestmentItemInfo *info = _investmentArr[indexPath.row];
+//        if(![info.homeType isEqualToString:@""])
+//        {
+//            return 27;
+//        }else{
+//            return 100;
+//        }
+//    }
+//    return 0;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return self.groupArray.count;
 }
 
 
 // 每组几行，默认为1
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if (section==1) {
-        if (self.collectionBidModel.colName.length > 0) {
-            return 1;
-        }
-        return 0;
-    }
-    return _investmentArr.count;
+    NSArray *sectionArray = self.groupArray[section];
+    return sectionArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 1) {
-        static NSString *cellId = @"collectionBidCell";
-        UCFCollectionBidCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
-        if (!cell) {
-            cell = [[[NSBundle mainBundle] loadNibNamed:@"UCFCollectionBidCell" owner:self options:nil] lastObject];
-            cell.delegate = self;
-        }
-        cell.collectionBidModel = self.collectionBidModel;
-        cell.moreValueLabel.text = self.totalCount;
-        return cell;
+    
+    static NSString *cellId = @"UCFProductListCell";
+    UCFProductListCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+    if (!cell) {
+        cell = [[[NSBundle mainBundle] loadNibNamed:@"UCFProductListCell" owner:self options:nil] lastObject];
+        cell.selectionStyle = UITableViewCellSeparatorStyleSingleLine;
     }
-    else {
-        //************************************************qyy 2016-11-17首页接口改造
-        InvestmentItemInfo *info = _investmentArr[indexPath.row];
-        if(![info.homeType isEqualToString:@""])
-        {
-            static NSString *cellStr = @"LatestCell";
-            UCFLatesProjectTableViewCell *cellt = [tableView dequeueReusableCellWithIdentifier:cellStr];
-            if (cellt == nil) {
-                cellt = [[NSBundle mainBundle]loadNibNamed:@"UCFLatesProjectTableViewCell" owner:self options:nil][0];
-                cellt.delegate = self;
-            }
-            cellt.but_press.tag = 100 + indexPath.row;
-            cellt.typeSellWay = info.homeType;
-            cellt.label_title.text = info.homeTile;
-            
-            if (![info.homeIconUrl isEqualToString:@""]) {
-                [cellt.image_ahead sd_setImageWithURL:[NSURL URLWithString:info.homeIconUrl] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL){
-                    
-                }];
-            }else{
-                cellt.image_ahead.image = [UIImage imageNamed:@"tabbar_icon_project_normal.png"];
-            }
-            return cellt;
-        }else{
-            //************************************************qyy 2016-11-17首页接口改造
-            static  NSString *indentifier = @"LatestCell";
-            
-            InvestmentCell *cell = [tableView dequeueReusableCellWithIdentifier:indentifier];
-            if (!cell) {
-                cell = [[NSBundle mainBundle]loadNibNamed:@"InvestmentCell" owner:self options:nil][0];
-                cell.delegate = self;
-                //        UIView *view = [[UIView alloc] initWithFrame:cell.frame];
-                //        view.backgroundColor = [UIColorWithRGB(0x2b3655) colorWithAlphaComponent:0.2];
-                //        cell.selectedBackgroundView = view;//选中后cell的背景颜色
-            }
-            InvestmentItemInfo *info = [_investmentArr objectSafeAtIndex:indexPath.row];
-            cell.investButton.tag = 100 + indexPath.row;
-            [cell setItemInfo:info];
-            NSArray *prdLabelsList = [NSArray arrayWithArray:(NSArray*)info.prdLabelsList];
-            
-            if (![prdLabelsList isEqual:@""])
-            {
-                for (NSDictionary *dic in prdLabelsList)
-                {
-                    NSString *labelPriority = dic[@"labelPriority"];
-                    if ([labelPriority isEqual:@"1"])
-                    {
-                        cell.angleView.angleString = dic[@"labelName"];
-                    }
-                }
-            }
-            return cell;
-        }
+    NSArray *sectionArray = self.groupArray[indexPath.section];
+    UCFProductListModel *model = sectionArray[indexPath.row];
+    if (sectionArray.count > 0) {
+        cell.model  = model;
     }
-    return nil;
+    if (indexPath.row == 0) {
+        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 0.5)];
+        line.backgroundColor = UIColorWithRGB(0xd8d8d8);
+        [cell.contentView addSubview:line];
+//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
+    if (indexPath.row == [sectionArray count] - 1) {
+        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(cell.frame) - 0.5, ScreenWidth, 0.5)];
+        line.backgroundColor = UIColorWithRGB(0xd8d8d8);
+        [cell.contentView addSubview:line];
+    }
+
+    return cell;
+
+    
+    
+//    if (indexPath.section == 1) {
+//        static NSString *cellId = @"collectionBidCell";
+//        UCFCollectionBidCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+//        if (!cell) {
+//            cell = [[[NSBundle mainBundle] loadNibNamed:@"UCFCollectionBidCell" owner:self options:nil] lastObject];
+//            cell.delegate = self;
+//        }
+//        cell.collectionBidModel = self.collectionBidModel;
+//        cell.moreValueLabel.text = self.totalCount;
+//        return cell;
+//    }
+//    else {
+//        //************************************************qyy 2016-11-17首页接口改造
+//        InvestmentItemInfo *info = _investmentArr[indexPath.row];
+//        if(![info.homeType isEqualToString:@""])
+//        {
+//            static NSString *cellStr = @"LatestCell";
+//            UCFLatesProjectTableViewCell *cellt = [tableView dequeueReusableCellWithIdentifier:cellStr];
+//            if (cellt == nil) {
+//                cellt = [[NSBundle mainBundle]loadNibNamed:@"UCFLatesProjectTableViewCell" owner:self options:nil][0];
+//                cellt.delegate = self;
+//            }
+//            cellt.but_press.tag = 100 + indexPath.row;
+//            cellt.typeSellWay = info.homeType;
+//            cellt.label_title.text = info.homeTile;
+//            
+//            if (![info.homeIconUrl isEqualToString:@""]) {
+//                [cellt.image_ahead sd_setImageWithURL:[NSURL URLWithString:info.homeIconUrl] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL){
+//                    
+//                }];
+//            }else{
+//                cellt.image_ahead.image = [UIImage imageNamed:@"tabbar_icon_project_normal.png"];
+//            }
+//            return cellt;
+//        }else{
+//            //************************************************qyy 2016-11-17首页接口改造
+//            static  NSString *indentifier = @"LatestCell";
+//            
+//            InvestmentCell *cell = [tableView dequeueReusableCellWithIdentifier:indentifier];
+//            if (!cell) {
+//                cell = [[NSBundle mainBundle]loadNibNamed:@"InvestmentCell" owner:self options:nil][0];
+//                cell.delegate = self;
+//                //        UIView *view = [[UIView alloc] initWithFrame:cell.frame];
+//                //        view.backgroundColor = [UIColorWithRGB(0x2b3655) colorWithAlphaComponent:0.2];
+//                //        cell.selectedBackgroundView = view;//选中后cell的背景颜色
+//            }
+//            InvestmentItemInfo *info = [_investmentArr objectSafeAtIndex:indexPath.row];
+//            cell.investButton.tag = 100 + indexPath.row;
+//            [cell setItemInfo:info];
+//            NSArray *prdLabelsList = [NSArray arrayWithArray:(NSArray*)info.prdLabelsList];
+//            
+//            if (![prdLabelsList isEqual:@""])
+//            {
+//                for (NSDictionary *dic in prdLabelsList)
+//                {
+//                    NSString *labelPriority = dic[@"labelPriority"];
+//                    if ([labelPriority isEqual:@"1"])
+//                    {
+//                        cell.angleView.angleString = dic[@"labelName"];
+//                    }
+//                }
+//            }
+//            return cell;
+//        }
+//    }
+//    return nil;
 }
 
 // 选中某cell时。
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    if (indexPath.section == 1 && indexPath.row == 0) {
-        
-        UCFCollectionBidCell *cell = (UCFCollectionBidCell *)[tableView cellForRowAtIndexPath:indexPath];
-        if (cell.collectionBidModel) {
-           [self gotoCollectionDetailViewContoller:cell.collectionBidModel];
-        }
-    }
-    else {
-        if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
-            //如果未登录，展示登录页面
-            [self showLoginView];
-        } else {
+    
+    
+    NSArray *sectionArray = self.groupArray[indexPath.section];
+    UCFProductListModel *model = sectionArray[indexPath.row];
+    switch ([model.type intValue]) {
+        case 1: //1尊享
+        {
+            UCFHonerPlanViewController *horner = [[UCFHonerPlanViewController alloc] initWithNibName:@"UCFHonerPlanViewController" bundle:nil];
+            horner.baseTitleText = @"工场尊享";
+            horner.accoutType = SelectAccoutTypeHoner;
+            [self.navigationController pushViewController:horner animated:YES];
             
-            InvestmentItemInfo *info = _investmentArr[indexPath.row];
-            if([info.type isEqualToString:@"2"])
-            {
-                self.accoutType  = SelectAccoutTypeHoner;
-            }else{
-                 self.accoutType  = SelectAccoutTypeP2P;
-            }
-            if ([self checkUserCanInvestIsDetail:YES]) {
-                _indexPath = indexPath;
-                InvestmentItemInfo * info = [_investmentArr objectAtIndex:_indexPath.row];
-                NSString *userid = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
-                NSString *strParameters = [NSString stringWithFormat:@"id=%@&userId=%@",info.idStr,userid];
-                if ([info.status intValue ] != 2) {
-                    NSInteger isOrder = [info.isOrder integerValue];
-                    if (isOrder > 0) {
-                        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-                        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self Type:self.accoutType];
-                    } else {
-                        UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前标的详情只对投资人开放"];
-                        [self.navigationController pushViewController:controller animated:YES];
-                    }
-                } else {
-                    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-                    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self Type:self.accoutType];
-                }
-            }
         }
+            break;
+        case 2://2尊享转让
+        {
+            UCFHonerPlanViewController *horner = [[UCFHonerPlanViewController alloc] initWithNibName:@"UCFHonerPlanViewController" bundle:nil];
+            horner.baseTitleText = @"工场尊享";
+            horner.accoutType = SelectAccoutTypeHoner;
+            [self.navigationController pushViewController:horner animated:YES];
+            
+        }
+            
+            break;
+        case 3://3微金
+
+        {
+            UCFProjectListController *project = [[UCFProjectListController alloc] initWithNibName:@"UCFProjectListController" bundle:nil];
+            project.strStyle = @"11";
+            project.viewType = @"1";
+            [self.navigationController pushViewController:project animated:YES];
+
+        }
+            break;
+        case 4://4微金转让
+        {
+            UCFProjectListController *project = [[UCFProjectListController alloc] initWithNibName:@"UCFProjectListController" bundle:nil];
+            project.strStyle = @"11";
+            project.viewType = @"2";
+            [self.navigationController pushViewController:project animated:YES];
+
+        }
+            break;
+        case 5://5批量
+        {
+            UCFProjectListController *project = [[UCFProjectListController alloc] initWithNibName:@"UCFProjectListController" bundle:nil];
+            project.strStyle = @"11";
+            project.viewType = @"2";
+            [self.navigationController pushViewController:project animated:YES];
+        }
+            
+            break;
+            
+        default:
+            break;
     }
+//    if (indexPath.section == 1 && indexPath.row == 0) {
+//        
+//        UCFCollectionBidCell *cell = (UCFCollectionBidCell *)[tableView cellForRowAtIndexPath:indexPath];
+//        if (cell.collectionBidModel) {
+//           [self gotoCollectionDetailViewContoller:cell.collectionBidModel];
+//        }
+//    }
+//    else {
+//        if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
+//            //如果未登录，展示登录页面
+//            [self showLoginView];
+//        } else {
+//            
+//            InvestmentItemInfo *info = _investmentArr[indexPath.row];
+//            if([info.type isEqualToString:@"2"])
+//            {
+//                self.accoutType  = SelectAccoutTypeHoner;
+//            }else{
+//                 self.accoutType  = SelectAccoutTypeP2P;
+//            }
+//            if ([self checkUserCanInvestIsDetail:YES]) {
+//                _indexPath = indexPath;
+//                InvestmentItemInfo * info = [_investmentArr objectAtIndex:_indexPath.row];
+//                NSString *userid = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
+//                NSString *strParameters = [NSString stringWithFormat:@"id=%@&userId=%@",info.idStr,userid];
+//                if ([info.status intValue ] != 2) {
+//                    NSInteger isOrder = [info.isOrder integerValue];
+//                    if (isOrder > 0) {
+//                        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//                        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self Type:self.accoutType];
+//                    } else {
+//                        UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前标的详情只对投资人开放"];
+//                        [self.navigationController pushViewController:controller animated:YES];
+//                    }
+//                } else {
+//                    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//                    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self Type:self.accoutType];
+//                }
+//            }
+//        }
+//    }
 }
 #pragma mark - 请求网络及回调
 //获取prdClaims/dataList
@@ -840,7 +940,7 @@
     
     //************************************************qyy 2016-11-17首页接口改造
     NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys:[UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults]valueForKey:UUID]],@"userId", nil];
-    [[NetworkModule sharedNetworkModule]newPostReq:strParameters tag:kSXTagPrdClaimsNewVersion owner:self signature:YES Type:SelectAccoutTypeP2P];
+    [[NetworkModule sharedNetworkModule]newPostReq:strParameters tag:kSXTagProductList owner:self signature:NO Type:SelectAccoutTypeP2P];
 
 }
 
@@ -1008,6 +1108,40 @@
         }else {
             [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
         }
+    }if (tag.intValue == kSXTagProductList) {
+        NSString *rstcode = dic[@"ret"];
+        NSString *rsttext = dic[@"message"];
+        if ([rstcode intValue] == 1) {
+            //============ 新街口解析方法2016年11月16日qyy-123 ============
+            _tableView.footer.hidden = YES;
+            //        [_errorView hide];
+            if ([rstcode intValue] == 1) {
+                
+                [self.groupArray removeAllObjects];
+                NSArray *tempArray = [[dic objectSafeDictionaryForKey:@"data"] objectSafeArrayForKey:@"group"];
+                for (int i = 0; i < tempArray.count; i++)
+                {
+                    NSMutableArray *tempArrayone = [[NSMutableArray alloc]init];
+                    NSArray *arrylow = [tempArray objectAtIndex:i];
+                    if(arrylow.count>0)
+                    {
+                        for(int p = 0;p < arrylow.count; p++)
+                        {
+                            NSDictionary *dataDic = [arrylow objectAtIndex:p];
+                            UCFProductListModel *model = [[UCFProductListModel alloc]initWithDict:dataDic];
+                            [tempArrayone addObject:model];
+                        }
+                    }
+                    [self.groupArray addObject:tempArrayone];
+                }
+                [_tableView reloadData];
+            }
+            _isHiddenNoticLab = YES;
+            [self activitiesAction:NO];
+         
+        }else {
+            [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
+        }
     }
     [_tableView.header endRefreshing];
 //    [_tableView.footer endRefreshing];
@@ -1120,10 +1254,15 @@
 
 - (void)collectionCell:(UCFCollectionBidCell *)currentView didClickedMoreButton:(UIButton *)MoreButton
 {    
-    UCFProjectListController *project = [[UCFProjectListController alloc] initWithNibName:@"UCFProjectListController" bundle:nil];
-    project.strStyle = @"11";
-    project.viewType = @"2";
-    [self.navigationController pushViewController:project animated:YES];
+//    UCFProjectListController *project = [[UCFProjectListController alloc] initWithNibName:@"UCFProjectListController" bundle:nil];
+//    project.strStyle = @"11";
+//    project.viewType = @"2";
+//    [self.navigationController pushViewController:project animated:YES];
+    
+    
+    UCFSecurityCenterViewController *personMessageVC = [[UCFSecurityCenterViewController alloc] initWithNibName:@"UCFSecurityCenterViewController" bundle:nil];
+    personMessageVC.title = @"个人信息";
+    [self.navigationController pushViewController:personMessageVC animated:YES];
 }
 
 #pragma mark - 刷新首页数据
