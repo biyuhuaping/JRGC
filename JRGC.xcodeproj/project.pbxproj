@@ -520,6 +520,8 @@
 		84FAB60C1C7C575300D0942F /* MGSwipeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FAB6091C7C575300D0942F /* MGSwipeButton.m */; };
 		84FAB60D1C7C575300D0942F /* MGSwipeTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FAB60B1C7C575300D0942F /* MGSwipeTableCell.m */; };
 		84FFA5301C7EAA9200ACD835 /* UIScrollView+TouchScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FFA52F1C7EAA9200ACD835 /* UIScrollView+TouchScrollView.m */; };
+		A8C9EB7A1EBC567600B3E993 /* UCFHonerContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C9EB781EBC567600B3E993 /* UCFHonerContainerViewController.m */; };
+		A8C9EB7B1EBC567600B3E993 /* UCFHonerContainerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8C9EB791EBC567600B3E993 /* UCFHonerContainerViewController.xib */; };
 		AEC5EEC01D9B6594000C0321 /* RechargeFixedTelNumView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEC5EEBF1D9B6594000C0321 /* RechargeFixedTelNumView.xib */; };
 		AEC5EEC31D9B65BA000C0321 /* RechargeFixedTelNumView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC5EEC21D9B65BA000C0321 /* RechargeFixedTelNumView.m */; };
 		E31141601D92769E00FF880A /* UCFWebViewJavascriptBridgeBBS.m in Sources */ = {isa = PBXBuildFile; fileRef = E311415E1D92769E00FF880A /* UCFWebViewJavascriptBridgeBBS.m */; };
@@ -1655,6 +1657,9 @@
 		84FAB60B1C7C575300D0942F /* MGSwipeTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSwipeTableCell.m; sourceTree = "<group>"; };
 		84FFA52E1C7EAA9200ACD835 /* UIScrollView+TouchScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+TouchScrollView.h"; sourceTree = "<group>"; };
 		84FFA52F1C7EAA9200ACD835 /* UIScrollView+TouchScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+TouchScrollView.m"; sourceTree = "<group>"; };
+		A8C9EB771EBC567600B3E993 /* UCFHonerContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFHonerContainerViewController.h; sourceTree = "<group>"; };
+		A8C9EB781EBC567600B3E993 /* UCFHonerContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFHonerContainerViewController.m; sourceTree = "<group>"; };
+		A8C9EB791EBC567600B3E993 /* UCFHonerContainerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFHonerContainerViewController.xib; sourceTree = "<group>"; };
 		AE43B84F1DD2D8BE001D0BD0 /* JRGC.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JRGC.entitlements; sourceTree = "<group>"; };
 		AEC5EEBF1D9B6594000C0321 /* RechargeFixedTelNumView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RechargeFixedTelNumView.xib; sourceTree = "<group>"; };
 		AEC5EEC11D9B65BA000C0321 /* RechargeFixedTelNumView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RechargeFixedTelNumView.h; sourceTree = "<group>"; };
@@ -2478,6 +2483,9 @@
 				7459EDFF1E5552FE005A6FF7 /* UCFBatchBidController.h */,
 				7459EE001E5552FE005A6FF7 /* UCFBatchBidController.m */,
 				7459EE011E5552FE005A6FF7 /* UCFBatchBidController.xib */,
+				A8C9EB771EBC567600B3E993 /* UCFHonerContainerViewController.h */,
+				A8C9EB781EBC567600B3E993 /* UCFHonerContainerViewController.m */,
+				A8C9EB791EBC567600B3E993 /* UCFHonerContainerViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -5379,6 +5387,7 @@
 				FB3A80221CC612B8004B56C3 /* UCFCouponReturn.xib in Resources */,
 				4AE1E9641E1CDB9900587CE6 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				746FD8271D9B71E700C5BEB6 /* UCFSettingViewController.xib in Resources */,
+				A8C9EB7B1EBC567600B3E993 /* UCFHonerContainerViewController.xib in Resources */,
 				8300100E1E1356870088C707 /* UCFModifyReservedBankNumberViewController.xib in Resources */,
 				FBEDF1E01CB5171500116E12 /* MyViewController.xib in Resources */,
 				840A794B1C2A80B60059A946 /* UCFMessageSettingViewController.xib in Resources */,
@@ -5758,6 +5767,7 @@
 				E311A66D1D90E85B00C5483E /* UCFWebViewJavascriptBridgeLevel.m in Sources */,
 				74D7FCCC1AE8F72700653B8F /* FundAccountGroup.m in Sources */,
 				74DDD3DB1E9740250064688E /* UCFSignView.m in Sources */,
+				A8C9EB7A1EBC567600B3E993 /* UCFHonerContainerViewController.m in Sources */,
 				742D0CA51DE2B6EB000FA676 /* UCFProjectListModel.m in Sources */,
 				7485EFD01B0492CE0044DE48 /* UCFRedEnvelopeModel.m in Sources */,
 				7440FD961E16567B00491BC5 /* UCFDataStaticsModel.m in Sources */,

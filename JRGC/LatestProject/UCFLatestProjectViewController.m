@@ -46,6 +46,7 @@
 #import "MjAlertView.h"
 #import "NSDate+IsBelongToToday.h"
 #import "HSHelper.h"
+#import "UCFHonerContainerViewController.h"
 @interface UCFLatestProjectViewController ()<InvestmentCellDelegate,FourOFourViewDelegate,CycleViewDelegate,PromptViewDelegate,homeButtonPressedCellDelegate, UITableViewDataSource, UITableViewDelegate, UCFCollectionBidCellDelegate,MjAlertViewDelegate,PraiseAlertDelegate>
 {
     UIView *_clickView;
@@ -414,10 +415,18 @@
 //    
 //}
 - (IBAction)homeButtonPressedHornorButton:(UIButton *)sender {
-    UCFHonerPlanViewController *horner = [[UCFHonerPlanViewController alloc] initWithNibName:@"UCFHonerPlanViewController" bundle:nil];
-    horner.baseTitleText = @"工场尊享";
-    horner.accoutType = SelectAccoutTypeHoner;
-    [self.navigationController pushViewController:horner animated:YES];
+    
+    
+    
+    UCFHonerContainerViewController *contaier = [[UCFHonerContainerViewController alloc] initWithNibName:@"UCFHonerContainerViewController" bundle:nil];
+    contaier.accoutType = SelectAccoutTypeHoner;
+    [self.navigationController pushViewController:contaier animated:YES];
+
+    
+//    UCFHonerPlanViewController *horner = [[UCFHonerPlanViewController alloc] initWithNibName:@"UCFHonerPlanViewController" bundle:nil];
+//    horner.baseTitleText = @"工场尊享";
+//    horner.accoutType = SelectAccoutTypeHoner;
+//    [self.navigationController pushViewController:horner animated:YES];
 }
 
 //- (void)homeButtonPressedHornorButton:(UIButton *)button
