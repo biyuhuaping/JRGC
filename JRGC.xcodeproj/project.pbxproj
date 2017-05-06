@@ -240,6 +240,7 @@
 		74956EB11D66E2BC00D68B61 /* BindPhoneNumViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74956EB01D66E2BC00D68B61 /* BindPhoneNumViewController.xib */; };
 		74956EB31D66E87F00D68B61 /* UCFModifyPhoneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74956EB21D66E87F00D68B61 /* UCFModifyPhoneViewController.xib */; };
 		74956EB51D66F33D00D68B61 /* UCFAccountDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74956EB41D66F33D00D68B61 /* UCFAccountDetailViewController.xib */; };
+		74C05FB41EBDCB0C00673979 /* UCFHomeListNavView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74C05FB31EBDCB0C00673979 /* UCFHomeListNavView.m */; };
 		74D337B91E1390E800386853 /* UCFDataStatisticsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74D337B71E1390E800386853 /* UCFDataStatisticsViewController.m */; };
 		74D337BA1E1390E800386853 /* UCFDataStatisticsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74D337B81E1390E800386853 /* UCFDataStatisticsViewController.xib */; };
 		74D337C11E13C72D00386853 /* UCFDataStaticsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74D337BF1E13C72D00386853 /* UCFDataStaticsCell.m */; };
@@ -1165,6 +1166,8 @@
 		74956EB01D66E2BC00D68B61 /* BindPhoneNumViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BindPhoneNumViewController.xib; sourceTree = "<group>"; };
 		74956EB21D66E87F00D68B61 /* UCFModifyPhoneViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFModifyPhoneViewController.xib; sourceTree = "<group>"; };
 		74956EB41D66F33D00D68B61 /* UCFAccountDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFAccountDetailViewController.xib; sourceTree = "<group>"; };
+		74C05FB21EBDCB0C00673979 /* UCFHomeListNavView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFHomeListNavView.h; sourceTree = "<group>"; };
+		74C05FB31EBDCB0C00673979 /* UCFHomeListNavView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFHomeListNavView.m; sourceTree = "<group>"; };
 		74D337B61E1390E800386853 /* UCFDataStatisticsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFDataStatisticsViewController.h; sourceTree = "<group>"; };
 		74D337B71E1390E800386853 /* UCFDataStatisticsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFDataStatisticsViewController.m; sourceTree = "<group>"; };
 		74D337B81E1390E800386853 /* UCFDataStatisticsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFDataStatisticsViewController.xib; sourceTree = "<group>"; };
@@ -2654,6 +2657,8 @@
 				742E281A1EBB26E000FF6D4E /* UCFHomeListHeaderSectionView.h */,
 				742E281B1EBB26E000FF6D4E /* UCFHomeListHeaderSectionView.m */,
 				742E281D1EBB26ED00FF6D4E /* UCFHomeListHeaderSectionView.xib */,
+				74C05FB21EBDCB0C00673979 /* UCFHomeListNavView.h */,
+				74C05FB31EBDCB0C00673979 /* UCFHomeListNavView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -5935,6 +5940,7 @@
 				4A6EDBD21D5AC650004D40FF /* MD5Util.m in Sources */,
 				7470EC021B033080006DDCEF /* NSString+FormatForThousand.m in Sources */,
 				7BCE020A1AC8FDEF0084C15C /* NetworkModule.m in Sources */,
+				74C05FB41EBDCB0C00673979 /* UCFHomeListNavView.m in Sources */,
 				7BC304871ACBC22D007767F1 /* UITableView+Misc.m in Sources */,
 				FBBF48781C58C46C006AB777 /* UIView+Border.m in Sources */,
 				7BCE023C1AC915A80084C15C /* SFHFKeychainUtils.m in Sources */,

@@ -15,14 +15,14 @@
 #import "UCFHomeListPresenter.h"
 #import "UserInfoSingle.h"
 
-//#import "UCFHomeListNavView.h"
+#import "UCFHomeListNavView.h"
 
 @interface UCFHomeViewController () <UCFHomeListViewControllerDelegate>
 @property (strong, nonatomic) UCFCycleImageViewController *cycleImageVC;
 @property (strong, nonatomic) UCFUserInformationViewController *userInfoVC;
 @property (strong, nonatomic) UCFHomeListViewController *homeListVC;
 
-//@property (weak, nonatomic) UCFHomeListNavView *navView;
+@property (weak, nonatomic) UCFHomeListNavView *navView;
 @end
 
 @implementation UCFHomeViewController
@@ -41,9 +41,9 @@
 {
     self.navigationController.navigationBar.hidden = YES;
     
-//    UCFHomeListNavView *navView = [[UCFHomeListNavView alloc] initWithFrame:CGRectZero];
-//    [self.view addSubview:navView];
-//    self.navView = navView;
+    UCFHomeListNavView *navView = [[UCFHomeListNavView alloc] initWithFrame:CGRectZero];
+    [self.view addSubview:navView];
+    self.navView = navView;
     
     UCFUserPresenter *userPresenter = [UCFUserPresenter presenter];
     
@@ -77,25 +77,25 @@
     self.homeListVC.tableView.frame = CGRectMake(0, 0, SCREEN_WIDTH, ScreenHeight-49);
     [self.view addSubview:self.homeListVC.tableView];
     
-//    self.navView.frame = CGRectMake(0, 0, self.view.width, 64);
-//    [self.view bringSubviewToFront:self.navView];
+    self.navView.frame = CGRectMake(0, 0, self.view.width, 64);
+    [self.view bringSubviewToFront:self.navView];
 }
 
 #pragma mark - homelistVC的代理方法
 
-//- (void)homeList:(UCFHomeListViewController *)homeList tableView:(UITableView *)tableView didScrollWithYOffSet:(CGFloat)offSet
-//{
-//    CGFloat alp = offSet / 64;
-//    if (alp < 0) {
-//        self.navView.alpha = 0;
-//    }
-//    else if (alp>=0 && alp<=0.9) {
-//        [UIView animateWithDuration:0.25 animations:^{
-//            self.navView.alpha = alp;
-//        }];
-//    }
-//    else
-//        self.navView.alpha = 0.9;
-//}
+- (void)homeList:(UCFHomeListViewController *)homeList tableView:(UITableView *)tableView didScrollWithYOffSet:(CGFloat)offSet
+{
+    CGFloat alp = offSet / 64;
+    if (alp < 0) {
+        self.navView.alpha = 0;
+    }
+    else if (alp>=0 && alp<=0.9) {
+        [UIView animateWithDuration:0.25 animations:^{
+            self.navView.alpha = alp;
+        }];
+    }
+    else
+        self.navView.alpha = 0.9;
+}
 
 @end
