@@ -17,7 +17,7 @@
 
 #import "UCFHomeListNavView.h"
 
-@interface UCFHomeViewController () <UCFHomeListViewControllerDelegate>
+@interface UCFHomeViewController () <UCFHomeListViewControllerDelegate, UCFHomeListNavViewDelegate>
 @property (strong, nonatomic) UCFCycleImageViewController *cycleImageVC;
 @property (strong, nonatomic) UCFUserInformationViewController *userInfoVC;
 @property (strong, nonatomic) UCFHomeListViewController *homeListVC;
@@ -42,6 +42,7 @@
     self.navigationController.navigationBar.hidden = YES;
     
     UCFHomeListNavView *navView = [[UCFHomeListNavView alloc] initWithFrame:CGRectZero];
+    navView.delegate = self;
     [self.view addSubview:navView];
     self.navView = navView;
     
@@ -85,17 +86,14 @@
 
 - (void)homeList:(UCFHomeListViewController *)homeList tableView:(UITableView *)tableView didScrollWithYOffSet:(CGFloat)offSet
 {
-    CGFloat alp = offSet / 64;
-    if (alp < 0) {
-        self.navView.alpha = 0;
-    }
-    else if (alp>=0 && alp<=0.9) {
-        [UIView animateWithDuration:0.25 animations:^{
-            self.navView.alpha = alp;
-        }];
-    }
-    else
-        self.navView.alpha = 0.9;
+    self.navView.offset = offSet;
+}
+
+#pragma mark - UCFHomeListNavViewDelegate
+
+- (void)homeListNavView:(UCFHomeListNavView *)navView didClicked:(UIButton *)loginAndRegister
+{
+    
 }
 
 @end

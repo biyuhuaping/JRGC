@@ -11,6 +11,8 @@
 #import "UCFHomeListPresenter.h"
 #import "UCFHomeListHeaderSectionView.h"
 
+#import "UCFHomeListCell.h"
+
 @interface UCFHomeListViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) UCFHomeListPresenter *presenter;
@@ -33,6 +35,15 @@
         
 //        self.presenter = presenter;
 //        self.presenter.view = self;//将V和P进行绑定(这里因为V是系统的TableView 无法简单的声明一个view属性 所以就绑定到TableView的持有者上面)
+        
+        UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 50)];
+        self.tableView.tableFooterView = footerView;
+        UILabel *tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 15, SCREEN_WIDTH, 20)];
+        tipLabel.font = [UIFont systemFontOfSize:12];
+        tipLabel.text = @"市场有风险  投资需谨慎";
+        tipLabel.textColor = UIColorWithRGB(0x999999);
+        tipLabel.textAlignment = NSTextAlignmentCenter;
+        [footerView addSubview:tipLabel];
     }
     return self;
 }
@@ -45,17 +56,30 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    if (section == 0) {
+        return 1;
+    }
+    else if (section == 1) {
+        return 2;
+    }
+    else if (section == 2) {
+        return 3;
+    }
+    else {
+        return 3;
+    }
+    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *cellId = @"cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+    static NSString *cellId = @"homeListCell";
+    
+    UCFHomeListCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     if (nil == cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
+        cell = (UCFHomeListCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeListCell" owner:self options:nil] lastObject];
     }
-    cell.textLabel.text = @"天王盖地虎";
+    
     return cell;
 }
 
@@ -101,5 +125,7 @@
         [self.delegate homeList:self tableView:self.tableView didScrollWithYOffSet:scrollView.contentOffset.y];
     }
 }
+
+#pragma mark - 提示标签
 
 @end

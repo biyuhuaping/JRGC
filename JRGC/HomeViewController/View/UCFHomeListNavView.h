@@ -16,5 +16,6 @@
 @end
 
 @interface UCFHomeListNavView : UIView
+@property (assign, nonatomic) CGFloat offset;
 @property (weak, nonatomic) id<UCFHomeListNavViewDelegate> delegate;
 @end
