@@ -74,8 +74,9 @@
     if ([tp isEqualToString:@"1"]) {
         NSString *strAmt = [UCFToolsMehod isNullOrNilWithString:[NSString stringWithFormat:@"%@",model.investAmt]];
         strAmt = [UCFToolsMehod dealmoneyFormart:strAmt];
-        NSMutableAttributedString *str = [SharedSingleton getAcolorfulStringWithText1:@"出借金额：" Color1:UIColorWithRGB(0x999999) Text2:[NSString stringWithFormat:@"¥%@", [UCFToolsMehod isNullOrNilWithString:strAmt]] Color2:UIColorWithRGB(0xfd4d4c) AllText:[NSString stringWithFormat:@"出借金额：¥%@", [UCFToolsMehod isNullOrNilWithString:strAmt]]];
-        investmentAmountLabel.attributedText = str;
+        NSString *textStr  = self.accoutType == SelectAccoutTypeP2P ? @"出借金额：" :@"投资金额：";
+        NSMutableAttributedString *str1 = [SharedSingleton getAcolorfulStringWithText1:textStr Color1:UIColorWithRGB(0x999999) Text2:[NSString stringWithFormat:@"¥%@", [UCFToolsMehod isNullOrNilWithString:strAmt]] Color2:UIColorWithRGB(0xfd4d4c) AllText:[NSString stringWithFormat:@"%@¥%@",textStr,[UCFToolsMehod isNullOrNilWithString:strAmt]]];
+        investmentAmountLabel.attributedText = str1;
         NSString *strRate = [NSString stringWithFormat:@"%@",model.annualRate];
         
         NSMutableAttributedString *str2 = [SharedSingleton getAcolorfulStringWithText1:@"预期年化利率：" Color1:UIColorWithRGB(0x999999) Text2:[NSString stringWithFormat:@"%@%%", [UCFToolsMehod isNullOrNilWithString:strRate]] Color2:UIColorWithRGB(0x555555) AllText:[NSString stringWithFormat:@"预期年化利率：%@%%",[UCFToolsMehod isNullOrNilWithString:strRate]]];
