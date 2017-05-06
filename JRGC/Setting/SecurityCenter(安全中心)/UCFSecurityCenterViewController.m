@@ -36,6 +36,8 @@
 #import "RiskAssessmentViewController.h"
 #import "UCFBatchInvestmentViewController.h"
 #import "HSHelper.h"
+#import "UCFFacCodeViewController.h"
+#import "UCFMoreViewController.h"
 @interface UCFSecurityCenterViewController () <UITableViewDataSource, UITableViewDelegate, SecurityCellDelegate, UCFLockHandleDelegate>
 
 // 选项表数据
@@ -51,6 +53,8 @@
 @property (nonatomic,strong)UCFSettingItem *setChangePassword;
 
 @property (strong, nonatomic) NSString *isCompanyAgent;//是否是机构用户
+
+@property (nonatomic,assign)int sex;//性别
 
 @end
 
@@ -76,10 +80,15 @@
 {
     if (_itemsData == nil) {
 //        UCFSettingItem *userName = [UCFSettingItem itemWithIcon:@"login_icon_name" title:@"用户名"];
-         self.userLevel = [UCFSettingArrowItem itemWithIcon:@"safecenter_icon_vip" title:@"会员等级" destVcClass:[UCFWebViewJavascriptBridgeLevel class]];//***qyy
-        self.userLevel.isShowOrHide = NO;//不显示
+        
+   
         UCFSettingItem *idauth = [UCFSettingArrowItem itemWithIcon:@"safecenter_icon_id" title:@"身份认证" destVcClass:[UCFModifyIdAuthViewController class]];
         UCFSettingItem *bundlePhoneNum = [UCFSettingArrowItem itemWithIcon:@"login_icon_phone" title:@"绑定手机号" destVcClass:[BindPhoneNumViewController class]];
+        UCFSettingItem *facCode = [UCFSettingArrowItem itemWithIcon:@"工场码" title:@"工场码" destVcClass:[UCFFacCodeViewController class]];
+       
+        self.userLevel = [UCFSettingArrowItem itemWithIcon:@"safecenter_icon_vip" title:@"会员等级" destVcClass:[UCFWebViewJavascriptBridgeLevel class]];//***qyy
+        self.userLevel.isShowOrHide = YES;//不显示
+        UCFSettingItem *moreVc = [UCFSettingArrowItem itemWithIcon:@"login_icon_phone" title:@"更多" destVcClass:[UCFMoreViewController class]];
         //先前是绑卡页面，因为删除绑卡页面，所以暂时用TradePasswordVC这个类替代，整体调试的时候改过来，zrc fixed
 //        UCFSettingItem *bundleCard = [UCFSettingArrowItem itemWithIcon:@"safecenter_icon_bankcard" title:@"绑定银行卡" destVcClass:[UCFBankCardInfoViewController class]];//***qyy
         
@@ -96,7 +105,7 @@
         
         UCFSettingGroup *group1 = [[UCFSettingGroup alloc] init];//用户信息
 //        group1.items = [[NSMutableArray alloc]initWithArray: @[self.userLevel,idauth, bundlePhoneNum, bundleCard,riskAssessment]];//qyy
-        group1.items = [[NSMutableArray alloc]initWithArray: @[idauth, bundlePhoneNum]];//qyy
+        group1.items = [[NSMutableArray alloc]initWithArray: @[idauth, bundlePhoneNum,facCode,self.userLevel,moreVc]];//qyy
 
         UCFSettingGroup *group2 = [[UCFSettingGroup alloc] init];//账户安全
         
@@ -163,7 +172,7 @@
     
     self.view.backgroundColor = UIColorWithRGB(0xebebee);
     
-//    _userLevelImage = [[UIImageView alloc]initWithFrame:CGRectMake(ScreenWidth - 63, 9, 25, 25)];
+    _userLevelImage = [[UIImageView alloc]initWithFrame:CGRectMake(ScreenWidth - 63, 9, 25, 25)];
 
     if ([UserInfoSingle sharedManager].openStatus == 4) {
         _setChangePassword.title = @"修改交易密码";
@@ -274,11 +283,12 @@
         if (ret) {
             NSDictionary *result = dic[@"data"][@"data"];
             UCFSettingGroup *group = [self.itemsData firstObject];
-//            NSNumber *memberLever = [dic objectSafeForKey:@"memberLever"];
-            NSString *authId = [result objectForKey:@"state"];
-            NSString *bindPhone = [result objectForKey:@"bindMobile"];
+            NSNumber *memberLever = [dic objectSafeForKey:@"memberLever"];
+            NSString *authId = [result objectSafeForKey:@"state"];
+            NSString *bindPhone = [result objectSafeForKey:@"bindMobile"];
+            self.sex = [[result objectSafeForKey:@"sex"] intValue];
             NSString *oldPhone = [[NSUserDefaults standardUserDefaults] valueForKey:PHONENUM];
-            NSString *gradeResult = dic[@"data"][@"gradeResult"];
+//            NSString *gradeResult = dic[@"data"][@"gradeResult"];
 //            NSString *batchInvestStatus = [NSString stringWithFormat:@"%@",result[@"batchInvestStatus"]];
             self.isCompanyAgent = dic[@"data"][@"isCompanyAgent"];
             
@@ -313,16 +323,7 @@
             for (UCFSettingItem *userItem in group.items) {
                 NSInteger index = [group.items indexOfObject:userItem];
                 switch (index) {
-//                    case 0:
-//                    {
-//                    userItem.subtitle = @"VIP";
-//                        if ([memberLever intValue] >= 2) {
-//                            _userLevelImage.image =[UIImage imageNamed:[NSString stringWithFormat:@"vip%d_icon.png",[memberLever intValue]-1]];
-//                        }else{
-//                            _userLevelImage.image =[UIImage imageNamed:@"no_vip_icon.png"];
-//                        }
-//                    }
-//                        break;
+//
                     case 0:{
                         userItem.subtitle = [authId isEqualToString:@"未认证"] ? @"未认证" : authId;
                     }
@@ -335,7 +336,16 @@
 //                        userItem.subtitle = [bindCard isEqualToString:@""] ? @"未绑定" : bindCard;
 //                        break;
                     case 2:
-                        userItem.subtitle = gradeResult;
+                        userItem.subtitle = [[NSUserDefaults standardUserDefaults] objectForKey:@"gcmCode"];
+                        break;
+                    case 3:
+                    {
+                        if ([memberLever intValue] >= 2) {
+                            _userLevelImage.image =[UIImage imageNamed:[NSString stringWithFormat:@"vip%d_icon.png",[memberLever intValue]-1]];
+                        }else{
+                            _userLevelImage.image =[UIImage imageNamed:@"no_vip_icon.png"];
+                        }
+                    }
                         break;
                     default:
                         break;
@@ -426,13 +436,6 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-//    if (indexPath.section == 0 && indexPath.row == 0 ) { //判断会员等级一栏 是否隐藏
-//        if (self.userLevel.isShowOrHide && self.userGradeSwitch) {
-//            return 44.0f;
-//        }else{
-//            return 0.0f;
-//        }
-//    }
     return 44.0f;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -455,27 +458,6 @@
         topLine.backgroundColor = UIColorWithRGB(0xd8d8d8);
         [cell addSubview:topLine];
     }
-    if(indexPath.section == 0 && indexPath.row == 1) {
-        UIView *topLine = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 0.5)];
-        topLine.backgroundColor = UIColorWithRGB(0xd8d8d8);
-        topLine.tag = 10001;
-        [cell addSubview:topLine];
-        if (kIS_IOS8) {
-            for (UIView *view  in cell.subviews) {
-                if (view.tag == 10001) {
-                    view.hidden = self.userGradeSwitch;
-                }
-            }
-        }else{
-            for (UIView *view in [cell subviews]) {
-                for (UIView *viewsub in [view subviews]) {
-                    if (viewsub.tag == 10001) {
-                        viewsub.hidden = self.userGradeSwitch;
-                    }
-                }
-            }
-        }
-    }
     if (indexPath.row == group.items.count-1) {
         UIView *bottomLine = [[UIView alloc] initWithFrame:CGRectMake(0,43.5, ScreenWidth, 0.5)];
           bottomLine.backgroundColor = UIColorWithRGB(0xd8d8d8);
@@ -483,8 +465,10 @@
     }
     cell.item = group.items[indexPath.row];
     cell.delegate = self;
-
     
+    if ([cell.item.title isEqualToString:@"会员等级"]) {
+        [cell.contentView addSubview:_userLevelImage];
+    }
     return cell;
 }
 //检查touchiID是否打开
@@ -743,17 +727,6 @@
         if (indexPath.section == 0) {
         NSInteger  indexPathRow = indexPath.row;
         switch (indexPathRow) {
-                
-//            case 0: {
-//                if ([item.subtitle isEqualToString:@"VIP"]) {
-//                  vc = [[arrowItem.destVcClass alloc] initWithNibName:@"UCFWebViewJavascriptBridgeLevel" bundle:nil];
-//                    vc.title = arrowItem.title;
-//                    ((UCFWebViewJavascriptBridgeLevel *)vc).url = LEVELURL;
-//                    ((UCFWebViewJavascriptBridgeLevel *)vc).navTitle = @"会员等级";
-//                     //vc.rootVc = self;
-//                }
-//            }
-//                break;
             case 0: {
                 vc.rootVc = self;
                 if ([item.subtitle isEqualToString:@"未认证"]) {
@@ -782,6 +755,30 @@
                 v.rootVc = self;
             }
                 break;
+            case 2:{
+                UCFFacCodeViewController *subVC = [[UCFFacCodeViewController alloc] initWithNibName:@"UCFFacCodeViewController" bundle:nil];
+                subVC.urlStr = [NSString stringWithFormat:@"https://m.9888.cn/mpwap/mycode.jsp?pcode=%@&sex=%d",[[NSUserDefaults standardUserDefaults] objectForKey:@"gcmCode"],self.sex];
+                vc = subVC;
+            }
+                break;
+            case 3:
+                {
+                  vc = [[arrowItem.destVcClass alloc] initWithNibName:@"UCFWebViewJavascriptBridgeLevel" bundle:nil];
+                    vc.title = arrowItem.title;
+                    ((UCFWebViewJavascriptBridgeLevel *)vc).url = LEVELURL;
+                    ((UCFWebViewJavascriptBridgeLevel *)vc).navTitle = @"会员等级";
+                     //vc.rootVc = self;
+                }
+                break;
+            case 4:
+            {
+                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"UCFMoreViewController" bundle:nil];
+                UCFMoreViewController *moreVC = [storyboard instantiateViewControllerWithIdentifier:@"more_main"];
+                moreVC.title = @"更多";
+                moreVC.sourceVC = @"UCFSecurityCenterViewController";
+                vc = moreVC;
+            }
+                break;
                 
 //            case 3: {
 //                vc.rootVc = self;
@@ -806,14 +803,14 @@
 //                }
 //            }
 //                break;
-            case 2: {
-                vc = [[RiskAssessmentViewController alloc] initWithNibName:@"RiskAssessmentViewController" bundle:nil];
-                vc.title = arrowItem.title;
-                ((RiskAssessmentViewController *)vc).url = GRADELURL;
-                [self.navigationController pushViewController:vc  animated:YES];
-                return;
-
-            }
+//            case 2: {
+//                vc = [[RiskAssessmentViewController alloc] initWithNibName:@"RiskAssessmentViewController" bundle:nil];
+//                vc.title = arrowItem.title;
+//                ((RiskAssessmentViewController *)vc).url = GRADELURL;
+//                [self.navigationController pushViewController:vc  animated:YES];
+//                return;
+//
+//            }
                 break;
           }
             [self.navigationController pushViewController:vc  animated:YES];

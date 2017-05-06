@@ -275,7 +275,7 @@
     else {
         cell.prdName.text = tempArr[indexPath.row][@"prdName"];//标的名称
     }
-    cell.labText.text = self.accoutType == SelectAccoutTypeP2P ? @"出借金额":@"认购金额";
+    cell.labText.text = self.accoutType == SelectAccoutTypeP2P ? @"出借金额":@"投资金额";
     cell.status.text = _statusArr[status];//标状态
     cell.annualRate.text = [[tempArr[indexPath.row] objectSafeForKey:@"annualRate"] stringByAppendingString:@"%"];//年化收益率
     

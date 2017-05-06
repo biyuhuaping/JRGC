@@ -154,10 +154,11 @@
         UCFSettingItem *p2pOrHonerAccout = nil;
         UCFSettingItem *riskAssessment = nil;
         if (self.accoutType == SelectAccoutTypeHoner) {
-
+              myInVest.title  = @"我的投资";
               p2pOrHonerAccout = [UCFSettingArrowItem itemWithIcon:nil title:@"尊享徽商银行存管账户" destVcClass:nil];
               riskAssessment= [UCFSettingArrowItem itemWithIcon:nil title:@"尊享风险承担能力" destVcClass:[RiskAssessmentViewController class]];
         }else{
+            myInVest.title  = @"我的出借";
             if ([UserInfoSingle sharedManager].openStatus == 4) {
                 setChangePassword.title = @"修改交易密码";
             }else{
@@ -302,9 +303,8 @@
     
     NSString *titleStr = item.title;
 //    && [NSStringFromClass(item.destVcClass) isEqualToString:@"MyViewController"]
-    if ([titleStr isEqualToString:@"我的出借"]  ) {
+    if ([titleStr isEqualToString:@"我的出借"]  || [titleStr isEqualToString:@"我的投资"] ) {
         MyViewController *myInvestVC = [[MyViewController alloc] initWithNibName:@"MyViewController" bundle:nil];
-        myInvestVC.title = @"我的出借";
         myInvestVC.selectedSegmentIndex = 0;
         myInvestVC.accoutType = self.accoutType;
         [self.navigationController pushViewController:myInvestVC animated:YES];
