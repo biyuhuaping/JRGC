@@ -12,7 +12,7 @@
 @interface UCFCycleImageViewController : UIViewController
 #pragma mark - 根据所对应的presenter生成当前controller
 + (instancetype)instanceWithPresenter:(UCFUserPresenter *)presenter;
-#pragma mark - 返回当前显示模块的页面高度
+#pragma mark - 计算轮播图模块的高度
 + (CGFloat)viewHeight;
 #pragma mark - 返回当前controller的presenter
 - (UCFUserPresenter *)presenter;

@@ -10,6 +10,9 @@
 #import "UCFCycleImageViewController.h"
 #import "UCFUserInformationViewController.h"
 #import "UCFHomeListViewController.h"
+#import "UCFLoginViewController.h"
+#import "UCFSecurityCenterViewController.h"
+#import "UCFMessageCenterViewController.h"
 
 #import "UCFUserPresenter.h"
 #import "UCFHomeListPresenter.h"
@@ -28,6 +31,21 @@
 @implementation UCFHomeViewController
 
 #pragma mark - 系统方法
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:animated];
+}
+
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUI:) name:@"refreshUIWithLoginAndOut" object:nil];
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 #pragma mark - 设置
@@ -50,10 +68,21 @@
     
     self.cycleImageVC = [UCFCycleImageViewController instanceWithPresenter:userPresenter];
     self.userInfoVC = [UCFUserInformationViewController instanceWithPresenter:userPresenter];
+    [self.userInfoVC setPersonInfoVCGenerator:^UIViewController *(id params) {
+        UCFSecurityCenterViewController *personMessageVC = [[UCFSecurityCenterViewController alloc] initWithNibName:@"UCFSecurityCenterViewController" bundle:nil];
+        personMessageVC.title = @"个人信息";
+        return personMessageVC;
+    }];
+    [self.userInfoVC setMessageVCGenerator:^UIViewController *(id params) {
+        UCFMessageCenterViewController *messagecenterVC = [[UCFMessageCenterViewController alloc]initWithNibName:@"UCFMessageCenterViewController" bundle:nil];
+        messagecenterVC.title =@"消息中心";
+        return messagecenterVC;
+    }];
     
     UCFHomeListPresenter *listViewPresenter = [UCFHomeListPresenter presenter];
     self.homeListVC = [UCFHomeListViewController instanceWithPresenter:listViewPresenter];
     self.homeListVC.delegate = self; //HomeListViewController走的是Protocol绑定方式
+    [self.view addSubview:self.homeListVC.tableView];
 
     [self addChildViewController:self.cycleImageVC];
     [self addChildViewController:self.userInfoVC];
@@ -61,23 +90,21 @@
 
 #pragma mark - addUI 添加界面
 - (void)addUI {
-    
-    
+    self.homeListVC.tableView.frame = CGRectMake(0, 0, SCREEN_WIDTH, ScreenHeight-49);
     NSString *userId = [UserInfoSingle sharedManager].userId;
     if (userId) {
+        
         CGFloat userInfoViewHeight = [UCFUserInformationViewController viewHeight];
         self.userInfoVC.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, userInfoViewHeight);
+        self.navView.hidden = YES;
         self.homeListVC.tableView.tableHeaderView = self.userInfoVC.view;
     }
     else {
         CGFloat cycleImageViewHeight = [UCFCycleImageViewController viewHeight];
         self.cycleImageVC.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, cycleImageViewHeight);
+        self.navView.hidden = NO;
         self.homeListVC.tableView.tableHeaderView = self.cycleImageVC.view;
     }
-    
-    self.homeListVC.tableView.frame = CGRectMake(0, 0, SCREEN_WIDTH, ScreenHeight-49);
-    [self.view addSubview:self.homeListVC.tableView];
-    
     self.navView.frame = CGRectMake(0, 0, self.view.width, 64);
     [self.view bringSubviewToFront:self.navView];
 }
@@ -93,7 +120,15 @@
 
 - (void)homeListNavView:(UCFHomeListNavView *)navView didClicked:(UIButton *)loginAndRegister
 {
-    
+    UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
+    UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
+    [self presentViewController:loginNaviController animated:YES completion:nil];
+}
+
+#pragma mark - 刷新界面
+- (void)refreshUI:(NSNotification *)noty
+{
+    [self addUI];
 }
 
 @end
