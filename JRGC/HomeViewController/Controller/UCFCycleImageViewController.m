@@ -21,13 +21,6 @@
 //    self.navigationController.navigationBar.hidden = YES;
 }
 
-#pragma mark - 计算轮播图模块的高度
-+ (CGFloat)viewHeight
-{
-    return [UIScreen mainScreen].bounds.size.width * 0.5 + 10;
-}
-
-
 #pragma mark - 根据所对应的presenter生成当前controller
 + (instancetype)instanceWithPresenter:(UCFUserPresenter *)presenter {
     return [[UCFCycleImageViewController alloc] initWithPresenter:presenter];
@@ -41,5 +34,17 @@
     return self;
 }
 
-
+#pragma mark - 计算轮播图模块的高度
++ (CGFloat)viewHeight
+{
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    if (width == 320) {
+        return 170;
+    }
+    else if (width == 375) {
+        return 197.5;
+    }
+    else
+        return 320.5;
+}
 @end

@@ -16,4 +16,7 @@
 + (CGFloat)viewHeight;
 #pragma mark - 返回当前controller的presenter
 - (UCFUserPresenter *)presenter;
+
+- (void)setPersonInfoVCGenerator:(ViewControllerGenerator)personInfoVCGenerator;
+- (void)setMessageVCGenerator:(ViewControllerGenerator)messageVCGenerator;
 @end

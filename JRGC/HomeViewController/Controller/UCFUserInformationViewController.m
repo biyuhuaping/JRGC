@@ -9,10 +9,14 @@
 #import "UCFUserInformationViewController.h"
 #import "UCFUserPresenter.h"
 
-#define UserInfoViewHeight  317
+#define UserInfoViewHeight  327
 
 @interface UCFUserInformationViewController () <UCFUserPresenterUserInfoCallBack>
 @property (strong, nonatomic) UCFUserPresenter *presenter;
+
+@property (copy, nonatomic) ViewControllerGenerator personInfoVCGenerator;
+@property (copy, nonatomic) ViewControllerGenerator messageVCGenerator;
+
 @end
 
 @implementation UCFUserInformationViewController
@@ -35,10 +39,32 @@
     }
     return self;
 }
+
 #pragma mark - 计算用户信息页高度
 + (CGFloat)viewHeight
 {
-    return UserInfoViewHeight + 10;
+    CGFloat height = [UIScreen mainScreen].bounds.size.width / 3.2;
+    return UserInfoViewHeight + height;
+}
+
+#pragma mark - 个人信息
+- (IBAction)personInfo:(UIButton *)sender {
+    if (self.personInfoVCGenerator) {
+        
+        UIViewController *targetVC = self.personInfoVCGenerator(nil);
+        if (targetVC) {
+            [self.parentViewController.navigationController pushViewController:targetVC animated:YES];
+        }
+    }
+}
+
+- (IBAction)message:(UIButton *)sender {
+    if (self.messageVCGenerator) {
+        UIViewController *targetVC = self.messageVCGenerator(nil);
+        if (targetVC) {
+            [self.parentViewController.navigationController pushViewController:targetVC animated:YES];
+        }
+    }
 }
 
 @end
