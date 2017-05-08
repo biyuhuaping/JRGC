@@ -107,8 +107,7 @@
 
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [self.navigationController setNavigationBarHidden:YES animated:animated];
@@ -119,20 +118,17 @@
     }
 }
 
-- (void)viewDidDisappear:(BOOL)animated
-{
+- (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 }
 
-- (void)popShadowView:(NSNotification*)info
-{
+- (void)popShadowView:(NSNotification*)info {
     [self.userInfoVC.presenter setDefaultState];
     [self addShadowViewAndLoginBtn];
 }
 
-- (void)setDefaultViewData
-{
+- (void)setDefaultViewData {
     [self.userInfoVC.presenter setDefaultState];
 }
 
@@ -213,8 +209,7 @@
 
 #pragma mark - UCFPCListViewControllerCallBack
 
-- (void)pcListViewControllerdidSelectItem:(UCFPCListModel *)pcListModel
-{
+- (void)pcListViewControllerdidSelectItem:(UCFPCListModel *)pcListModel {
     if (!self.enableClick) {
         return;
     }
@@ -267,8 +262,7 @@
 }
 
 #pragma mark - 无奈的代码
-- (BOOL)checkIDAAndBankBlindState:(SelectAccoutType)type
-{
+- (BOOL)checkIDAAndBankBlindState:(SelectAccoutType)type {
     NSUInteger openStatus = (type == SelectAccoutTypeP2P ? [_personModel.p2pOpenStatus integerValue] : [_personModel.enjoyOpenStatus integerValue]);
     __weak typeof(self) weakSelf = self;
     if (openStatus == 1 || openStatus == 2) {
@@ -286,8 +280,7 @@
     return YES;
 }
 //未登录状态添加阴影和登录按钮
-- (void)addShadowViewAndLoginBtn
-{
+- (void)addShadowViewAndLoginBtn {
     BOOL hasHideView = NO;
     for (UIView *view in [self.view subviews]) {
         if ([view isKindOfClass:[UCFLoginShaowView class]]) {
@@ -307,8 +300,7 @@
 }
 
 //移除shadowview
-- (void)hideShadowView
-{
+- (void)hideShadowView {
     for (UIView *view in [self.view subviews]) {
         if ([view isKindOfClass:[UCFLoginShaowView class]]) {
             [view setHidden:YES];
@@ -319,25 +311,21 @@
 
 #pragma mark -loginbtnClicked
 
-- (void)btnShadowClicked:(id)sender
-{
+- (void)btnShadowClicked:(id)sender {
     UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
     loginViewController.sourceVC = @"fromPersonCenter";
     UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
     [self presentViewController:loginNaviController animated:YES completion:nil];
 }
 
-
-- (void)regBtnclicked:(id)sender
-{
+- (void)regBtnclicked:(id)sender {
     UCFRegisterStepOneViewController *registerControler = [[UCFRegisterStepOneViewController alloc] init];
     registerControler.sourceVC = @"fromPersonCenter";
     UINavigationController *regNaviController = [[UINavigationController alloc] initWithRootViewController:registerControler];
     [self presentViewController:regNaviController animated:YES completion:nil];
 }
 
-- (void)moreBtnclicked:(id)sender
-{
+- (void)moreBtnclicked:(id)sender {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"UCFMoreViewController" bundle:nil];
     UCFMoreViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"more_main"];
     controller.sourceVC = @"fromPersonCenter";

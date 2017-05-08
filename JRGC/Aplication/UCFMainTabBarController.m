@@ -8,7 +8,9 @@
 
 #import "UCFMainTabBarController.h"
 #import "UCFLoginViewController.h"
-#import "UCFLatestProjectViewController.h"
+//#import "UCFLatestProjectViewController.h"
+#warning UCFHomeViewController.h 替换 UCFLatestProjectViewController.h
+#import "UCFHomeViewController.h"
 //#import "UCFSettingViewController.h"
 #import "UCFPersonCenterController.h"
 #import "UCFMoreViewController.h"
@@ -25,7 +27,9 @@
 #import "UCFWebViewJavascriptBridgeLevel.h"
 @interface UCFMainTabBarController ()
 
-@property (strong, nonatomic) UCFLatestProjectViewController *LatestView;
+//@property (strong, nonatomic) UCFLatestProjectViewController *LatestView;
+#warning UCFHomeViewController.h 替换 UCFLatestProjectViewController.h
+@property (strong, nonatomic) UCFHomeViewController *LatestView;
 //@property (strong, nonatomic) UCFAssignmentCreditorViewController *AssignmentView;
 @property (strong, nonatomic) UCFProjectListController *AssignmentView;
 @end
@@ -100,8 +104,10 @@
     for (int i=0; i<5; i++) {
         switch (i) {
             case 0:{
-                UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"HomeStoryboard" bundle:nil];
-                _LatestView = [storyBoard instantiateViewControllerWithIdentifier:@"home"];
+//                UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"HomeStoryboard" bundle:nil];
+//                _LatestView = [storyBoard instantiateViewControllerWithIdentifier:@"home"];
+#warning 新类替换修改
+                _LatestView = [[UCFHomeViewController alloc] initWithNibName:@"UCFHomeViewController" bundle:nil];
                 _LatestView.baseTitleType = @"list";
                 controller = _LatestView;
             }
@@ -179,7 +185,8 @@
     
     switch (index) {
         case 0:{
-            [_LatestView.tableView.header beginRefreshing];
+#warning 列表刷新
+//            [_LatestView.tableView.header beginRefreshing];
         }
             break;
         case 1:{
