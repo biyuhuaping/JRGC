@@ -87,6 +87,8 @@
     UCFTransferModel *model = [self.dataArray objectAtIndex:indexPath.row];
     model.isAnim = YES;
     cell.transferModel = model;
+    cell.minInvestLab.text = cell.remainingLab.text;
+    cell.remainingLab.text = @"";
     cell.delegate = self;
     cell.type = UCFProjectListCellTypeTransfer;
     return cell;

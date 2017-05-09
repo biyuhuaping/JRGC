@@ -44,7 +44,7 @@
 }
 - (void)addSegmentControl
 {
-    self.itemSeletedView.sectionTitles = @[@"尊享计划", @"尊享转让"];
+    self.itemSeletedView.sectionTitles = @[@"尊享计划", @"转让专区"];
     self.itemSeletedView.delegate = self;
 }
 - (void)addChildControllers
