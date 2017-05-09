@@ -338,7 +338,7 @@
             _rechargeBtn.frame = CGRectMake(ScreenWidth - 15 - 44 , 50, 44, 37);
             
             _totalKeYongTipLabel.hidden = YES;
-            _inputMoneyTextFieldLable.placeholder = [NSString stringWithFormat:@"%@起投",[[_dataDict objectForKey:@"data"] objectForKey:@"investAmt"]];
+        
             double availableBalance = [[[_dataDict objectForKey:@"data"] objectForKey:@"actBalance"] doubleValue];
             NSString *availableStr = [UCFToolsMehod AddComma:[NSString stringWithFormat:@"%.2f",availableBalance]];
             self.myMoneyLabel.text = [NSString stringWithFormat:@"¥%@",availableStr];
@@ -358,10 +358,11 @@
         
            _allTouziBtn.hidden = self.accoutType == SelectAccoutTypeHoner;//如果是尊享债转 则隐藏全投按钮
         if (self.accoutType == SelectAccoutTypeHoner) {
-           _inputMoneyTextFieldLable.text = [NSString stringWithFormat:@"%.2f",availableBalance];
+//           _inputMoneyTextFieldLable.text = [NSString stringWithFormat:@"%.2f",availableBalance];
            _inputMoneyTextFieldLable.userInteractionEnabled = NO;
         }else{
             _inputMoneyTextFieldLable.userInteractionEnabled = YES;
+            _inputMoneyTextFieldLable.placeholder = [NSString stringWithFormat:@"%@起投",[[_dataDict objectForKey:@"data"] objectForKey:@"investAmt"]];
         }
         
     }

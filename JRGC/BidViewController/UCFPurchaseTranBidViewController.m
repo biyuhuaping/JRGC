@@ -56,7 +56,7 @@
     self.navigationController.navigationBar.translucent = NO;
 
     [self addLeftButton];
-    baseTitleLabel.text = @"投标";
+    baseTitleLabel.text = self.accoutType == SelectAccoutTypeHoner ? @"购买":@"投标";
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     
@@ -142,11 +142,11 @@
             }
             cell.gongDouSwitch.on = isGongDouSwitch;
             */
-            cell.inputMoneyTextFieldLable.text = [self GetDefaultText];
         }
         cell.accoutType = self.accoutType;
         cell.dataDict = _dataDict;
         cell.isTransid = YES;
+        cell.inputMoneyTextFieldLable.text = self.accoutType == SelectAccoutTypeHoner ? [self getHonerDefaultText] : [self getP2PDefaultText];
         /*
         if (isGongDouSwitch) {
             cell.gongDouAccout.textColor = UIColorWithRGB(0x333333);
@@ -179,7 +179,7 @@
 {
     if (mark == 500) {
         MoneyBoardCell *cell = (MoneyBoardCell *)[_bidTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
-        cell.inputMoneyTextFieldLable.text = [self GetDefaultText];
+        cell.inputMoneyTextFieldLable.text = self.accoutType == SelectAccoutTypeHoner ? [self getHonerDefaultText]:[self getP2PDefaultText];
     } else if (mark == 501) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"RechargeStoryBorard" bundle:nil];
         UCFTopUpViewController *topUpView  = [storyboard instantiateViewControllerWithIdentifier:@"topup"];
@@ -190,7 +190,12 @@
         [self.navigationController pushViewController:topUpView animated:YES];
     }
 }
-- (NSString *)GetDefaultText
+-(NSString*)getHonerDefaultText{
+    NSString *cantranMoney = [[_dataDict objectForKey:@"data"] objectForKey:@"cantranMoney"];
+    NSString *keTouJinEStr = [NSString stringWithFormat:@"%.2lf",[cantranMoney doubleValue]];
+    return keTouJinEStr;
+}
+- (NSString *)getP2PDefaultText
 {
     NSString *cantranMoney = [[_dataDict objectForKey:@"data"] objectForKey:@"cantranMoney"];
     long long int keTouJinE = round(([cantranMoney doubleValue]) * 100) ;
