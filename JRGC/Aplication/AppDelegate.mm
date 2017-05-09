@@ -537,8 +537,8 @@
         if (selectIndex == 0 && !self.lockVc) {
             UINavigationController *nav = [self.tabBarController.viewControllers objectAtIndex:0];
             if ([nav.visibleViewController isKindOfClass:[UCFLatestProjectViewController class]]) {
-                [[MongoliaLayerCenter sharedManager] showLogic];
-            }
+                    [[MongoliaLayerCenter sharedManager] showLogic];
+                }
         }
     });
 }
