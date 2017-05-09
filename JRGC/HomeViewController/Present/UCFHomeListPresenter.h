@@ -7,8 +7,22 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "UCFHomeAPIManager.h"
+
+@class UCFHomeListPresenter;
+@protocol HomeListViewPresenterCallBack <NSObject>
+
+- (void)homeListViewPresenter:(UCFHomeListPresenter *)presenter didRefreshDataWithResult:(id)result error:(NSError *)error;
+
+@end
 
 @interface UCFHomeListPresenter : NSObject
 
+@property (weak, nonatomic) id<HomeListViewPresenterCallBack> view;
+
+- (NSArray *)allDatas;
+
 + (instancetype)presenter;
+
+- (void)fetchHomeListDataWithCompletionHandler:(NetworkCompletionHandler)completionHander;
 @end

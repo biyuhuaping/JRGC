@@ -11,5 +11,5 @@
 typedef void(^NetworkCompletionHandler)(NSError *error, id result);
 
 @interface UCFHomeAPIManager : NSObject
-
+- (void)fetchHomeListWithUserId:(NSString *)userId completionHandler:(NetworkCompletionHandler)completionHandler;
 @end

@@ -8,14 +8,21 @@
 
 #import "UCFHomeListHeaderSectionView.h"
 
+@interface UCFHomeListHeaderSectionView  ()
+@property (weak, nonatomic) IBOutlet UIImageView *headerImageView;
+@property (weak, nonatomic) IBOutlet UILabel *headerTitleLabel;
+@property (weak, nonatomic) IBOutlet UIButton *homeListHeaderMoreButton;
+
+@end
+
 @implementation UCFHomeListHeaderSectionView
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+- (void)setPresenter:(UCFHomeListGroupPresenter *)presenter {
+    _presenter = presenter;
+    
+    self.headerTitleLabel.text = presenter.headerTitle;
+    
+    self.homeListHeaderMoreButton.hidden = !presenter.showMore;
 }
-*/
 
 @end

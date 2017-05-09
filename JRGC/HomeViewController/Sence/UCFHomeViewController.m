@@ -136,6 +136,8 @@
 #pragma mark - 请求数据
 - (void)fetchData
 {
-    
+    [self.homeListVC.presenter fetchHomeListDataWithCompletionHandler:^(NSError *error, id result) {
+        
+    }];
 }
 @end

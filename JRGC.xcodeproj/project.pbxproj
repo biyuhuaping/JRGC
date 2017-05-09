@@ -234,6 +234,8 @@
 		749182101EC166F000AC1ECE /* SDCycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 749182081EC166F000AC1ECE /* SDCycleScrollView.m */; };
 		749182111EC166F000AC1ECE /* UIView+SDExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 7491820A1EC166F000AC1ECE /* UIView+SDExtension.m */; };
 		7491826B1EC1943F00AC1ECE /* UCFHomeAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7491826A1EC1943F00AC1ECE /* UCFHomeAPIManager.m */; };
+		7491827C1EC1C02800AC1ECE /* UCFHomeListGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 7491827B1EC1C02800AC1ECE /* UCFHomeListGroup.m */; };
+		7491827F1EC1C06700AC1ECE /* UCFHomeListGroupPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7491827E1EC1C06700AC1ECE /* UCFHomeListGroupPresenter.m */; };
 		7491FBD61AFC5D5400CD0720 /* UCFModifyIdAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7491FBD51AFC5D5400CD0720 /* UCFModifyIdAuthViewController.m */; };
 		749319C11B12B6DF00143424 /* UCFProvinceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 749319C01B12B6DF00143424 /* UCFProvinceModel.m */; };
 		749319CF1B12BCD600143424 /* libc.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 749319CE1B12BCD600143424 /* libc.dylib */; };
@@ -1173,6 +1175,10 @@
 		7491820A1EC166F000AC1ECE /* UIView+SDExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SDExtension.m"; sourceTree = "<group>"; };
 		749182691EC1943F00AC1ECE /* UCFHomeAPIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFHomeAPIManager.h; sourceTree = "<group>"; };
 		7491826A1EC1943F00AC1ECE /* UCFHomeAPIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFHomeAPIManager.m; sourceTree = "<group>"; };
+		7491827A1EC1C02800AC1ECE /* UCFHomeListGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFHomeListGroup.h; sourceTree = "<group>"; };
+		7491827B1EC1C02800AC1ECE /* UCFHomeListGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFHomeListGroup.m; sourceTree = "<group>"; };
+		7491827D1EC1C06700AC1ECE /* UCFHomeListGroupPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFHomeListGroupPresenter.h; sourceTree = "<group>"; };
+		7491827E1EC1C06700AC1ECE /* UCFHomeListGroupPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFHomeListGroupPresenter.m; sourceTree = "<group>"; };
 		7491FBD41AFC5D5400CD0720 /* UCFModifyIdAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFModifyIdAuthViewController.h; sourceTree = "<group>"; };
 		7491FBD51AFC5D5400CD0720 /* UCFModifyIdAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFModifyIdAuthViewController.m; sourceTree = "<group>"; };
 		749319BF1B12B6DF00143424 /* UCFProvinceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFProvinceModel.h; sourceTree = "<group>"; };
@@ -2720,6 +2726,8 @@
 			children = (
 				7456A9791EC07F9B006F978A /* UCFUserInfoListItem.h */,
 				7456A97A1EC07F9B006F978A /* UCFUserInfoListItem.m */,
+				7491827A1EC1C02800AC1ECE /* UCFHomeListGroup.h */,
+				7491827B1EC1C02800AC1ECE /* UCFHomeListGroup.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2731,6 +2739,8 @@
 				742E280F1EBADD0B00FF6D4E /* UCFUserPresenter.m */,
 				742E28141EBB1ADF00FF6D4E /* UCFHomeListPresenter.h */,
 				742E28151EBB1ADF00FF6D4E /* UCFHomeListPresenter.m */,
+				7491827D1EC1C06700AC1ECE /* UCFHomeListGroupPresenter.h */,
+				7491827E1EC1C06700AC1ECE /* UCFHomeListGroupPresenter.m */,
 			);
 			name = Presenter;
 			path = Present;
@@ -5927,6 +5937,7 @@
 				E3A96B091CBF837C00E8884F /* UCFWorkPointsViewController.m in Sources */,
 				740AC63F1DDC2AAE0058BC60 /* UCFProjectListController.m in Sources */,
 				7BCE02401B833B7000F9D73F /* IPDetector.m in Sources */,
+				7491827F1EC1C06700AC1ECE /* UCFHomeListGroupPresenter.m in Sources */,
 				25950EBB1D7FB6EC00E4CCBA /* CWCommon.m in Sources */,
 				7BC8AA1D1AD4C74200BF4660 /* UCFMyArrears.m in Sources */,
 				E37086B51D61A6CD0041D293 /* UCFHuiShangChooseBankViewController.m in Sources */,
@@ -6144,6 +6155,7 @@
 				25950EC41D7FB6EC00E4CCBA /* CWURLSession.m in Sources */,
 				7BD35A971AD61E4200389D6B /* LLLockIndicator.m in Sources */,
 				4AEA750A1B03764D00B03A46 /* UCFPurchaseTranBidViewController.m in Sources */,
+				7491827C1EC1C02800AC1ECE /* UCFHomeListGroup.m in Sources */,
 				4A14F68A1BA94A84002BD5DF /* LockFlagSingle.m in Sources */,
 				742E28101EBADD0B00FF6D4E /* UCFUserPresenter.m in Sources */,
 				744A5FAA1E79512C008921F9 /* UCFWebViewJavascriptBridgeLoanDetails.m in Sources */,

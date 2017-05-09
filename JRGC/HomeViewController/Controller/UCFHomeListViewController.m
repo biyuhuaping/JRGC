@@ -9,12 +9,13 @@
 #import "UCFHomeListViewController.h"
 
 #import "UCFHomeListPresenter.h"
+#import "UCFHomeListGroupPresenter.h"
 #import "MJRefresh.h"
 
 #import "UCFHomeListCell.h"
 #import "UCFHomeListHeaderSectionView.h"
 
-@interface UCFHomeListViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface UCFHomeListViewController () <UITableViewDelegate, UITableViewDataSource, HomeListViewPresenterCallBack>
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) UCFHomeListPresenter *presenter;
 @end
@@ -34,8 +35,8 @@
         self.tableView.backgroundColor = UIColorWithRGB(0xebebee);
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         
-//        self.presenter = presenter;
-//        self.presenter.view = self;//将V和P进行绑定(这里因为V是系统的TableView 无法简单的声明一个view属性 所以就绑定到TableView的持有者上面)
+        self.presenter = presenter;
+        self.presenter.view = self;//将V和P进行绑定(这里因为V是系统的TableView 无法简单的声明一个view属性 所以就绑定到TableView的持有者上面)
         
         UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 50)];
         self.tableView.tableFooterView = footerView;
@@ -54,24 +55,14 @@
 #pragma mark - tableDataSource方法
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 4;
+    return self.presenter.allDatas.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == 0) {
-        return 1;
-    }
-    else if (section == 1) {
-        return 2;
-    }
-    else if (section == 2) {
-        return 3;
-    }
-    else {
-        return 3;
-    }
-    return 0;
+    UCFHomeListGroupPresenter *groupPresenter = [self.presenter.allDatas objectAtIndex:section];
+    UCFHomeListGroup *group = groupPresenter.group;
+    return group.items.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -82,21 +73,34 @@
     if (nil == cell) {
         cell = (UCFHomeListCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeListCell" owner:self options:nil] lastObject];
     }
-    
     return cell;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UCFHomeListHeaderSectionView *view = [[[NSBundle mainBundle] loadNibNamed:@"UCFHomeListHeaderSectionView" owner:self options:nil] lastObject];
+    static NSString* viewId = @"homeListHeader";
+    UCFHomeListHeaderSectionView *view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:viewId];
+    if (nil == view) {
+        view = (UCFHomeListHeaderSectionView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeListHeaderSectionView" owner:self options:nil] lastObject];
+    }
     view.frame = CGRectMake(0, 0, ScreenWidth, 30);
+    UCFHomeListGroupPresenter *groupPresenter = [self.presenter.allDatas objectAtIndex:section];
+    UCFHomeListGroup *group = groupPresenter.group;
+    if (!group.items) {
+        return nil;
+    }
+    view.presenter = groupPresenter;
     return view;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 10)];
-    view.backgroundColor = [UIColor yellowColor];
+    static NSString* viewId = @"homeListFooter";
+    UITableViewHeaderFooterView *view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:viewId];
+    if (nil == view) {
+        view = [[UITableViewHeaderFooterView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 10)];
+    }
+    view.contentView.backgroundColor = [UIColor yellowColor];
     return view;
 }
 
@@ -107,15 +111,29 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 30;
+    UCFHomeListGroupPresenter *groupPresenter = [self.presenter.allDatas objectAtIndex:section];
+    UCFHomeListGroup *group = groupPresenter.group;
+    if (!group.items) {
+        return 0.001;
+    }
+    else
+        return 30;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    if (section == 3) {
+    UCFHomeListGroupPresenter *groupPresenter = [self.presenter.allDatas objectAtIndex:section];
+    UCFHomeListGroup *group = groupPresenter.group;
+    if (!group.items) {
         return 0.001;
     }
-    return 10;
+    else {
+        if (section == 3) {
+            return 0.001;
+        }
+        return 10;
+    }
+    
 }
 
 #pragma mark - tableView delegate方法
