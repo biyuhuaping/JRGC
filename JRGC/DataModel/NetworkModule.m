@@ -1237,7 +1237,12 @@ static NetworkModule *gInstance = NULL;
         case kSXTagProductList:
             parameter = [NEW_SERVER_IP stringByAppendingString:USERPRODUTLIST];
             break;
-
+        case kSXTagMySimpleInfo:
+            parameter = [NEW_SERVER_IP stringByAppendingString:MYSIMLEINFOURL];
+            break;
+        case kSXTagMyReceipt:
+            parameter = [NEW_SERVER_IP stringByAppendingString:MYRECEIPTURL];
+            break;
     }
     //给原有参数字典添加公共参数
     if (!data) {
