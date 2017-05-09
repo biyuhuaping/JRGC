@@ -33,6 +33,7 @@
 
 }
 @property (weak, nonatomic) IBOutlet UITableView *bidTableView;
+@property (strong, nonatomic) NSString *zxOrP2pStr;//尊享债转 提示语 为购买 P2P 为 投资
 
 @end
 
@@ -57,6 +58,7 @@
 
     [self addLeftButton];
     baseTitleLabel.text = self.accoutType == SelectAccoutTypeHoner ? @"购买":@"投标";
+    self.zxOrP2pStr = self.accoutType == SelectAccoutTypeHoner ?@"购买":@"投资";
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     
@@ -239,7 +241,7 @@
     NSString *investAmt = cell.inputMoneyTextFieldLable.text;
     if (cell.inputMoneyTextFieldLable.text.length == 0 || [cell.inputMoneyTextFieldLable.text isEqualToString:@"0"] || [cell.inputMoneyTextFieldLable.text isEqualToString:@"0.0"] || [cell.inputMoneyTextFieldLable.text isEqualToString:@"0.00"]) {
         
-        [MBProgressHUD displayHudError:@"请输入投资金额"];
+        [MBProgressHUD displayHudError:[NSString stringWithFormat:@"请输入%@金额",self.zxOrP2pStr]];
         return;
     }
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -314,7 +316,7 @@
             MoneyBoardCell *cell = (MoneyBoardCell *)[_bidTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
             int compare = [Common stringA:cell.inputMoneyTextFieldLable.text ComparedStringB:@"1000"];
             if (compare == 1 || compare == 0 ) {
-                UIAlertView *alert1 = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"投资金额%@元,确认投资吗？",cell.inputMoneyTextFieldLable.text] message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+                UIAlertView *alert1 = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@金额%@元,确认%@吗？",self.zxOrP2pStr,cell.inputMoneyTextFieldLable.text,self.zxOrP2pStr] message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
                 alert1.tag = 3000;
                 [alert1 show];
             } else {
@@ -339,14 +341,15 @@
     }
     investMoney = [NSString stringWithFormat:@"%.2f",[investMoney doubleValue]];
     if ([Common stringA:@"0.01" ComparedStringB:investMoney] == 1) {
-        [MBProgressHUD displayHudError:@"请输入投资金额"];
+        [MBProgressHUD displayHudError:[NSString stringWithFormat:@"请输入%@金额",self.zxOrP2pStr]];
         return;
     }
     //剩余比例
     NSString *keTouJinE = [NSString stringWithFormat:@"%.2f",[[aItemInfo objectForKey:@"cantranMoney"] doubleValue]];
     NSString *minInVestNum = [NSString stringWithFormat:@"%@",[aItemInfo objectForKey:@"investAmt"]];
     if([Common stringA:minInVestNum ComparedStringB:investMoney] == 1){
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"投资金额不可低于起投金额" delegate:self cancelButtonTitle:@"重新输入" otherButtonTitles: nil];
+        NSString *messageStr = [NSString stringWithFormat:@"%@金额不可低于起投金额",self.zxOrP2pStr];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"重新输入" otherButtonTitles: nil];
         alert.tag = 1000;
         [alert show];
         return;
@@ -354,7 +357,8 @@
     double inputMoney = [cell.inputMoneyTextFieldLable.text doubleValue];
     if([Common stringA:[NSString stringWithFormat:@"%.2f",inputMoney] ComparedStringB:keTouJinE] == 1)
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"不可以这么任性哟，投资金额已超过剩余可投金额了" delegate:self cancelButtonTitle:@"重新输入" otherButtonTitles: nil];
+         NSString *messageStr = [NSString stringWithFormat:@"不可以这么任性哟，%@金额已超过剩余可投金额了",self.zxOrP2pStr];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"重新输入" otherButtonTitles: nil];
         alert.tag = 1000;
         [alert show];
         return;
@@ -377,7 +381,7 @@
     {
         NSString *keyongMoney = availableBalance;
         needToRechare = [cell.inputMoneyTextFieldLable.text doubleValue] - [keyongMoney doubleValue];
-        NSString *showStr = [NSString stringWithFormat:@"总计投资金额¥%@\n可用金额%@\n另需充值金额¥%.2f",cell.inputMoneyTextFieldLable.text,cell.KeYongMoneyLabel.text,needToRechare];
+        NSString *showStr = [NSString stringWithFormat:@"总计%@金额¥%@\n可用金额%@\n另需充值金额¥%.2f",self.zxOrP2pStr,cell.inputMoneyTextFieldLable.text,cell.KeYongMoneyLabel.text,needToRechare];
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"可用金额不足" message:showStr delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"立即充值", nil];
         alert.tag = 2000;
         [alert show];
@@ -385,7 +389,8 @@
     }
     int compare = [Common stringA:cell.inputMoneyTextFieldLable.text ComparedStringB:@"1000"];
     if (compare == 1 || compare == 0 ) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:[NSString stringWithFormat:@"本次投资金额¥%@,确认投资吗？",[UCFToolsMehod AddComma:investMoney]] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"立即投资", nil];
+        NSString *buttontitleStr = [NSString stringWithFormat:@"立即%@",self.zxOrP2pStr];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:[NSString stringWithFormat:@"本次%@金额¥%@,确认%@吗？",self.zxOrP2pStr,[UCFToolsMehod AddComma:investMoney],self.zxOrP2pStr] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:buttontitleStr, nil];
         alert.tag = 3000;
         [alert show];
     } else {
