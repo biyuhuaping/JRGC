@@ -19,6 +19,8 @@
 #import "UserInfoSingle.h"
 
 #import "UCFHomeListNavView.h"
+#import "MaskView.h"
+#import "MongoliaLayerCenter.h"
 
 @interface UCFHomeViewController () <UCFHomeListViewControllerDelegate, UCFHomeListNavViewDelegate>
 @property (strong, nonatomic) UCFCycleImageViewController *cycleImageVC;
@@ -35,6 +37,7 @@
 {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:animated];
+//    [[MongoliaLayerCenter sharedManager] showLogic];
 }
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
