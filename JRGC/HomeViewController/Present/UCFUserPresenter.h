@@ -24,4 +24,5 @@
 @property (weak, nonatomic) id<UCFUserPresenterCyceleImageCallBack> cycleImageViewDelegate;
 
 + (instancetype)presenter;
+- (NSArray *)allDatas;
 @end

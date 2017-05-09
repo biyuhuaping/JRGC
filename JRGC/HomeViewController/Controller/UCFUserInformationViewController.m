@@ -9,13 +9,19 @@
 #import "UCFUserInformationViewController.h"
 #import "UCFUserPresenter.h"
 
+#import "UCFHomeUserInfoCell.h"
+#import "SDCycleScrollView.h"
+
 #define UserInfoViewHeight  327
 
-@interface UCFUserInformationViewController () <UCFUserPresenterUserInfoCallBack>
+@interface UCFUserInformationViewController () <UCFUserPresenterUserInfoCallBack, UITableViewDelegate, UITableViewDataSource, SDCycleScrollViewDelegate>
 @property (strong, nonatomic) UCFUserPresenter *presenter;
 
+@property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (copy, nonatomic) ViewControllerGenerator personInfoVCGenerator;
 @property (copy, nonatomic) ViewControllerGenerator messageVCGenerator;
+@property (weak, nonatomic) SDCycleScrollView *cycleImageView;
+@property (weak, nonatomic) IBOutlet UIView *cycleImageBackView;
 
 @end
 
@@ -25,6 +31,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 //    self.navigationController.navigationBar.hidden = YES;
+    NSArray *images = @[[UIImage imageNamed:@"h1.jpg"],
+                        [UIImage imageNamed:@"h2.jpg"],
+                        [UIImage imageNamed:@"h3.jpg"],
+                        [UIImage imageNamed:@"h4.jpg"]
+                        ];
+    SDCycleScrollView *cycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectZero imagesGroup:images];
+    cycleScrollView.delegate = self;
+    cycleScrollView.autoScrollTimeInterval = 2.0;
+    [self.cycleImageBackView addSubview:cycleScrollView];
+    self.cycleImageView = cycleScrollView;
+    
+}
+
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    self.cycleImageView.frame = self.cycleImageBackView.bounds;
 }
 
 #pragma mark - 根据所对应的presenter生成当前controller
@@ -65,6 +88,38 @@
             [self.parentViewController.navigationController pushViewController:targetVC animated:YES];
         }
     }
+}
+
+#pragma mark - tableView的数据源方法
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 2;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *cellId = @"homeUserInfo";
+    UCFHomeUserInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+    if (nil==cell) {
+        cell = (UCFHomeUserInfoCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeUserInfoCell" owner:self options:nil] lastObject];
+    }
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if ([self.delegate respondsToSelector:@selector(userInfotableView:didSelectedItem:)]) {
+        [self.delegate userInfotableView:self.tableview didSelectedItem:nil];
+    }
+}
+
+#pragma mark - SDCycleScrollViewDelegate
+
+- (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index
+{
+    NSLog(@"---点击了第%ld张图片", (long)index);
 }
 
 @end

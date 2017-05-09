@@ -8,9 +8,11 @@
 
 #import "UCFCycleImageViewController.h"
 #import "UCFUserPresenter.h"
+#import "SDCycleScrollView.h"
 
-@interface UCFCycleImageViewController () <UCFUserPresenterCyceleImageCallBack>
+@interface UCFCycleImageViewController () <UCFUserPresenterCyceleImageCallBack, SDCycleScrollViewDelegate>
 @property (strong, nonatomic) UCFUserPresenter *presenter;
+@property (weak, nonatomic) SDCycleScrollView *cycleImageView;
 @end
 
 @implementation UCFCycleImageViewController
@@ -19,6 +21,25 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 //    self.navigationController.navigationBar.hidden = YES;
+    
+    NSArray *images = @[[UIImage imageNamed:@"h1.jpg"],
+                        [UIImage imageNamed:@"h2.jpg"],
+                        [UIImage imageNamed:@"h3.jpg"],
+                        [UIImage imageNamed:@"h4.jpg"]
+                        ];
+    SDCycleScrollView *cycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectZero imagesGroup:images];
+        cycleScrollView.delegate = self;
+    cycleScrollView.autoScrollTimeInterval = 2.0;
+    [self.view addSubview:cycleScrollView];
+    self.cycleImageView = cycleScrollView;
+}
+
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    CGRect cycleFrame = self.view.bounds;
+    cycleFrame.size.height -= 10;
+    self.cycleImageView.frame = cycleFrame;
 }
 
 #pragma mark - 根据所对应的presenter生成当前controller
@@ -47,4 +68,12 @@
     else
         return 320.5;
 }
+
+#pragma mark - SDCycleScrollViewDelegate
+
+- (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index
+{
+    NSLog(@"---点击了第%ld张图片", (long)index);
+}
+
 @end
