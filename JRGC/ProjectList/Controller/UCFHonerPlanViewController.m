@@ -54,6 +54,7 @@
     
 
     baseTitleLabel.text = @"工场尊享";
+    self.accoutType = SelectAccoutTypeHoner;
     [self addLeftButton];
     [self.view bringSubviewToFront:self.loadingView];
     [self performSelector:@selector(removeLoadingView) withObject:nil afterDelay:3];
@@ -308,7 +309,6 @@
 }
 - (BOOL)checkUserCanInvestIsDetail:(BOOL)isDetail
 {
-//    return YES;
     switch ([UserInfoSingle sharedManager].enjoyOpenStatus)
     {// ***hqy添加
         case 1://未开户-->>>新用户开户
@@ -333,7 +333,8 @@
             return YES;
             break;
     }
-}- (void)showHSAlert:(NSString *)alertMessage
+}
+- (void)showHSAlert:(NSString *)alertMessage
 {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:alertMessage delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
     alert.tag = 8000;

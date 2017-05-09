@@ -19,6 +19,7 @@
 #import "UCFBankDepositoryAccountViewController.h"
 #import "UCFOldUserGuideViewController.h"
 #import "RiskAssessmentViewController.h"
+#import "HSHelper.h"
 @interface UCFHornerTransferViewController () <UITableViewDataSource, UITableViewDelegate, UCFProjectListCellDelegate>
 {
     UCFTransferModel *_transferModel;
@@ -111,7 +112,7 @@
                 UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前债权转让的详情只对投资人开放"];
                 [self.navigationController pushViewController:controller animated:YES];
             } else {
-                [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdTransferDetail owner:self Type:SelectAccoutDefault];
+                [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdTransferDetail owner:self Type:SelectAccoutTypeHoner];
             }
         }
     }
@@ -202,6 +203,7 @@
         if ([rstcode intValue] == 1) {
             UCFProjectDetailViewController *controller = [[UCFProjectDetailViewController alloc] initWithDataDic:dic isTransfer:YES withLabelList:nil];
             controller.sourceVc = @"transiBid";
+            controller.accoutType = SelectAccoutTypeHoner;
             [self.navigationController pushViewController:controller animated:YES];
         }else {
             [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
@@ -215,7 +217,7 @@
             UCFPurchaseTranBidViewController *purchaseViewController = [[UCFPurchaseTranBidViewController alloc] initWithNibName:@"UCFPurchaseTranBidViewController" bundle:nil];
             purchaseViewController.dataDict = dic;
             purchaseViewController.baseTitleType = @"detail_heTong";
-            purchaseViewController.accoutType = self.accoutType;
+            purchaseViewController.accoutType = SelectAccoutTypeHoner;
             [self.navigationController pushViewController:purchaseViewController animated:YES];
         } else if ([dic[@"status"] integerValue] == 3 || [dic[@"status"] integerValue] == 4) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:dic[@"statusdes"] delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
@@ -266,21 +268,22 @@
             [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             _transferModel = model  ;          //普通表
             NSString *strParameters = [NSString stringWithFormat:@"userId=%@&tranId=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],_transferModel.Id];
-            [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagDealTransferBid owner:self Type:SelectAccoutDefault];
+            [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagDealTransferBid owner:self Type:SelectAccoutTypeHoner];
             }
         }
 }
 
 - (BOOL)checkUserCanInvestIsDetail:(BOOL)isDetail
 {
-    switch ([UserInfoSingle sharedManager].openStatus)
+    //    return YES;
+    switch ([UserInfoSingle sharedManager].enjoyOpenStatus)
     {// ***hqy添加
         case 1://未开户-->>>新用户开户
         case 2://已开户 --->>>老用户(白名单)开户
         {
             [self showHSAlert:ZXTIP1];
             return NO;
-             break;
+            break;
         }
         case 3://已绑卡-->>>去设置交易密码页面
         {
@@ -297,8 +300,7 @@
             return YES;
             break;
     }
-}
-- (void)showHSAlert:(NSString *)alertMessage
+}- (void)showHSAlert:(NSString *)alertMessage
 {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:alertMessage delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
     alert.tag = 8000;
@@ -310,27 +312,11 @@
         [self reloadHonerTransferData];
     } else if (alertView.tag == 8000) {
         if (buttonIndex == 1) {
-            switch ([UserInfoSingle sharedManager].openStatus)
-            {// ***hqy添加
-                case 1://未开户-->>>新用户开户
-                case 2://已开户 --->>>老用户(白名单)开户
-                {
-                    UCFBankDepositoryAccountViewController * bankDepositoryAccountVC =[[UCFBankDepositoryAccountViewController alloc ]initWithNibName:@"UCFBankDepositoryAccountViewController" bundle:nil];
-                    bankDepositoryAccountVC.openStatus = [UserInfoSingle sharedManager].openStatus;
-                    [self.navigationController pushViewController:bankDepositoryAccountVC animated:YES];
-                }
-                    break;
-                case 3://已绑卡-->>>去设置交易密码页面
-                {
-                    UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:3];
-                    [self.navigationController pushViewController:vc animated:YES];
-                }
-                    break;
-            }
+            HSHelper *helper = [HSHelper new];
+            [helper pushOpenHSType:SelectAccoutTypeHoner Step:[UserInfoSingle sharedManager].enjoyOpenStatus nav:self.navigationController];
         }
-        
-    }else if (alertView.tag == 9000){
-        if(buttonIndex == 1){
+    } else if (alertView.tag == 9000) {
+        if(buttonIndex == 1){ //测试
             RiskAssessmentViewController *vc = [[RiskAssessmentViewController alloc] initWithNibName:@"RiskAssessmentViewController" bundle:nil];
             vc.accoutType = SelectAccoutTypeHoner;
             [self.navigationController pushViewController:vc animated:YES];

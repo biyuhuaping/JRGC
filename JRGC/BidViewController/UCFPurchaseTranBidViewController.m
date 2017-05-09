@@ -240,7 +240,7 @@
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSString *parmStr = [NSString stringWithFormat:@"annualRate=%@&repayMode=%@&repayPeriod=%@&investAmt=%@",annualRate,repayMode,repayPeriod,investAmt];
     
-    [[NetworkModule sharedNetworkModule] postReq:parmStr tag:kSXTagPrdClaimsComputeIntrest owner:self Type:SelectAccoutDefault];
+    [[NetworkModule sharedNetworkModule] postReq:parmStr tag:kSXTagPrdClaimsComputeIntrest owner:self Type:self.accoutType];
 }
 - (void)cretateInvestmentView
 {
@@ -587,6 +587,7 @@
         UIImageView * imageView2 = [[UIImageView alloc] init];
         imageView2.frame = CGRectMake(CGRectGetMinX(jieshouLabel.frame) - 7, CGRectGetMinY(jieshouLabel.frame) + 4, 5, 5);
         imageView2.image = [UIImage imageNamed:@"point.png"];
+        [footView addSubview:imageView2];
     }
     return footView;
 }
@@ -632,7 +633,7 @@
 {
     NSString *strParameters = nil;
     strParameters = [NSString stringWithFormat:@"userId=%@&tranId=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],[[_dataDict objectForKey:@"data"] objectForKey:@"id"]];//101943
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagDealTransferBid owner:self Type:SelectAccoutDefault];
+    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagDealTransferBid owner:self Type:self.accoutType];
 }
 - (void)viewWillAppear:(BOOL)animated
 {
