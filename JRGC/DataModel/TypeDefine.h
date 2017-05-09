@@ -232,6 +232,8 @@
 #define USERGETZUNXIANGAGREE @"api/userInfo/v2/zxAuthorization.json"
 #define USERZUNXIANGSTATE    @"api/userInfo/v2/zxIsAuthorization.json"
 #define USERPRODUTLIST        @"api/prdClaims/v2/productList.json" //产品列表
+#define MYSIMLEINFOURL      @"api/prdClaims/v2/mySimpleInfo.json"  //首页-查询用户工豆,工分,等信息
+#define MYRECEIPTURL        @"api/prdClaims/v2/myReceipt.json"     //首页-用户余额,累计收益,总资产
 
 
 enum kPostStatus{
@@ -435,7 +437,10 @@ enum kSXTag
     kSXTagUserAccountInfo,                   //P2P或尊享账户信息
     kSXTagGetUserAgree,                      //尊享授权
     kSXTagGetUserAgreeState,                 //获取尊享授权状态
-    kSXTagProductList                        //产品列表
+    kSXTagProductList,                        //产品列表
+    kSXTagMySimpleInfo,                //首页-查询用户工豆,工分,等信
+    kSXTagMyReceipt,                    //首页-用户余额,累计收益,总资产
+
 };
 
 typedef enum kSXTag kSXTag;
