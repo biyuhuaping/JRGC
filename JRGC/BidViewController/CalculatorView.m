@@ -21,6 +21,7 @@
     UIButton    *calculatorBtn;
     NSString    *normalBidID;
     NSString    *preInvestMoney;  // 上次的投标金额
+    UILabel     *moneyTextTip;
 }
 - (void)dealloc
 {
@@ -161,7 +162,7 @@
     bottomBaseView.backgroundColor = [UIColor whiteColor];
     [blueHeadView addSubview:bottomBaseView];
     
-    UILabel *moneyTextTip = [[UILabel alloc] init];
+    moneyTextTip = [[UILabel alloc] init];
     moneyTextTip.frame  =CGRectMake([Common calculateNewSizeBaseMachine:15.0f], CGRectGetMaxY(blueHeadView.frame) + [Common calculateNewSizeBaseMachine:14], [Common getStrWitdth:@"投资金额" TextFont:[UIFont systemFontOfSize:[Common calculateNewSizeBaseMachine:14.0f]]].width, [Common calculateNewSizeBaseMachine:14.0f]);
     if (_isTransid) {
          moneyTextTip.text = self.accoutType == SelectAccoutTypeHoner ? @"购买金额":@"投资金额";
@@ -184,9 +185,6 @@
     moneyTextField.delegate = self;
     moneyTextField.frame = CGRectMake([Common calculateNewSizeBaseMachine:9],[Common calculateNewSizeBaseMachine:5],[Common calculateNewSizeBaseMachine: CGRectGetWidth(textBaseView.frame) - 10],CGRectGetHeight(textBaseView.frame) - [Common calculateNewSizeBaseMachine: 10]);
     moneyTextField.placeholder = @"100起投";
-    if(_isTransid){
-        moneyTextField.userInteractionEnabled = self.accoutType == SelectAccoutTypeP2P;
-    }
     [moneyTextField addTarget:self action:@selector(textfieldLength:) forControlEvents:UIControlEventEditingChanged];
     moneyTextField.keyboardType = UIKeyboardTypeDecimalPad;
     moneyTextField.font = [UIFont systemFontOfSize:[Common calculateNewSizeBaseMachine:15.0f]];
@@ -360,6 +358,11 @@
  */
 - (void)reloadViewWithData:(NSDictionary *)dataDict AndNowMoney:(NSString *)currentMoney AndPreMoney:(NSString *)preMoney BankMoney:(NSString *)bankMoney
 {
+    if (_isTransid) {
+        moneyTextTip.text = self.accoutType == SelectAccoutTypeHoner ? @"购买金额":@"投资金额";
+    }else{
+        moneyTextTip.text = self.accoutType == SelectAccoutTypeHoner ? @"认购金额":@"投资金额";
+    }
     self.tranBidDataDict = dataDict;
     self.annleRate = [[dataDict objectForKey:@"data"] objectForKey:@"annualRate"];
     self.repayPeriodDay = [[dataDict objectForKey:@"data"] objectForKey:@"lastDays"];
@@ -367,6 +370,9 @@
     moneyTextField.text = [NSString stringWithFormat:@"%.2f",[currentMoney doubleValue]];
     preGetMoneyLabel.text = [NSString stringWithFormat:@"%@",[UCFToolsMehod AddComma:preMoney]];
     bankGetMoneyLabel.text = [NSString stringWithFormat:@"¥%@",[UCFToolsMehod AddComma:bankMoney]];
+    if(_isTransid){
+        moneyTextField.userInteractionEnabled = self.accoutType == SelectAccoutTypeP2P;
+    }
 }
 /**
  *  普通标收益入口
@@ -376,6 +382,11 @@
  */
 - (void)reloadViewWithData:(NSDictionary *)dataDict AndNowMoney:(NSString *)currentMoney
 {
+    if (_isTransid) {
+        moneyTextTip.text = self.accoutType == SelectAccoutTypeHoner ? @"购买金额":@"投资金额";
+    }else{
+        moneyTextTip.text = self.accoutType == SelectAccoutTypeHoner ? @"认购金额":@"投资金额";
+    }
     self.annleRate = [[dataDict objectForKey:@"data"] objectForKey:@"annualRate"];
     normalBidID = [NSString stringWithFormat:@"%@",[[dataDict objectForKey:@"data"] objectForKey:@"id"]] ;
     self.repayPeriodDay = [[dataDict objectForKey:@"data"] objectForKey:@"repayPeriodDay"];
