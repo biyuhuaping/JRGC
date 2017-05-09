@@ -233,6 +233,7 @@
 		7491820F1EC166F000AC1ECE /* SDCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 749182061EC166F000AC1ECE /* SDCollectionViewCell.m */; };
 		749182101EC166F000AC1ECE /* SDCycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 749182081EC166F000AC1ECE /* SDCycleScrollView.m */; };
 		749182111EC166F000AC1ECE /* UIView+SDExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 7491820A1EC166F000AC1ECE /* UIView+SDExtension.m */; };
+		7491826B1EC1943F00AC1ECE /* UCFHomeAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7491826A1EC1943F00AC1ECE /* UCFHomeAPIManager.m */; };
 		7491FBD61AFC5D5400CD0720 /* UCFModifyIdAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7491FBD51AFC5D5400CD0720 /* UCFModifyIdAuthViewController.m */; };
 		749319C11B12B6DF00143424 /* UCFProvinceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 749319C01B12B6DF00143424 /* UCFProvinceModel.m */; };
 		749319CF1B12BCD600143424 /* libc.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 749319CE1B12BCD600143424 /* libc.dylib */; };
@@ -1170,6 +1171,8 @@
 		749182081EC166F000AC1ECE /* SDCycleScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCycleScrollView.m; sourceTree = "<group>"; };
 		749182091EC166F000AC1ECE /* UIView+SDExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SDExtension.h"; sourceTree = "<group>"; };
 		7491820A1EC166F000AC1ECE /* UIView+SDExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SDExtension.m"; sourceTree = "<group>"; };
+		749182691EC1943F00AC1ECE /* UCFHomeAPIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFHomeAPIManager.h; sourceTree = "<group>"; };
+		7491826A1EC1943F00AC1ECE /* UCFHomeAPIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFHomeAPIManager.m; sourceTree = "<group>"; };
 		7491FBD41AFC5D5400CD0720 /* UCFModifyIdAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFModifyIdAuthViewController.h; sourceTree = "<group>"; };
 		7491FBD51AFC5D5400CD0720 /* UCFModifyIdAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFModifyIdAuthViewController.m; sourceTree = "<group>"; };
 		749319BF1B12B6DF00143424 /* UCFProvinceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFProvinceModel.h; sourceTree = "<group>"; };
@@ -2684,6 +2687,7 @@
 			isa = PBXGroup;
 			children = (
 				742E27F91EBACB6600FF6D4E /* Sence */,
+				749182681EC193F700AC1ECE /* APIManager */,
 				742E27F81EBACB6600FF6D4E /* Controller */,
 				742E27F71EBACB6600FF6D4E /* Presenter */,
 				742E27F51EBACB6600FF6D4E /* View */,
@@ -3137,6 +3141,15 @@
 				7491820A1EC166F000AC1ECE /* UIView+SDExtension.m */,
 			);
 			path = SDCycleScrollView;
+			sourceTree = "<group>";
+		};
+		749182681EC193F700AC1ECE /* APIManager */ = {
+			isa = PBXGroup;
+			children = (
+				749182691EC1943F00AC1ECE /* UCFHomeAPIManager.h */,
+				7491826A1EC1943F00AC1ECE /* UCFHomeAPIManager.m */,
+			);
+			path = APIManager;
 			sourceTree = "<group>";
 		};
 		749319EB1B13267600143424 /* NZLabel */ = {
@@ -5966,6 +5979,7 @@
 				FB1E7F7F1D8E4230009CBE2C /* UCFBidNewDetailView.m in Sources */,
 				74931A361B1326FE00143424 /* OHASMarkupParserBase.m in Sources */,
 				EDEE0D411C5F42D200021CCC /* BJGridItem.m in Sources */,
+				7491826B1EC1943F00AC1ECE /* UCFHomeAPIManager.m in Sources */,
 				4AD6F6901AF07EF500F1B490 /* MoneyBoardCell.m in Sources */,
 				742E28071EBAD3E600FF6D4E /* UCFUserInformationViewController.m in Sources */,
 				FB4E7D691B0B1C180009DB9D /* UCFModifyProportion.m in Sources */,
