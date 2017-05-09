@@ -52,6 +52,8 @@
     [self configuration];
 #pragma mark - 添加界面
     [self addUI];
+#pragma mark - 请求数据
+    [self fetchData];
 }
 
 #pragma mark - configuration 设置
@@ -131,4 +133,9 @@
     [self addUI];
 }
 
+#pragma mark - 请求数据
+- (void)fetchData
+{
+    
+}
 @end

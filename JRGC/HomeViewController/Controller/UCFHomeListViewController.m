@@ -9,9 +9,10 @@
 #import "UCFHomeListViewController.h"
 
 #import "UCFHomeListPresenter.h"
-#import "UCFHomeListHeaderSectionView.h"
+#import "MJRefresh.h"
 
 #import "UCFHomeListCell.h"
+#import "UCFHomeListHeaderSectionView.h"
 
 @interface UCFHomeListViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) UITableView *tableView;
@@ -44,6 +45,8 @@
         tipLabel.textColor = UIColorWithRGB(0x999999);
         tipLabel.textAlignment = NSTextAlignmentCenter;
         [footerView addSubview:tipLabel];
+        
+        [self.tableView addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(refreshData)];
     }
     return self;
 }
@@ -118,14 +121,20 @@
 #pragma mark - tableView delegate方法
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    if (scrollView.contentOffset.y < 0) {
-        return;
-    }
+//    if (scrollView.contentOffset.y < 0) {
+//        return;
+//    }
     if ([self.delegate respondsToSelector:@selector(homeList:tableView:didScrollWithYOffSet:)]) {
         [self.delegate homeList:self tableView:self.tableView didScrollWithYOffSet:scrollView.contentOffset.y];
     }
 }
 
 #pragma mark - 提示标签
+
+#pragma mark - 刷新数据
+- (void)refreshData
+{
+    
+}
 
 @end

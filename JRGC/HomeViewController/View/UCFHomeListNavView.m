@@ -77,22 +77,31 @@
 {
     DBLOG(@"%f", offset);
     _offset = offset;
-    CGFloat alf = offset / self.height;
-    if (alf < 0) {
+    if (offset < 0) {
         [UIView animateWithDuration:0.25 animations:^{
             self.backView.alpha = 0;
         }];
     }
-    else if (alf >= 0 && alf <= 0.9) {
-        [UIView animateWithDuration:0.25 animations:^{
-            self.backView.alpha = alf;
-        }];
-    }
     else {
-        [UIView animateWithDuration:0.25 animations:^{
-            self.backView.alpha = 0.9;
-        }];
+        CGFloat alf = offset / self.height;
+        if (alf < 0) {
+            [UIView animateWithDuration:0.25 animations:^{
+                self.backView.alpha = 0;
+            }];
+        }
+        else if (alf >= 0 && alf <= 0.9) {
+            [UIView animateWithDuration:0.25 animations:^{
+                self.backView.alpha = alf;
+            }];
+        }
+        else {
+            [UIView animateWithDuration:0.25 animations:^{
+                self.backView.alpha = 0.9;
+            }];
+        }
     }
+    
+    
 }
 
 @end

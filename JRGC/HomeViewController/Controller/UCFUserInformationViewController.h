@@ -8,8 +8,17 @@
 
 #import "UCFBaseViewController.h"
 
-@class UCFUserPresenter;
+@class UCFUserPresenter, UCFUserInformationViewController;
+@protocol UCFUserInformationViewControllerDelegate <NSObject>
+
+- (void)userInfotableView:(UITableView *)tableView didSelectedItem:(NSObject *)obj;
+
+@end
+
 @interface UCFUserInformationViewController : UIViewController
+
+@property (weak, nonatomic) id<UCFUserInformationViewControllerDelegate> delegate;
+
 #pragma mark - 根据所对应的presenter生成当前controller
 + (instancetype)instanceWithPresenter:(UCFUserPresenter *)presenter;
 #pragma mark - 返回当前显示模块的页面高度
