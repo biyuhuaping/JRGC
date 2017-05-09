@@ -11,5 +11,6 @@
 @interface MaskView : UIView<UIGestureRecognizerDelegate>
 -(instancetype)initWithFrame:(CGRect)frame;
 +(instancetype)makeViewWithMask:(CGRect)frame;
+- (void)show;
 -(void)block:(void(^)())block;
 @end

@@ -357,7 +357,7 @@
 #pragma 去邀请奖励页面
 - (void)mjalertView:(MjAlertView *)alertview didClickedButton:(UIButton *)clickedButton andClickedIndex:(NSInteger)index {
     if (alertview.tag == 1000) {
-        //请求接口已经阅读ddd
+        //请求接口已经阅读
         MaskView *view = [MaskView makeViewWithMask:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
     } else {
         if (index == 1) { //点击了立即查看详情
@@ -370,7 +370,6 @@
             }
         }
     }
-
 }
 -(void)gotoInviteFriendsWebVC:(NSDictionary *)dataDict{
     UCFCycleModel *banInfo = [UCFCycleModel getCycleModelByDataDict:dataDict];

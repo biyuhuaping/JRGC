@@ -8,6 +8,7 @@
 
 #import "MongoliaLayerCenter.h"
 #import "NSDate+IsBelongToToday.h"
+#import "MaskView.h"
 @interface MongoliaLayerCenter ()
 {
     NSInteger num;
@@ -32,6 +33,9 @@
 }
 - (void)showLogic
 {
+//    MaskView *view = [MaskView makeViewWithMask:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
+//    [view show];
+    return;
     //不登录就需要查看的
     NSDate *lastFirstLoginTime = [[NSUserDefaults standardUserDefaults] objectForKey:FirstAlertViewShowTime];
     BOOL isBelongToToday = [NSDate isBelongToTodayWithDate:lastFirstLoginTime]; //是不是同一天
@@ -39,24 +43,33 @@
     if (isBelongToToday) {
         //新手政策是否显示
         if ([[self.mongoliaLayerDic valueForKey:@"novicePoliceOnOff"] boolValue]) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"CheckInviteFriendsAlertView" object:nil];
+//            [[NSNotificationCenter defaultCenter] postNotificationName:@"CheckInviteFriendsAlertView" object:nil];
             //通知弹窗显示新手政策
+            MjAlertView *alertView = [[MjAlertView alloc]initInviteFriendsToMakeMoneyDelegate:self];
+            [alertView show];
             return;
         }
     }
     
     //下面是需要登录后查看的
-//    if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
-//        return;
-//    }
+    if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
+        return;
+    }
+    
     //是否弹用户引导蒙层
     if (![[NSUserDefaults standardUserDefaults] boolForKey:CHECK_ISSHOW_MASKVIEW]) {
         //发送弹蒙层通知
+        MaskView *view = [MaskView makeViewWithMask:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
+        [view show];
         return;
     }
+    
     //是否弹平台升级调整公告
     if (![[self.mongoliaLayerDic valueForKey:@"升级"] boolValue]) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:CHECK_UPDATE_ALERT object:nil];
+        MjAlertView *alertView = [[MjAlertView alloc] initPlatformUpgradeNotice:self];
+        alertView.tag = 1000;
+        [alertView show];
+//        [[NSNotificationCenter defaultCenter] postNotificationName:CHECK_UPDATE_ALERT object:nil];
         return;
     }
 
@@ -73,4 +86,9 @@
     
   
 }
+- (void)mjalertView:(MjAlertView *)alertview didClickedButton:(UIButton *)clickedButton andClickedIndex:(NSInteger)index
+{
+    
+}
+
 @end
