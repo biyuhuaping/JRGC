@@ -13,6 +13,7 @@
 @protocol UCFHomeListViewControllerDelegate <NSObject>
 
 - (void)homeList:(UCFHomeListViewController *)homeList tableView:(UITableView *)tableView didScrollWithYOffSet:(CGFloat)offSet;
+- (void)homeListRefreshDataWithHomelist:(UCFHomeListViewController *)homelist;
 
 @end
 

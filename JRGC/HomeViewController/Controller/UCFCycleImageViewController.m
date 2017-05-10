@@ -59,14 +59,15 @@
 + (CGFloat)viewHeight
 {
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
-    if (width == 320) {
-        return 170;
-    }
-    else if (width == 375) {
-        return 197.5;
-    }
-    else
-        return 320.5;
+//    if (width == 320) {
+//        return 170;
+//    }
+//    else if (width == 375) {
+//        return 197.5;
+//    }
+//    else
+//        return 320.5;
+    return width * 0.5 + 10;
 }
 
 #pragma mark - SDCycleScrollViewDelegate

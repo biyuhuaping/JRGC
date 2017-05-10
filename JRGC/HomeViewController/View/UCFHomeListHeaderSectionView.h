@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UCFHomeListGroupPresenter.h"
 
-@interface UCFHomeListHeaderSectionView : UIView
+@interface UCFHomeListHeaderSectionView : UITableViewHeaderFooterView
+@property (strong, nonatomic) UCFHomeListGroupPresenter *presenter;
 
 @end

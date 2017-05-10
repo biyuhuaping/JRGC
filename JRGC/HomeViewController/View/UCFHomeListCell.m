@@ -12,7 +12,12 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+    
+}
+
+- (void)setPresenter:(UCFHomeListCellPresenter *)presenter
+{
+    _presenter = presenter;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
