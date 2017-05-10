@@ -10,6 +10,8 @@
 #import "UCFUserInfoListItem.h"
 
 @interface UCFUserPresenter ()
+@property (strong, nonatomic) UCFHomeAPIManager *apiManager;
+@property (copy, nonatomic) NSString *userId;
 @property (strong, nonatomic) NSMutableArray *userInfoListCells;
 // p2p账户可用余额
 @property (copy, nonatomic) NSString *p2pBalanceMoney;
@@ -23,10 +25,18 @@
 
 @implementation UCFUserPresenter
 
+- (NSString *)userId
+{
+    NSString *userId1 = [[NSUserDefaults standardUserDefaults] objectForKey:UUID];
+    _userId = userId1.length > 0 ? userId1 : @"";
+    return _userId;
+}
+
 #pragma mark - 系统方法
 - (instancetype)init {
     if (self = [super init]) {
         self.userInfoListCells = [NSMutableArray array];
+        self.apiManager = [UCFHomeAPIManager new];
     }
     return self;
 }
@@ -67,4 +77,39 @@
         userInfoList1.subtitle = @"未开户";
     }
 }
+
+- (void)fetchUserInfoOneDataWithCompletionHandler:(NetworkCompletionHandler)completionHander
+{
+    [self.apiManager fetchUserInfoOneWithUserId:self.userId completionHandler:^(NSError *error, id result) {
+        if ([result isKindOfClass:[NSDictionary class]]) {
+            
+        }
+        else if ([result isKindOfClass:[NSString class]]) {
+            
+        }
+        if ([self.userInfoViewDelegate respondsToSelector:@selector(userInfoPresenter:didRefreshUserInfoWithResult:error:)]) {
+            [self.userInfoViewDelegate userInfoPresenter:self didRefreshUserInfoWithResult:result error:error];
+        }
+        
+        !completionHander ?: completionHander(error, result);
+    }];
+}
+
+- (void)fetchUserInfoTwoDataWithCompletionHandler:(NetworkCompletionHandler)completionHander
+{
+    [self.apiManager fetchUserInfoTwoWithUserId:self.userId completionHandler:^(NSError *error, id result) {
+        if ([result isKindOfClass:[NSDictionary class]]) {
+            
+        }
+        else if ([result isKindOfClass:[NSString class]]) {
+            
+        }
+        if ([self.userInfoViewDelegate respondsToSelector:@selector(userInfoPresenter:didRefreshUserInfoWithResult:error:)]) {
+//            [self.userInfoViewDelegate userInfoPresenter:self didRefreshUserInfoWithResult:result error:error];
+        }
+        
+        !completionHander ?: completionHander(error, result);
+    }];
+}
+
 @end

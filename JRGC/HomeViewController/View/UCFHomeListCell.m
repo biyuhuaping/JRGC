@@ -7,6 +7,7 @@
 //
 
 #import "UCFHomeListCell.h"
+#import "ZZCircleProgress.h"
 
 @interface UCFHomeListCell ()
 @property (weak, nonatomic) IBOutlet UILabel *proName;
@@ -14,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *proImageView2;
 @property (weak, nonatomic) IBOutlet UIImageView *proImageView3;
 @property (weak, nonatomic) IBOutlet UIView *proSignImageView;
+@property (weak, nonatomic) IBOutlet ZZCircleProgress *circleProgressView;
 
 @end
 
@@ -21,7 +23,14 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    
+    self.circleProgressView.animationModel = CircleIncreaseSameTime;
+    self.circleProgressView.showProgressText = YES;
+    self.circleProgressView.notAnimated = NO;
+    self.circleProgressView.progress = [@"0.8" floatValue];
+    self.circleProgressView.startAngle = -90;
+    self.circleProgressView.pathBackColor = [UIColor lightGrayColor];
+    self.circleProgressView.pathFillColor = [UIColor redColor];
+    self.circleProgressView.strokeWidth = 3;
 }
 
 - (void)setPresenter:(UCFHomeListCellPresenter *)presenter

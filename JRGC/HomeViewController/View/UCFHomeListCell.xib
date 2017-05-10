@@ -89,7 +89,7 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hab-TG-dZg">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hab-TG-dZg" customClass="ZZCircleProgress">
                         <rect key="frame" x="327" y="29.5" width="55" height="55"/>
                         <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -167,6 +167,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="circleProgressView" destination="Hab-TG-dZg" id="VAM-Jp-2K1"/>
                 <outlet property="proImageView1" destination="lF4-X1-Td4" id="d4z-Yy-faE"/>
                 <outlet property="proImageView2" destination="AQh-S1-1ZL" id="Jtk-8C-K5E"/>
                 <outlet property="proImageView3" destination="iKu-tW-Nr2" id="NAQ-sK-ZZw"/>
