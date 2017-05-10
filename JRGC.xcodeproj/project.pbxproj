@@ -549,6 +549,13 @@
 		84FFA5301C7EAA9200ACD835 /* UIScrollView+TouchScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FFA52F1C7EAA9200ACD835 /* UIScrollView+TouchScrollView.m */; };
 		A8AD2E3E1EB979760013DB7C /* MongoliaLayerCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = A8AD2E3D1EB979760013DB7C /* MongoliaLayerCenter.m */; };
 		A8D2DE781EB9E1CF00D61AD0 /* MaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = A8D2DE771EB9E1CF00D61AD0 /* MaskView.m */; };
+		A8DE85231EC2BC34004B3533 /* libUcfWalletSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A8DE84D91EC2BC34004B3533 /* libUcfWalletSDK.a */; };
+		A8DE85251EC2BC34004B3533 /* libSPaySDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A8DE84F11EC2BC34004B3533 /* libSPaySDK.a */; };
+		A8DE85261EC2BC34004B3533 /* SPaySDKResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A8DE84F21EC2BC34004B3533 /* SPaySDKResource.bundle */; };
+		A8DE85271EC2BC34004B3533 /* libUcfLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A8DE85191EC2BC34004B3533 /* libUcfLib.a */; };
+		A8DE85281EC2BC34004B3533 /* UcfLibResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A8DE851A1EC2BC34004B3533 /* UcfLibResources.bundle */; };
+		A8DE85291EC2BC34004B3533 /* UcfWalletSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A8DE851B1EC2BC34004B3533 /* UcfWalletSDK.bundle */; };
+		A8DE852E1EC30159004B3533 /* P2PWalletHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A8DE852D1EC30159004B3533 /* P2PWalletHelper.m */; };
 		AEC5EEC01D9B6594000C0321 /* RechargeFixedTelNumView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEC5EEBF1D9B6594000C0321 /* RechargeFixedTelNumView.xib */; };
 		AEC5EEC31D9B65BA000C0321 /* RechargeFixedTelNumView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC5EEC21D9B65BA000C0321 /* RechargeFixedTelNumView.m */; };
 		E31141601D92769E00FF880A /* UCFWebViewJavascriptBridgeBBS.m in Sources */ = {isa = PBXBuildFile; fileRef = E311415E1D92769E00FF880A /* UCFWebViewJavascriptBridgeBBS.m */; };
@@ -1735,6 +1742,71 @@
 		A8AD2E3D1EB979760013DB7C /* MongoliaLayerCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MongoliaLayerCenter.m; sourceTree = "<group>"; };
 		A8D2DE761EB9E1CF00D61AD0 /* MaskView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaskView.h; sourceTree = "<group>"; };
 		A8D2DE771EB9E1CF00D61AD0 /* MaskView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MaskView.m; sourceTree = "<group>"; };
+		A8DE84D91EC2BC34004B3533 /* libUcfWalletSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUcfWalletSDK.a; sourceTree = "<group>"; };
+		A8DE84DF1EC2BC34004B3533 /* NSDictionary+SPayUtilsExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+SPayUtilsExtras.h"; sourceTree = "<group>"; };
+		A8DE84E01EC2BC34004B3533 /* NSString+SPayUtilsExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SPayUtilsExtras.h"; sourceTree = "<group>"; };
+		A8DE84E11EC2BC34004B3533 /* SPayClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPayClient.h; sourceTree = "<group>"; };
+		A8DE84E21EC2BC34004B3533 /* SPayClientAlipayConfigModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPayClientAlipayConfigModel.h; sourceTree = "<group>"; };
+		A8DE84E31EC2BC34004B3533 /* SPayClientConstEnum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPayClientConstEnum.h; sourceTree = "<group>"; };
+		A8DE84E41EC2BC34004B3533 /* SPayClientHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPayClientHeaders.h; sourceTree = "<group>"; };
+		A8DE84E51EC2BC34004B3533 /* SPayClientPayAppPayManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPayClientPayAppPayManager.h; sourceTree = "<group>"; };
+		A8DE84E61EC2BC34004B3533 /* SPayClientPayDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPayClientPayDetailModel.h; sourceTree = "<group>"; };
+		A8DE84E71EC2BC34004B3533 /* SPayClientPayHelpModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPayClientPayHelpModel.h; sourceTree = "<group>"; };
+		A8DE84E81EC2BC34004B3533 /* SPayClientPayStateModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPayClientPayStateModel.h; sourceTree = "<group>"; };
+		A8DE84E91EC2BC34004B3533 /* SPayClientPaySuccessDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPayClientPaySuccessDetailModel.h; sourceTree = "<group>"; };
+		A8DE84EA1EC2BC34004B3533 /* SPayClientPaySuccessModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPayClientPaySuccessModel.h; sourceTree = "<group>"; };
+		A8DE84EB1EC2BC34004B3533 /* SPayClientQQConfigModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPayClientQQConfigModel.h; sourceTree = "<group>"; };
+		A8DE84EC1EC2BC34004B3533 /* SPayClientReverseScanPayDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPayClientReverseScanPayDetailModel.h; sourceTree = "<group>"; };
+		A8DE84ED1EC2BC34004B3533 /* SPayClientWapPayDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPayClientWapPayDetailModel.h; sourceTree = "<group>"; };
+		A8DE84EE1EC2BC34004B3533 /* SPayClientWechatConfigModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPayClientWechatConfigModel.h; sourceTree = "<group>"; };
+		A8DE84EF1EC2BC34004B3533 /* SPayClientXMLWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPayClientXMLWriter.h; sourceTree = "<group>"; };
+		A8DE84F01EC2BC34004B3533 /* SPBaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPBaseModel.h; sourceTree = "<group>"; };
+		A8DE84F11EC2BC34004B3533 /* libSPaySDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSPaySDK.a; sourceTree = "<group>"; };
+		A8DE84F21EC2BC34004B3533 /* SPaySDKResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SPaySDKResource.bundle; sourceTree = "<group>"; };
+		A8DE84F61EC2BC34004B3533 /* KKGestureLockPreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KKGestureLockPreviewView.h; sourceTree = "<group>"; };
+		A8DE84F71EC2BC34004B3533 /* KKGestureLockView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KKGestureLockView.h; sourceTree = "<group>"; };
+		A8DE84F81EC2BC34004B3533 /* Macro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Macro.h; sourceTree = "<group>"; };
+		A8DE84F91EC2BC34004B3533 /* NSBundle+UcfLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+UcfLib.h"; sourceTree = "<group>"; };
+		A8DE84FA1EC2BC34004B3533 /* NSData+UcfLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+UcfLib.h"; sourceTree = "<group>"; };
+		A8DE84FB1EC2BC34004B3533 /* NSDate+UcfLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+UcfLib.h"; sourceTree = "<group>"; };
+		A8DE84FC1EC2BC34004B3533 /* NSMutableDictionary+UcfLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableDictionary+UcfLib.h"; sourceTree = "<group>"; };
+		A8DE84FD1EC2BC34004B3533 /* NSObject+UcfLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+UcfLib.h"; sourceTree = "<group>"; };
+		A8DE84FE1EC2BC34004B3533 /* NSString+UcfLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+UcfLib.h"; sourceTree = "<group>"; };
+		A8DE84FF1EC2BC34004B3533 /* SystemInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemInfo.h; sourceTree = "<group>"; };
+		A8DE85001EC2BC34004B3533 /* UcfAlertManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UcfAlertManager.h; sourceTree = "<group>"; };
+		A8DE85011EC2BC34004B3533 /* UcfCardBinInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UcfCardBinInfo.h; sourceTree = "<group>"; };
+		A8DE85021EC2BC34004B3533 /* UcfCardBINModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UcfCardBINModel.h; sourceTree = "<group>"; };
+		A8DE85031EC2BC34004B3533 /* UcfCKeyChainStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UcfCKeyChainStore.h; sourceTree = "<group>"; };
+		A8DE85041EC2BC34004B3533 /* UcfCommonAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UcfCommonAlert.h; sourceTree = "<group>"; };
+		A8DE85051EC2BC34004B3533 /* UcfHttpRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UcfHttpRequest.h; sourceTree = "<group>"; };
+		A8DE85061EC2BC34004B3533 /* UcfLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UcfLib.h; sourceTree = "<group>"; };
+		A8DE85071EC2BC34004B3533 /* UcfNetworkInspector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UcfNetworkInspector.h; sourceTree = "<group>"; };
+		A8DE85081EC2BC34004B3533 /* UcfNumKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UcfNumKeyboard.h; sourceTree = "<group>"; };
+		A8DE85091EC2BC34004B3533 /* UcfProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UcfProgressHUD.h; sourceTree = "<group>"; };
+		A8DE850A1EC2BC34004B3533 /* UcfPwdTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UcfPwdTextField.h; sourceTree = "<group>"; };
+		A8DE850B1EC2BC34004B3533 /* UcfReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UcfReachability.h; sourceTree = "<group>"; };
+		A8DE850C1EC2BC34004B3533 /* UcfSystemInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UcfSystemInfo.h; sourceTree = "<group>"; };
+		A8DE850D1EC2BC34004B3533 /* UcfTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UcfTextField.h; sourceTree = "<group>"; };
+		A8DE850E1EC2BC34004B3533 /* UcfTouchIDUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UcfTouchIDUtils.h; sourceTree = "<group>"; };
+		A8DE850F1EC2BC34004B3533 /* UcfUrlHandler4Java.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UcfUrlHandler4Java.h; sourceTree = "<group>"; };
+		A8DE85101EC2BC34004B3533 /* UcfUrlHandler4Php.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UcfUrlHandler4Php.h; sourceTree = "<group>"; };
+		A8DE85111EC2BC34004B3533 /* UIButton+UcfLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+UcfLib.h"; sourceTree = "<group>"; };
+		A8DE85121EC2BC34004B3533 /* UICKeyChainStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICKeyChainStore.h; sourceTree = "<group>"; };
+		A8DE85131EC2BC34004B3533 /* UIColor+UcfLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+UcfLib.h"; sourceTree = "<group>"; };
+		A8DE85141EC2BC34004B3533 /* UIDevice-Hardware.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice-Hardware.h"; sourceTree = "<group>"; };
+		A8DE85151EC2BC34004B3533 /* UIImage+UcfLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+UcfLib.h"; sourceTree = "<group>"; };
+		A8DE85161EC2BC34004B3533 /* UIImageView+UcfLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+UcfLib.h"; sourceTree = "<group>"; };
+		A8DE85171EC2BC34004B3533 /* UITextField+UcfLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+UcfLib.h"; sourceTree = "<group>"; };
+		A8DE85181EC2BC34004B3533 /* UIView+UcfLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+UcfLib.h"; sourceTree = "<group>"; };
+		A8DE85191EC2BC34004B3533 /* libUcfLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUcfLib.a; sourceTree = "<group>"; };
+		A8DE851A1EC2BC34004B3533 /* UcfLibResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = UcfLibResources.bundle; sourceTree = "<group>"; };
+		A8DE851B1EC2BC34004B3533 /* UcfWalletSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = UcfWalletSDK.bundle; sourceTree = "<group>"; };
+		A8DE851C1EC2BC34004B3533 /* UcfWalletSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UcfWalletSDK.h; sourceTree = "<group>"; };
+		A8DE851F1EC2BC34004B3533 /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
+		A8DE85201EC2BC34004B3533 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
+		A8DE85211EC2BC34004B3533 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
+		A8DE852C1EC30159004B3533 /* P2PWalletHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = P2PWalletHelper.h; sourceTree = "<group>"; };
+		A8DE852D1EC30159004B3533 /* P2PWalletHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = P2PWalletHelper.m; sourceTree = "<group>"; };
 		AE43B84F1DD2D8BE001D0BD0 /* JRGC.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JRGC.entitlements; sourceTree = "<group>"; };
 		AEC5EEBF1D9B6594000C0321 /* RechargeFixedTelNumView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RechargeFixedTelNumView.xib; sourceTree = "<group>"; };
 		AEC5EEC11D9B65BA000C0321 /* RechargeFixedTelNumView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RechargeFixedTelNumView.h; sourceTree = "<group>"; };
@@ -2018,6 +2090,7 @@
 				2517E56C1D618FAA00EAA05F /* CoreMedia.framework in Frameworks */,
 				FBB0D4FA1DF8009000D2C280 /* YWFeedbackFMWK.framework in Frameworks */,
 				FB7A903F1D48A924005D64A1 /* libsqlite3.tbd in Frameworks */,
+				A8DE85271EC2BC34004B3533 /* libUcfLib.a in Frameworks */,
 				4AE1E96F1E1CDB9900587CE6 /* UShareUI.framework in Frameworks */,
 				FBB0D4F21DF8009000D2C280 /* BCConnectorBundle.framework in Frameworks */,
 				FB7A903D1D48A917005D64A1 /* libicucore.tbd in Frameworks */,
@@ -2044,6 +2117,7 @@
 				7BA6E4911AD6721F00FE8C37 /* MapKit.framework in Frameworks */,
 				FB65C9541D82995800476E67 /* libGrowing.a in Frameworks */,
 				4AE1E96D1E1CDB9900587CE6 /* UMSocialNetwork.framework in Frameworks */,
+				A8DE85251EC2BC34004B3533 /* libSPaySDK.a in Frameworks */,
 				7BA6E48F1AD6721600FE8C37 /* ImageIO.framework in Frameworks */,
 				7BC304991ACBC4FD007767F1 /* QuartzCore.framework in Frameworks */,
 				7BCE02641AC91C760084C15C /* libicucore.dylib in Frameworks */,
@@ -2062,6 +2136,7 @@
 				4AE1E9691E1CDB9900587CE6 /* libWeChatSDK.a in Frameworks */,
 				7BCE02521AC91B9B0084C15C /* CoreLocation.framework in Frameworks */,
 				7BCE02501AC91B780084C15C /* CoreData.framework in Frameworks */,
+				A8DE85231EC2BC34004B3533 /* libUcfWalletSDK.a in Frameworks */,
 				FBB0D4F41DF8009000D2C280 /* SecurityGuardSDK.framework in Frameworks */,
 				7BCE024E1AC91B720084C15C /* libbz2.1.0.dylib in Frameworks */,
 				7BCE024C1AC91B4A0084C15C /* AudioToolbox.framework in Frameworks */,
@@ -3574,6 +3649,7 @@
 		7BC304311ACB9CDB007767F1 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				A8DE852B1EC3012B004B3533 /* WalletHelper */,
 				A8AD2E381EB979240013DB7C /* MongoliaLayer */,
 				7456D3C51E82700500207349 /* UIView+Extension.h */,
 				7456D3C61E82700500207349 /* UIView+Extension.m */,
@@ -4210,6 +4286,7 @@
 		7BFE3EB11AC5635E002A53A2 /* ThirdLibs */ = {
 			isa = PBXGroup;
 			children = (
+				A8DE84D81EC2BC34004B3533 /* p2pWalletSDK */,
 				749181FA1EC166F000AC1ECE /* SDCycleScrollView */,
 				FBB0D4E81DF8009000D2C280 /* BCFeedback */,
 				2526ADD21DD08CB800114D9A /* MLMOptionSelectView */,
@@ -4832,6 +4909,143 @@
 			);
 			name = MongoliaLayer;
 			path = Tools/MongoliaLayer;
+			sourceTree = "<group>";
+		};
+		A8DE84D81EC2BC34004B3533 /* p2pWalletSDK */ = {
+			isa = PBXGroup;
+			children = (
+				A8DE84D91EC2BC34004B3533 /* libUcfWalletSDK.a */,
+				A8DE84DD1EC2BC34004B3533 /* SPaySDK */,
+				A8DE84F31EC2BC34004B3533 /* Ucflib */,
+				A8DE851B1EC2BC34004B3533 /* UcfWalletSDK.bundle */,
+				A8DE851C1EC2BC34004B3533 /* UcfWalletSDK.h */,
+				A8DE851D1EC2BC34004B3533 /* Wechat */,
+			);
+			name = p2pWalletSDK;
+			path = ThirdLibs/p2pWalletSDK;
+			sourceTree = "<group>";
+		};
+		A8DE84DD1EC2BC34004B3533 /* SPaySDK */ = {
+			isa = PBXGroup;
+			children = (
+				A8DE84DE1EC2BC34004B3533 /* headers */,
+				A8DE84F11EC2BC34004B3533 /* libSPaySDK.a */,
+				A8DE84F21EC2BC34004B3533 /* SPaySDKResource.bundle */,
+			);
+			path = SPaySDK;
+			sourceTree = "<group>";
+		};
+		A8DE84DE1EC2BC34004B3533 /* headers */ = {
+			isa = PBXGroup;
+			children = (
+				A8DE84DF1EC2BC34004B3533 /* NSDictionary+SPayUtilsExtras.h */,
+				A8DE84E01EC2BC34004B3533 /* NSString+SPayUtilsExtras.h */,
+				A8DE84E11EC2BC34004B3533 /* SPayClient.h */,
+				A8DE84E21EC2BC34004B3533 /* SPayClientAlipayConfigModel.h */,
+				A8DE84E31EC2BC34004B3533 /* SPayClientConstEnum.h */,
+				A8DE84E41EC2BC34004B3533 /* SPayClientHeaders.h */,
+				A8DE84E51EC2BC34004B3533 /* SPayClientPayAppPayManager.h */,
+				A8DE84E61EC2BC34004B3533 /* SPayClientPayDetailModel.h */,
+				A8DE84E71EC2BC34004B3533 /* SPayClientPayHelpModel.h */,
+				A8DE84E81EC2BC34004B3533 /* SPayClientPayStateModel.h */,
+				A8DE84E91EC2BC34004B3533 /* SPayClientPaySuccessDetailModel.h */,
+				A8DE84EA1EC2BC34004B3533 /* SPayClientPaySuccessModel.h */,
+				A8DE84EB1EC2BC34004B3533 /* SPayClientQQConfigModel.h */,
+				A8DE84EC1EC2BC34004B3533 /* SPayClientReverseScanPayDetailModel.h */,
+				A8DE84ED1EC2BC34004B3533 /* SPayClientWapPayDetailModel.h */,
+				A8DE84EE1EC2BC34004B3533 /* SPayClientWechatConfigModel.h */,
+				A8DE84EF1EC2BC34004B3533 /* SPayClientXMLWriter.h */,
+				A8DE84F01EC2BC34004B3533 /* SPBaseModel.h */,
+			);
+			path = headers;
+			sourceTree = "<group>";
+		};
+		A8DE84F31EC2BC34004B3533 /* Ucflib */ = {
+			isa = PBXGroup;
+			children = (
+				A8DE84F41EC2BC34004B3533 /* include */,
+				A8DE85191EC2BC34004B3533 /* libUcfLib.a */,
+				A8DE851A1EC2BC34004B3533 /* UcfLibResources.bundle */,
+			);
+			path = Ucflib;
+			sourceTree = "<group>";
+		};
+		A8DE84F41EC2BC34004B3533 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				A8DE84F51EC2BC34004B3533 /* UcfLib */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		A8DE84F51EC2BC34004B3533 /* UcfLib */ = {
+			isa = PBXGroup;
+			children = (
+				A8DE84F61EC2BC34004B3533 /* KKGestureLockPreviewView.h */,
+				A8DE84F71EC2BC34004B3533 /* KKGestureLockView.h */,
+				A8DE84F81EC2BC34004B3533 /* Macro.h */,
+				A8DE84F91EC2BC34004B3533 /* NSBundle+UcfLib.h */,
+				A8DE84FA1EC2BC34004B3533 /* NSData+UcfLib.h */,
+				A8DE84FB1EC2BC34004B3533 /* NSDate+UcfLib.h */,
+				A8DE84FC1EC2BC34004B3533 /* NSMutableDictionary+UcfLib.h */,
+				A8DE84FD1EC2BC34004B3533 /* NSObject+UcfLib.h */,
+				A8DE84FE1EC2BC34004B3533 /* NSString+UcfLib.h */,
+				A8DE84FF1EC2BC34004B3533 /* SystemInfo.h */,
+				A8DE85001EC2BC34004B3533 /* UcfAlertManager.h */,
+				A8DE85011EC2BC34004B3533 /* UcfCardBinInfo.h */,
+				A8DE85021EC2BC34004B3533 /* UcfCardBINModel.h */,
+				A8DE85031EC2BC34004B3533 /* UcfCKeyChainStore.h */,
+				A8DE85041EC2BC34004B3533 /* UcfCommonAlert.h */,
+				A8DE85051EC2BC34004B3533 /* UcfHttpRequest.h */,
+				A8DE85061EC2BC34004B3533 /* UcfLib.h */,
+				A8DE85071EC2BC34004B3533 /* UcfNetworkInspector.h */,
+				A8DE85081EC2BC34004B3533 /* UcfNumKeyboard.h */,
+				A8DE85091EC2BC34004B3533 /* UcfProgressHUD.h */,
+				A8DE850A1EC2BC34004B3533 /* UcfPwdTextField.h */,
+				A8DE850B1EC2BC34004B3533 /* UcfReachability.h */,
+				A8DE850C1EC2BC34004B3533 /* UcfSystemInfo.h */,
+				A8DE850D1EC2BC34004B3533 /* UcfTextField.h */,
+				A8DE850E1EC2BC34004B3533 /* UcfTouchIDUtils.h */,
+				A8DE850F1EC2BC34004B3533 /* UcfUrlHandler4Java.h */,
+				A8DE85101EC2BC34004B3533 /* UcfUrlHandler4Php.h */,
+				A8DE85111EC2BC34004B3533 /* UIButton+UcfLib.h */,
+				A8DE85121EC2BC34004B3533 /* UICKeyChainStore.h */,
+				A8DE85131EC2BC34004B3533 /* UIColor+UcfLib.h */,
+				A8DE85141EC2BC34004B3533 /* UIDevice-Hardware.h */,
+				A8DE85151EC2BC34004B3533 /* UIImage+UcfLib.h */,
+				A8DE85161EC2BC34004B3533 /* UIImageView+UcfLib.h */,
+				A8DE85171EC2BC34004B3533 /* UITextField+UcfLib.h */,
+				A8DE85181EC2BC34004B3533 /* UIView+UcfLib.h */,
+			);
+			path = UcfLib;
+			sourceTree = "<group>";
+		};
+		A8DE851D1EC2BC34004B3533 /* Wechat */ = {
+			isa = PBXGroup;
+			children = (
+				A8DE851E1EC2BC34004B3533 /* headers */,
+			);
+			path = Wechat;
+			sourceTree = "<group>";
+		};
+		A8DE851E1EC2BC34004B3533 /* headers */ = {
+			isa = PBXGroup;
+			children = (
+				A8DE851F1EC2BC34004B3533 /* WechatAuthSDK.h */,
+				A8DE85201EC2BC34004B3533 /* WXApi.h */,
+				A8DE85211EC2BC34004B3533 /* WXApiObject.h */,
+			);
+			path = headers;
+			sourceTree = "<group>";
+		};
+		A8DE852B1EC3012B004B3533 /* WalletHelper */ = {
+			isa = PBXGroup;
+			children = (
+				A8DE852C1EC30159004B3533 /* P2PWalletHelper.h */,
+				A8DE852D1EC30159004B3533 /* P2PWalletHelper.m */,
+			);
+			name = WalletHelper;
+			path = Tools/WalletHelper;
 			sourceTree = "<group>";
 		};
 		E32020081CC4BAB80065579C /* webViewJavascripBridge */ = {
@@ -5648,6 +5862,7 @@
 				4AFE198D1CA0006200EE6768 /* TopUpAndCash.storyboard in Resources */,
 				4ACB399B1E1216DD00E9BA8C /* FestivalActivitiesWebView.xib in Resources */,
 				4AE1E96B1E1CDB9900587CE6 /* README.txt in Resources */,
+				A8DE85281EC2BC34004B3533 /* UcfLibResources.bundle in Resources */,
 				833603CE1D928F9200C3E435 /* UCFWithdrawCashResultWebView.xib in Resources */,
 				7477BF9B1AFB19B200914BFB /* UCFNormalRedEnvelopeTableViewCell.xib in Resources */,
 				25A9CC1A1D5213EB00209142 /* UCFTipCell.xib in Resources */,
@@ -5695,10 +5910,12 @@
 				E3C1179D1D40CFCC0053A052 /* UCFContributionValueTypeTowCell.xib in Resources */,
 				74EB80F21AE51F660071621E /* UCFMoreViewController.storyboard in Resources */,
 				4A3FDBD01D5C5A7D00279CA2 /* RechargeStoryBorard.storyboard in Resources */,
+				A8DE85291EC2BC34004B3533 /* UcfWalletSDK.bundle in Resources */,
 				2510E3E91D6F1560006BB5F8 /* alertViewCS.xib in Resources */,
 				74FBC1BE1B84721400B8DD7E /* UCFBindCardTwoTableViewCell.xib in Resources */,
 				FBAEDA021C191AFE000C0AA1 /* PushConfig.plist in Resources */,
 				74E89FFC1DDD8D9B000B0AFF /* UCFTransferViewController.xib in Resources */,
+				A8DE85261EC2BC34004B3533 /* SPaySDKResource.bundle in Resources */,
 				FB5149491D64403100C26E7B /* touch_id@2x.gif in Resources */,
 				748ED7981CC7304100690215 /* UCFCashAndTopUp.xib in Resources */,
 				74E8A0011DDDA12D000B0AFF /* UCFHornerTransferViewController.xib in Resources */,
@@ -6190,6 +6407,7 @@
 				74931A141B1326B400143424 /* pinyin.c in Sources */,
 				7456D3CB1E82726500207349 /* UCFPCFunctionCell.m in Sources */,
 				7BC8AA211AD4C74200BF4660 /* UCFNormalInvestment.m in Sources */,
+				A8DE852E1EC30159004B3533 /* P2PWalletHelper.m in Sources */,
 				FB576C201BA7C98A005DC159 /* ReturnedMoneyCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -6407,6 +6625,10 @@
 					"$(PROJECT_DIR)/JRGC/ThirdLibs/umeng_ios_social_sdk_6.2.0_arm64_custom/UMSocial/SocialLibraries/Renren",
 					"$(PROJECT_DIR)/JRGC/ThirdLibs/umeng_ios_social_sdk_6.2.0_arm64_custom/UMSocial/SocialLibraries/Sina",
 					"$(PROJECT_DIR)/JRGC/ThirdLibs/umeng_ios_social_sdk_6.2.0_arm64_custom/UMSocial/SocialLibraries/WeChat",
+					"$(PROJECT_DIR)/JRGC/ThirdLibs/p2pWalletSDK",
+					"$(PROJECT_DIR)/JRGC/ThirdLibs/p2pWalletSDK/SPaySDK",
+					"$(PROJECT_DIR)/JRGC/ThirdLibs/p2pWalletSDK/Ucflib",
+					"$(PROJECT_DIR)/JRGC/ThirdLibs/p2pWalletSDK/Wechat",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp299;
@@ -6476,6 +6698,10 @@
 					"$(PROJECT_DIR)/JRGC/ThirdLibs/umeng_ios_social_sdk_6.2.0_arm64_custom/UMSocial/SocialLibraries/Renren",
 					"$(PROJECT_DIR)/JRGC/ThirdLibs/umeng_ios_social_sdk_6.2.0_arm64_custom/UMSocial/SocialLibraries/Sina",
 					"$(PROJECT_DIR)/JRGC/ThirdLibs/umeng_ios_social_sdk_6.2.0_arm64_custom/UMSocial/SocialLibraries/WeChat",
+					"$(PROJECT_DIR)/JRGC/ThirdLibs/p2pWalletSDK",
+					"$(PROJECT_DIR)/JRGC/ThirdLibs/p2pWalletSDK/SPaySDK",
+					"$(PROJECT_DIR)/JRGC/ThirdLibs/p2pWalletSDK/Ucflib",
+					"$(PROJECT_DIR)/JRGC/ThirdLibs/p2pWalletSDK/Wechat",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp299;

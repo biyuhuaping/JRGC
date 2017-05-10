@@ -25,6 +25,7 @@
 #import "UCFLoanViewController.h"
 #import "UCFDiscoveryViewController.h"
 #import "UCFWebViewJavascriptBridgeLevel.h"
+#import "P2PWalletHelper.h"
 @interface UCFMainTabBarController ()
 
 //@property (strong, nonatomic) UCFLatestProjectViewController *LatestView;
@@ -122,12 +123,13 @@
                 break;
             case 3:{
                
-                UCFWebViewJavascriptBridgeMall *mallWeb = [[UCFWebViewJavascriptBridgeMall alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
-                mallWeb.url = MALLURL;
-                mallWeb.isHideNavigationBar = YES;
-                [self useragent:mallWeb.webView];
-                controller = mallWeb;
-                mallWeb.navTitle = @"豆哥商城";
+//                UCFWebViewJavascriptBridgeMall *mallWeb = [[UCFWebViewJavascriptBridgeMall alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
+//                mallWeb.url = MALLURL;
+//                mallWeb.isHideNavigationBar = YES;
+//                [self useragent:mallWeb.webView];
+//                controller = mallWeb;
+//                mallWeb.navTitle = @"豆哥商城";
+                controller = [P2PWalletHelper getUCFWalletTargetController];
     
             }
                 break;
@@ -195,18 +197,7 @@
     if (contrl.viewControllers.count != 0) {
       topView = [contrl.viewControllers objectAtIndex:0];
     }
-    if ([topView isKindOfClass:[UCFWebViewJavascriptBridgeMall class]]) {
-        [self hideTabBar];
-//        UCFWebViewJavascriptBridgeMall *mallWeb = [[UCFWebViewJavascriptBridgeMall alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
-//        mallWeb.url = MALLURL;
-//        mallWeb.rootVc = tabBarController.viewControllers[tabBarController.selectedIndex];
-//        mallWeb.isHideNavigationBar = YES;
-//        [self useragent:mallWeb.webView];
-//        mallWeb.navTitle = @"豆哥商城";
-//        mallWeb.isTabbarfrom = YES;
 
-        return NO;
-     }
     if ([topView isKindOfClass:[UCFLoanViewController class]]) {
         UCFLoanViewController *loan = (UCFLoanViewController *)topView;
         bool isLoad = [loan isViewLoaded];
@@ -219,7 +210,6 @@
             UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
             BaseNavigationViewController *loginNaviController = [[BaseNavigationViewController alloc] initWithRootViewController:loginViewController];
             loginViewController.sourceVC = @"homePage";
-//            [[NSUserDefaults standardUserDefaults] setValue:@"1" forKey:@"personCenterClick"];
             [self presentViewController:loginNaviController animated:YES completion:nil];
             [Touch3DSingle sharedTouch3DSingle].isLoad = NO;
             return NO;
