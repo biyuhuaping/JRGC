@@ -1243,6 +1243,8 @@ static NetworkModule *gInstance = NULL;
         case kSXTagMyReceipt:
             parameter = [NEW_SERVER_IP stringByAppendingString:MYRECEIPTURL];
             break;
+        case KSXTagADJustMent:
+            parameter = [NEW_SERVER_IP stringByAppendingString:USERINFOADJUSTMENT];
     }
     //给原有参数字典添加公共参数
     if (!data) {
