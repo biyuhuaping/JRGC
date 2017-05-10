@@ -8,7 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "MjAlertView.h"
-@interface MongoliaLayerCenter : NSObject<MjAlertViewDelegate>
+#import "NetworkModule.h"
+@interface MongoliaLayerCenter : NSObject<MjAlertViewDelegate,NetworkModuleDelegate>
 //蒙层显示数组
 @property (nonatomic, strong) NSMutableDictionary *mongoliaLayerDic;
 
