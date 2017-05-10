@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UCFHomeListCellPresenter.h"
 
 @interface UCFHomeListCell : UITableViewCell
-
+@property (strong, nonatomic) UCFHomeListCellPresenter *presenter;
+@property (strong, nonatomic) NSIndexPath *indexPath;
+@property (weak, nonatomic) UITableView *tableView;
 @end
