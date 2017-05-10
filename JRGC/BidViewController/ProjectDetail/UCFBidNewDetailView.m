@@ -142,9 +142,9 @@
     UILabel *markLabel = [UILabel labelWithFrame:CGRectMake([Common calculateNewSizeBaseMachine:15],0 + [Common calculateNewSizeBaseMachine:155]-[Common calculateNewSizeBaseMachine:45] - 11,0,11) text:@"投资期限" textColor:[UIColor whiteColor] font:[UIFont systemFontOfSize:11]];
     [_headBkView addSubview:markLabel];
     if (_type == PROJECTDETAILTYPEBONDSRRANSFER) {
-        markLabel.text = @"投资期限";
+        markLabel.text = _isP2P ? @"投资期限" : @"购买期限";
     } else {
-        NSString *markLabelStr =_isP2P ? @"投资期限" : @"认购期限";
+        NSString *markLabelStr = _isP2P ? @"投资期限" : @"认购期限";
         markLabel.text = markLabelStr;
     }
     CGRect markLabelFrame = markLabel.frame;

@@ -43,7 +43,12 @@
     }else{
      [self  addLeftButtonTypeTwoPopRootVC];
     }
-    baseTitleLabel.text = @"投资详情";
+    if ([_detailType intValue] == 2) {
+      baseTitleLabel.text = self.accoutType == SelectAccoutTypeHoner ? @"购买详情": @"投资详情";
+    }else{
+      baseTitleLabel.text = self.accoutType == SelectAccoutTypeHoner ? @"认购详情": @"投资详情";
+    }
+
     self.baseTitleType = @"investmentDetail";
     _investmentDetailView = [[UCFInvestmentDetailView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - NavigationBarHeight) detailType:_detailType];
     _investmentDetailView.delegate = self;
@@ -196,6 +201,7 @@
         if ([rstcode intValue] == 1) {
             UCFProjectDetailViewController *controller = [[UCFProjectDetailViewController alloc] initWithDataDic:dic isTransfer:NO withLabelList:nil];
             controller.sourceVc = @"investmentDetail";
+            controller.accoutType = self.accoutType;
             [self.navigationController pushViewController:controller animated:YES];
         }else {
             [AuxiliaryFunc showAlertViewWithMessage:rsttext];
@@ -205,6 +211,7 @@
             UCFProjectDetailViewController *controller = [[UCFProjectDetailViewController alloc] initWithDataDic:dic isTransfer:YES withLabelList:nil];
             controller.sourceVc = @"investmentDetail";
             //controller.detailType = PROJECTDETAILTYPEBONDSRRANSFER;
+            controller.accoutType = self.accoutType;
             [self.navigationController pushViewController:controller animated:YES];
         }else {
             [AuxiliaryFunc showAlertViewWithMessage:@"产品标不存在，请检查(或者不能非法操作)"];
