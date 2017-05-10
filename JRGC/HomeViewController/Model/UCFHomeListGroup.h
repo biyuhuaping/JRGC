@@ -7,9 +7,17 @@
 //
 
 #import "UCFSettingGroup.h"
+#import "UCFHomeListCellModel.h"
 
 @interface UCFHomeListGroup : UCFSettingGroup
 // 头部图片
 @property (nonatomic, copy) NSString *headerImage;
+
 @property (nonatomic, assign) BOOL showMore;
+
+@property (nonatomic, copy) NSString *title;
+@property (nonatomic, copy) NSString *type;
+@property (nonatomic, strong) NSArray *prdlist;
+
++ (instancetype)homeListGroupWithDict:(NSDictionary *)dict;
 @end

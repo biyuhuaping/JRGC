@@ -62,17 +62,20 @@
 {
     UCFHomeListGroupPresenter *groupPresenter = [self.presenter.allDatas objectAtIndex:section];
     UCFHomeListGroup *group = groupPresenter.group;
-    return group.items.count;
+    return group.prdlist.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellId = @"homeListCell";
-    
     UCFHomeListCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     if (nil == cell) {
         cell = (UCFHomeListCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeListCell" owner:self options:nil] lastObject];
     }
+    cell.tableView = tableView;
+    UCFHomeListGroupPresenter *groupPresenter = [self.presenter.allDatas objectAtIndex:indexPath.section];
+    cell.presenter = [groupPresenter.group.prdlist objectAtIndex:indexPath.row];
+    cell.indexPath = indexPath;
     return cell;
 }
 
@@ -86,7 +89,7 @@
     view.frame = CGRectMake(0, 0, ScreenWidth, 30);
     UCFHomeListGroupPresenter *groupPresenter = [self.presenter.allDatas objectAtIndex:section];
     UCFHomeListGroup *group = groupPresenter.group;
-    if (!group.items) {
+    if (!group.prdlist) {
         return nil;
     }
     view.presenter = groupPresenter;
@@ -113,7 +116,7 @@
 {
     UCFHomeListGroupPresenter *groupPresenter = [self.presenter.allDatas objectAtIndex:section];
     UCFHomeListGroup *group = groupPresenter.group;
-    if (!group.items) {
+    if (!group.prdlist) {
         return 0.001;
     }
     else
@@ -124,7 +127,7 @@
 {
     UCFHomeListGroupPresenter *groupPresenter = [self.presenter.allDatas objectAtIndex:section];
     UCFHomeListGroup *group = groupPresenter.group;
-    if (!group.items) {
+    if (!group.prdlist) {
         return 0.001;
     }
     else {
@@ -139,20 +142,30 @@
 #pragma mark - tableView delegate方法
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-//    if (scrollView.contentOffset.y < 0) {
-//        return;
-//    }
     if ([self.delegate respondsToSelector:@selector(homeList:tableView:didScrollWithYOffSet:)]) {
         [self.delegate homeList:self tableView:self.tableView didScrollWithYOffSet:scrollView.contentOffset.y];
     }
 }
 
-#pragma mark - 提示标签
+#pragma mark - presenter的代理方法
+- (void)homeListViewPresenter:(UCFHomeListPresenter *)presenter didRefreshDataWithResult:(id)result error:(NSError *)error
+{
+    [self.tableView.header endRefreshing];
+    
+    if (!error) {
+        [self.tableView reloadData];
+        //        [self.tableView.footer resetNoMoreData];
+    } else if (self.presenter.allDatas.count == 0) {
+        //        show error view
+    }
+}
 
 #pragma mark - 刷新数据
 - (void)refreshData
 {
-    
+    if ([self.delegate respondsToSelector:@selector(homeListRefreshDataWithHomelist:)]) {
+        [self.delegate homeListRefreshDataWithHomelist:self];
+    }
 }
 
 @end

@@ -10,14 +10,73 @@
 #import "UCFHomeAPIManager.h"
 #import "UCFHomeListGroupPresenter.h"
 #import "UCFHomeListGroup.h"
+#import "UCFHomeListCellPresenter.h"
 
 @interface UCFHomeListPresenter ()
 @property (strong, nonatomic) UCFHomeAPIManager *apiManager;
 @property (copy, nonatomic) NSString *userId;
 @property (strong, nonatomic) NSMutableArray *homeListCells;
+@property (assign, nonatomic) BOOL authorization;
+
+@property (strong, nonatomic) UCFHomeListGroupPresenter *groupPresenter0;
+@property (strong, nonatomic) UCFHomeListGroupPresenter *groupPresenter1;
+@property (strong, nonatomic) UCFHomeListGroupPresenter *groupPresenter2;
+@property (strong, nonatomic) UCFHomeListGroupPresenter *groupPresenter3;
 @end
 
 @implementation UCFHomeListPresenter
+
+- (UCFHomeListGroupPresenter *)groupPresenter0
+{
+    if (!_groupPresenter0) {
+        UCFHomeListGroup *group0 = [[UCFHomeListGroup alloc] init];
+        group0.headTitle = @"新手专区";
+        group0.showMore = NO;
+        _groupPresenter0 = [UCFHomeListGroupPresenter presenterWithGroup:group0];
+    }
+    return _groupPresenter0;
+}
+
+- (UCFHomeListGroupPresenter *)groupPresenter1
+{
+    if (!_groupPresenter1) {
+        UCFHomeListGroup *group1 = [[UCFHomeListGroup alloc] init];
+        group1.headTitle = @"工场尊享";
+        group1.showMore = YES;
+        _groupPresenter1 = [UCFHomeListGroupPresenter presenterWithGroup:group1];
+    }
+    return _groupPresenter1;
+}
+
+- (UCFHomeListGroupPresenter *)groupPresenter2
+{
+    if (!_groupPresenter2) {
+        UCFHomeListGroup *group2 = [[UCFHomeListGroup alloc] init];
+        group2.headTitle = @"工场微金";
+        group2.showMore = YES;
+        _groupPresenter2 = [UCFHomeListGroupPresenter presenterWithGroup:group2];
+    }
+    return _groupPresenter2;
+}
+
+- (UCFHomeListGroupPresenter *)groupPresenter3
+{
+    if (!_groupPresenter3) {
+        UCFHomeListGroup *group3 = [[UCFHomeListGroup alloc] init];
+        group3.headTitle = @"资金周转";
+        group3.showMore = NO;
+        _groupPresenter3 = [UCFHomeListGroupPresenter presenterWithGroup:group3];
+    }
+    return _groupPresenter3;
+}
+
+- (NSString *)userId
+{
+    NSString *userId1 = [[NSUserDefaults standardUserDefaults] objectForKey:UUID];
+    _userId = userId1.length > 0 ? userId1 : @"";
+    return _userId;
+}
+
 #pragma mark - 类方法生成本类
 + (instancetype)presenter
 {
@@ -28,8 +87,6 @@
 - (instancetype)init {
     if (self = [super init]) {
         self.apiManager = [UCFHomeAPIManager new];
-        NSString *userId = [[NSUserDefaults standardUserDefaults] objectForKey:UUID];
-        self.userId = userId != nil ? userId : @"";
         self.homeListCells = [[NSMutableArray alloc] init];
         [self initData];
     }
@@ -45,68 +102,52 @@
 #pragma mark - 初始化数据
 - (void)initData
 {
-    UCFHomeListGroup *group0 = [[UCFHomeListGroup alloc] init];
-    group0.headTitle = @"新手专区";
-    group0.showMore = NO;
-    UCFHomeListGroupPresenter *groupPresenter0 = [UCFHomeListGroupPresenter presenterWithGroup:group0];
-    
-    UCFHomeListGroup *group1 = [[UCFHomeListGroup alloc] init];
-    group1.headTitle = @"工场尊享";
-    group1.showMore = YES;
-    UCFHomeListGroupPresenter *groupPresenter1 = [UCFHomeListGroupPresenter presenterWithGroup:group1];
-    
-    UCFHomeListGroup *group2 = [[UCFHomeListGroup alloc] init];
-    group2.headTitle = @"工场微金";
-    group2.showMore = YES;
-    UCFHomeListGroupPresenter *groupPresenter2 = [UCFHomeListGroupPresenter presenterWithGroup:group2];
-    
-    UCFHomeListGroup *group3 = [[UCFHomeListGroup alloc] init];
-    group3.headTitle = @"资金周转";
-    group3.showMore = NO;
-    UCFHomeListGroupPresenter *groupPresenter3 = [UCFHomeListGroupPresenter presenterWithGroup:group3];
-    
-    [self.homeListCells addObject:groupPresenter0];
-    [self.homeListCells addObject:groupPresenter1];
-    [self.homeListCells addObject:groupPresenter2];
-    [self.homeListCells addObject:groupPresenter3];
+    [self.homeListCells addObject:self.groupPresenter0];
+    [self.homeListCells addObject:self.groupPresenter1];
+    [self.homeListCells addObject:self.groupPresenter2];
+    [self.homeListCells addObject:self.groupPresenter3];
 }
 
 - (void)fetchHomeListDataWithCompletionHandler:(NetworkCompletionHandler)completionHander {
     
     [self.apiManager fetchHomeListWithUserId:self.userId completionHandler:^(NSError *error, id result) {
+        if ([result isKindOfClass:[NSDictionary class]]) {
+            NSDictionary *resultDict = result;
+            NSArray *groupList = [resultDict objectForKey:@"homelistContent"];
+            for (UCFHomeListGroup *group in groupList) {
+                NSArray *array = group.prdlist;
+                if (array.count > 0) {
+                    if ([group.type isEqualToString:@"11"]) {
+                        self.groupPresenter2.group.prdlist = [self productPrdListWithDataSource:array];
+                    }
+                    else if ([group.type isEqualToString:@"12"]) {
+                        self.groupPresenter1.group.prdlist = [self productPrdListWithDataSource:array];
+                    }
+                    else if ([group.type isEqualToString:@"13"]) {
+                        self.groupPresenter0.group.prdlist = [self productPrdListWithDataSource:array];
+                    }
+                }
+            }
+        }
+        else if ([result isKindOfClass:[NSString class]]) {
+            
+        }
+        if ([self.view respondsToSelector:@selector(homeListViewPresenter:didRefreshDataWithResult:error:)]) {
+            [self.view homeListViewPresenter:self didRefreshDataWithResult:result error:error];
+        }
         
+        !completionHander ?: completionHander(error, result);
     }];
-    
-//    [self.apiManager fetchUserInfoWithUserId:self.userId completionHandler:^(NSError *error, id result) {
-//        //            self.isHonorUser = YES;
-//        
-//        if ([result isKindOfClass:[UCFPersonCenterModel class]]) {
-//            UCFPersonCenterModel *personCenter = result;
-//            
-//            self.isP2PUser = [personCenter.p2pOpenStatus isEqualToString:@"1"] ? NO : YES;
-//            self.p2pBalanceMoney = personCenter.p2pAmount;
-//            self.p2pLastBackMoneyDate = personCenter.p2pRepayPerDate;
-//            
-//            self.isHonorUser = [personCenter.enjoyOpenStatus isEqualToString:@"1"] ? NO : YES;
-//            self.hornerBalanceMoney = personCenter.enjoyAmount;
-//            self.hornerLastBackMoneyDate = personCenter.enjoyRepayPerDate;
-//            
-//            [self.pcListCells removeAllObjects];
-//            [self initData];
-//        }
-//        else if ([result isKindOfClass:[NSString class]]) {
-//            
-//        }
-//        
-//        
-//        if ([self.view respondsToSelector:@selector(pcListViewPresenter:didRefreshDataWithResult:error:)]) {
-//            [self.view pcListViewPresenter:self didRefreshDataWithResult:result error:error];
-//        }
-//        if ([self.userInvoView respondsToSelector:@selector(pcListViewPresenter:didRefreshUserInfoWithResult:error:)]) {
-//            [self.userInvoView pcListViewPresenter:self didRefreshUserInfoWithResult:result error:error];
-//        }
-//        
-//        !completionHander ?: completionHander(error, result);
-//    }];
+}
+
+- (NSMutableArray *)productPrdListWithDataSource:(NSArray *)dataSource
+{
+    NSMutableArray *temp = [NSMutableArray new];
+    for (UCFHomeListCellModel *model in dataSource) {
+        UCFHomeListCellPresenter *cellPresenter = [UCFHomeListCellPresenter presenterWithItem:model];
+        [temp addObject:cellPresenter];
+        
+    }
+    return temp;
 }
 @end

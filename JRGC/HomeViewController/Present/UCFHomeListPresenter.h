@@ -24,5 +24,7 @@
 
 + (instancetype)presenter;
 
+- (BOOL)authorization;
+
 - (void)fetchHomeListDataWithCompletionHandler:(NetworkCompletionHandler)completionHander;
 @end

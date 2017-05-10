@@ -10,6 +10,7 @@
 #import "NetworkModule.h"
 #import "JSONKit.h"
 #import "UIDic+Safe.h"
+#import "UCFHomeListGroup.h"
 
 #define HOMELIST @"homeList"
 
@@ -49,16 +50,34 @@
     DBLOG(@"UCFPersonAPIManager : %@",dic);
     
     if (tag.intValue == kSXTagPrdClaimsNewVersion) {
+        NetworkCompletionHandler complete = [self.requestDict objectForKey:HOMELIST];
         if ([rstcode boolValue]) {
             NSDictionary *result = [dic objectSafeDictionaryForKey:@"data"];
-//            UCFPersonCenterModel *personCenterModel = [UCFPersonCenterModel personCenterWithDict:result];
-//            [[UCFSession sharedManager] transformBackgroundWithUserInfo:@{} withState:UCFSessionStateUserRefresh];
-//            [UserInfoSingle sharedManager].enjoyOpenStatus = [personCenterModel.enjoyOpenStatus integerValue];
-//            [UserInfoSingle sharedManager].openStatus = [personCenterModel.p2pOpenStatus integerValue];
-//            self.completionHandler(nil, personCenterModel);
+            NSMutableDictionary *tempResult = [[NSMutableDictionary alloc] init];
+            NSArray *group = [result objectSafeArrayForKey:@"group"];
+            NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+            for (NSDictionary *dict in group) {
+                UCFHomeListGroup * tempG = [UCFHomeListGroup homeListGroupWithDict:dict];
+                [tempArray addObject:tempG];
+            }
+            
+            NSString *siteNotice = [result objectSafeForKey:@"siteNotice"];
+            // 债券转让
+            NSString *p2pTransferNum = [result objectSafeForKey:@"p2pTransferNum"];
+            // 批量转让
+            NSString *totalCount = [result objectSafeForKey:@"totalCount"];
+            // 尊享转让
+            NSString *zxTransferNum = [result objectSafeForKey:@"zxTransferNum"];
+            
+            [tempResult setObject:tempArray forKey:@"homelistContent"];
+            [tempResult setObject:siteNotice forKey:@"siteNotice"];
+            [tempResult setObject:p2pTransferNum forKey:@"p2pTransferNum"];
+            [tempResult setObject:totalCount forKey:@"totalCount"];
+            [tempResult setObject:zxTransferNum forKey:@"zxTransferNum"];
+            complete(nil, tempResult);
         }
         else {
-//            self.completionHandler(nil, rsttext);
+            complete(nil, rsttext);
         }
         
         [self.requestDict removeObjectForKey:HOMELIST];
@@ -76,7 +95,8 @@
 - (void)errorPost:(NSError*)err tag:(NSNumber*)tag
 {
     if (tag.intValue == kSXTagPrdClaimsNewVersion) {
-//        self.completionHandler(err, nil);
+        NetworkCompletionHandler complete = [self.requestDict objectForKey:HOMELIST];
+        complete(err, nil);
         [self.requestDict removeObjectForKey:HOMELIST];
     }
 }

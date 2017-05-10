@@ -253,6 +253,8 @@
 		74956EB11D66E2BC00D68B61 /* BindPhoneNumViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74956EB01D66E2BC00D68B61 /* BindPhoneNumViewController.xib */; };
 		74956EB31D66E87F00D68B61 /* UCFModifyPhoneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74956EB21D66E87F00D68B61 /* UCFModifyPhoneViewController.xib */; };
 		74956EB51D66F33D00D68B61 /* UCFAccountDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74956EB41D66F33D00D68B61 /* UCFAccountDetailViewController.xib */; };
+		74A0AF021EC2B021009E5A57 /* UCFHomeListCellPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 74A0AF011EC2B021009E5A57 /* UCFHomeListCellPresenter.m */; };
+		74A0AF051EC2B04D009E5A57 /* UCFHomeListCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 74A0AF041EC2B04D009E5A57 /* UCFHomeListCellModel.m */; };
 		74C05FB41EBDCB0C00673979 /* UCFHomeListNavView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74C05FB31EBDCB0C00673979 /* UCFHomeListNavView.m */; };
 		74C05FB81EBDD3BD00673979 /* UCFHomeListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74C05FB61EBDD3BD00673979 /* UCFHomeListCell.m */; };
 		74C05FB91EBDD3BD00673979 /* UCFHomeListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74C05FB71EBDD3BD00673979 /* UCFHomeListCell.xib */; };
@@ -1209,6 +1211,10 @@
 		74956EB01D66E2BC00D68B61 /* BindPhoneNumViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BindPhoneNumViewController.xib; sourceTree = "<group>"; };
 		74956EB21D66E87F00D68B61 /* UCFModifyPhoneViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFModifyPhoneViewController.xib; sourceTree = "<group>"; };
 		74956EB41D66F33D00D68B61 /* UCFAccountDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFAccountDetailViewController.xib; sourceTree = "<group>"; };
+		74A0AF001EC2B021009E5A57 /* UCFHomeListCellPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFHomeListCellPresenter.h; sourceTree = "<group>"; };
+		74A0AF011EC2B021009E5A57 /* UCFHomeListCellPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFHomeListCellPresenter.m; sourceTree = "<group>"; };
+		74A0AF031EC2B04D009E5A57 /* UCFHomeListCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFHomeListCellModel.h; sourceTree = "<group>"; };
+		74A0AF041EC2B04D009E5A57 /* UCFHomeListCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFHomeListCellModel.m; sourceTree = "<group>"; };
 		74C05FB21EBDCB0C00673979 /* UCFHomeListNavView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFHomeListNavView.h; sourceTree = "<group>"; };
 		74C05FB31EBDCB0C00673979 /* UCFHomeListNavView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFHomeListNavView.m; sourceTree = "<group>"; };
 		74C05FB51EBDD3BD00673979 /* UCFHomeListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFHomeListCell.h; sourceTree = "<group>"; };
@@ -2728,6 +2734,8 @@
 				7456A97A1EC07F9B006F978A /* UCFUserInfoListItem.m */,
 				7491827A1EC1C02800AC1ECE /* UCFHomeListGroup.h */,
 				7491827B1EC1C02800AC1ECE /* UCFHomeListGroup.m */,
+				74A0AF031EC2B04D009E5A57 /* UCFHomeListCellModel.h */,
+				74A0AF041EC2B04D009E5A57 /* UCFHomeListCellModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2741,6 +2749,8 @@
 				742E28151EBB1ADF00FF6D4E /* UCFHomeListPresenter.m */,
 				7491827D1EC1C06700AC1ECE /* UCFHomeListGroupPresenter.h */,
 				7491827E1EC1C06700AC1ECE /* UCFHomeListGroupPresenter.m */,
+				74A0AF001EC2B021009E5A57 /* UCFHomeListCellPresenter.h */,
+				74A0AF011EC2B021009E5A57 /* UCFHomeListCellPresenter.m */,
 			);
 			name = Presenter;
 			path = Present;
@@ -6091,6 +6101,7 @@
 				7470EBFC1B031DDD006DDCEF /* UCFCouponModel.m in Sources */,
 				83A6FEA81EBC2DDF000BC48C /* UCFProductListCell.m in Sources */,
 				FB4F9E4A1D62A6C400CCB492 /* UpgradeAccountVC.m in Sources */,
+				74A0AF051EC2B04D009E5A57 /* UCFHomeListCellModel.m in Sources */,
 				7BC304861ACBC22D007767F1 /* UILabel+Misc.m in Sources */,
 				7BCE02231AC902FD0084C15C /* BaseAlertView.m in Sources */,
 				84F4E44E1B736C15008378ED /* MjAlertView.m in Sources */,
@@ -6202,6 +6213,7 @@
 				FB1E7F811D8E4230009CBE2C /* UCFMarkOfBondsRransferNewView.m in Sources */,
 				7BC8AA1B1AD4C74200BF4660 /* UCFFriendRegisterListModel.m in Sources */,
 				4A0E074A1B218E8C0099AEC3 /* RedAlertView.m in Sources */,
+				74A0AF021EC2B021009E5A57 /* UCFHomeListCellPresenter.m in Sources */,
 				FB72B08D1D74233E00F4DC8E /* BaseNavigationViewController.m in Sources */,
 				746FFE2C1B007FA100FF927F /* UCFBindBankCardNormalTableViewCell.m in Sources */,
 				7BE51D901ADE5079007600AB /* FullWebViewController.m in Sources */,
