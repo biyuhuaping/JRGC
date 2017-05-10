@@ -121,6 +121,11 @@
     self.navView.offset = offSet;
 }
 
+- (void)homeListRefreshDataWithHomelist:(UCFHomeListViewController *)homelist
+{
+    [self fetchData];
+}
+
 #pragma mark - UCFHomeListNavViewDelegate
 
 - (void)homeListNavView:(UCFHomeListNavView *)navView didClicked:(UIButton *)loginAndRegister
@@ -139,6 +144,15 @@
 #pragma mark - 请求数据
 - (void)fetchData
 {
-    
+    __weak typeof(self) weakSelf = self;
+    [self.homeListVC.presenter fetchHomeListDataWithCompletionHandler:^(NSError *error, id result) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];//上层交互逻辑
+        if ([result isKindOfClass:[NSDictionary class]]) {
+            //请求成功
+        }
+        else if ([result isKindOfClass:[NSString class]]) {
+            [AuxiliaryFunc showToastMessage:result withView:weakSelf.view];
+        }
+    }];
 }
 @end
