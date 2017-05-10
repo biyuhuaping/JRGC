@@ -9,6 +9,9 @@
 #import "UCFCycleImageViewController.h"
 #import "UCFUserPresenter.h"
 #import "SDCycleScrollView.h"
+#import "AppDelegate.h"
+#import "UCFCycleModel.h"
+#import "UCFWebViewJavascriptBridgeBanner.h"
 
 @interface UCFCycleImageViewController () <UCFUserPresenterCyceleImageCallBack, SDCycleScrollViewDelegate>
 @property (strong, nonatomic) UCFUserPresenter *presenter;
@@ -22,16 +25,14 @@
     [super viewDidLoad];
 //    self.navigationController.navigationBar.hidden = YES;
     
-    NSArray *images = @[[UIImage imageNamed:@"h1.jpg"],
-                        [UIImage imageNamed:@"h2.jpg"],
-                        [UIImage imageNamed:@"h3.jpg"],
-                        [UIImage imageNamed:@"h4.jpg"]
-                        ];
+    NSArray *images = @[[UIImage imageNamed:@"banner_default.png"]];
     SDCycleScrollView *cycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectZero imagesGroup:images];
         cycleScrollView.delegate = self;
     cycleScrollView.autoScrollTimeInterval = 2.0;
     [self.view addSubview:cycleScrollView];
     self.cycleImageView = cycleScrollView;
+    
+    [self getNormalBannerData];
 }
 
 - (void)viewDidLayoutSubviews
@@ -59,14 +60,6 @@
 + (CGFloat)viewHeight
 {
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
-//    if (width == 320) {
-//        return 170;
-//    }
-//    else if (width == 375) {
-//        return 197.5;
-//    }
-//    else
-//        return 320.5;
     return width * 0.5 + 10;
 }
 
@@ -74,7 +67,47 @@
 
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index
 {
-    NSLog(@"---点击了第%ld张图片", (long)index);
+    id model = [cycleScrollView.imagesGroup objectAtIndex:index];
+    if ([model isKindOfClass:[UCFCycleModel class]]) {
+        UCFCycleModel *modell = model;
+        UCFWebViewJavascriptBridgeBanner *webView = [[UCFWebViewJavascriptBridgeBanner alloc]initWithNibName:@"UCFWebViewJavascriptBridgeBanner" bundle:nil];
+        webView.baseTitleType = @"lunbotuhtml";
+        webView.url = modell.url;
+        webView.navTitle = modell.title;
+        webView.dicForShare = modell;
+        [self.parentViewController.navigationController pushViewController:webView animated:YES];
+    }
+}
+
+#pragma mark - 获取正式环境的banner图
+- (void)getNormalBannerData
+{
+    __weak typeof(self) weakSelf = self;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+        [request setURL:[NSURL URLWithString:CMS_BANNER]];
+        [request setHTTPMethod:@"GET"];
+        AppDelegate * app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        if (EnvironmentConfiguration == 2 || (app.isSubmitAppStoreTestTime && [[[NSUserDefaults standardUserDefaults] valueForKey:UUID] isEqualToString:@"108027"])) {
+            [request setValue:@"1" forHTTPHeaderField:@"jrgc-umark"];
+        }
+        NSHTTPURLResponse *urlResponse = nil;
+        NSError *error = nil;
+        NSData *recervedData = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&error];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (!recervedData) {
+                return ;
+            }
+            NSDictionary *modelDic = [NSJSONSerialization JSONObjectWithData:recervedData options:NSJSONReadingMutableContainers error:nil];
+            NSMutableArray *temp = [NSMutableArray new];
+            for (NSDictionary *dict in modelDic[@"banner"]) {
+                UCFCycleModel *model = [UCFCycleModel getCycleModelByDataDict:dict];
+                [temp addObject:model];
+            }
+            weakSelf.cycleImageView.imagesGroup = temp;
+            [weakSelf.cycleImageView refreshImage];
+        });
+    });
 }
 
 @end

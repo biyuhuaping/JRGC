@@ -13,4 +13,6 @@
 + (instancetype)presenterWithItem:(UCFHomeListCellModel *)item;
 
 - (UCFHomeListCellModel *)item;
+
+- (NSString *)proTitle;
 @end

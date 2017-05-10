@@ -255,6 +255,10 @@
 		74956EB51D66F33D00D68B61 /* UCFAccountDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74956EB41D66F33D00D68B61 /* UCFAccountDetailViewController.xib */; };
 		74A0AF021EC2B021009E5A57 /* UCFHomeListCellPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 74A0AF011EC2B021009E5A57 /* UCFHomeListCellPresenter.m */; };
 		74A0AF051EC2B04D009E5A57 /* UCFHomeListCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 74A0AF041EC2B04D009E5A57 /* UCFHomeListCellModel.m */; };
+		74A0AF081EC32A27009E5A57 /* UCFCycleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 74A0AF071EC32A27009E5A57 /* UCFCycleModel.m */; };
+		74A0AF0F1EC341DD009E5A57 /* NSTimer+timerBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 74A0AF0B1EC341DD009E5A57 /* NSTimer+timerBlock.m */; };
+		74A0AF101EC341DD009E5A57 /* ZZCircleProgress.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 74A0AF0C1EC341DD009E5A57 /* ZZCircleProgress.bundle */; };
+		74A0AF111EC341DD009E5A57 /* ZZCircleProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = 74A0AF0E1EC341DD009E5A57 /* ZZCircleProgress.m */; };
 		74C05FB41EBDCB0C00673979 /* UCFHomeListNavView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74C05FB31EBDCB0C00673979 /* UCFHomeListNavView.m */; };
 		74C05FB81EBDD3BD00673979 /* UCFHomeListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74C05FB61EBDD3BD00673979 /* UCFHomeListCell.m */; };
 		74C05FB91EBDD3BD00673979 /* UCFHomeListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74C05FB71EBDD3BD00673979 /* UCFHomeListCell.xib */; };
@@ -386,7 +390,6 @@
 		7BC8A8A01AFB4EB0003A8D89 /* RegisterSuccessAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BC8A89F1AFB4EB0003A8D89 /* RegisterSuccessAlert.m */; };
 		7BC8A9F51AD4BFF600BF4660 /* UCFMoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BC8A9F41AD4BFF600BF4660 /* UCFMoreViewController.m */; };
 		7BC8A9FB1AD4C0A100BF4660 /* UCFLatestProjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BC8A9FA1AD4C0A100BF4660 /* UCFLatestProjectViewController.m */; };
-		7BC8AA1A1AD4C74200BF4660 /* UCFCycleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BC8AA041AD4C74200BF4660 /* UCFCycleModel.m */; };
 		7BC8AA1B1AD4C74200BF4660 /* UCFFriendRegisterListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BC8AA071AD4C74200BF4660 /* UCFFriendRegisterListModel.m */; };
 		7BC8AA1C1AD4C74200BF4660 /* UCFGDYouHuiModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BC8AA091AD4C74200BF4660 /* UCFGDYouHuiModel.m */; };
 		7BC8AA1D1AD4C74200BF4660 /* UCFMyArrears.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BC8AA0B1AD4C74200BF4660 /* UCFMyArrears.m */; };
@@ -1215,6 +1218,13 @@
 		74A0AF011EC2B021009E5A57 /* UCFHomeListCellPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFHomeListCellPresenter.m; sourceTree = "<group>"; };
 		74A0AF031EC2B04D009E5A57 /* UCFHomeListCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFHomeListCellModel.h; sourceTree = "<group>"; };
 		74A0AF041EC2B04D009E5A57 /* UCFHomeListCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFHomeListCellModel.m; sourceTree = "<group>"; };
+		74A0AF061EC32A27009E5A57 /* UCFCycleModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFCycleModel.h; sourceTree = "<group>"; };
+		74A0AF071EC32A27009E5A57 /* UCFCycleModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFCycleModel.m; sourceTree = "<group>"; };
+		74A0AF0A1EC341DD009E5A57 /* NSTimer+timerBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+timerBlock.h"; sourceTree = "<group>"; };
+		74A0AF0B1EC341DD009E5A57 /* NSTimer+timerBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+timerBlock.m"; sourceTree = "<group>"; };
+		74A0AF0C1EC341DD009E5A57 /* ZZCircleProgress.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ZZCircleProgress.bundle; sourceTree = "<group>"; };
+		74A0AF0D1EC341DD009E5A57 /* ZZCircleProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZCircleProgress.h; sourceTree = "<group>"; };
+		74A0AF0E1EC341DD009E5A57 /* ZZCircleProgress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZCircleProgress.m; sourceTree = "<group>"; };
 		74C05FB21EBDCB0C00673979 /* UCFHomeListNavView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFHomeListNavView.h; sourceTree = "<group>"; };
 		74C05FB31EBDCB0C00673979 /* UCFHomeListNavView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFHomeListNavView.m; sourceTree = "<group>"; };
 		74C05FB51EBDD3BD00673979 /* UCFHomeListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFHomeListCell.h; sourceTree = "<group>"; };
@@ -1445,8 +1455,6 @@
 		7BC8A9F41AD4BFF600BF4660 /* UCFMoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFMoreViewController.m; sourceTree = "<group>"; };
 		7BC8A9F91AD4C0A100BF4660 /* UCFLatestProjectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UCFLatestProjectViewController.h; path = JRGC/LatestProject/UCFLatestProjectViewController.h; sourceTree = SOURCE_ROOT; };
 		7BC8A9FA1AD4C0A100BF4660 /* UCFLatestProjectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UCFLatestProjectViewController.m; path = JRGC/LatestProject/UCFLatestProjectViewController.m; sourceTree = SOURCE_ROOT; };
-		7BC8AA031AD4C74200BF4660 /* UCFCycleModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFCycleModel.h; sourceTree = "<group>"; };
-		7BC8AA041AD4C74200BF4660 /* UCFCycleModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFCycleModel.m; sourceTree = "<group>"; };
 		7BC8AA061AD4C74200BF4660 /* UCFFriendRegisterListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFFriendRegisterListModel.h; sourceTree = "<group>"; };
 		7BC8AA071AD4C74200BF4660 /* UCFFriendRegisterListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFFriendRegisterListModel.m; sourceTree = "<group>"; };
 		7BC8AA081AD4C74200BF4660 /* UCFGDYouHuiModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFGDYouHuiModel.h; sourceTree = "<group>"; };
@@ -2730,6 +2738,8 @@
 		742E27F61EBACB6600FF6D4E /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				74A0AF061EC32A27009E5A57 /* UCFCycleModel.h */,
+				74A0AF071EC32A27009E5A57 /* UCFCycleModel.m */,
 				7456A9791EC07F9B006F978A /* UCFUserInfoListItem.h */,
 				7456A97A1EC07F9B006F978A /* UCFUserInfoListItem.m */,
 				7491827A1EC1C02800AC1ECE /* UCFHomeListGroup.h */,
@@ -3242,6 +3252,18 @@
 			path = TagParsers;
 			sourceTree = "<group>";
 		};
+		74A0AF091EC341DD009E5A57 /* ZZCircleProgress */ = {
+			isa = PBXGroup;
+			children = (
+				74A0AF0A1EC341DD009E5A57 /* NSTimer+timerBlock.h */,
+				74A0AF0B1EC341DD009E5A57 /* NSTimer+timerBlock.m */,
+				74A0AF0C1EC341DD009E5A57 /* ZZCircleProgress.bundle */,
+				74A0AF0D1EC341DD009E5A57 /* ZZCircleProgress.h */,
+				74A0AF0E1EC341DD009E5A57 /* ZZCircleProgress.m */,
+			);
+			path = ZZCircleProgress;
+			sourceTree = "<group>";
+		};
 		74D337B51E13906500386853 /* 统计数据 */ = {
 			isa = PBXGroup;
 			children = (
@@ -3732,8 +3754,6 @@
 				FBA80F501AE6472C0066BF99 /* UCFLatestProject */,
 				748D77641ADE448800910FF7 /* UCFSettingModels */,
 				7BC8AA051AD4C74200BF4660 /* UCFFriednRegisterListModel */,
-				7BC8AA031AD4C74200BF4660 /* UCFCycleModel.h */,
-				7BC8AA041AD4C74200BF4660 /* UCFCycleModel.m */,
 				7BC8AA081AD4C74200BF4660 /* UCFGDYouHuiModel.h */,
 				7BC8AA091AD4C74200BF4660 /* UCFGDYouHuiModel.m */,
 				7BC8AA0A1AD4C74200BF4660 /* UCFMyArrears.h */,
@@ -4243,6 +4263,7 @@
 		7BFE3EB11AC5635E002A53A2 /* ThirdLibs */ = {
 			isa = PBXGroup;
 			children = (
+				74A0AF091EC341DD009E5A57 /* ZZCircleProgress */,
 				749181FA1EC166F000AC1ECE /* SDCycleScrollView */,
 				FBB0D4E81DF8009000D2C280 /* BCFeedback */,
 				2526ADD21DD08CB800114D9A /* MLMOptionSelectView */,
@@ -5619,6 +5640,7 @@
 				74EAF5B61B0ED78700807C1C /* UCFSelectedBankTableViewCell.xib in Resources */,
 				74E89FF71DDD8D5D000B0AFF /* UCFP2PViewController.xib in Resources */,
 				835B888B1E8222F600C8F0AB /* UCFP2POrHornerTabHeaderView.xib in Resources */,
+				74A0AF101EC341DD009E5A57 /* ZZCircleProgress.bundle in Resources */,
 				FBE5A0541AE8BEDD0095B2ED /* UCFMyInvestViewCell.xib in Resources */,
 				741CA7A31E724C44006056A8 /* UCFLoanViewController.xib in Resources */,
 				74E8A0061DDDA142000B0AFF /* UCFP2PTransferViewController.xib in Resources */,
@@ -5866,6 +5888,7 @@
 				7BA6E4C21AD6731900FE8C37 /* UIImage+GIF.m in Sources */,
 				7456D3BC1E8253B800207349 /* UCFPCListViewPresenter.m in Sources */,
 				4A6FAFC51D743CF300AD4DF8 /* CJLabel.m in Sources */,
+				74A0AF111EC341DD009E5A57 /* ZZCircleProgress.m in Sources */,
 				EDEC8BFA1CB3BA6300815228 /* WPAttributedStyleAction.m in Sources */,
 				4A0DA1551B26D8C4004E84F6 /* UCFPurchaseBidViewController.m in Sources */,
 				741CA7A21E724C44006056A8 /* UCFLoanViewController.m in Sources */,
@@ -6054,6 +6077,7 @@
 				833A6EB71E554B8700C8A494 /* UCFCollectionDetailCell.m in Sources */,
 				7BCE02261AC902FD0084C15C /* UCFToolsMehod.m in Sources */,
 				7BCE01FB1AC8FC260084C15C /* ASIInputStream.m in Sources */,
+				74A0AF0F1EC341DD009E5A57 /* NSTimer+timerBlock.m in Sources */,
 				7BA6E4BD1AD6731900FE8C37 /* SDWebImageDownloader.m in Sources */,
 				7BDD8FC81AE0DD67007A5CE8 /* MDRadialProgressTheme.m in Sources */,
 				25F445C31D66E276006813BB /* UCFChoseBankViewController.m in Sources */,
@@ -6084,6 +6108,7 @@
 				74C05FB41EBDCB0C00673979 /* UCFHomeListNavView.m in Sources */,
 				7BC304871ACBC22D007767F1 /* UITableView+Misc.m in Sources */,
 				FBBF48781C58C46C006AB777 /* UIView+Border.m in Sources */,
+				74A0AF081EC32A27009E5A57 /* UCFCycleModel.m in Sources */,
 				7BCE023C1AC915A80084C15C /* SFHFKeychainUtils.m in Sources */,
 				7BCA210E1AEDCE67001CD258 /* InvestmentDetailTableViewCell.m in Sources */,
 				74E89FFB1DDD8D9B000B0AFF /* UCFTransferViewController.m in Sources */,
@@ -6177,7 +6202,6 @@
 				7BC8AA241AD4C74200BF4660 /* UCFTransterBidHeadDetail.m in Sources */,
 				835B88851E8220CC00C8F0AB /* UCFP2POrHonerAccoutViewController.m in Sources */,
 				83F2D59E1DCB508F0041F913 /* UCFAccountTool.m in Sources */,
-				7BC8AA1A1AD4C74200BF4660 /* UCFCycleModel.m in Sources */,
 				74F490E51E5AF2660057AC62 /* UCFMyInvestBatchBidModel.m in Sources */,
 				74541C901ADFD6350009D27D /* UCFSettingViewController.m in Sources */,
 				74E8A0051DDDA142000B0AFF /* UCFP2PTransferViewController.m in Sources */,
