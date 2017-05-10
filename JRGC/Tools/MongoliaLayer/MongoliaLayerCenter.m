@@ -9,6 +9,7 @@
 #import "MongoliaLayerCenter.h"
 #import "NSDate+IsBelongToToday.h"
 #import "MaskView.h"
+#import "JSONKit.h"
 @interface MongoliaLayerCenter ()
 {
     NSInteger num;
@@ -33,8 +34,9 @@
 }
 - (void)showLogic
 {
-//    MaskView *view = [MaskView makeViewWithMask:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
-//    [view show];
+//    MjAlertView *alertView = [[MjAlertView alloc] initPlatformUpgradeNotice:self];
+//    alertView.tag = 1000;
+//    [alertView show];
     return;
     //不登录就需要查看的
     NSDate *lastFirstLoginTime = [[NSUserDefaults standardUserDefaults] objectForKey:FirstAlertViewShowTime];
@@ -43,7 +45,6 @@
     if (isBelongToToday) {
         //新手政策是否显示
         if ([[self.mongoliaLayerDic valueForKey:@"novicePoliceOnOff"] boolValue]) {
-//            [[NSNotificationCenter defaultCenter] postNotificationName:@"CheckInviteFriendsAlertView" object:nil];
             //通知弹窗显示新手政策
             MjAlertView *alertView = [[MjAlertView alloc]initInviteFriendsToMakeMoneyDelegate:self];
             [alertView show];
@@ -69,11 +70,8 @@
         MjAlertView *alertView = [[MjAlertView alloc] initPlatformUpgradeNotice:self];
         alertView.tag = 1000;
         [alertView show];
-//        [[NSNotificationCenter defaultCenter] postNotificationName:CHECK_UPDATE_ALERT object:nil];
         return;
     }
-
-
         //是否弹平风险评估
 //        if ([[self.mongoliaLayerDic valueForKey:@"风险评估"] boolValue]) {
 //            return;
@@ -88,7 +86,19 @@
 }
 - (void)mjalertView:(MjAlertView *)alertview didClickedButton:(UIButton *)clickedButton andClickedIndex:(NSInteger)index
 {
+    if (alertview.tag == 1000) {
+        [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID]} tag:KSXTagADJustMent owner:self signature:YES Type:SelectAccoutDefault];
+    }
+}
+#pragma mark  netMethod
+-(void)beginPost:(kSXTag)tag {
     
 }
-
+-(void)endPost:(id)result tag:(NSNumber*)tag {
+    NSString *data = (NSString *)result;
+    NSMutableDictionary *dic = [data objectFromJSONString];
+}
+-(void)errorPost:(NSError*)err tag:(NSNumber*)tag {
+    
+}
 @end
