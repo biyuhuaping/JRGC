@@ -86,7 +86,7 @@
 
 - (void)fetchUserInfoOneDataWithCompletionHandler:(NetworkCompletionHandler)completionHander
 {
-    if (!self.userId) {
+    if (!self.userId || [self.userId isEqualToString:@""]) {
         return;
     }
     __weak typeof(self) weakSelf = self;
@@ -111,7 +111,7 @@
 
 - (void)fetchUserInfoTwoDataWithCompletionHandler:(NetworkCompletionHandler)completionHander
 {
-    if (!self.userId) {
+    if (!self.userId || [self.userId isEqualToString:@""]) {
         return;
     }
     __weak typeof(self) weakSelf = self;

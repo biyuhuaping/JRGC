@@ -185,6 +185,7 @@
 #pragma mark - 刷新数据
 - (void)refreshData
 {
+    [self.presenter resetData];
     if ([self.delegate respondsToSelector:@selector(homeListRefreshDataWithHomelist:)]) {
         [self.delegate homeListRefreshDataWithHomelist:self];
     }
