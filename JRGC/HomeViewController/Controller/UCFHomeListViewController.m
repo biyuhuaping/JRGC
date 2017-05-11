@@ -15,7 +15,7 @@
 #import "UCFHomeListCell.h"
 #import "UCFHomeListHeaderSectionView.h"
 
-@interface UCFHomeListViewController () <UITableViewDelegate, UITableViewDataSource, HomeListViewPresenterCallBack, UCFHomeListHeaderSectionViewDelegate>
+@interface UCFHomeListViewController () <UITableViewDelegate, UITableViewDataSource, HomeListViewPresenterCallBack, UCFHomeListHeaderSectionViewDelegate, UCFHomeListCellDelegate>
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) UCFHomeListPresenter *presenter;
 @end
@@ -73,6 +73,7 @@
         cell = (UCFHomeListCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeListCell" owner:self options:nil] lastObject];
     }
     cell.tableView = tableView;
+    cell.delegate = self;
     UCFHomeListGroupPresenter *groupPresenter = [self.presenter.allDatas objectAtIndex:indexPath.section];
     cell.presenter = [groupPresenter.group.prdlist objectAtIndex:indexPath.row];
     cell.indexPath = indexPath;
@@ -153,6 +154,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
 }
 
 #pragma mark - presenter的代理方法
@@ -166,6 +168,12 @@
     } else if (self.presenter.allDatas.count == 0) {
         //        show error view
     }
+}
+
+#pragma mark - cell的代理方法
+- (void)homelistCell:(UCFHomeListCell *)homelistCell didClickedProgressViewWithPresenter:(UCFHomeListCellModel *)model
+{
+    
 }
 
 #pragma mark - UCFHomeListHeaderSectionView的代理方法

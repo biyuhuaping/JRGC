@@ -91,10 +91,23 @@
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hab-TG-dZg" customClass="ZZCircleProgress">
                         <rect key="frame" x="327" y="29.5" width="55" height="55"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jPS-Om-fiC">
+                                <rect key="frame" x="0.0" y="0.0" width="55" height="55"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="cyclePressClicked:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="x1N-Jt-kFC"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="jPS-Om-fiC" secondAttribute="bottom" id="83t-LD-oRa"/>
                             <constraint firstAttribute="width" constant="55" id="Pyf-Fg-p96"/>
                             <constraint firstAttribute="width" secondItem="Hab-TG-dZg" secondAttribute="height" multiplier="1:1" id="YI1-H2-0gd"/>
+                            <constraint firstAttribute="trailing" secondItem="jPS-Om-fiC" secondAttribute="trailing" id="YeW-QI-T0U"/>
+                            <constraint firstItem="jPS-Om-fiC" firstAttribute="top" secondItem="Hab-TG-dZg" secondAttribute="top" id="d7k-5p-g6e"/>
+                            <constraint firstItem="jPS-Om-fiC" firstAttribute="leading" secondItem="Hab-TG-dZg" secondAttribute="leading" id="z1R-FC-hbf"/>
                         </constraints>
                     </view>
                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="diO-Sz-3kr">

@@ -47,11 +47,10 @@
     }
     
 }
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+- (IBAction)cyclePressClicked:(UIButton *)sender {
+    if ([self.delegate respondsToSelector:@selector(homelistCell:didClickedProgressViewWithPresenter:)]) {
+        [self.delegate homelistCell:self didClickedProgressViewWithPresenter:self.presenter.item];
+    }
 }
 
 @end
