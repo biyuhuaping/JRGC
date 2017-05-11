@@ -81,7 +81,8 @@
 //计息方式
 @property (nonatomic, strong) NSString *interestMode;
 
-
+//尊享二次债转提示信息
+@property (nonatomic, strong) NSString *buyCueDes;
 
 -(id)initWithDictionary:(NSDictionary *)dicJson;
 + (instancetype)investDetailWithDict:(NSDictionary *)dict;

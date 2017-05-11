@@ -159,7 +159,7 @@
     
     [retDic setObject:dic[@"refundSummaryPlan"] forKey:@"refundSummarys"];//回款计划List
     [retDic setObject:contractInfoArr forKey:@"contractClauses"];//合同List
-    
+    [retDic setObject:[dic objectSafeForKey:@"buyCueDes"] forKey:@"buyCueDes"];//尊享二次债转提示信息
     return retDic;
 }
 

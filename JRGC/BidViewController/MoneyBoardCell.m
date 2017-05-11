@@ -40,6 +40,12 @@
 //    if (isShowLabels) {
         _topView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 10.0f)];
         _topView.backgroundColor = UIColorWithRGB(0xebebee);
+        _buyCueDesLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        _buyCueDesLabel.backgroundColor = [UIColor clearColor];
+        _buyCueDesLabel.font = [UIFont systemFontOfSize:11];
+        _buyCueDesLabel.textColor = UIColorWithRGB(0x999999);
+        [_topView addSubview:_buyCueDesLabel];
+
         _activitylabel1 = [UILabel labelWithFrame:CGRectZero text:@"" textColor:UIColorWithRGB(0x5b7aa4) font:[UIFont systemFontOfSize:MarkLabelFont]];
         _activitylabel1.backgroundColor = [UIColor whiteColor];
         _activitylabel1.layer.borderWidth = 1;
@@ -335,10 +341,20 @@
       }
     } else{
             _keYongTipLabel.text = @"可用金额";
-            _rechargeBtn.frame = CGRectMake(ScreenWidth - 15 - 44 , 50, 44, 37);
-            
+        NSString *buyCueDeStr = [_dataDict objectSafeForKey:@"buyCueDes"];
+        if (![buyCueDeStr isEqualToString:@""]) {
+           _topView.frame =  CGRectMake(0, 0, ScreenWidth, 25);
+           _buyCueDesLabel.frame =  CGRectMake(15, 5, ScreenWidth - 30, 15);
+           _buyCueDesLabel.text = buyCueDeStr;
+        }
+            _minuteCountDownView.frame = CGRectMake(0, CGRectGetMaxY(_topView.frame), ScreenWidth, 37);
+            _keYongBaseView.frame = CGRectMake(0,CGRectGetMaxY(_minuteCountDownView.frame) , ScreenWidth, 37);
+            _inputBaseView.frame = CGRectMake(15.0f, CGRectGetMaxY(_keYongBaseView.frame)+10, ScreenWidth - 69.0f, 37.0f);
+            _rechargeBtn.frame = CGRectMake(ScreenWidth - 15 - 44 , CGRectGetMaxY(_topView.frame)+40, 44, 37);
             _totalKeYongTipLabel.hidden = YES;
-        
+            _inputMoneyTextFieldLable.frame = CGRectMake(10.0f, 0, CGRectGetWidth(_inputBaseView.frame) - 70, CGRectGetHeight(_inputBaseView.frame));
+            _calulatorBtn.frame = CGRectMake(CGRectGetMaxX(_inputBaseView.frame) + 10, CGRectGetMidY(_inputBaseView.frame) - 29/2.0, 29, 29);
+             _midSepView.frame = CGRectMake(0, CGRectGetMaxY(_inputBaseView.frame) + 10, ScreenWidth, 10.0f);
             double availableBalance = [[[_dataDict objectForKey:@"data"] objectForKey:@"actBalance"] doubleValue];
             NSString *availableStr = [UCFToolsMehod AddComma:[NSString stringWithFormat:@"%.2f",availableBalance]];
             self.myMoneyLabel.text = [NSString stringWithFormat:@"¥%@",availableStr];
@@ -358,7 +374,6 @@
         
            _allTouziBtn.hidden = self.accoutType == SelectAccoutTypeHoner;//如果是尊享债转 则隐藏全投按钮
         if (self.accoutType == SelectAccoutTypeHoner) {
-//           _inputMoneyTextFieldLable.text = [NSString stringWithFormat:@"%.2f",availableBalance];
            _inputMoneyTextFieldLable.userInteractionEnabled = NO;
         }else{
             _inputMoneyTextFieldLable.userInteractionEnabled = YES;

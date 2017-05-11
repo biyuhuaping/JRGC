@@ -100,6 +100,10 @@
     if (indexPath.row == 0) {
         return 109.0f;
     } else if (indexPath.row == 1) {
+        NSString *buyCueDesStr =[_dataDict objectSafeForKey:@"buyCueDes"];
+        if (![buyCueDesStr isEqualToString:@""]) {
+          return 202.0f - 43 - 54 + 36+15;
+        }
         return 202.0f - 43 - 54 + 36;
     } else if (indexPath.row == 2) {
         return 30;
@@ -135,6 +139,7 @@
             cell.dataDict = _dataDict;
             cell.isTransid = YES;
             cell.minuteCountDownView.timeInterval = [[_dataDict objectSafeForKey:@"intervalMilli"] integerValue];
+//            cell.backgroundColor = [UIColor redColor];
             /*
             double gondDouBalance = [[[_dataDict objectForKey:@"data"] objectForKey:@"beanBalance"] doubleValue];
             if (gondDouBalance > 0.0) {
@@ -173,7 +178,6 @@
         cell.textLabel.text = showStr;
         cell.textLabel.font = [UIFont systemFontOfSize:13.0];
         return cell;
-        
     }
     
 }
@@ -586,19 +590,35 @@
     if (self.accoutType == SelectAccoutTypeHoner) {
         UILabel *jieshouLabel = [[UILabel alloc] initWithFrame:CGRectMake(23, CGRectGetMaxY(label1.frame)+10, ScreenWidth- 23 - 15, 12)];
         jieshouLabel.backgroundColor = [UIColor clearColor];
-        jieshouLabel.text = @"单笔尊享项目仅支持一对一转让，不支持部分购买。";
+        jieshouLabel.text = @"单笔尊享项目仅支持一对一转让，不支持部分购买";
         jieshouLabel.font = [UIFont systemFontOfSize:12];
         jieshouLabel.textColor = UIColorWithRGB(0x999999);
         [footView addSubview:jieshouLabel];
-        
-        footView.frame = CGRectMake(0, 0, ScreenWidth, CGRectGetMaxY(jieshouLabel.frame) + 15);
-        [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:footView isTop:YES];
         
         UIImageView * imageView2 = [[UIImageView alloc] init];
         imageView2.frame = CGRectMake(CGRectGetMinX(jieshouLabel.frame) - 7, CGRectGetMinY(jieshouLabel.frame) + 4, 5, 5);
         imageView2.image = [UIImage imageNamed:@"point.png"];
         [footView addSubview:imageView2];
+        
+        NSString *buyCueDesStr = @"";//尊享二次债转，增加提示 ---位置取消了
+        if (![buyCueDesStr isEqualToString:@""]) {
+            UILabel *jieshouLabel2 = [[UILabel alloc] initWithFrame:CGRectMake(23, CGRectGetMaxY(jieshouLabel.frame)+10, ScreenWidth- 23 - 15, 12)];
+            jieshouLabel2.backgroundColor = [UIColor clearColor];
+            jieshouLabel2.text = buyCueDesStr;
+            jieshouLabel2.font = [UIFont systemFontOfSize:12];
+            jieshouLabel2.textColor = UIColorWithRGB(0x999999);
+            [footView addSubview:jieshouLabel2];
+            
+            footView.frame = CGRectMake(0, 0, ScreenWidth, CGRectGetMaxY(jieshouLabel2.frame) + 15);
+            UIImageView * imageView3 = [[UIImageView alloc] init];
+            imageView3.frame = CGRectMake(CGRectGetMinX(jieshouLabel2.frame) - 7, CGRectGetMinY(jieshouLabel2.frame) + 4, 5, 5);
+            imageView3.image = [UIImage imageNamed:@"point.png"];
+            [footView addSubview:imageView3];
+        }else{
+            footView.frame = CGRectMake(0, 0, ScreenWidth, CGRectGetMaxY(jieshouLabel.frame) + 15);
+        }
     }
+    [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:footView isTop:YES];
     return footView;
 }
 - (NSString *)valueIndex:(ZBLinkLabelModel *)linkModel

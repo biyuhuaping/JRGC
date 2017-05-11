@@ -180,14 +180,19 @@
     
     UILabel *totalLabel = [UILabel labelWithFrame:CGRectMake([Common calculateNewSizeBaseMachine:15],[Common calculateNewSizeBaseMachine:HeadBkHeight] - [Common calculateNewSizeBaseMachine:shadeSpacingHeight] - 12,0,12) text:@"总计金额" textColor:UIColorWithRGB(0x7e96c4) font:[UIFont systemFontOfSize:11]];
     if (_type == PROJECTDETAILTYPEBONDSRRANSFER) {
-        totalLabel.text = @"";//起息日期
+        totalLabel.text = [_dic objectSafeForKey: @"buyCueDes"];//起息日期
+        CGFloat strWidth = [totalLabel.text sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:11]}].width;
+        CGRect rect =  totalLabel.frame;
+        rect.size.width = strWidth;
+        totalLabel.frame = rect;
     } else {
         totalLabel.text = @"总计金额";
+        CGRect totalLabelFrame = totalLabel.frame;
+        totalLabelFrame.size.width = stringWidth;
+        totalLabel.frame = totalLabelFrame;
     }
     [_headBkView addSubview:totalLabel];
-    CGRect totalLabelFrame = totalLabel.frame;
-    totalLabelFrame.size.width = stringWidth;
-    totalLabel.frame = totalLabelFrame;
+    
     
     _totalMoneyLabel = [UILabel labelWithFrame:CGRectMake(CGRectGetMaxX(totalLabel.frame) + 10,totalLabel.frame.origin.y - 1,150,14) text:@"" textColor:UIColorWithRGB(0x7e96c4) font:[UIFont systemFontOfSize:14]];
     [_headBkView addSubview:_totalMoneyLabel];
@@ -618,20 +623,35 @@
 //上拉view
 - (void)drawPullingView
 {
+   
     UIView *pullingBkView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(bottomBkView.frame), ScreenWidth, 42)];
     [self addSubview:pullingBkView];
     pullingBkView.backgroundColor = [UIColor clearColor];
     
-    UIImageView *iconView = [[UIImageView alloc] initWithFrame:CGRectMake((ScreenWidth - 15) / 2, 10, 15, 15)];
+    UILabel *buyCueDesTipLabel = [[UILabel alloc]initWithFrame:CGRectZero];
+    buyCueDesTipLabel.textColor = UIColorWithRGB(0x999999);
+    buyCueDesTipLabel.textAlignment = NSTextAlignmentLeft;
+    buyCueDesTipLabel.backgroundColor = [UIColor clearColor];
+    buyCueDesTipLabel.font = [UIFont systemFontOfSize:12];
+//    NSString *buyCueDesStr =[_dic objectSafeForKey: @"buyCueDes"];
+//    if (_type == PROJECTDETAILTYPEBONDSRRANSFER && !_isP2P && ![buyCueDesStr isEqualToString:@""] ) {
+//        pullingBkView.frame = CGRectMake(0, CGRectGetMaxY(bottomBkView.frame), ScreenWidth, 42 + 20);
+//        buyCueDesTipLabel.text = buyCueDesStr;
+//        [pullingBkView addSubview:buyCueDesTipLabel];
+//    }else{
+//        buyCueDesTipLabel.frame = CGRectZero;
+//    }
+    UIImageView *iconView = [[UIImageView alloc] initWithFrame:CGRectMake((ScreenWidth - 15) / 2, CGRectGetMaxY(buyCueDesTipLabel.frame)+10, 15, 15)];
     iconView.image = [UIImage imageNamed:@"particular_icon_up.png"];
     [pullingBkView addSubview:iconView];
+    
     
     UILabel *pullingLabel = [UILabel labelWithFrame:CGRectMake(0, CGRectGetMaxY(iconView.frame) + 5, ScreenWidth, 12) text:@"向上滑动，查看详情" textColor:UIColorWithRGB(0x999999) font:[UIFont systemFontOfSize:12]];
     [pullingBkView addSubview:pullingLabel];
 
     UIButton *bottomBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [bottomBtn addTarget:self action:@selector(bottomBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-    bottomBtn.frame = CGRectMake(0, 0, ScreenWidth, 42);
+    bottomBtn.frame = CGRectMake(0, CGRectGetMaxY(buyCueDesTipLabel.frame), ScreenWidth, 42);
     [pullingBkView addSubview:bottomBtn];
     [pullingBkView setUserInteractionEnabled:YES];
 }

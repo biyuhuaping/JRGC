@@ -82,9 +82,10 @@
         titleLabel.frame = CGRectMake(15, 7, ScreenWidth - 30, 30);
         return footerView;
     }else if(section == 0){
-        UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 30)];
+        UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 25)];
         footerView.backgroundColor = UIColorWithRGB(0xebebee);
         UILabel *titleLabel = [UILabel labelWithFrame:CGRectZero text:self.investDetailModel.interestMode  textColor:UIColorWithRGB(0x999999) font:[UIFont systemFontOfSize:11]];
+        titleLabel.text = [_detailType intValue] == 2  ? self.investDetailModel.buyCueDes : self.investDetailModel.interestMode;
         titleLabel.textAlignment = NSTextAlignmentLeft;
         titleLabel.tag = 1001;
         titleLabel.numberOfLines = 0;
@@ -108,10 +109,21 @@
         }
     }if (section == 0) {
         //该借款标还款日计不计息的判断条件
-        if ([self.investDetailModel.interestMode isEqualToString:@""] || self.investDetailModel.interestMode == nil) {
-            return 0;
-        } else {
-            return 30;
+        
+        if ([_detailType isEqualToString:@"1"]) {
+            if ([self.investDetailModel.interestMode isEqualToString:@""] || self.investDetailModel.interestMode == nil)
+            {
+                return 0;
+            }
+            else {
+                return 25;
+            }
+        }else{
+            if([self.investDetailModel.buyCueDes isEqualToString:@""] || self.investDetailModel.buyCueDes == nil )
+                return 0;
+            else {
+                return 25;
+            }
         }
     }
     return 0;
@@ -187,12 +199,23 @@
     } if(section == 1) {
         CGFloat headviewHeight;
         CGFloat viewYPos;
-        if ([self.investDetailModel.interestMode isEqualToString:@""] || self.investDetailModel.interestMode == nil) {
-            headviewHeight = 48;
-            viewYPos = 10;
-        } else {
-            headviewHeight = 38;
-            viewYPos = 0;
+        if ([_detailType integerValue] == 1) {
+            if ([self.investDetailModel.interestMode isEqualToString:@""] || self.investDetailModel.interestMode == nil) {
+                headviewHeight = 48;
+                viewYPos = 10;
+            } else {
+                headviewHeight = 38;
+                viewYPos = 0;
+            }
+  
+        }else{
+            if ([self.investDetailModel.buyCueDes isEqualToString:@""] || self.investDetailModel.buyCueDes == nil) {
+                headviewHeight = 48;
+                viewYPos = 10;
+            } else {
+                headviewHeight = 38;
+                viewYPos = 0;
+            }
         }
         UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, headviewHeight)];
         headView.backgroundColor = UIColorWithRGB(0xebebee);
@@ -433,11 +456,22 @@
         }
         return 48;
     }else if(section == 1){
-        if ([self.investDetailModel.interestMode isEqualToString:@""] || self.investDetailModel.interestMode == nil) {
-            return 48;
-        } else {
-            return 38;
+        if ([_detailType  intValue ] == 1) {
+            if ([self.investDetailModel.interestMode isEqualToString:@""] || self.investDetailModel.interestMode == nil) {
+                return 48;
+            } else {
+                return 38;
+            }
+  
+        }else{
+          if ([self.investDetailModel.buyCueDes isEqualToString:@""] || self.investDetailModel.buyCueDes == nil) {
+              return 48;
+          } else {
+              return 38;
+          }
+
         }
+        
     }
     return 48;
 }
