@@ -26,6 +26,8 @@
 #import "UCFDiscoveryViewController.h"
 #import "UCFWebViewJavascriptBridgeLevel.h"
 #import "P2PWalletHelper.h"
+#import "BlockUIAlertView.h"
+
 @interface UCFMainTabBarController ()
 
 //@property (strong, nonatomic) UCFLatestProjectViewController *LatestView;
@@ -197,7 +199,6 @@
     if (contrl.viewControllers.count != 0) {
       topView = [contrl.viewControllers objectAtIndex:0];
     }
-
     if ([topView isKindOfClass:[UCFLoanViewController class]]) {
         UCFLoanViewController *loan = (UCFLoanViewController *)topView;
         bool isLoad = [loan isViewLoaded];
@@ -213,6 +214,20 @@
             [self presentViewController:loginNaviController animated:YES completion:nil];
             [Touch3DSingle sharedTouch3DSingle].isLoad = NO;
             return NO;
+        }
+        return YES;
+    }
+    if ([self.viewControllers indexOfObject:viewController] == 3) {
+        NSString *userId = [UserInfoSingle sharedManager].userId;
+        if(nil == userId) {
+            UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
+            BaseNavigationViewController *loginNaviController = [[BaseNavigationViewController alloc] initWithRootViewController:loginViewController];
+            loginViewController.sourceVC = @"homePage";
+            [self presentViewController:loginNaviController animated:YES completion:nil];
+            [Touch3DSingle sharedTouch3DSingle].isLoad = NO;
+            return NO;
+        } else {
+           return [P2PWalletHelper checkUserHSStateCanOpenWallet];
         }
         return YES;
     }

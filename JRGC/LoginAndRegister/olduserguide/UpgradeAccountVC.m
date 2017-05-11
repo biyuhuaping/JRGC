@@ -52,8 +52,18 @@
 
 @implementation UpgradeAccountVC
 
+- (void)getToBack
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    if (_fromVC == 1) {
+        baseTitleLabel.text = @"开通徽商存管账户";
+        [self addLeftButton];
+    }
+    
     _isSendVoiceMessage = NO;
     _height1.constant = 0.5;
     _height2.constant = 0.5;

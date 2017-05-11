@@ -560,6 +560,8 @@
 		84FAB60D1C7C575300D0942F /* MGSwipeTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FAB60B1C7C575300D0942F /* MGSwipeTableCell.m */; };
 		84FFA5301C7EAA9200ACD835 /* UIScrollView+TouchScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FFA52F1C7EAA9200ACD835 /* UIScrollView+TouchScrollView.m */; };
 		A8AD2E3E1EB979760013DB7C /* MongoliaLayerCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = A8AD2E3D1EB979760013DB7C /* MongoliaLayerCenter.m */; };
+		A8CE17731EC44BF8009BD954 /* UCFWalletSelectBankCarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8CE17711EC44BF8009BD954 /* UCFWalletSelectBankCarViewController.m */; };
+		A8CE17741EC44BF8009BD954 /* UCFWalletSelectBankCarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8CE17721EC44BF8009BD954 /* UCFWalletSelectBankCarViewController.xib */; };
 		A8D2DE781EB9E1CF00D61AD0 /* MaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = A8D2DE771EB9E1CF00D61AD0 /* MaskView.m */; };
 		A8DE85231EC2BC34004B3533 /* libUcfWalletSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A8DE84D91EC2BC34004B3533 /* libUcfWalletSDK.a */; };
 		A8DE85251EC2BC34004B3533 /* libSPaySDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A8DE84F11EC2BC34004B3533 /* libSPaySDK.a */; };
@@ -1773,6 +1775,9 @@
 		84FFA52F1C7EAA9200ACD835 /* UIScrollView+TouchScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+TouchScrollView.m"; sourceTree = "<group>"; };
 		A8AD2E3C1EB979760013DB7C /* MongoliaLayerCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MongoliaLayerCenter.h; sourceTree = "<group>"; };
 		A8AD2E3D1EB979760013DB7C /* MongoliaLayerCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MongoliaLayerCenter.m; sourceTree = "<group>"; };
+		A8CE17701EC44BF8009BD954 /* UCFWalletSelectBankCarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFWalletSelectBankCarViewController.h; sourceTree = "<group>"; };
+		A8CE17711EC44BF8009BD954 /* UCFWalletSelectBankCarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFWalletSelectBankCarViewController.m; sourceTree = "<group>"; };
+		A8CE17721EC44BF8009BD954 /* UCFWalletSelectBankCarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFWalletSelectBankCarViewController.xib; sourceTree = "<group>"; };
 		A8D2DE761EB9E1CF00D61AD0 /* MaskView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaskView.h; sourceTree = "<group>"; };
 		A8D2DE771EB9E1CF00D61AD0 /* MaskView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MaskView.m; sourceTree = "<group>"; };
 		A8DE84D91EC2BC34004B3533 /* libUcfWalletSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUcfWalletSDK.a; sourceTree = "<group>"; };
@@ -4357,7 +4362,6 @@
 			children = (
 				A8DE84D81EC2BC34004B3533 /* p2pWalletSDK */,
 				74A0AF091EC341DD009E5A57 /* ZZCircleProgress */,
-
 				749181FA1EC166F000AC1ECE /* SDCycleScrollView */,
 				FBB0D4E81DF8009000D2C280 /* BCFeedback */,
 				2526ADD21DD08CB800114D9A /* MLMOptionSelectView */,
@@ -5114,6 +5118,9 @@
 			children = (
 				A8DE852C1EC30159004B3533 /* P2PWalletHelper.h */,
 				A8DE852D1EC30159004B3533 /* P2PWalletHelper.m */,
+				A8CE17701EC44BF8009BD954 /* UCFWalletSelectBankCarViewController.h */,
+				A8CE17711EC44BF8009BD954 /* UCFWalletSelectBankCarViewController.m */,
+				A8CE17721EC44BF8009BD954 /* UCFWalletSelectBankCarViewController.xib */,
 			);
 			name = WalletHelper;
 			path = Tools/WalletHelper;
@@ -5946,6 +5953,7 @@
 				742E28031EBACDE400FF6D4E /* UCFHomeViewController.xib in Resources */,
 				74EAF5C51B0F36D100807C1C /* UCFBankCard.xib in Resources */,
 				FB2858CE1BAAB583000EAA71 /* UCFMyInvestViewController.xib in Resources */,
+				A8CE17741EC44BF8009BD954 /* UCFWalletSelectBankCarViewController.xib in Resources */,
 				747BE9D31D5B0F48007DEF32 /* UCFHuiBuinessDetailViewController.xib in Resources */,
 				4AE1E96A1E1CDB9900587CE6 /* read_me.txt in Resources */,
 				E37086BB1D61BA5B0041D293 /* UCFHuiShangChooseBankViewCell.xib in Resources */,
@@ -6391,6 +6399,7 @@
 				7BDD8FD91AE1043C007A5CE8 /* SDLoopProgressView.m in Sources */,
 				7BA6E4C41AD6731900FE8C37 /* UIImage+WebP.m in Sources */,
 				7BCBF1261ADB616D00C874FC /* UCFRegisterOneView.m in Sources */,
+				A8CE17731EC44BF8009BD954 /* UCFWalletSelectBankCarViewController.m in Sources */,
 				74F490DF1E5ACAB70057AC62 /* UCFBatchBidModel.m in Sources */,
 				83F2D59F1DCB508F0041F913 /* UCFSession.m in Sources */,
 				ED44558E1C112BCF00823DF3 /* UCFLoginShaowView.m in Sources */,

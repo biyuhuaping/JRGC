@@ -10,4 +10,6 @@
 
 @interface P2PWalletHelper : NSObject
 + (UIViewController *)getUCFWalletTargetController;
++ (BOOL)checkUserHSStateCanOpenWallet;
+
 @end

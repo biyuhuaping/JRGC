@@ -8,6 +8,10 @@
 
 #import "P2PWalletHelper.h"
 #import "UcfWalletSDK.h"
+#import "AppDelegate.h"
+#import "UpgradeAccountVC.h"
+#import "UCFWalletSelectBankCarViewController.h"
+
 @implementation P2PWalletHelper
 
 + (UIViewController *)getUCFWalletTargetController
@@ -33,5 +37,41 @@
     data = data.lowercaseString;
     NSString *sign = [Common md5:data];
     return sign;
+}
++ (BOOL)checkUserHSStateCanOpenWallet
+{
+    if ([UserInfoSingle sharedManager].openStatus < 3 && [UserInfoSingle sharedManager].openStatus < 3) {
+        AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        __weak typeof(app.tabBarController) weakSelf = app.tabBarController;
+        BlockUIAlertView *alert = [[BlockUIAlertView alloc] initWithTitle:@"提示" message:@"绑定银行卡后，才可以访问生活频道" cancelButtonTitle:@"取消" clickButton:^(NSInteger index){
+            //开通尊享徽商账户
+            if (index == 1) {
+                UpgradeAccountVC *accountVC = [[UpgradeAccountVC alloc] initWithNibName:@"UpgradeAccountVC" bundle:nil];
+                accountVC.accoutType = SelectAccoutTypeHoner;
+                accountVC.fromVC = 1;
+                UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:accountVC];
+                [weakSelf presentViewController:loginNaviController animated:YES completion:nil];
+            }
+
+        } otherButtonTitles:@"确定"];
+        [alert show];
+        return NO;
+    } else if([UserInfoSingle sharedManager].openStatus > 3 && [UserInfoSingle sharedManager].openStatus > 3) {
+        AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        __weak typeof(app.tabBarController) weakSelf = app.tabBarController;
+        UCFWalletSelectBankCarViewController *selct = [[UCFWalletSelectBankCarViewController alloc] initWithNibName:@"UCFWalletSelectBankCarViewController" bundle:nil];
+        UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:selct];
+        [weakSelf presentViewController:loginNaviController animated:YES completion:nil];
+        //让用户选择用哪张银行卡
+        return NO;
+        
+    }else if([UserInfoSingle sharedManager].openStatus > 3 || [UserInfoSingle sharedManager].openStatus > 3) {
+        //让用户进入钱包
+        
+        //更新用户数据
+//        [UcfWalletSDK updateWalletBadgeWithMerchantId:<#(NSString *)#> UserId:<#(NSString *)#> isDelete:<#(BOOL)#> result:<#^(NSDictionary *resultDict)result#>]
+        return YES;
+    }
+    return YES;
 }
 @end
