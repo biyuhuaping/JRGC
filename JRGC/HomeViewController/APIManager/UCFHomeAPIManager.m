@@ -18,6 +18,7 @@
 #define USERINFOONE @"userInfoOne"
 #define USERINFOTWO @"userInfoTwo"
 #define SIGN @"sign"
+#define PRODETAIL @"prodetail"
 
 @interface UCFHomeAPIManager () <NetworkModuleDelegate>
 @property (strong, nonatomic) NSMutableDictionary *requestDict;
@@ -56,6 +57,45 @@
     if ([[NSUserDefaults standardUserDefaults] objectForKey:UUID]) {
         [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":userId, @"apptzticket":token} tag:kSXTagSingMenthod owner:self signature:YES Type:SelectAccoutDefault];
         [self.requestDict setObject:completionHandler forKey:SIGN];
+    }
+}
+
+#warning 详情
+- (void)fetchProDetailInfoWithParameter:(NSDictionary *)parameter completionHandler:(NetworkCompletionHandler)completionHandler
+{
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:UUID]) {
+        NSString *userId = [parameter objectForKey:@"userId"];
+        NSString *Id = [parameter objectForKey:@"Id"];
+        NSString *proType = [parameter objectForKey:@"proType"];
+        NSString *type  = [parameter objectForKey:@"type"];
+        switch ([type intValue]) {
+            case 3:
+            {
+                NSString *strParameters = [NSString stringWithFormat:@"id=%@&userId=%@",Id,userId];
+                if ([proType isEqualToString:@"1"]) {
+                    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self Type:SelectAccoutTypeP2P];
+                }
+                else if ([proType isEqualToString:@"2"]) {
+                    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self Type:SelectAccoutTypeHoner];
+                }
+                [self.requestDict setObject:completionHandler forKey:PRODETAIL];
+            }
+                break;
+            case 4:
+            {
+                NSString *strParameters = [NSString stringWithFormat:@"id=%@&userId=%@",Id,userId];
+                if ([proType isEqualToString:@"1"]) {
+                    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDealBid owner:self Type:SelectAccoutTypeP2P];
+                }
+                else if ([proType isEqualToString:@"2"]) {
+                    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDealBid owner:self Type:SelectAccoutTypeHoner];
+                }
+                [self.requestDict setObject:completionHandler forKey:PRODETAIL];
+            }
+                break;
+            default:
+                break;
+        }
     }
 }
 
@@ -142,6 +182,33 @@
         }
         [self.requestDict removeObjectForKey:SIGN];
     }
+    else if (tag.intValue == kSXTagPrdClaimsDetail) {
+        NetworkCompletionHandler complete = [self.requestDict objectForKey:PRODETAIL];
+        
+        rstcode = dic[@"status"];
+        rsttext = dic[@"statusdes"];
+        if ([rstcode intValue] == 1) {
+            complete(nil, dic);
+        }
+        else {
+            complete(nil, rsttext);
+        }
+        [self.requestDict removeObjectForKey:PRODETAIL];
+    }
+    else if (tag.intValue == kSXTagPrdClaimsDealBid) {
+        NetworkCompletionHandler complete = [self.requestDict objectForKey:PRODETAIL];
+        
+        rstcode = dic[@"status"];
+        rsttext = dic[@"statusdes"];
+        if ([rstcode intValue] == 1) {
+
+            complete(nil, dic);
+        }
+        else {
+            complete(nil, rsttext);
+        }
+        [self.requestDict removeObjectForKey:PRODETAIL];
+    }
 }
 //请求失败
 - (void)errorPost:(NSError*)err tag:(NSNumber*)tag
@@ -165,6 +232,16 @@
         NetworkCompletionHandler complete = [self.requestDict objectForKey:SIGN];
         complete(err, nil);
         [self.requestDict removeObjectForKey:SIGN];
+    }
+    else if (tag.intValue == kSXTagPrdClaimsDetail) {
+        NetworkCompletionHandler complete = [self.requestDict objectForKey:PRODETAIL];
+        complete(err, nil);
+        [self.requestDict removeObjectForKey:PRODETAIL];
+    }
+    else if (tag.intValue == kSXTagPrdClaimsDealBid) {
+        NetworkCompletionHandler complete = [self.requestDict objectForKey:PRODETAIL];
+        complete(err, nil);
+        [self.requestDict removeObjectForKey:PRODETAIL];
     }
 }
 
