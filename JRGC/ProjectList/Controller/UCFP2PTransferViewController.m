@@ -30,6 +30,7 @@
 
 // 无数据界面
 @property (strong, nonatomic) UCFNoDataView *noDataView;
+@property (strong, nonatomic) IBOutlet UIView *loadingView;
 
 @property (nonatomic, assign) NSInteger currentPage;
 @end
@@ -42,6 +43,11 @@
         _dataArray = [NSMutableArray array];
     }
     return _dataArray;
+}
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 }
 
 - (void)viewDidLoad {
@@ -64,10 +70,19 @@
     
     // 添加传统的下拉刷新
     [self.tableview addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(getNetDataFromNet)];
-    [self.tableview.header beginRefreshing];
-//    self.tableview.footer.hidden = YES;
-    
+//    [self.tableview.header beginRefreshing];
+    [self.view bringSubviewToFront:_loadingView];
+    [self performSelector:@selector(removeLoadingView) withObject:nil afterDelay:LoadingSecond];
 }
+-(void)removeLoadingView
+{
+    for (UIView *view in self.loadingView.subviews) {
+        [view removeFromSuperview];
+    }
+    [self.loadingView removeFromSuperview];
+    [self.tableview.header beginRefreshing];
+}
+
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {

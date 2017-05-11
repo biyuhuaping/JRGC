@@ -52,7 +52,7 @@
             }
             [self setValue:propertyValue forKey:key];
         } else {
-            [self setValue:@"" forKey:key];
+//            [self setValue:@"" forKey:key];
         }
     }
 }

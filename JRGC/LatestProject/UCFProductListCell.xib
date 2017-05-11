@@ -28,7 +28,7 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="精选投资，多重保障" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uaq-Wh-nbm">
                         <rect key="frame" x="173" y="23" width="111" height="15"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="list_icon_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="4FZ-Us-UCs">
@@ -76,7 +76,7 @@
                 <outlet property="productNameLabel" destination="qVn-cK-Vhq" id="3Ca-0f-5Rb"/>
                 <outlet property="productNumLabel" destination="w71-wr-aaB" id="Twe-1w-zHH"/>
             </connections>
-            <point key="canvasLocation" x="-83" y="92.5"/>
+            <point key="canvasLocation" x="-249" y="95"/>
         </tableViewCell>
     </objects>
     <resources>

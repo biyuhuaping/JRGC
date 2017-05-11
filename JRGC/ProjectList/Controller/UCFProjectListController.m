@@ -101,7 +101,7 @@
         _currentViewController = self.hornerPlan;
     }
     else if ([self.strStyle isEqualToString:@"13"]){
-        self.segmentedCtrl.selectedSegmentIndex = 2;
+        self.segmentedCtrl.selectedSegmentIndex = self.isShowHornor ? 2 : 1;
         self.currentViewController = self.transfer;
         [self.view addSubview:self.transfer.view];
         _currentViewController = self.transfer;

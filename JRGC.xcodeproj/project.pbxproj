@@ -494,6 +494,10 @@
 		835B888B1E8222F600C8F0AB /* UCFP2POrHornerTabHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 835B888A1E8222F600C8F0AB /* UCFP2POrHornerTabHeaderView.xib */; };
 		8366BFB91E151745008D027F /* UCFCashRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8366BFB71E151745008D027F /* UCFCashRecordCell.m */; };
 		8366BFBA1E151745008D027F /* UCFCashRecordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8366BFB81E151745008D027F /* UCFCashRecordCell.xib */; };
+		8371F8EE1EC2BFAD00579884 /* UCFHonerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8371F8EC1EC2BFAD00579884 /* UCFHonerViewController.m */; };
+		8371F8EF1EC2BFAD00579884 /* UCFHonerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8371F8ED1EC2BFAD00579884 /* UCFHonerViewController.xib */; };
+		8371F8F21EC2F87A00579884 /* UCFLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8371F8F11EC2F87A00579884 /* UCFLoadingView.m */; };
+		8371F8F41EC2F89B00579884 /* UCFLoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8371F8F31EC2F89B00579884 /* UCFLoadingView.xib */; };
 		83A6FEA81EBC2DDF000BC48C /* UCFProductListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A6FEA61EBC2DDF000BC48C /* UCFProductListCell.m */; };
 		83A6FEA91EBC2DDF000BC48C /* UCFProductListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83A6FEA71EBC2DDF000BC48C /* UCFProductListCell.xib */; };
 		83EB21E21D758EE50069EF95 /* UCFCashRecordListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83EB21E01D758EE50069EF95 /* UCFCashRecordListViewController.m */; };
@@ -1641,6 +1645,12 @@
 		8366BFB61E151745008D027F /* UCFCashRecordCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFCashRecordCell.h; sourceTree = "<group>"; };
 		8366BFB71E151745008D027F /* UCFCashRecordCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFCashRecordCell.m; sourceTree = "<group>"; };
 		8366BFB81E151745008D027F /* UCFCashRecordCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFCashRecordCell.xib; sourceTree = "<group>"; };
+		8371F8EB1EC2BFAD00579884 /* UCFHonerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFHonerViewController.h; sourceTree = "<group>"; };
+		8371F8EC1EC2BFAD00579884 /* UCFHonerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFHonerViewController.m; sourceTree = "<group>"; };
+		8371F8ED1EC2BFAD00579884 /* UCFHonerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFHonerViewController.xib; sourceTree = "<group>"; };
+		8371F8F01EC2F87A00579884 /* UCFLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFLoadingView.h; sourceTree = "<group>"; };
+		8371F8F11EC2F87A00579884 /* UCFLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFLoadingView.m; sourceTree = "<group>"; };
+		8371F8F31EC2F89B00579884 /* UCFLoadingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFLoadingView.xib; sourceTree = "<group>"; };
 		83A6FEA51EBC2DDF000BC48C /* UCFProductListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UCFProductListCell.h; path = JRGC/LatestProject/UCFProductListCell.h; sourceTree = SOURCE_ROOT; };
 		83A6FEA61EBC2DDF000BC48C /* UCFProductListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UCFProductListCell.m; path = JRGC/LatestProject/UCFProductListCell.m; sourceTree = SOURCE_ROOT; };
 		83A6FEA71EBC2DDF000BC48C /* UCFProductListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UCFProductListCell.xib; path = JRGC/LatestProject/UCFProductListCell.xib; sourceTree = SOURCE_ROOT; };
@@ -2569,6 +2579,9 @@
 				74E89FF31DDD8D5D000B0AFF /* UCFP2PViewController.h */,
 				74E89FF41DDD8D5D000B0AFF /* UCFP2PViewController.m */,
 				74E89FF51DDD8D5D000B0AFF /* UCFP2PViewController.xib */,
+				8371F8EB1EC2BFAD00579884 /* UCFHonerViewController.h */,
+				8371F8EC1EC2BFAD00579884 /* UCFHonerViewController.m */,
+				8371F8ED1EC2BFAD00579884 /* UCFHonerViewController.xib */,
 				74E89FF81DDD8D9B000B0AFF /* UCFTransferViewController.h */,
 				74E89FF91DDD8D9B000B0AFF /* UCFTransferViewController.m */,
 				74E89FFA1DDD8D9B000B0AFF /* UCFTransferViewController.xib */,
@@ -2609,6 +2622,9 @@
 				742D0C9E1DE29E99000FA676 /* UCFProjectListCell.h */,
 				742D0C9F1DE29E99000FA676 /* UCFProjectListCell.m */,
 				742D0CA01DE29E99000FA676 /* UCFProjectListCell.xib */,
+				8371F8F01EC2F87A00579884 /* UCFLoadingView.h */,
+				8371F8F11EC2F87A00579884 /* UCFLoadingView.m */,
+				8371F8F31EC2F89B00579884 /* UCFLoadingView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -5627,6 +5643,7 @@
 				74FC22861BA6AC9200D1660A /* UCFRedEnvelopeViewController.xib in Resources */,
 				840A79441C2A7C160059A946 /* UCFMessageCenterViewController.xib in Resources */,
 				E37086B61D61A6CD0041D293 /* UCFHuiShangChooseBankViewController.xib in Resources */,
+				8371F8EF1EC2BFAD00579884 /* UCFHonerViewController.xib in Resources */,
 				FB5149551D64441F00C26E7B /* guideImage7_1.png in Resources */,
 				74EAF5BE1B0F18CB00807C1C /* UCFBankCardInfoExplainView.xib in Resources */,
 				25B38EFC1D5884EE00FB09F1 /* UCFBankCardChoseListInfo.xib in Resources */,
@@ -5751,6 +5768,7 @@
 				AEC5EEC01D9B6594000C0321 /* RechargeFixedTelNumView.xib in Resources */,
 				4A675E3F1C5F484400F21DDA /* SelectPayMoneyOrbeansCell.xib in Resources */,
 				25314C0C1D8FD7FA0066F446 /* UCFDirectCell.xib in Resources */,
+				8371F8F41EC2F89B00579884 /* UCFLoadingView.xib in Resources */,
 				74DBAC7A1D5864C200F6F6B1 /* UCFHuiShangBankViewController.xib in Resources */,
 				E3C1179D1D40CFCC0053A052 /* UCFContributionValueTypeTowCell.xib in Resources */,
 				74EB80F21AE51F660071621E /* UCFMoreViewController.storyboard in Resources */,
@@ -5807,6 +5825,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8371F8F21EC2F87A00579884 /* UCFLoadingView.m in Sources */,
 				FBB685891AE4A76800F222B6 /* UIScrollView+MJExtension.m in Sources */,
 				7470C8481E5E7CDE007D52F4 /* UCFCollectionBidModel.m in Sources */,
 				FB4F9E731D62A6F800CCB492 /* TradePasswordVC.m in Sources */,
@@ -6047,6 +6066,7 @@
 				EDEF5E921CBF761700592B20 /* PromptView.m in Sources */,
 				4A9016871AFB12FE0049A9E0 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				25F538B41D881B0A0039262F /* UCFPurchaseWebView.m in Sources */,
+				8371F8EE1EC2BFAD00579884 /* UCFHonerViewController.m in Sources */,
 				742E28021EBACDE400FF6D4E /* UCFHomeViewController.m in Sources */,
 				74D7FCD51AE8F75000653B8F /* UCFHeadrView.m in Sources */,
 				7456D3B21E82278A00207349 /* UCFUserInfoController.m in Sources */,
