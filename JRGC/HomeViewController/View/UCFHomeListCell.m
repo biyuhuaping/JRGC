@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *proImageView3;
 @property (weak, nonatomic) IBOutlet UIView *proSignImageView;
 @property (weak, nonatomic) IBOutlet ZZCircleProgress *circleProgressView;
+@property (weak, nonatomic) IBOutlet UIView *oneImageView;
 
 @end
 
@@ -36,9 +37,13 @@
 - (void)setPresenter:(UCFHomeListCellPresenter *)presenter
 {
     _presenter = presenter;
-    if (presenter.item.type == UCFHomeListCellModelTypeDefault
+    if (presenter.modelType == UCFHomeListCellModelTypeDefault
         ) {
+        self.oneImageView.hidden = YES;
         self.proName.text = presenter.proTitle;
+    }
+    else if (presenter.modelType == UCFHomeListCellModelTypeOneImage) {
+        self.oneImageView.hidden = NO;
     }
     
 }

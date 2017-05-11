@@ -32,6 +32,7 @@
         UCFHomeListGroup *group0 = [[UCFHomeListGroup alloc] init];
         group0.headTitle = @"新手专区";
         group0.showMore = NO;
+        group0.headerImage = @"mine_icon_new";
         _groupPresenter0 = [UCFHomeListGroupPresenter presenterWithGroup:group0];
     }
     return _groupPresenter0;
@@ -43,6 +44,7 @@
         UCFHomeListGroup *group1 = [[UCFHomeListGroup alloc] init];
         group1.headTitle = @"工场尊享";
         group1.showMore = YES;
+        group1.headerImage = @"mine_icon_enjoy";
         _groupPresenter1 = [UCFHomeListGroupPresenter presenterWithGroup:group1];
     }
     return _groupPresenter1;
@@ -54,6 +56,7 @@
         UCFHomeListGroup *group2 = [[UCFHomeListGroup alloc] init];
         group2.headTitle = @"工场微金";
         group2.showMore = YES;
+        group2.headerImage = @"mine_icon_p2p";
         _groupPresenter2 = [UCFHomeListGroupPresenter presenterWithGroup:group2];
     }
     return _groupPresenter2;
@@ -65,6 +68,7 @@
         UCFHomeListGroup *group3 = [[UCFHomeListGroup alloc] init];
         group3.headTitle = @"资金周转";
         group3.showMore = NO;
+        group3.headerImage = @"mine_icon_transfer";
         _groupPresenter3 = [UCFHomeListGroupPresenter presenterWithGroup:group3];
     }
     return _groupPresenter3;
@@ -102,6 +106,21 @@
 #pragma mark - 初始化数据
 - (void)initData
 {
+    UCFHomeListCellModel *model = [[UCFHomeListCellModel alloc] init];
+    model.moedelType = UCFHomeListCellModelTypeOneImage;
+    UCFHomeListCellPresenter *cellPresenter = [UCFHomeListCellPresenter presenterWithItem:model];
+    NSMutableArray *temp2 = [NSMutableArray arrayWithObject:cellPresenter];
+    self.groupPresenter2.group.prdlist = temp2;
+    
+    NSMutableArray *temp3 = [[NSMutableArray alloc] init];
+    for (int i=0; i<3; i++) {
+        UCFHomeListCellModel *model = [[UCFHomeListCellModel alloc] init];
+        model.moedelType = UCFHomeListCellModelTypeOneImage;
+        UCFHomeListCellPresenter *cellPresenter = [UCFHomeListCellPresenter presenterWithItem:model];
+        [temp3 addObject:cellPresenter];
+    }
+    self.groupPresenter3.group.prdlist = temp3;
+    
     [self.homeListCells addObject:self.groupPresenter0];
     [self.homeListCells addObject:self.groupPresenter1];
     [self.homeListCells addObject:self.groupPresenter2];
@@ -118,7 +137,9 @@
                 NSArray *array = group.prdlist;
                 if (array.count > 0) {
                     if ([group.type isEqualToString:@"11"]) {
-                        weakSelf.groupPresenter2.group.prdlist = [weakSelf productPrdListWithDataSource:array];
+                        NSMutableArray *temp = [weakSelf productPrdListWithDataSource:array];
+                        [temp addObject:[weakSelf.groupPresenter2.group.prdlist lastObject]];
+                        weakSelf.groupPresenter2.group.prdlist = temp;
                     }
                     else if ([group.type isEqualToString:@"12"]) {
                         weakSelf.groupPresenter1.group.prdlist = [weakSelf productPrdListWithDataSource:array];
@@ -132,8 +153,8 @@
         else if ([result isKindOfClass:[NSString class]]) {
             
         }
-        if ([self.view respondsToSelector:@selector(homeListViewPresenter:didRefreshDataWithResult:error:)]) {
-            [self.view homeListViewPresenter:self didRefreshDataWithResult:result error:error];
+        if ([weakSelf.view respondsToSelector:@selector(homeListViewPresenter:didRefreshDataWithResult:error:)]) {
+            [self.view homeListViewPresenter:weakSelf didRefreshDataWithResult:result error:error];
         }
         
         !completionHander ?: completionHander(error, result);
@@ -144,7 +165,7 @@
 {
     NSMutableArray *temp = [NSMutableArray new];
     for (UCFHomeListCellModel *model in dataSource) {
-        model.type = UCFHomeListCellModelTypeDefault;
+        model.moedelType = UCFHomeListCellModelTypeDefault;
         UCFHomeListCellPresenter *cellPresenter = [UCFHomeListCellPresenter presenterWithItem:model];
         [temp addObject:cellPresenter];
         

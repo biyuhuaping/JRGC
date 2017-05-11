@@ -13,6 +13,10 @@
 #import "UCFLoginViewController.h"
 #import "UCFSecurityCenterViewController.h"
 #import "UCFMessageCenterViewController.h"
+#import "UCFMyFacBeanViewController.h"
+#import "UCFCouponViewController.h"
+#import "UCFWorkPointsViewController.h"
+#import "UCFWebViewJavascriptBridgeLevel.h"
 
 #import "UCFUserPresenter.h"
 #import "UCFHomeListPresenter.h"
@@ -22,7 +26,7 @@
 #import "MaskView.h"
 #import "MongoliaLayerCenter.h"
 
-@interface UCFHomeViewController () <UCFHomeListViewControllerDelegate, UCFHomeListNavViewDelegate>
+@interface UCFHomeViewController () <UCFHomeListViewControllerDelegate, UCFHomeListNavViewDelegate, UCFUserInformationViewControllerDelegate>
 @property (strong, nonatomic) UCFCycleImageViewController *cycleImageVC;
 @property (strong, nonatomic) UCFUserInformationViewController *userInfoVC;
 @property (strong, nonatomic) UCFHomeListViewController *homeListVC;
@@ -73,6 +77,7 @@
     
     self.cycleImageVC = [UCFCycleImageViewController instanceWithPresenter:userPresenter];
     self.userInfoVC = [UCFUserInformationViewController instanceWithPresenter:userPresenter];
+    self.userInfoVC.delegate = self;
     [self.userInfoVC setPersonInfoVCGenerator:^UIViewController *(id params) {
         UCFSecurityCenterViewController *personMessageVC = [[UCFSecurityCenterViewController alloc] initWithNibName:@"UCFSecurityCenterViewController" bundle:nil];
         personMessageVC.title = @"个人信息";
@@ -82,6 +87,30 @@
         UCFMessageCenterViewController *messagecenterVC = [[UCFMessageCenterViewController alloc]initWithNibName:@"UCFMessageCenterViewController" bundle:nil];
         messagecenterVC.title =@"消息中心";
         return messagecenterVC;
+    }];
+    
+    [self.userInfoVC setBeansVCGenerator:^UIViewController *(id params) {
+        UCFMyFacBeanViewController *bean = [[UCFMyFacBeanViewController alloc] initWithNibName:@"UCFMyFacBeanViewController" bundle:nil];
+        bean.title = @"我的工豆";
+        return bean;
+    }];
+    
+    [self.userInfoVC setCouponVCGenerator:^UIViewController *(id params) {
+        UCFCouponViewController *coupon = [[UCFCouponViewController alloc] initWithNibName:@"UCFCouponViewController" bundle:nil];
+        return coupon;
+    }];
+    
+    [self.userInfoVC setWorkPointInfoVCGenerator:^UIViewController *(id params) {
+        UCFWorkPointsViewController *workPoint = [[UCFWorkPointsViewController alloc]initWithNibName:@"UCFWorkPointsViewController" bundle:nil];
+        workPoint.title = @"我的工分";
+        return workPoint;
+    }];
+    
+    [self.userInfoVC setMyLevelVCGenerator:^UIViewController *(id params) {
+        UCFWebViewJavascriptBridgeLevel *subVC = [[UCFWebViewJavascriptBridgeLevel alloc] initWithNibName:@"UCFWebViewJavascriptBridgeLevel" bundle:nil];
+        subVC.url = LEVELURL;
+        subVC.navTitle = @"会员等级";
+        return subVC;
     }];
     
     UCFHomeListPresenter *listViewPresenter = [UCFHomeListPresenter presenter];
@@ -145,6 +174,15 @@
 - (void)fetchData
 {
     __weak typeof(self) weakSelf = self;
+    
+    [self.userInfoVC.presenter fetchUserInfoOneDataWithCompletionHandler:^(NSError *error, id result) {
+        
+    }];
+    
+    [self.userInfoVC.presenter fetchUserInfoTwoDataWithCompletionHandler:^(NSError *error, id result) {
+        
+    }];
+    
     [self.homeListVC.presenter fetchHomeListDataWithCompletionHandler:^(NSError *error, id result) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];//上层交互逻辑
         if ([result isKindOfClass:[NSDictionary class]]) {
@@ -155,12 +193,12 @@
         }
     }];
     
-    [self.userInfoVC.presenter fetchUserInfoOneDataWithCompletionHandler:^(NSError *error, id result) {
-        
-    }];
     
-    [self.userInfoVC.presenter fetchUserInfoTwoDataWithCompletionHandler:^(NSError *error, id result) {
-        
-    }];
+}
+
+#pragma mark - userInfoVC 的代理方法
+- (void)userInfotableView:(UITableView *)tableView didSelectedItem:(UCFUserInfoListItem *)item
+{
+    
 }
 @end

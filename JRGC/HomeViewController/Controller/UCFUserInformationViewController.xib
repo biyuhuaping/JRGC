@@ -12,8 +12,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UCFUserInformationViewController">
             <connections>
+                <outlet property="addedProfitLabel" destination="V37-AG-WJs" id="Ul2-Li-HYv"/>
+                <outlet property="availableBalance" destination="TZp-1w-jOI" id="27p-6j-NBZ"/>
                 <outlet property="cycleImageBackView" destination="aIU-EY-eXv" id="ijc-vp-vyr"/>
                 <outlet property="tableview" destination="Xdt-ys-drQ" id="HNa-jk-jbC"/>
+                <outlet property="totalMoney" destination="FDu-Ue-Gzc" id="kcw-BL-fLh"/>
+                <outlet property="userIconImageView" destination="CwZ-rf-VUp" id="ybg-jI-SNj"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -35,6 +39,9 @@
                                 <constraint firstAttribute="height" constant="33" id="Seu-zI-s1f"/>
                             </constraints>
                             <state key="normal" image="uesr_icon_checkin"/>
+                            <connections>
+                                <action selector="sign:" destination="-1" eventType="touchUpInside" id="hS8-wS-a5R"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9rZ-ap-g3U" userLabel="Message Button">
                             <rect key="frame" x="331" y="22" width="33" height="33"/>
@@ -208,6 +215,9 @@
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DPL-Qg-QYh">
                                     <rect key="frame" x="0.0" y="0.0" width="94" height="45"/>
+                                    <connections>
+                                        <action selector="beanClicked:" destination="-1" eventType="touchUpInside" id="kUr-I3-eyP"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <constraints>
@@ -240,6 +250,9 @@
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rIn-5W-gqd">
                                     <rect key="frame" x="0.0" y="0.0" width="93.5" height="45"/>
+                                    <connections>
+                                        <action selector="couponClicked:" destination="-1" eventType="touchUpInside" id="QuG-V7-RJ5"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <constraints>
@@ -272,6 +285,9 @@
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BjX-wN-ElY">
                                     <rect key="frame" x="0.0" y="0.0" width="94" height="45"/>
+                                    <connections>
+                                        <action selector="workPointClicked:" destination="-1" eventType="touchUpInside" id="c7R-qm-9Yh"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <constraints>
@@ -304,6 +320,9 @@
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A8W-cH-8Jy">
                                     <rect key="frame" x="0.0" y="0.0" width="93.5" height="45"/>
+                                    <connections>
+                                        <action selector="myLevelClicked:" destination="-1" eventType="touchUpInside" id="IzI-5f-boe"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <constraints>

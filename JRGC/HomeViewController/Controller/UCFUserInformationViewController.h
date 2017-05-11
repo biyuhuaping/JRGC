@@ -8,10 +8,10 @@
 
 #import "UCFBaseViewController.h"
 
-@class UCFUserPresenter, UCFUserInformationViewController;
+@class UCFUserPresenter, UCFUserInformationViewController, UCFUserInfoListItem;
 @protocol UCFUserInformationViewControllerDelegate <NSObject>
 
-- (void)userInfotableView:(UITableView *)tableView didSelectedItem:(NSObject *)obj;
+- (void)userInfotableView:(UITableView *)tableView didSelectedItem:(UCFUserInfoListItem *)item;
 
 @end
 
@@ -28,4 +28,9 @@
 
 - (void)setPersonInfoVCGenerator:(ViewControllerGenerator)personInfoVCGenerator;
 - (void)setMessageVCGenerator:(ViewControllerGenerator)messageVCGenerator;
+
+- (void)setBeansVCGenerator:(ViewControllerGenerator)beansVCGenerator;
+- (void)setCouponVCGenerator:(ViewControllerGenerator)couponVCGenerator;
+- (void)setWorkPointInfoVCGenerator:(ViewControllerGenerator)workPointInfoVCGenerator;
+- (void)setMyLevelVCGenerator:(ViewControllerGenerator)myLevelVCGenerator;
 @end

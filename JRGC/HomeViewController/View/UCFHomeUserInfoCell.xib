@@ -67,6 +67,11 @@
                     <constraint firstAttribute="bottom" secondItem="rfK-ad-RPR" secondAttribute="bottom" constant="-0.5" id="zkf-gu-LW2"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="itemDescribeLabel" destination="jqx-cj-zMw" id="vCc-wI-zSm"/>
+                <outlet property="itemTitleLabel" destination="IrY-TH-Dh6" id="rNS-Oe-gi8"/>
+                <outlet property="itemValueLabel" destination="3VK-d4-tat" id="4SO-G4-49f"/>
+            </connections>
             <point key="canvasLocation" x="20" y="10"/>
         </tableViewCell>
     </objects>
