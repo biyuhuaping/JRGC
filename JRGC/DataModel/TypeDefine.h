@@ -234,7 +234,7 @@
 #define USERPRODUTLIST        @"api/prdClaims/v2/productList.json" //产品列表
 #define MYSIMLEINFOURL      @"api/prdClaims/v2/mySimpleInfo.json"  //首页-查询用户工豆,工分,等信息
 #define MYRECEIPTURL        @"api/prdClaims/v2/myReceipt.json"     //首页-用户余额,累计收益,总资产
-#define USERINFOADJUSTMENT              @"api/userInfo/v2/adjustment" //公告确认
+#define USERINFOADJUSTMENT              @"api/userInfo/v2/adjustment.json" //公告确认
 
 
 enum kPostStatus{
