@@ -10,6 +10,7 @@
 #import "NZLabel.h"
 #import "UCFToolsMehod.h"
 #import "AppDelegate.h"
+#import "MongoliaLayerCenter.h"
 #import "BaseNavigationViewController.h"
 @interface UCFRegisterFinshViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *openButton;
@@ -182,6 +183,10 @@
     NSDictionary *dictAttr1 = @{NSFontAttributeName:font,NSForegroundColorAttributeName:color};
     NSAttributedString *attr1 = [[NSAttributedString alloc]initWithString:str1 attributes:dictAttr1];
     return attr1;
+}
+- (void)dealloc
+{
+    [[MongoliaLayerCenter sharedManager] showLogic];
 }
 
 /*

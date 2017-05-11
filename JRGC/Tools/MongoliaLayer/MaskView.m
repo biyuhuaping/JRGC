@@ -48,7 +48,10 @@
         _imageView2.hidden = YES;
         _imageView3.hidden = NO;
     } else if (num > 3) {
-        [self removeView];
+        //        self.finished();
+        if ([self.delegate respondsToSelector:@selector(viewWillRemove:)]) {
+            [self.delegate viewWillRemove:self];
+        }
     }
 }
 - (void)initImageView
@@ -73,7 +76,7 @@
     _imageView2.image = [UIImage imageNamed:@"zhezhao2"];
     _imageView2.hidden = YES;
     [self addSubview:self.imageView2];
-//
+    //
     self.imageView3 = [[UIImageView alloc] initWithFrame:CGRectMake(0, ScreenHeight - (ScreenWidth * 435.0f)/960.0f, ScreenWidth, (ScreenWidth * 435.0f)/960.0f)];
     _imageView3.backgroundColor = [UIColor clearColor];
     _imageView3.hidden = YES;
@@ -94,10 +97,10 @@
 -(void)removeView{
     [self removeFromSuperview];
 }
-//通过回调取消蒙层
--(void)block:(void(^)())block{
-    [self removeFromSuperview];
-    block();
+
+- (void)setCallBack:(MaskViewFinished)call
+{
+    self.finished = call;
 }
 
 @end
