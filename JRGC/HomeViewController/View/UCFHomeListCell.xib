@@ -94,7 +94,6 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jPS-Om-fiC">
                                 <rect key="frame" x="0.0" y="0.0" width="55" height="55"/>
-                                <state key="normal" title="Button"/>
                                 <connections>
                                     <action selector="cyclePressClicked:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="x1N-Jt-kFC"/>
                                 </connections>
