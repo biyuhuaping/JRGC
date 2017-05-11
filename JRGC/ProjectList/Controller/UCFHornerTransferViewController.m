@@ -230,7 +230,7 @@
             UCFPurchaseTranBidViewController *purchaseViewController = [[UCFPurchaseTranBidViewController alloc] initWithNibName:@"UCFPurchaseTranBidViewController" bundle:nil];
             purchaseViewController.dataDict = dic;
             purchaseViewController.baseTitleType = @"detail_heTong";
-            purchaseViewController.accoutType = self.accoutType;
+            purchaseViewController.accoutType = SelectAccoutTypeHoner;
             [self.navigationController pushViewController:purchaseViewController animated:YES];
         } else if ([dic[@"status"] integerValue] == 3 || [dic[@"status"] integerValue] == 4) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:dic[@"statusdes"] delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];

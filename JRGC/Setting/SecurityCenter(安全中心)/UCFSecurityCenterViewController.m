@@ -84,11 +84,11 @@
    
         UCFSettingItem *idauth = [UCFSettingArrowItem itemWithIcon:@"safecenter_icon_id" title:@"身份认证" destVcClass:[UCFModifyIdAuthViewController class]];
         UCFSettingItem *bundlePhoneNum = [UCFSettingArrowItem itemWithIcon:@"login_icon_phone" title:@"绑定手机号" destVcClass:[BindPhoneNumViewController class]];
-        UCFSettingItem *facCode = [UCFSettingArrowItem itemWithIcon:@"工场码" title:@"工场码" destVcClass:[UCFFacCodeViewController class]];
+        UCFSettingItem *facCode = [UCFSettingArrowItem itemWithIcon:@"safecenter_icon_code" title:@"工场码" destVcClass:[UCFFacCodeViewController class]];
        
         self.userLevel = [UCFSettingArrowItem itemWithIcon:@"safecenter_icon_vip" title:@"会员等级" destVcClass:[UCFWebViewJavascriptBridgeLevel class]];//***qyy
         self.userLevel.isShowOrHide = YES;//不显示
-        UCFSettingItem *moreVc = [UCFSettingArrowItem itemWithIcon:@"login_icon_phone" title:@"更多" destVcClass:[UCFMoreViewController class]];
+        UCFSettingItem *moreVc = [UCFSettingArrowItem itemWithIcon:@"safecenter_icon_more" title:@"更多" destVcClass:[UCFMoreViewController class]];
         //先前是绑卡页面，因为删除绑卡页面，所以暂时用TradePasswordVC这个类替代，整体调试的时候改过来，zrc fixed
 //        UCFSettingItem *bundleCard = [UCFSettingArrowItem itemWithIcon:@"safecenter_icon_bankcard" title:@"绑定银行卡" destVcClass:[UCFBankCardInfoViewController class]];//***qyy
         
