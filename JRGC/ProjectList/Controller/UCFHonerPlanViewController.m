@@ -55,9 +55,7 @@
 
     baseTitleLabel.text = @"工场尊享";
     [self addLeftButton];
-    [self.view bringSubviewToFront:self.loadingView];
-    [self performSelector:@selector(removeLoadingView) withObject:nil afterDelay:3];
-
+   
     
     self.tableview.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableview.backgroundColor = UIColorWithRGB(0xebebee);
@@ -79,6 +77,9 @@
 //    [self.tableview.header beginRefreshing];
 //    self.tableview.footer.hidden = YES;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadHonerPlanData) name:@"reloadHonerPlanData" object:nil];
+    [self.view bringSubviewToFront:self.loadingView];
+    [self performSelector:@selector(removeLoadingView) withObject:nil afterDelay:LoadingSecond];
+
 }
 -(void)removeLoadingView
 {

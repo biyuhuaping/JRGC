@@ -31,7 +31,7 @@
 @property (strong, nonatomic) UCFNoDataView *noDataView;
 
 @property (nonatomic, assign) NSInteger currentPage;
-
+@property (strong, nonatomic) IBOutlet UIView *loadingView;
 @end
 
 @implementation UCFOrdinaryBidController
@@ -63,8 +63,18 @@
     
     // 添加传统的下拉刷新
     [self.tableview addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(getNetDataFromNet)];
-    [self.tableview.header beginRefreshing];
+//    [self.tableview.header beginRefreshing];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadP2PData) name:@"reloadP2PData" object:nil];
+    [self.view bringSubviewToFront:_loadingView];
+    [self performSelector:@selector(removeLoadingView) withObject:nil afterDelay:LoadingSecond];
+}
+-(void)removeLoadingView
+{
+    for (UIView *view in self.loadingView.subviews) {
+        [view removeFromSuperview];
+    }
+    [self.loadingView removeFromSuperview];
+    [self.tableview.header beginRefreshing];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

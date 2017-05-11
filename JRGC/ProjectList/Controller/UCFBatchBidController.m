@@ -25,6 +25,7 @@
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (strong, nonatomic) UCFNoDataView *noDataView;
 @property (nonatomic, assign) NSInteger currentPage;
+@property (strong, nonatomic) IBOutlet UIView *loadingView;
 @end
 
 @implementation UCFBatchBidController
@@ -47,14 +48,18 @@
     [self addNoDataView];
     // add refreshing and load more
     [self addRefreshingAndLoadMore];
-
-    [self.tableview.header beginRefreshing];
-    
-
+//    [self.tableview.header beginRefreshing];
+    [self.view bringSubviewToFront:_loadingView];
+    [self performSelector:@selector(removeLoadingView) withObject:nil afterDelay:LoadingSecond];
 }
-
-
-
+-(void)removeLoadingView
+{
+    for (UIView *view in self.loadingView.subviews) {
+        [view removeFromSuperview];
+    }
+    [self.loadingView removeFromSuperview];
+    [self.tableview.header beginRefreshing];
+}
 #pragma mark - setting tableview
 - (void)settingTableViewStyle
 {

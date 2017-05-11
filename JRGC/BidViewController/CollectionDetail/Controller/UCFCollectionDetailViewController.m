@@ -92,6 +92,7 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
     }else {
          [self.navigationController setNavigationBarHidden:YES animated:NO];
     }
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 }
 
 - (void)viewDidLoad {

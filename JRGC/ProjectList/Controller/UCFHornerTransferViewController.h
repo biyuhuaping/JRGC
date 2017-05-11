@@ -7,7 +7,7 @@
 //
 
 #import "UCFBaseViewController.h"
-
+#import "UCFLoadingView.h"
 @interface UCFHornerTransferViewController : UCFBaseViewController
 
 @end

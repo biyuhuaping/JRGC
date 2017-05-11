@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UCFHornerTransferViewController">
             <connections>
+                <outlet property="loadingView" destination="HOy-KB-gDH" id="YWw-j3-L0G"/>
                 <outlet property="tableview" destination="Myg-hN-Q3i" id="HAu-il-KDl"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -20,6 +21,39 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HOy-KB-gDH">
+                    <rect key="frame" x="0.0" y="-64" width="375" height="731"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="transform" translatesAutoresizingMaskIntoConstraints="NO" id="Iad-6z-HOZ">
+                            <rect key="frame" x="122.5" y="280.5" width="130" height="170"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="170" id="SqF-yY-9rZ"/>
+                                <constraint firstAttribute="width" constant="130" id="UsU-lL-bc4"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="可直接访问www.gongchangzx.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UN3-8Z-K2Q">
+                            <rect key="frame" x="75" y="488.5" width="225.5" height="17"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" red="0.52156862749999999" green="0.56862745100000001" blue="0.70196078429999997" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="即将跳转工场尊享" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D8k-5c-MbV">
+                            <rect key="frame" x="114" y="462.5" width="147" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                            <color key="textColor" red="0.52156862749999999" green="0.56862745100000001" blue="0.70196078429999997" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="0.92156862750000001" green="0.92156862750000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="Iad-6z-HOZ" firstAttribute="centerX" secondItem="HOy-KB-gDH" secondAttribute="centerX" id="3k9-8j-Qhz"/>
+                        <constraint firstItem="D8k-5c-MbV" firstAttribute="centerX" secondItem="HOy-KB-gDH" secondAttribute="centerX" id="4Ns-Jw-doC"/>
+                        <constraint firstItem="Iad-6z-HOZ" firstAttribute="centerY" secondItem="HOy-KB-gDH" secondAttribute="centerY" id="Qzp-Wz-I2r"/>
+                        <constraint firstItem="UN3-8Z-K2Q" firstAttribute="top" secondItem="D8k-5c-MbV" secondAttribute="bottom" constant="5" id="syM-Xx-IZO"/>
+                        <constraint firstItem="UN3-8Z-K2Q" firstAttribute="centerX" secondItem="HOy-KB-gDH" secondAttribute="centerX" id="uNi-bS-pNy"/>
+                        <constraint firstItem="D8k-5c-MbV" firstAttribute="top" secondItem="Iad-6z-HOZ" secondAttribute="bottom" constant="12" id="xj6-C2-qD5"/>
+                    </constraints>
+                </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Myg-hN-Q3i">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -32,10 +66,17 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="Myg-hN-Q3i" secondAttribute="bottom" id="0Zf-GO-j7p"/>
+                <constraint firstItem="HOy-KB-gDH" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="-64" id="3vI-rz-FvE"/>
                 <constraint firstAttribute="trailing" secondItem="Myg-hN-Q3i" secondAttribute="trailing" id="E43-lg-Nvj"/>
                 <constraint firstItem="Myg-hN-Q3i" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="QRT-K4-wFn"/>
+                <constraint firstAttribute="bottom" secondItem="HOy-KB-gDH" secondAttribute="bottom" id="RQW-4T-qyE"/>
+                <constraint firstAttribute="trailing" secondItem="HOy-KB-gDH" secondAttribute="trailing" id="TwA-1q-nlv"/>
+                <constraint firstItem="HOy-KB-gDH" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="eLF-eB-Uup"/>
                 <constraint firstItem="Myg-hN-Q3i" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="iEA-Eh-gOQ"/>
             </constraints>
         </view>
     </objects>
+    <resources>
+        <image name="transform" width="130" height="170"/>
+    </resources>
 </document>
