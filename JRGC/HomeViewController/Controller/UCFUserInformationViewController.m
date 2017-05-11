@@ -27,9 +27,15 @@
 @property (strong, nonatomic) UCFUserPresenter *presenter;
 
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
+@property (weak, nonatomic) SDCycleScrollView *cycleImageView;
+
 @property (copy, nonatomic) ViewControllerGenerator personInfoVCGenerator;
 @property (copy, nonatomic) ViewControllerGenerator messageVCGenerator;
-@property (weak, nonatomic) SDCycleScrollView *cycleImageView;
+@property (copy, nonatomic) ViewControllerGenerator beansVCGenerator;
+@property (copy, nonatomic) ViewControllerGenerator couponVCGenerator;
+@property (copy, nonatomic) ViewControllerGenerator workPointInfoVCGenerator;
+@property (copy, nonatomic) ViewControllerGenerator myLevelVCGenerator;
+
 @property (weak, nonatomic) IBOutlet UIView *cycleImageBackView;
 
 - (IBAction)visible:(UIButton *)sender;
@@ -43,6 +49,47 @@
 @end
 
 @implementation UCFUserInformationViewController
+
+#pragma mark - button点击方法
+- (IBAction)beanClicked:(UIButton *)sender {
+    if (self.beansVCGenerator) {
+        
+        UIViewController *targetVC = self.beansVCGenerator(nil);
+        if (targetVC) {
+            [self.parentViewController.navigationController pushViewController:targetVC animated:YES];
+        }
+    }
+}
+
+- (IBAction)couponClicked:(UIButton *)sender {
+    if (self.couponVCGenerator) {
+        
+        UIViewController *targetVC = self.couponVCGenerator(nil);
+        if (targetVC) {
+            [self.parentViewController.navigationController pushViewController:targetVC animated:YES];
+        }
+    }
+}
+
+- (IBAction)workPointClicked:(UIButton *)sender {
+    if (self.workPointInfoVCGenerator) {
+        
+        UIViewController *targetVC = self.workPointInfoVCGenerator(nil);
+        if (targetVC) {
+            [self.parentViewController.navigationController pushViewController:targetVC animated:YES];
+        }
+    }
+}
+
+- (IBAction)myLevelClicked:(UIButton *)sender {
+    if (self.myLevelVCGenerator) {
+        
+        UIViewController *targetVC = self.myLevelVCGenerator(nil);
+        if (targetVC) {
+            [self.parentViewController.navigationController pushViewController:targetVC animated:YES];
+        }
+    }
+}
 
 #pragma mark - 系统方法
 - (void)viewDidLoad {

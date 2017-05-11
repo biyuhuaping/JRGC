@@ -106,6 +106,21 @@
 #pragma mark - 初始化数据
 - (void)initData
 {
+    UCFHomeListCellModel *model = [[UCFHomeListCellModel alloc] init];
+    model.moedelType = UCFHomeListCellModelTypeOneImage;
+    UCFHomeListCellPresenter *cellPresenter = [UCFHomeListCellPresenter presenterWithItem:model];
+    NSMutableArray *temp2 = [NSMutableArray arrayWithObject:cellPresenter];
+    self.groupPresenter2.group.prdlist = temp2;
+    
+    NSMutableArray *temp3 = [[NSMutableArray alloc] init];
+    for (int i=0; i<3; i++) {
+        UCFHomeListCellModel *model = [[UCFHomeListCellModel alloc] init];
+        model.moedelType = UCFHomeListCellModelTypeOneImage;
+        UCFHomeListCellPresenter *cellPresenter = [UCFHomeListCellPresenter presenterWithItem:model];
+        [temp3 addObject:cellPresenter];
+    }
+    self.groupPresenter3.group.prdlist = temp3;
+    
     [self.homeListCells addObject:self.groupPresenter0];
     [self.homeListCells addObject:self.groupPresenter1];
     [self.homeListCells addObject:self.groupPresenter2];
@@ -122,7 +137,9 @@
                 NSArray *array = group.prdlist;
                 if (array.count > 0) {
                     if ([group.type isEqualToString:@"11"]) {
-                        weakSelf.groupPresenter2.group.prdlist = [weakSelf productPrdListWithDataSource:array];
+                        NSMutableArray *temp = [weakSelf productPrdListWithDataSource:array];
+                        [temp addObject:[weakSelf.groupPresenter2.group.prdlist lastObject]];
+                        weakSelf.groupPresenter2.group.prdlist = temp;
                     }
                     else if ([group.type isEqualToString:@"12"]) {
                         weakSelf.groupPresenter1.group.prdlist = [weakSelf productPrdListWithDataSource:array];
@@ -148,7 +165,7 @@
 {
     NSMutableArray *temp = [NSMutableArray new];
     for (UCFHomeListCellModel *model in dataSource) {
-        model.type = UCFHomeListCellModelTypeDefault;
+        model.moedelType = UCFHomeListCellModelTypeDefault;
         UCFHomeListCellPresenter *cellPresenter = [UCFHomeListCellPresenter presenterWithItem:model];
         [temp addObject:cellPresenter];
         

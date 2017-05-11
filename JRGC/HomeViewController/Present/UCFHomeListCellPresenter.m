@@ -7,7 +7,8 @@
 //
 
 #import "UCFHomeListCellPresenter.h"
-#import "UCFHomeListCellModel.h"
+
+#define CELLRATE (600/180)
 
 @interface UCFHomeListCellPresenter ()
 @property (strong, nonatomic) UCFHomeListCellModel *item;
@@ -23,5 +24,21 @@
 - (NSString *)proTitle
 {
     return self.item.prdName;
+}
+
+- (UCFHomeListCellModelType)modelType
+{
+    return self.item.moedelType ? self.item.moedelType : UCFHomeListCellModelTypeDefault;
+}
+
+- (CGFloat)cellHeight
+{
+    if (self.item.moedelType == UCFHomeListCellModelTypeDefault) {
+        return 100.0;
+    }
+    else if (self.item.moedelType == UCFHomeListCellModelTypeOneImage) {
+        return (ScreenWidth - 20) / CELLRATE + 20;
+    }
+    return 0;
 }
 @end

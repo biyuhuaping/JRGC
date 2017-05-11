@@ -7,12 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "UCFHomeListCellModel.h"
 
-@class UCFHomeListCellModel;
 @interface UCFHomeListCellPresenter : NSObject
 + (instancetype)presenterWithItem:(UCFHomeListCellModel *)item;
 
 - (UCFHomeListCellModel *)item;
 
 - (NSString *)proTitle;
+- (UCFHomeListCellModelType)modelType;
+
+- (CGFloat)cellHeight;
 @end
