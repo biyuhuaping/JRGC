@@ -15,6 +15,6 @@
 
 - (NSString *)headerTitle;
 - (NSString *)footerTitle;
-- (NSString *)headerImage;
+- (UIImage *)headerImage;
 - (BOOL)showMore;
 @end

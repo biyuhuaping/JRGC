@@ -29,8 +29,8 @@
     return self.group.footerTitle.length > 0 ? self.group.footerTitle : @"";
 }
 
-- (NSString *)headerImage {
-    return self.group.headerImage.length > 0 ? self.group.headerImage : @"";
+- (UIImage *)headerImage {
+    return [UIImage imageNamed:self.group.headerImage];
 }
 
 - (BOOL)showMore {

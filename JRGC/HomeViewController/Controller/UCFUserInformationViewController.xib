@@ -12,8 +12,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UCFUserInformationViewController">
             <connections>
+                <outlet property="addedProfitLabel" destination="V37-AG-WJs" id="Ul2-Li-HYv"/>
+                <outlet property="availableBalance" destination="TZp-1w-jOI" id="27p-6j-NBZ"/>
                 <outlet property="cycleImageBackView" destination="aIU-EY-eXv" id="ijc-vp-vyr"/>
                 <outlet property="tableview" destination="Xdt-ys-drQ" id="HNa-jk-jbC"/>
+                <outlet property="totalMoney" destination="FDu-Ue-Gzc" id="kcw-BL-fLh"/>
+                <outlet property="userIconImageView" destination="CwZ-rf-VUp" id="ybg-jI-SNj"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -35,6 +39,9 @@
                                 <constraint firstAttribute="height" constant="33" id="Seu-zI-s1f"/>
                             </constraints>
                             <state key="normal" image="uesr_icon_checkin"/>
+                            <connections>
+                                <action selector="sign:" destination="-1" eventType="touchUpInside" id="hS8-wS-a5R"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9rZ-ap-g3U" userLabel="Message Button">
                             <rect key="frame" x="331" y="22" width="33" height="33"/>

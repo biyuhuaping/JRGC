@@ -32,6 +32,7 @@
         UCFHomeListGroup *group0 = [[UCFHomeListGroup alloc] init];
         group0.headTitle = @"新手专区";
         group0.showMore = NO;
+        group0.headerImage = @"mine_icon_new";
         _groupPresenter0 = [UCFHomeListGroupPresenter presenterWithGroup:group0];
     }
     return _groupPresenter0;
@@ -43,6 +44,7 @@
         UCFHomeListGroup *group1 = [[UCFHomeListGroup alloc] init];
         group1.headTitle = @"工场尊享";
         group1.showMore = YES;
+        group1.headerImage = @"mine_icon_enjoy";
         _groupPresenter1 = [UCFHomeListGroupPresenter presenterWithGroup:group1];
     }
     return _groupPresenter1;
@@ -54,6 +56,7 @@
         UCFHomeListGroup *group2 = [[UCFHomeListGroup alloc] init];
         group2.headTitle = @"工场微金";
         group2.showMore = YES;
+        group2.headerImage = @"mine_icon_p2p";
         _groupPresenter2 = [UCFHomeListGroupPresenter presenterWithGroup:group2];
     }
     return _groupPresenter2;
@@ -65,6 +68,7 @@
         UCFHomeListGroup *group3 = [[UCFHomeListGroup alloc] init];
         group3.headTitle = @"资金周转";
         group3.showMore = NO;
+        group3.headerImage = @"mine_icon_transfer";
         _groupPresenter3 = [UCFHomeListGroupPresenter presenterWithGroup:group3];
     }
     return _groupPresenter3;
@@ -132,8 +136,8 @@
         else if ([result isKindOfClass:[NSString class]]) {
             
         }
-        if ([self.view respondsToSelector:@selector(homeListViewPresenter:didRefreshDataWithResult:error:)]) {
-            [self.view homeListViewPresenter:self didRefreshDataWithResult:result error:error];
+        if ([weakSelf.view respondsToSelector:@selector(homeListViewPresenter:didRefreshDataWithResult:error:)]) {
+            [self.view homeListViewPresenter:weakSelf didRefreshDataWithResult:result error:error];
         }
         
         !completionHander ?: completionHander(error, result);

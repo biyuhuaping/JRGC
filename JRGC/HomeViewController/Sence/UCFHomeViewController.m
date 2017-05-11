@@ -22,7 +22,7 @@
 #import "MaskView.h"
 #import "MongoliaLayerCenter.h"
 
-@interface UCFHomeViewController () <UCFHomeListViewControllerDelegate, UCFHomeListNavViewDelegate>
+@interface UCFHomeViewController () <UCFHomeListViewControllerDelegate, UCFHomeListNavViewDelegate, UCFUserInformationViewControllerDelegate>
 @property (strong, nonatomic) UCFCycleImageViewController *cycleImageVC;
 @property (strong, nonatomic) UCFUserInformationViewController *userInfoVC;
 @property (strong, nonatomic) UCFHomeListViewController *homeListVC;
@@ -73,6 +73,7 @@
     
     self.cycleImageVC = [UCFCycleImageViewController instanceWithPresenter:userPresenter];
     self.userInfoVC = [UCFUserInformationViewController instanceWithPresenter:userPresenter];
+    self.userInfoVC.delegate = self;
     [self.userInfoVC setPersonInfoVCGenerator:^UIViewController *(id params) {
         UCFSecurityCenterViewController *personMessageVC = [[UCFSecurityCenterViewController alloc] initWithNibName:@"UCFSecurityCenterViewController" bundle:nil];
         personMessageVC.title = @"个人信息";
@@ -162,5 +163,11 @@
     [self.userInfoVC.presenter fetchUserInfoTwoDataWithCompletionHandler:^(NSError *error, id result) {
         
     }];
+}
+
+#pragma mark - userInfoVC 的代理方法
+- (void)userInfotableView:(UITableView *)tableView didSelectedItem:(UCFUserInfoListItem *)item
+{
+    
 }
 @end
