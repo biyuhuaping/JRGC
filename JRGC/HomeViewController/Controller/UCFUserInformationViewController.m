@@ -22,6 +22,8 @@
 @property (copy, nonatomic) ViewControllerGenerator messageVCGenerator;
 @property (weak, nonatomic) SDCycleScrollView *cycleImageView;
 @property (weak, nonatomic) IBOutlet UIView *cycleImageBackView;
+- (IBAction)visible:(UIButton *)sender;
+
 
 @end
 
@@ -109,7 +111,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
     if ([self.delegate respondsToSelector:@selector(userInfotableView:didSelectedItem:)]) {
         [self.delegate userInfotableView:self.tableview didSelectedItem:nil];
     }
@@ -122,4 +123,7 @@
     NSLog(@"---点击了第%ld张图片", (long)index);
 }
 
+- (IBAction)visible:(UIButton *)sender {
+    sender.selected = !sender.selected;
+}
 @end

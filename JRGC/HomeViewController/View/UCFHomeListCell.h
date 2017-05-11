@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "UCFHomeListCellPresenter.h"
+#import "UCFHomeListCellModel.h"
 
 @interface UCFHomeListCell : UITableViewCell
 @property (strong, nonatomic) UCFHomeListCellPresenter *presenter;

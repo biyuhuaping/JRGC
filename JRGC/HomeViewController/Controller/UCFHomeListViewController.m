@@ -15,7 +15,7 @@
 #import "UCFHomeListCell.h"
 #import "UCFHomeListHeaderSectionView.h"
 
-@interface UCFHomeListViewController () <UITableViewDelegate, UITableViewDataSource, HomeListViewPresenterCallBack>
+@interface UCFHomeListViewController () <UITableViewDelegate, UITableViewDataSource, HomeListViewPresenterCallBack, UCFHomeListHeaderSectionViewDelegate>
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) UCFHomeListPresenter *presenter;
 @end
@@ -86,6 +86,7 @@
     if (nil == view) {
         view = (UCFHomeListHeaderSectionView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeListHeaderSectionView" owner:self options:nil] lastObject];
     }
+    view.delegate = self;
     view.frame = CGRectMake(0, 0, ScreenWidth, 30);
     UCFHomeListGroupPresenter *groupPresenter = [self.presenter.allDatas objectAtIndex:section];
     UCFHomeListGroup *group = groupPresenter.group;
@@ -158,6 +159,12 @@
     } else if (self.presenter.allDatas.count == 0) {
         //        show error view
     }
+}
+
+#pragma mark - UCFHomeListHeaderSectionView的代理方法
+- (void)homeListHeader:(UCFHomeListHeaderSectionView *)homeListHeader didClickedMoreWithType:(NSString *)type
+{
+    
 }
 
 #pragma mark - 刷新数据

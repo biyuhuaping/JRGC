@@ -109,7 +109,7 @@
 }
 
 - (void)fetchHomeListDataWithCompletionHandler:(NetworkCompletionHandler)completionHander {
-    
+    __weak typeof(self) weakSelf = self;
     [self.apiManager fetchHomeListWithUserId:self.userId completionHandler:^(NSError *error, id result) {
         if ([result isKindOfClass:[NSDictionary class]]) {
             NSDictionary *resultDict = result;
@@ -118,13 +118,13 @@
                 NSArray *array = group.prdlist;
                 if (array.count > 0) {
                     if ([group.type isEqualToString:@"11"]) {
-                        self.groupPresenter2.group.prdlist = [self productPrdListWithDataSource:array];
+                        weakSelf.groupPresenter2.group.prdlist = [weakSelf productPrdListWithDataSource:array];
                     }
                     else if ([group.type isEqualToString:@"12"]) {
-                        self.groupPresenter1.group.prdlist = [self productPrdListWithDataSource:array];
+                        weakSelf.groupPresenter1.group.prdlist = [weakSelf productPrdListWithDataSource:array];
                     }
                     else if ([group.type isEqualToString:@"13"]) {
-                        self.groupPresenter0.group.prdlist = [self productPrdListWithDataSource:array];
+                        weakSelf.groupPresenter0.group.prdlist = [weakSelf productPrdListWithDataSource:array];
                     }
                 }
             }
@@ -144,6 +144,7 @@
 {
     NSMutableArray *temp = [NSMutableArray new];
     for (UCFHomeListCellModel *model in dataSource) {
+        model.type = UCFHomeListCellModelTypeDefault;
         UCFHomeListCellPresenter *cellPresenter = [UCFHomeListCellPresenter presenterWithItem:model];
         [temp addObject:cellPresenter];
         

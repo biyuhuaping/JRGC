@@ -16,4 +16,6 @@
 + (CGFloat)viewHeight;
 #pragma mark - 返回当前controller的presenter
 - (UCFUserPresenter *)presenter;
+#pragma mark - 获取正式环境的banner图
+- (void)getNormalBannerData;
 @end

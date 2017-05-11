@@ -9,7 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "UCFHomeListGroupPresenter.h"
 
+@class UCFHomeListHeaderSectionView;
+@protocol UCFHomeListHeaderSectionViewDelegate <NSObject>
+
+- (void)homeListHeader:(UCFHomeListHeaderSectionView *)homeListHeader didClickedMoreWithType:(NSString *)type;
+
+@end
+
 @interface UCFHomeListHeaderSectionView : UITableViewHeaderFooterView
 @property (strong, nonatomic) UCFHomeListGroupPresenter *presenter;
-
+@property (weak, nonatomic) id<UCFHomeListHeaderSectionViewDelegate> delegate;
 @end
