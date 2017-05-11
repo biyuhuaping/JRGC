@@ -301,6 +301,7 @@
             //topUpView.isGoBackShowNavBar = YES;
             topUpView.title = @"充值";
             topUpView.uperViewController = self;
+            topUpView.accoutType = self.accoutType;
             [self.navigationController pushViewController:topUpView animated:YES];
         }
         if (alertView.tag == 4000) {
