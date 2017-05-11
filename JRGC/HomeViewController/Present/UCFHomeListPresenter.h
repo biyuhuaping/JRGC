@@ -27,4 +27,6 @@
 - (BOOL)authorization;
 
 - (void)fetchHomeListDataWithCompletionHandler:(NetworkCompletionHandler)completionHander;
+
+- (void)resetData;
 @end

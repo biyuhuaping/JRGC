@@ -172,4 +172,14 @@
     }
     return temp;
 }
+
+#pragma mark - 重制数据
+- (void)resetData {
+    [self.homeListCells removeAllObjects];
+    self.groupPresenter0 = nil;
+    self.groupPresenter1 = nil;
+    self.groupPresenter2 = nil;
+    self.groupPresenter3 = nil;
+    [self initData];
+}
 @end
