@@ -20,6 +20,7 @@
 
 #import "UCFUserPresenter.h"
 #import "UCFHomeListPresenter.h"
+#import "UCFHomeListCellPresenter.h"
 #import "UserInfoSingle.h"
 
 #import "UCFHomeListNavView.h"
@@ -153,6 +154,32 @@
 - (void)homeListRefreshDataWithHomelist:(UCFHomeListViewController *)homelist
 {
     [self fetchData];
+}
+
+- (void)homeList:(UCFHomeListViewController *)homeList tableView:(UITableView *)tableView didClickedWithModel:(UCFHomeListCellModel *)model withType:(UCFHomeListType)type
+{
+    if (type == UCFHomeListTypeDetail) {
+        if (model.moedelType == UCFHomeListCellModelTypeDefault) {
+            
+        }
+        else if (model.moedelType == UCFHomeListCellModelTypeOneImage) {
+            
+        }
+    }
+    else if (type == UCFHomeListTypeInvest) {
+        if (model.moedelType == UCFHomeListCellModelTypeDefault) {
+            
+        }
+        else if (model.moedelType == UCFHomeListCellModelTypeOneImage) {
+            
+        }
+    }
+    else if (type == UCFHomeListTypeP2PMore) {
+        
+    }
+    else if (type == UCFHomeListTypeZXMore) {
+        
+    }
 }
 
 #pragma mark - UCFHomeListNavViewDelegate

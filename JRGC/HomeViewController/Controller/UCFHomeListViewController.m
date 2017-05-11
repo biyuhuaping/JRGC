@@ -154,7 +154,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
+    UCFHomeListGroupPresenter *groupPresenter = [self.presenter.allDatas objectAtIndex:indexPath.section];
+    UCFHomeListCellPresenter *presenter = [groupPresenter.group.prdlist objectAtIndex:indexPath.row];
+    if ([self.delegate respondsToSelector:@selector(homeList:tableView:didClickedWithModel:withType:)]) {
+        [self.delegate homeList:self tableView:self.tableView didClickedWithModel:presenter.item withType:UCFHomeListTypeDetail];
+    }
 }
 
 #pragma mark - presenter的代理方法
@@ -173,13 +177,22 @@
 #pragma mark - cell的代理方法
 - (void)homelistCell:(UCFHomeListCell *)homelistCell didClickedProgressViewWithPresenter:(UCFHomeListCellModel *)model
 {
-    
+    if ([self.delegate respondsToSelector:@selector(homeList:tableView:didClickedWithModel:withType:)]) {
+        [self.delegate homeList:self tableView:self.tableView didClickedWithModel:model withType:UCFHomeListTypeInvest];
+    }
 }
 
 #pragma mark - UCFHomeListHeaderSectionView的代理方法
 - (void)homeListHeader:(UCFHomeListHeaderSectionView *)homeListHeader didClickedMoreWithType:(NSString *)type
 {
-    
+    if ([self.delegate respondsToSelector:@selector(homeList:tableView:didClickedWithModel:withType:)]) {
+        if ([type isEqualToString:@"11"]) {
+            [self.delegate homeList:self tableView:self.tableView didClickedWithModel:nil withType:UCFHomeListTypeP2PMore];
+        }
+        else if ([type isEqualToString:@"12"]) {
+            [self.delegate homeList:self tableView:self.tableView didClickedWithModel:nil withType:UCFHomeListTypeZXMore];
+        }
+    }
 }
 
 #pragma mark - 刷新数据
