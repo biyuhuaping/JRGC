@@ -10,7 +10,7 @@
 #import "NSDate+IsBelongToToday.h"
 #import "MaskView.h"
 #import "JSONKit.h"
-@interface MongoliaLayerCenter ()
+@interface MongoliaLayerCenter ()<MaskViewDelegate>
 {
     NSInteger num;
 }
@@ -56,6 +56,7 @@
     if (![[NSUserDefaults standardUserDefaults] boolForKey:CHECK_ISSHOW_MASKVIEW]) {
         //发送弹蒙层通知
         MaskView *view = [MaskView makeViewWithMask:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
+        view.delegate = self;
         [view show];
         return;
     }
@@ -67,21 +68,27 @@
         [alertView show];
         return;
     }
-        //是否弹平风险评估
-//        if ([[self.mongoliaLayerDic valueForKey:@"风险评估"] boolValue]) {
-//            return;
-//        }
+    //是否弹平风险评估
+    //        if ([[self.mongoliaLayerDic valueForKey:@"风险评估"] boolValue]) {
+    //            return;
+    //        }
     
-        //是否弹红包雨
-//        if ([[self.mongoliaLayerDic valueForKey:@"红包雨"] boolValue]) {
-//            return;
-//        }
+    //是否弹红包雨
+    //        if ([[self.mongoliaLayerDic valueForKey:@"红包雨"] boolValue]) {
+    //            return;
+    //        }
     
-  
+    
 }
+- (void)viewWillRemove:(MaskView *)view
+{
+    [view removeFromSuperview];
+    [self showLogic];
+}
+
 - (void)mjalertView:(MjAlertView *)alertview didClickedButton:(UIButton *)clickedButton andClickedIndex:(NSInteger)index
 {
-    if (alertview.tag == 1000) {
+    if (alertview.tag == 1001) {
         [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID]} tag:KSXTagADJustMent owner:self signature:YES Type:SelectAccoutDefault];
     }
 }
