@@ -172,6 +172,7 @@ return shared##className; \
 #define FirstAlertViewShowTime     @"InviteFriendsEveryday"
 // 新手政策开关（0：关，1：开）
 //#define NOVICEPOLICEONOFF     @"novicePoliceOnOff"
+#define LoadingSecond  2
 
 #define RELOADP2PORHONERACCOTDATA  @"ReloadP2POrHonerAccoutData" //刷新p2p或尊享账户数据
 

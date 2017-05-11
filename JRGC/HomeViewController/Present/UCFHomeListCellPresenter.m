@@ -19,4 +19,9 @@
     presenter.item = item;
     return presenter;
 }
+
+- (NSString *)proTitle
+{
+    return self.item.prdName;
+}
 @end

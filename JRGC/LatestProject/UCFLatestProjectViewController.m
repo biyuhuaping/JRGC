@@ -40,7 +40,8 @@
 #import "RiskAssessmentViewController.h"    //风险评估
 
 #import "UCFProjectListController.h"
-#import "UCFHonerPlanViewController.h"
+#import "UCFHonerViewController.h"
+#import "UCFP2PViewController.h"
 
 #import "UCFCollectionDetailViewController.h" //集合详情
 #import "MjAlertView.h"
@@ -98,7 +99,9 @@
 @property (strong, nonatomic) IBOutlet UILabel *titleLab2;
 @property (strong, nonatomic) IBOutlet UILabel *titleLab3;
 @property (strong, nonatomic) IBOutlet UILabel *titleLab4;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *p2POrZxViewHeight;
 
+@property (weak, nonatomic) IBOutlet UIView *p2POrZxView;
 
 @property (strong, nonatomic) UCFCollectionBidModel *collectionBidModel;
 
@@ -126,6 +129,7 @@
     
     baseTitleLabel.text = @"产品列表";
     UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 50)];
+    [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:footerView isTop:YES];
     self.tableView.tableFooterView = footerView;
     UILabel *tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 15, SCREEN_WIDTH, 20)];
     tipLabel.font = [UIFont systemFontOfSize:12];
@@ -144,9 +148,10 @@
 //    if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
 //        [self.tableView setLayoutMargins: UIEdgeInsetsZero];
 //    }
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     self.tableView.separatorColor = UIColorWithRGB(0xe3e5ea);
     self.tableView.separatorInset = UIEdgeInsetsMake(0,15, 0, 0);
-
+    _isHiddenNoticLab = YES;
     //=========  下拉刷新、上拉加载更多  =========
     __weak typeof(self) weakSelf = self;
     // 添加传统的下拉刷新
@@ -309,6 +314,7 @@
     [self.navigationController.navigationBar setHidden:NO];
     [self.navigationController.navigationBar setBarTintColor:[UIColor whiteColor]];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+     [self activitiesAction:NO];
 //    [self showPlatformUpgradeNotice];
 //    [[MongoliaLayerCenter sharedManager] showLogic];
 //    // 该标识为首页是否加载过有引导页，Yes为 加载过，NO为 未加载过
@@ -406,34 +412,34 @@
 //***qyy 标类型type cell按钮的回调方法delegate
 -(void)homeButtonPressed:(UIButton *)button withCelltypeSellWay:(NSString *)strSellWay
 {
-    if ([strSellWay isEqualToString:@"12"]) {
-        UCFHonerPlanViewController *horner = [[UCFHonerPlanViewController alloc] initWithNibName:@"UCFHonerPlanViewController" bundle:nil];
-        horner.baseTitleText = @"工场尊享";
-        horner.accoutType = SelectAccoutTypeHoner;
-        [self.navigationController pushViewController:horner animated:YES];
-        return;
-    }
-    UCFProjectListController *project = [[UCFProjectListController alloc] initWithNibName:@"UCFProjectListController" bundle:nil];
-    project.strStyle = strSellWay;
-    project.viewType = @"1";
-    [self.navigationController pushViewController:project animated:YES];
+//    if ([strSellWay isEqualToString:@"12"]) {
+//        UCFHonerPlanViewController *horner = [[UCFHonerPlanViewController alloc] initWithNibName:@"UCFHonerPlanViewController" bundle:nil];
+//        horner.baseTitleText = @"工场尊享";
+//        horner.accoutType = SelectAccoutTypeHoner;
+//        [self.navigationController pushViewController:horner animated:YES];
+//        return;
+//    }
+//    UCFProjectListController *project = [[UCFProjectListController alloc] initWithNibName:@"UCFProjectListController" bundle:nil];
+//    project.strStyle = strSellWay;
+//    project.viewType = @"1";
+//    [self.navigationController pushViewController:project animated:YES];
 }
-- (IBAction)homeButtonPressedP2PButton:(UIButton *)sender {
-    UCFProjectListController *projectList = [[UCFProjectListController alloc] initWithNibName:@"UCFProjectListController" bundle:nil];
-    //    p2p.baseTitleText = @"工场P2P";
-    [self.navigationController pushViewController:projectList animated:YES];
-}
-
-//- (void)homeButtonPressedP2PButton:(UIButton *)button
-//{
-//    
+//- (IBAction)homeButtonPressedP2PButton:(UIButton *)sender {
+//    UCFProjectListController *projectList = [[UCFProjectListController alloc] initWithNibName:@"UCFProjectListController" bundle:nil];
+//    //    p2p.baseTitleText = @"工场P2P";
+//    [self.navigationController pushViewController:projectList animated:YES];
 //}
-- (IBAction)homeButtonPressedHornorButton:(UIButton *)sender {
-    UCFHonerPlanViewController *horner = [[UCFHonerPlanViewController alloc] initWithNibName:@"UCFHonerPlanViewController" bundle:nil];
-    horner.baseTitleText = @"工场尊享";
-    horner.accoutType = SelectAccoutTypeHoner;
-    [self.navigationController pushViewController:horner animated:YES];
-}
+//
+////- (void)homeButtonPressedP2PButton:(UIButton *)button
+////{
+////    
+////}
+//- (IBAction)homeButtonPressedHornorButton:(UIButton *)sender {
+//    UCFHonerPlanViewController *horner = [[UCFHonerPlanViewController alloc] initWithNibName:@"UCFHonerPlanViewController" bundle:nil];
+//    horner.baseTitleText = @"工场尊享";
+//    horner.accoutType = SelectAccoutTypeHoner;
+//    [self.navigationController pushViewController:horner animated:YES];
+//}
 
 //- (void)homeButtonPressedHornorButton:(UIButton *)button
 //{
@@ -620,16 +626,23 @@
 //控制 活动/公告栏 显示/隐藏
 - (void)activitiesAction:(BOOL)isShow{
     int labHight = isShow?35:0;//公告栏高度
-    int functionBtnViewHight = _actionArr.count?60:0;//功能按钮View高度
+    int functionBtnViewHight = 60;//功能按钮View高度
     _noticBottomDistance.constant = functionBtnViewHight;//功能按钮View高度
     
+    self.p2POrZxViewHeight.constant = 0;
+    
+    if(self.p2POrZxViewHeight.constant == 0){
+        for (UIView * view in self.p2POrZxView.subviews) {
+            [view removeFromSuperview];
+        }
+    }
     if (_isHiddenNoticLab) {
         labHight = 0;
     }
     
     // 2秒后刷新表格UI
     [UIView animateWithDuration:0.25 animations:^{
-        _headerView.frame = CGRectMake(0, 0, ScreenWidth, CGRectGetHeight(_bannerView.frame) + _tipsViewHeight.constant + labHight + functionBtnViewHight + 62);
+        _headerView.frame = CGRectMake(0, 0, ScreenWidth, CGRectGetHeight(_bannerView.frame) + _tipsViewHeight.constant + labHight + functionBtnViewHight+self.p2POrZxViewHeight.constant);
         _tableView.tableHeaderView = _headerView;
         DBLOG(@"===%@",NSStringFromCGRect(_headerView.frame));
     }];
@@ -724,7 +737,7 @@
     UCFProductListCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     if (!cell) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"UCFProductListCell" owner:self options:nil] lastObject];
-        cell.selectionStyle = UITableViewCellSeparatorStyleSingleLine;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     NSArray *sectionArray = self.groupArray[indexPath.section];
     UCFProductListModel *model = sectionArray[indexPath.row];
@@ -738,9 +751,8 @@
 //        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     if (indexPath.row == [sectionArray count] - 1) {
-        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(cell.frame) - 0.5, ScreenWidth, 0.5)];
-        line.backgroundColor = UIColorWithRGB(0xd8d8d8);
-        [cell.contentView addSubview:line];
+        self.tableView.separatorColor = UIColorWithRGB(0Xd8d8d8);
+        cell.separatorInset =  UIEdgeInsetsMake(0,0, 0, 0);
     }
 
     return cell;
@@ -825,8 +837,9 @@
     switch ([model.type intValue]) {
         case 1: //1尊享
         {
-            UCFHonerPlanViewController *horner = [[UCFHonerPlanViewController alloc] initWithNibName:@"UCFHonerPlanViewController" bundle:nil];
+            UCFHonerViewController *horner = [[UCFHonerViewController alloc] initWithNibName:@"UCFHonerViewController" bundle:nil];
             horner.baseTitleText = @"工场尊享";
+            horner.viewType = @"1";
             horner.accoutType = SelectAccoutTypeHoner;
             [self.navigationController pushViewController:horner animated:YES];
             
@@ -834,10 +847,14 @@
             break;
         case 2://2尊享转让
         {
-            UCFHonerPlanViewController *horner = [[UCFHonerPlanViewController alloc] initWithNibName:@"UCFHonerPlanViewController" bundle:nil];
+            UCFHonerViewController *horner = [[UCFHonerViewController alloc] initWithNibName:@"UCFHonerViewController" bundle:nil];
+            horner.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight - 64);
             horner.baseTitleText = @"工场尊享";
+            horner.viewType = @"2";
             horner.accoutType = SelectAccoutTypeHoner;
+            [horner setCurrentViewForHornerTransferVC];
             [self.navigationController pushViewController:horner animated:YES];
+
             
         }
             
@@ -845,28 +862,32 @@
         case 3://3微金
 
         {
-            UCFProjectListController *project = [[UCFProjectListController alloc] initWithNibName:@"UCFProjectListController" bundle:nil];
-            project.strStyle = @"11";
-            project.viewType = @"1";
-            [self.navigationController pushViewController:project animated:YES];
+            UCFP2PViewController *p2PVC = [[UCFP2PViewController alloc] initWithNibName:@"UCFP2PViewController" bundle:nil];
+            p2PVC.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight - 64);
+            p2PVC.viewType = @"1";
+            [p2PVC setCurrentViewForBatchBid];
+            [self.navigationController pushViewController:p2PVC animated:YES];
 
         }
             break;
         case 4://4微金转让
         {
-            UCFProjectListController *project = [[UCFProjectListController alloc] initWithNibName:@"UCFProjectListController" bundle:nil];
-            project.strStyle = @"11";
-            project.viewType = @"2";
-            [self.navigationController pushViewController:project animated:YES];
+            UCFP2PViewController *p2PVC = [[UCFP2PViewController alloc] initWithNibName:@"UCFP2PViewController" bundle:nil];
+            p2PVC.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight - 64);
+            p2PVC.viewType = @"3";
+            [p2PVC setCurrentViewForBatchBid];
+            [self.navigationController pushViewController:p2PVC animated:YES];
 
         }
             break;
         case 5://5批量
         {
-            UCFProjectListController *project = [[UCFProjectListController alloc] initWithNibName:@"UCFProjectListController" bundle:nil];
-            project.strStyle = @"11";
-            project.viewType = @"2";
-            [self.navigationController pushViewController:project animated:YES];
+            UCFP2PViewController *p2PVC = [[UCFP2PViewController alloc] initWithNibName:@"UCFP2PViewController" bundle:nil];
+            p2PVC.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight - 64);
+            p2PVC.viewType = @"2";
+            [p2PVC setCurrentViewForBatchBid];
+            [self.navigationController pushViewController:p2PVC animated:YES];
+            
         }
             
             break;

@@ -8,6 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+typedef enum : NSUInteger {
+    UCFHomeListCellModelTypeDefault,
+    UCFHomeListCellModelTypeOneImage,
+} UCFHomeListCellModelType;
+
 @interface UCFHomeListCellModel : NSObject
 @property (nonatomic, copy) NSString *annualRate;
 @property (nonatomic, strong) NSNumber *borrowAmount;
@@ -33,6 +38,7 @@
 @property (nonatomic, copy) NSString *p2pTransferNum;
 @property (nonatomic, copy) NSString *totalCount;
 @property (nonatomic, copy) NSString *zxTransferNum;
+@property (nonatomic, assign) UCFHomeListCellModelType moedelType;
 
 + (instancetype)homeListCellWithDict:(NSDictionary *)dict;
 @end

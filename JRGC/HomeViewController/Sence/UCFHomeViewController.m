@@ -154,5 +154,13 @@
             [AuxiliaryFunc showToastMessage:result withView:weakSelf.view];
         }
     }];
+    
+    [self.userInfoVC.presenter fetchUserInfoOneDataWithCompletionHandler:^(NSError *error, id result) {
+        
+    }];
+    
+    [self.userInfoVC.presenter fetchUserInfoTwoDataWithCompletionHandler:^(NSError *error, id result) {
+        
+    }];
 }
 @end

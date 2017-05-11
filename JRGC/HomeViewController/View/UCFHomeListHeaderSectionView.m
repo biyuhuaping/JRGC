@@ -24,5 +24,10 @@
     
     self.homeListHeaderMoreButton.hidden = !presenter.showMore;
 }
+- (IBAction)moreClicked:(UIButton *)sender {
+    if ([self.delegate respondsToSelector:@selector(homeListHeader:didClickedMoreWithType:)]) {
+        [self.delegate homeListHeader:self didClickedMoreWithType:self.presenter.group.type];
+    }
+}
 
 @end

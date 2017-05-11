@@ -13,6 +13,8 @@
 #import "UCFHomeListGroup.h"
 
 #define HOMELIST @"homeList"
+#define USERINFOONE @"userInfoOne"
+#define USERINFOTWO @"userInfoTwo"
 
 @interface UCFHomeAPIManager () <NetworkModuleDelegate>
 @property (strong, nonatomic) NSMutableDictionary *requestDict;
@@ -32,6 +34,18 @@
 {
     [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":userId} tag:kSXTagPrdClaimsNewVersion owner:self signature:YES Type:SelectAccoutDefault];
     [self.requestDict setObject:completionHandler forKey:HOMELIST];
+}
+
+- (void)fetchUserInfoOneWithUserId:(NSString *)userId completionHandler:(NetworkCompletionHandler)completionHandler
+{
+    [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":userId} tag:kSXTagMyReceipt owner:self signature:YES Type:SelectAccoutDefault];
+    [self.requestDict setObject:completionHandler forKey:USERINFOONE];
+}
+
+- (void)fetchUserInfoTwoWithUserId:(NSString *)userId completionHandler:(NetworkCompletionHandler)completionHandler
+{
+    [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":userId} tag:kSXTagMySimpleInfo owner:self signature:YES Type:SelectAccoutDefault];
+    [self.requestDict setObject:completionHandler forKey:USERINFOTWO];
 }
 
 //开始请求
@@ -82,6 +96,26 @@
         
         [self.requestDict removeObjectForKey:HOMELIST];
     }
+    else if (tag.intValue == kSXTagMyReceipt) {
+        NetworkCompletionHandler complete = [self.requestDict objectForKey:USERINFOONE];
+        if ([rstcode boolValue]) {
+            
+        }
+        else {
+            
+        }
+        [self.requestDict removeObjectForKey:USERINFOONE];
+    }
+    else if (tag.intValue == kSXTagMySimpleInfo) {
+        NetworkCompletionHandler complete = [self.requestDict objectForKey:USERINFOTWO];
+        if ([rstcode boolValue]) {
+            
+        }
+        else {
+            
+        }
+        [self.requestDict removeObjectForKey:USERINFOTWO];
+    }
     else if (tag.intValue == kSXTagSingMenthod) {
         if ([rstcode boolValue]) {
             
@@ -98,6 +132,16 @@
         NetworkCompletionHandler complete = [self.requestDict objectForKey:HOMELIST];
         complete(err, nil);
         [self.requestDict removeObjectForKey:HOMELIST];
+    }
+    else if (tag.intValue == kSXTagMyReceipt) {
+        NetworkCompletionHandler complete = [self.requestDict objectForKey:USERINFOONE];
+        complete(err, nil);
+        [self.requestDict removeObjectForKey:USERINFOONE];
+    }
+    else if (tag.intValue == kSXTagMySimpleInfo) {
+        NetworkCompletionHandler complete = [self.requestDict objectForKey:USERINFOTWO];
+        complete(err, nil);
+        [self.requestDict removeObjectForKey:USERINFOTWO];
     }
 }
 

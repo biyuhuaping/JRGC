@@ -23,6 +23,8 @@
 #import "SDCollectionViewCell.h"
 #import "UIView+SDExtension.h"
 #import "TAPageControl.h"
+#import "UIImageView+WebCache.h"
+#import "UCFCycleModel.h"
 
 
 
@@ -177,7 +179,15 @@ NSString * const ID = @"cycleCell";
 {
     SDCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:ID forIndexPath:indexPath];
     long itemIndex = indexPath.item % self.imagesGroup.count;
-    cell.imageView.image = self.imagesGroup[itemIndex];
+    id model = [self.imagesGroup objectAtIndex:itemIndex];
+//    cell.imageView.image = self.imagesGroup[itemIndex];
+    if ([model isKindOfClass:[UIImage class]]) {
+        cell.imageView.image = model;
+    }
+    else if ([model isKindOfClass:[UCFCycleModel class]]) {
+        UCFCycleModel *modell = model;
+        [cell.imageView sd_setImageWithURL:[NSURL URLWithString:modell.thumb] placeholderImage:[UIImage imageNamed:@"banner_default.png"]];
+    }
     if (_titlesGroup.count) {
         cell.title = _titlesGroup[itemIndex];
     }

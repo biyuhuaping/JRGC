@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "UCFHomeAPIManager.h"
 
 @class UCFUserPresenter;
 #pragma mark - 轮播图的代理回掉
@@ -25,4 +26,7 @@
 
 + (instancetype)presenter;
 - (NSArray *)allDatas;
+
+- (void)fetchUserInfoOneDataWithCompletionHandler:(NetworkCompletionHandler)completionHander;
+- (void)fetchUserInfoTwoDataWithCompletionHandler:(NetworkCompletionHandler)completionHander;
 @end

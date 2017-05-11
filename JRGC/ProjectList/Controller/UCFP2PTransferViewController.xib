@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UCFP2PTransferViewController">
             <connections>
+                <outlet property="loadingView" destination="zig-ow-nTq" id="D6V-yv-ula"/>
                 <outlet property="tableview" destination="jp0-i0-CM6" id="bAz-UO-e8N"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -28,14 +29,54 @@
                         <outlet property="delegate" destination="-1" id="sRA-Q0-ra6"/>
                     </connections>
                 </tableView>
+                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zig-ow-nTq">
+                    <rect key="frame" x="0.0" y="-64" width="375" height="731"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="transform" translatesAutoresizingMaskIntoConstraints="NO" id="gPy-3y-sKo">
+                            <rect key="frame" x="122.5" y="280.5" width="130" height="170"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="130" id="1SA-tm-8xa"/>
+                                <constraint firstAttribute="height" constant="170" id="XeP-DQ-Pdr"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="可直接访问www.gongchangp2p.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QUP-C6-xEt">
+                            <rect key="frame" x="70" y="488.5" width="235.5" height="17"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" red="0.52156862749999999" green="0.56862745100000001" blue="0.70196078429999997" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="即将跳转工场微金" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xK2-gS-sWX">
+                            <rect key="frame" x="114" y="462.5" width="147" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                            <color key="textColor" red="0.52156862749999999" green="0.56862745100000001" blue="0.70196078429999997" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="0.92156862750000001" green="0.92156862750000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="QUP-C6-xEt" firstAttribute="top" secondItem="xK2-gS-sWX" secondAttribute="bottom" constant="5" id="5er-VQ-8B4"/>
+                        <constraint firstItem="gPy-3y-sKo" firstAttribute="centerX" secondItem="zig-ow-nTq" secondAttribute="centerX" id="D7t-mG-jjt"/>
+                        <constraint firstItem="gPy-3y-sKo" firstAttribute="centerY" secondItem="zig-ow-nTq" secondAttribute="centerY" id="Rc2-qr-70U"/>
+                        <constraint firstItem="QUP-C6-xEt" firstAttribute="centerX" secondItem="zig-ow-nTq" secondAttribute="centerX" id="VO9-vh-HXw"/>
+                        <constraint firstItem="xK2-gS-sWX" firstAttribute="top" secondItem="gPy-3y-sKo" secondAttribute="bottom" constant="12" id="wRL-px-VeH"/>
+                        <constraint firstItem="xK2-gS-sWX" firstAttribute="centerX" secondItem="zig-ow-nTq" secondAttribute="centerX" id="yOu-zH-4JO"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="jp0-i0-CM6" secondAttribute="bottom" id="8S2-ph-B2f"/>
                 <constraint firstItem="jp0-i0-CM6" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="FHq-Sb-7Hm"/>
+                <constraint firstAttribute="trailing" secondItem="zig-ow-nTq" secondAttribute="trailing" id="W3K-ZE-23c"/>
                 <constraint firstAttribute="trailing" secondItem="jp0-i0-CM6" secondAttribute="trailing" id="Xou-ex-o23"/>
+                <constraint firstItem="zig-ow-nTq" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="YlN-aC-2fn"/>
+                <constraint firstItem="zig-ow-nTq" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="-64" id="jkv-Gs-OK5"/>
                 <constraint firstItem="jp0-i0-CM6" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="lFR-yF-xpg"/>
+                <constraint firstAttribute="bottom" secondItem="zig-ow-nTq" secondAttribute="bottom" id="noU-QO-5A4"/>
             </constraints>
         </view>
     </objects>
+    <resources>
+        <image name="transform" width="130" height="170"/>
+    </resources>
 </document>

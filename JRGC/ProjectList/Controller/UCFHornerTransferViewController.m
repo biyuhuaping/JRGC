@@ -19,6 +19,7 @@
 #import "UCFBankDepositoryAccountViewController.h"
 #import "UCFOldUserGuideViewController.h"
 #import "RiskAssessmentViewController.h"
+
 @interface UCFHornerTransferViewController () <UITableViewDataSource, UITableViewDelegate, UCFProjectListCellDelegate>
 {
     UCFTransferModel *_transferModel;
@@ -31,7 +32,10 @@
 // 无数据界面
 @property (strong, nonatomic) UCFNoDataView *noDataView;
 
+
 @property (nonatomic, assign) NSInteger currentPage;
+
+@property (strong, nonatomic) IBOutlet UIView *loadingView;
 @end
 
 @implementation UCFHornerTransferViewController
@@ -69,6 +73,17 @@
 //    self.tableview.footer.hidden = YES;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadHonerTransferData) name:@"reloadHonerTransferData" object:nil];
+    
+    [self.view bringSubviewToFront:_loadingView];
+    [self performSelector:@selector(removeLoadingView) withObject:nil afterDelay:LoadingSecond];
+}
+-(void)removeLoadingView
+{
+    for (UIView *view in self.loadingView.subviews) {
+        [view removeFromSuperview];
+    }
+    [self.loadingView removeFromSuperview];
+    [self.tableview.header beginRefreshing];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
