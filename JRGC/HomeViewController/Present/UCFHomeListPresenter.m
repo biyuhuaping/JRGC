@@ -137,14 +137,17 @@
                 NSArray *array = group.prdlist;
                 if (array.count > 0) {
                     if ([group.type isEqualToString:@"11"]) {
+                        weakSelf.groupPresenter2.group.type = group.type;
                         NSMutableArray *temp = [weakSelf productPrdListWithDataSource:array];
                         [temp addObject:[weakSelf.groupPresenter2.group.prdlist lastObject]];
                         weakSelf.groupPresenter2.group.prdlist = temp;
                     }
                     else if ([group.type isEqualToString:@"12"]) {
+                        weakSelf.groupPresenter1.group.type = group.type;
                         weakSelf.groupPresenter1.group.prdlist = [weakSelf productPrdListWithDataSource:array];
                     }
                     else if ([group.type isEqualToString:@"13"]) {
+                        weakSelf.groupPresenter0.group.type = group.type;
                         weakSelf.groupPresenter0.group.prdlist = [weakSelf productPrdListWithDataSource:array];
                     }
                 }
