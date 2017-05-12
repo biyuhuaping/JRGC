@@ -298,13 +298,10 @@
 - (void)fetchData
 {
     __weak typeof(self) weakSelf = self;
-    
     [self.userInfoVC.presenter fetchUserInfoOneDataWithCompletionHandler:^(NSError *error, id result) {
-        
     }];
     
     [self.userInfoVC.presenter fetchUserInfoTwoDataWithCompletionHandler:^(NSError *error, id result) {
-        
     }];
     
     [self.homeListVC.presenter fetchHomeListDataWithCompletionHandler:^(NSError *error, id result) {
@@ -316,8 +313,6 @@
             [AuxiliaryFunc showToastMessage:result withView:weakSelf.view];
         }
     }];
-    
-    
 }
 
 #pragma mark - userInfoVC 的代理方法
