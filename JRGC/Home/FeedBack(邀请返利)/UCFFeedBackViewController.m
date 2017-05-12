@@ -86,8 +86,8 @@
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(getMyInvestDataList) name:@"getMyInvestDataList" object:nil];
     _CheckInstructionBtn.hidden = YES;
-    [self getMyInvestDataList];
-    [self getAppSetting];
+//    [self getMyInvestDataList];
+//    [self getAppSetting];
 }
 
 //复制到剪切板
