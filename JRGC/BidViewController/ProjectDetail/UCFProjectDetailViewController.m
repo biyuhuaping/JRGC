@@ -186,7 +186,7 @@
         NSString *type = [[_dataDic objectSafeDictionaryForKey:@"prdClaims"] objectSafeForKey:@"type"];
        _isP2P = [type isEqualToString:@"1"] ? YES : NO; //  Yes为 p2p标
     }
-    
+    self.accoutType = _isP2P ? SelectAccoutTypeP2P :SelectAccoutTypeHoner;
     [self addnavigationBar];
     [self setNavTitleView];
     
@@ -558,7 +558,6 @@
                 NSString *projectId = [[_dataDic objectForKey:@"prdTransferFore"] objectForKey:@"id"];
                 NSString *strParameters = nil;
                 strParameters = [NSString stringWithFormat:@"userId=%@&tranId=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],projectId];//101943
-                self.accoutType = _isP2P ? SelectAccoutTypeP2P :SelectAccoutTypeHoner;
                 [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagDealTransferBid owner:self Type:self.accoutType];
             } else {
                 //普通表
@@ -566,7 +565,6 @@
                 NSString *projectId = [[_dataDic objectForKey:@"prdClaims"] objectForKey:@"id"];
                 NSString *strParameters = nil;
                 strParameters = [NSString stringWithFormat:@"userId=%@&id=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],projectId];//101943
-                self.accoutType = _isP2P ? SelectAccoutTypeP2P :SelectAccoutTypeHoner;
                 [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDealBid owner:self Type:self.accoutType];
             }
         }

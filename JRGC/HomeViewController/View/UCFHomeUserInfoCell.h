@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+@class UCFUserInfoListItem;
 @interface UCFHomeUserInfoCell : UITableViewCell
-
+@property (nonatomic, strong) UCFUserInfoListItem *item;
 @end

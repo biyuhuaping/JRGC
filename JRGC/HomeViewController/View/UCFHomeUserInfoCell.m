@@ -7,6 +7,14 @@
 //
 
 #import "UCFHomeUserInfoCell.h"
+#import "UCFUserInfoListItem.h"
+
+@interface UCFHomeUserInfoCell ()
+@property (weak, nonatomic) IBOutlet UILabel *itemTitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *itemDescribeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *itemValueLabel;
+
+@end
 
 @implementation UCFHomeUserInfoCell
 
@@ -15,10 +23,13 @@
     // Initialization code
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+- (void)setItem:(UCFUserInfoListItem *)item
+{
+    _item = item;
+    
+    self.itemTitleLabel.text = item.title;
+    self.itemDescribeLabel.hidden = !item.isShow;
+    self.itemValueLabel.text = item.subtitle;
 }
 
 @end

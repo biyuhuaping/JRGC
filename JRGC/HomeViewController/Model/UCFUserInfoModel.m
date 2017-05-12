@@ -1,16 +1,16 @@
 //
-//  UCFHomeListCellModel.m
+//  UCFUserInfoModel.m
 //  JRGC
 //
-//  Created by njw on 2017/5/10.
+//  Created by njw on 2017/5/11.
 //  Copyright © 2017年 qinwei. All rights reserved.
 //
 
-#import "UCFHomeListCellModel.h"
+#import "UCFUserInfoModel.h"
 #import <objc/runtime.h>
 
-@implementation UCFHomeListCellModel
-+ (instancetype)homeListCellWithDict:(NSDictionary *)dict
+@implementation UCFUserInfoModel
++ (instancetype)userInfomationWithDict:(NSDictionary *)dict
 {
     return [[self alloc] initWithDictionary:dict];
 }
@@ -46,10 +46,10 @@
 {
     for (NSString *key in [self propertyKeys]) {
         id propertyValue = [dataSource valueForKey:key];
-        if ([key isEqualToString:@"Id"]) {
-            propertyValue = [dataSource valueForKey:@"id"];
-        }
         if (![propertyValue isKindOfClass:[NSNull class]] && propertyValue != nil) {
+            if ([key isEqualToString:@"Id"]) {
+                propertyValue = [dataSource valueForKey:@"id"];
+            }
             [self setValue:propertyValue forKey:key];
         } else {
 //            [self setValue:@"" forKey:key];

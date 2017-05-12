@@ -97,8 +97,8 @@
     
 }
 -(void)endPost:(id)result tag:(NSNumber*)tag {
-    NSString *data = (NSString *)result;
-    NSMutableDictionary *dic = [data objectFromJSONString];
+//    NSString *data = (NSString *)result;
+//    NSMutableDictionary *dic = [data objectFromJSONString];
 }
 -(void)errorPost:(NSError*)err tag:(NSNumber*)tag {
     

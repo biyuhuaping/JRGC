@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *proImageView3;
 @property (weak, nonatomic) IBOutlet UIView *proSignImageView;
 @property (weak, nonatomic) IBOutlet ZZCircleProgress *circleProgressView;
+@property (weak, nonatomic) IBOutlet UIView *oneImageView;
 
 @end
 
@@ -36,17 +37,20 @@
 - (void)setPresenter:(UCFHomeListCellPresenter *)presenter
 {
     _presenter = presenter;
-    if (presenter.item.type == UCFHomeListCellModelTypeDefault
+    if (presenter.modelType == UCFHomeListCellModelTypeDefault
         ) {
+        self.oneImageView.hidden = YES;
         self.proName.text = presenter.proTitle;
+    }
+    else if (presenter.modelType == UCFHomeListCellModelTypeOneImage) {
+        self.oneImageView.hidden = NO;
     }
     
 }
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+- (IBAction)cyclePressClicked:(UIButton *)sender {
+    if ([self.delegate respondsToSelector:@selector(homelistCell:didClickedProgressViewWithPresenter:)]) {
+        [self.delegate homelistCell:self didClickedProgressViewWithPresenter:self.presenter.item];
+    }
 }
 
 @end

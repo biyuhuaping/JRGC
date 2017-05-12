@@ -23,6 +23,8 @@
     self.headerTitleLabel.text = presenter.headerTitle;
     
     self.homeListHeaderMoreButton.hidden = !presenter.showMore;
+    
+    self.headerImageView.image = presenter.headerImage;
 }
 - (IBAction)moreClicked:(UIButton *)sender {
     if ([self.delegate respondsToSelector:@selector(homeListHeader:didClickedMoreWithType:)]) {

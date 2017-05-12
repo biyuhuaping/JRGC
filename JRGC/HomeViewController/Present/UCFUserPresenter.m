@@ -8,11 +8,14 @@
 
 #import "UCFUserPresenter.h"
 #import "UCFUserInfoListItem.h"
+#import "UCFUserInfoModel.h"
 
 @interface UCFUserPresenter ()
 @property (strong, nonatomic) UCFHomeAPIManager *apiManager;
 @property (copy, nonatomic) NSString *userId;
 @property (strong, nonatomic) NSMutableArray *userInfoListCells;
+@property (strong, nonatomic) UCFUserInfoModel *userInfoOneModel;
+
 // p2p账户可用余额
 @property (copy, nonatomic) NSString *p2pBalanceMoney;
 // 尊享账户可用余额
@@ -37,6 +40,7 @@
     if (self = [super init]) {
         self.userInfoListCells = [NSMutableArray array];
         self.apiManager = [UCFHomeAPIManager new];
+        [self initUI];
     }
     return self;
 }
@@ -76,19 +80,29 @@
     else {
         userInfoList1.subtitle = @"未开户";
     }
+    [self.userInfoListCells addObject:userInfoList0];
+    [self.userInfoListCells addObject:userInfoList1];
 }
 
 - (void)fetchUserInfoOneDataWithCompletionHandler:(NetworkCompletionHandler)completionHander
 {
+    if (!self.userId || [self.userId isEqualToString:@""]) {
+        return;
+    }
+    __weak typeof(self) weakSelf = self;
     [self.apiManager fetchUserInfoOneWithUserId:self.userId completionHandler:^(NSError *error, id result) {
-        if ([result isKindOfClass:[NSDictionary class]]) {
-            
+        if ([result isKindOfClass:[UCFUserInfoModel class]]) {
+            UCFUserInfoModel *userInfo = result;
+            weakSelf.p2pBalanceMoney = userInfo.p2pCashBalance;
+            weakSelf.hornerBalanceMoney = userInfo.zxCashBalance;
+            weakSelf.isP2PUser = userInfo.p2pOpenState;
+            weakSelf.isHonorUser = userInfo.zxOpenState;
         }
         else if ([result isKindOfClass:[NSString class]]) {
             
         }
-        if ([self.userInfoViewDelegate respondsToSelector:@selector(userInfoPresenter:didRefreshUserInfoWithResult:error:)]) {
-            [self.userInfoViewDelegate userInfoPresenter:self didRefreshUserInfoWithResult:result error:error];
+        if ([weakSelf.userInfoViewDelegate respondsToSelector:@selector(userInfoPresenter:didRefreshUserInfoOneWithResult:error:)]) {
+            [weakSelf.userInfoViewDelegate userInfoPresenter:weakSelf didRefreshUserInfoOneWithResult:result error:error];
         }
         
         !completionHander ?: completionHander(error, result);
@@ -97,19 +111,41 @@
 
 - (void)fetchUserInfoTwoDataWithCompletionHandler:(NetworkCompletionHandler)completionHander
 {
+    if (!self.userId || [self.userId isEqualToString:@""]) {
+        return;
+    }
+    __weak typeof(self) weakSelf = self;
     [self.apiManager fetchUserInfoTwoWithUserId:self.userId completionHandler:^(NSError *error, id result) {
-        if ([result isKindOfClass:[NSDictionary class]]) {
+        if ([result isKindOfClass:[UCFUserInfoModel class]]) {
             
         }
         else if ([result isKindOfClass:[NSString class]]) {
             
         }
-        if ([self.userInfoViewDelegate respondsToSelector:@selector(userInfoPresenter:didRefreshUserInfoWithResult:error:)]) {
-//            [self.userInfoViewDelegate userInfoPresenter:self didRefreshUserInfoWithResult:result error:error];
+        if ([weakSelf.userInfoViewDelegate respondsToSelector:@selector(userInfoPresenter:didRefreshUserInfoTwoWithResult:error:)]) {
+            [weakSelf.userInfoViewDelegate userInfoPresenter:weakSelf didRefreshUserInfoTwoWithResult:result error:error];
         }
         
         !completionHander ?: completionHander(error, result);
     }];
+}
+
+- (void)fetchSignDataWithUserId:(NSString *)userId withToken:(NSString *)token completionHandler:(NetworkCompletionHandler)completionHander
+{
+    [self.apiManager fetchSignInfo:userId token:token completionHandler:^(NSError *error, id result) {
+        !completionHander ?: completionHander(error, result);
+    }];
+}
+
+- (void)fetchProDetailDataWithParameter:(NSDictionary *)parameter completionHandler:(NetworkCompletionHandler)completionHander
+{
+    [self.apiManager fetchProDetailInfoWithParameter:parameter completionHandler:^(NSError *error, id result) {
+        !completionHander ?: completionHander(error, result);
+    }];
+}
+
+- (void)refreshData {
+    [self fetchUserInfoTwoDataWithCompletionHandler:nil];
 }
 
 @end

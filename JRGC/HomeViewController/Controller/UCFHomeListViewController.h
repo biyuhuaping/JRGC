@@ -8,13 +8,21 @@
 
 #import <Foundation/Foundation.h>
 
-@class UCFHomeListPresenter, UCFHomeListViewController;
+typedef enum : NSUInteger {
+    UCFHomeListTypeP2PMore,
+    UCFHomeListTypeZXMore,
+    UCFHomeListTypeDetail,
+    UCFHomeListTypeInvest,
+} UCFHomeListType;
+
+@class UCFHomeListPresenter, UCFHomeListViewController, UCFHomeListCellModel;
 
 @protocol UCFHomeListViewControllerDelegate <NSObject>
 
 - (void)homeList:(UCFHomeListViewController *)homeList tableView:(UITableView *)tableView didScrollWithYOffSet:(CGFloat)offSet;
 - (void)homeListRefreshDataWithHomelist:(UCFHomeListViewController *)homelist;
 
+- (void)homeList:(UCFHomeListViewController *)homeList tableView:(UITableView *)tableView didClickedWithModel:(UCFHomeListCellModel *)model withType:(UCFHomeListType)type;
 @end
 
 @interface UCFHomeListViewController : NSObject

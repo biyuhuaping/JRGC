@@ -17,7 +17,8 @@
 
 #pragma mark - 个人信心的代理回调
 @protocol UCFUserPresenterUserInfoCallBack <NSObject>
-- (void)userInfoPresenter:(UCFUserPresenter *)presenter didRefreshUserInfoWithResult:(id)result error:(NSError *)error;
+- (void)userInfoPresenter:(UCFUserPresenter *)presenter didRefreshUserInfoOneWithResult:(id)result error:(NSError *)error;
+- (void)userInfoPresenter:(UCFUserPresenter *)presenter didRefreshUserInfoTwoWithResult:(id)result error:(NSError *)error;
 @end
 
 @interface UCFUserPresenter : NSObject
@@ -29,4 +30,9 @@
 
 - (void)fetchUserInfoOneDataWithCompletionHandler:(NetworkCompletionHandler)completionHander;
 - (void)fetchUserInfoTwoDataWithCompletionHandler:(NetworkCompletionHandler)completionHander;
+- (void)fetchSignDataWithUserId:(NSString *)userId withToken:(NSString *)token completionHandler:(NetworkCompletionHandler)completionHander;
+
+- (void)fetchProDetailDataWithParameter:(NSDictionary *)parameter completionHandler:(NetworkCompletionHandler)completionHander;
+#pragma mark - 刷新token
+- (void)refreshData;
 @end
