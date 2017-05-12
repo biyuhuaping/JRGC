@@ -17,6 +17,11 @@
 #import "UCFCouponViewController.h"
 #import "UCFWorkPointsViewController.h"
 #import "UCFWebViewJavascriptBridgeLevel.h"
+#import "UCFNoPermissionViewController.h"
+#import "UCFProjectDetailViewController.h"
+#import "UCFHonerViewController.h"
+#import "UCFP2PViewController.h"
+#import "UCFP2POrHonerAccoutViewController.h"
 
 #import "UCFUserPresenter.h"
 #import "UCFHomeListPresenter.h"
@@ -26,10 +31,8 @@
 #import "UCFHomeListNavView.h"
 #import "MaskView.h"
 #import "MongoliaLayerCenter.h"
-#import "UCFHonerViewController.h"
-#import "UCFP2PViewController.h"
-#import "UCFNoPermissionViewController.h"
-#import "UCFProjectDetailViewController.h"
+
+#import "UCFUserInfoListItem.h"
 
 @interface UCFHomeViewController () <UCFHomeListViewControllerDelegate, UCFHomeListNavViewDelegate, UCFUserInformationViewControllerDelegate>
 @property (strong, nonatomic) UCFCycleImageViewController *cycleImageVC;
@@ -303,6 +306,17 @@
 #pragma mark - userInfoVC 的代理方法
 - (void)userInfotableView:(UITableView *)tableView didSelectedItem:(UCFUserInfoListItem *)item
 {
-    
+    if (!item.isShow) {
+        return;
+    }
+    UCFP2POrHonerAccoutViewController *subVC = [[UCFP2POrHonerAccoutViewController alloc] initWithNibName:@"UCFP2POrHonerAccoutViewController" bundle:nil];
+    if ([item.title isEqualToString:@"P2P账户"]) {
+        subVC.accoutType =  SelectAccoutTypeP2P;
+    }
+    else if ([item.title isEqualToString:@"尊享账户"]) {
+        subVC.accoutType = SelectAccoutTypeHoner;
+    }
+    [self.navigationController pushViewController:subVC animated:YES];
 }
+
 @end

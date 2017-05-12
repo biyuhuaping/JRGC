@@ -20,6 +20,7 @@
 #import "UCFUserInfoModel.h"
 #import "UCFSignModel.h"
 #import "AppDelegate.h"
+#import "UCFUserInfoListItem.h"
 
 #define UserInfoViewHeight  327
 
@@ -176,6 +177,12 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     UCFUserInfoListItem *item = [self.presenter.allDatas objectAtIndex:indexPath.row];
+    if (indexPath.row == 0) {
+        item.isShow = [self.presenter checkIDAAndBankBlindState:SelectAccoutTypeP2P];
+    }
+    else if (indexPath.row == 1) {
+        item.isShow = [self.presenter checkIDAAndBankBlindState:SelectAccoutTypeHoner];
+    }
     if ([self.delegate respondsToSelector:@selector(userInfotableView:didSelectedItem:)]) {
         [self.delegate userInfotableView:self.tableview didSelectedItem:item];
     }
@@ -237,6 +244,7 @@
 {
     if (!error) {
         if ([result isKindOfClass:[UCFUserInfoModel class]]) {
+            [self.tableview reloadData];
             UCFUserInfoModel *userInfo = result;
 //            if ([personCenter.sex isEqualToString:@"0"]) {
 //                self.userIconImageView.image = [UIImage imageNamed:@"user_icon_head_female"];

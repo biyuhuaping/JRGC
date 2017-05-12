@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "UCFHomeAPIManager.h"
+#import "UCFUserInfoModel.h"
 
 @class UCFUserPresenter;
 #pragma mark - 轮播图的代理回掉
@@ -22,6 +23,7 @@
 @end
 
 @interface UCFUserPresenter : NSObject
+@property (strong, nonatomic) UCFUserInfoModel *userInfoOneModel;
 @property (weak, nonatomic) id<UCFUserPresenterUserInfoCallBack> userInfoViewDelegate;
 @property (weak, nonatomic) id<UCFUserPresenterCyceleImageCallBack> cycleImageViewDelegate;
 
@@ -35,4 +37,5 @@
 - (void)fetchProDetailDataWithParameter:(NSDictionary *)parameter completionHandler:(NetworkCompletionHandler)completionHander;
 #pragma mark - 刷新token
 - (void)refreshData;
+- (BOOL)checkIDAAndBankBlindState:(SelectAccoutType)type;
 @end
