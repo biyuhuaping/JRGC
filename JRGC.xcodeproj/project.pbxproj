@@ -197,8 +197,8 @@
 		74270D381EC595FA00F9419B /* UCFRegistrationRecord.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74270D2F1EC595FA00F9419B /* UCFRegistrationRecord.xib */; };
 		74270D421EC5960100F9419B /* UCFDataDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 74270D3B1EC5960100F9419B /* UCFDataDetailModel.m */; };
 		74270D431EC5960100F9419B /* UCFDataStaticsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 74270D3D1EC5960100F9419B /* UCFDataStaticsModel.m */; };
-		74270D441EC5960100F9419B /* UCFRegistrationRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 74270D3F1EC5960100F9419B /* UCFRegistrationRecord.m */; };
 		74270D451EC5960100F9419B /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 74270D411EC5960100F9419B /* UIColor+Hex.m */; };
+		74270D481EC5967B00F9419B /* UCFRegistrationRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 74270D471EC5967B00F9419B /* UCFRegistrationRecord.m */; };
 		742A632D1CB7A1A500CE2553 /* UCFAccountCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 742A632C1CB7A1A500CE2553 /* UCFAccountCell.m */; };
 		742D0CA11DE29E99000FA676 /* UCFProjectListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 742D0C9F1DE29E99000FA676 /* UCFProjectListCell.m */; };
 		742D0CA21DE29E99000FA676 /* UCFProjectListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 742D0CA01DE29E99000FA676 /* UCFProjectListCell.xib */; };
@@ -1118,10 +1118,10 @@
 		74270D3B1EC5960100F9419B /* UCFDataDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFDataDetailModel.m; sourceTree = "<group>"; };
 		74270D3C1EC5960100F9419B /* UCFDataStaticsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFDataStaticsModel.h; sourceTree = "<group>"; };
 		74270D3D1EC5960100F9419B /* UCFDataStaticsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFDataStaticsModel.m; sourceTree = "<group>"; };
-		74270D3E1EC5960100F9419B /* UCFRegistrationRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFRegistrationRecord.h; sourceTree = "<group>"; };
-		74270D3F1EC5960100F9419B /* UCFRegistrationRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFRegistrationRecord.m; sourceTree = "<group>"; };
 		74270D401EC5960100F9419B /* UIColor+Hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Hex.h"; sourceTree = "<group>"; };
 		74270D411EC5960100F9419B /* UIColor+Hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Hex.m"; sourceTree = "<group>"; };
+		74270D461EC5967B00F9419B /* UCFRegistrationRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFRegistrationRecord.h; sourceTree = "<group>"; };
+		74270D471EC5967B00F9419B /* UCFRegistrationRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFRegistrationRecord.m; sourceTree = "<group>"; };
 		742A632B1CB7A1A500CE2553 /* UCFAccountCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFAccountCell.h; sourceTree = "<group>"; };
 		742A632C1CB7A1A500CE2553 /* UCFAccountCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFAccountCell.m; sourceTree = "<group>"; };
 		742D0C9E1DE29E99000FA676 /* UCFProjectListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFProjectListCell.h; sourceTree = "<group>"; };
@@ -2906,6 +2906,8 @@
 				74270D2C1EC595FA00F9419B /* UCFMyRebateViewCtrl.h */,
 				74270D2D1EC595FA00F9419B /* UCFMyRebateViewCtrl.m */,
 				74270D2E1EC595FA00F9419B /* UCFMyRebateViewCtrl.xib */,
+				74270D461EC5967B00F9419B /* UCFRegistrationRecord.h */,
+				74270D471EC5967B00F9419B /* UCFRegistrationRecord.m */,
 				74270D2F1EC595FA00F9419B /* UCFRegistrationRecord.xib */,
 			);
 			path = ViewController;
@@ -2918,8 +2920,6 @@
 				74270D3B1EC5960100F9419B /* UCFDataDetailModel.m */,
 				74270D3C1EC5960100F9419B /* UCFDataStaticsModel.h */,
 				74270D3D1EC5960100F9419B /* UCFDataStaticsModel.m */,
-				74270D3E1EC5960100F9419B /* UCFRegistrationRecord.h */,
-				74270D3F1EC5960100F9419B /* UCFRegistrationRecord.m */,
 				74270D401EC5960100F9419B /* UIColor+Hex.h */,
 				74270D411EC5960100F9419B /* UIColor+Hex.m */,
 			);
@@ -5943,7 +5943,6 @@
 				74F490EE1E5B2AAA0057AC62 /* UCFCollectionBidCell.m in Sources */,
 				FBE9B7EF1ADCC3FB0060FC4D /* InvestmentCell.m in Sources */,
 				74F291071AE0DB72003E0E86 /* UCFBackMoneyDetailViewController.m in Sources */,
-				74270D441EC5960100F9419B /* UCFRegistrationRecord.m in Sources */,
 				74931A321B1326FE00143424 /* OHParagraphStyle.m in Sources */,
 				4A9016831AFB12FE0049A9E0 /* MASLayoutConstraint.m in Sources */,
 				7BA6E4B81AD6731900FE8C37 /* MKAnnotationView+WebCache.m in Sources */,
@@ -6159,6 +6158,7 @@
 				74EB30731B0E0EC900D27BA9 /* UCFBankTableViewCell.m in Sources */,
 				4AA2AA801E5B17B7006E83F8 /* UCFBatchSetNumWebViewController.m in Sources */,
 				7459EE021E5552FE005A6FF7 /* UCFBatchBidController.m in Sources */,
+				74270D481EC5967B00F9419B /* UCFRegistrationRecord.m in Sources */,
 				7491820D1EC166F000AC1ECE /* TADotView.m in Sources */,
 				7BD588031B098E12005091D3 /* UCFNoPermissionViewController.m in Sources */,
 				74931A061B13267600143424 /* NZLabel.m in Sources */,
