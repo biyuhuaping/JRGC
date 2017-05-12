@@ -99,7 +99,7 @@
 {
     if (indexPath.row == 0) {
         return 109.0f;
-    } else if (indexPath.row == 1) {//V2.4.20 去掉倒计时 36变为 0 
+    } else if (indexPath.row == 1) {//V2.4.20 去掉倒计时 36变为 0
         NSString *buyCueDesStr =[_dataDict objectSafeForKey:@"buyCueDes"];
         if (![buyCueDesStr isEqualToString:@""]) {
           return 202.0f - 43 - 54 + 0 + 15;

@@ -20,7 +20,7 @@
 #define shadeSpacingHeight 18 //遮罩label的上下间距
 #define shadeHeight 70 //遮罩高度
 
-#define MinuteDownViewHeight 0 //倒计时高度 原始37 现在隐藏 为 0
+#define MinuteDownViewHeight 37 //倒计时高度 原始37 现在隐藏 为 0
 @interface UCFBidNewDetailView () {
     UIImageView *_headBkView;
     MDRadialProgressView *_circleProgress;
@@ -338,9 +338,9 @@
     if (_type == PROJECTDETAILTYPEBONDSRRANSFER) { //债转不添加 担保机构
       guaranteeCompanyNameStr  = @"";
     }
-//    if(_isP2P || _type == PROJECTDETAILTYPEBONDSRRANSFER){
-//       [self drawMinuteCountDownView];//创建倒计时view
-//    }
+    if(_isP2P && _type != PROJECTDETAILTYPEBONDSRRANSFER){
+       [self drawMinuteCountDownView];//创建倒计时view
+    }
     //如果没有固定起息日
     if ([fixUpdate isEqual:[NSNull null]] || [fixUpdate isEqualToString:@""] || !fixUpdate) {
         [self drawType2bottomView:guaranteeCompanyNameStr];
@@ -399,7 +399,7 @@
         row = 4;
     }
     float view_y = 0;
-    if (_isP2P || _type == PROJECTDETAILTYPEBONDSRRANSFER) {
+    if (_isP2P && _type != PROJECTDETAILTYPEBONDSRRANSFER) {
        view_y = 0 + [Common calculateNewSizeBaseMachine:HeadBkHeight] + bottomViewYPos+MinuteDownViewHeight;
     }else{
         view_y = 0 + [Common calculateNewSizeBaseMachine:HeadBkHeight] + bottomViewYPos;
@@ -523,7 +523,7 @@
         row = 3;
     }
      CGFloat bottomBeginYPos;
-    if (_isP2P || _type == PROJECTDETAILTYPEBONDSRRANSFER) {
+    if (_isP2P && _type != PROJECTDETAILTYPEBONDSRRANSFER) {
         bottomBeginYPos = 0 + [Common calculateNewSizeBaseMachine:HeadBkHeight] + bottomViewYPos+MinuteDownViewHeight;
     }else{
         bottomBeginYPos = 0 + [Common calculateNewSizeBaseMachine:HeadBkHeight] + bottomViewYPos;
