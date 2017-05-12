@@ -189,6 +189,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="circleProgressView" destination="Hab-TG-dZg" id="VAM-Jp-2K1"/>
+                <outlet property="oneImageBackView" destination="Cbf-PE-4ML" id="15X-Eg-mVd"/>
                 <outlet property="oneImageView" destination="diO-Sz-3kr" id="XUD-FC-EE5"/>
                 <outlet property="proImageView1" destination="lF4-X1-Td4" id="d4z-Yy-faE"/>
                 <outlet property="proImageView2" destination="AQh-S1-1ZL" id="Jtk-8C-K5E"/>

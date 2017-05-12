@@ -25,13 +25,13 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Lws-XF-88u">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fanli1" translatesAutoresizingMaskIntoConstraints="NO" id="Lws-XF-88u">
                         <rect key="frame" x="10" y="60" width="325" height="260"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="Lws-XF-88u" secondAttribute="height" multiplier="1.25:1" id="ZFY-Da-fEJ"/>
                         </constraints>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kF1-OI-mnE">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fanli2" translatesAutoresizingMaskIntoConstraints="NO" id="kF1-OI-mnE">
                         <rect key="frame" x="10" y="335" width="325" height="135.5"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="kF1-OI-mnE" secondAttribute="height" multiplier="2.4:1" id="Hia-p0-423"/>
@@ -57,4 +57,8 @@
             <point key="canvasLocation" x="19.5" y="201.5"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="fanli1" width="300" height="240"/>
+        <image name="fanli2" width="300" height="125"/>
+    </resources>
 </document>

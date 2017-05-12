@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UIView *proSignImageView;
 @property (weak, nonatomic) IBOutlet ZZCircleProgress *circleProgressView;
 @property (weak, nonatomic) IBOutlet UIView *oneImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *oneImageBackView;
 
 @end
 
@@ -44,6 +45,12 @@
     }
     else if (presenter.modelType == UCFHomeListCellModelTypeOneImage) {
         self.oneImageView.hidden = NO;
+        if ([self.presenter.item.backImage hasPrefix:@"http"]) {
+            
+        }
+        else {
+            self.oneImageBackView.image = [UIImage imageNamed:self.presenter.item.backImage];
+        }
     }
     
 }

@@ -113,9 +113,11 @@
     self.groupPresenter2.group.prdlist = temp2;
     
     NSMutableArray *temp3 = [[NSMutableArray alloc] init];
+    NSArray *imageArr = @[@"home_bg_1", @"home_bg_2", @"home_bg_3"];
     for (int i=0; i<3; i++) {
         UCFHomeListCellModel *model = [[UCFHomeListCellModel alloc] init];
         model.moedelType = UCFHomeListCellModelTypeOneImage;
+        model.backImage = [imageArr objectAtIndex:i];
         UCFHomeListCellPresenter *cellPresenter = [UCFHomeListCellPresenter presenterWithItem:model];
         [temp3 addObject:cellPresenter];
     }
