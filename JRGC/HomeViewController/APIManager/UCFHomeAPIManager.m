@@ -184,29 +184,12 @@
     }
     else if (tag.intValue == kSXTagPrdClaimsDetail) {
         NetworkCompletionHandler complete = [self.requestDict objectForKey:PRODETAIL];
-        
-        rstcode = dic[@"status"];
-        rsttext = dic[@"statusdes"];
-        if ([rstcode intValue] == 1) {
-            complete(nil, dic);
-        }
-        else {
-            complete(nil, rsttext);
-        }
+        complete(nil, dic);
         [self.requestDict removeObjectForKey:PRODETAIL];
     }
     else if (tag.intValue == kSXTagPrdClaimsDealBid) {
         NetworkCompletionHandler complete = [self.requestDict objectForKey:PRODETAIL];
-        
-        rstcode = dic[@"status"];
-        rsttext = dic[@"statusdes"];
-        if ([rstcode intValue] == 1) {
-
-            complete(nil, dic);
-        }
-        else {
-            complete(nil, rsttext);
-        }
+        complete(nil, dic);
         [self.requestDict removeObjectForKey:PRODETAIL];
     }
 }

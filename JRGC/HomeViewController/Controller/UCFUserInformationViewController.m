@@ -8,6 +8,7 @@
 
 #import "UCFUserInformationViewController.h"
 #import "UCFWebViewJavascriptBridgeBanner.h"
+#import "UCFPurchaseBidViewController.h"
 
 #import "UCFUserPresenter.h"
 
@@ -24,7 +25,7 @@
 
 #define UserInfoViewHeight  327
 
-@interface UCFUserInformationViewController () <UCFUserPresenterUserInfoCallBack, UITableViewDelegate, UITableViewDataSource, SDCycleScrollViewDelegate>
+@interface UCFUserInformationViewController () <UCFUserPresenterUserInfoCallBack, UITableViewDelegate, UITableViewDataSource, SDCycleScrollViewDelegate, UIAlertViewDelegate>
 @property (strong, nonatomic) UCFUserPresenter *presenter;
 
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
@@ -309,6 +310,77 @@
     }
 }
 
+- (void)userInfoPresenter:(UCFUserPresenter *)presenter didReturnPrdClaimsDealBidWithResult:(id)result error:(NSError *)error
+{
+    NSString *rstCode = [result objectForKey:@"status"];
+    NSString *rsttext = [result objectForKey:@"statusdes"];
+    if ([rstCode integerValue] == 21 || [rstCode integerValue] == 22){
+        [self checkUserCanInvestIsDetail:NO];
+    } else {
+        if ([rstCode integerValue] == 15) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:rsttext delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            [alert show];
+        } else if ([rstCode integerValue] == 19) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:rsttext delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            alert.tag =7000;
+            [alert show];
+        }else if ([rstCode integerValue] == 30) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:rsttext delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"测试",nil];
+            alert.tag = 9000;
+            [alert show];
+        }else if ([rstCode integerValue] == 40) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:rsttext delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"联系客服",nil];
+            alert.tag = 9001;
+            [alert show];
+        } else {
+            [AuxiliaryFunc showAlertViewWithMessage:rsttext];
+        }
+    }
+}
+
+- (BOOL)checkUserCanInvestIsDetail:(BOOL)isDetail
+{
+    UCFBaseViewController *baseVC = (UCFBaseViewController *)self.parentViewController;
+    NSString *tipStr1 = baseVC.accoutType == SelectAccoutTypeP2P ? P2PTIP1:ZXTIP1;
+    NSString *tipStr2 = baseVC.accoutType == SelectAccoutTypeP2P ? P2PTIP2:ZXTIP2;
+    
+    NSInteger openStatus = baseVC.accoutType == SelectAccoutTypeP2P ? [UserInfoSingle sharedManager].openStatus :[UserInfoSingle sharedManager].enjoyOpenStatus;
+    
+    switch (openStatus)
+    {// ***hqy添加
+        case 1://未开户-->>>新用户开户
+        case 2://已开户 --->>>老用户(白名单)开户
+        {
+            [self showHSAlert:tipStr1];
+            return NO;
+            break;
+        }
+        case 3://已绑卡-->>>去设置交易密码页面
+        {
+            if (isDetail) {
+                return YES;
+            }else
+            {
+                [self showHSAlert:tipStr2];
+                return NO;
+            }
+        }
+            break;
+        default:
+            return YES;
+            break;
+    }
+}
+
+- (void)showHSAlert:(NSString *)alertMessage
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:alertMessage delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    UCFBaseViewController *baseVC = (UCFBaseViewController *)self.parentViewController;
+    alert.tag = baseVC.accoutType == SelectAccoutTypeP2P ?  8000 :8010 ;
+    [alert show];
+}
+
+
 #pragma mark - sign 签到
 - (IBAction)sign:(UIButton *)sender {
     NSString *userId  = [UserInfoSingle sharedManager].userId;
@@ -336,5 +408,11 @@
     }];
 }
 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if ([self.delegate respondsToSelector:@selector(proInvestAlert:didClickedWithTag:withIndex:)]) {
+        [self.delegate proInvestAlert:alertView didClickedWithTag:alertView.tag withIndex:buttonIndex];
+    }
+}
 
 @end

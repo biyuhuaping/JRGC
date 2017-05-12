@@ -22,7 +22,8 @@
 #import "UCFHonerViewController.h"
 #import "UCFP2PViewController.h"
 #import "UCFP2POrHonerAccoutViewController.h"
-
+#import "HSHelper.h"
+#import "RiskAssessmentViewController.h"
 #import "UCFUserPresenter.h"
 #import "UCFHomeListPresenter.h"
 #import "UCFHomeListCellPresenter.h"
@@ -33,6 +34,7 @@
 #import "MongoliaLayerCenter.h"
 
 #import "UCFUserInfoListItem.h"
+
 
 @interface UCFHomeViewController () <UCFHomeListViewControllerDelegate, UCFHomeListNavViewDelegate, UCFUserInformationViewControllerDelegate>
 @property (strong, nonatomic) UCFCycleImageViewController *cycleImageVC;
@@ -165,81 +167,90 @@
 
 - (void)homeList:(UCFHomeListViewController *)homeList tableView:(UITableView *)tableView didClickedWithModel:(UCFHomeListCellModel *)model withType:(UCFHomeListType)type
 {
+     __weak typeof(self) weakSelf = self;
+    self.accoutType = [model.type intValue] == 2 ?SelectAccoutTypeHoner:SelectAccoutTypeP2P;
+    
     if (type == UCFHomeListTypeDetail) {
         if (model.moedelType == UCFHomeListCellModelTypeDefault) {
-            
-    
-            if ([model.status intValue ] != 2) {
-                NSInteger isOrder = [model.isOrder integerValue];
-                if (isOrder > 0) {
-                    NSDictionary *parameter = @{@"Id": model.Id, @"userId": [UserInfoSingle sharedManager].userId, @"proType": model.type,@"type":@"3"};
-                    [self.userInfoVC.presenter fetchProDetailDataWithParameter:parameter completionHandler:^(NSError *error, id result) {
-                        NSDictionary *dic = (NSDictionary *)result;
-                        
-                        
-                        NSString *rstcode = dic[@"status"];
-                        NSString *rsttext = dic[@"statusdes"];
-                        if ([rstcode intValue] == 1) {
-                            NSArray *prdLabelsListTemp = [NSArray arrayWithArray:(NSArray*)model.prdLabelsList];
-                            UCFProjectDetailViewController *controller = [[UCFProjectDetailViewController alloc] initWithDataDic:dic isTransfer:NO withLabelList:prdLabelsListTemp];
-                            CGFloat platformSubsidyExpense = [model.platformSubsidyExpense floatValue];
-                            [[NSUserDefaults standardUserDefaults] setValue:[NSString stringWithFormat:@"%.1f",platformSubsidyExpense] forKey:@"platformSubsidyExpense"];
-                            [self.navigationController pushViewController:controller animated:YES];
-                        }else {
-                            [AuxiliaryFunc showAlertViewWithMessage:rsttext];
-                        }
-  
-                    }];
-                } else {
-                    UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前标的详情只对投资人开放"];
-                    [self.navigationController pushViewController:controller animated:YES];
-                }
+        
+            if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
+                //如果未登录，展示登录页面
+                [self showLoginView];
             } else {
-                NSDictionary *parameter = @{@"Id": model.Id, @"userId": [UserInfoSingle sharedManager].userId, @"proType": model.type,@"type":@"3"};
-                [self.userInfoVC.presenter fetchProDetailDataWithParameter:parameter completionHandler:^(NSError *error, id result) {
-                    NSDictionary *dic = (NSDictionary *)result;
-                    
-                    
-                    NSString *rstcode = dic[@"status"];
-                    NSString *rsttext = dic[@"statusdes"];
-                    if ([rstcode intValue] == 1) {
-                        NSArray *prdLabelsListTemp = [NSArray arrayWithArray:(NSArray*)model.prdLabelsList];
-                        UCFProjectDetailViewController *controller = [[UCFProjectDetailViewController alloc] initWithDataDic:dic isTransfer:NO withLabelList:prdLabelsListTemp];
-                        CGFloat platformSubsidyExpense = [model.platformSubsidyExpense floatValue];
-                        [[NSUserDefaults standardUserDefaults] setValue:[NSString stringWithFormat:@"%.1f",platformSubsidyExpense] forKey:@"platformSubsidyExpense"];
-                        [self.navigationController pushViewController:controller animated:YES];
-                    }else {
-                        [AuxiliaryFunc showAlertViewWithMessage:rsttext];
-                    }
-                }];
-            }
-        }
-        else if (model.moedelType == UCFHomeListCellModelTypeOneImage) {
+//                if([self.userInfoVC.presenter checkIDAAndBankBlindState:self.accoutType]){//           在这里需要 判断授权 以及开户,需要重新梳理
+                        NSInteger isOrder = [model.isOrder integerValue];
+                        if ([model.status intValue ] != 2){
+                        if (isOrder > 0) {
+                            NSDictionary *parameter = @{@"Id": model.Id, @"userId": [UserInfoSingle sharedManager].userId, @"proType": model.type,@"type":@"3"};
+                            [self.userInfoVC.presenter fetchProDetailDataWithParameter:parameter completionHandler:^(NSError *error, id result) {
+                                NSDictionary *dic = (NSDictionary *)result;
+                                
+                                
+                                NSString *rstcode = dic[@"status"];
+                                NSString *rsttext = dic[@"statusdes"];
+                                if ([rstcode intValue] == 1) {
+                                    NSArray *prdLabelsListTemp = [NSArray arrayWithArray:(NSArray*)model.prdLabelsList];
+                                    UCFProjectDetailViewController *controller = [[UCFProjectDetailViewController alloc] initWithDataDic:dic isTransfer:NO withLabelList:prdLabelsListTemp];
+                                    CGFloat platformSubsidyExpense = [model.platformSubsidyExpense floatValue];
+                                    [[NSUserDefaults standardUserDefaults] setValue:[NSString stringWithFormat:@"%.1f",platformSubsidyExpense] forKey:@"platformSubsidyExpense"];
+                                    [weakSelf.navigationController pushViewController:controller animated:YES];
+                                }else {
+                                    [AuxiliaryFunc showAlertViewWithMessage:rsttext];
+                                }
+                                
+                            }];
+                        } else {
+                            UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前标的详情只对投资人开放"];
+                            [self.navigationController pushViewController:controller animated:YES];
+                        }
+                    }else{
+                        {
+                            NSDictionary *parameter = @{@"Id": model.Id, @"userId": [UserInfoSingle sharedManager].userId, @"proType": model.type,@"type":@"3"};
+                            [self.userInfoVC.presenter fetchProDetailDataWithParameter:parameter completionHandler:^(NSError *error, id result) {
+                                NSDictionary *dic = (NSDictionary *)result;
+                                
+                                
+                                NSString *rstcode = dic[@"status"];
+                                NSString *rsttext = dic[@"statusdes"];
+                                if ([rstcode intValue] == 1) {
+                                    NSArray *prdLabelsListTemp = [NSArray arrayWithArray:(NSArray*)model.prdLabelsList];
+                                    UCFProjectDetailViewController *controller = [[UCFProjectDetailViewController alloc] initWithDataDic:dic isTransfer:NO withLabelList:prdLabelsListTemp];
+                                    CGFloat platformSubsidyExpense = [model.platformSubsidyExpense floatValue];
+                                    [[NSUserDefaults standardUserDefaults] setValue:[NSString stringWithFormat:@"%.1f",platformSubsidyExpense] forKey:@"platformSubsidyExpense"];
+                                    [weakSelf.navigationController pushViewController:controller animated:YES];
+                                }else {
+                                    [AuxiliaryFunc showAlertViewWithMessage:rsttext];
+                                }
+                            }];
+                         }
+                     }
+//                 }
+             }
+          }else if (model.moedelType == UCFHomeListCellModelTypeOneImage) {
             
         }
     }
     else if (type == UCFHomeListTypeInvest) {
         if (model.moedelType == UCFHomeListCellModelTypeDefault) {
             
-            NSDictionary *parameter = @{@"Id": model.Id, @"userId": [UserInfoSingle sharedManager].userId, @"proType": model.type,@"type":@"4"};
-            [self.userInfoVC.presenter fetchProDetailDataWithParameter:parameter completionHandler:^(NSError *error, id result) {
-                NSDictionary *dic = (NSDictionary *)result;
-                
-                
-                NSString *rstcode = dic[@"status"];
-                NSString *rsttext = dic[@"statusdes"];
-                if ([rstcode intValue] == 1) {
-                    
-                    UCFPurchaseBidViewController *purchaseViewController = [[UCFPurchaseBidViewController alloc] initWithNibName:@"UCFPurchaseBidViewController" bundle:nil];
-                    purchaseViewController.dataDict = dic;
-                    purchaseViewController.bidType = 0;
-                    purchaseViewController.baseTitleType = @"detail_heTong";
-                    purchaseViewController.accoutType = [model.type intValue];
-                    [self.navigationController pushViewController:purchaseViewController animated:YES];
-                }else {
-                    [AuxiliaryFunc showAlertViewWithMessage:rsttext];
-                }
-            }];
+            if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
+                //如果未登录，展示登录页面
+                [self showLoginView];
+            } else {
+//                [self.userInfoVC.presenter checkIDAAndBankBlindState:self.accoutType]){//           在这里需要 判断授权 以及开户
+                NSDictionary *parameter = @{@"Id": model.Id, @"userId": [UserInfoSingle sharedManager].userId, @"proType": model.type,@"type":@"4"};
+                [self.userInfoVC.presenter fetchProDetailDataWithParameter:parameter completionHandler:^(NSError *error, id result) {
+                    NSString *rstcode = [result objectForKey:@"status"];
+                    if ([rstcode intValue] == 1) {
+                        UCFPurchaseBidViewController *purchaseViewController = [[UCFPurchaseBidViewController alloc] initWithNibName:@"UCFPurchaseBidViewController" bundle:nil];
+                        purchaseViewController.dataDict = result;
+                        purchaseViewController.bidType = 0;
+                        purchaseViewController.baseTitleType = @"detail_heTong";
+                        purchaseViewController.accoutType = self.accoutType;
+                    [weakSelf.navigationController pushViewController:purchaseViewController animated:YES];
+                   }
+                }];
+            }
         }
         else if (model.moedelType == UCFHomeListCellModelTypeOneImage) {
             
@@ -261,6 +272,12 @@
         horner.accoutType = SelectAccoutTypeHoner;
         [self.navigationController pushViewController:horner animated:YES];
     }
+}
+- (void)showLoginView
+{
+    UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
+    UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
+    [self presentViewController:loginNaviController animated:YES completion:nil];
 }
 #pragma mark - UCFHomeListNavViewDelegate
 
@@ -317,6 +334,34 @@
         subVC.accoutType = SelectAccoutTypeHoner;
     }
     [self.navigationController pushViewController:subVC animated:YES];
+}
+
+- (void)proInvestAlert:(UIAlertView *)alertView didClickedWithTag:(NSInteger)tag withIndex:(NSInteger)index
+{
+    if (alertView.tag == 7000) {
+        [self fetchData];
+    } else if (alertView.tag == 8000) {
+        if (index == 1) {
+            HSHelper *helper = [HSHelper new];
+            [helper pushOpenHSType:SelectAccoutTypeP2P Step:[UserInfoSingle sharedManager].openStatus nav:self.navigationController];
+        }
+    }else if (alertView.tag == 8010) {
+        if (index == 1) {
+            HSHelper *helper = [HSHelper new];
+            [helper pushOpenHSType:SelectAccoutTypeHoner Step:[UserInfoSingle sharedManager].enjoyOpenStatus nav:self.navigationController];
+        }
+    }
+    else if (alertView.tag == 9000) {
+        if(index == 1){ //测试
+            RiskAssessmentViewController *vc = [[RiskAssessmentViewController alloc] initWithNibName:@"RiskAssessmentViewController" bundle:nil];
+            vc.accoutType = self.accoutType;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+    }else if(alertView.tag == 9001){
+        if (index == 1) {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"telprompt://400-0322-988"]];
+        }
+    }
 }
 
 @end

@@ -13,6 +13,8 @@
 
 - (void)userInfotableView:(UITableView *)tableView didSelectedItem:(UCFUserInfoListItem *)item;
 
+- (void)proInvestAlert:(UIAlertView *)alertView didClickedWithTag:(NSInteger)tag withIndex:(NSInteger)index;
+
 @end
 
 @interface UCFUserInformationViewController : UIViewController
