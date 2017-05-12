@@ -316,7 +316,7 @@
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
-    if (textField == _textField1 && ![Common isChinese:_textField1.text]) {
+    if (textField == _textField1 && [textField.text isEqualToString:@""]) {//&& ![Common isChinese:_textField1.text] 去掉对名字的限制
         [AuxiliaryFunc showToastMessage:@"请输入正确的姓名" withView:self.view];
         return;
     }else if (textField == _textField2 && ![Common isIdentityCard:_textField2.text]){
