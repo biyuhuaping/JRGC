@@ -26,6 +26,10 @@
 #import "UCFHomeListNavView.h"
 #import "MaskView.h"
 #import "MongoliaLayerCenter.h"
+#import "UCFHonerViewController.h"
+#import "UCFP2PViewController.h"
+#import "UCFNoPermissionViewController.h"
+#import "UCFProjectDetailViewController.h"
 
 @interface UCFHomeViewController () <UCFHomeListViewControllerDelegate, UCFHomeListNavViewDelegate, UCFUserInformationViewControllerDelegate>
 @property (strong, nonatomic) UCFCycleImageViewController *cycleImageVC;
@@ -161,6 +165,51 @@
     if (type == UCFHomeListTypeDetail) {
         if (model.moedelType == UCFHomeListCellModelTypeDefault) {
             
+    
+            if ([model.status intValue ] != 2) {
+                NSInteger isOrder = [model.isOrder integerValue];
+                if (isOrder > 0) {
+                    NSDictionary *parameter = @{@"Id": model.Id, @"userId": [UserInfoSingle sharedManager].userId, @"proType": model.type,@"type":@"3"};
+                    [self.userInfoVC.presenter fetchProDetailDataWithParameter:parameter completionHandler:^(NSError *error, id result) {
+                        NSDictionary *dic = (NSDictionary *)result;
+                        
+                        
+                        NSString *rstcode = dic[@"status"];
+                        NSString *rsttext = dic[@"statusdes"];
+                        if ([rstcode intValue] == 1) {
+                            NSArray *prdLabelsListTemp = [NSArray arrayWithArray:(NSArray*)model.prdLabelsList];
+                            UCFProjectDetailViewController *controller = [[UCFProjectDetailViewController alloc] initWithDataDic:dic isTransfer:NO withLabelList:prdLabelsListTemp];
+                            CGFloat platformSubsidyExpense = [model.platformSubsidyExpense floatValue];
+                            [[NSUserDefaults standardUserDefaults] setValue:[NSString stringWithFormat:@"%.1f",platformSubsidyExpense] forKey:@"platformSubsidyExpense"];
+                            [self.navigationController pushViewController:controller animated:YES];
+                        }else {
+                            [AuxiliaryFunc showAlertViewWithMessage:rsttext];
+                        }
+  
+                    }];
+                } else {
+                    UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前标的详情只对投资人开放"];
+                    [self.navigationController pushViewController:controller animated:YES];
+                }
+            } else {
+                NSDictionary *parameter = @{@"Id": model.Id, @"userId": [UserInfoSingle sharedManager].userId, @"proType": model.type,@"type":@"3"};
+                [self.userInfoVC.presenter fetchProDetailDataWithParameter:parameter completionHandler:^(NSError *error, id result) {
+                    NSDictionary *dic = (NSDictionary *)result;
+                    
+                    
+                    NSString *rstcode = dic[@"status"];
+                    NSString *rsttext = dic[@"statusdes"];
+                    if ([rstcode intValue] == 1) {
+                        NSArray *prdLabelsListTemp = [NSArray arrayWithArray:(NSArray*)model.prdLabelsList];
+                        UCFProjectDetailViewController *controller = [[UCFProjectDetailViewController alloc] initWithDataDic:dic isTransfer:NO withLabelList:prdLabelsListTemp];
+                        CGFloat platformSubsidyExpense = [model.platformSubsidyExpense floatValue];
+                        [[NSUserDefaults standardUserDefaults] setValue:[NSString stringWithFormat:@"%.1f",platformSubsidyExpense] forKey:@"platformSubsidyExpense"];
+                        [self.navigationController pushViewController:controller animated:YES];
+                    }else {
+                        [AuxiliaryFunc showAlertViewWithMessage:rsttext];
+                    }
+                }];
+            }
         }
         else if (model.moedelType == UCFHomeListCellModelTypeOneImage) {
             
@@ -169,19 +218,47 @@
     else if (type == UCFHomeListTypeInvest) {
         if (model.moedelType == UCFHomeListCellModelTypeDefault) {
             
+            NSDictionary *parameter = @{@"Id": model.Id, @"userId": [UserInfoSingle sharedManager].userId, @"proType": model.type,@"type":@"4"};
+            [self.userInfoVC.presenter fetchProDetailDataWithParameter:parameter completionHandler:^(NSError *error, id result) {
+                NSDictionary *dic = (NSDictionary *)result;
+                
+                
+                NSString *rstcode = dic[@"status"];
+                NSString *rsttext = dic[@"statusdes"];
+                if ([rstcode intValue] == 1) {
+                    
+                    UCFPurchaseBidViewController *purchaseViewController = [[UCFPurchaseBidViewController alloc] initWithNibName:@"UCFPurchaseBidViewController" bundle:nil];
+                    purchaseViewController.dataDict = dic;
+                    purchaseViewController.bidType = 0;
+                    purchaseViewController.baseTitleType = @"detail_heTong";
+                    purchaseViewController.accoutType = [model.type intValue];
+                    [self.navigationController pushViewController:purchaseViewController animated:YES];
+                }else {
+                    [AuxiliaryFunc showAlertViewWithMessage:rsttext];
+                }
+            }];
         }
         else if (model.moedelType == UCFHomeListCellModelTypeOneImage) {
             
         }
     }
-    else if (type == UCFHomeListTypeP2PMore) {
-        
+    else if (type == UCFHomeListTypeP2PMore)
+    {
+        UCFP2PViewController *p2PVC = [[UCFP2PViewController alloc] initWithNibName:@"UCFP2PViewController" bundle:nil];
+        p2PVC.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight - 64);
+        p2PVC.viewType = @"1";
+        [p2PVC setCurrentViewForBatchBid];
+        [self.navigationController pushViewController:p2PVC animated:YES];
     }
-    else if (type == UCFHomeListTypeZXMore) {
-        
+    else if (type == UCFHomeListTypeZXMore)
+    {
+        UCFHonerViewController *horner = [[UCFHonerViewController alloc] initWithNibName:@"UCFHonerViewController" bundle:nil];
+        horner.baseTitleText = @"工场尊享";
+        horner.viewType = @"1";
+        horner.accoutType = SelectAccoutTypeHoner;
+        [self.navigationController pushViewController:horner animated:YES];
     }
 }
-
 #pragma mark - UCFHomeListNavViewDelegate
 
 - (void)homeListNavView:(UCFHomeListNavView *)navView didClicked:(UIButton *)loginAndRegister

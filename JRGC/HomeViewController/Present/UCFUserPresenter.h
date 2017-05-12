@@ -31,6 +31,8 @@
 - (void)fetchUserInfoOneDataWithCompletionHandler:(NetworkCompletionHandler)completionHander;
 - (void)fetchUserInfoTwoDataWithCompletionHandler:(NetworkCompletionHandler)completionHander;
 - (void)fetchSignDataWithUserId:(NSString *)userId withToken:(NSString *)token completionHandler:(NetworkCompletionHandler)completionHander;
+
+- (void)fetchProDetailDataWithParameter:(NSDictionary *)parameter completionHandler:(NetworkCompletionHandler)completionHander;
 #pragma mark - 刷新token
 - (void)refreshData;
 @end
