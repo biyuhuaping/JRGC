@@ -8,22 +8,12 @@
 
 #import "UCFUserPresenter.h"
 #import "UCFUserInfoListItem.h"
-#import "UCFUserInfoModel.h"
+#import "HSHelper.h"
 
 @interface UCFUserPresenter ()
 @property (strong, nonatomic) UCFHomeAPIManager *apiManager;
 @property (copy, nonatomic) NSString *userId;
 @property (strong, nonatomic) NSMutableArray *userInfoListCells;
-@property (strong, nonatomic) UCFUserInfoModel *userInfoOneModel;
-
-// p2p账户可用余额
-@property (copy, nonatomic) NSString *p2pBalanceMoney;
-// 尊享账户可用余额
-@property (copy, nonatomic) NSString *hornerBalanceMoney;
-// 尊享是否开户
-@property (assign, nonatomic) BOOL isHonorUser;
-// P2P账户是否开户
-@property (assign, nonatomic) BOOL isP2PUser;
 @end
 
 @implementation UCFUserPresenter
@@ -55,30 +45,29 @@
     return self.userInfoListCells;
 }
 
-- (BOOL)isHonorUser
-{
-    return _isHonorUser;
-}
-
 #pragma mark - 初始化数据
 - (void)initUI
 {
     UCFUserInfoListItem *userInfoList0 = [UCFUserInfoListItem itemWithTitle:@"P2P账户" destVcClass:nil];
-    userInfoList0.isShow = self.isP2PUser;
-    if (self.isP2PUser) {
-        userInfoList0.subtitle = self.p2pBalanceMoney.length > 0 ? [NSString stringWithFormat:@"%@元", self.p2pBalanceMoney] : @"0.00元";
+    if ([self.userInfoOneModel.openStatus intValue] < 2) {
+        userInfoList0.isShow = NO;
+        userInfoList0.subtitle = @"未开户";
     }
     else {
-        userInfoList0.subtitle = @"未开户";
+        userInfoList0.isShow = YES;
+        userInfoList0.subtitle = self.userInfoOneModel.p2pCashBalance.length > 0 ? [NSString stringWithFormat:@"%@元", self.userInfoOneModel.p2pCashBalance] : @"0.00元";
+
     }
     
     UCFUserInfoListItem *userInfoList1 = [UCFUserInfoListItem itemWithTitle:@"尊享账户" destVcClass:nil];
-    userInfoList1.isShow = self.isHonorUser;
-    if (self.isHonorUser) {
-        userInfoList1.subtitle = self.hornerBalanceMoney.length > 0 ? [NSString stringWithFormat:@"%@元", self.hornerBalanceMoney] : @"";
+
+    if ([self.userInfoOneModel.zxOpenStatus intValue] < 2) {
+        userInfoList1.isShow = NO;
+        userInfoList1.subtitle = @"未开户";
     }
     else {
-        userInfoList1.subtitle = @"未开户";
+        userInfoList1.isShow = YES;
+        userInfoList1.subtitle = self.userInfoOneModel.zxCashBalance.length > 0 ? [NSString stringWithFormat:@"%@元", self.userInfoOneModel.zxCashBalance] : @"0.00元";
     }
     [self.userInfoListCells addObject:userInfoList0];
     [self.userInfoListCells addObject:userInfoList1];
@@ -92,11 +81,9 @@
     __weak typeof(self) weakSelf = self;
     [self.apiManager fetchUserInfoOneWithUserId:self.userId completionHandler:^(NSError *error, id result) {
         if ([result isKindOfClass:[UCFUserInfoModel class]]) {
-            UCFUserInfoModel *userInfo = result;
-            weakSelf.p2pBalanceMoney = userInfo.p2pCashBalance;
-            weakSelf.hornerBalanceMoney = userInfo.zxCashBalance;
-            weakSelf.isP2PUser = userInfo.p2pOpenState;
-            weakSelf.isHonorUser = userInfo.zxOpenState;
+            weakSelf.userInfoOneModel = result;
+            [weakSelf.userInfoListCells removeAllObjects];
+            [weakSelf initUI];
         }
         else if ([result isKindOfClass:[NSString class]]) {
             
@@ -146,6 +133,27 @@
 
 - (void)refreshData {
     [self fetchUserInfoTwoDataWithCompletionHandler:nil];
+}
+
+
+#pragma mark - 无奈的代码
+- (BOOL)checkIDAAndBankBlindState:(SelectAccoutType)type {
+    NSUInteger openStatus = (type == SelectAccoutTypeP2P ? [self.userInfoOneModel.openStatus integerValue] : [self.userInfoOneModel.zxOpenStatus integerValue]);
+    __weak typeof(self) weakSelf = self;
+    if (openStatus == 1 || openStatus == 2) {
+        NSString *message = (type == SelectAccoutTypeP2P ? P2PTIP1 : ZXTIP1);
+        NSInteger step = (type == SelectAccoutTypeP2P ? [self.userInfoOneModel.openStatus integerValue] : [self.userInfoOneModel.zxOpenStatus integerValue]);
+        BlockUIAlertView *alert = [[BlockUIAlertView alloc] initWithTitle:@"提示" message:message cancelButtonTitle:@"取消" clickButton:^(NSInteger index){
+            if (index == 1) {
+                HSHelper *helper = [HSHelper new];
+                UIViewController *VC = (UIViewController *)weakSelf.userInfoViewDelegate;
+                [helper pushOpenHSType:type Step:step nav:VC.parentViewController.navigationController];
+            }
+        } otherButtonTitles:@"确定"];
+        [alert show];
+        return NO;
+    }
+    return YES;
 }
 
 @end

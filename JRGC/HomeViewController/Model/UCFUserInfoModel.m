@@ -46,13 +46,15 @@
 {
     for (NSString *key in [self propertyKeys]) {
         id propertyValue = [dataSource valueForKey:key];
-        if (![propertyValue isKindOfClass:[NSNull class]] && propertyValue != nil) {
-            if ([key isEqualToString:@"Id"]) {
-                propertyValue = [dataSource valueForKey:@"id"];
+        if ([key isEqualToString:@"isCompanyAgent"]) {
+            [self setIsCompanyAgent:[propertyValue boolValue]];
+        }
+        else {
+            if (![propertyValue isKindOfClass:[NSNull class]] && propertyValue != nil) {
+                [self setValue:propertyValue forKey:key];
+            } else {
+    //            [self setValue:@"" forKey:key];
             }
-            [self setValue:propertyValue forKey:key];
-        } else {
-//            [self setValue:@"" forKey:key];
         }
     }
 }

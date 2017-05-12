@@ -15,9 +15,10 @@
 @property (nonatomic, copy) NSString *total;
 @property (nonatomic, copy) NSString *userId;
 @property (nonatomic, copy) NSString *zxCashBalance;
-#warning 暂定
-@property (nonatomic, assign) BOOL p2pOpenState;
-@property (nonatomic, assign) BOOL zxOpenState;
+@property (nonatomic, assign) BOOL isCompanyAgent;
+@property (nonatomic, copy) NSString *openStatus;
+@property (nonatomic, copy) NSString *tipsDes;
+@property (nonatomic, copy) NSString *zxOpenStatus;
 
 @property (nonatomic, copy) NSString *beanAmount;
 @property (nonatomic, strong) NSNumber *couponNumber;

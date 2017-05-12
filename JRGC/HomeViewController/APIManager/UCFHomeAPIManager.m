@@ -60,7 +60,7 @@
     }
 }
 
-#warning 详情
+#pragma mark - 获取标的详情
 - (void)fetchProDetailInfoWithParameter:(NSDictionary *)parameter completionHandler:(NetworkCompletionHandler)completionHandler
 {
     if ([[NSUserDefaults standardUserDefaults] objectForKey:UUID]) {
