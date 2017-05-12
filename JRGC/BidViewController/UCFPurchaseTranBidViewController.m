@@ -99,12 +99,12 @@
 {
     if (indexPath.row == 0) {
         return 109.0f;
-    } else if (indexPath.row == 1) {
+    } else if (indexPath.row == 1) {//V2.4.20 去掉倒计时 36变为 0 
         NSString *buyCueDesStr =[_dataDict objectSafeForKey:@"buyCueDes"];
         if (![buyCueDesStr isEqualToString:@""]) {
-          return 202.0f - 43 - 54 + 36+15;
+          return 202.0f - 43 - 54 + 0 + 15;
         }
-        return 202.0f - 43 - 54 + 36;
+        return 202.0f - 43 - 54 + 0;
     } else if (indexPath.row == 2) {
         return 30;
     }
@@ -133,7 +133,7 @@
         static NSString *cellStr2 = @"cell2";
         MoneyBoardCell *cell = [self.bidTableView dequeueReusableCellWithIdentifier:cellStr2];
         if (cell == nil) {
-            cell = [[MoneyBoardCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellStr2 isCollctionKeyBid:NO];
+            cell = [[MoneyBoardCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellStr2 isCollctionKeyBid:YES];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.delegate = self;
             cell.dataDict = _dataDict;

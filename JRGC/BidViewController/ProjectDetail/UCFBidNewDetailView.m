@@ -20,7 +20,7 @@
 #define shadeSpacingHeight 18 //遮罩label的上下间距
 #define shadeHeight 70 //遮罩高度
 
-#define MinuteDownViewHeight 37 //遮罩高度
+#define MinuteDownViewHeight 0 //倒计时高度 原始37 现在隐藏 为 0
 @interface UCFBidNewDetailView () {
     UIImageView *_headBkView;
     MDRadialProgressView *_circleProgress;
@@ -338,9 +338,9 @@
     if (_type == PROJECTDETAILTYPEBONDSRRANSFER) { //债转不添加 担保机构
       guaranteeCompanyNameStr  = @"";
     }
-    if(_isP2P || _type == PROJECTDETAILTYPEBONDSRRANSFER){
-       [self drawMinuteCountDownView];//创建倒计时view
-    }
+//    if(_isP2P || _type == PROJECTDETAILTYPEBONDSRRANSFER){
+//       [self drawMinuteCountDownView];//创建倒计时view
+//    }
     //如果没有固定起息日
     if ([fixUpdate isEqual:[NSNull null]] || [fixUpdate isEqualToString:@""] || !fixUpdate) {
         [self drawType2bottomView:guaranteeCompanyNameStr];

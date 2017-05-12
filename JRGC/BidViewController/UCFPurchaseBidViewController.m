@@ -799,14 +799,14 @@
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
             return 109.0f;
-        } else if (indexPath.row == 1) {
-            float height = 201.0f+36.0f+[self getSectionHight];//36为倒计时view的高度
+        } else if (indexPath.row == 1) {//V2.4.20现在去掉倒计时 36 将变为0
+            float height = 201.0f + 0 + [self getSectionHight];//36为倒计时view的高度
             if (isCompanyAgent) { //机构用户需要把工豆隐藏
                 height = height - 44.0f;
             }
-            if(!_isP2P){
-                height = height - 36.0f;
-            }
+//            if(!_isP2P){ //隐藏尊享 倒计时
+//                height = height - 36.0f;
+//            }
             return height;
         } else if (indexPath.row == 2) {
             return 30;
@@ -880,7 +880,7 @@
         static NSString *cellStr2 = @"cell2";
         MoneyBoardCell *cell = [self.bidTableView dequeueReusableCellWithIdentifier:cellStr2];
         if (cell == nil) {
-            cell = [[MoneyBoardCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellStr2 isCollctionKeyBid:!_isP2P];
+            cell = [[MoneyBoardCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellStr2 isCollctionKeyBid:YES];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.delegate = self;
             double gondDouBalance = [[[_dataDict objectSafeDictionaryForKey:@"beanUser"] objectForKey:@"availableBalance"] doubleValue];
