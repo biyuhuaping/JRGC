@@ -137,6 +137,13 @@
     }];
 }
 
+- (void)fetchProDetailDataWithParameter:(NSDictionary *)parameter completionHandler:(NetworkCompletionHandler)completionHander
+{
+    [self.apiManager fetchProDetailInfoWithParameter:parameter completionHandler:^(NSError *error, id result) {
+        !completionHander ?: completionHander(error, result);
+    }];
+}
+
 - (void)refreshData {
     [self fetchUserInfoTwoDataWithCompletionHandler:nil];
 }
