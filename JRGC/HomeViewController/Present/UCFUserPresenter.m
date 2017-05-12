@@ -21,9 +21,9 @@
 // 尊享账户可用余额
 @property (copy, nonatomic) NSString *hornerBalanceMoney;
 // 尊享是否开户
-@property (assign, nonatomic) BOOL isHonorUser;
+@property (copy, nonatomic) NSString *honorUserState;
 // P2P账户是否开户
-@property (assign, nonatomic) BOOL isP2PUser;
+@property (copy, nonatomic) NSString *P2PUserState;
 @end
 
 @implementation UCFUserPresenter
@@ -55,31 +55,26 @@
     return self.userInfoListCells;
 }
 
-- (BOOL)isHonorUser
-{
-    return _isHonorUser;
-}
-
 #pragma mark - 初始化数据
 - (void)initUI
 {
     UCFUserInfoListItem *userInfoList0 = [UCFUserInfoListItem itemWithTitle:@"P2P账户" destVcClass:nil];
-    userInfoList0.isShow = self.isP2PUser;
-    if (self.isP2PUser) {
-        userInfoList0.subtitle = self.p2pBalanceMoney.length > 0 ? [NSString stringWithFormat:@"%@元", self.p2pBalanceMoney] : @"0.00元";
-    }
-    else {
-        userInfoList0.subtitle = @"未开户";
-    }
+//    userInfoList0.isShow = self.isP2PUser;
+//    if (self.isP2PUser) {
+//        userInfoList0.subtitle = self.p2pBalanceMoney.length > 0 ? [NSString stringWithFormat:@"%@元", self.p2pBalanceMoney] : @"0.00元";
+//    }
+//    else {
+//        userInfoList0.subtitle = @"未开户";
+//    }
     
     UCFUserInfoListItem *userInfoList1 = [UCFUserInfoListItem itemWithTitle:@"尊享账户" destVcClass:nil];
-    userInfoList1.isShow = self.isHonorUser;
-    if (self.isHonorUser) {
-        userInfoList1.subtitle = self.hornerBalanceMoney.length > 0 ? [NSString stringWithFormat:@"%@元", self.hornerBalanceMoney] : @"";
-    }
-    else {
-        userInfoList1.subtitle = @"未开户";
-    }
+//    userInfoList1.isShow = self.isHonorUser;
+//    if (self.isHonorUser) {
+//        userInfoList1.subtitle = self.hornerBalanceMoney.length > 0 ? [NSString stringWithFormat:@"%@元", self.hornerBalanceMoney] : @"";
+//    }
+//    else {
+//        userInfoList1.subtitle = @"未开户";
+//    }
     [self.userInfoListCells addObject:userInfoList0];
     [self.userInfoListCells addObject:userInfoList1];
 }
@@ -92,11 +87,7 @@
     __weak typeof(self) weakSelf = self;
     [self.apiManager fetchUserInfoOneWithUserId:self.userId completionHandler:^(NSError *error, id result) {
         if ([result isKindOfClass:[UCFUserInfoModel class]]) {
-            UCFUserInfoModel *userInfo = result;
-            weakSelf.p2pBalanceMoney = userInfo.p2pCashBalance;
-            weakSelf.hornerBalanceMoney = userInfo.zxCashBalance;
-            weakSelf.isP2PUser = userInfo.p2pOpenState;
-            weakSelf.isHonorUser = userInfo.zxOpenState;
+            weakSelf.userInfoOneModel = result;
         }
         else if ([result isKindOfClass:[NSString class]]) {
             
