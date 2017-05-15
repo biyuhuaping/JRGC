@@ -35,4 +35,5 @@
 - (void)setCouponVCGenerator:(ViewControllerGenerator)couponVCGenerator;
 - (void)setWorkPointInfoVCGenerator:(ViewControllerGenerator)workPointInfoVCGenerator;
 - (void)setMyLevelVCGenerator:(ViewControllerGenerator)myLevelVCGenerator;
+- (void)signForRedBag;
 @end
