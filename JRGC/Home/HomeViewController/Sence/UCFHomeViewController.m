@@ -297,6 +297,7 @@
     else if (type == UCFHomeListTypeZXMore)
     {
         UCFHonerViewController *horner = [[UCFHonerViewController alloc] initWithNibName:@"UCFHonerViewController" bundle:nil];
+        horner.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight - 64);
         horner.baseTitleText = @"工场尊享";
         horner.viewType = @"1";
         horner.accoutType = SelectAccoutTypeHoner;

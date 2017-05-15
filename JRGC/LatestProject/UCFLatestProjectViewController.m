@@ -838,9 +838,11 @@
         case 1: //1尊享
         {
             UCFHonerViewController *horner = [[UCFHonerViewController alloc] initWithNibName:@"UCFHonerViewController" bundle:nil];
+            horner.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight - 64);
             horner.baseTitleText = @"工场尊享";
             horner.viewType = @"1";
             horner.accoutType = SelectAccoutTypeHoner;
+            [horner setCurrentViewForHornerTransferVC];
             [self.navigationController pushViewController:horner animated:YES];
             
         }

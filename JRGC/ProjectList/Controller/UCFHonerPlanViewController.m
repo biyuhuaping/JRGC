@@ -56,7 +56,7 @@
     baseTitleLabel.text = @"工场尊享";
     [self addLeftButton];
    
-    
+    self.accoutType = SelectAccoutTypeHoner;
     self.tableview.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableview.backgroundColor = UIColorWithRGB(0xebebee);
     self.tableview.contentInset = UIEdgeInsetsMake(5, 0, 5, 0);
