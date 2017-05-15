@@ -9,7 +9,7 @@
 #import "UCFInvitationRebateViewController.h"
 #import "UCFFeedBackViewController.h"
 #import "UCFInvitationRewardViewController.h"
-
+#import "UCFDataStatisticsViewController.h"
 @interface UCFInvitationRebateViewController ()
 @property (nonatomic, weak) UISegmentedControl *segmentedCtrl;
 //邀请返利
@@ -29,6 +29,26 @@
     [self addLeftButton];
     
     [self createUI];
+    
+    NSString *gcm = [[NSUserDefaults standardUserDefaults] objectForKey:@"gcmCode"];
+    if ([gcm hasPrefix:@"A"]) { //A码用户显示 饼图
+        [self addRightButtonWithImage:[UIImage imageNamed:@"icon_data"]];
+    }
+}
+- (void)addRightButtonWithImage:(UIImage *)rightButtonimage;
+{
+    UIButton *rightbutton = [UIButton buttonWithType:UIButtonTypeCustom];
+    rightbutton.frame = CGRectMake(0, 0, 30,30);
+    rightbutton.backgroundColor = [UIColor clearColor];
+    [rightbutton setImage:rightButtonimage forState:UIControlStateNormal];
+    [rightbutton addTarget:self action:@selector(clickRightBtn) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightbutton];
+    self.navigationItem.rightBarButtonItem = rightItem;
+}
+-(void)clickRightBtn{
+    
+    UCFDataStatisticsViewController *dataStatistic = [[UCFDataStatisticsViewController alloc] initWithNibName:@"UCFDataStatisticsViewController" bundle:nil];
+    [self.navigationController pushViewController:dataStatistic animated:YES];
 }
 
 - (void)viewWillLayoutSubviews

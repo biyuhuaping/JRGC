@@ -15,13 +15,17 @@
 #import "UCFToolsMehod.h"
 #import "FullWebViewController.h"
 #import "UCFWebViewJavascriptBridgeLevel.h"
+#import "UCFRegistrationRecord.h"
 
 @interface UCFFeedBackViewController ()<UMSocialPlatformProvider>
 
 @property (strong, nonatomic) IBOutlet UILabel *sumCommLab;//我的返利
-@property (strong, nonatomic) IBOutlet NZLabel *friendCountLab;//邀请投资人数
-@property (strong, nonatomic) IBOutlet NZLabel *recCountLab;//邀请注册人数
+@property (strong, nonatomic) IBOutlet NZLabel *userRecommendCountLab;//邀请投资人数
+@property (strong, nonatomic) IBOutlet NZLabel *zxInviteFriendsCountLab;//尊享注册人数
+@property (strong, nonatomic) IBOutlet NZLabel *p2pInviteFriendsCountLab;//微金注册人数
 @property (strong, nonatomic) IBOutlet UILabel *gcmLab;//我的工场码
+@property (strong, nonatomic) IBOutlet UILabel *p2pRebateAmtLab; //微金返利
+@property (strong, nonatomic) IBOutlet UILabel * zxRebateAmtLab;  //尊享返利
 //*********qyy
 @property (strong, nonatomic) IBOutlet UILabel *adviserAnnualRateLab;//基础年化佣金
 @property (strong, nonatomic) IBOutlet NZLabel *ownRateLab;//我的奖励比例
@@ -53,14 +57,16 @@
 @property (strong, nonatomic) IBOutlet UILabel *label_p2pMoney;
 
 @property (strong, nonatomic) IBOutlet UILabel *label_titleone;//上月您和好友投尊享标年化额
-@property (strong, nonatomic) IBOutlet UILabel *label_titletow;//本月尊享标年化佣金
+@property (strong, nonatomic) IBOutlet NZLabel *label_titletow;//本月尊享标年化佣金
 
-@property (strong, nonatomic) IBOutlet UILabel *label_titlethree;//P2P标年化佣金
+@property (strong, nonatomic) IBOutlet NZLabel *label_titlethree;//P2P标年化佣金
 
 @property (strong, nonatomic) IBOutlet UIView *view_Up;
 
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *view_secondHeight;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *view_upHeight;
+- (IBAction)gotoWeiJinRebateAmtVC:(id)sender;//去微金返利页面
+- (IBAction)gotoHonerRebateAmtVC:(id)sender;//去尊享返利页面
 
 @end
 
@@ -86,8 +92,8 @@
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(getMyInvestDataList) name:@"getMyInvestDataList" object:nil];
     _CheckInstructionBtn.hidden = YES;
-//    [self getMyInvestDataList];
-//    [self getAppSetting];
+    [self getMyInvestDataList];
+    [self getAppSetting];
 }
 
 //复制到剪切板
@@ -144,18 +150,12 @@
     }];
 }
 
-//进入我的返利列表
+//进入邀请记录页面
 - (IBAction)toMyRebateView:(id)sender {
-    //我的返利
-    UCFMyRebateViewCtrl *mv = [[UCFMyRebateViewCtrl alloc]initWithNibName:@"UCFMyRebateViewCtrl" bundle:nil];
-    mv.accoutType = self.accoutType;
-    __weak typeof(self) weakSelf = self;
-    mv.headerInfoBlock = ^(NSDictionary *dic){
-        weakSelf.sumCommLab.text = [NSString stringWithFormat:@"¥%@",dic[@"sumComm"]];//我的返利
-        weakSelf.friendCountLab.text = [NSString stringWithFormat:@"邀请投资人数:%@人",dic[@"friendCount"]];//邀请投资人数
-        weakSelf.recCountLab.text = [NSString stringWithFormat:@"邀请注册人数:%@人",dic[@"recCount"]];//邀请注册人数
-    };
-    [self.navigationController pushViewController:mv animated:YES];
+    //邀请记录
+    UCFRegistrationRecord *vc = [[UCFRegistrationRecord alloc]initWithNibName:@"UCFRegistrationRecord" bundle:nil];
+    [self.navigationController pushViewController:vc animated:YES];
+
 }
 
 //去设置 奖励年化佣金比例（废弃）
@@ -201,7 +201,7 @@
     
     NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys:userId,@"userId",nil];
     //*******qinyy
-    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXtagInviteRebate owner:self signature:YES Type:self.accoutType];
+    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:KSXTagMyInviteRebateinfo owner:self signature:YES Type:self.accoutType];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 }
 
@@ -214,7 +214,7 @@
 //开始请求
 - (void)beginPost:(kSXTag)tag{
     if (tag == kSXtagInviteRebate){
-        [GiFHUD show];
+//        [GiFHUD show];
     }
 }
 
@@ -222,31 +222,46 @@
 - (void)endPost:(id)result tag:(NSNumber *)tag
 {
     [GiFHUD dismiss];
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     NSMutableDictionary *dic = [result objectFromJSONString];
     
     //    _totalCountLab.text = [NSString stringWithFormat:@"共%@笔回款记录",dic[@"pageData"][@"pagination"][@"totalCount"]];
     DBLOG(@"邀请返利页：%@",dic);
-    if (tag.intValue == kSXtagInviteRebate) {
+    if (tag.intValue == KSXTagMyInviteRebateinfo) {
         NSString *rstcode = dic[@"ret"];
         NSString *rsttext = dic[@"message"];
-        NSDictionary* dictemp = [[dic objectSafeForKey:@"data"]objectSafeForKey:@"inviteRebateBasicInfo"];
+        NSDictionary* dictemp = [dic objectSafeForKey:@"data"];
         if ([rstcode intValue] == 1) {
-            _shareUrl = [[dic objectSafeDictionaryForKey:@"data"] objectSafeForKey:@"inviteUrl"];
-            _recCount = dictemp[@"recCount"];//邀请注册人数
-            _sumCommLab.text = [NSString stringWithFormat:@"¥%@",[UCFToolsMehod AddComma:dictemp[@"sumComm"]]];//我的返利
-            _friendCountLab.text = [NSString stringWithFormat:@"邀请投资人数:%@人",dictemp[@"friendCount"]];//邀请投资人数
-            _recCountLab.text = [NSString stringWithFormat:@"邀请注册人数:%@人",_recCount];//邀请注册人数
-            _gcmLab.text = dictemp[@"gcm"];//我的工场码
+            _shareUrl = [dictemp objectSafeForKey:@"inviteUrl"];
+            
+            _sumCommLab.text = [NSString stringWithFormat:@"¥%@",[UCFToolsMehod AddComma:dictemp[@"rebateAmt"]]];//我的返利
+            _userRecommendCountLab.text = [NSString stringWithFormat:@"邀请人数:%@人",dictemp[@"userRecommendCount"]];//邀请投资人数
+            
+            
+            NSString *P2PCountStr1 = [NSString stringWithFormat:@"微金返利(%@人投资）",[dictemp objectSafeForKey:@"p2pInviteFriendsCount"]];//微金人数
+            NSString *P2PCountStr2 = [NSString stringWithFormat:@"(%@人投资）",[dictemp objectSafeForKey:@"p2pInviteFriendsCount"]];//微金人数
+            _p2pInviteFriendsCountLab.text = P2PCountStr1;
+            [_p2pInviteFriendsCountLab setFont:[UIFont systemFontOfSize:10] string:P2PCountStr2];
+            
+            _p2pRebateAmtLab.text =  [NSString stringWithFormat:@"¥%@",[UCFToolsMehod AddComma:dictemp[@"p2pRebateAmt"]]];//微金返利
+
+            P2PCountStr1 = [NSString stringWithFormat:@"尊享返利(%@人投资）",[dictemp objectSafeForKey:@"zxInviteFriendsCount"]];//尊享投资人数
+            P2PCountStr2 = [NSString stringWithFormat:@"(%@人投资）",[dictemp objectSafeForKey:@"zxInviteFriendsCount"]];//尊享投资人数
+            _zxInviteFriendsCountLab.text = P2PCountStr1;
+            [_zxInviteFriendsCountLab setFont:[UIFont systemFontOfSize:10] string:P2PCountStr2];
+            _zxRebateAmtLab.text =  [NSString stringWithFormat:@"¥%@",[UCFToolsMehod AddComma:dictemp[@"zxRebateAmt"]]];//尊享返利
+
+            _gcmLab.text = dictemp[@"promotionCode"];//我的工场码
             _recruitStatus = dictemp[@"recruitStatus"];
             _label_titleone.text = dictemp[@"enjoyAnnualAmountText"];
             _label_titletow.text = dictemp[@"enjoyCommissionProportionText"];
             _label_titlethree.text = dictemp[@"p2pYearCommissionText"];
             
-            NSString *tipsStr = dictemp[@"recruitDes"];
-            if (tipsStr.length > 0) {
-                _tipsLabel.text = tipsStr;
-                _tipsViewHeight.constant = 35;
-            }
+//            NSString *tipsStr = dictemp[@"recruitDes"];
+//            if (tipsStr.length > 0) {
+//                _tipsLabel.text = tipsStr;
+//                _tipsViewHeight.constant = 35;
+//            }
             //**************************qyy**************
             NSString *adviserAnnualRate = @"¥0.00";
             
@@ -265,7 +280,10 @@
             _CheckInstructionBtn.hidden = !feeGateIsOpen;
             
             if ([_gcmLab.text hasPrefix:@"A"]){
-                _view_secondHeight.constant = 88;
+                _view_secondHeight.constant = 55;
+                [_label_titletow setFontColor:UIColorWithRGB(0xfd4d4c) string:@"非等额标"];
+                [_label_titlethree setFontColor:UIColorWithRGB(0xfd4d4c) string:@"等额标"];
+
             }else{
 //                if (kIS_IOS8) {
 //                    _view_upHeight.active = YES;//因为需要根据文字多少，来控制view的高度，所以让约束复活，限制高度，调整高度。
@@ -282,14 +300,17 @@
             
             _label_moutheMoney.text = dictemp[@"enjoyDescribe"];//***本月尊享标描述
             _label_p2pMoney.text = dictemp[@"p2pCommissionDescribe"];//***p2p尊享标描述
-            _ownRateLab.text = dictemp[@"enjoyCommissionProportion"];//本月尊享标年化佣金;
-            _friendRateLab.text = dictemp[@"p2pYearCommission"];//P2P标年化佣金;
+            _ownRateLab.text =  [NSString stringWithFormat:@"%@%%",dictemp[@"enjoyCommissionProportion"]];//本月尊享标年化佣金;
+            _friendRateLab.text = [NSString stringWithFormat:@"%@%%",[dictemp objectSafeForKey: @"p2pYearCommission"]];//P2P标年化佣金;
             [_ownRateLab setFont:[UIFont systemFontOfSize:15] string:@"%"];
             [_friendRateLab setFont:[UIFont systemFontOfSize:15] string:@"%"];
         }else {
             [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
         }
-        [[NSNotificationCenter defaultCenter]postNotificationName:REDALERTISHIDE object:@"5"];
+//        [[NSNotificationCenter defaultCenter]postNotificationName:REDALERTISHIDE object:@"5"];
+//        
+//        [self getAppSetting];
+
     }
     else if (tag.intValue == kSXTagGetAppSetting){
         //        NSString *rstcode = dic[@"status"];
@@ -323,4 +344,33 @@
     [[NSNotificationCenter defaultCenter]removeObserver:self name:@"getMyInvestDataList" object:nil];
 }
 
+
+
+#pragma mark -微金返利页面
+- (IBAction)gotoWeiJinRebateAmtVC:(id)sender {
+
+    UCFMyRebateViewCtrl *mv = [[UCFMyRebateViewCtrl alloc]initWithNibName:@"UCFMyRebateViewCtrl" bundle:nil];
+    mv.accoutType = SelectAccoutTypeP2P;
+    __weak typeof(self) weakSelf = self;
+    mv.headerInfoBlock = ^(NSDictionary *dic){
+//        weakSelf.sumCommLab.text = [NSString stringWithFormat:@"¥%@",dic[@"sumComm"]];//微金返利
+//        weakSelf.p2pInviteFriendsCountLab.text = [NSString stringWithFormat:@"邀请投资人数:%@人",dic[@"p2pInviteFriendsCount"]];//邀请投资人数
+//        weakSelf.userRecommendCountLab.text = [NSString stringWithFormat:@"邀请注册人数:%@人",dic[@"userRecommendCount"]];//邀请注册人数
+    };
+    [self.navigationController pushViewController:mv animated:YES];
+    
+}
+#pragma mark -尊享返利页面
+- (IBAction)gotoHonerRebateAmtVC:(id)sender{
+    
+    UCFMyRebateViewCtrl *mv = [[UCFMyRebateViewCtrl alloc]initWithNibName:@"UCFMyRebateViewCtrl" bundle:nil];
+    mv.accoutType = SelectAccoutTypeHoner;
+    __weak typeof(self) weakSelf = self;
+    mv.headerInfoBlock = ^(NSDictionary *dic){
+//        weakSelf.sumCommLab.text = [NSString stringWithFormat:@"¥%@",dic[@"sumComm"]];//尊享返利
+//        weakSelf.zxInviteFriendsCountLab.text = [NSString stringWithFormat:@"邀请投资人数:%@人",dic[@"zxInviteFriendsCount"]];//邀请投资人数
+//        weakSelf.userRecommendCountLab.text = [NSString stringWithFormat:@"邀请注册人数:%@人",dic[@"userRecommendCount"]];//邀请注册人数
+    };
+    [self.navigationController pushViewController:mv animated:YES];
+}
 @end

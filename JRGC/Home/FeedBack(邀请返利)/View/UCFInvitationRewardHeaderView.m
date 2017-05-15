@@ -13,7 +13,7 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    [self.contentView setBackgroundColor:[UIColor yellowColor]];
+    [self.contentView setBackgroundColor:UIColorWithRGB(0xf9f9f9)];
 }
 
 @end
