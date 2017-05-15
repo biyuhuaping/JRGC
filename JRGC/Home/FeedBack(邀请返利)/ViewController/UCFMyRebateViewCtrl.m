@@ -77,7 +77,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self addLeftButton];
-    baseTitleLabel.text = @"我的返利";
+    
+    baseTitleLabel.text = self.accoutType  == SelectAccoutTypeHoner ?  @"尊享返利":@"微金返利";
     
     _dataArr1 = [NSMutableArray new];
     _dataArr2 = [NSMutableArray new];
@@ -324,10 +325,7 @@
 }
 
 - (IBAction)toUCFRegistrationRecordView:(id)sender {
-    //邀请记录
-    UCFRegistrationRecord *vc = [[UCFRegistrationRecord alloc]initWithNibName:@"UCFRegistrationRecord" bundle:nil];
-    [self.navigationController pushViewController:vc animated:YES];
-}
+   }
 
 #pragma mark - UITableViewDelegate
 // tableview的数据源方法

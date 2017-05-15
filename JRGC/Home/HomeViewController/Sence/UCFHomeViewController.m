@@ -255,12 +255,33 @@
           }
         else if (model.moedelType == UCFHomeListCellModelTypeOneImageBatchLending) {
             // 批量出借
+            UCFP2PViewController *p2PVC = [[UCFP2PViewController alloc] initWithNibName:@"UCFP2PViewController" bundle:nil];
+            p2PVC.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight - 64);
+            p2PVC.viewType = @"2";
+            [p2PVC setCurrentViewForBatchBid];
+            [self.navigationController pushViewController:p2PVC animated:YES];
+            
+            
+            
         }
         else if (model.moedelType == UCFHomeListCellModelTypeOneImageBondTransfer) {
             // 债券转让
+            UCFP2PViewController *p2PVC = [[UCFP2PViewController alloc] initWithNibName:@"UCFP2PViewController" bundle:nil];
+            p2PVC.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight - 64);
+            p2PVC.viewType = @"3";
+            [p2PVC setCurrentViewForBatchBid];
+            [self.navigationController pushViewController:p2PVC animated:YES];
+
         }
         else if (model.moedelType == UCFHomeListCellModelTypeOneImageHonorTransfer) {
             // 尊享转让
+            UCFHonerViewController *horner = [[UCFHonerViewController alloc] initWithNibName:@"UCFHonerViewController" bundle:nil];
+            horner.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight - 64);
+            horner.baseTitleText = @"工场尊享";
+            horner.viewType = @"2";
+            horner.accoutType = SelectAccoutTypeHoner;
+            [horner setCurrentViewForHornerTransferVC];
+            [self.navigationController pushViewController:horner animated:YES];
         }
         else if (model.moedelType == UCFHomeListCellModelTypeOneImageBatchCycle) {
             
@@ -306,6 +327,7 @@
         horner.baseTitleText = @"工场尊享";
         horner.viewType = @"1";
         horner.accoutType = SelectAccoutTypeHoner;
+         [horner setCurrentViewForHornerTransferVC];
         [self.navigationController pushViewController:horner animated:YES];
     }
 }
