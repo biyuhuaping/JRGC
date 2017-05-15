@@ -16,6 +16,7 @@
 
 - (NSString *)proTitle;
 - (UCFHomeListCellModelType)modelType;
+- (NSString *)type;
 
 - (CGFloat)cellHeight;
 @end

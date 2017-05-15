@@ -226,9 +226,10 @@
                      }
 //                 }
              }
-          }else if (model.moedelType == UCFHomeListCellModelTypeOneImage) {
-            
-        }
+          }
+//        else if (model.moedelType == UCFHomeListCellModelTypeOneImage) {
+//            
+//        }
     }
     else if (type == UCFHomeListTypeInvest) {
         if (model.moedelType == UCFHomeListCellModelTypeDefault) {
@@ -252,9 +253,9 @@
                 }];
             }
         }
-        else if (model.moedelType == UCFHomeListCellModelTypeOneImage) {
-            
-        }
+//        else if (model.moedelType == UCFHomeListCellModelTypeOneImage) {
+//            
+//        }
     }
     else if (type == UCFHomeListTypeP2PMore)
     {

@@ -31,12 +31,17 @@
     return self.item.moedelType ? self.item.moedelType : UCFHomeListCellModelTypeDefault;
 }
 
+- (NSString *)type
+{
+    return self.item.type ? self.item.type : @"";
+}
+
 - (CGFloat)cellHeight
 {
     if (self.item.moedelType == UCFHomeListCellModelTypeDefault) {
         return 100.0;
     }
-    else if (self.item.moedelType == UCFHomeListCellModelTypeOneImage) {
+    else if (self.item.moedelType == UCFHomeListCellModelTypeOneImageBatchLending || self.item.moedelType == UCFHomeListCellModelTypeOneImageHonorTransfer || self.item.moedelType == UCFHomeListCellModelTypeOneImageBondTransfer || self.item.moedelType == UCFHomeListCellModelTypeOneImageBatchCycle) {
         return (ScreenWidth - 20) / CELLRATE + 20;
     }
     return 0;

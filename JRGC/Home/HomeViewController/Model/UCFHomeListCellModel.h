@@ -10,7 +10,10 @@
 
 typedef enum : NSUInteger {
     UCFHomeListCellModelTypeDefault,
-    UCFHomeListCellModelTypeOneImage,
+    UCFHomeListCellModelTypeOneImageBatchLending,
+    UCFHomeListCellModelTypeOneImageBondTransfer,
+    UCFHomeListCellModelTypeOneImageHonorTransfer,
+    UCFHomeListCellModelTypeOneImageBatchCycle,
 } UCFHomeListCellModelType;
 
 @interface UCFHomeListCellModel : NSObject
