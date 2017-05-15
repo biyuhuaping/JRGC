@@ -126,19 +126,11 @@
                 [tempArray addObject:tempG];
             }
             
-            NSString *siteNotice = [result objectSafeForKey:@"siteNotice"];
-            // 债券转让
-            NSString *p2pTransferNum = [result objectSafeForKey:@"p2pTransferNum"];
-            // 批量转让
-            NSString *totalCount = [result objectSafeForKey:@"totalCount"];
-            // 尊享转让
-            NSString *zxTransferNum = [result objectSafeForKey:@"zxTransferNum"];
+            UCFHomeListCellModel *homelistModel = [UCFHomeListCellModel homeListCellWithDict:result];
             
             [tempResult setObject:tempArray forKey:@"homelistContent"];
-            [tempResult setObject:siteNotice forKey:@"siteNotice"];
-            [tempResult setObject:p2pTransferNum forKey:@"p2pTransferNum"];
-            [tempResult setObject:totalCount forKey:@"totalCount"];
-            [tempResult setObject:zxTransferNum forKey:@"zxTransferNum"];
+            [tempResult setObject:homelistModel forKey:@"listInfo"];
+            [tempResult setObject:[result objectSafeForKey:@"siteNotice"] forKey:@"siteNotice"];
             complete(nil, tempResult);
         }
         else {

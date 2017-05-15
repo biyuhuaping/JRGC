@@ -17,6 +17,18 @@
 - (NSString *)proTitle;
 - (UCFHomeListCellModelType)modelType;
 - (NSString *)type;
+- (NSString *)annualRate;
+- (NSString *)repayModeText;
+- (NSString *)repayPeriodtext;
+- (NSString *)minInvest;
+- (NSString *)availBorrowAmount;
+- (NSString *)platformSubsidyExpense;
+- (NSString *)guaranteeCompany;
+- (NSString *)fixedDate;
+- (NSString *)holdTime;
+- (NSString *)totalCount;
+- (NSString *)p2pTransferNum;
+- (NSString *)zxTransferNum;
 
 - (CGFloat)cellHeight;
 @end

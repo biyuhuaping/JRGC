@@ -119,7 +119,6 @@
     NSArray *imageArr = @[@"home_bg_2", @"home_bg_3", @""];
     NSArray *titleArr = @[@"债券转让专区", @"尊享转让专区", @""];
     NSArray *typeArr = @[@"灵活变现", @"自由转让", @""];
-//    NSArray *modelType = @[@(UCFHomeListCellModelTypeOneImageBondTransfer),@(UCFHomeListCellModelTypeOneImageHonorTransfer),@(UCFHomeListCellModelTypeOneImageBatchCycle)];
     for (int i=0; i<3; i++) {
         UCFHomeListCellModel *model = [[UCFHomeListCellModel alloc] init];
         model.moedelType = i+UCFHomeListCellModelTypeOneImageBondTransfer;
@@ -162,6 +161,16 @@
                     }
                 }
             }
+            UCFHomeListCellModel *listInfo = [resultDict objectForKey:@"listInfo"];
+            UCFHomeListCellPresenter *temp2 = [self.groupPresenter2.group.prdlist lastObject];
+            temp2.item.totalCount = listInfo.totalCount;
+            
+            UCFHomeListCellPresenter *temp30 = [self.groupPresenter3.group.prdlist firstObject];
+            temp30.item.p2pTransferNum = listInfo.p2pTransferNum;
+            
+            UCFHomeListCellPresenter *temp31 = [self.groupPresenter3.group.prdlist objectAtIndex:1];
+            temp31.item.zxTransferNum = listInfo.zxTransferNum;
+            
         }
         else if ([result isKindOfClass:[NSString class]]) {
             
