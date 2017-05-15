@@ -111,6 +111,12 @@
 //            self.progressView.progressLabel.textColor = UIColorWithRGB(0x909dae);
         }
         
+        NSArray *statusArr = @[@"未审核",@"等待确认",@"出借",@"流标",@"满标",@"回款中",@"已回款"];
+        if ([presenter.item.type isEqualToString:@"2"] && status == 2) {
+            self.circleProgressView.progressText = @"认购";
+        }
+        else
+            self.circleProgressView.progressText = statusArr[status];
     }
     else if (presenter.modelType == UCFHomeListCellModelTypeOneImageBatchLending || presenter.modelType == UCFHomeListCellModelTypeOneImageHonorTransfer || presenter.modelType == UCFHomeListCellModelTypeOneImageBondTransfer)  {
         self.oneImageView.hidden = NO;

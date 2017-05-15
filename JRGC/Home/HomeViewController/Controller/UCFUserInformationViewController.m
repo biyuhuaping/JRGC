@@ -204,6 +204,26 @@
 
 - (IBAction)visible:(UIButton *)sender {
     sender.selected = !sender.selected;
+    if (sender.selected) {
+        self.beanLabel.text = @"--";
+        self.couponLabel.text = @"--";
+        self.scoreLabel.text = @"--";
+        self.myLevelLabel.text = @"--";
+        
+        self.addedProfitLabel.text = @"--";
+        self.totalMoney.text = @"--";
+        self.availableBalance.text = @"--";
+    }
+    else {
+        self.beanLabel.text = self.beanCount;
+        self.couponLabel.text = [NSString stringWithFormat:@"%@", self.couponNumber];
+        self.scoreLabel.text = self.score;
+        self.myLevelLabel.text = self.memLevel;
+        
+        self.addedProfitLabel.text = self.addProfit;
+        self.totalMoney.text = self.asset;
+        self.availableBalance.text = self.availableBanlance;
+    }
 }
 
 #pragma mark - SDCycleScrollViewDelegate
