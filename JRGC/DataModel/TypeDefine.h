@@ -236,6 +236,8 @@
 #define MYRECEIPTURL        @"api/prdClaims/v2/myReceipt.json"     //首页-用户余额,累计收益,总资产
 #define USERINFOADJUSTMENT              @"api/userInfo/v2/adjustment.json" //公告确认
 
+#define MYINVITEREBATEINFOURL  @"api/inviteRebate/v2/myInviteRebateinfo.json" //邀请返利
+#define MYINVITEREWARDINFOURL  @"api/inviteRebate/v2/myInviteRewardinfo.json" //邀请奖励
 
 enum kPostStatus{
     kPostStatusNone=0,
@@ -441,7 +443,9 @@ enum kSXTag
     kSXTagProductList,                        //产品列表
     kSXTagMySimpleInfo,                //首页-查询用户工豆,工分,等信
     kSXTagMyReceipt,                    //首页-用户余额,累计收益,总资产
-    KSXTagADJustMent                    //公告确认点击
+    KSXTagADJustMent,                    //公告确认点击
+    KSXTagMyInviteRebateinfo,           //邀请返利
+    KSXTagMyInviteRewardinfo,           //邀请奖励
 
 };
 

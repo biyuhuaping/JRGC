@@ -49,7 +49,7 @@
 - (NSArray *)status
 {
     if (!_status) {
-        _status = [[NSArray alloc] initWithObjects:@"未审核",@"等待确认",@"投资",@"流标",@"满标",@"回款中",@"已回款", nil];
+        _status = [[NSArray alloc] initWithObjects:@"未审核",@"等待确认",@"出借",@"流标",@"满标",@"回款中",@"已回款", nil];
     }
     return _status;
 }

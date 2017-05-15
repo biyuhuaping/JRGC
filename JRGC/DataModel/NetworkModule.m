@@ -1245,6 +1245,13 @@ static NetworkModule *gInstance = NULL;
             break;
         case KSXTagADJustMent:
             parameter = [NEW_SERVER_IP stringByAppendingString:USERINFOADJUSTMENT];
+            break;
+        case KSXTagMyInviteRebateinfo:
+            parameter = [NEW_SERVER_IP stringByAppendingString:MYINVITEREBATEINFOURL];
+            break;
+        case KSXTagMyInviteRewardinfo:
+            parameter = [NEW_SERVER_IP stringByAppendingString:MYINVITEREWARDINFOURL];
+            break;
     }
     //给原有参数字典添加公共参数
     if (!data) {
