@@ -107,15 +107,24 @@
 - (void)initData
 {
     UCFHomeListCellModel *model = [[UCFHomeListCellModel alloc] init];
-    model.moedelType = UCFHomeListCellModelTypeOneImage;
+    model.moedelType = UCFHomeListCellModelTypeOneImageBatchLending;
+    model.backImage = @"home_bg_1";
+    model.prdName = @"批量出借专区";
+    model.type = @"省心出借";
     UCFHomeListCellPresenter *cellPresenter = [UCFHomeListCellPresenter presenterWithItem:model];
     NSMutableArray *temp2 = [NSMutableArray arrayWithObject:cellPresenter];
     self.groupPresenter2.group.prdlist = temp2;
     
     NSMutableArray *temp3 = [[NSMutableArray alloc] init];
+    NSArray *imageArr = @[@"home_bg_2", @"home_bg_3", @""];
+    NSArray *titleArr = @[@"债券转让专区", @"尊享转让专区", @""];
+    NSArray *typeArr = @[@"灵活变现", @"自由转让", @""];
     for (int i=0; i<3; i++) {
         UCFHomeListCellModel *model = [[UCFHomeListCellModel alloc] init];
-        model.moedelType = UCFHomeListCellModelTypeOneImage;
+        model.moedelType = i+UCFHomeListCellModelTypeOneImageBondTransfer;
+        model.prdName = [titleArr objectAtIndex:i];
+        model.type = [typeArr objectAtIndex:i];
+        model.backImage = [imageArr objectAtIndex:i];
         UCFHomeListCellPresenter *cellPresenter = [UCFHomeListCellPresenter presenterWithItem:model];
         [temp3 addObject:cellPresenter];
     }
@@ -152,6 +161,16 @@
                     }
                 }
             }
+            UCFHomeListCellModel *listInfo = [resultDict objectForKey:@"listInfo"];
+            UCFHomeListCellPresenter *temp2 = [self.groupPresenter2.group.prdlist lastObject];
+            temp2.item.totalCount = listInfo.totalCount;
+            
+            UCFHomeListCellPresenter *temp30 = [self.groupPresenter3.group.prdlist firstObject];
+            temp30.item.p2pTransferNum = listInfo.p2pTransferNum;
+            
+            UCFHomeListCellPresenter *temp31 = [self.groupPresenter3.group.prdlist objectAtIndex:1];
+            temp31.item.zxTransferNum = listInfo.zxTransferNum;
+            
         }
         else if ([result isKindOfClass:[NSString class]]) {
             

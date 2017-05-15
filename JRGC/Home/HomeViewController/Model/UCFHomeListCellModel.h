@@ -10,7 +10,10 @@
 
 typedef enum : NSUInteger {
     UCFHomeListCellModelTypeDefault,
-    UCFHomeListCellModelTypeOneImage,
+    UCFHomeListCellModelTypeOneImageBatchLending,
+    UCFHomeListCellModelTypeOneImageBondTransfer,
+    UCFHomeListCellModelTypeOneImageHonorTransfer,
+    UCFHomeListCellModelTypeOneImageBatchCycle,
 } UCFHomeListCellModelType;
 
 @interface UCFHomeListCellModel : NSObject
@@ -39,6 +42,7 @@ typedef enum : NSUInteger {
 @property (nonatomic, copy) NSString *totalCount;
 @property (nonatomic, copy) NSString *zxTransferNum;
 @property (nonatomic, assign) UCFHomeListCellModelType moedelType;
+@property (nonatomic, copy) NSString *backImage;
 
 + (instancetype)homeListCellWithDict:(NSDictionary *)dict;
 @end

@@ -224,9 +224,18 @@
                             }];
                          }
                      }
-//                 }
-             }
-          }else if (model.moedelType == UCFHomeListCellModelTypeOneImage) {
+                }
+          }
+        else if (model.moedelType == UCFHomeListCellModelTypeOneImageBatchLending) {
+            // 批量出借
+        }
+        else if (model.moedelType == UCFHomeListCellModelTypeOneImageBondTransfer) {
+            // 债券转让
+        }
+        else if (model.moedelType == UCFHomeListCellModelTypeOneImageHonorTransfer) {
+            // 尊享转让
+        }
+        else if (model.moedelType == UCFHomeListCellModelTypeOneImageBatchCycle) {
             
         }
     }
@@ -252,9 +261,9 @@
                 }];
             }
         }
-        else if (model.moedelType == UCFHomeListCellModelTypeOneImage) {
-            
-        }
+//        else if (model.moedelType == UCFHomeListCellModelTypeOneImage) {
+//            
+//        }
     }
     else if (type == UCFHomeListTypeP2PMore)
     {
