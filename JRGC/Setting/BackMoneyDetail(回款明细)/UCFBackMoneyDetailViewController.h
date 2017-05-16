@@ -7,10 +7,10 @@
 //
 
 #import "UCFBaseViewController.h"
-#import "UCFSettingViewController.h"
+//#import "UCFSettingViewController.h"
 
 @interface UCFBackMoneyDetailViewController : UCFBaseViewController
 
-@property (nonatomic,weak) UCFSettingViewController *superViewController;
+//@property (nonatomic,weak) UCFSettingViewController *superViewController;
 
 @end
