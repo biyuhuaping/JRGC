@@ -184,13 +184,14 @@
     
     if (_showProgressText) {
         //画文字
-        NSString *currentText = [NSString stringWithFormat:@"%.2f%%",fakeProgress*100];
+//        NSString *currentText = [NSString stringWithFormat:@"%.2f%%",fakeProgress*100];
+        NSString *currentText = [NSString stringWithFormat:@"%@",self.progressText ? self.progressText : @""];
         //段落格式
         NSMutableParagraphStyle *textStyle = [[NSMutableParagraphStyle defaultParagraphStyle] mutableCopy];
         textStyle.lineBreakMode = NSLineBreakByWordWrapping;
         textStyle.alignment = NSTextAlignmentCenter;//水平居中
         //字体
-        UIFont *font = [UIFont systemFontOfSize:0.15*CircleSelfWidth];
+        UIFont *font = [UIFont systemFontOfSize:0.25*CircleSelfWidth];
         //构建属性集合
         NSDictionary *attributes = @{NSFontAttributeName:font, NSParagraphStyleAttributeName:textStyle};
         //获得size
@@ -265,6 +266,12 @@
     } repeats:YES];
     [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
     
+}
+
+- (void)setProgressText:(NSString *)progressText
+{
+    _progressText = progressText;
+    [self setNeedsDisplay];
 }
 
 //最后一次动画所做的处理

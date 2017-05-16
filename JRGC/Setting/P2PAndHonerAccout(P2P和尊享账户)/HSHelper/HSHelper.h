@@ -10,6 +10,8 @@
 #import "UCFOldUserGuideViewController.h"
 #import "UCFBankDepositoryAccountViewController.h"
 @interface HSHelper : NSObject <NetworkModuleDelegate>
+-(BOOL)checkP2POrWJIsAuthorization:(SelectAccoutType)accoutType;
 - (BOOL)checkHSState:(SelectAccoutType)type withValue:(NSInteger)vlaue;
+- (void)pushP2POrWJAuthorizationType:(SelectAccoutType)type nav:(UINavigationController *)nav;
 - (void)pushOpenHSType:(SelectAccoutType)type Step:(NSInteger)step nav:(UINavigationController *)nav;
 @end

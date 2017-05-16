@@ -25,7 +25,7 @@
 #import "UCFHuiBuinessDetailViewController.h"
 #import "UILabel+Misc.h"
 #import "HSHelper.h"
-#import "UCFFeedBackViewController.h"
+#import "UCFInvitationRebateViewController.h"
 #import "UCFSession.h"
 @interface UCFP2POrHonerAccoutViewController ()<UITableViewDelegate,UITableViewDataSource,UCFP2POrHornerTabHeaderViewDelete,UIAlertViewDelegate>
 {
@@ -143,7 +143,7 @@
         
         UCFSettingItem *myInVest = [UCFSettingArrowItem itemWithIcon:nil title:@"我的出借" destVcClass:[MyViewController class]];
         UCFSettingItem *backMoneyDetail = [UCFSettingArrowItem itemWithIcon:nil title:@"回款明细" destVcClass:[UCFBackMoneyDetailViewController class]];
-        UCFSettingItem *feedBackVC = [UCFSettingArrowItem itemWithIcon:nil title:@"邀请返利" destVcClass:[UCFFeedBackViewController class]];
+        UCFSettingItem *feedBackVC = [UCFSettingArrowItem itemWithIcon:nil title:@"邀请返利" destVcClass:[UCFInvitationRebateViewController class]];
         
         
         
@@ -316,7 +316,7 @@
         [self.navigationController pushViewController:backMoneyDetailVC animated:YES];
     }else if ([titleStr isEqualToString:@"邀请返利"]){
         
-        UCFFeedBackViewController *feedBackVC = [[UCFFeedBackViewController alloc] initWithNibName:@"UCFFeedBackViewController" bundle:nil];
+        UCFInvitationRebateViewController *feedBackVC = [[UCFInvitationRebateViewController alloc] initWithNibName:@"UCFInvitationRebateViewController" bundle:nil];
         feedBackVC.title = @"邀请返利";
         feedBackVC.accoutType = self.accoutType;
         [self.navigationController pushViewController:feedBackVC animated:YES];

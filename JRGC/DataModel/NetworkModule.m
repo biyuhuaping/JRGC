@@ -1246,8 +1246,22 @@ static NetworkModule *gInstance = NULL;
         case KSXTagADJustMent:
             parameter = [NEW_SERVER_IP stringByAppendingString:USERINFOADJUSTMENT];
             break;
+
         case KSXTagWalletShowMsg:
             parameter = [NEW_SERVER_IP stringByAppendingString:WALLETSHOW];
+
+        case KSXTagMyInviteRebateinfo:
+            parameter = [NEW_SERVER_IP stringByAppendingString:MYINVITEREBATEINFOURL];
+            break;
+        case KSXTagMyInviteRewardinfo:
+            parameter = [NEW_SERVER_IP stringByAppendingString:MYINVITEREWARDINFOURL];
+            break;
+        case KSXTagP2pISAuthorization:
+            parameter = [NEW_SERVER_IP stringByAppendingString:P2PISAUTHORIZATIONURL];
+            break;
+        case KSXTagP2pAuthorization:
+            parameter = [NEW_SERVER_IP stringByAppendingString:P2PAUTHORIZATIONURL];
+
             break;
     }
     //给原有参数字典添加公共参数

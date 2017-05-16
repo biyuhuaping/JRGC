@@ -286,15 +286,15 @@
 - (void) createItem {
     //自定义icon 的初始化方法
 //    UIApplicationShortcutIcon *icon0 = [UIApplicationShortcutIcon iconWithTemplateImageName:@"刮刮卡"];
-    UIApplicationShortcutIcon *icon1 = [UIApplicationShortcutIcon iconWithTemplateImageName:@"邀请返利"];
-    UIApplicationShortcutIcon *icon2 = [UIApplicationShortcutIcon iconWithTemplateImageName:@"工场码"];
-    UIApplicationShortcutIcon *icon3 = [UIApplicationShortcutIcon iconWithTemplateImageName:@"签到"];
+//    UIApplicationShortcutIcon *icon1 = [UIApplicationShortcutIcon iconWithTemplateImageName:@"邀请返利"];
+    UIApplicationShortcutIcon *icon0 = [UIApplicationShortcutIcon iconWithTemplateImageName:@"工场码"];
+    UIApplicationShortcutIcon *icon1 = [UIApplicationShortcutIcon iconWithTemplateImageName:@"签到"];
     
 //    UIMutableApplicationShortcutItem *item0 = [[UIMutableApplicationShortcutItem alloc]initWithType:@"0" localizedTitle:@"我的刮刮卡" localizedSubtitle:nil icon:icon0 userInfo:nil];
-    UIMutableApplicationShortcutItem *item1 = [[UIMutableApplicationShortcutItem alloc]initWithType:@"1" localizedTitle:@"我的邀请返利" localizedSubtitle:nil icon:icon1 userInfo:nil];
-    UIMutableApplicationShortcutItem *item2 = [[UIMutableApplicationShortcutItem alloc]initWithType:@"2" localizedTitle:@"我的工场码" localizedSubtitle:nil icon:icon2 userInfo:nil];
-    UIMutableApplicationShortcutItem *item3 = [[UIMutableApplicationShortcutItem alloc]initWithType:@"3" localizedTitle:@"签到抽红包" localizedSubtitle:nil icon:icon3 userInfo:nil];
-    [UIApplication sharedApplication].shortcutItems = @[item1,item2,item3];
+//    UIMutableApplicationShortcutItem *item1 = [[UIMutableApplicationShortcutItem alloc]initWithType:@"1" localizedTitle:@"我的邀请返利" localizedSubtitle:nil icon:icon1 userInfo:nil];
+    UIMutableApplicationShortcutItem *item2 = [[UIMutableApplicationShortcutItem alloc]initWithType:@"2" localizedTitle:@"我的工场码" localizedSubtitle:nil icon:icon0 userInfo:nil];
+    UIMutableApplicationShortcutItem *item3 = [[UIMutableApplicationShortcutItem alloc]initWithType:@"3" localizedTitle:@"签到抽红包" localizedSubtitle:nil icon:icon1 userInfo:nil];
+    [UIApplication sharedApplication].shortcutItems = @[item2,item3];
 }
 
 - (void)application:(UIApplication *)application performActionForShortcutItem:(UIApplicationShortcutItem *)shortcutItem completionHandler:(void (^)(BOOL))completionHandler {
@@ -311,10 +311,10 @@
         if (_isAfter) {
             _isAfter = NO;
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                self.tabBarController.selectedIndex = 4;
+                self.tabBarController.selectedIndex = 0;
             });
         }else{
-            self.tabBarController.selectedIndex = 4;
+            self.tabBarController.selectedIndex = 0;
         }
         
         //没有手势密码时并且进程还在后台运行，进入个人中心不会重新请求接口
@@ -730,12 +730,12 @@
         if ([dic[@"ret"] boolValue]) {
             NSString *unReadMsgCount = [dic[@"data"] objectSafeForKey:@"unReadMsgCount"];
             if ([unReadMsgCount intValue] > 0) {
-                [self.tabBarController.tabBar showBadgeOnItemIndex:4];
+                [self.tabBarController.tabBar showBadgeOnItemIndex:0];
             } else {
-                [self.tabBarController.tabBar hideBadgeOnItemIndex:4];
+                [self.tabBarController.tabBar hideBadgeOnItemIndex:0];
             }
         }else{
-            [self.tabBarController.tabBar hideBadgeOnItemIndex:4];
+            [self.tabBarController.tabBar hideBadgeOnItemIndex:0];
         }
     } else if (tag.intValue == kSXTagRedPointCheck) {
         NSString *Data = (NSString *)result;

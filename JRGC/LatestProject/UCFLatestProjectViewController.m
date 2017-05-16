@@ -173,11 +173,11 @@
     
 
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(choicePrdDetailCon2:) name:@"choiceCon" object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(choicePrdDetailCon2:) name:@"choiceCon" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(beginShowLoading) name:@"LatestProjectUpdate" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(alertViewInviteFriendsVC) name:@"CheckInviteFriendsAlertView" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showGoodCommentAlert:) name:CHECK_GOOD_COMMENT object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showPlatformUpgradeNotice) name:CHECK_UPDATE_ALERT object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(alertViewInviteFriendsVC) name:@"CheckInviteFriendsAlertView" object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showGoodCommentAlert:) name:CHECK_GOOD_COMMENT object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showPlatformUpgradeNotice) name:CHECK_UPDATE_ALERT object:nil];
     _timer2 = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(updateLabH) userInfo:nil repeats:YES];
     //[self addDragBtn];
 }
@@ -838,9 +838,11 @@
         case 1: //1尊享
         {
             UCFHonerViewController *horner = [[UCFHonerViewController alloc] initWithNibName:@"UCFHonerViewController" bundle:nil];
+            horner.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight - 64);
             horner.baseTitleText = @"工场尊享";
             horner.viewType = @"1";
             horner.accoutType = SelectAccoutTypeHoner;
+            [horner setCurrentViewForHornerTransferVC];
             [self.navigationController pushViewController:horner animated:YES];
             
         }
