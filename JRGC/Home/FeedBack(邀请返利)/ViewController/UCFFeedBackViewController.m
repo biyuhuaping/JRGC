@@ -300,8 +300,8 @@
             
             _label_moutheMoney.text = dictemp[@"enjoyDescribe"];//***本月尊享标描述
             _label_p2pMoney.text = dictemp[@"p2pCommissionDescribe"];//***p2p尊享标描述
-            _ownRateLab.text =  [NSString stringWithFormat:@"%@%%",dictemp[@"enjoyCommissionProportion"]];//本月尊享标年化佣金;
-            _friendRateLab.text = [NSString stringWithFormat:@"%@%%",[dictemp objectSafeForKey: @"p2pYearCommission"]];//P2P标年化佣金;
+            _ownRateLab.text =  [NSString stringWithFormat:@"%@",[dictemp objectSafeForKey:@"enjoyCommissionProportion"]];//本月尊享标年化佣金;
+            _friendRateLab.text = [NSString stringWithFormat:@"%@",[dictemp objectSafeForKey: @"p2pYearCommission"]];//P2P标年化佣金;
             [_ownRateLab setFont:[UIFont systemFontOfSize:15] string:@"%"];
             [_friendRateLab setFont:[UIFont systemFontOfSize:15] string:@"%"];
         }else {

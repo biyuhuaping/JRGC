@@ -11,6 +11,7 @@
 {
     UINavigationController * tmpNav;
     NSInteger tmpStep;
+    SelectAccoutType _accoutType;
 }
 @end
 @implementation HSHelper
@@ -25,10 +26,11 @@
 }
 - (void)pushOpenHSType:(SelectAccoutType)type Step:(NSInteger)step nav:(UINavigationController *)nav;
 {
+    _accoutType = type;
     if (type == SelectAccoutTypeHoner) {
         if (step == 1) {
             tmpNav = nav;
-            tmpStep = step;
+            tmpStep = step; 
             [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID]} tag:kSXTagGetUserAgreeState owner:self signature:YES Type:SelectAccoutTypeHoner];
         } else {
             UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:step];
@@ -37,34 +39,70 @@
             [nav pushViewController:vc animated:YES];
         }
     } else {
-        if (step == 1) {
-            step = 2;
+        if (step == 1 ||  step == 2) {
+            
+             [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID]} tag:KSXTagP2pISAuthorization owner:self signature:YES Type:SelectAccoutTypeP2P];
+        }else{
+            UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:step];
+            vc.site = @"1";
+            vc.accoutType = SelectAccoutTypeP2P;
+            [nav pushViewController:vc animated:YES];
         }
-        UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:step];
-        vc.site = @"1";
-        vc.accoutType = SelectAccoutTypeP2P;
-        [nav pushViewController:vc animated:YES];
     }
 }
 - (void)endPost:(id)result tag:(NSNumber *)tag
 {
     NSString *data = (NSString *)result;
     NSMutableDictionary *dic = [data objectFromJSONString];
-    if ([dic[@"ret"] boolValue]) {
-        if (![dic[@"data"][@"zxIsAuthorization"] boolValue]) {
-            UCFBankDepositoryAccountViewController * bankDepositoryAccountVC =[[UCFBankDepositoryAccountViewController alloc ]initWithNibName:@"UCFBankDepositoryAccountViewController" bundle:nil];
-            bankDepositoryAccountVC.openStatus = [UserInfoSingle sharedManager].openStatus;
-            [tmpNav pushViewController:bankDepositoryAccountVC animated:YES];
-        } else {
-            UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:2];
-            vc.site = @"2";
-            vc.accoutType = SelectAccoutTypeHoner;
-            [tmpNav pushViewController:vc animated:YES];
+    BOOL ret = [[dic objectSafeForKey:@"ret"] boolValue];
+    
+    switch (tag.intValue) {
+        case kSXTagGetUserAgreeState:
+        {
+            if (ret) {
+                
+                if (![dic[@"data"][@"zxIsAuthorization"] boolValue]) {
+                    UCFBankDepositoryAccountViewController * bankDepositoryAccountVC =[[UCFBankDepositoryAccountViewController alloc ]initWithNibName:@"UCFBankDepositoryAccountViewController" bundle:nil];
+                    bankDepositoryAccountVC.openStatus = [UserInfoSingle sharedManager].openStatus;
+                    bankDepositoryAccountVC.accoutType = _accoutType;
+                    [tmpNav pushViewController:bankDepositoryAccountVC animated:YES];
+                } else {
+                    UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:2];
+                    vc.site = @"2";
+                    vc.accoutType = SelectAccoutTypeHoner;
+                    [tmpNav pushViewController:vc animated:YES];
+                }
+            } else {
+                [MBProgressHUD displayHudError:dic[@"message"]];
+            }
+
         }
-    } else {
-        [MBProgressHUD displayHudError:dic[@"message"]];
+            break;
+        case KSXTagP2pISAuthorization:
+        {
+            if (ret) {
+                
+                if (![dic[@"data"][@"p2pIsAuthorization"] boolValue]) {//未授权
+                    UCFBankDepositoryAccountViewController * bankDepositoryAccountVC =[[UCFBankDepositoryAccountViewController alloc ]initWithNibName:@"UCFBankDepositoryAccountViewController" bundle:nil];
+                    bankDepositoryAccountVC.openStatus = [UserInfoSingle sharedManager].openStatus;
+                     bankDepositoryAccountVC.accoutType = _accoutType;
+                    [tmpNav pushViewController:bankDepositoryAccountVC animated:YES];
+                } else { //已经授权
+                    UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:2];
+                    vc.site = @"2";
+                    vc.accoutType = SelectAccoutTypeHoner;
+                    [tmpNav pushViewController:vc animated:YES];
+                }
+            } else {
+                [MBProgressHUD displayHudError:dic[@"message"]];
+            }
+            
+        }
+            break;
+        default:
+            break;
     }
-}
+   }
 - (void)beginPost:(kSXTag)tag
 {
     
