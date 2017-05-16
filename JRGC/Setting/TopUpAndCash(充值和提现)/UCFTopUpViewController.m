@@ -7,7 +7,7 @@
 //  充值页面
 
 #import "UCFTopUpViewController.h"
-#import "UCFSettingViewController.h"
+//#import "UCFSettingViewController.h"
 #import "RechargeListViewController.h"
 #import "UCFToolsMehod.h"
 #import "NZLabel.h"
