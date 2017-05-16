@@ -166,7 +166,8 @@
     else if (tag.intValue == kSXTagSingMenthod) {
         NetworkCompletionHandler complete = [self.requestDict objectForKey:SIGN];
         if ([rstcode boolValue]) {
-            UCFSignModel *signModel = [UCFSignModel signWithDict:result];
+            NSDictionary *data = [dic objectForKey:@"data"];
+            UCFSignModel *signModel = [UCFSignModel signWithDict:data];
             complete(nil, signModel);
         }
         else {

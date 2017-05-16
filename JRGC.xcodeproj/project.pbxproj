@@ -211,7 +211,6 @@
 		742D0CA11DE29E99000FA676 /* UCFProjectListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 742D0C9F1DE29E99000FA676 /* UCFProjectListCell.m */; };
 		742D0CA21DE29E99000FA676 /* UCFProjectListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 742D0CA01DE29E99000FA676 /* UCFProjectListCell.xib */; };
 		742D0CA51DE2B6EB000FA676 /* UCFProjectListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 742D0CA41DE2B6EB000FA676 /* UCFProjectListModel.m */; };
-		742D0CA81DE2D50E000FA676 /* UCFProjectLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 742D0CA71DE2D50E000FA676 /* UCFProjectLabel.m */; };
 		7446EBA91E8A071A007CE790 /* UCFPersonCenterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7446EBA81E8A0719007CE790 /* UCFPersonCenterModel.m */; };
 		744A5FAA1E79512C008921F9 /* UCFWebViewJavascriptBridgeLoanDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 744A5FA81E79512C008921F9 /* UCFWebViewJavascriptBridgeLoanDetails.m */; };
 		744A5FAB1E79512C008921F9 /* UCFWebViewJavascriptBridgeLoanDetails.xib in Resources */ = {isa = PBXBuildFile; fileRef = 744A5FA91E79512C008921F9 /* UCFWebViewJavascriptBridgeLoanDetails.xib */; };
@@ -231,6 +230,7 @@
 		7456D3D21E827B0D00207349 /* UCFPersonAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7456D3D11E827B0D00207349 /* UCFPersonAPIManager.m */; };
 		7456D3D51E8289BE00207349 /* UCFPCListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7456D3D41E8289BE00207349 /* UCFPCListModel.m */; };
 		7456D3D81E82A83F00207349 /* UCFPCGroupPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7456D3D71E82A83F00207349 /* UCFPCGroupPresenter.m */; };
+		7456EEB51ECAA336002EC5EF /* UCFProjectLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7456EEB41ECAA336002EC5EF /* UCFProjectLabel.m */; };
 		7459EE021E5552FE005A6FF7 /* UCFBatchBidController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7459EE001E5552FE005A6FF7 /* UCFBatchBidController.m */; };
 		7459EE031E5552FE005A6FF7 /* UCFBatchBidController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7459EE011E5552FE005A6FF7 /* UCFBatchBidController.xib */; };
 		746BBEA41AF8AEC700EBA0E7 /* UCFSelectedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 746BBEA31AF8AEC700EBA0E7 /* UCFSelectedView.m */; };
@@ -1149,8 +1149,6 @@
 		742D0CA01DE29E99000FA676 /* UCFProjectListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFProjectListCell.xib; sourceTree = "<group>"; };
 		742D0CA31DE2B6EB000FA676 /* UCFProjectListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFProjectListModel.h; sourceTree = "<group>"; };
 		742D0CA41DE2B6EB000FA676 /* UCFProjectListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFProjectListModel.m; sourceTree = "<group>"; };
-		742D0CA61DE2D50E000FA676 /* UCFProjectLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFProjectLabel.h; sourceTree = "<group>"; };
-		742D0CA71DE2D50E000FA676 /* UCFProjectLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFProjectLabel.m; sourceTree = "<group>"; };
 		7446EBA71E8A0719007CE790 /* UCFPersonCenterModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFPersonCenterModel.h; sourceTree = "<group>"; };
 		7446EBA81E8A0719007CE790 /* UCFPersonCenterModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFPersonCenterModel.m; sourceTree = "<group>"; };
 		744A5FA71E79512C008921F9 /* UCFWebViewJavascriptBridgeLoanDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFWebViewJavascriptBridgeLoanDetails.h; sourceTree = "<group>"; };
@@ -1184,6 +1182,8 @@
 		7456D3D41E8289BE00207349 /* UCFPCListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFPCListModel.m; sourceTree = "<group>"; };
 		7456D3D61E82A83F00207349 /* UCFPCGroupPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFPCGroupPresenter.h; sourceTree = "<group>"; };
 		7456D3D71E82A83F00207349 /* UCFPCGroupPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFPCGroupPresenter.m; sourceTree = "<group>"; };
+		7456EEB31ECAA336002EC5EF /* UCFProjectLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFProjectLabel.h; sourceTree = "<group>"; };
+		7456EEB41ECAA336002EC5EF /* UCFProjectLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFProjectLabel.m; sourceTree = "<group>"; };
 		7459EDFF1E5552FE005A6FF7 /* UCFBatchBidController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFBatchBidController.h; sourceTree = "<group>"; };
 		7459EE001E5552FE005A6FF7 /* UCFBatchBidController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFBatchBidController.m; sourceTree = "<group>"; };
 		7459EE011E5552FE005A6FF7 /* UCFBatchBidController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFBatchBidController.xib; sourceTree = "<group>"; };
@@ -2631,8 +2631,6 @@
 			children = (
 				742D0CA31DE2B6EB000FA676 /* UCFProjectListModel.h */,
 				742D0CA41DE2B6EB000FA676 /* UCFProjectListModel.m */,
-				742D0CA61DE2D50E000FA676 /* UCFProjectLabel.h */,
-				742D0CA71DE2D50E000FA676 /* UCFProjectLabel.m */,
 				748FAF601DE32D4900A7A973 /* UCFTransferModel.h */,
 				748FAF611DE32D4900A7A973 /* UCFTransferModel.m */,
 				74F490DD1E5ACAB70057AC62 /* UCFBatchBidModel.h */,
@@ -2798,6 +2796,8 @@
 		74270C631EC58F6800F9419B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				7456EEB31ECAA336002EC5EF /* UCFProjectLabel.h */,
+				7456EEB41ECAA336002EC5EF /* UCFProjectLabel.m */,
 				74270C641EC58F6800F9419B /* UCFCycleModel.h */,
 				74270C651EC58F6800F9419B /* UCFCycleModel.m */,
 				74270C661EC58F6800F9419B /* UCFHomeListCellModel.h */,
@@ -5537,7 +5537,7 @@
 						CreatedOnToolsVersion = 6.1;
 						DevelopmentTeam = EZRWM7P5C6;
 						LastSwiftMigration = 0800;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -5561,7 +5561,7 @@
 					83F2D4E81DCB3F940041F913 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = EZRWM7P5C6;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -5574,7 +5574,7 @@
 					83F2D4F41DCB3F950041F913 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = EZRWM7P5C6;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -5914,9 +5914,9 @@
 				74E535F01AE5FD7300DAABFC /* UCFFAQViewController.m in Sources */,
 				25950EC01D7FB6EC00E4CCBA /* CWLivessViewController.m in Sources */,
 				833A6EBC1E55902A00C8A494 /* UCFCollectionListCell.m in Sources */,
-				742D0CA81DE2D50E000FA676 /* UCFProjectLabel.m in Sources */,
 				7BC8AA1F1AD4C74200BF4660 /* UCFMyInvestment.m in Sources */,
 				7BC3048B1ACBC22D007767F1 /* UIView+AddLine.m in Sources */,
+				7456EEB51ECAA336002EC5EF /* UCFProjectLabel.m in Sources */,
 				7BA6E4BC1AD6731900FE8C37 /* SDWebImageDecoder.m in Sources */,
 				7BCE02241AC902FD0084C15C /* SharedSingleton.m in Sources */,
 				EDEAB70C1C7D4BAF00BBF3B1 /* UCFIdNumberTextField.m in Sources */,
@@ -6459,10 +6459,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = JRGC/JRGC.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Phoenix Credit Management CO., Ltd.";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = EZRWM7P5C6;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -6509,8 +6509,8 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp299;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "aaaf1335-9564-4b24-89a0-419b90fbe72c";
+				PROVISIONING_PROFILE_SPECIFIER = 2016_299Distribution;
 				SWIFT_OBJC_BRIDGING_HEADER = "JRGC/JRGC-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -6529,9 +6529,9 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = JRGC/JRGC.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Phoenix Credit Management CO., Ltd.";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = EZRWM7P5C6;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -6578,8 +6578,8 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp299;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "aaaf1335-9564-4b24-89a0-419b90fbe72c";
+				PROVISIONING_PROFILE_SPECIFIER = 2016_299Distribution;
 				SWIFT_OBJC_BRIDGING_HEADER = "JRGC/JRGC-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -6637,16 +6637,16 @@
 				CODE_SIGN_ENTITLEMENTS = "JRGCWatch Extension/JRGCWatch Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Phoenix Credit Management CO., Ltd.";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing Phoenix Credit Management CO., Ltd.";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = EZRWM7P5C6;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "JRGCWatch Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp299.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "1b2578ed-619c-4232-a1ae-f934766dd2b2";
+				PROVISIONING_PROFILE_SPECIFIER = 299ExtenSionDistribution;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
@@ -6665,17 +6665,17 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CODE_SIGN_ENTITLEMENTS = "JRGCWatch Extension/JRGCWatch Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Phoenix Credit Management CO., Ltd.";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = EZRWM7P5C6;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "JRGCWatch Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp299.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "1b2578ed-619c-4232-a1ae-f934766dd2b2";
+				PROVISIONING_PROFILE_SPECIFIER = 299ExtenSionDistribution;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
@@ -6695,16 +6695,16 @@
 				CODE_SIGN_ENTITLEMENTS = JRGCWatch/JRGCWatch.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Phoenix Credit Management CO., Ltd.";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing Phoenix Credit Management CO., Ltd.";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = EZRWM7P5C6;
 				GCC_NO_COMMON_BLOCKS = YES;
 				IBSC_MODULE = JRGCWatch_Extension;
 				INFOPLIST_FILE = JRGCWatch/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp299.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "3897abfa-f2db-414d-8147-2c702dd5bc18";
+				PROVISIONING_PROFILE_SPECIFIER = 299WatchKitDistribution;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
@@ -6723,17 +6723,17 @@
 				CODE_SIGN_ENTITLEMENTS = JRGCWatch/JRGCWatch.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Phoenix Credit Management CO., Ltd.";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing Phoenix Credit Management CO., Ltd.";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = EZRWM7P5C6;
 				GCC_NO_COMMON_BLOCKS = YES;
 				IBSC_MODULE = JRGCWatch_Extension;
 				INFOPLIST_FILE = JRGCWatch/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp299.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "3897abfa-f2db-414d-8147-2c702dd5bc18";
+				PROVISIONING_PROFILE_SPECIFIER = 299WatchKitDistribution;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;

@@ -11,6 +11,7 @@
 #import "UCFPurchaseBidViewController.h"
 
 #import "UCFUserPresenter.h"
+#import "UITabBar+TabBarBadge.h"
 
 #import "UCFHomeUserInfoCell.h"
 #import "SDCycleScrollView.h"
@@ -39,6 +40,7 @@
 @property (copy, nonatomic) ViewControllerGenerator myLevelVCGenerator;
 
 @property (weak, nonatomic) IBOutlet UIView *cycleImageBackView;
+@property (weak, nonatomic) IBOutlet UIButton *sign;
 
 - (IBAction)visible:(UIButton *)sender;
 
@@ -47,7 +49,18 @@
 @property (weak, nonatomic) IBOutlet UILabel *totalMoney;
 @property (weak, nonatomic) IBOutlet UILabel *availableBalance;
 @property (copy, nonatomic) NSString *userTicket;
+@property (weak, nonatomic) IBOutlet UILabel *beanLabel;
+@property (weak, nonatomic) IBOutlet UILabel *couponLabel;
+@property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
+@property (weak, nonatomic) IBOutlet UILabel *myLevelLabel;
 
+@property (copy, nonatomic) NSString *beanCount;
+@property (strong, nonatomic) NSNumber *couponNumber;
+@property (copy, nonatomic) NSString *score;
+@property (copy, nonatomic) NSString *memLevel;
+@property (copy, nonatomic) NSString *addProfit;
+@property (copy, nonatomic) NSString *asset;
+@property (copy, nonatomic) NSString *availableBanlance;
 @end
 
 @implementation UCFUserInformationViewController
@@ -191,6 +204,26 @@
 
 - (IBAction)visible:(UIButton *)sender {
     sender.selected = !sender.selected;
+    if (sender.selected) {
+        self.beanLabel.text = @"****";
+        self.couponLabel.text = @"****";
+        self.scoreLabel.text = @"****";
+        self.myLevelLabel.text = @"****";
+        
+        self.addedProfitLabel.text = @"****";
+        self.totalMoney.text = @"****";
+        self.availableBalance.text = @"****";
+    }
+    else {
+        self.beanLabel.text = self.beanCount;
+        self.couponLabel.text = [NSString stringWithFormat:@"%@", self.couponNumber];
+        self.scoreLabel.text = self.score;
+        self.myLevelLabel.text = self.memLevel;
+        
+        self.addedProfitLabel.text = self.addProfit;
+        self.totalMoney.text = self.asset;
+        self.availableBalance.text = self.availableBanlance;
+    }
 }
 
 #pragma mark - SDCycleScrollViewDelegate
@@ -247,29 +280,11 @@
         if ([result isKindOfClass:[UCFUserInfoModel class]]) {
             [self.tableview reloadData];
             UCFUserInfoModel *userInfo = result;
-//            if ([personCenter.sex isEqualToString:@"0"]) {
-//                self.userIconImageView.image = [UIImage imageNamed:@"user_icon_head_female"];
-//            }
-//            else if ([personCenter.sex isEqualToString:@"1"]) {
-//                self.userIconImageView.image = [UIImage imageNamed:@"user_icon_head_male"];
-//            }
-//            else {
-//                self.userIconImageView.image = [UIImage imageNamed:@"password_icon_head"];
-//            }
-//            self.userNameLabel.text = personCenter.userName.length > 0 ? personCenter.userName : @"未实名";
-//            self.userLevelImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"usercenter_vip%@_icon", personCenter.memberLever]];
-//            self.unreadMessageImageView.hidden = ([personCenter.unReadMsgCount integerValue] == 0) ? YES : NO;
-//            self.facBeanLabel.text = personCenter.beanAmount ==nil ?@"0":personCenter.beanAmount;
-//            self.couponLabel.text = [NSString stringWithFormat:@"%@", personCenter.couponNumber == nil ? @"0":personCenter.couponNumber];
-//            self.workPointLabel.text = [NSString stringWithFormat:@"%@", personCenter.score == nil ?@"0":personCenter.score];
-//            self.token = personCenter.userCenterTicket;
-//            self.signButton.hidden = personCenter.isCompanyAgent;
-//            
-//            if ([personCenter.unReadMsgCount intValue] == 0) {
-//                [self.tabBarController.tabBar hideBadgeOnItemIndex:4];
-//            } else {
-//                [self.tabBarController.tabBar showBadgeOnItemIndex:4];
-//            }
+            self.addProfit = userInfo.interests;
+            self.asset = userInfo.total;
+            self.availableBanlance = userInfo.cashBalance;
+            self.sign.hidden = userInfo.isCompanyAgent;
+            [self refreshUI];
         }
         else if ([result isKindOfClass:[NSString class]]) {
             
@@ -287,20 +302,17 @@
             UCFUserInfoModel *userInfo = result;
             [self.userIconImageView sd_setImageWithURL:[NSURL URLWithString:userInfo.hurl] placeholderImage:[UIImage imageNamed:@"password_icon_head"]];
             self.userTicket = userInfo.userCenterTicket;
-//            self.userNameLabel.text = personCenter.userName.length > 0 ? personCenter.userName : @"未实名";
-//            self.userLevelImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"usercenter_vip%@_icon", personCenter.memberLever]];
-//            self.unreadMessageImageView.hidden = ([personCenter.unReadMsgCount integerValue] == 0) ? YES : NO;
-//            self.facBeanLabel.text = personCenter.beanAmount ==nil ?@"0":personCenter.beanAmount;
-//            self.couponLabel.text = [NSString stringWithFormat:@"%@", personCenter.couponNumber == nil ? @"0":personCenter.couponNumber];
-//            self.workPointLabel.text = [NSString stringWithFormat:@"%@", personCenter.score == nil ?@"0":personCenter.score];
-//            self.token = personCenter.userCenterTicket;
-//            self.signButton.hidden = personCenter.isCompanyAgent;
-//            
-//            if ([personCenter.unReadMsgCount intValue] == 0) {
-//                [self.tabBarController.tabBar hideBadgeOnItemIndex:4];
-//            } else {
-//                [self.tabBarController.tabBar showBadgeOnItemIndex:4];
-//            }
+            self.beanCount = userInfo.beanAmount;
+            self.couponNumber = userInfo.couponNumber;
+            self.score = userInfo.score;
+            self.memLevel = userInfo.memberLever;
+            if ([userInfo.unReadMsgCount intValue] == 0) {
+                
+                [self.tabBarController.tabBar hideBadgeOnItemIndex:0];
+            } else {
+                [self.tabBarController.tabBar showBadgeOnItemIndex:0];
+            }
+            [self refreshUI];
         }
         else if ([result isKindOfClass:[NSString class]]) {
             
@@ -308,6 +320,18 @@
     } else if (self.presenter.allDatas.count == 0) {
         //        show error view
     }
+}
+
+- (void)refreshUI
+{
+    self.beanLabel.text = self.beanCount ? self.beanCount : @"--";
+    self.couponLabel.text = self.couponNumber ? [NSString stringWithFormat:@"%@", self.couponNumber] : @"--";
+    self.scoreLabel.text = self.score ? self.score : @"--";
+    self.myLevelLabel.text = self.memLevel ? self.memLevel : @"--";
+    
+    self.addedProfitLabel.text = self.addProfit ? self.addProfit : @"--";
+    self.totalMoney.text = self.asset ? self.asset : @"--";
+    self.availableBalance.text = self.availableBanlance ? self.availableBanlance : @"--";
 }
 
 - (void)userInfoPresenter:(UCFUserPresenter *)presenter didReturnPrdClaimsDealBidWithResult:(id)result error:(NSError *)error
@@ -413,6 +437,11 @@
     if ([self.delegate respondsToSelector:@selector(proInvestAlert:didClickedWithTag:withIndex:)]) {
         [self.delegate proInvestAlert:alertView didClickedWithTag:alertView.tag withIndex:buttonIndex];
     }
+}
+
+- (void)signForRedBag
+{
+    [self sign:self.sign];
 }
 
 @end
