@@ -50,6 +50,11 @@
         if ([key isEqualToString:@"Id"]) {
             propertyValue = [dataSource valueForKey:@"id"];
         }
+        else if ([key isEqualToString:@"p2pAuthorization"]) {
+            [self setP2pAuthorization:[propertyValue boolValue]];
+        }else if ([key isEqualToString:@"zxAuthorization"]){
+            [self setZxAuthorization:[propertyValue boolValue]];
+        }
         if ([key isEqualToString:@"prdLabelsList"]) {
             NSArray *proLabelArr = [dataSource valueForKey:key];
             if (proLabelArr.count > 0) {

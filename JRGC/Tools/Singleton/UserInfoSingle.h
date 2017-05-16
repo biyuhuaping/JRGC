@@ -32,6 +32,9 @@
 
 @property(nonatomic, assign) BOOL companyAgent;
 
+@property(nonatomic, assign) BOOL p2pAuthorization;
+@property(nonatomic, assign) BOOL zxAuthorization;
+
 //@property(nonatomic, copy) NSString *userLevel;
 //获取用户信息单利对象
 + (UserInfoSingle *)sharedManager;

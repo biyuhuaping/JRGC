@@ -204,7 +204,13 @@
                 //如果未登录，展示登录页面
                 [self showLoginView];
             } else {
-//                if([self.userInfoVC.presenter checkIDAAndBankBlindState:self.accoutType]){//           在这里需要 判断授权 以及开户,需要重新梳理
+                HSHelper *helper = [HSHelper new];
+                if (![helper checkP2POrWJIsAuthorization:self.accoutType]) {
+                    [helper pushP2POrWJAuthorizationType:self.accoutType nav:self.navigationController];
+                    
+                    return;
+                }
+               if([self.userInfoVC.presenter checkIDAAndBankBlindState:self.accoutType]){//           在这里需要 判断授权 以及开户,需要重新梳理
                         NSInteger isOrder = [model.isOrder integerValue];
                         if ([model.status intValue ] != 2){
                         if (isOrder > 0) {
@@ -251,7 +257,8 @@
                             }];
                          }
                      }
-                }
+                  }
+            }
           }
         else if (model.moedelType == UCFHomeListCellModelTypeOneImageBatchLending) {
             // 批量出借
@@ -294,7 +301,13 @@
                 //如果未登录，展示登录页面
                 [self showLoginView];
             } else {
-//                [self.userInfoVC.presenter checkIDAAndBankBlindState:self.accoutType]){//           在这里需要 判断授权 以及开户
+                 HSHelper *helper = [HSHelper new];
+                if (![helper checkP2POrWJIsAuthorization:self.accoutType]) {
+                    [helper pushP2POrWJAuthorizationType:self.accoutType nav:self.navigationController];
+                    
+                    return;
+                }
+                if([self checkUserCanInvestIsDetail:YES type:self.accoutType]){//
                 NSDictionary *parameter = @{@"Id": model.Id, @"userId": [UserInfoSingle sharedManager].userId, @"proType": model.type,@"type":@"4"};
                 [self.userInfoVC.presenter fetchProDetailDataWithParameter:parameter completionHandler:^(NSError *error, id result) {
                     NSString *rstcode = [result objectForKey:@"status"];
@@ -307,6 +320,7 @@
                     [weakSelf.navigationController pushViewController:purchaseViewController animated:YES];
                    }
                 }];
+              }
             }
         }
 //        else if (model.moedelType == UCFHomeListCellModelTypeOneImage) {
@@ -381,15 +395,81 @@
     if (!item.isShow) {
         return;
     }
-    UCFP2POrHonerAccoutViewController *subVC = [[UCFP2POrHonerAccoutViewController alloc] initWithNibName:@"UCFP2POrHonerAccoutViewController" bundle:nil];
     if ([item.title isEqualToString:@"P2P账户"]) {
-        subVC.accoutType =  SelectAccoutTypeP2P;
+        self.accoutType =  SelectAccoutTypeP2P;
     }
     else if ([item.title isEqualToString:@"尊享账户"]) {
-        subVC.accoutType = SelectAccoutTypeHoner;
+        self.accoutType = SelectAccoutTypeHoner;
     }
-    [self.navigationController pushViewController:subVC animated:YES];
+
+    HSHelper *helper = [HSHelper new];
+    if (![helper checkP2POrWJIsAuthorization:self.accoutType]) {//先授权
+        [helper pushP2POrWJAuthorizationType:self.accoutType nav:self.navigationController];
+        return;
+    }
+    if ([self checkUserCanInvestIsDetail:YES type:self.accoutType]) {
+        UCFP2POrHonerAccoutViewController *subVC = [[UCFP2POrHonerAccoutViewController alloc] initWithNibName:@"UCFP2POrHonerAccoutViewController" bundle:nil];
+        subVC.accoutType = self.accoutType;
+        [self.navigationController pushViewController:subVC animated:YES];
+    }
 }
+- (BOOL)checkUserCanInvestIsDetail:(BOOL)isDetail type:(SelectAccoutType)accout;
+{
+    
+    NSString *tipStr1 = accout == SelectAccoutTypeP2P ? P2PTIP1:ZXTIP1;
+    NSString *tipStr2 = accout == SelectAccoutTypeP2P ? P2PTIP2:ZXTIP2;
+    
+    NSInteger openStatus = accout == SelectAccoutTypeP2P ? [UserInfoSingle sharedManager].openStatus :[UserInfoSingle sharedManager].enjoyOpenStatus;
+    
+    switch (openStatus)
+    {// ***hqy添加
+        case 1://未开户-->>>新用户开户
+        case 2://已开户 --->>>老用户(白名单)开户
+        {
+            [self showHSAlert:tipStr1];
+            return NO;
+            break;
+        }
+        case 3://已绑卡-->>>去设置交易密码页面
+        {
+            if (isDetail) {
+                return YES;
+            }else
+            {
+                [self showHSAlert:tipStr2];
+                return NO;
+            }
+        }
+            break;
+        default:
+            return YES;
+            break;
+    }
+}
+- (void)showHSAlert:(NSString *)alertMessage
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:alertMessage delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    alert.tag =  self.accoutType == SelectAccoutTypeP2P ? 8000 :8010;
+    [alert show];
+}
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    if (alertView.tag == 8000) {
+        if (buttonIndex == 1) {
+            HSHelper *helper = [HSHelper new];
+            [helper pushOpenHSType:SelectAccoutTypeP2P Step:[UserInfoSingle sharedManager].openStatus nav:self.navigationController];
+        }
+    }else if (alertView.tag == 8010) {
+        if (buttonIndex == 1) {
+            HSHelper *helper = [HSHelper new];
+            [helper pushOpenHSType:SelectAccoutTypeHoner Step:[UserInfoSingle sharedManager].enjoyOpenStatus nav:self.navigationController];
+        }
+    }
+
+}
+
+
+
 
 - (void)proInvestAlert:(UIAlertView *)alertView didClickedWithTag:(NSInteger)tag withIndex:(NSInteger)index
 {

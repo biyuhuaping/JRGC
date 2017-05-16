@@ -44,5 +44,9 @@ typedef enum : NSUInteger {
 @property (nonatomic, assign) UCFHomeListCellModelType moedelType;
 @property (nonatomic, copy) NSString *backImage;
 
+@property (nonatomic, assign) BOOL p2pAuthorization;
+@property (nonatomic, assign) BOOL zxAuthorization;
+
+
 + (instancetype)homeListCellWithDict:(NSDictionary *)dict;
 @end
