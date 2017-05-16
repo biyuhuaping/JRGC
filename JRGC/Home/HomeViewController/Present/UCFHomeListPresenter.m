@@ -172,6 +172,8 @@
             temp31.item.zxTransferNum = listInfo.zxTransferNum;
             [UserInfoSingle sharedManager].p2pAuthorization = listInfo.p2pAuthorization;
             [UserInfoSingle sharedManager].zxAuthorization = listInfo.zxAuthorization;
+            [UserInfoSingle sharedManager].openStatus = [listInfo.openStatus integerValue];
+            [UserInfoSingle sharedManager].enjoyOpenStatus = [listInfo.zxOpenStatus integerValue];
             
         }
         else if ([result isKindOfClass:[NSString class]]) {
