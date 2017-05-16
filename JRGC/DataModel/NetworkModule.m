@@ -1252,6 +1252,12 @@ static NetworkModule *gInstance = NULL;
         case KSXTagMyInviteRewardinfo:
             parameter = [NEW_SERVER_IP stringByAppendingString:MYINVITEREWARDINFOURL];
             break;
+        case KSXTagP2pISAuthorization:
+            parameter = [NEW_SERVER_IP stringByAppendingString:P2PISAUTHORIZATIONURL];
+            break;
+        case KSXTagP2pAuthorization:
+            parameter = [NEW_SERVER_IP stringByAppendingString:P2PAUTHORIZATIONURL];
+            break;
     }
     //给原有参数字典添加公共参数
     if (!data) {
