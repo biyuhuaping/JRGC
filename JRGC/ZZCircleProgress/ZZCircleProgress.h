@@ -30,6 +30,7 @@ typedef NS_ENUM(NSInteger, CircleIncreaseModel) {
 @property (nonatomic, assign) BOOL increaseFromLast;/**<是否从上次数值开始动画，默认为NO*/
 @property (nonatomic, assign) BOOL notAnimated;/**<不加动画，默认为NO*/
 @property (nonatomic, assign) BOOL forceRefresh;/**<set的progress等于上次时是否仍刷新，默认为NO*/
+@property (nonatomic, copy) NSString *progressText;
 
 //动画模式
 @property (nonatomic, assign) CircleIncreaseModel animationModel;/**<动画模式*/

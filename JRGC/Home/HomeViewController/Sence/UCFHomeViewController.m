@@ -34,6 +34,7 @@
 #import "MongoliaLayerCenter.h"
 
 #import "UCFUserInfoListItem.h"
+#import "Touch3DSingle.h"
 
 
 @interface UCFHomeViewController () <UCFHomeListViewControllerDelegate, UCFHomeListNavViewDelegate, UCFUserInformationViewControllerDelegate>
@@ -59,8 +60,34 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUI:) name:@"refreshUIWithLoginAndOut" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(responds3DTouchClick) name:@"responds3DTouchClick" object:nil];
     }
     return self;
+}
+
+- (void)responds3DTouchClick
+{
+    if ([Touch3DSingle sharedTouch3DSingle].isLoad) {
+        [Touch3DSingle sharedTouch3DSingle].isLoad = NO;
+    }else
+        return;
+    int type = [[Touch3DSingle sharedTouch3DSingle].type intValue];
+    [self.navigationController popToRootViewControllerAnimated:NO];
+    switch (type) {
+        case 0:{//工场码
+//            self.userInfoVC.fixedScreenLight = [UIScreen mainScreen].brightness;
+//            UCFFacCodeViewController *subVC = [[UCFFacCodeViewController alloc] init];
+//            subVC.title = @"我的工场码";
+            //            subVC.urlStr = [NSString stringWithFormat:@"https://m.9888.cn/mpwap/mycode.jsp?pcode=%@&sex=%@",_gcm,_sex];
+//            [self.navigationController pushViewController:subVC animated:YES];
+        }
+            break;
+        case 1:{//签到
+            [self.userInfoVC signForRedBag];
+        }
+            break;
+    }
+    
 }
 
 - (void)viewDidLoad {

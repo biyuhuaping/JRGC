@@ -14,7 +14,12 @@
             <connections>
                 <outlet property="addedProfitLabel" destination="V37-AG-WJs" id="Ul2-Li-HYv"/>
                 <outlet property="availableBalance" destination="TZp-1w-jOI" id="27p-6j-NBZ"/>
+                <outlet property="beanLabel" destination="TMr-jK-RJv" id="rqw-OU-71y"/>
+                <outlet property="couponLabel" destination="qdd-1p-gn7" id="tKS-So-P2b"/>
                 <outlet property="cycleImageBackView" destination="aIU-EY-eXv" id="ijc-vp-vyr"/>
+                <outlet property="myLevelLabel" destination="7XL-OM-LfF" id="uvv-Fe-1fb"/>
+                <outlet property="scoreLabel" destination="ztp-YF-iUI" id="fXe-Po-9ny"/>
+                <outlet property="sign" destination="VpN-vn-Mvf" id="Zat-MO-e5e"/>
                 <outlet property="tableview" destination="Xdt-ys-drQ" id="HNa-jk-jbC"/>
                 <outlet property="totalMoney" destination="FDu-Ue-Gzc" id="kcw-BL-fLh"/>
                 <outlet property="userIconImageView" destination="CwZ-rf-VUp" id="ybg-jI-SNj"/>
