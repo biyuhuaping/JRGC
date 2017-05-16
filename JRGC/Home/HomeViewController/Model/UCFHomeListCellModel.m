@@ -8,6 +8,7 @@
 
 #import "UCFHomeListCellModel.h"
 #import <objc/runtime.h>
+#import "UCFProjectLabel.h"
 
 @implementation UCFHomeListCellModel
 + (instancetype)homeListCellWithDict:(NSDictionary *)dict
@@ -49,10 +50,23 @@
         if ([key isEqualToString:@"Id"]) {
             propertyValue = [dataSource valueForKey:@"id"];
         }
+        if ([key isEqualToString:@"prdLabelsList"]) {
+            NSArray *proLabelArr = [dataSource valueForKey:key];
+            if (proLabelArr.count > 0) {
+                NSMutableArray *temp = [NSMutableArray new];
+                for (NSDictionary *dict in proLabelArr) {
+                    UCFProjectLabel *projectLabel = [UCFProjectLabel projectLabelWithDict:dict];
+                    [temp addObject:projectLabel];
+                }
+                self.prdLabelsList = temp;
+            }
+        }
         if (![propertyValue isKindOfClass:[NSNull class]] && propertyValue != nil) {
             [self setValue:propertyValue forKey:key];
         } else {
-//            [self setValue:@"" forKey:key];
+            if (![key isEqualToString:@"moedelType"]) {
+                [self setValue:@"" forKey:key];
+            }
         }
     }
 }

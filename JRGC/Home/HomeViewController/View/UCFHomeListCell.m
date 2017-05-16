@@ -9,6 +9,7 @@
 #import "UCFHomeListCell.h"
 #import "ZZCircleProgress.h"
 #import "NZLabel.h"
+#import "UCFProjectLabel.h"
 
 @interface UCFHomeListCell ()
 @property (weak, nonatomic) IBOutlet UILabel *proName;
@@ -36,6 +37,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *oneImageDescribeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *oneImageNumLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *numBackViewW;
+@property (weak, nonatomic) IBOutlet UILabel *characteristicLabel;
+@property (weak, nonatomic) IBOutlet UIView *characteristicBackView;
 
 @end
 
@@ -117,6 +120,21 @@
         }
         else
             self.circleProgressView.progressText = statusArr[status];
+        
+        if (presenter.item.prdLabelsList.count>0) {
+            for (UCFProjectLabel *projectLabel in presenter.item.prdLabelsList) {
+                if ([projectLabel.labelPriority integerValue] == 1) {
+                    self.characteristicBackView.hidden = NO;
+                    self.characteristicLabel.text = projectLabel.labelName;
+                }
+                else {
+                    self.characteristicBackView.hidden = YES;
+                }
+            }
+        }
+        else {
+            self.characteristicBackView.hidden = YES;
+        }
     }
     else if (presenter.modelType == UCFHomeListCellModelTypeOneImageBatchLending || presenter.modelType == UCFHomeListCellModelTypeOneImageHonorTransfer || presenter.modelType == UCFHomeListCellModelTypeOneImageBondTransfer)  {
         self.oneImageView.hidden = NO;
