@@ -205,14 +205,14 @@
 - (IBAction)visible:(UIButton *)sender {
     sender.selected = !sender.selected;
     if (sender.selected) {
-        self.beanLabel.text = @"--";
-        self.couponLabel.text = @"--";
-        self.scoreLabel.text = @"--";
-        self.myLevelLabel.text = @"--";
+        self.beanLabel.text = @"****";
+        self.couponLabel.text = @"****";
+        self.scoreLabel.text = @"****";
+        self.myLevelLabel.text = @"****";
         
-        self.addedProfitLabel.text = @"--";
-        self.totalMoney.text = @"--";
-        self.availableBalance.text = @"--";
+        self.addedProfitLabel.text = @"****";
+        self.totalMoney.text = @"****";
+        self.availableBalance.text = @"****";
     }
     else {
         self.beanLabel.text = self.beanCount;
