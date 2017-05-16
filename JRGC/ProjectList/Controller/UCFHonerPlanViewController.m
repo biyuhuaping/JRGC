@@ -260,6 +260,12 @@
         //如果未登录，展示登录页面
         [self showLoginView];
     } else  {
+        
+        HSHelper *helper = [HSHelper new];
+        if (![helper checkP2POrWJIsAuthorization:self.accoutType]) {//先授权
+            [helper pushP2POrWJAuthorizationType:self.accoutType nav:self.navigationController];
+            return;
+        }
         if ([self checkUserCanInvestIsDetail:YES])
         {
             _projectListModel = [self.dataArray objectAtIndex:indexPath.row];
@@ -292,6 +298,11 @@
         //如果未登录，展示登录页面
         [self showLoginView];
      } else  {
+         HSHelper *helper = [HSHelper new];
+         if (![helper checkP2POrWJIsAuthorization:self.accoutType]) {//先授权
+             [helper pushP2POrWJAuthorizationType:self.accoutType nav:self.navigationController];
+             return;
+         }
          if ([self checkUserCanInvestIsDetail:NO]) {
              [MBProgressHUD showHUDAddedTo:self.view animated:YES];
              _projectListModel = model;

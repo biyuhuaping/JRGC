@@ -57,6 +57,7 @@
 - (void)initHonerUI
 {
     __weak typeof(self) weakSelf = self;
+    self.bottomLab.text = @"获取您的工场金服用户信息注册并开通工场尊享用户";
     _registLabel.text = @"我已阅读并同意《工场尊享用户服务协议》";
     _registLabel.userInteractionEnabled = YES;
     [_registLabel addLinkString:@"《工场尊享用户服务协议》" block:^(ZBLinkLabelModel *linkModel) {
@@ -67,6 +68,7 @@
 -(void)initP2PUI{
     __weak typeof(self) weakSelf = self;
     _registLabel.userInteractionEnabled = YES;
+    self.bottomLab.text = @"获取您的工场金服用户信息注册并开通工场微金用户";
     _registLabel.text = @"我已阅读并同意《工场微金用户服务协议》";
     [_registLabel addLinkString:@"《工场微金用户服务协议》" block:^(ZBLinkLabelModel *linkModel) {
         [weakSelf showHeTong:linkModel];
@@ -97,23 +99,31 @@
     
  
 }
+-(void)beginPost:(kSXTag)tag{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+   }
 - (void)endPost:(id)result tag:(NSNumber *)tag
 {
     NSString *Data = (NSString *)result;
     NSDictionary * dic = [Data objectFromJSONString];
     
-    
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     switch (tag.intValue) {
         case kSXTagGetUserAgree:
         {
-            if([dic[@"ret"] boolValue] == 1){
-                UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:2];
-                vc.site = @"2";
-                vc.accoutType = SelectAccoutTypeHoner;
-                [self.navigationController pushViewController:vc animated:YES];
-                NSMutableArray *navVCArray = [[NSMutableArray alloc] initWithArray:self.navigationController.viewControllers];
-                [navVCArray removeObjectAtIndex:navVCArray.count-2];
-                [self.navigationController setViewControllers:navVCArray animated:NO];
+            if([dic[@"ret"] boolValue] == 1){//授权成功
+                
+                [AuxiliaryFunc showToastMessage:@"授权成功" withView:self.view];
+                [UserInfoSingle sharedManager].zxAuthorization = YES;
+                [self performSelector:@selector(popViewController) withObject:nil afterDelay:2.0f];
+                
+//                UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:2];
+//                vc.site = @"2";
+//                vc.accoutType = SelectAccoutTypeHoner;
+//                [self.navigationController pushViewController:vc animated:YES];
+//                NSMutableArray *navVCArray = [[NSMutableArray alloc] initWithArray:self.navigationController.viewControllers];
+//                [navVCArray removeObjectAtIndex:navVCArray.count-2];
+//                [self.navigationController setViewControllers:navVCArray animated:NO];
             } else {
                 [MBProgressHUD displayHudError:dic[@"msg"]];
             }
@@ -121,14 +131,19 @@
             break;
         case KSXTagP2pAuthorization:
         {
-            if([dic[@"ret"] boolValue] == 1){
-                UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:2];
-                vc.site = @"1";
-                vc.accoutType = SelectAccoutTypeP2P;
-                [self.navigationController pushViewController:vc animated:YES];
-                NSMutableArray *navVCArray = [[NSMutableArray alloc] initWithArray:self.navigationController.viewControllers];
-                [navVCArray removeObjectAtIndex:navVCArray.count-2];
-                [self.navigationController setViewControllers:navVCArray animated:NO];
+            if([dic[@"ret"] boolValue] == 1){//授权成功
+                [AuxiliaryFunc showToastMessage:@"授权成功" withView:self.view];
+                 [UserInfoSingle sharedManager].p2pAuthorization = YES;
+                [self performSelector:@selector(popViewController) withObject:nil afterDelay:2.0f];
+               
+       
+//                UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:2];
+//                vc.site = @"1";
+//                vc.accoutType = SelectAccoutTypeP2P;
+//                [self.navigationController pushViewController:vc animated:YES];
+//                NSMutableArray *navVCArray = [[NSMutableArray alloc] initWithArray:self.navigationController.viewControllers];
+//                [navVCArray removeObjectAtIndex:navVCArray.count-2];
+//                [self.navigationController setViewControllers:navVCArray animated:NO];
             } else {
                 [MBProgressHUD displayHudError:dic[@"msg"]];
             }
@@ -138,10 +153,14 @@
         default:
             break;
     }
-    }
+}
+-(void)popViewController{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 - (void)errorPost:(NSError *)err tag:(NSNumber *)tag
 {
-    
+    [MBProgressHUD displayHudError:[err.userInfo objectForKey:@"NSLocalizedDescription"]];
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
 }
 - (void)dealloc
 {

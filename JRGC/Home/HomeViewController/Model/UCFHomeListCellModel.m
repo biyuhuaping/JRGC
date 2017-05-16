@@ -49,6 +49,11 @@
         if ([key isEqualToString:@"Id"]) {
             propertyValue = [dataSource valueForKey:@"id"];
         }
+        else if ([key isEqualToString:@"p2pAuthorization"]) {
+            [self setP2pAuthorization:[propertyValue boolValue]];
+        }else if ([key isEqualToString:@"zxAuthorization"]){
+            [self setZxAuthorization:[propertyValue boolValue]];
+        }
         if (![propertyValue isKindOfClass:[NSNull class]] && propertyValue != nil) {
             [self setValue:propertyValue forKey:key];
         } else {

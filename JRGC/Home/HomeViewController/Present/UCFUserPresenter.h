@@ -23,7 +23,7 @@
 - (void)userInfoPresenter:(UCFUserPresenter *)presenter didReturnPrdClaimsDealBidWithResult:(id)result error:(NSError *)error;
 @end
 
-@interface UCFUserPresenter : NSObject
+@interface UCFUserPresenter : NSObject<UIAlertViewDelegate>
 @property (strong, nonatomic) UCFUserInfoModel *userInfoOneModel;
 @property (weak, nonatomic) id<UCFUserPresenterUserInfoCallBack> userInfoViewDelegate;
 @property (weak, nonatomic) id<UCFUserPresenterCyceleImageCallBack> cycleImageViewDelegate;
