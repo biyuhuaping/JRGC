@@ -307,7 +307,7 @@
                     
                     return;
                 }
-                if([self checkUserCanInvestIsDetail:YES type:self.accoutType]){//
+                if([self checkUserCanInvestIsDetail:NO type:self.accoutType]){//
                 NSDictionary *parameter = @{@"Id": model.Id, @"userId": [UserInfoSingle sharedManager].userId, @"proType": model.type,@"type":@"4"};
                 [self.userInfoVC.presenter fetchProDetailDataWithParameter:parameter completionHandler:^(NSError *error, id result) {
                     NSString *rstcode = [result objectForKey:@"status"];
