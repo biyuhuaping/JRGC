@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -13,7 +13,6 @@
             <connections>
                 <outlet property="beansCountLabel" destination="PhW-Cc-SCy" id="Jvy-wf-OUI"/>
                 <outlet property="tableview" destination="Dhy-F3-MrA" id="gPx-uq-21c"/>
-                <outlet property="userRecommendLabel" destination="wrT-j6-pG2" id="Svm-l2-RWh"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -50,9 +49,6 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OUS-PE-bYb" userLabel="View" customClass="UIControl">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="95"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user_icon_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="tHQ-gK-1KY">
-                            <rect key="frame" x="348" y="51" width="12" height="21"/>
-                        </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的返利" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s25-XB-Mhb">
                             <rect key="frame" x="15" y="22" width="58" height="17"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -71,29 +67,19 @@
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="邀请人数：0人" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wrT-j6-pG2">
-                            <rect key="frame" x="265" y="54.5" width="75" height="14"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
                     </subviews>
                     <color key="backgroundColor" red="0.35686274509999999" green="0.41176470590000003" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="Crn-SL-SoG" firstAttribute="bottom" secondItem="s25-XB-Mhb" secondAttribute="bottom" constant="-1" id="1FH-KL-S8A"/>
-                        <constraint firstAttribute="trailing" secondItem="tHQ-gK-1KY" secondAttribute="trailing" constant="15" id="4YK-NG-02A"/>
                         <constraint firstItem="PhW-Cc-SCy" firstAttribute="left" secondItem="OUS-PE-bYb" secondAttribute="left" constant="15" id="66C-Ch-coc"/>
                         <constraint firstItem="Crn-SL-SoG" firstAttribute="leading" secondItem="PhW-Cc-SCy" secondAttribute="trailing" id="6NT-Ho-0RL"/>
                         <constraint firstItem="Crn-SL-SoG" firstAttribute="bottom" secondItem="PhW-Cc-SCy" secondAttribute="bottom" constant="-4" id="8xP-FZ-08V"/>
                         <constraint firstItem="Crn-SL-SoG" firstAttribute="leading" secondItem="s25-XB-Mhb" secondAttribute="trailing" constant="2" id="GzE-VQ-QiW"/>
                         <constraint firstItem="PhW-Cc-SCy" firstAttribute="leading" secondItem="OUS-PE-bYb" secondAttribute="leading" constant="15" id="MuX-sQ-TDd"/>
                         <constraint firstItem="s25-XB-Mhb" firstAttribute="left" secondItem="OUS-PE-bYb" secondAttribute="left" constant="15" id="NKR-R3-O7s"/>
-                        <constraint firstItem="wrT-j6-pG2" firstAttribute="centerY" secondItem="tHQ-gK-1KY" secondAttribute="centerY" id="Rlc-nX-bZK"/>
                         <constraint firstAttribute="bottom" secondItem="PhW-Cc-SCy" secondAttribute="bottom" constant="22" id="Uo0-8S-W2h"/>
-                        <constraint firstItem="tHQ-gK-1KY" firstAttribute="centerY" secondItem="OUS-PE-bYb" secondAttribute="centerY" constant="14" id="Y44-Pr-3OA"/>
                         <constraint firstAttribute="height" constant="95" id="ejs-oA-fBs"/>
                         <constraint firstItem="s25-XB-Mhb" firstAttribute="top" secondItem="OUS-PE-bYb" secondAttribute="top" constant="22" id="lHA-Ra-esu"/>
-                        <constraint firstItem="tHQ-gK-1KY" firstAttribute="leading" secondItem="wrT-j6-pG2" secondAttribute="trailing" constant="8" id="mZ1-g0-esE"/>
                     </constraints>
                     <variation key="default">
                         <mask key="constraints">
@@ -130,6 +116,5 @@
     </objects>
     <resources>
         <image name="homepage_message_arrow" width="7" height="12"/>
-        <image name="user_icon_arrow" width="12" height="21"/>
     </resources>
 </document>

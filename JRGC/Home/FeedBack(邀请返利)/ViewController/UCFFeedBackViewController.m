@@ -8,7 +8,7 @@
 
 #import "UCFFeedBackViewController.h"
 #import "UCFModifyProportion.h"
-#import "UCFMyRebateViewCtrl.h"
+#import "UCFProfitBackViewController.h"
 #import "NZLabel.h"
 #import <UShareUI/UShareUI.h>
 
@@ -349,28 +349,30 @@
 #pragma mark -微金返利页面
 - (IBAction)gotoWeiJinRebateAmtVC:(id)sender {
 
-    UCFMyRebateViewCtrl *mv = [[UCFMyRebateViewCtrl alloc]initWithNibName:@"UCFMyRebateViewCtrl" bundle:nil];
+    UCFProfitBackViewController *mv = [[UCFProfitBackViewController alloc]initWithNibName:@"UCFProfitBackViewController" bundle:nil];
     mv.accoutType = SelectAccoutTypeP2P;
+    mv.index = 0;
     __weak typeof(self) weakSelf = self;
-    mv.headerInfoBlock = ^(NSDictionary *dic){
+//    mv.headerInfoBlock = ^(NSDictionary *dic){
 //        weakSelf.sumCommLab.text = [NSString stringWithFormat:@"¥%@",dic[@"sumComm"]];//微金返利
 //        weakSelf.p2pInviteFriendsCountLab.text = [NSString stringWithFormat:@"邀请投资人数:%@人",dic[@"p2pInviteFriendsCount"]];//邀请投资人数
 //        weakSelf.userRecommendCountLab.text = [NSString stringWithFormat:@"邀请注册人数:%@人",dic[@"userRecommendCount"]];//邀请注册人数
-    };
+//    };
     [self.navigationController pushViewController:mv animated:YES];
     
 }
 #pragma mark -尊享返利页面
 - (IBAction)gotoHonerRebateAmtVC:(id)sender{
     
-    UCFMyRebateViewCtrl *mv = [[UCFMyRebateViewCtrl alloc]initWithNibName:@"UCFMyRebateViewCtrl" bundle:nil];
+    UCFProfitBackViewController *mv = [[UCFProfitBackViewController alloc]initWithNibName:@"UCFProfitBackViewController" bundle:nil];
     mv.accoutType = SelectAccoutTypeHoner;
+    mv.index = 1;
     __weak typeof(self) weakSelf = self;
-    mv.headerInfoBlock = ^(NSDictionary *dic){
+//    mv.headerInfoBlock = ^(NSDictionary *dic){
 //        weakSelf.sumCommLab.text = [NSString stringWithFormat:@"¥%@",dic[@"sumComm"]];//尊享返利
 //        weakSelf.zxInviteFriendsCountLab.text = [NSString stringWithFormat:@"邀请投资人数:%@人",dic[@"zxInviteFriendsCount"]];//邀请投资人数
 //        weakSelf.userRecommendCountLab.text = [NSString stringWithFormat:@"邀请注册人数:%@人",dic[@"userRecommendCount"]];//邀请注册人数
-    };
+//    };
     [self.navigationController pushViewController:mv animated:YES];
 }
 @end

@@ -357,6 +357,7 @@
 - (void)fetchData
 {
     __weak typeof(self) weakSelf = self;
+    
     [self.userInfoVC.presenter fetchUserInfoOneDataWithCompletionHandler:^(NSError *error, id result) {
     }];
     
