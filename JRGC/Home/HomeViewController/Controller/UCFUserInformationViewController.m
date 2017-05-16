@@ -305,6 +305,7 @@
             self.beanCount = userInfo.beanAmount;
             self.couponNumber = userInfo.couponNumber;
             self.score = userInfo.score;
+            [UserInfoSingle sharedManager].gender = userInfo.sex;
             switch ([userInfo.memberLever intValue]) {
                 case 0:
                     self.memLevel = @"普通会员";
