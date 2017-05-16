@@ -19,7 +19,7 @@
 #import "UCFBankDepositoryAccountViewController.h"
 #import "UCFOldUserGuideViewController.h"
 #import "RiskAssessmentViewController.h"
-
+#import "HSHelper.h"
 @interface UCFHornerTransferViewController () <UITableViewDataSource, UITableViewDelegate, UCFProjectListCellDelegate>
 {
     UCFTransferModel *_transferModel;
@@ -116,6 +116,11 @@
         //如果未登录，展示登录页面
         [self showLoginView];
     } else {
+        HSHelper *helper = [HSHelper new];
+        if (![helper checkP2POrWJIsAuthorization:self.accoutType]) {//先授权
+            [helper pushP2POrWJAuthorizationType:self.accoutType nav:self.navigationController];
+            return;
+        }
         if ([self checkUserCanInvestIsDetail:YES]) {
             [tableView deselectRowAtIndexPath:indexPath animated:NO];
 //            _indexPath = indexPath;
@@ -277,6 +282,11 @@
         UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
         [self presentViewController:loginNaviController animated:YES completion:nil];
     } else {
+        HSHelper *helper = [HSHelper new];
+        if (![helper checkP2POrWJIsAuthorization:self.accoutType]) {//先授权
+            [helper pushP2POrWJAuthorizationType:self.accoutType nav:self.navigationController];
+            return;
+        }
         if ([self checkUserCanInvestIsDetail:NO]) {
             [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             _transferModel = model  ;          //普通表

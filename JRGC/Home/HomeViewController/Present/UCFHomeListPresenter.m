@@ -170,6 +170,8 @@
             
             UCFHomeListCellPresenter *temp31 = [self.groupPresenter3.group.prdlist objectAtIndex:1];
             temp31.item.zxTransferNum = listInfo.zxTransferNum;
+            [UserInfoSingle sharedManager].p2pAuthorization = listInfo.p2pAuthorization;
+            [UserInfoSingle sharedManager].zxAuthorization = listInfo.zxAuthorization;
             
         }
         else if ([result isKindOfClass:[NSString class]]) {

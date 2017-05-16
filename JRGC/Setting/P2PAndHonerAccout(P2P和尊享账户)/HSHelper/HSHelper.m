@@ -16,6 +16,16 @@
 @end
 @implementation HSHelper
 
+-(BOOL)checkP2POrWJIsAuthorization:(SelectAccoutType)accoutType{
+    
+    if (accoutType == SelectAccoutTypeHoner) {
+        return [UserInfoSingle sharedManager].zxAuthorization;
+    }else{
+          return [UserInfoSingle sharedManager].p2pAuthorization;
+    }
+    return NO;
+}
+
 - (BOOL)checkHSState:(SelectAccoutType)type withValue:(NSInteger)vlaue
 {
     if (vlaue == 4) {
@@ -24,31 +34,37 @@
         return NO;
     }
 }
+- (void)pushP2POrWJAuthorizationType:(SelectAccoutType)type nav:(UINavigationController *)nav
+{
+    UCFBankDepositoryAccountViewController * bankDepositoryAccountVC =[[UCFBankDepositoryAccountViewController alloc ]initWithNibName:@"UCFBankDepositoryAccountViewController" bundle:nil];
+//    bankDepositoryAccountVC.openStatus = [UserInfoSingle sharedManager].openStatus;
+    bankDepositoryAccountVC.accoutType = type;
+    [nav pushViewController:bankDepositoryAccountVC animated:YES];
+}
 - (void)pushOpenHSType:(SelectAccoutType)type Step:(NSInteger)step nav:(UINavigationController *)nav;
 {
     _accoutType = type;
+    tmpNav = nav;
+    tmpStep = step;
     if (type == SelectAccoutTypeHoner) {
         if (step == 1) {
-            tmpNav = nav;
-            tmpStep = step; 
-            [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID]} tag:kSXTagGetUserAgreeState owner:self signature:YES Type:SelectAccoutTypeHoner];
-        } else {
+            step = 2;
+//            [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID]} tag:kSXTagGetUserAgreeState owner:self signature:YES Type:SelectAccoutTypeHoner];
+        }
             UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:step];
             vc.site = @"2";
             vc.accoutType = SelectAccoutTypeHoner;
             [nav pushViewController:vc animated:YES];
-        }
     } else {
-        if (step == 1 ||  step == 2) {
-            
-             [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID]} tag:KSXTagP2pISAuthorization owner:self signature:YES Type:SelectAccoutTypeP2P];
-        }else{
+        if (step == 1 ) {
+            step = 2;
+//             [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID]} tag:KSXTagP2pISAuthorization owner:self signature:YES Type:SelectAccoutTypeP2P];
+        }
             UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:step];
             vc.site = @"1";
             vc.accoutType = SelectAccoutTypeP2P;
             [nav pushViewController:vc animated:YES];
         }
-    }
 }
 - (void)endPost:(id)result tag:(NSNumber *)tag
 {
