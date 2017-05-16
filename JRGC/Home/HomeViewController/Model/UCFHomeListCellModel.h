@@ -46,6 +46,8 @@ typedef enum : NSUInteger {
 
 @property (nonatomic, assign) BOOL p2pAuthorization;
 @property (nonatomic, assign) BOOL zxAuthorization;
+@property (nonatomic, copy) NSString *openStatus;
+@property (nonatomic, copy) NSString *zxOpenStatus;
 
 
 + (instancetype)homeListCellWithDict:(NSDictionary *)dict;
