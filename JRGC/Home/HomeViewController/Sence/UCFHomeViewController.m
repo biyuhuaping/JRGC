@@ -28,6 +28,7 @@
 #import "UCFHomeListPresenter.h"
 #import "UCFHomeListCellPresenter.h"
 #import "UserInfoSingle.h"
+#import "UCFFacCodeViewController.h"
 
 #import "UCFHomeListNavView.h"
 #import "MaskView.h"
@@ -42,10 +43,20 @@
 @property (strong, nonatomic) UCFUserInformationViewController *userInfoVC;
 @property (strong, nonatomic) UCFHomeListViewController *homeListVC;
 
+@property (strong, nonatomic) NSMutableDictionary *stateDict;
+
 @property (weak, nonatomic) UCFHomeListNavView *navView;
 @end
 
 @implementation UCFHomeViewController
+
+- (NSMutableDictionary *)stateDict
+{
+    if (!_stateDict) {
+        _stateDict = [[NSMutableDictionary alloc] init];
+    }
+    return _stateDict;
+}
 
 #pragma mark - 系统方法
 - (void)viewWillAppear:(BOOL)animated
@@ -75,15 +86,15 @@
     [self.navigationController popToRootViewControllerAnimated:NO];
     switch (type) {
         case 0:{//工场码
-//            self.userInfoVC.fixedScreenLight = [UIScreen mainScreen].brightness;
-//            UCFFacCodeViewController *subVC = [[UCFFacCodeViewController alloc] init];
-//            subVC.title = @"我的工场码";
-            //            subVC.urlStr = [NSString stringWithFormat:@"https://m.9888.cn/mpwap/mycode.jsp?pcode=%@&sex=%@",_gcm,_sex];
-//            [self.navigationController pushViewController:subVC animated:YES];
+            UCFFacCodeViewController *subVC = [[UCFFacCodeViewController alloc] initWithNibName:@"UCFFacCodeViewController" bundle:nil];
+            subVC.urlStr = [NSString stringWithFormat:@"https://m.9888.cn/mpwap/mycode.jsp?pcode=%@&sex=%d",[[NSUserDefaults standardUserDefaults] objectForKey:@"gcmCode"], [[UserInfoSingle sharedManager].gender intValue]];
+            [self.navigationController pushViewController:subVC animated:YES];
         }
             break;
         case 1:{//签到
-            [self.userInfoVC signForRedBag];
+            if ([UserInfoSingle sharedManager].userId) {
+                [self.userInfoVC signForRedBag];
+            }
         }
             break;
     }
@@ -323,9 +334,6 @@
               }
             }
         }
-//        else if (model.moedelType == UCFHomeListCellModelTypeOneImage) {
-//            
-//        }
     }
     else if (type == UCFHomeListTypeP2PMore)
     {
@@ -346,6 +354,7 @@
         [self.navigationController pushViewController:horner animated:YES];
     }
 }
+
 - (void)showLoginView
 {
     UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
@@ -365,6 +374,10 @@
 - (void)refreshUI:(NSNotification *)noty
 {
     [self addUI];
+    BOOL hasSign = [self.stateDict objectForKey:@"sign"];
+    if (hasSign) {
+        
+    }
 }
 
 #pragma mark - 请求数据

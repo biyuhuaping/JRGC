@@ -13,6 +13,7 @@
 #import "UCFHomeListGroup.h"
 #import "UCFUserInfoModel.h"
 #import "UCFSignModel.h"
+#import "UCFSession.h"
 
 #define HOMELIST @"homeList"
 #define USERINFOONE @"userInfoOne"
@@ -131,6 +132,7 @@
             [tempResult setObject:tempArray forKey:@"homelistContent"];
             [tempResult setObject:homelistModel forKey:@"listInfo"];
             [tempResult setObject:[result objectSafeForKey:@"siteNotice"] forKey:@"siteNotice"];
+            [[UCFSession sharedManager] transformBackgroundWithUserInfo:@{} withState:UCFSessionStateUserRefresh];
             complete(nil, tempResult);
         }
         else {

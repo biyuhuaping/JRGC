@@ -27,6 +27,7 @@
 @property (nonatomic, copy) NSString *score;
 @property (nonatomic, strong) NSNumber *unReadMsgCount;
 @property (nonatomic, copy) NSString *userCenterTicket;
+@property (nonatomic, copy) NSString *sex;
 
 + (instancetype)userInfomationWithDict:(NSDictionary *)dict;
 @end
