@@ -49,6 +49,7 @@
         id propertyValue = [dataSource valueForKey:key];
         if ([key isEqualToString:@"Id"]) {
             propertyValue = [dataSource valueForKey:@"id"];
+            [self setValue:propertyValue forKey:key];
         }
         else if ([key isEqualToString:@"p2pAuthorization"]) {
             [self setP2pAuthorization:[propertyValue boolValue]];
