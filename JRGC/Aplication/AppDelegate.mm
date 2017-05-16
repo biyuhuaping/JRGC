@@ -36,7 +36,6 @@
 #import "UCFLatestProjectViewController.h"
 #import "UcfWalletSDK.h"
 #import "MD5Util.h"
-//#import "BaseNavigationViewController.h"
 #import "JPUSHService.h"//极光推送
 #import "MongoliaLayerCenter.h"
 // iOS10注册APNs所需头文件

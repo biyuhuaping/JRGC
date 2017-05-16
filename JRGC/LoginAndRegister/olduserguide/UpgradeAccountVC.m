@@ -705,6 +705,7 @@
             acVC.site = self.site;
             acVC.view.frame = self.view.bounds;
             acVC.db = self.db;
+            acVC.fromVC = self.fromVC;
             [acVC didMoveToParentViewController:self];
             self.db.isOpenAccount = YES;
             [self.view addSubview:acVC.view];

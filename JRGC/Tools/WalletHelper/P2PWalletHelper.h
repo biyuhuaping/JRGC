@@ -8,8 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@interface P2PWalletHelper : NSObject
-+ (UIViewController *)getUCFWalletTargetController;
-+ (BOOL)checkUserHSStateCanOpenWallet;
-
+@interface P2PWalletHelper : NSObject<NetworkModuleDelegate>
++ (P2PWalletHelper *)sharedManager;
+- (UIViewController *)getUCFWalletTargetController;
+- (BOOL)checkUserHSStateCanOpenWallet;
+- (void)getUserWalletData;
 @end

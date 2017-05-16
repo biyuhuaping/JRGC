@@ -1245,6 +1245,10 @@ static NetworkModule *gInstance = NULL;
             break;
         case KSXTagADJustMent:
             parameter = [NEW_SERVER_IP stringByAppendingString:USERINFOADJUSTMENT];
+            break;
+        case KSXTagWalletShowMsg:
+            parameter = [NEW_SERVER_IP stringByAppendingString:WALLETSHOW];
+            break;
     }
     //给原有参数字典添加公共参数
     if (!data) {

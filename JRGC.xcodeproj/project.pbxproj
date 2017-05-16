@@ -561,6 +561,8 @@
 		84FAB60D1C7C575300D0942F /* MGSwipeTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FAB60B1C7C575300D0942F /* MGSwipeTableCell.m */; };
 		84FFA5301C7EAA9200ACD835 /* UIScrollView+TouchScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FFA52F1C7EAA9200ACD835 /* UIScrollView+TouchScrollView.m */; };
 		A8AD2E3E1EB979760013DB7C /* MongoliaLayerCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = A8AD2E3D1EB979760013DB7C /* MongoliaLayerCenter.m */; };
+		A8B6B6801EC9A9F000D4E86F /* WalletBankView.m in Sources */ = {isa = PBXBuildFile; fileRef = A8B6B67F1EC9A9F000D4E86F /* WalletBankView.m */; };
+		A8B6B6821EC9AA0900D4E86F /* WalletBankView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8B6B6811EC9AA0900D4E86F /* WalletBankView.xib */; };
 		A8CE17731EC44BF8009BD954 /* UCFWalletSelectBankCarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8CE17711EC44BF8009BD954 /* UCFWalletSelectBankCarViewController.m */; };
 		A8CE17741EC44BF8009BD954 /* UCFWalletSelectBankCarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8CE17721EC44BF8009BD954 /* UCFWalletSelectBankCarViewController.xib */; };
 		A8D2DE781EB9E1CF00D61AD0 /* MaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = A8D2DE771EB9E1CF00D61AD0 /* MaskView.m */; };
@@ -1778,6 +1780,9 @@
 		84FFA52F1C7EAA9200ACD835 /* UIScrollView+TouchScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+TouchScrollView.m"; sourceTree = "<group>"; };
 		A8AD2E3C1EB979760013DB7C /* MongoliaLayerCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MongoliaLayerCenter.h; sourceTree = "<group>"; };
 		A8AD2E3D1EB979760013DB7C /* MongoliaLayerCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MongoliaLayerCenter.m; sourceTree = "<group>"; };
+		A8B6B67E1EC9A9F000D4E86F /* WalletBankView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletBankView.h; sourceTree = "<group>"; };
+		A8B6B67F1EC9A9F000D4E86F /* WalletBankView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletBankView.m; sourceTree = "<group>"; };
+		A8B6B6811EC9AA0900D4E86F /* WalletBankView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WalletBankView.xib; sourceTree = "<group>"; };
 		A8CE17701EC44BF8009BD954 /* UCFWalletSelectBankCarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFWalletSelectBankCarViewController.h; sourceTree = "<group>"; };
 		A8CE17711EC44BF8009BD954 /* UCFWalletSelectBankCarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFWalletSelectBankCarViewController.m; sourceTree = "<group>"; };
 		A8CE17721EC44BF8009BD954 /* UCFWalletSelectBankCarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFWalletSelectBankCarViewController.xib; sourceTree = "<group>"; };
@@ -5126,6 +5131,9 @@
 				A8CE17701EC44BF8009BD954 /* UCFWalletSelectBankCarViewController.h */,
 				A8CE17711EC44BF8009BD954 /* UCFWalletSelectBankCarViewController.m */,
 				A8CE17721EC44BF8009BD954 /* UCFWalletSelectBankCarViewController.xib */,
+				A8B6B67E1EC9A9F000D4E86F /* WalletBankView.h */,
+				A8B6B67F1EC9A9F000D4E86F /* WalletBankView.m */,
+				A8B6B6811EC9AA0900D4E86F /* WalletBankView.xib */,
 			);
 			name = WalletHelper;
 			path = Tools/WalletHelper;
@@ -5870,6 +5878,7 @@
 				74EAF5BE1B0F18CB00807C1C /* UCFBankCardInfoExplainView.xib in Resources */,
 				25B38EFC1D5884EE00FB09F1 /* UCFBankCardChoseListInfo.xib in Resources */,
 				742E281E1EBB26ED00FF6D4E /* UCFHomeListHeaderSectionView.xib in Resources */,
+				A8B6B6821EC9AA0900D4E86F /* WalletBankView.xib in Resources */,
 				E3C117AF1D40D2F90053A052 /* UCFWebViewJavascriptBridgeController.xib in Resources */,
 				74956EB31D66E87F00D68B61 /* UCFModifyPhoneViewController.xib in Resources */,
 				74C05FB91EBDD3BD00673979 /* UCFHomeListCell.xib in Resources */,
@@ -6493,6 +6502,7 @@
 				74A0AF021EC2B021009E5A57 /* UCFHomeListCellPresenter.m in Sources */,
 				FB72B08D1D74233E00F4DC8E /* BaseNavigationViewController.m in Sources */,
 				746FFE2C1B007FA100FF927F /* UCFBindBankCardNormalTableViewCell.m in Sources */,
+				A8B6B6801EC9A9F000D4E86F /* WalletBankView.m in Sources */,
 				7BE51D901ADE5079007600AB /* FullWebViewController.m in Sources */,
 				E32020151CC4BCEF0065579C /* WKWebViewJavascriptBridge.m in Sources */,
 				7B2E56911ADBBE77008B0F9E /* UCFRetrievePasswordStepTwoViewController.m in Sources */,

@@ -15,7 +15,7 @@
 #import "UCFPersonCenterController.h"
 #import "UCFMoreViewController.h"
 #import "AppDelegate.h"
-
+#import "P2PWalletHelper.h"
 #import "BaseNavigationViewController.h"
 #import "UITabBar+TabBarBadge.h"
 #import "Touch3DSingle.h"
@@ -38,17 +38,7 @@
 @end
 
 @implementation UCFMainTabBarController
-//- (void)viewWillAppear:(BOOL)animated
-//{
-//    self.navigationController.navigationBarHidden = YES;
-//    if ([[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
-//        BaseNavigationViewController *hander = [self.viewControllers objectAtIndex:4];
-//        if (hander.topViewController) {
-//            UCFPersonCenterController *person = (UCFPersonCenterController *)hander.topViewController;
-//            [person hideShadowView];
-//        }
-//    }
-//}
+
 - (void)viewDidLoad
 {   
     [super viewDidLoad];
@@ -68,8 +58,16 @@
     self.tabBar.clipsToBounds = NO;
     [self.tabBar addSubview:imaview];
     [[UITabBar appearance] setShadowImage:tabImag];
+    
+    
+    
+    
 }
-
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [[P2PWalletHelper sharedManager] getUserWalletData];
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -124,14 +122,8 @@
             }
                 break;
             case 3:{
-               
-//                UCFWebViewJavascriptBridgeMall *mallWeb = [[UCFWebViewJavascriptBridgeMall alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
-//                mallWeb.url = MALLURL;
-//                mallWeb.isHideNavigationBar = YES;
-//                [self useragent:mallWeb.webView];
-//                controller = mallWeb;
-//                mallWeb.navTitle = @"豆哥商城";
-                controller = [P2PWalletHelper getUCFWalletTargetController];
+
+                controller = [[P2PWalletHelper sharedManager] getUCFWalletTargetController];
     
             }
                 break;
@@ -227,7 +219,7 @@
             [Touch3DSingle sharedTouch3DSingle].isLoad = NO;
             return NO;
         } else {
-           return [P2PWalletHelper checkUserHSStateCanOpenWallet];
+           return [[P2PWalletHelper sharedManager] checkUserHSStateCanOpenWallet];
         }
         return YES;
     }
