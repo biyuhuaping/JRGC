@@ -40,6 +40,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *characteristicLabel;
 @property (weak, nonatomic) IBOutlet UIView *characteristicBackView;
 
+@property (weak, nonatomic) IBOutlet UIView *upSegLine;
+@property (weak, nonatomic) IBOutlet UIView *downSegLine;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *upLineLeftSpace;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *downLineLeftSpace;
 @end
 
 @implementation UCFHomeListCell
@@ -161,7 +165,37 @@
 - (void)setIndexPath:(NSIndexPath *)indexPath
 {
     _indexPath = indexPath;
+    NSInteger totalRows = [self.tableView numberOfRowsInSection:indexPath.section];
     
+    if (totalRows == 1) { // 这组只有1行
+        self.downSegLine.hidden = NO;
+        self.upSegLine.hidden = NO;
+        self.upSegLine.backgroundColor = UIColorWithRGB(0xd8d8d8);
+        self.downSegLine.backgroundColor = UIColorWithRGB(0xd8d8d8);
+        self.upLineLeftSpace.constant = 0;
+        self.downLineLeftSpace.constant = 0;
+    } else if (indexPath.row == 0) { // 这组的首行(第0行)
+        self.upSegLine.hidden = NO;
+        self.downSegLine.hidden = NO;
+        self.upSegLine.backgroundColor = UIColorWithRGB(0xd8d8d8);
+        self.downSegLine.backgroundColor = UIColorWithRGB(0xe3e5ea);
+        self.upLineLeftSpace.constant = 0;
+        self.downLineLeftSpace.constant = 15;
+    } else if (indexPath.row == totalRows - 1) { // 这组的末行(最后1行)
+        self.upSegLine.hidden = YES;
+        self.downSegLine.hidden = NO;
+        self.upSegLine.backgroundColor = UIColorWithRGB(0xe3e5ea);
+        self.downSegLine.backgroundColor = UIColorWithRGB(0xd8d8d8);
+        self.upLineLeftSpace.constant = 15;
+        self.downLineLeftSpace.constant = 0;
+    } else {
+        self.upSegLine.hidden = YES;
+        self.downSegLine.hidden = NO;
+        self.upSegLine.backgroundColor = UIColorWithRGB(0xe3e5ea);
+        self.downSegLine.backgroundColor = UIColorWithRGB(0xe3e5ea);
+        self.upLineLeftSpace.constant = 15;
+        self.downLineLeftSpace.constant = 15;
+    }
 }
 
 - (void)layoutSubviews
