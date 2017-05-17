@@ -23,7 +23,7 @@
 #import "UCFSignModel.h"
 #import "AppDelegate.h"
 #import "UCFUserInfoListItem.h"
-
+#import "HSHelper.h"
 #define UserInfoViewHeight  327
 
 @interface UCFUserInformationViewController () <UCFUserPresenterUserInfoCallBack, UITableViewDelegate, UITableViewDataSource, SDCycleScrollViewDelegate, UIAlertViewDelegate>
@@ -43,6 +43,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *sign;
 
 - (IBAction)visible:(UIButton *)sender;
+@property (weak, nonatomic) IBOutlet UIButton *visibleBtn;
 
 @property (weak, nonatomic) IBOutlet UIImageView *userIconImageView;
 @property (weak, nonatomic) IBOutlet UILabel *addedProfitLabel;
@@ -110,6 +111,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 //    self.navigationController.navigationBar.hidden = YES;
+    
+    self.visibleBtn.selected = [[NSUserDefaults standardUserDefaults] boolForKey:@"isVisible"];
     
     self.userIconImageView.layer.cornerRadius = CGRectGetWidth(self.userIconImageView.frame) * 0.5;
     self.userIconImageView.clipsToBounds = YES;
@@ -190,7 +193,25 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
     UCFUserInfoListItem *item = [self.presenter.allDatas objectAtIndex:indexPath.row];
+    
+    SelectAccoutType accoutType = SelectAccoutDefault;
+    
+    if ([item.title isEqualToString:@"P2P账户"]) {
+        accoutType =  SelectAccoutTypeP2P;
+    }
+    else if ([item.title isEqualToString:@"尊享账户"]) {
+        accoutType = SelectAccoutTypeHoner;
+    }
+    
+    HSHelper *helper = [HSHelper new];
+    if (![helper checkP2POrWJIsAuthorization:accoutType]) {//先授权
+        [helper pushP2POrWJAuthorizationType:accoutType nav:self.parentViewController.navigationController];
+        return;
+    }
+
+    
     if (indexPath.row == 0) {
         item.isShow = [self.presenter checkIDAAndBankBlindState:SelectAccoutTypeP2P];
     }
@@ -204,17 +225,9 @@
 
 - (IBAction)visible:(UIButton *)sender {
     sender.selected = !sender.selected;
+    [[NSUserDefaults standardUserDefaults] setBool:sender.selected forKey:@"isVisible"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     if (sender.selected) {
-        self.beanLabel.text = @"****";
-        self.couponLabel.text = @"****";
-        self.scoreLabel.text = @"****";
-        self.myLevelLabel.text = @"****";
-        
-        self.addedProfitLabel.text = @"****";
-        self.totalMoney.text = @"****";
-        self.availableBalance.text = @"****";
-    }
-    else {
         self.beanLabel.text = self.beanCount;
         self.couponLabel.text = [NSString stringWithFormat:@"%@", self.couponNumber];
         self.scoreLabel.text = self.score;
@@ -223,6 +236,16 @@
         self.addedProfitLabel.text = self.addProfit;
         self.totalMoney.text = self.asset;
         self.availableBalance.text = self.availableBanlance;
+    }
+    else {
+        self.beanLabel.text = @"****";
+        self.couponLabel.text = @"****";
+        self.scoreLabel.text = @"****";
+        self.myLevelLabel.text = @"****";
+        
+        self.addedProfitLabel.text = @"****";
+        self.totalMoney.text = @"****";
+        self.availableBalance.text = @"****";
     }
 }
 
@@ -280,9 +303,9 @@
         if ([result isKindOfClass:[UCFUserInfoModel class]]) {
             [self.tableview reloadData];
             UCFUserInfoModel *userInfo = result;
-            self.addProfit = userInfo.interests;
-            self.asset = userInfo.total;
-            self.availableBanlance = userInfo.cashBalance;
+            self.addProfit = [NSString stringWithFormat:@"%@", userInfo.interests];
+            self.asset = [NSString stringWithFormat:@"%@", userInfo.total];
+            self.availableBanlance = [NSString stringWithFormat:@"%@", userInfo.cashBalance];
             self.sign.hidden = userInfo.isCompanyAgent;
             [self refreshUI];
         }
@@ -345,14 +368,26 @@
 
 - (void)refreshUI
 {
-    self.beanLabel.text = self.beanCount ? self.beanCount : @"--";
-    self.couponLabel.text = self.couponNumber ? [NSString stringWithFormat:@"%@", self.couponNumber] : @"--";
-    self.scoreLabel.text = self.score ? self.score : @"--";
-    self.myLevelLabel.text = self.memLevel ? self.memLevel : @"--";
-    
-    self.addedProfitLabel.text = self.addProfit ? self.addProfit : @"--";
-    self.totalMoney.text = self.asset ? self.asset : @"--";
-    self.availableBalance.text = self.availableBanlance ? self.availableBanlance : @"--";
+    if (self.visibleBtn.selected) {
+        self.beanLabel.text = self.beanCount ? self.beanCount : @"--";
+        self.couponLabel.text = self.couponNumber ? [NSString stringWithFormat:@"%@", self.couponNumber] : @"--";
+        self.scoreLabel.text = self.score ? self.score : @"--";
+        self.myLevelLabel.text = self.memLevel ? self.memLevel : @"--";
+        
+        self.addedProfitLabel.text = self.addProfit ? self.addProfit : @"--";
+        self.totalMoney.text = self.asset ? self.asset : @"--";
+        self.availableBalance.text = self.availableBanlance ? self.availableBanlance : @"--";
+    }
+    else {
+        self.beanLabel.text = @"****";
+        self.couponLabel.text = @"****";
+        self.scoreLabel.text = @"****";
+        self.myLevelLabel.text = @"****";
+        
+        self.addedProfitLabel.text = @"****";
+        self.totalMoney.text = @"****";
+        self.availableBalance.text = @"****";
+    }
 }
 
 - (void)userInfoPresenter:(UCFUserPresenter *)presenter didReturnPrdClaimsDealBidWithResult:(id)result error:(NSError *)error

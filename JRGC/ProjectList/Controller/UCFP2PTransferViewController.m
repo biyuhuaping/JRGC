@@ -70,7 +70,7 @@
     
     // 添加传统的下拉刷新
     [self.tableview addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(getNetDataFromNet)];
-//    [self.tableview.header beginRefreshing];
+    self.tableview.footer.hidden = YES;
     [self.view bringSubviewToFront:_loadingView];
     [self performSelector:@selector(removeLoadingView) withObject:nil afterDelay:LoadingSecond];
 }
@@ -197,8 +197,8 @@
             [self.tableview reloadData];
             
             BOOL hasNext = [[[[[dic objectForKey:@"data"] objectForKey:@"pageData"] objectForKey:@"pagination"] objectForKey:@"hasNextPage"] boolValue];
-            
             if (self.dataArray.count > 0) {
+                self.tableview.footer.hidden = NO;
                 [self.noDataView hide];
                 if (!hasNext) {
                     [self.tableview.footer noticeNoMoreData];

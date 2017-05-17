@@ -215,8 +215,8 @@ return shared##className; \
 #define PROTOCOLENTUSTTRANSFER  @"https://m.9888.cn/static/wap/protocol-entrust-transfer/index.html"//履行反洗钱义务的承诺书
 #define ZXTIP1 @"请先开通尊享徽商存管账户"
 #define ZXTIP2 @"请先设置尊享徽商存管账户交易密码"
-#define P2PTIP1 @"请先开通P2P徽商存管账户"
-#define P2PTIP2 @"请先设置P2P徽商存管账户交易密码"
+#define P2PTIP1 @"请先开通微金徽商存管账户"
+#define P2PTIP2 @"请先设置微金徽商存管账户交易密码"
 //================== 调试宏 ==================
 #ifdef DEBUG
 # define DBLOG(fmt, ...) NSLog((@"\n-—————函数名:%s"  "行号:%d\n-—————" fmt), __FUNCTION__, __LINE__, ##__VA_ARGS__);

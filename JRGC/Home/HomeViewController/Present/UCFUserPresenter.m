@@ -48,7 +48,7 @@
 #pragma mark - 初始化数据
 - (void)initUI
 {
-    UCFUserInfoListItem *userInfoList0 = [UCFUserInfoListItem itemWithTitle:@"P2P账户" destVcClass:nil];
+    UCFUserInfoListItem *userInfoList0 = [UCFUserInfoListItem itemWithTitle:@"微金账户" destVcClass:nil];
     if ([self.userInfoOneModel.openStatus intValue] < 2) {
         userInfoList0.isShow = NO;
         userInfoList0.subtitle = @"未开户";

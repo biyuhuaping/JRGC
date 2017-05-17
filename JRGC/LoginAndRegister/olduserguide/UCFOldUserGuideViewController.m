@@ -113,11 +113,11 @@
     switch (step) {
         case 1://未开户-->>>新用户开户
         case 2:{//已开户 --->>>老用户(白名单)开户
-            messege = [_site isEqualToString:@"1"] ? @"未开通P2P徽商存管不能投标、提现、充值。" : @"未开通尊享徽商存管不能投标、提现、充值。" ;
+            messege = [_site isEqualToString:@"1"] ? @"未开通微金徽商存管不能投标、提现、充值。" : @"未开通尊享徽商存管不能投标、提现、充值。" ;
         }
             break;
         case 3:{//已绑卡-->>>去设置交易密码页面
-            messege = [_site isEqualToString:@"1"] ? @"未设置P2P交易密码不能投标、提现。" : @"未设置尊享交易密码不能投标、提现。";
+            messege = [_site isEqualToString:@"1"] ? @"未设置微金交易密码不能投标、提现。" : @"未设置尊享交易密码不能投标、提现。";
         }
             break;
     }
@@ -454,7 +454,7 @@
 
 - (void)showDepositoryView {
     if ([self.site intValue] == 1) {
-        baseTitleLabel.text = @"开通P2P徽商存管";
+        baseTitleLabel.text = @"开通微金徽商存管";
     }else{
         baseTitleLabel.text = @"开通尊享徽商存管";
     }

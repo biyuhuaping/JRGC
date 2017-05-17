@@ -91,7 +91,7 @@
         self.loginAndRegisterButton.layer.borderWidth = 0.5;
         [self.loginAndRegisterButton setBackgroundColor:[UIColor blackColor]];
         self.loginAndRegisterButton.layer.borderColor = [UIColor whiteColor].CGColor;
-        self.loginAndRegisterButton.alpha = 0.3;
+        self.loginAndRegisterButton.alpha = 0.7;
     }
 }
 

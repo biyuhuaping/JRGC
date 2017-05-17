@@ -66,6 +66,7 @@
     self.tableview.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableview.backgroundColor = UIColorWithRGB(0xebebee);
     self.tableview.contentInset = UIEdgeInsetsMake(5, 0, 5, 0);
+    self.tableview.footer.hidden = YES;
 }
 
 #pragma mark - add nodata view
@@ -207,6 +208,7 @@
             BOOL hasNext = [[[[[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"pageData"] objectSafeDictionaryForKey:@"pagination"] objectForKey:@"hasNextPage"] boolValue];
             
             if (self.dataArray.count > 0) {
+                self.tableview.footer.hidden = NO;
                 [self.noDataView hide];
                 if (!hasNext) {
                     [self.tableview.footer noticeNoMoreData];

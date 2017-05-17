@@ -105,7 +105,7 @@
     if (nil == view) {
         view = [[UITableViewHeaderFooterView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 10)];
     }
-    view.contentView.backgroundColor = [UIColor yellowColor];
+    view.contentView.backgroundColor = UIColorWithRGB(0xe3e5ea);
     return view;
 }
 
@@ -198,7 +198,6 @@
 #pragma mark - 刷新数据
 - (void)refreshData
 {
-    [self.presenter resetData];
     if ([self.delegate respondsToSelector:@selector(homeListRefreshDataWithHomelist:)]) {
         [self.delegate homeListRefreshDataWithHomelist:self];
     }
