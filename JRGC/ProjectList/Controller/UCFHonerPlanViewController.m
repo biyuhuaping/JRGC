@@ -75,7 +75,7 @@
     // 添加传统的下拉刷新
     [self.tableview addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(getNetDataFromNet)];
 //    [self.tableview.header beginRefreshing];
-//    self.tableview.footer.hidden = YES;
+    self.tableview.footer.hidden = YES;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadHonerPlanData) name:@"reloadHonerPlanData" object:nil];
     [self.view bringSubviewToFront:self.loadingView];
     [self performSelector:@selector(removeLoadingView) withObject:nil afterDelay:LoadingSecond];
@@ -175,6 +175,7 @@
             BOOL hasNext = [[[[[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"pageData"] objectSafeDictionaryForKey:@"pagination"] objectForKey:@"hasNextPage"] boolValue];
             
             if (self.dataArray.count > 0) {
+                self.tableview.footer.hidden = NO;
                 [self.noDataView hide];
                 if (!hasNext) {
                     [self.tableview.footer noticeNoMoreData];

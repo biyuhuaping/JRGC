@@ -100,14 +100,14 @@
  
 }
 -(void)beginPost:(kSXTag)tag{
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-   }
+//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+}
 - (void)endPost:(id)result tag:(NSNumber *)tag
 {
     NSString *Data = (NSString *)result;
     NSDictionary * dic = [Data objectFromJSONString];
     
-    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+//    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     switch (tag.intValue) {
         case kSXTagGetUserAgree:
         {
