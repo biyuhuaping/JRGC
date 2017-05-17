@@ -672,7 +672,7 @@
 - (void)novicecheck:(NSDictionary *)dic
 {
     int  novicePoliceOnOff = [[dic objectSafeForKey:@"novicePoliceOnOff"] intValue];
-    [[MongoliaLayerCenter sharedManager].mongoliaLayerDic setValue:[NSNumber numberWithInt:novicePoliceOnOff] forKey:@"novicePoliceOnOff"];
+//    [[MongoliaLayerCenter sharedManager].mongoliaLayerDic setValue:[NSNumber numberWithInt:novicePoliceOnOff] forKey:@"novicePoliceOnOff"];
 }
 - (void)zxSwitchCheck:(NSDictionary *)dic
 {

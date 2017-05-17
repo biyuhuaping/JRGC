@@ -34,7 +34,6 @@
 }
 - (void)showLogic
 {
-    
     //不登录就需要查看的
     NSDate *lastFirstLoginTime = [[NSUserDefaults standardUserDefaults] objectForKey:FirstAlertViewShowTime];
     BOOL isBelongToToday = [NSDate isBelongToTodayWithDate:lastFirstLoginTime]; //是不是同一天
@@ -63,7 +62,7 @@
     }
     
     //是否弹平台升级调整公告
-    if (![[self.mongoliaLayerDic valueForKey:@"authorization"] boolValue]) {
+    if ([[self.mongoliaLayerDic valueForKey:@"authorization"] boolValue]) {
         MjAlertView *alertView = [[MjAlertView alloc] initPlatformUpgradeNotice:self];
         alertView.tag = 1001;
         [alertView show];
@@ -98,8 +97,9 @@
     
 }
 -(void)endPost:(id)result tag:(NSNumber*)tag {
-//    NSString *data = (NSString *)result;
-//    NSMutableDictionary *dic = [data objectFromJSONString];
+    //    NSString *data = (NSString *)result;
+    //    NSMutableDictionary *dic = [data objectFromJSONString];
+    [self.mongoliaLayerDic setValue:[NSNumber numberWithInt:0] forKey:@"authorization"];
 }
 -(void)errorPost:(NSError*)err tag:(NSNumber*)tag {
     
