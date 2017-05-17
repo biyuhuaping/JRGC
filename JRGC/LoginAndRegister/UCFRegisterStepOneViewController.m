@@ -112,7 +112,7 @@
 {
     //注册协议 加载本地文件
     UCFXieYiViewController *zhuCeXieYi = [[UCFXieYiViewController alloc] init];
-    zhuCeXieYi.titleName = @"注册协议";
+    zhuCeXieYi.titleName = @"金融工场用户服务协议";
     NSString *path = [[NSBundle mainBundle] pathForResource:@"zhucexieyi" ofType:@"docx"];
     zhuCeXieYi.filePath = [NSURL fileURLWithPath:path];
     [self.navigationController pushViewController:zhuCeXieYi animated:YES];
