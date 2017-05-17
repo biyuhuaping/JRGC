@@ -47,7 +47,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self addLeftButton];
-    baseTitleLabel.text = @"确认授权";
+    baseTitleLabel.text = @"授权登录";
     if (self.accoutType == SelectAccoutTypeHoner) {
       [self initHonerUI];
     }else{

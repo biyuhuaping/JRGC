@@ -81,7 +81,7 @@
     label1.textAlignment = NSTextAlignmentCenter;
     [self addSubview:label1];
     
-    UILabel *label2 = [UILabel labelWithFrame:CGRectMake(XPOS, CGRectGetMaxY(label1.frame) + 5, ScreenWidth - XPOS*2, 20) text:[NSString stringWithFormat:@"《注册协议》"] textColor:UIColorWithRGB(0x4aa1f9) font:[UIFont systemFontOfSize:13]];
+    UILabel *label2 = [UILabel labelWithFrame:CGRectMake(XPOS, CGRectGetMaxY(label1.frame) + 5, ScreenWidth - XPOS*2, 20) text:[NSString stringWithFormat:@"《金融工场用户服务协议》"] textColor:UIColorWithRGB(0x4aa1f9) font:[UIFont systemFontOfSize:13]];
     label2.textAlignment = NSTextAlignmentCenter;
     [self addSubview:label2];
     

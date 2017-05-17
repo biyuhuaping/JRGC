@@ -23,7 +23,7 @@
 #import "UCFSignModel.h"
 #import "AppDelegate.h"
 #import "UCFUserInfoListItem.h"
-
+#import "HSHelper.h"
 #define UserInfoViewHeight  327
 
 @interface UCFUserInformationViewController () <UCFUserPresenterUserInfoCallBack, UITableViewDelegate, UITableViewDataSource, SDCycleScrollViewDelegate, UIAlertViewDelegate>
@@ -193,7 +193,25 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
     UCFUserInfoListItem *item = [self.presenter.allDatas objectAtIndex:indexPath.row];
+    
+    SelectAccoutType accoutType = SelectAccoutDefault;
+    
+    if ([item.title isEqualToString:@"P2P账户"]) {
+        accoutType =  SelectAccoutTypeP2P;
+    }
+    else if ([item.title isEqualToString:@"尊享账户"]) {
+        accoutType = SelectAccoutTypeHoner;
+    }
+    
+    HSHelper *helper = [HSHelper new];
+    if (![helper checkP2POrWJIsAuthorization:accoutType]) {//先授权
+        [helper pushP2POrWJAuthorizationType:accoutType nav:self.parentViewController.navigationController];
+        return;
+    }
+
+    
     if (indexPath.row == 0) {
         item.isShow = [self.presenter checkIDAAndBankBlindState:SelectAccoutTypeP2P];
     }
