@@ -62,7 +62,7 @@
     }
     
     //是否弹平台升级调整公告
-    if ([[self.mongoliaLayerDic valueForKey:@"authorization"] boolValue]) {
+    if (![[self.mongoliaLayerDic valueForKey:@"authorization"] boolValue]) {
         MjAlertView *alertView = [[MjAlertView alloc] initPlatformUpgradeNotice:self];
         alertView.tag = 1001;
         [alertView show];
@@ -99,7 +99,7 @@
 -(void)endPost:(id)result tag:(NSNumber*)tag {
     //    NSString *data = (NSString *)result;
     //    NSMutableDictionary *dic = [data objectFromJSONString];
-    [self.mongoliaLayerDic setValue:[NSNumber numberWithInt:0] forKey:@"authorization"];
+    [self.mongoliaLayerDic setValue:[NSNumber numberWithInt:1] forKey:@"authorization"];
 }
 -(void)errorPost:(NSError*)err tag:(NSNumber*)tag {
     
