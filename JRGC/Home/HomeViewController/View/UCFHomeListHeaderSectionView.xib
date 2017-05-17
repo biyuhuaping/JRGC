@@ -15,6 +15,13 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="30"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jqV-1Z-1TR">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="0.5"/>
+                    <color key="backgroundColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="0.5" id="ekn-8O-Prn"/>
+                    </constraints>
+                </view>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="E1b-pn-Uch">
                     <rect key="frame" x="10" y="-2" width="20" height="30"/>
                     <constraints>
@@ -45,13 +52,16 @@
                     </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.84705882352941175" green="0.84705882352941175" blue="0.84705882352941175" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="DpL-ou-yAE" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="1GF-OE-EUb"/>
                 <constraint firstItem="E1b-pn-Uch" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="ANW-S7-7DO"/>
                 <constraint firstItem="E1b-pn-Uch" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="-2" id="B52-7A-J7r"/>
+                <constraint firstItem="jqV-1Z-1TR" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="JSe-Ie-J23"/>
                 <constraint firstItem="END-za-lfi" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Oux-Cy-1OA"/>
                 <constraint firstItem="DpL-ou-yAE" firstAttribute="leading" secondItem="E1b-pn-Uch" secondAttribute="trailing" constant="2" id="YdN-Bn-FtO"/>
+                <constraint firstItem="jqV-1Z-1TR" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="eT0-cb-iey"/>
+                <constraint firstAttribute="trailing" secondItem="jqV-1Z-1TR" secondAttribute="trailing" id="p31-LP-UQu"/>
                 <constraint firstAttribute="trailing" secondItem="END-za-lfi" secondAttribute="trailing" constant="15" id="tej-Dc-ozw"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
