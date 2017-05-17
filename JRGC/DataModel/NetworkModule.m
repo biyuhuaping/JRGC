@@ -1249,7 +1249,7 @@ static NetworkModule *gInstance = NULL;
 
         case KSXTagWalletShowMsg:
             parameter = [NEW_SERVER_IP stringByAppendingString:WALLETSHOW];
-
+            break;
         case KSXTagMyInviteRebateinfo:
             parameter = [NEW_SERVER_IP stringByAppendingString:MYINVITEREBATEINFOURL];
             break;

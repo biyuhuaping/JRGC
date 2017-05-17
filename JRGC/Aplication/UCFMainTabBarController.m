@@ -117,8 +117,6 @@
                 loanWeb.url = EASYLOAN_URL;
                 controller = loanWeb;
                 loanWeb.navTitle = @"借款";
-                
-
             }
                 break;
             case 3:{

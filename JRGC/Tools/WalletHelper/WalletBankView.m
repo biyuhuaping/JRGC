@@ -7,7 +7,7 @@
 //
 
 #import "WalletBankView.h"
-
+#import "UIImageView+WebCache.h"
 @implementation WalletBankView
 
 - (void)awakeFromNib
@@ -17,5 +17,13 @@
 }
 - (IBAction)tap:(id)sender {
     self.block(self);
+}
+- (void)setDataDict:(NSDictionary *)dataDict
+{
+    [self.bankIcon sd_setImageWithURL:[NSURL URLWithString:dataDict[@"bankAppLogo"]]];
+    self.bankName.text = @"未知";
+    self.bankType.text = @"借记卡";
+    self.userName.text = dataDict[@"realName"];
+    self.bankNum.text = dataDict[@"bankCard"];
 }
 @end

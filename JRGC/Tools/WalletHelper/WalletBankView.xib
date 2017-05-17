@@ -141,7 +141,7 @@
                 </userDefinedRuntimeAttribute>
             </userDefinedRuntimeAttributes>
             <connections>
-                <outlet property="bankIcon" destination="XcD-4R-knj" id="yXv-Bj-RsS"/>
+                <outlet property="bankIcon" destination="di1-Pi-D3Y" id="TF9-DT-cGO"/>
                 <outlet property="bankName" destination="TDz-dW-ctW" id="a5S-vb-ERb"/>
                 <outlet property="bankNum" destination="Jay-Ha-dTm" id="FVN-uO-Rs7"/>
                 <outlet property="bankType" destination="cPP-Xt-Vck" id="Dvg-OP-9py"/>
@@ -151,7 +151,7 @@
                 <outlet property="userName" destination="zWs-4h-pbp" id="VOE-wA-c7y"/>
                 <outletCollection property="gestureRecognizers" destination="RgB-4V-cAW" appends="YES" id="iGn-0m-sXg"/>
             </connections>
-            <point key="canvasLocation" x="43" y="-128"/>
+            <point key="canvasLocation" x="-306" y="-155"/>
         </view>
         <tapGestureRecognizer id="RgB-4V-cAW">
             <connections>

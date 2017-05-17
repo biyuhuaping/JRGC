@@ -19,4 +19,5 @@ typedef void(^WalletBlock)(WalletBankView *blockContent);
 @property (weak, nonatomic) IBOutlet UIImageView *quickLogo;
 @property (weak, nonatomic) IBOutlet UIImageView *selectTipImageView;
 @property (copy, nonatomic) WalletBlock block;
+@property (nonatomic, strong)NSDictionary *dataDict;
 @end

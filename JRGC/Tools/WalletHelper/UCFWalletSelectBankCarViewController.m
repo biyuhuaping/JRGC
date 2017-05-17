@@ -8,10 +8,15 @@
 
 #import "UCFWalletSelectBankCarViewController.h"
 #import "WalletBankView.h"
+#import "P2PWalletHelper.h"
 @interface UCFWalletSelectBankCarViewController ()
+{
+    NSInteger selectIndex;
+}
 @property (weak, nonatomic) IBOutlet UIScrollView *baseScrollView;
 @property (weak, nonatomic) IBOutlet UILabel *headLab;
 @property (weak, nonatomic) IBOutlet UILabel *tipLabel;
+@property (weak, nonatomic) IBOutlet UIView *bottomBaseView;
 
 @end
 
@@ -28,38 +33,45 @@
     [super viewDidAppear:animated];
     [self addBankView];
 }
+- (IBAction)bottomButtonclicked:(UIButton *)sender {
+    [[P2PWalletHelper sharedManager] refreshWalletData:[self.dataDict[@"bankList"] objectAtIndex:selectIndex]];
+    [self getToBack];
+}
 - (void)addBankView
 {
     __weak typeof(self) weakSelf = self;
     CGFloat Y = CGRectGetMaxY(_tipLabel.frame);
     WalletBankView *walletBankView = (WalletBankView *)[[[NSBundle mainBundle] loadNibNamed:@"WalletBankView"owner:self options:nil] firstObject];
+    walletBankView.dataDict = [self.dataDict[@"bankList"] objectAtIndex:0];
     walletBankView.frame = CGRectMake(20, Y + 20, ScreenWidth - 40,  ((ScreenWidth - 40) * 71.0f)/145.0f);
     [_baseScrollView addSubview:walletBankView];
     walletBankView.tag = 10000;
     [walletBankView setBlock:^(WalletBankView *walletBankView){
         [weakSelf walletSelectView:walletBankView];
     }];
-    
-    
     Y = CGRectGetMaxY(walletBankView.frame);
     WalletBankView *walletBankView1 = (WalletBankView *)[[[NSBundle mainBundle] loadNibNamed:@"WalletBankView"owner:self options:nil] firstObject];
+    walletBankView1.dataDict = [self.dataDict[@"bankList"] objectAtIndex:1];
     walletBankView1.frame = CGRectMake(20, Y + 20, ScreenWidth - 40,  ((ScreenWidth - 40) * 71.0f)/145.0f);
     walletBankView1.tag = 10001;
     [_baseScrollView addSubview:walletBankView1];
     [walletBankView1 setBlock:^(WalletBankView *walletBankView1){
         [weakSelf walletSelectView:walletBankView1];
     }];
+    [self walletSelectView:walletBankView];
 }
 - (void)walletSelectView:(WalletBankView *)walletBankView
 {
     WalletBankView *walletBankView0 = [_baseScrollView viewWithTag:10000];
     WalletBankView *walletBankView1 = [_baseScrollView viewWithTag:10001];
     if (walletBankView.tag == 10000) {
+        selectIndex = 0;
         walletBankView1.selectTipImageView.hidden = YES;
         walletBankView1.layer.borderColor = UIColorWithRGB(0xdbdbdb).CGColor;
         walletBankView0.selectTipImageView.hidden = NO;
         walletBankView0.layer.borderColor = UIColorWithRGB(0xfd4d4c).CGColor;
     } else {
+        selectIndex = 1;
         walletBankView1.selectTipImageView.hidden = NO;
         walletBankView1.layer.borderColor = UIColorWithRGB(0xfd4d4c).CGColor;
         walletBankView0.selectTipImageView.hidden = YES;

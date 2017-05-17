@@ -13,4 +13,5 @@
 - (UIViewController *)getUCFWalletTargetController;
 - (BOOL)checkUserHSStateCanOpenWallet;
 - (void)getUserWalletData;
+- (void)refreshWalletData:(NSDictionary *)dict;
 @end

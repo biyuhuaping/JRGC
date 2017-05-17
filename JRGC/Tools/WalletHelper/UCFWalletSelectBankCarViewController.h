@@ -9,5 +9,5 @@
 #import "UCFBaseViewController.h"
 
 @interface UCFWalletSelectBankCarViewController : UCFBaseViewController
-
+@property(nonatomic, strong)NSDictionary *dataDict;
 @end
