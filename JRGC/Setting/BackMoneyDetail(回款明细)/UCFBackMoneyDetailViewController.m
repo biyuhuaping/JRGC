@@ -388,8 +388,8 @@
             [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
         }
         //更改回款状态状态符
-        _superViewController.checkedFeedBack = YES;
-        [[NSNotificationCenter defaultCenter]postNotificationName:REDALERTISHIDE object:@"4"];
+//        _superViewController.checkedFeedBack = YES;
+//        [[NSNotificationCenter defaultCenter]postNotificationName:REDALERTISHIDE object:@"4"];
     }
     [self setNoDataView];
 }

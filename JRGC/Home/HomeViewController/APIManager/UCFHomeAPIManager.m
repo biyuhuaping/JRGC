@@ -14,7 +14,7 @@
 #import "UCFUserInfoModel.h"
 #import "UCFSignModel.h"
 #import "UCFSession.h"
-
+#import "MongoliaLayerCenter.h"
 #define HOMELIST @"homeList"
 #define USERINFOONE @"userInfoOne"
 #define USERINFOTWO @"userInfoTwo"
@@ -126,7 +126,7 @@
                 UCFHomeListGroup * tempG = [UCFHomeListGroup homeListGroupWithDict:dict];
                 [tempArray addObject:tempG];
             }
-            
+            [[MongoliaLayerCenter sharedManager].mongoliaLayerDic setValue:result[@"authorization"] forKey:@"authorization"];
             UCFHomeListCellModel *homelistModel = [UCFHomeListCellModel homeListCellWithDict:result];
             
             [tempResult setObject:tempArray forKey:@"homelistContent"];
