@@ -292,8 +292,8 @@
     
 //    UIMutableApplicationShortcutItem *item0 = [[UIMutableApplicationShortcutItem alloc]initWithType:@"0" localizedTitle:@"我的刮刮卡" localizedSubtitle:nil icon:icon0 userInfo:nil];
 //    UIMutableApplicationShortcutItem *item1 = [[UIMutableApplicationShortcutItem alloc]initWithType:@"1" localizedTitle:@"我的邀请返利" localizedSubtitle:nil icon:icon1 userInfo:nil];
-    UIMutableApplicationShortcutItem *item2 = [[UIMutableApplicationShortcutItem alloc]initWithType:@"2" localizedTitle:@"我的工场码" localizedSubtitle:nil icon:icon0 userInfo:nil];
-    UIMutableApplicationShortcutItem *item3 = [[UIMutableApplicationShortcutItem alloc]initWithType:@"3" localizedTitle:@"签到抽红包" localizedSubtitle:nil icon:icon1 userInfo:nil];
+    UIMutableApplicationShortcutItem *item2 = [[UIMutableApplicationShortcutItem alloc]initWithType:@"0" localizedTitle:@"我的工场码" localizedSubtitle:nil icon:icon0 userInfo:nil];
+    UIMutableApplicationShortcutItem *item3 = [[UIMutableApplicationShortcutItem alloc]initWithType:@"1" localizedTitle:@"签到抽红包" localizedSubtitle:nil icon:icon1 userInfo:nil];
     [UIApplication sharedApplication].shortcutItems = @[item2,item3];
 }
 
@@ -662,7 +662,7 @@
 - (void)novicecheck:(NSDictionary *)dic
 {
     int  novicePoliceOnOff = [[dic objectSafeForKey:@"novicePoliceOnOff"] intValue];
-    [[MongoliaLayerCenter sharedManager].mongoliaLayerDic setValue:[NSNumber numberWithInt:novicePoliceOnOff] forKey:@"novicePoliceOnOff"];
+//    [[MongoliaLayerCenter sharedManager].mongoliaLayerDic setValue:[NSNumber numberWithInt:novicePoliceOnOff] forKey:@"novicePoliceOnOff"];
 }
 - (void)zxSwitchCheck:(NSDictionary *)dic
 {

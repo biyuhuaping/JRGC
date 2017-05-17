@@ -49,13 +49,14 @@
         id propertyValue = [dataSource valueForKey:key];
         if ([key isEqualToString:@"Id"]) {
             propertyValue = [dataSource valueForKey:@"id"];
+            [self setValue:propertyValue forKey:key];
         }
         else if ([key isEqualToString:@"p2pAuthorization"]) {
             [self setP2pAuthorization:[propertyValue boolValue]];
         }else if ([key isEqualToString:@"zxAuthorization"]){
             [self setZxAuthorization:[propertyValue boolValue]];
         }
-        if ([key isEqualToString:@"prdLabelsList"]) {
+        else if ([key isEqualToString:@"prdLabelsList"]) {
             NSArray *proLabelArr = [dataSource valueForKey:key];
             if (proLabelArr.count > 0) {
                 NSMutableArray *temp = [NSMutableArray new];
@@ -66,11 +67,13 @@
                 self.prdLabelsList = temp;
             }
         }
-        if (![propertyValue isKindOfClass:[NSNull class]] && propertyValue != nil) {
-            [self setValue:propertyValue forKey:key];
-        } else {
-            if (![key isEqualToString:@"moedelType"]) {
-                [self setValue:@"" forKey:key];
+        else {
+            if (![propertyValue isKindOfClass:[NSNull class]] && propertyValue != nil) {
+                [self setValue:propertyValue forKey:key];
+            } else {
+                if (![key isEqualToString:@"moedelType"]) {
+                    [self setValue:@"" forKey:key];
+                }
             }
         }
     }
