@@ -21,7 +21,7 @@
 - (void)setDataDict:(NSDictionary *)dataDict
 {
     [self.bankIcon sd_setImageWithURL:[NSURL URLWithString:dataDict[@"bankAppLogo"]]];
-    self.bankName.text = @"未知";
+    self.bankName.text = dataDict[@"bankName"];
     self.bankType.text = @"借记卡";
     self.userName.text = dataDict[@"realName"];
     self.bankNum.text = dataDict[@"bankCard"];

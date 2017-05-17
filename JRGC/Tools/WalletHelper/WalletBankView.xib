@@ -80,10 +80,18 @@
                                 <constraint firstAttribute="height" constant="40" id="tPk-Ar-Ij5"/>
                             </constraints>
                         </imageView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X2p-Be-xB7">
+                            <rect key="frame" x="20" y="93" width="530" height="2"/>
+                            <color key="backgroundColor" red="0.85882352939999995" green="0.85882352939999995" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1.5" id="qRA-Fc-W00"/>
+                            </constraints>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="di1-Pi-D3Y" firstAttribute="leading" secondItem="LOG-9r-wm8" secondAttribute="leading" constant="19" id="3L1-vQ-EWP"/>
+                        <constraint firstItem="X2p-Be-xB7" firstAttribute="leading" secondItem="LOG-9r-wm8" secondAttribute="leading" constant="20" id="CTX-JO-DFs"/>
                         <constraint firstItem="di1-Pi-D3Y" firstAttribute="top" secondItem="LOG-9r-wm8" secondAttribute="top" multiplier="2" constant="8" id="EBz-JV-KrL"/>
                         <constraint firstItem="zWs-4h-pbp" firstAttribute="height" secondItem="LOG-9r-wm8" secondAttribute="height" multiplier="1:9" id="EUj-QV-2aX"/>
                         <constraint firstAttribute="bottom" secondItem="2WM-nH-b4o" secondAttribute="bottom" id="FPO-mT-73n"/>
@@ -95,6 +103,7 @@
                         <constraint firstAttribute="bottom" secondItem="Jay-Ha-dTm" secondAttribute="bottom" constant="17" id="TAY-L5-0uq"/>
                         <constraint firstItem="TDz-dW-ctW" firstAttribute="centerY" secondItem="di1-Pi-D3Y" secondAttribute="centerY" constant="0.5" id="WKG-m9-26u"/>
                         <constraint firstItem="Jay-Ha-dTm" firstAttribute="leading" secondItem="LOG-9r-wm8" secondAttribute="leading" constant="19" id="Xbq-mo-lbR"/>
+                        <constraint firstItem="X2p-Be-xB7" firstAttribute="top" secondItem="di1-Pi-D3Y" secondAttribute="bottom" constant="10" id="aaI-0b-ksx"/>
                         <constraint firstAttribute="trailing" secondItem="2WM-nH-b4o" secondAttribute="trailing" id="cpB-e8-WEj"/>
                         <constraint firstAttribute="trailing" secondItem="zJc-ae-bp8" secondAttribute="trailing" constant="20" id="fJP-G3-1xz"/>
                         <constraint firstItem="XcD-4R-knj" firstAttribute="leading" secondItem="LOG-9r-wm8" secondAttribute="leading" id="fg7-Ot-4LO"/>
@@ -102,6 +111,7 @@
                         <constraint firstAttribute="trailing" secondItem="cPP-Xt-Vck" secondAttribute="trailing" constant="20" id="g1E-9S-UYQ"/>
                         <constraint firstAttribute="bottom" secondItem="zJc-ae-bp8" secondAttribute="bottom" constant="17" id="jGX-Xm-B0U"/>
                         <constraint firstAttribute="bottom" secondItem="XcD-4R-knj" secondAttribute="bottom" id="ler-7X-xNf"/>
+                        <constraint firstAttribute="trailing" secondItem="X2p-Be-xB7" secondAttribute="trailing" constant="20" id="ocS-Ox-qjo"/>
                         <constraint firstItem="TDz-dW-ctW" firstAttribute="centerY" secondItem="cPP-Xt-Vck" secondAttribute="centerY" constant="0.5" id="oq8-19-h9o"/>
                         <constraint firstItem="XcD-4R-knj" firstAttribute="top" secondItem="LOG-9r-wm8" secondAttribute="top" id="rqR-uU-Erh"/>
                         <constraint firstItem="Jay-Ha-dTm" firstAttribute="height" secondItem="LOG-9r-wm8" secondAttribute="height" multiplier="30:279" id="uBU-DU-4nH"/>
@@ -151,7 +161,7 @@
                 <outlet property="userName" destination="zWs-4h-pbp" id="VOE-wA-c7y"/>
                 <outletCollection property="gestureRecognizers" destination="RgB-4V-cAW" appends="YES" id="iGn-0m-sXg"/>
             </connections>
-            <point key="canvasLocation" x="-306" y="-155"/>
+            <point key="canvasLocation" x="-306" y="-155.5"/>
         </view>
         <tapGestureRecognizer id="RgB-4V-cAW">
             <connections>
