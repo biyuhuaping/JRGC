@@ -14,4 +14,5 @@
 - (BOOL)checkUserHSStateCanOpenWallet;
 - (void)getUserWalletData;
 - (void)refreshWalletData:(NSDictionary *)dict;
+- (void)changeTabMoveToWalletTabBar;
 @end

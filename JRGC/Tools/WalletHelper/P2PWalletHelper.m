@@ -30,19 +30,13 @@
 }
 - (UIViewController *)getUCFWalletTargetController
 {
+    NSDictionary *dict = [[NSUserDefaults standardUserDefaults] valueForKey:WALLET_DATADICT];
+    self.paramDict = dict;
     if (!self.paramDict) {
         self.walletController = [UcfWalletSDK wallet:nil retHandler:self retSelector:nil navTitle:@"生活"];
         return _walletController;
     }
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:8];
-    [params setValue:@"MT10000000" forKey:@"merchantId"];
-    [params setValue:@"402462" forKey:@"userId"];
-//    [params setValue:@"张三" forKey:@"realName"];
-//    [params setValue:@"112233444444402418" forKey:@"cardNo"];
-//    [params setValue:@"18401255051" forKey:@"mobileNo"];
-//    [params setValue:@"01" forKey:@"cardType"]; // 证件类型 01身份证，写死即可
-    [params setValue:@"f156dc284e32b654860891a1e480d8f0" forKey:@"sign"];
-    self.walletController =  [UcfWalletSDK wallet:params retHandler:self retSelector:nil navTitle:@"生活"];
+    self.walletController =  [UcfWalletSDK wallet:[self resetWalletDataDict:self.paramDict[@"bankList"][0]] retHandler:self retSelector:nil navTitle:@"生活"];
     return _walletController;
 }
 
@@ -62,8 +56,8 @@
             //开通尊享徽商账户
             if (index == 1) {
                 UpgradeAccountVC *accountVC = [[UpgradeAccountVC alloc] initWithNibName:@"UpgradeAccountVC" bundle:nil];
-                accountVC.accoutType = SelectAccoutTypeHoner;
                 accountVC.fromVC = 1;
+                accountVC.accoutType = SelectAccoutTypeHoner;
                 UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:accountVC];
                 [weakSelf presentViewController:loginNaviController animated:YES completion:nil];
             }
@@ -89,7 +83,7 @@
     }
     return YES;
 }
-- (void)refreshWalletData:(NSDictionary *)dict
+- (NSDictionary *)resetWalletDataDict:(NSDictionary *)dict
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:8];
     [params setValue:@"MT10000000" forKey:@"merchantId"];
@@ -99,7 +93,11 @@
     [params setValue:[NSString stringWithFormat:@"%@",dict[@"phone"]] forKey:@"mobileNo"];
     [params setValue:@"01" forKey:@"cardType"]; // 证件类型 01身份证，写死即可
     [params setValue:[self getSign] forKey:@"sign"];
-    [UcfWalletSDK refreshWalletVC:params navTitle:@"生活" walletVC:_walletController];
+    return params;
+}
+- (void)refreshWalletData:(NSDictionary *)dict
+{
+    [UcfWalletSDK refreshWalletVC:[self resetWalletDataDict:dict] navTitle:@"生活" walletVC:_walletController];
 }
 #pragma mark NetworkModuleDelegate
 - (void)getUserWalletData
@@ -119,20 +117,13 @@
     if (tag.intValue == KSXTagWalletShowMsg) {
         if ([dic[@"ret"] boolValue]) {
             NSDictionary *dataDict = dic[@"data"];
-            if ([dataDict[@"isOpen"] boolValue]) {
-                NSArray *bankArr = dataDict[@"bankList"];
-                if (bankArr.count > 0) {
-                    self.paramDict = dataDict;
-                    if (_walletController) {
-                        [UcfWalletSDK refreshWalletVC:nil navTitle:@"生活" walletVC:_walletController];
-                    } else {
-                    }
-                }
-            } else {
-                self.paramDict = nil;
+            self.paramDict = dataDict;
+            //1银行卡默认被选中，存储到本地
+            if ([self.paramDict[@"bankList"] count] == 1) {
+                [[NSUserDefaults standardUserDefaults] setValue:dataDict forKey:WALLET_DATADICT];
             }
         } else {
-            self.paramDict = nil;
+
         }
     }
 }
@@ -140,5 +131,10 @@
 {
     self.paramDict = nil;
 }
-
+- (void)changeTabMoveToWalletTabBar
+{
+    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    [app.tabBarController setSelectedIndex:3];
+//    [self getUserWalletData];
+}
 @end

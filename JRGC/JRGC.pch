@@ -107,6 +107,7 @@ return shared##className; \
 #define BACK_TO_LOGIN          @"logoutMyLogin"
 #define BACK_TO_HS              @"backToHS"
 #define USER_LEVEL              @"userLevel"
+#define WALLET_DATADICT         @"walletDataDict"
 //#define IDCARD_STATE    @"card_state"   //身份证认证状态
 
 //#define BANKCARD_STATE  @"bankcard_state"    //是否绑定银行卡

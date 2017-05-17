@@ -33,7 +33,7 @@
 #import "UITabBar+TabBarBadge.h"
 #import "UIImage+GIF.h"
 #import "Growing.h"
-#import "UCFLatestProjectViewController.h"
+#import "UCFHomeViewController.h"
 #import "UcfWalletSDK.h"
 #import "MD5Util.h"
 #import "JPUSHService.h"//极光推送
@@ -526,7 +526,7 @@
         NSInteger selectIndex = self.tabBarController.selectedIndex;
         if (selectIndex == 0 && !self.lockVc) {
             UINavigationController *nav = [self.tabBarController.viewControllers objectAtIndex:0];
-            if ([nav.visibleViewController isKindOfClass:[UCFLatestProjectViewController class]]) {
+            if ([nav.visibleViewController isKindOfClass:[UCFHomeViewController class]]) {
                     [[MongoliaLayerCenter sharedManager] showLogic];
                 }
         }
