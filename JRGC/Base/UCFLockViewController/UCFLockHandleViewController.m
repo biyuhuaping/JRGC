@@ -435,9 +435,9 @@
 -(void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    if (!_isFromRegister) {
-        [[MongoliaLayerCenter sharedManager] showLogic];
-    }
+//    if (!_isFromRegister) {
+//        [[MongoliaLayerCenter sharedManager] showLogic];
+//    }
 }
 // 绘制有touchID 的界面
 - (void)initTouchIDLockView
