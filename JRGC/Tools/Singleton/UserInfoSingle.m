@@ -177,17 +177,9 @@
 {
     self = [super init];
     if (self) {
-        [self addObserver:self forKeyPath:@"userId" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
+        
     }
     return self;
-}
-
-/**
- *  监听属性值发生改变时回调
- */
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context
-{
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshUIWithLoginAndOut" object:change];
 }
 
 @end

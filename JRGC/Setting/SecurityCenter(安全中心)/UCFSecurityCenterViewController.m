@@ -203,6 +203,7 @@
             [[UserInfoSingle sharedManager] removeUserInfo];
             [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"changScale"];
             [[NSUserDefaults standardUserDefaults] synchronize];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
             //安全退出后去首页
             AppDelegate *delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
             [delegate.tabBarController setSelectedIndex:0];
@@ -248,8 +249,12 @@
 {
 //    NSString *strParameters = [NSString stringWithFormat:@"userId=%@", [[NSUserDefaults standardUserDefaults] objectForKey:UUID]];
     
+    NSString *userId = [[NSUserDefaults standardUserDefaults] objectForKey:UUID];
+    if (nil == userId) {
+        return;
+    }
     
-    [[NetworkModule sharedNetworkModule] newPostReq:[NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:UUID],@"userId", nil] tag:kSXTagAccountSafe owner:self signature:YES Type:SelectAccoutDefault];
+    [[NetworkModule sharedNetworkModule] newPostReq:[NSDictionary dictionaryWithObjectsAndKeys:userId,@"userId", nil] tag:kSXTagAccountSafe owner:self signature:YES Type:SelectAccoutDefault];
 
 //    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagAccountSafe owner:self Type:SelectAccoutDefault];
 }
