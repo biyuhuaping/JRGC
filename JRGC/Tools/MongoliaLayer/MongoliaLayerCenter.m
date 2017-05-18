@@ -32,7 +32,10 @@
     }
     return _mongoliaLayerDic;
 }
-
+- (void)checkCurrentController
+{
+    
+}
 - (void)showLogic
 {
     //不登录就需要查看的
