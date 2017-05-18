@@ -23,7 +23,7 @@
 #import "CWLivessViewController.h"//---qyy0815
 #import "MD5Util.h"
 #import "UCFSession.h"
-
+#import "P2PWalletHelper.h"
 @interface UCFLoginViewController ()<UCFLoginFaceViewDelegate,cwIntegrationLivessDelegate>////---qyy0815
 {
     UCFLoginView *_loginView;
@@ -186,12 +186,10 @@
     if (tag.intValue == kSXTagLogin) {
         if ([[dic valueForKey:@"ret"] boolValue]) {
             DLog(@"log%@",dic);
-//            NSString *uuid = [NSString stringWithFormat:@"%@",dic[@"data"][@"userInfo"][@"userId"]];
-//            NSString *time = dic[TIME];
+
             [Common deleteCookies];
             //登录成功保存用户的资料
             [[UserInfoSingle sharedManager] setUserData:dic[@"data"][@"userInfo"]];
-//            [[UserInfoSingle sharedManager] setUserLevel:dic[@"data"][@"userLevel"]];
             [Common setHTMLCookies:dic[@"data"][@"userInfo"][@"jg_ckie"]];//html免登录的cookies
 
             NSString *lastName = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastLoginName"];
@@ -231,6 +229,8 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:REGIST_JPUSH object:nil];
             [self sendiWatchData:signatureStr withGcm:gcmCode];//登录成功之后向iWatch发送数据
             [Common addTestCookies];//app审核用的灰度
+            [[P2PWalletHelper sharedManager] getUserWalletData];
+
         } else {
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:dic[@"message"] delegate:nil cancelButtonTitle:@"重新输入" otherButtonTitles:nil];
             [alertView show];

@@ -15,7 +15,7 @@
 //#import "UCFPersonCenterController.h"
 #import "UCFMoreViewController.h"
 #import "AppDelegate.h"
-
+#import "P2PWalletHelper.h"
 #import "BaseNavigationViewController.h"
 #import "UITabBar+TabBarBadge.h"
 #import "Touch3DSingle.h"
@@ -25,6 +25,9 @@
 #import "UCFLoanViewController.h"
 #import "UCFDiscoveryViewController.h"
 #import "UCFWebViewJavascriptBridgeLevel.h"
+#import "P2PWalletHelper.h"
+#import "BlockUIAlertView.h"
+
 @interface UCFMainTabBarController ()
 
 //@property (strong, nonatomic) UCFLatestProjectViewController *LatestView;
@@ -35,17 +38,7 @@
 @end
 
 @implementation UCFMainTabBarController
-//- (void)viewWillAppear:(BOOL)animated
-//{
-//    self.navigationController.navigationBarHidden = YES;
-//    if ([[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
-//        BaseNavigationViewController *hander = [self.viewControllers objectAtIndex:4];
-//        if (hander.topViewController) {
-//            UCFPersonCenterController *person = (UCFPersonCenterController *)hander.topViewController;
-//            [person hideShadowView];
-//        }
-//    }
-//}
+
 - (void)viewDidLoad
 {   
     [super viewDidLoad];
@@ -65,8 +58,16 @@
     self.tabBar.clipsToBounds = NO;
     [self.tabBar addSubview:imaview];
     [[UITabBar appearance] setShadowImage:tabImag];
+    
+    
+    
+    
 }
-
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [[P2PWalletHelper sharedManager] getUserWalletData];
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -116,18 +117,11 @@
                 loanWeb.url = EASYLOAN_URL;
                 controller = loanWeb;
                 loanWeb.navTitle = @"借款";
-                
-
             }
                 break;
             case 3:{
-               
-                UCFWebViewJavascriptBridgeMall *mallWeb = [[UCFWebViewJavascriptBridgeMall alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
-                mallWeb.url = MALLURL;
-                mallWeb.isHideNavigationBar = YES;
-                [self useragent:mallWeb.webView];
-                controller = mallWeb;
-                mallWeb.navTitle = @"豆哥商城";
+
+                controller = [[P2PWalletHelper sharedManager] getUCFWalletTargetController];
     
             }
                 break;
@@ -195,18 +189,6 @@
     if (contrl.viewControllers.count != 0) {
       topView = [contrl.viewControllers objectAtIndex:0];
     }
-    if ([topView isKindOfClass:[UCFWebViewJavascriptBridgeMall class]]) {
-        [self hideTabBar];
-//        UCFWebViewJavascriptBridgeMall *mallWeb = [[UCFWebViewJavascriptBridgeMall alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
-//        mallWeb.url = MALLURL;
-//        mallWeb.rootVc = tabBarController.viewControllers[tabBarController.selectedIndex];
-//        mallWeb.isHideNavigationBar = YES;
-//        [self useragent:mallWeb.webView];
-//        mallWeb.navTitle = @"豆哥商城";
-//        mallWeb.isTabbarfrom = YES;
-
-        return NO;
-     }
     if ([topView isKindOfClass:[UCFLoanViewController class]]) {
         UCFLoanViewController *loan = (UCFLoanViewController *)topView;
         bool isLoad = [loan isViewLoaded];
@@ -219,10 +201,23 @@
             UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
             BaseNavigationViewController *loginNaviController = [[BaseNavigationViewController alloc] initWithRootViewController:loginViewController];
             loginViewController.sourceVC = @"homePage";
-//            [[NSUserDefaults standardUserDefaults] setValue:@"1" forKey:@"personCenterClick"];
             [self presentViewController:loginNaviController animated:YES completion:nil];
             [Touch3DSingle sharedTouch3DSingle].isLoad = NO;
             return NO;
+        }
+        return YES;
+    }
+    if ([self.viewControllers indexOfObject:viewController] == 3) {
+        NSString *userId = [UserInfoSingle sharedManager].userId;
+        if(nil == userId) {
+            UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
+            BaseNavigationViewController *loginNaviController = [[BaseNavigationViewController alloc] initWithRootViewController:loginViewController];
+            loginViewController.sourceVC = @"homePage";
+            [self presentViewController:loginNaviController animated:YES completion:nil];
+            [Touch3DSingle sharedTouch3DSingle].isLoad = NO;
+            return NO;
+        } else {
+           return [[P2PWalletHelper sharedManager] checkUserHSStateCanOpenWallet];
         }
         return YES;
     }

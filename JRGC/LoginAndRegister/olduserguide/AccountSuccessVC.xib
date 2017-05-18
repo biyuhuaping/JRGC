@@ -42,7 +42,6 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="37" id="k57-Zu-ij2"/>
                     </constraints>
-                    <state key="normal" title="设置交易密码"/>
                     <connections>
                         <action selector="submitDataButton:" destination="-1" eventType="touchUpInside" id="ZpR-cp-0KF"/>
                     </connections>

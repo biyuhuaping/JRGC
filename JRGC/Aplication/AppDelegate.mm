@@ -33,10 +33,9 @@
 #import "UITabBar+TabBarBadge.h"
 #import "UIImage+GIF.h"
 #import "Growing.h"
-#import "UCFLatestProjectViewController.h"
-
+#import "UCFHomeViewController.h"
+#import "UcfWalletSDK.h"
 #import "MD5Util.h"
-//#import "BaseNavigationViewController.h"
 #import "JPUSHService.h"//极光推送
 #import "MongoliaLayerCenter.h"
 // iOS10注册APNs所需头文件
@@ -104,7 +103,6 @@
     [[UINavigationBar appearance] setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
     [[UINavigationBar appearance] setShadowImage:[[UIImage alloc] init]];
     [self setUMData];
-    
     //初始化手势密码失败次数
     [[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithInt:5] forKey:@"nRetryTimesRemain"];
     [[NSUserDefaults standardUserDefaults] setValue:@"0" forKey:@"personCenterClick"];
@@ -112,8 +110,8 @@
     [MobClick startWithAppkey:@"544b0681fd98c525ad0372f2" reportPolicy:BATCH channelId:nil];
     NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     [MobClick setAppVersion:version];
-
     
+//    [UcfWalletSDK setEnvironment:0];
     //初始化广告view
     _advertisementView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
     
@@ -490,16 +488,8 @@
     [self checkIsLockView];
     [self checkFirstViewController];
 }
-- (void)checkCurrentTabBar
-{
-    if (self.tabBarController.selectedIndex == 3) {
-        UINavigationController *nav = [self.tabBarController.viewControllers objectAtIndex:3];
-        UIViewController *view1 = nav.visibleViewController;
-        view1.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
-    }
-}
+
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    [self checkCurrentTabBar];
      //进入前台之后，获取当前屏幕亮度，并保存更新屏幕亮
     NSInteger selectIndex = self.tabBarController.selectedIndex;
     if (selectIndex == 2) {
@@ -536,7 +526,7 @@
         NSInteger selectIndex = self.tabBarController.selectedIndex;
         if (selectIndex == 0 && !self.lockVc) {
             UINavigationController *nav = [self.tabBarController.viewControllers objectAtIndex:0];
-            if ([nav.visibleViewController isKindOfClass:[UCFLatestProjectViewController class]]) {
+            if ([nav.visibleViewController isKindOfClass:[UCFHomeViewController class]]) {
                     [[MongoliaLayerCenter sharedManager] showLogic];
                 }
         }
@@ -787,18 +777,26 @@
     }];
 }
 #pragma mark - 分享
-- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
-{
-    return   [[UMSocialManager defaultManager] handleOpenURL:url];
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url options:(nonnull NSDictionary<NSString *, id> *) options {
+    return [UcfWalletSDK handleApplication:application openUrl:url options:options];
 }
 
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
 {
-    if ([Growing handleUrl:url]) {
-        return [Growing handleUrl:url];
-    }else
-        return [[UMSocialManager defaultManager] handleOpenURL:url];
+    if ([[UMSocialManager defaultManager] handleOpenURL:url]) {
+        return YES;
+    }
+    return NO;
+//     || [UcfWalletSDK handleApplication:application openUrl:url]
 }
+
+//- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+//{
+//    if ([Growing handleUrl:url]) {
+//        return [Growing handleUrl:url];
+//    }else
+//        return [[UMSocialManager defaultManager] handleOpenURL:url];
+//}
 
 #pragma mark- --------------------极光推送---------------------------
 

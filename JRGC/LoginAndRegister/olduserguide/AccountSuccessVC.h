@@ -13,5 +13,6 @@
 
 @property (assign, nonatomic) UCFOldUserGuideViewController *db;
 @property (copy, nonatomic) NSString *site;
+@property (assign, nonatomic)NSInteger fromVC;
 
 @end
