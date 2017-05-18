@@ -39,11 +39,15 @@
 {
     
 }
+- (BOOL)isCurrentViewControllerVisible:(UIViewController *)viewController
+{
+    return (viewController.isViewLoaded && viewController.view.window);
+}
 - (void)showLogic
 {
     AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     UINavigationController *nav = app.tabBarController.selectedViewController;
-    if (app.lockVc || ![nav.visibleViewController isKindOfClass:[UCFHomeViewController class]]) {
+    if (app.advertisementView || [self isCurrentViewControllerVisible:app.lockVc] || ![nav.visibleViewController isKindOfClass:[UCFHomeViewController class]]) {
         return;
     }
     //不登录就需要查看的

@@ -45,7 +45,7 @@
 @interface AppDelegate () <UCFSessionDelegate,JPUSHRegisterDelegate>
 
 @property (assign, nonatomic) UIBackgroundTaskIdentifier backgroundUpdateTask;
-@property (strong, nonatomic) UIImageView *advertisementView;
+//@property (strong, nonatomic) UIImageView *advertisementView;
 @property (assign, nonatomic) NSInteger backTime;
 @property (assign, nonatomic) BOOL isComePushNotification;
 @property (assign, nonatomic) BOOL isFirstStart;
@@ -150,9 +150,9 @@
             _isShowAdversement = YES;
         } else {
             _isShowAdversement = NO;
-            if (!self.lockVc) {
-                [[MongoliaLayerCenter sharedManager] showLogic];
-            }
+//            if (!self.lockVc) {
+//                [[MongoliaLayerCenter sharedManager] showLogic];
+//            }
         }
         //显示广告
         if (_isShowAdversement) {
