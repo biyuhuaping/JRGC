@@ -10,6 +10,8 @@
 #import "NSDate+IsBelongToToday.h"
 #import "MaskView.h"
 #import "JSONKit.h"
+#import "AppDelegate.h"
+#import "UCFHomeViewController.h"
 @interface MongoliaLayerCenter ()<MaskViewDelegate>
 {
     NSInteger num;
@@ -39,6 +41,12 @@
 }
 - (void)showLogic
 {
+    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    UINavigationController *nav = app.tabBarController.selectedViewController;
+    if (app.lockVc || ![nav.visibleViewController isKindOfClass:[UCFHomeViewController class]]) {
+        return;
+    }
+    
     //不登录就需要查看的
     NSDate *lastFirstLoginTime = [[NSUserDefaults standardUserDefaults] objectForKey:FirstAlertViewShowTime];
     BOOL isBelongToToday = [NSDate isBelongToTodayWithDate:lastFirstLoginTime]; //是不是同一天
@@ -72,15 +80,6 @@
         [alertView show];
         return;
     }
-    //是否弹平风险评估
-    //        if ([[self.mongoliaLayerDic valueForKey:@"风险评估"] boolValue]) {
-    //            return;
-    //        }
-    
-    //是否弹红包雨
-    //        if ([[self.mongoliaLayerDic valueForKey:@"红包雨"] boolValue]) {
-    //            return;
-    //        }
 }
 - (void)viewWillRemove:(MaskView *)view
 {

@@ -126,9 +126,10 @@
                 UCFHomeListGroup * tempG = [UCFHomeListGroup homeListGroupWithDict:dict];
                 [tempArray addObject:tempG];
             }
-            [[MongoliaLayerCenter sharedManager].mongoliaLayerDic setValue:result[@"authorization"] forKey:@"authorization"];
+            if ([[result allKeys] containsObject:@"authorization"]) {
+                [[MongoliaLayerCenter sharedManager].mongoliaLayerDic setValue:result[@"authorization"] forKey:@"authorization"];
+            }
             UCFHomeListCellModel *homelistModel = [UCFHomeListCellModel homeListCellWithDict:result];
-            
             [tempResult setObject:tempArray forKey:@"homelistContent"];
             [tempResult setObject:homelistModel forKey:@"listInfo"];
             [tempResult setObject:[result objectSafeForKey:@"siteNotice"] forKey:@"siteNotice"];
