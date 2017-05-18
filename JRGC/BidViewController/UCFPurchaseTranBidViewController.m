@@ -33,6 +33,7 @@
 
 }
 @property (weak, nonatomic) IBOutlet UITableView *bidTableView;
+@property (strong, nonatomic) NSString *zxOrP2pStr;//尊享债转 提示语 为购买 P2P 为 投资
 
 @end
 
@@ -56,7 +57,8 @@
     self.navigationController.navigationBar.translucent = NO;
 
     [self addLeftButton];
-    baseTitleLabel.text = @"投标";
+    baseTitleLabel.text = self.accoutType == SelectAccoutTypeHoner ? @"购买":@"投标";
+    self.zxOrP2pStr = self.accoutType == SelectAccoutTypeHoner ?@"购买":@"投资";
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     
@@ -97,8 +99,12 @@
 {
     if (indexPath.row == 0) {
         return 109.0f;
-    } else if (indexPath.row == 1) {
-        return 202.0f - 43 - 54 + 36;
+    } else if (indexPath.row == 1) {//V2.4.20 去掉倒计时 36变为 0
+        NSString *buyCueDesStr =[_dataDict objectSafeForKey:@"buyCueDes"];
+        if (![buyCueDesStr isEqualToString:@""]) {
+            return 202.0f - 43 - 54 + 0 + 15;
+        }
+        return 202.0f - 43 - 54 + 0;
     } else if (indexPath.row == 2) {
         return 30;
     }
@@ -121,12 +127,13 @@
         }
         NSDictionary *info =  self.bidArray[0];
         [cell setTransInvestItemInfo:info];
+        cell.accoutType = self.accoutType;
         return cell;
     } else if(indexPath.row == 1){
         static NSString *cellStr2 = @"cell2";
         MoneyBoardCell *cell = [self.bidTableView dequeueReusableCellWithIdentifier:cellStr2];
         if (cell == nil) {
-            cell = [[MoneyBoardCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellStr2 isCollctionKeyBid:NO];
+            cell = [[MoneyBoardCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellStr2 isCollctionKeyBid:YES];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.delegate = self;
             cell.dataDict = _dataDict;
@@ -141,10 +148,11 @@
             }
             cell.gongDouSwitch.on = isGongDouSwitch;
             */
-            cell.inputMoneyTextFieldLable.text = [self GetDefaultText];
         }
+        cell.accoutType = self.accoutType;
         cell.dataDict = _dataDict;
         cell.isTransid = YES;
+        cell.inputMoneyTextFieldLable.text = self.accoutType == SelectAccoutTypeHoner ? [self getHonerDefaultText] : [self getP2PDefaultText];
         /*
         if (isGongDouSwitch) {
             cell.gongDouAccout.textColor = UIColorWithRGB(0x333333);
@@ -177,7 +185,7 @@
 {
     if (mark == 500) {
         MoneyBoardCell *cell = (MoneyBoardCell *)[_bidTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
-        cell.inputMoneyTextFieldLable.text = [self GetDefaultText];
+        cell.inputMoneyTextFieldLable.text = self.accoutType == SelectAccoutTypeHoner ? [self getHonerDefaultText]:[self getP2PDefaultText];
     } else if (mark == 501) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"RechargeStoryBorard" bundle:nil];
         UCFTopUpViewController *topUpView  = [storyboard instantiateViewControllerWithIdentifier:@"topup"];
@@ -188,7 +196,12 @@
         [self.navigationController pushViewController:topUpView animated:YES];
     }
 }
-- (NSString *)GetDefaultText
+-(NSString*)getHonerDefaultText{
+    NSString *cantranMoney = [[_dataDict objectForKey:@"data"] objectForKey:@"cantranMoney"];
+    NSString *keTouJinEStr = [NSString stringWithFormat:@"%.2lf",[cantranMoney doubleValue]];
+    return keTouJinEStr;
+}
+- (NSString *)getP2PDefaultText
 {
     NSString *cantranMoney = [[_dataDict objectForKey:@"data"] objectForKey:@"cantranMoney"];
     long long int keTouJinE = round(([cantranMoney doubleValue]) * 100) ;
@@ -232,13 +245,13 @@
     NSString *investAmt = cell.inputMoneyTextFieldLable.text;
     if (cell.inputMoneyTextFieldLable.text.length == 0 || [cell.inputMoneyTextFieldLable.text isEqualToString:@"0"] || [cell.inputMoneyTextFieldLable.text isEqualToString:@"0.0"] || [cell.inputMoneyTextFieldLable.text isEqualToString:@"0.00"]) {
         
-        [MBProgressHUD displayHudError:@"请输入投资金额"];
+        [MBProgressHUD displayHudError:[NSString stringWithFormat:@"请输入%@金额",self.zxOrP2pStr]];
         return;
     }
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSString *parmStr = [NSString stringWithFormat:@"annualRate=%@&repayMode=%@&repayPeriod=%@&investAmt=%@",annualRate,repayMode,repayPeriod,investAmt];
     
-    [[NetworkModule sharedNetworkModule] postReq:parmStr tag:kSXTagPrdClaimsComputeIntrest owner:self Type:SelectAccoutDefault];
+    [[NetworkModule sharedNetworkModule] postReq:parmStr tag:kSXTagPrdClaimsComputeIntrest owner:self Type:self.accoutType];
 }
 - (void)cretateInvestmentView
 {
@@ -308,7 +321,7 @@
             MoneyBoardCell *cell = (MoneyBoardCell *)[_bidTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
             int compare = [Common stringA:cell.inputMoneyTextFieldLable.text ComparedStringB:@"1000"];
             if (compare == 1 || compare == 0 ) {
-                UIAlertView *alert1 = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"投资金额%@元,确认投资吗？",cell.inputMoneyTextFieldLable.text] message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+                UIAlertView *alert1 = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@金额%@元,确认%@吗？",self.zxOrP2pStr,cell.inputMoneyTextFieldLable.text,self.zxOrP2pStr] message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
                 alert1.tag = 3000;
                 [alert1 show];
             } else {
@@ -333,14 +346,15 @@
     }
     investMoney = [NSString stringWithFormat:@"%.2f",[investMoney doubleValue]];
     if ([Common stringA:@"0.01" ComparedStringB:investMoney] == 1) {
-        [MBProgressHUD displayHudError:@"请输入投资金额"];
+        [MBProgressHUD displayHudError:[NSString stringWithFormat:@"请输入%@金额",self.zxOrP2pStr]];
         return;
     }
     //剩余比例
     NSString *keTouJinE = [NSString stringWithFormat:@"%.2f",[[aItemInfo objectForKey:@"cantranMoney"] doubleValue]];
     NSString *minInVestNum = [NSString stringWithFormat:@"%@",[aItemInfo objectForKey:@"investAmt"]];
     if([Common stringA:minInVestNum ComparedStringB:investMoney] == 1){
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"投资金额不可低于起投金额" delegate:self cancelButtonTitle:@"重新输入" otherButtonTitles: nil];
+        NSString *messageStr = [NSString stringWithFormat:@"%@金额不可低于起投金额",self.zxOrP2pStr];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"重新输入" otherButtonTitles: nil];
         alert.tag = 1000;
         [alert show];
         return;
@@ -348,7 +362,8 @@
     double inputMoney = [cell.inputMoneyTextFieldLable.text doubleValue];
     if([Common stringA:[NSString stringWithFormat:@"%.2f",inputMoney] ComparedStringB:keTouJinE] == 1)
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"不可以这么任性哟，投资金额已超过剩余可投金额了" delegate:self cancelButtonTitle:@"重新输入" otherButtonTitles: nil];
+        NSString *messageStr = [NSString stringWithFormat:@"不可以这么任性哟，%@金额已超过剩余可投金额了",self.zxOrP2pStr];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"重新输入" otherButtonTitles: nil];
         alert.tag = 1000;
         [alert show];
         return;
@@ -371,7 +386,7 @@
     {
         NSString *keyongMoney = availableBalance;
         needToRechare = [cell.inputMoneyTextFieldLable.text doubleValue] - [keyongMoney doubleValue];
-        NSString *showStr = [NSString stringWithFormat:@"总计投资金额¥%@\n可用金额%@\n另需充值金额¥%.2f",cell.inputMoneyTextFieldLable.text,cell.KeYongMoneyLabel.text,needToRechare];
+        NSString *showStr = [NSString stringWithFormat:@"总计%@金额¥%@\n可用金额%@\n另需充值金额¥%.2f",self.zxOrP2pStr,cell.inputMoneyTextFieldLable.text,cell.KeYongMoneyLabel.text,needToRechare];
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"可用金额不足" message:showStr delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"立即充值", nil];
         alert.tag = 2000;
         [alert show];
@@ -379,7 +394,8 @@
     }
     int compare = [Common stringA:cell.inputMoneyTextFieldLable.text ComparedStringB:@"1000"];
     if (compare == 1 || compare == 0 ) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:[NSString stringWithFormat:@"本次投资金额¥%@,确认投资吗？",[UCFToolsMehod AddComma:investMoney]] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"立即投资", nil];
+        NSString *buttontitleStr = [NSString stringWithFormat:@"立即%@",self.zxOrP2pStr];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:[NSString stringWithFormat:@"本次%@金额¥%@,确认%@吗？",self.zxOrP2pStr,[UCFToolsMehod AddComma:investMoney],self.zxOrP2pStr] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:buttontitleStr, nil];
         alert.tag = 3000;
         [alert show];
     } else {
@@ -544,8 +560,6 @@
     }
     NZLabel *label1 = [[NZLabel alloc] init];
     label1.font = [UIFont systemFontOfSize:12.0f];
-//    CGSize size = [Common getStrWitdth:totalStr TextFont:[UIFont systemFontOfSize:12]];
-//    label1.frame = CGRectMake(23, 15, ScreenWidth - 23 - 15, size.height);
     
     CGSize size = [Common getStrHeightWithStr:totalStr AndStrFont:12 AndWidth:ScreenWidth- 23 - 15 AndlineSpacing:1.0f];
     label1.numberOfLines = 0;
@@ -572,6 +586,41 @@
     imageView1.frame = CGRectMake(CGRectGetMinX(label1.frame) - 7, CGRectGetMinY(label1.frame) + 4, 5, 5);
     imageView1.image = [UIImage imageNamed:@"point.png"];
     [footView addSubview:imageView1];
+
+
+    if (self.accoutType == SelectAccoutTypeHoner) {
+        UILabel *jieshouLabel = [[UILabel alloc] initWithFrame:CGRectMake(23, CGRectGetMaxY(label1.frame)+10, ScreenWidth- 23 - 15, 12)];
+        jieshouLabel.backgroundColor = [UIColor clearColor];
+        jieshouLabel.text = @"单笔尊享项目仅支持一对一转让，不支持部分购买";
+        jieshouLabel.font = [UIFont systemFontOfSize:12];
+        jieshouLabel.textColor = UIColorWithRGB(0x999999);
+        [footView addSubview:jieshouLabel];
+        
+        UIImageView * imageView2 = [[UIImageView alloc] init];
+        imageView2.frame = CGRectMake(CGRectGetMinX(jieshouLabel.frame) - 7, CGRectGetMinY(jieshouLabel.frame) + 4, 5, 5);
+        imageView2.image = [UIImage imageNamed:@"point.png"];
+        [footView addSubview:imageView2];
+        
+        NSString *buyCueDesStr = @"";//尊享二次债转，增加提示 ---位置取消了
+        if (![buyCueDesStr isEqualToString:@""]) {
+            UILabel *jieshouLabel2 = [[UILabel alloc] initWithFrame:CGRectMake(23, CGRectGetMaxY(jieshouLabel.frame)+10, ScreenWidth- 23 - 15, 12)];
+            jieshouLabel2.backgroundColor = [UIColor clearColor];
+            jieshouLabel2.text = buyCueDesStr;
+            jieshouLabel2.font = [UIFont systemFontOfSize:12];
+            jieshouLabel2.textColor = UIColorWithRGB(0x999999);
+            [footView addSubview:jieshouLabel2];
+            
+            footView.frame = CGRectMake(0, 0, ScreenWidth, CGRectGetMaxY(jieshouLabel2.frame) + 15);
+            UIImageView * imageView3 = [[UIImageView alloc] init];
+            imageView3.frame = CGRectMake(CGRectGetMinX(jieshouLabel2.frame) - 7, CGRectGetMinY(jieshouLabel2.frame) + 4, 5, 5);
+            imageView3.image = [UIImage imageNamed:@"point.png"];
+            [footView addSubview:imageView3];
+        }else{
+            footView.frame = CGRectMake(0, 0, ScreenWidth, CGRectGetMaxY(jieshouLabel.frame) + 15);
+        }
+    }
+    [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:footView isTop:YES];
+    
     return footView;
 }
 - (NSString *)valueIndex:(ZBLinkLabelModel *)linkModel
@@ -616,7 +665,7 @@
 {
     NSString *strParameters = nil;
     strParameters = [NSString stringWithFormat:@"userId=%@&tranId=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],[[_dataDict objectForKey:@"data"] objectForKey:@"id"]];//101943
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagDealTransferBid owner:self Type:SelectAccoutDefault];
+    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagDealTransferBid owner:self Type:self.accoutType];
 }
 - (void)viewWillAppear:(BOOL)animated
 {

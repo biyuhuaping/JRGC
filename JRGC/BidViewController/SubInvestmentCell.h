@@ -9,6 +9,8 @@
 #import "InvestmentCell.h"
 
 @interface SubInvestmentCell : InvestmentCell
+
+@property (nonatomic,assign)SelectAccoutType accoutType;//账户类型
 @property (weak, nonatomic) IBOutlet UIButton *msgButton;
 
 @end

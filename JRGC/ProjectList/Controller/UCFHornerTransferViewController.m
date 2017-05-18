@@ -101,6 +101,8 @@
     UCFTransferModel *model = [self.dataArray objectAtIndex:indexPath.row];
     model.isAnim = YES;
     cell.transferModel = model;
+    cell.minInvestLab.text = cell.remainingLab.text;
+    cell.remainingLab.text = @"";
     cell.delegate = self;
     cell.type = UCFProjectListCellTypeTransfer;
     return cell;
@@ -131,7 +133,7 @@
                 UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前债权转让的详情只对投资人开放"];
                 [self.navigationController pushViewController:controller animated:YES];
             } else {
-                [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdTransferDetail owner:self Type:SelectAccoutDefault];
+                [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdTransferDetail owner:self Type:SelectAccoutTypeHoner];
             }
         }
     }
@@ -223,6 +225,7 @@
         if ([rstcode intValue] == 1) {
             UCFProjectDetailViewController *controller = [[UCFProjectDetailViewController alloc] initWithDataDic:dic isTransfer:YES withLabelList:nil];
             controller.sourceVc = @"transiBid";
+            controller.accoutType = SelectAccoutTypeHoner;
             [self.navigationController pushViewController:controller animated:YES];
         }else {
             [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
@@ -244,7 +247,7 @@
             [alert show];
         } else if ([dic[@"status"] integerValue] == 30) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:dic[@"statusdes"] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"测试",nil];
-            alert.tag =9000;
+            alert.tag = 9000;
             [alert show];
         }else {
             [AuxiliaryFunc showAlertViewWithMessage:rsttext];
@@ -284,22 +287,22 @@
         [self presentViewController:loginNaviController animated:YES completion:nil];
     } else {
         HSHelper *helper = [HSHelper new];
-        if (![helper checkP2POrWJIsAuthorization:self.accoutType]) {//先授权
-            [helper pushP2POrWJAuthorizationType:self.accoutType nav:self.navigationController];
+        if (![helper checkP2POrWJIsAuthorization:SelectAccoutTypeHoner]) {//先授权
+            [helper pushP2POrWJAuthorizationType:SelectAccoutTypeHoner nav:self.navigationController];
             return;
         }
         if ([self checkUserCanInvestIsDetail:NO]) {
             [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             _transferModel = model  ;          //普通表
             NSString *strParameters = [NSString stringWithFormat:@"userId=%@&tranId=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],_transferModel.Id];
-            [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagDealTransferBid owner:self Type:SelectAccoutDefault];
+            [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagDealTransferBid owner:self Type:SelectAccoutTypeHoner];
             }
         }
 }
 
 - (BOOL)checkUserCanInvestIsDetail:(BOOL)isDetail
 {
-    switch ([UserInfoSingle sharedManager].openStatus)
+    switch ([UserInfoSingle sharedManager].enjoyOpenStatus)
     {// ***hqy添加
         case 1://未开户-->>>新用户开户
         case 2://已开户 --->>>老用户(白名单)开户
@@ -336,25 +339,9 @@
         [self reloadHonerTransferData];
     } else if (alertView.tag == 8000) {
         if (buttonIndex == 1) {
-            switch ([UserInfoSingle sharedManager].openStatus)
-            {// ***hqy添加
-                case 1://未开户-->>>新用户开户
-                case 2://已开户 --->>>老用户(白名单)开户
-                {
-                    UCFBankDepositoryAccountViewController * bankDepositoryAccountVC =[[UCFBankDepositoryAccountViewController alloc ]initWithNibName:@"UCFBankDepositoryAccountViewController" bundle:nil];
-                    bankDepositoryAccountVC.openStatus = [UserInfoSingle sharedManager].openStatus;
-                    [self.navigationController pushViewController:bankDepositoryAccountVC animated:YES];
-                }
-                    break;
-                case 3://已绑卡-->>>去设置交易密码页面
-                {
-                    UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:3];
-                    [self.navigationController pushViewController:vc animated:YES];
-                }
-                    break;
-            }
+            HSHelper *helper = [HSHelper new];
+            [helper pushOpenHSType:SelectAccoutTypeHoner Step:[UserInfoSingle sharedManager].enjoyOpenStatus nav:self.navigationController];
         }
-        
     }else if (alertView.tag == 9000){
         if(buttonIndex == 1){
             RiskAssessmentViewController *vc = [[RiskAssessmentViewController alloc] initWithNibName:@"RiskAssessmentViewController" bundle:nil];
