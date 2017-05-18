@@ -156,7 +156,7 @@
                 UIViewController *VC = (UIViewController *)weakSelf.userInfoViewDelegate;
                 [helper pushOpenHSType:type Step:step nav:VC.parentViewController.navigationController];
             }
-        } otherButtonTitles:@"确定"];
+        } otherButtonTitles:@"确认"];
         [alert show];
         return NO;
     }
