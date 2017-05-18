@@ -79,18 +79,18 @@
     NSArray *tabbarTitleArray = @[@"我的",
                                   @"投资",
                                   @"借款",
-                                  @"商城",
+                                  @"生活",
                                   @"发现"];
     
     NSArray *tabbarNormalArray = @[@"tabbar_icon_user_normal",
                                    @"tabbar_icon_project_normal",                                  @"tabbar_icon_loan_normal",
-                                   @"tabbar_icon_shop_normal",
+                                   @"tabbar_icon_life_normal",
                                    @"tabbar_icon_find_normal"];
 
     NSArray *tabbarHighlightArray = @[@"tabbar_icon_user_highlight",
                                       @"tabbar_icon_project_highlight",//tabbar_icon_transfer_highlight.png
                                       @"tabbar_icon_loan_highlight",
-                                      @"tabbar_icon_shop_highlight",
+                                      @"tabbar_icon_life_highlight",
                                       @"tabbar_icon_find_highlight"];
     UIViewController *controller = nil;
     for (int i=0; i<5; i++) {
