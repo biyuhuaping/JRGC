@@ -46,12 +46,11 @@
     if (app.lockVc || ![nav.visibleViewController isKindOfClass:[UCFHomeViewController class]]) {
         return;
     }
-    
     //不登录就需要查看的
     NSDate *lastFirstLoginTime = [[NSUserDefaults standardUserDefaults] objectForKey:FirstAlertViewShowTime];
     BOOL isBelongToToday = [NSDate isBelongToTodayWithDate:lastFirstLoginTime]; //是不是同一天
     //NO 代表当天只显示一回的
-    if (isBelongToToday) {
+    if (!isBelongToToday) {
         //新手政策是否显示
         if ([[self.mongoliaLayerDic valueForKey:@"novicePoliceOnOff"] boolValue]) {
             //通知弹窗显示新手政策

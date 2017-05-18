@@ -67,7 +67,11 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [[MongoliaLayerCenter sharedManager] showLogic];
+    dispatch_queue_t queue= dispatch_get_main_queue();
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.1 * NSEC_PER_SEC)), queue, ^{
+        DBLog(@"主队列--延迟执行------%@",[NSThread currentThread]);
+        [[MongoliaLayerCenter sharedManager] showLogic];
+    });
 }
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
