@@ -17,6 +17,7 @@
 #import "SDCycleScrollView.h"
 #import "MjAlertView.h"
 #import "UCFSignView.h"
+#import "UCFNoticeView.h"
 
 #import "UCFCycleModel.h"
 #import "UCFUserInfoModel.h"
@@ -54,6 +55,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *couponLabel;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (weak, nonatomic) IBOutlet UILabel *myLevelLabel;
+@property (weak, nonatomic) IBOutlet UIView *noticeBackView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *noticeBackViewHeight;
 
 @property (copy, nonatomic) NSString *beanCount;
 @property (strong, nonatomic) NSNumber *couponNumber;

@@ -132,6 +132,8 @@
 		740AC6401DDC2AAE0058BC60 /* UCFProjectListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 740AC63E1DDC2AAE0058BC60 /* UCFProjectListController.xib */; };
 		740DAEC11E56E2D100CD7C8F /* UCFBatchProjectController.m in Sources */ = {isa = PBXBuildFile; fileRef = 740DAEBF1E56E2D100CD7C8F /* UCFBatchProjectController.m */; };
 		740DAEC21E56E2D100CD7C8F /* UCFBatchProjectController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 740DAEC01E56E2D100CD7C8F /* UCFBatchProjectController.xib */; };
+		740E2E941ECD4D55006FA335 /* UCFNoticeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 740E2E931ECD4D55006FA335 /* UCFNoticeView.m */; };
+		740E2E961ECD8884006FA335 /* UCFNoticeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 740E2E951ECD8884006FA335 /* UCFNoticeView.xib */; };
 		741CA7A21E724C44006056A8 /* UCFLoanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 741CA7A01E724C44006056A8 /* UCFLoanViewController.m */; };
 		741CA7A31E724C44006056A8 /* UCFLoanViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 741CA7A11E724C44006056A8 /* UCFLoanViewController.xib */; };
 		741CA7A71E724C64006056A8 /* UCFDiscoveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 741CA7A51E724C64006056A8 /* UCFDiscoveryViewController.m */; };
@@ -1014,6 +1016,9 @@
 		740DAEBE1E56E2D100CD7C8F /* UCFBatchProjectController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFBatchProjectController.h; sourceTree = "<group>"; };
 		740DAEBF1E56E2D100CD7C8F /* UCFBatchProjectController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFBatchProjectController.m; sourceTree = "<group>"; };
 		740DAEC01E56E2D100CD7C8F /* UCFBatchProjectController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFBatchProjectController.xib; sourceTree = "<group>"; };
+		740E2E921ECD4D55006FA335 /* UCFNoticeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFNoticeView.h; sourceTree = "<group>"; };
+		740E2E931ECD4D55006FA335 /* UCFNoticeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFNoticeView.m; sourceTree = "<group>"; };
+		740E2E951ECD8884006FA335 /* UCFNoticeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFNoticeView.xib; sourceTree = "<group>"; };
 		741CA79F1E724C44006056A8 /* UCFLoanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFLoanViewController.h; sourceTree = "<group>"; };
 		741CA7A01E724C44006056A8 /* UCFLoanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFLoanViewController.m; sourceTree = "<group>"; };
 		741CA7A11E724C44006056A8 /* UCFLoanViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFLoanViewController.xib; sourceTree = "<group>"; };
@@ -2899,6 +2904,9 @@
 				74270C881EC58F6800F9419B /* UCFHomeUserInfoCell.xib */,
 				74270C891EC58F6800F9419B /* UCFSignView.h */,
 				74270C8A1EC58F6800F9419B /* UCFSignView.m */,
+				740E2E921ECD4D55006FA335 /* UCFNoticeView.h */,
+				740E2E931ECD4D55006FA335 /* UCFNoticeView.m */,
+				740E2E951ECD8884006FA335 /* UCFNoticeView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -5821,6 +5829,7 @@
 				4A42BB2F1C27A7D20084AB08 /* NewCalculator.xib in Resources */,
 				E311A6641D90E7FC00C5483E /* UCFWebViewJavascriptBridgeMall.xib in Resources */,
 				74270C901EC58F6800F9419B /* UCFUserInformationViewController.xib in Resources */,
+				740E2E961ECD8884006FA335 /* UCFNoticeView.xib in Resources */,
 				840A79461C2A7C160059A946 /* UCFMessageCenterCell.xib in Resources */,
 				83FF3E4B1E12159C00DFB99C /* UCFCashTableViewCell.xib in Resources */,
 				7477BF911AFAFED900914BFB /* UCFRedEnvelopeTableViewCell.xib in Resources */,
@@ -5955,6 +5964,7 @@
 				7B2E568E1ADBBE5F008B0F9E /* UCFRetrievePasswordStepOneViewController.m in Sources */,
 				4A5552981E54413E00E69DA4 /* UCFBatchInvestmentViewController.m in Sources */,
 				7477BF951AFB0F4C00914BFB /* UCFRedEnvelopeTableViewCell.m in Sources */,
+				740E2E941ECD4D55006FA335 /* UCFNoticeView.m in Sources */,
 				7BC8A8A01AFB4EB0003A8D89 /* RegisterSuccessAlert.m in Sources */,
 				EDEC8C021CB3BAB300815228 /* NSMutableString+TagReplace.m in Sources */,
 				7491FBD61AFC5D5400CD0720 /* UCFModifyIdAuthViewController.m in Sources */,

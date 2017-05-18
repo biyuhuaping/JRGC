@@ -77,7 +77,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUI:) name:@"refreshUIWithLoginAndOut" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUI:) name:@"getPersonalCenterNetData" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(responds3DTouchClick) name:@"responds3DTouchClick" object:nil];
     }
     return self;
@@ -380,11 +380,15 @@
 #pragma mark - 刷新界面
 - (void)refreshUI:(NSNotification *)noty
 {
+    __weak typeof(self) weakSelf = self;
     [self addUI];
-    BOOL hasSign = [self.stateDict objectForKey:@"sign"];
-    if (hasSign) {
-        
-    }
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [weakSelf fetchData];
+    });
+//    BOOL hasSign = [self.stateDict objectForKey:@"sign"];
+//    if (hasSign) {
+//        
+//    }
 }
 
 #pragma mark - 请求数据

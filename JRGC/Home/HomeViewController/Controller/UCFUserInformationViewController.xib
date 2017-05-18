@@ -18,6 +18,8 @@
                 <outlet property="couponLabel" destination="qdd-1p-gn7" id="tKS-So-P2b"/>
                 <outlet property="cycleImageBackView" destination="aIU-EY-eXv" id="ijc-vp-vyr"/>
                 <outlet property="myLevelLabel" destination="7XL-OM-LfF" id="uvv-Fe-1fb"/>
+                <outlet property="noticeBackView" destination="zZd-1h-prZ" id="2dS-by-EB0"/>
+                <outlet property="noticeBackViewHeight" destination="Amd-gQ-Ohe" id="T5N-wI-atg"/>
                 <outlet property="scoreLabel" destination="ztp-YF-iUI" id="fXe-Po-9ny"/>
                 <outlet property="sign" destination="VpN-vn-Mvf" id="Zat-MO-e5e"/>
                 <outlet property="tableview" destination="Xdt-ys-drQ" id="HNa-jk-jbC"/>
@@ -369,6 +371,12 @@
                         <constraint firstAttribute="bottom" secondItem="0mE-VQ-GXA" secondAttribute="bottom" id="zAk-Pu-LZp"/>
                     </constraints>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zZd-1h-prZ">
+                    <rect key="frame" x="0.0" y="209" width="375" height="0.0"/>
+                    <constraints>
+                        <constraint firstAttribute="height" id="Amd-gQ-Ohe"/>
+                    </constraints>
+                </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Xdt-ys-drQ">
                     <rect key="frame" x="0.0" y="219" width="375" height="88"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -393,6 +401,7 @@
                 <constraint firstItem="kZn-8h-OrD" firstAttribute="top" secondItem="dRd-5Y-z02" secondAttribute="bottom" id="2xW-2v-XO3"/>
                 <constraint firstAttribute="trailing" secondItem="kZn-8h-OrD" secondAttribute="trailing" id="6oq-Jw-3gH"/>
                 <constraint firstItem="ncU-hd-Pef" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="97W-fU-kKE"/>
+                <constraint firstItem="Xdt-ys-drQ" firstAttribute="top" secondItem="zZd-1h-prZ" secondAttribute="bottom" constant="10" id="9LI-cH-wls"/>
                 <constraint firstItem="kZn-8h-OrD" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="JZe-Xc-0ju"/>
                 <constraint firstAttribute="trailing" secondItem="Xdt-ys-drQ" secondAttribute="trailing" id="N01-Mb-zX2"/>
                 <constraint firstItem="aIU-EY-eXv" firstAttribute="top" secondItem="Xdt-ys-drQ" secondAttribute="bottom" constant="10" id="QsA-ld-A84"/>
@@ -400,15 +409,17 @@
                 <constraint firstItem="ncU-hd-Pef" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="VH9-U7-lNu"/>
                 <constraint firstAttribute="trailing" secondItem="dRd-5Y-z02" secondAttribute="trailing" id="bp7-Ua-gzK"/>
                 <constraint firstAttribute="trailing" secondItem="aIU-EY-eXv" secondAttribute="trailing" id="fBT-6J-9Zc"/>
-                <constraint firstItem="Xdt-ys-drQ" firstAttribute="top" secondItem="kZn-8h-OrD" secondAttribute="bottom" constant="10" id="hqw-EK-BYG"/>
                 <constraint firstAttribute="trailing" secondItem="ncU-hd-Pef" secondAttribute="trailing" id="hsz-9H-6Q1"/>
                 <constraint firstItem="Xdt-ys-drQ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="iW6-0j-VB5"/>
                 <constraint firstItem="dRd-5Y-z02" firstAttribute="top" secondItem="ncU-hd-Pef" secondAttribute="bottom" id="jS7-pa-73B"/>
+                <constraint firstAttribute="trailing" secondItem="zZd-1h-prZ" secondAttribute="trailing" id="kql-7a-59z"/>
                 <constraint firstItem="aIU-EY-eXv" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="p6j-J4-Jfg"/>
+                <constraint firstItem="zZd-1h-prZ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="w8P-k5-F2z"/>
+                <constraint firstItem="zZd-1h-prZ" firstAttribute="top" secondItem="kZn-8h-OrD" secondAttribute="bottom" id="zFa-at-7GL"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="-81" y="-59"/>
+            <point key="canvasLocation" x="-81.5" y="-59"/>
         </view>
     </objects>
     <resources>

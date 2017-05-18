@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="UCFNoticeView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="35"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="up1-jF-cVe">
+                    <rect key="frame" x="15" y="0.0" width="345" height="35"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VAD-SQ-13a">
+                    <rect key="frame" x="340" y="0.0" width="35" height="35"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="VAD-SQ-13a" secondAttribute="height" multiplier="1:1" id="vtI-fn-CZX"/>
+                    </constraints>
+                    <state key="normal" image="calculator_close1"/>
+                    <connections>
+                        <action selector="noticeClose:" destination="iN0-l3-epB" eventType="touchUpInside" id="26O-iQ-xu9"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="0.35686274509803922" green="0.41176470588235292" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="up1-jF-cVe" secondAttribute="trailing" constant="15" id="6f9-Mm-Thv"/>
+                <constraint firstItem="up1-jF-cVe" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="7lb-bZ-6hA"/>
+                <constraint firstAttribute="bottom" secondItem="VAD-SQ-13a" secondAttribute="bottom" id="LvX-WL-KOb"/>
+                <constraint firstAttribute="bottom" secondItem="up1-jF-cVe" secondAttribute="bottom" id="V1R-QG-8cR"/>
+                <constraint firstItem="VAD-SQ-13a" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="VWf-HQ-6k1"/>
+                <constraint firstAttribute="trailing" secondItem="VAD-SQ-13a" secondAttribute="trailing" id="azb-IY-lfZ"/>
+                <constraint firstItem="up1-jF-cVe" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="uKT-Ca-F8h"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="noticeLabel" destination="up1-jF-cVe" id="Qpe-V3-WUI"/>
+            </connections>
+        </view>
+    </objects>
+    <resources>
+        <image name="calculator_close1" width="30" height="30"/>
+    </resources>
+</document>
