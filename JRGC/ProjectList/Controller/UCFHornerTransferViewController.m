@@ -119,8 +119,8 @@
         [self showLoginView];
     } else {
         HSHelper *helper = [HSHelper new];
-        if (![helper checkP2POrWJIsAuthorization:self.accoutType]) {//先授权
-            [helper pushP2POrWJAuthorizationType:self.accoutType nav:self.navigationController];
+        if (![helper checkP2POrWJIsAuthorization:SelectAccoutTypeHoner]) {//先授权
+            [helper pushP2POrWJAuthorizationType:SelectAccoutTypeHoner nav:self.navigationController];
             return;
         }
         if ([self checkUserCanInvestIsDetail:YES]) {
