@@ -24,6 +24,8 @@ typedef enum : NSUInteger {
 @end
 
 @interface UCFProjectListCell : UITableViewCell
+@property (strong, nonatomic) IBOutlet UILabel *minInvestLab;   //起投金额
+@property (strong, nonatomic) IBOutlet UILabel *remainingLab;   //可投金额
 @property (nonatomic, strong) UCFProjectListModel *model;
 @property (nonatomic, strong) UCFTransferModel *transferModel;
 @property (nonatomic, strong) UCFBatchBidModel *batchBidModel;

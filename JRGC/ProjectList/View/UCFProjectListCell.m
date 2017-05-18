@@ -23,8 +23,7 @@
 @property (strong, nonatomic) IBOutlet NZLabel *progressLab;    //进度百分比
 @property (strong, nonatomic) IBOutlet UILabel *repayPeriodLab; //投资期限
 @property (strong, nonatomic) IBOutlet UILabel *repayModeLab;   //还款方式
-@property (strong, nonatomic) IBOutlet UILabel *minInvestLab;   //起投金额
-@property (strong, nonatomic) IBOutlet UILabel *remainingLab;   //可投金额
+
 
 
 @property (strong, nonatomic) IBOutlet UIImageView *imgView1;
