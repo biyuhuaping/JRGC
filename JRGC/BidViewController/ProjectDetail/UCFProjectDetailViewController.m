@@ -190,7 +190,6 @@
     [self addnavigationBar];
     [self setNavTitleView];
     
-    
     NSString *tansType = @"1";
     switch (_detailType) {
         case PROJECTDETAILTYPENORMAL://普通标详情
