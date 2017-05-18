@@ -50,11 +50,9 @@
     if (app.advertisementView || [self isCurrentViewControllerVisible:app.lockVc] || ![nav.visibleViewController isKindOfClass:[UCFHomeViewController class]]) {
         return;
     }
-
     //不登录就需要查看的
     NSDate *lastFirstLoginTime = [[NSUserDefaults standardUserDefaults] objectForKey:FirstAlertViewShowTime];
     BOOL isBelongToToday = [NSDate isBelongToTodayWithDate:lastFirstLoginTime]; //是不是同一天
-    isBelongToToday = NO;
     //NO 代表当天只显示一回的
     if (!isBelongToToday) {
         //新手政策是否显示

@@ -237,7 +237,7 @@
 #define USERINFOADJUSTMENT              @"api/userInfo/v2/adjustment.json" //公告确认
 
 #define WALLETSHOW          @"api/userBase/v2/walletShow.json"     //钱包暗开信息提供
-
+#define WALLETSELECTBANKCARD @"api/userBase/v2/saveWalletParam.json"
 
 #define MYINVITEREBATEINFOURL  @"api/inviteRebate/v2/myInviteRebateinfo.json" //邀请返利
 #define MYINVITEREWARDINFOURL  @"api/inviteRebate/v2/myInviteRewardinfo.json" //邀请奖励
@@ -454,6 +454,7 @@ enum kSXTag
     KSXTagADJustMent,                    //公告确认点击
 
     KSXTagWalletShowMsg,                  //钱包暗开信息提供
+    kSXTagWalletSelectBankCar,             //选择银行卡
 
     KSXTagMyInviteRebateinfo,           //邀请返利
     KSXTagMyInviteRewardinfo,           //邀请奖励
