@@ -44,6 +44,7 @@
         UCFHomeListGroup *group1 = [[UCFHomeListGroup alloc] init];
         group1.headTitle = @"工场尊享";
         group1.showMore = YES;
+        group1.type = @"12";
         group1.headerImage = @"mine_icon_enjoy";
         _groupPresenter1 = [UCFHomeListGroupPresenter presenterWithGroup:group1];
     }
@@ -55,6 +56,7 @@
     if (!_groupPresenter2) {
         UCFHomeListGroup *group2 = [[UCFHomeListGroup alloc] init];
         group2.headTitle = @"工场微金";
+        group2.type = @"11";
         group2.showMore = YES;
         group2.headerImage = @"mine_icon_p2p";
         _groupPresenter2 = [UCFHomeListGroupPresenter presenterWithGroup:group2];
@@ -147,21 +149,23 @@
                 NSArray *array = group.prdlist;
                 if (array.count > 0) {
                     if ([group.type isEqualToString:@"11"]) {
-                        weakSelf.groupPresenter2.group.type = group.type;
+//                        weakSelf.groupPresenter2.group.type = group.type;
                         NSMutableArray *temp = [weakSelf productPrdListWithDataSource:array];
                         [temp addObject:[weakSelf.groupPresenter2.group.prdlist lastObject]];
                         weakSelf.groupPresenter2.group.prdlist = temp;
                     }
                     else if ([group.type isEqualToString:@"12"]) {
-                        weakSelf.groupPresenter1.group.type = group.type;
+//                        weakSelf.groupPresenter1.group.type = group.type;
                         weakSelf.groupPresenter1.group.prdlist = [weakSelf productPrdListWithDataSource:array];
                     }
                     else if ([group.type isEqualToString:@"13"]) {
-                        weakSelf.groupPresenter0.group.type = group.type;
+//                        weakSelf.groupPresenter0.group.type = group.type;
                         weakSelf.groupPresenter0.group.prdlist = [weakSelf productPrdListWithDataSource:array];
                     }
                 }
             }
+            
+            
             UCFHomeListCellModel *listInfo = [resultDict objectForKey:@"listInfo"];
             UCFHomeListCellPresenter *temp2 = [self.groupPresenter2.group.prdlist lastObject];
             temp2.item.totalCount = listInfo.totalCount;
