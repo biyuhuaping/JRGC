@@ -107,6 +107,7 @@ return shared##className; \
 #define BACK_TO_LOGIN          @"logoutMyLogin"
 #define BACK_TO_HS              @"backToHS"
 #define USER_LEVEL              @"userLevel"
+#define WALLET_DATADICT         @"walletDataDict"
 //#define IDCARD_STATE    @"card_state"   //身份证认证状态
 
 //#define BANKCARD_STATE  @"bankcard_state"    //是否绑定银行卡
@@ -168,6 +169,7 @@ return shared##className; \
 #define CHECK_UPDATE_ALERT  @"UPDATE_ALERT"
 #define CHECK_ISSHOW_MASKVIEW @"maskViewisShow"
 #define IS_RELOADE_REQUEST @"isReloadRequest"  //是否重新加载因验签失效造成失败的接口
+
 // 每天首次弹出邀请返利开关
 #define FirstAlertViewShowTime     @"InviteFriendsEveryday"
 // 新手政策开关（0：关，1：开）

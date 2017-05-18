@@ -32,6 +32,7 @@
     }
     return _mongoliaLayerDic;
 }
+
 - (void)showLogic
 {
     //不登录就需要查看的
@@ -60,7 +61,6 @@
         [view show];
         return;
     }
-    
     //是否弹平台升级调整公告
     if (![[self.mongoliaLayerDic valueForKey:@"authorization"] boolValue]) {
         MjAlertView *alertView = [[MjAlertView alloc] initPlatformUpgradeNotice:self];
@@ -77,8 +77,6 @@
     //        if ([[self.mongoliaLayerDic valueForKey:@"红包雨"] boolValue]) {
     //            return;
     //        }
-    
-    
 }
 - (void)viewWillRemove:(MaskView *)view
 {

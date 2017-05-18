@@ -52,8 +52,18 @@
 
 @implementation UpgradeAccountVC
 
+- (void)getToBack
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    if (_fromVC == 1) {
+        baseTitleLabel.text = @"开通徽商存管账户";
+        [self addLeftButton];
+    }
+    
     _isSendVoiceMessage = NO;
     _height1.constant = 0.5;
     _height2.constant = 0.5;
@@ -498,8 +508,7 @@
 
 //徽商绑定银行卡
 - (IBAction)submitDataButton:(id)sender {
-    [self.view endEditing:YES];
-
+    [self.view endEditing:YES];    
     if ([_tempBankId isEqualToString:_bankId]) {
         BlockUIAlertView *alert = [[BlockUIAlertView alloc]initWithTitle:@"提示" message:_notSupportDes cancelButtonTitle:nil clickButton:^(NSInteger index) {} otherButtonTitles:@"确定"];
         [alert show];
@@ -693,6 +702,7 @@
             //提交信息成功之后，显示开户成功页面
             AccountSuccessVC *acVC = [[AccountSuccessVC alloc]initWithNibName:@"AccountSuccessVC" bundle:nil];
             acVC.site = self.site;
+            acVC.fromVC = self.fromVC;
             acVC.view.frame = self.view.bounds;
             acVC.db = self.db;
             [acVC didMoveToParentViewController:self];

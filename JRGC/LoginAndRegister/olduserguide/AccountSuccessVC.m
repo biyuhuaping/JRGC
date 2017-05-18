@@ -25,6 +25,11 @@
     _showLabel.text = [_site isEqualToString:@"1"] ? @"微金徽商存管账户":@"尊享徽商存管账户";
     NSString *imageStr = [_site isEqualToString:@"1"] ? @"account_successful_img":@"account_successful_zunxiang";
     _successTipView.image = [UIImage imageNamed:imageStr];
+    if (_fromVC == 1) {
+        [_submitDataButton setTitle:@"进入生活频道" forState:UIControlStateNormal];
+    } else {
+        [_submitDataButton setTitle:@"设置交易密码" forState:UIControlStateNormal];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -33,9 +38,15 @@
 }
 
 - (IBAction)submitDataButton:(id)sender {
-    DBLOG(@"设置交易密码");
-    //请求成功后，发通知到 UCFOldUserGuideHeadViewController.m  设置 isFirstComingPassWord 为yes
-    [self.db changeTitleViewController:showPassWord];
+    DBLOG(@"设置交易密码")
+    if (_fromVC == 1) {
+        [self dismissViewControllerAnimated:YES completion:^{
+            
+        }];
+    } else {
+        //请求成功后，发通知到 UCFOldUserGuideHeadViewController.m  设置 isFirstComingPassWord 为yes
+        [self.db changeTitleViewController:showPassWord];
+    }
 }
 
 
