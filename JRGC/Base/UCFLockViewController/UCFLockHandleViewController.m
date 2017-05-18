@@ -16,7 +16,7 @@
 #import "AppDelegate.h"
 #import "AuxiliaryFunc.h"
 #import "RegisterSuccessAlert.h"
-
+#import "P2PWalletHelper.h"
 #import <LocalAuthentication/LocalAuthentication.h>
 #import <Security/Security.h>
 #import "UIImage+GIF.h"
