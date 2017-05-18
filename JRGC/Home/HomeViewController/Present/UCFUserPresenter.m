@@ -134,6 +134,9 @@
                 [weakSelf.userInfoViewDelegate userInfoPresenter:self didReturnPrdClaimsDealBidWithResult:result error:error];
             }
         }
+        if ([weakSelf.userInfoViewDelegate respondsToSelector:@selector(userInfoPresenter:didReturnPrdClaimsDealBidWithResult:error:)]) {
+            [weakSelf.userInfoViewDelegate userInfoPresenter:self didReturnPrdClaimsDealBidWithResult:result error:error];
+        }
         !completionHander ?: completionHander(error, result);
     }];
 }

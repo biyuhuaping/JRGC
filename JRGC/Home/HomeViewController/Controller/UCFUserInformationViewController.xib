@@ -90,8 +90,8 @@
                                         <constraint firstAttribute="height" constant="30" id="ix9-S1-nuT"/>
                                         <constraint firstAttribute="width" constant="30" id="qFK-sd-Psx"/>
                                     </constraints>
-                                    <state key="normal" image="invisible_bule"/>
-                                    <state key="selected" image="visible_blue"/>
+                                    <state key="normal" image="visible_blue"/>
+                                    <state key="selected" image="invisible_bule"/>
                                     <connections>
                                         <action selector="visible:" destination="-1" eventType="touchUpInside" id="GkR-mT-Alr"/>
                                     </connections>

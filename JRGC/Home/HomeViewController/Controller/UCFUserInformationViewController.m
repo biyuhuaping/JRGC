@@ -230,11 +230,11 @@
     sender.selected = !sender.selected;
     [[NSUserDefaults standardUserDefaults] setBool:sender.selected forKey:@"isVisible"];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    self.myLevelLabel.text = self.memLevel;
     if (sender.selected) {
         self.beanLabel.text = self.beanCount;
         self.couponLabel.text = [NSString stringWithFormat:@"%@", self.couponNumber];
         self.scoreLabel.text = self.score;
-        self.myLevelLabel.text = self.memLevel;
         
         self.addedProfitLabel.text = self.addProfit;
         self.totalMoney.text = self.asset;
@@ -244,7 +244,6 @@
         self.beanLabel.text = @"****";
         self.couponLabel.text = @"****";
         self.scoreLabel.text = @"****";
-        self.myLevelLabel.text = @"****";
         
         self.addedProfitLabel.text = @"****";
         self.totalMoney.text = @"****";
@@ -306,9 +305,9 @@
         if ([result isKindOfClass:[UCFUserInfoModel class]]) {
             [self.tableview reloadData];
             UCFUserInfoModel *userInfo = result;
-            self.addProfit = [NSString stringWithFormat:@"%@", userInfo.interests];
-            self.asset = [NSString stringWithFormat:@"%@", userInfo.total];
-            self.availableBanlance = [NSString stringWithFormat:@"%@", userInfo.cashBalance];
+            self.addProfit = [NSString stringWithFormat:@"¥%@", userInfo.interests];
+            self.asset = [NSString stringWithFormat:@"¥%@", userInfo.total];
+            self.availableBanlance = [NSString stringWithFormat:@"¥%@", userInfo.cashBalance];
             self.sign.hidden = userInfo.isCompanyAgent;
             [self refreshUI];
         }
@@ -371,11 +370,11 @@
 
 - (void)refreshUI
 {
+    self.myLevelLabel.text = self.memLevel ? self.memLevel : @"--";
     if (self.visibleBtn.selected) {
         self.beanLabel.text = self.beanCount ? self.beanCount : @"--";
         self.couponLabel.text = self.couponNumber ? [NSString stringWithFormat:@"%@", self.couponNumber] : @"--";
         self.scoreLabel.text = self.score ? self.score : @"--";
-        self.myLevelLabel.text = self.memLevel ? self.memLevel : @"--";
         
         self.addedProfitLabel.text = self.addProfit ? self.addProfit : @"--";
         self.totalMoney.text = self.asset ? self.asset : @"--";
@@ -385,7 +384,6 @@
         self.beanLabel.text = @"****";
         self.couponLabel.text = @"****";
         self.scoreLabel.text = @"****";
-        self.myLevelLabel.text = @"****";
         
         self.addedProfitLabel.text = @"****";
         self.totalMoney.text = @"****";
