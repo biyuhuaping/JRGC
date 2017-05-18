@@ -29,6 +29,7 @@
 {
     if (!_mongoliaLayerDic) {
         _mongoliaLayerDic = [NSMutableDictionary dictionary];
+        [_mongoliaLayerDic setValue:[NSNumber numberWithInt:1] forKey:@"authorization"];
     }
     return _mongoliaLayerDic;
 }
