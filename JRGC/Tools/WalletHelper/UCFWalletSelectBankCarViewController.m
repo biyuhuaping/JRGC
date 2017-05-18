@@ -34,7 +34,14 @@
     [self addBankView];
 }
 - (IBAction)bottomButtonclicked:(UIButton *)sender {
-    [[P2PWalletHelper sharedManager] refreshWalletData:[self.dataDict[@"bankList"] objectAtIndex:selectIndex]];
+    NSMutableArray *tmpArr = [NSMutableArray arrayWithCapacity:1];
+    [tmpArr addObject:[self.dataDict[@"bankList"] objectAtIndex:selectIndex]];
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:4];
+    [dict setValue:self.dataDict[@"isOpen"] forKey:@"isOpen"];
+    [dict setValue:self.dataDict[@"merchantId"] forKey:@"merchantId"];
+    [dict setValue:self.dataDict[@"sign"] forKey:@"sign"];
+    [dict setValue:tmpArr forKey:@"bankList"];
+    [[P2PWalletHelper sharedManager] refreshWalletData:dict];
     [self getToBack];
 }
 - (void)addBankView

@@ -319,6 +319,7 @@
     UCFInvestmentDetailViewController *controller = [[UCFInvestmentDetailViewController alloc] init];
     controller.billId = dict[@"prdOrderId"];
     controller.detailType = @"2";
+    controller.accoutType = self.accoutType;
     [self.navigationController pushViewController:controller animated:YES];
 }
 

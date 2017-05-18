@@ -36,7 +36,7 @@
         self.walletController = [UcfWalletSDK wallet:nil retHandler:self retSelector:nil navTitle:@"生活"];
         return _walletController;
     }
-    self.walletController =  [UcfWalletSDK wallet:[self resetWalletDataDict:self.paramDict[@"bankList"][0]] retHandler:self retSelector:nil navTitle:@"生活"];
+    self.walletController =  [UcfWalletSDK wallet:[self resetWalletDataDict:self.paramDict] retHandler:self retSelector:nil navTitle:@"生活"];
     return _walletController;
 }
 
@@ -76,9 +76,7 @@
         
     }else if([self.paramDict[@"bankList"] count] == 1) {
         //更新用户数据
-        NSArray *arr = self.paramDict[@"bankList"];
-        NSDictionary *dict = [arr objectAtIndex:0];
-        [self refreshWalletData:dict];
+        [self refreshWalletData:self.paramDict];
         return YES;
     }
     return YES;
@@ -86,18 +84,20 @@
 - (NSDictionary *)resetWalletDataDict:(NSDictionary *)dict
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:8];
-    [params setValue:@"MT10000000" forKey:@"merchantId"];
-    [params setValue:[NSString stringWithFormat:@"%@",dict[@"userId"]] forKey:@"userId"];
-    [params setValue:dict[@"realName"] forKey:@"realName"];
-    [params setValue:[NSString stringWithFormat:@"%@",dict[@"bankCard"]] forKey:@"cardNo"];
-    [params setValue:[NSString stringWithFormat:@"%@",dict[@"phone"]] forKey:@"mobileNo"];
+    NSDictionary *bankDic = dict[@"bankList"][0];
+    [params setValue:dict[@"merchantId"] forKey:@"merchantId"];
+    [params setValue:[NSString stringWithFormat:@"%@",bankDic[@"userId"]] forKey:@"userId"];
+    [params setValue:bankDic[@"realName"] forKey:@"realName"];
+    [params setValue:[NSString stringWithFormat:@"%@",bankDic[@"bankCard"]] forKey:@"cardNo"];
+    [params setValue:[NSString stringWithFormat:@"%@",bankDic[@"bankPhone"]] forKey:@"mobileNo"];
     [params setValue:@"01" forKey:@"cardType"]; // 证件类型 01身份证，写死即可
-    [params setValue:[self getSign] forKey:@"sign"];
+    [params setValue:dict[@"merchantId"] forKey:@"sign"];
     return params;
 }
 - (void)refreshWalletData:(NSDictionary *)dict
 {
     [UcfWalletSDK refreshWalletVC:[self resetWalletDataDict:dict] navTitle:@"生活" walletVC:_walletController];
+    [self changeTabMoveToWalletTabBar];
 }
 #pragma mark NetworkModuleDelegate
 - (void)getUserWalletData
@@ -129,7 +129,7 @@
 }
 -(void)errorPost:(NSError*)err tag:(NSNumber*)tag
 {
-    self.paramDict = nil;
+//    self.paramDict = nil;
 }
 - (void)changeTabMoveToWalletTabBar
 {
