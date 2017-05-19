@@ -402,6 +402,12 @@
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];//上层交互逻辑
         if ([result isKindOfClass:[NSDictionary class]]) {
             //请求成功
+            weakSelf.userInfoVC.siteNoticeStr = [result objectForKey:@"siteNotice"];
+            CGFloat userInfoViewHeight = [UCFUserInformationViewController viewHeight];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                self.userInfoVC.view.frame = CGRectMake(0, 0, ScreenWidth, userInfoViewHeight + +35);
+                [self.homeListVC.tableView reloadData];
+            });
         }
         else if ([result isKindOfClass:[NSString class]]) {
             [AuxiliaryFunc showToastMessage:result withView:weakSelf.view];

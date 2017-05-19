@@ -97,10 +97,10 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LPR-u1-fl8">
-                                    <rect key="frame" x="285" y="7" width="75" height="40"/>
+                                    <rect key="frame" x="210" y="7" width="150" height="40"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="40" id="RHX-sR-D7x"/>
-                                        <constraint firstAttribute="width" constant="75" id="zPR-nb-5mu"/>
+                                        <constraint firstAttribute="width" constant="150" id="zPR-nb-5mu"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="12" maxY="0.0"/>

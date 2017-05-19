@@ -19,6 +19,7 @@
 
 @interface UCFUserInformationViewController : UIViewController
 
+@property (copy, nonatomic) NSString *siteNoticeStr;
 @property (weak, nonatomic) id<UCFUserInformationViewControllerDelegate> delegate;
 
 #pragma mark - 根据所对应的presenter生成当前controller

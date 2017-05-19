@@ -57,6 +57,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *myLevelLabel;
 @property (weak, nonatomic) IBOutlet UIView *noticeBackView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *noticeBackViewHeight;
+@property (weak, nonatomic) UCFNoticeView *noticeView;
 
 @property (copy, nonatomic) NSString *beanCount;
 @property (strong, nonatomic) NSNumber *couponNumber;
@@ -115,6 +116,10 @@
     [super viewDidLoad];
 //    self.navigationController.navigationBar.hidden = YES;
     
+    UCFNoticeView *noticeView = (UCFNoticeView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFNoticeView" owner:self options:nil] lastObject];
+    [self.noticeBackView addSubview:noticeView];
+    self.noticeView = noticeView;
+    
     self.visibleBtn.selected = [[NSUserDefaults standardUserDefaults] boolForKey:@"isVisible"];
     
     self.userIconImageView.layer.cornerRadius = CGRectGetWidth(self.userIconImageView.frame) * 0.5;
@@ -134,6 +139,7 @@
 {
     [super viewDidLayoutSubviews];
     self.cycleImageView.frame = self.cycleImageBackView.bounds;
+    self.noticeView.frame = self.noticeBackView.bounds;
 }
 
 #pragma mark - 根据所对应的presenter生成当前controller
@@ -364,7 +370,7 @@
             
         }
     } else if (self.presenter.allDatas.count == 0) {
-        //        show error view
+//        show error view
     }
 }
 
@@ -495,7 +501,7 @@
         [self.delegate proInvestAlert:alertView didClickedWithTag:alertView.tag withIndex:buttonIndex];
     }
 }
-
+#pragma mark - 签到
 - (void)signForRedBag
 {
     [self sign:self.sign];
