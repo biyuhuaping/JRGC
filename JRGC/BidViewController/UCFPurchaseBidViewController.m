@@ -501,7 +501,7 @@
 
         } else {
             
-            NSString *messageStr = [NSString stringWithFormat:@"有可用返现券,确认不使用继续%@吗",_wJOrZxStr];
+            NSString *messageStr = [NSString stringWithFormat:@"有可用返现券,确认不使用并继续%@吗",_wJOrZxStr];
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
 
             alert.tag = 4000;

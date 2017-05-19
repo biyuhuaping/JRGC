@@ -257,11 +257,11 @@
             _label_titletow.text = dictemp[@"enjoyCommissionProportionText"];
             _label_titlethree.text = dictemp[@"p2pYearCommissionText"];
             
-//            NSString *tipsStr = dictemp[@"recruitDes"];
-//            if (tipsStr.length > 0) {
-//                _tipsLabel.text = tipsStr;
-//                _tipsViewHeight.constant = 35;
-//            }
+            NSString *tipsStr = dictemp[@"recruitDes"];
+            if (tipsStr.length > 0) {
+                _tipsLabel.text = tipsStr;
+                _tipsViewHeight.constant = 35;
+            }
             //**************************qyy**************
             NSString *adviserAnnualRate = @"¥0.00";
             
