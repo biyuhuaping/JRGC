@@ -28,7 +28,7 @@
     [super viewWillAppear:animated];
 //    self.btnButtom.constant = 30;
     if (!isFirstLaunch) {
-        _whiteBaseHeight.constant = CGRectGetMaxY(_bottomLab.frame) + 15;
+        _whiteBaseHeight.constant = CGRectGetMaxY(_bottomLab.frame) + 10;
     }
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 }
@@ -41,7 +41,7 @@
         [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:_whiteBaseView isTop:NO];
         isFirstLaunch = YES;
     }
-    self.scrollView.contentSize = CGSizeMake(0, ScreenHeight);
+    self.scrollView.contentSize = CGSizeMake(0, ScreenHeight - 64);
 }
 
 - (void)viewDidLoad {

@@ -736,7 +736,7 @@
                 vc.rootVc = self;
                 if ([item.subtitle isEqualToString:@"未认证"]) {
                     if (openStatus < 3) {
-                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:P2PTIP1 delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:P2PTIP1 delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
                         alert.tag = 10005;
                         [alert show];
                         return;

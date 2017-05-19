@@ -419,7 +419,7 @@
     if (!item.isShow) {
         return;
     }
-    if ([item.title isEqualToString:@"P2P账户"]) {
+    if ([item.title isEqualToString:@"微金账户"]) {
         self.accoutType =  SelectAccoutTypeP2P;
     }
     else if ([item.title isEqualToString:@"尊享账户"]) {
@@ -467,7 +467,7 @@
 }
 - (void)showHSAlert:(NSString *)alertMessage
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:alertMessage delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:alertMessage delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
     alert.tag =  self.accoutType == SelectAccoutTypeP2P ? 8000 :8010;
     [alert show];
 }
