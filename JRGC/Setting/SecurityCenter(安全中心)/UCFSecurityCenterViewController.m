@@ -736,6 +736,11 @@
             case 0: {
                 vc.rootVc = self;
                 if ([item.subtitle isEqualToString:@"未认证"]) {
+                    HSHelper *helper = [HSHelper new];
+                    if (![helper checkP2POrWJIsAuthorization:SelectAccoutTypeP2P]) {//先授权
+                        [helper pushP2POrWJAuthorizationType:SelectAccoutTypeP2P nav:self.navigationController];
+                        return;
+                    }
                     if (openStatus < 3) {
                         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:P2PTIP1 delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
                         alert.tag = 10005;

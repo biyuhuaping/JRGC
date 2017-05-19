@@ -56,6 +56,7 @@
             [dict setValue:self.dataDict[@"merchantId"] forKey:@"merchantId"];
             [dict setValue:self.dataDict[@"sign"] forKey:@"sign"];
             [dict setValue:tmpArr forKey:@"bankList"];
+            [P2PWalletHelper sharedManager].source = GetWalletDataTwoBank;
             [[P2PWalletHelper sharedManager] refreshWalletData:dict];
             [self getToBack];
         } else {

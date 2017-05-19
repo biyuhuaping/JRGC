@@ -92,12 +92,15 @@
 {
     self.ordinaryBid = [[UCFOrdinaryBidController alloc]initWithNibName:@"UCFOrdinaryBidController" bundle:nil];
     self.ordinaryBid.view.frame = CGRectMake(0, 44, ScreenWidth, ScreenHeight - 64 -44);
+    self.ordinaryBid.rootVc = self;
     [self addChildViewController:self.ordinaryBid];
     self.batchBid = [[UCFBatchBidController alloc]initWithNibName:@"UCFBatchBidController" bundle:nil];
     self.batchBid.view.frame = CGRectMake(0, 44, ScreenWidth, ScreenHeight - 64 -44);
+    self.batchBid.rootVc = self;
     [self addChildViewController:self.batchBid];
     self.p2PTransferVC = [[UCFP2PTransferViewController alloc]initWithNibName:@"UCFP2PTransferViewController" bundle:nil];
     self.p2PTransferVC.view.frame = CGRectMake(0, 44, ScreenWidth, ScreenHeight - 64 -44);
+    self.p2PTransferVC.rootVc = self;
     [self addChildViewController:self.p2PTransferVC];
 }
 

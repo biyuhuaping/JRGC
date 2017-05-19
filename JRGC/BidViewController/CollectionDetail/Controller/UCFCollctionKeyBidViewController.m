@@ -608,6 +608,7 @@
             webView.webDataDic = reqDict;
             webView.navTitle = @"集合标匹配中";
 //            webView.rootVc = @"collctionKeyBidVC";
+            webView.rootVc = self.rootVc;
             [self.navigationController pushViewController:webView animated:YES];
             NSMutableArray *navVCArray = [[NSMutableArray alloc] initWithArray:self.navigationController.viewControllers];
             [navVCArray removeObjectAtIndex:navVCArray.count-2];

@@ -219,6 +219,7 @@
             UCFProjectDetailViewController *controller = [[UCFProjectDetailViewController alloc] initWithDataDic:dic isTransfer:YES withLabelList:nil];
             controller.sourceVc = @"transiBid";
             controller.accoutType = SelectAccoutTypeP2P;
+            controller.rootVc = self.rootVc;
             [self.navigationController pushViewController:controller animated:YES];
         }else {
             [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
@@ -230,7 +231,7 @@
         if([dic[@"status"] integerValue] == 1)
         {
             UCFPurchaseTranBidViewController *purchaseViewController = [[UCFPurchaseTranBidViewController alloc] initWithNibName:@"UCFPurchaseTranBidViewController" bundle:nil];
-            purchaseViewController.rootVc = self.parentViewController.parentViewController;
+            purchaseViewController.rootVc = self.rootVc;
             purchaseViewController.dataDict = dic;
             purchaseViewController.baseTitleType = @"detail_heTong";
             purchaseViewController.accoutType = SelectAccoutTypeP2P;

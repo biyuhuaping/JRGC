@@ -66,7 +66,7 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [[P2PWalletHelper sharedManager] getUserWalletData];
+    [[P2PWalletHelper sharedManager] getUserWalletData:[P2PWalletHelper sharedManager].source];
 }
 - (void)didReceiveMemoryWarning
 {

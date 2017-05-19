@@ -68,6 +68,7 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadHonerPlanData" object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadP2PData" object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"LatestProjectUpdate" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
     if (self.rootVc) {
         [self.navigationController popToViewController:self.rootVc animated:YES];
     }

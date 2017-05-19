@@ -183,6 +183,8 @@
             UCFProjectDetailViewController *controller = [[UCFProjectDetailViewController alloc] initWithDataDic:dic isTransfer:NO withLabelList:prdLabelsListTemp];
             CGFloat platformSubsidyExpense = [_projectListModel.platformSubsidyExpense floatValue];
             [[NSUserDefaults standardUserDefaults] setValue:[NSString stringWithFormat:@"%.1f",platformSubsidyExpense] forKey:@"platformSubsidyExpense"];
+            controller.rootVc = self.rootVc;
+            controller.accoutType = SelectAccoutTypeP2P;
             [self.navigationController pushViewController:controller animated:YES];
         }else {
             [AuxiliaryFunc showAlertViewWithMessage:rsttext];
@@ -194,10 +196,11 @@
         if([dic[@"status"] integerValue] == 1)
         {
             UCFPurchaseBidViewController *purchaseViewController = [[UCFPurchaseBidViewController alloc] initWithNibName:@"UCFPurchaseBidViewController" bundle:nil];
-            purchaseViewController.rootVc = self.parentViewController.parentViewController;
+            purchaseViewController.rootVc = self.rootVc;
             purchaseViewController.dataDict = dic;
             purchaseViewController.bidType = 0;
             purchaseViewController.baseTitleType = @"detail_heTong";
+            purchaseViewController.accoutType = SelectAccoutTypeP2P;
             [self.navigationController pushViewController:purchaseViewController animated:YES];
             
         }else if ([dic[@"status"] integerValue] == 21 || [dic[@"status"] integerValue] == 22){

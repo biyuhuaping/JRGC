@@ -244,6 +244,8 @@
                                     UCFProjectDetailViewController *controller = [[UCFProjectDetailViewController alloc] initWithDataDic:dic isTransfer:NO withLabelList:prdLabelsListTemp];
                                     CGFloat platformSubsidyExpense = [model.platformSubsidyExpense floatValue];
                                     [[NSUserDefaults standardUserDefaults] setValue:[NSString stringWithFormat:@"%.1f",platformSubsidyExpense] forKey:@"platformSubsidyExpense"];
+                                    controller.accoutType = self.accoutType;
+                                    controller.rootVc = self;
                                     [weakSelf.navigationController pushViewController:controller animated:YES];
                                 }else {
                                     [AuxiliaryFunc showAlertViewWithMessage:rsttext];
@@ -268,6 +270,8 @@
                                     UCFProjectDetailViewController *controller = [[UCFProjectDetailViewController alloc] initWithDataDic:dic isTransfer:NO withLabelList:prdLabelsListTemp];
                                     CGFloat platformSubsidyExpense = [model.platformSubsidyExpense floatValue];
                                     [[NSUserDefaults standardUserDefaults] setValue:[NSString stringWithFormat:@"%.1f",platformSubsidyExpense] forKey:@"platformSubsidyExpense"];
+                                    controller.accoutType = self.accoutType;
+                                    controller.rootVc = self;
                                     [weakSelf.navigationController pushViewController:controller animated:YES];
                                 }else {
                                     [AuxiliaryFunc showAlertViewWithMessage:rsttext];
@@ -332,6 +336,8 @@
                         purchaseViewController.bidType = 0;
                         purchaseViewController.baseTitleType = @"detail_heTong";
                         purchaseViewController.accoutType = self.accoutType;
+                        purchaseViewController.accoutType = self.accoutType;
+                        purchaseViewController.rootVc = self;
                     [weakSelf.navigationController pushViewController:purchaseViewController animated:YES];
                    }
                 }];

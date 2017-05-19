@@ -169,6 +169,8 @@
             alertView.tag = 10001;
             [[NSNotificationCenter defaultCenter] postNotificationName:@"setDefaultViewData" object:nil];
             [[NSUserDefaults standardUserDefaults]setValue:nil forKey:UUID];
+            [[UserInfoSingle sharedManager] removeUserInfo];
+            [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"changScale"];
             [[NSUserDefaults standardUserDefaults]synchronize];
             [alertView show];
         }
@@ -186,6 +188,7 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (alertView.tag == 10001) {
+         [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self.navigationController popToRootViewControllerAnimated:NO];
         });

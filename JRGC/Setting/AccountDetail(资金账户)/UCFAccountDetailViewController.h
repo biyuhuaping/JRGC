@@ -10,4 +10,6 @@
 
 @interface UCFAccountDetailViewController : UCFBaseViewController
 
+@property (nonatomic,assign)NSInteger selectedSegmentIndex;
+
 @end
