@@ -200,7 +200,7 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:BACK_TO_BANNER object:nil];//返回banner时刷新
             AppDelegate *delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
             [[NSNotificationCenter defaultCenter] postNotificationName:IS_RELOADE_URL object:nil];
-            [[P2PWalletHelper sharedManager] getUserWalletData];
+//            [[P2PWalletHelper sharedManager] getUserWalletData];
 
             [delegate.tabBarController dismissViewControllerAnimated:NO completion:^{
                 [LLLockPassword saveLockPassword:nil];

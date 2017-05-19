@@ -7,7 +7,7 @@
 //
 
 #import "AccountSuccessVC.h"
-
+#import "P2PWalletHelper.h"
 @interface AccountSuccessVC ()
 
 @property (strong, nonatomic) IBOutlet UIButton *submitDataButton;
@@ -40,8 +40,9 @@
 - (IBAction)submitDataButton:(id)sender {
     DBLOG(@"设置交易密码")
     if (_fromVC == 1) {
+        [P2PWalletHelper sharedManager].source = GetWalletDataOpenHS;
         [self dismissViewControllerAnimated:YES completion:^{
-            
+            [[P2PWalletHelper sharedManager] changeTabMoveToWalletTabBar];
         }];
     } else {
         //请求成功后，发通知到 UCFOldUserGuideHeadViewController.m  设置 isFirstComingPassWord 为yes
