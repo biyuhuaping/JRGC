@@ -143,7 +143,7 @@
         
         UCFSettingItem *myInVest = [UCFSettingArrowItem itemWithIcon:nil title:@"我的出借" destVcClass:[MyViewController class]];
         UCFSettingItem *backMoneyDetail = [UCFSettingArrowItem itemWithIcon:nil title:@"回款明细" destVcClass:[UCFBackMoneyDetailViewController class]];
-        UCFSettingItem *feedBackVC = [UCFSettingArrowItem itemWithIcon:nil title:@"邀请返利" destVcClass:[UCFInvitationRebateViewController class]];
+        UCFSettingItem *feedBackVC = [UCFSettingArrowItem itemWithIcon:nil title:@"邀请获利" destVcClass:[UCFInvitationRebateViewController class]];
         
         
         
@@ -314,10 +314,10 @@
 //        backMoneyDetailVC.superViewController = self;
         backMoneyDetailVC.accoutType = self.accoutType;
         [self.navigationController pushViewController:backMoneyDetailVC animated:YES];
-    }else if ([titleStr isEqualToString:@"邀请返利"]){
+    }else if ([titleStr isEqualToString:@"邀请获利"]){
         
         UCFInvitationRebateViewController *feedBackVC = [[UCFInvitationRebateViewController alloc] initWithNibName:@"UCFInvitationRebateViewController" bundle:nil];
-        feedBackVC.title = @"邀请返利";
+        feedBackVC.title = @"邀请获利";
         feedBackVC.accoutType = self.accoutType;
         [self.navigationController pushViewController:feedBackVC animated:YES];
     }
@@ -404,7 +404,7 @@
                 HSHelper *helper = [HSHelper new];
                 [helper pushOpenHSType:type Step:3 nav:weakSelf.navigationController];
             }
-        } otherButtonTitles:@"确定"];
+        } otherButtonTitles:@"确认"];
         [alert show];
         return NO;
     }

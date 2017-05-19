@@ -277,7 +277,7 @@
 }
 - (void)showHSAlert:(NSString *)alertMessage
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:alertMessage delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:alertMessage delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
     alert.tag = 8000;
     [alert show];
 }

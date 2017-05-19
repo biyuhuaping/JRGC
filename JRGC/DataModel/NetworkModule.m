@@ -1250,6 +1250,9 @@ static NetworkModule *gInstance = NULL;
         case KSXTagWalletShowMsg:
             parameter = [NEW_SERVER_IP stringByAppendingString:WALLETSHOW];
             break;
+        case kSXTagWalletSelectBankCar:
+            parameter = [NEW_SERVER_IP stringByAppendingString:WALLETSELECTBANKCARD];
+            break;
         case KSXTagMyInviteRebateinfo:
             parameter = [NEW_SERVER_IP stringByAppendingString:MYINVITEREBATEINFOURL];
             break;

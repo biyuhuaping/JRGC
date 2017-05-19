@@ -207,7 +207,7 @@
     
     SelectAccoutType accoutType = SelectAccoutDefault;
     
-    if ([item.title isEqualToString:@"P2P账户"]) {
+    if ([item.title isEqualToString:@"微金账户"]) {
         accoutType =  SelectAccoutTypeP2P;
     }
     else if ([item.title isEqualToString:@"尊享账户"]) {

@@ -34,15 +34,38 @@
     [self addBankView];
 }
 - (IBAction)bottomButtonclicked:(UIButton *)sender {
-    NSMutableArray *tmpArr = [NSMutableArray arrayWithCapacity:1];
-    [tmpArr addObject:[self.dataDict[@"bankList"] objectAtIndex:selectIndex]];
-    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:4];
-    [dict setValue:self.dataDict[@"isOpen"] forKey:@"isOpen"];
-    [dict setValue:self.dataDict[@"merchantId"] forKey:@"merchantId"];
-    [dict setValue:self.dataDict[@"sign"] forKey:@"sign"];
-    [dict setValue:tmpArr forKey:@"bankList"];
-    [[P2PWalletHelper sharedManager] refreshWalletData:dict];
-    [self getToBack];
+    
+    NSDictionary *dic = [self.dataDict[@"bankList"] objectAtIndex:selectIndex];
+    [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"selectType":dic[@"accType"]} tag:kSXTagWalletSelectBankCar owner:self signature:YES Type:SelectAccoutDefault];
+}
+
+-(void)beginPost:(kSXTag)tag
+{
+    
+}
+-(void)endPost:(id)result tag:(NSNumber*)tag
+{
+    NSString *data = (NSString *)result;
+    NSMutableDictionary *dic = [data objectFromJSONString];
+    if (tag.intValue == kSXTagWalletSelectBankCar) {
+        if ([dic[@"ret"] boolValue]) {
+            NSMutableArray *tmpArr = [NSMutableArray arrayWithCapacity:1];
+            [tmpArr addObject:[self.dataDict[@"bankList"] objectAtIndex:selectIndex]];
+            NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:4];
+            [dict setValue:self.dataDict[@"isOpen"] forKey:@"isOpen"];
+            [dict setValue:self.dataDict[@"merchantId"] forKey:@"merchantId"];
+            [dict setValue:self.dataDict[@"sign"] forKey:@"sign"];
+            [dict setValue:tmpArr forKey:@"bankList"];
+            [[P2PWalletHelper sharedManager] refreshWalletData:dict];
+            [self getToBack];
+        } else {
+            [MBProgressHUD displayHudError:dic[@"message"]];
+        }
+    }
+}
+-(void)errorPost:(NSError*)err tag:(NSNumber*)tag
+{
+    [MBProgressHUD displayHudError:@"请稍后再试"];
 }
 - (void)addBankView
 {

@@ -186,7 +186,7 @@
 }
 - (void)dealloc
 {
-    [[MongoliaLayerCenter sharedManager] showLogic];
+//    [[MongoliaLayerCenter sharedManager] showLogic];
 }
 
 /*
