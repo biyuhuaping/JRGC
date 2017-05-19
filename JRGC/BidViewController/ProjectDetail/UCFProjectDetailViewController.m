@@ -518,6 +518,7 @@
         strParameters = [NSString stringWithFormat:@"userId=%@&prdClaimId=%@&contractType=%@&prdType=0",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],projectId,contractTypeStr];
     }
      [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+     self.accoutType = _isP2P ? SelectAccoutTypeP2P : SelectAccoutTypeHoner;
      [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetContractMsg owner:self Type:self.accoutType];
 }
 
