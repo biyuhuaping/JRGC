@@ -127,10 +127,10 @@
 #pragma mark -点击查看流水页面
 -(void)rightClicked
 {
-    UCFHuiBuinessDetailViewController *buinessDetail = [[UCFHuiBuinessDetailViewController alloc] initWithNibName:@"UCFHuiBuinessDetailViewController" bundle:nil];
-    buinessDetail.title = @"徽商资金流水";
-    buinessDetail.accoutType = self.accoutType;
-    [self.navigationController pushViewController:buinessDetail animated:YES];
+    UCFAccountDetailViewController *accountDetailVC = [[UCFAccountDetailViewController alloc] initWithNibName:@"UCFAccountDetailViewController" bundle:nil];
+    accountDetailVC.selectedSegmentIndex = 1;
+    accountDetailVC.accoutType = self.accoutType;
+    [self.navigationController pushViewController:accountDetailVC animated:YES];
 }
 
 

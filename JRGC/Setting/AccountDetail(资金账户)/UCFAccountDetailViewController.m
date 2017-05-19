@@ -125,8 +125,13 @@
     }];
     
     // 马上进入刷新状态
-    [self.accumulateTableview.header beginRefreshing];
-    [_selectedStateArray addObject:@(0)];
+    if(self.selectedSegmentIndex == 1){
+        [self.fundsTableView.header beginRefreshing];
+        [_selectedStateArray containsObject:@(1)];
+    }else{
+        [self.accumulateTableview.header beginRefreshing];
+        [_selectedStateArray addObject:@(0)];
+    }
 }
 
 #pragma mark 获取网络数据
@@ -362,6 +367,14 @@
     
     self.itemSelectedView.sectionTitles = @[@"款项总览", @"资金流水"];
     self.itemSelectedView.delegate = self;
+    self.itemSelectedView.segmentedControl.selectedSegmentIndex = self.selectedSegmentIndex;
+    if(self.selectedSegmentIndex == 1){
+        
+        [UIView animateWithDuration:0.3 animations:^{
+            [self.bgScrollview setContentOffset:CGPointMake(ScreenWidth, 0)];
+        }];
+        [self.fundsTableView.header beginRefreshing];
+    }
 }
 
 // 404错误界面的代理方法

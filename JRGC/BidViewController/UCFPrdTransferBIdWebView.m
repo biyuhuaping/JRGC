@@ -56,6 +56,7 @@
 -(void)getToBack{
     [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadHonerTransferData" object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadP2PTransferData" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
     UCFBaseViewController *vc = self.rootVc;
     if (vc) {
         [self.navigationController popToViewController:vc animated:YES];
