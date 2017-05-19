@@ -747,6 +747,7 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
 //            [[NSUserDefaults standardUserDefaults] setValue:[NSString stringWithFormat:@"%.1f",platformSubsidyExpense] forKey:@"platformSubsidyExpense"];
             controller.sourceVc = @"collection";
             self.intoViewControllerStr = @"ProjectDetailVC";
+            controller.rootVc = self.rootVc;
 //            controller.isHideNavigationBar = YES;
             [self.navigationController pushViewController:controller animated:YES];
         }else  {

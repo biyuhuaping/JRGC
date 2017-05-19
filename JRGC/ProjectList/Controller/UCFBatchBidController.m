@@ -229,6 +229,7 @@
             collectionDetailVC.souceVC = @"P2PVC";
             collectionDetailVC.colPrdClaimId = _colPrdClaimIdStr;
             collectionDetailVC.detailDataDict = [dic objectSafeDictionaryForKey:@"data"];
+            collectionDetailVC.rootVc = self.rootVc;
             [self.navigationController pushViewController:collectionDetailVC  animated:YES];
         
         }else {

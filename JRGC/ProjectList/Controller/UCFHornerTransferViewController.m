@@ -226,6 +226,7 @@
             UCFProjectDetailViewController *controller = [[UCFProjectDetailViewController alloc] initWithDataDic:dic isTransfer:YES withLabelList:nil];
             controller.sourceVc = @"transiBid";
             controller.accoutType = SelectAccoutTypeHoner;
+            controller.rootVc = self.rootVc;
             [self.navigationController pushViewController:controller animated:YES];
         }else {
             [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
@@ -240,6 +241,7 @@
             purchaseViewController.dataDict = dic;
             purchaseViewController.baseTitleType = @"detail_heTong";
             purchaseViewController.accoutType = SelectAccoutTypeHoner;
+            purchaseViewController.rootVc = self.rootVc;
             [self.navigationController pushViewController:purchaseViewController animated:YES];
         } else if ([dic[@"status"] integerValue] == 3 || [dic[@"status"] integerValue] == 4) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:dic[@"statusdes"] delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];

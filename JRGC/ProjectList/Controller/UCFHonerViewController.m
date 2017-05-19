@@ -73,9 +73,11 @@
 {
     self.honerPlanVC = [[UCFHonerPlanViewController alloc]initWithNibName:@"UCFHonerPlanViewController" bundle:nil];
     self.honerPlanVC.view.frame = CGRectMake(0, 44, ScreenWidth, ScreenHeight - 64 - 44);
+    self.honerPlanVC.rootVc = self;
     [self addChildViewController:self.honerPlanVC];
     self.hornerTransferVC = [[UCFHornerTransferViewController alloc]initWithNibName:@"UCFHornerTransferViewController" bundle:nil];
     self.hornerTransferVC.view.frame = CGRectMake(0, 44, ScreenWidth, ScreenHeight - 64 - 44);
+    self.hornerTransferVC.rootVc = self;
     [self addChildViewController:self.hornerTransferVC];
     
 }

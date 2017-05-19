@@ -62,20 +62,18 @@
     //    }
 //    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadHonerPlanData" object:nil];
 //    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadP2PData" object:nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"LatestProjectUpdate" object:nil];
-    if ([self.rootVc isEqualToString:@"collectionDetailVC"]) {
-        [self.navigationController popViewControllerAnimated:YES];
-    }else{
-        [self.navigationController popToRootViewControllerAnimated:YES];
-    }
+    [self jsClose];
 }
 - (void)jsClose
 {
-    if ([self.rootVc isEqualToString:@"collectionDetailVC"]) {
-        [self.navigationController popViewControllerAnimated:YES];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"LatestProjectUpdate" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
+    if (self.rootVc) {
+        [self.navigationController popToViewController:self.rootVc animated:YES];
     }else{
         [self.navigationController popToRootViewControllerAnimated:YES];
     }
+   
 }
 - (void)jsInvestSuc:(BOOL)isSuc
 {

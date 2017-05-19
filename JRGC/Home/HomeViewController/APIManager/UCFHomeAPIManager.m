@@ -127,7 +127,12 @@
                 [tempArray addObject:tempG];
             }
             if ([[result allKeys] containsObject:@"authorization"]) {
-                [[MongoliaLayerCenter sharedManager].mongoliaLayerDic setValue:result[@"authorization"] forKey:@"authorization"];
+                BOOL authorization =  [[result objectSafeForKey:@"authorization"] boolValue];
+                if (authorization) {
+                   [[MongoliaLayerCenter sharedManager].mongoliaLayerDic setValue:[NSNumber numberWithInt:1] forKey:@"authorization"];
+                }else{
+                   [[MongoliaLayerCenter sharedManager].mongoliaLayerDic setValue:[NSNumber numberWithInt:0] forKey:@"authorization"];
+                }
             }
             UCFHomeListCellModel *homelistModel = [UCFHomeListCellModel homeListCellWithDict:result];
             [tempResult setObject:tempArray forKey:@"homelistContent"];
