@@ -229,7 +229,8 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:REGIST_JPUSH object:nil];
             [self sendiWatchData:signatureStr withGcm:gcmCode];//登录成功之后向iWatch发送数据
             [Common addTestCookies];//app审核用的灰度
-            [[P2PWalletHelper sharedManager] getUserWalletData];
+            //因为tabBar viewWillAppear 里面有 所以就不再调用
+//            [[P2PWalletHelper sharedManager] getUserWalletData];
 
         } else {
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:dic[@"message"] delegate:nil cancelButtonTitle:@"重新输入" otherButtonTitles:nil];

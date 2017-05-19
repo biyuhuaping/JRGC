@@ -49,7 +49,7 @@
 }
 - (BOOL)checkUserHSStateCanOpenWallet
 {
-    if (!self.paramDict) {
+    if (!self.paramDict || [self.paramDict[@"bankList"] count] == 0) {
         AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
         __weak typeof(app.tabBarController) weakSelf = app.tabBarController;
         BlockUIAlertView *alert = [[BlockUIAlertView alloc] initWithTitle:@"提示" message:@"绑定银行卡后，才可以访问生活频道" cancelButtonTitle:@"取消" clickButton:^(NSInteger index){
@@ -77,6 +77,12 @@
     }else if([self.paramDict[@"bankList"] count] == 1) {
         //更新用户数据
         [self refreshWalletData:self.paramDict];
+        NSDictionary *dic = [self.paramDict[@"bankList"] objectAtIndex:0];
+        NSDictionary *dataDic = self.paramDict [@"data"];
+        if (![dataDic[@"isBindCard"] boolValue]) {
+            [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"selectType":dic[@"accType"]} tag:kSXTagWalletSelectBankCar owner:self signature:YES Type:SelectAccoutDefault];
+        }
+
         return YES;
     }
     return YES;
@@ -100,7 +106,7 @@
     [self changeTabMoveToWalletTabBar];
 }
 #pragma mark NetworkModuleDelegate
-- (void)getUserWalletData
+- (void)getUserWalletData:(GetWalletDataSource)source;
 {
     if ([[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
         [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID]} tag:KSXTagWalletShowMsg owner:self signature:YES Type:SelectAccoutDefault];
@@ -120,12 +126,28 @@
             self.paramDict = dataDict;
             //1银行卡默认被选中，存储到本地
             if ([self.paramDict[@"bankList"] count] == 1) {
+                if (self.source == GetWalletDataOpenHS) {
+                    [UcfWalletSDK refreshWalletVC:[self resetWalletDataDict:self.paramDict] navTitle:@"生活" walletVC:_walletController];
+                    //去绑定开通的这张银行卡
+                    if (![dataDict[@"isBindCard"] boolValue]) {
+                        [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"selectType":dic[@"accType"]} tag:kSXTagWalletSelectBankCar owner:self signature:YES Type:SelectAccoutDefault];
+                    }
+                } else if (self.source == GetWalletDataTwoBank) {
+                    
+                }
                 [[NSUserDefaults standardUserDefaults] setValue:dataDict forKey:WALLET_DATADICT];
             }
         } else {
 
         }
+    } else if (tag.integerValue == kSXTagWalletSelectBankCar) {
+        if ([dic[@"ret"] boolValue]) {
+         
+        } else {
+            
+        }
     }
+    
 }
 -(void)errorPost:(NSError*)err tag:(NSNumber*)tag
 {
