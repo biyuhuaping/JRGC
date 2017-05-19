@@ -27,7 +27,7 @@
 #import "HSHelper.h"
 #define UserInfoViewHeight  327
 
-@interface UCFUserInformationViewController () <UCFUserPresenterUserInfoCallBack, UITableViewDelegate, UITableViewDataSource, SDCycleScrollViewDelegate, UIAlertViewDelegate>
+@interface UCFUserInformationViewController () <UCFUserPresenterUserInfoCallBack, UITableViewDelegate, UITableViewDataSource, SDCycleScrollViewDelegate, UIAlertViewDelegate, UCFNoticeViewDelegate>
 @property (strong, nonatomic) UCFUserPresenter *presenter;
 
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
@@ -66,6 +66,7 @@
 @property (copy, nonatomic) NSString *addProfit;
 @property (copy, nonatomic) NSString *asset;
 @property (copy, nonatomic) NSString *availableBanlance;
+
 @end
 
 @implementation UCFUserInformationViewController
@@ -117,10 +118,11 @@
 //    self.navigationController.navigationBar.hidden = YES;
     
     UCFNoticeView *noticeView = (UCFNoticeView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFNoticeView" owner:self options:nil] lastObject];
+    noticeView.delegate = self;
     [self.noticeBackView addSubview:noticeView];
     self.noticeView = noticeView;
     
-    self.visibleBtn.selected = [[NSUserDefaults standardUserDefaults] boolForKey:@"isVisible"];
+    self.visibleBtn.selected = ![[NSUserDefaults standardUserDefaults] boolForKey:@"isVisible"];
     
     self.userIconImageView.layer.cornerRadius = CGRectGetWidth(self.userIconImageView.frame) * 0.5;
     self.userIconImageView.clipsToBounds = YES;
@@ -140,6 +142,7 @@
     [super viewDidLayoutSubviews];
     self.cycleImageView.frame = self.cycleImageBackView.bounds;
     self.noticeView.frame = self.noticeBackView.bounds;
+    self.noticeView.noticeLabel.text = self.noticeStr;
 }
 
 #pragma mark - 根据所对应的presenter生成当前controller
@@ -507,4 +510,19 @@
     [self sign:self.sign];
 }
 
+#pragma mark - 刷新公告
+- (void)refreshNotice
+{
+    BOOL isShowNotice = [[NSUserDefaults standardUserDefaults] boolForKey:@"isShowNotice"];
+    self.noticeBackViewHeight.constant = isShowNotice ? 35 : 0;
+}
+
+#pragma mark - noticeView 的代理
+- (void)noticeView:(UCFNoticeView *)noticeView didClickedCloseButton:(UIButton *)closeBtn
+{
+    self.noticeBackViewHeight.constant = 0;
+    if ([self.delegate respondsToSelector:@selector(closeNotice)]) {
+        [self.delegate closeNotice];
+    }
+}
 @end

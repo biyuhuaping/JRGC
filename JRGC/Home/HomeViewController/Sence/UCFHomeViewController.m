@@ -285,9 +285,6 @@
             p2PVC.viewType = @"2";
             [p2PVC setCurrentViewForBatchBid];
             [self.navigationController pushViewController:p2PVC animated:YES];
-            
-            
-            
         }
         else if (model.moedelType == UCFHomeListCellModelTypeOneImageBondTransfer) {
             // 债券转让
@@ -406,17 +403,40 @@
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];//上层交互逻辑
         if ([result isKindOfClass:[NSDictionary class]]) {
             //请求成功
-            weakSelf.userInfoVC.siteNoticeStr = [result objectForKey:@"siteNotice"];
-            CGFloat userInfoViewHeight = [UCFUserInformationViewController viewHeight];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                self.userInfoVC.view.frame = CGRectMake(0, 0, ScreenWidth, userInfoViewHeight + +35);
-                [self.homeListVC.tableView reloadData];
-            });
+            if ([UserInfoSingle sharedManager].userId) {
+                NSString *siteNotice = [result objectForKey:@"siteNotice"];
+                NSString *originSiteNotice = [[NSUserDefaults standardUserDefaults] stringForKey:@"originSiteNotice"];
+                if (![originSiteNotice isEqualToString:siteNotice] && (siteNotice != nil)) {
+                    [[NSUserDefaults standardUserDefaults] setValue:siteNotice forKey:@"originSiteNotice"];
+                    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isShowNotice"];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                        weakSelf.userInfoVC.noticeStr = siteNotice;
+                        [weakSelf refreshNotice];
+                    });
+                }
+            }
         }
         else if ([result isKindOfClass:[NSString class]]) {
             [AuxiliaryFunc showToastMessage:result withView:weakSelf.view];
         }
     }];
+}
+
+#pragma mark - 刷新公告
+- (void)refreshNotice
+{
+    BOOL isShowNotice = [[NSUserDefaults standardUserDefaults] boolForKey:@"isShowNotice"];
+    CGFloat userInfoViewHeight = [UCFUserInformationViewController viewHeight];
+    if (isShowNotice) {
+        self.userInfoVC.view.frame = CGRectMake(0, 0, ScreenWidth, userInfoViewHeight+35);
+        [self.userInfoVC refreshNotice];
+    }
+    else {
+        self.userInfoVC.view.frame = CGRectMake(0, 0, ScreenWidth, userInfoViewHeight);
+        [self.userInfoVC refreshNotice];
+    }
+    [self.homeListVC.tableView reloadData];
 }
 
 #pragma mark - userInfoVC 的代理方法
@@ -471,6 +491,12 @@
             break;
     }
 }
+
+- (void)closeNotice
+{
+    [self refreshNotice];
+}
+
 - (void)showHSAlert:(NSString *)alertMessage
 {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:alertMessage delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];

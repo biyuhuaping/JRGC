@@ -202,6 +202,7 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:@"setDefaultViewData" object:nil];
             [[UserInfoSingle sharedManager] removeUserInfo];
             [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"changScale"];
+            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isVisible"];
             [[NSUserDefaults standardUserDefaults] synchronize];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
             //安全退出后去首页

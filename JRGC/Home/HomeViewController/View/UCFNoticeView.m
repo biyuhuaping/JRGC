@@ -27,7 +27,11 @@
 }
 
 - (IBAction)noticeClose:(UIButton *)sender {
-    
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isShowNotice"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    if ([self.delegate respondsToSelector:@selector(noticeView:didClickedCloseButton:)]) {
+        [self.delegate noticeView:self didClickedCloseButton:sender];
+    }
 }
 
 
