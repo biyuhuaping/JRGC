@@ -634,6 +634,9 @@ static NetworkModule *gInstance = NULL;
             SEL sel = @selector(endPost:tag:);
             if ([req.owner respondsToSelector:sel]) {
                 NSString *data = req.result;
+                if (data.length == 0) {
+                    [MBProgressHUD displayHudError:@"网络异常"];
+                }
                 NSMutableDictionary *dic = [data objectFromJSONString];
                 //新格式接口
                 if ([[dic allKeys] containsObject:@"ret"]) {
@@ -780,12 +783,14 @@ static NetworkModule *gInstance = NULL;
 //清空数据
 - (void)cleanData{
     //退出时清cookis
+    
     [Common deleteCookies];
     [[UserInfoSingle sharedManager] removeUserInfo];
 //    [[NSUserDefaults standardUserDefaults] setValue:nil forKey:UUID];
 //    [[NSUserDefaults standardUserDefaults] setValue:nil forKey:TIME];
 //    [[NSUserDefaults standardUserDefaults] setValue:nil forKey:IDCARD_STATE];
 //    [[NSUserDefaults standardUserDefaults] setValue:nil forKey:BANKCARD_STATE];
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:FACESWITCHSTATUS];
     [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"changScale"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     [[NSNotificationCenter defaultCenter] postNotificationName:REGIST_JPUSH object:nil];

@@ -59,6 +59,8 @@
             [P2PWalletHelper sharedManager].source = GetWalletDataTwoBank;
             [[P2PWalletHelper sharedManager] refreshWalletData:dict];
             [self getToBack];
+            [[P2PWalletHelper sharedManager] changeTabMoveToWalletTabBar];
+
         } else {
             [MBProgressHUD displayHudError:dic[@"message"]];
         }
