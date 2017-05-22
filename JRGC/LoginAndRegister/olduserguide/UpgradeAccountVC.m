@@ -60,7 +60,7 @@
     [super viewDidLoad];
     
     if (_fromVC == 1) {
-        baseTitleLabel.text = @"开通徽商存管账户";
+        baseTitleLabel.text = @"开通尊享徽商存管账户";
         [self addLeftButton];
     }
     
