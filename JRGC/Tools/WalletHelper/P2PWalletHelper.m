@@ -78,8 +78,7 @@
         //更新用户数据
         [self refreshWalletData:self.paramDict];
         NSDictionary *dic = [self.paramDict[@"bankList"] objectAtIndex:0];
-        NSDictionary *dataDic = self.paramDict [@"data"];
-        if (![dataDic[@"isBindCard"] boolValue]) {
+        if (![self.paramDict[@"isBindCard"] boolValue]) {
             [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"selectType":dic[@"accType"]} tag:kSXTagWalletSelectBankCar owner:self signature:YES Type:SelectAccoutDefault];
         }
 
@@ -94,16 +93,18 @@
     [params setValue:dict[@"merchantId"] forKey:@"merchantId"];
     [params setValue:[NSString stringWithFormat:@"%@",bankDic[@"userId"]] forKey:@"userId"];
     [params setValue:bankDic[@"realName"] forKey:@"realName"];
-    [params setValue:[NSString stringWithFormat:@"%@",bankDic[@"bankCard"]] forKey:@"cardNo"];
-    [params setValue:[NSString stringWithFormat:@"%@",bankDic[@"bankPhone"]] forKey:@"mobileNo"];
+    [params setValue:[NSString stringWithFormat:@"%@",bankDic[@"idNo"]] forKey:@"cardNo"];
+    [params setValue:[NSString stringWithFormat:@"%@",bankDic[@"phone"]] forKey:@"mobileNo"];
     [params setValue:@"01" forKey:@"cardType"]; // 证件类型 01身份证，写死即可
-    [params setValue:dict[@"merchantId"] forKey:@"sign"];
+    [params setValue:[NSString stringWithFormat:@"%@",bankDic[@"bankCard"]] forKey:@"bankCardNo"];
+    [params setValue:[NSString stringWithFormat:@"%@",bankDic[@"bankPhone"]] forKey:@"bankCardPhone"];
+    [params setValue:dict[@"sign"] forKey:@"sign"];
     return params;
 }
 - (void)refreshWalletData:(NSDictionary *)dict
 {
     [UcfWalletSDK refreshWalletVC:[self resetWalletDataDict:dict] navTitle:@"生活" walletVC:_walletController];
-    [self changeTabMoveToWalletTabBar];
+//    [self changeTabMoveToWalletTabBar];
 }
 #pragma mark NetworkModuleDelegate
 - (void)getUserWalletData:(GetWalletDataSource)source;
@@ -130,7 +131,8 @@
                     [UcfWalletSDK refreshWalletVC:[self resetWalletDataDict:self.paramDict] navTitle:@"生活" walletVC:_walletController];
                     //去绑定开通的这张银行卡
                     if (![dataDict[@"isBindCard"] boolValue]) {
-                        [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"selectType":dic[@"accType"]} tag:kSXTagWalletSelectBankCar owner:self signature:YES Type:SelectAccoutDefault];
+                        NSDictionary *bankDic = self.paramDict[@"bankList"][0];
+                        [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"selectType":bankDic[@"accType"]} tag:kSXTagWalletSelectBankCar owner:self signature:YES Type:SelectAccoutDefault];
                     }
                 } else if (self.source == GetWalletDataTwoBank) {
                     
