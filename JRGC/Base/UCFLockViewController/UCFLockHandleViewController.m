@@ -305,7 +305,7 @@
     _titleLabel.text = @"设置手势";
     [self.view addSubview:_titleLabel];
     
-    self.runLabel = [[UILabel alloc] initWithFrame:CGRectMake(kIS_Iphone4?ScreenWidth - [Common calculateNewSizeBaseMachine:80]:ScreenWidth - 92,kIS_Iphone4?[Common calculateNewSizeBaseMachine:70]:56, [Common calculateNewSizeBaseMachine:50], [Common calculateNewSizeBaseMachine:13])];
+    self.runLabel = [[UILabel alloc] initWithFrame:CGRectMake(kIS_Iphone4?ScreenWidth - [Common calculateNewSizeBaseMachine:80]:ScreenWidth - 92,kIS_Iphone4?[Common calculateNewSizeBaseMachine:55]:41, [Common calculateNewSizeBaseMachine:50], [Common calculateNewSizeBaseMachine:43])];
     _runLabel.font = [UIFont systemFontOfSize:[Common calculateNewSizeBaseMachine:13]];
     _runLabel.textColor = [UIColor whiteColor];
     _runLabel.textAlignment = NSTextAlignmentRight;
