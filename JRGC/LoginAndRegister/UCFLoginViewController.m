@@ -223,6 +223,7 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:@"LatestProjectUpdate" object:nil];
             //更新个人中心数据
             [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
+            
             [self loginSuccess:dic];
             //登录成功检测一次红点
             [[NSNotificationCenter defaultCenter] postNotificationName:CHECK_RED_POINT object:nil];

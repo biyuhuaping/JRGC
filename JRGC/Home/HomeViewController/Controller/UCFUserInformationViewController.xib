@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -19,7 +19,7 @@
                 <outlet property="cycleImageBackView" destination="aIU-EY-eXv" id="ijc-vp-vyr"/>
                 <outlet property="myLevelLabel" destination="7XL-OM-LfF" id="uvv-Fe-1fb"/>
                 <outlet property="noticeBackView" destination="zZd-1h-prZ" id="2dS-by-EB0"/>
-                <outlet property="noticeBackViewHeight" destination="Amd-gQ-Ohe" id="T5N-wI-atg"/>
+                <outlet property="noticeBackViewHeight" destination="Amd-gQ-Ohe" id="I0W-wk-dps"/>
                 <outlet property="scoreLabel" destination="ztp-YF-iUI" id="fXe-Po-9ny"/>
                 <outlet property="sign" destination="VpN-vn-Mvf" id="Zat-MO-e5e"/>
                 <outlet property="tableview" destination="Xdt-ys-drQ" id="HNa-jk-jbC"/>
@@ -90,17 +90,17 @@
                                         <constraint firstAttribute="height" constant="30" id="ix9-S1-nuT"/>
                                         <constraint firstAttribute="width" constant="30" id="qFK-sd-Psx"/>
                                     </constraints>
-                                    <state key="normal" image="invisible_bule"/>
-                                    <state key="selected" image="visible_blue"/>
+                                    <state key="normal" image="visible_blue"/>
+                                    <state key="selected" image="invisible_bule"/>
                                     <connections>
                                         <action selector="visible:" destination="-1" eventType="touchUpInside" id="GkR-mT-Alr"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LPR-u1-fl8">
-                                    <rect key="frame" x="285" y="7" width="75" height="40"/>
+                                    <rect key="frame" x="210" y="7" width="150" height="40"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="40" id="RHX-sR-D7x"/>
-                                        <constraint firstAttribute="width" constant="75" id="zPR-nb-5mu"/>
+                                        <constraint firstAttribute="width" constant="150" id="zPR-nb-5mu"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="12" maxY="0.0"/>

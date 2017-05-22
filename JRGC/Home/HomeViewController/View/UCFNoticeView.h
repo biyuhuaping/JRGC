@@ -8,7 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@class UCFNoticeView;
+@protocol UCFNoticeViewDelegate <NSObject>
+
+- (void)noticeView:(UCFNoticeView *)noticeView didClickedCloseButton:(UIButton *)closeBtn;
+
+@end
+
 @interface UCFNoticeView : UIView
-@property (nonatomic, copy) NSString *noticeStr;
 @property (weak, nonatomic) IBOutlet UILabel *noticeLabel;
+@property (weak, nonatomic) id<UCFNoticeViewDelegate> delegate;
 @end

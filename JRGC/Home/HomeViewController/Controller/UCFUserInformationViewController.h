@@ -15,10 +15,12 @@
 
 - (void)proInvestAlert:(UIAlertView *)alertView didClickedWithTag:(NSInteger)tag withIndex:(NSInteger)index;
 
+- (void)closeNotice;
+
 @end
 
 @interface UCFUserInformationViewController : UIViewController
-
+@property (copy, nonatomic) NSString *noticeStr;
 @property (weak, nonatomic) id<UCFUserInformationViewControllerDelegate> delegate;
 
 #pragma mark - 根据所对应的presenter生成当前controller
@@ -36,4 +38,5 @@
 - (void)setWorkPointInfoVCGenerator:(ViewControllerGenerator)workPointInfoVCGenerator;
 - (void)setMyLevelVCGenerator:(ViewControllerGenerator)myLevelVCGenerator;
 - (void)signForRedBag;
+- (void)refreshNotice;
 @end

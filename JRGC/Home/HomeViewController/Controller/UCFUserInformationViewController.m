@@ -27,7 +27,7 @@
 #import "HSHelper.h"
 #define UserInfoViewHeight  327
 
-@interface UCFUserInformationViewController () <UCFUserPresenterUserInfoCallBack, UITableViewDelegate, UITableViewDataSource, SDCycleScrollViewDelegate, UIAlertViewDelegate>
+@interface UCFUserInformationViewController () <UCFUserPresenterUserInfoCallBack, UITableViewDelegate, UITableViewDataSource, SDCycleScrollViewDelegate, UIAlertViewDelegate, UCFNoticeViewDelegate>
 @property (strong, nonatomic) UCFUserPresenter *presenter;
 
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
@@ -57,6 +57,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *myLevelLabel;
 @property (weak, nonatomic) IBOutlet UIView *noticeBackView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *noticeBackViewHeight;
+@property (weak, nonatomic) UCFNoticeView *noticeView;
 
 @property (copy, nonatomic) NSString *beanCount;
 @property (strong, nonatomic) NSNumber *couponNumber;
@@ -65,6 +66,7 @@
 @property (copy, nonatomic) NSString *addProfit;
 @property (copy, nonatomic) NSString *asset;
 @property (copy, nonatomic) NSString *availableBanlance;
+
 @end
 
 @implementation UCFUserInformationViewController
@@ -115,7 +117,12 @@
     [super viewDidLoad];
 //    self.navigationController.navigationBar.hidden = YES;
     
-    self.visibleBtn.selected = [[NSUserDefaults standardUserDefaults] boolForKey:@"isVisible"];
+    UCFNoticeView *noticeView = (UCFNoticeView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFNoticeView" owner:self options:nil] lastObject];
+    noticeView.delegate = self;
+    [self.noticeBackView addSubview:noticeView];
+    self.noticeView = noticeView;
+    
+    self.visibleBtn.selected = ![[NSUserDefaults standardUserDefaults] boolForKey:@"isVisible"];
     
     self.userIconImageView.layer.cornerRadius = CGRectGetWidth(self.userIconImageView.frame) * 0.5;
     self.userIconImageView.clipsToBounds = YES;
@@ -134,6 +141,8 @@
 {
     [super viewDidLayoutSubviews];
     self.cycleImageView.frame = self.cycleImageBackView.bounds;
+    self.noticeView.frame = self.noticeBackView.bounds;
+    self.noticeView.noticeLabel.text = self.noticeStr;
 }
 
 #pragma mark - 根据所对应的presenter生成当前controller
@@ -230,11 +239,11 @@
     sender.selected = !sender.selected;
     [[NSUserDefaults standardUserDefaults] setBool:sender.selected forKey:@"isVisible"];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    self.myLevelLabel.text = self.memLevel;
     if (sender.selected) {
         self.beanLabel.text = self.beanCount;
         self.couponLabel.text = [NSString stringWithFormat:@"%@", self.couponNumber];
         self.scoreLabel.text = self.score;
-        self.myLevelLabel.text = self.memLevel;
         
         self.addedProfitLabel.text = self.addProfit;
         self.totalMoney.text = self.asset;
@@ -244,7 +253,6 @@
         self.beanLabel.text = @"****";
         self.couponLabel.text = @"****";
         self.scoreLabel.text = @"****";
-        self.myLevelLabel.text = @"****";
         
         self.addedProfitLabel.text = @"****";
         self.totalMoney.text = @"****";
@@ -306,9 +314,9 @@
         if ([result isKindOfClass:[UCFUserInfoModel class]]) {
             [self.tableview reloadData];
             UCFUserInfoModel *userInfo = result;
-            self.addProfit = [NSString stringWithFormat:@"%@", userInfo.interests];
-            self.asset = [NSString stringWithFormat:@"%@", userInfo.total];
-            self.availableBanlance = [NSString stringWithFormat:@"%@", userInfo.cashBalance];
+            self.addProfit = [NSString stringWithFormat:@"¥%@", userInfo.interests];
+            self.asset = [NSString stringWithFormat:@"¥%@", userInfo.total];
+            self.availableBanlance = [NSString stringWithFormat:@"¥%@", userInfo.cashBalance];
             self.sign.hidden = userInfo.isCompanyAgent;
             [self refreshUI];
         }
@@ -365,17 +373,17 @@
             
         }
     } else if (self.presenter.allDatas.count == 0) {
-        //        show error view
+//        show error view
     }
 }
 
 - (void)refreshUI
 {
+    self.myLevelLabel.text = self.memLevel ? self.memLevel : @"--";
     if (self.visibleBtn.selected) {
         self.beanLabel.text = self.beanCount ? self.beanCount : @"--";
         self.couponLabel.text = self.couponNumber ? [NSString stringWithFormat:@"%@", self.couponNumber] : @"--";
         self.scoreLabel.text = self.score ? self.score : @"--";
-        self.myLevelLabel.text = self.memLevel ? self.memLevel : @"--";
         
         self.addedProfitLabel.text = self.addProfit ? self.addProfit : @"--";
         self.totalMoney.text = self.asset ? self.asset : @"--";
@@ -385,7 +393,6 @@
         self.beanLabel.text = @"****";
         self.couponLabel.text = @"****";
         self.scoreLabel.text = @"****";
-        self.myLevelLabel.text = @"****";
         
         self.addedProfitLabel.text = @"****";
         self.totalMoney.text = @"****";
@@ -497,10 +504,25 @@
         [self.delegate proInvestAlert:alertView didClickedWithTag:alertView.tag withIndex:buttonIndex];
     }
 }
-
+#pragma mark - 签到
 - (void)signForRedBag
 {
     [self sign:self.sign];
 }
 
+#pragma mark - 刷新公告
+- (void)refreshNotice
+{
+    BOOL isShowNotice = [[NSUserDefaults standardUserDefaults] boolForKey:@"isShowNotice"];
+    self.noticeBackViewHeight.constant = isShowNotice ? 35 : 0;
+}
+
+#pragma mark - noticeView 的代理
+- (void)noticeView:(UCFNoticeView *)noticeView didClickedCloseButton:(UIButton *)closeBtn
+{
+    self.noticeBackViewHeight.constant = 0;
+    if ([self.delegate respondsToSelector:@selector(closeNotice)]) {
+        [self.delegate closeNotice];
+    }
+}
 @end
