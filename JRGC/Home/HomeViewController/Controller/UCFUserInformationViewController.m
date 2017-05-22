@@ -142,7 +142,15 @@
     [super viewDidLayoutSubviews];
     self.cycleImageView.frame = self.cycleImageBackView.bounds;
     self.noticeView.frame = self.noticeBackView.bounds;
-    self.noticeView.noticeLabel.text = self.noticeStr;
+}
+
+- (void)setNoticeStr:(NSString *)noticeStr
+{
+    _noticeStr = noticeStr;
+    if (noticeStr.length > 0) {
+        [_noticeView.noticeArray removeAllObjects];
+        [_noticeView.noticeArray addObject:noticeStr];
+    }
 }
 
 #pragma mark - 根据所对应的presenter生成当前controller

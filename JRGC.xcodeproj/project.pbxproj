@@ -285,6 +285,7 @@
 		74A0AF0F1EC341DD009E5A57 /* NSTimer+timerBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 74A0AF0B1EC341DD009E5A57 /* NSTimer+timerBlock.m */; };
 		74A0AF101EC341DD009E5A57 /* ZZCircleProgress.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 74A0AF0C1EC341DD009E5A57 /* ZZCircleProgress.bundle */; };
 		74A0AF111EC341DD009E5A57 /* ZZCircleProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = 74A0AF0E1EC341DD009E5A57 /* ZZCircleProgress.m */; };
+		74B3AD871ED2C31B00653F8B /* YFRollingLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 74B3AD861ED2C31B00653F8B /* YFRollingLabel.m */; };
 		74D7FCCC1AE8F72700653B8F /* FundAccountGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 74D7FCC91AE8F72700653B8F /* FundAccountGroup.m */; };
 		74D7FCCD1AE8F72700653B8F /* FundAccountItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 74D7FCCB1AE8F72700653B8F /* FundAccountItem.m */; };
 		74D7FCD51AE8F75000653B8F /* UCFHeadrView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74D7FCD21AE8F75000653B8F /* UCFHeadrView.m */; };
@@ -1277,6 +1278,8 @@
 		74A0AF0C1EC341DD009E5A57 /* ZZCircleProgress.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ZZCircleProgress.bundle; sourceTree = "<group>"; };
 		74A0AF0D1EC341DD009E5A57 /* ZZCircleProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZCircleProgress.h; sourceTree = "<group>"; };
 		74A0AF0E1EC341DD009E5A57 /* ZZCircleProgress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZCircleProgress.m; sourceTree = "<group>"; };
+		74B3AD851ED2C31B00653F8B /* YFRollingLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YFRollingLabel.h; sourceTree = "<group>"; };
+		74B3AD861ED2C31B00653F8B /* YFRollingLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YFRollingLabel.m; sourceTree = "<group>"; };
 		74D7FCC81AE8F72700653B8F /* FundAccountGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FundAccountGroup.h; sourceTree = "<group>"; };
 		74D7FCC91AE8F72700653B8F /* FundAccountGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FundAccountGroup.m; sourceTree = "<group>"; };
 		74D7FCCA1AE8F72700653B8F /* FundAccountItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FundAccountItem.h; sourceTree = "<group>"; };
@@ -3384,6 +3387,15 @@
 			path = ZZCircleProgress;
 			sourceTree = "<group>";
 		};
+		74B3AD841ED2C31B00653F8B /* YFRollingLabel */ = {
+			isa = PBXGroup;
+			children = (
+				74B3AD851ED2C31B00653F8B /* YFRollingLabel.h */,
+				74B3AD861ED2C31B00653F8B /* YFRollingLabel.m */,
+			);
+			path = YFRollingLabel;
+			sourceTree = "<group>";
+		};
 		74D7FCC61AE8F6EE00653B8F /* PersonalCenterModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -4330,6 +4342,7 @@
 		7BFE3EB11AC5635E002A53A2 /* ThirdLibs */ = {
 			isa = PBXGroup;
 			children = (
+				74B3AD841ED2C31B00653F8B /* YFRollingLabel */,
 				A8DE84D81EC2BC34004B3533 /* p2pWalletSDK */,
 				74A0AF091EC341DD009E5A57 /* ZZCircleProgress */,
 				749181FA1EC166F000AC1ECE /* SDCycleScrollView */,
@@ -6177,6 +6190,7 @@
 				748D776C1ADE51C900910FF7 /* UCFSettingGroup.m in Sources */,
 				74E89FF11DDD8D44000B0AFF /* UCFHonerPlanViewController.m in Sources */,
 				7BCE01F71AC8FC260084C15C /* ASIDataDecompressor.m in Sources */,
+				74B3AD871ED2C31B00653F8B /* YFRollingLabel.m in Sources */,
 				749319C11B12B6DF00143424 /* UCFProvinceModel.m in Sources */,
 				E311A6751D90EBBE00C5483E /* UCFWebViewJavascriptBridgeBanner.m in Sources */,
 				4A9016841AFB12FE0049A9E0 /* MASViewAttribute.m in Sources */,

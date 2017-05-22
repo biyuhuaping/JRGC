@@ -16,6 +16,6 @@
 @end
 
 @interface UCFNoticeView : UIView
-@property (weak, nonatomic) IBOutlet UILabel *noticeLabel;
+@property (strong, nonatomic) NSMutableArray *noticeArray;
 @property (weak, nonatomic) id<UCFNoticeViewDelegate> delegate;
 @end
