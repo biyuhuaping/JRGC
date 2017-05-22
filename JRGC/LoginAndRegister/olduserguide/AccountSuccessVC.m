@@ -27,8 +27,10 @@
     _successTipView.image = [UIImage imageNamed:imageStr];
     if (_fromVC == 1) {
         [_submitDataButton setTitle:@"进入生活频道" forState:UIControlStateNormal];
+        [[P2PWalletHelper sharedManager] getUserWalletData:GetWalletDataDefault];
     } else {
         [_submitDataButton setTitle:@"设置交易密码" forState:UIControlStateNormal];
+        [[P2PWalletHelper sharedManager] getUserWalletData:GetWalletDataOpenHS];
     }
 }
 
