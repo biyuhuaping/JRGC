@@ -126,6 +126,8 @@
 
 - (void)fetchProDetailDataWithParameter:(NSDictionary *)parameter completionHandler:(NetworkCompletionHandler)completionHander
 {
+    UCFBaseViewController *baseVC = (UCFBaseViewController *)self.userInfoViewDelegate;
+    [MBProgressHUD showHUDAddedTo:baseVC.view animated:YES];
     __weak typeof(self) weakSelf = self;
     NSString *type = [parameter objectForKey:@"type"];
     [self.apiManager fetchProDetailInfoWithParameter:parameter completionHandler:^(NSError *error, id result) {
