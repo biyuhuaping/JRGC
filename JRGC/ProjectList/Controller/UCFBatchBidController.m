@@ -139,7 +139,7 @@
             [helper pushP2POrWJAuthorizationType:self.accoutType nav:self.navigationController];
             return;
         }
-        if ([self checkUserCanInvestIsDetail:NO]) {
+        if ([self checkUserCanInvestIsDetail:YES]) {
             
             NSString *uuid = [[NSUserDefaults standardUserDefaults]valueForKey:UUID];
             NSDictionary *strParameters;

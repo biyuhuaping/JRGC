@@ -57,7 +57,7 @@
 - (void)initHonerUI
 {
     __weak typeof(self) weakSelf = self;
-    self.bottomLab.text = @"获取您的工场金服用户信息注册并开通工场尊享用户";
+    self.bottomLab.text = @"获取您的金融工场用户信息注册并开通工场尊享用户";
     _registLabel.text = @"我已阅读并同意《工场尊享用户服务协议》";
     _registLabel.userInteractionEnabled = YES;
     [_registLabel addLinkString:@"《工场尊享用户服务协议》" block:^(ZBLinkLabelModel *linkModel) {
@@ -68,7 +68,7 @@
 -(void)initP2PUI{
     __weak typeof(self) weakSelf = self;
     _registLabel.userInteractionEnabled = YES;
-    self.bottomLab.text = @"获取您的工场金服用户信息注册并开通工场微金用户";
+    self.bottomLab.text = @"获取您的金融工场用户信息注册并开通工场微金用户";
     _registLabel.text = @"我已阅读并同意《工场微金用户服务协议》";
     [_registLabel addLinkString:@"《工场微金用户服务协议》" block:^(ZBLinkLabelModel *linkModel) {
         [weakSelf showHeTong:linkModel];
