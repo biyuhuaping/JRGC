@@ -29,6 +29,12 @@
     
     self.itemTitleLabel.text = item.title;
     self.itemDescribeLabel.hidden = !item.isShow;
+    if (item.isShow) {
+        self.itemValueLabel.textColor = UIColorWithRGB(0xfd4d4c);
+    }
+    else {
+        self.itemValueLabel.textColor = UIColorWithRGB(0x999999);
+    }
     self.itemValueLabel.text = item.subtitle;
 }
 
