@@ -356,23 +356,23 @@
                 self.messageTipImageView.hidden = YES;
             }
             switch ([userInfo.memberLever intValue]) {
-                case 0:
+                case 1:
                     self.memLevel = @"普通会员";
                     break;
                     
-                case 1:
+                case 2:
                     self.memLevel = @"VIP1";
                     break;
                     
-                case 2:
+                case 3:
                     self.memLevel = @"VIP2";
                     break;
                     
-                case 3:
+                case 4:
                     self.memLevel = @"VIP3";
                     break;
                     
-                case 4:
+                case 5:
                     self.memLevel = @"VIP4";
                     break;
             }
