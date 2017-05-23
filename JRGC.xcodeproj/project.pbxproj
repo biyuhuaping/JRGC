@@ -575,6 +575,8 @@
 		84FAB60C1C7C575300D0942F /* MGSwipeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FAB6091C7C575300D0942F /* MGSwipeButton.m */; };
 		84FAB60D1C7C575300D0942F /* MGSwipeTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FAB60B1C7C575300D0942F /* MGSwipeTableCell.m */; };
 		84FFA5301C7EAA9200ACD835 /* UIScrollView+TouchScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FFA52F1C7EAA9200ACD835 /* UIScrollView+TouchScrollView.m */; };
+		A829E0A71ED42D0C00616FFE /* guideImage6_4.png in Resources */ = {isa = PBXBuildFile; fileRef = A829E0A51ED42D0C00616FFE /* guideImage6_4.png */; };
+		A829E0A81ED42D0C00616FFE /* guideImage7_4.png in Resources */ = {isa = PBXBuildFile; fileRef = A829E0A61ED42D0C00616FFE /* guideImage7_4.png */; };
 		A8AD2E3E1EB979760013DB7C /* MongoliaLayerCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = A8AD2E3D1EB979760013DB7C /* MongoliaLayerCenter.m */; };
 		A8B6B6801EC9A9F000D4E86F /* WalletBankView.m in Sources */ = {isa = PBXBuildFile; fileRef = A8B6B67F1EC9A9F000D4E86F /* WalletBankView.m */; };
 		A8B6B6821EC9AA0900D4E86F /* WalletBankView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8B6B6811EC9AA0900D4E86F /* WalletBankView.xib */; };
@@ -1795,6 +1797,8 @@
 		84FAB60B1C7C575300D0942F /* MGSwipeTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSwipeTableCell.m; sourceTree = "<group>"; };
 		84FFA52E1C7EAA9200ACD835 /* UIScrollView+TouchScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+TouchScrollView.h"; sourceTree = "<group>"; };
 		84FFA52F1C7EAA9200ACD835 /* UIScrollView+TouchScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+TouchScrollView.m"; sourceTree = "<group>"; };
+		A829E0A51ED42D0C00616FFE /* guideImage6_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guideImage6_4.png; sourceTree = "<group>"; };
+		A829E0A61ED42D0C00616FFE /* guideImage7_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guideImage7_4.png; sourceTree = "<group>"; };
 		A8AD2E3C1EB979760013DB7C /* MongoliaLayerCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MongoliaLayerCenter.h; sourceTree = "<group>"; };
 		A8AD2E3D1EB979760013DB7C /* MongoliaLayerCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MongoliaLayerCenter.m; sourceTree = "<group>"; };
 		A8B6B67E1EC9A9F000D4E86F /* WalletBankView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletBankView.h; sourceTree = "<group>"; };
@@ -5333,6 +5337,8 @@
 				FB51494F1D64441F00C26E7B /* guideImage7_1.png */,
 				FB5149501D64441F00C26E7B /* guideImage7_2.png */,
 				FB5149511D64441F00C26E7B /* guideImage7_3.png */,
+				A829E0A51ED42D0C00616FFE /* guideImage6_4.png */,
+				A829E0A61ED42D0C00616FFE /* guideImage7_4.png */,
 			);
 			name = guiviewImage;
 			path = Images/guiviewImage;
@@ -5931,6 +5937,8 @@
 				FB5149541D64441F00C26E7B /* guideImage6_3.png in Resources */,
 				74FC22801BA6A7FA00D1660A /* UCFSecurityCenterViewController.xib in Resources */,
 				4AE1E9671E1CDB9900587CE6 /* WeiboSDK.bundle in Resources */,
+				A829E0A71ED42D0C00616FFE /* guideImage6_4.png in Resources */,
+				A829E0A81ED42D0C00616FFE /* guideImage7_4.png in Resources */,
 				FBB0D4F91DF8009000D2C280 /* YWFeedbackBundle.bundle in Resources */,
 				4A809CD11B40F7A200164EE5 /* SubInvestmentCell.xib in Resources */,
 			);
@@ -6827,7 +6835,7 @@
 		83F2D5101DCB3F950041F913 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
@@ -6855,7 +6863,7 @@
 		83F2D5111DCB3F950041F913 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;

@@ -55,28 +55,18 @@
     if(ScreenHeight == 480){
         version = 6;
     }
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 4; i++) {
         UIImageView *adImageView = [[UIImageView alloc] initWithFrame:CGRectMake(ScreenWidth * i, 0, ScreenWidth,ScreenHeight)];
         adImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"guideImage%d_%d",version,i+1]];
         [guideScrollView addSubview:adImageView];
-        if (i == 2) {
+        if (i == 3) {
             UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
             if (ScreenHeight == 480 ) {
                 button.frame = CGRectMake((ScreenWidth - 210)/2, ScreenHeight - 49 - 38, 210, 38);
-//                 pageControl.center = CGPointMake(self.view.frame.size.width/2,CGRectGetMaxY(button.frame)+ 51/2); // 设置pageControl的位置
             } else {
                 button.frame = CGRectMake((ScreenWidth - 210)/2, ScreenHeight - 85 - 38, 210, 38);
 
             }
-            
-//                if (ScreenHeight == 667){
-//                button.frame = CGRectMake((ScreenWidth - 220)/2, ScreenHeight - 60 - 134/2, 210, 38);
-////                pageControl.center = CGPointMake(self.view.frame.size.width/2,CGRectGetMaxY(button.frame)+ 60/2); // 设置pageControl的位置
-//
-//            } else if (ScreenHeight == 736) {
-//                button.frame = CGRectMake((ScreenWidth-634/3)/2, ScreenHeight - 172/3 - 192/3, 634/3, 192/3);
-////                pageControl.center = CGPointMake(self.view.frame.size.width/2,CGRectGetMaxY(button.frame)+ 172/6); // 设置pageControl的位置
-//            }
             button.backgroundColor = [UIColor clearColor];
             [button setBackgroundImage:[UIImage imageNamed:@"page_btn.png"] forState:UIControlStateNormal];
             [button addTarget:self action:@selector(skipToMainWorkView) forControlEvents:UIControlEventTouchUpInside];
@@ -84,7 +74,7 @@
             adImageView.userInteractionEnabled = YES;
         }
     }
-    guideScrollView.contentSize = CGSizeMake(ScreenWidth * 3, ScreenHeight);
+    guideScrollView.contentSize = CGSizeMake(ScreenWidth * 4, ScreenHeight);
 }
 //- (void)scrollViewDidScroll:(UIScrollView *)scrollView
 //{
