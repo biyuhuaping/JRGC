@@ -21,7 +21,8 @@
     if (accoutType == SelectAccoutTypeHoner) {
         return [UserInfoSingle sharedManager].zxAuthorization;
     }else{
-          return [UserInfoSingle sharedManager].p2pAuthorization;
+        return YES;
+//          return [UserInfoSingle sharedManager].p2pAuthorization;
     }
     return NO;
 }
