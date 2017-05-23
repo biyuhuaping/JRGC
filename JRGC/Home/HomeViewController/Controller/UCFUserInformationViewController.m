@@ -58,6 +58,7 @@
 @property (weak, nonatomic) IBOutlet UIView *noticeBackView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *noticeBackViewHeight;
 @property (weak, nonatomic) UCFNoticeView *noticeView;
+@property (weak, nonatomic) IBOutlet UIImageView *messageTipImageView;
 
 @property (copy, nonatomic) NSString *beanCount;
 @property (strong, nonatomic) NSNumber *couponNumber;
@@ -142,7 +143,15 @@
     [super viewDidLayoutSubviews];
     self.cycleImageView.frame = self.cycleImageBackView.bounds;
     self.noticeView.frame = self.noticeBackView.bounds;
-    self.noticeView.noticeLabel.text = self.noticeStr;
+}
+
+- (void)setNoticeStr:(NSString *)noticeStr
+{
+    _noticeStr = noticeStr;
+    if (noticeStr.length > 0) {
+        [_noticeView.noticeArray removeAllObjects];
+        [_noticeView.noticeArray addObject:noticeStr];
+    }
 }
 
 #pragma mark - 根据所对应的presenter生成当前controller
@@ -340,6 +349,12 @@
             self.couponNumber = userInfo.couponNumber;
             self.score = userInfo.score;
             [UserInfoSingle sharedManager].gender = userInfo.sex;
+            if (userInfo.unReadMsgCount.integerValue > 0) {
+                self.messageTipImageView.hidden = NO;
+            }
+            else {
+                self.messageTipImageView.hidden = YES;
+            }
             switch ([userInfo.memberLever intValue]) {
                 case 0:
                     self.memLevel = @"普通会员";
@@ -402,6 +417,8 @@
 
 - (void)userInfoPresenter:(UCFUserPresenter *)presenter didReturnPrdClaimsDealBidWithResult:(id)result error:(NSError *)error
 {
+    UCFBaseViewController *baseVC = (UCFBaseViewController *)self.parentViewController;
+    [MBProgressHUD hideAllHUDsForView:baseVC.view animated:YES];
     NSString *rstCode = [result objectForKey:@"status"];
     NSString *rsttext = [result objectForKey:@"statusdes"];
     if ([rstCode integerValue] == 21 || [rstCode integerValue] == 22){

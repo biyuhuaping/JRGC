@@ -9,7 +9,7 @@
 #import "UCFRegistrationRecord.h"
 #import "UCFRebateCell1.h"
 #import "UCFNoDataView.h"
-
+#include "UIDic+Safe.h"
 @interface UCFRegistrationRecord ()
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
@@ -141,8 +141,10 @@
     }else if (_tableView.footer.isRefreshing){
         _pageNum ++;
     }
-    NSString *strParameters = [NSString stringWithFormat:@"userId=%@&page=%ld&rows=20",userId, (long)_pageNum];//5644
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:KSxtagFriendsRegisterList owner:self Type:SelectAccoutDefault];
+    NSString *pageStr = [NSString stringWithFormat:@"%ld",(long)_pageNum];//5644
+    NSDictionary *parameterDic = @{@"userId":userId,@"page":pageStr,@"rows":@"20"};
+    
+    [[NetworkModule sharedNetworkModule] newPostReq:parameterDic tag:kSXTagRecFriendList owner:self signature:YES Type:SelectAccoutDefault];
 }
 
 //开始请求
@@ -155,19 +157,22 @@
 {
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     NSMutableDictionary *dic = [result objectFromJSONString];
-    NSString *rstcode = dic[@"status"];
-    NSString *rsttext = dic[@"statusdes"];
+    BOOL rstcode = [dic[@"ret"]  boolValue];
+    NSString *rsttext = dic[@"message"];
     
     DBLOG(@"我的返利页：%@",dic);
     
-    _sumCommLab.text = [NSString stringWithFormat:@"%@人",dic[@"recCount"]];//人数
-    _friendCountLab.text = [NSString stringWithFormat:@"邀请投资人数:%@人",dic[@"friendCount"]];//邀请投资人数
+    NSDictionary *dataDic = [dic objectSafeDictionaryForKey:@"data"];
+    
+    _sumCommLab.text = [NSString stringWithFormat:@"%@人",[dataDic objectSafeForKey:@"userRemmendCount"]];//人数
+    _friendCountLab.text = [NSString stringWithFormat:@"邀请投资人数:%@人",[dataDic objectSafeForKey:@"friendsCount"]];//邀请投资人数
 
-    NSArray *tempArr = dic[@"pageData"][@"result"];
+    NSArray *tempArr =  [[dataDic objectSafeDictionaryForKey:@"pageData"] objectSafeArrayForKey: @"result"];
+//
     //（邀请返利-邀请注册记录）
-    if (tag.intValue == KSxtagFriendsRegisterList) {
+    if (tag.intValue == kSXTagRecFriendList) {
         _tableView.footer.hidden = NO;
-        if ([rstcode intValue] == 1) {
+        if (rstcode) {
             if (_pageNum == 1) {
                 _dataArr_1 = [NSMutableArray arrayWithArray:tempArr];
                 [_tableView.header endRefreshing];
@@ -201,7 +206,7 @@
 //请求失败
 - (void)errorPost:(NSError*)err tag:(NSNumber*)tag
 {
-    if (tag.intValue == KSxtagFriendsRegisterList) {
+    if (tag.intValue == kSXTagRecFriendList) {
         [MBProgressHUD displayHudError:err.userInfo[@"NSLocalizedDescription"]];
     }
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];

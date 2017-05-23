@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -16,12 +16,6 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="35"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="up1-jF-cVe">
-                    <rect key="frame" x="15" y="0.0" width="345" height="35"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VAD-SQ-13a">
                     <rect key="frame" x="340" y="0.0" width="35" height="35"/>
                     <constraints>
@@ -35,19 +29,12 @@
             </subviews>
             <color key="backgroundColor" red="0.35686274509803922" green="0.41176470588235292" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="up1-jF-cVe" secondAttribute="trailing" constant="15" id="6f9-Mm-Thv"/>
-                <constraint firstItem="up1-jF-cVe" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="7lb-bZ-6hA"/>
                 <constraint firstAttribute="bottom" secondItem="VAD-SQ-13a" secondAttribute="bottom" id="LvX-WL-KOb"/>
-                <constraint firstAttribute="bottom" secondItem="up1-jF-cVe" secondAttribute="bottom" id="V1R-QG-8cR"/>
                 <constraint firstItem="VAD-SQ-13a" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="VWf-HQ-6k1"/>
                 <constraint firstAttribute="trailing" secondItem="VAD-SQ-13a" secondAttribute="trailing" id="azb-IY-lfZ"/>
-                <constraint firstItem="up1-jF-cVe" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="uKT-Ca-F8h"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <connections>
-                <outlet property="noticeLabel" destination="up1-jF-cVe" id="Qpe-V3-WUI"/>
-            </connections>
         </view>
     </objects>
     <resources>
