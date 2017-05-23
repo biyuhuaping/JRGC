@@ -60,7 +60,7 @@
     [super viewDidLoad];
     
     if (_fromVC == 1) {
-        baseTitleLabel.text = @"开通徽商存管账户";
+        baseTitleLabel.text = @"开通尊享徽商存管账户";
         [self addLeftButton];
     }
     
@@ -79,7 +79,8 @@
     
     if ([_site isEqualToString:@"1"]) {
         
-        [_customLabel2 setFontColor:UIColorWithRGB(0x4aa1f9) string:@"《资金存管三方协议》、《信息咨询服务协议》"];
+//        [_customLabel2 setFontColor:UIColorWithRGB(0x4aa1f9) string:@"《资金存管三方协议》、《信息咨询服务协议》"];
+        [_customLabel2 setFontColor:UIColorWithRGB(0x4aa1f9) string:@"《资金存管三方协议》"];
         
         __weak typeof(self) weakSelf = self;
         [_customLabel2 addLinkString:@"《资金存管三方协议》" block:^(ZBLinkLabelModel *linkModel) {
@@ -87,11 +88,11 @@
             webController.baseTitleType = @"specialUser";
             [weakSelf.navigationController pushViewController:webController animated:YES];
         }];
-        [_customLabel2 addLinkString:@"《信息咨询服务协议》" block:^(ZBLinkLabelModel *linkModel) {
-            FullWebViewController *webController = [[FullWebViewController alloc] initWithWebUrl:COUNSELING title:@"信息咨询服务协议"];
-            webController.baseTitleType = @"specialUser";
-            [weakSelf.navigationController pushViewController:webController animated:YES];
-        }];
+//        [_customLabel2 addLinkString:@"《信息咨询服务协议》" block:^(ZBLinkLabelModel *linkModel) {
+//            FullWebViewController *webController = [[FullWebViewController alloc] initWithWebUrl:COUNSELING title:@"信息咨询服务协议"];
+//            webController.baseTitleType = @"specialUser";
+//            [weakSelf.navigationController pushViewController:webController animated:YES];
+//        }];
         
     } else {
         _customLabel2.text = @"开通即视为我已阅读并同意《资金账户服务三方协议》";
@@ -326,7 +327,7 @@
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
-    if (textField == _textField1 && ![Common isChinese:_textField1.text]) {
+    if (textField == _textField1 && [textField.text isEqualToString:@""] ) {//&& ![Common isChinese:_textField1.text]
         [AuxiliaryFunc showToastMessage:@"请输入正确的姓名" withView:self.view];
         return;
     }else if (textField == _textField2 && ![Common isIdentityCard:_textField2.text]){

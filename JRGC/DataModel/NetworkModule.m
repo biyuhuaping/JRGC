@@ -1271,6 +1271,9 @@ static NetworkModule *gInstance = NULL;
             parameter = [NEW_SERVER_IP stringByAppendingString:P2PAUTHORIZATIONURL];
 
             break;
+        case kSXTagRecFriendList:
+            parameter = [NEW_SERVER_IP stringByAppendingString:RECFRIENDLISTURL];
+            break;
     }
     //给原有参数字典添加公共参数
     if (!data) {
