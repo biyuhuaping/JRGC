@@ -138,7 +138,7 @@
 {
     _dragBtn = [[BJGridItem alloc] initWithTitle:nil withImageName:@"home_icon_rebate" atIndex:0 editable:NO];
     
-    [_dragBtn setFrame:CGRectMake(20, 120, 64, 64)];
+    [_dragBtn setFrame:CGRectMake(ScreenWidth - 62 - 6, ScreenHeight - 49 - 65 - 6, 62, 65)];
     _dragBtn.delegate = self;
     [self.view addSubview: _dragBtn];
 }
@@ -169,9 +169,9 @@
 - (void) gridItemDidEndMoved:(BJGridItem *) gridItem withLocation:(CGPoint)point moveGestureRecognizer:(UILongPressGestureRecognizer*) recognizer{
     CGPoint _point = [recognizer locationInView:self.view];
     if (_point.x < ScreenWidth / 2) {
-        _point.x = 0;
+        _point.x = 6;
     } else {
-        _point.x = ScreenWidth - gridItem.frame.size.width;
+        _point.x = ScreenWidth - gridItem.frame.size.width - 6;
     }
     
     if (_point.y < 0) {
@@ -181,8 +181,8 @@
     CGFloat yPoint = _point.y - point.y;
     if (yPoint < 0) {
         yPoint = 0;
-    } else if (yPoint > ScreenHeight - 64 - 44 - 64) {
-        yPoint = ScreenHeight - 64 - 44 - 64;
+    } else if (yPoint > ScreenHeight - 49 - 65 - 6) {
+        yPoint = ScreenHeight - 49 - 65 - 6;
     }
     [UIView animateWithDuration:0.2 animations:^{
         gridItem.frame = CGRectMake(_point.x, yPoint, gridItem.frame.size.width, gridItem.frame.size.height);
