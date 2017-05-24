@@ -795,6 +795,7 @@ static NetworkModule *gInstance = NULL;
     [[NSUserDefaults standardUserDefaults] synchronize];
     [[NSNotificationCenter defaultCenter] postNotificationName:REGIST_JPUSH object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"setDefaultViewData" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
 }
 
 // 请求失败，获取 error

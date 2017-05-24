@@ -36,9 +36,10 @@
 
 #import "UCFUserInfoListItem.h"
 #import "Touch3DSingle.h"
+#import "BJGridItem.h"
 
 
-@interface UCFHomeViewController () <UCFHomeListViewControllerDelegate, UCFHomeListNavViewDelegate, UCFUserInformationViewControllerDelegate>
+@interface UCFHomeViewController () <UCFHomeListViewControllerDelegate, UCFHomeListNavViewDelegate, UCFUserInformationViewControllerDelegate,BJGridItemDelegate>
 @property (strong, nonatomic) UCFCycleImageViewController *cycleImageVC;
 @property (strong, nonatomic) UCFUserInformationViewController *userInfoVC;
 @property (strong, nonatomic) UCFHomeListViewController *homeListVC;
@@ -46,6 +47,7 @@
 @property (strong, nonatomic) NSMutableDictionary *stateDict;
 
 @property (weak, nonatomic) UCFHomeListNavView *navView;
+@property (strong, nonatomic)BJGridItem *dragBtn;
 @end
 
 @implementation UCFHomeViewController
@@ -117,8 +119,80 @@
     [self addUI];
 #pragma mark - 请求数据
     [self fetchData];
+    [self addDragBtn];
+}
+#pragma mark Dragbtn
+- (void)addDragBtn
+{
+    _dragBtn = [[BJGridItem alloc] initWithTitle:nil withImageName:@"package_1.png" atIndex:0 editable:NO];
+    
+    [_dragBtn setFrame:CGRectMake(20, 120, 64, 64)];
+    _dragBtn.delegate = self;
+    [self.view addSubview: _dragBtn];
+}
+- (void)gridItemDidMoved:(BJGridItem *)gridItem withLocation:(CGPoint)point moveGestureRecognizer:(UILongPressGestureRecognizer *)recognizer{
+    CGRect frame = _dragBtn.frame;
+    CGPoint curPoint = [recognizer locationInView:self.view];
+    switch (recognizer.state) {
+        case UIGestureRecognizerStateBegan:
+            DLog(@"press long began");
+            break;
+        case UIGestureRecognizerStateEnded:
+            DLog(@"press long ended");
+            break;
+        case UIGestureRecognizerStateFailed:
+            DLog(@"press long failed");
+            break;
+        case UIGestureRecognizerStateChanged:
+            //移动
+            frame.origin.x = curPoint.x - point.x;
+            frame.origin.y = curPoint.y - point.y;
+            _dragBtn.frame = frame;
+            break;
+        default:
+            DLog(@"press long else");
+            break;
+    }
 }
 
+- (void) gridItemDidEndMoved:(BJGridItem *) gridItem withLocation:(CGPoint)point moveGestureRecognizer:(UILongPressGestureRecognizer*) recognizer{
+    CGPoint _point = [recognizer locationInView:self.view];
+    if (_point.x < ScreenWidth / 2) {
+        _point.x = 0;
+    } else {
+        _point.x = ScreenWidth - gridItem.frame.size.width;
+    }
+    
+    if (_point.y < 0) {
+        _point.y = 0;
+    }
+    
+    CGFloat yPoint = _point.y - point.y;
+    if (yPoint < 0) {
+        yPoint = 0;
+    } else if (yPoint > ScreenHeight - 64 - 44 - 64) {
+        yPoint = ScreenHeight - 64 - 44 - 64;
+    }
+    [UIView animateWithDuration:0.2 animations:^{
+        gridItem.frame = CGRectMake(_point.x, yPoint, gridItem.frame.size.width, gridItem.frame.size.height);
+    }];
+}
+
+- (void) gridItemDidEnterEditingMode:(BJGridItem *) gridItem
+{
+    
+}
+
+- (void) gridItemDidDeleted:(BJGridItem *) gridItem atIndex:(NSInteger)index
+{
+    
+}
+
+- (void) gridItemDidClicked:(BJGridItem *) gridItem
+{
+    
+}
+#pragma mark -----------------------------------
 #pragma mark - configuration 设置
 - (void)configuration
 {
@@ -401,9 +475,11 @@
     __weak typeof(self) weakSelf = self;
     
     [self.userInfoVC.presenter fetchUserInfoOneDataWithCompletionHandler:^(NSError *error, id result) {
+   
     }];
     
     [self.userInfoVC.presenter fetchUserInfoTwoDataWithCompletionHandler:^(NSError *error, id result) {
+    
     }];
     
     [self.homeListVC.presenter fetchHomeListDataWithCompletionHandler:^(NSError *error, id result) {

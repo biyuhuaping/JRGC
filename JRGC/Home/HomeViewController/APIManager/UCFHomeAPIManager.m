@@ -132,6 +132,8 @@
                    [[MongoliaLayerCenter sharedManager].mongoliaLayerDic setValue:[NSNumber numberWithInt:1] forKey:@"authorization"];
                 }else{
                    [[MongoliaLayerCenter sharedManager].mongoliaLayerDic setValue:[NSNumber numberWithInt:0] forKey:@"authorization"];
+                    [MongoliaLayerCenter sharedManager].sdate = [result objectSafeForKey:@"sdate"];
+                    
                 }
             }
             UCFHomeListCellModel *homelistModel = [UCFHomeListCellModel homeListCellWithDict:result];
