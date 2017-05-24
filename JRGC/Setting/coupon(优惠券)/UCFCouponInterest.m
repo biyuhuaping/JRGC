@@ -18,7 +18,7 @@
 #import "NZLabel.h"
 #import "UCFToolsMehod.h"
 #import "UCFCouponExchangeToFriends.h"
-#import "UCFFeedBackViewController.h"//邀请返利
+#import "UCFInvitationRebateViewController.h"//邀请获利
 
 // 错误界面
 #import "UCFNoDataView.h"
@@ -115,8 +115,9 @@
     if (!_presentFriendExist) {
         BlockUIAlertView *alert_bankbrach= [[BlockUIAlertView alloc]initWithTitle:nil message:@"当前暂无好友，快邀请好友来工场吧~" cancelButtonTitle:@"知道了" clickButton:^(NSInteger index) {
             if (index == 1) {
-                UCFFeedBackViewController *subVC = [[UCFFeedBackViewController alloc] initWithNibName:@"UCFFeedBackViewController" bundle:nil];
-                [self.navigationController pushViewController:subVC animated:YES];
+                UCFInvitationRebateViewController *feedBackVC = [[UCFInvitationRebateViewController alloc] initWithNibName:@"UCFInvitationRebateViewController" bundle:nil];
+                feedBackVC.title = @"邀请获利";
+                [self.navigationController pushViewController:feedBackVC animated:YES];
             }
         } otherButtonTitles:@"邀友注册"];
         [alert_bankbrach show];
