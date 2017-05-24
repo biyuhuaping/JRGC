@@ -138,7 +138,7 @@
                     
                 }
                 
-//                [[NSUserDefaults standardUserDefaults] setValue:dataDict forKey:WALLET_DATADICT];
+                [[NSUserDefaults standardUserDefaults] setValue:dataDict forKey:WALLET_DATADICT];
             }
         } else {
 
