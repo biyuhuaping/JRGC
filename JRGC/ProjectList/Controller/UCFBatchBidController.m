@@ -49,8 +49,14 @@
     // add refreshing and load more
     [self addRefreshingAndLoadMore];
 //    [self.tableview.header beginRefreshing];
-    [self.view bringSubviewToFront:_loadingView];
-    [self performSelector:@selector(removeLoadingView) withObject:nil afterDelay:LoadingSecond];
+//显示loading页面
+//    [self.view bringSubviewToFront:_loadingView];
+//    [self performSelector:@selector(removeLoadingView) withObject:nil afterDelay:LoadingSecond];
+    
+//隐藏loading页面
+    [self.view sendSubviewToBack:_loadingView];
+    _loadingView.hidden = YES;
+    [self performSelector:@selector(removeLoadingView) withObject:nil afterDelay:0];
 }
 -(void)removeLoadingView
 {

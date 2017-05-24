@@ -234,7 +234,7 @@
         if ([rstcode intValue] == 1) {
             _shareUrl = [dictemp objectSafeForKey:@"inviteUrl"];
             
-            _sumCommLab.text = [NSString stringWithFormat:@"¥%@",[UCFToolsMehod AddComma:dictemp[@"rebateAmt"]]];//我的返利
+            _sumCommLab.text = [NSString stringWithFormat:@"¥%@",dictemp[@"rebateAmt"]];//我的返利
             _userRecommendCountLab.text = [NSString stringWithFormat:@"邀请人数:%@人",dictemp[@"userRecommendCount"]];//邀请投资人数
             
             
@@ -243,13 +243,13 @@
             _p2pInviteFriendsCountLab.text = P2PCountStr1;
             [_p2pInviteFriendsCountLab setFont:[UIFont systemFontOfSize:10] string:P2PCountStr2];
             
-            _p2pRebateAmtLab.text =  [NSString stringWithFormat:@"¥%@",[UCFToolsMehod AddComma:dictemp[@"p2pRebateAmt"]]];//微金返利
+            _p2pRebateAmtLab.text =  [NSString stringWithFormat:@"¥%@",dictemp[@"p2pRebateAmt"]];//微金返利
 
             P2PCountStr1 = [NSString stringWithFormat:@"尊享返利(%@人投资）",[dictemp objectSafeForKey:@"zxInviteFriendsCount"]];//尊享投资人数
             P2PCountStr2 = [NSString stringWithFormat:@"(%@人投资）",[dictemp objectSafeForKey:@"zxInviteFriendsCount"]];//尊享投资人数
             _zxInviteFriendsCountLab.text = P2PCountStr1;
             [_zxInviteFriendsCountLab setFont:[UIFont systemFontOfSize:10] string:P2PCountStr2];
-            _zxRebateAmtLab.text =  [NSString stringWithFormat:@"¥%@",[UCFToolsMehod AddComma:dictemp[@"zxRebateAmt"]]];//尊享返利
+            _zxRebateAmtLab.text =  [NSString stringWithFormat:@"¥%@",dictemp[@"zxRebateAmt"]];//尊享返利
 
             _gcmLab.text = dictemp[@"promotionCode"];//我的工场码
             _recruitStatus = dictemp[@"recruitStatus"];

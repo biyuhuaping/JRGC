@@ -92,7 +92,7 @@
              _shareUrl = [dictemp objectSafeForKey:@"inviteUrl"];
              _facCode = [dictemp objectSafeForKey:@"promotionCode"];
              _beansCount = [dictemp objectSafeForKey:@"beansCount"];
-             _beansCountLabel.text =  [NSString stringWithFormat:@"¥%@",[UCFToolsMehod AddComma:_beansCount]];//我的返利
+             _beansCountLabel.text =  [NSString stringWithFormat:@"¥%@", _beansCount];//我的返利
              _userRecommendCount = [NSString stringWithFormat:@"%@",[dictemp objectSafeForKey:@"userRecommendCount"]];
              _userRecommendLabel.text = [NSString stringWithFormat:@"邀请人数:%@人",_userRecommendCount];
             [self.tableview reloadData];
@@ -212,6 +212,8 @@
             break;
     }
     
+    [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:view isTop:YES];
+//    [Common addLineViewColor:UIColorWithRGB(0xe3e5ea) With:view isTop:NO];
     return view;
 }
 
