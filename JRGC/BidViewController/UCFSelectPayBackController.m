@@ -44,6 +44,11 @@
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = NO;
 }
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self reloadView];
+}
 - (void)addRightButtonWithImage:(UIImage *)rightButtonimage;
 {
     UIButton *rightbutton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -70,11 +75,11 @@
     self.view.backgroundColor = UIColorWithRGB(0xebebee);
 
 }
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-
-}
+//- (void)viewDidAppear:(BOOL)animated
+//{
+//    [super viewDidAppear:animated];
+//
+//}
 - (void)initData
 {
 
@@ -409,8 +414,10 @@
 //}
 - (void)reloadView
 {
-    NSString *strParameters = [NSString stringWithFormat:@"userId=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagCheckMyMoney owner:self Type:self.accoutType];
+    if ([[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
+        NSString *strParameters = [NSString stringWithFormat:@"userId=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
+        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagCheckMyMoney owner:self Type:self.accoutType];
+    }
 }
 - (void)initWithTableView
 {
@@ -663,6 +670,13 @@
             _onlyMoney += _gongDouCount/100.0f;
             _keYongMoney = _onlyMoney;
             headView.KeYongMoneyLabel.text = [NSString stringWithFormat:@"¥%.2f",_keYongMoney];
+            
+            CGSize size = [Common getStrWitdth:headView.KeYongMoneyLabel.text TextFont:[UIFont boldSystemFontOfSize:17.0f]];
+            headView.KeYongMoneyLabel.frame = CGRectMake(CGRectGetMinX(headView.KeYongMoneyLabel.frame), CGRectGetMinY(headView.KeYongMoneyLabel.frame), size.width , CGRectGetHeight(headView.KeYongMoneyLabel.frame));
+            headView.totalKeYongTipLabel.frame = CGRectMake(CGRectGetMaxX(headView.KeYongMoneyLabel.frame) + 5, CGRectGetMaxY(headView.KeYongMoneyLabel.frame) - 12, 11 * 12, 12);
+            headView.inputMoneyTextFieldLable.text = [NSString stringWithFormat:@"%.2f",self.touZiMoney];
+
+            
         }
         [_superViewController reloadMainView];
     } else if (tag.intValue == kSXtagSelectBeansInterest) {

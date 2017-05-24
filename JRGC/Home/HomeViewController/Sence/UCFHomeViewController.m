@@ -133,7 +133,7 @@
 {
     _dragBtn = [[BJGridItem alloc] initWithTitle:nil withImageName:@"home_icon_rebate" atIndex:0 editable:NO];
     
-    [_dragBtn setFrame:CGRectMake(ScreenWidth - 64 - 6, ScreenHeight - 49 - 65 - 6, 64, 65)];
+    [_dragBtn setFrame:CGRectMake(ScreenWidth - 62 - 6, ScreenHeight - 49 - 65 - 6, 62, 65)];
     _dragBtn.delegate = self;
     [self.view addSubview: _dragBtn];
 }
