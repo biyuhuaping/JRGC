@@ -58,7 +58,7 @@
 {
     __weak typeof(self) weakSelf = self;
     self.bottomLab.text = @"获取您的金融工场用户信息注册并开通工场尊享用户";
-    _registLabel.text = @"我已阅读并同意《工场尊享用户服务协议》";
+    _registLabel.text = @"我已阅读并同意接受《工场尊享用户服务协议》";
     _registLabel.userInteractionEnabled = YES;
     [_registLabel addLinkString:@"《工场尊享用户服务协议》" block:^(ZBLinkLabelModel *linkModel) {
         [weakSelf showHeTong:linkModel];
