@@ -109,6 +109,7 @@
     [self registKeyBordNoti];
 }
 #pragma mark 初始化界面构建
+
 //初始化界面信息
 - (void)createUI
 {
@@ -163,7 +164,14 @@
     [self.navigationController pushViewController:webController animated:YES];
 }
 
-
+- (void)getToBack
+{
+    if (self.uperViewController) {
+        [self.navigationController popToViewController:self.uperViewController animated:YES];
+    } else {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -251,7 +259,7 @@
             
         } else if (buttonIndex == 1) {
            NSString *className = [NSString stringWithUTF8String:object_getClassName(_uperViewController)];
-            if ([className hasSuffix:@"UCFPurchaseBidViewController"] || [className hasSuffix:@"UCFPurchaseTranBidViewController"]) {
+            if ([className hasSuffix:@"UCFPurchaseBidViewController"] || [className hasSuffix:@"UCFPurchaseTranBidViewController"] || [className hasPrefix:@"UCFSelectPayBackController"]) {
                 [self.navigationController popToViewController:_uperViewController animated:YES];
             } else {
                 [self.navigationController popToRootViewControllerAnimated:NO];
