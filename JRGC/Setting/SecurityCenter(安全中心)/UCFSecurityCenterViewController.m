@@ -289,7 +289,7 @@
         if (ret) {
             NSDictionary *result = dic[@"data"][@"data"];
             UCFSettingGroup *group = [self.itemsData firstObject];
-            NSNumber *memberLever = [dic objectSafeForKey:@"memberLever"];
+            NSString *memberLever = [result objectSafeForKey:@"memberLever"];
             NSString *authId = [result objectSafeForKey:@"state"];
             NSString *bindPhone = [result objectSafeForKey:@"bindMobile"];
             self.sex = [[result objectSafeForKey:@"sex"] intValue];
@@ -346,10 +346,13 @@
                         break;
                     case 3:
                     {
-                        if ([memberLever intValue] >= 2) {
-                            _userLevelImage.image =[UIImage imageNamed:[NSString stringWithFormat:@"vip%d_icon.png",[memberLever intValue]-1]];
-                        }else{
+//                        memberLever = @"";
+                        if ([memberLever isEqualToString:@"1"]) {
                             _userLevelImage.image =[UIImage imageNamed:@"no_vip_icon.png"];
+
+                        }else{
+                            _userLevelImage.image =[UIImage imageNamed:[NSString stringWithFormat:@"vip%d_icon.png",[memberLever intValue]-1]];
+
                         }
                     }
                         break;
