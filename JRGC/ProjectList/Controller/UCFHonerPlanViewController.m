@@ -267,6 +267,17 @@
             [helper pushP2POrWJAuthorizationType:self.accoutType nav:self.navigationController];
             return;
         }
+        
+        _projectListModel = [self.dataArray objectAtIndex:indexPath.row];
+        if ([_projectListModel.status intValue ] != 2) {
+            NSInteger isOrder = [_projectListModel.isOrder integerValue];
+            if (isOrder <= 0) {
+                UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前标的详情只对投资人开放"];
+                [self.navigationController pushViewController:controller animated:YES];
+            }
+            return;
+        }
+        
         if ([self checkUserCanInvestIsDetail:YES])
         {
             _projectListModel = [self.dataArray objectAtIndex:indexPath.row];
@@ -303,6 +314,13 @@
          if (![helper checkP2POrWJIsAuthorization:self.accoutType]) {//先授权
              [helper pushP2POrWJAuthorizationType:self.accoutType nav:self.navigationController];
              return;
+         }
+         
+         if ([model.status intValue ] != 2) {
+             NSInteger isOrder = [_projectListModel.isOrder integerValue];
+             if (isOrder <= 0) {
+                 return;
+             }
          }
          if ([self checkUserCanInvestIsDetail:NO]) {
              [MBProgressHUD showHUDAddedTo:self.view animated:YES];
