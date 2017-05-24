@@ -240,8 +240,8 @@
         if (_isCollctionkeyBid) {
             
 //            _minuteCountDownView.frame = CGRectZero;
-          
-            _totalKeYongTipLabel.text = @"(我的余额)";
+             _keYongTipLabel.text = @"我的余额";
+            _totalKeYongTipLabel.text = @"";
             NSString *minInvestStr = [NSString stringWithFormat:@"%@",[[_dataDict objectForKey:@"colPrdClaimDetail"] objectForKey:@"colMinInvest"]];
       
             NSString *palceText = [NSString stringWithFormat:@"%@元起投", minInvestStr];

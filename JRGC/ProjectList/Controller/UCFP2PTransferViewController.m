@@ -71,8 +71,14 @@
     // 添加传统的下拉刷新
     [self.tableview addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(getNetDataFromNet)];
     self.tableview.footer.hidden = YES;
-    [self.view bringSubviewToFront:_loadingView];
-    [self performSelector:@selector(removeLoadingView) withObject:nil afterDelay:LoadingSecond];
+    //显示loading页面
+    //    [self.view bringSubviewToFront:_loadingView];
+    //    [self performSelector:@selector(removeLoadingView) withObject:nil afterDelay:LoadingSecond];
+    
+    //隐藏loading页面
+    [self.view sendSubviewToBack:_loadingView];
+    _loadingView.hidden = YES;
+    [self performSelector:@selector(removeLoadingView) withObject:nil afterDelay:0];
 }
 -(void)removeLoadingView
 {

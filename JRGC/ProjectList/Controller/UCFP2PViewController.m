@@ -34,8 +34,8 @@
     [self addChildControllers];
     // setting current controller
     self.currentViewController = self.ordinaryBid;
-    baseTitleLabel.text = @"即将跳转";
-    [self performSelector:@selector(updateNavLabelTitle) withObject:nil afterDelay:LoadingSecond];
+    baseTitleLabel.text = @"工场微金";
+//    [self performSelector:@selector(updateNavLabelTitle) withObject:nil afterDelay:0];
 }
 -(void)updateNavLabelTitle{
     baseTitleLabel.text  = @"工场微金";

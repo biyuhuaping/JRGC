@@ -96,11 +96,15 @@
     [self.view bringSubviewToFront:self.loadingView];
     [self performSelector:@selector(removeLoadingView) withObject:nil afterDelay:2.0f];
     if (self.accoutType ==  SelectAccoutTypeHoner) {
-      
+        [self.view bringSubviewToFront:self.loadingView];
+        [self performSelector:@selector(removeLoadingView) withObject:nil afterDelay:2.0f];
        self.loadingLabel1.text = @"即将跳转工场尊享";
         self.loadingLabel2.text = @"可直接访问www.gongchangzx.com";
          _isShowOrHideAccoutMoney = [[NSUserDefaults standardUserDefaults] boolForKey:@"IsShowHonerAccoutMoney"];
     }else{
+        [self.view sendSubviewToBack:self.loadingView];
+        self.loadingView.hidden = YES;
+        [self performSelector:@selector(removeLoadingView) withObject:nil afterDelay:0.0f];
         self.loadingLabel1.text = @"即将跳转工场微金";
         self.loadingLabel2.text = @"可直接访问www.gongchangp2p.com";
         _isShowOrHideAccoutMoney = [[NSUserDefaults standardUserDefaults] boolForKey:@"IsShowP2PAccoutMoney"];

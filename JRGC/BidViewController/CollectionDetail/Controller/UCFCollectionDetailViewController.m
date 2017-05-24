@@ -30,6 +30,7 @@
 #import "UCFLoginViewController.h"
 #import "UCFBatchBidWebViewController.h"
 #import "RiskAssessmentViewController.h"
+#import "HSHelper.h"
 #define shadeSpacingHeight 18 //遮罩label的上下间距
 #define shadeHeight 70 //遮罩高度
 static NSString * const DetailCellID = @"UCFCollectionDetailCell";
@@ -775,7 +776,12 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"联系客服",nil];
             alert.tag = 9001;
             [alert show];
-        }else
+        }else if ([dic[@"code"] integerValue] == 10040) {//设置交易密码
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:P2PTIP2 delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认",nil];
+            alert.tag = 8000;
+            [alert show];
+        }
+        else
         {
             [AuxiliaryFunc showAlertViewWithMessage:messageStr];
         }
@@ -810,7 +816,8 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
 
 - (IBAction)ClickBatchInvestment:(UIButton *)sender {
     
-    if ([self.souceVC isEqualToString:@"P2PVC"]) {
+    if ([sender.currentTitle  isEqualToString:@"批量出借"]) {
+        
          [MBProgressHUD showHUDAddedTo:self.view animated:YES];
          NSDictionary *dataDict = @{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"tenderId":_colPrdClaimId};
          [[NetworkModule sharedNetworkModule] newPostReq:dataDict tag:kSXTagColIntoDealBatch owner:self signature:YES Type:self.accoutType];
@@ -826,7 +833,12 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
     }
 }
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if (alertView.tag == 9000) {
+    if (alertView.tag == 8000) {
+        if (buttonIndex == 1) {
+            HSHelper *helper = [HSHelper new];
+            [helper pushOpenHSType:SelectAccoutTypeP2P Step:[UserInfoSingle sharedManager].openStatus nav:self.navigationController];
+        }
+    }else if (alertView.tag == 9000) {
         if(buttonIndex == 1){ //测试
             RiskAssessmentViewController *vc = [[RiskAssessmentViewController alloc] initWithNibName:@"RiskAssessmentViewController" bundle:nil];
             vc.accoutType = SelectAccoutTypeP2P;

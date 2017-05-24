@@ -183,7 +183,8 @@
                           NSFontAttributeName:[UIFont systemFontOfSize:13],/*(字体)*/
                           NSParagraphStyleAttributeName:paragraph,/*(段落)*/
                           };
-    NSString *desStr = [NSString stringWithFormat:@"• 使用快捷支付充值最低金额应大于等于%@元。\n• 对首次充值后未出借的提现，平台收取%@%%的手续费。\n• 充值/提现必须为银行借记卡，不支持存折、信用卡充值。\n• 充值需开通银行卡网上支付功能，如有疑问请咨询开户行客服。\n• 单笔充值不可超过该银行充值限额。\n• 如手机快捷支付充值失败，可尝试在电脑上进行网银转账，或使用支付宝进行转账操作。",minRecharge,fee];
+    NSString *str = self.accoutType == SelectAccoutTypeHoner ? @"投资" : @"出借";
+    NSString *desStr = [NSString stringWithFormat:@"• 使用快捷支付充值最低金额应大于等于%@元。\n• 对首次充值后未%@的提现，平台收取%@%%的手续费。\n• 充值/提现必须为银行借记卡，不支持存折、信用卡充值。\n• 充值需开通银行卡网上支付功能，如有疑问请咨询开户行客服。\n• 单笔充值不可超过该银行充值限额。\n• 如手机快捷支付充值失败，可尝试在电脑上进行网银转账，或使用支付宝进行转账操作。",minRecharge,str,fee];
     //查看各银行充值限额；
     _desLabel.attributedText = [NSString getNSAttributedString:desStr labelDict:dic];
     [_desLabel setBoldFontToString:@"网银"];

@@ -84,7 +84,11 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="95"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user_icon_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="QWt-Ug-e1I">
-                                                    <rect key="frame" x="348" y="48" width="12" height="21"/>
+                                                    <rect key="frame" x="352" y="53" width="8" height="15"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="15" id="DZI-kc-jqh"/>
+                                                        <constraint firstAttribute="width" constant="8" id="qEq-f8-GdT"/>
+                                                    </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的返利" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8oN-ir-ZxX">
                                                     <rect key="frame" x="15" y="23" width="58" height="17"/>
@@ -93,7 +97,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¥0.00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iQ1-xT-Zzg">
-                                                    <rect key="frame" x="15" y="44" width="66" height="29"/>
+                                                    <rect key="frame" x="15" y="46" width="66" height="29"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -105,7 +109,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="邀请人数：0人" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="656-IC-j0b" customClass="NZLabel">
-                                                    <rect key="frame" x="261" y="48" width="82" height="21"/>
+                                                    <rect key="frame" x="265" y="52" width="82" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -125,7 +129,7 @@
                                                 <constraint firstItem="iQ1-xT-Zzg" firstAttribute="left" secondItem="jgf-d5-DkD" secondAttribute="left" constant="15" id="Xk4-6V-mf7"/>
                                                 <constraint firstItem="656-IC-j0b" firstAttribute="centerY" secondItem="iQ1-xT-Zzg" secondAttribute="centerY" id="XpZ-x9-kMk"/>
                                                 <constraint firstItem="aOv-JJ-sp7" firstAttribute="leading" secondItem="8oN-ir-ZxX" secondAttribute="trailing" constant="2" id="bfE-uT-ZG9"/>
-                                                <constraint firstAttribute="bottom" secondItem="iQ1-xT-Zzg" secondAttribute="bottom" constant="22" id="tSb-JL-fhI"/>
+                                                <constraint firstAttribute="bottom" secondItem="iQ1-xT-Zzg" secondAttribute="bottom" constant="20" id="tSb-JL-fhI"/>
                                                 <constraint firstAttribute="bottom" secondItem="656-IC-j0b" secondAttribute="bottom" constant="26" id="vhn-vM-oVf"/>
                                             </constraints>
                                             <variation key="default">
