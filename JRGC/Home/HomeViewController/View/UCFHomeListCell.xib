@@ -175,7 +175,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user_icon_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="GTz-5E-YyU">
-                                        <rect key="frame" x="109" y="1.5" width="11" height="18"/>
+                                        <rect key="frame" x="109" y="0.5" width="11" height="18"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="11" id="Eir-im-wSg"/>
                                             <constraint firstAttribute="height" constant="18" id="hab-CZ-1fg"/>
@@ -187,7 +187,7 @@
                                     <constraint firstItem="S8S-CT-O9w" firstAttribute="leading" secondItem="KVc-aA-W3Q" secondAttribute="leading" id="9BR-vP-ehe"/>
                                     <constraint firstItem="A4I-Cd-hMH" firstAttribute="leading" secondItem="KVc-aA-W3Q" secondAttribute="leading" id="LU5-by-31G"/>
                                     <constraint firstAttribute="height" constant="40" id="Tsb-z1-Q4w"/>
-                                    <constraint firstItem="GTz-5E-YyU" firstAttribute="centerY" secondItem="A4I-Cd-hMH" secondAttribute="centerY" id="fIH-zU-KhR"/>
+                                    <constraint firstItem="GTz-5E-YyU" firstAttribute="centerY" secondItem="A4I-Cd-hMH" secondAttribute="centerY" constant="-1" id="fIH-zU-KhR"/>
                                     <constraint firstItem="GTz-5E-YyU" firstAttribute="leading" secondItem="A4I-Cd-hMH" secondAttribute="trailing" constant="5" id="lrG-D3-b74"/>
                                     <constraint firstAttribute="bottom" secondItem="S8S-CT-O9w" secondAttribute="bottom" id="oUm-Fe-3CG"/>
                                     <constraint firstAttribute="width" constant="130" id="wV9-F4-dX7"/>
@@ -276,8 +276,10 @@
                 <outlet property="numBackViewW" destination="cJ5-z1-Cno" id="FRl-XY-Fck"/>
                 <outlet property="oneImageBackView" destination="Cbf-PE-4ML" id="15X-Eg-mVd"/>
                 <outlet property="oneImageDescribeLabel" destination="S8S-CT-O9w" id="P9b-eg-7Hg"/>
+                <outlet property="oneImageDownHeight" destination="Rhf-Kd-Dod" id="tVp-Qc-2wb"/>
                 <outlet property="oneImageNumLabel" destination="unU-6I-yH8" id="q1Q-j0-16a"/>
                 <outlet property="oneImageTitleLabel" destination="A4I-Cd-hMH" id="JNd-ld-TRX"/>
+                <outlet property="oneImageUpHeight" destination="n3v-hM-3pz" id="Zxj-Xp-zzu"/>
                 <outlet property="oneImageView" destination="diO-Sz-3kr" id="XUD-FC-EE5"/>
                 <outlet property="proImageView1" destination="lF4-X1-Td4" id="d4z-Yy-faE"/>
                 <outlet property="proImageView2" destination="AQh-S1-1ZL" id="Jtk-8C-K5E"/>

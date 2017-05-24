@@ -37,6 +37,9 @@
 #import "UCFUserInfoListItem.h"
 #import "Touch3DSingle.h"
 #import "BJGridItem.h"
+#import "AppDelegate.h"
+#import "BaseNavigationViewController.h"
+#import "UCFHomeInviteViewController.h"
 
 
 @interface UCFHomeViewController () <UCFHomeListViewControllerDelegate, UCFHomeListNavViewDelegate, UCFUserInformationViewControllerDelegate,BJGridItemDelegate>
@@ -64,7 +67,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES animated:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 }
 - (void)viewDidAppear:(BOOL)animated
@@ -196,7 +199,10 @@
 
 - (void) gridItemDidClicked:(BJGridItem *) gridItem
 {
-    
+    UCFHomeInviteViewController *discoveryWeb = [[UCFHomeInviteViewController alloc] initWithNibName:@"UCFHomeInviteViewController" bundle:nil];
+    discoveryWeb.url      = DISCOVERYURL;//请求地址;
+    discoveryWeb.navTitle = @"邀请返利";
+    [self.navigationController pushViewController:discoveryWeb animated:YES];
 }
 #pragma mark -----------------------------------
 
@@ -392,7 +398,17 @@
             [self.navigationController pushViewController:horner animated:YES];
         }
         else if (model.moedelType == UCFHomeListCellModelTypeOneImageBatchCycle) {
-            
+            NSString *userId = [UserInfoSingle sharedManager].userId;
+            if (userId) {
+                AppDelegate *appDel = (AppDelegate *)[UIApplication sharedApplication].delegate;
+                [appDel.tabBarController setSelectedIndex:2];
+            }
+            else {
+                UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
+                BaseNavigationViewController *loginNaviController = [[BaseNavigationViewController alloc] initWithRootViewController:loginViewController];
+                loginViewController.sourceVC = @"homePage";
+                [self presentViewController:loginNaviController animated:YES completion:nil];
+            }
         }
     }
     else if (type == UCFHomeListTypeInvest) {

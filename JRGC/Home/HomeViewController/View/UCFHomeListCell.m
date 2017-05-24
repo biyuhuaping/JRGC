@@ -44,6 +44,10 @@
 @property (weak, nonatomic) IBOutlet UIView *downSegLine;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *upLineLeftSpace;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *downLineLeftSpace;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *oneImageUpHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *oneImageDownHeight;
+
 @end
 
 @implementation UCFHomeListCell
@@ -210,12 +214,15 @@
     }
     else if (self.presenter.modelType == UCFHomeListCellModelTypeOneImageBondTransfer) {
         self.oneImageNumLabel.text = self.presenter.item.p2pTransferNum;
+        self.oneImageDownHeight.constant = 5;
     }
     else if (self.presenter.modelType == UCFHomeListCellModelTypeOneImageHonorTransfer) {
         self.oneImageNumLabel.text = self.presenter.item.zxTransferNum;
+        self.oneImageUpHeight.constant = 5;
+        self.oneImageDownHeight.constant = 5;
     }
     else if (self.presenter.modelType == UCFHomeListCellModelTypeOneImageBatchCycle) {
-        
+        self.oneImageUpHeight.constant = 5;
     }
     
     if (self.oneImageNumLabel.text.length == 1) {
