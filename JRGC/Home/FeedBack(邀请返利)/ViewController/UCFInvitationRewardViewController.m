@@ -12,7 +12,7 @@
 #import "UCFInvitationRewardCell2.h"
 #import <UShareUI/UShareUI.h>
 #import "UCFToolsMehod.h"
-
+#import "UCFRegistrationRecord.h"
 @interface UCFInvitationRewardViewController () <UITableViewDelegate, UITableViewDataSource, UCFInvitationRewardCell2Delegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 
@@ -31,6 +31,7 @@
 @property (strong, nonatomic) NSString *shareUrl;
 
 @property (strong, nonatomic) NSString *beansCount;	//奖励工豆金额	string
+- (IBAction)gotoInvitationRecordVC:(UIControl *)sender;
 @property (strong, nonatomic) NSString *userRecommendCount;//	邀友数	number
 @end
 
@@ -287,5 +288,10 @@
 }
 
 
-
+#pragma mark - 邀请记录
+- (IBAction)gotoInvitationRecordVC:(UIControl *)sender {
+    //邀请记录
+    UCFRegistrationRecord *vc = [[UCFRegistrationRecord alloc]initWithNibName:@"UCFRegistrationRecord" bundle:nil];
+    [self.navigationController pushViewController:vc animated:YES];
+}
 @end

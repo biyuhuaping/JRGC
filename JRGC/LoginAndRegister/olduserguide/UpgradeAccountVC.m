@@ -488,10 +488,11 @@
         [AuxiliaryFunc showToastMessage:@"请完善信息之后再提交" withView:self.view];
         return;
     }
-    if (![Common isChinese:realName]) {
-        [AuxiliaryFunc showToastMessage:@"请输入正确的姓名" withView:self.view];
-        return;
-    }else if (![Common isIdentityCard:idCardNo] && [idCardNo rangeOfString:@"*"].location == NSNotFound){
+//    if (![Common isChinese:realName]) {
+//        [AuxiliaryFunc showToastMessage:@"请输入正确的姓名" withView:self.view];
+//        return;
+//    }else
+        if (![Common isIdentityCard:idCardNo] && [idCardNo rangeOfString:@"*"].location == NSNotFound){
         [AuxiliaryFunc showToastMessage:@"请输入正确的身份证号码" withView:self.view];
         return;
     }else if (![Common isValidCardNumber:bankCard]){
