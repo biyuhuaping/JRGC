@@ -285,8 +285,6 @@
 		74A0AF0F1EC341DD009E5A57 /* NSTimer+timerBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 74A0AF0B1EC341DD009E5A57 /* NSTimer+timerBlock.m */; };
 		74A0AF101EC341DD009E5A57 /* ZZCircleProgress.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 74A0AF0C1EC341DD009E5A57 /* ZZCircleProgress.bundle */; };
 		74A0AF111EC341DD009E5A57 /* ZZCircleProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = 74A0AF0E1EC341DD009E5A57 /* ZZCircleProgress.m */; };
-		74AD69D71ED5997200972938 /* UCFHomeInviteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74AD69D51ED5997200972938 /* UCFHomeInviteViewController.m */; };
-		74AD69D81ED5997200972938 /* UCFHomeInviteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74AD69D61ED5997200972938 /* UCFHomeInviteViewController.xib */; };
 		74B3AD871ED2C31B00653F8B /* YFRollingLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 74B3AD861ED2C31B00653F8B /* YFRollingLabel.m */; };
 		74D7FCCC1AE8F72700653B8F /* FundAccountGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 74D7FCC91AE8F72700653B8F /* FundAccountGroup.m */; };
 		74D7FCCD1AE8F72700653B8F /* FundAccountItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 74D7FCCB1AE8F72700653B8F /* FundAccountItem.m */; };
@@ -1282,9 +1280,6 @@
 		74A0AF0C1EC341DD009E5A57 /* ZZCircleProgress.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ZZCircleProgress.bundle; sourceTree = "<group>"; };
 		74A0AF0D1EC341DD009E5A57 /* ZZCircleProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZCircleProgress.h; sourceTree = "<group>"; };
 		74A0AF0E1EC341DD009E5A57 /* ZZCircleProgress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZCircleProgress.m; sourceTree = "<group>"; };
-		74AD69D41ED5997200972938 /* UCFHomeInviteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFHomeInviteViewController.h; sourceTree = "<group>"; };
-		74AD69D51ED5997200972938 /* UCFHomeInviteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFHomeInviteViewController.m; sourceTree = "<group>"; };
-		74AD69D61ED5997200972938 /* UCFHomeInviteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFHomeInviteViewController.xib; sourceTree = "<group>"; };
 		74B3AD851ED2C31B00653F8B /* YFRollingLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YFRollingLabel.h; sourceTree = "<group>"; };
 		74B3AD861ED2C31B00653F8B /* YFRollingLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YFRollingLabel.m; sourceTree = "<group>"; };
 		74D7FCC81AE8F72700653B8F /* FundAccountGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FundAccountGroup.h; sourceTree = "<group>"; };
@@ -2850,9 +2845,6 @@
 				74270C601EC58F6800F9419B /* UCFUserInformationViewController.h */,
 				74270C611EC58F6800F9419B /* UCFUserInformationViewController.m */,
 				74270C621EC58F6800F9419B /* UCFUserInformationViewController.xib */,
-				74AD69D41ED5997200972938 /* UCFHomeInviteViewController.h */,
-				74AD69D51ED5997200972938 /* UCFHomeInviteViewController.m */,
-				74AD69D61ED5997200972938 /* UCFHomeInviteViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -5789,7 +5781,6 @@
 				74FC22861BA6AC9200D1660A /* UCFRedEnvelopeViewController.xib in Resources */,
 				840A79441C2A7C160059A946 /* UCFMessageCenterViewController.xib in Resources */,
 				74270D521EC5A00400F9419B /* UCFInvitationRewardHeaderView.xib in Resources */,
-				74AD69D81ED5997200972938 /* UCFHomeInviteViewController.xib in Resources */,
 				E37086B61D61A6CD0041D293 /* UCFHuiShangChooseBankViewController.xib in Resources */,
 				8371F8EF1EC2BFAD00579884 /* UCFHonerViewController.xib in Resources */,
 				74270D1F1EC595ED00F9419B /* UCFRebateCell.xib in Resources */,
@@ -6140,7 +6131,6 @@
 				74FD355B1ADF58710083D52C /* UCFSettingMainCell.m in Sources */,
 				FB88C90D1AF9F92E00D2EE93 /* YcArray.m in Sources */,
 				7BA6E4C61AD6731900FE8C37 /* UIImageView+WebCache.m in Sources */,
-				74AD69D71ED5997200972938 /* UCFHomeInviteViewController.m in Sources */,
 				7BD35A981AD61E4200389D6B /* LLLockPassword.m in Sources */,
 				741CA7A71E724C64006056A8 /* UCFDiscoveryViewController.m in Sources */,
 				74EE331E1AF7209600BDE197 /* UCFFundDetialTableViewCell.m in Sources */,

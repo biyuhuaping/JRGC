@@ -39,7 +39,7 @@
 #import "BJGridItem.h"
 #import "AppDelegate.h"
 #import "BaseNavigationViewController.h"
-#import "UCFHomeInviteViewController.h"
+#import "FullWebViewController.h"
 
 
 @interface UCFHomeViewController () <UCFHomeListViewControllerDelegate, UCFHomeListNavViewDelegate, UCFUserInformationViewControllerDelegate,BJGridItemDelegate>
@@ -205,10 +205,10 @@
 
 - (void) gridItemDidClicked:(BJGridItem *) gridItem
 {
-    UCFHomeInviteViewController *discoveryWeb = [[UCFHomeInviteViewController alloc] initWithNibName:@"UCFHomeInviteViewController" bundle:nil];
-    discoveryWeb.url      = DISCOVERYURL;//请求地址;
-    discoveryWeb.navTitle = @"邀请返利";
-    [self.navigationController pushViewController:discoveryWeb animated:YES];
+    FullWebViewController *webView = [[FullWebViewController alloc] initWithWebUrl:HOMEINVITATIONURL title:@"邀请返利"];
+    webView.flageHaveShareBut = @"分享";
+//    webView.sourceVc = @"UCFLatestProjectViewController";
+    [self.navigationController pushViewController:webView animated:YES];
 }
 #pragma mark -----------------------------------
 

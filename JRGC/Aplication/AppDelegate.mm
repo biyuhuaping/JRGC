@@ -58,6 +58,9 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    //设置公告展示标志位
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isShowNotice"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     
     //修改webView标识
     [self setWebViewUserAgent];
