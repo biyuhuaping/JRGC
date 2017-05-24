@@ -48,6 +48,7 @@
 
 @property (weak, nonatomic) UCFHomeListNavView *navView;
 @property (strong, nonatomic)BJGridItem *dragBtn;
+@property (strong,nonatomic) NSString *intoVCStr;
 @end
 
 @implementation UCFHomeViewController
@@ -64,7 +65,11 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES animated:animated];
+    if ([self.intoVCStr isEqualToString:@"ProjectDetailVC"]) {
+        [self.navigationController setNavigationBarHidden:YES animated:NO];
+    }else{
+        [self.navigationController setNavigationBarHidden:YES animated:animated];
+    }
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 }
 - (void)viewDidAppear:(BOOL)animated
@@ -326,6 +331,7 @@
                                     UCFProjectDetailViewController *controller = [[UCFProjectDetailViewController alloc] initWithDataDic:dic isTransfer:NO withLabelList:prdLabelsListTemp];
                                     CGFloat platformSubsidyExpense = [model.platformSubsidyExpense floatValue];
                                     [[NSUserDefaults standardUserDefaults] setValue:[NSString stringWithFormat:@"%.1f",platformSubsidyExpense] forKey:@"platformSubsidyExpense"];
+                                    self.intoVCStr = @"ProjectDetailVC";
                                     controller.accoutType = self.accoutType;
                                     controller.rootVc = self;
                                     [weakSelf.navigationController pushViewController:controller animated:YES];
@@ -352,6 +358,7 @@
                                     UCFProjectDetailViewController *controller = [[UCFProjectDetailViewController alloc] initWithDataDic:dic isTransfer:NO withLabelList:prdLabelsListTemp];
                                     CGFloat platformSubsidyExpense = [model.platformSubsidyExpense floatValue];
                                     [[NSUserDefaults standardUserDefaults] setValue:[NSString stringWithFormat:@"%.1f",platformSubsidyExpense] forKey:@"platformSubsidyExpense"];
+                                    self.intoVCStr = @"ProjectDetailVC";
                                     controller.accoutType = self.accoutType;
                                     controller.rootVc = self;
                                     [weakSelf.navigationController pushViewController:controller animated:YES];
