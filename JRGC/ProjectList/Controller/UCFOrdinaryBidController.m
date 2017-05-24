@@ -65,8 +65,14 @@
     [self.tableview addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(getNetDataFromNet)];
     self.tableview.footer.hidden = YES;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadP2PData) name:@"reloadP2PData" object:nil];
-    [self.view bringSubviewToFront:_loadingView];
-    [self performSelector:@selector(removeLoadingView) withObject:nil afterDelay:LoadingSecond];
+    //显示loading页面
+    //    [self.view bringSubviewToFront:_loadingView];
+    //    [self performSelector:@selector(removeLoadingView) withObject:nil afterDelay:LoadingSecond];
+    
+    //隐藏loading页面
+    [self.view sendSubviewToBack:_loadingView];
+    _loadingView.hidden = YES;
+    [self performSelector:@selector(removeLoadingView) withObject:nil afterDelay:0];
 }
 -(void)removeLoadingView
 {
@@ -259,22 +265,26 @@
             return;
         }
         
+        _projectListModel = [self.dataArray objectAtIndex:indexPath.row];
+        NSString *userid = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
+        NSString *strParameters = [NSString stringWithFormat:@"id=%@&userId=%@", _projectListModel.Id,userid];
+        NSInteger isOrder = [_projectListModel.isOrder integerValue];
+        if ([_projectListModel.status intValue ] != 2) {
+            if (isOrder <= 0) {
+                UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前标的详情只对投资人开放"];
+                [self.navigationController pushViewController:controller animated:YES];
+                return;
+            }
+        }
         if ([self checkUserCanInvestIsDetail:YES]) {
-            _projectListModel = [self.dataArray objectAtIndex:indexPath.row];
-            NSString *userid = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
-            NSString *strParameters = [NSString stringWithFormat:@"id=%@&userId=%@", _projectListModel.Id,userid];
             if ([_projectListModel.status intValue ] != 2) {
-                NSInteger isOrder = [_projectListModel.isOrder integerValue];
                 if (isOrder > 0) {
                     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-                    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self Type:SelectAccoutDefault];
-                } else {
-                    UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前标的详情只对投资人开放"];
-                    [self.navigationController pushViewController:controller animated:YES];
+                    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self Type:SelectAccoutTypeP2P];
                 }
-            } else {
+            }else {
                 [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-                [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self Type:SelectAccoutDefault];
+                [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self Type:SelectAccoutTypeP2P];
             }
         }
     }
@@ -290,13 +300,19 @@
             [helper pushP2POrWJAuthorizationType:self.accoutType nav:self.navigationController];
             return;
         }
-        if ([self checkUserCanInvestIsDetail:NO]) {
-            if ([model.status integerValue] != 2) {
+        _projectListModel = model;
+  
+        NSInteger isOrder = [_projectListModel.isOrder integerValue];
+        if ([_projectListModel.status intValue ] != 2) {
+            if (isOrder <= 0) {
                 return;
             }
+        }
+        if ([self checkUserCanInvestIsDetail:NO]) {
+            
             [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-            _projectListModel = model;
-            NSString *strParameters = [NSString stringWithFormat:@"userId=%@&id=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],_projectListModel.Id];
+            NSString *userid = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
+            NSString *strParameters = [NSString stringWithFormat:@"id=%@&userId=%@", _projectListModel.Id,userid];
             [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDealBid owner:self Type:SelectAccoutDefault];
         }
     }
