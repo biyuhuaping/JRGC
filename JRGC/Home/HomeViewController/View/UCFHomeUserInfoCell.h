@@ -11,4 +11,6 @@
 @class UCFUserInfoListItem;
 @interface UCFHomeUserInfoCell : UITableViewCell
 @property (nonatomic, strong) UCFUserInfoListItem *item;
+@property (nonatomic, strong) NSIndexPath *indexPath;
+@property (nonatomic, strong) UITableView *tableView;
 @end

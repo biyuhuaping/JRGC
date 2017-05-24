@@ -44,17 +44,22 @@
 @property (weak, nonatomic) IBOutlet UIView *downSegLine;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *upLineLeftSpace;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *downLineLeftSpace;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *oneImageUpHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *oneImageDownHeight;
+
 @end
 
 @implementation UCFHomeListCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    self.rateLabel.textColor = UIColorWithRGB(0xfd4d4c);
     self.circleProgressView.animationModel = CircleIncreaseSameTime;
     self.circleProgressView.showProgressText = YES;
     self.circleProgressView.notAnimated = NO;
     self.circleProgressView.startAngle = -90;
-    self.circleProgressView.pathBackColor = [UIColor lightGrayColor];
+    self.circleProgressView.pathBackColor = UIColorWithRGB(0xcfd5d7);
     self.circleProgressView.pathFillColor = UIColorWithRGB(0xfa4d4c);
     self.circleProgressView.strokeWidth = 3;
     self.oneImageBackView.layer.cornerRadius = 3;
@@ -170,27 +175,27 @@
     if (totalRows == 1) { // 这组只有1行
         self.downSegLine.hidden = NO;
         self.upSegLine.hidden = NO;
-        self.upSegLine.backgroundColor = UIColorWithRGB(0xd8d8d8);
+        self.upSegLine.backgroundColor = UIColorWithRGB(0xe3e5ea);
         self.downSegLine.backgroundColor = UIColorWithRGB(0xd8d8d8);
         self.upLineLeftSpace.constant = 0;
         self.downLineLeftSpace.constant = 0;
     } else if (indexPath.row == 0) { // 这组的首行(第0行)
         self.upSegLine.hidden = NO;
-        self.downSegLine.hidden = NO;
-        self.upSegLine.backgroundColor = UIColorWithRGB(0xd8d8d8);
+        self.downSegLine.hidden = YES;
+        self.upSegLine.backgroundColor = UIColorWithRGB(0xe3e5ea);
         self.downSegLine.backgroundColor = UIColorWithRGB(0xe3e5ea);
         self.upLineLeftSpace.constant = 0;
         self.downLineLeftSpace.constant = 15;
     } else if (indexPath.row == totalRows - 1) { // 这组的末行(最后1行)
-        self.upSegLine.hidden = YES;
+        self.upSegLine.hidden = indexPath.section == 3 ? YES : NO;
         self.downSegLine.hidden = NO;
         self.upSegLine.backgroundColor = UIColorWithRGB(0xe3e5ea);
         self.downSegLine.backgroundColor = UIColorWithRGB(0xd8d8d8);
-        self.upLineLeftSpace.constant = 15;
+        self.upLineLeftSpace.constant = indexPath.section == 2 ? 0 : 15;
         self.downLineLeftSpace.constant = 0;
     } else {
-        self.upSegLine.hidden = YES;
-        self.downSegLine.hidden = NO;
+        self.upSegLine.hidden = indexPath.section == 3 ? YES : NO;
+        self.downSegLine.hidden = YES;
         self.upSegLine.backgroundColor = UIColorWithRGB(0xe3e5ea);
         self.downSegLine.backgroundColor = UIColorWithRGB(0xe3e5ea);
         self.upLineLeftSpace.constant = 15;
@@ -209,12 +214,15 @@
     }
     else if (self.presenter.modelType == UCFHomeListCellModelTypeOneImageBondTransfer) {
         self.oneImageNumLabel.text = self.presenter.item.p2pTransferNum;
+        self.oneImageDownHeight.constant = 5;
     }
     else if (self.presenter.modelType == UCFHomeListCellModelTypeOneImageHonorTransfer) {
         self.oneImageNumLabel.text = self.presenter.item.zxTransferNum;
+        self.oneImageUpHeight.constant = 5;
+        self.oneImageDownHeight.constant = 5;
     }
     else if (self.presenter.modelType == UCFHomeListCellModelTypeOneImageBatchCycle) {
-        
+        self.oneImageUpHeight.constant = 5;
     }
     
     if (self.oneImageNumLabel.text.length == 1) {

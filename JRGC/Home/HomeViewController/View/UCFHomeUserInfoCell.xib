@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -27,7 +27,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rfK-ad-RPR">
                         <rect key="frame" x="73" y="0.0" width="247" height="44"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="homepage_message_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="74k-Ri-HoV">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="list_icon_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="74k-Ri-HoV">
                                 <rect key="frame" x="224" y="14.5" width="8" height="15"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="15" id="1wU-2F-Ooc"/>
@@ -57,25 +57,49 @@
                             <constraint firstItem="jqx-cj-zMw" firstAttribute="centerY" secondItem="3VK-d4-tat" secondAttribute="centerY" id="u2F-ZO-PQd"/>
                         </constraints>
                     </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pvB-Gl-10b">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="0.5"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="0.5" id="mmi-VY-8u9"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dgU-UX-3CA">
+                        <rect key="frame" x="0.0" y="43" width="320" height="0.5"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="0.5" id="Qrm-PD-Ryi"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="dgU-UX-3CA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="6L8-6T-JTF"/>
+                    <constraint firstAttribute="trailing" secondItem="pvB-Gl-10b" secondAttribute="trailing" id="FIV-8j-ryr"/>
                     <constraint firstAttribute="trailing" secondItem="rfK-ad-RPR" secondAttribute="trailing" id="IHh-SQ-BvW"/>
+                    <constraint firstItem="pvB-Gl-10b" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="RTL-bx-JOk"/>
                     <constraint firstItem="IrY-TH-Dh6" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="bDg-8i-5gr"/>
+                    <constraint firstAttribute="trailing" secondItem="dgU-UX-3CA" secondAttribute="trailing" id="d7w-dy-AfK"/>
                     <constraint firstItem="rfK-ad-RPR" firstAttribute="leading" secondItem="IrY-TH-Dh6" secondAttribute="trailing" id="fqT-qx-qLk"/>
+                    <constraint firstItem="pvB-Gl-10b" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="sB7-ua-jkL"/>
                     <constraint firstItem="rfK-ad-RPR" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="vHn-TT-A05"/>
                     <constraint firstItem="IrY-TH-Dh6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="ypn-xt-YFa"/>
+                    <constraint firstAttribute="bottom" secondItem="dgU-UX-3CA" secondAttribute="bottom" id="zM7-O4-mb6"/>
                     <constraint firstAttribute="bottom" secondItem="rfK-ad-RPR" secondAttribute="bottom" constant="-0.5" id="zkf-gu-LW2"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="downLine" destination="dgU-UX-3CA" id="BJH-7D-Mme"/>
+                <outlet property="downLineLeftSpace" destination="6L8-6T-JTF" id="Lhz-na-e5P"/>
                 <outlet property="itemDescribeLabel" destination="jqx-cj-zMw" id="vCc-wI-zSm"/>
                 <outlet property="itemTitleLabel" destination="IrY-TH-Dh6" id="rNS-Oe-gi8"/>
                 <outlet property="itemValueLabel" destination="3VK-d4-tat" id="4SO-G4-49f"/>
+                <outlet property="upLine" destination="pvB-Gl-10b" id="6RU-Q4-48T"/>
+                <outlet property="upLineLeftSpace" destination="RTL-bx-JOk" id="x5F-KT-vJg"/>
             </connections>
             <point key="canvasLocation" x="20" y="10"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="homepage_message_arrow" width="7" height="12"/>
+        <image name="list_icon_arrow" width="8" height="13"/>
     </resources>
 </document>

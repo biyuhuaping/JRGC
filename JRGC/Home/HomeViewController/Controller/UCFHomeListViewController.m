@@ -106,7 +106,7 @@
     if (nil == view) {
         view = [[UITableViewHeaderFooterView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 10)];
     }
-    view.contentView.backgroundColor = UIColorWithRGB(0xe3e5ea);
+    view.contentView.backgroundColor = UIColorWithRGB(0xebebee);
     return view;
 }
 
@@ -125,7 +125,7 @@
         return 0.001;
     }
     else
-        return 30;
+        return 32;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -139,7 +139,7 @@
         if (section == 3) {
             return 0.001;
         }
-        return 10;
+        return 8;
     }
     
 }

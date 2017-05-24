@@ -140,6 +140,17 @@
                 self.bottmLine.alpha = 0.9;
             }];
         }
+        if (self.backView.alpha > 0.3) {
+            [UIView animateWithDuration:0.25 animations:^{
+                [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+            }];
+            
+        }
+        else {
+            [UIView animateWithDuration:0.25 animations:^{
+                [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+            }];
+        }
     }
     
     

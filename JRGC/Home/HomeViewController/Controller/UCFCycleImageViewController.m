@@ -85,7 +85,7 @@
     __weak typeof(self) weakSelf = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-        [request setURL:[NSURL URLWithString:CMS_BANNER]];
+        [request setURL:[NSURL URLWithString:CMS_BANNER_UNLOGIN]];
         [request setHTTPMethod:@"GET"];
         AppDelegate * app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
         if (EnvironmentConfiguration == 2 || (app.isSubmitAppStoreTestTime && [[[NSUserDefaults standardUserDefaults] valueForKey:UUID] isEqualToString:@"108027"])) {

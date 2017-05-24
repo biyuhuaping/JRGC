@@ -208,6 +208,8 @@
         cell = (UCFHomeUserInfoCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeUserInfoCell" owner:self options:nil] lastObject];
     }
     cell.item = [self.presenter.allDatas objectAtIndex:indexPath.row];
+    cell.tableView = tableView;
+    cell.indexPath = indexPath;
     return cell;
 }
 
