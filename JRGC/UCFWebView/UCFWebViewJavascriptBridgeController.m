@@ -416,7 +416,9 @@
 
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
 {
-    
+    if (!error) {
+        [MBProgressHUD displayHudError:@"图片保存成功"];
+    }
     NSLog(@"image = %@, error = %@, contextInfo = %@", image, error, contextInfo);
 }
 
