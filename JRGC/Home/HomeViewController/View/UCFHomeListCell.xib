@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -197,7 +197,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="qfH-Ep-SYh" firstAttribute="trailing" secondItem="Cbf-PE-4ML" secondAttribute="trailing" constant="3" id="1n5-p9-RrI"/>
+                            <constraint firstItem="qfH-Ep-SYh" firstAttribute="trailing" secondItem="Cbf-PE-4ML" secondAttribute="trailing" constant="2.5" id="1n5-p9-RrI"/>
                             <constraint firstItem="KVc-aA-W3Q" firstAttribute="leading" secondItem="Cbf-PE-4ML" secondAttribute="leading" constant="15" id="8mV-SS-FHt"/>
                             <constraint firstAttribute="bottom" secondItem="Cbf-PE-4ML" secondAttribute="bottom" constant="10" id="Rhf-Kd-Dod"/>
                             <constraint firstAttribute="trailing" secondItem="Cbf-PE-4ML" secondAttribute="trailing" constant="10" id="bKo-U5-Nlq"/>
