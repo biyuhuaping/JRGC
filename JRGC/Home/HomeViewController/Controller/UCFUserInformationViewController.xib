@@ -139,7 +139,7 @@
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9ug-JM-wzP">
                                     <rect key="frame" x="187.5" y="10" width="0.5" height="25"/>
-                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.20000000000000001" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="0.5" id="Rdo-dg-qe6"/>
                                     </constraints>
@@ -350,6 +350,13 @@
                                 <constraint firstItem="A8W-cH-8Jy" firstAttribute="top" secondItem="pzS-WE-9tC" secondAttribute="top" id="zzJ-1H-eKD"/>
                             </constraints>
                         </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BNd-WV-8lY">
+                            <rect key="frame" x="0.0" y="44.5" width="375" height="0.5"/>
+                            <color key="backgroundColor" red="0.84705882352941175" green="0.84705882352941175" blue="0.84705882352941175" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="0.5" id="Upr-hB-Czh"/>
+                            </constraints>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
@@ -357,9 +364,11 @@
                         <constraint firstItem="0mE-VQ-GXA" firstAttribute="leading" secondItem="kZn-8h-OrD" secondAttribute="leading" id="BZc-fD-gJy"/>
                         <constraint firstItem="1B0-PH-uFo" firstAttribute="top" secondItem="kZn-8h-OrD" secondAttribute="top" id="ChN-VA-xOw"/>
                         <constraint firstItem="LIn-Rn-GuV" firstAttribute="top" secondItem="kZn-8h-OrD" secondAttribute="top" id="Cqa-sv-3m0"/>
+                        <constraint firstAttribute="bottom" secondItem="BNd-WV-8lY" secondAttribute="bottom" id="GOV-4K-f0n"/>
                         <constraint firstItem="pzS-WE-9tC" firstAttribute="width" secondItem="0mE-VQ-GXA" secondAttribute="width" id="H5N-7a-DpY"/>
                         <constraint firstItem="LIn-Rn-GuV" firstAttribute="height" secondItem="0mE-VQ-GXA" secondAttribute="height" id="HH4-Z9-dnP"/>
                         <constraint firstItem="LIn-Rn-GuV" firstAttribute="leading" secondItem="0mE-VQ-GXA" secondAttribute="trailing" id="Hmc-sL-MG5"/>
+                        <constraint firstAttribute="trailing" secondItem="BNd-WV-8lY" secondAttribute="trailing" id="Iep-HR-B3R"/>
                         <constraint firstItem="pzS-WE-9tC" firstAttribute="height" secondItem="0mE-VQ-GXA" secondAttribute="height" id="JVQ-bE-r4m"/>
                         <constraint firstAttribute="bottom" secondItem="1B0-PH-uFo" secondAttribute="bottom" id="Mif-CO-Jez"/>
                         <constraint firstItem="pzS-WE-9tC" firstAttribute="top" secondItem="kZn-8h-OrD" secondAttribute="top" id="Tgv-1m-6NC"/>
@@ -373,6 +382,7 @@
                         <constraint firstItem="pzS-WE-9tC" firstAttribute="leading" secondItem="1B0-PH-uFo" secondAttribute="trailing" id="tr4-Ph-35h"/>
                         <constraint firstItem="1B0-PH-uFo" firstAttribute="width" secondItem="0mE-VQ-GXA" secondAttribute="width" id="xUn-Ce-zOr"/>
                         <constraint firstAttribute="bottom" secondItem="0mE-VQ-GXA" secondAttribute="bottom" id="zAk-Pu-LZp"/>
+                        <constraint firstItem="BNd-WV-8lY" firstAttribute="leading" secondItem="kZn-8h-OrD" secondAttribute="leading" id="zhl-eF-Ab3"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zZd-1h-prZ">
@@ -381,7 +391,7 @@
                         <constraint firstAttribute="height" id="Amd-gQ-Ohe"/>
                     </constraints>
                 </view>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Xdt-ys-drQ">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Xdt-ys-drQ">
                     <rect key="frame" x="0.0" y="219" width="375" height="88"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
@@ -394,13 +404,13 @@
                 </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aIU-EY-eXv">
                     <rect key="frame" x="0.0" y="317" width="375" height="117"/>
-                    <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="aIU-EY-eXv" secondAttribute="height" multiplier="3.2:1" id="nhk-XZ-8pj"/>
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="0.8901960784313725" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="kZn-8h-OrD" secondAttribute="trailing" id="6oq-Jw-3gH"/>
                 <constraint firstItem="kZn-8h-OrD" firstAttribute="top" secondItem="ncU-hd-Pef" secondAttribute="bottom" id="96F-1Y-PiG"/>
