@@ -49,9 +49,13 @@
 - (void)initUI
 {
     UCFUserInfoListItem *userInfoList0 = [UCFUserInfoListItem itemWithTitle:@"微金账户" destVcClass:nil];
-    if ([self.userInfoOneModel.openStatus intValue] < 2) {
+    if ([self.userInfoOneModel.openStatus intValue] <= 2) {
         userInfoList0.isShow = NO;
         userInfoList0.subtitle = @"未开户";
+    }
+    else if ([self.userInfoOneModel.openStatus integerValue] == 3) {
+        userInfoList0.isShow = NO;
+        userInfoList0.subtitle = @"";
     }
     else {
         userInfoList0.isShow = YES;
@@ -61,9 +65,13 @@
     
     UCFUserInfoListItem *userInfoList1 = [UCFUserInfoListItem itemWithTitle:@"尊享账户" destVcClass:nil];
 
-    if ([self.userInfoOneModel.zxOpenStatus intValue] < 2) {
+    if ([self.userInfoOneModel.zxOpenStatus intValue] <= 2) {
         userInfoList1.isShow = NO;
         userInfoList1.subtitle = @"未开户";
+    }
+    else if ([self.userInfoOneModel.zxOpenStatus integerValue] == 3) {
+        userInfoList1.isShow = NO;
+        userInfoList1.subtitle = @"";
     }
     else {
         userInfoList1.isShow = YES;

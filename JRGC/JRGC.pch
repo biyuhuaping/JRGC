@@ -214,7 +214,7 @@ return shared##className; \
 #define PROTOCOLENDERPROMISE  @"https://m.9888.cn/static/wap/protocol-lender-promise/index.html"//出借人承诺书
 
 #define PROTOCOLENTUSTTRANSFER  @"https://m.9888.cn/static/wap/protocol-entrust-transfer/index.html"//履行反洗钱义务的承诺书
-#define HOMEINVITATIONURL @"https://m.9888.cn/static/wap/topic-invite/index.html"
+#define HOMEINVITATIONURL @"https://m.9888.cn/static/wap/topic-invite/index.html" //首页邀请
 
 #define ZXTIP1 @"请先开通尊享徽商存管账户"
 #define ZXTIP2 @"请先设置尊享徽商存管账户交易密码"
