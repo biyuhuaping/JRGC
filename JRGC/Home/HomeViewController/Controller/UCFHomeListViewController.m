@@ -87,7 +87,7 @@
     if (nil == view) {
         view = (UCFHomeListHeaderSectionView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeListHeaderSectionView" owner:self options:nil] lastObject];
     }
-    [view.contentView setBackgroundColor:UIColorWithRGB(0xf9f9f9)];
+    [view.contentView setBackgroundColor:UIColorWithRGB(0xd8d8d8)];
     view.delegate = self;
     view.frame = CGRectMake(0, 0, ScreenWidth, 30);
     UCFHomeListGroupPresenter *groupPresenter = [self.presenter.allDatas objectAtIndex:section];
