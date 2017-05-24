@@ -33,31 +33,31 @@
 
         // place a clickable button on top of everything
         button = [[UIImageView alloc] init];
-        
+        button.image = [UIImage imageNamed:imageName];
         //循环创建UIImage并添加到数组中
-        NSMutableArray *arrayM = [NSMutableArray array];
-        for (int i = 0; i < 12; i++) {
-            //拼接图片名称
-            NSString *imgName = [NSString stringWithFormat:@"package_%d.png",i+1];
-            
-            //根据图片路径加载图片数据
-            UIImage *imgTemp = [UIImage imageNamed:imgName];
-            
-            //将图片名存储到数组
-            [arrayM addObject:imgTemp];
-        }
-        
-        //为animationImages属性赋值一个数组
-        button.animationImages = arrayM;
-        
-        //设置帧动画播放时间
-        button.animationDuration = arrayM.count * 0.1;
-        
-        //设置帧动画播放次数
-        button.animationRepeatCount = 0;
-        
-        //开启动画
-        [button startAnimating];
+//        NSMutableArray *arrayM = [NSMutableArray array];
+//        for (int i = 0; i < 12; i++) {
+//            //拼接图片名称
+//            NSString *imgName = [NSString stringWithFormat:@"package_%d.png",i+1];
+//            
+//            //根据图片路径加载图片数据
+//            UIImage *imgTemp = [UIImage imageNamed:imgName];
+//            
+//            //将图片名存储到数组
+//            [arrayM addObject:imgTemp];
+//        }
+//        
+//        //为animationImages属性赋值一个数组
+//        button.animationImages = arrayM;
+//        
+//        //设置帧动画播放时间
+//        button.animationDuration = arrayM.count * 0.1;
+//        
+//        //设置帧动画播放次数
+//        button.animationRepeatCount = 0;
+//        
+//        //开启动画
+//        [button startAnimating];
         
         [button setFrame:self.bounds];
         

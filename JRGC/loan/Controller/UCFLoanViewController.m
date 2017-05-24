@@ -27,6 +27,7 @@
 {
     [super viewWillAppear:animated];
     [self refreshWebContent];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];

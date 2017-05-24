@@ -76,6 +76,13 @@
         [[MongoliaLayerCenter sharedManager] showLogic];
     });
 }
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+}
+
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -124,7 +131,7 @@
 #pragma mark Dragbtn
 - (void)addDragBtn
 {
-    _dragBtn = [[BJGridItem alloc] initWithTitle:nil withImageName:@"package_1.png" atIndex:0 editable:NO];
+    _dragBtn = [[BJGridItem alloc] initWithTitle:nil withImageName:@"home_icon_rebate" atIndex:0 editable:NO];
     
     [_dragBtn setFrame:CGRectMake(20, 120, 64, 64)];
     _dragBtn.delegate = self;
