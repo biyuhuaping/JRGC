@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -13,6 +13,7 @@
             <connections>
                 <outlet property="beansCountLabel" destination="PhW-Cc-SCy" id="Jvy-wf-OUI"/>
                 <outlet property="tableview" destination="Dhy-F3-MrA" id="gPx-uq-21c"/>
+                <outlet property="userRecommendLabel" destination="SRm-6c-2eP" id="Oyw-xQ-jes"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -67,19 +68,33 @@
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user_icon_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="LdD-rB-hvw">
+                            <rect key="frame" x="348" y="48" width="12" height="21"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="邀请人数：0人" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SRm-6c-2eP" customClass="NZLabel">
+                            <rect key="frame" x="261" y="48" width="82" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" red="0.35686274509999999" green="0.41176470590000003" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="Crn-SL-SoG" firstAttribute="bottom" secondItem="s25-XB-Mhb" secondAttribute="bottom" constant="-1" id="1FH-KL-S8A"/>
+                        <constraint firstItem="SRm-6c-2eP" firstAttribute="centerY" secondItem="PhW-Cc-SCy" secondAttribute="centerY" id="1hP-Ga-OEa"/>
                         <constraint firstItem="PhW-Cc-SCy" firstAttribute="left" secondItem="OUS-PE-bYb" secondAttribute="left" constant="15" id="66C-Ch-coc"/>
                         <constraint firstItem="Crn-SL-SoG" firstAttribute="leading" secondItem="PhW-Cc-SCy" secondAttribute="trailing" id="6NT-Ho-0RL"/>
                         <constraint firstItem="Crn-SL-SoG" firstAttribute="bottom" secondItem="PhW-Cc-SCy" secondAttribute="bottom" constant="-4" id="8xP-FZ-08V"/>
                         <constraint firstItem="Crn-SL-SoG" firstAttribute="leading" secondItem="s25-XB-Mhb" secondAttribute="trailing" constant="2" id="GzE-VQ-QiW"/>
                         <constraint firstItem="PhW-Cc-SCy" firstAttribute="leading" secondItem="OUS-PE-bYb" secondAttribute="leading" constant="15" id="MuX-sQ-TDd"/>
                         <constraint firstItem="s25-XB-Mhb" firstAttribute="left" secondItem="OUS-PE-bYb" secondAttribute="left" constant="15" id="NKR-R3-O7s"/>
+                        <constraint firstItem="LdD-rB-hvw" firstAttribute="leading" secondItem="SRm-6c-2eP" secondAttribute="trailing" constant="5" id="QeQ-RJ-gdN"/>
+                        <constraint firstItem="LdD-rB-hvw" firstAttribute="centerY" secondItem="SRm-6c-2eP" secondAttribute="centerY" id="Saj-K7-Dfm"/>
                         <constraint firstAttribute="bottom" secondItem="PhW-Cc-SCy" secondAttribute="bottom" constant="22" id="Uo0-8S-W2h"/>
+                        <constraint firstAttribute="bottom" secondItem="SRm-6c-2eP" secondAttribute="bottom" constant="26" id="ZQE-MB-XRq"/>
                         <constraint firstAttribute="height" constant="95" id="ejs-oA-fBs"/>
                         <constraint firstItem="s25-XB-Mhb" firstAttribute="top" secondItem="OUS-PE-bYb" secondAttribute="top" constant="22" id="lHA-Ra-esu"/>
+                        <constraint firstAttribute="trailing" secondItem="LdD-rB-hvw" secondAttribute="trailing" constant="15" id="u6t-yL-YOS"/>
                     </constraints>
                     <variation key="default">
                         <mask key="constraints">
@@ -87,6 +102,9 @@
                             <exclude reference="8xP-FZ-08V"/>
                         </mask>
                     </variation>
+                    <connections>
+                        <action selector="gotoInvitationRecordVC:" destination="-1" eventType="touchUpInside" id="W25-Ju-pYM"/>
+                    </connections>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Dhy-F3-MrA">
                     <rect key="frame" x="0.0" y="95" width="375" height="572"/>
@@ -111,10 +129,11 @@
                 <constraint firstAttribute="trailing" secondItem="Dhy-F3-MrA" secondAttribute="trailing" id="hHW-0C-7JH"/>
                 <constraint firstItem="OUS-PE-bYb" firstAttribute="top" secondItem="cvm-Oe-jTL" secondAttribute="bottom" id="igd-Ug-GDt"/>
             </constraints>
-            <point key="canvasLocation" x="-64.5" y="55.5"/>
+            <point key="canvasLocation" x="-361.5" y="-62.5"/>
         </view>
     </objects>
     <resources>
         <image name="homepage_message_arrow" width="7" height="12"/>
+        <image name="user_icon_arrow" width="12" height="21"/>
     </resources>
 </document>
