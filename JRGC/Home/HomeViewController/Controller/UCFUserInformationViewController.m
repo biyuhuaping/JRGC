@@ -252,11 +252,11 @@
     sender.selected = !sender.selected;
     [[NSUserDefaults standardUserDefaults] setBool:sender.selected forKey:@"isVisible"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    self.myLevelLabel.text = self.memLevel;
     if (sender.selected) {
         self.beanLabel.text = self.beanCount;
         self.couponLabel.text = [NSString stringWithFormat:@"%@", self.couponNumber];
         self.scoreLabel.text = self.score;
+        self.myLevelLabel.text = self.memLevel;
         
         self.addedProfitLabel.text = self.addProfit;
         self.totalMoney.text = self.asset;
@@ -266,6 +266,7 @@
         self.beanLabel.text = @"****";
         self.couponLabel.text = @"****";
         self.scoreLabel.text = @"****";
+        self.myLevelLabel.text = @"****";
         
         self.addedProfitLabel.text = @"****";
         self.totalMoney.text = @"****";
@@ -347,7 +348,20 @@
     if (!error) {
         if ([result isKindOfClass:[UCFUserInfoModel class]]) {
             UCFUserInfoModel *userInfo = result;
-            [self.userIconImageView sd_setImageWithURL:[NSURL URLWithString:userInfo.hurl] placeholderImage:[UIImage imageNamed:@"password_icon_head"]];
+            switch ([userInfo.sex integerValue]) {
+                case 0:
+                    self.userIconImageView.image = [UIImage imageNamed:@"user_icon_head_female"];
+                    break;
+                    
+                case 1:
+                    self.userIconImageView.image = [UIImage imageNamed:@"user_icon_head_male"];
+                    break;
+                    
+                default:
+                    self.userIconImageView.image = [UIImage imageNamed:@"password_icon_head"];
+                    break;
+            }
+//            [self.userIconImageView sd_setImageWithURL:[NSURL URLWithString:userInfo.hurl] placeholderImage:[UIImage imageNamed:@""]];
             self.userTicket = userInfo.userCenterTicket;
             self.beanCount = userInfo.beanAmount;
             self.couponNumber = userInfo.couponNumber;
@@ -398,7 +412,6 @@
 
 - (void)refreshUI
 {
-    self.myLevelLabel.text = self.memLevel ? self.memLevel : @"--";
     if (self.visibleBtn.selected) {
         self.beanLabel.text = self.beanCount ? self.beanCount : @"--";
         self.couponLabel.text = self.couponNumber ? [NSString stringWithFormat:@"%@", self.couponNumber] : @"--";
@@ -407,6 +420,7 @@
         self.addedProfitLabel.text = self.addProfit ? self.addProfit : @"--";
         self.totalMoney.text = self.asset ? self.asset : @"--";
         self.availableBalance.text = self.availableBanlance ? self.availableBanlance : @"--";
+        self.myLevelLabel.text = self.memLevel ? self.memLevel : @"--";
     }
     else {
         self.beanLabel.text = @"****";
@@ -416,6 +430,7 @@
         self.addedProfitLabel.text = @"****";
         self.totalMoney.text = @"****";
         self.availableBalance.text = @"****";
+        self.myLevelLabel.text = @"****";
     }
 }
 
