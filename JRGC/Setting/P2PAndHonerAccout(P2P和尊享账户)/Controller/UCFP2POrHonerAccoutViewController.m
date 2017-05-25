@@ -193,7 +193,7 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     if (section == 0) {
-        return 155;
+        return 160;
     }
     return 10;
 }
@@ -206,9 +206,9 @@
 {
     if (section == 0) {
         _headerView = [[[NSBundle mainBundle]loadNibNamed:@"UCFP2POrHornerTabHeaderView" owner:nil options:nil] firstObject];
-        _headerView.frame = CGRectMake(0, 0, ScreenWidth, 155);
+        _headerView.frame = CGRectMake(0, 0, ScreenWidth, 160);
         _headerView.upView.backgroundColor = UIColorWithRGB(0x5b6993);
-        _headerView.downView.backgroundColor = UIColorWithRGB(0x505e87);
+        _headerView.downView.backgroundColor = [UIColor whiteColor];
         _headerView.delegate = self;
         _headerView.accoutTpye = self.accoutType;
         _headerView.isShowOrHideAccoutMoney = _isShowOrHideAccoutMoney;
@@ -217,7 +217,7 @@
         }else{
             _headerView.totalIncomeTitleLab.text = @"微金总资产";
         }
-        UIView *lineView1 = [[UIView alloc]initWithFrame:CGRectMake(0,154.5, ScreenWidth, 0.5)];
+        UIView *lineView1 = [[UIView alloc]initWithFrame:CGRectMake(0,159.5, ScreenWidth, 0.5)];
         lineView1.backgroundColor = UIColorWithRGB(0xd8d8d8);
         [_headerView addSubview:lineView1];
         _headerView.dataDict = _dataDict;
