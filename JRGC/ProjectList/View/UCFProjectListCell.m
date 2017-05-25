@@ -202,10 +202,9 @@
 
     NSInteger status = [model.status integerValue];
     if (_type == UCFProjectListCellTypeProject) {
-        if ([model.type isEqualToString:@"2"] && status == 2) {
+        if (([model.type isEqualToString:@"2"] || [model.type isEqualToString:@"3"]) && status == 2) {
             self.circleProgressView.textStr = @"认购";
-        }
-        else
+        }else
             self.circleProgressView.textStr = [self.status objectAtIndex:status];
     }
     
