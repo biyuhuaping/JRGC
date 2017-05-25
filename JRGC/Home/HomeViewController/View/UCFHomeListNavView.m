@@ -115,19 +115,21 @@
         [self setLoginAndRegisterButtonWithState:YES];
     }
     
-    if (offset < 0) {
+    if (offset <= 0) {
+        if ([UserInfoSingle sharedManager].userId) {
+            self.hidden = YES;
+        }
+        else {
+            self.hidden = NO;
+        }
         [UIView animateWithDuration:0.25 animations:^{
             self.backView.alpha = 0;
         }];
     }
     else {
+        self.hidden = NO;
         CGFloat alf = offset / self.height;
-        if (alf < 0) {
-            [UIView animateWithDuration:0.25 animations:^{
-                self.backView.alpha = 0;
-            }];
-        }
-        else if (alf >= 0 && alf <= 0.9) {
+        if (alf >= 0 && alf <= 0.9) {
             [UIView animateWithDuration:0.25 animations:^{
                 self.backView.alpha = alf;
                 self.bottmLine.alpha = alf;
