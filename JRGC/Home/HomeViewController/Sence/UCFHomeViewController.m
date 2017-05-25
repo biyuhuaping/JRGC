@@ -100,6 +100,8 @@
     if (self) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUI:) name:@"getPersonalCenterNetData" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(responds3DTouchClick) name:@"responds3DTouchClick" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setDefaultState:) name:@"setDefaultViewData" object:nil];
+        
     }
     return self;
 }
@@ -221,12 +223,6 @@
     
     UCFHomeListNavView *navView = [[UCFHomeListNavView alloc] initWithFrame:CGRectZero];
     navView.delegate = self;
-    if ([UserInfoSingle sharedManager].userId) {
-        navView.hidden = YES;
-    }
-    else {
-        navView.hidden = NO;
-    }
     [self.view addSubview:navView];
     self.navView = navView;
     
@@ -284,13 +280,14 @@
     self.homeListVC.tableView.frame = CGRectMake(0, 0, SCREEN_WIDTH, ScreenHeight-49);
     NSString *userId = [UserInfoSingle sharedManager].userId;
     if (userId) {
-        
+        self.navView.hidden = YES;
         CGFloat userInfoViewHeight = [UCFUserInformationViewController viewHeight];
         self.userInfoVC.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, userInfoViewHeight);
         self.navView.loginAndRegisterButton.hidden = YES;
         self.homeListVC.tableView.tableHeaderView = self.userInfoVC.view;
     }
     else {
+        self.navView.hidden = NO;
         CGFloat cycleImageViewHeight = [UCFCycleImageViewController viewHeight];
         self.cycleImageVC.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, cycleImageViewHeight);
         self.navView.loginAndRegisterButton.hidden = NO;
@@ -524,6 +521,20 @@
 //    if (hasSign) {
 //        
 //    }
+}
+
+- (void)setDefaultState:(NSNotification *)noty
+{
+    __weak typeof(self) weakSelf = self;
+    [self.userInfoVC setDefaultState];
+    [self addUI];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [weakSelf fetchData];
+    });
+    //    BOOL hasSign = [self.stateDict objectForKey:@"sign"];
+    //    if (hasSign) {
+    //
+    //    }
 }
 
 #pragma mark - 请求数据
