@@ -319,8 +319,16 @@
                 HSHelper *helper = [HSHelper new];
                 if (![helper checkP2POrWJIsAuthorization:self.accoutType]) {
                     [helper pushP2POrWJAuthorizationType:self.accoutType nav:self.navigationController];
-                    
                     return;
+                }
+                NSInteger isOrder = [model.isOrder integerValue];
+                if ([model.status intValue ] != 2){
+                    if (isOrder <= 0) {
+                        UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前标的详情只对投资人开放"];
+                        [self.navigationController pushViewController:controller animated:YES];
+                        
+                        return;
+                    }
                 }
                if([self.userInfoVC.presenter checkIDAAndBankBlindState:self.accoutType]){//           在这里需要 判断授权 以及开户,需要重新梳理
                         NSInteger isOrder = [model.isOrder integerValue];
@@ -328,6 +336,7 @@
                         if (isOrder > 0) {
                             NSDictionary *parameter = @{@"Id": model.Id, @"userId": [UserInfoSingle sharedManager].userId, @"proType": model.type,@"type":@"3"};
                             [self.userInfoVC.presenter fetchProDetailDataWithParameter:parameter completionHandler:^(NSError *error, id result) {
+                                
                                 NSDictionary *dic = (NSDictionary *)result;
                                 
                                 
@@ -431,6 +440,12 @@
                     [helper pushP2POrWJAuthorizationType:self.accoutType nav:self.navigationController];
                     
                     return;
+                }
+                NSInteger isOrder = [model.isOrder integerValue];
+                if ([model.status intValue ] != 2){
+                    if (isOrder <= 0) {
+                        return;
+                    }
                 }
                 if([self checkUserCanInvestIsDetail:NO type:self.accoutType]){//
                 NSDictionary *parameter = @{@"Id": model.Id, @"userId": [UserInfoSingle sharedManager].userId, @"proType": model.type,@"type":@"4"};
