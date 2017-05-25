@@ -52,6 +52,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *tipsLabel;//提示label
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *tipsViewHeight;//提示View的身高
 @property (strong, nonatomic) id recruitStatus;//值为3时，可以点击tipsview
+@property (weak, nonatomic) IBOutlet UIView *secondView_lineView;
 
 @property (strong, nonatomic) IBOutlet UILabel *label_moutheMoney;
 @property (strong, nonatomic) IBOutlet UILabel *label_p2pMoney;
@@ -89,7 +90,7 @@
     
     [_copBtn setBackgroundImage:[[UIImage imageNamed:@"btn_bule"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:2.5] forState:UIControlStateNormal];
     [_copBtn setBackgroundImage:[[UIImage imageNamed:@"btn_bule_highlight"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:2.5] forState:UIControlStateHighlighted];
-    
+    self.secondView_lineView.backgroundColor = UIColorWithRGB(0xd8d8d8);
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(getMyInvestDataList) name:@"getMyInvestDataList" object:nil];
     _CheckInstructionBtn.hidden = YES;
     [self getMyInvestDataList];
