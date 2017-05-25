@@ -338,7 +338,7 @@
                             [self.userInfoVC.presenter fetchProDetailDataWithParameter:parameter completionHandler:^(NSError *error, id result) {
                                 
                                 NSDictionary *dic = (NSDictionary *)result;
-                                
+                                [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
                                 
                                 NSString *rstcode = dic[@"status"];
                                 NSString *rsttext = dic[@"statusdes"];
@@ -350,6 +350,8 @@
                                     self.intoVCStr = @"ProjectDetailVC";
                                     controller.accoutType = self.accoutType;
                                     controller.rootVc = self;
+                                    
+                                    
                                     [weakSelf.navigationController pushViewController:controller animated:YES];
                                 }else {
                                     [AuxiliaryFunc showAlertViewWithMessage:rsttext];
@@ -365,7 +367,7 @@
                             NSDictionary *parameter = @{@"Id": model.Id, @"userId": [UserInfoSingle sharedManager].userId, @"proType": model.type,@"type":@"3"};
                             [self.userInfoVC.presenter fetchProDetailDataWithParameter:parameter completionHandler:^(NSError *error, id result) {
                                 NSDictionary *dic = (NSDictionary *)result;
-                                
+                                [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
                                 
                                 NSString *rstcode = dic[@"status"];
                                 NSString *rsttext = dic[@"statusdes"];
@@ -451,6 +453,7 @@
                 NSDictionary *parameter = @{@"Id": model.Id, @"userId": [UserInfoSingle sharedManager].userId, @"proType": model.type,@"type":@"4"};
                 [self.userInfoVC.presenter fetchProDetailDataWithParameter:parameter completionHandler:^(NSError *error, id result) {
                     NSString *rstcode = [result objectForKey:@"status"];
+                    [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
                     if ([rstcode intValue] == 1) {
                         UCFPurchaseBidViewController *purchaseViewController = [[UCFPurchaseBidViewController alloc] initWithNibName:@"UCFPurchaseBidViewController" bundle:nil];
                         purchaseViewController.dataDict = result;
