@@ -39,7 +39,8 @@ static NSInteger const kDefaultSpacingBetweenDots = 8;
 /**
  *  Default dot size
  */
-static CGSize const kDefaultDotSize = {8, 8};
+//static CGSize const kDefaultDotSize = {8, 8};
+static CGSize const kDefaultDotSize = {6, 6};
 
 
 @interface TAPageControl()

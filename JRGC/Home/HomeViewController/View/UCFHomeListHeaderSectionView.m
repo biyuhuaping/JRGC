@@ -11,7 +11,6 @@
 @interface UCFHomeListHeaderSectionView  ()
 @property (weak, nonatomic) IBOutlet UIImageView *headerImageView;
 @property (weak, nonatomic) IBOutlet UILabel *headerTitleLabel;
-@property (weak, nonatomic) IBOutlet UIButton *homeListHeaderMoreButton;
 
 @end
 

@@ -16,6 +16,7 @@
 @interface UCFCycleImageViewController () <UCFUserPresenterCyceleImageCallBack, SDCycleScrollViewDelegate>
 @property (strong, nonatomic) UCFUserPresenter *presenter;
 @property (weak, nonatomic) SDCycleScrollView *cycleImageView;
+@property (weak, nonatomic) IBOutlet UIView *bottomSegView;
 @end
 
 @implementation UCFCycleImageViewController
@@ -25,12 +26,14 @@
     [super viewDidLoad];
 //    self.navigationController.navigationBar.hidden = YES;
     
-    NSArray *images = @[[UIImage imageNamed:@"banner_default.png"]];
+    NSArray *images = @[[UIImage imageNamed:@"banner_unlogin_default"]];
     SDCycleScrollView *cycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectZero imagesGroup:images];
         cycleScrollView.delegate = self;
     cycleScrollView.autoScrollTimeInterval = 2.0;
     [self.view addSubview:cycleScrollView];
     self.cycleImageView = cycleScrollView;
+    
+    self.bottomSegView.backgroundColor = UIColorWithRGB(0xebebee);
     
     [self getNormalBannerData];
 }

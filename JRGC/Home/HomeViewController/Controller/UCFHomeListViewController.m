@@ -88,6 +88,8 @@
         view = (UCFHomeListHeaderSectionView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeListHeaderSectionView" owner:self options:nil] lastObject];
     }
     [view.contentView setBackgroundColor:UIColorWithRGB(0xf9f9f9)];
+    [view.upLine setBackgroundColor:UIColorWithRGB(0xebebee)];
+    [view.homeListHeaderMoreButton setTitleColor:UIColorWithRGB(0x4aa1f9) forState:UIControlStateNormal];
     view.delegate = self;
     view.frame = CGRectMake(0, 0, ScreenWidth, 30);
     UCFHomeListGroupPresenter *groupPresenter = [self.presenter.allDatas objectAtIndex:section];

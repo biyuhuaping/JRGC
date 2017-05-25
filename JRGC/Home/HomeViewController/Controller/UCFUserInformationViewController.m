@@ -118,6 +118,8 @@
     [super viewDidLoad];
 //    self.navigationController.navigationBar.hidden = YES;
     
+    [self.view setBackgroundColor:UIColorWithRGB(0xebebee)];
+    
     UCFNoticeView *noticeView = (UCFNoticeView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFNoticeView" owner:self options:nil] lastObject];
     noticeView.delegate = self;
     [self.noticeBackView addSubview:noticeView];

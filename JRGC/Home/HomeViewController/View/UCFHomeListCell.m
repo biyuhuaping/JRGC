@@ -223,6 +223,7 @@
     }
     else if (self.presenter.modelType == UCFHomeListCellModelTypeOneImageBatchCycle) {
         self.oneImageUpHeight.constant = 5;
+        self.oneImageDownHeight.constant = 10;
     }
     
     if (self.oneImageNumLabel.text.length == 1) {
