@@ -91,7 +91,7 @@
         [request setURL:[NSURL URLWithString:CMS_BANNER_UNLOGIN]];
         [request setHTTPMethod:@"GET"];
         AppDelegate * app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-        if (EnvironmentConfiguration == 2 || (app.isSubmitAppStoreTestTime && [[[NSUserDefaults standardUserDefaults] valueForKey:UUID] isEqualToString:@"108027"])) {
+        if (EnvironmentConfiguration == 2 || (app.isSubmitAppStoreTestTime)) {
             [request setValue:@"1" forHTTPHeaderField:@"jrgc-umark"];
         }
         NSHTTPURLResponse *urlResponse = nil;

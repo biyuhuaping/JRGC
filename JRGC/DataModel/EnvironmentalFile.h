@@ -7,12 +7,12 @@
 //
 
 
-#define EnvironmentConfiguration  1// 0测试 1正式 2灰度测试
+#define EnvironmentConfiguration  2// 0测试 1正式 2灰度测试
 
 #define AES_TESTKEY @"awejfij124321aweg@##$!*&+=-13123j24325"
 #define QDCODE      @""
 
-#if EnvironmentConfiguration == 1
+#if EnvironmentConfiguration == 2
 
 #define SERVER_IP       @"https://app.9888.cn/"      //正式网
 #define P2P_SERVER_IP   @"https://app.9888.cn/"

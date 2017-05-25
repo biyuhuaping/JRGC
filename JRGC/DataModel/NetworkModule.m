@@ -938,12 +938,13 @@ static NetworkModule *gInstance = NULL;
     UCFLoginViewController *loginViewController = [[[UCFLoginViewController alloc] init] autorelease];
     UINavigationController *loginNaviController = [[[UINavigationController alloc] initWithRootViewController:loginViewController] autorelease];
     AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
-    if (app.tabBarController.selectedIndex == 4) {
+//    if (app.tabBarController.selectedIndex == 4) {
         UINavigationController *nav = [app.tabBarController.childViewControllers objectAtIndex:4];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [nav popToRootViewControllerAnimated:NO];
+            [app.tabBarController setSelectedIndex:0];
         });
-    }
+//    }
     [app.tabBarController presentViewController:loginNaviController animated:YES completion:nil];
 }
 
@@ -956,6 +957,7 @@ static NetworkModule *gInstance = NULL;
             NSUInteger selectedIndex = appDelegate.tabBarController.selectedIndex;
             UINavigationController *nav = [appDelegate.tabBarController.viewControllers objectAtIndex:selectedIndex];
             [nav popToRootViewControllerAnimated:NO];
+            [appDelegate.tabBarController setSelectedIndex:0];
         } else {//重新登录
             [self shouLoginView];
         }
@@ -968,6 +970,7 @@ static NetworkModule *gInstance = NULL;
             NSUInteger selectedIndex = appDelegate.tabBarController.selectedIndex;
             UINavigationController *nav = [appDelegate.tabBarController.viewControllers objectAtIndex:selectedIndex];
             [nav popToRootViewControllerAnimated:NO];
+            [appDelegate.tabBarController setSelectedIndex:0];
         } else {
             [self shouLoginView];
         }
