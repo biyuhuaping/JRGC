@@ -57,8 +57,8 @@
     self.navigationController.navigationBar.translucent = NO;
 
     [self addLeftButton];
-    baseTitleLabel.text = self.accoutType == SelectAccoutTypeHoner ? @"购买":@"投标";
-    self.zxOrP2pStr = self.accoutType == SelectAccoutTypeHoner ?@"购买":@"投资";
+    baseTitleLabel.text = self.accoutType == SelectAccoutTypeHoner ? @"购买":@"出借";
+    self.zxOrP2pStr = self.accoutType == SelectAccoutTypeHoner ?@"购买":@"出借";
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     

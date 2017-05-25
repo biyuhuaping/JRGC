@@ -74,7 +74,7 @@
     if ([tp isEqualToString:@"1"]) {
         NSString *strAmt = [UCFToolsMehod isNullOrNilWithString:[NSString stringWithFormat:@"%@",model.investAmt]];
         strAmt = [UCFToolsMehod dealmoneyFormart:strAmt];
-        NSString *textStr  = self.accoutType == SelectAccoutTypeP2P ? @"出借金额：" :@"投资金额：";
+        NSString *textStr  = self.accoutType == SelectAccoutTypeP2P ? @"出借金额：" :@"认购金额：";
         NSMutableAttributedString *str1 = [SharedSingleton getAcolorfulStringWithText1:textStr Color1:UIColorWithRGB(0x999999) Text2:[NSString stringWithFormat:@"¥%@", [UCFToolsMehod isNullOrNilWithString:strAmt]] Color2:UIColorWithRGB(0xfd4d4c) AllText:[NSString stringWithFormat:@"%@¥%@",textStr,[UCFToolsMehod isNullOrNilWithString:strAmt]]];
         investmentAmountLabel.attributedText = str1;
         NSString *strRate = [NSString stringWithFormat:@"%@",model.annualRate];

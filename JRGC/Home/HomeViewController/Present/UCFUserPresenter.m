@@ -9,7 +9,7 @@
 #import "UCFUserPresenter.h"
 #import "UCFUserInfoListItem.h"
 #import "HSHelper.h"
-
+#import "UserInfoSingle.h"
 @interface UCFUserPresenter ()
 @property (strong, nonatomic) UCFHomeAPIManager *apiManager;
 @property (copy, nonatomic) NSString *userId;
@@ -158,11 +158,14 @@
 
 #pragma mark - 无奈的代码
 - (BOOL)checkIDAAndBankBlindState:(SelectAccoutType)type {
-    NSUInteger openStatus = (type == SelectAccoutTypeP2P ? [self.userInfoOneModel.openStatus integerValue] : [self.userInfoOneModel.zxOpenStatus integerValue]);
+    
+//    [UserInfoSingle sharedManager].openStatus = [listInfo.openStatus integerValue];
+//    [UserInfoSingle sharedManager].enjoyOpenStatus
+    NSUInteger openStatus = (type == SelectAccoutTypeP2P ? [UserInfoSingle sharedManager].openStatus  : [UserInfoSingle sharedManager].enjoyOpenStatus );
     __weak typeof(self) weakSelf = self;
     if (openStatus == 1 || openStatus == 2) {
         NSString *message = (type == SelectAccoutTypeP2P ? P2PTIP1 : ZXTIP1);
-        NSInteger step = (type == SelectAccoutTypeP2P ? [self.userInfoOneModel.openStatus integerValue] : [self.userInfoOneModel.zxOpenStatus integerValue]);
+        NSInteger step = (type == SelectAccoutTypeP2P ? [UserInfoSingle sharedManager].openStatus  : [UserInfoSingle sharedManager].enjoyOpenStatus);
         BlockUIAlertView *alert = [[BlockUIAlertView alloc] initWithTitle:@"提示" message:message cancelButtonTitle:@"取消" clickButton:^(NSInteger index){
             if (index == 1) {
                 HSHelper *helper = [HSHelper new];

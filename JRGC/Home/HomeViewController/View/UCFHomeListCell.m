@@ -124,7 +124,7 @@
         }
         
         NSArray *statusArr = @[@"未审核",@"等待确认",@"出借",@"流标",@"满标",@"回款中",@"已回款"];
-        if ([presenter.item.type isEqualToString:@"2"] && status == 2) {
+        if (([presenter.item.type isEqualToString:@"2"] || [presenter.item.type isEqualToString:@"3"] ) && status == 2) {
             self.circleProgressView.progressText = @"认购";
         }
         else
