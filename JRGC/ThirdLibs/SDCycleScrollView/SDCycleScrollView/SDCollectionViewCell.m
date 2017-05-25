@@ -33,6 +33,7 @@
 {
     if (self = [super initWithFrame:frame]) {
         UIImageView *imageView = [[UIImageView alloc] init];
+        [imageView setBackgroundColor:UIColorWithRGB(0xebebee)];
         _imageView = imageView;
         [self addSubview:imageView];
         

@@ -279,13 +279,13 @@
         
         CGFloat userInfoViewHeight = [UCFUserInformationViewController viewHeight];
         self.userInfoVC.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, userInfoViewHeight);
-        self.navView.hidden = YES;
+        self.navView.loginAndRegisterButton.hidden = YES;
         self.homeListVC.tableView.tableHeaderView = self.userInfoVC.view;
     }
     else {
         CGFloat cycleImageViewHeight = [UCFCycleImageViewController viewHeight];
         self.cycleImageVC.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, cycleImageViewHeight);
-        self.navView.hidden = NO;
+        self.navView.loginAndRegisterButton.hidden = NO;
         self.homeListVC.tableView.tableHeaderView = self.cycleImageVC.view;
     }
     self.navView.frame = CGRectMake(0, 0, self.view.width, 64);

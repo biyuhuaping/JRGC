@@ -10,7 +10,6 @@
 
 @interface UCFHomeListNavView ()
 @property (weak, nonatomic) UILabel *titleLabel;
-@property (weak, nonatomic) UIButton *loginAndRegisterButton;
 @property (weak, nonatomic) UIImageView *backView;
 @property (weak, nonatomic) UIView *bottmLine;
 @end
