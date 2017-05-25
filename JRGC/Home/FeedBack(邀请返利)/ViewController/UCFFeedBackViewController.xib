@@ -24,6 +24,7 @@
                 <outlet property="ownRateLab" destination="k4m-vg-lj7" id="NbP-h2-pZz"/>
                 <outlet property="p2pInviteFriendsCountLab" destination="bxf-dw-anQ" id="HlX-5p-cvU"/>
                 <outlet property="p2pRebateAmtLab" destination="fcQ-eX-kTw" id="KpK-ii-GLm"/>
+                <outlet property="secondView_lineView" destination="0u4-YH-XGc" id="DU2-SR-Jvv"/>
                 <outlet property="shareBtn" destination="Aza-iU-VrT" id="pFe-Sq-MIG"/>
                 <outlet property="sumCommLab" destination="iQ1-xT-Zzg" id="pc9-fp-a3K"/>
                 <outlet property="tipsLabel" destination="WZt-9Q-7lh" id="euY-Un-pqB"/>
@@ -250,12 +251,22 @@
                                                         <constraint firstItem="TNe-jc-YC2" firstAttribute="top" secondItem="JMj-ET-id4" secondAttribute="top" constant="11" id="tul-Ar-r48"/>
                                                     </constraints>
                                                 </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0u4-YH-XGc">
+                                                    <rect key="frame" x="0.0" y="54" width="375" height="0.5"/>
+                                                    <color key="backgroundColor" red="0.84705882352941175" green="0.84705882352941175" blue="0.84705882352941175" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="0.5" id="8vQ-eM-wUJ"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstItem="JMj-ET-id4" firstAttribute="leading" secondItem="mBP-f4-EA5" secondAttribute="trailing" id="7S2-P2-L4h"/>
+                                                <constraint firstItem="0u4-YH-XGc" firstAttribute="leading" secondItem="txc-C8-mul" secondAttribute="leading" id="Abj-KR-RvC"/>
                                                 <constraint firstAttribute="bottom" secondItem="mBP-f4-EA5" secondAttribute="bottom" id="FIq-y0-Phh"/>
                                                 <constraint firstAttribute="right" secondItem="6LY-rK-Oj2" secondAttribute="right" id="JHR-iZ-k8g"/>
+                                                <constraint firstAttribute="bottom" secondItem="0u4-YH-XGc" secondAttribute="bottom" id="MGs-Sn-6lS"/>
+                                                <constraint firstAttribute="trailing" secondItem="0u4-YH-XGc" secondAttribute="trailing" id="MsC-e1-jBQ"/>
                                                 <constraint firstItem="mBP-f4-EA5" firstAttribute="top" secondItem="txc-C8-mul" secondAttribute="top" id="MvJ-Ao-0ev"/>
                                                 <constraint firstAttribute="trailing" secondItem="JMj-ET-id4" secondAttribute="trailing" id="PMa-vR-kn5"/>
                                                 <constraint firstAttribute="bottom" secondItem="JMj-ET-id4" secondAttribute="bottom" id="XV6-aK-bn5"/>
@@ -599,7 +610,7 @@
                 <constraint firstItem="RBT-Dm-i7z" firstAttribute="leading" secondItem="YvA-0F-Ft3" secondAttribute="leading" id="trV-fq-ARl"/>
                 <constraint firstItem="RBT-Dm-i7z" firstAttribute="top" secondItem="YvA-0F-Ft3" secondAttribute="top" id="veT-bz-Eye"/>
             </constraints>
-            <point key="canvasLocation" x="-524" y="8"/>
+            <point key="canvasLocation" x="-524.5" y="7.5"/>
         </view>
     </objects>
     <resources>
