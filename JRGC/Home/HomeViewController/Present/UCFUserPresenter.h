@@ -28,6 +28,7 @@
 @property (strong, nonatomic) UCFUserInfoModel *userInfoOneModel;
 @property (weak, nonatomic) id<UCFUserPresenterUserInfoCallBack> userInfoViewDelegate;
 @property (weak, nonatomic) id<UCFUserPresenterCyceleImageCallBack> cycleImageViewDelegate;
+@property (assign, nonatomic) BOOL canClicked;
 
 + (instancetype)presenter;
 - (NSArray *)allDatas;
@@ -40,4 +41,5 @@
 #pragma mark - 刷新token
 - (void)refreshData;
 - (BOOL)checkIDAAndBankBlindState:(SelectAccoutType)type;
+- (void)setDefault;
 @end

@@ -218,6 +218,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (!self.presenter.canClicked) {
+        return;
+    }
     
     UCFUserInfoListItem *item = [self.presenter.allDatas objectAtIndex:indexPath.row];
     
@@ -432,6 +435,23 @@
         self.availableBalance.text = @"****";
         self.myLevelLabel.text = @"****";
     }
+}
+
+- (void)setDefaultState
+{
+    self.visibleBtn.selected = YES;
+    self.beanCount = nil;
+    self.couponNumber = nil;
+    self.score = nil;
+    
+    self.addProfit = nil;
+    self.asset = nil;
+    self.availableBanlance = nil;
+    self.memLevel  = nil;
+    [self refreshUI];
+    
+    [self.presenter setDefault];
+    [self.tableview reloadData];
 }
 
 - (void)userInfoPresenter:(UCFUserPresenter *)presenter didReturnPrdClaimsDealBidWithResult:(id)result error:(NSError *)error

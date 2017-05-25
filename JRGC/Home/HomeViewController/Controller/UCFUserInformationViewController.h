@@ -39,4 +39,5 @@
 - (void)setMyLevelVCGenerator:(ViewControllerGenerator)myLevelVCGenerator;
 - (void)signForRedBag;
 - (void)refreshNotice;
+- (void)setDefaultState;
 @end

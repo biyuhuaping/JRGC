@@ -30,6 +30,7 @@
     if (self = [super init]) {
         self.userInfoListCells = [NSMutableArray array];
         self.apiManager = [UCFHomeAPIManager new];
+        self.canClicked = YES;
         [self initUI];
     }
     return self;
@@ -87,7 +88,9 @@
         return;
     }
     __weak typeof(self) weakSelf = self;
+    self.canClicked = NO;
     [self.apiManager fetchUserInfoOneWithUserId:self.userId completionHandler:^(NSError *error, id result) {
+        weakSelf.canClicked = YES;
         if ([result isKindOfClass:[UCFUserInfoModel class]]) {
             weakSelf.userInfoOneModel = result;
             [weakSelf.userInfoListCells removeAllObjects];
@@ -176,5 +179,10 @@
     return YES;
 }
 
+- (void)setDefault
+{
+    self.userInfoOneModel = nil;
+    [self initUI];
+}
 
 @end
