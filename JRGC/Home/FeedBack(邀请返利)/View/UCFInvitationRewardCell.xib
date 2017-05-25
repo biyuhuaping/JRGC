@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -37,15 +37,25 @@
                             <constraint firstAttribute="width" secondItem="kF1-OI-mnE" secondAttribute="height" multiplier="2.4:1" id="Hia-p0-423"/>
                         </constraints>
                     </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jtA-qg-neD">
+                        <rect key="frame" x="0.0" y="485" width="345" height="0.5"/>
+                        <color key="backgroundColor" red="0.84705882352941175" green="0.84705882352941175" blue="0.84705882352941175" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="0.5" id="zdy-z1-uI4"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="Lws-XF-88u" firstAttribute="top" secondItem="5Rz-T2-JCB" secondAttribute="bottom" constant="15" id="0KW-em-ewn"/>
+                    <constraint firstAttribute="trailing" secondItem="jtA-qg-neD" secondAttribute="trailing" id="BBd-YA-rHa"/>
                     <constraint firstAttribute="trailing" secondItem="Lws-XF-88u" secondAttribute="trailing" constant="10" id="Ezx-L7-xfq"/>
                     <constraint firstAttribute="bottom" secondItem="kF1-OI-mnE" secondAttribute="bottom" constant="15" id="Fen-qb-CSx"/>
                     <constraint firstItem="5Rz-T2-JCB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="Ng4-rU-UzS"/>
                     <constraint firstAttribute="trailing" secondItem="kF1-OI-mnE" secondAttribute="trailing" constant="10" id="S7b-8y-zNa"/>
                     <constraint firstAttribute="trailing" secondItem="5Rz-T2-JCB" secondAttribute="trailing" constant="15" id="Um5-Ji-8EB"/>
                     <constraint firstItem="kF1-OI-mnE" firstAttribute="top" secondItem="Lws-XF-88u" secondAttribute="bottom" constant="15" id="VAq-sf-KHS"/>
+                    <constraint firstAttribute="bottom" secondItem="jtA-qg-neD" secondAttribute="bottom" id="e4q-f8-mdW"/>
+                    <constraint firstItem="jtA-qg-neD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="g9R-Ku-Z1W"/>
                     <constraint firstItem="kF1-OI-mnE" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="j7A-p5-ez3"/>
                     <constraint firstItem="Lws-XF-88u" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="kGy-zO-Gyf"/>
                     <constraint firstItem="5Rz-T2-JCB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="lMN-9c-iyH"/>

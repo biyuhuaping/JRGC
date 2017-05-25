@@ -155,8 +155,8 @@
 //
     NSString *temp = [NSString stringWithFormat:@"%lf",[model.borrowAmount doubleValue]-[model.completeLoan doubleValue]];
     
-    _repayModeLab.text = [self moneywithRemaining:temp total:model.borrowAmount];//剩余比例
-    _remainingLab.text = model.repayModeText;//还款方式
+    _repayModeLab.text = model.repayModeText;//还款方式
+    _remainingLab.text = [self moneywithRemaining:temp total:model.borrowAmount];//剩余比例
 
     switch (imaArr.count) {
         case 1: {
@@ -316,8 +316,8 @@
     [_progressLab setFont:[UIFont systemFontOfSize:13] string:@"%"];
      _repayPeriodLab.text = batchBidModel.colPeriodTxt;//投资期限
     _minInvestLab.text = [NSString stringWithFormat:@"%d元起",[batchBidModel.colMinInvest intValue]];//起投金额
-    _remainingLab.text = batchBidModel.colRepayModeTxt;
-    _repayModeLab.text = [self moneywithRemaining:batchBidModel.canBuyAmt total:batchBidModel.totalAmt];
+    _remainingLab.text = [self moneywithRemaining:batchBidModel.canBuyAmt total:batchBidModel.totalAmt];
+    _repayModeLab.text = batchBidModel.colRepayModeTxt;
     
 
     float totalAmt = [batchBidModel.totalAmt floatValue];
