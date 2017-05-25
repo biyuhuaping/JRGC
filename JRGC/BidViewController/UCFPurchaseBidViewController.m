@@ -56,6 +56,7 @@
 @property (strong, nonatomic) NSMutableDictionary       *coupDict;                  //从优惠券页面选择过来的选中数据
 @property (copy, nonatomic) NSString                    *tmpTextFieldTextValue;     //选中
 @property (copy, nonatomic) NSString                    *wJOrZxStr;//出借还是认购
+@property (copy, nonatomic) NSString                    *type;//尊享标 分为 委托协议尊享标
 @end
 
 @implementation UCFPurchaseBidViewController
@@ -186,7 +187,7 @@
     self.bidArray = [NSMutableArray array];
     [self.bidArray addObject:info1];
     
-    if (self.bidType == 0 && [info1.type isEqualToString:@"2"]) {
+    if (self.bidType == 0 && ([info1.type isEqualToString:@"2"]  ||[info1.type isEqualToString:@"3"] )) {
         _isP2P = NO;
         baseTitleLabel.text = @"认购";
     }else{
@@ -1116,7 +1117,7 @@
 {
     
 }
-#pragma mark - MoneyBoardCellDelegate
+#pragma mark - MoneyBoardCellDelegate 显示计算器
 - (void)showCalutorView
 {
     [self.view endEditing:YES];
