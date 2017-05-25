@@ -38,7 +38,7 @@
             YFRollingLabel *noticeLabel = [[YFRollingLabel alloc] initWithFrame:CGRectMake(15, 0, ScreenWidth-45, self.height)  textArray:self.noticeArray font:[UIFont systemFontOfSize:15] textColor:[UIColor whiteColor]];
             [self addSubview:noticeLabel];
             
-            noticeLabel.speed = 2;
+            noticeLabel.speed = 1;
             [noticeLabel setOrientation:RollingOrientationLeft];
             self.noticeLabel = noticeLabel;
         }
