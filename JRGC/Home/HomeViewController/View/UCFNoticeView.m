@@ -35,8 +35,9 @@
     [self.noticeLabel setInternalWidth:self.noticeLabel.width / 3];
     if (self.noticeArray.count > 0) {
         if (!self.noticeLabel) {
-            YFRollingLabel *noticeLabel = [[YFRollingLabel alloc] initWithFrame:CGRectMake(15, 0, ScreenWidth-30, self.height)  textArray:self.noticeArray font:[UIFont systemFontOfSize:20] textColor:[UIColor greenColor]];
+            YFRollingLabel *noticeLabel = [[YFRollingLabel alloc] initWithFrame:CGRectMake(15, 0, ScreenWidth-45, self.height)  textArray:self.noticeArray font:[UIFont systemFontOfSize:15] textColor:[UIColor whiteColor]];
             [self addSubview:noticeLabel];
+            
             noticeLabel.speed = 2;
             [noticeLabel setOrientation:RollingOrientationLeft];
             self.noticeLabel = noticeLabel;

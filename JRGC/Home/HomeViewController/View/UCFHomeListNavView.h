@@ -16,6 +16,7 @@
 @end
 
 @interface UCFHomeListNavView : UIView
+@property (weak, nonatomic) UIButton *loginAndRegisterButton;
 @property (assign, nonatomic) CGFloat offset;
 @property (weak, nonatomic) id<UCFHomeListNavViewDelegate> delegate;
 @end
