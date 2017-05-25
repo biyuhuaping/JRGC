@@ -80,8 +80,8 @@
     UILabel *label1 = [UILabel labelWithFrame:CGRectMake(XPOS, CGRectGetMaxY(_userPhoneNumField.frame) + 8, ScreenWidth - XPOS*2, 20) text:[NSString stringWithFormat:@"*注册即视为我已阅读并同意"] textColor:UIColorWithRGB(0x777777) font:[UIFont systemFontOfSize:13]];
     label1.textAlignment = NSTextAlignmentCenter;
     [self addSubview:label1];
-    
-    UILabel *label2 = [UILabel labelWithFrame:CGRectMake(XPOS, CGRectGetMaxY(label1.frame) + 5, ScreenWidth - XPOS*2, 20) text:[NSString stringWithFormat:@"《金融工场用户服务协议》"] textColor:UIColorWithRGB(0x4aa1f9) font:[UIFont systemFontOfSize:13]];
+//    《金融工场用户服务协议》
+    UILabel *label2 = [UILabel labelWithFrame:CGRectMake(XPOS, CGRectGetMaxY(label1.frame) + 5, ScreenWidth - XPOS*2, 20) text:[NSString stringWithFormat:@"《注册协议》"] textColor:UIColorWithRGB(0x4aa1f9) font:[UIFont systemFontOfSize:13]];
     label2.textAlignment = NSTextAlignmentCenter;
     [self addSubview:label2];
     
