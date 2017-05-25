@@ -113,12 +113,24 @@
 		<true/>
 		<key>NSExceptionDomains</key>
 		<dict>
+			<key>c.happycp.com</key>
+			<dict>
+				<key> NSIncludesSubdomains </key>
+				<true/>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+			</dict>
 			<key>jpush.cn</key>
 			<dict>
 				<key>NSExceptionAllowsInsecureHTTPLoads</key>
 				<true/>
 				<key>NSIncludesSubdomains</key>
 				<true/>
+			</dict>
+			<key>m.ucfpay.com</key>
+			<dict>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<false/>
 			</dict>
 			<key>mp.weixin.qq.com</key>
 			<dict>
