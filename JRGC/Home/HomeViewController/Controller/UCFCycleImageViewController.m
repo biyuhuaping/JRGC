@@ -29,7 +29,7 @@
     NSArray *images = @[[UIImage imageNamed:@"banner_unlogin_default"]];
     SDCycleScrollView *cycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectZero imagesGroup:images];
         cycleScrollView.delegate = self;
-    cycleScrollView.autoScrollTimeInterval = 2.0;
+    cycleScrollView.autoScrollTimeInterval = 7.0;
     [self.view addSubview:cycleScrollView];
     self.cycleImageView = cycleScrollView;
     

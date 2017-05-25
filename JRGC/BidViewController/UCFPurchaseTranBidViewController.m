@@ -275,7 +275,8 @@
     investmentButton.backgroundColor = UIColorWithRGB(0xfd4d4c);
     investmentButton.layer.cornerRadius = 2.0;
     investmentButton.layer.masksToBounds = YES;
-    [investmentButton setTitle:@"立即购买" forState:UIControlStateNormal];
+    NSString *buttonStr = self.accoutType == SelectAccoutTypeHoner ? @"立即购买":@"立即出借";
+    [investmentButton setTitle:buttonStr forState:UIControlStateNormal];
     [investmentButton addTarget:self action:@selector(investmentViewClick:) forControlEvents:UIControlEventTouchUpInside];
     [investBaseView addSubview:investmentButton];
     

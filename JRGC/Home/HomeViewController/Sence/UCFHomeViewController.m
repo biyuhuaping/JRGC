@@ -221,6 +221,12 @@
     
     UCFHomeListNavView *navView = [[UCFHomeListNavView alloc] initWithFrame:CGRectZero];
     navView.delegate = self;
+    if ([UserInfoSingle sharedManager].userId) {
+        navView.hidden = YES;
+    }
+    else {
+        navView.hidden = NO;
+    }
     [self.view addSubview:navView];
     self.navView = navView;
     
@@ -538,7 +544,7 @@
             if ([UserInfoSingle sharedManager].userId) {
                 NSString *siteNotice = [result objectForKey:@"siteNotice"];
                 NSString *originSiteNotice = [[NSUserDefaults standardUserDefaults] stringForKey:@"originSiteNotice"];
-                if (siteNotice != nil) {
+                if (siteNotice.length > 0) {
                     if (![originSiteNotice isEqualToString:siteNotice] ) {
                         [[NSUserDefaults standardUserDefaults] setValue:siteNotice forKey:@"originSiteNotice"];
                         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isShowNotice"];
