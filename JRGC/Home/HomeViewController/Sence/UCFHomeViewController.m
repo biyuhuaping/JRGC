@@ -533,14 +533,22 @@
             if ([UserInfoSingle sharedManager].userId) {
                 NSString *siteNotice = [result objectForKey:@"siteNotice"];
                 NSString *originSiteNotice = [[NSUserDefaults standardUserDefaults] stringForKey:@"originSiteNotice"];
-                if (![originSiteNotice isEqualToString:siteNotice] && (siteNotice != nil)) {
-                    [[NSUserDefaults standardUserDefaults] setValue:siteNotice forKey:@"originSiteNotice"];
-                    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isShowNotice"];
-                    [[NSUserDefaults standardUserDefaults] synchronize];
+                if (siteNotice != nil) {
+                    if (![originSiteNotice isEqualToString:siteNotice] ) {
+                        [[NSUserDefaults standardUserDefaults] setValue:siteNotice forKey:@"originSiteNotice"];
+                        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isShowNotice"];
+                        [[NSUserDefaults standardUserDefaults] synchronize];
+                    }
+                    
                     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                         weakSelf.userInfoVC.noticeStr = siteNotice;
                         [weakSelf refreshNotice];
                     });
+                }
+                else{
+                    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isShowNotice"];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                    [weakSelf refreshNotice];
                 }
             }
         }
