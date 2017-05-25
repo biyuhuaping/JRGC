@@ -348,7 +348,20 @@
     if (!error) {
         if ([result isKindOfClass:[UCFUserInfoModel class]]) {
             UCFUserInfoModel *userInfo = result;
-            [self.userIconImageView sd_setImageWithURL:[NSURL URLWithString:userInfo.hurl] placeholderImage:[UIImage imageNamed:@"password_icon_head"]];
+            switch ([userInfo.sex integerValue]) {
+                case 0:
+                    self.userIconImageView.image = [UIImage imageNamed:@"user_icon_head_female"];
+                    break;
+                    
+                case 1:
+                    self.userIconImageView.image = [UIImage imageNamed:@"user_icon_head_male"];
+                    break;
+                    
+                default:
+                    self.userIconImageView.image = [UIImage imageNamed:@"password_icon_head"];
+                    break;
+            }
+//            [self.userIconImageView sd_setImageWithURL:[NSURL URLWithString:userInfo.hurl] placeholderImage:[UIImage imageNamed:@""]];
             self.userTicket = userInfo.userCenterTicket;
             self.beanCount = userInfo.beanAmount;
             self.couponNumber = userInfo.couponNumber;
