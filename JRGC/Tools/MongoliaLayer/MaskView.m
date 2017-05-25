@@ -66,7 +66,9 @@
     } else if (ScreenHeight < 737) {
         height = 161;
     }
-    self.imageView1 = [[UIImageView alloc] initWithFrame:CGRectMake(0, height, ScreenWidth,(ScreenWidth * 497.0f)/960.0f )];
+    BOOL isShow = [[[NSUserDefaults standardUserDefaults] objectForKey:@"isShowNotice"] boolValue];
+    
+    self.imageView1 = [[UIImageView alloc] initWithFrame:CGRectMake(0, (isShow ? height + 35 : height), ScreenWidth,(ScreenWidth * 497.0f)/960.0f )];
     _imageView1.backgroundColor = [UIColor clearColor];
     _imageView1.image = [UIImage imageNamed:@"zhezhao1"];
     [self addSubview:self.imageView1];
