@@ -148,9 +148,9 @@
 //    if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
 //        [self.tableView setLayoutMargins: UIEdgeInsetsZero];
 //    }
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-    self.tableView.separatorColor = UIColorWithRGB(0xe3e5ea);
-    self.tableView.separatorInset = UIEdgeInsetsMake(0,15, 0, 0);
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+//    self.tableView.separatorColor = UIColorWithRGB(0xe3e5ea);
+//    self.tableView.separatorInset = UIEdgeInsetsMake(0,15, 0, 0);
     _isHiddenNoticLab = YES;
     //=========  下拉刷新、上拉加载更多  =========
     __weak typeof(self) weakSelf = self;
@@ -692,7 +692,7 @@
 {
     UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 10)];
     view.backgroundColor = [UIColor clearColor];
-    [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:view isTop:YES];
+//    [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:view isTop:YES];
     return view;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -700,7 +700,7 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 60;
+    return 61;
     
 //    if (indexPath.section == 1) {
 //        return 204;
@@ -748,11 +748,13 @@
         UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 0.5)];
         line.backgroundColor = UIColorWithRGB(0xd8d8d8);
         [cell.contentView addSubview:line];
-//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-    if (indexPath.row == [sectionArray count] - 1) {
-        self.tableView.separatorColor = UIColorWithRGB(0Xd8d8d8);
-        cell.separatorInset =  UIEdgeInsetsMake(0,0, 0, 0);
+    if (indexPath.row <=[sectionArray count] -2) {
+        cell.lineView.backgroundColor = UIColorWithRGB(0xeae5ea);
+        cell.lineLeft.constant = 15;
+    }else if (indexPath.row == [sectionArray count] - 1) {
+        cell.lineView.backgroundColor = UIColorWithRGB(0Xd8d8d8);
+        cell.lineLeft.constant = 0;
     }
 
     return cell;
