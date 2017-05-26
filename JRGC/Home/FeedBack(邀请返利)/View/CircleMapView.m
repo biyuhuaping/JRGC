@@ -62,11 +62,13 @@
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     if ([self.model.totalAmount doubleValue] == 0) {
         [self drawArcWithCGContextRef:ctx andWithPoint:CGPointMake(self.frame.size.height * 0.5, self.frame.size.height / 2) andWithAngle_start:0 andWithAngle_end:360 andWithColor:[UIColor colorWithHexString:@"e3e5ea"] andInt:0];
-        for (int i = 0; i < self.model.chartDetail.count; i++) {
-            //小圆的中心点
-            CGFloat xx = _circleRadius * 2 + 30;
-            CGFloat yy = 50 + i*(50+2.5);
-            [self addInstructionsAndnumber:[UIColor colorWithHexString: self.colors[i]] andCGContextRef:ctx andX:xx andY:yy andInt:i];
+        if (self.model.chartDetail.count > 0) {
+            for (int i = 0; i < self.model.chartDetail.count; i++) {
+                //小圆的中心点
+                CGFloat xx = _circleRadius * 2 + 30;
+                CGFloat yy = 50 + i*(50+2.5);
+                [self addInstructionsAndnumber:[UIColor colorWithHexString: self.colors[i]] andCGContextRef:ctx andX:xx andY:yy andInt:i];
+            }
         }
     }
     else {
