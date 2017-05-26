@@ -827,8 +827,8 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
         UCFBatchBidWebViewController *webView = [[UCFBatchBidWebViewController alloc]initWithNibName:@"UCFBatchBidWebViewController" bundle:nil];
         webView.url =  urlStr;
         webView.webDataDic = reqDict;
-        webView.navTitle = @"投资成功";
-        webView.rootVc = @"collectionDetailVC";
+        webView.navTitle = @"出借成功";
+        webView.rootVc = self;
         [self.navigationController pushViewController:webView animated:YES];
     }
 }

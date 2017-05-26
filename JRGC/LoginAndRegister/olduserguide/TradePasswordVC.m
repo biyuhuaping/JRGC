@@ -67,8 +67,11 @@
     //如果是按开通徽商流程进入本页面(不需要填身份证)，就只显示2行
     if (self.db.isOpenAccount) {
         _tableViewHeight.constant = 88;//176;
-        [self.tableView reloadData];
+      
+    }else{
+        _tableViewHeight.constant = 176;//176;显示4行的情况
     }
+      [self.tableView reloadData];
 }
 
 #pragma mark - 验证码
@@ -208,6 +211,10 @@
         return 2;
     }
     return 4;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    return 44.0f;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
