@@ -132,11 +132,15 @@ NSString * const ID = @"cycleCell";
 {
     int currentIndex = _mainView.contentOffset.x / _flowLayout.itemSize.width;
     int targetIndex = currentIndex + 1;
+    
+    targetIndex = targetIndex < 0 ? 0 : targetIndex;
+    
     if (targetIndex == _totalItemsCount) {
         targetIndex = _totalItemsCount * 0.5;
         [_mainView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:targetIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
     }
-    else {
+    else   {
+        
         [_mainView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:targetIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:YES];
     }
 }

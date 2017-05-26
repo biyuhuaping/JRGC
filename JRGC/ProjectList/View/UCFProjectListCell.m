@@ -59,7 +59,7 @@
             [self.delegate cell:self clickInvestBtn:sender withModel:self.model];
         }
     }
-    else if (self.type == UCFProjectListCellTypeTransfer) {
+    else if (self.type == UCFProjectListCellTypeTransfer || self.type == UCFProjectListCellTypeHonorTransfer) {
         if ([self.delegate respondsToSelector:@selector(cell:clickInvestBtn1:withModel:)]) {
             [self.delegate cell:self clickInvestBtn1:sender withModel:self.transferModel];
         }
