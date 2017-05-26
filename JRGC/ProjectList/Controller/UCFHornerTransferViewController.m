@@ -97,20 +97,19 @@
     UCFProjectListCell *cell = [self.tableview dequeueReusableCellWithIdentifier:cellStr1];
     if (cell == nil) {
         cell = [[NSBundle mainBundle]loadNibNamed:@"UCFProjectListCell" owner:self options:nil][0];
+        cell.type = UCFProjectListCellTypeHonorTransfer;
     }
     UCFTransferModel *model = [self.dataArray objectAtIndex:indexPath.row];
     model.isAnim = YES;
     cell.transferModel = model;
-    cell.minInvestLab.text = cell.remainingLab.text;
-    cell.remainingLab.text = @"";
     cell.delegate = self;
-    cell.type = UCFProjectListCellTypeTransfer;
+    
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 110;
+    return 98;
 }
 // 选中某cell时。
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
