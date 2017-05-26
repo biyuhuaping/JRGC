@@ -31,8 +31,10 @@
 - (UIViewController *)getUCFWalletTargetController
 {
     NSDictionary *dict = [[NSUserDefaults standardUserDefaults] valueForKey:WALLET_DATADICT];
+    [UcfWalletSDK setEnvironment:1];
     self.paramDict = dict;
     if (!self.paramDict) {
+        
         self.walletController = [UcfWalletSDK wallet:nil retHandler:self retSelector:nil navTitle:@"生活"];
         return _walletController;
     }
