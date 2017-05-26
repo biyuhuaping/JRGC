@@ -344,7 +344,7 @@
     else {
         self.circleProgressView.tintColor = UIColorWithRGB(0xfa4d4c);
         self.circleProgressView.progressLabel.textColor = UIColorWithRGB(0x555555);
-        self.circleProgressView.textStr = @"批量投资";
+        self.circleProgressView.textStr = @"批量出借";
         self.circleProgressView.progressLabel.font = [UIFont systemFontOfSize:12];
         if (batchBidModel.isAnim) {
             [self animateCircle:progress isAnim:YES];

@@ -101,7 +101,7 @@
 {
     AppDelegate * app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
 //     && [[[NSUserDefaults standardUserDefaults] valueForKey:UUID] isEqualToString:@"108027"]
-    if (EnvironmentConfiguration == 2 || (app.isSubmitAppStoreTestTime))
+    if (EnvironmentConfiguration == 2 || (app.isSubmitAppStoreTestTime ))
     {
         NSDictionary * cookieInfo =  [NSDictionary dictionaryWithObject:@"1" forKey:@"jrgc_umark"];
         
