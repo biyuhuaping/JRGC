@@ -108,10 +108,12 @@
     NSDictionary * dic = [Data objectFromJSONString];
     
 //    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    
     switch (tag.intValue) {
         case kSXTagGetUserAgree:
         {
-            if([dic[@"ret"] boolValue] == 1){//授权成功
+            NSDictionary *dataDict = [dic objectSafeDictionaryForKey:@"data"];
+            if([[dataDict objectSafeForKey: @"ret"] intValue] == 1){//授权成功
                 
                 [AuxiliaryFunc showToastMessage:@"授权成功" withView:self.view];
                 [UserInfoSingle sharedManager].zxAuthorization = YES;
@@ -125,7 +127,7 @@
 //                [navVCArray removeObjectAtIndex:navVCArray.count-2];
 //                [self.navigationController setViewControllers:navVCArray animated:NO];
             } else {
-                [MBProgressHUD displayHudError:dic[@"msg"]];
+                [MBProgressHUD displayHudError:[dataDict objectSafeForKey:@"msg"]];
             }
         }
             break;
