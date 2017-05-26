@@ -284,7 +284,7 @@
         self.circleProgressView.textStr = status == 0?@"认购":@"已转完";
     }
     else
-        self.circleProgressView.textStr = status == 0?@"出借":@"已转完";
+        self.circleProgressView.textStr = status == 0?@"购买":@"已转完";
     
     
     
