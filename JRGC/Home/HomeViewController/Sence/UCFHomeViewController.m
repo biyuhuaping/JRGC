@@ -81,11 +81,13 @@
         DBLog(@"主队列--延迟执行------%@",[NSThread currentThread]);
         [[MongoliaLayerCenter sharedManager] showLogic];
     });
+    
+
 }
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -593,7 +595,7 @@
         self.userInfoVC.view.frame = CGRectMake(0, 0, ScreenWidth, userInfoViewHeight);
         [self.userInfoVC refreshNotice];
     }
-    [self.homeListVC.tableView reloadData];
+    self.homeListVC.tableView.tableHeaderView = self.userInfoVC.view;
 }
 
 #pragma mark - userInfoVC 的代理方法

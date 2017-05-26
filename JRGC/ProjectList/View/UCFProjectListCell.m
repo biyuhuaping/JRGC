@@ -270,6 +270,10 @@
     else {
         self.iconW_01.constant = self.iconW_02.constant = self.iconW_03.constant = self.iconW_04.constant = 0;
     }
+    if (self.type == UCFProjectListCellTypeHonorTransfer) {
+        self.minInvestLab.text = self.remainingLab.text;
+        self.remainingLab.text = @"";
+    }
     
     NSInteger status = [transferModel.status integerValue];
     NSInteger stopStatus = [transferModel.stopStatus integerValue];

@@ -12,6 +12,7 @@ typedef enum : NSUInteger {
     UCFProjectListCellTypeProject = 0,
     UCFProjectListCellTypeTransfer,
     UCFProjectListCellTypeBatchBid,
+    UCFProjectListCellTypeHonorTransfer,
 } UCFProjectListCellType;
 
 @class UCFProjectListCell, UCFProjectListModel, UCFTransferModel, UCFBatchBidModel;
