@@ -113,7 +113,7 @@
         case kSXTagGetUserAgree:
         {
             NSDictionary *dataDict = [dic objectSafeDictionaryForKey:@"data"];
-            if([[dataDict objectSafeForKey: @"ret"] intValue] == 1){//授权成功
+            if([[dataDict objectSafeForKey:@"status"] intValue] == 1){//授权成功
                 
                 [AuxiliaryFunc showToastMessage:@"授权成功" withView:self.view];
                 [UserInfoSingle sharedManager].zxAuthorization = YES;
