@@ -95,6 +95,7 @@
 
 // 检测是否签到
 - (void)checkIsSign {
+    return;
     NSString *uuid = [[NSUserDefaults standardUserDefaults] objectForKey:UUID];
     if (uuid) {
         NSDate *lastFirstLoginTime = [[NSUserDefaults standardUserDefaults] objectForKey:FirstLoginTimeEveryday];

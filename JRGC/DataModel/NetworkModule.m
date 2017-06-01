@@ -634,9 +634,9 @@ static NetworkModule *gInstance = NULL;
             SEL sel = @selector(endPost:tag:);
             if ([req.owner respondsToSelector:sel]) {
                 NSString *data = req.result;
-                if (data.length == 0) {
-                    [MBProgressHUD displayHudError:@"网络异常"];
-                }
+//                if (data.length == 0) {
+//                    [MBProgressHUD displayHudError:@"网络异常"];
+//                }
                 NSMutableDictionary *dic = [data objectFromJSONString];
                 //新格式接口
                 if ([[dic allKeys] containsObject:@"ret"]) {
