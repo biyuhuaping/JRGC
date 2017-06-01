@@ -290,6 +290,7 @@
                 <outlet property="rateLabel" destination="5Yd-U8-tN8" id="Nzy-20-8us"/>
                 <outlet property="remainLabel" destination="hi6-3M-t9V" id="C2e-za-5Gr"/>
                 <outlet property="repayModelLabel" destination="Haw-fT-Yh0" id="y8B-ld-C8G"/>
+                <outlet property="signViewWidth" destination="P5q-c9-MrQ" id="ViF-4R-06g"/>
                 <outlet property="startMoneyLabel" destination="0mm-vY-FMR" id="uGi-3K-BTt"/>
                 <outlet property="timeLabel" destination="i2e-qJ-oX9" id="LjE-Fi-m1b"/>
                 <outlet property="titleBackView" destination="KVc-aA-W3Q" id="Dt8-4I-exG"/>

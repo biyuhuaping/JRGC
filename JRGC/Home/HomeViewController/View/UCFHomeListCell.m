@@ -47,6 +47,7 @@
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *oneImageUpHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *oneImageDownHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *signViewWidth;
 
 @end
 
@@ -124,21 +125,23 @@
         }
         
         NSArray *statusArr = @[@"未审核",@"等待确认",@"出借",@"流标",@"满标",@"回款中",@"已回款"];
-        if (([presenter.item.type isEqualToString:@"2"] || [presenter.item.type isEqualToString:@"3"] ) && status == 2) {
+        if (([presenter.item.type isEqualToString:@"2"]) && status == 2) {
             self.circleProgressView.progressText = @"认购";
         }
         else
             self.circleProgressView.progressText = statusArr[status];
         
         if (presenter.item.prdLabelsList.count>0) {
-            for (UCFProjectLabel *projectLabel in presenter.item.prdLabelsList) {
-                if ([projectLabel.labelPriority integerValue] == 1) {
-                    self.characteristicBackView.hidden = NO;
-                    self.characteristicLabel.text = projectLabel.labelName;
-                }
-                else {
-                    self.characteristicBackView.hidden = YES;
-                }
+            UCFProjectLabel *projectLabel = [presenter.item.prdLabelsList firstObject];
+            if ([projectLabel.labelPriority integerValue] == 1) {
+                self.characteristicBackView.hidden = NO;
+                NSDictionary *attrs = @{NSFontAttributeName : [UIFont systemFontOfSize:10]};
+                CGSize nameSize = [projectLabel.labelName boundingRectWithSize:CGSizeMake(MAXFLOAT, 12) options:NSStringDrawingUsesLineFragmentOrigin attributes:attrs context:nil].size;
+                self.signViewWidth.constant = nameSize.width + 11;
+                self.characteristicLabel.text = projectLabel.labelName;
+            }
+            else {
+                self.characteristicBackView.hidden = YES;
             }
         }
         else {
