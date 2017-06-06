@@ -213,7 +213,7 @@
 {
     FullWebViewController *webView = [[FullWebViewController alloc] initWithWebUrl:HOMEINVITATIONURL title:@"邀请返利"];
     webView.flageHaveShareBut = @"分享";
-//    webView.sourceVc = @"UCFLatestProjectViewController";
+    webView.sourceVc = @"UCFLatestProjectViewController";
     [self.navigationController pushViewController:webView animated:YES];
 }
 #pragma mark -----------------------------------
