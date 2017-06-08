@@ -38,10 +38,15 @@
     }
     return _dataArray;
 }
-
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
 #pragma mark - setting UI
+    baseTitleLabel.text = @"一键投标";
+    [self addLeftButton];
     // setting tableview style
     [self settingTableViewStyle];
     // add nodata view
@@ -235,7 +240,7 @@
             collectionDetailVC.souceVC = @"P2PVC";
             collectionDetailVC.colPrdClaimId = _colPrdClaimIdStr;
             collectionDetailVC.detailDataDict = [dic objectSafeDictionaryForKey:@"data"];
-            collectionDetailVC.rootVc = self.rootVc;
+            collectionDetailVC.rootVc = self;
             [self.navigationController pushViewController:collectionDetailVC  animated:YES];
         
         }else {
