@@ -14,7 +14,11 @@
 @protocol UCFHomeListCellDelegate <NSObject>
 
 - (void)homelistCell:(UCFHomeListCell *)homelistCell didClickedProgressViewWithPresenter:(UCFHomeListCellModel *)model;
+@end
 
+@protocol UCFHomeListCellHonorDelegate <NSObject>
+
+- (void)homelistCell:(UCFHomeListCell *)homelistCell didClickedProgressViewAtIndexPath:(NSIndexPath *)indexPath;
 @end
 
 @interface UCFHomeListCell : UITableViewCell
@@ -22,5 +26,6 @@
 @property (strong, nonatomic) NSIndexPath *indexPath;
 @property (weak, nonatomic) UITableView *tableView;
 @property (weak, nonatomic) id<UCFHomeListCellDelegate> delegate;
+@property (weak, nonatomic) id<UCFHomeListCellHonorDelegate> honorDelegate;
 @property (weak, nonatomic) UCFMicroMoneyModel *microMoneyModel;
 @end
