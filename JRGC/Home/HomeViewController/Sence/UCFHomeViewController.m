@@ -29,7 +29,7 @@
 #import "UCFHomeListCellPresenter.h"
 #import "UserInfoSingle.h"
 #import "UCFFacCodeViewController.h"
-
+#import "UCFWebViewJavascriptBridgeMallDetails.h"
 #import "UCFHomeListNavView.h"
 #import "MaskView.h"
 #import "MongoliaLayerCenter.h"
@@ -211,10 +211,14 @@
 
 - (void) gridItemDidClicked:(BJGridItem *) gridItem
 {
-    FullWebViewController *webView = [[FullWebViewController alloc] initWithWebUrl:HOMEINVITATIONURL title:@"邀请返利"];
-    webView.flageHaveShareBut = @"分享";
-    webView.sourceVc = @"UCFLatestProjectViewController";
-    [self.navigationController pushViewController:webView animated:YES];
+//    FullWebViewController *webView = [[FullWebViewController alloc] initWithWebUrl:HOMEINVITATIONURL title:@"邀请返利"];
+//    webView.flageHaveShareBut = @"分享";
+//    webView.sourceVc = @"UCFLatestProjectViewController";
+//    [self.navigationController pushViewController:webView animated:YES];
+    UCFWebViewJavascriptBridgeMallDetails *web = [[UCFWebViewJavascriptBridgeMallDetails alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMallDetails" bundle:nil];
+    web.url = COUPON_CENTER;
+    web.isHidenNavigationbar = YES;
+    [self.navigationController pushViewController:web animated:YES];
 }
 #pragma mark -----------------------------------
 
@@ -579,6 +583,7 @@
         else if ([result isKindOfClass:[NSString class]]) {
             [AuxiliaryFunc showToastMessage:result withView:weakSelf.view];
         }
+        [[NSNotificationCenter defaultCenter] postNotificationName:CHECK_COUPON_CENTER object:nil];
     }];
 }
 

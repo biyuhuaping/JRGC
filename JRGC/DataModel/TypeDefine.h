@@ -246,9 +246,14 @@
 #define P2PISAUTHORIZATIONURL  @"api/userInfo/v2/p2pIsAuthorization.json"//是否微金授权
 #define P2PAUTHORIZATIONURL    @"api/userInfo/v2/p2pAuthorization.json" //微金用户授权
 
+
+#define RECFRIENDLISTURL        @"api/inviteRebate/v2/recFriendList.json" //邀请下线列表
+#define GetCouponNum            @"api/couponCenter/v2/getCouponNum.json"
+
 #define RECFRIENDLISTURL   @"api/inviteRebate/v2/recFriendList.json" //邀请下线列表
 
 #define PRDCLAIMSWJSHOWURL  @"/api/prdClaims/v2/wjShow.json"//工场微金列表
+
 
 
 enum kPostStatus{
@@ -456,18 +461,15 @@ enum kSXTag
     kSXTagMySimpleInfo,                //首页-查询用户工豆,工分,等信
     kSXTagMyReceipt,                    //首页-用户余额,累计收益,总资产
     KSXTagADJustMent,                    //公告确认点击
-
     KSXTagWalletShowMsg,                  //钱包暗开信息提供
     kSXTagWalletSelectBankCar,             //选择银行卡
-
     KSXTagMyInviteRebateinfo,           //邀请返利
     KSXTagMyInviteRewardinfo,           //邀请奖励
     KSXTagP2pISAuthorization,           //是否微金授权
     KSXTagP2pAuthorization,             //微金用户授权
+    kSXTagCheckConponCenter,                 //检查领券中心红点
     kSXTagRecFriendList,                //邀请下线列表
     kSXTagPrdClaimsWJShow,              //工场微金列表 
-
-
 };
 
 typedef enum kSXTag kSXTag;
