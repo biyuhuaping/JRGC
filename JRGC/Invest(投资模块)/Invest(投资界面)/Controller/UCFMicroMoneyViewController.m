@@ -16,7 +16,7 @@
 #import "UCFMicroMoneyGroup.h"
 #import "UCFMicroMoneyModel.h"
 
-@interface UCFMicroMoneyViewController () <UITableViewDataSource, UITableViewDelegate, UCFInvestAPIWithMicroMoneyManagerDelegate>
+@interface UCFMicroMoneyViewController () <UITableViewDataSource, UITableViewDelegate, UCFInvestAPIWithMicroMoneyManagerDelegate, UCFHomeListCellHonorDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (strong, nonatomic) UCFMicroMoneyHeaderView *microMoneyHeaderView;
 @property (strong, nonatomic) UCFInvestAPIManager *apiManager;
@@ -102,6 +102,7 @@
     if (nil == cell) {
         cell = (UCFHomeListCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeListCell" owner:self options:nil] lastObject];
         cell.tableView = tableView;
+        cell.honorDelegate = self;
     }
     cell.indexPath = indexPath;
     UCFMicroMoneyGroup *group = [self.dataArray objectAtIndex:indexPath.section];
@@ -140,6 +141,14 @@
 {
     self.dataArray = (NSMutableArray *)result;
     [self.tableview reloadData];
+}
+
+#pragma mark - cell的代理
+
+- (void)homelistCell:(UCFHomeListCell *)homelistCell didClickedProgressViewAtIndexPath:(NSIndexPath *)indexPath
+{
+    UCFMicroMoneyGroup *group = [self.dataArray objectAtIndex:indexPath.section];
+    UCFMicroMoneyModel *model = [group.prdlist objectAtIndex:indexPath.row];
 }
 
 @end

@@ -12,12 +12,48 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="zxU-Ns-PEz" customClass="UCFTransferHeaderView">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="230"/>
+            <rect key="frame" x="0.0" y="0.0" width="465" height="230"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zGg-01-kDD">
-                    <rect key="frame" x="0.0" y="110" width="375" height="110"/>
+                    <rect key="frame" x="0.0" y="110" width="465" height="110"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EoR-31-dha">
+                            <rect key="frame" x="0.0" y="0.0" width="106" height="110"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Igt-CJ-gih">
+                            <rect key="frame" x="225" y="0.0" width="106" height="110"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gZE-ni-mTk">
+                            <rect key="frame" x="359" y="0.0" width="106" height="110"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PVp-6D-5Lh">
+                            <rect key="frame" x="111" y="0.0" width="106" height="110"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                    </subviews>
                     <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="gZE-ni-mTk" secondAttribute="trailing" id="1JX-UP-fXU"/>
+                        <constraint firstAttribute="bottom" secondItem="gZE-ni-mTk" secondAttribute="bottom" id="2lu-jo-jTA"/>
+                        <constraint firstItem="PVp-6D-5Lh" firstAttribute="leading" secondItem="EoR-31-dha" secondAttribute="trailing" constant="5" id="B0h-Yd-agS"/>
+                        <constraint firstItem="EoR-31-dha" firstAttribute="leading" secondItem="zGg-01-kDD" secondAttribute="leading" id="Czk-Ms-ajO"/>
+                        <constraint firstItem="gZE-ni-mTk" firstAttribute="width" secondItem="EoR-31-dha" secondAttribute="width" id="GdU-Ij-Jvn"/>
+                        <constraint firstItem="Igt-CJ-gih" firstAttribute="top" secondItem="zGg-01-kDD" secondAttribute="top" id="Lex-mX-Bgo"/>
+                        <constraint firstItem="PVp-6D-5Lh" firstAttribute="width" secondItem="EoR-31-dha" secondAttribute="width" id="Nqq-DH-O1q"/>
+                        <constraint firstAttribute="bottom" secondItem="EoR-31-dha" secondAttribute="bottom" id="OFs-3K-6cX"/>
+                        <constraint firstItem="EoR-31-dha" firstAttribute="top" secondItem="zGg-01-kDD" secondAttribute="top" id="Sic-ax-wZ1"/>
+                        <constraint firstAttribute="bottom" secondItem="Igt-CJ-gih" secondAttribute="bottom" id="fqh-cF-SND"/>
+                        <constraint firstItem="gZE-ni-mTk" firstAttribute="top" secondItem="zGg-01-kDD" secondAttribute="top" id="hRq-Yx-Cfb"/>
+                        <constraint firstItem="PVp-6D-5Lh" firstAttribute="top" secondItem="zGg-01-kDD" secondAttribute="top" id="iNC-vI-3wy"/>
+                        <constraint firstItem="gZE-ni-mTk" firstAttribute="leading" secondItem="Igt-CJ-gih" secondAttribute="trailing" constant="28" id="lGV-Yo-pG0"/>
+                        <constraint firstAttribute="bottom" secondItem="PVp-6D-5Lh" secondAttribute="bottom" id="ryw-xP-7VJ"/>
+                        <constraint firstItem="Igt-CJ-gih" firstAttribute="width" secondItem="EoR-31-dha" secondAttribute="width" id="wPc-nc-7y7"/>
+                        <constraint firstItem="Igt-CJ-gih" firstAttribute="leading" secondItem="PVp-6D-5Lh" secondAttribute="trailing" constant="8" id="waT-i3-xiV"/>
+                    </constraints>
                 </view>
             </subviews>
             <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
@@ -29,7 +65,7 @@
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="-128.5" y="-95"/>
+            <point key="canvasLocation" x="-83.5" y="-95"/>
         </view>
     </objects>
 </document>

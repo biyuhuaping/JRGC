@@ -169,6 +169,9 @@
     if ([self.delegate respondsToSelector:@selector(homelistCell:didClickedProgressViewWithPresenter:)]) {
         [self.delegate homelistCell:self didClickedProgressViewWithPresenter:self.presenter.item];
     }
+    else if ([self.honorDelegate respondsToSelector:@selector(homelistCell:didClickedProgressViewAtIndexPath:)]) {
+        [self.honorDelegate homelistCell:self didClickedProgressViewAtIndexPath:self.indexPath];
+    }
 }
 
 - (void)setIndexPath:(NSIndexPath *)indexPath
