@@ -23,7 +23,10 @@
 @end
 
 @implementation UCFInvestViewController
-
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -52,6 +55,7 @@
     
     self.microMoney = [[UCFMicroMoneyViewController alloc]initWithNibName:@"UCFMicroMoneyViewController" bundle:nil];
     self.microMoney.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight - 64);
+    self.microMoney.rootVc = self;
     [self addChildViewController:self.microMoney];
     
     self.investTransfer = [[UCFInvestTransferViewController alloc]initWithNibName:@"UCFInvestTransferViewController" bundle:nil];
