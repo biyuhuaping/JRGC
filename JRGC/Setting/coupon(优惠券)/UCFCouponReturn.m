@@ -19,7 +19,7 @@
 #import "UCFToolsMehod.h"
 #import "UCFCouponExchangeToFriends.h"
 #import "UCFInvitationRebateViewController.h"//邀请返利
-
+#import "UCFWebViewJavascriptBridgeMallDetails.h"
 // 错误界面
 #import "UCFNoDataView.h"
 
@@ -69,6 +69,12 @@
         }
             break;
     }
+}
+- (IBAction)fetchCouponCenter:(UIButton *)sender {
+    UCFWebViewJavascriptBridgeMallDetails *web = [[UCFWebViewJavascriptBridgeMallDetails alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMallDetails" bundle:nil];
+    web.url = COUPON_CENTER;
+    web.isHidenNavigationbar = YES;
+    [self.navigationController pushViewController:web animated:YES];
 }
 
 - (void)initTableView{

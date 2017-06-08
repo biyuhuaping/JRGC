@@ -1277,6 +1277,9 @@ static NetworkModule *gInstance = NULL;
         case kSXTagRecFriendList:
             parameter = [NEW_SERVER_IP stringByAppendingString:RECFRIENDLISTURL];
             break;
+        case kSXTagCheckConponCenter:
+            parameter = [NEW_SERVER_IP stringByAppendingString:GetCouponNum];
+            break;
     }
     //给原有参数字典添加公共参数
     if (!data) {

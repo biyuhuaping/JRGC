@@ -246,8 +246,8 @@
 #define P2PISAUTHORIZATIONURL  @"api/userInfo/v2/p2pIsAuthorization.json"//是否微金授权
 #define P2PAUTHORIZATIONURL    @"api/userInfo/v2/p2pAuthorization.json" //微金用户授权
 
-#define RECFRIENDLISTURL   @"api/inviteRebate/v2/recFriendList.json" //邀请下线列表
-
+#define RECFRIENDLISTURL        @"api/inviteRebate/v2/recFriendList.json" //邀请下线列表
+#define GetCouponNum            @"api/couponCenter/v2/getCouponNum.json"
 
 enum kPostStatus{
     kPostStatusNone=0,
@@ -462,8 +462,8 @@ enum kSXTag
     KSXTagMyInviteRewardinfo,           //邀请奖励
     KSXTagP2pISAuthorization,           //是否微金授权
     KSXTagP2pAuthorization,             //微金用户授权
-    kSXTagRecFriendList                 //邀请下线列表 
-
+    kSXTagRecFriendList,                 //邀请下线列表
+    kSXTagCheckConponCenter                 //检查领券中心红点
 
 };
 

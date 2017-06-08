@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -43,14 +43,30 @@
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="saM-3e-KmE">
+                            <rect key="frame" x="205" y="14" width="150" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="Pob-Z3-IYK"/>
+                                <constraint firstAttribute="width" constant="150" id="zzU-rh-ROO"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="12" maxY="0.0"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="-49" maxY="0.0"/>
+                            <state key="normal" title="领券中心" image="white_arrow"/>
+                            <connections>
+                                <action selector="fetchCouponCenter:" destination="-1" eventType="touchUpInside" id="7le-le-W0o"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" red="0.35686274509999999" green="0.41176470590000003" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="hHB-dh-63K" secondAttribute="trailing" constant="15" id="0ks-nS-ZaS"/>
                         <constraint firstAttribute="bottom" secondItem="hHB-dh-63K" secondAttribute="bottom" constant="15" id="8h3-b3-Z16"/>
+                        <constraint firstAttribute="trailing" secondItem="saM-3e-KmE" secondAttribute="trailing" constant="20" id="ETS-N8-3oB"/>
                         <constraint firstItem="UVL-hn-ygO" firstAttribute="leading" secondItem="CcB-of-gwu" secondAttribute="leading" constant="15" id="K7g-3F-qmN"/>
                         <constraint firstItem="hHB-dh-63K" firstAttribute="leading" secondItem="CcB-of-gwu" secondAttribute="leading" constant="15" id="KBL-Bk-aeR"/>
                         <constraint firstItem="UVL-hn-ygO" firstAttribute="top" secondItem="CcB-of-gwu" secondAttribute="top" constant="15" id="QoT-6U-JY6"/>
+                        <constraint firstItem="saM-3e-KmE" firstAttribute="centerY" secondItem="CcB-of-gwu" secondAttribute="centerY" id="d66-Mc-FLB"/>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="68" id="ekQ-Tv-8rC"/>
                         <constraint firstAttribute="height" constant="68" id="lxp-iC-ir1"/>
                     </constraints>
@@ -76,4 +92,7 @@
             </constraints>
         </view>
     </objects>
+    <resources>
+        <image name="white_arrow" width="7" height="12"/>
+    </resources>
 </document>

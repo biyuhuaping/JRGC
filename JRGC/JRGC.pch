@@ -169,7 +169,7 @@ return shared##className; \
 #define CHECK_UPDATE_ALERT  @"UPDATE_ALERT"
 #define CHECK_ISSHOW_MASKVIEW @"maskViewisShow"
 #define IS_RELOADE_REQUEST @"isReloadRequest"  //是否重新加载因验签失效造成失败的接口
-
+#define CHECK_COUPON_CENTER @"conponCenterMsg"
 // 每天首次弹出邀请返利开关
 #define FirstAlertViewShowTime     @"InviteFriendsEveryday"
 // 新手政策开关（0：关，1：开）
@@ -215,6 +215,8 @@ return shared##className; \
 
 #define PROTOCOLENTUSTTRANSFER  @"https://m.9888.cn/static/wap/protocol-entrust-transfer/index.html"//履行反洗钱义务的承诺书
 #define HOMEINVITATIONURL @"https://m.9888.cn/static/wap/topic-invite/index.html" //首页邀请
+
+#define COUPON_CENTER @"https://m.9888.cn/static/wap/coupon-center/index.html" //领券中心
 
 #define ZXTIP1 @"请先开通尊享徽商存管账户"
 #define ZXTIP2 @"请先设置尊享徽商存管账户交易密码"

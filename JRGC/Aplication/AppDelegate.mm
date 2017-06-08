@@ -212,6 +212,8 @@
     [self checkPersonCenterRedPoint];
     //调用红点接口，通知服务器红点标示倍查看
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkRedPointShouldHide:) name:REDALERTISHIDE object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkConponCenter) name:CHECK_COUPON_CENTER object:nil];
+
     /**
      *  极光推送自定义消息推送
      NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
@@ -285,6 +287,16 @@
     NSString *upFlag = noti.object;
     NSString *strParameters = [NSString stringWithFormat:@"userId=%@&updFlag=%@", [[NSUserDefaults standardUserDefaults] objectForKey:UUID],upFlag];
     [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagRedPointCheck owner:self Type:SelectAccoutDefault];
+}
+- (void)checkConponCenter
+{
+    NSDictionary *parmDic = nil;
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:UUID]) {
+        parmDic = [NSDictionary dictionaryWithObject:[[NSUserDefaults standardUserDefaults] objectForKey:UUID] forKey:@"userId"];
+    }
+//[[NetworkModule sharedNetworkModule] newPostReq:@{} tag:kSXTagGetInfoForOnOff owner:self signature:NO Type:SelectAccoutDefault];
+//
+    [[NetworkModule sharedNetworkModule] newPostReq:parmDic tag:kSXTagCheckConponCenter owner:self signature:YES Type:SelectAccoutDefault];
 }
 - (void) createItem {
     //自定义icon 的初始化方法
@@ -751,6 +763,19 @@
         if ([dic[@"status"] intValue] == 1) {
             // 通知个人中心刷新，之所以加这个通知，是因为投标成功页查看我的奖励，跟个人中心都要刷新个人中心数据，保持统一（但会造成一次网络浪费，从投标成功页查看我的奖励列表，点击tab的时候也会请求一次这个接口）
             [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
+        }
+    } else if (tag.intValue == kSXTagCheckConponCenter) {
+        NSString *Data = (NSString *)result;
+        NSDictionary * dic = [Data objectFromJSONString];
+        if ([dic[@"ret"] boolValue]) {
+            NSString *availableNum = [[dic objectSafeDictionaryForKey:@"data"] objectSafeForKey:@"availableNum"];
+            if ([availableNum integerValue] > 0) {
+                [self.tabBarController.tabBar showBadgeOnItemIndex:4];
+            } else {
+                [self.tabBarController.tabBar hideBadgeOnItemIndex:4];
+            }
+        } else {
+            [self.tabBarController.tabBar hideBadgeOnItemIndex:4];
         }
     }
 }

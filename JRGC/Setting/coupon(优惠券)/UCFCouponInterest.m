@@ -19,7 +19,7 @@
 #import "UCFToolsMehod.h"
 #import "UCFCouponExchangeToFriends.h"
 #import "UCFInvitationRebateViewController.h"//邀请获利
-
+#import "UCFWebViewJavascriptBridgeMallDetails.h"
 // 错误界面
 #import "UCFNoDataView.h"
 
@@ -138,6 +138,14 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+- (IBAction)fetchCouponCenter:(UIButton *)sender {
+    
+    UCFWebViewJavascriptBridgeMallDetails *web = [[UCFWebViewJavascriptBridgeMallDetails alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMallDetails" bundle:nil];
+    web.url = COUPON_CENTER;
+    web.isHidenNavigationbar = YES;
+    [self.navigationController pushViewController:web animated:YES];
+    
+}
 #pragma mark - 请求网络及回调
 //下拉刷新
 - (void)refreshingData{
