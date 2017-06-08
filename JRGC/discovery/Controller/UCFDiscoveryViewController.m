@@ -24,6 +24,7 @@
     [super viewWillAppear:animated];
     self.webView.frame = CGRectMake(0, 0.5, CGRectGetWidth(self.webView.frame), CGRectGetHeight(self.webView.frame));
     self.view.backgroundColor = UIColorWithRGB(0xeeeeee);
+    [self.webView reload];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];

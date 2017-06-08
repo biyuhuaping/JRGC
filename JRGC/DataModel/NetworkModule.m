@@ -1277,6 +1277,9 @@ static NetworkModule *gInstance = NULL;
         case kSXTagRecFriendList:
             parameter = [NEW_SERVER_IP stringByAppendingString:RECFRIENDLISTURL];
             break;
+        case kSXTagCheckConponCenter:
+            parameter = [NEW_SERVER_IP stringByAppendingString:GetCouponNum];
+            break;
         case kSXTagPrdClaimsWJShow:
             parameter = [NEW_SERVER_IP stringByAppendingString:PRDCLAIMSWJSHOWURL];
             break;
