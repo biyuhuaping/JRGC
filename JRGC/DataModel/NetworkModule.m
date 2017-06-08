@@ -1280,6 +1280,9 @@ static NetworkModule *gInstance = NULL;
         case kSXTagCheckConponCenter:
             parameter = [NEW_SERVER_IP stringByAppendingString:GetCouponNum];
             break;
+        case kSXTagPrdClaimsWJShow:
+            parameter = [NEW_SERVER_IP stringByAppendingString:PRDCLAIMSWJSHOWURL];
+            break;
     }
     //给原有参数字典添加公共参数
     if (!data) {
