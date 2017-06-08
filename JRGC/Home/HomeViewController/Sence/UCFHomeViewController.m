@@ -215,10 +215,15 @@
 //    webView.flageHaveShareBut = @"分享";
 //    webView.sourceVc = @"UCFLatestProjectViewController";
 //    [self.navigationController pushViewController:webView animated:YES];
-    UCFWebViewJavascriptBridgeMallDetails *web = [[UCFWebViewJavascriptBridgeMallDetails alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMallDetails" bundle:nil];
-    web.url = COUPON_CENTER;
-    web.isHidenNavigationbar = YES;
-    [self.navigationController pushViewController:web animated:YES];
+    if ([[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
+        UCFWebViewJavascriptBridgeMallDetails *web = [[UCFWebViewJavascriptBridgeMallDetails alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMallDetails" bundle:nil];
+        web.url = COUPON_CENTER;
+        web.isHidenNavigationbar = YES;
+        [self.navigationController pushViewController:web animated:YES];
+    } else {
+        [self showLoginView];
+    }
+
 }
 #pragma mark -----------------------------------
 
