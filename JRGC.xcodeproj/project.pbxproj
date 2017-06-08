@@ -302,6 +302,7 @@
 		74AFB1421EE93543007DBAFC /* UCFHonorInvestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 74AFB1411EE93543007DBAFC /* UCFHonorInvestModel.m */; };
 		74AFB1451EE93ACC007DBAFC /* UCFMicroMoneyGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 74AFB1441EE93ACC007DBAFC /* UCFMicroMoneyGroup.m */; };
 		74AFB1481EE93B8D007DBAFC /* UCFMicroMoneyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 74AFB1471EE93B8D007DBAFC /* UCFMicroMoneyModel.m */; };
+		74AFB14B1EE95895007DBAFC /* UCFHomeAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 74AFB14A1EE95895007DBAFC /* UCFHomeAPIManager.m */; };
 		74B3AD871ED2C31B00653F8B /* YFRollingLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 74B3AD861ED2C31B00653F8B /* YFRollingLabel.m */; };
 		74D7FCCC1AE8F72700653B8F /* FundAccountGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 74D7FCC91AE8F72700653B8F /* FundAccountGroup.m */; };
 		74D7FCCD1AE8F72700653B8F /* FundAccountItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 74D7FCCB1AE8F72700653B8F /* FundAccountItem.m */; };
@@ -1324,6 +1325,8 @@
 		74AFB1441EE93ACC007DBAFC /* UCFMicroMoneyGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFMicroMoneyGroup.m; sourceTree = "<group>"; };
 		74AFB1461EE93B8D007DBAFC /* UCFMicroMoneyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFMicroMoneyModel.h; sourceTree = "<group>"; };
 		74AFB1471EE93B8D007DBAFC /* UCFMicroMoneyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFMicroMoneyModel.m; sourceTree = "<group>"; };
+		74AFB1491EE95895007DBAFC /* UCFHomeAPIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFHomeAPIManager.h; sourceTree = "<group>"; };
+		74AFB14A1EE95895007DBAFC /* UCFHomeAPIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFHomeAPIManager.m; sourceTree = "<group>"; };
 		74B3AD851ED2C31B00653F8B /* YFRollingLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YFRollingLabel.h; sourceTree = "<group>"; };
 		74B3AD861ED2C31B00653F8B /* YFRollingLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YFRollingLabel.m; sourceTree = "<group>"; };
 		74D7FCC81AE8F72700653B8F /* FundAccountGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FundAccountGroup.h; sourceTree = "<group>"; };
@@ -2872,6 +2875,8 @@
 		74270C571EC58F6800F9419B /* APIManager */ = {
 			isa = PBXGroup;
 			children = (
+				74AFB1491EE95895007DBAFC /* UCFHomeAPIManager.h */,
+				74AFB14A1EE95895007DBAFC /* UCFHomeAPIManager.m */,
 			);
 			path = APIManager;
 			sourceTree = "<group>";
@@ -6288,6 +6293,7 @@
 				E3A96B091CBF837C00E8884F /* UCFWorkPointsViewController.m in Sources */,
 				740AC63F1DDC2AAE0058BC60 /* UCFProjectListController.m in Sources */,
 				7BCE02401B833B7000F9D73F /* IPDetector.m in Sources */,
+				74AFB14B1EE95895007DBAFC /* UCFHomeAPIManager.m in Sources */,
 				25950EBB1D7FB6EC00E4CCBA /* CWCommon.m in Sources */,
 				7BC8AA1D1AD4C74200BF4660 /* UCFMyArrears.m in Sources */,
 				E37086B51D61A6CD0041D293 /* UCFHuiShangChooseBankViewController.m in Sources */,
