@@ -27,6 +27,7 @@
 #import "UCFWebViewJavascriptBridgeLevel.h"
 #import "P2PWalletHelper.h"
 #import "BlockUIAlertView.h"
+#import "UCFInvestViewController.h"
 
 @interface UCFMainTabBarController ()
 
@@ -105,10 +106,11 @@
             }
                 break;
             case 1:{
-                UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"HomeStoryboard" bundle:nil];
-                controller = [storyBoard instantiateViewControllerWithIdentifier:@"home"];
-                _LatestView.baseTitleType = @"list";
-//                controller = _LatestView;
+//                UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"HomeStoryboard" bundle:nil];
+//                controller = [storyBoard instantiateViewControllerWithIdentifier:@"home"];
+//                _LatestView.baseTitleType = @"list";
+                UCFInvestViewController *invest = [[UCFInvestViewController alloc] initWithNibName:@"UCFInvestViewController" bundle:nil];
+                controller = invest;
             }
                 break;
             case 2:{

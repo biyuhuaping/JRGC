@@ -26,6 +26,15 @@
     return self;
 }
 
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self createUI];
+    }
+    return self;
+}
+
 - (void)createUI
 {
     DBLOG(@"%@", NSStringFromCGSize(self.bounds.size));
