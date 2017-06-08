@@ -252,7 +252,7 @@
 
 #define RECFRIENDLISTURL   @"api/inviteRebate/v2/recFriendList.json" //邀请下线列表
 
-#define PRDCLAIMSWJSHOWURL  @"/api/prdClaims/v2/wjShow.json"//工场微金列表
+#define PRDCLAIMSWJSHOWURL  @"api/prdClaims/v2/wjShow.json"//工场微金列表
 
 
 
