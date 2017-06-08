@@ -145,7 +145,6 @@
 		741EF9341E5555A90007E52B /* UCFOrdinaryBidController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 741EF9321E5555A90007E52B /* UCFOrdinaryBidController.xib */; };
 		7420DF061B159E81003CAE38 /* UCFMoreCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7420DF051B159E81003CAE38 /* UCFMoreCell.m */; };
 		7422DF2F1B6218B400DCFA40 /* NSDate+IsBelongToToday.m in Sources */ = {isa = PBXBuildFile; fileRef = 7422DF2E1B6218B400DCFA40 /* NSDate+IsBelongToToday.m */; };
-		74270C8B1EC58F6800F9419B /* UCFHomeAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 74270C591EC58F6800F9419B /* UCFHomeAPIManager.m */; };
 		74270C8C1EC58F6800F9419B /* UCFCycleImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74270C5C1EC58F6800F9419B /* UCFCycleImageViewController.m */; };
 		74270C8D1EC58F6800F9419B /* UCFCycleImageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74270C5D1EC58F6800F9419B /* UCFCycleImageViewController.xib */; };
 		74270C8E1EC58F6800F9419B /* UCFHomeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74270C5F1EC58F6800F9419B /* UCFHomeListViewController.m */; };
@@ -1058,8 +1057,6 @@
 		7420DF051B159E81003CAE38 /* UCFMoreCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFMoreCell.m; sourceTree = "<group>"; };
 		7422DF2D1B6218B400DCFA40 /* NSDate+IsBelongToToday.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+IsBelongToToday.h"; sourceTree = "<group>"; };
 		7422DF2E1B6218B400DCFA40 /* NSDate+IsBelongToToday.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+IsBelongToToday.m"; sourceTree = "<group>"; };
-		74270C581EC58F6800F9419B /* UCFHomeAPIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFHomeAPIManager.h; sourceTree = "<group>"; };
-		74270C591EC58F6800F9419B /* UCFHomeAPIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFHomeAPIManager.m; sourceTree = "<group>"; };
 		74270C5B1EC58F6800F9419B /* UCFCycleImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFCycleImageViewController.h; sourceTree = "<group>"; };
 		74270C5C1EC58F6800F9419B /* UCFCycleImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFCycleImageViewController.m; sourceTree = "<group>"; };
 		74270C5D1EC58F6800F9419B /* UCFCycleImageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFCycleImageViewController.xib; sourceTree = "<group>"; };
@@ -2875,8 +2872,6 @@
 		74270C571EC58F6800F9419B /* APIManager */ = {
 			isa = PBXGroup;
 			children = (
-				74270C581EC58F6800F9419B /* UCFHomeAPIManager.h */,
-				74270C591EC58F6800F9419B /* UCFHomeAPIManager.m */,
 			);
 			path = APIManager;
 			sourceTree = "<group>";
@@ -6526,7 +6521,6 @@
 				83F2D59E1DCB508F0041F913 /* UCFAccountTool.m in Sources */,
 				74F490E51E5AF2660057AC62 /* UCFMyInvestBatchBidModel.m in Sources */,
 				74E8A0051DDDA142000B0AFF /* UCFP2PTransferViewController.m in Sources */,
-				74270C8B1EC58F6800F9419B /* UCFHomeAPIManager.m in Sources */,
 				FB21732F1AF2362800649AA0 /* UCFBackMoneyModel.m in Sources */,
 				4A42BB321C27AC7B0084AB08 /* NewCalculator.m in Sources */,
 				74EB80EC1AE4FCC40071621E /* SecurityCell.m in Sources */,
