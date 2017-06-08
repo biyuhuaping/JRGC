@@ -248,6 +248,8 @@
 
 #define RECFRIENDLISTURL   @"api/inviteRebate/v2/recFriendList.json" //邀请下线列表
 
+#define PRDCLAIMSWJSHOWURL  @"/api/prdClaims/v2/wjShow.json"//工场微金列表
+
 
 enum kPostStatus{
     kPostStatusNone=0,
@@ -462,7 +464,8 @@ enum kSXTag
     KSXTagMyInviteRewardinfo,           //邀请奖励
     KSXTagP2pISAuthorization,           //是否微金授权
     KSXTagP2pAuthorization,             //微金用户授权
-    kSXTagRecFriendList                 //邀请下线列表 
+    kSXTagRecFriendList,                //邀请下线列表
+    kSXTagPrdClaimsWJShow,              //工场微金列表 
 
 
 };
