@@ -55,33 +55,33 @@
 - (void)transferHeaderView:(UCFTransferHeaderView *)transferHeader didClickOrderButton:(UIButton *)orderBtn andIsIncrease:(BOOL)isUp
 {
     switch (orderBtn.tag - 100) {
-            // 金额 YES 升序 NO 降序
+            // 利率 YES 升序 NO 降序
         case 0: {
             if (isUp) {
-                
+                DBLOG(@"利率  升序");
             }
             else {
-                
+                DBLOG(@"利率  降序");
             }
         }
             break;
-            // 期限 NO 升序 YES 降序
+            // 期限 YES 升序 NO 降序
         case 1: {
             if (isUp) {
-                
+                DBLOG(@"期限  升序");
             }
             else {
-                
+                DBLOG(@"期限  降序");
             }
         }
             break;
             // 金额 NO 升序 YES 降序
         case 2: {
             if (isUp) {
-                
+                DBLOG(@"金额  降序");
             }
             else {
-                
+                DBLOG(@"金额  升序");
             }
         }
             break;
