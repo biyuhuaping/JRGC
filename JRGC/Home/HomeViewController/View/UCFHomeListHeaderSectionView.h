@@ -18,6 +18,8 @@
 
 @interface UCFHomeListHeaderSectionView : UITableViewHeaderFooterView
 @property (weak, nonatomic) IBOutlet UIView *upLine;
+@property (weak, nonatomic) IBOutlet UIImageView *headerImageView;
+@property (weak, nonatomic) IBOutlet UILabel *headerTitleLabel;
 @property (weak, nonatomic) IBOutlet UIButton *homeListHeaderMoreButton;
 @property (strong, nonatomic) UCFHomeListGroupPresenter *presenter;
 @property (weak, nonatomic) id<UCFHomeListHeaderSectionViewDelegate> delegate;

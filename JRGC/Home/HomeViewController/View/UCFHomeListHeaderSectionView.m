@@ -9,8 +9,6 @@
 #import "UCFHomeListHeaderSectionView.h"
 
 @interface UCFHomeListHeaderSectionView  ()
-@property (weak, nonatomic) IBOutlet UIImageView *headerImageView;
-@property (weak, nonatomic) IBOutlet UILabel *headerTitleLabel;
 
 @end
 

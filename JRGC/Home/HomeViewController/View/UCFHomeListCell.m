@@ -10,6 +10,7 @@
 #import "ZZCircleProgress.h"
 #import "NZLabel.h"
 #import "UCFProjectLabel.h"
+#import "UCFMicroMoneyModel.h"
 
 @interface UCFHomeListCell ()
 @property (weak, nonatomic) IBOutlet UILabel *proName;
@@ -168,6 +169,9 @@
     if ([self.delegate respondsToSelector:@selector(homelistCell:didClickedProgressViewWithPresenter:)]) {
         [self.delegate homelistCell:self didClickedProgressViewWithPresenter:self.presenter.item];
     }
+    else if ([self.honorDelegate respondsToSelector:@selector(homelistCell:didClickedProgressViewAtIndexPath:)]) {
+        [self.honorDelegate homelistCell:self didClickedProgressViewAtIndexPath:self.indexPath];
+    }
 }
 
 - (void)setIndexPath:(NSIndexPath *)indexPath
@@ -238,6 +242,55 @@
     else if (self.oneImageNumLabel.text.length == 3) {
         self.numBackViewW.constant = 43;
     }
+}
+
+- (void)setMicroMoneyModel:(UCFMicroMoneyModel *)microMoneyModel
+{
+    _microMoneyModel = microMoneyModel;
+    self.oneImageView.hidden = YES;
+    self.proName.text = microMoneyModel.prdName;
+    self.rateLabel.text = [NSString stringWithFormat:@"%@%%", microMoneyModel.annualRate];
+    self.timeLabel.text = microMoneyModel.repayPeriodtext;
+    self.repayModelLabel.text = microMoneyModel.repayModeText;
+    self.startMoneyLabel.text = [NSString stringWithFormat:@"%@", microMoneyModel.minInvest];
+    NSString *temp = [NSString stringWithFormat:@"%lf",[microMoneyModel.borrowAmount doubleValue]-[microMoneyModel.completeLoan doubleValue]];
+    self.remainLabel.text = [self moneywithRemaining:temp total:microMoneyModel.borrowAmount];
+    
+    NSInteger status = [microMoneyModel.status integerValue];
+    NSArray *statusArr = @[@"未审核",@"等待确认",@"出借",@"流标",@"满标",@"回款中",@"已回款"];
+    if (microMoneyModel.modelType == UCFMicroMoneyModelTypeBatchBid && status == 2) {
+        self.circleProgressView.progressText = @"批量出借";
+    }
+    else
+        self.circleProgressView.progressText = statusArr[status];
+}
+
+- (NSString *)moneywithRemaining:(id)rem total:(id)total{
+    NSInteger rem1 = [rem integerValue]*0.0001;
+    double rem2 = [rem doubleValue]*0.0001;
+    
+    NSInteger total1 = [total integerValue]*0.0001;
+    double total2 = [total doubleValue]*0.0001;
+    
+    NSString *str1 = @"";
+    NSString *str2 = @"";
+    
+    if (rem1 == rem2) {
+        str1 = [NSString stringWithFormat:@"%.f万",rem2];
+    }else
+        str1 = [NSString stringWithFormat:@"%.2f万",rem2];
+    
+    if (total1 == total2) {
+        str2 = [NSString stringWithFormat:@"%.f万",total2];
+    }else
+        str2 = [NSString stringWithFormat:@"%.2f万",total2];
+    
+    //    return [NSString stringWithFormat:@"剩%@/%@",str1,str2];
+    //标未满的时候显示剩余 //满标的时候，显示总额
+    if (rem2 == 0) {
+        return [NSString stringWithFormat:@"%@",str2];
+    }
+    return [NSString stringWithFormat:@"剩%@",str1];
 }
 
 @end
