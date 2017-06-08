@@ -54,11 +54,8 @@
         self.rateState = !self.rateState;
     }
     self.index = sender.tag -100;
-    if (self.rateState) {
-        DBLOG(@"rate up");
-    }
-    else {
-        DBLOG(@"rate down");
+    if ([self.delegate respondsToSelector:@selector(transferHeaderView:didClickOrderButton:andIsIncrease:)]) {
+        [self.delegate transferHeaderView:self didClickOrderButton:sender andIsIncrease:self.rateState];
     }
 }
 
@@ -67,11 +64,8 @@
         self.limitState = !self.limitState;
     }
     self.index = sender.tag -100;
-    if (self.limitState) {
-        DBLOG(@"limit up");
-    }
-    else {
-        DBLOG(@"limit down");
+    if ([self.delegate respondsToSelector:@selector(transferHeaderView:didClickOrderButton:andIsIncrease:)]) {
+        [self.delegate transferHeaderView:self didClickOrderButton:sender andIsIncrease:self.limitState];
     }
 }
 
@@ -80,11 +74,8 @@
         self.sumState = !self.sumState;
     }
     self.index = sender.tag -100;
-    if (self.sumState) {
-        DBLOG(@"sum up");
-    }
-    else {
-        DBLOG(@"sum down");
+    if ([self.delegate respondsToSelector:@selector(transferHeaderView:didClickOrderButton:andIsIncrease:)]) {
+        [self.delegate transferHeaderView:self didClickOrderButton:sender andIsIncrease:self.sumState];
     }
 }
 

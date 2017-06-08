@@ -9,7 +9,7 @@
 #import "UCFInvestTransferViewController.h"
 #import "UCFTransferHeaderView.h"
 
-@interface UCFInvestTransferViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface UCFInvestTransferViewController () <UITableViewDelegate, UITableViewDataSource, UCFTransferHeaderViewDelegate>
 @property (strong, nonatomic) UCFTransferHeaderView *transferHeaderView;
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @end
@@ -27,6 +27,7 @@
     UCFTransferHeaderView *transferHeaderView = (UCFTransferHeaderView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFTransferHeaderView" owner:self options:nil] lastObject];
     transferHeaderView.frame = CGRectMake(0, 0, ScreenWidth, 230);
     self.tableview.tableHeaderView = transferHeaderView;
+    transferHeaderView.delegate = self;
     self.transferHeaderView = transferHeaderView;
     
 }
@@ -49,5 +50,42 @@
 }
 
 #pragma mark - tableview 代理
+
+#pragma mark - header 代理
+- (void)transferHeaderView:(UCFTransferHeaderView *)transferHeader didClickOrderButton:(UIButton *)orderBtn andIsIncrease:(BOOL)isUp
+{
+    switch (orderBtn.tag - 100) {
+            // 金额 YES 升序 NO 降序
+        case 0: {
+            if (isUp) {
+                
+            }
+            else {
+                
+            }
+        }
+            break;
+            // 期限 NO 升序 YES 降序
+        case 1: {
+            if (isUp) {
+                
+            }
+            else {
+                
+            }
+        }
+            break;
+            // 金额 NO 升序 YES 降序
+        case 2: {
+            if (isUp) {
+                
+            }
+            else {
+                
+            }
+        }
+            break;
+    }
+}
 
 @end
