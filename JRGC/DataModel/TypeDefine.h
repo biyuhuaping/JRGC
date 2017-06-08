@@ -469,14 +469,13 @@ enum kSXTag
     KSXTagMyInviteRewardinfo,           //邀请奖励
     KSXTagP2pISAuthorization,           //是否微金授权
     KSXTagP2pAuthorization,             //微金用户授权
-<<<<<<< HEAD
-    kSXTagRecFriendList,                 //邀请下线列表
-    kSXTagCheckConponCenter                 //检查领券中心红点
-=======
+
+    kSXTagCheckConponCenter,                 //检查领券中心红点
+
     kSXTagRecFriendList,                //邀请下线列表
     kSXTagPrdClaimsWJShow,              //工场微金列表 
 
->>>>>>> master
+
 
 };
 
