@@ -57,10 +57,19 @@
     self.tableview.tableHeaderView = microMoneyHeaderView;
     self.microMoneyHeaderView = microMoneyHeaderView;
     
+    //=========  下拉刷新、上拉加载更多  =========
+//    self.noDataView = [[UCFNoDataView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-64-49) errorTitle:@"敬请期待..."]
+    // 添加传统的下拉刷新
+    [self.tableview addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(reloadData)];
+    [self.tableview.header beginRefreshing];
+    
     UCFInvestAPIManager *apiManager = [[UCFInvestAPIManager alloc] init];
     apiManager.microMoneyDelegate = self;
     self.apiManager = apiManager;
     [apiManager getMicroMoneyFromNet];
+}
+-(void)reloadData{
+   [ self.apiManager getMicroMoneyFromNet];
 }
 
 #pragma mark - tableview 数据源
@@ -278,6 +287,10 @@
 - (void)investApiManager:(UCFInvestAPIManager *)apiManager didSuccessedReturnMicroMoneyResult:(id)result withTag:(NSUInteger)tag
 {
     self.dataArray = (NSMutableArray *)result;
+    if ([self.tableview.header isRefreshing]) {
+        [self.tableview.header endRefreshing];
+    }
+
     [self.tableview reloadData];
 }
 
