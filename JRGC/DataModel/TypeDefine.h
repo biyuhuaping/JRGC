@@ -253,6 +253,7 @@
 #define RECFRIENDLISTURL   @"api/inviteRebate/v2/recFriendList.json" //邀请下线列表
 
 #define PRDCLAIMSWJSHOWURL  @"api/prdClaims/v2/wjShow.json"//工场微金列表
+#define PRDTRANSEFERLIST    @"api/prdClaims/v2/transferShow.json" //混合债转列表
 
 
 
@@ -469,7 +470,8 @@ enum kSXTag
     KSXTagP2pAuthorization,             //微金用户授权
     kSXTagCheckConponCenter,                 //检查领券中心红点
     kSXTagRecFriendList,                //邀请下线列表
-    kSXTagPrdClaimsWJShow,              //工场微金列表 
+    kSXTagPrdClaimsWJShow,              //工场微金列表
+    kSXTagPrdTransferList,              //混合债转列表
 };
 
 typedef enum kSXTag kSXTag;

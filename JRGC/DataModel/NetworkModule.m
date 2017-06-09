@@ -1283,6 +1283,10 @@ static NetworkModule *gInstance = NULL;
         case kSXTagPrdClaimsWJShow:
             parameter = [NEW_SERVER_IP stringByAppendingString:PRDCLAIMSWJSHOWURL];
             break;
+        case kSXTagPrdTransferList:
+            parameter = [NEW_SERVER_IP stringByAppendingString:PRDTRANSEFERLIST];
+            break;
+            
     }
     //给原有参数字典添加公共参数
     if (!data) {
