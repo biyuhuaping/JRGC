@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "UCFHomeListCellPresenter.h"
 #import "UCFHomeListCellModel.h"
-
+#import "UCFProjectListModel.h"
 @class UCFHomeListCell, UCFHomeListCellPresenter, UCFMicroMoneyModel;
 @protocol UCFHomeListCellDelegate <NSObject>
 
@@ -28,4 +28,5 @@
 @property (weak, nonatomic) id<UCFHomeListCellDelegate> delegate;
 @property (weak, nonatomic) id<UCFHomeListCellHonorDelegate> honorDelegate;
 @property (weak, nonatomic) UCFMicroMoneyModel *microMoneyModel;
+@property (weak, nonatomic) UCFMicroMoneyModel *honerListModel;
 @end

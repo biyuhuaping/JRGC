@@ -117,9 +117,7 @@
         ordinaryBidVC.accoutType = SelectAccoutTypeP2P;
         [self.navigationController pushViewController:ordinaryBidVC animated:YES];
         
-    }
-
-    
+    }    
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -272,7 +270,6 @@
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"telprompt://400-0322-988"]];
         }
     }
-
 }
 
 

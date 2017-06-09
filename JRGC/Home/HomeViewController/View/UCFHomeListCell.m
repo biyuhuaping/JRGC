@@ -264,6 +264,22 @@
     else
         self.circleProgressView.progressText = statusArr[status];
 }
+- (void)setHonerListModel:(UCFMicroMoneyModel *)microMoneyModel
+{
+    _microMoneyModel = microMoneyModel;
+    self.oneImageView.hidden = YES;
+    self.proName.text = microMoneyModel.prdName;
+    self.rateLabel.text = [NSString stringWithFormat:@"%@%%", microMoneyModel.annualRate];
+    self.timeLabel.text = microMoneyModel.repayPeriodtext;
+    self.repayModelLabel.text = microMoneyModel.repayModeText;
+    self.startMoneyLabel.text = [NSString stringWithFormat:@"%@起", microMoneyModel.minInvest];
+    NSString *temp = [NSString stringWithFormat:@"%lf",[microMoneyModel.borrowAmount doubleValue]-[microMoneyModel.completeLoan doubleValue]];
+    self.remainLabel.text = [self moneywithRemaining:temp total:microMoneyModel.borrowAmount];
+    
+    NSInteger status = [microMoneyModel.status integerValue];
+    NSArray *statusArr = @[@"未审核",@"等待确认",@"认购",@"流标",@"满标",@"回款中",@"已回款"];
+    self.circleProgressView.progressText = statusArr[status];
+}
 
 - (NSString *)moneywithRemaining:(id)rem total:(id)total{
     NSInteger rem1 = [rem integerValue]*0.0001;
