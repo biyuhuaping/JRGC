@@ -12,6 +12,8 @@ typedef enum : NSUInteger {
     UCFMicroMoneyModelTypeNew,
     UCFMicroMoneyModelTypeBatchBid,
     UCFMicroMoneyModelTypeNormal,
+    UCFMicroMoneyModelTypeHonerNew,
+    UCFMicroMoneyModelTypeHonerNormal,
 } UCFMicroMoneyModelType;
 
 @interface UCFMicroMoneyModel : NSObject

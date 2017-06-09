@@ -21,6 +21,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *headerImageView;
 @property (weak, nonatomic) IBOutlet UILabel *headerTitleLabel;
 @property (weak, nonatomic) IBOutlet UIButton *homeListHeaderMoreButton;
+@property (weak, nonatomic) IBOutlet UIImageView *honerLineImageView;
+@property (weak, nonatomic) IBOutlet UILabel *honerLabel;
 @property (strong, nonatomic) UCFHomeListGroupPresenter *presenter;
 @property (weak, nonatomic) id<UCFHomeListHeaderSectionViewDelegate> delegate;
 @end
