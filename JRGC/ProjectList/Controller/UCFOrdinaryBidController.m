@@ -42,10 +42,16 @@
     }
     return _dataArray;
 }
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [self addLeftButton];
+    baseTitleLabel.text = @"微金项目";
     self.tableview.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableview.backgroundColor = UIColorWithRGB(0xebebee);
     self.tableview.contentInset = UIEdgeInsetsMake(5, 0, 5, 0);
@@ -189,7 +195,7 @@
             UCFProjectDetailViewController *controller = [[UCFProjectDetailViewController alloc] initWithDataDic:dic isTransfer:NO withLabelList:prdLabelsListTemp];
             CGFloat platformSubsidyExpense = [_projectListModel.platformSubsidyExpense floatValue];
             [[NSUserDefaults standardUserDefaults] setValue:[NSString stringWithFormat:@"%.1f",platformSubsidyExpense] forKey:@"platformSubsidyExpense"];
-            controller.rootVc = self.rootVc;
+            controller.rootVc = self;
             controller.accoutType = SelectAccoutTypeP2P;
             [self.navigationController pushViewController:controller animated:YES];
         }else {
@@ -202,7 +208,7 @@
         if([dic[@"status"] integerValue] == 1)
         {
             UCFPurchaseBidViewController *purchaseViewController = [[UCFPurchaseBidViewController alloc] initWithNibName:@"UCFPurchaseBidViewController" bundle:nil];
-            purchaseViewController.rootVc = self.rootVc;
+            purchaseViewController.rootVc = self;
             purchaseViewController.dataDict = dic;
             purchaseViewController.bidType = 0;
             purchaseViewController.baseTitleType = @"detail_heTong";

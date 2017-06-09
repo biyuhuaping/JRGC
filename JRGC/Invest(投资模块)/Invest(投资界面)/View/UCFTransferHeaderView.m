@@ -11,6 +11,14 @@
 
 @interface UCFTransferHeaderView ()
 @property (weak, nonatomic) SDCycleScrollView *cycleView;
+@property (weak, nonatomic) IBOutlet UIImageView *imageView1;
+@property (weak, nonatomic) IBOutlet UIButton *rateOrderButton;
+@property (weak, nonatomic) IBOutlet UIButton *limitOrderButton;
+@property (weak, nonatomic) IBOutlet UIButton *sumOrderButton;
+@property (assign, nonatomic) BOOL rateState;
+@property (assign, nonatomic) BOOL limitState;
+@property (assign, nonatomic) BOOL sumState;
+@property (assign, nonatomic) NSInteger index;
 @end
 
 @implementation UCFTransferHeaderView
@@ -24,11 +32,52 @@
     cycleScrollView.autoScrollTimeInterval = 7.0;
     [self addSubview:cycleScrollView];
     self.cycleView = cycleScrollView;
+    
+    self.index = 0;
+    self.rateState = YES;
+    self.limitState = YES;
+    self.sumState = YES;
+    
+    
 }
 
 - (void)layoutSubviews
 {
     [super layoutSubviews];
     self.cycleView.frame = CGRectMake(0, 10, ScreenWidth, 100);
+    
 }
+
+#pragma mark - button点击事件
+- (IBAction)rateOrder:(UIButton *)sender {
+    if (sender.tag-100 == self.index) {
+        self.rateState = !self.rateState;
+    }
+    self.index = sender.tag -100;
+    if ([self.delegate respondsToSelector:@selector(transferHeaderView:didClickOrderButton:andIsIncrease:)]) {
+        [self.delegate transferHeaderView:self didClickOrderButton:sender andIsIncrease:self.rateState];
+    }
+}
+
+- (IBAction)limitOrder:(UIButton *)sender {
+    if (sender.tag-100 == self.index) {
+        self.limitState = !self.limitState;
+    }
+    self.index = sender.tag -100;
+    if ([self.delegate respondsToSelector:@selector(transferHeaderView:didClickOrderButton:andIsIncrease:)]) {
+        [self.delegate transferHeaderView:self didClickOrderButton:sender andIsIncrease:self.limitState];
+    }
+}
+
+- (IBAction)sumOrder:(UIButton *)sender {
+    if (sender.tag-100 == self.index) {
+        self.sumState = !self.sumState;
+    }
+    self.index = sender.tag -100;
+    if ([self.delegate respondsToSelector:@selector(transferHeaderView:didClickOrderButton:andIsIncrease:)]) {
+        [self.delegate transferHeaderView:self didClickOrderButton:sender andIsIncrease:self.sumState];
+    }
+}
+
+
 @end
