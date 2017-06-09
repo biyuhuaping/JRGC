@@ -8,6 +8,12 @@
 
 #import "UCFTransfeTableViewCell.h"
 
+@interface UCFTransfeTableViewCell ()
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *timeLeadSpace;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *moneyLeadSpace;
+
+@end
+
 @implementation UCFTransfeTableViewCell
 
 - (void)awakeFromNib {
@@ -18,6 +24,8 @@
     self.timeLabel.textColor = UIColorWithRGB(0x555555);
     self.moneyLabel.textColor = UIColorWithRGB(0x555555);
     
+    _timeLeadSpace.constant = (ScreenWidth * 120.0f )/320.0f;
+    _moneyLeadSpace.constant = (ScreenWidth * 215.0f )/320.0f;
 }
 - (void)layoutSubviews
 {
