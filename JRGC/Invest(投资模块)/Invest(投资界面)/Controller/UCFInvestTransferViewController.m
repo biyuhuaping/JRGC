@@ -31,11 +31,10 @@
 #pragma mark - 设置界面
 - (void)createUI {
     UCFTransferHeaderView *transferHeaderView = (UCFTransferHeaderView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFTransferHeaderView" owner:self options:nil] lastObject];
-    transferHeaderView.frame = CGRectMake(0, 0, ScreenWidth, 230);
+    transferHeaderView.frame = CGRectMake(0, 0, ScreenWidth, 215);
     self.tableview.tableHeaderView = transferHeaderView;
     transferHeaderView.delegate = self;
     self.transferHeaderView = transferHeaderView;
-    
     [self.tableview addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(refreshData)];
     __weak typeof(self) weakSelf = self;
     [self.tableview addLegendFooterWithRefreshingBlock:^{
@@ -43,6 +42,8 @@
     }];
 
     [self.tableview setSeparatorColor:[UIColor clearColor]];
+    [transferHeaderView initData];
+
 }
 - (void)initData
 {
@@ -177,10 +178,9 @@
                     currentPage++;
                 }
             }
-            else {
-            }
-
             [self.tableview reloadData];
+        } else {
+            [MBProgressHUD displayHudError:rsttext];
         }
     
     }
@@ -193,6 +193,11 @@
 }
 - (void)errorPost:(NSError *)err tag:(NSNumber *)tag
 {
-    
+    if ([self.tableview.header isRefreshing]) {
+        [self.tableview.header endRefreshing];
+    }
+    if ([self.tableview.footer isRefreshing]) {
+        [self.tableview.footer endRefreshing];
+    }
 }
 @end
