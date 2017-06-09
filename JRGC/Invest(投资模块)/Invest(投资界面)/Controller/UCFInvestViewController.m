@@ -51,6 +51,7 @@
     
     self.honorInvest = [[UCFHonorInvestViewController alloc]initWithNibName:@"UCFHonorInvestViewController" bundle:nil];
     self.honorInvest.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight - 64);
+    self.honorInvest.rootVc = self;
     [self addChildViewController:self.honorInvest];
     
     self.microMoney = [[UCFMicroMoneyViewController alloc]initWithNibName:@"UCFMicroMoneyViewController" bundle:nil];
