@@ -767,6 +767,7 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
             purchaseViewController.bidType = 0;
             self.intoViewControllerStr = @"CollctionKeyBidVC";
             purchaseViewController.colPrdClaimId =_colPrdClaimId;
+            purchaseViewController.rootVc = self.rootVc;
             [self.navigationController pushViewController:purchaseViewController animated:YES];
         }else if ([dic[@"code"] integerValue] == 30) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"测试",nil];

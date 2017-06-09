@@ -40,7 +40,7 @@
 #import "AppDelegate.h"
 #import "BaseNavigationViewController.h"
 #import "FullWebViewController.h"
-
+#import "UCFBatchBidController.h"
 
 @interface UCFHomeViewController () <UCFHomeListViewControllerDelegate, UCFHomeListNavViewDelegate, UCFUserInformationViewControllerDelegate,BJGridItemDelegate>
 @property (strong, nonatomic) UCFCycleImageViewController *cycleImageVC;
@@ -407,11 +407,17 @@
           }
         else if (model.moedelType == UCFHomeListCellModelTypeOneImageBatchLending) {
             // 批量出借
-            UCFP2PViewController *p2PVC = [[UCFP2PViewController alloc] initWithNibName:@"UCFP2PViewController" bundle:nil];
-            p2PVC.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight - 64);
-            p2PVC.viewType = @"2";
-            [p2PVC setCurrentViewForBatchBid];
-            [self.navigationController pushViewController:p2PVC animated:YES];
+//            UCFP2PViewController *p2PVC = [[UCFP2PViewController alloc] initWithNibName:@"UCFP2PViewController" bundle:nil];
+//            p2PVC.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight - 64);
+//            p2PVC.viewType = @"2";
+//            [p2PVC setCurrentViewForBatchBid];
+//            [self.navigationController pushViewController:p2PVC animated:YES];
+            
+            
+            UCFBatchBidController *batchBidVc = [[UCFBatchBidController alloc]initWithNibName:@"UCFBatchBidController" bundle:nil];
+            batchBidVc.accoutType = SelectAccoutTypeP2P;
+            [self.navigationController pushViewController:batchBidVc animated:YES];
+
         }
         else if (model.moedelType == UCFHomeListCellModelTypeOneImageBondTransfer) {
             // 债券转让

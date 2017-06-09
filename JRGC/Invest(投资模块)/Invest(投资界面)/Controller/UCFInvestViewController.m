@@ -61,6 +61,7 @@
     
     self.investTransfer = [[UCFInvestTransferViewController alloc]initWithNibName:@"UCFInvestTransferViewController" bundle:nil];
     self.investTransfer.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight - 64);
+    self.investTransfer.rootVc = self;
     [self addChildViewController:self.investTransfer];
     
     self.currentViewController = self.honorInvest;
