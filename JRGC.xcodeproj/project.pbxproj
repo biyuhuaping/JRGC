@@ -608,6 +608,8 @@
 		A8DE85281EC2BC34004B3533 /* UcfLibResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A8DE851A1EC2BC34004B3533 /* UcfLibResources.bundle */; };
 		A8DE85291EC2BC34004B3533 /* UcfWalletSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A8DE851B1EC2BC34004B3533 /* UcfWalletSDK.bundle */; };
 		A8DE852E1EC30159004B3533 /* P2PWalletHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A8DE852D1EC30159004B3533 /* P2PWalletHelper.m */; };
+		A8E01A801EEA4C6F003E3BDC /* UCFTransfeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A8E01A7E1EEA4C6F003E3BDC /* UCFTransfeTableViewCell.m */; };
+		A8E01A811EEA4C6F003E3BDC /* UCFTransfeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8E01A7F1EEA4C6F003E3BDC /* UCFTransfeTableViewCell.xib */; };
 		AEC5EEC01D9B6594000C0321 /* RechargeFixedTelNumView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEC5EEBF1D9B6594000C0321 /* RechargeFixedTelNumView.xib */; };
 		AEC5EEC31D9B65BA000C0321 /* RechargeFixedTelNumView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC5EEC21D9B65BA000C0321 /* RechargeFixedTelNumView.m */; };
 		E31141601D92769E00FF880A /* UCFWebViewJavascriptBridgeBBS.m in Sources */ = {isa = PBXBuildFile; fileRef = E311415E1D92769E00FF880A /* UCFWebViewJavascriptBridgeBBS.m */; };
@@ -1921,6 +1923,9 @@
 		A8DE85211EC2BC34004B3533 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		A8DE852C1EC30159004B3533 /* P2PWalletHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = P2PWalletHelper.h; sourceTree = "<group>"; };
 		A8DE852D1EC30159004B3533 /* P2PWalletHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = P2PWalletHelper.m; sourceTree = "<group>"; };
+		A8E01A7D1EEA4C6F003E3BDC /* UCFTransfeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFTransfeTableViewCell.h; sourceTree = "<group>"; };
+		A8E01A7E1EEA4C6F003E3BDC /* UCFTransfeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFTransfeTableViewCell.m; sourceTree = "<group>"; };
+		A8E01A7F1EEA4C6F003E3BDC /* UCFTransfeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFTransfeTableViewCell.xib; sourceTree = "<group>"; };
 		AE43B84F1DD2D8BE001D0BD0 /* JRGC.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JRGC.entitlements; sourceTree = "<group>"; };
 		AEC5EEBF1D9B6594000C0321 /* RechargeFixedTelNumView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RechargeFixedTelNumView.xib; sourceTree = "<group>"; };
 		AEC5EEC11D9B65BA000C0321 /* RechargeFixedTelNumView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RechargeFixedTelNumView.h; sourceTree = "<group>"; };
@@ -3130,6 +3135,9 @@
 				74AFB12D1EE8F848007DBAFC /* UCFTransferHeaderView.h */,
 				74AFB12E1EE8F848007DBAFC /* UCFTransferHeaderView.m */,
 				74AFB1301EE8F850007DBAFC /* UCFTransferHeaderView.xib */,
+				A8E01A7D1EEA4C6F003E3BDC /* UCFTransfeTableViewCell.h */,
+				A8E01A7E1EEA4C6F003E3BDC /* UCFTransfeTableViewCell.m */,
+				A8E01A7F1EEA4C6F003E3BDC /* UCFTransfeTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -5917,6 +5925,7 @@
 				74956EB31D66E87F00D68B61 /* UCFModifyPhoneViewController.xib in Resources */,
 				83A6FEA91EBC2DDF000BC48C /* UCFProductListCell.xib in Resources */,
 				FBB685801AE4A76800F222B6 /* MJRefresh.bundle in Resources */,
+				A8E01A811EEA4C6F003E3BDC /* UCFTransfeTableViewCell.xib in Resources */,
 				741EF9341E5555A90007E52B /* UCFOrdinaryBidController.xib in Resources */,
 				2526ADE01DD08D5F00114D9A /* JRGCCustomGroupCell.xib in Resources */,
 				FB5149521D64441F00C26E7B /* guideImage6_1.png in Resources */,
@@ -6160,6 +6169,7 @@
 				25950EB81D7FB6EB00E4CCBA /* CWAnimationView.m in Sources */,
 				EDD13F691C196D860088A378 /* SCGIFImageView.m in Sources */,
 				25314C0B1D8FD7FA0066F446 /* UCFDirectCell.m in Sources */,
+				A8E01A801EEA4C6F003E3BDC /* UCFTransfeTableViewCell.m in Sources */,
 				4A9016851AFB12FE0049A9E0 /* MASViewConstraint.m in Sources */,
 				74F2911C1AE0DBE4003E0E86 /* UCFSecurityCenterViewController.m in Sources */,
 				FB88C90E1AF9F92E00D2EE93 /* YcMutableArray.m in Sources */,
