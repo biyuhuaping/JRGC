@@ -76,6 +76,10 @@
         self.currentViewController = self.investTransfer;
         self.itemSelectedView.segmentedControl.selectedSegmentIndex = 2;
     }
+    else {
+        self.currentViewController = self.honorInvest;
+        self.itemSelectedView.segmentedControl.selectedSegmentIndex = 0;
+    }
 }
 
 #pragma mark - 选项条的代理
