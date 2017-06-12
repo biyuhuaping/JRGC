@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -18,21 +19,19 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hKf-5t-iCl">
                     <rect key="frame" x="0.0" y="10" width="375" height="30"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="工场尊享 www.gongchangzx.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LTv-l2-eQ3">
-                            <rect key="frame" x="15" y="0.0" width="345" height="30"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_zx" translatesAutoresizingMaskIntoConstraints="NO" id="kxt-05-q0q">
+                            <rect key="frame" x="15" y="0.0" width="240" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="kxt-05-q0q" secondAttribute="height" multiplier="8:1" id="O6J-XB-bmI"/>
+                            </constraints>
+                        </imageView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
+                        <constraint firstItem="kxt-05-q0q" firstAttribute="top" secondItem="hKf-5t-iCl" secondAttribute="top" id="3Ev-Am-Vu3"/>
                         <constraint firstAttribute="height" constant="30" id="79v-Sd-TMx"/>
-                        <constraint firstItem="LTv-l2-eQ3" firstAttribute="leading" secondItem="hKf-5t-iCl" secondAttribute="leading" constant="15" id="C9s-D8-eJU"/>
-                        <constraint firstAttribute="bottom" secondItem="LTv-l2-eQ3" secondAttribute="bottom" id="ULu-BS-vet"/>
-                        <constraint firstItem="LTv-l2-eQ3" firstAttribute="top" secondItem="hKf-5t-iCl" secondAttribute="top" id="VDq-Yx-dH8"/>
-                        <constraint firstAttribute="trailing" secondItem="LTv-l2-eQ3" secondAttribute="trailing" constant="15" id="w3U-K5-Sba"/>
+                        <constraint firstItem="kxt-05-q0q" firstAttribute="leading" secondItem="hKf-5t-iCl" secondAttribute="leading" constant="15" id="hm3-U0-1AB"/>
+                        <constraint firstAttribute="bottom" secondItem="kxt-05-q0q" secondAttribute="bottom" id="olV-hT-Jcv"/>
                     </constraints>
                 </view>
             </subviews>
@@ -47,4 +46,7 @@
             <point key="canvasLocation" x="-152.5" y="-170"/>
         </view>
     </objects>
+    <resources>
+        <image name="logo_zx" width="200" height="20"/>
+    </resources>
 </document>

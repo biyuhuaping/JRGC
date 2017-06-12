@@ -17,6 +17,12 @@
 @property (weak, nonatomic) IBOutlet UIButton *sumOrderButton;
 @property (weak, nonatomic) IBOutlet UIView *buttonBaseView;
 @property (weak, nonatomic) IBOutlet UIView *bottomBaseView;
+@property (weak, nonatomic) IBOutlet UIImageView *rateUp;
+@property (weak, nonatomic) IBOutlet UIImageView *rateDown;
+@property (weak, nonatomic) IBOutlet UIImageView *limitUp;
+@property (weak, nonatomic) IBOutlet UIImageView *limitDown;
+@property (weak, nonatomic) IBOutlet UIImageView *sumUp;
+@property (weak, nonatomic) IBOutlet UIImageView *sumDown;
 @property (assign, nonatomic) BOOL rateState;
 @property (assign, nonatomic) BOOL limitState;
 @property (assign, nonatomic) BOOL sumState;
@@ -66,6 +72,16 @@
         self.rateState = !self.rateState;
     }
     self.index = sender.tag -100;
+    if (self.rateState) {
+        DBLOG(@"利率  升序");
+        [self calcueAllStateButton];
+        self.rateUp.highlighted = YES;
+    }
+    else {
+        DBLOG(@"利率  降序");
+        [self calcueAllStateButton];
+        self.rateDown.highlighted = YES;
+    }
     if ([self.delegate respondsToSelector:@selector(transferHeaderView:didClickOrderButton:andIsIncrease:)]) {
         [self.delegate transferHeaderView:self didClickOrderButton:sender andIsIncrease:self.rateState];
     }
@@ -78,6 +94,16 @@
         self.limitState = !self.limitState;
     }
     self.index = sender.tag -100;
+    if (self.limitState) {
+        DBLOG(@"期限  升序");
+        [self calcueAllStateButton];
+        self.limitUp.highlighted = YES;
+    }
+    else {
+        DBLOG(@"期限  降序");
+        [self calcueAllStateButton];
+        self.limitDown.highlighted = YES;
+    }
     if ([self.delegate respondsToSelector:@selector(transferHeaderView:didClickOrderButton:andIsIncrease:)]) {
         [self.delegate transferHeaderView:self didClickOrderButton:sender andIsIncrease:self.limitState];
     }
@@ -90,6 +116,17 @@
         self.sumState = !self.sumState;
     }
     self.index = sender.tag -100;
+    // 期限 YES 升序 NO 降序
+    if (self.sumState) {
+        DBLOG(@"金额  降序");
+        [self calcueAllStateButton];
+        self.sumUp.highlighted = YES;
+    }
+    else {
+        DBLOG(@"金额  升序");
+        [self calcueAllStateButton];
+        self.sumDown.highlighted = YES;
+    }
     if ([self.delegate respondsToSelector:@selector(transferHeaderView:didClickOrderButton:andIsIncrease:)]) {
         [self.delegate transferHeaderView:self didClickOrderButton:sender andIsIncrease:self.sumState];
     }
@@ -101,6 +138,16 @@
     [_limitOrderButton setTitleColor:UIColorWithRGB(0x555555) forState:UIControlStateNormal];
     [_sumOrderButton setTitleColor:UIColorWithRGB(0x555555) forState:UIControlStateNormal];
     [button setTitleColor:UIColorWithRGB(0xf5343c) forState:UIControlStateNormal];
+}
+
+- (void)calcueAllStateButton
+{
+    self.rateUp.highlighted = NO;
+    self.rateDown.highlighted = NO;
+    self.limitUp.highlighted = NO;
+    self.limitDown.highlighted = NO;
+    self.sumUp.highlighted = NO;
+    self.sumDown.highlighted = NO;
 }
 
 @end
