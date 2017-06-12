@@ -54,6 +54,8 @@
     [_rateOrderButton setTitleColor:UIColorWithRGB(0x555555) forState:UIControlStateNormal];
     [_limitOrderButton setTitleColor:UIColorWithRGB(0x555555) forState:UIControlStateNormal];
     [_sumOrderButton setTitleColor:UIColorWithRGB(0x555555) forState:UIControlStateNormal];
+    
+    [self getNormalBannerData];
 }
 
 - (void)layoutSubviews
@@ -148,6 +150,28 @@
     self.limitDown.highlighted = NO;
     self.sumUp.highlighted = NO;
     self.sumDown.highlighted = NO;
+}
+
+#pragma mark - 获取正式环境的banner图
+- (void)getNormalBannerData
+{
+    __weak typeof(self) weakSelf = self;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+        [request setURL:[NSURL URLWithString:@"https://fore.9888.cn/cms/uploadfile/2017/0612/20170612105400502.jpg"]];
+        [request setHTTPMethod:@"GET"];
+        NSHTTPURLResponse *urlResponse = nil;
+        NSError *error = nil;
+        NSData *recervedData = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&error];
+        UIImage *image = [UIImage imageWithData:recervedData];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (!image) {
+                return ;
+            }
+            weakSelf.cycleView.imagesGroup = @[image];
+            [weakSelf.cycleView refreshImage];
+        });
+    });
 }
 
 @end
