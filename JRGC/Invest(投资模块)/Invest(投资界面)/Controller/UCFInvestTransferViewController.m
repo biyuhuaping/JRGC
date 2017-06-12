@@ -85,7 +85,7 @@
         //如果未登录，展示登录页面
         [self showLoginView];
     } else {
-        if ([model.type intValue] == 1) {
+        if ([model.busType intValue] == 1) {
             self.accoutType = SelectAccoutTypeP2P;
         }else{//type 包括2 3，3为委托尊享标
             self.accoutType = SelectAccoutTypeHoner;

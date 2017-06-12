@@ -391,6 +391,14 @@
     accountDetailVC.accoutType = self.accoutType; 
     [self.navigationController pushViewController:accountDetailVC animated:YES];
 }
+//资金如何划转
+- (void)changeP2POrHonerAccoutMoneyAlertView
+{
+    NSString *message = self.accoutType == SelectAccoutTypeP2P ? @"Q:如何用微金账户中的1万元投资尊享标？\n A:需先将微金账户中的1万元提现至银行卡，再开通尊享账户(已开通尊享账户的用户跳过此步骤)，将资金充值到尊享账户，充值成功后可进行投资。":@"Q:如何用尊享账户中的1万元投资微金标？\n A:需先将尊享账户中的1万元提现至银行卡，再开通微金账户(已开通微金账户的用户跳过此步骤)，将资金充值到微金账户，充值成功后可进行投资";
+    
+    UIAlertView *alerView = [[UIAlertView alloc]initWithTitle:@"资金如何划转" message:message delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+    [alerView show];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

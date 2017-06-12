@@ -12,6 +12,7 @@
 
 @optional 
 - (void)checkP2POrHonerAccout;
+- (void)changeP2POrHonerAccoutMoneyAlertView;
 @end
 
 @interface UCFP2POrHornerTabHeaderView : UIView

@@ -20,6 +20,7 @@
 - (IBAction)CilckShowOrHideAccoutMoney:(UIButton *)sender;
 - (IBAction)checkP2POrHonerAccout:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *accountVisibleBtn;
+- (IBAction)accoutMoneyChangeButton:(id)sender;
 
 @end
 
@@ -97,5 +98,8 @@
     }else{
         return [NSString stringWithFormat:@"¥%@", [UCFToolsMehod AddComma:nullStr]];
     }
+}
+- (IBAction)accoutMoneyChangeButton:(id)sender {
+    [self.delegate changeP2POrHonerAccoutMoneyAlertView];
 }
 @end

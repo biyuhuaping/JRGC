@@ -131,6 +131,26 @@
                                 <constraint firstAttribute="height" constant="0.5" id="8TM-1n-DpR"/>
                             </constraints>
                         </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O8F-tX-cep">
+                            <rect key="frame" x="230" y="11" width="78" height="16"/>
+                            <color key="backgroundColor" red="0.29019607843137252" green="0.63137254901960782" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="16" id="hm0-lo-0CF"/>
+                                <constraint firstAttribute="width" constant="78" id="wXu-DN-UHf"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                            <state key="normal" title="资金如何划转?">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="2"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="accoutMoneyChangeButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="5ki-9l-YDY"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
@@ -139,6 +159,7 @@
                         <constraint firstItem="3Bl-A1-XIi" firstAttribute="leading" secondItem="fhF-8F-OAo" secondAttribute="trailing" id="GbI-gh-30e"/>
                         <constraint firstAttribute="trailing" secondItem="3Bl-A1-XIi" secondAttribute="trailing" id="RiK-w2-ioq"/>
                         <constraint firstItem="3Bl-A1-XIi" firstAttribute="top" secondItem="jWm-fQ-WOq" secondAttribute="top" id="STh-7O-byq"/>
+                        <constraint firstItem="O8F-tX-cep" firstAttribute="top" secondItem="jWm-fQ-WOq" secondAttribute="top" constant="11" id="SWz-E1-OBm"/>
                         <constraint firstItem="3Bl-A1-XIi" firstAttribute="width" secondItem="fhF-8F-OAo" secondAttribute="width" id="TgB-mG-8up"/>
                         <constraint firstAttribute="bottom" secondItem="3Bl-A1-XIi" secondAttribute="bottom" id="Wfg-DE-SBP"/>
                         <constraint firstAttribute="trailing" secondItem="fle-aZ-bIN" secondAttribute="trailing" id="WuI-rY-fQ6"/>
@@ -148,6 +169,7 @@
                         <constraint firstAttribute="trailing" secondItem="NYd-yJ-N81" secondAttribute="trailing" id="gVk-pU-PxV"/>
                         <constraint firstItem="fle-aZ-bIN" firstAttribute="top" secondItem="jWm-fQ-WOq" secondAttribute="top" id="ja6-zw-R4K"/>
                         <constraint firstItem="fle-aZ-bIN" firstAttribute="leading" secondItem="jWm-fQ-WOq" secondAttribute="leading" id="pd9-lE-Huf"/>
+                        <constraint firstItem="O8F-tX-cep" firstAttribute="leading" secondItem="fhF-8F-OAo" secondAttribute="trailing" constant="70" id="vI0-rA-vrf"/>
                         <constraint firstItem="fhF-8F-OAo" firstAttribute="top" secondItem="jWm-fQ-WOq" secondAttribute="top" id="vS6-0H-Y4n"/>
                         <constraint firstItem="NYd-yJ-N81" firstAttribute="leading" secondItem="jWm-fQ-WOq" secondAttribute="leading" id="zCu-jA-oBa"/>
                     </constraints>
@@ -174,7 +196,7 @@
                 <outlet property="totalIncomeTitleLab" destination="bYu-nd-nVA" id="3Qy-b9-7xT"/>
                 <outlet property="upView" destination="zU9-P5-x9d" id="MBH-Em-bt2"/>
             </connections>
-            <point key="canvasLocation" x="-1512" y="-540"/>
+            <point key="canvasLocation" x="-1769" y="-555"/>
         </view>
     </objects>
     <resources>
