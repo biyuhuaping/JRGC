@@ -9,5 +9,6 @@
 #import "UCFBaseViewController.h"
 
 @interface UCFInvestViewController : UCFBaseViewController
-
+@property (nonatomic, copy) NSString *selectedType;
+- (void)changeView;
 @end

@@ -118,10 +118,10 @@
     self.groupPresenter2.group.prdlist = temp2;
     
     NSMutableArray *temp3 = [[NSMutableArray alloc] init];
-    NSArray *imageArr = @[@"home_bg_2", @"home_bg_3", @"home_bg_4"];
-    NSArray *titleArr = @[@"债权转让专区", @"尊享转让专区", @""];
-    NSArray *typeArr = @[@"灵活变现", @"自由转让", @""];
-    for (int i=0; i<3; i++) {
+    NSArray *imageArr = @[@"home_bg_2", @"home_bg_4"];
+    NSArray *titleArr = @[@"转让专区", @""];
+    NSArray *typeArr = @[@"自由转让，灵活变现", @""];
+    for (int i=0; i<2; i++) {
         UCFHomeListCellModel *model = [[UCFHomeListCellModel alloc] init];
         model.moedelType = i+UCFHomeListCellModelTypeOneImageBondTransfer;
         model.prdName = [titleArr objectAtIndex:i];

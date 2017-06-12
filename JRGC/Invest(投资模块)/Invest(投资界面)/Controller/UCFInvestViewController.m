@@ -64,7 +64,18 @@
     self.investTransfer.rootVc = self;
     [self addChildViewController:self.investTransfer];
     
-    self.currentViewController = self.honorInvest;
+    if ([self.selectedType isEqualToString:@"P2P"]) {
+        self.currentViewController = self.microMoney;
+        self.itemSelectedView.segmentedControl.selectedSegmentIndex = 1;
+    }
+    else if ([self.selectedType isEqualToString:@"ZX"]) {
+        self.currentViewController = self.honorInvest;
+        self.itemSelectedView.segmentedControl.selectedSegmentIndex = 0;
+    }
+    else if ([self.selectedType isEqualToString:@"Trans"]) {
+        self.currentViewController = self.investTransfer;
+        self.itemSelectedView.segmentedControl.selectedSegmentIndex = 2;
+    }
 }
 
 #pragma mark - 选项条的代理
@@ -103,6 +114,20 @@
         }
             break;
     }
+}
+
+- (void)changeView {
+    if ([self.selectedType isEqualToString:@"P2P"]) {
+        self.itemSelectedView.segmentedControl.selectedSegmentIndex = 1;
+    }
+    else if ([self.selectedType isEqualToString:@"ZX"]) {
+        self.itemSelectedView.segmentedControl.selectedSegmentIndex = 0;
+    }
+    else if ([self.selectedType isEqualToString:@"Trans"]) {
+        self.itemSelectedView.segmentedControl.selectedSegmentIndex = 2;
+    }
+    
+    [self SelectedView:nil didClickSelectedItemWithSeg:self.itemSelectedView.segmentedControl];
 }
 
 @end
