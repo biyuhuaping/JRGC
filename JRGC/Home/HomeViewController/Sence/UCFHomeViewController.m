@@ -22,6 +22,7 @@
 #import "UCFHonerViewController.h"
 #import "UCFP2PViewController.h"
 #import "UCFP2POrHonerAccoutViewController.h"
+#import "UCFInvestViewController.h"
 #import "HSHelper.h"
 #import "RiskAssessmentViewController.h"
 #import "UCFUserPresenter.h"
@@ -421,12 +422,13 @@
         }
         else if (model.moedelType == UCFHomeListCellModelTypeOneImageBondTransfer) {
             // 债券转让
-            UCFP2PViewController *p2PVC = [[UCFP2PViewController alloc] initWithNibName:@"UCFP2PViewController" bundle:nil];
-            p2PVC.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight - 64);
-            p2PVC.viewType = @"3";
-            [p2PVC setCurrentViewForBatchBid];
-            [self.navigationController pushViewController:p2PVC animated:YES];
-
+            AppDelegate *appdel = (AppDelegate *)[UIApplication sharedApplication].delegate;
+            UCFInvestViewController *invest = (UCFInvestViewController *)[[appdel.tabBarController.childViewControllers objectAtIndex:1].childViewControllers firstObject];
+            invest.selectedType = @"Trans";
+            if ([invest isViewLoaded]) {
+                [invest changeView];
+            }
+            [appdel.tabBarController setSelectedIndex:1];
         }
         else if (model.moedelType == UCFHomeListCellModelTypeOneImageHonorTransfer) {
             // 尊享转让
@@ -493,21 +495,23 @@
     }
     else if (type == UCFHomeListTypeP2PMore)
     {
-        UCFP2PViewController *p2PVC = [[UCFP2PViewController alloc] initWithNibName:@"UCFP2PViewController" bundle:nil];
-        p2PVC.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight - 64);
-        p2PVC.viewType = @"1";
-        [p2PVC setCurrentViewForBatchBid];
-        [self.navigationController pushViewController:p2PVC animated:YES];
+        AppDelegate *appdel = (AppDelegate *)[UIApplication sharedApplication].delegate;
+        UCFInvestViewController *invest = (UCFInvestViewController *)[[appdel.tabBarController.childViewControllers objectAtIndex:1].childViewControllers firstObject];
+        invest.selectedType = @"P2P";
+        if ([invest isViewLoaded]) {
+            [invest changeView];
+        }
+        [appdel.tabBarController setSelectedIndex:1];
     }
     else if (type == UCFHomeListTypeZXMore)
     {
-        UCFHonerViewController *horner = [[UCFHonerViewController alloc] initWithNibName:@"UCFHonerViewController" bundle:nil];
-        horner.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight - 64);
-        horner.baseTitleText = @"工场尊享";
-        horner.viewType = @"1";
-        horner.accoutType = SelectAccoutTypeHoner;
-         [horner setCurrentViewForHornerTransferVC];
-        [self.navigationController pushViewController:horner animated:YES];
+        AppDelegate *appdel = (AppDelegate *)[UIApplication sharedApplication].delegate;
+        UCFInvestViewController *invest = (UCFInvestViewController *)[[appdel.tabBarController.childViewControllers objectAtIndex:1].childViewControllers firstObject];
+        invest.selectedType = @"ZX";
+        if ([invest isViewLoaded]) {
+            [invest changeView];
+        }
+        [appdel.tabBarController setSelectedIndex:1];
     }
 }
 
