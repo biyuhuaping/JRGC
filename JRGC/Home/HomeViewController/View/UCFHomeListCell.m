@@ -160,6 +160,9 @@
     else if (presenter.modelType == UCFHomeListCellModelTypeOneImageBatchCycle) {
         self.oneImageView.hidden = NO;
         self.titleBackView.hidden = YES;
+        for (UIView *view in self.titleBackView.subviews) {
+            view.hidden = YES;
+        }
         self.numBackView.hidden = YES;
         self.oneImageBackView.image = [UIImage imageNamed:self.presenter.item.backImage];
     }
