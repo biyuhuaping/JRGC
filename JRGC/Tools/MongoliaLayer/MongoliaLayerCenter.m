@@ -78,9 +78,13 @@
     }
     //是否弹平台升级调整公告
     if (![[self.mongoliaLayerDic valueForKey:@"authorization"] boolValue]) {
-        MjAlertView *alertView = [[MjAlertView alloc] initPlatformUpgradeNotice:self];
+        NSString *authorizationDate = [self.mongoliaLayerDic valueForKey:@"authorizationDate"];
+
+        MjAlertView *alertView = [[MjAlertView alloc] initPlatformUpgradeNotice:self withAuthorizationDate:authorizationDate];
         alertView.tag = 1001;
         [alertView show];
+        
+
         return;
     }
 }
