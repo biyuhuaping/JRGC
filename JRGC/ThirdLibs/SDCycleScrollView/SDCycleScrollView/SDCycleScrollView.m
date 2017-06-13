@@ -108,8 +108,8 @@ NSString * const ID = @"cycleCell";
         _timer = nil;
     }
     _imagesGroup = imagesGroup;
-    _totalItemsCount = imagesGroup.count * 100;
     
+    _totalItemsCount = imagesGroup.count * 100;
     [self setupPageControl];
     [self setupTimer];
 }
@@ -121,10 +121,16 @@ NSString * const ID = @"cycleCell";
             [view removeFromSuperview];
         }
     }
-    TAPageControl *pageControl = [[TAPageControl alloc] init];
-    pageControl.numberOfPages = self.imagesGroup.count;
-    [self addSubview:pageControl];
-    _pageControl = pageControl;
+    if (self.imagesGroup.count > 1) {
+        TAPageControl *pageControl = [[TAPageControl alloc] init];
+        pageControl.numberOfPages = self.imagesGroup.count;
+        [self addSubview:pageControl];
+        _pageControl = pageControl;
+        self.mainView.userInteractionEnabled = YES;
+    }
+    else {
+        self.mainView.userInteractionEnabled = NO;
+    }
 }
 
 
@@ -147,9 +153,11 @@ NSString * const ID = @"cycleCell";
 
 - (void)setupTimer
 {
-    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:self.autoScrollTimeInterval target:self selector:@selector(automaticScroll) userInfo:nil repeats:YES];
-    _timer = timer;
-    [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
+    if (self.imagesGroup.count>1) {
+        NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:self.autoScrollTimeInterval target:self selector:@selector(automaticScroll) userInfo:nil repeats:YES];
+        _timer = timer;
+        [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
+    }
 }
 
 - (void)layoutSubviews

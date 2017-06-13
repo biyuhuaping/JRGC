@@ -193,6 +193,9 @@
         //字体
 //        UIFont *font = [UIFont systemFontOfSize:0.25*CircleSelfWidth];
         UIFont *font = [UIFont systemFontOfSize:16];
+        if (_progressText.length > 2) {
+            font = [UIFont systemFontOfSize:12];
+        }
         //构建属性集合
         NSDictionary *attributes = @{NSFontAttributeName:font, NSParagraphStyleAttributeName:textStyle, NSForegroundColorAttributeName :UIColorWithRGB(0x5555555)};
         //获得size
