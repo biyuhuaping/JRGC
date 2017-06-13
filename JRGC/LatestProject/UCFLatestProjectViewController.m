@@ -356,7 +356,8 @@
 }
 - (void)showPlatformUpgradeNotice
 {
-    MjAlertView *alertView = [[MjAlertView alloc] initPlatformUpgradeNotice:self];
+    NSString *authorizationDate = [[MongoliaLayerCenter sharedManager].mongoliaLayerDic valueForKey:@"authorizationDate"];
+    MjAlertView *alertView = [[MjAlertView alloc] initPlatformUpgradeNotice:self withAuthorizationDate:authorizationDate];
     alertView.tag = 1000;
     [alertView show];
 }
