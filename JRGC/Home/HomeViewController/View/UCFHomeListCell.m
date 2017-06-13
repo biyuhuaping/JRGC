@@ -11,6 +11,7 @@
 #import "NZLabel.h"
 #import "UCFProjectLabel.h"
 #import "UCFMicroMoneyModel.h"
+#import "UCFAngleView.h"
 
 @interface UCFHomeListCell ()
 @property (weak, nonatomic) IBOutlet UILabel *proName;
@@ -29,6 +30,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *repayModelLabel;
 @property (weak, nonatomic) IBOutlet UILabel *startMoneyLabel;
 @property (weak, nonatomic) IBOutlet UILabel *remainLabel;
+@property (weak, nonatomic) IBOutlet UCFAngleView *angleView;
 
 @property (weak, nonatomic) IBOutlet UIView *oneImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *oneImageBackView;
@@ -38,8 +40,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *oneImageDescribeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *oneImageNumLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *numBackViewW;
-@property (weak, nonatomic) IBOutlet UILabel *characteristicLabel;
-@property (weak, nonatomic) IBOutlet UIView *characteristicBackView;
+
 
 @property (weak, nonatomic) IBOutlet UIView *upSegLine;
 @property (weak, nonatomic) IBOutlet UIView *downSegLine;
@@ -130,24 +131,33 @@
             self.circleProgressView.progressText = @"认购";
         }
         else
-            self.circleProgressView.progressText = statusArr[status];
+            self.circleProgressView.progressText = @"已售罄";
         
+        self.angleView.angleStatus = presenter.item.status;
+//        DBLOG(@"%@", model.status);
         if (presenter.item.prdLabelsList.count>0) {
-            UCFProjectLabel *projectLabel = [presenter.item.prdLabelsList firstObject];
-            if ([projectLabel.labelPriority integerValue] == 1) {
-                self.characteristicBackView.hidden = NO;
-                NSDictionary *attrs = @{NSFontAttributeName : [UIFont systemFontOfSize:10]};
-                CGSize nameSize = [projectLabel.labelName boundingRectWithSize:CGSizeMake(MAXFLOAT, 12) options:NSStringDrawingUsesLineFragmentOrigin attributes:attrs context:nil].size;
-                self.signViewWidth.constant = nameSize.width + 11;
-                self.characteristicLabel.text = projectLabel.labelName;
-            }
-            else {
-                self.characteristicBackView.hidden = YES;
+            for (UCFProjectLabel *projectLabel in presenter.item.prdLabelsList) {
+                if ([projectLabel.labelPriority integerValue] == 1) {
+                    self.angleView.angleString = [NSString stringWithFormat:@"%@", projectLabel.labelName];
+                }
             }
         }
-        else {
-            self.characteristicBackView.hidden = YES;
-        }
+//        if (presenter.item.prdLabelsList.count>0) {
+//            UCFProjectLabel *projectLabel = [presenter.item.prdLabelsList firstObject];
+//            if ([projectLabel.labelPriority integerValue] == 1) {
+//                self.characteristicBackView.hidden = NO;
+//                NSDictionary *attrs = @{NSFontAttributeName : [UIFont systemFontOfSize:10]};
+//                CGSize nameSize = [projectLabel.labelName boundingRectWithSize:CGSizeMake(MAXFLOAT, 12) options:NSStringDrawingUsesLineFragmentOrigin attributes:attrs context:nil].size;
+//                self.signViewWidth.constant = nameSize.width + 11;
+//                self.characteristicLabel.text = projectLabel.labelName;
+//            }
+//            else {
+//                self.characteristicBackView.hidden = YES;
+//            }
+//        }
+//        else {
+//            self.characteristicBackView.hidden = YES;
+//        }
     }
     else if (presenter.modelType == UCFHomeListCellModelTypeOneImageBatchLending || presenter.modelType == UCFHomeListCellModelTypeOneImageHonorTransfer || presenter.modelType == UCFHomeListCellModelTypeOneImageBondTransfer)  {
         self.oneImageView.hidden = NO;
@@ -265,7 +275,68 @@
         self.circleProgressView.progressText = @"批量出借";
     }
     else
-        self.circleProgressView.progressText = statusArr[status];
+        self.circleProgressView.progressText = @"已售罄";
+    
+//    if (microMoneyModel.prdLabelsList.count>0) {
+//        UCFProjectLabel *projectLabel = [microMoneyModel.prdLabelsList firstObject];
+//        if ([projectLabel.labelPriority integerValue] == 1) {
+//            self.characteristicBackView.hidden = NO;
+//            NSDictionary *attrs = @{NSFontAttributeName : [UIFont systemFontOfSize:10]};
+//            CGSize nameSize = [projectLabel.labelName boundingRectWithSize:CGSizeMake(MAXFLOAT, 12) options:NSStringDrawingUsesLineFragmentOrigin attributes:attrs context:nil].size;
+//            self.signViewWidth.constant = nameSize.width + 11;
+//            self.characteristicLabel.text = projectLabel.labelName;
+//        }
+//        else {
+//            self.characteristicBackView.hidden = YES;
+//        }
+//    }
+//    else {
+//        self.characteristicBackView.hidden = YES;
+//    }
+    if (microMoneyModel.platformSubsidyExpense.length > 0) {//贴
+        self.image1W.constant = 18;
+        self.proImageView1.image = [UIImage imageNamed:@"invest_icon_buletie"];
+    }
+    else {
+        self.image1W.constant = 0;
+    }
+    if (microMoneyModel.guaranteeCompany.length > 0) {//贴
+        self.image2W.constant = 18;
+        self.proImageView2.image = [UIImage imageNamed:@"particular_icon_guarantee_dark"];
+    }
+    else {
+        self.image2W.constant = 0;
+    }
+    if (microMoneyModel.fixedDate.length > 0) {//贴
+        self.image3W.constant = 18;
+        self.proImageView3.image = [UIImage imageNamed:@"invest_icon_redgu-1"];
+    }
+    else {
+        self.image3W.constant = 0;
+    }
+    if (microMoneyModel.holdTime.length > 0) {//贴
+        self.image4W.constant = 18;
+        self.proImageView4.image = [UIImage imageNamed:@"invest_icon_ling"];
+    }
+    else {
+        self.image4W.constant = 0;
+    }
+    
+    float progress = [microMoneyModel.completeLoan floatValue]/[microMoneyModel.borrowAmount floatValue];
+    if (progress < 0 || progress > 1) {
+        progress = 1;
+    }
+    else
+        self.circleProgressView.progress = progress;
+    
+    //控制进度视图显示
+    if (status < 3) {
+        self.circleProgressView.pathFillColor = UIColorWithRGB(0xfa4d4c);
+        //            self.progressView.progressLabel.textColor = UIColorWithRGB(0x555555);
+    }else{
+        self.circleProgressView.pathFillColor = UIColorWithRGB(0xe2e2e2);//未绘制的进度条颜色
+        //            self.progressView.progressLabel.textColor = UIColorWithRGB(0x909dae);
+    }
 }
 - (void)setHonerListModel:(UCFMicroMoneyModel *)microMoneyModel
 {
@@ -281,7 +352,74 @@
     
     NSInteger status = [microMoneyModel.status integerValue];
     NSArray *statusArr = @[@"未审核",@"等待确认",@"认购",@"流标",@"满标",@"回款中",@"已回款"];
-    self.circleProgressView.progressText = statusArr[status];
+    if (status>2) {
+        self.circleProgressView.progressText = @"已售罄";
+    }
+    else {
+        self.circleProgressView.progressText = statusArr[status];
+    }
+    
+    
+//    if (microMoneyModel.prdLabelsList.count>0) {
+//        UCFProjectLabel *projectLabel = [microMoneyModel.prdLabelsList firstObject];
+//        if ([projectLabel.labelPriority integerValue] == 1) {
+//            self.characteristicBackView.hidden = NO;
+//            NSDictionary *attrs = @{NSFontAttributeName : [UIFont systemFontOfSize:10]};
+//            CGSize nameSize = [projectLabel.labelName boundingRectWithSize:CGSizeMake(MAXFLOAT, 12) options:NSStringDrawingUsesLineFragmentOrigin attributes:attrs context:nil].size;
+//            self.signViewWidth.constant = nameSize.width + 11;
+//            self.characteristicLabel.text = projectLabel.labelName;
+//        }
+//        else {
+//            self.characteristicBackView.hidden = YES;
+//        }
+//    }
+//    else {
+//        self.characteristicBackView.hidden = YES;
+//    }
+    if (microMoneyModel.platformSubsidyExpense.length > 0) {//贴
+        self.image1W.constant = 18;
+        self.proImageView1.image = [UIImage imageNamed:@"invest_icon_buletie"];
+    }
+    else {
+        self.image1W.constant = 0;
+    }
+    if (microMoneyModel.guaranteeCompany.length > 0) {//贴
+        self.image2W.constant = 18;
+        self.proImageView2.image = [UIImage imageNamed:@"particular_icon_guarantee_dark"];
+    }
+    else {
+        self.image2W.constant = 0;
+    }
+    if (microMoneyModel.fixedDate.length > 0) {//贴
+        self.image3W.constant = 18;
+        self.proImageView3.image = [UIImage imageNamed:@"invest_icon_redgu-1"];
+    }
+    else {
+        self.image3W.constant = 0;
+    }
+    if (microMoneyModel.holdTime.length > 0) {//贴
+        self.image4W.constant = 18;
+        self.proImageView4.image = [UIImage imageNamed:@"invest_icon_ling"];
+    }
+    else {
+        self.image4W.constant = 0;
+    }
+    float progress = [microMoneyModel.completeLoan floatValue]/[microMoneyModel.borrowAmount floatValue];
+    if (progress < 0 || progress > 1) {
+        progress = 1;
+    }
+    else
+        self.circleProgressView.progress = progress;
+    
+    //控制进度视图显示
+    if (status < 3) {
+        self.circleProgressView.pathFillColor = UIColorWithRGB(0xfa4d4c);
+        //            self.progressView.progressLabel.textColor = UIColorWithRGB(0x555555);
+    }else{
+        self.circleProgressView.pathFillColor = UIColorWithRGB(0xe2e2e2);//未绘制的进度条颜色
+        //            self.progressView.progressLabel.textColor = UIColorWithRGB(0x909dae);
+    }
+    
 }
 
 - (NSString *)moneywithRemaining:(id)rem total:(id)total{
