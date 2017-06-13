@@ -109,6 +109,14 @@
     }
     UCFMicroMoneyGroup *group = [self.dataArray objectAtIndex:section];
     view.headerTitleLabel.text = group.title;
+    if (group.desc) {
+        view.honerLabel.hidden = NO;
+        view.honerLabel.text = group.desc;
+        view.honerLineImageView.hidden = NO;
+    }else{
+        view.honerLabel.hidden = YES;
+        view.honerLineImageView.hidden = YES;
+    }
     [view.headerImageView sd_setImageWithURL:[NSURL URLWithString:group.iconUrl]];
     view.homeListHeaderMoreButton.hidden = !group.showMore;
     [view.contentView setBackgroundColor:UIColorWithRGB(0xf9f9f9)];
@@ -119,7 +127,7 @@
     return view;
 }
 - (void)homeListHeader:(UCFHomeListHeaderSectionView *)homeListHeader didClickedMoreWithType:(NSString *)type{
-    if ([homeListHeader.headerTitleLabel.text isEqualToString:@"集合标专区"]) {
+    if ([homeListHeader.headerTitleLabel.text isEqualToString:@"一键投标"]) {
         UCFBatchBidController *batchBidVc = [[UCFBatchBidController alloc]initWithNibName:@"UCFBatchBidController" bundle:nil];
         batchBidVc.accoutType = SelectAccoutTypeP2P;
         [self.navigationController pushViewController:batchBidVc animated:YES];

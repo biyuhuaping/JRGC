@@ -544,8 +544,10 @@
         }
         cell.lab1.text = _dataArr2[indexPath.section][indexPath.row][@"realName"];//姓名
         cell.lab2.text = _dataArr2[indexPath.section][indexPath.row][@"mobile"];//手机号
-        cell.lab3.text = _dataArr2[indexPath.section][indexPath.row][@"repayPerDate"];//计划回款日
-        cell.lab4.text = [NSString stringWithFormat:@"¥%@",_dataArr2[indexPath.section][indexPath.row][@"refundAmt"]];//回款金额
+      
+        cell.lab3.text = _dataArr2[indexPath.section][indexPath.row][@"repayPerDate"] ;//计划回款日
+        NSString *refundAmtStr = _dataArr2[indexPath.section][indexPath.row][@"refundAmt"];
+        cell.lab4.text = [refundAmtStr hasPrefix:@"*"] ? refundAmtStr : [NSString stringWithFormat:@"¥%@",refundAmtStr];//回款金额
         return cell;
     }else if (tableView == _tableView3){//好友已回款列表
         static  NSString *indentifier = @"FriendRecCell1";
@@ -558,7 +560,8 @@
         cell.lab2.text = _dataArr3[indexPath.section][indexPath.row][@"mobile"];//手机号
         cell.lab3.text = _dataArr3[indexPath.section][indexPath.row][@"repayPerDate"];//计划回款日
         cell.lab4.text = _dataArr3[indexPath.section][indexPath.row][@"paidTime"];//实际回款日
-        cell.lab5.text = [NSString stringWithFormat:@"¥%@",_dataArr3[indexPath.section][indexPath.row][@"refundAmt"]];//回款金额
+        NSString *refundAmtStr = _dataArr3[indexPath.section][indexPath.row][@"refundAmt"];//计划回款日
+        cell.lab5.text = [refundAmtStr hasPrefix:@"*"] ? refundAmtStr : [NSString stringWithFormat:@"¥%@",refundAmtStr];//回款金额
         return cell;
     }else if (tableView == _tableView4){//分期回款列表
         static  NSString *indentifier = @"ReturnedMoneyCell";
