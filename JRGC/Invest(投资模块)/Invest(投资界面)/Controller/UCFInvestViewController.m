@@ -26,6 +26,15 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+    if ([self.currentViewController isEqual:self.honorInvest]) {
+        [self.honorInvest.tableView.header beginRefreshing];
+    }
+    else if ([self.currentViewController isEqual:self.microMoney]) {
+        [self.microMoney.tableview.header beginRefreshing];
+    }
+    else if ([self.currentViewController isEqual:self.investTransfer]) {
+        [self.investTransfer.tableview.header beginRefreshing];
+    }
 }
 - (void)viewDidLoad {
     [super viewDidLoad];

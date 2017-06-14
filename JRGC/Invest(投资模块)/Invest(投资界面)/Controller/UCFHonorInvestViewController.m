@@ -21,7 +21,6 @@
 #import "UCFLoginViewController.h"
 #import "RiskAssessmentViewController.h"
 @interface UCFHonorInvestViewController () <UITableViewDelegate, UITableViewDataSource,UCFHomeListCellHonorDelegate>
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) UCFHonorHeaderView *honorHeaderView;
 @property (strong, nonatomic) NSMutableArray *dataArray;
 @property (assign, nonatomic)  NSInteger currentPage;
@@ -43,15 +42,13 @@
     [super viewDidLoad];
     
     [self createUI];
-    
-    [self getHonerInvestHTTPRequst];
 }
 
 #pragma mark - 设置界面
 - (void)createUI {
     self.accoutType = SelectAccoutTypeHoner;
     UCFHonorHeaderView *honorHeaderView = (UCFHonorHeaderView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHonorHeaderView" owner:self options:nil] lastObject];
-    honorHeaderView.frame = CGRectMake(0, 0, ScreenWidth, 160);
+    honorHeaderView.frame = CGRectMake(0, 0, ScreenWidth, 120);
     self.honorHeaderView = honorHeaderView;
     self.tableView.tableHeaderView = honorHeaderView;
     
@@ -63,14 +60,14 @@
     self.noDataView = [[UCFNoDataView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-64-49) errorTitle:@"敬请期待..."];
     
     self.currentPage = 1;
+    
+    // 添加传统的下拉刷新
+    [self.tableView addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(getHonerInvestHTTPRequst)];
     // 添加上拉加载更多
     [self.tableView addLegendFooterWithRefreshingBlock:^{
         [weakSelf getHonerInvestHTTPRequst];
     }];
     
-    // 添加传统的下拉刷新
-    [self.tableView addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(getHonerInvestHTTPRequst)];
-    [self.tableView.header beginRefreshing];
     self.tableView.footer.hidden = YES;
 }
 - (void)getHonerInvestHTTPRequst{

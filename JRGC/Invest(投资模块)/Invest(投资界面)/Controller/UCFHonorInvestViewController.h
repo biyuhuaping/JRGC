@@ -9,5 +9,5 @@
 #import "UCFBaseViewController.h"
 
 @interface UCFHonorInvestViewController : UCFBaseViewController
-
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @end

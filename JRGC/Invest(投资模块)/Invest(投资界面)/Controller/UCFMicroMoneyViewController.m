@@ -26,7 +26,7 @@
 #import "UCFBatchBidController.h"
 #import "UCFOrdinaryBidController.h"
 @interface UCFMicroMoneyViewController () <UITableViewDataSource, UITableViewDelegate, UCFInvestAPIWithMicroMoneyManagerDelegate, UCFHomeListCellHonorDelegate,UCFHomeListHeaderSectionViewDelegate>
-@property (weak, nonatomic) IBOutlet UITableView *tableview;
+
 @property (strong, nonatomic) UCFMicroMoneyHeaderView *microMoneyHeaderView;
 @property (strong, nonatomic) UCFInvestAPIManager *apiManager;
 @property (strong, nonatomic) NSMutableArray *dataArray;
@@ -41,6 +41,12 @@
         _dataArray = [[NSMutableArray alloc] init];
     }
     return _dataArray;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.tableview.header beginRefreshing];
 }
 
 - (void)viewDidLoad {
@@ -61,14 +67,13 @@
 //    self.noDataView = [[UCFNoDataView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-64-49) errorTitle:@"敬请期待..."]
     // 添加传统的下拉刷新
     [self.tableview addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(reloadData)];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self.tableview.header beginRefreshing];
-    });
     
     UCFInvestAPIManager *apiManager = [[UCFInvestAPIManager alloc] init];
     apiManager.microMoneyDelegate = self;
     self.apiManager = apiManager;
-    [apiManager getMicroMoneyFromNet];
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        [self.tableview.header beginRefreshing];
+//    });
 }
 -(void)reloadData{
    [ self.apiManager getMicroMoneyFromNet];
