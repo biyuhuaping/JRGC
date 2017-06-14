@@ -21,7 +21,6 @@
 #import "UCFLoginViewController.h"
 #import "RiskAssessmentViewController.h"
 @interface UCFHonorInvestViewController () <UITableViewDelegate, UITableViewDataSource,UCFHomeListCellHonorDelegate>
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) UCFHonorHeaderView *honorHeaderView;
 @property (strong, nonatomic) NSMutableArray *dataArray;
 @property (assign, nonatomic)  NSInteger currentPage;
@@ -43,12 +42,6 @@
     [super viewDidLoad];
     
     [self createUI];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [self.tableView.header beginRefreshing];
 }
 
 #pragma mark - 设置界面

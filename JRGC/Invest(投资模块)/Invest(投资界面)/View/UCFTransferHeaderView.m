@@ -17,12 +17,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *sumOrderButton;
 @property (weak, nonatomic) IBOutlet UIView *buttonBaseView;
 @property (weak, nonatomic) IBOutlet UIView *bottomBaseView;
-@property (weak, nonatomic) IBOutlet UIImageView *rateUp;
-@property (weak, nonatomic) IBOutlet UIImageView *rateDown;
-@property (weak, nonatomic) IBOutlet UIImageView *limitUp;
-@property (weak, nonatomic) IBOutlet UIImageView *limitDown;
-@property (weak, nonatomic) IBOutlet UIImageView *sumUp;
-@property (weak, nonatomic) IBOutlet UIImageView *sumDown;
 @property (assign, nonatomic) BOOL rateState;
 @property (assign, nonatomic) BOOL limitState;
 @property (assign, nonatomic) BOOL sumState;
@@ -55,6 +49,15 @@
     [_limitOrderButton setTitleColor:UIColorWithRGB(0x555555) forState:UIControlStateNormal];
     [_sumOrderButton setTitleColor:UIColorWithRGB(0x555555) forState:UIControlStateNormal];
     
+    [self.rateOrderButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 8, 0, 0)];
+    [self.rateOrderButton setImageEdgeInsets:UIEdgeInsetsMake(0, 55, 0, 0)];
+    
+    [self.limitOrderButton setTitleEdgeInsets:UIEdgeInsetsMake(0, (ScreenWidth * 120.0f )/320.0f - ScreenWidth / 3.0 - 7, 0, 0)];
+    [self.limitOrderButton setImageEdgeInsets:UIEdgeInsetsMake(0, (ScreenWidth * 120.0f )/320.0f - ScreenWidth / 3.0 -7 + 48, 0, 0)];
+    
+    [self.sumOrderButton setTitleEdgeInsets:UIEdgeInsetsMake(0, (ScreenWidth * 215.0f )/320.0f - ScreenWidth / 3.0 *2 - 7, 0, 0)];
+    [self.sumOrderButton setImageEdgeInsets:UIEdgeInsetsMake(0, (ScreenWidth * 215.0f )/320.0f - ScreenWidth / 3.0 *2 - 7 + 48, 0, 0)];
+    
     [self getNormalBannerData];
 }
 
@@ -62,6 +65,7 @@
 {
     [super layoutSubviews];
     self.cycleView.frame = CGRectMake(0, 10, ScreenWidth, 100);
+    
     
 }
 - (void)initData
@@ -74,15 +78,14 @@
         self.rateState = !self.rateState;
     }
     self.index = sender.tag -100;
+    [self calcueAllStateButton];
     if (self.rateState) {
         DBLOG(@"利率  升序");
-        [self calcueAllStateButton];
-        self.rateUp.highlighted = YES;
+        [self.rateOrderButton setImage:[UIImage imageNamed:@"transfer_screen_icon_up"] forState:UIControlStateNormal];
     }
     else {
         DBLOG(@"利率  降序");
-        [self calcueAllStateButton];
-        self.rateDown.highlighted = YES;
+      [self.rateOrderButton setImage:[UIImage imageNamed:@"transfer_screen_icon_dnow"] forState:UIControlStateNormal];
     }
     if ([self.delegate respondsToSelector:@selector(transferHeaderView:didClickOrderButton:andIsIncrease:)]) {
         [self.delegate transferHeaderView:self didClickOrderButton:sender andIsIncrease:self.rateState];
@@ -96,15 +99,14 @@
         self.limitState = !self.limitState;
     }
     self.index = sender.tag -100;
+    [self calcueAllStateButton];
     if (self.limitState) {
         DBLOG(@"期限  升序");
-        [self calcueAllStateButton];
-        self.limitUp.highlighted = YES;
+        [self.limitOrderButton setImage:[UIImage imageNamed:@"transfer_screen_icon_up"] forState:UIControlStateNormal];
     }
     else {
         DBLOG(@"期限  降序");
-        [self calcueAllStateButton];
-        self.limitDown.highlighted = YES;
+        [self.limitOrderButton setImage:[UIImage imageNamed:@"transfer_screen_icon_dnow"] forState:UIControlStateNormal];
     }
     if ([self.delegate respondsToSelector:@selector(transferHeaderView:didClickOrderButton:andIsIncrease:)]) {
         [self.delegate transferHeaderView:self didClickOrderButton:sender andIsIncrease:self.limitState];
@@ -118,16 +120,15 @@
         self.sumState = !self.sumState;
     }
     self.index = sender.tag -100;
+    [self calcueAllStateButton];
     // 期限 YES 升序 NO 降序
     if (self.sumState) {
         DBLOG(@"金额  降序");
-        [self calcueAllStateButton];
-        self.sumUp.highlighted = YES;
+        [self.sumOrderButton setImage:[UIImage imageNamed:@"transfer_screen_icon_dnow"] forState:UIControlStateNormal];
     }
     else {
         DBLOG(@"金额  升序");
-        [self calcueAllStateButton];
-        self.sumDown.highlighted = YES;
+        [self.sumOrderButton setImage:[UIImage imageNamed:@"transfer_screen_icon_up"] forState:UIControlStateNormal];
     }
     if ([self.delegate respondsToSelector:@selector(transferHeaderView:didClickOrderButton:andIsIncrease:)]) {
         [self.delegate transferHeaderView:self didClickOrderButton:sender andIsIncrease:self.sumState];
@@ -144,12 +145,9 @@
 
 - (void)calcueAllStateButton
 {
-    self.rateUp.highlighted = NO;
-    self.rateDown.highlighted = NO;
-    self.limitUp.highlighted = NO;
-    self.limitDown.highlighted = NO;
-    self.sumUp.highlighted = NO;
-    self.sumDown.highlighted = NO;
+    [self.rateOrderButton setImage:[UIImage imageNamed:@"transfer_screen_icon_normal"] forState:UIControlStateNormal];
+    [self.limitOrderButton setImage:[UIImage imageNamed:@"transfer_screen_icon_normal"] forState:UIControlStateNormal];
+    [self.sumOrderButton setImage:[UIImage imageNamed:@"transfer_screen_icon_normal"] forState:UIControlStateNormal];
 }
 
 #pragma mark - 获取正式环境的banner图

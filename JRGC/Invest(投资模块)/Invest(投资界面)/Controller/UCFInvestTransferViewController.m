@@ -21,7 +21,7 @@
     NSInteger currentPage;
 }
 @property (strong, nonatomic) UCFTransferHeaderView *transferHeaderView;
-@property (weak, nonatomic) IBOutlet UITableView *tableview;
+
 @property (strong, nonatomic) NSMutableArray    *dataArray;
 @property (copy, nonatomic) NSString *sortType;
 @end
@@ -194,11 +194,11 @@
         case 0: {
             if (isUp) {
                 DBLOG(@"利率  升序");
-                self.sortType = @"12";
+                self.sortType = @"32";
             }
             else {
                 DBLOG(@"利率  降序");
-                self.sortType = @"11";
+                self.sortType = @"31";
             }
         }
             break;
@@ -206,11 +206,11 @@
         case 1: {
             if (isUp) {
                 DBLOG(@"期限  升序");
-                self.sortType = @"22";
+                self.sortType = @"12";
             }
             else {
                 DBLOG(@"期限  降序");
-                self.sortType = @"21";
+                self.sortType = @"11";
             }
         }
             break;
@@ -218,11 +218,11 @@
         case 2: {
             if (isUp) {
                 DBLOG(@"金额  降序");
-                self.sortType = @"31";
+                self.sortType = @"21";
             }
             else {
                 DBLOG(@"金额  升序");
-                self.sortType = @"32";
+                self.sortType = @"22";
             }
         }
             break;

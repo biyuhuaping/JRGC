@@ -26,7 +26,7 @@
 #import "UCFBatchBidController.h"
 #import "UCFOrdinaryBidController.h"
 @interface UCFMicroMoneyViewController () <UITableViewDataSource, UITableViewDelegate, UCFInvestAPIWithMicroMoneyManagerDelegate, UCFHomeListCellHonorDelegate,UCFHomeListHeaderSectionViewDelegate>
-@property (weak, nonatomic) IBOutlet UITableView *tableview;
+
 @property (strong, nonatomic) UCFMicroMoneyHeaderView *microMoneyHeaderView;
 @property (strong, nonatomic) UCFInvestAPIManager *apiManager;
 @property (strong, nonatomic) NSMutableArray *dataArray;
