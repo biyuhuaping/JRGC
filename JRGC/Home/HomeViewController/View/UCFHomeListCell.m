@@ -136,28 +136,11 @@
         self.angleView.angleStatus = presenter.item.status;
 //        DBLOG(@"%@", model.status);
         if (presenter.item.prdLabelsList.count>0) {
-            for (UCFProjectLabel *projectLabel in presenter.item.prdLabelsList) {
-                if ([projectLabel.labelPriority integerValue] == 1) {
-                    self.angleView.angleString = [NSString stringWithFormat:@"%@", projectLabel.labelName];
-                }
+            UCFProjectLabel *projectLabel = [presenter.item.prdLabelsList firstObject];
+            if ([projectLabel.labelPriority integerValue] == 1) {
+                self.angleView.angleString = [NSString stringWithFormat:@"%@", projectLabel.labelName];
             }
         }
-//        if (presenter.item.prdLabelsList.count>0) {
-//            UCFProjectLabel *projectLabel = [presenter.item.prdLabelsList firstObject];
-//            if ([projectLabel.labelPriority integerValue] == 1) {
-//                self.characteristicBackView.hidden = NO;
-//                NSDictionary *attrs = @{NSFontAttributeName : [UIFont systemFontOfSize:10]};
-//                CGSize nameSize = [projectLabel.labelName boundingRectWithSize:CGSizeMake(MAXFLOAT, 12) options:NSStringDrawingUsesLineFragmentOrigin attributes:attrs context:nil].size;
-//                self.signViewWidth.constant = nameSize.width + 11;
-//                self.characteristicLabel.text = projectLabel.labelName;
-//            }
-//            else {
-//                self.characteristicBackView.hidden = YES;
-//            }
-//        }
-//        else {
-//            self.characteristicBackView.hidden = YES;
-//        }
     }
     else if (presenter.modelType == UCFHomeListCellModelTypeOneImageBatchLending || presenter.modelType == UCFHomeListCellModelTypeOneImageHonorTransfer || presenter.modelType == UCFHomeListCellModelTypeOneImageBondTransfer)  {
         self.oneImageView.hidden = NO;
@@ -271,28 +254,26 @@
     
     NSInteger status = [microMoneyModel.status integerValue];
     NSArray *statusArr = @[@"未审核",@"等待确认",@"出借",@"流标",@"满标",@"回款中",@"已回款"];
-    if (microMoneyModel.modelType == UCFMicroMoneyModelTypeBatchBid && status == 2) {
-        self.circleProgressView.progressText = @"批量出借";
-    }
-    else
+    if (status>2) {
         self.circleProgressView.progressText = @"已售罄";
+    }
+    else {
+        if (microMoneyModel.modelType == UCFMicroMoneyModelTypeBatchBid && status == 2) {
+            self.circleProgressView.progressText = @"批量出借";
+        }
+        else {
+            self.circleProgressView.progressText = [statusArr objectAtIndex:status];
+        }
+    }
     
-//    if (microMoneyModel.prdLabelsList.count>0) {
-//        UCFProjectLabel *projectLabel = [microMoneyModel.prdLabelsList firstObject];
-//        if ([projectLabel.labelPriority integerValue] == 1) {
-//            self.characteristicBackView.hidden = NO;
-//            NSDictionary *attrs = @{NSFontAttributeName : [UIFont systemFontOfSize:10]};
-//            CGSize nameSize = [projectLabel.labelName boundingRectWithSize:CGSizeMake(MAXFLOAT, 12) options:NSStringDrawingUsesLineFragmentOrigin attributes:attrs context:nil].size;
-//            self.signViewWidth.constant = nameSize.width + 11;
-//            self.characteristicLabel.text = projectLabel.labelName;
-//        }
-//        else {
-//            self.characteristicBackView.hidden = YES;
-//        }
-//    }
-//    else {
-//        self.characteristicBackView.hidden = YES;
-//    }
+    self.angleView.angleStatus = microMoneyModel.status;
+    //        DBLOG(@"%@", model.status);
+    if (microMoneyModel.prdLabelsList.count>0) {
+        UCFProjectLabel *projectLabel = [microMoneyModel.prdLabelsList firstObject];
+        if ([projectLabel.labelPriority integerValue] == 1) {
+            self.angleView.angleString = [NSString stringWithFormat:@"%@", projectLabel.labelName];
+        }
+    }
     if (microMoneyModel.platformSubsidyExpense.length > 0) {//贴
         self.image1W.constant = 18;
         self.proImageView1.image = [UIImage imageNamed:@"invest_icon_buletie"];
@@ -360,22 +341,14 @@
     }
     
     
-//    if (microMoneyModel.prdLabelsList.count>0) {
-//        UCFProjectLabel *projectLabel = [microMoneyModel.prdLabelsList firstObject];
-//        if ([projectLabel.labelPriority integerValue] == 1) {
-//            self.characteristicBackView.hidden = NO;
-//            NSDictionary *attrs = @{NSFontAttributeName : [UIFont systemFontOfSize:10]};
-//            CGSize nameSize = [projectLabel.labelName boundingRectWithSize:CGSizeMake(MAXFLOAT, 12) options:NSStringDrawingUsesLineFragmentOrigin attributes:attrs context:nil].size;
-//            self.signViewWidth.constant = nameSize.width + 11;
-//            self.characteristicLabel.text = projectLabel.labelName;
-//        }
-//        else {
-//            self.characteristicBackView.hidden = YES;
-//        }
-//    }
-//    else {
-//        self.characteristicBackView.hidden = YES;
-//    }
+    self.angleView.angleStatus = microMoneyModel.status;
+    //        DBLOG(@"%@", model.status);
+    if (microMoneyModel.prdLabelsList.count>0) {
+        UCFProjectLabel *projectLabel = [microMoneyModel.prdLabelsList firstObject];
+        if ([projectLabel.labelPriority integerValue] == 1) {
+            self.angleView.angleString = [NSString stringWithFormat:@"%@", projectLabel.labelName];
+        }
+    }
     if (microMoneyModel.platformSubsidyExpense.length > 0) {//贴
         self.image1W.constant = 18;
         self.proImageView1.image = [UIImage imageNamed:@"invest_icon_buletie"];

@@ -43,8 +43,6 @@
     [super viewDidLoad];
     
     [self createUI];
-    
-    [self getHonerInvestHTTPRequst];
 }
 
 #pragma mark - 设置界面
@@ -63,13 +61,14 @@
     self.noDataView = [[UCFNoDataView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-64-49) errorTitle:@"敬请期待..."];
     
     self.currentPage = 1;
+    
+    // 添加传统的下拉刷新
+    [self.tableView addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(getHonerInvestHTTPRequst)];
     // 添加上拉加载更多
     [self.tableView addLegendFooterWithRefreshingBlock:^{
         [weakSelf getHonerInvestHTTPRequst];
     }];
     
-    // 添加传统的下拉刷新
-    [self.tableView addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(getHonerInvestHTTPRequst)];
     [self.tableView.header beginRefreshing];
     self.tableView.footer.hidden = YES;
 }
