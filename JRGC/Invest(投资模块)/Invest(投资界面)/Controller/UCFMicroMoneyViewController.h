@@ -9,5 +9,5 @@
 #import "UCFBaseViewController.h"
 
 @interface UCFMicroMoneyViewController : UCFBaseViewController
-
+@property (weak, nonatomic) IBOutlet UITableView *tableview;
 @end
