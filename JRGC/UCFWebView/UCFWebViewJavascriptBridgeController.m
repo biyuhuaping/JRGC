@@ -761,7 +761,12 @@
 //               
 //                    }];
 }
-
+- (void)goToInvestTab
+{
+    [self.navigationController popToRootViewControllerAnimated:NO];
+    AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    [app.tabBarController setSelectedIndex:1];
+}
 - (void)jsGoto:(NSDictionary *)dic
 {
     BOOL islogin = [dic[@"need_login"] boolValue];
@@ -1011,6 +1016,10 @@
     {
         //[self.navigationController popViewControllerAnimated:YES];
         [self jsGotoAppBackNative];
+    }else if ([controllerName  isEqualToString:@"app_invest_list"])//回到第二个tab页
+    {
+        //[self.navigationController popViewControllerAnimated:YES];
+        [self goToInvestTab];
     }
     
     //----------------------------------------------------------------------------------------------------qyy

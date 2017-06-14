@@ -223,20 +223,6 @@
         }
         return YES;
     }
-    
-//    if ([topView isKindOfClass:[UCFPersonCenterController class]] ) {
-//        if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
-//            self.selectedViewController = viewController;
-//            return YES;
-//        } else {
-//            if (![viewController isEqual:self.selectedViewController]) {
-//                NSDictionary *dict = [NSDictionary dictionaryWithObject:@"fromTabBar" forKey:@"source"];
-//                [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:dict];
-//            }
-//            self.selectedViewController = viewController;
-//            return YES;
-//        }
-//    }
     return YES;
 }
 - (void)tabBar:(UITabBar *)tabBar willBeginCustomizingItems:(NSArray *)items

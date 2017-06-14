@@ -25,6 +25,7 @@
     self.webView.frame = CGRectMake(0, 0.5, CGRectGetWidth(self.webView.frame), CGRectGetHeight(self.webView.frame));
     self.view.backgroundColor = UIColorWithRGB(0xeeeeee);
     [self.webView reload];
+    [[NSNotificationCenter defaultCenter] postNotificationName:CHECK_COUPON_CENTER object:nil];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
