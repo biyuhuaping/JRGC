@@ -34,6 +34,12 @@
     [self createUI];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.tableview.header beginRefreshing];
+}
+
 #pragma mark - 设置界面
 - (void)createUI {
     UCFTransferHeaderView *transferHeaderView = (UCFTransferHeaderView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFTransferHeaderView" owner:self options:nil] lastObject];

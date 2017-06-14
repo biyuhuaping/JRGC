@@ -45,6 +45,12 @@
     [self createUI];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.tableView.header beginRefreshing];
+}
+
 #pragma mark - 设置界面
 - (void)createUI {
     self.accoutType = SelectAccoutTypeHoner;
@@ -69,7 +75,6 @@
         [weakSelf getHonerInvestHTTPRequst];
     }];
     
-    [self.tableView.header beginRefreshing];
     self.tableView.footer.hidden = YES;
 }
 - (void)getHonerInvestHTTPRequst{

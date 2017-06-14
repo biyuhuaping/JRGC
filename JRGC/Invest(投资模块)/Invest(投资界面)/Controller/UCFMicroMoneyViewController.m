@@ -43,6 +43,12 @@
     return _dataArray;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.tableview.header beginRefreshing];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -65,9 +71,9 @@
     UCFInvestAPIManager *apiManager = [[UCFInvestAPIManager alloc] init];
     apiManager.microMoneyDelegate = self;
     self.apiManager = apiManager;
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self.tableview.header beginRefreshing];
-    });
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        [self.tableview.header beginRefreshing];
+//    });
 }
 -(void)reloadData{
    [ self.apiManager getMicroMoneyFromNet];

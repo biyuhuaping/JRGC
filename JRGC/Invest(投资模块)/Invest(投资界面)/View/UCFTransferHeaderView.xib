@@ -160,9 +160,10 @@
                                         <constraint firstAttribute="height" constant="7" id="VbL-pL-kKF"/>
                                     </constraints>
                                 </imageView>
-                                <button opaque="NO" tag="100" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="He4-L6-7yL">
+                                <button opaque="NO" tag="100" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="He4-L6-7yL">
                                     <rect key="frame" x="0.0" y="0.0" width="155" height="35"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <inset key="titleEdgeInsets" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     <state key="normal" title="利率">
                                         <color key="titleColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
@@ -200,9 +201,10 @@
                                         <constraint firstAttribute="height" constant="7" id="SOU-Ax-zlq"/>
                                     </constraints>
                                 </imageView>
-                                <button opaque="NO" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nqv-VD-rSw">
+                                <button opaque="NO" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nqv-VD-rSw">
                                     <rect key="frame" x="0.0" y="0.0" width="155" height="35"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <inset key="titleEdgeInsets" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     <state key="normal" title="期限">
                                         <color key="titleColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
@@ -240,9 +242,10 @@
                                         <constraint firstAttribute="width" constant="13" id="vLH-Xz-tvE"/>
                                     </constraints>
                                 </imageView>
-                                <button opaque="NO" tag="102" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OAV-7X-JUP">
+                                <button opaque="NO" tag="102" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OAV-7X-JUP">
                                     <rect key="frame" x="0.0" y="0.0" width="155" height="35"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <inset key="titleEdgeInsets" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     <state key="normal" title="金额">
                                         <color key="titleColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
@@ -307,7 +310,7 @@
                 <outlet property="sumOrderButton" destination="OAV-7X-JUP" id="pyr-M2-atQ"/>
                 <outlet property="sumUp" destination="xRp-bB-O3w" id="lHa-JU-saZ"/>
             </connections>
-            <point key="canvasLocation" x="27.5" y="-247.5"/>
+            <point key="canvasLocation" x="-231" y="-210"/>
         </view>
     </objects>
     <resources>
