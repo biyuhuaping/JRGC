@@ -16,7 +16,7 @@
 #import "RiskAssessmentViewController.h"
 #import "UCFLoginViewController.h"
 #import "UCFProjectDetailViewController.h"
-@interface UCFInvestTransferViewController () <UITableViewDelegate, UITableViewDataSource, UCFTransferHeaderViewDelegate,UCFTransfeTableViewCellDelegate>
+@interface UCFInvestTransferViewController () <UITableViewDelegate, UITableViewDataSource, UCFTransferHeaderViewDelegate>
 {
     NSInteger currentPage;
 }
@@ -73,14 +73,14 @@
     UCFTransfeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     if (nil == cell) {
         cell = (UCFTransfeTableViewCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFTransfeTableViewCell" owner:self options:nil] lastObject];
-        cell.delegate = self;
     }
     cell.model = [self.dataArray objectAtIndex:indexPath.row];
     return cell;
 }
-//判断从哪个过来的model
-- (void)transferCellDidSelectModel:(UCFTransferModel *)model
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+
+    UCFTransferModel *model = [self.dataArray objectAtIndex:indexPath.row];
     if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
         //如果未登录，展示登录页面
         [self showLoginView];
@@ -114,6 +114,7 @@
             //            }
         }
     }
+
 }
 - (void)showLoginView
 {
