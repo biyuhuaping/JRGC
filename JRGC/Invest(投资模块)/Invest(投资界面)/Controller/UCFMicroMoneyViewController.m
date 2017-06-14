@@ -197,7 +197,7 @@
                     NSInteger isOrder = [model.isOrder integerValue];
                     if ([model.status intValue ] != 2) {
                         if (isOrder <= 0) {
-                            UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前标的详情只对投资人开放"];
+                            UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前标的详情只对出借人开放"];
                             [self.navigationController pushViewController:controller animated:YES];
                             return;
                         }

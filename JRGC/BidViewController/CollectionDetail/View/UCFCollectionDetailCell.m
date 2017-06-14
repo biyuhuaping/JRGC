@@ -47,7 +47,7 @@
 // _statusArr = @[@"未审核", @"待确认", @"招标中", @"流标", @"满标", @"回款中", @"已回款"];
 -(NSString *)getPrdStatus:(NSInteger )status{
     
-    NSString *statusStr = @"满标";
+    NSString *statusStr = @"已售罄";
     switch (status) {
         case 0:
             statusStr = @"未审核";
@@ -58,23 +58,24 @@
         case 2:
             statusStr = @"出借";
             break;
-        case 3:
-            statusStr = @"流标";
-            break;
-        case 4:
-            statusStr = @"满标";
-            break;
-        case 5:
-            statusStr = @"回款中";
-            break;
-        case 6:
-            statusStr = @"已回款";
-            break;
-        case 7:
-            statusStr = @"未审核";
-            break;
+//        case 3:
+//            statusStr = @"流标";
+//            break;
+//        case 4:
+//            statusStr = @"满标";
+//            break;
+//        case 5:
+//            statusStr = @"回款中";
+//            break;
+//        case 6:
+//            statusStr = @"已回款";
+//            break;
+//        case 7:
+//            statusStr = @"未审核";
+//            break;
             
         default:
+            statusStr = @"已售罄";
             break;
     }
     return statusStr;

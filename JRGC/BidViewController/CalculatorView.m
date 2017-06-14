@@ -370,8 +370,9 @@
     moneyTextField.text = [NSString stringWithFormat:@"%.2f",[currentMoney doubleValue]];
     preGetMoneyLabel.text = [NSString stringWithFormat:@"%@",[UCFToolsMehod AddComma:preMoney]];
     bankGetMoneyLabel.text = [NSString stringWithFormat:@"¥%@",[UCFToolsMehod AddComma:bankMoney]];
+    NSString *typeStr = [[dataDict objectForKey:@"data"] objectForKey:@"type"];
     if(_isTransid){
-        moneyTextField.userInteractionEnabled = self.accoutType == SelectAccoutTypeP2P;
+        moneyTextField.userInteractionEnabled = !(self.accoutType == SelectAccoutTypeHoner && [typeStr intValue] == 2);
     }
 }
 /**
