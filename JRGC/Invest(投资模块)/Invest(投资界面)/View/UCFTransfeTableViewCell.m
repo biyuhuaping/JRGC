@@ -35,10 +35,9 @@
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-    
-    if (self.delegate && [self.delegate respondsToSelector:@selector(transferCellDidSelectModel:)]) {
-        [self.delegate transferCellDidSelectModel:_model];
-    }
+//    if (self.delegate && [self.delegate respondsToSelector:@selector(transferCellDidSelectModel:)]) {
+//        [self.delegate transferCellDidSelectModel:_model];
+//    }
     // Configure the view for the selected state
 }
 
