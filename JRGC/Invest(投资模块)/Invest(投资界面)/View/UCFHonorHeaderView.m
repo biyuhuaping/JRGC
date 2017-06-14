@@ -31,7 +31,7 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    self.cycleView.frame = CGRectMake(0, 40, ScreenWidth, self.height - 50);
+    self.cycleView.frame = CGRectMake(0, 10, ScreenWidth, self.height - 20);
 }
 
 #pragma mark - 获取正式环境的banner图
