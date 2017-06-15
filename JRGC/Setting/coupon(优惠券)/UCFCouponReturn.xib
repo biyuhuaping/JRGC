@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UCFCouponReturn">
             <connections>
+                <outlet property="couponCenterBtn" destination="saM-3e-KmE" id="qpD-WG-Utl"/>
                 <outlet property="couponNameLabel" destination="UVL-hn-ygO" id="BzG-7I-PjG"/>
                 <outlet property="tableView" destination="Qzs-bn-RW0" id="Fi8-8L-Fcr"/>
                 <outlet property="unUserFxCount" destination="hHB-dh-63K" id="0eM-0s-VPE"/>
@@ -90,6 +91,7 @@
                 <constraint firstAttribute="bottom" secondItem="Qzs-bn-RW0" secondAttribute="bottom" id="sal-4L-fOa"/>
                 <constraint firstItem="CcB-of-gwu" firstAttribute="top" secondItem="h5e-wn-xXW" secondAttribute="top" id="yHD-Ju-29T"/>
             </constraints>
+            <point key="canvasLocation" x="118" y="-57"/>
         </view>
     </objects>
     <resources>

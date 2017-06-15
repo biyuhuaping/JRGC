@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UCFCouponInterest">
             <connections>
+                <outlet property="couponCenterBtn" destination="Cjx-Y7-gpm" id="uGc-Ce-z1h"/>
                 <outlet property="couponNameLabel" destination="ixC-Xo-ckL" id="PKn-3a-yk0"/>
                 <outlet property="tableView" destination="dLl-LR-WKU" id="SDT-qc-q3h"/>
                 <outlet property="unUserFxCount" destination="Dg2-BP-Ynu" id="3zb-Im-6M4"/>
