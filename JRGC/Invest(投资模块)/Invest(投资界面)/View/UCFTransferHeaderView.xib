@@ -46,15 +46,15 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Igt-CJ-gih">
                             <rect key="frame" x="232.5" y="0.0" width="116.5" height="60"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="transfer_icon_03" translatesAutoresizingMaskIntoConstraints="NO" id="tgX-77-ghc">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="transfer_icon_02" translatesAutoresizingMaskIntoConstraints="NO" id="tgX-77-ghc">
                                     <rect key="frame" x="40" y="2.5" width="35" height="35"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="35" id="MId-BD-BxQ"/>
                                         <constraint firstAttribute="width" constant="35" id="j8y-kR-rTh"/>
                                     </constraints>
                                 </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="贴息项目" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9s0-Ut-OJJ">
-                                    <rect key="frame" x="34" y="42.5" width="49.5" height="14.5"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="期限灵活" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9s0-Ut-OJJ">
+                                    <rect key="frame" x="34" y="42.5" width="50" height="15"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
@@ -96,14 +96,14 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PVp-6D-5Lh">
                             <rect key="frame" x="116.5" y="0.0" width="116" height="60"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="transfer_icon_02" translatesAutoresizingMaskIntoConstraints="NO" id="cqr-Rw-9BO">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="transfer_icon_03" translatesAutoresizingMaskIntoConstraints="NO" id="cqr-Rw-9BO">
                                     <rect key="frame" x="40" y="2.5" width="35" height="35"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="35" id="GIp-Mh-38L"/>
                                         <constraint firstAttribute="height" constant="35" id="QkY-Tq-WFc"/>
                                     </constraints>
                                 </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="期限灵活" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J3Y-Mo-iuY">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="贴息项目" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J3Y-Mo-iuY">
                                     <rect key="frame" x="32.5" y="42.5" width="50" height="15"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     <nil key="textColor"/>

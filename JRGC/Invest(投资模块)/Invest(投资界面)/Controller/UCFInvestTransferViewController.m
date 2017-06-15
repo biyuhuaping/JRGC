@@ -54,12 +54,12 @@
     }];
 
     [self.tableview setSeparatorColor:[UIColor clearColor]];
-    [transferHeaderView initData];
+//    [transferHeaderView initData];
 
 }
 - (void)initData
 {
-    self.sortType = @"31";
+    self.sortType = @"";
     currentPage = 1;
     self.dataArray = [NSMutableArray array];
 }

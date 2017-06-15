@@ -36,7 +36,7 @@
     [self addSubview:cycleScrollView];
     self.cycleView = cycleScrollView;
     
-    self.index = 0;
+//    self.index = 3;
     self.rateState = YES;
     self.limitState = YES;
     self.sumState = YES;
