@@ -93,6 +93,9 @@
     [_tableView addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(refreshingData)];
     [_tableView.header beginRefreshing];
     _tableView.footer.hidden = YES;
+    if (_sourceVC == 1) {
+        _couponCenterBtn.hidden = YES;
+    }
 }
 
 #pragma mark - UITableViewDelegate

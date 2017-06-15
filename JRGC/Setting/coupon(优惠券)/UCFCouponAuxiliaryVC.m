@@ -42,12 +42,14 @@
     //返现券
     _couponReturnView = [[UCFCouponReturn alloc]initWithNibName:@"UCFCouponReturn" bundle:nil];
     _couponReturnView.status = _status;
+    _couponReturnView.sourceVC = 1;
     _couponReturnView.view.frame = CGRectMake(0, 44, CGRectGetWidth(super.view.bounds), CGRectGetHeight(super.view.bounds) - 44);
     [self addChildViewController:_couponReturnView];
     
     //返息券
     _couponInterestView = [[UCFCouponInterest alloc]initWithNibName:@"UCFCouponInterest" bundle:nil];
     _couponInterestView.status = _status;
+    _couponInterestView.sourceVC = 1;
     _couponInterestView.view.frame = CGRectMake(0, 44, ScreenWidth, ScreenHeight - 108);
     [self addChildViewController:_couponInterestView];
     
