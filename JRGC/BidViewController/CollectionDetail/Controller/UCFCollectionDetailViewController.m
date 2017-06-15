@@ -263,6 +263,7 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
     int progressInt = (int)(Progress *100);
     if([_souceVC isEqualToString:@"P2PVC"]){
         if (progressInt == 100) {
+            [self.investmentBtn setTitle:@"已售罄" forState:UIControlStateNormal];
             [self.investmentBtn setBackgroundColor:UIColorWithRGB(0xd4d4d4)];
             [self.investmentBtn setUserInteractionEnabled:NO];
         }else{
