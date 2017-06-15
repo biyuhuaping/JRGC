@@ -297,7 +297,7 @@
         NSString *data = (NSString *)result;
         NSMutableDictionary *dic = [data objectFromJSONString];
         NSString *rstcode = dic[@"status"];
-        NSString *rsttext = dic[@"statusdes"];
+        NSString *rsttext = [dic objectSafeForKey:@"statusdes"];
         if ([rstcode intValue] == 1) {
             UCFProjectDetailViewController *controller = [[UCFProjectDetailViewController alloc] initWithDataDic:dic isTransfer:YES withLabelList:nil];
             controller.sourceVc = @"transiBid";
@@ -305,7 +305,9 @@
             controller.rootVc = self.rootVc;
             [self.navigationController pushViewController:controller animated:YES];
         }else {
-            [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
+            if (![rsttext isEqualToString:@""] && rsttext) {
+                [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
+            }
         }
     }
     if ([self.tableview.header isRefreshing]) {

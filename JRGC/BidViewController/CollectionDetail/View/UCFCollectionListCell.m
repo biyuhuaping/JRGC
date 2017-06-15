@@ -115,6 +115,7 @@
             break;
             
         default:
+            statusStr = @"满标";
             break;
     }
     return statusStr;

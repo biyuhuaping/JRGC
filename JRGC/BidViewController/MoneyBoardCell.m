@@ -378,7 +378,8 @@
             _gongDouSwitch.hidden = YES;
         
             _allTouziBtn.hidden = self.accoutType == SelectAccoutTypeHoner;//如果是尊享债转 则隐藏全投按钮
-        if (self.accoutType == SelectAccoutTypeHoner) {
+        NSString *typeStr = [[_dataDict objectSafeDictionaryForKey:@"data"] objectSafeForKey:@"type"];
+        if (self.accoutType == SelectAccoutTypeHoner && [typeStr intValue] == 2) {
             _inputMoneyTextFieldLable.userInteractionEnabled = NO;
         }else{
             _inputMoneyTextFieldLable.userInteractionEnabled = YES;

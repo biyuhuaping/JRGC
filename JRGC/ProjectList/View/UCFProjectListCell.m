@@ -48,7 +48,8 @@
 - (NSArray *)status
 {
     if (!_status) {
-        _status = [[NSArray alloc] initWithObjects:@"未审核",@"等待确认",@"出借",@"流标",@"满标",@"回款中",@"已回款", nil];
+//        _status = [[NSArray alloc] initWithObjects:@"未审核",@"等待确认",@"出借",@"流标",@"满标",@"回款中",@"已回款", nil];
+        _status = [[NSArray alloc] initWithObjects:@"未审核",@"等待确认",@"出借",@"已售罄",@"已售罄",@"已售罄",@"已售罄", nil];
     }
     return _status;
 }
@@ -329,7 +330,7 @@
     
     float progress = (totalAmt - canBuyAmt) / totalAmt * 1000;
     if (batchBidModel.full || canBuyAmt == 0) {
-        self.circleProgressView.textStr = @"满标";
+        self.circleProgressView.textStr = @"已售罄";
         self.circleProgressView.progressLabel.font = [UIFont systemFontOfSize:14];
         self.circleProgressView.tintColor = UIColorWithRGB(0xe2e2e2);//未绘制的进度条颜色
 //        self.circleProgressView.tintColor = UIColorWithRGB(0xfa4d4c);

@@ -12,7 +12,8 @@
 @interface MongoliaLayerCenter : NSObject<MjAlertViewDelegate,NetworkModuleDelegate>
 //蒙层显示数组
 @property (nonatomic, strong) NSMutableDictionary *mongoliaLayerDic;
-@property (nonatomic, assign) BOOL lockViewDisappear; //默认为NO 
+@property (nonatomic, assign) BOOL lockViewDisappear; //默认为NO
+@property (nonatomic, weak)   UITableView   *tableView;
 + (MongoliaLayerCenter *)sharedManager;
 - (void)showLogic;
 
