@@ -58,6 +58,7 @@
         //新手政策是否显示
         if ([[self.mongoliaLayerDic valueForKey:@"novicePoliceOnOff"] boolValue]) {
             //通知弹窗显示新手政策
+            [self.tableView setContentOffset:CGPointMake(0, 0)];
             MjAlertView *alertView = [[MjAlertView alloc]initInviteFriendsToMakeMoneyDelegate:self];
             alertView.tag = 1000;
             [alertView show];

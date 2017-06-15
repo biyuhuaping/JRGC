@@ -213,5 +213,8 @@
             break;
     }
 }
-
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:CHECK_COUPON_CENTER object:nil];
+}
 @end
