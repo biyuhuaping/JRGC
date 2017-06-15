@@ -59,7 +59,7 @@
 }
 - (void)initData
 {
-    self.sortType = @"12";
+    self.sortType = @"31";
     currentPage = 1;
     self.dataArray = [NSMutableArray array];
 }

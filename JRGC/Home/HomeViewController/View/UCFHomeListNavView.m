@@ -124,6 +124,7 @@
         }
         [UIView animateWithDuration:0.25 animations:^{
             self.backView.alpha = 0;
+            self.bottmLine.alpha = 0;
         }];
     }
     else {
