@@ -58,6 +58,7 @@
         //新手政策是否显示
         if ([[self.mongoliaLayerDic valueForKey:@"novicePoliceOnOff"] boolValue]) {
             //通知弹窗显示新手政策
+            [self.tableView setContentOffset:CGPointMake(0, 0)];
             MjAlertView *alertView = [[MjAlertView alloc]initInviteFriendsToMakeMoneyDelegate:self];
             alertView.tag = 1000;
             [alertView show];
@@ -79,12 +80,9 @@
     //是否弹平台升级调整公告
     if (![[self.mongoliaLayerDic valueForKey:@"authorization"] boolValue]) {
         NSString *authorizationDate = [self.mongoliaLayerDic valueForKey:@"authorizationDate"];
-
         MjAlertView *alertView = [[MjAlertView alloc] initPlatformUpgradeNotice:self withAuthorizationDate:authorizationDate];
         alertView.tag = 1001;
         [alertView show];
-        
-
         return;
     }
 }
