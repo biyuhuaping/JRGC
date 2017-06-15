@@ -30,6 +30,7 @@
 - (void)layoutSubviews
 {
     self.rateLabel.text = [NSString stringWithFormat:@"%@%%",_model.transfereeYearRate];
+    [self.rateLabel setFont:[UIFont systemFontOfSize:12] string:@"%"];
     self.timeLabel.text = [NSString stringWithFormat:@"%@天",_model.lastDays];
     self.moneyLabel.text = _model.cantranMoney;
 }

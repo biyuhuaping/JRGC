@@ -45,6 +45,7 @@
     UCFTransferHeaderView *transferHeaderView = (UCFTransferHeaderView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFTransferHeaderView" owner:self options:nil] lastObject];
     transferHeaderView.frame = CGRectMake(0, 0, ScreenWidth, 215);
     self.tableview.tableHeaderView = transferHeaderView;
+    self.tableview.backgroundColor = UIColorWithRGB(0xebebee);
     transferHeaderView.delegate = self;
     self.transferHeaderView = transferHeaderView;
     [self.tableview addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(refreshData)];
@@ -54,12 +55,12 @@
     }];
 
     [self.tableview setSeparatorColor:[UIColor clearColor]];
-    [transferHeaderView initData];
+//    [transferHeaderView initData];
 
 }
 - (void)initData
 {
-    self.sortType = @"31";
+    self.sortType = @"";
     currentPage = 1;
     self.dataArray = [NSMutableArray array];
 }

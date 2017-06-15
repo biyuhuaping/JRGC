@@ -63,6 +63,7 @@
     self.tableview.tableHeaderView = microMoneyHeaderView;
     self.microMoneyHeaderView = microMoneyHeaderView;
     
+    self.tableview.backgroundColor = UIColorWithRGB(0xebebee);
     //=========  下拉刷新、上拉加载更多  =========
 //    self.noDataView = [[UCFNoDataView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-64-49) errorTitle:@"敬请期待..."]
     // 添加传统的下拉刷新
@@ -131,6 +132,18 @@
     view.frame = CGRectMake(0, 0, ScreenWidth, 30);
     return view;
 }
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    static NSString* viewId = @"homeListFooter";
+    UITableViewHeaderFooterView *view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:viewId];
+    if (nil == view) {
+        view = [[UITableViewHeaderFooterView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 10)];
+    }
+    view.contentView.backgroundColor = UIColorWithRGB(0xebebee);
+    return view;
+}
+
 - (void)homeListHeader:(UCFHomeListHeaderSectionView *)homeListHeader didClickedMoreWithType:(NSString *)type{
     if ([homeListHeader.headerTitleLabel.text isEqualToString:@"一键投标"]) {
         UCFBatchBidController *batchBidVc = [[UCFBatchBidController alloc]initWithNibName:@"UCFBatchBidController" bundle:nil];

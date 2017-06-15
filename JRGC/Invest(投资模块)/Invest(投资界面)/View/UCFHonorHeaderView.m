@@ -25,6 +25,7 @@
     cycleScrollView.autoScrollTimeInterval = 7.0;
     [self addSubview:cycleScrollView];
     self.cycleView = cycleScrollView;
+    self.backgroundColor = UIColorWithRGB(0xebebee);
     [self getNormalBannerData];
 }
 
