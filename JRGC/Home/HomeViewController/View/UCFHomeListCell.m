@@ -58,6 +58,11 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.rateLabel.textColor = UIColorWithRGB(0xfd4d4c);
+    self.proName.textColor = UIColorWithRGB(0x555555);
+    self.timeLabel.textColor = UIColorWithRGB(0x555555);
+    self.repayModelLabel.textColor = UIColorWithRGB(0x555555);
+    self.startMoneyLabel.textColor = UIColorWithRGB(0x999999);
+    self.remainLabel.textColor = UIColorWithRGB(0x999999);
     self.circleProgressView.animationModel = CircleIncreaseSameTime;
     self.circleProgressView.showProgressText = YES;
     self.circleProgressView.notAnimated = NO;
@@ -194,21 +199,21 @@
         self.upSegLine.backgroundColor = UIColorWithRGB(0xe3e5ea);
         self.downSegLine.backgroundColor = UIColorWithRGB(0xe3e5ea);
         self.upLineLeftSpace.constant = 0;
-        self.downLineLeftSpace.constant = 15;
+        self.downLineLeftSpace.constant = 25;
     } else if (indexPath.row == totalRows - 1) { // 这组的末行(最后1行)
         self.upSegLine.hidden = indexPath.section == 3 ? YES : NO;
         self.downSegLine.hidden = NO;
         self.upSegLine.backgroundColor = UIColorWithRGB(0xe3e5ea);
         self.downSegLine.backgroundColor = UIColorWithRGB(0xd8d8d8);
-        self.upLineLeftSpace.constant = indexPath.section == 2 ? 0 : 15;
+        self.upLineLeftSpace.constant = indexPath.section == 2 ? 0 : 25;
         self.downLineLeftSpace.constant = 0;
     } else {
         self.upSegLine.hidden = indexPath.section == 3 ? YES : NO;
         self.downSegLine.hidden = YES;
         self.upSegLine.backgroundColor = UIColorWithRGB(0xe3e5ea);
         self.downSegLine.backgroundColor = UIColorWithRGB(0xe3e5ea);
-        self.upLineLeftSpace.constant = 15;
-        self.downLineLeftSpace.constant = 15;
+        self.upLineLeftSpace.constant = 25;
+        self.downLineLeftSpace.constant = 25;
     }
 }
 

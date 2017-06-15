@@ -13,9 +13,10 @@
 @end
 #import <UIKit/UIKit.h>
 #import "UCFTransferModel.h"
+#import "NZLabel.h"
 
 @interface UCFTransfeTableViewCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UILabel *rateLabel;
+@property (weak, nonatomic) IBOutlet NZLabel *rateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *moneyLabel;
 @property (weak, nonatomic) IBOutlet UIView *bottomLine;

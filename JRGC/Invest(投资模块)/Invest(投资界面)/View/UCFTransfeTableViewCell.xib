@@ -26,25 +26,25 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="365天" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="3" translatesAutoresizingMaskIntoConstraints="NO" id="vMd-Ze-HDf">
-                        <rect key="frame" x="120" y="19" width="36.5" height="15"/>
+                        <rect key="frame" x="120" y="23" width="36.5" height="15"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                         <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="剩余期限" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="3" translatesAutoresizingMaskIntoConstraints="NO" id="79B-g9-rsO">
-                        <rect key="frame" x="120" y="39" width="45" height="14"/>
+                        <rect key="frame" x="120" y="43" width="45" height="14"/>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100.00%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="3" translatesAutoresizingMaskIntoConstraints="NO" id="NhQ-tP-Y5W" customClass="NZLabel">
-                        <rect key="frame" x="15" y="10" width="86" height="24"/>
+                        <rect key="frame" x="15" y="14" width="86" height="24"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                         <color key="textColor" red="0.96266388889999999" green="0.20288120209999999" blue="0.2349735349" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="可购金额" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="3" translatesAutoresizingMaskIntoConstraints="NO" id="nsC-bP-Jha">
-                        <rect key="frame" x="215" y="39" width="45" height="14"/>
+                        <rect key="frame" x="215" y="43" width="45" height="14"/>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
@@ -57,13 +57,13 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1万元" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="3" translatesAutoresizingMaskIntoConstraints="NO" id="gm0-Bw-LL1">
-                        <rect key="frame" x="215" y="19" width="31" height="15"/>
+                        <rect key="frame" x="215" y="23" width="31" height="15"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                         <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="预期年化利率" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="3" translatesAutoresizingMaskIntoConstraints="NO" id="1BW-wY-u5l">
-                        <rect key="frame" x="15" y="39" width="68" height="14"/>
+                        <rect key="frame" x="15" y="43" width="68" height="14"/>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
@@ -82,7 +82,7 @@
                     <constraint firstItem="nsC-bP-Jha" firstAttribute="leading" secondItem="gm0-Bw-LL1" secondAttribute="leading" id="Z9c-aj-9Na"/>
                     <constraint firstItem="79B-g9-rsO" firstAttribute="leading" secondItem="vMd-Ze-HDf" secondAttribute="leading" id="ZWM-FM-EDQ"/>
                     <constraint firstItem="79B-g9-rsO" firstAttribute="top" secondItem="vMd-Ze-HDf" secondAttribute="bottom" constant="5" id="das-ov-2jV"/>
-                    <constraint firstItem="ecn-dB-Hkl" firstAttribute="top" secondItem="79B-g9-rsO" secondAttribute="bottom" constant="20" id="eZa-mU-Fwe"/>
+                    <constraint firstItem="ecn-dB-Hkl" firstAttribute="top" secondItem="79B-g9-rsO" secondAttribute="bottom" constant="16" id="eZa-mU-Fwe"/>
                     <constraint firstItem="79B-g9-rsO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="120" id="nz2-TN-LX9"/>
                     <constraint firstAttribute="trailing" secondItem="ecn-dB-Hkl" secondAttribute="trailing" id="sP5-Mn-CWn"/>
                     <constraint firstItem="nsC-bP-Jha" firstAttribute="centerY" secondItem="79B-g9-rsO" secondAttribute="centerY" id="sSy-On-zQ9"/>
@@ -93,7 +93,7 @@
                 <outlet property="bottomLine" destination="ecn-dB-Hkl" id="Iz4-IJ-go0"/>
                 <outlet property="moneyLabel" destination="gm0-Bw-LL1" id="bzI-EK-ATb"/>
                 <outlet property="moneyLeadSpace" destination="3uX-X2-1KS" id="0Qq-5m-utH"/>
-                <outlet property="rateLabel" destination="NhQ-tP-Y5W" id="yyc-F7-9Zn"/>
+                <outlet property="rateLabel" destination="NhQ-tP-Y5W" id="iv9-gm-htT"/>
                 <outlet property="timeLabel" destination="vMd-Ze-HDf" id="xeS-70-MJD"/>
                 <outlet property="timeLeadSpace" destination="nz2-TN-LX9" id="Gtd-Wl-ZQ2"/>
             </connections>

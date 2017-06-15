@@ -9,10 +9,17 @@
 #import "UCFHomeListHeaderSectionView.h"
 
 @interface UCFHomeListHeaderSectionView  ()
+@property (weak, nonatomic) IBOutlet UIView *up;
 
 @end
 
 @implementation UCFHomeListHeaderSectionView
+
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    self.up.backgroundColor = UIColorWithRGB(0xebebee);
+}
 
 - (void)setPresenter:(UCFHomeListGroupPresenter *)presenter {
     _presenter = presenter;
