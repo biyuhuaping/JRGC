@@ -584,7 +584,7 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
     }else{
         UCFCollectionListCell *cell = [tableView dequeueReusableCellWithIdentifier:ListCellID];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.textLabel.text = @"投资详情";
+        cell.textLabel.text = @"出借详情";
         return cell;
     }
 }
@@ -613,7 +613,7 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
                 [MBProgressHUD showHUDAddedTo:self.view animated:YES];
                 [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self Type:SelectAccoutDefault];
             } else {
-                UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前标的详情只对投资人开放"];
+                UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前标的详情只对出借人开放"];
                 self.intoViewControllerStr = @"NoPermissionVC";
                 controller.souceVC = @"CollectionDetailVC";
                 [self.navigationController pushViewController:controller animated:YES];
