@@ -72,7 +72,11 @@
 }
 - (void)initData
 {
-    [self rateOrder:_rateOrderButton];
+//    [self rateOrder:_rateOrderButton];
+    [self calcueAllStateButton];
+    [_rateOrderButton setTitleColor:UIColorWithRGB(0x555555) forState:UIControlStateNormal];
+    [_limitOrderButton setTitleColor:UIColorWithRGB(0x555555) forState:UIControlStateNormal];
+    [_sumOrderButton setTitleColor:UIColorWithRGB(0x555555) forState:UIControlStateNormal];
 }
 #pragma mark - button点击事件
 - (IBAction)rateOrder:(UIButton *)sender {

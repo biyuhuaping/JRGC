@@ -62,7 +62,11 @@
 {
     self.sortType = @"";
     currentPage = 1;
-    self.dataArray = [NSMutableArray array];
+    if (self.dataArray) {
+        [self.dataArray removeAllObjects];
+    }
+    else
+        self.dataArray = [NSMutableArray array];
 }
 #pragma mark - tableview 数据源
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
@@ -237,6 +241,10 @@
 - (void)refreshData
 {
     currentPage = 1;
+    if ([self.tableview.header isRefreshing]) {
+        [self initData];
+        [_transferHeaderView initData];
+    }
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self loadNetData];
     });
