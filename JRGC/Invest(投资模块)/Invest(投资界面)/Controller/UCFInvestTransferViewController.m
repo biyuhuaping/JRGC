@@ -276,7 +276,7 @@
             NSArray *list_result = [[[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"pageData"] objectSafeArrayForKey:@"result"];
             if ([[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
                 NSString *oepnState =  [[dic objectSafeDictionaryForKey:@"data"] objectSafeForKey:@"openStatus"];
-                NSString *enjoyOpenStatus =  [[dic objectSafeDictionaryForKey:@"data"] objectSafeForKey:@"enjoyOpenStatus"];
+                NSString *enjoyOpenStatus =  [[dic objectSafeDictionaryForKey:@"data"] objectSafeForKey:@"zxOpenStatus"];
                 [UserInfoSingle sharedManager].openStatus = [oepnState integerValue];
                 [UserInfoSingle sharedManager].enjoyOpenStatus = [enjoyOpenStatus integerValue];
             }

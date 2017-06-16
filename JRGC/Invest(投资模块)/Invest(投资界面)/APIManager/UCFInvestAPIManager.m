@@ -50,6 +50,13 @@
             
             NSDictionary *resultData = [dic objectSafeDictionaryForKey:@"data"];
             NSArray *resultArr = [resultData objectSafeArrayForKey:@"group"];
+            
+            
+            if ([[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
+                NSString *oepnState =  [resultData objectSafeForKey:@"openStatus"];
+                [UserInfoSingle sharedManager].openStatus = [oepnState integerValue];
+            }
+            
             NSMutableArray *temp = [[NSMutableArray alloc] init];
             for (NSDictionary *dict in resultArr) {
                 UCFMicroMoneyGroup *microMoneyGroup = [UCFMicroMoneyGroup microMoneyGroupWithDict:dict];
