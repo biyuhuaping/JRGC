@@ -338,13 +338,13 @@
         if ([rstcode intValue] == 1) {
         
             NSArray *list_result = [[[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"pageData"] objectSafeArrayForKey:@"result"];
-            if ([[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
-                NSString *oepnState =  [[dic objectSafeDictionaryForKey:@"data"] objectSafeForKey:@"openStatus"];
-                [UserInfoSingle sharedManager].enjoyOpenStatus = [oepnState integerValue];
-            }
             NSDictionary *dataDict = [dic objectSafeDictionaryForKey:@"data"];
             BOOL isShowNew = [dataDict isExistenceforKey:@"newPrdClaim"];
-            
+            if ([[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
+                //此时openStatus为尊享的开户状态
+                NSString *oepnState =  [dataDict objectSafeForKey:@"openStatus"];
+                [UserInfoSingle sharedManager].enjoyOpenStatus = [oepnState integerValue];
+            }
             
             if ([self.tableView.header isRefreshing]) {//每次刷新初始化状态
                 [self.dataArray removeAllObjects];
