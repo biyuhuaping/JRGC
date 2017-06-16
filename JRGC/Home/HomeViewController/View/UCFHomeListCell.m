@@ -18,7 +18,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *proImageView1;
 @property (weak, nonatomic) IBOutlet UIImageView *proImageView2;
 @property (weak, nonatomic) IBOutlet UIImageView *proImageView3;
-@property (weak, nonatomic) IBOutlet UIView *proSignImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *proImageView4;
 @property (weak, nonatomic) IBOutlet ZZCircleProgress *circleProgressView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *image1W;
@@ -30,7 +29,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *repayModelLabel;
 @property (weak, nonatomic) IBOutlet UILabel *startMoneyLabel;
 @property (weak, nonatomic) IBOutlet UILabel *remainLabel;
-@property (weak, nonatomic) IBOutlet UCFAngleView *angleView;
 
 @property (weak, nonatomic) IBOutlet UIView *oneImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *oneImageBackView;
@@ -40,6 +38,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *oneImageDescribeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *oneImageNumLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *numBackViewW;
+@property (weak, nonatomic) IBOutlet UIView *proSignBackView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *proSignBackViewWidth;
+@property (weak, nonatomic) IBOutlet UILabel *proSignLabel;
 
 
 @property (weak, nonatomic) IBOutlet UIView *upSegLine;
@@ -144,13 +145,29 @@
         }
         
         
-        self.angleView.angleStatus = presenter.item.status;
-//        DBLOG(@"%@", model.status);
-        if (presenter.item.prdLabelsList.count>0) {
+//        self.angleView.angleStatus = presenter.item.status;
+////        DBLOG(@"%@", model.status);
+//        if (presenter.item.prdLabelsList.count>0) {
+//            UCFProjectLabel *projectLabel = [presenter.item.prdLabelsList firstObject];
+//            if ([projectLabel.labelPriority integerValue] == 1) {
+//                self.angleView.angleString = [NSString stringWithFormat:@"%@", projectLabel.labelName];
+//            }
+//        }
+        
+        if (presenter.item.prdLabelsList.count > 0) {
             UCFProjectLabel *projectLabel = [presenter.item.prdLabelsList firstObject];
             if ([projectLabel.labelPriority integerValue] == 1) {
-                self.angleView.angleString = [NSString stringWithFormat:@"%@", projectLabel.labelName];
+                self.proSignBackView.hidden = NO;
+                self.proSignLabel.text = [NSString stringWithFormat:@"%@", projectLabel.labelName];
+                CGSize size = [projectLabel.labelName boundingRectWithSize:CGSizeMake(MAXFLOAT, 15) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:10.0f]} context:nil].size;
+                self.proSignBackViewWidth.constant = size.width + 11;
             }
+            else {
+                self.proSignBackView.hidden = YES;
+            }
+        }
+        else {
+            self.proSignBackView.hidden = YES;
         }
     }
     else if (presenter.modelType == UCFHomeListCellModelTypeOneImageBatchLending || presenter.modelType == UCFHomeListCellModelTypeOneImageHonorTransfer || presenter.modelType == UCFHomeListCellModelTypeOneImageBondTransfer)  {
@@ -277,13 +294,28 @@
         }
     }
     
-    self.angleView.angleStatus = microMoneyModel.status;
-    //        DBLOG(@"%@", model.status);
-    if (microMoneyModel.prdLabelsList.count>0) {
+//    self.angleView.angleStatus = microMoneyModel.status;
+//    //        DBLOG(@"%@", model.status);
+//    if (microMoneyModel.prdLabelsList.count>0) {
+//        UCFProjectLabel *projectLabel = [microMoneyModel.prdLabelsList firstObject];
+//        if ([projectLabel.labelPriority integerValue] == 1) {
+//            self.angleView.angleString = [NSString stringWithFormat:@"%@", projectLabel.labelName];
+//        }
+//    }
+    if (microMoneyModel.prdLabelsList.count > 0) {
         UCFProjectLabel *projectLabel = [microMoneyModel.prdLabelsList firstObject];
         if ([projectLabel.labelPriority integerValue] == 1) {
-            self.angleView.angleString = [NSString stringWithFormat:@"%@", projectLabel.labelName];
+            self.proSignBackView.hidden = NO;
+            self.proSignLabel.text = [NSString stringWithFormat:@"%@", projectLabel.labelName];
+            CGSize size = [projectLabel.labelName boundingRectWithSize:CGSizeMake(MAXFLOAT, 15) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:10.0f]} context:nil].size;
+            self.proSignBackViewWidth.constant = size.width + 11;
         }
+        else {
+            self.proSignBackView.hidden = YES;
+        }
+    }
+    else {
+        self.proSignBackView.hidden = YES;
     }
     if (microMoneyModel.platformSubsidyExpense.length > 0) {//贴
         self.image1W.constant = 18;
@@ -352,13 +384,28 @@
     }
     
     
-    self.angleView.angleStatus = microMoneyModel.status;
-    //        DBLOG(@"%@", model.status);
-    if (microMoneyModel.prdLabelsList.count>0) {
+//    self.angleView.angleStatus = microMoneyModel.status;
+//    //        DBLOG(@"%@", model.status);
+//    if (microMoneyModel.prdLabelsList.count>0) {
+//        UCFProjectLabel *projectLabel = [microMoneyModel.prdLabelsList firstObject];
+//        if ([projectLabel.labelPriority integerValue] == 1) {
+//            self.angleView.angleString = [NSString stringWithFormat:@"%@", projectLabel.labelName];
+//        }
+//    }
+    if (microMoneyModel.prdLabelsList.count > 0) {
         UCFProjectLabel *projectLabel = [microMoneyModel.prdLabelsList firstObject];
         if ([projectLabel.labelPriority integerValue] == 1) {
-            self.angleView.angleString = [NSString stringWithFormat:@"%@", projectLabel.labelName];
+            self.proSignBackView.hidden = NO;
+            self.proSignLabel.text = [NSString stringWithFormat:@"%@", projectLabel.labelName];
+            CGSize size = [projectLabel.labelName boundingRectWithSize:CGSizeMake(MAXFLOAT, 15) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:10.0f]} context:nil].size;
+            self.proSignBackViewWidth.constant = size.width + 11;
         }
+        else {
+            self.proSignBackView.hidden = YES;
+        }
+    }
+    else {
+        self.proSignBackView.hidden = YES;
     }
     if (microMoneyModel.platformSubsidyExpense.length > 0) {//贴
         self.image1W.constant = 18;
