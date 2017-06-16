@@ -62,7 +62,11 @@
 {
     self.sortType = @"";
     currentPage = 1;
-    self.dataArray = [NSMutableArray array];
+    if (self.dataArray) {
+        [self.dataArray removeAllObjects];
+    }
+    else
+        self.dataArray = [NSMutableArray array];
 }
 #pragma mark - tableview 数据源
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
