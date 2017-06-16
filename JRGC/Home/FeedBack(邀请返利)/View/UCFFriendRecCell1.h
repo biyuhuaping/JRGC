@@ -15,5 +15,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *lab3;
 @property (strong, nonatomic) IBOutlet UILabel *lab4;
 @property (strong, nonatomic) IBOutlet UILabel *lab5;
+@property (strong, nonatomic) IBOutlet UILabel *planLabel;
 
 @end
