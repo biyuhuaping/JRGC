@@ -83,7 +83,7 @@
 //    NSArray *constraints3V=[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[seg]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(seg)];
 //    [self addConstraints:constraints3H];
 //    [self addConstraints:constraints3V];
-//    [seg addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
+    [seg addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
 }
 
 - (void)setSectionTitles:(NSArray *)sectionTitles
