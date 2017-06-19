@@ -44,16 +44,16 @@
         version.subtitle = [NSString stringWithFormat:@"V%@", currentVersion];
         
         UCFSettingItem *netAddress = [UCFSettingArrowItem itemWithIcon:nil title:@"官方网站" destVcClass:nil];
-        netAddress.subtitle = @"www.9888.cn";
+        netAddress.subtitle = @"www.9888keji.cn";
         
-        UCFSettingItem *weixinNo = [UCFSettingArrowItem itemWithIcon:nil title:@"微信公众号" destVcClass:nil];
-        weixinNo.subtitle = @"jrgc_p2p";
+//        UCFSettingItem *weixinNo = [UCFSettingArrowItem itemWithIcon:nil title:@"微信公众号" destVcClass:nil];
+//        weixinNo.subtitle = @"jrgc_p2p";
         
         UCFSettingItem *comment = [UCFSettingArrowItem itemWithIcon:nil title:@"给我们好评" destVcClass:nil];
         comment.subtitle = @"";
         
         UCFSettingGroup *group = [[UCFSettingGroup alloc] init];
-        group.items = [[NSMutableArray alloc]initWithArray:@[version, netAddress, weixinNo, comment]];
+        group.items = [[NSMutableArray alloc]initWithArray:@[version, netAddress, comment]];
         _itemsData = [[NSMutableArray alloc] initWithObjects:group, nil];
     }
     return _itemsData;
@@ -79,7 +79,7 @@
     } else {
         companyInfoSize = [companyIntro sizeWithFont:[UIFont systemFontOfSize:12] constrainedToSize:CGSizeMake(MAXFLOAT, 30)];
     }
-    self.headerView.frame = CGRectMake(0, 0, ScreenWidth, companyInfoSize.height + 52 + 60+20);
+    self.headerView.frame = CGRectMake(0, 0, ScreenWidth, companyInfoSize.height + 42 + 40 + 20);
     
     self.tableview.separatorColor = UIColorWithRGB(0xe3e5ea);
     self.tableview.separatorInset =  UIEdgeInsetsMake(0, 15, 0, 0);
@@ -158,14 +158,14 @@
         }
             break;
             
-        case 2: {
-            UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-            [pasteboard setString:item.subtitle];
-            [AuxiliaryFunc showToastMessage:@"已复制到剪切板" withView:self.view];
-        }
-            break;
+//        case 2: {
+//            UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+//            [pasteboard setString:item.subtitle];
+//            [AuxiliaryFunc showToastMessage:@"已复制到剪切板" withView:self.view];
+//        }
+//            break;
         
-        case 3: {
+        case 2: {
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 [[SDImageCache sharedImageCache] clearDisk];
                 dispatch_async(dispatch_get_main_queue(), ^{
