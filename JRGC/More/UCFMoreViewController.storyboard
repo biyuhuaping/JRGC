@@ -138,21 +138,21 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="about_icon" translatesAutoresizingMaskIntoConstraints="NO" id="UAB-Cm-09A">
-                                            <rect key="frame" x="129" y="20" width="117" height="52"/>
+                                            <rect key="frame" x="129" y="20" width="117" height="42"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="52" id="M0I-dj-GRh"/>
+                                                <constraint firstAttribute="height" constant="42" id="M0I-dj-GRh"/>
                                                 <constraint firstAttribute="width" constant="117" id="O0F-Ub-NL8"/>
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wIy-Zf-RIV">
-                                            <rect key="frame" x="15" y="92" width="345" height="100.5"/>
+                                            <rect key="frame" x="15" y="82" width="345" height="100.5"/>
                                             <string key="text">       金融工场，品牌创立于2012年，是中国领先的综合金融信息服务平台。平台以金融全球化发展趋势为契机，融合信息技术创新手段，秉承安全、专业、透明的经营理念，为用户提供多样化高效智能的金融产品，为企业和个人提供定制化金融服务解决方案。平台在交易品种与交易组织模式上持续创新，优化金融资产配置，提供多样化金融产品,让每个用户都能平等、轻松、高效地享受互联网金融服务，享有高品质金融生活。</string>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" red="0.26379796862602234" green="0.2637900710105896" blue="0.26379451155662537" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n4S-n5-Aph">
-                                            <rect key="frame" x="15" y="196.5" width="123" height="27"/>
+                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n4S-n5-Aph">
+                                            <rect key="frame" x="15" y="186.5" width="123" height="27"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <state key="normal" title="点击查看更多信息披露"/>
                                             <connections>
@@ -197,7 +197,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="about_icon" width="117" height="52"/>
+        <image name="about_icon" width="117" height="42"/>
         <image name="banner_default" width="960" height="300"/>
     </resources>
 </document>
