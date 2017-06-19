@@ -12,6 +12,8 @@
 
 @interface UCFSelectedView ()
 @property (nonatomic, strong) NSArray *constraintsForSeg;
+@property (nonatomic, weak) UIView *bottomSignView;
+@property (nonatomic, weak) UIView *bottomLine;
 @end
 
 @implementation UCFSelectedView
@@ -40,26 +42,28 @@
     DBLOG(@"%@", NSStringFromCGSize(self.bounds.size));
     UIView *bottomSignView = [[UIView alloc] init];
     [self addSubview:bottomSignView];
-    bottomSignView.translatesAutoresizingMaskIntoConstraints=NO;
+//    bottomSignView.translatesAutoresizingMaskIntoConstraints=NO;
     [bottomSignView setBackgroundColor:UIColorWithRGB(0xebebee)];
+    self.bottomSignView = bottomSignView;
     // 添加约束
-    NSArray *constraints1H=[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[bottomSignView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(bottomSignView)];
-    NSArray *constraints1V=[NSLayoutConstraint constraintsWithVisualFormat:@"V:[bottomSignView(==2)]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(bottomSignView)];
-    [self addConstraints:constraints1H];
-    [self addConstraints:constraints1V];
+//    NSArray *constraints1H=[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[bottomSignView]-0-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(bottomSignView)];
+//    NSArray *constraints1V=[NSLayoutConstraint constraintsWithVisualFormat:@"V:[bottomSignView(==2)]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(bottomSignView)];
+//    [self addConstraints:constraints1H];
+//    [self addConstraints:constraints1V];
     
     UIView *bottomLine = [[UIView alloc] init];
     [self addSubview:bottomLine];
-    bottomLine.translatesAutoresizingMaskIntoConstraints=NO;
+//    bottomLine.translatesAutoresizingMaskIntoConstraints=NO;
     [bottomLine setBackgroundColor:UIColorWithRGB(0xd8d8d8)];
+    self.bottomLine = bottomLine;
     
-    NSArray *constraints2H=[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[bottomLine]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(bottomLine)];
-    NSArray *constraints2V=[NSLayoutConstraint constraintsWithVisualFormat:@"V:[bottomLine(==0.5)]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(bottomLine)];
-    [self addConstraints:constraints2H];
-    [self addConstraints:constraints2V];
+//    NSArray *constraints2H=[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[bottomLine]-0-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(bottomLine)];
+//    NSArray *constraints2V=[NSLayoutConstraint constraintsWithVisualFormat:@"V:[bottomLine(==0.5)]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(bottomLine)];
+//    [self addConstraints:constraints2H];
+//    [self addConstraints:constraints2V];
     
     HMSegmentedControl *seg = [[HMSegmentedControl alloc] init];
-    seg.translatesAutoresizingMaskIntoConstraints=NO;
+//    seg.translatesAutoresizingMaskIntoConstraints=NO;
     seg.selectionIndicatorHeight = 2.0f;
     seg.backgroundColor = [UIColor clearColor];
     seg.font = [UIFont systemFontOfSize:14];
@@ -74,11 +78,11 @@
     [self addSubview:seg];
     self.segmentedControl = seg;
     
-    NSArray *constraints3H=[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-8-[seg]-8-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(seg)];
-    self.constraintsForSeg = constraints3H;
-    NSArray *constraints3V=[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[seg]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(seg)];
-    [self addConstraints:constraints3H];
-    [self addConstraints:constraints3V];
+//    NSArray *constraints3H=[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[seg]-0-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(seg)];
+//    self.constraintsForSeg = constraints3H;
+//    NSArray *constraints3V=[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[seg]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(seg)];
+//    [self addConstraints:constraints3H];
+//    [self addConstraints:constraints3V];
     [seg addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
 }
 
@@ -106,6 +110,14 @@
     if ([self.delegate respondsToSelector:@selector(SelectedView:didClickSelectedItemWithSeg:)]) {
         [self.delegate SelectedView:self didClickSelectedItemWithSeg:sender];
     }
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    self.bottomSignView.frame = CGRectMake(-8, self.height - 2, ScreenWidth, 2);
+    self.bottomLine.frame = CGRectMake(0, self.height - 0.5, ScreenWidth, 0.5);
+    self.segmentedControl.frame = CGRectMake(0, 0, ScreenWidth, self.height);
 }
 
 @end

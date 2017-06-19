@@ -544,6 +544,18 @@
         }
         cell.lab1.text = _dataArr2[indexPath.section][indexPath.row][@"realName"];//姓名
         cell.lab2.text = _dataArr2[indexPath.section][indexPath.row][@"mobile"];//手机号
+        
+        
+        int maxPerNo = [_dataArr2[indexPath.section][indexPath.row][@"maxPerNo"]intValue];//总几期
+        NSString *repayperno = _dataArr2[indexPath.section][indexPath.row][@"repayPerNo"];//第几期
+        NSString *string = [NSString stringWithFormat:@"(第%@期/共%d期)",repayperno,maxPerNo];
+        
+        if (maxPerNo > 0) {
+            cell.planLabel.text = [NSString stringWithFormat:@"计划回款日%@",string];//回款日
+        }else{
+            cell.planLabel.text = @"计划回款日";
+        }
+        [cell.planLabel setFontColor:UIColorWithRGB(0x999999) string:string];
       
         cell.lab3.text = _dataArr2[indexPath.section][indexPath.row][@"repayPerDate"] ;//计划回款日
         NSString *refundAmtStr = _dataArr2[indexPath.section][indexPath.row][@"refundAmt"];
@@ -558,6 +570,18 @@
         }
         cell.lab1.text = _dataArr3[indexPath.section][indexPath.row][@"realName"];//姓名
         cell.lab2.text = _dataArr3[indexPath.section][indexPath.row][@"mobile"];//手机号
+        
+        
+        int maxPerNo = [_dataArr3[indexPath.section][indexPath.row][@"maxPerNo"]intValue];//总几期
+        NSString *repayperno = _dataArr3[indexPath.section][indexPath.row][@"repayPerNo"];//第几期
+        NSString *string = [NSString stringWithFormat:@"(第%@期/共%d期)",repayperno,maxPerNo];
+        if (maxPerNo > 0) {
+            cell.planLabel.text = [NSString stringWithFormat:@"计划回款日%@",string];//回款日
+        }else{
+            cell.planLabel.text = @"计划回款日";
+        }
+        [cell.planLabel setFontColor:UIColorWithRGB(0x999999) string:string];
+        
         cell.lab3.text = _dataArr3[indexPath.section][indexPath.row][@"repayPerDate"];//计划回款日
         cell.lab4.text = _dataArr3[indexPath.section][indexPath.row][@"paidTime"];//实际回款日
         NSString *refundAmtStr = _dataArr3[indexPath.section][indexPath.row][@"refundAmt"];//计划回款日

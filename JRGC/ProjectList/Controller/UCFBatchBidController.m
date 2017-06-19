@@ -97,6 +97,7 @@
     self.currentPage = 1;
     // 添加传统的下拉刷新
     [self.tableview addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(getNetDataFromNet)];
+    self.tableview.footer.hidden = YES;
 }
 
 #pragma mark - tableView method

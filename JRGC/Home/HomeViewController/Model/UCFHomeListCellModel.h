@@ -41,6 +41,7 @@ typedef enum : NSUInteger {
 @property (nonatomic, copy) NSString *p2pTransferNum;
 @property (nonatomic, copy) NSString *totalCount;
 @property (nonatomic, copy) NSString *zxTransferNum;
+@property (nonatomic, copy) NSString *transferNum;
 @property (nonatomic, assign) UCFHomeListCellModelType moedelType;
 @property (nonatomic, copy) NSString *backImage;
 

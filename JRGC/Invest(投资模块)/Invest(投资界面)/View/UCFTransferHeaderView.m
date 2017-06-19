@@ -36,7 +36,9 @@
     [self addSubview:cycleScrollView];
     self.cycleView = cycleScrollView;
     
-    self.index = 0;
+    self.backgroundColor = UIColorWithRGB(0xebebee);
+    
+//    self.index = 3;
     self.rateState = YES;
     self.limitState = YES;
     self.sumState = YES;
@@ -50,13 +52,13 @@
     [_sumOrderButton setTitleColor:UIColorWithRGB(0x555555) forState:UIControlStateNormal];
     
     [self.rateOrderButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 8, 0, 0)];
-    [self.rateOrderButton setImageEdgeInsets:UIEdgeInsetsMake(0, 55, 0, 0)];
+    [self.rateOrderButton setImageEdgeInsets:UIEdgeInsetsMake(0, 50, 0, 0)];
     
     [self.limitOrderButton setTitleEdgeInsets:UIEdgeInsetsMake(0, (ScreenWidth * 120.0f )/320.0f - ScreenWidth / 3.0 - 7, 0, 0)];
-    [self.limitOrderButton setImageEdgeInsets:UIEdgeInsetsMake(0, (ScreenWidth * 120.0f )/320.0f - ScreenWidth / 3.0 -7 + 48, 0, 0)];
+    [self.limitOrderButton setImageEdgeInsets:UIEdgeInsetsMake(0, (ScreenWidth * 120.0f )/320.0f - ScreenWidth / 3.0 -7 + 43, 0, 0)];
     
     [self.sumOrderButton setTitleEdgeInsets:UIEdgeInsetsMake(0, (ScreenWidth * 215.0f )/320.0f - ScreenWidth / 3.0 *2 - 7, 0, 0)];
-    [self.sumOrderButton setImageEdgeInsets:UIEdgeInsetsMake(0, (ScreenWidth * 215.0f )/320.0f - ScreenWidth / 3.0 *2 - 7 + 48, 0, 0)];
+    [self.sumOrderButton setImageEdgeInsets:UIEdgeInsetsMake(0, (ScreenWidth * 215.0f )/320.0f - ScreenWidth / 3.0 *2 - 7 + 43, 0, 0)];
     
     [self getNormalBannerData];
 }
@@ -70,7 +72,11 @@
 }
 - (void)initData
 {
-    [self rateOrder:_rateOrderButton];
+//    [self rateOrder:_rateOrderButton];
+    [self calcueAllStateButton];
+    [_rateOrderButton setTitleColor:UIColorWithRGB(0x555555) forState:UIControlStateNormal];
+    [_limitOrderButton setTitleColor:UIColorWithRGB(0x555555) forState:UIControlStateNormal];
+    [_sumOrderButton setTitleColor:UIColorWithRGB(0x555555) forState:UIControlStateNormal];
 }
 #pragma mark - button点击事件
 - (IBAction)rateOrder:(UIButton *)sender {

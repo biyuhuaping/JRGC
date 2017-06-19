@@ -45,6 +45,7 @@
     UCFTransferHeaderView *transferHeaderView = (UCFTransferHeaderView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFTransferHeaderView" owner:self options:nil] lastObject];
     transferHeaderView.frame = CGRectMake(0, 0, ScreenWidth, 215);
     self.tableview.tableHeaderView = transferHeaderView;
+    self.tableview.backgroundColor = UIColorWithRGB(0xebebee);
     transferHeaderView.delegate = self;
     self.transferHeaderView = transferHeaderView;
     [self.tableview addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(refreshData)];
@@ -54,14 +55,16 @@
     }];
 
     [self.tableview setSeparatorColor:[UIColor clearColor]];
-    [transferHeaderView initData];
+//    [transferHeaderView initData];
 
 }
 - (void)initData
 {
-    self.sortType = @"31";
+    self.sortType = @"";
     currentPage = 1;
-    self.dataArray = [NSMutableArray array];
+    if (self.dataArray == nil) {
+        self.dataArray = [NSMutableArray array];
+    }
 }
 #pragma mark - tableview 数据源
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
@@ -101,8 +104,9 @@
             [helper pushP2POrWJAuthorizationType:self.accoutType nav:self.navigationController];
             return;
         }
+        NSString *noPermissionTitleStr = self.accoutType == SelectAccoutTypeP2P ? @"目前标的详情只对出借人开放":@"目前标的详情只对认购人开放";
         if ([model.status integerValue] == 0 && [model.stopStatus intValue] != 0) {
-            UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前债权转让的详情只对投资人开放"];
+            UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:noPermissionTitleStr];
             [self.navigationController pushViewController:controller animated:YES];
             return;
         }
@@ -235,6 +239,10 @@
 - (void)refreshData
 {
     currentPage = 1;
+    if ([self.tableview.header isRefreshing]) {
+        [self initData];
+        [_transferHeaderView initData];
+    }
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self loadNetData];
     });
@@ -266,11 +274,14 @@
             NSArray *list_result = [[[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"pageData"] objectSafeArrayForKey:@"result"];
             if ([[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
                 NSString *oepnState =  [[dic objectSafeDictionaryForKey:@"data"] objectSafeForKey:@"openStatus"];
-                NSString *enjoyOpenStatus =  [[dic objectSafeDictionaryForKey:@"data"] objectSafeForKey:@"enjoyOpenStatus"];
+                NSString *enjoyOpenStatus =  [[dic objectSafeDictionaryForKey:@"data"] objectSafeForKey:@"zxOpenStatus"];
                 [UserInfoSingle sharedManager].openStatus = [oepnState integerValue];
                 [UserInfoSingle sharedManager].enjoyOpenStatus = [enjoyOpenStatus integerValue];
             }
-            if (currentPage == 1) {
+//            if (currentPage == 1) {
+//                [self.dataArray removeAllObjects];
+//            }
+            if ([self.tableview.header isRefreshing]) {
                 [self.dataArray removeAllObjects];
             }
             for (NSDictionary *dict in list_result) {

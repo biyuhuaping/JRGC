@@ -325,8 +325,8 @@
 - (void)homeList:(UCFHomeListViewController *)homeList tableView:(UITableView *)tableView didClickedWithModel:(UCFHomeListCellModel *)model withType:(UCFHomeListType)type
 {
      __weak typeof(self) weakSelf = self;
-    self.accoutType = [model.type intValue] == 2 ?SelectAccoutTypeHoner:SelectAccoutTypeP2P;
-    
+    self.accoutType = [model.type intValue] == 1 ? SelectAccoutTypeP2P:SelectAccoutTypeHoner;
+    NSString *noPermissionTitleStr = self.accoutType == SelectAccoutTypeP2P ? @"目前标的详情只对出借人开放":@"目前标的详情只对认购人开放";
     if (type == UCFHomeListTypeDetail) {
         if (model.moedelType == UCFHomeListCellModelTypeDefault) {
         
@@ -342,7 +342,7 @@
                 NSInteger isOrder = [model.isOrder integerValue];
                 if ([model.status intValue ] != 2){
                     if (isOrder <= 0) {
-                        UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前标的详情只对投资人开放"];
+                        UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:noPermissionTitleStr];
                         [self.navigationController pushViewController:controller animated:YES];
                         
                         return;
@@ -376,10 +376,11 @@
                                 }
                                 
                             }];
-                        } else {
-                            UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前标的详情只对投资人开放"];
-                            [self.navigationController pushViewController:controller animated:YES];
                         }
+//                        else {
+//                            UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前标的详情只对投资人开放"];
+//                            [self.navigationController pushViewController:controller animated:YES];
+//                        }
                     }else{
                         {
                             NSDictionary *parameter = @{@"Id": model.Id, @"userId": [UserInfoSingle sharedManager].userId, @"proType": model.type,@"type":@"3"};
