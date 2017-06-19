@@ -18,7 +18,7 @@
 -(void)setAccoutType:(SelectAccoutType)accoutType{
     _accoutType =accoutType;
     self.loadingLabel1.text = accoutType == SelectAccoutTypeHoner ? @"即将跳转工场尊享":@"即将跳转工场微金";
-    self.loadingLabel2.text = accoutType == SelectAccoutTypeHoner ? @"可直接访问www.gongchangzx.com":@"可直接访问www.gongchangp2p.com";
+    self.loadingLabel2.text = accoutType == SelectAccoutTypeHoner ? @"可直接访问www.gongchangzx.com":@"可直接访问www.gongchangp2p.cn";
 }
 -(void)removeLoadingView
 {
