@@ -197,7 +197,10 @@
             font = [UIFont systemFontOfSize:12];
         }
         //构建属性集合
-        NSDictionary *attributes = @{NSFontAttributeName:font, NSParagraphStyleAttributeName:textStyle, NSForegroundColorAttributeName :UIColorWithRGB(0x5555555)};
+        if (self.textColor == nil) {
+            self.textColor = UIColorWithRGB(0x5555555);
+        }
+        NSDictionary *attributes = @{NSFontAttributeName:font, NSParagraphStyleAttributeName:textStyle, NSForegroundColorAttributeName :self.textColor};
         //获得size
         CGSize stringSize = [currentText sizeWithAttributes:attributes];
         //垂直居中
@@ -270,6 +273,10 @@
     } repeats:YES];
     [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
     
+}
+-(void)setTextColor:(UIColor *)textColor{
+    _textColor = textColor;
+    [self setNeedsDisplay];
 }
 
 - (void)setProgressText:(NSString *)progressText
