@@ -76,6 +76,7 @@
     if ([self.tableView.header isRefreshing]) {
         self.currentPage = 1;
         [self.tableView.footer resetNoMoreData];
+        [self.honorHeaderView getNormalBannerData];
     }
     else if ([self.tableView.footer isRefreshing]) {
         self.currentPage ++;

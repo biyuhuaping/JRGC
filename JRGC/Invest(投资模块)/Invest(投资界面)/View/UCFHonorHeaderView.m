@@ -8,6 +8,7 @@
 
 #import "UCFHonorHeaderView.h"
 #import "SDCycleScrollView.h"
+#import "UCFCycleModel.h"
 
 @interface UCFHonorHeaderView ()
 @property (weak, nonatomic) SDCycleScrollView *cycleView;
@@ -39,20 +40,43 @@
 - (void)getNormalBannerData
 {
     __weak typeof(self) weakSelf = self;
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+//        [request setURL:[NSURL URLWithString:@""]];
+//        [request setHTTPMethod:@"GET"];
+//        NSHTTPURLResponse *urlResponse = nil;
+//        NSError *error = nil;
+//        NSData *recervedData = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&error];
+//        UIImage *image = [UIImage imageWithData:recervedData];
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            if (!image) {
+//                return ;
+//            }
+//            
+//        });
+//    });
+//    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSString *URL = [NSString stringWithFormat:@"https://fore.9888.cn/cms/api/appbanners.php?key=0ca175b9c0f726a831d895e&id=49&p=0"];
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-        [request setURL:[NSURL URLWithString:@"https://fore.9888.cn/cms/uploadfile/2017/0612/20170612105242430.jpg"]];
+        [request setURL:[NSURL URLWithString:URL]];
         [request setHTTPMethod:@"GET"];
         NSHTTPURLResponse *urlResponse = nil;
         NSError *error = nil;
         NSData *recervedData = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&error];
-        UIImage *image = [UIImage imageWithData:recervedData];
         dispatch_async(dispatch_get_main_queue(), ^{
-            if (!image) {
+            if (!recervedData) {
                 return ;
             }
-            weakSelf.cycleView.imagesGroup = @[image];
+            NSString *imageStr=[[NSMutableString alloc] initWithData:recervedData encoding:NSUTF8StringEncoding];
+            imageStr = [imageStr stringByReplacingOccurrencesOfString:@"\\" withString:@""];
+            imageStr = [imageStr stringByReplacingOccurrencesOfString:@"\"" withString:@""];
+            self.contentMode = UIViewContentModeScaleToFill;
+            UCFCycleModel *model = [[UCFCycleModel alloc] init];
+            model.thumb = imageStr;
+            weakSelf.cycleView.imagesGroup = @[model];
             [weakSelf.cycleView refreshImage];
+//            [self sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"banner_default"]];
         });
     });
 }
