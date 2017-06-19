@@ -106,7 +106,7 @@
         self.loadingView.hidden = YES;
         [self performSelector:@selector(removeLoadingView) withObject:nil afterDelay:0.0f];
         self.loadingLabel1.text = @"即将跳转工场微金";
-        self.loadingLabel2.text = @"可直接访问www.gongchangp2p.com";
+        self.loadingLabel2.text = @"可直接访问www.gongchangp2p.cn";
         _isShowOrHideAccoutMoney = [[NSUserDefaults standardUserDefaults] boolForKey:@"IsShowP2PAccoutMoney"];
     }
     //添加阴影图片

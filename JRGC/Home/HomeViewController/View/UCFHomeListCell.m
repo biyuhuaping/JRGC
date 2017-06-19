@@ -135,9 +135,11 @@
         NSArray *statusArr = @[@"未审核",@"等待确认",@"出借",@"流标",@"满标",@"回款中",@"已回款"];
         if (status>2) {
             self.circleProgressView.progressText = @"已售罄";
+            self.circleProgressView.textColor = UIColorWithRGB(0x909dae);
         }
         else {
-            if (([presenter.item.type isEqualToString:@"2"]) && status == 2) {
+            self.circleProgressView.textColor = UIColorWithRGB(0x555555);
+            if (([presenter.item.type isEqualToString:@"2"] || [presenter.item.type isEqualToString:@"3"]) && status == 2) {
                 self.circleProgressView.progressText = @"认购";
             }
             else
@@ -282,10 +284,14 @@
     
     NSInteger status = [microMoneyModel.status integerValue];
     NSArray *statusArr = @[@"未审核",@"等待确认",@"出借",@"流标",@"满标",@"回款中",@"已回款"];
+    
+   
     if (status>2) {
         self.circleProgressView.progressText = @"已售罄";
+        self.circleProgressView.textColor = UIColorWithRGB(0x909dae);
     }
     else {
+        self.circleProgressView.textColor = UIColorWithRGB(0x555555);
         if (microMoneyModel.modelType == UCFMicroMoneyModelTypeBatchBid && status == 2) {
             self.circleProgressView.progressText = @"批量出借";
         }
@@ -378,8 +384,10 @@
     NSArray *statusArr = @[@"未审核",@"等待确认",@"认购",@"流标",@"满标",@"回款中",@"已回款"];
     if (status>2) {
         self.circleProgressView.progressText = @"已售罄";
+        self.circleProgressView.textColor = UIColorWithRGB(0x909dae);
     }
     else {
+        self.circleProgressView.textColor = UIColorWithRGB(0x555555);
         self.circleProgressView.progressText = statusArr[status];
     }
     
