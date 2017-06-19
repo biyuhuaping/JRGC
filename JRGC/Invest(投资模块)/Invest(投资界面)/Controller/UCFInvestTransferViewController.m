@@ -62,11 +62,9 @@
 {
     self.sortType = @"";
     currentPage = 1;
-    if (self.dataArray) {
-        [self.dataArray removeAllObjects];
-    }
-    else
+    if (self.dataArray == nil) {
         self.dataArray = [NSMutableArray array];
+    }
 }
 #pragma mark - tableview 数据源
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
@@ -280,7 +278,10 @@
                 [UserInfoSingle sharedManager].openStatus = [oepnState integerValue];
                 [UserInfoSingle sharedManager].enjoyOpenStatus = [enjoyOpenStatus integerValue];
             }
-            if (currentPage == 1) {
+//            if (currentPage == 1) {
+//                [self.dataArray removeAllObjects];
+//            }
+            if ([self.tableview.header isRefreshing]) {
                 [self.dataArray removeAllObjects];
             }
             for (NSDictionary *dict in list_result) {
