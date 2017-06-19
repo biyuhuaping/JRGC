@@ -17,4 +17,6 @@ typedef enum {
 
 - (void)getBannerImageStyle:(BannerStyle)style;
 
+- (void)getBannerImageStyle:(BannerStyle)style withId:(NSString *)Id;
+
 @end
