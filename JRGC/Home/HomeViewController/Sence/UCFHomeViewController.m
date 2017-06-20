@@ -422,7 +422,7 @@
             [self.navigationController pushViewController:batchBidVc animated:YES];
 
         }
-        else if (model.moedelType == UCFHomeListCellModelTypeOneImageBondTransfer) {
+        else if (model.moedelType == UCFHomeListCellModelTypeOneImageTransfer) {
             // 债券转让
             AppDelegate *appdel = (AppDelegate *)[UIApplication sharedApplication].delegate;
             UCFInvestViewController *invest = (UCFInvestViewController *)[[appdel.tabBarController.childViewControllers objectAtIndex:1].childViewControllers firstObject];
@@ -432,7 +432,7 @@
             }
             [appdel.tabBarController setSelectedIndex:1];
         }
-        else if (model.moedelType == UCFHomeListCellModelTypeOneImageHonorTransfer) {
+        else if (model.moedelType == UCFHomeListCellModelTypeOneImageTransfer) {
             // 尊享转让
             UCFHonerViewController *horner = [[UCFHonerViewController alloc] initWithNibName:@"UCFHonerViewController" bundle:nil];
             horner.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight - 64);
