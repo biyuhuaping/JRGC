@@ -18,7 +18,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zGg-01-kDD">
                     <rect key="frame" x="0.0" y="110" width="465" height="60"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EoR-31-dha">
+                        <view tag="100" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EoR-31-dha">
                             <rect key="frame" x="0.0" y="0.0" width="116.5" height="60"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="transfer_icon_01" translatesAutoresizingMaskIntoConstraints="NO" id="lMs-ak-xyj">
@@ -43,7 +43,32 @@
                                 <constraint firstItem="eTL-PN-uLx" firstAttribute="top" secondItem="lMs-ak-xyj" secondAttribute="bottom" constant="3" id="t4x-ZX-L4i"/>
                             </constraints>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Igt-CJ-gih">
+                        <view tag="101" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PVp-6D-5Lh">
+                            <rect key="frame" x="116" y="0.0" width="116" height="60"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="transfer_icon_03" translatesAutoresizingMaskIntoConstraints="NO" id="cqr-Rw-9BO">
+                                    <rect key="frame" x="41" y="5.5" width="33" height="33"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="33" id="GIp-Mh-38L"/>
+                                        <constraint firstAttribute="height" constant="33" id="QkY-Tq-WFc"/>
+                                    </constraints>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="贴息项目" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J3Y-Mo-iuY">
+                                    <rect key="frame" x="32.5" y="41.5" width="50" height="15"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                    <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="cqr-Rw-9BO" firstAttribute="centerX" secondItem="PVp-6D-5Lh" secondAttribute="centerX" id="4jf-1w-BQB"/>
+                                <constraint firstItem="J3Y-Mo-iuY" firstAttribute="centerX" secondItem="cqr-Rw-9BO" secondAttribute="centerX" id="QyD-Om-Kjk"/>
+                                <constraint firstItem="cqr-Rw-9BO" firstAttribute="centerY" secondItem="PVp-6D-5Lh" secondAttribute="centerY" constant="-8" id="XXU-wE-Lrq"/>
+                                <constraint firstItem="J3Y-Mo-iuY" firstAttribute="top" secondItem="cqr-Rw-9BO" secondAttribute="bottom" constant="3" id="v1y-8v-aJK"/>
+                            </constraints>
+                        </view>
+                        <view tag="102" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Igt-CJ-gih">
                             <rect key="frame" x="232.5" y="0.0" width="116.5" height="60"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="transfer_icon_02" translatesAutoresizingMaskIntoConstraints="NO" id="tgX-77-ghc">
@@ -68,7 +93,7 @@
                                 <constraint firstItem="9s0-Ut-OJJ" firstAttribute="top" secondItem="tgX-77-ghc" secondAttribute="bottom" constant="3" id="zPW-B3-F8t"/>
                             </constraints>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gZE-ni-mTk">
+                        <view tag="103" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gZE-ni-mTk">
                             <rect key="frame" x="349" y="0.0" width="116" height="60"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="transfer_icon_04" translatesAutoresizingMaskIntoConstraints="NO" id="4C2-XK-a4r">
@@ -91,31 +116,6 @@
                                 <constraint firstItem="4C2-XK-a4r" firstAttribute="centerX" secondItem="gZE-ni-mTk" secondAttribute="centerX" id="B5g-aa-W69"/>
                                 <constraint firstItem="N4B-D0-YDS" firstAttribute="centerX" secondItem="4C2-XK-a4r" secondAttribute="centerX" id="uBt-Xg-y9Q"/>
                                 <constraint firstItem="N4B-D0-YDS" firstAttribute="top" secondItem="4C2-XK-a4r" secondAttribute="bottom" constant="3" id="vbx-Xc-nAz"/>
-                            </constraints>
-                        </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PVp-6D-5Lh">
-                            <rect key="frame" x="116.5" y="0.0" width="116" height="60"/>
-                            <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="transfer_icon_03" translatesAutoresizingMaskIntoConstraints="NO" id="cqr-Rw-9BO">
-                                    <rect key="frame" x="41" y="5.5" width="33" height="33"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="33" id="GIp-Mh-38L"/>
-                                        <constraint firstAttribute="height" constant="33" id="QkY-Tq-WFc"/>
-                                    </constraints>
-                                </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="贴息项目" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J3Y-Mo-iuY">
-                                    <rect key="frame" x="32.5" y="41.5" width="50" height="15"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                    <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                            </subviews>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <constraints>
-                                <constraint firstItem="cqr-Rw-9BO" firstAttribute="centerX" secondItem="PVp-6D-5Lh" secondAttribute="centerX" id="4jf-1w-BQB"/>
-                                <constraint firstItem="J3Y-Mo-iuY" firstAttribute="centerX" secondItem="cqr-Rw-9BO" secondAttribute="centerX" id="QyD-Om-Kjk"/>
-                                <constraint firstItem="cqr-Rw-9BO" firstAttribute="centerY" secondItem="PVp-6D-5Lh" secondAttribute="centerY" constant="-8" id="XXU-wE-Lrq"/>
-                                <constraint firstItem="J3Y-Mo-iuY" firstAttribute="top" secondItem="cqr-Rw-9BO" secondAttribute="bottom" constant="3" id="v1y-8v-aJK"/>
                             </constraints>
                         </view>
                     </subviews>
