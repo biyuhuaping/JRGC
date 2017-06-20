@@ -15,6 +15,8 @@
 @property (nonatomic,copy) NSString *title;
 @property (nonatomic,copy) NSString *url;
 @property (nonatomic,copy) NSString *is_activity;
+@property (nonatomic,copy) NSString *down_time;
+@property (nonatomic,copy) NSString *publish_time;
 
 + (UCFCycleModel *)getCycleModelByDataDict:(NSDictionary *)dataDict;
 @end

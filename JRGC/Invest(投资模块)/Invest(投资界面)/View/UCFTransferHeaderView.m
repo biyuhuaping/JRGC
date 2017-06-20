@@ -8,6 +8,9 @@
 
 #import "UCFTransferHeaderView.h"
 #import "SDCycleScrollView.h"
+#import "UCFCycleModel.h"
+#import "JSONKit.h"
+#import "UIImageView+WebCache.h"
 
 @interface UCFTransferHeaderView ()
 @property (weak, nonatomic) SDCycleScrollView *cycleView;
@@ -21,9 +24,18 @@
 @property (assign, nonatomic) BOOL limitState;
 @property (assign, nonatomic) BOOL sumState;
 @property (assign, nonatomic) NSInteger index;
+@property (strong, nonatomic) NSMutableArray *iconArray;
 @end
 
 @implementation UCFTransferHeaderView
+
+- (NSMutableArray *)iconArray
+{
+    if (nil == _iconArray) {
+        _iconArray = [NSMutableArray array];
+    }
+    return _iconArray;
+}
 
 
 - (void)awakeFromNib
@@ -67,7 +79,24 @@
 {
     [super layoutSubviews];
     self.cycleView.frame = CGRectMake(0, 10, ScreenWidth, 100);
-    
+    if (self.iconArray.count>0) {
+        for (UIView *view in self.buttonBaseView.subviews) {
+            NSInteger index = view.tag - 100;
+            if (index >= 0) {
+                UCFCycleModel *model = [self.iconArray objectAtIndex:index];
+                for (UIView *view1 in view.subviews) {
+                    if ([view1 isKindOfClass:[UIImageView class]]) {
+                        UIImageView *image = (UIImageView *)view1;
+                        [image sd_setImageWithURL:[NSURL URLWithString:model.thumb]];
+                    }
+                    else if ([view1 isKindOfClass:[UILabel class]]) {
+                        UILabel *label = (UILabel *)view1;
+                        label.text = model.title;
+                    }
+                }
+            }
+        }
+    }
     
 }
 - (void)initData
@@ -161,21 +190,41 @@
 {
     __weak typeof(self) weakSelf = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSString *URL = [NSString stringWithFormat:@"https://fore.9888.cn/cms/api/appbanner_obj.php?key=0ca175b9c0f726a831d895e&bid=51&iid=50"];
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-        [request setURL:[NSURL URLWithString:@"https://fore.9888.cn/cms/uploadfile/2017/0612/20170612105400502.jpg"]];
+        [request setURL:[NSURL URLWithString:URL]];
         [request setHTTPMethod:@"GET"];
         NSHTTPURLResponse *urlResponse = nil;
         NSError *error = nil;
         NSData *recervedData = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&error];
-        UIImage *image = [UIImage imageWithData:recervedData];
         dispatch_async(dispatch_get_main_queue(), ^{
-            if (!image) {
+            if (!recervedData) {
                 return ;
             }
-            weakSelf.cycleView.imagesGroup = @[image];
+            NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:recervedData
+                                                                options:NSJSONReadingMutableContainers
+                                                                  error:nil];
+            self.contentMode = UIViewContentModeScaleToFill;
+            
+            NSArray *bannerArr = [dic objectForKey:@"banner"];
+            NSMutableArray *tempBanner = [NSMutableArray array];
+            for (NSDictionary *dic in bannerArr) {
+                UCFCycleModel *model = [UCFCycleModel getCycleModelByDataDict:dic];
+                [tempBanner addObject:model];
+            }
+            weakSelf.cycleView.imagesGroup = tempBanner;
             [weakSelf.cycleView refreshImage];
+            
+            [weakSelf.iconArray removeAllObjects];
+            NSArray *iconArr = [dic objectForKey:@"icon"];
+            for (NSDictionary *dict in iconArr) {
+                UCFCycleModel *model = [UCFCycleModel getCycleModelByDataDict:dict];
+                [weakSelf.iconArray addObject:model];
+            }
+            
         });
     });
 }
+
 
 @end

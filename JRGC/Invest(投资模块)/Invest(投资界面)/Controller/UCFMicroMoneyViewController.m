@@ -77,6 +77,7 @@
 //    });
 }
 -(void)reloadData{
+    [self.microMoneyHeaderView getNormalBannerData];
    [ self.apiManager getMicroMoneyFromNet];
 }
 

@@ -242,6 +242,7 @@
     if ([self.tableview.header isRefreshing]) {
         [self initData];
         [_transferHeaderView initData];
+        [_transferHeaderView getNormalBannerData];
     }
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self loadNetData];
@@ -278,12 +279,12 @@
                 [UserInfoSingle sharedManager].openStatus = [oepnState integerValue];
                 [UserInfoSingle sharedManager].enjoyOpenStatus = [enjoyOpenStatus integerValue];
             }
-//            if (currentPage == 1) {
-//                [self.dataArray removeAllObjects];
-//            }
-            if ([self.tableview.header isRefreshing]) {
+            if (currentPage == 1) {
                 [self.dataArray removeAllObjects];
             }
+//            if ([self.tableview.header isRefreshing]) {
+//                [self.dataArray removeAllObjects];
+//            }
             for (NSDictionary *dict in list_result) {
                 UCFTransferModel *model = [UCFTransferModel transferWithDict:dict];
                 [self.dataArray addObject:model];

@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface UCFMicroMoneyHeaderView : UIView
-
+- (void)getNormalBannerData;
 @end
