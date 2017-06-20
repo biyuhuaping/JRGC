@@ -123,7 +123,12 @@
     NSArray *typeArr = @[@"自由转让，灵活变现", @""];
     for (int i=0; i<2; i++) {
         UCFHomeListCellModel *model = [[UCFHomeListCellModel alloc] init];
-        model.moedelType = i+UCFHomeListCellModelTypeOneImageBondTransfer + i * 1;
+        if (i==0) {
+            model.moedelType = UCFHomeListCellModelTypeOneImageTransfer;
+        }
+        else if (i==1) {
+            model.moedelType = UCFHomeListCellModelTypeOneImageBatchCycle;
+        }
         model.prdName = [titleArr objectAtIndex:i];
         model.type = [typeArr objectAtIndex:i];
         model.backImage = [imageArr objectAtIndex:i];

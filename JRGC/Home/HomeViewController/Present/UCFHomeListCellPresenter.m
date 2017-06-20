@@ -102,11 +102,8 @@
     if (self.item.moedelType == UCFHomeListCellModelTypeDefault) {
         return 100.0;
     }
-    else if (self.item.moedelType == UCFHomeListCellModelTypeOneImageBatchLending || self.item.moedelType == UCFHomeListCellModelTypeOneImageBondTransfer || self.item.moedelType == UCFHomeListCellModelTypeOneImageBatchCycle) {
+    else {
         return (ScreenWidth - 20) / CELLRATE + 15;
-    }
-    else if (self.item.moedelType == UCFHomeListCellModelTypeOneImageHonorTransfer) {
-        return (ScreenWidth - 20) / CELLRATE + 10;
     }
     return 0;
 }

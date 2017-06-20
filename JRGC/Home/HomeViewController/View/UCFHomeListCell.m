@@ -172,10 +172,13 @@
             self.proSignBackView.hidden = YES;
         }
     }
-    else if (presenter.modelType == UCFHomeListCellModelTypeOneImageBatchLending || presenter.modelType == UCFHomeListCellModelTypeOneImageHonorTransfer || presenter.modelType == UCFHomeListCellModelTypeOneImageBondTransfer)  {
+    else if (presenter.modelType == UCFHomeListCellModelTypeOneImageBatchLending || presenter.modelType == UCFHomeListCellModelTypeOneImageTransfer)  {
         self.oneImageView.hidden = NO;
         self.titleBackView.hidden = NO;
         self.numBackView.hidden = NO;
+        for (UIView *view in self.titleBackView.subviews) {
+            view.hidden = NO;
+        }
         self.oneImageBackView.image = [UIImage imageNamed:self.presenter.item.backImage];
         self.oneImageTitleLabel.text = presenter.proTitle;
         self.oneImageDescribeLabel.text = presenter.type;
@@ -243,21 +246,21 @@
         [self.rateLabel setFont:[UIFont systemFontOfSize:12] string:@"%"];
     }
     else if (self.presenter.modelType == UCFHomeListCellModelTypeOneImageBatchLending)  {
+        self.oneImageUpHeight.constant = 10;
+        self.oneImageDownHeight.constant = 10;
         self.oneImageNumLabel.text = self.presenter.item.totalCount;
     }
-    else if (self.presenter.modelType == UCFHomeListCellModelTypeOneImageBondTransfer) {
-        self.oneImageNumLabel.text = self.presenter.item.p2pTransferNum;
-        self.oneImageDownHeight.constant = 5;
-    }
-    else if (self.presenter.modelType == UCFHomeListCellModelTypeOneImageHonorTransfer) {
-        self.oneImageNumLabel.text = self.presenter.item.zxTransferNum;
-        self.oneImageUpHeight.constant = 5;
+    else if (self.presenter.modelType == UCFHomeListCellModelTypeOneImageTransfer) {
+        self.oneImageNumLabel.text = self.presenter.item.transferNum;
+        self.oneImageUpHeight.constant = 10;
         self.oneImageDownHeight.constant = 5;
     }
     else if (self.presenter.modelType == UCFHomeListCellModelTypeOneImageBatchCycle) {
         self.oneImageUpHeight.constant = 5;
         self.oneImageDownHeight.constant = 10;
     }
+    self.oneImageTitleLabel.text = self.presenter.proTitle;
+    self.oneImageDescribeLabel.text = self.presenter.type;
     
     if (self.oneImageNumLabel.text.length == 1) {
         self.numBackViewW.constant = 22;
