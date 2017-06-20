@@ -204,6 +204,9 @@
             NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:recervedData
                                                                 options:NSJSONReadingMutableContainers
                                                                   error:nil];
+            if (nil == dic) {
+                return;
+            }
             self.contentMode = UIViewContentModeScaleToFill;
             
             NSArray *bannerArr = [dic objectForKey:@"banner"];

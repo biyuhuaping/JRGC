@@ -29,6 +29,7 @@
 - (NSString *)totalCount;
 - (NSString *)p2pTransferNum;
 - (NSString *)zxTransferNum;
+- (NSString *)transferNum;
 
 - (CGFloat)cellHeight;
 @end
