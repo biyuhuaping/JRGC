@@ -279,12 +279,12 @@
                 [UserInfoSingle sharedManager].openStatus = [oepnState integerValue];
                 [UserInfoSingle sharedManager].enjoyOpenStatus = [enjoyOpenStatus integerValue];
             }
-//            if (currentPage == 1) {
-//                [self.dataArray removeAllObjects];
-//            }
-            if ([self.tableview.header isRefreshing]) {
+            if (currentPage == 1) {
                 [self.dataArray removeAllObjects];
             }
+//            if ([self.tableview.header isRefreshing]) {
+//                [self.dataArray removeAllObjects];
+//            }
             for (NSDictionary *dict in list_result) {
                 UCFTransferModel *model = [UCFTransferModel transferWithDict:dict];
                 [self.dataArray addObject:model];
