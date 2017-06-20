@@ -88,8 +88,10 @@
     {
         return;
     }
+    
     NSArray *arr = [NSArray arrayWithObjects:@".9888.cn",@"m.dougemall.com",@".9888keji.com",@".gongchangp2p.cn",@".gongchangzx.com",@".gongchangp2p.com", nil];
     [self addWebViewCookie:value WithYUArr:arr];
+    
 //    NSMutableDictionary *cookieProperties = [NSMutableDictionary dictionary];
 //    [cookieProperties setObject:@"jg_nyscclnjsygjr" forKey:NSHTTPCookieName];
 //    [cookieProperties setObject:value forKey:NSHTTPCookieValue];//dic[@"jg_ckie"]
