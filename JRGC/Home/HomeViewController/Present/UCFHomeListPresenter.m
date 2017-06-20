@@ -176,7 +176,7 @@
             temp2.item.totalCount = listInfo.totalCount;
             
             UCFHomeListCellPresenter *temp30 = [self.groupPresenter3.group.prdlist firstObject];
-            temp30.item.p2pTransferNum = listInfo.transferNum;
+            temp30.item.transferNum = listInfo.transferNum;
             
             UCFHomeListCellPresenter *temp31 = [self.groupPresenter3.group.prdlist objectAtIndex:1];
             temp31.item.zxTransferNum = listInfo.zxTransferNum;

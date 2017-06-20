@@ -97,6 +97,11 @@
     return self.item.zxTransferNum;
 }
 
+- (NSString *)transferNum
+{
+    return self.item.transferNum;
+}
+
 - (CGFloat)cellHeight
 {
     if (self.item.moedelType == UCFHomeListCellModelTypeDefault) {

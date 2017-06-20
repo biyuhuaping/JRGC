@@ -174,6 +174,7 @@
     }
     else if (presenter.modelType == UCFHomeListCellModelTypeOneImageBatchLending || presenter.modelType == UCFHomeListCellModelTypeOneImageTransfer)  {
         self.oneImageView.hidden = NO;
+        self.oneImageNumLabel.hidden = NO;
         self.titleBackView.hidden = NO;
         self.numBackView.hidden = NO;
         for (UIView *view in self.titleBackView.subviews) {
@@ -251,7 +252,7 @@
         self.oneImageNumLabel.text = self.presenter.item.totalCount;
     }
     else if (self.presenter.modelType == UCFHomeListCellModelTypeOneImageTransfer) {
-        self.oneImageNumLabel.text = self.presenter.item.transferNum;
+        self.oneImageNumLabel.text = self.presenter.transferNum;
         self.oneImageUpHeight.constant = 10;
         self.oneImageDownHeight.constant = 5;
     }
