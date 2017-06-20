@@ -66,36 +66,55 @@
     
     [self addTestCookies];
 }
-
++ (void)addWebViewCookie:(NSString *)value WithYUArr:(NSArray *)arr
+{
+    for (int i = 0; i < arr.count; i++) {
+        NSMutableDictionary *cookieProperties = [NSMutableDictionary dictionary];
+        [cookieProperties setObject:@"jg_nyscclnjsygjr" forKey:NSHTTPCookieName];
+        [cookieProperties setObject:value forKey:NSHTTPCookieValue];//dic[@"jg_ckie"]
+        [cookieProperties setObject:arr[i] forKey:NSHTTPCookieDomain];
+        [cookieProperties setObject:@"/" forKey:NSHTTPCookiePath];
+        [cookieProperties setObject:@"0" forKey:NSHTTPCookieVersion];
+        [cookieProperties setObject:@"true" forKey:@"HttpOnly"];
+        //zrc fixed
+        [cookieProperties setObject:[NSDate dateWithTimeIntervalSinceNow:60*60*24*365]forKey:NSHTTPCookieExpires];
+        NSHTTPCookie *cookieuser = [NSHTTPCookie cookieWithProperties:cookieProperties];
+        [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookieuser];
+    }
+}
 + (void)setHTMLCookies:(NSString *)value
 {
     if(value == nil || [value isEqualToString:@""])
     {
         return;
     }
-    NSMutableDictionary *cookieProperties = [NSMutableDictionary dictionary];
-    [cookieProperties setObject:@"jg_nyscclnjsygjr" forKey:NSHTTPCookieName];
-    [cookieProperties setObject:value forKey:NSHTTPCookieValue];//dic[@"jg_ckie"]
-    [cookieProperties setObject:@".9888.cn" forKey:NSHTTPCookieDomain];
-    [cookieProperties setObject:@"/" forKey:NSHTTPCookiePath];
-    [cookieProperties setObject:@"0" forKey:NSHTTPCookieVersion];
-    [cookieProperties setObject:@"true" forKey:@"HttpOnly"];
-    //zrc fixed
-    [cookieProperties setObject:[NSDate dateWithTimeIntervalSinceNow:60*60*24*365]forKey:NSHTTPCookieExpires];
-    NSHTTPCookie *cookieuser = [NSHTTPCookie cookieWithProperties:cookieProperties];
-    [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookieuser];
-
     
-    NSMutableDictionary *cookieProperties1 = [NSMutableDictionary dictionary];
-    [cookieProperties1 setObject:@"jg_nyscclnjsygjr" forKey:NSHTTPCookieName];
-    [cookieProperties1 setObject:value forKey:NSHTTPCookieValue];//dic[@"jg_ckie"]
-    [cookieProperties1 setObject:@"m.dougemall.com" forKey:NSHTTPCookieDomain];
-    [cookieProperties1 setObject:@"/" forKey:NSHTTPCookiePath];
-    [cookieProperties1 setObject:@"0" forKey:NSHTTPCookieVersion];
-    [cookieProperties1 setObject:@"true" forKey:@"HttpOnly"];
-    [cookieProperties1 setObject:[NSDate dateWithTimeIntervalSinceNow:60*60*24*365]forKey:NSHTTPCookieExpires];
-    NSHTTPCookie *cookieuser1 = [NSHTTPCookie cookieWithProperties:cookieProperties1];
-    [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookieuser1];
+    NSArray *arr = [NSArray arrayWithObjects:@".9888.cn",@"m.dougemall.com",@".9888keji.com",@".gongchangp2p.cn",@".gongchangzx.com",@".gongchangp2p.com", nil];
+    [self addWebViewCookie:value WithYUArr:arr];
+    
+//    NSMutableDictionary *cookieProperties = [NSMutableDictionary dictionary];
+//    [cookieProperties setObject:@"jg_nyscclnjsygjr" forKey:NSHTTPCookieName];
+//    [cookieProperties setObject:value forKey:NSHTTPCookieValue];//dic[@"jg_ckie"]
+//    [cookieProperties setObject:@".9888.cn" forKey:NSHTTPCookieDomain];
+//    [cookieProperties setObject:@"/" forKey:NSHTTPCookiePath];
+//    [cookieProperties setObject:@"0" forKey:NSHTTPCookieVersion];
+//    [cookieProperties setObject:@"true" forKey:@"HttpOnly"];
+//    //zrc fixed
+//    [cookieProperties setObject:[NSDate dateWithTimeIntervalSinceNow:60*60*24*365]forKey:NSHTTPCookieExpires];
+//    NSHTTPCookie *cookieuser = [NSHTTPCookie cookieWithProperties:cookieProperties];
+//    [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookieuser];
+//
+//    
+//    NSMutableDictionary *cookieProperties1 = [NSMutableDictionary dictionary];
+//    [cookieProperties1 setObject:@"jg_nyscclnjsygjr" forKey:NSHTTPCookieName];
+//    [cookieProperties1 setObject:value forKey:NSHTTPCookieValue];//dic[@"jg_ckie"]
+//    [cookieProperties1 setObject:@"m.dougemall.com" forKey:NSHTTPCookieDomain];
+//    [cookieProperties1 setObject:@"/" forKey:NSHTTPCookiePath];
+//    [cookieProperties1 setObject:@"0" forKey:NSHTTPCookieVersion];
+//    [cookieProperties1 setObject:@"true" forKey:@"HttpOnly"];
+//    [cookieProperties1 setObject:[NSDate dateWithTimeIntervalSinceNow:60*60*24*365]forKey:NSHTTPCookieExpires];
+//    NSHTTPCookie *cookieuser1 = [NSHTTPCookie cookieWithProperties:cookieProperties1];
+//    [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookieuser1];
 }
 + (void)addTestCookies
 {
