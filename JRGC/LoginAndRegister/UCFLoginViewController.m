@@ -32,6 +32,7 @@
     BOOL _sameUser;
 }
 @property (nonatomic,strong) CWLivessViewController *controller;//---qyy0815
+@property (nonatomic,assign) NSInteger *selectTag;//0 为个人登录，1位企业登录
 @end
 
 @implementation UCFLoginViewController
@@ -165,6 +166,10 @@
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     FMDeviceManager_t *manager = [FMDeviceManager sharedManager];
     manager->getDeviceInfoAsync(nil, self);
+}
+-(void)seletedSegmentedControl:(NSInteger)seletedTag
+{
+    self.selectTag = seletedTag;
 }
 
 

@@ -10,7 +10,7 @@
 
 @interface SubInvestmentCell : InvestmentCell
 
-@property (nonatomic,assign)SelectAccoutType accoutType;//账户类型
+@property (nonatomic,strong)NSString *p2POrHonerType;//账户类型
 @property (weak, nonatomic) IBOutlet UIButton *msgButton;
 
 @end

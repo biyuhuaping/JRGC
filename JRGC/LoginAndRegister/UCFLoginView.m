@@ -12,16 +12,19 @@
 #import "UIButton+Misc.h"
 #import "AuxiliaryFunc.h"
 #import "BaseAlertView.h"
-
-@interface UCFLoginView ()
+#import "UCFSelectedView.h"
+#import "HMSegmentedControl.h"
+@interface UCFLoginView ()<UCFSelectedViewDelegate>
 {
     UITextField *_userNameTfd;//用户名
     UITextField *_passWordTfd;//密码
     UIButton *_loginBtn;//登录按钮
     UIButton *_forgetPasswordBtn;//忘记密码
     UIButton *_registerBtn;//注册
+    UILabel *_describeLabel;
 }
 
+@property(nonatomic ,strong) UCFSelectedView *itemSeletedView;
 @end
 
 @implementation UCFLoginView
@@ -58,7 +61,14 @@
 //初始化登录页
 - (void)initLoginViews
 {
-    _userNameTfd = [UITextFieldFactory getTextFieldObjectWithFrame:CGRectMake(XPOS, YPOS, ScreenWidth - 30, TEXTFIELDHEIGHT) delegate:self placeholder:@"用户名/邮箱/手机号" returnKeyType:UIReturnKeyDefault];
+#pragma mark - add segmentcontrol and segmentcontrol clicked method
+    _itemSeletedView =[[UCFSelectedView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 44)];
+    self.itemSeletedView.sectionTitles = @[@"个人登录", @"企业登录"];
+    self.itemSeletedView.backgroundColor = [UIColor whiteColor];
+    self.itemSeletedView.delegate = self;
+    [self addSubview:_itemSeletedView];
+ 
+    _userNameTfd = [UITextFieldFactory getTextFieldObjectWithFrame:CGRectMake(XPOS, CGRectGetMaxY(self.itemSeletedView.frame)+ 10, ScreenWidth - 30, TEXTFIELDHEIGHT) delegate:self placeholder:@"用户名/邮箱/手机号" returnKeyType:UIReturnKeyDefault];
     
     _userNameTfd.backgroundColor = [UIColor whiteColor];
     _userNameTfd.layer.borderColor = UIColorWithRGB(0xdddddd).CGColor;
@@ -113,12 +123,12 @@
     _loginBtn.layer.masksToBounds = YES;
     [self addSubview:_loginBtn];
     
-    UILabel *describeLabel = [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth - XPOS - 200, CGRectGetMaxY(_loginBtn.frame) + 8, 200, 18)];
-    describeLabel.font = [UIFont systemFontOfSize:15];
-    describeLabel.textColor = UIColorWithRGB(0x999999);
-    describeLabel.textAlignment = NSTextAlignmentRight;
-    describeLabel.backgroundColor = [UIColor clearColor];
-    [self addSubview:describeLabel];
+    _describeLabel = [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth - XPOS - 200, CGRectGetMaxY(_loginBtn.frame) + 8, 200, 18)];
+    _describeLabel.font = [UIFont systemFontOfSize:15];
+    _describeLabel.textColor = UIColorWithRGB(0x999999);
+    _describeLabel.textAlignment = NSTextAlignmentRight;
+    _describeLabel.backgroundColor = [UIColor clearColor];
+    [self addSubview:_describeLabel];
     
     UILabel *forgetLabel = [[UILabel alloc] initWithFrame:CGRectMake(XPOS, CGRectGetMaxY(_loginBtn.frame) + 8, 200, 18)];
     forgetLabel.font = [UIFont systemFontOfSize:13];
@@ -137,7 +147,7 @@
     NSRange rang2 = [strTitle rangeOfString:@"没有账号？"];
     [str setAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"Helvetica" size:13], NSForegroundColorAttributeName:UIColorWithRGB(0x4aa1f9)} range:rang];
     [str setAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"Helvetica" size:13], NSForegroundColorAttributeName:UIColorWithRGB(0x999999)} range:rang2];
-    describeLabel.attributedText = str;
+    _describeLabel.attributedText = str;
     
     _forgetPasswordBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     _forgetPasswordBtn.frame = CGRectMake(0, 0, 100, 18);
@@ -149,10 +159,10 @@
     _registerBtn.frame = CGRectMake(0, 0, 200, 18);
     _registerBtn.backgroundColor = [UIColor clearColor];
     [_registerBtn addTarget:self action:@selector(regisiterBtn:) forControlEvents:UIControlEventTouchUpInside];
-    [describeLabel addSubview:_registerBtn];
+    [_describeLabel addSubview:_registerBtn];
     
     forgetLabel.userInteractionEnabled = YES;
-    describeLabel.userInteractionEnabled = YES;
+    _describeLabel.userInteractionEnabled = YES;
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.bounds = CGRectMake(0, 0, 197, 23);
@@ -164,7 +174,15 @@
     button.userInteractionEnabled = NO;
     [self addSubview:button];
 }
-
+- (void)SelectedView:(UCFSelectedView *)selectedView didClickSelectedItemWithSeg:(HMSegmentedControl *)sender
+{
+    _describeLabel.hidden = sender.selectedSegmentIndex == 1;
+    _registerBtn.userInteractionEnabled = sender.selectedSegmentIndex == 0;
+    _userNameTfd.placeholder = sender.selectedSegmentIndex == 0 ? @"用户名/邮箱/手机号":@"手机号";
+    if ([self.delegate respondsToSelector:@selector(seletedSegmentedControl:)]) {
+        [self.delegate seletedSegmentedControl:sender.selectedSegmentIndex];
+    }
+}
 - (void)setFirstResponder
 {
     [_userNameTfd becomeFirstResponder];
