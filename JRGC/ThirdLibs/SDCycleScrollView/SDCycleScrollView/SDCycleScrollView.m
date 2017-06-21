@@ -165,7 +165,11 @@ NSString * const ID = @"cycleCell";
     [super layoutSubviews];
     
     _mainView.frame = self.bounds;
+
     if (_mainView.contentOffset.x == 0) {
+        if(_totalItemsCount <= 0){
+            return;
+        }
         [_mainView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:_totalItemsCount * 0.5 inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
     }
     
