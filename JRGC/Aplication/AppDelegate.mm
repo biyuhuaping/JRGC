@@ -153,6 +153,7 @@
             _isShowAdversement = YES;
         } else {
             _isShowAdversement = NO;
+            _advertisementView = nil;
 //            if (!self.lockVc) {
 //                [[MongoliaLayerCenter sharedManager] showLogic];
 //            }
