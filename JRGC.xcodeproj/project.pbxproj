@@ -596,6 +596,7 @@
 		A829E0A81ED42D0C00616FFE /* guideImage7_4.png in Resources */ = {isa = PBXBuildFile; fileRef = A829E0A61ED42D0C00616FFE /* guideImage7_4.png */; };
 		A8A3A57F1EE95BDA00D9C06D /* UCFInvestAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A8A3A57E1EE95BDA00D9C06D /* UCFInvestAPIManager.m */; };
 		A8AD2E3E1EB979760013DB7C /* MongoliaLayerCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = A8AD2E3D1EB979760013DB7C /* MongoliaLayerCenter.m */; };
+		A8AD6F851EFA6BDE000AF323 /* PagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = A8AD6F841EFA6BDE000AF323 /* PagerView.m */; };
 		A8B6B6801EC9A9F000D4E86F /* WalletBankView.m in Sources */ = {isa = PBXBuildFile; fileRef = A8B6B67F1EC9A9F000D4E86F /* WalletBankView.m */; };
 		A8B6B6821EC9AA0900D4E86F /* WalletBankView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8B6B6811EC9AA0900D4E86F /* WalletBankView.xib */; };
 		A8CE17731EC44BF8009BD954 /* UCFWalletSelectBankCarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8CE17711EC44BF8009BD954 /* UCFWalletSelectBankCarViewController.m */; };
@@ -1850,6 +1851,8 @@
 		A8A3A57E1EE95BDA00D9C06D /* UCFInvestAPIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFInvestAPIManager.m; sourceTree = "<group>"; };
 		A8AD2E3C1EB979760013DB7C /* MongoliaLayerCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MongoliaLayerCenter.h; sourceTree = "<group>"; };
 		A8AD2E3D1EB979760013DB7C /* MongoliaLayerCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MongoliaLayerCenter.m; sourceTree = "<group>"; };
+		A8AD6F831EFA6BDE000AF323 /* PagerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PagerView.h; sourceTree = "<group>"; };
+		A8AD6F841EFA6BDE000AF323 /* PagerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PagerView.m; sourceTree = "<group>"; };
 		A8B6B67E1EC9A9F000D4E86F /* WalletBankView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletBankView.h; sourceTree = "<group>"; };
 		A8B6B67F1EC9A9F000D4E86F /* WalletBankView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletBankView.m; sourceTree = "<group>"; };
 		A8B6B6811EC9AA0900D4E86F /* WalletBankView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WalletBankView.xib; sourceTree = "<group>"; };
@@ -4469,6 +4472,7 @@
 		7BFE3EB11AC5635E002A53A2 /* ThirdLibs */ = {
 			isa = PBXGroup;
 			children = (
+				A8AD6F821EFA6BDE000AF323 /* PagerView */,
 				74B3AD841ED2C31B00653F8B /* YFRollingLabel */,
 				A8DE84D81EC2BC34004B3533 /* p2pWalletSDK */,
 				74A0AF091EC341DD009E5A57 /* ZZCircleProgress */,
@@ -5103,6 +5107,15 @@
 			);
 			name = MongoliaLayer;
 			path = Tools/MongoliaLayer;
+			sourceTree = "<group>";
+		};
+		A8AD6F821EFA6BDE000AF323 /* PagerView */ = {
+			isa = PBXGroup;
+			children = (
+				A8AD6F831EFA6BDE000AF323 /* PagerView.h */,
+				A8AD6F841EFA6BDE000AF323 /* PagerView.m */,
+			);
+			path = PagerView;
 			sourceTree = "<group>";
 		};
 		A8DE84D81EC2BC34004B3533 /* p2pWalletSDK */ = {
@@ -6508,6 +6521,7 @@
 				7BCCA8B61ACA97EB0089DAAC /* UCFLoginView.m in Sources */,
 				840A79451C2A7C160059A946 /* UCFMessageCenterCell.m in Sources */,
 				4A9F15BA1B0EC9B1009A7365 /* CoupleHeadView.m in Sources */,
+				A8AD6F851EFA6BDE000AF323 /* PagerView.m in Sources */,
 				7BCA18621AD7813E0077C2A6 /* UCFInvestmentDetailViewController.m in Sources */,
 				FBEDF1DF1CB5171500116E12 /* MyViewController.m in Sources */,
 				FBC234731B31678800C783A8 /* UCFBackMoneyCell1.m in Sources */,

@@ -37,7 +37,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.tableview.header beginRefreshing];
 }
 
 #pragma mark - 设置界面
@@ -56,6 +55,7 @@
 
     [self.tableview setSeparatorColor:[UIColor clearColor]];
 //    [transferHeaderView initData];
+    [self.tableview.header beginRefreshing];
 
 }
 - (void)initData
