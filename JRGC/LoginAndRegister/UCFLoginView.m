@@ -22,6 +22,7 @@
     UIButton *_forgetPasswordBtn;//忘记密码
     UIButton *_registerBtn;//注册
     UILabel *_describeLabel;
+    UILabel *_forgetLabel;//忘记密码
 }
 
 @property(nonatomic ,strong) UCFSelectedView *itemSeletedView;
@@ -130,16 +131,16 @@
     _describeLabel.backgroundColor = [UIColor clearColor];
     [self addSubview:_describeLabel];
     
-    UILabel *forgetLabel = [[UILabel alloc] initWithFrame:CGRectMake(XPOS, CGRectGetMaxY(_loginBtn.frame) + 8, 200, 18)];
-    forgetLabel.font = [UIFont systemFontOfSize:13];
-    forgetLabel.textColor = UIColorWithRGB(0x999999);
-    forgetLabel.textAlignment = NSTextAlignmentLeft;
-    forgetLabel.backgroundColor = [UIColor clearColor];
+    _forgetLabel = [[UILabel alloc] initWithFrame:CGRectMake(XPOS, CGRectGetMaxY(_loginBtn.frame) + 8, 200, 18)];
+    _forgetLabel.font = [UIFont systemFontOfSize:13];
+    _forgetLabel.textColor = UIColorWithRGB(0x999999);
+    _forgetLabel.textAlignment = NSTextAlignmentLeft;
+    _forgetLabel.backgroundColor = [UIColor clearColor];
     NSMutableAttributedString *btnTitle = [[NSMutableAttributedString alloc] initWithString:@"忘记密码"];
     NSRange strRange = {0,[btnTitle length]};
     [btnTitle setAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"Helvetica" size:13], NSForegroundColorAttributeName:UIColorWithRGB(0x4aa1f9)} range:strRange];
-    forgetLabel.attributedText = btnTitle;
-    [self addSubview:forgetLabel];
+    _forgetLabel.attributedText = btnTitle;
+    [self addSubview:_forgetLabel];
     
     NSString *strTitle = @"没有账号？立即注册";
     NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:strTitle];
@@ -153,7 +154,7 @@
     _forgetPasswordBtn.frame = CGRectMake(0, 0, 100, 18);
     _forgetPasswordBtn.backgroundColor = [UIColor clearColor];
     [_forgetPasswordBtn addTarget:self action:@selector(resetPassword:) forControlEvents:UIControlEventTouchUpInside];
-    [forgetLabel addSubview:_forgetPasswordBtn];
+    [_forgetLabel addSubview:_forgetPasswordBtn];
     
     _registerBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     _registerBtn.frame = CGRectMake(0, 0, 200, 18);
@@ -161,7 +162,7 @@
     [_registerBtn addTarget:self action:@selector(regisiterBtn:) forControlEvents:UIControlEventTouchUpInside];
     [_describeLabel addSubview:_registerBtn];
     
-    forgetLabel.userInteractionEnabled = YES;
+    _forgetLabel.userInteractionEnabled = YES;
     _describeLabel.userInteractionEnabled = YES;
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -176,13 +177,31 @@
 }
 - (void)SelectedView:(UCFSelectedView *)selectedView didClickSelectedItemWithSeg:(HMSegmentedControl *)sender
 {
-    _describeLabel.hidden = sender.selectedSegmentIndex == 1;
-    _registerBtn.userInteractionEnabled = sender.selectedSegmentIndex == 0;
-    _userNameTfd.placeholder = sender.selectedSegmentIndex == 0 ? @"用户名/邮箱/手机号":@"手机号";
+    [self endEditing:YES];
+    _userNameTfd.text = @"";//切换时清空用户名和密码
+    _passWordTfd.text = @"";
+    if(sender.selectedSegmentIndex == 0){//个人登录
+        _describeLabel.hidden = NO;
+        _registerBtn.userInteractionEnabled = YES;
+        _userNameTfd.placeholder =  @"用户名/邮箱/手机号";
+        _userNameTfd.keyboardType = UIKeyboardTypeDefault;
+         [_userNameTfd becomeFirstResponder];
+        _forgetLabel.hidden = NO;
+        _forgetPasswordBtn.userInteractionEnabled = YES;
+       
+    }else{//企业登录
+        _describeLabel.hidden = YES;
+        _registerBtn.userInteractionEnabled = NO;
+        _userNameTfd.placeholder =  @"手机号";
+        _userNameTfd.keyboardType = UIKeyboardTypeNumberPad;
+         [_userNameTfd becomeFirstResponder];
+        _forgetLabel.hidden = YES;
+        _forgetPasswordBtn.userInteractionEnabled = NO;
+    }
     if ([self.delegate respondsToSelector:@selector(seletedSegmentedControl:)]) {
         [self.delegate seletedSegmentedControl:sender.selectedSegmentIndex];
     }
-}
+    }
 - (void)setFirstResponder
 {
     [_userNameTfd becomeFirstResponder];

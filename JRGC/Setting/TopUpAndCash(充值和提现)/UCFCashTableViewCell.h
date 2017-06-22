@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "UILabel+Misc.h"
 @interface UCFCashTableViewCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet UIButton *cashWayButton;
 @property (strong, nonatomic) IBOutlet UILabel *cashWayTitle;

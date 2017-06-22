@@ -574,6 +574,8 @@
 		83FB3F5E1E5C4D2A0094C9BA /* UCFBatchBidWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FB3F5C1E5C4D2A0094C9BA /* UCFBatchBidWebViewController.m */; };
 		83FB3F5F1E5C4D2A0094C9BA /* UCFBatchBidWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83FB3F5D1E5C4D2A0094C9BA /* UCFBatchBidWebViewController.xib */; };
 		83FB3F621E5C68150094C9BA /* UCFCollctionKeyBidViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FB3F611E5C68150094C9BA /* UCFCollctionKeyBidViewController.m */; };
+		83FEDB761EFBB56000CFE0EF /* UCFCompanyNoOpenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FEDB741EFBB56000CFE0EF /* UCFCompanyNoOpenViewController.m */; };
+		83FEDB771EFBB56000CFE0EF /* UCFCompanyNoOpenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83FEDB751EFBB56000CFE0EF /* UCFCompanyNoOpenViewController.xib */; };
 		83FF3E4A1E12159B00DFB99C /* UCFCashTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FF3E481E12159B00DFB99C /* UCFCashTableViewCell.m */; };
 		83FF3E4B1E12159C00DFB99C /* UCFCashTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83FF3E491E12159B00DFB99C /* UCFCashTableViewCell.xib */; };
 		840A79431C2A7C160059A946 /* UCFMessageCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 840A793D1C2A7C160059A946 /* UCFMessageCenterViewController.m */; };
@@ -1815,6 +1817,9 @@
 		83FB3F5D1E5C4D2A0094C9BA /* UCFBatchBidWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFBatchBidWebViewController.xib; sourceTree = "<group>"; };
 		83FB3F601E5C68150094C9BA /* UCFCollctionKeyBidViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFCollctionKeyBidViewController.h; sourceTree = "<group>"; };
 		83FB3F611E5C68150094C9BA /* UCFCollctionKeyBidViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFCollctionKeyBidViewController.m; sourceTree = "<group>"; };
+		83FEDB731EFBB56000CFE0EF /* UCFCompanyNoOpenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFCompanyNoOpenViewController.h; sourceTree = "<group>"; };
+		83FEDB741EFBB56000CFE0EF /* UCFCompanyNoOpenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFCompanyNoOpenViewController.m; sourceTree = "<group>"; };
+		83FEDB751EFBB56000CFE0EF /* UCFCompanyNoOpenViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFCompanyNoOpenViewController.xib; sourceTree = "<group>"; };
 		83FF3E471E12159B00DFB99C /* UCFCashTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFCashTableViewCell.h; sourceTree = "<group>"; };
 		83FF3E481E12159B00DFB99C /* UCFCashTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFCashTableViewCell.m; sourceTree = "<group>"; };
 		83FF3E491E12159B00DFB99C /* UCFCashTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFCashTableViewCell.xib; sourceTree = "<group>"; };
@@ -4028,6 +4033,9 @@
 				ED44558D1C112BCF00823DF3 /* UCFLoginShaowView.m */,
 				EDF01E281C7C0A5B005BDBED /* UCFValidFaceLoginViewController.h */,
 				EDF01E291C7C0A5B005BDBED /* UCFValidFaceLoginViewController.m */,
+				83FEDB731EFBB56000CFE0EF /* UCFCompanyNoOpenViewController.h */,
+				83FEDB741EFBB56000CFE0EF /* UCFCompanyNoOpenViewController.m */,
+				83FEDB751EFBB56000CFE0EF /* UCFCompanyNoOpenViewController.xib */,
 			);
 			name = Login;
 			sourceTree = "<group>";
@@ -6015,6 +6023,7 @@
 				74FC227E1BA6A5BB00D1660A /* UCFOverDueListViewController.xib in Resources */,
 				4AB1260C1AEF8EA400E915F1 /* UCFPurchaseBidViewController.xib in Resources */,
 				4AFE198D1CA0006200EE6768 /* TopUpAndCash.storyboard in Resources */,
+				83FEDB771EFBB56000CFE0EF /* UCFCompanyNoOpenViewController.xib in Resources */,
 				4ACB399B1E1216DD00E9BA8C /* FestivalActivitiesWebView.xib in Resources */,
 				4AE1E96B1E1CDB9900587CE6 /* README.txt in Resources */,
 				A8DE85281EC2BC34004B3533 /* UcfLibResources.bundle in Resources */,
@@ -6225,6 +6234,7 @@
 				7BCE02241AC902FD0084C15C /* SharedSingleton.m in Sources */,
 				EDEAB70C1C7D4BAF00BBF3B1 /* UCFIdNumberTextField.m in Sources */,
 				E3A96B0E1CBF83CE00E8884F /* UCFWorkPointsTableViewCell.m in Sources */,
+				83FEDB761EFBB56000CFE0EF /* UCFCompanyNoOpenViewController.m in Sources */,
 				4AD6B4C61B32D33E00D94140 /* CycleView.m in Sources */,
 				08E9A4E21B845E1200099F30 /* UCFTextField.m in Sources */,
 				7BC8A9F51AD4BFF600BF4660 /* UCFMoreViewController.m in Sources */,

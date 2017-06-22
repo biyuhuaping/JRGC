@@ -24,6 +24,7 @@
 #import "MD5Util.h"
 #import "UCFSession.h"
 #import "P2PWalletHelper.h"
+#import "UCFCompanyNoOpenViewController.h"
 @interface UCFLoginViewController ()<UCFLoginFaceViewDelegate,cwIntegrationLivessDelegate>////---qyy0815
 {
     UCFLoginView *_loginView;
@@ -32,7 +33,7 @@
     BOOL _sameUser;
 }
 @property (nonatomic,strong) CWLivessViewController *controller;//---qyy0815
-@property (nonatomic,assign) NSInteger *selectTag;//0 为个人登录，1位企业登录
+@property (nonatomic,assign) NSInteger selectTag;//0 为个人登录，1位企业登录
 @end
 
 @implementation UCFLoginViewController
@@ -160,7 +161,7 @@
 
 -(void)userLogin:(id)sender
 {
-    [self.view endEditing:YES];    
+    [self.view endEditing:YES];
     //同盾
     // 获取设备管理器实例
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -262,6 +263,14 @@
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     }
 }
+#pragma mark 企业用户没有开户就弹框
+- (void)gotoCompanyNoOpenVC
+{
+    UCFCompanyNoOpenViewController * fullVC =[[UCFCompanyNoOpenViewController alloc]initWithNibName:@"UCFCompanyNoOpenViewController" bundle:nil];
+    fullVC.baseTitleText = @"提示";
+    [self presentViewController:fullVC animated:YES completion:^{
+    }];
+}
 #pragma mark  登录成功之后向iOS发送数据 验签串 和工场码Data
 -(void)sendiWatchData:(NSString *)signatureStr withGcm:(NSString *)gcm{
     
@@ -358,7 +367,8 @@
     [parDic setValue:[MD5Util MD5Pwd:_loginView.passwordFieldText] forKey:@"pwd"];
     [parDic setValue:blockId forKey:@"token_id"];
     [parDic setValue:wanip forKey:@"ip"];
-    
+    NSString *isCompanyStr = self.selectTag == 0 ? @"flase" : @"true";
+    [parDic setValue:isCompanyStr forKey:@"isCompany"];
     [[NetworkModule sharedNetworkModule] newPostReq:parDic tag:kSXTagLogin owner:self signature:NO Type:SelectAccoutDefault];
 }
 #pragma mark - 刷脸登陆后反回的数据处理

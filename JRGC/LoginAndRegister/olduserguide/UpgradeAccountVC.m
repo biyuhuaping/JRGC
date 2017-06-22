@@ -14,6 +14,7 @@
 #import "UCFHuiShangChooseBankViewController.h"
 #import "FullWebViewController.h"
 #import "BlockUIAlertView.h"
+#import "UserInfoSingle.h"
 
 @interface UpgradeAccountVC ()<UITextFieldDelegate,NetworkModuleDelegate,UCFHuiShangChooseBankViewControllerDelegate>
 
@@ -151,7 +152,7 @@
     _textField2.font = [UIFont systemFontOfSize:14];
     _textField2.textColor = UIColorWithRGB(0x555555);
     [_textField2 addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
-    _textField2.placeholder = @"请输入身份证号";
+    _textField2.placeholder = [UserInfoSingle sharedManager].companyAgent ? @"社会信用代码/组织机构代码": @"请输入身份证号";
     
     _textField3 = [[UITextField alloc]initWithFrame:CGRectMake(40, 0, ScreenWidth-40-6, 44)];
     _textField3.clearButtonMode = UITextFieldViewModeWhileEditing;
