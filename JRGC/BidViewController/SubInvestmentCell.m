@@ -27,7 +27,7 @@
 //    self.progressLab.frame = CGRectMake(CGRectGetMinX(self.progressLab.frame), CGRectGetMinY(self.repayPeriodLab.frame), CGRectGetWidth(self.progressLab.frame), CGRectGetHeight(self.repayPeriodLab.frame));
 //    self.progressLab.font = [UIFont systemFontOfSize:13.0f];
     self.remainingLab.font = [UIFont boldSystemFontOfSize:12.0f];
-    if (self.accoutType == SelectAccoutTypeHoner) {
+    if ([self.p2POrHonerType intValue] == 2) {
         self.minInvestLab.text =  self.repayModeLab.text;
         self.repayModeLab.hidden = YES;
     }else{

@@ -34,6 +34,7 @@
 }
 @property (weak, nonatomic) IBOutlet UITableView *bidTableView;
 @property (strong, nonatomic) NSString *zxOrP2pStr;//尊享债转 提示语 为购买 P2P 为 投资
+@property (strong, nonatomic) NSString *p2POrHonerType;//// 1为微金，2位普通尊享，3为委托尊享标
 
 @end
 
@@ -59,7 +60,7 @@
     [self addLeftButton];
     baseTitleLabel.text = self.accoutType == SelectAccoutTypeHoner ? @"购买":@"出借";
     self.zxOrP2pStr = self.accoutType == SelectAccoutTypeHoner ?@"购买":@"出借";
-    
+    _p2POrHonerType = [[_dataDict objectSafeDictionaryForKey:@"prdTransferFore"] objectSafeForKey:@"type"];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     
     isHasOverdueGongDou = [self checkOverdueGongDou];
@@ -127,7 +128,7 @@
         }
         NSDictionary *info =  self.bidArray[0];
         [cell setTransInvestItemInfo:info];
-        cell.accoutType = self.accoutType;
+        cell.p2POrHonerType = _p2POrHonerType;
         return cell;
     } else if(indexPath.row == 1){
         static NSString *cellStr2 = @"cell2";
@@ -589,7 +590,7 @@
     [footView addSubview:imageView1];
 
 
-    if (self.accoutType == SelectAccoutTypeHoner) {
+    if (self.accoutType == SelectAccoutTypeHoner && [_p2POrHonerType intValue] == 2) {
         UILabel *jieshouLabel = [[UILabel alloc] initWithFrame:CGRectMake(23, CGRectGetMaxY(label1.frame)+10, ScreenWidth- 23 - 15, 12)];
         jieshouLabel.backgroundColor = [UIColor clearColor];
         jieshouLabel.text = @"单笔尊享项目仅支持一对一转让，不支持部分购买";

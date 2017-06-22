@@ -528,10 +528,11 @@
 #pragma mark --- 初始化提现方式
 -(void)initCashStyle{
     NSString *realTimeCashStr = @"";
+    NSString *tipStr = @"每晚23:00至次日1:00是银行系统的维护时间，为避免掉单请勿该时段提现。";
     if ([_perDayRealTimeAmountLimit isEqualToString:@""]) { //如果实时提现单日限额为空，则不展示
-        realTimeCashStr = [NSString stringWithFormat:@"单笔金额≤%@万，7*24小时实时到账。",_criticalValueStr];
+        realTimeCashStr = [NSString stringWithFormat:@"单笔金额≤%@万，7*24小时实时到账。\n%@",_criticalValueStr,tipStr];
     }else{
-        realTimeCashStr = [NSString stringWithFormat:@"单笔金额≤%@万，单日≤%@万，7*24小时实时到账。",_criticalValueStr,_perDayRealTimeAmountLimit];
+        realTimeCashStr = [NSString stringWithFormat:@"单笔金额≤%@万，单日≤%@万，7*24小时实时到账。\n%@",_criticalValueStr,_perDayRealTimeAmountLimit,tipStr];
     }
     NSString *largeCashStr = [NSString stringWithFormat:@"工作日%@受理，最快30分钟之内到账。",_doTime];
 
