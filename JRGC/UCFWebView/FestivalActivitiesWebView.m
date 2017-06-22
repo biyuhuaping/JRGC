@@ -31,11 +31,17 @@
     [self setErrorViewFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
     [self addErrorViewButton];
     [self addProgressView];//添加进度条
-    [self gotoURL:self.url];
+//    [self gotoURL:self.url];
+//    NSString* path = [[NSBundle mainBundle] pathForResource:@"index2" ofType:@"html"];
+//    NSURL* url = [NSURL fileURLWithPath:path];
+//    NSURLRequest* request = [NSURLRequest requestWithURL:url] ;
+//    [self.webView loadRequest:request];
     self.webView.scrollView.bounces = NO;
     [self.webView setOpaque:NO];
+    [self.webView setBackgroundColor:[UIColor clearColor]];
     self.webView.hidden = NO;
     [self addCloseBtn];
+    self.view.backgroundColor = [UIColor clearColor];
 }
 - (void)addCloseBtn
 {
