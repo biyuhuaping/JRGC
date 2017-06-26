@@ -13,6 +13,7 @@
 #import "AppDelegate.h"
 #import "UCFHomeViewController.h"
 #import "FestivalActivitiesWebView.h"
+#import "FullWebViewController.h"
 @interface MongoliaLayerCenter ()<MaskViewDelegate>
 {
     NSInteger num;
@@ -67,7 +68,7 @@
     BOOL isBelongToToday = [NSDate isBelongToTodayWithDate:lastFirstLoginTime]; //是不是同一天
     //NO 代表当天只显示一回的
     if (!isBelongToToday) {
-        //新手政策是否显示
+//        //新手政策是否显示
         if ([[self.mongoliaLayerDic valueForKey:@"novicePoliceOnOff"] boolValue]) {
             //通知弹窗显示新手政策
             [self.tableView setContentOffset:CGPointMake(0, 0)];
@@ -108,6 +109,13 @@
 {
     if (alertview.tag == 1001) {
         [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID]} tag:KSXTagADJustMent owner:self signature:YES Type:SelectAccoutDefault];
+    } else if (alertview.tag == 1000) {
+        AppDelegate * app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        UINavigationController *nav = app.tabBarController.selectedViewController;
+        FullWebViewController *webView = [[FullWebViewController alloc] initWithWebUrl:[[MongoliaLayerCenter sharedManager].mongoliaLayerDic valueForKey:@"novicePoliceUrl"]  title:@"新手政策"];
+        webView.flageHaveShareBut = @"分享";
+        webView.sourceVc = @"UCFLatestProjectViewController";
+        [nav pushViewController:webView animated:YES];
     }
 }
 #pragma mark  netMethod

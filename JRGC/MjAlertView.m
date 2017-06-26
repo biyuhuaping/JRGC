@@ -8,7 +8,7 @@
 
 #import "MjAlertView.h"
 #import "NZLabel.h"
-
+#import "MongoliaLayerCenter.h"
 #define SCREEN_WIDTH_5 ([UIScreen mainScreen].bounds.size.width == 320)
 #define SCREEN_WIDTH_6 ([UIScreen mainScreen].bounds.size.width == 375)
 #define SCREEN_WIDTH_6P ([UIScreen mainScreen].bounds.size.width == 414)
@@ -353,23 +353,29 @@
     button.tag = CancelButtonTag + 1;
     [button addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];
     [headerView addSubview:button];
+      
         
-    NZLabel *detailLab = [[NZLabel alloc] initWithFrame:CGRectMake(ScreenWidth /2 - 100, CGRectGetMidY(button.frame)-44-20, 200, 20)];
-    detailLab.text = @"每邀请一位奖励50-2400元";
-    detailLab.font = [UIFont systemFontOfSize:15];
-    detailLab.textColor = UIColorWithRGB(0x333333);
-    [detailLab setFontColor:UIColorWithRGB(0xfd4d4c) string:@"50-2400元"];
-    detailLab.textAlignment = NSTextAlignmentCenter;
-    [headerView addSubview:detailLab];
-        
-    NZLabel *titleLab = [[NZLabel alloc] initWithFrame:CGRectMake(ScreenWidth /2 - 75, CGRectGetMidY(detailLab.frame)-20 - 20, 150, 20)];
-    titleLab.text = @"2017邀友赚钱新政策";
-    titleLab.font = [UIFont systemFontOfSize:15];
-    titleLab.textColor = UIColorWithRGB(0x333333);
-    titleLab.textAlignment = NSTextAlignmentCenter;
-    [headerView addSubview:titleLab];
-
+//    NZLabel *detailLab = [[NZLabel alloc] initWithFrame:CGRectMake(ScreenWidth /2 - 100, CGRectGetMidY(button.frame)-44-20, 200, 20)];
+//    detailLab.text = @"每邀请一位奖励50-2400元";
+//    detailLab.font = [UIFont systemFontOfSize:15];
+//    detailLab.textColor = UIColorWithRGB(0x333333);
+//    [detailLab setFontColor:UIColorWithRGB(0xfd4d4c) string:@"50-2400元"];
+//    detailLab.textAlignment = NSTextAlignmentCenter;
+//    [headerView addSubview:detailLab];
+//        
+//    NZLabel *titleLab = [[NZLabel alloc] initWithFrame:CGRectMake(ScreenWidth /2 - 75, CGRectGetMidY(detailLab.frame)-20 - 20, 150, 20)];
+//    titleLab.text = @"2017邀友赚钱新政策";
+//    titleLab.font = [UIFont systemFontOfSize:15];
+//    titleLab.textColor = UIColorWithRGB(0x333333);
+//
+//    titleLab.textAlignment = NSTextAlignmentCenter;
+//    [headerView addSubview:titleLab];
     
+    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(ScreenWidth /2 - 100, CGRectGetMinY(button.frame) - 106, 200, 100)];
+    webView.backgroundColor = [UIColor clearColor];
+    [webView loadHTMLString: [[MongoliaLayerCenter sharedManager].mongoliaLayerDic valueForKey:@"novicePoliceContext"]  baseURL:nil];
+    [headerView addSubview:webView];
+
     UIButton *cancelbutton = [UIButton buttonWithType:UIButtonTypeCustom];
     cancelbutton.frame = CGRectMake(ScreenWidth - 34 - 19, CGRectGetMaxY(headerView.frame)-228-34,34, 34);
     [cancelbutton setBackgroundImage:[UIImage imageNamed:@"new_friend_close"] forState:UIControlStateNormal];
