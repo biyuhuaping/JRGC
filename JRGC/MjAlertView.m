@@ -380,10 +380,7 @@
         
     [self.showView  setFrame:CGRectMake(0, 0, ScreenWidth, 373)];
     self.showView.center = CGPointMake(ScreenWidth /2, ScreenHeight /2 - 72);
-//    self.showView.layer.cornerRadius = 5;
-//    self.showView.layer.masksToBounds = YES;
     self.showView.backgroundColor = [UIColor clearColor];
-//    self.alertviewType = MjAlertViewTypeCustom;
     self.alertviewType = MjAlertViewTypeInviteFriends;
     self.delegate =  delegate;
     // 默认显示动画类型
