@@ -240,8 +240,13 @@
 //            [[P2PWalletHelper sharedManager] getUserWalletData];
 
         } else {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:dic[@"message"] delegate:nil cancelButtonTitle:@"重新输入" otherButtonTitles:nil];
-            [alertView show];
+            
+            if(self.selectTag == 1 && [[dic valueForKey:@"code"] integerValue] == 21306){
+                [self gotoCompanyNoOpenVC];//企业为开户返回code 为21306
+            }else{
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:dic[@"message"] delegate:nil cancelButtonTitle:@"重新输入" otherButtonTitles:nil];
+                [alertView show];
+            }
         }
         
 
@@ -367,7 +372,7 @@
     [parDic setValue:[MD5Util MD5Pwd:_loginView.passwordFieldText] forKey:@"pwd"];
     [parDic setValue:blockId forKey:@"token_id"];
     [parDic setValue:wanip forKey:@"ip"];
-    NSString *isCompanyStr = self.selectTag == 0 ? @"flase" : @"true";
+    NSString *isCompanyStr = self.selectTag == 0 ? @"false" : @"true";
     [parDic setValue:isCompanyStr forKey:@"isCompany"];
     [[NetworkModule sharedNetworkModule] newPostReq:parDic tag:kSXTagLogin owner:self signature:NO Type:SelectAccoutDefault];
 }
