@@ -76,6 +76,15 @@
         }
         return;
     }
+    
+    if (_accoutTpye == SelectAccoutTypeP2P  ) {
+        if ([UserInfoSingle sharedManager].enjoyOpenStatus < 3) {
+            [_moneySwitchBtn setTitle:@"开尊享  赚收益" forState:UIControlStateNormal];
+        } else {
+            [_moneySwitchBtn setTitle:@"资金如何划转尊享账户？" forState:UIControlStateNormal];
+        }
+    }
+    
     cashBalanceStr = [NSString stringWithFormat:@"%.2lf",[[self.dataDict objectSafeForKey:@"cashBalance"] doubleValue]];//可用金额
     interestsStr = [NSString stringWithFormat:@"%.2f",[[self.dataDict  objectSafeForKey:@"interests"] doubleValue]];//累计收益
     totalStr = [NSString stringWithFormat:@"%.2f",[[self.dataDict  objectSafeForKey:@"total"]doubleValue]];//累计收益

@@ -392,6 +392,50 @@
     }
     return self;
 }
+#pragma  跳转尊享页面弹框
+-(instancetype)initSkipToHonerAccount:(id)delegate{
+    self = [self init];
+    if (self) {
+        
+
+        UIImageView *headerView  = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 373)];
+        headerView.userInteractionEnabled = YES;
+        headerView.image = [UIImage imageNamed:@"new_friend_bg.png"];
+        
+        [self.showView addSubview:headerView];
+        
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        button.frame = CGRectMake((ScreenWidth - 194)/2.0, CGRectGetMaxY(headerView.frame)-20-37, 194, 37);
+        button.layer.cornerRadius = 17.5;
+        button.userInteractionEnabled = YES;
+        button.titleLabel.font = [UIFont systemFontOfSize:15];
+        button.backgroundColor = UIColorWithRGB(0xfd4d4c);
+        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [button setTitle:@"立即查看详情" forState:UIControlStateNormal];
+        button.tag = CancelButtonTag + 1;
+        [button addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [headerView addSubview:button];
+        
+        UIButton *cancelbutton = [UIButton buttonWithType:UIButtonTypeCustom];
+        cancelbutton.frame = CGRectMake(ScreenWidth - 34 - 19, CGRectGetMaxY(headerView.frame)-228-34,34, 34);
+        [cancelbutton setBackgroundImage:[UIImage imageNamed:@"new_friend_close"] forState:UIControlStateNormal];
+        cancelbutton.tag = CancelButtonTag;
+        [cancelbutton addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [headerView addSubview:cancelbutton];
+        
+        
+        [self.showView  setFrame:CGRectMake(0, 0, ScreenWidth, 373)];
+        self.showView.center = CGPointMake(ScreenWidth /2, ScreenHeight /2 - 72);
+
+        self.showView.backgroundColor = [UIColor clearColor];
+        self.alertviewType = MjAlertViewTypeInviteFriends;
+        self.delegate =  delegate;
+        // 默认显示动画类型
+        self.alertAnimateType = MjAlertViewAnimateTypeNone;
+        
+    }
+    return self;
+}
 -(instancetype)initPlatformUpgradeNotice:(id)delegate withAuthorizationDate:(NSString *)date{
     self = [self init];
     if (self) {
