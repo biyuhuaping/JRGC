@@ -77,7 +77,7 @@
         return;
     }
     
-    if (_accoutTpye == SelectAccoutTypeP2P  ) {
+    if (_accoutTpye == SelectAccoutTypeP2P) {
         if ([UserInfoSingle sharedManager].enjoyOpenStatus < 3) {
             [_moneySwitchBtn setTitle:@"开尊享  赚收益" forState:UIControlStateNormal];
         } else {

@@ -12,6 +12,8 @@
 #import "JSONKit.h"
 #import "AppDelegate.h"
 #import "UCFHomeViewController.h"
+#import "HSHelper.h"
+#import "FullWebViewController.h"
 @interface MongoliaLayerCenter ()<MaskViewDelegate>
 {
     NSInteger num;
@@ -85,6 +87,13 @@
         [alertView show];
         return;
     }
+    //
+    if ([UserInfoSingle sharedManager].enjoyOpenStatus < 3 && !_honerAlert) {
+        MjAlertView *alertView = [[MjAlertView alloc] initSkipToHonerAccount:self];
+        alertView.tag = 1002;
+        _honerAlert = YES;
+        [alertView show];
+    }
 }
 - (void)viewWillRemove:(MaskView *)view
 {
@@ -94,8 +103,18 @@
 
 - (void)mjalertView:(MjAlertView *)alertview didClickedButton:(UIButton *)clickedButton andClickedIndex:(NSInteger)index
 {
-    if (alertview.tag == 1001) {
+    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    UINavigationController *nav = app.tabBarController.selectedViewController;
+    if (alertview.tag == 1000) {
+        FullWebViewController *webView = [[FullWebViewController alloc] initWithWebUrl:HOMEINVITATIONURL title:@"邀请返利"];
+        webView.flageHaveShareBut = @"分享";
+        webView.sourceVc = @"UCFLatestProjectViewController";
+        [nav pushViewController:webView animated:YES];
+    }else if (alertview.tag == 1001) {
         [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID]} tag:KSXTagADJustMent owner:self signature:YES Type:SelectAccoutDefault];
+    } else if (alertview.tag == 1002) {
+        HSHelper *helper = [HSHelper new];
+        [helper pushOpenHSType:SelectAccoutTypeHoner Step:[UserInfoSingle sharedManager].enjoyOpenStatus nav:nav];
     }
 }
 #pragma mark  netMethod

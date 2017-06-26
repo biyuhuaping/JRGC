@@ -76,14 +76,15 @@
     [self addLeftButton];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getP2POrHonerAccoutHttpRequest) name:RELOADP2PORHONERACCOTDATA object:nil];
-    
-    BOOL isFirstStep = [[NSUserDefaults standardUserDefaults] boolForKey:@"ISFirstStepInP2PAccount"];
-    if (!isFirstStep) {
-        MjAlertView *alertView = [[MjAlertView alloc] initSkipToHonerAccount:self];
-        alertView.tag = 1002;
-        [alertView show];
+    if (self.accoutType == SelectAccoutTypeP2P) {
+        BOOL isFirstStep = [[NSUserDefaults standardUserDefaults] boolForKey:@"ISFirstStepInP2PAccount"];
+        if (!isFirstStep && [UserInfoSingle sharedManager].enjoyOpenStatus < 3) {
+            MjAlertView *alertView = [[MjAlertView alloc] initSkipToHonerAccount:self];
+            alertView.tag = 1002;
+            [alertView show];
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"ISFirstStepInP2PAccount"];
+        }
     }
-
 }
 -(void)removeLoadingView
 {
@@ -410,25 +411,27 @@
 //资金如何划转
 - (void)changeP2POrHonerAccoutMoneyAlertView
 {
-//    HSHelper *helper = [HSHelper new];
-//    [helper pushOpenHSType:SelectAccoutTypeHoner Step:1 nav:self.navigationController];
-//    return;
     if ([UserInfoSingle sharedManager].enjoyOpenStatus < 3) {
-        HSHelper *helper = [HSHelper new];
-        [helper pushOpenHSType:SelectAccoutTypeHoner Step:1 nav:self.navigationController];
-    } else {
         MjAlertView *alertView = [[MjAlertView alloc] initSkipToHonerAccount:self];
         alertView.tag = 1002;
         [alertView show];
+    } else {
+        MjAlertView *alertView = [[MjAlertView alloc] initSkipToMoneySwitchHonerAccout:self];
+        alertView.tag = 1001;
+        [alertView show];
     }
-//    NSString *message = self.accoutType == SelectAccoutTypeP2P ? @"Q:如何用微金账户中的1万元投资尊享标？\n A:需先将微金账户中的1万元提现至银行卡，再开通尊享账户(已开通尊享账户的用户跳过此步骤)，将资金充值到尊享账户，充值成功后可进行投资。":@"Q:如何用尊享账户中的1万元投资微金标？\n A:需先将尊享账户中的1万元提现至银行卡，再开通微金账户(已开通微金账户的用户跳过此步骤)，将资金充值到微金账户，充值成功后可进行投资";
-//    
-//    UIAlertView *alerView = [[UIAlertView alloc]initWithTitle:@"资金如何划转" message:message delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
-//    [alerView show];
+
 }
 - (void)mjalertView:(MjAlertView *)alertview didClickedButton:(UIButton *)clickedButton andClickedIndex:(NSInteger)index
 {
-    
+    if (alertview.tag == 1002 && [UserInfoSingle sharedManager].enjoyOpenStatus < 3) {
+        HSHelper *helper = [HSHelper new];
+        [helper pushOpenHSType:SelectAccoutTypeHoner Step:1 nav:self.navigationController];
+    } else {
+        UCFP2POrHonerAccoutViewController *subVC = [[UCFP2POrHonerAccoutViewController alloc] initWithNibName:@"UCFP2POrHonerAccoutViewController" bundle:nil];
+        subVC.accoutType = SelectAccoutTypeHoner;
+        [self.navigationController pushViewController:subVC animated:YES];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

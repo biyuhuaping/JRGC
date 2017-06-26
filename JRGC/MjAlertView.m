@@ -317,6 +317,7 @@
     }
     return self;
 }
+
 -(void)clickSortButton:(UIButton*)sortButton{
     if (_currentSelectSortBtnTag != sortButton.tag) {
         //置灰上一个选择的button
@@ -393,45 +394,88 @@
     return self;
 }
 #pragma  跳转尊享页面弹框
+-(instancetype)initSkipToMoneySwitchHonerAccout:(id)delegate{
+    self = [self init];
+    if (self) {
+        
+        
+        UIImageView *headerView  = [[UIImageView alloc]initWithFrame:CGRectMake((ScreenWidth - 250.0f)/2.0f, 0, 250, 390)];
+        headerView.userInteractionEnabled = YES;
+        headerView.image = [UIImage imageNamed:@"skipHonerAccount"];
+        
+        [self.showView addSubview:headerView];
+        
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        button.frame = CGRectMake((CGRectGetWidth(headerView.frame) - 135)/2.0, CGRectGetMaxY(headerView.frame) - 25 - 32, 135, 32);
+        button.layer.cornerRadius = 16.0f;
+        button.userInteractionEnabled = YES;
+        button.titleLabel.font = [UIFont systemFontOfSize:15];
+        button.backgroundColor = UIColorWithRGB(0xfd4d4c);
+        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [button setTitle:@"去尊享 赚收益" forState:UIControlStateNormal];
+        button.tag = CancelButtonTag + 1;
+        [button addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [headerView addSubview:button];
+        
+        
+        UIButton *cancelbutton = [UIButton buttonWithType:UIButtonTypeCustom];
+        cancelbutton.frame = CGRectMake((ScreenWidth - 30.5)/2, CGRectGetMaxY(headerView.frame) + 13,30.5, 30.5);
+        [cancelbutton setBackgroundImage:[UIImage imageNamed:@"honorable_bj_close"] forState:UIControlStateNormal];
+        cancelbutton.tag = CancelButtonTag;
+        [cancelbutton addTarget:self action:@selector(closeBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [self.showView addSubview:cancelbutton];
+        
+        
+        [self.showView  setFrame:CGRectMake(0, 0, ScreenWidth, 433.5)];
+        
+        self.showView.backgroundColor = [UIColor clearColor];
+        self.alertviewType = MjAlertViewTypeTypeHoner;
+        self.delegate =  delegate;
+        // 默认显示动画类型
+        //        self.alertviewType = MjAlertViewTypeTypeHoner;
+        
+    }
+    return self;
+}
 -(instancetype)initSkipToHonerAccount:(id)delegate{
     self = [self init];
     if (self) {
         
 
-        UIImageView *headerView  = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 373)];
+        UIImageView *headerView  = [[UIImageView alloc]initWithFrame:CGRectMake((ScreenWidth - 250.0f)/2.0f, 0, 250, 335)];
         headerView.userInteractionEnabled = YES;
-        headerView.image = [UIImage imageNamed:@"new_friend_bg.png"];
+        headerView.image = [UIImage imageNamed:@"honorable_bj"];
         
         [self.showView addSubview:headerView];
-        
+    
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        button.frame = CGRectMake((ScreenWidth - 194)/2.0, CGRectGetMaxY(headerView.frame)-20-37, 194, 37);
-        button.layer.cornerRadius = 17.5;
+        button.frame = CGRectMake((CGRectGetWidth(headerView.frame) - 135)/2.0, CGRectGetMaxY(headerView.frame) - 25 - 32, 135, 32);
+        button.layer.cornerRadius = 16.0f;
         button.userInteractionEnabled = YES;
         button.titleLabel.font = [UIFont systemFontOfSize:15];
         button.backgroundColor = UIColorWithRGB(0xfd4d4c);
         [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [button setTitle:@"立即查看详情" forState:UIControlStateNormal];
+        [button setTitle:@"立刻领取50元" forState:UIControlStateNormal];
         button.tag = CancelButtonTag + 1;
         [button addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];
         [headerView addSubview:button];
         
+        
         UIButton *cancelbutton = [UIButton buttonWithType:UIButtonTypeCustom];
-        cancelbutton.frame = CGRectMake(ScreenWidth - 34 - 19, CGRectGetMaxY(headerView.frame)-228-34,34, 34);
-        [cancelbutton setBackgroundImage:[UIImage imageNamed:@"new_friend_close"] forState:UIControlStateNormal];
+        cancelbutton.frame = CGRectMake((ScreenWidth - 30.5)/2, CGRectGetMaxY(headerView.frame) + 13,30.5, 30.5);
+        [cancelbutton setBackgroundImage:[UIImage imageNamed:@"honorable_bj_close"] forState:UIControlStateNormal];
         cancelbutton.tag = CancelButtonTag;
-        [cancelbutton addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];
-        [headerView addSubview:cancelbutton];
+        [cancelbutton addTarget:self action:@selector(closeBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [self.showView addSubview:cancelbutton];
         
         
-        [self.showView  setFrame:CGRectMake(0, 0, ScreenWidth, 373)];
-        self.showView.center = CGPointMake(ScreenWidth /2, ScreenHeight /2 - 72);
-
+        [self.showView  setFrame:CGRectMake(0, 0, ScreenWidth, 378.5)];
+        
         self.showView.backgroundColor = [UIColor clearColor];
-        self.alertviewType = MjAlertViewTypeInviteFriends;
+        self.alertviewType = MjAlertViewTypeTypeHoner;
         self.delegate =  delegate;
         // 默认显示动画类型
-        self.alertAnimateType = MjAlertViewAnimateTypeNone;
+//        self.alertviewType = MjAlertViewTypeTypeHoner;
         
     }
     return self;
@@ -653,7 +697,10 @@
     }
     if(self.alertviewType == MjAlertViewTypeInviteFriends){
         self.showView.center = CGPointMake(ScreenWidth/2, 373/2);
-    }else{
+    } else if (self.alertviewType == MjAlertViewTypeTypeHoner) {
+        self.showView.center = self.center;
+    }
+    else{
         self.showView.center = self.center;
     }
     
@@ -742,6 +789,10 @@
         [self.delegate mjalertView:self didClickedButton:button andClickedIndex:0];
         [self hide];
     }
+}
+- (void)closeBtnClicked:(UIButton *)button
+{
+     [self hide];
 }
 - (void)btnClicked:(UIButton *)button
 {

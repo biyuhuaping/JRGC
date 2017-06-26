@@ -17,7 +17,8 @@ typedef enum : NSUInteger {
     MjAlertViewTypeSign,
     MjAlertViewTypeCustom,
     MjAlertViewTypeInviteFriends,
-    MjAlertViewTypeTypeOne
+    MjAlertViewTypeTypeOne,
+    MjAlertViewTypeTypeHoner,
 } MjAlertViewType;
 
 //动画类型
@@ -63,6 +64,8 @@ typedef enum : NSUInteger {
 -(instancetype)initCollectionViewWithTitle:(NSString *)title sortArray:(NSArray *)sortArray  selectedSortButtonTag:(NSInteger)tag delegate:(id)delegate cancelButtonTitle:(NSString *)cancelButtonTitle withOtherButtonTitle:(NSString*)otherButtonTitle;
 #pragma  跳转尊享页面弹框
 -(instancetype)initSkipToHonerAccount:(id)delegate;
+//资金划转弹框
+-(instancetype)initSkipToMoneySwitchHonerAccout:(id)delegate;
 #pragma  首页邀请新政策弹框
 -(instancetype)initInviteFriendsToMakeMoneyDelegate:(id)delegate;
 
