@@ -154,6 +154,7 @@
         } else {
             _isShowAdversement = NO;
             self.advertisementView = nil;
+
 //            if (!self.lockVc) {
 //                [[MongoliaLayerCenter sharedManager] showLogic];
 //            }
@@ -681,6 +682,10 @@
 {
     int  novicePoliceOnOff = [[dic objectSafeForKey:@"novicePoliceOnOff"] intValue];
     [[MongoliaLayerCenter sharedManager].mongoliaLayerDic setValue:[NSNumber numberWithInt:novicePoliceOnOff] forKey:@"novicePoliceOnOff"];
+    NSString *novicePoliceContext = [dic objectSafeForKey:@"novicePoliceContext"];
+    [[MongoliaLayerCenter sharedManager].mongoliaLayerDic setValue:novicePoliceContext forKey:@"novicePoliceContext"];
+    NSString *novicePoliceUrl = [dic objectSafeForKey:@"novicePoliceUrl"];
+    [[MongoliaLayerCenter sharedManager].mongoliaLayerDic setValue:novicePoliceUrl forKey:@"novicePoliceUrl"];
 }
 - (void)zxSwitchCheck:(NSDictionary *)dic
 {

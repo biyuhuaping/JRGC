@@ -17,9 +17,9 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>3.0.21</string>
+	<string>3.0.30</string>
 	<key>CFBundleVersion</key>
-	<string>6</string>
+	<string>1</string>
 	<key>UIBackgroundModes</key>
 	<array/>
 	<key>UISupportedInterfaceOrientations</key>
@@ -28,7 +28,7 @@
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
 	<key>WKCompanionAppBundleIdentifier</key>
-	<string>com.dzlh.jgrcapp</string>
+	<string>com.dzlh.jgrcapp299</string>
 	<key>WKWatchKitApp</key>
 	<true/>
 </dict>

@@ -69,6 +69,8 @@
     }];
     
     self.tableView.footer.hidden = YES;
+    [self.tableView.header beginRefreshing];
+
 }
 - (void)getHonerInvestHTTPRequst{
     NSString *uuid = [[NSUserDefaults standardUserDefaults]valueForKey:UUID];

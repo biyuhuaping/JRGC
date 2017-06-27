@@ -55,6 +55,7 @@
     
     CGFloat bottomViewYPos;
     BOOL _isP2P;//是否是P2P标
+    NSString *_p2pOrHonerType;// 1为微金，2位普通尊享，3为委托尊享标
     MinuteCountDownView *_minuteCountDownView;//倒计时View
 }
 
@@ -108,6 +109,12 @@
     }
     _headBkView.image = [UIImage imageNamed:@"particular_bg_2"];
     [self addSubview:_headBkView];
+    if (_type == PROJECTDETAILTYPEBONDSRRANSFER){
+        _p2pOrHonerType = [[_dic objectSafeDictionaryForKey:@"prdTransferFore"] objectSafeForKey:@"type"];
+    } else {
+        _p2pOrHonerType = [[_dic objectSafeDictionaryForKey:@"prdClaims"] objectSafeForKey:@"type"];
+
+    }
     [self drawHeadView];
 }
 
@@ -172,7 +179,7 @@
     remainLabel.frame = remainLabelFrame;
     remainLabel.textAlignment = NSTextAlignmentLeft;
     if (_type == PROJECTDETAILTYPEBONDSRRANSFER) {
-        remainLabel.text = @"剩余额度";
+        remainLabel.text = [_p2pOrHonerType intValue ] == 3 ? @"剩余金额":@"剩余额度";
     } else {
         NSString *remainLabelStr = _isP2P ? @"可投金额" : @"认购金额";
         remainLabel.text = remainLabelStr;
@@ -466,7 +473,7 @@
     [bottomBkView addSubview:line2];
     //****************分隔线**************
 
-    if (_type == PROJECTDETAILTYPEBONDSRRANSFER && !_isP2P){//债权转让
+    if (_type == PROJECTDETAILTYPEBONDSRRANSFER && [_p2pOrHonerType intValue] == 2){//债权转让 并且是普通尊享标
         if (row == 3) {
             UIImageView *qitouImageV = [[UIImageView alloc] initWithFrame:CGRectMake(IconXPos,44*2 + IconYPos, 22, 22)];
             qitouImageV.image = [UIImage imageNamed:@"particular_icon_guarantee.png"];
@@ -554,9 +561,8 @@
     UIView *line2 = [[UIView alloc] initWithFrame:CGRectMake(15, 44, ScreenWidth - 15, 0.5)];
     line2.backgroundColor = UIColorWithRGB(0xe3e5ea);
     [bottomBkView addSubview:line2];
-    //****************分隔线*************
-    
-    if (_type == PROJECTDETAILTYPEBONDSRRANSFER && !_isP2P ) {
+    //****************分隔线*************    
+    if (_type == PROJECTDETAILTYPEBONDSRRANSFER &&  [_p2pOrHonerType intValue] == 2 ) {
         if (row == 2) {
             //起投金额
             UIImageView *qitouImageV = [[UIImageView alloc] initWithFrame:CGRectMake(IconXPos,44*1 + IconYPos, 22, 22)];

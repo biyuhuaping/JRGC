@@ -13,6 +13,8 @@
 - (void)userLogin:(id)sender;
 - (void)resetPassword:(id)sender;
 - (void)regisiterBtn:(id)sender;
+- (void)seletedSegmentedControl:(NSInteger)seletedTag;
+
 
 @end
 

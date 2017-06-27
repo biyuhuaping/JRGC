@@ -19,7 +19,7 @@
 #import "FullWebViewController.h"
 #import "UCFCashTableViewCell.h"
 #import "UCFSettingItem.h"
-#define CASHWAYCELLHIGHT  70.0 //提现方式cell 的高度
+#define CASHWAYCELLHIGHT  73.0 //提现方式cell 的高度
 @interface UCFCashViewController ()<UCFChoseBankViewControllerDelegate,MjAlertViewDelegate,UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate,UIAlertViewDelegate>
 {
     CGFloat orinalHeight;
@@ -37,6 +37,7 @@
     NSString *_perDayAmountLimit;//单日最大提现金额
     NSString *_perDayRealTimeAmountLimit;//单日最大实时提现金额
     NSArray  *_cashWayArray;//提现方式数组
+    NSString *_perDayRealTimeTipStr;//单日提现子标题提示信息
 }
 @property (weak, nonatomic) IBOutlet UIScrollView *baseScrollView;
 @property (strong, nonatomic) IBOutlet UIImageView *bankIcon;
@@ -69,6 +70,8 @@
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *bankBranchViewHeight2;
 @property (strong, nonatomic) IBOutlet NZLabel *withdrawDescriptionLab;
 @property (strong, nonatomic) IBOutlet NZLabel *telServiceLabel;//联系客服
+@property (assign, nonatomic) float tableviewCellHeight;//联系客服
+
 - (IBAction)getMobileCheckCode:(id)sender;
 - (IBAction)sumitBtnClick:(id)sender;
 - (IBAction)clickChooseBankbranchVC:(UIButton *)sender;
@@ -91,9 +94,6 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
-   
     
     [self getMyBindCardMessage];//初始化数据
     [self initCashStyle]; //初始化提现方式
@@ -261,9 +261,10 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
 }
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     
-    return CASHWAYCELLHIGHT;
+    return self.tableviewCellHeight;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return _cashWayArray.count;
@@ -278,6 +279,8 @@
     UCFSettingItem *item = _cashWayArray[indexPath.row];
     cell.cashWayTitle.text = item.title;
     cell.cashWayDetailTitle.text = item.subtitle;
+    [cell.cashWayDetailTitle setFont:[UIFont systemFontOfSize:9] string:_perDayRealTimeTipStr];
+    [cell.cashWayDetailTitle setFontColor:[UIColor redColor] string:_perDayRealTimeTipStr];
     cell.cashWayButton.selected = item.isSelect;
     cell.cashWayButton.tag = indexPath.row +100;
     [cell.cashWayButton addTarget:self action:@selector(clickcCashWayButton:) forControlEvents:UIControlEventTouchUpInside];
@@ -295,7 +298,7 @@
         _height5.constant = 0;
     }
     if (_cashWayArray.count == 2 && indexPath.row == 0) {
-        UIView *lineview = [[UIView alloc]initWithFrame:CGRectMake(50, CGRectGetMaxY(cell.frame) - 0.5,ScreenWidth - 50, 0.5)];
+        UIView *lineview = [[UIView alloc]initWithFrame:CGRectMake(49, self.tableviewCellHeight - 0.5,ScreenWidth - 49, 0.5)];
         lineview.backgroundColor = UIColorWithRGB(0xE3E5EA);
         [cell addSubview:lineview];
     }
@@ -528,10 +531,18 @@
 #pragma mark --- 初始化提现方式
 -(void)initCashStyle{
     NSString *realTimeCashStr = @"";
-    if ([_perDayRealTimeAmountLimit isEqualToString:@""]) { //如果实时提现单日限额为空，则不展示
-        realTimeCashStr = [NSString stringWithFormat:@"单笔金额≤%@万，7*24小时实时到账。",_criticalValueStr];
+    _perDayRealTimeTipStr = @"每晚23:00至次日1:00是银行系统的维护时间，为避免掉单请勿该时段提现。";
+//    _perDayRealTimeTipStr = @"";
+    if([_perDayRealTimeTipStr isEqualToString:@""]){
+        self.tableviewCellHeight = 70.f;
     }else{
-        realTimeCashStr = [NSString stringWithFormat:@"单笔金额≤%@万，单日≤%@万，7*24小时实时到账。",_criticalValueStr,_perDayRealTimeAmountLimit];
+        self.tableviewCellHeight = 73.0f;
+    }
+
+    if ([_perDayRealTimeAmountLimit isEqualToString:@""]) { //如果实时提现单日限额为空，则不展示
+        realTimeCashStr = [NSString stringWithFormat:@"单笔金额≤%@万，7*24小时实时到账。\n%@",_criticalValueStr,_perDayRealTimeTipStr];
+    }else{
+        realTimeCashStr = [NSString stringWithFormat:@"单笔金额≤%@万，单日≤%@万，7*24小时实时到账。\n%@",_criticalValueStr,_perDayRealTimeAmountLimit,_perDayRealTimeTipStr];
     }
     NSString *largeCashStr = [NSString stringWithFormat:@"工作日%@受理，最快30分钟之内到账。",_doTime];
 
@@ -575,7 +586,7 @@
     _baseScrollView.contentOffset = CGPointMake(0, 0);
     _cashWayTableView.delegate = self;
     _cashWayTableView.dataSource = self;
-    _cashWayTableViewHeigt.constant = _cashWayArray.count * CASHWAYCELLHIGHT;
+    _cashWayTableViewHeigt.constant = _cashWayArray.count * self.tableviewCellHeight;
 }
 #pragma mark --- 点击修改提现金额按钮
 - (IBAction)clickModifyWithdrawCashBtn:(UIButton *)sender{

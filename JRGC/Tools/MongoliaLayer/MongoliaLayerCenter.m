@@ -13,6 +13,7 @@
 #import "AppDelegate.h"
 #import "UCFHomeViewController.h"
 #import "HSHelper.h"
+#import "FestivalActivitiesWebView.h"
 #import "FullWebViewController.h"
 @interface MongoliaLayerCenter ()<MaskViewDelegate>
 {
@@ -52,18 +53,29 @@
     if (app.advertisementView || [self isCurrentViewControllerVisible:app.lockVc] || ![nav.visibleViewController isKindOfClass:[UCFHomeViewController class]]) {
         return;
     }
+    
+//    FestivalActivitiesWebView *festivalView = [[FestivalActivitiesWebView alloc] initWithNibName:@"FestivalActivitiesWebView" bundle:nil];
+//    festivalView.url = @"https://m.9888.cn/static/wap/topic-invite/index.html";
+//    festivalView.isHideNavigationBar = YES;
+//    festivalView.definesPresentationContext = YES;
+//    festivalView.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+//    if (kIS_IOS8) {
+//        festivalView.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+//    }
+//    [nav presentViewController:festivalView animated:NO completion:nil];
+    
     //不登录就需要查看的
     NSDate *lastFirstLoginTime = [[NSUserDefaults standardUserDefaults] objectForKey:FirstAlertViewShowTime];
     BOOL isBelongToToday = [NSDate isBelongToTodayWithDate:lastFirstLoginTime]; //是不是同一天
     //NO 代表当天只显示一回的
     if (!isBelongToToday) {
-        //新手政策是否显示
+//        //新手政策是否显示
         if ([[self.mongoliaLayerDic valueForKey:@"novicePoliceOnOff"] boolValue]) {
             //通知弹窗显示新手政策
             [self.tableView setContentOffset:CGPointMake(0, 0)];
-            MjAlertView *alertView = [[MjAlertView alloc]initInviteFriendsToMakeMoneyDelegate:self];
+            MjAlertView *alertView = [[MjAlertView alloc] initInviteFriendsToMakeMoneyDelegate:self];
             alertView.tag = 1000;
-            [alertView show];
+            [alertView show]; 
             return;
         }
     }
@@ -121,9 +133,6 @@
         } else {
             [helper pushOpenHSType:SelectAccoutTypeHoner Step:[UserInfoSingle sharedManager].enjoyOpenStatus nav:nav];
         }
-        
-//        HSHelper *helper = [HSHelper new];
-//        [helper pushOpenHSType:SelectAccoutTypeHoner Step:[UserInfoSingle sharedManager].enjoyOpenStatus nav:nav];
     }
 }
 #pragma mark  netMethod
