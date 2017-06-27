@@ -42,6 +42,7 @@
     bankDepositoryAccountVC.accoutType = type;
     [nav pushViewController:bankDepositoryAccountVC animated:YES];
 }
+
 - (void)pushOpenHSType:(SelectAccoutType)type Step:(NSInteger)step nav:(UINavigationController *)nav;
 {
     _accoutType = type;

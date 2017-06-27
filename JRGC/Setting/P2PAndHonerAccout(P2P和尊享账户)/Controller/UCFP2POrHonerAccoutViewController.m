@@ -78,11 +78,19 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getP2POrHonerAccoutHttpRequest) name:RELOADP2PORHONERACCOTDATA object:nil];
     if (self.accoutType == SelectAccoutTypeP2P) {
         BOOL isFirstStep = [[NSUserDefaults standardUserDefaults] boolForKey:@"ISFirstStepInP2PAccount"];
-        if (!isFirstStep && [UserInfoSingle sharedManager].enjoyOpenStatus < 3) {
-            MjAlertView *alertView = [[MjAlertView alloc] initSkipToHonerAccount:self];
-            alertView.tag = 1002;
-            [alertView show];
-            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"ISFirstStepInP2PAccount"];
+        if (!isFirstStep) {
+            if ([UserInfoSingle sharedManager].enjoyOpenStatus < 3) {
+//                MjAlertView *alertView = [[MjAlertView alloc] initSkipToHonerAccount:self];
+//                alertView.tag = 1002;
+//                [alertView show];
+//                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"ISFirstStepInP2PAccount"];
+            } else {
+                MjAlertView *alertView = [[MjAlertView alloc] initSkipToMoneySwitchHonerAccout:self];
+                alertView.tag = 1001;
+                [alertView show];
+                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"ISFirstStepInP2PAccount"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+            }
         }
     }
 }
@@ -426,11 +434,13 @@
 {
     if (alertview.tag == 1002 && [UserInfoSingle sharedManager].enjoyOpenStatus < 3) {
         HSHelper *helper = [HSHelper new];
-        [helper pushOpenHSType:SelectAccoutTypeHoner Step:1 nav:self.navigationController];
+        if (![helper checkP2POrWJIsAuthorization:SelectAccoutTypeHoner]) {
+            [helper pushP2POrWJAuthorizationType:SelectAccoutTypeHoner nav:self.navigationController];
+        } else {
+            [helper pushOpenHSType:SelectAccoutTypeHoner Step:[UserInfoSingle sharedManager].enjoyOpenStatus nav:self.navigationController];
+        }
     } else {
-        UCFP2POrHonerAccoutViewController *subVC = [[UCFP2POrHonerAccoutViewController alloc] initWithNibName:@"UCFP2POrHonerAccoutViewController" bundle:nil];
-        subVC.accoutType = SelectAccoutTypeHoner;
-        [self.navigationController pushViewController:subVC animated:YES];
+        [self clickCashBtn:nil];
     }
 }
 

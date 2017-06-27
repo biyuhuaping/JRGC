@@ -412,7 +412,7 @@
         button.titleLabel.font = [UIFont systemFontOfSize:15];
         button.backgroundColor = UIColorWithRGB(0xfd4d4c);
         [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [button setTitle:@"去尊享 赚收益" forState:UIControlStateNormal];
+        [button setTitle:@"提钱去尊享" forState:UIControlStateNormal];
         button.tag = CancelButtonTag + 1;
         [button addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];
         [headerView addSubview:button];
