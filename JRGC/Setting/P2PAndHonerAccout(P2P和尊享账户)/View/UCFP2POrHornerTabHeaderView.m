@@ -81,7 +81,7 @@
         if ([UserInfoSingle sharedManager].enjoyOpenStatus < 3) {
             [_moneySwitchBtn setTitle:@"开尊享  赚收益" forState:UIControlStateNormal];
         } else {
-            [_moneySwitchBtn setTitle:@"资金如何划转尊享账户？" forState:UIControlStateNormal];
+            [_moneySwitchBtn setTitle:@"资金如何转至尊享账户？" forState:UIControlStateNormal];
         }
     }
     
