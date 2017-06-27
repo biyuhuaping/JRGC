@@ -112,9 +112,18 @@
         [nav pushViewController:webView animated:YES];
     }else if (alertview.tag == 1001) {
         [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID]} tag:KSXTagADJustMent owner:self signature:YES Type:SelectAccoutDefault];
+        [self showLogic];
     } else if (alertview.tag == 1002) {
+        
         HSHelper *helper = [HSHelper new];
-        [helper pushOpenHSType:SelectAccoutTypeHoner Step:[UserInfoSingle sharedManager].enjoyOpenStatus nav:nav];
+        if (![helper checkP2POrWJIsAuthorization:SelectAccoutTypeHoner]) {
+            [helper pushP2POrWJAuthorizationType:SelectAccoutTypeHoner nav:nav];
+        } else {
+            [helper pushOpenHSType:SelectAccoutTypeHoner Step:[UserInfoSingle sharedManager].enjoyOpenStatus nav:nav];
+        }
+        
+//        HSHelper *helper = [HSHelper new];
+//        [helper pushOpenHSType:SelectAccoutTypeHoner Step:[UserInfoSingle sharedManager].enjoyOpenStatus nav:nav];
     }
 }
 #pragma mark  netMethod

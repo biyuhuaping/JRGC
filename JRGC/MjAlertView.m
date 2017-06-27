@@ -8,7 +8,7 @@
 
 #import "MjAlertView.h"
 #import "NZLabel.h"
-
+#import "AppDelegate.h"
 #define SCREEN_WIDTH_5 ([UIScreen mainScreen].bounds.size.width == 320)
 #define SCREEN_WIDTH_6 ([UIScreen mainScreen].bounds.size.width == 375)
 #define SCREEN_WIDTH_6P ([UIScreen mainScreen].bounds.size.width == 414)
@@ -375,7 +375,7 @@
     cancelbutton.frame = CGRectMake(ScreenWidth - 34 - 19, CGRectGetMaxY(headerView.frame)-228-34,34, 34);
     [cancelbutton setBackgroundImage:[UIImage imageNamed:@"new_friend_close"] forState:UIControlStateNormal];
     cancelbutton.tag = CancelButtonTag;
-    [cancelbutton addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [cancelbutton addTarget:self action:@selector(closeBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     [headerView addSubview:cancelbutton];
         
         
@@ -816,8 +816,9 @@
 #pragma mark - 显示
 - (void)show
 {
-    [[UIApplication sharedApplication].keyWindow addSubview:self];
-    [[UIApplication sharedApplication].keyWindow bringSubviewToFront:self];
+    AppDelegate *app =  (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    [app.window addSubview:self];
+    NSLog(@"self.window.windowLevel == %lf",self.window.windowLevel) ;
     NSLog(@"%@", NSStringFromCGRect(self.showView.frame));
 }
 
