@@ -508,7 +508,7 @@
     _criticalValueStr =  [dataDic objectSafeForKey:@"criticalValue"];
     _perDayAmountLimit =  [dataDic objectSafeForKey:@"perDayAmountLimit"];
     _perDayRealTimeAmountLimit = [dataDic objectSafeForKey:@"perDayRealTimeAmountLimit"];
-    
+    _perDayRealTimeTipStr = [dataDic objectSafeForKey:@"realWithdrawMess"];//实时提现银行维护时间描述
 //    NSMutableParagraphStyle *paragraph = [[NSMutableParagraphStyle alloc] init];
 //    paragraph.alignment = NSTextAlignmentLeft;
 //    paragraph.lineSpacing = 1;
@@ -531,8 +531,8 @@
 #pragma mark --- 初始化提现方式
 -(void)initCashStyle{
     NSString *realTimeCashStr = @"";
-    _perDayRealTimeTipStr = @"每晚23:00至次日1:00是银行系统的维护时间，为避免掉单请勿该时段提现。";
-//    _perDayRealTimeTipStr = @"";
+//    _perDayRealTimeTipStr = @"每晚23:00至次日1:00是银行系统的维护时间，为避免掉单请勿该时段提现。";
+////    _perDayRealTimeTipStr = @"";
     if([_perDayRealTimeTipStr isEqualToString:@""]){
         self.tableviewCellHeight = 70.f;
     }else{

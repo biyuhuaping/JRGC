@@ -10,6 +10,8 @@
 #import "Common.h"
 
 @interface UCFModifyIdAuthViewController ()
+@property (weak, nonatomic) IBOutlet UIImageView *upImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *downImgeView;
 @property (weak, nonatomic) IBOutlet UILabel *realNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *genderLabel;
 @property (weak, nonatomic) IBOutlet UILabel *idNoLabel;
@@ -111,7 +113,8 @@
     }
     
     [self addLeftButton];
-    baseTitleLabel.text = @"身份认证";
+    
+    baseTitleLabel.text =  [UserInfoSingle sharedManager].companyAgent ? @"企业认证" : @"身份认证";
     
     [self getIdInfoFromNet];
     
@@ -146,10 +149,14 @@
         int isSucess = [dic[@"ret"]intValue];
         if (isSucess == 1) {
             if (isCompanyAgent) {
+                self.upImageView.image = [UIImage imageNamed:@"idcard_company"];
+                self.downImgeView.image = [UIImage imageNamed:@"card_company_bg"];
                 self.realNameLabel.text = [NSString stringWithFormat:@"企业名称：%@", [dataDict objectSafeForKey:@"realName"]];
-                self.genderLabel.text =@"性别：X";
-                self.idNoLabel.text = [NSString stringWithFormat:@"证件号：%@", [dataDict objectSafeForKey:@"idno"]];
+                self.genderLabel.text = [NSString stringWithFormat:@"法人姓名：%@",[dataDict objectSafeForKey:@"legalName"]];
+                self.idNoLabel.text = [NSString stringWithFormat:@"%@：%@", [dataDict objectSafeForKey:@"codeName"],[dataDict objectSafeForKey:@"idno"]];
             }else{
+                self.upImageView.image = [UIImage imageNamed:@"idcard_pic"];
+                self.downImgeView.image = [UIImage imageNamed:@"card_bg"];
                 self.realNameLabel.text = [NSString stringWithFormat:@"姓名：%@", [dataDict   objectSafeForKey:@"realName"]];
                 self.genderLabel.text = [NSString stringWithFormat:@"性别：%@", ([[dataDict  objectSafeForKey:@"sex"] integerValue] == 0 ? @"女" : @"男")];
                 self.idNoLabel.text = [NSString stringWithFormat:@"证件号：%@", [dataDict objectSafeForKey:@"idno"]];
