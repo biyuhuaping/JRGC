@@ -27,7 +27,9 @@
 #import "HSHelper.h"
 #import "UCFInvitationRebateViewController.h"
 #import "UCFSession.h"
-@interface UCFP2POrHonerAccoutViewController ()<UITableViewDelegate,UITableViewDataSource,UCFP2POrHornerTabHeaderViewDelete,UIAlertViewDelegate>
+#import "MjAlertView.h"
+
+@interface UCFP2POrHonerAccoutViewController ()<UITableViewDelegate,UITableViewDataSource,UCFP2POrHornerTabHeaderViewDelete,UIAlertViewDelegate,MjAlertViewDelegate>
 {
     UCFP2POrHornerTabHeaderView *_headerView;
     BOOL _isShowOrHideAccoutMoney;
@@ -74,7 +76,23 @@
     [self addLeftButton];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getP2POrHonerAccoutHttpRequest) name:RELOADP2PORHONERACCOTDATA object:nil];
-
+    if (self.accoutType == SelectAccoutTypeP2P) {
+        BOOL isFirstStep = [[NSUserDefaults standardUserDefaults] boolForKey:@"ISFirstStepInP2PAccount"];
+        if (!isFirstStep) {
+            if ([UserInfoSingle sharedManager].enjoyOpenStatus < 3) {
+//                MjAlertView *alertView = [[MjAlertView alloc] initSkipToHonerAccount:self];
+//                alertView.tag = 1002;
+//                [alertView show];
+//                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"ISFirstStepInP2PAccount"];
+            } else {
+                MjAlertView *alertView = [[MjAlertView alloc] initSkipToMoneySwitchHonerAccout:self];
+                alertView.tag = 1001;
+                [alertView show];
+                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"ISFirstStepInP2PAccount"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+            }
+        }
+    }
 }
 -(void)removeLoadingView
 {
@@ -193,7 +211,12 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     if (section == 0) {
-        return 160;
+        if (self.accoutType == SelectAccoutTypeP2P) {
+            return 208;
+        } else {
+            return 160;
+        }
+        
     }
     return 10;
 }
@@ -205,8 +228,9 @@
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     if (section == 0) {
+        CGFloat headHeight = self.accoutType == SelectAccoutTypeP2P ? 208 : 160;
         _headerView = [[[NSBundle mainBundle]loadNibNamed:@"UCFP2POrHornerTabHeaderView" owner:nil options:nil] firstObject];
-        _headerView.frame = CGRectMake(0, 0, ScreenWidth, 160);
+        _headerView.frame = CGRectMake(0, 0, ScreenWidth, headHeight);
         _headerView.upView.backgroundColor = UIColorWithRGB(0x5b6993);
         _headerView.downView.backgroundColor = [UIColor whiteColor];
         _headerView.delegate = self;
@@ -217,10 +241,11 @@
         }else{
             _headerView.totalIncomeTitleLab.text = @"微金总资产";
         }
-        UIView *lineView1 = [[UIView alloc]initWithFrame:CGRectMake(0,159.5, ScreenWidth, 0.5)];
+        UIView *lineView1 = [[UIView alloc]initWithFrame:CGRectMake(0,headHeight - 0.5, ScreenWidth, 0.5)];
         lineView1.backgroundColor = UIColorWithRGB(0xd8d8d8);
         [_headerView addSubview:lineView1];
         _headerView.dataDict = _dataDict;
+        _headerView.clipsToBounds = YES;
         return _headerView;
     }else{
         UIView *headerView = [[UIView alloc]initWithFrame: CGRectMake(0, 0, ScreenWidth, 10)];
@@ -394,11 +419,31 @@
 //资金如何划转
 - (void)changeP2POrHonerAccoutMoneyAlertView
 {
-    NSString *message = self.accoutType == SelectAccoutTypeP2P ? @"Q:如何用微金账户中的1万元投资尊享标？\n A:需先将微金账户中的1万元提现至银行卡，再开通尊享账户(已开通尊享账户的用户跳过此步骤)，将资金充值到尊享账户，充值成功后可进行投资。":@"Q:如何用尊享账户中的1万元投资微金标？\n A:需先将尊享账户中的1万元提现至银行卡，再开通微金账户(已开通微金账户的用户跳过此步骤)，将资金充值到微金账户，充值成功后可进行投资";
-    
-    UIAlertView *alerView = [[UIAlertView alloc]initWithTitle:@"资金如何划转" message:message delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
-    [alerView show];
+    if ([UserInfoSingle sharedManager].enjoyOpenStatus < 3) {
+        MjAlertView *alertView = [[MjAlertView alloc] initSkipToHonerAccount:self];
+        alertView.tag = 1002;
+        [alertView show];
+    } else {
+        MjAlertView *alertView = [[MjAlertView alloc] initSkipToMoneySwitchHonerAccout:self];
+        alertView.tag = 1001;
+        [alertView show];
+    }
+
 }
+- (void)mjalertView:(MjAlertView *)alertview didClickedButton:(UIButton *)clickedButton andClickedIndex:(NSInteger)index
+{
+    if (alertview.tag == 1002 && [UserInfoSingle sharedManager].enjoyOpenStatus < 3) {
+        HSHelper *helper = [HSHelper new];
+        if (![helper checkP2POrWJIsAuthorization:SelectAccoutTypeHoner]) {
+            [helper pushP2POrWJAuthorizationType:SelectAccoutTypeHoner nav:self.navigationController];
+        } else {
+            [helper pushOpenHSType:SelectAccoutTypeHoner Step:[UserInfoSingle sharedManager].enjoyOpenStatus nav:self.navigationController];
+        }
+    } else {
+        [self clickCashBtn:nil];
+    }
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

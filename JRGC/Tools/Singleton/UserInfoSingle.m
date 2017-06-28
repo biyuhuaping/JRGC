@@ -9,6 +9,7 @@
 #import "UserInfoSingle.h"
 #import <objc/runtime.h>
 #import "Growing.h"
+#import "MongoliaLayerCenter.h"
 @implementation UserInfoSingle
 
 + (UserInfoSingle *)sharedManager
@@ -120,7 +121,7 @@
     [Growing setCS1Value:nil forKey:@"user_Id"];
     [Growing setCS2Value:nil forKey:@"user_gcm"];
     [Growing setCS3Value:nil forKey:@"user_name"];
-    
+    [MongoliaLayerCenter sharedManager].honerAlert = NO;
     self.userId = nil;
     self.time = -1;
     self.jg_ckie = nil;

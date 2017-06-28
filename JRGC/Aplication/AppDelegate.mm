@@ -153,7 +153,8 @@
             _isShowAdversement = YES;
         } else {
             _isShowAdversement = NO;
-            _advertisementView = nil;
+            self.advertisementView = nil;
+
 //            if (!self.lockVc) {
 //                [[MongoliaLayerCenter sharedManager] showLogic];
 //            }
@@ -744,6 +745,7 @@
                         //可选择性更新
                         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"发现新版本 V%@",netVersion] message:des delegate:self cancelButtonTitle:@"下次再说" otherButtonTitles:@"更新", nil];
                         alert.tag = 101;
+                        NSLog(@"%lf",alert.window.windowLevel);
                         [alert show];
                     }
                 } else if (versionMark == 2) {

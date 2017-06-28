@@ -8,7 +8,9 @@
 
 #import "MjAlertView.h"
 #import "NZLabel.h"
+#import "AppDelegate.h"
 #import "MongoliaLayerCenter.h"
+
 #define SCREEN_WIDTH_5 ([UIScreen mainScreen].bounds.size.width == 320)
 #define SCREEN_WIDTH_6 ([UIScreen mainScreen].bounds.size.width == 375)
 #define SCREEN_WIDTH_6P ([UIScreen mainScreen].bounds.size.width == 414)
@@ -317,6 +319,7 @@
     }
     return self;
 }
+
 -(void)clickSortButton:(UIButton*)sortButton{
     if (_currentSelectSortBtnTag != sortButton.tag) {
         //置灰上一个选择的button
@@ -380,7 +383,7 @@
     cancelbutton.frame = CGRectMake(ScreenWidth - 34 - 19, CGRectGetMaxY(headerView.frame)-228-34,34, 34);
     [cancelbutton setBackgroundImage:[UIImage imageNamed:@"new_friend_close"] forState:UIControlStateNormal];
     cancelbutton.tag = CancelButtonTag;
-    [cancelbutton addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [cancelbutton addTarget:self action:@selector(closeBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     [headerView addSubview:cancelbutton];
         
         
@@ -392,6 +395,93 @@
     // 默认显示动画类型
     self.alertAnimateType = MjAlertViewAnimateTypeNone;
        
+    }
+    return self;
+}
+#pragma  跳转尊享页面弹框
+-(instancetype)initSkipToMoneySwitchHonerAccout:(id)delegate{
+    self = [self init];
+    if (self) {
+        
+        
+        UIImageView *headerView  = [[UIImageView alloc]initWithFrame:CGRectMake((ScreenWidth - 250.0f)/2.0f, 0, 250, 390)];
+        headerView.userInteractionEnabled = YES;
+        headerView.image = [UIImage imageNamed:@"skipHonerAccount"];
+        
+        [self.showView addSubview:headerView];
+        
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        button.frame = CGRectMake((CGRectGetWidth(headerView.frame) - 135)/2.0, CGRectGetMaxY(headerView.frame) - 25 - 32, 135, 32);
+        button.layer.cornerRadius = 16.0f;
+        button.userInteractionEnabled = YES;
+        button.titleLabel.font = [UIFont systemFontOfSize:15];
+        button.backgroundColor = UIColorWithRGB(0xfd4d4c);
+        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [button setTitle:@"提钱去尊享" forState:UIControlStateNormal];
+        button.tag = CancelButtonTag + 1;
+        [button addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [headerView addSubview:button];
+        
+        
+        UIButton *cancelbutton = [UIButton buttonWithType:UIButtonTypeCustom];
+        cancelbutton.frame = CGRectMake((ScreenWidth - 30.5)/2, CGRectGetMaxY(headerView.frame) + 13,30.5, 30.5);
+        [cancelbutton setBackgroundImage:[UIImage imageNamed:@"honorable_bj_close"] forState:UIControlStateNormal];
+        cancelbutton.tag = CancelButtonTag;
+        [cancelbutton addTarget:self action:@selector(closeBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [self.showView addSubview:cancelbutton];
+        
+        
+        [self.showView  setFrame:CGRectMake(0, 0, ScreenWidth, 433.5)];
+        
+        self.showView.backgroundColor = [UIColor clearColor];
+        self.alertviewType = MjAlertViewTypeTypeHoner;
+        self.delegate =  delegate;
+        // 默认显示动画类型
+        //        self.alertviewType = MjAlertViewTypeTypeHoner;
+        
+    }
+    return self;
+}
+-(instancetype)initSkipToHonerAccount:(id)delegate{
+    self = [self init];
+    if (self) {
+        
+
+        UIImageView *headerView  = [[UIImageView alloc]initWithFrame:CGRectMake((ScreenWidth - 250.0f)/2.0f, 0, 250, 335)];
+        headerView.userInteractionEnabled = YES;
+        headerView.image = [UIImage imageNamed:@"honorable_bj"];
+        
+        [self.showView addSubview:headerView];
+    
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        button.frame = CGRectMake((CGRectGetWidth(headerView.frame) - 135)/2.0, CGRectGetMaxY(headerView.frame) - 25 - 32, 135, 32);
+        button.layer.cornerRadius = 16.0f;
+        button.userInteractionEnabled = YES;
+        button.titleLabel.font = [UIFont systemFontOfSize:15];
+        button.backgroundColor = UIColorWithRGB(0xfd4d4c);
+        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [button setTitle:@"立刻领取50元" forState:UIControlStateNormal];
+        button.tag = CancelButtonTag + 1;
+        [button addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [headerView addSubview:button];
+        
+        
+        UIButton *cancelbutton = [UIButton buttonWithType:UIButtonTypeCustom];
+        cancelbutton.frame = CGRectMake((ScreenWidth - 30.5)/2, CGRectGetMaxY(headerView.frame) + 13,30.5, 30.5);
+        [cancelbutton setBackgroundImage:[UIImage imageNamed:@"honorable_bj_close"] forState:UIControlStateNormal];
+        cancelbutton.tag = CancelButtonTag;
+        [cancelbutton addTarget:self action:@selector(closeBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [self.showView addSubview:cancelbutton];
+        
+        
+        [self.showView  setFrame:CGRectMake(0, 0, ScreenWidth, 378.5)];
+        
+        self.showView.backgroundColor = [UIColor clearColor];
+        self.alertviewType = MjAlertViewTypeTypeHoner;
+        self.delegate =  delegate;
+        // 默认显示动画类型
+//        self.alertviewType = MjAlertViewTypeTypeHoner;
+        
     }
     return self;
 }
@@ -612,7 +702,10 @@
     }
     if(self.alertviewType == MjAlertViewTypeInviteFriends){
         self.showView.center = CGPointMake(ScreenWidth/2, 373/2);
-    }else{
+    } else if (self.alertviewType == MjAlertViewTypeTypeHoner) {
+        self.showView.center = self.center;
+    }
+    else{
         self.showView.center = self.center;
     }
     
@@ -702,6 +795,10 @@
         [self hide];
     }
 }
+- (void)closeBtnClicked:(UIButton *)button
+{
+     [self hide];
+}
 - (void)btnClicked:(UIButton *)button
 {
     if ([self.delegate respondsToSelector:@selector(mjalertView:didClickedButton:andClickedIndex:)]) {
@@ -724,8 +821,9 @@
 #pragma mark - 显示
 - (void)show
 {
-    [[UIApplication sharedApplication].keyWindow addSubview:self];
-    [[UIApplication sharedApplication].keyWindow bringSubviewToFront:self];
+    AppDelegate *app =  (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    [app.window addSubview:self];
+    NSLog(@"self.window.windowLevel == %lf",self.window.windowLevel) ;
     NSLog(@"%@", NSStringFromCGRect(self.showView.frame));
 }
 

@@ -12,6 +12,7 @@
 #import "JSONKit.h"
 #import "AppDelegate.h"
 #import "UCFHomeViewController.h"
+#import "HSHelper.h"
 #import "FestivalActivitiesWebView.h"
 #import "FullWebViewController.h"
 @interface MongoliaLayerCenter ()<MaskViewDelegate>
@@ -98,6 +99,13 @@
         [alertView show];
         return;
     }
+    //
+    if ([UserInfoSingle sharedManager].enjoyOpenStatus < 3 && !_honerAlert) {
+        MjAlertView *alertView = [[MjAlertView alloc] initSkipToHonerAccount:self];
+        alertView.tag = 1002;
+        _honerAlert = YES;
+        [alertView show];
+    }
 }
 - (void)viewWillRemove:(MaskView *)view
 {
@@ -107,15 +115,24 @@
 
 - (void)mjalertView:(MjAlertView *)alertview didClickedButton:(UIButton *)clickedButton andClickedIndex:(NSInteger)index
 {
-    if (alertview.tag == 1001) {
-        [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID]} tag:KSXTagADJustMent owner:self signature:YES Type:SelectAccoutDefault];
-    } else if (alertview.tag == 1000) {
-        AppDelegate * app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-        UINavigationController *nav = app.tabBarController.selectedViewController;
-        FullWebViewController *webView = [[FullWebViewController alloc] initWithWebUrl:[[MongoliaLayerCenter sharedManager].mongoliaLayerDic valueForKey:@"novicePoliceUrl"]  title:@"新手政策"];
+    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    UINavigationController *nav = app.tabBarController.selectedViewController;
+    if (alertview.tag == 1000) {
+        FullWebViewController *webView = [[FullWebViewController alloc] initWithWebUrl:HOMEINVITATIONURL title:@"邀请返利"];
         webView.flageHaveShareBut = @"分享";
         webView.sourceVc = @"UCFLatestProjectViewController";
         [nav pushViewController:webView animated:YES];
+    }else if (alertview.tag == 1001) {
+        [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID]} tag:KSXTagADJustMent owner:self signature:YES Type:SelectAccoutDefault];
+        [self showLogic];
+    } else if (alertview.tag == 1002) {
+        
+        HSHelper *helper = [HSHelper new];
+        if (![helper checkP2POrWJIsAuthorization:SelectAccoutTypeHoner]) {
+            [helper pushP2POrWJAuthorizationType:SelectAccoutTypeHoner nav:nav];
+        } else {
+            [helper pushOpenHSType:SelectAccoutTypeHoner Step:[UserInfoSingle sharedManager].enjoyOpenStatus nav:nav];
+        }
     }
 }
 #pragma mark  netMethod
