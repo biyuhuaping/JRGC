@@ -64,7 +64,7 @@
 {
 #pragma mark - add segmentcontrol and segmentcontrol clicked method
     _itemSeletedView =[[UCFSelectedView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 44)];
-    self.itemSeletedView.sectionTitles = @[@"个人登录", @"企业登录"];
+    self.itemSeletedView.sectionTitles = @[@"个人账户", @"企业账户"];
     self.itemSeletedView.backgroundColor = [UIColor whiteColor];
     self.itemSeletedView.delegate = self;
     [self addSubview:_itemSeletedView];
