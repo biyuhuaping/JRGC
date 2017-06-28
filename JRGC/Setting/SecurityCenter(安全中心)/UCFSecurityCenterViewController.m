@@ -332,6 +332,7 @@
                 switch (index) {
 //
                     case 0:{
+                        userItem.title = [self.isCompanyAgent boolValue] ? @"企业认证":@"身份认证";
                         userItem.subtitle = [authId isEqualToString:@"未认证"] ? @"未认证" : authId;
                     }
                         break;
