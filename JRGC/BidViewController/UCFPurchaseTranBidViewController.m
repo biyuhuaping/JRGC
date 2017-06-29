@@ -60,7 +60,7 @@
     [self addLeftButton];
     baseTitleLabel.text = self.accoutType == SelectAccoutTypeHoner ? @"购买":@"出借";
     self.zxOrP2pStr = self.accoutType == SelectAccoutTypeHoner ?@"购买":@"出借";
-    _p2POrHonerType = [[_dataDict objectSafeDictionaryForKey:@"prdTransferFore"] objectSafeForKey:@"type"];
+    _p2POrHonerType = [[_dataDict objectSafeDictionaryForKey:@"data"] objectSafeForKey:@"type"];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     
     isHasOverdueGongDou = [self checkOverdueGongDou];
@@ -68,7 +68,7 @@
     self.bidArray = [NSMutableArray array];
     [self.bidArray addObject:dict];
 
-
+   [[NSNotificationCenter defaultCenter]  addObserver:self selector:@selector(reloadMainView) name:@"UPDATEINVESTDATA" object:nil];
     _bidTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _bidTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _bidTableView.userInteractionEnabled = YES;
@@ -103,9 +103,9 @@
     } else if (indexPath.row == 1) {//V2.4.20 去掉倒计时 36变为 0
         NSString *buyCueDesStr =[_dataDict objectSafeForKey:@"buyCueDes"];
         if (![buyCueDesStr isEqualToString:@""]) {
-            return 202.0f - 43 - 54 + 0 + 15;
+            return 201.0f - 43 - 54 + 0 + 15 ;
         }
-        return 202.0f - 43 - 54 + 0;
+        return 201.0f - 43 - 54 + 0 ;
     } else if (indexPath.row == 2) {
         return 30;
     }
@@ -129,7 +129,7 @@
         NSDictionary *info =  self.bidArray[0];
         [cell setTransInvestItemInfo:info];
         cell.p2POrHonerType = _p2POrHonerType;
-        return cell;
+       return cell;
     } else if(indexPath.row == 1){
         static NSString *cellStr2 = @"cell2";
         MoneyBoardCell *cell = [self.bidTableView dequeueReusableCellWithIdentifier:cellStr2];
@@ -153,7 +153,7 @@
         cell.accoutType = self.accoutType;
         cell.dataDict = _dataDict;
         cell.isTransid = YES;
-        cell.inputMoneyTextFieldLable.text = self.accoutType == SelectAccoutTypeHoner ? [self getHonerDefaultText] : [self getP2PDefaultText];
+        cell.inputMoneyTextFieldLable.text = [self.p2POrHonerType intValue] == 2 ? [self getHonerDefaultText] : [self getP2PDefaultText];
         /*
         if (isGongDouSwitch) {
             cell.gongDouAccout.textColor = UIColorWithRGB(0x333333);

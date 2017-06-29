@@ -83,14 +83,14 @@
     if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
         return;
     }
-    //是否弹用户引导蒙层
-    if (![[NSUserDefaults standardUserDefaults] boolForKey:CHECK_ISSHOW_MASKVIEW]) {
-        //发送弹蒙层通知
-        MaskView *view = [MaskView makeViewWithMask:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
-        view.delegate = self;
-        [view show];
-        return;
-    }
+    //是否弹用户引导蒙层 *****3.0.30需求去掉引导遮罩
+//    if (![[NSUserDefaults standardUserDefaults] boolForKey:CHECK_ISSHOW_MASKVIEW]) {
+//        //发送弹蒙层通知
+//        MaskView *view = [MaskView makeViewWithMask:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
+//        view.delegate = self;
+//        [view show];
+//        return;
+//    }
     //是否弹平台升级调整公告
     if (![[self.mongoliaLayerDic valueForKey:@"authorization"] boolValue]) {
         NSString *authorizationDate = [self.mongoliaLayerDic valueForKey:@"authorizationDate"];
