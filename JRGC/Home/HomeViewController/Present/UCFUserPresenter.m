@@ -54,10 +54,6 @@
         userInfoList0.isShow = NO;
         userInfoList0.subtitle = @"未开户";
     }
-    else if ([self.userInfoOneModel.openStatus integerValue] == 3) {
-        userInfoList0.isShow = NO;
-        userInfoList0.subtitle = @"";
-    }
     else {
         userInfoList0.isShow = YES;
         userInfoList0.subtitle = self.userInfoOneModel.p2pCashBalance.length > 0 ? [NSString stringWithFormat:@"%@元", self.userInfoOneModel.p2pCashBalance] : @"0.00元";
@@ -69,10 +65,6 @@
     if ([self.userInfoOneModel.zxOpenStatus intValue] <= 2) {
         userInfoList1.isShow = NO;
         userInfoList1.subtitle = @"未开户";
-    }
-    else if ([self.userInfoOneModel.zxOpenStatus integerValue] == 3) {
-        userInfoList1.isShow = NO;
-        userInfoList1.subtitle = @"";
     }
     else {
         userInfoList1.isShow = YES;
