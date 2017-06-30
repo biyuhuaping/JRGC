@@ -67,6 +67,7 @@
 @property (copy, nonatomic) NSString *addProfit;
 @property (copy, nonatomic) NSString *asset;
 @property (copy, nonatomic) NSString *availableBanlance;
+@property (weak, nonatomic) IBOutlet UIButton *personInformationBtn;
 
 @end
 
@@ -137,6 +138,8 @@
     [self.cycleImageBackView addSubview:cycleScrollView];
     self.cycleImageView = cycleScrollView;
     
+    NSString *personInformationBtnTitle = [UserInfoSingle sharedManager].companyAgent ? @"企业信息" : @"个人信息";
+    [self.personInformationBtn setTitle:personInformationBtnTitle forState:UIControlStateNormal];
     [self performSelector:@selector(getNormalBannerData) withObject:nil afterDelay:0.5];
 }
 

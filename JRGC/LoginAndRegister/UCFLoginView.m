@@ -63,11 +63,12 @@
 - (void)initLoginViews
 {
 #pragma mark - add segmentcontrol and segmentcontrol clicked method
-    _itemSeletedView =[[UCFSelectedView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 44)];
+//    _itemSeletedView =[[UCFSelectedView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 44)]; //3.0.3版本取消此需求
+    _itemSeletedView =[[UCFSelectedView alloc]initWithFrame:CGRectZero];
     self.itemSeletedView.sectionTitles = @[@"个人账户", @"企业账户"];
     self.itemSeletedView.backgroundColor = [UIColor whiteColor];
     self.itemSeletedView.delegate = self;
-    [self addSubview:_itemSeletedView];
+//    [self addSubview:_itemSeletedView];
  
     _userNameTfd = [UITextFieldFactory getTextFieldObjectWithFrame:CGRectMake(XPOS, CGRectGetMaxY(self.itemSeletedView.frame)+ 10, ScreenWidth - 30, TEXTFIELDHEIGHT) delegate:self placeholder:@"用户名/邮箱/手机号" returnKeyType:UIReturnKeyDefault];
     
