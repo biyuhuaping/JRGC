@@ -381,12 +381,14 @@
             _gongDouCountLabel.hidden = YES;
             _gongDouSwitch.hidden = YES;
         
-            _allTouziBtn.hidden = self.accoutType == SelectAccoutTypeHoner;//如果是尊享债转 则隐藏全投按钮
+//            _allTouziBtn.hidden = self.accoutType == SelectAccoutTypeHoner;
         NSString *typeStr = [[_dataDict objectSafeDictionaryForKey:@"data"] objectSafeForKey:@"type"];
         if (self.accoutType == SelectAccoutTypeHoner && [typeStr intValue] == 2) {
             _inputMoneyTextFieldLable.userInteractionEnabled = NO;
+            _allTouziBtn.hidden = YES;////如果是普通尊享债转 则隐藏全投按钮
         }else{
             _inputMoneyTextFieldLable.userInteractionEnabled = YES;
+            _allTouziBtn.hidden = NO;//如果是p2P  委托尊享债转 则显示全投按钮
             _inputMoneyTextFieldLable.placeholder = [NSString stringWithFormat:@"%@起投",[[_dataDict objectForKey:@"data"] objectForKey:@"investAmt"]];
         }
     }

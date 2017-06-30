@@ -416,7 +416,7 @@
         view_y = 0 + [Common calculateNewSizeBaseMachine:HeadBkHeight] + bottomViewYPos;
     }
     
-    if (_type == PROJECTDETAILTYPEBONDSRRANSFER){//债权转让
+    if (_type == PROJECTDETAILTYPEBONDSRRANSFER &&  [_p2pOrHonerType intValue] == 2){//债权转让
         row --;
     }
     bottomBkView = [[UIView alloc] initWithFrame:CGRectMake(0, view_y, ScreenWidth, 44*row)];
@@ -532,7 +532,7 @@
     }else{
         bottomBeginYPos = 0 + [Common calculateNewSizeBaseMachine:HeadBkHeight] + bottomViewYPos;
     }
-    if (_type == PROJECTDETAILTYPEBONDSRRANSFER && !_isP2P ){ //为了隐藏尊享债转100起一栏
+    if (_type == PROJECTDETAILTYPEBONDSRRANSFER &&  [_p2pOrHonerType intValue] == 2 ){ //为了隐藏尊享债转100起一栏
         row --;
     }
     bottomBkView = [[UIView alloc] initWithFrame:CGRectMake(0,bottomBeginYPos, ScreenWidth, 44*row)];
