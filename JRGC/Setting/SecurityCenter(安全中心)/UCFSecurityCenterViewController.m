@@ -137,7 +137,7 @@
     [self addLeftButton];
 
 
-    baseTitleLabel.text = @"个人信息";
+    baseTitleLabel.text = [UserInfoSingle sharedManager].companyAgent ? @"企业信息" : @"个人信息";
   
     self.tableview.contentInset = UIEdgeInsetsMake(10, 0, 0, 0);
     self.tableview.separatorColor = UIColorWithRGB(0xe3e5ea);
