@@ -273,7 +273,11 @@
 {
     UCFCompanyNoOpenViewController * fullVC =[[UCFCompanyNoOpenViewController alloc]initWithNibName:@"UCFCompanyNoOpenViewController" bundle:nil];
     fullVC.baseTitleText = @"提示";
-    [self presentViewController:fullVC animated:YES completion:^{
+    if (kIS_IOS8) {
+        fullVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    }
+
+    [self presentViewController:fullVC animated:NO completion:^{
     }];
 }
 #pragma mark  登录成功之后向iOS发送数据 验签串 和工场码Data
