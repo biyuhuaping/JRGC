@@ -1286,7 +1286,15 @@ static NetworkModule *gInstance = NULL;
         case kSXTagPrdTransferList:
             parameter = [NEW_SERVER_IP stringByAppendingString:PRDTRANSEFERLIST];
             break;
-            
+        case kSXTagCalendarHeader:
+            parameter = [NEW_SERVER_IP stringByAppendingString:CALENDARHEADER];
+            break;
+        case kSXTagCalendarInfo:
+            parameter = [NEW_SERVER_IP stringByAppendingString:CALENDARINFO];
+            break;
+        case kSXTagCurrentDayInfo:
+            parameter = [NEW_SERVER_IP stringByAppendingString:CURRENTDAYINFO];
+            break;
     }
     //给原有参数字典添加公共参数
     if (!data) {
