@@ -627,11 +627,15 @@
     }
     if ([item.title isEqualToString:@"微金账户"]) {
         self.accoutType =  SelectAccoutTypeP2P;
-    }
-    else if ([item.title isEqualToString:@"尊享账户"]) {
+    } else if ([item.title isEqualToString:@"尊享账户"]) {
         self.accoutType = SelectAccoutTypeHoner;
+    } else if ([item.title isEqualToString:@"黄金账户"]) {
+        
+        
+        
+        return;
     }
-
+    
     if ([self checkUserCanInvestIsDetail:YES type:self.accoutType]) {
         UCFP2POrHonerAccoutViewController *subVC = [[UCFP2POrHonerAccoutViewController alloc] initWithNibName:@"UCFP2POrHonerAccoutViewController" bundle:nil];
         subVC.accoutType = self.accoutType;

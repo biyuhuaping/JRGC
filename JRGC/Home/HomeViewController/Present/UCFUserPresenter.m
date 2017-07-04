@@ -70,8 +70,22 @@
         userInfoList1.isShow = YES;
         userInfoList1.subtitle = self.userInfoOneModel.zxCashBalance.length > 0 ? [NSString stringWithFormat:@"%@元", self.userInfoOneModel.zxCashBalance] : @"0.00元";
     }
+    //黄金账户
+    UCFUserInfoListItem *userInfoList2 = [UCFUserInfoListItem itemWithTitle:@"黄金账户" destVcClass:nil];
+    
+    if ([self.userInfoOneModel.zxOpenStatus intValue] <= 2) {
+        userInfoList2.isShow = NO;
+        userInfoList2.subtitle = @"未开户";
+    }
+    else {
+        userInfoList2.isShow = YES;
+        userInfoList2.subtitle = self.userInfoOneModel.zxCashBalance.length > 0 ? [NSString stringWithFormat:@"%@克", self.userInfoOneModel.zxCashBalance] : @"0.00元";
+    }
+    
     [self.userInfoListCells addObject:userInfoList0];
     [self.userInfoListCells addObject:userInfoList1];
+    [self.userInfoListCells addObject:userInfoList2];
+
 }
 
 - (void)fetchUserInfoOneDataWithCompletionHandler:(NetworkCompletionHandler)completionHander
