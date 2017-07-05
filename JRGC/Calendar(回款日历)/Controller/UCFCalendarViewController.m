@@ -34,6 +34,7 @@
 //  初始化界面
     [self createUI];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(calendarHeaderClicked:) name:@"FSCalendarHeaderView" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentDayInfo:) name:@"currentDay" object:nil];
 }
 
@@ -175,6 +176,15 @@
     NSString *userId = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
     NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys:userId, @"userId", day, @"day", @"20", @"rows", @"1", @"page",  nil];
     [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagCurrentDayInfo owner:self signature:YES Type:self.accoutType];
+}
+
+- (void)calendarHeaderClicked:(NSNotification *)noty
+{
+    BOOL isShow = [noty.object boolValue];
+    CGSize size = [UIScreen mainScreen].bounds.size;
+    [UIView animateWithDuration:0.25 animations:^{
+        
+    }];
 }
 
 @end

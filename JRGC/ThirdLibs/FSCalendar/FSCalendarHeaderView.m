@@ -15,6 +15,11 @@
 
 @interface FSCalendarHeaderView ()<UICollectionViewDataSource,UICollectionViewDelegate>
 
+@property (weak, nonatomic) UIButton *preButton;
+@property (weak, nonatomic) UIButton *nextButton;
+@property (weak, nonatomic) UIView *upLine;
+@property (weak, nonatomic) UIView *downLine;
+
 - (void)scrollToOffset:(CGFloat)scrollOffset animated:(BOOL)animated;
 - (void)configureCell:(FSCalendarHeaderCell *)cell atIndexPath:(NSIndexPath *)indexPath;
 
@@ -63,6 +68,39 @@
     [self addSubview:collectionView];
     [collectionView registerClass:[FSCalendarHeaderCell class] forCellWithReuseIdentifier:@"cell"];
     self.collectionView = collectionView;
+    
+    UIButton *preButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [preButton setTitle:@"Pre" forState:UIControlStateNormal];
+    [preButton addTarget:self action:@selector(preButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:preButton];
+    self.preButton = preButton;
+    
+    UIButton *nextButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [nextButton setTitle:@"Next" forState:UIControlStateNormal];
+    [nextButton addTarget:self action:@selector(nextButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:nextButton];
+    self.nextButton = nextButton;
+    
+    UIView *upLine = [[UIView alloc] initWithFrame:CGRectZero];
+    [upLine setBackgroundColor:[UIColor colorWithRed:216.0/255.0 green:216.0/255.0 blue:216.0/255.0 alpha:1]];
+    [self addSubview:upLine];
+    self.upLine = upLine;
+    
+    UIView *downLine = [[UIView alloc] initWithFrame:CGRectZero];
+    [downLine setBackgroundColor:[UIColor colorWithRed:233.0/255.0 green:234.0/255.0 blue:238.0/255.0 alpha:1]];
+    [self addSubview:downLine];
+    self.downLine = downLine;
+}
+
+#pragma mark - button点击方法
+- (void)preButtonClicked:(UIButton *)button
+{
+    
+}
+
+- (void)nextButtonClicked:(UIButton *)button
+{
+    
 }
 
 - (void)layoutSubviews
@@ -80,7 +118,9 @@
         _needsAdjustingMonthPosition = NO;
         [self scrollToOffset:_scrollOffset animated:NO];
     }
-    
+    self.backgroundColor = [UIColor whiteColor];
+    self.upLine.frame = CGRectMake(0, 0, self.fs_width, 0.5);
+    self.downLine.frame = CGRectMake(0, self.fs_height-0.5, self.fs_width, 0.5);
 }
 
 - (void)dealloc
@@ -195,8 +235,13 @@
                 if ((indexPath.item == 0 || indexPath.item == [self.collectionView numberOfItemsInSection:0] - 1)) {
                     text = nil;
                 } else {
+                    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];//设置成中国阳历
                     NSDate *date = [self.calendar.gregorian dateByAddingUnit:NSCalendarUnitMonth value:indexPath.item-1 toDate:self.calendar.minimumDate options:0];
-                    text = [_calendar.formatter stringFromDate:date];
+                    NSDateComponents *comps = [[NSDateComponents alloc] init];
+                    NSInteger unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSWeekdayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;//这句我也不明白具体时用来做什么。。。
+                    comps = [calendar components:unitFlags fromDate:date];
+                    text = [NSString stringWithFormat:@"%ld年%ld月", (long)[comps year], (long)[comps month]];
+//                    text = [_calendar.formatter stringFromDate:date];
                 }
             } else {
                 NSDate *date = [self.calendar.gregorian dateByAddingUnit:NSCalendarUnitMonth value:indexPath.item toDate:self.calendar.minimumDate options:0];
@@ -252,7 +297,6 @@
         [pullDown addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:pullDown];
         self.pullDownButton = pullDown;
-        
     }
     return self;
 }
