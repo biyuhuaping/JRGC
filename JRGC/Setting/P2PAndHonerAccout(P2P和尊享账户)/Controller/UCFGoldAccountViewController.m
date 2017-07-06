@@ -139,7 +139,25 @@
     [_buyGoldBtn setBackgroundColor:UIColorWithRGB(0xffc027)];
     [_withdrawalsBtn setBackgroundColor:UIColorWithRGB(0x7C9DC7)];
     [_goldCashBtn setBackgroundColor:UIColorWithRGB(0x7C9DC7)];
+
     self.baseTableView.backgroundColor = UIColorWithRGB(0xe3e5eb);
+    [self addRightBtn];
+
+}
+- (void)addRightBtn {
+    UIButton *rightbutton = [UIButton buttonWithType:UIButtonTypeCustom];
+    rightbutton.frame = CGRectMake(0, 0, 88, 44);
+    rightbutton.backgroundColor = [UIColor clearColor];
+    [rightbutton setTitle:@"交易记录" forState:UIControlStateNormal];
+    rightbutton.titleLabel.font = [UIFont systemFontOfSize:15.0];
+    [rightbutton addTarget:self action:@selector(clickRightBtn) forControlEvents:UIControlEventTouchUpInside];
+    [rightbutton setTitleColor:UIColorWithRGB(0x333333) forState:UIControlStateNormal];
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightbutton];
+    self.navigationItem.rightBarButtonItem = rightItem;
+}
+- (void)clickRightBtn
+{
+    
 }
 - (IBAction)bottomButtomClicked:(UIButton *)sender {
     NSString *title = [sender titleForState:UIControlStateNormal];
