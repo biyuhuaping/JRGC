@@ -936,6 +936,7 @@ static NetworkModule *gInstance = NULL;
 {
     [MBProgressHUD hideAllHUDsForView:nil animated:NO];
     UCFLoginViewController *loginViewController = [[[UCFLoginViewController alloc] init] autorelease];
+    loginViewController.isForce = YES;
     UINavigationController *loginNaviController = [[[UINavigationController alloc] initWithRootViewController:loginViewController] autorelease];
     AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
 //    if (app.tabBarController.selectedIndex == 4) {
