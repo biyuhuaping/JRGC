@@ -10,6 +10,7 @@
 #import "UCFGoldAccountHeadView.h"
 #import "UCFSettingItem.h"
 #import "UCFCellStyleModel.h"
+#import "UCFGoldCashViewController.h"
 
 @interface UCFGoldAccountViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *baseTableView;
@@ -164,7 +165,8 @@
     if ([title isEqualToString:@"买金"]) {
         
     } else if ([title isEqualToString:@"变现"]) {
-        
+        UCFGoldCashViewController *vc1 = [[UCFGoldCashViewController alloc] initWithNibName:@"UCFGoldCashViewController" bundle:nil];
+        [self.navigationController pushViewController:vc1 animated:YES];
     } else if ([title isEqualToString:@"提金"]) {
         
     }
