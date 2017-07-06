@@ -33,7 +33,6 @@
 @interface FSCalendarHeaderCell : UICollectionViewCell
 
 @property (weak, nonatomic) UILabel *titleLabel;
-@property (weak, nonatomic) UIButton *pullDownButton;
 @property (weak, nonatomic) FSCalendarHeaderView *header;
 
 @end

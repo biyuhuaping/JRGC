@@ -19,10 +19,26 @@
 @property (weak, nonatomic) IBOutlet UILabel *statusILabel;
 @property (weak, nonatomic) IBOutlet UILabel *statusIILabel;
 
-
+@property (weak, nonatomic) UIView *upLine;
+@property (weak, nonatomic) UIView *downLine;
 @end
 
 @implementation UCFCalendarDetailHeaderView
+
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    
+    UIView *upLine = [[UIView alloc] initWithFrame:CGRectZero];
+    upLine.backgroundColor = UIColorWithRGB(0xd8d8d8);
+    [self addSubview:upLine];
+    self.upLine = upLine;
+    
+    UIView *downLine = [[UIView alloc] initWithFrame:CGRectZero];
+    [downLine setBackgroundColor:UIColorWithRGB(0xe9eaee)];
+    [self addSubview:downLine];
+    self.downLine = downLine;
+}
 
 - (IBAction)button:(UIButton *)sender {
     // 1.修改组模型的标记(状态取反)
@@ -37,10 +53,16 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
+    
+    self.upLine.frame = CGRectMake(0, 0, ScreenWidth, 0.5);
+    self.downLine.frame = CGRectMake(0, self.bottom-0.5, ScreenWidth, 0.5);
+    
     if (self.group.opened) {
-        self.arrowImageView.transform = CGAffineTransformMakeRotation(0);
-    } else {
         self.arrowImageView.transform = CGAffineTransformMakeRotation(M_PI);
+        self.downLine.backgroundColor = UIColorWithRGB(0xe9eaee);
+    } else {
+        self.arrowImageView.transform = CGAffineTransformMakeRotation(0);
+        self.downLine.backgroundColor = UIColorWithRGB(0xd8d8d8);
     }
     
 }
