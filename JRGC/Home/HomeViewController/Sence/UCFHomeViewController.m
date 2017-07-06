@@ -34,7 +34,7 @@
 #import "UCFHomeListNavView.h"
 #import "MaskView.h"
 #import "MongoliaLayerCenter.h"
-
+#import "UCFGoldAccountViewController.h"
 #import "UCFUserInfoListItem.h"
 #import "Touch3DSingle.h"
 #import "BJGridItem.h"
@@ -630,9 +630,8 @@
     } else if ([item.title isEqualToString:@"尊享账户"]) {
         self.accoutType = SelectAccoutTypeHoner;
     } else if ([item.title isEqualToString:@"黄金账户"]) {
-        
-        
-        
+        UCFGoldAccountViewController *subVC = [[UCFGoldAccountViewController alloc] initWithNibName:@"UCFGoldAccountViewController" bundle:nil];
+        [self.navigationController pushViewController:subVC animated:YES];
         return;
     }
     
