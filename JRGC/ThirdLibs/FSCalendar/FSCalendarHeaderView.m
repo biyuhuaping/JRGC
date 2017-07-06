@@ -69,18 +69,6 @@
     [collectionView registerClass:[FSCalendarHeaderCell class] forCellWithReuseIdentifier:@"cell"];
     self.collectionView = collectionView;
     
-    UIButton *preButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [preButton setTitle:@"Pre" forState:UIControlStateNormal];
-    [preButton addTarget:self action:@selector(preButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:preButton];
-    self.preButton = preButton;
-    
-    UIButton *nextButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [nextButton setTitle:@"Next" forState:UIControlStateNormal];
-    [nextButton addTarget:self action:@selector(nextButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:nextButton];
-    self.nextButton = nextButton;
-    
     UIView *upLine = [[UIView alloc] initWithFrame:CGRectZero];
     [upLine setBackgroundColor:[UIColor colorWithRed:216.0/255.0 green:216.0/255.0 blue:216.0/255.0 alpha:1]];
     [self addSubview:upLine];
@@ -90,17 +78,6 @@
     [downLine setBackgroundColor:[UIColor colorWithRed:233.0/255.0 green:234.0/255.0 blue:238.0/255.0 alpha:1]];
     [self addSubview:downLine];
     self.downLine = downLine;
-}
-
-#pragma mark - button点击方法
-- (void)preButtonClicked:(UIButton *)button
-{
-    
-}
-
-- (void)nextButtonClicked:(UIButton *)button
-{
-    
 }
 
 - (void)layoutSubviews
@@ -119,6 +96,10 @@
         [self scrollToOffset:_scrollOffset animated:NO];
     }
     self.backgroundColor = [UIColor whiteColor];
+    
+    self.preButton.frame = CGRectMake(0, 0, 80, self.fs_height);
+    self.nextButton.frame = CGRectMake(self.fs_width - 80, 0, 80, self.fs_height);
+    
     self.upLine.frame = CGRectMake(0, 0, self.fs_width, 0.5);
     self.downLine.frame = CGRectMake(0, self.fs_height-0.5, self.fs_width, 0.5);
 }
@@ -312,6 +293,8 @@
     [super layoutSubviews];
     
     self.titleLabel.frame = self.contentView.bounds;
+    self.titleLabel.font = [UIFont systemFontOfSize:15];
+    self.titleLabel.textColor = UIColorWithRGB(0x333333);
     self.pullDownButton.frame = self.contentView.bounds;
     self.pullDownButton.imageEdgeInsets = UIEdgeInsetsMake(0, self.contentView.fs_width * 0.5+10, 0, 0);
     

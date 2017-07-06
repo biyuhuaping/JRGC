@@ -30,6 +30,9 @@
 @property (weak, nonatomic) IBOutlet UIView *currentDayView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *calendarH;
 @property (strong, nonatomic) NSMutableArray *days;
+
+@property (weak, nonatomic) UIButton *preButton;
+@property (weak, nonatomic) UIButton *nextButton;
 @end
 
 @implementation UCFCalendarHeaderView
@@ -76,7 +79,41 @@ static NSString *const cellId = @"cellId";
     [self.calendarView addSubview:collectionView];
     self.calendar = collectionView;
     
+    
+    UIButton *preButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [preButton setTitle:@"Pre" forState:UIControlStateNormal];
+    [preButton addTarget:self action:@selector(preButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [preButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self addSubview:preButton];
+    self.preButton = preButton;
+    
+    UIButton *nextButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [nextButton setTitle:@"Next" forState:UIControlStateNormal];
+    [nextButton addTarget:self action:@selector(nextButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [nextButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self addSubview:nextButton];
+    self.nextButton = nextButton;
+    
     [collectionView registerClass:[UCFCalendarCollectionViewCell class] forCellWithReuseIdentifier:cellId];
+}
+
+#pragma mark - 按钮的点击方法
+- (void)preButtonClicked:(UIButton *)button
+{
+    if (self.calendar.contentOffset.x <=0) {
+        return;
+    }
+    CGPoint currentOffSet = self.calendar.contentOffset;
+    [self.calendar setContentOffset:CGPointMake(currentOffSet.x - ScreenWidth, 0)];
+}
+
+- (void)nextButtonClicked:(UIButton *)button
+{
+    if (self.calendar.contentOffset.x/ScreenWidth >= self.months.count-1) {
+        return;
+    }
+    CGPoint currentOffSet = self.calendar.contentOffset;
+    [self.calendar setContentOffset:CGPointMake(currentOffSet.x + ScreenWidth, 0)];
 }
 
 - (void)layoutSubviews
@@ -86,6 +123,10 @@ static NSString *const cellId = @"cellId";
     CGRect frame = self.frame;
     frame.size.height = CGRectGetMaxY(self.currentDayView.frame);
     self.frame = frame;
+    
+    self.preButton.frame = CGRectMake(0, 160, 80, 44);
+    self.nextButton.frame = CGRectMake(self.width - 80, 160, 80, 44);
+    [self.calendar bringSubviewToFront:self.preButton];
     
 }
 
