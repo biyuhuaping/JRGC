@@ -35,7 +35,7 @@
     [self createUI];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(calendarHeaderClicked:) name:@"FSCalendarHeaderView" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentDayInfo:) name:@"currentDay" object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentDayInfo:) name:@"currentDay" object:nil];
 }
 
 #pragma mark - 初始化界面
@@ -76,10 +76,16 @@
     UCFCalendarDayCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     if (!cell) {
         cell = (UCFCalendarDayCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFCalendarDayCell" owner:self options:nil] lastObject];
+        cell.tableview = tableView;
     }
     cell.indexPath = indexPath;
     cell.group = [self.selectedDayDatas objectAtIndex:indexPath.section];
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 27;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -166,8 +172,8 @@
 #pragma mark - 当前选中的日的信息请求
 - (void)currentDayInfo:(NSNotification *)noty
 {
-    NSString *currentDay = self.calendarHeader.currentDay;
-    [self getCurrentDayInfoFromNetWithDay:currentDay];
+//    NSString *currentDay = self.calendarHeader.currentDay;
+//    [self getCurrentDayInfoFromNetWithDay:currentDay];
 }
 
 #pragma mark - 请求当前日的信息

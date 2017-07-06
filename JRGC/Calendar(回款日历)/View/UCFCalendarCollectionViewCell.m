@@ -71,13 +71,13 @@
 //    return [self.gregorian dateByAddingUnit:NSCalendarUnitMonth value:5 toDate:[NSDate date] options:0];
 }
 
-- (NSString *)calendar:(FSCalendar *)calendar titleForDate:(NSDate *)date
-{
-    if ([self.gregorian isDateInToday:date]) {
-        return @"今";
-    }
-    return nil;
-}
+//- (NSString *)calendar:(FSCalendar *)calendar titleForDate:(NSDate *)date
+//{
+//    if ([self.gregorian isDateInToday:date]) {
+//        return @"今";
+//    }
+//    return nil;
+//}
 
 - (FSCalendarCell *)calendar:(FSCalendar *)calendar cellForDate:(NSDate *)date atMonthPosition:(FSCalendarMonthPosition)monthPosition
 {
@@ -161,14 +161,14 @@
             if ([dateStr isEqualToString:day.paidTime]) {
                 switch ([day.isAdvanceRepay intValue]) {
                     case 0:
-                        return @[[UIColor greenColor]];
+                        return @[UIColorWithRGB(0xfd4d4c)];
                         break;
                     case 1:
-                        return @[[UIColor redColor]];
+                        return @[UIColorWithRGB(0x7c9dc7)];
                         break;
                         
                     case 2:
-                        return @[[UIColor greenColor],[UIColor redColor]];
+                        return @[UIColorWithRGB(0x7c9dc7), UIColorWithRGB(0xfd4d4c)];
                         break;
                 }
             }

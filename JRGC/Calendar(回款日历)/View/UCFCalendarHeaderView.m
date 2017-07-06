@@ -33,6 +33,12 @@
 
 @property (weak, nonatomic) UIButton *preButton;
 @property (weak, nonatomic) UIButton *nextButton;
+@property (weak, nonatomic) UILabel *monthLabel;
+@property (weak, nonatomic) UIView *upLine;
+@property (weak, nonatomic) UIView *downLine1;
+@property (weak, nonatomic) UIView *downLine2;
+@property (weak, nonatomic) UIView *downLine;
+@property (strong, nonatomic) UIView *weekView;
 @end
 
 @implementation UCFCalendarHeaderView
@@ -51,6 +57,23 @@
         _days = [NSMutableArray array];
     }
     return _days;
+}
+
+- (UIView *)weekView
+{
+    if (nil == _weekView) {
+        _weekView = [[UIView alloc] initWithFrame:CGRectZero];
+        _weekView.backgroundColor = UIColorWithRGB(0xebebee);
+        for (int i=0; i<7; i++) {
+            UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
+            label.textColor = UIColorWithRGB(0x333333);
+            label.font = [UIFont systemFontOfSize:12];
+            label.tag = i;
+            label.textAlignment = NSTextAlignmentCenter;
+            [_weekView addSubview:label];
+        }
+    }
+    return _weekView;
 }
 
 static NSString *const cellId = @"cellId";
@@ -79,20 +102,49 @@ static NSString *const cellId = @"cellId";
     [self.calendarView addSubview:collectionView];
     self.calendar = collectionView;
     
+    UILabel *monthLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+    monthLabel.textColor = UIColorWithRGB(0x333333);
+    monthLabel.font = [UIFont systemFontOfSize:15];
+    monthLabel.textAlignment = NSTextAlignmentCenter;
+    monthLabel.backgroundColor = [UIColor whiteColor];
+    [self addSubview:monthLabel];
+    self.monthLabel = monthLabel;
     
     UIButton *preButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [preButton setTitle:@"Pre" forState:UIControlStateNormal];
+    [preButton setImage:[UIImage imageNamed:@"list_icon_arrow_left"] forState:UIControlStateNormal];
     [preButton addTarget:self action:@selector(preButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [preButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [self addSubview:preButton];
     self.preButton = preButton;
     
     UIButton *nextButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [nextButton setTitle:@"Next" forState:UIControlStateNormal];
     [nextButton addTarget:self action:@selector(nextButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [nextButton setImage:[UIImage imageNamed:@"list_icon_arrow"] forState:UIControlStateNormal];
     [nextButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [self addSubview:nextButton];
     self.nextButton = nextButton;
+    
+    UIView *upLine = [[UIView alloc] initWithFrame:CGRectZero];
+    upLine.backgroundColor = UIColorWithRGB(0xd8d8d8);
+    [self addSubview:upLine];
+    self.upLine = upLine;
+    
+    UIView *downLine1 = [[UIView alloc] initWithFrame:CGRectZero];
+    [downLine1 setBackgroundColor:UIColorWithRGB(0xe9eaee)];
+    [self addSubview:downLine1];
+    self.downLine1 = downLine1;
+    
+    UIView *downLine2 = [[UIView alloc] initWithFrame:CGRectZero];
+    [downLine2 setBackgroundColor:UIColorWithRGB(0xe9eaee)];
+    [self addSubview:downLine2];
+    self.downLine2 = downLine2;
+    
+    UIView *downLine = [[UIView alloc] initWithFrame:CGRectZero];
+    [downLine setBackgroundColor:UIColorWithRGB(0xe9eaee)];
+    [self addSubview:downLine];
+    self.downLine = downLine;
+    
+    [self addSubview:self.weekView];
     
     [collectionView registerClass:[UCFCalendarCollectionViewCell class] forCellWithReuseIdentifier:cellId];
 }
@@ -105,6 +157,7 @@ static NSString *const cellId = @"cellId";
     }
     CGPoint currentOffSet = self.calendar.contentOffset;
     [self.calendar setContentOffset:CGPointMake(currentOffSet.x - ScreenWidth, 0)];
+    self.monthLabel.text = [self.months objectAtIndex:(int)((currentOffSet.x - ScreenWidth) / ScreenWidth)];
 }
 
 - (void)nextButtonClicked:(UIButton *)button
@@ -114,6 +167,7 @@ static NSString *const cellId = @"cellId";
     }
     CGPoint currentOffSet = self.calendar.contentOffset;
     [self.calendar setContentOffset:CGPointMake(currentOffSet.x + ScreenWidth, 0)];
+    self.monthLabel.text = [self.months objectAtIndex:(int)((currentOffSet.x + ScreenWidth) / ScreenWidth)];
 }
 
 - (void)layoutSubviews
@@ -124,10 +178,52 @@ static NSString *const cellId = @"cellId";
     frame.size.height = CGRectGetMaxY(self.currentDayView.frame);
     self.frame = frame;
     
-    self.preButton.frame = CGRectMake(0, 160, 80, 44);
-    self.nextButton.frame = CGRectMake(self.width - 80, 160, 80, 44);
-    [self.calendar bringSubviewToFront:self.preButton];
+    self.preButton.frame = CGRectMake(0, self.calendarView.y, 80, 44);
+    self.nextButton.frame = CGRectMake(self.width - 80, self.calendarView.y, 80, 44);
+    self.monthLabel.frame = CGRectMake(0, self.calendarView.y + 0.5, ScreenWidth, 43);
     
+    self.upLine.frame = CGRectMake(0, self.calendarView.y, ScreenWidth, 0.5);
+    self.downLine1.frame = CGRectMake(0, self.calendarView.y + 43.5, ScreenWidth, 0.5);
+    
+    self.downLine2.frame = CGRectMake(0, self.calendarView.y + 44 + 29.5, ScreenWidth, 0.5);
+    
+    self.weekView.frame = CGRectMake(0, self.calendarView.y + 44, ScreenWidth, 29.5);
+    
+    self.downLine.frame = CGRectMake(0, self.calendarView.bottom - 0.5, ScreenWidth, 0.5);
+    
+    CGFloat weekLabelWidth = ScreenWidth / 7.0;
+    for (UILabel *label in self.weekView.subviews) {
+        label.frame = CGRectMake(weekLabelWidth * label.tag, 0, weekLabelWidth, 29.5);
+        switch (label.tag) {
+            case 0:
+                label.text = @"日";
+                break;
+                
+            case 1:
+                label.text = @"一";
+                break;
+                
+            case 2:
+                label.text = @"二";
+                break;
+                
+            case 3:
+                label.text = @"三";
+                break;
+                
+            case 4:
+                label.text = @"四";
+                break;
+                
+            case 5:
+                label.text = @"五";
+                break;
+                
+            case 6:
+                label.text = @"六";
+                break;
+        }
+    }
 }
 
 //定义展示的UICollectionViewCell的个数
@@ -196,19 +292,21 @@ static NSString *const cellId = @"cellId";
         NSString *strDate = [dateFormatter stringFromDate:[NSDate date]];
         BOOL isEnd = YES;
         for (NSString *month in _months) {
-            if (([strDate compare:month options:NSLiteralSearch] == NSOrderedSame) || ([strDate compare:month options:NSLiteralSearch] == NSOrderedSame)) {
+            if (([strDate compare:month options:NSLiteralSearch] == NSOrderedSame) || ([strDate compare:month options:NSLiteralSearch] == NSOrderedAscending)) {
                 NSInteger integer = [_months indexOfObject:month];
                 [_calendar scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:integer inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:NO];
                 isEnd = NO;
+                self.monthLabel.text = month;
                 [self getClendarInfoWithMonth:month];
                 break;
             }
         }
         if (isEnd) {
             [_calendar scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:(self.months.count - 1) inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:NO];
+            self.monthLabel.text = [self.months lastObject];
             [self getClendarInfoWithMonth:[self.months lastObject]];
         }
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"currentDay" object:nil];
+//        [[NSNotificationCenter defaultCenter] postNotificationName:@"currentDay" object:nil];
     }
 }
 
@@ -269,6 +367,7 @@ static NSString *const cellId = @"cellId";
 {
     if (scrollView == self.calendar) {
         NSInteger index = scrollView.contentOffset.x / ScreenWidth;
+        self.monthLabel.text = [self.months objectAtIndex:index];
         [self getClendarInfoWithMonth:[self.months objectAtIndex:index]];
     }
 }

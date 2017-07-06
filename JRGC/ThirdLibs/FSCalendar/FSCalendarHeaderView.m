@@ -15,11 +15,6 @@
 
 @interface FSCalendarHeaderView ()<UICollectionViewDataSource,UICollectionViewDelegate>
 
-@property (weak, nonatomic) UIButton *preButton;
-@property (weak, nonatomic) UIButton *nextButton;
-@property (weak, nonatomic) UIView *upLine;
-@property (weak, nonatomic) UIView *downLine;
-
 - (void)scrollToOffset:(CGFloat)scrollOffset animated:(BOOL)animated;
 - (void)configureCell:(FSCalendarHeaderCell *)cell atIndexPath:(NSIndexPath *)indexPath;
 
@@ -68,16 +63,6 @@
     [self addSubview:collectionView];
     [collectionView registerClass:[FSCalendarHeaderCell class] forCellWithReuseIdentifier:@"cell"];
     self.collectionView = collectionView;
-    
-    UIView *upLine = [[UIView alloc] initWithFrame:CGRectZero];
-    [upLine setBackgroundColor:[UIColor colorWithRed:216.0/255.0 green:216.0/255.0 blue:216.0/255.0 alpha:1]];
-    [self addSubview:upLine];
-    self.upLine = upLine;
-    
-    UIView *downLine = [[UIView alloc] initWithFrame:CGRectZero];
-    [downLine setBackgroundColor:[UIColor colorWithRed:233.0/255.0 green:234.0/255.0 blue:238.0/255.0 alpha:1]];
-    [self addSubview:downLine];
-    self.downLine = downLine;
 }
 
 - (void)layoutSubviews
@@ -97,11 +82,6 @@
     }
     self.backgroundColor = [UIColor whiteColor];
     
-    self.preButton.frame = CGRectMake(0, 0, 80, self.fs_height);
-    self.nextButton.frame = CGRectMake(self.fs_width - 80, 0, 80, self.fs_height);
-    
-    self.upLine.frame = CGRectMake(0, 0, self.fs_width, 0.5);
-    self.downLine.frame = CGRectMake(0, self.fs_height-0.5, self.fs_width, 0.5);
 }
 
 - (void)dealloc
@@ -271,13 +251,6 @@
         titleLabel.numberOfLines = 0;
         [self.contentView addSubview:titleLabel];
         self.titleLabel = titleLabel;
-        
-        UIButton *pullDown = [UIButton buttonWithType:UIButtonTypeCustom];
-        pullDown.backgroundColor = [UIColor clearColor];
-        [pullDown setImage:[UIImage imageNamed:@"fanli_loadown"] forState:UIControlStateNormal];
-        [pullDown addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];
-        [self.contentView addSubview:pullDown];
-        self.pullDownButton = pullDown;
     }
     return self;
 }
@@ -295,8 +268,6 @@
     self.titleLabel.frame = self.contentView.bounds;
     self.titleLabel.font = [UIFont systemFontOfSize:15];
     self.titleLabel.textColor = UIColorWithRGB(0x333333);
-    self.pullDownButton.frame = self.contentView.bounds;
-    self.pullDownButton.imageEdgeInsets = UIEdgeInsetsMake(0, self.contentView.fs_width * 0.5+10, 0, 0);
     
     if (self.header.scrollDirection == UICollectionViewScrollDirectionHorizontal) {
         CGFloat position = [self.contentView convertPoint:CGPointMake(CGRectGetMidX(self.contentView.bounds), CGRectGetMidY(self.contentView.bounds)) toView:self.header].x;
@@ -312,17 +283,6 @@
         self.contentView.alpha = 1.0 - (1.0-self.header.calendar.appearance.headerMinimumDissolvedAlpha)*ABS(center-position)/self.fs_height;
     }
     
-}
-
-- (void)btnClicked:(UIButton *)button
-{
-    if (button.selected) {
-        button.imageView.transform = CGAffineTransformMakeRotation(0);
-    } else {
-        button.imageView.transform = CGAffineTransformMakeRotation(M_PI);
-    }
-    button.selected = !button.selected;
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"FSCalendarHeaderView" object:@(button.selected)];
 }
 
 @end
