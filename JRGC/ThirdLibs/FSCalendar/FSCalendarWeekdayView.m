@@ -16,6 +16,7 @@
 @property (strong, nonatomic) NSPointerArray *weekdayPointers;
 @property (weak  , nonatomic) UIView *contentView;
 @property (weak  , nonatomic) FSCalendar *calendar;
+@property (weak  , nonatomic) UIView *downLine;
 
 - (void)commonInit;
 
@@ -54,6 +55,11 @@
         [self.contentView addSubview:weekdayLabel];
         [_weekdayPointers addPointer:(__bridge void * _Nullable)(weekdayLabel)];
     }
+    
+    UIView *downLine = [[UIView alloc] init];
+    downLine.backgroundColor = UIColorWithRGB(0xe9eaee);
+    [self addSubview:downLine];
+    self.downLine = downLine;
 }
 
 - (void)layoutSubviews
@@ -77,6 +83,7 @@
         x += width;
     }
     free(widths);
+    self.downLine.frame = CGRectMake(0, self.fs_height-0.5, self.fs_width, 0.5);
 }
 
 - (void)setCalendar:(FSCalendar *)calendar

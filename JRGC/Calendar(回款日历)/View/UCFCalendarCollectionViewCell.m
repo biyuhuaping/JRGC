@@ -40,8 +40,12 @@
         
         calendar.calendarHeaderView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.1];
         calendar.calendarWeekdayView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.1];
+        calendar.headerHeight = 44;
+        calendar.weekdayHeight = 30;
         calendar.appearance.eventSelectionColor = [UIColor whiteColor];
         calendar.appearance.eventOffset = CGPointMake(0, -7);
+        calendar.appearance.weekdayTextColor = UIColorWithRGB(0x333333);
+        calendar.appearance.weekdayFont = [UIFont systemFontOfSize:12];
         calendar.today = nil; // Hide the today circle
         [calendar registerClass:[DIYCalendarCell class] forCellReuseIdentifier:@"cell"];
         
