@@ -380,22 +380,21 @@
         NSString *rstcode = dic[@"status"];
         NSString *rsttext = dic[@"statusdes"];
         if ([rstcode intValue] == 1) {
-//            NSArray *prdLabelsListTemp = [NSArray arrayWithArray:(NSArray*)self.model.prdLabelsList];
-//            UCFProjectDetailViewController *controller = [[UCFProjectDetailViewController alloc] initWithDataDic:dic isTransfer:NO withLabelList:prdLabelsListTemp];
-//            CGFloat platformSubsidyExpense = [self.model.platformSubsidyExpense floatValue];
-//            [[NSUserDefaults standardUserDefaults] setValue:[NSString stringWithFormat:@"%.1f",platformSubsidyExpense] forKey:@"platformSubsidyExpense"];
-//            controller.rootVc = self.rootVc;;
-//            controller.accoutType = SelectAccoutTypeP2P;
-//            [self.navigationController pushViewController:controller animated:YES];
-            
-            
             NSArray *prdLabelsListTemp = [NSArray arrayWithArray:(NSArray*)self.model.prdLabelsList];
-            UCFGoldDetailViewController *controller = [[UCFGoldDetailViewController alloc]initWithNibName:@"UCFGoldDetailViewController" bundle:nil];
+            UCFProjectDetailViewController *controller = [[UCFProjectDetailViewController alloc] initWithDataDic:dic isTransfer:NO withLabelList:prdLabelsListTemp];
             CGFloat platformSubsidyExpense = [self.model.platformSubsidyExpense floatValue];
             [[NSUserDefaults standardUserDefaults] setValue:[NSString stringWithFormat:@"%.1f",platformSubsidyExpense] forKey:@"platformSubsidyExpense"];
             controller.rootVc = self.rootVc;;
             controller.accoutType = SelectAccoutTypeP2P;
             [self.navigationController pushViewController:controller animated:YES];
+            
+//            NSArray *prdLabelsListTemp = [NSArray arrayWithArray:(NSArray*)self.model.prdLabelsList];
+//            UCFGoldDetailViewController *controller = [[UCFGoldDetailViewController alloc]initWithNibName:@"UCFGoldDetailViewController" bundle:nil];
+//            CGFloat platformSubsidyExpense = [self.model.platformSubsidyExpense floatValue];
+//            [[NSUserDefaults standardUserDefaults] setValue:[NSString stringWithFormat:@"%.1f",platformSubsidyExpense] forKey:@"platformSubsidyExpense"];
+//            controller.rootVc = self.rootVc;;
+//            controller.accoutType = SelectAccoutTypeP2P;
+//            [self.navigationController pushViewController:controller animated:YES];
 
         }else {
             [AuxiliaryFunc showAlertViewWithMessage:rsttext];
