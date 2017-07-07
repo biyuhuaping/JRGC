@@ -100,6 +100,9 @@
             self.accoutType = SelectAccoutTypeHoner;
         }
         HSHelper *helper = [HSHelper new];
+        
+        [helper checkCompanyIsOpen:self.accoutType];//检查企业老用户是否开户
+        
         if (![helper checkP2POrWJIsAuthorization:self.accoutType]) {//先授权
             [helper pushP2POrWJAuthorizationType:self.accoutType nav:self.navigationController];
             return;

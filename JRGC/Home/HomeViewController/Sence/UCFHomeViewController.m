@@ -335,6 +335,9 @@
                 [self showLoginView];
             } else {
                 HSHelper *helper = [HSHelper new];
+                
+                [helper checkCompanyIsOpen:self.accoutType];
+                
                 if (![helper checkP2POrWJIsAuthorization:self.accoutType]) {
                     [helper pushP2POrWJAuthorizationType:self.accoutType nav:self.navigationController];
                     return;

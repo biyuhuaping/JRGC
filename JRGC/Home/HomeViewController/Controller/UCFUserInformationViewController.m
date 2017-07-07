@@ -138,7 +138,7 @@
     [self.cycleImageBackView addSubview:cycleScrollView];
     self.cycleImageView = cycleScrollView;
     
-    NSString *personInformationBtnTitle =  [[NSUserDefaults standardUserDefaults] boolForKey: @"isCompanyAgentType" ] ? @"企业信息" : @"个人信息";
+    NSString *personInformationBtnTitle =  [[NSUserDefaults standardUserDefaults] boolForKey: @"isCompanyAgentType"] ? @"企业信息" : @"个人信息";
     [self.personInformationBtn setTitle:personInformationBtnTitle forState:UIControlStateNormal];
     [self performSelector:@selector(getNormalBannerData) withObject:nil afterDelay:0.5];
 }
