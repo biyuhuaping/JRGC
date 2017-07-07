@@ -28,6 +28,7 @@
 #import "UCFInvitationRebateViewController.h"
 #import "UCFSession.h"
 #import "MjAlertView.h"
+#import "UCFCalendarViewController.h"
 
 @interface UCFP2POrHonerAccoutViewController ()<UITableViewDelegate,UITableViewDataSource,UCFP2POrHornerTabHeaderViewDelete,UIAlertViewDelegate,MjAlertViewDelegate>
 {
@@ -167,7 +168,7 @@
     if (_cellItemsData == nil) {
         
         UCFSettingItem *myInVest = [UCFSettingArrowItem itemWithIcon:nil title:@"我的出借" destVcClass:[MyViewController class]];
-        UCFSettingItem *backMoneyDetail = [UCFSettingArrowItem itemWithIcon:nil title:@"回款明细" destVcClass:[UCFBackMoneyDetailViewController class]];
+        UCFSettingItem *backMoneyDetail = [UCFSettingArrowItem itemWithIcon:nil title:@"回款日历" destVcClass:[UCFCalendarViewController class]];
         UCFSettingItem *feedBackVC = [UCFSettingArrowItem itemWithIcon:nil title:@"邀请获利" destVcClass:[UCFInvitationRebateViewController class]];
         
         
@@ -341,11 +342,11 @@
         myInvestVC.accoutType = self.accoutType;
         [self.navigationController pushViewController:myInvestVC animated:YES];
     }
-    else if ([titleStr isEqualToString:@"回款明细"]) {
-        UCFBackMoneyDetailViewController *backMoneyDetailVC = [[UCFBackMoneyDetailViewController alloc] initWithNibName:@"UCFBackMoneyDetailViewController" bundle:nil];
+    else if ([titleStr isEqualToString:@"回款日历"]) {
+        UCFCalendarViewController *backMoneyCalendarVC = [[UCFCalendarViewController alloc] initWithNibName:@"UCFCalendarViewController" bundle:nil];
 //        backMoneyDetailVC.superViewController = self;
-        backMoneyDetailVC.accoutType = self.accoutType;
-        [self.navigationController pushViewController:backMoneyDetailVC animated:YES];
+        backMoneyCalendarVC.accoutType = self.accoutType;
+        [self.navigationController pushViewController:backMoneyCalendarVC animated:YES];
     }else if ([titleStr isEqualToString:@"邀请获利"]){
         
         UCFInvitationRebateViewController *feedBackVC = [[UCFInvitationRebateViewController alloc] initWithNibName:@"UCFInvitationRebateViewController" bundle:nil];

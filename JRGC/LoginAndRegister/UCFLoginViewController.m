@@ -65,7 +65,9 @@
         _loginViewFace.hidden = NO;
     }else{
         _loginViewFace.hidden = YES;
-        [_loginView setFirstResponder];//***弹出键盘
+        if (!_isForce) {
+            [_loginView setFirstResponder];//***弹出键盘
+        }
     }
      //最近一次登录的用户名
     NSString *lastName = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastLoginName"];
@@ -404,7 +406,9 @@
 #pragma mark - 选择密码登陆后-将键盘弹出的回调用
 -(void)setFirstResponder
 {
-     [_loginView setFirstResponder];//***弹出键盘
+    if (!_isForce) {
+        [_loginView setFirstResponder];//***弹出键盘
+    }
 }
 
 /**

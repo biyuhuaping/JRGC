@@ -15,5 +15,5 @@
 
 //从哪儿来到得登录界面
 @property(nonatomic,copy) NSString *sourceVC;
-
+@property(nonatomic,assign) BOOL isForce;//是否是从强制登陆过来
 @end
