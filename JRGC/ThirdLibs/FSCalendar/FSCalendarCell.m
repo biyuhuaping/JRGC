@@ -134,6 +134,7 @@
     CGFloat titleHeight = self.bounds.size.height*5.0/6.0;
     CGFloat diameter = MIN(self.bounds.size.height*5.0/6.0,self.bounds.size.width);
     diameter = diameter > FSCalendarStandardCellDiameter ? (diameter - (diameter-FSCalendarStandardCellDiameter)*0.5) : diameter;
+    diameter = 21;
     _shapeLayer.frame = CGRectMake((self.bounds.size.width-diameter)/2,
                                    (titleHeight-diameter)/2,
                                    diameter,
@@ -145,13 +146,20 @@
         _shapeLayer.path = path;
     }
     
-    CGFloat eventSize = _shapeLayer.frame.size.height/6.0;
+//    CGFloat eventSize = _shapeLayer.frame.size.height/6.0;
+//    _eventIndicator.frame = CGRectMake(
+//                                       self.preferredEventOffset.x,
+//                                       CGRectGetMaxY(_shapeLayer.frame)+eventSize*0.17+self.preferredEventOffset.y,
+//                                       self.fs_width,
+//                                       eventSize*0.83
+//                                      );
+    CGFloat eventSize = 6;
     _eventIndicator.frame = CGRectMake(
                                        self.preferredEventOffset.x,
-                                       CGRectGetMaxY(_shapeLayer.frame)+eventSize*0.17+self.preferredEventOffset.y,
+                                       CGRectGetMaxY(_shapeLayer.frame) + 2,
                                        self.fs_width,
-                                       eventSize*0.83
-                                      );
+                                       eventSize
+                                       );
     
 }
 

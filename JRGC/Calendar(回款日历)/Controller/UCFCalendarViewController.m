@@ -145,9 +145,6 @@
             }
             for (NSDictionary *dic in dataList) {
                 UCFCalendarGroup *group = [UCFCalendarGroup groupWithDict:dic];
-                if ([dic isEqual:[dataList firstObject]]) {
-                    group.opened = YES;
-                }
                 [self.selectedDayDatas addObject:group];
             }
             [self.tableview reloadData];
