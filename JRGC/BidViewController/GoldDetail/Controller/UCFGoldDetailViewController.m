@@ -20,27 +20,45 @@
     BOOL _oneScrollPull;
     NSInteger _selectIndex;
     UIImageView *_navigationStyleBar;
+    UILabel *_activitylabel1;//二级标签
+    UILabel *_activitylabel2;//三级标签
+    UILabel *_activitylabel3;//四级标签
+    UILabel *_activitylabel4;//五级标签
+    NSArray *_prdLabelsList;
 }
 
-@property(nonatomic,strong) UIScrollView *oneScroll;
-@property(nonatomic ,strong)UITableView *twoTableview;
+@property(nonatomic,strong) IBOutlet UIScrollView *oneScroll;
+@property(nonatomic ,strong)IBOutlet UITableView *twoTableview;
 @property(nonatomic,strong)NSArray *titleArray;
+@property (weak, nonatomic) IBOutlet UIView *investBgView;
+@property (nonatomic,strong)UCFGoldDetailHeaderView  *goldHeaderView;
 
 @end
 
 @implementation UCFGoldDetailViewController
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+//    if ([_sourceVc isEqualToString:@"collection"]) {
+        [self.navigationController setNavigationBarHidden:YES animated:NO];
+        
+//    } else {
+//        [self.navigationController setNavigationBarHidden:YES animated:animated];
+//    }
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    [self addLeftButton];
-     [self addnavigationBar];
+    [self addnavigationBar];
     
     [self initOneScrollView];
     [self initTableViews];
     [self addnavigationBar];
-    // Do any additional setup after loading the view from its nib.
 }
-//自定义navigationbar
+#pragma mark 自定义navigationbar
 - (void) addnavigationBar
 {
     CGFloat scaleFlot = 1;
@@ -64,6 +82,7 @@
     [leftButton addTarget:self action:@selector(getBack) forControlEvents:UIControlEventTouchUpInside];
     [_navigationStyleBar addSubview:leftButton];
     _navigationStyleBar.userInteractionEnabled = YES;
+    [self.view bringSubviewToFront:self.investBgView];
 }
 - (void) getBack
 {
@@ -82,33 +101,170 @@
 }
 - (void)initOneScrollView
 {
-    _oneScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, BidDetailScrollViewHeight)];
-    _oneScroll.backgroundColor = [UIColor redColor];
+    [self.view bringSubviewToFront:self.investBgView];
+    
+    _oneScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64, ScreenWidth, ScreenHeight - 64 - 57)];
+    _oneScroll.backgroundColor = [UIColor greenColor];
     if (kIS_Iphone4) {
         [_oneScroll setContentSize:CGSizeMake(ScreenWidth, ScreenHeight)];
     } else {
+         [_oneScroll setContentSize:CGSizeMake(ScreenWidth, scrollViewHeight4S)];
 //        NSString *fixUpdate = [[_dataDic objectForKey:@"prdClaims"]objectForKey:@"fixedDate"];
-         NSString *fixUpdate = @"";
-        //如果没有固定起息日
-        if ([fixUpdate isEqual:[NSNull null]] || [fixUpdate isEqualToString:@""] || !fixUpdate) {
-            [_oneScroll setContentSize:CGSizeMake(ScreenWidth, scrollViewHeight4S - 44)];
-        } else {
-            [_oneScroll setContentSize:CGSizeMake(ScreenWidth, scrollViewHeight4S)];
-        }
+//         NSString *fixUpdate = @"eeeee";
+//        //如果没有固定起息日
+//        if ([fixUpdate isEqual:[NSNull null]] || [fixUpdate isEqualToString:@""] || !fixUpdate) {
+//            [_oneScroll setContentSize:CGSizeMake(ScreenWidth, scrollViewHeight4S - 44)];
+//        } else {
+//            [_oneScroll setContentSize:CGSizeMake(ScreenWidth, scrollViewHeight4S)];
+//        }
     }
     _oneScroll.delegate = self;
     _oneScroll.tag = 1001;
     _oneScroll.showsVerticalScrollIndicator = NO;
     [_oneScroll setBackgroundColor:UIColorWithRGB(0xebebee)];
     [self.view addSubview:_oneScroll];
-    
+    [_oneScroll bringSubviewToFront:self.investBgView];
     [self drawPullingView];
+    
+    
+    self.goldHeaderView  = [[[NSBundle mainBundle]loadNibNamed:@"UCFGoldDetailHeaderView" owner:nil options:nil] firstObject];
+    self.goldHeaderView.frame = CGRectMake(0, 0, ScreenWidth, 225);
+    [self.oneScroll addSubview:self.goldHeaderView];
+    
     
 //    detailView = [[UCFBidNewDetailView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, BidDetailScrollViewHeight) WithProjectType:PROJECTDETAILTYPENORMAL prdList:_prdLabelsList dataDic:_dataDic isP2P:_isP2P];
 //    detailView.delegate = self;
 //    [self addSubview:_oneScroll];
 //    [_oneScroll addSubview:detailView];
 }
+//标签view 高30 ************************************************************************************
+- (void)drawMarkView
+{
+    UIView *markBg = [[UIView alloc] initWithFrame:CGRectMake(0,CGRectGetMaxY(self.goldHeaderView.frame), ScreenWidth, 30)];
+    [self.oneScroll addSubview:markBg];
+    markBg.backgroundColor = [UIColor clearColor];
+    
+    _activitylabel1 = [UILabel labelWithFrame:CGRectZero text:@"" textColor:UIColorWithRGB(0x5b7aa4) font:[UIFont systemFontOfSize:MarkLabelFont]];
+    _activitylabel1.backgroundColor = [UIColor whiteColor];
+    _activitylabel1.layer.borderWidth = 1;
+    _activitylabel1.layer.cornerRadius = 2.0;
+    _activitylabel1.layer.borderColor = UIColorWithRGB(0x5b7aa4).CGColor;
+    [markBg addSubview:_activitylabel1];
+    
+    _activitylabel2 = [UILabel labelWithFrame:CGRectZero text:@"" textColor:UIColorWithRGB(0x5b7aa4) font:[UIFont systemFontOfSize:MarkLabelFont]];
+    _activitylabel2.backgroundColor = [UIColor whiteColor];
+    _activitylabel2.layer.borderWidth = 1;
+    _activitylabel2.layer.cornerRadius = 2.0;
+    _activitylabel2.layer.borderColor = UIColorWithRGB(0x5b7aa4).CGColor;
+    [markBg addSubview:_activitylabel2];
+    
+    _activitylabel3 = [UILabel labelWithFrame:CGRectZero text:@"" textColor:UIColorWithRGB(0x5b7aa4) font:[UIFont systemFontOfSize:MarkLabelFont]];
+    _activitylabel3.backgroundColor = [UIColor whiteColor];
+    _activitylabel3.layer.borderWidth = 1;
+    _activitylabel3.layer.cornerRadius = 2.0;
+    _activitylabel3.layer.borderColor = UIColorWithRGB(0x5b7aa4).CGColor;
+    [markBg addSubview:_activitylabel3];
+    
+    _activitylabel4 = [UILabel labelWithFrame:CGRectZero text:@"" textColor:UIColorWithRGB(0x5b7aa4) font:[UIFont systemFontOfSize:MarkLabelFont]];
+    _activitylabel4.backgroundColor = [UIColor whiteColor];
+    _activitylabel4.layer.borderWidth = 1;
+    _activitylabel4.layer.cornerRadius = 2.0;
+    _activitylabel4.layer.borderColor = UIColorWithRGB(0x5b7aa4).CGColor;
+    [markBg addSubview:_activitylabel4];
+    
+    //标签数组
+    NSArray *prdLabelsList = _prdLabelsList;
+    NSMutableArray *labelPriorityArr = [NSMutableArray arrayWithCapacity:4];
+    if (![prdLabelsList isEqual:[NSNull null]]) {
+        for (NSDictionary *dic in prdLabelsList) {
+            NSInteger labelPriority = [dic[@"labelPriority"] integerValue];
+            if (labelPriority > 1) {
+                if ([dic[@"labelName"] rangeOfString:@"起投"].location == NSNotFound) {
+                    [labelPriorityArr addObject:dic[@"labelName"]];
+                }
+            }
+        }
+    }
+    
+    //重设标签位置
+    if ([labelPriorityArr count] == 0) {
+        [_activitylabel1 setHidden:YES];
+        [_activitylabel2 setHidden:YES];
+        [_activitylabel3 setHidden:YES];
+        [_activitylabel4 setHidden:YES];
+    } else if ([labelPriorityArr count] == 1) {
+        [_activitylabel1 setHidden:NO];
+        [_activitylabel2 setHidden:YES];
+        [_activitylabel3 setHidden:YES];
+        [_activitylabel4 setHidden:YES];
+        CGFloat stringWidth = [labelPriorityArr[0] sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:MarkLabelFont]}].width;
+        _activitylabel1.frame = CGRectMake(15, FirstMarkYPos, stringWidth + MarkInSpacing, MarkHeight);
+        _activitylabel1.text = labelPriorityArr[0];
+    } else if ([labelPriorityArr count] == 2) {
+        [_activitylabel1 setHidden:NO];
+        [_activitylabel2 setHidden:NO];
+        [_activitylabel3 setHidden:YES];
+        [_activitylabel4 setHidden:YES];
+        _activitylabel1.text = labelPriorityArr[0];
+        _activitylabel2.text = labelPriorityArr[1];
+        CGFloat stringWidth = [labelPriorityArr[0] sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:MarkLabelFont]}].width;
+        CGFloat stringWidth2 = [labelPriorityArr[1] sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:MarkLabelFont]}].width;
+        _activitylabel1.frame = CGRectMake(15, FirstMarkYPos, stringWidth + MarkInSpacing, MarkHeight);
+        _activitylabel2.frame = CGRectMake(CGRectGetMaxX(_activitylabel1.frame) + MarkXSpacing, FirstMarkYPos, stringWidth2 + MarkInSpacing, MarkHeight);
+    } else if ([labelPriorityArr count] == 3) {
+        [_activitylabel1 setHidden:NO];
+        [_activitylabel2 setHidden:NO];
+        [_activitylabel3 setHidden:NO];
+        [_activitylabel4 setHidden:YES];
+        _activitylabel1.text = labelPriorityArr[0];
+        _activitylabel2.text = labelPriorityArr[1];
+        _activitylabel3.text = labelPriorityArr[2];
+        CGFloat stringWidth = [labelPriorityArr[0] sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:MarkLabelFont]}].width;
+        CGFloat stringWidth2 = [labelPriorityArr[1] sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:MarkLabelFont]}].width;
+        CGFloat stringWidth3 = [labelPriorityArr[2] sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:MarkLabelFont]}].width;
+        _activitylabel1.frame = CGRectMake(15, FirstMarkYPos, stringWidth + MarkInSpacing, MarkHeight);
+        _activitylabel2.frame = CGRectMake(CGRectGetMaxX(_activitylabel1.frame) + MarkXSpacing, FirstMarkYPos, stringWidth2 + MarkInSpacing, MarkHeight);
+        _activitylabel3.frame = CGRectMake(CGRectGetMaxX(_activitylabel2.frame) + MarkXSpacing, FirstMarkYPos, stringWidth3 + MarkInSpacing, MarkHeight);
+        
+        //如果标签长度超过屏幕宽度 重新布局2级标签
+        if (stringWidth + stringWidth2 + stringWidth3 + MarkXSpacing*2 + MarkInSpacing*3 + 15*2 > ScreenWidth) {
+            _activitylabel1.frame = CGRectMake(15, 2, stringWidth + MarkInSpacing, 12);
+            _activitylabel2.frame = CGRectMake(CGRectGetMaxX(_activitylabel1.frame) + MarkXSpacing, 2, stringWidth2 + MarkInSpacing, 12);
+            _activitylabel3.frame = CGRectMake(15, 16, stringWidth3 + 10, 12);
+        }
+    } else {
+        [_activitylabel1 setHidden:NO];
+        [_activitylabel2 setHidden:NO];
+        [_activitylabel3 setHidden:NO];
+        [_activitylabel4 setHidden:NO];
+        _activitylabel1.text = labelPriorityArr[0];
+        _activitylabel2.text = labelPriorityArr[1];
+        _activitylabel3.text = labelPriorityArr[2];
+        _activitylabel4.text = labelPriorityArr[3];
+        CGFloat stringWidth = [labelPriorityArr[0] sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:MarkLabelFont]}].width;
+        CGFloat stringWidth2 = [labelPriorityArr[1] sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:MarkLabelFont]}].width;
+        CGFloat stringWidth3 = [labelPriorityArr[2] sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:MarkLabelFont]}].width;
+        CGFloat stringWidth4 = [labelPriorityArr[3] sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:MarkLabelFont]}].width;
+        _activitylabel1.frame = CGRectMake(15, FirstMarkYPos, stringWidth + MarkInSpacing, MarkHeight);
+        _activitylabel2.frame = CGRectMake(CGRectGetMaxX(_activitylabel1.frame) + MarkXSpacing, FirstMarkYPos, stringWidth2 + MarkInSpacing, MarkHeight);
+        _activitylabel3.frame = CGRectMake(CGRectGetMaxX(_activitylabel2.frame) + MarkXSpacing, FirstMarkYPos, stringWidth3 + MarkInSpacing, MarkHeight);
+        _activitylabel4.frame = CGRectMake(CGRectGetMaxX(_activitylabel3.frame) + MarkXSpacing, FirstMarkYPos, stringWidth4 + MarkInSpacing, MarkHeight);
+        
+        //如果标签长度超过屏幕宽度 重新布局2级标签
+        if (stringWidth + stringWidth2 + stringWidth3 + MarkXSpacing*2 + MarkInSpacing*3 + 15*2 > ScreenWidth) {
+            _activitylabel1.frame = CGRectMake(15, 2, stringWidth + MarkInSpacing, 12);
+            _activitylabel2.frame = CGRectMake(CGRectGetMaxX(_activitylabel1.frame) + MarkXSpacing, 2, stringWidth2 + MarkInSpacing, 12);
+            _activitylabel3.frame = CGRectMake(15, 16, stringWidth3 + 10, 12);
+            _activitylabel4.frame = CGRectMake(CGRectGetMaxX(_activitylabel3.frame) + MarkXSpacing, 16, stringWidth3 + 10, 12);
+        } else if (stringWidth + stringWidth2 + stringWidth3 + stringWidth4 + MarkXSpacing*3 + MarkInSpacing*4 + 15*2 > ScreenWidth) {
+            _activitylabel1.frame = CGRectMake(15, 2, stringWidth + MarkInSpacing, 12);
+            _activitylabel2.frame = CGRectMake(CGRectGetMaxX(_activitylabel1.frame) + MarkXSpacing, 2, stringWidth2 + MarkInSpacing, 12);
+            _activitylabel3.frame = CGRectMake(CGRectGetMaxX(_activitylabel2.frame) + MarkXSpacing, 2, stringWidth3 + MarkInSpacing, 12);
+            _activitylabel4.frame = CGRectMake(15, 16, stringWidth4 + MarkInSpacing, 12);
+        }
+    }
+}
+
 //上拉view
 - (void)drawPullingView
 {
@@ -149,7 +305,7 @@
 
     _titleArray = [[NSArray alloc] initWithObjects:@"基础详情",@"认购记录", nil];
 
-    _twoTableview = [[UITableView alloc] initWithFrame:CGRectMake(0, ScreenHeight, ScreenWidth, ScreenHeight - 64) style:UITableViewStylePlain];
+    _twoTableview = [[UITableView alloc] initWithFrame:CGRectMake(0, ScreenHeight, ScreenWidth, ScreenHeight + 57  ) style:UITableViewStyleGrouped];
     _twoTableview.backgroundColor = [UIColor clearColor];
     //_tableView.separatorColor = UIColorWithRGB(0xeff0f3);
     _twoTableview.delegate = self;
@@ -164,9 +320,10 @@
         _twoTableview.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     }
     [self.view addSubview:_twoTableview];
+    [_twoTableview bringSubviewToFront:self.investBgView];
     _twoTableview.contentInset = UIEdgeInsetsMake(0, 0, 10, 0);
     //    _twoTableview.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
-//    [self addTopSegment];
+    [self addTopSegment];
     
     UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 0.5)];
     lineView.backgroundColor = UIColorWithRGB(0xd8d8d8);
@@ -204,7 +361,7 @@
 - (void)addTopSegment
 {
     _topSegmentedControl = [[HMSegmentedControl alloc] initWithSectionTitles:_titleArray];
-    [_topSegmentedControl setFrame:CGRectMake(0, 0, ScreenWidth, 44)];
+    [_topSegmentedControl setFrame:CGRectMake(0, 64, ScreenWidth, 44)];
     _topSegmentedControl.selectionIndicatorHeight = 2.0f;
     _topSegmentedControl.backgroundColor = [UIColor whiteColor];
     _topSegmentedControl.font = [UIFont systemFontOfSize:14];
@@ -217,6 +374,7 @@
     _topSegmentedControl.tag = 10001;
     [_topSegmentedControl addTarget:self action:@selector(topSegmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
     [self.view addSubview:_topSegmentedControl];
+//    self.twoTableview.tableHeaderView = _topSegmentedControl;
 //    [self.view viewAddLine:_topSegmentedControl Up:YES];
     //[self viewAddLine:_topSegmentedControl Up:NO];
     for (int i = 0 ; i < _titleArray.count - 1 ; i++) {
@@ -224,28 +382,40 @@
         linebk.frame = CGRectMake(ScreenWidth/_titleArray.count * (i + 1), 16, 1, 12);
         [_topSegmentedControl addSubview:linebk];
     }
-    [_topSegmentedControl setHidden:YES];
+//    [_topSegmentedControl setHidden:YES];
     if (_selectIndex != 0) {
         _topSegmentedControl.selectedSegmentIndex = _selectIndex;
     }
     
 }
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+//-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+//    
+//    return nil;
+//}
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    return 44.f;
+    return 50;
 }
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+//-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+//    
+//    return 44.f;
+//}
+- (NSInteger)numberOfRowsInSection:(UITableView *)tableView
 {
-    return 2;
-}
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 0;
+    return 1;
 }
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    return nil;
+   static NSString *cellId = @"tableveiwcell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellId];
+    }
+    
+    cell.textLabel.text =@"测试";
+    
+    return cell;
 }
 - (void)topSegmentedControlChangedValue:(HMSegmentedControl *)segmentCtrl
 {
@@ -273,8 +443,8 @@
             [self removeTopSegment];
             //_investmentView.frame = CGRectMake(0, ScreenHeight - 67, ScreenWidth, 67);
             [UIView animateWithDuration:0.3 animations:^{
-                _oneScroll.frame = CGRectMake(0, 0, ScreenWidth, BidDetailScrollViewHeight);
-                _twoTableview.frame = CGRectMake(0, ScreenHeight, ScreenWidth, BidDetailScrollViewHeight);
+                _oneScroll.frame = CGRectMake(0, 64, ScreenWidth, BidDetailScrollViewHeight);
+                _twoTableview.frame = CGRectMake(0, ScreenHeight + 64 + 57, ScreenWidth, BidDetailScrollViewHeight);
             } completion:^(BOOL finished) {
                 _oneScrollPull = NO;
 //                [bottomView setHidden:NO];x
@@ -289,8 +459,8 @@
                 [self addTopSegment];
 //                [_delegate toDownView];
                 [UIView animateWithDuration:0.3 animations:^{
-                    _oneScroll.frame = CGRectMake(0, -ScreenHeight - 64, ScreenWidth, BidDetailScrollViewHeight);
-                    _twoTableview.frame = CGRectMake(0,0, ScreenWidth, BidDetailScrollViewHeight);
+                    _oneScroll.frame = CGRectMake(0, -ScreenHeight, ScreenWidth, BidDetailScrollViewHeight);
+                    _twoTableview.frame = CGRectMake(0,64, ScreenWidth, BidDetailScrollViewHeight);
                 } completion:^(BOOL finished) {
 //                    [bottomView setHidden:YES];
                     [self hideAllTopSegment:NO];
@@ -369,7 +539,7 @@
     //_investmentView.frame = CGRectMake(0, ScreenHeight - 67 - 64, ScreenWidth, 67);
     _oneScroll.frame = CGRectMake(0, -ScreenHeight - 64, ScreenWidth, ScreenHeight - 64 - 57);
     [UIView animateWithDuration:0.2 animations:^{
-        _twoTableview.frame = CGRectMake(0, 0, ScreenWidth, BidDetailScrollViewHeight);
+        _twoTableview.frame = CGRectMake(0, 64, ScreenWidth, BidDetailScrollViewHeight);
     } completion:^(BOOL finished) {
 //        [bottomView setHidden:YES];
         [self hideAllTopSegment:NO];

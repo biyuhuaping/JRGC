@@ -576,6 +576,10 @@
 		83FB3F621E5C68150094C9BA /* UCFCollctionKeyBidViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FB3F611E5C68150094C9BA /* UCFCollctionKeyBidViewController.m */; };
 		83FEDB761EFBB56000CFE0EF /* UCFCompanyNoOpenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FEDB741EFBB56000CFE0EF /* UCFCompanyNoOpenViewController.m */; };
 		83FEDB771EFBB56000CFE0EF /* UCFCompanyNoOpenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83FEDB751EFBB56000CFE0EF /* UCFCompanyNoOpenViewController.xib */; };
+		83FF205C1F0BAF0500F21119 /* UCFGoldDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FF20551F0BAF0500F21119 /* UCFGoldDetailViewController.m */; };
+		83FF205D1F0BAF0500F21119 /* UCFGoldDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83FF20561F0BAF0500F21119 /* UCFGoldDetailViewController.xib */; };
+		83FF205E1F0BAF0500F21119 /* UCFGoldDetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FF205A1F0BAF0500F21119 /* UCFGoldDetailHeaderView.m */; };
+		83FF205F1F0BAF0500F21119 /* UCFGoldDetailHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83FF205B1F0BAF0500F21119 /* UCFGoldDetailHeaderView.xib */; };
 		83FF3E4A1E12159B00DFB99C /* UCFCashTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FF3E481E12159B00DFB99C /* UCFCashTableViewCell.m */; };
 		83FF3E4B1E12159C00DFB99C /* UCFCashTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83FF3E491E12159B00DFB99C /* UCFCashTableViewCell.xib */; };
 		840A79431C2A7C160059A946 /* UCFMessageCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 840A793D1C2A7C160059A946 /* UCFMessageCenterViewController.m */; };
@@ -1820,6 +1824,12 @@
 		83FEDB731EFBB56000CFE0EF /* UCFCompanyNoOpenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFCompanyNoOpenViewController.h; sourceTree = "<group>"; };
 		83FEDB741EFBB56000CFE0EF /* UCFCompanyNoOpenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFCompanyNoOpenViewController.m; sourceTree = "<group>"; };
 		83FEDB751EFBB56000CFE0EF /* UCFCompanyNoOpenViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFCompanyNoOpenViewController.xib; sourceTree = "<group>"; };
+		83FF20541F0BAF0500F21119 /* UCFGoldDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFGoldDetailViewController.h; sourceTree = "<group>"; };
+		83FF20551F0BAF0500F21119 /* UCFGoldDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFGoldDetailViewController.m; sourceTree = "<group>"; };
+		83FF20561F0BAF0500F21119 /* UCFGoldDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFGoldDetailViewController.xib; sourceTree = "<group>"; };
+		83FF20591F0BAF0500F21119 /* UCFGoldDetailHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFGoldDetailHeaderView.h; sourceTree = "<group>"; };
+		83FF205A1F0BAF0500F21119 /* UCFGoldDetailHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFGoldDetailHeaderView.m; sourceTree = "<group>"; };
+		83FF205B1F0BAF0500F21119 /* UCFGoldDetailHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFGoldDetailHeaderView.xib; sourceTree = "<group>"; };
 		83FF3E471E12159B00DFB99C /* UCFCashTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFCashTableViewCell.h; sourceTree = "<group>"; };
 		83FF3E481E12159B00DFB99C /* UCFCashTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFCashTableViewCell.m; sourceTree = "<group>"; };
 		83FF3E491E12159B00DFB99C /* UCFCashTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFCashTableViewCell.xib; sourceTree = "<group>"; };
@@ -2554,6 +2564,7 @@
 		4AB126071AEF8EA400E915F1 /* BidViewController */ = {
 			isa = PBXGroup;
 			children = (
+				83FF20521F0BAF0500F21119 /* GoldDetail */,
 				833A6EA11E55466B00C8A494 /* CollectionDetail */,
 				FB1E7F721D8E4230009CBE2C /* ProjectDetail */,
 				4AB126081AEF8EA400E915F1 /* UCFPurchaseBidViewController.h */,
@@ -5035,6 +5046,43 @@
 			path = Tools/iWatchTool;
 			sourceTree = "<group>";
 		};
+		83FF20521F0BAF0500F21119 /* GoldDetail */ = {
+			isa = PBXGroup;
+			children = (
+				83FF20531F0BAF0500F21119 /* Controller */,
+				83FF20571F0BAF0500F21119 /* Model */,
+				83FF20581F0BAF0500F21119 /* View */,
+			);
+			path = GoldDetail;
+			sourceTree = "<group>";
+		};
+		83FF20531F0BAF0500F21119 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				83FF20541F0BAF0500F21119 /* UCFGoldDetailViewController.h */,
+				83FF20551F0BAF0500F21119 /* UCFGoldDetailViewController.m */,
+				83FF20561F0BAF0500F21119 /* UCFGoldDetailViewController.xib */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		83FF20571F0BAF0500F21119 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		83FF20581F0BAF0500F21119 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				83FF20591F0BAF0500F21119 /* UCFGoldDetailHeaderView.h */,
+				83FF205A1F0BAF0500F21119 /* UCFGoldDetailHeaderView.m */,
+				83FF205B1F0BAF0500F21119 /* UCFGoldDetailHeaderView.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		840A793B1C2A7C160059A946 /* MessageCenter(消息中心) */ = {
 			isa = PBXGroup;
 			children = (
@@ -5832,7 +5880,7 @@
 						CreatedOnToolsVersion = 6.1;
 						DevelopmentTeam = EZRWM7P5C6;
 						LastSwiftMigration = 0800;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -5856,7 +5904,7 @@
 					83F2D4E81DCB3F940041F913 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = EZRWM7P5C6;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -5869,7 +5917,7 @@
 					83F2D4F41DCB3F950041F913 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = EZRWM7P5C6;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -5956,6 +6004,7 @@
 				74E89FF71DDD8D5D000B0AFF /* UCFP2PViewController.xib in Resources */,
 				744EB7EF1EE7DD15003C57C4 /* UCFInvestViewController.xib in Resources */,
 				835B888B1E8222F600C8F0AB /* UCFP2POrHornerTabHeaderView.xib in Resources */,
+				83FF205F1F0BAF0500F21119 /* UCFGoldDetailHeaderView.xib in Resources */,
 				74A0AF101EC341DD009E5A57 /* ZZCircleProgress.bundle in Resources */,
 				FBE5A0541AE8BEDD0095B2ED /* UCFMyInvestViewCell.xib in Resources */,
 				74270D571EC5AAE500F9419B /* UCFInvitationRewardCell.xib in Resources */,
@@ -6098,6 +6147,7 @@
 				25950EBF1D7FB6EC00E4CCBA /* CWFinishedView.xib in Resources */,
 				FB5149541D64441F00C26E7B /* guideImage6_3.png in Resources */,
 				74FC22801BA6A7FA00D1660A /* UCFSecurityCenterViewController.xib in Resources */,
+				83FF205D1F0BAF0500F21119 /* UCFGoldDetailViewController.xib in Resources */,
 				4AE1E9671E1CDB9900587CE6 /* WeiboSDK.bundle in Resources */,
 				A829E0A71ED42D0C00616FFE /* guideImage6_4.png in Resources */,
 				A829E0A81ED42D0C00616FFE /* guideImage7_4.png in Resources */,
@@ -6496,6 +6546,7 @@
 				74E536751AE6879900DAABFC /* BeanTableViewCell.m in Sources */,
 				747BE9D21D5B0F48007DEF32 /* UCFHuiBuinessDetailViewController.m in Sources */,
 				84FAB60D1C7C575300D0942F /* MGSwipeTableCell.m in Sources */,
+				83FF205E1F0BAF0500F21119 /* UCFGoldDetailHeaderView.m in Sources */,
 				742D0CA11DE29E99000FA676 /* UCFProjectListCell.m in Sources */,
 				7B2E56941ADBBE97008B0F9E /* UCFRetrievePasswordStepOneView.m in Sources */,
 				7BD35A991AD61E4200389D6B /* LLLockView.m in Sources */,
@@ -6512,6 +6563,7 @@
 				83F2D59F1DCB508F0041F913 /* UCFSession.m in Sources */,
 				ED44558E1C112BCF00823DF3 /* UCFLoginShaowView.m in Sources */,
 				ED70C8791C7C581E00F45AC4 /* ChooseFaceOrGesAlertView.m in Sources */,
+				83FF205C1F0BAF0500F21119 /* UCFGoldDetailViewController.m in Sources */,
 				74270C9A1EC58F6800F9419B /* UCFUserPresenter.m in Sources */,
 				74EB30731B0E0EC900D27BA9 /* UCFBankTableViewCell.m in Sources */,
 				4AA2AA801E5B17B7006E83F8 /* UCFBatchSetNumWebViewController.m in Sources */,
@@ -6775,10 +6827,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = JRGC/JRGC.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Phoenix Credit Management CO., Ltd.";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = EZRWM7P5C6;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -6829,8 +6881,8 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp299;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "aaaf1335-9564-4b24-89a0-419b90fbe72c";
-				PROVISIONING_PROFILE_SPECIFIER = 2016_299Distribution;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "JRGC/JRGC-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -6849,9 +6901,9 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = JRGC/JRGC.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Phoenix Credit Management CO., Ltd.";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = EZRWM7P5C6;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -6902,8 +6954,8 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp299;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "aaaf1335-9564-4b24-89a0-419b90fbe72c";
-				PROVISIONING_PROFILE_SPECIFIER = 2016_299Distribution;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "JRGC/JRGC-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -6961,16 +7013,16 @@
 				CODE_SIGN_ENTITLEMENTS = "JRGCWatch Extension/JRGCWatch Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Phoenix Credit Management CO., Ltd.";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing Phoenix Credit Management CO., Ltd.";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = EZRWM7P5C6;
+				DEVELOPMENT_TEAM = "";
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "JRGCWatch Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp299.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
-				PROVISIONING_PROFILE = "b1b92a10-3cdf-4b79-8694-13526aae1819";
-				PROVISIONING_PROFILE_SPECIFIER = 299ExtenSionDistribution;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
@@ -6989,17 +7041,17 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CODE_SIGN_ENTITLEMENTS = "JRGCWatch Extension/JRGCWatch Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Phoenix Credit Management CO., Ltd.";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = EZRWM7P5C6;
+				DEVELOPMENT_TEAM = "";
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "JRGCWatch Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp299.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
-				PROVISIONING_PROFILE = "b1b92a10-3cdf-4b79-8694-13526aae1819";
-				PROVISIONING_PROFILE_SPECIFIER = 299ExtenSionDistribution;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
@@ -7019,16 +7071,16 @@
 				CODE_SIGN_ENTITLEMENTS = JRGCWatch/JRGCWatch.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Phoenix Credit Management CO., Ltd.";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing Phoenix Credit Management CO., Ltd.";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = EZRWM7P5C6;
+				DEVELOPMENT_TEAM = "";
 				GCC_NO_COMMON_BLOCKS = YES;
 				IBSC_MODULE = JRGCWatch_Extension;
 				INFOPLIST_FILE = JRGCWatch/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp299.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "01f3a798-87f4-4065-b677-065ffd504df2";
-				PROVISIONING_PROFILE_SPECIFIER = 299WatchKitDistribution;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
@@ -7047,17 +7099,17 @@
 				CODE_SIGN_ENTITLEMENTS = JRGCWatch/JRGCWatch.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Phoenix Credit Management CO., Ltd.";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing Phoenix Credit Management CO., Ltd.";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = EZRWM7P5C6;
+				DEVELOPMENT_TEAM = "";
 				GCC_NO_COMMON_BLOCKS = YES;
 				IBSC_MODULE = JRGCWatch_Extension;
 				INFOPLIST_FILE = JRGCWatch/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp299.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "01f3a798-87f4-4065-b677-065ffd504df2";
-				PROVISIONING_PROFILE_SPECIFIER = 299WatchKitDistribution;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
