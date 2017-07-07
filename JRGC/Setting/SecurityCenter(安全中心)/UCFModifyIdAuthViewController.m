@@ -114,7 +114,7 @@
     
     [self addLeftButton];
     
-    baseTitleLabel.text =  [UserInfoSingle sharedManager].companyAgent ? @"企业认证" : @"身份认证";
+    baseTitleLabel.text =  [[NSUserDefaults standardUserDefaults] boolForKey:@"isCompanyAgentType" ] ? @"企业认证" : @"身份认证";
     
     [self getIdInfoFromNet];
     

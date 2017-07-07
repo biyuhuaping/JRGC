@@ -200,12 +200,12 @@
     if ((int)gondDouBalance > 0) {
         isGongDouSwitch = YES;
     }
-    if (isCompanyAgent) {
-        isHaveCashNum = NO;
-        isHaveCouponNum = NO;
-        isGongDouSwitch = NO;
-        isHasOverdueGongDou = NO;
-    }
+//    if (isCompanyAgent) {如果是企业
+//        isHaveCashNum = NO;
+//        isHaveCouponNum = NO;
+//        isGongDouSwitch = NO;
+//        isHasOverdueGongDou = NO;
+//    }
     _bidTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _bidTableView.delegate = self;
     _bidTableView.dataSource = self;

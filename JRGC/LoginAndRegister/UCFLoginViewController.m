@@ -223,10 +223,14 @@
             NSString *md5Str = _loginView.passwordFieldText.length > 0 ? [UCFToolsMehod md5:[MD5Util MD5Pwd:_loginView.passwordFieldText]] :[UCFToolsMehod md5:@""];
             NSString *yanQian = [NSString stringWithFormat:@"%@%@%@",_loginView.userNameFieldText,md5Str,dic[@"data"][@"userInfo"][@"time"]];
             NSString *gcmCode = [(NSDictionary *)dic[@"data"][@"userInfo"] objectSafeForKey: @"promotionCode"];
+            BOOL isCompanyAgent = [[(NSDictionary *)dic[@"data"][@"userInfo"] objectSafeForKey: @"isCompanyAgent"] boolValue];
             NSString *signatureStr  = [UCFToolsMehod md5:yanQian];
             [[NSUserDefaults standardUserDefaults] setObject:signatureStr forKey:SIGNATUREAPP];
             [[NSUserDefaults standardUserDefaults] setValue:gcmCode forKey:@"gcmCode"];
+            [[NSUserDefaults standardUserDefaults] setBool:isCompanyAgent forKey:@"isCompanyAgentType" ];
             [[NSUserDefaults standardUserDefaults] synchronize];
+            
+            
     
             [[NSNotificationCenter defaultCenter] postNotificationName:@"LatestProjectUpdate" object:nil];
             //更新个人中心数据
