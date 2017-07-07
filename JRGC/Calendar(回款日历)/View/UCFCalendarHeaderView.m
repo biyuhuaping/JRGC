@@ -39,6 +39,8 @@
 @property (weak, nonatomic) UIView *downLine2;
 @property (weak, nonatomic) UIView *downLine;
 @property (strong, nonatomic) UIView *weekView;
+@property (strong, nonatomic) NSDateFormatter *dateFormatter;
+@property (strong, nonatomic) NSDateFormatter *dateFormatter1;
 @end
 
 @implementation UCFCalendarHeaderView
@@ -57,6 +59,24 @@
         _days = [NSMutableArray array];
     }
     return _days;
+}
+
+- (NSDateFormatter *)dateFormatter
+{
+    if (nil == _dateFormatter) {
+        _dateFormatter = [[NSDateFormatter alloc] init];
+        [_dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    }
+    return _dateFormatter;
+}
+
+- (NSDateFormatter *)dateFormatter1
+{
+    if (nil == _dateFormatter1) {
+        _dateFormatter1 = [[NSDateFormatter alloc] init];
+        [_dateFormatter1 setDateFormat:@"yyyy-MM"];
+    }
+    return _dateFormatter1;
 }
 
 - (UIView *)weekView
@@ -157,7 +177,7 @@ static NSString *const cellId = @"cellId";
     }
     CGPoint currentOffSet = self.calendar.contentOffset;
     [self.calendar setContentOffset:CGPointMake(currentOffSet.x - ScreenWidth, 0)];
-    self.monthLabel.text = [self.months objectAtIndex:(int)((currentOffSet.x - ScreenWidth) / ScreenWidth)];
+    self.monthLabel.text = [self setCurrentMonthWithMonth:[self.months objectAtIndex:(int)((currentOffSet.x - ScreenWidth) / ScreenWidth)]];
 }
 
 - (void)nextButtonClicked:(UIButton *)button
@@ -167,7 +187,7 @@ static NSString *const cellId = @"cellId";
     }
     CGPoint currentOffSet = self.calendar.contentOffset;
     [self.calendar setContentOffset:CGPointMake(currentOffSet.x + ScreenWidth, 0)];
-    self.monthLabel.text = [self.months objectAtIndex:(int)((currentOffSet.x + ScreenWidth) / ScreenWidth)];
+    self.monthLabel.text = [self setCurrentMonthWithMonth:[self.months objectAtIndex:(int)((currentOffSet.x + ScreenWidth) / ScreenWidth)]];
 }
 
 - (void)layoutSubviews
@@ -257,9 +277,9 @@ static NSString *const cellId = @"cellId";
     _calendarHeaderInfo = calendarHeaderInfo;
     
     self.myPaymentLabel.text = [calendarHeaderInfo objectSafeForKey:@"myPayment"];
-    self.waitPrincipalLabel.text = [calendarHeaderInfo objectSafeForKey:@"waitInterest"];
-    self.waitInterestLabel.text = [calendarHeaderInfo objectSafeForKey:@"myPayment"];
-    self.currentDay = [calendarHeaderInfo objectSafeForKey:@"today"];
+    self.waitPrincipalLabel.text = [calendarHeaderInfo objectSafeForKey:@"waitPrincipal"];
+    self.waitInterestLabel.text = [calendarHeaderInfo objectSafeForKey:@"waitInterest"];
+//    self.currentDay = [calendarHeaderInfo objectSafeForKey:@"today"];
     
     [self.months removeAllObjects];
     [self.months addObjectsFromArray:[calendarHeaderInfo objectSafeForKey:@"months"]];
@@ -269,41 +289,34 @@ static NSString *const cellId = @"cellId";
     }
 }
 
-- (void)setCurrentDay:(NSString *)currentDay
-{
-    _currentDay = currentDay;
-    
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-    NSDate *currentDate = [dateFormatter dateFromString:currentDay];
-    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];//设置成中国阳历
-    NSDateComponents *comps = [[NSDateComponents alloc] init];
-    NSInteger unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSWeekdayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;//这句我也不明白具体时用来做什么。。。
-    comps = [calendar components:unitFlags fromDate:currentDate];
-    _currentDayLabel.text = [NSString stringWithFormat:@"%ld年%ld月%ld日", (long)[comps year],(long)[comps month],(long)[comps day]];
-}
+//- (void)setCurrentDay:(NSString *)currentDay
+//{
+//    _currentDay = currentDay;
+//    
+//}
 
 - (void)drawRect:(CGRect)rect
 {
     [super drawRect:rect];
     if (self.months.count > 0) {
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"yyyy-MM"];
-        NSString *strDate = [dateFormatter stringFromDate:[NSDate date]];
+        NSString *strDate = [self.dateFormatter1 stringFromDate:[NSDate date]];
         BOOL isEnd = YES;
         for (NSString *month in _months) {
             if (([strDate compare:month options:NSLiteralSearch] == NSOrderedSame) || ([strDate compare:month options:NSLiteralSearch] == NSOrderedAscending)) {
                 NSInteger integer = [_months indexOfObject:month];
                 [_calendar scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:integer inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:NO];
                 isEnd = NO;
-                self.monthLabel.text = month;
+                self.monthLabel.text = [self setCurrentMonthWithMonth: month];
+//                if ([strDate compare:month options:NSLiteralSearch] == NSOrderedSame) {
+//                    [self setCurrentDayWithDate:[self.dateFormatter stringFromDate:[NSDate date]]];
+//                }
                 [self getClendarInfoWithMonth:month];
                 break;
             }
         }
         if (isEnd) {
             [_calendar scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:(self.months.count - 1) inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:NO];
-            self.monthLabel.text = [self.months lastObject];
+            self.monthLabel.text = [self setCurrentMonthWithMonth: [self.months lastObject]];
             [self getClendarInfoWithMonth:[self.months lastObject]];
         }
 //        [[NSNotificationCenter defaultCenter] postNotificationName:@"currentDay" object:nil];
@@ -357,7 +370,7 @@ static NSString *const cellId = @"cellId";
 #pragma mark - FSCalendar的代理方法
 - (void)calendar:(UCFCalendarCollectionViewCell *)calendarCell didClickedDay:(NSString *)day
 {
-    self.currentDay = day;
+    [self setCurrentDayWithDate:day];
     if ([self.delegate respondsToSelector:@selector(calendar:didClickedDay:)]) {
         [self.delegate calendar:calendarCell didClickedDay:day];
     }
@@ -367,9 +380,29 @@ static NSString *const cellId = @"cellId";
 {
     if (scrollView == self.calendar) {
         NSInteger index = scrollView.contentOffset.x / ScreenWidth;
-        self.monthLabel.text = [self.months objectAtIndex:index];
+        self.monthLabel.text = [self setCurrentMonthWithMonth:[self.months objectAtIndex:index]];
         [self getClendarInfoWithMonth:[self.months objectAtIndex:index]];
+        [self.calendar reloadData];
     }
+}
+
+- (NSString *)setCurrentMonthWithMonth:(NSString *)month {
+    NSDate *currentDate = [self.dateFormatter1 dateFromString:month];
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];//设置成中国阳历
+    NSDateComponents *comps = [[NSDateComponents alloc] init];
+    NSInteger unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSWeekdayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;//这句我也不明白具体时用来做什么。。。
+    comps = [calendar components:unitFlags fromDate:currentDate];
+    return [NSString stringWithFormat:@"%ld年%ld月",(long)[comps year], (long)[comps month]];
+}
+
+- (void)setCurrentDayWithDate:(NSString *)date
+{
+    NSDate *currentDate = [self.dateFormatter dateFromString:date];
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];//设置成中国阳历
+    NSDateComponents *comps = [[NSDateComponents alloc] init];
+    NSInteger unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSWeekdayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;//这句我也不明白具体时用来做什么。。。
+    comps = [calendar components:unitFlags fromDate:currentDate];
+    _currentDayLabel.text = [NSString stringWithFormat:@"%ld年%ld月%ld日", (long)[comps year],(long)[comps month],(long)[comps day]];
 }
 
 @end

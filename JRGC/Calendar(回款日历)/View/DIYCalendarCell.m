@@ -68,7 +68,7 @@
     // Override the build-in appearance configuration
     if (self.isPlaceholder) {
         self.titleLabel.textColor = [UIColor lightGrayColor];
-        self.eventIndicator.hidden = YES;
+        self.eventIndicator.hidden = NO;
     }
 }
 
