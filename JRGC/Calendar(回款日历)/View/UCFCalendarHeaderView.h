@@ -20,5 +20,6 @@
 @property (strong, nonatomic) NSDictionary *calendarHeaderInfo;
 @property (weak, nonatomic) id<UCFCalendarHeaderViewDelegate> delegate;
 @property (copy, nonatomic) NSString *currentDay;
+@property (weak, nonatomic) IBOutlet UILabel *currentDayLabel;
 + (CGFloat)viewHeight;
 @end

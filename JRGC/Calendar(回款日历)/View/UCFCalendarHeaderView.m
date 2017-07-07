@@ -24,7 +24,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *waitInterestLabel;
 @property (weak, nonatomic) IBOutlet UILabel *repayMoneyLabel;
 @property (weak, nonatomic) IBOutlet UILabel *paidMoneyLabel;
-@property (weak, nonatomic) IBOutlet UILabel *currentDayLabel;
+
 
 @property (strong, nonatomic) NSMutableArray *months;
 @property (weak, nonatomic) IBOutlet UIView *currentDayView;
@@ -383,6 +383,8 @@ static NSString *const cellId = @"cellId";
         self.monthLabel.text = [self setCurrentMonthWithMonth:[self.months objectAtIndex:index]];
         [self getClendarInfoWithMonth:[self.months objectAtIndex:index]];
         [self.calendar reloadData];
+        self.currentDayLabel.text = nil;
+        [self.delegate calendar:self.calendar didClickedDay:nil];
     }
 }
 
