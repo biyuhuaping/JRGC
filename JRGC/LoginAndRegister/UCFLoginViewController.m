@@ -72,7 +72,13 @@
      //最近一次登录的用户名
     NSString *lastName = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastLoginName"];
     if (lastName.length!=0) {
-        [_loginView setUserNameFieldText:lastName];
+        
+        NSInteger selectTag =  [[NSUserDefaults standardUserDefaults]  integerForKey:@"selectTag"];
+        if (self.selectTag == selectTag) {//个人登录
+            [_loginView setUserNameFieldText:lastName];
+        }else {
+             [_loginView setUserNameFieldText:@""];
+        }
     }
     
     if ([_sourceVC isEqualToString:@"errorNum"]) {
@@ -173,6 +179,14 @@
 -(void)seletedSegmentedControl:(NSInteger)seletedTag
 {
     self.selectTag = seletedTag;
+    //最近一次登录的用户名
+    NSString *lastName = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastLoginName"];
+    NSInteger selectTag =  [[NSUserDefaults standardUserDefaults]  integerForKey:@"selectTag"];
+    if (self.selectTag == selectTag) {
+        [_loginView setUserNameFieldText:lastName];
+    }else{
+         [_loginView setUserNameFieldText:@""];
+    }
 }
 
 
@@ -228,6 +242,7 @@
             [[NSUserDefaults standardUserDefaults] setObject:signatureStr forKey:SIGNATUREAPP];
             [[NSUserDefaults standardUserDefaults] setValue:gcmCode forKey:@"gcmCode"];
             [[NSUserDefaults standardUserDefaults] setBool:isCompanyAgent forKey:@"isCompanyAgentType" ];
+            [[NSUserDefaults standardUserDefaults] setInteger:self.selectTag forKey:@"selectTag"];
             [[NSUserDefaults standardUserDefaults] synchronize];
             
             

@@ -763,6 +763,11 @@
                 break;
                 
             case 1: {
+                if(self.isCompanyAgent){
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"目前不支持企业用户修改手机号" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                    [alert show];
+                    return;
+                }
                 BindPhoneNumViewController *v = (BindPhoneNumViewController *)vc;
                 v.authedPhone = item.subtitle;
                 v.uperViewController = self;
