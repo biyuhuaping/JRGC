@@ -535,6 +535,7 @@ typedef NS_ENUM(NSUInteger, FSCalendarOrientation) {
             [collectionView selectItemAtIndexPath:indexPath animated:NO scrollPosition:UICollectionViewScrollPositionNone];
         }
     }
+    
     if (![_selectedDates containsObject:selectedDate]) {
         cell.selected = YES;
         [cell performSelecting];
@@ -1669,6 +1670,12 @@ typedef NS_ENUM(NSUInteger, FSCalendarOrientation) {
     [self.visibleStickyHeaders makeObjectsPerformSelector:@selector(configureAppearance)];
     [self.calendarHeaderView configureAppearance];
     [self.calendarWeekdayView configureAppearance];
+}
+
+- (void)calcueAllSelectedDays
+{
+    [_selectedDates removeAllObjects];
+    [_selectedDates addObject:[NSDate date]];
 }
 
 @end

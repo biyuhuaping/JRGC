@@ -57,11 +57,18 @@
 #pragma mark - tableView的数据源方法
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return self.selectedDayDatas.count;
+    if (!self.selectedDayDatas.count && self.calendarHeader.currentDayLabel.text.length>0) {
+        return 1;
+    }
+    else
+        return self.selectedDayDatas.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if (!self.selectedDayDatas.count) {
+        return 0;
+    }
     UCFCalendarGroup *group = [self.selectedDayDatas objectAtIndex:section];
     if (group.isOpened) {
         return 3;
@@ -90,6 +97,9 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
+    if (!self.selectedDayDatas.count) {
+        return 200;
+    }
     return 73;
 }
 
@@ -106,7 +116,10 @@
         headerView.contentView.backgroundColor = [UIColor whiteColor];
         headerView.delegate = self;
     }
-    headerView.group = [self.selectedDayDatas objectAtIndex:section];
+    if (self.selectedDayDatas.count>0) {
+        headerView.group = [self.selectedDayDatas objectAtIndex:section];
+    }
+    
     return headerView;
 }
 
@@ -145,9 +158,6 @@
             }
             for (NSDictionary *dic in dataList) {
                 UCFCalendarGroup *group = [UCFCalendarGroup groupWithDict:dic];
-                if ([dic isEqual:[dataList firstObject]]) {
-                    group.opened = YES;
-                }
                 [self.selectedDayDatas addObject:group];
             }
             [self.tableview reloadData];
@@ -166,15 +176,15 @@
 
 - (void)calendar:(UCFCalendarCollectionViewCell *)calendar didClickedDay:(NSString *)day
 {
-    [self getCurrentDayInfoFromNetWithDay:day];
+    if (nil == day) {
+        [self.selectedDayDatas removeAllObjects];
+        [self.tableview reloadData];
+    }
+    else {
+        [self getCurrentDayInfoFromNetWithDay:day];
+    }
 }
 
-#pragma mark - 当前选中的日的信息请求
-- (void)currentDayInfo:(NSNotification *)noty
-{
-//    NSString *currentDay = self.calendarHeader.currentDay;
-//    [self getCurrentDayInfoFromNetWithDay:currentDay];
-}
 
 #pragma mark - 请求当前日的信息
 - (void)getCurrentDayInfoFromNetWithDay:(NSString *)day
@@ -192,5 +202,4 @@
         
     }];
 }
-
 @end

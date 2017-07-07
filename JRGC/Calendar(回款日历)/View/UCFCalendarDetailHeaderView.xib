@@ -21,7 +21,7 @@
                     <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fanli_loadown" translatesAutoresizingMaskIntoConstraints="NO" id="RjB-4k-joS">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="list_icon_downarrow" translatesAutoresizingMaskIntoConstraints="NO" id="RjB-4k-joS">
                     <rect key="frame" x="340" y="13.5" width="20" height="20"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="20" id="FqU-Xt-9ut"/>
@@ -93,6 +93,6 @@
         </view>
     </objects>
     <resources>
-        <image name="fanli_loadown" width="15" height="15"/>
+        <image name="list_icon_downarrow" width="25" height="25"/>
     </resources>
 </document>

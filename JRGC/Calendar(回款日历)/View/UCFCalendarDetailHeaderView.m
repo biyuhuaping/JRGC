@@ -8,6 +8,7 @@
 
 #import "UCFCalendarDetailHeaderView.h"
 #import "UCFCalendarGroup.h"
+#import "UCFNoDataView.h"
 
 @interface UCFCalendarDetailHeaderView ()
 @property (weak, nonatomic) IBOutlet UIImageView *arrowImageView;
@@ -19,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *statusILabel;
 @property (weak, nonatomic) IBOutlet UILabel *statusIILabel;
 
+@property (weak, nonatomic)  UCFNoDataView *nodataview;
 @property (weak, nonatomic) UIView *upLine;
 @property (weak, nonatomic) UIView *downLine;
 @end
@@ -28,6 +30,10 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
+    
+    UCFNoDataView *noDataView = [[UCFNoDataView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 200) errorTitle:@"本日无回款项目"];
+    [self.contentView addSubview:noDataView];
+    self.nodataview = noDataView;
     
     UIView *upLine = [[UIView alloc] initWithFrame:CGRectZero];
     upLine.backgroundColor = UIColorWithRGB(0xd8d8d8);
@@ -65,6 +71,23 @@
         self.downLine.backgroundColor = UIColorWithRGB(0xd8d8d8);
     }
     
+    if (nil == self.group) {
+        self.nodataview.hidden = NO;
+        self.nodataview.backgroundColor = UIColorWithRGB(0xebebee);
+        self.proNameLabel.hidden = YES;
+        self.totalMoneyLabel.hidden = YES;
+        self.timeLabel.hidden = YES;
+        self.statusILabel.hidden = YES;
+        self.statusIILabel.hidden = YES;
+    }
+    else {
+        self.nodataview.hidden = YES;
+        self.proNameLabel.hidden = NO;
+        self.totalMoneyLabel.hidden = NO;
+        self.timeLabel.hidden = NO;
+        self.statusILabel.hidden = NO;
+        self.statusIILabel.hidden = NO;
+    }
 }
 
 - (void)setGroup:(UCFCalendarGroup *)group

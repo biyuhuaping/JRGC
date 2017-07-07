@@ -33,13 +33,11 @@
         calendar.delegate = self;
         calendar.scrollEnabled = NO;
         calendar.swipeToChooseGesture.enabled = NO;
-        calendar.allowsMultipleSelection = YES;
+        calendar.allowsMultipleSelection = NO;
 //        calendar.placeholderType = FSCalendarPlaceholderTypeFillHeadTail;
         [self addSubview:calendar];
         self.calendar = calendar;
         
-        calendar.calendarHeaderView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.1];
-        calendar.calendarWeekdayView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.1];
         calendar.headerHeight = 44;
         calendar.weekdayHeight = 30;
         calendar.appearance.eventSelectionColor = [UIColor whiteColor];
@@ -180,6 +178,37 @@
     return @[appearance.eventDefaultColor];
 }
 
+- (nullable UIColor *)calendar:(FSCalendar *)calendar appearance:(FSCalendarAppearance *)appearance fillSelectionColorForDate:(NSDate *)date
+{
+    return UIColorWithRGB(0xfd4d4c);
+}
+
+- (nullable NSArray<UIColor *> *)calendar:(FSCalendar *)calendar appearance:(FSCalendarAppearance *)appearance eventSelectionColorsForDate:(NSDate *)date {
+    if (self.days > 0) {
+        NSString *dateStr = [self.dateFormatter stringFromDate:date];
+        for (UCFCalendarDayInfo *day in self.days) {
+            if ([dateStr isEqualToString:day.paidTime]) {
+                switch ([day.isAdvanceRepay intValue]) {
+                    case 0:
+                        return @[UIColorWithRGB(0xfd4d4c)];
+                        break;
+                    case 1:
+                        return @[UIColorWithRGB(0x7c9dc7)];
+                        break;
+                        
+                    case 2:
+                        return @[UIColorWithRGB(0x7c9dc7), UIColorWithRGB(0xfd4d4c)];
+                        break;
+                }
+            }
+        }
+    }
+    if ([self.gregorian isDateInToday:date]) {
+        return @[[UIColor orangeColor]];
+    }
+    return @[appearance.eventDefaultColor];
+}
+
 #pragma mark - Private methods
 
 - (void)configureVisibleCells
@@ -195,10 +224,9 @@
 {
     
     DIYCalendarCell *diyCell = (DIYCalendarCell *)cell;
-    
     // Custom today circle
     diyCell.circleImageView.hidden = ![self.gregorian isDateInToday:date];
-    
+    [self.calendar calcueAllSelectedDays];
     // Configure selection layer
     if (monthPosition == FSCalendarMonthPositionCurrent) {
         
@@ -246,6 +274,7 @@
 {
     _days = days;
     [_calendar reloadData];
+
 }
 
 @end
