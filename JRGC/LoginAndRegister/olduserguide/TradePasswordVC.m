@@ -50,6 +50,8 @@
     [_submitDataButton setBackgroundImage:[[UIImage imageNamed:@"btn_red"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:2.5] forState:UIControlStateNormal];
     [_submitDataButton setBackgroundImage:[[UIImage imageNamed:@"btn_red_highlight"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:2.5] forState:UIControlStateHighlighted];
     
+    _isCompanyAgent = [UserInfoSingle sharedManager].companyAgent;
+    
     [_label setFontColor:UIColorWithRGB(0x4aa1f9) string:@"点击这里"];
     __weak typeof(self) weakSelf = self;
     [self.label addLinkString:@"点击这里" block:^(ZBLinkLabelModel *linkModel) {
@@ -256,7 +258,7 @@
                     _textField2.font = [UIFont systemFontOfSize:14];
                     _textField2.textColor = UIColorWithRGB(0x555555);
                     [_textField2 addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
-                    _textField2.placeholder = _isCompanyAgent?@"请输入证件号":@"请输入身份证号";
+                    _textField2.placeholder = [UserInfoSingle sharedManager].companyAgent ? @"请输入社会信用代码/组织机构代码":@"请输入身份证号";
                     [cell.contentView addSubview:_textField2];
                 }
                     break;
