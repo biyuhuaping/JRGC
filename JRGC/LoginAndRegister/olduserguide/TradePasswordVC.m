@@ -129,6 +129,10 @@
             return NO;
         }
         return YES;
+    }else if(textField == _textField2 && _isCompanyAgent){
+        if (textField.text.length > 20 && ![string isEqualToString:@""]) {
+            return NO;
+        }
     }
     return YES;
 }

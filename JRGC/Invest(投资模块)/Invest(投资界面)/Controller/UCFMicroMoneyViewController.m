@@ -26,6 +26,7 @@
 #import "UCFBatchBidController.h"
 #import "UCFOrdinaryBidController.h"
 #import "UCFGoldDetailViewController.h"
+#import "HSHelper.h"
 @interface UCFMicroMoneyViewController () <UITableViewDataSource, UITableViewDelegate, UCFInvestAPIWithMicroMoneyManagerDelegate, UCFHomeListCellHonorDelegate,UCFHomeListHeaderSectionViewDelegate>
 
 @property (strong, nonatomic) UCFMicroMoneyHeaderView *microMoneyHeaderView;
@@ -206,6 +207,9 @@
         [self gotoCollectionDetailViewContoller:model];
     }else {//新手标 或普通标
                 self.model = model;
+                 HSHelper *helper = [HSHelper new];
+                [helper checkCompanyIsOpen:self.accoutType];//检查企业老用户是否开户
+        
                 if ([self checkUserCanInvestIsDetail:YES type:self.accoutType]) {
                     NSString *userid = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
                     NSString *strParameters = [NSString stringWithFormat:@"id=%@&userId=%@",model.Id,userid];
