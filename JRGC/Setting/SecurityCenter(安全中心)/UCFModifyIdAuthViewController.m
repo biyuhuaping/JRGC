@@ -144,8 +144,9 @@
         DBLOG(@"UCFSettingViewController : %@",dic);
 //        NSString *ret = dic[@"ret"];
         NSString *message = dic[@"message"];
-        BOOL isCompanyAgent = [[dic objectSafeForKey:@"isCompanyAgent"] boolValue];//true:是机构 false:不是机构
+        
         NSDictionary *dataDict = [dic objectSafeDictionaryForKey:@"data"];
+        BOOL isCompanyAgent = [[dataDict objectSafeForKey:@"isCompanyAgent"] boolValue];//true:是机构 false:不是机构
         int isSucess = [dic[@"ret"]intValue];
         if (isSucess == 1) {
             if (isCompanyAgent) {

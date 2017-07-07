@@ -354,6 +354,8 @@
 - (void)userInfoPresenter:(UCFUserPresenter *)presenter didRefreshUserInfoTwoWithResult:(id)result error:(NSError *)error
 {
     if (!error) {
+        
+        
         if ([result isKindOfClass:[UCFUserInfoModel class]]) {
             UCFUserInfoModel *userInfo = result;
             switch ([userInfo.sex integerValue]) {
@@ -368,6 +370,9 @@
                 default:
                     self.userIconImageView.image = [UIImage imageNamed:@"password_icon_head"];
                     break;
+            }
+            if([ UserInfoSingle sharedManager].companyAgent){
+                self.userIconImageView.image = [UIImage imageNamed:@"company_head"];
             }
 //            [self.userIconImageView sd_setImageWithURL:[NSURL URLWithString:userInfo.hurl] placeholderImage:[UIImage imageNamed:@""]];
             self.userTicket = userInfo.userCenterTicket;
