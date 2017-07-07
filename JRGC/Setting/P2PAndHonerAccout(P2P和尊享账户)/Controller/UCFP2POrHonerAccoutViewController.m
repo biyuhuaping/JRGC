@@ -372,7 +372,7 @@
             //修改交易密码
             TradePasswordVC * tradePasswordVC = [[TradePasswordVC alloc]initWithNibName:@"TradePasswordVC" bundle:nil];
             tradePasswordVC.title = titleStr;
-            tradePasswordVC.isCompanyAgent = [self.isCompanyAgent boolValue];
+            tradePasswordVC.isCompanyAgent = [[NSUserDefaults standardUserDefaults] boolForKey: @"isCompanyAgentType"];
             tradePasswordVC.site = [NSString stringWithFormat:@"%d",self.accoutType];
             tradePasswordVC.accoutType = self.accoutType;
             [self.navigationController pushViewController:tradePasswordVC  animated:YES];

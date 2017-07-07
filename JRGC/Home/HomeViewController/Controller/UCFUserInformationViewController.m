@@ -138,7 +138,7 @@
     [self.cycleImageBackView addSubview:cycleScrollView];
     self.cycleImageView = cycleScrollView;
     
-    NSString *personInformationBtnTitle = [UserInfoSingle sharedManager].companyAgent ? @"企业信息" : @"个人信息";
+    NSString *personInformationBtnTitle =  [[NSUserDefaults standardUserDefaults] boolForKey: @"isCompanyAgentType" ] ? @"企业信息" : @"个人信息";
     [self.personInformationBtn setTitle:personInformationBtnTitle forState:UIControlStateNormal];
     [self performSelector:@selector(getNormalBannerData) withObject:nil afterDelay:0.5];
 }
@@ -337,7 +337,7 @@
             self.addProfit = [NSString stringWithFormat:@"¥%@", userInfo.interests];
             self.asset = [NSString stringWithFormat:@"¥%@", userInfo.total];
             self.availableBanlance = [NSString stringWithFormat:@"¥%@", userInfo.cashBalance];
-            self.sign.hidden = userInfo.isCompanyAgent;
+//            self.sign.hidden = userInfo.isCompanyAgent;
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self refreshUI];
             });
@@ -354,6 +354,8 @@
 - (void)userInfoPresenter:(UCFUserPresenter *)presenter didRefreshUserInfoTwoWithResult:(id)result error:(NSError *)error
 {
     if (!error) {
+        
+        
         if ([result isKindOfClass:[UCFUserInfoModel class]]) {
             UCFUserInfoModel *userInfo = result;
             switch ([userInfo.sex integerValue]) {
@@ -368,6 +370,9 @@
                 default:
                     self.userIconImageView.image = [UIImage imageNamed:@"password_icon_head"];
                     break;
+            }
+            if([[NSUserDefaults standardUserDefaults] boolForKey: @"isCompanyAgentType"]){
+                self.userIconImageView.image = [UIImage imageNamed:@"company_head"];
             }
 //            [self.userIconImageView sd_setImageWithURL:[NSURL URLWithString:userInfo.hurl] placeholderImage:[UIImage imageNamed:@""]];
             self.userTicket = userInfo.userCenterTicket;

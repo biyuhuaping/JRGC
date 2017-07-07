@@ -25,6 +25,7 @@
 #import "UCFCollectionDetailViewController.h"
 #import "UCFBatchBidController.h"
 #import "UCFOrdinaryBidController.h"
+#import "UCFGoldDetailViewController.h"
 @interface UCFMicroMoneyViewController () <UITableViewDataSource, UITableViewDelegate, UCFInvestAPIWithMicroMoneyManagerDelegate, UCFHomeListCellHonorDelegate,UCFHomeListHeaderSectionViewDelegate>
 
 @property (strong, nonatomic) UCFMicroMoneyHeaderView *microMoneyHeaderView;
@@ -386,6 +387,15 @@
             controller.rootVc = self.rootVc;;
             controller.accoutType = SelectAccoutTypeP2P;
             [self.navigationController pushViewController:controller animated:YES];
+            
+//            NSArray *prdLabelsListTemp = [NSArray arrayWithArray:(NSArray*)self.model.prdLabelsList];
+//            UCFGoldDetailViewController *controller = [[UCFGoldDetailViewController alloc]initWithNibName:@"UCFGoldDetailViewController" bundle:nil];
+//            CGFloat platformSubsidyExpense = [self.model.platformSubsidyExpense floatValue];
+//            [[NSUserDefaults standardUserDefaults] setValue:[NSString stringWithFormat:@"%.1f",platformSubsidyExpense] forKey:@"platformSubsidyExpense"];
+//            controller.rootVc = self.rootVc;;
+//            controller.accoutType = SelectAccoutTypeP2P;
+//            [self.navigationController pushViewController:controller animated:YES];
+
         }else {
             [AuxiliaryFunc showAlertViewWithMessage:rsttext];
         }

@@ -55,6 +55,7 @@
     [self.label addLinkString:@"点击这里" block:^(ZBLinkLabelModel *linkModel) {
         [weakSelf soudLabelClick];
     }];
+    _isCompanyAgent = [[NSUserDefaults standardUserDefaults] boolForKey: @"isCompanyAgentType"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -256,7 +257,7 @@
                     _textField2.font = [UIFont systemFontOfSize:14];
                     _textField2.textColor = UIColorWithRGB(0x555555);
                     [_textField2 addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
-                    _textField2.placeholder = _isCompanyAgent?@"请输入证件号":@"请输入身份证号";
+                    _textField2.placeholder = [[NSUserDefaults standardUserDefaults] boolForKey: @"isCompanyAgentType"] ? @"请输入社会信用代码/组织机构代码":@"请输入身份证号";
                     [cell.contentView addSubview:_textField2];
                 }
                     break;
