@@ -245,6 +245,15 @@
 -(void)gotoCollectionDetailViewContoller:(UCFMicroMoneyModel *)model{
     NSString *uuid = [[NSUserDefaults standardUserDefaults]valueForKey:UUID];
     self.accoutType = SelectAccoutTypeP2P;
+    //检查企业老用户是否开户
+    NSString *messageStr =  [[HSHelper new] checkCompanyIsOpen:self.accoutType];
+    if (![messageStr isEqualToString:@""]) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+
+    
     if ([self checkUserCanInvestIsDetail:YES type:self.accoutType]) {
             _colPrdClaimIdStr = [NSString stringWithFormat:@"%@",model.Id];
             NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys:uuid,@"userId", _colPrdClaimIdStr, @"colPrdClaimId", nil];
