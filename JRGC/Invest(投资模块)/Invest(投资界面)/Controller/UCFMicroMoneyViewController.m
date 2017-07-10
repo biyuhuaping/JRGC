@@ -208,7 +208,13 @@
     }else {//新手标 或普通标
                 self.model = model;
                  HSHelper *helper = [HSHelper new];
-                [helper checkCompanyIsOpen:self.accoutType];//检查企业老用户是否开户
+                //检查企业老用户是否开户
+                NSString *messageStr =  [helper checkCompanyIsOpen:self.accoutType];
+                if (![messageStr isEqualToString:@""]) {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil];
+                    [alert show];
+                    return;
+                }
         
                 if ([self checkUserCanInvestIsDetail:YES type:self.accoutType]) {
                     NSString *userid = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
@@ -346,6 +352,15 @@
     }else{
         
             HSHelper *helper = [HSHelper new];
+        
+            //检查企业老用户是否开户
+            NSString *messageStr =  [helper checkCompanyIsOpen:self.accoutType];
+            if (![messageStr isEqualToString:@""]) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil];
+                [alert show];
+                return;
+            }
+
             if (![helper checkP2POrWJIsAuthorization:self.accoutType]) {//先授权
                 [helper pushP2POrWJAuthorizationType:self.accoutType nav:self.navigationController];
                 return;

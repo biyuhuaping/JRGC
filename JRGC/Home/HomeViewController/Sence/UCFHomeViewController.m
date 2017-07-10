@@ -336,7 +336,12 @@
             } else {
                 HSHelper *helper = [HSHelper new];
                 
-                [helper checkCompanyIsOpen:self.accoutType];
+               NSString *messageStr =  [helper checkCompanyIsOpen:self.accoutType];
+                if (![messageStr isEqualToString:@""]) {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil];
+                    [alert show];
+                    return;
+                }
                 
                 if (![helper checkP2POrWJIsAuthorization:self.accoutType]) {
                     [helper pushP2POrWJAuthorizationType:self.accoutType nav:self.navigationController];
@@ -467,6 +472,16 @@
                 [self showLoginView];
             } else {
                  HSHelper *helper = [HSHelper new];
+                
+                
+                NSString *messageStr =  [helper checkCompanyIsOpen:self.accoutType];
+                if (![messageStr isEqualToString:@""]) {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil];
+                    [alert show];
+                    return;
+                }
+
+                
                 if (![helper checkP2POrWJIsAuthorization:self.accoutType]) {
                     [helper pushP2POrWJAuthorizationType:self.accoutType nav:self.navigationController];
                     
@@ -634,6 +649,8 @@
     else if ([item.title isEqualToString:@"尊享账户"]) {
         self.accoutType = SelectAccoutTypeHoner;
     }
+    
+    
 
     if ([self checkUserCanInvestIsDetail:YES type:self.accoutType]) {
         UCFP2POrHonerAccoutViewController *subVC = [[UCFP2POrHonerAccoutViewController alloc] initWithNibName:@"UCFP2POrHonerAccoutViewController" bundle:nil];
