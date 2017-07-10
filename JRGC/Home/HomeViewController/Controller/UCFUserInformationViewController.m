@@ -138,8 +138,7 @@
     [self.cycleImageBackView addSubview:cycleScrollView];
     self.cycleImageView = cycleScrollView;
     
-    NSString *personInformationBtnTitle =  [[NSUserDefaults standardUserDefaults] boolForKey: @"isCompanyAgentType"] ? @"企业信息" : @"个人信息";
-    [self.personInformationBtn setTitle:personInformationBtnTitle forState:UIControlStateNormal];
+    [self.personInformationBtn setTitle:@"个人信息" forState:UIControlStateNormal];
     [self performSelector:@selector(getNormalBannerData) withObject:nil afterDelay:0.5];
 }
 
@@ -373,6 +372,9 @@
             }
             if([[NSUserDefaults standardUserDefaults] boolForKey: @"isCompanyAgentType"]){
                 self.userIconImageView.image = [UIImage imageNamed:@"company_head"];
+                [self.personInformationBtn setTitle:@"企业信息" forState:UIControlStateNormal];
+            }else{
+                [self.personInformationBtn setTitle:@"个人信息" forState:UIControlStateNormal];
             }
 //            [self.userIconImageView sd_setImageWithURL:[NSURL URLWithString:userInfo.hurl] placeholderImage:[UIImage imageNamed:@""]];
             self.userTicket = userInfo.userCenterTicket;
