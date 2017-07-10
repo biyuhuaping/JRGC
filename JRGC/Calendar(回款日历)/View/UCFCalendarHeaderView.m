@@ -319,10 +319,10 @@ static NSString *const cellId = @"cellId";
 {
     [super drawRect:rect];
     if (self.months.count > 0) {
-        NSString *strDate = [self.dateFormatter1 stringFromDate:[NSDate date]];
         BOOL isEnd = YES;
+        NSString *currentMonth = [self.currentDay substringToIndex:7];
         for (NSString *month in _months) {
-            if (([strDate compare:month options:NSLiteralSearch] == NSOrderedSame) || ([strDate compare:month options:NSLiteralSearch] == NSOrderedAscending)) {
+            if (([currentMonth compare:month options:NSLiteralSearch] == NSOrderedSame) || ([currentMonth compare:month options:NSLiteralSearch] == NSOrderedAscending)) {
                 NSInteger integer = [_months indexOfObject:month];
                 [_calendar scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:integer inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:NO];
                 isEnd = NO;
