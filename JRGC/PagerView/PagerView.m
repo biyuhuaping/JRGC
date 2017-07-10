@@ -30,7 +30,7 @@
     if (self = [super initWithFrame:frame]){
         
         _viewController = controller;
-        float avgWidth = (frame.size.width/titleArray.count);
+//        float avgWidth = (frame.size.width/titleArray.count);
         self.nameArray = titleArray;
         _buttonArray = [NSMutableArray array]; //按钮数组
         
@@ -127,6 +127,7 @@
     
     NSInteger index = self.segmentScrollV.contentOffset.x / self.segmentScrollV.frame.size.width;
     UIViewController *childVC = _viewController.childViewControllers[index];
+    self.selectIndexStr = [NSString stringWithFormat:@"%ld",index];
     if (!childVC.view.superview) {
         
         childVC.view.frame = CGRectMake(index * self.segmentScrollV.frame.size.width, 0, self.segmentScrollV.frame.size.width, self.self.segmentScrollV.frame.size.height);

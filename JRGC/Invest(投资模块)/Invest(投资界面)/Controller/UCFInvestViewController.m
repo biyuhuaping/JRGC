@@ -38,8 +38,22 @@
     [self addChildViewControllers];
     //设置UI
     [self createUI];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentControllerUpdate) name:@"reloadHonerPlanData" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentControllerUpdate) name:@"reloadP2PTransferData" object:nil];
+    
 }
-
+- (void)currentControllerUpdate
+{
+    if ([_pagerView.selectIndexStr isEqualToString:@"1"]) {
+        [self.microMoney.tableview.header beginRefreshing];
+    }
+    else if ([_pagerView.selectIndexStr isEqualToString:@"0"]) {
+        [self.honorInvest.tableView.header beginRefreshing];
+    }
+    else if ([_pagerView.selectIndexStr isEqualToString:@"2"]) {
+        [self.investTransfer.tableview.header beginRefreshing];
+    }
+}
 - (void)viewWillLayoutSubviews
 {
     [super viewWillLayoutSubviews];
