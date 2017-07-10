@@ -236,6 +236,14 @@
     }
     
     HSHelper *helper = [HSHelper new];
+    //检查企业老用户是否开户
+    NSString *messageStr =  [helper checkCompanyIsOpen:accoutType];
+    if (![messageStr isEqualToString:@""]) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+
     if (![helper checkP2POrWJIsAuthorization:accoutType]) {//先授权
         [helper pushP2POrWJAuthorizationType:accoutType nav:self.parentViewController.navigationController];
         return;
