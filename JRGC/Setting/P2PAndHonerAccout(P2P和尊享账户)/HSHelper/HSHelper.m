@@ -23,11 +23,11 @@
       if (accoutType == SelectAccoutTypeHoner) {
         
         if([UserInfoSingle sharedManager].enjoyOpenStatus < 3){
-          messageStr =@"请先登录金融工场网站开通尊享微商存管账户";
+          messageStr =@"请先登录金融工场网站开通尊享徽商存管账户";
         }
       }else{
         if([UserInfoSingle sharedManager].openStatus < 3){
-        messageStr =@"请先登录金融工场网站开通微金微商存管账号户";
+        messageStr =@"请先登录金融工场网站开通微金徽商存管账户";
         }
       }
     }
