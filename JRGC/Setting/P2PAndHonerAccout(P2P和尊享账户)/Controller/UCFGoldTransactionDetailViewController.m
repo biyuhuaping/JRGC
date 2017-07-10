@@ -1,30 +1,25 @@
 //
-//  UCFGoldCashViewController.m
+//  UCFGoldTransactionDetailViewController.m
 //  JRGC
 //
-//  Created by 张瑞超 on 2017/7/6.
+//  Created by 张瑞超 on 2017/7/10.
 //  Copyright © 2017年 qinwei. All rights reserved.
 //
 
-#import "UCFGoldCashViewController.h"
+#import "UCFGoldTransactionDetailViewController.h"
 
-@interface UCFGoldCashViewController ()
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *viewHeight;
+@interface UCFGoldTransactionDetailViewController ()
 
 @end
 
-@implementation UCFGoldCashViewController
+@implementation UCFGoldTransactionDetailViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self addLeftButton];
-    baseTitleLabel.text = @"黄金变现";
-    self.view.backgroundColor = UIColorWithRGB(0xebebee);
+    baseTitleLabel.text = @"交易详情";
 }
-//- (void)updateViewConstraints
-//{
-//    
-//}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

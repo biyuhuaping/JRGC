@@ -11,7 +11,7 @@
 #import "UCFSettingItem.h"
 #import "UCFCellStyleModel.h"
 #import "UCFGoldCashViewController.h"
-
+#import "GoldTransactionRecordViewController.h"
 @interface UCFGoldAccountViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *baseTableView;
 @property (weak, nonatomic) IBOutlet UIButton *buyGoldBtn;
@@ -158,7 +158,8 @@
 }
 - (void)clickRightBtn
 {
-    
+    GoldTransactionRecordViewController *vc1 = [[GoldTransactionRecordViewController alloc] initWithNibName:@"GoldTransactionRecordViewController" bundle:nil];
+    [self.navigationController pushViewController:vc1 animated:YES];
 }
 - (IBAction)bottomButtomClicked:(UIButton *)sender {
     NSString *title = [sender titleForState:UIControlStateNormal];
