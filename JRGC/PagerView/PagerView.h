@@ -11,7 +11,7 @@
 @interface PagerView : UIView
 
 @property (strong, nonatomic) UIViewController  *viewController;
-
+@property (copy, nonatomic) NSString *selectIndexStr;
 /**
  滑块按钮
  
