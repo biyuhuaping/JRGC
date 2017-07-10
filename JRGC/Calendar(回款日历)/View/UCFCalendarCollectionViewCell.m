@@ -59,7 +59,9 @@
 - (void)setCurrentDay:(NSString *)currentDay
 {
     _currentDay = currentDay;
-    [self.calendar selectDate:[self.dateFormatter dateFromString:currentDay] scrollToDate:NO];
+//    [self.calendar selectDate:[self.dateFormatter dateFromString:currentDay]];
+//    [self.calendar selectDate:[self.dateFormatter dateFromString:currentDay] scrollToDate:NO];
+//    self.calendar.today = [self.dateFormatter dateFromString:currentDay];
 }
 
 #pragma mark - FSCalendarDataSource
@@ -144,6 +146,7 @@
 - (void)calendar:(FSCalendar *)calendar didSelectDate:(NSDate *)date atMonthPosition:(FSCalendarMonthPosition)monthPosition
 {
     NSLog(@"did select date %@",[self.dateFormatter stringFromDate:date]);
+    calendar.today = nil;
     if ([self.delegate respondsToSelector:@selector(calendar:didClickedDay:)]) {
         [self.delegate calendar:self didClickedDay:[self.dateFormatter stringFromDate:date]];
     }
@@ -274,6 +277,13 @@
 {
     _month = month;
     [self.calendar setCurrentPage:[self.dateFormatter dateFromString:[month stringByAppendingString:@"-01"]] animated:NO];
+    NSString *currentMonth = [self.currentDay substringToIndex:7];
+    if ([month isEqualToString:currentMonth]) {
+        _calendar.today = [_dateFormatter dateFromString:self.currentDay];
+    }
+    else
+        _calendar.today = nil;
+    
 }
 
 - (void)setDays:(NSMutableArray *)days
@@ -281,6 +291,12 @@
     _days = days;
     [_calendar reloadData];
 
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    DBLOG(@"currentDay : %@", self.currentDay);
 }
 
 @end

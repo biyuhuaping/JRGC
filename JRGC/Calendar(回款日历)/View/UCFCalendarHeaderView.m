@@ -131,6 +131,8 @@ static NSString *const cellId = @"cellId";
     
     UIButton *headerButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [self addSubview:headerButton];
+    [headerButton setImageEdgeInsets:UIEdgeInsetsMake(0, 95, 0, 0)];
+    [headerButton setImage:[UIImage imageNamed:@"fanli_loadown"] forState:UIControlStateNormal];
     [headerButton addTarget:self action:@selector(headerButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     self.headerButton = headerButton;
     
@@ -199,7 +201,13 @@ static NSString *const cellId = @"cellId";
 
 - (void)headerButtonClicked:(UIButton *)button
 {
+    if (self.headerButton.selected) {
+        self.headerButton.imageView.transform = CGAffineTransformMakeRotation(0);
+    } else {
+        self.headerButton.imageView.transform = CGAffineTransformMakeRotation(M_PI);
+    }
     button.selected = !button.selected;
+    
     if ([self.delegate respondsToSelector:@selector(calendar:didClickedHeader:)]) {
         [self.delegate calendar:self didClickedHeader:button];
     }
@@ -334,6 +342,7 @@ static NSString *const cellId = @"cellId";
 - (void)getClendarInfoWithMonth:(NSString *)month {
     self.calendar.pagingEnabled = NO;
     self.calendar.scrollEnabled = NO;
+    self.calendar.userInteractionEnabled = NO;
     NSString *userId = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
     NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys:userId, @"userId", month, @"month", nil];
     [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagCalendarInfo owner:self signature:YES Type:self.accoutType];
@@ -372,13 +381,16 @@ static NSString *const cellId = @"cellId";
     }
     self.calendar.scrollEnabled = YES;
     self.calendar.pagingEnabled = YES;
+    self.calendar.userInteractionEnabled = YES;
 }
 
 - (void)errorPost:(NSError *)err tag:(NSNumber *)tag
 {
     self.calendar.scrollEnabled = YES;
     self.calendar.pagingEnabled = YES;
+    self.calendar.userInteractionEnabled = YES;
 }
+
 
 #pragma mark - FSCalendar的代理方法
 - (void)calendar:(UCFCalendarCollectionViewCell *)calendarCell didClickedDay:(NSString *)day
@@ -418,6 +430,12 @@ static NSString *const cellId = @"cellId";
     NSInteger unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSWeekdayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;//这句我也不明白具体时用来做什么。。。
     comps = [calendar components:unitFlags fromDate:currentDate];
     _currentDayLabel.text = [NSString stringWithFormat:@"%ld年%ld月%ld日", (long)[comps year],(long)[comps month],(long)[comps day]];
+}
+
+- (void)headerViewInitUI {
+    self.headerButton.selected = NO;
+    self.headerButton.imageView.transform = CGAffineTransformIdentity;
+//    [self headerButtonClicked:self.headerButton];
 }
 
 @end
