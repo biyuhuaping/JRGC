@@ -12,7 +12,7 @@
 @protocol UCFCalendarHeaderViewDelegate <NSObject>
 
 - (void)calendar:(UCFCalendarCollectionViewCell *)calendar didClickedDay:(NSString *)day;
-
+- (void)calendar:(UCFCalendarHeaderView *)calendar didClickedHeader:(UIButton *)headerBtn;
 @end
 
 @interface UCFCalendarHeaderView : UIView
@@ -21,5 +21,8 @@
 @property (weak, nonatomic) id<UCFCalendarHeaderViewDelegate> delegate;
 @property (copy, nonatomic) NSString *currentDay;
 @property (weak, nonatomic) IBOutlet UILabel *currentDayLabel;
+@property (weak, nonatomic) UICollectionView *calendar;
+@property (weak, nonatomic) UILabel *monthLabel;
 + (CGFloat)viewHeight;
+- (void)getClendarInfoWithMonth:(NSString *)month;
 @end

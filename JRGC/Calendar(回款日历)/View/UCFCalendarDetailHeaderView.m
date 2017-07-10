@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *statusILabel;
 @property (weak, nonatomic) IBOutlet UILabel *statusIILabel;
+@property (weak, nonatomic) IBOutlet UIImageView *arrowImage;
 
 @property (weak, nonatomic)  UCFNoDataView *nodataview;
 @property (weak, nonatomic) UIView *upLine;
@@ -79,6 +80,7 @@
         self.timeLabel.hidden = YES;
         self.statusILabel.hidden = YES;
         self.statusIILabel.hidden = YES;
+        self.arrowImage.hidden = YES;
     }
     else {
         self.nodataview.hidden = YES;
@@ -87,15 +89,9 @@
         self.timeLabel.hidden = NO;
         self.statusILabel.hidden = NO;
         self.statusIILabel.hidden = NO;
+        self.arrowImage.hidden = NO;
     }
-}
-
-- (void)setGroup:(UCFCalendarGroup *)group
-{
-    _group = group;
-    self.proNameLabel.text = self.group.proName;
-    self.totalMoneyLabel.text = self.group.totalMoney;
-    self.timeLabel.text = [NSString stringWithFormat:@"第%@期/共%@期", self.group.repayPerNo, self.group.count];
+    
     if ([self.group.status intValue] == 0) {
         self.statusIILabel.hidden = YES;
         self.statusILabel.text = @"待回款";
@@ -116,6 +112,14 @@
             }
         }
     }
+}
+
+- (void)setGroup:(UCFCalendarGroup *)group
+{
+    _group = group;
+    self.proNameLabel.text = self.group.proName;
+    self.totalMoneyLabel.text = self.group.totalMoney;
+    self.timeLabel.text = [NSString stringWithFormat:@"第%@期/共%@期", self.group.repayPerNo, self.group.count];
 }
 
 @end
