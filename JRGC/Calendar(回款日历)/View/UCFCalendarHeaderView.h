@@ -25,4 +25,6 @@
 @property (weak, nonatomic) UILabel *monthLabel;
 + (CGFloat)viewHeight;
 - (void)getClendarInfoWithMonth:(NSString *)month;
+- (void)headerViewInitUI;
+
 @end

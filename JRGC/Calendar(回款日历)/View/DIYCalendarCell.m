@@ -15,10 +15,10 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        UIImageView *circleImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@""]];
-        circleImageView.backgroundColor = UIColorWithRGB(0xfd4d4c);
-        [self.contentView insertSubview:circleImageView atIndex:0];
-        self.circleImageView = circleImageView;
+//        UIImageView *circleImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@""]];
+//        circleImageView.backgroundColor = UIColorWithRGB(0xfd4d4c);
+//        [self.contentView insertSubview:circleImageView atIndex:0];
+//        self.circleImageView = circleImageView;
         
 //        CAShapeLayer *selectionLayer = [[CAShapeLayer alloc] init];
 //        selectionLayer.fillColor = [UIColor blackColor].CGColor;
@@ -40,10 +40,10 @@
     [super layoutSubviews];
     
 //    self.backgroundView.frame = CGRectInset(self.bounds, 1, 1);
-    self.circleImageView.frame = CGRectMake(0, 0, 21, 21);
-    self.circleImageView.center = self.titleLabel.center;
-    self.circleImageView.layer.cornerRadius = 10.5;
-    self.circleImageView.clipsToBounds = YES;
+//    self.circleImageView.frame = CGRectZero;
+//    self.circleImageView.center = self.titleLabel.center;
+//    self.circleImageView.layer.cornerRadius = 10.5;
+//    self.circleImageView.clipsToBounds = YES;
 //    self.selectionLayer.frame = self.bounds;
 //    
 //    if (self.selectionType == SelectionTypeMiddle) {

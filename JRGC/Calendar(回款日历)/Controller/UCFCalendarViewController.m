@@ -182,6 +182,14 @@
 
 - (void)calendar:(UCFCalendarCollectionViewCell *)calendar didClickedDay:(NSString *)day
 {
+    [self.calendarHeader headerViewInitUI];
+    if (self.pickerView.y < self.view.height) {
+        
+        [UIView animateWithDuration:0.25 animations:^{
+            self.pickerView.y = self.view.height;
+        }];
+    }
+    
     if (nil == day) {
         [self.selectedDayDatas removeAllObjects];
         [self.tableview reloadData];
@@ -255,5 +263,10 @@
     self.calendarHeader.monthLabel.text = [NSString stringWithFormat:@"%@月", temp];
     [self.calendarHeader.calendar setContentOffset:CGPointMake(ScreenWidth * row, 0)];
     [self.calendarHeader getClendarInfoWithMonth:month];
+}
+
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [super touchesEnded:touches withEvent:event];
 }
 @end
