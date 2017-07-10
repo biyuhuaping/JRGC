@@ -70,7 +70,8 @@ typedef enum : NSUInteger {
 -(instancetype)initInviteFriendsToMakeMoneyDelegate:(id)delegate;
 
 -(instancetype)initPlatformUpgradeNotice:(id)delegate withAuthorizationDate:(NSString *)date;
-
+//黄金浮动弹框
+-(instancetype)initGoldPriceFloatingAlert:(id)delegate;
 #pragma mark - 显示
 - (void)show;
 #pragma mark - 隐藏

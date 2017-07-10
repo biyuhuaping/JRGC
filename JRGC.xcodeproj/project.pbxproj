@@ -606,6 +606,7 @@
 		A851F34F1F132D2C003DE8B8 /* UCFGoldTransCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A851F34D1F132D2C003DE8B8 /* UCFGoldTransCell.xib */; };
 		A851F3531F1361D8003DE8B8 /* UCFGoldTransactionDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A851F3511F1361D8003DE8B8 /* UCFGoldTransactionDetailViewController.m */; };
 		A851F3541F1361D8003DE8B8 /* UCFGoldTransactionDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A851F3521F1361D8003DE8B8 /* UCFGoldTransactionDetailViewController.xib */; };
+		A851F3561F1379E2003DE8B8 /* UCFGoldPriceFloatView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A851F3551F1379E2003DE8B8 /* UCFGoldPriceFloatView.xib */; };
 		A8A3A57F1EE95BDA00D9C06D /* UCFInvestAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A8A3A57E1EE95BDA00D9C06D /* UCFInvestAPIManager.m */; };
 		A8AD2E3E1EB979760013DB7C /* MongoliaLayerCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = A8AD2E3D1EB979760013DB7C /* MongoliaLayerCenter.m */; };
 		A8AD6F851EFA6BDE000AF323 /* PagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = A8AD6F841EFA6BDE000AF323 /* PagerView.m */; };
@@ -1884,6 +1885,7 @@
 		A851F3501F1361D8003DE8B8 /* UCFGoldTransactionDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFGoldTransactionDetailViewController.h; sourceTree = "<group>"; };
 		A851F3511F1361D8003DE8B8 /* UCFGoldTransactionDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFGoldTransactionDetailViewController.m; sourceTree = "<group>"; };
 		A851F3521F1361D8003DE8B8 /* UCFGoldTransactionDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFGoldTransactionDetailViewController.xib; sourceTree = "<group>"; };
+		A851F3551F1379E2003DE8B8 /* UCFGoldPriceFloatView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFGoldPriceFloatView.xib; sourceTree = "<group>"; };
 		A8A3A57D1EE95BDA00D9C06D /* UCFInvestAPIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFInvestAPIManager.h; sourceTree = "<group>"; };
 		A8A3A57E1EE95BDA00D9C06D /* UCFInvestAPIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFInvestAPIManager.m; sourceTree = "<group>"; };
 		A8AD2E3C1EB979760013DB7C /* MongoliaLayerCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MongoliaLayerCenter.h; sourceTree = "<group>"; };
@@ -5172,6 +5174,7 @@
 				A8AD2E3D1EB979760013DB7C /* MongoliaLayerCenter.m */,
 				A8D2DE761EB9E1CF00D61AD0 /* MaskView.h */,
 				A8D2DE771EB9E1CF00D61AD0 /* MaskView.m */,
+				A851F3551F1379E2003DE8B8 /* UCFGoldPriceFloatView.xib */,
 			);
 			name = MongoliaLayer;
 			path = Tools/MongoliaLayer;
@@ -6047,6 +6050,7 @@
 				840A794B1C2A80B60059A946 /* UCFMessageSettingViewController.xib in Resources */,
 				74956EB51D66F33D00D68B61 /* UCFAccountDetailViewController.xib in Resources */,
 				4A90167F1AFB12FE0049A9E0 /* LICENSE in Resources */,
+				A851F3561F1379E2003DE8B8 /* UCFGoldPriceFloatView.xib in Resources */,
 				7459EE031E5552FE005A6FF7 /* UCFBatchBidController.xib in Resources */,
 				744A5FAB1E79512C008921F9 /* UCFWebViewJavascriptBridgeLoanDetails.xib in Resources */,
 				74F490EF1E5B2AAA0057AC62 /* UCFCollectionBidCell.xib in Resources */,
