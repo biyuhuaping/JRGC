@@ -13,10 +13,11 @@
 #import "UCFCalendarDetailHeaderView.h"
 #import "UCFCalendarDayCell.h"
 
-@interface UCFCalendarViewController () <UITableViewDataSource, UITableViewDelegate, UCFCalendarHeaderViewDelegate, UCFCalendarDetailHeaderViewDelegate>
+@interface UCFCalendarViewController () <UITableViewDataSource, UITableViewDelegate, UCFCalendarHeaderViewDelegate, UCFCalendarDetailHeaderViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource>
 @property (weak, nonatomic) UCFCalendarHeaderView *calendarHeader;
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (strong, nonatomic) NSMutableArray *selectedDayDatas;
+@property (weak, nonatomic) UIPickerView *pickerView;
 @end
 
 @implementation UCFCalendarViewController
@@ -33,9 +34,6 @@
     [super viewDidLoad];
 //  初始化界面
     [self createUI];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(calendarHeaderClicked:) name:@"FSCalendarHeaderView" object:nil];
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentDayInfo:) name:@"currentDay" object:nil];
 }
 
 #pragma mark - 初始化界面
@@ -43,6 +41,13 @@
     baseTitleLabel.text = @"回款日历";
     
     [self addLeftButton];
+    
+    UIPickerView *pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, ScreenHeight, ScreenWidth, 100)];
+    pickerView.delegate = self;
+    pickerView.dataSource = self;
+    [self.view addSubview:pickerView];
+    pickerView.backgroundColor = [UIColor whiteColor];
+    self.pickerView = pickerView;
     
     UCFCalendarHeaderView *calendarHeaderView = (UCFCalendarHeaderView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFCalendarHeaderView" owner:self options:nil] lastObject];
     calendarHeaderView.frame = CGRectMake(0, 0, ScreenWidth, [UCFCalendarHeaderView viewHeight]);
@@ -150,6 +155,7 @@
     if ([rstcode intValue] == 1) {
         if (tag.intValue == kSXTagCalendarHeader) {
             self.calendarHeader.calendarHeaderInfo = [dictotal objectSafeDictionaryForKey:@"data"];
+            [self.pickerView reloadAllComponents];
         }
         else if (tag.intValue == kSXTagCurrentDayInfo) {
             NSArray *dataList = [[[dictotal objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"pageData"] objectSafeArrayForKey:@"result"];
@@ -194,12 +200,60 @@
     [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagCurrentDayInfo owner:self signature:YES Type:self.accoutType];
 }
 
-- (void)calendarHeaderClicked:(NSNotification *)noty
+- (void)calendar:(UCFCalendarHeaderView *)calendar didClickedHeader:(UIButton *)headerBtn
 {
-    BOOL isShow = [noty.object boolValue];
-    CGSize size = [UIScreen mainScreen].bounds.size;
-    [UIView animateWithDuration:0.25 animations:^{
-        
-    }];
+    if (headerBtn.selected) {
+        [UIView animateWithDuration:0.25 animations:^{
+            self.pickerView.y = self.view.height - 100;
+        }];
+    }
+    else {
+        [UIView animateWithDuration:0.25 animations:^{
+            self.pickerView.y = self.view.height;
+        }];
+    }
+}
+
+#pragma mark - pickerView的代理方法
+//UIPickerViewDataSource中定义的方法，该方法的返回值决定该控件包含的列数
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView*)pickerView
+{
+    return 1; // 返回1表明该控件只包含1列
+}
+
+//UIPickerViewDataSource中定义的方法，该方法的返回值决定该控件指定列包含多少个列表项
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    // 由于该控件只包含一列，因此无须理会列序号参数component
+    // 该方法返回teams.count，表明teams包含多少个元素，该控件就包含多少行
+    NSArray * array = [self.calendarHeader.calendarHeaderInfo objectForKey:@"months"];
+    return array.count;
+}
+
+
+// UIPickerViewDelegate中定义的方法，该方法返回的NSString将作为UIPickerView
+// 中指定列和列表项的标题文本
+- (NSString *)pickerView:(UIPickerView *)pickerView
+             titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    // 由于该控件只包含一列，因此无须理会列序号参数component
+    // 该方法根据row参数返回teams中的元素，row参数代表列表项的编号，
+    // 因此该方法表示第几个列表项，就使用teams中的第几个元素
+    NSArray * array = [self.calendarHeader.calendarHeaderInfo objectForKey:@"months"];
+    NSMutableString *month = [array objectAtIndex:row];
+    NSString *temp = [month stringByReplacingOccurrencesOfString:@"-" withString:@"年"];
+    return [NSString stringWithFormat:@"%@月", temp];
+}
+
+// 当用户选中UIPickerViewDataSource中指定列和列表项时激发该方法
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:
+(NSInteger)row inComponent:(NSInteger)component
+{
+    NSArray * array = [self.calendarHeader.calendarHeaderInfo objectForKey:@"months"];
+    NSMutableString *month = [array objectAtIndex:row];
+    NSString *temp = [month stringByReplacingOccurrencesOfString:@"-" withString:@"年"];
+    self.calendarHeader.monthLabel.text = [NSString stringWithFormat:@"%@月", temp];
+    [self.calendarHeader.calendar setContentOffset:CGPointMake(ScreenWidth * row, 0)];
+    [self.calendarHeader getClendarInfoWithMonth:month];
 }
 @end

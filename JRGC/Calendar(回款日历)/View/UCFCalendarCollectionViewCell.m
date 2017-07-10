@@ -51,9 +51,15 @@
         self.dateFormatter = [[NSDateFormatter alloc] init];
         self.dateFormatter.dateFormat = @"yyyy-MM-dd";
         
-        [self.calendar selectDate:[NSDate date] scrollToDate:NO];
+//        [self.calendar selectDate:[NSDate date] scrollToDate:NO];
     }
     return self;
+}
+
+- (void)setCurrentDay:(NSString *)currentDay
+{
+    _currentDay = currentDay;
+    [self.calendar selectDate:[self.dateFormatter dateFromString:currentDay] scrollToDate:NO];
 }
 
 #pragma mark - FSCalendarDataSource

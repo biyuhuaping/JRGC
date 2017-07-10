@@ -18,5 +18,6 @@
 @interface UCFCalendarCollectionViewCell : UICollectionViewCell
 @property (copy, nonatomic) NSString *month;
 @property (copy, nonatomic) NSMutableArray *days;
+@property (copy, nonatomic) NSString *currentDay;
 @property (weak, nonatomic) id<UCFCalendarCollectionViewCellDelegate> delegate;
 @end

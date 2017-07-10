@@ -17,7 +17,6 @@
 
 @interface UCFCalendarHeaderView () <UICollectionViewDataSource, UICollectionViewDelegate, NetworkModuleDelegate, UCFCalendarCollectionViewCellDelegate>
 @property (weak, nonatomic) IBOutlet UIView *calendarView;
-@property (weak, nonatomic) UICollectionView *calendar;
 
 @property (weak, nonatomic) IBOutlet UILabel *myPaymentLabel;
 @property (weak, nonatomic) IBOutlet UILabel *waitPrincipalLabel;
@@ -33,7 +32,7 @@
 
 @property (weak, nonatomic) UIButton *preButton;
 @property (weak, nonatomic) UIButton *nextButton;
-@property (weak, nonatomic) UILabel *monthLabel;
+@property (weak, nonatomic) UIButton *headerButton;
 @property (weak, nonatomic) UIView *upLine;
 @property (weak, nonatomic) UIView *downLine1;
 @property (weak, nonatomic) UIView *downLine2;
@@ -130,6 +129,12 @@ static NSString *const cellId = @"cellId";
     [self addSubview:monthLabel];
     self.monthLabel = monthLabel;
     
+    UIButton *headerButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self addSubview:headerButton];
+    [headerButton addTarget:self action:@selector(headerButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    self.headerButton = headerButton;
+    
+    
     UIButton *preButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [preButton setImage:[UIImage imageNamed:@"list_icon_arrow_left"] forState:UIControlStateNormal];
     [preButton addTarget:self action:@selector(preButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -178,6 +183,7 @@ static NSString *const cellId = @"cellId";
     CGPoint currentOffSet = self.calendar.contentOffset;
     [self.calendar setContentOffset:CGPointMake(currentOffSet.x - ScreenWidth, 0)];
     self.monthLabel.text = [self setCurrentMonthWithMonth:[self.months objectAtIndex:(int)((currentOffSet.x - ScreenWidth) / ScreenWidth)]];
+    [self getClendarInfoWithMonth:[self.months objectAtIndex:(int)(currentOffSet.x/ ScreenWidth)-1]];
 }
 
 - (void)nextButtonClicked:(UIButton *)button
@@ -188,6 +194,15 @@ static NSString *const cellId = @"cellId";
     CGPoint currentOffSet = self.calendar.contentOffset;
     [self.calendar setContentOffset:CGPointMake(currentOffSet.x + ScreenWidth, 0)];
     self.monthLabel.text = [self setCurrentMonthWithMonth:[self.months objectAtIndex:(int)((currentOffSet.x + ScreenWidth) / ScreenWidth)]];
+    [self getClendarInfoWithMonth:[self.months objectAtIndex:(int)(currentOffSet.x/ ScreenWidth)+1]];
+}
+
+- (void)headerButtonClicked:(UIButton *)button
+{
+    button.selected = !button.selected;
+    if ([self.delegate respondsToSelector:@selector(calendar:didClickedHeader:)]) {
+        [self.delegate calendar:self didClickedHeader:button];
+    }
 }
 
 - (void)layoutSubviews
@@ -210,6 +225,8 @@ static NSString *const cellId = @"cellId";
     self.weekView.frame = CGRectMake(0, self.calendarView.y + 44, ScreenWidth, 29.5);
     
     self.downLine.frame = CGRectMake(0, self.calendarView.bottom - 0.5, ScreenWidth, 0.5);
+    
+    self.headerButton.frame = CGRectMake(0, self.calendarView.y + 0.5, ScreenWidth, 43);
     
     CGFloat weekLabelWidth = ScreenWidth / 7.0;
     for (UILabel *label in self.weekView.subviews) {
@@ -261,6 +278,7 @@ static NSString *const cellId = @"cellId";
 {
     UCFCalendarCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellId forIndexPath:indexPath];
     cell.delegate = self;
+    cell.currentDay = self.currentDay;
     cell.month = [self.months objectAtIndex:indexPath.item];
     return cell;
 }
@@ -279,7 +297,7 @@ static NSString *const cellId = @"cellId";
     self.myPaymentLabel.text = [calendarHeaderInfo objectSafeForKey:@"myPayment"];
     self.waitPrincipalLabel.text = [calendarHeaderInfo objectSafeForKey:@"waitPrincipal"];
     self.waitInterestLabel.text = [calendarHeaderInfo objectSafeForKey:@"waitInterest"];
-//    self.currentDay = [calendarHeaderInfo objectSafeForKey:@"today"];
+    self.currentDay = [calendarHeaderInfo objectSafeForKey:@"today"];
     
     [self.months removeAllObjects];
     [self.months addObjectsFromArray:[calendarHeaderInfo objectSafeForKey:@"months"]];
@@ -288,12 +306,6 @@ static NSString *const cellId = @"cellId";
         [self setNeedsDisplay];
     }
 }
-
-//- (void)setCurrentDay:(NSString *)currentDay
-//{
-//    _currentDay = currentDay;
-//    
-//}
 
 - (void)drawRect:(CGRect)rect
 {
@@ -307,9 +319,6 @@ static NSString *const cellId = @"cellId";
                 [_calendar scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:integer inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:NO];
                 isEnd = NO;
                 self.monthLabel.text = [self setCurrentMonthWithMonth: month];
-//                if ([strDate compare:month options:NSLiteralSearch] == NSOrderedSame) {
-//                    [self setCurrentDayWithDate:[self.dateFormatter stringFromDate:[NSDate date]]];
-//                }
                 [self getClendarInfoWithMonth:month];
                 break;
             }
@@ -319,11 +328,12 @@ static NSString *const cellId = @"cellId";
             self.monthLabel.text = [self setCurrentMonthWithMonth: [self.months lastObject]];
             [self getClendarInfoWithMonth:[self.months lastObject]];
         }
-//        [[NSNotificationCenter defaultCenter] postNotificationName:@"currentDay" object:nil];
     }
 }
 
 - (void)getClendarInfoWithMonth:(NSString *)month {
+    self.calendar.pagingEnabled = NO;
+    self.calendar.scrollEnabled = NO;
     NSString *userId = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
     NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys:userId, @"userId", month, @"month", nil];
     [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagCalendarInfo owner:self signature:YES Type:self.accoutType];
@@ -338,7 +348,7 @@ static NSString *const cellId = @"cellId";
 {
     NSDictionary *dictotal = [result objectFromJSONString];
     NSString *rstcode = [dictotal objectSafeForKey:@"ret"];
-    NSString *rsttext = [dictotal objectSafeForKey:@"message"];
+//    NSString *rsttext = [dictotal objectSafeForKey:@"message"];
     
     if ([rstcode intValue] == 1) {
         if (tag.intValue == kSXTagCalendarInfo) {
@@ -360,11 +370,14 @@ static NSString *const cellId = @"cellId";
     else{
 //        [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
     }
+    self.calendar.scrollEnabled = YES;
+    self.calendar.pagingEnabled = YES;
 }
 
 - (void)errorPost:(NSError *)err tag:(NSNumber *)tag
 {
-    
+    self.calendar.scrollEnabled = YES;
+    self.calendar.pagingEnabled = YES;
 }
 
 #pragma mark - FSCalendar的代理方法
@@ -384,7 +397,7 @@ static NSString *const cellId = @"cellId";
         [self getClendarInfoWithMonth:[self.months objectAtIndex:index]];
         [self.calendar reloadData];
         self.currentDayLabel.text = nil;
-        [self.delegate calendar:self.calendar didClickedDay:nil];
+        [self.delegate calendar:[self.calendar.visibleCells lastObject] didClickedDay:nil];
     }
 }
 
