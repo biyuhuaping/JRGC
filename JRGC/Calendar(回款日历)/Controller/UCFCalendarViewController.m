@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (strong, nonatomic) NSMutableArray *selectedDayDatas;
 @property (weak, nonatomic) UIPickerView *pickerView;
+@property (weak, nonatomic) UIView *pickerBackView;
 @end
 
 @implementation UCFCalendarViewController
@@ -49,9 +50,12 @@
     pickerView.backgroundColor = [UIColor whiteColor];
     self.pickerView = pickerView;
     
+    UIView *pickerBackView = [[UIView alloc] initWithFrame:CGRectMake(0, ScreenHeight, ScreenWidth, 200)];
+    
     UCFCalendarHeaderView *calendarHeaderView = (UCFCalendarHeaderView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFCalendarHeaderView" owner:self options:nil] lastObject];
     calendarHeaderView.frame = CGRectMake(0, 0, ScreenWidth, [UCFCalendarHeaderView viewHeight]);
     self.tableview.tableHeaderView = calendarHeaderView;
+    calendarHeaderView.backgroundColor = UIColorWithRGB(0xebebee);
     calendarHeaderView.accoutType = self.accoutType;
     calendarHeaderView.delegate = self;
     self.calendarHeader = calendarHeaderView;

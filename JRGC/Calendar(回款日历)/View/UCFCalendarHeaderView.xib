@@ -271,7 +271,7 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="0.9137254901960784" green="0.91764705882352937" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="WPr-IN-VvF" secondAttribute="trailing" id="1f6-6X-s2K"/>
                 <constraint firstAttribute="trailing" secondItem="Aat-EG-eXu" secondAttribute="trailing" id="5DC-ug-Hlp"/>
