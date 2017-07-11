@@ -52,7 +52,7 @@
 @property (nonatomic ,strong) UIImageView *userLevelImage;
 @property (nonatomic,strong)UCFSettingItem *setChangePassword;
 
-@property (strong, nonatomic) NSString *isCompanyAgent;//是否是机构用户
+@property (assign, nonatomic) BOOL isCompanyAgent;//是否是机构用户
 
 @property (nonatomic,assign)int sex;//性别
 
@@ -137,8 +137,9 @@
     [self addLeftButton];
 
 
-    baseTitleLabel.text = [UserInfoSingle sharedManager].companyAgent ? @"企业信息" : @"个人信息";
-  
+    baseTitleLabel.text =  [[NSUserDefaults standardUserDefaults] boolForKey: @"isCompanyAgentType" ]  ? @"企业信息" : @"个人信息";
+
+    
     self.tableview.contentInset = UIEdgeInsetsMake(10, 0, 0, 0);
     self.tableview.separatorColor = UIColorWithRGB(0xe3e5ea);
     self.tableview.separatorInset = UIEdgeInsetsMake(0,15, 0, 0);
@@ -297,8 +298,9 @@
             NSString *oldPhone = [[NSUserDefaults standardUserDefaults] valueForKey:PHONENUM];
 //            NSString *gradeResult = dic[@"data"][@"gradeResult"];
 //            NSString *batchInvestStatus = [NSString stringWithFormat:@"%@",result[@"batchInvestStatus"]];
-            self.isCompanyAgent = dic[@"data"][@"isCompanyAgent"];
             
+//
+            self.isCompanyAgent = [[[dic objectForKey:@"data"] objectForKey:@"isCompanyAgent"] boolValue];
             //新请求的手机号和本地存储手机号不一样则更新本地
             if (![oldPhone isEqualToString:bindPhone]) {
                 [[NSUserDefaults standardUserDefaults] setValue:bindPhone forKey:PHONENUM];
@@ -332,7 +334,7 @@
                 switch (index) {
 //
                     case 0:{
-                        userItem.title = [self.isCompanyAgent boolValue] ? @"企业认证":@"身份认证";
+                        userItem.title = _isCompanyAgent ? @"企业认证":@"身份认证";
                         userItem.subtitle = [authId isEqualToString:@"未认证"] ? @"未认证" : authId;
                     }
                         break;
@@ -761,6 +763,11 @@
                 break;
                 
             case 1: {
+                if(self.isCompanyAgent){
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"目前不支持企业用户修改手机号" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                    [alert show];
+                    return;
+                }
                 BindPhoneNumViewController *v = (BindPhoneNumViewController *)vc;
                 v.authedPhone = item.subtitle;
                 v.uperViewController = self;
@@ -849,7 +856,7 @@
                 }else{
                     TradePasswordVC * tradePasswordVC = [[TradePasswordVC alloc]initWithNibName:@"TradePasswordVC" bundle:nil];
                     tradePasswordVC.title = arrowItem.title;
-                    tradePasswordVC.isCompanyAgent = [self.isCompanyAgent boolValue];
+                    tradePasswordVC.isCompanyAgent =_isCompanyAgent;
                     [self.navigationController pushViewController:tradePasswordVC  animated:YES];
                 }
             }

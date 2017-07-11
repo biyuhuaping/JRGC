@@ -16,6 +16,24 @@
 @end
 @implementation HSHelper
 
+-(NSString *)checkCompanyIsOpen:(SelectAccoutType)accoutType{
+     NSString *messageStr = @"";
+    if ([[NSUserDefaults standardUserDefaults] boolForKey: @"isCompanyAgentType" ]) {//企业老用户
+   
+      if (accoutType == SelectAccoutTypeHoner) {
+        
+        if([UserInfoSingle sharedManager].enjoyOpenStatus < 3){
+          messageStr =@"请先登录金融工场网站开通尊享徽商存管账户";
+        }
+      }else{
+        if([UserInfoSingle sharedManager].openStatus < 3){
+        messageStr =@"请先登录金融工场网站开通微金徽商存管账户";
+        }
+      }
+    }
+    return messageStr;
+}
+
 -(BOOL)checkP2POrWJIsAuthorization:(SelectAccoutType)accoutType{
     
     if (accoutType == SelectAccoutTypeHoner) {

@@ -25,6 +25,8 @@
 #import "UCFCollectionDetailViewController.h"
 #import "UCFBatchBidController.h"
 #import "UCFOrdinaryBidController.h"
+#import "UCFGoldDetailViewController.h"
+#import "HSHelper.h"
 @interface UCFMicroMoneyViewController () <UITableViewDataSource, UITableViewDelegate, UCFInvestAPIWithMicroMoneyManagerDelegate, UCFHomeListCellHonorDelegate,UCFHomeListHeaderSectionViewDelegate>
 
 @property (strong, nonatomic) UCFMicroMoneyHeaderView *microMoneyHeaderView;
@@ -205,6 +207,15 @@
         [self gotoCollectionDetailViewContoller:model];
     }else {//新手标 或普通标
                 self.model = model;
+                 HSHelper *helper = [HSHelper new];
+                //检查企业老用户是否开户
+                NSString *messageStr =  [helper checkCompanyIsOpen:self.accoutType];
+                if (![messageStr isEqualToString:@""]) {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil];
+                    [alert show];
+                    return;
+                }
+        
                 if ([self checkUserCanInvestIsDetail:YES type:self.accoutType]) {
                     NSString *userid = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
                     NSString *strParameters = [NSString stringWithFormat:@"id=%@&userId=%@",model.Id,userid];
@@ -234,6 +245,15 @@
 -(void)gotoCollectionDetailViewContoller:(UCFMicroMoneyModel *)model{
     NSString *uuid = [[NSUserDefaults standardUserDefaults]valueForKey:UUID];
     self.accoutType = SelectAccoutTypeP2P;
+    //检查企业老用户是否开户
+    NSString *messageStr =  [[HSHelper new] checkCompanyIsOpen:self.accoutType];
+    if (![messageStr isEqualToString:@""]) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+
+    
     if ([self checkUserCanInvestIsDetail:YES type:self.accoutType]) {
             _colPrdClaimIdStr = [NSString stringWithFormat:@"%@",model.Id];
             NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys:uuid,@"userId", _colPrdClaimIdStr, @"colPrdClaimId", nil];
@@ -341,6 +361,15 @@
     }else{
         
             HSHelper *helper = [HSHelper new];
+        
+            //检查企业老用户是否开户
+            NSString *messageStr =  [helper checkCompanyIsOpen:self.accoutType];
+            if (![messageStr isEqualToString:@""]) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil];
+                [alert show];
+                return;
+            }
+
             if (![helper checkP2POrWJIsAuthorization:self.accoutType]) {//先授权
                 [helper pushP2POrWJAuthorizationType:self.accoutType nav:self.navigationController];
                 return;
@@ -386,6 +415,15 @@
             controller.rootVc = self.rootVc;;
             controller.accoutType = SelectAccoutTypeP2P;
             [self.navigationController pushViewController:controller animated:YES];
+            
+//            NSArray *prdLabelsListTemp = [NSArray arrayWithArray:(NSArray*)self.model.prdLabelsList];
+//            UCFGoldDetailViewController *controller = [[UCFGoldDetailViewController alloc]initWithNibName:@"UCFGoldDetailViewController" bundle:nil];
+//            CGFloat platformSubsidyExpense = [self.model.platformSubsidyExpense floatValue];
+//            [[NSUserDefaults standardUserDefaults] setValue:[NSString stringWithFormat:@"%.1f",platformSubsidyExpense] forKey:@"platformSubsidyExpense"];
+//            controller.rootVc = self.rootVc;;
+//            controller.accoutType = SelectAccoutTypeP2P;
+//            [self.navigationController pushViewController:controller animated:YES];
+
         }else {
             [AuxiliaryFunc showAlertViewWithMessage:rsttext];
         }

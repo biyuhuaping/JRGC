@@ -138,8 +138,7 @@
     [self.cycleImageBackView addSubview:cycleScrollView];
     self.cycleImageView = cycleScrollView;
     
-    NSString *personInformationBtnTitle = [UserInfoSingle sharedManager].companyAgent ? @"企业信息" : @"个人信息";
-    [self.personInformationBtn setTitle:personInformationBtnTitle forState:UIControlStateNormal];
+    [self.personInformationBtn setTitle:@"个人信息" forState:UIControlStateNormal];
     [self performSelector:@selector(getNormalBannerData) withObject:nil afterDelay:0.5];
 }
 
@@ -237,6 +236,14 @@
     }
     
     HSHelper *helper = [HSHelper new];
+    //检查企业老用户是否开户
+    NSString *messageStr =  [helper checkCompanyIsOpen:accoutType];
+    if (![messageStr isEqualToString:@""]) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+
     if (![helper checkP2POrWJIsAuthorization:accoutType]) {//先授权
         [helper pushP2POrWJAuthorizationType:accoutType nav:self.parentViewController.navigationController];
         return;
@@ -337,7 +344,7 @@
             self.addProfit = [NSString stringWithFormat:@"¥%@", userInfo.interests];
             self.asset = [NSString stringWithFormat:@"¥%@", userInfo.total];
             self.availableBanlance = [NSString stringWithFormat:@"¥%@", userInfo.cashBalance];
-            self.sign.hidden = userInfo.isCompanyAgent;
+//            self.sign.hidden = userInfo.isCompanyAgent;
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self refreshUI];
             });
@@ -354,6 +361,8 @@
 - (void)userInfoPresenter:(UCFUserPresenter *)presenter didRefreshUserInfoTwoWithResult:(id)result error:(NSError *)error
 {
     if (!error) {
+        
+        
         if ([result isKindOfClass:[UCFUserInfoModel class]]) {
             UCFUserInfoModel *userInfo = result;
             switch ([userInfo.sex integerValue]) {
@@ -368,6 +377,12 @@
                 default:
                     self.userIconImageView.image = [UIImage imageNamed:@"password_icon_head"];
                     break;
+            }
+            if([[NSUserDefaults standardUserDefaults] boolForKey: @"isCompanyAgentType"]){
+                self.userIconImageView.image = [UIImage imageNamed:@"company_head"];
+                [self.personInformationBtn setTitle:@"企业信息" forState:UIControlStateNormal];
+            }else{
+                [self.personInformationBtn setTitle:@"个人信息" forState:UIControlStateNormal];
             }
 //            [self.userIconImageView sd_setImageWithURL:[NSURL URLWithString:userInfo.hurl] placeholderImage:[UIImage imageNamed:@""]];
             self.userTicket = userInfo.userCenterTicket;
