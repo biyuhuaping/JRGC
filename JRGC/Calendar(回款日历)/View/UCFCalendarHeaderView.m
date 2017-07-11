@@ -82,7 +82,7 @@
 {
     if (nil == _weekView) {
         _weekView = [[UIView alloc] initWithFrame:CGRectZero];
-        _weekView.backgroundColor = UIColorWithRGB(0xebebee);
+        _weekView.backgroundColor = UIColorWithRGB(0xf9f9f9);
         for (int i=0; i<7; i++) {
             UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
             label.textColor = UIColorWithRGB(0x333333);
@@ -201,11 +201,11 @@ static NSString *const cellId = @"cellId";
 
 - (void)headerButtonClicked:(UIButton *)button
 {
-    if (self.headerButton.selected) {
-        self.headerButton.imageView.transform = CGAffineTransformMakeRotation(0);
-    } else {
-        self.headerButton.imageView.transform = CGAffineTransformMakeRotation(M_PI);
-    }
+//    if (self.headerButton.selected) {
+//        self.headerButton.imageView.transform = CGAffineTransformMakeRotation(0);
+//    } else {
+//        self.headerButton.imageView.transform = CGAffineTransformMakeRotation(M_PI);
+//    }
     button.selected = !button.selected;
     
     if ([self.delegate respondsToSelector:@selector(calendar:didClickedHeader:)]) {
@@ -222,7 +222,9 @@ static NSString *const cellId = @"cellId";
     self.frame = frame;
     
     self.preButton.frame = CGRectMake(0, self.calendarView.y, 80, 44);
+    [self.preButton setImageEdgeInsets:UIEdgeInsetsMake(0, 20, 0, self.preButton.width - 20- self.preButton.imageView.width)];
     self.nextButton.frame = CGRectMake(self.width - 80, self.calendarView.y, 80, 44);
+    [self.nextButton setImageEdgeInsets:UIEdgeInsetsMake(0, self.nextButton.width - 20- self.nextButton.imageView.width, 0, 20)];
     self.monthLabel.frame = CGRectMake(0, self.calendarView.y + 0.5, ScreenWidth, 43);
     
     self.upLine.frame = CGRectMake(0, self.calendarView.y, ScreenWidth, 0.5);
