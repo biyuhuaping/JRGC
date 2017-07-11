@@ -21,7 +21,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *statusIILabel;
 @property (weak, nonatomic) IBOutlet UIImageView *arrowImage;
 
-@property (weak, nonatomic)  UCFNoDataView *nodataview;
+@property (strong, nonatomic)  UCFNoDataView *nodataview;
 @property (weak, nonatomic) UIView *upLine;
 @property (weak, nonatomic) UIView *downLine;
 @end
@@ -33,7 +33,7 @@
     [super awakeFromNib];
     
     UCFNoDataView *noDataView = [[UCFNoDataView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 200) errorTitle:@"本日无回款项目"];
-    [self.contentView addSubview:noDataView];
+    [self addSubview:noDataView];
     self.nodataview = noDataView;
     
     UIView *upLine = [[UIView alloc] initWithFrame:CGRectZero];
@@ -60,17 +60,8 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    
     self.upLine.frame = CGRectMake(0, 0, ScreenWidth, 0.5);
     self.downLine.frame = CGRectMake(0, self.bottom-0.5, ScreenWidth, 0.5);
-    
-    if (self.group.opened) {
-        self.arrowImageView.transform = CGAffineTransformMakeRotation(M_PI);
-        self.downLine.backgroundColor = UIColorWithRGB(0xe9eaee);
-    } else {
-        self.arrowImageView.transform = CGAffineTransformMakeRotation(0);
-        self.downLine.backgroundColor = UIColorWithRGB(0xd8d8d8);
-    }
     
     if (nil == self.group) {
         self.nodataview.hidden = NO;
@@ -81,8 +72,16 @@
         self.statusILabel.hidden = YES;
         self.statusIILabel.hidden = YES;
         self.arrowImage.hidden = YES;
+        self.upLine.hidden = YES;
     }
     else {
+        if (self.group.opened) {
+            self.arrowImageView.transform = CGAffineTransformMakeRotation(M_PI);
+            self.downLine.backgroundColor = UIColorWithRGB(0xe9eaee);
+        } else {
+            self.arrowImageView.transform = CGAffineTransformMakeRotation(0);
+            self.downLine.backgroundColor = UIColorWithRGB(0xd8d8d8);
+        }
         self.nodataview.hidden = YES;
         self.proNameLabel.hidden = NO;
         self.totalMoneyLabel.hidden = NO;
@@ -90,25 +89,25 @@
         self.statusILabel.hidden = NO;
         self.statusIILabel.hidden = NO;
         self.arrowImage.hidden = NO;
-    }
-    
-    if ([self.group.status intValue] == 0) {
-        self.statusIILabel.hidden = YES;
-        self.statusILabel.text = @"待回款";
-        self.statusILabel.textColor = UIColorWithRGB(0xfd4d4c);
-    }
-    else if ([self.group.status intValue] == 1) {
-        self.statusILabel.textColor = UIColorWithRGB(0x4aa1f9);
-        if ([self.group.isAdvance intValue] == 0) {
+        self.upLine.hidden = NO;
+        if ([self.group.status intValue] == 0) {
             self.statusIILabel.hidden = YES;
-            self.statusILabel.text = @"已回款";
+            self.statusILabel.text = @"待回款";
+            self.statusILabel.textColor = UIColorWithRGB(0xfd4d4c);
         }
-        else {
-            self.statusIILabel.hidden = NO;
-            self.statusILabel.text = @"提前回款";
-            if (self.group.repayPerDate.length>0) {
-                NSString *day = [NSString stringWithFormat:@"%@日", [self.group.repayPerDate stringByReplacingOccurrencesOfString:@"-" withString:@"月"]];
-                self.statusIILabel.text = [NSString stringWithFormat:@"计划回款日%@", day];
+        else if ([self.group.status intValue] == 1) {
+            self.statusILabel.textColor = UIColorWithRGB(0x4aa1f9);
+            if ([self.group.isAdvance intValue] == 0) {
+                self.statusIILabel.hidden = YES;
+                self.statusILabel.text = @"已回款";
+            }
+            else {
+                self.statusIILabel.hidden = NO;
+                self.statusILabel.text = @"提前回款";
+                if (self.group.repayPerDate.length>0) {
+                    NSString *day = [NSString stringWithFormat:@"%@日", [self.group.repayPerDate stringByReplacingOccurrencesOfString:@"-" withString:@"月"]];
+                    self.statusIILabel.text = [NSString stringWithFormat:@"计划回款日%@", day];
+                }
             }
         }
     }
@@ -117,9 +116,9 @@
 - (void)setGroup:(UCFCalendarGroup *)group
 {
     _group = group;
-    self.proNameLabel.text = self.group.proName;
-    self.totalMoneyLabel.text = self.group.totalMoney;
-    self.timeLabel.text = [NSString stringWithFormat:@"第%@期/共%@期", self.group.repayPerNo, self.group.count];
+    _proNameLabel.text = group.proName;
+    _totalMoneyLabel.text = group.totalMoney;
+    _timeLabel.text = [NSString stringWithFormat:@"第%@期/共%@期", group.repayPerNo, group.count];
 }
 
 @end
