@@ -76,7 +76,7 @@
     // 该方法根据row参数返回teams中的元素，row参数代表列表项的编号，
     // 因此该方法表示第几个列表项，就使用teams中的第几个元素
     NSMutableString *month = [self.dataArray objectAtIndex:row];
-    NSString *temp = [month stringByReplacingOccurrencesOfString:@"-" withString:@"年"];
+    NSString *temp = [month stringByReplacingOccurrencesOfString:@"-" withString:@"年      "];
     return [NSString stringWithFormat:@"%@月", temp];
 }
 
