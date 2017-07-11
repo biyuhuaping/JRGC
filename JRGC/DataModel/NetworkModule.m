@@ -936,6 +936,7 @@ static NetworkModule *gInstance = NULL;
 {
     [MBProgressHUD hideAllHUDsForView:nil animated:NO];
     UCFLoginViewController *loginViewController = [[[UCFLoginViewController alloc] init] autorelease];
+    loginViewController.isForce = YES;
     UINavigationController *loginNaviController = [[[UINavigationController alloc] initWithRootViewController:loginViewController] autorelease];
     AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
 //    if (app.tabBarController.selectedIndex == 4) {
@@ -1286,7 +1287,15 @@ static NetworkModule *gInstance = NULL;
         case kSXTagPrdTransferList:
             parameter = [NEW_SERVER_IP stringByAppendingString:PRDTRANSEFERLIST];
             break;
-            
+        case kSXTagCalendarHeader:
+            parameter = [NEW_SERVER_IP stringByAppendingString:CALENDARHEADER];
+            break;
+        case kSXTagCalendarInfo:
+            parameter = [NEW_SERVER_IP stringByAppendingString:CALENDARINFO];
+            break;
+        case kSXTagCurrentDayInfo:
+            parameter = [NEW_SERVER_IP stringByAppendingString:CURRENTDAYINFO];
+            break;
     }
     //给原有参数字典添加公共参数
     if (!data) {
