@@ -42,7 +42,7 @@
 #import "BaseNavigationViewController.h"
 #import "FullWebViewController.h"
 #import "UCFBatchBidController.h"
-
+#import "UCFPurchaseBidViewController.h"
 @interface UCFHomeViewController () <UCFHomeListViewControllerDelegate, UCFHomeListNavViewDelegate, UCFUserInformationViewControllerDelegate,BJGridItemDelegate>
 @property (strong, nonatomic) UCFCycleImageViewController *cycleImageVC;
 @property (strong, nonatomic) UCFUserInformationViewController *userInfoVC;
