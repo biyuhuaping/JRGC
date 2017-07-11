@@ -7,7 +7,7 @@
 //
 
 #import "UCFGoldAccountHeadView.h"
-
+#import "MjAlertView.h"
 @interface UCFGoldAccountHeadView ()
 @property (weak, nonatomic) IBOutlet UILabel *holdGoldGram;
 
@@ -26,6 +26,8 @@
 @implementation UCFGoldAccountHeadView
 
 - (IBAction)floatBtnClicked:(id)sender {
+    MjAlertView *alertView = [[MjAlertView alloc] initGoldPriceFloatingAlert:self];
+    [alertView show];
 }
 - (IBAction)currentTimePriceBtnClicked:(UIButton *)sender {
 }

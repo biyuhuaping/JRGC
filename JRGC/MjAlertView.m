@@ -398,6 +398,56 @@
     }
     return self;
 }
+#pragma 黄金弹窗
+-(instancetype)initGoldPriceFloatingAlert:(id)delegate
+{
+    self = [self init];
+    if (self) {
+        
+        UIView *baseView = [[NSBundle mainBundle] loadNibNamed:@"UCFGoldPriceFloatView" owner:nil options:nil][0];
+        baseView.frame = CGRectMake(0, 0, 265, 220);
+        [self.showView  setFrame:CGRectMake(0, 0, 265, 220)];
+        self.alertviewType = MjAlertViewTypeTypeHoner;
+        self.delegate = delegate;
+        [self.showView addSubview:baseView];
+        
+        UIButton *closeBtn = nil;
+        for (UIView *view in baseView.subviews) {
+            if ([view isKindOfClass:[UIButton class]]) {
+                closeBtn = (UIButton *)view;
+            }
+        }
+        [closeBtn addTarget:self action:@selector(closeBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+        
+//        UIView *baseView = [[UIView alloc] initWithFrame:CGRectMake((ScreenWidth - 265)/2.0f, 0, 265, 169)];
+//        baseView.backgroundColor = [UIColor whiteColor];
+//        baseView.layer.cornerRadius = 4.0f;
+//        [self.showView addSubview:baseView];
+//        
+//        UILabel *titleLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(baseView.frame), 41)];
+//        titleLab.textColor = UIColorWithRGB(0x333333);
+//        titleLab.font = [UIFont systemFontOfSize:18.0f];
+//        [baseView addSubview:titleLab];
+//        
+//        UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(titleLab.frame), CGRectGetWidth(baseView.frame) - 30, 1)];
+//        lineView.backgroundColor = UIColorWithRGB(0xd8d8d8);
+//        [baseView addSubview:lineView];
+//        
+//        UILabel *body1Lab = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(lineView.frame) + 10, CGRectGetWidth(lineView.frame), 41)];
+//        NSString *body1Str = @"浮动盈亏指按持仓合约的初始成交价与当日结算价计算的潜在盈亏。";
+//        CGSize size = [Common getStrHeightWithStr:body1Str AndStrFont:13.0f AndWidth:CGRectGetWidth(lineView.frame)];
+//        CGRect tmpRect = body1Lab.frame;
+//        tmpRect.size.height = size.height;
+//        body1Lab.frame = tmpRect;
+//        body1Lab.text = body1Str;
+//        body1Lab.textColor = UIColorWithRGB(0x333333);
+//        body1Lab.font = [UIFont systemFontOfSize:18.0f];
+//        [baseView addSubview:body1Lab];
+        
+    
+    }
+    return self;
+}
 #pragma  跳转尊享页面弹框
 -(instancetype)initSkipToMoneySwitchHonerAccout:(id)delegate{
     self = [self init];

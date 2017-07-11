@@ -606,6 +606,7 @@
 		A851F34F1F132D2C003DE8B8 /* UCFGoldTransCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A851F34D1F132D2C003DE8B8 /* UCFGoldTransCell.xib */; };
 		A851F3531F1361D8003DE8B8 /* UCFGoldTransactionDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A851F3511F1361D8003DE8B8 /* UCFGoldTransactionDetailViewController.m */; };
 		A851F3541F1361D8003DE8B8 /* UCFGoldTransactionDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A851F3521F1361D8003DE8B8 /* UCFGoldTransactionDetailViewController.xib */; };
+		A851F3561F1379E2003DE8B8 /* UCFGoldPriceFloatView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A851F3551F1379E2003DE8B8 /* UCFGoldPriceFloatView.xib */; };
 		A8A3A57F1EE95BDA00D9C06D /* UCFInvestAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A8A3A57E1EE95BDA00D9C06D /* UCFInvestAPIManager.m */; };
 		A8AD2E3E1EB979760013DB7C /* MongoliaLayerCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = A8AD2E3D1EB979760013DB7C /* MongoliaLayerCenter.m */; };
 		A8AD6F851EFA6BDE000AF323 /* PagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = A8AD6F841EFA6BDE000AF323 /* PagerView.m */; };
@@ -744,8 +745,6 @@
 		FB88C90C1AF9F92E00D2EE93 /* UIDic+Safe.m in Sources */ = {isa = PBXBuildFile; fileRef = FB88C9071AF9F92E00D2EE93 /* UIDic+Safe.m */; };
 		FB88C90D1AF9F92E00D2EE93 /* YcArray.m in Sources */ = {isa = PBXBuildFile; fileRef = FB88C9091AF9F92E00D2EE93 /* YcArray.m */; };
 		FB88C90E1AF9F92E00D2EE93 /* YcMutableArray.m in Sources */ = {isa = PBXBuildFile; fileRef = FB88C90B1AF9F92E00D2EE93 /* YcMutableArray.m */; };
-		FBA49DB41B0438B400239E48 /* UCFCompleteBidViewCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = FBA49DB21B0438B400239E48 /* UCFCompleteBidViewCtrl.m */; };
-		FBA49DB51B0438B400239E48 /* UCFCompleteBidViewCtrl.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBA49DB31B0438B400239E48 /* UCFCompleteBidViewCtrl.xib */; };
 		FBA5BE9C1B0EDB0D000CDDC3 /* GiFHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = FBA5BE9B1B0EDB0D000CDDC3 /* GiFHUD.m */; };
 		FBA80F531AE6472C0066BF99 /* InvestmentItemInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = FBA80F521AE6472C0066BF99 /* InvestmentItemInfo.m */; };
 		FBAEDA001C191A08000C0AA1 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBAED9FF1C191A08000C0AA1 /* CoreFoundation.framework */; };
@@ -1884,6 +1883,7 @@
 		A851F3501F1361D8003DE8B8 /* UCFGoldTransactionDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFGoldTransactionDetailViewController.h; sourceTree = "<group>"; };
 		A851F3511F1361D8003DE8B8 /* UCFGoldTransactionDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFGoldTransactionDetailViewController.m; sourceTree = "<group>"; };
 		A851F3521F1361D8003DE8B8 /* UCFGoldTransactionDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFGoldTransactionDetailViewController.xib; sourceTree = "<group>"; };
+		A851F3551F1379E2003DE8B8 /* UCFGoldPriceFloatView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFGoldPriceFloatView.xib; sourceTree = "<group>"; };
 		A8A3A57D1EE95BDA00D9C06D /* UCFInvestAPIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFInvestAPIManager.h; sourceTree = "<group>"; };
 		A8A3A57E1EE95BDA00D9C06D /* UCFInvestAPIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFInvestAPIManager.m; sourceTree = "<group>"; };
 		A8AD2E3C1EB979760013DB7C /* MongoliaLayerCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MongoliaLayerCenter.h; sourceTree = "<group>"; };
@@ -2162,9 +2162,6 @@
 		FB88C9091AF9F92E00D2EE93 /* YcArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YcArray.m; sourceTree = "<group>"; };
 		FB88C90A1AF9F92E00D2EE93 /* YcMutableArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YcMutableArray.h; sourceTree = "<group>"; };
 		FB88C90B1AF9F92E00D2EE93 /* YcMutableArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YcMutableArray.m; sourceTree = "<group>"; };
-		FBA49DB11B0438B400239E48 /* UCFCompleteBidViewCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFCompleteBidViewCtrl.h; sourceTree = "<group>"; };
-		FBA49DB21B0438B400239E48 /* UCFCompleteBidViewCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFCompleteBidViewCtrl.m; sourceTree = "<group>"; };
-		FBA49DB31B0438B400239E48 /* UCFCompleteBidViewCtrl.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFCompleteBidViewCtrl.xib; sourceTree = "<group>"; };
 		FBA5BE9A1B0EDB0D000CDDC3 /* GiFHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GiFHUD.h; sourceTree = "<group>"; };
 		FBA5BE9B1B0EDB0D000CDDC3 /* GiFHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GiFHUD.m; sourceTree = "<group>"; };
 		FBA80F511AE6472C0066BF99 /* InvestmentItemInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvestmentItemInfo.h; sourceTree = "<group>"; };
@@ -2613,9 +2610,6 @@
 				83F4DAF21D9561EC00A0632E /* UCFPrdTransferBIdWebView.h */,
 				83F4DAF31D9561EC00A0632E /* UCFPrdTransferBIdWebView.m */,
 				83F4DAF41D9561EC00A0632E /* UCFPrdTransferBIdWebView.xib */,
-				FBA49DB11B0438B400239E48 /* UCFCompleteBidViewCtrl.h */,
-				FBA49DB21B0438B400239E48 /* UCFCompleteBidViewCtrl.m */,
-				FBA49DB31B0438B400239E48 /* UCFCompleteBidViewCtrl.xib */,
 				4A42BB291C27A4C70084AB08 /* BidSubView */,
 			);
 			path = BidViewController;
@@ -5172,6 +5166,7 @@
 				A8AD2E3D1EB979760013DB7C /* MongoliaLayerCenter.m */,
 				A8D2DE761EB9E1CF00D61AD0 /* MaskView.h */,
 				A8D2DE771EB9E1CF00D61AD0 /* MaskView.m */,
+				A851F3551F1379E2003DE8B8 /* UCFGoldPriceFloatView.xib */,
 			);
 			name = MongoliaLayer;
 			path = Tools/MongoliaLayer;
@@ -6047,6 +6042,7 @@
 				840A794B1C2A80B60059A946 /* UCFMessageSettingViewController.xib in Resources */,
 				74956EB51D66F33D00D68B61 /* UCFAccountDetailViewController.xib in Resources */,
 				4A90167F1AFB12FE0049A9E0 /* LICENSE in Resources */,
+				A851F3561F1379E2003DE8B8 /* UCFGoldPriceFloatView.xib in Resources */,
 				7459EE031E5552FE005A6FF7 /* UCFBatchBidController.xib in Resources */,
 				744A5FAB1E79512C008921F9 /* UCFWebViewJavascriptBridgeLoanDetails.xib in Resources */,
 				74F490EF1E5B2AAA0057AC62 /* UCFCollectionBidCell.xib in Resources */,
@@ -6129,7 +6125,6 @@
 				25C029BF1D40D7EA00EF75DC /* UCFLoginFaceView.xib in Resources */,
 				4AEA750B1B03764D00B03A46 /* UCFPurchaseTranBidViewController.xib in Resources */,
 				74270D181EC595ED00F9419B /* UCFDataStaticsCell.xib in Resources */,
-				FBA49DB51B0438B400239E48 /* UCFCompleteBidViewCtrl.xib in Resources */,
 				74270D211EC595ED00F9419B /* UCFRebateCell1.xib in Resources */,
 				740DAEC21E56E2D100CD7C8F /* UCFBatchProjectController.xib in Resources */,
 				25BAE2B21D804E6B001B6E01 /* JRGCViewForCWRresult.xib in Resources */,
@@ -6426,7 +6421,6 @@
 				83EB21E21D758EE50069EF95 /* UCFCashRecordListViewController.m in Sources */,
 				4A0DC8021BCF5B1300835E95 /* HWWeakTimer.m in Sources */,
 				FB7EDE401D6BFCD700C3E924 /* UCFMainTabBarController.m in Sources */,
-				FBA49DB41B0438B400239E48 /* UCFCompleteBidViewCtrl.m in Sources */,
 				7BC3047B1ACBC22D007767F1 /* DeviceInfo.m in Sources */,
 				748ED7A11CC74B9800690215 /* UCFMenuItemModel.m in Sources */,
 				83F2D59D1DCB508F0041F913 /* UCFAccount.m in Sources */,
