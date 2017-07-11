@@ -19,7 +19,9 @@ typedef enum : NSUInteger {
     MjAlertViewTypeInviteFriends,
     MjAlertViewTypeTypeOne,
     MjAlertViewTypeTypeHoner,
+    MjGoldAlertViewTypeFloat, //浮动盈亏
 } MjAlertViewType;
+
 
 //动画类型
 typedef enum : NSUInteger {
@@ -70,8 +72,10 @@ typedef enum : NSUInteger {
 -(instancetype)initInviteFriendsToMakeMoneyDelegate:(id)delegate;
 
 -(instancetype)initPlatformUpgradeNotice:(id)delegate withAuthorizationDate:(NSString *)date;
-//黄金浮动弹框
--(instancetype)initGoldPriceFloatingAlert:(id)delegate;
+//黄金弹窗
+-(instancetype)initGoldAlertType:(MjAlertViewType)type delegate:(id)delegate;
+// 黄金除了浮动价格弹框
+- (instancetype)initGoldAlertTitle:(NSString *)title Message:(NSString *)message delegate:(id)delegate;
 #pragma mark - 显示
 - (void)show;
 #pragma mark - 隐藏

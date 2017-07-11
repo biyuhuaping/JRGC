@@ -26,12 +26,14 @@
 @implementation UCFGoldAccountHeadView
 
 - (IBAction)floatBtnClicked:(id)sender {
-    MjAlertView *alertView = [[MjAlertView alloc] initGoldPriceFloatingAlert:self];
+    MjAlertView *alertView = [[MjAlertView alloc] initGoldAlertType:MjGoldAlertViewTypeFloat delegate:self];
     [alertView show];
 }
 - (IBAction)currentTimePriceBtnClicked:(UIButton *)sender {
 }
 - (IBAction)recoverBtnClicked:(UIButton *)sender {
+    MjAlertView *alertView = [[MjAlertView alloc] initGoldAlertTitle:@"总待收黄金" Message:@"总待收黄金=已购黄金+到期黄金" delegate:self];
+    [alertView show];
 }
 
 // Only override drawRect: if you perform custom drawing.

@@ -357,22 +357,6 @@
     [button addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];
     [headerView addSubview:button];
       
-        
-//    NZLabel *detailLab = [[NZLabel alloc] initWithFrame:CGRectMake(ScreenWidth /2 - 100, CGRectGetMidY(button.frame)-44-20, 200, 20)];
-//    detailLab.text = @"每邀请一位奖励50-2400元";
-//    detailLab.font = [UIFont systemFontOfSize:15];
-//    detailLab.textColor = UIColorWithRGB(0x333333);
-//    [detailLab setFontColor:UIColorWithRGB(0xfd4d4c) string:@"50-2400元"];
-//    detailLab.textAlignment = NSTextAlignmentCenter;
-//    [headerView addSubview:detailLab];
-//        
-//    NZLabel *titleLab = [[NZLabel alloc] initWithFrame:CGRectMake(ScreenWidth /2 - 75, CGRectGetMidY(detailLab.frame)-20 - 20, 150, 20)];
-//    titleLab.text = @"2017邀友赚钱新政策";
-//    titleLab.font = [UIFont systemFontOfSize:15];
-//    titleLab.textColor = UIColorWithRGB(0x333333);
-//
-//    titleLab.textAlignment = NSTextAlignmentCenter;
-//    [headerView addSubview:titleLab];
     
     UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(ScreenWidth /2 - 100, CGRectGetMinY(button.frame) - 106, 200, 100)];
     webView.backgroundColor = [UIColor clearColor];
@@ -398,53 +382,42 @@
     }
     return self;
 }
-#pragma 黄金弹窗
--(instancetype)initGoldPriceFloatingAlert:(id)delegate
+#pragma 黄金自定义弹窗
+-(instancetype)initGoldAlertType:(MjAlertViewType)type delegate:(id)delegate
 {
     self = [self init];
     if (self) {
-        
-        UIView *baseView = [[NSBundle mainBundle] loadNibNamed:@"UCFGoldPriceFloatView" owner:nil options:nil][0];
+        UIView *baseView = nil;
+        baseView = [[NSBundle mainBundle] loadNibNamed:@"UCFGoldPriceFloatView" owner:nil options:nil][0];
         baseView.frame = CGRectMake(0, 0, 265, 220);
-        [self.showView  setFrame:CGRectMake(0, 0, 265, 220)];
-        self.alertviewType = MjAlertViewTypeTypeHoner;
+        [self.showView  setFrame:CGRectMake((ScreenWidth - 265)/2.0f, (ScreenHeight - 220)/2.0f, 265, 220)];
         self.delegate = delegate;
         [self.showView addSubview:baseView];
-        
-        UIButton *closeBtn = nil;
-        for (UIView *view in baseView.subviews) {
-            if ([view isKindOfClass:[UIButton class]]) {
-                closeBtn = (UIButton *)view;
-            }
-        }
+        UIButton *closeBtn = [baseView viewWithTag:1000];
         [closeBtn addTarget:self action:@selector(closeBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-        
-//        UIView *baseView = [[UIView alloc] initWithFrame:CGRectMake((ScreenWidth - 265)/2.0f, 0, 265, 169)];
-//        baseView.backgroundColor = [UIColor whiteColor];
-//        baseView.layer.cornerRadius = 4.0f;
-//        [self.showView addSubview:baseView];
-//        
-//        UILabel *titleLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(baseView.frame), 41)];
-//        titleLab.textColor = UIColorWithRGB(0x333333);
-//        titleLab.font = [UIFont systemFontOfSize:18.0f];
-//        [baseView addSubview:titleLab];
-//        
-//        UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(titleLab.frame), CGRectGetWidth(baseView.frame) - 30, 1)];
-//        lineView.backgroundColor = UIColorWithRGB(0xd8d8d8);
-//        [baseView addSubview:lineView];
-//        
-//        UILabel *body1Lab = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(lineView.frame) + 10, CGRectGetWidth(lineView.frame), 41)];
-//        NSString *body1Str = @"浮动盈亏指按持仓合约的初始成交价与当日结算价计算的潜在盈亏。";
-//        CGSize size = [Common getStrHeightWithStr:body1Str AndStrFont:13.0f AndWidth:CGRectGetWidth(lineView.frame)];
-//        CGRect tmpRect = body1Lab.frame;
-//        tmpRect.size.height = size.height;
-//        body1Lab.frame = tmpRect;
-//        body1Lab.text = body1Str;
-//        body1Lab.textColor = UIColorWithRGB(0x333333);
-//        body1Lab.font = [UIFont systemFontOfSize:18.0f];
-//        [baseView addSubview:body1Lab];
-        
-    
+    }
+    return self;
+}
+// 黄金除了浮动价格弹框
+- (instancetype)initGoldAlertTitle:(NSString *)title Message:(NSString *)message delegate:(id)delegate
+{
+    self = [self init];
+    if (self) {
+        UIView *baseView = nil;
+        if (title.length != 0) {
+            baseView = [[NSBundle mainBundle] loadNibNamed:@"UCFGoldPriceFloatView" owner:nil options:nil][1];
+        } else {
+            baseView = [[NSBundle mainBundle] loadNibNamed:@"UCFGoldPriceFloatView" owner:nil options:nil][2];
+        }
+        [self.showView  setFrame:CGRectMake((ScreenWidth - CGRectGetWidth(baseView.frame))/2.0f, (ScreenHeight - CGRectGetHeight(baseView.frame))/2.0f,CGRectGetWidth(baseView.frame) , CGRectGetHeight(baseView.frame))];
+        self.delegate = delegate;
+        [self.showView addSubview:baseView];
+        UILabel *titleLab = [baseView viewWithTag:1001];
+        titleLab.text = title;
+        UILabel *msgLab = [baseView viewWithTag:1002];
+        msgLab.text = message;
+        UIButton *closeBtn = [baseView viewWithTag:1000];
+        [closeBtn addTarget:self action:@selector(closeBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     }
     return self;
 }
@@ -744,21 +717,20 @@
             }
         }
             break;
+        case MjAlertViewTypeInviteFriends:{
+            self.showView.center = CGPointMake(ScreenWidth/2, 373/2);
+        }
+            break;
+        case MjAlertViewTypeTypeHoner:{
+            self.showView.center = self.center;
+        }
+            break;
         default:
             if (self.block) {
                 self.block(self.showView);
             }
-            break;
+        break;
     }
-    if(self.alertviewType == MjAlertViewTypeInviteFriends){
-        self.showView.center = CGPointMake(ScreenWidth/2, 373/2);
-    } else if (self.alertviewType == MjAlertViewTypeTypeHoner) {
-        self.showView.center = self.center;
-    }
-    else{
-        self.showView.center = self.center;
-    }
-    
 }
 
 #pragma mark - 设置显示类型
