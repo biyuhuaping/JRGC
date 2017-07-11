@@ -76,7 +76,11 @@
     }
     UCFCalendarGroup *group = [self.selectedDayDatas objectAtIndex:section];
     if (group.isOpened) {
-        return 3;
+        if ([group.status intValue] == 0) {
+            return 2;
+        }
+        else
+            return 3;
     }
     else
         return 0;
