@@ -10,7 +10,9 @@
 #import "UCFGoldMoneyBoadCell.h"
 #import "NZLabel.h"
 #import "UCFGoldBidSuccessViewController.h"
-@interface UCFGoldPurchaseViewController ()<UITableViewDelegate,UITableViewDataSource>
+#import "UCFGoldCalculatorView.h"
+#import "AppDelegate.h"
+@interface UCFGoldPurchaseViewController ()<UITableViewDelegate,UITableViewDataSource,UCFGoldMoneyBoadCellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 - (IBAction)gotoGoldBidSuccessVC:(id)sender;
 
@@ -26,6 +28,8 @@
     
     self.tableView.tableFooterView = [self createFootView];
 //    self.tableView.contentInset =  UIEdgeInsetsMake(10, 0, 0, 0);
+    UITapGestureRecognizer *frade = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardDown)];
+    [self.view addGestureRecognizer:frade];
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
@@ -134,6 +138,7 @@
             cell = [[[NSBundle mainBundle]loadNibNamed:@"UCFGoldMoneyBoadCell" owner:nil options:nil] firstObject];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
+        cell.delegate = self;
          return cell;
     }else if (indexPath.section == 2){
         if (!cell) {
@@ -165,17 +170,17 @@
     [firstLabel setFontColor:UIColorWithRGB(0x666666) string:@"281.00元/克"];
     [footView addSubview:firstLabel];
     
-    UIImageView * imageView3 = [[UIImageView alloc] init];
-    imageView3.frame = CGRectMake(CGRectGetMinX(firstLabel.frame) - 7, CGRectGetMinY(firstLabel.frame) + 6, 5, 5);
-    imageView3.image = [UIImage imageNamed:@"point.png"];
-    [footView addSubview:imageView3];
+    UIImageView * imageView1 = [[UIImageView alloc] init];
+    imageView1.frame = CGRectMake(CGRectGetMinX(firstLabel.frame) - 7, CGRectGetMinY(firstLabel.frame) + 6, 5, 5);
+    imageView1.image = [UIImage imageNamed:@"point.png"];
+    [footView addSubview:imageView1];
     
     NZLabel *riskProtocolLabel = [[NZLabel alloc] init];
     riskProtocolLabel.font = [UIFont systemFontOfSize:12.0f];
     
     CGSize size2 = [Common getStrHeightWithStr:@"本人同意签署《黄金产品买卖及委托管理服务协议》" AndStrFont:13 AndWidth:ScreenWidth- 23 -15];
     riskProtocolLabel.numberOfLines = 0;
-    riskProtocolLabel.frame = CGRectMake(23,  CGRectGetMaxY(firstLabel.frame)+10, ScreenWidth- 23 -15, size2.height);
+    riskProtocolLabel.frame = CGRectMake(23,  CGRectGetMaxY(firstLabel.frame)+5, ScreenWidth- 23 -15, size2.height);
     riskProtocolLabel.text = @"本人同意签署《黄金产品买卖及委托管理服务协议》";
     riskProtocolLabel.userInteractionEnabled = YES;
     riskProtocolLabel.textColor = UIColorWithRGB(0x999999);
@@ -186,7 +191,7 @@
     [riskProtocolLabel setFontColor:UIColorWithRGB(0x4aa1f9) string:@"《黄金产品买卖及委托管理服务协议》"];
     
     UIImageView * imageView = [[UIImageView alloc] init];
-    imageView.frame = CGRectMake(CGRectGetMinX(riskProtocolLabel.frame) - 7, CGRectGetMinY(riskProtocolLabel.frame) + 6, 5, 5);
+    imageView.frame = CGRectMake(CGRectGetMinX(riskProtocolLabel.frame) - 7, CGRectGetMinY(riskProtocolLabel.frame) + size2.height/2, 5, 5);
     imageView.image = [UIImage imageNamed:@"point.png"];
     
     [footView addSubview:riskProtocolLabel];
@@ -200,7 +205,45 @@
     
 }
 
-
+#pragma mark - UCFGoldMoneyBoadCellDelegate
+#pragma mark 显示计算器
+-(void)showGoldCalculatorView
+{
+    [self.view endEditing:YES];
+    UCFGoldMoneyBoadCell *cell = (UCFGoldMoneyBoadCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:1]];
+//    NSString *investMoney = cell.inputMoneyTextFieldLable.text;
+//    if (cell.inputMoneyTextFieldLable.text.length == 0 || [cell.inputMoneyTextFieldLable.text isEqualToString:@"0"] || [cell.inputMoneyTextFieldLable.text isEqualToString:@"0.0"] || [cell.inputMoneyTextFieldLable.text isEqualToString:@"0.00"]) {
+//        [MBProgressHUD displayHudError:[NSString stringWithFormat:@"请输入%@金额",_wJOrZxStr]];
+//        return;
+//    }
+    UCFGoldCalculatorView * view = [[[NSBundle mainBundle]loadNibNamed:@"UCFGoldCalculatorView" owner:nil options:nil] firstObject];
+    view.tag = 173924;
+    view.frame = CGRectMake(0, 0, ScreenWidth,ScreenHeight);
+//    view.center = bgView.center;
+//    view.accoutType = self.accoutType;
+//    [view reloadViewWithData:_dataDict AndNowMoney:investMoney];
+//    [bgView addSubview:view];
+    
+    AppDelegate * app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    view.center = app.window.center;
+    [app.window addSubview:view];
+    
+}
+#pragma mark -黄金充值
+-(void)gotoGoldRechargeVC{
+    
+}
+#pragma mark -全投
+-(void)clickAllInvestmentBtn{
+    
+}
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
+    [self.tableView endEditing:YES];
+}
+-(void)keyboardDown{
+    [self.view endEditing:YES];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

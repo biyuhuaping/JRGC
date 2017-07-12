@@ -8,6 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol UCFGoldMoneyBoadCellDelegate <NSObject>
+
+@optional
+
+-(void)showGoldCalculatorView;
+-(void)gotoGoldRechargeVC;
+-(void)clickAllInvestmentBtn;
+
+@end
+
 @interface UCFGoldMoneyBoadCell : UITableViewCell
+@property (strong, nonatomic) IBOutlet UITextField *moneyTextField;
+
+@property (nonatomic, assign)id<UCFGoldMoneyBoadCellDelegate> delegate;
 
 @end
