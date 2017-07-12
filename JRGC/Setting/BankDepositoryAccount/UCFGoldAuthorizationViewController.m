@@ -16,6 +16,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self addLeftButton];
+    baseTitleLabel.text = @"用户授权";
     // Do any additional setup after loading the view from its nib.
 }
 
