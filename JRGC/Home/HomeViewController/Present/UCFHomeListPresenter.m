@@ -22,6 +22,7 @@
 @property (strong, nonatomic) UCFHomeListGroupPresenter *groupPresenter1;
 @property (strong, nonatomic) UCFHomeListGroupPresenter *groupPresenter2;
 @property (strong, nonatomic) UCFHomeListGroupPresenter *groupPresenter3;
+@property (strong, nonatomic) UCFHomeListGroupPresenter *groupPresenter4;
 @end
 
 @implementation UCFHomeListPresenter
@@ -68,12 +69,24 @@
 {
     if (!_groupPresenter3) {
         UCFHomeListGroup *group3 = [[UCFHomeListGroup alloc] init];
-        group3.headTitle = @"资金周转";
-        group3.showMore = NO;
-        group3.headerImage = @"mine_icon_transfer";
+        group3.headTitle = @"工场黄金";
+        group3.showMore = YES;
+        group3.headerImage = @"mine_icon_gold";
         _groupPresenter3 = [UCFHomeListGroupPresenter presenterWithGroup:group3];
     }
     return _groupPresenter3;
+}
+
+- (UCFHomeListGroupPresenter *)groupPresenter4
+{
+    if (!_groupPresenter4) {
+        UCFHomeListGroup *group4 = [[UCFHomeListGroup alloc] init];
+        group4.headTitle = @"资金周转";
+        group4.showMore = NO;
+        group4.headerImage = @"mine_icon_transfer";
+        _groupPresenter4 = [UCFHomeListGroupPresenter presenterWithGroup:group4];
+    }
+    return _groupPresenter4;
 }
 
 - (NSString *)userId
@@ -114,10 +127,10 @@
     model.prdName = @"批量出借专区";
     model.type = @"省心出借";
     UCFHomeListCellPresenter *cellPresenter = [UCFHomeListCellPresenter presenterWithItem:model];
-    NSMutableArray *temp2 = [NSMutableArray arrayWithObject:cellPresenter];
-    self.groupPresenter2.group.prdlist = temp2;
+    NSMutableArray *temp3 = [NSMutableArray arrayWithObject:cellPresenter];
+    self.groupPresenter3.group.prdlist = temp3;
     
-    NSMutableArray *temp3 = [[NSMutableArray alloc] init];
+    NSMutableArray *temp4 = [[NSMutableArray alloc] init];
     NSArray *imageArr = @[@"home_bg_2", @"home_bg_4"];
     NSArray *titleArr = @[@"转让专区", @""];
     NSArray *typeArr = @[@"自由转让，灵活变现", @""];
@@ -133,14 +146,15 @@
         model.type = [typeArr objectAtIndex:i];
         model.backImage = [imageArr objectAtIndex:i];
         UCFHomeListCellPresenter *cellPresenter = [UCFHomeListCellPresenter presenterWithItem:model];
-        [temp3 addObject:cellPresenter];
+        [temp4 addObject:cellPresenter];
     }
-    self.groupPresenter3.group.prdlist = temp3;
+    self.groupPresenter4.group.prdlist = temp4;
     
     [self.homeListCells addObject:self.groupPresenter0];
     [self.homeListCells addObject:self.groupPresenter1];
     [self.homeListCells addObject:self.groupPresenter2];
     [self.homeListCells addObject:self.groupPresenter3];
+    [self.homeListCells addObject:self.groupPresenter4];
 }
 
 - (void)fetchHomeListDataWithCompletionHandler:(NetworkCompletionHandler)completionHander {
@@ -156,8 +170,8 @@
                     if ([group.type isEqualToString:@"11"]) {
 //                        weakSelf.groupPresenter2.group.type = group.type;
                         NSMutableArray *temp = [weakSelf productPrdListWithDataSource:array];
-                        [temp addObject:[weakSelf.groupPresenter2.group.prdlist lastObject]];
-                        weakSelf.groupPresenter2.group.prdlist = temp;
+                        [temp addObject:[weakSelf.groupPresenter3.group.prdlist lastObject]];
+                        weakSelf.groupPresenter3.group.prdlist = temp;
                     }
                     else if ([group.type isEqualToString:@"12"]) {
 //                        weakSelf.groupPresenter1.group.type = group.type;
@@ -170,16 +184,23 @@
                 }
             }
             
+            NSMutableArray *temp2 = [NSMutableArray array];
+            UCFHomeListCellModel *model = [[UCFHomeListCellModel alloc] init];
+            model.moedelType = UCFHomeListCellModelTypeDefault;
+            UCFHomeListCellPresenter *cellPresenter = [UCFHomeListCellPresenter presenterWithItem:model];
+            [temp2 addObject:cellPresenter];
+            self.groupPresenter2.group.prdlist = temp2;
+            
             
             UCFHomeListCellModel *listInfo = [resultDict objectForKey:@"listInfo"];
-            UCFHomeListCellPresenter *temp2 = [self.groupPresenter2.group.prdlist lastObject];
-            temp2.item.totalCount = listInfo.totalCount;
+            UCFHomeListCellPresenter *temp3 = [self.groupPresenter3.group.prdlist lastObject];
+            temp3.item.totalCount = listInfo.totalCount;
             
-            UCFHomeListCellPresenter *temp30 = [self.groupPresenter3.group.prdlist firstObject];
-            temp30.item.transferNum = listInfo.transferNum;
+            UCFHomeListCellPresenter *temp40 = [self.groupPresenter4.group.prdlist firstObject];
+            temp40.item.transferNum = listInfo.transferNum;
             
-            UCFHomeListCellPresenter *temp31 = [self.groupPresenter3.group.prdlist objectAtIndex:1];
-            temp31.item.zxTransferNum = listInfo.zxTransferNum;
+            UCFHomeListCellPresenter *temp41 = [self.groupPresenter4.group.prdlist objectAtIndex:1];
+            temp41.item.zxTransferNum = listInfo.zxTransferNum;
             [UserInfoSingle sharedManager].p2pAuthorization = listInfo.p2pAuthorization;
             [UserInfoSingle sharedManager].zxAuthorization = listInfo.zxAuthorization;
             [UserInfoSingle sharedManager].openStatus = [listInfo.openStatus integerValue];
@@ -216,6 +237,7 @@
     self.groupPresenter1 = nil;
     self.groupPresenter2 = nil;
     self.groupPresenter3 = nil;
+    self.groupPresenter4 = nil;
     [self initData];
 }
 @end

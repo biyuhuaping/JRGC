@@ -138,7 +138,7 @@
         return 0.001;
     }
     else {
-        if (section == 3) {
+        if (section == 4) {
             return 0.001;
         }
         return 8;
