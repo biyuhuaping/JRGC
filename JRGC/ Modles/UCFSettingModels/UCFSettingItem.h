@@ -45,4 +45,5 @@ typedef void (^UCFSettingItemOption)();
 
 + (instancetype)itemWithIcon:(NSString *)icon title:(NSString *)title;
 + (instancetype)itemWithTitle:(NSString *)title;
++ (instancetype)itemWithTitle:(NSString *)title withSubtitle:(NSString *)subtitle;
 @end

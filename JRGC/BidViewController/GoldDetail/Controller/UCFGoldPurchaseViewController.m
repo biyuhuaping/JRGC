@@ -9,8 +9,10 @@
 #import "UCFGoldPurchaseViewController.h"
 #import "UCFGoldMoneyBoadCell.h"
 #import "NZLabel.h"
+#import "UCFGoldBidSuccessViewController.h"
 @interface UCFGoldPurchaseViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+- (IBAction)gotoGoldBidSuccessVC:(id)sender;
 
 @end
 
@@ -215,4 +217,10 @@
 }
 */
 
+- (IBAction)gotoGoldBidSuccessVC:(id)sender {
+    
+    UCFGoldBidSuccessViewController *goldAuthorizationVC = [[UCFGoldBidSuccessViewController alloc]initWithNibName:@"UCFGoldBidSuccessViewController" bundle:nil];
+    [self.navigationController pushViewController:goldAuthorizationVC  animated:YES];
+
+}
 @end

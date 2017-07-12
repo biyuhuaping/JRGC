@@ -11,8 +11,8 @@
 #import "UIImage+Misc.h"
 #import "HMSegmentedControl.h"
 #import "UCFGoldDetailHeaderView.h"
-//#import "UCFContractTableCell.h"
-//#import "UCFGoldAuthorizationViewController.h"
+#import "UCFContractTableCell.h"
+#import "UCFGoldAuthorizationViewController.h"
 #import "UCFGoldPurchaseViewController.h"
 @interface UCFGoldDetailViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
 {
@@ -669,21 +669,21 @@
 {
     if (_selectIndex == 0){
         
-//            if ([indexPath section] == 1) {
-//            NSString *cellindifier = @"UCFContractTableCell";
-//             UCFContractTableCell *cell = [tableView dequeueReusableCellWithIdentifier:cellindifier];
-//            if (!cell) {
-//                cell = [[[NSBundle mainBundle] loadNibNamed:@"UCFContractTableCell" owner:nil options:nil] firstObject];
-//                cell.accessoryType =UITableViewCellAccessoryDisclosureIndicator;
-//                cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//            }
-//            cell.contractTitleLabel.text = @"合同测试";
-////            NSDictionary *dict = [_firstSectionArray objectAtIndex:indexPath.row];
-////            NSString * imageUrlStr = [dict objectSafeForKey:@"iconUrl"];
-////            [inconImageView  sd_setImageWithURL:[NSURL URLWithString:imageUrlStr]];
-////            titleLabel.text = [dict objectSafeForKey:@"contractName"];
-//            return cell;
-//        }else {
+            if ([indexPath section] == 1) {
+            NSString *cellindifier = @"UCFContractTableCell";
+             UCFContractTableCell *cell = [tableView dequeueReusableCellWithIdentifier:cellindifier];
+            if (!cell) {
+                cell = [[[NSBundle mainBundle] loadNibNamed:@"UCFContractTableCell" owner:nil options:nil] firstObject];
+                cell.accessoryType =UITableViewCellAccessoryDisclosureIndicator;
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            }
+            cell.contractTitleLabel.text = @"合同测试";
+//            NSDictionary *dict = [_firstSectionArray objectAtIndex:indexPath.row];
+//            NSString * imageUrlStr = [dict objectSafeForKey:@"iconUrl"];
+//            [inconImageView  sd_setImageWithURL:[NSURL URLWithString:imageUrlStr]];
+//            titleLabel.text = [dict objectSafeForKey:@"contractName"];
+            return cell;
+        }else {
             NSString *cellindifier = @"secondIndexPath";
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellindifier];
             if (!cell) {
@@ -697,7 +697,7 @@
             
             cell.textLabel.text = @"测试";
             return cell;
-//        }
+        }
     } else {
         NSString *cellindifier = @"cell";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellindifier];
@@ -945,9 +945,12 @@
 
 - (IBAction)gotoGoldInvestmentVC:(id)sender {
     
+//    UCFGoldAuthorizationViewController *goldAuthorizationVC = [[UCFGoldAuthorizationViewController alloc]initWithNibName:@"UCFGoldAuthorizationViewController" bundle:nil];
+//    [self.navigationController pushViewController:goldAuthorizationVC  animated:YES];
+    
     UCFGoldPurchaseViewController *goldAuthorizationVC = [[UCFGoldPurchaseViewController alloc]initWithNibName:@"UCFGoldPurchaseViewController" bundle:nil];
     [self.navigationController pushViewController:goldAuthorizationVC  animated:YES];
-    
+
     
 }
 @end
