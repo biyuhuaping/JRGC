@@ -14,7 +14,6 @@
 #import "UCFToolsMehod.h"
 #import "UCFInvestmentView.h"
 #import "FullWebViewController.h"
-#import "UCFCompleteBidViewCtrl.h"//投标成功页
 #import "UCFTopUpViewController.h"
 #import "CalculatorView.h"
 #import "AppDelegate.h"
@@ -200,12 +199,12 @@
     if ((int)gondDouBalance > 0) {
         isGongDouSwitch = YES;
     }
-    if (isCompanyAgent) {
-        isHaveCashNum = NO;
-        isHaveCouponNum = NO;
-        isGongDouSwitch = NO;
-        isHasOverdueGongDou = NO;
-    }
+//    if (isCompanyAgent) {如果是企业
+//        isHaveCashNum = NO;
+//        isHaveCouponNum = NO;
+//        isGongDouSwitch = NO;
+//        isHasOverdueGongDou = NO;
+//    }
     _bidTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _bidTableView.delegate = self;
     _bidTableView.dataSource = self;
@@ -670,28 +669,7 @@
     NSString *data = (NSString *)result;
     NSMutableDictionary *dic = [data objectFromJSONString];
     NSString *rstcode = dic[@"status"];
-    if (tag.intValue == kSXTagPrdClaimsSaveDeals) {
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-        if ([rstcode intValue] == 1) {
-            //跳转投标成功页
-            DBLOG(@"投标成功页的数据字典:%@",dic);
-            UCFCompleteBidViewCtrl *compl = [[UCFCompleteBidViewCtrl alloc]initWithNibName:@"UCFCompleteBidViewCtrl" bundle:nil];
-            compl.dataDict = [NSMutableDictionary dictionaryWithDictionary:dic];
-            compl.superView = self;
-            [self.navigationController pushViewController:compl animated:YES];
-//            isSucessInvest = YES;
-
-        } else {
-            if ([rstcode intValue] == 15) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:dic[@"statusdes"] delegate:self cancelButtonTitle:@"返回列表" otherButtonTitles: nil];
-                alert.tag = 10023;
-                [alert show];
-            } else {
-                [self reloadMainView];
-                [AuxiliaryFunc showAlertViewWithMessage:dic[@"statusdes"]];
-            }
-        }
-    } else if (tag.intValue == kSXTagPrdClaimsDealBid){
+    if (tag.intValue == kSXTagPrdClaimsDealBid){
         if ([[dic valueForKey:@"status"] integerValue] == 1) {
             self.dataDict = dic;
             self.apptzticket = [NSString stringWithFormat:@"%@",[_dataDict objectForKey:@"apptzticket"]];

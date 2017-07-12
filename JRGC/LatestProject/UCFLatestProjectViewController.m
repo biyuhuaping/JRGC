@@ -9,7 +9,6 @@
 #import "UCFLatestProjectViewController.h"
 #import "InvestmentCell.h"
 #import "UCFProjectDetailViewController.h"//标详情
-#import "UCFCompleteBidViewCtrl.h"
 #import "UCFPurchaseBidViewController.h"//投资页面
 #import "UCFLoginViewController.h"
 #import "FullWebViewController.h"

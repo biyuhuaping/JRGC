@@ -34,7 +34,7 @@
 #import "UCFHomeListNavView.h"
 #import "MaskView.h"
 #import "MongoliaLayerCenter.h"
-
+#import "UCFGoldAccountViewController.h"
 #import "UCFUserInfoListItem.h"
 #import "Touch3DSingle.h"
 #import "BJGridItem.h"
@@ -42,7 +42,7 @@
 #import "BaseNavigationViewController.h"
 #import "FullWebViewController.h"
 #import "UCFBatchBidController.h"
-
+#import "UCFPurchaseBidViewController.h"
 @interface UCFHomeViewController () <UCFHomeListViewControllerDelegate, UCFHomeListNavViewDelegate, UCFUserInformationViewControllerDelegate,BJGridItemDelegate>
 @property (strong, nonatomic) UCFCycleImageViewController *cycleImageVC;
 @property (strong, nonatomic) UCFUserInformationViewController *userInfoVC;
@@ -335,6 +335,14 @@
                 [self showLoginView];
             } else {
                 HSHelper *helper = [HSHelper new];
+                
+               NSString *messageStr =  [helper checkCompanyIsOpen:self.accoutType];
+                if (![messageStr isEqualToString:@""]) {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil];
+                    [alert show];
+                    return;
+                }
+                
                 if (![helper checkP2POrWJIsAuthorization:self.accoutType]) {
                     [helper pushP2POrWJAuthorizationType:self.accoutType nav:self.navigationController];
                     return;
@@ -464,6 +472,16 @@
                 [self showLoginView];
             } else {
                  HSHelper *helper = [HSHelper new];
+                
+                
+                NSString *messageStr =  [helper checkCompanyIsOpen:self.accoutType];
+                if (![messageStr isEqualToString:@""]) {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil];
+                    [alert show];
+                    return;
+                }
+
+                
                 if (![helper checkP2POrWJIsAuthorization:self.accoutType]) {
                     [helper pushP2POrWJAuthorizationType:self.accoutType nav:self.navigationController];
                     
@@ -627,9 +645,12 @@
     }
     if ([item.title isEqualToString:@"微金账户"]) {
         self.accoutType =  SelectAccoutTypeP2P;
-    }
-    else if ([item.title isEqualToString:@"尊享账户"]) {
+    } else if ([item.title isEqualToString:@"尊享账户"]) {
         self.accoutType = SelectAccoutTypeHoner;
+    } else if ([item.title isEqualToString:@"黄金账户"]) {
+        UCFGoldAccountViewController *subVC = [[UCFGoldAccountViewController alloc] initWithNibName:@"UCFGoldAccountViewController" bundle:nil];
+        [self.navigationController pushViewController:subVC animated:YES];
+        return;
     }
 
     if ([self checkUserCanInvestIsDetail:YES type:self.accoutType]) {

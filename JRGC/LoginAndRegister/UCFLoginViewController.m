@@ -65,12 +65,20 @@
         _loginViewFace.hidden = NO;
     }else{
         _loginViewFace.hidden = YES;
-        [_loginView setFirstResponder];//***弹出键盘
+        if (!_isForce) {
+            [_loginView setFirstResponder];//***弹出键盘
+        }
     }
      //最近一次登录的用户名
     NSString *lastName = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastLoginName"];
     if (lastName.length!=0) {
-        [_loginView setUserNameFieldText:lastName];
+        
+        NSInteger selectTag =  [[NSUserDefaults standardUserDefaults]  integerForKey:@"selectTag"];
+        if (self.selectTag == selectTag) {//个人登录
+            [_loginView setUserNameFieldText:lastName];
+        }else {
+             [_loginView setUserNameFieldText:@""];
+        }
     }
     
     if ([_sourceVC isEqualToString:@"errorNum"]) {
@@ -171,6 +179,14 @@
 -(void)seletedSegmentedControl:(NSInteger)seletedTag
 {
     self.selectTag = seletedTag;
+    //最近一次登录的用户名
+    NSString *lastName = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastLoginName"];
+    NSInteger selectTag =  [[NSUserDefaults standardUserDefaults]  integerForKey:@"selectTag"];
+    if (self.selectTag == selectTag) {
+        [_loginView setUserNameFieldText:lastName];
+    }else{
+         [_loginView setUserNameFieldText:@""];
+    }
 }
 
 
@@ -221,10 +237,15 @@
             NSString *md5Str = _loginView.passwordFieldText.length > 0 ? [UCFToolsMehod md5:[MD5Util MD5Pwd:_loginView.passwordFieldText]] :[UCFToolsMehod md5:@""];
             NSString *yanQian = [NSString stringWithFormat:@"%@%@%@",_loginView.userNameFieldText,md5Str,dic[@"data"][@"userInfo"][@"time"]];
             NSString *gcmCode = [(NSDictionary *)dic[@"data"][@"userInfo"] objectSafeForKey: @"promotionCode"];
+            BOOL isCompanyAgent = [[(NSDictionary *)dic[@"data"][@"userInfo"] objectSafeForKey: @"isCompanyAgent"] boolValue];
             NSString *signatureStr  = [UCFToolsMehod md5:yanQian];
             [[NSUserDefaults standardUserDefaults] setObject:signatureStr forKey:SIGNATUREAPP];
             [[NSUserDefaults standardUserDefaults] setValue:gcmCode forKey:@"gcmCode"];
+            [[NSUserDefaults standardUserDefaults] setBool:isCompanyAgent forKey:@"isCompanyAgentType" ];
+            [[NSUserDefaults standardUserDefaults] setInteger:self.selectTag forKey:@"selectTag"];
             [[NSUserDefaults standardUserDefaults] synchronize];
+            
+            
     
             [[NSNotificationCenter defaultCenter] postNotificationName:@"LatestProjectUpdate" object:nil];
             //更新个人中心数据
@@ -404,7 +425,9 @@
 #pragma mark - 选择密码登陆后-将键盘弹出的回调用
 -(void)setFirstResponder
 {
-     [_loginView setFirstResponder];//***弹出键盘
+    if (!_isForce) {
+        [_loginView setFirstResponder];//***弹出键盘
+    }
 }
 
 /**
