@@ -71,6 +71,9 @@
                                     <constraint firstAttribute="height" constant="29" id="wue-t5-KJf"/>
                                 </constraints>
                                 <state key="normal" image="invest_btn_jisuanqi"/>
+                                <connections>
+                                    <action selector="showGoldCalculatorView:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="o4k-eo-cbg"/>
+                                </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jAz-mU-z62">
                                 <rect key="frame" x="15" y="7" width="251" height="37"/>
@@ -82,7 +85,7 @@
                                         </constraints>
                                         <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                                 <real key="value" value="0.0"/>
@@ -101,6 +104,9 @@
                                         <state key="normal" title="全投">
                                             <color key="titleColor" red="0.29019607843137252" green="0.63137254901960782" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="clickAllInvestmentBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Qc2-yi-NC5"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -249,10 +255,18 @@
                                 <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ay6-ce-dRb">
+                                <rect key="frame" x="274" y="7" width="31" height="30"/>
+                                <state key="normal" title="充值"/>
+                                <connections>
+                                    <action selector="clickGoldRechargeButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="wCk-km-YXC"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="OrX-gL-SNr" secondAttribute="trailing" id="2II-cf-QDX"/>
+                            <constraint firstAttribute="trailing" secondItem="ay6-ce-dRb" secondAttribute="trailing" constant="15" id="2gH-2t-upb"/>
                             <constraint firstItem="RPs-NX-Y26" firstAttribute="leading" secondItem="BIn-V3-i5p" secondAttribute="leading" constant="101" id="3ob-tP-HbJ"/>
                             <constraint firstAttribute="trailing" secondItem="Hrz-pP-AGv" secondAttribute="trailing" id="5cb-ck-xm3"/>
                             <constraint firstAttribute="bottom" secondItem="Hrz-pP-AGv" secondAttribute="bottom" id="F5c-3r-BoI"/>
@@ -261,6 +275,7 @@
                             <constraint firstItem="Hrz-pP-AGv" firstAttribute="leading" secondItem="BIn-V3-i5p" secondAttribute="leading" constant="15" id="dNr-aM-Wn5"/>
                             <constraint firstItem="RPs-NX-Y26" firstAttribute="centerY" secondItem="BIn-V3-i5p" secondAttribute="centerY" id="kRE-Tb-8nE"/>
                             <constraint firstAttribute="height" constant="44" id="mXT-AE-AIq"/>
+                            <constraint firstItem="ay6-ce-dRb" firstAttribute="centerY" secondItem="BIn-V3-i5p" secondAttribute="centerY" id="tKK-Ig-aQN"/>
                             <constraint firstItem="6OR-Kb-pO9" firstAttribute="leading" secondItem="BIn-V3-i5p" secondAttribute="leading" constant="15" id="w06-49-Vu7"/>
                             <constraint firstItem="6OR-Kb-pO9" firstAttribute="centerY" secondItem="BIn-V3-i5p" secondAttribute="centerY" id="xz8-Fq-j6u"/>
                         </constraints>
@@ -283,6 +298,9 @@
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1XO-EE-vhq">
                                 <rect key="frame" x="256" y="6.5" width="51" height="31"/>
                                 <color key="onTintColor" red="1" green="0.75294117650000003" blue="0.1529411765" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="clickGoldSwitch:" destination="KGk-i7-Jjw" eventType="valueChanged" id="GyE-dI-CAf"/>
+                                </connections>
                             </switch>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ciA-MJ-h3O">
                                 <rect key="frame" x="0.0" y="43.5" width="320" height="0.5"/>
@@ -332,7 +350,12 @@
                     <constraint firstAttribute="trailing" secondItem="SLg-ej-RVc" secondAttribute="trailing" id="ymQ-80-uwH"/>
                 </constraints>
             </tableViewCellContentView>
-            <point key="canvasLocation" x="-164" y="-55"/>
+            <connections>
+                <outlet property="GoldCalculatorView" destination="CQz-aB-job" id="0y8-c4-dGn"/>
+                <outlet property="goldSwitch" destination="1XO-EE-vhq" id="htV-T6-XQ0"/>
+                <outlet property="moneyTextField" destination="KEI-IF-L4v" id="hPW-rP-DVC"/>
+            </connections>
+            <point key="canvasLocation" x="-354" y="-36"/>
         </tableViewCell>
     </objects>
     <resources>
