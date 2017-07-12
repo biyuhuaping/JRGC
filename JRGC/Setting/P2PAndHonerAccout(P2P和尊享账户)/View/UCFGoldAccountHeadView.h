@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface UCFGoldAccountHeadView : UIView
-
+//更新黄金账户UI
+- (void)updateGoldAccount:(NSDictionary *)dataDic;
 @end

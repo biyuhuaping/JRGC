@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface GoldAccountFirstCell : UITableViewCell
-
+- (void)updateaVailableMoenyLab:(NSString *)availableMoeny;
 @end

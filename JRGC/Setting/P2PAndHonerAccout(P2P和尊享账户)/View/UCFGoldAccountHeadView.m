@@ -8,6 +8,9 @@
 
 #import "UCFGoldAccountHeadView.h"
 #import "MjAlertView.h"
+#import "YcArray.h"
+#import "YcMutableArray.h"
+#import "UIDic+Safe.h"
 @interface UCFGoldAccountHeadView ()
 @property (weak, nonatomic) IBOutlet UILabel *holdGoldGram;
 
@@ -48,6 +51,14 @@
     self.realtimeGoldPrice.textColor = UIColorWithRGB(0x555555);
     self.dealGoldPrice.textColor = UIColorWithRGB(0x555555);
     self.upBaseView.backgroundColor = UIColorWithRGB(0x5B6993);
-
 }
+- (void)updateGoldAccount:(NSDictionary *)dataDic
+{
+    self.holdGoldGram.text = [dataDic objectSafeForKey:@"holdGoldAmount"];
+    self.availableGoldNum.text = [dataDic objectSafeForKey:@"availableGoldAmount"];
+    self.totalRecoveryGold.text = [dataDic objectSafeForKey:@"collectGoldAmount"];
+    self.dealGoldPrice.text = [dataDic objectSafeForKey:@"dealPrice"];
+    
+}
+
 @end

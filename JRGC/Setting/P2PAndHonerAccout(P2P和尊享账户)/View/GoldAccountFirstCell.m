@@ -24,7 +24,10 @@
     self.availableMoenyLab.textColor = UIColorWithRGB(0x555555);
 
 }
-
+- (void)updateaVailableMoenyLab:(NSString *)availableMoeny
+{
+    self.availableMoenyLab.text = availableMoeny;
+}
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

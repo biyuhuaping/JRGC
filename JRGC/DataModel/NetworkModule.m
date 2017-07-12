@@ -1296,6 +1296,13 @@ static NetworkModule *gInstance = NULL;
         case kSXTagCurrentDayInfo:
             parameter = [NEW_SERVER_IP stringByAppendingString:CURRENTDAYINFO];
             break;
+        case kSXTagGoldAccount:
+            parameter = [NEW_SERVER_IP stringByAppendingString:GOLDACCOUNT];
+            break;
+        case ksxTagGoldCurrentPrice:
+            parameter = [NEW_SERVER_IP stringByAppendingString:CURRENTGOLDPRICE];
+            break;
+            
     }
     //给原有参数字典添加公共参数
     if (!data) {

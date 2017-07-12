@@ -257,7 +257,8 @@
 #define CALENDARHEADER      @"api/myPayment/v2/myPaymentInfo.json" //日历的月份和头部信息
 #define CALENDARINFO        @"api/myPayment/v2/myPaymentDay.json"  //日历的当前月信息
 #define CURRENTDAYINFO      @"api/myPayment/v2/myPaymentDetail.json" //当前日的回款信息
-
+#define GOLDACCOUNT         @"api/nmAccount/v2/getNmAccountInfo.json" //获取黄金账户信息
+#define CURRENTGOLDPRICE    @"api/nmCommon/v2/getRealTimePrice.json" //获取当前黄金价格
 
 
 enum kPostStatus{
@@ -478,6 +479,8 @@ enum kSXTag
     kSXTagCalendarHeader,               //日历的月份和头部信息
     kSXTagCalendarInfo,                 //日历的月信息
     kSXTagCurrentDayInfo,               //当前日的回款信息
+    kSXTagGoldAccount,                   //黄金账户信息
+    ksxTagGoldCurrentPrice              //当前黄金价格
 };
 
 typedef enum kSXTag kSXTag;
