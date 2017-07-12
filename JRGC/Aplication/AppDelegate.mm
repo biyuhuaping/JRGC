@@ -63,6 +63,7 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
     [UcfWalletSDK setEnvironment:1];
     //修改webView标识
+    
     [self setWebViewUserAgent];
     [UCFSession sharedManager].delegate = self;
 
