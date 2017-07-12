@@ -11,12 +11,15 @@
 #import "UIImage+Misc.h"
 #import "HMSegmentedControl.h"
 #import "UCFGoldDetailHeaderView.h"
-
-@interface UCFGoldDetailViewController ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate>
+//#import "UCFContractTableCell.h"
+//#import "UCFGoldAuthorizationViewController.h"
+#import "UCFGoldPurchaseViewController.h"
+@interface UCFGoldDetailViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
 {
     
     UILabel *_topLabel;
     HMSegmentedControl *_topSegmentedControl;
+    HMSegmentedControl *_segmentedControl;
     BOOL _oneScrollPull;
     NSInteger _selectIndex;
     UIImageView *_navigationStyleBar;
@@ -25,6 +28,10 @@
     UILabel *_activitylabel3;//四级标签
     UILabel *_activitylabel4;//五级标签
     NSArray *_prdLabelsList;
+    
+    UIView *bottomBkView;
+    UIView *_headerView;
+    float  bottomViewYPos;
 }
 
 @property(nonatomic,strong) IBOutlet UIScrollView *oneScroll;
@@ -32,6 +39,8 @@
 @property(nonatomic,strong)NSArray *titleArray;
 @property (weak, nonatomic) IBOutlet UIView *investBgView;
 @property (nonatomic,strong)UCFGoldDetailHeaderView  *goldHeaderView;
+- (IBAction)gotoGoldInvestmentVC:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *GoldInvestmentBtn;
 
 @end
 
@@ -131,6 +140,16 @@
     self.goldHeaderView.frame = CGRectMake(0, 0, ScreenWidth, 225);
     [self.oneScroll addSubview:self.goldHeaderView];
     
+    _prdLabelsList = @[@"送红包",@"限投1次最高30万",@"可用工豆"];
+    
+    if(_prdLabelsList.count > 0){
+      bottomViewYPos = 30;
+      [self drawMarkView];
+    }else{
+      bottomViewYPos = 10;
+    }
+
+    [self  drawTypeBottomView];
     
 //    detailView = [[UCFBidNewDetailView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, BidDetailScrollViewHeight) WithProjectType:PROJECTDETAILTYPENORMAL prdList:_prdLabelsList dataDic:_dataDic isP2P:_isP2P];
 //    detailView.delegate = self;
@@ -174,18 +193,30 @@
     
     //标签数组
     NSArray *prdLabelsList = _prdLabelsList;
-    NSMutableArray *labelPriorityArr = [NSMutableArray arrayWithCapacity:4];
-    if (![prdLabelsList isEqual:[NSNull null]]) {
-        for (NSDictionary *dic in prdLabelsList) {
-            NSInteger labelPriority = [dic[@"labelPriority"] integerValue];
-            if (labelPriority > 1) {
-                if ([dic[@"labelName"] rangeOfString:@"起投"].location == NSNotFound) {
-                    [labelPriorityArr addObject:dic[@"labelName"]];
-                }
-            }
-        }
-    }
-    
+//    NSMutableArray *labelPriorityArr = [NSMutableArray arrayWithCapacity:4];
+   NSMutableArray *labelPriorityArr = [NSMutableArray arrayWithArray:_prdLabelsList];
+//    if (![prdLabelsList isEqual:[NSNull null]]) {
+//        for (NSDictionary *dic in prdLabelsList) {
+//            NSInteger labelPriority = [dic[@"labelPriority"] integerValue];
+//            if (labelPriority > 1) {
+//                if ([dic[@"labelName"] rangeOfString:@"起投"].location == NSNotFound) {
+//                    [labelPriorityArr addObject:dic[@"labelName"]];
+//                }
+//            }
+//        }
+//    }
+//    NSMutableArray *labelPriorityArr = [NSMutableArray arrayWithCapacity:4];
+//    if (![prdLabelsList isEqual:[NSNull null]]) {
+//        for (NSDictionary *dic in prdLabelsList) {
+//            NSInteger labelPriority = [dic[@"labelPriority"] integerValue];
+//            if (labelPriority > 1) {
+//                if ([dic[@"labelName"] rangeOfString:@"起投"].location == NSNotFound) {
+//                    [labelPriorityArr addObject:dic[@"labelName"]];
+//                }
+//            }
+//        }
+//    }
+//    
     //重设标签位置
     if ([labelPriorityArr count] == 0) {
         [_activitylabel1 setHidden:YES];
@@ -265,10 +296,102 @@
     }
 }
 
+- (void)drawTypeBottomView
+
+{
+    int row = 4;
+    float view_y =  0 + CGRectGetMaxY(self.goldHeaderView.frame) + bottomViewYPos;
+    
+    bottomBkView = [[UIView alloc] initWithFrame:CGRectMake(0, view_y, ScreenWidth, 44*row)];
+    bottomBkView.backgroundColor = [UIColor whiteColor];
+    [self.oneScroll addSubview:bottomBkView];
+//
+//    if (!_isP2P) {
+//        [UCFToolsMehod viewAddLine:bottomBkView Up:YES];
+//    }
+//    [UCFToolsMehod viewAddLine:bottomBkView Up:NO];
+    
+    //固定起息日
+    UIImageView *guImageV = [[UIImageView alloc] initWithFrame:CGRectMake(IconXPos, IconYPos, 22, 22)];
+    guImageV.image = [UIImage imageNamed:@"invest_icon_redgu"];
+    [bottomBkView addSubview:guImageV];
+    
+    UILabel *guLabel = [UILabel labelWithFrame:CGRectMake(CGRectGetMaxX(guImageV.frame) + 5, IconYPos, 100, 22) text:@"还款方式" textColor:UIColorWithRGB(0x555555) font:[UIFont systemFontOfSize:13]];
+    guLabel.textAlignment = NSTextAlignmentLeft;
+    [bottomBkView addSubview:guLabel];
+    
+//    _fixedUpDateLabel = [UILabel labelWithFrame:CGRectMake(ScreenWidth - 15 - LabelWidTh, IconYPos, LabelWidTh, 22) text:@"2015-12-31" textColor:UIColorWithRGB(0x333333) font:[UIFont boldSystemFontOfSize:13]];
+//    _fixedUpDateLabel.textAlignment = NSTextAlignmentRight;
+//    [bottomBkView addSubview:_fixedUpDateLabel];
+//    
+//    NSString *fixUpdate = [[_dic objectForKey:@"prdClaims"]objectForKey:@"fixedDate"];
+//    NSString *guTitle;
+//    NSDate *fixDate = [NSDateManager getDateWithDateDes:fixUpdate dateFormatterStr:@"yyyy-MM-dd"];
+//    guTitle = [NSString stringWithFormat:@"%@",[NSDateManager getDateDesWithDate:fixDate dateFormatterStr:@"yyyy-MM-dd"]];
+//    _fixedUpDateLabel.text = guTitle;
+    
+    
+    //****************分隔线**************
+    UIView *line1 = [[UIView alloc] initWithFrame:CGRectMake(15, 44, ScreenWidth - 15, 0.5)];
+    line1.backgroundColor = UIColorWithRGB(0xe3e5ea);
+    [bottomBkView addSubview:line1];
+    //****************分隔线**************
+    
+    //还款方式
+    UIImageView *huankuanImageV = [[UIImageView alloc] initWithFrame:CGRectMake(IconXPos,44 + IconYPos, 22, 22)];
+    huankuanImageV.image = [UIImage imageNamed:@"particular_icon_repayment.png"];
+    [bottomBkView addSubview:huankuanImageV];
+    
+    UILabel *huankuanLabel = [UILabel labelWithFrame:CGRectMake(CGRectGetMaxX(guImageV.frame) + 5, 44 + IconYPos, 100, 22) text:@"黄金品种" textColor:UIColorWithRGB(0x555555) font:[UIFont systemFontOfSize:13]];
+    huankuanLabel.textAlignment = NSTextAlignmentLeft;
+    [bottomBkView addSubview:huankuanLabel];
+    
+//    _markTypeLabel = [UILabel labelWithFrame:CGRectMake(ScreenWidth - 15 - LabelWidTh, 44 + IconYPos, LabelWidTh, 22) text:@"一次还清" textColor:UIColorWithRGB(0x333333) font:[UIFont boldSystemFontOfSize:13]];
+//    _markTypeLabel.textAlignment = NSTextAlignmentRight;
+//    [bottomBkView addSubview:_markTypeLabel];
+//    
+    //****************分隔线**************
+    UIView *line2 = [[UIView alloc] initWithFrame:CGRectMake(15, 44 * 2, ScreenWidth - 15, 0.5)];
+    line2.backgroundColor = UIColorWithRGB(0xe3e5ea);
+    [bottomBkView addSubview:line2];
+    //****************分隔线**************
+
+        //起投金额
+        UIImageView *qitouImageV = [[UIImageView alloc] initWithFrame:CGRectMake(IconXPos,44*2 + IconYPos, 22, 22)];
+        qitouImageV.image = [UIImage imageNamed:@"particular_icon_money.png"];
+        [bottomBkView addSubview:qitouImageV];
+        
+        UILabel *qitouLabel = [UILabel labelWithFrame:CGRectMake(CGRectGetMaxX(guImageV.frame) + 5, 44*2 + IconYPos, 100, 22) text:@"起购克重" textColor:UIColorWithRGB(0x555555) font:[UIFont systemFontOfSize:13]];
+        qitouLabel.textAlignment = NSTextAlignmentLeft;
+        [bottomBkView addSubview:qitouLabel];
+        
+//        _investmentAmountLabel = [UILabel labelWithFrame:CGRectMake(ScreenWidth - 15 - LabelWidTh, 44*2 + IconYPos, LabelWidTh, 22) text:@"100元起" textColor:UIColorWithRGB(0x333333) font:[UIFont boldSystemFontOfSize:13]];
+//        _investmentAmountLabel.textAlignment = NSTextAlignmentRight;
+//        [bottomBkView addSubview:_investmentAmountLabel];
+//    //****************分隔线**************
+    UIView *line3 = [[UIView alloc] initWithFrame:CGRectMake(15, 44*3, ScreenWidth - 15, 0.5)];
+    line3.backgroundColor = UIColorWithRGB(0xe3e5ea);
+    [bottomBkView addSubview:line3];
+//    //****************分隔线**************
+    UIImageView *qitouImageV1 = [[UIImageView alloc] initWithFrame:CGRectMake(IconXPos,44*3 + IconYPos, 22, 22)];
+    qitouImageV1.image = [UIImage imageNamed:@"particular_icon_guarantee.png"];
+    [bottomBkView addSubview:qitouImageV1];
+    UILabel *qitouLabel1 = [UILabel labelWithFrame:CGRectMake(CGRectGetMaxX(qitouImageV.frame) + 5, 44*3 + IconYPos, 120 , 22) text:@"买入手续费(每克)" textColor:UIColorWithRGB(0x555555) font:[UIFont systemFontOfSize:13]];
+    qitouLabel1.textAlignment = NSTextAlignmentLeft;
+    [bottomBkView addSubview:qitouLabel1];
+//    _insNameLabel = [UILabel labelWithFrame:CGRectMake(CGRectGetMaxX(qitouLabel.frame) + 5, CGRectGetMinY(qitouLabel.frame), ScreenWidth -CGRectGetMaxX(qitouLabel.frame) - 5 - 15, 22) text:insName textColor:UIColorWithRGB(0x333333) font:[UIFont boldSystemFontOfSize:13]];
+//    _insNameLabel.textAlignment = NSTextAlignmentRight;
+//    [bottomBkView addSubview:_insNameLabel];
+    
+    
+    [self drawPullingView];
+}
+
+
 //上拉view
 - (void)drawPullingView
 {
-    UIView *pullingBkView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_oneScroll.frame)-42, ScreenWidth, 42)];
+    UIView *pullingBkView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(bottomBkView.frame), ScreenWidth, 42)];
 //    pullingBkView.backgroundColor = [UIColor redColor];
     [_oneScroll addSubview:pullingBkView];
     pullingBkView.backgroundColor = [UIColor clearColor];
@@ -305,7 +428,7 @@
 
     _titleArray = [[NSArray alloc] initWithObjects:@"基础详情",@"认购记录", nil];
 
-    _twoTableview = [[UITableView alloc] initWithFrame:CGRectMake(0, ScreenHeight, ScreenWidth, ScreenHeight + 57  ) style:UITableViewStyleGrouped];
+    _twoTableview = [[UITableView alloc] initWithFrame:CGRectMake(0, ScreenHeight, ScreenWidth, ScreenHeight + 57  ) style:UITableViewStylePlain];
     _twoTableview.backgroundColor = [UIColor clearColor];
     //_tableView.separatorColor = UIColorWithRGB(0xeff0f3);
     _twoTableview.delegate = self;
@@ -313,6 +436,7 @@
     //_tableView.bounces = NO;
     _twoTableview.showsVerticalScrollIndicator = NO;
     _twoTableview.tag = 1002;
+    _selectIndex = 0;
     if (kIS_IOS7) {
         [_twoTableview setSeparatorInset:UIEdgeInsetsMake(0,0,0,0)];
         _twoTableview.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
@@ -323,7 +447,8 @@
     [_twoTableview bringSubviewToFront:self.investBgView];
     _twoTableview.contentInset = UIEdgeInsetsMake(0, 0, 10, 0);
     //    _twoTableview.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
-    [self addTopSegment];
+//    [_twoTableview addSubview: addTopSegment];
+//    [self addTopSegment];
     
     UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 0.5)];
     lineView.backgroundColor = UIColorWithRGB(0xd8d8d8);
@@ -365,9 +490,9 @@
     _topSegmentedControl.selectionIndicatorHeight = 2.0f;
     _topSegmentedControl.backgroundColor = [UIColor whiteColor];
     _topSegmentedControl.font = [UIFont systemFontOfSize:14];
-    _topSegmentedControl.textColor = UIColorWithRGB(0x3c3c3c);
-    _topSegmentedControl.selectedTextColor = UIColorWithRGB(0xfd4d4c);
-    _topSegmentedControl.selectionIndicatorColor = UIColorWithRGB(0xfd4d4c);
+    _topSegmentedControl.textColor = UIColorWithRGB(0x555555);
+    _topSegmentedControl.selectedTextColor = UIColorWithRGB(0xfc8f0e);
+    _topSegmentedControl.selectionIndicatorColor = UIColorWithRGB(0xfc8f0e);
     _topSegmentedControl.selectionStyle = HMSegmentedControlSelectionStyleTextWidthStripe;
     _topSegmentedControl.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown;
     _topSegmentedControl.shouldAnimateUserSelection = YES;
@@ -386,40 +511,300 @@
     if (_selectIndex != 0) {
         _topSegmentedControl.selectedSegmentIndex = _selectIndex;
     }
-    
 }
-//-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-//    
-//    return nil;
-//}
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    if(section == 0)
+    {
+        if (!_headerView) {
+            _headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 44)];
+            _headerView.backgroundColor = UIColorWithRGB(0xebebee);
+            _segmentedControl = [[HMSegmentedControl alloc] initWithSectionTitles:_titleArray];
+            [_segmentedControl setFrame:CGRectMake(0, 0, ScreenWidth, 44)];
+            _segmentedControl.selectionIndicatorHeight = 2.0f;
+            _segmentedControl.backgroundColor = [UIColor whiteColor];
+            _segmentedControl.font = [UIFont systemFontOfSize:14];
+            _segmentedControl.textColor = UIColorWithRGB(0x555555);
+            _segmentedControl.selectedTextColor = UIColorWithRGB(0xfc8f0e);
+            _segmentedControl.selectionIndicatorColor = UIColorWithRGB(0xfc8f0e);
+            _segmentedControl.selectionStyle = HMSegmentedControlSelectionStyleTextWidthStripe;
+            _segmentedControl.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown;
+            _segmentedControl.shouldAnimateUserSelection = YES;
+            [_segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
+            [_headerView addSubview:_segmentedControl];
+            for (int i = 0 ; i < _titleArray.count -1; i++) {
+                UIImageView *linebk = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"particular_tabline.png"]];
+                linebk.frame = CGRectMake(ScreenWidth/_titleArray.count * (i + 1), 16, 1, 12);
+                [_segmentedControl addSubview:linebk];
+            }
+            
+            [self viewAddLine:_headerView Up:YES];
+            [self viewAddLine:_segmentedControl Up:YES];
+        }
+        return _headerView;
+    }else{
+        
+        if (_selectIndex == 0) {
+            if(section == 2) {
+                UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 50)];
+                headView.backgroundColor = UIColorWithRGB(0xebebee);
+                UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 10, ScreenWidth, 40)];
+                view.backgroundColor = UIColorWithRGB(0xf9f9f9);
+                UILabel *labelTitle = [[UILabel alloc] initWithFrame:CGRectMake(25/2.0, 12, ScreenWidth/2, 16)];
+                labelTitle.text = @"项目详情";
+                labelTitle.textColor = UIColorWithRGB(0x333333);
+                labelTitle.backgroundColor = [UIColor clearColor];
+                labelTitle.font = [UIFont systemFontOfSize:14];
+                [view addSubview:labelTitle];
+                [headView addSubview:view];
+                [self viewAddLine:headView Up:YES];
+                [self viewAddLine:headView Up:NO];
+                [self viewAddLine:view Up:YES];
+                return headView;
+            }else {
+                UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 10)];
+                headView.backgroundColor = UIColorWithRGB(0xebebee);
+                //[self viewAddLine:headView Up:YES];
+                UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, headView.frame.size.height - 0.5, ScreenWidth, 0.5)];
+                lineView.backgroundColor = UIColorWithRGB(0xd8d8d8);
+                [headView addSubview:lineView];
+                return headView;
+            }
+
+        }else
+        {
+            if(section == 1) {
+                UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 30)];
+                headView.backgroundColor = UIColorWithRGB(0xf9f9f9);
+                //[self viewAddLine:headView Up:YES];
+                [self viewAddLine:headView Up:NO];
+                UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, headView.frame.size.height - 0.5, ScreenWidth, 0.5)];
+                lineView.backgroundColor = UIColorWithRGB(0xeff0f3);
+                [headView addSubview:lineView];
+                
+                UILabel *placehoderLabel = [[UILabel alloc] initWithFrame:CGRectMake(XPOS,9 , ScreenWidth - XPOS * 2, 12)];
+                placehoderLabel.font = [UIFont boldSystemFontOfSize:12];
+                placehoderLabel.textColor = UIColorWithRGB(0x333333);
+                placehoderLabel.textAlignment = NSTextAlignmentLeft;
+                placehoderLabel.backgroundColor = [UIColor clearColor];
+                NSString *str = @"购买记录";
+//                placehoderLabel.text = [NSString stringWithFormat:@"共%lu笔%@",(unsigned long)[[_dataDic objectForKey:@"prdOrders"] count],str];
+                placehoderLabel.text = [NSString stringWithFormat:@"共10笔购买记录"];
+                [headView addSubview:placehoderLabel];
+                return headView;
+            }
+        }
+
     
-    return 50;
+    
+    }
+    return nil;
 }
-//-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    
-//    return 44.f;
-//}
-- (NSInteger)numberOfRowsInSection:(UITableView *)tableView
+- (void)viewAddLine:(UIView *)view Up:(BOOL)up
 {
-    return 1;
+    if (up) {
+        UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 0.5)];
+        lineView.backgroundColor = UIColorWithRGB(0xd8d8d8);
+        [view addSubview:lineView];
+    }else{
+        UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, view.frame.size.height - 0.5, ScreenWidth, 0.5)];
+        lineView.backgroundColor = UIColorWithRGB(0xeff0f3);
+        [view addSubview:lineView];
+    }
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if (section == 0) {
+           return 44.0f;
+    }else{
+        if (_selectIndex == 0) {
+            if(section == 0)
+            {
+                return 44;
+            } else if (section == 1) {
+                return 10;
+            }else{
+                return 50;
+            }
+        }else{
+            if(section == 1) {
+                return 30.f;
+            }
+        }
+    }
+    
+    return 0;
+
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPat
+{
+    return 44;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+     if (_selectIndex == 0) {
+         
+         return 3;
+     }else{
+         
+         return 2;
+     }
+}
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    if (_selectIndex == 0) {
+        
+        if(section == 1) {
+            return 3;
+        } else if(section == 2) {
+            return 1;
+        }
+    }else{
+        if(section == 1) {
+            return 5;
+        }
+    }
+    return 0;
 }
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-   static NSString *cellId = @"tableveiwcell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellId];
+    if (_selectIndex == 0){
+        
+//            if ([indexPath section] == 1) {
+//            NSString *cellindifier = @"UCFContractTableCell";
+//             UCFContractTableCell *cell = [tableView dequeueReusableCellWithIdentifier:cellindifier];
+//            if (!cell) {
+//                cell = [[[NSBundle mainBundle] loadNibNamed:@"UCFContractTableCell" owner:nil options:nil] firstObject];
+//                cell.accessoryType =UITableViewCellAccessoryDisclosureIndicator;
+//                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//            }
+//            cell.contractTitleLabel.text = @"合同测试";
+////            NSDictionary *dict = [_firstSectionArray objectAtIndex:indexPath.row];
+////            NSString * imageUrlStr = [dict objectSafeForKey:@"iconUrl"];
+////            [inconImageView  sd_setImageWithURL:[NSURL URLWithString:imageUrlStr]];
+////            titleLabel.text = [dict objectSafeForKey:@"contractName"];
+//            return cell;
+//        }else {
+            NSString *cellindifier = @"secondIndexPath";
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellindifier];
+            if (!cell) {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellindifier];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            }
+            //            NSDictionary *dict = [_firstSectionArray objectAtIndex:indexPath.row];
+            //            NSString * imageUrlStr = [dict objectSafeForKey:@"iconUrl"];
+            //            [inconImageView  sd_setImageWithURL:[NSURL URLWithString:imageUrlStr]];
+            //            titleLabel.text = [dict objectSafeForKey:@"contractName"];
+            
+            cell.textLabel.text = @"测试";
+            return cell;
+//        }
+    } else {
+        NSString *cellindifier = @"cell";
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellindifier];
+        if (!cell) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellindifier];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            if ([indexPath section] != 0) {
+                UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(XPOS, 17, 160, 14)];
+                titleLabel.font = [UIFont systemFontOfSize:14];
+                titleLabel.textColor = UIColorWithRGB(0x333333);
+                titleLabel.textAlignment = NSTextAlignmentLeft;
+                titleLabel.backgroundColor = [UIColor clearColor];
+                titleLabel.tag = 101;
+                [titleLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
+                [cell.contentView addSubview:titleLabel];
+                
+                UILabel *placoHolderLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+                placoHolderLabel.font = [UIFont systemFontOfSize:10];
+                placoHolderLabel.textColor = UIColorWithRGB(0xc8c8c8);
+                placoHolderLabel.textAlignment = NSTextAlignmentLeft;
+                placoHolderLabel.backgroundColor = [UIColor clearColor];
+                placoHolderLabel.tag = 102;
+                [placoHolderLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
+                [cell.contentView addSubview:placoHolderLabel];
+                
+                UILabel *countLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+                countLabel.font = [UIFont systemFontOfSize:14];
+                countLabel.textColor = UIColorWithRGB(0x333333);
+                countLabel.backgroundColor = [UIColor clearColor];
+                countLabel.tag = 103;
+                [countLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
+                [cell.contentView addSubview:countLabel];
+                
+                
+                UIImageView * phoneImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
+                phoneImageView.image = [UIImage imageNamed:@"particular_icon_phone.png"];
+                phoneImageView.tag = 104;
+                [phoneImageView setTranslatesAutoresizingMaskIntoConstraints:NO];
+                [cell.contentView addSubview:phoneImageView];
+                
+                NSDictionary *views = NSDictionaryOfVariableBindings(titleLabel,placoHolderLabel,countLabel,phoneImageView);
+                NSDictionary *metrics = @{@"vPadding":@19,@"hPadding":@15,@"vPadding2":@3,@"hPadding2":@3};
+                NSString *vfl1 = @"V:|-vPadding-[titleLabel(14)]-vPadding2-[placoHolderLabel(10)]";
+                NSString *vfl2 = @"|-hPadding-[titleLabel]-hPadding2-[phoneImageView(17)]";
+                NSString *vfl3 = @"V:|-17-[phoneImageView(18)]";
+                NSString *vfl4 = @"V:|-vPadding-[countLabel(14)]";
+                NSString *vfl5 = @"[countLabel]-hPadding-|";
+                NSString *vfl6 = @"|-hPadding-[placoHolderLabel]";
+                [cell.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:vfl1 options:0 metrics:metrics views:views]];
+                [cell.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:vfl2 options:0 metrics:metrics views:views]];
+                [cell.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:vfl3 options:0 metrics:metrics views:views]];
+                [cell.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:vfl4 options:0 metrics:metrics views:views]];
+                [cell.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:vfl5 options:0 metrics:metrics views:views]];
+                [cell.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:vfl6 options:0 metrics:metrics views:views]];
+            }
+        }
+        tableView.separatorColor = UIColorWithRGB(0xe3e5ea);
+        UILabel *titleLabel = (UILabel*)[cell.contentView viewWithTag:101];
+        UILabel *placoHolderLabel = (UILabel*)[cell.contentView viewWithTag:102];
+        UILabel *countLabel = (UILabel*)[cell.contentView viewWithTag:103];
+        UIImageView *phoneImageView = (UIImageView*)[cell.contentView viewWithTag:104];
+        titleLabel.text = @"购买记录111";
+        
+//        NSArray *prdOrders = [_dataDic objectForKey:@"prdOrders"];
+//        NSInteger path = [indexPath row];
+//        NSString *titleStr = [[prdOrders objectAtIndex:path]objectForKey:@"leftRealName"];
+//        //            titleStr = [titleStr stringByReplacingCharactersInRange:NSMakeRange(3, 2) withString:@"**"];
+//        titleLabel.text = titleStr;
+//        NSString *investAmt = [[prdOrders objectAtIndex:path] objectForKey:@"investAmt"];
+//        investAmt = [UCFToolsMehod dealmoneyFormart:investAmt];
+//        countLabel.text = [NSString stringWithFormat:@"¥%@",investAmt];
+//        NSString *applyDate = [[prdOrders objectAtIndex:path] objectForKey:@"applyDate"];
+//        placoHolderLabel.text = applyDate;
+//        NSString *busnissSource = [UCFToolsMehod isNullOrNilWithString:[[prdOrders objectAtIndex:path]objectForKey:@"businessSource"]];
+//        if ([busnissSource isEqualToString:@"1"] || [busnissSource isEqualToString:@"2"]) {
+//            [phoneImageView setHidden:NO];
+//        } else {
+//            [phoneImageView setHidden:YES];
+//        }
+//        
+//        NSString *applyUname = [UCFToolsMehod isNullOrNilWithString:[[prdOrders objectAtIndex:path]objectForKey:@"applyUname"]];
+//        NSString *personId = [[NSUserDefaults standardUserDefaults] valueForKey:UUID];
+//        if ([personId isEqualToString:applyUname]) {
+//            titleLabel.textColor = UIColorWithRGB(0xfd4d4c);
+//            titleLabel.font = [UIFont boldSystemFontOfSize:14];
+//            countLabel.textColor = UIColorWithRGB(0xfd4d4c);
+//        } else {
+//            titleLabel.textColor = UIColorWithRGB(0x333333);
+//            titleLabel.font = [UIFont systemFontOfSize:14];
+//            countLabel.textColor = UIColorWithRGB(0x333333);
+//        }
+        return cell;
     }
-    
-    cell.textLabel.text =@"测试";
-    
-    return cell;
+    return nil;;
 }
+- (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentCtrl
+{
+    
+    _topSegmentedControl.selectedSegmentIndex = segmentCtrl.selectedSegmentIndex;
+    _selectIndex = segmentCtrl.selectedSegmentIndex;
+    [_twoTableview  setContentInset:UIEdgeInsetsZero];
+    [_twoTableview reloadData];
+}
+
 - (void)topSegmentedControlChangedValue:(HMSegmentedControl *)segmentCtrl
 {
-    _topSegmentedControl.selectedSegmentIndex = segmentCtrl.selectedSegmentIndex;
+    _segmentedControl.selectedSegmentIndex = segmentCtrl.selectedSegmentIndex;
     _selectIndex = segmentCtrl.selectedSegmentIndex;
     [_twoTableview  setContentInset:UIEdgeInsetsZero];
     [_twoTableview reloadData];
@@ -437,7 +822,8 @@
     }
     NSInteger tag = scrollView.tag;
     if (tag == 1002) {
-        if (scrollView.contentOffset.y < -50) {
+        NSLog(@"scrollView.contentOffset.y---->>>>>>%f",scrollView.contentOffset.y);
+      if (scrollView.contentOffset.y < -50) {
             [_oneScroll setContentOffset:CGPointMake(0, 0) animated:YES];
 //            [_delegate toUpView];
             [self removeTopSegment];
@@ -452,6 +838,9 @@
                     [self removeTopSegment];
                 }
             }];
+        }else if(scrollView.contentOffset.y > 0){
+            
+            [self addTopSegment];
         }
     }  else if (tag == 1001) {
         if (scrollView.contentOffset.y > offsetFloat) {
@@ -478,7 +867,7 @@
     NSInteger tag = scrollView.tag;
     if (tag == 1002) {
         if (scrollView.contentOffset.y <= 0) {
-            [self hideAllTopSegment:NO];
+            [self hideAllTopSegment:YES];
             CGFloat sectionHeaderHeight = 44;
             if (scrollView.contentOffset.y<=sectionHeaderHeight&&scrollView.contentOffset.y>=0) {
                 scrollView.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, 0, 0);
@@ -486,7 +875,7 @@
                 scrollView.contentInset = UIEdgeInsetsMake(-sectionHeaderHeight, 0, 0, 0);
             }
         } else {
-            [self hideAllTopSegment:YES];
+            [self hideAllTopSegment:NO];
         }
         if (scrollView.contentOffset.y < -50) {
             _topLabel.text = @"释放，回到顶部";
@@ -554,4 +943,11 @@
 }
 */
 
+- (IBAction)gotoGoldInvestmentVC:(id)sender {
+    
+    UCFGoldPurchaseViewController *goldAuthorizationVC = [[UCFGoldPurchaseViewController alloc]initWithNibName:@"UCFGoldPurchaseViewController" bundle:nil];
+    [self.navigationController pushViewController:goldAuthorizationVC  animated:YES];
+    
+    
+}
 @end

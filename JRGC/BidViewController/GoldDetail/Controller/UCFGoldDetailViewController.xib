@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UCFGoldDetailViewController">
             <connections>
+                <outlet property="GoldInvestmentBtn" destination="B31-Ie-B2u" id="Xs1-dE-H4z"/>
                 <outlet property="investBgView" destination="Sqs-hs-uD1" id="YXi-tJ-8Ei"/>
                 <outlet property="oneScroll" destination="2Uv-Yb-hoN" id="I3E-oP-ckz"/>
                 <outlet property="twoTableview" destination="TXj-H0-I0i" id="H2g-97-PB6"/>
@@ -43,6 +44,9 @@
                             <state key="normal" title="立即购买">
                                 <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <connections>
+                                <action selector="gotoGoldInvestmentVC:" destination="-1" eventType="touchUpInside" id="DWm-F6-YmJ"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
