@@ -36,6 +36,7 @@
     
     
     self.fd_interactivePopDisabled = YES;
+    self.isPurchaseSuccess = YES;
     self.tableView.tableHeaderView = [self createHeaderView];
     self.tableView.tableFooterView = [self cretateFooterView];
     self.tableView.separatorColor = UIColorWithRGB(0xe3e5ea);
@@ -111,7 +112,7 @@
     NSString *cellindifier = @"secondIndexPath";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellindifier];
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellindifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellindifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.textLabel.textColor = UIColorWithRGB(0x555555);
         cell.detailTextLabel.textColor = UIColorWithRGB(0x555555);
