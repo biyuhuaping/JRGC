@@ -302,13 +302,8 @@
 }
 - (void) createItem {
     //自定义icon 的初始化方法
-//    UIApplicationShortcutIcon *icon0 = [UIApplicationShortcutIcon iconWithTemplateImageName:@"刮刮卡"];
-//    UIApplicationShortcutIcon *icon1 = [UIApplicationShortcutIcon iconWithTemplateImageName:@"邀请返利"];
     UIApplicationShortcutIcon *icon0 = [UIApplicationShortcutIcon iconWithTemplateImageName:@"工场码"];
     UIApplicationShortcutIcon *icon1 = [UIApplicationShortcutIcon iconWithTemplateImageName:@"签到"];
-    
-//    UIMutableApplicationShortcutItem *item0 = [[UIMutableApplicationShortcutItem alloc]initWithType:@"0" localizedTitle:@"我的刮刮卡" localizedSubtitle:nil icon:icon0 userInfo:nil];
-//    UIMutableApplicationShortcutItem *item1 = [[UIMutableApplicationShortcutItem alloc]initWithType:@"1" localizedTitle:@"我的邀请返利" localizedSubtitle:nil icon:icon1 userInfo:nil];
     UIMutableApplicationShortcutItem *item2 = [[UIMutableApplicationShortcutItem alloc]initWithType:@"0" localizedTitle:@"我的工场码" localizedSubtitle:nil icon:icon0 userInfo:nil];
     UIMutableApplicationShortcutItem *item3 = [[UIMutableApplicationShortcutItem alloc]initWithType:@"1" localizedTitle:@"签到抽红包" localizedSubtitle:nil icon:icon1 userInfo:nil];
     [UIApplication sharedApplication].shortcutItems = @[item2,item3];
@@ -352,7 +347,7 @@
     dispatch_queue_t queue= dispatch_get_main_queue();
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), queue, ^{
     DBLog(@"主队列--延迟执行------%@",[NSThread currentThread]);
-          [[ToolSingleTon sharedManager] checkIsSign];
+          [[ToolSingleTon sharedManager] getGoldPrice];
     });
 }
 #pragma mark - 广告页
