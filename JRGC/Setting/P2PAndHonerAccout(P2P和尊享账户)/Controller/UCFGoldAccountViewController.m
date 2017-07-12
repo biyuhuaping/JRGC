@@ -12,6 +12,7 @@
 #import "UCFCellStyleModel.h"
 #import "UCFGoldCashViewController.h"
 #import "GoldTransactionRecordViewController.h"
+#import "GoldAccountFirstCell.h"
 @interface UCFGoldAccountViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *baseTableView;
 @property (weak, nonatomic) IBOutlet UIButton *buyGoldBtn;
@@ -19,6 +20,13 @@
 @property (weak, nonatomic) IBOutlet UIButton *goldCashBtn;
 @property (strong, nonatomic) UCFGoldAccountHeadView *headerView;
 @property (strong, nonatomic) NSMutableArray    *dataArray;
+
+@property (copy, nonatomic)NSString     *availableGoldAmount;  //可用黄金克重
+@property (copy, nonatomic)NSString     *balanceAmount;        //账户余额
+@property (copy, nonatomic)NSString     *collectGoldAmount;    //待收黄金克重
+@property (copy, nonatomic)NSString     *dealPrice;            //成交均价
+@property (copy, nonatomic)NSString     *holdGoldAmount;       //持有黄金克重
+
 @end
 
 @implementation UCFGoldAccountViewController
@@ -27,7 +35,43 @@
     [super viewDidLoad];
     [self initData];
     [self initUI];
-
+}
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    _headerView.frame = CGRectMake(0, 0, ScreenWidth, 210);
+}
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+}
+#pragma mark NetData
+- (void)getNetData
+{
+    NSDictionary *parametersDict =  @{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID]};
+    self.accoutType = SelectAccoutDefault;
+    [[NetworkModule sharedNetworkModule] newPostReq:parametersDict tag:kSXTagGoldAccount owner:self signature:YES Type:self.accoutType];
+}
+- (void)endPost:(id)result tag:(NSNumber *)tag
+{
+    NSString *data = (NSString *)result;
+    NSMutableDictionary *dic = [data objectFromJSONString];
+    BOOL ret = [[dic objectSafeForKey:@"ret"] boolValue];
+    NSString *rsttext =  [dic objectSafeForKey:@"message"];
+    if(tag.integerValue == kSXTagGoldAccount) {
+        if (ret) {
+            NSDictionary *dataDict = [[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"result"];
+            self.availableGoldAmount = [dataDict objectSafeForKey:@"availableGoldAmount"];
+            self.balanceAmount = [dataDict objectSafeForKey:@"balanceAmount"];
+            self.collectGoldAmount = [dataDict objectSafeForKey:@"collectGoldAmount"];
+            self.dealPrice = [dataDict objectSafeForKey:@"dealPrice"];
+            self.holdGoldAmount = [dataDict objectSafeForKey:@"holdGoldAmount"];
+            [_headerView updateGoldAccount:dataDict];
+            [self.baseTableView reloadData];
+        } else {
+            [MBProgressHUD displayHudError:rsttext];
+        }
+    }
 }
 #pragma UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -88,7 +132,7 @@
         return cell;
     } else {
         static NSString *cellID = @"cellID02";
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+        GoldAccountFirstCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
         if (!cell) {
             cell = [[NSBundle mainBundle]loadNibNamed:@"GoldAccountFirstCell" owner:self options:nil][0];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -97,54 +141,48 @@
             UIView *lineView = [Common addSepateViewWithRect:CGRectMake(0, model.cellHeight - 0.5, ScreenWidth, 0.5) WithColor:UIColorWithRGB(0xe3e5ea)];
             lineView.tag = 1000;
             [cell.contentView addSubview:lineView];
+            cell.textLabel.text = @"可用余额";
         }
-        cell.textLabel.text = @"可用余额";
+        [cell updateaVailableMoenyLab:self.availableGoldAmount];
         return cell;
     }
     return nil;
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    if (!_headerView) {
-        _headerView = [[[NSBundle mainBundle] loadNibNamed:@"UCFGoldAccountHeadView" owner:nil options:nil] firstObject];
-        _headerView.frame = CGRectMake(0, 0, ScreenWidth, 210);
-        self.baseTableView.tableHeaderView = _headerView;
-    }
-}
+
 - (void)initData
 {
     self.dataArray = [NSMutableArray arrayWithCapacity:0];
-    
     UCFCellStyleModel *model01 = [[UCFCellStyleModel alloc] initWithCellStyle:CellStyleDefault WithLeftTitle:@"已购黄金" WithRightImage:[UIImage imageNamed:@"list_icon_arrow"] WithTargetClassName:@"" WithCellHeight:44 WithDelegate:self];
     UCFCellStyleModel *model02 = [[UCFCellStyleModel alloc] initWithCellStyle:CellStyleDefault WithLeftTitle:@"提金订单" WithRightImage:[UIImage imageNamed:@"list_icon_arrow"] WithTargetClassName:@"" WithCellHeight:44 WithDelegate:self];
     UCFCellStyleModel *model03 = [[UCFCellStyleModel alloc] initWithCellStyle:CellSepLine WithLeftTitle:nil WithRightImage:nil WithTargetClassName:nil WithCellHeight:10 WithDelegate:nil];
     UCFCellStyleModel *model04 = [[UCFCellStyleModel alloc] initWithCellStyle:CellStyleDefault WithLeftTitle:@"支付账户" WithRightImage:nil WithTargetClassName:nil WithCellHeight:37 WithDelegate:self];
     UCFCellStyleModel *model05 = [[UCFCellStyleModel alloc] initWithCellStyle:CellCustom WithLeftTitle:@"可用余额" WithRightImage:nil WithTargetClassName:nil WithCellHeight:44 WithDelegate:self];
-    
     [self.dataArray addObject:model01];
     [self.dataArray addObject:model02];
     [self.dataArray addObject:model03];
     [self.dataArray addObject:model04];
     [self.dataArray addObject:model05];
-
-
 }
 - (void)initUI
 {
     [self addLeftButton];
+    [self addRightBtn];
     baseTitleLabel.text = @"黄金账户";
     self.baseTableView.delegate = self;
     self.baseTableView.dataSource = self;
     [_buyGoldBtn setBackgroundColor:UIColorWithRGB(0xffc027)];
     [_withdrawalsBtn setBackgroundColor:UIColorWithRGB(0x7C9DC7)];
     [_goldCashBtn setBackgroundColor:UIColorWithRGB(0x7C9DC7)];
-
     self.baseTableView.backgroundColor = UIColorWithRGB(0xe3e5eb);
-    [self addRightBtn];
-
+    if (!_headerView) {
+        _headerView = [[[NSBundle mainBundle] loadNibNamed:@"UCFGoldAccountHeadView" owner:nil options:nil] firstObject];
+        _headerView.frame = CGRectMake(0, 0, ScreenWidth, 210);
+        self.baseTableView.tableHeaderView = _headerView;
+    }
+    [self getNetData];
 }
+
 - (void)addRightBtn {
     UIButton *rightbutton = [UIButton buttonWithType:UIButtonTypeCustom];
     rightbutton.frame = CGRectMake(0, 0, 88, 44);

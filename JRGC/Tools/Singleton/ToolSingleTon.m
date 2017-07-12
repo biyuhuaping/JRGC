@@ -93,20 +93,9 @@
 
 }
 
-// 检测是否签到
-- (void)checkIsSign {
-    return;
-    NSString *uuid = [[NSUserDefaults standardUserDefaults] objectForKey:UUID];
-    if (uuid) {
-        NSDate *lastFirstLoginTime = [[NSUserDefaults standardUserDefaults] objectForKey:FirstLoginTimeEveryday];
-        BOOL b = [NSDate isBelongToTodayWithDate:lastFirstLoginTime];
-        if (lastFirstLoginTime == nil || !b) {
-            if ([self checkHasCheckIn:uuid]) {
-                [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:FirstLoginTimeEveryday];
-                [[NetworkModule sharedNetworkModule] newPostReq:[NSDictionary dictionaryWithObject:uuid forKey:@"userId"] tag:kSXTagRedBagRainSwitch owner:self signature:YES Type:SelectAccoutDefault];
-            }
-        }
-    }
+//获取当前黄金价格
+- (void)getGoldPrice {
+    [[NetworkModule sharedNetworkModule] newPostReq:@{} tag:ksxTagGoldCurrentPrice owner:self signature:NO Type:SelectAccoutDefault];
 }
 
 - (void)beginPost:(kSXTag)tag
@@ -202,9 +191,14 @@
                 [self showFestivalActivitiesWebView:dic[@"data"][@"redBagRainAddress"]];
             }
         }
+    } else if (tag.integerValue == ksxTagGoldCurrentPrice) {
+        if ([dic[@"ret"] boolValue]) {
+            self.readTimePrice = [dic[@"data"][@"readTimePrice"] doubleValue];
+        } else {
+            [MBProgressHUD displayHudError:@"获取金价失败"];
+        }
     }
 }
-
 - (void)errorPost:(NSError *)err tag:(NSNumber *)tag
 {
     if (tag.intValue == kSXTagSignDaysAndIsSign) {
