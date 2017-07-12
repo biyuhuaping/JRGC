@@ -14,7 +14,6 @@
 #import "InvestmentCell.h"
 #import "MoneyBoardCell.h"
 #import "FullWebViewController.h"
-#import "UCFCompleteBidViewCtrl.h"//投标成功页
 #import "CalculatorView.h"
 #import "AppDelegate.h"
 #import "UCFTopUpViewController.h"

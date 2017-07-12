@@ -7,9 +7,7 @@
 //
 
 #import "UCFBaseViewController.h"
-#import "UCFCompleteBidViewCtrl.h"
 
 @interface UCFWorkPointsViewController : UCFBaseViewController
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
-@property (weak,   nonatomic) UCFCompleteBidViewCtrl *superView; //投标成功页
 @end

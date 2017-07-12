@@ -175,7 +175,7 @@
 + (CGFloat)viewHeight
 {
     CGFloat height = [UIScreen mainScreen].bounds.size.width / 3.2;
-    return UserInfoViewHeight + height;
+    return UserInfoViewHeight + height + 45;
 }
 
 #pragma mark - 个人信息
