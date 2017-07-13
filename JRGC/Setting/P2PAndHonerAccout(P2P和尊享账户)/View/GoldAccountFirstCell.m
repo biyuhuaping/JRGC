@@ -30,5 +30,15 @@
 
     // Configure the view for the selected state
 }
-
-@end
+- (IBAction)recharge:(UIButton *)sender {
+    if ([self.delegate respondsToSelector:@selector(goldAccountFirstCell:didClickedRechargeButton:)]) {
+        [self.delegate goldAccountFirstCell:self didClickedRechargeButton:sender];
+    }
+}
+    
+- (IBAction)cash:(UIButton *)sender {
+    if ([self.delegate respondsToSelector:@selector(goldAccountFirstCell:didClickedCashButton:)]) {
+        [self.delegate goldAccountFirstCell:self didClickedCashButton:sender];
+    }
+}
+    @end

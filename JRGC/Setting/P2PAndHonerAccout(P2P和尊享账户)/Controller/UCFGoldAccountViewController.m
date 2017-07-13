@@ -12,7 +12,9 @@
 #import "UCFCellStyleModel.h"
 #import "UCFGoldCashViewController.h"
 #import "GoldTransactionRecordViewController.h"
-@interface UCFGoldAccountViewController ()<UITableViewDelegate,UITableViewDataSource>
+#import "UCFGoldRechargeViewController.h"
+#import "GoldAccountFirstCell.h"
+@interface UCFGoldAccountViewController ()<UITableViewDelegate,UITableViewDataSource, GoldAccountFirstCellDeleage>
 @property (weak, nonatomic) IBOutlet UITableView *baseTableView;
 @property (weak, nonatomic) IBOutlet UIButton *buyGoldBtn;
 @property (weak, nonatomic) IBOutlet UIButton *withdrawalsBtn;
@@ -88,7 +90,7 @@
         return cell;
     } else {
         static NSString *cellID = @"cellID02";
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+        GoldAccountFirstCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
         if (!cell) {
             cell = [[NSBundle mainBundle]loadNibNamed:@"GoldAccountFirstCell" owner:self options:nil][0];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -97,6 +99,7 @@
             UIView *lineView = [Common addSepateViewWithRect:CGRectMake(0, model.cellHeight - 0.5, ScreenWidth, 0.5) WithColor:UIColorWithRGB(0xe3e5ea)];
             lineView.tag = 1000;
             [cell.contentView addSubview:lineView];
+            cell.delegate = self;
         }
         cell.textLabel.text = @"可用余额";
         return cell;
@@ -172,4 +175,19 @@
         
     }
 }
+    
+#pragma mark - GoldAccountFirstCellDelegate
+    
+- (void)goldAccountFirstCell:(GoldAccountFirstCell *)goldFirstCell didClickedRechargeButton:(UIButton *)button
+    {
+    UCFGoldRechargeViewController *goldRecharge = [[UCFGoldRechargeViewController alloc] initWithNibName:@"UCFGoldRechargeViewController" bundle:nil];
+        goldRecharge.baseTitleText = @"充值";
+    [self.navigationController pushViewController:goldRecharge animated:YES];
+}
+    
+- (void)goldAccountFirstCell:(GoldAccountFirstCell *)goldFirstCell didClickedCashButton:(UIButton *)button
+    {
+        
+}
+    
 @end
