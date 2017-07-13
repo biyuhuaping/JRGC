@@ -194,8 +194,16 @@
     } else if (tag.integerValue == ksxTagGoldCurrentPrice) {
         if ([dic[@"ret"] boolValue]) {
             self.readTimePrice = [dic[@"data"][@"readTimePrice"] doubleValue];
+            if (self.currentPrice) {
+                self.currentPrice(self.readTimePrice);
+            }
         } else {
             [MBProgressHUD displayHudError:@"获取金价失败"];
+//            self.currentPrice(0.00);
+            if (self.currentPrice) {
+                self.currentPrice(self.readTimePrice);
+            }
+
         }
     }
 }
