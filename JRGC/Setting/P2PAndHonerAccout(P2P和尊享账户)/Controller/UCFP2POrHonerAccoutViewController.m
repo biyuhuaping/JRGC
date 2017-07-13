@@ -77,23 +77,23 @@
     [self addLeftButton];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getP2POrHonerAccoutHttpRequest) name:RELOADP2PORHONERACCOTDATA object:nil];
-    if (self.accoutType == SelectAccoutTypeP2P) {
-        BOOL isFirstStep = [[NSUserDefaults standardUserDefaults] boolForKey:@"ISFirstStepInP2PAccount"];
-        if (!isFirstStep) {
-            if ([UserInfoSingle sharedManager].enjoyOpenStatus < 3) {
+//    if (self.accoutType == SelectAccoutTypeP2P) {
+//        BOOL isFirstStep = [[NSUserDefaults standardUserDefaults] boolForKey:@"ISFirstStepInP2PAccount"];
+//        if (!isFirstStep) {
+//            if ([UserInfoSingle sharedManager].enjoyOpenStatus < 3) {
 //                MjAlertView *alertView = [[MjAlertView alloc] initSkipToHonerAccount:self];
 //                alertView.tag = 1002;
 //                [alertView show];
 //                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"ISFirstStepInP2PAccount"];
-            } else {
-                MjAlertView *alertView = [[MjAlertView alloc] initSkipToMoneySwitchHonerAccout:self];
-                alertView.tag = 1001;
-                [alertView show];
-                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"ISFirstStepInP2PAccount"];
-                [[NSUserDefaults standardUserDefaults] synchronize];
-            }
-        }
-    }
+//            } else {
+//                MjAlertView *alertView = [[MjAlertView alloc] initSkipToMoneySwitchHonerAccout:self];
+//                alertView.tag = 1001;
+//                [alertView show];
+//                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"ISFirstStepInP2PAccount"];
+//                [[NSUserDefaults standardUserDefaults] synchronize];
+//            }
+//        }
+//    }
 }
 -(void)removeLoadingView
 {
@@ -215,7 +215,7 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     if (section == 0) {
-        if (self.accoutType == SelectAccoutTypeP2P) {
+        if (self.accoutType == SelectAccoutTypeP2P && [UserInfoSingle sharedManager].enjoyOpenStatus < 3) {
             return 208;
         } else {
             return 160;
@@ -423,16 +423,9 @@
 //资金如何划转
 - (void)changeP2POrHonerAccoutMoneyAlertView
 {
-    if ([UserInfoSingle sharedManager].enjoyOpenStatus < 3) {
-        MjAlertView *alertView = [[MjAlertView alloc] initSkipToHonerAccount:self];
-        alertView.tag = 1002;
-        [alertView show];
-    } else {
-        MjAlertView *alertView = [[MjAlertView alloc] initSkipToMoneySwitchHonerAccout:self];
-        alertView.tag = 1001;
-        [alertView show];
-    }
-
+    MjAlertView *alertView = [[MjAlertView alloc] initSkipToHonerAccount:self];
+    alertView.tag = 1002;
+    [alertView show];
 }
 - (void)mjalertView:(MjAlertView *)alertview didClickedButton:(UIButton *)clickedButton andClickedIndex:(NSInteger)index
 {

@@ -789,7 +789,7 @@
         }
         UCFWebViewJavascriptBridgeMallDetails *web = [[UCFWebViewJavascriptBridgeMallDetails alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMallDetails" bundle:nil];
         if ([self isKindOfClass:[UCFDiscoveryViewController class]]) {
-            web.isHidenNavigationbar = YES;
+            web.isHidenNavigationbar = NO;
         }
         web.url = [dic objectSafeForKey:@"value"];
         [self.navigationController pushViewController:web animated:YES];
