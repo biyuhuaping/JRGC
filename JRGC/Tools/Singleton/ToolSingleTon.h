@@ -8,9 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import "AuxiliaryFunc.h"
+typedef void(^GoldCurrentPrice)(double);
+
 @interface ToolSingleTon : NSObject
 @property(nonatomic, copy)NSString      *apptzticket;
 @property(nonatomic, assign)double      readTimePrice;
+//@property(nonatomic, copy) GoldCurrentPrice currentPrice;
 //@property(nonatomic,assign) BOOL checkIsInviteFriendsAlert;//监测是否邀友赚钱弹框
 + (ToolSingleTon *)sharedManager;
 

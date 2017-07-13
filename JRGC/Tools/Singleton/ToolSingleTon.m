@@ -175,16 +175,10 @@
             
             NSString *rewardAmt = dic[@"rewardAmt"];//抢光红包再奖励的钱数
             rewardAmt = rewardAmt?rewardAmt:@"0";
-//            [[[UIAlertView alloc] initWithTitle:@"OK" message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles:nil] show];
             [self showAlertViewWithQianDaoGongDouCount:returnAmount nextDayBeans:nextDayBeans signDays:signDays win:win winAmount:winAmount rewardAmt:rewardAmt];
             //签完到之后重新加载 用户数据
             [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
-            //            CustomAlertView *alert = [[CustomAlertView alloc] initWithFrame:CGRectMake(25, 0, ScreenWidth - 50 , 200) WithQianDaoGongDouCount:returnAmount WithNextDayCount:nextDayBeans WithCountinesDays:signDays WithActivtyDay:numDays WithActivtyGongDou:numBeans WithDelegate:self];
-            //            [alert show];
         }
-//        } else if ([flag isEqualToString:@"already"]) {
-////            [AuxiliaryFunc showToastMessage:@"今日已签到" withView:self.view];
-//        }
     } else if (tag.integerValue == kSXTagRedBagRainSwitch) {
         if ([dic[@"ret"] boolValue]) {
             if ([dic[@"data"][@"redBagRainOnOff"] boolValue] && [dic[@"data"][@"goInRedBagRainNum"] integerValue] == 0) {
@@ -197,6 +191,8 @@
         } else {
             [MBProgressHUD displayHudError:@"获取金价失败"];
         }
+        [[NSNotificationCenter defaultCenter] postNotificationName:CURRENT_GOLD_PRICE object:nil];
+
     }
 }
 - (void)errorPost:(NSError *)err tag:(NSNumber *)tag
@@ -209,15 +205,7 @@
     }
 }
 
-//-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-//{
-//    if (buttonIndex == 1) {
-//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//            NSString *strParameters = [NSString stringWithFormat:@"userId=%@", [[NSUserDefaults standardUserDefaults] objectForKey:UUID]];
-//            [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagSingMenthod owner:self];
-//        });
-//    }
-//}
+
 
 - (void)mjalertView:(MjAlertView *)alertview didClickedButton:(UIButton *)clickedButton andClickedIndex:(NSInteger)index
 {
