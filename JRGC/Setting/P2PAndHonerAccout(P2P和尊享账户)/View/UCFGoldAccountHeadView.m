@@ -27,30 +27,62 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *dealGoldSpace;
 @property (weak, nonatomic) IBOutlet UIView *upBaseView;
 @property (weak, nonatomic) IBOutlet UIButton *updateGoldPriceBtn;
+@property (assign,nonatomic)CGFloat angle;
+@property (assign, nonatomic) BOOL isStopTrans; //是否停止旋转
 @end
 
 @implementation UCFGoldAccountHeadView
 
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeTransState) name:CURRENT_GOLD_PRICE object:nil];
+}
+
+- (void)startAnimation
+{
+    _isStopTrans = NO;
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:0.001];
+    [UIView setAnimationDelegate:self];
+    [UIView setAnimationDidStopSelector:@selector(endAnimation)];
+     self.updateGoldPriceBtn.transform = CGAffineTransformMakeRotation(_angle * (M_PI / 180.0f));
+    [UIView commitAnimations];
+}
+- (void)changeTransState
+{
+    dispatch_queue_t queue= dispatch_get_main_queue();
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), queue, ^{
+        DBLog(@"主队列--延迟执行------%@",[NSThread currentThread]);
+        _isStopTrans = YES;
+        self.updateGoldPriceBtn.userInteractionEnabled = YES;
+        _angle = 0.0f;
+        [self endAnimation];
+    });
+}
+- (void)endAnimation
+{
+     _angle += 3.8;
+    if (!_isStopTrans) {
+        [self startAnimation];
+    }
+}
 - (IBAction)floatBtnClicked:(id)sender {
     MjAlertView *alertView = [[MjAlertView alloc] initGoldAlertType:MjGoldAlertViewTypeFloat delegate:self];
     [alertView show];
 }
 - (IBAction)currentTimePriceBtnClicked:(UIButton *)sender {
-     [[ToolSingleTon sharedManager] getGoldPrice];
-     [ToolSingleTon sharedManager].currentPrice = ^(double price){
-    
-     };
+    sender.userInteractionEnabled = NO;
+    [[ToolSingleTon sharedManager] getGoldPrice];
+    [self startAnimation];
+
 }
 - (IBAction)recoverBtnClicked:(UIButton *)sender {
     MjAlertView *alertView = [[MjAlertView alloc] initGoldAlertTitle:@"总待收黄金" Message:@"总待收黄金=已购黄金+到期黄金" delegate:self];
     [alertView show];
 }
 
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-//- (void)drawRect:(CGRect)rect {
-//    // Drawing code
-//}
+
 - (void)layoutSubviews
 {
     self.floatGoldSpace.constant = (ScreenWidth/320.0f) * 98.0f;
@@ -91,5 +123,9 @@
         return 0;
     }
 }
-
+- (void)dealloc
+{
+//    [[ToolSingleTon sharedManager] removeObserver:self forKeyPath:@"readTimePrice"];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 @end
