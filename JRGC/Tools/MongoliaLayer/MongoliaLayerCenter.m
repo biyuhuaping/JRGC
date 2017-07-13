@@ -100,7 +100,7 @@
         return;
     }
     //
-    if ([UserInfoSingle sharedManager].enjoyOpenStatus < 3 && !_honerAlert) {
+    if (([UserInfoSingle sharedManager].enjoyOpenStatus == 1 || [UserInfoSingle sharedManager].enjoyOpenStatus == 2) && !_honerAlert) {
         MjAlertView *alertView = [[MjAlertView alloc] initSkipToHonerAccount:self];
         alertView.tag = 1002;
         _honerAlert = YES;
