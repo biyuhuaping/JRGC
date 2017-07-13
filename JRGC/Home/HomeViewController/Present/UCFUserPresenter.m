@@ -49,26 +49,26 @@
 #pragma mark - 初始化数据
 - (void)initUI
 {
-    UCFUserInfoListItem *userInfoList0 = [UCFUserInfoListItem itemWithTitle:@"微金账户" destVcClass:nil];
+    UCFUserInfoListItem *userInfoList1 = [UCFUserInfoListItem itemWithTitle:@"微金账户" destVcClass:nil];
     if ([self.userInfoOneModel.openStatus intValue] <= 2) {
-        userInfoList0.isShow = NO;
-        userInfoList0.subtitle = @"未开户";
-    }
-    else {
-        userInfoList0.isShow = YES;
-        userInfoList0.subtitle = self.userInfoOneModel.p2pCashBalance.length > 0 ? [NSString stringWithFormat:@"%@元", self.userInfoOneModel.p2pCashBalance] : @"0.00元";
-
-    }
-    
-    UCFUserInfoListItem *userInfoList1 = [UCFUserInfoListItem itemWithTitle:@"尊享账户" destVcClass:nil];
-
-    if ([self.userInfoOneModel.zxOpenStatus intValue] <= 2) {
         userInfoList1.isShow = NO;
         userInfoList1.subtitle = @"未开户";
     }
     else {
         userInfoList1.isShow = YES;
-        userInfoList1.subtitle = self.userInfoOneModel.zxCashBalance.length > 0 ? [NSString stringWithFormat:@"%@元", self.userInfoOneModel.zxCashBalance] : @"0.00元";
+        userInfoList1.subtitle = self.userInfoOneModel.p2pCashBalance.length > 0 ? [NSString stringWithFormat:@"%@元", self.userInfoOneModel.p2pCashBalance] : @"0.00元";
+
+    }
+    
+    UCFUserInfoListItem *userInfoList0 = [UCFUserInfoListItem itemWithTitle:@"尊享账户" destVcClass:nil];
+
+    if ([self.userInfoOneModel.zxOpenStatus intValue] <= 2) {
+        userInfoList0.isShow = NO;
+        userInfoList0.subtitle = @"未开户";
+    }
+    else {
+        userInfoList0.isShow = YES;
+        userInfoList0.subtitle = self.userInfoOneModel.zxCashBalance.length > 0 ? [NSString stringWithFormat:@"%@元", self.userInfoOneModel.zxCashBalance] : @"0.00元";
     }
     [self.userInfoListCells addObject:userInfoList0];
     [self.userInfoListCells addObject:userInfoList1];

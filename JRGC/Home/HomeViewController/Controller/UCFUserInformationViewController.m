@@ -251,10 +251,10 @@
 
     
     if (indexPath.row == 0) {
-        item.isShow = [self.presenter checkIDAAndBankBlindState:SelectAccoutTypeP2P];
+        item.isShow = [self.presenter checkIDAAndBankBlindState:SelectAccoutTypeHoner];
     }
     else if (indexPath.row == 1) {
-        item.isShow = [self.presenter checkIDAAndBankBlindState:SelectAccoutTypeHoner];
+        item.isShow = [self.presenter checkIDAAndBankBlindState:SelectAccoutTypeP2P];
     }
     if ([self.delegate respondsToSelector:@selector(userInfotableView:didSelectedItem:)]) {
         [self.delegate userInfotableView:self.tableview didSelectedItem:item];
