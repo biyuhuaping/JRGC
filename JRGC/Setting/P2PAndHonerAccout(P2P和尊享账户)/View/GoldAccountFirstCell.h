@@ -16,5 +16,5 @@
 @interface GoldAccountFirstCell : UITableViewCell
     
 @property (weak, nonatomic) id<GoldAccountFirstCellDeleage> delegate;
-    
+- (void)updateaVailableMoenyLab:(NSString *)availableMoeny;
 @end

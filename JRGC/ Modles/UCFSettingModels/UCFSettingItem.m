@@ -22,4 +22,10 @@
 {
     return [self itemWithIcon:nil title:title];
 }
++ (instancetype)itemWithTitle:(NSString *)title withSubtitle:(NSString *)subtitle{
+    UCFSettingItem *item = [[self alloc] init];
+    item.subtitle = subtitle;
+    item.title = title;
+    return item;
+}
 @end

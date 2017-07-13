@@ -164,6 +164,7 @@ return shared##className; \
 #define UPDATEWARNALERT @"updateWarnAlert"  //升级弹框
 #define REDALERTISHIDE  @"redpointcheck"    //调用红点接口，通知服务器红点标示倍查看
 #define CHECK_RED_POINT @"checkpointred"    //随时检测红点的接口
+#define CURRENT_GOLD_PRICE @"cuurentGoldPrice" //当前黄金价格
 #define REGIST_JPUSH    @"regist_jpush"
 #define CHECK_GOOD_COMMENT          @"checkGoodCommentAlert"
 #define CHECK_UPDATE_ALERT  @"UPDATE_ALERT"

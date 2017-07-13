@@ -582,6 +582,12 @@
 		83CD843E1F13A50800227704 /* UCFLoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83CD84241F13A50800227704 /* UCFLoadingView.xib */; };
 		83CD843F1F13A50800227704 /* UCFProjectListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CD84261F13A50800227704 /* UCFProjectListCell.m */; };
 		83CD84401F13A50800227704 /* UCFProjectListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83CD84271F13A50800227704 /* UCFProjectListCell.xib */; };
+		83DAEFB31F16112000D7948F /* UCFGoldCalculatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DAEFB21F16112000D7948F /* UCFGoldCalculatorView.m */; };
+		83DAEFB51F16113400D7948F /* UCFGoldCalculatorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83DAEFB41F16113400D7948F /* UCFGoldCalculatorView.xib */; };
+		83DAEFBD1F166A3000D7948F /* UCFContractTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DAEFBB1F166A3000D7948F /* UCFContractTableCell.m */; };
+		83DAEFBE1F166A3000D7948F /* UCFContractTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83DAEFBC1F166A3000D7948F /* UCFContractTableCell.xib */; };
+		83DAEFC21F166A3B00D7948F /* UCFGoldAuthorizationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DAEFC01F166A3B00D7948F /* UCFGoldAuthorizationViewController.m */; };
+		83DAEFC31F166A3B00D7948F /* UCFGoldAuthorizationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83DAEFC11F166A3B00D7948F /* UCFGoldAuthorizationViewController.xib */; };
 		83EB21E21D758EE50069EF95 /* UCFCashRecordListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83EB21E01D758EE50069EF95 /* UCFCashRecordListViewController.m */; };
 		83EB21E31D758EE50069EF95 /* UCFCashRecordListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83EB21E11D758EE50069EF95 /* UCFCashRecordListViewController.xib */; };
 		83F2D4ED1DCB3F950041F913 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83F2D4EB1DCB3F950041F913 /* Interface.storyboard */; };
@@ -681,6 +687,8 @@
 		A8E02DB31F0E0A7800FC2260 /* GoldTransactionRecordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8E02DB11F0E0A7800FC2260 /* GoldTransactionRecordViewController.xib */; };
 		A8FC0BC61F0E13FA00D30108 /* UCFGoldCashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8FC0BC41F0E13FA00D30108 /* UCFGoldCashViewController.m */; };
 		A8FC0BC71F0E13FA00D30108 /* UCFGoldCashViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8FC0BC51F0E13FA00D30108 /* UCFGoldCashViewController.xib */; };
+		A8FF32E41F1666D000066A80 /* UCFGoldBidSuccessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8FF32E31F1666A600066A80 /* UCFGoldBidSuccessViewController.m */; };
+		A8FF32E51F1666DC00066A80 /* UCFGoldBidSuccessViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8FF32E21F1666A600066A80 /* UCFGoldBidSuccessViewController.xib */; };
 		AEC5EEC01D9B6594000C0321 /* RechargeFixedTelNumView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEC5EEBF1D9B6594000C0321 /* RechargeFixedTelNumView.xib */; };
 		AEC5EEC31D9B65BA000C0321 /* RechargeFixedTelNumView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC5EEC21D9B65BA000C0321 /* RechargeFixedTelNumView.m */; };
 		E31141601D92769E00FF880A /* UCFWebViewJavascriptBridgeBBS.m in Sources */ = {isa = PBXBuildFile; fileRef = E311415E1D92769E00FF880A /* UCFWebViewJavascriptBridgeBBS.m */; };
@@ -1885,6 +1893,18 @@
 		83CD84251F13A50800227704 /* UCFProjectListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFProjectListCell.h; sourceTree = "<group>"; };
 		83CD84261F13A50800227704 /* UCFProjectListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFProjectListCell.m; sourceTree = "<group>"; };
 		83CD84271F13A50800227704 /* UCFProjectListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFProjectListCell.xib; sourceTree = "<group>"; };
+		83DAEFAC1F15F89B00D7948F /* UCFGoldBidSuccessHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFGoldBidSuccessHeaderView.h; sourceTree = "<group>"; };
+		83DAEFAD1F15F89B00D7948F /* UCFGoldBidSuccessHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFGoldBidSuccessHeaderView.m; sourceTree = "<group>"; };
+		83DAEFAF1F15F8AD00D7948F /* UCFGoldBidSuccessHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFGoldBidSuccessHeaderView.xib; sourceTree = "<group>"; };
+		83DAEFB11F16112000D7948F /* UCFGoldCalculatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFGoldCalculatorView.h; sourceTree = "<group>"; };
+		83DAEFB21F16112000D7948F /* UCFGoldCalculatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFGoldCalculatorView.m; sourceTree = "<group>"; };
+		83DAEFB41F16113400D7948F /* UCFGoldCalculatorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFGoldCalculatorView.xib; sourceTree = "<group>"; };
+		83DAEFBA1F166A3000D7948F /* UCFContractTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFContractTableCell.h; sourceTree = "<group>"; };
+		83DAEFBB1F166A3000D7948F /* UCFContractTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFContractTableCell.m; sourceTree = "<group>"; };
+		83DAEFBC1F166A3000D7948F /* UCFContractTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFContractTableCell.xib; sourceTree = "<group>"; };
+		83DAEFBF1F166A3B00D7948F /* UCFGoldAuthorizationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFGoldAuthorizationViewController.h; sourceTree = "<group>"; };
+		83DAEFC01F166A3B00D7948F /* UCFGoldAuthorizationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFGoldAuthorizationViewController.m; sourceTree = "<group>"; };
+		83DAEFC11F166A3B00D7948F /* UCFGoldAuthorizationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFGoldAuthorizationViewController.xib; sourceTree = "<group>"; };
 		83EB21DF1D758EE50069EF95 /* UCFCashRecordListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFCashRecordListViewController.h; sourceTree = "<group>"; };
 		83EB21E01D758EE50069EF95 /* UCFCashRecordListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFCashRecordListViewController.m; sourceTree = "<group>"; };
 		83EB21E11D758EE50069EF95 /* UCFCashRecordListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFCashRecordListViewController.xib; sourceTree = "<group>"; };
@@ -2112,6 +2132,9 @@
 		A8FC0BC31F0E13FA00D30108 /* UCFGoldCashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFGoldCashViewController.h; sourceTree = "<group>"; };
 		A8FC0BC41F0E13FA00D30108 /* UCFGoldCashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFGoldCashViewController.m; sourceTree = "<group>"; };
 		A8FC0BC51F0E13FA00D30108 /* UCFGoldCashViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFGoldCashViewController.xib; sourceTree = "<group>"; };
+		A8FF32E11F1666A600066A80 /* UCFGoldBidSuccessViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFGoldBidSuccessViewController.h; sourceTree = "<group>"; };
+		A8FF32E21F1666A600066A80 /* UCFGoldBidSuccessViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFGoldBidSuccessViewController.xib; sourceTree = "<group>"; };
+		A8FF32E31F1666A600066A80 /* UCFGoldBidSuccessViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFGoldBidSuccessViewController.m; sourceTree = "<group>"; };
 		AE43B84F1DD2D8BE001D0BD0 /* JRGC.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JRGC.entitlements; sourceTree = "<group>"; };
 		AEC5EEBF1D9B6594000C0321 /* RechargeFixedTelNumView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RechargeFixedTelNumView.xib; sourceTree = "<group>"; };
 		AEC5EEC11D9B65BA000C0321 /* RechargeFixedTelNumView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RechargeFixedTelNumView.h; sourceTree = "<group>"; };
@@ -5384,6 +5407,9 @@
 		83FF20531F0BAF0500F21119 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				A8FF32E11F1666A600066A80 /* UCFGoldBidSuccessViewController.h */,
+				A8FF32E31F1666A600066A80 /* UCFGoldBidSuccessViewController.m */,
+				A8FF32E21F1666A600066A80 /* UCFGoldBidSuccessViewController.xib */,
 				83FF20541F0BAF0500F21119 /* UCFGoldDetailViewController.h */,
 				83FF20551F0BAF0500F21119 /* UCFGoldDetailViewController.m */,
 				83FF20561F0BAF0500F21119 /* UCFGoldDetailViewController.xib */,
@@ -5404,12 +5430,21 @@
 		83FF20581F0BAF0500F21119 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				83DAEFBA1F166A3000D7948F /* UCFContractTableCell.h */,
+				83DAEFBB1F166A3000D7948F /* UCFContractTableCell.m */,
+				83DAEFBC1F166A3000D7948F /* UCFContractTableCell.xib */,
 				83FF20591F0BAF0500F21119 /* UCFGoldDetailHeaderView.h */,
 				83FF205A1F0BAF0500F21119 /* UCFGoldDetailHeaderView.m */,
 				83FF205B1F0BAF0500F21119 /* UCFGoldDetailHeaderView.xib */,
 				83974FDB1F14B25200C2252F /* UCFGoldMoneyBoadCell.h */,
 				83974FDC1F14B25200C2252F /* UCFGoldMoneyBoadCell.m */,
 				83974FDD1F14B25200C2252F /* UCFGoldMoneyBoadCell.xib */,
+				83DAEFAC1F15F89B00D7948F /* UCFGoldBidSuccessHeaderView.h */,
+				83DAEFAD1F15F89B00D7948F /* UCFGoldBidSuccessHeaderView.m */,
+				83DAEFAF1F15F8AD00D7948F /* UCFGoldBidSuccessHeaderView.xib */,
+				83DAEFB11F16112000D7948F /* UCFGoldCalculatorView.h */,
+				83DAEFB21F16112000D7948F /* UCFGoldCalculatorView.m */,
+				83DAEFB41F16113400D7948F /* UCFGoldCalculatorView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -5456,6 +5491,9 @@
 		847103B61D59ACB200935B19 /* BankDepositoryAccount(微商银行存管专题页面) */ = {
 			isa = PBXGroup;
 			children = (
+				83DAEFBF1F166A3B00D7948F /* UCFGoldAuthorizationViewController.h */,
+				83DAEFC01F166A3B00D7948F /* UCFGoldAuthorizationViewController.m */,
+				83DAEFC11F166A3B00D7948F /* UCFGoldAuthorizationViewController.xib */,
 				847103B71D59AD7500935B19 /* UCFBankDepositoryAccountViewController.h */,
 				847103B81D59AD7500935B19 /* UCFBankDepositoryAccountViewController.m */,
 				847103B91D59AD7500935B19 /* UCFBankDepositoryAccountViewController.xib */,
@@ -6297,6 +6335,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A8FF32E51F1666DC00066A80 /* UCFGoldBidSuccessViewController.xib in Resources */,
 				744B9ED61F0B8AC100440FBA /* UCFCalendarDetailHeaderView.xib in Resources */,
 				83CD84331F13A50800227704 /* UCFP2PTransferViewController.xib in Resources */,
 				7BC7890A1B04569300D50494 /* jianjie.docx in Resources */,
@@ -6355,6 +6394,7 @@
 				83CD84311F13A50800227704 /* UCFOrdinaryBidController.xib in Resources */,
 				74A0AF101EC341DD009E5A57 /* ZZCircleProgress.bundle in Resources */,
 				A851F3541F1361D8003DE8B8 /* UCFGoldTransactionDetailViewController.xib in Resources */,
+				83DAEFBE1F166A3000D7948F /* UCFContractTableCell.xib in Resources */,
 				FBE5A0541AE8BEDD0095B2ED /* UCFMyInvestViewCell.xib in Resources */,
 				74270D571EC5AAE500F9419B /* UCFInvitationRewardCell.xib in Resources */,
 				74F4B8AF1ECAD20E00785DFC /* UCFProfitBackViewController.xib in Resources */,
@@ -6422,6 +6462,7 @@
 				7412323E1F14BB250061408A /* UCFPickView.xib in Resources */,
 				74BDA9941F09F6C60054403F /* Info.plist in Resources */,
 				7477BF911AFAFED900914BFB /* UCFRedEnvelopeTableViewCell.xib in Resources */,
+				83DAEFC31F166A3B00D7948F /* UCFGoldAuthorizationViewController.xib in Resources */,
 				8366BFBA1E151745008D027F /* UCFCashRecordCell.xib in Resources */,
 				FB21731A1AF20DFC00649AA0 /* UCFBackMoneyCell.xib in Resources */,
 				25950EC11D7FB6EC00E4CCBA /* CWLivessViewController.xib in Resources */,
@@ -6436,6 +6477,7 @@
 				83FEDB771EFBB56000CFE0EF /* UCFCompanyNoOpenViewController.xib in Resources */,
 				A8E02DB31F0E0A7800FC2260 /* GoldTransactionRecordViewController.xib in Resources */,
 				4ACB399B1E1216DD00E9BA8C /* FestivalActivitiesWebView.xib in Resources */,
+				83DAEFB51F16113400D7948F /* UCFGoldCalculatorView.xib in Resources */,
 				4AE1E96B1E1CDB9900587CE6 /* README.txt in Resources */,
 				83CD84351F13A50800227704 /* UCFP2PViewController.xib in Resources */,
 				A8DE85281EC2BC34004B3533 /* UcfLibResources.bundle in Resources */,
@@ -6553,6 +6595,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A8FF32E41F1666D000066A80 /* UCFGoldBidSuccessViewController.m in Sources */,
 				FBB685891AE4A76800F222B6 /* UIScrollView+MJExtension.m in Sources */,
 				7470C8481E5E7CDE007D52F4 /* UCFCollectionBidModel.m in Sources */,
 				74270C9D1EC58F6800F9419B /* UCFHomeListCell.m in Sources */,
@@ -6608,6 +6651,7 @@
 				74270C961EC58F6800F9419B /* UCFUserInfoModel.m in Sources */,
 				74270D421EC5960100F9419B /* UCFDataDetailModel.m in Sources */,
 				25950EB81D7FB6EB00E4CCBA /* CWAnimationView.m in Sources */,
+				83DAEFC21F166A3B00D7948F /* UCFGoldAuthorizationViewController.m in Sources */,
 				EDD13F691C196D860088A378 /* SCGIFImageView.m in Sources */,
 				25314C0B1D8FD7FA0066F446 /* UCFDirectCell.m in Sources */,
 				A8E01A801EEA4C6F003E3BDC /* UCFTransfeTableViewCell.m in Sources */,
@@ -6617,6 +6661,7 @@
 				74BDA98A1F09F6C60054403F /* FSCalendarCollectionViewLayout.m in Sources */,
 				7BCBF1291ADB618100C874FC /* UCFRegisterTwoView.m in Sources */,
 				747A91251B0206DB00FE2334 /* UCFFacBeanModel.m in Sources */,
+				83DAEFB31F16112000D7948F /* UCFGoldCalculatorView.m in Sources */,
 				A8E02DA91F0DD4BB00FC2260 /* UCFCellStyleModel.m in Sources */,
 				74270CF81EC5943200F9419B /* UCFInvitationRebateViewController.m in Sources */,
 				74270C971EC58F6800F9419B /* UCFHomeListCellPresenter.m in Sources */,
@@ -6650,6 +6695,7 @@
 				4ADA3A301B0DBBEF000B29FD /* CoupleHeadCell.m in Sources */,
 				748D935E1E641FF500E229A7 /* UCFLabel.m in Sources */,
 				74E535F01AE5FD7300DAABFC /* UCFFAQViewController.m in Sources */,
+				83DAEFBD1F166A3000D7948F /* UCFContractTableCell.m in Sources */,
 				25950EC01D7FB6EC00E4CCBA /* CWLivessViewController.m in Sources */,
 				833A6EBC1E55902A00C8A494 /* UCFCollectionListCell.m in Sources */,
 				7BC8AA1F1AD4C74200BF4660 /* UCFMyInvestment.m in Sources */,
@@ -7235,7 +7281,6 @@
 				CODE_SIGN_ENTITLEMENTS = JRGC/JRGC.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Phoenix Credit Management CO., Ltd.";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = "";
@@ -7289,8 +7334,8 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp299;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0ce353c9-748a-4307-9ccb-19c1a2dd7f16";
-				PROVISIONING_PROFILE_SPECIFIER = 2016_299Distribution;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "JRGC/JRGC-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -7310,7 +7355,6 @@
 				CODE_SIGN_ENTITLEMENTS = JRGC/JRGC.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Phoenix Credit Management CO., Ltd.";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
@@ -7363,8 +7407,8 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp299;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0ce353c9-748a-4307-9ccb-19c1a2dd7f16";
-				PROVISIONING_PROFILE_SPECIFIER = 2016_299Distribution;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "JRGC/JRGC-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -7423,7 +7467,6 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Phoenix Credit Management CO., Ltd.";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing Phoenix Credit Management CO., Ltd.";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = "";
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -7431,9 +7474,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp299.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
-
-				PROVISIONING_PROFILE = "1b2578ed-619c-4232-a1ae-f934766dd2b2";
-				PROVISIONING_PROFILE_SPECIFIER = 299ExtenSionDistribution;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
@@ -7453,7 +7493,6 @@
 				CODE_SIGN_ENTITLEMENTS = "JRGCWatch Extension/JRGCWatch Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Phoenix Credit Management CO., Ltd.";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = "";
@@ -7462,8 +7501,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp299.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
-				PROVISIONING_PROFILE = "1b2578ed-619c-4232-a1ae-f934766dd2b2";
-				PROVISIONING_PROFILE_SPECIFIER = 299ExtenSionDistribution;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
@@ -7484,7 +7523,6 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Phoenix Credit Management CO., Ltd.";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing Phoenix Credit Management CO., Ltd.";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = "";
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -7492,8 +7530,8 @@
 				INFOPLIST_FILE = JRGCWatch/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp299.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3897abfa-f2db-414d-8147-2c702dd5bc18";
-				PROVISIONING_PROFILE_SPECIFIER = 299WatchKitDistribution;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
@@ -7513,7 +7551,6 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Phoenix Credit Management CO., Ltd.";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing Phoenix Credit Management CO., Ltd.";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = "";
@@ -7522,8 +7559,8 @@
 				INFOPLIST_FILE = JRGCWatch/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp299.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3897abfa-f2db-414d-8147-2c702dd5bc18";
-				PROVISIONING_PROFILE_SPECIFIER = 299WatchKitDistribution;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
