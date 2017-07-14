@@ -8,7 +8,7 @@
 
 #import "UCFGoldMoneyBoadCell.h"
 
-@interface UCFGoldMoneyBoadCell()
+@interface UCFGoldMoneyBoadCell()<UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *GoldCalculatorView;
 @property (weak, nonatomic) IBOutlet UISwitch *goldSwitch;
@@ -23,13 +23,22 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+    
+    [self.moneyTextField  addTarget:self action:@selector(textfieldChangedLength:) forControlEvents:UIControlEventEditingChanged];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+-(void)layoutSubviews
+{
+    [super layoutSubviews];
+    NSDictionary *userAccountInfoDict = [_dataDict objectForKey:@"userAccountInfo"];
+    self.availableAllMoneyLabel.text = [NSString stringWithFormat:@"¥%@",[userAccountInfoDict objectForKey:@"availableAllMoney"]];
+    self.availableMoneyLabel.text = [NSString stringWithFormat:@"¥%@",[userAccountInfoDict objectForKey:@"availableMoney"]];
+    self.accountBeanLabel.text = [NSString stringWithFormat:@"¥%@",[userAccountInfoDict objectForKey:@"accountBean"]];
 }
 
 
@@ -46,6 +55,7 @@
 }
 
 - (IBAction)clickGoldSwitch:(UISwitch *)sender{
+    
 }
 
 - (IBAction)showGoldCalculatorView:(id)sender
@@ -55,5 +65,48 @@
         [self.delegate showGoldCalculatorView];
     }
     
+}
+- (UITextField *)textfieldChangedLength:(UITextField *)textField
+{
+    NSString *str = textField.text;
+    NSArray *array = [str componentsSeparatedByString:@"."];
+    
+    NSString *jeLength = [array firstObject];
+    if (jeLength.length > 9) {
+        textField.text = [textField.text substringToIndex:textField.text.length-1];
+    }
+    if (array.count == 1) {
+        if (jeLength != nil&& jeLength.length > 0) {
+            NSString *firstStr = [jeLength substringToIndex:1];
+            if ([firstStr isEqualToString:@"0"]) {
+                textField.text = @"0";
+            }
+        }
+        
+    }
+    
+    if(array.count > 2)
+    {
+        textField.text = [textField.text substringToIndex:textField.text.length-1];
+    }
+    if(array.count == 2)
+    {
+        
+        str = [array objectAtIndex:1];
+        
+        if(str.length > 3)
+        {
+            textField.text = [textField.text substringToIndex:textField.text.length-1];
+        }
+        NSString *firStr = [array objectAtIndex:0];
+        if (firStr == nil || firStr.length == 0) {
+            textField.text = [NSString stringWithFormat:@"0%@",textField.text];
+        }
+    }
+    NSString *perfire = [[_dataDict objectForKey:@"nmPrdClaimInfo"] objectForKey:@"remainAmount"];
+    double amountPay = [textField.text doubleValue] * [perfire doubleValue];
+    self.estimatAmountPayableLabel.text = [NSString stringWithFormat:@"¥%.2lf",amountPay];
+    
+    return textField;
 }
 @end

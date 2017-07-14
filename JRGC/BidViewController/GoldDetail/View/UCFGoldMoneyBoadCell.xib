@@ -78,7 +78,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jAz-mU-z62">
                                 <rect key="frame" x="15" y="7" width="251" height="37"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="100元起" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KEI-IF-L4v">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="1.000克起" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KEI-IF-L4v">
                                         <rect key="frame" x="10" y="0.0" width="206" height="37"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="37" id="j9m-ie-3kK"/>
@@ -94,6 +94,9 @@
                                                 <real key="value" value="0.0"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <outlet property="delegate" destination="-1" id="ako-md-kXo"/>
+                                        </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tCP-2i-e2D">
                                         <rect key="frame" x="216" y="0.0" width="30" height="37"/>
@@ -352,6 +355,11 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="GoldCalculatorView" destination="CQz-aB-job" id="0y8-c4-dGn"/>
+                <outlet property="accountBeanLabel" destination="9Z6-KP-JdU" id="5LC-W9-eR5"/>
+                <outlet property="availableAllMoneyLabel" destination="g2G-yc-xeY" id="hbr-hL-D2P"/>
+                <outlet property="availableMoneyLabel" destination="RPs-NX-Y26" id="g90-nR-0zO"/>
+                <outlet property="estimatAmountPayableLabel" destination="hl1-dd-UNh" id="HRk-u6-dGb"/>
+                <outlet property="getUpWeightGoldLabel" destination="wIa-tb-CCu" id="fyo-PY-px6"/>
                 <outlet property="goldSwitch" destination="1XO-EE-vhq" id="htV-T6-XQ0"/>
                 <outlet property="moneyTextField" destination="KEI-IF-L4v" id="hPW-rP-DVC"/>
             </connections>
