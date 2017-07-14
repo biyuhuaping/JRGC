@@ -20,6 +20,7 @@
 #define USERINFOTWO @"userInfoTwo"
 #define SIGN @"sign"
 #define PRODETAIL @"prodetail"
+#define COLLECTIONDETAIL  @"CollectionDetail"
 
 @interface UCFHomeAPIManager () <NetworkModuleDelegate>
 @property (strong, nonatomic) NSMutableDictionary *requestDict;
@@ -98,6 +99,12 @@
                 break;
         }
     }
+}
+- (void)fetchCollectionDetailInfoWithParameter:(NSDictionary *)parameter completionHandler:(NetworkCompletionHandler)completionHandler
+{
+    
+     [[NetworkModule sharedNetworkModule] newPostReq:parameter tag:kSXTagColPrdclaimsDetail owner:self signature:YES Type:SelectAccoutTypeP2P];
+    [self.requestDict setObject:completionHandler forKey:COLLECTIONDETAIL];
 }
 
 //开始请求
@@ -195,6 +202,10 @@
         NetworkCompletionHandler complete = [self.requestDict objectForKey:PRODETAIL];
         complete(nil, dic);
         [self.requestDict removeObjectForKey:PRODETAIL];
+    }else if (tag.intValue == kSXTagColPrdclaimsDetail) {
+        NetworkCompletionHandler complete = [self.requestDict objectForKey:COLLECTIONDETAIL];
+        complete(nil, dic);
+        [self.requestDict removeObjectForKey:COLLECTIONDETAIL];
     }
 }
 //请求失败
@@ -229,6 +240,10 @@
         NetworkCompletionHandler complete = [self.requestDict objectForKey:PRODETAIL];
         complete(err, nil);
         [self.requestDict removeObjectForKey:PRODETAIL];
+    }else if (tag.intValue == kSXTagColPrdclaimsDetail) {
+        NetworkCompletionHandler complete = [self.requestDict objectForKey:COLLECTIONDETAIL];
+        complete(err, nil);
+        [self.requestDict removeObjectForKey:COLLECTIONDETAIL];
     }
 }
 
