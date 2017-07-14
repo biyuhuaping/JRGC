@@ -12,6 +12,7 @@
 #import "UCFProjectLabel.h"
 #import "UCFMicroMoneyModel.h"
 #import "UCFAngleView.h"
+#import "UCFGoldModel.h"
 
 @interface UCFHomeListCell ()
 @property (weak, nonatomic) IBOutlet UILabel *proName;
@@ -462,6 +463,12 @@
         self.circleProgressView.pathFillColor = UIColorWithRGB(0xe2e2e2);//未绘制的进度条颜色
         //            self.progressView.progressLabel.textColor = UIColorWithRGB(0x909dae);
     }
+    
+}
+
+- (void)setGoldModel:(UCFGoldModel *)goldModel
+{
+    _goldModel = goldModel;
     
 }
 

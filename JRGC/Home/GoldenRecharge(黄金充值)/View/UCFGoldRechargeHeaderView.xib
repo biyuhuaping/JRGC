@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13122.19" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.16"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="UCFGoldRechargeHeaderView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="153"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入充值金额，最低10元" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3La-MU-PV1">
+                    <rect key="frame" x="15" y="32" width="345" height="37"/>
+                    <color key="backgroundColor" red="0.98823529409999999" green="0.56078431370000004" blue="0.054901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="37" id="s2K-Jc-gup"/>
+                    </constraints>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Lorem ipsum dolor sit er elit lamet, consectetaur " textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Tb0-DI-nT7">
+                    <rect key="frame" x="15" y="74" width="345" height="30"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="QNz-0k-SL4"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MfQ-Wm-QjZ">
+                    <rect key="frame" x="15" y="101" width="345" height="37"/>
+                    <color key="backgroundColor" red="0.48627450979999998" green="0.61568627450000002" blue="0.78039215689999997" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="37" id="I6K-39-hZZ"/>
+                    </constraints>
+                    <state key="normal" title="提交"/>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="3La-MU-PV1" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="7Gk-cw-ZMl"/>
+                <constraint firstItem="MfQ-Wm-QjZ" firstAttribute="top" secondItem="3La-MU-PV1" secondAttribute="bottom" constant="32" id="DwD-Cr-mrV"/>
+                <constraint firstItem="Tb0-DI-nT7" firstAttribute="top" secondItem="3La-MU-PV1" secondAttribute="bottom" constant="5" id="RBK-0U-kjh"/>
+                <constraint firstItem="MfQ-Wm-QjZ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="XdM-yK-stc"/>
+                <constraint firstAttribute="trailing" secondItem="MfQ-Wm-QjZ" secondAttribute="trailing" constant="15" id="Y4y-Oa-DmM"/>
+                <constraint firstItem="3La-MU-PV1" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="32" id="dvT-qw-lDz"/>
+                <constraint firstAttribute="trailing" secondItem="Tb0-DI-nT7" secondAttribute="trailing" constant="15" id="h9y-73-6xR"/>
+                <constraint firstItem="Tb0-DI-nT7" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="lEJ-LR-wQO"/>
+                <constraint firstAttribute="trailing" secondItem="3La-MU-PV1" secondAttribute="trailing" constant="15" id="mgW-Mm-FbU"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="textView" destination="Tb0-DI-nT7" id="h3Y-jk-o0Q"/>
+            </connections>
+            <point key="canvasLocation" x="30.5" y="-113"/>
+        </view>
+    </objects>
+</document>

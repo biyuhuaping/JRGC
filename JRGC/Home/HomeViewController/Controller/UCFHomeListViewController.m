@@ -138,7 +138,7 @@
         return 0.001;
     }
     else {
-        if (section == 3) {
+        if (section == 4) {
             return 0.001;
         }
         return 8;
@@ -194,6 +194,9 @@
         }
         else if ([type isEqualToString:@"12"]) {
             [self.delegate homeList:self tableView:self.tableView didClickedWithModel:nil withType:UCFHomeListTypeZXMore];
+        }
+        else if ([type isEqualToString:@"15"]) {
+            
         }
     }
 }

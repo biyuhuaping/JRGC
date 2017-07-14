@@ -72,6 +72,8 @@
     }
     //黄金账户
     UCFUserInfoListItem *userInfoList2 = [UCFUserInfoListItem itemWithTitle:@"黄金账户" destVcClass:nil];
+#warning test
+    self.userInfoOneModel.zxOpenStatus = @"4";
     
     if ([self.userInfoOneModel.zxOpenStatus intValue] <= 2) {
         userInfoList2.isShow = NO;
