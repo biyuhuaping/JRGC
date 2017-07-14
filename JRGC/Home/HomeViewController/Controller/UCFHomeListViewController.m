@@ -195,6 +195,9 @@
         else if ([type isEqualToString:@"12"]) {
             [self.delegate homeList:self tableView:self.tableView didClickedWithModel:nil withType:UCFHomeListTypeZXMore];
         }
+        else if ([type isEqualToString:@"15"]) {
+            
+        }
     }
 }
 

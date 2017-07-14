@@ -11,4 +11,5 @@
 @interface UCFGoldRechargeModel : NSObject
 @property (assign, nonatomic) BOOL isShowBlackDot;
 @property (copy, nonatomic) NSString *tipString;
+@property (assign, nonatomic) CGFloat cellHeight;
 @end

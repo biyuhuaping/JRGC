@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="153"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3La-MU-PV1">
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入充值金额，最低10元" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3La-MU-PV1">
                     <rect key="frame" x="15" y="32" width="345" height="37"/>
                     <color key="backgroundColor" red="0.98823529409999999" green="0.56078431370000004" blue="0.054901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
@@ -56,6 +56,9 @@
                 <constraint firstAttribute="trailing" secondItem="3La-MU-PV1" secondAttribute="trailing" constant="15" id="mgW-Mm-FbU"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="textView" destination="Tb0-DI-nT7" id="h3Y-jk-o0Q"/>
+            </connections>
             <point key="canvasLocation" x="30.5" y="-113"/>
         </view>
     </objects>

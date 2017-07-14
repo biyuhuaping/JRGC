@@ -10,8 +10,10 @@
 #import "UCFGoldRechargeModel.h"
 
 @interface UCFGoldRechargeCell ()
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *blackDotW;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tipStringLeftSpace;
 @property (weak, nonatomic) IBOutlet UILabel *tipLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *blackDot;
+
 @end
 
 @implementation UCFGoldRechargeCell
@@ -25,10 +27,12 @@
 {
     _model = model;
     if (model.isShowBlackDot) {
-        self.blackDotW.constant = 10;
+        self.tipStringLeftSpace.constant = 25;
+        self.blackDot.hidden = NO;
     }
     else {
-        self.blackDotW.constant = 0;
+        self.blackDot.hidden = YES;
+        self.tipStringLeftSpace.constant = 15;
     }
     self.tipLabel.text = model.tipString;
 }

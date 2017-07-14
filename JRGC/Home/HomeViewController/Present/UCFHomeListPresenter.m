@@ -71,6 +71,7 @@
         UCFHomeListGroup *group3 = [[UCFHomeListGroup alloc] init];
         group3.headTitle = @"工场黄金";
         group3.showMore = YES;
+        group3.type = @"15";
         group3.headerImage = @"mine_icon_gold";
         _groupPresenter3 = [UCFHomeListGroupPresenter presenterWithGroup:group3];
     }
@@ -181,16 +182,12 @@
 //                        weakSelf.groupPresenter0.group.type = group.type;
                         weakSelf.groupPresenter0.group.prdlist = [weakSelf productPrdListWithDataSource:array];
                     }
+                    else if ([group.type isEqualToString:@"15"]) {
+                        weakSelf.groupPresenter2.group.type = group.type;
+                        weakSelf.groupPresenter2.group.prdlist = [weakSelf productPrdListWithDataSource:array];
+                    }
                 }
             }
-            
-            NSMutableArray *temp2 = [NSMutableArray array];
-            UCFHomeListCellModel *model = [[UCFHomeListCellModel alloc] init];
-            model.moedelType = UCFHomeListCellModelTypeDefault;
-            UCFHomeListCellPresenter *cellPresenter = [UCFHomeListCellPresenter presenterWithItem:model];
-            [temp2 addObject:cellPresenter];
-            self.groupPresenter2.group.prdlist = temp2;
-            
             
             UCFHomeListCellModel *listInfo = [resultDict objectForKey:@"listInfo"];
             UCFHomeListCellPresenter *temp3 = [self.groupPresenter3.group.prdlist lastObject];
