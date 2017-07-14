@@ -222,7 +222,12 @@ NSString * const ID = @"cycleCell";
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     int itemIndex = (scrollView.contentOffset.x + self.mainView.sd_width * 0.5) / self.mainView.sd_width;
-    int indexOnPageControl = itemIndex % self.imagesGroup.count;
+    int indexOnPageControl;
+    if (self.imagesGroup.count == 0) {
+        indexOnPageControl = 0;
+    }
+    else
+        indexOnPageControl = itemIndex % self.imagesGroup.count;
     _pageControl.currentPage = indexOnPageControl;
 }
 

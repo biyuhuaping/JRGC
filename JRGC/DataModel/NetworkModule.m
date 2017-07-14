@@ -1316,6 +1316,10 @@ static NetworkModule *gInstance = NULL;
             break;
         case  kSXTagGoldAuthorizedOpenAccount: //黄金授权
             parameter = [NEW_SERVER_IP stringByAppendingString:GOLDAUTHORIZOPENACCOUT];
+            break;
+        case kSXTagGoldList:
+            parameter = [NEW_SERVER_IP stringByAppendingString:GOLDENLIST];
+            break;
     }
     //给原有参数字典添加公共参数
     if (!data) {

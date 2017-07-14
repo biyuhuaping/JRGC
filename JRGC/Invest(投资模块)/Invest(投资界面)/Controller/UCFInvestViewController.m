@@ -10,6 +10,7 @@
 #import "UCFHonorInvestViewController.h"
 #import "UCFMicroMoneyViewController.h"
 #import "UCFInvestTransferViewController.h"
+#import "UCFGoldenViewController.h"
 #import "PagerView.h"
 #import "UCFSelectedView.h"
 
@@ -21,6 +22,7 @@
 @property (weak, nonatomic) UCFSelectedView *itemSelectedView;
 @property (strong, nonatomic) UCFHonorInvestViewController *honorInvest;
 @property (strong, nonatomic) UCFMicroMoneyViewController *microMoney;
+@property (strong, nonatomic) UCFGoldenViewController *golden;
 @property (strong, nonatomic) UCFInvestTransferViewController *investTransfer;
 
 @property (strong, nonatomic) UCFBaseViewController *currentViewController;
@@ -70,16 +72,19 @@
     self.microMoney.rootVc = self;
     [self addChildViewController:self.microMoney];
     
+    self.golden = [[UCFGoldenViewController alloc] initWithNibName:@"UCFGoldenViewController" bundle:nil];
+    self.golden.rootVc = self;
+    [self addChildViewController:self.golden];
+    
     self.investTransfer = [[UCFInvestTransferViewController alloc]initWithNibName:@"UCFInvestTransferViewController" bundle:nil];
     self.investTransfer.rootVc = self;
     [self addChildViewController:self.investTransfer];
-    
 
 }
 - (void)createUI {
     _pagerView = [[PagerView alloc] initWithFrame:CGRectMake(0,20,ScreenWidth,ScreenHeight - 20 - 49)
                                SegmentViewHeight:44
-                                      titleArray:@[@"尊享",@"微金",@"债转"]
+                                      titleArray:@[@"尊享", @"微金", @"黄金", @"债转"]
                                       Controller:self
                                        lineWidth:44
                                       lineHeight:3];
