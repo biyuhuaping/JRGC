@@ -11,7 +11,8 @@
 #import "UCFHomeListCell.h"
 #import "UCFHomeListHeaderSectionView.h"
 #import "UCFGoldModel.h"
-
+#import "UCFGoldPurchaseViewController.h"
+#import "UCFGoldAuthorizationViewController.h"
 @interface UCFGoldenViewController () <UITableViewDelegate, UITableViewDataSource, UCFHomeListCellHonorDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (weak, nonatomic) UCFGoldenHeaderView *goldenHeader;
@@ -128,7 +129,20 @@
 
 - (void)homelistCell:(UCFHomeListCell *)homelistCell didClickedProgressViewAtIndexPath:(NSIndexPath *)indexPath
 {
+        if(![UserInfoSingle sharedManager].goldAuthorization){
     
+            UCFGoldAuthorizationViewController *goldAuthorizationVC = [[UCFGoldAuthorizationViewController alloc]initWithNibName:@"UCFGoldAuthorizationViewController" bundle:nil];
+            [self.navigationController pushViewController:goldAuthorizationVC  animated:YES];
+            return;
+        }
+    
+    NSDictionary *data  = [self.dataArray objectAtIndex:indexPath.row];
+    
+    
+    NSString *nmProClaimIdStr = [data objectForKey:@"nmPrdClaimId"];
+    NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId",nmProClaimIdStr, @"nmPrdClaimId",nil];
+    
+    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagGetGoldProClaimDetail owner:self signature:YES Type:SelectAccoutDefault];
 }
 
 - (void)refreshData {
@@ -188,6 +202,20 @@
             if (![rsttext isEqualToString:@""] && rsttext) {
                 [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
             }
+        }
+    }else if (tag.integerValue == kSXTagGetGoldProClaimDetail){
+        
+        NSMutableDictionary *dic = [result objectFromJSONString];
+        NSString *rsttext = dic[@"message"];
+        NSDictionary *dataDict = [dic objectSafeDictionaryForKey:@"data"];
+        if ( [dic[@"ret"] boolValue]) {
+            UCFGoldPurchaseViewController *goldAuthorizationVC = [[UCFGoldPurchaseViewController alloc]initWithNibName:@"UCFGoldPurchaseViewController" bundle:nil];
+            goldAuthorizationVC.dataDic = dataDict;
+            [self.navigationController pushViewController:goldAuthorizationVC  animated:YES];
+        }
+        else
+        {
+            [AuxiliaryFunc showAlertViewWithMessage:rsttext];
         }
     }
     if ([self.tableview.header isRefreshing]) {
