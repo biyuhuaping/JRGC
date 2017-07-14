@@ -12,9 +12,11 @@
 #import "UCFCellStyleModel.h"
 #import "UCFGoldCashViewController.h"
 #import "GoldTransactionRecordViewController.h"
+#import "UCFGoldRechargeViewController.h"
 #import "GoldAccountFirstCell.h"
 #import "UCFMyGoldInvestInfoViewController.h"
-@interface UCFGoldAccountViewController ()<UITableViewDelegate,UITableViewDataSource>
+
+@interface UCFGoldAccountViewController ()<UITableViewDelegate,UITableViewDataSource, GoldAccountFirstCellDeleage>
 @property (weak, nonatomic) IBOutlet UITableView *baseTableView;
 @property (weak, nonatomic) IBOutlet UIButton *buyGoldBtn;
 @property (weak, nonatomic) IBOutlet UIButton *withdrawalsBtn;
@@ -142,6 +144,7 @@
             UIView *lineView = [Common addSepateViewWithRect:CGRectMake(0, model.cellHeight - 0.5, ScreenWidth, 0.5) WithColor:UIColorWithRGB(0xe3e5ea)];
             lineView.tag = 1000;
             [cell.contentView addSubview:lineView];
+            cell.delegate = self;
             cell.textLabel.text = @"可用余额";
         }
         [cell updateaVailableMoenyLab:self.availableGoldAmount];
@@ -213,6 +216,20 @@
     } else if ([title isEqualToString:@"提金"]) {
         
     }
+}
+    
+#pragma mark - GoldAccountFirstCellDelegate
+    
+- (void)goldAccountFirstCell:(GoldAccountFirstCell *)goldFirstCell didClickedRechargeButton:(UIButton *)button
+    {
+    UCFGoldRechargeViewController *goldRecharge = [[UCFGoldRechargeViewController alloc] initWithNibName:@"UCFGoldRechargeViewController" bundle:nil];
+        goldRecharge.baseTitleText = @"充值";
+    [self.navigationController pushViewController:goldRecharge animated:YES];
+}
+    
+- (void)goldAccountFirstCell:(GoldAccountFirstCell *)goldFirstCell didClickedCashButton:(UIButton *)button
+    {
+        
 }
 #pragma 去已购黄金页面
 -(void)gotoGoldInvestInfoVC{
