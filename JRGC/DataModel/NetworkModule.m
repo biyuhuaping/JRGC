@@ -1302,7 +1302,9 @@ static NetworkModule *gInstance = NULL;
         case ksxTagGoldCurrentPrice:
             parameter = [NEW_SERVER_IP stringByAppendingString:CURRENTGOLDPRICE];
             break;
-            
+        case kSXTagGoldTradeFlowList:
+            parameter = [NEW_SERVER_IP stringByAppendingString:GOLDTRADELIST];
+            break;
     }
     //给原有参数字典添加公共参数
     if (!data) {
