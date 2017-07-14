@@ -1303,12 +1303,19 @@ static NetworkModule *gInstance = NULL;
             parameter = [NEW_SERVER_IP stringByAppendingString:CURRENTGOLDPRICE];
             break;
         case kSXTagGetGoldPrdClaimList:   // 获取黄金列表
-            parameter = [NEW_SERVER_IP stringByAppendingString:CURRENTGOLDPRICE];
+            parameter = [NEW_SERVER_IP stringByAppendingString:GETGOlDPRDCLAIMLIST];
             break;
         case kSXTagGetGoldPrdClaimDetail: //黄金标详情页
-            parameter = [NEW_SERVER_IP stringByAppendingString:CURRENTGOLDPRICE];
+            parameter = [NEW_SERVER_IP stringByAppendingString:GETGOlDPRDCLAIMDETAILINFO];
             break;
-            
+        case kSXTagGoldCalculateAmount:    //黄金计算器
+            parameter = [NEW_SERVER_IP stringByAppendingString:GOLDCALCULATEAOUNTURL];
+            break;
+        case kSXTagGetGoldProClaimDetail: //购买输入金额页信息查询
+            parameter = [NEW_SERVER_IP stringByAppendingString:GETGOLDPROCLAIMDETAILIL];
+            break;
+        case  kSXTagGoldAuthorizedOpenAccount: //黄金授权
+            parameter = [NEW_SERVER_IP stringByAppendingString:GOLDAUTHORIZOPENACCOUT];
     }
     //给原有参数字典添加公共参数
     if (!data) {

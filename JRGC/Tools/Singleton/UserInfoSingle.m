@@ -83,6 +83,7 @@
     [[NSUserDefaults standardUserDefaults] setValue:dict[@"openStatus"] forKey:OPENSTATUS];
     [[NSUserDefaults standardUserDefaults] setValue:dict[@"isCompanyAgent"] forKey:COMPANYAGENT];
     [[NSUserDefaults standardUserDefaults] setValue:dict[@"enjoyOpenStatus"] forKey:EnjoyState];
+    [[NSUserDefaults standardUserDefaults] setValue:dict[@"nmAuthorization"] forKey:GOldAUTHORIZATION];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     //  GrowingIO添加字段
