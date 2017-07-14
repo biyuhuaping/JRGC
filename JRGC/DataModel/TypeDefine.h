@@ -259,6 +259,7 @@
 #define CURRENTDAYINFO      @"api/myPayment/v2/myPaymentDetail.json" //当前日的回款信息
 #define GOLDACCOUNT         @"api/nmAccount/v2/getNmAccountInfo.json" //获取黄金账户信息
 #define CURRENTGOLDPRICE    @"api/nmCommon/v2/getRealTimePrice.json" //获取当前黄金价格
+#define GOLDTRADELIST       @"api/nmAccount/v2/getTradeFlowList.json"
 #define GOLDENLIST          @"api/nmPrdClaim/v2/getNmPrdClaimList.json" //获取黄金列表
 
 #define GETGOlDPRDCLAIMLIST @"api/nmPrdClaim/v2/getNmPrdClaimList.json"// 获取黄金列表
@@ -490,6 +491,7 @@ enum kSXTag
     kSXTagCurrentDayInfo,               //当前日的回款信息
     kSXTagGoldAccount,                   //黄金账户信息
     ksxTagGoldCurrentPrice,              //当前黄金价格
+    kSXTagGoldTradeFlowList,             //交易流水
     kSXTagGetGoldPrdClaimList,           // 获取黄金列表
     kSXTagGetGoldPrdClaimDetail,         //黄金标详情页
     kSXTagGoldCalculateAmount,           //黄金计算器

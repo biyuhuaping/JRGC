@@ -7,7 +7,7 @@
 //
 
 #import "UCFBaseViewController.h"
-
+#import "UCFGoldTradeListModel.h"
 @interface UCFGoldTransactionDetailViewController : UCFBaseViewController
-
+@property(nonatomic, strong)UCFGoldTradeListModel *model;
 @end
