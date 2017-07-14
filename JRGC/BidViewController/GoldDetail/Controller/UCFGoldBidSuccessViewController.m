@@ -37,7 +37,7 @@
     
     self.fd_interactivePopDisabled = YES;
     self.isPurchaseSuccess = YES;
-    self.tableView.tableHeaderView = [self createHeaderView];
+//    self.tableView.tableHeaderView = [self createHeaderView];
     self.tableView.tableFooterView = [self cretateFooterView];
     self.tableView.separatorColor = UIColorWithRGB(0xe3e5ea);
     self.tableView.separatorInset = UIEdgeInsetsMake(0, 15, 0, 0);

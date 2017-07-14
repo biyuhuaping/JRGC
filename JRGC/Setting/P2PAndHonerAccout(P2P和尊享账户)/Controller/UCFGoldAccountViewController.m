@@ -13,6 +13,7 @@
 #import "UCFGoldCashViewController.h"
 #import "GoldTransactionRecordViewController.h"
 #import "GoldAccountFirstCell.h"
+#import "UCFMyGoldInvestInfoViewController.h"
 @interface UCFGoldAccountViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *baseTableView;
 @property (weak, nonatomic) IBOutlet UIButton *buyGoldBtn;
@@ -209,5 +210,10 @@
     } else if ([title isEqualToString:@"提金"]) {
         
     }
+}
+#pragma 去已购黄金页面
+-(void)gotoGoldInvestInfoVC{
+    UCFMyGoldInvestInfoViewController *myGoldInvestVC = [[UCFMyGoldInvestInfoViewController alloc] initWithNibName:@"UCFMyGoldInvestInfoViewController" bundle:nil];
+    [self.navigationController pushViewController:myGoldInvestVC animated:YES];
 }
 @end
