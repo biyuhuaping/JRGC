@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13122.19" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.16"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UCFGoldAccountViewController">
             <connections>
-                <outlet property="baseTableView" destination="eTp-qx-XCD" id="sDp-Es-2Y2"/>
+                <outlet property="baseTableView" destination="5vg-Gq-oQw" id="hFw-nS-TXh"/>
                 <outlet property="buyGoldBtn" destination="8ak-Md-g48" id="s5H-A8-pID"/>
                 <outlet property="goldCashBtn" destination="GJ9-BG-NMs" id="2R3-3o-7rL"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -23,15 +23,11 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eTp-qx-XCD">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="617"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jLt-DS-Tni">
-                    <rect key="frame" x="0.0" y="617" width="375" height="50"/>
+                    <rect key="frame" x="0.0" y="614" width="375" height="53"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2no-83-PHH">
-                            <rect key="frame" x="251.5" y="10" width="108.5" height="30"/>
+                            <rect key="frame" x="251.5" y="10" width="108.5" height="33"/>
                             <color key="backgroundColor" red="0.48627450980392156" green="0.61568627450980395" blue="0.7803921568627451" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <state key="normal" title="提金"/>
@@ -45,7 +41,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8ak-Md-g48">
-                            <rect key="frame" x="15" y="10" width="108.5" height="30"/>
+                            <rect key="frame" x="15" y="10" width="108.5" height="33"/>
                             <color key="backgroundColor" red="1" green="0.75294117647058822" blue="0.15294117647058825" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <state key="normal" title="买金"/>
@@ -59,7 +55,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GJ9-BG-NMs">
-                            <rect key="frame" x="133" y="10" width="108" height="30"/>
+                            <rect key="frame" x="133" y="10" width="108" height="33"/>
                             <color key="backgroundColor" red="0.48627450980392156" green="0.61568627450980395" blue="0.7803921568627451" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <state key="normal" title="变现"/>
@@ -99,15 +95,22 @@
                         <constraint firstItem="GJ9-BG-NMs" firstAttribute="leading" secondItem="8ak-Md-g48" secondAttribute="trailing" constant="10" id="ezM-kj-kbl"/>
                     </constraints>
                 </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5vg-Gq-oQw">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="606"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="oZU-Iz-8jV"/>
+                        <outlet property="delegate" destination="-1" id="Pqn-fR-8pe"/>
+                    </connections>
+                </tableView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="eTp-qx-XCD" secondAttribute="bottom" constant="50" id="5tB-LB-2nu"/>
-                <constraint firstItem="eTp-qx-XCD" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="H6g-YX-Y8U"/>
+                <constraint firstItem="jLt-DS-Tni" firstAttribute="top" secondItem="5vg-Gq-oQw" secondAttribute="bottom" constant="8" symbolic="YES" id="87p-DM-XHY"/>
+                <constraint firstAttribute="trailing" secondItem="5vg-Gq-oQw" secondAttribute="trailing" id="F2V-jh-Ilb"/>
                 <constraint firstAttribute="bottom" secondItem="jLt-DS-Tni" secondAttribute="bottom" id="NOU-VM-Vbs"/>
-                <constraint firstItem="jLt-DS-Tni" firstAttribute="top" secondItem="eTp-qx-XCD" secondAttribute="bottom" id="Qxs-kV-jyC"/>
-                <constraint firstItem="eTp-qx-XCD" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Rqc-49-cJ0"/>
-                <constraint firstAttribute="trailing" secondItem="eTp-qx-XCD" secondAttribute="trailing" id="dCm-zC-iwi"/>
+                <constraint firstItem="5vg-Gq-oQw" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="ZKZ-XS-chL"/>
+                <constraint firstItem="5vg-Gq-oQw" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ag0-RS-7Ad"/>
                 <constraint firstAttribute="trailing" secondItem="jLt-DS-Tni" secondAttribute="trailing" id="g62-4k-vpt"/>
                 <constraint firstItem="jLt-DS-Tni" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="jhk-pK-Gmf"/>
             </constraints>

@@ -14,6 +14,8 @@
 #import "GoldTransactionRecordViewController.h"
 #import "UCFGoldRechargeViewController.h"
 #import "GoldAccountFirstCell.h"
+#import "UCFMyGoldInvestInfoViewController.h"
+
 @interface UCFGoldAccountViewController ()<UITableViewDelegate,UITableViewDataSource, GoldAccountFirstCellDeleage>
 @property (weak, nonatomic) IBOutlet UITableView *baseTableView;
 @property (weak, nonatomic) IBOutlet UIButton *buyGoldBtn;
@@ -151,7 +153,10 @@
     return nil;
 }
 
-
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
 - (void)initData
 {
     self.dataArray = [NSMutableArray arrayWithCapacity:0];
@@ -171,8 +176,8 @@
     [self addLeftButton];
     [self addRightBtn];
     baseTitleLabel.text = @"黄金账户";
-    self.baseTableView.delegate = self;
-    self.baseTableView.dataSource = self;
+//    self.baseTableView.delegate = self;
+//    self.baseTableView.dataSource = self;
     [_buyGoldBtn setBackgroundColor:UIColorWithRGB(0xffc027)];
     [_withdrawalsBtn setBackgroundColor:UIColorWithRGB(0x7C9DC7)];
     [_goldCashBtn setBackgroundColor:UIColorWithRGB(0x7C9DC7)];
@@ -226,5 +231,9 @@
     {
         
 }
-    
+#pragma 去已购黄金页面
+-(void)gotoGoldInvestInfoVC{
+    UCFMyGoldInvestInfoViewController *myGoldInvestVC = [[UCFMyGoldInvestInfoViewController alloc] initWithNibName:@"UCFMyGoldInvestInfoViewController" bundle:nil];
+    [self.navigationController pushViewController:myGoldInvestVC animated:YES];
+}
 @end
