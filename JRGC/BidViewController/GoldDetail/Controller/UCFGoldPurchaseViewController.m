@@ -12,6 +12,7 @@
 #import "UCFGoldBidSuccessViewController.h"
 #import "UCFGoldCalculatorView.h"
 #import "AppDelegate.h"
+#import "SubInvestmentCell.h"
 @interface UCFGoldPurchaseViewController ()<UITableViewDelegate,UITableViewDataSource,UCFGoldMoneyBoadCellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 - (IBAction)gotoGoldBidSuccessVC:(id)sender;
@@ -31,10 +32,7 @@
     UITapGestureRecognizer *frade = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardDown)];
     [self.view addGestureRecognizer:frade];
 }
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    
-    return 3;
-}
+
 
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     
@@ -67,29 +65,79 @@
         lineView.backgroundColor = UIColorWithRGB(0xe3e5ea);
         [headerView addSubview:lineView];
         return headerView;
-    }else{
-        UIView *topView =[[UIView alloc] init];
-        topView.backgroundColor = UIColorWithRGB(0xebebee);
-        topView.frame = CGRectMake(0, 0, ScreenWidth, 10.0f);
-//        [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:topView isTop:YES];
-//        [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:topView isTop:NO];
+    }
+    else{
+        UIView *topView =[[UIView alloc] initWithFrame: CGRectMake(0, 0, ScreenWidth, 10.0f)];
+        topView.backgroundColor = [UIColor clearColor];
+        //        [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:topView isTop:YES];
+        //        [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:topView isTop:NO];
         return topView;
     }
+    return nil;
+}
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    
+    return 2;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section == 1) {
-        return 274;
-    }else {
+    switch (indexPath.section) {
+        case 0:
+        {
+            if (indexPath.row == 0) {
+                return 109;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+            break;
+        case 1:
+        {
+            return 274;
+        }
+            break;
+        case 2:
+        {
+            return 44;
+        }
+            break;
+        default:
+            break;
+    }
         return 44;
-    }
-    
 }
+//-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+//    UIView *headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 10)];
+//    
+//    headerView.backgroundColor = [UIColor clearColor];
+//    
+//    
+//    
+//}
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    if (section == 2) {
-        return 47;
-    }
-    return 10;
     
+    switch (section) {
+        case 0:
+        {
+             return 0;
+        }
+            break;
+        case 1:
+        {
+             return 10;
+        }
+            break;
+        case 2:
+        {
+            return 47;
+
+        }
+            break;
+        default:
+            break;
+    }
+    return 0;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     
@@ -126,11 +174,23 @@
     UITableViewCell *cell = [tableView  dequeueReusableCellWithIdentifier:cellId];
     if (indexPath.section == 0) {
       
-        if (!cell) {
-            cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellId];
+        static NSString *cellStr1 = @"cell1";
+        SubInvestmentCell *cell = [tableView dequeueReusableCellWithIdentifier:cellStr1];
+        if (cell == nil) {
+            cell = [[[NSBundle mainBundle]loadNibNamed:@"SubInvestmentCell" owner:self options:nil] firstObject];
         }
-        cell.textLabel.text = @"投标页面";
-         return cell;
+//        InvestmentItemInfo *info =  self.bidArray[0];
+//        [cell setInvestItemInfo:info];
+        id prdLabelsList = [_dataDic objectForKey:@"prdLabelsList"];
+        if (![prdLabelsList isKindOfClass:[NSNull class]]) {
+            for (NSDictionary *dic in prdLabelsList) {
+                NSString *labelPriority = dic[@"labelPriority"];
+                if ([labelPriority isEqual:@"1"]) {
+                    cell.angleView.angleString = dic[@"labelName"];
+                }
+            }
+        }
+        return cell;
     }else if (indexPath.section == 1){
         static NSString *cellId = @"UCFGoldMoneyBoadCell";
         UCFGoldMoneyBoadCell *cell = [tableView  dequeueReusableCellWithIdentifier:cellId];
