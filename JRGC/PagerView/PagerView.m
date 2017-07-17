@@ -9,7 +9,7 @@
 #import "PagerView.h"
 #define DefalutColor UIColorWithRGB(0x555555)
 #define SelectedColor UIColorWithRGB(0xfd4d4c)
-#define ButtonWidth   100
+#define ButtonWidth   60
 @interface PagerView ()<UIScrollViewDelegate>
 
 @property (strong, nonatomic) NSArray           *nameArray;
@@ -30,7 +30,6 @@
     if (self = [super initWithFrame:frame]){
         
         _viewController = controller;
-//        float avgWidth = (frame.size.width/titleArray.count);
         self.nameArray = titleArray;
         _buttonArray = [NSMutableArray array]; //按钮数组
         
