@@ -247,9 +247,9 @@
             }
             for (NSDictionary *temp in resut) {
                 UCFGoldModel *gold = [UCFGoldModel goldModelWithDict:temp];
-//                [self.dataArray addObject:gold];
+                [self.dataArray addObject:gold];
             }
-            [self.dataArray addObjectsFromArray:resut];
+//            [self.dataArray addObjectsFromArray:resut];
             [self.tableview reloadData];
         }else {
             if (![rsttext isEqualToString:@""] && rsttext) {
