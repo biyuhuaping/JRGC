@@ -15,6 +15,7 @@
 #import "UCFGoldAuthorizationViewController.h"
 #import "UCFLoginViewController.h"
 #import "HSHelper.h"
+#import "UCFGoldDetailViewController.h"
 @interface UCFGoldenViewController () <UITableViewDelegate, UITableViewDataSource, UCFHomeListCellHonorDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (weak, nonatomic) UCFGoldenHeaderView *goldenHeader;
@@ -87,7 +88,7 @@
     }
     cell.tableView = tableView;
     cell.indexPath = indexPath;
-//    cell.goldModel = [self.dataArray objectAtIndex:indexPath.row];
+    cell.goldModel = [self.dataArray objectAtIndex:indexPath.row];
     return cell;
 }
 
@@ -127,6 +128,32 @@
         return view;
     }
     return nil;
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
+        //如果未登录，展示登录页面
+        [self showLoginView];
+    } else  {
+        HSHelper *helper = [HSHelper new];
+        
+        //检查企业老用户是否开户--未开户去主站开户
+        NSString *messageStr =  [helper checkCompanyIsOpen:self.accoutType];
+        if (![messageStr isEqualToString:@""]) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil];
+            [alert show];
+            return;
+        }
+        NSDictionary *data  = [self.dataArray objectAtIndex:indexPath.row];
+        
+        
+        NSString *nmProClaimIdStr = [data objectForKey:@"nmPrdClaimId"];
+        NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId",nmProClaimIdStr, @"nmPrdClaimId",nil];
+        [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagGetGoldPrdClaimDetail owner:self signature:YES Type:SelectAccoutTypeGold];
+        
+    }
+
+    
 }
 
 - (void)homelistCell:(UCFHomeListCell *)homelistCell didClickedProgressViewAtIndexPath:(NSIndexPath *)indexPath
@@ -238,6 +265,21 @@
             UCFGoldPurchaseViewController *goldAuthorizationVC = [[UCFGoldPurchaseViewController alloc]initWithNibName:@"UCFGoldPurchaseViewController" bundle:nil];
             goldAuthorizationVC.dataDic = dataDict;
             [self.navigationController pushViewController:goldAuthorizationVC  animated:YES];
+        }
+        else
+        {
+            [AuxiliaryFunc showAlertViewWithMessage:rsttext];
+        }
+    }
+    else if (tag.integerValue == kSXTagGetGoldPrdClaimDetail){
+        
+        NSMutableDictionary *dic = [result objectFromJSONString];
+        NSString *rsttext = dic[@"message"];
+        NSDictionary *dataDict = [dic objectSafeDictionaryForKey:@"data"];
+        if ( [dic[@"ret"] boolValue]) {
+            UCFGoldDetailViewController*goldDetailVC = [[UCFGoldDetailViewController alloc]initWithNibName:@"UCFGoldDetailViewController" bundle:nil];
+            goldDetailVC.dataDict = dataDict;
+            [self.navigationController pushViewController:goldDetailVC  animated:YES];
         }
         else
         {

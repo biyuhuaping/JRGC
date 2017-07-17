@@ -7,8 +7,15 @@
 //
 
 #import "UCFGoldCalculatorView.h"
-
-@interface UCFGoldCalculatorView ()
+#import "NetworkModule.h"
+#import "JSONKit.h"
+#import "UIDic+Safe.h"
+#import "AuxiliaryFunc.h"
+@interface UCFGoldCalculatorView ()<NetworkModuleDelegate>
+@property (weak, nonatomic) IBOutlet UILabel *GoldPriceLabel;
+@property (weak, nonatomic) IBOutlet UILabel *glodFeeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *purchaseMoneyLabel;
+- (IBAction)GoldCalculatorBtn:(id)sender;
 
 @end
 
@@ -101,6 +108,44 @@
     NSLog(@"此时view的frame====》 %@",NSStringFromCGRect(self.frame));
     
 }
+- (IBAction)GoldCalculatorBtn:(id)sender {
+    //    nmTypeId	黄金品种Id	string
+    //    purchaseGoldAmount
+    NSDictionary *paramDict = @{@"nmTypeId": self.nmTypeIdStr,@"purchaseGoldAmount":self.goldMoneyTextField.text};
+    [[NetworkModule sharedNetworkModule] newPostReq:paramDict tag:kSXTagGoldCalculateAmount owner:self signature:YES Type:SelectAccoutTypeGold];
+}
+-(void)beginPost:(kSXTag)tag
+{
+    
+}
+- (void)endPost:(id)result tag:(NSNumber *)tag
+{
+    if (tag.integerValue ==  kSXTagGoldCalculateAmount) {
+        NSString *data = (NSString *)result;
+        NSMutableDictionary *dic = [data objectFromJSONString];
+        if ([dic[@"ret"] boolValue]) {
+            
+            
+            /*
+             buyServiceMoney	买入收入续费	string
+             purchaseMoney	购买金额	string
+             realGoldPrice	实时金价	string
+             */
+            NSDictionary *resultDic = [[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"result"];
+            self.GoldPriceLabel.text = [NSString stringWithFormat:@"¥%@",[resultDic objectSafeForKey:@"realGoldPrice"]];
+            self.glodFeeLabel.text = [NSString stringWithFormat:@"¥%@",[resultDic objectSafeForKey:@"buyServiceMoney"]];
+            self.purchaseMoneyLabel.text = [NSString stringWithFormat:@"¥%@",[resultDic objectSafeForKey:@"purchaseMoney"]];
+          
+        }else{
+             [AuxiliaryFunc showAlertViewWithMessage:[dic objectSafeForKey:@"message"]];
+        }
+    }
+}
+-(void)errorPost:(NSError*)err tag:(NSNumber*)tag
+{
+//    calculatorBtn.enabled = YES;
+}
+
 - (void)removeBtn{
     [self removeFromSuperview];
 }
@@ -116,4 +161,5 @@
     
      [self removeFromSuperview];
 }
+
 @end

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface UCFGoldCalculatorView : UIView
+@property (nonatomic,strong)NSString *nmTypeIdStr;
 @property (strong, nonatomic) IBOutlet UITextField *goldMoneyTextField;
 - (IBAction)closeView:(id)sender;
 @property (weak, nonatomic) IBOutlet UIView *calculatorView;

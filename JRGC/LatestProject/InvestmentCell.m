@@ -10,7 +10,7 @@
 #import "NSString+FormatForThousand.h"
 #import "UCFToolsMehod.h"
 #import "UCFLatestProjectViewController.h"
-
+#import "UCFGoldModel.h"
 @implementation InvestmentCell
 
 - (void)awakeFromNib{
@@ -472,5 +472,100 @@
     
     
 }
+// 投资页普通表头
+- (void)setGoldInvestItemInfo:(UCFGoldModel *)aItemInfo{
+//    self.type = aItemInfo.type; //标类型
+    _investButton.userInteractionEnabled = NO;
+    _prdNameLab.text = aItemInfo.nmPrdClaimName;//债权名称
+    _progressLab.textAlignment = NSTextAlignmentLeft;
+    _prdNameLab.textColor = UIColorWithRGB(0x333333);
+    _prdNameLab.font = [UIFont systemFontOfSize:14.0];
+    
+    _progressLab.textColor = UIColorWithRGB(0xfc8f0e);
+    _progressLab.font = [UIFont boldSystemFontOfSize:15.0];
+    _progressLab.text = [NSString stringWithFormat:@"%@克/100克",aItemInfo.annualRate];//年化收益率
+    [_progressLab setFont:[UIFont boldSystemFontOfSize:10] string:@"克/100克"];
+//    if (aItemInfo.holdTime.length > 0) {
+//        _repayPeriodLab.text = [NSString stringWithFormat:@"%@~%@",aItemInfo.holdTime,aItemInfo.repayPeriodtext];//投资期限
+//    }else{
+       _repayPeriodLab.textAlignment = NSTextAlignmentLeft;
+//    }
+    _repayModeLab.text = [NSString stringWithFormat:@"可购%@克",aItemInfo.remainAmount];
+    
+    _repayPeriodLab.text = [NSString stringWithFormat:@"%@",aItemInfo.periodTerm];//投资天数    //贴 盾 固
+    
+//    NSMutableArray *imaArr = [NSMutableArray array];
+//    if (aItemInfo.platformSubsidyExpense.length > 0) {//贴
+//        [imaArr addObject:[UIImage imageNamed:@"invest_icon_buletie"]];
+//    }
+//    if (aItemInfo.guaranteeCompany.length > 0) {//盾
+//        [imaArr addObject:[UIImage imageNamed:@"particular_icon_guarantee_dark"]];
+//    }
+//    if (aItemInfo.fixedDate.length > 0) {//固
+//        [imaArr addObject:[UIImage imageNamed:@"invest_icon_redgu-1"]];
+//    }
+//    if (aItemInfo.holdTime.length > 0) {//灵
+//        _repayPeriodLab.text = [NSString stringWithFormat:@"%@~%@",aItemInfo.holdTime,aItemInfo.repayPeriodtext];//投资期限
+//        [imaArr addObject:[UIImage imageNamed:@"invest_icon_ling"]];
+//    }else{
+//        _repayPeriodLab.text = aItemInfo.repayPeriodtext;//投资期限
+//    }
+//    
+    
+//    switch (imaArr.count) {
+//        case 1: {
+//            _imgView1.image = imaArr[0];
+//        }
+//            break;
+//        case 2: {
+//            _imgView1.image = imaArr[0];
+//            _imgView2.image = imaArr[1];
+//        }
+//            break;
+//        case 3: {
+//            _imgView1.image = imaArr[0];
+//            _imgView2.image = imaArr[1];
+//            _imgView3.image = imaArr[2];
+//        }
+//            break;
+//        case 4: {
+//            _imgView1.image = imaArr[0];
+//            _imgView2.image = imaArr[1];
+//            _imgView3.image = imaArr[2];
+//            _imgView4.image = imaArr[3];
+//        }
+//            break;
+//    }
+    CGFloat temp = 100 * (1 - [aItemInfo.remainAmount doubleValue]/[aItemInfo.totalAmount doubleValue]);
+    int temp1 =  (int)(temp);
+    if (temp1 == 0) {
+        temp1 = 1;
+    }
+    if ([aItemInfo.totalAmount doubleValue] - [aItemInfo.remainAmount doubleValue]  < [aItemInfo.minPurchaseAmount doubleValue]) {
+        temp1 = 0;
+    }
+    self.angleView.angleStatus = @"2";
+    self.progressView.textStr = [NSString stringWithFormat:@"%d%%",temp1];
+    
+    float progress = 1 - [aItemInfo.remainAmount doubleValue]/[aItemInfo.totalAmount doubleValue];
+    progress = 1000*progress;
+    if (progress > 0 && progress < 1) {
+        progress = 1;
+    }
+    NSInteger status = [aItemInfo.status integerValue];
+    //控制进度视图显示
+    if (status < 3) {
+        self.progressView.tintColor = UIColorWithRGB(0xffc027);
+        self.progressView.progressLabel.textColor = UIColorWithRGB(0x333333);
+        self.progressView.progressLabel.font = [UIFont systemFontOfSize:14.0f];
+        [self animateCircle:progress isAnim:NO];
+    }else {
+        self.progressView.tintColor = UIColorWithRGB(0xcfd5d7);
+    }
+    [self layoutSubviews];
+}
 
+-(void)layoutSubviews{
+    [super layoutSubviews];
+}
 @end

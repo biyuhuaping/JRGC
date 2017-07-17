@@ -7,7 +7,7 @@
 //
 
 #import "UCFGoldBidSuccessViewController.h"
-#import "UCFGoldBidSuccessHeaderView.h"
+//#import "UCFGoldBidSuccessHeaderView.h"
 #import "AppDelegate.h"
 #import "UCFInvestViewController.h"
 #import "UINavigationController+FDFullscreenPopGesture.h"
@@ -45,28 +45,32 @@
 }
 -(void)infoDataArray{
     
-    UCFSettingItem *item1 = [UCFSettingItem itemWithTitle:@"项目名称" withSubtitle:@"****"];
-    UCFSettingItem *item2 = [UCFSettingItem itemWithTitle:@"买入克重" withSubtitle:@"0.0克"];
-    
-    UCFSettingItem *item3 = [UCFSettingItem itemWithTitle:@"成交金价" withSubtitle:@"¥0.00"];
-    UCFSettingItem *item4 = [UCFSettingItem itemWithTitle:@"手续费" withSubtitle:@"¥0.00"];
-    UCFSettingItem *item5 = [UCFSettingItem itemWithTitle:@"支付金额" withSubtitle:@"¥0.00"];
+    NSString *nmPrdClaimNameStr = [_dataDict objectSafeForKey:@"nmPrdClaimName"];
+    UCFSettingItem *item1 = [UCFSettingItem itemWithTitle:@"项目名称" withSubtitle:nmPrdClaimNameStr];
+    NSString *purchaseGoldAmountStr = [NSString stringWithFormat:@"%@克",[_dataDict objectSafeForKey:@"purchaseGoldAmount"]];
+    UCFSettingItem *item2 = [UCFSettingItem itemWithTitle:@"买入克重" withSubtitle:purchaseGoldAmountStr];
+     NSString *dealGoldPriceStr = [NSString stringWithFormat:@"¥%@",[_dataDict objectSafeForKey:@"dealGoldPrice"]];
+    UCFSettingItem *item3 = [UCFSettingItem itemWithTitle:@"成交金价" withSubtitle:dealGoldPriceStr];
+     NSString *fee =[NSString stringWithFormat:@"¥%@", [_dataDict objectSafeForKey:@"fee"]];
+    UCFSettingItem *item4 = [UCFSettingItem itemWithTitle:@"手续费" withSubtitle:fee];
+     NSString *purchaseMoneyStr = [NSString stringWithFormat:@"¥%@",[_dataDict objectSafeForKey:@"purchaseMoney"]];
+    UCFSettingItem *item5 = [UCFSettingItem itemWithTitle:@"支付金额" withSubtitle:purchaseMoneyStr];
     
     self.dataArray = @[item1,item2,item3,item4,item5];
 }
--(UIView *)createHeaderView{
-    UCFGoldBidSuccessHeaderView *headerView = [[[NSBundle mainBundle]loadNibNamed:@"UCFGoldBidSuccessHeaderView" owner:nil options:nil]firstObject];
-    headerView.frame = CGRectMake(0, 0, ScreenWidth, 207.5);
-    if(_isPurchaseSuccess){
-        headerView.headerImageView.image = [UIImage imageNamed:@"gold_SuccessfulPurchase_icon"];
-        headerView.headerTitleLabel.text = @"购买成功";
-    }else{
-        headerView.headerImageView.image = [UIImage imageNamed:@"gold_FailurePurchase_icon"];
-        headerView.headerTitleLabel.text = @"购买失败";
-    }
-   
-    return headerView;
-}
+//-(UIView *)createHeaderView{
+////    UCFGoldBidSuccessHeaderView *headerView = [[UCFGoldBidSuccessHeaderView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 207.5)];
+////    headerView.backgroundColor = [UIColor redColor];
+////    if(_isPurchaseSuccess){
+////        headerView.headerImageView.image = [UIImage imageNamed:@"gold_SuccessfulPurchase_icon"];
+////        headerView.headerTitleLabel.text = @"购买成功";
+////    }else{
+////        headerView.headerImageView.image = [UIImage imageNamed:@"gold_FailurePurchase_icon"];
+////        headerView.headerTitleLabel.text = @"购买失败";
+////    }
+//   
+//    return headerView;
+//}
 - (UIView *)cretateFooterView
 {
     UIView *investBaseView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 15+37)];

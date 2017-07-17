@@ -20,6 +20,6 @@
 @property (copy, nonatomic) NSString *remainAmount;
 @property (copy, nonatomic) NSString *status;
 @property (copy, nonatomic) NSString *totalAmount;
-
+@property (copy, nonatomic) NSString *nmTypeId;
 + (instancetype)goldModelWithDict:(NSDictionary *)dict;
 @end
