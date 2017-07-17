@@ -56,11 +56,21 @@
 
 - (NSString *)minInvest
 {
+    if ([self.item.type isEqualToString:@"3"]) {
+        return self.item.minInvest ? [NSString stringWithFormat:@"%@.000克起", self.item.minInvest] : @"";
+    }
     return self.item.minInvest ? [NSString stringWithFormat:@"%@元起", self.item.minInvest] : @"";
 }
 
 - (NSString *)availBorrowAmount
 {
+    if ([self.item.type isEqualToString:@"3"]) {
+        if (self.item.remainAmount.floatValue > 0.00) {
+            return [NSString stringWithFormat:@"剩%@克", self.item.remainAmount];
+        }
+        else
+            return [NSString stringWithFormat:@"%@克", self.item.borrowAmount];
+    }
     NSString *temp = [NSString stringWithFormat:@"%lf",[self.item.borrowAmount doubleValue]-[self.item.completeLoan doubleValue]];
     return [self moneywithRemaining:temp total:self.item.borrowAmount];
 }
