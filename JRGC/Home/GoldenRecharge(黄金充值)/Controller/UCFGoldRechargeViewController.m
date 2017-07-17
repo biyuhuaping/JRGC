@@ -11,11 +11,13 @@
 #import "UCFGoldRechargeCell.h"
 #import "UCFGoldRechargeModel.h"
 #import "UCFGoldRechargeHistoryController.h"
+#import "UCFGoldRechargeWebController.h"
 
-@interface UCFGoldRechargeViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface UCFGoldRechargeViewController () <UITableViewDelegate, UITableViewDataSource, UCFGoldRechargeHeaderViewDelegate>
 @property (weak, nonatomic) UCFGoldRechargeHeaderView *goldRechargeHeader;
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (strong, nonatomic) NSMutableArray *dataArray;
+@property (copy, nonatomic) NSString *backUrl;
 @end
 
 @implementation UCFGoldRechargeViewController
@@ -26,6 +28,14 @@
         _dataArray = [NSMutableArray array];
     }
     return _dataArray;
+}
+
+- (NSString *)bankUrl
+{
+    if (nil == _backUrl) {
+        _backUrl = [NSString stringWithFormat:@"schem://jinronggongchang/backupper"];
+    }
+    return _backUrl;
 }
 
 - (void)viewDidLoad {
@@ -39,6 +49,7 @@
 
 - (void)createUI {
     UCFGoldRechargeHeaderView *goldChargeHeader = (UCFGoldRechargeHeaderView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFGoldRechargeHeaderView" owner:self options:nil] lastObject];
+    goldChargeHeader.delegate = self;
     self.tableview.tableHeaderView = goldChargeHeader;
     self.goldRechargeHeader = goldChargeHeader;
     
@@ -102,7 +113,7 @@
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-    self.goldRechargeHeader.frame = CGRectMake(0, 0, ScreenWidth, 153);
+    self.goldRechargeHeader.frame = CGRectMake(0, 0, ScreenWidth, 168);
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -126,6 +137,49 @@
 {
     UCFGoldRechargeModel *model = [self.dataArray objectAtIndex:indexPath.row];
     return model.cellHeight;
+}
+
+- (void)goldRechargeHeader:(UCFGoldRechargeHeaderView *)goldHeader didClickedHandInButton:(UIButton *)handInButton withMoney:(NSString *)money
+{
+    
+    NSString *userId = [[NSUserDefaults standardUserDefaults] valueForKey:UUID];
+    if (!userId) {
+        return;
+    }
+    NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:self.bankUrl, @"backUrl", money, @"rechargeAmt", userId, @"userId",  nil];
+    [[NetworkModule sharedNetworkModule] newPostReq:param tag:kSXTagGoldRecharge owner:self signature:YES Type:SelectAccoutDefault];
+}
+
+- (void)beginPost:(kSXTag)tag
+{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+}
+
+- (void)endPost:(id)result tag:(NSNumber *)tag
+{
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    NSMutableDictionary *dic = [(NSString *)result objectFromJSONString];
+    NSString *rstcode = dic[@"ret"];
+    NSString *rsttext = dic[@"message"];
+    if (tag.intValue == kSXTagGoldRecharge) {
+        if ([rstcode intValue] == 1) {
+            UCFGoldRechargeWebController *webRecharge = [[UCFGoldRechargeWebController alloc] initWithNibName:@"UCFGoldRechargeWebController" bundle:nil];
+            webRecharge.baseTitleText = @"充值";
+            NSDictionary *data = [dic objectSafeDictionaryForKey:@"data"];
+            webRecharge.backUrl = self.bankUrl;
+            webRecharge.paramDictory = [data objectSafeDictionaryForKey:@"params"];
+            webRecharge.url = [data objectSafeForKey:@"url"];
+            [self.navigationController pushViewController:webRecharge animated:YES];
+        }else {
+            [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
+        }
+    }
+}
+
+- (void)errorPost:(NSError *)err tag:(NSNumber *)tag
+{
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    [MBProgressHUD displayHudError:err.userInfo[@"NSLocalizedDescription"]];
 }
 
 @end

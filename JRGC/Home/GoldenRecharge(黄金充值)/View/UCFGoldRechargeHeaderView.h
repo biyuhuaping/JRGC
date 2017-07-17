@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@class UCFGoldRechargeHeaderView;
+@protocol UCFGoldRechargeHeaderViewDelegate <NSObject>
+- (void)goldRechargeHeader:(UCFGoldRechargeHeaderView *)goldHeader didClickedHandInButton:(UIButton *)handInButton withMoney:(NSString *)money;
+@end
+
 @interface UCFGoldRechargeHeaderView : UIView
-@property (weak, nonatomic) id delegate;
+@property (weak, nonatomic) id<UCFGoldRechargeHeaderViewDelegate> delegate;
 @end
