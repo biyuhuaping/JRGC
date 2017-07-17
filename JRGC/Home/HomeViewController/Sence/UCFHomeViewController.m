@@ -640,9 +640,7 @@
 #pragma mark - userInfoVC 的代理方法
 - (void)userInfotableView:(UITableView *)tableView didSelectedItem:(UCFUserInfoListItem *)item
 {
-    UCFGoldAccountViewController *subVC = [[UCFGoldAccountViewController alloc] initWithNibName:@"UCFGoldAccountViewController" bundle:nil];
-    [self.navigationController pushViewController:subVC animated:YES];
-    return;
+
     if (!item.isShow) {
         return;
     }
