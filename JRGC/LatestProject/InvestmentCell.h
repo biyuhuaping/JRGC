@@ -12,7 +12,7 @@
 #import "UCFTransterBid.h"
 #import "UCFAngleView.h"
 #import "NZLabel.h"
-
+#import "UCFGoldModel.h"
 @class InvestmentCellDelegate;
 @protocol InvestmentCellDelegate <NSObject>
 
@@ -36,8 +36,9 @@
 @property (strong, nonatomic) IBOutlet UIImageView *imgView2;
 @property (strong, nonatomic) IBOutlet UIImageView *imgView3;
 @property (strong, nonatomic) IBOutlet UIImageView *imgView4;
-
+@property (strong,nonatomic)NSString *goldPriceStr;
 @property (strong, nonatomic) IBOutlet UCFAngleView *angleView;
+@property(assign,nonatomic)SelectAccoutType accoutType;
 
 @property (weak, nonatomic) IBOutlet CircleProgressView *progressView;
 @property (assign, nonatomic)id<InvestmentCellDelegate> delegate;
@@ -47,6 +48,8 @@
 - (void)setInvestItemInfo:(InvestmentItemInfo *)aItemInfo;
 - (void)setTransInvestItemInfo:(NSDictionary *)aItemInfo;
 - (void)setCollectionKeyBidInvestItemInfo:(NSDictionary *)aItemInfo;
+
+- (void)setGoldInvestItemInfo:(UCFGoldModel *)aItemInfo;
 /**
  *  投标页表头
  *

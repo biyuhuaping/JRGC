@@ -14,6 +14,8 @@
 #import "AppDelegate.h"
 #import "SubInvestmentCell.h"
 #import "UILabel+Misc.h"
+#import "UCFGoldModel.h"
+#import "ToolSingleTon.h"
 @interface UCFGoldPurchaseViewController ()<UITableViewDelegate,UITableViewDataSource,UCFGoldMoneyBoadCellDelegate>
 {
     float  bottomViewYPos;
@@ -25,6 +27,8 @@
    
 }
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic,strong)UCFGoldModel *goldModel;
+@property (nonatomic,assign)double goldPrice;//黄金实时单价
 - (IBAction)gotoGoldBidSuccessVC:(id)sender;
 
 @end
@@ -35,18 +39,52 @@
     [super viewDidLoad];
     [self addLeftButton];
     baseTitleLabel.text = @"购买";
-    // Do any additional setup after loading the view from its nib.
+
     
     self.tableView.tableFooterView = [self createFootView];
+    self.goldModel = [UCFGoldModel goldModelWithDict:[_dataDic objectSafeDictionaryForKey:@"nmPrdClaimInfo"]];
+    
+    _prdLabelsList = [[_dataDic objectSafeDictionaryForKey:@"nmPrdClaimInfo"] objectSafeArrayForKey:@"prdLabelsList"];
+//    [[ToolSingleTon sharedManager] getGoldPrice];
 //    self.tableView.contentInset =  UIEdgeInsetsMake(10, 0, 0, 0);
     UITapGestureRecognizer *frade = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardDown)];
     [self.view addGestureRecognizer:frade];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeGoldPrice) name:CURRENT_GOLD_PRICE object:nil];
+}
+-(void)changeGoldPrice
+{
+    
+    NSLog(@"changeGoldPrice");
 }
 
 
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    
-    if (section  == 2) {
+    if(section == 1)
+    {
+        NSArray *prdLabelsList = _prdLabelsList;
+        NSMutableArray *labelPriorityArr = [NSMutableArray arrayWithCapacity:4];
+        if (![prdLabelsList isEqual:[NSNull null]]) {
+            for (NSDictionary *dic in prdLabelsList) {
+                NSInteger labelPriority = [dic[@"labelPriority"] integerValue];
+                if (labelPriority > 1) {
+                    if ([dic[@"labelName"] rangeOfString:@"起投"].location == NSNotFound) {
+                        [labelPriorityArr addObject:dic[@"labelName"]];
+                    }
+                }
+            }
+        }
+        if ([labelPriorityArr count] == 0) {
+            
+            bottomViewYPos = 10;
+            UIView *topView =[[UIView alloc] initWithFrame: CGRectMake(0, 0, ScreenWidth, bottomViewYPos)];
+            topView.backgroundColor = [UIColor clearColor];
+            return topView;
+        } else {
+            bottomViewYPos = 30;
+            return   [self drawMarkView:bottomViewYPos];
+        }
+    }else  if (section  == 2) {
         
         UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 47)];
         headerView.backgroundColor = UIColorWithRGB(0xf9f9f9);
@@ -75,40 +113,6 @@
         lineView.backgroundColor = UIColorWithRGB(0xe3e5ea);
         [headerView addSubview:lineView];
         return headerView;
-    }
-    else{
-        if(section == 1)
-        {
-            NSArray *prdLabelsList = _prdLabelsList;
-            NSMutableArray *labelPriorityArr = [NSMutableArray arrayWithCapacity:4];
-            if (![prdLabelsList isEqual:[NSNull null]]) {
-                for (NSDictionary *dic in prdLabelsList) {
-                    NSInteger labelPriority = [dic[@"labelPriority"] integerValue];
-                    if (labelPriority > 1) {
-                        if ([dic[@"labelName"] rangeOfString:@"起投"].location == NSNotFound) {
-                            [labelPriorityArr addObject:dic[@"labelName"]];
-                        }
-                    }
-                }
-            }
-            if ([labelPriorityArr count] == 0) {
-            
-                bottomViewYPos = 10;
-                UIView *topView =[[UIView alloc] initWithFrame: CGRectMake(0, 0, ScreenWidth, bottomViewYPos)];
-                topView.backgroundColor = [UIColor clearColor];
-                return topView;
-            } else {
-                bottomViewYPos = 30;
-                 return   [self drawMarkView:bottomViewYPos];
-            }
-        }else{
-            UIView *topView =[[UIView alloc] initWithFrame: CGRectMake(0, 0, ScreenWidth, 10.0f)];
-            topView.backgroundColor = [UIColor clearColor];
-            //        [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:topView isTop:YES];
-            //        [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:topView isTop:NO];
-            return topView;
-
-        }
     }
     return nil;
 }
@@ -146,7 +150,7 @@
     [markBg addSubview:_activitylabel4];
     
     //标签数组
-    NSArray *prdLabelsList = [_dataDic objectSafeArrayForKey:@"prdLabelsList"];
+    NSArray *prdLabelsList = _prdLabelsList;
     NSMutableArray *labelPriorityArr = [NSMutableArray arrayWithCapacity:4];
         if (![prdLabelsList isEqual:[NSNull null]]) {
             for (NSDictionary *dic in prdLabelsList) {
@@ -241,7 +245,7 @@
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
-    return 2;
+    return 3;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     switch (indexPath.section) {
@@ -289,7 +293,23 @@
             break;
         case 1:
         {
-             return bottomViewYPos;
+            NSArray *prdLabelsList = _prdLabelsList;
+            NSMutableArray *labelPriorityArr = [NSMutableArray arrayWithCapacity:4];
+            if (![prdLabelsList isEqual:[NSNull null]]) {
+                for (NSDictionary *dic in prdLabelsList) {
+                    NSInteger labelPriority = [dic[@"labelPriority"] integerValue];
+                    if (labelPriority > 1) {
+                        if ([dic[@"labelName"] rangeOfString:@"起投"].location == NSNotFound) {
+                            [labelPriorityArr addObject:dic[@"labelName"]];
+                        }
+                    }
+                }
+            }
+            if ([labelPriorityArr count] == 0) {
+               return 10;
+            }else{
+               return 30;
+            }
         }
             break;
         case 2:
@@ -344,7 +364,10 @@
             cell = [[[NSBundle mainBundle]loadNibNamed:@"SubInvestmentCell" owner:self options:nil] firstObject];
         }
 //        InvestmentItemInfo *info =  self.bidArray[0];
-//        [cell setInvestItemInfo:info];
+        cell.accoutType = SelectAccoutTypeGold;
+        [cell setGoldInvestItemInfo:self.goldModel];
+        self.goldPrice = [ToolSingleTon sharedManager].readTimePrice;
+        cell.repayPeriodLab.text = [NSString stringWithFormat:@"实时金价(每克)%.3f",[ToolSingleTon sharedManager].readTimePrice]; //投资期限
         id prdLabelsList = [_dataDic objectForKey:@"prdLabelsList"];
         if (![prdLabelsList isKindOfClass:[NSNull class]]) {
             for (NSDictionary *dic in prdLabelsList) {
@@ -442,6 +465,8 @@
 //        return;
 //    }
     UCFGoldCalculatorView * view = [[[NSBundle mainBundle]loadNibNamed:@"UCFGoldCalculatorView" owner:nil options:nil] firstObject];
+    view.goldMoneyTextField.text = cell.moneyTextField.text;
+    view.nmTypeIdStr = self.goldModel.nmTypeId;
     view.tag = 173924;
     view.frame = CGRectMake(0, 0, ScreenWidth,ScreenHeight);
 //    view.center = bgView.center;
@@ -488,6 +513,7 @@
         if([rstcode intValue] == 1)
         {
             UCFGoldBidSuccessViewController *goldAuthorizationVC = [[UCFGoldBidSuccessViewController alloc]initWithNibName:@"UCFGoldBidSuccessViewController" bundle:nil];
+            goldAuthorizationVC.dataDict = [[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"result"];
             [self.navigationController pushViewController:goldAuthorizationVC  animated:YES];
 
 //            NSDictionary  *dataDict = dic[@"data"][@"tradeReq"];
@@ -545,7 +571,7 @@
      */
     NSDictionary  *nmPrdClaimInfoDic  = [_dataDic objectSafeDictionaryForKey:@"nmPrdClaimInfo"];
     NSString *nmPrdClaimIdStr = [nmPrdClaimInfoDic objectForKey:@"nmPrdClaimId"];
-    NSDictionary *paramDict = @{@"nmPrdClaimId": nmPrdClaimIdStr,@"purchaseBean":@"0.00",@"purchaseGoldAmount":@"1",@"purchaseMoney":@"100.00",@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"workshopCode":@""};
+    NSDictionary *paramDict = @{@"nmPrdClaimId": nmPrdClaimIdStr,@"purchaseBean":@"0.00",@"purchaseGoldAmount":@"1",@"purchaseMoney":@"300.00",@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"workshopCode":@""};
     [[NetworkModule sharedNetworkModule] newPostReq:paramDict tag:kSXTagGetPurchaseGold owner:self signature:YES Type:SelectAccoutTypeGold];
 
     

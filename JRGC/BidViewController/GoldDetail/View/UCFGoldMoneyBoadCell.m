@@ -7,7 +7,7 @@
 //
 
 #import "UCFGoldMoneyBoadCell.h"
-
+#import "ToolSingleTon.h"
 @interface UCFGoldMoneyBoadCell()<UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *GoldCalculatorView;
@@ -103,8 +103,7 @@
             textField.text = [NSString stringWithFormat:@"0%@",textField.text];
         }
     }
-    NSString *perfire = [[_dataDict objectForKey:@"nmPrdClaimInfo"] objectForKey:@"remainAmount"];
-    double amountPay = [textField.text doubleValue] * [perfire doubleValue];
+    double amountPay = [textField.text doubleValue] * [ToolSingleTon sharedManager].readTimePrice;
     self.estimatAmountPayableLabel.text = [NSString stringWithFormat:@"¥%.2lf",amountPay];
     
     return textField;
