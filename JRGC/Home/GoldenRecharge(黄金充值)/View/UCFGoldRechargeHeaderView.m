@@ -7,9 +7,11 @@
 //
 
 #import "UCFGoldRechargeHeaderView.h"
+#import "AuxiliaryFunc.h"
 
 #define font 13
 @interface UCFGoldRechargeHeaderView () <UITextViewDelegate>
+@property (weak, nonatomic) IBOutlet UITextField *textField;
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 @property (assign, nonatomic) BOOL isSelect;
 @end
@@ -20,8 +22,46 @@
 {
     [super awakeFromNib];
     [self protocolIsSelect:self.isSelect];
+    [self.textField addTarget:self action:@selector(textfieldLength:) forControlEvents:UIControlEventEditingChanged];
 }
 
+- (UITextField *)textfieldLength:(UITextField *)textField
+{
+    if (textField == self.textField) {
+        NSString *str = textField.text;
+        NSArray *array = [str componentsSeparatedByString:@"."];
+        
+        NSString *jeLength = [array firstObject];
+        if (jeLength.length > 7) {
+            textField.text = [textField.text substringToIndex:textField.text.length-1];
+        }
+        if (array.count == 1) {
+            if (jeLength != nil&& jeLength.length > 0) {
+                NSString *firstStr = [jeLength substringToIndex:1];
+                if ([firstStr isEqualToString:@"0"]) {
+                    textField.text = @"0";
+                }
+            }
+        }
+        if(array.count > 2)
+        {
+            textField.text = [textField.text substringToIndex:textField.text.length-1];
+        }
+        if(array.count == 2)
+        {
+            str = [array objectAtIndex:1];
+            if(str.length > 2)
+            {
+                textField.text = [textField.text substringToIndex:textField.text.length-1];
+            }
+            NSString *firStr = [array objectAtIndex:0];
+            if (firStr == nil || firStr.length == 0) {
+                textField.text = [NSString stringWithFormat:@"0%@",textField.text];
+            }
+        }
+    }
+    return textField;
+}
 
 - (void)protocolIsSelect:(BOOL)select {
     
@@ -86,6 +126,16 @@
     
     //     再次
     [self protocolIsSelect:self.isSelect];
+    
+}
+- (IBAction)handIn:(UIButton *)sender {
+    [self endEditing:YES];
+    float money = [self.textField.text floatValue];
+    if (money < 10.00) {
+        UIViewController *VC = self.delegate;
+        [AuxiliaryFunc showToastMessage:@"充值最低10元" withView:VC.view];
+        return;
+    }
     
 }
 @end

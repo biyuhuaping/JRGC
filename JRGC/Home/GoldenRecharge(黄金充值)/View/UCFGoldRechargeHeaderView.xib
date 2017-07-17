@@ -23,11 +23,11 @@
                     </constraints>
                     <nil key="textColor"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
+                    <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                 </textField>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Lorem ipsum dolor sit er elit lamet, consectetaur " textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Tb0-DI-nT7">
                     <rect key="frame" x="15" y="74" width="345" height="30"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="QNz-0k-SL4"/>
                     </constraints>
@@ -41,9 +41,12 @@
                         <constraint firstAttribute="height" constant="37" id="I6K-39-hZZ"/>
                     </constraints>
                     <state key="normal" title="提交"/>
+                    <connections>
+                        <action selector="handIn:" destination="iN0-l3-epB" eventType="touchUpInside" id="rA1-D0-xD7"/>
+                    </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="3La-MU-PV1" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="7Gk-cw-ZMl"/>
                 <constraint firstItem="MfQ-Wm-QjZ" firstAttribute="top" secondItem="3La-MU-PV1" secondAttribute="bottom" constant="32" id="DwD-Cr-mrV"/>
@@ -57,6 +60,7 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="textField" destination="3La-MU-PV1" id="Uox-gE-p9m"/>
                 <outlet property="textView" destination="Tb0-DI-nT7" id="h3Y-jk-o0Q"/>
             </connections>
             <point key="canvasLocation" x="30.5" y="-113"/>

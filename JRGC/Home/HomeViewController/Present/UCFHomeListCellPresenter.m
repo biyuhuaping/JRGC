@@ -38,6 +38,9 @@
 
 - (NSString *)annualRate
 {
+    if ([self.item.type isEqualToString:@"3"]) {
+        return self.item.annualRate ? [NSString stringWithFormat:@"%@克/100克", self.item.annualRate] : @"0.000克/100克" ;
+    }
     return self.item.annualRate ? [NSString stringWithFormat:@"%@%%",self.item.annualRate] : @"0.0%";
 }
 
@@ -105,7 +108,7 @@
 - (CGFloat)cellHeight
 {
     if (self.item.moedelType == UCFHomeListCellModelTypeDefault) {
-        return 100.0;
+        return 95.0;
     }
     else {
         return (ScreenWidth - 20) / CELLRATE + 15;

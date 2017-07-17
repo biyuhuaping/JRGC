@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface UCFGoldRechargeHeaderView : UIView
-
+@property (weak, nonatomic) id delegate;
 @end

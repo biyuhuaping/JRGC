@@ -15,6 +15,7 @@
 #import "UCFGoldRechargeViewController.h"
 #import "GoldAccountFirstCell.h"
 #import "UCFMyGoldInvestInfoViewController.h"
+#import "UCFGoldCashMoneyViewController.h"
 
 @interface UCFGoldAccountViewController ()<UITableViewDelegate,UITableViewDataSource, GoldAccountFirstCellDeleage>
 @property (weak, nonatomic) IBOutlet UITableView *baseTableView;
@@ -229,7 +230,9 @@
     
 - (void)goldAccountFirstCell:(GoldAccountFirstCell *)goldFirstCell didClickedCashButton:(UIButton *)button
     {
-        
+    UCFGoldCashMoneyViewController *goldCashMoney = [[UCFGoldCashMoneyViewController alloc] initWithNibName:@"UCFGoldCashMoneyViewController" bundle:nil];
+    goldCashMoney.baseTitleText = @"提现";
+    [self.navigationController pushViewController:goldCashMoney animated:YES];
 }
 #pragma 去已购黄金页面
 -(void)gotoGoldInvestInfoVC{
