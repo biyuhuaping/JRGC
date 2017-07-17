@@ -52,6 +52,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *oneImageUpHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *oneImageDownHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *signViewWidth;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *annurateLabelW;
 
 @end
 
@@ -244,8 +245,16 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
+    
     if (self.presenter.modelType == UCFHomeListCellModelTypeDefault) {
-        [self.rateLabel setFont:[UIFont systemFontOfSize:12] string:@"%"];
+        if ([self.presenter.type isEqualToString:@"3"] || self.goldModel) {
+            [self.rateLabel setFont:[UIFont systemFontOfSize:10] string:@"克/100克"];
+            self.annurateLabelW.constant = 52;
+        }
+        else {
+            [self.rateLabel setFont:[UIFont systemFontOfSize:12] string:@"%"];
+            self.annurateLabelW.constant = 0;
+        }
     }
     else if (self.presenter.modelType == UCFHomeListCellModelTypeOneImageBatchLending)  {
         self.oneImageUpHeight.constant = 10;
@@ -469,7 +478,36 @@
 - (void)setGoldModel:(UCFGoldModel *)goldModel
 {
     _goldModel = goldModel;
+    self.oneImageView.hidden = YES;
+    self.proName.text = goldModel.nmPrdClaimName;
+    self.rateLabel.text = [NSString stringWithFormat:@"%@克/100克", goldModel.annualRate];
+    [self.rateLabel setFont:[UIFont systemFontOfSize:10] string:@"克/100克"];
+    self.timeLabel.text = goldModel.periodTerm;
+    self.repayModelLabel.text = goldModel.paymentType;
+    self.startMoneyLabel.text = [NSString stringWithFormat:@"%@克起", goldModel.minPurchaseAmount];
+    if ([goldModel.remainAmount floatValue] > 0.000) {
+        self.remainLabel.text = [NSString stringWithFormat:@"剩%@克", goldModel.remainAmount];
+    }
+    else
+        self.remainLabel.text = [NSString stringWithFormat:@"%@克", goldModel.totalAmount];
+    NSInteger status = [goldModel.status integerValue];
     
+    
+    float progress = ([goldModel.totalAmount floatValue]- [goldModel.remainAmount floatValue])/[goldModel.totalAmount floatValue];
+    if (progress < 0 || progress > 1) {
+        progress = 1;
+    }
+    else
+        self.circleProgressView.progress = progress;
+    
+    if (status == 2) {
+        self.circleProgressView.progressText = @"售罄";
+        self.circleProgressView.textColor = UIColorWithRGB(0x909dae);
+    }
+    else if (status == 1) {
+        self.circleProgressView.textColor = UIColorWithRGB(0x555555);
+        self.circleProgressView.progressText = @"认购";
+    }
 }
 
 - (NSString *)moneywithRemaining:(id)rem total:(id)total{

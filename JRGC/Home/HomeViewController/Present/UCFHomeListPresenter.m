@@ -170,9 +170,8 @@
                 if (array.count > 0) {
                     if ([group.type isEqualToString:@"11"]) {
 //                        weakSelf.groupPresenter2.group.type = group.type;
-                        NSMutableArray *temp = [weakSelf productPrdListWithDataSource:array];
-                        [temp addObject:[weakSelf.groupPresenter3.group.prdlist lastObject]];
-                        weakSelf.groupPresenter3.group.prdlist = temp;
+                        weakSelf.groupPresenter2.group.type = group.type;
+                        weakSelf.groupPresenter2.group.prdlist = [weakSelf productPrdListWithDataSource:array];
                     }
                     else if ([group.type isEqualToString:@"12"]) {
 //                        weakSelf.groupPresenter1.group.type = group.type;
@@ -183,8 +182,9 @@
                         weakSelf.groupPresenter0.group.prdlist = [weakSelf productPrdListWithDataSource:array];
                     }
                     else if ([group.type isEqualToString:@"15"]) {
-                        weakSelf.groupPresenter2.group.type = group.type;
-                        weakSelf.groupPresenter2.group.prdlist = [weakSelf productPrdListWithDataSource:array];
+                        NSMutableArray *temp = [weakSelf productPrdListWithDataSource:array];
+                        [temp addObject:[weakSelf.groupPresenter3.group.prdlist lastObject]];
+                        weakSelf.groupPresenter3.group.prdlist = temp;
                     }
                 }
             }

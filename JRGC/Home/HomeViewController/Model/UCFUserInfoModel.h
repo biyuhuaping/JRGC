@@ -28,6 +28,7 @@
 @property (nonatomic, strong) NSNumber *unReadMsgCount;
 @property (nonatomic, copy) NSString *userCenterTicket;
 @property (nonatomic, copy) NSString *sex;
+@property (nonatomic, copy) NSString *holdGoldAmount;
 
 + (instancetype)userInfomationWithDict:(NSDictionary *)dict;
 @end
