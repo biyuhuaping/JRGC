@@ -102,7 +102,7 @@
     }
     else if ([self.selectedType isEqualToString:@"Trans"]) {
         self.currentViewController = self.investTransfer;
-        [_pagerView setSelectIndex:2];
+        [_pagerView setSelectIndex:3];
     }
     else {
         self.currentViewController = self.honorInvest;
@@ -120,7 +120,7 @@
         self.currentViewController = self.honorInvest;
     }
     else if ([self.selectedType isEqualToString:@"Trans"]) {
-        [_pagerView setSelectIndex:2];
+        [_pagerView setSelectIndex:3];
         self.currentViewController = self.investTransfer;
     }
 }
