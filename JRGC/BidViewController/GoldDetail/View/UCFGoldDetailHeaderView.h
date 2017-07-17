@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "UCFGoldModel.h"
 @interface UCFGoldDetailHeaderView : UIView
+@property (nonatomic,strong)UCFGoldModel *goldModel;
 
+- (void)setProcessViewProcess:(CGFloat)process;
 @end
