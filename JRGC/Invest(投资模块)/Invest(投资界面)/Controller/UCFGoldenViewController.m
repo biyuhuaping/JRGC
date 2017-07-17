@@ -144,10 +144,18 @@
             [alert show];
             return;
         }
-        NSDictionary *data  = [self.dataArray objectAtIndex:indexPath.row];
         
         
-        NSString *nmProClaimIdStr = [data objectForKey:@"nmPrdClaimId"];
+        if(![UserInfoSingle sharedManager].goldAuthorization){
+            
+            UCFGoldAuthorizationViewController *goldAuthorizationVC = [[UCFGoldAuthorizationViewController alloc]initWithNibName:@"UCFGoldAuthorizationViewController" bundle:nil];
+            [self.navigationController pushViewController:goldAuthorizationVC  animated:YES];
+            return;
+        }
+        
+        UCFGoldModel *goldModel = [self.dataArray objectAtIndex:indexPath.row];
+        
+        NSString *nmProClaimIdStr = goldModel.nmPrdClaimId;
         NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId",nmProClaimIdStr, @"nmPrdClaimId",nil];
         [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagGetGoldPrdClaimDetail owner:self signature:YES Type:SelectAccoutTypeGold];
         
@@ -173,16 +181,16 @@
         }
 
     
-//        if([UserInfoSingle sharedManager].goldAuthorization){
-//    
-//            UCFGoldAuthorizationViewController *goldAuthorizationVC = [[UCFGoldAuthorizationViewController alloc]initWithNibName:@"UCFGoldAuthorizationViewController" bundle:nil];
-//            [self.navigationController pushViewController:goldAuthorizationVC  animated:YES];
-//            return;
-//        }
-    NSDictionary *data  = [self.dataArray objectAtIndex:indexPath.row];
+    if(![UserInfoSingle sharedManager].goldAuthorization){
+
+        UCFGoldAuthorizationViewController *goldAuthorizationVC = [[UCFGoldAuthorizationViewController alloc]initWithNibName:@"UCFGoldAuthorizationViewController" bundle:nil];
+        [self.navigationController pushViewController:goldAuthorizationVC  animated:YES];
+        return;
+    }
+    UCFGoldModel *goldModel = [self.dataArray objectAtIndex:indexPath.row];
     
-    
-    NSString *nmProClaimIdStr = [data objectForKey:@"nmPrdClaimId"];
+    NSString *nmProClaimIdStr = goldModel.nmPrdClaimId;
+
     NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId",nmProClaimIdStr, @"nmPrdClaimId",nil];
     
     [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagGetGoldProClaimDetail owner:self signature:YES Type:SelectAccoutDefault];
