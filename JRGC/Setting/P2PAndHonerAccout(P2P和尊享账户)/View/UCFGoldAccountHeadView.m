@@ -53,7 +53,7 @@
 - (void)changeTransState
 {
     dispatch_queue_t queue= dispatch_get_main_queue();
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), queue, ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), queue, ^{
         DBLog(@"主队列--延迟执行------%@",[NSThread currentThread]);
         _isStopTrans = YES;
         self.updateGoldPriceBtn.userInteractionEnabled = YES;
