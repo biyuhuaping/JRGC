@@ -156,6 +156,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    UCFCellStyleModel *model  =[self.dataArray objectAtIndex:indexPath.row];
+    if ([model.leftTitle isEqualToString:@"已购黄金"]) {
+        [self gotoGoldInvestInfoVC];
+    }
 }
 - (void)initData
 {

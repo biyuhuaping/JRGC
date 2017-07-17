@@ -2785,7 +2785,7 @@
 		4AB126071AEF8EA400E915F1 /* BidViewController */ = {
 			isa = PBXGroup;
 			children = (
-				83FF20521F0BAF0500F21119 /* GoldDetail */,
+				83FF20521F0BAF0500F21119 /* GoldDetail(黄金详情) */,
 				833A6EA11E55466B00C8A494 /* CollectionDetail */,
 				FB1E7F721D8E4230009CBE2C /* ProjectDetail */,
 				4AB126081AEF8EA400E915F1 /* UCFPurchaseBidViewController.h */,
@@ -5473,13 +5473,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		83FF20521F0BAF0500F21119 /* GoldDetail */ = {
+		83FF20521F0BAF0500F21119 /* GoldDetail(黄金详情) */ = {
 			isa = PBXGroup;
 			children = (
 				83FF20531F0BAF0500F21119 /* Controller */,
 				83FF20571F0BAF0500F21119 /* Model */,
 				83FF20581F0BAF0500F21119 /* View */,
 			);
+			name = "GoldDetail(黄金详情)";
 			path = GoldDetail;
 			sourceTree = "<group>";
 		};

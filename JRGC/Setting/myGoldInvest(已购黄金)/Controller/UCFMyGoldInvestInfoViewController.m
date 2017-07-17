@@ -12,6 +12,8 @@
 #import "UCFNoDataView.h"
 #import "UCFMyGoldInvestInfoCell.h"
 #import "UCFGoldInvestmentDetailViewController.h"
+#import "UIDic+Safe.h"
+#import "UILabel+Misc.h"
 @interface UCFMyGoldInvestInfoViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(strong,nonatomic)HMSegmentedControl *topSegmentedControl;
 @property (strong, nonatomic) IBOutlet UIView *segmentedControlBgView ;
@@ -36,6 +38,9 @@
 
 @property (strong, nonatomic) IBOutlet NZLabel *listCountLab;//投资笔数
 @property (strong, nonatomic) NSMutableArray *listCountArr;//投资笔数
+@property (strong, nonatomic) IBOutlet UILabel *allGiveGoldAmountLabel;
+@property (strong, nonatomic) IBOutlet UILabel *collectGiveGoldAmountLabel;
+@property (strong, nonatomic) IBOutlet UILabel *collectGoldAmountLabel;
 
 // 无数据界面
 @property (strong, nonatomic) UCFNoDataView *noDataView;
@@ -110,17 +115,17 @@
     __weak typeof(self) weakSelf = self;
     // 添加上拉加载更多
     [_tableView1 addLegendFooterWithRefreshingBlock:^{
-        [weakSelf getMyInvestDataList];
+        [weakSelf getMyGoldInvestDataList];
     }];
     [_tableView2 addLegendFooterWithRefreshingBlock:^{
-        [weakSelf getMyInvestDataList];
+        [weakSelf getMyGoldInvestDataList];
     }];
     [_tableView3 addLegendFooterWithRefreshingBlock:^{
-        [weakSelf getMyInvestDataList];
+        [weakSelf getMyGoldInvestDataList];
     }];
-    [_tableView1 addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(getMyInvestDataList)];
-    [_tableView2 addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(getMyInvestDataList)];
-    [_tableView3 addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(getMyInvestDataList)];
+    [_tableView1 addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(getMyGoldInvestDataList)];
+    [_tableView2 addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(getMyGoldInvestDataList)];
+    [_tableView3 addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(getMyGoldInvestDataList)];
     
     // 马上进入刷新状态
     [_tableView1.header beginRefreshing];
@@ -326,49 +331,13 @@
     }
     else if (tableView == _tableView3){
         tempArr = _dataArr3;
-//        cell.repayDateLabText.text = @"实际回款日";//在 我的投资 已回款列表中 repayPerDate 是 实际回款日
     }
-    
-//    int status = [tempArr[indexPath.row][@"status"]intValue];
-//    
-//    int batchInvestStatus = [[tempArr[indexPath.row] objectSafeForKey:@"batchInvestStatus"] intValue];
-//    if (batchInvestStatus) {
-//        cell.prdName.text = [NSString stringWithFormat:@"%@(批量出借)", tempArr[indexPath.row][@"prdName"]];//标的名称
-//        [cell.prdName setFont:[UIFont systemFontOfSize:11] string:@"(批量出借)"];
-//        [cell.prdName setFontColor:UIColorWithRGB(0x999999) string:@"(批量出借)"];
-//    }
-//    else {
-//        cell.prdName.text = tempArr[indexPath.row][@"prdName"];//标的名称
-//    }
-//    cell.labText.text = self.accoutType == SelectAccoutTypeP2P ? @"出借金额":@"投资金额";
-//    cell.status.text = _statusArr[status];//标状态
-//    cell.annualRate.text = [[tempArr[indexPath.row] objectSafeForKey:@"annualRate"] stringByAppendingString:@"%"];//年化收益率
-//    
-//    NSString *annualAwardRateStr = [NSString stringWithFormat:@"%@",[tempArr[indexPath.row] objectSafeForKey:@"gradeIncreases"]];//年化加息奖励
-//    if ([annualAwardRateStr isEqualToString:@""] || [annualAwardRateStr floatValue] > 0 ) {//年化加息奖励
-//        cell.gradeIncreases.text = [annualAwardRateStr stringByAppendingString:@"%"];
-//        cell.annualInterestRateViewHight.constant = 27;
-//    }else{
-//        cell.annualInterestRateViewHight.constant = 0;
-//    }
-//    NSString *effactiveDate = tempArr[indexPath.row][@"effactiveDate"];//起息日
-//    NSString *repayPerDate = tempArr[indexPath.row][@"repayPerDate"];//回款时间
-//    cell.effactiveDate.text = effactiveDate.length > 0?effactiveDate:@"--";
-//    cell.repayPerDate.text = repayPerDate.length > 0?repayPerDate:@"--";
-//    
-//    double investAmt = [tempArr[indexPath.row][@"investAmt"] doubleValue];
-//    cell.investAmt.text = [NSString stringWithFormat:@"¥%0.2f",investAmt];//投资金额
-//    cell.applyDate.text = tempArr[indexPath.row][@"applyDate"];//交易时间
-//    
-//    if (status == 2 || status == 4) {//招标中或者满标中
-//        cell.status.textColor = UIColorWithRGB(0xfd4d4c);
-//    }
-//    else if (status == 5) {//回款中
-//        cell.status.textColor = UIColorWithRGB(0x4aa1f9);
-//    }else{
-//        cell.status.textColor = UIColorWithRGB(0x999999);
-//    }
-    
+
+    if (indexPath.row < tempArr.count) {
+        NSDictionary *dataDict = [tempArr objectAtIndex:indexPath.row];
+        cell.dataDict = dataDict;
+    }
+   
     return cell;
 }
 
@@ -396,7 +365,7 @@
 
 #pragma mark - 请求网络及回调
 //获取我的投资列表
-- (void)getMyInvestDataList{
+- (void)getMyGoldInvestDataList{
     NSInteger pageNum = 1;
     switch (_selectIndex) {
         case 0:
@@ -430,10 +399,19 @@
         }
             break;
     }
-    NSArray *tempArr = @[@"100",@"3",@"4"];
+    
+    /*
+     orderStatusCode	购买订单状态编码	string	0：全部；1：持有中；2：已到期
+     pageNo	页号	string
+     pageSize	页面大小	string
+     userId	用户ID	string
+     */
+    
     NSString *userId = [[NSUserDefaults standardUserDefaults] objectForKey:UUID];
-    NSString *strParameters = [NSString stringWithFormat:@"page=%ld&rows=20&userId=%@&flag=%@&typeFlag=", (long)pageNum,userId,tempArr[_selectIndex]];
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdOrderUinvest owner:self Type:self.accoutType];
+     NSString *pageNoStr = [NSString stringWithFormat:@"%ld",pageNum];
+    NSString *orderStatusCodeStr = [NSString stringWithFormat:@"%ld",_selectIndex];
+    NSDictionary *strParameters  = @{@"userId":userId,@"pageNo":pageNoStr,@"pageSize":@"20",@"orderStatusCode":orderStatusCodeStr};
+    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagGetGoldTradeRecordList owner:self signature:YES Type:SelectAccoutDefault];
 }
 
 //开始请求
@@ -456,33 +434,35 @@
     //DBLOG(@"首页获取最新项目列表：%@",data);
     
     NSMutableDictionary *dic = [data objectFromJSONString];
-    NSString *rstcode = dic[@"status"];
-    NSString *rsttext = dic[@"statusdes"];
+    NSString *rstcode = dic[@"ret"];
+    NSString *rsttext = dic[@"message"];
     DBLOG(@"我的投资请求结果：%@",dic);
     
     
     //headerView
-    //    id interests = dic[@"data"][@"interests"];
-    //    _interestsLab.text = [NSString stringWithFormat:@"￥%0.2f",[interests floatValue]];//累计收益
-    //
-    //    float principal = [dic[@"data"][@"noPrincipal"] floatValue];
-    //    _noPrincipalLab.text = [NSString stringWithFormat:@"￥%0.2f",principal];//待收本金
-    //
-    //    id noInterests = dic[@"data"][@"noInterests"];//待收利息
-    //    _noInterestsLab.text = [NSString stringWithFormat:@"￥%0.2f",[noInterests floatValue]];
+    NSDictionary * userDataInfoDict = [[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"userDataInfo"];
+
+    self.allGiveGoldAmountLabel.text = [NSString stringWithFormat:@"%.3f克",[[userDataInfoDict objectSafeForKey:@"allGiveGoldAmount"] floatValue]];//累计收益
+    [self.allGiveGoldAmountLabel setFont:[UIFont boldSystemFontOfSize:14] string:@"克"];
     
-    BOOL hasNextPage = [dic[@"pageData"][@"pagination"][@"hasNextPage"] boolValue];
-    NSArray *dataArr = dic[@"pageData"][@"result"];
     
-    if (tag.intValue == kSXTagPrdOrderUinvest) {
-        if ([rstcode intValue] == 1) {
+    float principal = [userDataInfoDict[@"collectGoldAmount"] floatValue];
+    self.collectGoldAmountLabel.text = [NSString stringWithFormat:@"总待收黄金:%.3f克",principal];//待收本金
+    float  collectGiveGoldAmount = [userDataInfoDict[@"collectGiveGoldAmount"] floatValue];;//待收利息
+    self.collectGiveGoldAmountLabel.text = [NSString stringWithFormat:@"待收赠金:%.3f克",collectGiveGoldAmount];
+    
+    BOOL hasNextPage = [[dic objectSafeDictionaryForKey:@"data"][@"pageData"][@"pagination"][@"hasNextPage"] boolValue];
+    NSArray *dataArr = [dic objectSafeDictionaryForKey:@"data"][@"pageData"][@"result"];
+    
+    if (tag.intValue == kSXTagGetGoldTradeRecordList) {
+        if ([rstcode boolValue]) {
             //            if (_setHeaderInfoBlock) {
             //                _setHeaderInfoBlock(dic[@"data"]);
             //            }
             
-            NSString *listCount = [NSString stringWithFormat:@"%@",dic[@"data"][@"listCount"]];//投资笔数
-            [_listCountArr setObject:listCount atIndexedSubscript:_index];
-            _listCountLab.text = [NSString stringWithFormat:@"共%@笔记录",_listCountArr[_index]];
+            NSString *listCount = [NSString stringWithFormat:@"%@",[dic objectSafeDictionaryForKey:@"data"][@"pageData"][@"pagination"][@"totalCount"]];//投资笔数
+            [_listCountArr setObject:listCount atIndexedSubscript:_selectIndex];
+            _listCountLab.text = [NSString stringWithFormat:@"共%@笔记录",_listCountArr[_selectIndex]];
             [_listCountLab setFont:[UIFont boldSystemFontOfSize:12] string:listCount];
             
             switch (_selectIndex) {
