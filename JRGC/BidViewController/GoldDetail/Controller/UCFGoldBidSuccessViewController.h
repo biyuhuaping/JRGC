@@ -10,4 +10,5 @@
 
 @interface UCFGoldBidSuccessViewController : UCFBaseViewController
 
+@property(nonatomic ,strong) NSDictionary *dataDict;
 @end

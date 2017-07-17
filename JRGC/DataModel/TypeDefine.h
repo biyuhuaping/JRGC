@@ -259,8 +259,18 @@
 #define CURRENTDAYINFO      @"api/myPayment/v2/myPaymentDetail.json" //当前日的回款信息
 #define GOLDACCOUNT         @"api/nmAccount/v2/getNmAccountInfo.json" //获取黄金账户信息
 #define CURRENTGOLDPRICE    @"api/nmCommon/v2/getRealTimePrice.json" //获取当前黄金价格
+#define GOLDTRADELIST       @"api/nmAccount/v2/getTradeFlowList.json"
 #define GOLDENLIST          @"api/nmPrdClaim/v2/getNmPrdClaimList.json" //获取黄金列表
 
+#define GETGOlDPRDCLAIMLIST @"api/nmPrdClaim/v2/getNmPrdClaimList.json"// 获取黄金列表
+#define GETGOlDPRDCLAIMDETAILINFO @"api/nmPrdClaim/v2/getNmPrdClaimInfo.json" //黄金标详情页
+
+#define GOLDCALCULATEAOUNTURL  @"api/nmTrade/v2/calculateAmount.json"//黄金计算器
+
+#define GETGOLDPROCLAIMDETAILIL @"api/nmTrade/v2/getNmProClaimDetail.json"//购买输入金额页信息查询
+
+#define GOLDAUTHORIZOPENACCOUT  @"api/nmAccount/v2/authorizedOpenAccount.json"//黄金授权
+#define GOLDPURCHASEURL  @"api/nmTrade/v2/purchaseGold.json" //黄金购买
 
 enum kPostStatus{
     kPostStatusNone=0,
@@ -482,7 +492,14 @@ enum kSXTag
     kSXTagCurrentDayInfo,               //当前日的回款信息
     kSXTagGoldAccount,                   //黄金账户信息
     ksxTagGoldCurrentPrice,              //当前黄金价格
+    kSXTagGoldTradeFlowList,             //交易流水
+    kSXTagGetGoldPrdClaimList,           // 获取黄金列表
+    kSXTagGetGoldPrdClaimDetail,         //黄金标详情页
+    kSXTagGoldCalculateAmount,           //黄金计算器
+    kSXTagGetGoldProClaimDetail,         //购买输入金额页信息查询
+    kSXTagGoldAuthorizedOpenAccount,    //黄金授权
     kSXTagGoldList,                      //黄金列表
+    kSXTagGetPurchaseGold,               //黄金购买
 };
 
 typedef enum kSXTag kSXTag;

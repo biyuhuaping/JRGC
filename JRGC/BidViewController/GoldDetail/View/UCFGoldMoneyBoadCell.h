@@ -19,8 +19,15 @@
 @end
 
 @interface UCFGoldMoneyBoadCell : UITableViewCell
-@property (strong, nonatomic) IBOutlet UITextField *moneyTextField;
 
+@property (strong ,nonatomic) NSDictionary *dataDict;
+@property (strong, nonatomic) IBOutlet UITextField *moneyTextField;
+@property (strong, nonatomic) IBOutlet UILabel *availableAllMoneyLabel;
+@property (strong, nonatomic) IBOutlet UILabel *estimatAmountPayableLabel;
+@property (strong, nonatomic) IBOutlet UILabel *getUpWeightGoldLabel;
+
+@property (strong, nonatomic) IBOutlet UILabel *availableMoneyLabel;
+@property (strong, nonatomic) IBOutlet UILabel *accountBeanLabel;
 @property (nonatomic, assign)id<UCFGoldMoneyBoadCellDelegate> delegate;
 
 @end

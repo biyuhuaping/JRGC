@@ -140,6 +140,9 @@
                                             <real key="value" value="2"/>
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="GoldCalculatorBtn:" destination="RgR-m2-Mks" eventType="touchUpInside" id="cxR-6o-hCw"/>
+                                    </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="克" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oie-g4-ojB">
                                     <rect key="frame" x="296" y="15" width="14" height="16"/>
@@ -233,8 +236,11 @@
                 <constraint firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" constant="25" id="XTb-Ef-DSE"/>
             </constraints>
             <connections>
+                <outlet property="GoldPriceLabel" destination="SQD-IW-9m8" id="0lO-Fj-SUV"/>
                 <outlet property="calculatorView" destination="iN0-l3-epB" id="ez3-Xn-ZLd"/>
+                <outlet property="glodFeeLabel" destination="anT-w1-Evz" id="wLa-cv-Xbq"/>
                 <outlet property="goldMoneyTextField" destination="Fv9-K4-iLg" id="rRv-IK-h1L"/>
+                <outlet property="purchaseMoneyLabel" destination="xJa-0R-qhx" id="um8-4U-tQK"/>
             </connections>
             <point key="canvasLocation" x="-478" y="-1"/>
         </view>

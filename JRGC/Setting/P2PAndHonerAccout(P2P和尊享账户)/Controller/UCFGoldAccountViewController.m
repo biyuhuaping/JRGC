@@ -16,6 +16,7 @@
 #import "GoldAccountFirstCell.h"
 #import "UCFMyGoldInvestInfoViewController.h"
 #import "UCFGoldCashMoneyViewController.h"
+#import "UCFNoDataView.h"
 
 @interface UCFGoldAccountViewController ()<UITableViewDelegate,UITableViewDataSource, GoldAccountFirstCellDeleage>
 @property (weak, nonatomic) IBOutlet UITableView *baseTableView;
@@ -209,14 +210,18 @@
 }
 - (IBAction)bottomButtomClicked:(UIButton *)sender {
     NSString *title = [sender titleForState:UIControlStateNormal];
+    NSString *showStr = @"";
     if ([title isEqualToString:@"买金"]) {
-        
+        [self.navigationController popViewControllerAnimated:YES];
+        return;
     } else if ([title isEqualToString:@"变现"]) {
-        UCFGoldCashViewController *vc1 = [[UCFGoldCashViewController alloc] initWithNibName:@"UCFGoldCashViewController" bundle:nil];
-        [self.navigationController pushViewController:vc1 animated:YES];
+        showStr = @"暂时没有可变现的黄金";
+//        UCFGoldCashViewController *vc1 = [[UCFGoldCashViewController alloc] initWithNibName:@"UCFGoldCashViewController" bundle:nil];
+//        [self.navigationController pushViewController:vc1 animated:YES];
     } else if ([title isEqualToString:@"提金"]) {
-        
+        showStr = @"暂时没有可提金的黄金";
     }
+    [MBProgressHUD displayHudError:showStr];
 }
     
 #pragma mark - GoldAccountFirstCellDelegate

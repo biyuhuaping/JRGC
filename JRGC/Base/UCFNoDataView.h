@@ -15,6 +15,8 @@
 @end
 
 @interface UCFNoDataView : UIView
+// 黄金没有数据占位图
+- (id)initGoldWithFrame:(CGRect)frame errorTitle:(NSString*)titleStr buttonTitle:(NSString *)btnTitleStr;
 
 - (id)initWithFrame:(CGRect)frame errorTitle:(NSString*)titleStr;
 

@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "UCFGoldTradeListModel.h"
 @interface UCFGoldTransCell : UITableViewCell
-@property (nonatomic, strong) NSDictionary *cellDict;
+@property (nonatomic, strong) UCFGoldTradeListModel *model;
 @property (nonatomic, assign) BOOL isEndCell;
 @end

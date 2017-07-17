@@ -76,7 +76,7 @@
 }
 - (void)endAnimation
 {
-     _angle += 3.8;
+     _angle += 5;
     if (!_isStopTrans) {
         [self startAnimation];
     }

@@ -9,5 +9,5 @@
 #import "UCFBaseViewController.h"
 
 @interface UCFGoldDetailViewController : UCFBaseViewController
-
+@property (nonatomic ,strong)NSDictionary *dataDict;
 @end

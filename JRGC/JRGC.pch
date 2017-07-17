@@ -50,9 +50,10 @@ typedef enum : NSUInteger {
 } PROJECTDETAILTYPE;
 
 typedef NS_ENUM(NSInteger, SelectAccoutType) {
+    SelectAccoutDefault = 0,
     SelectAccoutTypeP2P = 1, //P2P账户 默认是P2P账户
-    SelectAccoutTypeHoner, //尊享账号
-    SelectAccoutDefault
+    SelectAccoutTypeHoner, //尊享账户
+    SelectAccoutTypeGold,//黄金账户
 };
 
 #define GUIDE_OPEN @"1"
@@ -118,6 +119,7 @@ return shared##className; \
 #define HEADURL         @"headerUrl"
 #define OPENSTATUS      @"openStatus"
 #define COMPANYAGENT    @"companyAgent" //是否是机构用户
+#define GOldAUTHORIZATION    @"GoldAuthorization" //是否是机构用户
 #define SEX             @"sex"//性别
 #define YeeBayTopSwitch @"yeepayflag"
 #define YeeBayPersonalSwitch @"yeepayflag_A"

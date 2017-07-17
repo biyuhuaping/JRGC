@@ -118,6 +118,9 @@
                                     <real key="value" value="2"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="clickGoldAuthorizationBtn:" destination="-1" eventType="touchUpInside" id="Kjh-II-q1I"/>
+                            </connections>
                         </button>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="point" translatesAutoresizingMaskIntoConstraints="NO" id="12j-yT-MVO">
                             <rect key="frame" x="15" y="331" width="5" height="5"/>

@@ -12,8 +12,23 @@
 #import "UCFGoldBidSuccessViewController.h"
 #import "UCFGoldCalculatorView.h"
 #import "AppDelegate.h"
+#import "SubInvestmentCell.h"
+#import "UILabel+Misc.h"
+#import "UCFGoldModel.h"
+#import "ToolSingleTon.h"
 @interface UCFGoldPurchaseViewController ()<UITableViewDelegate,UITableViewDataSource,UCFGoldMoneyBoadCellDelegate>
+{
+    float  bottomViewYPos;
+    NSArray *_prdLabelsList;
+    UILabel *_activitylabel1;//二级标签
+    UILabel *_activitylabel2;//三级标签
+    UILabel *_activitylabel3;//四级标签
+    UILabel *_activitylabel4;//五级标签
+   
+}
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic,strong)UCFGoldModel *goldModel;
+@property (nonatomic,assign)double goldPrice;//黄金实时单价
 - (IBAction)gotoGoldBidSuccessVC:(id)sender;
 
 @end
@@ -24,21 +39,52 @@
     [super viewDidLoad];
     [self addLeftButton];
     baseTitleLabel.text = @"购买";
-    // Do any additional setup after loading the view from its nib.
+
     
     self.tableView.tableFooterView = [self createFootView];
+    self.goldModel = [UCFGoldModel goldModelWithDict:[_dataDic objectSafeDictionaryForKey:@"nmPrdClaimInfo"]];
+    
+    _prdLabelsList = [[_dataDic objectSafeDictionaryForKey:@"nmPrdClaimInfo"] objectSafeArrayForKey:@"prdLabelsList"];
+//    [[ToolSingleTon sharedManager] getGoldPrice];
 //    self.tableView.contentInset =  UIEdgeInsetsMake(10, 0, 0, 0);
     UITapGestureRecognizer *frade = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardDown)];
     [self.view addGestureRecognizer:frade];
-}
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
-    return 3;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeGoldPrice) name:CURRENT_GOLD_PRICE object:nil];
+}
+-(void)changeGoldPrice
+{
+    
+    NSLog(@"changeGoldPrice");
 }
 
+
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    
-    if (section  == 2) {
+    if(section == 1)
+    {
+        NSArray *prdLabelsList = _prdLabelsList;
+        NSMutableArray *labelPriorityArr = [NSMutableArray arrayWithCapacity:4];
+        if (![prdLabelsList isEqual:[NSNull null]]) {
+            for (NSDictionary *dic in prdLabelsList) {
+                NSInteger labelPriority = [dic[@"labelPriority"] integerValue];
+                if (labelPriority > 1) {
+                    if ([dic[@"labelName"] rangeOfString:@"起投"].location == NSNotFound) {
+                        [labelPriorityArr addObject:dic[@"labelName"]];
+                    }
+                }
+            }
+        }
+        if ([labelPriorityArr count] == 0) {
+            
+            bottomViewYPos = 10;
+            UIView *topView =[[UIView alloc] initWithFrame: CGRectMake(0, 0, ScreenWidth, bottomViewYPos)];
+            topView.backgroundColor = [UIColor clearColor];
+            return topView;
+        } else {
+            bottomViewYPos = 30;
+            return   [self drawMarkView:bottomViewYPos];
+        }
+    }else  if (section  == 2) {
         
         UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 47)];
         headerView.backgroundColor = UIColorWithRGB(0xf9f9f9);
@@ -67,29 +113,215 @@
         lineView.backgroundColor = UIColorWithRGB(0xe3e5ea);
         [headerView addSubview:lineView];
         return headerView;
-    }else{
-        UIView *topView =[[UIView alloc] init];
-        topView.backgroundColor = UIColorWithRGB(0xebebee);
-        topView.frame = CGRectMake(0, 0, ScreenWidth, 10.0f);
-//        [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:topView isTop:YES];
-//        [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:topView isTop:NO];
-        return topView;
     }
+    return nil;
+}
+- (UIView *)drawMarkView:(float)markHeight
+{
+    UIView *markBg = [[UIView alloc] initWithFrame:CGRectMake(0,0, ScreenWidth, 30)];
+    markBg.backgroundColor = [UIColor clearColor];
+    
+    _activitylabel1 = [UILabel labelWithFrame:CGRectZero text:@"" textColor:UIColorWithRGB(0x5b7aa4) font:[UIFont systemFontOfSize:MarkLabelFont]];
+    _activitylabel1.backgroundColor = [UIColor whiteColor];
+    _activitylabel1.layer.borderWidth = 1;
+    _activitylabel1.layer.cornerRadius = 2.0;
+    _activitylabel1.layer.borderColor = UIColorWithRGB(0x5b7aa4).CGColor;
+    [markBg addSubview:_activitylabel1];
+    
+    _activitylabel2 = [UILabel labelWithFrame:CGRectZero text:@"" textColor:UIColorWithRGB(0x5b7aa4) font:[UIFont systemFontOfSize:MarkLabelFont]];
+    _activitylabel2.backgroundColor = [UIColor whiteColor];
+    _activitylabel2.layer.borderWidth = 1;
+    _activitylabel2.layer.cornerRadius = 2.0;
+    _activitylabel2.layer.borderColor = UIColorWithRGB(0x5b7aa4).CGColor;
+    [markBg addSubview:_activitylabel2];
+    
+    _activitylabel3 = [UILabel labelWithFrame:CGRectZero text:@"" textColor:UIColorWithRGB(0x5b7aa4) font:[UIFont systemFontOfSize:MarkLabelFont]];
+    _activitylabel3.backgroundColor = [UIColor whiteColor];
+    _activitylabel3.layer.borderWidth = 1;
+    _activitylabel3.layer.cornerRadius = 2.0;
+    _activitylabel3.layer.borderColor = UIColorWithRGB(0x5b7aa4).CGColor;
+    [markBg addSubview:_activitylabel3];
+    
+    _activitylabel4 = [UILabel labelWithFrame:CGRectZero text:@"" textColor:UIColorWithRGB(0x5b7aa4) font:[UIFont systemFontOfSize:MarkLabelFont]];
+    _activitylabel4.backgroundColor = [UIColor whiteColor];
+    _activitylabel4.layer.borderWidth = 1;
+    _activitylabel4.layer.cornerRadius = 2.0;
+    _activitylabel4.layer.borderColor = UIColorWithRGB(0x5b7aa4).CGColor;
+    [markBg addSubview:_activitylabel4];
+    
+    //标签数组
+    NSArray *prdLabelsList = _prdLabelsList;
+    NSMutableArray *labelPriorityArr = [NSMutableArray arrayWithCapacity:4];
+        if (![prdLabelsList isEqual:[NSNull null]]) {
+            for (NSDictionary *dic in prdLabelsList) {
+                NSInteger labelPriority = [dic[@"labelPriority"] integerValue];
+                if (labelPriority > 1) {
+                    if ([dic[@"labelName"] rangeOfString:@"起投"].location == NSNotFound) {
+                        [labelPriorityArr addObject:dic[@"labelName"]];
+                    }
+                }
+            }
+        }
+    //重设标签位置
+    if ([labelPriorityArr count] == 0) {
+        [_activitylabel1 setHidden:YES];
+        [_activitylabel2 setHidden:YES];
+        [_activitylabel3 setHidden:YES];
+        [_activitylabel4 setHidden:YES];
+    } else if ([labelPriorityArr count] == 1) {
+        [_activitylabel1 setHidden:NO];
+        [_activitylabel2 setHidden:YES];
+        [_activitylabel3 setHidden:YES];
+        [_activitylabel4 setHidden:YES];
+        CGFloat stringWidth = [labelPriorityArr[0] sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:MarkLabelFont]}].width;
+        _activitylabel1.frame = CGRectMake(15, FirstMarkYPos, stringWidth + MarkInSpacing, MarkHeight);
+        _activitylabel1.text = labelPriorityArr[0];
+    } else if ([labelPriorityArr count] == 2) {
+        [_activitylabel1 setHidden:NO];
+        [_activitylabel2 setHidden:NO];
+        [_activitylabel3 setHidden:YES];
+        [_activitylabel4 setHidden:YES];
+        _activitylabel1.text = labelPriorityArr[0];
+        _activitylabel2.text = labelPriorityArr[1];
+        CGFloat stringWidth = [labelPriorityArr[0] sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:MarkLabelFont]}].width;
+        CGFloat stringWidth2 = [labelPriorityArr[1] sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:MarkLabelFont]}].width;
+        _activitylabel1.frame = CGRectMake(15, FirstMarkYPos, stringWidth + MarkInSpacing, MarkHeight);
+        _activitylabel2.frame = CGRectMake(CGRectGetMaxX(_activitylabel1.frame) + MarkXSpacing, FirstMarkYPos, stringWidth2 + MarkInSpacing, MarkHeight);
+    } else if ([labelPriorityArr count] == 3) {
+        [_activitylabel1 setHidden:NO];
+        [_activitylabel2 setHidden:NO];
+        [_activitylabel3 setHidden:NO];
+        [_activitylabel4 setHidden:YES];
+        _activitylabel1.text = labelPriorityArr[0];
+        _activitylabel2.text = labelPriorityArr[1];
+        _activitylabel3.text = labelPriorityArr[2];
+        CGFloat stringWidth = [labelPriorityArr[0] sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:MarkLabelFont]}].width;
+        CGFloat stringWidth2 = [labelPriorityArr[1] sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:MarkLabelFont]}].width;
+        CGFloat stringWidth3 = [labelPriorityArr[2] sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:MarkLabelFont]}].width;
+        _activitylabel1.frame = CGRectMake(15, FirstMarkYPos, stringWidth + MarkInSpacing, MarkHeight);
+        _activitylabel2.frame = CGRectMake(CGRectGetMaxX(_activitylabel1.frame) + MarkXSpacing, FirstMarkYPos, stringWidth2 + MarkInSpacing, MarkHeight);
+        _activitylabel3.frame = CGRectMake(CGRectGetMaxX(_activitylabel2.frame) + MarkXSpacing, FirstMarkYPos, stringWidth3 + MarkInSpacing, MarkHeight);
+        
+        //如果标签长度超过屏幕宽度 重新布局2级标签
+        if (stringWidth + stringWidth2 + stringWidth3 + MarkXSpacing*2 + MarkInSpacing*3 + 15*2 > ScreenWidth) {
+            _activitylabel1.frame = CGRectMake(15, 2, stringWidth + MarkInSpacing, 12);
+            _activitylabel2.frame = CGRectMake(CGRectGetMaxX(_activitylabel1.frame) + MarkXSpacing, 2, stringWidth2 + MarkInSpacing, 12);
+            _activitylabel3.frame = CGRectMake(15, 16, stringWidth3 + 10, 12);
+        }
+    } else {
+        [_activitylabel1 setHidden:NO];
+        [_activitylabel2 setHidden:NO];
+        [_activitylabel3 setHidden:NO];
+        [_activitylabel4 setHidden:NO];
+        _activitylabel1.text = labelPriorityArr[0];
+        _activitylabel2.text = labelPriorityArr[1];
+        _activitylabel3.text = labelPriorityArr[2];
+        _activitylabel4.text = labelPriorityArr[3];
+        CGFloat stringWidth = [labelPriorityArr[0] sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:MarkLabelFont]}].width;
+        CGFloat stringWidth2 = [labelPriorityArr[1] sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:MarkLabelFont]}].width;
+        CGFloat stringWidth3 = [labelPriorityArr[2] sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:MarkLabelFont]}].width;
+        CGFloat stringWidth4 = [labelPriorityArr[3] sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:MarkLabelFont]}].width;
+        _activitylabel1.frame = CGRectMake(15, FirstMarkYPos, stringWidth + MarkInSpacing, MarkHeight);
+        _activitylabel2.frame = CGRectMake(CGRectGetMaxX(_activitylabel1.frame) + MarkXSpacing, FirstMarkYPos, stringWidth2 + MarkInSpacing, MarkHeight);
+        _activitylabel3.frame = CGRectMake(CGRectGetMaxX(_activitylabel2.frame) + MarkXSpacing, FirstMarkYPos, stringWidth3 + MarkInSpacing, MarkHeight);
+        _activitylabel4.frame = CGRectMake(CGRectGetMaxX(_activitylabel3.frame) + MarkXSpacing, FirstMarkYPos, stringWidth4 + MarkInSpacing, MarkHeight);
+        
+        //如果标签长度超过屏幕宽度 重新布局2级标签
+        if (stringWidth + stringWidth2 + stringWidth3 + MarkXSpacing*2 + MarkInSpacing*3 + 15*2 > ScreenWidth) {
+            _activitylabel1.frame = CGRectMake(15, 2, stringWidth + MarkInSpacing, 12);
+            _activitylabel2.frame = CGRectMake(CGRectGetMaxX(_activitylabel1.frame) + MarkXSpacing, 2, stringWidth2 + MarkInSpacing, 12);
+            _activitylabel3.frame = CGRectMake(15, 16, stringWidth3 + 10, 12);
+            _activitylabel4.frame = CGRectMake(CGRectGetMaxX(_activitylabel3.frame) + MarkXSpacing, 16, stringWidth3 + 10, 12);
+        } else if (stringWidth + stringWidth2 + stringWidth3 + stringWidth4 + MarkXSpacing*3 + MarkInSpacing*4 + 15*2 > ScreenWidth) {
+            _activitylabel1.frame = CGRectMake(15, 2, stringWidth + MarkInSpacing, 12);
+            _activitylabel2.frame = CGRectMake(CGRectGetMaxX(_activitylabel1.frame) + MarkXSpacing, 2, stringWidth2 + MarkInSpacing, 12);
+            _activitylabel3.frame = CGRectMake(CGRectGetMaxX(_activitylabel2.frame) + MarkXSpacing, 2, stringWidth3 + MarkInSpacing, 12);
+            _activitylabel4.frame = CGRectMake(15, 16, stringWidth4 + MarkInSpacing, 12);
+        }
+    }
+    
+    return markBg;
+}
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    
+    return 3;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section == 1) {
-        return 274;
-    }else {
+    switch (indexPath.section) {
+        case 0:
+        {
+            if (indexPath.row == 0) {
+                return 109;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+            break;
+        case 1:
+        {
+            return 274;
+        }
+            break;
+        case 2:
+        {
+            return 44;
+        }
+            break;
+        default:
+            break;
+    }
         return 44;
-    }
-    
 }
+//-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+//    UIView *headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 10)];
+//    
+//    headerView.backgroundColor = [UIColor clearColor];
+//    
+//    
+//    
+//}
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    if (section == 2) {
-        return 47;
-    }
-    return 10;
     
+    switch (section) {
+        case 0:
+        {
+             return 0;
+        }
+            break;
+        case 1:
+        {
+            NSArray *prdLabelsList = _prdLabelsList;
+            NSMutableArray *labelPriorityArr = [NSMutableArray arrayWithCapacity:4];
+            if (![prdLabelsList isEqual:[NSNull null]]) {
+                for (NSDictionary *dic in prdLabelsList) {
+                    NSInteger labelPriority = [dic[@"labelPriority"] integerValue];
+                    if (labelPriority > 1) {
+                        if ([dic[@"labelName"] rangeOfString:@"起投"].location == NSNotFound) {
+                            [labelPriorityArr addObject:dic[@"labelName"]];
+                        }
+                    }
+                }
+            }
+            if ([labelPriorityArr count] == 0) {
+               return 10;
+            }else{
+               return 30;
+            }
+        }
+            break;
+        case 2:
+        {
+            return 47;
+
+        }
+            break;
+        default:
+            break;
+    }
+    return 0;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     
@@ -126,11 +358,26 @@
     UITableViewCell *cell = [tableView  dequeueReusableCellWithIdentifier:cellId];
     if (indexPath.section == 0) {
       
-        if (!cell) {
-            cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellId];
+        static NSString *cellStr1 = @"cell1";
+        SubInvestmentCell *cell = [tableView dequeueReusableCellWithIdentifier:cellStr1];
+        if (cell == nil) {
+            cell = [[[NSBundle mainBundle]loadNibNamed:@"SubInvestmentCell" owner:self options:nil] firstObject];
         }
-        cell.textLabel.text = @"投标页面";
-         return cell;
+//        InvestmentItemInfo *info =  self.bidArray[0];
+        cell.accoutType = SelectAccoutTypeGold;
+        [cell setGoldInvestItemInfo:self.goldModel];
+        self.goldPrice = [ToolSingleTon sharedManager].readTimePrice;
+        cell.repayPeriodLab.text = [NSString stringWithFormat:@"实时金价(每克)%.3f",[ToolSingleTon sharedManager].readTimePrice]; //投资期限
+        id prdLabelsList = [_dataDic objectForKey:@"prdLabelsList"];
+        if (![prdLabelsList isKindOfClass:[NSNull class]]) {
+            for (NSDictionary *dic in prdLabelsList) {
+                NSString *labelPriority = dic[@"labelPriority"];
+                if ([labelPriority isEqual:@"1"]) {
+                    cell.angleView.angleString = dic[@"labelName"];
+                }
+            }
+        }
+        return cell;
     }else if (indexPath.section == 1){
         static NSString *cellId = @"UCFGoldMoneyBoadCell";
         UCFGoldMoneyBoadCell *cell = [tableView  dequeueReusableCellWithIdentifier:cellId];
@@ -138,6 +385,7 @@
             cell = [[[NSBundle mainBundle]loadNibNamed:@"UCFGoldMoneyBoadCell" owner:nil options:nil] firstObject];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
+        cell.dataDict = self.dataDic;
         cell.delegate = self;
          return cell;
     }else if (indexPath.section == 2){
@@ -217,6 +465,8 @@
 //        return;
 //    }
     UCFGoldCalculatorView * view = [[[NSBundle mainBundle]loadNibNamed:@"UCFGoldCalculatorView" owner:nil options:nil] firstObject];
+    view.goldMoneyTextField.text = cell.moneyTextField.text;
+    view.nmTypeIdStr = self.goldModel.nmTypeId;
     view.tag = 173924;
     view.frame = CGRectMake(0, 0, ScreenWidth,ScreenHeight);
 //    view.center = bgView.center;
@@ -230,11 +480,13 @@
     
 }
 #pragma mark -黄金充值
--(void)gotoGoldRechargeVC{
+-(void)gotoGoldRechargeVC
+{
     
 }
 #pragma mark -全投
--(void)clickAllInvestmentBtn{
+-(void)clickAllInvestmentBtn
+{
     
 }
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
@@ -244,7 +496,54 @@
 -(void)keyboardDown{
     [self.view endEditing:YES];
 }
+-(void)beginPost:(kSXTag)tag
+{
+    
+    
+}
 
+
+- (void)endPost:(id)result tag:(NSNumber *)tag
+{
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    NSString *data = (NSString *)result;
+    if (tag.intValue == kSXTagGetPurchaseGold){
+        NSMutableDictionary *dic = [data objectFromJSONString];
+        NSString *rstcode = dic[@"ret"];
+        if([rstcode intValue] == 1)
+        {
+            UCFGoldBidSuccessViewController *goldAuthorizationVC = [[UCFGoldBidSuccessViewController alloc]initWithNibName:@"UCFGoldBidSuccessViewController" bundle:nil];
+            goldAuthorizationVC.dataDict = [[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"result"];
+            [self.navigationController pushViewController:goldAuthorizationVC  animated:YES];
+
+//            NSDictionary  *dataDict = dic[@"data"][@"tradeReq"];
+//            NSString *urlStr = dic[@"data"][@"url"];
+//            UCFPurchaseWebView *webView = [[UCFPurchaseWebView alloc]initWithNibName:@"UCFPurchaseWebView" bundle:nil];
+//            webView.url = urlStr;
+//            webView.rootVc = self.rootVc;
+//            webView.webDataDic =dataDict;
+//            webView.navTitle = @"即将跳转";
+//            webView.accoutType = self.accoutType;
+//            [self.navigationController pushViewController:webView animated:YES];
+//            
+//            NSMutableArray *navVCArray = [[NSMutableArray alloc] initWithArray:self.navigationController.viewControllers];
+//            [navVCArray removeObjectAtIndex:navVCArray.count-2];
+//            [self.navigationController setViewControllers:navVCArray animated:NO];
+        }
+        else{
+//            [self reloadMainView];
+            [AuxiliaryFunc showAlertViewWithMessage:[dic objectSafeForKey:@"message"]];
+        }
+     }
+}
+-(void)errorPost:(NSError*)err tag:(NSNumber*)tag
+{
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    [MBProgressHUD displayHudError:[err.userInfo objectForKey:@"NSLocalizedDescription"]];
+    //    if (self.bidTableView.header.isRefreshing) {
+    //        [self.bidTableView.header endRefreshing];
+    //    }
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -262,8 +561,19 @@
 
 - (IBAction)gotoGoldBidSuccessVC:(id)sender {
     
-    UCFGoldBidSuccessViewController *goldAuthorizationVC = [[UCFGoldBidSuccessViewController alloc]initWithNibName:@"UCFGoldBidSuccessViewController" bundle:nil];
-    [self.navigationController pushViewController:goldAuthorizationVC  animated:YES];
+    /*
+     nmPrdClaimId	标Id	string
+     purchaseBean	使用工豆金额	string
+     purchaseGoldAmount	购买黄金克重	string
+     purchaseMoney	购买金额	string
+     userId	用户Id	string
+     workshopCode	工场码	string
+     */
+    NSDictionary  *nmPrdClaimInfoDic  = [_dataDic objectSafeDictionaryForKey:@"nmPrdClaimInfo"];
+    NSString *nmPrdClaimIdStr = [nmPrdClaimInfoDic objectForKey:@"nmPrdClaimId"];
+    NSDictionary *paramDict = @{@"nmPrdClaimId": nmPrdClaimIdStr,@"purchaseBean":@"0.00",@"purchaseGoldAmount":@"1",@"purchaseMoney":@"300.00",@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"workshopCode":@""};
+    [[NetworkModule sharedNetworkModule] newPostReq:paramDict tag:kSXTagGetPurchaseGold owner:self signature:YES Type:SelectAccoutTypeGold];
 
+    
 }
 @end
