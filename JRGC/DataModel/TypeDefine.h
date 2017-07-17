@@ -270,6 +270,7 @@
 #define GETGOLDPROCLAIMDETAILIL @"api/nmTrade/v2/getNmProClaimDetail.json"//购买输入金额页信息查询
 
 #define GOLDAUTHORIZOPENACCOUT  @"api/nmAccount/v2/authorizedOpenAccount.json"//黄金授权
+#define GOLDPURCHASEURL  @"api/nmTrade/v2/purchaseGold.json" //黄金购买
 
 enum kPostStatus{
     kPostStatusNone=0,
@@ -498,6 +499,7 @@ enum kSXTag
     kSXTagGetGoldProClaimDetail,         //购买输入金额页信息查询
     kSXTagGoldAuthorizedOpenAccount,    //黄金授权
     kSXTagGoldList,                      //黄金列表
+    kSXTagGetPurchaseGold,               //黄金购买
 };
 
 typedef enum kSXTag kSXTag;

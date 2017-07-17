@@ -139,19 +139,15 @@
                 textField.text = @"0";
             }
         }
-        
     }
-    
     if(array.count > 2)
     {
         textField.text = [textField.text substringToIndex:textField.text.length-1];
     }
     if(array.count == 2)
     {
-        
         str = [array objectAtIndex:1];
-        
-        if(str.length > 2)
+        if(str.length > 3)
         {
             textField.text = [textField.text substringToIndex:textField.text.length-1];
         }
@@ -160,7 +156,6 @@
             textField.text = [NSString stringWithFormat:@"0%@",textField.text];
         }
     }
-    
     return textField;
 }
 /*

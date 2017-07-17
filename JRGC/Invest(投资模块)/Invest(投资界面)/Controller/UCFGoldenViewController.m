@@ -11,7 +11,10 @@
 #import "UCFHomeListCell.h"
 #import "UCFHomeListHeaderSectionView.h"
 #import "UCFGoldModel.h"
-
+#import "UCFGoldPurchaseViewController.h"
+#import "UCFGoldAuthorizationViewController.h"
+#import "UCFLoginViewController.h"
+#import "HSHelper.h"
 @interface UCFGoldenViewController () <UITableViewDelegate, UITableViewDataSource, UCFHomeListCellHonorDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (weak, nonatomic) UCFGoldenHeaderView *goldenHeader;
@@ -84,7 +87,7 @@
     }
     cell.tableView = tableView;
     cell.indexPath = indexPath;
-    cell.goldModel = [self.dataArray objectAtIndex:indexPath.row];
+//    cell.goldModel = [self.dataArray objectAtIndex:indexPath.row];
     return cell;
 }
 
@@ -128,7 +131,42 @@
 
 - (void)homelistCell:(UCFHomeListCell *)homelistCell didClickedProgressViewAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
+        //如果未登录，展示登录页面
+        [self showLoginView];
+    } else  {
+        HSHelper *helper = [HSHelper new];
+        
+        //检查企业老用户是否开户--未开户去主站开户
+        NSString *messageStr =  [helper checkCompanyIsOpen:self.accoutType];
+        if (![messageStr isEqualToString:@""]) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil];
+            [alert show];
+            return;
+        }
+
     
+//        if([UserInfoSingle sharedManager].goldAuthorization){
+//    
+//            UCFGoldAuthorizationViewController *goldAuthorizationVC = [[UCFGoldAuthorizationViewController alloc]initWithNibName:@"UCFGoldAuthorizationViewController" bundle:nil];
+//            [self.navigationController pushViewController:goldAuthorizationVC  animated:YES];
+//            return;
+//        }
+    NSDictionary *data  = [self.dataArray objectAtIndex:indexPath.row];
+    
+    
+    NSString *nmProClaimIdStr = [data objectForKey:@"nmPrdClaimId"];
+    NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId",nmProClaimIdStr, @"nmPrdClaimId",nil];
+    
+    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagGetGoldProClaimDetail owner:self signature:YES Type:SelectAccoutDefault];
+    }
+}
+#pragma mark -去登录页面
+- (void)showLoginView
+{
+    UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
+    UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
+    [self presentViewController:loginNaviController animated:YES completion:nil];
 }
 
 - (void)refreshData {
@@ -176,18 +214,34 @@
                     self.tableview.footer.hidden = YES;
             }
             NSArray *resut = [pageData objectSafeArrayForKey:@"result"];
+//            [self.dataArray addObjectsFromArray:resut];
             if ([self.tableview.header isRefreshing]) {
                 [self.dataArray removeAllObjects];
             }
             for (NSDictionary *temp in resut) {
                 UCFGoldModel *gold = [UCFGoldModel goldModelWithDict:temp];
-                [self.dataArray addObject:gold];
+//                [self.dataArray addObject:gold];
             }
+            [self.dataArray addObjectsFromArray:resut];
             [self.tableview reloadData];
         }else {
             if (![rsttext isEqualToString:@""] && rsttext) {
                 [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
             }
+        }
+    }else if (tag.integerValue == kSXTagGetGoldProClaimDetail){
+        
+        NSMutableDictionary *dic = [result objectFromJSONString];
+        NSString *rsttext = dic[@"message"];
+        NSDictionary *dataDict = [dic objectSafeDictionaryForKey:@"data"];
+        if ( [dic[@"ret"] boolValue]) {
+            UCFGoldPurchaseViewController *goldAuthorizationVC = [[UCFGoldPurchaseViewController alloc]initWithNibName:@"UCFGoldPurchaseViewController" bundle:nil];
+            goldAuthorizationVC.dataDic = dataDict;
+            [self.navigationController pushViewController:goldAuthorizationVC  animated:YES];
+        }
+        else
+        {
+            [AuxiliaryFunc showAlertViewWithMessage:rsttext];
         }
     }
     if ([self.tableview.header isRefreshing]) {

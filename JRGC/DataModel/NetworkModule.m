@@ -1324,6 +1324,9 @@ static NetworkModule *gInstance = NULL;
         case kSXTagGoldList:
             parameter = [NEW_SERVER_IP stringByAppendingString:GOLDENLIST];
             break;
+        case kSXTagGetPurchaseGold:
+            parameter = [NEW_SERVER_IP stringByAppendingString:GOLDPURCHASEURL];
+            break;
     }
     //给原有参数字典添加公共参数
     if (!data) {
