@@ -16,10 +16,13 @@
 #import "UILabel+Misc.h"
 @interface UCFGoldPurchaseViewController ()<UITableViewDelegate,UITableViewDataSource,UCFGoldMoneyBoadCellDelegate>
 {
+    float  bottomViewYPos;
+    NSArray *_prdLabelsList;
     UILabel *_activitylabel1;//二级标签
     UILabel *_activitylabel2;//三级标签
     UILabel *_activitylabel3;//四级标签
     UILabel *_activitylabel4;//五级标签
+   
 }
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 - (IBAction)gotoGoldBidSuccessVC:(id)sender;
@@ -76,20 +79,40 @@
     else{
         if(section == 1)
         {
-            if ([_dataDic objectSafeArrayForKey:@"prdLabelsList"]) {
-                
+            NSArray *prdLabelsList = _prdLabelsList;
+            NSMutableArray *labelPriorityArr = [NSMutableArray arrayWithCapacity:4];
+            if (![prdLabelsList isEqual:[NSNull null]]) {
+                for (NSDictionary *dic in prdLabelsList) {
+                    NSInteger labelPriority = [dic[@"labelPriority"] integerValue];
+                    if (labelPriority > 1) {
+                        if ([dic[@"labelName"] rangeOfString:@"起投"].location == NSNotFound) {
+                            [labelPriorityArr addObject:dic[@"labelName"]];
+                        }
+                    }
+                }
             }
+            if ([labelPriorityArr count] == 0) {
             
+                bottomViewYPos = 10;
+                UIView *topView =[[UIView alloc] initWithFrame: CGRectMake(0, 0, ScreenWidth, bottomViewYPos)];
+                topView.backgroundColor = [UIColor clearColor];
+                return topView;
+            } else {
+                bottomViewYPos = 30;
+                 return   [self drawMarkView:bottomViewYPos];
+            }
+        }else{
+            UIView *topView =[[UIView alloc] initWithFrame: CGRectMake(0, 0, ScreenWidth, 10.0f)];
+            topView.backgroundColor = [UIColor clearColor];
+            //        [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:topView isTop:YES];
+            //        [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:topView isTop:NO];
+            return topView;
+
         }
-        UIView *topView =[[UIView alloc] initWithFrame: CGRectMake(0, 0, ScreenWidth, 10.0f)];
-        topView.backgroundColor = [UIColor clearColor];
-        //        [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:topView isTop:YES];
-        //        [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:topView isTop:NO];
-        return topView;
     }
     return nil;
 }
-- (void)drawMarkView
+- (UIView *)drawMarkView:(float)markHeight
 {
     UIView *markBg = [[UIView alloc] initWithFrame:CGRectMake(0,0, ScreenWidth, 30)];
     markBg.backgroundColor = [UIColor clearColor];
@@ -212,6 +235,8 @@
             _activitylabel4.frame = CGRectMake(15, 16, stringWidth4 + MarkInSpacing, 12);
         }
     }
+    
+    return markBg;
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -264,7 +289,7 @@
             break;
         case 1:
         {
-             return 10;
+             return bottomViewYPos;
         }
             break;
         case 2:
