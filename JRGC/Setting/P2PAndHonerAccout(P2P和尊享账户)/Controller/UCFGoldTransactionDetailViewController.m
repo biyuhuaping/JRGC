@@ -9,7 +9,18 @@
 #import "UCFGoldTransactionDetailViewController.h"
 
 @interface UCFGoldTransactionDetailViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *tradeTypeNameLab;
+@property (weak, nonatomic) IBOutlet UILabel *dealGoldNum;
+@property (weak, nonatomic) IBOutlet UIView *middleBaseView;
+@property (weak, nonatomic) IBOutlet UIView *bottomBaseView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomViewSpace;
+@property (weak, nonatomic) IBOutlet UILabel *dealMoneyLab;
+@property (weak, nonatomic) IBOutlet UILabel *dealGoldPrice;
+@property (weak, nonatomic) IBOutlet UILabel *serviceChargeLab;
 
+@property (weak, nonatomic) IBOutlet UILabel *dealType;
+@property (weak, nonatomic) IBOutlet UILabel *dealTime;
+@property (weak, nonatomic) IBOutlet UILabel *dealNO;
 @end
 
 @implementation UCFGoldTransactionDetailViewController
@@ -18,11 +29,36 @@
     [super viewDidLoad];
     [self addLeftButton];
     baseTitleLabel.text = @"交易详情";
+    
+    [self initUI];
 }
-
+- (void)initUI {
+    if ([_model.tradeTypeCode isEqualToString:@"11"]) {
+        self.dealType.text = @"冻结";
+        self.middleBaseView.hidden = YES;
+        self.bottomViewSpace.constant = 0;
+        self.tradeTypeNameLab.text = @"冻结克重";
+        self.dealGoldNum.textColor = UIColorWithRGB(0x999999);
+        self.dealGoldNum.text = [NSString stringWithFormat:@"%@克",_model.frozenMoney];
+        self.dealTime.text = _model.tradeTime;
+        self.dealNO.text = _model.tradeRemark;
+    } else if([_model.tradeTypeCode isEqualToString:@"12"]){
+        self.tradeTypeNameLab.text = @"买金克重";
+        self.dealGoldNum.textColor = UIColorWithRGB(0xfd4d4c);
+        self.dealGoldNum.text = [NSString stringWithFormat:@"%@克",_model.purchaseAmount];
+        self.dealType.text = @"买金";
+        self.dealTime.text = _model.tradeTime;
+        self.dealNO.text = _model.tradeRemark;
+        
+        self.dealMoneyLab.text = [NSString stringWithFormat:@"￥%@",_model.tradeMoney];
+        self.dealMoneyLab.textColor = UIColorWithRGB(0xfd4d4c);
+        self.dealGoldPrice.text = [NSString stringWithFormat:@"￥%@",_model.purchasePrice];
+        self.serviceChargeLab.text = @"手续费";
+    }
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 /*

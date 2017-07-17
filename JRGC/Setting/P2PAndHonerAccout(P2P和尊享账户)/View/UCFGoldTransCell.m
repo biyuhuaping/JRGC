@@ -34,6 +34,9 @@
     } else {
         self.bottomLine.hidden = NO;
     }
+    self.dealType.text = _model.tradeTypeName;
+    self.turnoverLab.text = _model.purchaseAmount;
+    self.dealMoney.text = _model.tradeMoney;
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:NO animated:animated];
