@@ -38,6 +38,9 @@
 
 - (NSString *)annualRate
 {
+    if ([self.item.type isEqualToString:@"3"]) {
+        return self.item.annualRate ? [NSString stringWithFormat:@"%@克/100克", self.item.annualRate] : @"0.000克/100克" ;
+    }
     return self.item.annualRate ? [NSString stringWithFormat:@"%@%%",self.item.annualRate] : @"0.0%";
 }
 
@@ -53,11 +56,21 @@
 
 - (NSString *)minInvest
 {
+    if ([self.item.type isEqualToString:@"3"]) {
+        return self.item.minInvest ? [NSString stringWithFormat:@"%@.000克起", self.item.minInvest] : @"";
+    }
     return self.item.minInvest ? [NSString stringWithFormat:@"%@元起", self.item.minInvest] : @"";
 }
 
 - (NSString *)availBorrowAmount
 {
+    if ([self.item.type isEqualToString:@"3"]) {
+        if (self.item.remainAmount.floatValue > 0.00) {
+            return [NSString stringWithFormat:@"剩%@克", self.item.remainAmount];
+        }
+        else
+            return [NSString stringWithFormat:@"%@克", self.item.borrowAmount];
+    }
     NSString *temp = [NSString stringWithFormat:@"%lf",[self.item.borrowAmount doubleValue]-[self.item.completeLoan doubleValue]];
     return [self moneywithRemaining:temp total:self.item.borrowAmount];
 }
@@ -105,7 +118,7 @@
 - (CGFloat)cellHeight
 {
     if (self.item.moedelType == UCFHomeListCellModelTypeDefault) {
-        return 100.0;
+        return 95.0;
     }
     else {
         return (ScreenWidth - 20) / CELLRATE + 15;

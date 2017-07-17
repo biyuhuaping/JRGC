@@ -72,17 +72,8 @@
     }
     //黄金账户
     UCFUserInfoListItem *userInfoList2 = [UCFUserInfoListItem itemWithTitle:@"黄金账户" destVcClass:nil];
-#warning test
-    self.userInfoOneModel.zxOpenStatus = @"4";
-    
-    if ([self.userInfoOneModel.zxOpenStatus intValue] <= 2) {
-        userInfoList2.isShow = NO;
-        userInfoList2.subtitle = @"未开户";
-    }
-    else {
-        userInfoList2.isShow = YES;
-        userInfoList2.subtitle = self.userInfoOneModel.zxCashBalance.length > 0 ? [NSString stringWithFormat:@"%@克", self.userInfoOneModel.zxCashBalance] : @"0.00元";
-    }
+    userInfoList2.isShow = YES;
+    userInfoList2.subtitle = self.userInfoOneModel.holdGoldAmount.length > 0 ? [NSString stringWithFormat:@"%@克", self.userInfoOneModel.holdGoldAmount] : @"0.000克";
     
     [self.userInfoListCells addObject:userInfoList0];
     [self.userInfoListCells addObject:userInfoList1];

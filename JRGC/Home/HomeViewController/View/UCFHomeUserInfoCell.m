@@ -40,8 +40,8 @@
         } else {
             self.itemValueLabel.textColor = UIColorWithRGB(0xfd4d4c);
             self.itemDescribeLabel.text = @"可用余额";
-
         }
+        
     }
     else {
         self.itemValueLabel.textColor = UIColorWithRGB(0x999999);
