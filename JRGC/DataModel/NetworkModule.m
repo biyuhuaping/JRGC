@@ -1305,7 +1305,7 @@ static NetworkModule *gInstance = NULL;
             
         case kSXTagGoldTradeFlowList:
             parameter = [NEW_SERVER_IP stringByAppendingString:GOLDTRADELIST];
-            
+            break;
         case kSXTagGetGoldPrdClaimList:   // 获取黄金列表
             parameter = [NEW_SERVER_IP stringByAppendingString:GETGOlDPRDCLAIMLIST];
             break;
