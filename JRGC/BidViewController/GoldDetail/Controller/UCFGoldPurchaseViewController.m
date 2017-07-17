@@ -89,7 +89,6 @@
         UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 47)];
         headerView.backgroundColor = UIColorWithRGB(0xf9f9f9);
 
-        
         UIView *topView =[[UIView alloc] init];
         topView.backgroundColor = UIColorWithRGB(0xebebee);
         topView.frame = CGRectMake(0, 0, ScreenWidth, 10.0f);
