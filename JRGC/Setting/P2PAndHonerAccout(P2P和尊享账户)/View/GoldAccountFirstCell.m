@@ -26,7 +26,7 @@
 }
 - (void)updateaVailableMoenyLab:(NSString *)availableMoeny
 {
-    self.availableMoenyLab.text = availableMoeny;
+    self.availableMoenyLab.text = [NSString stringWithFormat:@"￥%@",availableMoeny];
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
