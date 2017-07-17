@@ -11,6 +11,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UCFMyGoldInvestInfoViewController">
             <connections>
+                <outlet property="allGiveGoldAmountLabel" destination="zgB-6W-OEU" id="wbg-8q-gOc"/>
+                <outlet property="collectGiveGoldAmountLabel" destination="g0j-qF-fVa" id="6cY-6N-IBh"/>
+                <outlet property="collectGoldAmountLabel" destination="sMU-sD-oJ9" id="RAl-J8-9AT"/>
                 <outlet property="scrollView" destination="XL3-yB-mh1" id="OGh-23-pdC"/>
                 <outlet property="segmentedControlBgView" destination="13E-Cx-u8S" id="jaG-EW-b7P"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>

@@ -300,7 +300,17 @@
                     <constraint firstItem="Bhc-UE-DJe" firstAttribute="top" secondItem="FnW-AO-1P3" secondAttribute="bottom" id="x98-Xj-58e"/>
                 </constraints>
             </tableViewCellContentView>
-            <point key="canvasLocation" x="48" y="29.5"/>
+            <connections>
+                <outlet property="dealGoldPriceLabel" destination="nD0-wA-J9A" id="G9I-BL-lev"/>
+                <outlet property="expiredDateLabel" destination="Ysn-iB-Ng8" id="8wC-Ac-w4P"/>
+                <outlet property="hasGiveGoldAmountLabel" destination="nOM-Ia-i8d" id="49T-1J-Xof"/>
+                <outlet property="nmPrdClaimNameLabel" destination="bd6-5z-WMp" id="jxj-WF-nIC"/>
+                <outlet property="orderStatusNameLabel" destination="clo-bG-jxs" id="LY2-qx-piz"/>
+                <outlet property="perGiveGoldAmountLabel" destination="riT-ys-Dks" id="wU0-pt-dPJ"/>
+                <outlet property="purchaseGoldAmountLabel" destination="KyL-Kd-2GA" id="kJb-bz-iIe"/>
+                <outlet property="startDateLabel" destination="GsK-cF-Q7h" id="SdI-My-nOe"/>
+            </connections>
+            <point key="canvasLocation" x="201" y="24"/>
         </tableViewCell>
     </objects>
 </document>
