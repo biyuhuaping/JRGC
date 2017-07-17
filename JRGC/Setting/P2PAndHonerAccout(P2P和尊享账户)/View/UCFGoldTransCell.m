@@ -34,8 +34,14 @@
     } else {
         self.bottomLine.hidden = NO;
     }
-    self.dealType.text = _model.tradeTypeName;
-    self.turnoverLab.text = _model.purchaseAmount;
+    if ([_model.tradeTypeCode isEqualToString:@"11"]) {
+        self.dealType.text = @"冻结";
+        
+    } else if([_model.tradeTypeCode isEqualToString:@"12"]){
+
+        self.dealType.text = @"买金";
+        
+    }    self.turnoverLab.text = _model.purchaseAmount;
     self.dealMoney.text = _model.tradeMoney;
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

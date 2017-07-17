@@ -137,6 +137,7 @@
                 NSDictionary *dic = [list_result objectAtIndex:i];
                 UCFGoldTradeListModel *model = [[UCFGoldTradeListModel alloc] initWithDict:dic];
                 NSString *tradeTime = model.tradeTime;
+                tradeTime = [tradeTime substringToIndex:10];
                 if ([[self.dataDict allKeys] containsObject:tradeTime]) {
                     NSMutableArray *tmpArr = [self.dataDict objectForKey:tradeTime];
                     [tmpArr addObject:model];
