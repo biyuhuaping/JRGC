@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "UCFOldUserGuideViewController.h"
 #import "UCFBankDepositoryAccountViewController.h"
+#import "UCFGoldAuthorizationViewController.h"
 @interface HSHelper : NSObject <NetworkModuleDelegate>
 -(NSString *)checkCompanyIsOpen:(SelectAccoutType)accoutType;
 -(BOOL)checkP2POrWJIsAuthorization:(SelectAccoutType)accoutType;
