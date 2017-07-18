@@ -46,7 +46,8 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 3;
+    NSArray *array = [self.dataArray objectAtIndex:section];
+    return array.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -71,6 +72,11 @@
     return 0.001;
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    return nil;
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 35;
@@ -88,7 +94,7 @@
 
 - (void)beginPost:(kSXTag)tag
 {
-    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 }
 
 - (void)endPost:(id)result tag:(NSNumber *)tag
@@ -115,6 +121,7 @@
                 self.currentPage ++;
                 self.tableview.footer.hidden = YES;
                 [self.tableview.footer resetNoMoreData];
+                self.dataArray = [self arrayGroupWithArray:self.dataArray];
             }
             else {
                 if (self.dataArray.count > 0) {
@@ -122,6 +129,7 @@
                 }
                 else
                     self.tableview.footer.hidden = YES;
+                self.dataArray = [self arrayGroupWithArray:self.dataArray];
             }
             [self.tableview reloadData];
         }else {
@@ -148,6 +156,35 @@
     if ([self.tableview.footer isRefreshing]) {
         [self.tableview.footer endRefreshing];
     }
+}
+
+- (NSMutableArray *)arrayGroupWithArray:(NSMutableArray *)array
+{
+    if (array.count>0) {
+        UCFGoldHistoryModel *firstModel = [array firstObject];
+        NSMutableArray *tempDataArray = [NSMutableArray array];
+        NSMutableArray *tempMonthArray = [NSMutableArray array];
+        for (UCFGoldHistoryModel *model in array) {
+            if ([model.rechargeDate isEqualToString:firstModel.rechargeDate]) {
+                [tempMonthArray addObject:model];
+                if ([model isEqual:[array lastObject]]) {
+                    [tempDataArray addObject:tempMonthArray];
+                }
+            }
+            else {
+                firstModel = model;
+                [tempDataArray addObject:tempMonthArray];
+                tempMonthArray = [NSMutableArray array];
+                [tempMonthArray addObject:model];
+                if ([model isEqual:[array lastObject]]) {
+                    [tempDataArray addObject:tempMonthArray];
+                }
+            }
+        }
+        return tempDataArray;
+    }
+    
+    return nil;
 }
 
 @end

@@ -48,6 +48,9 @@
         if ([key isEqualToString:@"type"]) {
             
         }
+        else if ([key isEqualToString:@"rechargeDate"]) {
+            [self setValue:[propertyValue substringToIndex:10] forKey:key];
+        }
         else {
             if (![propertyValue isKindOfClass:[NSNull class]] && propertyValue != nil) {
                 [self setValue:propertyValue forKey:key];

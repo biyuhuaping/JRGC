@@ -252,6 +252,7 @@
             //去充值页面
             UCFGoldRechargeViewController *goldRecharge = [[UCFGoldRechargeViewController alloc] initWithNibName:@"UCFGoldRechargeViewController" bundle:nil];
             goldRecharge.baseTitleText = @"充值";
+            goldRecharge.rootVc = self;
             [self.navigationController pushViewController:goldRecharge animated:YES];
         }
     }

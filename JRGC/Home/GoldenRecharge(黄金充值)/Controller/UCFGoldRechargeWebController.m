@@ -10,7 +10,7 @@
 
 #define SIGNATURETIME 30.0
 
-@interface UCFGoldRechargeWebController ()
+@interface UCFGoldRechargeWebController () <UIWebViewDelegate>
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 @end
 
@@ -59,6 +59,7 @@
     [self.webView loadRequest:request];
 }
 
+
 -(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
 //    if (self.theConnection) {
@@ -89,6 +90,18 @@
             //}
         }
     }
+}
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    NSString *requestString = [[[request URL]  absoluteString] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSRange range = [requestString rangeOfString:self.backUrl];
+    if (range.location != NSNotFound) {
+        [self.navigationController popToViewController:self.rootVc animated:YES];
+        return NO;
+    }
+    
+    return YES;
 }
 
 -(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error{
