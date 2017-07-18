@@ -116,9 +116,12 @@
     self.totalRecoveryGold.text = [NSString stringWithFormat:@"%@克",[dataDic objectSafeForKey:@"collectGoldAmount"]];
     self.dealGoldPrice.text =  [NSString stringWithFormat:@"￥%@",[dataDic objectSafeForKey:@"dealPrice"]];
     double floatValue1 = ([ToolSingleTon sharedManager].readTimePrice - [[dataDic objectSafeForKey:@"dealPrice"] doubleValue]) * [[dataDic objectSafeForKey:@"holdGoldAmount"] doubleValue];
-    if (floatValue1 >= 0) {
+    if (floatValue1 > 0) {
         self.floatLabel.textColor = UIColorWithRGB(0xfd4d4c);
         self.floatLabel.text = [NSString stringWithFormat:@"+￥%.2f",floatValue1];
+    } else if (floatValue1 == 0) {
+        self.floatLabel.textColor = UIColorWithRGB(0x55555);
+        self.floatLabel.text = [NSString stringWithFormat:@"￥%.2f",floatValue1];
     } else {
         self.floatLabel.textColor = UIColorWithRGB(0x4db94f);
         self.floatLabel.text = [NSString stringWithFormat:@"-￥%.2f",floatValue1];

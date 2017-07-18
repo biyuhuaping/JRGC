@@ -325,7 +325,17 @@
 - (void)homeList:(UCFHomeListViewController *)homeList tableView:(UITableView *)tableView didClickedWithModel:(UCFHomeListCellModel *)model withType:(UCFHomeListType)type
 {
      __weak typeof(self) weakSelf = self;
-    self.accoutType = [model.type intValue] == 1 ? SelectAccoutTypeP2P:SelectAccoutTypeHoner;
+    switch ([model.type intValue]) {
+        case 1:
+            self.accoutType = SelectAccoutTypeP2P;
+            break;
+        case 2:
+            self.accoutType = SelectAccoutTypeHoner;
+            break;
+        case 3:
+            self.accoutType = SelectAccoutTypeGold;
+            break;
+    }
     NSString *noPermissionTitleStr = self.accoutType == SelectAccoutTypeP2P ? @"目前标的详情只对出借人开放":@"目前标的详情只对认购人开放";
     if (type == UCFHomeListTypeDetail) {
         if (model.moedelType == UCFHomeListCellModelTypeDefault) {
@@ -528,6 +538,15 @@
         AppDelegate *appdel = (AppDelegate *)[UIApplication sharedApplication].delegate;
         UCFInvestViewController *invest = (UCFInvestViewController *)[[appdel.tabBarController.childViewControllers objectAtIndex:1].childViewControllers firstObject];
         invest.selectedType = @"ZX";
+        if ([invest isViewLoaded]) {
+            [invest changeView];
+        }
+        [appdel.tabBarController setSelectedIndex:1];
+    }
+    else if (type == UCFHomeListTypeGlodMore) {
+        AppDelegate *appdel = (AppDelegate *)[UIApplication sharedApplication].delegate;
+        UCFInvestViewController *invest = (UCFInvestViewController *)[[appdel.tabBarController.childViewControllers objectAtIndex:1].childViewControllers firstObject];
+        invest.selectedType = @"Gold";
         if ([invest isViewLoaded]) {
             [invest changeView];
         }

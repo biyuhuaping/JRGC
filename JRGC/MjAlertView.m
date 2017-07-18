@@ -726,6 +726,7 @@
         }
             break;
         default:
+            self.showView.center = self.center;
             if (self.block) {
                 self.block(self.showView);
             }

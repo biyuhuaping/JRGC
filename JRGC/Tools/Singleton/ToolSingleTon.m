@@ -19,6 +19,7 @@
 @property (strong, nonatomic) UIView *alertView;
 @property (strong, nonatomic) UIView *background;
 @property (strong, nonatomic) MjAlertView *alert;
+@property (strong, nonatomic) NSTimer *timer;
 @end
 
 @implementation ToolSingleTon
@@ -28,9 +29,17 @@
     static dispatch_once_t predicate;
     dispatch_once(&predicate, ^{
         sharedAccountManagerInstance = [[self alloc] init];
-
     });
     return sharedAccountManagerInstance;
+}
+- (instancetype)init {
+    self = [super init];
+    if(self) {
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:5 * 60 target:self selector:@selector(getGoldPrice) userInfo:nil repeats:YES];
+        
+        [_timer setFireDate:[NSDate distantPast]];
+    }
+    return self;
 }
 - (BOOL)checkHasCheckIn:(NSString *)uid
 {

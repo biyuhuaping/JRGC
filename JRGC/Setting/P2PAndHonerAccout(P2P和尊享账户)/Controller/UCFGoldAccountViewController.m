@@ -18,6 +18,9 @@
 #import "UCFGoldCashMoneyViewController.h"
 #import "UCFNoDataView.h"
 #import "UCFGoldAuthorizationViewController.h"
+#import "UserInfoSingle.h"
+#import "HSHelper.h"
+
 
 @interface UCFGoldAccountViewController ()<UITableViewDelegate,UITableViewDataSource, GoldAccountFirstCellDeleage>
 @property (weak, nonatomic) IBOutlet UITableView *baseTableView;
@@ -150,7 +153,7 @@
             cell.delegate = self;
             cell.textLabel.text = @"可用余额";
         }
-        [cell updateaVailableMoenyLab:self.availableGoldAmount];
+        [cell updateaVailableMoenyLab:self.balanceAmount];
         return cell;
     }
     return nil;
@@ -234,14 +237,41 @@
 - (void)goldAccountFirstCell:(GoldAccountFirstCell *)goldFirstCell didClickedRechargeButton:(UIButton *)button
     {
         
-//    if(![UserInfoSingle sharedManager].goldAuthorization){
-//        UCFGoldAuthorizationViewController *goldAuthorizationVC = [[UCFGoldAuthorizationViewController alloc]initWithNibName:@"UCFGoldAuthorizationViewController" bundle:nil];
-//        [self.navigationController pushViewController:goldAuthorizationVC  animated:YES];
-//        return;
-//    }
-    UCFGoldRechargeViewController *goldRecharge = [[UCFGoldRechargeViewController alloc] initWithNibName:@"UCFGoldRechargeViewController" bundle:nil];
-        goldRecharge.baseTitleText = @"充值";
-    [self.navigationController pushViewController:goldRecharge animated:YES];
+    NSString *tipStr1 = ZXTIP1;
+    NSInteger openStatus = [UserInfoSingle sharedManager].openStatus ;
+    NSInteger enjoyOpenStatus = [UserInfoSingle sharedManager].enjoyOpenStatus;
+    if (openStatus < 3 && enjoyOpenStatus < 3 ) {//去开户页面
+        [self showHSAlert:tipStr1];
+        return;
+    }
+    else{
+        if(![UserInfoSingle sharedManager].goldAuthorization){//去授权页面
+            HSHelper *helper = [HSHelper new];
+//                [helper pushGoldAuthorizationType:SelectAccoutTypeGold nav:self.navigationController];
+            return;
+        }else{
+            //去充值页面
+            UCFGoldRechargeViewController *goldRecharge = [[UCFGoldRechargeViewController alloc] initWithNibName:@"UCFGoldRechargeViewController" bundle:nil];
+            goldRecharge.baseTitleText = @"充值";
+            [self.navigationController pushViewController:goldRecharge animated:YES];
+        }
+    }
+}
+
+- (void)showHSAlert:(NSString *)alertMessage
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:alertMessage delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    alert.tag = 8000;
+    [alert show];
+}
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == 8000) {
+        if (buttonIndex == 1) {
+            HSHelper *helper = [HSHelper new];
+            [helper pushOpenHSType:SelectAccoutTypeHoner Step:[UserInfoSingle sharedManager].enjoyOpenStatus nav:self.navigationController];
+        }
+    }
 }
     
 - (void)goldAccountFirstCell:(GoldAccountFirstCell *)goldFirstCell didClickedCashButton:(UIButton *)button
