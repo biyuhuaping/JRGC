@@ -86,7 +86,7 @@
     _baseTableView.backgroundColor = UIColorWithRGB(0xebebee);
     [self addLeftButton];
     if (!self.noDataView) {
-        self.noDataView = [[UCFNoDataView alloc] initGoldWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - 64 - 100) errorTitle:@"你还没有订单" buttonTitle:@"去逛逛"];
+        self.noDataView = [[UCFNoDataView alloc] initGoldWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - 64 - 100) errorTitle:@"你还没有交易记录" buttonTitle:@"去逛逛"];
         self.noDataView.delegate = self;
     }
 }
