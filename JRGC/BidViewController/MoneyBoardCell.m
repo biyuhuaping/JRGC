@@ -241,7 +241,7 @@
         if (_isCollctionkeyBid) {
             
 //            _minuteCountDownView.frame = CGRectZero;
-             _keYongTipLabel.text = @"我的余额";
+             _keYongTipLabel.text = @"可用金额";
             BOOL bankNumEq = [[_dataDict objectSafeForKey:@"bankNumEq"] boolValue];
             
             _totalKeYongTipLabel.text = bankNumEq ? @"(尊享余额+微金余额)"  : @"" ;
@@ -368,7 +368,6 @@
             _keYongBaseView.frame = CGRectMake(0,CGRectGetMaxY(_topView.frame) , ScreenWidth, 37);
             _inputBaseView.frame = CGRectMake(15.0f, CGRectGetMaxY(_keYongBaseView.frame)+10, ScreenWidth - 69.0f, 37.0f);
             _rechargeBtn.frame = CGRectMake(ScreenWidth - 15 - 44 , CGRectGetMaxY(_topView.frame)+4, 44, 37);
-            _totalKeYongTipLabel.hidden = YES;
             _inputMoneyTextFieldLable.frame = CGRectMake(10.0f, 0, CGRectGetWidth(_inputBaseView.frame) - 70, CGRectGetHeight(_inputBaseView.frame));
             _calulatorBtn.frame = CGRectMake(CGRectGetMaxX(_inputBaseView.frame) + 10, CGRectGetMidY(_inputBaseView.frame) - 29/2.0, 29, 29);
             _midSepView.frame = CGRectMake(0, CGRectGetMaxY(_inputBaseView.frame) + 10, ScreenWidth, 10.0f);

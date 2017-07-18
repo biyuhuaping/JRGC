@@ -187,9 +187,8 @@
     
     if (self.bidType == 0) {
         _isP2P = YES;
-        baseTitleLabel.text = @"投标";
     }
-    
+     baseTitleLabel.text = @"出借";
     double gondDouBalance = [[_dataDict objectForKey:@"beanAmount"] doubleValue];
     if ((int)gondDouBalance > 0) {
         isGongDouSwitch = YES;
