@@ -1327,6 +1327,15 @@ static NetworkModule *gInstance = NULL;
         case kSXTagGetPurchaseGold:
             parameter = [NEW_SERVER_IP stringByAppendingString:GOLDPURCHASEURL];
             break;
+        case kSXTagGetGoldContractInfo:   //查询合同详情
+            parameter = [NEW_SERVER_IP stringByAppendingString:GOLDCONTRACTINFOURL];
+            break;
+        case kSXTagGetGoldTradeRecordList: //已购黄金列表
+            parameter = [NEW_SERVER_IP stringByAppendingString:GOLDTRADERECORDLISTURL];
+            break;
+        case kSXTagGetGoldTradeDetail:     //已购黄金详情
+            parameter = [NEW_SERVER_IP stringByAppendingString:GETGOLDTRADEDETAILURL];
+            break;
         case kSXTagGoldRecharge:
             parameter = [NEW_SERVER_IP stringByAppendingString:GOLDRECHARGE];
             break;

@@ -18,6 +18,8 @@
 #import "UCFGoldPurchaseRecordCell.h"
 #import "UCFToolsMehod.h"
 #import "NSString+CJString.h"
+#import "FullWebViewController.h"
+#import "HWWeakTimer.h"
 @interface UCFGoldDetailViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
 {
     
@@ -40,6 +42,10 @@
     UIView *bottomBkView;
     UIView *_headerView;
     float  bottomViewYPos;
+    
+    NSTimer *updateTimer;
+    CGFloat Progress;
+    CGFloat curProcess;
 }
 
 @property(nonatomic,strong) IBOutlet UIScrollView *oneScroll;
@@ -193,6 +199,8 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+#pragma mark-
+#pragma mark  上面的的ScrollView
 - (void)initOneScrollView
 {
     [self.view bringSubviewToFront:self.investBgView];
@@ -228,7 +236,7 @@
     self.goldHeaderView.goldModel = self.goldModel;
     [self.oneScroll addSubview:self.goldHeaderView];
     
-  
+    [self progressAnimiation];
     
     NSArray *prdLabelsList = _prdLabelsList;
     NSMutableArray *labelPriorityArr = [NSMutableArray arrayWithCapacity:4];
@@ -251,7 +259,32 @@
 
     [self  drawTypeBottomView];
 }
-//标签view 高30 ************************************************************************************
+#pragma 进度条动画
+- (void)progressAnimiation
+{
+    curProcess = 0;
+    Progress = 1 - [self.goldModel.remainAmount doubleValue]/[self.goldModel.totalAmount floatValue];
+    Progress = (int)(Progress *100) / 100.00;
+    [self performSelector:@selector(beginUpdatingProgressView) withObject:nil afterDelay:0.1];
+}
+
+- (void)beginUpdatingProgressView
+{
+    updateTimer = [HWWeakTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(updateProgress:) userInfo:nil repeats:YES];
+}
+
+- (void)updateProgress:(NSTimer *)timer
+{
+    if (fabs(curProcess - Progress) < 0.01) {
+       
+        [self.goldHeaderView setProcessViewProcess:Progress];
+        [timer invalidate];
+    } else {
+        curProcess = curProcess + 0.01;
+        [self.goldHeaderView  setProcessViewProcess:curProcess];
+    }
+}
+#pragma 标签view
 - (void)drawMarkView:(NSMutableArray *)labelPriorityArr
 {
     UIView *markBg = [[UIView alloc] initWithFrame:CGRectMake(0,CGRectGetMaxY(self.goldHeaderView.frame), ScreenWidth, 30)];
@@ -474,14 +507,7 @@
     buyCueDesTipLabel.textAlignment = NSTextAlignmentLeft;
     buyCueDesTipLabel.backgroundColor = [UIColor clearColor];
     buyCueDesTipLabel.font = [UIFont systemFontOfSize:12];
-    //    NSString *buyCueDesStr =[_dic objectSafeForKey: @"buyCueDes"];
-    //    if (_type == PROJECTDETAILTYPEBONDSRRANSFER && !_isP2P && ![buyCueDesStr isEqualToString:@""] ) {
-    //        pullingBkView.frame = CGRectMake(0, CGRectGetMaxY(bottomBkView.frame), ScreenWidth, 42 + 20);
-    //        buyCueDesTipLabel.text = buyCueDesStr;
-    //        [pullingBkView addSubview:buyCueDesTipLabel];
-    //    }else{
-    //        buyCueDesTipLabel.frame = CGRectZero;
-    //    }
+
     UIImageView *iconView = [[UIImageView alloc] initWithFrame:CGRectMake((ScreenWidth - 15) / 2, CGRectGetMaxY(buyCueDesTipLabel.frame)+10, 15, 15)];
     iconView.image = [UIImage imageNamed:@"particular_icon_up.png"];
     [pullingBkView addSubview:iconView];
@@ -556,6 +582,8 @@
     topBkView.frame = bkFrame;
     
 }
+#pragma mark-
+#pragma mark  下边的的的ScrollView
 - (void)addTopSegment
 {
     _topSegmentedControl = [[HMSegmentedControl alloc] initWithSectionTitles:_titleArray];
@@ -585,6 +613,7 @@
         _topSegmentedControl.selectedSegmentIndex = _selectIndex;
     }
 }
+#pragma tableView代理
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     if(section == 0)
     {
@@ -823,6 +852,22 @@
     }
     return nil;;
 }
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (_selectIndex == 0 &&  indexPath.section == 1) {
+        NSDictionary *dataDict = [self.contractArray objectAtIndex:indexPath.row];
+//        contractTemplateId	合同id	string
+//        nmPrdClaimId	标ID	string
+//        userId	用户ID	string
+        NSString *contractTemplateIdStr = [NSString stringWithFormat:@"%@",[dataDict objectSafeForKey:@"id"]];
+        NSString *nmProClaimIdStr = self.goldModel.nmPrdClaimId;
+        NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId",nmProClaimIdStr, @"nmPrdClaimId",contractTemplateIdStr,@"contractTemplateId",nil];
+        
+        [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagGetGoldContractInfo owner:self signature:YES Type:SelectAccoutTypeGold];
+    }
+}
 - (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentCtrl
 {
     
@@ -840,7 +885,7 @@
     [_twoTableview reloadData];
 }
 
-#pragma mark -scrollViewScroll
+#pragma mark -scrollViewScroll代理
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
@@ -993,6 +1038,23 @@
         {
             [AuxiliaryFunc showAlertViewWithMessage:rsttext];
         }
+    }else if (tag.intValue == kSXTagGetGoldContractInfo){
+        NSDictionary *dataDict = [[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"result"];
+        if ( [dic[@"ret"] boolValue])
+        {
+            NSString *contractContentStr = [dataDict objectSafeForKey:@"contractContent"];
+            NSString *contractTitle = [dataDict objectSafeForKey:@"contractName"];
+            FullWebViewController *controller = [[FullWebViewController alloc] initWithHtmlStr:contractContentStr title:contractTitle];
+            controller.baseTitleType = @"detail_heTong";
+            [self.navigationController pushViewController:controller animated:YES];
+        }
+        else
+        {
+            [AuxiliaryFunc showAlertViewWithMessage:rsttext];
+        }
+        
+       
+        
     }
 }
 - (void)errorPost:(NSError *)err tag:(NSNumber *)tag
