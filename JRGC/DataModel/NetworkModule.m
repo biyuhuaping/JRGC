@@ -1336,8 +1336,11 @@ static NetworkModule *gInstance = NULL;
         case kSXTagGetGoldTradeDetail:     //已购黄金详情
             parameter = [NEW_SERVER_IP stringByAppendingString:GETGOLDTRADEDETAILURL];
             break;
-        case kSXTagGoldRecharge:
+        case kSXTagGoldRecharge:            //黄金充值
             parameter = [NEW_SERVER_IP stringByAppendingString:GOLDRECHARGE];
+            break;
+        case kSXTagGoldRechargeHistory:     //黄金充值记录
+            parameter = [NEW_SERVER_IP stringByAppendingString:GOLDRECHARGEHISTORY];
             break;
     }
     //给原有参数字典添加公共参数

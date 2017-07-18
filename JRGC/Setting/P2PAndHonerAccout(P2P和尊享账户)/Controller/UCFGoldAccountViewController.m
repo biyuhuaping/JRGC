@@ -236,7 +236,6 @@
     
 - (void)goldAccountFirstCell:(GoldAccountFirstCell *)goldFirstCell didClickedRechargeButton:(UIButton *)button
     {
-        
     NSString *tipStr1 = ZXTIP1;
     NSInteger openStatus = [UserInfoSingle sharedManager].openStatus ;
     NSInteger enjoyOpenStatus = [UserInfoSingle sharedManager].enjoyOpenStatus;
@@ -247,7 +246,7 @@
     else{
         if(![UserInfoSingle sharedManager].goldAuthorization){//去授权页面
             HSHelper *helper = [HSHelper new];
-//                [helper pushGoldAuthorizationType:SelectAccoutTypeGold nav:self.navigationController];
+            [helper pushGoldAuthorizationType:SelectAccoutTypeGold nav:self.navigationController];
             return;
         }else{
             //去充值页面

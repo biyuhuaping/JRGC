@@ -154,6 +154,7 @@
                 self.circleProgressView.textColor = UIColorWithRGB(0x555555);
                 if (([presenter.item.type isEqualToString:@"2"] || [presenter.item.type isEqualToString:@"3"]) && status == 2) {
                     self.circleProgressView.progressText = @"认购";
+                    self.circleProgressView.pathFillColor = UIColorWithRGB(0xfc8f0e);
                 }
                 else
                     self.circleProgressView.progressText = statusArr[status];
@@ -529,6 +530,7 @@
     }
     else if (status == 1) {
         self.circleProgressView.textColor = UIColorWithRGB(0x555555);
+        self.circleProgressView.pathFillColor = UIColorWithRGB(0xfc8f0e);
         self.circleProgressView.progressText = @"认购";
     }
     if (goldModel.prdLabelsList.count > 0) {

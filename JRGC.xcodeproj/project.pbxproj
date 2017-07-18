@@ -132,6 +132,7 @@
 		4AF9C5E91B0B419600E3BE7D /* RechargeListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF9C5E71B0B419600E3BE7D /* RechargeListCell.m */; };
 		4AFAA8A71B0D76AB005C9BEC /* UCFSelectPayBackController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AFAA8A61B0D76AB005C9BEC /* UCFSelectPayBackController.m */; };
 		4AFE198D1CA0006200EE6768 /* TopUpAndCash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4AFE198C1CA0006200EE6768 /* TopUpAndCash.storyboard */; };
+		740832021F1E115C002B1EA6 /* UCFGoldHistoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 740832011F1E115C002B1EA6 /* UCFGoldHistoryModel.m */; };
 		740DAEC11E56E2D100CD7C8F /* UCFBatchProjectController.m in Sources */ = {isa = PBXBuildFile; fileRef = 740DAEBF1E56E2D100CD7C8F /* UCFBatchProjectController.m */; };
 		740DAEC21E56E2D100CD7C8F /* UCFBatchProjectController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 740DAEC01E56E2D100CD7C8F /* UCFBatchProjectController.xib */; };
 		740E2E941ECD4D55006FA335 /* UCFNoticeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 740E2E931ECD4D55006FA335 /* UCFNoticeView.m */; };
@@ -1142,6 +1143,8 @@
 		4AFAA8A51B0D76AB005C9BEC /* UCFSelectPayBackController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFSelectPayBackController.h; sourceTree = "<group>"; };
 		4AFAA8A61B0D76AB005C9BEC /* UCFSelectPayBackController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFSelectPayBackController.m; sourceTree = "<group>"; };
 		4AFE198C1CA0006200EE6768 /* TopUpAndCash.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TopUpAndCash.storyboard; sourceTree = "<group>"; };
+		740832001F1E115C002B1EA6 /* UCFGoldHistoryModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFGoldHistoryModel.h; sourceTree = "<group>"; };
+		740832011F1E115C002B1EA6 /* UCFGoldHistoryModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFGoldHistoryModel.m; sourceTree = "<group>"; };
 		740DAEBE1E56E2D100CD7C8F /* UCFBatchProjectController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFBatchProjectController.h; sourceTree = "<group>"; };
 		740DAEBF1E56E2D100CD7C8F /* UCFBatchProjectController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFBatchProjectController.m; sourceTree = "<group>"; };
 		740DAEC01E56E2D100CD7C8F /* UCFBatchProjectController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFBatchProjectController.xib; sourceTree = "<group>"; };
@@ -3968,6 +3971,8 @@
 		74E1403E1F1C56E400B17A96 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				740832001F1E115C002B1EA6 /* UCFGoldHistoryModel.h */,
+				740832011F1E115C002B1EA6 /* UCFGoldHistoryModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -6948,6 +6953,7 @@
 				FBB685841AE4A76800F222B6 /* MJRefreshGifFooter.m in Sources */,
 				747A91151B01A46300FE2334 /* UCFInvestDetailModel.m in Sources */,
 				74270D451EC5960100F9419B /* UIColor+Hex.m in Sources */,
+				740832021F1E115C002B1EA6 /* UCFGoldHistoryModel.m in Sources */,
 				74F291161AE0DBC1003E0E86 /* UCFMyInvestViewController.m in Sources */,
 				7420DF061B159E81003CAE38 /* UCFMoreCell.m in Sources */,
 				4ADA3A461B0DEA89000B29FD /* AllSelectView.m in Sources */,
