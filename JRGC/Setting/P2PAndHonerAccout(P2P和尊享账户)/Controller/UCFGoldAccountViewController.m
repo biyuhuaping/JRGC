@@ -150,7 +150,7 @@
             cell.delegate = self;
             cell.textLabel.text = @"可用余额";
         }
-        [cell updateaVailableMoenyLab:self.availableGoldAmount];
+        [cell updateaVailableMoenyLab:self.balanceAmount];
         return cell;
     }
     return nil;
