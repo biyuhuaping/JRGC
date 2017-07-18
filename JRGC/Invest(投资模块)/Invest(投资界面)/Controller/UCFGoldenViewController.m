@@ -17,7 +17,7 @@
 #import "HSHelper.h"
 #import "UCFGoldDetailViewController.h"
 #import "ToolSingleTon.h"
-@interface UCFGoldenViewController () <UITableViewDelegate, UITableViewDataSource, UCFHomeListCellHonorDelegate>
+@interface UCFGoldenViewController () <UITableViewDelegate, UITableViewDataSource, UCFHomeListCellHonorDelegate,UIAlertViewDelegate>
 @property (weak, nonatomic) UCFGoldenHeaderView *goldenHeader;
 @property (strong, nonatomic) NSMutableArray *dataArray;
 @property (assign, nonatomic) NSUInteger currentPage;
@@ -136,21 +136,12 @@
         //如果未登录，展示登录页面
         [self showLoginView];
     } else  {
-        HSHelper *helper = [HSHelper new];
         
-        //检查企业老用户是否开户--未开户去主站开户
-        NSString *messageStr =  [helper checkCompanyIsOpen:self.accoutType];
-        if (![messageStr isEqualToString:@""]) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil];
-            [alert show];
-            return;
-        }
-        
-        
-        if(![UserInfoSingle sharedManager].goldAuthorization){
-            
-            UCFGoldAuthorizationViewController *goldAuthorizationVC = [[UCFGoldAuthorizationViewController alloc]initWithNibName:@"UCFGoldAuthorizationViewController" bundle:nil];
-            [self.navigationController pushViewController:goldAuthorizationVC  animated:YES];
+        NSString *tipStr1 = ZXTIP1;
+        NSInteger openStatus = [UserInfoSingle sharedManager].openStatus ;
+        NSInteger enjoyOpenStatus = [UserInfoSingle sharedManager].enjoyOpenStatus;
+        if (openStatus < 3 && enjoyOpenStatus < 3 ) {
+            [self showHSAlert:tipStr1];
             return;
         }
         
@@ -171,31 +162,23 @@
         //如果未登录，展示登录页面
         [self showLoginView];
     } else  {
-        HSHelper *helper = [HSHelper new];
         
-        //检查企业老用户是否开户--未开户去主站开户
-        NSString *messageStr =  [helper checkCompanyIsOpen:self.accoutType];
-        if (![messageStr isEqualToString:@""]) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil];
-            [alert show];
+        NSString *tipStr1 = ZXTIP1;
+        NSInteger openStatus = [UserInfoSingle sharedManager].openStatus ;
+        NSInteger enjoyOpenStatus = [UserInfoSingle sharedManager].enjoyOpenStatus;
+        if (openStatus < 3 && enjoyOpenStatus < 3 ) {//去开户页面
+            [self showHSAlert:tipStr1];
             return;
         }
 
-    
-    if(![UserInfoSingle sharedManager].goldAuthorization){
+        UCFGoldModel *goldModel = [self.dataArray objectAtIndex:indexPath.row];
+        
+        NSString *nmProClaimIdStr = goldModel.nmPrdClaimId;
 
-        UCFGoldAuthorizationViewController *goldAuthorizationVC = [[UCFGoldAuthorizationViewController alloc]initWithNibName:@"UCFGoldAuthorizationViewController" bundle:nil];
-        [self.navigationController pushViewController:goldAuthorizationVC  animated:YES];
-        return;
-    }
-    UCFGoldModel *goldModel = [self.dataArray objectAtIndex:indexPath.row];
-    
-    NSString *nmProClaimIdStr = goldModel.nmPrdClaimId;
-
-    NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId",nmProClaimIdStr, @"nmPrdClaimId",nil];
-    
-    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagGetGoldProClaimDetail owner:self signature:YES Type:SelectAccoutDefault];
-    }
+        NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId",nmProClaimIdStr, @"nmPrdClaimId",nil];
+        
+        [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagGetGoldProClaimDetail owner:self signature:YES Type:SelectAccoutDefault];
+        }
 }
 #pragma mark -去登录页面
 - (void)showLoginView
@@ -203,6 +186,27 @@
     UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
     UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
     [self presentViewController:loginNaviController animated:YES completion:nil];
+}
+- (BOOL)checkUserCanInvestIsDetailType:(SelectAccoutType)accout;
+{
+   
+    
+    return NO;
+}
+- (void)showHSAlert:(NSString *)alertMessage
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:alertMessage delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    alert.tag = 8000;
+    [alert show];
+}
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+     if (alertView.tag == 8000) {
+        if (buttonIndex == 1) {
+            HSHelper *helper = [HSHelper new];
+            [helper pushOpenHSType:SelectAccoutTypeHoner Step:[UserInfoSingle sharedManager].enjoyOpenStatus nav:self.navigationController];
+        }
+    }
 }
 
 - (void)refreshData {
