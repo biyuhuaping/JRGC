@@ -135,18 +135,31 @@
         }
         
         NSArray *statusArr = @[@"未审核",@"等待确认",@"出借",@"流标",@"满标",@"回款中",@"已回款"];
-        if (status>2) {
-            self.circleProgressView.progressText = @"已售罄";
-            self.circleProgressView.textColor = UIColorWithRGB(0x909dae);
-        }
-        else {
-            self.circleProgressView.textColor = UIColorWithRGB(0x555555);
-            if (([presenter.item.type isEqualToString:@"2"] || [presenter.item.type isEqualToString:@"3"]) && status == 2) {
+        if ([presenter.item.type isEqualToString:@"3"]) {
+            if (status==2) {
+                self.circleProgressView.progressText = @"售罄";
+                self.circleProgressView.textColor = UIColorWithRGB(0x909dae);
+            }
+            else {
+                self.circleProgressView.textColor = UIColorWithRGB(0x555555);
                 self.circleProgressView.progressText = @"认购";
             }
-            else
-                self.circleProgressView.progressText = statusArr[status];
         }
+        else {
+            if (status>2) {
+                self.circleProgressView.progressText = @"已售罄";
+                self.circleProgressView.textColor = UIColorWithRGB(0x909dae);
+            }
+            else {
+                self.circleProgressView.textColor = UIColorWithRGB(0x555555);
+                if (([presenter.item.type isEqualToString:@"2"] || [presenter.item.type isEqualToString:@"3"]) && status == 2) {
+                    self.circleProgressView.progressText = @"认购";
+                }
+                else
+                    self.circleProgressView.progressText = statusArr[status];
+            }
+        }
+        
         
         
 //        self.angleView.angleStatus = presenter.item.status;
@@ -226,14 +239,14 @@
         self.upLineLeftSpace.constant = 0;
         self.downLineLeftSpace.constant = 25;
     } else if (indexPath.row == totalRows - 1) { // 这组的末行(最后1行)
-        self.upSegLine.hidden = indexPath.section == 3 ? YES : NO;
+        self.upSegLine.hidden = indexPath.section == 4 ? YES : NO;
         self.downSegLine.hidden = NO;
         self.upSegLine.backgroundColor = UIColorWithRGB(0xe3e5ea);
         self.downSegLine.backgroundColor = UIColorWithRGB(0xd8d8d8);
-        self.upLineLeftSpace.constant = indexPath.section == 2 ? 0 : 25;
+        self.upLineLeftSpace.constant = indexPath.section == 3 ? 0 : 25;
         self.downLineLeftSpace.constant = 0;
     } else {
-        self.upSegLine.hidden = indexPath.section == 3 ? YES : NO;
+        self.upSegLine.hidden = indexPath.section == 4 ? YES : NO;
         self.downSegLine.hidden = YES;
         self.upSegLine.backgroundColor = UIColorWithRGB(0xe3e5ea);
         self.downSegLine.backgroundColor = UIColorWithRGB(0xe3e5ea);
@@ -507,6 +520,21 @@
     else if (status == 1) {
         self.circleProgressView.textColor = UIColorWithRGB(0x555555);
         self.circleProgressView.progressText = @"认购";
+    }
+    if (goldModel.prdLabelsList.count > 0) {
+        UCFProjectLabel *projectLabel = [goldModel.prdLabelsList firstObject];
+        if ([projectLabel.labelPriority integerValue] == 1) {
+            self.proSignBackView.hidden = NO;
+            self.proSignLabel.text = [NSString stringWithFormat:@"%@", projectLabel.labelName];
+            CGSize size = [projectLabel.labelName boundingRectWithSize:CGSizeMake(MAXFLOAT, 15) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:10.0f]} context:nil].size;
+            self.proSignBackViewWidth.constant = size.width + 11;
+        }
+        else {
+            self.proSignBackView.hidden = YES;
+        }
+    }
+    else {
+        self.proSignBackView.hidden = YES;
     }
 }
 
