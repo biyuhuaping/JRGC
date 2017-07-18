@@ -16,6 +16,7 @@
 #import "UCFLoginViewController.h"
 #import "HSHelper.h"
 #import "UCFGoldDetailViewController.h"
+#import "ToolSingleTon.h"
 @interface UCFGoldenViewController () <UITableViewDelegate, UITableViewDataSource, UCFHomeListCellHonorDelegate>
 @property (weak, nonatomic) UCFGoldenHeaderView *goldenHeader;
 @property (strong, nonatomic) NSMutableArray *dataArray;
@@ -42,12 +43,12 @@
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-    self.goldenHeader.frame = CGRectMake(0, 0, ScreenWidth, 236);
+    self.goldenHeader.frame = CGRectMake(0, 0, ScreenWidth, 201);
 }
 
 #pragma mark - 初始化UI
 - (void)createUI {
-    CGFloat height = [UCFGoldenHeaderView viewHeight];
+//    CGFloat height = [UCFGoldenHeaderView viewHeight];
     UCFGoldenHeaderView *goldenHeader = (UCFGoldenHeaderView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFGoldenHeaderView" owner:self options:nil] lastObject];
     self.tableview.tableHeaderView = goldenHeader;
     self.goldenHeader = goldenHeader;
@@ -102,10 +103,10 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    if (self.dataArray.count > 0) {
-        return 10;
-    }
-    return 0;
+//    if (self.dataArray.count > 0) {
+//        return 10;
+//    }
+    return 0.001;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -116,7 +117,8 @@
         if (nil == view) {
             view = (UCFHomeListHeaderSectionView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeListHeaderSectionView" owner:self options:nil] lastObject];
         }
-        view.headerTitleLabel.text = @"优享金";
+        view.homeListHeaderMoreButton.hidden = YES;
+        view.headerTitleLabel.text = @"尊享金";
         view.headerImageView.image = [UIImage imageNamed:@"mine_icon_gold"];
         view.honerLabel.text = @"实物黄金赚收益";
         view.honerLabel.hidden = NO;
@@ -234,6 +236,14 @@
         if ([rstcode intValue] == 1) {
             NSDictionary *dict = [dic objectSafeDictionaryForKey:@"data"];
             NSDictionary *pageData = [dict objectSafeDictionaryForKey:@"pageData"];
+            NSArray *resut = [pageData objectSafeArrayForKey:@"result"];
+            if ([self.tableview.header isRefreshing]) {
+                [self.dataArray removeAllObjects];
+            }
+            for (NSDictionary *temp in resut) {
+                UCFGoldModel *gold = [UCFGoldModel goldModelWithDict:temp];
+                [self.dataArray addObject:gold];
+            }
             BOOL hasNextPage = [[[pageData objectSafeDictionaryForKey:@"pagination"] objectForKey:@"hasNextPage"] boolValue];
             if (hasNextPage) {
                 self.currentPage ++;
@@ -247,16 +257,6 @@
                 else
                     self.tableview.footer.hidden = YES;
             }
-            NSArray *resut = [pageData objectSafeArrayForKey:@"result"];
-//            [self.dataArray addObjectsFromArray:resut];
-            if ([self.tableview.header isRefreshing]) {
-                [self.dataArray removeAllObjects];
-            }
-            for (NSDictionary *temp in resut) {
-                UCFGoldModel *gold = [UCFGoldModel goldModelWithDict:temp];
-                [self.dataArray addObject:gold];
-            }
-//            [self.dataArray addObjectsFromArray:resut];
             [self.tableview reloadData];
         }else {
             if (![rsttext isEqualToString:@""] && rsttext) {
