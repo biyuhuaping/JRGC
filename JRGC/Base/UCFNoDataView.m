@@ -56,7 +56,7 @@
     UILabel *errorLbl = [UILabel labelWithFrame:CGRectMake(0, CGRectGetMaxY(iconView.frame) + 15, 112, 14) text:_errorTitle textColor:showColor font:[UIFont systemFontOfSize:14]];
     [centerView addSubview:errorLbl];
     
-    if (isGold) {
+    if (isGold && ![_btnStr isEqualToString:@""]) {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         [button setTitle:_btnStr forState:UIControlStateNormal];
         [button addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];
