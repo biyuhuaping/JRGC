@@ -68,15 +68,14 @@
     _pageNum3 = 1;
     
     _statusArr = @[@"未审核", @"待确认", @"招标中", @"流标", @"满标", @"回款中", @"已回款"];
-    _index = 0;
     _didClickBtns = [NSMutableArray arrayWithObject:@(0)];
     _listCountArr = [NSMutableArray arrayWithObjects:@"0",@"0",@"0",@"0", nil];
     
     [self initTableView];
-    
-    _noDataView = [[UCFNoDataView alloc] initWithFrame:_tableView1.bounds errorTitle:@"暂无数据"];
-    _noDataView2 = [[UCFNoDataView alloc] initWithFrame:_tableView2.bounds errorTitle:@"暂无数据"];
-    _noDataView3 = [[UCFNoDataView alloc] initWithFrame:_tableView3.bounds errorTitle:@"暂无数据"];
+
+    _noDataView = [[UCFNoDataView alloc] initGoldWithFrame:_tableView1.bounds errorTitle:@"暂无数据"  buttonTitle:@""];
+    _noDataView2 = [[UCFNoDataView alloc] initGoldWithFrame:_tableView2.bounds errorTitle:@"暂无数据"buttonTitle:@""];
+    _noDataView3 = [[UCFNoDataView alloc] initGoldWithFrame:_tableView3.bounds errorTitle:@"暂无数据"buttonTitle:@""];
 }
 
 - (void)initTableView{
@@ -200,9 +199,10 @@
             }
                 break;
         }
-//    _listCountLab.text = [NSString stringWithFormat:@"共%@笔记录",_listCountArr[_index]];
-//    [_listCountLab setFont:[UIFont boldSystemFontOfSize:12] string:_listCountArr[_index]];
+    _listCountLab.text = [NSString stringWithFormat:@"共%@笔记录",_listCountArr[_selectIndex]];
+    [_listCountLab setFont:[UIFont boldSystemFontOfSize:12] string:_listCountArr[_selectIndex]];
     
+    _scrollView.contentOffset  = CGPointMake(ScreenWidth *_selectIndex, 0);
 }
 
 //// 选项按钮的点击事件
@@ -408,8 +408,8 @@
      */
     
     NSString *userId = [[NSUserDefaults standardUserDefaults] objectForKey:UUID];
-     NSString *pageNoStr = [NSString stringWithFormat:@"%ld",pageNum];
-    NSString *orderStatusCodeStr = [NSString stringWithFormat:@"%ld",_selectIndex];
+    NSString *pageNoStr = [NSString stringWithFormat:@"%d",pageNum];
+    NSString *orderStatusCodeStr = [NSString stringWithFormat:@"%d",_selectIndex];
     NSDictionary *strParameters  = @{@"userId":userId,@"pageNo":pageNoStr,@"pageSize":@"20",@"orderStatusCode":orderStatusCodeStr};
     [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagGetGoldTradeRecordList owner:self signature:YES Type:SelectAccoutDefault];
 }

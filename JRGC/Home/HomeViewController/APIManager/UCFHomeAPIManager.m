@@ -21,7 +21,7 @@
 #define SIGN @"sign"
 #define PRODETAIL @"prodetail"
 #define GOLDDETAIL @"goldDetail"
-
+#define GOLDPROCLAIMDETAIL @"GoldProClaimDetail"
 @interface UCFHomeAPIManager () <NetworkModuleDelegate>
 @property (strong, nonatomic) NSMutableDictionary *requestDict;
 @end
@@ -99,13 +99,13 @@
             {
                 
                 [[NetworkModule sharedNetworkModule] newPostReq:parameter tag:kSXTagGetGoldPrdClaimDetail owner:self signature:YES Type:SelectAccoutTypeGold];
-                [self.requestDict setObject:completionHandler forKey:PRODETAIL];
+                [self.requestDict setObject:completionHandler forKey:GOLDDETAIL];
             }
                 break;
             case 6://黄金投资页面请求
             {
                 [[NetworkModule sharedNetworkModule] newPostReq:parameter tag:kSXTagGetGoldProClaimDetail owner:self signature:YES Type:SelectAccoutTypeGold];
-                [self.requestDict setObject:completionHandler forKey:PRODETAIL];
+                [self.requestDict setObject:completionHandler forKey:GOLDPROCLAIMDETAIL];
             }
                 break;
             default:
@@ -216,9 +216,9 @@
         [self.requestDict removeObjectForKey:GOLDDETAIL];
     }
     else if (tag.intValue == kSXTagGetGoldProClaimDetail) {
-        NetworkCompletionHandler complete = [self.requestDict objectForKey:GOLDDETAIL];
+        NetworkCompletionHandler complete = [self.requestDict objectForKey:GOLDPROCLAIMDETAIL];
         complete(nil, dic);
-        [self.requestDict removeObjectForKey:GOLDDETAIL];
+        [self.requestDict removeObjectForKey:GOLDPROCLAIMDETAIL];
     }
 }
 //请求失败
@@ -260,9 +260,9 @@
         [self.requestDict removeObjectForKey:GOLDDETAIL];
     }
     else if (tag.intValue == kSXTagGetGoldProClaimDetail) {
-        NetworkCompletionHandler complete = [self.requestDict objectForKey:GOLDDETAIL];
+        NetworkCompletionHandler complete = [self.requestDict objectForKey:GOLDPROCLAIMDETAIL];
          complete(err, nil);
-        [self.requestDict removeObjectForKey:GOLDDETAIL];
+        [self.requestDict removeObjectForKey:GOLDPROCLAIMDETAIL];
     }
 }
 
