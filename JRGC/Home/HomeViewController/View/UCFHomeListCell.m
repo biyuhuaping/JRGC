@@ -181,10 +181,12 @@
             }
             else {
                 self.proSignBackView.hidden = YES;
+                self.proSignBackViewWidth.constant = 0;
             }
         }
         else {
             self.proSignBackView.hidden = YES;
+            self.proSignBackViewWidth.constant = 0;
         }
     }
     else if (presenter.modelType == UCFHomeListCellModelTypeOneImageBatchLending || presenter.modelType == UCFHomeListCellModelTypeOneImageTransfer)  {
@@ -263,10 +265,14 @@
         if ([self.presenter.type isEqualToString:@"3"] || self.goldModel) {
             [self.rateLabel setFont:[UIFont systemFontOfSize:10] string:@"克/100克"];
             self.annurateLabelW.constant = 52;
+            self.rateLabel.textColor = UIColorWithRGB(0xfc8f0e);
+            self.proSignBackView.backgroundColor = UIColorWithRGB(0xffc027);
         }
         else {
             [self.rateLabel setFont:[UIFont systemFontOfSize:12] string:@"%"];
             self.annurateLabelW.constant = 0;
+            self.rateLabel.textColor = UIColorWithRGB(0xfd4d4c);
+            self.proSignBackView.backgroundColor = UIColorWithRGB(0xfd4d4c);
         }
     }
     else if (self.presenter.modelType == UCFHomeListCellModelTypeOneImageBatchLending)  {
@@ -345,10 +351,12 @@
         }
         else {
             self.proSignBackView.hidden = YES;
+            self.proSignBackViewWidth.constant = 0;
         }
     }
     else {
         self.proSignBackView.hidden = YES;
+        self.proSignBackViewWidth.constant = 0;
     }
     if (microMoneyModel.platformSubsidyExpense.length > 0) {//贴
         self.image1W.constant = 18;
@@ -437,10 +445,12 @@
         }
         else {
             self.proSignBackView.hidden = YES;
+            self.proSignBackViewWidth.constant = 0;
         }
     }
     else {
         self.proSignBackView.hidden = YES;
+        self.proSignBackViewWidth.constant = 0;
     }
     if (microMoneyModel.platformSubsidyExpense.length > 0) {//贴
         self.image1W.constant = 18;
@@ -531,11 +541,18 @@
         }
         else {
             self.proSignBackView.hidden = YES;
+            self.proSignBackViewWidth.constant = 0;
         }
     }
     else {
         self.proSignBackView.hidden = YES;
+        self.proSignBackViewWidth.constant = 0;
     }
+    
+    self.image1W.constant = 0;
+    self.image2W.constant = 0;
+    self.image3W.constant = 0;
+    self.image4W.constant = 0;
 }
 
 - (NSString *)moneywithRemaining:(id)rem total:(id)total{
