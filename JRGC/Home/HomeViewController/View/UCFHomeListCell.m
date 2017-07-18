@@ -143,6 +143,7 @@
             else {
                 self.circleProgressView.textColor = UIColorWithRGB(0x555555);
                 self.circleProgressView.progressText = @"认购";
+                self.circleProgressView.pathFillColor = UIColorWithRGB(0xfc8f0e);
             }
         }
         else {
@@ -529,6 +530,7 @@
     }
     else if (status == 1) {
         self.circleProgressView.textColor = UIColorWithRGB(0x555555);
+        self.circleProgressView.pathFillColor = UIColorWithRGB(0xfc8f0e);
         self.circleProgressView.progressText = @"认购";
     }
     if (goldModel.prdLabelsList.count > 0) {

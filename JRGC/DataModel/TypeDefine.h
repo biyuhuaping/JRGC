@@ -276,6 +276,7 @@
 #define GETGOLDTRADEDETAILURL  @"api/nmTrade/v2/getTradeDetail.json" //已购黄金详情
 
 #define GOLDRECHARGE     @"api/nmAccount/v2/recharge.json"   //黄金充值
+#define GOLDRECHARGEHISTORY    @"api/nmAccount/v2/getRechargeRecord.json"   //黄金充值记录
 
 enum kPostStatus{
     kPostStatusNone=0,
@@ -509,6 +510,7 @@ enum kSXTag
     kSXTagGetGoldTradeRecordList,        //已购黄金列表
     kSXTagGetGoldTradeDetail,            //已购黄金详情
     kSXTagGoldRecharge,                  //黄金充值
+    kSXTagGoldRechargeHistory,           //黄金充值记录
 };
 
 typedef enum kSXTag kSXTag;

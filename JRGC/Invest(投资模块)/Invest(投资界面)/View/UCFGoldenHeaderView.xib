@@ -38,7 +38,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hZS-Z2-HVG">
-                            <rect key="frame" x="232" y="28" width="30" height="30"/>
+                            <rect key="frame" x="224" y="28" width="30" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="M9v-0M-9VN"/>
                                 <constraint firstAttribute="width" constant="30" id="fhf-ie-hQV"/>
@@ -57,7 +57,7 @@
                         <constraint firstAttribute="bottom" secondItem="hTs-NK-F87" secondAttribute="bottom" constant="13" id="bpz-PY-EUL"/>
                         <constraint firstAttribute="height" constant="71" id="nFZ-Gh-9Of"/>
                         <constraint firstItem="hZS-Z2-HVG" firstAttribute="centerY" secondItem="hTs-NK-F87" secondAttribute="centerY" id="pxN-DL-k7m"/>
-                        <constraint firstItem="hZS-Z2-HVG" firstAttribute="leading" secondItem="hTs-NK-F87" secondAttribute="trailing" constant="8" id="vB6-Hx-g6j"/>
+                        <constraint firstItem="hZS-Z2-HVG" firstAttribute="leading" secondItem="hTs-NK-F87" secondAttribute="trailing" id="vB6-Hx-g6j"/>
                     </constraints>
                 </view>
             </subviews>
