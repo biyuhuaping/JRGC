@@ -124,7 +124,7 @@
         self.floatLabel.text = [NSString stringWithFormat:@"￥%.2f",floatValue1];
     } else {
         self.floatLabel.textColor = UIColorWithRGB(0x4db94f);
-        self.floatLabel.text = [NSString stringWithFormat:@"-￥%.2f",floatValue1];
+        self.floatLabel.text = [NSString stringWithFormat:@"-￥%.2f",fabs(floatValue1)];
     }
 
 }
