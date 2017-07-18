@@ -20,6 +20,7 @@
 #define USERINFOTWO @"userInfoTwo"
 #define SIGN @"sign"
 #define PRODETAIL @"prodetail"
+#define GOLDDETAIL @"goldDetail"
 
 @interface UCFHomeAPIManager () <NetworkModuleDelegate>
 @property (strong, nonatomic) NSMutableDictionary *requestDict;
@@ -70,7 +71,7 @@
         NSString *proType = [parameter objectForKey:@"proType"];
         NSString *type  = [parameter objectForKey:@"type"];
         switch ([type intValue]) {
-            case 3:
+            case 3://微金和尊享标详情请求
             {
                 NSString *strParameters = [NSString stringWithFormat:@"id=%@&userId=%@",Id,userId];
                 if ([proType isEqualToString:@"1"]) {
@@ -82,7 +83,7 @@
                 [self.requestDict setObject:completionHandler forKey:PRODETAIL];
             }
                 break;
-            case 4:
+            case 4://微金和尊享投资页面请求
             {
                 NSString *strParameters = [NSString stringWithFormat:@"id=%@&userId=%@",Id,userId];
                 if ([proType isEqualToString:@"1"]) {
@@ -91,6 +92,19 @@
                 else if ([proType isEqualToString:@"2"]) {
                     [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDealBid owner:self Type:SelectAccoutTypeHoner];
                 }
+                [self.requestDict setObject:completionHandler forKey:PRODETAIL];
+            }
+                break;
+            case 5://黄金详情网络请求
+            {
+                
+                [[NetworkModule sharedNetworkModule] newPostReq:parameter tag:kSXTagGetGoldPrdClaimDetail owner:self signature:YES Type:SelectAccoutTypeGold];
+                [self.requestDict setObject:completionHandler forKey:PRODETAIL];
+            }
+                break;
+            case 6://黄金投资页面请求
+            {
+                [[NetworkModule sharedNetworkModule] newPostReq:parameter tag:kSXTagGetGoldProClaimDetail owner:self signature:YES Type:SelectAccoutTypeGold];
                 [self.requestDict setObject:completionHandler forKey:PRODETAIL];
             }
                 break;
@@ -196,6 +210,16 @@
         complete(nil, dic);
         [self.requestDict removeObjectForKey:PRODETAIL];
     }
+    else if (tag.intValue == kSXTagGetGoldPrdClaimDetail) {
+        NetworkCompletionHandler complete = [self.requestDict objectForKey:GOLDDETAIL];
+        complete(nil, dic);
+        [self.requestDict removeObjectForKey:GOLDDETAIL];
+    }
+    else if (tag.intValue == kSXTagGetGoldProClaimDetail) {
+        NetworkCompletionHandler complete = [self.requestDict objectForKey:GOLDDETAIL];
+        complete(nil, dic);
+        [self.requestDict removeObjectForKey:GOLDDETAIL];
+    }
 }
 //请求失败
 - (void)errorPost:(NSError*)err tag:(NSNumber*)tag
@@ -229,6 +253,16 @@
         NetworkCompletionHandler complete = [self.requestDict objectForKey:PRODETAIL];
         complete(err, nil);
         [self.requestDict removeObjectForKey:PRODETAIL];
+    }
+    else if (tag.intValue == kSXTagGetGoldPrdClaimDetail) {
+        NetworkCompletionHandler complete = [self.requestDict objectForKey:GOLDDETAIL];
+        complete(err, nil);
+        [self.requestDict removeObjectForKey:GOLDDETAIL];
+    }
+    else if (tag.intValue == kSXTagGetGoldProClaimDetail) {
+        NetworkCompletionHandler complete = [self.requestDict objectForKey:GOLDDETAIL];
+         complete(err, nil);
+        [self.requestDict removeObjectForKey:GOLDDETAIL];
     }
 }
 

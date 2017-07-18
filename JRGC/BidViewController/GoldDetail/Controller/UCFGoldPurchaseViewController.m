@@ -16,6 +16,8 @@
 #import "UILabel+Misc.h"
 #import "UCFGoldModel.h"
 #import "ToolSingleTon.h"
+#import "HSHelper.h"
+#import "UCFGoldRechargeViewController.h"
 @interface UCFGoldPurchaseViewController ()<UITableViewDelegate,UITableViewDataSource,UCFGoldMoneyBoadCellDelegate>
 {
     float  bottomViewYPos;
@@ -34,7 +36,12 @@
 @end
 
 @implementation UCFGoldPurchaseViewController
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self addLeftButton];
@@ -244,7 +251,7 @@
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
-    return 3;
+    return 2;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     switch (indexPath.section) {
@@ -438,7 +445,7 @@
     [riskProtocolLabel setFontColor:UIColorWithRGB(0x4aa1f9) string:@"《黄金产品买卖及委托管理服务协议》"];
     
     UIImageView * imageView = [[UIImageView alloc] init];
-    imageView.frame = CGRectMake(CGRectGetMinX(riskProtocolLabel.frame) - 7, CGRectGetMinY(riskProtocolLabel.frame) + size2.height/2, 5, 5);
+    imageView.frame = CGRectMake(CGRectGetMinX(riskProtocolLabel.frame) - 7, CGRectGetMinY(riskProtocolLabel.frame) + 6, 5, 5);
     imageView.image = [UIImage imageNamed:@"point.png"];
     
     [footView addSubview:riskProtocolLabel];
@@ -482,6 +489,32 @@
 -(void)gotoGoldRechargeVC
 {
     
+    
+    if(![UserInfoSingle sharedManager].goldAuthorization){//去授权页面
+        HSHelper *helper = [HSHelper new];
+        [helper pushGoldAuthorizationType:SelectAccoutTypeGold nav:self.navigationController];
+        return;
+    }else{
+        //去充值页面
+        UCFGoldRechargeViewController *goldRecharge = [[UCFGoldRechargeViewController alloc] initWithNibName:@"UCFGoldRechargeViewController" bundle:nil];
+        goldRecharge.baseTitleText = @"充值";
+        [self.navigationController pushViewController:goldRecharge animated:YES];
+    }
+}
+- (void)showHSAlert:(NSString *)alertMessage
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:alertMessage delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    alert.tag = 8000;
+    [alert show];
+}
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == 8000) {
+        if (buttonIndex == 1) {
+            HSHelper *helper = [HSHelper new];
+            [helper pushOpenHSType:SelectAccoutTypeHoner Step:[UserInfoSingle sharedManager].enjoyOpenStatus nav:self.navigationController];
+        }
+    }
 }
 #pragma mark -全投
 -(void)clickAllInvestmentBtn

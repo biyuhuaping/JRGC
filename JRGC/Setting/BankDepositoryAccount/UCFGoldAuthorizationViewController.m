@@ -7,13 +7,26 @@
 //
 
 #import "UCFGoldAuthorizationViewController.h"
-
+#import "UCFGoldRechargeViewController.h"
 @interface UCFGoldAuthorizationViewController ()
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 - (IBAction)clickGoldAuthorizationBtn:(id)sender;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *upViewHeight;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *upViewWidth;
+@property (weak, nonatomic) IBOutlet UILabel *LabelTip;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *btnBottom;
 
 @end
 
+
 @implementation UCFGoldAuthorizationViewController
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.scrollView.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight - 64);
+    self.upViewWidth.constant = ScreenWidth;
+    self.upViewHeight.constant = CGRectGetMaxY(self.LabelTip.frame)+25;
+    self.scrollView.contentSize = CGSizeMake(0, ScreenHeight - 64);
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -35,57 +48,22 @@
     NSString *Data = (NSString *)result;
     NSDictionary * dic = [Data objectFromJSONString];
     
-    //    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-    
-    switch (tag.intValue) {
-        case kSXTagGoldAuthorizedOpenAccount:
-        {
-            BOOL ret  = [[dic objectSafeDictionaryForKey:@"ret"] boolValue];
-            if(ret){//授权成功
-                
-                [AuxiliaryFunc showToastMessage:@"授权成功" withView:self.view];
-                [UserInfoSingle sharedManager].goldAuthorization = YES;
-                [self performSelector:@selector(popViewController) withObject:nil afterDelay:2.0f];
-                
-                //                UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:2];
-                //                vc.site = @"2";
-                //                vc.accoutType = SelectAccoutTypeHoner;
-                //                [self.navigationController pushViewController:vc animated:YES];
-                //                NSMutableArray *navVCArray = [[NSMutableArray alloc] initWithArray:self.navigationController.viewControllers];
-                //                [navVCArray removeObjectAtIndex:navVCArray.count-2];
-                //                [self.navigationController setViewControllers:navVCArray animated:NO];
-            } else {
-                [MBProgressHUD displayHudError:[dic objectSafeForKey:@"message"]];
-            }
-        }
-            break;
-        case KSXTagP2pAuthorization:
-        {
-            if([dic[@"ret"] boolValue] == 1){//授权成功
-                [AuxiliaryFunc showToastMessage:@"授权成功" withView:self.view];
-                [UserInfoSingle sharedManager].p2pAuthorization = YES;
-                [self performSelector:@selector(popViewController) withObject:nil afterDelay:2.0f];
-                
-                
-                //                UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:2];
-                //                vc.site = @"1";
-                //                vc.accoutType = SelectAccoutTypeP2P;
-                //                [self.navigationController pushViewController:vc animated:YES];
-                //                NSMutableArray *navVCArray = [[NSMutableArray alloc] initWithArray:self.navigationController.viewControllers];
-                //                [navVCArray removeObjectAtIndex:navVCArray.count-2];
-                //                [self.navigationController setViewControllers:navVCArray animated:NO];
-            } else {
-                [MBProgressHUD displayHudError:dic[@"msg"]];
-            }
-        }
-            break;
+    if (tag.intValue == kSXTagGoldAuthorizedOpenAccount ) {
+        BOOL ret  = [[dic objectSafeDictionaryForKey:@"ret"] boolValue];
+        if(ret){//授权成功
             
-        default:
-            break;
+//            [AuxiliaryFunc showToastMessage:@"授权成功" withView:self.view];
+            [UserInfoSingle sharedManager].goldAuthorization = YES;
+            UCFGoldRechargeViewController *goldRecharge = [[UCFGoldRechargeViewController alloc] initWithNibName:@"UCFGoldRechargeViewController" bundle:nil];
+            goldRecharge.baseTitleText = @"充值";
+            [self.navigationController pushViewController:goldRecharge animated:YES];
+            NSMutableArray *navVCArray = [[NSMutableArray alloc] initWithArray:self.navigationController.viewControllers];
+            [navVCArray removeObjectAtIndex:navVCArray.count-2];
+            [self.navigationController setViewControllers:navVCArray animated:NO];
+        } else {
+            [MBProgressHUD displayHudError:[dic objectSafeForKey:@"message"]];
+        }
     }
-}
--(void)popViewController{
-    [self.navigationController popViewControllerAnimated:YES];
 }
 - (void)errorPost:(NSError *)err tag:(NSNumber *)tag
 {
