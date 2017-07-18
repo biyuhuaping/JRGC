@@ -52,8 +52,11 @@
     else if ([_pagerView.selectIndexStr isEqualToString:@"0"]) {
         [self.honorInvest.tableView.header beginRefreshing];
     }
-    else if ([_pagerView.selectIndexStr isEqualToString:@"2"]) {
+    else if ([_pagerView.selectIndexStr isEqualToString:@"3"]) {
         [self.investTransfer.tableview.header beginRefreshing];
+    }
+    else if ([_pagerView.selectIndexStr isEqualToString:@"2"]) {
+        [self.golden.tableview.header beginRefreshing];
     }
 }
 - (void)viewWillLayoutSubviews
@@ -104,6 +107,10 @@
         self.currentViewController = self.investTransfer;
         [_pagerView setSelectIndex:3];
     }
+    else if ([self.selectedType isEqualToString:@"Gold"]) {
+        self.currentViewController = self.golden;
+        [_pagerView setSelectIndex:2];
+    }
     else {
         self.currentViewController = self.honorInvest;
         [_pagerView setSelectIndex:0];
@@ -122,6 +129,10 @@
     else if ([self.selectedType isEqualToString:@"Trans"]) {
         [_pagerView setSelectIndex:3];
         self.currentViewController = self.investTransfer;
+    }
+    else if ([self.selectedType isEqualToString:@"Gold"]) {
+        [_pagerView setSelectIndex:2];
+        self.currentViewController = self.golden;
     }
 }
 

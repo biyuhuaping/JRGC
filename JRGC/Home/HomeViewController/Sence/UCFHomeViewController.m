@@ -533,6 +533,15 @@
         }
         [appdel.tabBarController setSelectedIndex:1];
     }
+    else if (type == UCFHomeListTypeGlodMore) {
+        AppDelegate *appdel = (AppDelegate *)[UIApplication sharedApplication].delegate;
+        UCFInvestViewController *invest = (UCFInvestViewController *)[[appdel.tabBarController.childViewControllers objectAtIndex:1].childViewControllers firstObject];
+        invest.selectedType = @"Gold";
+        if ([invest isViewLoaded]) {
+            [invest changeView];
+        }
+        [appdel.tabBarController setSelectedIndex:1];
+    }
 }
 
 - (void)showLoginView

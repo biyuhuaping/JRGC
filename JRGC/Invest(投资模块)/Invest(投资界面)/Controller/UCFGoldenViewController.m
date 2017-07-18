@@ -17,7 +17,6 @@
 #import "HSHelper.h"
 #import "UCFGoldDetailViewController.h"
 @interface UCFGoldenViewController () <UITableViewDelegate, UITableViewDataSource, UCFHomeListCellHonorDelegate>
-@property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (weak, nonatomic) UCFGoldenHeaderView *goldenHeader;
 @property (strong, nonatomic) NSMutableArray *dataArray;
 @property (assign, nonatomic) NSUInteger currentPage;
