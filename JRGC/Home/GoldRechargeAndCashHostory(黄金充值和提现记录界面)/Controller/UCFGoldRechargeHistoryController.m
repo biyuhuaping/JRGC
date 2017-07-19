@@ -29,6 +29,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self addLeftButton];
+    self.currentPage = 1;
     [self.tableview addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(getDataFromNet)];
     __weak typeof(self) weakSelf = self;
     [self.tableview addLegendFooterWithRefreshingBlock:^{
@@ -87,6 +88,9 @@
     NSString *userId = [UserInfoSingle sharedManager].userId;
     if (!userId) {
         return;
+    }
+    if ([self.tableview.header isRefreshing]) {
+        self.currentPage = 1;
     }
     NSDictionary *dictory = [NSDictionary dictionaryWithObjectsAndKeys:userId, @"userId", @"20", @"pageSize", [NSString stringWithFormat:@"%ld", (long)self.currentPage], @"pageNo", nil];
     [[NetworkModule sharedNetworkModule] newPostReq:dictory tag:kSXTagGoldRechargeHistory owner:self signature:YES Type:SelectAccoutDefault];

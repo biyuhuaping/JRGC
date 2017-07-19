@@ -278,6 +278,7 @@
     {
     UCFGoldCashMoneyViewController *goldCashMoney = [[UCFGoldCashMoneyViewController alloc] initWithNibName:@"UCFGoldCashMoneyViewController" bundle:nil];
     goldCashMoney.baseTitleText = @"提现";
+    goldCashMoney.balanceMoney = self.balanceAmount;
     [self.navigationController pushViewController:goldCashMoney animated:YES];
 }
 #pragma 去已购黄金页面

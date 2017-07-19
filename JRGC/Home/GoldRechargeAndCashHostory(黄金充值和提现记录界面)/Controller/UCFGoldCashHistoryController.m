@@ -11,7 +11,7 @@
 
 @interface UCFGoldCashHistoryController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
-
+@property (assign, nonatomic) NSUInteger currentPage;
 @end
 
 @implementation UCFGoldCashHistoryController
@@ -20,6 +20,14 @@
     [super viewDidLoad];
     
     [self addLeftButton];
+    self.currentPage = 1;
+    [self.tableview addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(getDataFromNet)];
+    __weak typeof(self) weakSelf = self;
+    [self.tableview addLegendFooterWithRefreshingBlock:^{
+        [weakSelf getDataFromNet];
+    }];
+    self.tableview.footer.hidden = YES;
+    [self.tableview.header beginRefreshing];
 }
 
 #pragma mark - tableview 的数据源方法
@@ -59,4 +67,33 @@
 {
     return 35;
 }
+
+- (void)getDataFromNet
+{
+    NSString *userId = [[NSUserDefaults standardUserDefaults] valueForKey:UUID];
+    if (!userId) {
+        return;
+    }
+    if ([self.tableview.header isRefreshing]) {
+        self.currentPage = 1;
+    }
+    NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%lu", (unsigned long)self.currentPage], @"pageNo", @"20", @"pageSize", userId, @"userId", nil];
+    [[NetworkModule sharedNetworkModule] newPostReq:param tag:kSXTagGoldCashHistory owner:self signature:YES Type:SelectAccoutDefault];
+}
+
+- (void)beginPost:(kSXTag)tag
+{
+    
+}
+
+- (void)endPost:(id)result tag:(NSNumber *)tag
+{
+    
+}
+
+-(void)errorPost:(NSError *)err tag:(NSNumber *)tag
+{
+    
+}
+
 @end
