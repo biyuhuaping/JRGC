@@ -183,6 +183,7 @@
             [self saveInfoDic:dic];
             
             [[NSUserDefaults standardUserDefaults] setObject:_phoneNumber forKey:@"lastLoginName"];
+            [UserInfoSingle sharedManager].goldAuthorization = [[(NSDictionary *)dic[@"data"][@"userInfo"] objectSafeForKey: @"nmAuthorization"] boolValue];
             //更新验签串
             NSString *yanQian = [NSString stringWithFormat:@"%@%@%@",dic[@"loginName"],[UCFToolsMehod md5:[MD5Util MD5Pwd:_registerTwoView.getPassword]],dic[@"time"]];
             
