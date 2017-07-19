@@ -14,6 +14,7 @@
                 <outlet property="allGiveGoldAmountLabel" destination="zgB-6W-OEU" id="wbg-8q-gOc"/>
                 <outlet property="collectGiveGoldAmountLabel" destination="g0j-qF-fVa" id="6cY-6N-IBh"/>
                 <outlet property="collectGoldAmountLabel" destination="sMU-sD-oJ9" id="RAl-J8-9AT"/>
+                <outlet property="listCountLab" destination="AWi-vQ-o5S" id="6Eb-h3-bW2"/>
                 <outlet property="scrollView" destination="XL3-yB-mh1" id="OGh-23-pdC"/>
                 <outlet property="segmentedControlBgView" destination="13E-Cx-u8S" id="jaG-EW-b7P"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -75,7 +76,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IfI-hl-0X0">
                     <rect key="frame" x="0.0" y="144" width="375" height="30"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="共0笔记录" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AWi-vQ-o5S">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="共0笔记录" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AWi-vQ-o5S" customClass="NZLabel">
                             <rect key="frame" x="15" y="8" width="57" height="14.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

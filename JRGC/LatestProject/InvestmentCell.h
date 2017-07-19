@@ -12,7 +12,6 @@
 #import "UCFTransterBid.h"
 #import "UCFAngleView.h"
 #import "NZLabel.h"
-#import "UCFGoldModel.h"
 @class InvestmentCellDelegate;
 @protocol InvestmentCellDelegate <NSObject>
 
@@ -48,8 +47,6 @@
 - (void)setInvestItemInfo:(InvestmentItemInfo *)aItemInfo;
 - (void)setTransInvestItemInfo:(NSDictionary *)aItemInfo;
 - (void)setCollectionKeyBidInvestItemInfo:(NSDictionary *)aItemInfo;
-
-- (void)setGoldInvestItemInfo:(UCFGoldModel *)aItemInfo;
 /**
  *  投标页表头
  *

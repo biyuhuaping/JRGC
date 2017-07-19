@@ -48,10 +48,25 @@
     //预期增金克重
     self.perGiveGoldAmountLabel.text = [NSString stringWithFormat:@"%@克",[dataDict objectSafeForKey:@"perGiveGoldAmount"]];
     //已获增金克重
-    self.hasGiveGoldAmountLabel.text = [NSString stringWithFormat:@"%@",[dataDict objectSafeForKey:@"hasGiveGoldAmount"]];
+    self.hasGiveGoldAmountLabel.text = [NSString stringWithFormat:@"%@克",[dataDict objectSafeForKey:@"hasGiveGoldAmount"]];
     
-    self.startDateLabel.text = [NSString stringWithFormat:@"%@",[dataDict objectSafeForKey:@"startDate"]];
-    self.expiredDateLabel.text = [NSString stringWithFormat:@"%@",[dataDict objectSafeForKey:@"expiredDate"]];
-    self.orderStatusNameLabel.text = [NSString stringWithFormat:@"%@",[dataDict objectSafeForKey:@"orderStatusName"]];
+    self.startDateLabel.text = [NSString stringWithFormat:@"%@",[self checkStr:[dataDict objectSafeForKey:@"startDate"]]];
+    self.expiredDateLabel.text = [NSString stringWithFormat:@"%@",[self checkStr:[dataDict objectSafeForKey:@"expiredDate"]]];
+    
+    NSString *orderStatusName = [dataDict objectSafeForKey:@"orderStatusName"];
+    self.orderStatusNameLabel.text = [NSString stringWithFormat:@"%@",orderStatusName];
+    if ([orderStatusName isEqualToString:@"已到期"]) {
+        self.orderStatusNameLabel.textColor  = UIColorWithRGB(0x999999);
+    }else{
+        self.orderStatusNameLabel.textColor  = UIColorWithRGB(0x4aa1f9);
+    }
+}
+-(NSString *)checkStr:(NSString *)nullStr
+{
+    if ([nullStr isEqualToString:@""]) {
+        return @"--";
+    }else{
+        return nullStr;
+    }
 }
 @end

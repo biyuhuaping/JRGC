@@ -35,10 +35,15 @@
 -(void)layoutSubviews
 {
     [super layoutSubviews];
+}
+-(void)setDataDict:(NSDictionary *)dataDict
+{
+    _dataDict = dataDict;
     NSDictionary *userAccountInfoDict = [_dataDict objectForKey:@"userAccountInfo"];
     self.availableAllMoneyLabel.text = [NSString stringWithFormat:@"¥%@",[userAccountInfoDict objectForKey:@"availableAllMoney"]];
     self.availableMoneyLabel.text = [NSString stringWithFormat:@"¥%@",[userAccountInfoDict objectForKey:@"availableMoney"]];
     self.accountBeanLabel.text = [NSString stringWithFormat:@"¥%@",[userAccountInfoDict objectForKey:@"accountBean"]];
+
 }
 
 
@@ -107,5 +112,10 @@
     self.estimatAmountPayableLabel.text = [NSString stringWithFormat:@"¥%.2lf",amountPay];
     
     return textField;
+}
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
 }
 @end

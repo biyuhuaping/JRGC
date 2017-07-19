@@ -136,7 +136,7 @@
 {
     NSArray *titleArray = @[@"全部",@"持有中",@"已到期"];
     _topSegmentedControl = [[HMSegmentedControl alloc] initWithSectionTitles:titleArray];
-    [_topSegmentedControl setFrame:self.segmentedControlBgView.frame];
+    [_topSegmentedControl setFrame:CGRectMake(0, 0, ScreenWidth, 44)];
     _topSegmentedControl.selectionIndicatorHeight = 2.0f;
     _topSegmentedControl.backgroundColor = [UIColor whiteColor];
     _topSegmentedControl.font = [UIFont systemFontOfSize:14];
@@ -148,7 +148,7 @@
     _topSegmentedControl.shouldAnimateUserSelection = YES;
     _topSegmentedControl.tag = 10001;
     [_topSegmentedControl addTarget:self action:@selector(topSegmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
-    [self.view addSubview:_topSegmentedControl];
+    [self.segmentedControlBgView addSubview:_topSegmentedControl];
     //    self.twoTableview.tableHeaderView = _topSegmentedControl;
     //    [self.view viewAddLine:_topSegmentedControl Up:YES];
     //[self viewAddLine:_topSegmentedControl Up:NO];
@@ -357,9 +357,8 @@
     //    [tableView deselectRowAtIndexPath:indexPath animated:NO];
     NSDictionary *dict = [temp objectAtIndex:indexPath.row];
     UCFGoldInvestmentDetailViewController *controller = [[UCFGoldInvestmentDetailViewController alloc] initWithNibName:@"UCFGoldInvestmentDetailViewController" bundle:nil];
-//    controller.billId = dict[@"id"];
-//    controller.accoutType = self.accoutType;
-//    controller.detailType = @"1";
+    controller.orderId =  [NSString stringWithFormat:@"%@",[dict objectSafeForKey:@"orderId"]];
+    controller.accoutType = SelectAccoutTypeGold;
     [self.navigationController pushViewController:controller animated:YES];
 }
 

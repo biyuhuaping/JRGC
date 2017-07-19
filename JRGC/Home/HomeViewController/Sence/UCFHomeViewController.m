@@ -562,28 +562,14 @@
         [appdel.tabBarController setSelectedIndex:1];
     }
     else if (type == UCFHomeListTypeGlodMore) {
-        
-        
-        UCFGoldCalculatorView * view = [[[NSBundle mainBundle]loadNibNamed:@"UCFGoldCalculatorView" owner:nil options:nil] firstObject];
-        view.goldMoneyTextField.text = @"2";
-        view.nmTypeIdStr = @"21";
-        view.tag = 173924;
-        view.frame = CGRectMake(0, 0, ScreenWidth,ScreenHeight);
-        AppDelegate * app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-        view.center = app.window.center;
-        [app.window addSubview:view];
-
-        
-        
-        
-        
-//        AppDelegate *appdel = (AppDelegate *)[UIApplication sharedApplication].delegate;
-//        UCFInvestViewController *invest = (UCFInvestViewController *)[[appdel.tabBarController.childViewControllers objectAtIndex:1].childViewControllers firstObject];
-//        invest.selectedType = @"Gold";
-//        if ([invest isViewLoaded]) {
-//            [invest changeView];
-//        }
-//        [appdel.tabBarController setSelectedIndex:1];
+    
+        AppDelegate *appdel = (AppDelegate *)[UIApplication sharedApplication].delegate;
+        UCFInvestViewController *invest = (UCFInvestViewController *)[[appdel.tabBarController.childViewControllers objectAtIndex:1].childViewControllers firstObject];
+        invest.selectedType = @"Gold";
+        if ([invest isViewLoaded]) {
+            [invest changeView];
+        }
+        [appdel.tabBarController setSelectedIndex:1];
     }
 }
 -(void)gotoGoldInvestVC:(UCFHomeListCellModel *)model{
@@ -618,9 +604,9 @@
 -(void)gotoGoldDetailVC:(UCFHomeListCellModel *)model{
     
     NSString *tipStr1 = ZXTIP1;
-    NSInteger openStatus = [UserInfoSingle sharedManager].openStatus ;
+//    NSInteger openStatus = [UserInfoSingle sharedManager].openStatus ;
     NSInteger enjoyOpenStatus = [UserInfoSingle sharedManager].enjoyOpenStatus;
-    if (openStatus < 3 && enjoyOpenStatus < 3 ) {
+    if ( enjoyOpenStatus < 3 ) {
         [self showHSAlert:tipStr1];
         return;
     }
