@@ -680,6 +680,8 @@
 		84FAB60C1C7C575300D0942F /* MGSwipeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FAB6091C7C575300D0942F /* MGSwipeButton.m */; };
 		84FAB60D1C7C575300D0942F /* MGSwipeTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FAB60B1C7C575300D0942F /* MGSwipeTableCell.m */; };
 		84FFA5301C7EAA9200ACD835 /* UIScrollView+TouchScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FFA52F1C7EAA9200ACD835 /* UIScrollView+TouchScrollView.m */; };
+		A828D6B31F1F30C200662266 /* UCFExtractGoldViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A828D6B11F1F30C200662266 /* UCFExtractGoldViewController.m */; };
+		A828D6B41F1F30C200662266 /* UCFExtractGoldViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A828D6B21F1F30C200662266 /* UCFExtractGoldViewController.xib */; };
 		A829E0A71ED42D0C00616FFE /* guideImage6_4.png in Resources */ = {isa = PBXBuildFile; fileRef = A829E0A51ED42D0C00616FFE /* guideImage6_4.png */; };
 		A829E0A81ED42D0C00616FFE /* guideImage7_4.png in Resources */ = {isa = PBXBuildFile; fileRef = A829E0A61ED42D0C00616FFE /* guideImage7_4.png */; };
 		A851F3481F132713003DE8B8 /* UCFGoldTransactionHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = A851F3471F132713003DE8B8 /* UCFGoldTransactionHeadView.m */; };
@@ -2091,6 +2093,9 @@
 		84FAB60B1C7C575300D0942F /* MGSwipeTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSwipeTableCell.m; sourceTree = "<group>"; };
 		84FFA52E1C7EAA9200ACD835 /* UIScrollView+TouchScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+TouchScrollView.h"; sourceTree = "<group>"; };
 		84FFA52F1C7EAA9200ACD835 /* UIScrollView+TouchScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+TouchScrollView.m"; sourceTree = "<group>"; };
+		A828D6B01F1F30C200662266 /* UCFExtractGoldViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFExtractGoldViewController.h; sourceTree = "<group>"; };
+		A828D6B11F1F30C200662266 /* UCFExtractGoldViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFExtractGoldViewController.m; sourceTree = "<group>"; };
+		A828D6B21F1F30C200662266 /* UCFExtractGoldViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFExtractGoldViewController.xib; sourceTree = "<group>"; };
 		A829E0A51ED42D0C00616FFE /* guideImage6_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guideImage6_4.png; sourceTree = "<group>"; };
 		A829E0A61ED42D0C00616FFE /* guideImage7_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guideImage7_4.png; sourceTree = "<group>"; };
 		A851F3461F132713003DE8B8 /* UCFGoldTransactionHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFGoldTransactionHeadView.h; sourceTree = "<group>"; };
@@ -5026,6 +5031,9 @@
 				A851F3501F1361D8003DE8B8 /* UCFGoldTransactionDetailViewController.h */,
 				A851F3511F1361D8003DE8B8 /* UCFGoldTransactionDetailViewController.m */,
 				A851F3521F1361D8003DE8B8 /* UCFGoldTransactionDetailViewController.xib */,
+				A828D6B01F1F30C200662266 /* UCFExtractGoldViewController.h */,
+				A828D6B11F1F30C200662266 /* UCFExtractGoldViewController.m */,
+				A828D6B21F1F30C200662266 /* UCFExtractGoldViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -6549,6 +6557,7 @@
 				7439853E1F174FC800F2EDB8 /* UCFGoldRechargeHeaderView.xib in Resources */,
 				833A6EB81E554B8700C8A494 /* UCFCollectionDetailCell.xib in Resources */,
 				83CD84391F13A50800227704 /* UCFTransferViewController.xib in Resources */,
+				A828D6B41F1F30C200662266 /* UCFExtractGoldViewController.xib in Resources */,
 				FB82B8CC1DD96A8E0080C099 /* UCFCouponAuxiliaryVC.xib in Resources */,
 				A851F34F1F132D2C003DE8B8 /* UCFGoldTransCell.xib in Resources */,
 				74E140591F1CCB3F00B17A96 /* UCFGoldRechargeWebController.xib in Resources */,
@@ -6922,6 +6931,7 @@
 				7BA6E4BC1AD6731900FE8C37 /* SDWebImageDecoder.m in Sources */,
 				7BCE02241AC902FD0084C15C /* SharedSingleton.m in Sources */,
 				EDEAB70C1C7D4BAF00BBF3B1 /* UCFIdNumberTextField.m in Sources */,
+				A828D6B31F1F30C200662266 /* UCFExtractGoldViewController.m in Sources */,
 				E3A96B0E1CBF83CE00E8884F /* UCFWorkPointsTableViewCell.m in Sources */,
 				83FEDB761EFBB56000CFE0EF /* UCFCompanyNoOpenViewController.m in Sources */,
 				4AD6B4C61B32D33E00D94140 /* CycleView.m in Sources */,
