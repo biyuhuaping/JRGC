@@ -20,6 +20,7 @@
 #import "UCFGoldAuthorizationViewController.h"
 #import "UserInfoSingle.h"
 #import "HSHelper.h"
+#import "UCFExtractGoldViewController.h"
 
 
 @interface UCFGoldAccountViewController ()<UITableViewDelegate,UITableViewDataSource, GoldAccountFirstCellDeleage>
@@ -165,6 +166,9 @@
     UCFCellStyleModel *model  =[self.dataArray objectAtIndex:indexPath.row];
     if ([model.leftTitle isEqualToString:@"已购黄金"]) {
         [self gotoGoldInvestInfoVC];
+    } else if ([model.leftTitle isEqualToString:@"提金订单"]) {
+        UCFExtractGoldViewController *vc1 = [[UCFExtractGoldViewController alloc] initWithNibName:@"UCFExtractGoldViewController" bundle:nil];
+        [self.navigationController pushViewController:vc1 animated:YES];
     }
 }
 - (void)initData
@@ -180,6 +184,9 @@
     [self.dataArray addObject:model03];
     [self.dataArray addObject:model04];
     [self.dataArray addObject:model05];
+    //刷新黄金账户数据通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getNetData) name:UPDATE_GOLD_ACCOUNT object:nil];
+    
 }
 - (void)initUI
 {

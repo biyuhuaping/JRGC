@@ -7,7 +7,7 @@
 //
 
 #import "UCFMyGoldInvestInfoCell.h"
-
+#import "UIDic+Safe.h"
 @implementation UCFMyGoldInvestInfoCell
 
 - (void)awakeFromNib {
@@ -39,25 +39,19 @@
 -(void)setDataDict:(NSDictionary *)dataDict
 
 {
-    self.dealGoldPriceLabel.text = [NSString stringWithFormat:@"¥%@",[dataDict objectForKey:@"dealGoldPrice"]];
+    //成交金价
+    self.dealGoldPriceLabel.text = [NSString stringWithFormat:@"¥%@",[dataDict objectSafeForKey:@"dealGoldPrice"]];
+    //标名称
+    self.nmPrdClaimNameLabel.text = [NSString stringWithFormat:@"%@",[dataDict objectSafeForKey:@"nmPrdClaimName"]];
+    //购买克重
+    self.purchaseGoldAmountLabel.text = [NSString stringWithFormat:@"%@克",[dataDict objectSafeForKey:@"purchaseGoldAmount"]];
+    //预期增金克重
+    self.perGiveGoldAmountLabel.text = [NSString stringWithFormat:@"%@克",[dataDict objectSafeForKey:@"perGiveGoldAmount"]];
+    //已获增金克重
+    self.hasGiveGoldAmountLabel.text = [NSString stringWithFormat:@"%@",[dataDict objectSafeForKey:@"hasGiveGoldAmount"]];
     
-    self.nmPrdClaimNameLabel.text = [NSString stringWithFormat:@"%@",[dataDict objectForKey:@"nmPrdClaimName"]];
-    
-    self.purchaseGoldAmountLabel.text = [NSString stringWithFormat:@"%@克",[dataDict objectForKey:@"purchaseGoldAmount"]];
-    
-    self.perGiveGoldAmountLabel.text = [NSString stringWithFormat:@"%@克",[dataDict objectForKey:@""]];
-    
-//    self.dealGoldPriceLabel.text = [NSString stringWithFormat:@"%@",[dataDict objectForKey:@""]];
-//    
-//    self.dealGoldPriceLabel.text = [NSString stringWithFormat:@"%@",[dataDict objectForKey:@""]];
-//    self.dealGoldPriceLabel.text = [NSString stringWithFormat:@"%@",[dataDict objectForKey:@""]];
-//    self.dealGoldPriceLabel.text = [NSString stringWithFormat:@"%@",[dataDict objectForKey:@""]];
-//    
-//    self.dealGoldPriceLabel.text = [NSString stringWithFormat:@"%@",[dataDict objectForKey:@""]];
-//    
-//    self.dealGoldPriceLabel.text = [NSString stringWithFormat:@"%@",[dataDict objectForKey:@""]];
-//    
-//    self.dealGoldPriceLabel.text = [NSString stringWithFormat:@"%@",[dataDict objectForKey:@""]];
-    
+    self.startDateLabel.text = [NSString stringWithFormat:@"%@",[dataDict objectSafeForKey:@"startDate"]];
+    self.expiredDateLabel.text = [NSString stringWithFormat:@"%@",[dataDict objectSafeForKey:@"expiredDate"]];
+    self.orderStatusNameLabel.text = [NSString stringWithFormat:@"%@",[dataDict objectSafeForKey:@"orderStatusName"]];
 }
 @end

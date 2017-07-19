@@ -30,6 +30,7 @@
         self.calculatorView.layer.cornerRadius = 4;
         UITapGestureRecognizer *frade = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(fadeKeyboard)];
         [self addGestureRecognizer:frade];
+        [self.goldMoneyTextField  addTarget:self action:@selector(textfieldChangedLength:) forControlEvents:UIControlEventEditingChanged];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(calculatorKeyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(calculatorKeyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 #ifdef __IPHONE_5_0
@@ -93,6 +94,47 @@
 {
     [self.goldMoneyTextField resignFirstResponder];
 }
+- (UITextField *)textfieldChangedLength:(UITextField *)textField
+{
+    NSString *str = textField.text;
+    NSArray *array = [str componentsSeparatedByString:@"."];
+    
+    NSString *jeLength = [array firstObject];
+    if (jeLength.length > 9) {
+        textField.text = [textField.text substringToIndex:textField.text.length-1];
+    }
+    if (array.count == 1) {
+        if (jeLength != nil&& jeLength.length > 0) {
+            NSString *firstStr = [jeLength substringToIndex:1];
+            if ([firstStr isEqualToString:@"0"]) {
+                textField.text = @"0";
+            }
+        }
+        
+    }
+    
+    if(array.count > 2)
+    {
+        textField.text = [textField.text substringToIndex:textField.text.length-1];
+    }
+    if(array.count == 2)
+    {
+        
+        str = [array objectAtIndex:1];
+        
+        if(str.length > 3)
+        {
+            textField.text = [textField.text substringToIndex:textField.text.length-1];
+        }
+        NSString *firStr = [array objectAtIndex:0];
+        if (firStr == nil || firStr.length == 0) {
+            textField.text = [NSString stringWithFormat:@"0%@",textField.text];
+        }
+    }
+    
+    return textField;
+}
+
 -(void)awakeFromNib
 {
     [super awakeFromNib];
@@ -111,7 +153,7 @@
 - (IBAction)GoldCalculatorBtn:(id)sender {
     //    nmTypeId	黄金品种Id	string
     //    purchaseGoldAmount
-    NSDictionary *paramDict = @{@"nmTypeId": self.nmTypeIdStr,@"purchaseGoldAmount":self.goldMoneyTextField.text};
+    NSDictionary *paramDict = @{@"nmTypeId": self.nmTypeIdStr,@"purchaseGoldAmount":self.goldMoneyTextField.text,@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID]};
     [[NetworkModule sharedNetworkModule] newPostReq:paramDict tag:kSXTagGoldCalculateAmount owner:self signature:YES Type:SelectAccoutTypeGold];
 }
 -(void)beginPost:(kSXTag)tag
@@ -131,7 +173,7 @@
              purchaseMoney	购买金额	string
              realGoldPrice	实时金价	string
              */
-            NSDictionary *resultDic = [[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"result"];
+            NSDictionary *resultDic = [dic objectSafeDictionaryForKey:@"data"] ;
             self.GoldPriceLabel.text = [NSString stringWithFormat:@"¥%@",[resultDic objectSafeForKey:@"realGoldPrice"]];
             self.glodFeeLabel.text = [NSString stringWithFormat:@"¥%@",[resultDic objectSafeForKey:@"buyServiceMoney"]];
             self.purchaseMoneyLabel.text = [NSString stringWithFormat:@"¥%@",[resultDic objectSafeForKey:@"purchaseMoney"]];

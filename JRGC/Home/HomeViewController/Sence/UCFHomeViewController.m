@@ -45,6 +45,7 @@
 #import "UCFPurchaseBidViewController.h"
 #import "UCFGoldDetailViewController.h"
 #import "UCFGoldPurchaseViewController.h"
+#import  "UCFGoldCalculatorView.h"
 @interface UCFHomeViewController () <UCFHomeListViewControllerDelegate, UCFHomeListNavViewDelegate, UCFUserInformationViewControllerDelegate,BJGridItemDelegate>
 @property (strong, nonatomic) UCFCycleImageViewController *cycleImageVC;
 @property (strong, nonatomic) UCFUserInformationViewController *userInfoVC;
@@ -349,7 +350,7 @@
                 
                 if (self.accoutType == SelectAccoutTypeGold) {
                     
-                
+                    [self gotoGoldDetailVC:model];
                 }else{
                     
                     HSHelper *helper = [HSHelper new];
@@ -561,13 +562,28 @@
         [appdel.tabBarController setSelectedIndex:1];
     }
     else if (type == UCFHomeListTypeGlodMore) {
-        AppDelegate *appdel = (AppDelegate *)[UIApplication sharedApplication].delegate;
-        UCFInvestViewController *invest = (UCFInvestViewController *)[[appdel.tabBarController.childViewControllers objectAtIndex:1].childViewControllers firstObject];
-        invest.selectedType = @"Gold";
-        if ([invest isViewLoaded]) {
-            [invest changeView];
-        }
-        [appdel.tabBarController setSelectedIndex:1];
+        
+        
+        UCFGoldCalculatorView * view = [[[NSBundle mainBundle]loadNibNamed:@"UCFGoldCalculatorView" owner:nil options:nil] firstObject];
+        view.goldMoneyTextField.text = @"2";
+        view.nmTypeIdStr = @"21";
+        view.tag = 173924;
+        view.frame = CGRectMake(0, 0, ScreenWidth,ScreenHeight);
+        AppDelegate * app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        view.center = app.window.center;
+        [app.window addSubview:view];
+
+        
+        
+        
+        
+//        AppDelegate *appdel = (AppDelegate *)[UIApplication sharedApplication].delegate;
+//        UCFInvestViewController *invest = (UCFInvestViewController *)[[appdel.tabBarController.childViewControllers objectAtIndex:1].childViewControllers firstObject];
+//        invest.selectedType = @"Gold";
+//        if ([invest isViewLoaded]) {
+//            [invest changeView];
+//        }
+//        [appdel.tabBarController setSelectedIndex:1];
     }
 }
 -(void)gotoGoldInvestVC:(UCFHomeListCellModel *)model{

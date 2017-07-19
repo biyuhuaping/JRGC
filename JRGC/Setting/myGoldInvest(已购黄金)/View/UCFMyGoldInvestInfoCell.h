@@ -13,7 +13,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *dealGoldPriceLabel;
 @property (strong, nonatomic) IBOutlet UILabel *purchaseGoldAmountLabel;
 @property (strong, nonatomic) IBOutlet UILabel *perGiveGoldAmountLabel;
-@property (strong, nonatomic) IBOutlet UIView *hasGiveGoldAmountLabel;
+@property (strong, nonatomic) IBOutlet UILabel *hasGiveGoldAmountLabel;
 @property (strong, nonatomic) IBOutlet UILabel *startDateLabel;
 @property (strong, nonatomic) IBOutlet UILabel *expiredDateLabel;
 @property (strong, nonatomic) IBOutlet UILabel *orderStatusNameLabel;

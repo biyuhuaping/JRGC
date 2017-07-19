@@ -135,5 +135,8 @@
     //NSLog(@"-1009");
     //}
 }
-
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:UPDATE_GOLD_ACCOUNT object:nil];
+}
 @end

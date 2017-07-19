@@ -18,6 +18,8 @@
 #import "ToolSingleTon.h"
 #import "HSHelper.h"
 #import "UCFGoldRechargeViewController.h"
+#import "NSString+CJString.h"
+#import "FullWebViewController.h"
 @interface UCFGoldPurchaseViewController ()<UITableViewDelegate,UITableViewDataSource,UCFGoldMoneyBoadCellDelegate>
 {
     float  bottomViewYPos;
@@ -410,7 +412,8 @@
     footView.userInteractionEnabled = YES;
     __weak typeof(self) weakSelf = self;
     
-    NSString * totalStr1 = @"黄金价格实时波动，在0.50元的波动范围内成交，成交瞬间系统价格不高于281.00元/克则立即为你买入";
+    NSString *readTimePriceStr = [NSString stringWithFormat:@"%.2lf元/克",[ToolSingleTon sharedManager].readTimePrice];
+    NSString * totalStr1 = [NSString stringWithFormat:@"黄金价格实时波动，在0.50元的波动范围内成交，成交瞬间系统价格不高于%@则立即为你买入",readTimePriceStr] ;
     NZLabel *firstLabel = [[NZLabel alloc] init];
     firstLabel.font = [UIFont systemFontOfSize:13.0f];
     CGSize size1 = [Common getStrHeightWithStr:totalStr1 AndStrFont:13 AndWidth:ScreenWidth- 23 -15];
@@ -420,8 +423,9 @@
     firstLabel.userInteractionEnabled = YES;
     firstLabel.textColor = UIColorWithRGB(0x999999);
     
+    
     [firstLabel setFontColor:UIColorWithRGB(0x666666) string:@"0.50元"];
-    [firstLabel setFontColor:UIColorWithRGB(0x666666) string:@"281.00元/克"];
+    [firstLabel setFontColor:UIColorWithRGB(0x666666) string:readTimePriceStr];
     [footView addSubview:firstLabel];
     
     UIImageView * imageView1 = [[UIImageView alloc] init];
@@ -429,34 +433,62 @@
     imageView1.image = [UIImage imageNamed:@"point.png"];
     [footView addSubview:imageView1];
     
-    NZLabel *riskProtocolLabel = [[NZLabel alloc] init];
-    riskProtocolLabel.font = [UIFont systemFontOfSize:12.0f];
     
-    CGSize size2 = [Common getStrHeightWithStr:@"本人同意签署《黄金产品买卖及委托管理服务协议》" AndStrFont:13 AndWidth:ScreenWidth- 23 -15];
-    riskProtocolLabel.numberOfLines = 0;
-    riskProtocolLabel.frame = CGRectMake(23,  CGRectGetMaxY(firstLabel.frame)+5, ScreenWidth- 23 -15, size2.height);
-    riskProtocolLabel.text = @"本人同意签署《黄金产品买卖及委托管理服务协议》";
-    riskProtocolLabel.userInteractionEnabled = YES;
-    riskProtocolLabel.textColor = UIColorWithRGB(0x999999);
+    NSDictionary *userOtherMsg = [self.dataDic objectForKey:@"nmPrdClaimInfo"];
+    NSArray *contractMsgArr = [userOtherMsg valueForKey:@"contractList"];
+    NSString *totalStr = [NSString stringWithFormat:@"本人已阅读并同意签署"];
+    for (int i = 0; i < contractMsgArr.count; i++) {
+        NSString *tmpStr = [[contractMsgArr objectAtIndex:i] valueForKey:@"contractName"];
+        totalStr = [totalStr stringByAppendingString:[NSString stringWithFormat:@"《%@》",tmpStr]];
+    }
+    NZLabel *label1 = [[NZLabel alloc] init];
+    label1.font = [UIFont systemFontOfSize:12.0f];
+    CGSize size = [Common getStrHeightWithStr:totalStr AndStrFont:12 AndWidth:ScreenWidth- 23 -15 AndlineSpacing:1.0f];
+    label1.numberOfLines = 0;
+    label1.frame = CGRectMake(23, CGRectGetMaxY(firstLabel.frame)+10, ScreenWidth-23 - 15, size.height);
+    NSDictionary *dic = [Common getParagraphStyleDictWithStrFont:12 WithlineSpacing:1.0f];
+    label1.attributedText = [NSString getNSAttributedString:totalStr labelDict:dic];
+    label1.userInteractionEnabled = YES;
+    label1.textColor = UIColorWithRGB(0x999999);
     
-    [riskProtocolLabel addLinkString:@"《黄金产品买卖及委托管理服务协议》" block:^(ZBLinkLabelModel *linkModel) {
-        [weakSelf showGoldDelegate:linkModel];
-    }];
-    [riskProtocolLabel setFontColor:UIColorWithRGB(0x4aa1f9) string:@"《黄金产品买卖及委托管理服务协议》"];
+    for (int i = 0; i < contractMsgArr.count; i++) {
+        NSString *tmpStr = [NSString stringWithFormat:@"《%@》",[[contractMsgArr objectAtIndex:i] valueForKey:@"contractName"]];
+        [label1 addLinkString:tmpStr block:^(ZBLinkLabelModel *linkModel) {
+            [weakSelf showGoldDelegate:linkModel];
+        }];
+        [label1 setFontColor:UIColorWithRGB(0x4aa1f9) string:tmpStr];
+    }
+    [footView addSubview:label1];
     
-    UIImageView * imageView = [[UIImageView alloc] init];
-    imageView.frame = CGRectMake(CGRectGetMinX(riskProtocolLabel.frame) - 7, CGRectGetMinY(riskProtocolLabel.frame) + 6, 5, 5);
-    imageView.image = [UIImage imageNamed:@"point.png"];
-    
-    [footView addSubview:riskProtocolLabel];
-    [footView addSubview:imageView];
-    
+    UIImageView * imageView2 = [[UIImageView alloc] init];
+    imageView2.frame = CGRectMake(CGRectGetMinX(label1.frame) - 7, CGRectGetMinY(label1.frame) + 4, 5, 5);
+    imageView2.image = [UIImage imageNamed:@"point.png"];
+    [footView addSubview:imageView2];
     return footView;
 }
 #pragma 显示黄金协议
 -(void)showGoldDelegate:(ZBLinkLabelModel *)linkModel{
     
     
+    NSString *contractStr = linkModel.linkString;
+    contractStr = [contractStr substringWithRange:NSMakeRange(1, contractStr.length-2)];
+    
+    NSDictionary *userOtherMsg = [self.dataDic objectForKey:@"nmPrdClaimInfo"];
+    NSArray *contractMsgArr = [userOtherMsg valueForKey:@"contractList"];
+    
+    NSString *contractTemplateIdStr = @"";
+    for (NSDictionary *data in contractMsgArr ) {
+        NSString *tmpStr = [data valueForKey:@"contractName"];
+        
+        if ([contractStr isEqualToString:tmpStr]) {
+        contractTemplateIdStr = [NSString stringWithFormat:@"%@",[data objectSafeForKey:@"id"]];
+            break;
+        }
+    }
+    NSString *nmProClaimIdStr = self.goldModel.nmPrdClaimId;
+    NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId",nmProClaimIdStr, @"nmPrdClaimId",contractTemplateIdStr,@"contractTemplateId",nil];
+    
+    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagGetGoldContractInfo owner:self signature:YES Type:SelectAccoutTypeGold];
 }
 
 #pragma mark - UCFGoldMoneyBoadCellDelegate
@@ -488,8 +520,6 @@
 #pragma mark -黄金充值
 -(void)gotoGoldRechargeVC
 {
-    
-    
     if(![UserInfoSingle sharedManager].goldAuthorization){//去授权页面
         HSHelper *helper = [HSHelper new];
         [helper pushGoldAuthorizationType:SelectAccoutTypeGold nav:self.navigationController];
@@ -539,9 +569,11 @@
 {
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     NSString *data = (NSString *)result;
+    NSMutableDictionary *dic = [data objectFromJSONString];
+    NSString *rstcode = dic[@"ret"];
+    NSString *message = [dic objectSafeForKey:@"message"];
     if (tag.intValue == kSXTagGetPurchaseGold){
-        NSMutableDictionary *dic = [data objectFromJSONString];
-        NSString *rstcode = dic[@"ret"];
+       
         if([rstcode intValue] == 1)
         {
             UCFGoldBidSuccessViewController *goldAuthorizationVC = [[UCFGoldBidSuccessViewController alloc]initWithNibName:@"UCFGoldBidSuccessViewController" bundle:nil];
@@ -564,9 +596,23 @@
         }
         else{
 //            [self reloadMainView];
-            [AuxiliaryFunc showAlertViewWithMessage:[dic objectSafeForKey:@"message"]];
+            [AuxiliaryFunc showAlertViewWithMessage:message];
         }
-     }
+    }else if (tag.intValue == kSXTagGetGoldContractInfo){
+        NSDictionary *dataDict = [[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"result"];
+        if ( [dic[@"ret"] boolValue])
+        {
+            NSString *contractContentStr = [dataDict objectSafeForKey:@"contractContent"];
+            NSString *contractTitle = [dataDict objectSafeForKey:@"contractName"];
+            FullWebViewController *controller = [[FullWebViewController alloc] initWithHtmlStr:contractContentStr title:contractTitle];
+            controller.baseTitleType = @"detail_heTong";
+            [self.navigationController pushViewController:controller animated:YES];
+        }
+        else
+        {
+            [AuxiliaryFunc showAlertViewWithMessage:message];
+        }
+    }
 }
 -(void)errorPost:(NSError*)err tag:(NSNumber*)tag
 {
