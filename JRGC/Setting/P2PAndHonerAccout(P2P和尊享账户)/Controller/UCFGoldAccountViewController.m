@@ -242,7 +242,12 @@
 #pragma mark - GoldAccountFirstCellDelegate
     
 - (void)goldAccountFirstCell:(GoldAccountFirstCell *)goldFirstCell didClickedRechargeButton:(UIButton *)button
-    {
+{
+        UCFGoldRechargeViewController *goldRecharge = [[UCFGoldRechargeViewController alloc] initWithNibName:@"UCFGoldRechargeViewController" bundle:nil];
+        goldRecharge.baseTitleText = @"充值";
+        goldRecharge.rootVc = self;
+        [self.navigationController pushViewController:goldRecharge animated:YES];
+        return;
     NSString *tipStr1 = ZXTIP1;
     NSInteger openStatus = [UserInfoSingle sharedManager].openStatus ;
     NSInteger enjoyOpenStatus = [UserInfoSingle sharedManager].enjoyOpenStatus;

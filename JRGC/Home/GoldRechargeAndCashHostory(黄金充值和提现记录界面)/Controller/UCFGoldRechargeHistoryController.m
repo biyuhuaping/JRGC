@@ -7,8 +7,9 @@
 //
 
 #import "UCFGoldRechargeHistoryController.h"
-#import "UCFGoldReCashHisCell.h"
+#import "UCFGoldRechargeRecordCell.h"
 #import "UCFGoldHistoryModel.h"
+#import "UCFGoldRecordHeaderFooterView.h"
 
 @interface UCFGoldRechargeHistoryController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
@@ -53,10 +54,10 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *cellId = @"goldRechargeAndCash";
-    UCFGoldReCashHisCell *hisCell = [tableView dequeueReusableCellWithIdentifier:cellId];
+    static NSString *cellId = @"goldRechargeRecord";
+    UCFGoldRechargeRecordCell *hisCell = [tableView dequeueReusableCellWithIdentifier:cellId];
     if (nil == hisCell) {
-        hisCell = (UCFGoldReCashHisCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFGoldReCashHisCell" owner:self options:nil] lastObject];
+        hisCell = (UCFGoldRechargeRecordCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFGoldRechargeRecordCell" owner:self options:nil] lastObject];
         hisCell.tableview = tableView;
     }
     hisCell.indexPath = indexPath;
@@ -65,17 +66,25 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 30;
+    return 35;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    static NSString *viewId = @"goldRecordHeaderFooterView";
+    UCFGoldRecordHeaderFooterView *recordView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:viewId];
+    if (nil == recordView) {
+        recordView = (UCFGoldRecordHeaderFooterView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFGoldRecordHeaderFooterView" owner:self options:nil] lastObject];
+    }
+    UCFGoldHistoryModel *model = [[self.dataArray objectAtIndex:section] firstObject];
+    NSArray *dateArr = [model.rechargeDate componentsSeparatedByString:@"-"];
+    recordView.monthLabel.text = [NSString stringWithFormat:@"%@年%d月", [dateArr firstObject], [[dateArr objectAtIndex:1] intValue]];
+    return recordView;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     return 0.001;
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    return nil;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

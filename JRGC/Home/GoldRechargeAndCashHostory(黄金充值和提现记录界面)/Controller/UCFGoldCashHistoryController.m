@@ -7,7 +7,8 @@
 //
 
 #import "UCFGoldCashHistoryController.h"
-#import "UCFGoldReCashHisCell.h"
+#import "UCFGoldCashRecordCell.h"
+#import "UCFGoldRecordHeaderFooterView.h"
 
 @interface UCFGoldCashHistoryController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
@@ -43,10 +44,10 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *cellId = @"goldRechargeAndCash";
-    UCFGoldReCashHisCell *hisCell = [tableView dequeueReusableCellWithIdentifier:cellId];
+    static NSString *cellId = @"goldCashRecord";
+    UCFGoldCashRecordCell *hisCell = [tableView dequeueReusableCellWithIdentifier:cellId];
     if (nil == hisCell) {
-        hisCell = (UCFGoldReCashHisCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFGoldReCashHisCell" owner:self options:nil] lastObject];
+        hisCell = (UCFGoldCashRecordCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFGoldCashRecordCell" owner:self options:nil] lastObject];
         hisCell.tableview = tableView;
     }
     hisCell.indexPath = indexPath;
@@ -55,7 +56,13 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 30;
+    return 35;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    static NSString *cellId = @"goldRecordHeaderFooterView";
+    return nil;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section

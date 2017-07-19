@@ -49,7 +49,7 @@
             
         }
         else if ([key isEqualToString:@"rechargeDate"]) {
-            [self setValue:[propertyValue substringToIndex:10] forKey:key];
+            [self setValue:[propertyValue substringToIndex:7] forKey:key];
         }
         else {
             if (![propertyValue isKindOfClass:[NSNull class]] && propertyValue != nil) {
