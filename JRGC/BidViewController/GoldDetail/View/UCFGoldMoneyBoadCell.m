@@ -23,7 +23,7 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    
+    self.moneyTextField.delegate = self;
     [self.moneyTextField  addTarget:self action:@selector(textfieldChangedLength:) forControlEvents:UIControlEventEditingChanged];
 }
 

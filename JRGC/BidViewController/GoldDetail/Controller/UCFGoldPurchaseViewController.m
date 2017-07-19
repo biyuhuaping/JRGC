@@ -54,11 +54,12 @@
     self.goldModel = [UCFGoldModel goldModelWithDict:[_dataDic objectSafeDictionaryForKey:@"nmPrdClaimInfo"]];
     
     _prdLabelsList = [[_dataDic objectSafeDictionaryForKey:@"nmPrdClaimInfo"] objectSafeArrayForKey:@"prdLabelsList"];
-    [[ToolSingleTon sharedManager] getGoldPrice];
+    
     self.tableView.contentInset =  UIEdgeInsetsMake(10, 0, 0, 0);
     UITapGestureRecognizer *frade = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardDown)];
-    [self.tableView addGestureRecognizer:frade];
+    [self.view addGestureRecognizer:frade];
     
+    [[ToolSingleTon sharedManager] getGoldPrice];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];

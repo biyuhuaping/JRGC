@@ -57,7 +57,8 @@
             [self setZxAuthorization:[propertyValue boolValue]];
         }
         else if ([key isEqualToString:@"prdLabelsList"]) {
-            NSArray *proLabelArr = [dataSource objectSafeArrayForKey:key];
+            NSArray *proLabelArr = [dataSource  objectSafeDictionaryForKey:key];
+            
             if (proLabelArr.count > 0) {
                 NSMutableArray *temp = [NSMutableArray new];
                 for (NSDictionary *dict in proLabelArr) {
