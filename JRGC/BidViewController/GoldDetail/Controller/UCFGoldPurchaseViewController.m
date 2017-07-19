@@ -56,8 +56,8 @@
     _prdLabelsList = [[_dataDic objectSafeDictionaryForKey:@"nmPrdClaimInfo"] objectSafeArrayForKey:@"prdLabelsList"];
 //    [[ToolSingleTon sharedManager] getGoldPrice];
 //    self.tableView.contentInset =  UIEdgeInsetsMake(10, 0, 0, 0);
-    UITapGestureRecognizer *frade = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardDown)];
-    [self.view addGestureRecognizer:frade];
+//    UITapGestureRecognizer *frade = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardDown)];
+//    [self.view addGestureRecognizer:frade];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeGoldPrice) name:CURRENT_GOLD_PRICE object:nil];
 }

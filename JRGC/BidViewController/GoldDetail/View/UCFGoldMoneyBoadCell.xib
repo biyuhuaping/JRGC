@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13122.19" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.16"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -81,7 +81,7 @@
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="1.000克起" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KEI-IF-L4v">
                                         <rect key="frame" x="10" y="0.0" width="206" height="37"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="37" id="j9m-ie-3kK"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="37" id="j9m-ie-3kK"/>
                                         </constraints>
                                         <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -174,18 +174,12 @@
                             <constraint firstItem="stJ-74-eeJ" firstAttribute="centerY" secondItem="SLg-ej-RVc" secondAttribute="centerY" id="1K3-Ad-eW3"/>
                             <constraint firstItem="hl1-dd-UNh" firstAttribute="centerY" secondItem="SLg-ej-RVc" secondAttribute="centerY" id="GOu-yM-2Q3"/>
                             <constraint firstItem="hl1-dd-UNh" firstAttribute="leading" secondItem="SLg-ej-RVc" secondAttribute="leading" constant="101" id="NbV-5o-hul"/>
-                            <constraint firstItem="stJ-74-eeJ" firstAttribute="top" secondItem="SLg-ej-RVc" secondAttribute="top" constant="10" id="VHm-Iz-pnQ"/>
                             <constraint firstItem="stJ-74-eeJ" firstAttribute="leading" secondItem="SLg-ej-RVc" secondAttribute="leading" constant="15" id="p4H-hM-see"/>
                             <constraint firstAttribute="height" constant="44" id="p7Z-xp-BCF"/>
                             <constraint firstAttribute="bottom" secondItem="TbI-44-4zb" secondAttribute="bottom" id="ptS-wT-YEN"/>
                             <constraint firstItem="TbI-44-4zb" firstAttribute="leading" secondItem="SLg-ej-RVc" secondAttribute="leading" constant="15" id="qyH-Qi-iVB"/>
                             <constraint firstAttribute="trailing" secondItem="TbI-44-4zb" secondAttribute="trailing" id="s2n-Gt-2KO"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="VHm-Iz-pnQ"/>
-                            </mask>
-                        </variation>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vI6-rn-Jgv">
                         <rect key="frame" x="0.0" y="132" width="320" height="44"/>
@@ -363,7 +357,7 @@
                 <outlet property="goldSwitch" destination="1XO-EE-vhq" id="htV-T6-XQ0"/>
                 <outlet property="moneyTextField" destination="KEI-IF-L4v" id="hPW-rP-DVC"/>
             </connections>
-            <point key="canvasLocation" x="-354" y="-36"/>
+            <point key="canvasLocation" x="-302" y="-36"/>
         </tableViewCell>
     </objects>
     <resources>
