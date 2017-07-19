@@ -34,8 +34,11 @@
                                 <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已结算" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="clo-bG-jxs">
-                                <rect key="frame" x="253" y="8" width="52" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已结算" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="clo-bG-jxs">
+                                <rect key="frame" x="250" y="8" width="55" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="55" id="GUx-AK-42R"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.2901960784" green="0.63137254899999995" blue="0.97647058819999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -51,6 +54,7 @@
                         <color key="backgroundColor" red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="clo-bG-jxs" secondAttribute="trailing" constant="15" id="14v-3m-dzQ"/>
+                            <constraint firstItem="clo-bG-jxs" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="bd6-5z-WMp" secondAttribute="trailing" constant="5" id="Ft9-Ss-h3l"/>
                             <constraint firstAttribute="height" constant="37" id="IGp-yf-ags"/>
                             <constraint firstItem="clo-bG-jxs" firstAttribute="centerY" secondItem="pV7-32-P0T" secondAttribute="centerY" id="JYs-cV-wF9"/>
                             <constraint firstItem="7bg-SD-9Ey" firstAttribute="top" secondItem="pV7-32-P0T" secondAttribute="top" id="Plt-gx-0ei"/>
@@ -310,7 +314,7 @@
                 <outlet property="purchaseGoldAmountLabel" destination="KyL-Kd-2GA" id="kJb-bz-iIe"/>
                 <outlet property="startDateLabel" destination="GsK-cF-Q7h" id="SdI-My-nOe"/>
             </connections>
-            <point key="canvasLocation" x="201" y="24"/>
+            <point key="canvasLocation" x="355" y="88"/>
         </tableViewCell>
     </objects>
 </document>

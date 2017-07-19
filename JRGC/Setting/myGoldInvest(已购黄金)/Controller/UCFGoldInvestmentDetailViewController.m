@@ -13,7 +13,9 @@
 #import "UCFGoldDetailViewController.h"
 @interface UCFGoldInvestmentDetailViewController ()<UITableViewDataSource,UITableViewDelegate,UCFGoldInvestDetailCellDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
-
+@property (nonatomic,strong)NSDictionary *dataDict;
+@property (nonatomic,strong)NSArray *dataDetailArray;
+//@property (strong, nonatomic) NSDictionary *tableView;
 @end
 
 @implementation UCFGoldInvestmentDetailViewController
@@ -22,6 +24,7 @@
     [super viewDidLoad];
     [self addLeftButton];
     baseTitleLabel.text = @"已购详情";
+    [self getGoldInvestmentDetailDataHTTPRequst];
 //    self.tableView.contentInset =  UIEdgeInsetsMake(10, 0, 0, 0);
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     // Do any additional setup after loading the view from its nib.
@@ -49,7 +52,7 @@
             break;
         case 3:
         {
-             return 1;
+             return self.dataDetailArray.count + 1;
         }
             break;
             
@@ -80,10 +83,13 @@
             break;
         case 3:
         {
-            return 118;
+            if (indexPath.row == 0) {
+                return 64;
+            }else{
+                return 27;
+            }
         }
             break;
-            
         default:
         {
             return 0;
@@ -119,6 +125,7 @@
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
             cell.delegate = self;
+            cell.dataDict = self.dataDict;
             return cell;
         }
             break;
@@ -130,6 +137,7 @@
                 cell = [[[NSBundle mainBundle]loadNibNamed:@"UCFGoldInvestDetailCell" owner:nil options:nil] objectAtIndex:1];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
+            cell.dataDict = self.dataDict;
             return cell;
         }
             break;
@@ -166,13 +174,32 @@
             break;
         case 3:
         {
-            static NSString *cellId = @"UCFGoldInvestDetailFourCell";
-            UCFGoldInvestDetailFourCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
-            if (!cell) {
-                cell = [[[NSBundle mainBundle]loadNibNamed:@"UCFGoldInvestDetailCell" owner:nil options:nil] lastObject];
-                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            if (indexPath.row == 0) {
+                static NSString *cellId = @"UCFGoldInvestDetailFourCell";
+                UCFGoldInvestDetailFourCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+                if (!cell) {
+                    cell = [[[NSBundle mainBundle]loadNibNamed:@"UCFGoldInvestDetailCell" owner:nil options:nil] objectAtIndex:2];
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                }
+                cell.paymentType.text = [self.dataDict objectSafeForKey:@"paymentType"];
+                return cell;
+            }else{
+                
+                
+                static NSString *cellId = @"UCFGoldInvestDetailFiveCell";
+                UCFGoldInvestDetailFiveCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+                if (!cell) {
+                    cell = [[[NSBundle mainBundle]loadNibNamed:@"UCFGoldInvestDetailCell" owner:nil options:nil] lastObject];
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                }
+                
+                if (indexPath.row -1 < self.dataDetailArray.count)
+                {
+                    cell.dataDict = [self.dataDetailArray objectAtIndex:indexPath.row - 1];
+                }
+                return cell;
             }
-            return cell;
+           
         }
             break;
             
@@ -188,10 +215,68 @@
 -(void)gotoGoldDetialVC
 {
     
-    UCFGoldDetailViewController *goldDetalVC  = [[UCFGoldDetailViewController alloc]initWithNibName:@"UCFGoldDetailViewController" bundle:nil];
-    [self.navigationController pushViewController:goldDetalVC animated:YES];
+    NSString *nmProClaimIdStr = [self.dataDict objectSafeForKey:@"nmPrdClaimId"];
     
+    NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId",nmProClaimIdStr, @"nmPrdClaimId",nil];
+    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagGetGoldPrdClaimDetail owner:self signature:YES Type:SelectAccoutDefault];
 }
+-(void)getGoldInvestmentDetailDataHTTPRequst
+{
+    
+    
+    [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":[UserInfoSingle sharedManager].userId, @"orderId":self.orderId, } tag:kSXTagGetGoldTradeDetail owner:self signature:YES Type:self.accoutType];
+}
+//开始请求
+- (void)beginPost:(kSXTag)tag
+{
+    //    [GiFHUD show];
+}
+
+//请求成功及结果
+- (void)endPost:(id)result tag:(NSNumber *)tag
+{
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    NSMutableDictionary *dic = [result objectFromJSONString];
+    //    DBLOG(@"新用户开户：%@",data);
+    
+    BOOL ret = [dic[@"ret"] boolValue];
+    if (tag.intValue == kSXTagGetGoldTradeDetail) {
+        if (ret)
+        {
+            self.dataDict = [[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"result"];
+            
+            self.dataDetailArray = [self.dataDict objectSafeArrayForKey:@"refunddetail"];
+            [self.tableView reloadData];
+        }else {
+            [AuxiliaryFunc showToastMessage:dic[@"message"] withView:self.view];
+        }
+    } else if (tag.integerValue == kSXTagGetGoldPrdClaimDetail){
+        
+        NSMutableDictionary *dic = [result objectFromJSONString];
+        NSString *rsttext = dic[@"message"];
+        NSDictionary *dataDict = [dic objectSafeDictionaryForKey:@"data"];
+        if ( [dic[@"ret"] boolValue]) {
+            UCFGoldDetailViewController*goldDetailVC = [[UCFGoldDetailViewController alloc]initWithNibName:@"UCFGoldDetailViewController" bundle:nil];
+            goldDetailVC.dataDict = dataDict;
+            [self.navigationController pushViewController:goldDetailVC  animated:YES];
+        }
+        else
+        {
+            [AuxiliaryFunc showAlertViewWithMessage:rsttext];
+        }
+    }
+
+
+}
+
+//请求失败
+- (void)errorPost:(NSError*)err tag:(NSNumber*)tag
+{
+    [AuxiliaryFunc showToastMessage:err.userInfo[@"NSLocalizedDescription"] withView:self.view];
+    //    [MBProgressHUD displayHudError:err.userInfo[@"NSLocalizedDescription"]];
+    //    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

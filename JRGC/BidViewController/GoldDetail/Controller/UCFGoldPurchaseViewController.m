@@ -54,13 +54,60 @@
     self.goldModel = [UCFGoldModel goldModelWithDict:[_dataDic objectSafeDictionaryForKey:@"nmPrdClaimInfo"]];
     
     _prdLabelsList = [[_dataDic objectSafeDictionaryForKey:@"nmPrdClaimInfo"] objectSafeArrayForKey:@"prdLabelsList"];
-//    [[ToolSingleTon sharedManager] getGoldPrice];
+    [[ToolSingleTon sharedManager] getGoldPrice];
 //    self.tableView.contentInset =  UIEdgeInsetsMake(10, 0, 0, 0);
     UITapGestureRecognizer *frade = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardDown)];
-    [self.view addGestureRecognizer:frade];
+    [self.tableView addGestureRecognizer:frade];
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+#ifdef __IPHONE_5_0
+    float version = [[[UIDevice currentDevice] systemVersion] floatValue];
+    if (version >= 5.0) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillChangeFrameNotification object:nil];
+    }
+#endif
+
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeGoldPrice) name:CURRENT_GOLD_PRICE object:nil];
 }
+#pragma mark - 监听键盘
+- (void)keyboardWillShow:(NSNotification *)notification {
+    NSDictionary *userInfo = [notification userInfo];
+    NSValue* aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+    CGRect keyboardRect = [aValue CGRectValue];
+    NSValue *animationDurationValue = [userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
+    NSTimeInterval animationDuration;
+    [animationDurationValue getValue:&animationDuration];
+    [self moveInputBarWithKeyboardHeight:keyboardRect.size.height withDuration:animationDuration];
+}
+- (void)keyboardWillHide:(NSNotification *)notification {
+    NSDictionary* userInfo = [notification userInfo];
+    NSValue *animationDurationValue = [userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
+    NSTimeInterval animationDuration;
+    [animationDurationValue getValue:&animationDuration];
+    [self moveInputBarWithKeyboardHeight:0 withDuration:animationDuration];
+}
+
+#pragma mark - inputBarDelegate
+-(void)moveInputBarWithKeyboardHeight:(CGFloat)height withDuration:(NSTimeInterval)time
+{
+    if (height == 0)
+    {
+        self.tableView.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight - NavigationBarHeight - 57);
+    }
+    else
+    {
+        CGRect viewFrame = CGRectMake(0, 0, ScreenWidth, ScreenHeight - NavigationBarHeight - 57);
+        viewFrame.size.height -= height;
+        viewFrame.size.height += 57;
+        if (viewFrame.size.height != self.tableView.frame.size.height) {
+            self.tableView.frame = viewFrame;
+        }
+    }
+}
+
 -(void)changeGoldPrice
 {
     
@@ -371,7 +418,6 @@
         if (cell == nil) {
             cell = [[[NSBundle mainBundle]loadNibNamed:@"SubInvestmentCell" owner:self options:nil] firstObject];
         }
-//        InvestmentItemInfo *info =  self.bidArray[0];
         cell.accoutType = SelectAccoutTypeGold;
         [cell setGoldInvestItemInfo:self.goldModel];
         self.goldPrice = [ToolSingleTon sharedManager].readTimePrice;
@@ -443,10 +489,10 @@
     }
     NZLabel *label1 = [[NZLabel alloc] init];
     label1.font = [UIFont systemFontOfSize:12.0f];
-    CGSize size = [Common getStrHeightWithStr:totalStr AndStrFont:12 AndWidth:ScreenWidth- 23 -15 AndlineSpacing:1.0f];
+    CGSize size = [Common getStrHeightWithStr:totalStr AndStrFont:13 AndWidth:ScreenWidth- 23 -15 AndlineSpacing:1.0f];
     label1.numberOfLines = 0;
     label1.frame = CGRectMake(23, CGRectGetMaxY(firstLabel.frame)+10, ScreenWidth-23 - 15, size.height);
-    NSDictionary *dic = [Common getParagraphStyleDictWithStrFont:12 WithlineSpacing:1.0f];
+    NSDictionary *dic = [Common getParagraphStyleDictWithStrFont:13 WithlineSpacing:1.0f];
     label1.attributedText = [NSString getNSAttributedString:totalStr labelDict:dic];
     label1.userInteractionEnabled = YES;
     label1.textColor = UIColorWithRGB(0x999999);
@@ -461,7 +507,7 @@
     [footView addSubview:label1];
     
     UIImageView * imageView2 = [[UIImageView alloc] init];
-    imageView2.frame = CGRectMake(CGRectGetMinX(label1.frame) - 7, CGRectGetMinY(label1.frame) + 4, 5, 5);
+    imageView2.frame = CGRectMake(CGRectGetMinX(label1.frame) - 7, CGRectGetMinY(label1.frame) + 6, 5, 5);
     imageView2.image = [UIImage imageNamed:@"point.png"];
     [footView addSubview:imageView2];
     return footView;
@@ -496,7 +542,7 @@
 -(void)showGoldCalculatorView
 {
     [self.view endEditing:YES];
-    UCFGoldMoneyBoadCell *cell = (UCFGoldMoneyBoadCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:1]];
+    UCFGoldMoneyBoadCell *cell = (UCFGoldMoneyBoadCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
 //    NSString *investMoney = cell.inputMoneyTextFieldLable.text;
 //    if (cell.inputMoneyTextFieldLable.text.length == 0 || [cell.inputMoneyTextFieldLable.text isEqualToString:@"0"] || [cell.inputMoneyTextFieldLable.text isEqualToString:@"0.0"] || [cell.inputMoneyTextFieldLable.text isEqualToString:@"0.00"]) {
 //        [MBProgressHUD displayHudError:[NSString stringWithFormat:@"请输入%@金额",_wJOrZxStr]];
@@ -551,10 +597,6 @@
 {
     
 }
--(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    [self.view endEditing:YES];
-    [self.tableView endEditing:YES];
-}
 -(void)keyboardDown{
     [self.view endEditing:YES];
 }
@@ -574,30 +616,11 @@
     NSString *message = [dic objectSafeForKey:@"message"];
     if (tag.intValue == kSXTagGetPurchaseGold){
        
-        if([rstcode intValue] == 1)
-        {
             UCFGoldBidSuccessViewController *goldAuthorizationVC = [[UCFGoldBidSuccessViewController alloc]initWithNibName:@"UCFGoldBidSuccessViewController" bundle:nil];
             goldAuthorizationVC.dataDict = [[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"result"];
+            goldAuthorizationVC.isPurchaseSuccess = [rstcode boolValue];
+            goldAuthorizationVC.errorMessageStr = [rstcode boolValue] ? @"":message;
             [self.navigationController pushViewController:goldAuthorizationVC  animated:YES];
-
-//            NSDictionary  *dataDict = dic[@"data"][@"tradeReq"];
-//            NSString *urlStr = dic[@"data"][@"url"];
-//            UCFPurchaseWebView *webView = [[UCFPurchaseWebView alloc]initWithNibName:@"UCFPurchaseWebView" bundle:nil];
-//            webView.url = urlStr;
-//            webView.rootVc = self.rootVc;
-//            webView.webDataDic =dataDict;
-//            webView.navTitle = @"即将跳转";
-//            webView.accoutType = self.accoutType;
-//            [self.navigationController pushViewController:webView animated:YES];
-//            
-//            NSMutableArray *navVCArray = [[NSMutableArray alloc] initWithArray:self.navigationController.viewControllers];
-//            [navVCArray removeObjectAtIndex:navVCArray.count-2];
-//            [self.navigationController setViewControllers:navVCArray animated:NO];
-        }
-        else{
-//            [self reloadMainView];
-            [AuxiliaryFunc showAlertViewWithMessage:message];
-        }
     }else if (tag.intValue == kSXTagGetGoldContractInfo){
         NSDictionary *dataDict = [[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"result"];
         if ( [dic[@"ret"] boolValue])

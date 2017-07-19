@@ -44,6 +44,11 @@
                             <state key="normal" title="立即购买">
                                 <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="2"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <action selector="gotoGoldInvestmentVC:" destination="-1" eventType="touchUpInside" id="DWm-F6-YmJ"/>
                             </connections>

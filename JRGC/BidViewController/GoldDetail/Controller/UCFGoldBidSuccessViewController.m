@@ -14,7 +14,7 @@
 #import "UCFSettingItem.h"
 @interface UCFGoldBidSuccessViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (assign ,nonatomic) BOOL isPurchaseSuccess;//是否购买成功
+
 @property (strong,nonatomic) NSArray *dataArray;
 @end
 
@@ -33,12 +33,9 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
     self.fd_interactivePopDisabled = YES;
-    self.isPurchaseSuccess = YES;
-    self.tableView.tableHeaderView = [self createHeaderView];
-    self.tableView.tableFooterView = [self cretateFooterView];
+//    self.tableView.tableHeaderView = [self createHeaderView];
+//    self.tableView.tableFooterView = [self cretateFooterView];
     self.tableView.separatorColor = UIColorWithRGB(0xe3e5ea);
     self.tableView.separatorInset = UIEdgeInsetsMake(0, 15, 0, 0);
     [self infoDataArray];
@@ -50,7 +47,7 @@
     NSString *purchaseGoldAmountStr = [NSString stringWithFormat:@"%@克",[_dataDict objectSafeForKey:@"purchaseGoldAmount"]];
     UCFSettingItem *item2 = [UCFSettingItem itemWithTitle:@"买入克重" withSubtitle:purchaseGoldAmountStr];
      NSString *dealGoldPriceStr = [NSString stringWithFormat:@"¥%@",[_dataDict objectSafeForKey:@"dealGoldPrice"]];
-    UCFSettingItem *item3 = [UCFSettingItem itemWithTitle:@"成交金价" withSubtitle:dealGoldPriceStr];
+    UCFSettingItem *item3 = [UCFSettingItem itemWithTitle:@"成交金价(每克)" withSubtitle:dealGoldPriceStr];
      NSString *poundageStr =[NSString stringWithFormat:@"¥%@", [_dataDict objectSafeForKey:@"poundage"]];
     UCFSettingItem *item4 = [UCFSettingItem itemWithTitle:@"手续费" withSubtitle:poundageStr];
      NSString *purchaseMoneyStr = [NSString stringWithFormat:@"¥%@",[_dataDict objectSafeForKey:@"purchaseMoney"]];
@@ -70,7 +67,6 @@
         headerView.headerImageView.image = [UIImage imageNamed:@"gold_FailurePurchase_icon"];
         headerView.headerTitleLabel.text = @"购买失败";
     }
-   
     return headerView;
 }
 - (UIView *)cretateFooterView
@@ -105,8 +101,24 @@
         [self.navigationController popViewControllerAnimated:YES];
     }
 }
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+-(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    return [self createHeaderView];
+}
+-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    return [self cretateFooterView];
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 15+37;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 207.5;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     return 44.0f;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -138,7 +150,7 @@
         errorLabel.font = [UIFont systemFontOfSize:14];
         errorLabel.textAlignment = NSTextAlignmentCenter;
         [cell.contentView addSubview:errorLabel];
-        errorLabel.text = @"银行卡余额不足";//购买错误信息
+        errorLabel.text = self.errorMessageStr;//购买错误信息
     }
 
     return cell;

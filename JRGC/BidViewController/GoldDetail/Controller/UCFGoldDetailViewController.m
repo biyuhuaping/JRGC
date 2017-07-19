@@ -1052,9 +1052,6 @@
         {
             [AuxiliaryFunc showAlertViewWithMessage:rsttext];
         }
-        
-       
-        
     }
 }
 - (void)errorPost:(NSError *)err tag:(NSNumber *)tag
