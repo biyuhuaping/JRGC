@@ -44,6 +44,7 @@
         calendar.appearance.eventOffset = CGPointMake(0, -7);
         calendar.appearance.weekdayTextColor = UIColorWithRGB(0x333333);
         calendar.appearance.weekdayFont = [UIFont systemFontOfSize:12];
+        calendar.appearance.todayColor = UIColorWithRGB(0xfd4d4c);
         calendar.today = nil; // Hide the today circle
         [calendar registerClass:[DIYCalendarCell class] forCellReuseIdentifier:@"cell"];
         
