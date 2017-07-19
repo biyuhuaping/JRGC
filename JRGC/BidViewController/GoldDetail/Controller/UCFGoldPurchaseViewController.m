@@ -12,7 +12,7 @@
 #import "UCFGoldBidSuccessViewController.h"
 #import "UCFGoldCalculatorView.h"
 #import "AppDelegate.h"
-#import "SubInvestmentCell.h"
+#import "UCFGoldInvestmentCell.h"
 #import "UILabel+Misc.h"
 #import "UCFGoldModel.h"
 #import "ToolSingleTon.h"
@@ -55,7 +55,7 @@
     
     _prdLabelsList = [[_dataDic objectSafeDictionaryForKey:@"nmPrdClaimInfo"] objectSafeArrayForKey:@"prdLabelsList"];
     [[ToolSingleTon sharedManager] getGoldPrice];
-//    self.tableView.contentInset =  UIEdgeInsetsMake(10, 0, 0, 0);
+    self.tableView.contentInset =  UIEdgeInsetsMake(10, 0, 0, 0);
     UITapGestureRecognizer *frade = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardDown)];
     [self.tableView addGestureRecognizer:frade];
     
@@ -111,7 +111,8 @@
 -(void)changeGoldPrice
 {
     
-    NSLog(@"changeGoldPrice");
+    self.goldPrice = [ToolSingleTon sharedManager].readTimePrice;
+    [self.tableView  reloadData];
 }
 
 
@@ -307,7 +308,7 @@
         case 0:
         {
             if (indexPath.row == 0) {
-                return 109;
+                return 90;
             }
             else
             {
@@ -413,24 +414,23 @@
     UITableViewCell *cell = [tableView  dequeueReusableCellWithIdentifier:cellId];
     if (indexPath.section == 0) {
       
-        static NSString *cellStr1 = @"cell1";
-        SubInvestmentCell *cell = [tableView dequeueReusableCellWithIdentifier:cellStr1];
+        static NSString *cellStr1 = @"UCFGoldInvestmentCell";
+        UCFGoldInvestmentCell *cell = [tableView dequeueReusableCellWithIdentifier:cellStr1];
         if (cell == nil) {
-            cell = [[[NSBundle mainBundle]loadNibNamed:@"SubInvestmentCell" owner:self options:nil] firstObject];
+            cell = [[[NSBundle mainBundle]loadNibNamed:@"UCFGoldInvestmentCell" owner:self options:nil] firstObject];
         }
-        cell.accoutType = SelectAccoutTypeGold;
+//        cell.accoutType = SelectAccoutTypeGold;
         [cell setGoldInvestItemInfo:self.goldModel];
-        self.goldPrice = [ToolSingleTon sharedManager].readTimePrice;
-        cell.repayPeriodLab.text = [NSString stringWithFormat:@"实时金价(每克)%.3f",[ToolSingleTon sharedManager].readTimePrice]; //投资期限
-        id prdLabelsList = [_dataDic objectForKey:@"prdLabelsList"];
-        if (![prdLabelsList isKindOfClass:[NSNull class]]) {
-            for (NSDictionary *dic in prdLabelsList) {
-                NSString *labelPriority = dic[@"labelPriority"];
-                if ([labelPriority isEqual:@"1"]) {
-                    cell.angleView.angleString = dic[@"labelName"];
-                }
-            }
-        }
+        cell.realGoldPriceLab.text = [NSString stringWithFormat:@"实时金价(每克)¥%.2f",[ToolSingleTon sharedManager].readTimePrice]; //
+//        id prdLabelsList = [_dataDic objectForKey:@"prdLabelsList"];
+//        if (![prdLabelsList isKindOfClass:[NSNull class]]) {
+//            for (NSDictionary *dic in prdLabelsList) {
+//                NSString *labelPriority = dic[@"labelPriority"];
+//                if ([labelPriority isEqual:@"1"]) {
+//                    cell.angleView.angleString = dic[@"labelName"];
+//                }
+//            }
+//        }
         return cell;
     }else if (indexPath.section == 1){
         static NSString *cellId = @"UCFGoldMoneyBoadCell";

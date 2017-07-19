@@ -68,6 +68,7 @@
     _openStatus = [[[NSUserDefaults standardUserDefaults] valueForKey:OPENSTATUS] integerValue];
     self.companyAgent = [[[NSUserDefaults standardUserDefaults] valueForKey:COMPANYAGENT] boolValue];
     self.enjoyOpenStatus = [[[NSUserDefaults standardUserDefaults] valueForKey:EnjoyState] integerValue];
+    self.goldAuthorization = [[[NSUserDefaults standardUserDefaults]valueForKey:GOldAUTHORIZATION] boolValue];
 //    self.userLevel = [[NSUserDefaults standardUserDefaults] valueForKey:USER_LEVEL];
 }
 //存储用户信息
@@ -116,6 +117,7 @@
     [[NSUserDefaults standardUserDefaults] setValue:nil forKey:OPENSTATUS];
     [[NSUserDefaults standardUserDefaults] setValue:nil forKey:COMPANYAGENT];
     [[NSUserDefaults standardUserDefaults] setValue:nil forKey:USER_LEVEL];
+    [[NSUserDefaults standardUserDefaults] setValue:nil forKey:GOldAUTHORIZATION];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     //  GrowingIO删除字段

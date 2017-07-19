@@ -57,7 +57,7 @@
 }
 -(UIView *)createHeaderView{
     UCFGoldBidSuccessHeaderView *headerView = [[[NSBundle mainBundle]loadNibNamed:@"UCFGoldBidSuccessHeaderView" owner:nil options:nil]firstObject];
-    headerView.frame =  CGRectMake(0, 0, ScreenWidth, 207.5);
+    headerView.frame =  CGRectMake(0, 0, ScreenWidth, 207);
     headerView.backgroundColor = [UIColor clearColor];
     
     if(_isPurchaseSuccess){
@@ -115,7 +115,7 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 207.5;
+    return 207;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
