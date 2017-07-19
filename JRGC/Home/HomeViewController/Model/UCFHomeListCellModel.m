@@ -9,7 +9,7 @@
 #import "UCFHomeListCellModel.h"
 #import <objc/runtime.h>
 #import "UCFProjectLabel.h"
-
+#import "UIDic+Safe.h"
 @implementation UCFHomeListCellModel
 + (instancetype)homeListCellWithDict:(NSDictionary *)dict
 {
@@ -57,7 +57,7 @@
             [self setZxAuthorization:[propertyValue boolValue]];
         }
         else if ([key isEqualToString:@"prdLabelsList"]) {
-            NSArray *proLabelArr = [dataSource valueForKey:key];
+            NSArray *proLabelArr = [dataSource  objectSafeDictionaryForKey:key];
             if (proLabelArr.count > 0) {
                 NSMutableArray *temp = [NSMutableArray new];
                 for (NSDictionary *dict in proLabelArr) {
