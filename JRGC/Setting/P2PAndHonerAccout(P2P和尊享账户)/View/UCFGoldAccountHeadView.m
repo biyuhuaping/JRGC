@@ -52,6 +52,12 @@
 }
 - (void)changeTransState
 {
+    //如果在此时在手动点击略过
+    if (self.updateGoldPriceBtn.userInteractionEnabled == NO) {
+        return;
+    } else {
+        [self startAnimation];
+    }
     dispatch_queue_t queue= dispatch_get_main_queue();
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), queue, ^{
         DBLog(@"主队列--延迟执行------%@",[NSThread currentThread]);
@@ -66,12 +72,18 @@
 {
     self.realtimeGoldPrice.text = [NSString stringWithFormat:@"￥%.2f",[ToolSingleTon sharedManager].readTimePrice];
     double floatValue1 = ([ToolSingleTon sharedManager].readTimePrice - [[_tmpData objectSafeForKey:@"dealPrice"] doubleValue]) * [[_tmpData objectSafeForKey:@"holdGoldAmount"] doubleValue];
-    if (floatValue1 >= 0) {
+    NSString *floatValueStr = [NSString stringWithFormat:@"%.2f",floatValue1];
+    NSComparisonResult comparResult = [floatValueStr compare:@"0.00" options:NSNumericSearch];
+    
+    if (comparResult == NSOrderedDescending) {
         self.floatLabel.textColor = UIColorWithRGB(0xfd4d4c);
         self.floatLabel.text = [NSString stringWithFormat:@"+￥%.2f",floatValue1];
+    } else if (comparResult == NSOrderedSame) {
+        self.floatLabel.textColor = UIColorWithRGB(0x555555);
+        self.floatLabel.text = [NSString stringWithFormat:@"￥%.2f",floatValue1];
     } else {
         self.floatLabel.textColor = UIColorWithRGB(0x4db94f);
-        self.floatLabel.text = [NSString stringWithFormat:@"-￥%.2f",floatValue1];
+        self.floatLabel.text = [NSString stringWithFormat:@"-￥%.2f",fabs(floatValue1)];
     }
 }
 - (void)endAnimation
@@ -92,11 +104,9 @@
 
 }
 - (IBAction)recoverBtnClicked:(UIButton *)sender {
-    MjAlertView *alertView = [[MjAlertView alloc] initGoldAlertTitle:@"总待收黄金" Message:@"总待收黄金=已购黄金+到期黄金" delegate:self];
+    MjAlertView *alertView = [[MjAlertView alloc] initGoldAlertTitle:@"总待收黄金" Message:@"总待收黄金=已购黄金+到期赠金" delegate:self];
     [alertView show];
 }
-
-
 - (void)layoutSubviews
 {
     self.floatGoldSpace.constant = (ScreenWidth/320.0f) * 98.0f;
@@ -116,10 +126,13 @@
     self.totalRecoveryGold.text = [NSString stringWithFormat:@"%@克",[dataDic objectSafeForKey:@"collectGoldAmount"]];
     self.dealGoldPrice.text =  [NSString stringWithFormat:@"￥%@",[dataDic objectSafeForKey:@"dealPrice"]];
     double floatValue1 = ([ToolSingleTon sharedManager].readTimePrice - [[dataDic objectSafeForKey:@"dealPrice"] doubleValue]) * [[dataDic objectSafeForKey:@"holdGoldAmount"] doubleValue];
-    if (floatValue1 > 0) {
+    NSString *floatValueStr = [NSString stringWithFormat:@"%.2f",floatValue1];
+    NSComparisonResult comparResult = [floatValueStr compare:@"0.00" options:NSNumericSearch];
+
+    if (comparResult == NSOrderedDescending) {
         self.floatLabel.textColor = UIColorWithRGB(0xfd4d4c);
         self.floatLabel.text = [NSString stringWithFormat:@"+￥%.2f",floatValue1];
-    } else if (floatValue1 == 0) {
+    } else if (comparResult == NSOrderedSame) {
         self.floatLabel.textColor = UIColorWithRGB(0x555555);
         self.floatLabel.text = [NSString stringWithFormat:@"￥%.2f",floatValue1];
     } else {
@@ -143,7 +156,6 @@
 }
 - (void)dealloc
 {
-//    [[ToolSingleTon sharedManager] removeObserver:self forKeyPath:@"readTimePrice"];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 @end

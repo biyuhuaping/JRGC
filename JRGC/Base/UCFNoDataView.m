@@ -53,7 +53,7 @@
     iconView.image = [UIImage imageNamed:imageStr];
     [centerView addSubview:iconView];
     UIColor *showColor = isGold ? UIColorWithRGB(0xe3a257) : UIColorWithRGB(0x8591b3);
-    UILabel *errorLbl = [UILabel labelWithFrame:CGRectMake(0, CGRectGetMaxY(iconView.frame) + 15, 112, 14) text:_errorTitle textColor:showColor font:[UIFont systemFontOfSize:14]];
+    UILabel *errorLbl = [UILabel labelWithFrame:CGRectMake(-20, CGRectGetMaxY(iconView.frame) + 15, 152, 14) text:_errorTitle textColor:showColor font:[UIFont systemFontOfSize:14]];
     [centerView addSubview:errorLbl];
     
     if (isGold && ![_btnStr isEqualToString:@""]) {
