@@ -789,7 +789,12 @@
         }
         UCFWebViewJavascriptBridgeMallDetails *web = [[UCFWebViewJavascriptBridgeMallDetails alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMallDetails" bundle:nil];
         if ([self isKindOfClass:[UCFDiscoveryViewController class]]) {
-            web.isHidenNavigationbar = NO;
+            
+            if ([[dic objectSafeForKey:@"value"] isEqualToString:@"https://m.dougemall.com"]) {
+                web.isHidenNavigationbar = NO;
+            } else {
+                web.isHidenNavigationbar = YES;
+            }
         }
         web.url = [dic objectSafeForKey:@"value"];
         [self.navigationController pushViewController:web animated:YES];
