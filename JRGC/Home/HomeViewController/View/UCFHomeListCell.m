@@ -117,13 +117,23 @@
         else {
             self.image4W.constant = 0;
         }
-        float progress = [presenter.item.completeLoan floatValue]/[presenter.item.borrowAmount floatValue];
-        if (progress < 0 || progress > 1) {
-            progress = 1;
+        float progress;
+        if ([presenter.item.type isEqualToString:@"3"]) {
+            progress = [presenter.item.completeLoan floatValue]/[presenter.item.borrowAmount floatValue];
+            if (progress < 0 || progress > 1) {
+                progress = 1;
+            }
+            else
+                self.circleProgressView.progress = progress;
         }
-        else
-            self.circleProgressView.progress = progress;
-        
+        else {
+            progress = [presenter.item.completeLoan floatValue]/[presenter.item.borrowAmount floatValue];
+            if (progress < 0 || progress > 1) {
+                progress = 1;
+            }
+            else
+                self.circleProgressView.progress = progress;
+        }
         NSInteger status = [presenter.item.status integerValue];
         //控制进度视图显示
         if (status < 3) {
@@ -139,6 +149,7 @@
             if (status==2) {
                 self.circleProgressView.progressText = @"售罄";
                 self.circleProgressView.textColor = UIColorWithRGB(0x909dae);
+                self.circleProgressView.pathFillColor = UIColorWithRGB(0xe2e2e2);
             }
             else {
                 self.circleProgressView.textColor = UIColorWithRGB(0x555555);
@@ -534,6 +545,7 @@
     if (status == 2) {
         self.circleProgressView.progressText = @"售罄";
         self.circleProgressView.textColor = UIColorWithRGB(0x909dae);
+        self.circleProgressView.pathFillColor = UIColorWithRGB(0xe2e2e2);
     }
     else if (status == 1) {
         self.circleProgressView.textColor = UIColorWithRGB(0x555555);
