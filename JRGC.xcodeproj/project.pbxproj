@@ -5617,15 +5617,15 @@
 		83FF20531F0BAF0500F21119 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				A8FF32E11F1666A600066A80 /* UCFGoldBidSuccessViewController.h */,
-				A8FF32E31F1666A600066A80 /* UCFGoldBidSuccessViewController.m */,
-				A8FF32E21F1666A600066A80 /* UCFGoldBidSuccessViewController.xib */,
 				83FF20541F0BAF0500F21119 /* UCFGoldDetailViewController.h */,
 				83FF20551F0BAF0500F21119 /* UCFGoldDetailViewController.m */,
 				83FF20561F0BAF0500F21119 /* UCFGoldDetailViewController.xib */,
 				83974FD61F14AC4300C2252F /* UCFGoldPurchaseViewController.h */,
 				83974FD71F14AC4300C2252F /* UCFGoldPurchaseViewController.m */,
 				83974FD81F14AC4300C2252F /* UCFGoldPurchaseViewController.xib */,
+				A8FF32E11F1666A600066A80 /* UCFGoldBidSuccessViewController.h */,
+				A8FF32E31F1666A600066A80 /* UCFGoldBidSuccessViewController.m */,
+				A8FF32E21F1666A600066A80 /* UCFGoldBidSuccessViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";

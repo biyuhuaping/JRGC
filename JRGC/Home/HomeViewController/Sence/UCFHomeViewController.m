@@ -341,8 +341,6 @@
             self.accoutType = SelectAccoutTypeGold;
             break;
     }
-    self.accoutType = [model.type intValue] == 1 ? SelectAccoutTypeP2P:SelectAccoutTypeHoner;
-    
     NSString *noPermissionTitleStr = self.accoutType == SelectAccoutTypeP2P ? @"目前标的详情只对出借人开放":@"目前标的详情只对认购人开放";
     if (type == UCFHomeListTypeDetail) {
         if (model.moedelType == UCFHomeListCellModelTypeDefault) {
