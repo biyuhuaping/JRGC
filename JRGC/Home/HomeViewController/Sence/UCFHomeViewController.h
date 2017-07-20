@@ -7,7 +7,8 @@
 //
 
 #import "UCFBaseViewController.h"
+#import "UCFHomeListViewController.h"
 
 @interface UCFHomeViewController : UCFBaseViewController
-
+- (void)skipToOtherPage:(UCFHomeListType)type;
 @end

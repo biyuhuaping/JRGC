@@ -21,8 +21,7 @@
 #import "UserInfoSingle.h"
 #import "HSHelper.h"
 #import "UCFExtractGoldViewController.h"
-
-
+#import "AppDelegate.h"
 @interface UCFGoldAccountViewController ()<UITableViewDelegate,UITableViewDataSource, GoldAccountFirstCellDeleage>
 @property (weak, nonatomic) IBOutlet UITableView *baseTableView;
 @property (weak, nonatomic) IBOutlet UIButton *buyGoldBtn;
@@ -227,7 +226,8 @@
     NSString *title = [sender titleForState:UIControlStateNormal];
     NSString *showStr = @"";
     if ([title isEqualToString:@"买金"]) {
-        [self.navigationController popViewControllerAnimated:YES];
+        [self.navigationController popToRootViewControllerAnimated:NO];
+        [_homeView skipToOtherPage:UCFHomeListTypeGlodMore];
         return;
     } else if ([title isEqualToString:@"变现"]) {
         showStr = @"暂时没有可变现的黄金";
