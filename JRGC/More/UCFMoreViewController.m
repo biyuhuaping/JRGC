@@ -55,14 +55,14 @@ static NSString * const kAppKey = @"23511571";
         UCFSettingItem *problemFeedback = [UCFSettingArrowItem itemWithIcon:nil title:@"问题反馈" destVcClass:nil];
         UCFSettingItem *faq = [UCFSettingArrowItem itemWithIcon:nil title:@"帮助中心" destStoryBoardStr:@"UCFMoreViewController" storyIdStr:@"faq"];
         UCFSettingItem *aboutUs = [UCFSettingArrowItem itemWithIcon:nil title:@"关于我们" destStoryBoardStr:@"UCFMoreViewController" storyIdStr:@"aboutus"];
-        UCFSettingItem *beansFamily = [UCFSettingArrowItem itemWithIcon:nil title:@"工友之家" destVcClass:[UCFWebViewJavascriptBridgeBBS class]];
+//        UCFSettingItem *beansFamily = [UCFSettingArrowItem itemWithIcon:nil title:@"工友之家" destVcClass:[UCFWebViewJavascriptBridgeBBS class]];
         UCFSettingGroup *group1 = [[UCFSettingGroup alloc] init];
-        group1.items = [[NSMutableArray alloc]initWithArray: @[contactUs, problemFeedback,faq]];
+        group1.items = [[NSMutableArray alloc]initWithArray: @[contactUs, problemFeedback,faq,aboutUs]];
         
-        UCFSettingGroup *group2 = [[UCFSettingGroup alloc] init];
-        group2.items = [[NSMutableArray alloc]initWithArray: @[beansFamily,aboutUs]];
+//        UCFSettingGroup *group2 = [[UCFSettingGroup alloc] init];
+//        group2.items = [[NSMutableArray alloc]initWithArray: @[beansFamily,aboutUs]];
         
-        _itemsData = [[NSMutableArray alloc] initWithObjects:group1,group2,nil];
+        _itemsData = [[NSMutableArray alloc] initWithObjects:group1,nil];
     }
     return _itemsData;
 }
