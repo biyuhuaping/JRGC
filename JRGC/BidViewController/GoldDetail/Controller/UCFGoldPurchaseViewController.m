@@ -32,7 +32,13 @@
 }
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic,strong)UCFGoldModel *goldModel;
+@property (nonatomic,strong)IBOutlet UIButton *goldPurchaseButton;
 @property (nonatomic,assign)double goldPrice;//黄金实时单价
+@property (nonatomic,assign)BOOL isSelectGongDouSwitch;
+
+@property (nonatomic,assign)double availableAllMoney ;
+@property (nonatomic,assign)double availableMoney ;
+@property (nonatomic,assign)double accountBean ;
 - (IBAction)gotoGoldBidSuccessVC:(id)sender;
 
 @end
@@ -55,6 +61,11 @@
     
     _prdLabelsList = [[_dataDic objectSafeDictionaryForKey:@"nmPrdClaimInfo"] objectSafeArrayForKey:@"prdLabelsList"];
     
+    
+    NSDictionary *userAccountInfoDict = [self.dataDic objectForKey:@"userAccountInfo"];
+     _availableAllMoney = [[userAccountInfoDict objectForKey:@"availableAllMoney"] doubleValue];
+     _availableMoney = [[userAccountInfoDict objectForKey:@"availableMoney"] doubleValue];
+     _accountBean = [[userAccountInfoDict objectForKey:@"accountBean"] doubleValue];
     self.tableView.contentInset =  UIEdgeInsetsMake(10, 0, 0, 0);
     UITapGestureRecognizer *frade = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardDown)];
     [self.view addGestureRecognizer:frade];
@@ -69,7 +80,6 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillChangeFrameNotification object:nil];
     }
 #endif
-
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeGoldPrice) name:CURRENT_GOLD_PRICE object:nil];
 }
@@ -423,15 +433,19 @@
 //        cell.accoutType = SelectAccoutTypeGold;
         [cell setGoldInvestItemInfo:self.goldModel];
         cell.realGoldPriceLab.text = [NSString stringWithFormat:@"实时金价(每克)¥%.2f",[ToolSingleTon sharedManager].readTimePrice]; //
-//        id prdLabelsList = [_dataDic objectForKey:@"prdLabelsList"];
-//        if (![prdLabelsList isKindOfClass:[NSNull class]]) {
-//            for (NSDictionary *dic in prdLabelsList) {
-//                NSString *labelPriority = dic[@"labelPriority"];
-//                if ([labelPriority isEqual:@"1"]) {
-//                    cell.angleView.angleString = dic[@"labelName"];
-//                }
-//            }
-//        }
+        _prdLabelsList = [[_dataDic objectSafeDictionaryForKey:@"nmPrdClaimInfo"] objectSafeArrayForKey:@"prdLabelsList"];
+        if (_prdLabelsList.count > 0) {
+            for (NSDictionary *dic in _prdLabelsList) {
+                NSString *labelPriority = dic[@"labelPriority"];
+                if ([labelPriority isEqual:@"1"]) {
+                    cell.angleGoldView.angleString = dic[@"labelName"];
+                    cell.angleGoldView.hidden = NO;
+                    break;
+                }
+            }
+        }else{
+            cell.angleGoldView.hidden = YES;
+        }
         return cell;
     }else if (indexPath.section == 1){
         static NSString *cellId = @"UCFGoldMoneyBoadCell";
@@ -441,6 +455,7 @@
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
         cell.dataDict = self.dataDic;
+        cell.goldModel  = _goldModel;
         cell.delegate = self;
          return cell;
     }else if (indexPath.section == 2){
@@ -562,7 +577,10 @@
     AppDelegate * app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     view.center = app.window.center;
     [app.window addSubview:view];
-    
+}
+-(void)clickGoldSwitch:(UISwitch *)goldSwitch
+{
+    self.isSelectGongDouSwitch = goldSwitch.on;
 }
 #pragma mark -黄金充值
 -(void)gotoGoldRechargeVC
@@ -592,15 +610,126 @@
             [helper pushOpenHSType:SelectAccoutTypeHoner Step:[UserInfoSingle sharedManager].enjoyOpenStatus nav:self.navigationController];
         }
     }
+    if (alertView.tag == 2000) {
+        if (buttonIndex == 1) {
+            [self gotoGoldRechargeVC];
+        }
+    }
 }
 #pragma mark -全投
 -(void)clickAllInvestmentBtn
 {
+    [self.view endEditing:YES];
+    UCFGoldMoneyBoadCell *cell = (UCFGoldMoneyBoadCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
+     NSDictionary *userAccountInfoDict = [self.dataDic objectForKey:@"userAccountInfo"];
+    double availableAllMoney = [[userAccountInfoDict objectForKey:@"availableAllMoney"] doubleValue];
+    double availableMoney = [[userAccountInfoDict objectForKey:@"availableMoney"] doubleValue];
     
+    double purchaseGoldCount  = 0.00;
+    
+    if (self.isSelectGongDouSwitch)
+    {
+        purchaseGoldCount = availableAllMoney /[ToolSingleTon sharedManager].readTimePrice;
+    }
+    else
+    {
+       purchaseGoldCount = availableMoney /[ToolSingleTon sharedManager].readTimePrice;
+    }
+    
+    if(purchaseGoldCount >= [self.goldModel.remainAmount doubleValue] )
+    {
+        purchaseGoldCount = [self.goldModel.remainAmount doubleValue];
+    }
+    cell.moneyTextField.text =  [NSString stringWithFormat:@"%.3lf",purchaseGoldCount];
+    
+    
+    double amountPay = [cell.moneyTextField.text doubleValue] * [ToolSingleTon sharedManager].readTimePrice;
+    cell.estimatAmountPayableLabel.text = [NSString stringWithFormat:@"¥%.2lf",amountPay];
+    
+    double periodTerm = [[self.goldModel.periodTerm substringWithRange:NSMakeRange(0, self.goldModel.periodTerm.length - 1)] doubleValue];
+    
+    double getUpWeightGold = [cell.moneyTextField.text doubleValue] *[self.goldModel.annualRate doubleValue] * periodTerm /360.0 / 100.0;
+    cell.getUpWeightGoldLabel.text = [NSString stringWithFormat:@"%.3lf克",getUpWeightGold];
+    [self.tableView reloadData];
 }
 -(void)keyboardDown{
     [self.view endEditing:YES];
 }
+- (IBAction)gotoGoldBidSuccessVC:(id)sender {
+    
+    /*
+     nmPrdClaimId	标Id	string
+     purchaseBean	使用工豆金额	string
+     purchaseGoldAmount	购买黄金克重	string
+     purchaseMoney	购买金额	string
+     userId	用户Id	string
+     workshopCode	工场码	string
+     
+     
+     */
+    
+    UCFGoldMoneyBoadCell *cell = (UCFGoldMoneyBoadCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
+    
+    double purchaseGoldAmount =  [cell.moneyTextField.text doubleValue];
+    double minPurchaseAmount  =  [self.goldModel.minPurchaseAmount doubleValue];
+    double maxPurchaseAmount  =  [self.goldModel.remainAmount doubleValue];
+    
+    if([cell.moneyTextField.text isEqualToString:@""] ){
+        [MBProgressHUD displayHudError:@"请输入购买克重"];
+        return;
+    }
+    if (purchaseGoldAmount < minPurchaseAmount) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"购买克重不可低于起投克重" delegate:self cancelButtonTitle:@"重新输入" otherButtonTitles: nil];
+        alert.tag = 1000;
+        [alert show];
+        return;
+    }
+
+    if(purchaseGoldAmount  > maxPurchaseAmount)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"不可以这么任性哟，购买克重已超过剩余可投克重了" delegate:self cancelButtonTitle:@"重新输入" otherButtonTitles: nil];
+        alert.tag = 1000;
+        [alert show];
+        return;
+    }
+    if(minPurchaseAmount > maxPurchaseAmount - purchaseGoldAmount &&  maxPurchaseAmount < minPurchaseAmount * 2 )
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"需购买剩余的全部克重" delegate:self cancelButtonTitle:@"重新输入" otherButtonTitles: nil];
+        alert.tag = 1000;
+        [alert show];
+        return;
+    }
+    if(minPurchaseAmount > maxPurchaseAmount - purchaseGoldAmount &&  maxPurchaseAmount - purchaseGoldAmount > 0)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"需保证标的剩余克重大于起投克重" delegate:self cancelButtonTitle:@"重新输入" otherButtonTitles: nil];
+        alert.tag = 1000;
+        [alert show];
+        return;
+    }
+    
+
+     double keyongMoney = self.isSelectGongDouSwitch ?  _availableAllMoney : _availableMoney;
+      double estimatAmountMoney  = [[cell.estimatAmountPayableLabel.text substringFromIndex:1] doubleValue];
+    if (keyongMoney < estimatAmountMoney) {
+       
+        double   needToRechare = estimatAmountMoney - keyongMoney;
+        NSString *showStr = [NSString stringWithFormat:@"总计购买金额¥%.2lf\n可用金额%.2lf\n另需充值金额¥%.2f",estimatAmountMoney, keyongMoney,needToRechare];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"可用金额不足" message:showStr delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"立即充值", nil];
+        alert.tag = 2000;
+        [alert show];
+        return;
+
+    }
+    
+    
+    double amountPay = [cell.moneyTextField.text doubleValue] * [ToolSingleTon sharedManager].readTimePrice;
+    NSString *purchaseGoldAmountStr = [NSString stringWithFormat:@"%.2lf",amountPay];
+    NSDictionary  *nmPrdClaimInfoDic  = [_dataDic objectSafeDictionaryForKey:@"nmPrdClaimInfo"];
+    NSString *nmPrdClaimIdStr = [nmPrdClaimInfoDic objectForKey:@"nmPrdClaimId"];
+    NSDictionary *paramDict = @{@"nmPrdClaimId": nmPrdClaimIdStr,@"purchaseBean":@"0.00",@"purchaseGoldAmount":cell.moneyTextField.text,@"purchaseMoney":purchaseGoldAmountStr,@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"workshopCode":@""};
+    [[NetworkModule sharedNetworkModule] newPostReq:paramDict tag:kSXTagGetPurchaseGold owner:self signature:YES Type:SelectAccoutTypeGold];
+}
+
 -(void)beginPost:(kSXTag)tag
 {
     
@@ -661,32 +790,4 @@
 }
 */
 
-- (IBAction)gotoGoldBidSuccessVC:(id)sender {
-    
-    /*
-     nmPrdClaimId	标Id	string
-     purchaseBean	使用工豆金额	string
-     purchaseGoldAmount	购买黄金克重	string
-     purchaseMoney	购买金额	string
-     userId	用户Id	string
-     workshopCode	工场码	string
-     
-     
-     */
-    
-    UCFGoldMoneyBoadCell *cell = (UCFGoldMoneyBoadCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
-    
-    if([cell.moneyTextField.text isEqualToString:@""] ){
-        [MBProgressHUD displayHudError:@"请输入购买克重"];
-        return;
-    }
-       double amountPay = [cell.moneyTextField.text doubleValue] * [ToolSingleTon sharedManager].readTimePrice;
-    NSString *purchaseGoldAmountStr = [NSString stringWithFormat:@"%.2lf",amountPay];
-    NSDictionary  *nmPrdClaimInfoDic  = [_dataDic objectSafeDictionaryForKey:@"nmPrdClaimInfo"];
-    NSString *nmPrdClaimIdStr = [nmPrdClaimInfoDic objectForKey:@"nmPrdClaimId"];
-    NSDictionary *paramDict = @{@"nmPrdClaimId": nmPrdClaimIdStr,@"purchaseBean":@"0.00",@"purchaseGoldAmount":cell.moneyTextField.text,@"purchaseMoney":purchaseGoldAmountStr,@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"workshopCode":@""};
-    [[NetworkModule sharedNetworkModule] newPostReq:paramDict tag:kSXTagGetPurchaseGold owner:self signature:YES Type:SelectAccoutTypeGold];
-
-    
-}
 @end

@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UCFGoldPurchaseViewController">
             <connections>
+                <outlet property="goldPurchaseButton" destination="e4K-eK-UnH" id="4wf-Hk-Kdn"/>
                 <outlet property="tableView" destination="Brt-mF-8IG" id="88D-xI-hi7"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>

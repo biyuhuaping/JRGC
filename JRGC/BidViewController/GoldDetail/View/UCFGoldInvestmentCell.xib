@@ -12,14 +12,14 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UCFGoldInvestmentCell" rowHeight="91" id="KGk-i7-Jjw" customClass="UCFGoldInvestmentCell">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="91"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="91"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="90.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="90.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="invest_bg_cell" translatesAutoresizingMaskIntoConstraints="NO" id="NXL-dk-CVO">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="91"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="91"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="neV-EE-shx">
                         <rect key="frame" x="15" y="11" width="35.5" height="17"/>
@@ -31,14 +31,14 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="invest_bg_circle" translatesAutoresizingMaskIntoConstraints="NO" id="EYZ-sm-vpT">
-                        <rect key="frame" x="234.5" y="12" width="71" height="21"/>
+                        <rect key="frame" x="289.5" y="12" width="71" height="21"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="71" id="HDS-qi-wvo"/>
                             <constraint firstAttribute="height" constant="21" id="SE8-6o-wWe"/>
                         </constraints>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BBC-fu-Ttm" customClass="CircleProgressView">
-                        <rect key="frame" x="235" y="12.5" width="70" height="70"/>
+                        <rect key="frame" x="290" y="12.5" width="70" height="70"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mvc-Xu-Nas">
                                 <rect key="frame" x="8" y="8" width="54" height="54"/>
@@ -88,10 +88,19 @@
                         <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gmi-DM-6ok" customClass="UCFAngleView">
+                        <rect key="frame" x="321" y="-3" width="28" height="16"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="28" id="Eyn-Xb-jje"/>
+                            <constraint firstAttribute="height" constant="16" id="Z1E-Uq-O2I"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="NXL-dk-CVO" secondAttribute="bottom" id="1FP-hf-QYe"/>
                     <constraint firstItem="9g8-KS-euu" firstAttribute="leading" secondItem="YPb-tO-NDR" secondAttribute="leading" id="4OY-2U-Mrt"/>
+                    <constraint firstItem="Gmi-DM-6ok" firstAttribute="centerX" secondItem="BBC-fu-Ttm" secondAttribute="centerX" constant="10" id="5le-Mm-YO3"/>
                     <constraint firstItem="NXL-dk-CVO" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="9zb-1Q-jV9"/>
                     <constraint firstItem="YPb-tO-NDR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="138" id="Fk7-F3-fiA"/>
                     <constraint firstItem="neV-EE-shx" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="NyP-Zx-ftc"/>
@@ -101,6 +110,7 @@
                     <constraint firstItem="sqr-YL-GGw" firstAttribute="top" secondItem="neV-EE-shx" secondAttribute="bottom" constant="15" id="Ztm-zD-tdR"/>
                     <constraint firstItem="EYZ-sm-vpT" firstAttribute="centerY" secondItem="BBC-fu-Ttm" secondAttribute="centerY" constant="-25" id="b0r-o4-DhM"/>
                     <constraint firstItem="9g8-KS-euu" firstAttribute="centerY" secondItem="2c3-AP-5RM" secondAttribute="centerY" id="kqW-Yl-RB5"/>
+                    <constraint firstItem="Gmi-DM-6ok" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="-3" id="pgR-bb-5hF"/>
                     <constraint firstItem="EYZ-sm-vpT" firstAttribute="centerX" secondItem="BBC-fu-Ttm" secondAttribute="centerX" id="phZ-zp-39y"/>
                     <constraint firstAttribute="bottom" secondItem="2c3-AP-5RM" secondAttribute="bottom" constant="9" id="qqr-pC-aK4"/>
                     <constraint firstItem="BBC-fu-Ttm" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12.5" id="tAM-d6-AoY"/>
@@ -113,6 +123,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="GoldInvestButton" destination="mvc-Xu-Nas" id="Vgi-gU-0gu"/>
+                <outlet property="angleGoldView" destination="Gmi-DM-6ok" id="wEh-9n-9Mg"/>
                 <outlet property="annualRateLab" destination="sqr-YL-GGw" id="g7z-ho-A5K"/>
                 <outlet property="nmPrdClaimNameLab" destination="neV-EE-shx" id="Ktx-TH-pbn"/>
                 <outlet property="periodTermLab" destination="YPb-tO-NDR" id="oKl-1i-mNh"/>

@@ -9,5 +9,6 @@
 #import "SDBaseProgressView.h"
 
 @interface SDLoopProgressView : SDBaseProgressView
-
+// Color of the completed steps.
+@property (strong, nonatomic) UIColor *completedColor;
 @end

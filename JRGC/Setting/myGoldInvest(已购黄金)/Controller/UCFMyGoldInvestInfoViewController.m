@@ -14,7 +14,7 @@
 #import "UCFGoldInvestmentDetailViewController.h"
 #import "UIDic+Safe.h"
 #import "UILabel+Misc.h"
-@interface UCFMyGoldInvestInfoViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface UCFMyGoldInvestInfoViewController ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate>
 @property(strong,nonatomic)HMSegmentedControl *topSegmentedControl;
 @property (strong, nonatomic) IBOutlet UIView *segmentedControlBgView ;
 @property (assign, nonatomic)  NSInteger selectIndex ;
@@ -81,6 +81,8 @@
 - (void)initTableView{
     CGFloat height = ScreenHeight - 240;
     _scrollView.contentSize = CGSizeMake(ScreenWidth*3, height);
+    _scrollView.delegate  =  self;
+    _scrollView.pagingEnabled = YES;
     _tableView1 = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, height) style:UITableViewStylePlain];
     _tableView2 = [[UITableView alloc]initWithFrame:CGRectMake(ScreenWidth, 0, ScreenWidth, height) style:UITableViewStylePlain];
     _tableView3 = [[UITableView alloc]initWithFrame:CGRectMake(ScreenWidth*2, 0, ScreenWidth, height) style:UITableViewStylePlain];
@@ -165,6 +167,17 @@
 -(void)topSegmentedControlChangedValue:(HMSegmentedControl *)segmentedControl{
     // 是否支持点击状态栏回到最顶端
     _selectIndex = segmentedControl.selectedSegmentIndex;
+    [self selectTableView];
+}
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    _selectIndex  = scrollView.contentOffset.x / ScreenWidth;
+    [self selectTableView];
+}
+-(void)selectTableView
+
+{    _topSegmentedControl.selectedSegmentIndex = _selectIndex;
+    
     switch (_selectIndex) {
         case 0:{
             _tableView1.scrollsToTop = YES;
@@ -185,107 +198,24 @@
         }
             break;
     }
-        switch (_selectIndex) {
-            case 0:{
-                [_tableView1.header beginRefreshing];
-            }
-                break;
-            case 1:{
-                [_tableView2.header beginRefreshing];
-            }
-                break;
-            case 2:{
-                [_tableView3.header beginRefreshing];
-            }
-                break;
+    switch (_selectIndex) {
+        case 0:{
+            [_tableView1.header beginRefreshing];
         }
+            break;
+        case 1:{
+            [_tableView2.header beginRefreshing];
+        }
+            break;
+        case 2:{
+            [_tableView3.header beginRefreshing];
+        }
+            break;
+    }
     _listCountLab.text = [NSString stringWithFormat:@"共%@笔记录",_listCountArr[_selectIndex]];
     [_listCountLab setFont:[UIFont boldSystemFontOfSize:12] string:_listCountArr[_selectIndex]];
-    
-    _scrollView.contentOffset  = CGPointMake(ScreenWidth *_selectIndex, 0);
+    [_scrollView setContentOffset:CGPointMake(ScreenWidth *_selectIndex, 0) animated:YES];
 }
-
-//// 选项按钮的点击事件
-//- (IBAction)sender:(UIButton *)sender {
-//    CGFloat offset = ScreenWidth*(sender.tag-100);
-//    [self setBtnAndLine:offset];
-//    [_scrollView setContentOffset:CGPointMake(offset, 0) animated:YES];
-//}
-//
-//- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-//    if (scrollView == _scrollView) {
-//        CGFloat offset = scrollView.contentOffset.x;
-//        [self setBtnAndLine:offset];
-//    }
-//}
-
-////设置按钮颜色和下划线
-//- (void)setBtnAndLine:(NSInteger)offset{
-//    _index = (NSInteger)offset/ScreenWidth;
-//    //滑动下划线
-//    [UIView animateWithDuration:0.25 animations:^{
-//        _lineCenterX.constant = _index*ScreenWidth/3;
-//        [self.view layoutIfNeeded];  //没有此句可能没有动画效果
-//    }];
-//    
-//    // 是否支持点击状态栏回到最顶端
-//    switch (_index) {
-//        case 0:{
-//            _tableView1.scrollsToTop = YES;
-//            _tableView2.scrollsToTop = NO;
-//            _tableView3.scrollsToTop = NO;
-//        }
-//            break;
-//        case 1:{
-//            _tableView1.scrollsToTop = NO;
-//            _tableView2.scrollsToTop = YES;
-//            _tableView3.scrollsToTop = NO;
-//        }
-//            break;
-//        case 2:{
-//            _tableView1.scrollsToTop = NO;
-//            _tableView2.scrollsToTop = NO;
-//            _tableView3.scrollsToTop = YES;
-//        }
-//            break;
-//    }
-//    
-//    //设置按钮颜色
-//    for (UIButton *btn in self.itemChangeView.subviews) {
-//        if (btn.tag == 100 + _index) {
-//            btn.selected = YES;
-//        }else if ([btn respondsToSelector:@selector(setSelected:)])
-//            btn.selected = NO;
-//    }
-//    if (![_didClickBtns containsObject:@(_index)]) {
-//        [_didClickBtns addObject:@(_index)];
-//        switch (_index) {
-//            case 0:{
-//                [_tableView1.header beginRefreshing];
-//            }
-//                break;
-//            case 1:{
-//                [_tableView2.header beginRefreshing];
-//            }
-//                break;
-//            case 2:{
-//                [_tableView3.header beginRefreshing];
-//            }
-//                break;
-//        }
-//    }
-//    _listCountLab.text = [NSString stringWithFormat:@"共%@笔记录",_listCountArr[_index]];
-//    [_listCountLab setFont:[UIFont boldSystemFontOfSize:12] string:_listCountArr[_index]];
-//}
-
-////to回款明细页面
-//- (IBAction)toBackMoneyDetailView:(id)sender {
-//    UCFBackMoneyDetailViewController *vc = [[UCFBackMoneyDetailViewController alloc]initWithNibName:@"UCFBackMoneyDetailViewController" bundle:nil];
-//    vc.accoutType = self.accoutType;
-//    vc.title = @"回款明细";
-//    [self.navigationController pushViewController:vc animated:YES];
-//}
-
 #pragma mark - UITableViewDelegate
 // 每组几行，默认为1
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
