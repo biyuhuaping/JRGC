@@ -133,7 +133,7 @@
             self.circleProgressView.pathFillColor = UIColorWithRGB(0xe2e2e2);//未绘制的进度条颜色
 //            self.progressView.progressLabel.textColor = UIColorWithRGB(0x909dae);
         }
-        
+        DBLOG(@"type : %@", presenter.item.type);
         NSArray *statusArr = @[@"未审核",@"等待确认",@"出借",@"流标",@"满标",@"回款中",@"已回款"];
         if ([presenter.item.type isEqualToString:@"3"]) {
             if (status==2) {
@@ -159,6 +159,13 @@
                 else
                     self.circleProgressView.progressText = statusArr[status];
             }
+            
+//            else if ([presenter.item.type isEqualToString:@"14"] && status == 2) {
+//                self.circleProgressView.progressText = @"批量出借";
+//            }
+//            else
+//                self.circleProgressView.progressText = statusArr[status];
+            
         }
         
         

@@ -241,8 +241,10 @@
         if (_isCollctionkeyBid) {
             
 //            _minuteCountDownView.frame = CGRectZero;
-             _keYongTipLabel.text = @"我的余额";
-            _totalKeYongTipLabel.text = @"";
+             _keYongTipLabel.text = @"可用金额";
+            BOOL bankNumEq = [[_dataDict objectSafeForKey:@"bankNumEq"] boolValue];
+            
+            _totalKeYongTipLabel.text = bankNumEq ? @"(尊享余额+微金余额)"  : @"" ;
             NSString *minInvestStr = [NSString stringWithFormat:@"%@",[[_dataDict objectForKey:@"colPrdClaimDetail"] objectForKey:@"colMinInvest"]];
       
             NSString *palceText = [NSString stringWithFormat:@"%@元起投", minInvestStr];
@@ -265,7 +267,7 @@
             self.KeYongMoneyLabel.text = [NSString stringWithFormat:@"¥%@",totalMoney];
             CGSize size = [Common getStrWitdth:self.KeYongMoneyLabel.text TextFont:_KeYongMoneyLabel.font];
             self.KeYongMoneyLabel.frame = CGRectMake(CGRectGetMinX(self.KeYongMoneyLabel.frame), CGRectGetMinY(self.KeYongMoneyLabel.frame), size.width, CGRectGetHeight(self.KeYongMoneyLabel.frame));
-            _totalKeYongTipLabel.frame = CGRectMake(CGRectGetMaxX(_KeYongMoneyLabel.frame) + 5, CGRectGetMinY(_KeYongMoneyLabel.frame) + 5, 11 * 12, 12);
+            _totalKeYongTipLabel.frame = CGRectMake(CGRectGetMaxX(_KeYongMoneyLabel.frame) + 5, CGRectGetMinY(_KeYongMoneyLabel.frame) + 5, 11 * 16, 12);
              [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:_topView isTop:NO];
             if (_isCompanyAgent) {
                 _gongDouAccout.hidden = YES;
@@ -274,6 +276,9 @@
             }
         }else{
             
+            BOOL bankNumEq = [[_dataDict objectSafeForKey:@"bankNumEq"] boolValue];
+            
+            _totalKeYongTipLabel.text = bankNumEq ? @"(尊享余额+微金余额+我的工豆)"  : @"(我的余额+我的工豆)" ;
             _prdLabelsList =  [[_dataDict objectSafeDictionaryForKey:@"data"] objectSafeArrayForKey:@"prdLabelsList"];;
             NSMutableArray *labelPriorityArr = [NSMutableArray arrayWithCapacity:4];
             if (![_prdLabelsList isEqual:[NSNull null]]) {
@@ -336,7 +341,7 @@
           
 //        _lineView1.frame =  CGRectMake(0,CGRectGetMaxY(_lineView.frame) + 42.5, ScreenWidth, 0.5);
         self.KeYongMoneyLabel.frame = CGRectMake(CGRectGetMinX(self.KeYongMoneyLabel.frame), CGRectGetMinY(self.KeYongMoneyLabel.frame), size.width, CGRectGetHeight(self.KeYongMoneyLabel.frame));
-        _totalKeYongTipLabel.frame = CGRectMake(CGRectGetMaxX(_KeYongMoneyLabel.frame) + 5, CGRectGetMinY(_KeYongMoneyLabel.frame) + 5, 11 * 12, 12);
+        _totalKeYongTipLabel.frame = CGRectMake(CGRectGetMaxX(_KeYongMoneyLabel.frame) + 5, CGRectGetMinY(_KeYongMoneyLabel.frame) + 5, 11 * 16, 12);
         if (_isCompanyAgent) {
             _gongDouAccout.hidden = YES;
             _gongDouCountLabel.hidden = YES;
@@ -344,7 +349,10 @@
          }
       }
     } else{
-            _keYongTipLabel.text = @"可用金额";
+        BOOL bankNumEq = [[_dataDict objectSafeForKey:@"bankNumEq"] boolValue];
+        
+        _totalKeYongTipLabel.text = bankNumEq ? @"(尊享余额+微金余额)":@"";
+        _keYongTipLabel.text = @"可用金额";
         NSString *buyCueDeStr = [_dataDict objectSafeForKey:@"buyCueDes"];
         if (![buyCueDeStr isEqualToString:@""]) {
             _topView.frame =  CGRectMake(0, 0, ScreenWidth, 25);
@@ -360,7 +368,6 @@
             _keYongBaseView.frame = CGRectMake(0,CGRectGetMaxY(_topView.frame) , ScreenWidth, 37);
             _inputBaseView.frame = CGRectMake(15.0f, CGRectGetMaxY(_keYongBaseView.frame)+10, ScreenWidth - 69.0f, 37.0f);
             _rechargeBtn.frame = CGRectMake(ScreenWidth - 15 - 44 , CGRectGetMaxY(_topView.frame)+4, 44, 37);
-            _totalKeYongTipLabel.hidden = YES;
             _inputMoneyTextFieldLable.frame = CGRectMake(10.0f, 0, CGRectGetWidth(_inputBaseView.frame) - 70, CGRectGetHeight(_inputBaseView.frame));
             _calulatorBtn.frame = CGRectMake(CGRectGetMaxX(_inputBaseView.frame) + 10, CGRectGetMidY(_inputBaseView.frame) - 29/2.0, 29, 29);
             _midSepView.frame = CGRectMake(0, CGRectGetMaxY(_inputBaseView.frame) + 10, ScreenWidth, 10.0f);
@@ -376,7 +383,7 @@
             self.KeYongMoneyLabel.text = [NSString stringWithFormat:@"¥%@",totalMoney];
             CGSize size = [Common getStrWitdth:self.KeYongMoneyLabel.text TextFont:_KeYongMoneyLabel.font];
             self.KeYongMoneyLabel.frame = CGRectMake(CGRectGetMinX(self.KeYongMoneyLabel.frame), CGRectGetMinY(self.KeYongMoneyLabel.frame), size.width, CGRectGetHeight(self.KeYongMoneyLabel.frame));
-            _totalKeYongTipLabel.frame = CGRectMake(CGRectGetMaxX(_KeYongMoneyLabel.frame) + 5, CGRectGetMinY(_KeYongMoneyLabel.frame) + 5, 11 * 12, 12);
+            _totalKeYongTipLabel.frame = CGRectMake(CGRectGetMaxX(_KeYongMoneyLabel.frame) + 5, CGRectGetMinY(_KeYongMoneyLabel.frame) + 5, 11 * 16, 12);
             _gongDouAccout.hidden = YES;
             _gongDouCountLabel.hidden = YES;
             _gongDouSwitch.hidden = YES;
