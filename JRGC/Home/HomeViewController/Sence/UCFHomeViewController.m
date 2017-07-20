@@ -9,7 +9,6 @@
 #import "UCFHomeViewController.h"
 #import "UCFCycleImageViewController.h"
 #import "UCFUserInformationViewController.h"
-#import "UCFHomeListViewController.h"
 #import "UCFLoginViewController.h"
 #import "UCFSecurityCenterViewController.h"
 #import "UCFMessageCenterViewController.h"
@@ -326,7 +325,10 @@
 {
     [self fetchData];
 }
-
+- (void)skipToOtherPage:(UCFHomeListType)type
+{
+    [self homeList:nil tableView:nil didClickedWithModel:nil withType:type];
+}
 - (void)homeList:(UCFHomeListViewController *)homeList tableView:(UITableView *)tableView didClickedWithModel:(UCFHomeListCellModel *)model withType:(UCFHomeListType)type
 {
      __weak typeof(self) weakSelf = self;
@@ -790,6 +792,7 @@
         self.accoutType = SelectAccoutTypeHoner;
     } else if ([item.title isEqualToString:@"黄金账户"]) {
         UCFGoldAccountViewController *subVC = [[UCFGoldAccountViewController alloc] initWithNibName:@"UCFGoldAccountViewController" bundle:nil];
+        subVC.homeView = self;
         [self.navigationController pushViewController:subVC animated:YES];
         return;
     }
