@@ -50,7 +50,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="37" id="2Du-yx-3BI"/>
                     </constraints>
-                    <state key="normal" title="提交">
+                    <state key="normal" title="充值">
                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <userDefinedRuntimeAttributes>

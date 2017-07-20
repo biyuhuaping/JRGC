@@ -148,12 +148,12 @@
                 else
                     self.tableview.footer.hidden = YES;
                 self.dataArray = [self arrayGroupWithArray:self.dataArray];
-                if (!self.dataArray.count) {
-                    [self.noDataView showInView:self.tableview];
-                }
-                else {
-                    [self.noDataView hide];
-                }
+            }
+            if (!self.dataArray.count) {
+                [self.noDataView showInView:self.tableview];
+            }
+            else {
+                [self.noDataView hide];
             }
             [self.tableview reloadData];
         }else {
