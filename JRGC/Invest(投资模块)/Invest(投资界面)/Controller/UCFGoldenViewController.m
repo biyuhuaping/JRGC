@@ -17,6 +17,7 @@
 #import "HSHelper.h"
 #import "UCFGoldDetailViewController.h"
 #import "ToolSingleTon.h"
+#import "UCFNoPermissionViewController.h"
 @interface UCFGoldenViewController () <UITableViewDelegate, UITableViewDataSource, UCFHomeListCellHonorDelegate,UIAlertViewDelegate>
 @property (weak, nonatomic) UCFGoldenHeaderView *goldenHeader;
 @property (strong, nonatomic) NSMutableArray *dataArray;
@@ -147,6 +148,13 @@
         
         UCFGoldModel *goldModel = [self.dataArray objectAtIndex:indexPath.row];
         
+        if ([goldModel.status intValue] == 2) {
+            UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前标的详情只对认购人开放"];
+            [self.navigationController pushViewController:controller animated:YES];
+            return;
+
+        }
+        
         NSString *nmProClaimIdStr = goldModel.nmPrdClaimId;
         NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId",nmProClaimIdStr, @"nmPrdClaimId",nil];
         [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagGetGoldPrdClaimDetail owner:self signature:YES Type:SelectAccoutTypeGold];
@@ -172,6 +180,9 @@
         }
 
         UCFGoldModel *goldModel = [self.dataArray objectAtIndex:indexPath.row];
+        if ([goldModel.status intValue] == 2) {
+            return;
+        }
         
         NSString *nmProClaimIdStr = goldModel.nmPrdClaimId;
 

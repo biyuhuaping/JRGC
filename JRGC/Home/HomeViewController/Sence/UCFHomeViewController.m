@@ -598,6 +598,9 @@
         [self showHSAlert:tipStr1];
         return;
     }
+    if ([model.status intValue] == 2) {
+        return;
+    }
      __weak typeof(self) weakSelf = self;
     NSString *nmProClaimIdStr = [NSString stringWithFormat:@"%@",model.Id];
     NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId",nmProClaimIdStr, @"nmPrdClaimId",@"6",@"type",nil];
@@ -626,6 +629,12 @@
     if ( enjoyOpenStatus < 3 ) {
         [self showHSAlert:tipStr1];
         return;
+    }
+    if ([model.status intValue] == 2) {
+        UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前标的详情只对认购人开放"];
+        [self.navigationController pushViewController:controller animated:YES];
+        return;
+        
     }
     __weak typeof(self) weakSelf = self;
     NSString *nmProClaimIdStr = [NSString stringWithFormat:@"%@",model.Id];

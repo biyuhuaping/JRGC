@@ -30,6 +30,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *availableMoneyLabel;
 @property (strong, nonatomic) IBOutlet UILabel *accountBeanLabel;
 @property (nonatomic, assign)id<UCFGoldMoneyBoadCellDelegate> delegate;
+@property (weak, nonatomic) IBOutlet UISwitch *goldSwitch;
 
 @property (nonatomic,strong)UCFGoldModel *goldModel;
 
