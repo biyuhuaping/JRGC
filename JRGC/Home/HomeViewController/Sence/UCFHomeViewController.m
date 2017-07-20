@@ -803,6 +803,12 @@
         [self.navigationController pushViewController:subVC animated:YES];
     }
 }
+
+- (void)userInfoClickAssetDetailButton:(UIButton *)button withInfomation:(id)infomation
+{
+    
+}
+
 - (BOOL)checkUserCanInvestIsDetail:(BOOL)isDetail type:(SelectAccoutType)accout;
 {
     

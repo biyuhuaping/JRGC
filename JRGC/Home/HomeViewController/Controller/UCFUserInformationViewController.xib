@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13122.19" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.16"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -169,6 +169,17 @@
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kRv-DB-ZcT">
+                                    <rect key="frame" x="58" y="1" width="30" height="30"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="30" id="LnJ-rt-IUu"/>
+                                        <constraint firstAttribute="height" constant="30" id="kIG-bo-PLA"/>
+                                    </constraints>
+                                    <state key="normal" image="gold_account_icon_info_02"/>
+                                    <connections>
+                                        <action selector="assetDetail:" destination="-1" eventType="touchUpInside" id="Xvo-De-e6v"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" red="0.023529411764705882" green="0.094117647058823528" blue="0.24313725490196078" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                             <constraints>
@@ -181,6 +192,8 @@
                                 <constraint firstItem="R7Y-Kr-1bv" firstAttribute="leading" secondItem="9ug-JM-wzP" secondAttribute="trailing" constant="15" id="aeH-hh-Vcj"/>
                                 <constraint firstItem="9ug-JM-wzP" firstAttribute="centerX" secondItem="dRd-5Y-z02" secondAttribute="centerX" id="ipB-YL-TOn"/>
                                 <constraint firstAttribute="bottom" secondItem="R7Y-Kr-1bv" secondAttribute="bottom" constant="8" id="lIA-km-eGw"/>
+                                <constraint firstItem="kRv-DB-ZcT" firstAttribute="leading" secondItem="FDu-Ue-Gzc" secondAttribute="trailing" id="mQq-0j-Sym"/>
+                                <constraint firstItem="kRv-DB-ZcT" firstAttribute="centerY" secondItem="FDu-Ue-Gzc" secondAttribute="centerY" id="oSe-ar-qFU"/>
                                 <constraint firstAttribute="bottom" secondItem="9ug-JM-wzP" secondAttribute="bottom" constant="10" id="p0q-3U-41w"/>
                                 <constraint firstAttribute="height" constant="47" id="tsN-Qb-U5D"/>
                                 <constraint firstItem="TZp-1w-jOI" firstAttribute="top" secondItem="dRd-5Y-z02" secondAttribute="top" constant="7" id="uvH-CE-PAo"/>
@@ -435,6 +448,7 @@
         </view>
     </objects>
     <resources>
+        <image name="gold_account_icon_info_02" width="13" height="13"/>
         <image name="invisible_bule" width="15" height="15"/>
         <image name="mine_bg" width="300" height="150"/>
         <image name="password_icon_head" width="80" height="80"/>

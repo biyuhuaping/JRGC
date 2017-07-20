@@ -29,6 +29,9 @@
 @property (nonatomic, copy) NSString *userCenterTicket;
 @property (nonatomic, copy) NSString *sex;
 @property (nonatomic, copy) NSString *holdGoldAmount;
+@property (nonatomic, copy) NSString *goldMarketAmount;
+@property (nonatomic, copy) NSString *allGiveGoldAmount;
+@property (nonatomic, copy) NSString *nmCashBalance;
 
 + (instancetype)userInfomationWithDict:(NSDictionary *)dict;
 @end
