@@ -42,12 +42,13 @@
         _circleProgress.theme.thickness = 12;
         _circleProgress.theme.centerColor = UIColorWithRGB(0x28335c);
         _circleProgress.theme.incompletedColor = UIColorWithRGB(0x162138);
-        _circleProgress.theme.completedColor = [UIColor yellowColor]; // UIColorWithRGB(0xffc027);
+        _circleProgress.theme.completedColor = UIColorWithRGB(0xffc027); //
         _circleProgress.label.hidden = YES;
         [self addSubview:_circleProgress];
         
         _proressView = [[SDLoopProgressView alloc] initWithFrame:frame];
         _proressView.center = _circleProgress.center;
+        _proressView.completedColor = UIColorWithRGB(0xffc027);
         _proressView.progress = 0;
         [self addSubview:_proressView];
         
