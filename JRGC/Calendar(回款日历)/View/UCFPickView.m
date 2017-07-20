@@ -90,7 +90,12 @@
 - (IBAction)pickerSelectedMonth:(UIButton *)sender {
     [self hidden];
     if ([self.delegate respondsToSelector:@selector(pickerView:selectedMonth:withIndex:)]) {
-        [self.delegate pickerView:self selectedMonth:self.currentMonth withIndex:[self.dataArray indexOfObject:self.currentMonth]];
+        if (self.currentMonth) {
+            [self.delegate pickerView:self selectedMonth:self.currentMonth withIndex:[self.dataArray indexOfObject:self.currentMonth]];
+        }
+        else {
+            [self.delegate pickerView:self selectedMonth:[self.dataArray firstObject] withIndex:0];
+        }
     }
 }
 

@@ -46,6 +46,8 @@
 #import "UCFGoldDetailViewController.h"
 #import "UCFGoldPurchaseViewController.h"
 #import  "UCFGoldCalculatorView.h"
+#import "UCFCollectionDetailViewController.h"
+
 @interface UCFHomeViewController () <UCFHomeListViewControllerDelegate, UCFHomeListNavViewDelegate, UCFUserInformationViewControllerDelegate,BJGridItemDelegate>
 @property (strong, nonatomic) UCFCycleImageViewController *cycleImageVC;
 @property (strong, nonatomic) UCFUserInformationViewController *userInfoVC;
@@ -339,6 +341,8 @@
             self.accoutType = SelectAccoutTypeGold;
             break;
     }
+    self.accoutType = [model.type intValue] == 1 ? SelectAccoutTypeP2P:SelectAccoutTypeHoner;
+    
     NSString *noPermissionTitleStr = self.accoutType == SelectAccoutTypeP2P ? @"目前标的详情只对出借人开放":@"目前标的详情只对认购人开放";
     if (type == UCFHomeListTypeDetail) {
         if (model.moedelType == UCFHomeListCellModelTypeDefault) {
@@ -366,6 +370,18 @@
                         [helper pushP2POrWJAuthorizationType:self.accoutType nav:self.navigationController];
                         return;
                     }
+                    NSInteger isOrder = [model.isOrder integerValue];
+                    if ([model.status intValue ] != 2){
+                        if (isOrder <= 0) {
+                            UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:noPermissionTitleStr];
+                            [self.navigationController pushViewController:controller animated:YES];
+                            
+                            return;
+                        }
+                    }
+                if([model.type intValue] == 14){ //集合标详情
+                    [self gotoCollectionDetailViewContoller:model];
+                }else{
                     NSInteger isOrder = [model.isOrder integerValue];
                     if ([model.status intValue ] != 2){
                         if (isOrder <= 0) {
@@ -435,9 +451,9 @@
                     }
                 }
                     
-             }
-                
-                
+                    
+               }
+            }
           }
         else if (model.moedelType == UCFHomeListCellModelTypeOneImageBatchLending) {
             // 批量出借
@@ -499,21 +515,20 @@
                     [self gotoGoldInvestVC:model];
                 }else{
                     HSHelper *helper = [HSHelper new];
-                    
-                    
                     NSString *messageStr =  [helper checkCompanyIsOpen:self.accoutType];
                     if (![messageStr isEqualToString:@""]) {
                         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil];
                         [alert show];
                         return;
                     }
-                    
-                    
                     if (![helper checkP2POrWJIsAuthorization:self.accoutType]) {
                         [helper pushP2POrWJAuthorizationType:self.accoutType nav:self.navigationController];
-                        
                         return;
                     }
+                if ([model.type intValue] == 14) { //集合标
+                    [self gotoCollectionDetailViewContoller:model];
+                }else{
+                    
                     NSInteger isOrder = [model.isOrder integerValue];
                     if ([model.status intValue ] != 2){
                         if (isOrder <= 0) {
@@ -536,7 +551,9 @@
                                 [weakSelf.navigationController pushViewController:purchaseViewController animated:YES];
                             }
                         }];
+                        
                     }
+                  }
                 }
             }
         }
@@ -562,28 +579,14 @@
         [appdel.tabBarController setSelectedIndex:1];
     }
     else if (type == UCFHomeListTypeGlodMore) {
-        
-        
-        UCFGoldCalculatorView * view = [[[NSBundle mainBundle]loadNibNamed:@"UCFGoldCalculatorView" owner:nil options:nil] firstObject];
-        view.goldMoneyTextField.text = @"2";
-        view.nmTypeIdStr = @"21";
-        view.tag = 173924;
-        view.frame = CGRectMake(0, 0, ScreenWidth,ScreenHeight);
-        AppDelegate * app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-        view.center = app.window.center;
-        [app.window addSubview:view];
-
-        
-        
-        
-        
-//        AppDelegate *appdel = (AppDelegate *)[UIApplication sharedApplication].delegate;
-//        UCFInvestViewController *invest = (UCFInvestViewController *)[[appdel.tabBarController.childViewControllers objectAtIndex:1].childViewControllers firstObject];
-//        invest.selectedType = @"Gold";
-//        if ([invest isViewLoaded]) {
-//            [invest changeView];
-//        }
-//        [appdel.tabBarController setSelectedIndex:1];
+    
+        AppDelegate *appdel = (AppDelegate *)[UIApplication sharedApplication].delegate;
+        UCFInvestViewController *invest = (UCFInvestViewController *)[[appdel.tabBarController.childViewControllers objectAtIndex:1].childViewControllers firstObject];
+        invest.selectedType = @"Gold";
+        if ([invest isViewLoaded]) {
+            [invest changeView];
+        }
+        [appdel.tabBarController setSelectedIndex:1];
     }
 }
 -(void)gotoGoldInvestVC:(UCFHomeListCellModel *)model{
@@ -618,9 +621,9 @@
 -(void)gotoGoldDetailVC:(UCFHomeListCellModel *)model{
     
     NSString *tipStr1 = ZXTIP1;
-    NSInteger openStatus = [UserInfoSingle sharedManager].openStatus ;
+//    NSInteger openStatus = [UserInfoSingle sharedManager].openStatus ;
     NSInteger enjoyOpenStatus = [UserInfoSingle sharedManager].enjoyOpenStatus;
-    if (openStatus < 3 && enjoyOpenStatus < 3 ) {
+    if ( enjoyOpenStatus < 3 ) {
         [self showHSAlert:tipStr1];
         return;
     }
@@ -652,6 +655,33 @@
     UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
     UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
     [self presentViewController:loginNaviController animated:YES completion:nil];
+}
+#pragma mark - 去批量投资集合详情
+-(void)gotoCollectionDetailViewContoller:(UCFHomeListCellModel *)model{
+    NSString *uuid = [[NSUserDefaults standardUserDefaults]valueForKey:UUID];
+    self.accoutType = SelectAccoutTypeP2P;
+    __weak typeof(self) weakSelf = self;
+    if ([self checkUserCanInvestIsDetail:YES type:self.accoutType]) {
+        NSString  *colPrdClaimIdStr = [NSString stringWithFormat:@"%@",model.Id];
+        NSDictionary *parameter = [NSDictionary dictionaryWithObjectsAndKeys:uuid,@"userId", colPrdClaimIdStr, @"colPrdClaimId", nil];
+        [self.userInfoVC.presenter fetchCollectionDetailDataWithParameter:parameter completionHandler:^(NSError *error, id result) {
+            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+            NSDictionary *dic = (NSDictionary *)result;
+            NSString *rstcode = dic[@"ret"];
+            NSString *rsttext = dic[@"message"];
+            if ([rstcode intValue] == 1) {
+                
+                UCFCollectionDetailViewController *collectionDetailVC = [[UCFCollectionDetailViewController alloc]initWithNibName:@"UCFCollectionDetailViewController" bundle:nil];
+                collectionDetailVC.souceVC = @"P2PVC";
+                collectionDetailVC.colPrdClaimId = colPrdClaimIdStr;
+                collectionDetailVC.detailDataDict = [dic objectSafeDictionaryForKey:@"data"];
+                collectionDetailVC.accoutType = SelectAccoutTypeP2P;
+                [self.navigationController pushViewController:collectionDetailVC  animated:YES];
+            }else {
+                [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
+            }
+        }];
+    }
 }
 #pragma mark - UCFHomeListNavViewDelegate
 

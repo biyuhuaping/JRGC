@@ -7,7 +7,7 @@
 //
 
 #import "UCFGoldInvestDetailCell.h"
-
+#import "UIDic+Safe.h"
 @implementation UCFGoldInvestDetailCell
 
 - (void)awakeFromNib {
@@ -27,8 +27,44 @@
         [self.delegate gotoGoldDetialVC];
     }
 }
-@end
+/*
+ dealGoldPrice	成交金价	string
+ expiredDate	到期日期	string
+ hasGiveGoldAmount	已获增金克重	string
+ nmPrdClaimId	标ID	string
+ nmPrdClaimName	标名称	string
+ orderId	订单ID	string
+ orderStatusCode	订单状态编码	string
+ orderStatusName	订单状态名称	string
+ paymentType	结算方式	string
+ perGiveGoldAmount	预期增金克重	string
+ periodTerm	标期限	string
+ purchaseGoldAmount	购买黄金克重	string
+ purchaseMoneyAmount	购买金额	string
+ */
 
+-(void)setDataDict:(NSDictionary *)dataDict
+{
+    _dataDict = dataDict;
+    
+    self.nmPrdClaimNameLabel.text = [dataDict objectSafeForKey:@"nmPrdClaimName"];
+    self.orderStatusNameLabel.text = [dataDict objectSafeForKey:@"orderStatusName"];
+    self.dealGoldPriceLabel.text = [NSString stringWithFormat:@"¥%@",[dataDict objectSafeForKey:@"dealGoldPrice"]];
+    self.perGiveGoldAmount.text = [NSString stringWithFormat:@"%@克/100克",[dataDict objectSafeForKey:@"perGiveGoldAmount"]];
+    self.paymentTypeLabel.text = [NSString stringWithFormat:@"%@",[dataDict objectSafeForKey:@"paymentType"]];
+    self.periodTermLabel.text = [NSString stringWithFormat:@"%@",[dataDict objectSafeForKey:@"periodTerm"]];
+    self.startDateLabel.text = [NSString stringWithFormat:@"%@",[self checkStr:[dataDict objectSafeForKey:@"startDate"]]];
+    self.expiredDateLabel.text = [NSString stringWithFormat:@"%@",[self checkStr:[dataDict objectSafeForKey:@"expiredDate"]]];
+}
+-(NSString *)checkStr:(NSString *)nullStr
+{
+    if ([nullStr isEqualToString:@""]) {
+        return @"--";
+    }else{
+        return nullStr;
+    }
+}
+@end
 
 @implementation UCFGoldInvestDetailSecondCell
 
@@ -42,7 +78,15 @@
     
     // Configure the view for the selected state
 }
-
+-(void)setDataDict:(NSDictionary *)dataDict
+{
+    _dataDict = dataDict;
+    
+    self.totalGoldAmountLabel.text = [NSString stringWithFormat:@"%.3f克",[[dataDict objectSafeForKey:@"purchaseGoldAmount"] floatValue] + [[dataDict objectSafeForKey:@"perGiveGoldAmount"] floatValue]];
+    self.purchaseGoldAmountLabel.text = [NSString stringWithFormat:@"%@克",[dataDict objectSafeForKey:@"purchaseGoldAmount"]];//购买黄金克重	string
+    self.hasGiveGoldAmountLabel.text = [NSString stringWithFormat:@"%@克(到期%@)",[dataDict objectSafeForKey:@"hasGiveGoldAmount"],[dataDict objectSafeForKey:@"paymentType"]];//已获增金克重	string
+    self.perGiveGoldAmountLabel.text = [NSString stringWithFormat:@"%@克",[dataDict objectSafeForKey:@"perGiveGoldAmount"]];//预期增金克重	string
+}
 @end
 
 @implementation UCFGoldInvestDetailFourCell
@@ -56,6 +100,35 @@
     [super setSelected:selected animated:animated];
     
     // Configure the view for the selected state
+}
+
+@end
+
+@implementation UCFGoldInvestDetailFiveCell
+
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    // Initialization code
+}
+
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+    [super setSelected:selected animated:animated];
+    
+    // Configure the view for the selected state
+}
+-(void)setDataDict:(NSDictionary *)dataDict
+{
+    _dataDict = dataDict;
+    /*
+     refundDate	回金日期	string
+     refundGoldAmount	回金克重	string
+     refundStatus	回金状态	string	未回/已回
+     refundType	回金类型	string	买金/增金
+     */
+    self.refundDateLabel.text = [dataDict objectSafeForKey:@"refundDate"];
+    self.refundGoldAmountLabel.text = [NSString stringWithFormat:@"%@克",[dataDict objectSafeForKey:@"refundGoldAmount"]];
+    self.refundTypeLabel.text = [dataDict objectSafeForKey:@"refundType"];
+    self.refundStatusLabel.text = [dataDict objectSafeForKey:@"refundStatus"];
 }
 
 @end

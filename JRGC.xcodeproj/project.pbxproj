@@ -559,6 +559,8 @@
 		831B98AB1E728ECC009E46EA /* MinuteCountDownView.m in Sources */ = {isa = PBXBuildFile; fileRef = 831B98A81E728ECC009E46EA /* MinuteCountDownView.m */; };
 		831B98AC1E728ECC009E46EA /* MinuteCountDownView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 831B98AA1E728ECC009E46EA /* MinuteCountDownView.xib */; };
 		832D521F1D8FE5EA0060F1F7 /* UCFWithdrawCashResultWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 832D521E1D8FE5EA0060F1F7 /* UCFWithdrawCashResultWebView.m */; };
+		833345721F1F82BF00A0F30D /* UCFGoldInvestmentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 833345701F1F82BF00A0F30D /* UCFGoldInvestmentCell.m */; };
+		833345731F1F82BF00A0F30D /* UCFGoldInvestmentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 833345711F1F82BF00A0F30D /* UCFGoldInvestmentCell.xib */; };
 		833603CE1D928F9200C3E435 /* UCFWithdrawCashResultWebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 833603CD1D928F9200C3E435 /* UCFWithdrawCashResultWebView.xib */; };
 		833A6EAB1E55466B00C8A494 /* UCFCollectionDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 833A6EA41E55466B00C8A494 /* UCFCollectionDetailViewController.m */; };
 		833A6EAC1E55466B00C8A494 /* UCFCollectionDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 833A6EA51E55466B00C8A494 /* UCFCollectionDetailViewController.xib */; };
@@ -1897,6 +1899,9 @@
 		831B98AA1E728ECC009E46EA /* MinuteCountDownView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MinuteCountDownView.xib; sourceTree = "<group>"; };
 		832D521D1D8FE5EA0060F1F7 /* UCFWithdrawCashResultWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFWithdrawCashResultWebView.h; sourceTree = "<group>"; };
 		832D521E1D8FE5EA0060F1F7 /* UCFWithdrawCashResultWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFWithdrawCashResultWebView.m; sourceTree = "<group>"; };
+		8333456F1F1F82BF00A0F30D /* UCFGoldInvestmentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFGoldInvestmentCell.h; sourceTree = "<group>"; };
+		833345701F1F82BF00A0F30D /* UCFGoldInvestmentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFGoldInvestmentCell.m; sourceTree = "<group>"; };
+		833345711F1F82BF00A0F30D /* UCFGoldInvestmentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFGoldInvestmentCell.xib; sourceTree = "<group>"; };
 		833603CD1D928F9200C3E435 /* UCFWithdrawCashResultWebView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFWithdrawCashResultWebView.xib; sourceTree = "<group>"; };
 		833A6EA31E55466B00C8A494 /* UCFCollectionDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFCollectionDetailViewController.h; sourceTree = "<group>"; };
 		833A6EA41E55466B00C8A494 /* UCFCollectionDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFCollectionDetailViewController.m; sourceTree = "<group>"; };
@@ -5690,6 +5695,9 @@
 				83D64F601F1CB8AE00A839F2 /* UCFGoldPurchaseRecordCell.h */,
 				83D64F611F1CB8AE00A839F2 /* UCFGoldPurchaseRecordCell.m */,
 				83D64F621F1CB8AE00A839F2 /* UCFGoldPurchaseRecordCell.xib */,
+				8333456F1F1F82BF00A0F30D /* UCFGoldInvestmentCell.h */,
+				833345701F1F82BF00A0F30D /* UCFGoldInvestmentCell.m */,
+				833345711F1F82BF00A0F30D /* UCFGoldInvestmentCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -6718,6 +6726,7 @@
 				83FCCA6C1F1711A6002921C5 /* UCFMyGoldInvestInfoViewController.xib in Resources */,
 				83FF3E4B1E12159C00DFB99C /* UCFCashTableViewCell.xib in Resources */,
 				7412323E1F14BB250061408A /* UCFPickView.xib in Resources */,
+				833345731F1F82BF00A0F30D /* UCFGoldInvestmentCell.xib in Resources */,
 				74BDA9941F09F6C60054403F /* Info.plist in Resources */,
 				7477BF911AFAFED900914BFB /* UCFRedEnvelopeTableViewCell.xib in Resources */,
 				83DAEFC31F166A3B00D7948F /* UCFGoldAuthorizationViewController.xib in Resources */,
@@ -7036,6 +7045,7 @@
 				2526ADDA1DD08CB800114D9A /* MLMOptionSelectView.m in Sources */,
 				7BC789091B04555F00D50494 /* UCFXieYiViewController.m in Sources */,
 				74931A2D1B1326FE00143424 /* CoreTextUtils.m in Sources */,
+				833345721F1F82BF00A0F30D /* UCFGoldInvestmentCell.m in Sources */,
 				74F2910A1AE0DB82003E0E86 /* UCFCouponViewController.m in Sources */,
 				83FB3F5E1E5C4D2A0094C9BA /* UCFBatchBidWebViewController.m in Sources */,
 				748ED79B1CC7312000690215 /* UCFCashAndTopUp.m in Sources */,
@@ -7568,7 +7578,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = EZRWM7P5C6;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -7642,7 +7652,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = EZRWM7P5C6;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

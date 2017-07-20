@@ -21,6 +21,8 @@
 - (void)userInfoPresenter:(UCFUserPresenter *)presenter didRefreshUserInfoOneWithResult:(id)result error:(NSError *)error;
 - (void)userInfoPresenter:(UCFUserPresenter *)presenter didRefreshUserInfoTwoWithResult:(id)result error:(NSError *)error;
 - (void)userInfoPresenter:(UCFUserPresenter *)presenter didReturnPrdClaimsDealBidWithResult:(id)result error:(NSError *)error;
+//集合标请求回调
+- (void)userInfoPresenter:(UCFUserPresenter *)presenter didReturnCollectionDetailWithResult:(id)result error:(NSError *)error;
 
 @end
 
@@ -38,6 +40,8 @@
 - (void)fetchSignDataWithUserId:(NSString *)userId withToken:(NSString *)token completionHandler:(NetworkCompletionHandler)completionHander;
 
 - (void)fetchProDetailDataWithParameter:(NSDictionary *)parameter completionHandler:(NetworkCompletionHandler)completionHander;
+
+- (void)fetchCollectionDetailDataWithParameter:(NSDictionary *)parameter completionHandler:(NetworkCompletionHandler)completionHander;
 #pragma mark - 刷新token
 - (void)refreshData;
 - (BOOL)checkIDAAndBankBlindState:(SelectAccoutType)type;

@@ -9,5 +9,5 @@
 #import "UCFBaseViewController.h"
 
 @interface UCFGoldInvestmentDetailViewController : UCFBaseViewController
-
+@property (nonatomic,strong) NSString *orderId;
 @end
