@@ -42,6 +42,7 @@
             if ([weakSelf.delegate respondsToSelector:@selector(goldCell:didDialedWithNO:)]) {
                 [weakSelf.delegate goldCell:weakSelf didDialedWithNO:@"400-0322-988"];
             }
+//            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"telprompt://400-0322-988"]];
         }];
     }
     

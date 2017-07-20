@@ -243,11 +243,11 @@
     
 - (void)goldAccountFirstCell:(GoldAccountFirstCell *)goldFirstCell didClickedRechargeButton:(UIButton *)button
 {
-//        UCFGoldRechargeViewController *goldRecharge = [[UCFGoldRechargeViewController alloc] initWithNibName:@"UCFGoldRechargeViewController" bundle:nil];
-//        goldRecharge.baseTitleText = @"充值";
-//        goldRecharge.rootVc = self;
-//        [self.navigationController pushViewController:goldRecharge animated:YES];
-//        return;
+    if ([UserInfoSingle sharedManager].companyAgent) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"暂不支持企业用户、特殊用户充值" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+        [alertView show];
+        return;
+    }
     NSString *tipStr1 = ZXTIP1;
 //    NSInteger openStatus = [UserInfoSingle sharedManager].openStatus ;
     NSInteger enjoyOpenStatus = [UserInfoSingle sharedManager].enjoyOpenStatus;

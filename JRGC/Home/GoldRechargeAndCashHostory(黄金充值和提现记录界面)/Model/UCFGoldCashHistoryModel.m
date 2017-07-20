@@ -45,8 +45,8 @@
 {
     for (NSString *key in [self propertyKeys]) {
         id propertyValue = [dataSource valueForKey:key];
-        if ([key isEqualToString:@"rechargeMonth"]) {
-            NSString *dateStr = [dataSource objectForKey:@"rechargeDate"];
+        if ([key isEqualToString:@"withdrawMonth"]) {
+            NSString *dateStr = [dataSource objectForKey:@"withdrawDate"];
             [self setValue:[dateStr substringToIndex:7] forKey:key];
         }
         else {
