@@ -17,6 +17,8 @@
 
 - (void)closeNotice;
 
+- (void)userInfoClickAssetDetailButton:(UIButton *)button withInfomation:(id)infomation;
+
 @end
 
 @interface UCFUserInformationViewController : UIViewController

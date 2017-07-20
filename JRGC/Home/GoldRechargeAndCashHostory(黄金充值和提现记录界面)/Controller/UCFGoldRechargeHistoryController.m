@@ -10,11 +10,13 @@
 #import "UCFGoldRechargeRecordCell.h"
 #import "UCFGoldRechargeHistoryModel.h"
 #import "UCFGoldRecordHeaderFooterView.h"
+#import "UCFNoDataView.h"
 
 @interface UCFGoldRechargeHistoryController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (strong, nonatomic) NSMutableArray *dataArray;
 @property (assign, nonatomic) NSInteger currentPage;
+@property (strong, nonatomic) UCFNoDataView *noDataView;
 @end
 
 @implementation UCFGoldRechargeHistoryController
@@ -37,6 +39,8 @@
         [weakSelf getDataFromNet];
     }];
     self.tableview.footer.hidden = YES;
+    UCFNoDataView *noDataView = [[UCFNoDataView alloc] initGoldWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - 64) errorTitle:@"你还没有交易记录" buttonTitle:@""];
+    self.noDataView = noDataView;
     [self.tableview.header beginRefreshing];
 }
 
@@ -144,6 +148,12 @@
                 else
                     self.tableview.footer.hidden = YES;
                 self.dataArray = [self arrayGroupWithArray:self.dataArray];
+                if (!self.dataArray.count) {
+                    [self.noDataView showInView:self.tableview];
+                }
+                else {
+                    [self.noDataView hide];
+                }
             }
             [self.tableview reloadData];
         }else {

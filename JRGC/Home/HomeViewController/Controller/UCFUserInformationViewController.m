@@ -83,6 +83,11 @@
         }
     }
 }
+- (IBAction)assetDetail:(UIButton *)sender {
+    if ([self.delegate respondsToSelector:@selector(userInfoClickAssetDetailButton:withInfomation:)]) {
+        [self.delegate userInfoClickAssetDetailButton:sender withInfomation:self.presenter.userInfoOneModel];
+    }
+}
 
 - (IBAction)couponClicked:(UIButton *)sender {
     if (self.couponVCGenerator) {
