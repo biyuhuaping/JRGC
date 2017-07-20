@@ -806,7 +806,7 @@
                 cell.separatorInset = UIEdgeInsetsMake(0, 15, 0, 0);
             }
             NSDictionary *dict = [self.contractArray objectAtIndex:indexPath.row];
-            NSString * imageUrlStr = [dict objectSafeForKey:@"iconUrl"];
+            NSString * imageUrlStr = [dict objectSafeForKey:@"icoUrl"];
             [cell.iconUrlLabel  sd_setImageWithURL:[NSURL URLWithString:imageUrlStr]];
             cell.contractTitleLabel.text = [dict objectSafeForKey:@"contractName"];
             return cell;
