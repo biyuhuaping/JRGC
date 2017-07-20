@@ -8,8 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "UCFGoldModel.h"
+#import "MDRadialProgressView.h"
+#import "MDRadialProgressTheme.h"
+#import "SDLoopProgressView.h"
+#import "MDRadialProgressLabel.h"
 @interface UCFGoldDetailHeaderView : UIView
 @property (nonatomic,strong)UCFGoldModel *goldModel;
-
+@property (nonatomic,strong)MDRadialProgressView *circleProgress;
 - (void)setProcessViewProcess:(CGFloat)process;
 @end
