@@ -35,6 +35,10 @@
 @property (nonatomic,strong)IBOutlet UIButton *goldPurchaseButton;
 @property (nonatomic,assign)double goldPrice;//黄金实时单价
 @property (nonatomic,assign)BOOL isSelectGongDouSwitch;
+
+@property (nonatomic,assign)double availableAllMoney ;
+@property (nonatomic,assign)double availableMoney ;
+@property (nonatomic,assign)double accountBean ;
 - (IBAction)gotoGoldBidSuccessVC:(id)sender;
 
 @end
@@ -57,6 +61,11 @@
     
     _prdLabelsList = [[_dataDic objectSafeDictionaryForKey:@"nmPrdClaimInfo"] objectSafeArrayForKey:@"prdLabelsList"];
     
+    
+    NSDictionary *userAccountInfoDict = [self.dataDic objectForKey:@"userAccountInfo"];
+     _availableAllMoney = [[userAccountInfoDict objectForKey:@"availableAllMoney"] doubleValue];
+     _availableMoney = [[userAccountInfoDict objectForKey:@"availableMoney"] doubleValue];
+     _accountBean = [[userAccountInfoDict objectForKey:@"accountBean"] doubleValue];
     self.tableView.contentInset =  UIEdgeInsetsMake(10, 0, 0, 0);
     UITapGestureRecognizer *frade = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardDown)];
     [self.view addGestureRecognizer:frade];
@@ -71,7 +80,6 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillChangeFrameNotification object:nil];
     }
 #endif
-
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeGoldPrice) name:CURRENT_GOLD_PRICE object:nil];
 }
@@ -602,6 +610,11 @@
             [helper pushOpenHSType:SelectAccoutTypeHoner Step:[UserInfoSingle sharedManager].enjoyOpenStatus nav:self.navigationController];
         }
     }
+    if (alertView.tag == 2000) {
+        if (buttonIndex == 1) {
+            [self gotoGoldRechargeVC];
+        }
+    }
 }
 #pragma mark -全投
 -(void)clickAllInvestmentBtn
@@ -686,12 +699,26 @@
         [alert show];
         return;
     }
-    if(minPurchaseAmount > maxPurchaseAmount - purchaseGoldAmount )
+    if(minPurchaseAmount > maxPurchaseAmount - purchaseGoldAmount &&  maxPurchaseAmount - purchaseGoldAmount > 0)
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"需保证标的剩余克重大于起投克重" delegate:self cancelButtonTitle:@"重新输入" otherButtonTitles: nil];
         alert.tag = 1000;
         [alert show];
         return;
+    }
+    
+
+     double keyongMoney = self.isSelectGongDouSwitch ?  _availableAllMoney : _availableMoney;
+      double estimatAmountMoney  = [[cell.estimatAmountPayableLabel.text substringFromIndex:1] doubleValue];
+    if (keyongMoney < estimatAmountMoney) {
+       
+        double   needToRechare = estimatAmountMoney - keyongMoney;
+        NSString *showStr = [NSString stringWithFormat:@"总计购买金额¥%.2lf\n可用金额%.2lf\n另需充值金额¥%.2f",estimatAmountMoney, keyongMoney,needToRechare];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"可用金额不足" message:showStr delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"立即充值", nil];
+        alert.tag = 2000;
+        [alert show];
+        return;
+
     }
     
     
