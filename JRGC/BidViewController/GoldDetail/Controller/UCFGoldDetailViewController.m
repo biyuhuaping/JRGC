@@ -234,6 +234,7 @@
     self.goldHeaderView  = [[[NSBundle mainBundle]loadNibNamed:@"UCFGoldDetailHeaderView" owner:nil options:nil] firstObject];
     self.goldHeaderView.frame = CGRectMake(0, 0, ScreenWidth, 225);
     self.goldHeaderView.goldModel = self.goldModel;
+    self.goldHeaderView.circleProgress.theme.completedColor = [UIColor yellowColor]; // UIColorWithRGB(0xffc027);
     [self.oneScroll addSubview:self.goldHeaderView];
     
     [self progressAnimiation];
@@ -487,7 +488,7 @@
     _buyServiceRateLabel.textAlignment = NSTextAlignmentRight;
     [bottomBkView addSubview:_buyServiceRateLabel];
     
-    _buyServiceRateLabel.text = [NSString stringWithFormat:@"¥%@",self.goldModel.minPurchaseAmount] ;
+    _buyServiceRateLabel.text = [NSString stringWithFormat:@"¥%.2f",[self.goldModel.buyServiceRate floatValue]];
     
     
     [self drawPullingView];

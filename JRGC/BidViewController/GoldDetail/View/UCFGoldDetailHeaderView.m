@@ -15,7 +15,6 @@
 #import "MDRadialProgressLabel.h"
 @interface UCFGoldDetailHeaderView()
 {
-    MDRadialProgressView *_circleProgress;
     SDLoopProgressView *_proressView;
 }
 
@@ -43,7 +42,7 @@
         _circleProgress.theme.thickness = 12;
         _circleProgress.theme.centerColor = UIColorWithRGB(0x28335c);
         _circleProgress.theme.incompletedColor = UIColorWithRGB(0x162138);
-        _circleProgress.theme.completedColor = UIColorWithRGB(0xffc027);
+        _circleProgress.theme.completedColor = [UIColor yellowColor]; // UIColorWithRGB(0xffc027);
         _circleProgress.label.hidden = YES;
         [self addSubview:_circleProgress];
         
@@ -68,7 +67,8 @@
     self.periodTermLabel.text = [NSString stringWithFormat:@"%@",goldModel.periodTerm];
     [self.periodTermLabel setFont:[UIFont systemFontOfSize:15] string:@"天"];
     [self.periodTermLabel setFont:[UIFont systemFontOfSize:15] string:@"个月"];
-    self.remainAmountLabel.text = [NSString stringWithFormat:@"%.3lf",[goldModel.remainAmount doubleValue]];
+    self.remainAmountLabel.text = [NSString stringWithFormat:@"%.3lf克",[goldModel.remainAmount doubleValue]];
+    self.remainAmountLabel.textColor = [UIColor whiteColor];
     self.realGoldPriceLabel.text = [NSString stringWithFormat:@"实时金价(每克)¥%.2lf",[ToolSingleTon  sharedManager].readTimePrice];
     
     float Progress = 1 - [goldModel.remainAmount doubleValue]/[goldModel.totalAmount floatValue];

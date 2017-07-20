@@ -26,7 +26,9 @@
 }
 - (void)updateaVailableMoenyLab:(NSString *)availableMoeny
 {
-    self.availableMoenyLab.text = [NSString stringWithFormat:@"￥%@",availableMoeny];
+    NSString *showStr = [NSString stringWithFormat:@"%@",[Common checkNullStr:availableMoeny]];
+    showStr = [showStr isEqualToString:@""] ? @"0.00" : showStr;
+    self.availableMoenyLab.text = [NSString stringWithFormat:@"￥%@",showStr];
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
