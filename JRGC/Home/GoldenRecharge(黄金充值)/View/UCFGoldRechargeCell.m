@@ -8,10 +8,11 @@
 
 #import "UCFGoldRechargeCell.h"
 #import "UCFGoldRechargeModel.h"
+#import "NZLabel.h"
 
 @interface UCFGoldRechargeCell ()
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tipStringLeftSpace;
-@property (weak, nonatomic) IBOutlet UILabel *tipLabel;
+@property (weak, nonatomic) IBOutlet NZLabel *tipLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *blackDot;
 
 @end
@@ -20,7 +21,6 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    
 }
 
 - (void)setModel:(UCFGoldRechargeModel *)model
@@ -35,6 +35,16 @@
         self.tipStringLeftSpace.constant = 15;
     }
     self.tipLabel.text = model.tipString;
+    if ([model.tipString containsString:@"400-0322-988"]) {
+        __weak typeof(self) weakSelf = self;
+        [self.tipLabel setFontColor:[UIColor blueColor] string:@"400-0322-988"];
+        [self.tipLabel addLinkString:@"400-0322-988" block:^(ZBLinkLabelModel *linkModel) {
+            if ([weakSelf.delegate respondsToSelector:@selector(goldCell:didDialedWithNO:)]) {
+                [weakSelf.delegate goldCell:weakSelf didDialedWithNO:@"400-0322-988"];
+            }
+        }];
+    }
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

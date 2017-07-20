@@ -8,8 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@class UCFGoldRechargeModel;
+@class UCFGoldRechargeModel, UCFGoldRechargeCell;
+@protocol UCFGoldRechargeCellDelegate <NSObject>
+- (void)goldCell:(UCFGoldRechargeCell *)goldCell didDialedWithNO:(NSString *)No;
+@end
+
 @interface UCFGoldRechargeCell : UITableViewCell
 @property (strong, nonatomic) UCFGoldRechargeModel *model;
-
+@property (weak, nonatomic)  id<UCFGoldRechargeCellDelegate> delegate;
 @end

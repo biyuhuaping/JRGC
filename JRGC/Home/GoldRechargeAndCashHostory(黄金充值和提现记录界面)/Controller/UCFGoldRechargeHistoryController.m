@@ -7,8 +7,9 @@
 //
 
 #import "UCFGoldRechargeHistoryController.h"
-#import "UCFGoldReCashHisCell.h"
-#import "UCFGoldHistoryModel.h"
+#import "UCFGoldRechargeRecordCell.h"
+#import "UCFGoldRechargeHistoryModel.h"
+#import "UCFGoldRecordHeaderFooterView.h"
 
 @interface UCFGoldRechargeHistoryController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
@@ -29,6 +30,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self addLeftButton];
+    self.currentPage = 1;
     [self.tableview addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(getDataFromNet)];
     __weak typeof(self) weakSelf = self;
     [self.tableview addLegendFooterWithRefreshingBlock:^{
@@ -52,19 +54,34 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *cellId = @"goldRechargeAndCash";
-    UCFGoldReCashHisCell *hisCell = [tableView dequeueReusableCellWithIdentifier:cellId];
+    static NSString *cellId = @"goldRechargeRecord";
+    UCFGoldRechargeRecordCell *hisCell = [tableView dequeueReusableCellWithIdentifier:cellId];
     if (nil == hisCell) {
-        hisCell = (UCFGoldReCashHisCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFGoldReCashHisCell" owner:self options:nil] lastObject];
+        hisCell = (UCFGoldRechargeRecordCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFGoldRechargeRecordCell" owner:self options:nil] lastObject];
         hisCell.tableview = tableView;
     }
     hisCell.indexPath = indexPath;
+    NSArray *monthArray = [self.dataArray objectAtIndex:indexPath.section];
+    hisCell.model = [monthArray objectAtIndex:indexPath.row];
     return hisCell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 30;
+    return 35;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    static NSString *viewId = @"goldRecordHeaderFooterView";
+    UCFGoldRecordHeaderFooterView *recordView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:viewId];
+    if (nil == recordView) {
+        recordView = (UCFGoldRecordHeaderFooterView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFGoldRecordHeaderFooterView" owner:self options:nil] lastObject];
+    }
+    UCFGoldRechargeHistoryModel *model = [[self.dataArray objectAtIndex:section] firstObject];
+    NSArray *dateArr = [model.rechargeMonth componentsSeparatedByString:@"-"];
+    recordView.monthLabel.text = [NSString stringWithFormat:@"%@年%d月", [dateArr firstObject], [[dateArr objectAtIndex:1] intValue]];
+    return recordView;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -72,14 +89,9 @@
     return 0.001;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    return nil;
-}
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 35;
+    return 101;
 }
 
 - (void)getDataFromNet
@@ -87,6 +99,9 @@
     NSString *userId = [UserInfoSingle sharedManager].userId;
     if (!userId) {
         return;
+    }
+    if ([self.tableview.header isRefreshing]) {
+        self.currentPage = 1;
     }
     NSDictionary *dictory = [NSDictionary dictionaryWithObjectsAndKeys:userId, @"userId", @"20", @"pageSize", [NSString stringWithFormat:@"%ld", (long)self.currentPage], @"pageNo", nil];
     [[NetworkModule sharedNetworkModule] newPostReq:dictory tag:kSXTagGoldRechargeHistory owner:self signature:YES Type:SelectAccoutDefault];
@@ -112,8 +127,7 @@
                 [self.dataArray removeAllObjects];
             }
             for (NSDictionary *temp in resut) {
-                UCFGoldHistoryModel *goldhistory = [UCFGoldHistoryModel goldHistoryModelWithDict:temp];
-                goldhistory.type = UCFGoldHistoryModelTypeRecharge;
+                UCFGoldRechargeHistoryModel *goldhistory = [UCFGoldRechargeHistoryModel goldRechargeHistoryModelWithDict:temp];
                 [self.dataArray addObject:goldhistory];
             }
             BOOL hasNextPage = [[[pageData objectSafeDictionaryForKey:@"pagination"] objectForKey:@"hasNextPage"] boolValue];
@@ -161,11 +175,11 @@
 - (NSMutableArray *)arrayGroupWithArray:(NSMutableArray *)array
 {
     if (array.count>0) {
-        UCFGoldHistoryModel *firstModel = [array firstObject];
+        UCFGoldRechargeHistoryModel *firstModel = [array firstObject];
         NSMutableArray *tempDataArray = [NSMutableArray array];
         NSMutableArray *tempMonthArray = [NSMutableArray array];
-        for (UCFGoldHistoryModel *model in array) {
-            if ([model.rechargeDate isEqualToString:firstModel.rechargeDate]) {
+        for (UCFGoldRechargeHistoryModel *model in array) {
+            if ([model.rechargeMonth isEqualToString:firstModel.rechargeMonth]) {
                 [tempMonthArray addObject:model];
                 if ([model isEqual:[array lastObject]]) {
                     [tempDataArray addObject:tempMonthArray];
