@@ -220,8 +220,15 @@
 
 - (void)getGoldProFromNetWithPage:(NSString *)page
 {
+    NSString *userId = [UserInfoSingle sharedManager].userId;
+    NSDictionary * param;
+    if (nil == userId) {
+        param = [NSDictionary dictionaryWithObjectsAndKeys:@"20", @"pageSize", page, @"pageNo", nil];
+    }
+    else {
+        param = [NSDictionary dictionaryWithObjectsAndKeys:userId, @"userId", @"20", @"pageSize", page, @"pageNo", nil];
+    }
     
-    NSDictionary * param = [NSDictionary dictionaryWithObjectsAndKeys:@"20", @"pageSize", page, @"pageNo", nil];
     [[NetworkModule sharedNetworkModule] newPostReq:param tag:kSXTagGoldList owner:self signature:NO Type:SelectAccoutDefault];
 }
 

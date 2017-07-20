@@ -24,6 +24,10 @@
     [super awakeFromNib];
     [self protocolIsSelect:self.isSelect];
     [self.textField addTarget:self action:@selector(textfieldLength:) forControlEvents:UIControlEventEditingChanged];
+    UIView *leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 8, 37)];
+    self.textField.leftView = leftView;
+    self.textField.leftViewMode=UITextFieldViewModeAlways; //此处用来设置leftview现实时机
+    self.textField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
 }
 
 - (UITextField *)textfieldLength:(UITextField *)textField

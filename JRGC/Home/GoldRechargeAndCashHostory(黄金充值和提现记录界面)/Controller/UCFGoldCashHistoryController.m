@@ -62,6 +62,8 @@
         hisCell.tableview = tableView;
     }
     hisCell.indexPath = indexPath;
+    NSArray *array = [self.dataArray objectAtIndex:indexPath.section];
+    hisCell.model = [array objectAtIndex:indexPath.row];
     return hisCell;
 }
 
@@ -72,8 +74,15 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    static NSString *cellId = @"goldRecordHeaderFooterView";
-    return nil;
+    static NSString *viewId = @"goldRecordHeaderFooterView";
+    UCFGoldRecordHeaderFooterView *recordView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:viewId];
+    if (nil == recordView) {
+        recordView = (UCFGoldRecordHeaderFooterView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFGoldRecordHeaderFooterView" owner:self options:nil] lastObject];
+    }
+    UCFGoldCashHistoryModel *model = [[self.dataArray objectAtIndex:section] firstObject];
+    NSArray *dateArr = [model.withdrawMonth componentsSeparatedByString:@"-"];
+    recordView.monthLabel.text = [NSString stringWithFormat:@"%@年%d月", [dateArr firstObject], [[dateArr objectAtIndex:1] intValue]];
+    return recordView;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -83,7 +92,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 35;
+    return 118;
 }
 
 - (void)getDataFromNet
@@ -171,7 +180,7 @@
         NSMutableArray *tempDataArray = [NSMutableArray array];
         NSMutableArray *tempMonthArray = [NSMutableArray array];
         for (UCFGoldCashHistoryModel *model in array) {
-            if ([model.rechargeMonth isEqualToString:firstModel.rechargeMonth]) {
+            if ([model.withdrawMonth isEqualToString:firstModel.withdrawMonth]) {
                 [tempMonthArray addObject:model];
                 if ([model isEqual:[array lastObject]]) {
                     [tempDataArray addObject:tempMonthArray];
