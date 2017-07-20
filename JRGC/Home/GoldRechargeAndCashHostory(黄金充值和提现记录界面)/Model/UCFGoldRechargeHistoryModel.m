@@ -1,16 +1,16 @@
 //
-//  UCFGoldHistoryModel.m
+//  UCFGoldRechargeHistoryModel.m
 //  JRGC
 //
-//  Created by njw on 2017/7/18.
+//  Created by njw on 2017/7/19.
 //  Copyright © 2017年 qinwei. All rights reserved.
 //
 
-#import "UCFGoldHistoryModel.h"
+#import "UCFGoldRechargeHistoryModel.h"
 #import <objc/runtime.h>
 
-@implementation UCFGoldHistoryModel
-+ (instancetype)goldHistoryModelWithDict:(NSDictionary *)dict
+@implementation UCFGoldRechargeHistoryModel
++ (instancetype)goldRechargeHistoryModelWithDict:(NSDictionary *)dict
 {
     return [[self alloc] initWithDictionary:dict];
 }
@@ -45,11 +45,9 @@
 {
     for (NSString *key in [self propertyKeys]) {
         id propertyValue = [dataSource valueForKey:key];
-        if ([key isEqualToString:@"type"]) {
-            
-        }
-        else if ([key isEqualToString:@"rechargeDate"]) {
-            [self setValue:[propertyValue substringToIndex:7] forKey:key];
+        if ([key isEqualToString:@"rechargeMonth"]) {
+            NSString *dateStr = [dataSource objectForKey:@"rechargeDate"];
+            [self setValue:[dateStr substringToIndex:7] forKey:key];
         }
         else {
             if (![propertyValue isKindOfClass:[NSNull class]] && propertyValue != nil) {

@@ -8,7 +8,7 @@
 
 #import "UCFGoldRechargeHistoryController.h"
 #import "UCFGoldRechargeRecordCell.h"
-#import "UCFGoldHistoryModel.h"
+#import "UCFGoldRechargeHistoryModel.h"
 #import "UCFGoldRecordHeaderFooterView.h"
 
 @interface UCFGoldRechargeHistoryController () <UITableViewDelegate, UITableViewDataSource>
@@ -61,6 +61,8 @@
         hisCell.tableview = tableView;
     }
     hisCell.indexPath = indexPath;
+    NSArray *monthArray = [self.dataArray objectAtIndex:indexPath.section];
+    hisCell.model = [monthArray objectAtIndex:indexPath.row];
     return hisCell;
 }
 
@@ -76,8 +78,8 @@
     if (nil == recordView) {
         recordView = (UCFGoldRecordHeaderFooterView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFGoldRecordHeaderFooterView" owner:self options:nil] lastObject];
     }
-    UCFGoldHistoryModel *model = [[self.dataArray objectAtIndex:section] firstObject];
-    NSArray *dateArr = [model.rechargeDate componentsSeparatedByString:@"-"];
+    UCFGoldRechargeHistoryModel *model = [[self.dataArray objectAtIndex:section] firstObject];
+    NSArray *dateArr = [model.rechargeMonth componentsSeparatedByString:@"-"];
     recordView.monthLabel.text = [NSString stringWithFormat:@"%@年%d月", [dateArr firstObject], [[dateArr objectAtIndex:1] intValue]];
     return recordView;
 }
@@ -89,7 +91,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 35;
+    return 101;
 }
 
 - (void)getDataFromNet
@@ -125,8 +127,7 @@
                 [self.dataArray removeAllObjects];
             }
             for (NSDictionary *temp in resut) {
-                UCFGoldHistoryModel *goldhistory = [UCFGoldHistoryModel goldHistoryModelWithDict:temp];
-                goldhistory.type = UCFGoldHistoryModelTypeRecharge;
+                UCFGoldRechargeHistoryModel *goldhistory = [UCFGoldRechargeHistoryModel goldRechargeHistoryModelWithDict:temp];
                 [self.dataArray addObject:goldhistory];
             }
             BOOL hasNextPage = [[[pageData objectSafeDictionaryForKey:@"pagination"] objectForKey:@"hasNextPage"] boolValue];
@@ -174,11 +175,11 @@
 - (NSMutableArray *)arrayGroupWithArray:(NSMutableArray *)array
 {
     if (array.count>0) {
-        UCFGoldHistoryModel *firstModel = [array firstObject];
+        UCFGoldRechargeHistoryModel *firstModel = [array firstObject];
         NSMutableArray *tempDataArray = [NSMutableArray array];
         NSMutableArray *tempMonthArray = [NSMutableArray array];
-        for (UCFGoldHistoryModel *model in array) {
-            if ([model.rechargeDate isEqualToString:firstModel.rechargeDate]) {
+        for (UCFGoldRechargeHistoryModel *model in array) {
+            if ([model.rechargeMonth isEqualToString:firstModel.rechargeMonth]) {
                 [tempMonthArray addObject:model];
                 if ([model isEqual:[array lastObject]]) {
                     [tempDataArray addObject:tempMonthArray];

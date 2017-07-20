@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+@class UCFGoldRechargeHistoryModel;
 @interface UCFGoldRechargeRecordCell : UITableViewCell
 @property (weak, nonatomic) UITableView *tableview;
 @property (strong, nonatomic) NSIndexPath *indexPath;
+@property (strong, nonatomic) UCFGoldRechargeHistoryModel *model;
 @end

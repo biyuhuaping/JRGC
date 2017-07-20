@@ -9,13 +9,23 @@
 #import "UCFGoldCashHistoryController.h"
 #import "UCFGoldCashRecordCell.h"
 #import "UCFGoldRecordHeaderFooterView.h"
+#import "UCFGoldCashHistoryModel.h"
 
 @interface UCFGoldCashHistoryController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
+@property (strong, nonatomic) NSMutableArray *dataArray;
 @property (assign, nonatomic) NSUInteger currentPage;
 @end
 
 @implementation UCFGoldCashHistoryController
+
+- (NSMutableArray *)dataArray
+{
+    if (nil == _dataArray) {
+        _dataArray = [NSMutableArray array];
+    }
+    return _dataArray;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -34,12 +44,13 @@
 #pragma mark - tableview 的数据源方法
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 3;
+    return self.dataArray.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 4;
+    NSArray *array = [self.dataArray objectAtIndex:section];
+    return array.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -90,17 +101,96 @@
 
 - (void)beginPost:(kSXTag)tag
 {
-    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 }
 
 - (void)endPost:(id)result tag:(NSNumber *)tag
 {
-    
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    NSMutableDictionary *dic = [result objectFromJSONString];
+    NSString *rstcode = dic[@"ret"];
+    NSString *rsttext = dic[@"message"];
+    if (tag.integerValue == kSXTagGoldCashHistory) {
+        if ([rstcode intValue] == 1) {
+            NSDictionary *dict = [dic objectSafeDictionaryForKey:@"data"];
+            NSDictionary *pageData = [dict objectSafeDictionaryForKey:@"pageData"];
+            NSArray *resut = [pageData objectSafeArrayForKey:@"result"];
+            if ([self.tableview.header isRefreshing]) {
+                [self.dataArray removeAllObjects];
+            }
+            for (NSDictionary *temp in resut) {
+                UCFGoldCashHistoryModel *goldhistory = [UCFGoldCashHistoryModel goldCashHistoryModelWithDict:temp];
+                [self.dataArray addObject:goldhistory];
+            }
+            BOOL hasNextPage = [[[pageData objectSafeDictionaryForKey:@"pagination"] objectForKey:@"hasNextPage"] boolValue];
+            if (hasNextPage) {
+                self.currentPage ++;
+                self.tableview.footer.hidden = YES;
+                [self.tableview.footer resetNoMoreData];
+                self.dataArray = [self arrayGroupWithArray:self.dataArray];
+            }
+            else {
+                if (self.dataArray.count > 0) {
+                    [self.tableview.footer noticeNoMoreData];
+                }
+                else
+                    self.tableview.footer.hidden = YES;
+                self.dataArray = [self arrayGroupWithArray:self.dataArray];
+            }
+            [self.tableview reloadData];
+        }else {
+            if (![rsttext isEqualToString:@""] && rsttext) {
+                [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
+            }
+        }
+        if ([self.tableview.header isRefreshing]) {
+            [self.tableview.header endRefreshing];
+        }
+        if ([self.tableview.footer isRefreshing]) {
+            [self.tableview.footer endRefreshing];
+        }
+    }
 }
 
 -(void)errorPost:(NSError *)err tag:(NSNumber *)tag
 {
+    [MBProgressHUD displayHudError:err.userInfo[@"NSLocalizedDescription"]];
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    if ([self.tableview.header isRefreshing]) {
+        [self.tableview.header endRefreshing];
+    }
+    if ([self.tableview.footer isRefreshing]) {
+        [self.tableview.footer endRefreshing];
+    }
+}
+
+- (NSMutableArray *)arrayGroupWithArray:(NSMutableArray *)array
+{
+    if (array.count>0) {
+        UCFGoldCashHistoryModel *firstModel = [array firstObject];
+        NSMutableArray *tempDataArray = [NSMutableArray array];
+        NSMutableArray *tempMonthArray = [NSMutableArray array];
+        for (UCFGoldCashHistoryModel *model in array) {
+            if ([model.rechargeMonth isEqualToString:firstModel.rechargeMonth]) {
+                [tempMonthArray addObject:model];
+                if ([model isEqual:[array lastObject]]) {
+                    [tempDataArray addObject:tempMonthArray];
+                }
+            }
+            else {
+                firstModel = model;
+                [tempDataArray addObject:tempMonthArray];
+                tempMonthArray = [NSMutableArray array];
+                [tempMonthArray addObject:model];
+                if ([model isEqual:[array lastObject]]) {
+                    [tempDataArray addObject:tempMonthArray];
+                }
+            }
+        }
+        return tempDataArray;
+    }
     
+    return nil;
 }
 
 @end

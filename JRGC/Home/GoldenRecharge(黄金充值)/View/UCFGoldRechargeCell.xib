@@ -31,7 +31,7 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NK3-dl-2VV">
+                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NK3-dl-2VV" customClass="NZLabel">
                         <rect key="frame" x="25" y="14" width="280" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -49,7 +49,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="blackDot" destination="bYn-sZ-NuP" id="D7M-Xm-NTj"/>
-                <outlet property="tipLabel" destination="NK3-dl-2VV" id="vtl-ny-SCP"/>
+                <outlet property="tipLabel" destination="NK3-dl-2VV" id="j1b-RV-YyP"/>
                 <outlet property="tipStringLeftSpace" destination="5cA-Su-Xdh" id="AfA-Mf-GHh"/>
             </connections>
         </tableViewCell>
