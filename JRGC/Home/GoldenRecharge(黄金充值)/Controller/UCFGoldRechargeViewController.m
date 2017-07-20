@@ -13,7 +13,7 @@
 #import "UCFGoldRechargeHistoryController.h"
 #import "UCFGoldRechargeWebController.h"
 
-@interface UCFGoldRechargeViewController () <UITableViewDelegate, UITableViewDataSource, UCFGoldRechargeHeaderViewDelegate>
+@interface UCFGoldRechargeViewController () <UITableViewDelegate, UITableViewDataSource, UCFGoldRechargeHeaderViewDelegate, UCFGoldRechargeCellDelegate>
 @property (weak, nonatomic) UCFGoldRechargeHeaderView *goldRechargeHeader;
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (strong, nonatomic) NSMutableArray *dataArray;
@@ -129,7 +129,7 @@
         goldRecharge = (UCFGoldRechargeCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFGoldRechargeCell" owner:self options:nil] lastObject];
     }
     goldRecharge.model = [self.dataArray objectAtIndex:indexPath.row];
-    
+    goldRecharge.delegate = self;
     return goldRecharge;
 }
 
@@ -181,6 +181,11 @@
 {
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     [MBProgressHUD displayHudError:err.userInfo[@"NSLocalizedDescription"]];
+}
+
+- (void)goldCell:(UCFGoldRechargeCell *)goldCell didDialedWithNO:(NSString *)No
+{
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"telprompt://400-0322-988"]];
 }
 
 @end

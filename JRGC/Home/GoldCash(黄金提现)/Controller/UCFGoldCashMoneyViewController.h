@@ -9,5 +9,5 @@
 #import "UCFBaseViewController.h"
 
 @interface UCFGoldCashMoneyViewController : UCFBaseViewController
-
+@property (copy, nonatomic) NSString *balanceMoney;
 @end
