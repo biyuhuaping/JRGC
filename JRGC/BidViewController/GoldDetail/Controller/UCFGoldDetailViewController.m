@@ -46,6 +46,8 @@
     NSTimer *updateTimer;
     CGFloat Progress;
     CGFloat curProcess;
+    
+    CGFloat pauseInfoHeight;//暂停信息高度
 }
 
 @property(nonatomic,strong) IBOutlet UIScrollView *oneScroll;
@@ -239,6 +241,27 @@
     
     [self progressAnimiation];
     
+    
+    
+//     self.goldModel.pauseInfo =   @"9：30至23：50开放购买定期产品（周末和工作日可以购买，节假日除外）。此时间段若变动，工场收到众瑞邮件通知后，修改技术参数控制。";
+    NSString *pauseInfo = self.goldModel.pauseInfo;
+    if (pauseInfo == nil || [pauseInfo isEqualToString:@""]) {
+        pauseInfoHeight = 0;
+        self.GoldInvestmentBtn.backgroundColor = UIColorWithRGB(0xffc027);
+        [self.GoldInvestmentBtn setTitle:@"立即购买" forState:UIControlStateNormal];
+        self.GoldInvestmentBtn.userInteractionEnabled = YES;
+    }
+    else
+    {
+        self.GoldInvestmentBtn.backgroundColor = UIColorWithRGB(0xcccccc);
+        [self.GoldInvestmentBtn setTitle:@"暂停交易" forState:UIControlStateNormal];
+        self.GoldInvestmentBtn.userInteractionEnabled = NO;
+        CGSize size =  [Common getStrHeightWithStr:self.goldModel.pauseInfo AndStrFont:12 AndWidth:ScreenWidth - 30 AndlineSpacing:2];
+        pauseInfoHeight = size.height;
+    }
+    
+    
+    
     NSArray *prdLabelsList = _prdLabelsList;
     NSMutableArray *labelPriorityArr = [NSMutableArray arrayWithCapacity:4];
     if (![prdLabelsList isEqual:[NSNull null]]) {
@@ -255,9 +278,25 @@
       bottomViewYPos = 30;
         [self drawMarkView:labelPriorityArr];
     }else{
-      bottomViewYPos = 10;
+        
+        if (self.goldModel.pauseInfo) {
+            UIView *pauseInfoView  = [[UIView alloc] initWithFrame:CGRectMake(0,CGRectGetMaxY(self.goldHeaderView.frame), ScreenWidth, pauseInfoHeight + 10)];
+            pauseInfoView.backgroundColor = [UIColor clearColor];
+            
+            UILabel *buyCueDesTipLabel = [[UILabel alloc]initWithFrame:CGRectMake(15 , 5 , ScreenWidth - 30 , pauseInfoHeight )];
+            buyCueDesTipLabel.textColor = UIColorWithRGB(0xfd4d4c);
+            buyCueDesTipLabel.textAlignment = NSTextAlignmentLeft;
+            buyCueDesTipLabel.backgroundColor = [UIColor clearColor];
+            buyCueDesTipLabel.font = [UIFont systemFontOfSize:12];
+            buyCueDesTipLabel.numberOfLines = 0 ;
+            buyCueDesTipLabel.text = self.goldModel.pauseInfo;
+            [pauseInfoView addSubview: buyCueDesTipLabel];
+            [self.oneScroll addSubview:pauseInfoView];
+            bottomViewYPos = pauseInfoHeight + 10;
+        }else{
+           bottomViewYPos = 10;
+        }
     }
-
     [self  drawTypeBottomView];
 }
 #pragma 进度条动画
@@ -288,7 +327,26 @@
 #pragma 标签view
 - (void)drawMarkView:(NSMutableArray *)labelPriorityArr
 {
-    UIView *markBg = [[UIView alloc] initWithFrame:CGRectMake(0,CGRectGetMaxY(self.goldHeaderView.frame), ScreenWidth, 30)];
+    
+    float markBg_Height = 30;
+    if (self.goldModel.pauseInfo) {
+        bottomViewYPos  = 30 + pauseInfoHeight + 5;
+    }
+    UIView *markBg = [[UIView alloc] initWithFrame:CGRectMake(0,CGRectGetMaxY(self.goldHeaderView.frame), ScreenWidth, markBg_Height)];
+    if (self.goldModel.pauseInfo) {
+        UIView *pauseInfoView  = [[UIView alloc] initWithFrame:CGRectMake(0,30 , ScreenWidth, pauseInfoHeight + 5)];
+        pauseInfoView.backgroundColor = [UIColor clearColor];
+        
+        UILabel *buyCueDesTipLabel = [[UILabel alloc]initWithFrame:CGRectMake(15 , 0 , ScreenWidth - 30 , pauseInfoHeight )];
+        buyCueDesTipLabel.textColor = UIColorWithRGB(0xfd4d4c);
+        buyCueDesTipLabel.textAlignment = NSTextAlignmentLeft;
+        buyCueDesTipLabel.backgroundColor = [UIColor clearColor];
+        buyCueDesTipLabel.font = [UIFont systemFontOfSize:12];
+        buyCueDesTipLabel.numberOfLines = 0 ;
+        buyCueDesTipLabel.text = self.goldModel.pauseInfo;
+        [pauseInfoView addSubview: buyCueDesTipLabel];
+        [markBg addSubview:pauseInfoView];
+    }
     [self.oneScroll addSubview:markBg];
     markBg.backgroundColor = [UIColor clearColor];
     

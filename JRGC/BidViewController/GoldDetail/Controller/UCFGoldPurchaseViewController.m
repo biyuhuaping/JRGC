@@ -456,6 +456,7 @@
         }
         cell.dataDict = self.dataDic;
         cell.goldModel  = _goldModel;
+        self.isSelectGongDouSwitch = cell.goldSwitch.on;
         cell.delegate = self;
          return cell;
     }else if (indexPath.section == 2){
@@ -559,21 +560,17 @@
 {
     [self.view endEditing:YES];
     UCFGoldMoneyBoadCell *cell = (UCFGoldMoneyBoadCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
-//    NSString *investMoney = cell.inputMoneyTextFieldLable.text;
-//    if (cell.inputMoneyTextFieldLable.text.length == 0 || [cell.inputMoneyTextFieldLable.text isEqualToString:@"0"] || [cell.inputMoneyTextFieldLable.text isEqualToString:@"0.0"] || [cell.inputMoneyTextFieldLable.text isEqualToString:@"0.00"]) {
-//        [MBProgressHUD displayHudError:[NSString stringWithFormat:@"请输入%@金额",_wJOrZxStr]];
-//        return;
-//    }
+    if([cell.moneyTextField.text isEqualToString:@""] ||[ cell.moneyTextField.text doubleValue] == 0 ){
+        [MBProgressHUD displayHudError:@"请输入购买克重"];
+        return;
+    }
+
     UCFGoldCalculatorView * view = [[[NSBundle mainBundle]loadNibNamed:@"UCFGoldCalculatorView" owner:nil options:nil] firstObject];
     view.goldMoneyTextField.text = cell.moneyTextField.text;
     view.nmTypeIdStr = self.goldModel.nmTypeId;
     view.tag = 173924;
     view.frame = CGRectMake(0, 0, ScreenWidth,ScreenHeight);
-//    view.center = bgView.center;
-//    view.accoutType = self.accoutType;
-//    [view reloadViewWithData:_dataDict AndNowMoney:investMoney];
-//    [bgView addSubview:view];
-    
+    [view getGoldCalculatorHTTPRequset];
     AppDelegate * app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     view.center = app.window.center;
     [app.window addSubview:view];
@@ -669,7 +666,7 @@
      */
     
     UCFGoldMoneyBoadCell *cell = (UCFGoldMoneyBoadCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
-    
+    self.isSelectGongDouSwitch = cell.goldSwitch.on;
     double purchaseGoldAmount =  [cell.moneyTextField.text doubleValue];
     double minPurchaseAmount  =  [self.goldModel.minPurchaseAmount doubleValue];
     double maxPurchaseAmount  =  [self.goldModel.remainAmount doubleValue];
@@ -726,7 +723,11 @@
     NSString *purchaseGoldAmountStr = [NSString stringWithFormat:@"%.2lf",amountPay];
     NSDictionary  *nmPrdClaimInfoDic  = [_dataDic objectSafeDictionaryForKey:@"nmPrdClaimInfo"];
     NSString *nmPrdClaimIdStr = [nmPrdClaimInfoDic objectForKey:@"nmPrdClaimId"];
-    NSDictionary *paramDict = @{@"nmPrdClaimId": nmPrdClaimIdStr,@"purchaseBean":@"0.00",@"purchaseGoldAmount":cell.moneyTextField.text,@"purchaseMoney":purchaseGoldAmountStr,@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"workshopCode":@""};
+    
+    NSString *purchaseBeanStr = self.isSelectGongDouSwitch ? [NSString stringWithFormat:@"%.2f",_accountBean]:@"0.00";
+    
+    NSDictionary *paramDict = @{@"nmPrdClaimId": nmPrdClaimIdStr,@"purchaseBean":purchaseBeanStr,@"purchaseGoldAmount":cell.moneyTextField.text,@"purchaseMoney":purchaseGoldAmountStr,@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"workshopCode":@""};
+    
     [[NetworkModule sharedNetworkModule] newPostReq:paramDict tag:kSXTagGetPurchaseGold owner:self signature:YES Type:SelectAccoutTypeGold];
 }
 

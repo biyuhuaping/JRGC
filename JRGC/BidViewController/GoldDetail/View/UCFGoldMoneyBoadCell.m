@@ -11,7 +11,7 @@
 @interface UCFGoldMoneyBoadCell()<UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *GoldCalculatorView;
-@property (weak, nonatomic) IBOutlet UISwitch *goldSwitch;
+
 - (IBAction)clickGoldRechargeButton:(id)sender;
 - (IBAction)clickAllInvestmentBtn:(id)sender;
 - (IBAction)clickGoldSwitch:(UISwitch *)sender;
