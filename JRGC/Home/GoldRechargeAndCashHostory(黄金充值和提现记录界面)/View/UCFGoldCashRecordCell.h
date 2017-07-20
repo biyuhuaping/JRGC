@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+@class UCFGoldCashHistoryModel;
 @interface UCFGoldCashRecordCell : UITableViewCell
 @property (weak, nonatomic) UITableView *tableview;
 @property (strong, nonatomic) NSIndexPath *indexPath;
+@property (strong, nonatomic) UCFGoldCashHistoryModel *model;
 @end

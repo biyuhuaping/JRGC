@@ -15,7 +15,7 @@
 @property (copy, nonatomic) NSString *withdrawDate;
 @property (copy, nonatomic) NSString *withdrawMode;
 @property (copy, nonatomic) NSString *withdrawOrderId;
-@property (copy, nonatomic) NSString *rechargeMonth;
+@property (copy, nonatomic) NSString *withdrawMonth;
 
 + (instancetype)goldCashHistoryModelWithDict:(NSDictionary *)dict;
 @end
