@@ -29,6 +29,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *updateGoldPriceBtn;
 @property (assign,nonatomic)CGFloat angle;
 @property (assign, nonatomic) BOOL isStopTrans; //是否停止旋转
+@property (assign, nonatomic) BOOL isLoading;
 @property (strong, nonatomic) NSDictionary *tmpData;
 @end
 
@@ -53,15 +54,14 @@
 - (void)changeTransState
 {
     //如果在此时在手动点击略过
-    if (self.updateGoldPriceBtn.userInteractionEnabled == NO) {
-        return;
-    } else {
+    if (!self.isLoading) {
         [self startAnimation];
     }
     dispatch_queue_t queue= dispatch_get_main_queue();
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), queue, ^{
         DBLog(@"主队列--延迟执行------%@",[NSThread currentThread]);
         _isStopTrans = YES;
+        self.isLoading = NO;
         self.updateGoldPriceBtn.userInteractionEnabled = YES;
         _angle = 0.0f;
         [self endAnimation];
@@ -101,6 +101,7 @@
     sender.userInteractionEnabled = NO;
     [[ToolSingleTon sharedManager] getGoldPrice];
     [self startAnimation];
+    self.isLoading = YES;
 
 }
 - (IBAction)recoverBtnClicked:(UIButton *)sender {
