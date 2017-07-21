@@ -153,13 +153,6 @@
         
         UCFGoldModel *goldModel = [self.dataArray objectAtIndex:indexPath.row];
         
-        if ([goldModel.status intValue] == 2) {
-            UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前标的详情只对认购人开放"];
-            [self.navigationController pushViewController:controller animated:YES];
-            return;
-
-        }
-        
         NSString *nmProClaimIdStr = goldModel.nmPrdClaimId;
         NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId",nmProClaimIdStr, @"nmPrdClaimId",nil];
         [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagGetGoldPrdClaimDetail owner:self signature:YES Type:SelectAccoutTypeGold];
@@ -302,7 +295,7 @@
         }
         else
         {
-            [AuxiliaryFunc showAlertViewWithMessage:rsttext];
+               [AuxiliaryFunc showAlertViewWithMessage:rsttext];
         }
     }
     else if (tag.integerValue == kSXTagGetGoldPrdClaimDetail){
@@ -317,7 +310,14 @@
         }
         else
         {
-            [AuxiliaryFunc showAlertViewWithMessage:rsttext];
+            if([[dic objectSafeForKey:@"code"]  intValue] == 11112)
+            {
+                UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前标的详情只对认购人开放"];
+                [self.navigationController pushViewController:controller animated:YES];
+            }else{
+                [AuxiliaryFunc showAlertViewWithMessage:rsttext];
+            }
+
         }
     }
     if ([self.tableview.header isRefreshing]) {

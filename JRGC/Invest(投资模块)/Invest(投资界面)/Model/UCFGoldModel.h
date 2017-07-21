@@ -23,5 +23,6 @@
 @property (copy, nonatomic) NSString *nmTypeId;
 @property (copy, nonatomic) NSString *buyServiceRate;
 @property (copy, nonatomic) NSString *pauseInfo;//暂停信息
+@property (copy, nonatomic) NSString *nmPurchaseToken;
 + (instancetype)goldModelWithDict:(NSDictionary *)dict;
 @end
