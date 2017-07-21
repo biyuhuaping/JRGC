@@ -93,8 +93,7 @@
         view.frame = CGRectMake(0, 0, 265, 220);
         
         UCFAssetTipView *tipview = (UCFAssetTipView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFAssetTipView" owner:self options:nil] lastObject];
-#warning 待修改
-        tipview.assetLabel.text = [NSString stringWithFormat:@"%@=%@+%@+%@", weakSelf.presenter.userInfoOneModel.total, weakSelf.presenter.userInfoOneModel.goldMarketAmount, weakSelf.presenter.userInfoOneModel.nmCashBalance];
+        tipview.assetLabel.text = [NSString stringWithFormat:@"%@=%@+%@+%@", weakSelf.presenter.userInfoOneModel.total, weakSelf.presenter.userInfoOneModel.cashTotal, weakSelf.presenter.userInfoOneModel.goldMarketAmount, weakSelf.presenter.userInfoOneModel.nmCashBalance];
         tipview.frame = view.bounds;
         view.center = CGPointMake(ScreenWidth * 0.5, ScreenHeight * 0.5);
         tipview.delegate = weakSelf;

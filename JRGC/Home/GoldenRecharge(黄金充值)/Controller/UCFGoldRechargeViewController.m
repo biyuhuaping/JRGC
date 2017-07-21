@@ -12,6 +12,7 @@
 #import "UCFGoldRechargeModel.h"
 #import "UCFGoldRechargeHistoryController.h"
 #import "UCFGoldRechargeWebController.h"
+#import "UCFContractModel.h"
 
 @interface UCFGoldRechargeViewController () <UITableViewDelegate, UITableViewDataSource, UCFGoldRechargeHeaderViewDelegate, UCFGoldRechargeCellDelegate>
 @property (weak, nonatomic) UCFGoldRechargeHeaderView *goldRechargeHeader;
@@ -44,7 +45,7 @@
     [self addLeftButton];
     [self addRightBtn];
     [self createUI];
-    [self initData];
+//    [self initData];
     [self getTipInfoFromNet];
 }
 
@@ -88,24 +89,6 @@
     [self.navigationController pushViewController:goldRechargeHistory animated:YES];
 }
 
-- (void)initData {
-    NSArray *array = @[@"温馨提示", @"充值金额仅限在黄金账户使用;", @"使用快捷支付充值最低金额应大于等于10元;", @"对首次充值后未交易的提现，平台收取0.4%的手续费;", @"充值/提现必须为银行借记卡,不支持存折、信用卡充值;", @"充值需要开通银行卡网上支付功能, 如有疑问请咨询开户行客服;", @"单笔充值不可超过银行充值限额;", @"如果充值金额没有及时到账,请拨打客服400-0322-988咨询。"];
-    [self.dataArray removeAllObjects];
-    for (NSString *str in array) {
-        UCFGoldRechargeModel *model = [[UCFGoldRechargeModel alloc] init];
-        model.tipString = str;
-        CGSize size = [self sizeWithString:str font:[UIFont systemFontOfSize:13] constraintSize:CGSizeMake(ScreenWidth - 40, MAXFLOAT)];
-        if ([str isEqualToString:[array firstObject]]) {
-            model.isShowBlackDot = NO;
-            model.cellHeight = size.height + 16;
-        }
-        else {
-            model.isShowBlackDot = YES;
-            model.cellHeight = size.height + 5;
-        }
-        [self.dataArray addObject:model];
-    }
-}
 - (CGSize)sizeWithString:(NSString *)string font:(UIFont *)font constraintSize:(CGSize)constraintSize
 {
     CGSize stringSize = CGSizeZero;
@@ -184,7 +167,37 @@
         }
     }
     else if (tag.intValue == kSXTagGoldRechargeInfo) {
-        
+        if ([rstcode intValue] == 1) {
+            NSDictionary *data = [dic objectSafeDictionaryForKey:@"data"];
+            NSArray *contractInfo = [data objectSafeDictionaryForKey:@"contractList"];
+            NSMutableArray *temp = [NSMutableArray array];
+            for (NSDictionary *contractDict in contractInfo) {
+                UCFContractModel *contract = [[UCFContractModel alloc] init];
+                contract.Id = [contractDict objectSafeForKey:@"id"];
+                contract.contractName = [contractDict objectSafeForKey:@"contractName"];
+                [temp addObject:contract];
+            }
+            self.goldRechargeHeader.constracts = temp;
+            NSString *tipContent = [data objectSafeForKey:@"pageContent"];
+            NSString *tipStr = [tipContent stringByReplacingOccurrencesOfString:@"• " withString:@""];
+            NSArray *array = [tipStr componentsSeparatedByString:@"\n"];
+            [self.dataArray removeAllObjects];
+            for (NSString *str in array) {
+                UCFGoldRechargeModel *model = [[UCFGoldRechargeModel alloc] init];
+                model.tipString = str;
+                CGSize size = [self sizeWithString:str font:[UIFont systemFontOfSize:13] constraintSize:CGSizeMake(ScreenWidth - 40, MAXFLOAT)];
+                model.isShowBlackDot = YES;
+                model.cellHeight = size.height + 5;
+                [self.dataArray addObject:model];
+            }
+            UCFGoldRechargeModel *firstModel = [[UCFGoldRechargeModel alloc] init];
+            firstModel.tipString = @"温馨提示";
+            CGSize size = [self sizeWithString:@"温馨提示" font:[UIFont systemFontOfSize:13] constraintSize:CGSizeMake(ScreenWidth - 40, MAXFLOAT)];
+            firstModel.isShowBlackDot = NO;
+            firstModel.cellHeight = size.height + 16;
+            [self.dataArray insertObject:firstModel atIndex:0];
+            [self.tableview reloadData];
+        }
     }
 }
 
