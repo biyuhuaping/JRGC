@@ -15,4 +15,5 @@
 
 @interface UCFGoldRechargeHeaderView : UIView
 @property (weak, nonatomic) id<UCFGoldRechargeHeaderViewDelegate> delegate;
+@property (strong, nonatomic) NSArray *constracts;
 @end

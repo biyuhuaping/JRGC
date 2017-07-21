@@ -358,6 +358,7 @@
 		74BDA99F1F09F8780054403F /* DIYCalendarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74BDA99E1F09F8780054403F /* DIYCalendarCell.m */; };
 		74BDA9A21F0A7B990054403F /* UCFCalendarGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 74BDA9A11F0A7B990054403F /* UCFCalendarGroup.m */; };
 		74CE8B831F21B60600512B15 /* UCFAssetTipView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74CE8B821F21B60600512B15 /* UCFAssetTipView.xib */; };
+		74CE8B861F220C7500512B15 /* UCFContractModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 74CE8B851F220C7500512B15 /* UCFContractModel.m */; };
 		74D7FCCC1AE8F72700653B8F /* FundAccountGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 74D7FCC91AE8F72700653B8F /* FundAccountGroup.m */; };
 		74D7FCCD1AE8F72700653B8F /* FundAccountItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 74D7FCCB1AE8F72700653B8F /* FundAccountItem.m */; };
 		74D7FCD51AE8F75000653B8F /* UCFHeadrView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74D7FCD21AE8F75000653B8F /* UCFHeadrView.m */; };
@@ -1541,6 +1542,8 @@
 		74BDA9A01F0A7B990054403F /* UCFCalendarGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFCalendarGroup.h; sourceTree = "<group>"; };
 		74BDA9A11F0A7B990054403F /* UCFCalendarGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFCalendarGroup.m; sourceTree = "<group>"; };
 		74CE8B821F21B60600512B15 /* UCFAssetTipView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFAssetTipView.xib; sourceTree = "<group>"; };
+		74CE8B841F220C7500512B15 /* UCFContractModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFContractModel.h; sourceTree = "<group>"; };
+		74CE8B851F220C7500512B15 /* UCFContractModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFContractModel.m; sourceTree = "<group>"; };
 		74D7FCC81AE8F72700653B8F /* FundAccountGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FundAccountGroup.h; sourceTree = "<group>"; };
 		74D7FCC91AE8F72700653B8F /* FundAccountGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FundAccountGroup.m; sourceTree = "<group>"; };
 		74D7FCCA1AE8F72700653B8F /* FundAccountItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FundAccountItem.h; sourceTree = "<group>"; };
@@ -3570,6 +3573,8 @@
 			children = (
 				743985441F17699600F2EDB8 /* UCFGoldRechargeModel.h */,
 				743985451F17699600F2EDB8 /* UCFGoldRechargeModel.m */,
+				74CE8B841F220C7500512B15 /* UCFContractModel.h */,
+				74CE8B851F220C7500512B15 /* UCFContractModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -7391,6 +7396,7 @@
 				FBB685821AE4A76800F222B6 /* MJRefreshConst.m in Sources */,
 				25950EBA1D7FB6EC00E4CCBA /* CWCamera.m in Sources */,
 				7BC8AA221AD4C74200BF4660 /* UCFRepayment.m in Sources */,
+				74CE8B861F220C7500512B15 /* UCFContractModel.m in Sources */,
 				7BC3048A1ACBC22D007767F1 /* UITextFieldFactory.m in Sources */,
 				743985421F175EB800F2EDB8 /* UCFGoldRechargeCell.m in Sources */,
 				FB1E7F811D8E4230009CBE2C /* UCFMarkOfBondsRransferNewView.m in Sources */,

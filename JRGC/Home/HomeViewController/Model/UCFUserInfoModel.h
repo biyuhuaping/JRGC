@@ -13,6 +13,7 @@
 @property (nonatomic, copy) NSString *interests;
 @property (nonatomic, copy) NSString *p2pCashBalance;
 @property (nonatomic, copy) NSString *total;
+@property (nonatomic, copy) NSString *cashTotal;
 @property (nonatomic, copy) NSString *userId;
 @property (nonatomic, copy) NSString *zxCashBalance;
 @property (nonatomic, assign) BOOL isCompanyAgent;

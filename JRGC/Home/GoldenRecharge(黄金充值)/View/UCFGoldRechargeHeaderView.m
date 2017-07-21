@@ -8,6 +8,7 @@
 
 #import "UCFGoldRechargeHeaderView.h"
 #import "MBProgressHUD.h"
+#import "UCFContractModel.h"
 
 
 #define font 13
@@ -22,7 +23,6 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    [self protocolIsSelect:self.isSelect];
     [self.textField addTarget:self action:@selector(textfieldLength:) forControlEvents:UIControlEventEditingChanged];
     UIView *leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 8, 37)];
     self.textField.leftView = leftView;
@@ -68,12 +68,24 @@
     return textField;
 }
 
-- (void)protocolIsSelect:(BOOL)select {
+- (void)protocolIsSelect:(BOOL)select withConstract:(NSArray *)constracts {
     
-    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:@"我已阅读并同意《委托划款授权书》"];
-    [attributedString addAttribute:NSLinkAttributeName
-                             value:@"weituohuakuan://"
-                             range:[[attributedString string] rangeOfString:@"《委托划款授权书》"]];
+    NSMutableString *contractsStr = [NSMutableString string];
+    [contractsStr appendString:@"我已阅读并同意"];
+    for (UCFContractModel *contract in constracts) {
+        [contractsStr appendString:@"《"];
+        [contractsStr appendString:contract.contractName];
+        [contractsStr appendString:@"》"];
+    }
+    
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:contractsStr];
+    for (UCFContractModel *contract in constracts) {
+        NSString *str = [NSString stringWithFormat:@"《%@》", contract.contractName];
+        NSString *strV = [NSString stringWithFormat:@"weituohuakuan%lu://", (unsigned long)[constracts indexOfObject:contract]];
+        [attributedString addAttribute:NSLinkAttributeName
+                                 value:strV
+                                 range:[[attributedString string] rangeOfString:str]];
+    }
     
 //    UIImage *image = [UIImage imageNamed:select == YES ? @"purchases_check_box_sel" : @"purchases_check_box_nor"];
 //    CGSize size = CGSizeMake(font + 2, font + 2);
@@ -102,8 +114,8 @@
 }
 
 - (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange {
-    if ([[URL scheme] isEqualToString:@"weituohuakuan"]) {
-        
+    if ([[URL scheme] isEqualToString:@"weituohuakuan0"]) {
+        UCFContractModel *contract = [self.constracts firstObject];
         NSLog(@"委托协议---------------");
         return NO;
     }
@@ -131,7 +143,7 @@
 - (void)setNeiRong {
     
     //     再次
-    [self protocolIsSelect:self.isSelect];
+//    [self protocolIsSelect:self.isSelect];
     
 }
 - (IBAction)handIn:(UIButton *)sender {
@@ -160,4 +172,13 @@
         [self.delegate goldRechargeHeader:self didClickedHandInButton:sender withMoney:inputMoney];
     }
 }
+
+- (void)setConstracts:(NSArray *)constracts
+{
+    _constracts = constracts;
+    if (constracts.count>0) {
+        [self protocolIsSelect:self.isSelect withConstract:constracts];
+    }
+}
+
 @end
