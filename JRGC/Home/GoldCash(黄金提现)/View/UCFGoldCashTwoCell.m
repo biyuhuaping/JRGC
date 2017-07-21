@@ -9,7 +9,7 @@
 #import "UCFGoldCashTwoCell.h"
 
 @interface UCFGoldCashTwoCell ()
-
+@property (nonatomic, weak) UIButton *cashAllButton;
 @end
 
 @implementation UCFGoldCashTwoCell
@@ -17,6 +17,25 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     [self.textField addTarget:self action:@selector(textfieldLength:) forControlEvents:UIControlEventEditingChanged];
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.cashAllButton = button;
+    [button setTitle:@"全提" forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(cashAll:) forControlEvents:UIControlEventTouchUpInside];
+    self.textField.rightView = button;
+    self.textField.rightViewMode=UITextFieldViewModeAlways; //此处用来设置leftview现实时机
+    self.textField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    self.cashAllButton.frame = CGRectMake(0, 0, 60, self.textField.height);
+}
+
+- (void)cashAll:(UIButton *)button
+{
+    self.textField.text = self.avavilableMoney;
 }
 
 - (UITextField *)textfieldLength:(UITextField *)textField

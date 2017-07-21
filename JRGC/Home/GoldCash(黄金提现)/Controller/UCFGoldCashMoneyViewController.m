@@ -131,6 +131,11 @@
         if (nil == goldCash2) {
             goldCash2 = (UCFGoldCashTwoCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFGoldCashTwoCell" owner:self options:nil] lastObject];
         }
+        goldCash2.avavilableMoney = self.balanceMoney;
+//        if (self.cashAll) {
+//            goldCash2.textField.text = self.balanceMoney;
+//            self.cashAll = NO;
+//        }
         self.amoutCell = goldCash2;
         return goldCash2;
     }
@@ -187,8 +192,14 @@
         [MBProgressHUD displayHudError:@"请输入提现金额"];
         return;
     }
+//    comparResult = [inputMoney compare:self.balanceMoney options:NSNumericSearch];
+//    if (comparResult == NSOrderedDescending || comparResult == NSOrderedSame) {
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"充值金额不可大于最大可提现金额" message:nil delegate:self cancelButtonTitle:@"知道了" otherButtonTitles: nil];
+//        [alert show];
+//        return;
+//    }
     comparResult = [inputMoney compare:self.balanceMoney options:NSNumericSearch];
-    if (comparResult == NSOrderedDescending || comparResult == NSOrderedSame) {
+    if (comparResult == NSOrderedDescending) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"充值金额不可大于最大可提现金额" message:nil delegate:self cancelButtonTitle:@"知道了" otherButtonTitles: nil];
         [alert show];
         return;
@@ -231,6 +242,11 @@
 - (void)backGoldAccount
 {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:UPDATE_GOLD_ACCOUNT object:nil];
 }
 
 @end

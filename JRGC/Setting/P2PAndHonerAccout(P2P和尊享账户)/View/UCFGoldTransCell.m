@@ -34,10 +34,10 @@
     } else {
         self.bottomLine.hidden = NO;
     }
-    if ([_model.tradeTypeCode isEqualToString:@"11"]) {
+    if ([_model.tradeTypeCode isEqualToString:@"98"]) {
         self.dealType.text = @"冻结";
         
-    } else if([_model.tradeTypeCode isEqualToString:@"12"]){
+    } else if([_model.tradeTypeCode isEqualToString:@"99"]){
 
         self.dealType.text = @"买金";
         

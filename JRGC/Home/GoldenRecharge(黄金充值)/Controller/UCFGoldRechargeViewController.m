@@ -45,6 +45,7 @@
     [self addRightBtn];
     [self createUI];
     [self initData];
+    [self getTipInfoFromNet];
 }
 
 - (void)createUI {
@@ -55,6 +56,13 @@
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
     [self.tableview addGestureRecognizer:tap];
+}
+
+- (void)getTipInfoFromNet
+{
+    NSString *userId = [UserInfoSingle sharedManager].userId;
+    NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:userId, @"userId", nil];
+    [[NetworkModule sharedNetworkModule] newPostReq:param tag:kSXTagGoldRechargeInfo owner:self signature:YES Type:SelectAccoutDefault];
 }
 
 - (void)tapped:(UITapGestureRecognizer *)tap {
@@ -174,6 +182,9 @@
         }else {
             [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
         }
+    }
+    else if (tag.intValue == kSXTagGoldRechargeInfo) {
+        
     }
 }
 

@@ -138,5 +138,6 @@
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:UPDATE_GOLD_ACCOUNT object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:Reload_Gold_Purchase_Data object:nil];
 }
 @end

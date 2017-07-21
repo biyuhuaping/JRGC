@@ -17,7 +17,7 @@
 
 - (void)closeNotice;
 
-- (void)userInfoClickAssetDetailButton:(UIButton *)button withInfomation:(id)infomation;
+//- (void)userInfoClickAssetDetailButton:(UIButton *)button withInfomation:(id)infomation;
 
 @end
 
