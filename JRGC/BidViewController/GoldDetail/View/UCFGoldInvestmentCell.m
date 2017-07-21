@@ -50,7 +50,7 @@
     if ([aItemInfo.totalAmount doubleValue] - [aItemInfo.remainAmount doubleValue]  < [aItemInfo.minPurchaseAmount doubleValue]) {
         temp1 = 0;
     }
-//    self.angleView.angleStatus = @"2";
+    self.angleGoldView.angleStatus = @"2";
     self.progressGoldView.textStr = [NSString stringWithFormat:@"%d%%",temp1];
     
     float progress = 1 - [aItemInfo.remainAmount doubleValue]/[aItemInfo.totalAmount doubleValue];

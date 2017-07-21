@@ -11,6 +11,8 @@
 #import "JSONKit.h"
 #import "UIDic+Safe.h"
 #import "AuxiliaryFunc.h"
+#import "UCFToolsMehod.h"
+#import "MBProgressHUD.h"
 @interface UCFGoldCalculatorView ()<NetworkModuleDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *GoldPriceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *glodFeeLabel;
@@ -150,9 +152,17 @@
     NSLog(@"此时view的frame====》 %@",NSStringFromCGRect(self.frame));
     
 }
+- (void)getGoldCalculatorHTTPRequset
+{
+    [self GoldCalculatorBtn:nil];
+}
 - (IBAction)GoldCalculatorBtn:(id)sender {
     //    nmTypeId	黄金品种Id	string
     //    purchaseGoldAmount
+    if([self.goldMoneyTextField.text doubleValue]  ==  0 ){
+        [MBProgressHUD displayHudError:@"请输入购买克重"];
+        return;
+    }
     NSDictionary *paramDict = @{@"nmTypeId": self.nmTypeIdStr,@"purchaseGoldAmount":self.goldMoneyTextField.text,@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID]};
     [[NetworkModule sharedNetworkModule] newPostReq:paramDict tag:kSXTagGoldCalculateAmount owner:self signature:YES Type:SelectAccoutTypeGold];
 }
@@ -176,7 +186,10 @@
             NSDictionary *resultDic = [dic objectSafeDictionaryForKey:@"data"] ;
             self.GoldPriceLabel.text = [NSString stringWithFormat:@"¥%@",[resultDic objectSafeForKey:@"realGoldPrice"]];
             self.glodFeeLabel.text = [NSString stringWithFormat:@"¥%@",[resultDic objectSafeForKey:@"buyServiceMoney"]];
-            self.purchaseMoneyLabel.text = [NSString stringWithFormat:@"¥%@",[resultDic objectSafeForKey:@"purchaseMoney"]];
+            
+            NSString *purchaseMoneyStr =  [UCFToolsMehod AddComma:[resultDic objectSafeForKey:@"purchaseMoney"]];
+            
+            self.purchaseMoneyLabel.text = [NSString stringWithFormat:@"¥%@",purchaseMoneyStr];
           
         }else{
              [AuxiliaryFunc showAlertViewWithMessage:[dic objectSafeForKey:@"message"]];

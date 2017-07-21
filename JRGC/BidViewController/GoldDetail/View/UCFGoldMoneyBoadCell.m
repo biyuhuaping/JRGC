@@ -11,7 +11,7 @@
 @interface UCFGoldMoneyBoadCell()<UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *GoldCalculatorView;
-@property (weak, nonatomic) IBOutlet UISwitch *goldSwitch;
+
 - (IBAction)clickGoldRechargeButton:(id)sender;
 - (IBAction)clickAllInvestmentBtn:(id)sender;
 - (IBAction)clickGoldSwitch:(UISwitch *)sender;
@@ -43,7 +43,12 @@
     self.availableAllMoneyLabel.text = [NSString stringWithFormat:@"¥%@",[userAccountInfoDict objectForKey:@"availableAllMoney"]];
     self.availableMoneyLabel.text = [NSString stringWithFormat:@"¥%@",[userAccountInfoDict objectForKey:@"availableMoney"]];
     self.accountBeanLabel.text = [NSString stringWithFormat:@"¥%@",[userAccountInfoDict objectForKey:@"accountBean"]];
-
+    
+}
+-(void)setGoldModel:(UCFGoldModel *)goldModel
+{
+    _goldModel = goldModel;
+    self.moneyTextField.placeholder = [NSString stringWithFormat:@"%@克起",goldModel.minPurchaseAmount];
 }
 
 
@@ -60,7 +65,9 @@
 }
 
 - (IBAction)clickGoldSwitch:(UISwitch *)sender{
-    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(clickGoldSwitch:)]) {
+        [self.delegate clickGoldSwitch:sender];
+    }
 }
 
 - (IBAction)showGoldCalculatorView:(id)sender
@@ -110,6 +117,11 @@
     }
     double amountPay = [textField.text doubleValue] * [ToolSingleTon sharedManager].readTimePrice;
     self.estimatAmountPayableLabel.text = [NSString stringWithFormat:@"¥%.2lf",amountPay];
+    
+    double periodTerm = [[self.goldModel.periodTerm substringWithRange:NSMakeRange(0, self.goldModel.periodTerm.length - 1)] doubleValue];
+    
+    double getUpWeightGold = [textField.text doubleValue] *[self.goldModel.annualRate doubleValue] * periodTerm /360.0 / 100.0;
+    self.getUpWeightGoldLabel.text = [NSString stringWithFormat:@"%.3lf克",getUpWeightGold];
     
     return textField;
 }

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "UCFGoldModel.h"
 @protocol UCFGoldMoneyBoadCellDelegate <NSObject>
 
 @optional
@@ -15,6 +15,7 @@
 -(void)showGoldCalculatorView;
 -(void)gotoGoldRechargeVC;
 -(void)clickAllInvestmentBtn;
+-(void)clickGoldSwitch:(UISwitch *)goldSwitch;
 
 @end
 
@@ -29,5 +30,9 @@
 @property (strong, nonatomic) IBOutlet UILabel *availableMoneyLabel;
 @property (strong, nonatomic) IBOutlet UILabel *accountBeanLabel;
 @property (nonatomic, assign)id<UCFGoldMoneyBoadCellDelegate> delegate;
+@property (weak, nonatomic) IBOutlet UISwitch *goldSwitch;
+
+@property (nonatomic,strong)UCFGoldModel *goldModel;
+
 
 @end

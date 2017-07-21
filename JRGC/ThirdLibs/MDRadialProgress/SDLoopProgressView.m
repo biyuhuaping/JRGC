@@ -16,8 +16,11 @@
     
     CGFloat xCenter = rect.size.width * 0.5;
     CGFloat yCenter = rect.size.height * 0.5;
-    [UIColorWithRGB(0xfd4d4c) set];
-    
+    if (self.completedColor) {
+        [self.completedColor set];
+    }else{
+        [UIColorWithRGB(0xfd4d4c) set];
+    }
     CGContextSetLineWidth(ctx, 6);
     CGContextSetLineCap(ctx, kCGLineCapRound);
     CGFloat to = - M_PI * 0.5 + self.progress * M_PI * 2;
