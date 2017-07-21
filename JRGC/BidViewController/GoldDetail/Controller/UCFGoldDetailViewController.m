@@ -236,30 +236,31 @@
     self.goldHeaderView  = [[[NSBundle mainBundle]loadNibNamed:@"UCFGoldDetailHeaderView" owner:nil options:nil] firstObject];
     self.goldHeaderView.frame = CGRectMake(0, 0, ScreenWidth, 225);
     self.goldHeaderView.goldModel = self.goldModel;
-    self.goldHeaderView.circleProgress.theme.completedColor = [UIColor yellowColor]; // UIColorWithRGB(0xffc027);
     [self.oneScroll addSubview:self.goldHeaderView];
     
     [self progressAnimiation];
     
-    
-    
-//     self.goldModel.pauseInfo =   @"9：30至23：50开放购买定期产品（周末和工作日可以购买，节假日除外）。此时间段若变动，工场收到众瑞邮件通知后，修改技术参数控制。";
-    NSString *pauseInfo = self.goldModel.pauseInfo;
-    if (pauseInfo == nil || [pauseInfo isEqualToString:@""]) {
-        pauseInfoHeight = 0;
-        self.GoldInvestmentBtn.backgroundColor = UIColorWithRGB(0xffc027);
-        [self.GoldInvestmentBtn setTitle:@"立即购买" forState:UIControlStateNormal];
-        self.GoldInvestmentBtn.userInteractionEnabled = YES;
+
+    if (Progress == 1 || [self.goldModel.status intValue] == 2) {
+        self.GoldInvestmentBtn.backgroundColor = UIColorWithRGB(0xcccccc);
+        [self.GoldInvestmentBtn setTitle:@"已售罄" forState:UIControlStateNormal];
+        self.GoldInvestmentBtn.userInteractionEnabled = NO;
     }
-    else
+    else if([self.goldModel.status intValue] == 21)
     {
         self.GoldInvestmentBtn.backgroundColor = UIColorWithRGB(0xcccccc);
         [self.GoldInvestmentBtn setTitle:@"暂停交易" forState:UIControlStateNormal];
         self.GoldInvestmentBtn.userInteractionEnabled = NO;
         CGSize size =  [Common getStrHeightWithStr:self.goldModel.pauseInfo AndStrFont:12 AndWidth:ScreenWidth - 30 AndlineSpacing:2];
         pauseInfoHeight = size.height;
+
+    }else
+    {
+        pauseInfoHeight = 0;
+        self.GoldInvestmentBtn.backgroundColor = UIColorWithRGB(0xffc027);
+        [self.GoldInvestmentBtn setTitle:@"立即购买" forState:UIControlStateNormal];
+        self.GoldInvestmentBtn.userInteractionEnabled = YES;
     }
-    
     
     
     NSArray *prdLabelsList = _prdLabelsList;
@@ -305,6 +306,7 @@
     curProcess = 0;
     Progress = 1 - [self.goldModel.remainAmount doubleValue]/[self.goldModel.totalAmount floatValue];
     Progress = (int)(Progress *100) / 100.00;
+    
     [self performSelector:@selector(beginUpdatingProgressView) withObject:nil afterDelay:0.1];
 }
 
