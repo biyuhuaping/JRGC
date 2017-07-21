@@ -54,23 +54,17 @@
     [super viewDidLoad];
     [self addLeftButton];
     baseTitleLabel.text = @"购买";
+    
+    [self initGoldData];//初始化数据
 
+     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloatGoldPurchaseData) name:Reload_Gold_Purchase_Data object:nil];
     
     self.tableView.tableFooterView = [self createFootView];
-    self.goldModel = [UCFGoldModel goldModelWithDict:[_dataDic objectSafeDictionaryForKey:@"nmPrdClaimInfo"]];
-    
-    _prdLabelsList = [[_dataDic objectSafeDictionaryForKey:@"nmPrdClaimInfo"] objectSafeArrayForKey:@"prdLabelsList"];
-    
-    
-    NSDictionary *userAccountInfoDict = [self.dataDic objectForKey:@"userAccountInfo"];
-     _availableAllMoney = [[userAccountInfoDict objectForKey:@"availableAllMoney"] doubleValue];
-     _availableMoney = [[userAccountInfoDict objectForKey:@"availableMoney"] doubleValue];
-     _accountBean = [[userAccountInfoDict objectForKey:@"accountBean"] doubleValue];
     self.tableView.contentInset =  UIEdgeInsetsMake(10, 0, 0, 0);
     UITapGestureRecognizer *frade = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardDown)];
     [self.view addGestureRecognizer:frade];
     
-    [[ToolSingleTon sharedManager] getGoldPrice];
+  
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
@@ -82,6 +76,18 @@
 #endif
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeGoldPrice) name:CURRENT_GOLD_PRICE object:nil];
+}
+-(void)initGoldData
+{
+    self.goldModel = [UCFGoldModel goldModelWithDict:[_dataDic objectSafeDictionaryForKey:@"nmPrdClaimInfo"]];
+    
+    _prdLabelsList = [[_dataDic objectSafeDictionaryForKey:@"nmPrdClaimInfo"] objectSafeArrayForKey:@"prdLabelsList"];
+    
+    
+    NSDictionary *userAccountInfoDict = [self.dataDic objectForKey:@"userAccountInfo"];
+    _availableAllMoney = [[userAccountInfoDict objectForKey:@"availableAllMoney"] doubleValue];
+    _availableMoney = [[userAccountInfoDict objectForKey:@"availableMoney"] doubleValue];
+    _accountBean = [[userAccountInfoDict objectForKey:@"accountBean"] doubleValue];
 }
 #pragma mark - 监听键盘
 - (void)keyboardWillShow:(NSNotification *)notification {
@@ -117,6 +123,13 @@
             self.tableView.frame = viewFrame;
         }
     }
+}
+-(void)reloatGoldPurchaseData
+{
+    NSString *nmProClaimIdStr = self.goldModel.nmPrdClaimId;
+    NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId",nmProClaimIdStr, @"nmPrdClaimId",nil];
+    
+    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagGetGoldProClaimDetail owner:self signature:YES Type:SelectAccoutDefault];
 }
 
 -(void)changeGoldPrice
@@ -456,6 +469,11 @@
         }
         cell.dataDict = self.dataDic;
         cell.goldModel  = _goldModel;
+        if (_accountBean == 0) {
+            cell.goldSwitch.on = NO;
+        }else{
+            cell.goldSwitch.on = YES;
+        }
         self.isSelectGongDouSwitch = cell.goldSwitch.on;
         cell.delegate = self;
          return cell;
@@ -717,7 +735,12 @@
         return;
 
     }
-    
+    if(![UserInfoSingle sharedManager].goldAuthorization){//去授权页面
+        HSHelper *helper = [HSHelper new];
+        
+        [helper pushGoldAuthorizationType:SelectAccoutTypeGold nav:self.navigationController sourceVC:@"GoldPurchaseVC"];
+        return;
+    }
     
     double amountPay = [cell.moneyTextField.text doubleValue] * [ToolSingleTon sharedManager].readTimePrice;
     NSString *purchaseGoldAmountStr = [NSString stringWithFormat:@"%.2lf",amountPay];
@@ -761,6 +784,20 @@
             FullWebViewController *controller = [[FullWebViewController alloc] initWithHtmlStr:contractContentStr title:contractTitle];
             controller.baseTitleType = @"detail_heTong";
             [self.navigationController pushViewController:controller animated:YES];
+        }
+        else
+        {
+            [AuxiliaryFunc showAlertViewWithMessage:message];
+        }
+    }if (tag.integerValue == kSXTagGetGoldProClaimDetail){
+        
+        NSDictionary *dataDict = [dic objectSafeDictionaryForKey:@"data"];
+        if ( [dic[@"ret"] boolValue])
+        {
+            [[ToolSingleTon sharedManager] getGoldPrice];
+            self.dataDic = dataDict;
+            [self initGoldData];
+            [self.tableView reloadData];
         }
         else
         {

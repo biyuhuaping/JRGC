@@ -95,11 +95,12 @@
 //    [investBaseView addSubview:shadowView];
 }
 -(void)gotoMainView{
-    if(_isPurchaseSuccess){//购买成功返回主页面
+//    if(_isPurchaseSuccess){//购买成功返回主页面
         [self.navigationController popToRootViewControllerAnimated:YES];
-    }else{//购买失败返回上一级页面
-        [self.navigationController popViewControllerAnimated:YES];
-    }
+//    }
+//    else{//购买失败返回上一级页面
+//        [self.navigationController popViewControllerAnimated:YES];
+//    }
 }
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {

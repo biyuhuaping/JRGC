@@ -60,12 +60,17 @@
     bankDepositoryAccountVC.accoutType = type;
     [nav pushViewController:bankDepositoryAccountVC animated:YES];
 }
-- (void)pushGoldAuthorizationType:(SelectAccoutType)type nav:(UINavigationController *)nav
+- (void)pushGoldAuthorizationType:(SelectAccoutType)type nav:(UINavigationController *)nav sourceVC:(NSString *)soucreFrom
 {
     UCFGoldAuthorizationViewController * bankDepositoryAccountVC =[[UCFGoldAuthorizationViewController alloc ]initWithNibName:@"UCFGoldAuthorizationViewController" bundle:nil];
     //    bankDepositoryAccountVC.openStatus = [UserInfoSingle sharedManager].openStatus;
+    bankDepositoryAccountVC.sourceVc = soucreFrom;
     bankDepositoryAccountVC.accoutType = type;
     [nav pushViewController:bankDepositoryAccountVC animated:YES];
+}
+- (void)pushGoldAuthorizationType:(SelectAccoutType)type nav:(UINavigationController *)nav
+{
+    [self pushGoldAuthorizationType:type nav:nav sourceVC:@""];
 }
 
 - (void)pushOpenHSType:(SelectAccoutType)type Step:(NSInteger)step nav:(UINavigationController *)nav;
