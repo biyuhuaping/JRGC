@@ -36,9 +36,12 @@
 @property (nonatomic,assign)double goldPrice;//黄金实时单价
 @property (nonatomic,assign)BOOL isSelectGongDouSwitch;
 
+@property (nonatomic,strong)NSString *nmPurchaseTokenStr;
+
 @property (nonatomic,assign)double availableAllMoney ;
 @property (nonatomic,assign)double availableMoney ;
 @property (nonatomic,assign)double accountBean ;
+@property (nonatomic,assign)double willExpireBean;//即将过期工豆
 - (IBAction)gotoGoldBidSuccessVC:(id)sender;
 
 @end
@@ -83,11 +86,12 @@
     
     _prdLabelsList = [[_dataDic objectSafeDictionaryForKey:@"nmPrdClaimInfo"] objectSafeArrayForKey:@"prdLabelsList"];
     
-    
+    self.nmPurchaseTokenStr = [_dataDic objectSafeForKey:@"nmPurchaseToken"];
     NSDictionary *userAccountInfoDict = [self.dataDic objectForKey:@"userAccountInfo"];
     _availableAllMoney = [[userAccountInfoDict objectForKey:@"availableAllMoney"] doubleValue];
     _availableMoney = [[userAccountInfoDict objectForKey:@"availableMoney"] doubleValue];
     _accountBean = [[userAccountInfoDict objectForKey:@"accountBean"] doubleValue];
+    _willExpireBean= [[userAccountInfoDict objectForKey:@"willExpireBean"] doubleValue];
 }
 #pragma mark - 监听键盘
 - (void)keyboardWillShow:(NSNotification *)notification {
@@ -342,7 +346,13 @@
             break;
         case 1:
         {
-            return 274;
+            if (indexPath.row == 0) {
+              return 274;
+            }
+             else
+            {
+              return 30;
+            }
         }
             break;
         case 2:
@@ -417,7 +427,7 @@
             break;
         case 1:
         {
-            return 1;
+            return _willExpireBean == 0 ? 1 : 2;
         }
             break;
         case 2:
@@ -461,22 +471,40 @@
         }
         return cell;
     }else if (indexPath.section == 1){
-        static NSString *cellId = @"UCFGoldMoneyBoadCell";
-        UCFGoldMoneyBoadCell *cell = [tableView  dequeueReusableCellWithIdentifier:cellId];
-        if (!cell) {
-            cell = [[[NSBundle mainBundle]loadNibNamed:@"UCFGoldMoneyBoadCell" owner:nil options:nil] firstObject];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        
+        if (indexPath.row == 0) {
+            static NSString *cellId = @"UCFGoldMoneyBoadCell";
+            UCFGoldMoneyBoadCell *cell = [tableView  dequeueReusableCellWithIdentifier:cellId];
+            if (!cell) {
+                cell = [[[NSBundle mainBundle]loadNibNamed:@"UCFGoldMoneyBoadCell" owner:nil options:nil] firstObject];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            }
+            cell.dataDict = self.dataDic;
+            cell.goldModel  = _goldModel;
+            if (_accountBean == 0) {
+                cell.goldSwitch.on = NO;
+            }else{
+                cell.goldSwitch.on = YES;
+            }
+            self.isSelectGongDouSwitch = cell.goldSwitch.on;
+            cell.delegate = self;
+            return cell;
+
+        }else  if ( indexPath.row == 1) {
+            static NSString *cellStr = @"tipCell";
+            UITableViewCell  *cell = [tableView dequeueReusableCellWithIdentifier:cellStr];
+            if (cell == nil) {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellStr];
+                cell.backgroundColor = UIColorWithRGBA(92, 106, 145, 1);
+                cell.textLabel.textColor = [UIColor whiteColor];
+            }
+            NSString *showStr = [NSString stringWithFormat:@"价值¥%.2f工豆即将过期，请尽快使用",        _willExpireBean];
+            cell.textLabel.text = showStr;
+            cell.textLabel.font = [UIFont systemFontOfSize:13.0];
+            return cell;
+            
         }
-        cell.dataDict = self.dataDic;
-        cell.goldModel  = _goldModel;
-        if (_accountBean == 0) {
-            cell.goldSwitch.on = NO;
-        }else{
-            cell.goldSwitch.on = YES;
-        }
-        self.isSelectGongDouSwitch = cell.goldSwitch.on;
-        cell.delegate = self;
-         return cell;
     }else if (indexPath.section == 2){
         if (!cell) {
             cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellId];
@@ -493,7 +521,7 @@
     footView.userInteractionEnabled = YES;
     __weak typeof(self) weakSelf = self;
     
-    NSString *readTimePriceStr = [NSString stringWithFormat:@"%.2lf元/克",[ToolSingleTon sharedManager].readTimePrice];
+    NSString *readTimePriceStr = [NSString stringWithFormat:@"%.2lf元/克",[ToolSingleTon sharedManager].readTimePrice + 0.5];
     NSString * totalStr1 = [NSString stringWithFormat:@"黄金价格实时波动，在0.50元的波动范围内成交，成交瞬间系统价格不高于%@则立即为你买入",readTimePriceStr] ;
     NZLabel *firstLabel = [[NZLabel alloc] init];
     firstLabel.font = [UIFont systemFontOfSize:13.0f];
@@ -749,7 +777,7 @@
     
     NSString *purchaseBeanStr = self.isSelectGongDouSwitch ? [NSString stringWithFormat:@"%.2f",_accountBean]:@"0.00";
     
-    NSDictionary *paramDict = @{@"nmPrdClaimId": nmPrdClaimIdStr,@"purchaseBean":purchaseBeanStr,@"purchaseGoldAmount":cell.moneyTextField.text,@"purchaseMoney":purchaseGoldAmountStr,@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"workshopCode":@""};
+    NSDictionary *paramDict = @{@"nmPurchaseToken":self.nmPurchaseTokenStr,@"nmPrdClaimId": nmPrdClaimIdStr,@"purchaseBean":purchaseBeanStr,@"purchaseGoldAmount":cell.moneyTextField.text,@"purchaseMoney":purchaseGoldAmountStr,@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"workshopCode":@""};
     
     [[NetworkModule sharedNetworkModule] newPostReq:paramDict tag:kSXTagGetPurchaseGold owner:self signature:YES Type:SelectAccoutTypeGold];
 }

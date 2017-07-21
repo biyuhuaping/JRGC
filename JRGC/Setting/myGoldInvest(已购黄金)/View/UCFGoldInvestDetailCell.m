@@ -50,7 +50,7 @@
     self.nmPrdClaimNameLabel.text = [dataDict objectSafeForKey:@"nmPrdClaimName"];
     self.orderStatusNameLabel.text = [dataDict objectSafeForKey:@"orderStatusName"];
     self.dealGoldPriceLabel.text = [NSString stringWithFormat:@"¥%@",[dataDict objectSafeForKey:@"dealGoldPrice"]];
-    self.perGiveGoldAmount.text = [NSString stringWithFormat:@"%@克/100克",[dataDict objectSafeForKey:@"perGiveGoldAmount"]];
+    self.perGiveGoldAmount.text = [NSString stringWithFormat:@"%@克/100克",[dataDict objectSafeForKey:@"annualRate"]];
     self.paymentTypeLabel.text = [NSString stringWithFormat:@"%@",[dataDict objectSafeForKey:@"paymentType"]];
     self.periodTermLabel.text = [NSString stringWithFormat:@"%@",[dataDict objectSafeForKey:@"periodTerm"]];
     self.startDateLabel.text = [NSString stringWithFormat:@"%@",[self checkStr:[dataDict objectSafeForKey:@"startDate"]]];

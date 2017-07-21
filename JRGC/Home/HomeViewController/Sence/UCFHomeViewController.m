@@ -630,12 +630,11 @@
         [self showHSAlert:tipStr1];
         return;
     }
-    if ([model.status intValue] == 2) {
-        UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前标的详情只对认购人开放"];
-        [self.navigationController pushViewController:controller animated:YES];
-        return;
-        
-    }
+//    if ([model.status intValue] == 2) {
+//        UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前标的详情只对认购人开放"];
+//        [self.navigationController pushViewController:controller animated:YES];
+//        return;
+//    }
     __weak typeof(self) weakSelf = self;
     NSString *nmProClaimIdStr = [NSString stringWithFormat:@"%@",model.Id];
     NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId",nmProClaimIdStr, @"nmPrdClaimId",@"5",@"type",nil];
@@ -646,14 +645,22 @@
 
         NSString *rsttext = dic[@"message"];
         NSDictionary *dataDict = [dic objectSafeDictionaryForKey:@"data"];
-        if ( [dic[@"ret"] boolValue]) {
+        if ( [dic[@"ret"] boolValue])
+        {
             UCFGoldDetailViewController*goldDetailVC = [[UCFGoldDetailViewController alloc]initWithNibName:@"UCFGoldDetailViewController" bundle:nil];
             goldDetailVC.dataDict = dataDict;
             [weakSelf.navigationController pushViewController:goldDetailVC  animated:YES];
         }
         else
         {
-            [AuxiliaryFunc showAlertViewWithMessage:rsttext];
+            if([[dic objectSafeForKey:@"code"]  intValue] == 11112)
+            {
+                UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前标的详情只对认购人开放"];
+                [weakSelf.navigationController pushViewController:controller animated:YES];
+            }else{
+                [AuxiliaryFunc showAlertViewWithMessage:rsttext];
+            }
+
         }
     }];
 }

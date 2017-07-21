@@ -146,7 +146,7 @@
             cell.detailTextLabel.text = item.subtitle;
         }
     }else{
-        UILabel *errorLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 44)];
+        UILabel *errorLabel = [[UILabel alloc]initWithFrame:CGRectMake(15, 0, ScreenWidth-30, 44)];
         errorLabel.textColor = UIColorWithRGB(0x555555);
         errorLabel.font = [UIFont systemFontOfSize:14];
         errorLabel.textAlignment = NSTextAlignmentCenter;
