@@ -710,6 +710,12 @@
      
      
      */
+    if(![UserInfoSingle sharedManager].goldAuthorization){//去授权页面
+        HSHelper *helper = [HSHelper new];
+        
+        [helper pushGoldAuthorizationType:SelectAccoutTypeGold nav:self.navigationController sourceVC:@"GoldPurchaseVC"];
+        return;
+    }
     
     UCFGoldMoneyBoadCell *cell = (UCFGoldMoneyBoadCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
     self.isSelectGongDouSwitch = cell.goldSwitch.on;
@@ -763,12 +769,7 @@
         return;
 
     }
-    if(![UserInfoSingle sharedManager].goldAuthorization){//去授权页面
-        HSHelper *helper = [HSHelper new];
-        
-        [helper pushGoldAuthorizationType:SelectAccoutTypeGold nav:self.navigationController sourceVC:@"GoldPurchaseVC"];
-        return;
-    }
+   
     
     double amountPay = [cell.moneyTextField.text doubleValue] * [ToolSingleTon sharedManager].readTimePrice;
     NSString *purchaseGoldAmountStr = [NSString stringWithFormat:@"%.2lf",amountPay];

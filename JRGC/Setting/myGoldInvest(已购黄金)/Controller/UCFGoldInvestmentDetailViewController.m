@@ -193,6 +193,7 @@
                 if (!cell) {
                     cell = [[[NSBundle mainBundle]loadNibNamed:@"UCFGoldInvestDetailCell" owner:nil options:nil] lastObject];
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    cell.separatorInset = UIEdgeInsetsMake(0, 15, 0, 0);
                 }
                 
                 if (indexPath.row -1 < self.dataDetailArray.count)
