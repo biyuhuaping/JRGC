@@ -18,6 +18,8 @@
 #import "MjAlertView.h"
 #import "UCFSignView.h"
 #import "UCFNoticeView.h"
+#import "MjAlertView.h"
+#import "UCFAssetTipView.h"
 
 #import "UCFCycleModel.h"
 #import "UCFUserInfoModel.h"
@@ -27,7 +29,7 @@
 #import "HSHelper.h"
 #define UserInfoViewHeight  327
 
-@interface UCFUserInformationViewController () <UCFUserPresenterUserInfoCallBack, UITableViewDelegate, UITableViewDataSource, SDCycleScrollViewDelegate, UIAlertViewDelegate, UCFNoticeViewDelegate>
+@interface UCFUserInformationViewController () <UCFUserPresenterUserInfoCallBack, UITableViewDelegate, UITableViewDataSource, SDCycleScrollViewDelegate, UIAlertViewDelegate, UCFNoticeViewDelegate, UCFAssetTipViewDelegate>
 @property (strong, nonatomic) UCFUserPresenter *presenter;
 
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
@@ -69,6 +71,8 @@
 @property (copy, nonatomic) NSString *availableBanlance;
 @property (weak, nonatomic) IBOutlet UIButton *personInformationBtn;
 
+@property (weak, nonatomic) MjAlertView *assetTipview;
+
 @end
 
 @implementation UCFUserInformationViewController
@@ -76,7 +80,6 @@
 #pragma mark - button点击方法
 - (IBAction)beanClicked:(UIButton *)sender {
     if (self.beansVCGenerator) {
-        
         UIViewController *targetVC = self.beansVCGenerator(nil);
         if (targetVC) {
             [self.parentViewController.navigationController pushViewController:targetVC animated:YES];
@@ -84,9 +87,29 @@
     }
 }
 - (IBAction)assetDetail:(UIButton *)sender {
-    if ([self.delegate respondsToSelector:@selector(userInfoClickAssetDetailButton:withInfomation:)]) {
-        [self.delegate userInfoClickAssetDetailButton:sender withInfomation:self.presenter.userInfoOneModel];
-    }
+    __weak typeof(self) weakSelf = self;
+    MjAlertView *alertView = [[MjAlertView alloc] initCustomAlertViewWithBlock:^(id blockContent) {
+        UIView *view = (UIView *)blockContent;
+        view.frame = CGRectMake(0, 0, 265, 220);
+        
+        UCFAssetTipView *tipview = (UCFAssetTipView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFAssetTipView" owner:self options:nil] lastObject];
+#warning 待修改
+        tipview.assetLabel.text = [NSString stringWithFormat:@"%@=%@+%@+%@", weakSelf.presenter.userInfoOneModel.total, weakSelf.presenter.userInfoOneModel.goldMarketAmount, weakSelf.presenter.userInfoOneModel.nmCashBalance];
+        tipview.frame = view.bounds;
+        view.center = CGPointMake(ScreenWidth * 0.5, ScreenHeight * 0.5);
+        tipview.delegate = weakSelf;
+        [view addSubview:tipview];
+    }];
+    [alertView show];
+    self.assetTipview = alertView;
+//    if ([self.delegate respondsToSelector:@selector(userInfoClickAssetDetailButton:withInfomation:)]) {
+//        [self.delegate userInfoClickAssetDetailButton:sender withInfomation:self.presenter.userInfoOneModel];
+//    }
+}
+
+- (void)assetTipViewDidClickedCloseButton:(UIButton *)button
+{
+    [self.assetTipview hide];
 }
 
 - (IBAction)couponClicked:(UIButton *)sender {

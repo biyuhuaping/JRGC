@@ -1348,6 +1348,9 @@ static NetworkModule *gInstance = NULL;
         case kSXTagGoldCashHistory:
             parameter = [NEW_SERVER_IP stringByAppendingString:GOLDCASHHISTORY];
             break;
+        case kSXTagGoldRechargeInfo:
+            parameter = [NEW_SERVER_IP stringByAppendingString:GOLDRECHARGEINFO];
+            break;
     }
     //给原有参数字典添加公共参数
     if (!data) {

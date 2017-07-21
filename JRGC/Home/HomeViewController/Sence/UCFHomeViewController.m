@@ -804,10 +804,19 @@
     }
 }
 
-- (void)userInfoClickAssetDetailButton:(UIButton *)button withInfomation:(id)infomation
-{
-    
-}
+//- (void)userInfoClickAssetDetailButton:(UIButton *)button withInfomation:(id)infomation
+//{
+//    __weak typeof(self) weakSelf = self;
+//    MjAlertView *alertView = [[MjAlertView alloc] initCustomAlertViewWithBlock:^(id blockContent) {
+//        UIView *view = (UIView *)blockContent;
+//        view.frame = CGRectMake(0, 0, 265, 220);
+//        UCFAssetTipView *tipview = (UCFAssetTipView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFAssetTipView" owner:self options:nil] lastObject];
+//        tipview.frame = view.bounds;
+//        tipview.delegate = weakSelf;
+//        [view addSubview:tipview];
+//    }];
+//    [alertView show];
+//}
 
 - (BOOL)checkUserCanInvestIsDetail:(BOOL)isDetail type:(SelectAccoutType)accout;
 {

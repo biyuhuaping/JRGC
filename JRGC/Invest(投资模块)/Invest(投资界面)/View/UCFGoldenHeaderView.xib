@@ -37,13 +37,13 @@
                             <color key="textColor" red="0.9882352941176471" green="0.5607843137254902" blue="0.054901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hZS-Z2-HVG">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hZS-Z2-HVG">
                             <rect key="frame" x="224" y="28" width="30" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="M9v-0M-9VN"/>
                                 <constraint firstAttribute="width" constant="30" id="fhf-ie-hQV"/>
                             </constraints>
-                            <state key="normal" title="R"/>
+                            <state key="normal" image="gold_account_icon_reload"/>
                             <connections>
                                 <action selector="refreshRealGoldPrice:" destination="iN0-l3-epB" eventType="touchUpInside" id="E94-2I-B8v"/>
                             </connections>
@@ -79,4 +79,7 @@
             <point key="canvasLocation" x="24.5" y="-180"/>
         </view>
     </objects>
+    <resources>
+        <image name="gold_account_icon_reload" width="14" height="14"/>
+    </resources>
 </document>

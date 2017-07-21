@@ -277,6 +277,7 @@
 
 #define GOLDRECHARGE     @"api/nmAccount/v2/recharge.json"   //黄金充值
 #define GOLDRECHARGEHISTORY    @"api/nmAccount/v2/getRechargeRecord.json"   //黄金充值记录
+#define GOLDRECHARGEINFO       @"api/nmAccount/v2/getRechargePageInfo.json" //黄金充值页的信息
 #define GOLDCASH        @"api/nmAccount/v2/withdrawal.json"          //黄金提现
 #define GOLDCASHHISTORY @"api/nmAccount/v2/getWithdrawRecord.json"   //黄金提现记录
 
@@ -513,6 +514,7 @@ enum kSXTag
     kSXTagGetGoldTradeDetail,            //已购黄金详情
     kSXTagGoldRecharge,                  //黄金充值
     kSXTagGoldRechargeHistory,           //黄金充值记录
+    kSXTagGoldRechargeInfo,              //黄金充值页信息
     kSXTagGoldCash,               //黄金提现
     kSXTagGoldCashHistory,        //黄金提现记录
 };
