@@ -153,21 +153,23 @@
                 UILabel *acessoryLabel = [UILabel labelWithFrame:CGRectMake(ScreenWidth - 100, (cell.contentView.frame.size.height - 12) / 2, 70, 12) text:@"" textColor:UIColorWithRGB(0x999999) font:[UIFont systemFontOfSize:12]];
                 acessoryLabel.tag = 100;
                 acessoryLabel.textAlignment = NSTextAlignmentRight;
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 [cell.contentView addSubview:acessoryLabel];
             }
             UILabel *acessoryLabel = (UILabel*)[cell.contentView viewWithTag:100];
 //            UCFConstractModel *constract = self.investDetailModel.contractClauses[indexPath.row];
-            cell.textLabel.text = @"未签署";
+            cell.textLabel.text = @"黄金合同名称（未返回）";
 //            switch ([constract.signStatus integerValue]) {
-//                case 0:
-//                    acessoryLabel.text = @"未签署";
-//                    break;
-//                    
-//                default: acessoryLabel.text = @"已签署";
-//                    break;
-//            }
-//            [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:cell.contentView isTop:YES];
-//            [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:cell.contentView isTop:NO];
+            switch (0) {
+                case 0:
+                        acessoryLabel.text = @"未签署";
+                    break;
+                    
+                default: acessoryLabel.text = @"已签署";
+                    break;
+            }
+            [self addLineViewColor:UIColorWithRGB(0xd8d8d8) With:cell isTop:YES];
+            [self addLineViewColor:UIColorWithRGB(0xd8d8d8) With:cell isTop:NO];
             return cell;
 
         }
@@ -210,6 +212,16 @@
             break;
     }
     return cell;
+}
+-(void)addLineViewColor:(UIColor *)color With:(UIView *)view isTop:(BOOL)top
+{
+    CGFloat height = 0.0f;
+    if (!top) {
+        height = CGRectGetHeight(view.frame);
+    }
+    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, height - 0.5, ScreenWidth, 0.5)];
+    lineView.backgroundColor = color;
+    [view addSubview:lineView];
 }
 #pragma 去标详情页面
 -(void)gotoGoldDetialVC

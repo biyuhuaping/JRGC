@@ -82,7 +82,7 @@
 {
     _dataDict = dataDict;
     
-    self.totalGoldAmountLabel.text = [NSString stringWithFormat:@"%.3f克",[[dataDict objectSafeForKey:@"purchaseGoldAmount"] floatValue] + [[dataDict objectSafeForKey:@"perGiveGoldAmount"] floatValue]];
+    self.totalGoldAmountLabel.text = [NSString stringWithFormat:@"%.3f克",[[dataDict objectSafeForKey:@"receivableGoldAmount"] floatValue]];
     self.purchaseGoldAmountLabel.text = [NSString stringWithFormat:@"%@克",[dataDict objectSafeForKey:@"purchaseGoldAmount"]];//购买黄金克重	string
     self.hasGiveGoldAmountLabel.text = [NSString stringWithFormat:@"%@克(到期%@)",[dataDict objectSafeForKey:@"hasGiveGoldAmount"],[dataDict objectSafeForKey:@"paymentType"]];//已获增金克重	string
     self.perGiveGoldAmountLabel.text = [NSString stringWithFormat:@"%@克",[dataDict objectSafeForKey:@"perGiveGoldAmount"]];//预期增金克重	string
@@ -127,8 +127,8 @@
      */
     self.refundDateLabel.text = [dataDict objectSafeForKey:@"refundDate"];
     self.refundGoldAmountLabel.text = [NSString stringWithFormat:@"%@克",[dataDict objectSafeForKey:@"refundGoldAmount"]];
-    self.refundTypeLabel.text = [dataDict objectSafeForKey:@"refundType"];
-    self.refundStatusLabel.text = [dataDict objectSafeForKey:@"refundStatus"];
+    self.refundTypeLabel.text = [dataDict objectSafeForKey:@"refundStatus"];
+    self.refundStatusLabel.text = [dataDict objectSafeForKey:@"refundType"];
 }
 
 @end

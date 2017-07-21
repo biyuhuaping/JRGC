@@ -180,7 +180,7 @@
         }
 
         UCFGoldModel *goldModel = [self.dataArray objectAtIndex:indexPath.row];
-        if ([goldModel.status intValue] == 2) {
+        if ([goldModel.status intValue] == 2 || [goldModel.status intValue] == 21 ) {
             return;
         }
         

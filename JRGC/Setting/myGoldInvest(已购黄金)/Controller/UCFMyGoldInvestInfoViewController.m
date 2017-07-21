@@ -171,8 +171,11 @@
 }
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    _selectIndex  = scrollView.contentOffset.x / ScreenWidth;
-    [self selectTableView];
+    if(scrollView == _scrollView)
+    {
+        _selectIndex  = scrollView.contentOffset.x / ScreenWidth;
+        [self selectTableView];
+    }
 }
 -(void)selectTableView
 
@@ -340,7 +343,7 @@
     NSString *pageNoStr = [NSString stringWithFormat:@"%d",pageNum];
     NSString *orderStatusCodeStr = [NSString stringWithFormat:@"%d",_selectIndex];
     NSDictionary *strParameters  = @{@"userId":userId,@"pageNo":pageNoStr,@"pageSize":@"20",@"orderStatusCode":orderStatusCodeStr};
-    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagGetGoldTradeRecordList owner:self signature:YES Type:SelectAccoutDefault];
+    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagGetGoldTradeRecordList owner:self signature:YES Type:SelectAccoutTypeGold];
 }
 
 //开始请求
