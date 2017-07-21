@@ -16,5 +16,6 @@
 - (BOOL)checkHSState:(SelectAccoutType)type withValue:(NSInteger)vlaue;
 - (void)pushP2POrWJAuthorizationType:(SelectAccoutType)type nav:(UINavigationController *)nav;
 - (void)pushGoldAuthorizationType:(SelectAccoutType)type nav:(UINavigationController *)nav;//黄金授权
+- (void)pushGoldAuthorizationType:(SelectAccoutType)type nav:(UINavigationController *)nav sourceVC:(NSString *)soucreFrom;
 - (void)pushOpenHSType:(SelectAccoutType)type Step:(NSInteger)step nav:(UINavigationController *)nav;
 @end

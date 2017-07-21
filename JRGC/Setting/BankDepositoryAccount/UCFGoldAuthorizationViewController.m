@@ -52,14 +52,26 @@
         BOOL ret  = [[dic objectSafeDictionaryForKey:@"ret"] boolValue];
         if(ret){//授权成功
             
-//            [AuxiliaryFunc showToastMessage:@"授权成功" withView:self.view];
+//
+            
+            
+            
             [UserInfoSingle sharedManager].goldAuthorization = YES;
-            UCFGoldRechargeViewController *goldRecharge = [[UCFGoldRechargeViewController alloc] initWithNibName:@"UCFGoldRechargeViewController" bundle:nil];
-            goldRecharge.baseTitleText = @"充值";
-            [self.navigationController pushViewController:goldRecharge animated:YES];
-            NSMutableArray *navVCArray = [[NSMutableArray alloc] initWithArray:self.navigationController.viewControllers];
-            [navVCArray removeObjectAtIndex:navVCArray.count-2];
-            [self.navigationController setViewControllers:navVCArray animated:NO];
+            
+            if ([_sourceVc isEqualToString:@""]) {
+                UCFGoldRechargeViewController *goldRecharge = [[UCFGoldRechargeViewController alloc] initWithNibName:@"UCFGoldRechargeViewController" bundle:nil];
+                goldRecharge.baseTitleText = @"充值";
+                [self.navigationController pushViewController:goldRecharge animated:YES];
+                NSMutableArray *navVCArray = [[NSMutableArray alloc] initWithArray:self.navigationController.viewControllers];
+                [navVCArray removeObjectAtIndex:navVCArray.count-2];
+                [self.navigationController setViewControllers:navVCArray animated:NO];
+            }
+            else //
+            {
+                [AuxiliaryFunc showToastMessage:@"授权成功" withView:self.view];
+                [self performSelector:@selector(popViewController) withObject:nil afterDelay:2.0f];
+            }
+            
         } else {
             [MBProgressHUD displayHudError:[dic objectSafeForKey:@"message"]];
         }
@@ -70,6 +82,10 @@
     [MBProgressHUD displayHudError:[err.userInfo objectForKey:@"NSLocalizedDescription"]];
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
 }
+-(void)popViewController{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

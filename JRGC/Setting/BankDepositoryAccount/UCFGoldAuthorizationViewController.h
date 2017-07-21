@@ -10,4 +10,6 @@
 
 @interface UCFGoldAuthorizationViewController : UCFBaseViewController
 
+@property (nonatomic ,strong)NSString *sourceVc;
+
 @end

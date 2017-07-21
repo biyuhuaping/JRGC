@@ -33,6 +33,11 @@
     }
     return _dataArray;
 }
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.tableview.header beginRefreshing];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

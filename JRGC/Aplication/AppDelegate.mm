@@ -63,7 +63,8 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
     [UcfWalletSDK setEnvironment:1];
     //修改webView标识
-    
+    [[ToolSingleTon sharedManager] getGoldPrice]; //获取实时金价
+
     [self setWebViewUserAgent];
     [UCFSession sharedManager].delegate = self;
 

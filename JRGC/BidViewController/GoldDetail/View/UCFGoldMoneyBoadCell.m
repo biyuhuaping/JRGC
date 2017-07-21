@@ -65,6 +65,15 @@
 }
 
 - (IBAction)clickGoldSwitch:(UISwitch *)sender{
+ 
+    NSDictionary *userAccountInfoDict = [_dataDict objectForKey:@"userAccountInfo"];
+
+    
+    if (sender.on) {
+        self.availableAllMoneyLabel.text = [NSString stringWithFormat:@"¥%@",[userAccountInfoDict objectForKey:@"availableAllMoney"]];
+    }else{
+        self.availableAllMoneyLabel.text = [NSString stringWithFormat:@"¥%@",[userAccountInfoDict objectForKey:@"availableMoney"]];
+    }
     if (self.delegate && [self.delegate respondsToSelector:@selector(clickGoldSwitch:)]) {
         [self.delegate clickGoldSwitch:sender];
     }
