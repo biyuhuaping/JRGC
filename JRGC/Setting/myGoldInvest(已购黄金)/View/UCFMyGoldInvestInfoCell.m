@@ -48,7 +48,14 @@
     //预期增金克重
     self.perGiveGoldAmountLabel.text = [NSString stringWithFormat:@"%@克",[dataDict objectSafeForKey:@"perGiveGoldAmount"]];
     //已获增金克重
-    self.hasGiveGoldAmountLabel.text = [NSString stringWithFormat:@"%@克",[dataDict objectSafeForKey:@"hasGiveGoldAmount"]];
+    
+    NSString *hasGiveGoldAmount = [dataDict objectSafeForKey:@"hasGiveGoldAmount"];
+    
+    if ([hasGiveGoldAmount isEqualToString:@""]) {
+        self.hasGiveGoldAmountLabel.text = @"--";
+    }else{
+        self.hasGiveGoldAmountLabel.text = [NSString stringWithFormat:@"%@克",[dataDict objectSafeForKey:@"hasGiveGoldAmount"]];
+    }
     
     self.startDateLabel.text = [NSString stringWithFormat:@"%@",[self checkStr:[dataDict objectSafeForKey:@"startDate"]]];
     self.expiredDateLabel.text = [NSString stringWithFormat:@"%@",[self checkStr:[dataDict objectSafeForKey:@"expiredDate"]]];

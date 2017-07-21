@@ -598,7 +598,7 @@
         [self showHSAlert:tipStr1];
         return;
     }
-    if ([model.status intValue] == 2) {
+    if ([model.status intValue] == 2 || [model.status intValue] == 21) {
         return;
     }
      __weak typeof(self) weakSelf = self;
