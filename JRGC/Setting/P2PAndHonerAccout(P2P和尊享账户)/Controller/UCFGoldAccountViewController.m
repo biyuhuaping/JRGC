@@ -151,7 +151,7 @@
             lineView.tag = 1000;
             [cell.contentView addSubview:lineView];
             cell.delegate = self;
-            cell.textLabel.text = @"可用余额";
+//            cell.textLabel.text = @"可用余额";
         }
         [cell updateaVailableMoenyLab:self.balanceAmount];
         return cell;
