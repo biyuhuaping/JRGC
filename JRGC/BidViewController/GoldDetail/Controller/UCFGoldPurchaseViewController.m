@@ -20,7 +20,7 @@
 #import "UCFGoldRechargeViewController.h"
 #import "NSString+CJString.h"
 #import "FullWebViewController.h"
-@interface UCFGoldPurchaseViewController ()<UITableViewDelegate,UITableViewDataSource,UCFGoldMoneyBoadCellDelegate>
+@interface UCFGoldPurchaseViewController ()<UITableViewDelegate,UITableViewDataSource,UCFGoldMoneyBoadCellDelegate,UITextFieldDelegate>
 {
     float  bottomViewYPos;
     NSArray *_prdLabelsList;
@@ -70,14 +70,14 @@
     
   
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-#ifdef __IPHONE_5_0
-    float version = [[[UIDevice currentDevice] systemVersion] floatValue];
-    if (version >= 5.0) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillChangeFrameNotification object:nil];
-    }
-#endif
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(goldKeyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(goldKeyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+//#ifdef __IPHONE_5_0
+//    float version = [[[UIDevice currentDevice] systemVersion] floatValue];
+//    if (version >= 5.0) {
+//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(goldKeyboardWillShow:) name:UIKeyboardWillChangeFrameNotification object:nil];
+//    }
+//#endif
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeGoldPrice) name:CURRENT_GOLD_PRICE object:nil];
 }
@@ -95,7 +95,7 @@
     _willExpireBean= [[userAccountInfoDict objectForKey:@"willExpireBean"] doubleValue];
 }
 #pragma mark - 监听键盘
-- (void)keyboardWillShow:(NSNotification *)notification {
+- (void)goldKeyboardWillShow:(NSNotification *)notification {
     NSDictionary *userInfo = [notification userInfo];
     NSValue* aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
     CGRect keyboardRect = [aValue CGRectValue];
@@ -104,7 +104,7 @@
     [animationDurationValue getValue:&animationDuration];
     [self moveInputBarWithKeyboardHeight:keyboardRect.size.height withDuration:animationDuration];
 }
-- (void)keyboardWillHide:(NSNotification *)notification {
+- (void)goldKeyboardWillHide:(NSNotification *)notification {
     NSDictionary* userInfo = [notification userInfo];
     NSValue *animationDurationValue = [userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
     NSTimeInterval animationDuration;
@@ -490,6 +490,7 @@
             }
             self.isSelectGongDouSwitch = cell.goldSwitch.on;
             cell.delegate = self;
+            cell.moneyTextField.delegate = self;
             return cell;
 
         }else  if ( indexPath.row == 1) {
@@ -607,13 +608,12 @@
 {
     [self.view endEditing:YES];
     UCFGoldMoneyBoadCell *cell = (UCFGoldMoneyBoadCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
-    if([cell.moneyTextField.text isEqualToString:@""] ||[ cell.moneyTextField.text doubleValue] == 0 ){
-        [MBProgressHUD displayHudError:@"请输入购入克重"];
-        return;
-    }
-
+//    if([cell.moneyTextField.text isEqualToString:@""] ||[ cell.moneyTextField.text doubleValue] == 0 ){
+//        [MBProgressHUD displayHudError:@"请输入购入克重"];
+//        return;
+//    }
     UCFGoldCalculatorView * view = [[[NSBundle mainBundle]loadNibNamed:@"UCFGoldCalculatorView" owner:nil options:nil] firstObject];
-    view.goldMoneyTextField.text = cell.moneyTextField.text;
+    view.goldMoneyTextField.text = [ cell.moneyTextField.text doubleValue] == 0  ? self.goldModel.minPurchaseAmount : cell.moneyTextField.text;
     view.nmTypeIdStr = self.goldModel.nmTypeId;
     view.tag = 173924;
     view.frame = CGRectMake(0, 0, ScreenWidth,ScreenHeight);
@@ -629,6 +629,12 @@
 #pragma mark -黄金充值
 -(void)gotoGoldRechargeVC
 {
+    if ([UserInfoSingle sharedManager].isSpecial ||[UserInfoSingle sharedManager].companyAgent) {
+        UIAlertView *alerView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"暂不支持企业，特殊用户购买" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        //        alerView.tag = 1002;
+        [alerView show];
+        return;
+    }
     if(![UserInfoSingle sharedManager].goldAuthorization){//去授权页面
         HSHelper *helper = [HSHelper new];
         [helper pushGoldAuthorizationType:SelectAccoutTypeGold nav:self.navigationController];
@@ -751,6 +757,15 @@
      
      
      */
+
+    if ([UserInfoSingle sharedManager].isSpecial ||[UserInfoSingle sharedManager].companyAgent) {
+        UIAlertView *alerView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"暂不支持企业，特殊用户购买" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+//        alerView.tag = 1002;
+        [alerView show];
+        return;
+    }
+    
+    
     if(![UserInfoSingle sharedManager].goldAuthorization){//去授权页面
         HSHelper *helper = [HSHelper new];
         
@@ -765,7 +780,7 @@
     double maxPurchaseAmount  =  [self.goldModel.remainAmount doubleValue];
     
     if([cell.moneyTextField.text isEqualToString:@""] ){
-        [MBProgressHUD displayHudError:@"请输入购买克重"];
+        [MBProgressHUD displayHudError:@"请输入购入克重"];
         return;
     }
     if (purchaseGoldAmount < minPurchaseAmount) {

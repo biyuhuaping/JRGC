@@ -243,9 +243,9 @@
     
 - (void)goldAccountFirstCell:(GoldAccountFirstCell *)goldFirstCell didClickedRechargeButton:(UIButton *)button
 {
-    if ([UserInfoSingle sharedManager].companyAgent) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"暂不支持企业用户、特殊用户充值" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-        [alertView show];
+    if ([UserInfoSingle sharedManager].isSpecial || [UserInfoSingle sharedManager].companyAgent) {
+        UIAlertView *alerView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"暂不支持企业，特殊用户购买" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        [alerView show];
         return;
     }
     NSString *tipStr1 = ZXTIP1;
