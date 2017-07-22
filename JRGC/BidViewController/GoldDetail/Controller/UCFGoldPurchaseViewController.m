@@ -42,6 +42,7 @@
 @property (nonatomic,assign)double availableMoney ;
 @property (nonatomic,assign)double accountBean ;
 @property (nonatomic,assign)double willExpireBean;//即将过期工豆
+@property (nonatomic,strong)NSString *purchaseMoneyStr;//黄金购买付款金额
 - (IBAction)gotoGoldBidSuccessVC:(id)sender;
 
 @end
@@ -645,18 +646,44 @@
     alert.tag = 8000;
     [alert show];
 }
+#pragma mark -
+#pragma mark alertView代理
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (alertView.tag == 8000) {
-        if (buttonIndex == 1) {
-            HSHelper *helper = [HSHelper new];
-            [helper pushOpenHSType:SelectAccoutTypeHoner Step:[UserInfoSingle sharedManager].enjoyOpenStatus nav:self.navigationController];
+    
+    switch (alertView.tag) {
+        case 8000:
+        {
+            if (buttonIndex == 1) {
+                HSHelper *helper = [HSHelper new];
+                [helper pushOpenHSType:SelectAccoutTypeHoner Step:[UserInfoSingle sharedManager].enjoyOpenStatus nav:self.navigationController];
+            }
+
         }
-    }
-    if (alertView.tag == 2000) {
-        if (buttonIndex == 1) {
-            [self gotoGoldRechargeVC];
+            break;
+        case 2000:
+        {
+            if (buttonIndex == 1) {
+                [self gotoGoldRechargeVC];
+            }
         }
+        case 43068:
+        {
+            if (buttonIndex == 1) {
+                [self gotoGoldBidSuccessVC:nil];
+            }else
+            {
+                [self.navigationController popToRootViewControllerAnimated:YES];
+            }
+        }
+        case 1000:
+        {
+            UCFGoldMoneyBoadCell *cell = (UCFGoldMoneyBoadCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
+            [cell.moneyTextField becomeFirstResponder];
+        }
+            
+        default:
+            break;
     }
 }
 #pragma mark -全投
@@ -698,6 +725,8 @@
 -(void)keyboardDown{
     [self.view endEditing:YES];
 }
+#pragma mark-
+#pragma mark 立即购买
 - (IBAction)gotoGoldBidSuccessVC:(id)sender {
     
     /*
@@ -758,7 +787,11 @@
     
 
      double keyongMoney = self.isSelectGongDouSwitch ?  _availableAllMoney : _availableMoney;
-      double estimatAmountMoney  = [[cell.estimatAmountPayableLabel.text substringFromIndex:1] doubleValue];
+     double estimatAmountMoney = [cell.moneyTextField.text doubleValue] * [ToolSingleTon sharedManager].readTimePrice;
+    if (self.purchaseMoneyStr) {
+        estimatAmountMoney =  [self.purchaseMoneyStr doubleValue];
+    }
+
     if (keyongMoney < estimatAmountMoney) {
        
         double   needToRechare = estimatAmountMoney - keyongMoney;
@@ -769,24 +802,26 @@
         return;
 
     }
-   
-    
-    double amountPay = [cell.moneyTextField.text doubleValue] * [ToolSingleTon sharedManager].readTimePrice;
-    NSString *purchaseGoldAmountStr = [NSString stringWithFormat:@"%.2lf",amountPay];
+ 
+    if (!self.purchaseMoneyStr) {
+        self.purchaseMoneyStr =   [NSString stringWithFormat:@"%.2lf",estimatAmountMoney];
+    }
     NSDictionary  *nmPrdClaimInfoDic  = [_dataDic objectSafeDictionaryForKey:@"nmPrdClaimInfo"];
     NSString *nmPrdClaimIdStr = [nmPrdClaimInfoDic objectForKey:@"nmPrdClaimId"];
     
     NSString *purchaseBeanStr = self.isSelectGongDouSwitch ? [NSString stringWithFormat:@"%.2f",_accountBean]:@"0.00";
     
-    NSDictionary *paramDict = @{@"nmPurchaseToken":self.nmPurchaseTokenStr,@"nmPrdClaimId": nmPrdClaimIdStr,@"purchaseBean":purchaseBeanStr,@"purchaseGoldAmount":cell.moneyTextField.text,@"purchaseMoney":purchaseGoldAmountStr,@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"workshopCode":@""};
+    NSDictionary *paramDict = @{@"nmPurchaseToken":self.nmPurchaseTokenStr,@"nmPrdClaimId": nmPrdClaimIdStr,@"purchaseBean":purchaseBeanStr,@"purchaseGoldAmount":cell.moneyTextField.text,@"purchaseMoney": self.purchaseMoneyStr,@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"workshopCode":@""};
     
     [[NetworkModule sharedNetworkModule] newPostReq:paramDict tag:kSXTagGetPurchaseGold owner:self signature:YES Type:SelectAccoutTypeGold];
 }
 
 -(void)beginPost:(kSXTag)tag
 {
-    
-    
+    if(tag !=kSXTagGetGoldProClaimDetail)
+    {
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    }
 }
 
 
@@ -797,13 +832,29 @@
     NSMutableDictionary *dic = [data objectFromJSONString];
     NSString *rstcode = dic[@"ret"];
     NSString *message = [dic objectSafeForKey:@"message"];
-    if (tag.intValue == kSXTagGetPurchaseGold){
-       
-            UCFGoldBidSuccessViewController *goldAuthorizationVC = [[UCFGoldBidSuccessViewController alloc]initWithNibName:@"UCFGoldBidSuccessViewController" bundle:nil];
-            goldAuthorizationVC.dataDict = [[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"result"];
-            goldAuthorizationVC.isPurchaseSuccess = [rstcode boolValue];
-            goldAuthorizationVC.errorMessageStr = [rstcode boolValue] ? @"":message;
-            [self.navigationController pushViewController:goldAuthorizationVC  animated:YES];
+    if (tag.intValue == kSXTagGetPurchaseGold){//黄金购买
+    
+        NSDictionary *resultDict =[[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"result"];
+        
+        if ([[dic objectSafeForKey:@"code"] intValue] == 43068)
+        {
+            self.goldPrice =  [[resultDict objectSafeForKey:@"dealGoldPrice"] doubleValue];
+            [ToolSingleTon sharedManager].readTimePrice = self.goldPrice;
+            
+            self.nmPurchaseTokenStr = [resultDict objectSafeForKey:@"nmPurchaseToken"];
+            self.purchaseMoneyStr = [resultDict objectSafeForKey:@"realTimePurchaseAmt"];
+            NSString *showStr = [NSString stringWithFormat:@"由于金价实时波动，成交时金价增至%.2lf元/元，是否继续购买？",self.goldPrice];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:showStr delegate:self cancelButtonTitle:@"放弃购买" otherButtonTitles:@"继续购买", nil];
+            alert.tag = 43068;
+            [alert show];
+            return;
+        }else {
+            UCFGoldBidSuccessViewController *goldBidSuccessVC = [[UCFGoldBidSuccessViewController alloc]initWithNibName:@"UCFGoldBidSuccessViewController" bundle:nil];
+            goldBidSuccessVC.dataDict = resultDict;
+            goldBidSuccessVC.isPurchaseSuccess = [rstcode boolValue];
+            goldBidSuccessVC.errorMessageStr = [rstcode boolValue] ? @"":message;
+            [self.navigationController pushViewController:goldBidSuccessVC  animated:YES];
+        }
     }else if (tag.intValue == kSXTagGetGoldContractInfo){
         NSDictionary *dataDict = [[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"result"];
         if ( [dic[@"ret"] boolValue])

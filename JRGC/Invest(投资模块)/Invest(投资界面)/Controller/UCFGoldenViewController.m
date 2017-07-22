@@ -243,9 +243,11 @@
 
 - (void)beginPost:(kSXTag)tag
 {
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    if(tag != kSXTagGoldList)
+    {
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    }
 }
-
 - (void)endPost:(id)result tag:(NSNumber *)tag
 {
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];

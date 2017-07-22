@@ -281,6 +281,8 @@
 #define GOLDCASH        @"api/nmAccount/v2/withdrawal.json"          //黄金提现
 #define GOLDCASHHISTORY @"api/nmAccount/v2/getWithdrawRecord.json"   //黄金提现记录
 
+#define GOLDCHASEAGEINFOURL  @"api/nmAccount/v2/getWithDrawPageInfo.json"//黄金提现页面信息
+
 enum kPostStatus{
     kPostStatusNone=0,
     kPostStatusBeging=1,
@@ -517,6 +519,7 @@ enum kSXTag
     kSXTagGoldRechargeInfo,              //黄金充值页信息
     kSXTagGoldCash,               //黄金提现
     kSXTagGoldCashHistory,        //黄金提现记录
+    kSXTagGoldCashPageInfo,       //黄金提现页面信息
 };
 
 typedef enum kSXTag kSXTag;

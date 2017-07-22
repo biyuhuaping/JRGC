@@ -13,11 +13,16 @@
 #import "UCFGoldCashTwoCell.h"
 #import "UCFGoldCashThreeCell.h"
 #import "UCFGoldCashHistoryController.h"
-
-@interface UCFGoldCashMoneyViewController () <UITableViewDataSource, UITableViewDelegate, UCFGoldCashThreeCellDelegate>
+#import "UCFToolsMehod.h"
+#import "MjAlertView.h"
+@interface UCFGoldCashMoneyViewController () <UITableViewDataSource, UITableViewDelegate, UCFGoldCashThreeCellDelegate,MjAlertViewDelegate>
 @property (strong, nonatomic) NSMutableArray *dataArray;
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (weak, nonatomic) UCFGoldCashTwoCell *amoutCell;
+
+@property (nonatomic,strong)NSString *withdrawTokenStr;//提现token
+@property (nonatomic,assign)BOOL isPurchasePerson;//是否没有购买进行提现
+@property (nonatomic,assign)double withdrawRate;//提现手续费率
 @end
 
 @implementation UCFGoldCashMoneyViewController
@@ -34,11 +39,18 @@
     [super viewDidLoad];
     
     [self addLeftButton];
+    [self getGoldCashInfo];
     [self createUI];
     [self addRightBtn];
     [self initData];
-    
-    
+}
+#pragma mark -
+#pragma mark 获取提现页面数据
+-(void)getGoldCashInfo
+{
+    NSString *userId = [[NSUserDefaults standardUserDefaults] valueForKey:UUID];
+    NSDictionary *param =@{ @"userId" : userId };
+    [[NetworkModule sharedNetworkModule] newPostReq:param tag:kSXTagGoldCashPageInfo owner:self signature:YES Type:SelectAccoutDefault];
 }
 
 - (void)createUI {
@@ -192,24 +204,57 @@
         [MBProgressHUD displayHudError:@"请输入提现金额"];
         return;
     }
-//    comparResult = [inputMoney compare:self.balanceMoney options:NSNumericSearch];
+
+    if ([Common stringA:inputMoney ComparedStringB:@"10"] == -1) {
+        [MBProgressHUD displayHudError:[NSString stringWithFormat:@"单笔提现金额不低于10元"]];
+        return;
+    }
+    NSString *maxAmountStr = self.balanceMoney;
+
+    if ([Common stringA:inputMoney ComparedStringB:maxAmountStr] == 1) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"可转出余额不足，多多投资吧" delegate:self cancelButtonTitle:@"重新输入" otherButtonTitles: nil];
+        [alert show];
+        return;
+    }
+
+    //    comparResult = [inputMoney compare:self.balanceMoney options:NSNumericSearch];
 //    if (comparResult == NSOrderedDescending || comparResult == NSOrderedSame) {
 //        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"充值金额不可大于最大可提现金额" message:nil delegate:self cancelButtonTitle:@"知道了" otherButtonTitles: nil];
 //        [alert show];
 //        return;
 //    }
-    comparResult = [inputMoney compare:self.balanceMoney options:NSNumericSearch];
-    if (comparResult == NSOrderedDescending) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"充值金额不可大于最大可提现金额" message:nil delegate:self cancelButtonTitle:@"知道了" otherButtonTitles: nil];
-        [alert show];
+    if (!_isPurchasePerson) {
+        double cashMoney = [inputMoney doubleValue];//提现金额
+        double feeMoney = cashMoney * _withdrawRate *0.01; //手续费
+        double actualMoney = cashMoney - feeMoney;//实际提现金额
+        NSString *cashMoneyStr = [UCFToolsMehod AddComma:[NSString stringWithFormat:@"%.2lf",cashMoney]];
+        NSString *feeMoneyStr = [UCFToolsMehod AddComma:[NSString stringWithFormat:@"%.2lf",feeMoney]];
+        NSString *actualMoneyStr = [UCFToolsMehod AddComma:[NSString stringWithFormat:@"%.2lf",actualMoney]];
+        NSString *cashMoneyStr1 = [NSString stringWithFormat:@"¥%@",cashMoneyStr];
+        NSString *feeMoneyStr1 = [NSString stringWithFormat:@"¥%@",feeMoneyStr];
+        NSString *actualMoneyStr1 = [NSString stringWithFormat:@"¥%@",actualMoneyStr];
+        MjAlertView *alertView =[[MjAlertView alloc] initCashAlertViewWithCashMoney:cashMoneyStr1 ActualAccount:actualMoneyStr1 FeeMoney:feeMoneyStr1 delegate:self cancelButtonTitle:@"取消" withOtherButtonTitle:@"确定"];
+        [alertView show];
         return;
     }
+    [self gotoGoldCash];
+}
+
+-(void)gotoGoldCash
+{
     NSString *userId = [[NSUserDefaults standardUserDefaults] valueForKey:UUID];
     if (!userId) {
         return;
     }
-    NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:inputMoney, @"amount", userId, @"userId",  nil];
+    NSString *inputMoney = [Common deleteStrHeadAndTailSpace:self.amoutCell.textField.text];
+    NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:inputMoney, @"amount", userId, @"userId", _withdrawTokenStr,@"withdrawToken", nil];
     [[NetworkModule sharedNetworkModule] newPostReq:param tag:kSXTagGoldCash owner:self signature:YES Type:SelectAccoutDefault];
+}
+
+- (void)mjalertView:(MjAlertView *)alertview didClickedButton:(UIButton *)clickedButton andClickedIndex:(NSInteger)index{
+    if (index == 1) {
+        [self gotoGoldCash];
+    }
 }
 
 - (void)beginPost:(kSXTag)tag
@@ -229,6 +274,26 @@
             [self performSelector:@selector(backGoldAccount) withObject:nil afterDelay:0.5];
         }else {
             [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
+        }
+    }
+    else if(tag.intValue == kSXTagGoldCashPageInfo)
+
+    {
+        NSDictionary *dataDict = [dic objectSafeDictionaryForKey:@"data"];
+        if ([rstcode boolValue]) {
+            
+            /*
+             isPurchasePerson	是否没有购买进行提现	string	true是，false否
+             pageContent	页面内容	string
+             withdrawRate	没有购买的提现的费率	string	eg:0.4
+             withdrawToken	提现的token值	string
+             */
+            _withdrawTokenStr = [dataDict objectSafeForKey:@"withdrawToken"];
+            _isPurchasePerson = [[dataDict objectSafeForKey:@"isPurchasePerson"] boolValue];
+            _withdrawRate = [[dataDict objectSafeForKey:@"withdrawRate"] doubleValue];
+            
+            
+            
         }
     }
 }

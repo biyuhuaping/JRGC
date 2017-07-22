@@ -119,7 +119,7 @@
         }
         float progress;
         if ([presenter.item.type isEqualToString:@"3"]) {
-            progress = [presenter.item.completeLoan floatValue]/[presenter.item.borrowAmount floatValue];
+            progress = 1 - [presenter.item.remainAmount floatValue]/[presenter.item.borrowAmount floatValue];
             if (progress < 0 || progress > 1) {
                 progress = 1;
             }
@@ -135,15 +135,28 @@
                 self.circleProgressView.progress = progress;
         }
         NSInteger status = [presenter.item.status integerValue];
-        //控制进度视图显示
-        if (status < 3) {
-            self.circleProgressView.pathFillColor = UIColorWithRGB(0xfa4d4c);
-//            self.progressView.progressLabel.textColor = UIColorWithRGB(0x555555);
-        }else{
-            self.circleProgressView.pathFillColor = UIColorWithRGB(0xe2e2e2);//未绘制的进度条颜色
-//            self.progressView.progressLabel.textColor = UIColorWithRGB(0x909dae);
-        }
+    
         DBLOG(@"type : %@", presenter.item.type);
+        if([presenter.item.type isEqualToString:@"3"])
+        {
+            if (status == 1) {
+                self.circleProgressView.pathFillColor = UIColorWithRGB(0xffc027);
+                //            self.progressView.progressLabel.textColor = UIColorWithRGB(0x555555);
+            }else{
+                self.circleProgressView.pathFillColor = UIColorWithRGB(0xe2e2e2);//未绘制的进度条颜色
+                //            self.progressView.progressLabel.textColor = UIColorWithRGB(0x909dae);
+            }
+        }
+        else{
+            //控制进度视图显示
+            if (status < 3) {
+                self.circleProgressView.pathFillColor = UIColorWithRGB(0xfa4d4c);
+                //            self.progressView.progressLabel.textColor = UIColorWithRGB(0x555555);
+            }else{
+                self.circleProgressView.pathFillColor = UIColorWithRGB(0xe2e2e2);//未绘制的进度条颜色
+                //            self.progressView.progressLabel.textColor = UIColorWithRGB(0x909dae);
+            }
+        }
         NSArray *statusArr = @[@"未审核",@"等待确认",@"出借",@"流标",@"满标",@"回款中",@"已回款"];
         if ([presenter.item.type isEqualToString:@"3"]) {
             if (status == 21) {
