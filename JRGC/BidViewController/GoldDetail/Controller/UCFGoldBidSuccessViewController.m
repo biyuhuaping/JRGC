@@ -96,6 +96,7 @@
 }
 -(void)gotoMainView{
 //    if(_isPurchaseSuccess){//购买成功返回主页面
+      [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
         [self.navigationController popToRootViewControllerAnimated:YES];
 //    }
 //    else{//购买失败返回上一级页面

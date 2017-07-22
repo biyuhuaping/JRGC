@@ -223,7 +223,7 @@
 //        [alert show];
 //        return;
 //    }
-    if (!_isPurchasePerson) {
+    if (_isPurchasePerson) {
         double cashMoney = [inputMoney doubleValue];//提现金额
         double feeMoney = cashMoney * _withdrawRate *0.01; //手续费
         double actualMoney = cashMoney - feeMoney;//实际提现金额
