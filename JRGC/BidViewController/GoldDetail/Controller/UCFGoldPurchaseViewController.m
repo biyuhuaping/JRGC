@@ -608,7 +608,7 @@
     [self.view endEditing:YES];
     UCFGoldMoneyBoadCell *cell = (UCFGoldMoneyBoadCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
     if([cell.moneyTextField.text isEqualToString:@""] ||[ cell.moneyTextField.text doubleValue] == 0 ){
-        [MBProgressHUD displayHudError:@"请输入购买克重"];
+        [MBProgressHUD displayHudError:@"请输入购入克重"];
         return;
     }
 
@@ -636,6 +636,7 @@
     }else{
         //去充值页面
         UCFGoldRechargeViewController *goldRecharge = [[UCFGoldRechargeViewController alloc] initWithNibName:@"UCFGoldRechargeViewController" bundle:nil];
+        goldRecharge.rootVc = self;
         goldRecharge.baseTitleText = @"充值";
         [self.navigationController pushViewController:goldRecharge animated:YES];
     }
@@ -706,7 +707,7 @@
        purchaseGoldCount = availableMoney /[ToolSingleTon sharedManager].readTimePrice;
     }
     
-    if(purchaseGoldCount >= [self.goldModel.remainAmount doubleValue] )
+    if(purchaseGoldCount >= [self.goldModel.remainAmount doubleValue])
     {
         purchaseGoldCount = [self.goldModel.remainAmount doubleValue];
     }
@@ -714,6 +715,17 @@
     
     
     double amountPay = [cell.moneyTextField.text doubleValue] * [ToolSingleTon sharedManager].readTimePrice;
+    
+    if (self.isSelectGongDouSwitch)
+    {
+        if (amountPay > availableAllMoney) {
+            amountPay = availableAllMoney;
+        }
+    }else{
+        if (amountPay > availableMoney) {
+            amountPay = availableMoney;
+        }
+    }
     cell.estimatAmountPayableLabel.text = [NSString stringWithFormat:@"¥%.2lf",amountPay];
     
     double periodTerm = [[self.goldModel.periodTerm substringWithRange:NSMakeRange(0, self.goldModel.periodTerm.length - 1)] doubleValue];
@@ -811,6 +823,11 @@
     
     NSString *purchaseBeanStr = self.isSelectGongDouSwitch ? [NSString stringWithFormat:@"%.2f",_accountBean]:@"0.00";
     
+    
+    if(self.isSelectGongDouSwitch && _accountBean > estimatAmountMoney)
+    {//如果工豆金额大约购买金额 传给服务端工豆金额为购买金额
+        purchaseBeanStr = self.purchaseMoneyStr;
+    }
     NSDictionary *paramDict = @{@"nmPurchaseToken":self.nmPurchaseTokenStr,@"nmPrdClaimId": nmPrdClaimIdStr,@"purchaseBean":purchaseBeanStr,@"purchaseGoldAmount":cell.moneyTextField.text,@"purchaseMoney": self.purchaseMoneyStr,@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"workshopCode":@""};
     
     [[NetworkModule sharedNetworkModule] newPostReq:paramDict tag:kSXTagGetPurchaseGold owner:self signature:YES Type:SelectAccoutTypeGold];

@@ -72,13 +72,14 @@
 {
     self.realtimeGoldPrice.text = [NSString stringWithFormat:@"￥%.2f",[ToolSingleTon sharedManager].readTimePrice];
     double floatValue1 = ([ToolSingleTon sharedManager].readTimePrice - [[_tmpData objectSafeForKey:@"dealPrice"] doubleValue]) * [[_tmpData objectSafeForKey:@"holdGoldAmount"] doubleValue];
-    NSString *floatValueStr = [NSString stringWithFormat:@"%.2f",floatValue1];
-    NSComparisonResult comparResult = [floatValueStr compare:@"0.00" options:NSNumericSearch];
+//    NSString *floatValueStr = [NSString stringWithFormat:@"%.2f",floatValue1];
+//    NSComparisonResult comparResult = [floatValueStr compare:@"0.00" options:NSNumericSearch];
     
-    if (comparResult == NSOrderedDescending) {
+    if (floatValue1 > 0) {
         self.floatLabel.textColor = UIColorWithRGB(0xfd4d4c);
         self.floatLabel.text = [NSString stringWithFormat:@"+￥%.2f",floatValue1];
-    } else if (comparResult == NSOrderedSame) {
+    } else if (floatValue1 == 0) {
+        floatValue1 = 0;
         self.floatLabel.textColor = UIColorWithRGB(0x555555);
         self.floatLabel.text = [NSString stringWithFormat:@"￥%.2f",floatValue1];
     } else {

@@ -73,6 +73,9 @@
             }
         }
     }
+    if ([textField.text doubleValue] > [self.avavilableMoney doubleValue]) {
+        textField.text = self.avavilableMoney;
+    }
     return textField;
 }
 

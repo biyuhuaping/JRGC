@@ -160,7 +160,7 @@
     //    nmTypeId	黄金品种Id	string
     //    purchaseGoldAmount
     if([self.goldMoneyTextField.text doubleValue]  ==  0 ){
-        [MBProgressHUD displayHudError:@"请输入购买克重"];
+        [MBProgressHUD displayHudError:@"请输入购入克重"];
         return;
     }
     NSDictionary *paramDict = @{@"nmTypeId": self.nmTypeIdStr,@"purchaseGoldAmount":self.goldMoneyTextField.text,@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID]};
