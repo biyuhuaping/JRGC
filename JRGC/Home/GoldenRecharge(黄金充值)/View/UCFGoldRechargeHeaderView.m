@@ -117,6 +117,9 @@
     if ([[URL scheme] isEqualToString:@"weituohuakuan0"]) {
         UCFContractModel *contract = [self.constracts firstObject];
         NSLog(@"委托协议---------------");
+        if ([self.delegate respondsToSelector:@selector(goldRechargeHeader:didClickedConstractWithId:)]) {
+            [self.delegate goldRechargeHeader:self didClickedConstractWithId:contract.Id];
+        }
         return NO;
     }
 //    else if ([[URL scheme] isEqualToString:@"checkbox"]) {

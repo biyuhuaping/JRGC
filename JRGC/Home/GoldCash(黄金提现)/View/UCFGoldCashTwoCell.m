@@ -8,7 +8,7 @@
 
 #import "UCFGoldCashTwoCell.h"
 
-@interface UCFGoldCashTwoCell ()
+@interface UCFGoldCashTwoCell () <UITextFieldDelegate>
 @property (nonatomic, weak) UIButton *cashAllButton;
 @end
 
@@ -74,6 +74,13 @@
         }
     }
     return textField;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    if ([textField.text floatValue] > [self.avavilableMoney floatValue]) {
+        textField.text = self.avavilableMoney;
+    }
 }
 
 @end

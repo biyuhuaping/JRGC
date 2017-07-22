@@ -13,6 +13,7 @@
 #import "UCFGoldRechargeHistoryController.h"
 #import "UCFGoldRechargeWebController.h"
 #import "UCFContractModel.h"
+#import "FullWebViewController.h"
 
 @interface UCFGoldRechargeViewController () <UITableViewDelegate, UITableViewDataSource, UCFGoldRechargeHeaderViewDelegate, UCFGoldRechargeCellDelegate>
 @property (weak, nonatomic) UCFGoldRechargeHeaderView *goldRechargeHeader;
@@ -141,6 +142,13 @@
     [[NetworkModule sharedNetworkModule] newPostReq:param tag:kSXTagGoldRecharge owner:self signature:YES Type:SelectAccoutDefault];
 }
 
+- (void)goldRechargeHeader:(UCFGoldRechargeHeaderView *)goldHeader didClickedConstractWithId:(NSString *)constractId
+{
+    NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId", [NSString stringWithFormat:@"%@", constractId], @"contractTemplateId", nil];
+    
+    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagGetGoldContractInfo owner:self signature:YES Type:SelectAccoutTypeGold];
+}
+
 - (void)beginPost:(kSXTag)tag
 {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -197,6 +205,22 @@
             firstModel.cellHeight = size.height + 16;
             [self.dataArray insertObject:firstModel atIndex:0];
             [self.tableview reloadData];
+        }
+    }
+    else if (tag.intValue == kSXTagGetGoldContractInfo) {
+        if ([rstcode intValue] == 1)
+        {
+            NSDictionary *constractResult = [[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"result"];
+            
+            NSString *contractContentStr = [constractResult objectSafeForKey:@"contractContent"];
+            NSString *contractTitle = [constractResult objectSafeForKey:@"contractName"];
+            FullWebViewController *controller = [[FullWebViewController alloc] initWithHtmlStr:contractContentStr title:contractTitle];
+            controller.baseTitleType = @"detail_heTong";
+            [self.navigationController pushViewController:controller animated:YES];
+        }
+        else
+        {
+            [AuxiliaryFunc showAlertViewWithMessage:rsttext];
         }
     }
 }

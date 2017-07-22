@@ -11,6 +11,7 @@
 @class UCFGoldRechargeHeaderView;
 @protocol UCFGoldRechargeHeaderViewDelegate <NSObject>
 - (void)goldRechargeHeader:(UCFGoldRechargeHeaderView *)goldHeader didClickedHandInButton:(UIButton *)handInButton withMoney:(NSString *)money;
+- (void)goldRechargeHeader:(UCFGoldRechargeHeaderView *)goldHeader didClickedConstractWithId:(NSString *)constractId;
 @end
 
 @interface UCFGoldRechargeHeaderView : UIView
