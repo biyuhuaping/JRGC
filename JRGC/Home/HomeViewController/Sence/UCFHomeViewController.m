@@ -592,9 +592,9 @@
 -(void)gotoGoldInvestVC:(UCFHomeListCellModel *)model{
     
     NSString *tipStr1 = ZXTIP1;
-    NSInteger openStatus = [UserInfoSingle sharedManager].openStatus ;
+//    NSInteger openStatus = [UserInfoSingle sharedManager].openStatus ;
     NSInteger enjoyOpenStatus = [UserInfoSingle sharedManager].enjoyOpenStatus;
-    if (openStatus < 3 && enjoyOpenStatus < 3 ) {
+    if ( enjoyOpenStatus < 3 ) {
         [self showHSAlert:tipStr1];
         return;
     }

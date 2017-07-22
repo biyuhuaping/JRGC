@@ -329,12 +329,10 @@
 #pragma 标签view
 - (void)drawMarkView:(NSMutableArray *)labelPriorityArr
 {
-    
-    float markBg_Height = 30;
     if (self.goldModel.pauseInfo) {
         bottomViewYPos  = 30 + pauseInfoHeight + 5;
     }
-    UIView *markBg = [[UIView alloc] initWithFrame:CGRectMake(0,CGRectGetMaxY(self.goldHeaderView.frame), ScreenWidth, markBg_Height)];
+    UIView *markBg = [[UIView alloc] initWithFrame:CGRectMake(0,CGRectGetMaxY(self.goldHeaderView.frame), ScreenWidth, bottomViewYPos)];
     if (self.goldModel.pauseInfo) {
         UIView *pauseInfoView  = [[UIView alloc] initWithFrame:CGRectMake(0,30 , ScreenWidth, pauseInfoHeight + 5)];
         pauseInfoView.backgroundColor = [UIColor clearColor];
