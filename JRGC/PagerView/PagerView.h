@@ -12,6 +12,7 @@
 
 @property (strong, nonatomic) UIViewController  *viewController;
 @property (copy, nonatomic) NSString *selectIndexStr;
+@property (weak, nonatomic) id source;
 /**
  滑块按钮
  

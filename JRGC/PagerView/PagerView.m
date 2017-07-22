@@ -125,14 +125,15 @@
 - (void)initChildViewController{
     
     NSInteger index = self.segmentScrollV.contentOffset.x / self.segmentScrollV.frame.size.width;
-    UIViewController *childVC = _viewController.childViewControllers[index];
-    self.selectIndexStr = [NSString stringWithFormat:@"%ld",index];
-    if (!childVC.view.superview) {
-        
-        childVC.view.frame = CGRectMake(index * self.segmentScrollV.frame.size.width, 0, self.segmentScrollV.frame.size.width, self.self.segmentScrollV.frame.size.height);
-        [self.segmentScrollV addSubview:childVC.view];
+    if (self.viewController.childViewControllers.count >0) {
+        UIViewController *childVC = _viewController.childViewControllers[index];
+        self.selectIndexStr = [NSString stringWithFormat:@"%ld",index];
+        if (!childVC.view.superview) {
+            
+            childVC.view.frame = CGRectMake(index * self.segmentScrollV.frame.size.width, 0, self.segmentScrollV.frame.size.width, self.self.segmentScrollV.frame.size.height);
+            [self.segmentScrollV addSubview:childVC.view];
+        }
     }
-    
 }
 
 @end
