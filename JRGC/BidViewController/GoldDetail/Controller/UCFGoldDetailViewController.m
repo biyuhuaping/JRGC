@@ -251,7 +251,7 @@
         self.GoldInvestmentBtn.backgroundColor = UIColorWithRGB(0xcccccc);
         [self.GoldInvestmentBtn setTitle:@"暂停交易" forState:UIControlStateNormal];
         self.GoldInvestmentBtn.userInteractionEnabled = NO;
-        CGSize size =  [Common getStrHeightWithStr:self.goldModel.pauseInfo AndStrFont:12 AndWidth:ScreenWidth - 30 AndlineSpacing:2];
+        CGSize size =  [Common getStrHeightWithStr:self.goldModel.pauseInfo AndStrFont:10 AndWidth:ScreenWidth - 30 AndlineSpacing:2];
         pauseInfoHeight = size.height;
 
     }else
@@ -288,7 +288,7 @@
             buyCueDesTipLabel.textColor = UIColorWithRGB(0xfd4d4c);
             buyCueDesTipLabel.textAlignment = NSTextAlignmentLeft;
             buyCueDesTipLabel.backgroundColor = [UIColor clearColor];
-            buyCueDesTipLabel.font = [UIFont systemFontOfSize:12];
+            buyCueDesTipLabel.font = [UIFont systemFontOfSize:10];
             buyCueDesTipLabel.numberOfLines = 0 ;
             buyCueDesTipLabel.text = self.goldModel.pauseInfo;
             [pauseInfoView addSubview: buyCueDesTipLabel];
@@ -338,10 +338,10 @@
         pauseInfoView.backgroundColor = [UIColor clearColor];
         
         UILabel *buyCueDesTipLabel = [[UILabel alloc]initWithFrame:CGRectMake(15 , 0 , ScreenWidth - 30 , pauseInfoHeight )];
-        buyCueDesTipLabel.textColor = UIColorWithRGB(0xffc027);
+        buyCueDesTipLabel.textColor = UIColorWithRGB(0xfc8f0e);
         buyCueDesTipLabel.textAlignment = NSTextAlignmentLeft;
         buyCueDesTipLabel.backgroundColor = [UIColor clearColor];
-        buyCueDesTipLabel.font = [UIFont systemFontOfSize:12];
+        buyCueDesTipLabel.font = [UIFont systemFontOfSize:10];
         buyCueDesTipLabel.numberOfLines = 0 ;
         buyCueDesTipLabel.text = self.goldModel.pauseInfo;
         [pauseInfoView addSubview: buyCueDesTipLabel];

@@ -35,7 +35,7 @@
 @property(nonatomic, assign) BOOL p2pAuthorization;
 @property(nonatomic, assign) BOOL zxAuthorization;
 @property(nonatomic, assign) BOOL goldAuthorization;//黄金授权标识
-
+@property(nonatomic, copy) NSString *isSpecial;//是否是特殊用户
 //@property(nonatomic, copy) NSString *userLevel;
 //获取用户信息单利对象
 + (UserInfoSingle *)sharedManager;
