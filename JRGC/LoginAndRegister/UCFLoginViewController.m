@@ -239,7 +239,7 @@
             NSString *gcmCode = [(NSDictionary *)dic[@"data"][@"userInfo"] objectSafeForKey: @"promotionCode"];
             BOOL isCompanyAgent = [[(NSDictionary *)dic[@"data"][@"userInfo"] objectSafeForKey: @"isCompanyAgent"] boolValue];
             [UserInfoSingle sharedManager].goldAuthorization = [[(NSDictionary *)dic[@"data"][@"userInfo"] objectSafeForKey: @"nmAuthorization"] boolValue];
-            [UserInfoSingle sharedManager].isSpecial = [[(NSDictionary *)dic[@"data"][@"userInfo"] objectSafeForKey: @"isSpecial"] boolValue];
+            [UserInfoSingle sharedManager].isSpecial = [(NSDictionary *)dic[@"data"][@"userInfo"] objectSafeForKey: @"isSpecial"] ;
             NSString *signatureStr  = [UCFToolsMehod md5:yanQian];
             [[NSUserDefaults standardUserDefaults] setObject:signatureStr forKey:SIGNATUREAPP];
             [[NSUserDefaults standardUserDefaults] setValue:gcmCode forKey:@"gcmCode"];
