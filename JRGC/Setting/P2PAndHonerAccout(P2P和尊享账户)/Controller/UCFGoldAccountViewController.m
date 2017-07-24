@@ -22,6 +22,7 @@
 #import "HSHelper.h"
 #import "UCFExtractGoldViewController.h"
 #import "AppDelegate.h"
+#import "UILabel+Misc.h"
 @interface UCFGoldAccountViewController ()<UITableViewDelegate,UITableViewDataSource, GoldAccountFirstCellDeleage>
 @property (weak, nonatomic) IBOutlet UITableView *baseTableView;
 @property (weak, nonatomic) IBOutlet UIButton *buyGoldBtn;
@@ -106,8 +107,17 @@
             UIView *lineView = [Common addSepateViewWithRect:CGRectMake(15, model.cellHeight - 0.5, ScreenWidth, 0.5) WithColor:UIColorWithRGB(0xe3e5ea)];
             lineView.tag = 1000;
             [cell.contentView addSubview:lineView];
+            UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(15, 0, ScreenWidth-30, model.cellHeight)];
+            titleLabel.textColor = UIColorWithRGB(0x555555);
+            titleLabel.font = [UIFont systemFontOfSize:15];
+            titleLabel.numberOfLines = 0;
+            titleLabel.textAlignment = NSTextAlignmentLeft;
+            titleLabel.tag = 1010;
+            [cell.contentView addSubview:titleLabel];
+
         }
         UIView *lineView = [cell.contentView viewWithTag:1000];
+        UILabel *titleLabel = [cell.contentView viewWithTag:1010];
         if ([model.leftTitle isEqualToString:@"支付账户"]) {
             lineView.frame = CGRectMake(0, model.cellHeight - 0.5, ScreenWidth, 0.5);
             cell.textLabel.font = [UIFont boldSystemFontOfSize:14];
@@ -123,7 +133,12 @@
                 lineView.frame = CGRectZero;
             }
         }
-        cell.textLabel.text = model.leftTitle;
+        titleLabel.text = model.leftTitle;
+        if ([model.leftTitle isEqualToString:@"支付账户"]) {
+            titleLabel.text = @"支付账户(可用余额仅限黄金账户使用)";
+            [titleLabel setFont:[UIFont systemFontOfSize:10] string:@"(可用余额仅限黄金账户使用)"];
+            [titleLabel setFontColor:UIColorWithRGB(0x999999) string:@"(可用余额仅限黄金账户使用)"];
+        }
         return cell;
     } else if (model.cellStyle  == CellSepLine) {
         static NSString *cellID = @"cellID01";

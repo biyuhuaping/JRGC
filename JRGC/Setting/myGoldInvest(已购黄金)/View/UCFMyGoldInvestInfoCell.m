@@ -51,7 +51,7 @@
     
     NSString *hasGiveGoldAmount = [dataDict objectSafeForKey:@"hasGiveGoldAmount"];
     
-    if ([hasGiveGoldAmount isEqualToString:@""]) {
+    if ([hasGiveGoldAmount doubleValue] == 0) {
         self.hasGiveGoldAmountLabel.text = @"--";
     }else{
         self.hasGiveGoldAmountLabel.text = [NSString stringWithFormat:@"%@克",[dataDict objectSafeForKey:@"hasGiveGoldAmount"]];

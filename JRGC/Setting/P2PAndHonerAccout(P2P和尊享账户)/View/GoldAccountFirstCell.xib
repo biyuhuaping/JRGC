@@ -20,7 +20,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="￥50.00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vkE-gX-SCu">
-                        <rect key="frame" x="106" y="8" width="55.5" height="18"/>
+                        <rect key="frame" x="106" y="13" width="55.5" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -41,17 +41,8 @@
                             <action selector="recharge:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="lKz-pW-NuC"/>
                         </connections>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="注：可用余额仅限黄金账户使用" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jmk-gR-4hB">
-                        <rect key="frame" x="15" y="28.5" width="143.5" height="12"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="12" id="VVp-IS-hVe"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                        <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="可用余额" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Foa-rs-Qq5">
-                        <rect key="frame" x="15" y="7.5" width="61.5" height="18"/>
+                        <rect key="frame" x="15" y="12.5" width="61.5" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -60,13 +51,11 @@
                 <constraints>
                     <constraint firstItem="Foa-rs-Qq5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="039-2b-fkp"/>
                     <constraint firstItem="bmP-ZC-RpV" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="1Ka-ab-N3f"/>
-                    <constraint firstItem="Jmk-gR-4hB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="7fK-4F-XTa"/>
                     <constraint firstItem="vkE-gX-SCu" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="98" id="Huk-6z-gJa"/>
                     <constraint firstItem="bmP-ZC-RpV" firstAttribute="leading" secondItem="JBF-zb-ZiR" secondAttribute="trailing" constant="20" id="JUE-uJ-ogl"/>
                     <constraint firstAttribute="trailing" secondItem="bmP-ZC-RpV" secondAttribute="trailing" constant="15" id="Mtm-BQ-ld7"/>
-                    <constraint firstItem="vkE-gX-SCu" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" constant="-5" id="esX-Qe-i1q"/>
+                    <constraint firstItem="vkE-gX-SCu" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="esX-Qe-i1q"/>
                     <constraint firstItem="JBF-zb-ZiR" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="kx4-BW-3Q3"/>
-                    <constraint firstAttribute="bottom" secondItem="Jmk-gR-4hB" secondAttribute="bottom" constant="3" id="sAD-3k-iqo"/>
                     <constraint firstItem="vkE-gX-SCu" firstAttribute="centerY" secondItem="Foa-rs-Qq5" secondAttribute="centerY" id="ubG-l7-3gT"/>
                 </constraints>
             </tableViewCellContentView>
