@@ -33,7 +33,7 @@
     [self initUI];
 }
 - (void)initUI {
-    if ([_model.tradeTypeCode isEqualToString:@"11"]) {
+    if ([_model.tradeTypeName isEqualToString:@"冻结"]) {
         self.dealType.text = @"冻结";
         self.middleBaseView.hidden = YES;
         self.bottomViewSpace.constant = 0;
@@ -42,7 +42,7 @@
         self.dealGoldNum.text = [NSString stringWithFormat:@"%@克",_model.frozenMoney];
         self.dealTime.text = _model.tradeTime;
         self.dealNO.text = _model.tradeRemark;
-    } else if([_model.tradeTypeCode isEqualToString:@"12"]){
+    } else if([_model.tradeTypeName isEqualToString:@"买金"]){
         self.tradeTypeNameLab.text = @"买金克重";
         self.dealGoldNum.textColor = UIColorWithRGB(0xfd4d4c);
         self.dealGoldNum.text = [NSString stringWithFormat:@"%@克",_model.purchaseAmount];
