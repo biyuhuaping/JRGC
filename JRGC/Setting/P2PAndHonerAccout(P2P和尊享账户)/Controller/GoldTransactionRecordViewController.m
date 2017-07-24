@@ -35,47 +35,7 @@
     self.dataDict = [NSMutableDictionary dictionary];
     self.timeIndexArr = [NSMutableArray array];
     [self addRefreshingAndLoadMore];
-//    UCFGoldTradeListModel *model = [UCFGoldTradeListModel new];
-//    model.frozenMoney = @"1000.0";
-//    model.purchaseAmount = @"100";
-//    model.purchasePrice = @"235.00";
-//    model.tradeMoney = @"11111.00";
-//    model.tradeRemark = @"都是对的撒";
-//    model.tradeTime = @"2017-07-13";
-//    model.tradeTypeCode = @"12";
-//    model.tradeTypeName = @"买金";
-//
-//    UCFGoldTradeListModel *model1 = [UCFGoldTradeListModel new];
-//    model1.frozenMoney = @"1000.0";
-//    model1.purchaseAmount = @"100";
-//    model1.purchasePrice = @"235.00";
-//    model1.tradeMoney = @"11111.00";
-//    model1.tradeRemark = @"都是对的撒";
-//    model1.tradeTime = @"2017-08-13";
-//    model1.tradeTypeCode = @"11";
-//    model1.tradeTypeName = @"冻结";
-//
-//    NSMutableArray *list_result = [NSMutableArray array];
-//    [list_result addObject:model];
-//    [list_result addObject:model];
-//    [list_result addObject:model1];
-//
-//    for (int i = 0; i < list_result.count; i++) {
-//        UCFGoldTradeListModel *model =  [list_result objectAtIndex:i];;
-//        NSString *tradeTime = model.tradeTime;
-//        if ([[self.dataDict allKeys] containsObject:tradeTime]) {
-//            NSMutableArray *tmpArr = [self.dataDict objectForKey:tradeTime];
-//            [tmpArr addObject:model];
-//        } else {
-//            //此处每次有新分组的时候会创建，因为字典是无序的，所以用数组存个有序序列（前提是服务端给的有顺序的）
-//            NSMutableArray *tmpArr = [NSMutableArray array];
-//            [tmpArr addObject:model];
-//            [self.dataDict setValue:tmpArr forKey:tradeTime];
-//            //这个实际上是个时间索引
-//            [self.timeIndexArr addObject:tradeTime];
-//        }
-//    }
-//    [self.baseTableView reloadData];
+    
 }
 
 - (void)initUI
@@ -219,6 +179,13 @@
     }
     NSString *tradeTimeKey = self.timeIndexArr[indexPath.section];
     cell.model = [[self.dataDict valueForKey:tradeTimeKey] objectAtIndex:indexPath.row];
+    if (indexPath.section == self.timeIndexArr.count - 1 && indexPath.row == [[self.dataDict valueForKey:tradeTimeKey] count] - 1) {
+        cell.sepLinePostion = 2;
+    } else if (indexPath.row == [[self.dataDict valueForKey:tradeTimeKey] count] - 1) {
+        cell.sepLinePostion = 1;
+    } else {
+        cell.sepLinePostion = 0;
+    }
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

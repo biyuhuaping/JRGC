@@ -10,5 +10,5 @@
 #import "UCFGoldTradeListModel.h"
 @interface UCFGoldTransCell : UITableViewCell
 @property (nonatomic, strong) UCFGoldTradeListModel *model;
-@property (nonatomic, assign) BOOL isEndCell;
+@property (nonatomic, assign) NSInteger sepLinePostion; // 0 中间分隔 1 每组的最后一个分隔 2最后一组的最后一个分隔
 @end
