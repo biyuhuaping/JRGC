@@ -31,13 +31,13 @@
     self.proNoLabel.text = [NSString stringWithFormat:@"订单号%@", model.withdrawOrderId];
     switch ([model.statusCode intValue]) {
         case 9:
-            self.cashStatusLabel.text = @"成功";
+            self.cashStatusLabel.text = @"提现成功";
             break;
         case 10:
-            self.cashStatusLabel.text = @"失败";
+            self.cashStatusLabel.text = @"提现失败";
             break;
         case 11:
-            self.cashStatusLabel.text = @"处理中";
+            self.cashStatusLabel.text = @"未处理";
             break;
     }
     self.withdrawModeLabel.text = model.withdrawMode;

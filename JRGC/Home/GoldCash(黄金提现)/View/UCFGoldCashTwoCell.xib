@@ -21,7 +21,7 @@
                     <textField opaque="NO" contentMode="scaleToFill" restorationIdentifier="goldCash2" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入提现金额" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="o71-qh-NBC">
                         <rect key="frame" x="15" y="0.0" width="290" height="43.5"/>
                         <nil key="textColor"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                         <connections>
                             <outlet property="delegate" destination="KGk-i7-Jjw" id="2QR-KQ-Fre"/>

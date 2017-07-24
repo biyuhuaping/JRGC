@@ -16,4 +16,5 @@
 @interface UCFGoldRechargeCell : UITableViewCell
 @property (strong, nonatomic) UCFGoldRechargeModel *model;
 @property (weak, nonatomic)  id<UCFGoldRechargeCellDelegate> delegate;
+@property (strong, nonatomic) NSIndexPath *indexPath;
 @end
