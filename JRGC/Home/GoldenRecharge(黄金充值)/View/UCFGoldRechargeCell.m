@@ -37,7 +37,7 @@
     self.tipLabel.text = model.tipString;
     if ([model.tipString containsString:@"400-0322-988"]) {
         __weak typeof(self) weakSelf = self;
-        [self.tipLabel setFontColor:[UIColor blueColor] string:@"400-0322-988"];
+        [self.tipLabel setFontColor:UIColorWithRGB(0x4aa1f9) string:@"400-0322-988"];
         [self.tipLabel addLinkString:@"400-0322-988" block:^(ZBLinkLabelModel *linkModel) {
             if ([weakSelf.delegate respondsToSelector:@selector(goldCell:didDialedWithNO:)]) {
                 [weakSelf.delegate goldCell:weakSelf didDialedWithNO:@"400-0322-988"];
@@ -46,6 +46,16 @@
         }];
     }
     
+}
+
+- (void)setIndexPath:(NSIndexPath *)indexPath
+{
+    _indexPath = indexPath;
+    if (indexPath.row == 1) {
+        self.tipLabel.textColor = UIColorWithRGB(0x666666);
+    }
+    else
+        self.tipLabel.textColor = UIColorWithRGB(0x999999);
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

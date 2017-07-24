@@ -90,7 +90,7 @@
     __weak typeof(self) weakSelf = self;
     MjAlertView *alertView = [[MjAlertView alloc] initCustomAlertViewWithBlock:^(id blockContent) {
         UIView *view = (UIView *)blockContent;
-        view.frame = CGRectMake(0, 0, 265, 220);
+        view.frame = CGRectMake(0, 0, 265, 250);
         
         UCFAssetTipView *tipview = (UCFAssetTipView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFAssetTipView" owner:self options:nil] lastObject];
         tipview.assetLabel.text = [NSString stringWithFormat:@"%@=%@+%@+%@", weakSelf.presenter.userInfoOneModel.total, weakSelf.presenter.userInfoOneModel.cashTotal, weakSelf.presenter.userInfoOneModel.goldMarketAmount, weakSelf.presenter.userInfoOneModel.nmCashBalance];

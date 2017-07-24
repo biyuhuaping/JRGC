@@ -85,6 +85,12 @@
         self.oneImageView.hidden = YES;
         self.proName.text = presenter.proTitle;
         self.rateLabel.text = presenter.annualRate;
+        if ([presenter.item.type isEqualToString:@"3"]) {
+            self.rateLabel.font = [UIFont systemFontOfSize:15];
+        }
+        else {
+            self.rateLabel.font = [UIFont systemFontOfSize:20];
+        }
         self.timeLabel.text = presenter.repayPeriodtext;
         self.repayModelLabel.text = presenter.repayModeText;
         self.startMoneyLabel.text = presenter.minInvest;
@@ -539,6 +545,7 @@
 - (void)setGoldModel:(UCFGoldModel *)goldModel
 {
     _goldModel = goldModel;
+    self.rateLabel.font = [UIFont systemFontOfSize:15];
     self.oneImageView.hidden = YES;
     self.proName.text = goldModel.nmPrdClaimName;
     self.rateLabel.text = [NSString stringWithFormat:@"%@克/100克", goldModel.annualRate];

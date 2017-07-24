@@ -20,7 +20,8 @@
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     self.cashAllButton = button;
     [button setTitle:@"全提" forState:UIControlStateNormal];
-    [button setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    button.titleLabel.font = [UIFont systemFontOfSize:14];
+    [button setTitleColor:UIColorWithRGB(0x4aa1f9) forState:UIControlStateNormal];
     [button addTarget:self action:@selector(cashAll:) forControlEvents:UIControlEventTouchUpInside];
     self.textField.rightView = button;
     self.textField.rightViewMode=UITextFieldViewModeAlways; //此处用来设置leftview现实时机

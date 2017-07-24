@@ -49,10 +49,10 @@
             self.statusLabel.text = @"支付中";
             break;
         case 3:
-            self.statusLabel.text = @"支付成功";
+            self.statusLabel.text = @"充值成功";
             break;
         case 4:
-            self.statusLabel.text = @"支付失败";
+            self.statusLabel.text = @"充值失败";
             break;
     }
     self.amountLabel.text = [NSString stringWithFormat:@"¥%@", model.rechargeAmount];

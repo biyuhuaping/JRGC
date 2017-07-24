@@ -120,6 +120,7 @@
     if (nil == goldRecharge) {
         goldRecharge = (UCFGoldRechargeCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFGoldRechargeCell" owner:self options:nil] lastObject];
     }
+    goldRecharge.indexPath = indexPath;
     goldRecharge.model = [self.dataArray objectAtIndex:indexPath.row];
     goldRecharge.delegate = self;
     return goldRecharge;

@@ -15,7 +15,7 @@
 #import "UCFGoldCashHistoryController.h"
 #import "UCFToolsMehod.h"
 #import "MjAlertView.h"
-@interface UCFGoldCashMoneyViewController () <UITableViewDataSource, UITableViewDelegate, UCFGoldCashThreeCellDelegate,MjAlertViewDelegate, UIAlertViewDelegate>
+@interface UCFGoldCashMoneyViewController () <UITableViewDataSource, UITableViewDelegate, UCFGoldCashThreeCellDelegate,MjAlertViewDelegate, UIAlertViewDelegate, UCFGoldRechargeCellDelegate>
 @property (strong, nonatomic) NSMutableArray *dataArray;
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (weak, nonatomic) UCFGoldCashTwoCell *amoutCell;
@@ -166,10 +166,17 @@
         if (nil == goldRecharge) {
             goldRecharge = (UCFGoldRechargeCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFGoldRechargeCell" owner:self options:nil] lastObject];
         }
+        goldRecharge.indexPath = indexPath;
         goldRecharge.model = [self.dataArray objectAtIndex:indexPath.row];
+        goldRecharge.delegate = self;
         return goldRecharge;
     }
     return nil;
+}
+
+- (void)goldCell:(UCFGoldRechargeCell *)goldCell didDialedWithNO:(NSString *)No
+{
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"telprompt://400-0322-988"]];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
