@@ -52,8 +52,8 @@
         self.turnoverLab.textColor = UIColorWithRGB(0x999999);
         self.dealMoney.textColor = UIColorWithRGB(0x999999);
     }
-    NSString *showStr = [_model.frozenMoney stringByReplacingOccurrencesOfString:@"-" withString:@""];
-    self.dealMoney.text = [NSString stringWithFormat:@"￥%@",showStr];
+
+    self.dealMoney.text = [NSString stringWithFormat:@"%@",_model.frozenMoney];
     self.turnoverLab.text = [NSString stringWithFormat:@"%@克",_model.purchaseAmount];
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
