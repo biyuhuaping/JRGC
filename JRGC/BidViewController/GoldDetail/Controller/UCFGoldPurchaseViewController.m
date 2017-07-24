@@ -677,6 +677,7 @@
             if (buttonIndex == 1) {
                 [self gotoGoldRechargeVC];
             }
+            break;
         }
         case 43068:
         {
@@ -686,6 +687,7 @@
             {
                 [self.navigationController popToRootViewControllerAnimated:YES];
             }
+            break;
         }
         case 1000:
         {
@@ -736,12 +738,12 @@
             amountPay = availableMoney;
         }
     }
-    cell.estimatAmountPayableLabel.text = [NSString stringWithFormat:@"¥%.2lf",amountPay];
+    cell.estimatAmountPayableLabel.text = [NSString stringWithFormat:@"¥%.2lf",[[Common notRounding:amountPay afterPoint:3] doubleValue]];
     
     double periodTerm = [[self.goldModel.periodTerm substringWithRange:NSMakeRange(0, self.goldModel.periodTerm.length - 1)] doubleValue];
     
     double getUpWeightGold = [cell.moneyTextField.text doubleValue] *[self.goldModel.annualRate doubleValue] * periodTerm /360.0 / 100.0;
-    cell.getUpWeightGoldLabel.text = [NSString stringWithFormat:@"%.3lf克",getUpWeightGold];
+    cell.getUpWeightGoldLabel.text = [NSString stringWithFormat:@"%.3lf克",[[Common notRounding:getUpWeightGold afterPoint:3] doubleValue]];
     [self.tableView reloadData];
 }
 -(void)keyboardDown{
@@ -881,9 +883,14 @@
             NSString *showStr = [NSString stringWithFormat:@"由于金价实时波动，成交时金价增至%.2lf元/元，是否继续购买？",self.goldPrice];
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:showStr delegate:self cancelButtonTitle:@"放弃购买" otherButtonTitles:@"继续购买", nil];
             alert.tag = 43068;
+            [alert show]; //11114
+            return;
+        }else  if ([[dic objectSafeForKey:@"code"] intValue] == 11114)
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:message delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
             [alert show];
             return;
-        }else {
+        } else  {
             UCFGoldBidSuccessViewController *goldBidSuccessVC = [[UCFGoldBidSuccessViewController alloc]initWithNibName:@"UCFGoldBidSuccessViewController" bundle:nil];
             goldBidSuccessVC.dataDict = resultDict;
             goldBidSuccessVC.isPurchaseSuccess = [rstcode boolValue];

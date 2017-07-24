@@ -90,7 +90,7 @@
     __weak typeof(self) weakSelf = self;
     MjAlertView *alertView = [[MjAlertView alloc] initCustomAlertViewWithBlock:^(id blockContent) {
         UIView *view = (UIView *)blockContent;
-        view.frame = CGRectMake(0, 0, 265, 220);
+        view.frame = CGRectMake(0, 0, 265, 250);
         
         UCFAssetTipView *tipview = (UCFAssetTipView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFAssetTipView" owner:self options:nil] lastObject];
         tipview.assetLabel.text = [NSString stringWithFormat:@"%@=%@+%@+%@", weakSelf.presenter.userInfoOneModel.total, weakSelf.presenter.userInfoOneModel.cashTotal, weakSelf.presenter.userInfoOneModel.goldMarketAmount, weakSelf.presenter.userInfoOneModel.nmCashBalance];
@@ -581,10 +581,12 @@
         return;
     }
     __weak typeof(self) weakSelf = self;
+    
     [self.presenter fetchSignDataWithUserId:userId withToken:self.userTicket completionHandler:^(NSError *error, id result) {
                     if ([result isKindOfClass:[UCFSignModel class]]) {
                         MjAlertView *alert = [[MjAlertView alloc] initRedBagAlertViewWithBlock:^(id blockContent) {
                             UIView *view = (UIView *)blockContent;
+                            view.center = CGPointMake(ScreenWidth * 0.5, ScreenHeight * 0.5);
                             UCFSignView *signView = [[UCFSignView alloc] initWithFrame:view.bounds];
                             [view addSubview:signView];
                             [view sendSubviewToBack:signView];

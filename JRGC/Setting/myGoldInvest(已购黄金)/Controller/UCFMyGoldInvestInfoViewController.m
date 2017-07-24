@@ -378,10 +378,10 @@
     [self.allGiveGoldAmountLabel setFont:[UIFont boldSystemFontOfSize:14] string:@"克"];
     
     
-    float principal = [userDataInfoDict[@"collectGoldAmount"] floatValue];
-    self.collectGoldAmountLabel.text = [NSString stringWithFormat:@"待收赠金:%.3f克",principal];//待收本金
     float  collectGiveGoldAmount = [userDataInfoDict[@"collectGiveGoldAmount"] floatValue];;//待收利息
-    self.collectGiveGoldAmountLabel.text = [NSString stringWithFormat:@"总待收黄金:%.3f克",collectGiveGoldAmount];
+    self.collectGoldAmountLabel.text = [NSString stringWithFormat:@"待收赠金:%.3f克",collectGiveGoldAmount];
+      float principal = [userDataInfoDict[@"collectGoldAmount"] floatValue];////总待收黄金
+    self.collectGiveGoldAmountLabel.text = [NSString stringWithFormat:@"总待收黄金:%.3f克",principal];
     
     BOOL hasNextPage = [[dic objectSafeDictionaryForKey:@"data"][@"pageData"][@"pagination"][@"hasNextPage"] boolValue];
     NSArray *dataArr = [dic objectSafeDictionaryForKey:@"data"][@"pageData"][@"result"];

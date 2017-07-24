@@ -104,10 +104,11 @@
     
     [attributedString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:font] range:NSMakeRange(0, attributedString.length)];
     _textView.attributedText = attributedString;
-    _textView.linkTextAttributes = @{NSForegroundColorAttributeName: [UIColor blueColor],
+    _textView.linkTextAttributes = @{NSForegroundColorAttributeName: UIColorWithRGB(0x4aa1f9),
                                      NSUnderlineColorAttributeName: [UIColor lightGrayColor],
                                      NSUnderlineStyleAttributeName: @(NSUnderlinePatternSolid)};
-    
+    _textView.textColor = UIColorWithRGB(0x999999);
+    _textView.backgroundColor = UIColorWithRGB(0xebebee);
     _textView.delegate = self;
     _textView.editable = NO; //必须禁止输入，否则点击将弹出输入键盘
     _textView.scrollEnabled = NO;

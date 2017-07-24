@@ -15,7 +15,7 @@
 #import "UCFGoldCashHistoryController.h"
 #import "UCFToolsMehod.h"
 #import "MjAlertView.h"
-@interface UCFGoldCashMoneyViewController () <UITableViewDataSource, UITableViewDelegate, UCFGoldCashThreeCellDelegate,MjAlertViewDelegate>
+@interface UCFGoldCashMoneyViewController () <UITableViewDataSource, UITableViewDelegate, UCFGoldCashThreeCellDelegate,MjAlertViewDelegate, UIAlertViewDelegate, UCFGoldRechargeCellDelegate>
 @property (strong, nonatomic) NSMutableArray *dataArray;
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (weak, nonatomic) UCFGoldCashTwoCell *amoutCell;
@@ -166,10 +166,17 @@
         if (nil == goldRecharge) {
             goldRecharge = (UCFGoldRechargeCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFGoldRechargeCell" owner:self options:nil] lastObject];
         }
+        goldRecharge.indexPath = indexPath;
         goldRecharge.model = [self.dataArray objectAtIndex:indexPath.row];
+        goldRecharge.delegate = self;
         return goldRecharge;
     }
     return nil;
+}
+
+- (void)goldCell:(UCFGoldRechargeCell *)goldCell didDialedWithNO:(NSString *)No
+{
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"telprompt://400-0322-988"]];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -252,6 +259,9 @@
 }
 
 - (void)mjalertView:(MjAlertView *)alertview didClickedButton:(UIButton *)clickedButton andClickedIndex:(NSInteger)index{
+    if (alertview.tag == 1000) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
     if (index == 1) {
         [self gotoGoldCash];
     }
@@ -270,8 +280,9 @@
     NSString *rsttext = dic[@"message"];
     if (tag.intValue == kSXTagGoldCash) {
         if ([rstcode intValue] == 1) {
-            [AuxiliaryFunc showToastMessage:@"提现成功" withView:self.view];
-            [self performSelector:@selector(backGoldAccount) withObject:nil afterDelay:0.5];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"提现申请已提交，请耐心等待" delegate:self cancelButtonTitle:@"确认" otherButtonTitles: nil];
+            alertView.tag = 1000;
+            [alertView show];
         }else {
             [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
         }
@@ -302,11 +313,6 @@
 {
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     [MBProgressHUD displayHudError:err.userInfo[@"NSLocalizedDescription"]];
-}
-
-- (void)backGoldAccount
-{
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)dealloc
