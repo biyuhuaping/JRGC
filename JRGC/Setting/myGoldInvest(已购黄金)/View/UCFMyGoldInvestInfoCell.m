@@ -47,21 +47,21 @@
     self.purchaseGoldAmountLabel.text = [NSString stringWithFormat:@"%@克",[dataDict objectSafeForKey:@"purchaseGoldAmount"]];
     //预期增金克重
     self.perGiveGoldAmountLabel.text = [NSString stringWithFormat:@"%@克",[dataDict objectSafeForKey:@"perGiveGoldAmount"]];
-    //已获增金克重
     
+
     NSString *hasGiveGoldAmount = [dataDict objectSafeForKey:@"hasGiveGoldAmount"];
-    
-    if ([hasGiveGoldAmount isEqualToString:@""]) {
-        self.hasGiveGoldAmountLabel.text = @"--";
-    }else{
-        self.hasGiveGoldAmountLabel.text = [NSString stringWithFormat:@"%@克",[dataDict objectSafeForKey:@"hasGiveGoldAmount"]];
-    }
-    
-    self.startDateLabel.text = [NSString stringWithFormat:@"%@",[self checkStr:[dataDict objectSafeForKey:@"startDate"]]];
-    self.expiredDateLabel.text = [NSString stringWithFormat:@"%@",[self checkStr:[dataDict objectSafeForKey:@"expiredDate"]]];
     
     NSString *orderStatusName = [dataDict objectSafeForKey:@"orderStatusName"];
     self.orderStatusNameLabel.text = [NSString stringWithFormat:@"%@",orderStatusName];
+    
+    if ([orderStatusName  isEqualToString:@"未结算"]) {
+        self.hasGiveGoldAmountLabel.text = @"--";
+    }else{ //已获增金克重
+       self.hasGiveGoldAmountLabel.text = [NSString stringWithFormat:@"%@克(%@)",hasGiveGoldAmount,[dataDict objectSafeForKey:@"paymentType"]];
+    }
+    self.startDateLabel.text = [NSString stringWithFormat:@"%@",[self checkStr:[dataDict objectSafeForKey:@"startDate"]]];
+    self.expiredDateLabel.text = [NSString stringWithFormat:@"%@",[self checkStr:[dataDict objectSafeForKey:@"expiredDate"]]];
+    
     if ([orderStatusName isEqualToString:@"已到期"]) {
         self.orderStatusNameLabel.textColor  = UIColorWithRGB(0x999999);
     }else{

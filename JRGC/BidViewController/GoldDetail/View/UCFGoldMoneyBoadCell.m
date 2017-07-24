@@ -125,12 +125,12 @@
         }
     }
     double amountPay = [textField.text doubleValue] * [ToolSingleTon sharedManager].readTimePrice;
-    self.estimatAmountPayableLabel.text = [NSString stringWithFormat:@"¥%.2lf",amountPay];
+    self.estimatAmountPayableLabel.text = [NSString stringWithFormat:@"¥%.2lf",[[Common notRounding:amountPay afterPoint:2] doubleValue]];
     
     double periodTerm = [[self.goldModel.periodTerm substringWithRange:NSMakeRange(0, self.goldModel.periodTerm.length - 1)] doubleValue];
     
     double getUpWeightGold = [textField.text doubleValue] *[self.goldModel.annualRate doubleValue] * periodTerm /360.0 / 100.0;
-    self.getUpWeightGoldLabel.text = [NSString stringWithFormat:@"%.3lf克",getUpWeightGold];
+    self.getUpWeightGoldLabel.text = [NSString stringWithFormat:@"%.3lf克",[[Common notRounding:getUpWeightGold afterPoint:3] doubleValue]];
     
     return textField;
 }
