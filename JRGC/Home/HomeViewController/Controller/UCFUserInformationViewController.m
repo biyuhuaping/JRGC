@@ -581,10 +581,12 @@
         return;
     }
     __weak typeof(self) weakSelf = self;
+    
     [self.presenter fetchSignDataWithUserId:userId withToken:self.userTicket completionHandler:^(NSError *error, id result) {
                     if ([result isKindOfClass:[UCFSignModel class]]) {
                         MjAlertView *alert = [[MjAlertView alloc] initRedBagAlertViewWithBlock:^(id blockContent) {
                             UIView *view = (UIView *)blockContent;
+                            view.center = CGPointMake(ScreenWidth * 0.5, ScreenHeight * 0.5);
                             UCFSignView *signView = [[UCFSignView alloc] initWithFrame:view.bounds];
                             [view addSubview:signView];
                             [view sendSubviewToBack:signView];
