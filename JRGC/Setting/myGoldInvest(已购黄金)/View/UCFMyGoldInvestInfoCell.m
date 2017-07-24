@@ -50,7 +50,6 @@
     
 
     NSString *hasGiveGoldAmount = [dataDict objectSafeForKey:@"hasGiveGoldAmount"];
-    
     NSString *orderStatusName = [dataDict objectSafeForKey:@"orderStatusName"];
     self.orderStatusNameLabel.text = [NSString stringWithFormat:@"%@",orderStatusName];
     

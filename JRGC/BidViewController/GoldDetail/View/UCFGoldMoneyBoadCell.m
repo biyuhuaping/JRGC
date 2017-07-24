@@ -40,7 +40,9 @@
 {
     _dataDict = dataDict;
     NSDictionary *userAccountInfoDict = [_dataDict objectForKey:@"userAccountInfo"];
-    self.availableAllMoneyLabel.text = [NSString stringWithFormat:@"¥%@",[userAccountInfoDict objectForKey:@"availableAllMoney"]];
+    
+    BOOL isGongDouSwitch = [[NSUserDefaults standardUserDefaults] boolForKey:@"SelectGoldGongDouSwitch"];
+    self.availableAllMoneyLabel.text = isGongDouSwitch ? [NSString stringWithFormat:@"¥%@",[userAccountInfoDict objectForKey:@"availableAllMoney"]] :[NSString stringWithFormat:@"¥%@",[userAccountInfoDict objectForKey:@"availableMoney"]];
     self.availableMoneyLabel.text = [NSString stringWithFormat:@"¥%@",[userAccountInfoDict objectForKey:@"availableMoney"]];
     self.accountBeanLabel.text = [NSString stringWithFormat:@"¥%@",[userAccountInfoDict objectForKey:@"accountBean"]];
     

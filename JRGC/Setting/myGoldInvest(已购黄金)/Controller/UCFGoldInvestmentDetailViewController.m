@@ -25,7 +25,7 @@
     [self addLeftButton];
     baseTitleLabel.text = @"已购详情";
     [self getGoldInvestmentDetailDataHTTPRequst];
-//    self.tableView.contentInset =  UIEdgeInsetsMake(10, 0, 0, 0);
+    self.tableView.separatorInset =  UIEdgeInsetsMake(0, 15, 0, 0);
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     // Do any additional setup after loading the view from its nib.
 }
