@@ -121,7 +121,13 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 44.0f;
+    if(_isPurchaseSuccess){
+            return 44.0f;
+    }else{
+        CGSize size =  [Common getStrHeightWithStr:self.errorMessageStr AndStrFont:12 AndWidth:ScreenWidth - 30 AndlineSpacing:2];
+        return size.height + 20;
+    }
+
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
 
@@ -147,14 +153,15 @@
             cell.detailTextLabel.text = item.subtitle;
         }
     }else{
-        UILabel *errorLabel = [[UILabel alloc]initWithFrame:CGRectMake(15, 0, ScreenWidth-30, 44)];
+        CGSize size =  [Common getStrHeightWithStr:self.errorMessageStr AndStrFont:12 AndWidth:ScreenWidth - 30 AndlineSpacing:2];
+        UILabel *errorLabel = [[UILabel alloc]initWithFrame:CGRectMake(15, 10, ScreenWidth-30, size.height)];
         errorLabel.textColor = UIColorWithRGB(0x555555);
-        errorLabel.font = [UIFont systemFontOfSize:14];
+        errorLabel.font = [UIFont systemFontOfSize:12];
+        errorLabel.numberOfLines = 0;
         errorLabel.textAlignment = NSTextAlignmentCenter;
         [cell.contentView addSubview:errorLabel];
         errorLabel.text = self.errorMessageStr;//购买错误信息
     }
-
     return cell;
 }
 - (void)didReceiveMemoryWarning {

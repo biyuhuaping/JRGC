@@ -634,7 +634,7 @@
 -(void)gotoGoldRechargeVC
 {
     if ([[UserInfoSingle sharedManager].isSpecial boolValue] ||[UserInfoSingle sharedManager].companyAgent) {
-        UIAlertView *alerView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"暂不支持企业，特殊用户购买" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        UIAlertView *alerView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"暂不支持企业用户、特殊用户购买" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
         //        alerView.tag = 1002;
         [alerView show];
         return;
@@ -763,7 +763,7 @@
      */
 
     if ([[UserInfoSingle sharedManager].isSpecial boolValue] ||[UserInfoSingle sharedManager].companyAgent) {
-        UIAlertView *alerView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"暂不支持企业，特殊用户购买" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        UIAlertView *alerView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"暂不支持企业用户，特殊用户购买" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
 //        alerView.tag = 1002;
         [alerView show];
         return;
@@ -772,7 +772,6 @@
     
     if(![UserInfoSingle sharedManager].goldAuthorization){//去授权页面
         HSHelper *helper = [HSHelper new];
-        
         [helper pushGoldAuthorizationType:SelectAccoutTypeGold nav:self.navigationController sourceVC:@"GoldPurchaseVC"];
         return;
     }
