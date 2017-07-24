@@ -160,6 +160,7 @@
                     [[MongoliaLayerCenter sharedManager].mongoliaLayerDic setValue:sDateStr forKey:@"authorizationDate"];
                 }
             }
+            [UserInfoSingle sharedManager].companyAgent = [[result objectSafeForKey:@"isCompanyAgent"] boolValue];
             UCFHomeListCellModel *homelistModel = [UCFHomeListCellModel homeListCellWithDict:result];
             [tempResult setObject:tempArray forKey:@"homelistContent"];
             [tempResult setObject:homelistModel forKey:@"listInfo"];
