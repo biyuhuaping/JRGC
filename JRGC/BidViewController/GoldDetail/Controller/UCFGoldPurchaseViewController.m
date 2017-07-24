@@ -93,6 +93,11 @@
     _availableMoney = [[userAccountInfoDict objectForKey:@"availableMoney"] doubleValue];
     _accountBean = [[userAccountInfoDict objectForKey:@"accountBean"] doubleValue];
     _willExpireBean= [[userAccountInfoDict objectForKey:@"willExpireBean"] doubleValue];
+    
+    //保存是否选择工豆
+    [[NSUserDefaults standardUserDefaults] setBool:!(_accountBean==0) forKey:@"SelectGoldGongDouSwitch"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    self.isSelectGongDouSwitch = !(_accountBean==0);
 }
 #pragma mark - 监听键盘
 - (void)goldKeyboardWillShow:(NSNotification *)notification {
@@ -483,11 +488,7 @@
             }
             cell.dataDict = self.dataDic;
             cell.goldModel  = _goldModel;
-            if (_accountBean == 0) {
-                cell.goldSwitch.on = NO;
-            }else{
-                cell.goldSwitch.on = YES;
-            }
+            cell.goldSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"SelectGoldGongDouSwitch"];
             self.isSelectGongDouSwitch = cell.goldSwitch.on;
             cell.delegate = self;
             cell.moneyTextField.delegate = self;
@@ -625,11 +626,14 @@
 -(void)clickGoldSwitch:(UISwitch *)goldSwitch
 {
     self.isSelectGongDouSwitch = goldSwitch.on;
+    
+    [[NSUserDefaults standardUserDefaults] setBool:self.isSelectGongDouSwitch forKey:@"SelectGoldGongDouSwitch"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 #pragma mark -黄金充值
 -(void)gotoGoldRechargeVC
 {
-    if ([UserInfoSingle sharedManager].isSpecial ||[UserInfoSingle sharedManager].companyAgent) {
+    if ([[UserInfoSingle sharedManager].isSpecial boolValue] ||[UserInfoSingle sharedManager].companyAgent) {
         UIAlertView *alerView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"暂不支持企业，特殊用户购买" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
         //        alerView.tag = 1002;
         [alerView show];
@@ -685,8 +689,8 @@
         }
         case 1000:
         {
-            UCFGoldMoneyBoadCell *cell = (UCFGoldMoneyBoadCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
-            [cell.moneyTextField becomeFirstResponder];
+//            UCFGoldMoneyBoadCell *cell = (UCFGoldMoneyBoadCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
+//            [cell.moneyTextField becomeFirstResponder];
         }
             
         default:
@@ -758,7 +762,7 @@
      
      */
 
-    if ([UserInfoSingle sharedManager].isSpecial ||[UserInfoSingle sharedManager].companyAgent) {
+    if ([[UserInfoSingle sharedManager].isSpecial boolValue] ||[UserInfoSingle sharedManager].companyAgent) {
         UIAlertView *alerView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"暂不支持企业，特殊用户购买" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
 //        alerView.tag = 1002;
         [alerView show];

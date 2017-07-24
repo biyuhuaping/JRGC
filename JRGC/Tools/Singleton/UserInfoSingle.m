@@ -168,8 +168,14 @@
         }
         if (ret) {
             id propertyValue = [dataSource valueForKey:key];
-            //该值不为NSNULL，并且也不为nil
-            if (![propertyValue isKindOfClass:[NSNull class]] && propertyValue!=nil) {
+            
+            if ([key isEqualToString:@"isSpecial"]) {
+                NSString *value  = [NSString stringWithFormat:@"%@",propertyValue];
+                [self setValue:value forKey:key];
+
+            }
+            //该e值不为NSNULL，并且也不为nil
+           else if (![propertyValue isKindOfClass:[NSNull class]] && propertyValue!=nil) {
                 [self setValue:propertyValue forKey:key];
             }
         }
