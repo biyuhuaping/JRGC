@@ -48,13 +48,13 @@
     if ([_model.tradeTypeName isEqualToString:@"买金"]) {
         self.turnoverLab.textColor = UIColorWithRGB(0xfd4d4c);
         self.dealMoney.textColor = UIColorWithRGB(0xfd4d4c);
-        
     } else if ([_model.tradeTypeName isEqualToString:@"冻结"]) {
         self.turnoverLab.textColor = UIColorWithRGB(0x999999);
         self.dealMoney.textColor = UIColorWithRGB(0x999999);
     }
+    NSString *showStr = [_model.frozenMoney stringByReplacingOccurrencesOfString:@"-" withString:@""];
+    self.dealMoney.text = [NSString stringWithFormat:@"￥%@",showStr];
     self.turnoverLab.text = [NSString stringWithFormat:@"%@克",_model.purchaseAmount];
-    self.dealMoney.text = _model.tradeMoney;
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:NO animated:animated];
