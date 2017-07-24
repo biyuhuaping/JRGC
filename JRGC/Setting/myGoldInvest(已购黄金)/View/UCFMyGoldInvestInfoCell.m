@@ -41,27 +41,30 @@
 {
     //成交金价
     self.dealGoldPriceLabel.text = [NSString stringWithFormat:@"¥%@",[dataDict objectSafeForKey:@"dealGoldPrice"]];
+    
+    self.dealGoldPriceLabel.font = [UIFont boldSystemFontOfSize:12];
     //标名称
     self.nmPrdClaimNameLabel.text = [NSString stringWithFormat:@"%@",[dataDict objectSafeForKey:@"nmPrdClaimName"]];
     //购买克重
     self.purchaseGoldAmountLabel.text = [NSString stringWithFormat:@"%@克",[dataDict objectSafeForKey:@"purchaseGoldAmount"]];
+     self.purchaseGoldAmountLabel.font = [UIFont boldSystemFontOfSize:12];
+    
     //预期增金克重
     self.perGiveGoldAmountLabel.text = [NSString stringWithFormat:@"%@克",[dataDict objectSafeForKey:@"perGiveGoldAmount"]];
-    //已获增金克重
     
+
     NSString *hasGiveGoldAmount = [dataDict objectSafeForKey:@"hasGiveGoldAmount"];
+    NSString *orderStatusName = [dataDict objectSafeForKey:@"orderStatusName"];
+    self.orderStatusNameLabel.text = [NSString stringWithFormat:@"%@",orderStatusName];
     
-    if ([hasGiveGoldAmount doubleValue] == 0) {
+    if ([orderStatusName  isEqualToString:@"未起算"]) {
         self.hasGiveGoldAmountLabel.text = @"--";
-    }else{
-        self.hasGiveGoldAmountLabel.text = [NSString stringWithFormat:@"%@克",[dataDict objectSafeForKey:@"hasGiveGoldAmount"]];
+    }else{ //已获增金克重
+       self.hasGiveGoldAmountLabel.text = [NSString stringWithFormat:@"%@克(%@)",hasGiveGoldAmount,[dataDict objectSafeForKey:@"paymentType"]];
     }
-    
     self.startDateLabel.text = [NSString stringWithFormat:@"%@",[self checkStr:[dataDict objectSafeForKey:@"startDate"]]];
     self.expiredDateLabel.text = [NSString stringWithFormat:@"%@",[self checkStr:[dataDict objectSafeForKey:@"expiredDate"]]];
     
-    NSString *orderStatusName = [dataDict objectSafeForKey:@"orderStatusName"];
-    self.orderStatusNameLabel.text = [NSString stringWithFormat:@"%@",orderStatusName];
     if ([orderStatusName isEqualToString:@"已到期"]) {
         self.orderStatusNameLabel.textColor  = UIColorWithRGB(0x999999);
     }else{
