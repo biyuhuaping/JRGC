@@ -47,7 +47,7 @@
                                             </constraints>
                                         </view>
                                     </subviews>
-                                    <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="trailing" secondItem="s6i-z5-kBl" secondAttribute="trailing" id="0q7-Ls-tAC"/>
                                         <constraint firstAttribute="bottom" secondItem="s6i-z5-kBl" secondAttribute="bottom" id="8tP-z7-GHO"/>
@@ -90,19 +90,18 @@
                                                     <rect key="frame" x="0.0" y="11" width="374" height="1"/>
                                                     <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="1" id="luj-H5-f5S"/>
+                                                        <constraint firstAttribute="height" constant="0.5" id="luj-H5-f5S"/>
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="242-s5-QxX">
                                                     <rect key="frame" x="0.0" y="0.0" width="374" height="1"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="1" id="baC-ic-hbA"/>
-                                                        <constraint firstAttribute="height" constant="1" id="uNl-3s-9h9"/>
+                                                        <constraint firstAttribute="height" constant="0.5" id="uNl-3s-9h9"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
-                                            <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="12" id="DPR-rQ-XdU"/>
                                                 <constraint firstItem="242-s5-QxX" firstAttribute="leading" secondItem="z8a-SP-53j" secondAttribute="leading" id="QAS-rR-sUV"/>
@@ -119,14 +118,14 @@
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gos-eo-JrP">
                                                     <rect key="frame" x="15" y="26" width="359" height="0.5"/>
-                                                    <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="backgroundColor" red="0.8901960784313725" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="0.5" id="my3-gU-cw2"/>
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IMK-ot-ws2">
                                                     <rect key="frame" x="15" y="53.5" width="359" height="0.5"/>
-                                                    <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="backgroundColor" red="0.8901960784313725" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="0.5" id="9zz-eQ-pQA"/>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="0.5" id="x2i-CQ-Zd8"/>
@@ -222,19 +221,18 @@
                                                     <rect key="frame" x="0.0" y="11" width="374" height="1"/>
                                                     <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="1" id="zEM-UP-HzA"/>
+                                                        <constraint firstAttribute="height" constant="0.5" id="zEM-UP-HzA"/>
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zul-Kq-ORr">
-                                                    <rect key="frame" x="0.0" y="0.0" width="374" height="1"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="374" height="0.5"/>
+                                                    <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="1" id="M2D-MD-Tc1"/>
-                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="1" id="kHg-Rq-CqS"/>
+                                                        <constraint firstAttribute="height" constant="0.5" id="M2D-MD-Tc1"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
-                                            <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="12" id="F24-zE-KH7"/>
                                                 <constraint firstItem="zul-Kq-ORr" firstAttribute="top" secondItem="wdj-RC-wos" secondAttribute="top" id="JrS-iJ-mqh"/>
@@ -253,19 +251,19 @@
                                                     <rect key="frame" x="0.0" y="80.5" width="374" height="0.5"/>
                                                     <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="1" id="9Fv-uG-Lfm"/>
+                                                        <constraint firstAttribute="height" constant="0.5" id="9Fv-uG-Lfm"/>
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ezn-Ob-lhB">
                                                     <rect key="frame" x="15" y="26" width="359" height="0.5"/>
-                                                    <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="backgroundColor" red="0.8901960784313725" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="0.5" id="cCm-xi-3uv"/>
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bvV-yZ-egI">
                                                     <rect key="frame" x="15" y="53.5" width="359" height="0.5"/>
-                                                    <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="backgroundColor" red="0.8901960784313725" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="0.5" id="5yY-5g-yyR"/>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="0.5" id="nDg-Nk-Sdn"/>
@@ -354,7 +352,7 @@
                                     </constraints>
                                 </view>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="0.92156862750000001" green="0.92156862750000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstItem="UDB-3J-HXA" firstAttribute="top" secondItem="eeQ-e3-t7N" secondAttribute="top" id="0dB-Sl-wCA"/>
                                 <constraint firstAttribute="trailing" secondItem="UDB-3J-HXA" secondAttribute="trailing" id="1gi-6C-tfY"/>

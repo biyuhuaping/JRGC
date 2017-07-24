@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *dealMoney;
 @property (weak, nonatomic) IBOutlet UIView *bottomLine;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *trailToEndSpace;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *leftSpace;
 
 @end
 
@@ -29,19 +30,30 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    if (self.isEndCell) {
-        self.bottomLine.hidden = YES;
-    } else {
+    if (self.sepLinePostion == 0) {
         self.bottomLine.hidden = NO;
+        self.bottomLine.frame = CGRectMake(15, CGRectGetMinY(self.bottomLine.frame), ScreenWidth - 15, 0.5);
+        self.leftSpace.constant = 15;
+        
+    } else if (self.sepLinePostion == 1){
+        self.bottomLine.hidden = YES;
+        self.leftSpace.constant = 0;
+        
+    } else if (self.sepLinePostion == 2) {
+        self.bottomLine.hidden = NO;
+        self.leftSpace.constant = 0;
+        
     }
-    if ([_model.tradeTypeCode isEqualToString:@"98"]) {
-        self.dealType.text = @"冻结";
+    self.dealType.text = _model.tradeTypeName;
+    if ([_model.tradeTypeName isEqualToString:@"买金"]) {
+        self.turnoverLab.textColor = UIColorWithRGB(0xfd4d4c);
+        self.dealMoney.textColor = UIColorWithRGB(0xfd4d4c);
         
-    } else if([_model.tradeTypeCode isEqualToString:@"99"]){
-
-        self.dealType.text = @"买金";
-        
-    }    self.turnoverLab.text = _model.purchaseAmount;
+    } else if ([_model.tradeTypeName isEqualToString:@"冻结"]) {
+        self.turnoverLab.textColor = UIColorWithRGB(0x999999);
+        self.dealMoney.textColor = UIColorWithRGB(0x999999);
+    }
+    self.turnoverLab.text = [NSString stringWithFormat:@"%@克",_model.purchaseAmount];
     self.dealMoney.text = _model.tradeMoney;
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

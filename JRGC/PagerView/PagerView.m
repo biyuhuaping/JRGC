@@ -19,11 +19,61 @@
 @property (strong, nonatomic) UIView            *segmentView;
 @property (strong, nonatomic) UIView            *bottomLine;
 @property (strong, nonatomic) UIScrollView      *segmentScrollV;
-
-
+@property (strong, nonatomic) UIScrollView      *titleBaseScrollView;
 @end
 
 @implementation PagerView
+
+- (instancetype)initWithFrame:(CGRect)frame SegmentViewHeight:(CGFloat)segmentViewHeight Controller:(UIViewController *)controller titleArray:(NSArray *)titleArray{
+    
+    if (self = [super initWithFrame:frame]){
+        
+        self.viewController = controller;
+        self.nameArray = titleArray;
+        self.buttonArray = [NSMutableArray array]; //按钮数组
+        //添加标题视图
+        self.segmentView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, frame.size.width, segmentViewHeight)];
+        self.segmentView.backgroundColor = [UIColor whiteColor];
+        [self addSubview:self.segmentView];
+    }
+    return self;
+}
+- (UIScrollView *)titleBaseScrollView
+{
+    if (_titleBaseScrollView) {
+        _titleBaseScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, CGRectGetHeight(self.segmentView.frame))];
+        _titleBaseScrollView.showsHorizontalScrollIndicator = NO;
+    }
+    return _titleBaseScrollView;
+}
+//设置头部视图的背景颜色
+- (void)setSegmentBaseBackgroudColor:(UIColor *)color
+{
+    self.segmentView.backgroundColor = color;
+}
+- (void)setButtonWidth:(float)width Offx:(float)offX;
+{
+    for(UIView *btnView in self.titleBaseScrollView.subviews) {
+        [btnView removeFromSuperview];
+    }
+    float totalWidth = self.nameArray.count * width;
+    if (totalWidth > ScreenWidth) {
+        [self.titleBaseScrollView setContentSize:CGSizeMake(2*offX + totalWidth, CGRectGetHeight(self.segmentView.frame))];
+    }
+    //添加按钮
+    for (int i = 0; i < self.nameArray.count; i++) {
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        button.tag =  100 + i;
+        button.frame = CGRectMake(offX + ButtonWidth * i, 0, ButtonWidth, CGRectGetHeight(self.segmentView.frame));
+        button.titleLabel.font = [UIFont systemFontOfSize:16];
+        [button setTitle:self.nameArray[i] forState:UIControlStateNormal];
+        [button setTitleColor:DefalutColor forState:UIControlStateNormal];
+        [button setTitleColor:SelectedColor forState:UIControlStateSelected];
+        [button addTarget:self action:@selector(Click:) forControlEvents:(UIControlEventTouchUpInside)];
+        [self.titleBaseScrollView addSubview:button];
+        [_buttonArray addObject:button];   //添加顶部按钮
+    }
+}
 
 - (instancetype)initWithFrame:(CGRect)frame SegmentViewHeight:(CGFloat)segmentViewHeight titleArray:(NSArray *)titleArray Controller:(UIViewController *)controller lineWidth:(float)lineW lineHeight:(float)lineH{
     
@@ -76,7 +126,6 @@
     
     return self;
 }
-
 - (void)setSelectIndex:(NSInteger)index
 {
     UIButton *button = [self.segmentView viewWithTag: 100 + index];
