@@ -85,7 +85,7 @@
     self.totalGoldAmountLabel.text = [NSString stringWithFormat:@"%.3f克",[[dataDict objectSafeForKey:@"receivableGoldAmount"] floatValue]];
     self.purchaseGoldAmountLabel.text = [NSString stringWithFormat:@"%@克",[dataDict objectSafeForKey:@"purchaseGoldAmount"]];//购买黄金克重	string
     NSString *orderStatusName = [dataDict objectSafeForKey:@"orderStatusName"];
-    if ([orderStatusName  isEqualToString:@"未结算"]) {
+    if ([orderStatusName  isEqualToString:@"未起算"]) {
         self.hasGiveGoldAmountLabel.text = @"--";
     }else{ //已获增金克重
         self.hasGiveGoldAmountLabel.text = [NSString stringWithFormat:@"%@克(%@)",[dataDict objectSafeForKey:@"hasGiveGoldAmount"],[dataDict objectSafeForKey:@"paymentType"]];//已获增金克重	string

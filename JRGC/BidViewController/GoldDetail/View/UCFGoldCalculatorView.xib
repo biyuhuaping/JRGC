@@ -46,17 +46,6 @@
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iFe-4n-yMk">
-                                    <rect key="frame" x="283" y="4" width="30" height="30"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="30" id="8hJ-VT-zJ5"/>
-                                        <constraint firstAttribute="height" constant="30" id="fFh-5t-8J2"/>
-                                    </constraints>
-                                    <state key="normal" image="calculator_close"/>
-                                    <connections>
-                                        <action selector="closeView:" destination="RgR-m2-Mks" eventType="touchUpInside" id="HMh-M7-hHe"/>
-                                    </connections>
-                                </button>
                             </subviews>
                             <color key="backgroundColor" red="0.35686274509803922" green="0.41176470588235292" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
@@ -69,9 +58,7 @@
                                 <constraint firstItem="aZV-hy-0Mm" firstAttribute="top" secondItem="L8L-Mt-GnN" secondAttribute="bottom" constant="8" id="ePH-CL-9YJ"/>
                                 <constraint firstItem="bdN-zB-ud9" firstAttribute="leading" secondItem="Ohw-My-JDC" secondAttribute="leading" constant="15" id="efU-So-UVn"/>
                                 <constraint firstAttribute="height" constant="108" id="gLi-vG-e4F"/>
-                                <constraint firstItem="iFe-4n-yMk" firstAttribute="top" secondItem="Ohw-My-JDC" secondAttribute="top" constant="4" id="gOu-ch-zbr"/>
                                 <constraint firstItem="L8L-Mt-GnN" firstAttribute="leading" secondItem="Ohw-My-JDC" secondAttribute="leading" constant="15" id="kj0-WG-f7P"/>
-                                <constraint firstAttribute="trailing" secondItem="iFe-4n-yMk" secondAttribute="trailing" constant="12" id="mAE-Da-iA0"/>
                                 <constraint firstAttribute="trailing" secondItem="bdN-zB-ud9" secondAttribute="trailing" constant="15" id="y14-Iu-DmK"/>
                             </constraints>
                             <variation key="default">
@@ -227,13 +214,36 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4ka-tp-fO1">
+                    <rect key="frame" x="187" y="482" width="1" height="25"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="25" id="Uv6-QQ-Yk0"/>
+                        <constraint firstAttribute="width" constant="1" id="ehy-K5-QzZ"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FSC-Ca-x2B">
+                    <rect key="frame" x="175.5" y="507" width="25" height="25"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="25" id="Amv-mg-gvG"/>
+                        <constraint firstAttribute="width" constant="25" id="OYM-UT-fxc"/>
+                    </constraints>
+                    <state key="normal" image="calculator_icon_close"/>
+                    <connections>
+                        <action selector="closeView:" destination="RgR-m2-Mks" eventType="touchUpInside" id="Yju-3W-btg"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="4ka-tp-fO1" firstAttribute="centerX" secondItem="RgR-m2-Mks" secondAttribute="centerX" id="BkP-wV-H8y"/>
+                <constraint firstItem="FSC-Ca-x2B" firstAttribute="centerX" secondItem="RgR-m2-Mks" secondAttribute="centerX" id="CHw-Ve-mJz"/>
                 <constraint firstItem="iN0-l3-epB" firstAttribute="leading" secondItem="RgR-m2-Mks" secondAttribute="leading" constant="25" id="EeG-rc-7MR"/>
                 <constraint firstItem="iN0-l3-epB" firstAttribute="centerX" secondItem="RgR-m2-Mks" secondAttribute="centerX" id="Fae-zf-UNP"/>
                 <constraint firstItem="iN0-l3-epB" firstAttribute="centerY" secondItem="RgR-m2-Mks" secondAttribute="centerY" id="GdP-t8-EBh"/>
+                <constraint firstItem="4ka-tp-fO1" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="bottom" id="LCx-KV-sor"/>
                 <constraint firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" constant="25" id="XTb-Ef-DSE"/>
+                <constraint firstItem="FSC-Ca-x2B" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="bottom" constant="25" id="pDx-vO-Id7"/>
             </constraints>
             <connections>
                 <outlet property="GoldPriceLabel" destination="SQD-IW-9m8" id="0lO-Fj-SUV"/>
@@ -242,10 +252,10 @@
                 <outlet property="goldMoneyTextField" destination="Fv9-K4-iLg" id="rRv-IK-h1L"/>
                 <outlet property="purchaseMoneyLabel" destination="xJa-0R-qhx" id="um8-4U-tQK"/>
             </connections>
-            <point key="canvasLocation" x="-478" y="-1"/>
+            <point key="canvasLocation" x="-478.5" y="-1.5"/>
         </view>
     </objects>
     <resources>
-        <image name="calculator_close" width="30" height="30"/>
+        <image name="calculator_icon_close" width="25" height="25"/>
     </resources>
 </document>

@@ -25,7 +25,7 @@
     [self addLeftButton];
     baseTitleLabel.text = @"已购详情";
     [self getGoldInvestmentDetailDataHTTPRequst];
-    self.tableView.separatorInset =  UIEdgeInsetsMake(0, 15, 0, 0);
+//    self.tableView.separatorInset =  UIEdgeInsetsMake(0, 15, 0, 0);
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     // Do any additional setup after loading the view from its nib.
 }
@@ -199,6 +199,15 @@
                 if (indexPath.row -1 < self.dataDetailArray.count)
                 {
                     cell.dataDict = [self.dataDetailArray objectAtIndex:indexPath.row - 1];
+                }
+                
+                
+                if (indexPath.row < self.dataDetailArray.count - 1) {
+                    cell.lineViewLeft.constant = 15;
+                    cell.lineView.backgroundColor = UIColorWithRGB(0xe3e5ea);
+                }else{
+                    cell.lineViewLeft.constant = 0;
+                    cell.lineView.backgroundColor = UIColorWithRGB(0xd8d8d8);
                 }
                 return cell;
             }
