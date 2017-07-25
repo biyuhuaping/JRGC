@@ -50,31 +50,31 @@
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="总资产=现金资产+黄金市值+黄金账户余额" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Ls-c7-bcG">
-                            <rect key="frame" x="15" y="57.5" width="235" height="15"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <rect key="frame" x="25" y="57.5" width="215" height="13.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
                             <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00=0.00+0.00+0.00" textAlignment="center" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dMT-FC-uqK">
-                            <rect key="frame" x="15" y="80.5" width="235" height="14"/>
+                            <rect key="frame" x="25" y="79" width="215" height="14"/>
                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                             <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="现金资产=微金总资产+尊享总资产" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8gJ-Xl-Ebg">
-                            <rect key="frame" x="15" y="125" width="172" height="14"/>
+                            <rect key="frame" x="25" y="123.5" width="172" height="14"/>
                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                             <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="黄金市值=持有克重✕实时金价" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lp4-8n-XNG">
-                            <rect key="frame" x="15" y="146" width="152" height="14"/>
+                            <rect key="frame" x="25" y="144.5" width="152" height="14"/>
                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                             <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="计算公式:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kxR-a7-OfR">
-                            <rect key="frame" x="15" y="102.5" width="53" height="14.5"/>
+                            <rect key="frame" x="25" y="101" width="53" height="14.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
@@ -83,21 +83,21 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="200" id="034-o7-8Q1"/>
-                        <constraint firstItem="kxR-a7-OfR" firstAttribute="leading" secondItem="CJB-XM-dk1" secondAttribute="leading" constant="15" id="11b-oI-HXx"/>
-                        <constraint firstItem="lp4-8n-XNG" firstAttribute="leading" secondItem="CJB-XM-dk1" secondAttribute="leading" constant="15" id="12j-za-NyI"/>
+                        <constraint firstItem="kxR-a7-OfR" firstAttribute="leading" secondItem="CJB-XM-dk1" secondAttribute="leading" constant="25" id="11b-oI-HXx"/>
+                        <constraint firstItem="lp4-8n-XNG" firstAttribute="leading" secondItem="CJB-XM-dk1" secondAttribute="leading" constant="25" id="12j-za-NyI"/>
                         <constraint firstAttribute="trailing" secondItem="vOY-UH-IUO" secondAttribute="trailing" constant="15" id="5vP-Jw-ebX"/>
                         <constraint firstItem="vOY-UH-IUO" firstAttribute="leading" secondItem="CJB-XM-dk1" secondAttribute="leading" constant="15" id="AqV-1g-oxr"/>
-                        <constraint firstAttribute="trailing" secondItem="3Ls-c7-bcG" secondAttribute="trailing" constant="15" id="DSd-re-6j8"/>
+                        <constraint firstAttribute="trailing" secondItem="3Ls-c7-bcG" secondAttribute="trailing" constant="25" id="DSd-re-6j8"/>
                         <constraint firstItem="8gJ-Xl-Ebg" firstAttribute="top" secondItem="kxR-a7-OfR" secondAttribute="bottom" constant="8" id="Day-8u-rAZ"/>
                         <constraint firstItem="vOY-UH-IUO" firstAttribute="top" secondItem="CJB-XM-dk1" secondAttribute="top" constant="45" id="EIb-q9-ZtV"/>
                         <constraint firstItem="fdS-wa-GNa" firstAttribute="top" secondItem="CJB-XM-dk1" secondAttribute="top" constant="15" id="Fzo-i9-jYv"/>
-                        <constraint firstItem="dMT-FC-uqK" firstAttribute="leading" secondItem="CJB-XM-dk1" secondAttribute="leading" constant="15" id="HMq-mv-egp"/>
+                        <constraint firstItem="dMT-FC-uqK" firstAttribute="leading" secondItem="CJB-XM-dk1" secondAttribute="leading" constant="25" id="HMq-mv-egp"/>
                         <constraint firstItem="kxR-a7-OfR" firstAttribute="top" secondItem="dMT-FC-uqK" secondAttribute="bottom" constant="8" id="IEN-9y-Qdb"/>
                         <constraint firstItem="fdS-wa-GNa" firstAttribute="centerX" secondItem="CJB-XM-dk1" secondAttribute="centerX" id="Za9-AP-EUs"/>
-                        <constraint firstAttribute="trailing" secondItem="dMT-FC-uqK" secondAttribute="trailing" constant="15" id="aqj-jc-VsO"/>
+                        <constraint firstAttribute="trailing" secondItem="dMT-FC-uqK" secondAttribute="trailing" constant="25" id="aqj-jc-VsO"/>
                         <constraint firstItem="3Ls-c7-bcG" firstAttribute="top" secondItem="vOY-UH-IUO" secondAttribute="bottom" constant="11" id="e0b-xC-Ghc"/>
-                        <constraint firstItem="3Ls-c7-bcG" firstAttribute="leading" secondItem="CJB-XM-dk1" secondAttribute="leading" constant="15" id="hlA-g4-ClH"/>
-                        <constraint firstItem="8gJ-Xl-Ebg" firstAttribute="leading" secondItem="CJB-XM-dk1" secondAttribute="leading" constant="15" id="kV2-qd-LoX"/>
+                        <constraint firstItem="3Ls-c7-bcG" firstAttribute="leading" secondItem="CJB-XM-dk1" secondAttribute="leading" constant="25" id="hlA-g4-ClH"/>
+                        <constraint firstItem="8gJ-Xl-Ebg" firstAttribute="leading" secondItem="CJB-XM-dk1" secondAttribute="leading" constant="25" id="kV2-qd-LoX"/>
                         <constraint firstItem="dMT-FC-uqK" firstAttribute="top" secondItem="3Ls-c7-bcG" secondAttribute="bottom" constant="8" id="qYN-Qh-P3O"/>
                         <constraint firstItem="lp4-8n-XNG" firstAttribute="top" secondItem="8gJ-Xl-Ebg" secondAttribute="bottom" constant="7" id="urg-3W-20o"/>
                     </constraints>
