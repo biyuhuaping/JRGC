@@ -16,5 +16,6 @@
 
 @interface UCFGoldRechargeHeaderView : UIView
 @property (weak, nonatomic) id<UCFGoldRechargeHeaderViewDelegate> delegate;
+@property (weak, nonatomic) IBOutlet UITextField *textField;
 @property (strong, nonatomic) NSArray *constracts;
 @end

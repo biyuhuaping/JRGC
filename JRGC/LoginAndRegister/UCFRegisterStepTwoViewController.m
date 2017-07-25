@@ -184,7 +184,7 @@
             
             [[NSUserDefaults standardUserDefaults] setObject:_phoneNumber forKey:@"lastLoginName"];
             [UserInfoSingle sharedManager].goldAuthorization = [[(NSDictionary *)dic[@"data"][@"userInfo"] objectSafeForKey: @"nmAuthorization"] boolValue];
-            [UserInfoSingle sharedManager].isSpecial = [(NSDictionary *)dic[@"data"][@"userInfo"] objectSafeForKey: @"isSpecial"];
+            [UserInfoSingle sharedManager].isSpecial = [[(NSDictionary *)dic[@"data"][@"userInfo"] objectSafeForKey: @"isSpecial"] boolValue];
             //更新验签串
             NSString *yanQian = [NSString stringWithFormat:@"%@%@%@",dic[@"loginName"],[UCFToolsMehod md5:[MD5Util MD5Pwd:_registerTwoView.getPassword]],dic[@"time"]];
             

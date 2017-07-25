@@ -9,5 +9,5 @@
 #import "UCFBaseViewController.h"
 
 @interface UCFGoldRechargeViewController : UCFBaseViewController
-
+@property (nonatomic,strong)NSString *needToRechareStr;
 @end
