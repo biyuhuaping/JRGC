@@ -64,12 +64,8 @@
 
 - (NSString *)availBorrowAmount
 {
-    if ([self.item.type isEqualToString:@"3"]) {
-        if (self.item.remainAmount.floatValue > 0.00) {
-            return [NSString stringWithFormat:@"剩%@克", self.item.remainAmount];
-        }
-        else
-            return [NSString stringWithFormat:@"%@克", self.item.borrowAmount];
+    if ([self.item.type isEqualToString:@"3"]) {   
+        return [NSString stringWithFormat:@"剩%@克", self.item.remainAmount];
     }
     NSString *temp = [NSString stringWithFormat:@"%lf",[self.item.borrowAmount doubleValue]-[self.item.completeLoan doubleValue]];
     return [self moneywithRemaining:temp total:self.item.borrowAmount];
