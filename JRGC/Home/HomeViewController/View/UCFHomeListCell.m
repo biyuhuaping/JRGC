@@ -553,11 +553,7 @@
     self.timeLabel.text = goldModel.periodTerm;
     self.repayModelLabel.text = goldModel.paymentType;
     self.startMoneyLabel.text = [NSString stringWithFormat:@"%@克起", goldModel.minPurchaseAmount];
-    if ([goldModel.remainAmount floatValue] > 0.000) {
-        self.remainLabel.text = [NSString stringWithFormat:@"剩%@克", goldModel.remainAmount];
-    }
-    else
-        self.remainLabel.text = [NSString stringWithFormat:@"%@克", goldModel.totalAmount];
+    self.remainLabel.text = [NSString stringWithFormat:@"剩%@克", goldModel.remainAmount];
     NSInteger status = [goldModel.status integerValue];
     
     
