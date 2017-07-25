@@ -75,6 +75,7 @@
             <connections>
                 <outlet property="goldValueBackView" destination="OU6-vG-3DJ" id="bL2-hW-blw"/>
                 <outlet property="realGoldPriceLabel" destination="hTs-NK-F87" id="rwV-qw-c6S"/>
+                <outlet property="refreshBtn" destination="hZS-Z2-HVG" id="Aip-qX-N16"/>
             </connections>
             <point key="canvasLocation" x="24.5" y="-180"/>
         </view>

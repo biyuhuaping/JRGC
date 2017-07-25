@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13122.19" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.16"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -25,32 +25,32 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vw0-XN-23a">
-                            <rect key="frame" x="15" y="45.5" width="237" height="1"/>
+                            <rect key="frame" x="25" y="45.5" width="215" height="1"/>
                             <color key="backgroundColor" red="0.89019607840000003" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="0.5" id="Qit-S0-7jf"/>
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="浮动盈亏指按持仓合约的初始成交价与当日结算价计算的潜在盈亏。" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="69Q-bV-wP3">
-                            <rect key="frame" x="15" y="54.5" width="235" height="29"/>
+                            <rect key="frame" x="25" y="54.5" width="215" height="29"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="计算公式：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rdw-VB-1yP">
-                            <rect key="frame" x="15" y="92.5" width="57" height="14"/>
+                            <rect key="frame" x="25" y="92.5" width="57" height="14"/>
                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                             <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="单笔:浮动盈亏=实时金价-成交金价" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GN7-Ga-cPF">
-                            <rect key="frame" x="15" y="113.5" width="173.5" height="13.5"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="浮动盈亏=实时金价-成交金价" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GN7-Ga-cPF">
+                            <rect key="frame" x="25" y="113.5" width="147.5" height="14"/>
                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                             <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="注:当有多笔成交时，浮动盈亏为多笔的盈亏价格" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NST-ac-7vZ">
-                            <rect key="frame" x="15" y="134" width="239.5" height="14"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="当有多笔成交时，浮动盈亏为多笔的均价" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NST-ac-7vZ">
+                            <rect key="frame" x="25" y="134" width="215" height="14"/>
                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                             <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
@@ -58,22 +58,22 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
+                        <constraint firstItem="GN7-Ga-cPF" firstAttribute="top" secondItem="Rdw-VB-1yP" secondAttribute="bottom" constant="7" id="0NX-44-oT8"/>
                         <constraint firstItem="c03-GM-RFP" firstAttribute="centerX" secondItem="uRf-Zp-cRx" secondAttribute="centerX" id="4vB-SK-hmT"/>
-                        <constraint firstItem="69Q-bV-wP3" firstAttribute="leading" secondItem="uRf-Zp-cRx" secondAttribute="leading" constant="15" id="534-W1-JUU"/>
-                        <constraint firstAttribute="trailing" secondItem="69Q-bV-wP3" secondAttribute="trailing" constant="15" id="CkT-e3-dU3"/>
-                        <constraint firstItem="vw0-XN-23a" firstAttribute="leading" secondItem="uRf-Zp-cRx" secondAttribute="leading" constant="15" id="HsK-mW-2BX"/>
-                        <constraint firstItem="Rdw-VB-1yP" firstAttribute="top" secondItem="69Q-bV-wP3" secondAttribute="bottom" constant="9" id="Jvf-Ir-Kes"/>
+                        <constraint firstItem="NST-ac-7vZ" firstAttribute="top" secondItem="GN7-Ga-cPF" secondAttribute="bottom" constant="6.5" id="7Xt-K8-fxE"/>
+                        <constraint firstItem="Rdw-VB-1yP" firstAttribute="leading" secondItem="uRf-Zp-cRx" secondAttribute="leading" constant="25" id="D8f-9q-cl4"/>
+                        <constraint firstItem="vw0-XN-23a" firstAttribute="leading" secondItem="uRf-Zp-cRx" secondAttribute="leading" constant="25" id="HsK-mW-2BX"/>
                         <constraint firstAttribute="height" constant="170" id="Jvm-IU-q6Y"/>
-                        <constraint firstItem="NST-ac-7vZ" firstAttribute="top" secondItem="GN7-Ga-cPF" secondAttribute="bottom" constant="7" id="WiB-bp-pLV"/>
-                        <constraint firstItem="NST-ac-7vZ" firstAttribute="leading" secondItem="GN7-Ga-cPF" secondAttribute="leading" id="XTY-qL-xYI"/>
-                        <constraint firstItem="69Q-bV-wP3" firstAttribute="centerX" secondItem="uRf-Zp-cRx" secondAttribute="centerX" id="Zgq-gO-3Jm"/>
+                        <constraint firstItem="69Q-bV-wP3" firstAttribute="leading" secondItem="uRf-Zp-cRx" secondAttribute="leading" constant="25" id="QJC-tA-I8X"/>
+                        <constraint firstItem="GN7-Ga-cPF" firstAttribute="leading" secondItem="uRf-Zp-cRx" secondAttribute="leading" constant="25" id="QvQ-L5-BA8"/>
                         <constraint firstItem="vw0-XN-23a" firstAttribute="top" secondItem="c03-GM-RFP" secondAttribute="bottom" constant="11" id="alM-f8-KfN"/>
-                        <constraint firstItem="GN7-Ga-cPF" firstAttribute="leading" secondItem="uRf-Zp-cRx" secondAttribute="leading" constant="15" id="eoV-gE-Nkh"/>
+                        <constraint firstItem="69Q-bV-wP3" firstAttribute="top" secondItem="vw0-XN-23a" secondAttribute="bottom" constant="8" id="cKL-Yg-XjY"/>
+                        <constraint firstItem="NST-ac-7vZ" firstAttribute="leading" secondItem="uRf-Zp-cRx" secondAttribute="leading" constant="25" id="ehf-uc-PLq"/>
                         <constraint firstItem="c03-GM-RFP" firstAttribute="top" secondItem="uRf-Zp-cRx" secondAttribute="top" constant="15" id="fqB-hj-X0p"/>
-                        <constraint firstItem="GN7-Ga-cPF" firstAttribute="top" secondItem="Rdw-VB-1yP" secondAttribute="bottom" constant="7" id="fxJ-Q9-f0N"/>
-                        <constraint firstItem="Rdw-VB-1yP" firstAttribute="leading" secondItem="uRf-Zp-cRx" secondAttribute="leading" constant="15" id="gni-Kb-Fr6"/>
-                        <constraint firstItem="69Q-bV-wP3" firstAttribute="top" secondItem="vw0-XN-23a" secondAttribute="bottom" constant="8" id="rxj-yp-F2u"/>
-                        <constraint firstAttribute="trailing" secondItem="vw0-XN-23a" secondAttribute="trailing" constant="13" id="zu8-1v-xjQ"/>
+                        <constraint firstItem="Rdw-VB-1yP" firstAttribute="top" secondItem="69Q-bV-wP3" secondAttribute="bottom" constant="9" id="i4h-sj-NmX"/>
+                        <constraint firstAttribute="trailing" secondItem="NST-ac-7vZ" secondAttribute="trailing" constant="25" id="nbq-ee-rSA"/>
+                        <constraint firstAttribute="trailing" secondItem="69Q-bV-wP3" secondAttribute="trailing" constant="25" id="qkQ-BN-V1H"/>
+                        <constraint firstAttribute="trailing" secondItem="vw0-XN-23a" secondAttribute="trailing" constant="25" id="zu8-1v-xjQ"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
