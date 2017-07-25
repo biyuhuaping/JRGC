@@ -10,25 +10,35 @@
 #import "HWWeakTimer.h"
 @interface RotationButton ()
 @property (nonatomic, strong)NSTimer *fixTelNumTimer;
+@property (nonatomic, assign)CGFloat angle;
 @end
 
 @implementation RotationButton
-
-+ (instancetype)buttonWithType:(UIButtonType)buttonType{
-    RotationButton *rotationButton = [super buttonWithType:buttonType];
-    if (rotationButton) {
-        [rotationButton initTimer];
-    }
-    return rotationButton;
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    [self initTimer];
+////    self.layer.anchorPoint = self.center;
+//    self.backgroundColor = [UIColor redColor];
 }
+
 - (void)initTimer
 {
-    _fixTelNumTimer = [HWWeakTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(telNumTimerFired) userInfo:nil repeats:YES];
+    _fixTelNumTimer = [HWWeakTimer scheduledTimerWithTimeInterval:0.001 target:self selector:@selector(telNumTimerFired) userInfo:nil repeats:YES];
     [_fixTelNumTimer setFireDate:[NSDate distantFuture]];
 }
 - (void)telNumTimerFired
 {
-    
+    _angle = _angle + 0.01;//angle旋转的角度,随着NSTimer增大
+    self.transform = CGAffineTransformMakeRotation(_angle);
+}
+- (void)buttonBeginTransform{
+    _angle = 0.0f;
+    _fixTelNumTimer.fireDate = [NSDate distantPast];
+}
+- (void)buttonEndTransform
+{
+    _fixTelNumTimer.fireDate = [NSDate distantFuture];
 }
 /*
 // Only override drawRect: if you perform custom drawing.

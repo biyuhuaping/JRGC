@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13122.19" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.16"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -127,7 +127,7 @@
                                 <action selector="floatBtnClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="1m2-My-IAN"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RaO-Q4-hiX">
+                        <button opaque="NO" tag="2000" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RaO-Q4-hiX" customClass="RotationButton">
                             <rect key="frame" x="186" y="14.5" width="14" height="14"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="14" id="D6I-Ux-uvb"/>
@@ -135,7 +135,7 @@
                             </constraints>
                             <state key="normal" image="gold_account_icon_reload"/>
                             <connections>
-                                <action selector="currentTimePriceBtnClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="UQP-Wi-wRM"/>
+                                <action selector="currentTimePriceBtnClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="To8-0o-Blf"/>
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="￥0.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Abz-XP-xhx">
@@ -225,7 +225,7 @@
                 <outlet property="recoverBtn" destination="GFM-n7-sQ4" id="mdW-AA-mw3"/>
                 <outlet property="totalRecoveryGold" destination="NGD-UC-G8X" id="iTY-qZ-JyR"/>
                 <outlet property="upBaseView" destination="X83-vg-3XH" id="G9q-aU-wtH"/>
-                <outlet property="updateGoldPriceBtn" destination="RaO-Q4-hiX" id="xDi-JN-Da2"/>
+                <outlet property="updateGoldPriceBtn" destination="RaO-Q4-hiX" id="DrH-V7-fke"/>
             </connections>
             <point key="canvasLocation" x="-82" y="-285"/>
         </view>

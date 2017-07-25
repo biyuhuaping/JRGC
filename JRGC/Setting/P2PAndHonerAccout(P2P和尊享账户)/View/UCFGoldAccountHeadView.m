@@ -12,7 +12,7 @@
 #import "YcMutableArray.h"
 #import "UIDic+Safe.h"
 #import "ToolSingleTon.h"
-
+#import "RotationButton.h"
 @interface UCFGoldAccountHeadView ()
 @property (weak, nonatomic) IBOutlet UILabel *holdGoldGram;
 
@@ -26,10 +26,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *floatGoldSpace;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *dealGoldSpace;
 @property (weak, nonatomic) IBOutlet UIView *upBaseView;
-@property (weak, nonatomic) IBOutlet UIButton *updateGoldPriceBtn;
-@property (assign,nonatomic)CGFloat angle;
-@property (assign, nonatomic) BOOL isStopTrans; //是否停止旋转
-@property (assign, nonatomic) BOOL isLoading;
+@property (weak, nonatomic) IBOutlet RotationButton *updateGoldPriceBtn;
 @property (strong, nonatomic) NSDictionary *tmpData;
 @end
 
@@ -39,48 +36,34 @@
 {
     [super awakeFromNib];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeTransState) name:CURRENT_GOLD_PRICE object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(beginGetGoldPrice) name:BEHIN_GET_GOLD_PRICE object:nil];
+    
 }
 
 - (void)startAnimation
 {
-    _isStopTrans = NO;
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:0.001];
-    [UIView setAnimationDelegate:self];
-    [UIView setAnimationDidStopSelector:@selector(endAnimation)];
-     self.updateGoldPriceBtn.transform = CGAffineTransformMakeRotation(_angle * (M_PI / 180.0f));
-    [UIView commitAnimations];
+    [_updateGoldPriceBtn buttonBeginTransform];
 }
 - (void)endAnimation
 {
-    _angle += 5;
-    if (!_isStopTrans) {
-        [self startAnimation];
-    }
+    [_updateGoldPriceBtn buttonEndTransform];
 }
 - (void)changeTransState
 {
     //如果在此时5分钟自动旋转过来则跳过
-    if (!self.isLoading) {
-        [self startAnimation];
-    }
-    dispatch_queue_t queue= dispatch_get_main_queue();
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), queue, ^{
-        DBLog(@"主队列--延迟执行------%@",[NSThread currentThread]);
-        _isStopTrans = YES;
-        self.isLoading = NO;
-        self.updateGoldPriceBtn.userInteractionEnabled = YES;
-        _angle = 0.0f;
-        [self updateGoldFloat];
-    });
+        dispatch_queue_t queue= dispatch_get_main_queue();
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), queue, ^{
+            DBLog(@"主队列--延迟执行------%@",[NSThread currentThread]);
+            self.updateGoldPriceBtn.userInteractionEnabled = YES;
+            [self updateGoldFloat];
+            [self endAnimation];
+        });
 }
 - (void)updateGoldFloat
 {
     self.realtimeGoldPrice.text = [NSString stringWithFormat:@"￥%.2f",[ToolSingleTon sharedManager].readTimePrice];
     double floatValue1 = ([ToolSingleTon sharedManager].readTimePrice - [[_tmpData objectSafeForKey:@"dealPrice"] doubleValue]) * [[_tmpData objectSafeForKey:@"holdGoldAmount"] doubleValue];
     
-//    NSString *floatValueStr = [NSString stringWithFormat:@"%.2f",floatValue1];
-//    NSComparisonResult comparResult = [floatValueStr compare:@"0.00" options:NSNumericSearch];
     
     if (floatValue1 > 0) {
         self.floatLabel.textColor = UIColorWithRGB(0xfd4d4c);
@@ -101,13 +84,15 @@
 }
 - (IBAction)currentTimePriceBtnClicked:(UIButton *)sender {
     sender.userInteractionEnabled = NO;
-    _angle = 0;
-    self.isLoading = YES;
     [[ToolSingleTon sharedManager] getGoldPrice];
     [self startAnimation];
-
 }
-
+- (void)beginGetGoldPrice
+{
+    if (self.updateGoldPriceBtn.userInteractionEnabled) {
+        [self currentTimePriceBtnClicked:self.updateGoldPriceBtn];
+    }
+}
 - (IBAction)recoverBtnClicked:(UIButton *)sender {
     MjAlertView *alertView = [[MjAlertView alloc] initGoldAlertTitle:@"总待收黄金" Message:@"总待收黄金=已购黄金+到期赠金" delegate:self];
     [alertView show];

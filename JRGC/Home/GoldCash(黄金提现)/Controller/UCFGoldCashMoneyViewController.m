@@ -259,11 +259,15 @@
 }
 
 - (void)mjalertView:(MjAlertView *)alertview didClickedButton:(UIButton *)clickedButton andClickedIndex:(NSInteger)index{
-    if (alertview.tag == 1000) {
-        [self.navigationController popViewControllerAnimated:YES];
-    }
     if (index == 1) {
         [self gotoGoldCash];
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == 1000) {
+        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 
