@@ -55,6 +55,7 @@
     goldChargeHeader.delegate = self;
     self.tableview.tableHeaderView = goldChargeHeader;
     self.goldRechargeHeader = goldChargeHeader;
+    goldChargeHeader.textField.text = self.needToRechareStr;
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
     [self.tableview addGestureRecognizer:tap];

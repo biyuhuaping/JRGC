@@ -35,6 +35,15 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 
 }
+- (void)setIsSpecial:(BOOL)isSpecial {
+    _isSpecial = isSpecial;
+//    [[NSUserDefaults standardUserDefaults] setValue:isSpecial forKey:@"isSpecial"];
+//    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+}
+-(void)setCompanyAgent:(BOOL)companyAgent{
+    _companyAgent = companyAgent;
+}
 
 - (void)setMobile:(NSString *)mobile {
     _mobile = mobile;
@@ -169,13 +178,8 @@
         if (ret) {
             id propertyValue = [dataSource valueForKey:key];
             
-            if ([key isEqualToString:@"isSpecial"]) {
-                NSString *value  = [NSString stringWithFormat:@"%@",propertyValue];
-                [self setValue:value forKey:key];
-
-            }
             //该e值不为NSNULL，并且也不为nil
-           else if (![propertyValue isKindOfClass:[NSNull class]] && propertyValue!=nil) {
+           if (![propertyValue isKindOfClass:[NSNull class]] && propertyValue!=nil) {
                 [self setValue:propertyValue forKey:key];
             }
         }

@@ -83,26 +83,26 @@
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="该网站将获取以下授权" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9CV-63-bkB">
-                            <rect key="frame" x="15" y="300" width="133" height="25"/>
+                            <rect key="frame" x="15" y="287" width="133" height="26"/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                             <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="获取您的实名信息(姓名、身份证、手机号等)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6TN-Ks-B4H">
-                            <rect key="frame" x="23" y="335" width="242" height="15"/>
+                            <rect key="frame" x="23" y="323" width="242" height="15"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="point" translatesAutoresizingMaskIntoConstraints="NO" id="12j-yT-MVO">
-                            <rect key="frame" x="15" y="340" width="5" height="5"/>
+                            <rect key="frame" x="15" y="328" width="5" height="5"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="5" id="5jd-aD-ZGc"/>
                                 <constraint firstAttribute="height" constant="5" id="J9G-mB-BgY"/>
                             </constraints>
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4pM-Dq-7t0">
-                            <rect key="frame" x="15" y="360" width="384" height="37"/>
+                            <rect key="frame" x="15" y="348" width="384" height="37"/>
                             <color key="backgroundColor" red="1" green="0.75294117647058822" blue="0.15294117647058825" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="37" id="lqz-1I-PIC"/>
@@ -122,13 +122,13 @@
                     </subviews>
                     <color key="backgroundColor" red="0.92156862750000001" green="0.92156862750000001" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstItem="9CV-63-bkB" firstAttribute="top" secondItem="E1g-hO-sfj" secondAttribute="bottom" constant="27" id="3dR-XD-JEM"/>
+                        <constraint firstItem="9CV-63-bkB" firstAttribute="top" secondItem="E1g-hO-sfj" secondAttribute="bottom" constant="14" id="3dR-XD-JEM"/>
                         <constraint firstItem="12j-yT-MVO" firstAttribute="leading" secondItem="2rF-UN-eCX" secondAttribute="leading" constant="15" id="7JQ-Ab-Y7e"/>
                         <constraint firstItem="E1g-hO-sfj" firstAttribute="leading" secondItem="2rF-UN-eCX" secondAttribute="leading" id="7On-uQ-4wU"/>
                         <constraint firstAttribute="bottom" secondItem="E1g-hO-sfj" secondAttribute="bottom" constant="394" id="7Pb-63-xKi"/>
                         <constraint firstItem="6TN-Ks-B4H" firstAttribute="leading" secondItem="12j-yT-MVO" secondAttribute="trailing" constant="3" id="Dah-3N-eRl"/>
                         <constraint firstItem="9CV-63-bkB" firstAttribute="leading" secondItem="2rF-UN-eCX" secondAttribute="leading" constant="15" id="Kfx-Ky-V2y"/>
-                        <constraint firstAttribute="bottom" secondItem="4pM-Dq-7t0" secondAttribute="bottom" constant="270" id="Rq6-t1-1ar"/>
+                        <constraint firstAttribute="bottom" secondItem="4pM-Dq-7t0" secondAttribute="bottom" constant="282" id="Rq6-t1-1ar"/>
                         <constraint firstAttribute="trailing" secondItem="4pM-Dq-7t0" secondAttribute="trailing" constant="15" id="cSo-h0-YYu"/>
                         <constraint firstItem="6TN-Ks-B4H" firstAttribute="top" secondItem="9CV-63-bkB" secondAttribute="bottom" constant="10" id="hcR-dz-F0j"/>
                         <constraint firstItem="6TN-Ks-B4H" firstAttribute="centerY" secondItem="12j-yT-MVO" secondAttribute="centerY" id="ixD-bb-UAP"/>
