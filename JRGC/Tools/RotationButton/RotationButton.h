@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface RotationButton : UIButton
-
+- (void)buttonBeginTransform;
+- (void)buttonEndTransform;
 @end

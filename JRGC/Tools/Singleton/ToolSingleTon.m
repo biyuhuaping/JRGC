@@ -104,6 +104,8 @@
 
 //获取当前黄金价格
 - (void)getGoldPrice {
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:BEHIN_GET_GOLD_PRICE object:nil];
     [[NetworkModule sharedNetworkModule] newPostReq:@{} tag:ksxTagGoldCurrentPrice owner:self signature:NO Type:SelectAccoutDefault];
 }
 
