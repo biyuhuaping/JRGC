@@ -39,23 +39,32 @@
         self.bottomViewSpace.constant = 0;
         self.tradeTypeNameLab.text = @"冻结克重";
         self.dealGoldNum.textColor = UIColorWithRGB(0x999999);
-        self.dealGoldNum.text = [NSString stringWithFormat:@"%@克",_model.frozenMoney];
+        NSString *totalStr =  [NSString stringWithFormat:@"%@克",_model.purchaseAmount];
+        self.dealGoldNum.attributedText = [self changeLabelWithText:@"克" withTotalStr:totalStr];
         self.dealTime.text = _model.tradeTime;
         self.dealNO.text = _model.tradeRemark;
     } else if([_model.tradeTypeName isEqualToString:@"买金"]){
         self.tradeTypeNameLab.text = @"买金克重";
         self.dealGoldNum.textColor = UIColorWithRGB(0xfd4d4c);
-        self.dealGoldNum.text = [NSString stringWithFormat:@"%@克",_model.purchaseAmount];
+        NSString *totalStr = [NSString stringWithFormat:@"%@克",_model.purchaseAmount];
+        self.dealGoldNum.attributedText = [self changeLabelWithText:@"克" withTotalStr:totalStr];
         self.dealType.text = @"买金";
         self.dealTime.text = _model.tradeTime;
         self.dealNO.text = _model.tradeRemark;
         
-        self.dealMoneyLab.text = [NSString stringWithFormat:@"￥%@",_model.tradeMoney];
+        self.dealMoneyLab.text = [NSString stringWithFormat:@"%@",_model.frozenMoney];
         self.dealMoneyLab.textColor = UIColorWithRGB(0xfd4d4c);
         self.dealGoldPrice.text = [NSString stringWithFormat:@"￥%@",_model.purchasePrice];
-        self.serviceChargeLab.text = @"手续费";
+        self.serviceChargeLab.text = [NSString stringWithFormat:@"￥%@",_model.poundage];;
     }
     
+}
+-(NSMutableAttributedString*) changeLabelWithText:(NSString*)needText withTotalStr:(NSString *)totalStr
+{
+    NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:totalStr];
+    UIFont *font = [UIFont systemFontOfSize:14];
+    [attrString addAttribute:NSFontAttributeName value:font range:[totalStr rangeOfString:needText]];
+    return attrString;
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
