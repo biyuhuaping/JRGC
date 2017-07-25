@@ -14,6 +14,7 @@
 @property (assign, nonatomic) BOOL isStopTrans; //是否停止旋转
 @property (weak, nonatomic) IBOutlet UIButton *refreshBtn;
 @property (assign,nonatomic) CGFloat angle;
+@property (assign, nonatomic) BOOL isLoading;
 @end
 
 @implementation UCFGoldenHeaderView
@@ -61,23 +62,23 @@
     }
 }
 
-//- (void)changeTransState
-//{
-//    //如果在此时在手动点击略过
-//    if (!self.isLoading) {
-//        [self startAnimation];
-//    }
-//    dispatch_queue_t queue= dispatch_get_main_queue();
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), queue, ^{
-//        DBLog(@"主队列--延迟执行------%@",[NSThread currentThread]);
-//        _isStopTrans = YES;
-//        self.isLoading = NO;
-//        self.updateGoldPriceBtn.userInteractionEnabled = YES;
-//        _angle = 0.0f;
-//        [self endAnimation];
-//        [self updateGoldFloat];
-//    });
-//}
+- (void)changeTransState
+{
+    //如果在此时在手动点击略过
+    if (!self.isLoading) {
+        [self startAnimation];
+    }
+    dispatch_queue_t queue= dispatch_get_main_queue();
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), queue, ^{
+        DBLog(@"主队列--延迟执行------%@",[NSThread currentThread]);
+        _isStopTrans = YES;
+        self.isLoading = NO;
+        self.refreshBtn.userInteractionEnabled = YES;
+        _angle = 0.0f;
+        [self endAnimation];
+        [self setRealGoldPrice];
+    });
+}
 
 - (void)setRealGoldPrice
 {
