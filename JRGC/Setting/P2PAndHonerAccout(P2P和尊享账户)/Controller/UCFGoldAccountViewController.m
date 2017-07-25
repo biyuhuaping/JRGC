@@ -313,4 +313,8 @@
     UCFMyGoldInvestInfoViewController *myGoldInvestVC = [[UCFMyGoldInvestInfoViewController alloc] initWithNibName:@"UCFMyGoldInvestInfoViewController" bundle:nil];
     [self.navigationController pushViewController:myGoldInvestVC animated:YES];
 }
+- (void)dealloc
+{
+    
+}
 @end
