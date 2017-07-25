@@ -37,7 +37,7 @@
 @property (nonatomic,assign)BOOL isSelectGongDouSwitch;
 
 @property (nonatomic,strong)NSString *nmPurchaseTokenStr;
-
+@property (nonatomic,strong)NSString *needToRechareStr;
 @property (nonatomic,assign)double availableAllMoney ;
 @property (nonatomic,assign)double availableMoney ;
 @property (nonatomic,assign)double accountBean ;
@@ -633,21 +633,22 @@
 #pragma mark -黄金充值
 -(void)gotoGoldRechargeVC
 {
-    if ([[UserInfoSingle sharedManager].isSpecial boolValue] ||[UserInfoSingle sharedManager].companyAgent) {
-        UIAlertView *alerView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"暂不支持企业用户、特殊用户购买" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+    if ([UserInfoSingle sharedManager].isSpecial  ||[UserInfoSingle sharedManager].companyAgent) {
+        UIAlertView *alerView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"暂不支持企业用户、特殊用户充值" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
         //        alerView.tag = 1002;
         [alerView show];
         return;
     }
     if(![UserInfoSingle sharedManager].goldAuthorization){//去授权页面
         HSHelper *helper = [HSHelper new];
-        [helper pushGoldAuthorizationType:SelectAccoutTypeGold nav:self.navigationController];
+        [helper pushGoldAuthorizationType:SelectAccoutTypeGold nav:self.navigationController sourceVC:_needToRechareStr];
         return;
     }else{
         //去充值页面
         UCFGoldRechargeViewController *goldRecharge = [[UCFGoldRechargeViewController alloc] initWithNibName:@"UCFGoldRechargeViewController" bundle:nil];
         goldRecharge.rootVc = self;
         goldRecharge.baseTitleText = @"充值";
+        goldRecharge.needToRechareStr = _needToRechareStr;
         [self.navigationController pushViewController:goldRecharge animated:YES];
     }
 }
@@ -764,8 +765,8 @@
      
      */
 
-    if ([[UserInfoSingle sharedManager].isSpecial boolValue] ||[UserInfoSingle sharedManager].companyAgent) {
-        UIAlertView *alerView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"暂不支持企业用户，特殊用户购买" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+    if ([UserInfoSingle sharedManager].isSpecial ||[UserInfoSingle sharedManager].companyAgent) {
+        UIAlertView *alerView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"暂不支持企业用户、特殊用户购买" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
 //        alerView.tag = 1002;
         [alerView show];
         return;
@@ -827,7 +828,8 @@
     if (keyongMoney < estimatAmountMoney) {
        
         double   needToRechare = estimatAmountMoney - keyongMoney;
-        NSString *showStr = [NSString stringWithFormat:@"总计购买金额¥%.2lf\n可用金额%.2lf\n另需充值金额¥%.2f",estimatAmountMoney, keyongMoney,needToRechare];
+        _needToRechareStr = [NSString stringWithFormat:@"%.2lf",needToRechare];
+        NSString *showStr = [NSString stringWithFormat:@"总计购买金额¥%.2lf\n可用金额%.2lf\n另需充值金额¥%.2lf",estimatAmountMoney, keyongMoney,needToRechare];
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"可用金额不足" message:showStr delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"立即充值", nil];
         alert.tag = 2000;
         [alert show];

@@ -258,8 +258,8 @@
     
 - (void)goldAccountFirstCell:(GoldAccountFirstCell *)goldFirstCell didClickedRechargeButton:(UIButton *)button
 {
-    if ([[UserInfoSingle sharedManager].isSpecial boolValue] || [UserInfoSingle sharedManager].companyAgent) {
-        UIAlertView *alerView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"暂不支持企业，特殊用户购买" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+    if ([UserInfoSingle sharedManager].isSpecial || [UserInfoSingle sharedManager].companyAgent) {
+        UIAlertView *alerView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"暂不支持企业用户、特殊用户充值" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
         [alerView show];
         return;
     }
@@ -312,5 +312,9 @@
 -(void)gotoGoldInvestInfoVC{
     UCFMyGoldInvestInfoViewController *myGoldInvestVC = [[UCFMyGoldInvestInfoViewController alloc] initWithNibName:@"UCFMyGoldInvestInfoViewController" bundle:nil];
     [self.navigationController pushViewController:myGoldInvestVC animated:YES];
+}
+- (void)dealloc
+{
+    
 }
 @end

@@ -198,7 +198,7 @@
         if ([dic[@"ret"] boolValue]) {
             self.readTimePrice = [dic[@"data"][@"readTimePrice"] doubleValue];
         } else {
-            [MBProgressHUD displayHudError:@"获取金价失败"];
+//            [MBProgressHUD displayHudError:@"获取金价失败"];
         }
         [[NSNotificationCenter defaultCenter] postNotificationName:CURRENT_GOLD_PRICE object:nil];
 
@@ -211,6 +211,8 @@
     }
     else if (tag.intValue == kSXTagSingMenthod) {
         
+    } else if (tag.integerValue == ksxTagGoldCurrentPrice) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:CURRENT_GOLD_PRICE object:nil];
     }
 }
 

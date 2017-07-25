@@ -22,7 +22,7 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setRealGoldPrice) name:CURRENT_GOLD_PRICE object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setRealGoldPrice) name:CURRENT_GOLD_PRICE object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeTransState) name:CURRENT_GOLD_PRICE object:nil];
     _isStopTrans = NO;
 }
@@ -75,7 +75,6 @@
         self.isLoading = NO;
         self.refreshBtn.userInteractionEnabled = YES;
         _angle = 0.0f;
-        [self endAnimation];
         [self setRealGoldPrice];
     });
 }

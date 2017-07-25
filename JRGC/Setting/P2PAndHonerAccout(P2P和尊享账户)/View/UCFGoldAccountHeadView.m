@@ -51,9 +51,16 @@
      self.updateGoldPriceBtn.transform = CGAffineTransformMakeRotation(_angle * (M_PI / 180.0f));
     [UIView commitAnimations];
 }
+- (void)endAnimation
+{
+    _angle += 5;
+    if (!_isStopTrans) {
+        [self startAnimation];
+    }
+}
 - (void)changeTransState
 {
-    //如果在此时在手动点击略过
+    //如果在此时5分钟自动旋转过来则跳过
     if (!self.isLoading) {
         [self startAnimation];
     }
@@ -64,7 +71,6 @@
         self.isLoading = NO;
         self.updateGoldPriceBtn.userInteractionEnabled = YES;
         _angle = 0.0f;
-        [self endAnimation];
         [self updateGoldFloat];
     });
 }
@@ -72,6 +78,7 @@
 {
     self.realtimeGoldPrice.text = [NSString stringWithFormat:@"￥%.2f",[ToolSingleTon sharedManager].readTimePrice];
     double floatValue1 = ([ToolSingleTon sharedManager].readTimePrice - [[_tmpData objectSafeForKey:@"dealPrice"] doubleValue]) * [[_tmpData objectSafeForKey:@"holdGoldAmount"] doubleValue];
+    
 //    NSString *floatValueStr = [NSString stringWithFormat:@"%.2f",floatValue1];
 //    NSComparisonResult comparResult = [floatValueStr compare:@"0.00" options:NSNumericSearch];
     
@@ -87,24 +94,20 @@
         self.floatLabel.text = [NSString stringWithFormat:@"-￥%.2f",fabs(floatValue1)];
     }
 }
-- (void)endAnimation
-{
-     _angle += 5;
-    if (!_isStopTrans) {
-        [self startAnimation];
-    }
-}
+
 - (IBAction)floatBtnClicked:(id)sender {
     MjAlertView *alertView = [[MjAlertView alloc] initGoldAlertType:MjGoldAlertViewTypeFloat delegate:self];
     [alertView show];
 }
 - (IBAction)currentTimePriceBtnClicked:(UIButton *)sender {
     sender.userInteractionEnabled = NO;
+    _angle = 0;
+    self.isLoading = YES;
     [[ToolSingleTon sharedManager] getGoldPrice];
     [self startAnimation];
-    self.isLoading = YES;
 
 }
+
 - (IBAction)recoverBtnClicked:(UIButton *)sender {
     MjAlertView *alertView = [[MjAlertView alloc] initGoldAlertTitle:@"总待收黄金" Message:@"总待收黄金=已购黄金+到期赠金" delegate:self];
     [alertView show];
