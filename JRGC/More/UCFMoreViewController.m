@@ -28,7 +28,7 @@
 
 static NSString * const kAppKey = @"23511571";
 
-@interface UCFMoreViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface UCFMoreViewController () <UITableViewDataSource, UITableViewDelegate,UIActionSheetDelegate>
 @property (weak, nonatomic) IBOutlet UIView *moreBannerBgView;
 @property (weak, nonatomic) IBOutlet UIImageView *moreBanner;
 // 选项表数据
@@ -47,20 +47,20 @@ static NSString * const kAppKey = @"23511571";
     if (_itemsData == nil) {
         
         UCFSettingItem *contactUs = [UCFSettingArrowItem itemWithIcon:nil title:@"联系我们" destVcClass:nil];
-        contactUs.subtitle = @"400-0322-988";
+        contactUs.subtitle = @"010-65255966      400-0322-988";
         contactUs.option = ^{
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"联系客服" message:@"呼叫400-0322-988" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"立即拨打", nil];
-            [alert show];
+            
+            UIActionSheet *alert = [[UIActionSheet alloc] initWithTitle:@"请选择客服电话" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"010-65255966",@"400-0322-988", nil];
+            [alert showInView:self.view];
+//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"联系客服" message:@"呼叫400-0322-988" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"立即拨打", nil];
+//            [alert show];
         };
         UCFSettingItem *problemFeedback = [UCFSettingArrowItem itemWithIcon:nil title:@"问题反馈" destVcClass:nil];
         UCFSettingItem *faq = [UCFSettingArrowItem itemWithIcon:nil title:@"帮助中心" destStoryBoardStr:@"UCFMoreViewController" storyIdStr:@"faq"];
         UCFSettingItem *aboutUs = [UCFSettingArrowItem itemWithIcon:nil title:@"关于我们" destStoryBoardStr:@"UCFMoreViewController" storyIdStr:@"aboutus"];
-//        UCFSettingItem *beansFamily = [UCFSettingArrowItem itemWithIcon:nil title:@"工友之家" destVcClass:[UCFWebViewJavascriptBridgeBBS class]];
         UCFSettingGroup *group1 = [[UCFSettingGroup alloc] init];
         group1.items = [[NSMutableArray alloc]initWithArray: @[contactUs, problemFeedback,faq,aboutUs]];
         
-//        UCFSettingGroup *group2 = [[UCFSettingGroup alloc] init];
-//        group2.items = [[NSMutableArray alloc]initWithArray: @[beansFamily,aboutUs]];
         
         _itemsData = [[NSMutableArray alloc] initWithObjects:group1,nil];
     }
@@ -161,12 +161,24 @@ static NSString * const kAppKey = @"23511571";
 //  banner图点击事件
 - (void)tapBanner
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"联系客服" message:@"呼叫400-0322-988" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"立即拨打", nil];
-    [alert show];
+    UIActionSheet *alert = [[UIActionSheet alloc] initWithTitle:@"请选择客服电话" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"010-65255966",@"400-0322-988", nil];
+    [alert showInView:self.view];
+//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"联系客服" message:@"呼叫400-0322-988" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"立即拨打", nil];
+//    [alert show];
 }
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex == 1) {
+        NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"4000322988"];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+    }
+}
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0) {
+        NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"01065255966"];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+    }
+    else if (buttonIndex == 1) {
         NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"4000322988"];
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
     }
@@ -241,13 +253,6 @@ static NSString * const kAppKey = @"23511571";
         item.option();
     } else if ([item isKindOfClass:[UCFSettingArrowItem class]]) { // 箭头
         UCFSettingArrowItem *arrowItem = (UCFSettingArrowItem *)item;
-//        AppDelegate * app = (AppDelegate *)[[UIApplication sharedApplication] delegate]; 
-//        if (app.isSubmitAppStoreTestTime && [arrowItem.title isEqualToString:@"工友之家"]) {
-//            UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-//            [pasteboard setString:@"http://bbs.9888.cn"];
-//            [AuxiliaryFunc showToastMessage:@"已复制到剪切板" withView:self.view];
-//            return;
-//        }
         if (indexPath.section == 0 && indexPath.row == 1) {//用户反馈
             [self openFeedbackViewController];
         }
