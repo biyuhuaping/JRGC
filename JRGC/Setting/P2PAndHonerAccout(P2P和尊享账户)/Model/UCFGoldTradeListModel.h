@@ -17,6 +17,7 @@
 @property(nonatomic, copy)NSString *tradeTime;
 @property(nonatomic, copy)NSString *tradeTypeCode;
 @property(nonatomic, copy)NSString *tradeTypeName;
+@property(nonatomic, copy)NSString *poundage;
 - (instancetype)initWithDict:(NSDictionary *)dict;
 
 @end

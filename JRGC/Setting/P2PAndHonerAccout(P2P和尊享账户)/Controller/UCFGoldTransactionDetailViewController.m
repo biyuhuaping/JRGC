@@ -52,10 +52,10 @@
         self.dealTime.text = _model.tradeTime;
         self.dealNO.text = _model.tradeRemark;
         
-        self.dealMoneyLab.text = [NSString stringWithFormat:@"￥%@",_model.tradeMoney];
+        self.dealMoneyLab.text = [NSString stringWithFormat:@"%@",_model.frozenMoney];
         self.dealMoneyLab.textColor = UIColorWithRGB(0xfd4d4c);
         self.dealGoldPrice.text = [NSString stringWithFormat:@"￥%@",_model.purchasePrice];
-        self.serviceChargeLab.text = @"手续费";
+        self.serviceChargeLab.text = [NSString stringWithFormat:@"￥%@",_model.poundage];;
     }
     
 }
