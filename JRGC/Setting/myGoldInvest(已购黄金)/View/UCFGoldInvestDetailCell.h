@@ -50,6 +50,8 @@
 
 @end
 @interface UCFGoldInvestDetailFiveCell : UITableViewCell
+@property (strong, nonatomic) IBOutlet UIView *lineView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *lineViewLeft;
 @property (weak, nonatomic) IBOutlet UILabel *refundDateLabel;//回金日期
 @property (weak, nonatomic) IBOutlet UILabel *refundGoldAmountLabel;//回金克重
 @property (weak, nonatomic) IBOutlet UILabel *refundTypeLabel;//回金类型	string	买金/增金

@@ -231,4 +231,6 @@ typedef NS_ENUM(NSInteger, PicType) {
 //batch按钮的背景图片获取方法
 + (UIImage *)batchImageSelectedState:(CGRect)rect;
 + (UIImage *)batchImageNormalState:(CGRect)rect;
+//四舍五入方法
++(NSString *)notRounding:(double)price afterPoint:(int)position;
 @end

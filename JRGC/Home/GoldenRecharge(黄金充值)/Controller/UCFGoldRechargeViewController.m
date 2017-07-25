@@ -139,6 +139,10 @@
     if (!userId) {
         return;
     }
+    if ([money doubleValue] < 10.00f) {
+        [MBProgressHUD displayHudError:@"充值金额大于10元"];
+        return;
+    }
     NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:self.bankUrl, @"backUrl", money, @"rechargeAmt", userId, @"userId",  nil];
     [[NetworkModule sharedNetworkModule] newPostReq:param tag:kSXTagGoldRecharge owner:self signature:YES Type:SelectAccoutDefault];
 }
