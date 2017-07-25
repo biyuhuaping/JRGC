@@ -13,7 +13,7 @@
 
 #define font 13
 @interface UCFGoldRechargeHeaderView () <UITextViewDelegate>
-@property (weak, nonatomic) IBOutlet UITextField *textField;
+
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 @property (assign, nonatomic) BOOL isSelect;
 @end

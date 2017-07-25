@@ -8,6 +8,7 @@
 
 #import "UCFGoldAuthorizationViewController.h"
 #import "UCFGoldRechargeViewController.h"
+#import "NSString+CJString.h"
 @interface UCFGoldAuthorizationViewController ()
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 - (IBAction)clickGoldAuthorizationBtn:(id)sender;
@@ -24,6 +25,12 @@
     [super viewWillAppear:animated];
     self.scrollView.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight - 64);
     self.upViewWidth.constant = ScreenWidth;
+    
+    NSString *tipText = @"联合黄金在门户方为其提供的平台发布、运营各类黄金产品，为客户提供产品报价、加工、物流等服务。联合黄金应确保在平台展示的各信息及资料真实有效。";
+    NSDictionary *dic = [Common getParagraphStyleDictWithStrFont:12 WithlineSpacing:2.0f];
+    self.LabelTip.attributedText = [NSString getNSAttributedString:tipText labelDict:dic];
+
+    
     self.upViewHeight.constant = CGRectGetMaxY(self.LabelTip.frame)+25;
     self.scrollView.contentSize = CGSizeMake(0, ScreenHeight - 64);
 }
@@ -58,9 +65,10 @@
             
             [UserInfoSingle sharedManager].goldAuthorization = YES;
             
-            if ([_sourceVc isEqualToString:@""]) {
+            if (![_sourceVc isEqualToString:@"GoldPurchaseVC"]) {
                 UCFGoldRechargeViewController *goldRecharge = [[UCFGoldRechargeViewController alloc] initWithNibName:@"UCFGoldRechargeViewController" bundle:nil];
                 goldRecharge.baseTitleText = @"充值";
+                goldRecharge.needToRechareStr = self.sourceVc;
                 [self.navigationController pushViewController:goldRecharge animated:YES];
                 NSMutableArray *navVCArray = [[NSMutableArray alloc] initWithArray:self.navigationController.viewControllers];
                 [navVCArray removeObjectAtIndex:navVCArray.count-2];

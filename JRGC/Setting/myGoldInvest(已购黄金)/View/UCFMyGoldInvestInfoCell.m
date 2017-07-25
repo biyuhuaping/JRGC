@@ -47,7 +47,7 @@
     self.nmPrdClaimNameLabel.text = [NSString stringWithFormat:@"%@",[dataDict objectSafeForKey:@"nmPrdClaimName"]];
     //购买克重
     self.purchaseGoldAmountLabel.text = [NSString stringWithFormat:@"%@克",[dataDict objectSafeForKey:@"purchaseGoldAmount"]];
-     self.purchaseGoldAmountLabel.font = [UIFont boldSystemFontOfSize:12];
+    self.purchaseGoldAmountLabel.font = [UIFont boldSystemFontOfSize:12];
     
     //预期增金克重
     self.perGiveGoldAmountLabel.text = [NSString stringWithFormat:@"%@克",[dataDict objectSafeForKey:@"perGiveGoldAmount"]];
