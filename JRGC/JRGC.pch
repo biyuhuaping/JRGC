@@ -34,7 +34,7 @@
 #define MarkLabelFont 10
 #define IconYPos 11
 #define IconXPos 13
-#define LabelWidTh 150
+#define LabelWidTh 170
 #define TitleXDistance 5
 #define scrollViewHeight4S 503
 
