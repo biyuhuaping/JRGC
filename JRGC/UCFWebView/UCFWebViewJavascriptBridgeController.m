@@ -406,8 +406,8 @@
             UIImageWriteToSavedPhotosAlbum(savedImage, self, @selector(image:didFinishSavingWithError:contextInfo:), (__bridge void *)self);
         } else if ([nativeData[@"action"] isEqualToString:@"show_header"]) {
             
-            [self.navigationController setNavigationBarHidden:NO];
-            
+            [self.navigationController setNavigationBarHidden:NO animated:NO];
+            [self viewDidLayoutSubviews];
         }
         //----------------------------------------------------------------------------------------------------qyy
         
