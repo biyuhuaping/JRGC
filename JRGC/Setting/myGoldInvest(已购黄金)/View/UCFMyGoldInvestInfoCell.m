@@ -52,7 +52,7 @@
    
     NSString *orderStatusName = [dataDict objectSafeForKey:@"orderStatusName"];
     if ([orderStatusName  isEqualToString:@"未起算"]) {
-        self.perGiveGoldAmountLabel.text = [dataDict objectSafeForKey:@"perGiveGoldAmount"];
+        self.perGiveGoldAmountLabel.text = @"--";
     }else{ //已获增金克重
         //预期增金克重
         self.perGiveGoldAmountLabel.text = [NSString stringWithFormat:@"%@克",[dataDict objectSafeForKey:@"perGiveGoldAmount"]];
