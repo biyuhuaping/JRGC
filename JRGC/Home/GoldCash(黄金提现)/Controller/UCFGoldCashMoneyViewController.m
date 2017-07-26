@@ -44,7 +44,7 @@
     [self getGoldCashInfo];
     [self createUI];
     [self addRightBtn];
-    [self initData];
+//    [self initData];
 }
 #pragma mark -
 #pragma mark 获取提现页面数据
@@ -84,24 +84,24 @@
     self.navigationItem.rightBarButtonItem = rightItem;
 }
 
-- (void)initData {
-    NSArray *array = @[@"温馨提示", @"单笔提现金额不能低于10元，提现申请成功后不可撤回;", @"对首次充值后无投资的提现，平台收取0.4%的手续费;", @"金额大于50W在工作日8:30-16:30内发起当日到账，当日此时段申请次日到账;", @"如遇问题,请拨打客服400-0322-988咨询。"];
-    [self.dataArray removeAllObjects];
-    for (NSString *str in array) {
-        UCFGoldRechargeModel *model = [[UCFGoldRechargeModel alloc] init];
-        model.tipString = str;
-        CGSize size = [self sizeWithString:str font:[UIFont systemFontOfSize:13] constraintSize:CGSizeMake(ScreenWidth - 40, MAXFLOAT)];
-        if ([str isEqualToString:[array firstObject]]) {
-            model.isShowBlackDot = NO;
-            model.cellHeight = size.height + 16;
-        }
-        else {
-            model.isShowBlackDot = YES;
-            model.cellHeight = size.height + 5;
-        }
-        [self.dataArray addObject:model];
-    }
-}
+//- (void)initData {
+//    NSArray *array = @[@"温馨提示", @"单笔提现金额不能低于10元，提现申请成功后不可撤回;", @"对首次充值后无投资的提现，平台收取0.4%的手续费;", @"金额大于50W在工作日8:30-16:30内发起当日到账，当日此时段申请次日到账;", @"如遇问题,请拨打客服400-0322-988咨询。"];
+//    [self.dataArray removeAllObjects];
+//    for (NSString *str in array) {
+//        UCFGoldRechargeModel *model = [[UCFGoldRechargeModel alloc] init];
+//        model.tipString = str;
+//        CGSize size = [self sizeWithString:str font:[UIFont systemFontOfSize:13] constraintSize:CGSizeMake(ScreenWidth - 40, MAXFLOAT)];
+//        if ([str isEqualToString:[array firstObject]]) {
+//            model.isShowBlackDot = NO;
+//            model.cellHeight = size.height + 16;
+//        }
+//        else {
+//            model.isShowBlackDot = YES;
+//            model.cellHeight = size.height + 5;
+//        }
+//        [self.dataArray addObject:model];
+//    }
+//}
 
 - (CGSize)sizeWithString:(NSString *)string font:(UIFont *)font constraintSize:(CGSize)constraintSize
 {
@@ -324,8 +324,25 @@
             _isPurchasePerson = [[dataDict objectSafeForKey:@"isPurchasePerson"] boolValue];
             _withdrawRate = [[dataDict objectSafeForKey:@"withdrawRate"] doubleValue];
             
-            
-            
+            NSString *pageContent = [dataDict objectSafeForKey:@"pageContent"];
+            NSString *tipStr = [pageContent stringByReplacingOccurrencesOfString:@"• " withString:@""];
+            NSArray *array = [tipStr componentsSeparatedByString:@"\n"];
+            [self.dataArray removeAllObjects];
+            for (NSString *str in array) {
+                UCFGoldRechargeModel *model = [[UCFGoldRechargeModel alloc] init];
+                model.tipString = str;
+                CGSize size = [self sizeWithString:str font:[UIFont systemFontOfSize:13] constraintSize:CGSizeMake(ScreenWidth - 40, MAXFLOAT)];
+                model.isShowBlackDot = YES;
+                model.cellHeight = size.height + 5;
+                [self.dataArray addObject:model];
+            }
+            UCFGoldRechargeModel *firstModel = [[UCFGoldRechargeModel alloc] init];
+            firstModel.tipString = @"温馨提示";
+            CGSize size = [self sizeWithString:@"温馨提示" font:[UIFont systemFontOfSize:13] constraintSize:CGSizeMake(ScreenWidth - 40, MAXFLOAT)];
+            firstModel.isShowBlackDot = NO;
+            firstModel.cellHeight = size.height + 16;
+            [self.dataArray insertObject:firstModel atIndex:0];
+            [self.tableview reloadData];
         }
     }
 }

@@ -10,6 +10,6 @@
 
 @interface UCFGoldenHeaderView : UIView
 @property (weak, nonatomic) IBOutlet UIView *goldValueBackView;
-
+- (void)getNormalBannerData;
 + (CGFloat)viewHeight;
 @end
