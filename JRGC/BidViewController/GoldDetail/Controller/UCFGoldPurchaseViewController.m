@@ -820,7 +820,8 @@
     
 
      double keyongMoney = self.isSelectGongDouSwitch ?  _availableAllMoney : _availableMoney;
-     double estimatAmountMoney = [cell.moneyTextField.text doubleValue] * [ToolSingleTon sharedManager].readTimePrice;
+     double estimatAmountMoney = [[cell.estimatAmountPayableLabel.text substringFromIndex:1]
+        doubleValue];
     if (self.purchaseMoneyStr) {
         estimatAmountMoney =  [self.purchaseMoneyStr doubleValue];
     }
@@ -828,7 +829,7 @@
     if (keyongMoney < estimatAmountMoney) {
        
         double   needToRechare = estimatAmountMoney - keyongMoney;
-        _needToRechareStr = [NSString stringWithFormat:@"%.2lf",needToRechare];
+        _needToRechareStr = [NSString stringWithFormat:@"%.2lf",[[Common notRounding:needToRechare afterPoint:2] doubleValue]];
         NSString *showStr = [NSString stringWithFormat:@"总计购买金额¥%.2lf\n可用金额%.2lf\n另需充值金额¥%.2lf",estimatAmountMoney, keyongMoney,needToRechare];
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"可用金额不足" message:showStr delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"立即充值", nil];
         alert.tag = 2000;
