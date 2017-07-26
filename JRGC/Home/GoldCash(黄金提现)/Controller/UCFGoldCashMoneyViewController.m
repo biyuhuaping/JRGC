@@ -15,10 +15,12 @@
 #import "UCFGoldCashHistoryController.h"
 #import "UCFToolsMehod.h"
 #import "MjAlertView.h"
-@interface UCFGoldCashMoneyViewController () <UITableViewDataSource, UITableViewDelegate, UCFGoldCashThreeCellDelegate,MjAlertViewDelegate, UIAlertViewDelegate, UCFGoldRechargeCellDelegate>
+#import "UCFCashTipView.h"
+@interface UCFGoldCashMoneyViewController () <UITableViewDataSource, UITableViewDelegate, UCFGoldCashThreeCellDelegate, UIAlertViewDelegate, UCFGoldRechargeCellDelegate, UCFCashTipViewDelegate>
 @property (strong, nonatomic) NSMutableArray *dataArray;
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (weak, nonatomic) UCFGoldCashTwoCell *amoutCell;
+@property (weak, nonatomic) MjAlertView *cashTipAlertView;
 
 @property (nonatomic,strong)NSString *withdrawTokenStr;//提现token
 @property (nonatomic,assign)BOOL isPurchasePerson;//是否没有购买进行提现
@@ -197,6 +199,7 @@
 - (void)goldCashcell:(UCFGoldCashThreeCell *)cashCell didClickCashButton:(UIButton *)cashButton
 {
     [self.tableview endEditing:YES];
+    
     NSString *inputMoney = [Common deleteStrHeadAndTailSpace:self.amoutCell.textField.text];
     if ([Common isPureNumandCharacters:inputMoney]) {
         [MBProgressHUD displayHudError:@"请输入正确金额"];
@@ -223,13 +226,7 @@
         [alert show];
         return;
     }
-
-    //    comparResult = [inputMoney compare:self.balanceMoney options:NSNumericSearch];
-//    if (comparResult == NSOrderedDescending || comparResult == NSOrderedSame) {
-//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"充值金额不可大于最大可提现金额" message:nil delegate:self cancelButtonTitle:@"知道了" otherButtonTitles: nil];
-//        [alert show];
-//        return;
-//    }
+    
     if (_isPurchasePerson) {
         double cashMoney = [inputMoney doubleValue];//提现金额
         double feeMoney = cashMoney * _withdrawRate *0.01; //手续费
@@ -240,7 +237,21 @@
         NSString *cashMoneyStr1 = [NSString stringWithFormat:@"¥%@",cashMoneyStr];
         NSString *feeMoneyStr1 = [NSString stringWithFormat:@"¥%@",feeMoneyStr];
         NSString *actualMoneyStr1 = [NSString stringWithFormat:@"¥%@",actualMoneyStr];
-        MjAlertView *alertView =[[MjAlertView alloc] initCashAlertViewWithCashMoney:cashMoneyStr1 ActualAccount:actualMoneyStr1 FeeMoney:feeMoneyStr1 delegate:self cancelButtonTitle:@"取消" withOtherButtonTitle:@"确定"];
+        
+        __weak typeof(self) weakSelf = self;
+        MjAlertView *alertView =[[MjAlertView alloc] initCustomAlertViewWithBlock:^(id blockContent) {
+            UIView *view = (UIView *)blockContent;
+            view.frame = CGRectMake(0, 0, 265, 235);
+            view.center = CGPointMake(ScreenWidth * 0.5, ScreenHeight * 0.5);
+            UCFCashTipView *cashTipView = [[[NSBundle mainBundle] loadNibNamed:@"UCFCashTipView" owner:self options:nil] lastObject];
+            [view addSubview:cashTipView];
+            cashTipView.actualMoneyLabel.text = actualMoneyStr1;
+            cashTipView.cashMoneyLabel.text = cashMoneyStr1;
+            cashTipView.brokerageLabel.text = feeMoneyStr1;
+            cashTipView.frame = view.bounds;
+            cashTipView.delegate = weakSelf;
+        }];
+        self.cashTipAlertView = alertView;
         [alertView show];
         return;
     }
@@ -258,8 +269,13 @@
     [[NetworkModule sharedNetworkModule] newPostReq:param tag:kSXTagGoldCash owner:self signature:YES Type:SelectAccoutDefault];
 }
 
-- (void)mjalertView:(MjAlertView *)alertview didClickedButton:(UIButton *)clickedButton andClickedIndex:(NSInteger)index{
-    if (index == 1) {
+- (void)cashTipView:(UCFCashTipView *)cashTipView didClickedButton:(UIButton *)button
+{
+    NSInteger index = button.tag - 100;
+    if (index == 0) {
+        [self.cashTipAlertView hide];
+    }
+    else if (index == 1) {
         [self gotoGoldCash];
     }
 }
