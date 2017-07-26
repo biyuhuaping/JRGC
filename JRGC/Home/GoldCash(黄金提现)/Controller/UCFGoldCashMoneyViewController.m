@@ -276,6 +276,7 @@
         [self.cashTipAlertView hide];
     }
     else if (index == 1) {
+        [self.cashTipAlertView hide];
         [self gotoGoldCash];
     }
 }
