@@ -412,7 +412,10 @@
             [self.navigationController setNavigationBarHidden:NO animated:NO];
             [self.view.window setNeedsLayout];
             [self.view.window layoutIfNeeded];
-//            [self performSelectorOnMainThread:@selector(viewDidLayoutSubviews) withObject:nil waitUntilDone:YES];
+        }else if ([nativeData[@"action"] isEqualToString:@"hide_header"]) {
+            [self.navigationController setNavigationBarHidden:YES animated:NO];
+            [self.view.window setNeedsLayout];
+            [self.view.window layoutIfNeeded];
         }
         //----------------------------------------------------------------------------------------------------qyy
         
