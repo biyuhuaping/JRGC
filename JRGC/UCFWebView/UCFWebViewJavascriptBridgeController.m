@@ -404,6 +404,10 @@
         else if([nativeData[@"action"] isEqualToString:@"save_fxh_qrcode"]){ //放心花---保存 工场码
             UIImage *savedImage = [UIImage imageNamed:@"loanCode"];
             UIImageWriteToSavedPhotosAlbum(savedImage, self, @selector(image:didFinishSavingWithError:contextInfo:), (__bridge void *)self);
+        } else if ([nativeData[@"action"] isEqualToString:@"show_header"]) {
+            
+            [self.navigationController setNavigationBarHidden:NO];
+            
         }
         //----------------------------------------------------------------------------------------------------qyy
         
