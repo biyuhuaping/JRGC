@@ -97,7 +97,13 @@
     NSString *requestString = [[[request URL]  absoluteString] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSRange range = [requestString rangeOfString:self.backUrl];
     if (range.location != NSNotFound) {
-        [self.navigationController popToViewController:self.rootVc animated:YES];
+        NSRange sucRange = [requestString rangeOfString:@"status=00"];
+        if (sucRange.location != NSNotFound) {
+            [self.navigationController popToViewController:self.rootVc animated:YES];
+        }
+        else {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
         return NO;
     }
     

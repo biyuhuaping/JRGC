@@ -320,6 +320,8 @@
 		74956EB11D66E2BC00D68B61 /* BindPhoneNumViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74956EB01D66E2BC00D68B61 /* BindPhoneNumViewController.xib */; };
 		74956EB31D66E87F00D68B61 /* UCFModifyPhoneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74956EB21D66E87F00D68B61 /* UCFModifyPhoneViewController.xib */; };
 		74956EB51D66F33D00D68B61 /* UCFAccountDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74956EB41D66F33D00D68B61 /* UCFAccountDetailViewController.xib */; };
+		749D6C901F28406A00AAD0C4 /* UCFCashTipView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 749D6C8F1F28406A00AAD0C4 /* UCFCashTipView.xib */; };
+		749D6C931F2840A100AAD0C4 /* UCFCashTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 749D6C921F2840A100AAD0C4 /* UCFCashTipView.m */; };
 		74A0AF0F1EC341DD009E5A57 /* NSTimer+timerBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 74A0AF0B1EC341DD009E5A57 /* NSTimer+timerBlock.m */; };
 		74A0AF101EC341DD009E5A57 /* ZZCircleProgress.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 74A0AF0C1EC341DD009E5A57 /* ZZCircleProgress.bundle */; };
 		74A0AF111EC341DD009E5A57 /* ZZCircleProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = 74A0AF0E1EC341DD009E5A57 /* ZZCircleProgress.m */; };
@@ -1474,6 +1476,9 @@
 		74956EB01D66E2BC00D68B61 /* BindPhoneNumViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BindPhoneNumViewController.xib; sourceTree = "<group>"; };
 		74956EB21D66E87F00D68B61 /* UCFModifyPhoneViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFModifyPhoneViewController.xib; sourceTree = "<group>"; };
 		74956EB41D66F33D00D68B61 /* UCFAccountDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFAccountDetailViewController.xib; sourceTree = "<group>"; };
+		749D6C8F1F28406A00AAD0C4 /* UCFCashTipView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFCashTipView.xib; sourceTree = "<group>"; };
+		749D6C911F2840A100AAD0C4 /* UCFCashTipView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFCashTipView.h; sourceTree = "<group>"; };
+		749D6C921F2840A100AAD0C4 /* UCFCashTipView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFCashTipView.m; sourceTree = "<group>"; };
 		74A0AF0A1EC341DD009E5A57 /* NSTimer+timerBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+timerBlock.h"; sourceTree = "<group>"; };
 		74A0AF0B1EC341DD009E5A57 /* NSTimer+timerBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+timerBlock.m"; sourceTree = "<group>"; };
 		74A0AF0C1EC341DD009E5A57 /* ZZCircleProgress.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ZZCircleProgress.bundle; sourceTree = "<group>"; };
@@ -3730,6 +3735,9 @@
 				7443C72A1F1EFF7C009669C0 /* UCFGoldCashThreeCell.h */,
 				7443C72B1F1EFF7C009669C0 /* UCFGoldCashThreeCell.m */,
 				7443C72C1F1EFF7C009669C0 /* UCFGoldCashThreeCell.xib */,
+				749D6C911F2840A100AAD0C4 /* UCFCashTipView.h */,
+				749D6C921F2840A100AAD0C4 /* UCFCashTipView.m */,
+				749D6C8F1F28406A00AAD0C4 /* UCFCashTipView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -6689,6 +6697,7 @@
 				741CA7A31E724C44006056A8 /* UCFLoanViewController.xib in Resources */,
 				748ED7A61CC74F3200690215 /* SettingMainButton.xib in Resources */,
 				7477BF9D1AFB4BF400914BFB /* SecuirtyCenter.storyboard in Resources */,
+				749D6C901F28406A00AAD0C4 /* UCFCashTipView.xib in Resources */,
 				E311A6691D90E83800C5483E /* UCFWebViewJavascriptBridgeMallDetails.xib in Resources */,
 				83974FDA1F14AC4300C2252F /* UCFGoldPurchaseViewController.xib in Resources */,
 				E311A6761D90EBBE00C5483E /* UCFWebViewJavascriptBridgeBanner.xib in Resources */,
@@ -7020,6 +7029,7 @@
 				A851F34E1F132D2C003DE8B8 /* UCFGoldTransCell.m in Sources */,
 				74A0AF111EC341DD009E5A57 /* ZZCircleProgress.m in Sources */,
 				EDEC8BFA1CB3BA6300815228 /* WPAttributedStyleAction.m in Sources */,
+				749D6C931F2840A100AAD0C4 /* UCFCashTipView.m in Sources */,
 				A8E02DAD1F0DDC5000FC2260 /* GoldAccountFirstCell.m in Sources */,
 				4A0DA1551B26D8C4004E84F6 /* UCFPurchaseBidViewController.m in Sources */,
 				741CA7A21E724C44006056A8 /* UCFLoanViewController.m in Sources */,
