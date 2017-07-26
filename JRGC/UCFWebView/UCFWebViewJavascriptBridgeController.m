@@ -76,7 +76,11 @@
     [super viewDidDisappear:animated];
     [self endRefresh];
 }*/
-
+//- (void)viewDidLayoutSubviews
+//{
+//    [self viewDidLayoutSubviews];
+//    self.webView.frame = CGRectMake(0, 0, ScreenWidth, self.view.frame.size.height);
+//}
 - (void)setController
 {
     if (![self isKindOfClass:[UCFLoanViewController class]] && ![self isKindOfClass:[UCFDiscoveryViewController class]]) {
@@ -405,9 +409,10 @@
             UIImage *savedImage = [UIImage imageNamed:@"loanCode"];
             UIImageWriteToSavedPhotosAlbum(savedImage, self, @selector(image:didFinishSavingWithError:contextInfo:), (__bridge void *)self);
         } else if ([nativeData[@"action"] isEqualToString:@"show_header"]) {
-            
             [self.navigationController setNavigationBarHidden:NO animated:NO];
-            [self viewDidLayoutSubviews];
+            [self.view.window setNeedsLayout];
+            [self.view.window layoutIfNeeded];
+//            [self performSelectorOnMainThread:@selector(viewDidLayoutSubviews) withObject:nil waitUntilDone:YES];
         }
         //----------------------------------------------------------------------------------------------------qyy
         
