@@ -72,7 +72,7 @@
     [super viewWillAppear:animated];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 //    if ([_sourceVc isEqualToString:@"collection"]) {
-        [self.navigationController setNavigationBarHidden:YES animated:NO];
+        [self.navigationController setNavigationBarHidden:YES animated:YES];
         
 //    } else {
 //        [self.navigationController setNavigationBarHidden:YES animated:animated];
