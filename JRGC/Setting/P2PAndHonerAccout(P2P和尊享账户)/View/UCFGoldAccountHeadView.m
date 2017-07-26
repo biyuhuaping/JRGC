@@ -62,7 +62,7 @@
 - (void)updateGoldFloat
 {
     self.realtimeGoldPrice.text = [NSString stringWithFormat:@"￥%.2f",[ToolSingleTon sharedManager].readTimePrice];
-    double floatValue1 = ([ToolSingleTon sharedManager].readTimePrice - [[_tmpData objectSafeForKey:@"dealPrice"] doubleValue]) * [[_tmpData objectSafeForKey:@"holdGoldAmount"] doubleValue];
+    double floatValue1 = [ToolSingleTon sharedManager].readTimePrice * [[_tmpData objectSafeForKey:@"holdGoldAmount"] doubleValue] - [[_tmpData objectSafeForKey:@"tradeAllMoney"] doubleValue];
     
     
     if (floatValue1 > 0) {
@@ -115,7 +115,7 @@
     self.realtimeGoldPrice.text = [NSString stringWithFormat:@"￥%.2f",[ToolSingleTon sharedManager].readTimePrice];
     self.totalRecoveryGold.text = [NSString stringWithFormat:@"%@克",[dataDic objectSafeForKey:@"collectGoldAmount"]];
     self.dealGoldPrice.text =  [NSString stringWithFormat:@"￥%@",[dataDic objectSafeForKey:@"dealPrice"]];
-    double floatValue1 = ([ToolSingleTon sharedManager].readTimePrice - [[dataDic objectSafeForKey:@"dealPrice"] doubleValue]) * [[dataDic objectSafeForKey:@"holdGoldAmount"] doubleValue];
+    double floatValue1 = [ToolSingleTon sharedManager].readTimePrice * [[dataDic objectSafeForKey:@"holdGoldAmount"] doubleValue] - [[dataDic objectSafeForKey:@"tradeAllMoney"] doubleValue];
 //    NSString *floatValueStr = [NSString stringWithFormat:@"%.2f",floatValue1];
 //    NSComparisonResult comparResult = [[floatValueStr substringFromIndex:1] compare:@"0.00" options:NSNumericSearch];
 
