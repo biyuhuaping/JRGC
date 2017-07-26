@@ -219,6 +219,7 @@
 }
 
 - (void)refreshData {
+    [self.goldenHeader getNormalBannerData];
     self.currentPage = 1;
     [self getGoldProFromNetWithPage:[NSString stringWithFormat:@"%lu", self.currentPage]];
 }
