@@ -201,7 +201,7 @@
             }
             
             
-            if (indexPath.row < self.dataDetailArray.count - 1) {
+            if (indexPath.row < self.dataDetailArray.count) {
                 cell.lineViewLeft.constant = 15;
                 cell.lineView.backgroundColor = UIColorWithRGB(0xe3e5ea);
             }else{
