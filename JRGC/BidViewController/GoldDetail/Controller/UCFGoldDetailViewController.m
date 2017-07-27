@@ -475,11 +475,11 @@
     guImageV.image = [UIImage imageNamed:@"gold_particular_icon_repayment"];
     [bottomBkView addSubview:guImageV];
     
-    UILabel *guLabel = [UILabel labelWithFrame:CGRectMake(CGRectGetMaxX(guImageV.frame) + 5, IconYPos, 100, 22) text:@"还款方式" textColor:UIColorWithRGB(0x555555) font:[UIFont systemFontOfSize:13]];
+    UILabel *guLabel = [UILabel labelWithFrame:CGRectMake(CGRectGetMaxX(guImageV.frame) + 5, IconYPos, 120, 22) text:@"收益克重交付方式" textColor:UIColorWithRGB(0x555555) font:[UIFont systemFontOfSize:13]];
     guLabel.textAlignment = NSTextAlignmentLeft;
     [bottomBkView addSubview:guLabel];
     
-    _fixedUpDateLabel = [UILabel labelWithFrame:CGRectMake(ScreenWidth - 15 - LabelWidTh, IconYPos, LabelWidTh, 22) text:@"2015-12-31" textColor:UIColorWithRGB(0x333333) font:[UIFont boldSystemFontOfSize:13]];
+    _fixedUpDateLabel = [UILabel labelWithFrame:CGRectMake(ScreenWidth - 15 - LabelWidTh-25, IconYPos, LabelWidTh+25, 22) text:@"2015-12-31" textColor:UIColorWithRGB(0x333333) font:[UIFont boldSystemFontOfSize:13]];
     _fixedUpDateLabel.textAlignment = NSTextAlignmentRight;
     [bottomBkView addSubview:_fixedUpDateLabel];
     _fixedUpDateLabel.text = self.goldModel.paymentType;
@@ -537,7 +537,7 @@
     UIImageView *qitouImageV1 = [[UIImageView alloc] initWithFrame:CGRectMake(IconXPos,44*3 + IconYPos, 22, 22)];
     qitouImageV1.image = [UIImage imageNamed:@"gold_particular_icon_-poundage"];
     [bottomBkView addSubview:qitouImageV1];
-    UILabel *qitouLabel1 = [UILabel labelWithFrame:CGRectMake(CGRectGetMaxX(qitouImageV.frame) + 5, 44*3 + IconYPos, 120 , 22) text:@"买入手续费(每克)" textColor:UIColorWithRGB(0x555555) font:[UIFont systemFontOfSize:13]];
+    UILabel *qitouLabel1 = [UILabel labelWithFrame:CGRectMake(CGRectGetMaxX(qitouImageV.frame) + 5, 44*3 + IconYPos, 120 , 22) text:@"买入手续费(元/克)" textColor:UIColorWithRGB(0x555555) font:[UIFont systemFontOfSize:13]];
     qitouLabel1.textAlignment = NSTextAlignmentLeft;
     [bottomBkView addSubview:qitouLabel1];
     _buyServiceRateLabel = [UILabel labelWithFrame:CGRectMake(CGRectGetMaxX(qitouLabel1.frame) + 5, CGRectGetMinY(qitouLabel1.frame), ScreenWidth -CGRectGetMaxX(qitouLabel1.frame) - 5 - 15, 22) text:@"¥0.00" textColor:UIColorWithRGB(0x333333) font:[UIFont boldSystemFontOfSize:13]];
