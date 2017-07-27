@@ -59,12 +59,9 @@
         BOOL ret  = [[dic objectSafeDictionaryForKey:@"ret"] boolValue];
         if(ret){//授权成功
             
-//
-            
-            
-            
             [UserInfoSingle sharedManager].goldAuthorization = YES;
-            
+            [[NSUserDefaults standardUserDefaults] setBool:YES  forKey:GOldAUTHORIZATION];
+            [[NSUserDefaults standardUserDefaults] synchronize];
             if (![_sourceVc isEqualToString:@"GoldPurchaseVC"]) {
                 UCFGoldRechargeViewController *goldRecharge = [[UCFGoldRechargeViewController alloc] initWithNibName:@"UCFGoldRechargeViewController" bundle:nil];
                 goldRecharge.baseTitleText = @"充值";

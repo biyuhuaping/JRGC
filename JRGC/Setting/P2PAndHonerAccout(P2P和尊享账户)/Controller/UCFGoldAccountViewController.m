@@ -40,7 +40,11 @@
 @end
 
 @implementation UCFGoldAccountViewController
-
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initData];
