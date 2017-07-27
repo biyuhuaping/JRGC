@@ -43,11 +43,11 @@
 -(void)infoDataArray{
     
     NSString *nmPrdClaimNameStr = [_dataDict objectSafeForKey:@"nmPrdClaimName"];
-    UCFSettingItem *item1 = [UCFSettingItem itemWithTitle:@"项目名称" withSubtitle:nmPrdClaimNameStr];
+    UCFSettingItem *item1 = [UCFSettingItem itemWithTitle:@"产品名称" withSubtitle:nmPrdClaimNameStr];
     NSString *purchaseGoldAmountStr = [NSString stringWithFormat:@"%@克",[_dataDict objectSafeForKey:@"purchaseGoldAmount"]];
     UCFSettingItem *item2 = [UCFSettingItem itemWithTitle:@"买入克重" withSubtitle:purchaseGoldAmountStr];
      NSString *dealGoldPriceStr = [NSString stringWithFormat:@"¥%@",[_dataDict objectSafeForKey:@"dealGoldPrice"]];
-    UCFSettingItem *item3 = [UCFSettingItem itemWithTitle:@"成交金价(每克)" withSubtitle:dealGoldPriceStr];
+    UCFSettingItem *item3 = [UCFSettingItem itemWithTitle:@"成交金价(元/克)" withSubtitle:dealGoldPriceStr];
      NSString *poundageStr =[NSString stringWithFormat:@"¥%@", [_dataDict objectSafeForKey:@"poundage"]];
     UCFSettingItem *item4 = [UCFSettingItem itemWithTitle:@"手续费" withSubtitle:poundageStr];
      NSString *purchaseMoneyStr = [NSString stringWithFormat:@"¥%@",[_dataDict objectSafeForKey:@"purchaseMoney"]];

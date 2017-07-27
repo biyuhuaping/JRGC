@@ -379,7 +379,7 @@
     
     
     float  collectGiveGoldAmount = [userDataInfoDict[@"collectGiveGoldAmount"] floatValue];;//待收利息
-    self.collectGoldAmountLabel.text = [NSString stringWithFormat:@"待收赠金:%.3f克",collectGiveGoldAmount];
+    self.collectGoldAmountLabel.text = [NSString stringWithFormat:@"待收收益:%.3f克",collectGiveGoldAmount];
       float principal = [userDataInfoDict[@"collectGoldAmount"] floatValue];////总待收黄金
     self.collectGiveGoldAmountLabel.text = [NSString stringWithFormat:@"总待收黄金:%.3f克",principal];
     

@@ -28,7 +28,7 @@
 {
     
     
-    self.realGoldPriceLab.text = [NSString stringWithFormat:@"实时金价(每克)%.3f",[ToolSingleTon sharedManager].readTimePrice]; //
+    self.realGoldPriceLab.text = [NSString stringWithFormat:@"实时金价(元/克)%.3f",[ToolSingleTon sharedManager].readTimePrice]; //
     
     self.GoldInvestButton.userInteractionEnabled = NO;
     self.nmPrdClaimNameLab.text = aItemInfo.nmPrdClaimName;//债权名称

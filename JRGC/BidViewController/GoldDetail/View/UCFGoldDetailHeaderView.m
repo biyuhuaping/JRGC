@@ -70,7 +70,7 @@
     [self.periodTermLabel setFont:[UIFont systemFontOfSize:15] string:@"个月"];
     self.remainAmountLabel.text = [NSString stringWithFormat:@"%.3lf克",[goldModel.remainAmount doubleValue]];
     self.remainAmountLabel.textColor = [UIColor whiteColor];
-    self.realGoldPriceLabel.text = [NSString stringWithFormat:@"实时金价(每克)¥%.2lf",[ToolSingleTon  sharedManager].readTimePrice];
+    self.realGoldPriceLabel.text = [NSString stringWithFormat:@"实时金价(元/克)¥%.2lf",[ToolSingleTon  sharedManager].readTimePrice];
     
     float Progress = 1 - [goldModel.remainAmount doubleValue]/[goldModel.totalAmount floatValue];
     int progressInt = (int)(Progress *100);
