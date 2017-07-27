@@ -285,7 +285,7 @@
             pauseInfoView.backgroundColor = [UIColor clearColor];
             
             UILabel *buyCueDesTipLabel = [[UILabel alloc]initWithFrame:CGRectMake(15 , 5 , ScreenWidth - 30 , pauseInfoHeight )];
-            buyCueDesTipLabel.textColor = UIColorWithRGB(0xfd4d4c);
+            buyCueDesTipLabel.textColor = UIColorWithRGB(0xfc8f0e);
             buyCueDesTipLabel.textAlignment = NSTextAlignmentLeft;
             buyCueDesTipLabel.backgroundColor = [UIColor clearColor];
             buyCueDesTipLabel.font = [UIFont systemFontOfSize:10];
