@@ -123,6 +123,8 @@ NSString * const ID = @"cycleCell";
     }
     if (self.imagesGroup.count > 1) {
         TAPageControl *pageControl = [[TAPageControl alloc] init];
+        pageControl.dotImage = [UIImage imageNamed:@"dot_icon_02"];
+        pageControl.currentDotImage = [UIImage imageNamed:@"dot_icon_01"];
         pageControl.numberOfPages = self.imagesGroup.count;
         [self addSubview:pageControl];
         _pageControl = pageControl;
