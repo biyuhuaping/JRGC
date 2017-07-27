@@ -892,6 +892,7 @@
             UILabel *lbl = (UILabel*)[cell.contentView viewWithTag:100];
             NSDictionary *dic = [Common getParagraphStyleDictWithStrFont:12.0f WithlineSpacing:3.0];
             NSString *remarkStr = [UCFToolsMehod isNullOrNilWithString:[[_dataDict objectForKey:@"result"] objectForKey:@"nmPrdClaimDetail"]];
+            remarkStr = [remarkStr stringByReplacingOccurrencesOfString:@"\\n" withString:@"\n"];
             lbl.attributedText = [NSString getNSAttributedString:remarkStr labelDict:dic];
             
             return cell;
