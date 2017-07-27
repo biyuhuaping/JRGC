@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13122.19" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.16"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -18,8 +18,8 @@
                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uRf-Zp-cRx">
                     <rect key="frame" x="0.0" y="0.0" width="265" height="170"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="浮动盈亏" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c03-GM-RFP">
-                            <rect key="frame" x="100" y="15" width="65.5" height="19.5"/>
+                        <label opaque="NO" userInteractionEnabled="NO" tag="199" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="累计盈亏" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c03-GM-RFP">
+                            <rect key="frame" x="100" y="15" width="66" height="20"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -31,26 +31,20 @@
                                 <constraint firstAttribute="height" constant="0.5" id="Qit-S0-7jf"/>
                             </constraints>
                         </view>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="浮动盈亏指按持仓合约的初始成交价与当日结算价计算的潜在盈亏。" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="69Q-bV-wP3">
+                        <label opaque="NO" userInteractionEnabled="NO" tag="200" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="累计盈亏指消费者在金融工场尊享金的累计收益或亏损" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="69Q-bV-wP3">
                             <rect key="frame" x="25" y="54.5" width="215" height="29"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="计算公式：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rdw-VB-1yP">
+                        <label opaque="NO" userInteractionEnabled="NO" tag="201" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="计算公式：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rdw-VB-1yP">
                             <rect key="frame" x="25" y="92.5" width="57" height="14"/>
                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                             <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="浮动盈亏=实时金价×持有黄金-买入价格" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GN7-Ga-cPF">
-                            <rect key="frame" x="25" y="113.5" width="200" height="14"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                            <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="当有多笔成交时，浮动盈亏为多笔的均价" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NST-ac-7vZ">
-                            <rect key="frame" x="25" y="134" width="215" height="14"/>
+                        <label opaque="NO" userInteractionEnabled="NO" tag="202" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="消费者总盈亏=(消费者持有黄金市值+消费者变现总金额+消费者提取金条市值)-消费者购买总金额 " lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GN7-Ga-cPF">
+                            <rect key="frame" x="25" y="113.5" width="215" height="14"/>
                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                             <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
@@ -60,7 +54,6 @@
                     <constraints>
                         <constraint firstItem="GN7-Ga-cPF" firstAttribute="top" secondItem="Rdw-VB-1yP" secondAttribute="bottom" constant="7" id="0NX-44-oT8"/>
                         <constraint firstItem="c03-GM-RFP" firstAttribute="centerX" secondItem="uRf-Zp-cRx" secondAttribute="centerX" id="4vB-SK-hmT"/>
-                        <constraint firstItem="NST-ac-7vZ" firstAttribute="top" secondItem="GN7-Ga-cPF" secondAttribute="bottom" constant="6.5" id="7Xt-K8-fxE"/>
                         <constraint firstItem="Rdw-VB-1yP" firstAttribute="leading" secondItem="uRf-Zp-cRx" secondAttribute="leading" constant="25" id="D8f-9q-cl4"/>
                         <constraint firstItem="vw0-XN-23a" firstAttribute="leading" secondItem="uRf-Zp-cRx" secondAttribute="leading" constant="25" id="HsK-mW-2BX"/>
                         <constraint firstAttribute="height" constant="170" id="Jvm-IU-q6Y"/>
@@ -68,11 +61,10 @@
                         <constraint firstItem="GN7-Ga-cPF" firstAttribute="leading" secondItem="uRf-Zp-cRx" secondAttribute="leading" constant="25" id="QvQ-L5-BA8"/>
                         <constraint firstItem="vw0-XN-23a" firstAttribute="top" secondItem="c03-GM-RFP" secondAttribute="bottom" constant="11" id="alM-f8-KfN"/>
                         <constraint firstItem="69Q-bV-wP3" firstAttribute="top" secondItem="vw0-XN-23a" secondAttribute="bottom" constant="8" id="cKL-Yg-XjY"/>
-                        <constraint firstItem="NST-ac-7vZ" firstAttribute="leading" secondItem="uRf-Zp-cRx" secondAttribute="leading" constant="25" id="ehf-uc-PLq"/>
                         <constraint firstItem="c03-GM-RFP" firstAttribute="top" secondItem="uRf-Zp-cRx" secondAttribute="top" constant="15" id="fqB-hj-X0p"/>
                         <constraint firstItem="Rdw-VB-1yP" firstAttribute="top" secondItem="69Q-bV-wP3" secondAttribute="bottom" constant="9" id="i4h-sj-NmX"/>
-                        <constraint firstAttribute="trailing" secondItem="NST-ac-7vZ" secondAttribute="trailing" constant="25" id="nbq-ee-rSA"/>
                         <constraint firstAttribute="trailing" secondItem="69Q-bV-wP3" secondAttribute="trailing" constant="25" id="qkQ-BN-V1H"/>
+                        <constraint firstAttribute="trailing" secondItem="GN7-Ga-cPF" secondAttribute="trailing" constant="25" id="z4M-z7-osl"/>
                         <constraint firstAttribute="trailing" secondItem="vw0-XN-23a" secondAttribute="trailing" constant="25" id="zu8-1v-xjQ"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
@@ -115,7 +107,7 @@
                     <real key="value" value="0.0"/>
                 </userDefinedRuntimeAttribute>
             </userDefinedRuntimeAttributes>
-            <point key="canvasLocation" x="-504" y="-614"/>
+            <point key="canvasLocation" x="-263" y="-794"/>
         </view>
         <view contentMode="scaleToFill" id="Erl-wU-vGl">
             <rect key="frame" x="0.0" y="0.0" width="265" height="195"/>

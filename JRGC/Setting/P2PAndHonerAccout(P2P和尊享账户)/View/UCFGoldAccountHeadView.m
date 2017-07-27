@@ -79,8 +79,14 @@
 }
 
 - (IBAction)floatBtnClicked:(id)sender {
-    MjAlertView *alertView = [[MjAlertView alloc] initGoldAlertType:MjGoldAlertViewTypeFloat delegate:self];
-    [alertView show];
+    UIButton *btn = (UIButton *)sender;
+    if (btn.tag == 500) {
+        MjAlertView *alertView = [[MjAlertView alloc] initGoldAlertType:MjGoldAlertViewTypeFloat delegate:self];
+        [alertView show];
+    } else {
+        MjAlertView *alertView = [[MjAlertView alloc] initGoldAlertType:MjGoldAlertViewTypeAverage delegate:self];
+        [alertView show];
+    }
 }
 - (IBAction)currentTimePriceBtnClicked:(UIButton *)sender {
     sender.userInteractionEnabled = NO;
