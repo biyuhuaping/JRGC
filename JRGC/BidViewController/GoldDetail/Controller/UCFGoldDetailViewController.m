@@ -807,12 +807,12 @@
             case 2:
             {
                 NSString *str = [[_dataDict objectForKey:@"result"] objectSafeForKey:@"nmPrdClaimDetail"];
-                str = [UCFToolsMehod isNullOrNilWithString:str];
+                str = [str stringByReplacingOccurrencesOfString:@"\\n" withString:@"\n"];
                 if ([str isEqualToString:@""]) {
                     return 0;
                 }
                 CGSize size =  [Common getStrHeightWithStr:str AndStrFont:12 AndWidth:ScreenWidth - 30 AndlineSpacing:3];
-                return size.height;
+                return size.height + 20;
             }
                 break;
             default:
