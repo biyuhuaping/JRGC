@@ -393,6 +393,20 @@
         [self.showView  setFrame:CGRectMake((ScreenWidth - 265)/2.0f, (ScreenHeight - 220)/2.0f, 265, 220)];
         self.delegate = delegate;
         [self.showView addSubview:baseView];
+        
+        UILabel *titleLab = [baseView viewWithTag:199];
+        UILabel *midLab = [baseView viewWithTag:200];
+//        UILabel *midLab = [baseView viewWithTag:201];
+        UILabel *msgLab = [baseView viewWithTag:202];
+        if (type == MjGoldAlertViewTypeFloat) {
+            titleLab.text = @"累计盈亏";
+            midLab.text = @"累计盈亏指消费者在金融工场尊享金的累计收益或亏损";
+            msgLab.text = @"消费者总盈亏=(消费者持有黄金市值+消费者变现总金额+消费者提取金条市值)-消费者购买总金额 ";
+        } else if (type == MjGoldAlertViewTypeAverage) {
+            titleLab.text = @"买入均价";
+            midLab.text= @"买入均价指消费者购买黄金的加权平均价";
+            msgLab.text = @"尊享金购买总支出/尊享金购买总克重";
+        }
         UIButton *closeBtn = [baseView viewWithTag:1000];
         [closeBtn addTarget:self action:@selector(closeBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     }
