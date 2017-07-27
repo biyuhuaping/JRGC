@@ -470,6 +470,8 @@
                     cell.angleGoldView.angleString = dic[@"labelName"];
                     cell.angleGoldView.hidden = NO;
                     break;
+                }else{
+                  cell.angleGoldView.hidden = YES;
                 }
             }
         }else{

@@ -807,12 +807,12 @@
             case 2:
             {
                 NSString *str = [[_dataDict objectForKey:@"result"] objectSafeForKey:@"nmPrdClaimDetail"];
-                str = [UCFToolsMehod isNullOrNilWithString:str];
+                str = [str stringByReplacingOccurrencesOfString:@"\\n" withString:@"\n"];
                 if ([str isEqualToString:@""]) {
                     return 0;
                 }
                 CGSize size =  [Common getStrHeightWithStr:str AndStrFont:12 AndWidth:ScreenWidth - 30 AndlineSpacing:3];
-                return size.height;
+                return size.height + 20;
             }
                 break;
             default:
@@ -892,6 +892,7 @@
             UILabel *lbl = (UILabel*)[cell.contentView viewWithTag:100];
             NSDictionary *dic = [Common getParagraphStyleDictWithStrFont:12.0f WithlineSpacing:3.0];
             NSString *remarkStr = [UCFToolsMehod isNullOrNilWithString:[[_dataDict objectForKey:@"result"] objectForKey:@"nmPrdClaimDetail"]];
+            remarkStr = [remarkStr stringByReplacingOccurrencesOfString:@"\\n" withString:@"\n"];
             lbl.attributedText = [NSString getNSAttributedString:remarkStr labelDict:dic];
             
             return cell;
