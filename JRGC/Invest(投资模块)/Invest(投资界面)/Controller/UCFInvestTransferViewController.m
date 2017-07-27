@@ -42,7 +42,7 @@
 #pragma mark - 设置界面
 - (void)createUI {
     UCFTransferHeaderView *transferHeaderView = (UCFTransferHeaderView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFTransferHeaderView" owner:self options:nil] lastObject];
-    transferHeaderView.frame = CGRectMake(0, 0, ScreenWidth, 215);
+    transferHeaderView.frame = CGRectMake(0, 0, ScreenWidth, ScreenWidth /16*5 + 125);
     self.tableview.tableHeaderView = transferHeaderView;
     self.tableview.backgroundColor = UIColorWithRGB(0xebebee);
     transferHeaderView.delegate = self;
