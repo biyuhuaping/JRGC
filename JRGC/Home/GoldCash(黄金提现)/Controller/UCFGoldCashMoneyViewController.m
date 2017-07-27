@@ -16,7 +16,7 @@
 #import "UCFToolsMehod.h"
 #import "MjAlertView.h"
 #import "UCFCashTipView.h"
-@interface UCFGoldCashMoneyViewController () <UITableViewDataSource, UITableViewDelegate, UCFGoldCashThreeCellDelegate, UIAlertViewDelegate, UCFGoldRechargeCellDelegate, UCFCashTipViewDelegate>
+@interface UCFGoldCashMoneyViewController () <UITableViewDataSource, UITableViewDelegate, UCFGoldCashThreeCellDelegate, UIAlertViewDelegate, UCFGoldRechargeCellDelegate, UCFCashTipViewDelegate, MjAlertViewDelegate>
 @property (strong, nonatomic) NSMutableArray *dataArray;
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (weak, nonatomic) UCFGoldCashTwoCell *amoutCell;
@@ -281,16 +281,16 @@
     }
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (alertView.tag == 1000) {
-        [self.navigationController popViewControllerAnimated:YES];
-    }
-}
-
 - (void)beginPost:(kSXTag)tag
 {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+}
+
+- (void)mjalertView:(MjAlertView *)alertview didClickedButton:(UIButton *)clickedButton andClickedIndex:(NSInteger)index
+{
+    if (alertview.tag == 100) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 - (void)endPost:(id)result tag:(NSNumber *)tag
@@ -301,8 +301,8 @@
     NSString *rsttext = dic[@"message"];
     if (tag.intValue == kSXTagGoldCash) {
         if ([rstcode intValue] == 1) {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"提现申请已提交，请耐心等待" delegate:self cancelButtonTitle:@"确认" otherButtonTitles: nil];
-            alertView.tag = 1000;
+            MjAlertView *alertView = [[MjAlertView alloc] initGoldAlertTitle:@"提示" Message:@"提现申请已提交，请耐心等待" delegate:self];
+            alertView.tag = 100;
             [alertView show];
         }else {
             [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
