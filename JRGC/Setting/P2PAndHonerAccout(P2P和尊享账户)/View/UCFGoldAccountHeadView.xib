@@ -117,7 +117,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" tag="500" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3QI-Nw-rd3">
-                            <rect key="frame" x="69.5" y="15.5" width="13" height="13"/>
+                            <rect key="frame" x="67" y="15.5" width="13" height="13"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="13" id="2sD-qF-hud"/>
                                 <constraint firstAttribute="height" constant="13" id="Sb0-Hr-lyK"/>
@@ -166,7 +166,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" tag="501" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZcD-Zg-Ipj">
-                            <rect key="frame" x="307" y="15" width="13" height="13"/>
+                            <rect key="frame" x="304" y="15" width="13" height="13"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="13" id="eeI-iu-cuw"/>
                                 <constraint firstAttribute="width" constant="13" id="p1R-kw-Sar"/>
@@ -191,8 +191,8 @@
                         <constraint firstAttribute="bottom" secondItem="X3s-nZ-HHa" secondAttribute="bottom" constant="12" id="X9T-wa-o3t"/>
                         <constraint firstAttribute="bottom" secondItem="Abz-XP-xhx" secondAttribute="bottom" constant="12" id="XwB-Jp-DJ0"/>
                         <constraint firstItem="X3s-nZ-HHa" firstAttribute="leading" secondItem="I3a-Tr-OiG" secondAttribute="leading" id="hAC-yI-GTB"/>
-                        <constraint firstItem="3QI-Nw-rd3" firstAttribute="leading" secondItem="2sE-VC-ltr" secondAttribute="trailing" constant="5" id="i10-P5-0AZ"/>
-                        <constraint firstItem="ZcD-Zg-Ipj" firstAttribute="leading" secondItem="I3a-Tr-OiG" secondAttribute="trailing" constant="5" id="kCM-fa-1Qz"/>
+                        <constraint firstItem="3QI-Nw-rd3" firstAttribute="leading" secondItem="2sE-VC-ltr" secondAttribute="trailing" constant="2" id="i10-P5-0AZ"/>
+                        <constraint firstItem="ZcD-Zg-Ipj" firstAttribute="leading" secondItem="I3a-Tr-OiG" secondAttribute="trailing" constant="2" id="kCM-fa-1Qz"/>
                         <constraint firstAttribute="bottom" secondItem="D9b-Ap-0m3" secondAttribute="bottom" constant="12" id="kCX-f3-PsU"/>
                         <constraint firstItem="6Ar-Cy-Bq1" firstAttribute="centerY" secondItem="2sE-VC-ltr" secondAttribute="centerY" id="mmg-ve-xqG"/>
                         <constraint firstItem="3QI-Nw-rd3" firstAttribute="centerY" secondItem="2sE-VC-ltr" secondAttribute="centerY" id="nR3-Cv-mBF"/>
