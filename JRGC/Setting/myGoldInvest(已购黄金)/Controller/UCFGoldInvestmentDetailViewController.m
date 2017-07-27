@@ -12,6 +12,9 @@
 #import "UILabel+Misc.h"
 #import "UCFGoldDetailViewController.h"
 @interface UCFGoldInvestmentDetailViewController ()<UITableViewDataSource,UITableViewDelegate,UCFGoldInvestDetailCellDelegate>
+{
+    NSString *_contractnameStr;
+}
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic,strong)NSDictionary *dataDict;
 @property (nonatomic,strong)NSArray *dataDetailArray;
@@ -30,9 +33,7 @@
     [self addLeftButton];
     baseTitleLabel.text = @"已购详情";
     [self getGoldInvestmentDetailDataHTTPRequst];
-//    self.tableView.separatorInset =  UIEdgeInsetsMake(0, 15, 0, 0);
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    // Do any additional setup after loading the view from its nib.
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -226,17 +227,15 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (self.nmContractListArray.count > 0) {
+    if (self.nmContractListArray.count > 0 && indexPath.section == 2) {
         
         NSDictionary *dataDict  = [self.nmContractListArray objectAtIndex:indexPath.row];
         NSString *contractTemplateIdStr = [NSString stringWithFormat:@"%@",[dataDict objectSafeForKey:@"id"]];
+        _contractnameStr = [dataDict objectSafeForKey:@"contractName"];
         NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId",@"1", @"purchaseType",contractTemplateIdStr,@"contractTemplateId",nil];
         
         [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagGetGoldContractInfo owner:self signature:YES Type:SelectAccoutTypeGold];
-        
     }
-    
-    
 }
 #pragma 去标详情页面
 -(void)gotoGoldDetialVC
@@ -298,8 +297,8 @@
         if ( [dic[@"ret"] boolValue])
         {
             NSString *contractContentStr = [dataDict objectSafeForKey:@"contractContent"];
-            NSString *contractTitle = [dataDict objectSafeForKey:@"contractName"];
-            FullWebViewController *controller = [[FullWebViewController alloc] initWithHtmlStr:contractContentStr title:contractTitle];
+//            NSString *contractTitle = [dataDict objectSafeForKey:@"contractName"];
+            FullWebViewController *controller = [[FullWebViewController alloc] initWithHtmlStr:contractContentStr title:_contractnameStr];
             controller.baseTitleType = @"detail_heTong";
             [self.navigationController pushViewController:controller animated:YES];
         }
@@ -308,9 +307,6 @@
             [AuxiliaryFunc showAlertViewWithMessage:rsttext];
         }
     }
-
-
-
 }
 
 //请求失败
