@@ -159,9 +159,7 @@
             for (NSDictionary *dic in prdLabelsList) {
                 NSInteger labelPriority = [dic[@"labelPriority"] integerValue];
                 if (labelPriority > 1) {
-                    if ([dic[@"labelName"] rangeOfString:@"起投"].location == NSNotFound) {
                         [labelPriorityArr addObject:dic[@"labelName"]];
-                    }
                 }
             }
         }
