@@ -49,7 +49,7 @@
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-    self.goldenHeader.frame = CGRectMake(0, 0, ScreenWidth, 201);
+    self.goldenHeader.frame = CGRectMake(0, 0, ScreenWidth, ScreenWidth/16*5+101);
 }
 
 #pragma mark - 初始化UI
