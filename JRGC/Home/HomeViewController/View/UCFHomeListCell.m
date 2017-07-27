@@ -177,7 +177,7 @@
             }
             else {
                 self.circleProgressView.textColor = UIColorWithRGB(0x555555);
-                self.circleProgressView.progressText = @"认购";
+                self.circleProgressView.progressText = @"购买";
                 self.circleProgressView.pathFillColor = UIColorWithRGB(0xfc8f0e);
             }
         }
@@ -576,7 +576,7 @@
     else if (status == 1) {
         self.circleProgressView.textColor = UIColorWithRGB(0x555555);
         self.circleProgressView.pathFillColor = UIColorWithRGB(0xfc8f0e);
-        self.circleProgressView.progressText = @"认购";
+        self.circleProgressView.progressText = @"购买";
     }else if (status == 21){
         self.circleProgressView.progressText = @"暂停交易";
         self.circleProgressView.textColor = UIColorWithRGB(0x909dae);
