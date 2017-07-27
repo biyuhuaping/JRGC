@@ -582,7 +582,7 @@
 - (void)initTableViews
 {
 
-    _titleArray = [[NSArray alloc] initWithObjects:@"基础详情",@"认购记录", nil];
+    _titleArray = [[NSArray alloc] initWithObjects:@"基础详情",@"购买记录", nil];
 
     _twoTableview = [[UITableView alloc] initWithFrame:CGRectMake(0, ScreenHeight, ScreenWidth, ScreenHeight + 57  ) style:UITableViewStylePlain];
     _twoTableview.backgroundColor = [UIColor clearColor];

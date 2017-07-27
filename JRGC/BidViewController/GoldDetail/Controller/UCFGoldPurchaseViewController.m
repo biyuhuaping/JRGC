@@ -456,7 +456,7 @@
         }
 //        cell.accoutType = SelectAccoutTypeGold;
         [cell setGoldInvestItemInfo:self.goldModel];
-        cell.realGoldPriceLab.text = [NSString stringWithFormat:@"实时金价(每克)¥%.2f",[ToolSingleTon sharedManager].readTimePrice]; //
+        cell.realGoldPriceLab.text = [NSString stringWithFormat:@"实时金价(元/克)¥%.2lf",[ToolSingleTon sharedManager].readTimePrice]; //
         _prdLabelsList = [[_dataDic objectSafeDictionaryForKey:@"nmPrdClaimInfo"] objectSafeArrayForKey:@"prdLabelsList"];
         if (_prdLabelsList.count > 0) {
             for (NSDictionary *dic in _prdLabelsList) {
