@@ -54,6 +54,7 @@
 @property (strong, nonatomic) NSString *shareUrl;
 
 @property (strong, nonatomic) UIProgressView *progressView; //webView的进度条
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topConSpace;
 
 
 @end
@@ -410,12 +411,13 @@
             UIImageWriteToSavedPhotosAlbum(savedImage, self, @selector(image:didFinishSavingWithError:contextInfo:), (__bridge void *)self);
         } else if ([nativeData[@"action"] isEqualToString:@"show_header"]) {
             [self.navigationController setNavigationBarHidden:NO animated:NO];
-            [self.view.window setNeedsLayout];
-            [self.view.window layoutIfNeeded];
+            self.webView.translatesAutoresizingMaskIntoConstraints = false;
+            self.topConSpace.constant = 0;
         }else if ([nativeData[@"action"] isEqualToString:@"hide_header"]) {
+            self.webView.translatesAutoresizingMaskIntoConstraints = false;
             [self.navigationController setNavigationBarHidden:YES animated:NO];
-            [self.view.window setNeedsLayout];
-            [self.view.window layoutIfNeeded];
+            self.topConSpace.constant = 0;
+
         }
         //----------------------------------------------------------------------------------------------------qyy
         
