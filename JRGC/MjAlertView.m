@@ -820,6 +820,9 @@
 }
 - (void)closeBtnClicked:(UIButton *)button
 {
+    if ([self.delegate respondsToSelector:@selector(mjalertView:didClickedButton:andClickedIndex:)]) {
+        [self.delegate mjalertView:self didClickedButton:button andClickedIndex:button.tag];
+    }
      [self hide];
 }
 - (void)btnClicked:(UIButton *)button
