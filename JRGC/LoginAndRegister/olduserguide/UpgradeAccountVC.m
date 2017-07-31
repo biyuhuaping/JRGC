@@ -79,21 +79,31 @@
     [_customLabel1 setFontColor:UIColorWithRGB(0x4aa1f9) string:@"获取语音验证码"];
     
     if (self.accoutType == SelectAccoutTypeP2P) {
-         _customLabel2.text = @"开通即视为我已阅读并同意《资金存管三方协议》、《信息咨询服务协议》";
-        [_customLabel2 setFontColor:UIColorWithRGB(0x4aa1f9) string:@"《资金存管三方协议》、《信息咨询服务协议》"];
-//        [_customLabel2 setFontColor:UIColorWithRGB(0x4aa1f9) string:@"《资金存管三方协议》"];
         
+        NSString *showStr = @"开通即视为我已阅读并同意《资金存管三方协议》";
+        BOOL isShow = NO;
+        if (isShow) {
+            showStr = @"开通即视为我已阅读并同意《CFCA数字证书服务协议》《资金存管三方协议》";
+        }
+         _customLabel2.text = showStr;
         __weak typeof(self) weakSelf = self;
+        if (isShow) {
+            [_customLabel2 setFontColor:UIColorWithRGB(0x4aa1f9) string:@"《CFCA数字证书服务协议》《资金存管三方协议》"];
+            [_customLabel2 addLinkString:@"《CFCA数字证书服务协议》" block:^(ZBLinkLabelModel *linkModel) {
+                FullWebViewController *webController = [[FullWebViewController alloc] initWithWebUrl:COUNSELING title:@"CFCA数字证书服务协议"];
+                webController.baseTitleType = @"specialUser";
+                [weakSelf.navigationController pushViewController:webController animated:YES];
+            }];
+        } else {
+            [_customLabel2 setFontColor:UIColorWithRGB(0x4aa1f9) string:@"《资金存管三方协议》"];
+        }
+        
         [_customLabel2 addLinkString:@"《资金存管三方协议》" block:^(ZBLinkLabelModel *linkModel) {
             FullWebViewController *webController = [[FullWebViewController alloc] initWithWebUrl:TRUSTEESHIP title:@"资金存管三方协议"];
             webController.baseTitleType = @"specialUser";
             [weakSelf.navigationController pushViewController:webController animated:YES];
         }];
-        [_customLabel2 addLinkString:@"《信息咨询服务协议》" block:^(ZBLinkLabelModel *linkModel) {
-            FullWebViewController *webController = [[FullWebViewController alloc] initWithWebUrl:COUNSELING title:@"信息咨询服务协议"];
-            webController.baseTitleType = @"specialUser";
-            [weakSelf.navigationController pushViewController:webController animated:YES];
-        }];
+
         
     } else {
         _customLabel2.text = @"开通即视为我已阅读并同意《资金账户服务三方协议》";
