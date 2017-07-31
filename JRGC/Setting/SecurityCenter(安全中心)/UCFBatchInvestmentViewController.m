@@ -55,7 +55,7 @@ static NSString *thirdStr = @"自动投标授权已经开启";
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    baseTitleLabel.text = @"自动投标授权";
+    baseTitleLabel.text = @"批量出借授权";
     [self addRightButtonWithImage:[UIImage imageNamed:@"icon_question.png"]];
 
     [self addLeftButton];
@@ -105,7 +105,7 @@ static NSString *thirdStr = @"自动投标授权已经开启";
     view1.backgroundColor = [UIColor whiteColor];
     view1.iconName = @"auto_fast";
     view1.title = @"投标更快捷";
-    view1.des = @"开启自动投标授权，即可在批量投标中使用批量出借功能，快速出借多个小额项目。";
+    view1.des = @"开启批量出借授权，即可在批量投标中使用批量出借功能，快速出借多个小额项目。";
     [_baseScrollView addSubview:view1];
     [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:view1 isTop:YES];
     
@@ -122,7 +122,7 @@ static NSString *thirdStr = @"自动投标授权已经开启";
     [_baseScrollView addSubview:view2];
     [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:view2 isTop:NO];
     
-    NSString *totalStr = [NSString stringWithFormat:@"本人同意签署《自动投标授权协议》"];
+    NSString *totalStr = [NSString stringWithFormat:@"本人同意签署《批量出借咨询与服务协议》"];
     NZLabel *label1 = [[NZLabel alloc] init];
     label1.font = [UIFont systemFontOfSize:12.0f];
     CGSize size = [Common getStrHeightWithStr:totalStr AndStrFont:12 AndWidth:ScreenWidth - 25];
