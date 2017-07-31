@@ -727,7 +727,7 @@
         TradePasswordVC * tradePasswordVC = [[TradePasswordVC alloc]initWithNibName:@"TradePasswordVC" bundle:nil];
         tradePasswordVC.title = @"修改交易密码";
         tradePasswordVC.isCompanyAgent = [UserInfoSingle sharedManager].companyAgent;
-        tradePasswordVC.site = [NSString stringWithFormat:@"%ld",self.accoutType];
+//        tradePasswordVC.site = [NSString stringWithFormat:@"%ld",self.accoutType];
         tradePasswordVC.accoutType = self.accoutType;
         [self.navigationController pushViewController:tradePasswordVC  animated:YES];
         return NO;

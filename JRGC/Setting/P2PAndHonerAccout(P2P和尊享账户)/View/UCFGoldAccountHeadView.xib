@@ -98,14 +98,14 @@
                                 <constraint firstAttribute="height" constant="0.5" id="4Wg-TQ-ETJ"/>
                             </constraints>
                         </view>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="买入均价(每克)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I3a-Tr-OiG">
-                            <rect key="frame" x="219" y="14" width="83" height="15"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="买入均价(元/克)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I3a-Tr-OiG">
+                            <rect key="frame" x="219" y="14" width="87" height="15"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="实时金价(每克)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Ar-Cy-Bq1">
-                            <rect key="frame" x="98" y="14.5" width="83" height="14.5"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="实时金价(元/克)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Ar-Cy-Bq1">
+                            <rect key="frame" x="98" y="14.5" width="87" height="15"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
@@ -128,7 +128,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" tag="2000" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RaO-Q4-hiX" customClass="RotationButton">
-                            <rect key="frame" x="186" y="14.5" width="14" height="14"/>
+                            <rect key="frame" x="190" y="14.5" width="14" height="14"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="14" id="D6I-Ux-uvb"/>
                                 <constraint firstAttribute="height" constant="14" id="Tka-U1-VtQ"/>
@@ -166,7 +166,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" tag="501" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZcD-Zg-Ipj">
-                            <rect key="frame" x="304" y="15" width="13" height="13"/>
+                            <rect key="frame" x="308" y="15" width="13" height="13"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="13" id="eeI-iu-cuw"/>
                                 <constraint firstAttribute="width" constant="13" id="p1R-kw-Sar"/>

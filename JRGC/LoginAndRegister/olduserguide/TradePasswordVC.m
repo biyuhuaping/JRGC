@@ -28,6 +28,7 @@
 @property (strong, nonatomic) UITextField *textField4;
 @property (assign, nonatomic) BOOL         isVoiceMsg;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *tableViewHeight;
+@property (copy, nonatomic) NSString *site;
 
 @end
 
@@ -36,7 +37,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self addLeftButton];
-    
+    self.site = self.accoutType == SelectAccoutTypeP2P ? @"1" : @"2";
     if([self.title isEqualToString:@"修改交易密码"] ){
         baseTitleLabel.text = @"验证身份";
         [self.submitDataButton setTitle:@"修改交易密码" forState:UIControlStateNormal];

@@ -100,7 +100,7 @@
     }
 }
 - (IBAction)recoverBtnClicked:(UIButton *)sender {
-    MjAlertView *alertView = [[MjAlertView alloc] initGoldAlertTitle:@"总待收黄金" Message:@"总待收黄金=已购黄金+到期赠金" delegate:self];
+    MjAlertView *alertView = [[MjAlertView alloc] initGoldAlertTitle:@"总待收黄金" Message:@"总待收黄金=已购黄金+到期收益" delegate:self];
     [alertView show];
 }
 - (void)layoutSubviews

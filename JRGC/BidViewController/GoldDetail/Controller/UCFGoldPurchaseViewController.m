@@ -159,9 +159,7 @@
             for (NSDictionary *dic in prdLabelsList) {
                 NSInteger labelPriority = [dic[@"labelPriority"] integerValue];
                 if (labelPriority > 1) {
-                    if ([dic[@"labelName"] rangeOfString:@"起投"].location == NSNotFound) {
                         [labelPriorityArr addObject:dic[@"labelName"]];
-                    }
                 }
             }
         }
@@ -458,7 +456,7 @@
         }
 //        cell.accoutType = SelectAccoutTypeGold;
         [cell setGoldInvestItemInfo:self.goldModel];
-        cell.realGoldPriceLab.text = [NSString stringWithFormat:@"实时金价(每克)¥%.2f",[ToolSingleTon sharedManager].readTimePrice]; //
+        cell.realGoldPriceLab.text = [NSString stringWithFormat:@"实时金价(元/克)¥%.2lf",[ToolSingleTon sharedManager].readTimePrice]; //
         _prdLabelsList = [[_dataDic objectSafeDictionaryForKey:@"nmPrdClaimInfo"] objectSafeArrayForKey:@"prdLabelsList"];
         if (_prdLabelsList.count > 0) {
             for (NSDictionary *dic in _prdLabelsList) {
