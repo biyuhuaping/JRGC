@@ -63,7 +63,6 @@
 - (void)pushGoldAuthorizationType:(SelectAccoutType)type nav:(UINavigationController *)nav sourceVC:(NSString *)soucreFrom
 {
     UCFGoldAuthorizationViewController * bankDepositoryAccountVC =[[UCFGoldAuthorizationViewController alloc ]initWithNibName:@"UCFGoldAuthorizationViewController" bundle:nil];
-    //    bankDepositoryAccountVC.openStatus = [UserInfoSingle sharedManager].openStatus;
     bankDepositoryAccountVC.sourceVc = soucreFrom;
     bankDepositoryAccountVC.accoutType = type;
     [nav pushViewController:bankDepositoryAccountVC animated:YES];
@@ -81,19 +80,15 @@
     if (type == SelectAccoutTypeHoner) {
         if (step == 1) {
             step = 2;
-//            [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID]} tag:kSXTagGetUserAgreeState owner:self signature:YES Type:SelectAccoutTypeHoner];
         }
             UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:step];
-            vc.site = @"2";
             vc.accoutType = SelectAccoutTypeHoner;
             [nav pushViewController:vc animated:YES];
     } else {
         if (step == 1 ) {
             step = 2;
-//             [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID]} tag:KSXTagP2pISAuthorization owner:self signature:YES Type:SelectAccoutTypeP2P];
         }
             UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:step];
-            vc.site = @"1";
             vc.accoutType = SelectAccoutTypeP2P;
             [nav pushViewController:vc animated:YES];
         }
@@ -116,7 +111,7 @@
                     [tmpNav pushViewController:bankDepositoryAccountVC animated:YES];
                 } else {
                     UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:2];
-                    vc.site = @"2";
+//                    vc.site = @"2";
                     vc.accoutType = SelectAccoutTypeHoner;
                     [tmpNav pushViewController:vc animated:YES];
                 }
@@ -137,7 +132,7 @@
                     [tmpNav pushViewController:bankDepositoryAccountVC animated:YES];
                 } else { //已经授权
                     UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:2];
-                    vc.site = @"2";
+//                    vc.site = @"2";
                     vc.accoutType = SelectAccoutTypeHoner;
                     [tmpNav pushViewController:vc animated:YES];
                 }

@@ -373,7 +373,7 @@
             TradePasswordVC * tradePasswordVC = [[TradePasswordVC alloc]initWithNibName:@"TradePasswordVC" bundle:nil];
             tradePasswordVC.title = titleStr;
             tradePasswordVC.isCompanyAgent = [[NSUserDefaults standardUserDefaults] boolForKey: @"isCompanyAgentType"];
-            tradePasswordVC.site = [NSString stringWithFormat:@"%d",self.accoutType];
+//            tradePasswordVC.site = [NSString stringWithFormat:@"%d",self.accoutType];
             tradePasswordVC.accoutType = self.accoutType;
             [self.navigationController pushViewController:tradePasswordVC  animated:YES];
         }else{//设置交易密码

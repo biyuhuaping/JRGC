@@ -109,15 +109,15 @@
     [self.passWordVC.view endEditing:YES];
     
     NSString *messege = @"确定返回？";
-    NSInteger step = [_site isEqualToString:@"1"] ? [UserInfoSingle sharedManager].openStatus : [UserInfoSingle sharedManager].enjoyOpenStatus;
+    NSInteger step = self.accoutType == SelectAccoutTypeP2P ? [UserInfoSingle sharedManager].openStatus : [UserInfoSingle sharedManager].enjoyOpenStatus;
     switch (step) {
         case 1://未开户-->>>新用户开户
         case 2:{//已开户 --->>>老用户(白名单)开户
-            messege = [_site isEqualToString:@"1"] ? @"未开通微金徽商存管不能投标、提现、充值。" : @"未开通尊享徽商存管不能投标、提现、充值。" ;
+            messege = self.accoutType == SelectAccoutTypeP2P ? @"未开通微金徽商存管不能投标、提现、充值。" : @"未开通尊享徽商存管不能投标、提现、充值。" ;
         }
             break;
         case 3:{//已绑卡-->>>去设置交易密码页面
-            messege = [_site isEqualToString:@"1"] ? @"未设置微金交易密码不能投标、提现。" : @"未设置尊享交易密码不能投标、提现。";
+            messege = self.accoutType == SelectAccoutTypeP2P ? @"未设置微金交易密码不能投标、提现。" : @"未设置尊享交易密码不能投标、提现。";
         }
             break;
     }
@@ -172,13 +172,13 @@
     self.currentVC = self.openVC;
     self.upgradeVC = [[UpgradeAccountVC alloc] initWithNibName:@"UpgradeAccountVC" bundle:nil];
     self.upgradeVC.db = self;
-    self.upgradeVC.site = _site;
+//    self.upgradeVC.site = _site;
     self.upgradeVC.accoutType = self.accoutType;
     [self addChildViewController:self.upgradeVC];
     
     self.passWordVC = [[TradePasswordVC alloc] initWithNibName:@"TradePasswordVC" bundle:nil];
     self.passWordVC.db = self;
-    self.passWordVC.site = _site;
+//    self.passWordVC.site = _site;
     self.passWordVC.accoutType = self.accoutType;
     [self addChildViewController:self.passWordVC];
 }
@@ -453,7 +453,7 @@
 }
 
 - (void)showDepositoryView {
-    if ([self.site intValue] == 1) {
+    if (self.accoutType == SelectAccoutTypeP2P) {
         baseTitleLabel.text = @"开通微金徽商存管";
     }else{
         baseTitleLabel.text = @"开通尊享徽商存管";

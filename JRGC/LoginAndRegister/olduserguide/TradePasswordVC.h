@@ -15,5 +15,5 @@
 @property (strong, nonatomic) NSString *idCardNo;       //身份证号
 
 @property (assign, nonatomic) BOOL isCompanyAgent;//是否是机构用户
-@property (copy, nonatomic)NSString     *site; //徽商还是p2p
+//@property (copy, nonatomic)NSString     *site; //徽商还是p2p
 @end
