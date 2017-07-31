@@ -13,9 +13,11 @@
 #import "MJRefresh.h"
 
 #import "UCFHomeListCell.h"
+#import "UCFHomeListNo2Cell.h"
+#import "UCFHomeInvestCell.h"
 #import "UCFHomeListHeaderSectionView.h"
 
-@interface UCFHomeListViewController () <UITableViewDelegate, UITableViewDataSource, HomeListViewPresenterCallBack, UCFHomeListHeaderSectionViewDelegate, UCFHomeListCellDelegate>
+@interface UCFHomeListViewController () <UITableViewDelegate, UITableViewDataSource, HomeListViewPresenterCallBack, UCFHomeListHeaderSectionViewDelegate, UCFHomeListCellDelegate, UCFHomeInvestCellDelegate>
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) UCFHomeListPresenter *presenter;
 @end
@@ -34,6 +36,7 @@
         
         self.tableView.backgroundColor = UIColorWithRGB(0xebebee);
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        self.tableView.showsVerticalScrollIndicator = NO;
         
         self.presenter = presenter;
         self.presenter.view = self;//将V和P进行绑定(这里因为V是系统的TableView 无法简单的声明一个view属性 所以就绑定到TableView的持有者上面)
@@ -67,17 +70,41 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *cellId = @"homeListCell";
-    UCFHomeListCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
-    if (nil == cell) {
-        cell = (UCFHomeListCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeListCell" owner:self options:nil] lastObject];
-    }
-    cell.tableView = tableView;
-    cell.delegate = self;
     UCFHomeListGroupPresenter *groupPresenter = [self.presenter.allDatas objectAtIndex:indexPath.section];
-    cell.presenter = [groupPresenter.group.prdlist objectAtIndex:indexPath.row];
-    cell.indexPath = indexPath;
-    return cell;
+    UCFHomeListCellPresenter *cellPresenter = [groupPresenter.group.prdlist objectAtIndex:indexPath.row];
+    if (cellPresenter.modelType == UCFHomeListCellModelTypeDefault) {
+        static NSString *cellId = @"homeListCell";
+        UCFHomeListCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+        if (nil == cell) {
+            cell = (UCFHomeListCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeListCell" owner:self options:nil] lastObject];
+        }
+        cell.tableView = tableView;
+        cell.delegate = self;
+        cell.presenter = cellPresenter;
+        cell.indexPath = indexPath;
+        return cell;
+    }
+    else if (cellPresenter.modelType == UCFHomeListCellModelTypeOneImageTransfer || cellPresenter.modelType == UCFHomeListCellModelTypeOneImageBatchCycle || cellPresenter.modelType == UCFHomeListCellModelTypeOneImageBatchLending) {
+        static NSString *cellId = @"homeListCell2";
+        UCFHomeListNo2Cell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+        if (nil == cell) {
+            cell = (UCFHomeListNo2Cell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeListNo2Cell" owner:self options:nil] lastObject];
+        }
+        cell.presenter = cellPresenter;
+        return cell;
+    }
+    else if (cellPresenter.modelType == UCFHomeListCellModelTypeInvest) {
+        static NSString *cellId = @"homeListInvestCell";
+        UCFHomeInvestCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+        if (nil == cell) {
+            cell = (UCFHomeInvestCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeInvestCell" owner:self options:nil] lastObject];
+            cell.delegate = self;
+        }
+        cell.indexPath = indexPath;
+        cell.presenter = cellPresenter;
+        return cell;
+    }
+    return nil;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -98,6 +125,13 @@
         return nil;
     }
     view.presenter = groupPresenter;
+    if (section == 0) {
+        view.honerLabel.hidden = NO;
+        view.honerLabel.text = groupPresenter.group.desc;
+    }
+    else {
+        view.honerLabel.hidden = YES;
+    }
     return view;
 }
 
@@ -138,7 +172,7 @@
         return 0.001;
     }
     else {
-        if (section == 4) {
+        if (section == 5) {
             return 0.001;
         }
         return 8;
@@ -199,6 +233,12 @@
             [self.delegate homeList:self tableView:self.tableView didClickedWithModel:nil withType:UCFHomeListTypeGlodMore];
         }
     }
+}
+
+#pragma mark - 工厂邀请cell的代理方法
+- (void)homeInvestCell:(UCFHomeInvestCell *)homeInvestCell didClickedInvestButtonAtIndexPath:(NSIndexPath *)indexPath
+{
+    
 }
 
 #pragma mark - 刷新数据

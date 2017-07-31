@@ -21,6 +21,7 @@
 - (NSString *)repayModeText;
 - (NSString *)repayPeriodtext;
 - (NSString *)minInvest;
+- (NSString *)repayPeriod;
 - (NSString *)availBorrowAmount;
 - (NSString *)platformSubsidyExpense;
 - (NSString *)guaranteeCompany;

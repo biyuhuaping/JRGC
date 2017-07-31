@@ -54,6 +54,11 @@
     return self.item.repayPeriodtext;
 }
 
+- (NSString *)repayPeriod
+{
+    return self.item.repayPeriod;
+}
+
 - (NSString *)minInvest
 {
     if ([self.item.type isEqualToString:@"3"]) {
@@ -115,6 +120,9 @@
 {
     if (self.item.moedelType == UCFHomeListCellModelTypeDefault) {
         return 95.0;
+    }
+    else if (self.item.moedelType == UCFHomeListCellModelTypeInvest) {
+        return 85.0;
     }
     else {
         return (ScreenWidth - 20) / CELLRATE + 15;

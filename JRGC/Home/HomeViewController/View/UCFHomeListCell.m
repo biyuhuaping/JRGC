@@ -30,28 +30,14 @@
 @property (weak, nonatomic) IBOutlet UILabel *repayModelLabel;
 @property (weak, nonatomic) IBOutlet UILabel *startMoneyLabel;
 @property (weak, nonatomic) IBOutlet UILabel *remainLabel;
-
-@property (weak, nonatomic) IBOutlet UIView *oneImageView;
-@property (weak, nonatomic) IBOutlet UIImageView *oneImageBackView;
-@property (weak, nonatomic) IBOutlet UIView *titleBackView;
-@property (weak, nonatomic) IBOutlet UIView *numBackView;
-@property (weak, nonatomic) IBOutlet UILabel *oneImageTitleLabel;
-@property (weak, nonatomic) IBOutlet UILabel *oneImageDescribeLabel;
-@property (weak, nonatomic) IBOutlet UILabel *oneImageNumLabel;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *numBackViewW;
 @property (weak, nonatomic) IBOutlet UIView *proSignBackView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *proSignBackViewWidth;
 @property (weak, nonatomic) IBOutlet UILabel *proSignLabel;
-
 
 @property (weak, nonatomic) IBOutlet UIView *upSegLine;
 @property (weak, nonatomic) IBOutlet UIView *downSegLine;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *upLineLeftSpace;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *downLineLeftSpace;
-
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *oneImageUpHeight;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *oneImageDownHeight;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *signViewWidth;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *annurateLabelW;
 
 @end
@@ -73,8 +59,6 @@
     self.circleProgressView.pathBackColor = UIColorWithRGB(0xcfd5d7);
     self.circleProgressView.pathFillColor = UIColorWithRGB(0xfa4d4c);
     self.circleProgressView.strokeWidth = 3;
-    self.oneImageBackView.layer.cornerRadius = 3;
-    self.oneImageBackView.clipsToBounds = YES;
 }
 
 - (void)setPresenter:(UCFHomeListCellPresenter *)presenter
@@ -82,7 +66,6 @@
     _presenter = presenter;
     if (presenter.modelType == UCFHomeListCellModelTypeDefault
         ) {
-        self.oneImageView.hidden = YES;
         self.proName.text = presenter.proTitle;
         self.rateLabel.text = presenter.annualRate;
         if ([presenter.item.type isEqualToString:@"3"]) {
@@ -233,29 +216,8 @@
             self.proSignBackViewWidth.constant = 0;
         }
     }
-    else if (presenter.modelType == UCFHomeListCellModelTypeOneImageBatchLending || presenter.modelType == UCFHomeListCellModelTypeOneImageTransfer)  {
-        self.oneImageView.hidden = NO;
-        self.oneImageNumLabel.hidden = NO;
-        self.titleBackView.hidden = NO;
-        self.numBackView.hidden = NO;
-        for (UIView *view in self.titleBackView.subviews) {
-            view.hidden = NO;
-        }
-        self.oneImageBackView.image = [UIImage imageNamed:self.presenter.item.backImage];
-        self.oneImageTitleLabel.text = presenter.proTitle;
-        self.oneImageDescribeLabel.text = presenter.type;
-    }
-    else if (presenter.modelType == UCFHomeListCellModelTypeOneImageBatchCycle) {
-        self.oneImageView.hidden = NO;
-        self.titleBackView.hidden = YES;
-        for (UIView *view in self.titleBackView.subviews) {
-            view.hidden = YES;
-        }
-        self.numBackView.hidden = YES;
-        self.oneImageBackView.image = [UIImage imageNamed:self.presenter.item.backImage];
-    }
-    
 }
+
 - (IBAction)cyclePressClicked:(UIButton *)sender {
     if ([self.delegate respondsToSelector:@selector(homelistCell:didClickedProgressViewWithPresenter:)]) {
         [self.delegate homelistCell:self didClickedProgressViewWithPresenter:self.presenter.item];
@@ -319,38 +281,11 @@
             self.proSignBackView.backgroundColor = UIColorWithRGB(0xfd4d4c);
         }
     }
-    else if (self.presenter.modelType == UCFHomeListCellModelTypeOneImageBatchLending)  {
-        self.oneImageUpHeight.constant = 10;
-        self.oneImageDownHeight.constant = 10;
-        self.oneImageNumLabel.text = self.presenter.item.totalCount;
-    }
-    else if (self.presenter.modelType == UCFHomeListCellModelTypeOneImageTransfer) {
-        self.oneImageNumLabel.text = self.presenter.transferNum;
-        self.oneImageUpHeight.constant = 10;
-        self.oneImageDownHeight.constant = 5;
-    }
-    else if (self.presenter.modelType == UCFHomeListCellModelTypeOneImageBatchCycle) {
-        self.oneImageUpHeight.constant = 5;
-        self.oneImageDownHeight.constant = 10;
-    }
-    self.oneImageTitleLabel.text = self.presenter.proTitle;
-    self.oneImageDescribeLabel.text = self.presenter.type;
-    
-    if (self.oneImageNumLabel.text.length == 1) {
-        self.numBackViewW.constant = 22;
-    }
-    else if (self.oneImageNumLabel.text.length == 2) {
-        self.numBackViewW.constant = 32;
-    }
-    else if (self.oneImageNumLabel.text.length == 3) {
-        self.numBackViewW.constant = 43;
-    }
 }
 
 - (void)setMicroMoneyModel:(UCFMicroMoneyModel *)microMoneyModel
 {
     _microMoneyModel = microMoneyModel;
-    self.oneImageView.hidden = YES;
     self.proName.text = microMoneyModel.prdName;
     self.rateLabel.text = [NSString stringWithFormat:@"%@%%", microMoneyModel.annualRate];
     self.timeLabel.text = microMoneyModel.repayPeriodtext;
@@ -450,7 +385,6 @@
 - (void)setHonerListModel:(UCFMicroMoneyModel *)microMoneyModel
 {
     _microMoneyModel = microMoneyModel;
-    self.oneImageView.hidden = YES;
     self.proName.text = microMoneyModel.prdName;
     self.rateLabel.text = [NSString stringWithFormat:@"%@%%", microMoneyModel.annualRate];
     self.timeLabel.text = microMoneyModel.repayPeriodtext;
@@ -546,7 +480,6 @@
 {
     _goldModel = goldModel;
     self.rateLabel.font = [UIFont systemFontOfSize:15];
-    self.oneImageView.hidden = YES;
     self.proName.text = goldModel.nmPrdClaimName;
     self.rateLabel.text = [NSString stringWithFormat:@"%@克/100克", goldModel.annualRate];
     [self.rateLabel setFont:[UIFont systemFontOfSize:10] string:@"克/100克"];
