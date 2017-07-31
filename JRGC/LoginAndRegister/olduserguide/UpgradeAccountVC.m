@@ -78,7 +78,7 @@
     [_customLabel1 addGestureRecognizer:tap];
     [_customLabel1 setFontColor:UIColorWithRGB(0x4aa1f9) string:@"获取语音验证码"];
     
-    if ([_site isEqualToString:@"1"]) {
+    if (self.accoutType == SelectAccoutTypeP2P) {
          _customLabel2.text = @"开通即视为我已阅读并同意《资金存管三方协议》、《信息咨询服务协议》";
         [_customLabel2 setFontColor:UIColorWithRGB(0x4aa1f9) string:@"《资金存管三方协议》、《信息咨询服务协议》"];
 //        [_customLabel2 setFontColor:UIColorWithRGB(0x4aa1f9) string:@"《资金存管三方协议》"];
@@ -438,7 +438,7 @@
     if (indexPath.row == 3) {
         UCFHuiShangChooseBankViewController *vc = [[UCFHuiShangChooseBankViewController alloc] initWithNibName:@"UCFHuiShangChooseBankViewController" bundle:nil];
         vc.bankDelegate = self;
-        vc.site = _site;
+//        vc.site = _site;
         vc.accoutType = self.accoutType;
         [self.navigationController pushViewController:vc animated:YES];
     }
@@ -687,7 +687,7 @@
     else if (tag.intValue == kSXTagOpenAccount) {//徽商绑定银行卡
         if ([ret boolValue]) {
             DBLOG(@"%@",dic[@"data"]);
-            if ([_site isEqualToString:@"1"]) {
+            if (self.accoutType == SelectAccoutTypeP2P) {
                 [UserInfoSingle sharedManager].openStatus = 3;
             } else {
                 [UserInfoSingle sharedManager].enjoyOpenStatus = 3;
@@ -704,7 +704,7 @@
             
             //提交信息成功之后，显示开户成功页面
             AccountSuccessVC *acVC = [[AccountSuccessVC alloc]initWithNibName:@"AccountSuccessVC" bundle:nil];
-            acVC.site = self.site;
+//            acVC.site = self.site;
             acVC.fromVC = self.fromVC;
             acVC.view.frame = self.view.bounds;
             acVC.db = self.db;
