@@ -607,7 +607,7 @@
         [alert show];
         return;
     }
-    if ([UserInfoSingle sharedManager].isAutoBid) {
+    if (![UserInfoSingle sharedManager].isAutoBid) {
         UCFBatchInvestmentViewController *batchInvestment = [[UCFBatchInvestmentViewController alloc] init];
         batchInvestment.isStep = 1;
         batchInvestment.accoutType = SelectAccoutTypeP2P;
