@@ -387,29 +387,24 @@
         }
         else if ([nativeData[@"action"] isEqualToString:@"share"])//放心花添加分享点击事件
         {
-            NSDictionary *dic = [nativeData[@"value"] objectFromJSONString];
-            weakSelf.dicForShare = [UCFCycleModel  getCycleModelByDataDict:dic];
-            weakSelf.dicForShare.thumb = [dic objectSafeForKey:@"image"];
-            weakSelf.dicForShare.url = [dic objectSafeForKey:@"link"];
-            [weakSelf clickRightBtn]; //放心花中的分享
+            
+            [weakSelf goToShare:nativeData];
+
         }
         else if ([nativeData[@"action"] isEqualToString:@"clipboard"])//放心花---复制到剪切板上
         {
             UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
             [pasteboard setString:[nativeData objectSafeForKey:@"value"]];
             [AuxiliaryFunc showToastMessage:@"已复制到剪切板" withView:weakSelf.view];
-        }else if([nativeData[@"action"] isEqualToString:@"get_factory_code"]){ //放心花---返回数据 工场码
+        }
+        else if([nativeData[@"action"] isEqualToString:@"get_factory_code"]){ //放心花---返回数据 工场码
             
-            NSString *gcmCode = [[NSUserDefaults standardUserDefaults] objectForKey:@"gcmCode"];
-            if(gcmCode){ //返回数据 工场码
-                [_bridge callHandler:@"jsHandler" data:@{@"type": @"factory_code",@"value":gcmCode} responseCallback:^(id responseData) {
-                    DBLOG(@"工场码返回成功");
-                }];
-            }
+            [weakSelf goTofactoryCode];
         }
         else if([nativeData[@"action"] isEqualToString:@"save_fxh_qrcode"]){ //放心花---保存 工场码
             UIImage *savedImage = [UIImage imageNamed:@"loanCode"];
-            UIImageWriteToSavedPhotosAlbum(savedImage, weakSelf, @selector(image:didFinishSavingWithError:contextInfo:), (__bridge void *)self);
+            
+            UIImageWriteToSavedPhotosAlbum(savedImage, weakSelf, @selector(image:didFinishSavingWithError:contextInfo:), (__bridge void *)weakSelf);
         } else if ([nativeData[@"action"] isEqualToString:@"show_header"]) {
             [weakSelf.navigationController setNavigationBarHidden:NO animated:NO];
             weakSelf.webView.translatesAutoresizingMaskIntoConstraints = false;
@@ -444,7 +439,23 @@
     }
     NSLog(@"image = %@, error = %@, contextInfo = %@", image, error, contextInfo);
 }
-
+- (void)goTofactoryCode
+{
+    NSString *gcmCode = [[NSUserDefaults standardUserDefaults] objectForKey:@"gcmCode"];
+    if(gcmCode){ //返回数据 工场码
+        [_bridge callHandler:@"jsHandler" data:@{@"type": @"factory_code",@"value":gcmCode} responseCallback:^(id responseData) {
+            DBLOG(@"工场码返回成功");
+        }];
+    }
+}
+- (void)goToShare:(NSDictionary *)nativeData;
+{
+    NSDictionary *dic = [nativeData[@"value"] objectFromJSONString];
+    self.dicForShare = [UCFCycleModel  getCycleModelByDataDict:dic];
+    self.dicForShare.thumb = [dic objectSafeForKey:@"image"];
+    self.dicForShare.url = [dic objectSafeForKey:@"link"];
+    [self clickRightBtn]; //放心花中的分享
+}
 - (void)getTokenId
 {
     NSString *jg_ckie = [UserInfoSingle sharedManager].jg_ckie;
