@@ -35,12 +35,27 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 
 }
+
+- (void)setIsRisk:(BOOL)isRisk
+{
+    _isRisk = isRisk;
+    [[NSUserDefaults standardUserDefaults] setBool:isRisk forKey:@"isRisk"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (void)setIsAutoBid:(BOOL)isAutoBid
+{
+    _isAutoBid = isAutoBid;
+    [[NSUserDefaults standardUserDefaults] setBool:isAutoBid forKey:@"isAutoBid"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 - (void)setIsSpecial:(BOOL)isSpecial {
     _isSpecial = isSpecial;
 //    [[NSUserDefaults standardUserDefaults] setValue:isSpecial forKey:@"isSpecial"];
 //    [[NSUserDefaults standardUserDefaults] synchronize];
-    
 }
+
 -(void)setCompanyAgent:(BOOL)companyAgent{
     _companyAgent = companyAgent;
 }
@@ -79,6 +94,8 @@
     self.enjoyOpenStatus = [[[NSUserDefaults standardUserDefaults] valueForKey:EnjoyState] integerValue];
     self.goldAuthorization = [[[NSUserDefaults standardUserDefaults]valueForKey:GOldAUTHORIZATION] boolValue];
 //    self.userLevel = [[NSUserDefaults standardUserDefaults] valueForKey:USER_LEVEL];
+    self.isRisk = [[NSUserDefaults standardUserDefaults] boolForKey:@"isRisk"];
+    self.isAutoBid = [[NSUserDefaults standardUserDefaults] boolForKey:@"isAutoBid"];
 }
 //存储用户信息
 - (void)storeUserCache:(NSDictionary *)dict
@@ -143,6 +160,8 @@
     _realName = nil;
     _openStatus = -1;
     self.companyAgent = NO;
+    self.isRisk = NO;
+    self.isAutoBid = NO;
 //    self.userLevel = nil;
     [[NSNotificationCenter defaultCenter] postNotificationName:@"userisloginandcheckgrade" object:@(NO)];
 }
@@ -180,12 +199,7 @@
             
             //该e值不为NSNULL，并且也不为nil
            if (![propertyValue isKindOfClass:[NSNull class]] && propertyValue!=nil) {
-#warning test
-               if ([key isEqualToString:@"isSpecial"] || [key isEqualToString:@"isCompanyAgent"]) {
-                   
-               }
-               else
-                   [self setValue:propertyValue forKey:key];
+               [self setValue:propertyValue forKey:key];
             }
         }
     }

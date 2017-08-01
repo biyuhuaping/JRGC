@@ -95,7 +95,7 @@
         cell.presenter = cellPresenter;
         return cell;
     }
-    else if (cellPresenter.modelType == UCFHomeListCellModelTypeInvest) {
+    else if (cellPresenter.modelType == UCFHomeListCellModelTypeReserved) {
         static NSString *cellId = @"homeListInvestCell";
         UCFHomeInvestCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
         if (nil == cell) {

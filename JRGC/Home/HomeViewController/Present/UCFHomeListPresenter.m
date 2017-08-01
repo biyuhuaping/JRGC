@@ -184,7 +184,7 @@
             if (investGroup) {
                 NSArray *investModels = investGroup.prdlist;
                 UCFHomeListCellModel *investModel = [investModels firstObject];
-                investModel.moedelType = UCFHomeListCellModelTypeInvest;
+                investModel.moedelType = UCFHomeListCellModelTypeReserved;
                 UCFHomeListCellPresenter *cellPresenter = [UCFHomeListCellPresenter presenterWithItem:investModel];
                 weakSelf.groupPresenter5.group.prdlist = [NSArray arrayWithObjects:cellPresenter, nil];
             }

@@ -388,16 +388,16 @@
         else if ([nativeData[@"action"] isEqualToString:@"share"])//放心花添加分享点击事件
         {
             NSDictionary *dic = [nativeData[@"value"] objectFromJSONString];
-            self.dicForShare = [UCFCycleModel  getCycleModelByDataDict:dic];
-            self.dicForShare.thumb = [dic objectSafeForKey:@"image"];
-            self.dicForShare.url = [dic objectSafeForKey:@"link"];
+            weakSelf.dicForShare = [UCFCycleModel  getCycleModelByDataDict:dic];
+            weakSelf.dicForShare.thumb = [dic objectSafeForKey:@"image"];
+            weakSelf.dicForShare.url = [dic objectSafeForKey:@"link"];
             [weakSelf clickRightBtn]; //放心花中的分享
         }
         else if ([nativeData[@"action"] isEqualToString:@"clipboard"])//放心花---复制到剪切板上
         {
             UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
             [pasteboard setString:[nativeData objectSafeForKey:@"value"]];
-            [AuxiliaryFunc showToastMessage:@"已复制到剪切板" withView:self.view];
+            [AuxiliaryFunc showToastMessage:@"已复制到剪切板" withView:weakSelf.view];
         }else if([nativeData[@"action"] isEqualToString:@"get_factory_code"]){ //放心花---返回数据 工场码
             
             NSString *gcmCode = [[NSUserDefaults standardUserDefaults] objectForKey:@"gcmCode"];
@@ -409,24 +409,24 @@
         }
         else if([nativeData[@"action"] isEqualToString:@"save_fxh_qrcode"]){ //放心花---保存 工场码
             UIImage *savedImage = [UIImage imageNamed:@"loanCode"];
-            UIImageWriteToSavedPhotosAlbum(savedImage, self, @selector(image:didFinishSavingWithError:contextInfo:), (__bridge void *)self);
+            UIImageWriteToSavedPhotosAlbum(savedImage, weakSelf, @selector(image:didFinishSavingWithError:contextInfo:), (__bridge void *)self);
         } else if ([nativeData[@"action"] isEqualToString:@"show_header"]) {
-            [self.navigationController setNavigationBarHidden:NO animated:NO];
-            self.webView.translatesAutoresizingMaskIntoConstraints = false;
-            self.topConSpace.constant = 0;
+            [weakSelf.navigationController setNavigationBarHidden:NO animated:NO];
+            weakSelf.webView.translatesAutoresizingMaskIntoConstraints = false;
+            weakSelf.topConSpace.constant = 0;
         }else if ([nativeData[@"action"] isEqualToString:@"hide_header"]) {
-            self.webView.translatesAutoresizingMaskIntoConstraints = false;
-            [self.navigationController setNavigationBarHidden:YES animated:NO];
-            self.topConSpace.constant = 0;
+            weakSelf.webView.translatesAutoresizingMaskIntoConstraints = false;
+            [weakSelf.navigationController setNavigationBarHidden:YES animated:NO];
+            weakSelf.topConSpace.constant = 0;
 
         }
         else if ([nativeData[@"action"] isEqualToString:@"auto_bid_auth"]) //投标成功 跳转到 投资详情
         {
             UCFBatchInvestmentViewController *batchInvestment = [[UCFBatchInvestmentViewController alloc] init];
             batchInvestment.isStep = 1;
-            batchInvestment.accoutType = self.accoutType;
+            batchInvestment.accoutType = weakSelf.accoutType;
 //            batchInvestment.sourceType = @"P2POrHonerAccoutVC";
-            [self.navigationController pushViewController:batchInvestment animated:YES];
+            [weakSelf.navigationController pushViewController:batchInvestment animated:YES];
         }
         //----------------------------------------------------------------------------------------------------qyy
         
@@ -1323,4 +1323,5 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 @end

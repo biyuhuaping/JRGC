@@ -36,6 +36,9 @@
 @property(nonatomic, assign) BOOL zxAuthorization;
 @property(nonatomic, assign) BOOL goldAuthorization;//黄金授权标识
 @property(nonatomic, assign) BOOL isSpecial;//是否是特殊用户
+@property(nonatomic, assign) BOOL isRisk;       //是否风险评估
+@property(nonatomic, assign) BOOL isAutoBid;    //是否自动投标
+
 //@property(nonatomic, copy) NSString *userLevel;
 //获取用户信息单利对象
 + (UserInfoSingle *)sharedManager;
