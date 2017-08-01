@@ -122,7 +122,7 @@
         return 95.0;
     }
     else if (self.item.moedelType == UCFHomeListCellModelTypeInvest) {
-        return 85.0;
+        return 73.0;
     }
     else {
         return (ScreenWidth - 20) / CELLRATE + 15;

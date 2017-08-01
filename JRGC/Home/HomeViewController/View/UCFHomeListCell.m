@@ -69,10 +69,10 @@
         self.proName.text = presenter.proTitle;
         self.rateLabel.text = presenter.annualRate;
         if ([presenter.item.type isEqualToString:@"3"]) {
-            self.rateLabel.font = [UIFont systemFontOfSize:15];
+            self.rateLabel.font = [UIFont boldSystemFontOfSize:15];
         }
         else {
-            self.rateLabel.font = [UIFont systemFontOfSize:20];
+            self.rateLabel.font = [UIFont boldSystemFontOfSize:20];
         }
         self.timeLabel.text = presenter.repayPeriodtext;
         self.repayModelLabel.text = presenter.repayModeText;

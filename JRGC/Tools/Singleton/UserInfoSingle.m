@@ -180,7 +180,12 @@
             
             //该e值不为NSNULL，并且也不为nil
            if (![propertyValue isKindOfClass:[NSNull class]] && propertyValue!=nil) {
-                [self setValue:propertyValue forKey:key];
+#warning test
+               if ([key isEqualToString:@"isSpecial"] || [key isEqualToString:@"isCompanyAgent"]) {
+                   
+               }
+               else
+                   [self setValue:propertyValue forKey:key];
             }
         }
     }

@@ -33,6 +33,7 @@
 #import "UCFWebViewJavascriptBridgeMallDetails.h"
 #import "UCFWebViewJavascriptBridgeLevel.h"
 #import "UCFFeedBackViewController.h"//邀请返利
+#import "UCFBatchInvestmentViewController.h"
 #import "TradePasswordVC.h"
 
 #import "UserInfoSingle.h"
@@ -418,6 +419,14 @@
             [self.navigationController setNavigationBarHidden:YES animated:NO];
             self.topConSpace.constant = 0;
 
+        }
+        else if ([nativeData[@"action"] isEqualToString:@"auto_bid_auth"]) //投标成功 跳转到 投资详情
+        {
+            UCFBatchInvestmentViewController *batchInvestment = [[UCFBatchInvestmentViewController alloc] init];
+            batchInvestment.isStep = 1;
+            batchInvestment.accoutType = self.accoutType;
+//            batchInvestment.sourceType = @"P2POrHonerAccoutVC";
+            [self.navigationController pushViewController:batchInvestment animated:YES];
         }
         //----------------------------------------------------------------------------------------------------qyy
         

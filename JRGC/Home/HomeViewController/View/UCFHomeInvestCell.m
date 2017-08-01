@@ -12,7 +12,7 @@
 
 @interface UCFHomeInvestCell ()
 @property (weak, nonatomic) IBOutlet NZLabel *anurateLabel;
-@property (weak, nonatomic) IBOutlet UILabel *repayPeroid;
+@property (weak, nonatomic) IBOutlet NZLabel *repayPeroid;
 
 @end
 
@@ -41,6 +41,7 @@
 {
     [super layoutSubviews];
     [self.anurateLabel setFont:[UIFont systemFontOfSize:12] string:@"%"];
+    [self.repayPeroid setFont:[UIFont systemFontOfSize:12] string:@"天"];
 }
 
 @end

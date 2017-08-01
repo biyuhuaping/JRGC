@@ -46,6 +46,7 @@
 #import "UCFGoldPurchaseViewController.h"
 #import  "UCFGoldCalculatorView.h"
 #import "UCFCollectionDetailViewController.h"
+#import "UCFFacReservedViewController.h"
 
 @interface UCFHomeViewController () <UCFHomeListViewControllerDelegate, UCFHomeListNavViewDelegate, UCFUserInformationViewControllerDelegate,BJGridItemDelegate>
 @property (strong, nonatomic) UCFCycleImageViewController *cycleImageVC;
@@ -589,6 +590,17 @@
         [appdel.tabBarController setSelectedIndex:1];
     }
 }
+
+- (void)homeList:(UCFHomeListViewController *)homeList didClickReservedWithModel:(UCFHomeListCellModel *)model
+{
+    
+    UCFFacReservedViewController *facReservedWeb = [[UCFFacReservedViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
+    facReservedWeb.url = @"https://m.9888.cn/static/wap/invest/index.html#/reserve/info";
+    facReservedWeb.navTitle = @"工场预约";
+    [self.navigationController pushViewController:facReservedWeb animated:YES];
+}
+
+
 -(void)gotoGoldInvestVC:(UCFHomeListCellModel *)model{
     
     NSString *tipStr1 = ZXTIP1;

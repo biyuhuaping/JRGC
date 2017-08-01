@@ -16,6 +16,8 @@
 #import "UCFHomeListNo2Cell.h"
 #import "UCFHomeInvestCell.h"
 #import "UCFHomeListHeaderSectionView.h"
+#import "UCFLoginViewController.h"
+#import "AppDelegate.h"
 
 @interface UCFHomeListViewController () <UITableViewDelegate, UITableViewDataSource, HomeListViewPresenterCallBack, UCFHomeListHeaderSectionViewDelegate, UCFHomeListCellDelegate, UCFHomeInvestCellDelegate>
 @property (strong, nonatomic) UITableView *tableView;
@@ -128,9 +130,11 @@
     if (section == 0) {
         view.honerLabel.hidden = NO;
         view.honerLabel.text = groupPresenter.group.desc;
+        view.segView.hidden = NO;
     }
     else {
         view.honerLabel.hidden = YES;
+        view.segView.hidden = YES;
     }
     return view;
 }
@@ -238,7 +242,20 @@
 #pragma mark - 工厂邀请cell的代理方法
 - (void)homeInvestCell:(UCFHomeInvestCell *)homeInvestCell didClickedInvestButtonAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSString *userId = [UserInfoSingle sharedManager].userId;
+    if (nil == userId) {
+        UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
+        UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
+        AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+        [app.tabBarController presentViewController:loginNaviController animated:YES completion:nil];
+        return;
+    }
     
+    UCFHomeListGroupPresenter *groupPresenter = [self.presenter.allDatas objectAtIndex:indexPath.section];
+    UCFHomeListCellPresenter *cellPresenter =  [groupPresenter.group.prdlist objectAtIndex:indexPath.row];
+    if ([self.delegate respondsToSelector:@selector(homeList:didClickReservedWithModel:)]) {
+        [self.delegate homeList:self didClickReservedWithModel:cellPresenter.item];
+    }
 }
 
 #pragma mark - 刷新数据

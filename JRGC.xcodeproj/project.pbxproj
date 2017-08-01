@@ -421,6 +421,8 @@
 		74F490EF1E5B2AAA0057AC62 /* UCFCollectionBidCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74F490ED1E5B2AAA0057AC62 /* UCFCollectionBidCell.xib */; };
 		74F4B8AE1ECAD20E00785DFC /* UCFProfitBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F4B8AC1ECAD20E00785DFC /* UCFProfitBackViewController.m */; };
 		74F4B8AF1ECAD20E00785DFC /* UCFProfitBackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74F4B8AD1ECAD20E00785DFC /* UCFProfitBackViewController.xib */; };
+		74F998C21F3024C400A6E607 /* UCFFacReservedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F998C01F3024C400A6E607 /* UCFFacReservedViewController.m */; };
+		74F998C31F3024C400A6E607 /* UCFFacReservedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74F998C11F3024C400A6E607 /* UCFFacReservedViewController.xib */; };
 		74FBC1BD1B84721400B8DD7E /* UCFBindCardTwoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74FBC1BB1B84721400B8DD7E /* UCFBindCardTwoTableViewCell.m */; };
 		74FBC1BE1B84721400B8DD7E /* UCFBindCardTwoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74FBC1BC1B84721400B8DD7E /* UCFBindCardTwoTableViewCell.xib */; };
 		74FC227E1BA6A5BB00D1660A /* UCFOverDueListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74FC227D1BA6A5BB00D1660A /* UCFOverDueListViewController.xib */; };
@@ -1655,6 +1657,9 @@
 		74F4B8AB1ECAD20E00785DFC /* UCFProfitBackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFProfitBackViewController.h; sourceTree = "<group>"; };
 		74F4B8AC1ECAD20E00785DFC /* UCFProfitBackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFProfitBackViewController.m; sourceTree = "<group>"; };
 		74F4B8AD1ECAD20E00785DFC /* UCFProfitBackViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFProfitBackViewController.xib; sourceTree = "<group>"; };
+		74F998BF1F3024C400A6E607 /* UCFFacReservedViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFFacReservedViewController.h; sourceTree = "<group>"; };
+		74F998C01F3024C400A6E607 /* UCFFacReservedViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFFacReservedViewController.m; sourceTree = "<group>"; };
+		74F998C11F3024C400A6E607 /* UCFFacReservedViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFFacReservedViewController.xib; sourceTree = "<group>"; };
 		74FBC1BA1B84721400B8DD7E /* UCFBindCardTwoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFBindCardTwoTableViewCell.h; sourceTree = "<group>"; };
 		74FBC1BB1B84721400B8DD7E /* UCFBindCardTwoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFBindCardTwoTableViewCell.m; sourceTree = "<group>"; };
 		74FBC1BC1B84721400B8DD7E /* UCFBindCardTwoTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFBindCardTwoTableViewCell.xib; sourceTree = "<group>"; };
@@ -3115,6 +3120,7 @@
 		74270C551EC58F4000F9419B /* Home(首页模块) */ = {
 			isa = PBXGroup;
 			children = (
+				74F998B61F30200300A6E607 /* FactoryInvest(工场预约) */,
 				74E1403D1F1C56A000B17A96 /* GoldRechargeAndCashHostory(黄金充值和提现记录界面) */,
 				74270C561EC58F6800F9419B /* HomeViewController(首页界面) */,
 				749140A91F18CED500E624CE /* GoldCash(黄金提现) */,
@@ -4241,6 +4247,40 @@
 				74F490E41E5AF2660057AC62 /* UCFMyInvestBatchBidModel.m */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		74F998B61F30200300A6E607 /* FactoryInvest(工场预约) */ = {
+			isa = PBXGroup;
+			children = (
+				74F998B91F30203C00A6E607 /* Model */,
+				74F998B81F30203900A6E607 /* View */,
+				74F998B71F30203700A6E607 /* Controller */,
+			);
+			path = "FactoryInvest(工场预约)";
+			sourceTree = "<group>";
+		};
+		74F998B71F30203700A6E607 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				74F998BF1F3024C400A6E607 /* UCFFacReservedViewController.h */,
+				74F998C01F3024C400A6E607 /* UCFFacReservedViewController.m */,
+				74F998C11F3024C400A6E607 /* UCFFacReservedViewController.xib */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		74F998B81F30203900A6E607 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		74F998B91F30203C00A6E607 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		74FD35521ADF58710083D52C /* View */ = {
@@ -6689,6 +6729,7 @@
 				A8B6B6821EC9AA0900D4E86F /* WalletBankView.xib in Resources */,
 				E3C117AF1D40D2F90053A052 /* UCFWebViewJavascriptBridgeController.xib in Resources */,
 				74956EB31D66E87F00D68B61 /* UCFModifyPhoneViewController.xib in Resources */,
+				74F998C31F3024C400A6E607 /* UCFFacReservedViewController.xib in Resources */,
 				83A6FEA91EBC2DDF000BC48C /* UCFProductListCell.xib in Resources */,
 				74BDA9611F09EE3B0054403F /* UCFCalendarViewController.xib in Resources */,
 				FBB685801AE4A76800F222B6 /* MJRefresh.bundle in Resources */,
@@ -6968,6 +7009,7 @@
 				74931A2F1B1326FE00143424 /* NSAttributedString+Attributes.m in Sources */,
 				2526ADE11DD08D5F00114D9A /* JRGCCustomGroupCell.m in Sources */,
 				4A04F8331F0B6DBB00ADE9D8 /* UCFGoldAccountHeadView.m in Sources */,
+				74F998C21F3024C400A6E607 /* UCFFacReservedViewController.m in Sources */,
 				7BC304881ACBC22D007767F1 /* UITableViewFooterPull.m in Sources */,
 				74270C8F1EC58F6800F9419B /* UCFUserInformationViewController.m in Sources */,
 				83CD84381F13A50800227704 /* UCFTransferViewController.m in Sources */,

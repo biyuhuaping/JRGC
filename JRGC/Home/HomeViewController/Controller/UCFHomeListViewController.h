@@ -24,6 +24,8 @@ typedef enum : NSUInteger {
 - (void)homeListRefreshDataWithHomelist:(UCFHomeListViewController *)homelist;
 
 - (void)homeList:(UCFHomeListViewController *)homeList tableView:(UITableView *)tableView didClickedWithModel:(UCFHomeListCellModel *)model withType:(UCFHomeListType)type;
+
+- (void)homeList:(UCFHomeListViewController *)homeList didClickReservedWithModel:(UCFHomeListCellModel *)model;
 @end
 
 @interface UCFHomeListViewController : NSObject
