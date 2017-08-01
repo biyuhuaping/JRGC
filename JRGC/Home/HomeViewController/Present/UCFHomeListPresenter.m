@@ -99,7 +99,7 @@
         group5.desc = @"平均1小时起息";
         group5.showMore = NO;
 //        group5.type = @"15";
-        group5.headerImage = @"mine_icon_gold";
+        group5.headerImage = @"mine_factory_reserved";
         _groupPresenter5 = [UCFHomeListGroupPresenter presenterWithGroup:group5];
     }
     return _groupPresenter5;

@@ -58,6 +58,13 @@
                         <action selector="moreClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="0jK-Gt-yqB"/>
                     </connections>
                 </button>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YGf-Ll-FON">
+                    <rect key="frame" x="89.5" y="8" width="0.5" height="16"/>
+                    <color key="backgroundColor" red="0.8901960784313725" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="0.5" id="i6U-s8-4lQ"/>
+                    </constraints>
+                </view>
                 <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="particular_tabline" translatesAutoresizingMaskIntoConstraints="NO" id="RvM-hy-SMb">
                     <rect key="frame" x="89.5" y="10" width="1" height="12"/>
                     <constraints>
@@ -75,21 +82,24 @@
             <constraints>
                 <constraint firstItem="DpL-ou-yAE" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="1" id="1GF-OE-EUb"/>
                 <constraint firstItem="nYl-qW-A7i" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="3Ww-B4-8ZF"/>
+                <constraint firstAttribute="bottom" secondItem="YGf-Ll-FON" secondAttribute="bottom" constant="8" id="4XE-s4-Mtz"/>
                 <constraint firstAttribute="trailing" secondItem="nYl-qW-A7i" secondAttribute="trailing" id="5Yp-JZ-H4H"/>
+                <constraint firstItem="E6Z-yl-wCj" firstAttribute="leading" secondItem="RvM-hy-SMb" secondAttribute="trailing" constant="4" id="68Y-eB-TLa"/>
                 <constraint firstItem="E1b-pn-Uch" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="ANW-S7-7DO"/>
                 <constraint firstItem="E1b-pn-Uch" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="B52-7A-J7r"/>
+                <constraint firstItem="E6Z-yl-wCj" firstAttribute="top" secondItem="jqV-1Z-1TR" secondAttribute="bottom" constant="8" id="Eei-83-FT3"/>
+                <constraint firstItem="YGf-Ll-FON" firstAttribute="leading" secondItem="DpL-ou-yAE" secondAttribute="trailing" constant="4" id="Gtc-eY-d1T"/>
                 <constraint firstItem="jqV-1Z-1TR" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="JSe-Ie-J23"/>
                 <constraint firstItem="nYl-qW-A7i" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="LaC-Lw-WSW"/>
                 <constraint firstItem="END-za-lfi" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="1" id="Oux-Cy-1OA"/>
-                <constraint firstAttribute="bottom" secondItem="E6Z-yl-wCj" secondAttribute="bottom" constant="8" id="QHF-ps-28g"/>
                 <constraint firstItem="RvM-hy-SMb" firstAttribute="leading" secondItem="DpL-ou-yAE" secondAttribute="trailing" constant="4" id="QJl-CM-y6v"/>
                 <constraint firstItem="RvM-hy-SMb" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="R5i-Dy-VEA"/>
                 <constraint firstItem="DpL-ou-yAE" firstAttribute="leading" secondItem="E1b-pn-Uch" secondAttribute="trailing" constant="2" id="YdN-Bn-FtO"/>
-                <constraint firstItem="E6Z-yl-wCj" firstAttribute="leading" secondItem="RvM-hy-SMb" secondAttribute="trailing" constant="4" id="aRB-zj-Cnh"/>
+                <constraint firstAttribute="bottom" secondItem="E6Z-yl-wCj" secondAttribute="bottom" constant="8" id="cRG-Oi-DcG"/>
                 <constraint firstItem="jqV-1Z-1TR" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="2" id="eT0-cb-iey"/>
-                <constraint firstItem="E6Z-yl-wCj" firstAttribute="top" secondItem="jqV-1Z-1TR" secondAttribute="bottom" constant="8" id="mOL-PH-z4P"/>
                 <constraint firstAttribute="trailing" secondItem="jqV-1Z-1TR" secondAttribute="trailing" id="p31-LP-UQu"/>
                 <constraint firstAttribute="trailing" secondItem="END-za-lfi" secondAttribute="trailing" constant="15" id="tej-Dc-ozw"/>
+                <constraint firstItem="YGf-Ll-FON" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="u5c-bF-Q29"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -99,6 +109,7 @@
                 <outlet property="homeListHeaderMoreButton" destination="END-za-lfi" id="9CE-7Z-AgE"/>
                 <outlet property="honerLabel" destination="E6Z-yl-wCj" id="WxA-1i-VhO"/>
                 <outlet property="honerLineImageView" destination="RvM-hy-SMb" id="bV1-xl-Rzd"/>
+                <outlet property="segView" destination="YGf-Ll-FON" id="RPr-Ml-X4K"/>
                 <outlet property="up" destination="nYl-qW-A7i" id="yzQ-Cp-d8B"/>
                 <outlet property="upLine" destination="nYl-qW-A7i" id="kd5-gK-l3b"/>
             </connections>

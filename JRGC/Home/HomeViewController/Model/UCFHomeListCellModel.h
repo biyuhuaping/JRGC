@@ -45,6 +45,7 @@ typedef enum : NSUInteger {
 @property (nonatomic, copy) NSString *remainAmount; //剩余黄金克数
 @property (nonatomic, assign) UCFHomeListCellModelType moedelType;
 @property (nonatomic, copy) NSString *backImage;
+@property (nonatomic, copy) NSString *url;
 
 @property (nonatomic, assign) BOOL p2pAuthorization;
 @property (nonatomic, assign) BOOL zxAuthorization;

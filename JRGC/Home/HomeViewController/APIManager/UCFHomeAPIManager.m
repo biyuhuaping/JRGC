@@ -169,6 +169,7 @@
                 investModel.Id = [investDict objectSafeForKey:@"id"];
                 investModel.annualRate = [investDict objectSafeForKey:@"annualRate"];
                 investModel.repayPeriod = [investDict objectSafeForKey:@"repayPeriod"];
+                investModel.url = [investDict objectSafeForKey:@"url"];
                 tempInvestG.prdlist = [NSArray arrayWithObjects:investModel, nil];
                 [tempResult setObject:tempInvestG forKey:@"appointInvest"];
             }
