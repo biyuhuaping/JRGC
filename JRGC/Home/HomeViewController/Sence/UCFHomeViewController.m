@@ -612,6 +612,7 @@
         batchInvestment.isStep = 1;
         batchInvestment.accoutType = SelectAccoutTypeP2P;
         [self.navigationController pushViewController:batchInvestment animated:YES];
+        return;
     }
     UCFFacReservedViewController *facReservedWeb = [[UCFFacReservedViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
     NSString *url = [model.url stringByReplacingOccurrencesOfString:@"/info" withString:@"/apply"];
