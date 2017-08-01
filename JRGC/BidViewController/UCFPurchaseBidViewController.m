@@ -1380,11 +1380,32 @@
     footView.userInteractionEnabled = YES;
     __weak typeof(self) weakSelf = self;
     //https://m.9888.cn/static/wap/protocol-risk-prompt/index.html
+    
+    
+    NZLabel *firstProtocolLabel = [[NZLabel alloc] init];
+    firstProtocolLabel.font = [UIFont systemFontOfSize:12.0f];
+    CGSize size = [Common getStrHeightWithStr:@"本人阅读并同意《CFCA数字证书服务协议》" AndStrFont:12 AndWidth:ScreenWidth- 23 -15];
+    firstProtocolLabel.numberOfLines = 0;
+    firstProtocolLabel.frame = CGRectMake(23, 10, ScreenWidth- 23 -15, size.height);
+    firstProtocolLabel.text = @"本人阅读并同意《CFCA数字证书服务协议》";
+    firstProtocolLabel.userInteractionEnabled = YES;
+    firstProtocolLabel.textColor = UIColorWithRGB(0x999999);
+    
+    [firstProtocolLabel addLinkString:@"《CFCA数字证书服务协议》" block:^(ZBLinkLabelModel *linkModel) {
+        [weakSelf showHeTong:linkModel];
+    }];
+    [firstProtocolLabel setFontColor:UIColorWithRGB(0x4aa1f9) string:@"《CFCA数字证书服务协议》"];
+    
+    UIImageView * imageView = [[UIImageView alloc] init];
+    imageView.frame = CGRectMake(CGRectGetMinX(firstProtocolLabel.frame) - 7, CGRectGetMinY(firstProtocolLabel.frame) + 6, 5, 5);
+    imageView.image = [UIImage imageNamed:@"point.png"];
+    
+    
     NZLabel *riskProtocolLabel = [[NZLabel alloc] init];
     riskProtocolLabel.font = [UIFont systemFontOfSize:12.0f];
-    CGSize size1 = [Common getStrHeightWithStr:@"本人阅读并悉知《网络借贷出借风险提示》中风险" AndStrFont:12 AndWidth:ScreenWidth- 23 -15];
+    CGSize size1 = [Common getStrHeightWithStr:@"本人阅读并悉知《网络借贷出借风险提示》中风险" AndStrFont:12 AndWidth:ScreenWidth - 23 - 15];
     riskProtocolLabel.numberOfLines = 0;
-    riskProtocolLabel.frame = CGRectMake(23, 15, ScreenWidth- 23 -15, size1.height);
+    riskProtocolLabel.frame = CGRectMake(23,CGRectGetMaxY(firstProtocolLabel.frame) + 10, ScreenWidth- 23 -15, size1.height);
     riskProtocolLabel.text = @"本人阅读并悉知《网络借贷出借风险提示》中风险";
     riskProtocolLabel.userInteractionEnabled = YES;
     riskProtocolLabel.textColor = UIColorWithRGB(0x999999);
@@ -1394,20 +1415,31 @@
     }];
     [riskProtocolLabel setFontColor:UIColorWithRGB(0x4aa1f9) string:@"《网络借贷出借风险提示》"];
   
-    UIImageView * imageView = [[UIImageView alloc] init];
-    imageView.frame = CGRectMake(CGRectGetMinX(riskProtocolLabel.frame) - 7, CGRectGetMinY(riskProtocolLabel.frame) + 4, 5, 5);
-    imageView.image = [UIImage imageNamed:@"point.png"];
+    UIImageView * imageView1 = [[UIImageView alloc] init];
+    imageView1.frame = CGRectMake(CGRectGetMinX(riskProtocolLabel.frame) - 7, CGRectGetMinY(riskProtocolLabel.frame) + 4, 5, 5);
+    imageView1.image = [UIImage imageNamed:@"point.png"];
     
-    
+    NSDictionary *userOtherMsg = [_dataDict objectForKey:@"userOtherMsg"];
+    NSString  *cfcaContractNameSt = [userOtherMsg objectSafeForKey:@"cfcaContractName"];
     if(_isP2P){
-        [footView addSubview:riskProtocolLabel];
-        [footView addSubview:imageView];
+        if (![cfcaContractNameSt isEqualToString:@""]) {
+            [footView addSubview:firstProtocolLabel];
+            [footView addSubview:imageView];
+            [footView addSubview:riskProtocolLabel];
+            [footView addSubview:imageView1];
+        }else{
+            firstProtocolLabel.frame =CGRectZero;
+            imageView1.frame  = CGRectZero;
+            riskProtocolLabel.frame = CGRectMake(23,CGRectGetMaxY(firstProtocolLabel.frame) + 10, ScreenWidth- 23 -15, size1.height);
+            imageView1.frame = CGRectMake(CGRectGetMinX(riskProtocolLabel.frame) - 7, CGRectGetMinY(riskProtocolLabel.frame) + 4, 5, 5);
+            [footView addSubview:riskProtocolLabel];
+            [footView addSubview:imageView1];
+        }
     }else{
         footView.frame  = CGRectMake(0, 0, ScreenWidth, 98 - size1.height - 10);
         riskProtocolLabel.frame = CGRectZero;
-        imageView.frame = CGRectZero;
+        imageView1.frame = CGRectZero;
     }
-    NSDictionary *userOtherMsg = [_dataDict objectForKey:@"userOtherMsg"];
     NSArray *contractMsgArr = [userOtherMsg valueForKey:@"contractMsg"];
     NSString *totalStr = [NSString stringWithFormat:@"本人已阅读并同意签署"];
     for (int i = 0; i < contractMsgArr.count; i++) {
@@ -1416,12 +1448,12 @@
     }
     NZLabel *label1 = [[NZLabel alloc] init];
     label1.font = [UIFont systemFontOfSize:12.0f];
-    CGSize size = [Common getStrHeightWithStr:totalStr AndStrFont:12 AndWidth:ScreenWidth- 23 -15 AndlineSpacing:1.0f];
+    CGSize size2 = [Common getStrHeightWithStr:totalStr AndStrFont:12 AndWidth:ScreenWidth- 23 -15 AndlineSpacing:1.0f];
     label1.numberOfLines = 0;
     if (_isP2P) {
-        label1.frame = CGRectMake(23, CGRectGetMaxY(riskProtocolLabel.frame)+10, ScreenWidth-23 - 15, size.height);
+        label1.frame = CGRectMake(23, CGRectGetMaxY(riskProtocolLabel.frame)+10, ScreenWidth-23 - 15, size2.height);
     }else{
-        label1.frame = CGRectMake(23, 15, ScreenWidth - 23 -15, size.height);
+        label1.frame = CGRectMake(23, 15, ScreenWidth - 23 -15, size2.height);
     }
     NSDictionary *dic = [Common getParagraphStyleDictWithStrFont:12 WithlineSpacing:1.0f];
     label1.attributedText = [NSString getNSAttributedString:totalStr labelDict:dic];
@@ -1437,10 +1469,10 @@
     }
     [footView addSubview:label1];
     
-    UIImageView * imageView1 = [[UIImageView alloc] init];
-    imageView1.frame = CGRectMake(CGRectGetMinX(label1.frame) - 7, CGRectGetMinY(label1.frame) + 4, 5, 5);
-    imageView1.image = [UIImage imageNamed:@"point.png"];
-    [footView addSubview:imageView1];
+    UIImageView * imageView2 = [[UIImageView alloc] init];
+    imageView2.frame = CGRectMake(CGRectGetMinX(label1.frame) - 7, CGRectGetMinY(label1.frame) + 4, 5, 5);
+    imageView2.image = [UIImage imageNamed:@"point.png"];
+    [footView addSubview:imageView2];
     
     CGFloat height1 = CGRectGetMaxY(label1.frame);
     NSArray *downContractList = [_dataDict objectForKey:@"downContractList"];
@@ -1504,10 +1536,10 @@
     footView.frame = CGRectMake(0, 0, ScreenWidth, CGRectGetMaxY(jieshouLabel.frame) + 15);
     [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:footView isTop:YES];
     
-    UIImageView * imageView2 = [[UIImageView alloc] init];
-    imageView2.frame = CGRectMake(CGRectGetMinX(jieshouLabel.frame) - 7, CGRectGetMinY(jieshouLabel.frame) + 4, 5, 5);
-    imageView2.image = [UIImage imageNamed:@"point.png"];
-    [footView addSubview:imageView2];
+    UIImageView * imageView3 = [[UIImageView alloc] init];
+    imageView3.frame = CGRectMake(CGRectGetMinX(jieshouLabel.frame) - 7, CGRectGetMinY(jieshouLabel.frame) + 4, 5, 5);
+    imageView3.image = [UIImage imageNamed:@"point.png"];
+    [footView addSubview:imageView3];
     
     return footView;
 }
@@ -1528,19 +1560,38 @@
 }
 - (void)showHeTong:(ZBLinkLabelModel *)linkModel
 {
-    NSString *contractStr = linkModel.linkString;
-    if ([contractStr isEqualToString:@"《网络借贷出借风险提示》"]) {
+    NSString *contractNameStr = linkModel.linkString;
+    if ([contractNameStr isEqualToString:@"《网络借贷出借风险提示》"]) {
         [self showContractWebViewUrl:PROTOCOLRISKPROMPT withTitle:@"网络借贷出借风险提示"];
-    }else if([contractStr isEqualToString:@"《出借人承诺书》"]){
-        [self showContractWebViewUrl:PROTOCOLENDERPROMISE withTitle:@"出借人承诺书"];
-    }else if([contractStr isEqualToString:@"《履行反洗钱义务的承诺书》"]){
-        [self showContractWebViewUrl:PROTOCOLENTUSTTRANSFER withTitle:@"履行反洗钱义务的承诺书"];
-    }else{
+    }
+//    else if([contractStr isEqualToString:@"《出借人承诺书》"]){
+//        [self showContractWebViewUrl:PROTOCOLENDERPROMISE withTitle:@"出借人承诺书"];
+//    }else if([contractStr isEqualToString:@"《履行反洗钱义务的承诺书》"]){
+//        [self showContractWebViewUrl:PROTOCOLENTUSTTRANSFER withTitle:@"履行反洗钱义务的承诺书"];
+//    }
+    else{
         
         NSDictionary *userOtherMsg = [_dataDict objectForKey:@"userOtherMsg"];
         NSArray *contractMsgArr = [userOtherMsg valueForKey:@"contractMsg"];
-        NSString *contractTypeStr = [self valueIndex:linkModel WithDataArr:contractMsgArr typeKey:@"contractType"];
         
+        
+        contractNameStr = [contractNameStr substringWithRange:NSMakeRange(1, contractNameStr.length - 2)];
+        _contractTitle = contractNameStr;
+        NSString *contractUrlStr = @"";
+        NSString *contractTypeStr =@"";
+        for (NSDictionary *dict in contractMsgArr) {
+            if ([contractNameStr isEqualToString:[dict objectSafeForKey:@"contractName"]]) {
+                contractTypeStr = [dict valueForKey:@"contractType"];
+                contractUrlStr = [dict objectSafeForKey:@"contractUrl"];
+                break;
+            }
+        }
+        if (![contractUrlStr isEqualToString:@""]) {//如果合同url存在的情况
+             [self showContractWebViewUrl:contractUrlStr withTitle:contractNameStr];
+            return;
+        }
+        
+        contractTypeStr = [contractNameStr isEqualToString:@"CFCA数字证书服务协议"] ? @"CFCA" :contractTypeStr;
         NSString *projectId = [[self.dataDict objectForKey:@"data"] objectForKey:@"id"];
         NSString *strParameters = [NSString stringWithFormat:@"userId=%@&prdClaimId=%@&contractType=%@&prdType=0",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],projectId,contractTypeStr];
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];

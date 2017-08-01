@@ -595,6 +595,17 @@
     if (tag.intValue == kSXTagGetOpenAccountInfo) {//获取徽商开户页面信息
         if ([ret boolValue]) {
             DBLOG(@"%@",dic[@"data"]);
+            NSString *cfcaContractNameStr = [dic[@"data"] objectSafeForKey:@"cfcaContractName"];
+            if(![cfcaContractNameStr isEqualToString:@""]){
+                _customLabel2.text = @"开通即视为我已阅读并同意《CFCA数字证书服务协议》《资金存管三方协议》";
+                __weak typeof(self) weakSelf = self;
+                [_customLabel2 setFontColor:UIColorWithRGB(0x4aa1f9) string:@"《CFCA数字证书服务协议》《资金存管三方协议》"];
+                [_customLabel2 addLinkString:@"《CFCA数字证书服务协议》" block:^(ZBLinkLabelModel *linkModel) {
+                    FullWebViewController *webController = [[FullWebViewController alloc] initWithWebUrl:COUNSELING title:@"CFCA数字证书服务协议"];
+                    webController.baseTitleType = @"specialUser";
+                    [weakSelf.navigationController pushViewController:webController animated:YES];
+                }];
+            }
             NSDictionary *userInfoDic = dic[@"data"][@"userInfo"];
             _openStatus = dic[@"data"][@"openStatus"];
             _bankId = [NSString stringWithFormat:@"%@",userInfoDic[@"bankId"]];//[userInfoDic objectSafeForKey:@"bankId"];//

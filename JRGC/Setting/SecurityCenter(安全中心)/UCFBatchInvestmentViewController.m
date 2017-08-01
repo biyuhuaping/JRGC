@@ -38,6 +38,11 @@ static NSString *thirdStr = @"自动投标授权已经开启";
 @end
 
 @implementation UCFBatchInvestmentViewController
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+}
 - (void)addRightButtonWithImage:(UIImage *)rightButtonimage;
 {
     UIButton *rightbutton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -133,10 +138,10 @@ static NSString *thirdStr = @"自动投标授权已经开启";
     label1.textColor = UIColorWithRGB(0x999999);
     
     __weak typeof(self) weakSelf = self;
-    [label1 addLinkString:@"《自动投标授权协议》" block:^(ZBLinkLabelModel *linkModel) {
+    [label1 addLinkString:@"《批量出借咨询与服务协议》" block:^(ZBLinkLabelModel *linkModel) {
         [weakSelf showHeTong];
     }];
-    [label1 setFontColor:UIColorWithRGB(0x4aa1f9) string:@"《自动投标授权协议》"];
+    [label1 setFontColor:UIColorWithRGB(0x4aa1f9) string:@"《批量出借咨询与服务协议》"];
     
     [_baseScrollView addSubview:label1];
     
