@@ -361,6 +361,10 @@
 		74BDA9A21F0A7B990054403F /* UCFCalendarGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 74BDA9A11F0A7B990054403F /* UCFCalendarGroup.m */; };
 		74CE8B831F21B60600512B15 /* UCFAssetTipView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74CE8B821F21B60600512B15 /* UCFAssetTipView.xib */; };
 		74CE8B861F220C7500512B15 /* UCFContractModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 74CE8B851F220C7500512B15 /* UCFContractModel.m */; };
+		74D6578E1F2EFFFF00177EB7 /* UCFHomeListNo2Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74D6578C1F2EFFFF00177EB7 /* UCFHomeListNo2Cell.m */; };
+		74D6578F1F2EFFFF00177EB7 /* UCFHomeListNo2Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74D6578D1F2EFFFF00177EB7 /* UCFHomeListNo2Cell.xib */; };
+		74D657931F2F135700177EB7 /* UCFHomeInvestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74D657911F2F135700177EB7 /* UCFHomeInvestCell.m */; };
+		74D657941F2F135700177EB7 /* UCFHomeInvestCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74D657921F2F135700177EB7 /* UCFHomeInvestCell.xib */; };
 		74D7FCCC1AE8F72700653B8F /* FundAccountGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 74D7FCC91AE8F72700653B8F /* FundAccountGroup.m */; };
 		74D7FCCD1AE8F72700653B8F /* FundAccountItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 74D7FCCB1AE8F72700653B8F /* FundAccountItem.m */; };
 		74D7FCD51AE8F75000653B8F /* UCFHeadrView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74D7FCD21AE8F75000653B8F /* UCFHeadrView.m */; };
@@ -1550,6 +1554,12 @@
 		74CE8B821F21B60600512B15 /* UCFAssetTipView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFAssetTipView.xib; sourceTree = "<group>"; };
 		74CE8B841F220C7500512B15 /* UCFContractModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFContractModel.h; sourceTree = "<group>"; };
 		74CE8B851F220C7500512B15 /* UCFContractModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFContractModel.m; sourceTree = "<group>"; };
+		74D6578B1F2EFFFF00177EB7 /* UCFHomeListNo2Cell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFHomeListNo2Cell.h; sourceTree = "<group>"; };
+		74D6578C1F2EFFFF00177EB7 /* UCFHomeListNo2Cell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFHomeListNo2Cell.m; sourceTree = "<group>"; };
+		74D6578D1F2EFFFF00177EB7 /* UCFHomeListNo2Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFHomeListNo2Cell.xib; sourceTree = "<group>"; };
+		74D657901F2F135700177EB7 /* UCFHomeInvestCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFHomeInvestCell.h; sourceTree = "<group>"; };
+		74D657911F2F135700177EB7 /* UCFHomeInvestCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFHomeInvestCell.m; sourceTree = "<group>"; };
+		74D657921F2F135700177EB7 /* UCFHomeInvestCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFHomeInvestCell.xib; sourceTree = "<group>"; };
 		74D7FCC81AE8F72700653B8F /* FundAccountGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FundAccountGroup.h; sourceTree = "<group>"; };
 		74D7FCC91AE8F72700653B8F /* FundAccountGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FundAccountGroup.m; sourceTree = "<group>"; };
 		74D7FCCA1AE8F72700653B8F /* FundAccountItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FundAccountItem.h; sourceTree = "<group>"; };
@@ -3205,6 +3215,12 @@
 				74270C7E1EC58F6800F9419B /* UCFHomeListCell.h */,
 				74270C7F1EC58F6800F9419B /* UCFHomeListCell.m */,
 				74270C801EC58F6800F9419B /* UCFHomeListCell.xib */,
+				74D6578B1F2EFFFF00177EB7 /* UCFHomeListNo2Cell.h */,
+				74D6578C1F2EFFFF00177EB7 /* UCFHomeListNo2Cell.m */,
+				74D6578D1F2EFFFF00177EB7 /* UCFHomeListNo2Cell.xib */,
+				74D657901F2F135700177EB7 /* UCFHomeInvestCell.h */,
+				74D657911F2F135700177EB7 /* UCFHomeInvestCell.m */,
+				74D657921F2F135700177EB7 /* UCFHomeInvestCell.xib */,
 				74270C811EC58F6800F9419B /* UCFHomeListHeaderSectionView.h */,
 				74270C821EC58F6800F9419B /* UCFHomeListHeaderSectionView.m */,
 				74270C831EC58F6800F9419B /* UCFHomeListHeaderSectionView.xib */,
@@ -6695,6 +6711,7 @@
 				74270D571EC5AAE500F9419B /* UCFInvitationRewardCell.xib in Resources */,
 				74F4B8AF1ECAD20E00785DFC /* UCFProfitBackViewController.xib in Resources */,
 				741CA7A31E724C44006056A8 /* UCFLoanViewController.xib in Resources */,
+				74D657941F2F135700177EB7 /* UCFHomeInvestCell.xib in Resources */,
 				748ED7A61CC74F3200690215 /* SettingMainButton.xib in Resources */,
 				7477BF9D1AFB4BF400914BFB /* SecuirtyCenter.storyboard in Resources */,
 				749D6C901F28406A00AAD0C4 /* UCFCashTipView.xib in Resources */,
@@ -6838,6 +6855,7 @@
 				FB4F9E461D62A6B600CCB492 /* OpeningMerchantsVC.xib in Resources */,
 				AEC5EEC01D9B6594000C0321 /* RechargeFixedTelNumView.xib in Resources */,
 				4A675E3F1C5F484400F21DDA /* SelectPayMoneyOrbeansCell.xib in Resources */,
+				74D6578F1F2EFFFF00177EB7 /* UCFHomeListNo2Cell.xib in Resources */,
 				25314C0C1D8FD7FA0066F446 /* UCFDirectCell.xib in Resources */,
 				74270D1A1EC595ED00F9419B /* UCFFriendRecCell.xib in Resources */,
 				74DBAC7A1D5864C200F6F6B1 /* UCFHuiShangBankViewController.xib in Resources */,
@@ -6921,6 +6939,7 @@
 				7443C7401F1F6CBB009669C0 /* UCFGoldRechargeHistoryModel.m in Sources */,
 				7439853C1F174FBD00F2EDB8 /* UCFGoldRechargeHeaderView.m in Sources */,
 				740E2E941ECD4D55006FA335 /* UCFNoticeView.m in Sources */,
+				74D657931F2F135700177EB7 /* UCFHomeInvestCell.m in Sources */,
 				7BC8A8A01AFB4EB0003A8D89 /* RegisterSuccessAlert.m in Sources */,
 				A8A3A57F1EE95BDA00D9C06D /* UCFInvestAPIManager.m in Sources */,
 				EDEC8C021CB3BAB300815228 /* NSMutableString+TagReplace.m in Sources */,
@@ -7186,6 +7205,7 @@
 				7BCBF1231ADB613C00C874FC /* UCFRegisterStepTwoViewController.m in Sources */,
 				FB1E7F7F1D8E4230009CBE2C /* UCFBidNewDetailView.m in Sources */,
 				74931A361B1326FE00143424 /* OHASMarkupParserBase.m in Sources */,
+				74D6578E1F2EFFFF00177EB7 /* UCFHomeListNo2Cell.m in Sources */,
 				83D64F5E1F1C9C6E00A839F2 /* UCFGoldBidSuccessHeaderView.m in Sources */,
 				7443C7311F1F3881009669C0 /* UCFGoldRecordHeaderFooterView.m in Sources */,
 				EDEE0D411C5F42D200021CCC /* BJGridItem.m in Sources */,

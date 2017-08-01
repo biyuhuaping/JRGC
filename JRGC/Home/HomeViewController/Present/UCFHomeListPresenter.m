@@ -23,6 +23,7 @@
 @property (strong, nonatomic) UCFHomeListGroupPresenter *groupPresenter2;
 @property (strong, nonatomic) UCFHomeListGroupPresenter *groupPresenter3;
 @property (strong, nonatomic) UCFHomeListGroupPresenter *groupPresenter4;
+@property (strong, nonatomic) UCFHomeListGroupPresenter *groupPresenter5;
 @end
 
 @implementation UCFHomeListPresenter
@@ -90,6 +91,20 @@
     return _groupPresenter4;
 }
 
+- (UCFHomeListGroupPresenter *)groupPresenter5
+{
+    if (!_groupPresenter5) {
+        UCFHomeListGroup *group5 = [[UCFHomeListGroup alloc] init];
+        group5.headTitle = @"工场预约";
+        group5.desc = @"平均1小时起息";
+        group5.showMore = NO;
+//        group5.type = @"15";
+        group5.headerImage = @"mine_icon_gold";
+        _groupPresenter5 = [UCFHomeListGroupPresenter presenterWithGroup:group5];
+    }
+    return _groupPresenter5;
+}
+
 - (NSString *)userId
 {
     NSString *userId1 = [[NSUserDefaults standardUserDefaults] objectForKey:UUID];
@@ -151,6 +166,7 @@
     }
     self.groupPresenter4.group.prdlist = temp4;
     
+    [self.homeListCells addObject:self.groupPresenter5];
     [self.homeListCells addObject:self.groupPresenter0];
     [self.homeListCells addObject:self.groupPresenter1];
     [self.homeListCells addObject:self.groupPresenter2];
@@ -164,6 +180,15 @@
         if ([result isKindOfClass:[NSDictionary class]]) {
             [self resetData];
             NSDictionary *resultDict = result;
+            UCFHomeListGroup *investGroup = [resultDict objectForKey:@"appointInvest"];
+            if (investGroup) {
+                NSArray *investModels = investGroup.prdlist;
+                UCFHomeListCellModel *investModel = [investModels firstObject];
+                investModel.moedelType = UCFHomeListCellModelTypeInvest;
+                UCFHomeListCellPresenter *cellPresenter = [UCFHomeListCellPresenter presenterWithItem:investModel];
+                weakSelf.groupPresenter5.group.prdlist = [NSArray arrayWithObjects:cellPresenter, nil];
+            }
+            
             NSArray *groupList = [resultDict objectForKey:@"homelistContent"];
             for (UCFHomeListGroup *group in groupList) {
                 NSArray *array = group.prdlist;
@@ -235,6 +260,7 @@
     self.groupPresenter2 = nil;
     self.groupPresenter3 = nil;
     self.groupPresenter4 = nil;
+    self.groupPresenter5 = nil;
     [self initData];
 }
 @end

@@ -160,6 +160,18 @@
                     [[MongoliaLayerCenter sharedManager].mongoliaLayerDic setValue:sDateStr forKey:@"authorizationDate"];
                 }
             }
+            if ([[result allKeys] containsObject:@"appointInvest"]) {
+                NSDictionary *investDict = [result objectSafeDictionaryForKey:@"appointInvest"];
+                UCFHomeListGroup * tempInvestG = [[UCFHomeListGroup alloc] init];
+                tempInvestG.title = [investDict objectSafeForKey:@"title"];
+                tempInvestG.desc = [investDict objectSafeForKey:@"desc"];
+                UCFHomeListCellModel *investModel = [[UCFHomeListCellModel alloc] init];
+                investModel.Id = [investDict objectSafeForKey:@"id"];
+                investModel.annualRate = [investDict objectSafeForKey:@"annualRate"];
+                investModel.repayPeriod = [investDict objectSafeForKey:@"repayPeriod"];
+                tempInvestG.prdlist = [NSArray arrayWithObjects:investModel, nil];
+                [tempResult setObject:tempInvestG forKey:@"appointInvest"];
+            }
             [UserInfoSingle sharedManager].companyAgent = [[result objectSafeForKey:@"isCompanyAgent"] boolValue];
             UCFHomeListCellModel *homelistModel = [UCFHomeListCellModel homeListCellWithDict:result];
             [tempResult setObject:tempArray forKey:@"homelistContent"];
