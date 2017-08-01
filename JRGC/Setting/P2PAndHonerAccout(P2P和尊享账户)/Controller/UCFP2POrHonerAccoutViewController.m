@@ -193,7 +193,7 @@
             p2pOrHonerAccout = [UCFSettingArrowItem itemWithIcon:nil title:@"微金徽商银行存管账户" destVcClass:nil];
             riskAssessment = [UCFSettingArrowItem itemWithIcon:nil title:@"微金风险承担能力" destVcClass:[RiskAssessmentViewController class]];
         }
-        UCFSettingItem *batchInvest = [UCFSettingArrowItem itemWithIcon:nil title:@"自动投标" destVcClass:[UCFBatchInvestmentViewController class]];
+        UCFSettingItem *batchInvest = [UCFSettingArrowItem itemWithIcon:nil title:@"批量出借" destVcClass:[UCFBatchInvestmentViewController class]];
         
         
         UCFSettingGroup *group1 = [[UCFSettingGroup alloc] init];//第一栏
@@ -306,9 +306,9 @@
     UCFSettingItem *item = group.items[indexPath.row];
     cell.textLabel.text = item.title;
     cell.detailTextLabel.text =item.subtitle;
-    if ([cell.textLabel.text rangeOfString:@"(开启后才可进行批量投资)"].location != NSNotFound ) {
-        [cell.textLabel setFont:[UIFont systemFontOfSize:13] string:@"(开启后才可进行批量投资)"];
-        [cell.textLabel setFontColor:UIColorWithRGB(0x999999) string:@"(开启后才可进行批量投资)"];
+    if ([cell.textLabel.text rangeOfString:@"(开通后一次可投多个项目)"].location != NSNotFound ) {
+        [cell.textLabel setFont:[UIFont systemFontOfSize:13] string:@"(开通后一次可投多个项目)"];
+        [cell.textLabel setFontColor:UIColorWithRGB(0x999999) string:@"(开通后一次可投多个项目)"];
     }
     if(indexPath.section == [self.cellItemsData indexOfObject:group] && indexPath.row == group.items.count-1){
        cellLineView.backgroundColor  = UIColorWithRGB(0xd8d8d8);
@@ -397,7 +397,7 @@
             }
  
     }
-    else if([titleStr hasPrefix:@"自动投标"]){
+    else if([titleStr hasPrefix:@"批量出借"]){
         if ([self checkIDAAndBankBlindState:self.accoutType]) {
             UCFBatchInvestmentViewController *batchInvestment = [[UCFBatchInvestmentViewController alloc] init];
             batchInvestment.isStep = [item.subtitle isEqualToString:@"未开启"] ? 1 : 2;
@@ -606,7 +606,7 @@
                                     case 4:
                                     {
                                          item.subtitle = batchMaximum.length == 0 ? @"未开启" : batchMaximum;
-                                         item.title = batchMaximum.length == 0 ? @"自动投标(开启后才可进行批量投资)" : @"自动投标";
+                                         item.title = batchMaximum.length == 0 ? @"批量出借(开通后一次可投多个项目)" : @"批量出借";
                                     }
                                         break;
                                     default:

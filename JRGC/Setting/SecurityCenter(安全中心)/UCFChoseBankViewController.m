@@ -51,10 +51,6 @@
                                              selector:@selector(keyboardHide:)
                                                  name:UIKeyboardDidHideNotification
                                                object:nil];
-  
-    
-    
-
     
     self.tableView.footer.hidden= YES;
     
