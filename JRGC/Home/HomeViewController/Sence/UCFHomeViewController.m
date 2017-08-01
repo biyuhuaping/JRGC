@@ -47,8 +47,9 @@
 #import  "UCFGoldCalculatorView.h"
 #import "UCFCollectionDetailViewController.h"
 #import "UCFFacReservedViewController.h"
+#import "UCFBatchInvestmentViewController.h"
 
-@interface UCFHomeViewController () <UCFHomeListViewControllerDelegate, UCFHomeListNavViewDelegate, UCFUserInformationViewControllerDelegate,BJGridItemDelegate>
+@interface UCFHomeViewController () <UCFHomeListViewControllerDelegate, UCFHomeListNavViewDelegate, UCFUserInformationViewControllerDelegate,BJGridItemDelegate, UIAlertViewDelegate>
 @property (strong, nonatomic) UCFCycleImageViewController *cycleImageVC;
 @property (strong, nonatomic) UCFUserInformationViewController *userInfoVC;
 @property (strong, nonatomic) UCFHomeListViewController *homeListVC;
@@ -110,7 +111,7 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUI:) name:@"getPersonalCenterNetData" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(responds3DTouchClick) name:@"responds3DTouchClick" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setDefaultState:) name:@"setDefaultViewData" object:nil];
-        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fetchData) name:@"refreshUserState" object:nil];
     }
     return self;
 }
@@ -503,6 +504,12 @@
                 [self presentViewController:loginNaviController animated:YES completion:nil];
             }
         }
+        else if (model.moedelType == UCFHomeListCellModelTypeReserved) {
+            UCFFacReservedViewController *facReservedWeb = [[UCFFacReservedViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
+            facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@", model.url, model.Id];
+            facReservedWeb.navTitle = @"工场预约";
+            [self.navigationController pushViewController:facReservedWeb animated:YES];
+        }
     }
     else if (type == UCFHomeListTypeInvest) {
         if (model.moedelType == UCFHomeListCellModelTypeDefault) {
@@ -593,9 +600,23 @@
 
 - (void)homeList:(UCFHomeListViewController *)homeList didClickReservedWithModel:(UCFHomeListCellModel *)model
 {
-    
+    if (![UserInfoSingle sharedManager].isRisk) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"您还没进行风险评估" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
+        self.accoutType = SelectAccoutTypeP2P;
+        alert.tag =  9000;
+        [alert show];
+        return;
+    }
+    if ([UserInfoSingle sharedManager].isAutoBid) {
+        UCFBatchInvestmentViewController *batchInvestment = [[UCFBatchInvestmentViewController alloc] init];
+        batchInvestment.isStep = 1;
+        batchInvestment.accoutType = SelectAccoutTypeP2P;
+        [self.navigationController pushViewController:batchInvestment animated:YES];
+        return;
+    }
     UCFFacReservedViewController *facReservedWeb = [[UCFFacReservedViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
-    facReservedWeb.url = @"https://m.9888.cn/static/wap/invest/index.html#/reserve/info";
+    NSString *url = [model.url stringByReplacingOccurrencesOfString:@"/info" withString:@"/apply"];
+    facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@", url, model.Id];
     facReservedWeb.navTitle = @"工场预约";
     [self.navigationController pushViewController:facReservedWeb animated:YES];
 }
@@ -902,6 +923,13 @@
         if (buttonIndex == 1) {
             HSHelper *helper = [HSHelper new];
             [helper pushOpenHSType:SelectAccoutTypeHoner Step:[UserInfoSingle sharedManager].enjoyOpenStatus nav:self.navigationController];
+        }
+    }
+    else if (alertView.tag == 9000) {
+        if(buttonIndex == 1){ //测试
+            RiskAssessmentViewController *vc = [[RiskAssessmentViewController alloc] initWithNibName:@"RiskAssessmentViewController" bundle:nil];
+            vc.accoutType = self.accoutType;
+            [self.navigationController pushViewController:vc animated:YES];
         }
     }
 }

@@ -387,7 +387,9 @@
         }
         else if ([nativeData[@"action"] isEqualToString:@"share"])//放心花添加分享点击事件
         {
+            
             [weakSelf goToShare:nativeData];
+
         }
         else if ([nativeData[@"action"] isEqualToString:@"clipboard"])//放心花---复制到剪切板上
         {
@@ -401,6 +403,7 @@
         }
         else if([nativeData[@"action"] isEqualToString:@"save_fxh_qrcode"]){ //放心花---保存 工场码
             UIImage *savedImage = [UIImage imageNamed:@"loanCode"];
+            
             UIImageWriteToSavedPhotosAlbum(savedImage, weakSelf, @selector(image:didFinishSavingWithError:contextInfo:), (__bridge void *)weakSelf);
         } else if ([nativeData[@"action"] isEqualToString:@"show_header"]) {
             [weakSelf.navigationController setNavigationBarHidden:NO animated:NO];
@@ -1331,4 +1334,5 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 @end

@@ -598,6 +598,7 @@ static NSString *thirdStr = @"自动投标授权已经开启";
     }else{
         [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadMianViewData" object:nil];
     }
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshUserState" object:nil];
 }
 /*
 #pragma mark - Navigation

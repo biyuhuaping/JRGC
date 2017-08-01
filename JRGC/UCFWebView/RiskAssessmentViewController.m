@@ -67,6 +67,8 @@
 //    if ([_sourceVC isEqualToString:@"P2POrHonerAccoutVC"]) {
 //            [[NSNotificationCenter defaultCenter] postNotificationName:RELOADP2PORHONERACCOTDATA object:nil];
 //    }
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshUserState" object:nil];
+    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
