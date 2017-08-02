@@ -344,6 +344,9 @@
         case 3:
             self.accoutType = SelectAccoutTypeGold;
             break;
+        case 14:
+            self.accoutType = SelectAccoutTypeP2P;
+            break;
     }
     NSString *noPermissionTitleStr = self.accoutType == SelectAccoutTypeP2P ? @"目前标的详情只对出借人开放":@"目前标的详情只对认购人开放";
     if (type == UCFHomeListTypeDetail) {

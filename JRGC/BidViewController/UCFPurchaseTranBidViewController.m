@@ -675,11 +675,13 @@
     NSString *contractNameStr = linkModel.linkString;
     if ([contractNameStr isEqualToString:@"《网络借贷出借风险提示》"]) {
         [self showContractWebViewUrl:PROTOCOLRISKPROMPT withTitle:@"网络借贷出借风险提示"];
-    }else{
+    }else if ([contractNameStr isEqualToString:@"《CFCA数字证书服务协议》"]) {
+        [self showContractWebViewUrl:CFCAURL withTitle:@"CFCA数字证书服务协议"];
+    }
+    else{
         
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         NSString *contractTypeStr = [self valueIndex:linkModel];
-         contractTypeStr = [contractNameStr isEqualToString:@"CFCA数字证书服务协议"] ? @"CFCA" :contractTypeStr;
         NSString *projectId = [[self.dataDict objectForKey:@"data"] objectForKey:@"id"];
         NSString *strParameters = [NSString stringWithFormat:@"userId=%@&prdClaimId=%@&contractType=%@&prdType=1",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],projectId,contractTypeStr];
         [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetContractMsg owner:self Type:self.accoutType];
