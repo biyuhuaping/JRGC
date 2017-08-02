@@ -178,7 +178,8 @@
     __weak typeof(self) weakSelf = self;
     [self.apiManager fetchHomeListWithUserId:self.userId completionHandler:^(NSError *error, id result) {
         if ([result isKindOfClass:[NSDictionary class]]) {
-            [self resetData];
+            [weakSelf resetData];
+            weakSelf.canClicked = YES;
             NSDictionary *resultDict = result;
             UCFHomeListGroup *investGroup = [resultDict objectForKey:@"appointInvest"];
             if (investGroup) {
