@@ -199,8 +199,12 @@
             
             //该e值不为NSNULL，并且也不为nil
            if (![propertyValue isKindOfClass:[NSNull class]] && propertyValue!=nil) {
-               [self setValue:propertyValue forKey:key];
-            }
+               if ([key isEqualToString:@"isSpecial"]) {
+                   [self setIsSpecial:[propertyValue boolValue]];
+               }
+               else
+                   [self setValue:propertyValue forKey:key];
+           }
         }
     }
     return ret;
