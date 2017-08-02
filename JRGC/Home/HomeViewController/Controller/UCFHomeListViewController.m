@@ -195,6 +195,17 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (!self.presenter.canClicked) {
+        return;
+    }
+    NSString *userId = [UserInfoSingle sharedManager].userId;
+    if (nil == userId) {
+        UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
+        UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
+        AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+        [app.tabBarController presentViewController:loginNaviController animated:YES completion:nil];
+        return;
+    }
     UCFHomeListGroupPresenter *groupPresenter = [self.presenter.allDatas objectAtIndex:indexPath.section];
     UCFHomeListCellPresenter *presenter = [groupPresenter.group.prdlist objectAtIndex:indexPath.row];
     if ([self.delegate respondsToSelector:@selector(homeList:tableView:didClickedWithModel:withType:)]) {

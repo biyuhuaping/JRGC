@@ -79,7 +79,7 @@
     if ([self.intoVCStr isEqualToString:@"ProjectDetailVC"]) {
         [self.navigationController setNavigationBarHidden:YES animated:NO];
     }else{
-        [self.navigationController setNavigationBarHidden:YES animated:animated];
+        [self.navigationController setNavigationBarHidden:YES animated:NO];
     }
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
