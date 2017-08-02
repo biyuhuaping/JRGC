@@ -171,19 +171,17 @@
             }
             else {
                 self.circleProgressView.textColor = UIColorWithRGB(0x555555);
-                if (([presenter.item.type isEqualToString:@"2"] || [presenter.item.type isEqualToString:@"3"]) && status == 2) {
-                    self.circleProgressView.progressText = @"认购";
+                if ([presenter.item.type isEqualToString:@"14"] && status == 2) {
+                    self.circleProgressView.progressText = @"批量出借";
                 }
                 else
-                    self.circleProgressView.progressText = statusArr[status];
-            }
-            
-            if ([presenter.item.type isEqualToString:@"14"] && status == 2) {
-                self.circleProgressView.progressText = @"批量出借";
-            }
-            else
-            {
-               self.circleProgressView.progressText = statusArr[status];
+                {
+                    if (([presenter.item.type isEqualToString:@"2"] || [presenter.item.type isEqualToString:@"3"] || [presenter.item.type isEqualToString:@"4"]) && status == 2) {
+                        self.circleProgressView.progressText = @"认购";
+                    }
+                    else
+                        self.circleProgressView.progressText = statusArr[status];
+                }
             }
         }
         
