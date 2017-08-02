@@ -505,10 +505,12 @@
             }
         }
         else if (model.moedelType == UCFHomeListCellModelTypeReserved) {
-            UCFFacReservedViewController *facReservedWeb = [[UCFFacReservedViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
-            facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@", model.url, model.Id];
-            facReservedWeb.navTitle = @"工场预约";
-            [self.navigationController pushViewController:facReservedWeb animated:YES];
+            if ([self checkUserCanInvestIsDetail:NO type:SelectAccoutTypeP2P]) {
+                UCFFacReservedViewController *facReservedWeb = [[UCFFacReservedViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
+                facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@", model.url, model.Id];
+                facReservedWeb.navTitle = @"工场预约";
+                [self.navigationController pushViewController:facReservedWeb animated:YES];
+            }
         }
     }
     else if (type == UCFHomeListTypeInvest) {
@@ -600,6 +602,10 @@
 
 - (void)homeList:(UCFHomeListViewController *)homeList didClickReservedWithModel:(UCFHomeListCellModel *)model
 {
+    BOOL b = [self checkUserCanInvestIsDetail:NO type:SelectAccoutTypeP2P];
+    if (!b) {
+        return;
+    }
     if (![UserInfoSingle sharedManager].isRisk) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"您还没进行风险评估" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
         self.accoutType = SelectAccoutTypeP2P;
