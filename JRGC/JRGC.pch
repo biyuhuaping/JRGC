@@ -222,6 +222,7 @@ return shared##className; \
 #define HOMEINVITATIONURL @"https://m.9888.cn/static/wap/topic-invite/index.html" //首页邀请
 
 #define COUPON_CENTER @"https://m.9888.cn/static/wap/coupon-center/index.html" //领券中心
+#define CFCAURL  @"https://static.9888.cn/pages/notices/CFCA.htm"//CFCA协议
 
 #define ZXTIP1 @"请先开通尊享徽商存管账户"
 #define ZXTIP2 @"请先设置尊享徽商存管账户交易密码"

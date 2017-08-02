@@ -90,7 +90,7 @@
         if (isShow) {
             [_customLabel2 setFontColor:UIColorWithRGB(0x4aa1f9) string:@"《CFCA数字证书服务协议》《资金存管三方协议》"];
             [_customLabel2 addLinkString:@"《CFCA数字证书服务协议》" block:^(ZBLinkLabelModel *linkModel) {
-                FullWebViewController *webController = [[FullWebViewController alloc] initWithWebUrl:COUNSELING title:@"CFCA数字证书服务协议"];
+                FullWebViewController *webController = [[FullWebViewController alloc] initWithWebUrl:CFCAURL title:@"CFCA数字证书服务协议"];
                 webController.baseTitleType = @"specialUser";
                 [weakSelf.navigationController pushViewController:webController animated:YES];
             }];
@@ -601,7 +601,7 @@
                 __weak typeof(self) weakSelf = self;
                 [_customLabel2 setFontColor:UIColorWithRGB(0x4aa1f9) string:@"《CFCA数字证书服务协议》《资金存管三方协议》"];
                 [_customLabel2 addLinkString:@"《CFCA数字证书服务协议》" block:^(ZBLinkLabelModel *linkModel) {
-                    FullWebViewController *webController = [[FullWebViewController alloc] initWithWebUrl:COUNSELING title:@"CFCA数字证书服务协议"];
+                    FullWebViewController *webController = [[FullWebViewController alloc] initWithWebUrl:CFCAURL title:@"CFCA数字证书服务协议"];
                     webController.baseTitleType = @"specialUser";
                     [weakSelf.navigationController pushViewController:webController animated:YES];
                 }];

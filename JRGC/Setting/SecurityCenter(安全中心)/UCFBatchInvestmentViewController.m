@@ -154,8 +154,8 @@ static NSString *thirdStr = @"自动投标授权已经开启";
 }
 - (void)showHeTong
 {
-    NSString *strParameters = [NSString stringWithFormat:@"userId=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetBatchContractMsg owner:self Type:SelectAccoutDefault];
+    NSString *strParameters = [NSString stringWithFormat:@"userId=%@&contractType=107&prdType=2",[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
+    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetContractMsg owner:self Type:SelectAccoutTypeP2P];
 }
 - (void)initSecondSectionView
 {
@@ -592,7 +592,21 @@ static NSString *thirdStr = @"自动投标授权已经开启";
             [self.navigationController pushViewController:controller animated:YES];
         }
 
+    }else if(tag.intValue == kSXTagGetContractMsg) {
+        NSString *Data = (NSString *)result;
+        NSDictionary * dic = [Data objectFromJSONString];
+        NSDictionary *dictionary =  [dic objectSafeDictionaryForKey:@"contractMess"];
+        NSString *status = [dic objectSafeForKey:@"status"];
+        if ([status intValue] == 1) {
+            NSString *contractMessStr = [dictionary objectSafeForKey:@"contractMess"];
+            FullWebViewController *controller = [[FullWebViewController alloc] initWithHtmlStr:contractMessStr title:@"批量出借咨询与服务协议"];
+            controller.baseTitleType = @"detail_heTong";
+            [self.navigationController pushViewController:controller animated:YES];
+        }else{
+            //            [self showHTAlertdidFinishGetUMSocialDataResponse];
+        }
     }
+
 }
 - (void)dealloc
 {

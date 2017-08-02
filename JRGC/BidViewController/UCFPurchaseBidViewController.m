@@ -1586,12 +1586,12 @@
                 break;
             }
         }
+        contractUrlStr = [contractNameStr hasPrefix:@"CFCA"] ? CFCAURL :contractTypeStr;
         if (![contractUrlStr isEqualToString:@""]) {//如果合同url存在的情况
              [self showContractWebViewUrl:contractUrlStr withTitle:contractNameStr];
             return;
         }
-        
-        contractTypeStr = [contractNameStr isEqualToString:@"CFCA数字证书服务协议"] ? @"CFCA" :contractTypeStr;
+
         NSString *projectId = [[self.dataDict objectForKey:@"data"] objectForKey:@"id"];
         NSString *strParameters = [NSString stringWithFormat:@"userId=%@&prdClaimId=%@&contractType=%@&prdType=0",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],projectId,contractTypeStr];
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
