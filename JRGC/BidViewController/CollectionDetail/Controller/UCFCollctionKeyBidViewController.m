@@ -1400,7 +1400,7 @@
     }else if([contractStr isEqualToString:@"《履行反洗钱义务的承诺书》"]){
         [self showContractWebViewUrl:PROTOCOLENTUSTTRANSFER withTitle:@"履行反洗钱义务的承诺书"];
     }else if([contractStr isEqualToString:@"《CFCA数字证书服务协议》"]){
-        [self showContractWebViewUrl:PROTOCOLENTUSTTRANSFER withTitle:@"CFCA数字证书服务协议"];
+        [self showContractWebViewUrl:CFCAURL withTitle:@"CFCA数字证书服务协议"];
     }
     else{
         [self showContractWebViewUrl:BATHCHINVESTPROTOCOL withTitle:@"批量出借协议"];
