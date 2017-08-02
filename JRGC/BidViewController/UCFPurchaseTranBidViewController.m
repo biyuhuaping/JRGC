@@ -563,11 +563,10 @@
     imageView1.frame = CGRectMake(CGRectGetMinX(riskProtocolLabel.frame) - 7, CGRectGetMinY(riskProtocolLabel.frame) + 4, 5, 5);
     imageView1.image = [UIImage imageNamed:@"point.png"];
     
-    NSDictionary *userOtherMsg = [_dataDict objectForKey:@"userOtherMsg"];
-    NSString  *cfcaContractNameSt = [userOtherMsg objectSafeForKey:@"cfcaContractName"];
-    if(self.accoutType == SelectAccoutTypeP2P){
+    NSString  *cfcaContractNameStr = [_dataDict objectSafeForKey:@"cfcaContractName"];
+    if(self.accoutType == SelectAccoutTypeP2P){//CFCA数字证书服务协议
         
-        if (![cfcaContractNameSt isEqualToString:@""]) {
+        if (![cfcaContractNameStr isEqualToString:@""]) {
             [footView addSubview:firstProtocolLabel];
             [footView addSubview:imageView];
             [footView addSubview:riskProtocolLabel];
