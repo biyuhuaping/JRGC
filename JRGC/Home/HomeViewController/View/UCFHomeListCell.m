@@ -76,7 +76,6 @@
         }
         self.timeLabel.text = presenter.repayPeriodtext;
         self.repayModelLabel.text = presenter.repayModeText;
-        self.startMoneyLabel.text = presenter.minInvest;
         self.remainLabel.text = presenter.availBorrowAmount;
         if (presenter.platformSubsidyExpense.length > 0) {//贴
             self.image1W.constant = 18;
@@ -135,6 +134,7 @@
                 self.circleProgressView.pathFillColor = UIColorWithRGB(0xe2e2e2);//未绘制的进度条颜色
                 //            self.progressView.progressLabel.textColor = UIColorWithRGB(0x909dae);
             }
+            self.startMoneyLabel.text = @"年化收益克重";
         }
         else{
             //控制进度视图显示
@@ -145,6 +145,7 @@
                 self.circleProgressView.pathFillColor = UIColorWithRGB(0xe2e2e2);//未绘制的进度条颜色
                 //            self.progressView.progressLabel.textColor = UIColorWithRGB(0x909dae);
             }
+            self.startMoneyLabel.text = presenter.minInvest;
         }
         NSArray *statusArr = @[@"未审核",@"等待确认",@"出借",@"流标",@"满标",@"回款中",@"已回款"];
         if ([presenter.item.type isEqualToString:@"3"]) {
@@ -483,7 +484,8 @@
     [self.rateLabel setFont:[UIFont systemFontOfSize:10] string:@"克/100克"];
     self.timeLabel.text = goldModel.periodTerm;
     self.repayModelLabel.text = goldModel.paymentType;
-    self.startMoneyLabel.text = [NSString stringWithFormat:@"%@克起", goldModel.minPurchaseAmount];
+    self.startMoneyLabel.text = @"年化收益克重";
+//    [NSString stringWithFormat:@"%@克起", goldModel.minPurchaseAmount];
     self.remainLabel.text = [NSString stringWithFormat:@"剩%@克", goldModel.remainAmount];
     NSInteger status = [goldModel.status integerValue];
     
