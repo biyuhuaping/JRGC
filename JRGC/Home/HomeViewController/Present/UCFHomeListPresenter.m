@@ -176,6 +176,7 @@
 
 - (void)fetchHomeListDataWithCompletionHandler:(NetworkCompletionHandler)completionHander {
     __weak typeof(self) weakSelf = self;
+    self.canClicked = NO;
     [self.apiManager fetchHomeListWithUserId:self.userId completionHandler:^(NSError *error, id result) {
         if ([result isKindOfClass:[NSDictionary class]]) {
             [weakSelf resetData];
