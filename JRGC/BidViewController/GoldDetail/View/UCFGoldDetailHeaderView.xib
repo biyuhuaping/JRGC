@@ -67,7 +67,7 @@
                         </mask>
                     </variation>
                 </view>
-                <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DSH-ye-4S5">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DSH-ye-4S5">
                     <rect key="frame" x="0.0" y="155" width="375" height="70"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="可购克重" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vwN-JF-Ahb">
@@ -105,7 +105,7 @@
                             </userDefinedRuntimeAttributes>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" red="0.082352941176470587" green="0.12941176470588234" blue="0.22352941176470587" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" red="0.082352941176470587" green="0.12941176470588234" blue="0.22352941176470587" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="WYs-1X-L5c" firstAttribute="top" secondItem="DSH-ye-4S5" secondAttribute="top" constant="-64" id="0YQ-jV-2ke"/>
                         <constraint firstAttribute="height" constant="70" id="5CQ-hu-zWR"/>
@@ -137,6 +137,7 @@
                 <outlet property="periodTermLabel" destination="OjN-7Z-ENo" id="gbh-Ri-Frc"/>
                 <outlet property="realGoldPriceLabel" destination="K6t-j1-gmf" id="3hX-Ty-TiI"/>
                 <outlet property="remainAmountLabel" destination="87A-p0-dAk" id="ZIz-by-b0m"/>
+                <outlet property="remainAmountLabelTitle" destination="vwN-JF-Ahb" id="jz2-B4-wO5"/>
             </connections>
             <point key="canvasLocation" x="-66.5" y="-173.5"/>
         </view>

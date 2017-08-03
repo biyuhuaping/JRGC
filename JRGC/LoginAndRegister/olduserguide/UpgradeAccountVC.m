@@ -80,10 +80,10 @@
     
     if (self.accoutType == SelectAccoutTypeP2P) {
         
-        NSString *showStr = @"开通即视为我已阅读并同意《资金存管三方协议》";
+        NSString *showStr = @"开通即视为本人已阅读并同意《资金存管三方协议》";
         BOOL isShow = NO;
         if (isShow) {
-            showStr = @"开通即视为我已阅读并同意《CFCA数字证书服务协议》《资金存管三方协议》";
+            showStr = @"开通即视为本人已阅读并同意《CFCA数字证书服务协议》《资金存管三方协议》";
         }
          _customLabel2.text = showStr;
         __weak typeof(self) weakSelf = self;
@@ -106,7 +106,7 @@
 
         
     } else {
-        _customLabel2.text = @"开通即视为我已阅读并同意《资金账户服务三方协议》";
+        _customLabel2.text = @"开通即视为本人已阅读并同意《资金账户服务三方协议》";
         [_customLabel2 setFontColor:UIColorWithRGB(0x4aa1f9) string:@"《资金账户服务三方协议》"];
 
         __weak typeof(self) weakSelf = self;
@@ -597,7 +597,7 @@
             DBLOG(@"%@",dic[@"data"]);
             NSString *cfcaContractNameStr = [dic[@"data"] objectSafeForKey:@"cfcaContractName"];
             if(![cfcaContractNameStr isEqualToString:@""]){
-                _customLabel2.text = @"开通即视为我已阅读并同意《CFCA数字证书服务协议》《资金存管三方协议》";
+                _customLabel2.text = @"开通即视为本人已阅读并同意《CFCA数字证书服务协议》《资金存管三方协议》";
                 __weak typeof(self) weakSelf = self;
                 [_customLabel2 setFontColor:UIColorWithRGB(0x4aa1f9) string:@"《CFCA数字证书服务协议》《资金存管三方协议》"];
                 [_customLabel2 addLinkString:@"《CFCA数字证书服务协议》" block:^(ZBLinkLabelModel *linkModel) {

@@ -22,6 +22,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *periodTermLabel;
 @property (strong, nonatomic) IBOutlet UILabel *remainAmountLabel;
 @property (strong, nonatomic) IBOutlet UILabel *realGoldPriceLabel;
+@property (weak, nonatomic) IBOutlet UILabel *remainAmountLabelTitle;
 
 @end
 @implementation UCFGoldDetailHeaderView
@@ -58,6 +59,8 @@
 -(void)layoutSubviews
 {
     [super layoutSubviews];
+    self.remainAmountLabel.textColor = [UIColor whiteColor];
+    self.remainAmountLabelTitle.textColor = [UIColor whiteColor];
 }
 
 -(void)setGoldModel:(UCFGoldModel *)goldModel
