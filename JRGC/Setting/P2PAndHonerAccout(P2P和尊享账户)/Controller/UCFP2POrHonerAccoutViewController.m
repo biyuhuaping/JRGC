@@ -29,6 +29,7 @@
 #import "UCFSession.h"
 #import "MjAlertView.h"
 #import "UCFCalendarViewController.h"
+#import "UCFMyReservedViewController.h"
 
 @interface UCFP2POrHonerAccoutViewController ()<UITableViewDelegate,UITableViewDataSource,UCFP2POrHornerTabHeaderViewDelete,UIAlertViewDelegate,MjAlertViewDelegate>
 {
@@ -194,7 +195,7 @@
             riskAssessment = [UCFSettingArrowItem itemWithIcon:nil title:@"微金风险承担能力" destVcClass:[RiskAssessmentViewController class]];
         }
         UCFSettingItem *batchInvest = [UCFSettingArrowItem itemWithIcon:nil title:@"批量出借" destVcClass:[UCFBatchInvestmentViewController class]];
-        
+        UCFSettingItem *myReserved = [UCFSettingArrowItem itemWithIcon:nil title:@"我的预约" destVcClass:[UCFMyReservedViewController class]];
         
         UCFSettingGroup *group1 = [[UCFSettingGroup alloc] init];//第一栏
         group1.items = [[NSMutableArray alloc]initWithArray: @[myInVest,backMoneyDetail,feedBackVC]];
@@ -204,7 +205,7 @@
         if (self.accoutType == SelectAccoutTypeHoner) {
             group2.items = [[NSMutableArray alloc]initWithArray:@[p2pOrHonerAccout, bundleCard ,setChangePassword,riskAssessment]];
         }else{
-            group2.items = [[NSMutableArray alloc]initWithArray:@[p2pOrHonerAccout, bundleCard ,setChangePassword,riskAssessment,batchInvest]];
+            group2.items = [[NSMutableArray alloc]initWithArray:@[p2pOrHonerAccout, bundleCard ,setChangePassword,riskAssessment,batchInvest, myReserved]];
         }
         _cellItemsData = [[NSMutableArray alloc] initWithObjects:group1,group2,nil];
     }
@@ -405,6 +406,12 @@
             batchInvestment.sourceType = @"P2POrHonerAccoutVC";
             [self.navigationController pushViewController:batchInvestment animated:YES];
         }
+    }
+    else if ([titleStr hasPrefix:@"我的预约"]) {
+        UCFMyReservedViewController *myserved = [[UCFMyReservedViewController alloc] initWithNibName:@"UCFMyReservedViewController" bundle:nil];
+        myserved.url = [NSString stringWithFormat:@"https://m.9888.cn/static/wap/invest/index.html#/reserve/records"];
+        myserved.navTitle = titleStr;
+        [self.navigationController pushViewController:myserved animated:YES];
     }
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
