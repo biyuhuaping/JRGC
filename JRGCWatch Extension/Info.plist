@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>XPC!</string>
 	<key>CFBundleShortVersionString</key>
-	<string>3.0.50</string>
+	<string>3.1.10</string>
 	<key>CFBundleVersion</key>
 	<string>4</string>
 	<key>CLKComplicationSupportedFamilies</key>
@@ -36,7 +36,7 @@
 		<key>NSExtensionAttributes</key>
 		<dict>
 			<key>WKAppBundleIdentifier</key>
-			<string>com.dzlh.jgrcapp.watchkitapp</string>
+			<string>com.dzlh.jgrcapp299.watchkitapp</string>
 		</dict>
 		<key>NSExtensionPointIdentifier</key>
 		<string>com.apple.watchkit</string>
