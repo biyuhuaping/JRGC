@@ -415,22 +415,7 @@
             weakSelf.topConSpace.constant = 0;
 
         }
-        else if ([nativeData[@"action"] isEqualToString:@"auto_bid_auth"]) //投标成功 跳转到 投资详情
-        {
-            UCFBatchInvestmentViewController *batchInvestment = [[UCFBatchInvestmentViewController alloc] init];
-            batchInvestment.isStep = 1;
-            batchInvestment.accoutType = weakSelf.accoutType;
-//            batchInvestment.sourceType = @"P2POrHonerAccoutVC";
-            [weakSelf.navigationController pushViewController:batchInvestment animated:YES];
-        }
-        else if ([nativeData[@"action"] isEqualToString:@"auto_bid_second"]) //投标成功 跳转到 投资详情
-        {
-            UCFBatchInvestmentViewController *batchInvestment = [[UCFBatchInvestmentViewController alloc] init];
-            batchInvestment.isStep = 2;
-            batchInvestment.accoutType = weakSelf.accoutType;
-            //            batchInvestment.sourceType = @"P2POrHonerAccoutVC";
-            [weakSelf.navigationController pushViewController:batchInvestment animated:YES];
-        }
+        
         //----------------------------------------------------------------------------------------------------qyy
         
        /* else if ([nativeData[@"action"] isEqualToString:@"app_invest_error"]) //投标成功 跳转到 投资详情
@@ -1067,6 +1052,22 @@
     {
         //[self.navigationController popViewControllerAnimated:YES];
         [self goToInvestTab];
+    }
+    else if ([controllerName isEqualToString:@"auto_bid_auth"]) //投标成功 跳转到 投资详情
+    {
+        UCFBatchInvestmentViewController *batchInvestment = [[UCFBatchInvestmentViewController alloc] init];
+        batchInvestment.isStep = 1;
+        batchInvestment.accoutType = self.accoutType;
+        //            batchInvestment.sourceType = @"P2POrHonerAccoutVC";
+        [self.navigationController pushViewController:batchInvestment animated:YES];
+    }
+    else if ([controllerName isEqualToString:@"auto_bid_second"]) //投标成功 跳转到 投资详情
+    {
+        UCFBatchInvestmentViewController *batchInvestment = [[UCFBatchInvestmentViewController alloc] init];
+        batchInvestment.isStep = 2;
+        batchInvestment.accoutType = self.accoutType;
+        //            batchInvestment.sourceType = @"P2POrHonerAccoutVC";
+        [self.navigationController pushViewController:batchInvestment animated:YES];
     }
     
     //----------------------------------------------------------------------------------------------------qyy
