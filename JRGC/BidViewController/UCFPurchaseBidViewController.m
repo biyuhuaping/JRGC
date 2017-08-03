@@ -1563,6 +1563,8 @@
     NSString *contractNameStr = linkModel.linkString;
     if ([contractNameStr isEqualToString:@"《网络借贷出借风险提示》"]) {
         [self showContractWebViewUrl:PROTOCOLRISKPROMPT withTitle:@"网络借贷出借风险提示"];
+    }else if ([contractNameStr isEqualToString:@"《CFCA数字证书服务协议》"]) {
+        [self showContractWebViewUrl:CFCAURL withTitle:@"CFCA数字证书服务协议"];
     }
 //    else if([contractStr isEqualToString:@"《出借人承诺书》"]){
 //        [self showContractWebViewUrl:PROTOCOLENDERPROMISE withTitle:@"出借人承诺书"];
@@ -1586,7 +1588,6 @@
                 break;
             }
         }
-        contractUrlStr = [contractNameStr hasPrefix:@"CFCA"] ? CFCAURL :contractTypeStr;
         if (![contractUrlStr isEqualToString:@""]) {//如果合同url存在的情况
              [self showContractWebViewUrl:contractUrlStr withTitle:contractNameStr];
             return;
