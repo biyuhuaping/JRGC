@@ -721,7 +721,8 @@
     {
         purchaseGoldCount = [self.goldModel.remainAmount doubleValue];
     }
-    cell.moneyTextField.text =  [NSString stringWithFormat:@"%.3lf",purchaseGoldCount];
+    purchaseGoldCount =  purchaseGoldCount *1000;
+    cell.moneyTextField.text =  [NSString stringWithFormat:@"%.3lf",(int)purchaseGoldCount/1000.0];
     
     
     double amountPay = [cell.moneyTextField.text doubleValue] * [ToolSingleTon sharedManager].readTimePrice;
