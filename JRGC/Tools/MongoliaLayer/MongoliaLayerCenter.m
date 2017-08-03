@@ -126,7 +126,7 @@
     }else if (alertview.tag == 1001) {
         [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID]} tag:KSXTagADJustMent owner:self signature:YES Type:SelectAccoutDefault];
         [self showLogic];
-    } else if (alertview.tag == 1002) {
+    } else if (alertview.tag == 1002 && index == 1) {
         
         HSHelper *helper = [HSHelper new];
         if (![helper checkP2POrWJIsAuthorization:SelectAccoutTypeHoner]) {
