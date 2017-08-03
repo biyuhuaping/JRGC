@@ -800,7 +800,7 @@
         [alert show];
         return;
     }
-    if(minPurchaseAmount > maxPurchaseAmount - purchaseGoldAmount &&  maxPurchaseAmount < minPurchaseAmount * 2 )
+    if(minPurchaseAmount > maxPurchaseAmount - purchaseGoldAmount &&  maxPurchaseAmount < minPurchaseAmount * 2 &&  maxPurchaseAmount - purchaseGoldAmount > 0)
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"需购买剩余的全部克重" delegate:self cancelButtonTitle:@"重新输入" otherButtonTitles: nil];
         alert.tag = 1000;

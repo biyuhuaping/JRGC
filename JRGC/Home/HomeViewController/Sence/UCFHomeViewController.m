@@ -508,7 +508,8 @@
             }
         }
         else if (model.moedelType == UCFHomeListCellModelTypeReserved) {
-            if ([self checkUserCanInvestIsDetail:NO type:SelectAccoutTypeP2P]) {
+            self.accoutType = SelectAccoutTypeP2P;
+            if ([self checkUserCanInvestIsDetail:NO type:self.accoutType]) {
                 UCFFacReservedViewController *facReservedWeb = [[UCFFacReservedViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
                 facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@", model.url, model.Id];
                 facReservedWeb.navTitle = @"工场预约";
@@ -605,7 +606,8 @@
 
 - (void)homeList:(UCFHomeListViewController *)homeList didClickReservedWithModel:(UCFHomeListCellModel *)model
 {
-    BOOL b = [self checkUserCanInvestIsDetail:NO type:SelectAccoutTypeP2P];
+    self.accoutType = SelectAccoutTypeP2P;
+    BOOL b = [self checkUserCanInvestIsDetail:NO type:self.accoutType];
     if (!b) {
         return;
     }

@@ -464,12 +464,9 @@
     bottomBkView = [[UIView alloc] initWithFrame:CGRectMake(0, view_y, ScreenWidth, 44*row)];
     bottomBkView.backgroundColor = [UIColor whiteColor];
     [self.oneScroll addSubview:bottomBkView];
-//
-//    if (!_isP2P) {
-//        [UCFToolsMehod viewAddLine:bottomBkView Up:YES];
-//    }
-//    [UCFToolsMehod viewAddLine:bottomBkView Up:NO];
     
+    [UCFToolsMehod viewAddLine:bottomBkView Up:YES];
+    [UCFToolsMehod viewAddLine:bottomBkView Up:NO];
 
     UIImageView *guImageV = [[UIImageView alloc] initWithFrame:CGRectMake(IconXPos, IconYPos, 22, 22)];
     guImageV.image = [UIImage imageNamed:@"gold_particular_icon_repayment"];
