@@ -17,6 +17,7 @@
     UCFInvestmentDetailView *_investmentDetailView;
     UCFNoDataView *_nodataView;
     UCF404ErrorView *_errorView;
+    NSString *_contractTitle;
 }
 
 @end
@@ -150,10 +151,12 @@
     NSMutableArray *contractInfoArr = [NSMutableArray arrayWithCapacity:3];
     NSArray *contractInfo = dic[@"transferContractMess"];
     for (NSDictionary *dic in contractInfo) {
-        NSMutableDictionary *tempDic = [NSMutableDictionary dictionaryWithCapacity:4];
+        NSMutableDictionary *tempDic = [NSMutableDictionary dictionaryWithCapacity:5];
         [tempDic setValue:dic[@"contracttitle"] forKey:@"contracttitle"];
         [tempDic setValue:dic[@"signStatus"] forKey:@"signStatus"];
         [tempDic setValue:dic[@"contractContent"] forKey:@"contractContent"];
+        [tempDic setValue:[dic objectSafeForKey:@"contractType"] forKey:@"contractType"];
+        [tempDic setValue:[dic objectSafeForKey:@"contractDownUrl"] forKey:@"contractDownUrl"];
         [contractInfoArr addObject:tempDic];
     }
     
@@ -216,10 +219,24 @@
         }else {
             [AuxiliaryFunc showAlertViewWithMessage:@"产品标不存在，请检查(或者不能非法操作)"];
         }
+    }else if(tag.intValue == kSXTagGetContractMsg) {
+        NSString *Data = (NSString *)result;
+        NSDictionary * dic = [Data objectFromJSONString];
+        NSDictionary *dictionary =  [dic objectSafeDictionaryForKey:@"contractMess"];
+        NSString *status = [dic objectSafeForKey:@"status"];
+        if ([status intValue] == 1) {
+            NSString *contractMessStr = [dictionary objectSafeForKey:@"contractMess"];
+            [self showContractHtmlStr:contractMessStr withTitle:_contractTitle];
+        }else{
+            [self showHTAlertdidFinishGetUMSocialDataResponse];
+        }
     }
-
 }
-
+- (void)showHTAlertdidFinishGetUMSocialDataResponse
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请登录www.9888.cn相关页面查看" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles: nil];
+    [alert show];
+}
 //请求失败
 - (void)errorPost:(NSError*)err tag:(NSNumber*)tag
 {
@@ -232,14 +249,39 @@
 
 - (void)investmentDetailView:(UCFInvestmentDetailView *)investmentDetailView didSelectConstractDetailWithModel:(UCFConstractModel *)constract
 {
-    if([constract.contractContent isEqualToString:@"" ] || constract.contractContent == nil){
-        //合同的内容为空时 弹框提示
-        UIAlertView *alerView =[[ UIAlertView alloc]initWithTitle:@"提示" message:@"请登录www.9888.cn相关页面查看" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-        [alerView show];
-        return ;
+//    if([constract.contractContent isEqualToString:@"" ] || constract.contractContent == nil){
+//        //合同的内容为空时 弹框提示
+//        UIAlertView *alerView =[[ UIAlertView alloc]initWithTitle:@"提示" message:@"请登录www.9888.cn相关页面查看" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+//        [alerView show];
+//        return ;
+//    }
+    
+    
+    if (![constract.contractDownUrl isEqualToString:@""] && constract.contractDownUrl !=nil) {//如果合同url存在的情况
+        [self showContractWebViewUrl:constract.contractDownUrl withTitle:constract.contracttitle];
+        return;
     }
-    FullWebViewController *controller = [[FullWebViewController alloc] initWithHtmlStr:constract.contractContent title:constract.contracttitle];
+    if (![constract.contractContent isEqualToString:@""] && constract.contractContent !=nil) {//如果合同内容 存在的情况
+        [self showContractHtmlStr:constract.contractContent withTitle:constract.contracttitle];
+        return;
+    }
+    _contractTitle = constract.contracttitle;
+    NSString *strParameters = [NSString stringWithFormat:@"userId=%@&prdOrderId=%@&contractType=%@&prdType=0",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],self.billId,constract.contractType];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetContractMsg owner:self Type:self.accoutType];
+   
+}
+-(void)showContractHtmlStr:(NSString *)content withTitle:(NSString *)title
+{
+    FullWebViewController *controller = [[FullWebViewController alloc] initWithHtmlStr:content title:title];
     controller.baseTitleType = @"specialUser";
+    [self.navigationController pushViewController:controller animated:YES];
+}
+#pragma mark H5URl加载方式
+-(void)showContractWebViewUrl:(NSString *)urlStr withTitle:(NSString *)title
+{
+    FullWebViewController *controller = [[FullWebViewController alloc] initWithWebUrl:urlStr    title:title];
+    controller.baseTitleType = @"detail_heTong";
     [self.navigationController pushViewController:controller animated:YES];
 }
 
