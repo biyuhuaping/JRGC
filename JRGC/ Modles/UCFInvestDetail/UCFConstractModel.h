@@ -17,6 +17,14 @@
 @property (nonatomic, copy) NSString *signStatus;
 // 合同内容
 @property (nonatomic, copy) NSString *contractContent;
+// 合同类型
+@property (nonatomic, copy) NSString *contractType;
+// 合同Url
+@property (nonatomic, copy) NSString *contractDownUrl;
+/*
+ 
+ "contracttitle":"出借咨询与服务协议","contractType":"5","signStatus":"1","contractContent":""
+ */
 
 -(id)initWithDictionary:(NSDictionary *)dicJson;
 + (instancetype)constractWithDict:(NSDictionary *)dict;

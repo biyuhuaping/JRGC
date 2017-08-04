@@ -595,6 +595,8 @@
 		83974FDF1F14B25200C2252F /* UCFGoldMoneyBoadCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83974FDD1F14B25200C2252F /* UCFGoldMoneyBoadCell.xib */; };
 		83A6FEA81EBC2DDF000BC48C /* UCFProductListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A6FEA61EBC2DDF000BC48C /* UCFProductListCell.m */; };
 		83A6FEA91EBC2DDF000BC48C /* UCFProductListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83A6FEA71EBC2DDF000BC48C /* UCFProductListCell.xib */; };
+		83C3E7E21F346188007BE065 /* UCFGoldCouponViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C3E7E01F346188007BE065 /* UCFGoldCouponViewController.m */; };
+		83C3E7E31F346188007BE065 /* UCFGoldCouponViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83C3E7E11F346188007BE065 /* UCFGoldCouponViewController.xib */; };
 		83CD84281F13A50800227704 /* UCFBatchBidController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CD84001F13A50800227704 /* UCFBatchBidController.m */; };
 		83CD84291F13A50800227704 /* UCFBatchBidController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83CD84011F13A50800227704 /* UCFBatchBidController.xib */; };
 		83CD842A1F13A50800227704 /* UCFHonerPlanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CD84031F13A50800227704 /* UCFHonerPlanViewController.m */; };
@@ -1967,6 +1969,9 @@
 		83A6FEA51EBC2DDF000BC48C /* UCFProductListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UCFProductListCell.h; path = JRGC/LatestProject/UCFProductListCell.h; sourceTree = SOURCE_ROOT; };
 		83A6FEA61EBC2DDF000BC48C /* UCFProductListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UCFProductListCell.m; path = JRGC/LatestProject/UCFProductListCell.m; sourceTree = SOURCE_ROOT; };
 		83A6FEA71EBC2DDF000BC48C /* UCFProductListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UCFProductListCell.xib; path = JRGC/LatestProject/UCFProductListCell.xib; sourceTree = SOURCE_ROOT; };
+		83C3E7DF1F346188007BE065 /* UCFGoldCouponViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFGoldCouponViewController.h; sourceTree = "<group>"; };
+		83C3E7E01F346188007BE065 /* UCFGoldCouponViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFGoldCouponViewController.m; sourceTree = "<group>"; };
+		83C3E7E11F346188007BE065 /* UCFGoldCouponViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFGoldCouponViewController.xib; sourceTree = "<group>"; };
 		83CD83FF1F13A50800227704 /* UCFBatchBidController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFBatchBidController.h; sourceTree = "<group>"; };
 		83CD84001F13A50800227704 /* UCFBatchBidController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFBatchBidController.m; sourceTree = "<group>"; };
 		83CD84011F13A50800227704 /* UCFBatchBidController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFBatchBidController.xib; sourceTree = "<group>"; };
@@ -5752,6 +5757,9 @@
 				A8FF32E11F1666A600066A80 /* UCFGoldBidSuccessViewController.h */,
 				A8FF32E31F1666A600066A80 /* UCFGoldBidSuccessViewController.m */,
 				A8FF32E21F1666A600066A80 /* UCFGoldBidSuccessViewController.xib */,
+				83C3E7DF1F346188007BE065 /* UCFGoldCouponViewController.h */,
+				83C3E7E01F346188007BE065 /* UCFGoldCouponViewController.m */,
+				83C3E7E11F346188007BE065 /* UCFGoldCouponViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -6776,6 +6784,7 @@
 				FBEDF1E01CB5171500116E12 /* MyViewController.xib in Resources */,
 				A851F34A1F132739003DE8B8 /* UCFGoldTransactionHeadView.xib in Resources */,
 				840A794B1C2A80B60059A946 /* UCFMessageSettingViewController.xib in Resources */,
+				83C3E7E31F346188007BE065 /* UCFGoldCouponViewController.xib in Resources */,
 				74956EB51D66F33D00D68B61 /* UCFAccountDetailViewController.xib in Resources */,
 				4A90167F1AFB12FE0049A9E0 /* LICENSE in Resources */,
 				A851F3561F1379E2003DE8B8 /* UCFGoldPriceFloatView.xib in Resources */,
@@ -6990,6 +6999,7 @@
 				7439853C1F174FBD00F2EDB8 /* UCFGoldRechargeHeaderView.m in Sources */,
 				740E2E941ECD4D55006FA335 /* UCFNoticeView.m in Sources */,
 				74D657931F2F135700177EB7 /* UCFHomeInvestCell.m in Sources */,
+				83C3E7E21F346188007BE065 /* UCFGoldCouponViewController.m in Sources */,
 				7BC8A8A01AFB4EB0003A8D89 /* RegisterSuccessAlert.m in Sources */,
 				A8A3A57F1EE95BDA00D9C06D /* UCFInvestAPIManager.m in Sources */,
 				EDEC8C021CB3BAB300815228 /* NSMutableString+TagReplace.m in Sources */,
