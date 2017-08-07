@@ -20,7 +20,8 @@
 #import "UCFGoldRechargeViewController.h"
 #import "NSString+CJString.h"
 #import "FullWebViewController.h"
-@interface UCFGoldPurchaseViewController ()<UITableViewDelegate,UITableViewDataSource,UCFGoldMoneyBoadCellDelegate,UITextFieldDelegate>
+#import "UCFGoldCouponViewController.h"
+@interface UCFGoldPurchaseViewController ()<UITableViewDelegate,UITableViewDataSource,UCFGoldMoneyBoadCellDelegate,UITextFieldDelegate,UIGestureRecognizerDelegate>
 {
     float  bottomViewYPos;
     NSArray *_prdLabelsList;
@@ -66,6 +67,7 @@
     self.tableView.tableFooterView = [self createFootView];
     self.tableView.contentInset =  UIEdgeInsetsMake(10, 0, 0, 0);
     UITapGestureRecognizer *frade = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardDown)];
+    frade.delegate = self;
     [self.view addGestureRecognizer:frade];
     
   
@@ -508,10 +510,63 @@
     }else if (indexPath.section == 2){
         if (!cell) {
             cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellId];
+            CGFloat offX = 0.0f;
+//            if (isHaveCouponNum) {
+//                offX = 15.0f;
+//            }
+            UIView *lineView1 = [[UIView alloc] initWithFrame:CGRectMake(0, 44, ScreenWidth, 0.5)];
+            lineView1.backgroundColor = UIColorWithRGB(0xe3e5ea);
+            [cell addSubview:lineView1];
+            UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+            button.frame = CGRectMake(0, 0, ScreenWidth, 44);
+            button.backgroundColor = [UIColor clearColor];
+            button.tag = 400;
+            [button addTarget:self action:@selector(pushGoldCouponVC) forControlEvents:UIControlEventTouchUpInside];
+            [cell addSubview:button];
+            cell.textLabel.textColor = UIColorWithRGB(0x555555);
+            cell.textLabel.font = [UIFont systemFontOfSize:16.0f];
+            
+            UIImageView *arrowImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"list_icon_arrow"]];
+            arrowImageView.frame = CGRectMake(ScreenWidth - 8 - 20,(44 - 13)/2, 8, 13);
+            [cell addSubview:arrowImageView];
+            
+            UILabel *availableLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, CGRectGetMinX(arrowImageView.frame) - 5, 44)];
+            availableLabel.textColor = UIColorWithRGB(0x555555);
+            availableLabel.font = [UIFont systemFontOfSize:16.0f];
+            availableLabel.text = @"0张可用";
+            availableLabel.tag = 1001;
+            availableLabel.textAlignment = NSTextAlignmentRight;
+            [cell addSubview:availableLabel];
         }
-        cell.textLabel.text = @"优惠劵";
+        UILabel *availableLabel = (UILabel *)[cell viewWithTag:1001];
+        cell.textLabel.text = @"黄金补贴券";
     }
     return cell;
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (indexPath.section == 2) {
+        
+        UCFGoldCouponViewController *goldCouponVC = [[UCFGoldCouponViewController   alloc]initWithNibName:@"UCFGoldCouponViewController" bundle:nil];
+        [self.navigationController pushViewController:goldCouponVC animated:YES];
+        
+    }
+}
+-(void)pushGoldCouponVC
+{
+    UCFGoldCouponViewController *goldCouponVC = [[UCFGoldCouponViewController   alloc]initWithNibName:@"UCFGoldCouponViewController" bundle:nil];
+    [self.navigationController pushViewController:goldCouponVC animated:YES];
+    
+}
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
+    // 若为UITableViewCellContentView（即点击了tableViewCell），则不截获Touch事件
+    if (touch.view.tag  == 1001) {//cell 上的所有子View的tag == 1001
+        return NO;
+    }
+    return  YES;
 }
 #pragma 显示黄金协议
 - (UIView *)createFootView
@@ -721,7 +776,8 @@
     {
         purchaseGoldCount = [self.goldModel.remainAmount doubleValue];
     }
-    cell.moneyTextField.text =  [NSString stringWithFormat:@"%.3lf",purchaseGoldCount];
+    purchaseGoldCount =  purchaseGoldCount *1000;
+    cell.moneyTextField.text =  [NSString stringWithFormat:@"%.3lf",(int)purchaseGoldCount/1000.0];
     
     
     double amountPay = [cell.moneyTextField.text doubleValue] * [ToolSingleTon sharedManager].readTimePrice;
