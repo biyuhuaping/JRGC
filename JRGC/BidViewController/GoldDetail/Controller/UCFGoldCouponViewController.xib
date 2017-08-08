@@ -11,6 +11,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UCFGoldCouponViewController">
             <connections>
+                <outlet property="allSelectBtn" destination="ELr-jf-sBp" id="Bhe-jP-8LA"/>
+                <outlet property="needGoldAccountLab" destination="KUp-2o-OtS" id="PvP-4X-k52"/>
+                <outlet property="remainGoldAccountLab" destination="jqQ-Ft-vMV" id="Ycz-Qi-gee"/>
+                <outlet property="selectTipStr" destination="Ya7-tf-y1J" id="adV-p9-03u"/>
                 <outlet property="tableView" destination="nuo-Tj-kvb" id="vS9-ZG-2ya"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -112,13 +116,16 @@
                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ELr-jf-sBp">
-                                    <rect key="frame" x="15" y="7.5" width="30" height="30"/>
+                                    <rect key="frame" x="15" y="7" width="30" height="30"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="30" id="RiD-Xy-ARD"/>
                                         <constraint firstAttribute="height" constant="30" id="nLk-wH-YEx"/>
                                     </constraints>
                                     <state key="normal" image="invest_btn_select_normal"/>
                                     <state key="selected" image="invest_btn_select_highlight"/>
+                                    <connections>
+                                        <action selector="clickAllSelectBtn:" destination="-1" eventType="touchUpInside" id="rYe-HV-XUG"/>
+                                    </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="全选" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JBt-Ym-8M3">
                                     <rect key="frame" x="50" y="14.5" width="27" height="16"/>
@@ -176,6 +183,9 @@
                                             <real key="value" value="2"/>
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="ClickConfirmUseGoldCoupon:" destination="-1" eventType="touchUpInside" id="utf-Vs-jDv"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

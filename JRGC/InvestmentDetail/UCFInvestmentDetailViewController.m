@@ -234,7 +234,7 @@
 }
 - (void)showHTAlertdidFinishGetUMSocialDataResponse
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请登录www.9888.cn相关页面查看" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles: nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请登录www.9888keji.cn相关页面查看" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles: nil];
     [alert show];
 }
 //请求失败
@@ -256,20 +256,37 @@
 //        return ;
 //    }
     
-    
-    if (![constract.contractDownUrl isEqualToString:@""] && constract.contractDownUrl !=nil) {//如果合同url存在的情况
-        [self showContractWebViewUrl:constract.contractDownUrl withTitle:constract.contracttitle];
-        return;
+    if (self.accoutType == SelectAccoutTypeP2P) {
+        
+        if ([constract.contractDownUrl isEqualToString:@""] && constract.contractDownUrl ==nil ) {//如果合同url不存在的情况
+            if ([constract.signStatus boolValue]) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message: @"系统升级，协议请登录工场微金PC端查阅！" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles: nil];
+                [alert show];
+                return;
+            }else{
+                _contractTitle = constract.contracttitle;
+                NSString *strParameters = [NSString stringWithFormat:@"userId=%@&prdOrderId=%@&contractType=%@&prdType=0",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],self.billId,constract.contractType];
+                [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetContractMsg owner:self Type:self.accoutType];
+            }
+        }
+        if (![constract.contractDownUrl isEqualToString:@""] && constract.contractDownUrl !=nil ) {//如果合同url存在的情况
+            [self showContractWebViewUrl:constract.contractDownUrl withTitle:constract.contracttitle];
+            return;
+        }
+
+    }else{
+        if (![constract.contractContent isEqualToString:@""] && constract.contractContent !=nil) {//如果合同内容 存在的情况
+            [self showContractHtmlStr:constract.contractContent withTitle:constract.contracttitle];
+            return;
+        }
+        
+        _contractTitle = constract.contracttitle;
+        NSString *strParameters = [NSString stringWithFormat:@"userId=%@&prdOrderId=%@&contractType=%@&prdType=0",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],self.billId,constract.contractType];
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetContractMsg owner:self Type:self.accoutType];
+        
     }
-    if (![constract.contractContent isEqualToString:@""] && constract.contractContent !=nil) {//如果合同内容 存在的情况
-        [self showContractHtmlStr:constract.contractContent withTitle:constract.contracttitle];
-        return;
-    }
-    _contractTitle = constract.contracttitle;
-    NSString *strParameters = [NSString stringWithFormat:@"userId=%@&prdOrderId=%@&contractType=%@&prdType=0",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],self.billId,constract.contractType];
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetContractMsg owner:self Type:self.accoutType];
-   
 }
 -(void)showContractHtmlStr:(NSString *)content withTitle:(NSString *)title
 {

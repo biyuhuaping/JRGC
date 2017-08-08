@@ -57,13 +57,22 @@
                                 <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="invest_bg_label" translatesAutoresizingMaskIntoConstraints="NO" id="9rz-jC-iyt">
+                                <rect key="frame" x="197" y="-3.5" width="63" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="17" id="CB3-Az-OIT"/>
+                                    <constraint firstAttribute="width" constant="63" id="R1D-lz-b3o"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="cmo-Ru-eYY" secondAttribute="trailing" constant="10" id="8C8-np-zzw"/>
                             <constraint firstItem="GWY-cq-YY9" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="5UZ-qp-pdQ" secondAttribute="trailing" constant="4" id="9UO-DM-ZyN"/>
                             <constraint firstAttribute="height" constant="72" id="EVc-4T-rId"/>
+                            <constraint firstAttribute="trailing" secondItem="9rz-jC-iyt" secondAttribute="trailing" constant="10" id="O7L-DB-spu"/>
                             <constraint firstItem="ZTz-eB-bC6" firstAttribute="top" secondItem="dQz-k4-f7d" secondAttribute="top" id="Odk-LH-UgN"/>
+                            <constraint firstItem="9rz-jC-iyt" firstAttribute="top" secondItem="dQz-k4-f7d" secondAttribute="top" constant="-3.5" id="PYh-9q-6rP"/>
                             <constraint firstAttribute="trailing" secondItem="GWY-cq-YY9" secondAttribute="trailing" constant="10" id="Xzz-NQ-jQF"/>
                             <constraint firstAttribute="bottom" secondItem="ZTz-eB-bC6" secondAttribute="bottom" id="bZ1-hD-b9Y"/>
                             <constraint firstItem="5UZ-qp-pdQ" firstAttribute="leading" secondItem="dQz-k4-f7d" secondAttribute="leading" constant="10" id="cYv-EH-ov4"/>
@@ -99,12 +108,22 @@
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" red="0.92156862750000001" green="0.92156862750000001" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <connections>
+                <outlet property="angleView" destination="9rz-jC-iyt" id="qUa-sy-Gbx"/>
+                <outlet property="cellBtn" destination="Yde-o8-Ewx" id="yh6-a4-UjF"/>
+                <outlet property="goldAccountLab" destination="BgU-68-Nsj" id="Bun-2H-VPU"/>
+                <outlet property="investMinLab" destination="5UZ-qp-pdQ" id="JNR-Dt-haA"/>
+                <outlet property="investPeriodLab" destination="GWY-cq-YY9" id="AIs-fg-9Ny"/>
+                <outlet property="overdueTimeLab" destination="cmo-Ru-eYY" id="iwT-j5-Gsj"/>
+                <outlet property="remarkLab" destination="4JJ-GZ-okK" id="Dpg-Z4-0VK"/>
+            </connections>
             <point key="canvasLocation" x="72" y="-324"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="goldinvest_btn_select_highlight" width="25" height="25"/>
         <image name="invest_bg_gold" width="260" height="72"/>
+        <image name="invest_bg_label" width="28" height="17"/>
         <image name="invest_btn_select_normal" width="25" height="25"/>
     </resources>
 </document>

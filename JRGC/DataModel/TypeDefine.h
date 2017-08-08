@@ -283,6 +283,9 @@
 
 #define GOLDCHASEAGEINFOURL  @"api/nmAccount/v2/getWithDrawPageInfo.json"//黄金提现页面信息
 
+#define GOLDCOUPONLISTURL  @"api/nmTrade/v2/getGoldCouponList.json"   //可用黄金券列表
+#define GOlDOUPONSELEALLURL @"api/nmTrade/v2/selectALLGoldCoupon.json"
+
 enum kPostStatus{
     kPostStatusNone=0,
     kPostStatusBeging=1,
@@ -520,6 +523,8 @@ enum kSXTag
     kSXTagGoldCash,               //黄金提现
     kSXTagGoldCashHistory,        //黄金提现记录
     kSXTagGoldCashPageInfo,       //黄金提现页面信息
+    kSXTagGetGoldCouponList,      //可用黄金券列表
+    kSXTagGelectALLGoldCoupon,
 };
 
 typedef enum kSXTag kSXTag;
