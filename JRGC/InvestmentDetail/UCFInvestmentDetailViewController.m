@@ -234,7 +234,7 @@
 }
 - (void)showHTAlertdidFinishGetUMSocialDataResponse
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请登录www.9888.cn相关页面查看" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles: nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请登录www.9888keji.cn相关页面查看" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles: nil];
     [alert show];
 }
 //请求失败
@@ -257,7 +257,13 @@
 //    }
     
     
-    if (![constract.contractDownUrl isEqualToString:@""] && constract.contractDownUrl !=nil) {//如果合同url存在的情况
+    if (![constract.contractDownUrl isEqualToString:@""] && constract.contractDownUrl !=nil ) {//如果合同url存在的情况
+        
+        if ([constract.signStatus boolValue] && self.accoutType == SelectAccoutTypeP2P) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message: @"系统升级，协议请登录工场微金PC端查阅！" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles: nil];
+            [alert show];
+            return;
+        }
         [self showContractWebViewUrl:constract.contractDownUrl withTitle:constract.contracttitle];
         return;
     }

@@ -334,7 +334,7 @@
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
-    return 3;
+    return  2;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     switch (indexPath.section) {
@@ -559,6 +559,7 @@
 -(void)pushGoldCouponVC
 {
     UCFGoldCouponViewController *goldCouponVC = [[UCFGoldCouponViewController   alloc]initWithNibName:@"UCFGoldCouponViewController" bundle:nil];
+    goldCouponVC.nmPrdClaimIdStr = self.goldModel.nmPrdClaimId;
     [self.navigationController pushViewController:goldCouponVC animated:YES];
     
 }
