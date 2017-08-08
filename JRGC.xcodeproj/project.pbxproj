@@ -210,7 +210,6 @@
 		74270D571EC5AAE500F9419B /* UCFInvitationRewardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74270D551EC5AAE500F9419B /* UCFInvitationRewardCell.xib */; };
 		74270D5B1EC5AE8700F9419B /* UCFInvitationRewardCell2.m in Sources */ = {isa = PBXBuildFile; fileRef = 74270D591EC5AE8700F9419B /* UCFInvitationRewardCell2.m */; };
 		74270D5C1EC5AE8700F9419B /* UCFInvitationRewardCell2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74270D5A1EC5AE8700F9419B /* UCFInvitationRewardCell2.xib */; };
-		7429A60C1F395D1A0099D860 /* yonghufuwuxieyi.docx in Resources */ = {isa = PBXBuildFile; fileRef = 7429A60B1F395D1A0099D860 /* yonghufuwuxieyi.docx */; };
 		742A632D1CB7A1A500CE2553 /* UCFAccountCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 742A632C1CB7A1A500CE2553 /* UCFAccountCell.m */; };
 		7439853C1F174FBD00F2EDB8 /* UCFGoldRechargeHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7439853B1F174FBD00F2EDB8 /* UCFGoldRechargeHeaderView.m */; };
 		7439853E1F174FC800F2EDB8 /* UCFGoldRechargeHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7439853D1F174FC800F2EDB8 /* UCFGoldRechargeHeaderView.xib */; };
@@ -1303,7 +1302,7 @@
 		74270D581EC5AE8700F9419B /* UCFInvitationRewardCell2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFInvitationRewardCell2.h; sourceTree = "<group>"; };
 		74270D591EC5AE8700F9419B /* UCFInvitationRewardCell2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFInvitationRewardCell2.m; sourceTree = "<group>"; };
 		74270D5A1EC5AE8700F9419B /* UCFInvitationRewardCell2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFInvitationRewardCell2.xib; sourceTree = "<group>"; };
-		7429A60B1F395D1A0099D860 /* yonghufuwuxieyi.docx */ = {isa = PBXFileReference; lastKnownFileType = file; name = yonghufuwuxieyi.docx; path = ../../../../../.Trash/yonghufuwuxieyi.docx; sourceTree = "<group>"; };
+		7429A60F1F3961700099D860 /* yonghufuwuxieyi.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = yonghufuwuxieyi.docx; sourceTree = "<group>"; };
 		742A632B1CB7A1A500CE2553 /* UCFAccountCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFAccountCell.h; sourceTree = "<group>"; };
 		742A632C1CB7A1A500CE2553 /* UCFAccountCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFAccountCell.m; sourceTree = "<group>"; };
 		7439853A1F174FBD00F2EDB8 /* UCFGoldRechargeHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFGoldRechargeHeaderView.h; sourceTree = "<group>"; };
@@ -4514,7 +4513,7 @@
 		7BC789031B04548800D50494 /* docs */ = {
 			isa = PBXGroup;
 			children = (
-				7429A60B1F395D1A0099D860 /* yonghufuwuxieyi.docx */,
+				7429A60F1F3961700099D860 /* yonghufuwuxieyi.docx */,
 				7BC789071B04555F00D50494 /* UCFXieYiViewController.h */,
 				7BC789081B04555F00D50494 /* UCFXieYiViewController.m */,
 				7BC789041B04549500D50494 /* jianjie.docx */,
@@ -6786,7 +6785,6 @@
 				749D6C901F28406A00AAD0C4 /* UCFCashTipView.xib in Resources */,
 				E311A6691D90E83800C5483E /* UCFWebViewJavascriptBridgeMallDetails.xib in Resources */,
 				83974FDA1F14AC4300C2252F /* UCFGoldPurchaseViewController.xib in Resources */,
-				7429A60C1F395D1A0099D860 /* yonghufuwuxieyi.docx in Resources */,
 				E311A6761D90EBBE00C5483E /* UCFWebViewJavascriptBridgeBanner.xib in Resources */,
 				FB3A80221CC612B8004B56C3 /* UCFCouponReturn.xib in Resources */,
 				4AE1E9641E1CDB9900587CE6 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
