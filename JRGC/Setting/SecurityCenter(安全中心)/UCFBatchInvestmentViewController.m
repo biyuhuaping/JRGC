@@ -20,7 +20,7 @@
 #define TITLECOLORGRAY UIColorWithRGB(0xf9f9f9)
 static NSString *firstStr = @"批量出借授权开启后可一次性出借多个小额项目";
 static NSString *secondStr = @"为保证您的资金安全，请合理选择";
-static NSString *thirdStr = @"自动投标授权已经开启";
+static NSString *thirdStr = @"批量出借授权已经开启";
 @interface UCFBatchInvestmentViewController ()
 {
     UIButton *selectButton;
@@ -568,7 +568,7 @@ static NSString *thirdStr = @"自动投标授权已经开启";
                  UCFBatchSetNumWebViewController *webView = [[UCFBatchSetNumWebViewController alloc]initWithNibName:@"UCFBatchSetNumWebViewController" bundle:nil];
                  webView.url = urlStr;
                  webView.webDataDic =dataDict;
-                 webView.navTitle = @"自动投标授权";
+                 webView.navTitle = @"批量出借授权";
                  webView.sourceType = _sourceType;
                  webView.accoutType = self.accoutType;
                  [self.navigationController pushViewController:webView animated:YES];
