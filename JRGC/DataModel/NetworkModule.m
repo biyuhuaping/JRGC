@@ -522,7 +522,7 @@ static NetworkModule *gInstance = NULL;
 - (void)postData:(NSString*)data tag:(kSXTag)tag owner:(id<NetworkModuleDelegate>)owner url:(NSString*)url
 {
     PostRequest *req = (PostRequest*)[queue objectForKey:[NSNumber numberWithInt:tag]];
-    if (tag == kSXTagPersonCenter) {
+    if (tag == kSXTagPersonCenter || tag == kSXTagGetInfoForOnOff) {
         if (req.postStatus == kPostStatusBeging) {
             return;
         }
