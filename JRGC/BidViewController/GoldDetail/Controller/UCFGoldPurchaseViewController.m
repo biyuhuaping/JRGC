@@ -39,6 +39,7 @@
 
 @property (nonatomic,strong)NSString *nmPurchaseTokenStr;
 @property (nonatomic,strong)NSString *needToRechareStr;
+@property (nonatomic,strong)NSString *goldCouponNumStr;//返金劵张数
 @property (nonatomic,assign)double availableAllMoney ;
 @property (nonatomic,assign)double availableMoney ;
 @property (nonatomic,assign)double accountBean ;
@@ -94,8 +95,8 @@
     _availableAllMoney = [[userAccountInfoDict objectForKey:@"availableAllMoney"] doubleValue];
     _availableMoney = [[userAccountInfoDict objectForKey:@"availableMoney"] doubleValue];
     _accountBean = [[userAccountInfoDict objectForKey:@"accountBean"] doubleValue];
-    _willExpireBean= [[userAccountInfoDict objectForKey:@"willExpireBean"] doubleValue];
-    
+    _willExpireBean = [[userAccountInfoDict objectForKey:@"willExpireBean"] doubleValue];
+    _goldCouponNumStr = [userAccountInfoDict objectSafeForKey:@"goldCouponNum"];
     //保存是否选择工豆
     [[NSUserDefaults standardUserDefaults] setBool:!(_accountBean==0) forKey:@"SelectGoldGongDouSwitch"];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -333,7 +334,7 @@
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
-    return 2;
+    return 3;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     switch (indexPath.section) {
@@ -539,7 +540,8 @@
             [cell addSubview:availableLabel];
         }
         UILabel *availableLabel = (UILabel *)[cell viewWithTag:1001];
-        cell.textLabel.text = @"黄金补贴券";
+        cell.textLabel.text = @"黄金返金券";
+        availableLabel.text = [NSString stringWithFormat:@"%@张可用",_goldCouponNumStr];
     }
     return cell;
 }
