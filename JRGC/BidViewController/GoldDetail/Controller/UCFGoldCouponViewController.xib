@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UCFGoldCouponViewController">
             <connections>
+                <outlet property="tableView" destination="nuo-Tj-kvb" id="vS9-ZG-2ya"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -96,6 +97,14 @@
                         <constraint firstAttribute="height" constant="67" id="xFz-jK-lq8"/>
                     </constraints>
                 </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nuo-Tj-kvb">
+                    <rect key="frame" x="0.0" y="67" width="375" height="499"/>
+                    <color key="backgroundColor" red="0.92156862750000001" green="0.92156862750000001" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="GDK-xi-FC3"/>
+                        <outlet property="delegate" destination="-1" id="uRg-1r-WaX"/>
+                    </connections>
+                </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MUl-Ku-uw1">
                     <rect key="frame" x="0.0" y="566" width="375" height="101"/>
                     <subviews>
@@ -194,10 +203,6 @@
                         <constraint firstAttribute="trailing" secondItem="tV8-P1-Ag6" secondAttribute="trailing" id="zaQ-em-sb3"/>
                     </constraints>
                 </view>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nuo-Tj-kvb">
-                    <rect key="frame" x="0.0" y="67" width="375" height="499"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                </tableView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
