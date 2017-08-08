@@ -195,7 +195,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (!self.presenter.canClicked) {
+    if (!self.presenter.canReservedClicked) {
         return;
     }
     NSString *userId = [UserInfoSingle sharedManager].userId;
@@ -253,7 +253,7 @@
 #pragma mark - 工厂邀请cell的代理方法
 - (void)homeInvestCell:(UCFHomeInvestCell *)homeInvestCell didClickedInvestButtonAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (!self.presenter.canClicked) {
+    if (!self.presenter.canReservedClicked) {
         return;
     }
     NSString *userId = [UserInfoSingle sharedManager].userId;
