@@ -149,6 +149,7 @@
                 UCFHomeListGroup * tempG = [UCFHomeListGroup homeListGroupWithDict:dict];
                 [tempArray addObject:tempG];
             }
+            [tempResult setObject:tempArray forKey:@"homelistContent"];
             if ([[result allKeys] containsObject:@"authorization"]) {
                 NSString *sDateStr = [result objectSafeForKey:@"sdate"];
                 BOOL authorization =  [[result objectSafeForKey:@"authorization"] boolValue];
@@ -177,7 +178,6 @@
             [UserInfoSingle sharedManager].isRisk = [[result objectSafeForKey:@"isRisk"] boolValue];
             [UserInfoSingle sharedManager].isAutoBid = [[result objectSafeForKey:@"isAutoBid"] boolValue];
             UCFHomeListCellModel *homelistModel = [UCFHomeListCellModel homeListCellWithDict:result];
-            [tempResult setObject:tempArray forKey:@"homelistContent"];
             [tempResult setObject:homelistModel forKey:@"listInfo"];
             [tempResult setObject:[result objectSafeForKey:@"siteNotice"] forKey:@"siteNotice"];
             [[UCFSession sharedManager] transformBackgroundWithUserInfo:@{} withState:UCFSessionStateUserRefresh];

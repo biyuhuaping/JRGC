@@ -22,15 +22,15 @@
 #pragma mark - Format
 
 - (NSString *)headerTitle {
-    return self.group.headTitle.length > 0 ? self.group.headTitle : @"";
+    return self.group.title.length > 0 ? self.group.title : @"";
 }
 
 - (NSString *)footerTitle {
     return self.group.footerTitle.length > 0 ? self.group.footerTitle : @"";
 }
 
-- (UIImage *)headerImage {
-    return [UIImage imageNamed:self.group.headerImage];
+- (NSString *)iconUrl {
+    return self.group.iconUrl.length > 0 ? self.group.iconUrl : @"";
 }
 
 - (BOOL)showMore {
