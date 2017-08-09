@@ -258,7 +258,7 @@
     
     if (self.accoutType == SelectAccoutTypeP2P) {
         
-        if ([constract.contractDownUrl isEqualToString:@""] && constract.contractDownUrl ==nil ) {//如果合同url不存在的情况
+        if ([constract.contractDownUrl isEqualToString:@""] || constract.contractDownUrl ==nil ) {//如果合同url不存在的情况
             if ([constract.signStatus boolValue]) {
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message: @"系统升级，协议请登录工场微金PC端查阅！" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles: nil];
                 [alert show];
