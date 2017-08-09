@@ -98,16 +98,19 @@
 {
     int cellSelectCount = 0 ;//已选张数
     double tatolGetGoldAccout = 0;//可返金克重
+    double tatolNeetGoldAccout = 0 ;//需投总克重
     for (UCFGoldCouponModel *model in self.dataArray) {
         if (model.isSelectedStatus) {
             cellSelectCount++;
             tatolGetGoldAccout += [model.goldAccount doubleValue];
+            tatolNeetGoldAccout += [model.investMin doubleValue];
         }
     }
     self.allSelectBtn.selected = cellSelectCount == self.totalPage;
     NSString *cellSelectCountStr = [NSString stringWithFormat:@"%d",cellSelectCount];
     NSString *tatolGetGoldAccoutStr = [NSString stringWithFormat:@"%.3lf",tatolGetGoldAccout];
     self.selectTipStr.text = [NSString stringWithFormat:@"已选用%@张，可返金%@克",cellSelectCountStr,tatolGetGoldAccoutStr];
+    self.needGoldAccountLab.text = [NSString stringWithFormat:@"%.3lf克",tatolNeetGoldAccout];
     [self.selectTipStr setFontColor:UIColorWithRGB(0xfc8c0e) string:cellSelectCountStr];
     [self.selectTipStr setFontColor:UIColorWithRGB(0xfc8c0e) string:tatolGetGoldAccoutStr];
 }
@@ -120,11 +123,9 @@
            model.isSelectedStatus = YES;
         }
         [self.tableView reloadData];
+        NSDictionary *paramDict = @{@"nmPrdClaimId": _nmPrdClaimIdStr,@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID]};
+        [[NetworkModule sharedNetworkModule] newPostReq:paramDict tag:kSXTagGelectALLGoldCoupon owner:self signature:YES Type:SelectAccoutTypeGold];
     }
-    
-    
-    
-    
 }
 -(void)getGoldCouponListHttpRequest
 {
@@ -168,7 +169,7 @@
         if ([rstcode boolValue]) {
             
             NSDictionary *pageData = [[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"pageData"];
-            self.totalPage = [[[pageData objectSafeDictionaryForKey:@"pagination"] objectForKey:@"totalPage"] intValue];
+            self.totalPage = [[[pageData objectSafeDictionaryForKey:@"pagination"] objectSafeForKey:@"totalPage"] intValue];
              NSArray *resultDataArray  = [pageData objectSafeArrayForKey:@"result"] ;
             if(_pageNo == 1)
             {
@@ -189,21 +190,28 @@
                 UCFGoldCouponModel *model = [[UCFGoldCouponModel alloc]initWithDictionary:dataDict];
                 [self.dataArray addObject:model];
             }
-            for (int i = 0; i < self.dataArray.count; i++) {
-                [self.selectCellDataArray addObject:@"0"];
-            }
             [self.tableView reloadData];
         }
-        
-        
-        
-        
-     
     }
-    
-    if (tag.integerValue == kSXTagGetGoldProClaimDetail)
+    if (tag.integerValue == kSXTagGelectALLGoldCoupon)
     {
-        
+        if ([rstcode boolValue]) {
+            
+            //  goldAccountSum	黄金券返金总克重	string
+            //goldRecordids	选中的黄金券ID	string	用逗号隔开
+            //investMinSum	需要投资的总克重	string
+            NSDictionary *dataDict  = [dic objectSafeDictionaryForKey:@"data"];
+                                      
+            NSString *cellSelectCountStr = [NSString stringWithFormat:@"%d",_totalPage];
+            NSString *tatolGetGoldAccoutStr = [NSString stringWithFormat:@"%@",[dataDict objectSafeForKey:@"goldAccountSum"]];
+            self.selectTipStr.text = [NSString stringWithFormat:@"已选用%@张，可返金%@克",cellSelectCountStr,tatolGetGoldAccoutStr];
+            [self.selectTipStr setFontColor:UIColorWithRGB(0xfc8c0e) string:cellSelectCountStr];
+            [self.selectTipStr setFontColor:UIColorWithRGB(0xfc8c0e) string:tatolGetGoldAccoutStr];
+            self.needGoldAccountLab.text = [NSString stringWithFormat:@"%@克",[dataDict objectSafeForKey:@"investMinSum"]];
+        }else{
+            
+            
+        }
     }
     
     [self endRefreshing];
@@ -238,7 +246,9 @@
 }
 */
 
-- (IBAction)ClickConfirmUseGoldCoupon:(id)sender {
+- (IBAction)ClickConfirmUseGoldCoupon:(id)sender
+{
+    
 }
 
 @end
