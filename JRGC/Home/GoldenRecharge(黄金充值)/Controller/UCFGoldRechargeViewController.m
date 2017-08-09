@@ -14,6 +14,9 @@
 #import "UCFGoldRechargeWebController.h"
 #import "UCFContractModel.h"
 #import "FullWebViewController.h"
+#import "UCFGoldChargeOneCell.h"
+#import "UCFGoldChargeSecCell.h"
+#import "UCFColdChargeThirdCell.h"
 
 @interface UCFGoldRechargeViewController () <UITableViewDelegate, UITableViewDataSource, UCFGoldRechargeHeaderViewDelegate, UCFGoldRechargeCellDelegate>
 @property (weak, nonatomic) UCFGoldRechargeHeaderView *goldRechargeHeader;
@@ -55,11 +58,11 @@
 }
 
 - (void)createUI {
-    UCFGoldRechargeHeaderView *goldChargeHeader = (UCFGoldRechargeHeaderView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFGoldRechargeHeaderView" owner:self options:nil] lastObject];
-    goldChargeHeader.delegate = self;
-    self.tableview.tableHeaderView = goldChargeHeader;
-    self.goldRechargeHeader = goldChargeHeader;
-    goldChargeHeader.textField.text = self.needToRechareStr;
+//    UCFGoldRechargeHeaderView *goldChargeHeader = (UCFGoldRechargeHeaderView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFGoldRechargeHeaderView" owner:self options:nil] lastObject];
+//    goldChargeHeader.delegate = self;
+//    self.tableview.tableHeaderView = goldChargeHeader;
+//    self.goldRechargeHeader = goldChargeHeader;
+//    goldChargeHeader.textField.text = self.needToRechareStr;
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
     [self.tableview addGestureRecognizer:tap];
@@ -113,26 +116,139 @@
     self.goldRechargeHeader.frame = CGRectMake(0, 0, ScreenWidth, 168);
 }
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 4;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if (section == 0) {
+        return 32;
+    }
+    else if (section == 1) {
+        return 15;
+    }
+    else if (section == 2) {
+        return 0.001;
+    }
+    else
+        return 0.001;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    if (section == 0) {
+        return 0.001;
+    }
+    else if (section == 1) {
+        return 15;
+    }
+    else if (section == 2) {
+        return 15;
+    }
+    else
+        return 0.001;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    static NSString *cellId = @"goldRechargeSectionHeader";
+    UIView *goldRechargeHeader = [tableView dequeueReusableCellWithIdentifier:cellId];
+    if (nil == goldRechargeHeader) {
+        goldRechargeHeader = [[UIView alloc] init];
+        goldRechargeHeader.restorationIdentifier = cellId;
+        goldRechargeHeader.backgroundColor = UIColorWithRGB(0xebebee);
+    }
+    if (section == 0) {
+        goldRechargeHeader.frame = CGRectMake(0, 0, ScreenWidth, 32);
+    }
+    else if (section == 1) {
+        goldRechargeHeader.frame = CGRectMake(0, 0, ScreenWidth, 15);
+    }
+    else if (section == 2) {
+        goldRechargeHeader.frame = CGRectMake(0, 0, ScreenWidth, 0.001);
+    }
+    return goldRechargeHeader;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    static NSString *cellId = @"goldRechargeSectionFooter";
+    UIView *goldRechargeFooter = [tableView dequeueReusableCellWithIdentifier:cellId];
+    if (nil == goldRechargeFooter) {
+        goldRechargeFooter = [[UIView alloc] init];
+        goldRechargeFooter.restorationIdentifier = cellId;
+        goldRechargeFooter.backgroundColor = UIColorWithRGB(0xebebee);
+    }
+    if (section == 1 || section == 2) {
+        goldRechargeFooter.frame = CGRectMake(0, 0, ScreenWidth, 15);
+    }
+    else {
+        goldRechargeFooter.frame = CGRectMake(0, 0, ScreenWidth, 0.001);
+    }
+    return goldRechargeFooter;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.dataArray.count;
+    if (section == 3) {
+        return self.dataArray.count;
+    }
+    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *cellId = @"goldRecharge";
-    UCFGoldRechargeCell *goldRecharge = [tableView dequeueReusableCellWithIdentifier:cellId];
-    if (nil == goldRecharge) {
-        goldRecharge = (UCFGoldRechargeCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFGoldRechargeCell" owner:self options:nil] lastObject];
+    if (indexPath.section == 0) {
+        static NSString *cellId = @"goldRechargeFirst";
+        UCFGoldChargeOneCell *goldRecharge = [tableView dequeueReusableCellWithIdentifier:cellId];
+        if (nil == goldRecharge) {
+            goldRecharge = (UCFGoldChargeOneCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFGoldChargeOneCell" owner:self options:nil] lastObject];
+        }
+        return goldRecharge;
     }
-    goldRecharge.indexPath = indexPath;
-    goldRecharge.model = [self.dataArray objectAtIndex:indexPath.row];
-    goldRecharge.delegate = self;
-    return goldRecharge;
+    else if (indexPath.section == 1) {
+        static NSString *cellId = @"goldRechargeSecond";
+        UCFGoldChargeSecCell *goldRecharge = [tableView dequeueReusableCellWithIdentifier:cellId];
+        if (nil == goldRecharge) {
+            goldRecharge = (UCFGoldChargeSecCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFGoldChargeSecCell" owner:self options:nil] lastObject];
+        }
+        return goldRecharge;
+    }
+    else if (indexPath.section == 2) {
+        static NSString *cellId = @"goldRechargeThird";
+        UCFColdChargeThirdCell *goldRecharge = [tableView dequeueReusableCellWithIdentifier:cellId];
+        if (nil == goldRecharge) {
+            goldRecharge = (UCFColdChargeThirdCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFColdChargeThirdCell" owner:self options:nil] lastObject];
+        }
+        return goldRecharge;
+    }
+    else {
+        static NSString *cellId = @"goldRecharge";
+        UCFGoldRechargeCell *goldRecharge = [tableView dequeueReusableCellWithIdentifier:cellId];
+        if (nil == goldRecharge) {
+            goldRecharge = (UCFGoldRechargeCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFGoldRechargeCell" owner:self options:nil] lastObject];
+        }
+        goldRecharge.indexPath = indexPath;
+        goldRecharge.model = [self.dataArray objectAtIndex:indexPath.row];
+        goldRecharge.delegate = self;
+        return goldRecharge;
+    }
+    return nil;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (indexPath.section == 0) {
+        return 37;
+    }
+    else if (indexPath.section == 1) {
+        return 20;
+    }
+    else if (indexPath.section == 2) {
+        return 37;
+    }
     UCFGoldRechargeModel *model = [self.dataArray objectAtIndex:indexPath.row];
     return model.cellHeight;
 }

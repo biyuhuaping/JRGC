@@ -84,25 +84,6 @@
     self.navigationItem.rightBarButtonItem = rightItem;
 }
 
-//- (void)initData {
-//    NSArray *array = @[@"温馨提示", @"单笔提现金额不能低于10元，提现申请成功后不可撤回;", @"对首次充值后无投资的提现，平台收取0.4%的手续费;", @"金额大于50W在工作日8:30-16:30内发起当日到账，当日此时段申请次日到账;", @"如遇问题,请拨打客服400-0322-988咨询。"];
-//    [self.dataArray removeAllObjects];
-//    for (NSString *str in array) {
-//        UCFGoldRechargeModel *model = [[UCFGoldRechargeModel alloc] init];
-//        model.tipString = str;
-//        CGSize size = [self sizeWithString:str font:[UIFont systemFontOfSize:13] constraintSize:CGSizeMake(ScreenWidth - 40, MAXFLOAT)];
-//        if ([str isEqualToString:[array firstObject]]) {
-//            model.isShowBlackDot = NO;
-//            model.cellHeight = size.height + 16;
-//        }
-//        else {
-//            model.isShowBlackDot = YES;
-//            model.cellHeight = size.height + 5;
-//        }
-//        [self.dataArray addObject:model];
-//    }
-//}
-
 - (CGSize)sizeWithString:(NSString *)string font:(UIFont *)font constraintSize:(CGSize)constraintSize
 {
     CGSize stringSize = CGSizeZero;
