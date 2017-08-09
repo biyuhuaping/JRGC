@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "UILabel+Misc.h"
+#import "NZLabel.h"
+
 @interface UCFFriendRecCell : UITableViewCell
 
 @property (strong, nonatomic) IBOutlet UILabel *lab1;
@@ -15,5 +17,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *lab3;
 @property (strong, nonatomic) IBOutlet UILabel *lab4;
 @property (strong, nonatomic) IBOutlet UILabel *planLabel;
+@property (weak, nonatomic) IBOutlet UILabel *investorLab;
+@property (weak, nonatomic) IBOutlet NZLabel *payGoldGram;
 
 @end

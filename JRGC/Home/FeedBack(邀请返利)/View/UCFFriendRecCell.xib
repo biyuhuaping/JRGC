@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="136"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7Mv-N4-ZCc" id="qMn-Dh-JeP">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="135.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="136"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cii-La-gbI">
@@ -184,13 +184,15 @@
                 <outlet property="height3" destination="7px-VZ-JgZ" id="01V-B0-yZf"/>
                 <outlet property="height4" destination="y8j-C3-V26" id="XQF-ki-RRd"/>
                 <outlet property="height5" destination="yzD-ad-TWk" id="VNg-5s-Za8"/>
+                <outlet property="investorLab" destination="2Dz-14-7IY" id="iqx-re-rrX"/>
                 <outlet property="lab1" destination="54J-zp-YmL" id="2I2-XB-sD9"/>
                 <outlet property="lab2" destination="7ps-Ra-95f" id="f8f-vL-Ecg"/>
                 <outlet property="lab3" destination="KYr-Ud-kxb" id="cNA-wd-d3U"/>
                 <outlet property="lab4" destination="her-nb-obs" id="Xh8-bL-bAU"/>
+                <outlet property="payGoldGram" destination="gUv-oP-kWh" id="aQe-Hi-QT0"/>
                 <outlet property="planLabel" destination="WMa-aW-Nnq" id="0q8-2o-TDV"/>
             </connections>
-            <point key="canvasLocation" x="28.5" y="231"/>
+            <point key="canvasLocation" x="-172" y="0.0"/>
         </tableViewCell>
     </objects>
 </document>

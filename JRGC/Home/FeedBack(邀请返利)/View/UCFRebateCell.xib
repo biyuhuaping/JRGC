@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="289"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KCh-Pi-kyk" id="o0P-Lf-WAZ">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="288.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="289"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LvH-JV-khE">
@@ -51,8 +51,8 @@
                                         <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="一次结清" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1QG-wb-hM4">
-                                        <rect key="frame" x="62" y="30" width="48" height="15"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="一次结清" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1QG-wb-hM4">
+                                        <rect key="frame" x="62" y="30" width="49.5" height="15"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -82,8 +82,8 @@
                                     <constraint firstItem="1QG-wb-hM4" firstAttribute="centerY" secondItem="RJK-Ua-IAO" secondAttribute="centerY" id="tRd-Ib-bMF"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="起息日期" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hYm-DT-p51">
-                                <rect key="frame" x="15" y="111" width="48" height="28"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="起息日期" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hYm-DT-p51">
+                                <rect key="frame" x="15" y="111" width="49.5" height="28"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="e3R-HU-xu7"/>
                                 </constraints>
@@ -103,8 +103,8 @@
                                 <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="计划回款日" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Zz-8F-z6B" customClass="NZLabel">
-                                <rect key="frame" x="15" y="139" width="60" height="28"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="计划回款日" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Zz-8F-z6B" customClass="NZLabel">
+                                <rect key="frame" x="15" y="139" width="61.5" height="28"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="JdI-FS-sR1"/>
                                 </constraints>
@@ -112,8 +112,8 @@
                                 <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="detailed_icon" translatesAutoresizingMaskIntoConstraints="NO" id="mzt-aD-hfb">
-                                <rect key="frame" x="80" y="146" width="13" height="15"/>
+                            <imageView multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="detailed_icon" translatesAutoresizingMaskIntoConstraints="NO" id="mzt-aD-hfb">
+                                <rect key="frame" x="81.5" y="146" width="13" height="15"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="15" id="gMO-lP-Eeh"/>
                                     <constraint firstAttribute="width" constant="13" id="ul5-GZ-zEe"/>
@@ -122,8 +122,8 @@
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eH3-gf-MXL">
                                 <rect key="frame" x="0.0" y="167" width="375" height="28"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="实际回款日" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oRt-Im-YrR">
-                                        <rect key="frame" x="15" y="0.0" width="60" height="28"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="实际回款日" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oRt-Im-YrR">
+                                        <rect key="frame" x="15" y="0.0" width="61.5" height="28"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -166,8 +166,8 @@
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="agI-2M-ruH">
                                 <rect key="frame" x="0.0" y="223" width="375" height="28"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="好友返利" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="34V-MC-Np1">
-                                        <rect key="frame" x="15" y="0.0" width="48" height="28"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="好友返利" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="34V-MC-Np1">
+                                        <rect key="frame" x="15" y="0.0" width="49.5" height="28"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -209,8 +209,8 @@
                                         <color key="textColor" red="0.97724676132202148" green="0.20183229446411133" blue="0.23505187034606934" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="我的返利" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iUg-ND-yu3">
-                                        <rect key="frame" x="15" y="0.0" width="48" height="28"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的返利" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iUg-ND-yu3">
+                                        <rect key="frame" x="15" y="0.0" width="49.5" height="28"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -274,8 +274,8 @@
                         <color key="textColor" red="0.5296475887298584" green="0.52963173389434814" blue="0.52964073419570923" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="投资人" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vyi-Kv-RHh">
-                        <rect key="frame" x="15" y="63" width="36" height="28"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="投资人" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vyi-Kv-RHh">
+                        <rect key="frame" x="15" y="63" width="37" height="28"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="28" id="nGs-Lk-Myr"/>
                         </constraints>
@@ -289,8 +289,8 @@
                         <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="投资日期" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rHN-Hl-RKb">
-                        <rect key="frame" x="15" y="92" width="48" height="28"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="投资日期" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rHN-Hl-RKb">
+                        <rect key="frame" x="15" y="92" width="49.5" height="28"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="28" id="dvf-ff-m9g"/>
                         </constraints>
@@ -304,8 +304,8 @@
                         <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="投资金额" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="77r-Ia-ZPu">
-                        <rect key="frame" x="15" y="205" width="48" height="28"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="投资金额" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="77r-Ia-ZPu">
+                        <rect key="frame" x="15" y="205" width="49.5" height="28"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="28" id="URP-DT-VVd"/>
                         </constraints>
@@ -405,7 +405,10 @@
             </tableViewCellContentView>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
             <connections>
+                <outlet property="InvestorLab" destination="vyi-Kv-RHh" id="YAh-LR-PG0"/>
+                <outlet property="actualPaybackDate" destination="oRt-Im-YrR" id="aUa-YZ-HfK"/>
                 <outlet property="cellUpBigViewHight" destination="2B7-qA-dQM" id="dS4-2a-xj7"/>
+                <outlet property="friendGetPayLab" destination="34V-MC-Np1" id="oU1-O7-ZD0"/>
                 <outlet property="friendRebateViewHeight" destination="ib5-SQ-UaK" id="QS3-b4-Gue"/>
                 <outlet property="height1" destination="WN2-Qo-k4w" id="oUX-EP-AAW"/>
                 <outlet property="height2" destination="ZLN-5j-cQl" id="Hir-Ju-o3U"/>
@@ -417,6 +420,8 @@
                 <outlet property="height8" destination="YWo-nT-IK6" id="aAH-jw-uri"/>
                 <outlet property="height9" destination="6rr-M4-xVQ" id="AUT-i5-e3d"/>
                 <outlet property="imag" destination="mzt-aD-hfb" id="gjS-gp-8ND"/>
+                <outlet property="investDate" destination="rHN-Hl-RKb" id="d3b-02-4Qv"/>
+                <outlet property="investMoney" destination="77r-Ia-ZPu" id="qmZ-B2-YQx"/>
                 <outlet property="lab1" destination="mqd-w1-kwL" id="Ya6-Ho-z3R"/>
                 <outlet property="lab2" destination="RJK-Ua-IAO" id="Yoe-g4-90K"/>
                 <outlet property="lab3" destination="1QG-wb-hM4" id="wX3-Pk-8fQ"/>
@@ -433,8 +438,9 @@
                 <outlet property="title_6" destination="xt2-Mr-ctk" id="HIu-FC-bzO"/>
                 <outlet property="title_7" destination="FlP-H5-oyW" id="HCe-GD-WXt"/>
                 <outlet property="title_8" destination="e3p-Qm-6Kr" id="Yn3-cP-25f"/>
+                <outlet property="workDate" destination="hYm-DT-p51" id="1fb-ui-V7s"/>
             </connections>
-            <point key="canvasLocation" x="788.5" y="163.5"/>
+            <point key="canvasLocation" x="610" y="133"/>
         </tableViewCell>
     </objects>
     <resources>

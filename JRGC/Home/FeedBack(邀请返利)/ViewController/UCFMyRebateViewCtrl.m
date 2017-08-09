@@ -57,6 +57,7 @@
 @property (strong, nonatomic) IBOutlet NZLabel *friendCountLab;//邀请投资人数
 @property (strong, nonatomic) IBOutlet NZLabel *recCountLab;//邀请注册人数
 
+
 // 无数据界面
 @property (nonatomic, strong) UCFNoDataView *noDataView;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *height;
@@ -69,6 +70,10 @@
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *lineViewHeight1;
 @property (strong, nonatomic) IBOutlet UILabel *nperLab;//期数
 @property (strong, nonatomic) IBOutlet UILabel *investorsLab;//投资人
+@property (weak, nonatomic) IBOutlet NZLabel *inverstNumLab; //投资人数
+@property (weak, nonatomic) IBOutlet UIButton *feedBackDetailLab; //邀请返利明细
+@property (weak, nonatomic) IBOutlet UIButton *friendUnFeedBackLab;//好友未回款
+@property (weak, nonatomic) IBOutlet UIButton *friendFeedBackLab;//好友已回款
 
 @end
 
@@ -77,8 +82,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self addLeftButton];
-    
-    baseTitleLabel.text = self.accoutType  == SelectAccoutTypeHoner ?  @"尊享返利":@"微金返利";
+    if (self.accoutType == SelectAccoutTypeGold) {
+        baseTitleLabel.text = @"黄金返利";
+        _friendCountLab.text = @"邀请购买人数:0人";
+        [_friendUnFeedBackLab setTitle:@"好友未回金" forState:UIControlStateNormal];
+        [_friendFeedBackLab setTitle:@"好友已回金" forState:UIControlStateNormal];
+        
+    } else {
+        baseTitleLabel.text = self.accoutType  == SelectAccoutTypeHoner ?  @"尊享返利":@"微金返利";
+    }
     
     _dataArr1 = [NSMutableArray new];
     _dataArr2 = [NSMutableArray new];
@@ -95,7 +107,12 @@
     _index = 0;
     _didClickBtns = [NSMutableArray arrayWithObject:@(0)];
     
-    _titleArr1 = @[@"未审核", @"等待确认", @"招标中", @"流标", @"满标", @"回款中", @"已回款"];
+    if (self.accoutType == SelectAccoutTypeGold) {
+        _titleArr1 = @[@"未审核", @"等待确认", @"认购中", @"流标", @"满标", @"回金中", @"已回金"];
+
+    } else {
+        _titleArr1 = @[@"未审核", @"等待确认", @"招标中", @"流标", @"满标", @"回款中", @"已回款"];
+    }
     _titleArr2 = @[@"已认证", @"未认证"];
     
     UIButton *btn = (UIButton *)[self.itemChangeView viewWithTag:100];
@@ -377,7 +394,13 @@
         right.text = [NSString stringWithFormat:@"本月收益¥%@",commission];
     }else if (tableView == _tableView2) {
         left.text = [[[[_monthDataArr2 objectSafeAtIndex:section]objectSafeForKey:@"repayPerDate"] stringByReplacingOccurrencesOfString:@"-" withString:@"年"] stringByAppendingString:@"月"];
-        right.text = [NSString stringWithFormat:@"本月共%@笔回款",[_monthDataArr2 objectSafeAtIndex:section][@"counts"]];
+        NSString *headStr = @"";
+        if (self.accoutType == SelectAccoutTypeGold) {
+            headStr = [NSString stringWithFormat:@"本月共%@笔回金",[_monthDataArr2 objectSafeAtIndex:section][@"counts"]];
+        } else {
+            headStr = [NSString stringWithFormat:@"本月共%@笔回款",[_monthDataArr2 objectSafeAtIndex:section][@"counts"]];
+        }
+        right.text = headStr;
     }else if (tableView == _tableView3) {
         NSString *t = [_monthDataArr3 objectSafeAtIndex:section];
         left.text = [[t stringByReplacingOccurrencesOfString:@"-" withString:@"年"] stringByAppendingString:@"月"];
@@ -387,7 +410,13 @@
                 commission = [dic objectSafeForKey:@"counts"];
             }
         }
-        right.text = [NSString stringWithFormat:@"本月共%@笔回款",commission];
+        NSString *headStr = @"";
+        if (self.accoutType == SelectAccoutTypeGold) {
+            headStr = [NSString stringWithFormat:@"本月共%@笔回金",commission];
+        } else {
+            headStr = [NSString stringWithFormat:@"本月共%@笔回款",commission];
+        }
+        right.text = headStr;
     }
     return headerView;
 }
@@ -459,6 +488,14 @@
         if (!cell) {
             cell = [[NSBundle mainBundle]loadNibNamed:@"UCFRebateCell" owner:self options:nil][0];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            if (self.accoutType == SelectAccoutTypeGold) {
+                cell.InvestorLab.text = @"购买人";
+                cell.investDate.text = @"购买日期";
+                cell.workDate.text = @"起算日期";
+                cell.actualPaybackDate.text = @"计划回金日";
+                cell.investMoney.text = @"实际回金日";
+                cell.friendGetPayLab.text = @"购买克重";
+            }
         }
         NSDictionary * dic = _dataArr1[indexPath.section][indexPath.row];
         id status = dic[@"status"];
@@ -541,6 +578,11 @@
         if (!cell) {
             cell = [[NSBundle mainBundle]loadNibNamed:@"UCFFriendRecCell" owner:self options:nil][0];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            if (self.accoutType == SelectAccoutTypeGold) {
+                cell.investorLab.text = @"购买人";
+                cell.planLabel.text = @"计划回金日";
+                cell.payGoldGram.text = @"回金克重";
+            }
         }
         cell.lab1.text = _dataArr2[indexPath.section][indexPath.row][@"realName"];//姓名
         cell.lab2.text = _dataArr2[indexPath.section][indexPath.row][@"mobile"];//手机号
@@ -567,6 +609,12 @@
         if (!cell) {
             cell = [[NSBundle mainBundle]loadNibNamed:@"UCFFriendRecCell1" owner:self options:nil][0];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            if (self.accoutType == SelectAccoutTypeGold) {
+                cell.investorLab.text = @"购买人";
+                cell.planLabel.text = @"计划回金日";
+                cell.payGoldGram.text = @"回金克重";
+                cell.actulPayDateLab.text = @"实际回金日";
+            }
         }
         cell.lab1.text = _dataArr3[indexPath.section][indexPath.row][@"realName"];//姓名
         cell.lab2.text = _dataArr3[indexPath.section][indexPath.row][@"mobile"];//手机号
@@ -711,7 +759,11 @@
         sumComm = [UCFToolsMehod AddComma:dic[@"sumComm"]];
         _totalCountLab.text = [NSString stringWithFormat:@"共%@笔回款记录",[[[dic objectSafeForKey:@"pageData"] objectSafeForKey:@"pagination"]objectSafeForKey:@"totalCount"]];
         _sumCommLab.text = [NSString stringWithFormat:@"¥%@",sumComm];//我的返利
-        _friendCountLab.text = [NSString stringWithFormat:@"邀请投资人数:%@人",friendCount];//邀请投资人数
+        if (self.accoutType == SelectAccoutTypeGold) {
+            _friendCountLab.text = [NSString stringWithFormat:@"邀请购买人数:%@人",friendCount];//邀请投资人数
+        } else {
+            _friendCountLab.text = [NSString stringWithFormat:@"邀请投资人数:%@人",friendCount];//邀请投资人数
+        }
         _recCountLab.text = [NSString stringWithFormat:@"邀请注册人数:%@人",recCount];//邀请注册人数
         
         if (_headerInfoBlock) {

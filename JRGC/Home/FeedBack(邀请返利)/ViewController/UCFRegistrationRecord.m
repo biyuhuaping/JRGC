@@ -165,7 +165,11 @@
     NSDictionary *dataDic = [dic objectSafeDictionaryForKey:@"data"];
     
     _sumCommLab.text = [NSString stringWithFormat:@"%@人",[dataDic objectSafeForKey:@"userRemmendCount"]];//人数
-    _friendCountLab.text = [NSString stringWithFormat:@"邀请投资人数:%@人",[dataDic objectSafeForKey:@"friendsCount"]];//邀请投资人数
+    if (self.accoutType == SelectAccoutTypeGold) {
+        _friendCountLab.text = [NSString stringWithFormat:@"邀请投购买人数:%@人",[dataDic objectSafeForKey:@"friendsCount"]];//邀请投资人数
+    } else {
+        _friendCountLab.text = [NSString stringWithFormat:@"邀请投资人数:%@人",[dataDic objectSafeForKey:@"friendsCount"]];//邀请投资人数
+    }
 
     NSArray *tempArr =  [[dataDic objectSafeDictionaryForKey:@"pageData"] objectSafeArrayForKey: @"result"];
 //

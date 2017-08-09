@@ -30,9 +30,11 @@
     
     [self createUI];
     
-    NSString *gcm = [[NSUserDefaults standardUserDefaults] objectForKey:@"gcmCode"];
-    if ([gcm hasPrefix:@"A"]) { //A码用户显示 饼图
-        [self addRightButtonWithImage:[UIImage imageNamed:@"icon_data"]];
+    if (self.accoutType != SelectAccoutTypeGold) {
+        NSString *gcm = [[NSUserDefaults standardUserDefaults] objectForKey:@"gcmCode"];
+        if ([gcm hasPrefix:@"A"]) { //A码用户显示 饼图
+            [self addRightButtonWithImage:[UIImage imageNamed:@"icon_data"]];
+        }
     }
 }
 - (void)addRightButtonWithImage:(UIImage *)rightButtonimage;
@@ -59,27 +61,29 @@
 
 #pragma mark - 初始化界面
 - (void)createUI {
-    
-    UISegmentedControl *segmentContrl = [[UISegmentedControl alloc]initWithItems:@[@"邀请返利",@"邀请奖励"]];;
-    segmentContrl.frame = CGRectMake(0, 0, ScreenWidth*5/8, 30);
-    [segmentContrl setTintColor:UIColorWithRGB(0x5b6993)];
-    segmentContrl.selectedSegmentIndex = 0;
-    [segmentContrl addTarget:self action:@selector(segmentedValueChanged:) forControlEvents:UIControlEventValueChanged];
-    self.segmentedCtrl = segmentContrl;
-    self.navigationItem.titleView = segmentContrl;
-    
+    if (self.accoutType == SelectAccoutTypeGold) {
+        baseTitleLabel.text = @"邀请返利";
+    } else {
+        UISegmentedControl *segmentContrl = [[UISegmentedControl alloc]initWithItems:@[@"邀请返利",@"邀请奖励"]];;
+        segmentContrl.frame = CGRectMake(0, 0, ScreenWidth*5/8, 30);
+        [segmentContrl setTintColor:UIColorWithRGB(0x5b6993)];
+        segmentContrl.selectedSegmentIndex = 0;
+        [segmentContrl addTarget:self action:@selector(segmentedValueChanged:) forControlEvents:UIControlEventValueChanged];
+        self.segmentedCtrl = segmentContrl;
+        self.navigationItem.titleView = segmentContrl;
+    }
     self.invitaionRebateVC = [[UCFFeedBackViewController alloc]initWithNibName:@"UCFFeedBackViewController" bundle:nil];
-//    self.invitaionRebateVC.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight - 64);
     self.invitaionRebateVC.accoutType = self.accoutType;
     [self addChildViewController:self.invitaionRebateVC];
     
     self.invitationRewardVC = [[UCFInvitationRewardViewController alloc]initWithNibName:@"UCFInvitationRewardViewController" bundle:nil];
-//    self.invitationRewardVC.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight - 64);
     self.invitationRewardVC.accoutType = self.accoutType;
     [self addChildViewController:self.invitationRewardVC];
     
     self.currentViewController = self.invitaionRebateVC;
     [self.view addSubview:self.invitaionRebateVC.view];
+
+
 }
 
 #pragma mark - segment代理方法

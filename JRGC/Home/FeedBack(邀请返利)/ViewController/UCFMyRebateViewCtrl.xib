@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -14,8 +14,12 @@
                 <outlet property="alertView" destination="hFo-dM-ogf" id="6MR-OE-AVo"/>
                 <outlet property="centerX" destination="bVj-kG-i8G" id="VS2-Me-kww"/>
                 <outlet property="closeBtn" destination="CH2-cI-ONh" id="VL0-KL-vAy"/>
+                <outlet property="feedBackDetailLab" destination="WbR-DK-zkb" id="J3Y-I5-7oE"/>
                 <outlet property="friendCountLab" destination="sVI-Jh-C3h" id="we0-qb-1BF"/>
+                <outlet property="friendFeedBackLab" destination="IeW-a8-dkm" id="k5h-ji-TCU"/>
+                <outlet property="friendUnFeedBackLab" destination="c9N-Et-rUg" id="7Nh-SD-qaA"/>
                 <outlet property="height" destination="XjL-fP-YAV" id="yYf-Z4-5db"/>
+                <outlet property="inverstNumLab" destination="sVI-Jh-C3h" id="JYt-gt-E69"/>
                 <outlet property="investorsLab" destination="rDW-F0-7Jp" id="uhX-Kc-Hbp"/>
                 <outlet property="itemChangeView" destination="jfb-mU-9hd" id="K2u-lL-7XX"/>
                 <outlet property="lineViewHeight1" destination="MIj-Cp-LhT" id="Nrw-Wb-BdF"/>
@@ -202,6 +206,7 @@
                 <constraint firstItem="FVQ-Aq-h8Y" firstAttribute="top" secondItem="jfb-mU-9hd" secondAttribute="bottom" constant="2" id="qEO-89-mFP"/>
                 <constraint firstAttribute="trailing" secondItem="jfb-mU-9hd" secondAttribute="trailing" id="x5C-2H-YU9"/>
             </constraints>
+            <point key="canvasLocation" x="-217" y="55"/>
         </view>
         <view clipsSubviews="YES" contentMode="scaleToFill" id="hFo-dM-ogf">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>

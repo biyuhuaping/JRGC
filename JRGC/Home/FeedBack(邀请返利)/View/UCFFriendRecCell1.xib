@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="165"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YJn-pA-FrI" id="k0C-yj-JN1">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="164.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="165"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GDt-D1-81z">
@@ -192,20 +192,23 @@
             </tableViewCellContentView>
             <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <connections>
+                <outlet property="actulPayDateLab" destination="BAU-rM-c35" id="fGT-s7-RBh"/>
                 <outlet property="height1" destination="qMc-Xt-cZd" id="RtQ-LF-gcp"/>
                 <outlet property="height2" destination="F3o-Vx-PhX" id="0CF-gV-Vuf"/>
                 <outlet property="height3" destination="pzl-YS-UQz" id="aLK-hr-oDP"/>
                 <outlet property="height4" destination="xRP-6E-s21" id="cId-cg-P6E"/>
                 <outlet property="height5" destination="0J4-bn-Dw8" id="PKA-ul-CKc"/>
                 <outlet property="height6" destination="p1r-gB-Bwv" id="zl3-3x-lR6"/>
+                <outlet property="investorLab" destination="wpS-qf-bvb" id="lVs-sZ-0Ry"/>
                 <outlet property="lab1" destination="nhF-qe-wHD" id="yGI-qz-RKf"/>
                 <outlet property="lab2" destination="tFS-7D-N6H" id="vyj-4r-OG9"/>
                 <outlet property="lab3" destination="bRL-rG-uM0" id="3Zx-ix-C4g"/>
                 <outlet property="lab4" destination="24P-1V-w5i" id="3JC-Hu-M2A"/>
                 <outlet property="lab5" destination="c5r-Cf-QbH" id="JgF-FO-WtA"/>
+                <outlet property="payGoldGram" destination="mZM-2B-yrq" id="zkx-Ab-8gD"/>
                 <outlet property="planLabel" destination="agO-J6-0QC" id="MT6-X1-ggt"/>
             </connections>
-            <point key="canvasLocation" x="28.5" y="231"/>
+            <point key="canvasLocation" x="-252.5" y="132.5"/>
         </tableViewCell>
     </objects>
 </document>

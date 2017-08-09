@@ -39,4 +39,12 @@
 
 @property (strong, nonatomic) IBOutlet UIImageView *imag;
 
+
+@property (weak, nonatomic) IBOutlet UILabel *InvestorLab; //投资人
+@property (weak, nonatomic) IBOutlet UILabel *investDate; //投资日期
+@property (weak, nonatomic) IBOutlet UILabel *workDate;    //起息日期
+@property (weak, nonatomic) IBOutlet UILabel *actualPaybackDate;//实际回款日
+@property (weak, nonatomic) IBOutlet UILabel *investMoney; //投资金额
+@property (weak, nonatomic) IBOutlet UILabel *friendGetPayLab; //好友返利
+
 @end

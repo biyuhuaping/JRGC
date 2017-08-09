@@ -53,6 +53,7 @@
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *tipsViewHeight;//提示View的身高
 @property (strong, nonatomic) id recruitStatus;//值为3时，可以点击tipsview
 @property (weak, nonatomic) IBOutlet UIView *secondView_lineView;
+@property (weak, nonatomic) IBOutlet UIView *gold_secondView;
 
 @property (strong, nonatomic) IBOutlet UILabel *label_moutheMoney;
 @property (strong, nonatomic) IBOutlet UILabel *label_p2pMoney;
@@ -68,6 +69,8 @@
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *view_upHeight;
 - (IBAction)gotoWeiJinRebateAmtVC:(id)sender;//去微金返利页面
 - (IBAction)gotoHonerRebateAmtVC:(id)sender;//去尊享返利页面
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *secondViewHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *feedBackLabYCenter;
 
 @end
 
@@ -80,8 +83,16 @@
     
     if (self.accoutType == SelectAccoutTypeHoner) {
         baseTitleLabel.text = @"尊享邀请返利";
-    }else{
+        _gold_secondView.hidden = YES;
+    }else if(self.accoutType == SelectAccoutTypeP2P){
         baseTitleLabel.text = @"微金邀请返利";
+        _gold_secondView.hidden = YES;
+    } else if (self.accoutType == SelectAccoutTypeGold) {
+        baseTitleLabel.text = @"邀请返利";
+        _secondViewHeight.constant = 44;
+        _gold_secondView.hidden = NO;
+        _feedBackLabYCenter.constant = - 15;
+
     }
    
     
@@ -93,6 +104,8 @@
     self.secondView_lineView.backgroundColor = UIColorWithRGB(0xd8d8d8);
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(getMyInvestDataList) name:@"getMyInvestDataList" object:nil];
     _CheckInstructionBtn.hidden = YES;
+
+    
     [self getMyInvestDataList];
     [self getAppSetting];
 }
@@ -155,6 +168,7 @@
 - (IBAction)toMyRebateView:(id)sender {
     //邀请记录
     UCFRegistrationRecord *vc = [[UCFRegistrationRecord alloc]initWithNibName:@"UCFRegistrationRecord" bundle:nil];
+    vc.accoutType = self.accoutType;
     [self.navigationController pushViewController:vc animated:YES];
 
 }
@@ -198,11 +212,16 @@
 //获取我的投资列表
 - (void)getMyInvestDataList
 {
-    NSString *userId = [[NSUserDefaults standardUserDefaults] objectForKey:UUID];
-    
-    NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys:userId,@"userId",nil];
-    //*******qinyy
-    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:KSXTagMyInviteRebateinfo owner:self signature:YES Type:self.accoutType];
+    if (self.accoutType == SelectAccoutTypeGold) {
+        //黄金邀请返利的接口
+    } else {
+        NSString *userId = [[NSUserDefaults standardUserDefaults] objectForKey:UUID];
+        
+        NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys:userId,@"userId",nil];
+        //*******qinyy
+        [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:KSXTagMyInviteRebateinfo owner:self signature:YES Type:self.accoutType];
+    }
+
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 }
 
@@ -353,7 +372,7 @@
     UCFProfitBackViewController *mv = [[UCFProfitBackViewController alloc]initWithNibName:@"UCFProfitBackViewController" bundle:nil];
     mv.accoutType = SelectAccoutTypeP2P;
     mv.index = 0;
-    __weak typeof(self) weakSelf = self;
+//    __weak typeof(self) weakSelf = self;
 //    mv.headerInfoBlock = ^(NSDictionary *dic){
 //        weakSelf.sumCommLab.text = [NSString stringWithFormat:@"¥%@",dic[@"sumComm"]];//微金返利
 //        weakSelf.p2pInviteFriendsCountLab.text = [NSString stringWithFormat:@"邀请投资人数:%@人",dic[@"p2pInviteFriendsCount"]];//邀请投资人数
@@ -368,7 +387,7 @@
     UCFProfitBackViewController *mv = [[UCFProfitBackViewController alloc]initWithNibName:@"UCFProfitBackViewController" bundle:nil];
     mv.accoutType = SelectAccoutTypeHoner;
     mv.index = 1;
-    __weak typeof(self) weakSelf = self;
+//    __weak typeof(self) weakSelf = self;
 //    mv.headerInfoBlock = ^(NSDictionary *dic){
 //        weakSelf.sumCommLab.text = [NSString stringWithFormat:@"¥%@",dic[@"sumComm"]];//尊享返利
 //        weakSelf.zxInviteFriendsCountLab.text = [NSString stringWithFormat:@"邀请投资人数:%@人",dic[@"zxInviteFriendsCount"]];//邀请投资人数

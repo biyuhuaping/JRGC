@@ -9,5 +9,4 @@
 #import "UCFBaseViewController.h"
 
 @interface UCFInvitationRebateViewController : UCFBaseViewController
-
 @end

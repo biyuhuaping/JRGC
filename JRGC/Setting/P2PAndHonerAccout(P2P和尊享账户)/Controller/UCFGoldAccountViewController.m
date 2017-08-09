@@ -22,7 +22,9 @@
 #import "HSHelper.h"
 #import "UCFExtractGoldViewController.h"
 #import "AppDelegate.h"
+#import "UCFInvitationRebateViewController.h"
 #import "UILabel+Misc.h"
+#import "UCFFeedBackViewController.h"
 @interface UCFGoldAccountViewController ()<UITableViewDelegate,UITableViewDataSource, GoldAccountFirstCellDeleage>
 @property (weak, nonatomic) IBOutlet UITableView *baseTableView;
 @property (weak, nonatomic) IBOutlet UIButton *buyGoldBtn;
@@ -133,8 +135,11 @@
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             cell.textLabel.font = [UIFont systemFontOfSize:15];
             cell.backgroundColor = [UIColor whiteColor];
-            if ([model.leftTitle isEqualToString:@"提金订单"]) {
+            if ([model.leftTitle isEqualToString:@"邀请返利"]) {
                 lineView.frame = CGRectZero;
+            } else if ([model.leftTitle isEqualToString:@"提金订单"]) {
+                lineView.frame = CGRectMake(0, model.cellHeight - 1, ScreenWidth, 1);
+
             }
         }
         titleLabel.text = model.leftTitle;
@@ -166,7 +171,7 @@
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.textLabel.textColor = UIColorWithRGB(0x555555);
             cell.textLabel.font = [UIFont systemFontOfSize:15.0f];
-            UIView *lineView = [Common addSepateViewWithRect:CGRectMake(0, model.cellHeight - 0.5, ScreenWidth, 0.5) WithColor:UIColorWithRGB(0xe3e5ea)];
+            UIView *lineView = [Common addSepateViewWithRect:CGRectMake(15, model.cellHeight - 0.5, ScreenWidth, 0.5) WithColor:UIColorWithRGB(0xe3e5ea)];
             lineView.tag = 1000;
             [cell.contentView addSubview:lineView];
             cell.delegate = self;
@@ -182,26 +187,38 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     UCFCellStyleModel *model  =[self.dataArray objectAtIndex:indexPath.row];
-    if ([model.leftTitle isEqualToString:@"已购黄金"]) {
+    if ([model.leftTitle isEqualToString:@"尊享金"]) {
         [self gotoGoldInvestInfoVC];
     } else if ([model.leftTitle isEqualToString:@"提金订单"]) {
         UCFExtractGoldViewController *vc1 = [[UCFExtractGoldViewController alloc] initWithNibName:@"UCFExtractGoldViewController" bundle:nil];
         [self.navigationController pushViewController:vc1 animated:YES];
+    } else if ([model.leftTitle isEqualToString:@"邀请返利"]) {
+    
+        UCFFeedBackViewController *feedBackVC = [[UCFFeedBackViewController alloc]initWithNibName:@"UCFFeedBackViewController" bundle:nil];
+        feedBackVC.accoutType = SelectAccoutTypeGold;
+        [self.navigationController pushViewController:feedBackVC animated:YES];
     }
 }
 - (void)initData
 {
     self.dataArray = [NSMutableArray arrayWithCapacity:0];
-    UCFCellStyleModel *model01 = [[UCFCellStyleModel alloc] initWithCellStyle:CellStyleDefault WithLeftTitle:@"已购黄金" WithRightImage:[UIImage imageNamed:@"list_icon_arrow"] WithTargetClassName:@"" WithCellHeight:44 WithDelegate:self];
-    UCFCellStyleModel *model02 = [[UCFCellStyleModel alloc] initWithCellStyle:CellStyleDefault WithLeftTitle:@"提金订单" WithRightImage:[UIImage imageNamed:@"list_icon_arrow"] WithTargetClassName:@"" WithCellHeight:44 WithDelegate:self];
-    UCFCellStyleModel *model03 = [[UCFCellStyleModel alloc] initWithCellStyle:CellSepLine WithLeftTitle:nil WithRightImage:nil WithTargetClassName:nil WithCellHeight:10 WithDelegate:nil];
-    UCFCellStyleModel *model04 = [[UCFCellStyleModel alloc] initWithCellStyle:CellStyleDefault WithLeftTitle:@"支付账户" WithRightImage:nil WithTargetClassName:nil WithCellHeight:37 WithDelegate:self];
-    UCFCellStyleModel *model05 = [[UCFCellStyleModel alloc] initWithCellStyle:CellCustom WithLeftTitle:@"可用余额" WithRightImage:nil WithTargetClassName:nil WithCellHeight:44 WithDelegate:self];
+
+    
+    UCFCellStyleModel *model01 = [[UCFCellStyleModel alloc] initWithCellStyle:CellStyleDefault WithLeftTitle:@"支付账户" WithRightImage:nil WithTargetClassName:nil WithCellHeight:37 WithDelegate:self];
+    UCFCellStyleModel *model02 = [[UCFCellStyleModel alloc] initWithCellStyle:CellCustom WithLeftTitle:@"可用余额" WithRightImage:nil WithTargetClassName:nil WithCellHeight:44 WithDelegate:self];
+    UCFCellStyleModel *model03 = [[UCFCellStyleModel alloc] initWithCellStyle:CellStyleDefault WithLeftTitle:@"邀请返利" WithRightImage:[UIImage imageNamed:@"list_icon_arrow"] WithTargetClassName:@"" WithCellHeight:44 WithDelegate:self];
+    UCFCellStyleModel *model04 = [[UCFCellStyleModel alloc] initWithCellStyle:CellSepLine WithLeftTitle:nil WithRightImage:nil WithTargetClassName:nil WithCellHeight:10 WithDelegate:nil];
+    
+    UCFCellStyleModel *model05 = [[UCFCellStyleModel alloc] initWithCellStyle:CellStyleDefault WithLeftTitle:@"尊享金" WithRightImage:[UIImage imageNamed:@"list_icon_arrow"] WithTargetClassName:@"" WithCellHeight:44 WithDelegate:self];
+    UCFCellStyleModel *model06 = [[UCFCellStyleModel alloc] initWithCellStyle:CellStyleDefault WithLeftTitle:@"提金订单" WithRightImage:[UIImage imageNamed:@"list_icon_arrow"] WithTargetClassName:@"" WithCellHeight:44 WithDelegate:self];
+
     [self.dataArray addObject:model01];
     [self.dataArray addObject:model02];
     [self.dataArray addObject:model03];
     [self.dataArray addObject:model04];
     [self.dataArray addObject:model05];
+    [self.dataArray addObject:model06];
+
     //刷新黄金账户数据通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getNetData) name:UPDATE_GOLD_ACCOUNT object:nil];
     
