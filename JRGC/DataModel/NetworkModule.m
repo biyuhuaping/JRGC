@@ -1357,6 +1357,9 @@ static NetworkModule *gInstance = NULL;
         case kSXTagGetGoldCouponList://黄金提现页面信息
             parameter = [NEW_SERVER_IP stringByAppendingString:GOLDCOUPONLISTURL];
             break;
+        case kSXTagGelectALLGoldCoupon://黄金返金劵全选
+            parameter = [NEW_SERVER_IP stringByAppendingString:GOlDOUPONSELEALLURL];
+            break;
             
     }
     //给原有参数字典添加公共参数
