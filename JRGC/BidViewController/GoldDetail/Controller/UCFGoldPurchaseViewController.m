@@ -29,6 +29,7 @@
     UILabel *_activitylabel2;//三级标签
     UILabel *_activitylabel3;//四级标签
     UILabel *_activitylabel4;//五级标签
+    UITextField *_gCCodeTextField;//工场码
    
 }
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -44,6 +45,7 @@
 @property (nonatomic,assign)double accountBean ;
 @property (nonatomic,assign)double willExpireBean;//即将过期工豆
 @property (nonatomic,strong)NSString *purchaseMoneyStr;//黄金购买付款金额
+@property (nonatomic,assign)BOOL  isShowWorkshopCode;//是否显示输入工场码
 - (IBAction)gotoGoldBidSuccessVC:(id)sender;
 
 @end
@@ -66,6 +68,7 @@
     
     self.tableView.tableFooterView = [self createFootView];
     self.tableView.contentInset =  UIEdgeInsetsMake(10, 0, 0, 0);
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     UITapGestureRecognizer *frade = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardDown)];
     frade.delegate = self;
     [self.view addGestureRecognizer:frade];
@@ -96,6 +99,8 @@
     _accountBean = [[userAccountInfoDict objectForKey:@"accountBean"] doubleValue];
     _willExpireBean= [[userAccountInfoDict objectForKey:@"willExpireBean"] doubleValue];
     
+    //是否显示输入工场码（1.5）
+    _isShowWorkshopCode = [[_dataDic objectSafeForKey:@"isShowWorkshopCode"] boolValue];
     //保存是否选择工豆
     [[NSUserDefaults standardUserDefaults] setBool:!(_accountBean==0) forKey:@"SelectGoldGongDouSwitch"];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -175,7 +180,7 @@
             bottomViewYPos = 30;
             return   [self drawMarkView:bottomViewYPos];
         }
-    }else  if (section  == 2) {
+    }else  if (section  == 3) {
         
         UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 47)];
         headerView.backgroundColor = UIColorWithRGB(0xf9f9f9);
@@ -333,7 +338,7 @@
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
-    return 2;
+    return _isShowWorkshopCode ? 3 : 2;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     switch (indexPath.section) {
@@ -360,6 +365,15 @@
         }
             break;
         case 2:
+        {
+            if (indexPath.row == 0) {
+                return 37;
+            } else {
+                return 67;
+            }
+        }
+            break;
+        case 3:
         {
             return 44;
         }
@@ -407,8 +421,13 @@
             break;
         case 2:
         {
-            return 47;
+            return 10;
+        }
+            break;
 
+        case 3:
+        {
+            return 37;
         }
             break;
         default:
@@ -435,7 +454,7 @@
             break;
         case 2:
         {
-            return 1;
+            return 2;
         }
 
         default:
@@ -507,13 +526,9 @@
             return cell;
             
         }
-    }else if (indexPath.section == 2){
+    }else if (indexPath.section == 3){
         if (!cell) {
             cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellId];
-            CGFloat offX = 0.0f;
-//            if (isHaveCouponNum) {
-//                offX = 15.0f;
-//            }
             UIView *lineView1 = [[UIView alloc] initWithFrame:CGRectMake(0, 44, ScreenWidth, 0.5)];
             lineView1.backgroundColor = UIColorWithRGB(0xe3e5ea);
             [cell addSubview:lineView1];
@@ -540,9 +555,67 @@
         }
         UILabel *availableLabel = (UILabel *)[cell viewWithTag:1001];
         cell.textLabel.text = @"黄金补贴券";
+        return cell;
+
+    }else if (indexPath.section == 2 && indexPath.row == 0) {
+        static NSString *cellStr5 = @"cell6";
+        UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:cellStr5];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellStr5];
+            UIView *headview = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 37)];
+            headview.backgroundColor = UIColorWithRGB(0xf9f9f9);
+            UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 0.5)];
+            lineView.backgroundColor = UIColorWithRGB(0xd8d8d8);
+            [headview addSubview:lineView];
+            [Common addLineViewColor:UIColorWithRGB(0xeff0f3) With:headview isTop:NO];
+            [cell.contentView addSubview:headview];
+            
+            UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(15.0f, 10.5, 300, 16)];
+            textLabel.font = [UIFont systemFontOfSize:14.0f];
+            textLabel.text = @"推荐人(没有推荐人可不填)";
+            textLabel.textColor = UIColorWithRGB(0x333333);
+            [textLabel setFont:[UIFont systemFontOfSize:12] string:@"(没有推荐人可不填)"];
+            [textLabel setFontColor:UIColorWithRGB(0x999999) string:@"(没有推荐人可不填)"];
+            textLabel.backgroundColor = [UIColor clearColor];
+            [headview addSubview:textLabel];
+        }
+        return cell;
+    } else if (indexPath.section == 2 && indexPath.row == 1) {
+        static NSString *cellStr6 = @"cell7";
+        UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:cellStr6];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellStr6];
+            [self addView:cell];
+        }
+        return cell;
+
     }
+
     return cell;
 }
+#pragma mark -
+- (void)addView:(UITableViewCell *)cell
+{
+    UIView * inputBaseView = [[UIView alloc] initWithFrame:CGRectMake(15.0f, 15, ScreenWidth - 30.0f, 37.0f)];
+    inputBaseView.backgroundColor = UIColorWithRGB(0xf2f2f2);
+    inputBaseView.layer.borderColor = UIColorWithRGB(0xd8d8d8).CGColor;
+    inputBaseView.layer.borderWidth = 0.5f;
+    inputBaseView.layer.cornerRadius = 4.0f;
+    [cell addSubview:inputBaseView];
+    
+    _gCCodeTextField = [[UITextField alloc] initWithFrame:CGRectMake(10.0f, 8.5f, CGRectGetWidth(inputBaseView.frame) - 20, 20.0f)];
+    _gCCodeTextField.backgroundColor = [UIColor clearColor];
+    _gCCodeTextField.delegate = self;
+    _gCCodeTextField.returnKeyType = UIReturnKeyDone;
+    _gCCodeTextField.keyboardType = UIKeyboardTypeEmailAddress;
+    _gCCodeTextField.placeholder = @"点击填写工场码";
+    [inputBaseView addSubview:_gCCodeTextField];
+    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 66.5, ScreenWidth, 0.5)];
+    lineView.backgroundColor = UIColorWithRGB(0xd8d8d8);
+    [cell addSubview:lineView];
+    
+}
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -904,7 +977,10 @@
     {//如果工豆金额大约购买金额 传给服务端工豆金额为购买金额
         purchaseBeanStr = self.purchaseMoneyStr;
     }
-    NSDictionary *paramDict = @{@"nmPurchaseToken":self.nmPurchaseTokenStr,@"nmPrdClaimId": nmPrdClaimIdStr,@"purchaseBean":purchaseBeanStr,@"purchaseGoldAmount":cell.moneyTextField.text,@"purchaseMoney": self.purchaseMoneyStr,@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"workshopCode":@""};
+    if (_gCCodeTextField.text == nil) {
+       _gCCodeTextField.text = @"";
+    }
+    NSDictionary *paramDict = @{@"nmPurchaseToken":self.nmPurchaseTokenStr,@"nmPrdClaimId": nmPrdClaimIdStr,@"purchaseBean":purchaseBeanStr,@"purchaseGoldAmount":cell.moneyTextField.text,@"purchaseMoney": self.purchaseMoneyStr,@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"workshopCode":_gCCodeTextField.text};
     
     [[NetworkModule sharedNetworkModule] newPostReq:paramDict tag:kSXTagGetPurchaseGold owner:self signature:YES Type:SelectAccoutTypeGold];
 }
