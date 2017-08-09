@@ -7,6 +7,7 @@
 //
 
 #import "UCFHomeListHeaderSectionView.h"
+#import "UIImageView+WebCache.h"
 
 @interface UCFHomeListHeaderSectionView  ()
 @property (weak, nonatomic) IBOutlet UIView *up;
@@ -28,7 +29,7 @@
     
     self.homeListHeaderMoreButton.hidden = !presenter.showMore;
     
-    self.headerImageView.image = presenter.headerImage;
+    [self.headerImageView sd_setImageWithURL:[NSURL URLWithString:presenter.iconUrl]];
 }
 - (IBAction)moreClicked:(UIButton *)sender {
     if ([self.delegate respondsToSelector:@selector(homeListHeader:didClickedMoreWithType:)]) {

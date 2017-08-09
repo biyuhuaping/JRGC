@@ -32,9 +32,9 @@
 {
     if (!_groupPresenter0) {
         UCFHomeListGroup *group0 = [[UCFHomeListGroup alloc] init];
-        group0.headTitle = @"新手专区";
+//        group0.headTitle = @"新手专区";
         group0.showMore = NO;
-        group0.headerImage = @"mine_icon_new";
+//        group0.headerImage = @"mine_icon_new";
         _groupPresenter0 = [UCFHomeListGroupPresenter presenterWithGroup:group0];
     }
     return _groupPresenter0;
@@ -44,10 +44,10 @@
 {
     if (!_groupPresenter1) {
         UCFHomeListGroup *group1 = [[UCFHomeListGroup alloc] init];
-        group1.headTitle = @"工场尊享";
+//        group1.headTitle = @"工场尊享";
         group1.showMore = YES;
         group1.type = @"12";
-        group1.headerImage = @"mine_icon_enjoy";
+//        group1.headerImage = @"mine_icon_enjoy";
         _groupPresenter1 = [UCFHomeListGroupPresenter presenterWithGroup:group1];
     }
     return _groupPresenter1;
@@ -57,10 +57,10 @@
 {
     if (!_groupPresenter2) {
         UCFHomeListGroup *group2 = [[UCFHomeListGroup alloc] init];
-        group2.headTitle = @"工场微金";
+//        group2.headTitle = @"工场微金";
         group2.type = @"11";
         group2.showMore = YES;
-        group2.headerImage = @"mine_icon_p2p";
+//        group2.headerImage = @"mine_icon_p2p";
         _groupPresenter2 = [UCFHomeListGroupPresenter presenterWithGroup:group2];
     }
     return _groupPresenter2;
@@ -70,10 +70,10 @@
 {
     if (!_groupPresenter3) {
         UCFHomeListGroup *group3 = [[UCFHomeListGroup alloc] init];
-        group3.headTitle = @"工场黄金";
+//        group3.headTitle = @"工场黄金";
         group3.showMore = YES;
         group3.type = @"15";
-        group3.headerImage = @"mine_icon_gold";
+//        group3.headerImage = @"mine_icon_gold";
         _groupPresenter3 = [UCFHomeListGroupPresenter presenterWithGroup:group3];
     }
     return _groupPresenter3;
@@ -83,9 +83,9 @@
 {
     if (!_groupPresenter4) {
         UCFHomeListGroup *group4 = [[UCFHomeListGroup alloc] init];
-        group4.headTitle = @"资金周转";
+//        group4.headTitle = @"资金周转";
         group4.showMore = NO;
-        group4.headerImage = @"mine_icon_transfer";
+//        group4.headerImage = @"mine_icon_transfer";
         _groupPresenter4 = [UCFHomeListGroupPresenter presenterWithGroup:group4];
     }
     return _groupPresenter4;
@@ -95,11 +95,11 @@
 {
     if (!_groupPresenter5) {
         UCFHomeListGroup *group5 = [[UCFHomeListGroup alloc] init];
-        group5.headTitle = @"工场预约";
+//        group5.headTitle = @"预约宝";
         group5.desc = @"平均1小时起息";
         group5.showMore = NO;
 //        group5.type = @"15";
-        group5.headerImage = @"mine_factory_reserved";
+//        group5.headerImage = @"mine_factory_reserved";
         _groupPresenter5 = [UCFHomeListGroupPresenter presenterWithGroup:group5];
     }
     return _groupPresenter5;
@@ -188,6 +188,9 @@
                 UCFHomeListCellModel *investModel = [investModels firstObject];
                 investModel.moedelType = UCFHomeListCellModelTypeReserved;
                 UCFHomeListCellPresenter *cellPresenter = [UCFHomeListCellPresenter presenterWithItem:investModel];
+                weakSelf.groupPresenter5.group.type = investGroup.type;
+                weakSelf.groupPresenter5.group.title = investGroup.title;
+                weakSelf.groupPresenter5.group.iconUrl = investGroup.iconUrl;
                 weakSelf.groupPresenter5.group.prdlist = [NSArray arrayWithObjects:cellPresenter, nil];
             }
             
@@ -198,19 +201,29 @@
                     if ([group.type isEqualToString:@"11"]) {
 //                        weakSelf.groupPresenter2.group.type = group.type;
                         weakSelf.groupPresenter2.group.type = group.type;
+                        weakSelf.groupPresenter2.group.title = group.title;
+                        weakSelf.groupPresenter2.group.iconUrl = group.iconUrl;
                         weakSelf.groupPresenter2.group.prdlist = [weakSelf productPrdListWithDataSource:array];
                     }
                     else if ([group.type isEqualToString:@"12"]) {
 //                        weakSelf.groupPresenter1.group.type = group.type;
+                        weakSelf.groupPresenter1.group.type = group.type;
+                        weakSelf.groupPresenter1.group.title = group.title;
+                        weakSelf.groupPresenter1.group.iconUrl = group.iconUrl;
                         weakSelf.groupPresenter1.group.prdlist = [weakSelf productPrdListWithDataSource:array];
                     }
                     else if ([group.type isEqualToString:@"13"]) {
-//                        weakSelf.groupPresenter0.group.type = group.type;
+                        weakSelf.groupPresenter0.group.type = group.type;
+                        weakSelf.groupPresenter0.group.title = group.title;
+                        weakSelf.groupPresenter0.group.iconUrl = group.iconUrl;
                         weakSelf.groupPresenter0.group.prdlist = [weakSelf productPrdListWithDataSource:array];
                     }
                     else if ([group.type isEqualToString:@"15"]) {
                         NSMutableArray *temp = [weakSelf productPrdListWithDataSource:array];
                         [temp addObject:[weakSelf.groupPresenter3.group.prdlist lastObject]];
+                        weakSelf.groupPresenter3.group.type = group.type;
+                        weakSelf.groupPresenter3.group.title = group.title;
+                        weakSelf.groupPresenter3.group.iconUrl = group.iconUrl;
                         weakSelf.groupPresenter3.group.prdlist = temp;
                     }
                 }
