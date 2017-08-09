@@ -45,6 +45,9 @@
                     <constraint firstAttribute="bottom" secondItem="ZWr-zo-97l" secondAttribute="bottom" id="gDm-9N-Syg"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="textField" destination="ZWr-zo-97l" id="Xo0-95-uEr"/>
+            </connections>
         </tableViewCell>
     </objects>
 </document>

@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UCFGoldChargeSecCell : UITableViewCell
+@class UCFGoldChargeSecCell;
+@protocol UCFGoldChargeSecCellDelegate <NSObject>
+- (void)goldRechargeSecCell:(UCFGoldChargeSecCell *)goldRechargeSecCell didClickedConstractWithId:(NSString *)constractId;
+@end
 
+@interface UCFGoldChargeSecCell : UITableViewCell
+@property (strong, nonatomic) NSArray *constracts;
+@property (weak, nonatomic) id<UCFGoldChargeSecCellDelegate> delegate;
 @end

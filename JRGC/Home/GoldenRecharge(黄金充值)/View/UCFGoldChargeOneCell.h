@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface UCFGoldChargeOneCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UITextField *textField;
 
 @end

@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UCFColdChargeThirdCell : UITableViewCell
+@class UCFColdChargeThirdCell;
+@protocol UCFColdChargeThirdCellDelegate <NSObject>
+- (void)goldRechargeCell:(UCFColdChargeThirdCell *)rechargeCell didClickRechargeButton:(UIButton *)rechargeButton;
+@end
 
+@interface UCFColdChargeThirdCell : UITableViewCell
+@property (weak, nonatomic) id<UCFColdChargeThirdCellDelegate> delegate;
 @end

@@ -151,29 +151,9 @@
     
 }
 - (IBAction)handIn:(UIButton *)sender {
-    [self endEditing:YES];
-    NSString *inputMoney = [Common deleteStrHeadAndTailSpace:self.textField.text];
-    if ([Common isPureNumandCharacters:inputMoney]) {
-        [MBProgressHUD displayHudError:@"请输入正确金额"];
-        return;
-    }
-    inputMoney = [NSString stringWithFormat:@"%.2f",[inputMoney doubleValue]];
-    NSComparisonResult comparResult = [@"0.01" compare:[Common deleteStrHeadAndTailSpace:inputMoney] options:NSNumericSearch];
-    //ipa 版本号 大于 或者等于 Apple 的版本，返回，不做自己服务器检测
-    if (comparResult == NSOrderedDescending) {
-        //        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"请输入充值金额" message:nil delegate:self cancelButtonTitle:@"知道了" otherButtonTitles: nil];
-        //        [alert show];
-        [MBProgressHUD displayHudError:@"请输入充值金额"];
-        return;
-    }
-    comparResult = [inputMoney compare:@"10000000.00" options:NSNumericSearch];
-    if (comparResult == NSOrderedDescending || comparResult == NSOrderedSame) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"充值金额不可大于1000万" message:nil delegate:self cancelButtonTitle:@"知道了" otherButtonTitles: nil];
-        [alert show];
-        return;
-    }
+    
     if ([self.delegate respondsToSelector:@selector(goldRechargeHeader:didClickedHandInButton:withMoney:)]) {
-        [self.delegate goldRechargeHeader:self didClickedHandInButton:sender withMoney:inputMoney];
+//        [self.delegate goldRechargeHeader:self didClickedHandInButton:sender withMoney:inputMoney];
     }
 }
 

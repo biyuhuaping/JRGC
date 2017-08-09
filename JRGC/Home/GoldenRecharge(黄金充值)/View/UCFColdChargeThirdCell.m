@@ -15,10 +15,10 @@
     self.contentView.backgroundColor = UIColorWithRGB(0xebebee);
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+- (IBAction)recharge:(UIButton *)sender {
+    if ([self.delegate respondsToSelector:@selector(goldRechargeCell:didClickRechargeButton:)]) {
+        [self.delegate goldRechargeCell:self didClickRechargeButton:sender];
+    }
 }
 
 @end

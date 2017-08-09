@@ -18,11 +18,13 @@
 #import "UCFGoldChargeSecCell.h"
 #import "UCFColdChargeThirdCell.h"
 
-@interface UCFGoldRechargeViewController () <UITableViewDelegate, UITableViewDataSource, UCFGoldRechargeHeaderViewDelegate, UCFGoldRechargeCellDelegate>
+@interface UCFGoldRechargeViewController () <UITableViewDelegate, UITableViewDataSource, UCFGoldRechargeCellDelegate, UCFGoldChargeSecCellDelegate, UCFColdChargeThirdCellDelegate>
 @property (weak, nonatomic) UCFGoldRechargeHeaderView *goldRechargeHeader;
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (strong, nonatomic) NSMutableArray *dataArray;
 @property (copy, nonatomic) NSString *backUrl;
+@property (strong, nonatomic) NSArray *constracts;
+@property (weak, nonatomic) UCFGoldChargeOneCell *chargeOneCell;
 @end
 
 @implementation UCFGoldRechargeViewController
@@ -206,6 +208,7 @@
         if (nil == goldRecharge) {
             goldRecharge = (UCFGoldChargeOneCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFGoldChargeOneCell" owner:self options:nil] lastObject];
         }
+        self.chargeOneCell = goldRecharge;
         return goldRecharge;
     }
     else if (indexPath.section == 1) {
@@ -214,6 +217,8 @@
         if (nil == goldRecharge) {
             goldRecharge = (UCFGoldChargeSecCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFGoldChargeSecCell" owner:self options:nil] lastObject];
         }
+        goldRecharge.constracts = self.constracts;
+        goldRecharge.delegate = self;
         return goldRecharge;
     }
     else if (indexPath.section == 2) {
@@ -221,6 +226,7 @@
         UCFColdChargeThirdCell *goldRecharge = [tableView dequeueReusableCellWithIdentifier:cellId];
         if (nil == goldRecharge) {
             goldRecharge = (UCFColdChargeThirdCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFColdChargeThirdCell" owner:self options:nil] lastObject];
+            goldRecharge.delegate = self;
         }
         return goldRecharge;
     }
@@ -244,7 +250,7 @@
         return 37;
     }
     else if (indexPath.section == 1) {
-        return 20;
+        return 22;
     }
     else if (indexPath.section == 2) {
         return 37;
@@ -253,22 +259,43 @@
     return model.cellHeight;
 }
 
-- (void)goldRechargeHeader:(UCFGoldRechargeHeaderView *)goldHeader didClickedHandInButton:(UIButton *)handInButton withMoney:(NSString *)money
+- (void)goldRechargeCell:(UCFColdChargeThirdCell *)rechargeCell didClickRechargeButton:(UIButton *)rechargeButton
 {
+    [self.tableview endEditing:YES];
+    NSString *inputMoney = [Common deleteStrHeadAndTailSpace:self.chargeOneCell.textField.text];
+    if ([Common isPureNumandCharacters:inputMoney]) {
+        [MBProgressHUD displayHudError:@"请输入正确金额"];
+        return;
+    }
+    inputMoney = [NSString stringWithFormat:@"%.2f",[inputMoney doubleValue]];
+    NSComparisonResult comparResult = [@"0.01" compare:[Common deleteStrHeadAndTailSpace:inputMoney] options:NSNumericSearch];
+    //ipa 版本号 大于 或者等于 Apple 的版本，返回，不做自己服务器检测
+    if (comparResult == NSOrderedDescending) {
+        //        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"请输入充值金额" message:nil delegate:self cancelButtonTitle:@"知道了" otherButtonTitles: nil];
+        //        [alert show];
+        [MBProgressHUD displayHudError:@"请输入充值金额"];
+        return;
+    }
+    comparResult = [inputMoney compare:@"10000000.00" options:NSNumericSearch];
+    if (comparResult == NSOrderedDescending || comparResult == NSOrderedSame) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"充值金额不可大于1000万" message:nil delegate:self cancelButtonTitle:@"知道了" otherButtonTitles: nil];
+        [alert show];
+        return;
+    }
     
     NSString *userId = [[NSUserDefaults standardUserDefaults] valueForKey:UUID];
     if (!userId) {
         return;
     }
-    if ([money doubleValue] < 10.00f) {
+    if ([inputMoney doubleValue] < 10.00f) {
         [MBProgressHUD displayHudError:@"充值金额大于10元"];
         return;
     }
-    NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:self.bankUrl, @"backUrl", money, @"rechargeAmt", userId, @"userId",  nil];
+    NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:self.bankUrl, @"backUrl", inputMoney, @"rechargeAmt", userId, @"userId",  nil];
     [[NetworkModule sharedNetworkModule] newPostReq:param tag:kSXTagGoldRecharge owner:self signature:YES Type:SelectAccoutDefault];
 }
 
-- (void)goldRechargeHeader:(UCFGoldRechargeHeaderView *)goldHeader didClickedConstractWithId:(NSString *)constractId
+- (void)goldRechargeSecCell:(UCFGoldChargeSecCell *)goldRechargeSecCell didClickedConstractWithId:(NSString *)constractId
 {
     NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId", [NSString stringWithFormat:@"%@", constractId], @"contractTemplateId", nil];
     
@@ -311,7 +338,7 @@
                 contract.contractName = [contractDict objectSafeForKey:@"contractName"];
                 [temp addObject:contract];
             }
-            self.goldRechargeHeader.constracts = temp;
+            self.constracts = temp;
             NSString *tipContent = [data objectSafeForKey:@"pageContent"];
             NSString *tipStr = [tipContent stringByReplacingOccurrencesOfString:@"• " withString:@""];
             NSArray *array = [tipStr componentsSeparatedByString:@"\n"];
