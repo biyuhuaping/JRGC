@@ -516,7 +516,7 @@
 //                          NSFontAttributeName:[UIFont systemFontOfSize:13],/*(字体)*/
 //                          NSParagraphStyleAttributeName:paragraph,/*(段落)*/
 //                          };
-    NSString *withdrawDescriptionStr = [NSString stringWithFormat: @"•单笔提现金额不能低于%@元，提现申请成功后不可撤回；\n•对首次充值后无投资的提现，平台收取%@%%的手续费；\n•徽电子账户采用原卡进出设置，为了您的资金安全，只能提现至您绑定的银行卡；",[dataDic  objectForKey:@"minAmt"],_fee];
+    NSString *withdrawDescriptionStr = [NSString stringWithFormat: @"•单笔提现金额不能低于%@元，提现申请成功后不可撤回；\n•对首次充值后无投资的提现，第三方支付平台收取%@%%的手续费；\n•徽电子账户采用原卡进出设置，为了您的资金安全，只能提现至您绑定的银行卡；",[dataDic  objectForKey:@"minAmt"],_fee];
     _withdrawDescriptionLab.text = withdrawDescriptionStr;
     
     __weak typeof(self) weakSelf = self;
