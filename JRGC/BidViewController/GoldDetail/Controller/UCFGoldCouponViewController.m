@@ -20,7 +20,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *selectTipStr;
 @property (nonatomic,strong)NSMutableArray *selectCellDataArray;
 @property (nonatomic,assign) int pageNo;
-@property (nonatomic,assign) int totalPage;//返金劵的总数
+@property (nonatomic,assign) int totalPage;//返金劵的总页数
+@property (nonatomic,assign) int totalCount;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 - (IBAction)clickAllSelectBtn:(UIButton *)sender;
 - (IBAction)ClickConfirmUseGoldCoupon:(id)sender;
@@ -106,7 +107,7 @@
             tatolNeetGoldAccout += [model.investMin doubleValue];
         }
     }
-    self.allSelectBtn.selected = cellSelectCount == self.totalPage;
+    self.allSelectBtn.selected = cellSelectCount == self.totalCount;
     NSString *cellSelectCountStr = [NSString stringWithFormat:@"%d",cellSelectCount];
     NSString *tatolGetGoldAccoutStr = [NSString stringWithFormat:@"%.3lf",tatolGetGoldAccout];
     self.selectTipStr.text = [NSString stringWithFormat:@"已选用%@张，可返金%@克",cellSelectCountStr,tatolGetGoldAccoutStr];
@@ -123,6 +124,18 @@
            model.isSelectedStatus = YES;
         }
         [self.tableView reloadData];
+    }else{
+        for (UCFGoldCouponModel *model in self.dataArray) {
+            model.isSelectedStatus = NO;
+        }
+        [self.tableView reloadData];
+        [self changeGoldCellSelectStatus];
+    }
+}
+-(void)setAllSelectBtn:(UIButton *)allSelectBtn
+{
+    if (allSelectBtn.selected)
+    {
         NSDictionary *paramDict = @{@"nmPrdClaimId": _nmPrdClaimIdStr,@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID]};
         [[NetworkModule sharedNetworkModule] newPostReq:paramDict tag:kSXTagGelectALLGoldCoupon owner:self signature:YES Type:SelectAccoutTypeGold];
     }
@@ -139,8 +152,6 @@
     
     if ([self.tableView.header isRefreshing]) {
         self.pageNo = 1;
-    }else if([self.tableView.footer isRefreshing]){
-        self.pageNo ++;
     }
 
     NSString *pageNoStr = [NSString stringWithFormat:@"%d",self.pageNo];
@@ -150,7 +161,7 @@
 }
 -(void)beginPost:(kSXTag)tag
 {
-    if(tag !=kSXTagGetGoldProClaimDetail)
+    if(tag !=kSXTagGelectALLGoldCoupon)
     {
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     }
@@ -167,9 +178,10 @@
     if (tag.intValue == kSXTagGetGoldCouponList)
     {//黄金购买
         if ([rstcode boolValue]) {
-            
+            self.tableView.footer.hidden = NO;
             NSDictionary *pageData = [[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"pageData"];
             self.totalPage = [[[pageData objectSafeDictionaryForKey:@"pagination"] objectSafeForKey:@"totalPage"] intValue];
+            self.totalCount = [[[pageData objectSafeDictionaryForKey:@"pagination"] objectSafeForKey:@"totalCount"] intValue];
              NSArray *resultDataArray  = [pageData objectSafeArrayForKey:@"result"] ;
             if(_pageNo == 1)
             {
@@ -202,7 +214,7 @@
             //investMinSum	需要投资的总克重	string
             NSDictionary *dataDict  = [dic objectSafeDictionaryForKey:@"data"];
                                       
-            NSString *cellSelectCountStr = [NSString stringWithFormat:@"%d",_totalPage];
+            NSString *cellSelectCountStr = [NSString stringWithFormat:@"%d",_totalCount];
             NSString *tatolGetGoldAccoutStr = [NSString stringWithFormat:@"%@",[dataDict objectSafeForKey:@"goldAccountSum"]];
             self.selectTipStr.text = [NSString stringWithFormat:@"已选用%@张，可返金%@克",cellSelectCountStr,tatolGetGoldAccoutStr];
             [self.selectTipStr setFontColor:UIColorWithRGB(0xfc8c0e) string:cellSelectCountStr];
