@@ -9,5 +9,5 @@
 #import "UCFBaseViewController.h"
 
 @interface UCFGoldCouponViewController : UCFBaseViewController
-
+@property (nonatomic,strong)NSString *nmPrdClaimIdStr;//黄金标id
 @end

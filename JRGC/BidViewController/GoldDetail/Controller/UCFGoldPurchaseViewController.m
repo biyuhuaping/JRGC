@@ -40,6 +40,7 @@
 
 @property (nonatomic,strong)NSString *nmPurchaseTokenStr;
 @property (nonatomic,strong)NSString *needToRechareStr;
+@property (nonatomic,strong)NSString *goldCouponNumStr;//返金劵张数
 @property (nonatomic,assign)double availableAllMoney ;
 @property (nonatomic,assign)double availableMoney ;
 @property (nonatomic,assign)double accountBean ;
@@ -101,6 +102,8 @@
     
     //是否显示输入工场码（1.5）
     _isShowWorkshopCode = [[_dataDic objectSafeForKey:@"isShowWorkshopCode"] boolValue];
+
+    _goldCouponNumStr = [userAccountInfoDict objectSafeForKey:@"goldCouponNum"];
     //保存是否选择工豆
     [[NSUserDefaults standardUserDefaults] setBool:!(_accountBean==0) forKey:@"SelectGoldGongDouSwitch"];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -338,6 +341,7 @@
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
+
     return _isShowWorkshopCode ? 3 : 2;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -554,7 +558,8 @@
             [cell addSubview:availableLabel];
         }
         UILabel *availableLabel = (UILabel *)[cell viewWithTag:1001];
-        cell.textLabel.text = @"黄金补贴券";
+        cell.textLabel.text = @"黄金返金券";
+        availableLabel.text = [NSString stringWithFormat:@"%@张可用",_goldCouponNumStr];
         return cell;
 
     }else if (indexPath.section == 2 && indexPath.row == 0) {
@@ -588,7 +593,6 @@
             [self addView:cell];
         }
         return cell;
-
     }
 
     return cell;
@@ -630,6 +634,7 @@
 -(void)pushGoldCouponVC
 {
     UCFGoldCouponViewController *goldCouponVC = [[UCFGoldCouponViewController   alloc]initWithNibName:@"UCFGoldCouponViewController" bundle:nil];
+    goldCouponVC.nmPrdClaimIdStr = self.goldModel.nmPrdClaimId;
     [self.navigationController pushViewController:goldCouponVC animated:YES];
     
 }

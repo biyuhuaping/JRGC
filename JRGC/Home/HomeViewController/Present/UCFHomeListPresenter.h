@@ -19,7 +19,7 @@
 @interface UCFHomeListPresenter : NSObject
 
 @property (weak, nonatomic) id<HomeListViewPresenterCallBack> view;
-@property (assign, nonatomic) BOOL canClicked;
+@property (assign, nonatomic) BOOL canReservedClicked;
 - (NSArray *)allDatas;
 
 + (instancetype)presenter;

@@ -36,7 +36,7 @@
     if (item.isShow) {
         if ([_item.title isEqualToString:@"黄金账户"]) {
             self.itemValueLabel.textColor = UIColorWithRGB(0xfc8f0e);
-            self.itemDescribeLabel.text = @"可用黄金";
+            self.itemDescribeLabel.text = @"持有黄金";
         } else {
             self.itemValueLabel.textColor = UIColorWithRGB(0xfd4d4c);
             self.itemDescribeLabel.text = @"可用余额";
