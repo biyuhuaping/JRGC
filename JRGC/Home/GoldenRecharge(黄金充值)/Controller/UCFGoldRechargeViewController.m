@@ -7,7 +7,6 @@
 //
 
 #import "UCFGoldRechargeViewController.h"
-#import "UCFGoldRechargeHeaderView.h"
 #import "UCFGoldRechargeCell.h"
 #import "UCFGoldRechargeModel.h"
 #import "UCFGoldRechargeHistoryController.h"
@@ -17,9 +16,11 @@
 #import "UCFGoldChargeOneCell.h"
 #import "UCFGoldChargeSecCell.h"
 #import "UCFColdChargeThirdCell.h"
+#import "UCFGoldRechargeFourthCell.h"
+#import "UCFGoldRechargeBankCell.h"
 
 @interface UCFGoldRechargeViewController () <UITableViewDelegate, UITableViewDataSource, UCFGoldRechargeCellDelegate, UCFGoldChargeSecCellDelegate, UCFColdChargeThirdCellDelegate>
-@property (weak, nonatomic) UCFGoldRechargeHeaderView *goldRechargeHeader;
+//@property (weak, nonatomic) UCFGoldRechargeHeaderView *goldRechargeHeader;
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (strong, nonatomic) NSMutableArray *dataArray;
 @property (copy, nonatomic) NSString *backUrl;
@@ -70,15 +71,15 @@
     [self.tableview addGestureRecognizer:tap];
 }
 
+- (void)tapped:(UITapGestureRecognizer *)tap {
+    [self.view endEditing:YES];
+}
+
 - (void)getTipInfoFromNet
 {
     NSString *userId = [UserInfoSingle sharedManager].userId;
     NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:userId, @"userId", nil];
     [[NetworkModule sharedNetworkModule] newPostReq:param tag:kSXTagGoldRechargeInfo owner:self signature:YES Type:SelectAccoutDefault];
-}
-
-- (void)tapped:(UITapGestureRecognizer *)tap {
-    [self.goldRechargeHeader endEditing:YES];
 }
 
 - (void)addRightBtn {
@@ -115,12 +116,11 @@
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-    self.goldRechargeHeader.frame = CGRectMake(0, 0, ScreenWidth, 168);
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 4;
+    return 5;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -194,7 +194,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == 3) {
+    if (section == 4) {
         return self.dataArray.count;
     }
     return 1;
@@ -203,6 +203,15 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
+        static NSString *cellId = @"goldRechargeFourth";
+        UCFGoldRechargeFourthCell *goldRecharge = [tableView dequeueReusableCellWithIdentifier:cellId];
+        if (nil == goldRecharge) {
+            goldRecharge = (UCFGoldRechargeFourthCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFGoldRechargeFourthCell" owner:self options:nil] lastObject];
+        }
+        return goldRecharge;
+    }
+    
+    else if (indexPath.section == 1) {
         static NSString *cellId = @"goldRechargeFirst";
         UCFGoldChargeOneCell *goldRecharge = [tableView dequeueReusableCellWithIdentifier:cellId];
         if (nil == goldRecharge) {
@@ -211,7 +220,7 @@
         self.chargeOneCell = goldRecharge;
         return goldRecharge;
     }
-    else if (indexPath.section == 1) {
+    else if (indexPath.section == 2) {
         static NSString *cellId = @"goldRechargeSecond";
         UCFGoldChargeSecCell *goldRecharge = [tableView dequeueReusableCellWithIdentifier:cellId];
         if (nil == goldRecharge) {
@@ -221,7 +230,7 @@
         goldRecharge.delegate = self;
         return goldRecharge;
     }
-    else if (indexPath.section == 2) {
+    else if (indexPath.section == 3) {
         static NSString *cellId = @"goldRechargeThird";
         UCFColdChargeThirdCell *goldRecharge = [tableView dequeueReusableCellWithIdentifier:cellId];
         if (nil == goldRecharge) {
@@ -247,12 +256,15 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
-        return 37;
+        return 30;
     }
     else if (indexPath.section == 1) {
-        return 22;
+        return 37;
     }
     else if (indexPath.section == 2) {
+        return 22;
+    }
+    else if (indexPath.section == 3) {
         return 37;
     }
     UCFGoldRechargeModel *model = [self.dataArray objectAtIndex:indexPath.row];
