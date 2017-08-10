@@ -549,7 +549,7 @@
                                      NSParagraphStyleAttributeName:paragraphStyle,
                                      NSForegroundColorAttributeName :UIColorWithRGB(0x555555)
                                      };
-        NSString *str = [NSString stringWithFormat:@"尊敬的用户：\n       感谢您一直以来对金融工场平台的大力支持，为了给您提供更优质、专业的服务，金融工场平台品牌将作如下调整：\n1、现由北京凤凰信用管理有限公司运营的金融工场品牌自%@起由北京豆哥投资管理有限公司负责运营与使用。\n2、金融工场平台原用户的权益不受影响，北京凤凰信用管理有限公司运营的工场微金（网址:www.gongchangp2p.cn）平台将继续履行金融工场与原用户订立的服务协议，继续根据相关协议向原用户提供相关服务，直至相关协议履行完毕。\n感谢您对金融工场平台的信任和支持！\n\n\t\t北京豆哥投资管理有限公司",date];
+        NSString *str = [NSString stringWithFormat:@"尊敬的用户：\n       感谢您一直以来对金融工场平台的大力支持，为了给您提供更优质、专业的服务，金融工场平台品牌将作如下调整：\n1、现由北京凤凰信用管理有限公司运营的金融工场品牌自%@起由北京豆哥投资管理有限公司负责运营与使用。\n2、金融工场平台原用户的权益不受影响，北京凤凰信用管理有限公司运营的工场微金（网址:www.gongchangp2p.com）平台将继续履行金融工场与原用户订立的服务协议，继续根据相关协议向原用户提供相关服务，直至相关协议履行完毕。\n感谢您对金融工场平台的信任和支持！\n\n\t\t北京豆哥投资管理有限公司",date];
         textView.attributedText = [[NSAttributedString alloc] initWithString:str attributes:attributes];
         textView.editable = NO;
         [whiteBaseView addSubview:textView];
