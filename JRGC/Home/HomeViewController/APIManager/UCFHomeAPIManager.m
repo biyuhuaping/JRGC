@@ -166,6 +166,7 @@
                 UCFHomeListGroup * tempInvestG = [[UCFHomeListGroup alloc] init];
                 tempInvestG.title = [investDict objectSafeForKey:@"title"];
                 tempInvestG.desc = [investDict objectSafeForKey:@"desc"];
+                tempInvestG.iconUrl = [investDict objectSafeForKey:@"iconUrl"];
                 UCFHomeListCellModel *investModel = [[UCFHomeListCellModel alloc] init];
                 investModel.Id = [investDict objectSafeForKey:@"id"];
                 investModel.annualRate = [investDict objectSafeForKey:@"annualRate"];
