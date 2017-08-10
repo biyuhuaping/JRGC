@@ -89,7 +89,7 @@
                                    @"tabbar_icon_find_normal"];
 
     NSArray *tabbarHighlightArray = @[@"tabbar_icon_user_highlight",
-                                      @"tabbar_icon_project_highlight",//tabbar_icon_transfer_highlight.png
+                                      @"tabbar_icon_project_highlight",
                                       @"tabbar_icon_loan_highlight",
                                       @"tabbar_icon_life_highlight",
                                       @"tabbar_icon_find_highlight"];
