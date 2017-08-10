@@ -486,7 +486,13 @@
     self.repayModelLabel.text = goldModel.paymentType;
     self.startMoneyLabel.text = @"年化收益克重";
 //    [NSString stringWithFormat:@"%@克起", goldModel.minPurchaseAmount];
-    self.remainLabel.text = [NSString stringWithFormat:@"剩%@克", goldModel.remainAmount];
+    if ([goldModel.remainAmount floatValue] > 0) {
+        self.remainLabel.text = [NSString stringWithFormat:@"剩%@克", goldModel.remainAmount];
+    }
+    else {
+        self.remainLabel.text = [NSString stringWithFormat:@"%@克", goldModel.totalAmount];
+    }
+    
     NSInteger status = [goldModel.status integerValue];
     
     

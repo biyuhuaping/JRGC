@@ -32,9 +32,7 @@
 {
     if (!_groupPresenter0) {
         UCFHomeListGroup *group0 = [[UCFHomeListGroup alloc] init];
-//        group0.headTitle = @"新手专区";
         group0.showMore = NO;
-//        group0.headerImage = @"mine_icon_new";
         _groupPresenter0 = [UCFHomeListGroupPresenter presenterWithGroup:group0];
     }
     return _groupPresenter0;
@@ -44,10 +42,8 @@
 {
     if (!_groupPresenter1) {
         UCFHomeListGroup *group1 = [[UCFHomeListGroup alloc] init];
-//        group1.headTitle = @"工场尊享";
         group1.showMore = YES;
         group1.type = @"12";
-//        group1.headerImage = @"mine_icon_enjoy";
         _groupPresenter1 = [UCFHomeListGroupPresenter presenterWithGroup:group1];
     }
     return _groupPresenter1;
@@ -83,9 +79,9 @@
 {
     if (!_groupPresenter4) {
         UCFHomeListGroup *group4 = [[UCFHomeListGroup alloc] init];
-//        group4.headTitle = @"资金周转";
+        group4.title = @"资金周转";
         group4.showMore = NO;
-//        group4.headerImage = @"mine_icon_transfer";
+        group4.headerImage = @"mine_icon_transfer";
         _groupPresenter4 = [UCFHomeListGroupPresenter presenterWithGroup:group4];
     }
     return _groupPresenter4;
@@ -137,14 +133,14 @@
 #pragma mark - 初始化数据
 - (void)initData
 {
-    UCFHomeListCellModel *model = [[UCFHomeListCellModel alloc] init];
-    model.moedelType = UCFHomeListCellModelTypeOneImageBatchLending;
-    model.backImage = @"home_bg_1";
-    model.prdName = @"批量出借专区";
-    model.type = @"省心出借";
-    UCFHomeListCellPresenter *cellPresenter = [UCFHomeListCellPresenter presenterWithItem:model];
-    NSMutableArray *temp3 = [NSMutableArray arrayWithObject:cellPresenter];
-    self.groupPresenter3.group.prdlist = temp3;
+//    UCFHomeListCellModel *model = [[UCFHomeListCellModel alloc] init];
+//    model.moedelType = UCFHomeListCellModelTypeOneImageBatchLending;
+//    model.backImage = @"home_bg_1";
+//    model.prdName = @"批量出借专区";
+//    model.type = @"省心出借";
+//    UCFHomeListCellPresenter *cellPresenter = [UCFHomeListCellPresenter presenterWithItem:model];
+//    NSMutableArray *temp3 = [NSMutableArray arrayWithObject:cellPresenter];
+//    self.groupPresenter3.group.prdlist = temp3;
     
     NSMutableArray *temp4 = [[NSMutableArray alloc] init];
     NSArray *imageArr = @[@"home_bg_2", @"home_bg_4"];
@@ -220,12 +216,12 @@
                         weakSelf.groupPresenter0.group.prdlist = [weakSelf productPrdListWithDataSource:array];
                     }
                     else if ([group.type isEqualToString:@"15"]) {
-                        NSMutableArray *temp = [weakSelf productPrdListWithDataSource:array];
-                        [temp addObject:[weakSelf.groupPresenter3.group.prdlist lastObject]];
+//                        NSMutableArray *temp = [weakSelf productPrdListWithDataSource:array];
+//                        [temp addObject:[weakSelf.groupPresenter3.group.prdlist lastObject]];
                         weakSelf.groupPresenter3.group.type = group.type;
                         weakSelf.groupPresenter3.group.title = group.title;
                         weakSelf.groupPresenter3.group.iconUrl = group.iconUrl;
-                        weakSelf.groupPresenter3.group.prdlist = temp;
+                        weakSelf.groupPresenter3.group.prdlist = [weakSelf productPrdListWithDataSource:array];
                     }
                 }
             }
