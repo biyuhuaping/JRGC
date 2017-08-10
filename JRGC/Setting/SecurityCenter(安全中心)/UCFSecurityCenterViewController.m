@@ -200,12 +200,12 @@
             [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagUserLogout owner:self signature:YES Type:SelectAccoutDefault];
             
             [[UCFSession sharedManager] transformBackgroundWithUserInfo:nil withState:UCFSessionStateUserLogout];
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"setDefaultViewData" object:nil];
+//            [[NSNotificationCenter defaultCenter] postNotificationName:@"setDefaultViewData" object:nil];
             [[UserInfoSingle sharedManager] removeUserInfo];
             [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"changScale"];
             [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isVisible"];
             [[NSUserDefaults standardUserDefaults] synchronize];
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"setDefaultViewData" object:nil];
             //安全退出后去首页
             AppDelegate *delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
             [delegate.tabBarController setSelectedIndex:0];
