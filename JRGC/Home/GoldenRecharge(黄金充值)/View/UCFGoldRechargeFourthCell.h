@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UCFGoldRechargeFourthCell : UITableViewCell
+@class UCFGoldRechargeFourthCell;
+@protocol UCFGoldRechargeFourthCellDelegate <NSObject>
+- (void)goldRechargeCell:(UCFGoldRechargeFourthCell *)goldRechargeCell didClickedCheckButton:(UIButton *)checkButton;
+@end;
 
+@interface UCFGoldRechargeFourthCell : UITableViewCell
+@property (weak, nonatomic) id<UCFGoldRechargeFourthCellDelegate> delegate;
 @end

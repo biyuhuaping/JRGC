@@ -193,6 +193,7 @@
 - (void)setDefault
 {
     self.userInfoOneModel = nil;
+    
     [self initUI];
 }
 

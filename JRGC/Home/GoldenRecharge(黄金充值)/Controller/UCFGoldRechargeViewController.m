@@ -18,8 +18,9 @@
 #import "UCFColdChargeThirdCell.h"
 #import "UCFGoldRechargeFourthCell.h"
 #import "UCFGoldRechargeBankCell.h"
+#import "UCFBankLimitViewController.h"
 
-@interface UCFGoldRechargeViewController () <UITableViewDelegate, UITableViewDataSource, UCFGoldRechargeCellDelegate, UCFGoldChargeSecCellDelegate, UCFColdChargeThirdCellDelegate>
+@interface UCFGoldRechargeViewController () <UITableViewDelegate, UITableViewDataSource, UCFGoldRechargeCellDelegate, UCFGoldChargeSecCellDelegate, UCFColdChargeThirdCellDelegate, UCFGoldRechargeFourthCellDelegate>
 //@property (weak, nonatomic) UCFGoldRechargeHeaderView *goldRechargeHeader;
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (strong, nonatomic) NSMutableArray *dataArray;
@@ -209,6 +210,7 @@
         UCFGoldRechargeFourthCell *goldRecharge = [tableView dequeueReusableCellWithIdentifier:cellId];
         if (nil == goldRecharge) {
             goldRecharge = (UCFGoldRechargeFourthCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFGoldRechargeFourthCell" owner:self options:nil] lastObject];
+            goldRecharge.delegate = self;
         }
         return goldRecharge;
     }
@@ -257,7 +259,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
-        return 100;
+        return (ScreenWidth - 40) * 0.5;
     }
     else if (indexPath.section == 1) {
         return 30;
@@ -316,6 +318,13 @@
     NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId", [NSString stringWithFormat:@"%@", constractId], @"contractTemplateId", nil];
     
     [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagGetGoldContractInfo owner:self signature:YES Type:SelectAccoutTypeGold];
+}
+
+- (void)goldRechargeCell:(UCFGoldRechargeFourthCell *)goldRechargeCell didClickedCheckButton:(UIButton *)checkButton
+{
+    UCFBankLimitViewController *bankLimit = [[UCFBankLimitViewController alloc] initWithNibName:@"UCFBankLimitViewController" bundle:nil];
+    bankLimit.baseTitleText = @"银行限额";
+    [self.navigationController pushViewController:bankLimit animated:YES];
 }
 
 - (void)beginPost:(kSXTag)tag

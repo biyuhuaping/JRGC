@@ -27,7 +27,7 @@
     NSMutableString *str1 = [NSMutableString stringWithFormat:@"点击查看银行限额"];
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str1];
     NSString *str = [NSString stringWithFormat:@"银行限额"];
-    NSString *strV = [NSString stringWithFormat:@"checkbanklimit"];
+    NSString *strV = [NSString stringWithFormat:@"checkbanklimit://"];
     [attributedString addAttribute:NSLinkAttributeName
                              value:strV
                              range:[[attributedString string] rangeOfString:str]];
@@ -63,9 +63,9 @@
     if ([[URL scheme] isEqualToString:@"checkbanklimit"]) {
 //        UCFContractModel *contract = [self.constracts firstObject];
 //        NSLog(@"委托协议---------------");
-//        if ([self.delegate respondsToSelector:@selector(goldRechargeSecCell:didClickedConstractWithId:)]) {
-//            [self.delegate goldRechargeSecCell:self didClickedConstractWithId:contract.Id];
-//        }
+        if ([self.delegate respondsToSelector:@selector(goldRechargeCell:didClickedCheckButton:)]) {
+            [self.delegate goldRechargeCell:self didClickedCheckButton:nil];
+        }
         return NO;
     }
     //    else if ([[URL scheme] isEqualToString:@"checkbox"]) {

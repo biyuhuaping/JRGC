@@ -259,6 +259,12 @@
 		745D37D61F3AE98800897F1A /* UCFGoldChargeSecCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 745D37D41F3AE98800897F1A /* UCFGoldChargeSecCell.xib */; };
 		745D37DA1F3AE9B200897F1A /* UCFColdChargeThirdCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 745D37D81F3AE9B200897F1A /* UCFColdChargeThirdCell.m */; };
 		745D37DB1F3AE9B200897F1A /* UCFColdChargeThirdCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 745D37D91F3AE9B200897F1A /* UCFColdChargeThirdCell.xib */; };
+		746748D11F3C53310067294D /* UCFBankLimitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 746748CF1F3C53310067294D /* UCFBankLimitViewController.m */; };
+		746748D21F3C53310067294D /* UCFBankLimitViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 746748D01F3C53310067294D /* UCFBankLimitViewController.xib */; };
+		746748DA1F3C561A0067294D /* UCFGoldBankLimitHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 746748D91F3C561A0067294D /* UCFGoldBankLimitHeader.m */; };
+		746748DC1F3C56290067294D /* UCFGoldBankLimitHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 746748DB1F3C56290067294D /* UCFGoldBankLimitHeader.xib */; };
+		746748E01F3C595A0067294D /* UCFGoldBankLimitCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 746748DE1F3C595A0067294D /* UCFGoldBankLimitCell.m */; };
+		746748E11F3C595A0067294D /* UCFGoldBankLimitCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 746748DF1F3C595A0067294D /* UCFGoldBankLimitCell.xib */; };
 		74677C661F165022003768EB /* UCFGoldRechargeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74677C641F165022003768EB /* UCFGoldRechargeViewController.m */; };
 		74677C671F165022003768EB /* UCFGoldRechargeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74677C651F165022003768EB /* UCFGoldRechargeViewController.xib */; };
 		746BBEA41AF8AEC700EBA0E7 /* UCFSelectedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 746BBEA31AF8AEC700EBA0E7 /* UCFSelectedView.m */; };
@@ -1389,6 +1395,15 @@
 		745D37D71F3AE9B200897F1A /* UCFColdChargeThirdCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFColdChargeThirdCell.h; sourceTree = "<group>"; };
 		745D37D81F3AE9B200897F1A /* UCFColdChargeThirdCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFColdChargeThirdCell.m; sourceTree = "<group>"; };
 		745D37D91F3AE9B200897F1A /* UCFColdChargeThirdCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFColdChargeThirdCell.xib; sourceTree = "<group>"; };
+		746748CE1F3C53310067294D /* UCFBankLimitViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFBankLimitViewController.h; sourceTree = "<group>"; };
+		746748CF1F3C53310067294D /* UCFBankLimitViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFBankLimitViewController.m; sourceTree = "<group>"; };
+		746748D01F3C53310067294D /* UCFBankLimitViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFBankLimitViewController.xib; sourceTree = "<group>"; };
+		746748D81F3C561A0067294D /* UCFGoldBankLimitHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFGoldBankLimitHeader.h; sourceTree = "<group>"; };
+		746748D91F3C561A0067294D /* UCFGoldBankLimitHeader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFGoldBankLimitHeader.m; sourceTree = "<group>"; };
+		746748DB1F3C56290067294D /* UCFGoldBankLimitHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFGoldBankLimitHeader.xib; sourceTree = "<group>"; };
+		746748DD1F3C595A0067294D /* UCFGoldBankLimitCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFGoldBankLimitCell.h; sourceTree = "<group>"; };
+		746748DE1F3C595A0067294D /* UCFGoldBankLimitCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFGoldBankLimitCell.m; sourceTree = "<group>"; };
+		746748DF1F3C595A0067294D /* UCFGoldBankLimitCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFGoldBankLimitCell.xib; sourceTree = "<group>"; };
 		74677C631F165022003768EB /* UCFGoldRechargeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFGoldRechargeViewController.h; sourceTree = "<group>"; };
 		74677C641F165022003768EB /* UCFGoldRechargeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFGoldRechargeViewController.m; sourceTree = "<group>"; };
 		74677C651F165022003768EB /* UCFGoldRechargeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFGoldRechargeViewController.xib; sourceTree = "<group>"; };
@@ -3645,6 +3660,12 @@
 				7436F2D51F3C38AE003B77CA /* UCFGoldRechargeBankCell.h */,
 				7436F2D61F3C38AE003B77CA /* UCFGoldRechargeBankCell.m */,
 				7436F2D71F3C38AE003B77CA /* UCFGoldRechargeBankCell.xib */,
+				746748D81F3C561A0067294D /* UCFGoldBankLimitHeader.h */,
+				746748D91F3C561A0067294D /* UCFGoldBankLimitHeader.m */,
+				746748DB1F3C56290067294D /* UCFGoldBankLimitHeader.xib */,
+				746748DD1F3C595A0067294D /* UCFGoldBankLimitCell.h */,
+				746748DE1F3C595A0067294D /* UCFGoldBankLimitCell.m */,
+				746748DF1F3C595A0067294D /* UCFGoldBankLimitCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3669,6 +3690,9 @@
 				74E140551F1CCB3F00B17A96 /* UCFGoldRechargeWebController.h */,
 				74E140561F1CCB3F00B17A96 /* UCFGoldRechargeWebController.m */,
 				74E140571F1CCB3F00B17A96 /* UCFGoldRechargeWebController.xib */,
+				746748CE1F3C53310067294D /* UCFBankLimitViewController.h */,
+				746748CF1F3C53310067294D /* UCFBankLimitViewController.m */,
+				746748D01F3C53310067294D /* UCFBankLimitViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -6911,6 +6935,7 @@
 				83CD84351F13A50800227704 /* UCFP2PViewController.xib in Resources */,
 				A8DE85281EC2BC34004B3533 /* UcfLibResources.bundle in Resources */,
 				833603CE1D928F9200C3E435 /* UCFWithdrawCashResultWebView.xib in Resources */,
+				746748D21F3C53310067294D /* UCFBankLimitViewController.xib in Resources */,
 				7477BF9B1AFB19B200914BFB /* UCFNormalRedEnvelopeTableViewCell.xib in Resources */,
 				25A9CC1A1D5213EB00209142 /* UCFTipCell.xib in Resources */,
 				FB5149341D64403100C26E7B /* gif@3x.gif in Resources */,
@@ -6969,6 +6994,7 @@
 				74D6578F1F2EFFFF00177EB7 /* UCFHomeListNo2Cell.xib in Resources */,
 				25314C0C1D8FD7FA0066F446 /* UCFDirectCell.xib in Resources */,
 				74270D1A1EC595ED00F9419B /* UCFFriendRecCell.xib in Resources */,
+				746748DC1F3C56290067294D /* UCFGoldBankLimitHeader.xib in Resources */,
 				74DBAC7A1D5864C200F6F6B1 /* UCFHuiShangBankViewController.xib in Resources */,
 				E3C1179D1D40CFCC0053A052 /* UCFContributionValueTypeTowCell.xib in Resources */,
 				83CD842F1F13A50800227704 /* UCFHornerTransferViewController.xib in Resources */,
@@ -6978,6 +7004,7 @@
 				A8DE85291EC2BC34004B3533 /* UcfWalletSDK.bundle in Resources */,
 				2510E3E91D6F1560006BB5F8 /* alertViewCS.xib in Resources */,
 				74FBC1BE1B84721400B8DD7E /* UCFBindCardTwoTableViewCell.xib in Resources */,
+				746748E11F3C595A0067294D /* UCFGoldBankLimitCell.xib in Resources */,
 				FBAEDA021C191AFE000C0AA1 /* PushConfig.plist in Resources */,
 				A8DE85261EC2BC34004B3533 /* SPaySDKResource.bundle in Resources */,
 				74270CF91EC5943200F9419B /* UCFInvitationRebateViewController.xib in Resources */,
@@ -7056,6 +7083,7 @@
 				EDEC8C021CB3BAB300815228 /* NSMutableString+TagReplace.m in Sources */,
 				7491FBD61AFC5D5400CD0720 /* UCFModifyIdAuthViewController.m in Sources */,
 				7BCE01F61AC8FC260084C15C /* ASIDataCompressor.m in Sources */,
+				746748E01F3C595A0067294D /* UCFGoldBankLimitCell.m in Sources */,
 				E3A6A4B31CC71D03003A3FED /* NSString+URL.m in Sources */,
 				4A4C792D1D6EA41E007F268E /* UserInfoSingle.m in Sources */,
 				7BA6E4C01AD6731900FE8C37 /* SDWebImagePrefetcher.m in Sources */,
@@ -7279,6 +7307,7 @@
 				4A0DC8021BCF5B1300835E95 /* HWWeakTimer.m in Sources */,
 				FB7EDE401D6BFCD700C3E924 /* UCFMainTabBarController.m in Sources */,
 				7BC3047B1ACBC22D007767F1 /* DeviceInfo.m in Sources */,
+				746748DA1F3C561A0067294D /* UCFGoldBankLimitHeader.m in Sources */,
 				745D37DA1F3AE9B200897F1A /* UCFColdChargeThirdCell.m in Sources */,
 				748ED7A11CC74B9800690215 /* UCFMenuItemModel.m in Sources */,
 				83F2D59D1DCB508F0041F913 /* UCFAccount.m in Sources */,
@@ -7297,6 +7326,7 @@
 				7BA6E4B91AD6731900FE8C37 /* NSData+ImageContentType.m in Sources */,
 				7BCE01F91AC8FC260084C15C /* ASIFormDataRequest.m in Sources */,
 				7BC304841ACBC22D007767F1 /* UIImage+Misc.m in Sources */,
+				746748D11F3C53310067294D /* UCFBankLimitViewController.m in Sources */,
 				2510E3E71D6F1524006BB5F8 /* alertViewCS.m in Sources */,
 				7BC8AA231AD4C74200BF4660 /* UCFTransterBid.m in Sources */,
 				25C029BE1D40D7EA00EF75DC /* UCFLoginFaceView.m in Sources */,

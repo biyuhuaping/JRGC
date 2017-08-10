@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13122.19" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.16"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" restorationIdentifier="goldBankLimitHeader" id="iN0-l3-epB" customClass="UCFGoldBankLimitHeader">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="37"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="银行" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ahs-jx-DYM">
+                    <rect key="frame" x="10" y="10.5" width="118.5" height="16"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="单笔限额(元)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xSu-6N-CEv">
+                    <rect key="frame" x="128.5" y="10.5" width="118.5" height="16"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="日累计限额(元)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yPi-iW-1pe">
+                    <rect key="frame" x="247" y="10.5" width="118" height="16"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Ahs-jx-DYM" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="LJG-Wb-vXR"/>
+                <constraint firstItem="xSu-6N-CEv" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="P5E-7z-LnV"/>
+                <constraint firstAttribute="trailing" secondItem="yPi-iW-1pe" secondAttribute="trailing" constant="10" id="Y5B-H8-ne6"/>
+                <constraint firstItem="xSu-6N-CEv" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="aAh-eY-x3v"/>
+                <constraint firstItem="xSu-6N-CEv" firstAttribute="leading" secondItem="Ahs-jx-DYM" secondAttribute="trailing" id="bfz-lO-Fa3"/>
+                <constraint firstItem="yPi-iW-1pe" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="cIp-T7-PZi"/>
+                <constraint firstItem="yPi-iW-1pe" firstAttribute="width" secondItem="xSu-6N-CEv" secondAttribute="width" id="lDq-cl-8Dj"/>
+                <constraint firstItem="yPi-iW-1pe" firstAttribute="leading" secondItem="xSu-6N-CEv" secondAttribute="trailing" id="oUp-uF-Py5"/>
+                <constraint firstItem="Ahs-jx-DYM" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="qhJ-OP-kz3"/>
+                <constraint firstItem="Ahs-jx-DYM" firstAttribute="width" secondItem="xSu-6N-CEv" secondAttribute="width" id="rjN-1d-hJt"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+        </view>
+    </objects>
+</document>
