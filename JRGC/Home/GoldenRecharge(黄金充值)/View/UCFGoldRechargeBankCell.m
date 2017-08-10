@@ -12,7 +12,7 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+    self.contentView.backgroundColor = UIColorWithRGB(0xebebee);
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
