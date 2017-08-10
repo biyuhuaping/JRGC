@@ -96,7 +96,7 @@
     if (!_groupPresenter5) {
         UCFHomeListGroup *group5 = [[UCFHomeListGroup alloc] init];
 //        group5.headTitle = @"预约宝";
-        group5.desc = @"平均1小时起息";
+//        group5.desc = @"平均1小时起息";
         group5.showMore = NO;
 //        group5.type = @"15";
 //        group5.headerImage = @"mine_factory_reserved";
@@ -190,6 +190,7 @@
                 UCFHomeListCellPresenter *cellPresenter = [UCFHomeListCellPresenter presenterWithItem:investModel];
                 weakSelf.groupPresenter5.group.type = investGroup.type;
                 weakSelf.groupPresenter5.group.title = investGroup.title;
+                weakSelf.groupPresenter5.group.desc = investGroup.desc;
                 weakSelf.groupPresenter5.group.iconUrl = investGroup.iconUrl;
                 weakSelf.groupPresenter5.group.prdlist = [NSArray arrayWithObjects:cellPresenter, nil];
             }
