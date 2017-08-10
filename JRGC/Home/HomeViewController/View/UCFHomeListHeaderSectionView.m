@@ -29,7 +29,12 @@
     
     self.homeListHeaderMoreButton.hidden = !presenter.showMore;
     
-    [self.headerImageView sd_setImageWithURL:[NSURL URLWithString:presenter.iconUrl]];
+    if ([presenter.group.title isEqualToString:@"资金周转"]) {
+        self.headerImageView.image = [UIImage imageNamed:presenter.group.headerImage];
+    }
+    else {
+        [self.headerImageView sd_setImageWithURL:[NSURL URLWithString:presenter.iconUrl]];
+    }
 }
 - (IBAction)moreClicked:(UIButton *)sender {
     if ([self.delegate respondsToSelector:@selector(homeListHeader:didClickedMoreWithType:)]) {
