@@ -286,7 +286,6 @@
 		7485EFD01B0492CE0044DE48 /* UCFRedEnvelopeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7485EFCF1B0492CE0044DE48 /* UCFRedEnvelopeModel.m */; };
 		748A3CD31AF1FE9800D7FAF1 /* FundsDetailFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 748A3CD21AF1FE9800D7FAF1 /* FundsDetailFrame.m */; };
 		748A3D081AF219BD00D7FAF1 /* FundsDetailGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 748A3D071AF219BD00D7FAF1 /* FundsDetailGroup.m */; };
-		748ACE1B1F3BFDF300750653 /* jrgcuserxieyi.docx in Resources */ = {isa = PBXBuildFile; fileRef = 748ACE1A1F3BFDF300750653 /* jrgcuserxieyi.docx */; };
 		748D77671ADE44D300910FF7 /* UCFSettingItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 748D77661ADE44D300910FF7 /* UCFSettingItem.m */; };
 		748D776C1ADE51C900910FF7 /* UCFSettingGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 748D776B1ADE51C900910FF7 /* UCFSettingGroup.m */; };
 		748D77A41ADE6D5A00910FF7 /* UCFSettingArrowItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 748D77A31ADE6D5A00910FF7 /* UCFSettingArrowItem.m */; };
@@ -634,6 +633,7 @@
 		83DAEFBE1F166A3000D7948F /* UCFContractTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83DAEFBC1F166A3000D7948F /* UCFContractTableCell.xib */; };
 		83DAEFC21F166A3B00D7948F /* UCFGoldAuthorizationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DAEFC01F166A3B00D7948F /* UCFGoldAuthorizationViewController.m */; };
 		83DAEFC31F166A3B00D7948F /* UCFGoldAuthorizationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83DAEFC11F166A3B00D7948F /* UCFGoldAuthorizationViewController.xib */; };
+		83E3F7A51F3C35C500286550 /* jrgcuserxieyi.docx in Resources */ = {isa = PBXBuildFile; fileRef = 83E3F7A41F3C35C500286550 /* jrgcuserxieyi.docx */; };
 		83E780721F38004400A400CE /* UCFGoldCouponCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E780701F38004400A400CE /* UCFGoldCouponCell.m */; };
 		83E780731F38004400A400CE /* UCFGoldCouponCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83E780711F38004400A400CE /* UCFGoldCouponCell.xib */; };
 		83EB21E21D758EE50069EF95 /* UCFCashRecordListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83EB21E01D758EE50069EF95 /* UCFCashRecordListViewController.m */; };
@@ -1428,7 +1428,6 @@
 		748A3CD21AF1FE9800D7FAF1 /* FundsDetailFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FundsDetailFrame.m; sourceTree = "<group>"; };
 		748A3D061AF219BD00D7FAF1 /* FundsDetailGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FundsDetailGroup.h; sourceTree = "<group>"; };
 		748A3D071AF219BD00D7FAF1 /* FundsDetailGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FundsDetailGroup.m; sourceTree = "<group>"; };
-		748ACE1A1F3BFDF300750653 /* jrgcuserxieyi.docx */ = {isa = PBXFileReference; lastKnownFileType = file; name = jrgcuserxieyi.docx; path = ../../../../../Desktop/jrgcuserxieyi.docx; sourceTree = "<group>"; };
 		748D77651ADE44D300910FF7 /* UCFSettingItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFSettingItem.h; sourceTree = "<group>"; };
 		748D77661ADE44D300910FF7 /* UCFSettingItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFSettingItem.m; sourceTree = "<group>"; };
 		748D776A1ADE51C900910FF7 /* UCFSettingGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFSettingGroup.h; sourceTree = "<group>"; };
@@ -2033,6 +2032,7 @@
 		83DAEFBF1F166A3B00D7948F /* UCFGoldAuthorizationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFGoldAuthorizationViewController.h; sourceTree = "<group>"; };
 		83DAEFC01F166A3B00D7948F /* UCFGoldAuthorizationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFGoldAuthorizationViewController.m; sourceTree = "<group>"; };
 		83DAEFC11F166A3B00D7948F /* UCFGoldAuthorizationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFGoldAuthorizationViewController.xib; sourceTree = "<group>"; };
+		83E3F7A41F3C35C500286550 /* jrgcuserxieyi.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = jrgcuserxieyi.docx; sourceTree = "<group>"; };
 		83E7806F1F38004400A400CE /* UCFGoldCouponCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFGoldCouponCell.h; sourceTree = "<group>"; };
 		83E780701F38004400A400CE /* UCFGoldCouponCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFGoldCouponCell.m; sourceTree = "<group>"; };
 		83E780711F38004400A400CE /* UCFGoldCouponCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFGoldCouponCell.xib; sourceTree = "<group>"; };
@@ -4517,7 +4517,7 @@
 		7BC789031B04548800D50494 /* docs */ = {
 			isa = PBXGroup;
 			children = (
-				748ACE1A1F3BFDF300750653 /* jrgcuserxieyi.docx */,
+				83E3F7A41F3C35C500286550 /* jrgcuserxieyi.docx */,
 				7BC789071B04555F00D50494 /* UCFXieYiViewController.h */,
 				7BC789081B04555F00D50494 /* UCFXieYiViewController.m */,
 				7BC789041B04549500D50494 /* jianjie.docx */,
@@ -6720,7 +6720,6 @@
 				83FB3F5F1E5C4D2A0094C9BA /* UCFBatchBidWebViewController.xib in Resources */,
 				74E1404A1F1C575200B17A96 /* UCFGoldCashHistoryController.xib in Resources */,
 				74270D1C1EC595ED00F9419B /* UCFFriendRecCell1.xib in Resources */,
-				748ACE1B1F3BFDF300750653 /* jrgcuserxieyi.docx in Resources */,
 				7BC7890B1B04569300D50494 /* xinxizixunxieyi.docx in Resources */,
 				7BC7890C1B04569300D50494 /* zhucexieyi.docx in Resources */,
 				7439853E1F174FC800F2EDB8 /* UCFGoldRechargeHeaderView.xib in Resources */,
@@ -6770,6 +6769,7 @@
 				A8E01A811EEA4C6F003E3BDC /* UCFTransfeTableViewCell.xib in Resources */,
 				2526ADE01DD08D5F00114D9A /* JRGCCustomGroupCell.xib in Resources */,
 				FB5149521D64441F00C26E7B /* guideImage6_1.png in Resources */,
+				83E3F7A51F3C35C500286550 /* jrgcuserxieyi.docx in Resources */,
 				74956EB11D66E2BC00D68B61 /* BindPhoneNumViewController.xib in Resources */,
 				74EAF5B61B0ED78700807C1C /* UCFSelectedBankTableViewCell.xib in Resources */,
 				744EB7FE1EE7E871003C57C4 /* UCFInvestTransferViewController.xib in Resources */,
