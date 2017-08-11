@@ -240,6 +240,7 @@
 #define WALLETSELECTBANKCARD @"api/userBase/v2/saveWalletParam.json"
 
 #define MYINVITEREBATEINFOURL  @"api/inviteRebate/v2/myInviteRebateinfo.json" //邀请返利
+#define MYGOLDINVITEREBATEINFOURL @"api/inviteRebate/v2/goldInviteInfo.json"  //黄金邀请返利
 #define MYINVITEREWARDINFOURL  @"api/inviteRebate/v2/myInviteRewardinfo.json" //邀请奖励
 
 
@@ -495,6 +496,7 @@ enum kSXTag
     KSXTagWalletShowMsg,                  //钱包暗开信息提供
     kSXTagWalletSelectBankCar,             //选择银行卡
     KSXTagMyInviteRebateinfo,           //邀请返利
+    kSXTagGoldMyInviteRebateinfo,       //黄金邀请返利
     KSXTagMyInviteRewardinfo,           //邀请奖励
     KSXTagP2pISAuthorization,           //是否微金授权
     KSXTagP2pAuthorization,             //微金用户授权

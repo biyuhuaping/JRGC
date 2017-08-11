@@ -1265,6 +1265,9 @@ static NetworkModule *gInstance = NULL;
         case KSXTagMyInviteRebateinfo:
             parameter = [NEW_SERVER_IP stringByAppendingString:MYINVITEREBATEINFOURL];
             break;
+        case kSXTagGoldMyInviteRebateinfo:
+            parameter = [NEW_SERVER_IP stringByAppendingString:MYGOLDINVITEREBATEINFOURL];
+            break;
         case KSXTagMyInviteRewardinfo:
             parameter = [NEW_SERVER_IP stringByAppendingString:MYINVITEREWARDINFOURL];
             break;

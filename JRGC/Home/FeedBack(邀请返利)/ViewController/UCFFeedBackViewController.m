@@ -71,6 +71,9 @@
 - (IBAction)gotoHonerRebateAmtVC:(id)sender;//去尊享返利页面
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *secondViewHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *feedBackLabYCenter;
+@property (weak, nonatomic) IBOutlet UILabel *myFeedBackShowLab;
+@property (weak, nonatomic) IBOutlet UILabel *goldInvitationNumLab;
+@property (weak, nonatomic) IBOutlet UILabel *feedBackRegistLab;
 
 @end
 
@@ -91,14 +94,17 @@
         baseTitleLabel.text = @"邀请返利";
         _secondViewHeight.constant = 44;
         _gold_secondView.hidden = NO;
-        _feedBackLabYCenter.constant = - 15;
+        _feedBackLabYCenter.constant = - 12;
 
     }
-   
-    
-    [_shareBtn setBackgroundImage:[[UIImage imageNamed:@"btn_red"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:2.5] forState:UIControlStateNormal];
-    [_shareBtn setBackgroundImage:[[UIImage imageNamed:@"btn_red_highlight"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:2.5] forState:UIControlStateHighlighted];
-    
+    if (self.accoutType == SelectAccoutTypeGold) {
+        [_shareBtn setBackgroundColor:UIColorWithRGB(0xfc8f0e)];
+        _shareBtn.layer.cornerRadius = 2.0f;
+        _myFeedBackShowLab.text = @"我的黄金邀请返利";
+    } else {
+        [_shareBtn setBackgroundImage:[[UIImage imageNamed:@"btn_red"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:2.5] forState:UIControlStateNormal];
+        [_shareBtn setBackgroundImage:[[UIImage imageNamed:@"btn_red_highlight"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:2.5] forState:UIControlStateHighlighted];
+    }
     [_copBtn setBackgroundImage:[[UIImage imageNamed:@"btn_bule"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:2.5] forState:UIControlStateNormal];
     [_copBtn setBackgroundImage:[[UIImage imageNamed:@"btn_bule_highlight"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:2.5] forState:UIControlStateHighlighted];
     self.secondView_lineView.backgroundColor = UIColorWithRGB(0xd8d8d8);
@@ -163,14 +169,27 @@
         }
     }];
 }
-
-//进入邀请记录页面
-- (IBAction)toMyRebateView:(id)sender {
+- (IBAction)goRecordView:(UIButton *)sender {
     //邀请记录
     UCFRegistrationRecord *vc = [[UCFRegistrationRecord alloc]initWithNibName:@"UCFRegistrationRecord" bundle:nil];
     vc.accoutType = self.accoutType;
     [self.navigationController pushViewController:vc animated:YES];
+}
 
+//进入邀请记录页面
+- (IBAction)toMyRebateView:(id)sender {
+    if (self.accoutType == SelectAccoutTypeGold) {
+        
+        UCFProfitBackViewController *mv = [[UCFProfitBackViewController alloc]initWithNibName:@"UCFProfitBackViewController" bundle:nil];
+        mv.accoutType = SelectAccoutTypeGold;
+        [self.navigationController pushViewController:mv animated:YES];
+        
+    } else {
+        //邀请记录
+        UCFRegistrationRecord *vc = [[UCFRegistrationRecord alloc]initWithNibName:@"UCFRegistrationRecord" bundle:nil];
+        vc.accoutType = self.accoutType;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 //去设置 奖励年化佣金比例（废弃）
@@ -212,12 +231,13 @@
 //获取我的投资列表
 - (void)getMyInvestDataList
 {
+    NSString *userId = [[NSUserDefaults standardUserDefaults] objectForKey:UUID];
+    
+    NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys:userId,@"userId",nil];
     if (self.accoutType == SelectAccoutTypeGold) {
         //黄金邀请返利的接口
+        [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagGoldMyInviteRebateinfo owner:self signature:YES Type:self.accoutType];
     } else {
-        NSString *userId = [[NSUserDefaults standardUserDefaults] objectForKey:UUID];
-        
-        NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys:userId,@"userId",nil];
         //*******qinyy
         [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:KSXTagMyInviteRebateinfo owner:self signature:YES Type:self.accoutType];
     }
@@ -305,17 +325,10 @@
                 [_label_titlethree setFontColor:UIColorWithRGB(0xfd4d4c) string:@"等额标"];
 
             }else{
-//                if (kIS_IOS8) {
-//                    _view_upHeight.active = YES;//因为需要根据文字多少，来控制view的高度，所以让约束复活，限制高度，调整高度。
-//                    _view_upHeight.constant = 0;
-//                }else{
-//                    _view_upHeight.constant = 0;//为iOS8之前的版本临时适配。
-                    
                     NSDictionary* views = NSDictionaryOfVariableBindings(_view_Up);
                     //设置高度
                     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_view_Up(0)]" options:0 metrics:nil views:views]];
 
-//                }
             }
             
             _label_moutheMoney.text = dictemp[@"enjoyDescribe"];//***本月尊享标描述
@@ -331,10 +344,31 @@
 //        
 //        [self getAppSetting];
 
-    }
-    else if (tag.intValue == kSXTagGetAppSetting){
-        //        NSString *rstcode = dic[@"status"];
-        //        NSString *rsttext = dic[@"statusdes"];
+    } else if (tag.intValue == kSXTagGoldMyInviteRebateinfo) {
+        NSString *rstcode = dic[@"ret"];
+        NSString *rsttext = dic[@"message"];
+        NSDictionary* dictemp = [[dic objectSafeForKey:@"data"] objectSafeDictionaryForKey:@"inviteRebateBasicInfo"];
+        if ([rstcode intValue] == 1) {
+            _shareUrl = [dictemp objectSafeForKey:@"inviteUrl"];
+            _sumCommLab.text = [NSString stringWithFormat:@"¥%@",dictemp[@"sumComm"]];//我的返利
+            _goldInvitationNumLab.text = [NSString stringWithFormat:@"%@人",dictemp[@"recCount"]];//邀请人数
+            _userRecommendCountLab.text = [NSString stringWithFormat:@"共%@人购买",dictemp[@"friendCount"]]; //邀请投资人数
+            _gcmLab.text = dictemp[@"gcm"];//我的工场码
+            _gcmLab.textColor = UIColorWithRGB(0xfc8f0e);
+            _label_titlethree.text = @"年化佣金";
+            _label_p2pMoney.text = dictemp[@"enjoyDescribe"];//***p2p尊享标描述
+            _friendRateLab.text = dictemp[@"enjoyCommissionProportion"];
+            _feedBackRegistLab.textColor = UIColorWithRGB(0x333333);
+            NSDictionary* views = NSDictionaryOfVariableBindings(_view_Up);
+            //设置高度
+            [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_view_Up(0)]" options:0 metrics:nil views:views]];
+            
+            
+        } else {
+    
+        }
+        
+    } else if (tag.intValue == kSXTagGetAppSetting){
         NSArray *temArr = [NSArray arrayWithArray:dic[@"result"]];
         //1:红包URL   2：红包文字描述    3：工场码图片URL    4:工场码文字描述   5：红包标题  6：工场码标题
         for (NSDictionary *result in temArr) {
