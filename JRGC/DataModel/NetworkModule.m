@@ -176,6 +176,7 @@ static NetworkModule *gInstance = NULL;
         case kSXTagFriendsList:
             parameter = [serverIP stringByAppendingString:FRIENDS_LIST];
             break;
+
 //        case kSXTagContractPartyContractSign:
 //            parameter = [SERVER_IP stringByAppendingString:CONTRACTSIGN];
 //            break;
@@ -379,9 +380,7 @@ static NetworkModule *gInstance = NULL;
         case kSRecommendRefund:
             parameter = [serverIP stringByAppendingString:RecommendRefund];
             break;
-//        case kSXTagCheckCardBelongToBank:
-//            parameter = [SERVER_IP stringByAppendingString:CheckCardBelongToBank];
-//            break;
+
         case kAppQueryByManyList:
             parameter = [serverIP stringByAppendingString:GETAppQueryByManyList];
             break;
@@ -1362,6 +1361,13 @@ static NetworkModule *gInstance = NULL;
             break;
         case kSXTagGelectALLGoldCoupon://黄金返金劵全选
             parameter = [NEW_SERVER_IP stringByAppendingString:GOlDOUPONSELEALLURL];
+            break;
+        case kSXTagGoldFriendList:
+            parameter = [NEW_SERVER_IP stringByAppendingString:GOLD_FRIENDS_LIST];
+            parameter = @"http://10.10.100.112/mockjsdata/13/invite_rebate_detail.json?";
+            break;
+        case kSXTagGoldRecommendRefund:
+            parameter = [SERVER_IP stringByAppendingString:GOLD_RecommendRefund];
             break;
             
     }
