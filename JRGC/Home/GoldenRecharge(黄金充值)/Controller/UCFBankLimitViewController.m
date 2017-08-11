@@ -9,6 +9,7 @@
 #import "UCFBankLimitViewController.h"
 #import "UCFGoldBankLimitHeader.h"
 #import "UCFGoldBankLimitCell.h"
+#import "UCFGoldLimitedBankModel.h"
 
 @interface UCFBankLimitViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
@@ -17,10 +18,62 @@
 
 @implementation UCFBankLimitViewController
 
+- (NSMutableArray *)dataArray
+{
+    if (nil == _dataArray) {
+        _dataArray = [[NSMutableArray alloc] init];
+    }
+    return _dataArray;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.baseTitleText = @"银行限额";
     [self addLeftButton];
+    [self getLimitedBankForNet];
+}
+
+- (void)getLimitedBankForNet
+{
+    NSString *userId = [UserInfoSingle sharedManager].userId;
+    if (!userId) {
+        return;
+    }
+    [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId": userId} tag:kSXTagGoldLimitedBankList owner:self signature:YES Type:SelectAccoutDefault];
+}
+
+- (void)beginPost:(kSXTag)tag
+{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+}
+
+- (void)endPost:(id)result tag:(NSNumber *)tag
+{
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    NSMutableDictionary *dic = [(NSString *)result objectFromJSONString];
+    NSString *rstcode = dic[@"ret"];
+    NSString *rsttext = dic[@"message"];
+    if (tag.intValue == kSXTagGoldLimitedBankList) {
+        if ([rstcode intValue] == 1) {
+            NSArray *bankLimitList = [[dic objectSafeDictionaryForKey:@"data"] objectSafeArrayForKey:@"bankLimitList"];
+            if (self.dataArray.count > 0) {
+                [self.dataArray removeAllObjects];
+            }
+            for (NSDictionary *dict in bankLimitList) {
+                UCFGoldLimitedBankModel *bankModel = [UCFGoldLimitedBankModel getGoldLimitedBankModelByDataDict:dict];
+                [self.dataArray addObject:bankModel];
+            }
+            [self.tableview reloadData];
+        }else {
+            [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
+        }
+    }
+}
+
+- (void)errorPost:(NSError *)err tag:(NSNumber *)tag
+{
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    [MBProgressHUD displayHudError:err.userInfo[@"NSLocalizedDescription"]];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -49,7 +102,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 5;
+    return self.dataArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -59,7 +112,7 @@
     if (nil == cell) {
         cell = (UCFGoldBankLimitCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFGoldBankLimitCell" owner:self options:nil] lastObject];
     }
-    
+    cell.bankModel = [self.dataArray objectAtIndex:indexPath.row];
     return cell;
 }
 @end

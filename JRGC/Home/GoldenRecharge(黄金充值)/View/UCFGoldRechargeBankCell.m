@@ -7,6 +7,18 @@
 //
 
 #import "UCFGoldRechargeBankCell.h"
+#import "UCFGoldBankModel.h"
+#import "UIImageView+WebCache.h"
+
+@interface UCFGoldRechargeBankCell ()
+@property (weak, nonatomic) IBOutlet UIImageView *bankIconImageView;
+@property (weak, nonatomic) IBOutlet UILabel *bankNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *bankNoLabel;
+@property (weak, nonatomic) IBOutlet UILabel *limitPerDayLabel;
+@property (weak, nonatomic) IBOutlet UILabel *limitPerlistLabel;
+
+@end
 
 @implementation UCFGoldRechargeBankCell
 
@@ -15,10 +27,16 @@
     self.contentView.backgroundColor = UIColorWithRGB(0xebebee);
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    if (self.goldBankModel.bankLogoUrl.length > 0) {
+        [self.bankIconImageView sd_setImageWithURL:[NSURL URLWithString:self.goldBankModel.bankLogoUrl]];
+    }
+    self.bankNameLabel.text = self.goldBankModel.bankName;
+    self.userNameLabel.text = self.goldBankModel.userBankName;
+    self.bankNoLabel.text = self.goldBankModel.userBankCard;
+    self.limitPerDayLabel.text = self.goldBankModel.bankDayLimit;
+    self.limitPerlistLabel.text = self.goldBankModel.bankOneLimt;
 }
 
 @end
