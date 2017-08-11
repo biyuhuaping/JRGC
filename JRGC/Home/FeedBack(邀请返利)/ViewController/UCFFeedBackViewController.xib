@@ -13,9 +13,11 @@
             <connections>
                 <outlet property="copBtn" destination="IRn-u6-oBQ" id="kzy-FD-jTk"/>
                 <outlet property="feedBackLabYCenter" destination="XpZ-x9-kMk" id="NrU-qF-eE2"/>
+                <outlet property="feedBackRegistLab" destination="Xho-2e-cTX" id="vgV-if-sZP"/>
                 <outlet property="friendLab3" destination="1qH-Wh-VrH" id="5Sf-Rl-9Jv"/>
                 <outlet property="friendRateLab" destination="tuC-wE-wem" id="CyI-Jt-YHU"/>
                 <outlet property="gcmLab" destination="JBB-Bt-lfB" id="WLv-9K-1ID"/>
+                <outlet property="goldInvitationNumLab" destination="Qic-4n-0Qv" id="95G-6h-oBe"/>
                 <outlet property="gold_secondView" destination="omL-gK-fGO" id="XHt-3T-640"/>
                 <outlet property="heightView" destination="aBd-wK-anP" id="uGe-tq-vR6"/>
                 <outlet property="label_moutheMoney" destination="DLr-q0-D4o" id="kZu-2j-7E9"/>
@@ -23,6 +25,7 @@
                 <outlet property="label_titlethree" destination="1qH-Wh-VrH" id="bsV-TM-pZV"/>
                 <outlet property="label_titletow" destination="HhI-lU-f2o" id="j7a-C3-BEr"/>
                 <outlet property="lingView" destination="6LY-rK-Oj2" id="X4V-VQ-WdH"/>
+                <outlet property="myFeedBackShowLab" destination="8oN-ir-ZxX" id="Zff-C5-tbe"/>
                 <outlet property="ownRateLab" destination="k4m-vg-lj7" id="NbP-h2-pZz"/>
                 <outlet property="p2pInviteFriendsCountLab" destination="bxf-dw-anQ" id="HlX-5p-cvU"/>
                 <outlet property="p2pRebateAmtLab" destination="fcQ-eX-kTw" id="KpK-ii-GLm"/>
@@ -256,9 +259,9 @@
                                                     <rect key="frame" x="0.0" y="1" width="375" height="53"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="邀请人数" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T0P-sW-eNu">
-                                                            <rect key="frame" x="15" y="16" width="70" height="21"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <nil key="textColor"/>
+                                                            <rect key="frame" x="15" y="18.5" width="57.5" height="17"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="list_icon_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="rCI-98-bXm">
@@ -271,20 +274,31 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6人" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qic-4n-0Qv">
-                                                            <rect key="frame" x="319" y="16" width="28" height="21"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <nil key="textColor"/>
+                                                            <rect key="frame" x="323.5" y="18.5" width="23.5" height="17"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WGP-t5-bhj">
+                                                            <rect key="frame" x="0.0" y="0.0" width="375" height="53"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                            <connections>
+                                                                <action selector="goRecordView:" destination="-1" eventType="touchUpInside" id="w8r-Eh-946"/>
+                                                            </connections>
+                                                        </button>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
+                                                        <constraint firstItem="WGP-t5-bhj" firstAttribute="top" secondItem="omL-gK-fGO" secondAttribute="top" id="JUN-ul-sKW"/>
                                                         <constraint firstItem="rCI-98-bXm" firstAttribute="leading" secondItem="Qic-4n-0Qv" secondAttribute="trailing" constant="5" id="L6W-tt-D1A"/>
                                                         <constraint firstItem="T0P-sW-eNu" firstAttribute="leading" secondItem="omL-gK-fGO" secondAttribute="leading" constant="15" id="Nor-WA-r6m"/>
                                                         <constraint firstItem="Qic-4n-0Qv" firstAttribute="centerY" secondItem="omL-gK-fGO" secondAttribute="centerY" id="UPA-KZ-jGY"/>
+                                                        <constraint firstItem="WGP-t5-bhj" firstAttribute="leading" secondItem="omL-gK-fGO" secondAttribute="leading" id="agj-Zm-qEg"/>
+                                                        <constraint firstAttribute="bottom" secondItem="WGP-t5-bhj" secondAttribute="bottom" id="bbl-VP-yeg"/>
                                                         <constraint firstItem="rCI-98-bXm" firstAttribute="centerY" secondItem="omL-gK-fGO" secondAttribute="centerY" id="eDp-Pk-Kkh"/>
                                                         <constraint firstItem="T0P-sW-eNu" firstAttribute="centerY" secondItem="omL-gK-fGO" secondAttribute="centerY" id="w1H-EX-wz6"/>
                                                         <constraint firstAttribute="trailing" secondItem="rCI-98-bXm" secondAttribute="trailing" constant="15" id="x3B-ir-JBb"/>
+                                                        <constraint firstAttribute="trailing" secondItem="WGP-t5-bhj" secondAttribute="trailing" id="zPP-Tl-CHm"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -643,7 +657,7 @@
                 <constraint firstItem="RBT-Dm-i7z" firstAttribute="leading" secondItem="YvA-0F-Ft3" secondAttribute="leading" id="trV-fq-ARl"/>
                 <constraint firstItem="RBT-Dm-i7z" firstAttribute="top" secondItem="YvA-0F-Ft3" secondAttribute="top" id="veT-bz-Eye"/>
             </constraints>
-            <point key="canvasLocation" x="-524.5" y="7.5"/>
+            <point key="canvasLocation" x="-945" y="-151"/>
         </view>
     </objects>
     <resources>
