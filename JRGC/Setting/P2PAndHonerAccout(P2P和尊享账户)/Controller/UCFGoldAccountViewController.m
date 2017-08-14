@@ -193,10 +193,12 @@
         UCFExtractGoldViewController *vc1 = [[UCFExtractGoldViewController alloc] initWithNibName:@"UCFExtractGoldViewController" bundle:nil];
         [self.navigationController pushViewController:vc1 animated:YES];
     } else if ([model.leftTitle isEqualToString:@"邀请返利"]) {
-    
         UCFFeedBackViewController *feedBackVC = [[UCFFeedBackViewController alloc]initWithNibName:@"UCFFeedBackViewController" bundle:nil];
         feedBackVC.accoutType = SelectAccoutTypeGold;
         [self.navigationController pushViewController:feedBackVC animated:YES];
+    }  else if ([model.leftTitle isEqualToString:@"增金宝"]) {
+    
+    
     }
 }
 - (void)initData
@@ -209,8 +211,9 @@
     UCFCellStyleModel *model03 = [[UCFCellStyleModel alloc] initWithCellStyle:CellStyleDefault WithLeftTitle:@"邀请返利" WithRightImage:[UIImage imageNamed:@"list_icon_arrow"] WithTargetClassName:@"" WithCellHeight:44 WithDelegate:self];
     UCFCellStyleModel *model04 = [[UCFCellStyleModel alloc] initWithCellStyle:CellSepLine WithLeftTitle:nil WithRightImage:nil WithTargetClassName:nil WithCellHeight:10 WithDelegate:nil];
     
-    UCFCellStyleModel *model05 = [[UCFCellStyleModel alloc] initWithCellStyle:CellStyleDefault WithLeftTitle:@"尊享金" WithRightImage:[UIImage imageNamed:@"list_icon_arrow"] WithTargetClassName:@"" WithCellHeight:44 WithDelegate:self];
-    UCFCellStyleModel *model06 = [[UCFCellStyleModel alloc] initWithCellStyle:CellStyleDefault WithLeftTitle:@"提金订单" WithRightImage:[UIImage imageNamed:@"list_icon_arrow"] WithTargetClassName:@"" WithCellHeight:44 WithDelegate:self];
+    UCFCellStyleModel *model05 = [[UCFCellStyleModel alloc] initWithCellStyle:CellStyleDefault WithLeftTitle:@"增金宝" WithRightImage:[UIImage imageNamed:@"list_icon_arrow"] WithTargetClassName:@"" WithCellHeight:44 WithDelegate:self];
+    UCFCellStyleModel *model06 = [[UCFCellStyleModel alloc] initWithCellStyle:CellStyleDefault WithLeftTitle:@"尊享金" WithRightImage:[UIImage imageNamed:@"list_icon_arrow"] WithTargetClassName:@"" WithCellHeight:44 WithDelegate:self];
+    UCFCellStyleModel *model07 = [[UCFCellStyleModel alloc] initWithCellStyle:CellStyleDefault WithLeftTitle:@"提金订单" WithRightImage:[UIImage imageNamed:@"list_icon_arrow"] WithTargetClassName:@"" WithCellHeight:44 WithDelegate:self];
 
     [self.dataArray addObject:model01];
     [self.dataArray addObject:model02];
@@ -218,6 +221,8 @@
     [self.dataArray addObject:model04];
     [self.dataArray addObject:model05];
     [self.dataArray addObject:model06];
+    [self.dataArray addObject:model07];
+
 
     //刷新黄金账户数据通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getNetData) name:UPDATE_GOLD_ACCOUNT object:nil];
