@@ -11,4 +11,6 @@
 @class UCFGoldLimitedBankModel;
 @interface UCFGoldBankLimitCell : UITableViewCell
 @property (nonatomic, strong) UCFGoldLimitedBankModel *bankModel;
+@property (nonatomic, weak) UITableView *tableview;
+@property (nonatomic, strong) NSIndexPath *indexPath;
 @end

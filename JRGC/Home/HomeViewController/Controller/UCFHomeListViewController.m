@@ -198,16 +198,16 @@
     if (!self.presenter.canReservedClicked) {
         return;
     }
+    UCFHomeListGroupPresenter *groupPresenter = [self.presenter.allDatas objectAtIndex:indexPath.section];
+    UCFHomeListCellPresenter *presenter = [groupPresenter.group.prdlist objectAtIndex:indexPath.row];
     NSString *userId = [UserInfoSingle sharedManager].userId;
-    if (nil == userId) {
+    if (nil == userId && presenter.item.moedelType != UCFHomeListCellModelTypeOneImageTransfer) {
         UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
         UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
         AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
         [app.tabBarController presentViewController:loginNaviController animated:YES completion:nil];
         return;
     }
-    UCFHomeListGroupPresenter *groupPresenter = [self.presenter.allDatas objectAtIndex:indexPath.section];
-    UCFHomeListCellPresenter *presenter = [groupPresenter.group.prdlist objectAtIndex:indexPath.row];
     if ([self.delegate respondsToSelector:@selector(homeList:tableView:didClickedWithModel:withType:)]) {
         [self.delegate homeList:self tableView:self.tableView didClickedWithModel:presenter.item withType:UCFHomeListTypeDetail];
     }
