@@ -252,9 +252,7 @@ static NetworkModule *gInstance = NULL;
 //        case kSxTagApplyCard:
 //            parameter = [SERVER_IP stringByAppendingString:APPLYCARD];
 //            break;
-        case kSxTagRegistMobileCheck:
-            parameter = [serverIP stringByAppendingString:RIGISTCHECK];
-            break;
+
         case kSxTagRegistNameCheck: //检验用户命是否可用 暂时没用
             parameter = [serverIP stringByAppendingString:RIGISTCHECK];
             break;
@@ -1372,6 +1370,9 @@ static NetworkModule *gInstance = NULL;
             break;
         case kSXTagGoldLimitedBankList://黄金充值受限的银行列表
             parameter = [NEW_SERVER_IP stringByAppendingString:GOLDLIMITEDBANKLIST];
+            break;
+        case kSxTagRegistMobileCheck:
+            parameter = [NEW_SERVER_IP stringByAppendingString:RIGISTCHECK];
             break;
     }
     //给原有参数字典添加公共参数
