@@ -19,6 +19,7 @@
 #import "UCFGoldRechargeFourthCell.h"
 #import "UCFGoldRechargeBankCell.h"
 #import "UCFBankLimitViewController.h"
+#import "UCFGoldBankModel.h"
 
 @interface UCFGoldRechargeViewController () <UITableViewDelegate, UITableViewDataSource, UCFGoldRechargeCellDelegate, UCFGoldChargeSecCellDelegate, UCFColdChargeThirdCellDelegate, UCFGoldRechargeFourthCellDelegate>
 //@property (weak, nonatomic) UCFGoldRechargeHeaderView *goldRechargeHeader;
@@ -27,6 +28,7 @@
 @property (copy, nonatomic) NSString *backUrl;
 @property (strong, nonatomic) NSArray *constracts;
 @property (weak, nonatomic) UCFGoldChargeOneCell *chargeOneCell;
+@property (strong, nonatomic) UCFGoldBankModel *goldBankModel;
 @end
 
 @implementation UCFGoldRechargeViewController
@@ -64,6 +66,9 @@
 - (void)createUI {
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
     [self.tableview addGestureRecognizer:tap];
+    
+    [self.tableview setContentInset:UIEdgeInsetsMake(0, 0, 60, 0)];
+    [self.tableview setBackgroundColor:UIColorWithRGB(0xebebee)];
 }
 
 - (void)tapped:(UITapGestureRecognizer *)tap {
@@ -123,11 +128,8 @@
     if (section == 0) {
         return 32;
     }
-    else if (section == 1) {
-        return 15;
-    }
-    else if (section == 2) {
-        return 0.001;
+    else if (section == 4) {
+        return 25;
     }
     else
         return 0.001;
@@ -135,13 +137,10 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    if (section == 0) {
-        return 0.001;
+    if (section == 1) {
+        return 18;
     }
-    else if (section == 1) {
-        return 15;
-    }
-    else if (section == 2) {
+    else if (section == 4) {
         return 15;
     }
     else
@@ -203,6 +202,7 @@
         if (nil == goldRecharge) {
             goldRecharge = (UCFGoldRechargeBankCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFGoldRechargeBankCell" owner:self options:nil] lastObject];
         }
+        goldRecharge.goldBankModel = self.goldBankModel;
         return goldRecharge;
     }
     else if (indexPath.section == 1) {
@@ -262,7 +262,7 @@
         return (ScreenWidth - 40) * 0.5;
     }
     else if (indexPath.section == 1) {
-        return 30;
+        return 22;
     }
     else if (indexPath.section == 2) {
         return 37;
@@ -381,6 +381,8 @@
             CGSize size = [self sizeWithString:@"温馨提示" font:[UIFont systemFontOfSize:13] constraintSize:CGSizeMake(ScreenWidth - 40, MAXFLOAT)];
             firstModel.isShowBlackDot = NO;
             firstModel.cellHeight = size.height + 16;
+            NSDictionary *userBankInfo = [data objectSafeDictionaryForKey:@"userBankInfo"];
+            self.goldBankModel = [UCFGoldBankModel getGoldBankModelByDataDict:userBankInfo];
             [self.dataArray insertObject:firstModel atIndex:0];
             [self.tableview reloadData];
         }

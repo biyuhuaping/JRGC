@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+@class UCFGoldLimitedBankModel;
 @interface UCFGoldBankLimitCell : UITableViewCell
-
+@property (nonatomic, strong) UCFGoldLimitedBankModel *bankModel;
 @end

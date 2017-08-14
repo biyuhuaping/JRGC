@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+@class UCFGoldBankModel;
 @interface UCFGoldRechargeBankCell : UITableViewCell
-
+@property (nonatomic, strong) UCFGoldBankModel *goldBankModel;
 @end
