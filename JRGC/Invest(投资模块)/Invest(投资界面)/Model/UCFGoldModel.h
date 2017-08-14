@@ -17,6 +17,7 @@
 @property (copy, nonatomic) NSString *paymentType;
 @property (copy, nonatomic) NSString *periodTerm;
 @property (copy, nonatomic) NSArray *prdLabelsList;
+@property (copy, nonatomic) NSString *holdTime;
 @property (copy, nonatomic) NSString *remainAmount;
 @property (copy, nonatomic) NSString *status;
 @property (copy, nonatomic) NSString *totalAmount;

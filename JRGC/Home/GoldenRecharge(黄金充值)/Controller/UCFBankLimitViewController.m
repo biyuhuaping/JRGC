@@ -112,6 +112,8 @@
     if (nil == cell) {
         cell = (UCFGoldBankLimitCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFGoldBankLimitCell" owner:self options:nil] lastObject];
     }
+    cell.tableview = tableView;
+    cell.indexPath = indexPath;
     cell.bankModel = [self.dataArray objectAtIndex:indexPath.row];
     return cell;
 }

@@ -74,7 +74,12 @@
         else {
             self.rateLabel.font = [UIFont boldSystemFontOfSize:20];
         }
-        self.timeLabel.text = presenter.repayPeriodtext;
+        if (presenter.holdTime.length > 0) {
+            self.timeLabel.text = [NSString stringWithFormat:@"%@~%@", presenter.holdTime, presenter.repayPeriodtext];
+        }
+        else {
+            self.timeLabel.text = [NSString stringWithFormat:@"%@", presenter.repayPeriodtext];
+        }
         self.repayModelLabel.text = presenter.repayModeText;
         self.remainLabel.text = presenter.availBorrowAmount;
         if (presenter.platformSubsidyExpense.length > 0) {//贴
@@ -386,7 +391,13 @@
     _microMoneyModel = microMoneyModel;
     self.proName.text = microMoneyModel.prdName;
     self.rateLabel.text = [NSString stringWithFormat:@"%@%%", microMoneyModel.annualRate];
-    self.timeLabel.text = microMoneyModel.repayPeriodtext;
+    if (microMoneyModel.holdTime.length > 0) {
+        self.timeLabel.text = [NSString stringWithFormat:@"%@~%@", microMoneyModel.holdTime, microMoneyModel.repayPeriodtext];
+    }
+    else {
+        self.timeLabel.text = [NSString stringWithFormat:@"%@", microMoneyModel.repayPeriodtext];
+    }
+//    self.timeLabel.text = microMoneyModel.repayPeriodtext;
     self.repayModelLabel.text = microMoneyModel.repayModeText;
     self.startMoneyLabel.text = [NSString stringWithFormat:@"%@元起", microMoneyModel.minInvest];
     NSString *temp = [NSString stringWithFormat:@"%lf",[microMoneyModel.borrowAmount doubleValue]-[microMoneyModel.completeLoan doubleValue]];
