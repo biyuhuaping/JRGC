@@ -1368,6 +1368,7 @@ static NetworkModule *gInstance = NULL;
             break;
         case kSXTagGoldRecommendRefund:
             parameter = [SERVER_IP stringByAppendingString:GOLD_RecommendRefund];
+            parameter = @"http://10.10.100.112/mockjsdata/13/friendslist.json?";
             break;
         case kSXTagGoldLimitedBankList://黄金充值受限的银行列表
             parameter = [NEW_SERVER_IP stringByAppendingString:GOLDLIMITEDBANKLIST];
