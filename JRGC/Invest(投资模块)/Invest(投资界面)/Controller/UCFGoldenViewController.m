@@ -18,6 +18,9 @@
 #import "UCFGoldDetailViewController.h"
 #import "ToolSingleTon.h"
 #import "UCFNoPermissionViewController.h"
+#import "UCFGoldFlexibleCell.h"
+
+
 @interface UCFGoldenViewController () <UITableViewDelegate, UITableViewDataSource, UCFHomeListCellHonorDelegate,UIAlertViewDelegate>
 @property (weak, nonatomic) UCFGoldenHeaderView *goldenHeader;
 @property (strong, nonatomic) NSMutableArray *dataArray;
@@ -71,31 +74,48 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if (section == 0) {
+        return 1;
+    }
     return self.dataArray.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (indexPath.section == 0) {
+        return 185.0;
+    }
     return 100;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *cellId = @"homeListCell";
-    UCFHomeListCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
-    if (nil == cell) {
-        cell = (UCFHomeListCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeListCell" owner:self options:nil] lastObject];
-        cell.honorDelegate = self;
+    if (indexPath.section == 0) {
+        static NSString *cellId = @"goldflexible";
+        UCFGoldFlexibleCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+        if (nil == cell) {
+            cell = (UCFGoldFlexibleCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFGoldFlexibleCell" owner:self options:nil] lastObject];
+        }
+        return cell;
     }
-    cell.tableView = tableView;
-    cell.indexPath = indexPath;
-    cell.goldModel = [self.dataArray objectAtIndex:indexPath.row];
-    return cell;
+    else if (indexPath.section == 1) {
+        static NSString *cellId = @"homeListCell";
+        UCFHomeListCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+        if (nil == cell) {
+            cell = (UCFHomeListCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeListCell" owner:self options:nil] lastObject];
+            cell.honorDelegate = self;
+        }
+        cell.tableView = tableView;
+        cell.indexPath = indexPath;
+        cell.goldModel = [self.dataArray objectAtIndex:indexPath.row];
+        return cell;
+    }
+    return nil;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section

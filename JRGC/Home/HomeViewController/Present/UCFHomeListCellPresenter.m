@@ -127,6 +127,9 @@
     else if (self.item.moedelType == UCFHomeListCellModelTypeReserved) {
         return 73.0;
     }
+    else if (self.item.moedelType == UCFHomeListCellModelTypeGoldFixed) {
+        return 185.0;
+    }
     else {
         return (ScreenWidth - 20) / CELLRATE + 15;
     }

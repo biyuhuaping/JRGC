@@ -221,7 +221,13 @@
                         weakSelf.groupPresenter3.group.type = group.type;
                         weakSelf.groupPresenter3.group.title = group.title;
                         weakSelf.groupPresenter3.group.iconUrl = group.iconUrl;
-                        weakSelf.groupPresenter3.group.prdlist = [weakSelf productPrdListWithDataSource:array];
+                        NSMutableArray *temp = [weakSelf productPrdListWithDataSource:array];
+                        UCFHomeListCellModel *model = [[UCFHomeListCellModel alloc] init];
+                        model.moedelType = UCFHomeListCellModelTypeGoldFixed;
+                        UCFHomeListCellPresenter *cellPresenter = [UCFHomeListCellPresenter presenterWithItem:model];
+                        [temp insertObject:cellPresenter atIndex:0];
+                        weakSelf.groupPresenter3.group.prdlist = temp;
+                        
                     }
                 }
             }

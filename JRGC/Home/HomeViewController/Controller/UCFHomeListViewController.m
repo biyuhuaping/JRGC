@@ -15,6 +15,7 @@
 #import "UCFHomeListCell.h"
 #import "UCFHomeListNo2Cell.h"
 #import "UCFHomeInvestCell.h"
+#import "UCFGoldFlexibleCell.h"
 #import "UCFHomeListHeaderSectionView.h"
 #import "UCFLoginViewController.h"
 #import "AppDelegate.h"
@@ -104,6 +105,14 @@
         }
         cell.indexPath = indexPath;
         cell.presenter = cellPresenter;
+        return cell;
+    }
+    else if (cellPresenter.modelType == UCFHomeListCellModelTypeGoldFixed) {
+        static NSString *cellId = @"goldflexible";
+        UCFGoldFlexibleCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+        if (nil == cell) {
+            cell = (UCFGoldFlexibleCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFGoldFlexibleCell" owner:self options:nil] lastObject];
+        }
         return cell;
     }
     return nil;
