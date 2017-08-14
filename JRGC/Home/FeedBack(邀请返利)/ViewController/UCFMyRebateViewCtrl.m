@@ -74,6 +74,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *feedBackDetailLab; //邀请返利明细
 @property (weak, nonatomic) IBOutlet UIButton *friendUnFeedBackLab;//好友未回款
 @property (weak, nonatomic) IBOutlet UIButton *friendFeedBackLab;//好友已回款
+@property (weak, nonatomic) IBOutlet UIView *moveLineView;
 
 @end
 
@@ -83,11 +84,17 @@
     [super viewDidLoad];
     [self addLeftButton];
     if (self.accoutType == SelectAccoutTypeGold) {
-        baseTitleLabel.text = @"黄金邀请返利";
-        _friendCountLab.text = @"邀请购买人数:0人";
+        baseTitleLabel.text = @"黄金返利";
         [_friendUnFeedBackLab setTitle:@"好友未回金" forState:UIControlStateNormal];
         [_friendFeedBackLab setTitle:@"好友已回金" forState:UIControlStateNormal];
-        
+        _friendCountLab.text = [NSString stringWithFormat:@"邀请购买人数:%@人",_feedBackDictionary[@"friendCount"]];
+        _sumCommLab.text = [NSString stringWithFormat:@"¥%@",_feedBackDictionary[@"sumComm"]];
+        _recCountLab.text = [NSString stringWithFormat:@"邀请注册人数：%@人",_feedBackDictionary[@"recCount"]];
+        [_feedBackDetailLab setTitleColor:UIColorWithRGB(0xffc027) forState:UIControlStateSelected];
+        [_friendUnFeedBackLab setTitleColor:UIColorWithRGB(0xffc027) forState:UIControlStateSelected];
+        [_friendFeedBackLab setTitleColor:UIColorWithRGB(0xffc027) forState:UIControlStateSelected];
+        _moveLineView.backgroundColor = UIColorWithRGB(0xffc027);
+
     } else {
         baseTitleLabel.text = self.accoutType  == SelectAccoutTypeHoner ?  @"尊享返利":@"微金返利";
     }
@@ -286,8 +293,9 @@
     for (UIButton *btn in self.itemChangeView.subviews) {
         if (btn.tag == 100 + _index) {
             btn.selected = YES;
-        }else if ([btn respondsToSelector:@selector(setSelected:)])
+        } else if ([btn respondsToSelector:@selector(setSelected:)]) {
             btn.selected = NO;
+        }
     }
     if (![_didClickBtns containsObject:@(_index)]) {
         [_didClickBtns addObject:@(_index)];
@@ -531,7 +539,7 @@
             cell.title1.text = dic[@"prdClaimsName"];//标名称
             id status = dic[@"status"];
             cell.imag.hidden = YES;
-            cell.title_1.text = _titleArr1[0];
+            cell.title_1.text = _titleArr1[[status intValue]];
             cell.title_2.text = dic[@"applyName"];//投资人
             cell.title_3.text = dic[@"tradeTime"];//投资日期
             NSString *qxdate = [dic objectSafeForKey: @"startingDate"];
