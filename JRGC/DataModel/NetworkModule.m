@@ -1369,7 +1369,9 @@ static NetworkModule *gInstance = NULL;
         case kSXTagGoldRecommendRefund:
             parameter = [SERVER_IP stringByAppendingString:GOLD_RecommendRefund];
             break;
-            
+        case kSXTagGoldLimitedBankList://黄金充值受限的银行列表
+            parameter = [NEW_SERVER_IP stringByAppendingString:GOLDLIMITEDBANKLIST];
+            break;
     }
     //给原有参数字典添加公共参数
     if (!data) {
