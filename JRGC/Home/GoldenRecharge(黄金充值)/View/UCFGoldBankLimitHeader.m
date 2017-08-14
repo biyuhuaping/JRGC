@@ -13,7 +13,7 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    self.contentView.backgroundColor = UIColorWithRGB(0xebebee);
+    self.contentView.backgroundColor = UIColorWithRGB(0xf9f9f9);
 }
 
 /*
