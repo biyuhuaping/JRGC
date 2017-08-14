@@ -9,7 +9,7 @@
 #import "UCFGoldRechargeFourthCell.h"
 #import "UCFContractModel.h"
 
-#define font 13
+#define font 12.5
 @interface UCFGoldRechargeFourthCell () <UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 @property (assign, nonatomic) BOOL isSelect;
