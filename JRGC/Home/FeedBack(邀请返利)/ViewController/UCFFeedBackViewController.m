@@ -16,7 +16,7 @@
 #import "FullWebViewController.h"
 #import "UCFWebViewJavascriptBridgeLevel.h"
 #import "UCFRegistrationRecord.h"
-
+#import "UCFMyRebateViewCtrl.h"
 @interface UCFFeedBackViewController ()<UMSocialPlatformProvider>
 
 @property (strong, nonatomic) IBOutlet UILabel *sumCommLab;//我的返利
@@ -179,11 +179,9 @@
 //进入邀请记录页面
 - (IBAction)toMyRebateView:(id)sender {
     if (self.accoutType == SelectAccoutTypeGold) {
-        
-        UCFProfitBackViewController *mv = [[UCFProfitBackViewController alloc]initWithNibName:@"UCFProfitBackViewController" bundle:nil];
-        mv.accoutType = SelectAccoutTypeGold;
+        UCFMyRebateViewCtrl *mv = [[UCFMyRebateViewCtrl alloc]initWithNibName:@"UCFMyRebateViewCtrl" bundle:nil];
+        mv.accoutType = self.accoutType;
         [self.navigationController pushViewController:mv animated:YES];
-        
     } else {
         //邀请记录
         UCFRegistrationRecord *vc = [[UCFRegistrationRecord alloc]initWithNibName:@"UCFRegistrationRecord" bundle:nil];
@@ -362,10 +360,8 @@
             NSDictionary* views = NSDictionaryOfVariableBindings(_view_Up);
             //设置高度
             [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_view_Up(0)]" options:0 metrics:nil views:views]];
-            
-            
         } else {
-    
+            [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
         }
         
     } else if (tag.intValue == kSXTagGetAppSetting){

@@ -64,6 +64,7 @@
 //#define PRDCLAIMSFORCEBORROWS   @"prdClaimsFore/borrows"
 //#define PRDCLAIMSFOREDEBTBORROWS @"prdClaimsFore/debtBorrows"
 #define FRIENDS_LIST        @"newfactoryCodeController/investFriendsList"//邀请返利-邀请投资明细
+#define GOLD_FRIENDS_LIST   @"api/inviteRebate/v2/goldInviteDetail.json"
 //#define CONTRACTSIGN        @"contractParty/contractSign"
 //#define CONTRACTCONTENT     @"contractParty/getContent"
 //#define BASEBANKMESS        @"newbankCard/baseBankMess"  // 银行卡列表
@@ -132,6 +133,7 @@
 #define GUAGUAPOST                    @"happyCard/exchange"//刮刮卡
 #define GongDouOverduing              @"newBeanRecordCon/AppqueryOverDetail"     //即将过期的工豆
 #define RecommendRefund               @"/factoryCode/recommendRefundDataApp"//好友回款
+#define GOLD_RecommendRefund           @"api/inviteRebate/v2/goldRecommendRefund.json"
 //#define CheckCardBelongToBank         @"newbankCard/bankCardCheck" //判断行别
 
 #define GETAppQueryByManyList         @"/newfactoryCodeController/appQueryByManyList"//多期回款明细
@@ -337,12 +339,7 @@ enum kSXTag
 //    kSXTagPrdClaimsForeBorrows,//还款列表
 //    kSXTagPrdClaimsForeDebtBorrows,//欠款单
     kSXTagFriendsList,//好友列表
-//    kSXTagContractPartyContractSign,//签署合同
-//    kSXTagContractPartyGetContent,//合同详情
-//    kSXTagBankCardBaseBankMess,//银行信息
-//    kSXTagPersonalSettingsGetTRegionList,//区域信息
-//    kSXTagBankCardSubmitApply,//绑定银行卡
-//    kSXTagActWithdrawSendPhoneVerifyCode,//提现银行卡
+    kSXTagGoldFriendList,
     kSXTagWithdrawalsSendPhone,//获取充值验证码
 //    kSXTagActWithdrawApply,//确认提现
 //    kSXTagActWithdrawPickUpInterest,//提取利息
@@ -411,6 +408,7 @@ enum kSXTag
     kSXTagRedBagRainSwitch,             //红包雨开关
     kSXTagGuaGuaPost,                   //刮刮卡
     kSRecommendRefund,                  //好友回款
+    kSXTagGoldRecommendRefund,          //黄金好友未回款
 //    kSXTagCheckCardBelongToBank,        //判断银行卡所属行别
     kAppQueryByManyList,               //多期回款明细
     kSXTagRedPointCheck,                //检测红点状态

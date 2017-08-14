@@ -29,17 +29,15 @@
 - (void)createUI {
     
     [self addLeftButton];
-    if (self.accoutType == SelectAccoutTypeGold) {
-        baseTitleLabel.text = @"黄金返利";
-    } else {
-        UISegmentedControl *segmentContrl = [[UISegmentedControl alloc]initWithItems:@[@"微金返利",@"尊享返利"]];;
-        segmentContrl.frame = CGRectMake(0, 0, ScreenWidth*5/8, 30);
-        [segmentContrl setTintColor:UIColorWithRGB(0x5b6993)];
-        segmentContrl.selectedSegmentIndex = 0;
-        [segmentContrl addTarget:self action:@selector(segmentedValueChanged:) forControlEvents:UIControlEventValueChanged];
-        self.segmentedCtrl = segmentContrl;
-        self.navigationItem.titleView = segmentContrl;
-    }
+
+    UISegmentedControl *segmentContrl = [[UISegmentedControl alloc]initWithItems:@[@"微金返利",@"尊享返利"]];;
+    segmentContrl.frame = CGRectMake(0, 0, ScreenWidth*5/8, 30);
+    [segmentContrl setTintColor:UIColorWithRGB(0x5b6993)];
+    segmentContrl.selectedSegmentIndex = 0;
+    [segmentContrl addTarget:self action:@selector(segmentedValueChanged:) forControlEvents:UIControlEventValueChanged];
+    self.segmentedCtrl = segmentContrl;
+    self.navigationItem.titleView = segmentContrl;
+    
 }
 
 - (void)segmentedValueChanged:(UISegmentedControl *)segment
