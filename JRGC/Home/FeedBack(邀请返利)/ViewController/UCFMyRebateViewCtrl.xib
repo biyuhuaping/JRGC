@@ -23,6 +23,7 @@
                 <outlet property="investorsLab" destination="rDW-F0-7Jp" id="uhX-Kc-Hbp"/>
                 <outlet property="itemChangeView" destination="jfb-mU-9hd" id="K2u-lL-7XX"/>
                 <outlet property="lineViewHeight1" destination="MIj-Cp-LhT" id="Nrw-Wb-BdF"/>
+                <outlet property="moveLineView" destination="38G-6c-tOh" id="l3a-6U-Xhx"/>
                 <outlet property="nperLab" destination="oPr-Xc-A1F" id="Ay1-5b-YZJ"/>
                 <outlet property="recCountLab" destination="8wY-xs-38T" id="HKR-j1-xwV"/>
                 <outlet property="scrollView" destination="FVQ-Aq-h8Y" id="zIH-Qu-PYo"/>
@@ -206,7 +207,7 @@
                 <constraint firstItem="FVQ-Aq-h8Y" firstAttribute="top" secondItem="jfb-mU-9hd" secondAttribute="bottom" constant="2" id="qEO-89-mFP"/>
                 <constraint firstAttribute="trailing" secondItem="jfb-mU-9hd" secondAttribute="trailing" id="x5C-2H-YU9"/>
             </constraints>
-            <point key="canvasLocation" x="-217" y="55"/>
+            <point key="canvasLocation" x="-496" y="22"/>
         </view>
         <view clipsSubviews="YES" contentMode="scaleToFill" id="hFo-dM-ogf">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>

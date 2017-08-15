@@ -74,6 +74,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *feedBackDetailLab; //邀请返利明细
 @property (weak, nonatomic) IBOutlet UIButton *friendUnFeedBackLab;//好友未回款
 @property (weak, nonatomic) IBOutlet UIButton *friendFeedBackLab;//好友已回款
+@property (weak, nonatomic) IBOutlet UIView *moveLineView;
 
 @end
 
@@ -83,11 +84,17 @@
     [super viewDidLoad];
     [self addLeftButton];
     if (self.accoutType == SelectAccoutTypeGold) {
-        baseTitleLabel.text = @"黄金邀请返利";
-        _friendCountLab.text = @"邀请购买人数:0人";
+        baseTitleLabel.text = @"黄金返利";
         [_friendUnFeedBackLab setTitle:@"好友未回金" forState:UIControlStateNormal];
         [_friendFeedBackLab setTitle:@"好友已回金" forState:UIControlStateNormal];
-        
+        _friendCountLab.text = [NSString stringWithFormat:@"邀请购买人数:%@人",_feedBackDictionary[@"friendCount"]];
+        _sumCommLab.text = [NSString stringWithFormat:@"¥%@",_feedBackDictionary[@"sumComm"]];
+        _recCountLab.text = [NSString stringWithFormat:@"邀请注册人数：%@人",_feedBackDictionary[@"recCount"]];
+        [_feedBackDetailLab setTitleColor:UIColorWithRGB(0xffc027) forState:UIControlStateSelected];
+        [_friendUnFeedBackLab setTitleColor:UIColorWithRGB(0xffc027) forState:UIControlStateSelected];
+        [_friendFeedBackLab setTitleColor:UIColorWithRGB(0xffc027) forState:UIControlStateSelected];
+        _moveLineView.backgroundColor = UIColorWithRGB(0xffc027);
+
     } else {
         baseTitleLabel.text = self.accoutType  == SelectAccoutTypeHoner ?  @"尊享返利":@"微金返利";
     }
@@ -286,8 +293,9 @@
     for (UIButton *btn in self.itemChangeView.subviews) {
         if (btn.tag == 100 + _index) {
             btn.selected = YES;
-        }else if ([btn respondsToSelector:@selector(setSelected:)])
+        } else if ([btn respondsToSelector:@selector(setSelected:)]) {
             btn.selected = NO;
+        }
     }
     if (![_didClickBtns containsObject:@(_index)]) {
         [_didClickBtns addObject:@(_index)];
@@ -531,12 +539,12 @@
             cell.title1.text = dic[@"prdClaimsName"];//标名称
             id status = dic[@"status"];
             cell.imag.hidden = YES;
-            cell.title_1.text = _titleArr1[2];
+            cell.title_1.text = _titleArr1[[status intValue]];
             cell.title_2.text = dic[@"applyName"];//投资人
             cell.title_3.text = dic[@"tradeTime"];//投资日期
             NSString *qxdate = [dic objectSafeForKey: @"startingDate"];
             cell.title_7.text = qxdate.length > 0 ? qxdate :@"--" ;//起息日期
-            cell.title_4.text = [NSString stringWithFormat:@"%@",dic[@"purchaseAmount"]];//投资本金
+            cell.title_4.text = [NSString stringWithFormat:@"%@g",dic[@"purchaseAmount"]];//投资本金
             float tableViewRowHeight = 278;
             //判断好友返利是否为0.0
 //            NSString *commissionAmt = [dic[@"commissionAmt"] stringByReplacingOccurrencesOfString:@"￥" withString:@""];
@@ -579,9 +587,9 @@
                 cell.title1TopConstraint.constant = 21;
             }
             if ([cell.title_1.text isEqualToString:@"回金中"]) {
-                cell.title_1.textColor = UIColorWithRGB(0x4aa1f9);
-            } else if ([cell.title_1.text isEqualToString:@"招标中"]){
-                cell.title_1.textColor = UIColorWithRGB(0xffc027);//那种红
+                cell.title_1.textColor = UIColorWithRGB(0xffc027);
+            } else if ([cell.title_1.text isEqualToString:@"认购中"]){
+                cell.title_1.textColor = UIColorWithRGB(0x4aa1f9);//那种红0x4aa1f9
             } else if ([cell.title_1.text isEqualToString:@"满标"]){
                 cell.title_1.textColor = UIColorWithRGB(0xffc027);
             } else{

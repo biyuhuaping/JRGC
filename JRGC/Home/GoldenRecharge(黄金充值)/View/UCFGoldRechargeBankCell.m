@@ -25,6 +25,12 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.contentView.backgroundColor = UIColorWithRGB(0xebebee);
+    self.bankNameLabel.textColor = UIColorWithRGB(0x333333);
+    self.userNameLabel.textColor = UIColorWithRGB(0x333333);
+    self.bankNoLabel.textColor = UIColorWithRGB(0x333333);
+    self.limitPerDayLabel.textColor = UIColorWithRGB(0x555555);
+    self.limitPerlistLabel.textColor = UIColorWithRGB(0x555555);
+
 }
 
 - (void)layoutSubviews {

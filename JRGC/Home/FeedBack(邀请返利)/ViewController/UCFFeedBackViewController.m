@@ -75,6 +75,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *goldInvitationNumLab;
 @property (weak, nonatomic) IBOutlet UILabel *feedBackRegistLab;
 
+@property (strong, nonatomic) NSDictionary    *feedBackDictionary;
 @end
 
 @implementation UCFFeedBackViewController
@@ -181,6 +182,7 @@
     if (self.accoutType == SelectAccoutTypeGold) {
         UCFMyRebateViewCtrl *mv = [[UCFMyRebateViewCtrl alloc]initWithNibName:@"UCFMyRebateViewCtrl" bundle:nil];
         mv.accoutType = self.accoutType;
+        mv.feedBackDictionary = self.feedBackDictionary;
         [self.navigationController pushViewController:mv animated:YES];
     } else {
         //邀请记录
@@ -347,6 +349,7 @@
         NSString *rsttext = dic[@"message"];
         NSDictionary* dictemp = [[dic objectSafeForKey:@"data"] objectSafeDictionaryForKey:@"inviteRebateBasicInfo"];
         if ([rstcode intValue] == 1) {
+            self.feedBackDictionary = dictemp;
             _shareUrl = [dictemp objectSafeForKey:@"inviteUrl"];
             _sumCommLab.text = [NSString stringWithFormat:@"¥%@",dictemp[@"sumComm"]];//我的返利
             _goldInvitationNumLab.text = [NSString stringWithFormat:@"%@人",dictemp[@"recCount"]];//邀请人数

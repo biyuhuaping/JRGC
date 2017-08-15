@@ -89,10 +89,14 @@
 {
     if([QDCODE isEqualToString:@""]){
         //点下一步前先验证手机号
-        NSString *strParameters = [NSString stringWithFormat:@"vString=%@&type=%@",[_registerOneView phoneNumberText],@"1"];
-        if (strParameters) {
-            [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSxTagRegistMobileCheck owner:self Type:SelectAccoutDefault];
-        }
+//        NSString *strParameters = [NSString stringWithFormat:@"vString=%@&type=%@",[_registerOneView phoneNumberText],@"1"];
+//        if (strParameters) {
+//            [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSxTagRegistMobileCheck owner:self Type:SelectAccoutDefault];
+//        }
+        NSMutableDictionary *parmDict = [NSMutableDictionary dictionaryWithCapacity:1];
+        [parmDict setValue:[_registerOneView phoneNumberText] forKey:@"phoneNum"];
+        [[NetworkModule sharedNetworkModule] newPostReq:parmDict tag:kSxTagRegistMobileCheck owner:self signature:NO Type:SelectAccoutDefault];
+        
     } else {
         //点下一步前先验证手机号
         NSString *strParameters = [NSString stringWithFormat:@"qd=%@",QDCODE];
@@ -143,21 +147,18 @@
 {
     NSString *data = (NSString *)result;
     NSMutableDictionary *dic = [data objectFromJSONString];
-    NSString *rstcode = dic[@"status"];
-    NSString *rsttext = dic[@"statusdes"];
-    
+    NSString *rstcode = dic[@"status"];    
     if (tag.intValue == kSxTagRegistMobileCheck) {
-        if([rstcode intValue] == 1)
-        {
+        if([dic[@"ret"] boolValue]) {
             [self getRegisterTokenHttpRequst];
         } else if([rstcode intValue] == 3) {
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:rsttext delegate:self cancelButtonTitle:@"重新输入" otherButtonTitles:@"立即拨打", nil];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:dic[@"message"] delegate:self cancelButtonTitle:@"重新输入" otherButtonTitles:@"立即拨打", nil];
             [alertView show];
         } else
         {
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:rsttext delegate:nil cancelButtonTitle:@"重新输入" otherButtonTitles:nil, nil];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:dic[@"message"] delegate:nil cancelButtonTitle:@"重新输入" otherButtonTitles:nil, nil];
             [alertView show];
         }
     }else if (tag.integerValue == kSXTagGetRegisterToken){
@@ -175,10 +176,13 @@
             isLimitFactoryCode = NO;
         }
         //点下一步前先验证手机号
-        NSString *strParameters = [NSString stringWithFormat:@"vString=%@&type=%@",[_registerOneView phoneNumberText],@"1"];
-        if (strParameters) {
-            [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSxTagRegistMobileCheck owner:self Type:SelectAccoutDefault];
-        }
+//        NSString *strParameters = [NSString stringWithFormat:@"vString=%@&type=%@",[_registerOneView phoneNumberText],@"1"];
+//        if (strParameters) {
+//            [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSxTagRegistMobileCheck owner:self Type:SelectAccoutDefault];
+//        }
+        NSMutableDictionary *parmDict = [NSMutableDictionary dictionaryWithCapacity:1];
+        [parmDict setValue:[_registerOneView phoneNumberText] forKey:@"phoneNum"];
+        [[NetworkModule sharedNetworkModule] newPostReq:parmDict tag:kSxTagRegistMobileCheck owner:self signature:NO Type:SelectAccoutDefault];
     }
 }
 
