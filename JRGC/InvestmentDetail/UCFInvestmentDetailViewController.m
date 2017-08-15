@@ -12,17 +12,21 @@
 #import "UCFProjectDetailViewController.h"
 #import "UCFNoDataView.h"
 #import "UCFPurchaseWebView.h"
-@interface UCFInvestmentDetailViewController ()
+#import <QuickLook/QuickLook.h>
+#import "QLHeaderViewController.h"
+@interface UCFInvestmentDetailViewController ()<QLPreviewControllerDelegate,QLPreviewControllerDataSource>
 {
     UCFInvestmentDetailView *_investmentDetailView;
     UCFNoDataView *_nodataView;
     UCF404ErrorView *_errorView;
     NSString *_contractTitle;
+    
 }
-
+@property(nonatomic,copy)NSString *localFilePath;
 @end
 
 @implementation UCFInvestmentDetailViewController
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -231,10 +235,27 @@
             [self showHTAlertdidFinishGetUMSocialDataResponse];
         }
     } else if (tag.intValue == kSXTagContractDownLoad) {
-        FullWebViewController *controller = [[FullWebViewController alloc] init];
-        controller.localFilePath = result;
-        [self.navigationController pushViewController:controller animated:YES];
+        
+        self.localFilePath = result;
+//        QLHeaderViewController *vc = [[QLHeaderViewController alloc] init];
+//        vc.localFilePath = result;
+//        [self.navigationController pushViewController:vc animated:YES];
+        
+        QLPreviewController *QLPVC = [[QLPreviewController alloc] init];
+        QLPVC.delegate = self;
+        QLPVC.dataSource = self;
+        QLPVC.title = @"合同";
+        [self presentViewController:QLPVC animated:YES completion:nil];
     }
+}
+#pragma mark QLPreviewControllerDataSource
+- (NSInteger)numberOfPreviewItemsInPreviewController:(QLPreviewController *)controller{
+    return 1;
+}
+- (id<QLPreviewItem>)previewController:(QLPreviewController *)controller previewItemAtIndex:(NSInteger)index{
+    NSArray *arr = @[_localFilePath];
+    
+    return [NSURL fileURLWithPath:arr[index]];
 }
 - (void)showHTAlertdidFinishGetUMSocialDataResponse
 {

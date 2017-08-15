@@ -572,7 +572,7 @@
             
             cell.title_6.text = [NSString stringWithFormat:@"%@",dic[@"commissionAmt"]]; //我的返利
 
-            cell.title_8.text = [dic[@"actualRefundTime"] length] > 0 ? dic[@"actualRefundTime"]:@"--";//回款日
+            cell.title_8.text = [dic[@"refundPerDate"] length] > 0 ? dic[@"refundPerDate"]:@"--";//回款日
             
             cell.lab1.text = [NSString stringWithFormat:@"%@",dic[@"annualRate"]];//15%
             if ([dic[@"holdTime"]length] > 0) {
