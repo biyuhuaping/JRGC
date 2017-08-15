@@ -360,7 +360,7 @@
         case 1:
         {
             if (indexPath.row == 0) {
-              return 274;
+                return _isGoldCurrentAccout ? 176 : 274 ;
             }
              else
             {
@@ -474,30 +474,59 @@
     UITableViewCell *cell = [tableView  dequeueReusableCellWithIdentifier:cellId];
     if (indexPath.section == 0) {
       
-        static NSString *cellStr1 = @"UCFGoldInvestmentCell";
-        UCFGoldInvestmentCell *cell = [tableView dequeueReusableCellWithIdentifier:cellStr1];
-        if (cell == nil) {
-            cell = [[[NSBundle mainBundle]loadNibNamed:@"UCFGoldInvestmentCell" owner:self options:nil] firstObject];
-        }
-//        cell.accoutType = SelectAccoutTypeGold;
-        [cell setGoldInvestItemInfo:self.goldModel];
-        cell.realGoldPriceLab.text = [NSString stringWithFormat:@"实时金价(元/克)¥%.2lf",[ToolSingleTon sharedManager].readTimePrice]; //
-        _prdLabelsList = [[_dataDic objectSafeDictionaryForKey:@"nmPrdClaimInfo"] objectSafeArrayForKey:@"prdLabelsList"];
-        if (_prdLabelsList.count > 0) {
-            for (NSDictionary *dic in _prdLabelsList) {
-                NSString *labelPriority = dic[@"labelPriority"];
-                if ([labelPriority isEqual:@"1"]) {
-                    cell.angleGoldView.angleString = dic[@"labelName"];
-                    cell.angleGoldView.hidden = NO;
-                    break;
-                }else{
-                  cell.angleGoldView.hidden = YES;
-                }
+        if(_isGoldCurrentAccout)
+        {
+            static NSString *cellStr1 = @"UCFGoldCurrrntInvestmentCell";
+            UCFGoldCurrrntInvestmentCell *cell = [tableView dequeueReusableCellWithIdentifier:cellStr1];
+            if (cell == nil) {
+                cell = [[[NSBundle mainBundle]loadNibNamed:@"UCFGoldInvestmentCell" owner:self options:nil] lastObject];
             }
-        }else{
-            cell.angleGoldView.hidden = YES;
+            //        cell.accoutType = SelectAccoutTypeGold;
+            [cell setGoldInvestItemInfo:self.goldModel];
+            cell.realGoldPriceLab.text = [NSString stringWithFormat:@"¥%.2lf",[ToolSingleTon sharedManager].readTimePrice]; //
+            _prdLabelsList = [[_dataDic objectSafeDictionaryForKey:@"nmPrdClaimInfo"] objectSafeArrayForKey:@"prdLabelsList"];
+            if (_prdLabelsList.count > 0) {
+                for (NSDictionary *dic in _prdLabelsList) {
+                    NSString *labelPriority = dic[@"labelPriority"];
+                    if ([labelPriority isEqual:@"1"]) {
+                        cell.angleGoldView.angleString = dic[@"labelName"];
+                        cell.angleGoldView.hidden = NO;
+                        break;
+                    }else{
+                        cell.angleGoldView.hidden = YES;
+                    }
+                }
+            }else{
+                cell.angleGoldView.hidden = YES;
+            }
+            return cell;
         }
-        return cell;
+        else{
+            static NSString *cellStr1 = @"UCFGoldInvestmentCell";
+            UCFGoldInvestmentCell *cell = [tableView dequeueReusableCellWithIdentifier:cellStr1];
+            if (cell == nil) {
+                cell = [[[NSBundle mainBundle]loadNibNamed:@"UCFGoldInvestmentCell" owner:self options:nil] firstObject];
+            }
+            //        cell.accoutType = SelectAccoutTypeGold;
+            [cell setGoldInvestItemInfo:self.goldModel];
+            cell.realGoldPriceLab.text = [NSString stringWithFormat:@"实时金价(元/克)¥%.2lf",[ToolSingleTon sharedManager].readTimePrice]; //
+            _prdLabelsList = [[_dataDic objectSafeDictionaryForKey:@"nmPrdClaimInfo"] objectSafeArrayForKey:@"prdLabelsList"];
+            if (_prdLabelsList.count > 0) {
+                for (NSDictionary *dic in _prdLabelsList) {
+                    NSString *labelPriority = dic[@"labelPriority"];
+                    if ([labelPriority isEqual:@"1"]) {
+                        cell.angleGoldView.angleString = dic[@"labelName"];
+                        cell.angleGoldView.hidden = NO;
+                        break;
+                    }else{
+                        cell.angleGoldView.hidden = YES;
+                    }
+                }
+            }else{
+                cell.angleGoldView.hidden = YES;
+            }
+            return cell;
+        }
     }else if (indexPath.section == 1){
         
         
@@ -508,6 +537,7 @@
                 cell = [[[NSBundle mainBundle]loadNibNamed:@"UCFGoldMoneyBoadCell" owner:nil options:nil] firstObject];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
+            cell.isGoldCurrentAccout = self.isGoldCurrentAccout;
             cell.dataDict = self.dataDic;
             cell.goldModel  = _goldModel;
             cell.goldSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"SelectGoldGongDouSwitch"];

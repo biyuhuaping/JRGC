@@ -15,8 +15,10 @@
 - (IBAction)clickGoldRechargeButton:(id)sender;
 - (IBAction)clickAllInvestmentBtn:(id)sender;
 - (IBAction)clickGoldSwitch:(UISwitch *)sender;
+@property (strong, nonatomic) IBOutlet UILabel *gongDouLabel;
 
-
+@property (strong, nonatomic) IBOutlet UIButton *rechargeButton1;
+@property (strong, nonatomic) IBOutlet UIButton *rechargeButton2;
 - (IBAction)showGoldCalculatorView:(id)sender;
 @end
 @implementation UCFGoldMoneyBoadCell
@@ -35,6 +37,30 @@
 -(void)layoutSubviews
 {
     [super layoutSubviews];
+}
+-(void)setIsGoldCurrentAccout:(BOOL)isGoldCurrentAccout
+{
+    _isGoldCurrentAccout = isGoldCurrentAccout;
+    if (isGoldCurrentAccout) {
+        self.gongDouLabel.text = @"";
+        self.rechargeButton1.hidden = NO;
+        self.estimatAmountPayableLabel.textAlignment = NSTextAlignmentRight;
+        self.getUpWeightGoldLabel.textAlignment = NSTextAlignmentRight;
+        for (UIView *view in self.contentView.subviews) {
+            if (view.tag == 10) {
+                for (UIView *view1 in view.subviews)
+                {
+                    [view1 removeFromSuperview];
+                }
+                [view removeFromSuperview];
+            }
+        }
+    }else{
+        self.gongDouLabel.text = @"(含工豆)";
+        self.rechargeButton1.hidden = YES;
+        self.estimatAmountPayableLabel.textAlignment = NSTextAlignmentLeft;
+        self.getUpWeightGoldLabel.textAlignment = NSTextAlignmentLeft;
+    }
 }
 -(void)setDataDict:(NSDictionary *)dataDict
 {

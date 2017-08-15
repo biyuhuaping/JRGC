@@ -17,3 +17,7 @@
 @property (nonatomic,strong)MDRadialProgressView *circleProgress;
 - (void)setProcessViewProcess:(CGFloat)process;
 @end
+@interface UCFGoldCurrentDetailHeaderView : UIView
+@property (nonatomic,strong)UCFGoldModel *goldModel;
+@property (nonatomic,strong)MDRadialProgressView *circleProgress;
+@end

@@ -11,5 +11,5 @@
 @interface UCFMyRebateViewCtrl : UCFBaseViewController
 
 @property (copy, nonatomic) void(^headerInfoBlock)(NSDictionary *);
-
+@property (nonatomic,strong) NSDictionary   *feedBackDictionary;
 @end
