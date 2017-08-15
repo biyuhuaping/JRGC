@@ -1012,10 +1012,9 @@
     {//如果工豆金额大约购买金额 传给服务端工豆金额为购买金额
         purchaseBeanStr = self.purchaseMoneyStr;
     }
-    if (_gCCodeTextField.text == nil) {
-       _gCCodeTextField.text = @"";
-    }
-    NSDictionary *paramDict = @{@"nmPurchaseToken":self.nmPurchaseTokenStr,@"nmPrdClaimId": nmPrdClaimIdStr,@"purchaseBean":purchaseBeanStr,@"purchaseGoldAmount":cell.moneyTextField.text,@"purchaseMoney": self.purchaseMoneyStr,@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"workshopCode":_gCCodeTextField.text};
+    NSString *gcMaStr = _gCCodeTextField.text == nil ? @"" :_gCCodeTextField.text;
+    
+    NSDictionary *paramDict = @{@"nmPurchaseToken":self.nmPurchaseTokenStr,@"nmPrdClaimId": nmPrdClaimIdStr,@"purchaseBean":purchaseBeanStr,@"purchaseGoldAmount":cell.moneyTextField.text,@"purchaseMoney": self.purchaseMoneyStr,@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"workshopCode":gcMaStr};
     
     [[NetworkModule sharedNetworkModule] newPostReq:paramDict tag:kSXTagGetPurchaseGold owner:self signature:YES Type:SelectAccoutTypeGold];
 }
