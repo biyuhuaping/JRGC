@@ -74,6 +74,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *feedBackDetailLab; //邀请返利明细
 @property (weak, nonatomic) IBOutlet UIButton *friendUnFeedBackLab;//好友未回款
 @property (weak, nonatomic) IBOutlet UIButton *friendFeedBackLab;//好友已回款
+@property (weak, nonatomic) IBOutlet UIView *moveLineView;
 
 @end
 
@@ -83,11 +84,17 @@
     [super viewDidLoad];
     [self addLeftButton];
     if (self.accoutType == SelectAccoutTypeGold) {
-        baseTitleLabel.text = @"黄金邀请返利";
-        _friendCountLab.text = @"邀请购买人数:0人";
+        baseTitleLabel.text = @"黄金返利";
         [_friendUnFeedBackLab setTitle:@"好友未回金" forState:UIControlStateNormal];
         [_friendFeedBackLab setTitle:@"好友已回金" forState:UIControlStateNormal];
-        
+        _friendCountLab.text = [NSString stringWithFormat:@"邀请购买人数:%@人",_feedBackDictionary[@"friendCount"]];
+        _sumCommLab.text = [NSString stringWithFormat:@"¥%@",_feedBackDictionary[@"sumComm"]];
+        _recCountLab.text = [NSString stringWithFormat:@"邀请注册人数：%@人",_feedBackDictionary[@"recCount"]];
+        [_feedBackDetailLab setTitleColor:UIColorWithRGB(0xffc027) forState:UIControlStateSelected];
+        [_friendUnFeedBackLab setTitleColor:UIColorWithRGB(0xffc027) forState:UIControlStateSelected];
+        [_friendFeedBackLab setTitleColor:UIColorWithRGB(0xffc027) forState:UIControlStateSelected];
+        _moveLineView.backgroundColor = UIColorWithRGB(0xffc027);
+
     } else {
         baseTitleLabel.text = self.accoutType  == SelectAccoutTypeHoner ?  @"尊享返利":@"微金返利";
     }
@@ -286,8 +293,9 @@
     for (UIButton *btn in self.itemChangeView.subviews) {
         if (btn.tag == 100 + _index) {
             btn.selected = YES;
-        }else if ([btn respondsToSelector:@selector(setSelected:)])
+        } else if ([btn respondsToSelector:@selector(setSelected:)]) {
             btn.selected = NO;
+        }
     }
     if (![_didClickBtns containsObject:@(_index)]) {
         [_didClickBtns addObject:@(_index)];
@@ -434,15 +442,6 @@
     }
     return headerView;
 }
-//
-//- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
-//    if (section == _dataArr1.count-1) {
-//        return nil;
-//    }
-//    UIView *footerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 10)];
-//    footerView.backgroundColor = UIColorWithRGB(0xE6E6EA);
-//    return footerView;
-//}
 
 //每组几行，默认为1
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -539,22 +538,13 @@
             NSDictionary * dic = _dataArr1[indexPath.section][indexPath.row];
             cell.title1.text = dic[@"prdClaimsName"];//标名称
             id status = dic[@"status"];
-//            cell.title2.text = dic[@"tradeTime"];;
             cell.imag.hidden = YES;
-            
-            
-            cell.title_1.text = _titleArr1[2];
+            cell.title_1.text = _titleArr1[[status intValue]];
             cell.title_2.text = dic[@"applyName"];//投资人
             cell.title_3.text = dic[@"tradeTime"];//投资日期
             NSString *qxdate = [dic objectSafeForKey: @"startingDate"];
             cell.title_7.text = qxdate.length > 0 ? qxdate :@"--" ;//起息日期
-            
-            
-            
-            
-            
-            
-            cell.title_4.text = [NSString stringWithFormat:@"%@",dic[@"purchaseAmount"]];//投资本金
+            cell.title_4.text = [NSString stringWithFormat:@"%@g",dic[@"purchaseAmount"]];//投资本金
             float tableViewRowHeight = 278;
             //判断好友返利是否为0.0
 //            NSString *commissionAmt = [dic[@"commissionAmt"] stringByReplacingOccurrencesOfString:@"￥" withString:@""];
@@ -591,24 +581,20 @@
                 cell.lab2.text = dic[@"periodTerm"];//30天
             }
             cell.lab3.text = dic[@"repayModetext"];//一次结清
-            
             if ([[dic objectSafeForKey:@"annualRate"] isEqualToString:@""]) {
                 cell.title1TopConstraint.constant = 28;
             }else{
                 cell.title1TopConstraint.constant = 21;
             }
-            if ([cell.title_1.text isEqualToString:@"回款中"]) {
-                cell.title_1.textColor = UIColorWithRGB(0x4aa1f9);
-            } else if ([cell.title_1.text isEqualToString:@"招标中"]){
-                cell.title_1.textColor = UIColorWithRGB(0xF9333C);//那种红
+            if ([cell.title_1.text isEqualToString:@"回金中"]) {
+                cell.title_1.textColor = UIColorWithRGB(0xffc027);
+            } else if ([cell.title_1.text isEqualToString:@"认购中"]){
+                cell.title_1.textColor = UIColorWithRGB(0x4aa1f9);//那种红0x4aa1f9
             } else if ([cell.title_1.text isEqualToString:@"满标"]){
-                cell.title_1.textColor = UIColorWithRGB(0xfa4d4c);
+                cell.title_1.textColor = UIColorWithRGB(0xffc027);
             } else{
                 cell.title_1.textColor = UIColorWithRGB(0x999999);
             }
-
-            
-            
         } else {
             NSDictionary * dic = _dataArr1[indexPath.section][indexPath.row];
             id status = dic[@"status"];
@@ -698,24 +684,42 @@
                 cell.payGoldGram.text = @"回金克重";
             }
         }
-        cell.lab1.text = _dataArr2[indexPath.section][indexPath.row][@"realName"];//姓名
-        cell.lab2.text = _dataArr2[indexPath.section][indexPath.row][@"mobile"];//手机号
-        
-        
-        int maxPerNo = [_dataArr2[indexPath.section][indexPath.row][@"maxPerNo"]intValue];//总几期
-        NSString *repayperno = _dataArr2[indexPath.section][indexPath.row][@"repayPerNo"];//第几期
-        NSString *string = [NSString stringWithFormat:@"(第%@期/共%d期)",repayperno,maxPerNo];
-        
-        if (maxPerNo > 0) {
-            cell.planLabel.text = [NSString stringWithFormat:@"计划回款日%@",string];//回款日
-        }else{
-            cell.planLabel.text = @"计划回款日";
+        if (self.accoutType == SelectAccoutTypeGold) {
+            cell.lab1.text = _dataArr2[indexPath.section][indexPath.row][@"applyName"];//姓名
+            cell.lab2.text = _dataArr2[indexPath.section][indexPath.row][@"phone"];//手机号
+//            int maxPerNo = [_dataArr2[indexPath.section][indexPath.row][@"maxPerNo"]intValue];//总几期
+//            NSString *repayperno = _dataArr2[indexPath.section][indexPath.row][@"repayPerNo"];//第几期
+//            NSString *string = [NSString stringWithFormat:@"(第%@期/共%d期)",repayperno,maxPerNo];
+            
+//            if (maxPerNo > 0) {
+//                cell.planLabel.text = [NSString stringWithFormat:@"计划回款日%@",string];//回款日
+//            }else{
+                cell.planLabel.text = @"计划回金日";
+//            }
+//            [cell.planLabel setFontColor:UIColorWithRGB(0x999999) string:string];
+            
+            cell.lab3.text = _dataArr2[indexPath.section][indexPath.row][@"refundPerDate"] ;//计划回款日
+            NSString *refundAmtStr = _dataArr2[indexPath.section][indexPath.row][@"planRefundAmount"];
+            cell.lab4.text = [refundAmtStr hasPrefix:@"*"] ? refundAmtStr : [NSString stringWithFormat:@"%@g",refundAmtStr];//回款金额
+        } else {
+            cell.lab1.text = _dataArr2[indexPath.section][indexPath.row][@"realName"];//姓名
+            cell.lab2.text = _dataArr2[indexPath.section][indexPath.row][@"mobile"];//手机号
+            int maxPerNo = [_dataArr2[indexPath.section][indexPath.row][@"maxPerNo"]intValue];//总几期
+            NSString *repayperno = _dataArr2[indexPath.section][indexPath.row][@"repayPerNo"];//第几期
+            NSString *string = [NSString stringWithFormat:@"(第%@期/共%d期)",repayperno,maxPerNo];
+            
+            if (maxPerNo > 0) {
+                cell.planLabel.text = [NSString stringWithFormat:@"计划回款日%@",string];//回款日
+            }else{
+                cell.planLabel.text = @"计划回款日";
+            }
+            [cell.planLabel setFontColor:UIColorWithRGB(0x999999) string:string];
+            
+            cell.lab3.text = _dataArr2[indexPath.section][indexPath.row][@"repayPerDate"] ;//计划回款日
+            NSString *refundAmtStr = _dataArr2[indexPath.section][indexPath.row][@"refundAmt"];
+            cell.lab4.text = [refundAmtStr hasPrefix:@"*"] ? refundAmtStr : [NSString stringWithFormat:@"¥%@",refundAmtStr];//回款金额
         }
-        [cell.planLabel setFontColor:UIColorWithRGB(0x999999) string:string];
-      
-        cell.lab3.text = _dataArr2[indexPath.section][indexPath.row][@"repayPerDate"] ;//计划回款日
-        NSString *refundAmtStr = _dataArr2[indexPath.section][indexPath.row][@"refundAmt"];
-        cell.lab4.text = [refundAmtStr hasPrefix:@"*"] ? refundAmtStr : [NSString stringWithFormat:@"¥%@",refundAmtStr];//回款金额
+
         return cell;
     }else if (tableView == _tableView3){//好友已回款列表
         static  NSString *indentifier = @"FriendRecCell1";
@@ -730,24 +734,32 @@
                 cell.actulPayDateLab.text = @"实际回金日";
             }
         }
-        cell.lab1.text = _dataArr3[indexPath.section][indexPath.row][@"realName"];//姓名
-        cell.lab2.text = _dataArr3[indexPath.section][indexPath.row][@"mobile"];//手机号
-        
-        
-        int maxPerNo = [_dataArr3[indexPath.section][indexPath.row][@"maxPerNo"]intValue];//总几期
-        NSString *repayperno = _dataArr3[indexPath.section][indexPath.row][@"repayPerNo"];//第几期
-        NSString *string = [NSString stringWithFormat:@"(第%@期/共%d期)",repayperno,maxPerNo];
-        if (maxPerNo > 0) {
-            cell.planLabel.text = [NSString stringWithFormat:@"计划回款日%@",string];//回款日
-        }else{
-            cell.planLabel.text = @"计划回款日";
+        if (self.accoutType == SelectAccoutTypeGold) {
+            cell.lab1.text = _dataArr3[indexPath.section][indexPath.row][@"applyName"];//姓名
+            cell.lab2.text = _dataArr3[indexPath.section][indexPath.row][@"phone"];//手机号
+            cell.planLabel.text = @"计划回金日";
+            cell.lab3.text = _dataArr3[indexPath.section][indexPath.row][@"refundPerDate"] ;//计划回款日
+            NSString *refundAmtStr = _dataArr3[indexPath.section][indexPath.row][@"planRefundAmount"];
+            cell.lab4.text = [refundAmtStr hasPrefix:@"*"] ? refundAmtStr : [NSString stringWithFormat:@"%@g",refundAmtStr];//回款金额
+        } else {
+            cell.lab1.text = _dataArr3[indexPath.section][indexPath.row][@"realName"];//姓名
+            cell.lab2.text = _dataArr3[indexPath.section][indexPath.row][@"mobile"];//手机号
+            int maxPerNo = [_dataArr3[indexPath.section][indexPath.row][@"maxPerNo"]intValue];//总几期
+            NSString *repayperno = _dataArr3[indexPath.section][indexPath.row][@"repayPerNo"];//第几期
+            NSString *string = [NSString stringWithFormat:@"(第%@期/共%d期)",repayperno,maxPerNo];
+            if (maxPerNo > 0) {
+                cell.planLabel.text = [NSString stringWithFormat:@"计划回款日%@",string];//回款日
+            }else{
+                cell.planLabel.text = @"计划回款日";
+            }
+            [cell.planLabel setFontColor:UIColorWithRGB(0x999999) string:string];
+            
+            cell.lab3.text = _dataArr3[indexPath.section][indexPath.row][@"repayPerDate"];//计划回款日
+            cell.lab4.text = _dataArr3[indexPath.section][indexPath.row][@"paidTime"];//实际回款日
+            NSString *refundAmtStr = _dataArr3[indexPath.section][indexPath.row][@"refundAmt"];//计划回款日
+            cell.lab5.text = [refundAmtStr hasPrefix:@"*"] ? refundAmtStr : [NSString stringWithFormat:@"¥%@",refundAmtStr];//回款金额
         }
-        [cell.planLabel setFontColor:UIColorWithRGB(0x999999) string:string];
-        
-        cell.lab3.text = _dataArr3[indexPath.section][indexPath.row][@"repayPerDate"];//计划回款日
-        cell.lab4.text = _dataArr3[indexPath.section][indexPath.row][@"paidTime"];//实际回款日
-        NSString *refundAmtStr = _dataArr3[indexPath.section][indexPath.row][@"refundAmt"];//计划回款日
-        cell.lab5.text = [refundAmtStr hasPrefix:@"*"] ? refundAmtStr : [NSString stringWithFormat:@"¥%@",refundAmtStr];//回款金额
+
         return cell;
     }else if (tableView == _tableView4){//分期回款列表
         static  NSString *indentifier = @"ReturnedMoneyCell";
@@ -756,17 +768,21 @@
             cell = [[NSBundle mainBundle]loadNibNamed:@"ReturnedMoneyCell" owner:self options:nil][0];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
-        cell.lab1.text = _dataArr4[indexPath.row][@"repaydate"];//回款日
-        cell.lab2.text = [NSString stringWithFormat:@"第%@期",_dataArr4[indexPath.row][@"repayperno"]];//第几期
-        
-        NSString *status = _dataArr4[indexPath.row][@"status"];//回款状态
-        if ([status isEqualToString:@"0"]) {//0未还 1已还
-            cell.lab3.text = @"未还";
-            [cell.lab3 setTextColor:UIColorWithRGB(0xfd4d4c)];
-        }else{
-            cell.lab3.text = @"已还";
-            [cell.lab3 setTextColor:UIColorWithRGB(0x4aa1f9)];
+        if (self.accoutType == SelectAccoutTypeGold) {
+            
+        } else {
+            cell.lab1.text = _dataArr4[indexPath.row][@"repaydate"];//回款日
+            cell.lab2.text = [NSString stringWithFormat:@"第%@期",_dataArr4[indexPath.row][@"repayperno"]];//第几期
+            NSString *status = _dataArr4[indexPath.row][@"status"];//回款状态
+            if ([status isEqualToString:@"0"]) {//0未还 1已还
+                cell.lab3.text = @"未还";
+                [cell.lab3 setTextColor:UIColorWithRGB(0xfd4d4c)];
+            }else{
+                cell.lab3.text = @"已还";
+                [cell.lab3 setTextColor:UIColorWithRGB(0x4aa1f9)];
+            }
         }
+
         
         return cell;
     }
@@ -803,13 +819,11 @@
                 _pageNum1 ++;
             }
             if (self.accoutType == SelectAccoutTypeGold) {
-                
                 NSMutableDictionary *tmpDict = [NSMutableDictionary dictionaryWithCapacity:1];
                 [tmpDict setValue:userId forKey:@"userId"];
                 [tmpDict setValue:[NSString stringWithFormat:@"%ld",(long)_pageNum1] forKey:@"page"];
                 [tmpDict setValue:@"20" forKey:@"rows"];
                 [[NetworkModule sharedNetworkModule] newPostReq:tmpDict tag:kSXTagGoldFriendList owner:self signature:YES Type:SelectAccoutDefault];
-                
             } else {
                 NSString *strParameters = [NSString stringWithFormat:@"userId=%@&page=%ld&rows=20",userId, (long)_pageNum1];//@"1674"(long)pageNum
                 [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagFriendsList owner:self Type:self.accoutType];
@@ -1144,7 +1158,7 @@
         NSMutableArray *arr = [NSMutableArray array];
         
         if (self.accoutType == SelectAccoutTypeGold) {
-            NSString *str = _monthDataArr2[i][@"refundPerDate"];
+            NSString *str = _monthDataArr2[i][@"repayPerDate"];
             for (int j = 0; j < _dataArr_2.count; j++) {
                 NSString *dateStr = [_dataArr_2[j][@"refundPerDate"]substringToIndex:7];
                 if ([str isEqualToString:dateStr]) {

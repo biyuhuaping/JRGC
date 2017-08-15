@@ -85,9 +85,6 @@ static NetworkModule *gInstance = NULL;
         case kSXTagValidpomoCode:
             parameter = [serverIP stringByAppendingString:VALIDPOMOCODE];
             break;
-//        case kSXTagPrdClaims:
-//            parameter = [SERVER_IP stringByAppendingString:PRDCLAIMS_LIST];
-//            break;
         case kSXTagPrdTransfer:  //是否在用 老接口的债转列表
             parameter = [serverIP stringByAppendingString:PRDTRANSFER_LIST];
             break;
@@ -113,48 +110,18 @@ static NetworkModule *gInstance = NULL;
         case kSXTagAccountSafe:
             parameter = [serverIP stringByAppendingString:ACCOUNT_SAFE];
             break;
-//        case kSXTagIdentifyCard:
-//            parameter = [serverIP stringByAppendingString:IDNO_CHECKINFO];
-//            break;
-//        case kSXTagSendMessage:
-//            parameter = [SERVER_IP stringByAppendingString:SEND_MESSAGE];
-//            break;
         case kSXTagSendMessageforTicket:
             parameter = [serverIP stringByAppendingString:GET_MESSAGE_TICKET];
             break;
-//        case kSXTagUserLogout:
-//            parameter = [serverIP stringByAppendingString:USER_LOGOUT];
-//            break;
         case kSXTagDealTransferBid:
             parameter = [serverIP stringByAppendingString:DEALTRANSFERBID];
             break;
-//        case kSXTagSaveTransferDeals:
-//            parameter = [SERVER_IP stringByAppendingString:SAVETRANSFERDEALS];
-//            break;
-//        case kSXTagUpdateMobile:
-//            parameter = [SERVER_IP stringByAppendingString:UPDATE_TEL];
-//            break;
         case kSXTagKicItemList:
             parameter = [serverIP stringByAppendingString:DICITEMLIST];
             break;
-//        case kSXTagMyTradingLog:
-//            parameter = [SERVER_IP stringByAppendingString:TRADED_LOG];
-//            break;
-//        case kSXTagMyCompact:
-//            parameter = [SERVER_IP stringByAppendingString:MY_CONTRACT_LIST];
-//            break;
-//        case kSXTagMyGuarantee:
-//            parameter = [SERVER_IP stringByAppendingString:MY_GUARANTEE];
-//            break;
-//        case kSXTagMyRecommend:
-//            parameter = [SERVER_IP stringByAppendingString:MY_COMMEND];
-//            break;
         case kSXTagWorkshopCode:
             parameter = [serverIP stringByAppendingString:WORK_SHOP_CODE];
             break;
-//        case kSXTagCashAdvance:
-//            parameter = [SERVER_IP stringByAppendingString:ACT_WITHDRAW];
-//            break;
         case kSXTagPrdOrderUinvest:
             parameter = [serverIP stringByAppendingString:PRDORDERUINVEST];
             break;
@@ -164,72 +131,15 @@ static NetworkModule *gInstance = NULL;
         case kSXTagPrdOrderRefundLsit:
             parameter = [serverIP stringByAppendingString:PRDORDERREFUNDLSIT];
             break;
-//        case kSXTagPrdClaimsForeAllBorrows:
-//            parameter = [SERVER_IP stringByAppendingString:PRDCLAIMSFOREALLBORROWS];
-//            break;
-//        case kSXTagPrdClaimsForeBorrows:
-//            parameter = [SERVER_IP stringByAppendingString:PRDCLAIMSFORCEBORROWS];
-//            break;
-//        case kSXTagPrdClaimsForeDebtBorrows:
-//            parameter = [SERVER_IP stringByAppendingString:PRDCLAIMSFOREDEBTBORROWS];
-//            break;
         case kSXTagFriendsList:
             parameter = [serverIP stringByAppendingString:FRIENDS_LIST];
             break;
-
-//        case kSXTagContractPartyContractSign:
-//            parameter = [SERVER_IP stringByAppendingString:CONTRACTSIGN];
-//            break;
-//        case kSXTagContractPartyGetContent:
-//            parameter = [SERVER_IP stringByAppendingString:CONTRACTCONTENT];
-//            break;
-//        case kSXTagBankCardBaseBankMess:
-//            parameter = [SERVER_IP stringByAppendingString:BASEBANKMESS];
-//            break;
-//        case kSXTagPersonalSettingsGetTRegionList:
-//            parameter = [SERVER_IP stringByAppendingString:GETTREGIONLIST];
-//            break;
-//        case kSXTagBankCardSubmitApply:
-//            parameter = [SERVER_IP stringByAppendingString:BANKCARDSUBMITAPPLY];
-//            break;
-//        case kSXTagActWithdrawSendPhoneVerifyCode:
-//            parameter = [SERVER_IP stringByAppendingString:SENDPHONeVERIFYCODE];
-//            break;
-//        case kSXTagActWithdrawApply:
-//            parameter = [SERVER_IP stringByAppendingString:ACTWITHDRAWAPPLY];
-//            break;
-//        case kSXTagActWithdrawPickUpInterest:
-//            parameter = [SERVER_IP stringByAppendingString:PICKUPINTEREST];
-////            break;
-//        case kSXTagAccountFunds:
-//            parameter = [SERVER_IP stringByAppendingString:ACCOUNTFUNDS];
-//            break;
         case kSXTagPrdClaimsComputeIntrest:
             parameter = [serverIP stringByAppendingString:COMPUTEINTREST];
             break;
         case kSXTagNormalBidComputeIntrest:
             parameter = [serverIP stringByAppendingString:NORMALCOMPUTEINTREST];
             break;
-//        case kSXTagPrdTransferComputeIntrest:
-//            parameter = [SERVER_IP stringByAppendingString:TRANSFERCOMPUTEINTREST];
-//            break;
-            
-//        case kSXTagPRDCLAIMSFOREGUARANTORBORROWS:
-//            parameter = [SERVER_IP stringByAppendingString:PRDCLAIMSFOREGUARANTORBORROWS];
-//            break;
-//        case kSXTagPrdClaimsForeAllSubrogation:
-//            parameter = [SERVER_IP stringByAppendingString:PRDALLSUBROGATION];
-//            break;
-//        case kSXTagPrdClaimsForeTransferPay:
-//            parameter = [SERVER_IP stringByAppendingString:PRDTRANSFERPAY];
-//            break;
-//        case kSXTagPrdClaimsForeBuyBack:
-//            parameter = [SERVER_IP stringByAppendingString:PRDBUYBACK];
-//            break;
-            
-//        case kSXTagPrdClaimsForeBorrowsInfo:
-//            parameter = [SERVER_IP stringByAppendingString:PRDBORROWSINFO];
-//            break;
         case kSXTagFactoryCodeSaveRate:
             parameter = [serverIP stringByAppendingString:FACTORYCODESAVERATE];
             break;
@@ -237,33 +147,12 @@ static NetworkModule *gInstance = NULL;
         case kSXTagCalulateInstallNum:
             parameter = [serverIP stringByAppendingString:CAULATENUM];
             break;
-//        case kSXTagGetGuaGuaKa:
-//            parameter = [SERVER_IP stringByAppendingString:GETGUAGUAKA];
-//            break;
-//        case kSXTagCheckGuaCard:
-//            parameter = [SERVER_IP stringByAppendingString:CHECKGUACARD];
-//            break;
-//        case kSXTagBehavior:
-//            parameter = [SERVER_IP stringByAppendingString:USERBEHAVIOR];
-//            break;
-//        case kSXTagExchangeList:
-//            parameter = [SERVER_IP stringByAppendingString:EXCAHGELIST];
-//            break;
-//        case kSxTagApplyCard:
-//            parameter = [SERVER_IP stringByAppendingString:APPLYCARD];
-//            break;
-        case kSxTagRegistMobileCheck:
-            parameter = [serverIP stringByAppendingString:RIGISTCHECK];
-            break;
         case kSxTagRegistNameCheck: //检验用户命是否可用 暂时没用
             parameter = [serverIP stringByAppendingString:RIGISTCHECK];
             break;
         case KSxtagFriendsRegisterList:
             parameter = [serverIP stringByAppendingString:FRIENDREGISTERLIST];
             break;
-//        case kSxTagAllInverstMoney:
-//            parameter = [SERVER_IP stringByAppendingString:AllInverstMoney];
-//            break;
         case kSxTagGongDouInCome:
             parameter = [serverIP stringByAppendingString:GongDouInCome];
             break;
@@ -279,89 +168,27 @@ static NetworkModule *gInstance = NULL;
         case kSXTagCheckPomoCode:
             parameter = [serverIP stringByAppendingString:CheckPomoCode];
             break;
-
-//        case kSxTagChatFriendList:
-//            parameter = [SERVER_IP stringByAppendingString:ChatFriendList];
-//            break;
-
-//        case kSxTagCheckChatYouYunId:
-//            parameter = [SERVER_IP stringByAppendingString:CheckChatId];
-//            break;
-
-//        case kSxTagRegistyouYun:
-//            parameter = [SERVER_IP stringByAppendingString:RegistyouYun];
-//            break;
-            
-//        case kSxTagGetRedBag:
-//            parameter = [SERVER_IP stringByAppendingString:GetRedBag];
-//            break;
-
-//        case kSxTagCratchCardisExist:
-//            parameter = [SERVER_IP stringByAppendingString:IsExistSpring];
-//            break;
-//        case kSxTagKnockedRedPackage:
-//            parameter = [SERVER_IP stringByAppendingString:RedPackage];
-//            break;
         case kSxTagMyRedPackage:
             parameter = [serverIP stringByAppendingString:MyRedPackage];
             break;
-//        case kSxTagZiJinTuoGuan:
-//            parameter = [SERVER_IP stringByAppendingString:ZiJinTuoGuan];
-//            break;
-//        case kSxTagHSPayMobile:
-//            parameter = [SERVER_IP stringByAppendingString:HSPayMobile];
-//            break;
         case kSXTagKicItemList01:
             parameter = [serverIP stringByAppendingString:DICITEMLIST];
             break;
-//        case kSxTagYeePayState:
-//            parameter = [SERVER_IP stringByAppendingString:QueryYeePay];
-//            break;
         case ksxTagPayRecord:
             parameter = [serverIP stringByAppendingString:PAYRECORD];
             break;
-//        case kSXTagPaySwitch:
-//            parameter = [SERVER_IP stringByAppendingString:PAYSWITCH];
-//            break;
-//        case kSXtagBeanRecord:
-//            parameter = [SERVER_IP stringByAppendingString:QUERYBEANCOUPON];
-//            break;
         case kSXtagSelectBeanRecord:
             parameter = [serverIP stringByAppendingString:COUPSELECTBYOWER];
             break;
         case kSXtagSelectBeansInterest:
             parameter = [serverIP stringByAppendingString:BEANSINTEREST];
             break;
-//        case kSXtagInventAmt:
-//            parameter = [SERVER_IP stringByAppendingString:SELECTINVENTAMYT];
-//            break;
-//        case kSXtagBeanAllBorrows:
-//            parameter = [SERVER_IP stringByAppendingString:GONDDOUALLBORROW];
-//            break;
-//        case kSXtagBeanInCome:
-//            parameter = [SERVER_IP stringByAppendingString:GOUNGDOISHOURU];
-//            break;
-//        case kSXtagBeanExpendBorrows:
-//            parameter = [SERVER_IP stringByAppendingString:GONGDOUZHICHU];
-//            break;
-//        case kSXtagBeanOverdueBorrows:
-//            parameter = [SERVER_IP stringByAppendingString:GONGDOUGUOQI];
-//            break;
         case kSXtagHuoQuAllYOUHuiQuan:
             parameter = [serverIP stringByAppendingString:ALLYOUHUIQUANLIST];
             break;
-//        case kSXTagYeeBaoCheckBankNumPass:
-//            parameter = [SERVER_IP stringByAppendingString:YIBAOCHECKBANKSTATE];
-//            break;
         case kSXTagSingMenthod:
             parameter = [serverIP stringByAppendingString:SingMenthod];
             break;
-//        case kSXTagModifyBankCardZone:
-//            parameter = [SERVER_IP stringByAppendingString:MODIFYBANKCARDZONE];
-//            break;
-//        case kSXTagRedBagAddress:
-//            parameter = [SERVER_IP stringByAppendingString:REDBAG_ADDRESS];
-//            break;
         case kSXTagCheckMyMoney:
             parameter = [serverIP stringByAppendingString:CHECKMYMONEY];
             break;
@@ -371,9 +198,6 @@ static NetworkModule *gInstance = NULL;
         case kSXTagTransfersOrder:
             parameter = [serverIP stringByAppendingString:TransfersOrder];
             break;
-//        case kSXTagIsBetaVerSion:
-//            parameter = [SERVER_IP stringByAppendingString:CHECKBETAVER];
-//            break;
         case kSXTagSignDaysAndIsSign:
             parameter = [serverIP stringByAppendingString:SignDaysAndIsSign];
             break;
@@ -390,12 +214,6 @@ static NetworkModule *gInstance = NULL;
         case kSXTagCheckPersonRedPoint:
             parameter = [serverIP stringByAppendingString:CHECKPERSONCENTERREDALERT];
             break;
-//        case kSXTagGetIgnorgeLogin:
-//            parameter = [SERVER_IP stringByAppendingString:GETIGNORGELOGINTOKEN];
-//            break;
-//        case kSXTagGetMSGCenter:
-//            parameter = [serverIP stringByAppendingString:MSGCENTER];
-            break;
         case kSXTagGetMSGDetail:
             parameter = [serverIP stringByAppendingString:MSGCENTERDETAIL];
             break;
@@ -405,27 +223,9 @@ static NetworkModule *gInstance = NULL;
         case kSXTagUpdateUserDisPermission:
             parameter = [serverIP stringByAppendingString:UPDATEUSERDISPERMISSION];
             break;
-//        case kSXTagGetUserCouponFxCount:
-//            parameter = [SERVER_IP stringByAppendingString:USERCOUPONFXCOUNT];
-//            break;
-//        case KSXTagMsgListSignAllRead:
-//            parameter = [serverIP stringByAppendingString:MSGSIGNALLREAD];
-//            break;
         case KSXTagMsgListSignRead:
             parameter = [serverIP stringByAppendingString:MSGSIGNREAD];
             break;
-//        case KSXTagMsgListRemoveTMsg:
-//            parameter = [serverIP stringByAppendingString:MSGREOMETMSG];
-//            break;
-//        case kSXTagGetRedPointMessage:
-//            parameter = [SERVER_IP stringByAppendingString:GETREDPOINTMDSSAGE];
-//            break;
-//        case kSXTagGetWorkPoint:
-//            parameter = [SERVER_IP stringByAppendingString:GETWORKPOINT];
-//             break;
-//        case kSXTagContributionValueInvot:
-//            parameter = [serverIP stringByAppendingString:GETCONTRIBUTIONVALUEINVOT];
-//            break;
         case kSXTagFaceInfoCollection:
             parameter = [serverIP stringByAppendingString:FACEINFOCOLLECTION];
             break;
@@ -441,14 +241,6 @@ static NetworkModule *gInstance = NULL;
         case kSXTagFaceInfoStore:
             parameter = [serverIP stringByAppendingString:FACEINFOSTORE];
             break;
-
-//        case kSXTagChoseBranchBank:
-//            parameter = [SERVER_IP stringByAppendingString:CHOSEBRANCHBANK];
-//            break;
-
-//        case kSXTagChooseBankList:
-//            parameter = [SERVER_IP stringByAppendingString:CHOOSEBANKLIST];
-//            break;
         case kSXTagRegistResult:
             parameter = [serverIP stringByAppendingString:REGISTRESULT];
             break;
@@ -1364,13 +1156,17 @@ static NetworkModule *gInstance = NULL;
             break;
         case kSXTagGoldFriendList:
             parameter = [NEW_SERVER_IP stringByAppendingString:GOLD_FRIENDS_LIST];
-            parameter = @"http://10.10.100.112/mockjsdata/13/invite_rebate_detail.json?";
+//            parameter = @"http://10.10.100.112/mockjsdata/13/invite_rebate_detail.json?";
             break;
         case kSXTagGoldRecommendRefund:
             parameter = [SERVER_IP stringByAppendingString:GOLD_RecommendRefund];
+//            parameter = @"http://10.10.100.112/mockjsdata/13/friendslist.json?";
             break;
         case kSXTagGoldLimitedBankList://黄金充值受限的银行列表
             parameter = [NEW_SERVER_IP stringByAppendingString:GOLDLIMITEDBANKLIST];
+            break;
+        case kSxTagRegistMobileCheck:
+            parameter = [NEW_SERVER_IP stringByAppendingString:RIGISTCHECK];
             break;
     }
     //给原有参数字典添加公共参数

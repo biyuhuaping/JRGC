@@ -126,7 +126,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     if (section == 0) {
-        return 32;
+        return 20;
     }
     else if (section == 4) {
         return 25;
@@ -138,7 +138,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     if (section == 1) {
-        return 18;
+        return 16;
     }
     else if (section == 4) {
         return 15;
@@ -157,10 +157,10 @@
         goldRechargeHeader.backgroundColor = UIColorWithRGB(0xebebee);
     }
     if (section == 0) {
-        goldRechargeHeader.frame = CGRectMake(0, 0, ScreenWidth, 32);
+        goldRechargeHeader.frame = CGRectMake(0, 0, ScreenWidth, 20);
     }
     else if (section == 1) {
-        goldRechargeHeader.frame = CGRectMake(0, 0, ScreenWidth, 15);
+        goldRechargeHeader.frame = CGRectMake(0, 0, ScreenWidth, 0.001);
     }
     else if (section == 2) {
         goldRechargeHeader.frame = CGRectMake(0, 0, ScreenWidth, 0.001);
@@ -177,7 +177,7 @@
         goldRechargeFooter.restorationIdentifier = cellId;
         goldRechargeFooter.backgroundColor = UIColorWithRGB(0xebebee);
     }
-    if (section == 1 || section == 2) {
+    if (section == 1) {
         goldRechargeFooter.frame = CGRectMake(0, 0, ScreenWidth, 15);
     }
     else {
@@ -262,13 +262,13 @@
         return (ScreenWidth - 40) * 0.5;
     }
     else if (indexPath.section == 1) {
-        return 22;
+        return 21;
     }
     else if (indexPath.section == 2) {
         return 37;
     }
     else if (indexPath.section == 3) {
-        return 22;
+        return 21;
     }
     else if (indexPath.section == 4) {
         return 37;
