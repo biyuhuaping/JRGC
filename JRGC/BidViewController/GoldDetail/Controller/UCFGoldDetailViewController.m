@@ -48,6 +48,7 @@
     CGFloat curProcess;
     
     CGFloat pauseInfoHeight;//暂停信息高度
+    CGFloat goldHeaderViewHeight;//黄金标详情头View的高度
 }
 
 @property(nonatomic,strong) IBOutlet UIScrollView *oneScroll;
@@ -56,6 +57,7 @@
 @property (weak, nonatomic) IBOutlet UIView *investBgView;
 
 @property (nonatomic,strong)UCFGoldDetailHeaderView  *goldHeaderView;
+@property (nonatomic,strong)UCFGoldCurrentDetailHeaderView  *goldCurrentHeaderView;
 @property (nonatomic,strong)UCFGoldModel *goldModel;
 @property (nonatomic,strong)NSArray  *contractArray;//合同数组
 @property (nonatomic,strong)NSArray *purchaseRecordListArray;//购买记录
@@ -83,8 +85,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-   
-    
     [self infoGoldData];
     [self addnavigationBar];
   
@@ -94,6 +94,7 @@
 }
 -(void)infoGoldData
 {
+//    self.isGoldCurrentAccout = YES;
      self.goldModel = [UCFGoldModel goldModelWithDict:[_dataDict objectSafeDictionaryForKey:@"result"]];
     self.contractArray = [[_dataDict objectSafeDictionaryForKey:@"result"] objectSafeArrayForKey:@"contractList"];
     self.purchaseRecordListArray = [[_dataDict objectSafeDictionaryForKey:@"result"] objectSafeArrayForKey:@"purchaseRecordList"];
@@ -230,17 +231,26 @@
     [_oneScroll setBackgroundColor:UIColorWithRGB(0xebebee)];
     [self.view addSubview:_oneScroll];
     [_oneScroll bringSubviewToFront:self.investBgView];
-    [self drawPullingView];
+//    [self drawPullingView];
     
     
-    self.goldHeaderView  = [[[NSBundle mainBundle]loadNibNamed:@"UCFGoldDetailHeaderView" owner:nil options:nil] firstObject];
-    self.goldHeaderView.frame = CGRectMake(0, 0, ScreenWidth, 225);
-    self.goldHeaderView.goldModel = self.goldModel;
-    [self.oneScroll addSubview:self.goldHeaderView];
+    if (self.isGoldCurrentAccout)//是活期标的标头
+    {
+        self.goldCurrentHeaderView  = [[[NSBundle mainBundle]loadNibNamed:@"UCFGoldDetailHeaderView" owner:nil options:nil] lastObject];
+        self.goldCurrentHeaderView.frame = CGRectMake(0, 0, ScreenWidth, 225);
+        self.goldCurrentHeaderView.goldModel = self.goldModel;
+        [self.oneScroll addSubview:self.goldCurrentHeaderView];
+        goldHeaderViewHeight =  CGRectGetMaxY(self.goldCurrentHeaderView.frame);
+    }else
+    {
+        self.goldHeaderView  = [[[NSBundle mainBundle]loadNibNamed:@"UCFGoldDetailHeaderView" owner:nil options:nil] firstObject];
+        self.goldHeaderView.frame = CGRectMake(0, 0, ScreenWidth, 225);
+        self.goldHeaderView.goldModel = self.goldModel;
+        [self.oneScroll addSubview:self.goldHeaderView];
+        goldHeaderViewHeight = CGRectGetMaxY(self.goldHeaderView.frame);
+        [self progressAnimiation];
+    }
     
-    [self progressAnimiation];
-    
-
     if (Progress == 1 || [self.goldModel.status intValue] == 2) {
         self.GoldInvestmentBtn.backgroundColor = UIColorWithRGB(0xcccccc);
         [self.GoldInvestmentBtn setTitle:@"已售罄" forState:UIControlStateNormal];
@@ -279,7 +289,7 @@
     }else{
         
         if (self.goldModel.pauseInfo) {
-            UIView *pauseInfoView  = [[UIView alloc] initWithFrame:CGRectMake(0,CGRectGetMaxY(self.goldHeaderView.frame), ScreenWidth, pauseInfoHeight + 10)];
+            UIView *pauseInfoView  = [[UIView alloc] initWithFrame:CGRectMake(0,goldHeaderViewHeight, ScreenWidth, pauseInfoHeight + 10)];
             pauseInfoView.backgroundColor = [UIColor clearColor];
             
             UILabel *buyCueDesTipLabel = [[UILabel alloc]initWithFrame:CGRectMake(15 , 5 , ScreenWidth - 30 , pauseInfoHeight )];
@@ -330,7 +340,7 @@
     if (self.goldModel.pauseInfo) {
         bottomViewYPos  = 30 + pauseInfoHeight + 5;
     }
-    UIView *markBg = [[UIView alloc] initWithFrame:CGRectMake(0,CGRectGetMaxY(self.goldHeaderView.frame), ScreenWidth, bottomViewYPos)];
+    UIView *markBg = [[UIView alloc] initWithFrame:CGRectMake(0,goldHeaderViewHeight, ScreenWidth, bottomViewYPos)];
     if (self.goldModel.pauseInfo) {
         UIView *pauseInfoView  = [[UIView alloc] initWithFrame:CGRectMake(0,30 , ScreenWidth, pauseInfoHeight + 5)];
         pauseInfoView.backgroundColor = [UIColor clearColor];
@@ -459,7 +469,7 @@
 
 {
     int row = 4;
-    float view_y =  0 + CGRectGetMaxY(self.goldHeaderView.frame) + bottomViewYPos;
+    float view_y =  0 + goldHeaderViewHeight + bottomViewYPos;
     
     bottomBkView = [[UIView alloc] initWithFrame:CGRectMake(0, view_y, ScreenWidth, 44*row)];
     bottomBkView.backgroundColor = [UIColor whiteColor];
@@ -544,7 +554,52 @@
     _buyServiceRateLabel.text = [NSString stringWithFormat:@"¥%.2f",[self.goldModel.buyServiceRate floatValue]];
     
     
-    [self drawPullingView];
+    if (self.isGoldCurrentAccout) {
+        [self addInformationView];
+    }else{
+        [self drawPullingView];
+    }
+}
+-(void)addInformationView
+{
+    
+    
+    UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 47)];
+    headView.backgroundColor = UIColorWithRGB(0xebebee);
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 10, ScreenWidth,37)];
+    view.backgroundColor = UIColorWithRGB(0xf9f9f9);
+    UILabel *labelTitle = [[UILabel alloc] initWithFrame:CGRectMake(25/2.0, 12, ScreenWidth/2, 16)];
+    labelTitle.text = @"补充说明";
+    labelTitle.textColor = UIColorWithRGB(0x333333);
+    labelTitle.backgroundColor = [UIColor clearColor];
+    labelTitle.font = [UIFont systemFontOfSize:14];
+    [view addSubview:labelTitle];
+    [headView addSubview:view];
+    
+    [self viewAddLine:headView Up:NO];
+    [self viewAddLine:view Up:YES];
+
+    NSString *textStr = @"使用“共享宝马”的程序和共享脚踏车类似，用户只需扫描车上二维码下载该共享汽车品牌的应用，注册并上传驾驶证缴纳999元押金，找到车辆后通过应用可打开车门。\n进入车内需要经过两大安全系统“检测”：人脸视频系统、红外线酒精测试系统，才可将车子开走。\n有消息称，在沈阳投放之后，宝马会先在北上广等一线城市进行投放，随后还会覆盖到全国各个城市。\n使用“共享宝马”的程序和共享脚踏车类似，用户只需扫描车上二维码下载该共享汽车品牌的应用，注册并上传驾驶证缴纳999元押金，找到车辆后通过应用可打开车门。进入车内需要经过两大安全系统“检测”：人脸视频系统、红外线酒精测试系统，才可将车子开走。\n有消息称，在沈阳投放之后，宝马会先在北上广等一线城市进行投放，随后还会覆盖到全国各个城市。";
+    
+    CGSize size =  [Common getStrHeightWithStr:textStr AndStrFont:12 AndWidth:ScreenWidth - 30 AndlineSpacing:3];
+    UILabel *textLabel = [UILabel labelWithFrame:CGRectZero text:@"12个月" textColor:UIColorWithRGB(0x555555) font:[UIFont systemFontOfSize:12]];
+    textLabel.tag = 100;
+    textLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    textLabel.textAlignment = NSTextAlignmentLeft;
+    textLabel.numberOfLines = 0;
+    textLabel.text = textStr;
+    textLabel.frame = CGRectMake(15, CGRectGetMaxY(headView.frame)+10,ScreenWidth - 30 , size.height+20);
+    NSDictionary *dic = [Common getParagraphStyleDictWithStrFont:12.0f WithlineSpacing:3.0];
+//    textStr = [textStr stringByReplacingOccurrencesOfString:@"\\n" withString:@"\n"];
+    textLabel.attributedText = [NSString getNSAttributedString:textStr labelDict:dic];
+   
+    
+    UIView *informationBgView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(bottomBkView.frame),ScreenWidth,CGRectGetMaxY(textLabel.frame)+10)];
+    informationBgView.backgroundColor = [UIColor whiteColor];
+    [informationBgView addSubview:headView];
+    [informationBgView addSubview:textLabel];
+    [_oneScroll addSubview:informationBgView];
+    [_oneScroll setContentSize:CGSizeMake(ScreenWidth, CGRectGetMaxY(informationBgView.frame))];
 }
 
 
@@ -944,15 +999,16 @@
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
+//          NSLog(@"scrollView.contentOffset.y---->>>>>>%f",scrollView.contentOffset.y);
     CGFloat offsetFloat;
     if (kIS_Iphone4) {
-        offsetFloat = 64;
+        offsetFloat = _isGoldCurrentAccout ? 170 : 64;
     } else {
-        offsetFloat = 80;
+        offsetFloat = _isGoldCurrentAccout ? 120 : 80;
     }
     NSInteger tag = scrollView.tag;
     if (tag == 1002) {
-        NSLog(@"scrollView.contentOffset.y---->>>>>>%f",scrollView.contentOffset.y);
+//        NSLog(@"scrollView.contentOffset.y---->>>>>>%f",scrollView.contentOffset.y);
       if (scrollView.contentOffset.y < -50) {
             [_oneScroll setContentOffset:CGPointMake(0, 0) animated:YES];
 //            [_delegate toUpView];
@@ -973,6 +1029,7 @@
             [self addTopSegment];
         }
     }  else if (tag == 1001) {
+//         NSLog(@"111111scrollView.contentOffset.y---->>>>>>%f",scrollView.contentOffset.y);
         if (scrollView.contentOffset.y > offsetFloat) {
             if (!_oneScrollPull) {
                 [self addTopSegment];
@@ -1087,6 +1144,7 @@
         {
             UCFGoldPurchaseViewController *goldAuthorizationVC = [[UCFGoldPurchaseViewController alloc]initWithNibName:@"UCFGoldPurchaseViewController" bundle:nil];
             goldAuthorizationVC.dataDic = dataDict;
+            goldAuthorizationVC.isGoldCurrentAccout = self.isGoldCurrentAccout;
             [self.navigationController pushViewController:goldAuthorizationVC  animated:YES];
         }
         else

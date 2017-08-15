@@ -19,22 +19,22 @@
 @property (strong, nonatomic) IBOutlet UILabel *nmPrdClaimNameLab;     //标名称
 
 @property (strong, nonatomic) IBOutlet UILabel *annualRateLab; //年化赠金利率
-@property (strong, nonatomic) IBOutlet UILabel *realGoldPriceLab;   //还款方式
+@property (strong, nonatomic) IBOutlet UILabel *realGoldPriceLab;   //实时金价
 @property (strong, nonatomic) IBOutlet UILabel *periodTermLab;   //投资期限
 @property (strong, nonatomic) IBOutlet UILabel *remainAmountLab;   //可投金额
 @property (weak, nonatomic) IBOutlet UIButton *GoldInvestButton;
 @property (strong, nonatomic) IBOutlet UCFAngleView *angleGoldView;
 @property (weak, nonatomic) IBOutlet CircleProgressView *progressGoldView;
-/*
- 
- annualRate;
- nmPrdClaimName;
- 
- periodTe
- ;
- remainAmount;
- totalAmount;
- */
+
+- (void)setGoldInvestItemInfo:(UCFGoldModel *)aItemInfo;
+@end
+
+
+@interface UCFGoldCurrrntInvestmentCell : UITableViewCell
+@property (strong, nonatomic) IBOutlet UILabel *nmPrdClaimNameLab;     //标名称
+@property (strong, nonatomic) IBOutlet UILabel *annualRateLab; //年化赠金利率
+@property (strong, nonatomic) IBOutlet UILabel *realGoldPriceLab;   //实时金价
+@property (strong, nonatomic) IBOutlet UCFAngleView *angleGoldView;
 
 - (void)setGoldInvestItemInfo:(UCFGoldModel *)aItemInfo;
 @end
