@@ -92,7 +92,7 @@
         baseTitleLabel.text = @"微金邀请返利";
         _gold_secondView.hidden = YES;
     } else if (self.accoutType == SelectAccoutTypeGold) {
-        baseTitleLabel.text = @"邀请返利";
+        baseTitleLabel.text = @"黄金邀请返利";
         _secondViewHeight.constant = 44;
         _gold_secondView.hidden = NO;
         _feedBackLabYCenter.constant = - 12;

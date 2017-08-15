@@ -578,7 +578,7 @@
             if ([dic[@"holdTime"]length] > 0) {
                 cell.lab2.text = [NSString stringWithFormat:@"%@~%@",dic[@"holdTime"],dic[@"repayPeriodtext"]];//投资期限
             }else{
-                cell.lab2.text = dic[@"periodTerm"];//30天
+                cell.lab2.text =[NSString stringWithFormat:@"%@",dic[@"periodTerm"]];//30天
             }
             cell.lab3.text = dic[@"repayModetext"];//一次结清
             if ([[dic objectSafeForKey:@"annualRate"] isEqualToString:@""]) {

@@ -256,6 +256,9 @@ static NetworkModule *gInstance = NULL;
         case kSXTagRegistCheckQUDAO:
             parameter = [serverIP stringByAppendingString:RegistCheckQdIsLimit];
             break;
+        case kSXTagContractDownLoad:
+            parameter = [serverIP stringByAppendingString:DOWNLOADCONTRACT];
+            break;
 
     }
 
@@ -332,6 +335,7 @@ static NetworkModule *gInstance = NULL;
     DBLOG(@"%@",url);
 
     [req postData:data delegate:self];
+
 }
 
 - (void)cancel:(kSXTag)tag
