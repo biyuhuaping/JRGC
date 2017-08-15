@@ -84,7 +84,7 @@
     [super viewDidLoad];
     [self addLeftButton];
     if (self.accoutType == SelectAccoutTypeGold) {
-        baseTitleLabel.text = @"黄金返利";
+        baseTitleLabel.text = @"黄金邀请返利";
         [_friendUnFeedBackLab setTitle:@"好友未回金" forState:UIControlStateNormal];
         [_friendFeedBackLab setTitle:@"好友已回金" forState:UIControlStateNormal];
         _friendCountLab.text = [NSString stringWithFormat:@"邀请购买人数:%@人",_feedBackDictionary[@"friendCount"]];
