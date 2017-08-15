@@ -10,7 +10,7 @@
 #import "UCFGoldAccountHeadView.h"
 #import "UCFSettingItem.h"
 #import "UCFCellStyleModel.h"
-#import "UCFGoldCashViewController.h"
+//#import "UCFGoldCashViewController.h"
 #import "GoldTransactionRecordViewController.h"
 #import "UCFGoldRechargeViewController.h"
 #import "GoldAccountFirstCell.h"
@@ -25,6 +25,9 @@
 #import "UCFInvitationRebateViewController.h"
 #import "UILabel+Misc.h"
 #import "UCFFeedBackViewController.h"
+#import "UCFGoldRaiseViewController.h"
+
+
 @interface UCFGoldAccountViewController ()<UITableViewDelegate,UITableViewDataSource, GoldAccountFirstCellDeleage>
 @property (weak, nonatomic) IBOutlet UITableView *baseTableView;
 @property (weak, nonatomic) IBOutlet UIButton *buyGoldBtn;
@@ -197,8 +200,10 @@
         feedBackVC.accoutType = SelectAccoutTypeGold;
         [self.navigationController pushViewController:feedBackVC animated:YES];
     }  else if ([model.leftTitle isEqualToString:@"增金宝"]) {
-    
-    
+        UCFGoldRaiseViewController *goldRaise = [[UCFGoldRaiseViewController alloc] initWithNibName:@"UCFGoldRaiseViewController" bundle:nil];
+        goldRaise.baseTitleText = @"增金宝";
+        [self.navigationController pushViewController:goldRaise animated:YES];
+        
     }
 }
 - (void)initData
@@ -271,7 +276,7 @@
         [_homeView skipToOtherPage:UCFHomeListTypeGlodMore];
         return;
     } else if ([title isEqualToString:@"变现"]) {
-        showStr = @"暂时没有可变现的黄金";
+//        showStr = @"暂时没有可变现的黄金";
 //        UCFGoldCashViewController *vc1 = [[UCFGoldCashViewController alloc] initWithNibName:@"UCFGoldCashViewController" bundle:nil];
 //        [self.navigationController pushViewController:vc1 animated:YES];
     } else if ([title isEqualToString:@"提金"]) {
