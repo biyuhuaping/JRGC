@@ -11,7 +11,7 @@
 #import "FullWebViewController.h"
 #import "UCFProjectDetailViewController.h"
 #import "UCFNoDataView.h"
-
+#import "UCFPurchaseWebView.h"
 @interface UCFInvestmentDetailViewController ()
 {
     UCFInvestmentDetailView *_investmentDetailView;
@@ -230,6 +230,10 @@
         }else{
             [self showHTAlertdidFinishGetUMSocialDataResponse];
         }
+    } else if (tag.intValue == kSXTagContractDownLoad) {
+        FullWebViewController *controller = [[FullWebViewController alloc] init];
+        controller.localFilePath = result;
+        [self.navigationController pushViewController:controller animated:YES];
     }
 }
 - (void)showHTAlertdidFinishGetUMSocialDataResponse
@@ -260,8 +264,8 @@
         
         if ([constract.contractDownUrl isEqualToString:@""] || constract.contractDownUrl ==nil ) {//如果合同url不存在的情况
             if ([constract.signStatus boolValue]) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message: @"系统升级，协议请登录工场微金PC端查阅！" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles: nil];
-                [alert show];
+                NSString *strParameters = [NSString stringWithFormat:@"userId=%@&prdOrderId=%@&contractType=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],self.billId,constract.contractType];
+                [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagContractDownLoad owner:self Type:self.accoutType];
                 return;
             }else{
                 _contractTitle = constract.contracttitle;

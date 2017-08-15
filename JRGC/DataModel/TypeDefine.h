@@ -229,7 +229,7 @@
 #define DISCOVERYURL    @"https://m.9888.cn/static/wap/fa-xian/index.html"     //发现
 #define RegistCheckQdIsLimit @"newuserregist/checkQdIslimit"
 #define EASYLOAN_URL    @"https://m.easyloan888.com/static/loan/3rd/index.html#/jrgc-login" //借款URL
-
+#define DOWNLOADCONTRACT @"newprdOrder/downloadContract" 
 #define USERACOUNTINFOURL  @"api/userAccount/v2/userAccountInfo.json" //P2P或尊享账户信息
 #define USERGETZUNXIANGAGREE @"api/userInfo/v2/zxAuthorization.json"
 #define USERZUNXIANGSTATE    @"api/userInfo/v2/zxIsAuthorization.json"
@@ -527,6 +527,7 @@ enum kSXTag
     kSXTagGetGoldCouponList,      //可用黄金券列表
     kSXTagGelectALLGoldCoupon,
     kSXTagGoldLimitedBankList,      //黄金受限银行的列表
+    kSXTagContractDownLoad,
 };
 
 typedef enum kSXTag kSXTag;
