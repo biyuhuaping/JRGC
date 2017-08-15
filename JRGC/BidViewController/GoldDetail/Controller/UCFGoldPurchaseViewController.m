@@ -339,10 +339,13 @@
     return markBg;
 }
 
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    
-
-    return _isShowWorkshopCode ? 3 : 2;
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    if ([_goldCouponNumStr intValue] > 0) {//有返金劵的情况
+         return _isShowWorkshopCode ? 4 : 3;
+    }else {
+        return _isShowWorkshopCode  ? 3 : 2;
+    }
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     switch (indexPath.section) {
@@ -370,22 +373,23 @@
             break;
         case 2:
         {
-            if (indexPath.row == 0) {
-                return 37;
-            } else {
-                return 67;
+            
+            if ([_goldCouponNumStr intValue] > 0) {
+                return 44;
+            }else{
+                return 37+67;
             }
         }
             break;
         case 3:
         {
-            return 44;
+            return 37+67;
         }
             break;
         default:
             break;
     }
-        return 44;
+        return 0;
 }
 //-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
 //    UIView *headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 10)];
@@ -458,9 +462,15 @@
             break;
         case 2:
         {
-            return 2;
+            return 1;
+          
         }
-
+            break;
+        case 3:
+        {
+            return 1;
+        }
+             break;
         default:
             break;
     }
@@ -474,7 +484,7 @@
     UITableViewCell *cell = [tableView  dequeueReusableCellWithIdentifier:cellId];
     if (indexPath.section == 0) {
       
-        if(_isGoldCurrentAccout)
+        if(_isGoldCurrentAccout)//活期黄金标的头cell
         {
             static NSString *cellStr1 = @"UCFGoldCurrrntInvestmentCell";
             UCFGoldCurrrntInvestmentCell *cell = [tableView dequeueReusableCellWithIdentifier:cellStr1];
@@ -501,7 +511,7 @@
             }
             return cell;
         }
-        else{
+        else{////定期黄金标的头cell
             static NSString *cellStr1 = @"UCFGoldInvestmentCell";
             UCFGoldInvestmentCell *cell = [tableView dequeueReusableCellWithIdentifier:cellStr1];
             if (cell == nil) {
@@ -560,7 +570,7 @@
             return cell;
             
         }
-    }else if (indexPath.section == 3){
+    }else if (indexPath.section == 2 && [_goldCouponNumStr intValue] > 0){
         if (!cell) {
             cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellId];
             UIView *lineView1 = [[UIView alloc] initWithFrame:CGRectMake(0, 44, ScreenWidth, 0.5)];
@@ -592,7 +602,7 @@
         availableLabel.text = [NSString stringWithFormat:@"%@张可用",_goldCouponNumStr];
         return cell;
 
-    }else if (indexPath.section == 2 && indexPath.row == 0) {
+    }else if ((indexPath.section == 2 && [_goldCouponNumStr intValue] == 0 && _isShowWorkshopCode) ||(indexPath.section == 3 && _isShowWorkshopCode)) {
         static NSString *cellStr5 = @"cell6";
         UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:cellStr5];
         if (cell == nil) {
@@ -613,17 +623,37 @@
             [textLabel setFontColor:UIColorWithRGB(0x999999) string:@"(没有推荐人可不填)"];
             textLabel.backgroundColor = [UIColor clearColor];
             [headview addSubview:textLabel];
-        }
-        return cell;
-    } else if (indexPath.section == 2 && indexPath.row == 1) {
-        static NSString *cellStr6 = @"cell7";
-        UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:cellStr6];
-        if (cell == nil) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellStr6];
-            [self addView:cell];
+            
+            
+            UIView * inputBaseView = [[UIView alloc] initWithFrame:CGRectMake(15.0f, CGRectGetMaxY(headview.frame)+ 15, ScreenWidth - 30.0f, 37.0f)];
+            inputBaseView.backgroundColor = UIColorWithRGB(0xf2f2f2);
+            inputBaseView.layer.borderColor = UIColorWithRGB(0xd8d8d8).CGColor;
+            inputBaseView.layer.borderWidth = 0.5f;
+            inputBaseView.layer.cornerRadius = 4.0f;
+            [cell.contentView addSubview:inputBaseView];
+            
+            _gCCodeTextField = [[UITextField alloc] initWithFrame:CGRectMake(10.0f, 8.5f, CGRectGetWidth(inputBaseView.frame) - 20, 20.0f)];
+            _gCCodeTextField.backgroundColor = [UIColor clearColor];
+            _gCCodeTextField.delegate = self;
+            _gCCodeTextField.returnKeyType = UIReturnKeyDone;
+            _gCCodeTextField.keyboardType = UIKeyboardTypeEmailAddress;
+            _gCCodeTextField.placeholder = @"点击填写工场码";
+            [inputBaseView addSubview:_gCCodeTextField];
+            UIView *lineView1 = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(inputBaseView.frame), ScreenWidth, 0.5)];
+            lineView1.backgroundColor = UIColorWithRGB(0xd8d8d8);
+            [cell addSubview:lineView1];
         }
         return cell;
     }
+//    else if (indexPath.section == 2 && indexPath.row == 1) {
+//        static NSString *cellStr6 = @"cell7";
+//        UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:cellStr6];
+//        if (cell == nil) {
+//            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellStr6];
+//            [self addView:cell];
+//        }
+//        return cell;
+//    }
 
     return cell;
 }
