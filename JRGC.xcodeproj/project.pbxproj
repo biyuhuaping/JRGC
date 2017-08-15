@@ -355,6 +355,8 @@
 		74A0AF0F1EC341DD009E5A57 /* NSTimer+timerBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 74A0AF0B1EC341DD009E5A57 /* NSTimer+timerBlock.m */; };
 		74A0AF101EC341DD009E5A57 /* ZZCircleProgress.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 74A0AF0C1EC341DD009E5A57 /* ZZCircleProgress.bundle */; };
 		74A0AF111EC341DD009E5A57 /* ZZCircleProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = 74A0AF0E1EC341DD009E5A57 /* ZZCircleProgress.m */; };
+		74A54A901F42CC7A00753E3B /* UCFGoldCashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74A54A8E1F42CC7A00753E3B /* UCFGoldCashViewController.m */; };
+		74A54A911F42CC7A00753E3B /* UCFGoldCashViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74A54A8F1F42CC7A00753E3B /* UCFGoldCashViewController.xib */; };
 		74AFB12A1EE8F068007DBAFC /* UCFMicroMoneyHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74AFB1291EE8F068007DBAFC /* UCFMicroMoneyHeaderView.m */; };
 		74AFB12C1EE8F072007DBAFC /* UCFMicroMoneyHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74AFB12B1EE8F072007DBAFC /* UCFMicroMoneyHeaderView.xib */; };
 		74AFB12F1EE8F848007DBAFC /* UCFTransferHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74AFB12E1EE8F848007DBAFC /* UCFTransferHeaderView.m */; };
@@ -1570,6 +1572,9 @@
 		74A0AF0C1EC341DD009E5A57 /* ZZCircleProgress.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ZZCircleProgress.bundle; sourceTree = "<group>"; };
 		74A0AF0D1EC341DD009E5A57 /* ZZCircleProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZCircleProgress.h; sourceTree = "<group>"; };
 		74A0AF0E1EC341DD009E5A57 /* ZZCircleProgress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZCircleProgress.m; sourceTree = "<group>"; };
+		74A54A8D1F42CC7A00753E3B /* UCFGoldCashViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFGoldCashViewController.h; sourceTree = "<group>"; };
+		74A54A8E1F42CC7A00753E3B /* UCFGoldCashViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFGoldCashViewController.m; sourceTree = "<group>"; };
+		74A54A8F1F42CC7A00753E3B /* UCFGoldCashViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFGoldCashViewController.xib; sourceTree = "<group>"; };
 		74AFB1281EE8F068007DBAFC /* UCFMicroMoneyHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFMicroMoneyHeaderView.h; sourceTree = "<group>"; };
 		74AFB1291EE8F068007DBAFC /* UCFMicroMoneyHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFMicroMoneyHeaderView.m; sourceTree = "<group>"; };
 		74AFB12B1EE8F072007DBAFC /* UCFMicroMoneyHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFMicroMoneyHeaderView.xib; sourceTree = "<group>"; };
@@ -4066,6 +4071,9 @@
 		74A54A8A1F42A59100753E3B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				74A54A8D1F42CC7A00753E3B /* UCFGoldCashViewController.h */,
+				74A54A8E1F42CC7A00753E3B /* UCFGoldCashViewController.m */,
+				74A54A8F1F42CC7A00753E3B /* UCFGoldCashViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -7065,6 +7073,7 @@
 				FB2858CE1BAAB583000EAA71 /* UCFMyInvestViewController.xib in Resources */,
 				7443C7241F1EFF45009669C0 /* UCFGoldCashOneCell.xib in Resources */,
 				74E140451F1C573000B17A96 /* UCFGoldRechargeHistoryController.xib in Resources */,
+				74A54A911F42CC7A00753E3B /* UCFGoldCashViewController.xib in Resources */,
 				A8CE17741EC44BF8009BD954 /* UCFWalletSelectBankCarViewController.xib in Resources */,
 				74270C9E1EC58F6800F9419B /* UCFHomeListCell.xib in Resources */,
 				747BE9D31D5B0F48007DEF32 /* UCFHuiBuinessDetailViewController.xib in Resources */,
@@ -7526,6 +7535,7 @@
 				7BA6E4C31AD6731900FE8C37 /* UIImage+MultiFormat.m in Sources */,
 				FBE265DA1B26CAB100240A79 /* UCFMyClaimCtrl.m in Sources */,
 				E3B26F481CA136F9002E87F4 /* DBColor.m in Sources */,
+				74A54A901F42CC7A00753E3B /* UCFGoldCashViewController.m in Sources */,
 				74E8042D1AE78B8F00E7250E /* BindPhoneNumViewController.m in Sources */,
 				74F4B8AE1ECAD20E00785DFC /* UCFProfitBackViewController.m in Sources */,
 				A8AD2E3E1EB979760013DB7C /* MongoliaLayerCenter.m in Sources */,

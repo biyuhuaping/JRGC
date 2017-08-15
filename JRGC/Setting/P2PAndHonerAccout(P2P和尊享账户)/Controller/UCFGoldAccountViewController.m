@@ -10,7 +10,7 @@
 #import "UCFGoldAccountHeadView.h"
 #import "UCFSettingItem.h"
 #import "UCFCellStyleModel.h"
-//#import "UCFGoldCashViewController.h"
+#import "UCFGoldCashViewController.h"
 #import "GoldTransactionRecordViewController.h"
 #import "UCFGoldRechargeViewController.h"
 #import "GoldAccountFirstCell.h"
@@ -277,8 +277,9 @@
         return;
     } else if ([title isEqualToString:@"变现"]) {
 //        showStr = @"暂时没有可变现的黄金";
-//        UCFGoldCashViewController *vc1 = [[UCFGoldCashViewController alloc] initWithNibName:@"UCFGoldCashViewController" bundle:nil];
-//        [self.navigationController pushViewController:vc1 animated:YES];
+        UCFGoldCashViewController *vc1 = [[UCFGoldCashViewController alloc] initWithNibName:@"UCFGoldCashViewController" bundle:nil];
+        vc1.baseTitleText = @"黄金变现";
+        [self.navigationController pushViewController:vc1 animated:YES];
     } else if ([title isEqualToString:@"提金"]) {
         showStr = @"暂时没有可提金的黄金";
     }
