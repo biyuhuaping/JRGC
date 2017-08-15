@@ -160,60 +160,6 @@
 }
 
 
--(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    if(section == 1)
-    {
-        NSArray *prdLabelsList = _prdLabelsList;
-        NSMutableArray *labelPriorityArr = [NSMutableArray arrayWithCapacity:4];
-        if (![prdLabelsList isEqual:[NSNull null]]) {
-            for (NSDictionary *dic in prdLabelsList) {
-                NSInteger labelPriority = [dic[@"labelPriority"] integerValue];
-                if (labelPriority > 1) {
-                        [labelPriorityArr addObject:dic[@"labelName"]];
-                }
-            }
-        }
-        if ([labelPriorityArr count] == 0) {
-            
-            bottomViewYPos = 10;
-            UIView *topView =[[UIView alloc] initWithFrame: CGRectMake(0, 0, ScreenWidth, bottomViewYPos)];
-            topView.backgroundColor = [UIColor clearColor];
-            return topView;
-        } else {
-            bottomViewYPos = 30;
-            return   [self drawMarkView:bottomViewYPos];
-        }
-    }else  if (section  == 3) {
-        
-        UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 47)];
-        headerView.backgroundColor = UIColorWithRGB(0xf9f9f9);
-
-        UIView *topView =[[UIView alloc] init];
-        topView.backgroundColor = UIColorWithRGB(0xebebee);
-        topView.frame = CGRectMake(0, 0, ScreenWidth, 10.0f);
-        [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:topView isTop:YES];
-        [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:topView isTop:NO];
-        [headerView addSubview:topView];
-        
-        UIImageView * coupImage = [[UIImageView alloc] init];
-        coupImage.image = [UIImage imageNamed:@"invest_icon_coupon.png"];
-        coupImage.tag = 2999;
-        coupImage.frame = CGRectMake(13, 10 + (37 - 25)/2.0f, 25, 25);
-        [headerView addSubview:coupImage];
-        
-        UILabel *commendLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(coupImage.frame) + 7, 10 + (37 - 14)/2, 80, 14)];
-        commendLabel.text = @"使用优惠券";
-        commendLabel.font = [UIFont systemFontOfSize:14.0f];
-        commendLabel.textColor = UIColorWithRGB(0x555555);
-        [headerView addSubview:commendLabel];
-        
-        UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 47, ScreenWidth, 0.5)];
-        lineView.backgroundColor = UIColorWithRGB(0xe3e5ea);
-        [headerView addSubview:lineView];
-        return headerView;
-    }
-    return nil;
-}
 - (UIView *)drawMarkView:(float)markHeight
 {
     UIView *markBg = [[UIView alloc] initWithFrame:CGRectMake(0,0, ScreenWidth, 30)];
@@ -391,14 +337,61 @@
     }
         return 0;
 }
-//-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
-//    UIView *headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 10)];
-//    
-//    headerView.backgroundColor = [UIColor clearColor];
-//    
-//    
-//    
-//}
+
+-(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    if(section == 1)
+    {
+        NSArray *prdLabelsList = _prdLabelsList;
+        NSMutableArray *labelPriorityArr = [NSMutableArray arrayWithCapacity:4];
+        if (![prdLabelsList isEqual:[NSNull null]]) {
+            for (NSDictionary *dic in prdLabelsList) {
+                NSInteger labelPriority = [dic[@"labelPriority"] integerValue];
+                if (labelPriority > 1) {
+                    [labelPriorityArr addObject:dic[@"labelName"]];
+                }
+            }
+        }
+        if ([labelPriorityArr count] == 0) {
+            
+            bottomViewYPos = 10;
+            UIView *topView =[[UIView alloc] initWithFrame: CGRectMake(0, 0, ScreenWidth, bottomViewYPos)];
+            topView.backgroundColor = [UIColor clearColor];
+            return topView;
+        } else {
+            bottomViewYPos = 30;
+            return   [self drawMarkView:bottomViewYPos];
+        }
+    }else  if (section == 2 && [_goldCouponNumStr intValue] > 0) {
+        
+        UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 47)];
+        headerView.backgroundColor = UIColorWithRGB(0xf9f9f9);
+        
+        UIView *topView =[[UIView alloc] init];
+        topView.backgroundColor = UIColorWithRGB(0xebebee);
+        topView.frame = CGRectMake(0, 0, ScreenWidth, 10.0f);
+        [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:topView isTop:YES];
+        [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:topView isTop:NO];
+        [headerView addSubview:topView];
+        
+        UIImageView * coupImage = [[UIImageView alloc] init];
+        coupImage.image = [UIImage imageNamed:@"invest_icon_coupon.png"];
+        coupImage.tag = 2999;
+        coupImage.frame = CGRectMake(13, 10 + (37 - 25)/2.0f, 25, 25);
+        [headerView addSubview:coupImage];
+        
+        UILabel *commendLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(coupImage.frame) + 7, 10 + (37 - 14)/2, 80, 14)];
+        commendLabel.text = @"使用优惠券";
+        commendLabel.font = [UIFont systemFontOfSize:14.0f];
+        commendLabel.textColor = UIColorWithRGB(0x555555);
+        [headerView addSubview:commendLabel];
+        
+        UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 47, ScreenWidth, 0.5)];
+        lineView.backgroundColor = UIColorWithRGB(0xe3e5ea);
+        [headerView addSubview:lineView];
+        return headerView;
+    }
+    return nil;
+}
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     
     switch (section) {
@@ -429,13 +422,16 @@
             break;
         case 2:
         {
-            return 10;
+            if ([_goldCouponNumStr intValue] > 0) {
+                return 47;
+            }else{
+                return 10;
+            }
         }
             break;
-
         case 3:
         {
-            return 37;
+            return 10;
         }
             break;
         default:
@@ -639,7 +635,7 @@
             _gCCodeTextField.keyboardType = UIKeyboardTypeEmailAddress;
             _gCCodeTextField.placeholder = @"点击填写工场码";
             [inputBaseView addSubview:_gCCodeTextField];
-            UIView *lineView1 = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(inputBaseView.frame), ScreenWidth, 0.5)];
+            UIView *lineView1 = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(inputBaseView.frame)+14.5, ScreenWidth, 0.5)];
             lineView1.backgroundColor = UIColorWithRGB(0xd8d8d8);
             [cell addSubview:lineView1];
         }
