@@ -51,11 +51,7 @@
 - (void)setIndexPath:(NSIndexPath *)indexPath
 {
     _indexPath = indexPath;
-    if (indexPath.row == 1) {
-        self.tipLabel.textColor = UIColorWithRGB(0x666666);
-    }
-    else
-        self.tipLabel.textColor = UIColorWithRGB(0x999999);
+    self.tipLabel.textColor = UIColorWithRGB(0x999999);
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

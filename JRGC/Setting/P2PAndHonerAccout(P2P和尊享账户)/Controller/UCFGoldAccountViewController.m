@@ -131,15 +131,15 @@
             cell.backgroundColor = UIColorWithRGB(0xf9f9f9);
             cell.textLabel.textColor = UIColorWithRGB(0x333333);
         } else {
-            lineView.frame = CGRectMake(15, model.cellHeight - 1, ScreenWidth, 1);
+            lineView.frame = CGRectMake(15, model.cellHeight - 0.5, ScreenWidth, 0.5);
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             cell.textLabel.font = [UIFont systemFontOfSize:15];
             cell.backgroundColor = [UIColor whiteColor];
             if ([model.leftTitle isEqualToString:@"邀请返利"]) {
                 lineView.frame = CGRectZero;
             } else if ([model.leftTitle isEqualToString:@"提金订单"]) {
-                lineView.frame = CGRectMake(0, model.cellHeight - 1, ScreenWidth, 1);
-
+                lineView.backgroundColor = UIColorWithRGB(0xd8d8d8);
+                lineView.frame = CGRectMake(0, model.cellHeight - 0.5, ScreenWidth, 0.5);
             }
         }
         titleLabel.text = model.leftTitle;
@@ -175,7 +175,6 @@
             lineView.tag = 1000;
             [cell.contentView addSubview:lineView];
             cell.delegate = self;
-//            cell.textLabel.text = @"可用余额";
         }
         [cell updateaVailableMoenyLab:self.balanceAmount];
         return cell;

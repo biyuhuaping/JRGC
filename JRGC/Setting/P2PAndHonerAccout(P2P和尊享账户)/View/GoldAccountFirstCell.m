@@ -7,12 +7,11 @@
 //
 
 #import "GoldAccountFirstCell.h"
-
+#import "UCFToolsMehod.h"
 @interface GoldAccountFirstCell ()
 @property (weak, nonatomic) IBOutlet UILabel *availableMoenyLab;
 @property (weak, nonatomic) IBOutlet UIButton *rechargeBtn;
 @property (weak, nonatomic) IBOutlet UIButton *withdrawalsBtn;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *moneySpace;
 
 @end
 
@@ -20,15 +19,13 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    self.moneySpace.constant = (ScreenWidth/320.0f) * 98.0f;
     self.availableMoenyLab.textColor = UIColorWithRGB(0x555555);
-
 }
 - (void)updateaVailableMoenyLab:(NSString *)availableMoeny
 {
     NSString *showStr = [NSString stringWithFormat:@"%@",[Common checkNullStr:availableMoeny]];
     showStr = [showStr isEqualToString:@""] ? @"0.00" : showStr;
-    self.availableMoenyLab.text = [NSString stringWithFormat:@"￥%@",showStr];
+    self.availableMoenyLab.text = [NSString stringWithFormat:@"%@元",[UCFToolsMehod AddComma:showStr]];
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

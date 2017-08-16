@@ -13,6 +13,7 @@
 #import "UIDic+Safe.h"
 #import "ToolSingleTon.h"
 #import "RotationButton.h"
+#import "UCFToolsMehod.h"
 @interface UCFGoldAccountHeadView ()
 @property (weak, nonatomic) IBOutlet UILabel *holdGoldGram;
 
@@ -23,8 +24,7 @@
 @property (weak, nonatomic) IBOutlet UILabel    *floatLabel;
 @property (weak, nonatomic) IBOutlet UILabel    *realtimeGoldPrice;
 @property (weak, nonatomic) IBOutlet UILabel    *dealGoldPrice;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *floatGoldSpace;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *dealGoldSpace;
+
 @property (weak, nonatomic) IBOutlet UIView *upBaseView;
 @property (weak, nonatomic) IBOutlet RotationButton *updateGoldPriceBtn;
 @property (strong, nonatomic) NSDictionary *tmpData;
@@ -61,20 +61,20 @@
 }
 - (void)updateGoldFloat
 {
-    self.realtimeGoldPrice.text = [NSString stringWithFormat:@"￥%.2f",[ToolSingleTon sharedManager].readTimePrice];
+    self.realtimeGoldPrice.text = [NSString stringWithFormat:@"%.2f元/克",[ToolSingleTon sharedManager].readTimePrice];
     double floatValue1 = [ToolSingleTon sharedManager].readTimePrice * [[_tmpData objectSafeForKey:@"holdGoldAmount"] doubleValue] - [[_tmpData objectSafeForKey:@"tradeAllMoney"] doubleValue];
     
     
     if (floatValue1 > 0) {
         self.floatLabel.textColor = UIColorWithRGB(0xfd4d4c);
-        self.floatLabel.text = [NSString stringWithFormat:@"+￥%.2f",floatValue1];
+        self.floatLabel.text = [NSString stringWithFormat:@"+%.2f元",floatValue1];
     } else if (floatValue1 == 0) {
         floatValue1 = 0;
         self.floatLabel.textColor = UIColorWithRGB(0x555555);
-        self.floatLabel.text = [NSString stringWithFormat:@"￥%.2f",floatValue1];
+        self.floatLabel.text = [NSString stringWithFormat:@"%.2f元",floatValue1];
     } else {
         self.floatLabel.textColor = UIColorWithRGB(0x4db94f);
-        self.floatLabel.text = [NSString stringWithFormat:@"-￥%.2f",fabs(floatValue1)];
+        self.floatLabel.text = [NSString stringWithFormat:@"-%.2f元",fabs(floatValue1)];
     }
 }
 
@@ -105,8 +105,6 @@
 }
 - (void)layoutSubviews
 {
-    self.floatGoldSpace.constant = (ScreenWidth/320.0f) * 98.0f;
-    self.dealGoldSpace.constant = (ScreenWidth/320.0f) * 219.0f;
     self.realtimeGoldPrice.textColor = UIColorWithRGB(0x555555);
     self.dealGoldPrice.textColor = UIColorWithRGB(0x555555);
     self.upBaseView.backgroundColor = UIColorWithRGB(0x5B6993);
@@ -116,25 +114,24 @@
     self.tmpData = dataDic;
     self.holdGoldGram.text =[NSString stringWithFormat:@"%@克",[dataDic objectSafeForKey:@"holdGoldAmount"]] ;
     NSString  *goldValue = [self switchGoldPriceFormat:[dataDic objectSafeForKey:@"availableGoldAmount"]];
-    NSString *availeStr = [NSString stringWithFormat:@"%@克(当前市值约¥%@)",[dataDic objectSafeForKey:@"availableGoldAmount"],goldValue];
+    NSString *available = [UCFToolsMehod AddComma:goldValue];
+    NSString *availeStr = [NSString stringWithFormat:@"%@克(当前市值约%@元)",[dataDic objectSafeForKey:@"availableGoldAmount"],available];
     self.availableGoldNum.text = availeStr;
-    self.realtimeGoldPrice.text = [NSString stringWithFormat:@"￥%.2f",[ToolSingleTon sharedManager].readTimePrice];
+    self.realtimeGoldPrice.text = [NSString stringWithFormat:@"%.2f元/克",[ToolSingleTon sharedManager].readTimePrice];
     self.totalRecoveryGold.text = [NSString stringWithFormat:@"%@克",[dataDic objectSafeForKey:@"collectGoldAmount"]];
-    self.dealGoldPrice.text =  [NSString stringWithFormat:@"￥%@",[dataDic objectSafeForKey:@"dealPrice"]];
+    self.dealGoldPrice.text =  [NSString stringWithFormat:@"%@元/克",[dataDic objectSafeForKey:@"dealPrice"]];
     double floatValue1 = [ToolSingleTon sharedManager].readTimePrice * [[dataDic objectSafeForKey:@"holdGoldAmount"] doubleValue] - [[dataDic objectSafeForKey:@"tradeAllMoney"] doubleValue];
-//    NSString *floatValueStr = [NSString stringWithFormat:@"%.2f",floatValue1];
-//    NSComparisonResult comparResult = [[floatValueStr substringFromIndex:1] compare:@"0.00" options:NSNumericSearch];
 
     if (floatValue1 > 0) {
         self.floatLabel.textColor = UIColorWithRGB(0xfd4d4c);
-        self.floatLabel.text = [NSString stringWithFormat:@"+￥%.2f",floatValue1];
+        self.floatLabel.text = [NSString stringWithFormat:@"+%.2f元",floatValue1];
     } else if (floatValue1 == 0) {
         floatValue1 = 0;
         self.floatLabel.textColor = UIColorWithRGB(0x555555);
-        self.floatLabel.text = [NSString stringWithFormat:@"￥%.2f",floatValue1];
+        self.floatLabel.text = [NSString stringWithFormat:@"%.2f元",floatValue1];
     } else {
         self.floatLabel.textColor = UIColorWithRGB(0x4db94f);
-        self.floatLabel.text = [NSString stringWithFormat:@"-￥%.2f",fabs(floatValue1)];
+        self.floatLabel.text = [NSString stringWithFormat:@"-%.2f元",fabs(floatValue1)];
     }
 }
 - (NSString *)switchGoldPriceFormat:(NSString *)availableGoldAmount
