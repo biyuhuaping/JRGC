@@ -1,12 +1,11 @@
 //
-//  UCFCouponReturn.m
+//  UCFGoldCouponReturn.m
 //  JRGC
 //
-//  Created by biyuhuaping on 16/4/19.
-//  Copyright © 2016年 qinwei. All rights reserved.
-//  返现券
-
-#import "UCFCouponReturn.h"
+//  Created by hanqiyuan on 2017/8/16.
+//  Copyright © 2017年 qinwei. All rights reserved.
+//
+#import "UCFGoldCouponReturn.h"
 #import "UCFCouponUseCell.h"
 #import "UCFGivingPointCell.h"
 
@@ -23,7 +22,7 @@
 // 错误界面
 #import "UCFNoDataView.h"
 
-@interface UCFCouponReturn ()<NetworkModuleDelegate>
+@interface UCFGoldCouponReturn ()<NetworkModuleDelegate,UITableViewDelegate,UITableViewDataSource>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *dataArr;
@@ -39,7 +38,7 @@
 
 @end
 
-@implementation UCFCouponReturn
+@implementation UCFGoldCouponReturn
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -76,11 +75,10 @@
     web.isHidenNavigationbar = YES;
     [self.navigationController pushViewController:web animated:YES];
 }
-
 - (void)initTableView{
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.backgroundColor = UIColorWithRGB(0xebebee);
-
+    
     //=========  下拉刷新、上拉加载更多  =========
     __weak typeof(self) weakSelf = self;
     
@@ -127,7 +125,7 @@
                 UCFInvitationRebateViewController *feedBackVC = [[UCFInvitationRebateViewController alloc] initWithNibName:@"UCFInvitationRebateViewController" bundle:nil];
                 feedBackVC.title = @"邀请获利";
                 [self.navigationController pushViewController:feedBackVC animated:YES];
-
+                
             }
         } otherButtonTitles:@"邀友注册"];
         [alert_bankbrach show];
@@ -157,7 +155,7 @@
 - (void)getCouponDataList{
     //status：0未使用 1已过期 2已使用
     NSString *userId = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
-    NSDictionary *dic = @{@"couponType":@"1",//1:返现 2：返息
+    NSDictionary *dic = @{@"couponType":@"3",//1:返现 2：返息 3返金
                           @"page":[NSString stringWithFormat:@"%ld",_currentPage],
                           @"pageSize":@"20",
                           @"status":_status,   //status：1：未使用 2：已使用 3：已过期 4：已赠送
@@ -167,14 +165,14 @@
 
 //开始请求
 - (void)beginPost:(kSXTag)tag{
-//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    //    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 }
 
 //请求成功及结果
 - (void)endPost:(id)result tag:(NSNumber *)tag{
     [_tableView.header endRefreshing];
     [_tableView.footer endRefreshing];
-//    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    //    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     NSMutableDictionary *dic = [result objectFromJSONString];
     DBLOG(@"返现券列表：%@",dic);
     
@@ -186,8 +184,8 @@
             NSMutableArray *temp1 = [NSMutableArray array];
             for (NSDictionary *dict in dataArr) {
                 UCFCouponModel *couponModel = [UCFCouponModel couponWithDict:dict];
-//                couponModel.state = [_status integerValue];//1：未使用 2：已使用 3：已过期 4：已赠送
-                couponModel.couponType = @"0";
+                //                couponModel.state = [_status integerValue];//1：未使用 2：已使用 3：已过期 4：已赠送
+                couponModel.couponType = @"3";
                 [temp1 addObject:couponModel];
             }
             id unUserFxCount = dic[@"data"][@"unUserFxCount"];
@@ -237,7 +235,6 @@
     [_tableView.header endRefreshing];
     [_tableView.footer endRefreshing];
     [MBProgressHUD displayHudError:err.userInfo[@"NSLocalizedDescription"]];
-//    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    //    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
 }
-
 @end

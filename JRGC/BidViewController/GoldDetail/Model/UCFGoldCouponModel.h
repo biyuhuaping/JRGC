@@ -22,7 +22,7 @@
  */
 @property(nonatomic,copy) NSString *goldAccount;//返金克重
 
-@property(nonatomic,copy) NSString *prdId;//黄金券ID
+@property(nonatomic,copy) NSString *goldCouponId;//黄金券ID
 
 @property(nonatomic,copy) NSString *investMin;//最小投资克重	string;
 

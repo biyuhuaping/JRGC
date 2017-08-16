@@ -11,7 +11,7 @@
 
 #import "UCFCouponReturn.h"
 #import "UCFCouponInterest.h"
-
+#import "UCFGoldCouponReturn.h"
 @interface UCFCouponAuxiliaryVC ()<UCFSelectedViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UCFSelectedView *itemSelectView;   // 选项条
@@ -19,6 +19,7 @@
 
 @property (strong, nonatomic) UCFCouponReturn   *couponReturnView;      //返现券
 @property (strong, nonatomic) UCFCouponInterest *couponInterestView;    //返息券
+@property (strong, nonatomic) UCFGoldCouponReturn   *couponGoldView;      //返现券
 @property (strong, nonatomic) UIViewController  *currentViewController; //当前viewCotl
 
 @end
@@ -29,7 +30,7 @@
     [super viewDidLoad];
     [self addLeftButton];
     _currentSelectedState = 0;
-    self.itemSelectView.sectionTitles = @[@"返现券", @"返息券"];
+    self.itemSelectView.sectionTitles = @[@"返现券", @"返息券",@"返金劵"];
     self.itemSelectView.delegate = self;
     [self initViewController];
 }
@@ -52,6 +53,13 @@
     _couponInterestView.sourceVC = 1;
     _couponInterestView.view.frame = CGRectMake(0, 44, ScreenWidth, ScreenHeight - 108);
     [self addChildViewController:_couponInterestView];
+    //返金券
+    _couponGoldView = [[UCFGoldCouponReturn alloc]initWithNibName:@"UCFGoldCouponReturn" bundle:nil];
+    _couponGoldView.status = _status;
+    _couponGoldView.sourceVC = 1;
+    _couponGoldView.view.frame = CGRectMake(0, 44, ScreenWidth, ScreenHeight - 108);
+    [self addChildViewController:_couponGoldView];
+    
     
     // 需要显示的子ViewController，要将其View添加到父View中
     [self.view addSubview:_couponReturnView.view];
@@ -72,6 +80,12 @@
         case 1: {
             [self transitionFromViewController:_currentViewController toViewController:_couponInterestView duration:0.25 options:UIViewAnimationOptionCurveEaseInOut animations:nil completion:^(BOOL finished) {
                 self.currentViewController = _couponInterestView;
+            }];
+        }
+            break;
+        case 2:{
+            [self transitionFromViewController:_currentViewController toViewController:_couponGoldView duration:0.25 options:UIViewAnimationOptionCurveEaseInOut animations:nil completion:^(BOOL finished) {
+                self.currentViewController = _couponGoldView;
             }];
         }
             break;
