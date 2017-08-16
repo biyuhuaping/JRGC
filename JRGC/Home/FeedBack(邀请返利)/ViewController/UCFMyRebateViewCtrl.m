@@ -83,6 +83,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self addLeftButton];
+    [_feedBackDetailLab setTitleColor:UIColorWithRGB(0x555555) forState:UIControlStateNormal];
+    [_friendUnFeedBackLab setTitleColor:UIColorWithRGB(0x555555) forState:UIControlStateNormal];
+    [_friendFeedBackLab setTitleColor:UIColorWithRGB(0x555555) forState:UIControlStateNormal];
     if (self.accoutType == SelectAccoutTypeGold) {
         baseTitleLabel.text = @"黄金邀请返利";
         [_friendUnFeedBackLab setTitle:@"好友未回金" forState:UIControlStateNormal];
@@ -90,10 +93,10 @@
         _friendCountLab.text = [NSString stringWithFormat:@"邀请购买人数:%@人",_feedBackDictionary[@"friendCount"]];
         _sumCommLab.text = [NSString stringWithFormat:@"¥%@",_feedBackDictionary[@"sumComm"]];
         _recCountLab.text = [NSString stringWithFormat:@"邀请注册人数：%@人",_feedBackDictionary[@"recCount"]];
-        [_feedBackDetailLab setTitleColor:UIColorWithRGB(0xffc027) forState:UIControlStateSelected];
-        [_friendUnFeedBackLab setTitleColor:UIColorWithRGB(0xffc027) forState:UIControlStateSelected];
-        [_friendFeedBackLab setTitleColor:UIColorWithRGB(0xffc027) forState:UIControlStateSelected];
-        _moveLineView.backgroundColor = UIColorWithRGB(0xffc027);
+        [_feedBackDetailLab setTitleColor:UIColorWithRGB(0xfc8f0e) forState:UIControlStateSelected];
+        [_friendUnFeedBackLab setTitleColor:UIColorWithRGB(0xfc8f0e) forState:UIControlStateSelected];
+        [_friendFeedBackLab setTitleColor:UIColorWithRGB(0xfc8f0e) forState:UIControlStateSelected];
+        _moveLineView.backgroundColor = UIColorWithRGB(0xfc8f0e);
 
     } else {
         baseTitleLabel.text = self.accoutType  == SelectAccoutTypeHoner ?  @"尊享返利":@"微金返利";
