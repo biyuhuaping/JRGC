@@ -400,7 +400,7 @@
                     commission = [dic objectSafeForKey:@"commission"];
                 }
             }
-            right.text = [NSString stringWithFormat:@"本月收益克重%@g",commission];
+            right.text = [NSString stringWithFormat:@"本月收益%@",commission];
         } else {
             NSString *t = [_monthDataArr1 objectSafeAtIndex:section];
             left.text = [[t stringByReplacingOccurrencesOfString:@"-" withString:@"年"] stringByAppendingString:@"月"];
@@ -578,7 +578,7 @@
             if ([dic[@"holdTime"]length] > 0) {
                 cell.lab2.text = [NSString stringWithFormat:@"%@~%@",dic[@"holdTime"],dic[@"repayPeriodtext"]];//投资期限
             }else{
-                cell.lab2.text =[NSString stringWithFormat:@"%@",dic[@"periodTerm"]];//30天
+                cell.lab2.text =[NSString stringWithFormat:@"%@天",dic[@"periodTerm"]];//30天
             }
             cell.lab3.text = dic[@"repayModetext"];//一次结清
             if ([[dic objectSafeForKey:@"annualRate"] isEqualToString:@""]) {
