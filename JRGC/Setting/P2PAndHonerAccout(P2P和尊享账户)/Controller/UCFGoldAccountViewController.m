@@ -208,7 +208,6 @@
     UCFCellStyleModel *model02 = [[UCFCellStyleModel alloc] initWithCellStyle:CellCustom WithLeftTitle:@"可用余额" WithRightImage:nil WithTargetClassName:nil WithCellHeight:44 WithDelegate:self];
     UCFCellStyleModel *model03 = [[UCFCellStyleModel alloc] initWithCellStyle:CellStyleDefault WithLeftTitle:@"邀请返利" WithRightImage:[UIImage imageNamed:@"list_icon_arrow"] WithTargetClassName:@"" WithCellHeight:44 WithDelegate:self];
     UCFCellStyleModel *model04 = [[UCFCellStyleModel alloc] initWithCellStyle:CellSepLine WithLeftTitle:nil WithRightImage:nil WithTargetClassName:nil WithCellHeight:10 WithDelegate:nil];
-    
     UCFCellStyleModel *model05 = [[UCFCellStyleModel alloc] initWithCellStyle:CellStyleDefault WithLeftTitle:@"尊享金" WithRightImage:[UIImage imageNamed:@"list_icon_arrow"] WithTargetClassName:@"" WithCellHeight:44 WithDelegate:self];
     UCFCellStyleModel *model06 = [[UCFCellStyleModel alloc] initWithCellStyle:CellStyleDefault WithLeftTitle:@"提金订单" WithRightImage:[UIImage imageNamed:@"list_icon_arrow"] WithTargetClassName:@"" WithCellHeight:44 WithDelegate:self];
 
@@ -323,7 +322,7 @@
 }
     
 - (void)goldAccountFirstCell:(GoldAccountFirstCell *)goldFirstCell didClickedCashButton:(UIButton *)button
-    {
+{
     UCFGoldCashMoneyViewController *goldCashMoney = [[UCFGoldCashMoneyViewController alloc] initWithNibName:@"UCFGoldCashMoneyViewController" bundle:nil];
     goldCashMoney.baseTitleText = @"提现";
     goldCashMoney.balanceMoney = self.balanceAmount;
