@@ -28,4 +28,11 @@
     item.title = title;
     return item;
 }
++ (instancetype)itemWithIcon:(NSString *)icon WithTitle:(NSString *)title withSubtitle:(NSString *)subtitle{
+    UCFSettingItem *item = [[self alloc] init];
+    item.icon = icon;
+    item.subtitle = subtitle;
+    item.title = title;
+    return item;
+}
 @end

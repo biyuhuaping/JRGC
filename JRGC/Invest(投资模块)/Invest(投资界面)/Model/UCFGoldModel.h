@@ -22,8 +22,10 @@
 @property (copy, nonatomic) NSString *status;
 @property (copy, nonatomic) NSString *totalAmount;
 @property (copy, nonatomic) NSString *nmTypeId;
-@property (copy, nonatomic) NSString *buyServiceRate;
+@property (copy, nonatomic) NSString *buyServiceRate;//买入手续费率
 @property (copy, nonatomic) NSString *pauseInfo;//暂停信息
 @property (copy, nonatomic) NSString *nmPurchaseToken;
+@property (copy, nonatomic) NSString *cashServiceRate;//变现手续费率
+@property (copy, nonatomic) NSString *goldServiceRate;//提金手续费率
 + (instancetype)goldModelWithDict:(NSDictionary *)dict;
 @end

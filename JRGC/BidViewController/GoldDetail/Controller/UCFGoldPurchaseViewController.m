@@ -495,7 +495,7 @@
             }
             //        cell.accoutType = SelectAccoutTypeGold;
             [cell setGoldInvestItemInfo:self.goldModel];
-            cell.realGoldPriceLab.text = [NSString stringWithFormat:@"¥%.2lf",[ToolSingleTon sharedManager].readTimePrice]; //
+//            cell.realGoldPriceLab.text = [NSString stringWithFormat:@"¥%.2lf",[ToolSingleTon sharedManager].readTimePrice]; //
             _prdLabelsList = [[_dataDic objectSafeDictionaryForKey:@"nmPrdClaimInfo"] objectSafeArrayForKey:@"prdLabelsList"];
             if (_prdLabelsList.count > 0) {
                 for (NSDictionary *dic in _prdLabelsList) {
@@ -784,20 +784,21 @@
 -(void)showGoldCalculatorView
 {
     [self.view endEditing:YES];
-    UCFGoldMoneyBoadCell *cell = (UCFGoldMoneyBoadCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
-//    if([cell.moneyTextField.text isEqualToString:@""] ||[ cell.moneyTextField.text doubleValue] == 0 ){
-//        [MBProgressHUD displayHudError:@"请输入购入克重"];
-//        return;
-//    }
-    UCFGoldCalculatorView * view = [[[NSBundle mainBundle]loadNibNamed:@"UCFGoldCalculatorView" owner:nil options:nil] firstObject];
-    view.goldMoneyTextField.text = [ cell.moneyTextField.text doubleValue] == 0  ? self.goldModel.minPurchaseAmount : cell.moneyTextField.text;
-    view.nmTypeIdStr = self.goldModel.nmTypeId;
-    view.tag = 173924;
-    view.frame = CGRectMake(0, 0, ScreenWidth,ScreenHeight);
-    [view getGoldCalculatorHTTPRequset];
-    AppDelegate * app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    view.center = app.window.center;
-    [app.window addSubview:view];
+    if(self.isGoldCurrentAccout){
+        
+        
+    }else{
+        UCFGoldMoneyBoadCell *cell = (UCFGoldMoneyBoadCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
+        UCFGoldCalculatorView * view = [[[NSBundle mainBundle]loadNibNamed:@"UCFGoldCalculatorView" owner:nil options:nil] firstObject];
+        view.goldMoneyTextField.text = [ cell.moneyTextField.text doubleValue] == 0  ? self.goldModel.minPurchaseAmount : cell.moneyTextField.text;
+        view.nmTypeIdStr = self.goldModel.nmTypeId;
+        view.tag = 173924;
+        view.frame = CGRectMake(0, 0, ScreenWidth,ScreenHeight);
+        [view getGoldCalculatorHTTPRequset];
+        AppDelegate * app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        view.center = app.window.center;
+        [app.window addSubview:view];
+    }
 }
 -(void)clickGoldSwitch:(UISwitch *)goldSwitch
 {
@@ -926,12 +927,16 @@
             amountPay = availableMoney;
         }
     }
-    cell.estimatAmountPayableLabel.text = [NSString stringWithFormat:@"¥%.2lf",[[Common notRounding:amountPay afterPoint:3] doubleValue]];
-    
-    double periodTerm = [[self.goldModel.periodTerm substringWithRange:NSMakeRange(0, self.goldModel.periodTerm.length - 1)] doubleValue];
-    
-    double getUpWeightGold = [cell.moneyTextField.text doubleValue] *[self.goldModel.annualRate doubleValue] * periodTerm /360.0 / 100.0;
-    cell.getUpWeightGoldLabel.text = [NSString stringWithFormat:@"%.3lf克",[[Common notRounding:getUpWeightGold afterPoint:3] doubleValue]];
+    cell.estimatAmountPayableLabel.text = [NSString stringWithFormat:@"¥%.2lf",[[Common notRounding:amountPay afterPoint:2] doubleValue]];
+    if (self.isGoldCurrentAccout) {
+        double getUpWeightGold = amountPay * [self.goldModel.annualRate doubleValue] /360.0;
+        cell.getUpWeightGoldLabel.text = [NSString stringWithFormat:@"¥%.2lf",[[Common notRounding:getUpWeightGold afterPoint:2] doubleValue]];
+    }else{
+        double periodTerm = [[self.goldModel.periodTerm substringWithRange:NSMakeRange(0, self.goldModel.periodTerm.length - 1)] doubleValue];
+        
+        double getUpWeightGold = [cell.moneyTextField.text doubleValue] *[self.goldModel.annualRate doubleValue] * periodTerm /360.0 / 100.0;
+        cell.getUpWeightGoldLabel.text = [NSString stringWithFormat:@"%.3lf克",[[Common notRounding:getUpWeightGold afterPoint:3] doubleValue]];
+    }
     [self.tableView reloadData];
 }
 -(void)keyboardDown{
@@ -980,7 +985,9 @@
     double purchaseGoldAmount =  [cell.moneyTextField.text doubleValue];
     double minPurchaseAmount  =  [self.goldModel.minPurchaseAmount doubleValue];
     double maxPurchaseAmount  =  [self.goldModel.remainAmount doubleValue];
-    
+    if(self.isGoldCurrentAccout){
+        maxPurchaseAmount = 1000;
+    }
     if([cell.moneyTextField.text isEqualToString:@""] ){
         [MBProgressHUD displayHudError:@"请输入购入克重"];
         return;
@@ -1085,7 +1092,13 @@
 
 -(void)getPurchaseGoldSucceessHttpRequst
 {
-     [[NetworkModule sharedNetworkModule] newPostReq:self.paramDict tag:kSXTagGetPurchaseGold owner:self signature:YES Type:SelectAccoutTypeGold];
+    if(self.isGoldCurrentAccout)
+    {
+         [[NetworkModule sharedNetworkModule] newPostReq:self.paramDict tag:kSXTagGoldCurrentPurchase owner:self signature:YES Type:SelectAccoutTypeGold];
+    }else{
+        
+         [[NetworkModule sharedNetworkModule] newPostReq:self.paramDict tag:kSXTagGetPurchaseGold owner:self signature:YES Type:SelectAccoutTypeGold];
+    }
 }
 
 -(void)beginPost:(kSXTag)tag
@@ -1159,6 +1172,35 @@
         else
         {
             [AuxiliaryFunc showAlertViewWithMessage:message];
+        }
+    }
+    else if (tag.intValue == kSXTagGoldCurrentPurchase){//黄金活期购买
+        
+        NSDictionary *resultDict =[[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"result"];
+        
+        if ([[dic objectSafeForKey:@"code"] intValue] == 43068)
+        {
+            self.goldPrice =  [[resultDict objectSafeForKey:@"dealGoldPrice"] doubleValue];
+            [ToolSingleTon sharedManager].readTimePrice = self.goldPrice;
+            
+            self.nmPurchaseTokenStr = [resultDict objectSafeForKey:@"nmPurchaseToken"];
+            self.purchaseMoneyStr = [resultDict objectSafeForKey:@"realTimePurchaseAmt"];
+            NSString *showStr = [NSString stringWithFormat:@"由于金价实时波动，成交时金价增至%.2lf元/元，是否继续购买？",self.goldPrice];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:showStr delegate:self cancelButtonTitle:@"放弃购买" otherButtonTitles:@"继续购买", nil];
+            alert.tag = 43068;
+            [alert show]; //11114
+            return;
+        }else  if ([[dic objectSafeForKey:@"code"] intValue] == 11114)
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:message delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+            [alert show];
+            return;
+        } else  {
+            UCFGoldBidSuccessViewController *goldBidSuccessVC = [[UCFGoldBidSuccessViewController alloc]initWithNibName:@"UCFGoldBidSuccessViewController" bundle:nil];
+            goldBidSuccessVC.dataDict = resultDict;
+            goldBidSuccessVC.isPurchaseSuccess = [rstcode boolValue];
+            goldBidSuccessVC.errorMessageStr = [rstcode boolValue] ? @"":message;
+            [self.navigationController pushViewController:goldBidSuccessVC  animated:YES];
         }
     }
 }

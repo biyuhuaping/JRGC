@@ -26,6 +26,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *availableAllMoneyLabel;
 @property (strong, nonatomic) IBOutlet UILabel *estimatAmountPayableLabel;
 @property (strong, nonatomic) IBOutlet UILabel *getUpWeightGoldLabel;
+@property (strong, nonatomic) IBOutlet UILabel *estimatAmountPayTitleLab;
+@property (strong, nonatomic) IBOutlet UILabel *getUpWeightGoldTilteLab;
 
 @property (strong, nonatomic) IBOutlet UILabel *availableMoneyLabel;
 @property (strong, nonatomic) IBOutlet UILabel *accountBeanLabel;
