@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="141"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="141"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="140.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="444-8q-YpZ">
@@ -49,13 +49,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6225******1726" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cdo-i6-QLV">
-                                <rect key="frame" x="15" y="90" width="134" height="21"/>
+                                <rect key="frame" x="15" y="92" width="134" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="张克川" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JI3-Io-H1B">
-                                <rect key="frame" x="15" y="66" width="46" height="18"/>
+                                <rect key="frame" x="15" y="71" width="46" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -101,9 +101,9 @@
                             <constraint firstAttribute="bottom" secondItem="8zb-n5-mjv" secondAttribute="bottom" constant="10" id="JaT-jh-AXz"/>
                             <constraint firstItem="CRN-id-IuF" firstAttribute="top" secondItem="444-8q-YpZ" secondAttribute="top" constant="9" id="OQ9-gL-Nnc"/>
                             <constraint firstItem="KMi-IF-XOR" firstAttribute="centerY" secondItem="WIG-Os-W1n" secondAttribute="centerY" id="Oeq-Yg-4Hi"/>
-                            <constraint firstItem="8zb-n5-mjv" firstAttribute="top" secondItem="Cdo-i6-QLV" secondAttribute="bottom" constant="6" id="WLo-5U-xuO"/>
+                            <constraint firstItem="8zb-n5-mjv" firstAttribute="top" secondItem="Cdo-i6-QLV" secondAttribute="bottom" constant="4" id="WLo-5U-xuO"/>
                             <constraint firstAttribute="bottom" secondItem="WIG-Os-W1n" secondAttribute="bottom" constant="10" id="Wzq-Rj-ya2"/>
-                            <constraint firstItem="Cdo-i6-QLV" firstAttribute="top" secondItem="JI3-Io-H1B" secondAttribute="bottom" constant="6" id="ZZR-1I-6OF"/>
+                            <constraint firstItem="Cdo-i6-QLV" firstAttribute="top" secondItem="JI3-Io-H1B" secondAttribute="bottom" constant="3" id="ZZR-1I-6OF"/>
                             <constraint firstItem="axi-Za-NT8" firstAttribute="top" secondItem="444-8q-YpZ" secondAttribute="top" id="eeZ-qm-fgx"/>
                             <constraint firstAttribute="trailing" secondItem="axi-Za-NT8" secondAttribute="trailing" id="fO0-Kd-urN"/>
                             <constraint firstItem="8zb-n5-mjv" firstAttribute="leading" secondItem="444-8q-YpZ" secondAttribute="leading" constant="15" id="gNb-Zo-t4B"/>
@@ -131,7 +131,7 @@
                 <outlet property="limitPerlistLabel" destination="WIG-Os-W1n" id="Sgd-WR-bVP"/>
                 <outlet property="userNameLabel" destination="JI3-Io-H1B" id="QeY-Ae-UK9"/>
             </connections>
-            <point key="canvasLocation" x="32" y="60.5"/>
+            <point key="canvasLocation" x="-106" y="46"/>
         </tableViewCell>
     </objects>
     <resources>

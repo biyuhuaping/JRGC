@@ -21,7 +21,8 @@
 #import "NSString+CJString.h"
 #import "FullWebViewController.h"
 #import "UCFGoldCouponViewController.h"
-@interface UCFGoldPurchaseViewController ()<UITableViewDelegate,UITableViewDataSource,UCFGoldMoneyBoadCellDelegate,UITextFieldDelegate,UIGestureRecognizerDelegate>
+#import "UCFToolsMehod.h"
+@interface UCFGoldPurchaseViewController ()<UITableViewDelegate,UITableViewDataSource,UCFGoldMoneyBoadCellDelegate,UITextFieldDelegate,UIGestureRecognizerDelegate,UCFGoldCouponViewControllerDelegate>
 {
     float  bottomViewYPos;
     NSArray *_prdLabelsList;
@@ -47,6 +48,10 @@
 @property (nonatomic,assign)double willExpireBean;//即将过期工豆
 @property (nonatomic,strong)NSString *purchaseMoneyStr;//黄金购买付款金额
 @property (nonatomic,assign)BOOL  isShowWorkshopCode;//是否显示输入工场码
+@property (nonatomic,assign)BOOL  isHaveGoldCouponNum;//是否有返金券
+@property (nonatomic,strong)NSDictionary  *goldCouponDataDict;//选择返金劵数据数组
+
+@property (nonatomic,strong)NSDictionary *paramDict;//请求参数
 - (IBAction)gotoGoldBidSuccessVC:(id)sender;
 
 @end
@@ -104,6 +109,7 @@
     _isShowWorkshopCode = [[_dataDic objectSafeForKey:@"isShowWorkshopCode"] boolValue];
 
     _goldCouponNumStr = [userAccountInfoDict objectSafeForKey:@"goldCouponNum"];
+    _isHaveGoldCouponNum  = [_goldCouponNumStr integerValue] == 0 ? NO : YES;
     //保存是否选择工豆
     [[NSUserDefaults standardUserDefaults] setBool:!(_accountBean==0) forKey:@"SelectGoldGongDouSwitch"];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -160,60 +166,6 @@
 }
 
 
--(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    if(section == 1)
-    {
-        NSArray *prdLabelsList = _prdLabelsList;
-        NSMutableArray *labelPriorityArr = [NSMutableArray arrayWithCapacity:4];
-        if (![prdLabelsList isEqual:[NSNull null]]) {
-            for (NSDictionary *dic in prdLabelsList) {
-                NSInteger labelPriority = [dic[@"labelPriority"] integerValue];
-                if (labelPriority > 1) {
-                        [labelPriorityArr addObject:dic[@"labelName"]];
-                }
-            }
-        }
-        if ([labelPriorityArr count] == 0) {
-            
-            bottomViewYPos = 10;
-            UIView *topView =[[UIView alloc] initWithFrame: CGRectMake(0, 0, ScreenWidth, bottomViewYPos)];
-            topView.backgroundColor = [UIColor clearColor];
-            return topView;
-        } else {
-            bottomViewYPos = 30;
-            return   [self drawMarkView:bottomViewYPos];
-        }
-    }else  if (section  == 3) {
-        
-        UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 47)];
-        headerView.backgroundColor = UIColorWithRGB(0xf9f9f9);
-
-        UIView *topView =[[UIView alloc] init];
-        topView.backgroundColor = UIColorWithRGB(0xebebee);
-        topView.frame = CGRectMake(0, 0, ScreenWidth, 10.0f);
-        [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:topView isTop:YES];
-        [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:topView isTop:NO];
-        [headerView addSubview:topView];
-        
-        UIImageView * coupImage = [[UIImageView alloc] init];
-        coupImage.image = [UIImage imageNamed:@"invest_icon_coupon.png"];
-        coupImage.tag = 2999;
-        coupImage.frame = CGRectMake(13, 10 + (37 - 25)/2.0f, 25, 25);
-        [headerView addSubview:coupImage];
-        
-        UILabel *commendLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(coupImage.frame) + 7, 10 + (37 - 14)/2, 80, 14)];
-        commendLabel.text = @"使用优惠券";
-        commendLabel.font = [UIFont systemFontOfSize:14.0f];
-        commendLabel.textColor = UIColorWithRGB(0x555555);
-        [headerView addSubview:commendLabel];
-        
-        UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 47, ScreenWidth, 0.5)];
-        lineView.backgroundColor = UIColorWithRGB(0xe3e5ea);
-        [headerView addSubview:lineView];
-        return headerView;
-    }
-    return nil;
-}
 - (UIView *)drawMarkView:(float)markHeight
 {
     UIView *markBg = [[UIView alloc] initWithFrame:CGRectMake(0,0, ScreenWidth, 30)];
@@ -341,7 +293,7 @@
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    if ([_goldCouponNumStr intValue] > 0) {//有返金劵的情况
+    if (_isHaveGoldCouponNum) {//有返金劵的情况
          return _isShowWorkshopCode ? 4 : 3;
     }else {
         return _isShowWorkshopCode  ? 3 : 2;
@@ -374,7 +326,7 @@
         case 2:
         {
             
-            if ([_goldCouponNumStr intValue] > 0) {
+            if (_isHaveGoldCouponNum) {
                 return 44;
             }else{
                 return 37+67;
@@ -391,14 +343,61 @@
     }
         return 0;
 }
-//-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
-//    UIView *headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 10)];
-//    
-//    headerView.backgroundColor = [UIColor clearColor];
-//    
-//    
-//    
-//}
+
+-(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    if(section == 1)
+    {
+        NSArray *prdLabelsList = _prdLabelsList;
+        NSMutableArray *labelPriorityArr = [NSMutableArray arrayWithCapacity:4];
+        if (![prdLabelsList isEqual:[NSNull null]]) {
+            for (NSDictionary *dic in prdLabelsList) {
+                NSInteger labelPriority = [dic[@"labelPriority"] integerValue];
+                if (labelPriority > 1) {
+                    [labelPriorityArr addObject:dic[@"labelName"]];
+                }
+            }
+        }
+        if ([labelPriorityArr count] == 0) {
+            
+            bottomViewYPos = 10;
+            UIView *topView =[[UIView alloc] initWithFrame: CGRectMake(0, 0, ScreenWidth, bottomViewYPos)];
+            topView.backgroundColor = [UIColor clearColor];
+            return topView;
+        } else {
+            bottomViewYPos = 30;
+            return   [self drawMarkView:bottomViewYPos];
+        }
+    }else  if (section == 2 && _isHaveGoldCouponNum) {
+        
+        UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 47)];
+        headerView.backgroundColor = UIColorWithRGB(0xf9f9f9);
+        
+        UIView *topView =[[UIView alloc] init];
+        topView.backgroundColor = UIColorWithRGB(0xebebee);
+        topView.frame = CGRectMake(0, 0, ScreenWidth, 10.0f);
+        [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:topView isTop:YES];
+        [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:topView isTop:NO];
+        [headerView addSubview:topView];
+        
+        UIImageView * coupImage = [[UIImageView alloc] init];
+        coupImage.image = [UIImage imageNamed:@"invest_icon_coupon.png"];
+        coupImage.tag = 2999;
+        coupImage.frame = CGRectMake(13, 10 + (37 - 25)/2.0f, 25, 25);
+        [headerView addSubview:coupImage];
+        
+        UILabel *commendLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(coupImage.frame) + 7, 10 + (37 - 14)/2, 80, 14)];
+        commendLabel.text = @"使用优惠券";
+        commendLabel.font = [UIFont systemFontOfSize:14.0f];
+        commendLabel.textColor = UIColorWithRGB(0x555555);
+        [headerView addSubview:commendLabel];
+        
+        UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 47, ScreenWidth, 0.5)];
+        lineView.backgroundColor = UIColorWithRGB(0xe3e5ea);
+        [headerView addSubview:lineView];
+        return headerView;
+    }
+    return nil;
+}
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     
     switch (section) {
@@ -429,13 +428,16 @@
             break;
         case 2:
         {
-            return 10;
+            if ([_goldCouponNumStr intValue] > 0) {
+                return 47;
+            }else{
+                return 10;
+            }
         }
             break;
-
         case 3:
         {
-            return 37;
+            return 10;
         }
             break;
         default:
@@ -570,7 +572,7 @@
             return cell;
             
         }
-    }else if (indexPath.section == 2 && [_goldCouponNumStr intValue] > 0){
+    }else if (indexPath.section == 2 && _isHaveGoldCouponNum){
         if (!cell) {
             cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellId];
             UIView *lineView1 = [[UIView alloc] initWithFrame:CGRectMake(0, 44, ScreenWidth, 0.5)];
@@ -597,12 +599,26 @@
             availableLabel.textAlignment = NSTextAlignmentRight;
             [cell addSubview:availableLabel];
         }
+        
         UILabel *availableLabel = (UILabel *)[cell viewWithTag:1001];
         cell.textLabel.text = @"黄金返金券";
-        availableLabel.text = [NSString stringWithFormat:@"%@张可用",_goldCouponNumStr];
+        if(self.goldCouponDataDict)
+        {
+            //
+            NSString *goldAccountSumStr = [self.goldCouponDataDict objectSafeForKey:@"goldAccountSum"];
+            NSString *investMinSumStr = [self.goldCouponDataDict objectSafeForKey:@"investMinSum"];
+           availableLabel.text = [NSString stringWithFormat:@"返%@g黄金，购满%@g可用",goldAccountSumStr,investMinSumStr];
+            [availableLabel setFontColor:UIColorWithRGB(0xfc8f0e) string:goldAccountSumStr];
+            [availableLabel setFontColor:UIColorWithRGB(0x333333) string:investMinSumStr];
+            availableLabel.font = [UIFont systemFontOfSize:12.0f];
+        }else{
+            availableLabel.text = [NSString stringWithFormat:@"%@张可用",_goldCouponNumStr];
+            [availableLabel setFontColor:UIColorWithRGB(0x333333) string:_goldCouponNumStr];
+            availableLabel.font = [UIFont systemFontOfSize:14.0f];
+        }
         return cell;
 
-    }else if ((indexPath.section == 2 && [_goldCouponNumStr intValue] == 0 && _isShowWorkshopCode) ||(indexPath.section == 3 && _isShowWorkshopCode)) {
+    }else if ((indexPath.section == 2 && !_isHaveGoldCouponNum && _isShowWorkshopCode) ||(indexPath.section == 3 && _isShowWorkshopCode)) {
         static NSString *cellStr5 = @"cell6";
         UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:cellStr5];
         if (cell == nil) {
@@ -639,47 +655,14 @@
             _gCCodeTextField.keyboardType = UIKeyboardTypeEmailAddress;
             _gCCodeTextField.placeholder = @"点击填写工场码";
             [inputBaseView addSubview:_gCCodeTextField];
-            UIView *lineView1 = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(inputBaseView.frame), ScreenWidth, 0.5)];
+            UIView *lineView1 = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(inputBaseView.frame)+14.5, ScreenWidth, 0.5)];
             lineView1.backgroundColor = UIColorWithRGB(0xd8d8d8);
             [cell addSubview:lineView1];
         }
         return cell;
     }
-//    else if (indexPath.section == 2 && indexPath.row == 1) {
-//        static NSString *cellStr6 = @"cell7";
-//        UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:cellStr6];
-//        if (cell == nil) {
-//            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellStr6];
-//            [self addView:cell];
-//        }
-//        return cell;
-//    }
-
     return cell;
 }
-#pragma mark -
-- (void)addView:(UITableViewCell *)cell
-{
-    UIView * inputBaseView = [[UIView alloc] initWithFrame:CGRectMake(15.0f, 15, ScreenWidth - 30.0f, 37.0f)];
-    inputBaseView.backgroundColor = UIColorWithRGB(0xf2f2f2);
-    inputBaseView.layer.borderColor = UIColorWithRGB(0xd8d8d8).CGColor;
-    inputBaseView.layer.borderWidth = 0.5f;
-    inputBaseView.layer.cornerRadius = 4.0f;
-    [cell addSubview:inputBaseView];
-    
-    _gCCodeTextField = [[UITextField alloc] initWithFrame:CGRectMake(10.0f, 8.5f, CGRectGetWidth(inputBaseView.frame) - 20, 20.0f)];
-    _gCCodeTextField.backgroundColor = [UIColor clearColor];
-    _gCCodeTextField.delegate = self;
-    _gCCodeTextField.returnKeyType = UIReturnKeyDone;
-    _gCCodeTextField.keyboardType = UIKeyboardTypeEmailAddress;
-    _gCCodeTextField.placeholder = @"点击填写工场码";
-    [inputBaseView addSubview:_gCCodeTextField];
-    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 66.5, ScreenWidth, 0.5)];
-    lineView.backgroundColor = UIColorWithRGB(0xd8d8d8);
-    [cell addSubview:lineView];
-    
-}
-
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -687,6 +670,7 @@
     if (indexPath.section == 2) {
         
         UCFGoldCouponViewController *goldCouponVC = [[UCFGoldCouponViewController   alloc]initWithNibName:@"UCFGoldCouponViewController" bundle:nil];
+        goldCouponVC.delegate = self;
         [self.navigationController pushViewController:goldCouponVC animated:YES];
         
     }
@@ -695,6 +679,8 @@
 {
     UCFGoldCouponViewController *goldCouponVC = [[UCFGoldCouponViewController   alloc]initWithNibName:@"UCFGoldCouponViewController" bundle:nil];
     goldCouponVC.nmPrdClaimIdStr = self.goldModel.nmPrdClaimId;
+    goldCouponVC.delegate = self;
+    goldCouponVC.remainAmountStr  = self.goldModel.remainAmount;
     [self.navigationController pushViewController:goldCouponVC animated:YES];
     
 }
@@ -880,11 +866,21 @@
             }
             break;
         }
-        case 1000:
+        case 3000:
         {
-//            UCFGoldMoneyBoadCell *cell = (UCFGoldMoneyBoadCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
-//            [cell.moneyTextField becomeFirstResponder];
+            if (buttonIndex == 1) {
+            [self getPurchaseGoldSucceessHttpRequst];
         }
+            break;
+        }
+        case 4000:
+        {
+            if (buttonIndex == 1) {
+                [self getPurchaseGoldSucceessHttpRequst];
+            }
+            break;
+        }
+
             
         default:
             break;
@@ -941,6 +937,15 @@
 -(void)keyboardDown{
     [self.view endEditing:YES];
 }
+#pragma mark-
+#pragma mark 选择返金劵返回数据
+-(void)getSelectedGoldCouponNum:(NSDictionary *)goldCouponDict
+
+{
+    self.goldCouponDataDict = goldCouponDict;
+    [self.tableView reloadData];
+}
+
 #pragma mark-
 #pragma mark 立即购买
 - (IBAction)gotoGoldBidSuccessVC:(id)sender {
@@ -1032,9 +1037,6 @@
     if (!self.purchaseMoneyStr) {
         self.purchaseMoneyStr =   [NSString stringWithFormat:@"%.2lf",estimatAmountMoney];
     }
-    NSDictionary  *nmPrdClaimInfoDic  = [_dataDic objectSafeDictionaryForKey:@"nmPrdClaimInfo"];
-    NSString *nmPrdClaimIdStr = [nmPrdClaimInfoDic objectForKey:@"nmPrdClaimId"];
-    
     NSString *purchaseBeanStr = self.isSelectGongDouSwitch ? [NSString stringWithFormat:@"%.2f",_accountBean]:@"0.00";
     
     
@@ -1042,11 +1044,48 @@
     {//如果工豆金额大约购买金额 传给服务端工豆金额为购买金额
         purchaseBeanStr = self.purchaseMoneyStr;
     }
+    
     NSString *gcMaStr = _gCCodeTextField.text == nil ? @"" :_gCCodeTextField.text;
     
-    NSDictionary *paramDict = @{@"nmPurchaseToken":self.nmPurchaseTokenStr,@"nmPrdClaimId": nmPrdClaimIdStr,@"purchaseBean":purchaseBeanStr,@"purchaseGoldAmount":cell.moneyTextField.text,@"purchaseMoney": self.purchaseMoneyStr,@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"workshopCode":gcMaStr};
+    NSString *goldRecordidsStr  = self.goldCouponDataDict ? [self.goldCouponDataDict objectSafeForKey:@"goldRecordids"]: @"";
     
-    [[NetworkModule sharedNetworkModule] newPostReq:paramDict tag:kSXTagGetPurchaseGold owner:self signature:YES Type:SelectAccoutTypeGold];
+    self.paramDict = @{@"nmPurchaseToken":self.nmPurchaseTokenStr,@"nmPrdClaimId": self.goldModel.nmPrdClaimId,@"purchaseBean":purchaseBeanStr,@"purchaseGoldAmount":cell.moneyTextField.text,@"purchaseMoney": self.purchaseMoneyStr,@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"workshopCode":gcMaStr,@"goldRecordids":goldRecordidsStr};
+    
+    if (_isHaveGoldCouponNum) {//如果有返金劵的话
+        //返金券
+        if (self.goldCouponDataDict) {
+            //勾选使用条件不足
+            NSString *couponPrdaimSum2 = [self.goldCouponDataDict valueForKey:@"investMinSum"];
+            NSString *invenestMoney = [NSString stringWithFormat:@"%.3lf",purchaseGoldAmount];
+            int compareResult1 = [Common stringA:invenestMoney ComparedStringB:couponPrdaimSum2];
+            NSString *showStr = @"";
+            if (compareResult1 == -1) {
+                showStr = [NSString stringWithFormat:@"返金券使用条件不足,需购买满%@可用",[UCFToolsMehod AddComma:couponPrdaimSum2]];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:showStr delegate:self cancelButtonTitle:nil otherButtonTitles:@"重新输入", nil];
+                alert.tag = 1000;
+                [alert show];
+                return;
+            }
+            NSString *cashNum = [self.goldCouponDataDict valueForKey:@"selectedGoldCouponNum"];
+            showStr = [NSString stringWithFormat:@"购买克重%@克,确认购买吗?\n使用返金券%@张(共%@克)",invenestMoney, cashNum,[UCFToolsMehod AddComma:[self.goldCouponDataDict valueForKey:@"goldAccountSum"]]];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:showStr delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"立即购买", nil];
+            alert.tag = 3000;
+            [alert show];
+            return;
+        } else {
+            NSString *messageStr = [NSString stringWithFormat:@"有可用返息券,确认不使用继续购买吗"];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+            alert.tag = 4000;
+            [alert show];
+            return;
+        }
+    }
+    [self getPurchaseGoldSucceessHttpRequst];
+}
+
+-(void)getPurchaseGoldSucceessHttpRequst
+{
+     [[NetworkModule sharedNetworkModule] newPostReq:self.paramDict tag:kSXTagGetPurchaseGold owner:self signature:YES Type:SelectAccoutTypeGold];
 }
 
 -(void)beginPost:(kSXTag)tag

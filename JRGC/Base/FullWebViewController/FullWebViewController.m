@@ -83,9 +83,9 @@
     self.navigationController.navigationBar.translucent = NO;
     if([_sourceVc isEqualToString:@"cashVC"]){//提现页面
      [self addheaderView];
-     fullView.frame = CGRectMake(0, 64, ScreenWidth, ScreenHeight - NavigationBarHeight);
+        fullView.frame = CGRectMake(0, 64, ScreenWidth, ScreenHeight - NavigationBarHeight);
     }else{
-      fullView.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight - NavigationBarHeight);
+        fullView.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight - NavigationBarHeight);
     }
     
     self.view.backgroundColor = UIColorWithRGB(0xebebee);
@@ -100,8 +100,20 @@
             [fullView loadHTMLString:_htmlStr baseURL:nil];
         }
     }
+    if (_localFilePath) {
+        
+        NSURL *url=[NSURL fileURLWithPath:_localFilePath];
+        NSURLRequest *request=[NSURLRequest requestWithURL:url];
+//        fullView.allowsPictureInPictureMediaPlayback = YES;
+        [fullView loadRequest:request];
+//        NSData *newData = [NSData dataWithContentsOfFile:_localFilePath];
+//        [fullView loadData:newData MIMEType:@"" textEncodingName:@"UTF8" baseURL:nil];
+//        [fullView loadData:data MIMEType:respnose.MIMEType textEncodingName:@"UTF8" baseURL:nil];
+        
+//        [fullView loadRequest:request];
+    }
     
-    fullView.scalesPageToFit =YES;
+    fullView.scalesPageToFit =YES ;
     fullView.delegate =self;
     _activityIndicatorView = [[UIActivityIndicatorView alloc]
                              initWithFrame : CGRectMake(0.0f, 0.0f, 32.0f, 32.0f)] ;

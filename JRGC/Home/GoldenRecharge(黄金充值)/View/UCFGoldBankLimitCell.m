@@ -31,10 +31,14 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    [self.bankIconImageView sd_setImageWithURL:[NSURL URLWithString:self.bankModel.bankLogoUrl]];
+    [self.bankIconImageView sd_setImageWithURL:[NSURL URLWithString:self.bankModel.bankLogoUrl] placeholderImage:[UIImage imageNamed:@"bank_default"] options:SDWebImageRetryFailed];
+
     self.bankNameLabel.text = self.bankModel.bankName;
     self.bankOneLimitLabel.text = self.bankModel.bankOneLimt;
     self.bankDayAddedLimitLabel.text = self.bankModel.bankDayLimit;
+    self.bankNameLabel.textColor = UIColorWithRGB(0x555555);
+    self.bankOneLimitLabel.textColor = UIColorWithRGB(0x555555);
+    self.bankDayAddedLimitLabel.textColor = UIColorWithRGB(0x555555);
 }
 
 - (void)setIndexPath:(NSIndexPath *)indexPath

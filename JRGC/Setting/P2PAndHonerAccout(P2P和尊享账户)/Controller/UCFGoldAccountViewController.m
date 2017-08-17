@@ -134,15 +134,15 @@
             cell.backgroundColor = UIColorWithRGB(0xf9f9f9);
             cell.textLabel.textColor = UIColorWithRGB(0x333333);
         } else {
-            lineView.frame = CGRectMake(15, model.cellHeight - 1, ScreenWidth, 1);
+            lineView.frame = CGRectMake(15, model.cellHeight - 0.5, ScreenWidth, 0.5);
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             cell.textLabel.font = [UIFont systemFontOfSize:15];
             cell.backgroundColor = [UIColor whiteColor];
             if ([model.leftTitle isEqualToString:@"邀请返利"]) {
                 lineView.frame = CGRectZero;
             } else if ([model.leftTitle isEqualToString:@"提金订单"]) {
-                lineView.frame = CGRectMake(0, model.cellHeight - 1, ScreenWidth, 1);
-
+                lineView.backgroundColor = UIColorWithRGB(0xd8d8d8);
+                lineView.frame = CGRectMake(0, model.cellHeight - 0.5, ScreenWidth, 0.5);
             }
         }
         titleLabel.text = model.leftTitle;
@@ -178,7 +178,6 @@
             lineView.tag = 1000;
             [cell.contentView addSubview:lineView];
             cell.delegate = self;
-//            cell.textLabel.text = @"可用余额";
         }
         [cell updateaVailableMoenyLab:self.balanceAmount];
         return cell;
@@ -219,6 +218,7 @@
     UCFCellStyleModel *model05 = [[UCFCellStyleModel alloc] initWithCellStyle:CellStyleDefault WithLeftTitle:@"增金宝" WithRightImage:[UIImage imageNamed:@"list_icon_arrow"] WithTargetClassName:@"" WithCellHeight:44 WithDelegate:self];
     UCFCellStyleModel *model06 = [[UCFCellStyleModel alloc] initWithCellStyle:CellStyleDefault WithLeftTitle:@"尊享金" WithRightImage:[UIImage imageNamed:@"list_icon_arrow"] WithTargetClassName:@"" WithCellHeight:44 WithDelegate:self];
     UCFCellStyleModel *model07 = [[UCFCellStyleModel alloc] initWithCellStyle:CellStyleDefault WithLeftTitle:@"提金订单" WithRightImage:[UIImage imageNamed:@"list_icon_arrow"] WithTargetClassName:@"" WithCellHeight:44 WithDelegate:self];
+
 
     [self.dataArray addObject:model01];
     [self.dataArray addObject:model02];
@@ -334,7 +334,7 @@
 }
     
 - (void)goldAccountFirstCell:(GoldAccountFirstCell *)goldFirstCell didClickedCashButton:(UIButton *)button
-    {
+{
     UCFGoldCashMoneyViewController *goldCashMoney = [[UCFGoldCashMoneyViewController alloc] initWithNibName:@"UCFGoldCashMoneyViewController" bundle:nil];
     goldCashMoney.baseTitleText = @"提现";
     goldCashMoney.balanceMoney = self.balanceAmount;

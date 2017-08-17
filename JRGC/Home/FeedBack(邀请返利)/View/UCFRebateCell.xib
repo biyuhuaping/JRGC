@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="289"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KCh-Pi-kyk" id="o0P-Lf-WAZ">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="289"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="288.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LvH-JV-khE">
@@ -440,7 +440,7 @@
                 <outlet property="title_8" destination="e3p-Qm-6Kr" id="Yn3-cP-25f"/>
                 <outlet property="workDate" destination="hYm-DT-p51" id="1fb-ui-V7s"/>
             </connections>
-            <point key="canvasLocation" x="610" y="133"/>
+            <point key="canvasLocation" x="609.5" y="132.5"/>
         </tableViewCell>
     </objects>
     <resources>

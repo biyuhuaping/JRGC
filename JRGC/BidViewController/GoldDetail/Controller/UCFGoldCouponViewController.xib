@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UCFGoldCouponViewController">
             <connections>
                 <outlet property="allSelectBtn" destination="ELr-jf-sBp" id="Bhe-jP-8LA"/>
+                <outlet property="confirmUseGoldCouponBtn" destination="3hQ-gJ-uH4" id="ktJ-wf-lA2"/>
                 <outlet property="needGoldAccountLab" destination="KUp-2o-OtS" id="PvP-4X-k52"/>
                 <outlet property="remainGoldAccountLab" destination="jqQ-Ft-vMV" id="Ycz-Qi-gee"/>
                 <outlet property="selectTipStr" destination="Ya7-tf-y1J" id="adV-p9-03u"/>

@@ -53,7 +53,16 @@
      NSString *purchaseMoneyStr = [NSString stringWithFormat:@"¥%@",[_dataDict objectSafeForKey:@"purchaseMoney"]];
     UCFSettingItem *item5 = [UCFSettingItem itemWithTitle:@"支付金额" withSubtitle:purchaseMoneyStr];
     
-    self.dataArray = @[item1,item2,item3,item4,item5];
+    NSString *returnGoldStr = [NSString stringWithFormat:@"%@克",[_dataDict objectSafeForKey:@"returnGold"]];
+    if([returnGoldStr doubleValue] > 0)
+    {
+         UCFSettingItem *item6 = [UCFSettingItem itemWithTitle:@"获得返金" withSubtitle:returnGoldStr];
+         self.dataArray = @[item1,item2,item3,item4,item5,item6];
+    }
+    else
+    {
+         self.dataArray = @[item1,item2,item3,item4,item5];
+    }
 }
 -(UIView *)createHeaderView{
     UCFGoldBidSuccessHeaderView *headerView = [[[NSBundle mainBundle]loadNibNamed:@"UCFGoldBidSuccessHeaderView" owner:nil options:nil]firstObject];

@@ -18,7 +18,7 @@
 @property (weak, nonatomic) IBOutlet NZLabel *investValueLabel;     // 投资活动
 @property (weak, nonatomic) IBOutlet UILabel *investActivityLabel;
 @property (weak, nonatomic) IBOutlet UILabel *expireTimeLabel;      // 有效期
-@property (strong, nonatomic) IBOutlet UILabel *symbolLab;          //符号+/¥
+@property (strong, nonatomic) IBOutlet NZLabel *symbolLab;          //符号+/¥
 @property (weak, nonatomic) PrintView *printView;
 @property (strong, nonatomic) IBOutlet NZLabel *inverstPeriodLab;   //使用范围
 @property (strong, nonatomic) IBOutlet UILabel *amountLab;          //金额（只在兑换券里显示）
@@ -108,18 +108,30 @@
             break;
     }
     
-    
     if ([couponModel.couponType isEqualToString:@"1"]) {
+        _symbolLab.font = [UIFont boldSystemFontOfSize:18];
         self.couponValueLabel.text = couponModel.backIntrestRate;
         _symbolLab.text = @"+";
         [_couponValueLabel setFont:[UIFont systemFontOfSize:15] string:@"%"];
-    }else{
+    }else if ([couponModel.couponType intValue] == 3) {
+        self.couponValueLabel.text = @"";
+        _symbolLab.font = [UIFont boldSystemFontOfSize:20];
+        _symbolLab.text = [NSString stringWithFormat:@"%@克",couponModel.useInvest];
+        [ _symbolLab setFont:[UIFont boldSystemFontOfSize:14] string:@"克"];
+    }
+    else{
         self.couponValueLabel.text = couponModel.useInvest;
         _symbolLab.text = @"¥";
+        _symbolLab.font = [UIFont boldSystemFontOfSize:18];
     }
     
     NSString *temp = [UCFToolsMehod AddComma:couponModel.investMultip];
-    self.investValueLabel.text = [NSString stringWithFormat:@"投资¥%@可用", temp];
+    if([couponModel.couponType intValue] == 3)
+    {
+        self.investValueLabel.text = [NSString stringWithFormat:@"购买%@g可用", temp];
+    }else{
+         self.investValueLabel.text = [NSString stringWithFormat:@"投资¥%@可用", temp];
+    }
     [_investValueLabel setFont:[UIFont boldSystemFontOfSize:10] string:[NSString stringWithFormat:@"¥%@", temp]];
     self.investActivityLabel.text = couponModel.remark;
     self.expireTimeLabel.text = [NSString stringWithFormat:@"有效期 %@", couponModel.overdueTime];
