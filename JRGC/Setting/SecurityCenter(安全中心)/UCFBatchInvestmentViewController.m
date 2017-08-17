@@ -364,7 +364,7 @@ static NSString *thirdStr = @"批量出借授权已经开启";
     }
 }
 - (void)showApplyView {
-    baseTitleLabel.text = @"自动投标授权";
+    baseTitleLabel.text = @"批量出借授权";
     [self registerView];
     [self saveBeforeView];
     [self passWordBeforeView];

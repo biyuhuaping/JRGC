@@ -547,7 +547,7 @@
             cell.title_3.text = dic[@"tradeTime"];//投资日期
             NSString *qxdate = [dic objectSafeForKey: @"startingDate"];
             cell.title_7.text = qxdate.length > 0 ? qxdate :@"--" ;//起息日期
-            cell.title_4.text = [NSString stringWithFormat:@"%@g",dic[@"purchaseAmount"]];//投资本金
+            cell.title_4.text = [NSString stringWithFormat:@"%@克",dic[@"purchaseAmount"]];//投资本金
             float tableViewRowHeight = 278;
             //判断好友返利是否为0.0
 //            NSString *commissionAmt = [dic[@"commissionAmt"] stringByReplacingOccurrencesOfString:@"￥" withString:@""];
@@ -703,7 +703,7 @@
             
             cell.lab3.text = _dataArr2[indexPath.section][indexPath.row][@"refundPerDate"] ;//计划回款日
             NSString *refundAmtStr = _dataArr2[indexPath.section][indexPath.row][@"planRefundAmount"];
-            cell.lab4.text = [refundAmtStr hasPrefix:@"*"] ? refundAmtStr : [NSString stringWithFormat:@"%@g",refundAmtStr];//回款金额
+            cell.lab4.text = [refundAmtStr hasPrefix:@"*"] ? refundAmtStr : [NSString stringWithFormat:@"%@克",refundAmtStr];//回款金额
         } else {
             cell.lab1.text = _dataArr2[indexPath.section][indexPath.row][@"realName"];//姓名
             cell.lab2.text = _dataArr2[indexPath.section][indexPath.row][@"mobile"];//手机号
@@ -743,7 +743,7 @@
             cell.planLabel.text = @"计划回金日";
             cell.lab3.text = _dataArr3[indexPath.section][indexPath.row][@"refundPerDate"] ;//计划回款日
             NSString *refundAmtStr = _dataArr3[indexPath.section][indexPath.row][@"planRefundAmount"];
-            cell.lab4.text = [refundAmtStr hasPrefix:@"*"] ? refundAmtStr : [NSString stringWithFormat:@"%@g",refundAmtStr];//回款金额
+            cell.lab4.text = [refundAmtStr hasPrefix:@"*"] ? refundAmtStr : [NSString stringWithFormat:@"%@克",refundAmtStr];//回款金额
         } else {
             cell.lab1.text = _dataArr3[indexPath.section][indexPath.row][@"realName"];//姓名
             cell.lab2.text = _dataArr3[indexPath.section][indexPath.row][@"mobile"];//手机号
