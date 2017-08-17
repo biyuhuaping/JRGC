@@ -81,13 +81,13 @@
                                    @"tabbar_icon_project_normal",
                                    @"tabbar_icon_find_normal",
                                    @"tabbar_icon_life_normal",
-                                   @"tabbar_icon_loan_normal"];
+                                   @"tabbar_icon_more_normal"];
 
     NSArray *tabbarHighlightArray = @[@"tabbar_icon_user_highlight",
                                       @"tabbar_icon_project_highlight",
                                       @"tabbar_icon_find_highlight",
                                       @"tabbar_icon_life_highlight",
-                                      @"tabbar_icon_loan_highlight"];
+                                      @"tabbar_icon_more_highlight"];
     UIViewController *controller = nil;
     for (int i=0; i<5; i++) {
         switch (i) {
