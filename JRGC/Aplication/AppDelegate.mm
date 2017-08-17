@@ -776,12 +776,12 @@
         if ([dic[@"ret"] boolValue]) {
             NSString *availableNum = [[dic objectSafeDictionaryForKey:@"data"] objectSafeForKey:@"availableNum"];
             if ([availableNum integerValue] > 0) {
-                [self.tabBarController.tabBar showBadgeOnItemIndex:4];
+                [self.tabBarController.tabBar showBadgeOnItemIndex:2];
             } else {
-                [self.tabBarController.tabBar hideBadgeOnItemIndex:4];
+                [self.tabBarController.tabBar hideBadgeOnItemIndex:2];
             }
         } else {
-            [self.tabBarController.tabBar hideBadgeOnItemIndex:4];
+            [self.tabBarController.tabBar hideBadgeOnItemIndex:2];
         }
     }
 }

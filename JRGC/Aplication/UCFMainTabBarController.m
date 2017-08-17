@@ -8,11 +8,7 @@
 
 #import "UCFMainTabBarController.h"
 #import "UCFLoginViewController.h"
-//#import "UCFLatestProjectViewController.h"
-#warning UCFHomeViewController.h 替换 UCFLatestProjectViewController.h
 #import "UCFHomeViewController.h"
-//#import "UCFSettingViewController.h"
-//#import "UCFPersonCenterController.h"
 #import "UCFMoreViewController.h"
 #import "AppDelegate.h"
 #import "P2PWalletHelper.h"
@@ -31,10 +27,8 @@
 
 @interface UCFMainTabBarController ()
 
-//@property (strong, nonatomic) UCFLatestProjectViewController *LatestView;
-#warning UCFHomeViewController.h 替换 UCFLatestProjectViewController.h
+
 @property (strong, nonatomic) UCFHomeViewController *LatestView;
-//@property (strong, nonatomic) UCFAssignmentCreditorViewController *AssignmentView;
 @property (strong, nonatomic) UCFProjectListController *AssignmentView;
 @end
 
@@ -79,60 +73,57 @@
     NSMutableArray *vcArray = [NSMutableArray array];
     NSArray *tabbarTitleArray = @[@"我的",
                                   @"投资",
-                                  @"借款",
+                                  @"发现",
                                   @"生活",
-                                  @"发现"];
+                                  @"更多"];
     
     NSArray *tabbarNormalArray = @[@"tabbar_icon_user_normal",
-                                   @"tabbar_icon_project_normal",                                  @"tabbar_icon_loan_normal",
+                                   @"tabbar_icon_project_normal",
+                                   @"tabbar_icon_find_normal",
                                    @"tabbar_icon_life_normal",
-                                   @"tabbar_icon_find_normal"];
+                                   @"tabbar_icon_loan_normal"];
 
     NSArray *tabbarHighlightArray = @[@"tabbar_icon_user_highlight",
                                       @"tabbar_icon_project_highlight",
-                                      @"tabbar_icon_loan_highlight",
+                                      @"tabbar_icon_find_highlight",
                                       @"tabbar_icon_life_highlight",
-                                      @"tabbar_icon_find_highlight"];
+                                      @"tabbar_icon_loan_highlight"];
     UIViewController *controller = nil;
     for (int i=0; i<5; i++) {
         switch (i) {
             case 0:{
-//                UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"HomeStoryboard" bundle:nil];
-//                _LatestView = [storyBoard instantiateViewControllerWithIdentifier:@"home"];
-#warning 新类替换修改
                 _LatestView = [[UCFHomeViewController alloc] initWithNibName:@"UCFHomeViewController" bundle:nil];
                 _LatestView.baseTitleType = @"list";
                 controller = _LatestView;
             }
                 break;
             case 1:{
-//                UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"HomeStoryboard" bundle:nil];
-//                controller = [storyBoard instantiateViewControllerWithIdentifier:@"home"];
-//                _LatestView.baseTitleType = @"list";
                 UCFInvestViewController *invest = [[UCFInvestViewController alloc] initWithNibName:@"UCFInvestViewController" bundle:nil];
                 controller = invest;
             }
                 break;
             case 2:{
                 
-                UCFLoanViewController *loanWeb = [[UCFLoanViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
-                loanWeb.url = EASYLOAN_URL;
-                controller = loanWeb;
-                loanWeb.navTitle = @"借款";
+//                UCFLoanViewController *loanWeb = [[UCFLoanViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
+//                loanWeb.url = EASYLOAN_URL;
+//                controller = loanWeb;
+//                loanWeb.navTitle = @"借款";
+                UCFDiscoveryViewController *discoveryWeb = [[UCFDiscoveryViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
+                discoveryWeb.url      = DISCOVERYURL;//请求地址;
+                discoveryWeb.navTitle = @"发现";
+                controller = discoveryWeb;
             }
                 break;
             case 3:{
 
                 controller = [[P2PWalletHelper sharedManager] getUCFWalletTargetController];
-    
+
             }
                 break;
             case 4:{
-                
-                UCFDiscoveryViewController *discoveryWeb = [[UCFDiscoveryViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
-                discoveryWeb.url      = DISCOVERYURL;//请求地址;
-                discoveryWeb.navTitle = @"发现";
-                controller = discoveryWeb;
+                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"UCFMoreViewController" bundle:nil];
+                UCFMoreViewController *moreView =  [storyboard instantiateViewControllerWithIdentifier:@"more_main"];
+                controller = moreView;
             }
                 break;
             default:
@@ -162,8 +153,7 @@
 
 #pragma mark - UITabBarControllerDelegate
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController{
-//    [[NSNotificationCenter defaultCenter] postNotificationName:@"AssignmentUpdate" object:nil];
-//    [[NSNotificationCenter defaultCenter] postNotificationName:@"LatestProjectUpdate" object:nil];
+
 }
 
 - (void)gestureRecognizerHandle:(UITapGestureRecognizer *)sender{

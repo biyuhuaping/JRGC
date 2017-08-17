@@ -88,7 +88,7 @@
        
         self.userLevel = [UCFSettingArrowItem itemWithIcon:@"safecenter_icon_vip" title:@"会员等级" destVcClass:[UCFWebViewJavascriptBridgeLevel class]];//***qyy
         self.userLevel.isShowOrHide = YES;//不显示
-        UCFSettingItem *moreVc = [UCFSettingArrowItem itemWithIcon:@"safecenter_icon_more" title:@"更多" destVcClass:[UCFMoreViewController class]];
+//        UCFSettingItem *moreVc = [UCFSettingArrowItem itemWithIcon:@"safecenter_icon_more" title:@"更多" destVcClass:[UCFMoreViewController class]];
         //先前是绑卡页面，因为删除绑卡页面，所以暂时用TradePasswordVC这个类替代，整体调试的时候改过来，zrc fixed
 //        UCFSettingItem *bundleCard = [UCFSettingArrowItem itemWithIcon:@"safecenter_icon_bankcard" title:@"绑定银行卡" destVcClass:[UCFBankCardInfoViewController class]];//***qyy
         
@@ -104,18 +104,15 @@
 //        self.setChangePassword.isShowOrHide  = YES;//显示该信息 对应的cell可以点击
         
         UCFSettingGroup *group1 = [[UCFSettingGroup alloc] init];//用户信息
-//        group1.items = [[NSMutableArray alloc]initWithArray: @[self.userLevel,idauth, bundlePhoneNum, bundleCard,riskAssessment]];//qyy
-        group1.items = [[NSMutableArray alloc]initWithArray: @[idauth, bundlePhoneNum,facCode,self.userLevel,moreVc]];//qyy
+        group1.items = [[NSMutableArray alloc]initWithArray: @[idauth, bundlePhoneNum,facCode,self.userLevel]];//qyy
 
         UCFSettingGroup *group2 = [[UCFSettingGroup alloc] init];//账户安全
         
         if ([self checkTouchIdIsOpen]) {
             UCFSettingItem *zhiWenSwith  = [UCFSettingSwitchItem itemWithIcon:@"safecenter_icon_touch" title:@"启用指纹解锁" withSwitchType:1];
-//            group2.items = [[NSMutableArray alloc]initWithArray:@[batchInvest,activeGestureCode,zhiWenSwith, activeFaceValid,modifyPassword,_setChangePassword]];
              group2.items = [[NSMutableArray alloc]initWithArray:@[activeGestureCode,zhiWenSwith, activeFaceValid,modifyPassword]];
         } else {
-//            group2.items =[[NSMutableArray alloc]initWithArray: @[batchInvest,activeGestureCode,activeFaceValid,modifyPassword,_setChangePassword]];
-             group2.items =[[NSMutableArray alloc]initWithArray: @[activeGestureCode,activeFaceValid,modifyPassword,]];
+             group2.items =[[NSMutableArray alloc]initWithArray: @[activeGestureCode,activeFaceValid,modifyPassword]];
 
         }
         _itemsData = [[NSMutableArray alloc] initWithObjects:group1,group2,nil];
