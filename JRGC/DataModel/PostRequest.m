@@ -56,9 +56,15 @@
 - (id)result
 {
     if(postStatus == kPostStatusEnded){
+        
         NSData *data = [_request responseData];
+        if (_tag == kSXTagContractDownLoad) {
+            NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+            NSString *imagePath = [documentPath stringByAppendingString:@"/11.pdf"];
+            [data writeToFile:imagePath atomically:YES];
+            return imagePath;
+        }
         NSString *string = [[[NSString alloc] initWithData:data encoding:_enc] autorelease];
-       
         DBLog(@"请求返回数据:%@",string);
         return string;
     } else {
@@ -75,22 +81,6 @@
     [_request setResponseEncoding:_enc];
     [_request setRequestMethod:@"POST"];
     _request.timeOutSeconds = 30.0f;
-
-//    NSMutableDictionary *reqHeaders = [[NSMutableDictionary alloc] init];
-//
-//    [reqHeaders setValue:@"application/json; encoding=utf-8" forKey:@"Content-Type"];
-//    [reqHeaders setValue:@"application/json" forKey:@"Accept"];
-//
-//    NSString *uuid = [[NSUserDefaults standardUserDefaults] valueForKey:UUID];
-//    [reqHeaders setValue:uuid forKey:@"uuid"];
-//    DLog(@"%s \n =============================\n\n\n\n---- uuid is 【 %@ 】 ---- \n\n\n\n =============================",__FUNCTION__,uuid);
-////    [reqHeaders setValue:@"4" forKey:@"uuid"];
-//    
-//    NSString *mobile = [[UIDevice currentDevice] model];
-//    [_request setUserAgent:mobile];
-//    
-//    _request.requestHeaders = reqHeaders;
-//    [reqHeaders release];
     AppDelegate * app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     if (EnvironmentConfiguration == 2 || (app.isSubmitAppStoreTestTime)) {
         [_request addRequestHeader:@"jrgc-umark" value:@"1"];
@@ -101,11 +91,6 @@
     DLog(@"post data:%@",data);
     // 重要
     _request.tag = _tag;
-//    NSMutableString *authStr = [[NSMutableString alloc] init];
-//    if (data) {
-//        [authStr setString:data];
-//    }
-//
      NSData *sourceData = [data dataUsingEncoding:_enc];
 
     [_request appendPostData:sourceData];
@@ -114,12 +99,7 @@
     if(self.owner)
         [self.owner beginPost:self.sxTag];
     [_request startAsynchronous];
-//    [_request setAuthenticationScheme:@"https"];//设置验证方式
-//    [_request setValidatesSecureCertificate:NO];//设置验证证书
-//    [authStr release];
-    
-//    BOOL dataWasCompressed = [_request isResponseCompressed];
-//    DLog(@"dataWasCompressed is %hhd ",dataWasCompressed);
+
 }
 
 - (void)dealloc

@@ -92,22 +92,24 @@
         baseTitleLabel.text = @"微金邀请返利";
         _gold_secondView.hidden = YES;
     } else if (self.accoutType == SelectAccoutTypeGold) {
-        baseTitleLabel.text = @"邀请返利";
+        baseTitleLabel.text = @"黄金邀请返利";
         _secondViewHeight.constant = 44;
         _gold_secondView.hidden = NO;
         _feedBackLabYCenter.constant = - 12;
 
     }
     if (self.accoutType == SelectAccoutTypeGold) {
-        [_shareBtn setBackgroundColor:UIColorWithRGB(0xfc8f0e)];
+        [_shareBtn setBackgroundColor:UIColorWithRGB(0xffc027)];
+        [_copBtn setBackgroundColor:UIColorWithRGB(0x7C9DC7)];
         _shareBtn.layer.cornerRadius = 2.0f;
         _myFeedBackShowLab.text = @"我的黄金邀请返利";
     } else {
         [_shareBtn setBackgroundImage:[[UIImage imageNamed:@"btn_red"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:2.5] forState:UIControlStateNormal];
         [_shareBtn setBackgroundImage:[[UIImage imageNamed:@"btn_red_highlight"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:2.5] forState:UIControlStateHighlighted];
+        [_copBtn setBackgroundImage:[[UIImage imageNamed:@"btn_bule"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:2.5] forState:UIControlStateNormal];
+        [_copBtn setBackgroundImage:[[UIImage imageNamed:@"btn_bule_highlight"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:2.5] forState:UIControlStateHighlighted];
     }
-    [_copBtn setBackgroundImage:[[UIImage imageNamed:@"btn_bule"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:2.5] forState:UIControlStateNormal];
-    [_copBtn setBackgroundImage:[[UIImage imageNamed:@"btn_bule_highlight"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:2.5] forState:UIControlStateHighlighted];
+
     self.secondView_lineView.backgroundColor = UIColorWithRGB(0xd8d8d8);
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(getMyInvestDataList) name:@"getMyInvestDataList" object:nil];
     _CheckInstructionBtn.hidden = YES;

@@ -765,6 +765,8 @@
 		A851F3531F1361D8003DE8B8 /* UCFGoldTransactionDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A851F3511F1361D8003DE8B8 /* UCFGoldTransactionDetailViewController.m */; };
 		A851F3541F1361D8003DE8B8 /* UCFGoldTransactionDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A851F3521F1361D8003DE8B8 /* UCFGoldTransactionDetailViewController.xib */; };
 		A851F3561F1379E2003DE8B8 /* UCFGoldPriceFloatView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A851F3551F1379E2003DE8B8 /* UCFGoldPriceFloatView.xib */; };
+		A85A2EBF1F431CEF004BF4C1 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A85A2EBE1F431CEF004BF4C1 /* QuickLook.framework */; };
+		A85A2EC21F4321B0004BF4C1 /* QLHeaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A85A2EC11F4321B0004BF4C1 /* QLHeaderViewController.m */; };
 		A8A3A57F1EE95BDA00D9C06D /* UCFInvestAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A8A3A57E1EE95BDA00D9C06D /* UCFInvestAPIManager.m */; };
 		A8AD2E3E1EB979760013DB7C /* MongoliaLayerCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = A8AD2E3D1EB979760013DB7C /* MongoliaLayerCenter.m */; };
 		A8AD6F851EFA6BDE000AF323 /* PagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = A8AD6F841EFA6BDE000AF323 /* PagerView.m */; };
@@ -2294,6 +2296,9 @@
 		A851F3511F1361D8003DE8B8 /* UCFGoldTransactionDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFGoldTransactionDetailViewController.m; sourceTree = "<group>"; };
 		A851F3521F1361D8003DE8B8 /* UCFGoldTransactionDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFGoldTransactionDetailViewController.xib; sourceTree = "<group>"; };
 		A851F3551F1379E2003DE8B8 /* UCFGoldPriceFloatView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFGoldPriceFloatView.xib; sourceTree = "<group>"; };
+		A85A2EBE1F431CEF004BF4C1 /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
+		A85A2EC01F4321B0004BF4C1 /* QLHeaderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLHeaderViewController.h; sourceTree = "<group>"; };
+		A85A2EC11F4321B0004BF4C1 /* QLHeaderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLHeaderViewController.m; sourceTree = "<group>"; };
 		A8A3A57D1EE95BDA00D9C06D /* UCFInvestAPIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFInvestAPIManager.h; sourceTree = "<group>"; };
 		A8A3A57E1EE95BDA00D9C06D /* UCFInvestAPIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFInvestAPIManager.m; sourceTree = "<group>"; };
 		A8AD2E3C1EB979760013DB7C /* MongoliaLayerCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MongoliaLayerCenter.h; sourceTree = "<group>"; };
@@ -2640,6 +2645,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A85A2EBF1F431CEF004BF4C1 /* QuickLook.framework in Frameworks */,
 				4ABED3AB1E2FB28E006B3F62 /* libresolv.tbd in Frameworks */,
 				4ABED3A91E2FACE3006B3F62 /* UserNotifications.framework in Frameworks */,
 				25950EC61D7FB6EC00E4CCBA /* libCloudwalkFaceSDK.a in Frameworks */,
@@ -4812,6 +4818,8 @@
 				7BE51D8B1ADE1B8F007600AB /* UCFInvestmentDetailView.m */,
 				7BCA210C1AEDCE67001CD258 /* InvestmentDetailTableViewCell.h */,
 				7BCA210D1AEDCE67001CD258 /* InvestmentDetailTableViewCell.m */,
+				A85A2EC01F4321B0004BF4C1 /* QLHeaderViewController.h */,
+				A85A2EC11F4321B0004BF4C1 /* QLHeaderViewController.m */,
 			);
 			name = InvestmentDetail;
 			path = ../InvestmentDetail;
@@ -4982,6 +4990,7 @@
 		7BCE02651AC91CBE0084C15C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A85A2EBE1F431CEF004BF4C1 /* QuickLook.framework */,
 				4ABED3AA1E2FB28E006B3F62 /* libresolv.tbd */,
 				4ABED3A81E2FACE3006B3F62 /* UserNotifications.framework */,
 				83F2D5A01DCB57CA0041F913 /* WatchConnectivity.framework */,
@@ -7669,6 +7678,7 @@
 				FB4F9E451D62A6B600CCB492 /* OpeningMerchantsVC.m in Sources */,
 				FBA80F531AE6472C0066BF99 /* InvestmentItemInfo.m in Sources */,
 				74270C941EC58F6800F9419B /* UCFSignModel.m in Sources */,
+				A85A2EC21F4321B0004BF4C1 /* QLHeaderViewController.m in Sources */,
 				7BCCA8B31ACA97C20089DAAC /* UCFLoginViewController.m in Sources */,
 				741EB18A1D59829E006C885F /* UCFTableCellTwo.m in Sources */,
 				EDEC8C031CB3BAB300815228 /* NSString+WPAttributedMarkup.m in Sources */,

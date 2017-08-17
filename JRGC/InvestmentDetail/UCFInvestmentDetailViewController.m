@@ -11,18 +11,22 @@
 #import "FullWebViewController.h"
 #import "UCFProjectDetailViewController.h"
 #import "UCFNoDataView.h"
-
-@interface UCFInvestmentDetailViewController ()
+#import "UCFPurchaseWebView.h"
+#import <QuickLook/QuickLook.h>
+#import "QLHeaderViewController.h"
+@interface UCFInvestmentDetailViewController ()<QLPreviewControllerDelegate,QLPreviewControllerDataSource>
 {
     UCFInvestmentDetailView *_investmentDetailView;
     UCFNoDataView *_nodataView;
     UCF404ErrorView *_errorView;
     NSString *_contractTitle;
+    
 }
-
+@property(nonatomic,copy)NSString *localFilePath;
 @end
 
 @implementation UCFInvestmentDetailViewController
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -230,7 +234,28 @@
         }else{
             [self showHTAlertdidFinishGetUMSocialDataResponse];
         }
+    } else if (tag.intValue == kSXTagContractDownLoad) {
+        
+        self.localFilePath = result;
+//        QLHeaderViewController *vc = [[QLHeaderViewController alloc] init];
+//        vc.localFilePath = result;
+//        [self.navigationController pushViewController:vc animated:YES];
+        
+        QLPreviewController *QLPVC = [[QLPreviewController alloc] init];
+        QLPVC.delegate = self;
+        QLPVC.dataSource = self;
+        QLPVC.title = @"合同";
+        [self presentViewController:QLPVC animated:YES completion:nil];
     }
+}
+#pragma mark QLPreviewControllerDataSource
+- (NSInteger)numberOfPreviewItemsInPreviewController:(QLPreviewController *)controller{
+    return 1;
+}
+- (id<QLPreviewItem>)previewController:(QLPreviewController *)controller previewItemAtIndex:(NSInteger)index{
+    NSArray *arr = @[_localFilePath];
+    
+    return [NSURL fileURLWithPath:arr[index]];
 }
 - (void)showHTAlertdidFinishGetUMSocialDataResponse
 {
@@ -260,8 +285,8 @@
         
         if ([constract.contractDownUrl isEqualToString:@""] || constract.contractDownUrl ==nil ) {//如果合同url不存在的情况
             if ([constract.signStatus boolValue]) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message: @"系统升级，协议请登录工场微金PC端查阅！" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles: nil];
-                [alert show];
+                NSString *strParameters = [NSString stringWithFormat:@"userId=%@&prdOrderId=%@&contractType=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],self.billId,constract.contractType];
+                [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagContractDownLoad owner:self Type:self.accoutType];
                 return;
             }else{
                 _contractTitle = constract.contracttitle;

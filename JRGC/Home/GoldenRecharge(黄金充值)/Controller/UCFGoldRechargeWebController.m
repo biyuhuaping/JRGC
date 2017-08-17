@@ -103,7 +103,7 @@
     if (range.location != NSNotFound) {
         NSRange sucRange = [requestString rangeOfString:@"status=00"];
         if (sucRange.location != NSNotFound) {
-            [self.navigationController popToViewController:self.rootVc animated:YES];
+            [self performSelector:@selector(goBackToGoldAccount) withObject:nil afterDelay:1];
         }
         else {
             [self.navigationController popViewControllerAnimated:YES];
@@ -113,7 +113,10 @@
     
     return YES;
 }
-
+- (void)goBackToGoldAccount
+{
+    [self.navigationController popToViewController:self.rootVc animated:YES];
+}
 -(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error{
     
     

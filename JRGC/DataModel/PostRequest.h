@@ -30,5 +30,4 @@
 - (void)cancel;
 - (void)postData:(NSString *)data delegate:(id)delegate;
 
-
 @end
