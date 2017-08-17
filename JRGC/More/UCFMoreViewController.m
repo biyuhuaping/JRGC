@@ -52,8 +52,6 @@ static NSString * const kAppKey = @"23511571";
             
             UIActionSheet *alert = [[UIActionSheet alloc] initWithTitle:@"请选择客服电话" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"010-65255966",@"400-0322-988", nil];
             [alert showInView:self.view];
-//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"联系客服" message:@"呼叫400-0322-988" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"立即拨打", nil];
-//            [alert show];
         };
         UCFSettingItem *problemFeedback = [UCFSettingArrowItem itemWithIcon:nil title:@"问题反馈" destVcClass:nil];
         UCFSettingItem *faq = [UCFSettingArrowItem itemWithIcon:nil title:@"帮助中心" destStoryBoardStr:@"UCFMoreViewController" storyIdStr:@"faq"];
@@ -71,7 +69,7 @@ static NSString * const kAppKey = @"23511571";
     [super viewDidLoad];
     self.view.backgroundColor = UIColorWithRGB(0xd8d8d8);
     self.navigationController.navigationBar.translucent = NO;
-    [self addLeftButton];
+//    [self addLeftButton];
     [self initUI];
     self.navigationController.fd_prefersNavigationBarHidden = YES;
 
