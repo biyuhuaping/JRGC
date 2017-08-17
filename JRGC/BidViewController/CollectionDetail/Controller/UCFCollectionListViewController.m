@@ -127,6 +127,7 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
     UCFInvestmentDetailViewController *controller = [[UCFInvestmentDetailViewController alloc] init];
     controller.billId = dataDict[@"id"];
     controller.detailType = @"1";
+    controller.accoutType = SelectAccoutTypeP2P;
     [self.navigationController pushViewController:controller animated:YES];
 }
 -(void)getCollectionListHttpRequest{
