@@ -36,4 +36,12 @@
 - (BOOL)showMore {
     return self.group.showMore;
 }
+
+- (int)type {
+    return  [self.group.type intValue];
+}
+
+- (NSString *)desc {
+    return self.group.desc;
+}
 @end

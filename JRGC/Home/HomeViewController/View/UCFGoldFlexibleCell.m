@@ -7,6 +7,15 @@
 //
 
 #import "UCFGoldFlexibleCell.h"
+#import "UCFHomeListCellPresenter.h"
+#import "NZLabel.h"
+
+@interface UCFGoldFlexibleCell ()
+@property (weak, nonatomic) IBOutlet NZLabel *goldFlexibleRateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *minInvestLabel;
+@property (weak, nonatomic) IBOutlet UILabel *completeLabel;
+
+@end
 
 @implementation UCFGoldFlexibleCell
 
@@ -15,10 +24,17 @@
     // Initialization code
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+- (void)setPresenter:(UCFHomeListCellPresenter *)presenter
+{
+    _presenter = presenter;
+    self.goldFlexibleRateLabel.text = presenter.annualRate;
+    self.minInvestLabel.text = presenter.minInvest;
+    self.completeLabel.text = presenter.completeLoan;
 }
 
+- (IBAction)goldBuy:(UIButton *)sender {
+    if ([self.delegate respondsToSelector:@selector(homelistCell:didClickedBuyButtonWithModel:)]) {
+        [self.delegate homelistCell:self didClickedBuyButtonWithModel:self.presenter.item];
+    }
+}
 @end

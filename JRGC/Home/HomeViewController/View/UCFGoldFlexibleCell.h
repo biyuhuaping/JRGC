@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UCFGoldFlexibleCell : UITableViewCell
+@class UCFHomeListCellPresenter, UCFGoldFlexibleCell, UCFHomeListCellModel;
+@protocol UCFGoldFlexibleCellDelegate <NSObject>
 
+- (void)homelistCell:(UCFGoldFlexibleCell *)homelistCell didClickedBuyButtonWithModel:(UCFHomeListCellModel *)model;
+@end
+
+@interface UCFGoldFlexibleCell : UITableViewCell
+@property (strong, nonatomic) UCFHomeListCellPresenter *presenter;
+@property (strong, nonatomic) NSIndexPath *indexPath;
+@property (weak, nonatomic) id<UCFGoldFlexibleCellDelegate> delegate;
 @end
