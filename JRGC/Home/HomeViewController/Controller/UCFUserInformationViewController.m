@@ -20,6 +20,7 @@
 #import "UCFNoticeView.h"
 #import "MjAlertView.h"
 #import "UCFAssetTipView.h"
+#import "UCFAddedProfitView.h"
 
 #import "UCFCycleModel.h"
 #import "UCFUserInfoModel.h"
@@ -29,7 +30,7 @@
 #import "HSHelper.h"
 #define UserInfoViewHeight  327
 
-@interface UCFUserInformationViewController () <UCFUserPresenterUserInfoCallBack, UITableViewDelegate, UITableViewDataSource, SDCycleScrollViewDelegate, UIAlertViewDelegate, UCFNoticeViewDelegate, UCFAssetTipViewDelegate>
+@interface UCFUserInformationViewController () <UCFUserPresenterUserInfoCallBack, UITableViewDelegate, UITableViewDataSource, SDCycleScrollViewDelegate, UIAlertViewDelegate, UCFNoticeViewDelegate, UCFAssetTipViewDelegate, UCFAddedProfitViewDelegate>
 @property (strong, nonatomic) UCFUserPresenter *presenter;
 
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
@@ -72,7 +73,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *personInformationBtn;
 
 @property (weak, nonatomic) MjAlertView *assetTipview;
-
+@property (weak, nonatomic) MjAlertView *addedProfitView;
 @end
 
 @implementation UCFUserInformationViewController
@@ -620,6 +621,27 @@
 {
     BOOL isShowNotice = [[NSUserDefaults standardUserDefaults] boolForKey:@"isShowNotice"];
     self.noticeBackViewHeight.constant = isShowNotice ? 35 : 0;
+}
+#pragma mark - 累计收益解释按钮点击
+- (IBAction)addProfitClicked:(UIButton *)sender {
+    __weak typeof(self) weakSelf = self;
+    MjAlertView *alertView = [[MjAlertView alloc] initCustomAlertViewWithBlock:^(id blockContent) {
+        UIView *view = (UIView *)blockContent;
+        view.frame = CGRectMake(0, 0, 265, 210);
+        
+        UCFAddedProfitView *tipview = (UCFAddedProfitView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFAddedProfitView" owner:self options:nil] lastObject];
+        tipview.frame = view.bounds;
+        view.center = CGPointMake(ScreenWidth * 0.5, ScreenHeight * 0.5);
+        tipview.delegate = weakSelf;
+        [view addSubview:tipview];
+    }];
+    [alertView show];
+    self.addedProfitView = alertView;
+}
+
+- (void)addedProfitTipViewDidClickedCloseButton:(UIButton *)button
+{
+    [self.addedProfitView hide];
 }
 
 #pragma mark - noticeView 的代理

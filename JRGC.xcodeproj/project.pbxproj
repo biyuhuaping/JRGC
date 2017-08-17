@@ -233,6 +233,8 @@
 		743985461F17699600F2EDB8 /* UCFGoldRechargeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 743985451F17699600F2EDB8 /* UCFGoldRechargeModel.m */; };
 		743B275F1F3D8B070098DC1B /* UCFGoldBankModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 743B275E1F3D8B070098DC1B /* UCFGoldBankModel.m */; };
 		743B27621F3D9BD40098DC1B /* UCFGoldLimitedBankModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 743B27611F3D9BD40098DC1B /* UCFGoldLimitedBankModel.m */; };
+		7442E0391F45C7A7001E1D2F /* UCFAddedProfitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7442E0381F45C7A7001E1D2F /* UCFAddedProfitView.m */; };
+		7442E03B1F45C7B3001E1D2F /* UCFAddedProfitView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7442E03A1F45C7B3001E1D2F /* UCFAddedProfitView.xib */; };
 		7443C7231F1EFF45009669C0 /* UCFGoldCashOneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7443C7211F1EFF45009669C0 /* UCFGoldCashOneCell.m */; };
 		7443C7241F1EFF45009669C0 /* UCFGoldCashOneCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7443C7221F1EFF45009669C0 /* UCFGoldCashOneCell.xib */; };
 		7443C7281F1EFF61009669C0 /* UCFGoldCashTwoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7443C7261F1EFF61009669C0 /* UCFGoldCashTwoCell.m */; };
@@ -1386,6 +1388,9 @@
 		743B275E1F3D8B070098DC1B /* UCFGoldBankModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFGoldBankModel.m; sourceTree = "<group>"; };
 		743B27601F3D9BD40098DC1B /* UCFGoldLimitedBankModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFGoldLimitedBankModel.h; sourceTree = "<group>"; };
 		743B27611F3D9BD40098DC1B /* UCFGoldLimitedBankModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFGoldLimitedBankModel.m; sourceTree = "<group>"; };
+		7442E0371F45C7A7001E1D2F /* UCFAddedProfitView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFAddedProfitView.h; sourceTree = "<group>"; };
+		7442E0381F45C7A7001E1D2F /* UCFAddedProfitView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFAddedProfitView.m; sourceTree = "<group>"; };
+		7442E03A1F45C7B3001E1D2F /* UCFAddedProfitView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFAddedProfitView.xib; sourceTree = "<group>"; };
 		7443C7201F1EFF45009669C0 /* UCFGoldCashOneCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFGoldCashOneCell.h; sourceTree = "<group>"; };
 		7443C7211F1EFF45009669C0 /* UCFGoldCashOneCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFGoldCashOneCell.m; sourceTree = "<group>"; };
 		7443C7221F1EFF45009669C0 /* UCFGoldCashOneCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFGoldCashOneCell.xib; sourceTree = "<group>"; };
@@ -3438,6 +3443,9 @@
 				74B763DD1F20E08E00E12E51 /* UCFAssetTipView.h */,
 				74B763DE1F20E08E00E12E51 /* UCFAssetTipView.m */,
 				74CE8B821F21B60600512B15 /* UCFAssetTipView.xib */,
+				7442E0371F45C7A7001E1D2F /* UCFAddedProfitView.h */,
+				7442E0381F45C7A7001E1D2F /* UCFAddedProfitView.m */,
+				7442E03A1F45C7B3001E1D2F /* UCFAddedProfitView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -7014,6 +7022,7 @@
 				74BDA9611F09EE3B0054403F /* UCFCalendarViewController.xib in Resources */,
 				FBB685801AE4A76800F222B6 /* MJRefresh.bundle in Resources */,
 				83FCCA761F1745A2002921C5 /* UCFGoldInvestmentDetailViewController.xib in Resources */,
+				7442E03B1F45C7B3001E1D2F /* UCFAddedProfitView.xib in Resources */,
 				A8E01A811EEA4C6F003E3BDC /* UCFTransfeTableViewCell.xib in Resources */,
 				2526ADE01DD08D5F00114D9A /* JRGCCustomGroupCell.xib in Resources */,
 				FB5149521D64441F00C26E7B /* guideImage6_1.png in Resources */,
@@ -7722,6 +7731,7 @@
 				7BCBF1261ADB616D00C874FC /* UCFRegisterOneView.m in Sources */,
 				A8CE17731EC44BF8009BD954 /* UCFWalletSelectBankCarViewController.m in Sources */,
 				83CD84361F13A50800227704 /* UCFProjectListController.m in Sources */,
+				7442E0391F45C7A7001E1D2F /* UCFAddedProfitView.m in Sources */,
 				74BDA9911F09F6C60054403F /* FSCalendarStickyHeader.m in Sources */,
 				83F2D59F1DCB508F0041F913 /* UCFSession.m in Sources */,
 				ED44558E1C112BCF00823DF3 /* UCFLoginShaowView.m in Sources */,

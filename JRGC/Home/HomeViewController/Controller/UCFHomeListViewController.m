@@ -274,8 +274,8 @@
 #pragma mark -  黄金活期购买
 - (void)homelistCell:(UCFGoldFlexibleCell *)homelistCell didClickedBuyButtonWithModel:(UCFHomeListCellModel *)model
 {
-    if ([self.delegate respondsToSelector:@selector(homeList:tableView:didClickedWithModel:withType:)]) {
-        [self.delegate homeList:self tableView:self.tableView didClickedWithModel:model withType:UCFHomeListTypeInvest];
+    if ([self.delegate respondsToSelector:@selector(homeList:tableView:didClickedBuyGoldWithModel:)]) {
+        [self.delegate homeList:self tableView:self.tableView didClickedBuyGoldWithModel:model];
     }
 }
 
