@@ -13,10 +13,17 @@
 
 @interface UCFGoldRaiseViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
-
+@property (weak, nonatomic) UCFGoldRaiseView *raiseHeaderView;
 @end
 
 @implementation UCFGoldRaiseViewController
+
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    CGFloat height = [UCFGoldRaiseView viewHeight];
+    self.raiseHeaderView.frame = CGRectMake(0, 0, ScreenWidth, height);
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -26,9 +33,8 @@
 
 - (void)createUI {
     UCFGoldRaiseView *view = (UCFGoldRaiseView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFGoldRaiseView" owner:self options:nil] lastObject];
-    CGFloat height = [UCFGoldRaiseView viewHeight];
-    view.frame = CGRectMake(0, 0, ScreenWidth, height);
     self.tableview.tableHeaderView = view;
+    self.raiseHeaderView = view;
     
     UIButton *rightbutton = [UIButton buttonWithType:UIButtonTypeCustom];
     rightbutton.frame = CGRectMake(0, 0, 88, 44);

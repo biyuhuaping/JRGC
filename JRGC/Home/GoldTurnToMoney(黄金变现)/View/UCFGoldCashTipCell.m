@@ -7,6 +7,14 @@
 //
 
 #import "UCFGoldCashTipCell.h"
+#import "UCFGoldCashModel.h"
+
+@interface UCFGoldCashTipCell ()
+@property (weak, nonatomic) IBOutlet UIImageView *dotImageView;
+@property (weak, nonatomic) IBOutlet UILabel *tipLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tipLeftSpace;
+
+@end
 
 @implementation UCFGoldCashTipCell
 
@@ -15,10 +23,12 @@
     // Initialization code
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    self.dotImageView.hidden = !self.goldCashModel.isShowBlackDot;
+    self.tipLeftSpace.constant = self.goldCashModel.isShowBlackDot ? 25 : 15;
+    self.tipLabel.text = self.goldCashModel.tipString;
 }
 
 @end

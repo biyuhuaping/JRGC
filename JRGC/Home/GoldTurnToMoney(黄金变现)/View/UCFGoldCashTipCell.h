@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+@class UCFGoldCashModel;
 @interface UCFGoldCashTipCell : UITableViewCell
-
+@property (nonatomic, strong) UCFGoldCashModel *goldCashModel;
 @end
