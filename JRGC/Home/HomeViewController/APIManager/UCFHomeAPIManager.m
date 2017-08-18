@@ -23,7 +23,7 @@
 #define GOLDDETAIL @"goldDetail"
 #define GOLDPROCLAIMDETAIL @"GoldProClaimDetail"
 #define COLLECTIONDETAIL  @"CollectionDetail"
-
+#define GOLDCURRENTPROCLAIMDETAIL @"GoldCurrentProClaimDetail"//黄金活期
 
 @interface UCFHomeAPIManager () <NetworkModuleDelegate>
 @property (strong, nonatomic) NSMutableDictionary *requestDict;
@@ -111,6 +111,19 @@
                 [self.requestDict setObject:completionHandler forKey:GOLDPROCLAIMDETAIL];
             }
                 break;
+            case 7://黄金活期标详情页面请求
+            {
+                [[NetworkModule sharedNetworkModule] newPostReq:parameter tag:kSXTagGoldCurrentPrdClaimInfo owner:self signature:YES Type:SelectAccoutTypeGold];
+                [self.requestDict setObject:completionHandler forKey:GOLDCURRENTPROCLAIMDETAIL];
+            }
+                break;
+            case 8://黄金活期投资页面请求
+            {
+                [[NetworkModule sharedNetworkModule] newPostReq:parameter tag:kSXTagGoldCurrentProClaimDetail owner:self signature:YES Type:SelectAccoutTypeGold];
+                [self.requestDict setObject:completionHandler forKey:GOLDCURRENTPROCLAIMDETAIL];
+            }
+                break;
+
             default:
                 break;
         }
@@ -250,6 +263,16 @@
         complete(nil, dic);
         [self.requestDict removeObjectForKey:GOLDPROCLAIMDETAIL];
     }
+    else if (tag.intValue == kSXTagGoldCurrentPrdClaimInfo) {
+        NetworkCompletionHandler complete = [self.requestDict objectForKey:GOLDCURRENTPROCLAIMDETAIL];
+        complete(nil, dic);
+        [self.requestDict removeObjectForKey:GOLDCURRENTPROCLAIMDETAIL];
+    }
+    else if (tag.intValue == kSXTagGoldCurrentProClaimDetail) {
+        NetworkCompletionHandler complete = [self.requestDict objectForKey:GOLDCURRENTPROCLAIMDETAIL];
+        complete(nil, dic);
+        [self.requestDict removeObjectForKey:GOLDCURRENTPROCLAIMDETAIL];
+    }
 }
 //请求失败
 - (void)errorPost:(NSError*)err tag:(NSNumber*)tag
@@ -297,6 +320,16 @@
         NetworkCompletionHandler complete = [self.requestDict objectForKey:GOLDPROCLAIMDETAIL];
          complete(err, nil);
         [self.requestDict removeObjectForKey:GOLDPROCLAIMDETAIL];
+    }
+    else if (tag.intValue == kSXTagGoldCurrentPrdClaimInfo) {
+        NetworkCompletionHandler complete = [self.requestDict objectForKey:GOLDCURRENTPROCLAIMDETAIL];
+        complete(err, nil);
+        [self.requestDict removeObjectForKey:GOLDCURRENTPROCLAIMDETAIL];
+    }
+    else if (tag.intValue == kSXTagGoldCurrentProClaimDetail) {
+        NetworkCompletionHandler complete = [self.requestDict objectForKey:GOLDCURRENTPROCLAIMDETAIL];
+        complete(err, nil);
+        [self.requestDict removeObjectForKey:GOLDCURRENTPROCLAIMDETAIL];
     }
 }
 
