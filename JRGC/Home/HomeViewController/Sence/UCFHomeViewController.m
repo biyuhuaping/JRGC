@@ -331,10 +331,15 @@
 {
     [self homeList:nil tableView:nil didClickedWithModel:nil withType:type];
 }
-
+#pragma mark - 黄金活期 购买点击事件
 - (void)homeList:(UCFHomeListViewController *)homeList tableView:(UITableView *)tableView didClickedBuyGoldWithModel:(UCFHomeListCellModel *)model
 {
-    
+    if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
+        //如果未登录，展示登录页面
+        [self showLoginView];
+    } else {
+            [self gotoGoldInvestVC:model];
+    }
 }
 
 - (void)homeList:(UCFHomeListViewController *)homeList tableView:(UITableView *)tableView didClickedWithModel:(UCFHomeListCellModel *)model withType:(UCFHomeListType)type
@@ -347,7 +352,10 @@
         case 2:
             self.accoutType = SelectAccoutTypeHoner;
             break;
-        case 3:
+        case 3://黄金定期
+            self.accoutType = SelectAccoutTypeGold;
+            break;
+        case 6://黄金活期
             self.accoutType = SelectAccoutTypeGold;
             break;
         case 14:
@@ -651,25 +659,53 @@
     if ([model.status intValue] == 2 || [model.status intValue] == 21) {
         return;
     }
+    
+    
+    
      __weak typeof(self) weakSelf = self;
-    NSString *nmProClaimIdStr = [NSString stringWithFormat:@"%@",model.Id];
-    NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId",nmProClaimIdStr, @"nmPrdClaimId",@"6",@"type",nil];
-
-    [self.userInfoVC.presenter fetchProDetailDataWithParameter:strParameters completionHandler:^(NSError *error, id result) {
-        NSDictionary *dic = (NSDictionary *)result;
-        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-        NSString *rsttext = [dic objectSafeForKey:@"message"];
-        NSDictionary *dataDict = [dic objectSafeDictionaryForKey:@"data"];
-        if ( [dic[@"ret"] boolValue]) {
-            UCFGoldPurchaseViewController *goldAuthorizationVC = [[UCFGoldPurchaseViewController alloc]initWithNibName:@"UCFGoldPurchaseViewController" bundle:nil];
-            goldAuthorizationVC.dataDic = dataDict;
-            [self.navigationController pushViewController:goldAuthorizationVC  animated:YES];
-        }
-        else
-        {
-            [AuxiliaryFunc showAlertViewWithMessage:rsttext];
-        }
-    }];
+    
+    if ([model.type intValue] == 6) {
+        NSString *nmProClaimIdStr = [NSString stringWithFormat:@"%@",model.Id];
+        NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId",nmProClaimIdStr, @"nmPrdClaimId",@"8",@"type",nil];
+        
+        [self.userInfoVC.presenter fetchProDetailDataWithParameter:strParameters completionHandler:^(NSError *error, id result) {
+            NSDictionary *dic = (NSDictionary *)result;
+            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+            NSString *rsttext = [dic objectSafeForKey:@"message"];
+            NSDictionary *dataDict = [dic objectSafeDictionaryForKey:@"data"];
+            if ( [dic[@"ret"] boolValue]) {
+                UCFGoldPurchaseViewController *goldPurchaseVC = [[UCFGoldPurchaseViewController alloc]initWithNibName:@"UCFGoldPurchaseViewController" bundle:nil];
+                goldPurchaseVC.dataDic = dataDict;
+                goldPurchaseVC.isGoldCurrentAccout = YES;
+                [self.navigationController pushViewController:goldPurchaseVC  animated:YES];
+            }
+            else
+            {
+                [AuxiliaryFunc showAlertViewWithMessage:rsttext];
+            }
+        }];
+    }
+    else{
+        NSString *nmProClaimIdStr = [NSString stringWithFormat:@"%@",model.Id];
+        NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId",nmProClaimIdStr, @"nmPrdClaimId",@"6",@"type",nil];
+        
+        [self.userInfoVC.presenter fetchProDetailDataWithParameter:strParameters completionHandler:^(NSError *error, id result) {
+            NSDictionary *dic = (NSDictionary *)result;
+            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+            NSString *rsttext = [dic objectSafeForKey:@"message"];
+            NSDictionary *dataDict = [dic objectSafeDictionaryForKey:@"data"];
+            if ( [dic[@"ret"] boolValue]) {
+                UCFGoldPurchaseViewController *goldPurchaseVC = [[UCFGoldPurchaseViewController alloc]initWithNibName:@"UCFGoldPurchaseViewController" bundle:nil];
+                goldPurchaseVC.dataDic = dataDict;
+                goldPurchaseVC.isGoldCurrentAccout = NO;
+                [self.navigationController pushViewController:goldPurchaseVC  animated:YES];
+            }
+            else
+            {
+                [AuxiliaryFunc showAlertViewWithMessage:rsttext];
+            }
+        }];
+    }
 }
 -(void)gotoGoldDetailVC:(UCFHomeListCellModel *)model{
     
@@ -686,36 +722,70 @@
 //        return;
 //    }
     __weak typeof(self) weakSelf = self;
-    NSString *nmProClaimIdStr = [NSString stringWithFormat:@"%@",model.Id];
-    NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId",nmProClaimIdStr, @"nmPrdClaimId",@"5",@"type",nil];
+    NSString *typeStr = model.type;
     
-    [self.userInfoVC.presenter fetchProDetailDataWithParameter:strParameters completionHandler:^(NSError *error, id result) {
-        NSDictionary *dic = (NSDictionary *)result;
-        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-
-        NSString *rsttext = dic[@"message"];
-        NSDictionary *dataDict = [dic objectSafeDictionaryForKey:@"data"];
-        if ( [dic[@"ret"] boolValue])
-        {
-            UCFGoldDetailViewController*goldDetailVC = [[UCFGoldDetailViewController alloc]initWithNibName:@"UCFGoldDetailViewController" bundle:nil];
-            goldDetailVC.dataDict = dataDict;
-            [weakSelf.navigationController pushViewController:goldDetailVC  animated:YES];
-        }
-        else
-        {
-            if([[dic objectSafeForKey:@"code"]  intValue] == 11112)
+    if ([typeStr intValue] == 6) {//黄金活期标
+        NSString *nmProClaimIdStr = [NSString stringWithFormat:@"%@",model.Id];
+        NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId",nmProClaimIdStr, @"nmPrdClaimId",@"7",@"type",nil];
+        
+        [self.userInfoVC.presenter fetchProDetailDataWithParameter:strParameters completionHandler:^(NSError *error, id result) {
+            NSDictionary *dic = (NSDictionary *)result;
+            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+            
+            NSString *rsttext = dic[@"message"];
+            NSDictionary *dataDict = [dic objectSafeDictionaryForKey:@"data"];
+            if ( [dic[@"ret"] boolValue])
             {
-                UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前标的详情只对认购人开放"];
-                [weakSelf.navigationController pushViewController:controller animated:YES];
-            }else{
-                [AuxiliaryFunc showAlertViewWithMessage:rsttext];
+                UCFGoldDetailViewController*goldDetailVC = [[UCFGoldDetailViewController alloc]initWithNibName:@"UCFGoldDetailViewController" bundle:nil];
+                goldDetailVC.dataDict = dataDict;
+                goldDetailVC.isGoldCurrentAccout = YES;
+                [weakSelf.navigationController pushViewController:goldDetailVC  animated:YES];
             }
+            else
+            {
+                if([[dic objectSafeForKey:@"code"]  intValue] == 11112)
+                {
+                    UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前标的详情只对认购人开放"];
+                    [weakSelf.navigationController pushViewController:controller animated:YES];
+                }else{
+                    [AuxiliaryFunc showAlertViewWithMessage:rsttext];
+                }
+                
+            }
+        }];
 
-        }
-    }];
+        
+    }else{
+        NSString *nmProClaimIdStr = [NSString stringWithFormat:@"%@",model.Id];
+        NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId",nmProClaimIdStr, @"nmPrdClaimId",@"5",@"type",nil];
+        
+        [self.userInfoVC.presenter fetchProDetailDataWithParameter:strParameters completionHandler:^(NSError *error, id result) {
+            NSDictionary *dic = (NSDictionary *)result;
+            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+            
+            NSString *rsttext = dic[@"message"];
+            NSDictionary *dataDict = [dic objectSafeDictionaryForKey:@"data"];
+            if ( [dic[@"ret"] boolValue])
+            {
+                UCFGoldDetailViewController*goldDetailVC = [[UCFGoldDetailViewController alloc]initWithNibName:@"UCFGoldDetailViewController" bundle:nil];
+                goldDetailVC.dataDict = dataDict;
+                goldDetailVC.isGoldCurrentAccout = NO;
+                [weakSelf.navigationController pushViewController:goldDetailVC  animated:YES];
+            }
+            else
+            {
+                if([[dic objectSafeForKey:@"code"]  intValue] == 11112)
+                {
+                    UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前标的详情只对认购人开放"];
+                    [weakSelf.navigationController pushViewController:controller animated:YES];
+                }else{
+                    [AuxiliaryFunc showAlertViewWithMessage:rsttext];
+                }
+                
+            }
+        }];
+    }
 }
-
-
 - (void)showLoginView
 {
     UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
