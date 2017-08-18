@@ -56,6 +56,33 @@
         self.dealMoneyLab.textColor = UIColorWithRGB(0xfd4d4c);
         self.dealGoldPrice.text = [NSString stringWithFormat:@"￥%@",_model.purchasePrice];
         self.serviceChargeLab.text = [NSString stringWithFormat:@"￥%@",_model.poundage];;
+    } else if ([_model.tradeTypeName isEqualToString:@"变现"]) {
+        self.tradeTypeNameLab.text = @"变现克重";
+        self.dealGoldNum.textColor = UIColorWithRGB(0x4db94f);
+        NSString *totalStr = [NSString stringWithFormat:@"%@克",_model.purchaseAmount]; //变现克重
+        self.dealGoldNum.attributedText = [self changeLabelWithText:@"克" withTotalStr:totalStr];
+        self.dealType.text = @"变现";
+        self.dealTime.text = _model.tradeTime;
+        self.dealNO.text = _model.tradeRemark;
+        
+        self.dealMoneyLab.text = [NSString stringWithFormat:@"%@",_model.frozenMoney];
+        self.dealMoneyLab.textColor = UIColorWithRGB(0x4db94f);
+        self.dealGoldPrice.text = [NSString stringWithFormat:@"￥%@",_model.purchasePrice];
+        self.serviceChargeLab.text = [NSString stringWithFormat:@"￥%@",_model.poundage];;
+    
+    } else if ([_model.tradeTypeName isEqualToString:@"收益克重"]) {
+        self.dealType.text = @"收益克重";
+        self.dealType.textColor = UIColorWithRGB(0xfd4d4c);
+        self.middleBaseView.hidden = YES;
+        self.bottomViewSpace.constant = 0;
+        self.tradeTypeNameLab.text = @"收益克重";
+        self.dealGoldNum.textColor = UIColorWithRGB(0xfd4d4c);
+        NSString *totalStr =  [NSString stringWithFormat:@"%@克",_model.purchaseAmount];
+        self.dealGoldNum.attributedText = [self changeLabelWithText:@"克" withTotalStr:totalStr];
+        self.dealTime.text = _model.tradeTime;
+        self.dealNO.text = _model.tradeRemark;
+
+        
     }
     
 }

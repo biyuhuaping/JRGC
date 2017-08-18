@@ -51,6 +51,12 @@
     } else if ([_model.tradeTypeName isEqualToString:@"冻结"]) {
         self.turnoverLab.textColor = UIColorWithRGB(0x999999);
         self.dealMoney.textColor = UIColorWithRGB(0x999999);
+    } else if ([_model.tradeTypeName isEqualToString:@"变现"]) {
+        self.turnoverLab.textColor = UIColorWithRGB(0x4db94f);
+        self.dealMoney.textColor = UIColorWithRGB(0x4db94f);
+    } else if ([_model.tradeTypeName isEqualToString:@"收益克重"]) {
+        self.turnoverLab.textColor = UIColorWithRGB(0xfd4d4c);
+        self.dealMoney.textColor = UIColorWithRGB(0xfd4d4c);
     }
 
     self.dealMoney.text = [NSString stringWithFormat:@"%@",_model.frozenMoney];
