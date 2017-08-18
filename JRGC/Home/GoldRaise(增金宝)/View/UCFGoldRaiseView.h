@@ -9,5 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface UCFGoldRaiseView : UIView
+@property (weak, nonatomic) IBOutlet UILabel *goldIncreaseAmount;
+@property (weak, nonatomic) IBOutlet UILabel *addedProfitLabel;
+@property (weak, nonatomic) IBOutlet UILabel *floatProfitLabel;
+@property (weak, nonatomic) IBOutlet UILabel *averagePriceLabel;
+
 + (CGFloat)viewHeight;
 @end
