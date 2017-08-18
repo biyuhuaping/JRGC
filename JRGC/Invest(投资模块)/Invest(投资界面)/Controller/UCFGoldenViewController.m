@@ -25,6 +25,7 @@
 @property (weak, nonatomic) UCFGoldenHeaderView *goldenHeader;
 @property (strong, nonatomic) NSMutableArray *dataArray;
 @property (assign, nonatomic) NSUInteger currentPage;
+@property (strong, nonatomic) UCFGoldModel *fliexGoldModel;
 @end
 
 @implementation UCFGoldenViewController
@@ -80,7 +81,10 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (section == 0) {
-        return 1;
+        if (self.fliexGoldModel.nmPrdClaimName.length>0) {
+            return 1;
+        }
+        return 0;
     }
     return self.dataArray.count;
 }
@@ -120,11 +124,18 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    if (self.dataArray.count>0) {
-        return 32;
+    if (section == 0) {
+        if (self.fliexGoldModel.nmPrdClaimName.length > 0) {
+            return 32;
+        }
+        else return 0.001;
     }
-    else
-        return 0.001;
+    else {
+        if (self.dataArray.count>0) {
+            return 32;
+        }
+    }
+    return 0.001;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -132,27 +143,46 @@
 //    if (self.dataArray.count > 0) {
 //        return 10;
 //    }
+    if (section == 0) {
+        if (self.fliexGoldModel.nmPrdClaimName.length > 0) {
+            return 8;
+        }
+    }
     return 0.001;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    if (self.dataArray.count > 0) {
-        static NSString* viewId = @"homeListHeader";
-        UCFHomeListHeaderSectionView *view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:viewId];
-        if (nil == view) {
-            view = (UCFHomeListHeaderSectionView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeListHeaderSectionView" owner:self options:nil] lastObject];
+    
+    static NSString* viewId = @"homeListHeader";
+    UCFHomeListHeaderSectionView *view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:viewId];
+    if (nil == view) {
+        view = (UCFHomeListHeaderSectionView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeListHeaderSectionView" owner:self options:nil] lastObject];
+    }
+    [view.contentView setBackgroundColor:UIColorWithRGB(0xf9f9f9)];
+    [view.upLine setBackgroundColor:UIColorWithRGB(0xebebee)];
+    view.frame = CGRectMake(0, 0, ScreenWidth, 30);
+    if (section == 0) {
+        if (self.fliexGoldModel.nmPrdClaimName.length > 0) {
+            view.homeListHeaderMoreButton.hidden = YES;
+            view.headerTitleLabel.text = @"增金宝";
+            view.headerImageView.image = [UIImage imageNamed:@"mine_icon_gold"];
+//            view.honerLabel.text = @"实物黄金赚收益";
+//            view.honerLabel.hidden = NO;
+            [view.homeListHeaderMoreButton setTitleColor:UIColorWithRGB(0x4aa1f9) forState:UIControlStateNormal];
+            return view;
         }
-        view.homeListHeaderMoreButton.hidden = YES;
-        view.headerTitleLabel.text = @"尊享金";
-        view.headerImageView.image = [UIImage imageNamed:@"mine_icon_gold"];
-        view.honerLabel.text = @"实物黄金赚收益";
-        view.honerLabel.hidden = NO;
-        [view.contentView setBackgroundColor:UIColorWithRGB(0xf9f9f9)];
-        [view.upLine setBackgroundColor:UIColorWithRGB(0xebebee)];
-        [view.homeListHeaderMoreButton setTitleColor:UIColorWithRGB(0x4aa1f9) forState:UIControlStateNormal];
-        view.frame = CGRectMake(0, 0, ScreenWidth, 30);
-        return view;
+    }
+    else if (section == 1) {
+        if (self.dataArray.count > 0) {
+            view.homeListHeaderMoreButton.hidden = YES;
+            view.headerTitleLabel.text = @"尊享金";
+            view.headerImageView.image = [UIImage imageNamed:@"mine_icon_gold"];
+            view.honerLabel.text = @"实物黄金赚收益";
+            view.honerLabel.hidden = NO;
+            [view.homeListHeaderMoreButton setTitleColor:UIColorWithRGB(0x4aa1f9) forState:UIControlStateNormal];
+            return view;
+        }
     }
     return nil;
 }
@@ -305,6 +335,9 @@
             if ([self.tableview.header isRefreshing]) {
                 [self.dataArray removeAllObjects];
             }
+            
+            UCFGoldModel *goldFliexModel = [UCFGoldModel goldModelWithDict:[dict objectSafeDictionaryForKey:@"nmCurrentPrdInfo"]];
+            self.fliexGoldModel = goldFliexModel;
             for (NSDictionary *temp in resut) {
                 UCFGoldModel *gold = [UCFGoldModel goldModelWithDict:temp];
                 [self.dataArray addObject:gold];

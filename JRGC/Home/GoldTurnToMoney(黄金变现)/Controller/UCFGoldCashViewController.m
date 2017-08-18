@@ -7,17 +7,22 @@
 //
 
 #import "UCFGoldCashViewController.h"
-#import "UCFGoldCashFirstCell.h"
+#import "UCFCashGoldHeader.h"
 #import "UCFGoldCashSecondCell.h"
 #import "UCFGoldCashThirdCell.h"
 #import "UCFGoldCashFourthCell.h"
 #import "UCFGoldCashButtonCell.h"
 #import "UCFGoldCashTipCell.h"
 #import "UCFGoldCashModel.h"
+#import "ToolSingleTon.h"
 
 @interface UCFGoldCashViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (strong, nonatomic) NSMutableArray *dataArray;
+@property (copy, nonatomic) NSString *availableGoldAmount;
+@property (copy, nonatomic) NSString *cashServiceRate;
+@property (copy, nonatomic) NSString *liquidateToken;
+@property (weak, nonatomic) UCFCashGoldHeader *cashGoldHeader;
 @end
 
 @implementation UCFGoldCashViewController
@@ -30,12 +35,25 @@
     return _dataArray;
 }
 
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    self.cashGoldHeader.frame = CGRectMake(0, 0, ScreenWidth, 130);
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self addLeftButton];
     
-    [self.tableview setContentInset:UIEdgeInsetsMake(0, 0, 100, 0)];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTipMessage) name:CURRENT_GOLD_PRICE object:nil];
+    
+    UCFCashGoldHeader *cashGoldHeader = (UCFCashGoldHeader *)[[[NSBundle mainBundle] loadNibNamed:@"UCFCashGoldHeader" owner:self options:nil] lastObject];
+    
+    self.tableview.tableHeaderView = cashGoldHeader;
+    self.cashGoldHeader = cashGoldHeader;
+    
+    [self.tableview setContentInset:UIEdgeInsetsMake(10, 0, 100, 0)];
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
     [self.tableview addGestureRecognizer:tap];
@@ -68,50 +86,30 @@
     NSMutableDictionary *dic = [result objectFromJSONString];
     NSString *rstcode = dic[@"ret"];
     NSString *rsttext = dic[@"message"];
-    if (tag.integerValue == kSXTagGoldIncrease) {
+    if (tag.integerValue == kSXTagGoldChangeCashInfo) {
         if ([rstcode intValue] == 1) {
             NSDictionary *dict = [dic objectSafeDictionaryForKey:@"data"];
-            NSDictionary *pageData = [dict objectSafeDictionaryForKey:@"pageData"];
-            //            NSArray *resut = [pageData objectSafeArrayForKey:@"result"];
-            //            if ([self.tableview.header isRefreshing]) {
-            //                [self.dataArray removeAllObjects];
-            //            }
-            //            for (NSDictionary *temp in resut) {
-            //                UCFGoldRechargeHistoryModel *goldhistory = [UCFGoldRechargeHistoryModel goldRechargeHistoryModelWithDict:temp];
-            //                [self.dataArray addObject:goldhistory];
-            //            }
-            //            BOOL hasNextPage = [[[pageData objectSafeDictionaryForKey:@"pagination"] objectForKey:@"hasNextPage"] boolValue];
-            //            if (hasNextPage) {
-            //                self.currentPage ++;
-            //                self.tableview.footer.hidden = YES;
-            //                [self.tableview.footer resetNoMoreData];
-            //                self.dataArray = [self arrayGroupWithArray:self.dataArray];
-            //            }
-            //            else {
-            //                if (self.dataArray.count > 0) {
-            //                    [self.tableview.footer noticeNoMoreData];
-            //                }
-            //                else
-            //                    self.tableview.footer.hidden = YES;
-            //                self.dataArray = [self arrayGroupWithArray:self.dataArray];
-            //            }
-            //            if (!self.dataArray.count) {
-            //                [self.noDataView showInView:self.tableview];
-            //            }
-            //            else {
-            //                [self.noDataView hide];
-            //            }
+            self.availableGoldAmount = [dict objectSafeForKey:@"availableGoldAmount"];
+            self.cashServiceRate = [dict objectSafeForKey:@"cashServiceRate"];
+            self.liquidateToken = [dict objectSafeForKey:@"liquidateToken"];
+            NSString *tipStr = [[dict objectSafeForKey:@"pageContent"] stringByReplacingOccurrencesOfString:@"•" withString:@""];
+            NSArray *tipArray = [tipStr componentsSeparatedByString:@"\n"];
+            [self.dataArray removeAllObjects];
+            [self initData];
+            for (NSString *str in tipArray) {
+                UCFGoldCashModel *model = [[UCFGoldCashModel alloc] init];
+                model.tipString = str;
+            model.isShowBlackDot = YES;
+            CGSize size = [self sizeWithString:str font:[UIFont systemFontOfSize:13] constraintSize:CGSizeMake(ScreenWidth - 40, MAXFLOAT)];
+            model.cellHeight = size.height+5;
+            [self.dataArray addObject:model];
+            }
+            
             [self.tableview reloadData];
         }else {
             if (![rsttext isEqualToString:@""] && rsttext) {
                 [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
             }
-        }
-        if ([self.tableview.header isRefreshing]) {
-            [self.tableview.header endRefreshing];
-        }
-        if ([self.tableview.footer isRefreshing]) {
-            [self.tableview.footer endRefreshing];
         }
     }
 }
@@ -120,16 +118,11 @@
 {
     [MBProgressHUD displayHudError:err.userInfo[@"NSLocalizedDescription"]];
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-    if ([self.tableview.header isRefreshing]) {
-        [self.tableview.header endRefreshing];
-    }
-    if ([self.tableview.footer isRefreshing]) {
-        [self.tableview.footer endRefreshing];
-    }
 }
 
 - (void)initData {
-    NSArray *tipsArray = [[NSArray alloc] initWithObjects:@"黄金价格实时波动，在0.50元的波动范围内成交，成交瞬间系统价格不低于276.50/克则立即为你变现", @"温馨提示:", @"每日可变现上限1,000.000克", @"工作日14:00前变现，当日24:00前到账；14:00后变现，T+1日24:00前到账", nil];
+    NSString *tipOneStr = [NSString stringWithFormat:@"黄金价格实时波动，在0.50元的波动范围内成交，成交瞬间系统价格不低于%.2f/克则立即为你变现", [ToolSingleTon sharedManager].readTimePrice];
+    NSArray *tipsArray = [[NSArray alloc] initWithObjects:tipOneStr, @"温馨提示:", nil];
     [self.dataArray removeAllObjects];
     for (NSString *str in tipsArray) {
         UCFGoldCashModel *model = [[UCFGoldCashModel alloc] init];
@@ -145,27 +138,26 @@
             CGSize size = [self sizeWithString:str font:[UIFont systemFontOfSize:13] constraintSize:CGSizeMake(ScreenWidth - 40, MAXFLOAT)];
             model.cellHeight = size.height+5;
         }
-        else {
-            model.tipString = str;
-            model.isShowBlackDot = YES;
-            CGSize size = [self sizeWithString:str font:[UIFont systemFontOfSize:13] constraintSize:CGSizeMake(ScreenWidth - 40, MAXFLOAT)];
-            model.cellHeight = size.height+5;
-        }
         [self.dataArray addObject:model];
     }
 }
 
+- (void)refreshTipMessage
+{
+    [self.tableview reloadData];
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 5;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == 1) {
+    if (section == 0) {
         return 3;
     }
-    else if (section == 4) {
+    else if (section == 3) {
         return self.dataArray.count -1;
     }
     return 1;
@@ -173,10 +165,10 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    if (section == 0 || section == 1) {
+    if (section == 0) {
         return 10;
     }
-    else if (section == 2) {
+    else if (section == 1) {
         return 15;
     }
     return 0.001;
@@ -184,10 +176,10 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    if (section == 2) {
+    if (section == 1) {
         return 10;
     }
-    else if (section == 3) {
+    else if (section == 2) {
         return 28;
     }
     return 0.001;
@@ -195,15 +187,8 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *cellId = @"goldcashfirst";
+    static NSString *cellId = @"";
     if (indexPath.section == 0) {
-        UCFGoldCashFirstCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
-        if (nil == cell) {
-            cell = (UCFGoldCashFirstCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFGoldCashFirstCell" owner:self options:nil] lastObject];
-        }
-        return cell;
-    }
-    else if (indexPath.section == 1) {
         switch (indexPath.row) {
             case 0: {
                 cellId = @"goldcashsecond";
@@ -237,7 +222,7 @@
         }
         
     }
-    else if (indexPath.section == 2) {
+    else if (indexPath.section == 1) {
         cellId = @"goldcashbutton";
         UCFGoldCashButtonCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
         if (nil == cell) {
@@ -245,7 +230,7 @@
         }
         return cell;
     }
-    else if (indexPath.section == 3) {
+    else if (indexPath.section == 2) {
         cellId = @"goldcashtip";
         UCFGoldCashTipCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
         if (nil == cell) {
@@ -254,7 +239,7 @@
         cell.goldCashModel = [self.dataArray firstObject];
         return cell;
     }
-    else if (indexPath.section == 4) {
+    else if (indexPath.section == 3) {
         cellId = @"goldcashtip";
         UCFGoldCashTipCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
         if (nil == cell) {
@@ -268,17 +253,14 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0) {
-        return 130;
-    }
-    else if (indexPath.section == 2) {
+    if (indexPath.section == 1) {
         return 37;
     }
-    else if (indexPath.section == 3)  {
+    else if (indexPath.section == 2)  {
         UCFGoldCashModel *model = [self.dataArray firstObject];
         return model.cellHeight;
     }
-    else if (indexPath.section == 4) {
+    else if (indexPath.section == 3) {
         UCFGoldCashModel *model = [self.dataArray objectAtIndex:(indexPath.row + 1)];
         return model.cellHeight;
     }
