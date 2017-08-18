@@ -206,9 +206,8 @@
 
         NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId",nmProClaimIdStr, @"nmPrdClaimId",nil];
         
-//        [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagGetGoldProClaimDetail owner:self signature:YES Type:SelectAccoutDefault];
-//        }
-        [self getGoldCurrentPrdClaimInfoHttpRequest:goldModel];
+        [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagGetGoldProClaimDetail owner:self signature:YES Type:SelectAccoutDefault];
+//        [self getGoldCurrentPrdClaimInfoHttpRequest:goldModel];
     }
 }
 #pragma mark -活期详情页面数据请求
@@ -352,7 +351,7 @@
         if ( [dic[@"ret"] boolValue]) {
             UCFGoldDetailViewController*goldDetailVC = [[UCFGoldDetailViewController alloc]initWithNibName:@"UCFGoldDetailViewController" bundle:nil];
             goldDetailVC.dataDict = dataDict;
-            goldDetailVC.isGoldCurrentAccout = YES;
+            goldDetailVC.isGoldCurrentAccout = NO;
             [self.navigationController pushViewController:goldDetailVC  animated:YES];
         }
         else

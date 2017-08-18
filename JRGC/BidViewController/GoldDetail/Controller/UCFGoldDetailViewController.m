@@ -909,7 +909,7 @@
                 return 50;
             }
         }else{
-            if(section == 1) {
+            if(section == 1 && !self.isGoldCurrentAccout) {
                 return 30.f;
             }
         }
