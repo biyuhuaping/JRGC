@@ -1172,6 +1172,9 @@ static NetworkModule *gInstance = NULL;
         case kSxTagRegistMobileCheck:
             parameter = [NEW_SERVER_IP stringByAppendingString:RIGISTCHECK];
             break;
+        case kSXTagGoldIncrease:
+            parameter = [NEW_SERVER_IP stringByAppendingString:GOLDINCREASE];
+            break;
     }
     //给原有参数字典添加公共参数
     if (!data) {

@@ -153,6 +153,12 @@
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="addedProfitLabel" destination="g03-BO-19Z" id="I3e-m5-hFv"/>
+                <outlet property="averagePriceLabel" destination="dwK-J7-phF" id="mpM-NM-8kp"/>
+                <outlet property="floatProfitLabel" destination="S75-rl-oXp" id="0FX-HF-Kak"/>
+                <outlet property="goldIncreaseAmount" destination="Tle-4f-fiW" id="OIv-Go-vmg"/>
+            </connections>
             <point key="canvasLocation" x="25.5" y="-138"/>
         </view>
     </objects>

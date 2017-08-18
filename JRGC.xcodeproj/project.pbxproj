@@ -434,6 +434,7 @@
 		74E536761AE6879900DAABFC /* BeanTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74E536741AE6879900DAABFC /* BeanTableViewCell.xib */; };
 		74E8042D1AE78B8F00E7250E /* BindPhoneNumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74E8042C1AE78B8F00E7250E /* BindPhoneNumViewController.m */; };
 		74E804301AE78BA200E7250E /* ModifyPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74E8042F1AE78BA200E7250E /* ModifyPasswordViewController.m */; };
+		74E892701F46A2A1006A9B6B /* UCFGoldIncreaseAccountInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 74E8926F1F46A2A1006A9B6B /* UCFGoldIncreaseAccountInfoModel.m */; };
 		74EAF5B51B0ED78700807C1C /* UCFSelectedBankTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74EAF5B31B0ED78700807C1C /* UCFSelectedBankTableViewCell.m */; };
 		74EAF5B61B0ED78700807C1C /* UCFSelectedBankTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74EAF5B41B0ED78700807C1C /* UCFSelectedBankTableViewCell.xib */; };
 		74EAF5BC1B0F119D00807C1C /* UCFBankCardInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74EAF5BB1B0F119D00807C1C /* UCFBankCardInfoViewController.m */; };
@@ -1726,6 +1727,8 @@
 		74E8042C1AE78B8F00E7250E /* BindPhoneNumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindPhoneNumViewController.m; sourceTree = "<group>"; };
 		74E8042E1AE78BA200E7250E /* ModifyPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModifyPasswordViewController.h; sourceTree = "<group>"; };
 		74E8042F1AE78BA200E7250E /* ModifyPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModifyPasswordViewController.m; sourceTree = "<group>"; };
+		74E8926E1F46A2A1006A9B6B /* UCFGoldIncreaseAccountInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFGoldIncreaseAccountInfoModel.h; sourceTree = "<group>"; };
+		74E8926F1F46A2A1006A9B6B /* UCFGoldIncreaseAccountInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFGoldIncreaseAccountInfoModel.m; sourceTree = "<group>"; };
 		74EAF5B21B0ED78700807C1C /* UCFSelectedBankTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFSelectedBankTableViewCell.h; sourceTree = "<group>"; };
 		74EAF5B31B0ED78700807C1C /* UCFSelectedBankTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFSelectedBankTableViewCell.m; sourceTree = "<group>"; };
 		74EAF5B41B0ED78700807C1C /* UCFSelectedBankTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFSelectedBankTableViewCell.xib; sourceTree = "<group>"; };
@@ -3177,6 +3180,8 @@
 		740586BC1F419CC600E2DE01 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				74E8926E1F46A2A1006A9B6B /* UCFGoldIncreaseAccountInfoModel.h */,
+				74E8926F1F46A2A1006A9B6B /* UCFGoldIncreaseAccountInfoModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -7600,6 +7605,7 @@
 				83FCCA751F1745A2002921C5 /* UCFGoldInvestmentDetailViewController.m in Sources */,
 				7443C73C1F1F3E7D009669C0 /* UCFGoldCashRecordCell.m in Sources */,
 				74E140581F1CCB3F00B17A96 /* UCFGoldRechargeWebController.m in Sources */,
+				74E892701F46A2A1006A9B6B /* UCFGoldIncreaseAccountInfoModel.m in Sources */,
 				74D7FCD51AE8F75000653B8F /* UCFHeadrView.m in Sources */,
 				74AFB12F1EE8F848007DBAFC /* UCFTransferHeaderView.m in Sources */,
 				7456D3C71E82700500207349 /* UIView+Extension.m in Sources */,

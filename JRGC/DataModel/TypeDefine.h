@@ -289,6 +289,7 @@
 #define GOLDCOUPONLISTURL  @"api/nmTrade/v2/getGoldCouponList.json"   //可用黄金券列表
 #define GOlDOUPONSELEALLURL @"api/nmTrade/v2/selectALLGoldCoupon.json"
 #define GOLDLIMITEDBANKLIST @"api/nmAccount/v2/getBankLimitList.json"   //黄金充值受限银行的列表
+#define GOLDINCREASE        @"api/nmTrade/v2/getCurrentTradeInfo.json"  //增金宝账户
 
 enum kPostStatus{
     kPostStatusNone=0,
@@ -528,6 +529,7 @@ enum kSXTag
     kSXTagGelectALLGoldCoupon,
     kSXTagGoldLimitedBankList,      //黄金受限银行的列表
     kSXTagContractDownLoad,
+    kSXTagGoldIncrease,             //增金宝
 };
 
 typedef enum kSXTag kSXTag;
