@@ -206,8 +206,32 @@
 
         NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId",nmProClaimIdStr, @"nmPrdClaimId",nil];
         
-        [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagGetGoldProClaimDetail owner:self signature:YES Type:SelectAccoutDefault];
-        }
+//        [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagGetGoldProClaimDetail owner:self signature:YES Type:SelectAccoutDefault];
+//        }
+        [self getGoldCurrentPrdClaimInfoHttpRequest:goldModel];
+    }
+}
+#pragma mark -活期详情页面数据请求
+-(void)getGoldCurrentPrdClaimInfoHttpRequest:(UCFGoldModel *)goldModel
+{
+    
+    NSString *nmProClaimIdStr = goldModel.nmPrdClaimId;
+    
+    NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId",@"1", @"nmPrdClaimId",nil];
+    
+    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagGoldCurrentPrdClaimInfo owner:self signature:YES Type:SelectAccoutTypeGold];
+
+}
+#pragma mark -活期投资页面数据请求
+-(void)getGoldCurrentProClaimDetailHttpRequest:(UCFGoldModel *)goldModel
+{
+    
+    NSString *nmProClaimIdStr = goldModel.nmPrdClaimId;
+    
+    NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId",nmProClaimIdStr, @"nmPrdClaimId",nil];
+    
+    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagGoldCurrentProClaimDetail owner:self signature:YES Type:SelectAccoutTypeGold];
+    
 }
 #pragma mark -去登录页面
 - (void)showLoginView
@@ -218,8 +242,6 @@
 }
 - (BOOL)checkUserCanInvestIsDetailType:(SelectAccoutType)accout;
 {
-   
-    
     return NO;
 }
 - (void)showHSAlert:(NSString *)alertMessage
@@ -312,13 +334,14 @@
         NSString *rsttext = dic[@"message"];
         NSDictionary *dataDict = [dic objectSafeDictionaryForKey:@"data"];
         if ( [dic[@"ret"] boolValue]) {
-            UCFGoldPurchaseViewController *goldAuthorizationVC = [[UCFGoldPurchaseViewController alloc]initWithNibName:@"UCFGoldPurchaseViewController" bundle:nil];
-            goldAuthorizationVC.dataDic = dataDict;
-            [self.navigationController pushViewController:goldAuthorizationVC  animated:YES];
+            UCFGoldPurchaseViewController *goldPurchaseVC = [[UCFGoldPurchaseViewController alloc]initWithNibName:@"UCFGoldPurchaseViewController" bundle:nil];
+            goldPurchaseVC.dataDic = dataDict;
+            goldPurchaseVC.isGoldCurrentAccout = NO;
+            [self.navigationController pushViewController:goldPurchaseVC  animated:YES];
         }
         else
         {
-               [AuxiliaryFunc showAlertViewWithMessage:rsttext];
+            [AuxiliaryFunc showAlertViewWithMessage:rsttext];
         }
     }
     else if (tag.integerValue == kSXTagGetGoldPrdClaimDetail){
@@ -329,6 +352,7 @@
         if ( [dic[@"ret"] boolValue]) {
             UCFGoldDetailViewController*goldDetailVC = [[UCFGoldDetailViewController alloc]initWithNibName:@"UCFGoldDetailViewController" bundle:nil];
             goldDetailVC.dataDict = dataDict;
+            goldDetailVC.isGoldCurrentAccout = YES;
             [self.navigationController pushViewController:goldDetailVC  animated:YES];
         }
         else
@@ -341,6 +365,44 @@
                 [AuxiliaryFunc showAlertViewWithMessage:rsttext];
             }
 
+        }
+    }else if (tag.integerValue == kSXTagGoldCurrentProClaimDetail){//活期投资页面
+        
+        NSMutableDictionary *dic = [result objectFromJSONString];
+        NSString *rsttext = dic[@"message"];
+        NSDictionary *dataDict = [dic objectSafeDictionaryForKey:@"data"];
+        if ( [dic[@"ret"] boolValue]) {
+            UCFGoldPurchaseViewController *goldPurchaseVC = [[UCFGoldPurchaseViewController alloc]initWithNibName:@"UCFGoldPurchaseViewController" bundle:nil];
+            goldPurchaseVC.dataDic = dataDict;
+            goldPurchaseVC.isGoldCurrentAccout = YES;
+            [self.navigationController pushViewController:goldPurchaseVC  animated:YES];
+        }
+        else
+        {
+            [AuxiliaryFunc showAlertViewWithMessage:rsttext];
+        }
+    }
+    else if (tag.integerValue == kSXTagGoldCurrentPrdClaimInfo){//活期详情页面
+        
+        NSMutableDictionary *dic = [result objectFromJSONString];
+        NSString *rsttext = dic[@"message"];
+        NSDictionary *dataDict = [dic objectSafeDictionaryForKey:@"data"];
+        if ( [dic[@"ret"] boolValue]) {
+            UCFGoldDetailViewController*goldDetailVC = [[UCFGoldDetailViewController alloc]initWithNibName:@"UCFGoldDetailViewController" bundle:nil];
+            goldDetailVC.dataDict = dataDict;
+            goldDetailVC.isGoldCurrentAccout = YES;
+            [self.navigationController pushViewController:goldDetailVC  animated:YES];
+        }
+        else
+        {
+            if([[dic objectSafeForKey:@"code"]  intValue] == 11112)
+            {
+                UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前标的详情只对认购人开放"];
+                [self.navigationController pushViewController:controller animated:YES];
+            }else{
+                [AuxiliaryFunc showAlertViewWithMessage:rsttext];
+            }
+            
         }
     }
     if ([self.tableview.header isRefreshing]) {

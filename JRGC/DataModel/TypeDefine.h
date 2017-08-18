@@ -290,6 +290,9 @@
 #define GOlDOUPONSELEALLURL @"api/nmTrade/v2/selectALLGoldCoupon.json"
 #define GOLDLIMITEDBANKLIST @"api/nmAccount/v2/getBankLimitList.json"   //黄金充值受限银行的列表
 #define GOLDINCREASE        @"api/nmTrade/v2/getCurrentTradeInfo.json"  //增金宝账户
+#define GOLDCURRENPRDCLAIMINFO @"api/nmPrdClaim/v2/getNmCurrentPrdClaimInfo.json"//黄金活期详情
+#define GOLDCURRENPROClAIMDEAIL @"api/nmTrade/v2/getNmCurrentProClaimDetail.json"//黄金活期投资页面数据
+#define GOLDCURRENPURCHASEGOLD  @"/api/nmTrade/v2/purchaseCurrentGold.json"//黄金活期购买接口
 
 enum kPostStatus{
     kPostStatusNone=0,
@@ -530,6 +533,9 @@ enum kSXTag
     kSXTagGoldLimitedBankList,      //黄金受限银行的列表
     kSXTagContractDownLoad,
     kSXTagGoldIncrease,             //增金宝
+    kSXTagGoldCurrentPrdClaimInfo,      //黄金活期详情
+    kSXTagGoldCurrentProClaimDetail,         //黄金活期投资页面数据
+    kSXTagGoldCurrentPurchase,           //黄金活期购买接口
 };
 
 typedef enum kSXTag kSXTag;

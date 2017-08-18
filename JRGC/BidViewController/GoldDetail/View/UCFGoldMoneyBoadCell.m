@@ -41,8 +41,11 @@
 -(void)setIsGoldCurrentAccout:(BOOL)isGoldCurrentAccout
 {
     _isGoldCurrentAccout = isGoldCurrentAccout;
-    if (isGoldCurrentAccout) {
+    if (isGoldCurrentAccout) {//活期
         self.gongDouLabel.text = @"";
+        self.estimatAmountPayTitleLab.text = @"预计金额(含手续费)";
+        self.getUpWeightGoldTilteLab.text = @"预期每日收益";
+        self.getUpWeightGoldLabel.text = @"¥0.00";
         self.rechargeButton1.hidden = NO;
         self.estimatAmountPayableLabel.textAlignment = NSTextAlignmentRight;
         self.getUpWeightGoldLabel.textAlignment = NSTextAlignmentRight;
@@ -55,8 +58,11 @@
                 [view removeFromSuperview];
             }
         }
-    }else{
+    }else{//定期
         self.gongDouLabel.text = @"(含工豆)";
+        self.estimatAmountPayTitleLab.text = @"预计应付金额";
+        self.getUpWeightGoldTilteLab.text = @"到期收益克重";
+        self.getUpWeightGoldLabel.text = @"0.000克";
         self.rechargeButton1.hidden = YES;
         self.estimatAmountPayableLabel.textAlignment = NSTextAlignmentLeft;
         self.getUpWeightGoldLabel.textAlignment = NSTextAlignmentLeft;
@@ -95,8 +101,6 @@
 - (IBAction)clickGoldSwitch:(UISwitch *)sender{
  
     NSDictionary *userAccountInfoDict = [_dataDict objectForKey:@"userAccountInfo"];
-
-    
     if (sender.on) {
         self.availableAllMoneyLabel.text = [NSString stringWithFormat:@"¥%@",[userAccountInfoDict objectForKey:@"availableAllMoney"]];
     }else{
@@ -155,11 +159,15 @@
     double amountPay = [textField.text doubleValue] * [ToolSingleTon sharedManager].readTimePrice;
     self.estimatAmountPayableLabel.text = [NSString stringWithFormat:@"¥%.2lf",[[Common notRounding:amountPay afterPoint:2] doubleValue]];
     
-    double periodTerm = [[self.goldModel.periodTerm substringWithRange:NSMakeRange(0, self.goldModel.periodTerm.length - 1)] doubleValue];
-    
-    double getUpWeightGold = [textField.text doubleValue] *[self.goldModel.annualRate doubleValue] * periodTerm /360.0 / 100.0;
-    self.getUpWeightGoldLabel.text = [NSString stringWithFormat:@"%.3lf克",[[Common notRounding:getUpWeightGold afterPoint:3] doubleValue]];
-    
+    if (self.isGoldCurrentAccout) {
+        double getUpWeightGold = amountPay * [self.goldModel.annualRate doubleValue] /360.0;
+        self.getUpWeightGoldLabel.text = [NSString stringWithFormat:@"¥%.2lf",[[Common notRounding:getUpWeightGold afterPoint:2] doubleValue]];
+    }else{
+        double periodTerm = [[self.goldModel.periodTerm substringWithRange:NSMakeRange(0, self.goldModel.periodTerm.length - 1)] doubleValue];
+        
+        double getUpWeightGold = [textField.text doubleValue] *[self.goldModel.annualRate doubleValue] * periodTerm /360.0 / 100.0;
+        self.getUpWeightGoldLabel.text = [NSString stringWithFormat:@"%.3lf克",[[Common notRounding:getUpWeightGold afterPoint:3] doubleValue]];
+    }
     return textField;
 }
 - (BOOL)textFieldShouldReturn:(UITextField *)textField

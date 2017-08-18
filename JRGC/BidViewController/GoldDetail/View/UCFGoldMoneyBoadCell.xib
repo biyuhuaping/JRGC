@@ -368,8 +368,10 @@
                 <outlet property="accountBeanLabel" destination="9Z6-KP-JdU" id="5LC-W9-eR5"/>
                 <outlet property="availableAllMoneyLabel" destination="g2G-yc-xeY" id="hbr-hL-D2P"/>
                 <outlet property="availableMoneyLabel" destination="RPs-NX-Y26" id="g90-nR-0zO"/>
+                <outlet property="estimatAmountPayTitleLab" destination="stJ-74-eeJ" id="2xb-G8-Sev"/>
                 <outlet property="estimatAmountPayableLabel" destination="hl1-dd-UNh" id="HRk-u6-dGb"/>
                 <outlet property="getUpWeightGoldLabel" destination="wIa-tb-CCu" id="fyo-PY-px6"/>
+                <outlet property="getUpWeightGoldTilteLab" destination="OG9-nW-4RF" id="pwT-Eg-UxP"/>
                 <outlet property="goldSwitch" destination="1XO-EE-vhq" id="htV-T6-XQ0"/>
                 <outlet property="gongDouLabel" destination="M3D-VY-LUO" id="ll4-yd-w6d"/>
                 <outlet property="moneyTextField" destination="KEI-IF-L4v" id="hPW-rP-DVC"/>
