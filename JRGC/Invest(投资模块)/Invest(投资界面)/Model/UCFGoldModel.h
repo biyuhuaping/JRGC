@@ -27,5 +27,6 @@
 @property (copy, nonatomic) NSString *nmPurchaseToken;
 @property (copy, nonatomic) NSString *cashServiceRate;//变现手续费率
 @property (copy, nonatomic) NSString *goldServiceRate;//提金手续费率
+@property (copy, nonatomic) NSString *supplementExplain;//补充说明
 + (instancetype)goldModelWithDict:(NSDictionary *)dict;
 @end
