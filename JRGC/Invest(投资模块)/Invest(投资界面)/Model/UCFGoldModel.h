@@ -16,6 +16,7 @@
 @property (copy, nonatomic) NSString *nmTypeName;
 @property (copy, nonatomic) NSString *paymentType;
 @property (copy, nonatomic) NSString *periodTerm;
+@property (copy, nonatomic) NSString *isFirstbid;
 @property (copy, nonatomic) NSArray *prdLabelsList;
 @property (copy, nonatomic) NSString *holdTime;
 @property (copy, nonatomic) NSString *remainAmount;
