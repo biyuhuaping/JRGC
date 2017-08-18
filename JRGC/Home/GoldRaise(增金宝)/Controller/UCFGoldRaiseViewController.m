@@ -126,6 +126,7 @@
             goldAccount.dealPrice = [dict objectSafeForKey:@"dealPrice"];
             goldAccount.floatingPL = [dict objectSafeForKey:@"floatingPL"];
             goldAccount.goldAmount = [dict objectSafeForKey:@"goldAmount"];
+            self.raiseHeaderView.goldIncreModel = goldAccount;
 //            NSArray *resut = [pageData objectSafeArrayForKey:@"result"];
 //            if ([self.tableview.header isRefreshing]) {
 //                [self.dataArray removeAllObjects];

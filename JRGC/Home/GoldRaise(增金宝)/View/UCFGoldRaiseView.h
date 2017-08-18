@@ -8,11 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+@class UCFGoldIncreaseAccountInfoModel;
 @interface UCFGoldRaiseView : UIView
-@property (weak, nonatomic) IBOutlet UILabel *goldIncreaseAmount;
-@property (weak, nonatomic) IBOutlet UILabel *addedProfitLabel;
-@property (weak, nonatomic) IBOutlet UILabel *floatProfitLabel;
-@property (weak, nonatomic) IBOutlet UILabel *averagePriceLabel;
+@property (nonatomic, strong) UCFGoldIncreaseAccountInfoModel *goldIncreModel;
 
 + (CGFloat)viewHeight;
 @end
