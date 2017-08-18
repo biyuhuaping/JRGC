@@ -207,8 +207,15 @@
         [app.tabBarController presentViewController:loginNaviController animated:YES completion:nil];
         return;
     }
-    if ([self.delegate respondsToSelector:@selector(homeList:tableView:didClickedWithModel:withType:)]) {
-        [self.delegate homeList:self tableView:self.tableView didClickedWithModel:presenter.item withType:UCFHomeListTypeDetail];
+    if ([presenter.type intValue] == 6) {
+        if ([self.delegate respondsToSelector:@selector(homeList:tableView:didClickedGoldIncreaseWithModel:)]) {
+            [self.delegate homeList:self tableView:self.tableView didClickedGoldIncreaseWithModel:presenter.item];
+        }
+    }
+    else {
+        if ([self.delegate respondsToSelector:@selector(homeList:tableView:didClickedWithModel:withType:)]) {
+            [self.delegate homeList:self tableView:self.tableView didClickedWithModel:presenter.item withType:UCFHomeListTypeDetail];
+        }
     }
 }
 

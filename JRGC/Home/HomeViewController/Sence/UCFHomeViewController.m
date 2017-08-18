@@ -48,6 +48,7 @@
 #import "UCFCollectionDetailViewController.h"
 #import "UCFFacReservedViewController.h"
 #import "UCFBatchInvestmentViewController.h"
+#import "UCFGoldCashViewController.h"
 
 @interface UCFHomeViewController () <UCFHomeListViewControllerDelegate, UCFHomeListNavViewDelegate, UCFUserInformationViewControllerDelegate,BJGridItemDelegate, UIAlertViewDelegate>
 @property (strong, nonatomic) UCFCycleImageViewController *cycleImageVC;
@@ -321,6 +322,11 @@
 - (void)homeList:(UCFHomeListViewController *)homeList tableView:(UITableView *)tableView didScrollWithYOffSet:(CGFloat)offSet
 {
     self.navView.offset = offSet;
+}
+// 活期详情
+- (void)homeList:(UCFHomeListViewController *)homeList tableView:(UITableView *)tableView didClickedGoldIncreaseWithModel:(UCFHomeListCellModel *)model
+{
+    
 }
 
 - (void)homeListRefreshDataWithHomelist:(UCFHomeListViewController *)homelist
