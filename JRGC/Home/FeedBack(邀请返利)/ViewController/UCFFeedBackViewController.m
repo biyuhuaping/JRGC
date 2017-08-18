@@ -349,10 +349,10 @@
     } else if (tag.intValue == kSXTagGoldMyInviteRebateinfo) {
         NSString *rstcode = dic[@"ret"];
         NSString *rsttext = dic[@"message"];
-        NSDictionary* dictemp = [[dic objectSafeForKey:@"data"] objectSafeDictionaryForKey:@"inviteRebateBasicInfo"];
+        NSDictionary* dictemp = [[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"inviteRebateBasicInfo"];
         if ([rstcode intValue] == 1) {
             self.feedBackDictionary = dictemp;
-            _shareUrl = [dictemp objectSafeForKey:@"inviteUrl"];
+            _shareUrl = [[dic objectSafeDictionaryForKey:@"data"] objectForKey:@"inviteUrl"];
             _sumCommLab.text = [NSString stringWithFormat:@"¥%@",dictemp[@"sumComm"]];//我的返利
             _goldInvitationNumLab.text = [NSString stringWithFormat:@"%@人",dictemp[@"recCount"]];//邀请人数
             _userRecommendCountLab.text = [NSString stringWithFormat:@"共%@人购买",dictemp[@"friendCount"]]; //邀请投资人数
