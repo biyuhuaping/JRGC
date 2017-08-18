@@ -17,4 +17,6 @@
 - (NSString *)footerTitle;
 - (NSString *)iconUrl;
 - (BOOL)showMore;
+- (int)type;
+- (NSString *)desc;
 @end

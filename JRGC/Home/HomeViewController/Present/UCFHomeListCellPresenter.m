@@ -61,8 +61,8 @@
 
 - (NSString *)minInvest
 {
-    if ([self.item.type isEqualToString:@"3"]) {
-        return self.item.minInvest ? [NSString stringWithFormat:@"%@.000克起", self.item.minInvest] : @"";
+    if ([self.item.type isEqualToString:@"3"] || [self.item.type isEqualToString:@"6"]) {
+        return self.item.minInvest ? [NSString stringWithFormat:@"%.3f克起", [self.item.minInvest doubleValue]] : @"";
     }
     return self.item.minInvest ? [NSString stringWithFormat:@"%@元起", self.item.minInvest] : @"";
 }
@@ -119,6 +119,14 @@
     return self.item.transferNum;
 }
 
+- (NSString *)completeLoan
+{
+    if ([self.item.type isEqualToString:@"6"]) {
+        return [NSString stringWithFormat:@"已售%.3f克", [self.item.completeLoan doubleValue]];
+    }
+    return [NSString stringWithFormat:@"%@", self.item.completeLoan];
+}
+
 - (CGFloat)cellHeight
 {
     if (self.item.moedelType == UCFHomeListCellModelTypeDefault) {
@@ -126,6 +134,9 @@
     }
     else if (self.item.moedelType == UCFHomeListCellModelTypeReserved) {
         return 73.0;
+    }
+    else if (self.item.moedelType == UCFHomeListCellModelTypeGoldFixed) {
+        return 175.0;
     }
     else {
         return (ScreenWidth - 20) / CELLRATE + 15;

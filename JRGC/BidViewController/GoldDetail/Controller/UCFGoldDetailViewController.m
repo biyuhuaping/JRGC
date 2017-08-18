@@ -20,6 +20,7 @@
 #import "NSString+CJString.h"
 #import "FullWebViewController.h"
 #import "HWWeakTimer.h"
+#import "UCFSettingItem.h"
 @interface UCFGoldDetailViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
 {
     
@@ -48,6 +49,8 @@
     CGFloat curProcess;
     
     CGFloat pauseInfoHeight;//暂停信息高度
+    CGFloat goldHeaderViewHeight;//黄金标详情头View的高度
+    CGFloat  oneScrollHeight;//上面scrollView的高度
 }
 
 @property(nonatomic,strong) IBOutlet UIScrollView *oneScroll;
@@ -56,6 +59,7 @@
 @property (weak, nonatomic) IBOutlet UIView *investBgView;
 
 @property (nonatomic,strong)UCFGoldDetailHeaderView  *goldHeaderView;
+@property (nonatomic,strong)UCFGoldCurrentDetailHeaderView  *goldCurrentHeaderView;
 @property (nonatomic,strong)UCFGoldModel *goldModel;
 @property (nonatomic,strong)NSArray  *contractArray;//合同数组
 @property (nonatomic,strong)NSArray *purchaseRecordListArray;//购买记录
@@ -83,8 +87,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-   
-    
     [self infoGoldData];
     [self addnavigationBar];
   
@@ -94,6 +96,7 @@
 }
 -(void)infoGoldData
 {
+//    self.isGoldCurrentAccout = YES;
      self.goldModel = [UCFGoldModel goldModelWithDict:[_dataDict objectSafeDictionaryForKey:@"result"]];
     self.contractArray = [[_dataDict objectSafeDictionaryForKey:@"result"] objectSafeArrayForKey:@"contractList"];
     self.purchaseRecordListArray = [[_dataDict objectSafeDictionaryForKey:@"result"] objectSafeArrayForKey:@"purchaseRecordList"];
@@ -207,9 +210,12 @@
 {
     [self.view bringSubviewToFront:self.investBgView];
     
+    oneScrollHeight = ScreenHeight - 64 - 57;
+    if (self.isGoldCurrentAccout) {
+        oneScrollHeight -=18;
+    }
     
-    
-    _oneScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64, ScreenWidth, ScreenHeight - 64 - 57)];
+    _oneScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64, ScreenWidth, oneScrollHeight)];
     _oneScroll.backgroundColor = [UIColor greenColor];
     if (kIS_Iphone4) {
         [_oneScroll setContentSize:CGSizeMake(ScreenWidth, ScreenHeight)];
@@ -230,17 +236,42 @@
     [_oneScroll setBackgroundColor:UIColorWithRGB(0xebebee)];
     [self.view addSubview:_oneScroll];
     [_oneScroll bringSubviewToFront:self.investBgView];
-    [self drawPullingView];
+//    [self drawPullingView];
     
     
-    self.goldHeaderView  = [[[NSBundle mainBundle]loadNibNamed:@"UCFGoldDetailHeaderView" owner:nil options:nil] firstObject];
-    self.goldHeaderView.frame = CGRectMake(0, 0, ScreenWidth, 225);
-    self.goldHeaderView.goldModel = self.goldModel;
-    [self.oneScroll addSubview:self.goldHeaderView];
+    if (self.isGoldCurrentAccout)//是活期标的标头
+    {
+        self.goldCurrentHeaderView  = [[[NSBundle mainBundle]loadNibNamed:@"UCFGoldDetailHeaderView" owner:nil options:nil] lastObject];
+        self.goldCurrentHeaderView.frame = CGRectMake(0, 0, ScreenWidth, 166);
+        self.goldCurrentHeaderView.goldModel = self.goldModel;
+        [self.oneScroll addSubview:self.goldCurrentHeaderView];
+        goldHeaderViewHeight =  CGRectGetMaxY(self.goldCurrentHeaderView.frame);
+        
+        
+        UIView *pauseInfoView  = [[UIView alloc] initWithFrame:CGRectMake(0,-18, ScreenWidth, 18)];
+        pauseInfoView.backgroundColor = [UIColor whiteColor];
+        
+        UILabel *buyCueDesTipLabel = [[UILabel alloc]initWithFrame:CGRectMake(15 , 6 , ScreenWidth - 30 , 15 )];
+        buyCueDesTipLabel.textColor = UIColorWithRGB(0x555555);
+        buyCueDesTipLabel.textAlignment = NSTextAlignmentCenter;
+        buyCueDesTipLabel.backgroundColor = [UIColor clearColor];
+        buyCueDesTipLabel.font = [UIFont systemFontOfSize:12];
+        buyCueDesTipLabel.numberOfLines = 0 ;
+        NSString *soldAmountStr = self.goldModel.totalAmount;//已卖克重
+        buyCueDesTipLabel.text = [NSString stringWithFormat:@"累计出售%@克",soldAmountStr];
+        [buyCueDesTipLabel setFontColor:UIColorWithRGB(0xfc8f0e) string:soldAmountStr];
+        [pauseInfoView addSubview: buyCueDesTipLabel];
+        [self.investBgView addSubview:pauseInfoView];
+    }else
+    {
+        self.goldHeaderView  = [[[NSBundle mainBundle]loadNibNamed:@"UCFGoldDetailHeaderView" owner:nil options:nil] firstObject];
+        self.goldHeaderView.frame = CGRectMake(0, 0, ScreenWidth, 225);
+        self.goldHeaderView.goldModel = self.goldModel;
+        [self.oneScroll addSubview:self.goldHeaderView];
+        goldHeaderViewHeight = CGRectGetMaxY(self.goldHeaderView.frame);
+        [self progressAnimiation];
+    }
     
-    [self progressAnimiation];
-    
-
     if (Progress == 1 || [self.goldModel.status intValue] == 2) {
         self.GoldInvestmentBtn.backgroundColor = UIColorWithRGB(0xcccccc);
         [self.GoldInvestmentBtn setTitle:@"已售罄" forState:UIControlStateNormal];
@@ -279,7 +310,7 @@
     }else{
         
         if (self.goldModel.pauseInfo) {
-            UIView *pauseInfoView  = [[UIView alloc] initWithFrame:CGRectMake(0,CGRectGetMaxY(self.goldHeaderView.frame), ScreenWidth, pauseInfoHeight + 10)];
+            UIView *pauseInfoView  = [[UIView alloc] initWithFrame:CGRectMake(0,goldHeaderViewHeight, ScreenWidth, pauseInfoHeight + 10)];
             pauseInfoView.backgroundColor = [UIColor clearColor];
             
             UILabel *buyCueDesTipLabel = [[UILabel alloc]initWithFrame:CGRectMake(15 , 5 , ScreenWidth - 30 , pauseInfoHeight )];
@@ -330,7 +361,7 @@
     if (self.goldModel.pauseInfo) {
         bottomViewYPos  = 30 + pauseInfoHeight + 5;
     }
-    UIView *markBg = [[UIView alloc] initWithFrame:CGRectMake(0,CGRectGetMaxY(self.goldHeaderView.frame), ScreenWidth, bottomViewYPos)];
+    UIView *markBg = [[UIView alloc] initWithFrame:CGRectMake(0,goldHeaderViewHeight, ScreenWidth, bottomViewYPos)];
     if (self.goldModel.pauseInfo) {
         UIView *pauseInfoView  = [[UIView alloc] initWithFrame:CGRectMake(0,30 , ScreenWidth, pauseInfoHeight + 5)];
         pauseInfoView.backgroundColor = [UIColor clearColor];
@@ -459,7 +490,7 @@
 
 {
     int row = 4;
-    float view_y =  0 + CGRectGetMaxY(self.goldHeaderView.frame) + bottomViewYPos;
+    float view_y =  0 + goldHeaderViewHeight + bottomViewYPos;
     
     bottomBkView = [[UIView alloc] initWithFrame:CGRectMake(0, view_y, ScreenWidth, 44*row)];
     bottomBkView.backgroundColor = [UIColor whiteColor];
@@ -467,84 +498,185 @@
     
     [UCFToolsMehod viewAddLine:bottomBkView Up:YES];
     [UCFToolsMehod viewAddLine:bottomBkView Up:NO];
-
-    UIImageView *guImageV = [[UIImageView alloc] initWithFrame:CGRectMake(IconXPos, IconYPos, 22, 22)];
-    guImageV.image = [UIImage imageNamed:@"gold_particular_icon_repayment"];
-    [bottomBkView addSubview:guImageV];
     
-    UILabel *guLabel = [UILabel labelWithFrame:CGRectMake(CGRectGetMaxX(guImageV.frame) + 5, IconYPos, 120, 22) text:@"收益克重交付方式" textColor:UIColorWithRGB(0x555555) font:[UIFont systemFontOfSize:13]];
-    guLabel.textAlignment = NSTextAlignmentLeft;
-    [bottomBkView addSubview:guLabel];
-    
-    _fixedUpDateLabel = [UILabel labelWithFrame:CGRectMake(ScreenWidth - 15 - LabelWidTh-25, IconYPos, LabelWidTh+25, 22) text:@"2015-12-31" textColor:UIColorWithRGB(0x333333) font:[UIFont boldSystemFontOfSize:13]];
-    _fixedUpDateLabel.textAlignment = NSTextAlignmentRight;
-    [bottomBkView addSubview:_fixedUpDateLabel];
-    _fixedUpDateLabel.text = self.goldModel.paymentType;
-//    NSString *fixUpdate = [[_dic objectForKey:@"prdClaims"]objectForKey:@"fixedDate"];
-//    NSString *guTitle;
-//    NSDate *fixDate = [NSDateManager getDateWithDateDes:fixUpdate dateFormatterStr:@"yyyy-MM-dd"];
-//    guTitle = [NSString stringWithFormat:@"%@",[NSDateManager getDateDesWithDate:fixDate dateFormatterStr:@"yyyy-MM-dd"]];
-//
-    
-    
-    //****************分隔线**************
-    UIView *line1 = [[UIView alloc] initWithFrame:CGRectMake(15, 44, ScreenWidth - 15, 0.5)];
-    line1.backgroundColor = UIColorWithRGB(0xe3e5ea);
-    [bottomBkView addSubview:line1];
-    //****************分隔线**************
-    
-    //还款方式
-    UIImageView *huankuanImageV = [[UIImageView alloc] initWithFrame:CGRectMake(IconXPos,44 + IconYPos, 22, 22)];
-    huankuanImageV.image = [UIImage imageNamed:@"gold_particular_icon_genre"];
-    [bottomBkView addSubview:huankuanImageV];
-    
-    UILabel *huankuanLabel = [UILabel labelWithFrame:CGRectMake(CGRectGetMaxX(guImageV.frame) + 5, 44 + IconYPos, 100, 22) text:@"黄金品种" textColor:UIColorWithRGB(0x555555) font:[UIFont systemFontOfSize:13]];
-    huankuanLabel.textAlignment = NSTextAlignmentLeft;
-    [bottomBkView addSubview:huankuanLabel];
-    
-    _markTypeLabel = [UILabel labelWithFrame:CGRectMake(ScreenWidth - 15 - LabelWidTh, 44 + IconYPos, LabelWidTh, 22) text:@"一次还清" textColor:UIColorWithRGB(0x333333) font:[UIFont boldSystemFontOfSize:13]];
-    _markTypeLabel.textAlignment = NSTextAlignmentRight;
-    [bottomBkView addSubview:_markTypeLabel];
-    _markTypeLabel.text = self.goldModel.nmTypeName;
-//
-    //****************分隔线**************
-    UIView *line2 = [[UIView alloc] initWithFrame:CGRectMake(15, 44 * 2, ScreenWidth - 15, 0.5)];
-    line2.backgroundColor = UIColorWithRGB(0xe3e5ea);
-    [bottomBkView addSubview:line2];
-    //****************分隔线**************
-
-        //起投金额
-        UIImageView *qitouImageV = [[UIImageView alloc] initWithFrame:CGRectMake(IconXPos,44*2 + IconYPos, 22, 22)];
-        qitouImageV.image = [UIImage imageNamed:@"gold_particular_icon_measure"];
-        [bottomBkView addSubview:qitouImageV];
+    NSArray *array = @[];
+    if (self.isGoldCurrentAccout) {
+        UCFSettingItem *item1 = [UCFSettingItem itemWithIcon:@"gold_particular_icon_genre" WithTitle:@"黄金品种" withSubtitle:self.self.goldModel.nmTypeName];
+        NSString *buyServiceRateStr = [NSString stringWithFormat:@"¥%.2f元/克",[self.goldModel.buyServiceRate floatValue]];
+        UCFSettingItem *item2 = [UCFSettingItem itemWithIcon:@"gold_particular_icon_-poundage" WithTitle:@"买入手续费" withSubtitle:buyServiceRateStr];
+        NSString *cashServiceRateStr = [NSString stringWithFormat:@"%@元/克",self.goldModel.cashServiceRate] ;
+        UCFSettingItem *item3 = [UCFSettingItem itemWithIcon:@"gold_particular_icon_repayment" WithTitle:@"变现手续费" withSubtitle:cashServiceRateStr];
+        NSString *goldServiceRateStr = [NSString stringWithFormat:@"%@元/克",self.goldModel.goldServiceRate];
+        UCFSettingItem *item4 = [UCFSettingItem itemWithIcon:@"gold_particular_icon_measure" WithTitle:@"提金手续费" withSubtitle:goldServiceRateStr];
+        array  = @[item1,item2,item3,item4];
+    }else{
+        UCFSettingItem *item1 = [UCFSettingItem itemWithIcon:@"gold_particular_icon_repayment" WithTitle:@"收益克重交付方式" withSubtitle:self.goldModel.paymentType];
+        UCFSettingItem *item2 = [UCFSettingItem itemWithIcon:@"gold_particular_icon_genre" WithTitle:@"黄金品种" withSubtitle:self.self.goldModel.nmTypeName];
+        NSString *minPurchaseAmountStr = [NSString stringWithFormat:@"%@克",self.goldModel.minPurchaseAmount] ;
+        UCFSettingItem *item3 = [UCFSettingItem itemWithIcon:@"gold_particular_icon_measure" WithTitle:@"起购克重" withSubtitle:minPurchaseAmountStr];
         
-        UILabel *qitouLabel = [UILabel labelWithFrame:CGRectMake(CGRectGetMaxX(guImageV.frame) + 5, 44*2 + IconYPos, 100, 22) text:@"起购克重" textColor:UIColorWithRGB(0x555555) font:[UIFont systemFontOfSize:13]];
-        qitouLabel.textAlignment = NSTextAlignmentLeft;
-        [bottomBkView addSubview:qitouLabel];
+        NSString *buyServiceRateStr = [NSString stringWithFormat:@"¥%.2f",[self.goldModel.buyServiceRate floatValue]];
+        UCFSettingItem *item4 = [UCFSettingItem itemWithIcon:@"gold_particular_icon_-poundage" WithTitle:@"买入手续费(元/克)" withSubtitle:buyServiceRateStr];
         
-        _investmentAmountLabel = [UILabel labelWithFrame:CGRectMake(ScreenWidth - 15 - LabelWidTh, 44*2 + IconYPos, LabelWidTh, 22) text:@"1.000克" textColor:UIColorWithRGB(0x333333) font:[UIFont boldSystemFontOfSize:13]];
-        _investmentAmountLabel.textAlignment = NSTextAlignmentRight;
-        [bottomBkView addSubview:_investmentAmountLabel];
-    _investmentAmountLabel.text = [NSString stringWithFormat:@"%@克",self.goldModel.minPurchaseAmount] ;
+        array  = @[item1,item2,item3,item4];
+    }
+    
+    
+    
+    for(int i = 0 ; i < array.count ; i++)
+    {
+        UCFSettingItem *item  = [array objectAtIndex:i];
+        UIView *baseView = [[UIView alloc] initWithFrame:CGRectMake(0, 44 * i, ScreenWidth, 44)];
+        baseView.backgroundColor = [UIColor clearColor];
+        
+        UIImageView *guImageV = [[UIImageView alloc] initWithFrame:CGRectMake(IconXPos, IconYPos, 22, 22)];
+        guImageV.image = [UIImage imageNamed:item.icon];
+        [baseView addSubview:guImageV];
+        
+        UILabel *guLabel = [UILabel labelWithFrame:CGRectMake(CGRectGetMaxX(guImageV.frame) + 5, IconYPos, 120, 22) text:item.title textColor:UIColorWithRGB(0x555555) font:[UIFont systemFontOfSize:13]];
+        guLabel.textAlignment = NSTextAlignmentLeft;
+        [baseView addSubview:guLabel];
+        
+       UILabel *fixedUpDateLabel = [UILabel labelWithFrame:CGRectMake(ScreenWidth - 15 - LabelWidTh-25, IconYPos, LabelWidTh+25, 22) text:item.subtitle textColor:UIColorWithRGB(0x333333) font:[UIFont boldSystemFontOfSize:13]];
+        fixedUpDateLabel.textAlignment = NSTextAlignmentRight;
+        [baseView addSubview:fixedUpDateLabel];
+        if (i < array.count - 1 ) {
+            UIView *line1 = [[UIView alloc] initWithFrame:CGRectMake(15, 44, ScreenWidth - 15, 0.5)];
+            line1.backgroundColor = UIColorWithRGB(0xe3e5ea);
+            [baseView addSubview:line1];
+        }
+       [bottomBkView addSubview:baseView];
+    }
+    
+    
+    
+    
+
+//    UIImageView *guImageV = [[UIImageView alloc] initWithFrame:CGRectMake(IconXPos, IconYPos, 22, 22)];
+//    guImageV.image = [UIImage imageNamed:@"gold_particular_icon_repayment"];
+//    [bottomBkView addSubview:guImageV];
+//    
+//    UILabel *guLabel = [UILabel labelWithFrame:CGRectMake(CGRectGetMaxX(guImageV.frame) + 5, IconYPos, 120, 22) text:@"收益克重交付方式" textColor:UIColorWithRGB(0x555555) font:[UIFont systemFontOfSize:13]];
+//    guLabel.textAlignment = NSTextAlignmentLeft;
+//    [bottomBkView addSubview:guLabel];
+//    
+//    _fixedUpDateLabel = [UILabel labelWithFrame:CGRectMake(ScreenWidth - 15 - LabelWidTh-25, IconYPos, LabelWidTh+25, 22) text:@"2015-12-31" textColor:UIColorWithRGB(0x333333) font:[UIFont boldSystemFontOfSize:13]];
+//    _fixedUpDateLabel.textAlignment = NSTextAlignmentRight;
+//    [bottomBkView addSubview:_fixedUpDateLabel];
+//    _fixedUpDateLabel.text = self.goldModel.paymentType;
+////    NSString *fixUpdate = [[_dic objectForKey:@"prdClaims"]objectForKey:@"fixedDate"];
+////    NSString *guTitle;
+////    NSDate *fixDate = [NSDateManager getDateWithDateDes:fixUpdate dateFormatterStr:@"yyyy-MM-dd"];
+////    guTitle = [NSString stringWithFormat:@"%@",[NSDateManager getDateDesWithDate:fixDate dateFormatterStr:@"yyyy-MM-dd"]];
+////
+//    
+//    
 //    //****************分隔线**************
-    UIView *line3 = [[UIView alloc] initWithFrame:CGRectMake(15, 44*3, ScreenWidth - 15, 0.5)];
-    line3.backgroundColor = UIColorWithRGB(0xe3e5ea);
-    [bottomBkView addSubview:line3];
+//    UIView *line1 = [[UIView alloc] initWithFrame:CGRectMake(15, 44, ScreenWidth - 15, 0.5)];
+//    line1.backgroundColor = UIColorWithRGB(0xe3e5ea);
+//    [bottomBkView addSubview:line1];
 //    //****************分隔线**************
-    UIImageView *qitouImageV1 = [[UIImageView alloc] initWithFrame:CGRectMake(IconXPos,44*3 + IconYPos, 22, 22)];
-    qitouImageV1.image = [UIImage imageNamed:@"gold_particular_icon_-poundage"];
-    [bottomBkView addSubview:qitouImageV1];
-    UILabel *qitouLabel1 = [UILabel labelWithFrame:CGRectMake(CGRectGetMaxX(qitouImageV.frame) + 5, 44*3 + IconYPos, 120 , 22) text:@"买入手续费(元/克)" textColor:UIColorWithRGB(0x555555) font:[UIFont systemFontOfSize:13]];
-    qitouLabel1.textAlignment = NSTextAlignmentLeft;
-    [bottomBkView addSubview:qitouLabel1];
-    _buyServiceRateLabel = [UILabel labelWithFrame:CGRectMake(CGRectGetMaxX(qitouLabel1.frame) + 5, CGRectGetMinY(qitouLabel1.frame), ScreenWidth -CGRectGetMaxX(qitouLabel1.frame) - 5 - 15, 22) text:@"¥0.00" textColor:UIColorWithRGB(0x333333) font:[UIFont boldSystemFontOfSize:13]];
-    _buyServiceRateLabel.textAlignment = NSTextAlignmentRight;
-    [bottomBkView addSubview:_buyServiceRateLabel];
+//    
+//    //还款方式
+//    UIImageView *huankuanImageV = [[UIImageView alloc] initWithFrame:CGRectMake(IconXPos,44 + IconYPos, 22, 22)];
+//    huankuanImageV.image = [UIImage imageNamed:@"gold_particular_icon_genre"];
+//    [bottomBkView addSubview:huankuanImageV];
+//    
+//    UILabel *huankuanLabel = [UILabel labelWithFrame:CGRectMake(CGRectGetMaxX(guImageV.frame) + 5, 44 + IconYPos, 100, 22) text:@"黄金品种" textColor:UIColorWithRGB(0x555555) font:[UIFont systemFontOfSize:13]];
+//    huankuanLabel.textAlignment = NSTextAlignmentLeft;
+//    [bottomBkView addSubview:huankuanLabel];
+//    
+//    _markTypeLabel = [UILabel labelWithFrame:CGRectMake(ScreenWidth - 15 - LabelWidTh, 44 + IconYPos, LabelWidTh, 22) text:@"一次还清" textColor:UIColorWithRGB(0x333333) font:[UIFont boldSystemFontOfSize:13]];
+//    _markTypeLabel.textAlignment = NSTextAlignmentRight;
+//    [bottomBkView addSubview:_markTypeLabel];
+//    _markTypeLabel.text = self.goldModel.nmTypeName;
+////
+//    //****************分隔线**************
+//    UIView *line2 = [[UIView alloc] initWithFrame:CGRectMake(15, 44 * 2, ScreenWidth - 15, 0.5)];
+//    line2.backgroundColor = UIColorWithRGB(0xe3e5ea);
+//    [bottomBkView addSubview:line2];
+//    //****************分隔线**************
+//
+//        //起投金额
+//        UIImageView *qitouImageV = [[UIImageView alloc] initWithFrame:CGRectMake(IconXPos,44*2 + IconYPos, 22, 22)];
+//        qitouImageV.image = [UIImage imageNamed:@"gold_particular_icon_measure"];
+//        [bottomBkView addSubview:qitouImageV];
+//        
+//        UILabel *qitouLabel = [UILabel labelWithFrame:CGRectMake(CGRectGetMaxX(guImageV.frame) + 5, 44*2 + IconYPos, 100, 22) text:@"起购克重" textColor:UIColorWithRGB(0x555555) font:[UIFont systemFontOfSize:13]];
+//        qitouLabel.textAlignment = NSTextAlignmentLeft;
+//        [bottomBkView addSubview:qitouLabel];
+//        
+//        _investmentAmountLabel = [UILabel labelWithFrame:CGRectMake(ScreenWidth - 15 - LabelWidTh, 44*2 + IconYPos, LabelWidTh, 22) text:@"1.000克" textColor:UIColorWithRGB(0x333333) font:[UIFont boldSystemFontOfSize:13]];
+//        _investmentAmountLabel.textAlignment = NSTextAlignmentRight;
+//        [bottomBkView addSubview:_investmentAmountLabel];
+//    _investmentAmountLabel.text = [NSString stringWithFormat:@"%@克",self.goldModel.minPurchaseAmount] ;
+////    //****************分隔线**************
+//    UIView *line3 = [[UIView alloc] initWithFrame:CGRectMake(15, 44*3, ScreenWidth - 15, 0.5)];
+//    line3.backgroundColor = UIColorWithRGB(0xe3e5ea);
+//    [bottomBkView addSubview:line3];
+////    //****************分隔线**************
+//    UIImageView *qitouImageV1 = [[UIImageView alloc] initWithFrame:CGRectMake(IconXPos,44*3 + IconYPos, 22, 22)];
+//    qitouImageV1.image = [UIImage imageNamed:@"gold_particular_icon_-poundage"];
+//    [bottomBkView addSubview:qitouImageV1];
+//    UILabel *qitouLabel1 = [UILabel labelWithFrame:CGRectMake(CGRectGetMaxX(qitouImageV.frame) + 5, 44*3 + IconYPos, 120 , 22) text:@"买入手续费(元/克)" textColor:UIColorWithRGB(0x555555) font:[UIFont systemFontOfSize:13]];
+//    qitouLabel1.textAlignment = NSTextAlignmentLeft;
+//    [bottomBkView addSubview:qitouLabel1];
+//    _buyServiceRateLabel = [UILabel labelWithFrame:CGRectMake(CGRectGetMaxX(qitouLabel1.frame) + 5, CGRectGetMinY(qitouLabel1.frame), ScreenWidth -CGRectGetMaxX(qitouLabel1.frame) - 5 - 15, 22) text:@"¥0.00" textColor:UIColorWithRGB(0x333333) font:[UIFont boldSystemFontOfSize:13]];
+//    _buyServiceRateLabel.textAlignment = NSTextAlignmentRight;
+//    [bottomBkView addSubview:_buyServiceRateLabel];
+//    
+//    _buyServiceRateLabel.text = [NSString stringWithFormat:@"¥%.2f",[self.goldModel.buyServiceRate floatValue]];
     
-    _buyServiceRateLabel.text = [NSString stringWithFormat:@"¥%.2f",[self.goldModel.buyServiceRate floatValue]];
+    
+    if (self.isGoldCurrentAccout) {
+        [self addInformationView];
+    }else{
+        [self drawPullingView];
+    }
+}
+-(void)addInformationView
+{
     
     
-    [self drawPullingView];
+    UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 47)];
+    headView.backgroundColor = UIColorWithRGB(0xebebee);
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 10, ScreenWidth,37)];
+    view.backgroundColor = UIColorWithRGB(0xf9f9f9);
+    UILabel *labelTitle = [[UILabel alloc] initWithFrame:CGRectMake(25/2.0, 12, ScreenWidth/2, 16)];
+    labelTitle.text = @"补充说明";
+    labelTitle.textColor = UIColorWithRGB(0x333333);
+    labelTitle.backgroundColor = [UIColor clearColor];
+    labelTitle.font = [UIFont systemFontOfSize:14];
+    [view addSubview:labelTitle];
+    [headView addSubview:view];
+    
+    [self viewAddLine:headView Up:NO];
+    [self viewAddLine:view Up:YES];
+
+    NSString *textStr = @"使用“共享宝马”的程序和共享脚踏车类似，用户只需扫描车上二维码下载该共享汽车品牌的应用，注册并上传驾驶证缴纳999元押金，找到车辆后通过应用可打开车门。\n进入车内需要经过两大安全系统“检测”：人脸视频系统、红外线酒精测试系统，才可将车子开走。\n有消息称，在沈阳投放之后，宝马会先在北上广等一线城市进行投放，随后还会覆盖到全国各个城市。\n使用“共享宝马”的程序和共享脚踏车类似，用户只需扫描车上二维码下载该共享汽车品牌的应用，注册并上传驾驶证缴纳999元押金，找到车辆后通过应用可打开车门。进入车内需要经过两大安全系统“检测”：人脸视频系统、红外线酒精测试系统，才可将车子开走。\n有消息称，在沈阳投放之后，宝马会先在北上广等一线城市进行投放，随后还会覆盖到全国各个城市。";
+    
+    CGSize size =  [Common getStrHeightWithStr:textStr AndStrFont:12 AndWidth:ScreenWidth - 30 AndlineSpacing:2];
+    UILabel *textLabel = [UILabel labelWithFrame:CGRectZero text:@"12个月" textColor:UIColorWithRGB(0x555555) font:[UIFont systemFontOfSize:12]];
+    textLabel.tag = 100;
+    textLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    textLabel.textAlignment = NSTextAlignmentLeft;
+    textLabel.numberOfLines = 0;
+    textLabel.text = textStr;
+    textLabel.frame = CGRectMake(15, CGRectGetMaxY(headView.frame)+15,ScreenWidth - 30 , size.height);
+    NSDictionary *dic = [Common getParagraphStyleDictWithStrFont:12.0f WithlineSpacing:2.0];
+//    textStr = [textStr stringByReplacingOccurrencesOfString:@"\\n" withString:@"\n"];
+    textLabel.attributedText = [NSString getNSAttributedString:textStr labelDict:dic];
+
+    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(textLabel.frame)+15, ScreenWidth, 10)];
+    footerView.backgroundColor = UIColorWithRGB(0xebebee);
+    
+    UIView *informationBgView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(bottomBkView.frame),ScreenWidth,CGRectGetMaxY(footerView.frame))];
+    informationBgView.backgroundColor = [UIColor whiteColor];
+    [informationBgView addSubview:headView];
+    [informationBgView addSubview:textLabel];
+    [informationBgView addSubview:footerView];
+    [_oneScroll addSubview:informationBgView];
+    [_oneScroll setContentSize:CGSizeMake(ScreenWidth, CGRectGetMaxY(informationBgView.frame))];
 }
 
 
@@ -728,7 +860,7 @@
 
         }else
         {
-            if(section == 1) {
+            if(section == 1 && !self.isGoldCurrentAccout) {
                 UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 30)];
                 headView.backgroundColor = UIColorWithRGB(0xf9f9f9);
                 //[self viewAddLine:headView Up:YES];
@@ -743,14 +875,11 @@
                 placehoderLabel.textAlignment = NSTextAlignmentLeft;
                 placehoderLabel.backgroundColor = [UIColor clearColor];
                 NSString *str = @"购买记录";
-                placehoderLabel.text = [NSString stringWithFormat:@"共%lu笔%@",self.purchaseRecordListArray.count,str];
+                placehoderLabel.text = [NSString stringWithFormat:@"共%lu笔%@",(unsigned long)self.purchaseRecordListArray.count,str];
                 [headView addSubview:placehoderLabel];
                 return headView;
             }
         }
-
-    
-    
     }
     return nil;
 }
@@ -944,23 +1073,24 @@
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
+//          NSLog(@"scrollView.contentOffset.y---->>>>>>%f",scrollView.contentOffset.y);
     CGFloat offsetFloat;
     if (kIS_Iphone4) {
-        offsetFloat = 64;
+        offsetFloat = _isGoldCurrentAccout ? 190 : 64;
     } else {
-        offsetFloat = 80;
+        offsetFloat = _isGoldCurrentAccout ? 120 : 80;
     }
     NSInteger tag = scrollView.tag;
     if (tag == 1002) {
-        NSLog(@"scrollView.contentOffset.y---->>>>>>%f",scrollView.contentOffset.y);
+//        NSLog(@"scrollView.contentOffset.y---->>>>>>%f",scrollView.contentOffset.y);
       if (scrollView.contentOffset.y < -50) {
             [_oneScroll setContentOffset:CGPointMake(0, 0) animated:YES];
 //            [_delegate toUpView];
             [self removeTopSegment];
             //_investmentView.frame = CGRectMake(0, ScreenHeight - 67, ScreenWidth, 67);
             [UIView animateWithDuration:0.3 animations:^{
-                _oneScroll.frame = CGRectMake(0, 64, ScreenWidth, BidDetailScrollViewHeight);
-                _twoTableview.frame = CGRectMake(0, ScreenHeight + 64 + 57, ScreenWidth, BidDetailScrollViewHeight);
+                _oneScroll.frame = CGRectMake(0, 64, ScreenWidth, oneScrollHeight);
+                _twoTableview.frame = CGRectMake(0, ScreenHeight + 64 + 57, ScreenWidth, oneScrollHeight);
             } completion:^(BOOL finished) {
                 _oneScrollPull = NO;
 //                [bottomView setHidden:NO];x
@@ -973,13 +1103,14 @@
             [self addTopSegment];
         }
     }  else if (tag == 1001) {
+//         NSLog(@"111111scrollView.contentOffset.y---->>>>>>%f",scrollView.contentOffset.y);
         if (scrollView.contentOffset.y > offsetFloat) {
             if (!_oneScrollPull) {
                 [self addTopSegment];
 //                [_delegate toDownView];
                 [UIView animateWithDuration:0.3 animations:^{
-                    _oneScroll.frame = CGRectMake(0, -ScreenHeight, ScreenWidth, BidDetailScrollViewHeight);
-                    _twoTableview.frame = CGRectMake(0,64, ScreenWidth, BidDetailScrollViewHeight);
+                    _oneScroll.frame = CGRectMake(0, -ScreenHeight, ScreenWidth, oneScrollHeight);
+                    _twoTableview.frame = CGRectMake(0,64, ScreenWidth, oneScrollHeight);
                 } completion:^(BOOL finished) {
 //                    [bottomView setHidden:YES];
                     [self hideAllTopSegment:NO];
@@ -1053,9 +1184,9 @@
        [self addTopSegment];
 //    [_delegate toDownView];
     //_investmentView.frame = CGRectMake(0, ScreenHeight - 67 - 64, ScreenWidth, 67);
-    _oneScroll.frame = CGRectMake(0, -ScreenHeight - 64, ScreenWidth, ScreenHeight - 64 - 57);
+    _oneScroll.frame = CGRectMake(0, -ScreenHeight - 64, ScreenWidth, oneScrollHeight);
     [UIView animateWithDuration:0.2 animations:^{
-        _twoTableview.frame = CGRectMake(0, 64, ScreenWidth, BidDetailScrollViewHeight);
+        _twoTableview.frame = CGRectMake(0, 64, ScreenWidth, oneScrollHeight);
     } completion:^(BOOL finished) {
 //        [bottomView setHidden:YES];
         [self hideAllTopSegment:NO];
@@ -1068,7 +1199,12 @@
     NSString *nmProClaimIdStr = self.goldModel.nmPrdClaimId;
     NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId",nmProClaimIdStr, @"nmPrdClaimId",nil];
     
-    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagGetGoldProClaimDetail owner:self signature:YES Type:SelectAccoutDefault];
+    
+    if(self.isGoldCurrentAccout){
+       [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagGoldCurrentProClaimDetail owner:self signature:YES Type:SelectAccoutTypeGold];
+    }else{
+        [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagGetGoldProClaimDetail owner:self signature:YES Type:SelectAccoutTypeGold];
+    }
 }
 - (void)beginPost:(kSXTag)tag
 {
@@ -1087,6 +1223,7 @@
         {
             UCFGoldPurchaseViewController *goldAuthorizationVC = [[UCFGoldPurchaseViewController alloc]initWithNibName:@"UCFGoldPurchaseViewController" bundle:nil];
             goldAuthorizationVC.dataDic = dataDict;
+            goldAuthorizationVC.isGoldCurrentAccout = self.isGoldCurrentAccout;
             [self.navigationController pushViewController:goldAuthorizationVC  animated:YES];
         }
         else
@@ -1102,6 +1239,20 @@
             FullWebViewController *controller = [[FullWebViewController alloc] initWithHtmlStr:contractContentStr title:contractTitle];
             controller.baseTitleType = @"detail_heTong";
             [self.navigationController pushViewController:controller animated:YES];
+        }
+        else
+        {
+            [AuxiliaryFunc showAlertViewWithMessage:rsttext];
+        }
+    }else if (tag.integerValue == kSXTagGoldCurrentProClaimDetail){
+        
+        NSDictionary *dataDict = [dic objectSafeDictionaryForKey:@"data"];
+        if ( [dic[@"ret"] boolValue])
+        {
+            UCFGoldPurchaseViewController *goldPurchaseVC = [[UCFGoldPurchaseViewController alloc]initWithNibName:@"UCFGoldPurchaseViewController" bundle:nil];
+            goldPurchaseVC.dataDic = dataDict;
+            goldPurchaseVC.isGoldCurrentAccout = self.isGoldCurrentAccout;
+            [self.navigationController pushViewController:goldPurchaseVC  animated:YES];
         }
         else
         {

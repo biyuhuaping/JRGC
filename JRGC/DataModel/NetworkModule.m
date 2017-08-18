@@ -1172,6 +1172,15 @@ static NetworkModule *gInstance = NULL;
         case kSxTagRegistMobileCheck:
             parameter = [NEW_SERVER_IP stringByAppendingString:RIGISTCHECK];
             break;
+        case kSXTagGoldCurrentPrdClaimInfo://黄金活期详情
+            parameter = [NEW_SERVER_IP stringByAppendingString:GOLDCURRENPRDCLAIMINFO];
+            break;
+        case kSXTagGoldCurrentProClaimDetail: //黄金活期投资页面数据
+            parameter = [NEW_SERVER_IP stringByAppendingString:GOLDCURRENPROClAIMDEAIL];
+            break;
+        case kSXTagGoldCurrentPurchase: //黄金活期购买接口
+            parameter = [NEW_SERVER_IP stringByAppendingString:GOLDCURRENPURCHASEGOLD];
+            break;
     }
     //给原有参数字典添加公共参数
     if (!data) {

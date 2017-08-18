@@ -187,6 +187,7 @@
             for (NSDictionary *dict in dataArr) {
                 UCFCouponModel *couponModel = [UCFCouponModel couponWithDict:dict];
 //                couponModel.state = [_status integerValue];//1：未使用 2：已使用 3：已过期 4：已赠送
+                couponModel.couponType = @"0";
                 [temp1 addObject:couponModel];
             }
             id unUserFxCount = dic[@"data"][@"unUserFxCount"];

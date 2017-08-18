@@ -31,6 +31,7 @@
 - (NSString *)p2pTransferNum;
 - (NSString *)zxTransferNum;
 - (NSString *)transferNum;
+- (NSString *)completeLoan;
 
 - (CGFloat)cellHeight;
 @end

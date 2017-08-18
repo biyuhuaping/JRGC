@@ -94,3 +94,24 @@
     _proressView.progress = process;
 }
 @end
+@interface UCFGoldCurrentDetailHeaderView()
+
+@property (strong, nonatomic) IBOutlet UILabel *annualRateLabel;
+
+@property (strong, nonatomic) IBOutlet UILabel *minPurchaseAmountLabel;
+
+@property (strong, nonatomic) IBOutlet UILabel *realGoldPriceLabel;
+@end
+@implementation UCFGoldCurrentDetailHeaderView
+
+-(void)layoutSubviews
+{
+    [super layoutSubviews];
+    self.realGoldPriceLabel.text = [NSString stringWithFormat:@"¥%.2lf",[ToolSingleTon  sharedManager].readTimePrice];
+    self.annualRateLabel.text = [NSString stringWithFormat:@"%@%%",self.goldModel.annualRate];
+    [self.annualRateLabel setFont: [UIFont systemFontOfSize:22] string:@"%"];
+}
+
+
+
+@end

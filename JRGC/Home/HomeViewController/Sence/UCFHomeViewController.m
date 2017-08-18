@@ -331,6 +331,12 @@
 {
     [self homeList:nil tableView:nil didClickedWithModel:nil withType:type];
 }
+
+- (void)homeList:(UCFHomeListViewController *)homeList tableView:(UITableView *)tableView didClickedBuyGoldWithModel:(UCFHomeListCellModel *)model
+{
+    
+}
+
 - (void)homeList:(UCFHomeListViewController *)homeList tableView:(UITableView *)tableView didClickedWithModel:(UCFHomeListCellModel *)model withType:(UCFHomeListType)type
 {
      __weak typeof(self) weakSelf = self;

@@ -251,14 +251,14 @@
         self.upLineLeftSpace.constant = 0;
         self.downLineLeftSpace.constant = 25;
     } else if (indexPath.row == totalRows - 1) { // 这组的末行(最后1行)
-        self.upSegLine.hidden = indexPath.section == 4 ? YES : NO;
+        self.upSegLine.hidden = NO;
         self.downSegLine.hidden = NO;
         self.upSegLine.backgroundColor = UIColorWithRGB(0xe3e5ea);
         self.downSegLine.backgroundColor = UIColorWithRGB(0xd8d8d8);
-        self.upLineLeftSpace.constant = indexPath.section == 3 ? 0 : 25;
+        self.upLineLeftSpace.constant = 25;
         self.downLineLeftSpace.constant = 0;
     } else {
-        self.upSegLine.hidden = indexPath.section == 4 ? YES : NO;
+        self.upSegLine.hidden = NO;
         self.downSegLine.hidden = YES;
         self.upSegLine.backgroundColor = UIColorWithRGB(0xe3e5ea);
         self.downSegLine.backgroundColor = UIColorWithRGB(0xe3e5ea);

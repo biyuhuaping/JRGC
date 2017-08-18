@@ -20,6 +20,9 @@
 {
     [super awakeFromNib];
     self.up.backgroundColor = UIColorWithRGB(0xebebee);
+    [self.contentView setBackgroundColor:UIColorWithRGB(0xf9f9f9)];
+    [self.upLine setBackgroundColor:UIColorWithRGB(0xebebee)];
+    [self.homeListHeaderMoreButton setTitleColor:UIColorWithRGB(0x4aa1f9) forState:UIControlStateNormal];
 }
 
 - (void)setPresenter:(UCFHomeListGroupPresenter *)presenter {
@@ -36,6 +39,20 @@
         [self.headerImageView sd_setImageWithURL:[NSURL URLWithString:presenter.iconUrl]];
     }
 }
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    if (self.presenter.type == 16) {
+        self.honerLabel.hidden = NO;
+        self.honerLabel.text = self.presenter.desc;
+        self.segView.hidden = NO;
+    }
+    else {
+        self.honerLabel.hidden = YES;
+        self.segView.hidden = YES;
+    }
+}
+
 - (IBAction)moreClicked:(UIButton *)sender {
     if ([self.delegate respondsToSelector:@selector(homeListHeader:didClickedMoreWithType:)]) {
         [self.delegate homeListHeader:self didClickedMoreWithType:self.presenter.group.type];

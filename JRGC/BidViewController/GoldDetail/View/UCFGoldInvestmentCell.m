@@ -27,6 +27,7 @@
 - (void)setGoldInvestItemInfo:(UCFGoldModel *)aItemInfo
 {
     
+   
     
     self.realGoldPriceLab.text = [NSString stringWithFormat:@"实时金价(元/克)%.3f",[ToolSingleTon sharedManager].readTimePrice]; //
     
@@ -80,5 +81,38 @@
     self.progressGoldView.elapsedTime = progress;
     //    self.progressView.tintColor = [UIColor redColor];
     //    self.progressView.textStr = @"投资";
+}
+@end
+
+
+@implementation UCFGoldCurrrntInvestmentCell
+
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    // Initialization code
+}
+
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+    [super setSelected:selected animated:animated];
+    
+}
+
+
+// 投资页普通表头
+- (void)setGoldInvestItemInfo:(UCFGoldModel *)aItemInfo
+{
+    self.realGoldPriceLab.text = [NSString stringWithFormat:@"%.3lf元/克",[ToolSingleTon sharedManager].readTimePrice];
+    [self.realGoldPriceLab setFont:[UIFont boldSystemFontOfSize:12] string:@"元/克"];
+    self.nmPrdClaimNameLab.text = aItemInfo.nmPrdClaimName;//债权名称
+    self.nmPrdClaimNameLab.textAlignment = NSTextAlignmentLeft;
+    self.nmPrdClaimNameLab.textColor = UIColorWithRGB(0x333333);
+    self.nmPrdClaimNameLab.font = [UIFont systemFontOfSize:14.0];
+    
+    self.annualRateLab.textColor = UIColorWithRGB(0x555555);
+    self.annualRateLab.font = [UIFont systemFontOfSize:18.0];
+    self.annualRateLab.text = [NSString stringWithFormat:@"%@%%",aItemInfo.annualRate];//年化收益率
+    [self.annualRateLab setFont:[UIFont systemFontOfSize:12] string:@"%"];
+    self.angleGoldView.angleStatus = @"2";
+
 }
 @end

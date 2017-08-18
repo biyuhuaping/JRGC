@@ -18,6 +18,9 @@
 #import "UCFGoldDetailViewController.h"
 #import "ToolSingleTon.h"
 #import "UCFNoPermissionViewController.h"
+#import "UCFGoldFlexibleCell.h"
+
+
 @interface UCFGoldenViewController () <UITableViewDelegate, UITableViewDataSource, UCFHomeListCellHonorDelegate,UIAlertViewDelegate>
 @property (weak, nonatomic) UCFGoldenHeaderView *goldenHeader;
 @property (strong, nonatomic) NSMutableArray *dataArray;
@@ -71,31 +74,48 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if (section == 0) {
+        return 1;
+    }
     return self.dataArray.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (indexPath.section == 0) {
+        return 185.0;
+    }
     return 100;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *cellId = @"homeListCell";
-    UCFHomeListCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
-    if (nil == cell) {
-        cell = (UCFHomeListCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeListCell" owner:self options:nil] lastObject];
-        cell.honorDelegate = self;
+    if (indexPath.section == 0) {
+        static NSString *cellId = @"goldflexible";
+        UCFGoldFlexibleCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+        if (nil == cell) {
+            cell = (UCFGoldFlexibleCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFGoldFlexibleCell" owner:self options:nil] lastObject];
+        }
+        return cell;
     }
-    cell.tableView = tableView;
-    cell.indexPath = indexPath;
-    cell.goldModel = [self.dataArray objectAtIndex:indexPath.row];
-    return cell;
+    else if (indexPath.section == 1) {
+        static NSString *cellId = @"homeListCell";
+        UCFHomeListCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+        if (nil == cell) {
+            cell = (UCFHomeListCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeListCell" owner:self options:nil] lastObject];
+            cell.honorDelegate = self;
+        }
+        cell.tableView = tableView;
+        cell.indexPath = indexPath;
+        cell.goldModel = [self.dataArray objectAtIndex:indexPath.row];
+        return cell;
+    }
+    return nil;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -186,8 +206,32 @@
 
         NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId",nmProClaimIdStr, @"nmPrdClaimId",nil];
         
-        [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagGetGoldProClaimDetail owner:self signature:YES Type:SelectAccoutDefault];
-        }
+//        [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagGetGoldProClaimDetail owner:self signature:YES Type:SelectAccoutDefault];
+//        }
+        [self getGoldCurrentPrdClaimInfoHttpRequest:goldModel];
+    }
+}
+#pragma mark -活期详情页面数据请求
+-(void)getGoldCurrentPrdClaimInfoHttpRequest:(UCFGoldModel *)goldModel
+{
+    
+    NSString *nmProClaimIdStr = goldModel.nmPrdClaimId;
+    
+    NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId",@"1", @"nmPrdClaimId",nil];
+    
+    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagGoldCurrentPrdClaimInfo owner:self signature:YES Type:SelectAccoutTypeGold];
+
+}
+#pragma mark -活期投资页面数据请求
+-(void)getGoldCurrentProClaimDetailHttpRequest:(UCFGoldModel *)goldModel
+{
+    
+    NSString *nmProClaimIdStr = goldModel.nmPrdClaimId;
+    
+    NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId",nmProClaimIdStr, @"nmPrdClaimId",nil];
+    
+    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagGoldCurrentProClaimDetail owner:self signature:YES Type:SelectAccoutTypeGold];
+    
 }
 #pragma mark -去登录页面
 - (void)showLoginView
@@ -198,8 +242,6 @@
 }
 - (BOOL)checkUserCanInvestIsDetailType:(SelectAccoutType)accout;
 {
-   
-    
     return NO;
 }
 - (void)showHSAlert:(NSString *)alertMessage
@@ -292,13 +334,14 @@
         NSString *rsttext = dic[@"message"];
         NSDictionary *dataDict = [dic objectSafeDictionaryForKey:@"data"];
         if ( [dic[@"ret"] boolValue]) {
-            UCFGoldPurchaseViewController *goldAuthorizationVC = [[UCFGoldPurchaseViewController alloc]initWithNibName:@"UCFGoldPurchaseViewController" bundle:nil];
-            goldAuthorizationVC.dataDic = dataDict;
-            [self.navigationController pushViewController:goldAuthorizationVC  animated:YES];
+            UCFGoldPurchaseViewController *goldPurchaseVC = [[UCFGoldPurchaseViewController alloc]initWithNibName:@"UCFGoldPurchaseViewController" bundle:nil];
+            goldPurchaseVC.dataDic = dataDict;
+            goldPurchaseVC.isGoldCurrentAccout = NO;
+            [self.navigationController pushViewController:goldPurchaseVC  animated:YES];
         }
         else
         {
-               [AuxiliaryFunc showAlertViewWithMessage:rsttext];
+            [AuxiliaryFunc showAlertViewWithMessage:rsttext];
         }
     }
     else if (tag.integerValue == kSXTagGetGoldPrdClaimDetail){
@@ -309,6 +352,7 @@
         if ( [dic[@"ret"] boolValue]) {
             UCFGoldDetailViewController*goldDetailVC = [[UCFGoldDetailViewController alloc]initWithNibName:@"UCFGoldDetailViewController" bundle:nil];
             goldDetailVC.dataDict = dataDict;
+            goldDetailVC.isGoldCurrentAccout = YES;
             [self.navigationController pushViewController:goldDetailVC  animated:YES];
         }
         else
@@ -321,6 +365,44 @@
                 [AuxiliaryFunc showAlertViewWithMessage:rsttext];
             }
 
+        }
+    }else if (tag.integerValue == kSXTagGoldCurrentProClaimDetail){//活期投资页面
+        
+        NSMutableDictionary *dic = [result objectFromJSONString];
+        NSString *rsttext = dic[@"message"];
+        NSDictionary *dataDict = [dic objectSafeDictionaryForKey:@"data"];
+        if ( [dic[@"ret"] boolValue]) {
+            UCFGoldPurchaseViewController *goldPurchaseVC = [[UCFGoldPurchaseViewController alloc]initWithNibName:@"UCFGoldPurchaseViewController" bundle:nil];
+            goldPurchaseVC.dataDic = dataDict;
+            goldPurchaseVC.isGoldCurrentAccout = YES;
+            [self.navigationController pushViewController:goldPurchaseVC  animated:YES];
+        }
+        else
+        {
+            [AuxiliaryFunc showAlertViewWithMessage:rsttext];
+        }
+    }
+    else if (tag.integerValue == kSXTagGoldCurrentPrdClaimInfo){//活期详情页面
+        
+        NSMutableDictionary *dic = [result objectFromJSONString];
+        NSString *rsttext = dic[@"message"];
+        NSDictionary *dataDict = [dic objectSafeDictionaryForKey:@"data"];
+        if ( [dic[@"ret"] boolValue]) {
+            UCFGoldDetailViewController*goldDetailVC = [[UCFGoldDetailViewController alloc]initWithNibName:@"UCFGoldDetailViewController" bundle:nil];
+            goldDetailVC.dataDict = dataDict;
+            goldDetailVC.isGoldCurrentAccout = YES;
+            [self.navigationController pushViewController:goldDetailVC  animated:YES];
+        }
+        else
+        {
+            if([[dic objectSafeForKey:@"code"]  intValue] == 11112)
+            {
+                UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前标的详情只对认购人开放"];
+                [self.navigationController pushViewController:controller animated:YES];
+            }else{
+                [AuxiliaryFunc showAlertViewWithMessage:rsttext];
+            }
+            
         }
     }
     if ([self.tableview.header isRefreshing]) {

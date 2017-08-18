@@ -15,11 +15,12 @@
 #import "UCFHomeListCell.h"
 #import "UCFHomeListNo2Cell.h"
 #import "UCFHomeInvestCell.h"
+#import "UCFGoldFlexibleCell.h"
 #import "UCFHomeListHeaderSectionView.h"
 #import "UCFLoginViewController.h"
 #import "AppDelegate.h"
 
-@interface UCFHomeListViewController () <UITableViewDelegate, UITableViewDataSource, HomeListViewPresenterCallBack, UCFHomeListHeaderSectionViewDelegate, UCFHomeListCellDelegate, UCFHomeInvestCellDelegate>
+@interface UCFHomeListViewController () <UITableViewDelegate, UITableViewDataSource, HomeListViewPresenterCallBack, UCFHomeListHeaderSectionViewDelegate, UCFHomeListCellDelegate, UCFHomeInvestCellDelegate, UCFGoldFlexibleCellDelegate>
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) UCFHomeListPresenter *presenter;
 @end
@@ -106,6 +107,17 @@
         cell.presenter = cellPresenter;
         return cell;
     }
+    else if (cellPresenter.modelType == UCFHomeListCellModelTypeGoldFixed) {
+        static NSString *cellId = @"goldflexible";
+        UCFGoldFlexibleCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+        if (nil == cell) {
+            cell = (UCFGoldFlexibleCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFGoldFlexibleCell" owner:self options:nil] lastObject];
+        }
+        cell.indexPath = indexPath;
+        cell.presenter = cellPresenter;
+        cell.delegate = self;
+        return cell;
+    }
     return nil;
 }
 
@@ -116,9 +128,6 @@
     if (nil == view) {
         view = (UCFHomeListHeaderSectionView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeListHeaderSectionView" owner:self options:nil] lastObject];
     }
-    [view.contentView setBackgroundColor:UIColorWithRGB(0xf9f9f9)];
-    [view.upLine setBackgroundColor:UIColorWithRGB(0xebebee)];
-    [view.homeListHeaderMoreButton setTitleColor:UIColorWithRGB(0x4aa1f9) forState:UIControlStateNormal];
     view.delegate = self;
     view.frame = CGRectMake(0, 0, ScreenWidth, 30);
     UCFHomeListGroupPresenter *groupPresenter = [self.presenter.allDatas objectAtIndex:section];
@@ -127,15 +136,6 @@
         return nil;
     }
     view.presenter = groupPresenter;
-    if (section == 0) {
-        view.honerLabel.hidden = NO;
-        view.honerLabel.text = groupPresenter.group.desc;
-        view.segView.hidden = NO;
-    }
-    else {
-        view.honerLabel.hidden = YES;
-        view.segView.hidden = YES;
-    }
     return view;
 }
 
@@ -181,7 +181,6 @@
         }
         return 8;
     }
-    
 }
 
 #pragma mark - tableView delegate方法
@@ -269,6 +268,14 @@
     UCFHomeListCellPresenter *cellPresenter =  [groupPresenter.group.prdlist objectAtIndex:indexPath.row];
     if ([self.delegate respondsToSelector:@selector(homeList:didClickReservedWithModel:)]) {
         [self.delegate homeList:self didClickReservedWithModel:cellPresenter.item];
+    }
+}
+
+#pragma mark -  黄金活期购买
+- (void)homelistCell:(UCFGoldFlexibleCell *)homelistCell didClickedBuyButtonWithModel:(UCFHomeListCellModel *)model
+{
+    if ([self.delegate respondsToSelector:@selector(homeList:tableView:didClickedBuyGoldWithModel:)]) {
+        [self.delegate homeList:self tableView:self.tableView didClickedBuyGoldWithModel:model];
     }
 }
 

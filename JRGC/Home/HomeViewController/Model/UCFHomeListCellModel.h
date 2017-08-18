@@ -11,6 +11,7 @@
 typedef enum : NSUInteger {
     UCFHomeListCellModelTypeDefault,
     UCFHomeListCellModelTypeReserved,
+    UCFHomeListCellModelTypeGoldFixed,
     UCFHomeListCellModelTypeOneImageBatchLending,
     UCFHomeListCellModelTypeOneImageTransfer,
     UCFHomeListCellModelTypeOneImageBatchCycle,

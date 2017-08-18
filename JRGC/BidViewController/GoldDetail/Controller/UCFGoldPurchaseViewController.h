@@ -10,4 +10,5 @@
 
 @interface UCFGoldPurchaseViewController : UCFBaseViewController
 @property(nonatomic,strong)NSDictionary *dataDic;
+@property (nonatomic,assign)BOOL isGoldCurrentAccout;//是否是活期的标
 @end
