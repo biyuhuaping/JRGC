@@ -131,9 +131,9 @@
         }
     }
     else if (tag.integerValue == kSXTagGoldChangeCash) {
-        NSDictionary *dict = [[dic objectSafeDictionaryForKey:@"data"] objectSafeForKey:@"result"];
+        NSDictionary *dict = [dic objectSafeDictionaryForKey:@"data"];
         UCFCashGoldResultModel *cashGoldResu = [[UCFCashGoldResultModel alloc] init];
-        cashGoldResu.dealGoldPrice = [dict objectSafeForKey:@"dealGoldPrice"];
+        cashGoldResu.dealGoldPrice = [NSString stringWithFormat:@"%@",[dict objectSafeForKey:@"dealGoldPrice"]];
         cashGoldResu.liquidateGoldAmount = [dict objectSafeForKey:@"liquidateGoldAmount"];
         cashGoldResu.liquidateMoney = [dict objectSafeForKey:@"liquidateMoney"];
         cashGoldResu.liquidateToken = [dict objectSafeForKey:@"liquidateToken"];
@@ -364,6 +364,7 @@
         [alert show];
         return;
     }
+    [self cashGold];
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex

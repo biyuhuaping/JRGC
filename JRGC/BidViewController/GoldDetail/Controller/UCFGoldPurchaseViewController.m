@@ -1082,7 +1082,7 @@
             [alert show];
             return;
         } else {
-            NSString *messageStr = [NSString stringWithFormat:@"有可用返息券,确认不使用继续购买吗"];
+            NSString *messageStr = [NSString stringWithFormat:@"有可用返金券,确认不使用并继续购买吗"];
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
             alert.tag = 4000;
             [alert show];

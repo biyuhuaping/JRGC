@@ -37,9 +37,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    baseTitleLabel.text = @"返金券";
+    baseTitleLabel.text = @"使用返金券";
     [self addLeftButton];
-    self.remainGoldAccountLab.text = self.remainAmountStr;
+    
+    self.confirmUseGoldCouponBtn.userInteractionEnabled = NO;
+    [self.confirmUseGoldCouponBtn setBackgroundColor:UIColorWithRGB(0xcccccc)];
+    
+    self.remainGoldAccountLab.text = [NSString stringWithFormat:@"%@克",self.remainAmountStr];
     self.tableView.contentInset =  UIEdgeInsetsMake(0, 0, 10, 0);
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
@@ -127,7 +131,7 @@
     self.needGoldAccountLab.text = [NSString stringWithFormat:@"%.3lf克",_tatolNeetGoldAccout];
     [self.selectTipStr setFontColor:UIColorWithRGB(0xfc8c0e) string:_cellSelectCountStr];
     [self.selectTipStr setFontColor:UIColorWithRGB(0xfc8c0e) string:tatolGetGoldAccoutStr];
-    if (_tatolNeetGoldAccout > [self.remainAmountStr doubleValue]) {
+    if (_tatolNeetGoldAccout > [self.remainAmountStr doubleValue] || _tatolGetGoldAccout == 0 || _tatolNeetGoldAccout == 0) {
         self.confirmUseGoldCouponBtn.userInteractionEnabled = NO;
         [self.confirmUseGoldCouponBtn setBackgroundColor:UIColorWithRGB(0xcccccc)];
     }else{
@@ -233,7 +237,15 @@
             self.selectTipStr.text = [NSString stringWithFormat:@"已选用%@张，可返金%@克",self.cellSelectCountStr,tatolGetGoldAccoutStr];
             [self.selectTipStr setFontColor:UIColorWithRGB(0xfc8c0e) string:self.cellSelectCountStr];
             [self.selectTipStr setFontColor:UIColorWithRGB(0xfc8c0e) string:tatolGetGoldAccoutStr];
-            self.needGoldAccountLab.text = [NSString stringWithFormat:@"%@克",[dataDict objectSafeForKey:@"investMinSum"]];
+            NSString *investMinSumStr = [dataDict objectSafeForKey:@"investMinSum"];
+            self.needGoldAccountLab.text = [NSString stringWithFormat:@"%@克",investMinSumStr];
+            if ([investMinSumStr doubleValue] > [self.remainAmountStr doubleValue]) {
+                self.confirmUseGoldCouponBtn.userInteractionEnabled = NO;
+                [self.confirmUseGoldCouponBtn setBackgroundColor:UIColorWithRGB(0xcccccc)];
+            }else{
+                self.confirmUseGoldCouponBtn.userInteractionEnabled = YES;
+                [self.confirmUseGoldCouponBtn setBackgroundColor:UIColorWithRGB(0xFFC027)];
+            }
         }else{
         
             
