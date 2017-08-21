@@ -60,7 +60,7 @@
             NSMutableArray *temp = [[NSMutableArray alloc] init];
             for (NSDictionary *dict in resultArr) {
                 UCFMicroMoneyGroup *microMoneyGroup = [UCFMicroMoneyGroup microMoneyGroupWithDict:dict];
-                if ([microMoneyGroup.type isEqualToString:@"13"]) {
+                if ([microMoneyGroup.type isEqualToString:@"16"]) {
                     microMoneyGroup.showMore = NO;
                 }
                 else {

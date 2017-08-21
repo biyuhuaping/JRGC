@@ -9,6 +9,7 @@
 #import "UCFHomeInvestCell.h"
 #import "UCFHomeListCellPresenter.h"
 #import "NZLabel.h"
+#import "UCFMicroMoneyModel.h"
 
 @interface UCFHomeInvestCell ()
 @property (weak, nonatomic) IBOutlet NZLabel *anurateLabel;
@@ -32,9 +33,23 @@
 }
 
 - (IBAction)reserveForSomeone:(UIButton *)sender {
-    if ([self.delegate respondsToSelector:@selector(homeInvestCell:didClickedInvestButtonAtIndexPath:)]) {
-        [self.delegate homeInvestCell:self didClickedInvestButtonAtIndexPath:self.indexPath];
+    if ([NSStringFromClass([self.delegate class]) isEqualToString:@"UCFMicroMoneyViewController"]) {
+        if ([self.delegate respondsToSelector:@selector(microMoneyListCell:didClickedInvestButtonWithModel:)]) {
+            [self.delegate microMoneyListCell:self didClickedInvestButtonWithModel:self.microModel];
+        }
     }
+    else {
+        if ([self.delegate respondsToSelector:@selector(homeInvestCell:didClickedInvestButtonAtIndexPath:)]) {
+            [self.delegate homeInvestCell:self didClickedInvestButtonAtIndexPath:self.indexPath];
+        }
+    }
+}
+
+- (void)setMicroModel:(UCFMicroMoneyModel *)microModel
+{
+    _microModel = microModel;
+    self.anurateLabel.text = microModel.annualRate ? [NSString stringWithFormat:@"%@%%",microModel.annualRate] : @"0.0%";
+    self.repayPeroid.text = microModel.repayPeriodtext;
 }
 
 - (void)layoutSubviews
