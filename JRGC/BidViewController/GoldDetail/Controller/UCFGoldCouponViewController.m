@@ -43,7 +43,7 @@
     self.confirmUseGoldCouponBtn.userInteractionEnabled = NO;
     [self.confirmUseGoldCouponBtn setBackgroundColor:UIColorWithRGB(0xcccccc)];
     
-    self.remainGoldAccountLab.text = self.remainAmountStr;
+    self.remainGoldAccountLab.text = [NSString stringWithFormat:@"%@克",self.remainAmountStr];
     self.tableView.contentInset =  UIEdgeInsetsMake(0, 0, 10, 0);
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
