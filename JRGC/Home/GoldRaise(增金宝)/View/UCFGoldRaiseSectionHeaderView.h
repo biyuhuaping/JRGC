@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface UCFGoldRaiseSectionHeaderView : UITableViewHeaderFooterView
+@property (weak, nonatomic) IBOutlet UILabel *titleStrLabel;
 
 @end
