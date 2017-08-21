@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UCFCashGoldTipview : UIView
+@protocol UCFCashGoldTipviewDelegate <NSObject>
+- (void)cashGoldTipViewDidClickedCloseButton:(UIButton *)button;
+@end
 
+@interface UCFCashGoldTipview : UIView
+@property (weak, nonatomic) IBOutlet UILabel *realGoldPriceLabel;
+@property (weak, nonatomic) IBOutlet UILabel *serviceFeeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *actualGoldPriceLabel;
+@property (nonatomic, weak) id<UCFCashGoldTipviewDelegate> delegate;
 @end

@@ -21,7 +21,7 @@
 #import "UCFGoldFlexibleCell.h"
 
 
-@interface UCFGoldenViewController () <UITableViewDelegate, UITableViewDataSource, UCFHomeListCellHonorDelegate,UIAlertViewDelegate>
+@interface UCFGoldenViewController () <UITableViewDelegate, UITableViewDataSource, UCFHomeListCellHonorDelegate,UIAlertViewDelegate, UCFGoldFlexibleCellDelegate>
 @property (weak, nonatomic) UCFGoldenHeaderView *goldenHeader;
 @property (strong, nonatomic) NSMutableArray *dataArray;
 @property (assign, nonatomic) NSUInteger currentPage;
@@ -92,7 +92,10 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
-        return 185.0;
+        if (self.fliexGoldModel.nmPrdClaimName.length>0) {
+            return 185.0;
+        }
+        return 0;
     }
     return 100;
 }
@@ -104,6 +107,10 @@
         UCFGoldFlexibleCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
         if (nil == cell) {
             cell = (UCFGoldFlexibleCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFGoldFlexibleCell" owner:self options:nil] lastObject];
+            cell.delegate = self;
+        }
+        if (self.fliexGoldModel) {
+            cell.goldmodel = self.fliexGoldModel;
         }
         return cell;
     }
@@ -120,6 +127,11 @@
         return cell;
     }
     return nil;
+}
+#pragma mark - 黄金活期购买的代理
+- (void)goldList:(UCFGoldFlexibleCell *)goldListCell didClickedBuyFilexGoldWithModel:(UCFGoldModel *)model
+{
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section

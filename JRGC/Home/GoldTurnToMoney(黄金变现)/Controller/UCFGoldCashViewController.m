@@ -17,8 +17,10 @@
 #import "ToolSingleTon.h"
 #import "UCFCashGoldResultModel.h"
 #import "UCFGoldCashSucessController.h"
+#import "MjAlertView.h"
+#import "UCFCashGoldTipview.h"
 
-@interface UCFGoldCashViewController () <UITableViewDataSource, UITableViewDelegate, UCFGoldCashButtonCellDelegate, UIAlertViewDelegate, UCFGoldCashFourthCellDelegate>
+@interface UCFGoldCashViewController () <UITableViewDataSource, UITableViewDelegate, UCFGoldCashButtonCellDelegate, UIAlertViewDelegate, UCFGoldCashFourthCellDelegate, UCFCashGoldTipviewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (strong, nonatomic) NSMutableArray *dataArray;
 @property (copy, nonatomic) NSString *availableGoldAmount;
@@ -29,6 +31,7 @@
 @property (strong, nonatomic) UCFCashGoldResultModel *cashGoldResult;
 @property (copy, nonatomic) NSString *goldAveragePrice;
 @property (assign, nonatomic) BOOL isGoOn;
+@property (weak, nonatomic) MjAlertView *tipView;
 @end
 
 @implementation UCFGoldCashViewController
@@ -373,7 +376,27 @@
 
 - (void)goldCashFourthDidClickedTipButton:(UIButton *)button
 {
-    
+    __weak typeof(self) weakSelf = self;
+    MjAlertView *alertView = [[MjAlertView alloc] initCustomAlertViewWithBlock:^(id blockContent) {
+        UIView *view = (UIView *)blockContent;
+        view.frame = CGRectMake(0, 0, 265, 245);
+        
+        UCFCashGoldTipview *tipview = (UCFCashGoldTipview *)[[[NSBundle mainBundle] loadNibNamed:@"UCFCashGoldTipview" owner:self options:nil] lastObject];
+        tipview.realGoldPriceLabel.text = [NSString stringWithFormat:@"%.2f元", [ToolSingleTon sharedManager].readTimePrice];
+        tipview.serviceFeeLabel.text = [NSString stringWithFormat:@"%@元/克", weakSelf.cashServiceRate];
+        tipview.actualGoldPriceLabel.text = [NSString stringWithFormat:@"%.2f元", [ToolSingleTon sharedManager].readTimePrice-[weakSelf.cashServiceRate floatValue]];
+        tipview.frame = view.bounds;
+        view.center = CGPointMake(ScreenWidth * 0.5, ScreenHeight * 0.5);
+        tipview.delegate = weakSelf;
+        [view addSubview:tipview];
+    }];
+    weakSelf.tipView = alertView;
+    [alertView show];
+}
+
+- (void)cashGoldTipViewDidClickedCloseButton:(UIButton *)button
+{
+    [self.tipView hide];
 }
 
 - (void)cashGold {
