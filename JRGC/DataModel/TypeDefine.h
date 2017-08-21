@@ -89,7 +89,7 @@
 //#define USERBEHAVIOR                  @"userBehavior/writeBehavior"
 #define EXCAHGELIST                   @"scratchCard/exchangeList"
 //#define APPLYCARD                     @"scratchCard/applyCard"
-#define RIGISTCHECK                   @"newuserregist/verification"
+#define RIGISTCHECK                   @"api/user/v2/verificationMobile.json"//@"newuserregist/verification"
 //#define INVITEREBATE                  @"newfactoryCodeController/info"          //邀请返利
 #define INVITEREBATE                  @"api/inviteRebate/v2/info.json"          //邀请返利
 #define FRIENDREGISTERLIST            @"newfactoryCodeController/recFriendList" //邀请注册记录

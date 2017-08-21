@@ -608,7 +608,7 @@
             //
             NSString *goldAccountSumStr = [self.goldCouponDataDict objectSafeForKey:@"goldAccountSum"];
             NSString *investMinSumStr = [self.goldCouponDataDict objectSafeForKey:@"investMinSum"];
-           availableLabel.text = [NSString stringWithFormat:@"返%@g黄金，购满%@g可用",goldAccountSumStr,investMinSumStr];
+           availableLabel.text = [NSString stringWithFormat:@"返%@克黄金，购满%@克可用",goldAccountSumStr,investMinSumStr];
             [availableLabel setFontColor:UIColorWithRGB(0xfc8f0e) string:goldAccountSumStr];
             [availableLabel setFontColor:UIColorWithRGB(0x333333) string:investMinSumStr];
             availableLabel.font = [UIFont systemFontOfSize:12.0f];
@@ -1069,7 +1069,7 @@
             int compareResult1 = [Common stringA:invenestMoney ComparedStringB:couponPrdaimSum2];
             NSString *showStr = @"";
             if (compareResult1 == -1) {
-                showStr = [NSString stringWithFormat:@"返金券使用条件不足,需购买满%@可用",[UCFToolsMehod AddComma:couponPrdaimSum2]];
+                showStr = [NSString stringWithFormat:@"返金券使用条件不足,需购买满%@克可用",[UCFToolsMehod AddComma:couponPrdaimSum2]];
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:showStr delegate:self cancelButtonTitle:nil otherButtonTitles:@"重新输入", nil];
                 alert.tag = 1000;
                 [alert show];

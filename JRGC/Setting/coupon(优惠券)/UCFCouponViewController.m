@@ -215,6 +215,7 @@
 #pragma mark 下拉弹框的点击相应事件
 - (void)listShowDidSelect:(NSIndexPath *)idexnum {
     UCFCouponAuxiliaryVC *subVC = [[UCFCouponAuxiliaryVC alloc]initWithNibName:@"UCFCouponAuxiliaryVC" bundle:nil];
+    subVC.currentSelectedState = _currentSelectedState;
     [self.navigationController pushViewController:subVC animated:YES];
     switch (idexnum.row) {
         case 0: {
