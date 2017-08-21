@@ -131,7 +131,22 @@
 #pragma mark - 黄金活期购买的代理
 - (void)goldList:(UCFGoldFlexibleCell *)goldListCell didClickedBuyFilexGoldWithModel:(UCFGoldModel *)model
 {
-    
+    if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
+        //如果未登录，展示登录页面
+        [self showLoginView];
+    } else  {
+        
+        NSString *tipStr1 = ZXTIP1;
+        //        NSInteger openStatus = [UserInfoSingle sharedManager].openStatus ;
+        NSInteger enjoyOpenStatus = [UserInfoSingle sharedManager].enjoyOpenStatus;
+        if (  enjoyOpenStatus < 3 ) {
+            [self showHSAlert:tipStr1];
+            return;
+        }
+
+        [self getGoldCurrentProClaimDetailHttpRequest:self.fliexGoldModel];
+    }
+
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -213,11 +228,18 @@
             return;
         }
         
+        
+        if (indexPath.section == 0) {
+            [self getGoldCurrentPrdClaimInfoHttpRequest:self.fliexGoldModel];
+        }else{
+            
+        
         UCFGoldModel *goldModel = [self.dataArray objectAtIndex:indexPath.row];
         
         NSString *nmProClaimIdStr = goldModel.nmPrdClaimId;
         NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId",nmProClaimIdStr, @"nmPrdClaimId",nil];
         [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagGetGoldPrdClaimDetail owner:self signature:YES Type:SelectAccoutTypeGold];
+        }
         
     }
 
@@ -239,27 +261,15 @@
             return;
         }
         
-        
- 
         UCFGoldModel *goldModel = [self.dataArray objectAtIndex:indexPath.row];
-        
-//        if (goldModel.type) {
-//            
-//        }
-        
-        
-        
-        
         if ([goldModel.status intValue] == 2 || [goldModel.status intValue] == 21 ) {
-            return;
+                return;
         }
-        
+            
         NSString *nmProClaimIdStr = goldModel.nmPrdClaimId;
-
         NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId",nmProClaimIdStr, @"nmPrdClaimId",nil];
-        
+            
         [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagGetGoldProClaimDetail owner:self signature:YES Type:SelectAccoutDefault];
-//        [self getGoldCurrentPrdClaimInfoHttpRequest:goldModel];
     }
 }
 #pragma mark -活期详情页面数据请求

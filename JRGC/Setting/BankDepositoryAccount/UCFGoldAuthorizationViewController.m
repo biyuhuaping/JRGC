@@ -16,6 +16,7 @@
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *upViewWidth;
 @property (weak, nonatomic) IBOutlet UILabel *LabelTip;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *btnBottom;
+@property (weak, nonatomic) IBOutlet UIButton *goldAuthorizationBtn;
 
 @end
 
@@ -45,6 +46,7 @@
     
     NSString *userID = [[NSUserDefaults standardUserDefaults] objectForKey:UUID];
     [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":userID} tag:kSXTagGoldAuthorizedOpenAccount owner:self signature:YES Type:SelectAccoutDefault];
+    self.goldAuthorizationBtn.userInteractionEnabled = NO;
     
 }
 -(void)beginPost:(kSXTag)tag{
@@ -78,6 +80,7 @@
             }
             
         } else {
+            self.goldAuthorizationBtn.userInteractionEnabled = YES;
             [MBProgressHUD displayHudError:[dic objectSafeForKey:@"message"]];
         }
     }
