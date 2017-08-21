@@ -8,9 +8,13 @@
 
 #import "UCFMicroMoneyViewController.h"
 #import "UCFMicroMoneyHeaderView.h"
+#import "UCFBatchInvestmentViewController.h"
+#import "UCFFacReservedViewController.h"
 
 #import "UCFHomeListHeaderSectionView.h"
 #import "UCFHomeListCell.h"
+#import "UCFHomeInvestCell.h"
+#import "AppDelegate.h"
 
 #import "UCFInvestAPIManager.h"
 #import "UCFMicroMoneyGroup.h"
@@ -27,7 +31,7 @@
 #import "UCFOrdinaryBidController.h"
 #import "UCFGoldDetailViewController.h"
 #import "HSHelper.h"
-@interface UCFMicroMoneyViewController () <UITableViewDataSource, UITableViewDelegate, UCFInvestAPIWithMicroMoneyManagerDelegate, UCFHomeListCellHonorDelegate,UCFHomeListHeaderSectionViewDelegate>
+@interface UCFMicroMoneyViewController () <UITableViewDataSource, UITableViewDelegate, UCFInvestAPIWithMicroMoneyManagerDelegate, UCFHomeListCellHonorDelegate,UCFHomeListHeaderSectionViewDelegate, UCFHomeInvestCellDelegate>
 
 @property (strong, nonatomic) UCFMicroMoneyHeaderView *microMoneyHeaderView;
 @property (strong, nonatomic) UCFInvestAPIManager *apiManager;
@@ -162,31 +166,87 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellId = @"homeListCell";
-    UCFHomeListCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
-    if (nil == cell) {
-        cell = (UCFHomeListCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeListCell" owner:self options:nil] lastObject];
-        cell.tableView = tableView;
-        cell.honorDelegate = self;
-    }
-    cell.indexPath = indexPath;
     UCFMicroMoneyGroup *group = [self.dataArray objectAtIndex:indexPath.section];
     UCFMicroMoneyModel *model = [group.prdlist objectAtIndex:indexPath.row];
-    if ([group.type isEqualToString:@"13"]) {
-        model.modelType = UCFMicroMoneyModelTypeNew;
+    if (group.type.intValue == 16) {
+        cellId = @"homeListInvestCell";
+        UCFHomeInvestCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+        if (nil == cell) {
+            cell = (UCFHomeInvestCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeInvestCell" owner:self options:nil] lastObject];
+            cell.delegate = self;
+        }
+        cell.microModel = model;
+        return cell;
     }
-    else if ([group.type isEqualToString:@"14"]) {
-        model.modelType = UCFMicroMoneyModelTypeBatchBid;
+    else {
+        UCFHomeListCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+        if (nil == cell) {
+            cell = (UCFHomeListCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeListCell" owner:self options:nil] lastObject];
+            cell.tableView = tableView;
+            cell.honorDelegate = self;
+        }
+        cell.indexPath = indexPath;
+        
+        if ([group.type isEqualToString:@"13"]) {
+            model.modelType = UCFMicroMoneyModelTypeNew;
+        }
+        else if ([group.type isEqualToString:@"14"]) {
+            model.modelType = UCFMicroMoneyModelTypeBatchBid;
+        }
+        else if ([group.type isEqualToString:@"11"]) {
+            model.modelType = UCFMicroMoneyModelTypeNormal;
+        }
+        cell.microMoneyModel = model;
+        return cell;
     }
-    else if ([group.type isEqualToString:@"11"]) {
-        model.modelType = UCFMicroMoneyModelTypeNormal;
-    }
-    cell.microMoneyModel = model;
-    return cell;
+    return nil;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    UCFMicroMoneyGroup *group = [self.dataArray objectAtIndex:indexPath.section];
+    if (group.type.intValue == 16) {
+        return 75;
+    }
     return 100;
+}
+
+#pragma mark - 预约按钮的点击代理方法
+- (void)microMoneyListCell:(UCFHomeInvestCell *)microMoneyCell didClickedInvestButtonWithModel:(UCFMicroMoneyModel *)model
+{
+    NSString *userId = [UserInfoSingle sharedManager].userId;
+    if (nil == userId) {
+        UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
+        UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
+        AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+        [app.tabBarController presentViewController:loginNaviController animated:YES completion:nil];
+        return;
+    }
+    self.accoutType = SelectAccoutTypeP2P;
+    BOOL b = [self checkUserCanInvestIsDetail:NO type:self.accoutType];
+    if (!b) {
+        return;
+    }
+    if (![UserInfoSingle sharedManager].isRisk) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"您还没进行风险评估" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
+        self.accoutType = SelectAccoutTypeP2P;
+        alert.tag =  9000;
+        [alert show];
+        return;
+    }
+    if (![UserInfoSingle sharedManager].isAutoBid) {
+        UCFBatchInvestmentViewController *batchInvestment = [[UCFBatchInvestmentViewController alloc] init];
+        batchInvestment.isStep = 1;
+        batchInvestment.accoutType = SelectAccoutTypeP2P;
+        [self.navigationController pushViewController:batchInvestment animated:YES];
+        return;
+    }
+    UCFFacReservedViewController *facReservedWeb = [[UCFFacReservedViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
+    NSString *urlInfo = @"https://m.9888.cn/static/wap/invest/index.html#/reserve/info";
+    NSString *url = [urlInfo stringByReplacingOccurrencesOfString:@"/info" withString:@"/apply"];
+    facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@", url, model.Id];
+    facReservedWeb.navTitle = @"工场预约";
+    [self.navigationController pushViewController:facReservedWeb animated:YES];
 }
 
 
@@ -205,7 +265,18 @@
     
     if (model.modelType == UCFMicroMoneyModelTypeBatchBid ) {//批量出借标
         [self gotoCollectionDetailViewContoller:model];
-    }else {//新手标 或普通标
+    }
+    else if (model.type.intValue == 0) {
+        self.accoutType = SelectAccoutTypeP2P;
+        if ([self checkUserCanInvestIsDetail:NO type:self.accoutType]) {
+            UCFFacReservedViewController *facReservedWeb = [[UCFFacReservedViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
+            NSString *url = @"https://m.9888.cn/static/wap/invest/index.html#/reserve/info";
+            facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@", url, model.Id];
+            facReservedWeb.navTitle = @"工场预约";
+            [self.navigationController pushViewController:facReservedWeb animated:YES];
+        }
+    }
+    else {//新手标 或普通标
                 self.model = model;
                  HSHelper *helper = [HSHelper new];
                 //检查企业老用户是否开户
@@ -252,8 +323,6 @@
         [alert show];
         return;
     }
-
-    
     if ([self checkUserCanInvestIsDetail:YES type:self.accoutType]) {
             _colPrdClaimIdStr = [NSString stringWithFormat:@"%@",model.Id];
             NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys:uuid,@"userId", _colPrdClaimIdStr, @"colPrdClaimId", nil];
