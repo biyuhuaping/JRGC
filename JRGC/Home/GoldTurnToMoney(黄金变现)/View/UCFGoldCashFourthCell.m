@@ -20,5 +20,10 @@
 
     // Configure the view for the selected state
 }
+- (IBAction)tipClicked:(UIButton *)sender {
+    if ([self.delegate respondsToSelector:@selector(goldCashFourthDidClickedTipButton:)]) {
+        [self.delegate goldCashFourthDidClickedTipButton:sender];
+    }
+}
 
 @end

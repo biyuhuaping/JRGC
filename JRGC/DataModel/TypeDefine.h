@@ -294,6 +294,7 @@
 #define GOLDCURRENPROClAIMDEAIL @"api/nmTrade/v2/getNmCurrentProClaimDetail.json"//黄金活期投资页面数据
 #define GOLDCURRENPURCHASEGOLD  @"/api/nmTrade/v2/purchaseCurrentGold.json"//黄金活期购买接口
 #define GOLDCHANGECASHINFO      @"api/nmAccount/v2/getLiquidatePageInfo.json"  //黄金变现界面信息
+#define GOLDCHANGECASH          @"api/nmTrade/v2/liquidateGold.json"    //黄金变现
 
 enum kPostStatus{
     kPostStatusNone=0,
@@ -538,6 +539,7 @@ enum kSXTag
     kSXTagGoldCurrentProClaimDetail,         //黄金活期投资页面数据
     kSXTagGoldCurrentPurchase,           //黄金活期购买接口
     kSXTagGoldChangeCashInfo,           //黄金变现页面信息
+    kSXTagGoldChangeCash,               //黄金变现
 };
 
 typedef enum kSXTag kSXTag;

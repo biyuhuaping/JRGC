@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface UCFGoldCashSecondCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *availableCashGoldAmount;
 
 @end

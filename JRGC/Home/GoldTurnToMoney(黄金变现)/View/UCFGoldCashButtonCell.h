@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class UCFGoldCashButtonCell;
+@protocol UCFGoldCashButtonCellDelegate <NSObject>
+- (void)goldCashcell:(UCFGoldCashButtonCell *)cashCell didClickCashGoldButton:(UIButton *)cashButton;
+@end
 @interface UCFGoldCashButtonCell : UITableViewCell
-
+@property (nonatomic, weak) id<UCFGoldCashButtonCellDelegate> delegate;
 @end

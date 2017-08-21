@@ -1187,6 +1187,9 @@ static NetworkModule *gInstance = NULL;
         case kSXTagGoldChangeCashInfo: //黄金活期购买接口
             parameter = [NEW_SERVER_IP stringByAppendingString:GOLDCHANGECASHINFO];
             break;
+        case kSXTagGoldChangeCash:
+            parameter = [NEW_SERVER_IP stringByAppendingString:GOLDCHANGECASH];
+            break;
     }
     //给原有参数字典添加公共参数
     if (!data) {
