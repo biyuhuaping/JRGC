@@ -226,8 +226,18 @@
             [self showHSAlert:tipStr1];
             return;
         }
-
+        
+        
+ 
         UCFGoldModel *goldModel = [self.dataArray objectAtIndex:indexPath.row];
+        
+//        if (goldModel.type) {
+//            
+//        }
+        
+        
+        
+        
         if ([goldModel.status intValue] == 2 || [goldModel.status intValue] == 21 ) {
             return;
         }
@@ -246,7 +256,7 @@
     
     NSString *nmProClaimIdStr = goldModel.nmPrdClaimId;
     
-    NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId",@"1", @"nmPrdClaimId",nil];
+    NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId",nmProClaimIdStr, @"nmPrdClaimId",nil];
     
     [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagGoldCurrentPrdClaimInfo owner:self signature:YES Type:SelectAccoutTypeGold];
 

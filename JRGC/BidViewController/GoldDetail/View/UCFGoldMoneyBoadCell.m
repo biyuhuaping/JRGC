@@ -160,7 +160,7 @@
     self.estimatAmountPayableLabel.text = [NSString stringWithFormat:@"¥%.2lf",[[Common notRounding:amountPay afterPoint:2] doubleValue]];
     
     if (self.isGoldCurrentAccout) {
-        double getUpWeightGold = amountPay * [self.goldModel.annualRate doubleValue] /360.0;
+        double getUpWeightGold = amountPay * [self.goldModel.annualRate doubleValue] /360.0/100;
         self.getUpWeightGoldLabel.text = [NSString stringWithFormat:@"¥%.2lf",[[Common notRounding:getUpWeightGold afterPoint:2] doubleValue]];
     }else{
         double periodTerm = [[self.goldModel.periodTerm substringWithRange:NSMakeRange(0, self.goldModel.periodTerm.length - 1)] doubleValue];

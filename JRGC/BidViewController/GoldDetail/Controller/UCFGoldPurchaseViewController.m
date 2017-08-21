@@ -22,6 +22,7 @@
 #import "FullWebViewController.h"
 #import "UCFGoldCouponViewController.h"
 #import "UCFToolsMehod.h"
+#import "MjAlertView.h"
 @interface UCFGoldPurchaseViewController ()<UITableViewDelegate,UITableViewDataSource,UCFGoldMoneyBoadCellDelegate,UITextFieldDelegate,UIGestureRecognizerDelegate,UCFGoldCouponViewControllerDelegate>
 {
     float  bottomViewYPos;
@@ -304,7 +305,7 @@
         case 0:
         {
             if (indexPath.row == 0) {
-                return 90;
+                return _isGoldCurrentAccout ? 98 : 90;
             }
             else
             {
@@ -785,7 +786,8 @@
 {
     [self.view endEditing:YES];
     if(self.isGoldCurrentAccout){
-        
+        MjAlertView *alertView = [[MjAlertView alloc] initGoldAlertTitle:@"计算器" Message:@"预期每日收益=当日委托管理黄金克重×年化收益率÷360天×交易日截止时刻金价" delegate:self];
+        [alertView show];
         
     }else{
         UCFGoldMoneyBoadCell *cell = (UCFGoldMoneyBoadCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
@@ -929,7 +931,7 @@
     }
     cell.estimatAmountPayableLabel.text = [NSString stringWithFormat:@"¥%.2lf",[[Common notRounding:amountPay afterPoint:2] doubleValue]];
     if (self.isGoldCurrentAccout) {
-        double getUpWeightGold = amountPay * [self.goldModel.annualRate doubleValue] /360.0;
+        double getUpWeightGold = amountPay * [self.goldModel.annualRate doubleValue] /360.0/100;
         cell.getUpWeightGoldLabel.text = [NSString stringWithFormat:@"¥%.2lf",[[Common notRounding:getUpWeightGold afterPoint:2] doubleValue]];
     }else{
         double periodTerm = [[self.goldModel.periodTerm substringWithRange:NSMakeRange(0, self.goldModel.periodTerm.length - 1)] doubleValue];

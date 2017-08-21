@@ -326,7 +326,12 @@
 // 活期详情
 - (void)homeList:(UCFHomeListViewController *)homeList tableView:(UITableView *)tableView didClickedGoldIncreaseWithModel:(UCFHomeListCellModel *)model
 {
-    
+    if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
+        //如果未登录，展示登录页面
+        [self showLoginView];
+    } else {
+        [self gotoGoldDetailVC:model];
+    }
 }
 
 - (void)homeListRefreshDataWithHomelist:(UCFHomeListViewController *)homelist
@@ -662,11 +667,6 @@
         [self showHSAlert:tipStr1];
         return;
     }
-    if ([model.status intValue] == 2 || [model.status intValue] == 21) {
-        return;
-    }
-    
-    
     
      __weak typeof(self) weakSelf = self;
     
@@ -692,6 +692,10 @@
         }];
     }
     else{
+        
+        if ([model.status intValue] == 2 || [model.status intValue] == 21) {
+            return;
+        }
         NSString *nmProClaimIdStr = [NSString stringWithFormat:@"%@",model.Id];
         NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId",nmProClaimIdStr, @"nmPrdClaimId",@"6",@"type",nil];
         
