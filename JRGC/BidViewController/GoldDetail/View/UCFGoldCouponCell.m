@@ -37,7 +37,7 @@
     self.goldAccountLab.text  = [NSString stringWithFormat:@"%@克",model.goldAccount];
     [self.goldAccountLab setFont:[UIFont systemFontOfSize:20] string:@"克"];
     self.remarkLab.text = model.remark;
-    self.overdueTimeLab.text = [NSString stringWithFormat:@"有效期至%@",model.overdueTime];
+    self.overdueTimeLab.text = [NSString stringWithFormat:@"有效期%@",model.overdueTime];
     self.investMinLab.text  = [NSString stringWithFormat:@"购买%@克可用",model.investMin];
     self.investPeriodLab.text  = [NSString stringWithFormat:@"购买期限≥%@天可用",model.investPeriod];
     if ([model.validityStatus boolValue]) {

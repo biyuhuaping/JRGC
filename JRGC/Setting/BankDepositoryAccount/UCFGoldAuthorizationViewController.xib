@@ -13,6 +13,7 @@
             <connections>
                 <outlet property="LabelTip" destination="Klz-LZ-JVz" id="Nsx-GY-9gl"/>
                 <outlet property="btnBottom" destination="Rq6-t1-1ar" id="WYX-cx-0Uu"/>
+                <outlet property="goldAuthorizationBtn" destination="4pM-Dq-7t0" id="m38-Xc-zq5"/>
                 <outlet property="scrollView" destination="2rF-UN-eCX" id="9CQ-hD-tmy"/>
                 <outlet property="upViewHeight" destination="mUP-tS-bD0" id="vYw-Ua-1V5"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
