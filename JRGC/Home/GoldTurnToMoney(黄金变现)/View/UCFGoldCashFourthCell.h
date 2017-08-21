@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UCFGoldCashFourthCell : UITableViewCell
+@protocol UCFGoldCashFourthCellDelegate <NSObject>
 
+- (void)goldCashFourthDidClickedTipButton:(UIButton *)button;
+
+@end
+
+@interface UCFGoldCashFourthCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *cashServiceFee;
+@property (weak, nonatomic) id<UCFGoldCashFourthCellDelegate> delegate;
 @end

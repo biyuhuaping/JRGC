@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13122.19" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.16"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -30,6 +30,9 @@
                             <constraint firstAttribute="width" constant="50" id="P9H-Gv-E4z"/>
                         </constraints>
                         <state key="normal" image="gold_account_icon_info_02"/>
+                        <connections>
+                            <action selector="tipClicked:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="3dg-PZ-G6g"/>
+                        </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00元" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Ug-Ci-W2m">
                         <rect key="frame" x="261" y="13" width="44" height="17"/>
@@ -48,6 +51,9 @@
                     <constraint firstAttribute="trailing" secondItem="7Ug-Ci-W2m" secondAttribute="trailing" constant="15" id="tBa-oN-BAJ"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="cashServiceFee" destination="7Ug-Ci-W2m" id="VBX-cL-eE1"/>
+            </connections>
         </tableViewCell>
     </objects>
     <resources>

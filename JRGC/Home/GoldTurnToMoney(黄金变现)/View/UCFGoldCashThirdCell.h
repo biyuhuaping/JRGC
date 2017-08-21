@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface UCFGoldCashThirdCell : UITableViewCell
-
+@property (weak, nonatomic) IBOutlet UITextField *textField;
+@property (copy, nonatomic) NSString *avavilableGoldAmount;
 @end

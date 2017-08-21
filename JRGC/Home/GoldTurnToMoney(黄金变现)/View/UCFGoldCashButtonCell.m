@@ -15,10 +15,11 @@
     // Initialization code
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
 
-    // Configure the view for the selected state
+- (IBAction)cashGold:(UIButton *)sender {
+    if ([self.delegate respondsToSelector:@selector(goldCashcell:didClickCashGoldButton:)]) {
+        [self.delegate goldCashcell:self didClickCashGoldButton:sender];
+    }
 }
 
 @end
