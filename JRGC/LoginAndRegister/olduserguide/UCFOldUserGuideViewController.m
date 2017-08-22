@@ -477,7 +477,7 @@
 
 - (void)dealloc{
     //刷新首页、债券转让、个人中心数据
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"LatestProjectUpdate" object:nil];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:@"LatestProjectUpdate" object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadP2PTransferData" object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadHonerPlanData" object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];

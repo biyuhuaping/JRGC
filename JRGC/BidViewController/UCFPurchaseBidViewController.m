@@ -300,7 +300,7 @@
         } else if (alertView.tag == 2000) {
 
         } else if (alertView.tag == 10023) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"LatestProjectUpdate" object:nil];
+//            [[NSNotificationCenter defaultCenter] postNotificationName:@"LatestProjectUpdate" object:nil];
             [self.navigationController popToRootViewControllerAnimated:YES];
         }
         if (alertView.tag == 6000) {

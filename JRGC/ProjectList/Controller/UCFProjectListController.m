@@ -213,7 +213,6 @@
     BOOL islogin = [noty.object boolValue];
     UISegmentedControl *segmentCtrl = nil;
     if (islogin) {
-//        NSInteger userLevel = [[UserInfoSingle sharedManager].userLevel integerValue];
         BOOL isShowHornor = [[NSUserDefaults standardUserDefaults] boolForKey:@"isShowHornor"];
         if (isShowHornor) {
             self.isShowHornor = YES;
