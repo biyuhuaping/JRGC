@@ -1201,4 +1201,11 @@
     roundedOunces = [ouncesDecimal decimalNumberByRoundingAccordingToBehavior:roundingBehavior];
     return [NSString stringWithFormat:@"%@",roundedOunces];
 }
++ (NSMutableAttributedString*) changeLabelWithAllStr:(NSString *)allStr Text:(NSString*)needText Font:(CGFloat)font
+{
+    NSMutableAttributedString * noteStr = [[NSMutableAttributedString alloc]initWithString:allStr];
+    NSRange redRangeTwo = NSMakeRange([[noteStr string] rangeOfString:needText].location, [[noteStr string] rangeOfString:needText].length);
+    [noteStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:font] range:redRangeTwo];
+    return noteStr;
+}
 @end

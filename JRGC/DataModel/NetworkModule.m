@@ -1193,6 +1193,9 @@ static NetworkModule *gInstance = NULL;
         case kSXTagGoldIncreaseList:
             parameter = [NEW_SERVER_IP stringByAppendingString:GOLDINCREASELIST];
             break;
+        case kSXTagGoldIncreTransList:
+            parameter = [NEW_SERVER_IP stringByAppendingString:GOLDINCRETRANSLIST];
+            break;
     }
     //给原有参数字典添加公共参数
     if (!data) {

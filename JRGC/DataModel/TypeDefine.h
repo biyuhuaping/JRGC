@@ -89,7 +89,9 @@
 //#define USERBEHAVIOR                  @"userBehavior/writeBehavior"
 #define EXCAHGELIST                   @"scratchCard/exchangeList"
 //#define APPLYCARD                     @"scratchCard/applyCard"
-#define RIGISTCHECK                   @"api/user/v2/verificationMobile.json"//@"newuserregist/verification"
+
+#define RIGISTCHECK                   @"api/user/v2/verificationMobile.json"
+
 //#define INVITEREBATE                  @"newfactoryCodeController/info"          //邀请返利
 #define INVITEREBATE                  @"api/inviteRebate/v2/info.json"          //邀请返利
 #define FRIENDREGISTERLIST            @"newfactoryCodeController/recFriendList" //邀请注册记录
@@ -291,6 +293,7 @@
 #define GOLDLIMITEDBANKLIST @"api/nmAccount/v2/getBankLimitList.json"   //黄金充值受限银行的列表
 #define GOLDINCREASE        @"api/nmTrade/v2/getCurrentTradeInfo.json"  //增金宝账户
 #define GOLDINCREASELIST    @"api/nmTrade/v2/queryCurrentInterestList.json"    //增金宝列表
+#define GOLDINCRETRANSLIST  @"api/nmTrade/v2/getCurrentGoldTradeList.json"     //增金宝页面交易详情
 #define GOLDCURRENPRDCLAIMINFO @"api/nmPrdClaim/v2/getNmCurrentPrdClaimInfo.json"//黄金活期详情
 #define GOLDCURRENPROClAIMDEAIL @"api/nmTrade/v2/getNmCurrentProClaimDetail.json"//黄金活期投资页面数据
 #define GOLDCURRENPURCHASEGOLD  @"/api/nmTrade/v2/purchaseCurrentGold.json"//黄金活期购买接口
@@ -537,6 +540,7 @@ enum kSXTag
     kSXTagContractDownLoad,
     kSXTagGoldIncrease,             //增金宝
     kSXTagGoldIncreaseList,         //增金宝列表
+    kSXTagGoldIncreTransList,       //增金宝交易详情
     kSXTagGoldCurrentPrdClaimInfo,      //黄金活期详情
     kSXTagGoldCurrentProClaimDetail,         //黄金活期投资页面数据
     kSXTagGoldCurrentPurchase,           //黄金活期购买接口
