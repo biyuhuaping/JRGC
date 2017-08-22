@@ -9,8 +9,9 @@
 #import "InvestmentCell.h"
 #import "NSString+FormatForThousand.h"
 #import "UCFToolsMehod.h"
-#import "UCFLatestProjectViewController.h"
+//#import "UCFLatestProjectViewController.h"
 #import "UCFGoldModel.h"
+#import "UIDic+Safe.h"
 @implementation InvestmentCell
 
 - (void)awakeFromNib{
@@ -26,13 +27,13 @@
     [super setFrame:frame];
 }
 
-- (IBAction)investmentClick:(id)sender {
-    if ([self.delegate isKindOfClass:[UCFLatestProjectViewController class]]) {
-        if (self.delegate && [self.delegate respondsToSelector:@selector(investBtnClicked:withType:)] ) {
-            [self.delegate investBtnClicked:sender withType:self.type]; //标类型];
-        }
-    }
-}
+//- (IBAction)investmentClick:(id)sender {
+//    if ([self.delegate isKindOfClass:[UCFLatestProjectViewController class]]) {
+//        if (self.delegate && [self.delegate respondsToSelector:@selector(investBtnClicked:withType:)] ) {
+//            [self.delegate investBtnClicked:sender withType:self.type]; //标类型];
+//        }
+//    }
+//}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
