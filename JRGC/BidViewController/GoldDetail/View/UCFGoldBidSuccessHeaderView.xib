@@ -12,11 +12,11 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="UCFGoldBidSuccessHeaderView">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="207.5"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="208"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xvb-61-OUH">
-                    <rect key="frame" x="0.0" y="10" width="375" height="197.5"/>
+                    <rect key="frame" x="0.0" y="10" width="375" height="198"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1rg-R2-4q7">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="0.5"/>
@@ -73,7 +73,7 @@
                 <outlet property="headerImageView" destination="lKd-Qu-guB" id="HPj-Lg-gSf"/>
                 <outlet property="headerTitleLabel" destination="GZn-Jy-Wiq" id="7wy-fk-XDT"/>
             </connections>
-            <point key="canvasLocation" x="-564" y="-308"/>
+            <point key="canvasLocation" x="-692" y="-313"/>
         </view>
     </objects>
     <resources>
