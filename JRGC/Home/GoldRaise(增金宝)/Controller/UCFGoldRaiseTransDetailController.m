@@ -11,7 +11,7 @@
 #import "UCFGoldIncreTransListModel.h"
 #import "UCFGoldIncreTransListCell.h"
 
-@interface UCFGoldRaiseTransDetailController () <UITableViewDelegate, UITableViewDataSource>
+@interface UCFGoldRaiseTransDetailController () <UITableViewDelegate, UITableViewDataSource, UCFGoldIncreTransListCellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (strong, nonatomic) NSMutableArray *dataArray;
 @property (assign, nonatomic) NSUInteger currentPage;
@@ -73,11 +73,18 @@
     UCFGoldIncreTransListCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     if (nil == cell) {
         cell = (UCFGoldIncreTransListCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFGoldIncreTransListCell" owner:self options:nil] lastObject];
+        cell.delegate = self;
     }
     cell.tableview = tableView;
     cell.indexPath = indexPath;
     cell.model = listModel;
     return cell;
+}
+
+#pragma mark - 合同的代理方法
+- (void)goldIncreTransListCellDidClickedConstractWithModel:(UCFGoldIncreContractModel *)model
+{
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

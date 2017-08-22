@@ -277,9 +277,31 @@
         return;
     } else if ([title isEqualToString:@"变现"]) {
 //        showStr = @"暂时没有可变现的黄金";
-        UCFGoldCashViewController *vc1 = [[UCFGoldCashViewController alloc] initWithNibName:@"UCFGoldCashViewController" bundle:nil];
-        vc1.baseTitleText = @"黄金变现";
-        [self.navigationController pushViewController:vc1 animated:YES];
+        if ([UserInfoSingle sharedManager].isSpecial || [UserInfoSingle sharedManager].companyAgent) {
+            UIAlertView *alerView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"暂不支持企业用户、特殊用户充值" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+            [alerView show];
+            return;
+        }
+        NSString *tipStr1 = ZXTIP1;
+        //    NSInteger openStatus = [UserInfoSingle sharedManager].openStatus ;
+        NSInteger enjoyOpenStatus = [UserInfoSingle sharedManager].enjoyOpenStatus;
+        if ( enjoyOpenStatus < 3 ) {//去开户页面
+            [self showHSAlert:tipStr1];
+            return;
+        }
+        else{
+            if(![UserInfoSingle sharedManager].goldAuthorization){//去授权页面
+                HSHelper *helper = [HSHelper new];
+                [helper pushGoldAuthorizationType:SelectAccoutTypeGold nav:self.navigationController];
+                return;
+            }else{
+                //去充值页面
+                UCFGoldCashViewController *vc1 = [[UCFGoldCashViewController alloc] initWithNibName:@"UCFGoldCashViewController" bundle:nil];
+                vc1.baseTitleText = @"黄金变现";
+                vc1.rootVc = self;
+                [self.navigationController pushViewController:vc1 animated:YES];
+            }
+        }
     } else if ([title isEqualToString:@"提金"]) {
         showStr = @"暂时没有可提金的黄金";
     }
