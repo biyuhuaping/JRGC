@@ -87,6 +87,7 @@
     }
     self.groupTransferPresenter.group.prdlist = temp4;
     [self.homeListCells addObject:self.groupTransferPresenter];
+
 }
 
 - (void)fetchHomeListDataWithCompletionHandler:(NetworkCompletionHandler)completionHander {
