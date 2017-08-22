@@ -214,7 +214,7 @@
             [Common deleteCookies];
             [[NSNotificationCenter defaultCenter] postNotificationName:REGIST_JPUSH object:nil];
             //通知首页隐藏tipView
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"LatestProjectUpdate" object:nil];
+//            [[NSNotificationCenter defaultCenter] postNotificationName:@"LatestProjectUpdate" object:nil];
             [[NSNotificationCenter defaultCenter] postNotificationName:CHECK_COUPON_CENTER object:nil];
         }
 

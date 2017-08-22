@@ -213,7 +213,6 @@
             //登录成功保存用户的资料
             [[UserInfoSingle sharedManager] setUserData:dic[@"data"][@"userInfo"]];
             [Common setHTMLCookies:dic[@"data"][@"userInfo"][@"jg_ckie"]];//html免登录的cookies
-
             NSString *lastName = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastLoginName"];
             if (lastName != nil) {
                 if (![lastName isEqualToString:[Common deleteStrHeadAndTailSpace:_loginView.userNameFieldText]]) {
@@ -238,7 +237,9 @@
             NSString *yanQian = [NSString stringWithFormat:@"%@%@%@",_loginView.userNameFieldText,md5Str,dic[@"data"][@"userInfo"][@"time"]];
             NSString *gcmCode = [(NSDictionary *)dic[@"data"][@"userInfo"] objectSafeForKey: @"promotionCode"];
             BOOL isCompanyAgent = [[(NSDictionary *)dic[@"data"][@"userInfo"] objectSafeForKey: @"isCompanyAgent"] boolValue];
+            
             [UserInfoSingle sharedManager].goldAuthorization = [[(NSDictionary *)dic[@"data"][@"userInfo"] objectSafeForKey: @"nmAuthorization"] boolValue];
+            
             [UserInfoSingle sharedManager].isSpecial = [[(NSDictionary *)dic[@"data"][@"userInfo"] objectSafeForKey: @"isSpecial"] boolValue];
             NSString *signatureStr  = [UCFToolsMehod md5:yanQian];
             [[NSUserDefaults standardUserDefaults] setObject:signatureStr forKey:SIGNATUREAPP];
@@ -249,7 +250,7 @@
             
             
     
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"LatestProjectUpdate" object:nil];
+//            [[NSNotificationCenter defaultCenter] postNotificationName:@"LatestProjectUpdate" object:nil];
             //更新个人中心数据
             [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
             
