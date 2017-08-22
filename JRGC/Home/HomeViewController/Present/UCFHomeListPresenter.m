@@ -163,8 +163,9 @@
     self.groupPresenter4.group.prdlist = temp4;
     
     [self.homeListCells addObject:self.groupPresenter0];
-    [self.homeListCells addObject:self.groupPresenter2];
     [self.homeListCells addObject:self.groupPresenter5];
+    [self.homeListCells addObject:self.groupPresenter2];
+    
     [self.homeListCells addObject:self.groupPresenter1];
     
     
