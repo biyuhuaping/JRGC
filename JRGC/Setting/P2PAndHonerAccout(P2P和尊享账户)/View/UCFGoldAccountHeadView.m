@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UILabel    *floatLabel;
 @property (weak, nonatomic) IBOutlet UILabel    *realtimeGoldPrice;
 @property (weak, nonatomic) IBOutlet UILabel    *dealGoldPrice;
+@property (weak, nonatomic) IBOutlet UILabel    *currentGoldTotalPrice;
 
 @property (weak, nonatomic) IBOutlet UIView *upBaseView;
 @property (weak, nonatomic) IBOutlet RotationButton *updateGoldPriceBtn;
@@ -64,6 +65,9 @@
     self.realtimeGoldPrice.text = [NSString stringWithFormat:@"%.2f元/克",[ToolSingleTon sharedManager].readTimePrice];
     double floatValue1 = [ToolSingleTon sharedManager].readTimePrice * [[_tmpData objectSafeForKey:@"holdGoldAmount"] doubleValue] - [[_tmpData objectSafeForKey:@"tradeAllMoney"] doubleValue];
     
+    NSString  *goldValue = [self switchGoldPriceFormat:[_tmpData objectSafeForKey:@"holdGoldAmount"]];
+    NSString *available = [UCFToolsMehod AddComma:goldValue];
+    self.currentGoldTotalPrice.text = [NSString stringWithFormat:@"(当前市值约¥%@)",available];
     
     if (floatValue1 > 0) {
         self.floatLabel.textColor = UIColorWithRGB(0xfd4d4c);
@@ -112,10 +116,12 @@
 - (void)updateGoldAccount:(NSDictionary *)dataDic
 {
     self.tmpData = dataDic;
-    self.holdGoldGram.text =[NSString stringWithFormat:@"%@克",[dataDic objectSafeForKey:@"holdGoldAmount"]] ;
-    NSString  *goldValue = [self switchGoldPriceFormat:[dataDic objectSafeForKey:@"availableGoldAmount"]];
+    self.holdGoldGram.text =[NSString stringWithFormat:@"%@ 克",[dataDic objectSafeForKey:@"holdGoldAmount"]];
+    self.holdGoldGram.attributedText = [Common changeLabelWithAllStr:self.holdGoldGram.text Text:@"克" Font:14];
+    NSString  *goldValue = [self switchGoldPriceFormat:[dataDic objectSafeForKey:@"holdGoldAmount"]];
     NSString *available = [UCFToolsMehod AddComma:goldValue];
-    NSString *availeStr = [NSString stringWithFormat:@"%@克(当前市值约%@元)",[dataDic objectSafeForKey:@"availableGoldAmount"],available];
+    self.currentGoldTotalPrice.text = [NSString stringWithFormat:@"(当前市值约¥%@)",available];
+    NSString *availeStr = [NSString stringWithFormat:@"%@克",[dataDic objectSafeForKey:@"availableGoldAmount"]];
     self.availableGoldNum.text = availeStr;
     self.realtimeGoldPrice.text = [NSString stringWithFormat:@"%.2f元/克",[ToolSingleTon sharedManager].readTimePrice];
     self.totalRecoveryGold.text = [NSString stringWithFormat:@"%@克",[dataDic objectSafeForKey:@"collectGoldAmount"]];

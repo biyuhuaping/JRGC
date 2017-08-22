@@ -233,4 +233,6 @@ typedef NS_ENUM(NSInteger, PicType) {
 + (UIImage *)batchImageNormalState:(CGRect)rect;
 //四舍五入方法
 +(NSString *)notRounding:(double)price afterPoint:(int)position;
+//改变一部分字体大小
++ (NSMutableAttributedString*) changeLabelWithAllStr:(NSString *)allStr Text:(NSString*)needText Font:(CGFloat)font;
 @end

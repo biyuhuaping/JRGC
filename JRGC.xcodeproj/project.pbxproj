@@ -541,7 +541,6 @@
 		7BC7C0B81ADCEDB6003799B0 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BC7C0B71ADCEDB6003799B0 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		7BC8A8A01AFB4EB0003A8D89 /* RegisterSuccessAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BC8A89F1AFB4EB0003A8D89 /* RegisterSuccessAlert.m */; };
 		7BC8A9F51AD4BFF600BF4660 /* UCFMoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BC8A9F41AD4BFF600BF4660 /* UCFMoreViewController.m */; };
-		7BC8A9FB1AD4C0A100BF4660 /* UCFLatestProjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BC8A9FA1AD4C0A100BF4660 /* UCFLatestProjectViewController.m */; };
 		7BC8AA1B1AD4C74200BF4660 /* UCFFriendRegisterListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BC8AA071AD4C74200BF4660 /* UCFFriendRegisterListModel.m */; };
 		7BC8AA1C1AD4C74200BF4660 /* UCFGDYouHuiModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BC8AA091AD4C74200BF4660 /* UCFGDYouHuiModel.m */; };
 		7BC8AA1D1AD4C74200BF4660 /* UCFMyArrears.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BC8AA0B1AD4C74200BF4660 /* UCFMyArrears.m */; };
@@ -1927,8 +1926,6 @@
 		7BC8A89F1AFB4EB0003A8D89 /* RegisterSuccessAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterSuccessAlert.m; sourceTree = "<group>"; };
 		7BC8A9F31AD4BFF600BF4660 /* UCFMoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFMoreViewController.h; sourceTree = "<group>"; };
 		7BC8A9F41AD4BFF600BF4660 /* UCFMoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFMoreViewController.m; sourceTree = "<group>"; };
-		7BC8A9F91AD4C0A100BF4660 /* UCFLatestProjectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UCFLatestProjectViewController.h; path = JRGC/LatestProject/UCFLatestProjectViewController.h; sourceTree = SOURCE_ROOT; };
-		7BC8A9FA1AD4C0A100BF4660 /* UCFLatestProjectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UCFLatestProjectViewController.m; path = JRGC/LatestProject/UCFLatestProjectViewController.m; sourceTree = SOURCE_ROOT; };
 		7BC8AA061AD4C74200BF4660 /* UCFFriendRegisterListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFFriendRegisterListModel.h; sourceTree = "<group>"; };
 		7BC8AA071AD4C74200BF4660 /* UCFFriendRegisterListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFFriendRegisterListModel.m; sourceTree = "<group>"; };
 		7BC8AA081AD4C74200BF4660 /* UCFGDYouHuiModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFGDYouHuiModel.h; sourceTree = "<group>"; };
@@ -5142,8 +5139,6 @@
 				74F490ED1E5B2AAA0057AC62 /* UCFCollectionBidCell.xib */,
 				748D935C1E641FF500E229A7 /* UCFLabel.h */,
 				748D935D1E641FF500E229A7 /* UCFLabel.m */,
-				7BC8A9F91AD4C0A100BF4660 /* UCFLatestProjectViewController.h */,
-				7BC8A9FA1AD4C0A100BF4660 /* UCFLatestProjectViewController.m */,
 				FBC375861ADB9C6D009615EC /* HomeStoryboard.storyboard */,
 				25CCDA991DDAE28C002C0F6D /* UCFLatesProjectTableViewCell.h */,
 				25CCDA9A1DDAE28C002C0F6D /* UCFLatesProjectTableViewCell.m */,
@@ -6948,7 +6943,7 @@
 				TargetAttributes = {
 					7BFE3E7F1AC55C98002A53A2 = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = VED3V7289N;
+						DevelopmentTeam = MHG97AJ3LK;
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -6973,7 +6968,7 @@
 					};
 					83F2D4E81DCB3F940041F913 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = VED3V7289N;
+						DevelopmentTeam = MHG97AJ3LK;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
@@ -6986,7 +6981,7 @@
 					};
 					83F2D4F41DCB3F950041F913 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = VED3V7289N;
+						DevelopmentTeam = MHG97AJ3LK;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
@@ -7723,7 +7718,6 @@
 				74BDA98B1F09F6C60054403F /* FSCalendarConstants.m in Sources */,
 				25950EC51D7FB6EC00E4CCBA /* FaceRectKeyPointView.m in Sources */,
 				E37086BF1D61BBB10041D293 /* DBCellConfig.m in Sources */,
-				7BC8A9FB1AD4C0A100BF4660 /* UCFLatestProjectViewController.m in Sources */,
 				7491820C1EC166F000AC1ECE /* TAAnimatedDotView.m in Sources */,
 				8414490B1CB4B6A6000CD292 /* UCFMessageCenterModel.m in Sources */,
 				83CD842C1F13A50800227704 /* UCFHonerViewController.m in Sources */,

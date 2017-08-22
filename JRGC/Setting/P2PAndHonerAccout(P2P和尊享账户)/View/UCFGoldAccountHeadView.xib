@@ -30,38 +30,32 @@
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="可用黄金" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7hQ-6x-Jfd">
-                            <rect key="frame" x="15" y="81" width="49.5" height="14"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="增金宝(活期)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7hQ-6x-Jfd">
+                            <rect key="frame" x="15" y="80" width="70" height="15"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <color key="textColor" red="0.75294117647058822" green="0.78431372549019607" blue="0.8784313725490196" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.000克(当前市值约¥0)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ieW-Ng-m20">
-                            <rect key="frame" x="15" y="103" width="131" height="15"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.000克" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ieW-Ng-m20">
+                            <rect key="frame" x="15" y="103" width="46" height="15"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="总待收黄金" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tMN-t9-7aL">
-                            <rect key="frame" x="226.5" y="81" width="61.5" height="14"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="尊享金(定期)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tMN-t9-7aL">
+                            <rect key="frame" x="230" y="79" width="70" height="16"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <color key="textColor" red="0.75294117650000003" green="0.7843137255" blue="0.87843137250000003" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GFM-n7-sQ4">
-                            <rect key="frame" x="275" y="73" width="30" height="30"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="30" id="71n-J5-ZFQ"/>
-                                <constraint firstAttribute="height" constant="30" id="YxU-Fs-0yF"/>
-                            </constraints>
-                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="-13" maxY="0.0"/>
-                            <state key="normal" image="gold_account_icon_info_01"/>
-                            <connections>
-                                <action selector="recoverBtnClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="zyw-Ui-L5D"/>
-                            </connections>
-                        </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="0.000克" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NGD-UC-G8X">
-                            <rect key="frame" x="226.5" y="103" width="45.5" height="15"/>
+                            <rect key="frame" x="230" y="103" width="45.5" height="15"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(当前市值约￥0.00)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tEU-uN-Wih">
+                            <rect key="frame" x="111.5" y="54.5" width="107.5" height="14.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
@@ -71,18 +65,18 @@
                     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="ieW-Ng-m20" firstAttribute="leading" secondItem="7hQ-6x-Jfd" secondAttribute="leading" id="0ef-Ez-dpH"/>
+                        <constraint firstItem="tEU-uN-Wih" firstAttribute="leading" secondItem="TrE-lb-jYU" secondAttribute="trailing" constant="5" id="28z-mB-5qk"/>
                         <constraint firstItem="xjL-Hx-BPR" firstAttribute="leading" secondItem="X83-vg-3XH" secondAttribute="leading" constant="15" id="7r7-Jz-JnE"/>
                         <constraint firstItem="xjL-Hx-BPR" firstAttribute="top" secondItem="X83-vg-3XH" secondAttribute="top" constant="18" id="Iiy-eh-Lsr"/>
                         <constraint firstItem="tMN-t9-7aL" firstAttribute="leading" secondItem="NGD-UC-G8X" secondAttribute="leading" id="LFw-8C-Ahy"/>
-                        <constraint firstAttribute="trailing" secondItem="GFM-n7-sQ4" secondAttribute="trailing" constant="15" id="NF8-Xw-ZCV"/>
                         <constraint firstItem="ieW-Ng-m20" firstAttribute="leading" secondItem="X83-vg-3XH" secondAttribute="leading" constant="15" id="PK3-OM-J6A"/>
                         <constraint firstItem="NGD-UC-G8X" firstAttribute="top" secondItem="tMN-t9-7aL" secondAttribute="bottom" constant="8" id="TR2-FJ-9Rl"/>
                         <constraint firstItem="TrE-lb-jYU" firstAttribute="leading" secondItem="xjL-Hx-BPR" secondAttribute="leading" id="be3-6y-DDS"/>
                         <constraint firstAttribute="bottom" secondItem="ieW-Ng-m20" secondAttribute="bottom" constant="18" id="c2E-LS-t11"/>
                         <constraint firstItem="tMN-t9-7aL" firstAttribute="centerY" secondItem="7hQ-6x-Jfd" secondAttribute="centerY" id="exz-O9-gLH"/>
                         <constraint firstItem="ieW-Ng-m20" firstAttribute="top" secondItem="7hQ-6x-Jfd" secondAttribute="bottom" constant="8" id="hIT-dx-Ol8"/>
-                        <constraint firstAttribute="trailing" secondItem="tMN-t9-7aL" secondAttribute="trailing" constant="32" id="lRY-Fd-Pj4"/>
-                        <constraint firstItem="GFM-n7-sQ4" firstAttribute="centerY" secondItem="tMN-t9-7aL" secondAttribute="centerY" id="mgP-XW-2TE"/>
+                        <constraint firstItem="tEU-uN-Wih" firstAttribute="bottom" secondItem="TrE-lb-jYU" secondAttribute="bottom" constant="-3" id="lPL-fc-dM8"/>
+                        <constraint firstAttribute="trailing" secondItem="tMN-t9-7aL" secondAttribute="trailing" constant="20" id="lRY-Fd-Pj4"/>
                         <constraint firstAttribute="height" constant="136" id="nje-ft-P5m"/>
                         <constraint firstItem="NGD-UC-G8X" firstAttribute="centerY" secondItem="ieW-Ng-m20" secondAttribute="centerY" id="sY0-px-4go"/>
                         <constraint firstItem="TrE-lb-jYU" firstAttribute="top" secondItem="xjL-Hx-BPR" secondAttribute="bottom" constant="6" id="tRg-oC-rTY"/>
@@ -201,21 +195,20 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="availableGoldNum" destination="ieW-Ng-m20" id="sLj-Ux-cuS"/>
+                <outlet property="currentGoldTotalPrice" destination="tEU-uN-Wih" id="y8b-SR-xpF"/>
                 <outlet property="dealGoldPrice" destination="X3s-nZ-HHa" id="nmT-tl-WJb"/>
                 <outlet property="floatLabel" destination="Abz-XP-xhx" id="UfC-ZW-Ito"/>
                 <outlet property="floatingBtn" destination="3QI-Nw-rd3" id="nYB-rb-yRy"/>
                 <outlet property="holdGoldGram" destination="TrE-lb-jYU" id="Luf-Y7-lxT"/>
                 <outlet property="realtimeGoldPrice" destination="D9b-Ap-0m3" id="Mvy-6z-g2R"/>
-                <outlet property="recoverBtn" destination="GFM-n7-sQ4" id="mdW-AA-mw3"/>
                 <outlet property="totalRecoveryGold" destination="NGD-UC-G8X" id="iTY-qZ-JyR"/>
                 <outlet property="upBaseView" destination="X83-vg-3XH" id="G9q-aU-wtH"/>
                 <outlet property="updateGoldPriceBtn" destination="RaO-Q4-hiX" id="DrH-V7-fke"/>
             </connections>
-            <point key="canvasLocation" x="-82" y="-285"/>
+            <point key="canvasLocation" x="-580" y="-370"/>
         </view>
     </objects>
     <resources>
-        <image name="gold_account_icon_info_01" width="13" height="13"/>
         <image name="gold_account_icon_info_02" width="13" height="13"/>
         <image name="gold_account_icon_reload" width="14" height="14"/>
     </resources>
