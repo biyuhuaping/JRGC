@@ -169,7 +169,7 @@
 }
 
 - (void)initData {
-    NSString *tipOneStr = [NSString stringWithFormat:@"黄金价格实时波动，在0.50元的波动范围内成交，成交瞬间系统价格不低于%.2f/克则立即为你变现", [ToolSingleTon sharedManager].readTimePrice];
+    NSString *tipOneStr = [NSString stringWithFormat:@"黄金价格实时波动，在0.50元的波动范围内成交，成交瞬间系统价格不低于%.2f/克则立即为你变现", ([ToolSingleTon sharedManager].readTimePrice - 0.5)];
     NSArray *tipsArray = [[NSArray alloc] initWithObjects:tipOneStr, @"温馨提示:", nil];
     [self.dataArray removeAllObjects];
     for (NSString *str in tipsArray) {
@@ -342,7 +342,7 @@
     [self.tableview endEditing:YES];
     NSString *inputAmout = [Common deleteStrHeadAndTailSpace:self.amoutCell.textField.text];
     if ([Common isPureNumandCharacters:inputAmout]) {
-        [MBProgressHUD displayHudError:@"请输入正确金额"];
+        [MBProgressHUD displayHudError:@"请输入正确的黄金克重"];
         return;
     }
     inputAmout = [NSString stringWithFormat:@"%.3f",[inputAmout doubleValue]];
@@ -351,7 +351,7 @@
     if (comparResult == NSOrderedDescending) {
         //        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"请输入充值金额" message:nil delegate:self cancelButtonTitle:@"知道了" otherButtonTitles: nil];
         //        [alert show];
-        [MBProgressHUD displayHudError:@"请输入提现的黄金克重"];
+        [MBProgressHUD displayHudError:@"请输入变现的黄金克重"];
         return;
     }
     
