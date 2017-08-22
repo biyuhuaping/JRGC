@@ -161,6 +161,12 @@
                     [[MongoliaLayerCenter sharedManager].mongoliaLayerDic setValue:sDateStr forKey:@"authorizationDate"];
                 }
             }
+            if ([[result allKeys] containsObject:@"nmGoldAuthorization"]) {
+                BOOL nmGoldAuthorization =  [[result objectSafeForKey:@"nmGoldAuthorization"] boolValue];
+                [UserInfoSingle sharedManager].goldAuthorization = nmGoldAuthorization;
+                [[NSUserDefaults standardUserDefaults] setBool:nmGoldAuthorization  forKey:GOldAUTHORIZATION];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+            }
             if ([[result allKeys] containsObject:@"appointInvest"]) {
                 NSDictionary *investDict = [result objectSafeDictionaryForKey:@"appointInvest"];
                 UCFHomeListGroup * tempInvestG = [[UCFHomeListGroup alloc] init];
