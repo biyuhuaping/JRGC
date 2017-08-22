@@ -50,6 +50,7 @@
 @property (nonatomic,strong)NSString *purchaseMoneyStr;//黄金购买付款金额
 @property (nonatomic,assign)BOOL  isShowWorkshopCode;//是否显示输入工场码
 @property (nonatomic,assign)BOOL  isHaveGoldCouponNum;//是否有返金券
+@property (nonatomic,assign)BOOL  isShow_43068;//是否弹出金价波动框
 @property (nonatomic,strong)NSDictionary  *goldCouponDataDict;//选择返金劵数据数组
 
 @property (nonatomic,strong)NSDictionary *paramDict;//请求参数
@@ -870,6 +871,7 @@
                 [self gotoGoldBidSuccessVC:nil];
             }else
             {
+                _isShow_43068 = NO;
                 [self.navigationController popToRootViewControllerAnimated:YES];
             }
             break;
@@ -1032,7 +1034,7 @@
      double keyongMoney = self.isSelectGongDouSwitch ?  _availableAllMoney : _availableMoney;
      double estimatAmountMoney = [[cell.estimatAmountPayableLabel.text substringFromIndex:1]
         doubleValue];
-    if (self.purchaseMoneyStr) {
+    if (self.purchaseMoneyStr && _isShow_43068) {//金价波动，二次提交时
         estimatAmountMoney =  [self.purchaseMoneyStr doubleValue];
     }
 
@@ -1130,6 +1132,7 @@
         
         if ([[dic objectSafeForKey:@"code"] intValue] == 43068)
         {
+            _isShow_43068 = YES;
             self.goldPrice =  [[resultDict objectSafeForKey:@"dealGoldPrice"] doubleValue];
             [ToolSingleTon sharedManager].readTimePrice = self.goldPrice;
             
@@ -1187,6 +1190,7 @@
         
         if ([[dic objectSafeForKey:@"code"] intValue] == 43068)
         {
+            _isShow_43068 = YES;
             self.goldPrice =  [[resultDict objectSafeForKey:@"dealGoldPrice"] doubleValue];
             [ToolSingleTon sharedManager].readTimePrice = self.goldPrice;
             
@@ -1195,7 +1199,7 @@
             NSString *showStr = [NSString stringWithFormat:@"由于金价实时波动，成交时金价增至%.2lf元/元，是否继续购买？",self.goldPrice];
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:showStr delegate:self cancelButtonTitle:@"放弃购买" otherButtonTitles:@"继续购买", nil];
             alert.tag = 43068;
-            [alert show]; //11114
+            [alert show];
             return;
         }else  if ([[dic objectSafeForKey:@"code"] intValue] == 11114)
         {

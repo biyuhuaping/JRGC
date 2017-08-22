@@ -281,7 +281,7 @@
      goldRecordids	选中的黄金券ID	string	用逗号隔开
      investMinSum	需要投资的总克重	string
      */
-    NSString *investMinSumStr  = [NSString stringWithFormat:@"%.3lf",_tatolNeetGoldAccout];
+    NSString *investMinSumStr  = [NSString stringWithFormat:@"%.0lf",_tatolNeetGoldAccout];
     if ([investMinSumStr doubleValue] > [self.remainAmountStr doubleValue]) {
         return;
     }
