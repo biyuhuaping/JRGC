@@ -39,7 +39,7 @@
 - (NSString *)goldAveragePrice
 {
     if (!_goldAveragePrice) {
-        _goldAveragePrice = [NSString stringWithFormat:@"%.2f", [ToolSingleTon sharedManager].readTimePrice];
+        _goldAveragePrice = [NSString stringWithFormat:@"%.2lf", [ToolSingleTon sharedManager].readTimePrice * [self.amoutCell.textField.text doubleValue]];
     }
     return _goldAveragePrice;
 }
@@ -141,22 +141,24 @@
         cashGoldResu.poundage = [dict objectSafeForKey:@"poundage"];
         cashGoldResu.realTimeliquidateAmt = [dict objectSafeForKey:@"realTimeliquidateAmt"];
         self.cashGoldResult = cashGoldResu;
-        if ([[dic objectForKey:@"code"] integerValue] == 11111) {
-            UCFGoldCashSucessController *cashSuc = [[UCFGoldCashSucessController alloc] initWithNibName:@"UCFGoldCashSucessController" bundle:nil];
-            cashSuc.baseTitleText = @"确认成功";
-            cashSuc.cashResuModel = self.cashGoldResult;
-            [self.navigationController pushViewController:cashSuc animated:YES];
-        }
-        else if ([[dic objectForKey:@"code"] integerValue] == 43068) {
+        self.liquidateToken = cashGoldResu.liquidateToken;
+        self.goldAveragePrice = cashGoldResu.liquidateGoldAmount;
+        if ([[dic objectForKey:@"code"] integerValue] == 43068) {
             NSString *meg = [NSString stringWithFormat:@"由于金价实时波动，变现是金价增长至%@元/克", self.cashGoldResult.realTimeliquidateAmt];
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:meg delegate:self cancelButtonTitle:@"放弃变现" otherButtonTitles:@"继续变现", nil];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:meg delegate:self cancelButtonTitle:@"放弃变现" otherButtonTitles:@"继续变现", nil];
             [alertView show];
+            return;
         }
-        else {
-            if (![rsttext isEqualToString:@""] && rsttext) {
-                [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
-            }
-        }
+        UCFGoldCashSucessController *cashSuc = [[UCFGoldCashSucessController alloc] initWithNibName:@"UCFGoldCashSucessController" bundle:nil];
+        cashSuc.baseTitleText = @"确认成功";
+        cashSuc.cashResuModel = self.cashGoldResult;
+        cashSuc.isPurchaseSuccess = [[dic objectSafeForKey:@"ret"] boolValue];
+        [self.navigationController pushViewController:cashSuc animated:YES];
+//        else {
+//            if (![rsttext isEqualToString:@""] && rsttext) {
+//                [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
+//            }
+//        }
     }
 }
 
@@ -408,6 +410,7 @@
     else{
         self.isGoOn = NO;
     }
+
     NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:userId, @"userId", self.liquidateToken, @"liquidateToken", self.amoutCell.textField.text, @"goldAmount", self.goldAveragePrice, @"money",  nil];
     [[NetworkModule sharedNetworkModule] newPostReq:param tag:kSXTagGoldChangeCash owner:self signature:YES Type:SelectAccoutDefault];
 }
