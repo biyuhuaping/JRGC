@@ -220,6 +220,9 @@
         if (nil == goldRecharge) {
             goldRecharge = (UCFGoldChargeOneCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFGoldChargeOneCell" owner:self options:nil] lastObject];
         }
+        if (self.needToRechareStr) {
+            goldRecharge.textField.text = self.needToRechareStr;
+        }
         self.chargeOneCell = goldRecharge;
         return goldRecharge;
     }
