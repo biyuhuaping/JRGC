@@ -52,19 +52,19 @@
     
     switch ([_status intValue]) {
         case 1:{
-            _couponNameLabel.text = @"可用返现券";
+            _couponNameLabel.text = @"可用返金券";
         }
             break;
         case 2:{
-            _couponNameLabel.text = @"已用返现券";
+            _couponNameLabel.text = @"已用返金券";
         }
             break;
         case 3:{
-            _couponNameLabel.text = @"过期返现券";
+            _couponNameLabel.text = @"过期返金券";
         }
             break;
         case 4:{
-            _couponNameLabel.text = @"已赠送返现券";
+            _couponNameLabel.text = @"已赠送返金券";
         }
             break;
     }
@@ -124,6 +124,7 @@
             if (index == 1) {
                 UCFInvitationRebateViewController *feedBackVC = [[UCFInvitationRebateViewController alloc] initWithNibName:@"UCFInvitationRebateViewController" bundle:nil];
                 feedBackVC.title = @"邀请获利";
+                feedBackVC.accoutType = SelectAccoutTypeGold;
                 [self.navigationController pushViewController:feedBackVC animated:YES];
                 
             }
@@ -142,6 +143,7 @@
     UCFCouponExchangeToFriends *vc = [[UCFCouponExchangeToFriends alloc]initWithNibName:@"UCFCouponExchangeToFriends" bundle:nil];
     vc.quanData = _dataArr[indexPath.row];
     vc.couponType = @"1";
+    vc.accoutType = SelectAccoutTypeGold;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

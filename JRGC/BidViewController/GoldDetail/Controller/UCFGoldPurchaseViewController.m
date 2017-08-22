@@ -156,7 +156,12 @@
     NSString *nmProClaimIdStr = self.goldModel.nmPrdClaimId;
     NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId",nmProClaimIdStr, @"nmPrdClaimId",nil];
     
-    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagGetGoldProClaimDetail owner:self signature:YES Type:SelectAccoutDefault];
+    if (self.isGoldCurrentAccout) {
+        [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagGoldCurrentProClaimDetail owner:self signature:YES Type:SelectAccoutTypeGold];
+    }
+    else{
+        [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagGetGoldProClaimDetail owner:self signature:YES Type:SelectAccoutDefault];
+    }
 }
 
 -(void)changeGoldPrice
@@ -610,7 +615,7 @@
             NSString *investMinSumStr = [self.goldCouponDataDict objectSafeForKey:@"investMinSum"];
            availableLabel.text = [NSString stringWithFormat:@"返%@克黄金，购满%@克可用",goldAccountSumStr,investMinSumStr];
             [availableLabel setFontColor:UIColorWithRGB(0xfc8f0e) string:goldAccountSumStr];
-            [availableLabel setFontColor:UIColorWithRGB(0x333333) string:investMinSumStr];
+            [availableLabel setFontColor:UIColorWithRGB(0xfc8f0e) string:investMinSumStr];
             availableLabel.font = [UIFont systemFontOfSize:12.0f];
         }else{
             availableLabel.text = [NSString stringWithFormat:@"%@张可用",_goldCouponNumStr];
@@ -1203,6 +1208,20 @@
             goldBidSuccessVC.isPurchaseSuccess = [rstcode boolValue];
             goldBidSuccessVC.errorMessageStr = [rstcode boolValue] ? @"":message;
             [self.navigationController pushViewController:goldBidSuccessVC  animated:YES];
+        }
+    }else if (tag.integerValue == kSXTagGoldCurrentProClaimDetail){
+        
+        NSDictionary *dataDict = [dic objectSafeDictionaryForKey:@"data"];
+        if ( [dic[@"ret"] boolValue])
+        {
+            [[ToolSingleTon sharedManager] getGoldPrice];
+            self.dataDic = dataDict;
+            [self initGoldData];
+            [self.tableView reloadData];
+        }
+        else
+        {
+            [AuxiliaryFunc showAlertViewWithMessage:message];
         }
     }
 }
