@@ -14,4 +14,5 @@
 @end
 @interface UCFGoldCashButtonCell : UITableViewCell
 @property (nonatomic, weak) id<UCFGoldCashButtonCellDelegate> delegate;
+@property (nonatomic, assign) BOOL canCash;
 @end
