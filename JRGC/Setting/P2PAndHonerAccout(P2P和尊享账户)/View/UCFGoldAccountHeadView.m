@@ -63,23 +63,23 @@
 - (void)updateGoldFloat
 {
     self.realtimeGoldPrice.text = [NSString stringWithFormat:@"%.2f元/克",[ToolSingleTon sharedManager].readTimePrice];
-    double floatValue1 = [ToolSingleTon sharedManager].readTimePrice * [[_tmpData objectSafeForKey:@"holdGoldAmount"] doubleValue] - [[_tmpData objectSafeForKey:@"tradeAllMoney"] doubleValue];
     
     NSString  *goldValue = [self switchGoldPriceFormat:[_tmpData objectSafeForKey:@"holdGoldAmount"]];
     NSString *available = [UCFToolsMehod AddComma:goldValue];
-    self.currentGoldTotalPrice.text = [NSString stringWithFormat:@"(当前市值约¥%@)",available];
+    self.currentGoldTotalPrice.text = [NSString stringWithFormat:@"(当前市值约%@)",available];
     
-    if (floatValue1 > 0) {
-        self.floatLabel.textColor = UIColorWithRGB(0xfd4d4c);
-        self.floatLabel.text = [NSString stringWithFormat:@"+%.2f元",floatValue1];
-    } else if (floatValue1 == 0) {
-        floatValue1 = 0;
-        self.floatLabel.textColor = UIColorWithRGB(0x555555);
-        self.floatLabel.text = [NSString stringWithFormat:@"%.2f元",floatValue1];
-    } else {
-        self.floatLabel.textColor = UIColorWithRGB(0x4db94f);
-        self.floatLabel.text = [NSString stringWithFormat:@"-%.2f元",fabs(floatValue1)];
-    }
+//    double floatValue1 = [ToolSingleTon sharedManager].readTimePrice * [[_tmpData objectSafeForKey:@"holdGoldAmount"] doubleValue] - [[_tmpData objectSafeForKey:@"tradeAllMoney"] doubleValue];
+//    if (floatValue1 > 0) {
+//        self.floatLabel.textColor = UIColorWithRGB(0xfd4d4c);
+//        self.floatLabel.text = [NSString stringWithFormat:@"+%.2f元",floatValue1];
+//    } else if (floatValue1 == 0) {
+//        floatValue1 = 0;
+//        self.floatLabel.textColor = UIColorWithRGB(0x555555);
+//        self.floatLabel.text = [NSString stringWithFormat:@"%.2f元",floatValue1];
+//    } else {
+//        self.floatLabel.textColor = UIColorWithRGB(0x4db94f);
+//        self.floatLabel.text = [NSString stringWithFormat:@"-%.2f元",fabs(floatValue1)];
+//    }
 }
 
 - (IBAction)floatBtnClicked:(id)sender {
@@ -96,6 +96,10 @@
     sender.userInteractionEnabled = NO;
     [[ToolSingleTon sharedManager] getGoldPrice];
     [self startAnimation];
+    if (self.deleage && [self.deleage respondsToSelector:@selector(notiAccountCenterUpdate)]) {
+        [self.deleage notiAccountCenterUpdate];
+    }
+    
 }
 - (void)beginGetGoldPrice
 {
@@ -120,14 +124,15 @@
     self.holdGoldGram.attributedText = [Common changeLabelWithAllStr:self.holdGoldGram.text Text:@"克" Font:14];
     NSString  *goldValue = [self switchGoldPriceFormat:[dataDic objectSafeForKey:@"holdGoldAmount"]];
     NSString *available = [UCFToolsMehod AddComma:goldValue];
-    self.currentGoldTotalPrice.text = [NSString stringWithFormat:@"(当前市值约¥%@)",available];
+    self.currentGoldTotalPrice.text = [NSString stringWithFormat:@"(当前市值约%@)",available];
     NSString *availeStr = [NSString stringWithFormat:@"%@克",[dataDic objectSafeForKey:@"availableGoldAmount"]];
     self.availableGoldNum.text = availeStr;
     self.realtimeGoldPrice.text = [NSString stringWithFormat:@"%.2f元/克",[ToolSingleTon sharedManager].readTimePrice];
     self.totalRecoveryGold.text = [NSString stringWithFormat:@"%@克",[dataDic objectSafeForKey:@"collectGoldAmount"]];
     self.dealGoldPrice.text =  [NSString stringWithFormat:@"%@元/克",[dataDic objectSafeForKey:@"dealPrice"]];
-    double floatValue1 = [ToolSingleTon sharedManager].readTimePrice * [[dataDic objectSafeForKey:@"holdGoldAmount"] doubleValue] - [[dataDic objectSafeForKey:@"tradeAllMoney"] doubleValue];
-
+    
+//    double floatValue1 = [ToolSingleTon sharedManager].readTimePrice * [[dataDic objectSafeForKey:@"holdGoldAmount"] doubleValue] - [[dataDic objectSafeForKey:@"tradeAllMoney"] doubleValue];
+    double floatValue1 = [[dataDic objectSafeForKey:@"accountProfitLoss"] doubleValue];
     if (floatValue1 > 0) {
         self.floatLabel.textColor = UIColorWithRGB(0xfd4d4c);
         self.floatLabel.text = [NSString stringWithFormat:@"+%.2f元",floatValue1];
