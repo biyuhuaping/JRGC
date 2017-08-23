@@ -68,7 +68,10 @@
                 UCFGoldRechargeViewController *goldRecharge = [[UCFGoldRechargeViewController alloc] initWithNibName:@"UCFGoldRechargeViewController" bundle:nil];
                 goldRecharge.baseTitleText = @"充值";
                 goldRecharge.needToRechareStr = self.sourceVc;
+                NSInteger index =  [[self.navigationController viewControllers] indexOfObject:self];
+                goldRecharge.rootVc = [[self.navigationController viewControllers] objectAtIndex:index - 1];
                 [self.navigationController pushViewController:goldRecharge animated:YES];
+                
                 NSMutableArray *navVCArray = [[NSMutableArray alloc] initWithArray:self.navigationController.viewControllers];
                 [navVCArray removeObjectAtIndex:navVCArray.count-2];
                 [self.navigationController setViewControllers:navVCArray animated:NO];

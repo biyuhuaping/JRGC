@@ -28,7 +28,7 @@
 #import "UCFGoldRaiseViewController.h"
 
 
-@interface UCFGoldAccountViewController ()<UITableViewDelegate,UITableViewDataSource, GoldAccountFirstCellDeleage>
+@interface UCFGoldAccountViewController ()<UITableViewDelegate,UITableViewDataSource, GoldAccountFirstCellDeleage,UCFGoldAccountHeadViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *baseTableView;
 @property (weak, nonatomic) IBOutlet UIButton *buyGoldBtn;
 @property (weak, nonatomic) IBOutlet UIButton *withdrawalsBtn;
@@ -91,6 +91,7 @@
             [MBProgressHUD displayHudError:rsttext];
         }
     }
+    [self.baseTableView.header endRefreshing];
 }
 #pragma UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -247,11 +248,17 @@
     if (!_headerView) {
         _headerView = [[[NSBundle mainBundle] loadNibNamed:@"UCFGoldAccountHeadView" owner:nil options:nil] firstObject];
         _headerView.frame = CGRectMake(0, 0, ScreenWidth, 210);
+        _headerView.deleage = self;
         self.baseTableView.tableHeaderView = _headerView;
     }
+    [self.baseTableView addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(getNetData)];
+
     [self getNetData];
 }
-
+- (void)notiAccountCenterUpdate
+{
+    [self getNetData];
+}
 - (void)addRightBtn {
     UIButton *rightbutton = [UIButton buttonWithType:UIButtonTypeCustom];
     rightbutton.frame = CGRectMake(0, 0, 88, 44);
