@@ -14,7 +14,7 @@
 #import "UCFPurchaseWebView.h"
 #import <QuickLook/QuickLook.h>
 #import "QLHeaderViewController.h"
-@interface UCFInvestmentDetailViewController ()<QLPreviewControllerDelegate,QLPreviewControllerDataSource>
+@interface UCFInvestmentDetailViewController ()
 {
     UCFInvestmentDetailView *_investmentDetailView;
     UCFNoDataView *_nodataView;
@@ -236,27 +236,26 @@
         }
     } else if (tag.intValue == kSXTagContractDownLoad) {
         
-        self.localFilePath = result;
-//        QLHeaderViewController *vc = [[QLHeaderViewController alloc] init];
-//        vc.localFilePath = result;
-//        [self.navigationController pushViewController:vc animated:YES];
-        
-        QLPreviewController *QLPVC = [[QLPreviewController alloc] init];
-        QLPVC.delegate = self;
-        QLPVC.dataSource = self;
-        QLPVC.title = @"合同";
-        [self presentViewController:QLPVC animated:YES completion:nil];
+        QLHeaderViewController *vc = [[QLHeaderViewController alloc] init];
+        vc.localFilePath = result;
+        [self.navigationController pushViewController:vc animated:YES];
+//        self.localFilePath = result;
+//        QLPreviewController *QLPVC = [[QLPreviewController alloc] init];
+//        QLPVC.delegate = self;
+//        QLPVC.dataSource = self;
+//        QLPVC.title = @"合同";
+//        [self presentViewController:QLPVC animated:YES completion:nil];
     }
 }
-#pragma mark QLPreviewControllerDataSource
-- (NSInteger)numberOfPreviewItemsInPreviewController:(QLPreviewController *)controller{
-    return 1;
-}
-- (id<QLPreviewItem>)previewController:(QLPreviewController *)controller previewItemAtIndex:(NSInteger)index{
-    NSArray *arr = @[_localFilePath];
-    
-    return [NSURL fileURLWithPath:arr[index]];
-}
+//#pragma mark QLPreviewControllerDataSource
+//- (NSInteger)numberOfPreviewItemsInPreviewController:(QLPreviewController *)controller{
+//    return 1;
+//}
+//- (id<QLPreviewItem>)previewController:(QLPreviewController *)controller previewItemAtIndex:(NSInteger)index{
+//    NSArray *arr = @[_localFilePath];
+//    
+//    return [NSURL fileURLWithPath:arr[index]];
+//}
 - (void)showHTAlertdidFinishGetUMSocialDataResponse
 {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请登录www.9888keji.cn相关页面查看" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles: nil];

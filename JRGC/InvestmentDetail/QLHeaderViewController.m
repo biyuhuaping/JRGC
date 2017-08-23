@@ -20,12 +20,21 @@
     [self addLeftButton];
     baseTitleLabel.text = @"合同";
     
-    self.view.backgroundColor = [UIColor whiteColor];
-    QLPreviewController *QLPVC = [[QLPreviewController alloc] init];
-    QLPVC.delegate = self;
-    QLPVC.dataSource = self;
-    QLPVC.view.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:QLPVC.view];
+//    self.view.backgroundColor = [UIColor whiteColor];
+//    QLPreviewController *QLPVC = [[QLPreviewController alloc] init];
+//    QLPVC.delegate = self;
+//    QLPVC.dataSource = self;
+//    QLPVC.view.backgroundColor = [UIColor whiteColor];
+//    [self.view addSubview:QLPVC.view];
+    
+    
+    QLPreviewController *HPQLController = [[QLPreviewController alloc] init];
+    HPQLController.dataSource = self;
+    [self addChildViewController:HPQLController];
+    [HPQLController didMoveToParentViewController:self];
+    [self.view addSubview:HPQLController.view];
+    HPQLController.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+    
 }
 - (NSInteger)numberOfPreviewItemsInPreviewController:(QLPreviewController *)controller{
     return 1;
