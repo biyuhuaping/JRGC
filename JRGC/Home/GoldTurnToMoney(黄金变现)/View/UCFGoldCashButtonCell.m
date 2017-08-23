@@ -8,6 +8,11 @@
 
 #import "UCFGoldCashButtonCell.h"
 
+@interface UCFGoldCashButtonCell ()
+@property (weak, nonatomic) IBOutlet UIButton *cashButton;
+
+@end
+
 @implementation UCFGoldCashButtonCell
 
 - (void)awakeFromNib {
@@ -20,6 +25,12 @@
     if ([self.delegate respondsToSelector:@selector(goldCashcell:didClickCashGoldButton:)]) {
         [self.delegate goldCashcell:self didClickCashGoldButton:sender];
     }
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    self.cashButton.enabled = self.canCash;
 }
 
 @end

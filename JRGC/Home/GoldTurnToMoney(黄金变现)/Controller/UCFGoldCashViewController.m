@@ -285,6 +285,12 @@
         if (nil == cell) {
             cell = (UCFGoldCashButtonCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFGoldCashButtonCell" owner:self options:nil] lastObject];
         }
+        if (self.availableGoldAmount.doubleValue > 0.0) {
+            cell.canCash = YES;
+        }
+        else {
+            cell.canCash = NO;
+        }
         cell.delegate = self;
         return cell;
     }

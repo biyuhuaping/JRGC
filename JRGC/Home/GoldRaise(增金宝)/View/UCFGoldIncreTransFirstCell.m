@@ -27,7 +27,10 @@
 }
 
 - (IBAction)checkContract:(UIButton *)sender {
-    
+    if ([self.delegate respondsToSelector:@selector(goldIncreTransListCellDidClickedConstractWithModel:)]) {
+        UCFGoldIncreContractModel *contract = [self.model.nmContractModelList objectAtIndex:(self.indexPath.row - 3)];
+        [self.delegate goldIncreTransListCellDidClickedConstractWithModel:contract];
+    }
 }
 
 - (void)layoutSubviews
