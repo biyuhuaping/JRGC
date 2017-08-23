@@ -12,5 +12,6 @@
 - (void)addedProfitTipViewDidClickedCloseButton:(UIButton *)button;
 @end
 @interface UCFAddedProfitView : UIView
+@property (weak, nonatomic) IBOutlet UILabel *profitDetailLabel;
 @property (weak, nonatomic) id<UCFAddedProfitViewDelegate> delegate;
 @end

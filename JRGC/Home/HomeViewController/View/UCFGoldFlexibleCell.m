@@ -10,11 +10,17 @@
 #import "UCFHomeListCellPresenter.h"
 #import "NZLabel.h"
 #import "UCFGoldModel.h"
+#import "UCFProjectLabel.h"
 
 @interface UCFGoldFlexibleCell ()
 @property (weak, nonatomic) IBOutlet NZLabel *goldFlexibleRateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *minInvestLabel;
 @property (weak, nonatomic) IBOutlet UILabel *completeLabel;
+@property (weak, nonatomic) IBOutlet UIButton *buyButton;
+@property (weak, nonatomic) IBOutlet UILabel *proSignLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *buyButtonW;
+@property (weak, nonatomic) IBOutlet UIView *proSignBackView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *proSignBackViewW;
 
 @end
 
@@ -22,7 +28,6 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
 }
 
 - (void)setPresenter:(UCFHomeListCellPresenter *)presenter
@@ -31,6 +36,34 @@
     self.goldFlexibleRateLabel.text = presenter.annualRate;
     self.minInvestLabel.text = presenter.minInvest;
     self.completeLabel.text = presenter.completeLoan;
+    if (presenter.status == 2) {
+        self.buyButton.enabled = YES;
+        self.buyButtonW.constant = 60;
+        [self.buyButton setBackgroundColor:UIColorWithRGB(0xffc027)];
+    }
+    else if (presenter.status == 4) {
+        self.buyButton.enabled = NO;
+        self.buyButtonW.constant = 80;
+        [self.buyButton setBackgroundColor:[UIColor lightGrayColor]];
+    }
+    
+    if (presenter.item.prdLabelsList.count > 0) {
+        UCFProjectLabel *projectLabel = [presenter.item.prdLabelsList firstObject];
+        if ([projectLabel.labelPriority integerValue] == 1) {
+            self.proSignBackView.hidden = NO;
+            self.proSignLabel.text = [NSString stringWithFormat:@"%@", projectLabel.labelName];
+            CGSize size = [projectLabel.labelName boundingRectWithSize:CGSizeMake(MAXFLOAT, 15) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12.0f]} context:nil].size;
+            self.proSignBackViewW.constant = size.width + 11;
+        }
+        else {
+            self.proSignBackView.hidden = YES;
+            self.proSignBackViewW.constant = 0;
+        }
+    }
+    else {
+        self.proSignBackView.hidden = YES;
+        self.proSignBackViewW.constant = 0;
+    }
 }
 
 - (void)setGoldmodel:(UCFGoldModel *)goldmodel

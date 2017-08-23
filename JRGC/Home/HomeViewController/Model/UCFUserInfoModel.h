@@ -33,6 +33,9 @@
 @property (nonatomic, copy) NSString *goldMarketAmount;
 @property (nonatomic, copy) NSString *allGiveGoldAmount;
 @property (nonatomic, copy) NSString *nmCashBalance;
+@property (nonatomic, copy) NSString *p2pInterests;
+@property (nonatomic, copy) NSString *zxInterests;
+@property (nonatomic, copy) NSString *nmInterests;
 
 + (instancetype)userInfomationWithDict:(NSDictionary *)dict;
 @end
