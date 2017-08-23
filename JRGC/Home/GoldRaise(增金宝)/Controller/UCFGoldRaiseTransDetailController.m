@@ -7,9 +7,11 @@
 //
 
 #import "UCFGoldRaiseTransDetailController.h"
+#import "FullWebViewController.h"
 #import "UCFNoDataView.h"
 #import "UCFGoldIncreTransListModel.h"
 #import "UCFGoldIncreTransListCell.h"
+#import "UCFGoldIncreContractModel.h"
 
 @interface UCFGoldRaiseTransDetailController () <UITableViewDelegate, UITableViewDataSource, UCFGoldIncreTransListCellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
@@ -84,7 +86,9 @@
 #pragma mark - 合同的代理方法
 - (void)goldIncreTransListCellDidClickedConstractWithModel:(UCFGoldIncreContractModel *)model
 {
+    NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId", [NSString stringWithFormat:@"%@", model.orderId], @"contractTemplateId", nil];
     
+    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagGetGoldContractInfo owner:self signature:YES Type:SelectAccoutTypeGold];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -161,6 +165,17 @@
         }
         if ([self.tableview.footer isRefreshing]) {
             [self.tableview.footer endRefreshing];
+        }
+    }
+    else if (tag.integerValue == kSXTagGetGoldContractInfo) {
+        if ([rstcode intValue] == 1) {
+            NSDictionary *constractResult = [[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"result"];
+            
+            NSString *contractContentStr = [constractResult objectSafeForKey:@"contractContent"];
+            NSString *contractTitle = [constractResult objectSafeForKey:@"contractName"];
+            FullWebViewController *controller = [[FullWebViewController alloc] initWithHtmlStr:contractContentStr title:contractTitle];
+            controller.baseTitleType = @"detail_heTong";
+            [self.navigationController pushViewController:controller animated:YES];
         }
     }
 }

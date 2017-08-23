@@ -103,7 +103,7 @@
     NSMutableArray *array = [self.listArray objectAtIndex:section];
     UCFGoldIncreaseListModel *model = [array firstObject];
     if (nil == header) {
-        header = [[[NSBundle mainBundle] loadNibNamed:@"UCFGoldRaiseSectionHeaderView" owner:self options:nil] lastObject];
+        header = (UCFGoldRaiseSectionHeaderView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFGoldRaiseSectionHeaderView" owner:self options:nil] lastObject];
     }
     header.titleStrLabel.text = [NSString stringWithFormat:@"%@收益明细", model.yearMonth];
     return header;
@@ -252,7 +252,7 @@
 - (NSMutableArray *)arrayWithDataArray:(NSMutableArray *)data
 {
     if (data.count > 0) {
-        NSMutableArray *tempGroups = [NSMutableArray array];
+        NSMutableArray *tempGroups = [[NSMutableArray alloc] init];
         NSMutableArray *tempGroup = [[NSMutableArray alloc] init];
         for (UCFGoldIncreaseListModel *model in data) {
             NSDateComponents *comps = [self dateComponentsWithDateStr:model.profitDate];
@@ -263,6 +263,9 @@
         for (UCFGoldIncreaseListModel *model in self.dataArray) {
             if ([model.yearMonth isEqualToString:modelFirst.yearMonth]) {
                 [tempGroup addObject:model];
+                if ([model isEqual:[self.dataArray lastObject]]) {
+                    [tempGroups addObject:tempGroup];
+                }
             }
             else {
                 [tempGroups addObject:tempGroup];
@@ -273,7 +276,8 @@
         }
         return tempGroups;
     }
-    return nil;
+    else
+        return nil;
 }
 
 

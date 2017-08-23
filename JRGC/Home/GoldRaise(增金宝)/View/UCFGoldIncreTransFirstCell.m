@@ -28,7 +28,7 @@
 
 - (IBAction)checkContract:(UIButton *)sender {
     if ([self.delegate respondsToSelector:@selector(goldIncreTransListCellDidClickedConstractWithModel:)]) {
-        UCFGoldIncreContractModel *contract = [self.model.nmContractModelList objectAtIndex:(self.indexPath.row - 3)];
+        UCFGoldIncreContractModel *contract = [self.model.nmContractModelList objectAtIndex:(self.indexPath.row - 4)];
         [self.delegate goldIncreTransListCellDidClickedConstractWithModel:contract];
     }
 }
@@ -80,7 +80,7 @@
         else {
             self.secondLabel.hidden = YES;
             self.contractButton.hidden = NO;
-            UCFGoldIncreContractModel *contract = [self.model.nmContractModelList objectAtIndex:(self.indexPath.row - 3)];
+            UCFGoldIncreContractModel *contract = [self.model.nmContractModelList objectAtIndex:(self.indexPath.row - 4)];
             self.firstLabel.text = contract.contractName;
         }
     }
