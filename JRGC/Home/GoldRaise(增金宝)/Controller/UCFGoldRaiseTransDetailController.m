@@ -32,7 +32,7 @@
     [super viewDidLoad];
     [self addLeftButton];
     self.currentPage = 1;
-    [self getDataFromNet];
+    [self createUI];
     [self.tableview.header beginRefreshing];
 }
 

@@ -11,4 +11,5 @@
 @interface UCFGoldCashThirdCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UITextField *textField;
 @property (copy, nonatomic) NSString *avavilableGoldAmount;
+@property (weak, nonatomic) UITableView *tableview;
 @end
