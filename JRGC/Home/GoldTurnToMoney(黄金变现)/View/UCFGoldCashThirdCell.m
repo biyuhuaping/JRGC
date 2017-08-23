@@ -84,6 +84,7 @@
     if ([textField.text floatValue] > [self.avavilableGoldAmount floatValue]) {
         textField.text = self.avavilableGoldAmount;
     }
+    [self.tableview reloadData];
 }
 
 - (void)layoutSubviews
