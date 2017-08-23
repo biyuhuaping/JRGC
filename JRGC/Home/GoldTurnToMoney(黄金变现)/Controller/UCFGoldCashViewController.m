@@ -149,16 +149,13 @@
             [alertView show];
             return;
         }
+        [[NSNotificationCenter defaultCenter] postNotificationName:UPDATE_GOLD_ACCOUNT object:nil];
         UCFGoldCashSucessController *cashSuc = [[UCFGoldCashSucessController alloc] initWithNibName:@"UCFGoldCashSucessController" bundle:nil];
         cashSuc.baseTitleText = @"确认成功";
         cashSuc.cashResuModel = self.cashGoldResult;
         cashSuc.isPurchaseSuccess = [[dic objectSafeForKey:@"ret"] boolValue];
         [self.navigationController pushViewController:cashSuc animated:YES];
-//        else {
-//            if (![rsttext isEqualToString:@""] && rsttext) {
-//                [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
-//            }
-//        }
+
     }
 }
 
