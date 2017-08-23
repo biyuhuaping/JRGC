@@ -132,7 +132,7 @@
     NSString *temp = [UCFToolsMehod AddComma:couponModel.investMultip];
     if([couponModel.couponType intValue] == 3)
     {
-        self.investValueLabel.text = [NSString stringWithFormat:@"购买%@g可用", temp];
+        self.investValueLabel.text = [NSString stringWithFormat:@"购买%@克可用", couponModel.investMultip];
     }else{
        self.investValueLabel.text = [NSString stringWithFormat:@"投资¥%@可用", temp];
     }
