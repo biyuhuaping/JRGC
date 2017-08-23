@@ -344,6 +344,7 @@
     if (tag.intValue == kSXTagGoldRecharge) {
         if ([rstcode intValue] == 1) {
             UCFGoldRechargeWebController *webRecharge = [[UCFGoldRechargeWebController alloc] initWithNibName:@"UCFGoldRechargeWebController" bundle:nil];
+            
             webRecharge.rootVc = self.rootVc;
             webRecharge.baseTitleText = @"充值";
             NSDictionary *data = [dic objectSafeDictionaryForKey:@"data"];

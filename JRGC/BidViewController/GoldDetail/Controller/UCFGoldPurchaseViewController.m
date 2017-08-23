@@ -682,12 +682,14 @@
         
     }
 }
+#pragma mark - 去黄金返金劵劵页面
 -(void)pushGoldCouponVC
 {
     UCFGoldCouponViewController *goldCouponVC = [[UCFGoldCouponViewController   alloc]initWithNibName:@"UCFGoldCouponViewController" bundle:nil];
     goldCouponVC.nmPrdClaimIdStr = self.goldModel.nmPrdClaimId;
     goldCouponVC.delegate = self;
     goldCouponVC.remainAmountStr  = self.goldModel.remainAmount;
+    goldCouponVC.selectGoldCouponDict = self.goldCouponDataDict;
     [self.navigationController pushViewController:goldCouponVC animated:YES];
     
 }

@@ -14,5 +14,6 @@
 @interface UCFGoldCouponViewController : UCFBaseViewController
 @property (nonatomic,strong)NSString *nmPrdClaimIdStr;//黄金标id
 @property (nonatomic,strong)NSString *remainAmountStr;//黄金标可购克重
+@property (nonatomic,strong)NSDictionary  *selectGoldCouponDict;
 @property (nonatomic,assign)id<UCFGoldCouponViewControllerDelegate> delegate;
 @end

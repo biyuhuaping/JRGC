@@ -232,8 +232,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSDictionary *dic = [self.dataList objectAtIndex:indexPath.row];
     NSString *moneyStr;
-    if ([self.couponType intValue] == 1) {
+    if ([self.quanData.couponType intValue] == 0) {
         moneyStr = [NSString stringWithFormat:@"确认将￥%@元返现券,赠送给%@吗？",self.quanData.useInvest,[dic[@"userName"] isEqualToString:@"未认证"] ? [NSString stringWithFormat:@"用户%@",dic[@"mobile"]]:dic[@"userName"]];
+    }
+    else if ([self.quanData.couponType intValue] == 3) {
+        moneyStr = [NSString stringWithFormat:@"确认将%@克返金券,赠送给%@吗？",self.quanData.useInvest,[dic[@"userName"] isEqualToString:@"未认证"] ? [NSString stringWithFormat:@"用户%@",dic[@"mobile"]]:dic[@"userName"]];
     }
     else {
         moneyStr = [NSString stringWithFormat:@"确认将+%@返息券,赠送给%@吗？",self.quanData.backIntrestRate,[dic[@"userName"] isEqualToString:@"未认证"] ? [NSString stringWithFormat:@"用户%@",dic[@"mobile"]]:dic[@"userName"]];
