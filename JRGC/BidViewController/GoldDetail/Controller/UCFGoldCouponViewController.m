@@ -39,10 +39,7 @@
     [super viewDidLoad];
     baseTitleLabel.text = @"使用返金券";
     [self addLeftButton];
-    
-    self.confirmUseGoldCouponBtn.userInteractionEnabled = NO;
-    [self.confirmUseGoldCouponBtn setBackgroundColor:UIColorWithRGB(0xcccccc)];
-    
+
     self.remainGoldAccountLab.text = [NSString stringWithFormat:@"%@克",self.remainAmountStr];
     self.tableView.contentInset =  UIEdgeInsetsMake(0, 0, 10, 0);
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -131,7 +128,7 @@
     self.needGoldAccountLab.text = [NSString stringWithFormat:@"%.3lf克",_tatolNeetGoldAccout];
     [self.selectTipStr setFontColor:UIColorWithRGB(0xfc8c0e) string:_cellSelectCountStr];
     [self.selectTipStr setFontColor:UIColorWithRGB(0xfc8c0e) string:tatolGetGoldAccoutStr];
-    if (_tatolNeetGoldAccout > [self.remainAmountStr doubleValue] || _tatolGetGoldAccout == 0 || _tatolNeetGoldAccout == 0) {
+    if (_tatolNeetGoldAccout > [self.remainAmountStr doubleValue]) {
         self.confirmUseGoldCouponBtn.userInteractionEnabled = NO;
         [self.confirmUseGoldCouponBtn setBackgroundColor:UIColorWithRGB(0xcccccc)];
     }else{
@@ -220,6 +217,10 @@
                 UCFGoldCouponModel *model = [[UCFGoldCouponModel alloc]initWithDictionary:dataDict];
                 [self.dataArray addObject:model];
             }
+            [self changeGoldCellSelectStatus];
+            if (self.selectGoldCouponDict) {
+                [self changeSelectGoldState];
+            }
             [self.tableView reloadData];
         }
     }
@@ -268,6 +269,40 @@
            [self.tableView.footer endRefreshing];
     }
 }
+
+-(void)changeSelectGoldState
+{
+    int cellSelectCount = [[self.selectGoldCouponDict objectSafeForKey:@"selectedGoldCouponNum"] intValue]  ;//已选张数
+    _tatolGetGoldAccout = [[self.selectGoldCouponDict objectSafeForKey:@"goldAccountSum"] doubleValue];//可返金克重
+    _tatolNeetGoldAccout = [[self.selectGoldCouponDict objectSafeForKey:@"investMinSum"] doubleValue] ;//需投总克重
+    self.goldRecordidsStr = [self.selectGoldCouponDict objectSafeForKey:@"goldRecordids"];
+    
+    NSArray *selectGoldCouonArray  = [self.goldRecordidsStr  componentsSeparatedByString:@","];
+    for (NSString *selectModelStr in selectGoldCouonArray)
+    {
+        for (UCFGoldCouponModel *model in self.dataArray) {
+            if ([model.goldCouponId isEqualToString:selectModelStr]) {
+                model.isSelectedStatus = YES;
+                break;
+            }
+        }
+    }
+    self.allSelectBtn.selected = cellSelectCount == self.totalCount;
+    self.cellSelectCountStr = [NSString stringWithFormat:@"%d",cellSelectCount];
+    NSString *tatolGetGoldAccoutStr = [NSString stringWithFormat:@"%.3lf",_tatolGetGoldAccout];
+    self.selectTipStr.text = [NSString stringWithFormat:@"已选用%@张，可返金%@克",_cellSelectCountStr,tatolGetGoldAccoutStr];
+    self.needGoldAccountLab.text = [NSString stringWithFormat:@"%.3lf克",_tatolNeetGoldAccout];
+    [self.selectTipStr setFontColor:UIColorWithRGB(0xfc8c0e) string:_cellSelectCountStr];
+    [self.selectTipStr setFontColor:UIColorWithRGB(0xfc8c0e) string:tatolGetGoldAccoutStr];
+    if (_tatolNeetGoldAccout > [self.remainAmountStr doubleValue] ) {
+        self.confirmUseGoldCouponBtn.userInteractionEnabled = NO;
+        [self.confirmUseGoldCouponBtn setBackgroundColor:UIColorWithRGB(0xcccccc)];
+    }else{
+        self.confirmUseGoldCouponBtn.userInteractionEnabled = YES;
+        [self.confirmUseGoldCouponBtn setBackgroundColor:UIColorWithRGB(0xFFC027)];
+    }
+    self.selectGoldCouponDict = nil;
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -285,6 +320,13 @@
     if ([investMinSumStr doubleValue] > [self.remainAmountStr doubleValue]) {
         return;
     }
+    if (_tatolGetGoldAccout == 0 || _tatolNeetGoldAccout == 0) {//没有选择时，直接返回空
+        [self.delegate getSelectedGoldCouponNum:nil];
+        [self.navigationController popViewControllerAnimated:YES];
+        return;
+    }
+    
+    
     if (self.allSelectBtn.selected) {//如果是全选,则用服务端的数据
         NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithDictionary:self.allSelectDataDict];
         [dic setObject:self.cellSelectCountStr forKey:@"selectedGoldCouponNum"];
