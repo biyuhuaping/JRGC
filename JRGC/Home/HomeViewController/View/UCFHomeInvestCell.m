@@ -29,7 +29,7 @@
 {
     _presenter = presenter;
     self.anurateLabel.text = presenter.annualRate;
-    self.repayPeroid.text = presenter.repayPeriod;
+    self.repayPeroid.text = presenter.repayPeriodtext;
 }
 
 - (IBAction)reserveForSomeone:(UIButton *)sender {

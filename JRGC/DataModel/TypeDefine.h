@@ -300,6 +300,9 @@
 #define GOLDCHANGECASHINFO      @"api/nmAccount/v2/getLiquidatePageInfo.json"  //黄金变现界面信息
 #define GOLDCHANGECASH          @"api/nmAccount/v2/liquidateGold.json"    //黄金变现
 
+
+#define PRERESERVE_URL          @"https://m.9888.cn/static/wap/invest/index.html#/reserve/info" //预约的url
+
 enum kPostStatus{
     kPostStatusNone=0,
     kPostStatusBeging=1,
