@@ -52,7 +52,7 @@
 @property (nonatomic,assign)BOOL  isHaveGoldCouponNum;//是否有返金券
 @property (nonatomic,assign)BOOL  isShow_43068;//是否弹出金价波动框
 @property (nonatomic,strong)NSDictionary  *goldCouponDataDict;//选择返金劵数据数组
-
+@property (weak, nonatomic) IBOutlet UIImageView *baseShadowView;
 @property (nonatomic,strong)NSDictionary *paramDict;//请求参数
 - (IBAction)gotoGoldBidSuccessVC:(id)sender;
 
@@ -81,7 +81,8 @@
     frade.delegate = self;
     [self.view addGestureRecognizer:frade];
     
-  
+    UIImage *bgShadowImage= [UIImage imageNamed:@"tabbar_shadow.png"];
+    self.baseShadowView.image = [bgShadowImage resizableImageWithCapInsets:UIEdgeInsetsMake(2, 1, 2, 1) resizingMode:UIImageResizingModeTile];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(goldKeyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(goldKeyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
