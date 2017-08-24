@@ -127,6 +127,11 @@
     return [NSString stringWithFormat:@"%@", self.item.completeLoan];
 }
 
+- (int)status
+{
+    return self.item.status.intValue;
+}
+
 - (CGFloat)cellHeight
 {
     if (self.item.moedelType == UCFHomeListCellModelTypeDefault) {

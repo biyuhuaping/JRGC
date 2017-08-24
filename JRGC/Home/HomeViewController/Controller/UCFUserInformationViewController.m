@@ -631,6 +631,7 @@
         
         UCFAddedProfitView *tipview = (UCFAddedProfitView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFAddedProfitView" owner:self options:nil] lastObject];
         tipview.frame = view.bounds;
+        tipview.profitDetailLabel.text = [NSString stringWithFormat:@"%@=%@+%@+%@", weakSelf.addProfit, weakSelf.presenter.userInfoOneModel.p2pInterests, weakSelf.presenter.userInfoOneModel.zxInterests, weakSelf.presenter.userInfoOneModel.nmInterests];
         view.center = CGPointMake(ScreenWidth * 0.5, ScreenHeight * 0.5);
         tipview.delegate = weakSelf;
         [view addSubview:tipview];

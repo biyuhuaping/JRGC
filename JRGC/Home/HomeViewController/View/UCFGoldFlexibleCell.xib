@@ -62,7 +62,7 @@
                         <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ijz-Br-af3">
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ijz-Br-af3">
                         <rect key="frame" x="130" y="101" width="60" height="30"/>
                         <color key="backgroundColor" red="1" green="0.75294117650000003" blue="0.1529411765" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -72,6 +72,7 @@
                         <state key="normal" title="购买">
                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
+                        <state key="disabled" title="暂停交易"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                 <real key="value" value="15"/>
@@ -130,9 +131,14 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="buyButton" destination="Ijz-Br-af3" id="zkB-oM-ZQa"/>
+                <outlet property="buyButtonW" destination="fBH-bf-zBb" id="t71-i6-7yu"/>
                 <outlet property="completeLabel" destination="ykn-V6-wcz" id="69E-lZ-FxU"/>
                 <outlet property="goldFlexibleRateLabel" destination="kd8-6z-wVu" id="QY5-ps-M8x"/>
                 <outlet property="minInvestLabel" destination="qMu-bG-GvN" id="yqX-Jg-Akl"/>
+                <outlet property="proSignBackView" destination="L70-gE-1vf" id="tdZ-nv-mkp"/>
+                <outlet property="proSignBackViewW" destination="HDb-7W-qLt" id="zNr-Rf-KJZ"/>
+                <outlet property="proSignLabel" destination="y68-wb-rbF" id="D3z-wx-YWd"/>
             </connections>
             <point key="canvasLocation" x="33" y="-1"/>
         </tableViewCell>
