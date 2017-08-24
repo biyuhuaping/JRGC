@@ -77,6 +77,10 @@
                 _investValueLabel.textColor = UIColorWithRGB(0x999999);
                 [_inverstPeriodLab setFont:[UIFont boldSystemFontOfSize:10] string:[NSString stringWithFormat:@"≥%@", couponModel.inverstPeriod]];
             }
+            if([couponModel.couponType intValue] == 3)//黄金返金劵未使用的情况
+            {
+                _symbolLab.textColor = UIColorWithRGB(0xfc8f0e);
+            }
             [self.printView removeFromSuperview];
             self.printView = nil;
         }
