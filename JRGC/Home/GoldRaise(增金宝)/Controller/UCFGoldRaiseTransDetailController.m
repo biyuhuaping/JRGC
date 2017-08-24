@@ -70,7 +70,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UCFGoldIncreTransListModel *listModel = [self.dataArray objectAtIndex:indexPath.row];
+    UCFGoldIncreTransListModel *listModel = [self.dataArray objectAtIndex:indexPath.section];
     static NSString *cellId = @"goldIncreTransList";
     UCFGoldIncreTransListCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     if (nil == cell) {

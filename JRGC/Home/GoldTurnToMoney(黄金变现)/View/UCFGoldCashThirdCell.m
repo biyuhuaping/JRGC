@@ -76,6 +76,8 @@
     if ([textField.text doubleValue] > [self.avavilableGoldAmount doubleValue]) {
         textField.text = self.avavilableGoldAmount;
     }
+    NSIndexPath *path = [NSIndexPath indexPathForRow:2 inSection:0];
+    [self.tableview reloadRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationNone];
     return textField;
 }
 
@@ -83,7 +85,6 @@
 {
     if ([textField.text floatValue] > [self.avavilableGoldAmount floatValue]) {
         textField.text = self.avavilableGoldAmount;
-        [self.tableview reloadData];
     }
 }
 
