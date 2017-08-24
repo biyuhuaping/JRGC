@@ -17,6 +17,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *remainGoldAccountLab;
 @property (strong, nonatomic) IBOutlet UILabel *needGoldAccountLab;
 @property (nonatomic,strong)NSMutableArray *dataArray;
+@property (weak, nonatomic) IBOutlet UIImageView *baseShadowView;
 
 @property (strong, nonatomic) IBOutlet UILabel *selectTipStr;
 @property (nonatomic,strong)NSMutableArray *selectCellDataArray;
@@ -43,6 +44,9 @@
     self.remainGoldAccountLab.text = [NSString stringWithFormat:@"%@克",self.remainAmountStr];
     self.tableView.contentInset =  UIEdgeInsetsMake(0, 0, 10, 0);
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    UIImage *bgShadowImage= [UIImage imageNamed:@"tabbar_shadow.png"];
+    self.baseShadowView.image = [bgShadowImage resizableImageWithCapInsets:UIEdgeInsetsMake(2, 1, 2, 1) resizingMode:UIImageResizingModeTile];
     
     //=========  下拉刷新、上拉加载更多  =========
     __weak typeof(self) weakSelf = self;

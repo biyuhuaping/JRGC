@@ -31,9 +31,9 @@
     
     _baseImageView = [[UIImageView alloc] init];
     _baseImageView.userInteractionEnabled = YES;
-    UIImage *baseImage = [UIImage imageNamed:@"invest_bg_coupon.png"];
+    UIImage *baseImage = [UIImage imageNamed:@"invest_bg_coupon_common.png"];
     [baseImage resizableImageWithCapInsets:UIEdgeInsetsMake(0,130, 0, 120) resizingMode:UIImageResizingModeTile];
-    _baseImageView.image = [UIImage imageNamed:@"invest_bg_coupon.png"];
+    _baseImageView.image = [UIImage imageNamed:@"invest_bg_coupon_common.png"];
     _baseImageView.frame = CGRectMake(CGRectGetMaxX(_selectedBtn.frame) + 8, 10, ScreenWidth - CGRectGetMaxX(_selectedBtn.frame) - 8 -15, 72);
     _baseImageView.backgroundColor = [UIColor clearColor];
     [self addSubview:_baseImageView];
@@ -138,7 +138,7 @@
                 if (_listType == 1) {
                     _baseImageView.image = [UIImage imageNamed:@"invest_bg_interest.png"];
                 } else {
-                    _baseImageView.image = [UIImage imageNamed:@"invest_bg_coupon.png"];
+                    _baseImageView.image = [UIImage imageNamed:@"invest_bg_coupon_common.png"];
                 }
                 _investLimitLab.text = [NSString stringWithFormat:@"投资期限≥%ld天可用",(long)inverstPeriod];
                 _investLimitLab.textColor = UIColorWithRGB(0x999999);

@@ -81,7 +81,7 @@
                     _bgImgeView.image = [UIImage imageNamed:@"gold_bg_usable_common"];
                 }
                 else
-                    _bgImgeView.image = [UIImage imageNamed:@"coupon_bg_usable"];
+                    _bgImgeView.image = [UIImage imageNamed:@"coupon_bg_usable_common"];
                 _inverstPeriodLab.text = [NSString stringWithFormat:@"%@ ≥%@天 可用",inverstStr,couponModel.inverstPeriod];
                 [_inverstPeriodLab setFont:[UIFont boldSystemFontOfSize:10] string:[NSString stringWithFormat:@"≥%@", couponModel.inverstPeriod]];
             }

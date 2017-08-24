@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UCFGoldPurchaseViewController">
             <connections>
+                <outlet property="baseShadowView" destination="AtZ-gh-T0b" id="cFe-dG-CwR"/>
                 <outlet property="goldPurchaseButton" destination="e4K-eK-UnH" id="4wf-Hk-Kdn"/>
                 <outlet property="tableView" destination="Brt-mF-8IG" id="88D-xI-hi7"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -32,6 +33,12 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rc3-Ef-w72">
                     <rect key="frame" x="0.0" y="610" width="375" height="57"/>
                     <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AtZ-gh-T0b">
+                            <rect key="frame" x="0.0" y="-10" width="375" height="10"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="10" id="Dsz-vA-1H6"/>
+                            </constraints>
+                        </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e4K-eK-UnH">
                             <rect key="frame" x="15" y="10" width="345" height="37"/>
                             <color key="backgroundColor" red="1" green="0.75294117650000003" blue="0.1529411765" alpha="1" colorSpace="calibratedRGB"/>
@@ -54,9 +61,12 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
+                        <constraint firstItem="AtZ-gh-T0b" firstAttribute="leading" secondItem="Rc3-Ef-w72" secondAttribute="leading" id="3XC-yb-c2V"/>
                         <constraint firstItem="e4K-eK-UnH" firstAttribute="leading" secondItem="Rc3-Ef-w72" secondAttribute="leading" constant="15" id="BHq-ZA-b07"/>
                         <constraint firstItem="e4K-eK-UnH" firstAttribute="top" secondItem="Rc3-Ef-w72" secondAttribute="top" constant="10" id="IK4-UQ-XLC"/>
+                        <constraint firstItem="e4K-eK-UnH" firstAttribute="top" secondItem="AtZ-gh-T0b" secondAttribute="bottom" constant="10" id="WEo-UA-7ap"/>
                         <constraint firstAttribute="bottom" secondItem="e4K-eK-UnH" secondAttribute="bottom" constant="10" id="dCW-De-wXo"/>
+                        <constraint firstAttribute="trailing" secondItem="AtZ-gh-T0b" secondAttribute="trailing" id="eUZ-ZC-4TY"/>
                         <constraint firstAttribute="height" constant="57" id="mXl-K5-y4r"/>
                         <constraint firstAttribute="trailing" secondItem="e4K-eK-UnH" secondAttribute="trailing" constant="15" id="ssQ-cX-Kfg"/>
                     </constraints>
@@ -78,7 +88,7 @@
                     <exclude reference="HCv-0v-ZXD"/>
                 </mask>
             </variation>
-            <point key="canvasLocation" x="-127" y="29"/>
+            <point key="canvasLocation" x="-127.5" y="28.5"/>
         </view>
     </objects>
 </document>

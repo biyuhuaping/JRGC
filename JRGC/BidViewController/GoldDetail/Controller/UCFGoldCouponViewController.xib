@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UCFGoldCouponViewController">
             <connections>
                 <outlet property="allSelectBtn" destination="ELr-jf-sBp" id="Bhe-jP-8LA"/>
+                <outlet property="baseShadowView" destination="NTY-HV-1as" id="gms-Zr-UKw"/>
                 <outlet property="confirmUseGoldCouponBtn" destination="3hQ-gJ-uH4" id="ktJ-wf-lA2"/>
                 <outlet property="needGoldAccountLab" destination="KUp-2o-OtS" id="PvP-4X-k52"/>
                 <outlet property="remainGoldAccountLab" destination="jqQ-Ft-vMV" id="Ycz-Qi-gee"/>
@@ -110,6 +111,12 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MUl-Ku-uw1">
                     <rect key="frame" x="0.0" y="566" width="375" height="101"/>
                     <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NTY-HV-1as">
+                            <rect key="frame" x="0.0" y="-10" width="375" height="10"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="10" id="KUt-09-u35"/>
+                            </constraints>
+                        </imageView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tV8-P1-Ag6">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                             <subviews>
@@ -144,7 +151,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
-                            <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstItem="Ya7-tf-y1J" firstAttribute="centerY" secondItem="tV8-P1-Ag6" secondAttribute="centerY" id="0eh-2b-y6Z"/>
                                 <constraint firstAttribute="height" constant="44" id="17M-5N-D5x"/>
@@ -201,13 +208,16 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
+                        <constraint firstItem="NTY-HV-1as" firstAttribute="leading" secondItem="MUl-Ku-uw1" secondAttribute="leading" id="2Ae-DO-Md4"/>
                         <constraint firstAttribute="trailing" secondItem="zvI-VB-BFn" secondAttribute="trailing" id="2XZ-Ey-pmx"/>
                         <constraint firstItem="zvI-VB-BFn" firstAttribute="leading" secondItem="MUl-Ku-uw1" secondAttribute="leading" id="RNR-v0-bWY"/>
                         <constraint firstItem="tV8-P1-Ag6" firstAttribute="leading" secondItem="MUl-Ku-uw1" secondAttribute="leading" id="UV1-Xb-3v6"/>
                         <constraint firstItem="tV8-P1-Ag6" firstAttribute="top" secondItem="MUl-Ku-uw1" secondAttribute="top" id="WvG-D4-rio"/>
                         <constraint firstItem="zvI-VB-BFn" firstAttribute="top" secondItem="tV8-P1-Ag6" secondAttribute="bottom" id="fJn-5h-hyo"/>
+                        <constraint firstAttribute="trailing" secondItem="NTY-HV-1as" secondAttribute="trailing" id="hWk-pz-zXd"/>
                         <constraint firstAttribute="height" constant="101" id="r8S-g0-gCh"/>
                         <constraint firstAttribute="bottom" secondItem="zvI-VB-BFn" secondAttribute="bottom" id="tB5-2k-Xgc"/>
+                        <constraint firstItem="tV8-P1-Ag6" firstAttribute="top" secondItem="NTY-HV-1as" secondAttribute="bottom" id="wev-BD-1kO"/>
                         <constraint firstAttribute="trailing" secondItem="tV8-P1-Ag6" secondAttribute="trailing" id="zaQ-em-sb3"/>
                     </constraints>
                 </view>
