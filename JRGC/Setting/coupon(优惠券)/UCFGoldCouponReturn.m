@@ -35,7 +35,7 @@
 
 // 无数据界面
 @property (strong, nonatomic) UCFNoDataView *noDataView;
-
+- (IBAction)fetchCouponCenter:(UIButton *)sender;
 @end
 
 @implementation UCFGoldCouponReturn
