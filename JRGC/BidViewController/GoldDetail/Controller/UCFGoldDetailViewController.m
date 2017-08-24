@@ -266,7 +266,8 @@
         UIImageView *baseShadowView = [[UIImageView alloc]initWithFrame:CGRectMake(0, -28, ScreenWidth, 10)];
         baseShadowView.image = [bgShadowImage resizableImageWithCapInsets:UIEdgeInsetsMake(2, 1, 2, 1) resizingMode:UIImageResizingModeTile];
         [self.investBgView addSubview:baseShadowView];
-    }else
+    }
+    else
     {
         self.goldHeaderView  = [[[NSBundle mainBundle]loadNibNamed:@"UCFGoldDetailHeaderView" owner:nil options:nil] firstObject];
         self.goldHeaderView.frame = CGRectMake(0, 0, ScreenWidth, 225);
@@ -287,7 +288,7 @@
         [self.GoldInvestmentBtn setTitle:@"已售罄" forState:UIControlStateNormal];
         self.GoldInvestmentBtn.userInteractionEnabled = NO;
     }
-    else if([self.goldModel.status intValue] == 21)
+    else if([self.goldModel.status intValue] == 21 || [self.goldModel.status intValue] == 4)
     {
         self.GoldInvestmentBtn.backgroundColor = UIColorWithRGB(0xcccccc);
         [self.GoldInvestmentBtn setTitle:@"暂停交易" forState:UIControlStateNormal];
@@ -515,9 +516,9 @@
         NSString *buyServiceRateStr = [NSString stringWithFormat:@"¥%.2f",[self.goldModel.buyServiceRate floatValue]];
         UCFSettingItem *item2 = [UCFSettingItem itemWithIcon:@"gold_particular_icon_-poundage" WithTitle:@"买入手续费(元/克)" withSubtitle:buyServiceRateStr];
         NSString *cashServiceRateStr = [NSString stringWithFormat:@"¥%@",self.goldModel.cashServiceRate] ;
-        UCFSettingItem *item3 = [UCFSettingItem itemWithIcon:@"gold_particular_icon_repayment" WithTitle:@"变现手续费(元/克)" withSubtitle:cashServiceRateStr];
+        UCFSettingItem *item3 = [UCFSettingItem itemWithIcon:@"gold_particular_icon_cash" WithTitle:@"变现手续费(元/克)" withSubtitle:cashServiceRateStr];
         NSString *goldServiceRateStr = [NSString stringWithFormat:@"¥%@",self.goldModel.goldServiceRate];
-        UCFSettingItem *item4 = [UCFSettingItem itemWithIcon:@"gold_particular_icon_measure" WithTitle:@"提金手续费(元/克)" withSubtitle:goldServiceRateStr];
+        UCFSettingItem *item4 = [UCFSettingItem itemWithIcon:@"gold_particular_icon_draw" WithTitle:@"提金手续费(元/克)" withSubtitle:goldServiceRateStr];
         array  = @[item1,item2,item3,item4];
     }else{
         UCFSettingItem *item1 = [UCFSettingItem itemWithIcon:@"gold_particular_icon_repayment" WithTitle:@"收益克重交付方式" withSubtitle:self.goldModel.paymentType];
