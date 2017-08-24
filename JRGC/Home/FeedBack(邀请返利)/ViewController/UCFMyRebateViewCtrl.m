@@ -691,7 +691,7 @@
             cell.profitLab.text = [NSString stringWithFormat:@"¥%@",kindDict[@"profitMoney"]];
             cell.myFeedBackLab.text = kindDict[@"commissionAmt"];
             cell.bidNameLab.text = kindDict[@"prdClaimsName"];
-            cell.annateLab.text = kindDict[@"annualRate%%"];
+            cell.annateLab.text = [NSString stringWithFormat:@"%@%%",kindDict[@"annualRate"]];
             cell.myFeedBackLab.textColor = UIColorWithRGB(0xffc027);
             return cell;
         }
