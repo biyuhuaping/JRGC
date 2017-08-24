@@ -14,6 +14,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *firstLabel;
 @property (weak, nonatomic) IBOutlet UILabel *secondLabel;
 @property (weak, nonatomic) IBOutlet UIButton *contractButton;
+@property (weak, nonatomic) IBOutlet UIView *upLine;
+@property (weak, nonatomic) IBOutlet UIView *downLine;
 
 @end
 
@@ -31,6 +33,12 @@
         UCFGoldIncreContractModel *contract = [self.model.nmContractModelList objectAtIndex:(self.indexPath.row - 4)];
         [self.delegate goldIncreTransListCellDidClickedConstractWithModel:contract];
     }
+}
+
+- (void)setIndexPath:(NSIndexPath *)indexPath
+{
+    _indexPath = indexPath;
+    
 }
 
 - (void)layoutSubviews

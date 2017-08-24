@@ -88,7 +88,7 @@
         if ([projectLabel.labelPriority integerValue] == 1) {
             self.proSignBackView.hidden = NO;
             self.proSignLabel.text = [NSString stringWithFormat:@"%@", projectLabel.labelName];
-            CGSize size = [projectLabel.labelName boundingRectWithSize:CGSizeMake(MAXFLOAT, 15) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:10.0f]} context:nil].size;
+            CGSize size = [projectLabel.labelName boundingRectWithSize:CGSizeMake(MAXFLOAT, 15) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12.0f]} context:nil].size;
             self.proSignBackViewW.constant = size.width + 11;
         }
         else {

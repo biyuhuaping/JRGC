@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13122.19" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.16"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -78,8 +78,10 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="contractButton" destination="4Is-qu-TMm" id="VZn-jc-WEf"/>
+                <outlet property="downLine" destination="j3E-n1-TWK" id="ajX-DB-iAm"/>
                 <outlet property="firstLabel" destination="T8r-LM-Ufv" id="qKc-9t-2Ic"/>
                 <outlet property="secondLabel" destination="PPQ-AO-0tL" id="pfY-gW-u4L"/>
+                <outlet property="upLine" destination="VPl-8n-qC4" id="vJK-q5-8kt"/>
             </connections>
             <point key="canvasLocation" x="2" y="-131"/>
         </tableViewCell>

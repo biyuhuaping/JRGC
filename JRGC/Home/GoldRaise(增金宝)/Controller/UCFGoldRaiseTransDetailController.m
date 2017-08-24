@@ -49,11 +49,22 @@
         [weakSelf getDataFromNet];
     }];
     self.tableview.footer.hidden = YES;
+    [self.tableview setContentInset:UIEdgeInsetsMake(5, 0, 5, 0)];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return self.dataArray.count;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 5.0;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 5;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
