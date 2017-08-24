@@ -86,9 +86,9 @@
 #pragma mark - 合同的代理方法
 - (void)goldIncreTransListCellDidClickedConstractWithModel:(UCFGoldIncreContractModel *)model
 {
-    NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId", [NSString stringWithFormat:@"%@", model.orderId], @"contractTemplateId", nil];
+    NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId", [NSString stringWithFormat:@"%@", model.contractType], @"contractType", [NSString stringWithFormat:@"%@", model.orderId], @"orderId", nil];
     
-    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagGetGoldContractInfo owner:self signature:YES Type:SelectAccoutTypeGold];
+    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagGlixedGoldConstract owner:self signature:YES Type:SelectAccoutTypeGold];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -167,7 +167,7 @@
             [self.tableview.footer endRefreshing];
         }
     }
-    else if (tag.integerValue == kSXTagGetGoldContractInfo) {
+    else if (tag.integerValue == kSXTagGlixedGoldConstract) {
         if ([rstcode intValue] == 1) {
             NSDictionary *constractResult = [[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"result"];
             

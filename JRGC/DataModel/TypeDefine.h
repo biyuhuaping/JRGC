@@ -31,7 +31,7 @@
 #define VALID_BINDED_PHONE  @"newuserregist/bindNewPhone" //修改绑定手机号验证一绑定号码
 //#define IDNO_CHECKINFO      @"newsafe/idnoCheckInfo"   // 个人身份证信息
 #define IDNO_CHECKINFO      @"api/userInfo/v2/idnoCheckInfo.json"// 个人身份证信息
-
+#define FLIXEDGOLDCONSTRACT @"api/nmCommon/v2/getCurrentContractMess.json" //活期合同接口
 
 #define CHANGE_PWD          @"api/userInfo/v2/updatePwd.json" //修改登录密码
 #define MYTRANSFER_DETAIL   @"newPrdTransferOrder/transferOrderDetail"
@@ -549,6 +549,7 @@ enum kSXTag
     kSXTagGoldCurrentPurchase,           //黄金活期购买接口
     kSXTagGoldChangeCashInfo,           //黄金变现页面信息
     kSXTagGoldChangeCash,               //黄金变现
+    kSXTagGlixedGoldConstract,          //活期合同接口
 };
 
 typedef enum kSXTag kSXTag;

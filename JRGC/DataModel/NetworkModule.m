@@ -1196,6 +1196,9 @@ static NetworkModule *gInstance = NULL;
         case kSXTagGoldIncreTransList:
             parameter = [NEW_SERVER_IP stringByAppendingString:GOLDINCRETRANSLIST];
             break;
+        case kSXTagGlixedGoldConstract:
+            parameter = [NEW_SERVER_IP stringByAppendingString:FLIXEDGOLDCONSTRACT];
+            break;
     }
     //给原有参数字典添加公共参数
     if (!data) {
