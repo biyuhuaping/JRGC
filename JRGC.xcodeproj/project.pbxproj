@@ -769,6 +769,8 @@
 		84FAB60C1C7C575300D0942F /* MGSwipeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FAB6091C7C575300D0942F /* MGSwipeButton.m */; };
 		84FAB60D1C7C575300D0942F /* MGSwipeTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FAB60B1C7C575300D0942F /* MGSwipeTableCell.m */; };
 		84FFA5301C7EAA9200ACD835 /* UIScrollView+TouchScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FFA52F1C7EAA9200ACD835 /* UIScrollView+TouchScrollView.m */; };
+		A81F40061F4E86F80018B673 /* UCFRebateGoldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A81F40041F4E86F80018B673 /* UCFRebateGoldCell.m */; };
+		A81F40071F4E86F90018B673 /* UCFRebateGoldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A81F40051F4E86F80018B673 /* UCFRebateGoldCell.xib */; };
 		A828D6B31F1F30C200662266 /* UCFExtractGoldViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A828D6B11F1F30C200662266 /* UCFExtractGoldViewController.m */; };
 		A828D6B41F1F30C200662266 /* UCFExtractGoldViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A828D6B21F1F30C200662266 /* UCFExtractGoldViewController.xib */; };
 		A829E0A71ED42D0C00616FFE /* guideImage6_4.png in Resources */ = {isa = PBXBuildFile; fileRef = A829E0A51ED42D0C00616FFE /* guideImage6_4.png */; };
@@ -2321,6 +2323,9 @@
 		84FAB60B1C7C575300D0942F /* MGSwipeTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSwipeTableCell.m; sourceTree = "<group>"; };
 		84FFA52E1C7EAA9200ACD835 /* UIScrollView+TouchScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+TouchScrollView.h"; sourceTree = "<group>"; };
 		84FFA52F1C7EAA9200ACD835 /* UIScrollView+TouchScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+TouchScrollView.m"; sourceTree = "<group>"; };
+		A81F40031F4E86F80018B673 /* UCFRebateGoldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFRebateGoldCell.h; sourceTree = "<group>"; };
+		A81F40041F4E86F80018B673 /* UCFRebateGoldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFRebateGoldCell.m; sourceTree = "<group>"; };
+		A81F40051F4E86F80018B673 /* UCFRebateGoldCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFRebateGoldCell.xib; sourceTree = "<group>"; };
 		A828D6B01F1F30C200662266 /* UCFExtractGoldViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFExtractGoldViewController.h; sourceTree = "<group>"; };
 		A828D6B11F1F30C200662266 /* UCFExtractGoldViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFExtractGoldViewController.m; sourceTree = "<group>"; };
 		A828D6B21F1F30C200662266 /* UCFExtractGoldViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFExtractGoldViewController.xib; sourceTree = "<group>"; };
@@ -3555,6 +3560,9 @@
 				74270D581EC5AE8700F9419B /* UCFInvitationRewardCell2.h */,
 				74270D591EC5AE8700F9419B /* UCFInvitationRewardCell2.m */,
 				74270D5A1EC5AE8700F9419B /* UCFInvitationRewardCell2.xib */,
+				A81F40031F4E86F80018B673 /* UCFRebateGoldCell.h */,
+				A81F40041F4E86F80018B673 /* UCFRebateGoldCell.m */,
+				A81F40051F4E86F80018B673 /* UCFRebateGoldCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -7216,6 +7224,7 @@
 				74FA211A1F4C0BA100037991 /* UCFGoldIncreTransListCell.xib in Resources */,
 				747BE9D31D5B0F48007DEF32 /* UCFHuiBuinessDetailViewController.xib in Resources */,
 				74270D311EC595FA00F9419B /* UCFDataStatisticsViewController.xib in Resources */,
+				A81F40071F4E86F90018B673 /* UCFRebateGoldCell.xib in Resources */,
 				83E780731F38004400A400CE /* UCFGoldCouponCell.xib in Resources */,
 				4AE1E96A1E1CDB9900587CE6 /* read_me.txt in Resources */,
 				83974FDF1F14B25200C2252F /* UCFGoldMoneyBoadCell.xib in Resources */,
@@ -7840,6 +7849,7 @@
 				7BC7C0B81ADCEDB6003799B0 /* JSONKit.m in Sources */,
 				74BDA9861F09F6C60054403F /* FSCalendarAppearance.m in Sources */,
 				74E535ED1AE5FD6400DAABFC /* UCFAboutUsViewController.m in Sources */,
+				A81F40061F4E86F80018B673 /* UCFRebateGoldCell.m in Sources */,
 				744F8BEE1F3327AF005FF01B /* UCFMyReservedViewController.m in Sources */,
 				832D521F1D8FE5EA0060F1F7 /* UCFWithdrawCashResultWebView.m in Sources */,
 				747A91211B01B11100FE2334 /* UCFConstractModel.m in Sources */,
