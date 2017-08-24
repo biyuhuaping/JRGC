@@ -73,6 +73,33 @@
     [self.goldFlexibleRateLabel setFont:[UIFont boldSystemFontOfSize:12] string:@"%"];
     self.minInvestLabel.text = [NSString stringWithFormat:@"%.3f克起", [goldmodel.minPurchaseAmount doubleValue]];
     self.completeLabel.text = [NSString stringWithFormat:@"已售%@克", goldmodel.totalAmount];
+    if (goldmodel.status.intValue == 2) {
+        self.buyButton.enabled = YES;
+        self.buyButtonW.constant = 60;
+        [self.buyButton setBackgroundColor:UIColorWithRGB(0xffc027)];
+    }
+    else if (goldmodel.status.intValue == 4) {
+        self.buyButton.enabled = NO;
+        self.buyButtonW.constant = 80;
+        [self.buyButton setBackgroundColor:[UIColor lightGrayColor]];
+    }
+    if (goldmodel.prdLabelsList.count > 0) {
+        UCFProjectLabel *projectLabel = [goldmodel.prdLabelsList firstObject];
+        if ([projectLabel.labelPriority integerValue] == 1) {
+            self.proSignBackView.hidden = NO;
+            self.proSignLabel.text = [NSString stringWithFormat:@"%@", projectLabel.labelName];
+            CGSize size = [projectLabel.labelName boundingRectWithSize:CGSizeMake(MAXFLOAT, 15) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:10.0f]} context:nil].size;
+            self.proSignBackViewW.constant = size.width + 11;
+        }
+        else {
+            self.proSignBackView.hidden = YES;
+            self.proSignBackViewW.constant = 0;
+        }
+    }
+    else {
+        self.proSignBackView.hidden = YES;
+        self.proSignBackViewW.constant = 0;
+    }
 }
 
 - (IBAction)goldBuy:(UIButton *)sender {
