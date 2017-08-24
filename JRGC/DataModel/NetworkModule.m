@@ -1159,6 +1159,7 @@ static NetworkModule *gInstance = NULL;
             parameter = [NEW_SERVER_IP stringByAppendingString:GOlDOUPONSELEALLURL];
             break;
         case kSXTagGoldFriendList:
+//            //@"http://10.105.6.54:8080/"
             parameter = [NEW_SERVER_IP stringByAppendingString:GOLD_FRIENDS_LIST];
 //            parameter = @"http://10.10.100.112/mockjsdata/13/invite_rebate_detail.json?";
             break;
