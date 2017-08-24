@@ -66,13 +66,21 @@
             if ([couponModel.inverstPeriod isEqualToString:@"0"] || [couponModel.inverstPeriod isEqualToString:@""]) {//0 通用   "" 旧返现券
                 if ([couponModel.couponType isEqualToString:@"1"]) {
                     _bgImgeView.image = [UIImage imageNamed:@"interest_bg_usable"];
-                }else
+                }
+                else if ([couponModel.couponType isEqualToString:@"3"]) {
+                    _bgImgeView.image = [UIImage imageNamed:@"gold_bg_usable_common"];
+                }
+                else
                     _bgImgeView.image = [UIImage imageNamed:@"coupon_bg_usable_common"];
                 _inverstPeriodLab.text = @"任意标可用";
             }else{
                 if ([couponModel.couponType isEqualToString:@"1"]) {
                     _bgImgeView.image = [UIImage imageNamed:@"interest_bg_usable"];
-                }else
+                }
+                else if ([couponModel.couponType isEqualToString:@"3"]) {
+                    _bgImgeView.image = [UIImage imageNamed:@"gold_bg_usable_common"];
+                }
+                else
                     _bgImgeView.image = [UIImage imageNamed:@"coupon_bg_usable"];
                 _inverstPeriodLab.text = [NSString stringWithFormat:@"%@ ≥%@天 可用",inverstStr,couponModel.inverstPeriod];
                 [_inverstPeriodLab setFont:[UIFont boldSystemFontOfSize:10] string:[NSString stringWithFormat:@"≥%@", couponModel.inverstPeriod]];
