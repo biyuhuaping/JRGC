@@ -269,8 +269,8 @@
                 }
                 cell.delegate = self;
                 if (self.cashServiceRate && self.amoutCell.textField.text > 0) {
-                    CGFloat cashMoney = ([ToolSingleTon sharedManager].readTimePrice - [self.cashServiceRate doubleValue]) * [self.amoutCell.textField.text doubleValue];
-                    cell.cashServiceFee.text = [NSString stringWithFormat:@"%.f元", cashMoney];
+                    CGFloat cashMoney = ([ToolSingleTon sharedManager].readTimePrice-[self.cashServiceRate doubleValue]) * [self.amoutCell.textField.text doubleValue];
+                    cell.cashServiceFee.text = [NSString stringWithFormat:@"%.2f元", cashMoney];
                 }
                 return cell;
             }
@@ -385,15 +385,16 @@
 
 - (void)goldCashFourthDidClickedTipButton:(UIButton *)button
 {
+    [self.view endEditing:YES];
     __weak typeof(self) weakSelf = self;
     MjAlertView *alertView = [[MjAlertView alloc] initCustomAlertViewWithBlock:^(id blockContent) {
         UIView *view = (UIView *)blockContent;
         view.frame = CGRectMake(0, 0, 265, 245);
         
         UCFCashGoldTipview *tipview = (UCFCashGoldTipview *)[[[NSBundle mainBundle] loadNibNamed:@"UCFCashGoldTipview" owner:self options:nil] lastObject];
-        tipview.realGoldPriceLabel.text = [NSString stringWithFormat:@"%.2f元", [ToolSingleTon sharedManager].readTimePrice];
-        tipview.serviceFeeLabel.text = [NSString stringWithFormat:@"%@元/克", weakSelf.cashServiceRate];
-        tipview.actualGoldPriceLabel.text = [NSString stringWithFormat:@"%.2f元", ([ToolSingleTon sharedManager].readTimePrice-[weakSelf.cashServiceRate floatValue]) * [self.amoutCell.textField.text doubleValue]] ;
+        tipview.realGoldPriceLabel.text = [NSString stringWithFormat:@"%.2f元", [ToolSingleTon sharedManager].readTimePrice * [self.amoutCell.textField.text doubleValue]];
+        tipview.serviceFeeLabel.text = [NSString stringWithFormat:@"%.2f元", [weakSelf.cashServiceRate doubleValue] * [self.amoutCell.textField.text doubleValue]];
+        tipview.actualGoldPriceLabel.text = [NSString stringWithFormat:@"%.2f元", ([ToolSingleTon sharedManager].readTimePrice-[weakSelf.cashServiceRate doubleValue]) * [self.amoutCell.textField.text doubleValue]];
         tipview.frame = view.bounds;
         view.center = CGPointMake(ScreenWidth * 0.5, ScreenHeight * 0.5);
         tipview.delegate = weakSelf;
