@@ -12,4 +12,5 @@
 @property (assign, nonatomic) BOOL isShowBlackDot;
 @property (copy, nonatomic) NSString *tipString;
 @property (assign, nonatomic) CGFloat cellHeight;
+@property (strong, nonatomic) NSArray *changeColorStrs;
 @end
