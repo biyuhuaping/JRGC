@@ -14,14 +14,19 @@
 #import "UCFNoDataView.h"
 #import "UCFGoldIncreaseListModel.h"
 #import "UCFGoldIncreListCell.h"
+#import "MjAlertView.h"
+#import "UCFFloatDetailView.h"
+#import "UCFAveragePriceDetailView.h"
 
-@interface UCFGoldRaiseViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface UCFGoldRaiseViewController () <UITableViewDataSource, UITableViewDelegate, UCFGoldRaiseViewDelegate, UCFFloatDetailViewDelegate, UCFAveragePriceDetailViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (weak, nonatomic) UCFGoldRaiseView *raiseHeaderView;
 @property (assign, nonatomic) NSUInteger currentPage;
 @property (strong, nonatomic) NSMutableArray *dataArray;
 @property (strong, nonatomic) UCFNoDataView *noDataView;
 @property (strong, nonatomic) NSMutableArray *listArray;
+@property (weak, nonatomic) MjAlertView *tipView1;
+@property (weak, nonatomic) MjAlertView *tipView2;
 @end
 
 @implementation UCFGoldRaiseViewController
@@ -52,12 +57,13 @@
 - (void)createUI {
     UCFGoldRaiseView *view = (UCFGoldRaiseView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFGoldRaiseView" owner:self options:nil] lastObject];
     view.backgroundColor = UIColorWithRGB(0xebebee);
+    view.delegate = self;
     self.tableview.tableHeaderView = view;
     
     self.raiseHeaderView = view;
     
     UIButton *rightbutton = [UIButton buttonWithType:UIButtonTypeCustom];
-    rightbutton.frame = CGRectMake(0, 0, 88, 44);
+    rightbutton.frame = CGRectMake(0, 0, 62, 44);
     rightbutton.backgroundColor = [UIColor clearColor];
     [rightbutton setTitle:@"交易详情" forState:UIControlStateNormal];
     rightbutton.titleLabel.font = [UIFont systemFontOfSize:15.0];
@@ -95,7 +101,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    return 0.001;
+    return 10;
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
@@ -125,7 +131,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 44;
+    return 32;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -137,6 +143,8 @@
     }
     NSMutableArray *array = [self.listArray objectAtIndex:indexPath.section];
     UCFGoldIncreaseListModel *model = [array objectAtIndex:indexPath.row];
+    cell.tableview = tableView;
+    cell.indexPath = indexPath;
     cell.model = model;
     return cell;
 }
@@ -300,5 +308,47 @@
     return comp;
 }
 
+- (void)floatDetailClicedButton:(UIButton *)button
+{
+    __weak typeof(self) weakSelf = self;
+    MjAlertView *alertView = [[MjAlertView alloc] initCustomAlertViewWithBlock:^(id blockContent) {
+        UIView *view = (UIView *)blockContent;
+        view.frame = CGRectMake(0, 0, 265, 210);
+        UCFFloatDetailView *tipview = (UCFFloatDetailView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFFloatDetailView" owner:self options:nil] lastObject];
+        tipview.frame = view.bounds;
+        view.center = CGPointMake(ScreenWidth * 0.5, ScreenHeight * 0.5);
+        tipview.delegate = weakSelf;
+        [view addSubview:tipview];
+    }];
+    weakSelf.tipView1 = alertView;
+    [alertView show];
+}
+
+- (void)curentViewTipViewDidClickedCloseButton:(UIButton *)button
+{
+    [self.tipView1 hide];
+}
+
+- (void)averagePriceDetailClicedButton:(UIButton *)button
+{
+    __weak typeof(self) weakSelf = self;
+    MjAlertView *alertView = [[MjAlertView alloc] initCustomAlertViewWithBlock:^(id blockContent) {
+        UIView *view = (UIView *)blockContent;
+        view.frame = CGRectMake(0, 0, 265, 210);
+        UCFAveragePriceDetailView *tipview = (UCFAveragePriceDetailView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFAveragePriceDetailView" owner:self options:nil] lastObject];
+        tipview.frame = view.bounds;
+        view.center = CGPointMake(ScreenWidth * 0.5, ScreenHeight * 0.5);
+        tipview.delegate = weakSelf;
+        [view addSubview:tipview];
+        
+    }];
+    weakSelf.tipView2 = alertView;
+    [alertView show];
+}
+
+- (void)averageDetaiViewTipViewDidClickedCloseButton:(UIButton *)button
+{
+    [self.tipView2 hide];
+}
 
 @end

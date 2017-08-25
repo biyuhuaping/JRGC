@@ -11,4 +11,6 @@
 @class UCFGoldIncreaseListModel;
 @interface UCFGoldIncreListCell : UITableViewCell
 @property (nonatomic, strong) UCFGoldIncreaseListModel *model;
+@property (nonatomic, weak) UITableView *tableview;
+@property (nonatomic, strong) NSIndexPath *indexPath;
 @end

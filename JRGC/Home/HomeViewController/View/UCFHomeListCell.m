@@ -142,6 +142,12 @@
         if([presenter.item.type isEqualToString:@"3"])
         {
             self.goldTtileThird.hidden = NO;
+            if (presenter.availBorrowAmount.doubleValue > 0) {
+                self.goldTtileThird.text = @"剩余克重";
+            }
+            else {
+                self.goldTtileThird.text = @"已售克重";
+            }
             self.timeLabel.font = [UIFont systemFontOfSize:11];
             self.repayModelLabel.font = [UIFont systemFontOfSize:11];
             if (status == 1) {

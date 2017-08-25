@@ -78,10 +78,12 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="contractButton" destination="4Is-qu-TMm" id="VZn-jc-WEf"/>
-                <outlet property="downLine" destination="j3E-n1-TWK" id="ajX-DB-iAm"/>
+                <outlet property="downLineLeftSpace" destination="MI3-PG-gIZ" id="CA2-bc-BZY"/>
+                <outlet property="downSegLine" destination="j3E-n1-TWK" id="fnp-t6-k8k"/>
                 <outlet property="firstLabel" destination="T8r-LM-Ufv" id="qKc-9t-2Ic"/>
                 <outlet property="secondLabel" destination="PPQ-AO-0tL" id="pfY-gW-u4L"/>
-                <outlet property="upLine" destination="VPl-8n-qC4" id="vJK-q5-8kt"/>
+                <outlet property="upLineLeftSpace" destination="LhN-la-Hej" id="8ww-ZY-r9O"/>
+                <outlet property="upSegLine" destination="VPl-8n-qC4" id="yrW-WB-m8H"/>
             </connections>
             <point key="canvasLocation" x="2" y="-131"/>
         </tableViewCell>

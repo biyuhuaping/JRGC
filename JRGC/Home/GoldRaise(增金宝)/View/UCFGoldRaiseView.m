@@ -8,9 +8,10 @@
 
 #import "UCFGoldRaiseView.h"
 #import "UCFGoldIncreaseAccountInfoModel.h"
+#import "NZLabel.h"
 
 @interface UCFGoldRaiseView ()
-@property (weak, nonatomic) IBOutlet UILabel *goldIncreaseAmount;
+@property (weak, nonatomic) IBOutlet NZLabel *goldIncreaseAmount;
 @property (weak, nonatomic) IBOutlet UILabel *addedProfitLabel;
 @property (weak, nonatomic) IBOutlet UILabel *floatProfitLabel;
 @property (weak, nonatomic) IBOutlet UILabel *averagePriceLabel;
@@ -24,11 +25,21 @@
 {
     return 160;
 }
+- (IBAction)floatDetail:(UIButton *)sender {
+    if ([self.delegate respondsToSelector:@selector(floatDetailClicedButton:)]) {
+        [self.delegate floatDetailClicedButton:sender];
+    }
+}
+- (IBAction)averagePriceDetail:(UIButton *)sender {
+    if ([self.delegate respondsToSelector:@selector(averagePriceDetailClicedButton:)]) {
+        [self.delegate averagePriceDetailClicedButton:sender];
+    }
+}
 
 - (void)setGoldIncreModel:(UCFGoldIncreaseAccountInfoModel *)goldIncreModel
 {
     _goldIncreModel = goldIncreModel;
-    self.goldIncreaseAmount.text = goldIncreModel.goldAmount ? [NSString stringWithFormat:@"%@", goldIncreModel.goldAmount] : @"0.000克";
+    self.goldIncreaseAmount.text = goldIncreModel.goldAmount ? [NSString stringWithFormat:@"%@克", goldIncreModel.goldAmount] : @"0.000克";
     self.addedProfitLabel.text = goldIncreModel.allGiveMoney ? [NSString stringWithFormat:@"%@元", goldIncreModel.allGiveMoney] : @"0.00元";
     self.floatProfitLabel.text = goldIncreModel.floatingPL ? [NSString stringWithFormat:@"%@元", goldIncreModel.floatingPL] : @"0.00元";
     self.averagePriceLabel.text = goldIncreModel.dealPrice ?  [NSString stringWithFormat:@"%@元/克", goldIncreModel.dealPrice] : @"0.00元/克";
@@ -38,11 +49,16 @@
 {
     [super layoutSubviews];
     self.upBaseView.backgroundColor = UIColorWithRGB(0x5B6993);
-
-//    self.goldIncreaseAmount.text = self.goldIncreModel.goldAmount > 0 ? @"0.000克" : [NSString stringWithFormat:@"%@", self.goldIncreModel.goldAmount];
-//    self.addedProfitLabel.text = self.goldIncreModel.allGiveMoney > 0 ? @"0.00元" : [NSString stringWithFormat:@"%@元", self.goldIncreModel.allGiveMoney];
-//    self.floatProfitLabel.text = self.goldIncreModel.floatingPL > 0 ? @"0.00元" : [NSString stringWithFormat:@"%@元", self.goldIncreModel.floatingPL];
-//    self.averagePriceLabel.text = self.goldIncreModel.dealPrice > 0 ? @"0.00元/克" : [NSString stringWithFormat:@"%@元/克", self.goldIncreModel.dealPrice];
+    [self.goldIncreaseAmount setFont:[UIFont systemFontOfSize:16] string:@"克"];
+    if ([self.goldIncreModel.floatingPL hasPrefix:@"+"]) {
+        self.floatProfitLabel.textColor = UIColorWithRGB(0xfd4d4c);
+    }
+    else if ([self.goldIncreModel.floatingPL hasPrefix:@"-"]) {
+        self.floatProfitLabel.textColor = UIColorWithRGB(0x4db94f);
+    }
+    else {
+        self.floatProfitLabel.textColor = UIColorWithRGB(0x555555);
+    }
 }
 
 @end
