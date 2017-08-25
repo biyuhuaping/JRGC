@@ -14,13 +14,15 @@
 @property (weak, nonatomic) IBOutlet UILabel *addedProfitLabel;
 @property (weak, nonatomic) IBOutlet UILabel *floatProfitLabel;
 @property (weak, nonatomic) IBOutlet UILabel *averagePriceLabel;
+@property (weak, nonatomic) IBOutlet UIView *upBaseView;
+
 @end
 
 @implementation UCFGoldRaiseView
 
 + (CGFloat)viewHeight
 {
-    return 200;
+    return 160;
 }
 
 - (void)setGoldIncreModel:(UCFGoldIncreaseAccountInfoModel *)goldIncreModel
@@ -35,7 +37,8 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    
+    self.upBaseView.backgroundColor = UIColorWithRGB(0x5B6993);
+
 //    self.goldIncreaseAmount.text = self.goldIncreModel.goldAmount > 0 ? @"0.000克" : [NSString stringWithFormat:@"%@", self.goldIncreModel.goldAmount];
 //    self.addedProfitLabel.text = self.goldIncreModel.allGiveMoney > 0 ? @"0.00元" : [NSString stringWithFormat:@"%@元", self.goldIncreModel.allGiveMoney];
 //    self.floatProfitLabel.text = self.goldIncreModel.floatingPL > 0 ? @"0.00元" : [NSString stringWithFormat:@"%@元", self.goldIncreModel.floatingPL];

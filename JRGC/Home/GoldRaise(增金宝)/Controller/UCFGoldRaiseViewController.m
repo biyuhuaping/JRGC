@@ -51,7 +51,9 @@
 
 - (void)createUI {
     UCFGoldRaiseView *view = (UCFGoldRaiseView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFGoldRaiseView" owner:self options:nil] lastObject];
+    view.backgroundColor = UIColorWithRGB(0xebebee);
     self.tableview.tableHeaderView = view;
+    
     self.raiseHeaderView = view;
     
     UIButton *rightbutton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -88,14 +90,13 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 40;
+    return 30;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     return 0.001;
 }
-
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     static NSString *headerId = @"goldraisesectionheader";
@@ -105,7 +106,9 @@
     if (nil == header) {
         header = (UCFGoldRaiseSectionHeaderView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFGoldRaiseSectionHeaderView" owner:self options:nil] lastObject];
     }
+    header.contentView.backgroundColor = UIColorWithRGB(0xf9f9f9);
     header.titleStrLabel.text = [NSString stringWithFormat:@"%@收益明细", model.yearMonth];
+    header.titleStrLabel.textColor = UIColorWithRGB(0x333333);
     return header;
 }
 
