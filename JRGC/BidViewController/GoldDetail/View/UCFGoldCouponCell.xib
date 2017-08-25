@@ -25,22 +25,22 @@
                                 <rect key="frame" x="0.0" y="0.0" width="270" height="72"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00克" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BgU-68-Nsj">
-                                <rect key="frame" x="10" y="8" width="78.5" height="22"/>
+                                <rect key="frame" x="10" y="13" width="66" height="16"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="22" id="LJa-BK-Qnu"/>
+                                    <constraint firstAttribute="height" constant="16" id="LJa-BK-Qnu"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <color key="textColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="金融工场专用劵" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4JJ-GZ-okK">
-                                <rect key="frame" x="10" y="34" width="86" height="14.5"/>
+                                <rect key="frame" x="10" y="33" width="86" height="14.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="有效期2017-08-20" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cmo-Ru-eYY">
-                                <rect key="frame" x="154.5" y="34" width="105.5" height="14.5"/>
+                                <rect key="frame" x="154.5" y="33" width="105.5" height="14.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -83,7 +83,7 @@
                             <constraint firstAttribute="trailing" secondItem="ZTz-eB-bC6" secondAttribute="trailing" id="hNV-qT-AlB"/>
                             <constraint firstItem="GWY-cq-YY9" firstAttribute="centerY" secondItem="5UZ-qp-pdQ" secondAttribute="centerY" id="jBb-pj-MPi"/>
                             <constraint firstItem="4JJ-GZ-okK" firstAttribute="top" secondItem="BgU-68-Nsj" secondAttribute="bottom" constant="4" id="kJQ-kl-5Od"/>
-                            <constraint firstItem="BgU-68-Nsj" firstAttribute="top" secondItem="dQz-k4-f7d" secondAttribute="top" constant="8" id="lsf-53-04R"/>
+                            <constraint firstItem="BgU-68-Nsj" firstAttribute="top" secondItem="dQz-k4-f7d" secondAttribute="top" constant="13" id="lsf-53-04R"/>
                             <constraint firstAttribute="bottom" secondItem="5UZ-qp-pdQ" secondAttribute="bottom" constant="3" id="xYt-sh-nOz"/>
                             <constraint firstItem="ZTz-eB-bC6" firstAttribute="leading" secondItem="dQz-k4-f7d" secondAttribute="leading" id="zAZ-m0-frN"/>
                         </constraints>
