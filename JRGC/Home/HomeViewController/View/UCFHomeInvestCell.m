@@ -14,6 +14,7 @@
 @interface UCFHomeInvestCell ()
 @property (weak, nonatomic) IBOutlet NZLabel *anurateLabel;
 @property (weak, nonatomic) IBOutlet NZLabel *repayPeroid;
+@property (weak, nonatomic) IBOutlet UIButton *reserveButton;
 
 @end
 
@@ -22,7 +23,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-    
+    self.reserveButton.backgroundColor = UIColorWithRGB(0xfd4d4c);
 }
 
 - (void)setPresenter:(UCFHomeListCellPresenter *)presenter

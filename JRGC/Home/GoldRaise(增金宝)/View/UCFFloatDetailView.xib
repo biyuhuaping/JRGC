@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="UCFFloatDetailView">
+            <rect key="frame" x="0.0" y="0.0" width="265" height="210"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M5a-8u-W72">
+                    <rect key="frame" x="0.0" y="0.0" width="265" height="160"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yBe-E4-zP7">
+                            <rect key="frame" x="15" y="45" width="235" height="0.5"/>
+                            <color key="backgroundColor" red="0.89019607840000003" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="0.5" id="c7e-bn-mmN"/>
+                            </constraints>
+                        </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="增金宝浮动盈亏" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S18-U0-t0w">
+                            <rect key="frame" x="75" y="15" width="115" height="20"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="增金宝浮动盈亏指消费者的增金宝在当前价格的浮动盈利和亏损" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d4A-3O-JZQ">
+                            <rect key="frame" x="15" y="57" width="235" height="29"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="计算公式:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jLP-S6-SuB">
+                            <rect key="frame" x="15" y="94" width="53" height="14.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="增金宝浮动盈亏=(实时金价-增金宝买入均价)✕增金宝克重" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oni-d8-0lX">
+                            <rect key="frame" x="15" y="115" width="235" height="24"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                            <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="S18-U0-t0w" firstAttribute="centerX" secondItem="M5a-8u-W72" secondAttribute="centerX" id="0cn-bl-Oun"/>
+                        <constraint firstAttribute="trailing" secondItem="yBe-E4-zP7" secondAttribute="trailing" constant="15" id="5hz-q9-c2T"/>
+                        <constraint firstItem="oni-d8-0lX" firstAttribute="leading" secondItem="M5a-8u-W72" secondAttribute="leading" constant="15" id="6nB-KM-Q01"/>
+                        <constraint firstItem="yBe-E4-zP7" firstAttribute="top" secondItem="M5a-8u-W72" secondAttribute="top" constant="45" id="8s1-BS-EJc"/>
+                        <constraint firstItem="S18-U0-t0w" firstAttribute="top" secondItem="M5a-8u-W72" secondAttribute="top" constant="15" id="ARJ-Hv-1hS"/>
+                        <constraint firstItem="d4A-3O-JZQ" firstAttribute="top" secondItem="yBe-E4-zP7" secondAttribute="bottom" constant="11" id="Bzb-if-Jve"/>
+                        <constraint firstItem="jLP-S6-SuB" firstAttribute="top" secondItem="d4A-3O-JZQ" secondAttribute="bottom" constant="8" id="UOD-dx-YCB"/>
+                        <constraint firstAttribute="height" constant="160" id="W3n-zG-Brs"/>
+                        <constraint firstItem="oni-d8-0lX" firstAttribute="top" secondItem="jLP-S6-SuB" secondAttribute="bottom" constant="6" id="clI-qd-Uzf"/>
+                        <constraint firstItem="yBe-E4-zP7" firstAttribute="leading" secondItem="M5a-8u-W72" secondAttribute="leading" constant="15" id="rHA-wB-ZPu"/>
+                        <constraint firstAttribute="trailing" secondItem="d4A-3O-JZQ" secondAttribute="trailing" constant="15" id="rn4-0G-GJK"/>
+                        <constraint firstItem="d4A-3O-JZQ" firstAttribute="leading" secondItem="M5a-8u-W72" secondAttribute="leading" constant="15" id="sfd-3J-r2c"/>
+                        <constraint firstAttribute="trailing" secondItem="oni-d8-0lX" secondAttribute="trailing" constant="15" id="y1E-P4-TvD"/>
+                        <constraint firstItem="jLP-S6-SuB" firstAttribute="leading" secondItem="M5a-8u-W72" secondAttribute="leading" constant="15" id="ybU-Tq-4aF"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="4"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bYG-Hy-MzW">
+                    <rect key="frame" x="132" y="160" width="1" height="20"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="1" id="FwY-hN-Fe1"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" tag="1000" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lFk-B3-S4y">
+                    <rect key="frame" x="117.5" y="179.5" width="30.5" height="30.5"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="30.5" id="MQI-WB-3q8"/>
+                        <constraint firstAttribute="height" constant="30.5" id="bBd-d2-LOT"/>
+                    </constraints>
+                    <state key="normal" image="honorable_bj_close"/>
+                    <connections>
+                        <action selector="close:" destination="iN0-l3-epB" eventType="touchUpInside" id="UYU-sT-kwG"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="lFk-B3-S4y" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="3iF-B7-X2Q"/>
+                <constraint firstItem="bYG-Hy-MzW" firstAttribute="top" secondItem="M5a-8u-W72" secondAttribute="bottom" id="CYM-vv-ZzZ"/>
+                <constraint firstAttribute="trailing" secondItem="M5a-8u-W72" secondAttribute="trailing" id="I90-xK-FZ7"/>
+                <constraint firstAttribute="bottom" secondItem="lFk-B3-S4y" secondAttribute="bottom" id="KjO-Qw-eDN"/>
+                <constraint firstItem="M5a-8u-W72" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="MtX-il-tmc"/>
+                <constraint firstItem="M5a-8u-W72" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Zeb-Tp-oIt"/>
+                <constraint firstItem="bYG-Hy-MzW" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="eQy-Eh-Knx"/>
+                <constraint firstItem="lFk-B3-S4y" firstAttribute="top" secondItem="bYG-Hy-MzW" secondAttribute="bottom" id="qlJ-yg-rWB"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-8.5" y="-18"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="honorable_bj_close" width="30" height="30"/>
+    </resources>
+</document>

@@ -10,6 +10,11 @@
 
 @implementation UCFGoldRaiseSectionHeaderView
 
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    self.backgroundColor = UIColorWithRGB(0xf9f9f9);
+}
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

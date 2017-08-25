@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="265" height="240"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qJd-l1-TF3">
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qJd-l1-TF3">
                     <rect key="frame" x="0.0" y="0.0" width="265" height="195"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LLy-Mi-Qah">
@@ -61,6 +61,11 @@
                                 <constraint firstAttribute="trailing" secondItem="iqb-L4-d0E" secondAttribute="trailing" constant="15" id="xv5-0N-PDA"/>
                                 <constraint firstItem="8iD-JV-XUp" firstAttribute="top" secondItem="LLy-Mi-Qah" secondAttribute="top" constant="15" id="yIW-A7-zNg"/>
                             </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="0.0"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CVq-Qw-Vlc">
                             <rect key="frame" x="0.0" y="110" width="265" height="85"/>
@@ -125,6 +130,11 @@
                                 <constraint firstItem="cYl-Bi-g3h" firstAttribute="centerY" secondItem="1D4-SK-7zd" secondAttribute="centerY" id="wX8-0p-7Te"/>
                                 <constraint firstItem="eQ9-gq-EUL" firstAttribute="top" secondItem="0Pe-gE-mXo" secondAttribute="bottom" constant="6" id="xyF-i0-cmf"/>
                             </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="0.0"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
                         </view>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -138,6 +148,11 @@
                         <constraint firstItem="CVq-Qw-Vlc" firstAttribute="leading" secondItem="qJd-l1-TF3" secondAttribute="leading" id="rdZ-t8-306"/>
                         <constraint firstItem="LLy-Mi-Qah" firstAttribute="top" secondItem="qJd-l1-TF3" secondAttribute="top" id="uwu-az-Nvf"/>
                     </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="10"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FaM-rV-aVx">
                     <rect key="frame" x="132" y="195" width="1" height="15"/>

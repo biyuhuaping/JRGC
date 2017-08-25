@@ -14,8 +14,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *firstLabel;
 @property (weak, nonatomic) IBOutlet UILabel *secondLabel;
 @property (weak, nonatomic) IBOutlet UIButton *contractButton;
-@property (weak, nonatomic) IBOutlet UIView *upLine;
-@property (weak, nonatomic) IBOutlet UIView *downLine;
+
+@property (weak, nonatomic) IBOutlet UIView *upSegLine;
+@property (weak, nonatomic) IBOutlet UIView *downSegLine;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *upLineLeftSpace;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *downLineLeftSpace;
 
 @end
 
@@ -38,7 +41,37 @@
 - (void)setIndexPath:(NSIndexPath *)indexPath
 {
     _indexPath = indexPath;
+    NSInteger totalRows = [self.tableview numberOfRowsInSection:indexPath.section];
     
+    if (totalRows == 1) { // 这组只有1行
+        self.downSegLine.hidden = NO;
+        self.upSegLine.hidden = NO;
+        self.upSegLine.backgroundColor = UIColorWithRGB(0xe3e5ea);
+        self.downSegLine.backgroundColor = UIColorWithRGB(0xd8d8d8);
+        self.upLineLeftSpace.constant = 0;
+        self.downLineLeftSpace.constant = 0;
+    } else if (indexPath.row == 0) { // 这组的首行(第0行)
+        self.upSegLine.hidden = NO;
+        self.downSegLine.hidden = NO;
+        self.upSegLine.backgroundColor = UIColorWithRGB(0xd8d8d8);
+        self.downSegLine.backgroundColor = UIColorWithRGB(0xe3e5ea);
+        self.upLineLeftSpace.constant = 0;
+        self.downLineLeftSpace.constant = 0;
+    } else if (indexPath.row == totalRows - 1) { // 这组的末行(最后1行)
+        self.upSegLine.hidden = YES;
+        self.downSegLine.hidden = NO;
+        self.upSegLine.backgroundColor = UIColorWithRGB(0xe3e5ea);
+        self.downSegLine.backgroundColor = UIColorWithRGB(0xd8d8d8);
+        self.upLineLeftSpace.constant = 15;
+        self.downLineLeftSpace.constant = 0;
+    } else {
+        self.upSegLine.hidden = YES;
+        self.downSegLine.hidden = NO;
+        self.upSegLine.backgroundColor = UIColorWithRGB(0xe3e5ea);
+        self.downSegLine.backgroundColor = UIColorWithRGB(0xe3e5ea);
+        self.upLineLeftSpace.constant = 15;
+        self.downLineLeftSpace.constant = 15;
+    }
 }
 
 - (void)layoutSubviews
@@ -55,8 +88,8 @@
         self.contentView.backgroundColor = [UIColor whiteColor];
         self.secondLabel.hidden = NO;
         self.contractButton.hidden = YES;
-        self.secondLabel.text = self.model.tradeTime;
         if (self.indexPath.row == 1) {
+            self.secondLabel.text = self.model.tradeTime;
             if ([self.model.orderTypeName isEqualToString:@"购买活期"]) {
                 self.firstLabel.text = @"成交日期";
             }
@@ -68,22 +101,25 @@
             }
         }
         else if (self.indexPath.row == 2) {
+            self.secondLabel.text = [NSString stringWithFormat:@"%@元/克", self.model.dealGoldPrice];
             if ([self.model.orderTypeName isEqualToString:@"购买活期"]) {
                 self.firstLabel.text = @"成交金价";
-                self.secondLabel.text = self.model.tradeMoney;
-            }
-            else if ([self.model.orderTypeName isEqualToString:@"定期转活期"]) {
-                self.firstLabel.text = @"转存克重";
-                self.secondLabel.text = self.model.tradeAmount;
             }
             else {
-                self.firstLabel.text = @"返金克重";
-                self.secondLabel.text = self.model.tradeAmount;
+                self.firstLabel.text = @"转入金价";
             }
         }
         else if (self.indexPath.row == 3) {
-            self.firstLabel.text = @"购买克重";
-            self.secondLabel.text = self.model.tradeAmount;
+            self.secondLabel.text = [NSString stringWithFormat:@"%@克", self.model.tradeAmount];
+            if ([self.model.orderTypeName isEqualToString:@"购买活期"]) {
+                self.firstLabel.text = @"购买克重";
+            }
+            else if ([self.model.orderTypeName isEqualToString:@"定期转活期"]) {
+                self.firstLabel.text = @"转存克重";
+            }
+            else {
+                self.firstLabel.text = @"返金克重";
+            }
         }
         else {
             self.secondLabel.hidden = YES;

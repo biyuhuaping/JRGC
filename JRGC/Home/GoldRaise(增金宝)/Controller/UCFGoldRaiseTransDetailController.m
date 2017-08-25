@@ -49,7 +49,7 @@
         [weakSelf getDataFromNet];
     }];
     self.tableview.footer.hidden = YES;
-    [self.tableview setContentInset:UIEdgeInsetsMake(5, 0, 5, 0)];
+//    [self.tableview setContentInset:UIEdgeInsetsMake(5, 0, 5, 0)];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -59,12 +59,18 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
+    if (section == 0) {
+        return 10.0;
+    }
     return 5.0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    return 5;
+    if (section == self.dataArray.count-1) {
+        return 10;
+    }
+    return 5.0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -74,7 +80,7 @@
         return 4 + listModel.nmContractModelList.count;
     }
     else {
-        return 3;
+        return 4;
     }
     return 0;
 }

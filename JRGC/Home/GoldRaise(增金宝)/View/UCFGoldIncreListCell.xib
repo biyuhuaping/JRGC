@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13122.19" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.16"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -19,28 +19,52 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ogI-jk-T7S">
-                        <rect key="frame" x="15" y="11.5" width="42" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <rect key="frame" x="15" y="14.5" width="31" height="14.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nPm-KL-zvm">
-                        <rect key="frame" x="263" y="11" width="42" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <rect key="frame" x="274" y="15" width="31" height="14.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qSG-CD-pRt">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="0.5"/>
+                        <color key="backgroundColor" red="0.8901960784313725" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="0.5" id="4VA-TR-3He"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vQ1-tQ-ZnS">
+                        <rect key="frame" x="0.0" y="43" width="320" height="0.5"/>
+                        <color key="backgroundColor" red="0.84705882352941175" green="0.84705882352941175" blue="0.84705882352941175" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="0.5" id="wHt-wh-G1j"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="trailing" secondItem="qSG-CD-pRt" secondAttribute="trailing" id="1Ro-Hi-6Ij"/>
                     <constraint firstItem="ogI-jk-T7S" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="2Dt-GF-7Hq"/>
                     <constraint firstItem="ogI-jk-T7S" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="8in-eo-lIR"/>
+                    <constraint firstItem="vQ1-tQ-ZnS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Ido-iP-Nvy"/>
+                    <constraint firstItem="qSG-CD-pRt" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Nkj-Nd-4VE"/>
+                    <constraint firstAttribute="trailing" secondItem="vQ1-tQ-ZnS" secondAttribute="trailing" id="adf-Oz-ZJb"/>
+                    <constraint firstItem="qSG-CD-pRt" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="eGc-8L-XkB"/>
                     <constraint firstAttribute="trailing" secondItem="nPm-KL-zvm" secondAttribute="trailing" constant="15" id="fUD-nn-dwI"/>
                     <constraint firstItem="nPm-KL-zvm" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="rNZ-gN-yed"/>
+                    <constraint firstAttribute="bottom" secondItem="vQ1-tQ-ZnS" secondAttribute="bottom" id="xNr-x9-vsU"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="desLabel" destination="nPm-KL-zvm" id="lSB-Bi-aOM"/>
+                <outlet property="downLineLeftSpace" destination="Ido-iP-Nvy" id="qAH-my-tlY"/>
+                <outlet property="downSegLine" destination="vQ1-tQ-ZnS" id="cuK-Sq-vuM"/>
                 <outlet property="monthDayLabel" destination="ogI-jk-T7S" id="xgp-jZ-KUu"/>
+                <outlet property="upLineLeftSpace" destination="Nkj-Nd-4VE" id="MuA-hI-07o"/>
+                <outlet property="upSegLine" destination="qSG-CD-pRt" id="8RF-u8-54m"/>
             </connections>
         </tableViewCell>
     </objects>
