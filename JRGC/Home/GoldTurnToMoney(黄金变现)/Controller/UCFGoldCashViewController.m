@@ -166,13 +166,15 @@
 }
 
 - (void)initData {
-    NSString *tipOneStr = [NSString stringWithFormat:@"黄金价格实时波动，在0.50元的波动范围内成交，成交瞬间系统价格不低于%.2f/克则立即为你变现", ([ToolSingleTon sharedManager].readTimePrice - 0.5)];
+    NSString *tipOneStr = [NSString stringWithFormat:@"黄金价格实时波动，在0.50元的波动范围内成交，成交瞬间系统价格不低于%.2f元/克则立即为你变现", ([ToolSingleTon sharedManager].readTimePrice - 0.5)];
     NSArray *tipsArray = [[NSArray alloc] initWithObjects:tipOneStr, @"温馨提示:", nil];
     [self.dataArray removeAllObjects];
     for (NSString *str in tipsArray) {
         UCFGoldCashModel *model = [[UCFGoldCashModel alloc] init];
         if (str == [tipsArray firstObject]) {
             model.tipString = str;
+            NSString *str1 = [NSString stringWithFormat:@"%.2f元/克", ([ToolSingleTon sharedManager].readTimePrice - 0.5)];
+            model.changeColorStrs = @[@"0.50元", str1];
             model.isShowBlackDot = NO;
             CGSize size = [self sizeWithString:str font:[UIFont systemFontOfSize:13] constraintSize:CGSizeMake(ScreenWidth - 40, MAXFLOAT)];
             model.cellHeight = size.height;
@@ -269,7 +271,12 @@
                 }
                 cell.delegate = self;
                 if (self.cashServiceRate && self.amoutCell.textField.text > 0) {
-                    CGFloat cashMoney = ([ToolSingleTon sharedManager].readTimePrice-[self.cashServiceRate doubleValue]) * [self.amoutCell.textField.text doubleValue];
+                    CGFloat goldAmount = [self.amoutCell.textField.text doubleValue];
+                    if (goldAmount < 0.1 && goldAmount > 0) {
+                        goldAmount = 0.1;
+                    }
+                    CGFloat cashMoney = ([ToolSingleTon sharedManager].readTimePrice-[self.cashServiceRate doubleValue]) * goldAmount;
+                    
                     cell.cashServiceFee.text = [NSString stringWithFormat:@"%.2f元", cashMoney];
                 }
                 return cell;
@@ -326,6 +333,11 @@
     else if (indexPath.section == 3) {
         UCFGoldCashModel *model = [self.dataArray objectAtIndex:(indexPath.row + 1)];
         return model.cellHeight;
+    }
+    else if (indexPath.section == 0) {
+        if (indexPath.row == 1) {
+            return 47;
+        }
     }
     return 44;
 }
@@ -392,9 +404,13 @@
         view.frame = CGRectMake(0, 0, 265, 245);
         
         UCFCashGoldTipview *tipview = (UCFCashGoldTipview *)[[[NSBundle mainBundle] loadNibNamed:@"UCFCashGoldTipview" owner:self options:nil] lastObject];
-        tipview.realGoldPriceLabel.text = [NSString stringWithFormat:@"%.2f元", [ToolSingleTon sharedManager].readTimePrice * [self.amoutCell.textField.text doubleValue]];
-        tipview.serviceFeeLabel.text = [NSString stringWithFormat:@"%.2f元", [weakSelf.cashServiceRate doubleValue] * [self.amoutCell.textField.text doubleValue]];
-        tipview.actualGoldPriceLabel.text = [NSString stringWithFormat:@"%.2f元", ([ToolSingleTon sharedManager].readTimePrice-[weakSelf.cashServiceRate doubleValue]) * [self.amoutCell.textField.text doubleValue]];
+        CGFloat goldAmount = [weakSelf.amoutCell.textField.text doubleValue];
+        if (goldAmount < 0.1 && goldAmount > 0) {
+            goldAmount = 0.1;
+        }
+        tipview.realGoldPriceLabel.text = [NSString stringWithFormat:@"%.2f元", [ToolSingleTon sharedManager].readTimePrice * goldAmount];
+        tipview.serviceFeeLabel.text = [NSString stringWithFormat:@"%.2f元", [weakSelf.cashServiceRate doubleValue] * goldAmount];
+        tipview.actualGoldPriceLabel.text = [NSString stringWithFormat:@"%.2f元", ([ToolSingleTon sharedManager].readTimePrice-[weakSelf.cashServiceRate doubleValue]) * goldAmount];
         tipview.frame = view.bounds;
         view.center = CGPointMake(ScreenWidth * 0.5, ScreenHeight * 0.5);
         tipview.delegate = weakSelf;

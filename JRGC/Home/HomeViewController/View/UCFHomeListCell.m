@@ -33,6 +33,7 @@
 @property (weak, nonatomic) IBOutlet UIView *proSignBackView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *proSignBackViewWidth;
 @property (weak, nonatomic) IBOutlet UILabel *proSignLabel;
+@property (weak, nonatomic) IBOutlet UILabel *goldTtileThird;
 
 @property (weak, nonatomic) IBOutlet UIView *upSegLine;
 @property (weak, nonatomic) IBOutlet UIView *downSegLine;
@@ -80,8 +81,16 @@
         else {
             self.timeLabel.text = [NSString stringWithFormat:@"%@", presenter.repayPeriodtext];
         }
-        self.repayModelLabel.text = presenter.repayModeText;
-        self.remainLabel.text = presenter.availBorrowAmount;
+        if ([presenter.item.type isEqualToString:@"3"]) {
+            self.remainLabel.text = @"期限";
+            self.repayModelLabel.text = presenter.availBorrowAmount;
+        }
+        else {
+            self.repayModelLabel.text = presenter.repayModeText;
+            self.remainLabel.text = presenter.availBorrowAmount;
+        }
+        
+        
         if (presenter.platformSubsidyExpense.length > 0) {//贴
             self.image1W.constant = 18;
             self.proImageView1.image = [UIImage imageNamed:@"invest_icon_buletie"];
@@ -132,6 +141,9 @@
         DBLOG(@"type : %@", presenter.item.type);
         if([presenter.item.type isEqualToString:@"3"])
         {
+            self.goldTtileThird.hidden = NO;
+            self.timeLabel.font = [UIFont systemFontOfSize:11];
+            self.repayModelLabel.font = [UIFont systemFontOfSize:11];
             if (status == 1) {
                 self.circleProgressView.pathFillColor = UIColorWithRGB(0xffc027);
                 //            self.progressView.progressLabel.textColor = UIColorWithRGB(0x555555);
@@ -142,6 +154,9 @@
             self.startMoneyLabel.text = @"年化收益克重";
         }
         else{
+            self.goldTtileThird.hidden = YES;
+            self.timeLabel.font = [UIFont systemFontOfSize:12];
+            self.repayModelLabel.font = [UIFont systemFontOfSize:12];
             //控制进度视图显示
             if (status < 3) {
                 self.circleProgressView.pathFillColor = UIColorWithRGB(0xfa4d4c);
@@ -274,7 +289,7 @@
     if (self.presenter.modelType == UCFHomeListCellModelTypeDefault) {
         if ([self.presenter.type isEqualToString:@"3"] || self.goldModel) {
             [self.rateLabel setFont:[UIFont systemFontOfSize:10] string:@"克/100克"];
-            self.annurateLabelW.constant = 52;
+            self.annurateLabelW.constant = 45;
             self.rateLabel.textColor = UIColorWithRGB(0xfc8f0e);
             self.proSignBackView.backgroundColor = UIColorWithRGB(0xffc027);
         }
@@ -495,19 +510,17 @@
 {
     _goldModel = goldModel;
     self.rateLabel.font = [UIFont systemFontOfSize:15];
+    self.goldTtileThird.hidden = NO;
+    self.timeLabel.font = [UIFont systemFontOfSize:11];
+    self.repayModelLabel.font = [UIFont systemFontOfSize:11];
     self.proName.text = goldModel.nmPrdClaimName;
     self.rateLabel.text = [NSString stringWithFormat:@"%@克/100克", goldModel.annualRate];
     [self.rateLabel setFont:[UIFont systemFontOfSize:10] string:@"克/100克"];
     self.timeLabel.text = goldModel.periodTerm;
-    self.repayModelLabel.text = goldModel.paymentType;
+    self.repayModelLabel.text = [NSString stringWithFormat:@"%@克", goldModel.remainAmount];
     self.startMoneyLabel.text = @"年化收益克重";
 //    [NSString stringWithFormat:@"%@克起", goldModel.minPurchaseAmount];
-    if ([goldModel.remainAmount floatValue] > 0) {
-        self.remainLabel.text = [NSString stringWithFormat:@"剩%@克", goldModel.remainAmount];
-    }
-    else {
-        self.remainLabel.text = [NSString stringWithFormat:@"%@克", goldModel.totalAmount];
-    }
+    self.remainLabel.text = @"期限";
     
     NSInteger status = [goldModel.status integerValue];
     

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13122.19" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.16"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -51,13 +51,13 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2.00%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kd8-6z-wVu" customClass="NZLabel">
-                        <rect key="frame" x="128" y="54.5" width="64.5" height="25.5"/>
-                        <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
+                        <rect key="frame" x="125" y="54.5" width="70.5" height="27.5"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
                         <color key="textColor" red="0.98823529409999999" green="0.56078431370000004" blue="0.054901960780000002" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="年化收益率" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OMq-0B-YR5">
-                        <rect key="frame" x="132" y="83" width="56.5" height="13.5"/>
+                        <rect key="frame" x="132" y="80" width="56.5" height="13.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -69,6 +69,7 @@
                             <constraint firstAttribute="width" constant="60" id="fBH-bf-zBb"/>
                             <constraint firstAttribute="height" constant="30" id="x9V-Hh-B69"/>
                         </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <state key="normal" title="购买">
                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
@@ -102,7 +103,7 @@
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F3O-Li-wNx">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="0.5"/>
-                        <color key="backgroundColor" red="0.84705882352941175" green="0.84705882352941175" blue="0.84705882352941175" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.8901960784313725" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="0.5" id="RQR-qJ-80h"/>
                         </constraints>
@@ -110,7 +111,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="X4h-mS-dSI" firstAttribute="top" secondItem="Ijz-Br-af3" secondAttribute="bottom" constant="10" id="2NX-nk-VfV"/>
-                    <constraint firstItem="OMq-0B-YR5" firstAttribute="top" secondItem="kd8-6z-wVu" secondAttribute="bottom" constant="3" id="D8I-E6-h9R"/>
+                    <constraint firstItem="OMq-0B-YR5" firstAttribute="top" secondItem="kd8-6z-wVu" secondAttribute="bottom" constant="-2" id="D8I-E6-h9R"/>
                     <constraint firstItem="L70-gE-1vf" firstAttribute="centerY" secondItem="a3k-Ik-jm9" secondAttribute="centerY" id="JDx-Go-A9F"/>
                     <constraint firstItem="a3k-Ik-jm9" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="25" id="K1J-kD-mzi"/>
                     <constraint firstItem="qMu-bG-GvN" firstAttribute="centerY" secondItem="X4h-mS-dSI" secondAttribute="centerY" id="Tb5-gQ-Pz6"/>

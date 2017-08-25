@@ -8,10 +8,11 @@
 
 #import "UCFGoldCashTipCell.h"
 #import "UCFGoldCashModel.h"
+#import "NZLabel.h"
 
 @interface UCFGoldCashTipCell ()
 @property (weak, nonatomic) IBOutlet UIImageView *dotImageView;
-@property (weak, nonatomic) IBOutlet UILabel *tipLabel;
+@property (weak, nonatomic) IBOutlet NZLabel *tipLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tipLeftSpace;
 
 @end
@@ -29,6 +30,11 @@
     self.dotImageView.hidden = !self.goldCashModel.isShowBlackDot;
     self.tipLeftSpace.constant = self.goldCashModel.isShowBlackDot ? 25 : 15;
     self.tipLabel.text = self.goldCashModel.tipString;
+    if (self.goldCashModel.changeColorStrs.count > 0) {
+        for (NSString *str in self.goldCashModel.changeColorStrs) {
+            [self.tipLabel setFontColor:UIColorWithRGB(0xfc8f0e) string:str];
+        }
+    }
 }
 
 @end
