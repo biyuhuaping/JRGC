@@ -73,7 +73,7 @@
         [self.baseTableView.footer resetNoMoreData];
     }
     if (uuid) {
-        strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:uuid,@"userId", [NSString stringWithFormat:@"%ld", (long)self.currentPage], @"page", @"20", @"pageSize", nil];
+        strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:uuid,@"userId", [NSString stringWithFormat:@"%ld", (long)self.currentPage], @"pageNo", @"20", @"pageSize", nil];
     }
     [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagGoldTradeFlowList owner:self signature:YES Type:SelectAccoutDefault];
 }
