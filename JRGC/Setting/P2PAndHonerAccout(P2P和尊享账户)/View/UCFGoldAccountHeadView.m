@@ -120,7 +120,7 @@
 - (void)updateGoldAccount:(NSDictionary *)dataDic
 {
     self.tmpData = dataDic;
-    self.holdGoldGram.text =[NSString stringWithFormat:@"%@ 克",[dataDic objectSafeForKey:@"holdGoldAmount"]];
+    self.holdGoldGram.text =[NSString stringWithFormat:@"%@克",[dataDic objectSafeForKey:@"holdGoldAmount"]];
     self.holdGoldGram.attributedText = [Common changeLabelWithAllStr:self.holdGoldGram.text Text:@"克" Font:14];
     NSString  *goldValue = [self switchGoldPriceFormat:[dataDic objectSafeForKey:@"holdGoldAmount"]];
     NSString *available = [UCFToolsMehod AddComma:goldValue];

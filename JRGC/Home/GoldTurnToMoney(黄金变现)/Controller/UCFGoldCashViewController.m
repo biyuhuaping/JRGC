@@ -144,7 +144,7 @@
         self.liquidateToken = cashGoldResu.liquidateToken;
         self.goldAveragePrice = cashGoldResu.dealGoldPrice;
         if ([[dic objectForKey:@"code"] integerValue] == 43068) {
-            NSString *meg = [NSString stringWithFormat:@"由于金价实时波动，变现是金价跌至%@元/克", self.cashGoldResult.dealGoldPrice];
+            NSString *meg = [NSString stringWithFormat:@"由于金价实时波动，变现时金价降至%@元/克，是否继续变现？", self.cashGoldResult.dealGoldPrice];
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:meg delegate:self cancelButtonTitle:@"放弃变现" otherButtonTitles:@"继续变现", nil];
             [alertView show];
             return;

@@ -775,6 +775,7 @@
 		A828D6B41F1F30C200662266 /* UCFExtractGoldViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A828D6B21F1F30C200662266 /* UCFExtractGoldViewController.xib */; };
 		A829E0A71ED42D0C00616FFE /* guideImage6_4.png in Resources */ = {isa = PBXBuildFile; fileRef = A829E0A51ED42D0C00616FFE /* guideImage6_4.png */; };
 		A829E0A81ED42D0C00616FFE /* guideImage7_4.png in Resources */ = {isa = PBXBuildFile; fileRef = A829E0A61ED42D0C00616FFE /* guideImage7_4.png */; };
+		A82FBA6A1F4FD40900FD79BC /* CoustomLab.m in Sources */ = {isa = PBXBuildFile; fileRef = A82FBA691F4FD40900FD79BC /* CoustomLab.m */; };
 		A851F3481F132713003DE8B8 /* UCFGoldTransactionHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = A851F3471F132713003DE8B8 /* UCFGoldTransactionHeadView.m */; };
 		A851F34A1F132739003DE8B8 /* UCFGoldTransactionHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A851F3491F132739003DE8B8 /* UCFGoldTransactionHeadView.xib */; };
 		A851F34E1F132D2C003DE8B8 /* UCFGoldTransCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A851F34C1F132D2C003DE8B8 /* UCFGoldTransCell.m */; };
@@ -2331,6 +2332,8 @@
 		A828D6B21F1F30C200662266 /* UCFExtractGoldViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFExtractGoldViewController.xib; sourceTree = "<group>"; };
 		A829E0A51ED42D0C00616FFE /* guideImage6_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guideImage6_4.png; sourceTree = "<group>"; };
 		A829E0A61ED42D0C00616FFE /* guideImage7_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guideImage7_4.png; sourceTree = "<group>"; };
+		A82FBA681F4FD40900FD79BC /* CoustomLab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoustomLab.h; sourceTree = "<group>"; };
+		A82FBA691F4FD40900FD79BC /* CoustomLab.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoustomLab.m; sourceTree = "<group>"; };
 		A851F3461F132713003DE8B8 /* UCFGoldTransactionHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFGoldTransactionHeadView.h; sourceTree = "<group>"; };
 		A851F3471F132713003DE8B8 /* UCFGoldTransactionHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFGoldTransactionHeadView.m; sourceTree = "<group>"; };
 		A851F3491F132739003DE8B8 /* UCFGoldTransactionHeadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFGoldTransactionHeadView.xib; sourceTree = "<group>"; };
@@ -4733,6 +4736,7 @@
 		7BC304311ACB9CDB007767F1 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				A82FBA671F4FD3EC00FD79BC /* CoustomLab */,
 				A8C34F301F2734A800926B7F /* RotationButton */,
 				A8DE852B1EC3012B004B3533 /* WalletHelper */,
 				A8AD2E381EB979240013DB7C /* MongoliaLayer */,
@@ -6190,6 +6194,16 @@
 				84FAB60B1C7C575300D0942F /* MGSwipeTableCell.m */,
 			);
 			path = MGSwipeTableCell;
+			sourceTree = "<group>";
+		};
+		A82FBA671F4FD3EC00FD79BC /* CoustomLab */ = {
+			isa = PBXGroup;
+			children = (
+				A82FBA681F4FD40900FD79BC /* CoustomLab.h */,
+				A82FBA691F4FD40900FD79BC /* CoustomLab.m */,
+			);
+			name = CoustomLab;
+			path = Tools/CoustomLab;
 			sourceTree = "<group>";
 		};
 		A8A3A57C1EE95BDA00D9C06D /* APIManager */ = {
@@ -7684,6 +7698,7 @@
 				83F82E861EBC5DD200B79E02 /* UCFProductListModel.m in Sources */,
 				74931A331B1326FE00143424 /* OHTouchesGestureRecognizer.m in Sources */,
 				74270C991EC58F6800F9419B /* UCFHomeListPresenter.m in Sources */,
+				A82FBA6A1F4FD40900FD79BC /* CoustomLab.m in Sources */,
 				4AF9C5E91B0B419600E3BE7D /* RechargeListCell.m in Sources */,
 				7470EC091B036B71006DDCEF /* UIImage+zhang.m in Sources */,
 				747B103B1F15F82200CECB2C /* UCFGoldenHeaderView.m in Sources */,

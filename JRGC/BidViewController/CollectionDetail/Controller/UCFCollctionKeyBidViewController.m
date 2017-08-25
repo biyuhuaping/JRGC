@@ -397,8 +397,8 @@
     
     self.maxBatchAmount =[NSString stringWithFormat:@"%@",[self.dataDict objectSafeForKey:@"batchAmount"]];
     
-    if (self.maxBatchAmount.length != 0) {
-        if ([Common stringA:investMoney ComparedStringB:self.maxBatchAmount] == 1) {
+    if ([self.maxBatchAmount longLongValue] > 0  && ![UserInfoSingle sharedManager].companyAgent) {
+        if ([Common stringA:investMoney ComparedStringB:self.maxBatchAmount] == 1 ) {
             
             NSString *mesageStr = [NSString stringWithFormat:@"出借金额超过批量出借单笔限额，您设置的批量出借金额单笔限额为%@元",self.maxBatchAmount];
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:mesageStr delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"修改", nil];

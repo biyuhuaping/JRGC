@@ -999,10 +999,9 @@
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
-//          NSLog(@"scrollView.contentOffset.y---->>>>>>%f",scrollView.contentOffset.y);
     CGFloat offsetFloat;
     if (kIS_Iphone4) {
-        offsetFloat = _isGoldCurrentAccout ? 190 : 64;
+        offsetFloat = _isGoldCurrentAccout ? 185 : 64;
     } else {
         offsetFloat = _isGoldCurrentAccout ? 120 : 80;
     }

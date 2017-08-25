@@ -25,11 +25,11 @@
 #import "NSString+FormatForThousand.h"
 
 #import "GiFHUD.h"
-
+#import "CoustomLab.h"
 
 @interface UCFBaseViewController : UIViewController<NetworkModuleDelegate,MBProgressHUDDelegate>
 {
-    UILabel *baseTitleLabel;
+    CoustomLab *baseTitleLabel;
     UIView *lineViewAA;
 }
 

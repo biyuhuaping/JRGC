@@ -250,6 +250,10 @@
         _headerView.frame = CGRectMake(0, 0, ScreenWidth, 210);
         _headerView.deleage = self;
         self.baseTableView.tableHeaderView = _headerView;
+        
+        UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 10)];
+        footView.backgroundColor = UIColorWithRGB(0xebebee);
+        self.baseTableView.tableFooterView = footView;
     }
     [self.baseTableView addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(getNetData)];
 
@@ -261,7 +265,7 @@
 }
 - (void)addRightBtn {
     UIButton *rightbutton = [UIButton buttonWithType:UIButtonTypeCustom];
-    rightbutton.frame = CGRectMake(0, 0, 88, 44);
+    rightbutton.frame = CGRectMake(0, 0, 66, 44);
     rightbutton.backgroundColor = [UIColor clearColor];
     [rightbutton setTitle:@"交易记录" forState:UIControlStateNormal];
     rightbutton.titleLabel.font = [UIFont systemFontOfSize:15.0];

@@ -35,7 +35,7 @@
      
      */
     self.goldAccountLab.text  = [NSString stringWithFormat:@"%@克",model.goldAccount];
-    [self.goldAccountLab setFont:[UIFont systemFontOfSize:20] string:@"克"];
+    [self.goldAccountLab setFont:[UIFont boldSystemFontOfSize:12] string:@"克"];
     self.remarkLab.text = model.remark;
     self.overdueTimeLab.text = [NSString stringWithFormat:@"有效期%@",model.overdueTime];
     self.investMinLab.text  = [NSString stringWithFormat:@"购买%@克可用",model.investMin];
