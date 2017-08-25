@@ -616,12 +616,32 @@
             NSString *goldAccountSumStr = [self.goldCouponDataDict objectSafeForKey:@"goldAccountSum"];
             NSString *investMinSumStr = [self.goldCouponDataDict objectSafeForKey:@"investMinSum"];
            availableLabel.text = [NSString stringWithFormat:@"返%@克黄金，购满%@克可用",goldAccountSumStr,investMinSumStr];
-            [availableLabel setFontColor:UIColorWithRGB(0xfc8f0e) string:goldAccountSumStr];
-            [availableLabel setFontColor:UIColorWithRGB(0xfc8f0e) string:investMinSumStr];
+            
+            NSString *total1 = [NSString stringWithFormat:@"返%@克黄金，购满%@克可用",goldAccountSumStr,investMinSumStr];
+//            [NSString stringWithFormat:@"返现¥%@,满¥%@可用",[UCFToolsMehod AddComma:couponSum],[UCFToolsMehod AddComma:couponPrdaimSum]];
+//            [availableLabel setFontColor:UIColorWithRGB(0xfc8f0e) string:goldAccountSumStr];
+//            [availableLabel setFontColor:UIColorWithRGB(0xfc8f0e) string:investMinSumStr];
+//            availableLabel.font = [UIFont systemFontOfSize:12.0f];
+            
+            NSRange range1 = [total1 rangeOfString:[NSString stringWithFormat:@"返%@",goldAccountSumStr]];
+            range1.location += 1;
+            range1.length -= 1;
+            NSRange range2 = [total1 rangeOfString:[NSString stringWithFormat:@"购满%@",investMinSumStr]];
+            range2.location += 2;
+            range2.length -= 2;
+            NSValue *value1 = [NSValue valueWithBytes:&range1 objCType:@encode(NSRange)];
+            NSValue *value2 = [NSValue valueWithBytes:&range2 objCType:@encode(NSRange)];
+            NSDictionary *attributeDict0 = [NSDictionary dictionaryWithObjectsAndKeys:
+                                            [UIFont boldSystemFontOfSize:12.0],NSFontAttributeName,
+                                            UIColorWithRGB(0xfc8f0e),NSForegroundColorAttributeName,nil];
+            
+            NSDictionary *attributeDict = [NSDictionary dictionaryWithObjectsAndKeys:UIColorWithRGB(0xfc8f0e),NSForegroundColorAttributeName,nil];
+            
+            availableLabel.attributedText = [Common twoSectionOfLabelShowDifferentAttribute:[NSArray arrayWithObjects:attributeDict,attributeDict0, nil] WithTextLocations:[NSArray arrayWithObjects:value1,value2, nil] WithTotalString:total1];
             availableLabel.font = [UIFont systemFontOfSize:12.0f];
         }else{
             availableLabel.text = [NSString stringWithFormat:@"%@张可用",_goldCouponNumStr];
-            [availableLabel setFontColor:UIColorWithRGB(0x333333) string:_goldCouponNumStr];
+            [availableLabel setFontColor:UIColorWithRGB(0xfc8f0e) string:_goldCouponNumStr];
             availableLabel.font = [UIFont systemFontOfSize:14.0f];
         }
         return cell;
