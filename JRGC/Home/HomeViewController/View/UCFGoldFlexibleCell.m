@@ -30,21 +30,34 @@
     [super awakeFromNib];
 }
 
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    [self.goldFlexibleRateLabel setFont:[UIFont systemFontOfSize:12] string:@"%"];
+}
+
 - (void)setPresenter:(UCFHomeListCellPresenter *)presenter
 {
     _presenter = presenter;
     self.goldFlexibleRateLabel.text = presenter.annualRate;
     self.minInvestLabel.text = presenter.minInvest;
     self.completeLabel.text = presenter.completeLoan;
-    if (presenter.status == 2) {
+    
+    if (presenter.status == 1) {
         self.buyButton.enabled = YES;
         self.buyButtonW.constant = 60;
         [self.buyButton setBackgroundColor:UIColorWithRGB(0xffc027)];
     }
-    else if (presenter.status == 4) {
+    else if (presenter.status == 2) {
+        [self.buyButton setTitle:@"售罄" forState:UIControlStateNormal];
+        self.buyButton.enabled = YES;
+        self.buyButtonW.constant = 60;
+        [self.buyButton setBackgroundColor:UIColorWithRGB(0xffc027)];
+    }
+    else if (presenter.status == 21) {
         self.buyButton.enabled = NO;
-        self.buyButtonW.constant = 80;
-        [self.buyButton setBackgroundColor:[UIColor lightGrayColor]];
+        self.buyButtonW.constant = 100;
+        [self.buyButton setBackgroundColor:UIColorWithRGB(0xcccccc)];
     }
     
     if (presenter.item.prdLabelsList.count > 0) {
@@ -73,15 +86,21 @@
     [self.goldFlexibleRateLabel setFont:[UIFont boldSystemFontOfSize:12] string:@"%"];
     self.minInvestLabel.text = [NSString stringWithFormat:@"%.3f克起", [goldmodel.minPurchaseAmount doubleValue]];
     self.completeLabel.text = [NSString stringWithFormat:@"已售%@克", goldmodel.totalAmount];
-    if (goldmodel.status.intValue == 2) {
+    if (goldmodel.status.intValue == 1) {
         self.buyButton.enabled = YES;
         self.buyButtonW.constant = 60;
         [self.buyButton setBackgroundColor:UIColorWithRGB(0xffc027)];
     }
-    else if (goldmodel.status.intValue == 4) {
+    else if (goldmodel.status.intValue == 2) {
+        [self.buyButton setTitle:@"售罄" forState:UIControlStateNormal];
+        self.buyButton.enabled = YES;
+        self.buyButtonW.constant = 60;
+        [self.buyButton setBackgroundColor:UIColorWithRGB(0xffc027)];
+    }
+    else if (goldmodel.status.intValue == 21) {
         self.buyButton.enabled = NO;
-        self.buyButtonW.constant = 80;
-        [self.buyButton setBackgroundColor:[UIColor lightGrayColor]];
+        self.buyButtonW.constant = 100;
+        [self.buyButton setBackgroundColor:UIColorWithRGB(0xcccccc)];
     }
     if (goldmodel.prdLabelsList.count > 0) {
         UCFProjectLabel *projectLabel = [goldmodel.prdLabelsList firstObject];
