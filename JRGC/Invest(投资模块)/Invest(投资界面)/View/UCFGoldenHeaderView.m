@@ -67,8 +67,10 @@
 }
 - (void)beginGetGoldPrice
 {
-    if (self.refreshBtn.userInteractionEnabled) {
-        [self refreshRealGoldPrice:nil];
+    if ([[Common getCurrentVC] isKindOfClass:[self.hostVc class]]) {
+        if (self.refreshBtn.userInteractionEnabled) {
+            [self refreshRealGoldPrice:nil];
+        }
     }
 }
 - (void)changeTransState

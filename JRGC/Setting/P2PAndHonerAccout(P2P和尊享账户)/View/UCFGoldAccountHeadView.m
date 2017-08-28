@@ -103,8 +103,10 @@
 }
 - (void)beginGetGoldPrice
 {
-    if (self.updateGoldPriceBtn.userInteractionEnabled) {
-        [self currentTimePriceBtnClicked:self.updateGoldPriceBtn];
+    if ([[Common getCurrentVC] isKindOfClass:[self.deleage class]]) {
+        if (self.updateGoldPriceBtn.userInteractionEnabled) {
+            [self currentTimePriceBtnClicked:self.updateGoldPriceBtn];
+        }
     }
 }
 - (IBAction)recoverBtnClicked:(UIButton *)sender {

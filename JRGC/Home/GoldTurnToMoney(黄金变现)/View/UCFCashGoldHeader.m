@@ -46,10 +46,13 @@
 {
     [self.refreshGoldPricebtn buttonEndTransform];
 }
+
 - (void)beginGetGoldPrice
 {
-    if (self.refreshGoldPricebtn.userInteractionEnabled) {
-        [self refreshRealGoldPrice:nil];
+    if ([[Common getCurrentVC] isKindOfClass:[self.hostVc class]]) {
+        if (self.refreshGoldPricebtn.userInteractionEnabled) {
+            [self refreshRealGoldPrice:nil];
+        }
     }
 }
 - (void)changeTransState

@@ -69,6 +69,7 @@
     
     self.tableview.tableHeaderView = cashGoldHeader;
     self.cashGoldHeader = cashGoldHeader;
+    cashGoldHeader.hostVc = self;
     
     [self.tableview setContentInset:UIEdgeInsetsMake(10, 0, 100, 0)];
     

@@ -62,6 +62,7 @@
     UCFGoldenHeaderView *goldenHeader = (UCFGoldenHeaderView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFGoldenHeaderView" owner:self options:nil] lastObject];
     self.tableview.tableHeaderView = goldenHeader;
     self.goldenHeader = goldenHeader;
+    goldenHeader.hostVc = self;
     
     [self.tableview addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(refreshData)];
     __weak typeof(self) weakSelf = self;

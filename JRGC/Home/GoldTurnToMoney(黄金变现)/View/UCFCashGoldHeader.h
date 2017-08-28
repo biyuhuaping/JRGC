@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface UCFCashGoldHeader : UIView
-
+@property (weak, nonatomic) id hostVc;
 @end
