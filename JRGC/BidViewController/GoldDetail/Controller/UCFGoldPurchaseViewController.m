@@ -99,6 +99,7 @@
 {
     self.goldModel = [UCFGoldModel goldModelWithDict:[_dataDic objectSafeDictionaryForKey:@"nmPrdClaimInfo"]];
     
+    
     _prdLabelsList = [[_dataDic objectSafeDictionaryForKey:@"nmPrdClaimInfo"] objectSafeArrayForKey:@"prdLabelsList"];
     
     self.nmPurchaseTokenStr = [_dataDic objectSafeForKey:@"nmPurchaseToken"];
@@ -556,8 +557,8 @@
             if (!cell) {
                 cell = [[[NSBundle mainBundle]loadNibNamed:@"UCFGoldMoneyBoadCell" owner:nil options:nil] firstObject];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                cell.isGoldCurrentAccout = self.isGoldCurrentAccout;
             }
-            cell.isGoldCurrentAccout = self.isGoldCurrentAccout;
             cell.dataDict = self.dataDic;
             cell.goldModel  = _goldModel;
             cell.goldSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"SelectGoldGongDouSwitch"];
@@ -930,6 +931,9 @@
     
     double purchaseGoldCount  = 0.00;
     
+  
+
+    
     if (self.isSelectGongDouSwitch)
     {
         purchaseGoldCount = availableAllMoney /[ToolSingleTon sharedManager].readTimePrice;
@@ -939,10 +943,13 @@
        purchaseGoldCount = availableMoney /[ToolSingleTon sharedManager].readTimePrice;
     }
     
-    if(purchaseGoldCount >= [self.goldModel.remainAmount doubleValue])
-    {
-        purchaseGoldCount = [self.goldModel.remainAmount doubleValue];
+    if(!_isGoldCurrentAccout){ //黄金定期 做限购校验
+        if(purchaseGoldCount >= [self.goldModel.remainAmount doubleValue])
+        {
+            purchaseGoldCount = [self.goldModel.remainAmount doubleValue];
+        }
     }
+
     purchaseGoldCount =  purchaseGoldCount *1000;
     cell.moneyTextField.text =  [NSString stringWithFormat:@"%.3lf",(int)purchaseGoldCount/1000.0];
     

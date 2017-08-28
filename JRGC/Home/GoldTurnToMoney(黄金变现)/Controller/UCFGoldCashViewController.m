@@ -156,8 +156,8 @@
         cashSuc.rootVc = self.rootVc;
         cashSuc.cashResuModel = self.cashGoldResult;
         cashSuc.isPurchaseSuccess = [[dic objectSafeForKey:@"ret"] boolValue];
+        cashSuc.errorMessageStr = [dic objectSafeForKey:@"message"];
         [self.navigationController pushViewController:cashSuc animated:YES];
-
     }
 }
 
