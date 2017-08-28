@@ -400,7 +400,7 @@
         UILabel *msgLab = [baseView viewWithTag:202];
         if (type == MjGoldAlertViewTypeFloat) {
             titleLab.text = @"累计盈亏";
-            midLab.text = @"累计盈亏指消费者在金融工场尊享金的累计收益或亏损";
+            midLab.text = @"累计盈亏指消费者在金融工场尊享金的累计盈利或亏损";
             msgLab.text = @"消费者总盈亏=(消费者持有黄金市值+消费者变现总金额+消费者提取金条市值)-消费者购买总金额 ";
         } else if (type == MjGoldAlertViewTypeAverage) {
             titleLab.text = @"买入均价";
