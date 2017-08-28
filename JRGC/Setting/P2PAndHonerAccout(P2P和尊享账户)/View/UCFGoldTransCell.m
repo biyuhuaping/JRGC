@@ -45,10 +45,14 @@
         
     }
     self.dealType.text = _model.tradeTypeName;
+    self.dealMoney.hidden = NO;
     if ([_model.tradeTypeCode isEqualToString:@"99"]) { //买金
         self.turnoverLab.textColor = UIColorWithRGB(0xfd4d4c);
         self.dealMoney.textColor = UIColorWithRGB(0xfd4d4c);
     } else if ([_model.tradeTypeCode isEqualToString:@"98"]) { //冻结
+        self.turnoverLab.textColor = UIColorWithRGB(0x999999);
+        self.dealMoney.textColor = UIColorWithRGB(0x999999);
+    } else if ([_model.tradeTypeCode isEqualToString:@"109"]) {//变现冻结
         self.turnoverLab.textColor = UIColorWithRGB(0x999999);
         self.dealMoney.textColor = UIColorWithRGB(0x999999);
     } else if ([_model.tradeTypeCode isEqualToString:@"110"]) {//变现
@@ -57,9 +61,10 @@
     } else if ([_model.tradeTypeCode isEqualToString:@"111"]) {//收益克重
         self.turnoverLab.textColor = UIColorWithRGB(0xfd4d4c);
         self.dealMoney.textColor = UIColorWithRGB(0xfd4d4c);
+        self.dealMoney.hidden = YES;
     }
 
-    self.dealMoney.text = [NSString stringWithFormat:@"%@",_model.frozenMoney];
+    self.dealMoney.text = [NSString stringWithFormat:@"%@",_model.tradeMoney];
     self.turnoverLab.text = [NSString stringWithFormat:@"%@克",_model.purchaseAmount];
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
