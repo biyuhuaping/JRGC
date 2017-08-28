@@ -1017,8 +1017,8 @@
     double purchaseGoldAmount =  [cell.moneyTextField.text doubleValue];
     double minPurchaseAmount  =  [self.goldModel.minPurchaseAmount doubleValue];
     double maxPurchaseAmount  =  [self.goldModel.remainAmount doubleValue];
-    if(self.isGoldCurrentAccout){
-        maxPurchaseAmount = 1000;
+    if(self.isGoldCurrentAccout){//活期,没有限购克重，
+        maxPurchaseAmount = DBL_MAX;
     }
     if([cell.moneyTextField.text isEqualToString:@""] ){
         [MBProgressHUD displayHudError:@"请输入购入克重"];
