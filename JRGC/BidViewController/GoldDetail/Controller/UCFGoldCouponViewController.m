@@ -204,13 +204,16 @@
             if(_pageNo == 1)
             {
                 [self.dataArray removeAllObjects];
-                if (resultDataArray.count < 10) {
+                if (resultDataArray.count < 20) {
                     [self.tableView.footer noticeNoMoreData];
                 }
             }
             if(_pageNo <= _totalPage)
             {
                 _pageNo++;
+                if (resultDataArray.count < 20) {
+                    [self.tableView.footer noticeNoMoreData];
+                }
             }
             else
             {
@@ -238,10 +241,12 @@
             self.allSelectDataDict = dataDict;
             self.cellSelectCountStr = [NSString stringWithFormat:@"%d",_totalCount];
             NSString *tatolGetGoldAccoutStr = [NSString stringWithFormat:@"%@",[dataDict objectSafeForKey:@"goldAccountSum"]];
+            _tatolGetGoldAccout =  [tatolGetGoldAccoutStr doubleValue];
             self.selectTipStr.text = [NSString stringWithFormat:@"已选用%@张，可返金%@克",self.cellSelectCountStr,tatolGetGoldAccoutStr];
             [self.selectTipStr setFontColor:UIColorWithRGB(0xfc8c0e) string:self.cellSelectCountStr];
             [self.selectTipStr setFontColor:UIColorWithRGB(0xfc8c0e) string:tatolGetGoldAccoutStr];
             NSString *investMinSumStr = [dataDict objectSafeForKey:@"investMinSum"];
+            _tatolNeetGoldAccout = [investMinSumStr doubleValue];
             self.needGoldAccountLab.text = [NSString stringWithFormat:@"%@克",investMinSumStr];
             if ([investMinSumStr doubleValue] > [self.remainAmountStr doubleValue]) {
                 self.confirmUseGoldCouponBtn.userInteractionEnabled = NO;
@@ -252,7 +257,7 @@
             }
         }else{
         
-            
+              [AuxiliaryFunc showAlertViewWithMessage:message];
         }
     }
     [self endRefreshing];
@@ -327,7 +332,6 @@
         [self.navigationController popViewControllerAnimated:YES];
         return;
     }
-    
     
     if (self.allSelectBtn.selected) {//如果是全选,则用服务端的数据
         NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithDictionary:self.allSelectDataDict];

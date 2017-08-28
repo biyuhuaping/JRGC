@@ -593,7 +593,7 @@
             [button addTarget:self action:@selector(pushGoldCouponVC) forControlEvents:UIControlEventTouchUpInside];
             [cell addSubview:button];
             cell.textLabel.textColor = UIColorWithRGB(0x555555);
-            cell.textLabel.font = [UIFont systemFontOfSize:16.0f];
+            cell.textLabel.font = [UIFont systemFontOfSize:13.0f];
             
             UIImageView *arrowImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"list_icon_arrow"]];
             arrowImageView.frame = CGRectMake(ScreenWidth - 8 - 20,(44 - 13)/2, 8, 13);
@@ -601,7 +601,7 @@
             
             UILabel *availableLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, CGRectGetMinX(arrowImageView.frame) - 5, 44)];
             availableLabel.textColor = UIColorWithRGB(0x555555);
-            availableLabel.font = [UIFont systemFontOfSize:16.0f];
+            availableLabel.font = [UIFont systemFontOfSize:12.0f];
             availableLabel.text = @"0张可用";
             availableLabel.tag = 1001;
             availableLabel.textAlignment = NSTextAlignmentRight;
@@ -632,17 +632,17 @@
             NSValue *value1 = [NSValue valueWithBytes:&range1 objCType:@encode(NSRange)];
             NSValue *value2 = [NSValue valueWithBytes:&range2 objCType:@encode(NSRange)];
             NSDictionary *attributeDict0 = [NSDictionary dictionaryWithObjectsAndKeys:
-                                            [UIFont boldSystemFontOfSize:12.0],NSFontAttributeName,
+                                            [UIFont boldSystemFontOfSize:11.0],NSFontAttributeName,
                                             UIColorWithRGB(0xfc8f0e),NSForegroundColorAttributeName,nil];
             
             NSDictionary *attributeDict = [NSDictionary dictionaryWithObjectsAndKeys:UIColorWithRGB(0xfc8f0e),NSForegroundColorAttributeName,nil];
             
             availableLabel.attributedText = [Common twoSectionOfLabelShowDifferentAttribute:[NSArray arrayWithObjects:attributeDict,attributeDict0, nil] WithTextLocations:[NSArray arrayWithObjects:value1,value2, nil] WithTotalString:total1];
-            availableLabel.font = [UIFont systemFontOfSize:12.0f];
+            availableLabel.font = [UIFont systemFontOfSize:11.0f];
         }else{
             availableLabel.text = [NSString stringWithFormat:@"%@张可用",_goldCouponNumStr];
             [availableLabel setFontColor:UIColorWithRGB(0xfc8f0e) string:_goldCouponNumStr];
-            availableLabel.font = [UIFont systemFontOfSize:14.0f];
+            availableLabel.font = [UIFont systemFontOfSize:12.0f];
         }
         return cell;
 
