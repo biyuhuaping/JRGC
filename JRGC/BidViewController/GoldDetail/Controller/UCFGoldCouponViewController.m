@@ -240,13 +240,19 @@
             NSDictionary *dataDict  = [dic objectSafeDictionaryForKey:@"data"];
             self.allSelectDataDict = dataDict;
             self.cellSelectCountStr = [NSString stringWithFormat:@"%d",_totalCount];
-            NSString *tatolGetGoldAccoutStr = [NSString stringWithFormat:@"%@",[dataDict objectSafeForKey:@"goldAccountSum"]];
-            _tatolGetGoldAccout =  [tatolGetGoldAccoutStr doubleValue];
+            
+             _tatolGetGoldAccout =  [[dataDict objectSafeForKey:@"goldAccountSum"] doubleValue];
+            
+            NSString *tatolGetGoldAccoutStr = [NSString stringWithFormat:@"%.3lf",_tatolGetGoldAccout];
+           
             self.selectTipStr.text = [NSString stringWithFormat:@"已选用%@张，可返金%@克",self.cellSelectCountStr,tatolGetGoldAccoutStr];
             [self.selectTipStr setFontColor:UIColorWithRGB(0xfc8c0e) string:self.cellSelectCountStr];
             [self.selectTipStr setFontColor:UIColorWithRGB(0xfc8c0e) string:tatolGetGoldAccoutStr];
-            NSString *investMinSumStr = [dataDict objectSafeForKey:@"investMinSum"];
-            _tatolNeetGoldAccout = [investMinSumStr doubleValue];
+        
+            
+            _tatolNeetGoldAccout = [[dataDict objectSafeForKey:@"investMinSum"] doubleValue];
+            
+            NSString *investMinSumStr = [NSString stringWithFormat:@"%.3lf",_tatolNeetGoldAccout];
             self.needGoldAccountLab.text = [NSString stringWithFormat:@"%@克",investMinSumStr];
             if ([investMinSumStr doubleValue] > [self.remainAmountStr doubleValue]) {
                 self.confirmUseGoldCouponBtn.userInteractionEnabled = NO;

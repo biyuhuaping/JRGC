@@ -48,7 +48,7 @@
     UCFSettingItem *item3 = [UCFSettingItem itemWithTitle:@"变现手续费" withSubtitle:poundageStr];
     
     NSString *liquidateMoneyStr =[NSString stringWithFormat:@"¥%@", self.cashResuModel.liquidateMoney];
-    UCFSettingItem *item4 = [UCFSettingItem itemWithTitle:@"变现金额金额" withSubtitle:liquidateMoneyStr];
+    UCFSettingItem *item4 = [UCFSettingItem itemWithTitle:@"变现金额" withSubtitle:liquidateMoneyStr];
     if(_isPurchaseSuccess){
         self.dataArray = @[item1,item2,item3,item4];
     }
