@@ -150,15 +150,16 @@
 - (NSString *)switchGoldPriceFormat:(NSString *)availableGoldAmount
 {
     double goldValue = [availableGoldAmount doubleValue] *[ToolSingleTon sharedManager].readTimePrice;
-    if (goldValue < 9999.95) {
-        return [NSString stringWithFormat:@"%.0f",goldValue];
-    } else if (goldValue >= 9999.95 && goldValue < 999999.95) {
-        return [NSString stringWithFormat:@"%.0f万",goldValue/10000.0f];
-    } else if (goldValue >= 999999.95){
-        return [NSString stringWithFormat:@"%.0f千万",goldValue/10000000.0f];
-    } else {
-        return 0;
-    }
+    return [NSString stringWithFormat:@"%.0f元",goldValue];
+//    if (goldValue < 9999.95) {
+//        return [NSString stringWithFormat:@"%.0f",goldValue];
+//    } else if (goldValue >= 9999.95 && goldValue < 999999.95) {
+//        return [NSString stringWithFormat:@"%.0f万",goldValue/10000.0f];
+//    } else if (goldValue >= 999999.95){
+//        return [NSString stringWithFormat:@"%.0f千万",goldValue/10000000.0f];
+//    } else {
+//        return 0;
+//    }
 }
 - (void)dealloc
 {

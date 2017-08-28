@@ -97,7 +97,7 @@
 -(void)infoGoldData
 {
 //    self.isGoldCurrentAccout = YES;
-     self.goldModel = [UCFGoldModel goldModelWithDict:[_dataDict objectSafeDictionaryForKey:@"result"]];
+    self.goldModel = [UCFGoldModel goldModelWithDict:[_dataDict objectSafeDictionaryForKey:@"result"]];
     self.contractArray = [[_dataDict objectSafeDictionaryForKey:@"result"] objectSafeArrayForKey:@"contractList"];
     self.purchaseRecordListArray = [[_dataDict objectSafeDictionaryForKey:@"result"] objectSafeArrayForKey:@"purchaseRecordList"];
 }
@@ -513,12 +513,12 @@
     NSArray *array = @[];
     if (self.isGoldCurrentAccout) {
         UCFSettingItem *item1 = [UCFSettingItem itemWithIcon:@"gold_particular_icon_genre" WithTitle:@"黄金品种" withSubtitle:self.self.goldModel.nmTypeName];
-        NSString *buyServiceRateStr = [NSString stringWithFormat:@"¥%.2f",[self.goldModel.buyServiceRate floatValue]];
-        UCFSettingItem *item2 = [UCFSettingItem itemWithIcon:@"gold_particular_icon_-poundage" WithTitle:@"买入手续费(元/克)" withSubtitle:buyServiceRateStr];
-        NSString *cashServiceRateStr = [NSString stringWithFormat:@"¥%@",self.goldModel.cashServiceRate] ;
-        UCFSettingItem *item3 = [UCFSettingItem itemWithIcon:@"gold_particular_icon_cash" WithTitle:@"变现手续费(元/克)" withSubtitle:cashServiceRateStr];
-        NSString *goldServiceRateStr = [NSString stringWithFormat:@"¥%@",self.goldModel.goldServiceRate];
-        UCFSettingItem *item4 = [UCFSettingItem itemWithIcon:@"gold_particular_icon_draw" WithTitle:@"提金手续费(元/克)" withSubtitle:goldServiceRateStr];
+        NSString *buyServiceRateStr = [NSString stringWithFormat:@"%.2f元/克",[self.goldModel.buyServiceRate floatValue]];
+        UCFSettingItem *item2 = [UCFSettingItem itemWithIcon:@"gold_particular_icon_-poundage" WithTitle:@"买入手续费" withSubtitle:buyServiceRateStr];
+        NSString *cashServiceRateStr = [NSString stringWithFormat:@"%@元/克",self.goldModel.cashServiceRate] ;
+        UCFSettingItem *item3 = [UCFSettingItem itemWithIcon:@"gold_particular_icon_cash" WithTitle:@"变现手续费" withSubtitle:cashServiceRateStr];
+        NSString *goldServiceRateStr = [NSString stringWithFormat:@"%@元/克",self.goldModel.goldServiceRate];
+        UCFSettingItem *item4 = [UCFSettingItem itemWithIcon:@"gold_particular_icon_draw" WithTitle:@"提金手续费" withSubtitle:goldServiceRateStr];
         array  = @[item1,item2,item3,item4];
     }else{
         UCFSettingItem *item1 = [UCFSettingItem itemWithIcon:@"gold_particular_icon_repayment" WithTitle:@"收益克重交付方式" withSubtitle:self.goldModel.paymentType];
@@ -526,8 +526,8 @@
         NSString *minPurchaseAmountStr = [NSString stringWithFormat:@"%@克",self.goldModel.minPurchaseAmount] ;
         UCFSettingItem *item3 = [UCFSettingItem itemWithIcon:@"gold_particular_icon_measure" WithTitle:@"起购克重" withSubtitle:minPurchaseAmountStr];
         
-        NSString *buyServiceRateStr = [NSString stringWithFormat:@"¥%.2f",[self.goldModel.buyServiceRate floatValue]];
-        UCFSettingItem *item4 = [UCFSettingItem itemWithIcon:@"gold_particular_icon_-poundage" WithTitle:@"买入手续费(元/克)" withSubtitle:buyServiceRateStr];
+        NSString *buyServiceRateStr = [NSString stringWithFormat:@"%.2f元/克",[self.goldModel.buyServiceRate floatValue]];
+        UCFSettingItem *item4 = [UCFSettingItem itemWithIcon:@"gold_particular_icon_-poundage" WithTitle:@"买入手续费" withSubtitle:buyServiceRateStr];
         
         array  = @[item1,item2,item3,item4];
     }
@@ -1001,7 +1001,11 @@
 {
     CGFloat offsetFloat;
     if (kIS_Iphone4) {
+        
         offsetFloat = _isGoldCurrentAccout ? 185 : 64;
+        if (ScreenHeight == 667) {
+            offsetFloat = _isGoldCurrentAccout ? 150 : 64;
+        }
     } else {
         offsetFloat = _isGoldCurrentAccout ? 120 : 80;
     }
