@@ -128,12 +128,14 @@
 -(void)gotoMainView{
     //    if(_isPurchaseSuccess){//购买成功返回主页面
     [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
-    [self.navigationController popToRootViewControllerAnimated:YES];
+//    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self.navigationController popToViewController:self.rootVc animated:YES];
     //    }
     //    else{//购买失败返回上一级页面
     //        [self.navigationController popViewControllerAnimated:YES];
     //    }
 }
+
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     return [self createHeaderView];
