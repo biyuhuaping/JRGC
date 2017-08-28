@@ -33,45 +33,49 @@
     [self initUI];
 }
 - (void)initUI {
-    if ([_model.tradeTypeName isEqualToString:@"冻结"]) {
-        self.dealType.text = @"冻结";
+    if ([_model.tradeTypeCode isEqualToString:@"98"] || [_model.tradeTypeCode isEqualToString:@"109"] || [_model.tradeTypeCode isEqualToString:@"113"]|| [_model.tradeTypeCode isEqualToString:@"100"] || [_model.tradeTypeCode isEqualToString:@"101"]) {
+        self.dealType.text = _model.tradeTypeName;
         self.middleBaseView.hidden = YES;
         self.bottomViewSpace.constant = 0;
-        self.tradeTypeNameLab.text = @"冻结克重";
+        if ([_model.tradeTypeCode isEqualToString:@"101"]) {
+            self.tradeTypeNameLab.text = @"解冻克重";
+        } else {
+            self.tradeTypeNameLab.text = @"冻结克重";
+        }
         self.dealGoldNum.textColor = UIColorWithRGB(0x999999);
         NSString *totalStr =  [NSString stringWithFormat:@"%@克",_model.purchaseAmount];
         self.dealGoldNum.attributedText = [self changeLabelWithText:@"克" withTotalStr:totalStr];
         self.dealTime.text = _model.tradeTime;
         self.dealNO.text = _model.tradeRemark;
-    } else if([_model.tradeTypeName isEqualToString:@"买金"]){
+    } else if([_model.tradeTypeCode isEqualToString:@"99"]){
         self.tradeTypeNameLab.text = @"买金克重";
         self.dealGoldNum.textColor = UIColorWithRGB(0xfd4d4c);
         NSString *totalStr = [NSString stringWithFormat:@"%@克",_model.purchaseAmount];
         self.dealGoldNum.attributedText = [self changeLabelWithText:@"克" withTotalStr:totalStr];
-        self.dealType.text = @"买金";
+        self.dealType.text = _model.tradeTypeName;
         self.dealTime.text = _model.tradeTime;
         self.dealNO.text = _model.tradeRemark;
         
-        self.dealMoneyLab.text = [NSString stringWithFormat:@"%@",_model.frozenMoney];
+        self.dealMoneyLab.text = [NSString stringWithFormat:@"%@",_model.tradeMoney];
         self.dealMoneyLab.textColor = UIColorWithRGB(0xfd4d4c);
-        self.dealGoldPrice.text = [NSString stringWithFormat:@"￥%@",_model.purchasePrice];
-        self.serviceChargeLab.text = [NSString stringWithFormat:@"￥%@",_model.poundage];;
-    } else if ([_model.tradeTypeName isEqualToString:@"变现"]) {
+        self.dealGoldPrice.text = [NSString stringWithFormat:@"¥%@",_model.purchasePrice];
+        self.serviceChargeLab.text = [NSString stringWithFormat:@"¥%@",_model.poundage];;
+    } else if ([_model.tradeTypeCode isEqualToString:@"110"]) {
         self.tradeTypeNameLab.text = @"变现克重";
         self.dealGoldNum.textColor = UIColorWithRGB(0x4db94f);
         NSString *totalStr = [NSString stringWithFormat:@"%@克",_model.purchaseAmount]; //变现克重
         self.dealGoldNum.attributedText = [self changeLabelWithText:@"克" withTotalStr:totalStr];
-        self.dealType.text = @"变现";
+        self.dealType.text = _model.tradeTypeName;
         self.dealTime.text = _model.tradeTime;
         self.dealNO.text = _model.tradeRemark;
         
-        self.dealMoneyLab.text = [NSString stringWithFormat:@"%@",_model.frozenMoney];
+        self.dealMoneyLab.text = [NSString stringWithFormat:@"%@",_model.tradeMoney];
         self.dealMoneyLab.textColor = UIColorWithRGB(0x4db94f);
-        self.dealGoldPrice.text = [NSString stringWithFormat:@"￥%@",_model.purchasePrice];
-        self.serviceChargeLab.text = [NSString stringWithFormat:@"￥%@",_model.poundage];;
+        self.dealGoldPrice.text = [NSString stringWithFormat:@"¥%@",_model.purchasePrice];
+        self.serviceChargeLab.text = [NSString stringWithFormat:@"¥%@",_model.poundage];;
     
-    } else if ([_model.tradeTypeName isEqualToString:@"收益克重"]) {
-        self.dealType.text = @"收益克重";
+    } else if ([_model.tradeTypeCode isEqualToString:@"111"]) {
+        self.dealType.text = _model.tradeTypeName;
         self.dealType.textColor = UIColorWithRGB(0xfd4d4c);
         self.middleBaseView.hidden = YES;
         self.bottomViewSpace.constant = 0;
@@ -84,7 +88,6 @@
 
         
     }
-    
 }
 -(NSMutableAttributedString*) changeLabelWithText:(NSString*)needText withTotalStr:(NSString *)totalStr
 {
