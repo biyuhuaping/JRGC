@@ -70,7 +70,7 @@
     titleLabel.textAlignment = NSTextAlignmentCenter;
     [view addSubview:titleLabel];
 
-    NSString *messageStr = [NSString stringWithFormat:@"您的变现申请预计在1个工作日内处理变现金额将存放至您的余额账户中"];
+    NSString *messageStr = [NSString stringWithFormat:@"您的变现申请预计在T+1个工作日内处理，变现金额将存放至您的黄金账户余额。"];
     if (!_isPurchaseSuccess) {
         messageStr = self.errorMessageStr;
     }
