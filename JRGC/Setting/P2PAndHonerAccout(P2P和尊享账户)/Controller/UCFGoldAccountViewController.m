@@ -314,11 +314,14 @@
             }
         }
     } else if ([title isEqualToString:@"提金"]) {
-        showStr = @"暂时没有可提金的黄金";
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"提金页面正在奋力优化中\n如需提金，请拨打客服电话400-0322-988" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"联系客服", nil];
+        alert.tag = 7000;
+        [alert show];
+    
     }
     [MBProgressHUD displayHudError:showStr];
 }
-    
+
 #pragma mark - GoldAccountFirstCellDelegate
     
 - (void)goldAccountFirstCell:(GoldAccountFirstCell *)goldFirstCell didClickedRechargeButton:(UIButton *)button
@@ -362,6 +365,11 @@
         if (buttonIndex == 1) {
             HSHelper *helper = [HSHelper new];
             [helper pushOpenHSType:SelectAccoutTypeHoner Step:[UserInfoSingle sharedManager].enjoyOpenStatus nav:self.navigationController];
+        }
+    } else if (alertView.tag == 7000) {
+        if (buttonIndex == 1) {
+            NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"4000322988"];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
         }
     }
 }

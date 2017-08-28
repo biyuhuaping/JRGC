@@ -110,9 +110,12 @@
                             <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" tag="500" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3QI-Nw-rd3">
-                            <rect key="frame" x="67" y="15.5" width="13" height="13"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <button opaque="NO" tag="500" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3QI-Nw-rd3">
+                            <rect key="frame" x="55" y="4" width="36" height="36"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="36" id="9wb-fq-5cG"/>
+                                <constraint firstAttribute="height" constant="36" id="mwy-sL-Aq8"/>
+                            </constraints>
                             <state key="normal" image="gold_account_icon_info_02"/>
                             <connections>
                                 <action selector="floatBtnClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="1m2-My-IAN"/>
@@ -147,10 +150,22 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <button opaque="NO" tag="501" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o3k-0O-lRr">
+                            <rect key="frame" x="286" y="3.5" width="36" height="36"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="36" id="K2p-c1-FHm"/>
+                                <constraint firstAttribute="height" constant="36" id="RPL-Q3-1eh"/>
+                            </constraints>
+                            <state key="normal" image="gold_account_icon_info_02"/>
+                            <connections>
+                                <action selector="floatBtnClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="Kqu-e0-gn3"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="Abz-XP-xhx" firstAttribute="leading" secondItem="2sE-VC-ltr" secondAttribute="leading" id="7WA-L8-vyI"/>
+                        <constraint firstItem="o3k-0O-lRr" firstAttribute="centerY" secondItem="I3a-Tr-OiG" secondAttribute="centerY" id="9xD-n2-YO4"/>
                         <constraint firstItem="X3s-nZ-HHa" firstAttribute="centerY" secondItem="Abz-XP-xhx" secondAttribute="centerY" id="EAO-Wg-tqx"/>
                         <constraint firstItem="mKQ-qx-XER" firstAttribute="top" secondItem="X3s-nZ-HHa" secondAttribute="bottom" constant="9" id="EPr-YO-MmL"/>
                         <constraint firstItem="X3s-nZ-HHa" firstAttribute="centerY" secondItem="D9b-Ap-0m3" secondAttribute="centerY" id="Hvi-Zv-wes"/>
@@ -162,11 +177,14 @@
                         <constraint firstItem="2sE-VC-ltr" firstAttribute="leading" secondItem="gFV-n2-JDv" secondAttribute="leading" constant="15" id="UDY-lX-eER"/>
                         <constraint firstItem="X3s-nZ-HHa" firstAttribute="leading" secondItem="I3a-Tr-OiG" secondAttribute="leading" id="ZyJ-Nv-f1A"/>
                         <constraint firstItem="X3s-nZ-HHa" firstAttribute="top" secondItem="I3a-Tr-OiG" secondAttribute="bottom" constant="9" id="faj-i8-LY4"/>
+                        <constraint firstItem="3QI-Nw-rd3" firstAttribute="leading" secondItem="2sE-VC-ltr" secondAttribute="trailing" constant="-10" id="gHw-KQ-gwH"/>
+                        <constraint firstItem="o3k-0O-lRr" firstAttribute="leading" secondItem="I3a-Tr-OiG" secondAttribute="trailing" constant="-10" id="hl6-Cv-Gjv"/>
                         <constraint firstAttribute="trailing" secondItem="X3s-nZ-HHa" secondAttribute="trailing" constant="15" id="pnL-xb-r3G"/>
                         <constraint firstItem="mKQ-qx-XER" firstAttribute="leading" secondItem="gFV-n2-JDv" secondAttribute="leading" id="tGH-VT-kPy"/>
                         <constraint firstItem="I3a-Tr-OiG" firstAttribute="centerY" secondItem="6Ar-Cy-Bq1" secondAttribute="centerY" id="uwg-Ic-9xA"/>
                         <constraint firstItem="I3a-Tr-OiG" firstAttribute="centerY" secondItem="2sE-VC-ltr" secondAttribute="centerY" id="xLy-re-pHe"/>
                         <constraint firstItem="RaO-Q4-hiX" firstAttribute="leading" secondItem="6Ar-Cy-Bq1" secondAttribute="trailing" constant="5" id="yS4-fV-uCD"/>
+                        <constraint firstItem="3QI-Nw-rd3" firstAttribute="centerY" secondItem="2sE-VC-ltr" secondAttribute="centerY" id="zHt-SS-Hxs"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ngC-gD-3Br">
