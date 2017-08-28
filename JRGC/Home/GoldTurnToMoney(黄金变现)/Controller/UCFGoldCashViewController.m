@@ -413,7 +413,7 @@
             serviceFee = 0.1;
         }
         tipview.realGoldPriceLabel.text = [NSString stringWithFormat:@"%.2f元", [ToolSingleTon sharedManager].readTimePrice * goldAmount];
-        tipview.serviceFeeLabel.text = [NSString stringWithFormat:@"%.2f元", [weakSelf.cashServiceRate doubleValue] * goldAmount];
+        tipview.serviceFeeLabel.text = [NSString stringWithFormat:@"%.2f元", serviceFee];
         tipview.actualGoldPriceLabel.text = [NSString stringWithFormat:@"%.2f元", [ToolSingleTon sharedManager].readTimePrice  * goldAmount - serviceFee];
         tipview.frame = view.bounds;
         view.center = CGPointMake(ScreenWidth * 0.5, ScreenHeight * 0.5);
