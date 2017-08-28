@@ -79,7 +79,7 @@
                         <rect key="frame" x="0.0" y="37" width="320" height="51"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CQz-aB-job">
-                                <rect key="frame" x="276" y="11" width="29" height="29"/>
+                                <rect key="frame" x="276" y="14" width="29" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="29" id="uX1-ah-bje"/>
                                     <constraint firstAttribute="height" constant="29" id="wue-t5-KJf"/>
@@ -90,7 +90,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jAz-mU-z62">
-                                <rect key="frame" x="15" y="7" width="251" height="37"/>
+                                <rect key="frame" x="15" y="10" width="251" height="37"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="1.000克起" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KEI-IF-L4v">
                                         <rect key="frame" x="10" y="0.0" width="206" height="37"/>
@@ -153,19 +153,19 @@
                         <constraints>
                             <constraint firstItem="CQz-aB-job" firstAttribute="leading" secondItem="jAz-mU-z62" secondAttribute="trailing" constant="10" id="0gY-mL-1o7"/>
                             <constraint firstAttribute="trailing" secondItem="CQz-aB-job" secondAttribute="trailing" constant="15" id="Fu4-ut-rgf"/>
-                            <constraint firstAttribute="bottom" secondItem="jAz-mU-z62" secondAttribute="bottom" constant="7" id="SfY-2u-MZH"/>
+                            <constraint firstAttribute="bottom" secondItem="jAz-mU-z62" secondAttribute="bottom" constant="4" id="SfY-2u-MZH"/>
                             <constraint firstItem="jAz-mU-z62" firstAttribute="leading" secondItem="NLl-HB-vUD" secondAttribute="leading" constant="15" id="UIm-Jc-leF"/>
                             <constraint firstAttribute="height" constant="51" id="UQ8-GH-g7v"/>
-                            <constraint firstItem="CQz-aB-job" firstAttribute="centerY" secondItem="NLl-HB-vUD" secondAttribute="centerY" id="YGL-t6-px3"/>
-                            <constraint firstItem="jAz-mU-z62" firstAttribute="top" secondItem="NLl-HB-vUD" secondAttribute="top" constant="7" id="hMw-tm-A7s"/>
+                            <constraint firstItem="CQz-aB-job" firstAttribute="centerY" secondItem="NLl-HB-vUD" secondAttribute="centerY" constant="3" id="YGL-t6-px3"/>
+                            <constraint firstItem="jAz-mU-z62" firstAttribute="top" secondItem="NLl-HB-vUD" secondAttribute="top" constant="10" id="hMw-tm-A7s"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SLg-ej-RVc">
                         <rect key="frame" x="0.0" y="88" width="320" height="44"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¥0.00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hl1-dd-UNh">
-                                <rect key="frame" x="101" y="11.5" width="204" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="101" y="12.5" width="204" height="19.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" red="0.9882352941176471" green="0.5607843137254902" blue="0.054901960784313725" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -200,8 +200,8 @@
                         <rect key="frame" x="0.0" y="132" width="320" height="44"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.000克" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wIa-tb-CCu">
-                                <rect key="frame" x="101" y="14.5" width="204" height="16"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <rect key="frame" x="101" y="13" width="204" height="19.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>

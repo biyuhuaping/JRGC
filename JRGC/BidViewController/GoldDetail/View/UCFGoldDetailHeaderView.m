@@ -107,8 +107,8 @@
 -(void)layoutSubviews
 {
     [super layoutSubviews];
-    self.realGoldPriceLabel.text = [NSString stringWithFormat:@"¥%.2lf",[ToolSingleTon  sharedManager].readTimePrice];
-    self.annualRateLabel.text = [NSString stringWithFormat:@"%@%%",self.goldModel.annualRate];
+    self.realGoldPriceLabel.text = [NSString stringWithFormat:@"%.2lf元/克",[ToolSingleTon  sharedManager].readTimePrice];
+    self.annualRateLabel.text = [NSString stringWithFormat:@"%.2lf%%",[self.goldModel.annualRate floatValue]];
     [self.annualRateLabel setFont: [UIFont systemFontOfSize:22] string:@"%"];
 }
 
