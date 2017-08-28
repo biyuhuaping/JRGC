@@ -48,13 +48,7 @@
         self.buyButtonW.constant = 60;
         [self.buyButton setBackgroundColor:UIColorWithRGB(0xffc027)];
     }
-    else if (presenter.status == 2) {
-        [self.buyButton setTitle:@"售罄" forState:UIControlStateNormal];
-        self.buyButton.enabled = YES;
-        self.buyButtonW.constant = 60;
-        [self.buyButton setBackgroundColor:UIColorWithRGB(0xffc027)];
-    }
-    else if (presenter.status == 21) {
+    else {
         self.buyButton.enabled = NO;
         self.buyButtonW.constant = 100;
         [self.buyButton setBackgroundColor:UIColorWithRGB(0xcccccc)];
@@ -91,13 +85,7 @@
         self.buyButtonW.constant = 60;
         [self.buyButton setBackgroundColor:UIColorWithRGB(0xffc027)];
     }
-    else if (goldmodel.status.intValue == 2) {
-        [self.buyButton setTitle:@"售罄" forState:UIControlStateNormal];
-        self.buyButton.enabled = YES;
-        self.buyButtonW.constant = 60;
-        [self.buyButton setBackgroundColor:UIColorWithRGB(0xffc027)];
-    }
-    else if (goldmodel.status.intValue == 21) {
+    else {
         self.buyButton.enabled = NO;
         self.buyButtonW.constant = 100;
         [self.buyButton setBackgroundColor:UIColorWithRGB(0xcccccc)];
