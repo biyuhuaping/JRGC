@@ -36,6 +36,8 @@
 
 - (void)cashAll:(UIButton *)button {
     self.textField.text = self.avavilableGoldAmount;
+    NSIndexPath *path = [NSIndexPath indexPathForRow:2 inSection:0];
+    [self.tableview reloadRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 - (UITextField *)textfieldLength:(UITextField *)textField
