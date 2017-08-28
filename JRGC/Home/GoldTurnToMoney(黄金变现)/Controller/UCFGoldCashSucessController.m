@@ -71,6 +71,9 @@
     [view addSubview:titleLabel];
 
     NSString *messageStr = [NSString stringWithFormat:@"您的变现申请预计在1个工作日内处理变现金额将存放至您的余额账户中"];
+    if (!_isPurchaseSuccess) {
+        messageStr = self.errorMessageStr;
+    }
     CGSize size =  [Common getStrHeightWithStr:messageStr AndStrFont:12 AndWidth:ScreenWidth - 30 AndlineSpacing:2];
     UILabel *textLabel = [[UILabel alloc]initWithFrame:CGRectMake(15, CGRectGetMaxY(titleLabel.frame) + 25, ScreenWidth-30, size.height)];
     textLabel.textColor = UIColorWithRGB(0x555555);
@@ -90,7 +93,6 @@
     }else{
         imageView.image = [UIImage imageNamed:@"gold_FailurePurchase_icon"];
         titleLabel.text = @"变现申请失败";
-        textLabel.text = self.errorMessageStr;
     }
     headView.frame = CGRectMake(0, 0, ScreenWidth, CGRectGetMaxY(textLabel.frame)+25);
     [headView addSubview:view];
