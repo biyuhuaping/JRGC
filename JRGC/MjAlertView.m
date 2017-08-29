@@ -405,7 +405,7 @@
         } else if (type == MjGoldAlertViewTypeAverage) {
             titleLab.text = @"买入均价";
             midLab.text= @"买入均价指消费者购买黄金的加权平均价";
-            msgLab.text = @"尊享金购买总支出/尊享金购买总克重";
+            msgLab.text = @"买入均价=(尊享金购买总支出+增金宝购买总支出)/(尊享金购买总克重+增金宝购买总克重)";
         }
         UIButton *closeBtn = [baseView viewWithTag:1000];
         [closeBtn addTarget:self action:@selector(closeBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
