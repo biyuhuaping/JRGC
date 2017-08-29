@@ -550,7 +550,7 @@
                 cell.title1.text = dic[@"prdClaimsName"];//标名称
                 id status = dic[@"status"];
                 cell.imag.hidden = YES;
-                cell.title_1.text = _titleArr1[[status intValue]];
+                cell.title_1.text = _titleArr1[[status intValue] - 1];
                 cell.title_2.text = dic[@"applyName"];//投资人
                 cell.title_3.text = dic[@"tradeTime"];//投资日期
                 NSString *qxdate = [dic objectSafeForKey: @"startingDate"];
