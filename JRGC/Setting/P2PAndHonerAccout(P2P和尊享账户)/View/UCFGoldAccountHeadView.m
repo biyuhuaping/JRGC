@@ -66,7 +66,7 @@
     
     NSString  *goldValue = [self switchGoldPriceFormat:[_tmpData objectSafeForKey:@"holdGoldAmount"]];
     NSString *available = [UCFToolsMehod AddComma:goldValue];
-    self.currentGoldTotalPrice.text = [NSString stringWithFormat:@"(当前市值约%@)",available];
+    self.currentGoldTotalPrice.text = [NSString stringWithFormat:@"(当前市值约%@元)",available];
     
 //    double floatValue1 = [ToolSingleTon sharedManager].readTimePrice * [[_tmpData objectSafeForKey:@"holdGoldAmount"] doubleValue] - [[_tmpData objectSafeForKey:@"tradeAllMoney"] doubleValue];
 //    if (floatValue1 > 0) {
