@@ -76,10 +76,10 @@
     self.noDataView = noDataView;
     
     [self.tableview addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(getDataFromNet)];
-//    __weak typeof(self) weakSelf = self;
-//    [self.tableview addLegendFooterWithRefreshingBlock:^{
-//        [weakSelf getGoldIncreaseList];
-//    }];
+    __weak typeof(self) weakSelf = self;
+    [self.tableview addLegendFooterWithRefreshingBlock:^{
+        [weakSelf getGoldIncreaseList];
+    }];
     self.tableview.footer.hidden = YES;
 }
 
@@ -212,22 +212,21 @@
                 UCFGoldIncreaseListModel *model = [UCFGoldIncreaseListModel goldIncreseListModelWithDict:temp];
                 [self.dataArray addObject:model];
             }
-//            BOOL hasNextPage = [[[pageData objectSafeDictionaryForKey:@"pagination"] objectForKey:@"hasNextPage"] boolValue];
-//            if (hasNextPage) {
-//                self.currentPage ++;
-//                self.tableview.footer.hidden = YES;
-//                [self.tableview.footer resetNoMoreData];
-//                self.listArray = [self arrayWithDataArray:self.dataArray];
-//            }
-//            else {
-//                if (self.dataArray.count > 0) {
-//                    [self.tableview.footer noticeNoMoreData];
-//                }
-//                else
-//                    self.tableview.footer.hidden = YES;
-//                self.listArray = [self arrayWithDataArray:self.dataArray];
-//            }
-            self.listArray = [self arrayWithDataArray:self.dataArray];
+            BOOL hasNextPage = [[[pageData objectSafeDictionaryForKey:@"pagination"] objectForKey:@"hasNextPage"] boolValue];
+            if (hasNextPage) {
+                self.currentPage ++;
+                self.tableview.footer.hidden = YES;
+                [self.tableview.footer resetNoMoreData];
+                self.listArray = [self arrayWithDataArray:self.dataArray];
+            }
+            else {
+                if (self.dataArray.count > 0) {
+                    [self.tableview.footer noticeNoMoreData];
+                }
+                else
+                    self.tableview.footer.hidden = YES;
+                self.listArray = [self arrayWithDataArray:self.dataArray];
+            }
             if (!self.dataArray.count) {
                 [self.noDataView showInView:self.tableview];
             }
