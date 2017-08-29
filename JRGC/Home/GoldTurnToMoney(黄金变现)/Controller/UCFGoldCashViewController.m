@@ -39,7 +39,7 @@
 - (NSString *)goldAveragePrice
 {
     if (!_goldAveragePrice) {
-        _goldAveragePrice = [NSString stringWithFormat:@"%.2lf", [ToolSingleTon sharedManager].readTimePrice * [self.amoutCell.textField.text doubleValue]];
+        _goldAveragePrice = [NSString stringWithFormat:@"%.2lf", [ToolSingleTon sharedManager].readTimePrice];
     }
     return _goldAveragePrice;
 }
