@@ -78,7 +78,7 @@
     _goldmodel = goldmodel;
     self.goldFlexibleRateLabel.text = [NSString stringWithFormat:@"%.2lf%%", [goldmodel.annualRate doubleValue]];
     [self.goldFlexibleRateLabel setFont:[UIFont boldSystemFontOfSize:12] string:@"%"];
-    self.minInvestLabel.text = [NSString stringWithFormat:@"%.3f克起", [goldmodel.minPurchaseAmount doubleValue]];
+    self.minInvestLabel.text = [NSString stringWithFormat:@"%.3f克起购", [goldmodel.minPurchaseAmount doubleValue]];
     self.completeLabel.text = [NSString stringWithFormat:@"已售%@克", goldmodel.totalAmount];
     if (goldmodel.status.intValue == 1) {
         self.buyButton.enabled = YES;

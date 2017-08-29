@@ -62,7 +62,7 @@
 - (NSString *)minInvest
 {
     if ([self.item.type isEqualToString:@"3"] || [self.item.type isEqualToString:@"6"]) {
-        return self.item.minInvest ? [NSString stringWithFormat:@"%.3f克起", [self.item.minInvest doubleValue]] : @"";
+        return self.item.minInvest ? [NSString stringWithFormat:@"%.3f克起购", [self.item.minInvest doubleValue]] : @"";
     }
     return self.item.minInvest ? [NSString stringWithFormat:@"%@元起", self.item.minInvest] : @"";
 }
