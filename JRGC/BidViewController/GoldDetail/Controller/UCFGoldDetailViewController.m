@@ -639,7 +639,7 @@
 
     _titleArray = [[NSArray alloc] initWithObjects:@"基础详情",@"购买记录", nil];
 
-    _twoTableview = [[UITableView alloc] initWithFrame:CGRectMake(0, ScreenHeight, ScreenWidth, ScreenHeight + 57  ) style:UITableViewStylePlain];
+    _twoTableview = [[UITableView alloc] initWithFrame:CGRectMake(0, ScreenHeight, ScreenWidth, ScreenHeight + 57  ) style:UITableViewStyleGrouped];
     _twoTableview.backgroundColor = [UIColor clearColor];
     _twoTableview.separatorColor = UIColorWithRGB(0xe3e5ea);
     _twoTableview.delegate = self;
@@ -656,14 +656,14 @@
     }
     [self.view addSubview:_twoTableview];
     [_twoTableview bringSubviewToFront:self.investBgView];
-    _twoTableview.contentInset = UIEdgeInsetsMake(0, 0, 10, 0);
+    _twoTableview.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     //    _twoTableview.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
 //    [_twoTableview addSubview: addTopSegment];
 //    [self addTopSegment];
     
-    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 0.5)];
-    lineView.backgroundColor = UIColorWithRGB(0xd8d8d8);
-    _twoTableview.tableFooterView = lineView;
+//    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 0.5)];
+//    lineView.backgroundColor = UIColorWithRGB(0xd8d8d8);
+//    _twoTableview.tableFooterView = lineView;
     
     //下拉view
     UIView *topView = [[UIView alloc] initWithFrame:CGRectMake(0, - 40, ScreenWidth, 40)];
@@ -821,6 +821,25 @@
         [view addSubview:lineView];
     }
 }
+-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    if (section == 1) {
+        if(_selectIndex == 1 && self.isGoldCurrentAccout) {
+            UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 30)];
+            footerView.backgroundColor = [UIColor clearColor];
+            UILabel *placehoderLabel = [[UILabel alloc] initWithFrame:CGRectMake(XPOS,9 , ScreenWidth - XPOS * 2, 12)];
+            placehoderLabel.font = [UIFont boldSystemFontOfSize:12];
+            placehoderLabel.textColor = UIColorWithRGB(0x999999);
+            placehoderLabel.textAlignment = NSTextAlignmentCenter;
+            placehoderLabel.backgroundColor = [UIColor clearColor];
+            placehoderLabel.text = @"只展示最近20条购买记录";
+            [footerView addSubview:placehoderLabel];
+            return footerView;
+        }
+    }
+    return nil;
+}
+
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     if (section == 0) {
            return 44.0f;
@@ -841,10 +860,27 @@
         }
     }
     
-    return 0;
+    return 0.01;
 
 }
-
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    if (section == 1) {
+       
+        
+        
+        if(_selectIndex == 1 && self.isGoldCurrentAccout) {
+            
+            return 30;
+        }
+    }else if(section == 2)
+    {
+        if (_selectIndex == 0) {
+            return 10;
+        }
+    }
+   return 0.01;
+}
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (_selectIndex == 0) {
@@ -945,6 +981,10 @@
             remarkStr = [remarkStr stringByReplacingOccurrencesOfString:@"\\n" withString:@"\n"];
             lbl.attributedText = [NSString getNSAttributedString:remarkStr labelDict:dic];
             
+            CGSize size =  [Common getStrHeightWithStr:remarkStr AndStrFont:12 AndWidth:ScreenWidth - 30 AndlineSpacing:3];
+            UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, size.height + 20 -0.5, ScreenWidth, 0.5)];
+            lineView.backgroundColor = UIColorWithRGB(0xd8d8d8);
+            [cell.contentView addSubview:lineView];
             return cell;
         }
     } else {
@@ -958,6 +998,11 @@
         }
         cell.purchaseRecordDict = [self.purchaseRecordListArray objectAtIndex:indexPath.row];
         
+        if (indexPath.row == self.purchaseRecordListArray.count - 1) {
+            UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 52 - 0.5, ScreenWidth, 0.5)];
+            lineView.backgroundColor = UIColorWithRGB(0xd8d8d8);
+            [cell.contentView addSubview:lineView];
+        }
         return cell;
     }
     return nil;;
@@ -1002,9 +1047,9 @@
     CGFloat offsetFloat;
     if (kIS_Iphone4) {
         
-        offsetFloat = _isGoldCurrentAccout ? 185 : 64;
-        if (ScreenHeight == 667) {
-            offsetFloat = _isGoldCurrentAccout ? 150 : 64;
+        offsetFloat = _isGoldCurrentAccout ? 180 : 64;
+        if (ScreenHeight == 736) {
+            offsetFloat = _isGoldCurrentAccout ? 105 : 64;
         }
     } else {
         offsetFloat = _isGoldCurrentAccout ? 120 : 80;
@@ -1032,7 +1077,7 @@
             [self addTopSegment];
         }
     }  else if (tag == 1001) {
-//         NSLog(@"111111scrollView.contentOffset.y---->>>>>>%f",scrollView.contentOffset.y);
+        DLog(@"111111scrollView.contentOffset.y---->>>>>>%f",scrollView.contentOffset.y);
         if (scrollView.contentOffset.y > offsetFloat) {
             if (!_oneScrollPull) {
                 [self addTopSegment];
