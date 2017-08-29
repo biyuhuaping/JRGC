@@ -72,7 +72,7 @@
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightbutton];
     self.navigationItem.rightBarButtonItem = rightItem;
     
-    UCFNoDataView *noDataView = [[UCFNoDataView alloc] initGoldWithFrame:CGRectMake(0, 200, ScreenWidth, ScreenHeight - 264) errorTitle:@"你还没有交易记录" buttonTitle:@""];
+    UCFNoDataView *noDataView = [[UCFNoDataView alloc] initGoldWithFrame:CGRectMake(0, 200, ScreenWidth, ScreenHeight - 264) errorTitle:@"暂无数据" buttonTitle:@""];
     self.noDataView = noDataView;
     
     [self.tableview addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(getDataFromNet)];
