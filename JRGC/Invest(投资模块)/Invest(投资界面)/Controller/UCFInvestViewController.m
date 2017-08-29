@@ -46,10 +46,10 @@
 }
 - (void)currentControllerUpdate
 {
-    if ([_pagerView.selectIndexStr isEqualToString:@"1"]) {
+    if ([_pagerView.selectIndexStr isEqualToString:@"0"]) {
         [self.microMoney.tableview.header beginRefreshing];
     }
-    else if ([_pagerView.selectIndexStr isEqualToString:@"0"]) {
+    else if ([_pagerView.selectIndexStr isEqualToString:@"1"]) {
         [self.honorInvest.tableView.header beginRefreshing];
     }
     else if ([_pagerView.selectIndexStr isEqualToString:@"3"]) {
@@ -67,13 +67,13 @@
 #pragma mark - 设置界面
 - (void)addChildViewControllers
 {
-    self.honorInvest = [[UCFHonorInvestViewController alloc]initWithNibName:@"UCFHonorInvestViewController" bundle:nil];
-    self.honorInvest.rootVc = self;
-    [self addChildViewController:self.honorInvest];
-    
     self.microMoney = [[UCFMicroMoneyViewController alloc]initWithNibName:@"UCFMicroMoneyViewController" bundle:nil];
     self.microMoney.rootVc = self;
     [self addChildViewController:self.microMoney];
+    
+    self.honorInvest = [[UCFHonorInvestViewController alloc]initWithNibName:@"UCFHonorInvestViewController" bundle:nil];
+    self.honorInvest.rootVc = self;
+    [self addChildViewController:self.honorInvest];
     
     self.golden = [[UCFGoldenViewController alloc] initWithNibName:@"UCFGoldenViewController" bundle:nil];
     self.golden.rootVc = self;
@@ -87,7 +87,7 @@
 - (void)createUI {
     _pagerView = [[PagerView alloc] initWithFrame:CGRectMake(0,20,ScreenWidth,ScreenHeight - 20 - 49)
                                SegmentViewHeight:44
-                                      titleArray:@[@"尊享", @"微金", @"黄金", @"债转"]
+                                      titleArray:@[@"微金", @"尊享", @"黄金", @"债转"]
                                       Controller:self
                                        lineWidth:44
                                       lineHeight:3];
@@ -96,11 +96,11 @@
     
     if ([self.selectedType isEqualToString:@"P2P"]) {
         self.currentViewController = self.microMoney;
-        [_pagerView setSelectIndex:1];
+        [_pagerView setSelectIndex:0];
     }
     else if ([self.selectedType isEqualToString:@"ZX"]) {
         self.currentViewController = self.honorInvest;
-        [_pagerView setSelectIndex:0];
+        [_pagerView setSelectIndex:1];
         
     }
     else if ([self.selectedType isEqualToString:@"Trans"]) {
@@ -119,11 +119,11 @@
 
 - (void)changeView {
     if ([self.selectedType isEqualToString:@"P2P"]) {
-        [_pagerView setSelectIndex:1];
+        [_pagerView setSelectIndex:0];
         self.currentViewController = self.microMoney;
     }
     else if ([self.selectedType isEqualToString:@"ZX"]) {
-        [_pagerView setSelectIndex:0];
+        [_pagerView setSelectIndex:1];
         self.currentViewController = self.honorInvest;
     }
     else if ([self.selectedType isEqualToString:@"Trans"]) {
