@@ -115,9 +115,10 @@
 }
 - (void)layoutSubviews
 {
-    self.realtimeGoldPrice.textColor = UIColorWithRGB(0x555555);
-    self.dealGoldPrice.textColor = UIColorWithRGB(0x555555);
-    self.upBaseView.backgroundColor = UIColorWithRGB(0x5B6993);
+    [super layoutSubviews];
+    _realtimeGoldPrice.textColor = UIColorWithRGB(0x555555);
+    _dealGoldPrice.textColor = UIColorWithRGB(0x555555);
+    _upBaseView.backgroundColor = UIColorWithRGB(0x5B6993);
 }
 - (void)updateGoldAccount:(NSDictionary *)dataDic
 {

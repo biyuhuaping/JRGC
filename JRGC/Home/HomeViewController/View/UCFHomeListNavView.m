@@ -82,6 +82,10 @@
 - (void)setLoginAndRegisterButtonWithState:(BOOL)selected
 {
     if (selected) {
+        [UIView animateWithDuration:0.25 animations:^{
+            self.backView.alpha = 0;
+            self.bottmLine.alpha = 0;
+        }];
         self.loginAndRegisterButton.layer.borderWidth = 0;
         [self.loginAndRegisterButton setBackgroundColor:[UIColor clearColor]];
         self.loginAndRegisterButton.alpha = 1.0;

@@ -218,28 +218,28 @@ static NSString *const cellId = @"cellId";
     [super layoutSubviews];
     self.calendar.frame = self.calendarView.bounds;
     CGRect frame = self.frame;
-    frame.size.height = CGRectGetMaxY(self.currentDayView.frame);
-    self.frame = frame;
+    frame.size.height = CGRectGetMaxY(_currentDayView.frame);
+//    self.frame = frame;
+//
+    self.preButton.frame = CGRectMake(0, _calendarView.y, 80, 44);
+    [self.preButton setImageEdgeInsets:UIEdgeInsetsMake(0, 20, 0, _preButton.width - 20- _preButton.imageView.width)];
+    self.nextButton.frame = CGRectMake(self.width - 80, _calendarView.y, 80, 44);
+    [self.nextButton setImageEdgeInsets:UIEdgeInsetsMake(0, _nextButton.width - 20- _nextButton.imageView.width, 0, 20)];
+    self.monthLabel.frame = CGRectMake(0, _calendarView.y + 0.5, ScreenWidth, 43);
     
-    self.preButton.frame = CGRectMake(0, self.calendarView.y, 80, 44);
-    [self.preButton setImageEdgeInsets:UIEdgeInsetsMake(0, 20, 0, self.preButton.width - 20- self.preButton.imageView.width)];
-    self.nextButton.frame = CGRectMake(self.width - 80, self.calendarView.y, 80, 44);
-    [self.nextButton setImageEdgeInsets:UIEdgeInsetsMake(0, self.nextButton.width - 20- self.nextButton.imageView.width, 0, 20)];
-    self.monthLabel.frame = CGRectMake(0, self.calendarView.y + 0.5, ScreenWidth, 43);
+    self.upLine.frame = CGRectMake(0, _calendarView.y, ScreenWidth, 0.5);
+    self.downLine1.frame = CGRectMake(0, _calendarView.y + 43.5, ScreenWidth, 0.5);
     
-    self.upLine.frame = CGRectMake(0, self.calendarView.y, ScreenWidth, 0.5);
-    self.downLine1.frame = CGRectMake(0, self.calendarView.y + 43.5, ScreenWidth, 0.5);
+    self.downLine2.frame = CGRectMake(0, _calendarView.y + 44 + 29.5, ScreenWidth, 0.5);
     
-    self.downLine2.frame = CGRectMake(0, self.calendarView.y + 44 + 29.5, ScreenWidth, 0.5);
+    self.weekView.frame = CGRectMake(0, _calendarView.y + 44, ScreenWidth, 29.5);
     
-    self.weekView.frame = CGRectMake(0, self.calendarView.y + 44, ScreenWidth, 29.5);
+    self.downLine.frame = CGRectMake(0, _calendarView.bottom - 0.5, ScreenWidth, 0.5);
     
-    self.downLine.frame = CGRectMake(0, self.calendarView.bottom - 0.5, ScreenWidth, 0.5);
-    
-    self.headerButton.frame = CGRectMake(0, self.calendarView.y + 0.5, ScreenWidth, 43);
+    self.headerButton.frame = CGRectMake(0, _calendarView.y + 0.5, ScreenWidth, 43);
     
     CGFloat weekLabelWidth = ScreenWidth / 7.0;
-    for (UILabel *label in self.weekView.subviews) {
+    for (UILabel *label in _weekView.subviews) {
         label.frame = CGRectMake(weekLabelWidth * label.tag, 0, weekLabelWidth, 29.5);
         switch (label.tag) {
             case 0:
