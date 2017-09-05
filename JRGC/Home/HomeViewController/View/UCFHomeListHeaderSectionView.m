@@ -29,7 +29,7 @@
     _presenter = presenter;
     
     self.headerTitleLabel.text = presenter.headerTitle;
-    
+    _honerLabel.text = _presenter.desc;
     self.homeListHeaderMoreButton.hidden = !presenter.showMore;
     
     if ([presenter.group.title isEqualToString:@"资金周转"]) {
@@ -43,12 +43,11 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     if (self.presenter.type == 16) {
-        self.honerLabel.hidden = NO;
-        self.honerLabel.text = self.presenter.desc;
+        _honerLabel.hidden = NO;
         self.segView.hidden = NO;
     }
     else {
-        self.honerLabel.hidden = YES;
+        _honerLabel.hidden = YES;
         self.segView.hidden = YES;
     }
 }
