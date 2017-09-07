@@ -233,7 +233,6 @@
 
 - (void)layoutSubviews
 {
-    [super layoutSubviews];
     if (self.presenter) {
         if (_presenter.platformSubsidyExpense.length > 0) {//贴
             _image1W.constant = 18;
@@ -263,7 +262,6 @@
         else {
             _image4W.constant = 0;
         }
-
     }
     
     if (_presenter.item.prdLabelsList.count > 0) {
@@ -272,16 +270,16 @@
             self.proSignBackView.hidden = NO;
             self.proSignLabel.text = [NSString stringWithFormat:@"%@", projectLabel.labelName];
             CGSize size = [projectLabel.labelName boundingRectWithSize:CGSizeMake(MAXFLOAT, 15) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:10.0f]} context:nil].size;
-            self.proSignBackViewWidth.constant = size.width + 11;
+            _proSignBackViewWidth.constant = size.width + 11;
         }
         else {
-            self.proSignBackView.hidden = YES;
-            self.proSignBackViewWidth.constant = 0;
+            _proSignBackView.hidden = YES;
+            _proSignBackViewWidth.constant = 0;
         }
     }
     else {
-        self.proSignBackView.hidden = YES;
-        self.proSignBackViewWidth.constant = 0;
+        _proSignBackView.hidden = YES;
+        _proSignBackViewWidth.constant = 0;
     }
     
     if (self.presenter.modelType == UCFHomeListCellModelTypeDefault) {
@@ -298,6 +296,7 @@
             self.proSignBackView.backgroundColor = UIColorWithRGB(0xfd4d4c);
         }
     }
+    [super layoutSubviews];
 }
 
 - (void)setMicroMoneyModel:(UCFMicroMoneyModel *)microMoneyModel
