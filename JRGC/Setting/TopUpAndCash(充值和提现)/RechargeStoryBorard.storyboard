@@ -318,6 +318,7 @@
                         <outlet property="cardCodeLabel" destination="j7L-yk-EJB" id="b2c-vJ-fOL"/>
                         <outlet property="contentHeight" destination="Xrz-7o-rOI" id="V2F-xi-kLK"/>
                         <outlet property="deleagateLabel" destination="wad-W4-54X" id="Num-Zo-Wz6"/>
+                        <outlet property="deleageteLabelBottom" destination="oId-7f-E0D" id="NMs-Cw-erD"/>
                         <outlet property="desLabel" destination="pjy-KO-TDY" id="uB8-HC-yhs"/>
                         <outlet property="fastPayImageView" destination="R0i-Gb-MfX" id="FDV-yd-q1A"/>
                         <outlet property="getCodeButton" destination="xHa-oe-13K" id="QYH-h0-Gyf"/>

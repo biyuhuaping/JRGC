@@ -21,7 +21,11 @@
 @end
 
 @implementation UCFGoldRaiseTransDetailController
-
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+}
 - (NSMutableArray *)dataArray
 {
     if (!_dataArray) {
