@@ -165,11 +165,10 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *cellId = @"homeListCell";
     UCFMicroMoneyGroup *group = [self.dataArray objectAtIndex:indexPath.section];
     UCFMicroMoneyModel *model = [group.prdlist objectAtIndex:indexPath.row];
     if (group.type.intValue == 16) {
-        cellId = @"homeListInvestCell";
+        static NSString *cellId = @"homeListInvestCell";
         UCFHomeInvestCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
         if (nil == cell) {
             cell = (UCFHomeInvestCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeInvestCell" owner:self options:nil] lastObject];
@@ -179,6 +178,7 @@
         return cell;
     }
     else {
+        static NSString *cellId = @"homeListCell";
         UCFHomeListCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
         if (nil == cell) {
             cell = (UCFHomeListCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeListCell" owner:self options:nil] lastObject];
@@ -208,7 +208,7 @@
     if (group.type.intValue == 16) {
         return 75;
     }
-    return 100;
+    return 95;
 }
 
 #pragma mark - 预约按钮的点击代理方法
