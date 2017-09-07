@@ -210,25 +210,16 @@
     
     
 
-    if(self.accoutType == SelectAccoutTypeHoner)
-    {
-        if (![_contractName isEqualToString:@""]) {
-            self.deleageteLabelBottom.constant = 12;
-              NSString *tmpStr = [NSString stringWithFormat:@"《%@》",_contractName];
-            self.deleagateLabel.text = [NSString stringWithFormat:@"我同意签署%@",tmpStr];
-            self.deleagateLabel.textColor = UIColorWithRGB(0x999999);
-            [self.deleagateLabel addLinkString:tmpStr block:^(ZBLinkLabelModel *linkModel) {
-                [weakSelf showDeleagateView];
-            }];
-            [self.deleagateLabel setFontColor:UIColorWithRGB(0x4aa1f9) string:tmpStr];
-        }else{
-            self.deleageteLabelBottom.constant = 0;
-            self.deleagateLabel.text = @"";
-
-        }
-    }
-    else
-    {
+    if (![_contractName isEqualToString:@""]) {//合同名称存在就展示
+        self.deleageteLabelBottom.constant = 12;
+          NSString *tmpStr = [NSString stringWithFormat:@"《%@》",_contractName];
+        self.deleagateLabel.text = [NSString stringWithFormat:@"我已阅读并同意%@",tmpStr];
+        self.deleagateLabel.textColor = UIColorWithRGB(0x999999);
+        [self.deleagateLabel addLinkString:tmpStr block:^(ZBLinkLabelModel *linkModel) {
+            [weakSelf showDeleagateView];
+        }];
+        [self.deleagateLabel setFontColor:UIColorWithRGB(0x4aa1f9) string:tmpStr];
+    }else{
         self.deleageteLabelBottom.constant = 0;
         self.deleagateLabel.text = @"";
     }
