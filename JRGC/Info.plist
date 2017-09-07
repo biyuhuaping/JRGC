@@ -65,6 +65,16 @@
 				<string>QQ41d704d1</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>keji.com</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>JRGC</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>4</string>
