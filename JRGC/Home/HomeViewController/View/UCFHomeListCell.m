@@ -275,12 +275,12 @@
         }
         else {
             _proSignBackView.hidden = YES;
-            _proSignBackViewWidth.constant = 0;
+//            _proSignBackViewWidth.constant = 0;
         }
     }
     else {
         _proSignBackView.hidden = YES;
-        _proSignBackViewWidth.constant = 0;
+//        _proSignBackViewWidth.constant = 0;
     }
     
     if (self.presenter.modelType == UCFHomeListCellModelTypeDefault) {
