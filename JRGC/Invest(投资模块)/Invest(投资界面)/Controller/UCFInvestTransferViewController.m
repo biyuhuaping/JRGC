@@ -306,6 +306,7 @@
                 if (!hasNext) {
                     [self.tableview.footer noticeNoMoreData];
                 } else {
+                    [self.tableview.footer resetNoMoreData];
                     currentPage++;
                 }
             }

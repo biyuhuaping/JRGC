@@ -239,8 +239,6 @@
     [self addLeftButton];
     [self addRightBtn];
     baseTitleLabel.text = @"黄金账户";
-//    self.baseTableView.delegate = self;
-//    self.baseTableView.dataSource = self;
     [_buyGoldBtn setBackgroundColor:UIColorWithRGB(0xffc027)];
     [_withdrawalsBtn setBackgroundColor:UIColorWithRGB(0x7C9DC7)];
     [_goldCashBtn setBackgroundColor:UIColorWithRGB(0x7C9DC7)];

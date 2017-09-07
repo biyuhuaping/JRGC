@@ -90,35 +90,6 @@
             self.remainLabel.text = presenter.availBorrowAmount;
         }
         
-        
-        if (presenter.platformSubsidyExpense.length > 0) {//贴
-            self.image1W.constant = 18;
-            self.proImageView1.image = [UIImage imageNamed:@"invest_icon_buletie"];
-        }
-        else {
-            self.image1W.constant = 0;
-        }
-        if (presenter.guaranteeCompany.length > 0) {//贴
-            self.image2W.constant = 18;
-            self.proImageView2.image = [UIImage imageNamed:@"particular_icon_guarantee_dark"];
-        }
-        else {
-            self.image2W.constant = 0;
-        }
-        if (presenter.fixedDate.length > 0) {//贴
-            self.image3W.constant = 18;
-            self.proImageView3.image = [UIImage imageNamed:@"invest_icon_redgu-1"];
-        }
-        else {
-            self.image3W.constant = 0;
-        }
-        if (presenter.holdTime.length > 0) {//贴
-            self.image4W.constant = 18;
-            self.proImageView4.image = [UIImage imageNamed:@"invest_icon_ling"];
-        }
-        else {
-            self.image4W.constant = 0;
-        }
         float progress;
         if ([presenter.item.type isEqualToString:@"3"]) {
             progress = 1 - [presenter.item.remainAmount floatValue]/[presenter.item.borrowAmount floatValue];
@@ -141,7 +112,7 @@
         DBLOG(@"type : %@", presenter.item.type);
         if([presenter.item.type isEqualToString:@"3"])
         {
-            self.goldTtileThird.hidden = NO;
+//            self.goldTtileThird.hidden = NO;
             if (presenter.availBorrowAmount.doubleValue > 0) {
                 self.goldTtileThird.text = @"剩余克重";
             }
@@ -160,7 +131,7 @@
             self.startMoneyLabel.text = @"年化收益克重";
         }
         else{
-            self.goldTtileThird.hidden = YES;
+//            self.goldTtileThird.hidden = YES;
             self.timeLabel.font = [UIFont systemFontOfSize:12];
             self.repayModelLabel.font = [UIFont systemFontOfSize:12];
             //控制进度视图显示
@@ -212,34 +183,6 @@
             }
         }
         
-        
-        
-//        self.angleView.angleStatus = presenter.item.status;
-////        DBLOG(@"%@", model.status);
-//        if (presenter.item.prdLabelsList.count>0) {
-//            UCFProjectLabel *projectLabel = [presenter.item.prdLabelsList firstObject];
-//            if ([projectLabel.labelPriority integerValue] == 1) {
-//                self.angleView.angleString = [NSString stringWithFormat:@"%@", projectLabel.labelName];
-//            }
-//        }
-        
-        if (presenter.item.prdLabelsList.count > 0) {
-            UCFProjectLabel *projectLabel = [presenter.item.prdLabelsList firstObject];
-            if ([projectLabel.labelPriority integerValue] == 1) {
-                self.proSignBackView.hidden = NO;
-                self.proSignLabel.text = [NSString stringWithFormat:@"%@", projectLabel.labelName];
-                CGSize size = [projectLabel.labelName boundingRectWithSize:CGSizeMake(MAXFLOAT, 15) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:10.0f]} context:nil].size;
-                self.proSignBackViewWidth.constant = size.width + 11;
-            }
-            else {
-                self.proSignBackView.hidden = YES;
-                self.proSignBackViewWidth.constant = 0;
-            }
-        }
-        else {
-            self.proSignBackView.hidden = YES;
-            self.proSignBackViewWidth.constant = 0;
-        }
     }
 }
 
@@ -291,6 +234,55 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
+    if (self.presenter) {
+        if (_presenter.platformSubsidyExpense.length > 0) {//贴
+            _image1W.constant = 18;
+            self.proImageView1.image = [UIImage imageNamed:@"invest_icon_buletie"];
+        }
+        else {
+            _image1W.constant = 0;
+        }
+        if (_presenter.guaranteeCompany.length > 0) {//贴
+            _image2W.constant = 18;
+            self.proImageView2.image = [UIImage imageNamed:@"particular_icon_guarantee_dark"];
+        }
+        else {
+            _image2W.constant = 0;
+        }
+        if (_presenter.fixedDate.length > 0) {//贴
+            _image3W.constant = 18;
+            self.proImageView3.image = [UIImage imageNamed:@"invest_icon_redgu-1"];
+        }
+        else {
+            _image3W.constant = 0;
+        }
+        if (_presenter.holdTime.length > 0) {//贴
+            _image4W.constant = 18;
+            self.proImageView4.image = [UIImage imageNamed:@"invest_icon_ling"];
+        }
+        else {
+            _image4W.constant = 0;
+        }
+
+    }
+    
+    if (_presenter.item.prdLabelsList.count > 0) {
+        UCFProjectLabel *projectLabel = [_presenter.item.prdLabelsList firstObject];
+        if ([projectLabel.labelPriority integerValue] == 1) {
+            self.proSignBackView.hidden = NO;
+            self.proSignLabel.text = [NSString stringWithFormat:@"%@", projectLabel.labelName];
+            CGSize size = [projectLabel.labelName boundingRectWithSize:CGSizeMake(MAXFLOAT, 15) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:10.0f]} context:nil].size;
+            self.proSignBackViewWidth.constant = size.width + 11;
+        }
+        else {
+            self.proSignBackView.hidden = YES;
+            self.proSignBackViewWidth.constant = 0;
+        }
+    }
+    else {
+        self.proSignBackView.hidden = YES;
+        self.proSignBackViewWidth.constant = 0;
+    }
     
     if (self.presenter.modelType == UCFHomeListCellModelTypeDefault) {
         if ([self.presenter.type isEqualToString:@"3"] || self.goldModel) {

@@ -1,12 +1,12 @@
 //
-//  UCFMyRebateViewCtrl.m
+//  UCFGoldMyRebateViewController.m
 //  JRGC
 //
-//  Created by biyuhuaping on 15/5/11.
-//  Copyright (c) 2015年 qinwei. All rights reserved.
+//  Created by 张瑞超 on 2017/9/5.
+//  Copyright © 2017年 qinwei. All rights reserved.
 //
 
-#import "UCFMyRebateViewCtrl.h"
+#import "UCFGoldMyRebateViewController.h"
 #import "UCFRebateCell.h"//邀请返利明细
 #import "UCFFriendRecCell.h"//好友未回款
 #import "UCFFriendRecCell1.h"//好友已回款
@@ -19,9 +19,8 @@
 #import "UCFNoDataView.h"
 #import "UCFDataStatisticsViewController.h"
 #import "UCFRebateGoldCell.h"
-
-@interface UCFMyRebateViewCtrl ()<UITableViewDataSource, UITableViewDelegate>
-
+#import "UCFGoldRebateCell.h"
+@interface UCFGoldMyRebateViewController ()<UITableViewDataSource, UITableViewDelegate,UIScrollViewDelegate>
 @property (strong, nonatomic) IBOutlet UIView *itemChangeView;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *centerX;//下划线的
 @property (strong, nonatomic) UILabel *totalCountLab;//记录总数
@@ -64,14 +63,7 @@
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *height;
 
 //回款明细 弹出页面
-@property (strong, nonatomic) IBOutlet UIView *alertView;
-@property (strong, nonatomic) IBOutlet UIButton *closeBtn;
-@property (strong, nonatomic) IBOutlet UITableView *tableView4;
-@property (strong, nonatomic) NSMutableArray *dataArr4;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *lineViewHeight1;
-@property (strong, nonatomic) IBOutlet UILabel *nperLab;//期数
-@property (strong, nonatomic) IBOutlet UILabel *investorsLab;//投资人
-@property (weak, nonatomic) IBOutlet NZLabel *inverstNumLab; //投资人数
 @property (weak, nonatomic) IBOutlet UIButton *feedBackDetailLab; //邀请返利明细
 @property (weak, nonatomic) IBOutlet UIButton *friendUnFeedBackLab;//好友未回款
 @property (weak, nonatomic) IBOutlet UIButton *friendFeedBackLab;//好友已回款
@@ -79,22 +71,31 @@
 
 @end
 
-@implementation UCFMyRebateViewCtrl
+@implementation UCFGoldMyRebateViewController
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self addLeftButton];
+
+    baseTitleLabel.text = @"黄金邀请返利";
+    [_friendUnFeedBackLab setTitle:@"好友未回金" forState:UIControlStateNormal];
+    [_friendFeedBackLab setTitle:@"好友已回金" forState:UIControlStateNormal];
+    _friendCountLab.text = [NSString stringWithFormat:@"邀请购买人数:%@人",_feedBackDictionary[@"friendCount"]];
+    _sumCommLab.text = [NSString stringWithFormat:@"¥%@",_feedBackDictionary[@"sumComm"]];
+    _recCountLab.text = [NSString stringWithFormat:@"邀请注册人数：%@人",_feedBackDictionary[@"recCount"]];
+    [_feedBackDetailLab setTitleColor:UIColorWithRGB(0xfc8f0e) forState:UIControlStateSelected];
+    [_friendUnFeedBackLab setTitleColor:UIColorWithRGB(0xfc8f0e) forState:UIControlStateSelected];
+    [_friendFeedBackLab setTitleColor:UIColorWithRGB(0xfc8f0e) forState:UIControlStateSelected];
     [_feedBackDetailLab setTitleColor:UIColorWithRGB(0x555555) forState:UIControlStateNormal];
     [_friendUnFeedBackLab setTitleColor:UIColorWithRGB(0x555555) forState:UIControlStateNormal];
     [_friendFeedBackLab setTitleColor:UIColorWithRGB(0x555555) forState:UIControlStateNormal];
+    _moveLineView.backgroundColor = UIColorWithRGB(0xfc8f0e);
+        
 
-    baseTitleLabel.text = self.accoutType  == SelectAccoutTypeHoner ?  @"尊享返利":@"微金返利";
-    
-    
     _dataArr1 = [NSMutableArray new];
     _dataArr2 = [NSMutableArray new];
     _dataArr3 = [NSMutableArray new];
-    _dataArr4 = [NSMutableArray new];
     _monthDataArr1 = [NSMutableArray array];
     _monthDataArr2 = [NSMutableArray array];//_monthDataArr1不需要在此初始化
     _monthDataArr3 = [NSMutableArray array];
@@ -106,9 +107,8 @@
     _index = 0;
     _didClickBtns = [NSMutableArray arrayWithObject:@(0)];
     
+    _titleArr1 = @[@"认购中", @"满标", @"回金中", @"已回金"];
 
-    _titleArr1 = @[@"未审核", @"等待确认", @"招标中", @"流标", @"满标", @"回款中", @"已回款"];
-    
     _titleArr2 = @[@"已认证", @"未认证"];
     
     UIButton *btn = (UIButton *)[self.itemChangeView viewWithTag:100];
@@ -119,46 +119,8 @@
     [self initTableView];
     _noDataView = [[UCFNoDataView alloc] initWithFrame:_tableView1.bounds errorTitle:@"暂无数据"];
     
-    _alertView.frame = CGRectMake(0, 0, 265, 274);
-    _alertView.layer.cornerRadius = 8;
-
-    [_closeBtn setBackgroundImage:[[UIImage imageNamed:@"btn_red"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:2.5] forState:UIControlStateNormal];
-    [_closeBtn setBackgroundImage:[[UIImage imageNamed:@"btn_red_highlight"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:2.5] forState:UIControlStateHighlighted];
     
-    
-    NSString *gcmCode = [[NSUserDefaults standardUserDefaults] objectForKey:@"gcmCode"];
-    if ([gcmCode hasPrefix:@"A"]) {
-//        [self addRightButton];
-    }
-    else {
-        self.navigationItem.rightBarButtonItem = nil;
-    }
-}
 
-- (void)addRightButton
-{
-    UIButton *rightbutton = [UIButton buttonWithType:UIButtonTypeCustom];
-    rightbutton.frame = CGRectMake(0, 0, 75, 44);
-    [rightbutton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [rightbutton setTitle:@"统计数据" forState:UIControlStateNormal];
-    rightbutton.titleLabel.font = [UIFont systemFontOfSize:15.0];
-    [rightbutton addTarget:self action:@selector(clickRightBtn) forControlEvents:UIControlEventTouchUpInside];
-    [rightbutton setTitleColor:[UIColor colorWithWhite:1 alpha:0.7] forState:UIControlStateHighlighted];
-    [rightbutton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
-//
-    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightbutton];
-    self.navigationItem.rightBarButtonItem = rightItem;
-}
-
-- (void)clickRightBtn
-{
-    UCFDataStatisticsViewController *dataStatistic = [[UCFDataStatisticsViewController alloc] initWithNibName:@"UCFDataStatisticsViewController" bundle:nil];
-    [self.navigationController pushViewController:dataStatistic animated:YES];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)initTableView{
@@ -196,30 +158,17 @@
     //=========  下拉刷新、上拉加载更多  =========
     __weak typeof(self) weakSelf = self;
     // 添加传统的下拉刷新
-//    [_tableView1 addLegendHeaderWithRefreshingBlock:^{
-//        // 进入刷新状态后会自动调用这个block
-//        [weakSelf getDataList];
-//    }];
-//    
-//    // 添加上拉加载更多
+    //    // 添加上拉加载更多
     [_tableView1 addLegendFooterWithRefreshingBlock:^{
         [weakSelf getDataList];
     }];
     [_tableView1 addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(getDataList)];
     [_tableView2 addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(getDataList)];
     [_tableView3 addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(getDataList)];
-
+    
     // 马上进入刷新状态
     [_tableView1.header beginRefreshing];
-    
-    //=========
-    // 添加传统的下拉刷新
-//    [_tableView2 addLegendHeaderWithRefreshingBlock:^{
-//        // 进入刷新状态后会自动调用这个block
-//        [weakSelf getDataList];
-//    }];
-    
-    // 添加上拉加载更多
+
     [_tableView2 addLegendFooterWithRefreshingBlock:^{
         [weakSelf getDataList];
     }];
@@ -339,7 +288,7 @@
 }
 
 - (IBAction)toUCFRegistrationRecordView:(id)sender {
-   }
+}
 
 #pragma mark - UITableViewDelegate
 // tableview的数据源方法
@@ -355,9 +304,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    if (tableView == _tableView4) {
-        return 0;
-    }
+
     return 30;
 }
 
@@ -380,25 +327,22 @@
     [headerView addSubview:right];
     
     if (tableView == _tableView1) {
-
-        NSString *t = [_monthDataArr1 objectSafeAtIndex:section];
-        left.text = [[t stringByReplacingOccurrencesOfString:@"-" withString:@"年"] stringByAppendingString:@"月"];
-        NSString *commission = @"0";//[[_monthTitlArr1 objectSafeAtIndex:section] objectSafeForKey:@"commission"];
-        for (NSDictionary *dic in _monthTitlArr1) {
-            if ([dic[@"transactionTime"] isEqualToString:t]) {
-                commission = [dic objectSafeForKey:@"commission"];
+        if (self.accoutType == SelectAccoutTypeGold) {
+            NSString *t = [_monthDataArr1 objectSafeAtIndex:section];
+            left.text = [[t stringByReplacingOccurrencesOfString:@"-" withString:@"年"] stringByAppendingString:@"月"];
+            NSString *commission = @"0";//[[_monthTitlArr1 objectSafeAtIndex:section] objectSafeForKey:@"commission"];
+            for (NSDictionary *dic in _monthTitlArr1) {
+                if ([dic[@"transactionTime"] isEqualToString:t]) {
+                    commission = [dic objectSafeForKey:@"commission"];
+                }
             }
+            right.text = [NSString stringWithFormat:@"本月收益%@",commission];
         }
-        right.text = [NSString stringWithFormat:@"本月收益¥%@",commission];
         
-        
-
     }else if (tableView == _tableView2) {
         left.text = [[[[_monthDataArr2 objectSafeAtIndex:section]objectSafeForKey:@"repayPerDate"] stringByReplacingOccurrencesOfString:@"-" withString:@"年"] stringByAppendingString:@"月"];
         NSString *headStr = @"";
-
-        headStr = [NSString stringWithFormat:@"本月共%@笔回款",[_monthDataArr2 objectSafeAtIndex:section][@"counts"]];
-        
+        headStr = [NSString stringWithFormat:@"本月共%@笔回金",[_monthDataArr2 objectSafeAtIndex:section][@"counts"]];
         right.text = headStr;
     }else if (tableView == _tableView3) {
         NSString *t = [_monthDataArr3 objectSafeAtIndex:section];
@@ -410,9 +354,7 @@
             }
         }
         NSString *headStr = @"";
-
-        headStr = [NSString stringWithFormat:@"本月共%@笔回款",commission];
-        
+        headStr = [NSString stringWithFormat:@"本月共%@笔回金",commission];
         right.text = headStr;
     }
     return headerView;
@@ -426,8 +368,6 @@
         return [_dataArr2[section] count];
     }else if (tableView == _tableView3){
         return [_dataArr3[section] count];
-    } else if (tableView == _tableView4){
-        return _dataArr4.count;
     }
     return 0;
 }
@@ -435,24 +375,28 @@
 //行高
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (tableView == _tableView1) {
-        NSDictionary * dic = _dataArr1[indexPath.section][indexPath.row];
-        float tableViewRowHeight = 0;
-        if (indexPath.row == [_dataArr1[indexPath.section] count] - 1 && indexPath.section != _dataArr1.count - 1) {
-            tableViewRowHeight = 299;
-        }else{
-            tableViewRowHeight = 289;
+            NSDictionary * dic = _dataArr1[indexPath.section][indexPath.row];
+            if ([dic[@"bizType"] isEqualToString:@"02"]) {
+                float tableViewRowHeight = 174;
+                if (indexPath.row == [_dataArr1[indexPath.section] count] - 1 && indexPath.section != _dataArr1.count - 1) {
+                    tableViewRowHeight += 10;
+                }
+                return tableViewRowHeight;
+            } else {
+                float tableViewRowHeight = 258;
+                
+                if (indexPath.row == [_dataArr1[indexPath.section] count] - 1 && indexPath.section != _dataArr1.count - 1) {
+                    tableViewRowHeight += 10;
+                }
+                
+                //判断是否有实际回款日期
+                if (![dic[@"actualRefundTime"] hasPrefix:@"20"]) {
+                    tableViewRowHeight -= 28;
+                }
+                return tableViewRowHeight;
+                
         }
-        
-        //判断好友返利是否为0.0
-        if ([dic[@"lenderCommission"] floatValue] <= 0) {
-            tableViewRowHeight -= 28;
-        }
-        //判断是否有实际回款日期
-        if (![dic[@"paidTime"] hasPrefix:@"20"]) {
-            tableViewRowHeight -= 28;
-        }
-        return tableViewRowHeight;
-    } else if (tableView == _tableView2){
+    }else if (tableView == _tableView2){
         if (indexPath.row == [_dataArr2[indexPath.section] count]- 1) {
             return 145;
         }
@@ -462,8 +406,6 @@
             return 175;
         }
         return 165;
-    }else if (tableView == _tableView4){
-        return 33;
     }
     return 0;
 }
@@ -475,87 +417,68 @@
         NSDictionary * kindDict = _dataArr1[indexPath.section][indexPath.row];
         if ([kindDict[@"bizType"] isEqualToString:@"01"]) {
             static  NSString *indentifier = @"UCFRebateCell";
-            UCFRebateCell *cell = [tableView dequeueReusableCellWithIdentifier:indentifier];
+            UCFGoldRebateCell *cell = [tableView dequeueReusableCellWithIdentifier:indentifier];
             if (!cell) {
-                cell = [[NSBundle mainBundle]loadNibNamed:@"UCFRebateCell" owner:self options:nil][0];
+                cell = [[NSBundle mainBundle]loadNibNamed:@"UCFGoldRebateCell" owner:self options:nil][0];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                cell.backgroundColor = UIColorWithRGB(0xebebee);
             }
-            NSDictionary * dic = _dataArr1[indexPath.section][indexPath.row];
-            id status = dic[@"status"];
-            cell.title1.text = dic[@"prdClaimsName"];//标名称
+                NSDictionary * dic = _dataArr1[indexPath.section][indexPath.row];
+                cell.bidName.text = dic[@"prdClaimsName"];//标名称
+                id status = dic[@"status"];
+                cell.bidState.text = _titleArr1[[status intValue] - 1];
+                cell.investPeopleName.text = dic[@"applyName"];//投资人
+                cell.investBeginTime.text = dic[@"tradeTime"];//投资日期
+                NSString *qxdate = [dic objectSafeForKey: @"startingDate"];
+                cell.investQXTime.text = qxdate.length > 0 ? qxdate :@"--" ;//起息日期
+                cell.investNum.text = [NSString stringWithFormat:@"%@克",dic[@"purchaseAmount"]];//投资本金
+                float tableViewRowHeight = 258;
+                 //判断是否有实际回款日期
+                if (![dic[@"actualRefundTime"] hasPrefix:@"20"]) {
+                    tableViewRowHeight -= 28;
+                    cell.auctualDateHeight.constant = 0;
+                }else{
+                    cell.auctualDateHeight.constant = 28;
+                    cell.investActualTime.text = dic[@"actualRefundTime"];
+                }
+//                cell.cellUpBigViewHight.constant = tableViewRowHeight;
+                cell.myFeedBackMoney.text = [NSString stringWithFormat:@"%@",dic[@"commissionAmt"]]; //我的返利
+                cell.investPlanDate.text = [dic[@"refundPerDate"] length] > 0 ? dic[@"refundPerDate"]:@"--";//回款日
+                cell.bidInterest.text = [NSString stringWithFormat:@"%@",dic[@"annualRate"]];//15%
+                if ([dic[@"holdTime"]length] > 0) {
+                    cell.bidTime.text = [NSString stringWithFormat:@"%@~%@",dic[@"holdTime"],dic[@"repayPeriodtext"]];//投资期限
+                }else{
+                    cell.bidTime.text =[NSString stringWithFormat:@"%@天",dic[@"periodTerm"]];//30天
+                }
+                cell.bidDealType.text = dic[@"repayModetext"];//一次结清
+    
+                if ([cell.bidState.text isEqualToString:@"回金中"]) {
+                    cell.bidState.textColor = UIColorWithRGB(0xffc027);
+                } else if ([cell.bidState.text isEqualToString:@"认购中"]){
+                    cell.bidState.textColor = UIColorWithRGB(0x4aa1f9);//那种红0x4aa1f9
+                } else if ([cell.bidState.text isEqualToString:@"满标"]){
+                    cell.bidState.textColor = UIColorWithRGB(0xffc027);
+                } else{
+                    cell.bidState.textColor = UIColorWithRGB(0x999999);
+                }
             
-            int count = [dic[@"count"]intValue];//总几期
-            if (count > 1) {
-                NSString *repayperno = dic[@"repayperno"];//第几期
-                NSString *string = [NSString stringWithFormat:@"(第%@期/共%d期)",repayperno,count];
-                cell.title2.text = [NSString stringWithFormat:@"计划回款日%@",string];//回款日
-                [cell.title2 setFontColor:UIColorWithRGB(0x999999) string:string];
-                cell.imag.hidden = NO;
-            }else{
-                cell.title2.text = @"计划回款日";
-                cell.imag.hidden = YES;
+            return cell;
+        } else {
+            static  NSString *indentifier = @"UCFRebateGoldCell";
+            UCFRebateGoldCell *cell = [tableView dequeueReusableCellWithIdentifier:indentifier];
+            if (!cell) {
+                cell = [[NSBundle mainBundle]loadNibNamed:@"UCFRebateGoldCell" owner:self options:nil][0];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                cell.backgroundColor = UIColorWithRGB(0xebebee);
             }
-            
-            
-            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didSelectReply:)];
-            [cell.imag addGestureRecognizer:tap];
-            
-            cell.title_1.text = _titleArr1[[status intValue]];
-            cell.title_2.text = dic[@"applyName"];//投资人
-            cell.title_3.text = dic[@"applyDateStr"];//投资日期
-            cell.title_4.text = [NSString stringWithFormat:@"%@",dic[@"investAmt"]];//投资本金
-            
-            
-            float tableViewRowHeight = 278;
-            //判断好友返利是否为0.0
-            if([dic[@"lenderCommission"] floatValue] > 0 ){
-                cell.friendRebateViewHeight.constant = 28;
-                cell.title_5.text = [NSString stringWithFormat:@"¥%@",dic[@"lenderCommission"]];//好友返利
-            }else{
-                tableViewRowHeight -= 28;
-                cell.friendRebateViewHeight.constant = 0;
-            }
-            
-            //判断是否有实际回款日期
-            if (![dic[@"paidTime"] hasPrefix:@"20"]) {
-                tableViewRowHeight -= 28;
-                cell.paidTimeViewHeight.constant = 0;
-            }else{
-                cell.paidTimeViewHeight.constant = 28;
-                cell.paidTimeLab.text = dic[@"paidTime"];
-            }
-            cell.cellUpBigViewHight.constant = tableViewRowHeight;
-            
-            
-            cell.title_6.text = [NSString stringWithFormat:@"¥%@",dic[@"totalCommission"]]; //我的返利
-            NSString *qxdate = [dic objectSafeForKey: @"qxdate"];
-            cell.title_7.text = qxdate.length > 0 ? qxdate :@"--" ;//起息日期
-            cell.title_8.text = [dic[@"repaydate"] length] > 0 ? dic[@"repaydate"]:@"--";//回款日
-            
-            cell.lab1.text = [NSString stringWithFormat:@"%@",dic[@"arate"]];//15%
-            if ([dic[@"holdTime"]length] > 0) {
-                cell.lab2.text = [NSString stringWithFormat:@"%@~%@",dic[@"holdTime"],dic[@"repayPeriodtext"]];//投资期限
-            }else{
-                cell.lab2.text = dic[@"repayPeriodtext"];//30天
-            }
-            cell.lab3.text = dic[@"repayModetext"];//一次结清
-            
-            if ([[dic objectSafeForKey:@"arate"] isEqualToString:@""]) {
-                cell.title1TopConstraint.constant = 28;
-            }else{
-                cell.title1TopConstraint.constant = 21;
-            }
-            if ([cell.title_1.text isEqualToString:@"回款中"]) {
-                cell.title_1.textColor = UIColorWithRGB(0x4aa1f9);
-            } else if ([cell.title_1.text isEqualToString:@"招标中"]){
-                cell.title_1.textColor = UIColorWithRGB(0xF9333C);//那种红
-            } else if ([cell.title_1.text isEqualToString:@"满标"]){
-                cell.title_1.textColor = UIColorWithRGB(0xfa4d4c);
-            } else{
-                cell.title_1.textColor = UIColorWithRGB(0x999999);
-            }
-        
-        return cell;
+            cell.nameLab.text =  kindDict[@"applyName"];//姓名
+            cell.benginDateLab.text = kindDict[@"tradeTime"];
+            cell.profitLab.text = [NSString stringWithFormat:@"¥%@",kindDict[@"profitMoney"]];
+            cell.myFeedBackLab.text = kindDict[@"commissionAmt"];
+            cell.bidNameLab.text = kindDict[@"prdClaimsName"];
+            cell.annateLab.text = [NSString stringWithFormat:@"%@%%",kindDict[@"annualRate"]];
+            cell.myFeedBackLab.textColor = UIColorWithRGB(0xffc027);
+            return cell;
         }
     }else if (tableView == _tableView2){//好友未回款列表
         static  NSString *indentifier = @"FriendRecCell";
@@ -563,72 +486,39 @@
         if (!cell) {
             cell = [[NSBundle mainBundle]loadNibNamed:@"UCFFriendRecCell" owner:self options:nil][0];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        }
-
-            cell.lab1.text = _dataArr2[indexPath.section][indexPath.row][@"realName"];//姓名
-            cell.lab2.text = _dataArr2[indexPath.section][indexPath.row][@"mobile"];//手机号
-            int maxPerNo = [_dataArr2[indexPath.section][indexPath.row][@"maxPerNo"]intValue];//总几期
-            NSString *repayperno = _dataArr2[indexPath.section][indexPath.row][@"repayPerNo"];//第几期
-            NSString *string = [NSString stringWithFormat:@"(第%@期/共%d期)",repayperno,maxPerNo];
-            
-            if (maxPerNo > 0) {
-                cell.planLabel.text = [NSString stringWithFormat:@"计划回款日%@",string];//回款日
-            }else{
-                cell.planLabel.text = @"计划回款日";
+            if (self.accoutType == SelectAccoutTypeGold) {
+                cell.investorLab.text = @"购买人";
+                cell.planLabel.text = @"计划回金日";
+                cell.payGoldGram.text = @"回金克重";
             }
-            [cell.planLabel setFontColor:UIColorWithRGB(0x999999) string:string];
-            
-            cell.lab3.text = _dataArr2[indexPath.section][indexPath.row][@"repayPerDate"] ;//计划回款日
-            NSString *refundAmtStr = _dataArr2[indexPath.section][indexPath.row][@"refundAmt"];
-            cell.lab4.text = [refundAmtStr hasPrefix:@"*"] ? refundAmtStr : [NSString stringWithFormat:@"¥%@",refundAmtStr];//回款金额
-        
-
-            return cell;
+        }
+        cell.lab1.text = _dataArr2[indexPath.section][indexPath.row][@"applyName"];//姓名
+        cell.lab2.text = _dataArr2[indexPath.section][indexPath.row][@"phone"];//手机号
+        cell.planLabel.text = @"计划回金日";
+        cell.lab3.text = _dataArr2[indexPath.section][indexPath.row][@"refundPerDate"] ;//计划回款日
+        NSString *refundAmtStr = _dataArr2[indexPath.section][indexPath.row][@"planRefundAmount"];
+        cell.lab4.text = [refundAmtStr hasPrefix:@"*"] ? refundAmtStr : [NSString stringWithFormat:@"%@克",refundAmtStr];//回款金额
+        return cell;
     }else if (tableView == _tableView3){//好友已回款列表
         static  NSString *indentifier = @"FriendRecCell1";
         UCFFriendRecCell1 *cell = [tableView dequeueReusableCellWithIdentifier:indentifier];
         if (!cell) {
             cell = [[NSBundle mainBundle]loadNibNamed:@"UCFFriendRecCell1" owner:self options:nil][0];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        }
-
-            cell.lab1.text = _dataArr3[indexPath.section][indexPath.row][@"realName"];//姓名
-            cell.lab2.text = _dataArr3[indexPath.section][indexPath.row][@"mobile"];//手机号
-            int maxPerNo = [_dataArr3[indexPath.section][indexPath.row][@"maxPerNo"]intValue];//总几期
-            NSString *repayperno = _dataArr3[indexPath.section][indexPath.row][@"repayPerNo"];//第几期
-            NSString *string = [NSString stringWithFormat:@"(第%@期/共%d期)",repayperno,maxPerNo];
-            if (maxPerNo > 0) {
-                cell.planLabel.text = [NSString stringWithFormat:@"计划回款日%@",string];//回款日
-            }else{
-                cell.planLabel.text = @"计划回款日";
+            if (self.accoutType == SelectAccoutTypeGold) {
+                cell.investorLab.text = @"购买人";
+                cell.planLabel.text = @"计划回金日";
+                cell.payGoldGram.text = @"回金克重";
+                cell.actulPayDateLab.text = @"实际回金日";
             }
-            [cell.planLabel setFontColor:UIColorWithRGB(0x999999) string:string];
-            
-            cell.lab3.text = _dataArr3[indexPath.section][indexPath.row][@"repayPerDate"];//计划回款日
-            cell.lab4.text = _dataArr3[indexPath.section][indexPath.row][@"paidTime"];//实际回款日
-            NSString *refundAmtStr = _dataArr3[indexPath.section][indexPath.row][@"refundAmt"];//计划回款日
-            cell.lab5.text = [refundAmtStr hasPrefix:@"*"] ? refundAmtStr : [NSString stringWithFormat:@"¥%@",refundAmtStr];//回款金额
+        }
+            cell.lab1.text = _dataArr3[indexPath.section][indexPath.row][@"applyName"];//姓名
+            cell.lab2.text = _dataArr3[indexPath.section][indexPath.row][@"phone"];//手机号
+            cell.planLabel.text = @"计划回金日";
+            cell.lab3.text = _dataArr3[indexPath.section][indexPath.row][@"refundPerDate"] ;//计划回款日
+            NSString *refundAmtStr = _dataArr3[indexPath.section][indexPath.row][@"planRefundAmount"];
+            cell.lab4.text = [refundAmtStr hasPrefix:@"*"] ? refundAmtStr : [NSString stringWithFormat:@"%@克",refundAmtStr];//回款金额
         
-
-        return cell;
-    }else if (tableView == _tableView4){//分期回款列表
-        static  NSString *indentifier = @"ReturnedMoneyCell";
-        ReturnedMoneyCell *cell = [tableView dequeueReusableCellWithIdentifier:indentifier];
-        if (!cell) {
-            cell = [[NSBundle mainBundle]loadNibNamed:@"ReturnedMoneyCell" owner:self options:nil][0];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        }
-
-            cell.lab1.text = _dataArr4[indexPath.row][@"repaydate"];//回款日
-            cell.lab2.text = [NSString stringWithFormat:@"第%@期",_dataArr4[indexPath.row][@"repayperno"]];//第几期
-            NSString *status = _dataArr4[indexPath.row][@"status"];//回款状态
-            if ([status isEqualToString:@"0"]) {//0未还 1已还
-                cell.lab3.text = @"未还";
-                [cell.lab3 setTextColor:UIColorWithRGB(0xfd4d4c)];
-            }else{
-                cell.lab3.text = @"已还";
-                [cell.lab3 setTextColor:UIColorWithRGB(0x4aa1f9)];
-            }
         return cell;
     }
     return nil;
@@ -639,16 +529,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
-//点击回款日明细方法
-- (void)didSelectReply:(UITapGestureRecognizer *)sender{
-    [self showAlertView];
-    NSIndexPath *indexPath = [_tableView1 indexPathForRowAtPoint:[sender locationInView:_tableView1]];
-    DBLOG(@"响应手势:%@",_dataArr1[indexPath.section][indexPath.row]);
-    
-    NSString *userId = [[NSUserDefaults standardUserDefaults] objectForKey:UUID];
-    NSString *strParameters = [NSString stringWithFormat:@"userId=%@&odrclaimsid=%@",userId,_dataArr1[indexPath.section][indexPath.row][@"id"]];//5644
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kAppQueryByManyList owner:self Type:self.accoutType];
-}
+
 
 #pragma mark - 请求网络及回调
 //获取我的投资列表
@@ -663,11 +544,13 @@
             }else if (_tableView1.footer.isRefreshing){
                 _pageNum1 ++;
             }
-
-            NSString *strParameters = [NSString stringWithFormat:@"userId=%@&page=%ld&rows=20",userId, (long)_pageNum1];//@"1674"(long)pageNum
-            [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagFriendsList owner:self Type:self.accoutType];
-            
-
+            if (self.accoutType == SelectAccoutTypeGold) {
+                NSMutableDictionary *tmpDict = [NSMutableDictionary dictionaryWithCapacity:1];
+                [tmpDict setValue:userId forKey:@"userId"];
+                [tmpDict setValue:[NSString stringWithFormat:@"%ld",(long)_pageNum1] forKey:@"page"];
+                [tmpDict setValue:@"20" forKey:@"rows"];
+                [[NetworkModule sharedNetworkModule] newPostReq:tmpDict tag:kSXTagGoldFriendList owner:self signature:YES Type:SelectAccoutDefault];
+            }
         }
             break;
             
@@ -678,8 +561,16 @@
             }else if (_tableView2.footer.isRefreshing){
                 _pageNum2 ++;
             }
-            NSString *strParameters = [NSString stringWithFormat:@"userId=%@&page=%ld&rows=20&status=0",userId, (long)_pageNum2];//5644
-            [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSRecommendRefund owner:self Type:self.accoutType];
+            if (self.accoutType == SelectAccoutTypeGold) {
+                
+                NSMutableDictionary *tmpDict = [NSMutableDictionary dictionaryWithCapacity:1];
+                [tmpDict setValue:userId forKey:@"userId"];
+                [tmpDict setValue:[NSString stringWithFormat:@"%ld",(long)_pageNum2] forKey:@"page"];
+                [tmpDict setValue:@"20" forKey:@"rows"];
+                [tmpDict setValue:@"00" forKey:@"status"];
+                [[NetworkModule sharedNetworkModule] newPostReq:tmpDict tag:kSXTagGoldRecommendRefund owner:self signature:YES Type:SelectAccoutDefault];
+                
+            }
         }
             break;
         case 2://（邀请返利-好友已回款）
@@ -689,9 +580,14 @@
             }else if (_tableView3.footer.isRefreshing){
                 _pageNum3 ++;
             }
-            
-            NSString *strParameters = [NSString stringWithFormat:@"userId=%@&page=%ld&rows=20&status=1",userId, (long)_pageNum3];//5644
-            [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSRecommendRefund owner:self Type:self.accoutType];
+            if (self.accoutType == SelectAccoutTypeGold) {
+                NSMutableDictionary *tmpDict = [NSMutableDictionary dictionaryWithCapacity:1];
+                [tmpDict setValue:userId forKey:@"userId"];
+                [tmpDict setValue:[NSString stringWithFormat:@"%ld",(long)_pageNum3] forKey:@"page"];
+                [tmpDict setValue:@"20" forKey:@"rows"];
+                [tmpDict setValue:@"01" forKey:@"status"];
+                [[NetworkModule sharedNetworkModule] newPostReq:tmpDict tag:kSXTagGoldRecommendRefund owner:self signature:YES Type:SelectAccoutDefault];
+            }
         }
             break;
     }
@@ -699,7 +595,7 @@
 
 //开始请求
 - (void)beginPost:(kSXTag)tag{
-//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    //    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 }
 
 //请求成功及结果
@@ -707,52 +603,14 @@
 {
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     NSMutableDictionary *dic = [result objectFromJSONString];
-    NSString *rstcode = dic[@"status"];
     NSString *rsttext = dic[@"statusdes"];
     DBLOG(@"我的返利页：%@",dic);
-
-    if (tag.intValue == kAppQueryByManyList){
-        _nperLab.text = [NSString stringWithFormat:@"第%@期/共%@期",dic[@"datasizepre"],dic[@"datasize"]];//期数
-        _investorsLab.text = [NSString stringWithFormat:@"投资人：%@",dic[@"realname"]];//投资人
-        _dataArr4 = [[NSMutableArray alloc]initWithArray:dic[@"reslist"]];
-        [_tableView4 reloadData];
-        if (_dataArr4.count <= 3) {
-            _alertView.frame = CGRectMake(0, 0, 265, 274);
-        }else
-            _alertView.frame = CGRectMake(0, 0, 265, 373);
-        _alertView.center = self.view.center;
-    }
     //（邀请返利-邀请投资明细）
-    else if (tag.intValue == kSXTagFriendsList) {
-        NSArray *tempArr = dic[@"pageData"][@"result"];
-
-        NSString *sumComm = dic[@"sumComm"];
-        NSString *friendCount = dic[@"friendCount"];
-        NSString *recCount = dic[@"recCount"];
-        if (!sumComm || [sumComm isKindOfClass:[NSNull class]]) {
-            sumComm = @"";
-        }else if(!friendCount || [friendCount isKindOfClass:[NSNull class]]){
-            friendCount = @"";
-        }else if (!recCount || [recCount isKindOfClass:[NSNull class]]){
-            recCount = @"";
-        }
-        sumComm = [UCFToolsMehod AddComma:dic[@"sumComm"]];
-        _totalCountLab.text = [NSString stringWithFormat:@"共%@笔回款记录",[[[dic objectSafeForKey:@"pageData"] objectSafeForKey:@"pagination"]objectSafeForKey:@"totalCount"]];
-        _sumCommLab.text = [NSString stringWithFormat:@"¥%@",sumComm];//我的返利
-        if (self.accoutType == SelectAccoutTypeGold) {
-            _friendCountLab.text = [NSString stringWithFormat:@"邀请购买人数:%@人",friendCount];//邀请投资人数
-        } else {
-            _friendCountLab.text = [NSString stringWithFormat:@"邀请投资人数:%@人",friendCount];//邀请投资人数
-        }
-        _recCountLab.text = [NSString stringWithFormat:@"邀请注册人数:%@人",recCount];//邀请注册人数
-        
-        if (_headerInfoBlock) {
-            _headerInfoBlock(@{@"sumComm":sumComm,@"friendCount":friendCount,@"recCount":recCount});
-        }
-        
+     if (tag.intValue == kSXTagGoldFriendList) {
+        NSArray *tempArr = dic[@"data"][@"pageData"][@"result"];
         _tableView1.footer.hidden = NO;
-        if ([rstcode intValue] == 1) {
-            _monthTitlArr1 = [NSMutableArray arrayWithArray:dic[@"monthDataList"]];
+        if ([dic[@"ret"] boolValue]) {
+            _monthTitlArr1 = [NSMutableArray arrayWithArray:dic[@"data"][@"monthDataList"]];
             if (_pageNum1 == 1) {
                 _dataArr_1 = [NSMutableArray arrayWithArray:tempArr];
                 [_tableView1.header endRefreshing];
@@ -771,13 +629,13 @@
             [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
             [self endRefreshing];
         }
-    } else if (tag.intValue == kSRecommendRefund) {
-        NSArray *tempArr = dic[@"pageData"][@"result"];
+    } else if (tag.intValue == kSXTagGoldRecommendRefund) {
+        NSArray *tempArr = dic[@"data"][@"pageData"][@"result"];
         if (_index == 1) {
             _tableView2.footer.hidden = NO;
-            if ([rstcode intValue] == 1) {
+            if ([dic[@"ret"] boolValue]) {
                 if (_pageNum2 == 1) {
-                    _monthDataArr2 = [NSMutableArray arrayWithArray:dic[@"monthlist"]];
+                    _monthDataArr2 = [NSMutableArray arrayWithArray:dic[@"data"][@"monthlist"]];
                     _dataArr_2 = [NSMutableArray arrayWithArray:tempArr];
                     [_tableView2.header endRefreshing];
                     [_tableView2.footer endRefreshing];
@@ -799,8 +657,8 @@
         //（邀请返利-好友已回款）
         else if (_index == 2) {
             _tableView3.footer.hidden = NO;
-            if ([rstcode intValue] == 1) {
-                _monthTitlArr3 = [NSMutableArray arrayWithArray:dic[@"monthlist"]];
+            if ([dic[@"ret"] boolValue]) {
+                _monthTitlArr3 = [NSMutableArray arrayWithArray:dic[@"data"][@"monthlist"]];
                 if (_pageNum3 == 1) {
                     _dataArr_3 = [NSMutableArray arrayWithArray:tempArr];
                     [_tableView3.header endRefreshing];
@@ -859,15 +717,8 @@
             if (![_monthDataArr1 containsObject:dateStr]) {
                 [_monthDataArr1 addObject:dateStr];
             }
-        } else {
-            NSString *dateStr = [_dataArr_1[i][@"applyDate"]substringToIndex:7];
-            if (![_monthDataArr1 containsObject:dateStr]) {
-                [_monthDataArr1 addObject:dateStr];
-            }
         }
-
     }
-    
     //把同年月的归到一组
     NSMutableArray *dataArray = [NSMutableArray array];
     for (int i = 0; i < _monthDataArr1.count; i++) {
@@ -875,11 +726,6 @@
         for (int j = 0; j < _dataArr_1.count; j++) {
             if (self.accoutType == SelectAccoutTypeGold) {
                 NSString *dateStr = [_dataArr_1[j][@"tradeTime"]substringToIndex:7];
-                if ([_monthDataArr1[i] isEqualToString:dateStr]) {
-                    [arr addObject:_dataArr_1[j]];
-                }
-            } else {
-                NSString *dateStr = [_dataArr_1[j][@"applyDate"]substringToIndex:7];
                 if ([_monthDataArr1[i] isEqualToString:dateStr]) {
                     [arr addObject:_dataArr_1[j]];
                 }
@@ -911,18 +757,7 @@
                 }
             }
             [dataArray addObject:arr];
-        } else {
-            NSString *str = _monthDataArr2[i][@"repayPerDate"];
-            for (int j = 0; j < _dataArr_2.count; j++) {
-                NSString *dateStr = [_dataArr_2[j][@"repayPerDate"]substringToIndex:7];
-                if ([str isEqualToString:dateStr]) {
-                    [arr addObject:_dataArr_2[j]];
-                }
-            }
-            [dataArray addObject:arr];
         }
-        
-
     }
     _dataArr2 = [NSMutableArray arrayWithArray:dataArray];
 }
@@ -937,7 +772,9 @@
     //取出分组个数/分组关键字
     for (int i = 0; i < _dataArr_3.count; i++) {
         NSString *dateStr = @"";
-        dateStr = [_dataArr_3[i][@"paidTime"]substringToIndex:7];
+        if (self.accoutType == SelectAccoutTypeGold) {
+            dateStr = [_dataArr_3[i][@"actualRefundTime"]substringToIndex:7];
+        }
         if (![_monthDataArr3 containsObject:dateStr]) {
             [_monthDataArr3 addObject:dateStr];
         }
@@ -948,8 +785,9 @@
         NSMutableArray *arr = [NSMutableArray array];
         for (int j = 0; j < _dataArr_3.count; j++) {
             NSString *dateStr = @"";
-            dateStr = [_dataArr_3[i][@"paidTime"]substringToIndex:7];
-
+            if (self.accoutType == SelectAccoutTypeGold) {
+                dateStr = [_dataArr_3[i][@"actualRefundTime"]substringToIndex:7];
+            }
             if ([_monthDataArr3[i] isEqualToString:dateStr]) {
                 [arr addObject:_dataArr_3[j]];
             }
@@ -960,48 +798,4 @@
     }
     _dataArr3 = [NSMutableArray arrayWithArray:dataArray];
 }
-
-#pragma mark - 弹出视图
-//展示视图
-- (void)showAlertView{
-    UIView *backgroundView = [[UIView alloc]initWithFrame:self.view.bounds];
-    backgroundView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.5];
-    [self.view.window addSubview:backgroundView];
-    [self.view.window addSubview:_alertView];
-    _alertView.center = self.view.center;
-//    self.view.window.windowLevel = 1;
-    
-    CAKeyframeAnimation *popAnimation = [CAKeyframeAnimation animationWithKeyPath:@"transform"];
-    popAnimation.duration = 0.4;
-    popAnimation.values = @[[NSValue valueWithCATransform3D:CATransform3DMakeScale(0.01f, 0.01f, 1.0f)],
-                            [NSValue valueWithCATransform3D:CATransform3DMakeScale(1.1f, 1.1f, 1.0f)],
-                            [NSValue valueWithCATransform3D:CATransform3DMakeScale(0.9f, 0.9f, 1.0f)],
-                            [NSValue valueWithCATransform3D:CATransform3DIdentity]];
-    popAnimation.keyTimes = @[@0.2f, @0.5f, @0.75f, @1.0f];
-    popAnimation.timingFunctions = @[[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut],
-                                     [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut],
-                                     [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
-    [_alertView.layer addAnimation:popAnimation forKey:nil];
-}
-
-//隐藏视图
-- (IBAction)hideAlertAction:(id)sender {
-    CAKeyframeAnimation *hideAnimation = [CAKeyframeAnimation animationWithKeyPath:@"transform"];
-    hideAnimation.duration = 0.4;
-    hideAnimation.values = @[[NSValue valueWithCATransform3D:CATransform3DMakeScale(1.1f, 1.1f, 1.0f)],
-                             [NSValue valueWithCATransform3D:CATransform3DMakeScale(1.0f, 1.0f, 1.0f)],
-                             [NSValue valueWithCATransform3D:CATransform3DMakeScale(0.00f, 0.00f, 0.00f)]];
-    hideAnimation.keyTimes = @[@0.2f, @0.5f, @0.75f];
-    hideAnimation.timingFunctions = @[[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut],
-                                      [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut],
-                                      [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
-    [_alertView.layer addAnimation:hideAnimation forKey:nil];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [_alertView removeFromSuperview];
-        NSArray *array = self.view.window.subviews;
-        [[array lastObject] removeFromSuperview];
-    });
-}
-
-
 @end

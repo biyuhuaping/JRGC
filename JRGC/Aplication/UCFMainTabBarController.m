@@ -18,7 +18,7 @@
 #import "UCFWebViewJavascriptBridgeMall.h"
 #import "UCFOldUserGuideViewController.h"
 #import "UCFProjectListController.h"
-#import "UCFLoanViewController.h"
+//#import "UCFLoanViewController.h"
 #import "UCFDiscoveryViewController.h"
 #import "UCFWebViewJavascriptBridgeLevel.h"
 #import "P2PWalletHelper.h"
@@ -103,11 +103,6 @@
             }
                 break;
             case 2:{
-                
-//                UCFLoanViewController *loanWeb = [[UCFLoanViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
-//                loanWeb.url = EASYLOAN_URL;
-//                controller = loanWeb;
-//                loanWeb.navTitle = @"借款";
                 UCFDiscoveryViewController *discoveryWeb = [[UCFDiscoveryViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
                 discoveryWeb.url      = DISCOVERYURL;//请求地址;
                 discoveryWeb.navTitle = @"发现";
@@ -181,24 +176,24 @@
     if (contrl.viewControllers.count != 0) {
       topView = [contrl.viewControllers objectAtIndex:0];
     }
-    if ([topView isKindOfClass:[UCFLoanViewController class]]) {
-        UCFLoanViewController *loan = (UCFLoanViewController *)topView;
-        bool isLoad = [loan isViewLoaded];
-        if (isLoad) {
-            [loan refreshWebContent];
-        }
-        NSString *jg_ckie = [UserInfoSingle sharedManager].jg_ckie;
-        NSString *userId = [UserInfoSingle sharedManager].userId;
-        if (nil == jg_ckie || nil == userId) {
-            UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
-            BaseNavigationViewController *loginNaviController = [[BaseNavigationViewController alloc] initWithRootViewController:loginViewController];
-            loginViewController.sourceVC = @"homePage";
-            [self presentViewController:loginNaviController animated:YES completion:nil];
-            [Touch3DSingle sharedTouch3DSingle].isLoad = NO;
-            return NO;
-        }
-        return YES;
-    }
+//    if ([topView isKindOfClass:[UCFLoanViewController class]]) {
+//        UCFLoanViewController *loan = (UCFLoanViewController *)topView;
+//        bool isLoad = [loan isViewLoaded];
+//        if (isLoad) {
+//            [loan refreshWebContent];
+//        }
+//        NSString *jg_ckie = [UserInfoSingle sharedManager].jg_ckie;
+//        NSString *userId = [UserInfoSingle sharedManager].userId;
+//        if (nil == jg_ckie || nil == userId) {
+//            UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
+//            BaseNavigationViewController *loginNaviController = [[BaseNavigationViewController alloc] initWithRootViewController:loginViewController];
+//            loginViewController.sourceVC = @"homePage";
+//            [self presentViewController:loginNaviController animated:YES completion:nil];
+//            [Touch3DSingle sharedTouch3DSingle].isLoad = NO;
+//            return NO;
+//        }
+//        return YES;
+//    }
     if ([self.viewControllers indexOfObject:viewController] == 3) {
         NSString *userId = [UserInfoSingle sharedManager].userId;
         if(nil == userId) {

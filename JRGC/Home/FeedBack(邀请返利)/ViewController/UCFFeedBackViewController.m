@@ -11,7 +11,7 @@
 #import "UCFProfitBackViewController.h"
 #import "NZLabel.h"
 #import <UShareUI/UShareUI.h>
-
+#import "UCFGoldMyRebateViewController.h"
 #import "UCFToolsMehod.h"
 #import "FullWebViewController.h"
 #import "UCFWebViewJavascriptBridgeLevel.h"
@@ -114,7 +114,6 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(getMyInvestDataList) name:@"getMyInvestDataList" object:nil];
     _CheckInstructionBtn.hidden = YES;
 
-    
     [self getMyInvestDataList];
     [self getAppSetting];
 }
@@ -129,9 +128,6 @@
 //分享到
 - (IBAction)shareBtn:(id)sender{
     //分享
-    //微信分享链接
-    //    NSString *urlStr = @"http://fore.9888.cn/cms/ggk/";
-//    _shareUrl = [NSString stringWithFormat:@"http://passport.9888.cn/pp-web2/register/phone.do?gcm=%@",_gcmLab.text];
     UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
 
     __weak typeof(self) weakSelf = self;
@@ -182,10 +178,16 @@
 //进入邀请记录页面
 - (IBAction)toMyRebateView:(id)sender {
     if (self.accoutType == SelectAccoutTypeGold) {
-        UCFMyRebateViewCtrl *mv = [[UCFMyRebateViewCtrl alloc]initWithNibName:@"UCFMyRebateViewCtrl" bundle:nil];
+        
+        UCFGoldMyRebateViewController *mv = [[UCFGoldMyRebateViewController alloc] initWithNibName:@"UCFGoldMyRebateViewController" bundle:nil];
         mv.accoutType = self.accoutType;
         mv.feedBackDictionary = self.feedBackDictionary;
         [self.navigationController pushViewController:mv animated:YES];
+
+//        UCFMyRebateViewCtrl *mv = [[UCFMyRebateViewCtrl alloc]initWithNibName:@"UCFMyRebateViewCtrl" bundle:nil];
+//        mv.accoutType = self.accoutType;
+//        mv.feedBackDictionary = self.feedBackDictionary;
+//        [self.navigationController pushViewController:mv animated:YES];
     } else {
         //邀请记录
         UCFRegistrationRecord *vc = [[UCFRegistrationRecord alloc]initWithNibName:@"UCFRegistrationRecord" bundle:nil];
@@ -224,7 +226,6 @@
     //[self.navigationController pushViewController:webController animated:YES];
     
     UCFWebViewJavascriptBridgeLevel *subVC = [[UCFWebViewJavascriptBridgeLevel alloc]initWithNibName:@"UCFWebViewJavascriptBridgeLevel" bundle:nil];
-//    subVC.navTitle = @"年化佣金小贴士"
     subVC.url      = ANNUALCOMMOSIONURL;//请求地址;
     [self.navigationController pushViewController:subVC animated:YES];
 }

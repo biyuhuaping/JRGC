@@ -932,13 +932,15 @@
     if (!item.isShow) {
         return;
     }
+    
+    __weak typeof(self) weakSelf = self;
     if ([item.title isEqualToString:@"微金账户"]) {
         self.accoutType =  SelectAccoutTypeP2P;
     } else if ([item.title isEqualToString:@"尊享账户"]) {
         self.accoutType = SelectAccoutTypeHoner;
     } else if ([item.title isEqualToString:@"黄金账户"]) {
         UCFGoldAccountViewController *subVC = [[UCFGoldAccountViewController alloc] initWithNibName:@"UCFGoldAccountViewController" bundle:nil];
-        subVC.homeView = self;
+        subVC.homeView = weakSelf;
         [self.navigationController pushViewController:subVC animated:YES];
         return;
     }

@@ -30,7 +30,6 @@
 
 - (void)layoutSubviews
 {
-    [super layoutSubviews];
     self.noticeLabel.frame = CGRectMake(15, 0, ScreenWidth - 30, self.height);
     [self.noticeLabel setInternalWidth:self.noticeLabel.width / 3];
     if (self.noticeArray.count > 0) {
@@ -43,6 +42,7 @@
             self.noticeLabel = noticeLabel;
         }
     }
+    [super layoutSubviews];
 }
 
 - (IBAction)noticeClose:(UIButton *)sender {
