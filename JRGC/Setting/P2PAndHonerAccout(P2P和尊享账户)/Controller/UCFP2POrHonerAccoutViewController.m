@@ -198,7 +198,13 @@
         UCFSettingItem *myReserved = [UCFSettingArrowItem itemWithIcon:nil title:@"我的预约" destVcClass:[UCFMyReservedViewController class]];
         
         UCFSettingGroup *group1 = [[UCFSettingGroup alloc] init];//第一栏
-        group1.items = [[NSMutableArray alloc]initWithArray: @[myInVest,backMoneyDetail,feedBackVC]];
+
+        if (kIS_IOS8) {
+            group1.items = [[NSMutableArray alloc]initWithArray: @[myInVest,backMoneyDetail,feedBackVC]];
+        }
+        else {
+            group1.items = [[NSMutableArray alloc]initWithArray: @[myInVest,feedBackVC]];
+        }
         
         UCFSettingGroup *group2 = [[UCFSettingGroup alloc] init];//第二栏
         
