@@ -1200,6 +1200,9 @@ static NetworkModule *gInstance = NULL;
         case kSXTagGlixedGoldConstract:
             parameter = [NEW_SERVER_IP stringByAppendingString:FLIXEDGOLDCONSTRACT];
             break;
+        case kSXTagHonerRechangeShowContract:
+            parameter = [NEW_SERVER_IP stringByAppendingString:HONERRECHANGESHOWCONT];
+            break;
         case kSXTagUserStatusInfo:
             parameter = [NEW_SERVER_IP stringByAppendingString:USERSTATUSINFO];
             break;

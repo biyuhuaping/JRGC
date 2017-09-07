@@ -29,6 +29,8 @@
     NSString *telNum;               //客服电话
     NSString *minRecharge;          //最小充值金额
     NSString *fee;                  //提现费率
+    NSString *_contractName;          //合同名称（存在则展示合同不存在则不展示)
+    NSString *_contractType;          //合同类型
     MjAlertView         *mjalert; //修改预留手机号弹框
     UITextField         *telTextField;
     UITextField         *codeTextField;
@@ -69,6 +71,7 @@
 
 //充值出借人协议
 @property (weak, nonatomic) IBOutlet NZLabel *deleagateLabel;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *deleageteLabelBottom;
 
 @property (weak, nonatomic) IBOutlet NZLabel *telServiceLabel;
 //充值说明介绍
@@ -158,10 +161,10 @@
     
 }
 -(void)showDeleagateView{
-    FullWebViewController *webController = [[FullWebViewController alloc] initWithWebUrl:@"https://m.9888.cn/static/wap/protocol-entrust-transfer/index.html" title:@"出借人委托划款授权书"];
-    webController.sourceVc = @"topUpVC";//充值页面
-    webController.baseTitleType = @"specialUser";
-    [self.navigationController pushViewController:webController animated:YES];
+    
+    NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId",_contractType, @"contractType",nil];
+    
+    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagHonerRechangeShowContract owner:self signature:YES Type:SelectAccoutTypeHoner];
 }
 
 - (void)getToBack
@@ -206,14 +209,30 @@
     [self.telServiceLabel setFontColor:UIColorWithRGB(0x4aa1f9) string:@"拨打客服"];
     
     
-    self.deleagateLabel.text = @"";
-//    self.deleagateLabel.text = @"我同意签署《出借人委托划款授权书》";
-//    self.deleagateLabel.textColor = UIColorWithRGB(0x999999);
-//    NSString *tmpStr = @"《出借人委托划款授权书》";
-//    [self.deleagateLabel addLinkString:tmpStr block:^(ZBLinkLabelModel *linkModel) {
-//        [weakSelf showDeleagateView];
-//    }];
-//    [self.deleagateLabel setFontColor:UIColorWithRGB(0x4aa1f9) string:tmpStr];
+
+    if(self.accoutType == SelectAccoutTypeHoner)
+    {
+        if (![_contractName isEqualToString:@""]) {
+            self.deleageteLabelBottom.constant = 12;
+              NSString *tmpStr = [NSString stringWithFormat:@"《%@》",_contractName];
+            self.deleagateLabel.text = [NSString stringWithFormat:@"我同意签署%@",tmpStr];
+            self.deleagateLabel.textColor = UIColorWithRGB(0x999999);
+            [self.deleagateLabel addLinkString:tmpStr block:^(ZBLinkLabelModel *linkModel) {
+                [weakSelf showDeleagateView];
+            }];
+            [self.deleagateLabel setFontColor:UIColorWithRGB(0x4aa1f9) string:tmpStr];
+        }else{
+            self.deleageteLabelBottom.constant = 0;
+            self.deleagateLabel.text = @"";
+
+        }
+    }
+    else
+    {
+        self.deleageteLabelBottom.constant = 0;
+        self.deleagateLabel.text = @"";
+    }
+
 //    _serviceLabel.text =[NSString stringWithFormat:@"如果您绑定的银行卡暂不支持手机一键支付请联系客服%@",telNum];
 //    [_serviceLabel addLinkString:telNum block:^(ZBLinkLabelModel *linkModel){
 //        [weakSelf telServiceNo];
@@ -787,6 +806,9 @@
                 self.phoneTextField.backgroundColor = UIColorWithRGB(0xf4f4f4);
                 self.phoneTextField.userInteractionEnabled = NO;
             }
+            
+             _contractType = [NSString stringWithFormat:@"%@",[dic[@"data"]objectSafeForKey:@"contractType"]];
+            _contractName = [dic[@"data"] objectSafeForKey:@"contractName"];
             [self controldesLabel];
         } else {
             [MBProgressHUD displayHudError:dic[@"message"]];
@@ -856,7 +878,23 @@
             [_fixTelNumTimer setFireDate:[NSDate distantPast]];
         }
         [MBProgressHUD displayHudError:dic[@"message"]];
+    }else if (tag.intValue == kSXTagHonerRechangeShowContract){
+        NSMutableDictionary *dic = [data objectFromJSONString];
+        NSDictionary *dataDict = [dic objectSafeDictionaryForKey:@"data"];
+        if ( [dic[@"ret"] boolValue])
+        {
+            NSString *contractContentStr = [dataDict objectSafeForKey:@"contractMsg"];
+            FullWebViewController *controller = [[FullWebViewController alloc] initWithHtmlStr:contractContentStr title:_contractName];
+            controller.baseTitleType = @"detail_heTong";
+            controller.sourceVc = @"topUpVC";//充值页面
+            [self.navigationController pushViewController:controller animated:YES];
+        }
+        else
+        {
+            [AuxiliaryFunc showAlertViewWithMessage:[dic objectSafeForKey:@"message"]];
+        }
     }
+    
     
 }
 #pragma mark ---------------------------

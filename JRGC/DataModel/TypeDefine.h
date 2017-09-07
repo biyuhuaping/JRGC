@@ -304,6 +304,7 @@
 
 #define PRERESERVE_URL          @"https://m.9888.cn/static/wap/invest/index.html#/reserve/info" //预约的url
 
+#define HONERRECHANGESHOWCONT @"/api/contract/v2/showContractMess.json"//尊享充值委托划款协议合同预览
 enum kPostStatus{
     kPostStatusNone=0,
     kPostStatusBeging=1,
@@ -551,6 +552,7 @@ enum kSXTag
     kSXTagGoldChangeCashInfo,           //黄金变现页面信息
     kSXTagGoldChangeCash,               //黄金变现
     kSXTagGlixedGoldConstract,          //活期合同接口
+    kSXTagHonerRechangeShowContract,   //尊享充值划款授权协议
     kSXTagUserStatusInfo,               //用户状态信息
 };
 
