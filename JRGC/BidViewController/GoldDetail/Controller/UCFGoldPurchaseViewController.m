@@ -42,7 +42,7 @@
 
 @property (nonatomic,strong)NSString *nmPurchaseTokenStr;
 @property (nonatomic,strong)NSString *needToRechareStr;
-@property (nonatomic,strong)NSString *goldCouponNumStr;//返金劵张数
+@property (nonatomic,strong)NSString *goldCouponNumStr;//返金券张数
 @property (nonatomic,assign)double availableAllMoney ;
 @property (nonatomic,assign)double availableMoney ;
 @property (nonatomic,assign)double accountBean ;
@@ -51,7 +51,7 @@
 @property (nonatomic,assign)BOOL  isShowWorkshopCode;//是否显示输入工场码
 @property (nonatomic,assign)BOOL  isHaveGoldCouponNum;//是否有返金券
 @property (nonatomic,assign)BOOL  isShow_43068;//是否弹出金价波动框
-@property (nonatomic,strong)NSDictionary  *goldCouponDataDict;//选择返金劵数据数组
+@property (nonatomic,strong)NSDictionary  *goldCouponDataDict;//选择返金券数据数组
 @property (weak, nonatomic) IBOutlet UIImageView *baseShadowView;
 @property (nonatomic,strong)NSDictionary *paramDict;//请求参数
 - (IBAction)gotoGoldBidSuccessVC:(id)sender;
@@ -302,7 +302,7 @@
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    if (_isHaveGoldCouponNum) {//有返金劵的情况
+    if (_isHaveGoldCouponNum) {//有返金券的情况
          return _isShowWorkshopCode ? 4 : 3;
     }else {
         return _isShowWorkshopCode  ? 3 : 2;
@@ -704,7 +704,7 @@
         
     }
 }
-#pragma mark - 去黄金返金劵劵页面
+#pragma mark - 去黄金返金券券页面
 -(void)pushGoldCouponVC
 {
     UCFGoldCouponViewController *goldCouponVC = [[UCFGoldCouponViewController   alloc]initWithNibName:@"UCFGoldCouponViewController" bundle:nil];
@@ -982,7 +982,7 @@
     [self.view endEditing:YES];
 }
 #pragma mark-
-#pragma mark 选择返金劵返回数据
+#pragma mark 选择返金券返回数据
 -(void)getSelectedGoldCouponNum:(NSDictionary *)goldCouponDict
 
 {
@@ -1097,7 +1097,7 @@
     
     self.paramDict = @{@"nmPurchaseToken":self.nmPurchaseTokenStr,@"nmPrdClaimId": self.goldModel.nmPrdClaimId,@"purchaseBean":purchaseBeanStr,@"purchaseGoldAmount":cell.moneyTextField.text,@"purchaseMoney": self.purchaseMoneyStr,@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"workshopCode":gcMaStr,@"goldRecordids":goldRecordidsStr};
     
-    if (_isHaveGoldCouponNum) {//如果有返金劵的话
+    if (_isHaveGoldCouponNum) {//如果有返金券的话
         //返金券
         if (self.goldCouponDataDict) {
             //勾选使用条件不足

@@ -1025,7 +1025,7 @@
         [self presentViewController:regNaviController animated:YES completion:nil];
     }
     //----------因nativeData[@"action"]值等于@"toNative"，需要重新写sToNative:方法。需要等鸿龙处理，故暂且放在此处------------------qyy
-    else if ([controllerName isEqualToString:@"app_fanxiCoupon"]) //跳到反息劵界面
+    else if ([controllerName isEqualToString:@"app_fanxiCoupon"]) //跳到反息券界面
     {
         UCFCouponViewController *coupVC = [[UCFCouponViewController alloc]initWithNibName:@"UCFCouponViewController" bundle:nil];
         coupVC.segmentIndex = 1;

@@ -54,7 +54,7 @@
     baseTitleLabel.text = @"优惠券";
     _currentSelectedState = 0;
 
-    self.itemSelectView.sectionTitles = @[@"返现券", @"返息券",@"返金劵"];
+    self.itemSelectView.sectionTitles = @[@"返现券", @"返息券",@"返金券"];
     self.itemSelectView.delegate = self;
     
     //下拉选框
