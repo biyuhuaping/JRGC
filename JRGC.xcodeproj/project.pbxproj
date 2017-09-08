@@ -865,7 +865,6 @@
 		ED0647F91C7ABE1E00311AA1 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = ED0647F81C7ABE1E00311AA1 /* libc++.tbd */; };
 		ED0647FB1C7ABF7300311AA1 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED0647FA1C7ABF7300311AA1 /* AssetsLibrary.framework */; };
 		ED0647FD1C7ABFA400311AA1 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED0647FC1C7ABFA400311AA1 /* CoreImage.framework */; };
-		ED44558E1C112BCF00823DF3 /* UCFLoginShaowView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED44558D1C112BCF00823DF3 /* UCFLoginShaowView.m */; };
 		ED70C8791C7C581E00F45AC4 /* ChooseFaceOrGesAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED70C8781C7C581E00F45AC4 /* ChooseFaceOrGesAlertView.m */; };
 		EDD13F691C196D860088A378 /* SCGIFImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = EDD13F681C196D860088A378 /* SCGIFImageView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		EDEAB70C1C7D4BAF00BBF3B1 /* UCFIdNumberTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = EDEAB70B1C7D4BAF00BBF3B1 /* UCFIdNumberTextField.m */; };
@@ -2537,8 +2536,6 @@
 		ED0647F81C7ABE1E00311AA1 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		ED0647FA1C7ABF7300311AA1 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		ED0647FC1C7ABFA400311AA1 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
-		ED44558C1C112BCF00823DF3 /* UCFLoginShaowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFLoginShaowView.h; sourceTree = "<group>"; };
-		ED44558D1C112BCF00823DF3 /* UCFLoginShaowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFLoginShaowView.m; sourceTree = "<group>"; };
 		ED70C8771C7C581E00F45AC4 /* ChooseFaceOrGesAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChooseFaceOrGesAlertView.h; path = docs/ChooseFaceOrGesAlertView.h; sourceTree = "<group>"; };
 		ED70C8781C7C581E00F45AC4 /* ChooseFaceOrGesAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChooseFaceOrGesAlertView.m; path = docs/ChooseFaceOrGesAlertView.m; sourceTree = "<group>"; };
 		EDD13F671C196D860088A378 /* SCGIFImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCGIFImageView.h; sourceTree = "<group>"; };
@@ -4956,8 +4953,6 @@
 				25C029BD1D40D7EA00EF75DC /* UCFLoginFaceView.xib */,
 				7BCA21121AEE1DB0001CD258 /* UCFVerifyLoginViewController.h */,
 				7BCA21131AEE1DB0001CD258 /* UCFVerifyLoginViewController.m */,
-				ED44558C1C112BCF00823DF3 /* UCFLoginShaowView.h */,
-				ED44558D1C112BCF00823DF3 /* UCFLoginShaowView.m */,
 				EDF01E281C7C0A5B005BDBED /* UCFValidFaceLoginViewController.h */,
 				EDF01E291C7C0A5B005BDBED /* UCFValidFaceLoginViewController.m */,
 				83FEDB731EFBB56000CFE0EF /* UCFCompanyNoOpenViewController.h */,
@@ -7862,7 +7857,6 @@
 				7442E0391F45C7A7001E1D2F /* UCFAddedProfitView.m in Sources */,
 				74BDA9911F09F6C60054403F /* FSCalendarStickyHeader.m in Sources */,
 				83F2D59F1DCB508F0041F913 /* UCFSession.m in Sources */,
-				ED44558E1C112BCF00823DF3 /* UCFLoginShaowView.m in Sources */,
 				ED70C8791C7C581E00F45AC4 /* ChooseFaceOrGesAlertView.m in Sources */,
 				83FF205C1F0BAF0500F21119 /* UCFGoldDetailViewController.m in Sources */,
 				744B9ED51F0B8AC100440FBA /* UCFCalendarDetailHeaderView.m in Sources */,
