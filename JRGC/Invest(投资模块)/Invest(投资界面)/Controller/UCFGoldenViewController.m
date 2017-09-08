@@ -194,7 +194,7 @@
         if (self.fliexGoldModel.nmPrdClaimName.length > 0) {
             view.homeListHeaderMoreButton.hidden = YES;
             view.headerTitleLabel.text = @"增金宝";
-            view.headerImageView.image = [UIImage imageNamed:@"mine_icon_gold"];
+            view.headerImageView.image = [UIImage imageNamed:@"mine_icon_gold_current"];
 //            view.honerLabel.text = @"实物黄金赚收益";
 //            view.honerLabel.hidden = NO;
             [view.homeListHeaderMoreButton setTitleColor:UIColorWithRGB(0x4aa1f9) forState:UIControlStateNormal];
