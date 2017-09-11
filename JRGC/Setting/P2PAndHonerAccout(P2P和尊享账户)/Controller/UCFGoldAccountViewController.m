@@ -156,11 +156,15 @@
                 lineView.backgroundColor = UIColorWithRGB(0xd8d8d8);
                 lineView.frame = CGRectMake(0, model.cellHeight - 0.5, ScreenWidth, 0.5);
             } else if ([model.leftTitle isEqualToString:@"增金宝"]) {
-                desLabel.hidden = NO;
-                desLabel.text = @"AAAA";
+                if ([self.availableGoldAmount doubleValue] > 0) {
+                    desLabel.text = [NSString stringWithFormat:@"%@克",self.availableGoldAmount];
+                    desLabel.hidden = NO;
+                }
             } else if ([model.leftTitle isEqualToString:@"尊享金"]) {
-                desLabel.hidden = NO;
-                desLabel.text = @"BBBB";
+                if ([self.collectGoldAmount doubleValue] > 0) {
+                    desLabel.hidden = NO;
+                    desLabel.text = [NSString stringWithFormat:@"%@克",self.collectGoldAmount];
+                }
             }
         }
         titleLabel.text = model.leftTitle;
