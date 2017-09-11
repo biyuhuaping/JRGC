@@ -125,6 +125,7 @@
             }
         }
     }
+    self.allSelectBtn.selected = cellSelectCount == INT_MAX;
     self.cellSelectCountStr = [NSString stringWithFormat:@"%d",cellSelectCount];
     NSString *tatolGetGoldAccoutStr = [NSString stringWithFormat:@"%.3lf",_tatolGetGoldAccout];
     self.selectTipStr.text = [NSString stringWithFormat:@"已选用%@张，可返金%@克",_cellSelectCountStr,tatolGetGoldAccoutStr];
