@@ -472,8 +472,6 @@
 {
     if (tableView == _tableView1) {//邀请返利明细列表
         
-        NSDictionary * kindDict = _dataArr1[indexPath.section][indexPath.row];
-        if ([kindDict[@"bizType"] isEqualToString:@"01"]) {
             static  NSString *indentifier = @"UCFRebateCell";
             UCFRebateCell *cell = [tableView dequeueReusableCellWithIdentifier:indentifier];
             if (!cell) {
@@ -556,7 +554,7 @@
             }
         
         return cell;
-        }
+        
     }else if (tableView == _tableView2){//好友未回款列表
         static  NSString *indentifier = @"FriendRecCell";
         UCFFriendRecCell *cell = [tableView dequeueReusableCellWithIdentifier:indentifier];
