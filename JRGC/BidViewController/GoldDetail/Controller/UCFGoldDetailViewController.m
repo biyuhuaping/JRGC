@@ -41,6 +41,7 @@
     UILabel *_buyServiceRateLabel;
     
     UIView *bottomBkView;
+    UIView *informationBgView;
     UIView *_headerView;
     float  bottomViewYPos;
     
@@ -593,24 +594,27 @@
 //    textStr = [textStr stringByReplacingOccurrencesOfString:@"\\n" withString:@"\n"];
     textLabel.attributedText = [NSString getNSAttributedString:self.goldModel.supplementExplain labelDict:dic];
 
-    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(textLabel.frame)+15, ScreenWidth, 10)];
-    footerView.backgroundColor = UIColorWithRGB(0xebebee);
+//    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(textLabel.frame)+15, ScreenWidth, 10)];
+//    footerView.backgroundColor = UIColorWithRGB(0xebebee);
     
-    UIView *informationBgView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(bottomBkView.frame),ScreenWidth,CGRectGetMaxY(footerView.frame))];
+    informationBgView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(bottomBkView.frame),ScreenWidth,CGRectGetMaxY(textLabel.frame))];
     informationBgView.backgroundColor = [UIColor whiteColor];
     [informationBgView addSubview:headView];
     [informationBgView addSubview:textLabel];
-    [informationBgView addSubview:footerView];
+//    [informationBgView addSubview:footerView];
     [_oneScroll addSubview:informationBgView];
-    [_oneScroll setContentSize:CGSizeMake(ScreenWidth, CGRectGetMaxY(informationBgView.frame))];
+     [self drawPullingView];
 }
-
-
 //上拉view
 - (void)drawPullingView
 {
-    UIView *pullingBkView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(bottomBkView.frame), ScreenWidth, 42)];
-//    pullingBkView.backgroundColor = [UIColor redColor];
+    UIView *pullingBkView = [[UIView alloc] init];
+    if (_isGoldCurrentAccout) {
+        pullingBkView.frame = CGRectMake(0, CGRectGetMaxY(informationBgView.frame), ScreenWidth, 42);
+         [_oneScroll setContentSize:CGSizeMake(ScreenWidth, CGRectGetMaxY(pullingBkView.frame))];
+    }else{
+         pullingBkView.frame = CGRectMake(0, CGRectGetMaxY(bottomBkView.frame), ScreenWidth, 42);
+    }
     [_oneScroll addSubview:pullingBkView];
     pullingBkView.backgroundColor = [UIColor clearColor];
     
