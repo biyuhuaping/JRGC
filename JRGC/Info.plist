@@ -69,10 +69,10 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>keji.com</string>
+			<string>goToJRGC</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>JRGC</string>
+				<string>Scheme</string>
 			</array>
 		</dict>
 	</array>

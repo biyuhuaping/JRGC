@@ -17,7 +17,6 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
 }
 
 
@@ -31,6 +30,11 @@
 {
     [super layoutSubviews];
     self.cashButton.enabled = self.canCash;
+    if (self.cashButton.enabled) {
+        [_cashButton setBackgroundColor: UIColorWithRGB(0xFFC027)];
+    } else {
+        [_cashButton setBackgroundColor: [UIColor lightGrayColor]];
+    }
 }
 
 @end
