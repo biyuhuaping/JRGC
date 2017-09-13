@@ -597,7 +597,7 @@
 //    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(textLabel.frame)+15, ScreenWidth, 10)];
 //    footerView.backgroundColor = UIColorWithRGB(0xebebee);
     
-    informationBgView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(bottomBkView.frame),ScreenWidth,CGRectGetMaxY(textLabel.frame))];
+    informationBgView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(bottomBkView.frame),ScreenWidth,CGRectGetMaxY(textLabel.frame) + 15)];
     informationBgView.backgroundColor = [UIColor whiteColor];
     [informationBgView addSubview:headView];
     [informationBgView addSubview:textLabel];
