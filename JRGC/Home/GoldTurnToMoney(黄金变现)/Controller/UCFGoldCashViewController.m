@@ -110,7 +110,7 @@
         if ([rstcode intValue] == 1) {
             NSDictionary *dict = [dic objectSafeDictionaryForKey:@"data"];
             self.availableGoldAmount = [dict objectSafeForKey:@"availableGoldAmount"];
-            self.isTradeDay = [dict objectSafeForKey:@"isTradeDay"];
+            self.isTradeDay = [[dict objectSafeForKey:@"isTradeDay"] boolValue];
             self.cashServiceRate = [dict objectSafeForKey:@"cashServiceRate"];
             self.liquidateToken = [dict objectSafeForKey:@"liquidateToken"];
             NSString *tipStr = [[dict objectSafeForKey:@"pageContent"] stringByReplacingOccurrencesOfString:@"•" withString:@""];
