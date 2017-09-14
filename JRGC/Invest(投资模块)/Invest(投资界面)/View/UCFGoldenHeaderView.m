@@ -46,7 +46,7 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    self.cycleView.frame = self.headCycleBackView.bounds;
+//    self.cycleView.frame = self.headCycleBackView.bounds;
 //    CGFloat bottom = _goldValueBackView.bottom;
 //    self.height = bottom + 10;
     self.realGoldPriceLabel.text = [NSString stringWithFormat:@"%.2f", [ToolSingleTon sharedManager].readTimePrice];

@@ -20,7 +20,9 @@
 #import "UCFNoPermissionViewController.h"
 #import "UCFLoginViewController.h"
 #import "RiskAssessmentViewController.h"
-@interface UCFHonorInvestViewController () <UITableViewDelegate, UITableViewDataSource,UCFHomeListCellHonorDelegate>
+#import "UCFInvestMicroMoneyCell.h"
+
+@interface UCFHonorInvestViewController () <UITableViewDelegate, UITableViewDataSource,UCFInvestMicroMoneyCellDelegate>
 @property (strong, nonatomic) UCFHonorHeaderView *honorHeaderView;
 @property (strong, nonatomic) NSMutableArray *dataArray;
 @property (assign, nonatomic)  NSInteger currentPage;
@@ -164,25 +166,24 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *cellId = @"homeListCell";
-    UCFHomeListCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+    static NSString *cellId = @"investmicromoney";
+    UCFInvestMicroMoneyCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     if (nil == cell) {
-        cell = (UCFHomeListCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeListCell" owner:self options:nil] lastObject];
+        cell = (UCFInvestMicroMoneyCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFInvestMicroMoneyCell" owner:self options:nil] lastObject];
         cell.tableView = tableView;
-        cell.honorDelegate = self;
+        cell.delegate = self;
     }
     cell.indexPath = indexPath;
     UCFSettingGroup *group = [self.dataArray objectAtIndex:indexPath.section];
     UCFMicroMoneyModel *model = [group.items objectAtIndex:indexPath.row];
     cell.honerListModel = model;
-    cell.honorDelegate = self;
 //    cell.type = UCFProjectListCellTypeProject;
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 100;
+    return 95;
 }
 
 
@@ -241,7 +242,7 @@
     }
 }
 #pragma mark 认购点击事件
-- (void)homelistCell:(UCFHomeListCell *)homelistCell didClickedProgressViewAtIndexPath:(NSIndexPath *)indexPath{
+- (void)homelistCell:(UCFInvestMicroMoneyCell *)homelistCell didClickedProgressViewAtIndexPath:(NSIndexPath *)indexPath{
     
     UCFSettingGroup *group = [self.dataArray objectAtIndex:indexPath.section];
     UCFMicroMoneyModel *model = [group.items objectAtIndex:indexPath.row];

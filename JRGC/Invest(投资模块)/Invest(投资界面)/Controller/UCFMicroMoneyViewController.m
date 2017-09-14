@@ -13,6 +13,7 @@
 
 #import "UCFHomeListHeaderSectionView.h"
 #import "UCFHomeListCell.h"
+#import "UCFInvestMicroMoneyCell.h"
 #import "UCFHomeInvestCell.h"
 #import "AppDelegate.h"
 
@@ -31,7 +32,7 @@
 #import "UCFOrdinaryBidController.h"
 #import "UCFGoldDetailViewController.h"
 #import "HSHelper.h"
-@interface UCFMicroMoneyViewController () <UITableViewDataSource, UITableViewDelegate, UCFInvestAPIWithMicroMoneyManagerDelegate, UCFHomeListCellHonorDelegate,UCFHomeListHeaderSectionViewDelegate, UCFHomeInvestCellDelegate>
+@interface UCFMicroMoneyViewController () <UITableViewDataSource, UITableViewDelegate, UCFInvestAPIWithMicroMoneyManagerDelegate, UCFInvestMicroMoneyCellDelegate,UCFHomeListHeaderSectionViewDelegate, UCFHomeInvestCellDelegate>
 
 @property (strong, nonatomic) UCFMicroMoneyHeaderView *microMoneyHeaderView;
 @property (strong, nonatomic) UCFInvestAPIManager *apiManager;
@@ -165,12 +166,11 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *cellId = @"homeListCell";
     UCFMicroMoneyGroup *group = [self.dataArray objectAtIndex:indexPath.section];
     UCFMicroMoneyModel *model = [group.prdlist objectAtIndex:indexPath.row];
     if (group.type.intValue == 16) {
-        cellId = @"homeListInvestCell";
-        UCFHomeInvestCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+        static NSString *cellId1 = @"homeListInvestCell";
+        UCFHomeInvestCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId1];
         if (nil == cell) {
             cell = (UCFHomeInvestCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeInvestCell" owner:self options:nil] lastObject];
             cell.delegate = self;
@@ -179,11 +179,12 @@
         return cell;
     }
     else {
-        UCFHomeListCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+        static NSString *cellId2 = @"investmicromoney";
+        UCFInvestMicroMoneyCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId2];
         if (nil == cell) {
-            cell = (UCFHomeListCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeListCell" owner:self options:nil] lastObject];
+            cell = (UCFInvestMicroMoneyCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFInvestMicroMoneyCell" owner:self options:nil] lastObject];
             cell.tableView = tableView;
-            cell.honorDelegate = self;
+            cell.delegate = self;
         }
         cell.indexPath = indexPath;
         
@@ -414,7 +415,7 @@
 
 #pragma mark - cell的代理
 
-- (void)homelistCell:(UCFHomeListCell *)homelistCell didClickedProgressViewAtIndexPath:(NSIndexPath *)indexPath
+- (void)homelistCell:(UCFInvestMicroMoneyCell *)homelistCell didClickedProgressViewAtIndexPath:(NSIndexPath *)indexPath
 {
     UCFMicroMoneyGroup *group = [self.dataArray objectAtIndex:indexPath.section];
     UCFMicroMoneyModel *model = [group.prdlist objectAtIndex:indexPath.row];

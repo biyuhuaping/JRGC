@@ -288,6 +288,8 @@
 		746748E11F3C595A0067294D /* UCFGoldBankLimitCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 746748DF1F3C595A0067294D /* UCFGoldBankLimitCell.xib */; };
 		74677C661F165022003768EB /* UCFGoldRechargeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74677C641F165022003768EB /* UCFGoldRechargeViewController.m */; };
 		74677C671F165022003768EB /* UCFGoldRechargeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74677C651F165022003768EB /* UCFGoldRechargeViewController.xib */; };
+		74694AAB1F613FB600C4F935 /* UCFInvestMicroMoneyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74694AA91F613FB600C4F935 /* UCFInvestMicroMoneyCell.m */; };
+		74694AAC1F613FB600C4F935 /* UCFInvestMicroMoneyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74694AAA1F613FB600C4F935 /* UCFInvestMicroMoneyCell.xib */; };
 		746BBEA41AF8AEC700EBA0E7 /* UCFSelectedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 746BBEA31AF8AEC700EBA0E7 /* UCFSelectedView.m */; };
 		746BBEAB1AF8E93E00EBA0E7 /* UCFCouponUseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 746BBEA91AF8E93E00EBA0E7 /* UCFCouponUseCell.m */; };
 		746BBEAC1AF8E93E00EBA0E7 /* UCFCouponUseCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 746BBEAA1AF8E93E00EBA0E7 /* UCFCouponUseCell.xib */; };
@@ -1496,6 +1498,9 @@
 		74677C631F165022003768EB /* UCFGoldRechargeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFGoldRechargeViewController.h; sourceTree = "<group>"; };
 		74677C641F165022003768EB /* UCFGoldRechargeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFGoldRechargeViewController.m; sourceTree = "<group>"; };
 		74677C651F165022003768EB /* UCFGoldRechargeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFGoldRechargeViewController.xib; sourceTree = "<group>"; };
+		74694AA81F613FB600C4F935 /* UCFInvestMicroMoneyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFInvestMicroMoneyCell.h; sourceTree = "<group>"; };
+		74694AA91F613FB600C4F935 /* UCFInvestMicroMoneyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFInvestMicroMoneyCell.m; sourceTree = "<group>"; };
+		74694AAA1F613FB600C4F935 /* UCFInvestMicroMoneyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFInvestMicroMoneyCell.xib; sourceTree = "<group>"; };
 		746BBEA21AF8AEC700EBA0E7 /* UCFSelectedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFSelectedView.h; sourceTree = "<group>"; };
 		746BBEA31AF8AEC700EBA0E7 /* UCFSelectedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFSelectedView.m; sourceTree = "<group>"; };
 		746BBEA81AF8E93E00EBA0E7 /* UCFCouponUseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFCouponUseCell.h; sourceTree = "<group>"; };
@@ -3717,6 +3722,9 @@
 				747B10391F15F82200CECB2C /* UCFGoldenHeaderView.h */,
 				747B103A1F15F82200CECB2C /* UCFGoldenHeaderView.m */,
 				747B103C1F15F83500CECB2C /* UCFGoldenHeaderView.xib */,
+				74694AA81F613FB600C4F935 /* UCFInvestMicroMoneyCell.h */,
+				74694AA91F613FB600C4F935 /* UCFInvestMicroMoneyCell.m */,
+				74694AAA1F613FB600C4F935 /* UCFInvestMicroMoneyCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -7309,6 +7317,7 @@
 				FB5149571D64441F00C26E7B /* guideImage7_3.png in Resources */,
 				FB2858CC1BAAB07C000EAA71 /* UCFBackMoneyDetailViewController.xib in Resources */,
 				740586BA1F417ADB00E2DE01 /* UCFGoldFlexibleCell.xib in Resources */,
+				74694AAC1F613FB600C4F935 /* UCFInvestMicroMoneyCell.xib in Resources */,
 				E311A66E1D90E85B00C5483E /* UCFWebViewJavascriptBridgeLevel.xib in Resources */,
 				74270D331EC595FA00F9419B /* UCFFeedBackViewController.xib in Resources */,
 				83FCCA7B1F174B05002921C5 /* UCFGoldInvestDetailCell.xib in Resources */,
@@ -7657,6 +7666,7 @@
 				4A0DC8021BCF5B1300835E95 /* HWWeakTimer.m in Sources */,
 				FB7EDE401D6BFCD700C3E924 /* UCFMainTabBarController.m in Sources */,
 				7BC3047B1ACBC22D007767F1 /* DeviceInfo.m in Sources */,
+				74694AAB1F613FB600C4F935 /* UCFInvestMicroMoneyCell.m in Sources */,
 				746748DA1F3C561A0067294D /* UCFGoldBankLimitHeader.m in Sources */,
 				745D37DA1F3AE9B200897F1A /* UCFColdChargeThirdCell.m in Sources */,
 				748ED7A11CC74B9800690215 /* UCFMenuItemModel.m in Sources */,
