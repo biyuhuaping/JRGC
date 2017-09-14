@@ -54,11 +54,12 @@
     baseTitleLabel.text = @"优惠券";
     _currentSelectedState = 0;
 
-    self.itemSelectView.sectionTitles = @[@"返现券", @"返息券",@"返金劵"];
+    self.itemSelectView.sectionTitles = @[@"返现券", @"返息券",@"返金券"];
     self.itemSelectView.delegate = self;
     
     //下拉选框
-    self.listArray = [[NSMutableArray alloc]initWithObjects:@"使用记录",@"过期记录",@"赠送记录", nil];
+//    self.listArray = [[NSMutableArray alloc]initWithObjects:@"使用记录",@"过期记录",@"赠送记录", nil];
+    self.listArray = [[NSMutableArray alloc]initWithObjects:@"使用记录",@"赠送记录", nil];
     _cellViewShowList = [[MLMOptionSelectView alloc] initOptionView];//***初始化下拉弹框
 
     __weak typeof(self) weakSelfList = self;
@@ -223,12 +224,12 @@
             subVC.status = @"2";//status; //1：未使用 2：已使用 3：已过期 4：已赠送
         }
             break;
+//        case 1: {
+//            subVC.baseTitleText = @"过期记录";
+//            subVC.status = @"3";//status; //1：未使用 2：已使用 3：已过期 4：已赠送
+//        }
+//            break;
         case 1: {
-            subVC.baseTitleText = @"过期记录";
-            subVC.status = @"3";//status; //1：未使用 2：已使用 3：已过期 4：已赠送
-        }
-            break;
-        case 2: {
             subVC.baseTitleText = @"赠送记录";
             subVC.status = @"4";//status; //1：未使用 2：已使用 3：已过期 4：已赠送
         }

@@ -209,7 +209,7 @@
     if (group.type.intValue == 16) {
         return 75;
     }
-    return 100;
+    return 95;
 }
 
 #pragma mark - 预约按钮的点击代理方法

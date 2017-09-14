@@ -30,7 +30,7 @@
     [super viewDidLoad];
     [self addLeftButton];
  
-    self.itemSelectView.sectionTitles = @[@"返现券", @"返息券",@"返金劵"];
+    self.itemSelectView.sectionTitles = @[@"返现券", @"返息券",@"返金券"];
     self.itemSelectView.delegate = self;
     self.itemSelectView.segmentedControl.selectedSegmentIndex =_currentSelectedState;
     [self initViewController];

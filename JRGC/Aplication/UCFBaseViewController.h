@@ -29,7 +29,7 @@
 
 @interface UCFBaseViewController : UIViewController<NetworkModuleDelegate,MBProgressHUDDelegate>
 {
-    CoustomLab *baseTitleLabel;
+    UILabel *baseTitleLabel;
     UIView *lineViewAA;
 }
 

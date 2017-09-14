@@ -22,12 +22,11 @@
 #import "UCFWebViewJavascriptBridgeBBS.h"
 #import "UINavigationController+FDFullscreenPopGesture.h"
 
-//反馈界面
+
 #import <YWFeedbackFMWK/YWFeedbackKit.h>
 #import <YWFeedbackFMWK/YWFeedbackViewController.h>
-
 static NSString * const kAppKey = @"23511571";
-
+static NSString * const kAppSecret = @"10dddec2bf7d3be794eda13b0df0a7d9";
 @interface UCFMoreViewController () <UITableViewDataSource, UITableViewDelegate,UIActionSheetDelegate>
 @property (weak, nonatomic) IBOutlet UIView *moreBannerBgView;
 @property (weak, nonatomic) IBOutlet UIImageView *moreBanner;
@@ -79,7 +78,7 @@ static NSString * const kAppKey = @"23511571";
 /** 打开用户反馈页面 */
 - (void)openFeedbackViewController {
     //  初始化方式,或者参考下方的`- (YWFeedbackKit *)feedbackKit`方法。
-    self.feedbackKit = [[YWFeedbackKit alloc] initWithAppKey:kAppKey];
+//    self.feedbackKit = [[YWFeedbackKit alloc] initWithAppKey:kAppKey];
     NSString *userId = [[NSUserDefaults standardUserDefaults] valueForKey:UUID];
     userId = userId?userId:@"";
     NSDictionary *infoDic = [[NSBundle mainBundle] infoDictionary];
@@ -88,13 +87,13 @@ static NSString * const kAppKey = @"23511571";
     self.feedbackKit.extInfo = @{@"loginTime":[[NSDate date] description],
                                  @"userid":userId,
                                  @"客户端版本":currentVersion};
-    
+
     __weak typeof(self) weakSelf = self;
     [self.feedbackKit makeFeedbackViewControllerWithCompletionBlock:^(YWFeedbackViewController *viewController, NSError *error) {
         if (viewController != nil) {
             UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:viewController];
             [weakSelf presentViewController:nav animated:YES completion:nil];
-            
+
             [viewController setCloseBlock:^(UIViewController *aParentController){
                 [aParentController dismissViewControllerAnimated:YES completion:nil];
             }];
@@ -105,7 +104,12 @@ static NSString * const kAppKey = @"23511571";
         }
     }];
 }
-
+- (YWFeedbackKit *)feedbackKit {
+    if (!_feedbackKit) {
+        _feedbackKit = [[YWFeedbackKit alloc] initWithAppKey:kAppKey appSecret:kAppSecret];
+    }
+    return _feedbackKit;
+}
 - (void)getToBack
 {
     [self.view endEditing:YES];

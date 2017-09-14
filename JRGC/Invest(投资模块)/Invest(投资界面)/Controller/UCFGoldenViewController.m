@@ -196,7 +196,7 @@
         if (self.fliexGoldModel.nmPrdClaimName.length > 0) {
             view.homeListHeaderMoreButton.hidden = YES;
             view.headerTitleLabel.text = @"增金宝";
-            view.headerImageView.image = [UIImage imageNamed:@"mine_icon_gold"];
+            view.headerImageView.image = [UIImage imageNamed:@"mine_icon_gold_current"];
 //            view.honerLabel.text = @"实物黄金赚收益";
 //            view.honerLabel.hidden = NO;
             [view.homeListHeaderMoreButton setTitleColor:UIColorWithRGB(0x4aa1f9) forState:UIControlStateNormal];
@@ -224,15 +224,15 @@
     } else  {
         
         NSString *tipStr1 = ZXTIP1;
-//        NSInteger openStatus = [UserInfoSingle sharedManager].openStatus ;
+        NSInteger openStatus = [UserInfoSingle sharedManager].openStatus ;
         NSInteger enjoyOpenStatus = [UserInfoSingle sharedManager].enjoyOpenStatus;
-        if (  enjoyOpenStatus < 3 ) {
+        if (  enjoyOpenStatus < 3 && openStatus < 3) {
             [self showHSAlert:tipStr1];
             return;
         }
         
         
-        if (indexPath.section == 0) {
+        if (indexPath.section == 0) {//活期详情
             [self getGoldCurrentPrdClaimInfoHttpRequest:self.fliexGoldModel];
         }else{
             

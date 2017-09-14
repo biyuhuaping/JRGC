@@ -67,13 +67,13 @@
 
     [self setWebViewUserAgent];
     [UCFSession sharedManager].delegate = self;
-
-//    [self checkUpdate];
     [self checkNovicePoliceOnOff];//监测2017新手奖励政策开关。
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
-    
+    [self.window makeKeyAndVisible];
+    [[UserInfoSingle sharedManager] getUserData];
+
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(forceUpdateVersion) name:CHECK_NEW_VERSION object:nil];
    
@@ -227,12 +227,11 @@
      name:kJPFNetworkDidLoginNotification
      object:nil];
      */
-    [[UserInfoSingle sharedManager] getUserData];
-    
+
+
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isShowHornor"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
-    [self.window makeKeyAndVisible];
     return YES;
 }
 

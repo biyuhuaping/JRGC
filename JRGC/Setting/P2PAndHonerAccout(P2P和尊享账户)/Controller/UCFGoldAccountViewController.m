@@ -124,10 +124,21 @@
             titleLabel.textAlignment = NSTextAlignmentLeft;
             titleLabel.tag = 1010;
             [cell.contentView addSubview:titleLabel];
-
+            
+            UILabel *desLabel = [[UILabel alloc] initWithFrame: CGRectMake(ScreenWidth/2, 0, ScreenWidth/2 - 30, model.cellHeight)];
+            desLabel.textColor = UIColorWithRGB(0xfa4d4c);
+            desLabel.tag = 1020;
+            desLabel.textAlignment = NSTextAlignmentRight;
+            desLabel.font = [UIFont systemFontOfSize:14.0f];
+            [cell.contentView addSubview:desLabel];
+            
         }
         UIView *lineView = [cell.contentView viewWithTag:1000];
         UILabel *titleLabel = [cell.contentView viewWithTag:1010];
+        UILabel *desLabel = [cell.contentView viewWithTag:1020];
+
+        desLabel.hidden = YES;
+
         if ([model.leftTitle isEqualToString:@"支付账户"]) {
             lineView.frame = CGRectMake(0, model.cellHeight - 0.5, ScreenWidth, 0.5);
             cell.textLabel.font = [UIFont boldSystemFontOfSize:14];
@@ -144,6 +155,16 @@
             } else if ([model.leftTitle isEqualToString:@"提金订单"]) {
                 lineView.backgroundColor = UIColorWithRGB(0xd8d8d8);
                 lineView.frame = CGRectMake(0, model.cellHeight - 0.5, ScreenWidth, 0.5);
+            } else if ([model.leftTitle isEqualToString:@"增金宝"]) {
+                if ([self.availableGoldAmount doubleValue] > 0) {
+                    desLabel.text = [NSString stringWithFormat:@"%@克",self.availableGoldAmount];
+                    desLabel.hidden = NO;
+                }
+            } else if ([model.leftTitle isEqualToString:@"尊享金"]) {
+                if ([self.collectGoldAmount doubleValue] > 0) {
+                    desLabel.hidden = NO;
+                    desLabel.text = [NSString stringWithFormat:@"%@克",self.collectGoldAmount];
+                }
             }
         }
         titleLabel.text = model.leftTitle;
@@ -330,9 +351,9 @@
         return;
     }
     NSString *tipStr1 = ZXTIP1;
-//    NSInteger openStatus = [UserInfoSingle sharedManager].openStatus ;
+    NSInteger openStatus = [UserInfoSingle sharedManager].openStatus ;
     NSInteger enjoyOpenStatus = [UserInfoSingle sharedManager].enjoyOpenStatus;
-    if ( enjoyOpenStatus < 3 ) {//去开户页面
+    if ( enjoyOpenStatus < 3 && openStatus < 3) {//去开户页面
         [self showHSAlert:tipStr1];
         return;
     }

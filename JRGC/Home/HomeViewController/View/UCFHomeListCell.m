@@ -233,6 +233,7 @@
 
 - (void)layoutSubviews
 {
+    [super layoutSubviews];
     if (self.presenter) {
         if (_presenter.platformSubsidyExpense.length > 0) {//贴
             _image1W.constant = 18;
@@ -274,12 +275,12 @@
         }
         else {
             _proSignBackView.hidden = YES;
-            _proSignBackViewWidth.constant = 0;
+//            _proSignBackViewWidth.constant = 0;
         }
     }
     else {
         _proSignBackView.hidden = YES;
-        _proSignBackViewWidth.constant = 0;
+//        _proSignBackViewWidth.constant = 0;
     }
     
     if (self.presenter.modelType == UCFHomeListCellModelTypeDefault) {
@@ -296,7 +297,6 @@
             self.proSignBackView.backgroundColor = UIColorWithRGB(0xfd4d4c);
         }
     }
-    [super layoutSubviews];
 }
 
 - (void)setMicroMoneyModel:(UCFMicroMoneyModel *)microMoneyModel
@@ -332,15 +332,6 @@
             self.circleProgressView.progressText = [statusArr objectAtIndex:status];
         }
     }
-    
-//    self.angleView.angleStatus = microMoneyModel.status;
-//    //        DBLOG(@"%@", model.status);
-//    if (microMoneyModel.prdLabelsList.count>0) {
-//        UCFProjectLabel *projectLabel = [microMoneyModel.prdLabelsList firstObject];
-//        if ([projectLabel.labelPriority integerValue] == 1) {
-//            self.angleView.angleString = [NSString stringWithFormat:@"%@", projectLabel.labelName];
-//        }
-//    }
     if (microMoneyModel.prdLabelsList.count > 0) {
         UCFProjectLabel *projectLabel = [microMoneyModel.prdLabelsList firstObject];
         if ([projectLabel.labelPriority integerValue] == 1) {
@@ -397,10 +388,8 @@
     //控制进度视图显示
     if (status < 3) {
         self.circleProgressView.pathFillColor = UIColorWithRGB(0xfa4d4c);
-        //            self.progressView.progressLabel.textColor = UIColorWithRGB(0x555555);
     }else{
         self.circleProgressView.pathFillColor = UIColorWithRGB(0xe2e2e2);//未绘制的进度条颜色
-        //            self.progressView.progressLabel.textColor = UIColorWithRGB(0x909dae);
     }
 }
 - (void)setHonerListModel:(UCFMicroMoneyModel *)microMoneyModel

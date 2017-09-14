@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (strong, nonatomic) NSMutableArray *dataArray;
 @property (copy, nonatomic) NSString *availableGoldAmount;
+@property (assign, nonatomic) BOOL isTradeDay;
 @property (copy, nonatomic) NSString *cashServiceRate;
 @property (copy, nonatomic) NSString *liquidateToken;
 @property (weak, nonatomic) UCFCashGoldHeader *cashGoldHeader;
@@ -109,6 +110,7 @@
         if ([rstcode intValue] == 1) {
             NSDictionary *dict = [dic objectSafeDictionaryForKey:@"data"];
             self.availableGoldAmount = [dict objectSafeForKey:@"availableGoldAmount"];
+            self.isTradeDay = [dict objectSafeForKey:@"isTradeDay"];
             self.cashServiceRate = [dict objectSafeForKey:@"cashServiceRate"];
             self.liquidateToken = [dict objectSafeForKey:@"liquidateToken"];
             NSString *tipStr = [[dict objectSafeForKey:@"pageContent"] stringByReplacingOccurrencesOfString:@"•" withString:@""];
@@ -294,7 +296,7 @@
         if (nil == cell) {
             cell = (UCFGoldCashButtonCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFGoldCashButtonCell" owner:self options:nil] lastObject];
         }
-        if (self.availableGoldAmount.doubleValue > 0.0) {
+        if (self.availableGoldAmount.doubleValue > 0.0 && self.isTradeDay) {
             cell.canCash = YES;
         }
         else {

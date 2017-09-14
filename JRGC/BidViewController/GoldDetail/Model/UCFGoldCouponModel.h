@@ -36,7 +36,7 @@
 
 @property(nonatomic,copy)NSString *validityStatus;//是否即将过期	string	0是，1否;
 
-@property(nonatomic,assign)BOOL isSelectedStatus;//该返金劵是否被选中
+@property(nonatomic,assign)BOOL isSelectedStatus;//该返金券是否被选中
 //初始化方法
 - (id)initWithDictionary:(NSDictionary *)dicJson;
 @end

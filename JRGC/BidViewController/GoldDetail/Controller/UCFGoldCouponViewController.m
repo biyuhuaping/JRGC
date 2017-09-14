@@ -23,11 +23,11 @@
 @property (nonatomic,strong)NSMutableArray *selectCellDataArray;
 @property (nonatomic,strong)NSDictionary *allSelectDataDict;
 @property (nonatomic,assign) int pageNo;
-@property (nonatomic,assign) int totalPage;//返金劵的总页数
+@property (nonatomic,assign) int totalPage;//返金券的总页数
 @property (nonatomic,assign) int totalCount;
 @property (nonatomic,assign) double tatolGetGoldAccout ;//可返金克重
 @property (nonatomic,assign) double tatolNeetGoldAccout ;//需投总克重
-@property (nonatomic,strong) NSString *cellSelectCountStr;//选择返金劵的张数
+@property (nonatomic,strong) NSString *cellSelectCountStr;//选择返金券的张数
 @property (nonatomic,strong)NSMutableString *goldRecordidsStr;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 - (IBAction)clickAllSelectBtn:(UIButton *)sender;
@@ -125,6 +125,7 @@
             }
         }
     }
+    self.allSelectBtn.selected = cellSelectCount == INT_MAX;
     self.cellSelectCountStr = [NSString stringWithFormat:@"%d",cellSelectCount];
     NSString *tatolGetGoldAccoutStr = [NSString stringWithFormat:@"%.3lf",_tatolGetGoldAccout];
     self.selectTipStr.text = [NSString stringWithFormat:@"已选用%@张，可返金%@克",_cellSelectCountStr,tatolGetGoldAccoutStr];
