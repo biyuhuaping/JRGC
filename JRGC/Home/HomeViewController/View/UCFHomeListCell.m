@@ -265,8 +265,11 @@
         }
     }
     
-    if (_presenter.item.prdLabelsList.count > 0) {
+    if (_presenter.item.prdLabelsList.count > 0 || self.goldModel.prdLabelsList.count > 0) {
         UCFProjectLabel *projectLabel = [_presenter.item.prdLabelsList firstObject];
+        if (projectLabel == nil) {
+            projectLabel = [self.goldModel.prdLabelsList firstObject];
+        }
         if ([projectLabel.labelPriority integerValue] == 1) {
             self.proSignBackView.hidden = NO;
             self.proSignLabel.text = [NSString stringWithFormat:@"%@", projectLabel.labelName];
