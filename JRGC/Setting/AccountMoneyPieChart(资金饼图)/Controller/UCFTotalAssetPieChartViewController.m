@@ -69,15 +69,15 @@
         if ([rstcode boolValue]) {
             NSDictionary *dataDict = [dic objectSafeDictionaryForKey:@"data"];
             NSString * accountBalance = [dataDict objectSafeForKey:@"accountBalance"];
-            NSString * accountBalance = [dataDict objectSafeForKey:@"goldAssets"];
+            NSString * goldAssets = [dataDict objectSafeForKey:@"goldAssets"];
             NSString * p2pAssets = [dataDict objectSafeForKey:@"p2pAssets"];
-
             NSString * totalAssets = [dataDict objectSafeForKey:@"totalAssets"];
             NSString * uncollectedPAndD = [dataDict objectSafeForKey:@"uncollectedPAndD"];
             NSString * zxAssets = [dataDict objectSafeForKey:@"zxAssets"];
+        }else{
+            
         }
     }
-
 }
 -(void)errorPost:(NSError *)err tag:(NSNumber *)tag
 {
