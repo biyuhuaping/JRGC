@@ -33,7 +33,7 @@
     //饼图标题
     self.chartView.pieTitle = pieChartModel.pieChartTitle;
     //动画时间
-    _chartView.animateTime = 0.5;
+    _chartView.animateTime = 1;
     
     //内圆的颜色
     _chartView.innerColor = [UIColor whiteColor];
@@ -54,7 +54,7 @@
     _chartView.centerType = PieCenterTypeMiddleRight;
     
     //是否动画
-    _chartView.needAnimation = NO;
+    _chartView.needAnimation = YES;
     
     //动画类型，全部只有一个动画；各个部分都有动画
     _chartView.type = PieAnimationTypeTogether;
@@ -72,7 +72,7 @@
     _chartView.textFontSize = 11;
     
     //文本的高度
-    _chartView.textHeight = 15;
+    _chartView.textHeight = 14;
     
     //文本前的颜色块的高度
     _chartView.colorHeight = 6;

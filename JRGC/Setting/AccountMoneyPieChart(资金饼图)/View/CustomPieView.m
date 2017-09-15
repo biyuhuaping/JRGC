@@ -388,7 +388,8 @@ typedef void(^ClickBlock)(NSInteger clickIndex);
         
         if (self.isRound) {
             
-            colorLayer.cornerRadius = colorHeight/2;
+//            colorLayer.cornerRadius = colorHeight/2;
+            colorLayer.cornerRadius = 2;
         }
         
         [self.colorPointArray addObject:colorLayer];
