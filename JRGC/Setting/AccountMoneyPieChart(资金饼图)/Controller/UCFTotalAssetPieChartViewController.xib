@@ -11,6 +11,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UCFTotalAssetPieChartViewController">
             <connections>
+                <outlet property="tableView" destination="XgF-GJ-dxa" id="QGw-K4-fVh"/>
+                <outlet property="totalAssetLabel" destination="LZ2-rT-g2K" id="GEl-zA-6Gx"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -54,9 +56,12 @@
                         <constraint firstItem="4qF-Du-V3W" firstAttribute="top" secondItem="BmK-UB-nLG" secondAttribute="top" constant="23" id="vQw-sq-kuf"/>
                     </constraints>
                 </view>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XgF-GJ-dxa">
-                    <rect key="frame" x="0.0" y="85" width="375" height="582"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XgF-GJ-dxa">
+                    <rect key="frame" x="0.0" y="85" width="375" height="320"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="320" id="yOt-sz-MtE"/>
+                    </constraints>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="Kxi-fo-3Yw"/>
                         <outlet property="delegate" destination="-1" id="9BT-Am-LEv"/>
@@ -65,7 +70,6 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="XgF-GJ-dxa" secondAttribute="bottom" id="8UP-6v-6HU"/>
                 <constraint firstItem="XgF-GJ-dxa" firstAttribute="top" secondItem="BmK-UB-nLG" secondAttribute="bottom" id="T9C-58-YlO"/>
                 <constraint firstItem="XgF-GJ-dxa" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Vck-2d-6oG"/>
                 <constraint firstItem="BmK-UB-nLG" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="hrz-4z-cxz"/>

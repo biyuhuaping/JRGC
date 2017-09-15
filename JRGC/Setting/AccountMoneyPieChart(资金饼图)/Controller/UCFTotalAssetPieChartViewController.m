@@ -7,9 +7,12 @@
 //
 
 #import "UCFTotalAssetPieChartViewController.h"
-
+#import "UCFCustomPieViewCell.h"
+#import "UCFCustomPieChartModel.h"
 @interface UCFTotalAssetPieChartViewController ()<UITableViewDelegate,UITableViewDataSource>
-
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) IBOutlet UILabel *totalAssetLabel;
+@property (nonatomic,strong)NSArray *dataArray;
 @end
 
 @implementation UCFTotalAssetPieChartViewController
@@ -17,25 +20,31 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self getHeaderInfoRequest];
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 2;
+    return self.dataArray.count;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 160;
+    return 165;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *cellindifier = @"twoSectionCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellindifier];
+    NSString *cellindifier = @"UCFCustomPieViewCell";
+    UCFCustomPieViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellindifier];
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellindifier];
+        cell = [[[NSBundle mainBundle]loadNibNamed:@"UCFCustomPieViewCell" owner:nil options:nil]firstObject];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
+    if (indexPath.row <  self.dataArray.count)
+    {
+        UCFCustomPieChartModel * model = self.dataArray[indexPath.row];
+        cell.pieChartModel = model;
+    }
     return cell;
 
 }
@@ -74,15 +83,30 @@
             NSString * totalAssets = [dataDict objectSafeForKey:@"totalAssets"];
             NSString * uncollectedPAndD = [dataDict objectSafeForKey:@"uncollectedPAndD"];
             NSString * zxAssets = [dataDict objectSafeForKey:@"zxAssets"];
-        }else{
+            self.totalAssetLabel.text = [NSString stringWithFormat:@"¥%@",totalAssets];
+            UCFCustomPieChartModel *pieChatModel1 = [[UCFCustomPieChartModel alloc]init];
+            pieChatModel1.pieChartTitle = @"按账户类型";
+            pieChatModel1.pieChartDataArray = [[NSMutableArray alloc]initWithArray:@[p2pAssets,goldAssets,zxAssets]];
+//             pieChatModel1.pieChartDataArray = [[NSMutableArray alloc]initWithArray:@[@"1000.00",@"5000.00",@"12000.00"]];
+            pieChatModel1.pieChartTitleArray = [[NSMutableArray alloc]initWithArray:@[@"微金资产",@"尊享资产",@"黄金资产"]];
             
+            UCFCustomPieChartModel *pieChatModel2 = [[UCFCustomPieChartModel alloc]init];
+            pieChatModel2.pieChartTitle = @"按金额类型";
+            pieChatModel2.pieChartDataArray = [[NSMutableArray alloc]initWithArray:@[uncollectedPAndD,accountBalance]];
+//             pieChatModel2.pieChartDataArray = [[NSMutableArray alloc]initWithArray:@[@"6000.00",@"12000.00"]];
+            pieChatModel2.pieChartTitleArray = [[NSMutableArray alloc]initWithArray:@[@"待收资产",@"账户余额"]];
+
+            self.dataArray = @[pieChatModel1,pieChatModel2];
+            
+            [self.tableView reloadData];
+        }else{
+            [AuxiliaryFunc showToastMessage:message withView:self.view];
         }
     }
 }
 -(void)errorPost:(NSError *)err tag:(NSNumber *)tag
 {
-    
-    
+    [MBProgressHUD displayHudError:err.userInfo[@"NSLocalizedDescription"]];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
