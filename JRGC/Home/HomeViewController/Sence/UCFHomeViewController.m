@@ -254,15 +254,12 @@
         UINavigationController *nav = app.tabBarController.selectedViewController;
         [nav pushViewController:web animated:YES];
     } else if ([dic[@"type"] isEqualToString:@"bidID"]){
-        NSInteger openStatus =  [UserInfoSingle sharedManager].openStatus;
-        if (openStatus > 3) {
             UCFFacReservedViewController *facReservedWeb = [[UCFFacReservedViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
             facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@", PRERESERVE_URL, dic[@"value"]];
             facReservedWeb.navTitle = @"工场预约";
             AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
             UINavigationController *nav = app.tabBarController.selectedViewController;
             [nav pushViewController:facReservedWeb animated:YES];
-        }
     }
 }
 #pragma mark -----------------------------------

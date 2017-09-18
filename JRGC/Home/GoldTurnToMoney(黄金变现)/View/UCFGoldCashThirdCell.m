@@ -32,6 +32,7 @@
     self.textField.rightView = button;
     self.textField.rightViewMode=UITextFieldViewModeAlways; //此处用来设置leftview现实时机
     self.textField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    self.cashAllButton.frame = CGRectMake(0, 0, 72, self.height);
 }
 
 - (void)cashAll:(UIButton *)button {
@@ -94,7 +95,6 @@
 {
     [super layoutSubviews];
     self.leftView.frame = CGRectMake(0, 0, 6, self.height);
-    self.cashAllButton.frame = CGRectMake(0, 0, 72, self.height);
 }
 
 @end

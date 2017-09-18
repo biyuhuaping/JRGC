@@ -325,7 +325,7 @@
                 [helper pushGoldAuthorizationType:SelectAccoutTypeGold nav:self.navigationController];
                 return;
             }else{
-                //去充值页面
+              
                 UCFGoldCashViewController *vc1 = [[UCFGoldCashViewController alloc] initWithNibName:@"UCFGoldCashViewController" bundle:nil];
                 vc1.baseTitleText = @"黄金变现";
                 vc1.rootVc = self;
