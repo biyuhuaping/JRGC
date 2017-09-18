@@ -382,6 +382,16 @@
     }
     return self;
 }
+#pragma 广告页弹框
+-(instancetype)initADViewAlertWithDelegate:(id)delegate
+{
+    self = [self init];
+    if (self) {
+        UIView *baseView = nil;
+        baseView = [[NSBundle mainBundle] loadNibNamed:@"AD_View" owner:nil options:nil][0];
+    }
+    return self;
+}
 #pragma 黄金自定义弹窗
 -(instancetype)initGoldAlertType:(MjAlertViewType)type delegate:(id)delegate
 {

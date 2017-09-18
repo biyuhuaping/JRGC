@@ -46,6 +46,7 @@
 {
     return (viewController.isViewLoaded && viewController.view.window);
 }
+
 - (void)showLogic
 {
 
