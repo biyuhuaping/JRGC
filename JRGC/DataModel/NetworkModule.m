@@ -1206,6 +1206,13 @@ static NetworkModule *gInstance = NULL;
         case kSXTagUserStatusInfo:
             parameter = [NEW_SERVER_IP stringByAppendingString:USERSTATUSINFO];
             break;
+        case kSXTagTotalAssetsOverView://总资产
+            parameter = [NEW_SERVER_IP stringByAppendingString:TOTALASSTSOVERVIEWURL];
+            break;
+        case kSXTagTotalEarningsOverview://总资产
+            parameter = [NEW_SERVER_IP stringByAppendingString:TOTALEARINGSOVERVIEW];
+            break;
+
     }
     //给原有参数字典添加公共参数
     if (!data) {
