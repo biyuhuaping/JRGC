@@ -113,6 +113,8 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(responds3DTouchClick) name:@"responds3DTouchClick" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setDefaultState:) name:@"setDefaultViewData" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUI:) name:@"refreshUserState" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(msgSkipToNativeAPP:) name:@"msgSkipToNativeAPP" object:nil];
+
     }
     return self;
 }
@@ -233,6 +235,35 @@
         [self showLoginView];
     }
 
+}
+
+- (void)msgSkipToNativeAPP:(NSNotification *)noti
+{
+    NSDictionary *dic = (NSDictionary *)noti.object;
+    if ([dic[@"type"] isEqualToString:@"coupon"]) {
+        UCFCouponViewController *coupon = [[UCFCouponViewController alloc] initWithNibName:@"UCFCouponViewController" bundle:nil];
+        AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        UINavigationController *nav = app.tabBarController.selectedViewController;
+        [nav pushViewController:coupon animated:YES];
+    } else if ([dic[@"type"] isEqualToString:@"webUrl"]){
+        UCFWebViewJavascriptBridgeMallDetails *web = [[UCFWebViewJavascriptBridgeMallDetails alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMallDetails" bundle:nil];
+        NSString *decodeURL = [dic[@"value"] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        web.url = decodeURL;
+        web.isHidenNavigationbar = YES;
+        AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        UINavigationController *nav = app.tabBarController.selectedViewController;
+        [nav pushViewController:web animated:YES];
+    } else if ([dic[@"type"] isEqualToString:@"bidID"]){
+        NSInteger openStatus =  [UserInfoSingle sharedManager].openStatus;
+        if (openStatus > 3) {
+            UCFFacReservedViewController *facReservedWeb = [[UCFFacReservedViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
+            facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@", PRERESERVE_URL, dic[@"value"]];
+            facReservedWeb.navTitle = @"工场预约";
+            AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+            UINavigationController *nav = app.tabBarController.selectedViewController;
+            [nav pushViewController:facReservedWeb animated:YES];
+        }
+    }
 }
 #pragma mark -----------------------------------
 
