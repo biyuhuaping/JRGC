@@ -157,10 +157,6 @@
         } else {
             _isShowAdversement = NO;
             self.advertisementView = nil;
-
-//            if (!self.lockVc) {
-//                [[MongoliaLayerCenter sharedManager] showLogic];
-//            }
         }
         //显示广告
         if (_isShowAdversement) {

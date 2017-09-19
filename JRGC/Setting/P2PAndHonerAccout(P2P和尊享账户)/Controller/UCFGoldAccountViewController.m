@@ -126,7 +126,7 @@
             [cell.contentView addSubview:titleLabel];
             
             UILabel *desLabel = [[UILabel alloc] initWithFrame: CGRectMake(ScreenWidth/2, 0, ScreenWidth/2 - 30, model.cellHeight)];
-            desLabel.textColor = UIColorWithRGB(0xfa4d4c);
+            desLabel.textColor = UIColorWithRGB(0x555555);
             desLabel.tag = 1020;
             desLabel.textAlignment = NSTextAlignmentRight;
             desLabel.font = [UIFont systemFontOfSize:14.0f];
