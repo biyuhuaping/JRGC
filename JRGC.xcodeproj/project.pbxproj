@@ -485,7 +485,7 @@
 		74F649401F471BCF00328235 /* UCFCashGoldTipview.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74F6493F1F471BCF00328235 /* UCFCashGoldTipview.xib */; };
 		74F998C21F3024C400A6E607 /* UCFFacReservedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F998C01F3024C400A6E607 /* UCFFacReservedViewController.m */; };
 		74F998C31F3024C400A6E607 /* UCFFacReservedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74F998C11F3024C400A6E607 /* UCFFacReservedViewController.xib */; };
-		74FA21191F4C0BA100037991 /* UCFGoldIncreTransFirstCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74FA21171F4C0BA100037991 /* UCFGoldIncreTransFirstCell.m */; };
+		74FA21191F4C0BA100037991 /* UCFGoldIncreTransListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74FA21171F4C0BA100037991 /* UCFGoldIncreTransListCell.m */; };
 		74FA211A1F4C0BA100037991 /* UCFGoldIncreTransListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74FA21181F4C0BA100037991 /* UCFGoldIncreTransListCell.xib */; };
 		74FBC1BD1B84721400B8DD7E /* UCFBindCardTwoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74FBC1BB1B84721400B8DD7E /* UCFBindCardTwoTableViewCell.m */; };
 		74FBC1BE1B84721400B8DD7E /* UCFBindCardTwoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74FBC1BC1B84721400B8DD7E /* UCFBindCardTwoTableViewCell.xib */; };
@@ -1832,7 +1832,7 @@
 		74F998C01F3024C400A6E607 /* UCFFacReservedViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFFacReservedViewController.m; sourceTree = "<group>"; };
 		74F998C11F3024C400A6E607 /* UCFFacReservedViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFFacReservedViewController.xib; sourceTree = "<group>"; };
 		74FA21161F4C0BA100037991 /* UCFGoldIncreTransListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFGoldIncreTransListCell.h; sourceTree = "<group>"; };
-		74FA21171F4C0BA100037991 /* UCFGoldIncreTransFirstCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFGoldIncreTransFirstCell.m; sourceTree = "<group>"; };
+		74FA21171F4C0BA100037991 /* UCFGoldIncreTransListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFGoldIncreTransListCell.m; sourceTree = "<group>"; };
 		74FA21181F4C0BA100037991 /* UCFGoldIncreTransListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFGoldIncreTransListCell.xib; sourceTree = "<group>"; };
 		74FBC1BA1B84721400B8DD7E /* UCFBindCardTwoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFBindCardTwoTableViewCell.h; sourceTree = "<group>"; };
 		74FBC1BB1B84721400B8DD7E /* UCFBindCardTwoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFBindCardTwoTableViewCell.m; sourceTree = "<group>"; };
@@ -3256,7 +3256,7 @@
 				74EC4B871F4AF5FE00E4ACB0 /* UCFGoldIncreListCell.m */,
 				74EC4B881F4AF5FE00E4ACB0 /* UCFGoldIncreListCell.xib */,
 				74FA21161F4C0BA100037991 /* UCFGoldIncreTransListCell.h */,
-				74FA21171F4C0BA100037991 /* UCFGoldIncreTransFirstCell.m */,
+				74FA21171F4C0BA100037991 /* UCFGoldIncreTransListCell.m */,
 				74FA21181F4C0BA100037991 /* UCFGoldIncreTransListCell.xib */,
 				74067A3D1F50341B00747888 /* UCFFloatDetailView.h */,
 				74067A3E1F50341B00747888 /* UCFFloatDetailView.m */,
@@ -7560,7 +7560,7 @@
 				25950EBC1D7FB6EC00E4CCBA /* CWFaceViewController.m in Sources */,
 				749182101EC166F000AC1ECE /* SDCycleScrollView.m in Sources */,
 				747FE00E1B0C57DD005C27CA /* UCFModifyPhoneViewController.m in Sources */,
-				74FA21191F4C0BA100037991 /* UCFGoldIncreTransFirstCell.m in Sources */,
+				74FA21191F4C0BA100037991 /* UCFGoldIncreTransListCell.m in Sources */,
 				A8F742B21F18939800EF001A /* UCFGoldTradeListModel.m in Sources */,
 				FB88B3BA1AF0C7B0005D6BF3 /* UCFAngleView.m in Sources */,
 				FBB6858A1AE4A76800F222B6 /* UIScrollView+MJRefresh.m in Sources */,
