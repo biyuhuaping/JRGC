@@ -271,7 +271,8 @@
 - (void)configuration
 {
     self.navigationController.navigationBar.hidden = YES;
-    
+
+
     UCFHomeListNavView *navView = [[UCFHomeListNavView alloc] initWithFrame:CGRectZero];
     navView.delegate = self;
     [self.view addSubview:navView];
@@ -346,6 +347,11 @@
     }
     self.navView.frame = CGRectMake(0, 0, self.view.width, 64);
     [self.view bringSubviewToFront:self.navView];
+    if (__IPHONE_11_0) {
+        if ([self.homeListVC.tableView respondsToSelector:@selector(setContentInsetAdjustmentBehavior:)]) {
+            self.homeListVC.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        }
+    }
 }
 
 #pragma mark - homelistVC的代理方法
