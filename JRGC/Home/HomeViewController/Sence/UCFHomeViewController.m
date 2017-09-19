@@ -347,11 +347,13 @@
     }
     self.navView.frame = CGRectMake(0, 0, self.view.width, 64);
     [self.view bringSubviewToFront:self.navView];
-    if (__IPHONE_11_0) {
-        if ([self.homeListVC.tableView respondsToSelector:@selector(setContentInsetAdjustmentBehavior:)]) {
-            self.homeListVC.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-        }
+#ifdef __IPHONE_11_0
+    if (@available(iOS 11.0, *)) {
+        self.homeListVC.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    } else {
+        // Fallback on earlier versions
     }
+#endif
 }
 
 #pragma mark - homelistVC的代理方法
