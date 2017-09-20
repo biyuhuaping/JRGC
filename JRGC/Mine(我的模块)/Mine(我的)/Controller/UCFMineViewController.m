@@ -12,8 +12,9 @@
 #import "UCFMineFuncCell.h"
 #import "UCFMineFuncSecCell.h"
 
-@interface UCFMineViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface UCFMineViewController () <UITableViewDelegate, UITableViewDataSource, UCFMineHeaderViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) UCFMineHeaderView *mineHeaderView;
 
 @end
 
@@ -25,13 +26,20 @@
     [self createUI];
 }
 
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    self.mineHeaderView.frame = CGRectMake(0, 0, ScreenWidth, 195);
+}
+
 #pragma mark - 设置界面
 - (void)createUI {
     self.navigationController.navigationBar.hidden = YES;
     
     UCFMineHeaderView *mineHeader = (UCFMineHeaderView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFMineHeaderView" owner:self options:nil] lastObject];
-    mineHeader.frame = CGRectMake(0, 0, ScreenWidth, 195);
+    mineHeader.delegate = self;
     self.tableView.tableHeaderView = mineHeader;
+    self.mineHeaderView = mineHeader;
 }
 
 #pragma mark - tableView 的代理方法
@@ -90,6 +98,12 @@
         return 50;
     }
     return 60;
+}
+
+#pragma mark - 我的页面的头部视图代理方法
+- (void)mineHeaderViewDidClikedUserInfoWithCurrentVC:(UCFMineHeaderView *)mineHeaderView
+{
+    
 }
 
 @end
