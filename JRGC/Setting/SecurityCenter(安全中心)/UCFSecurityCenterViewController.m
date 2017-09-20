@@ -104,7 +104,7 @@
 //        self.setChangePassword.isShowOrHide  = YES;//显示该信息 对应的cell可以点击
         
         UCFSettingGroup *group1 = [[UCFSettingGroup alloc] init];//用户信息
-        group1.items = [[NSMutableArray alloc]initWithArray: @[idauth, bundlePhoneNum,facCode,self.userLevel]];//qyy
+        group1.items = [[NSMutableArray alloc]initWithArray: @[idauth, bundlePhoneNum,self.userLevel,facCode]];//qyy
 
         UCFSettingGroup *group2 = [[UCFSettingGroup alloc] init];//账户安全
         
@@ -776,18 +776,19 @@
             }
                 break;
             case 2:{
-                UCFFacCodeViewController *subVC = [[UCFFacCodeViewController alloc] initWithNibName:@"UCFFacCodeViewController" bundle:nil];
-                subVC.urlStr = [NSString stringWithFormat:@"https://m.9888.cn/mpwap/mycode.jsp?pcode=%@&sex=%d",[[NSUserDefaults standardUserDefaults] objectForKey:@"gcmCode"],self.sex];
-                vc = subVC;
+                
+                vc = [[arrowItem.destVcClass alloc] initWithNibName:@"UCFWebViewJavascriptBridgeLevel" bundle:nil];
+                vc.title = arrowItem.title;
+                ((UCFWebViewJavascriptBridgeLevel *)vc).url = LEVELURL;
+                ((UCFWebViewJavascriptBridgeLevel *)vc).navTitle = @"会员等级";
+                //vc.rootVc = self;
             }
                 break;
             case 3:
                 {
-                  vc = [[arrowItem.destVcClass alloc] initWithNibName:@"UCFWebViewJavascriptBridgeLevel" bundle:nil];
-                    vc.title = arrowItem.title;
-                    ((UCFWebViewJavascriptBridgeLevel *)vc).url = LEVELURL;
-                    ((UCFWebViewJavascriptBridgeLevel *)vc).navTitle = @"会员等级";
-                     //vc.rootVc = self;
+                    UCFFacCodeViewController *subVC = [[UCFFacCodeViewController alloc] initWithNibName:@"UCFFacCodeViewController" bundle:nil];
+                    subVC.urlStr = [NSString stringWithFormat:@"https://m.9888.cn/mpwap/mycode.jsp?pcode=%@&sex=%d",[[NSUserDefaults standardUserDefaults] objectForKey:@"gcmCode"],self.sex];
+                    vc = subVC;
                 }
                 break;
             case 4:
