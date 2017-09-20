@@ -17,6 +17,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *startDateLabel;
 @property (strong, nonatomic) IBOutlet UILabel *expiredDateLabel;
 @property (strong, nonatomic) IBOutlet UILabel *orderStatusNameLabel;
+@property (strong, nonatomic) IBOutlet UILabel *expiredDateStrLabel;
 
 @property (strong, nonatomic) NSDictionary *dataDict;
 
