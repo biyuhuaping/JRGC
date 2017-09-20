@@ -1,0 +1,95 @@
+//
+//  UCFMineViewController.m
+//  JRGC
+//
+//  Created by njw on 2017/9/19.
+//  Copyright © 2017年 qinwei. All rights reserved.
+//
+
+#import "UCFMineViewController.h"
+#import "UCFMineHeaderView.h"
+#import "UCFMineCell.h"
+#import "UCFMineFuncCell.h"
+#import "UCFMineFuncSecCell.h"
+
+@interface UCFMineViewController () <UITableViewDelegate, UITableViewDataSource>
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+
+@end
+
+@implementation UCFMineViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    [self createUI];
+}
+
+#pragma mark - 设置界面
+- (void)createUI {
+    self.navigationController.navigationBar.hidden = YES;
+    
+    UCFMineHeaderView *mineHeader = (UCFMineHeaderView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFMineHeaderView" owner:self options:nil] lastObject];
+    mineHeader.frame = CGRectMake(0, 0, ScreenWidth, 195);
+    self.tableView.tableHeaderView = mineHeader;
+}
+
+#pragma mark - tableView 的代理方法
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 3;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    switch (section) {
+        case 0:
+            return 3;
+        
+        case 1:
+            return 1;
+        
+        case 2:
+            return 2;
+    }
+    return 0;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 0) {
+        static NSString *cellId = @"minecellfirst";
+        UCFMineCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+        if (nil == cell) {
+            cell = (UCFMineCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFMineCell" owner:self options:nil] lastObject];
+        }
+        return cell;
+    }
+    else if (indexPath.section == 1) {
+        static NSString *cellId = @"minefunccell";
+        UCFMineFuncCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+        if (nil == cell) {
+            cell = (UCFMineFuncCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFMineFuncCell" owner:self options:nil] lastObject];
+        }
+        return cell;
+    }
+    else if (indexPath.section == 2) {
+        static NSString *cellId = @"minefuncseccell";
+        UCFMineFuncSecCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+        if (nil == cell) {
+            cell = (UCFMineFuncSecCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFMineFuncSecCell" owner:self options:nil] lastObject];
+        }
+        return cell;
+    }
+    return nil;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 1) {
+        return 50;
+    }
+    return 60;
+}
+
+@end

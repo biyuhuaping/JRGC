@@ -8,14 +8,23 @@
 
 #import "UCFBaseViewController.h"
 
-@class UCFUserPresenter;
+@class UCFHomeListPresenter, UCFCycleImageViewController, UCFHomeIconPresenter;
+
+@protocol UCFCycleImageViewControllerDelegate <NSObject>
+
+- (void)cycleImageVC:(UCFCycleImageViewController *)cycleImageVC didClickedIconWithIconPresenter:(UCFHomeIconPresenter *)iconPresenter;
+
+@end
+
 @interface UCFCycleImageViewController : UIViewController
+@property (weak, nonatomic) id<UCFCycleImageViewControllerDelegate> delegate;
+
 #pragma mark - 根据所对应的presenter生成当前controller
-+ (instancetype)instanceWithPresenter:(UCFUserPresenter *)presenter;
++ (instancetype)instanceWithPresenter:(UCFHomeListPresenter *)presenter;
 #pragma mark - 计算轮播图模块的高度
 + (CGFloat)viewHeight;
 #pragma mark - 返回当前controller的presenter
-- (UCFUserPresenter *)presenter;
+- (UCFHomeListPresenter *)presenter;
 #pragma mark - 获取正式环境的banner图
 - (void)getNormalBannerData;
 @end

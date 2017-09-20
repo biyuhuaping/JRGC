@@ -50,7 +50,7 @@
 #import "UCFBatchInvestmentViewController.h"
 #import "UCFGoldCashViewController.h"
 
-@interface UCFHomeViewController () <UCFHomeListViewControllerDelegate, UCFHomeListNavViewDelegate, UCFUserInformationViewControllerDelegate,BJGridItemDelegate, UIAlertViewDelegate>
+@interface UCFHomeViewController () <UCFHomeListViewControllerDelegate, UCFHomeListNavViewDelegate, UCFCycleImageViewControllerDelegate,BJGridItemDelegate, UIAlertViewDelegate>
 @property (strong, nonatomic) UCFCycleImageViewController *cycleImageVC;
 @property (strong, nonatomic) UCFUserInformationViewController *userInfoVC;
 @property (strong, nonatomic) UCFHomeListViewController *homeListVC;
@@ -92,11 +92,6 @@
     });
     
 
-}
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -246,72 +241,37 @@
     [self.view addSubview:navView];
     self.navView = navView;
     
-    UCFUserPresenter *userPresenter = [UCFUserPresenter presenter];
+//    UCFUserPresenter *userPresenter = [UCFUserPresenter presenter];
     
-    self.cycleImageVC = [UCFCycleImageViewController instanceWithPresenter:userPresenter];
-    self.userInfoVC = [UCFUserInformationViewController instanceWithPresenter:userPresenter];
-    self.userInfoVC.delegate = self;
-    [self.userInfoVC setPersonInfoVCGenerator:^UIViewController *(id params) {
-        UCFSecurityCenterViewController *personMessageVC = [[UCFSecurityCenterViewController alloc] initWithNibName:@"UCFSecurityCenterViewController" bundle:nil];
-        personMessageVC.title = @"个人信息";
-        return personMessageVC;
-    }];
-    [self.userInfoVC setMessageVCGenerator:^UIViewController *(id params) {
-        UCFMessageCenterViewController *messagecenterVC = [[UCFMessageCenterViewController alloc]initWithNibName:@"UCFMessageCenterViewController" bundle:nil];
-        messagecenterVC.title =@"消息中心";
-        return messagecenterVC;
-    }];
     
-    [self.userInfoVC setBeansVCGenerator:^UIViewController *(id params) {
-        UCFMyFacBeanViewController *bean = [[UCFMyFacBeanViewController alloc] initWithNibName:@"UCFMyFacBeanViewController" bundle:nil];
-        bean.title = @"我的工豆";
-        return bean;
-    }];
-    
-    [self.userInfoVC setCouponVCGenerator:^UIViewController *(id params) {
-        UCFCouponViewController *coupon = [[UCFCouponViewController alloc] initWithNibName:@"UCFCouponViewController" bundle:nil];
-        return coupon;
-    }];
-    
-    [self.userInfoVC setWorkPointInfoVCGenerator:^UIViewController *(id params) {
-        UCFWorkPointsViewController *workPoint = [[UCFWorkPointsViewController alloc]initWithNibName:@"UCFWorkPointsViewController" bundle:nil];
-        workPoint.title = @"我的工分";
-        return workPoint;
-    }];
-    
-    [self.userInfoVC setMyLevelVCGenerator:^UIViewController *(id params) {
-        UCFWebViewJavascriptBridgeLevel *subVC = [[UCFWebViewJavascriptBridgeLevel alloc] initWithNibName:@"UCFWebViewJavascriptBridgeLevel" bundle:nil];
-        subVC.url = LEVELURL;
-        subVC.navTitle = @"会员等级";
-        return subVC;
-    }];
     
     UCFHomeListPresenter *listViewPresenter = [UCFHomeListPresenter presenter];
+    self.cycleImageVC = [UCFCycleImageViewController instanceWithPresenter:listViewPresenter];
+    self.cycleImageVC.delegate = self;
+    
+    
     self.homeListVC = [UCFHomeListViewController instanceWithPresenter:listViewPresenter];
     self.homeListVC.delegate = self; //HomeListViewController走的是Protocol绑定方式
     [self.view addSubview:self.homeListVC.tableView];
 
     [self addChildViewController:self.cycleImageVC];
-    [self addChildViewController:self.userInfoVC];
+//    [self addChildViewController:self.userInfoVC];
 }
 
 #pragma mark - addUI 添加界面
 - (void)addUI {
     self.homeListVC.tableView.frame = CGRectMake(0, 0, SCREEN_WIDTH, ScreenHeight-49);
+    CGFloat cycleImageViewHeight = [UCFCycleImageViewController viewHeight];
+    self.cycleImageVC.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, cycleImageViewHeight);
+    self.homeListVC.tableView.tableHeaderView = self.cycleImageVC.view;
     NSString *userId = [UserInfoSingle sharedManager].userId;
     if (userId) {
         self.navView.hidden = YES;
-        CGFloat userInfoViewHeight = [UCFUserInformationViewController viewHeight];
-        self.userInfoVC.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, userInfoViewHeight);
         self.navView.loginAndRegisterButton.hidden = YES;
-        self.homeListVC.tableView.tableHeaderView = self.userInfoVC.view;
     }
     else {
         self.navView.hidden = NO;
-        CGFloat cycleImageViewHeight = [UCFCycleImageViewController viewHeight];
-        self.cycleImageVC.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, cycleImageViewHeight);
         self.navView.loginAndRegisterButton.hidden = NO;
-        self.homeListVC.tableView.tableHeaderView = self.cycleImageVC.view;
     }
     self.navView.frame = CGRectMake(0, 0, self.view.width, 64);
     [self.view bringSubviewToFront:self.navView];
@@ -450,11 +410,8 @@
                                     
                                 }];
                             }
-                            //                        else {
-                            //                            UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前标的详情只对投资人开放"];
-                            //                            [self.navigationController pushViewController:controller animated:YES];
-                            //                        }
-                        }else{
+                        }
+                        else{
                             {
                                 NSDictionary *parameter = @{@"Id": model.Id, @"userId": [UserInfoSingle sharedManager].userId, @"proType": model.type,@"type":@"3"};
                                 [self.userInfoVC.presenter fetchProDetailDataWithParameter:parameter completionHandler:^(NSError *error, id result) {
@@ -486,13 +443,6 @@
             }
           }
         else if (model.moedelType == UCFHomeListCellModelTypeOneImageBatchLending) {
-            // 批量出借
-//            UCFP2PViewController *p2PVC = [[UCFP2PViewController alloc] initWithNibName:@"UCFP2PViewController" bundle:nil];
-//            p2PVC.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight - 64);
-//            p2PVC.viewType = @"2";
-//            [p2PVC setCurrentViewForBatchBid];
-//            [self.navigationController pushViewController:p2PVC animated:YES];
-            
             
             UCFBatchBidController *batchBidVc = [[UCFBatchBidController alloc]initWithNibName:@"UCFBatchBidController" bundle:nil];
             batchBidVc.accoutType = SelectAccoutTypeP2P;
@@ -860,10 +810,6 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [weakSelf fetchData];
     });
-    //    BOOL hasSign = [self.stateDict objectForKey:@"sign"];
-    //    if (hasSign) {
-    //
-    //    }
 }
 
 #pragma mark - 请求数据
@@ -871,10 +817,14 @@
 {
     __weak typeof(self) weakSelf = self;
     
-    [self.userInfoVC.presenter fetchUserInfoOneDataWithCompletionHandler:^(NSError *error, id result) {
-    }];
+//    [self.userInfoVC.presenter fetchUserInfoOneDataWithCompletionHandler:^(NSError *error, id result) {
+//    }];
+//    
+//    [self.userInfoVC.presenter fetchUserInfoTwoDataWithCompletionHandler:^(NSError *error, id result) {
+//    }];
     
-    [self.userInfoVC.presenter fetchUserInfoTwoDataWithCompletionHandler:^(NSError *error, id result) {
+    [self.homeListVC.presenter fetchHomeIconListDataWithCompletionHandler:^(NSError *error, id result) {
+        
     }];
     
     [self.homeListVC.presenter fetchHomeListDataWithCompletionHandler:^(NSError *error, id result) {
@@ -950,6 +900,11 @@
         subVC.accoutType = self.accoutType;
         [self.navigationController pushViewController:subVC animated:YES];
     }
+}
+
+- (void)cycleImageVC:(UCFCycleImageViewController *)cycleImageVC didClickedIconWithIconPresenter:(UCFHomeIconPresenter *)iconPresenter
+{
+    
 }
 
 //- (void)userInfoClickAssetDetailButton:(UIButton *)button withInfomation:(id)infomation

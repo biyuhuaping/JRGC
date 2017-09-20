@@ -24,6 +24,7 @@
 #import "P2PWalletHelper.h"
 #import "BlockUIAlertView.h"
 #import "UCFInvestViewController.h"
+#import "UCFMineViewController.h"
 
 @interface UCFMainTabBarController ()
 
@@ -71,11 +72,11 @@
 - (void)initAllTabbarItems
 {
     NSMutableArray *vcArray = [NSMutableArray array];
-    NSArray *tabbarTitleArray = @[@"我的",
+    NSArray *tabbarTitleArray = @[@"首页",
                                   @"投资",
                                   @"发现",
                                   @"生活",
-                                  @"更多"];
+                                  @"我的"];
     
     NSArray *tabbarNormalArray = @[@"tabbar_icon_user_normal",
                                    @"tabbar_icon_project_normal",
@@ -116,9 +117,8 @@
             }
                 break;
             case 4:{
-                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"UCFMoreViewController" bundle:nil];
-                UCFMoreViewController *moreView =  [storyboard instantiateViewControllerWithIdentifier:@"more_main"];
-                controller = moreView;
+                UCFMineViewController *mine = [[UCFMineViewController alloc] initWithNibName:@"UCFMineViewController" bundle:nil];
+                controller = mine;
             }
                 break;
             default:

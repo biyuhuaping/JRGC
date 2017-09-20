@@ -1206,6 +1206,9 @@ static NetworkModule *gInstance = NULL;
         case kSXTagUserStatusInfo:
             parameter = [NEW_SERVER_IP stringByAppendingString:USERSTATUSINFO];
             break;
+        case kSXTagHomeIconList:
+            parameter = [NEW_SERVER_IP stringByAppendingString:HOMEICONLIST];
+            break;
     }
     //给原有参数字典添加公共参数
     if (!data) {
