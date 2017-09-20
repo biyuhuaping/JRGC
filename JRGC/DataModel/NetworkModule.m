@@ -1206,6 +1206,9 @@ static NetworkModule *gInstance = NULL;
         case kSXTagUserStatusInfo:
             parameter = [NEW_SERVER_IP stringByAppendingString:USERSTATUSINFO];
             break;
+        case kSXTagHomeIconList:
+            parameter = [NEW_SERVER_IP stringByAppendingString:HOMEICONLIST];
+            break;
         case kSXTagTotalAssetsOverView://总资产
             parameter = [NEW_SERVER_IP stringByAppendingString:TOTALASSTSOVERVIEWURL];
             break;

@@ -236,6 +236,7 @@
 #define USERGETZUNXIANGAGREE @"api/userInfo/v2/zxAuthorization.json"
 #define USERZUNXIANGSTATE    @"api/userInfo/v2/zxIsAuthorization.json"
 #define USERPRODUTLIST        @"api/prdClaims/v2/productList.json" //产品列表
+#define HOMEICONLIST        @"api/prdClaims/v2/productNum.json" //首页图标的列表
 #define MYSIMLEINFOURL      @"api/prdClaims/v2/mySimpleInfo.json"  //首页-查询用户工豆,工分,等信息
 #define MYRECEIPTURL        @"api/prdClaims/v2/myReceipt.json"     //首页-用户余额,累计收益,总资产
 #define USERINFOADJUSTMENT              @"api/userInfo/v2/adjustment.json" //公告确认
@@ -510,6 +511,7 @@ enum kSXTag
     kSXTagGlixedGoldConstract,          //活期合同接口
     kSXTagHonerRechangeShowContract,   //尊享充值划款授权协议
     kSXTagUserStatusInfo,               //用户状态信息
+    kSXTagHomeIconList,                 //首页图标列表
     kSXTagTotalAssetsOverView,          //总资产
     kSXTagTotalEarningsOverview,        //累计收益
 };

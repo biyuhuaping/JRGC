@@ -1,17 +1,17 @@
 //
-//  UCFHomeListGroup.m
+//  UCFHomeIconModel.m
 //  JRGC
 //
-//  Created by njw on 2017/5/9.
+//  Created by njw on 2017/9/15.
 //  Copyright © 2017年 qinwei. All rights reserved.
 //
 
-#import "UCFHomeListGroup.h"
+#import "UCFHomeIconModel.h"
 #import <objc/runtime.h>
 
-@implementation UCFHomeListGroup
+@implementation UCFHomeIconModel
 
-+ (instancetype)homeListGroupWithDict:(NSDictionary *)dict
++ (instancetype)homeIconListWithDict:(NSDictionary *)dict
 {
     return [[self alloc] initWithDictionary:dict];
 }
@@ -47,27 +47,18 @@
 {
     for (NSString *key in [self propertyKeys]) {
         id propertyValue = [dataSource valueForKey:key];
+        if ([key isEqualToString:@"desction"]) {
+            propertyValue = [dataSource valueForKey:@"description"];
+        }
         if (![propertyValue isKindOfClass:[NSNull class]] && propertyValue != nil) {
-            if ([key isEqualToString:@"prdlist"]) {
-                NSMutableArray *temp = [[NSMutableArray alloc] init];
-                for (NSDictionary *tempDict in propertyValue) {
-                    UCFHomeListCellModel *model = [UCFHomeListCellModel homeListCellWithDict:tempDict];
-                    [temp addObject:model];
-                }
-                self.prdlist = temp;
-            }
-            else if ([key isEqualToString:@"attach"]) {
-                
-            }
-            else
-                [self setValue:propertyValue forKey:key];
+            [self setValue:propertyValue forKey:key];
         } else {
-            if ([key isEqualToString:@"showMore"]) {
-                [self setShowMore:[propertyValue boolValue]];
+            if ([key isEqualToString:@"type"]) {
+                [self setValue:propertyValue forKey:key];
             }
-            else
+            else {
                 [self setValue:@"" forKey:key];
-            DLog(@"%@",[NSString stringWithFormat:@"字段值%@读取异常(字段不存在或者值为空)",key]);
+            }
         }
     }
 }
@@ -76,5 +67,4 @@
 {
     
 }
-
 @end

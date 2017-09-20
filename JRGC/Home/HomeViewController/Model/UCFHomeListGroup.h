@@ -15,7 +15,9 @@
 
 @property (nonatomic, assign) BOOL showMore;
 
+@property (nonatomic, strong) NSArray *attach;
 @property (nonatomic, copy) NSString *title;
+@property (nonatomic, copy) NSString *layout;
 @property (nonatomic, copy) NSString *type;
 @property (nonatomic, strong) NSArray *prdlist;
 @property (nonatomic, copy) NSString *desc;

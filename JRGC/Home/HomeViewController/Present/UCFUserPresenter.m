@@ -88,22 +88,22 @@
     }
     __weak typeof(self) weakSelf = self;
     self.canClicked = NO;
-    [self.apiManager fetchUserInfoOneWithUserId:self.userId completionHandler:^(NSError *error, id result) {
-        weakSelf.canClicked = YES;
-        if ([result isKindOfClass:[UCFUserInfoModel class]]) {
-            weakSelf.userInfoOneModel = result;
-            [weakSelf.userInfoListCells removeAllObjects];
-            [weakSelf initUI];
-        }
-        else if ([result isKindOfClass:[NSString class]]) {
-            
-        }
-        if ([weakSelf.userInfoViewDelegate respondsToSelector:@selector(userInfoPresenter:didRefreshUserInfoOneWithResult:error:)]) {
-            [weakSelf.userInfoViewDelegate userInfoPresenter:weakSelf didRefreshUserInfoOneWithResult:result error:error];
-        }
-        
-        !completionHander ?: completionHander(error, result);
-    }];
+//    [self.apiManager fetchUserInfoOneWithUserId:self.userId completionHandler:^(NSError *error, id result) {
+//        weakSelf.canClicked = YES;
+//        if ([result isKindOfClass:[UCFUserInfoModel class]]) {
+//            weakSelf.userInfoOneModel = result;
+//            [weakSelf.userInfoListCells removeAllObjects];
+//            [weakSelf initUI];
+//        }
+//        else if ([result isKindOfClass:[NSString class]]) {
+//            
+//        }
+//        if ([weakSelf.userInfoViewDelegate respondsToSelector:@selector(userInfoPresenter:didRefreshUserInfoOneWithResult:error:)]) {
+//            [weakSelf.userInfoViewDelegate userInfoPresenter:weakSelf didRefreshUserInfoOneWithResult:result error:error];
+//        }
+//        
+//        !completionHander ?: completionHander(error, result);
+//    }];
 }
 
 - (void)fetchUserInfoTwoDataWithCompletionHandler:(NetworkCompletionHandler)completionHander
@@ -112,19 +112,19 @@
         return;
     }
     __weak typeof(self) weakSelf = self;
-    [self.apiManager fetchUserInfoTwoWithUserId:self.userId completionHandler:^(NSError *error, id result) {
-        if ([result isKindOfClass:[UCFUserInfoModel class]]) {
-            
-        }
-        else if ([result isKindOfClass:[NSString class]]) {
-            
-        }
-        if ([weakSelf.userInfoViewDelegate respondsToSelector:@selector(userInfoPresenter:didRefreshUserInfoTwoWithResult:error:)]) {
-            [weakSelf.userInfoViewDelegate userInfoPresenter:weakSelf didRefreshUserInfoTwoWithResult:result error:error];
-        }
-        
-        !completionHander ?: completionHander(error, result);
-    }];
+//    [self.apiManager fetchUserInfoTwoWithUserId:self.userId completionHandler:^(NSError *error, id result) {
+//        if ([result isKindOfClass:[UCFUserInfoModel class]]) {
+//            
+//        }
+//        else if ([result isKindOfClass:[NSString class]]) {
+//            
+//        }
+//        if ([weakSelf.userInfoViewDelegate respondsToSelector:@selector(userInfoPresenter:didRefreshUserInfoTwoWithResult:error:)]) {
+//            [weakSelf.userInfoViewDelegate userInfoPresenter:weakSelf didRefreshUserInfoTwoWithResult:result error:error];
+//        }
+//        
+//        !completionHander ?: completionHander(error, result);
+//    }];
 }
 
 - (void)fetchSignDataWithUserId:(NSString *)userId withToken:(NSString *)token completionHandler:(NetworkCompletionHandler)completionHander
