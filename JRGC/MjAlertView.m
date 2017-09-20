@@ -382,6 +382,35 @@
     }
     return self;
 }
+#pragma 广告页弹框
+-(instancetype)initADViewAlertWithDelegate:(id)delegate
+{
+    self = [self init];
+    if (self) {
+        UIView *baseView = nil;
+        baseView = [[NSBundle mainBundle] loadNibNamed:@"AD_View" owner:nil options:nil][0];
+        baseView.frame = CGRectMake(0, 0, 270, 460);
+        [self.showView  setFrame:CGRectMake((ScreenWidth - 270)/2.0f, (ScreenHeight - 460)/2.0f, 270, 460)];
+        self.delegate = delegate;
+        [self.showView addSubview:baseView];
+        
+        UIButton *closeBtn = [baseView viewWithTag:1000];
+        [closeBtn addTarget:self action:@selector(closeBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+        
+        UIButton *adImageView = [baseView viewWithTag:999];
+        
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goToAdDetailContent)];
+        [adImageView addGestureRecognizer:tap];
+    }
+    return self;
+}
+- (void)goToAdDetailContent
+{
+    if ([self.delegate respondsToSelector:@selector(mjalertView:didClickedButton:andClickedIndex:)]) {
+        [self.delegate mjalertView:self didClickedButton:nil andClickedIndex:0];
+        [self hide];
+    }
+}
 #pragma 黄金自定义弹窗
 -(instancetype)initGoldAlertType:(MjAlertViewType)type delegate:(id)delegate
 {
