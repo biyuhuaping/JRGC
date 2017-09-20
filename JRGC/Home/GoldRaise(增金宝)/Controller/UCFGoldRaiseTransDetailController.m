@@ -80,7 +80,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     UCFGoldIncreTransListModel *listModel = [self.dataArray objectAtIndex:section];
-    if ([listModel.orderTypeName isEqualToString:@"购买活期"]) {
+    if ([listModel.orderTypeCode isEqualToString:@"01"]) {
         return 4 + listModel.nmContractModelList.count;
     }
     else {
