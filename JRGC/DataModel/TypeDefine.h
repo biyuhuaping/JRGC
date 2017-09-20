@@ -306,6 +306,10 @@
 #define PRERESERVE_URL          @"https://m.9888.cn/static/wap/invest/index.html#/reserve/info" //预约的url
 
 #define HONERRECHANGESHOWCONT @"/api/contract/v2/showContractMess.json"//尊享充值委托划款协议合同预览
+#define TOTALASSTSOVERVIEWURL @"api/userAccount/v2/assetsOverview.json"//总资产接口
+#define TOTALEARINGSOVERVIEW  @"/api/userAccount/v2/earningsOverview.json" //累计收益
+
+
 enum kPostStatus{
     kPostStatusNone=0,
     kPostStatusBeging=1,
@@ -508,6 +512,8 @@ enum kSXTag
     kSXTagHonerRechangeShowContract,   //尊享充值划款授权协议
     kSXTagUserStatusInfo,               //用户状态信息
     kSXTagHomeIconList,                 //首页图标列表
+    kSXTagTotalAssetsOverView,          //总资产
+    kSXTagTotalEarningsOverview,        //累计收益
 };
 
 typedef enum kSXTag kSXTag;

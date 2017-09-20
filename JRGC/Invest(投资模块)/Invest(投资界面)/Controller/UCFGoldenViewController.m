@@ -19,8 +19,7 @@
 #import "ToolSingleTon.h"
 #import "UCFNoPermissionViewController.h"
 #import "UCFGoldFlexibleCell.h"
-
-
+#import "UCFAccountPieCharViewController.h"
 @interface UCFGoldenViewController () <UITableViewDelegate, UITableViewDataSource, UCFHomeListCellHonorDelegate,UIAlertViewDelegate, UCFGoldFlexibleCellDelegate>
 @property (weak, nonatomic) UCFGoldenHeaderView *goldenHeader;
 @property (strong, nonatomic) NSMutableArray *dataArray;
@@ -276,6 +275,15 @@
 #pragma mark -活期详情页面数据请求
 -(void)getGoldCurrentPrdClaimInfoHttpRequest:(UCFGoldModel *)goldModel
 {
+    
+    
+    
+    UCFAccountPieCharViewController * accoutPieChartVC = [[UCFAccountPieCharViewController alloc]initWithNibName:@"UCFAccountPieCharViewController" bundle:nil];
+    accoutPieChartVC.selectedSegmentIndex = 0 ;
+    
+    [self.navigationController pushViewController:accoutPieChartVC animated:YES];
+    
+    return;
     
     NSString *nmProClaimIdStr = goldModel.nmPrdClaimId;
     
