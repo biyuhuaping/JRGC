@@ -77,6 +77,8 @@ typedef enum : NSUInteger {
 -(instancetype)initGoldAlertType:(MjAlertViewType)type delegate:(id)delegate;
 // 黄金除了浮动价格弹框
 - (instancetype)initGoldAlertTitle:(NSString *)title Message:(NSString *)message delegate:(id)delegate;
+//广告页弹框
+-(instancetype)initADViewAlertWithDelegate:(id)delegate;
 #pragma mark - 显示
 - (void)show;
 #pragma mark - 隐藏

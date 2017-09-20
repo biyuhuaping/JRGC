@@ -56,6 +56,11 @@
         return;
     }
     
+//    MjAlertView *alertView = [[MjAlertView alloc] initADViewAlertWithDelegate:self];
+//    alertView.delegate = self;
+//    [alertView show];
+    
+    
 //    FestivalActivitiesWebView *festivalView = [[FestivalActivitiesWebView alloc] initWithNibName:@"FestivalActivitiesWebView" bundle:nil];
 //    festivalView.url = @"https://m.9888.cn/static/wap/topic-invite/index.html";
 //    festivalView.isHideNavigationBar = YES;
