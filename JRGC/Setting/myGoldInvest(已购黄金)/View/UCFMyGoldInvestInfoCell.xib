@@ -246,8 +246,8 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bhc-UE-DJe">
                         <rect key="frame" x="0.0" y="182" width="320" height="27"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="到期日" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n6I-fQ-fid">
-                                <rect key="frame" x="15" y="6.5" width="37" height="14.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="预计到期日" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n6I-fQ-fid">
+                                <rect key="frame" x="15" y="6.5" width="61.5" height="14.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -307,6 +307,7 @@
             <connections>
                 <outlet property="dealGoldPriceLabel" destination="nD0-wA-J9A" id="G9I-BL-lev"/>
                 <outlet property="expiredDateLabel" destination="Ysn-iB-Ng8" id="8wC-Ac-w4P"/>
+                <outlet property="expiredDateStrLabel" destination="n6I-fQ-fid" id="gCq-eu-j0k"/>
                 <outlet property="hasGiveGoldAmountLabel" destination="wai-2k-Xow" id="khr-6c-ffH"/>
                 <outlet property="nmPrdClaimNameLabel" destination="bd6-5z-WMp" id="jxj-WF-nIC"/>
                 <outlet property="orderStatusNameLabel" destination="clo-bG-jxs" id="LY2-qx-piz"/>
@@ -314,7 +315,7 @@
                 <outlet property="purchaseGoldAmountLabel" destination="KyL-Kd-2GA" id="kJb-bz-iIe"/>
                 <outlet property="startDateLabel" destination="GsK-cF-Q7h" id="SdI-My-nOe"/>
             </connections>
-            <point key="canvasLocation" x="355" y="88"/>
+            <point key="canvasLocation" x="66" y="112"/>
         </tableViewCell>
     </objects>
 </document>

@@ -55,6 +55,8 @@
     self.periodTermLabel.text = [NSString stringWithFormat:@"%@",[dataDict objectSafeForKey:@"periodTerm"]];
     self.startDateLabel.text = [NSString stringWithFormat:@"%@",[self checkStr:[dataDict objectSafeForKey:@"startDate"]]];
     self.expiredDateLabel.text = [NSString stringWithFormat:@"%@",[self checkStr:[dataDict objectSafeForKey:@"expiredDate"]]];
+      NSString *orderStatusName = [dataDict objectSafeForKey:@"orderStatusName"];
+    self.expiredDateStrLabel.text  = [orderStatusName isEqualToString:@"已到期"] ? @"到期日期:":@"预计到期日期:";
 }
 -(NSString *)checkStr:(NSString *)nullStr
 {

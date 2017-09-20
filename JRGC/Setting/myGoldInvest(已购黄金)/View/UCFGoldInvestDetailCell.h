@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *startDateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *orderStatusNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *expiredDateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *expiredDateStrLabel;
 @property (weak, nonatomic) IBOutlet UILabel *perGiveGoldAmount;
 @property (weak, nonatomic) IBOutlet UILabel *nmPrdClaimNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *periodTermLabel;
