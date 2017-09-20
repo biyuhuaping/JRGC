@@ -20,6 +20,8 @@
 #import "UCFNoPermissionViewController.h"
 #import "UCFGoldFlexibleCell.h"
 #import "UCFAccountPieCharViewController.h"
+#import "UCFRechargeOrCashViewController.h"
+#import "AppDelegate.h"
 @interface UCFGoldenViewController () <UITableViewDelegate, UITableViewDataSource, UCFHomeListCellHonorDelegate,UIAlertViewDelegate, UCFGoldFlexibleCellDelegate>
 @property (weak, nonatomic) UCFGoldenHeaderView *goldenHeader;
 @property (strong, nonatomic) NSMutableArray *dataArray;
@@ -233,6 +235,18 @@
             [self getGoldCurrentPrdClaimInfoHttpRequest:self.fliexGoldModel];
         }else{
             
+            UCFRechargeOrCashViewController * rechargeCashVC = [[UCFRechargeOrCashViewController alloc]initWithNibName:@"UCFRechargeOrCashViewController" bundle:nil];
+            
+            UINavigationController *rechargeCashNavController = [[UINavigationController alloc] initWithRootViewController:rechargeCashVC];
+            AppDelegate * app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+            //    rechargeCashVC.view.center = app.window.center;
+            rechargeCashNavController.view.frame = app.window.bounds;
+            [app.window addSubview:rechargeCashNavController.view];
+            
+            return;
+            
+            
+            
         
         UCFGoldModel *goldModel = [self.dataArray objectAtIndex:indexPath.row];
         
@@ -295,6 +309,30 @@
 #pragma mark -活期投资页面数据请求
 -(void)getGoldCurrentProClaimDetailHttpRequest:(UCFGoldModel *)goldModel
 {
+    
+    
+    UCFRechargeOrCashViewController * rechargeCashVC = [[UCFRechargeOrCashViewController alloc]initWithNibName:@"UCFRechargeOrCashViewController" bundle:nil];
+    
+      UINavigationController *rechargeCashNavController = [[UINavigationController alloc] initWithRootViewController:rechargeCashVC];
+    rechargeCashNavController.modalPresentationStyle = UIModalPresentationOverFullScreen;
+    [self presentViewController:rechargeCashNavController animated:NO completion:^{
+        
+        
+    }];
+    
+    
+    
+    
+    
+    
+//    UINavigationController *rechargeCashNavController = [[UINavigationController alloc] initWithRootViewController:rechargeCashVC];
+//    AppDelegate * app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+//    //    rechargeCashVC.view.center = app.window.center;
+//    rechargeCashNavController.view.frame = app.window.bounds;
+//    [app.window addSubview:rechargeCashNavController.view];
+    
+    return;
+    
     
     NSString *nmProClaimIdStr = goldModel.nmPrdClaimId;
     
