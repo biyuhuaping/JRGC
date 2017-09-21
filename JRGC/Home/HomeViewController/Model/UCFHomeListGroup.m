@@ -8,6 +8,7 @@
 
 #import "UCFHomeListGroup.h"
 #import <objc/runtime.h>
+#import "UCFAttachModel.h"
 
 @implementation UCFHomeListGroup
 
@@ -57,7 +58,14 @@
                 self.prdlist = temp;
             }
             else if ([key isEqualToString:@"attach"]) {
-                
+                if (propertyValue) {
+                    NSMutableArray *tmp = [[NSMutableArray alloc] init];
+                    for (NSDictionary *dd in propertyValue) {
+                        UCFAttachModel *attach = [UCFAttachModel attachListWithDict:dd];
+                        [tmp addObject:attach];
+                    }
+                    [self setAttach:tmp];
+                }
             }
             else
                 [self setValue:propertyValue forKey:key];

@@ -29,6 +29,20 @@
     }
 }
 
+//充值
+- (IBAction)topUp:(UIButton *)sender {
+    if ([self.delegate respondsToSelector:@selector(mineHeaderView:didClikedTopUpButton:)]) {
+        [self.delegate mineHeaderView:self didClikedTopUpButton:sender];
+    }
+}
+
+//提现
+- (IBAction)cash:(UIButton *)sender {
+    if ([self.delegate respondsToSelector:@selector(mineHeaderView:didClikedCashButton:)]) {
+        [self.delegate mineHeaderView:self didClikedCashButton:sender];
+    }
+}
+
 #pragma mark - 计算我的头部信息高度
 + (CGFloat)viewHeight
 {

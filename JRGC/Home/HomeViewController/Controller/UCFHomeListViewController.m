@@ -164,6 +164,9 @@
     if (!group.prdlist) {
         return 0.001;
     }
+    else if ([group.type isEqualToString:@""]) {
+        return 100;
+    }
     else
         return 32;
 }

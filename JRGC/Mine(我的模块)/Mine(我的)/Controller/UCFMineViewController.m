@@ -106,4 +106,14 @@
     
 }
 
+- (void)mineHeaderView:(UCFMineHeaderView *)mineHeaderView didClikedTopUpButton:(UIButton *)rechargeButton
+{
+    
+}
+
+- (void)mineHeaderView:(UCFMineHeaderView *)mineHeaderView didClikedCashButton:(UIButton *)cashButton
+{
+    
+}
+
 @end
