@@ -836,6 +836,8 @@
 		A8AD6F851EFA6BDE000AF323 /* PagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = A8AD6F841EFA6BDE000AF323 /* PagerView.m */; };
 		A8B6B6801EC9A9F000D4E86F /* WalletBankView.m in Sources */ = {isa = PBXBuildFile; fileRef = A8B6B67F1EC9A9F000D4E86F /* WalletBankView.m */; };
 		A8B6B6821EC9AA0900D4E86F /* WalletBankView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8B6B6811EC9AA0900D4E86F /* WalletBankView.xib */; };
+		A8BF2E591F739AAD003ABDE7 /* 登录页标注.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A8BF2E581F739AAD003ABDE7 /* 登录页标注.jpg */; };
+		A8BF2E5C1F739DCB003ABDE7 /* UCFLoginBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = A8BF2E5B1F739DCB003ABDE7 /* UCFLoginBaseView.m */; };
 		A8C34F331F2737BA00926B7F /* RotationButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C34F321F2737BA00926B7F /* RotationButton.m */; };
 		A8CE17731EC44BF8009BD954 /* UCFWalletSelectBankCarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8CE17711EC44BF8009BD954 /* UCFWalletSelectBankCarViewController.m */; };
 		A8CE17741EC44BF8009BD954 /* UCFWalletSelectBankCarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8CE17721EC44BF8009BD954 /* UCFWalletSelectBankCarViewController.xib */; };
@@ -2462,6 +2464,9 @@
 		A8B6B67E1EC9A9F000D4E86F /* WalletBankView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletBankView.h; sourceTree = "<group>"; };
 		A8B6B67F1EC9A9F000D4E86F /* WalletBankView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletBankView.m; sourceTree = "<group>"; };
 		A8B6B6811EC9AA0900D4E86F /* WalletBankView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WalletBankView.xib; sourceTree = "<group>"; };
+		A8BF2E581F739AAD003ABDE7 /* 登录页标注.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "登录页标注.jpg"; sourceTree = "<group>"; };
+		A8BF2E5A1F739DCB003ABDE7 /* UCFLoginBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFLoginBaseView.h; sourceTree = "<group>"; };
+		A8BF2E5B1F739DCB003ABDE7 /* UCFLoginBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFLoginBaseView.m; sourceTree = "<group>"; };
 		A8C34F311F2737BA00926B7F /* RotationButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RotationButton.h; sourceTree = "<group>"; };
 		A8C34F321F2737BA00926B7F /* RotationButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RotationButton.m; sourceTree = "<group>"; };
 		A8CE17701EC44BF8009BD954 /* UCFWalletSelectBankCarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFWalletSelectBankCarViewController.h; sourceTree = "<group>"; };
@@ -5106,6 +5111,8 @@
 				83FEDB731EFBB56000CFE0EF /* UCFCompanyNoOpenViewController.h */,
 				83FEDB741EFBB56000CFE0EF /* UCFCompanyNoOpenViewController.m */,
 				83FEDB751EFBB56000CFE0EF /* UCFCompanyNoOpenViewController.xib */,
+				A8BF2E5A1F739DCB003ABDE7 /* UCFLoginBaseView.h */,
+				A8BF2E5B1F739DCB003ABDE7 /* UCFLoginBaseView.m */,
 			);
 			name = Login;
 			sourceTree = "<group>";
@@ -5476,6 +5483,7 @@
 			isa = PBXGroup;
 			children = (
 				AE43B84F1DD2D8BE001D0BD0 /* JRGC.entitlements */,
+				A8BF2E581F739AAD003ABDE7 /* 登录页标注.jpg */,
 				FB7EDE371D6BFCD700C3E924 /* Aplication */,
 				7BC304311ACB9CDB007767F1 /* Tools */,
 				7BFE3EB11AC5635E002A53A2 /* ThirdLibs */,
@@ -7538,6 +7546,7 @@
 				74677C671F165022003768EB /* UCFGoldRechargeViewController.xib in Resources */,
 				74FC22881BA6AE2100D1660A /* UCFFacCodeViewController.xib in Resources */,
 				74270C8D1EC58F6800F9419B /* UCFCycleImageViewController.xib in Resources */,
+				A8BF2E591F739AAD003ABDE7 /* 登录页标注.jpg in Resources */,
 				74FC22821BA6A90E00D1660A /* UCFMyFacBeanViewController.xib in Resources */,
 				74B98C911F70C2C100CB6A9F /* UCFMineViewController.xib in Resources */,
 				745D37D61F3AE98800897F1A /* UCFGoldChargeSecCell.xib in Resources */,
@@ -7944,6 +7953,7 @@
 				741EB1861D596EF2006C885F /* UCFTableCellOne.m in Sources */,
 				A860F2601F5E3EFE0017495F /* UCFGoldMyRebateViewController.m in Sources */,
 				7BC304821ACBC22D007767F1 /* UIButton+Misc.m in Sources */,
+				A8BF2E5C1F739DCB003ABDE7 /* UCFLoginBaseView.m in Sources */,
 				258291341DD31F0F00AB1FD2 /* UCFGivingPointCell.m in Sources */,
 				74BDA98C1F09F6C60054403F /* FSCalendarDelegationFactory.m in Sources */,
 				7BC217281ACD4A030086D374 /* GuideViewController.m in Sources */,

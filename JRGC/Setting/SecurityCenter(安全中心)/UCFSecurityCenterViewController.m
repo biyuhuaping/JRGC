@@ -38,6 +38,9 @@
 #import "HSHelper.h"
 #import "UCFFacCodeViewController.h"
 #import "UCFMoreViewController.h"
+#import "UCFSignModel.h"
+#import "MjAlertView.h"
+#import "UCFSignView.h"
 @interface UCFSecurityCenterViewController () <UITableViewDataSource, UITableViewDelegate, SecurityCellDelegate, UCFLockHandleDelegate>
 
 // 选项表数据
@@ -121,11 +124,9 @@
     [super viewDidLoad];
     
     [self addLeftButton];
-
+    [self addRightButtonWithImage:[UIImage imageNamed:@"ic_step_one"]];
 
     baseTitleLabel.text =  [[NSUserDefaults standardUserDefaults] boolForKey: @"isCompanyAgentType" ]  ? @"企业信息" : @"个人信息";
-
-    
     self.tableview.contentInset = UIEdgeInsetsMake(10, 0, 0, 0);
     self.tableview.separatorColor = UIColorWithRGB(0xe3e5ea);
     self.tableview.separatorInset = UIEdgeInsetsMake(0,15, 0, 0);
@@ -133,8 +134,6 @@
     UIView *footerview = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 47)];
     self.tableview.tableFooterView = footerview;
     [footerview setBackgroundColor:UIColorWithRGB(0xebebee)];
-    
-    
     
     UIButton *logOutButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [logOutButton addTarget:self action:@selector(logOutClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -158,12 +157,10 @@
     [self getSecurityCenterNetData];
     
     self.view.backgroundColor = UIColorWithRGB(0xebebee);
-    
     _userLevelImage = [[UIImageView alloc]initWithFrame:CGRectMake(ScreenWidth - 63, 9, 25, 25)];
-
     if ([UserInfoSingle sharedManager].openStatus == 4) {
         _setChangePassword.title = @"修改交易密码";
-    }else{
+    } else {
         _setChangePassword.title = @"设置交易密码";
     }
 }
@@ -174,7 +171,12 @@
     alertView.tag = 10000;
     [alertView show];
 }
-
+- (void)clickRightBtn
+{
+//    if ([[NSUserDefaults standardUserDefaults] objectForKey:UUID]) {
+//        [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":userId, @"apptzticket":token} tag:kSXTagSingMenthod owner:self signature:YES Type:SelectAccoutDefault];
+//    }
+}
 #pragma mark alertViewDelegate
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -186,7 +188,6 @@
             [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagUserLogout owner:self signature:YES Type:SelectAccoutDefault];
             
             [[UCFSession sharedManager] transformBackgroundWithUserInfo:nil withState:UCFSessionStateUserLogout];
-//            [[NSNotificationCenter defaultCenter] postNotificationName:@"setDefaultViewData" object:nil];
             [[UserInfoSingle sharedManager] removeUserInfo];
             [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"changScale"];
             [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isVisible"];
@@ -338,33 +339,11 @@
                         break;
                 }
             }
-            
-//            UCFSettingGroup *group2 = [self.itemsData lastObject];
-//            UCFSettingItem *userItem = group2.items.firstObject;
-//            userItem.subtitle = batchInvestStatus.length == 0 ? @"未开启" : batchInvestStatus;
-//            userItem.title = batchInvestStatus.length == 0 ? @"自动投标(开启后才可进行批量投资)" : @"自动投标";
-
             [self.tableview reloadData];
         }else
             [AuxiliaryFunc showToastMessage:message withView:self.view];
     }  else if (tag.integerValue == kSXTagUserLogout) {
-//        [[UCFSession sharedManager] transformBackgroundWithUserInfo:nil withState:UCFSessionStateUserLogout];
-//        [[NSNotificationCenter defaultCenter] postNotificationName:@"setDefaultViewData" object:nil];
-//        [[UserInfoSingle sharedManager] removeUserInfo];
-//        [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"changScale"];
-//        [[NSUserDefaults standardUserDefaults] synchronize];
-//        //安全退出后去首页
-//        AppDelegate *delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-//        [delegate.tabBarController setSelectedIndex:0];
-//        [delegate.tabBarController.tabBar hideBadgeOnItemIndex:3];
-//        [self.navigationController popToRootViewControllerAnimated:YES];
-//        [[NSUserDefaults standardUserDefaults] setValue:@"0" forKey:@"personCenterClick"];
-//        
-//        //退出时清cookis
-//        [Common deleteCookies];
-//        [[NSNotificationCenter defaultCenter] postNotificationName:REGIST_JPUSH object:nil];
-//        //通知首页隐藏tipView
-//        [[NSNotificationCenter defaultCenter] postNotificationName:@"LatestProjectUpdate" object:nil];
+
     }else if(tag.integerValue == kSXTagFaceSwitchStatus){//刷脸登录状态开关
         if ([rstcode intValue] == 1) {
             NSString * faceIsOpen = [dic objectSafeForKey:@"isOpen"];// 1：关闭 0：开启
@@ -384,6 +363,23 @@
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:FACESWITCHSTATUS];
             [[NSUserDefaults standardUserDefaults] synchronize];
             [self.tableview reloadData];
+        }
+    } else if (tag.intValue == kSXTagSingMenthod) {
+        if (dic[@"ret"]) {
+            NSDictionary *data = [dic objectForKey:@"data"];
+            UCFSignModel *signModel = [UCFSignModel signWithDict:data];
+            MjAlertView *alert = [[MjAlertView alloc] initRedBagAlertViewWithBlock:^(id blockContent) {
+                UIView *view = (UIView *)blockContent;
+                view.center = CGPointMake(ScreenWidth * 0.5, ScreenHeight * 0.5);
+                UCFSignView *signView = [[UCFSignView alloc] initWithFrame:view.bounds];
+                [view addSubview:signView];
+                [view sendSubviewToBack:signView];
+                signView.signModel = signModel;
+            } delegate:self cancelButtonTitle:@"关闭"];
+            alert.showViewbackImage = [UIImage imageNamed:@"checkin_bg"];
+            [alert show];
+        } else {
+            [AuxiliaryFunc showToastMessage:dic[@"message"] withView:self.view];
         }
     }
 }
