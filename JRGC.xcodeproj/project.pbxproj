@@ -7226,7 +7226,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0700;
-				ORGANIZATIONNAME = qinwei;
+				ORGANIZATIONNAME = JRGC;
 				TargetAttributes = {
 					7BFE3E7F1AC55C98002A53A2 = {
 						CreatedOnToolsVersion = 6.1;
