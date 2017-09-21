@@ -7,7 +7,7 @@
 //
 
 #import "UCFWithdrawCashResultWebView.h"
-
+#import "AppDelegate.h"
 @interface UCFWithdrawCashResultWebView ()
 @property BOOL flagInvestSuc;
 @end
@@ -35,7 +35,19 @@
     if ([controllerName isEqualToString:@"app_withdraw"])//提现成功页面红色按妞
     {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
-        [self.navigationController popToRootViewControllerAnimated:YES];
+        NSString *className = [NSString stringWithUTF8String:object_getClassName(self.rootVc)];
+        if([className hasSuffix:@"UCFRechargeOrCashViewController"])
+        {
+            AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+            [appDelegate.tabBarController dismissViewControllerAnimated:NO completion:^{
+                NSUInteger selectedIndex = appDelegate.tabBarController.selectedIndex;
+                UINavigationController *nav = [appDelegate.tabBarController.viewControllers objectAtIndex:selectedIndex];
+                [nav popToRootViewControllerAnimated:NO];
+            }];
+        }else{
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }
+     
     }
     else if ([controllerName  isEqualToString:@"app_withdraw_recharge"])//提现失败页面
     {
@@ -55,11 +67,20 @@
     
     if (self.flagInvestSuc) { //提现成功返回个人中心
         [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
-     
-        [self.navigationController popToRootViewControllerAnimated:YES];
+        NSString *className = [NSString stringWithUTF8String:object_getClassName(self.rootVc)];
+        if([className hasSuffix:@"UCFRechargeOrCashViewController"])
+        {
+            AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+            [appDelegate.tabBarController dismissViewControllerAnimated:NO completion:^{
+                NSUInteger selectedIndex = appDelegate.tabBarController.selectedIndex;
+                UINavigationController *nav = [appDelegate.tabBarController.viewControllers objectAtIndex:selectedIndex];
+                [nav popToRootViewControllerAnimated:NO];
+            }];
+        }else{
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }
     }else{
         [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
-        
         [self.navigationController popViewControllerAnimated:YES];
     }
 }

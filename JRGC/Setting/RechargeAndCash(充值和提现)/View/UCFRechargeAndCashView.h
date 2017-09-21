@@ -22,6 +22,9 @@
 @property (strong, nonatomic) IBOutlet UILabel *cardDetialLabel;
 @property (strong, nonatomic) IBOutlet UILabel *cardNumberLabel;
 @property (strong, nonatomic) IBOutlet UILabel *cardStateLabel;
+@property (strong, nonatomic) IBOutlet UILabel *accoutBalanceLabel;//账户余额Label
+@property(nonatomic,assign) BOOL isRechargeOrCash;//是充值还是提现 NO 为充值  Yes 为提现
+
 @property (strong, nonatomic) UCFAccoutCardModel *accoutCardModel;
 @property (assign, nonatomic) id<UCFRechargeAndCashViewDelegate> delegate;
 @end

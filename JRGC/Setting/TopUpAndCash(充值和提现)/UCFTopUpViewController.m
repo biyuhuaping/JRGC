@@ -272,7 +272,17 @@
            NSString *className = [NSString stringWithUTF8String:object_getClassName(_uperViewController)];
             if ([className hasSuffix:@"UCFPurchaseBidViewController"] || [className hasSuffix:@"UCFPurchaseTranBidViewController"] || [className hasSuffix:@"UCFSelectPayBackController"]) {
                 [self.navigationController popToViewController:_uperViewController animated:YES];
-            } else {
+            }
+            else if([className hasSuffix:@"UCFRechargeOrCashViewController"])
+            {
+                AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+                [appDelegate.tabBarController dismissViewControllerAnimated:NO completion:^{
+                    NSUInteger selectedIndex = appDelegate.tabBarController.selectedIndex;
+                    UINavigationController *nav = [appDelegate.tabBarController.viewControllers objectAtIndex:selectedIndex];
+                    [nav popToRootViewControllerAnimated:NO];
+                }];
+            }
+            else{
                 [self.navigationController popToRootViewControllerAnimated:NO];
                 AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
                 [appDelegate.tabBarController setSelectedIndex:0];

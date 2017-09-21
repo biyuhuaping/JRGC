@@ -1215,7 +1215,12 @@ static NetworkModule *gInstance = NULL;
         case kSXTagTotalEarningsOverview://总资产
             parameter = [NEW_SERVER_IP stringByAppendingString:TOTALEARINGSOVERVIEW];
             break;
-
+        case kSXTagGetBindingBankCardList: //我的-->>充值接口
+            parameter = [NEW_SERVER_IP stringByAppendingString:MYACCOUNTBINFINGBANKCARD];
+            break;
+        case kSXTagGetAccountBalanceList: //我的-->>提现接口
+            parameter = [NEW_SERVER_IP stringByAppendingString:MYACCOUNTBlANCELIST];
+            break;
     }
     //给原有参数字典添加公共参数
     if (!data) {

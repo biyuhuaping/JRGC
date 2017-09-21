@@ -22,17 +22,24 @@
                     <rect key="frame" x="0.0" y="0.0" width="290" height="30"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="充值至微金账户" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j9S-YW-OVk">
-                            <rect key="frame" x="20" y="7" width="250" height="16"/>
+                            <rect key="frame" x="20" y="7" width="93" height="16"/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="0.69999999999999996" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¥0.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qbe-gF-Cfp">
+                            <rect key="frame" x="226" y="6" width="44" height="18"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
+                        <constraint firstItem="Qbe-gF-Cfp" firstAttribute="centerY" secondItem="CfE-O2-b6f" secondAttribute="centerY" id="9rA-LG-jcr"/>
                         <constraint firstItem="j9S-YW-OVk" firstAttribute="centerY" secondItem="CfE-O2-b6f" secondAttribute="centerY" id="Dir-ij-Ajm"/>
+                        <constraint firstAttribute="trailing" secondItem="Qbe-gF-Cfp" secondAttribute="trailing" constant="20" id="GMC-X9-KkW"/>
                         <constraint firstItem="j9S-YW-OVk" firstAttribute="leading" secondItem="CfE-O2-b6f" secondAttribute="leading" constant="20" id="Gx1-Zh-Ttz"/>
-                        <constraint firstItem="j9S-YW-OVk" firstAttribute="centerX" secondItem="CfE-O2-b6f" secondAttribute="centerX" id="LbN-iV-LhE"/>
                         <constraint firstAttribute="height" constant="30" id="VYW-zF-ADR"/>
                     </constraints>
                 </view>
@@ -130,6 +137,7 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="accoutBalanceLabel" destination="Qbe-gF-Cfp" id="PQH-0g-W7G"/>
                 <outlet property="cardBgImageView" destination="rYl-6l-bSd" id="Zde-Eo-vzs"/>
                 <outlet property="cardDetialLabel" destination="xKI-p5-uRs" id="l1f-a4-0kq"/>
                 <outlet property="cardLogoImage" destination="HJY-mU-LuO" id="Mcz-Pn-Csx"/>
@@ -138,7 +146,7 @@
                 <outlet property="cardtitleLabel" destination="j9S-YW-OVk" id="xkz-64-rSl"/>
                 <outlet property="upViewHight" destination="VYW-zF-ADR" id="Zrl-0p-6L2"/>
             </connections>
-            <point key="canvasLocation" x="-208" y="-232"/>
+            <point key="canvasLocation" x="-398" y="-305"/>
         </view>
     </objects>
     <resources>

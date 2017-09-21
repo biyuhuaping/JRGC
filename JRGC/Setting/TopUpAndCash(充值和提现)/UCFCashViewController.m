@@ -688,6 +688,7 @@
             webVC.navTitle = @"即将跳转";
             webVC.url = urlStr;
             webVC.accoutType = self.accoutType;
+            webVC.rootVc = self.rootVc;
             [self.navigationController pushViewController:webVC animated:YES];
         }
         else{

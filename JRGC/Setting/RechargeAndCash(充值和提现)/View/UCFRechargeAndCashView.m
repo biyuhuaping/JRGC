@@ -33,12 +33,14 @@
 -(void)setAccoutCardModel:(UCFAccoutCardModel *)accoutCardModel
 {
     _accoutCardModel = accoutCardModel;
+    self.isRechargeOrCash = accoutCardModel.isRechargeOrCash;
     self.cardtitleLabel.text = accoutCardModel.cardTitleStr;
     self.cardLogoImage.image = [UIImage imageNamed:accoutCardModel.cardLogoImageName];
     self.cardDetialLabel.text = accoutCardModel.cardDetialStr;
     self.cardBgImageView.image = [UIImage imageNamed:accoutCardModel.cardBgImageName];
     self.cardStateLabel.text = accoutCardModel.cardStateStr;
     self.cardNumberLabel.text = accoutCardModel.cardNumberStr;
+    self.accoutBalanceLabel.text = accoutCardModel.accoutBalanceStr;
 }
 /*
 // Only override drawRect: if you perform custom drawing.
