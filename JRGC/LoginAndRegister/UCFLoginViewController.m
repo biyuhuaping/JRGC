@@ -225,7 +225,7 @@
                 } else {
                     _sameUser = YES;
                     //同一个用户
-                    [[NSNotificationCenter defaultCenter] postNotificationName:IS_RELOADE_REQUEST object:nil];
+//                    [[NSNotificationCenter defaultCenter] postNotificationName:IS_RELOADE_REQUEST object:nil];
                 }
             }
             [[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithInt:0] forKey:WRANGGCODENUMBER];
@@ -260,9 +260,6 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:REGIST_JPUSH object:nil];
             [self sendiWatchData:signatureStr withGcm:gcmCode];//登录成功之后向iWatch发送数据
             [Common addTestCookies];//app审核用的灰度
-            //因为tabBar viewWillAppear 里面有 所以就不再调用
-//            [[P2PWalletHelper sharedManager] getUserWalletData];
-
         } else {
             
             if(self.selectTag == 1 && [[dic valueForKey:@"code"] integerValue] == 21306){
@@ -272,15 +269,11 @@
                 [alertView show];
             }
         }
-        
-
-        
-    }else if(tag.integerValue == kSXTagUserLogout){
+    } else if(tag.integerValue == kSXTagUserLogout){
         
     }  else if (tag.intValue == kSXTagGetBanner) {
 
     }
-    
 }
 -(void)errorPost:(NSError*)err tag:(NSNumber*)tag
 {

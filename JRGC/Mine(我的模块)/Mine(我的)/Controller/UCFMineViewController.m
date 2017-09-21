@@ -11,15 +11,39 @@
 #import "UCFMineCell.h"
 #import "UCFMineFuncCell.h"
 #import "UCFMineFuncSecCell.h"
+#import "UCFSecurityCenterViewController.h"
+#import "UCFLoginBaseView.h"
 
 @interface UCFMineViewController () <UITableViewDelegate, UITableViewDataSource, UCFMineHeaderViewDelegate, UCFMineFuncCellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (weak, nonatomic) UCFMineHeaderView *mineHeaderView;
-
+@property (weak, nonatomic) UCFMineHeaderView   *mineHeaderView;
+@property (strong, nonatomic) UCFLoginBaseView  *loginView;
 @end
 
 @implementation UCFMineViewController
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = YES;
+    if ([[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
+        if (_loginView) {
+            [_loginView removeFromSuperview];
+            _loginView = nil;
+         }
+    } else {
+        if (!_loginView) {
+            [self.view addSubview:self.loginView];
+        }
+    }
+}
+- (UCFLoginBaseView *)loginView
+{
+    if (!_loginView) {
+        _loginView = [[UCFLoginBaseView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
+    }
+    return _loginView;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -34,7 +58,6 @@
 
 #pragma mark - 设置界面
 - (void)createUI {
-    self.navigationController.navigationBar.hidden = YES;
     
     UCFMineHeaderView *mineHeader = (UCFMineHeaderView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFMineHeaderView" owner:self options:nil] lastObject];
     mineHeader.delegate = self;
@@ -104,7 +127,9 @@
 #pragma mark - 我的页面的头部视图代理方法
 - (void)mineHeaderViewDidClikedUserInfoWithCurrentVC:(UCFMineHeaderView *)mineHeaderView
 {
-    
+    UCFSecurityCenterViewController *personMessageVC = [[UCFSecurityCenterViewController alloc] initWithNibName:@"UCFSecurityCenterViewController" bundle:nil];
+    personMessageVC.title = @"个人信息";
+    [self.navigationController pushViewController:personMessageVC animated:YES];
 }
 
 - (void)mineHeaderView:(UCFMineHeaderView *)mineHeaderView didClikedTopUpButton:(UIButton *)rechargeButton

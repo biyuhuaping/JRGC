@@ -38,6 +38,9 @@
 #import "HSHelper.h"
 #import "UCFFacCodeViewController.h"
 #import "UCFMoreViewController.h"
+#import "UCFSignModel.h"
+#import "MjAlertView.h"
+#import "UCFSignView.h"
 @interface UCFSecurityCenterViewController () <UITableViewDataSource, UITableViewDelegate, SecurityCellDelegate, UCFLockHandleDelegate>
 
 // 选项表数据
@@ -79,30 +82,19 @@
 - (NSMutableArray *)itemsData
 {
     if (_itemsData == nil) {
-//        UCFSettingItem *userName = [UCFSettingItem itemWithIcon:@"login_icon_name" title:@"用户名"];
         
-   
         UCFSettingItem *idauth = [UCFSettingArrowItem itemWithIcon:@"safecenter_icon_id" title:@"身份认证" destVcClass:[UCFModifyIdAuthViewController class]];
         UCFSettingItem *bundlePhoneNum = [UCFSettingArrowItem itemWithIcon:@"login_icon_phone" title:@"绑定手机号" destVcClass:[BindPhoneNumViewController class]];
         UCFSettingItem *facCode = [UCFSettingArrowItem itemWithIcon:@"safecenter_icon_code" title:@"工场码" destVcClass:[UCFFacCodeViewController class]];
        
         self.userLevel = [UCFSettingArrowItem itemWithIcon:@"safecenter_icon_vip" title:@"会员等级" destVcClass:[UCFWebViewJavascriptBridgeLevel class]];//***qyy
         self.userLevel.isShowOrHide = YES;//不显示
-//        UCFSettingItem *moreVc = [UCFSettingArrowItem itemWithIcon:@"safecenter_icon_more" title:@"更多" destVcClass:[UCFMoreViewController class]];
-        //先前是绑卡页面，因为删除绑卡页面，所以暂时用TradePasswordVC这个类替代，整体调试的时候改过来，zrc fixed
-//        UCFSettingItem *bundleCard = [UCFSettingArrowItem itemWithIcon:@"safecenter_icon_bankcard" title:@"绑定银行卡" destVcClass:[UCFBankCardInfoViewController class]];//***qyy
-        
-//        UCFSettingItem *riskAssessment = [UCFSettingArrowItem itemWithIcon:@"safecenter_icon_assessment" title:@"风险承担能力" destVcClass:[RiskAssessmentViewController class]];
-        
-
-//        UCFSettingItem *batchInvest = [UCFSettingArrowItem itemWithIcon:@"safecenter_icon_auto" title:@"自动投标" destVcClass:[UCFBatchInvestmentViewController class]];//qyy
 
         UCFSettingItem *activeGestureCode  = [UCFSettingSwitchItem itemWithIcon:@"safecenter_icon_gesture" title:@"启用手势密码"];
         UCFSettingItem *activeFaceValid  = [UCFSettingSwitchItem itemWithIcon:@"uesr_icon_face" title:@"启用刷脸登录" withSwitchType:2];
         UCFSettingItem *modifyPassword = [UCFSettingArrowItem itemWithIcon:@"login_icon_password" title:@"修改登录密码" destVcClass:[ModifyPasswordViewController class]];//***qyy
-//        self.setChangePassword = [UCFSettingArrowItem itemWithIcon:@"safecenter_icon_transaction" title:@"设置交易密码" destVcClass:[TradePasswordVC class]];
-//        self.setChangePassword.isShowOrHide  = YES;//显示该信息 对应的cell可以点击
-        
+
+        UCFSettingItem *moreVc = [UCFSettingArrowItem itemWithIcon:@"safecenter_icon_more" title:@"更多" destVcClass:[UCFMoreViewController class]];
         UCFSettingGroup *group1 = [[UCFSettingGroup alloc] init];//用户信息
         group1.items = [[NSMutableArray alloc]initWithArray: @[idauth, bundlePhoneNum,self.userLevel,facCode]];//qyy
 
@@ -110,9 +102,9 @@
         
         if ([self checkTouchIdIsOpen]) {
             UCFSettingItem *zhiWenSwith  = [UCFSettingSwitchItem itemWithIcon:@"safecenter_icon_touch" title:@"启用指纹解锁" withSwitchType:1];
-             group2.items = [[NSMutableArray alloc]initWithArray:@[activeGestureCode,zhiWenSwith, activeFaceValid,modifyPassword]];
+             group2.items = [[NSMutableArray alloc]initWithArray:@[activeGestureCode,zhiWenSwith, activeFaceValid,modifyPassword,moreVc]];
         } else {
-             group2.items =[[NSMutableArray alloc]initWithArray: @[activeGestureCode,activeFaceValid,modifyPassword]];
+             group2.items =[[NSMutableArray alloc]initWithArray: @[activeGestureCode,activeFaceValid,modifyPassword,moreVc]];
 
         }
         _itemsData = [[NSMutableArray alloc] initWithObjects:group1,group2,nil];
@@ -132,11 +124,9 @@
     [super viewDidLoad];
     
     [self addLeftButton];
-
+    [self addRightButtonWithImage:[UIImage imageNamed:@"ic_step_one"]];
 
     baseTitleLabel.text =  [[NSUserDefaults standardUserDefaults] boolForKey: @"isCompanyAgentType" ]  ? @"企业信息" : @"个人信息";
-
-    
     self.tableview.contentInset = UIEdgeInsetsMake(10, 0, 0, 0);
     self.tableview.separatorColor = UIColorWithRGB(0xe3e5ea);
     self.tableview.separatorInset = UIEdgeInsetsMake(0,15, 0, 0);
@@ -144,8 +134,6 @@
     UIView *footerview = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 47)];
     self.tableview.tableFooterView = footerview;
     [footerview setBackgroundColor:UIColorWithRGB(0xebebee)];
-    
-    
     
     UIButton *logOutButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [logOutButton addTarget:self action:@selector(logOutClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -169,12 +157,10 @@
     [self getSecurityCenterNetData];
     
     self.view.backgroundColor = UIColorWithRGB(0xebebee);
-    
     _userLevelImage = [[UIImageView alloc]initWithFrame:CGRectMake(ScreenWidth - 63, 9, 25, 25)];
-
     if ([UserInfoSingle sharedManager].openStatus == 4) {
         _setChangePassword.title = @"修改交易密码";
-    }else{
+    } else {
         _setChangePassword.title = @"设置交易密码";
     }
 }
@@ -185,7 +171,12 @@
     alertView.tag = 10000;
     [alertView show];
 }
-
+- (void)clickRightBtn
+{
+//    if ([[NSUserDefaults standardUserDefaults] objectForKey:UUID]) {
+//        [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":userId, @"apptzticket":token} tag:kSXTagSingMenthod owner:self signature:YES Type:SelectAccoutDefault];
+//    }
+}
 #pragma mark alertViewDelegate
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -197,7 +188,6 @@
             [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagUserLogout owner:self signature:YES Type:SelectAccoutDefault];
             
             [[UCFSession sharedManager] transformBackgroundWithUserInfo:nil withState:UCFSessionStateUserLogout];
-//            [[NSNotificationCenter defaultCenter] postNotificationName:@"setDefaultViewData" object:nil];
             [[UserInfoSingle sharedManager] removeUserInfo];
             [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"changScale"];
             [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isVisible"];
@@ -293,17 +283,12 @@
             NSString *bindPhone = [result objectSafeForKey:@"bindMobile"];
             self.sex = [[result objectSafeForKey:@"sex"] intValue];
             NSString *oldPhone = [[NSUserDefaults standardUserDefaults] valueForKey:PHONENUM];
-//            NSString *gradeResult = dic[@"data"][@"gradeResult"];
-//            NSString *batchInvestStatus = [NSString stringWithFormat:@"%@",result[@"batchInvestStatus"]];
-            
-//
             self.isCompanyAgent = [[[dic objectForKey:@"data"] objectForKey:@"isCompanyAgent"] boolValue];
             //新请求的手机号和本地存储手机号不一样则更新本地
             if (![oldPhone isEqualToString:bindPhone]) {
                 [[NSUserDefaults standardUserDefaults] setValue:bindPhone forKey:PHONENUM];
                 [[NSUserDefaults standardUserDefaults] synchronize];
             }
-//            NSString *bindCard = [result objectForKey:@"card"];
             NSString *realName = [result objectForKey:@"realName"];
             self.userGradeSwitch = [dic[@"data"][@"isOpen"]  boolValue];
             //保存 刷脸登录开关
@@ -314,7 +299,6 @@
                  [[NSUserDefaults standardUserDefaults] setBool:NO forKey:FACESWITCHSTATUS];
             }
             
-//            [UserInfoSingle sharedManager].openStatus = [dic[@"data"][@"openStatus"] integerValue] ;
             if ([UserInfoSingle sharedManager].openStatus == 4) {
                 _setChangePassword.title = @"修改交易密码";
             }else{
@@ -323,9 +307,7 @@
 
             [[NSUserDefaults standardUserDefaults] setObject:realName forKey:REALNAME];
             [[NSUserDefaults standardUserDefaults] synchronize];
-//            if (self.userGradeSwitch) {
-//                self.userLevel.isShowOrHide = YES;//大开关开启时 会员等级 显示
-//            }
+
             for (UCFSettingItem *userItem in group.items) {
                 NSInteger index = [group.items indexOfObject:userItem];
                 switch (index) {
@@ -339,55 +321,29 @@
                         userItem.subtitle = [bindPhone isEqualToString:@""] ? @"未绑定" : bindPhone;
                         break;
                     
-//                    case 3:
-//                        userItem.subtitle = [bindCard isEqualToString:@""] ? @"未绑定" : bindCard;
-//                        break;
-                    case 2:
-                        userItem.subtitle = [[NSUserDefaults standardUserDefaults] objectForKey:@"gcmCode"];
+                    case 2:{
+                        if ([memberLever isEqualToString:@"1"]) {
+                            _userLevelImage.image =[UIImage imageNamed:@"no_vip_icon.png"];
+                            
+                        }else{
+                            _userLevelImage.image =[UIImage imageNamed:[NSString stringWithFormat:@"vip%d_icon.png",[memberLever intValue]-1]];
+                        }
+                    }
                         break;
                     case 3:
                     {
-//                        memberLever = @"";
-                        if ([memberLever isEqualToString:@"1"]) {
-                            _userLevelImage.image =[UIImage imageNamed:@"no_vip_icon.png"];
-
-                        }else{
-                            _userLevelImage.image =[UIImage imageNamed:[NSString stringWithFormat:@"vip%d_icon.png",[memberLever intValue]-1]];
-
-                        }
+                        userItem.subtitle = [[NSUserDefaults standardUserDefaults] objectForKey:@"gcmCode"];
                     }
                         break;
                     default:
                         break;
                 }
             }
-            
-//            UCFSettingGroup *group2 = [self.itemsData lastObject];
-//            UCFSettingItem *userItem = group2.items.firstObject;
-//            userItem.subtitle = batchInvestStatus.length == 0 ? @"未开启" : batchInvestStatus;
-//            userItem.title = batchInvestStatus.length == 0 ? @"自动投标(开启后才可进行批量投资)" : @"自动投标";
-
             [self.tableview reloadData];
         }else
             [AuxiliaryFunc showToastMessage:message withView:self.view];
     }  else if (tag.integerValue == kSXTagUserLogout) {
-//        [[UCFSession sharedManager] transformBackgroundWithUserInfo:nil withState:UCFSessionStateUserLogout];
-//        [[NSNotificationCenter defaultCenter] postNotificationName:@"setDefaultViewData" object:nil];
-//        [[UserInfoSingle sharedManager] removeUserInfo];
-//        [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"changScale"];
-//        [[NSUserDefaults standardUserDefaults] synchronize];
-//        //安全退出后去首页
-//        AppDelegate *delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-//        [delegate.tabBarController setSelectedIndex:0];
-//        [delegate.tabBarController.tabBar hideBadgeOnItemIndex:3];
-//        [self.navigationController popToRootViewControllerAnimated:YES];
-//        [[NSUserDefaults standardUserDefaults] setValue:@"0" forKey:@"personCenterClick"];
-//        
-//        //退出时清cookis
-//        [Common deleteCookies];
-//        [[NSNotificationCenter defaultCenter] postNotificationName:REGIST_JPUSH object:nil];
-//        //通知首页隐藏tipView
-//        [[NSNotificationCenter defaultCenter] postNotificationName:@"LatestProjectUpdate" object:nil];
+
     }else if(tag.integerValue == kSXTagFaceSwitchStatus){//刷脸登录状态开关
         if ([rstcode intValue] == 1) {
             NSString * faceIsOpen = [dic objectSafeForKey:@"isOpen"];// 1：关闭 0：开启
@@ -407,6 +363,23 @@
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:FACESWITCHSTATUS];
             [[NSUserDefaults standardUserDefaults] synchronize];
             [self.tableview reloadData];
+        }
+    } else if (tag.intValue == kSXTagSingMenthod) {
+        if (dic[@"ret"]) {
+            NSDictionary *data = [dic objectForKey:@"data"];
+            UCFSignModel *signModel = [UCFSignModel signWithDict:data];
+            MjAlertView *alert = [[MjAlertView alloc] initRedBagAlertViewWithBlock:^(id blockContent) {
+                UIView *view = (UIView *)blockContent;
+                view.center = CGPointMake(ScreenWidth * 0.5, ScreenHeight * 0.5);
+                UCFSignView *signView = [[UCFSignView alloc] initWithFrame:view.bounds];
+                [view addSubview:signView];
+                [view sendSubviewToBack:signView];
+                signView.signModel = signModel;
+            } delegate:self cancelButtonTitle:@"关闭"];
+            alert.showViewbackImage = [UIImage imageNamed:@"checkin_bg"];
+            [alert show];
+        } else {
+            [AuxiliaryFunc showToastMessage:dic[@"message"] withView:self.view];
         }
     }
 }
@@ -493,14 +466,11 @@
 // 安全中心cell的代理方法
 - (void)securityCell:(SecurityCell *)securityCell changeGestureState:(BOOL)gestureState
 {
-    NSIndexPath *indexPath = [_tableview indexPathForCell:securityCell];
-    UCFSettingGroup *group = self.itemsData[1];
-    if (indexPath.row == 0) {
+    if ([securityCell.itemNameLabel.text isEqualToString:@"启用手势密码"]) {
         if (gestureState) {
             UCFVerifyLoginViewController *controller = [[UCFVerifyLoginViewController alloc] init];
             controller.sourceVC = @"securityCenter";
             [self.navigationController pushViewController:controller animated:YES];
-            //[self showGestureCode];
         }
         else {
             //关闭手势密码
@@ -520,19 +490,11 @@
             } otherButtonTitles:@"取消"];
             [alert show];
         }
-    } else {
-        if ([group.items count] == 3) {//没有指纹解锁一栏 一共5栏
-            [self validFaceLogin:gestureState WithCell:securityCell];
-        } else {//有指纹解锁一栏  一共5栏
-            if (indexPath.row == 1) { //开启指纹解锁
-            [self touchIDVerificationSwitchState:gestureState WithCell:securityCell];
-            } else {
-                [self validFaceLogin:gestureState WithCell:securityCell];
-            }
-        }
-        
+    } else if ([securityCell.itemNameLabel.text isEqualToString:@"启用刷脸登录"]) {
+        [self validFaceLogin:gestureState WithCell:securityCell];
+    } else if (([securityCell.itemNameLabel.text isEqualToString:@"启用指纹解锁"])) {
+        [self touchIDVerificationSwitchState:gestureState WithCell:securityCell];
     }
- 
 }
 
 - (void)validFaceLogin:(BOOL)gestureState WithCell:(SecurityCell *)cell
@@ -776,12 +738,10 @@
             }
                 break;
             case 2:{
-                
                 vc = [[arrowItem.destVcClass alloc] initWithNibName:@"UCFWebViewJavascriptBridgeLevel" bundle:nil];
                 vc.title = arrowItem.title;
                 ((UCFWebViewJavascriptBridgeLevel *)vc).url = LEVELURL;
                 ((UCFWebViewJavascriptBridgeLevel *)vc).navTitle = @"会员等级";
-                //vc.rootVc = self;
             }
                 break;
             case 3:
@@ -791,48 +751,7 @@
                     vc = subVC;
                 }
                 break;
-            case 4:
-            {
-                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"UCFMoreViewController" bundle:nil];
-                UCFMoreViewController *moreVC = [storyboard instantiateViewControllerWithIdentifier:@"more_main"];
-                moreVC.title = @"更多";
-                moreVC.sourceVC = @"UCFSecurityCenterViewController";
-                vc = moreVC;
-            }
-                break;
-                
-//            case 3: {
-//                vc.rootVc = self;
-//                if ([item.subtitle isEqualToString:@"未绑定"]) {
-//                    if(openStatus < 3){
-//                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请先开通徽商存管账户" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-//                        alert.tag = 10005;
-//                        [alert show];
-//                    }
-//                    return;
-//                }else {
-//                    if (openStatus == 5) {
-//                        FullWebViewController *webController = [[FullWebViewController alloc] initWithWebUrl:REMINDBANKH5 title:@"特殊用户绑卡提醒"];
-//                        webController.baseTitleType = @"specialUser";
-//                       [self.navigationController pushViewController:webController  animated:YES];
-//                        return;
-//                    }
-//                    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SecuirtyCenter" bundle:nil];
-//                    vc = [storyboard instantiateViewControllerWithIdentifier:@"bankcardinfo"];
-////                    vc = [[UCFBankCardInfoViewController alloc] init];
-//                    vc.title = @"绑定银行卡";
-//                }
-//            }
-//                break;
-//            case 2: {
-//                vc = [[RiskAssessmentViewController alloc] initWithNibName:@"RiskAssessmentViewController" bundle:nil];
-//                vc.title = arrowItem.title;
-//                ((RiskAssessmentViewController *)vc).url = GRADELURL;
-//                [self.navigationController pushViewController:vc  animated:YES];
-//                return;
-//
-//            }
-                break;
+
           }
             [self.navigationController pushViewController:vc  animated:YES];
         }
@@ -843,7 +762,7 @@
                 modifyPasswordVC.title = arrowItem.title;
                 modifyPasswordVC.hidesBottomBarWhenPushed = YES;
                 [self.navigationController pushViewController:modifyPasswordVC  animated:YES];
-            }else if([NSStringFromClass(arrowItem.destVcClass)  isEqualToString: @"TradePasswordVC"]){ //设置交易密码或修改交易密码
+            } else if([NSStringFromClass(arrowItem.destVcClass)  isEqualToString: @"TradePasswordVC"]){ //设置交易密码或修改交易密码
                 if(openStatus < 3){
                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请先开通徽商存管账户" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
                     alert.tag = 10005;
@@ -857,17 +776,14 @@
                     tradePasswordVC.isCompanyAgent =_isCompanyAgent;
                     [self.navigationController pushViewController:tradePasswordVC  animated:YES];
                 }
+            } else if ([NSStringFromClass(arrowItem.destVcClass)  isEqualToString: @"UCFMoreViewController"]) {
+                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"UCFMoreViewController" bundle:nil];
+                UCFMoreViewController *moreVC = [storyboard instantiateViewControllerWithIdentifier:@"more_main"];
+                moreVC.title = @"更多";
+                moreVC.sourceVC = @"UCFSecurityCenterViewController";
+                vc = moreVC;
+                [self.navigationController pushViewController:moreVC  animated:YES];
             }
-//            else if ([NSStringFromClass(arrowItem.destVcClass)  isEqualToString: @"UCFBatchInvestmentViewController"]) {
-//                if([self checkHSIsLegitimate]) {
-//                    UCFBatchInvestmentViewController *batchInvestment = [[UCFBatchInvestmentViewController alloc] init];
-//                    batchInvestment.sourceType = @"personCenter";
-//                    UCFSettingGroup *group2 = [self.itemsData lastObject];
-//                    UCFSettingItem *userItem = group2.items.firstObject;
-//                    batchInvestment.isStep = [userItem.subtitle isEqualToString:@"未开启"] ? 1 : 2;
-//                    [self.navigationController pushViewController:batchInvestment animated:YES];
-//                }
-//            }
         }
     }
 }

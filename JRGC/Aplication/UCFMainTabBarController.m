@@ -54,10 +54,6 @@
     self.tabBar.clipsToBounds = NO;
     [self.tabBar addSubview:imaview];
     [[UITabBar appearance] setShadowImage:tabImag];
-    
-    
-    
-    
 }
 - (void)viewDidAppear:(BOOL)animated
 {
