@@ -272,7 +272,6 @@
     } else if(tag.integerValue == kSXTagUserLogout){
         
     }  else if (tag.intValue == kSXTagGetBanner) {
-
     }
 }
 -(void)errorPost:(NSError*)err tag:(NSNumber*)tag

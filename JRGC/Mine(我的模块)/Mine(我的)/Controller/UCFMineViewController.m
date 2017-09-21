@@ -13,7 +13,7 @@
 #import "UCFMineFuncSecCell.h"
 #import "UCFSecurityCenterViewController.h"
 #import "UCFLoginBaseView.h"
-
+#import "UCFCalendarViewController.h"
 @interface UCFMineViewController () <UITableViewDelegate, UITableViewDataSource, UCFMineHeaderViewDelegate, UCFMineFuncCellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) UCFMineHeaderView   *mineHeaderView;
@@ -146,7 +146,10 @@
 
 - (void)mineFuncCell:(UCFMineFuncCell *)mineFuncCell didClickedCalendarButton:(UIButton *)button
 {
-    
+    UCFCalendarViewController *backMoneyCalendarVC = [[UCFCalendarViewController alloc] initWithNibName:@"UCFCalendarViewController" bundle:nil];
+//        backMoneyDetailVC.superViewController = self;
+//    backMoneyCalendarVC.accoutType = self.accoutType;
+    [self.navigationController pushViewController:backMoneyCalendarVC animated:YES];
 }
 
 - (void)mineFuncCell:(UCFMineFuncCell *)mineFuncCell didClickedMyReservedButton:(UIButton *)button
