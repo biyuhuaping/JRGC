@@ -63,7 +63,6 @@
     else if ([self.item isKindOfClass:[UCFSettingSwitchItem class]]) { // 开关
         self.accessoryView = self.switchView;
         self.selectionStyle = UITableViewCellSelectionStyleNone;
-//        self.accessoryView = nil;
         UCFSettingSwitchItem *item1 = (UCFSettingSwitchItem *)self.item;
         if (item1.switchType == 1) {
             BOOL isOpen = [[NSUserDefaults standardUserDefaults] boolForKey:@"isUserShowTouchIdLockView"];

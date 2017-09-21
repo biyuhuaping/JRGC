@@ -11,7 +11,7 @@
 #import "UCFMineCell.h"
 #import "UCFMineFuncCell.h"
 #import "UCFMineFuncSecCell.h"
-
+#import "UCFSecurityCenterViewController.h"
 @interface UCFMineViewController () <UITableViewDelegate, UITableViewDataSource, UCFMineHeaderViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) UCFMineHeaderView *mineHeaderView;
@@ -103,7 +103,9 @@
 #pragma mark - 我的页面的头部视图代理方法
 - (void)mineHeaderViewDidClikedUserInfoWithCurrentVC:(UCFMineHeaderView *)mineHeaderView
 {
-    
+    UCFSecurityCenterViewController *personMessageVC = [[UCFSecurityCenterViewController alloc] initWithNibName:@"UCFSecurityCenterViewController" bundle:nil];
+    personMessageVC.title = @"个人信息";
+    [self.navigationController pushViewController:personMessageVC animated:YES];
 }
 
 - (void)mineHeaderView:(UCFMineHeaderView *)mineHeaderView didClikedTopUpButton:(UIButton *)rechargeButton
