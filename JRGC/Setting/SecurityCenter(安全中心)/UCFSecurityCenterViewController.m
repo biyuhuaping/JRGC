@@ -79,20 +79,35 @@
 - (NSMutableArray *)itemsData
 {
     if (_itemsData == nil) {
+//        UCFSettingItem *userName = [UCFSettingItem itemWithIcon:@"login_icon_name" title:@"用户名"];
+        
+   
         UCFSettingItem *idauth = [UCFSettingArrowItem itemWithIcon:@"safecenter_icon_id" title:@"身份认证" destVcClass:[UCFModifyIdAuthViewController class]];
         UCFSettingItem *bundlePhoneNum = [UCFSettingArrowItem itemWithIcon:@"login_icon_phone" title:@"绑定手机号" destVcClass:[BindPhoneNumViewController class]];
+        UCFSettingItem *facCode = [UCFSettingArrowItem itemWithIcon:@"safecenter_icon_code" title:@"工场码" destVcClass:[UCFFacCodeViewController class]];
+       
         self.userLevel = [UCFSettingArrowItem itemWithIcon:@"safecenter_icon_vip" title:@"会员等级" destVcClass:[UCFWebViewJavascriptBridgeLevel class]];//***qyy
         self.userLevel.isShowOrHide = YES;//不显示
-        UCFSettingItem *facCode = [UCFSettingArrowItem itemWithIcon:@"safecenter_icon_code" title:@"工场码" destVcClass:[UCFFacCodeViewController class]];
+//        UCFSettingItem *moreVc = [UCFSettingArrowItem itemWithIcon:@"safecenter_icon_more" title:@"更多" destVcClass:[UCFMoreViewController class]];
+        //先前是绑卡页面，因为删除绑卡页面，所以暂时用TradePasswordVC这个类替代，整体调试的时候改过来，zrc fixed
+//        UCFSettingItem *bundleCard = [UCFSettingArrowItem itemWithIcon:@"safecenter_icon_bankcard" title:@"绑定银行卡" destVcClass:[UCFBankCardInfoViewController class]];//***qyy
+        
+//        UCFSettingItem *riskAssessment = [UCFSettingArrowItem itemWithIcon:@"safecenter_icon_assessment" title:@"风险承担能力" destVcClass:[RiskAssessmentViewController class]];
+        
+
+//        UCFSettingItem *batchInvest = [UCFSettingArrowItem itemWithIcon:@"safecenter_icon_auto" title:@"自动投标" destVcClass:[UCFBatchInvestmentViewController class]];//qyy
+
         UCFSettingItem *activeGestureCode  = [UCFSettingSwitchItem itemWithIcon:@"safecenter_icon_gesture" title:@"启用手势密码"];
         UCFSettingItem *activeFaceValid  = [UCFSettingSwitchItem itemWithIcon:@"uesr_icon_face" title:@"启用刷脸登录" withSwitchType:2];
         UCFSettingItem *modifyPassword = [UCFSettingArrowItem itemWithIcon:@"login_icon_password" title:@"修改登录密码" destVcClass:[ModifyPasswordViewController class]];//***qyy
-        
+//        self.setChangePassword = [UCFSettingArrowItem itemWithIcon:@"safecenter_icon_transaction" title:@"设置交易密码" destVcClass:[TradePasswordVC class]];
+//        self.setChangePassword.isShowOrHide  = YES;//显示该信息 对应的cell可以点击
         
         UCFSettingGroup *group1 = [[UCFSettingGroup alloc] init];//用户信息
-        group1.items = [[NSMutableArray alloc]initWithArray: @[idauth, bundlePhoneNum,self.userLevel,facCode]];//qyy
+        group1.items = [[NSMutableArray alloc]initWithArray: @[idauth, bundlePhoneNum,facCode,self.userLevel]];//qyy
 
         UCFSettingGroup *group2 = [[UCFSettingGroup alloc] init];//账户安全
+        
         if ([self checkTouchIdIsOpen]) {
             UCFSettingItem *zhiWenSwith  = [UCFSettingSwitchItem itemWithIcon:@"safecenter_icon_touch" title:@"启用指纹解锁" withSwitchType:1];
              group2.items = [[NSMutableArray alloc]initWithArray:@[activeGestureCode,zhiWenSwith, activeFaceValid,modifyPassword]];
@@ -278,13 +293,17 @@
             NSString *bindPhone = [result objectSafeForKey:@"bindMobile"];
             self.sex = [[result objectSafeForKey:@"sex"] intValue];
             NSString *oldPhone = [[NSUserDefaults standardUserDefaults] valueForKey:PHONENUM];
+//            NSString *gradeResult = dic[@"data"][@"gradeResult"];
+//            NSString *batchInvestStatus = [NSString stringWithFormat:@"%@",result[@"batchInvestStatus"]];
             
+//
             self.isCompanyAgent = [[[dic objectForKey:@"data"] objectForKey:@"isCompanyAgent"] boolValue];
             //新请求的手机号和本地存储手机号不一样则更新本地
             if (![oldPhone isEqualToString:bindPhone]) {
                 [[NSUserDefaults standardUserDefaults] setValue:bindPhone forKey:PHONENUM];
                 [[NSUserDefaults standardUserDefaults] synchronize];
             }
+//            NSString *bindCard = [result objectForKey:@"card"];
             NSString *realName = [result objectForKey:@"realName"];
             self.userGradeSwitch = [dic[@"data"][@"isOpen"]  boolValue];
             //保存 刷脸登录开关
@@ -295,6 +314,7 @@
                  [[NSUserDefaults standardUserDefaults] setBool:NO forKey:FACESWITCHSTATUS];
             }
             
+//            [UserInfoSingle sharedManager].openStatus = [dic[@"data"][@"openStatus"] integerValue] ;
             if ([UserInfoSingle sharedManager].openStatus == 4) {
                 _setChangePassword.title = @"修改交易密码";
             }else{
@@ -323,29 +343,51 @@
 //                        userItem.subtitle = [bindCard isEqualToString:@""] ? @"未绑定" : bindCard;
 //                        break;
                     case 2:
-                        if ([memberLever isEqualToString:@"1"]) {
-                            _userLevelImage.image =[UIImage imageNamed:@"no_vip_icon.png"];
-                            
-                        }else{
-                            _userLevelImage.image =[UIImage imageNamed:[NSString stringWithFormat:@"vip%d_icon.png",[memberLever intValue]-1]];
-                        }
-
+                        userItem.subtitle = [[NSUserDefaults standardUserDefaults] objectForKey:@"gcmCode"];
                         break;
                     case 3:
                     {
-                        userItem.subtitle = [[NSUserDefaults standardUserDefaults] objectForKey:@"gcmCode"];
+//                        memberLever = @"";
+                        if ([memberLever isEqualToString:@"1"]) {
+                            _userLevelImage.image =[UIImage imageNamed:@"no_vip_icon.png"];
+
+                        }else{
+                            _userLevelImage.image =[UIImage imageNamed:[NSString stringWithFormat:@"vip%d_icon.png",[memberLever intValue]-1]];
+
+                        }
                     }
                         break;
                     default:
                         break;
                 }
             }
+            
+//            UCFSettingGroup *group2 = [self.itemsData lastObject];
+//            UCFSettingItem *userItem = group2.items.firstObject;
+//            userItem.subtitle = batchInvestStatus.length == 0 ? @"未开启" : batchInvestStatus;
+//            userItem.title = batchInvestStatus.length == 0 ? @"自动投标(开启后才可进行批量投资)" : @"自动投标";
 
             [self.tableview reloadData];
         }else
             [AuxiliaryFunc showToastMessage:message withView:self.view];
     }  else if (tag.integerValue == kSXTagUserLogout) {
-
+//        [[UCFSession sharedManager] transformBackgroundWithUserInfo:nil withState:UCFSessionStateUserLogout];
+//        [[NSNotificationCenter defaultCenter] postNotificationName:@"setDefaultViewData" object:nil];
+//        [[UserInfoSingle sharedManager] removeUserInfo];
+//        [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"changScale"];
+//        [[NSUserDefaults standardUserDefaults] synchronize];
+//        //安全退出后去首页
+//        AppDelegate *delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+//        [delegate.tabBarController setSelectedIndex:0];
+//        [delegate.tabBarController.tabBar hideBadgeOnItemIndex:3];
+//        [self.navigationController popToRootViewControllerAnimated:YES];
+//        [[NSUserDefaults standardUserDefaults] setValue:@"0" forKey:@"personCenterClick"];
+//        
+//        //退出时清cookis
+//        [Common deleteCookies];
+//        [[NSNotificationCenter defaultCenter] postNotificationName:REGIST_JPUSH object:nil];
+//        //通知首页隐藏tipView
+//        [[NSNotificationCenter defaultCenter] postNotificationName:@"LatestProjectUpdate" object:nil];
     }else if(tag.integerValue == kSXTagFaceSwitchStatus){//刷脸登录状态开关
         if ([rstcode intValue] == 1) {
             NSString * faceIsOpen = [dic objectSafeForKey:@"isOpen"];// 1：关闭 0：开启
@@ -734,19 +776,18 @@
             }
                 break;
             case 2:{
-                
-                vc = [[arrowItem.destVcClass alloc] initWithNibName:@"UCFWebViewJavascriptBridgeLevel" bundle:nil];
-                vc.title = arrowItem.title;
-                ((UCFWebViewJavascriptBridgeLevel *)vc).url = LEVELURL;
-                ((UCFWebViewJavascriptBridgeLevel *)vc).navTitle = @"会员等级";
-                //vc.rootVc = self;
+                UCFFacCodeViewController *subVC = [[UCFFacCodeViewController alloc] initWithNibName:@"UCFFacCodeViewController" bundle:nil];
+                subVC.urlStr = [NSString stringWithFormat:@"https://m.9888.cn/mpwap/mycode.jsp?pcode=%@&sex=%d",[[NSUserDefaults standardUserDefaults] objectForKey:@"gcmCode"],self.sex];
+                vc = subVC;
             }
                 break;
             case 3:
                 {
-                    UCFFacCodeViewController *subVC = [[UCFFacCodeViewController alloc] initWithNibName:@"UCFFacCodeViewController" bundle:nil];
-                    subVC.urlStr = [NSString stringWithFormat:@"https://m.9888.cn/mpwap/mycode.jsp?pcode=%@&sex=%d",[[NSUserDefaults standardUserDefaults] objectForKey:@"gcmCode"],self.sex];
-                    vc = subVC;
+                  vc = [[arrowItem.destVcClass alloc] initWithNibName:@"UCFWebViewJavascriptBridgeLevel" bundle:nil];
+                    vc.title = arrowItem.title;
+                    ((UCFWebViewJavascriptBridgeLevel *)vc).url = LEVELURL;
+                    ((UCFWebViewJavascriptBridgeLevel *)vc).navTitle = @"会员等级";
+                     //vc.rootVc = self;
                 }
                 break;
             case 4:
