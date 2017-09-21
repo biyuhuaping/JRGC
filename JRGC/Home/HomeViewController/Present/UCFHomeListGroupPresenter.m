@@ -44,4 +44,9 @@
 - (NSString *)desc {
     return self.group.desc;
 }
+
+- (NSArray *)attach
+{
+    return self.group.attach;
+}
 @end

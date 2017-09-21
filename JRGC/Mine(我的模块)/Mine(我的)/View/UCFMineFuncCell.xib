@@ -51,18 +51,40 @@
                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nhr-xL-s10">
+                        <rect key="frame" x="0.0" y="0.0" width="160" height="49.5"/>
+                        <state key="normal" title="Button"/>
+                        <connections>
+                            <action selector="calendar:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="2Iz-Xs-oVg"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p0e-et-6C9">
+                        <rect key="frame" x="160.5" y="0.0" width="159.5" height="49.5"/>
+                        <state key="normal" title="Button"/>
+                        <connections>
+                            <action selector="myReserved:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="hvk-XX-Zl9"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="OTu-kO-pxf" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="7Te-d1-rQr"/>
                     <constraint firstItem="OTu-kO-pxf" firstAttribute="leading" secondItem="xuD-06-5HS" secondAttribute="trailing" constant="8" id="BxI-90-a6j"/>
+                    <constraint firstAttribute="bottom" secondItem="Nhr-xL-s10" secondAttribute="bottom" id="Fwh-qC-X8U"/>
                     <constraint firstItem="0a9-DN-l69" firstAttribute="centerY" secondItem="TYK-JK-dHU" secondAttribute="centerY" id="Go5-am-eTP"/>
+                    <constraint firstAttribute="bottom" secondItem="p0e-et-6C9" secondAttribute="bottom" id="Oqo-oE-MQS"/>
                     <constraint firstItem="xuD-06-5HS" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="ZYg-7Z-Rcs"/>
                     <constraint firstAttribute="bottom" secondItem="Gfc-Nz-GRd" secondAttribute="bottom" id="aff-CG-cze"/>
                     <constraint firstItem="Gfc-Nz-GRd" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="cWC-sz-MOp"/>
                     <constraint firstItem="0a9-DN-l69" firstAttribute="leading" secondItem="TYK-JK-dHU" secondAttribute="trailing" constant="5" id="f0S-Ni-4yg"/>
+                    <constraint firstItem="p0e-et-6C9" firstAttribute="leading" secondItem="Gfc-Nz-GRd" secondAttribute="trailing" id="fpu-fq-aPB"/>
+                    <constraint firstAttribute="trailing" secondItem="p0e-et-6C9" secondAttribute="trailing" id="gB6-ob-lWd"/>
+                    <constraint firstItem="Gfc-Nz-GRd" firstAttribute="leading" secondItem="Nhr-xL-s10" secondAttribute="trailing" id="jFG-L3-My5"/>
+                    <constraint firstItem="Nhr-xL-s10" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="nga-1P-CNb"/>
                     <constraint firstItem="Gfc-Nz-GRd" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="ry1-Sn-Hfh"/>
                     <constraint firstItem="TYK-JK-dHU" firstAttribute="leading" secondItem="Gfc-Nz-GRd" secondAttribute="trailing" constant="13" id="tFf-hr-Bku"/>
+                    <constraint firstItem="Nhr-xL-s10" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="tPO-K5-JVI"/>
                     <constraint firstItem="TYK-JK-dHU" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="xcm-J2-qek"/>
+                    <constraint firstItem="p0e-et-6C9" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="zsw-O5-b9I"/>
                     <constraint firstItem="xuD-06-5HS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="13" id="zuu-kh-h6b"/>
                 </constraints>
             </tableViewCellContentView>

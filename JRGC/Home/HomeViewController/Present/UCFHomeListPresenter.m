@@ -133,6 +133,9 @@
         else if ([model.type isEqualToString:@"0"]) {
             model.moedelType = UCFHomeListCellModelTypeReserved;
         }
+        else if ([group.type isEqualToString:@"13"]) {
+            model.moedelType = UCFHomeListCellModelTypeNewUser;
+        }
         else {
             model.moedelType = UCFHomeListCellModelTypeDefault;
         }

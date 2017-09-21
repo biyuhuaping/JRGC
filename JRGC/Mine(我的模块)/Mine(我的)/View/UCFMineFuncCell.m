@@ -15,10 +15,17 @@
     // Initialization code
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+- (IBAction)calendar:(UIButton *)sender {
+    if ([self.delegate respondsToSelector:@selector(mineFuncCell:didClickedCalendarButton:)]) {
+        [self.delegate mineFuncCell:self didClickedCalendarButton:sender];
+    }
 }
+
+- (IBAction)myReserved:(UIButton *)sender {
+    if ([self.delegate respondsToSelector:@selector(mineFuncCell:didClickedMyReservedButton:)]) {
+        [self.delegate mineFuncCell:self didClickedMyReservedButton:sender];
+    }
+}
+
 
 @end

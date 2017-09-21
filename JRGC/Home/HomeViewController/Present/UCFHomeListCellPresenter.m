@@ -137,13 +137,13 @@
 - (CGFloat)cellHeight
 {
     if (self.item.moedelType == UCFHomeListCellModelTypeDefault) {
-        return 95.0;
+        return 100.0;
     }
-    else if (self.item.moedelType == UCFHomeListCellModelTypeReserved) {
-        return 73.0;
+    else if (self.item.moedelType == UCFHomeListCellModelTypeReserved || self.item.moedelType == UCFHomeListCellModelTypeGoldFixed) {
+        return 170.0;
     }
-    else if (self.item.moedelType == UCFHomeListCellModelTypeGoldFixed) {
-        return 175.0;
+    else if (self.item.moedelType == UCFHomeListCellModelTypeNewUser) {
+        return 125.0;
     }
     else {
         return (ScreenWidth - 20) / CELLRATE + 15;

@@ -12,7 +12,7 @@
 #import "UCFMineFuncCell.h"
 #import "UCFMineFuncSecCell.h"
 
-@interface UCFMineViewController () <UITableViewDelegate, UITableViewDataSource, UCFMineHeaderViewDelegate>
+@interface UCFMineViewController () <UITableViewDelegate, UITableViewDataSource, UCFMineHeaderViewDelegate, UCFMineFuncCellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) UCFMineHeaderView *mineHeaderView;
 
@@ -78,6 +78,7 @@
         UCFMineFuncCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
         if (nil == cell) {
             cell = (UCFMineFuncCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFMineFuncCell" owner:self options:nil] lastObject];
+            cell.delegate = self;
         }
         return cell;
     }
@@ -112,6 +113,18 @@
 }
 
 - (void)mineHeaderView:(UCFMineHeaderView *)mineHeaderView didClikedCashButton:(UIButton *)cashButton
+{
+    
+}
+
+#pragma mark - UCFMineFuncCell的代理方法
+
+- (void)mineFuncCell:(UCFMineFuncCell *)mineFuncCell didClickedCalendarButton:(UIButton *)button
+{
+    
+}
+
+- (void)mineFuncCell:(UCFMineFuncCell *)mineFuncCell didClickedMyReservedButton:(UIButton *)button
 {
     
 }

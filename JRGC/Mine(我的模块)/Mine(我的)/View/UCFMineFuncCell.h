@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UCFMineFuncCell : UITableViewCell
+@class UCFMineFuncCell;
+@protocol UCFMineFuncCellDelegate <NSObject>
 
+- (void)mineFuncCell:(UCFMineFuncCell *)mineFuncCell didClickedCalendarButton:(UIButton *)button;
+- (void)mineFuncCell:(UCFMineFuncCell *)mineFuncCell didClickedMyReservedButton:(UIButton *)button;
+@end
+
+@interface UCFMineFuncCell : UITableViewCell
+@property (weak, nonatomic) id<UCFMineFuncCellDelegate> delegate;
 @end

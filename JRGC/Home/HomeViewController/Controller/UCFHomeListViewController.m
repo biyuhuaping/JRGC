@@ -16,11 +16,12 @@
 #import "UCFHomeListNo2Cell.h"
 #import "UCFHomeInvestCell.h"
 #import "UCFGoldFlexibleCell.h"
+#import "UCFNewUserCell.h"
 #import "UCFHomeListHeaderSectionView.h"
 #import "UCFLoginViewController.h"
 #import "AppDelegate.h"
 
-@interface UCFHomeListViewController () <UITableViewDelegate, UITableViewDataSource, HomeListViewPresenterCallBack, UCFHomeListHeaderSectionViewDelegate, UCFHomeListCellDelegate, UCFHomeInvestCellDelegate, UCFGoldFlexibleCellDelegate>
+@interface UCFHomeListViewController () <UITableViewDelegate, UITableViewDataSource, HomeListViewPresenterCallBack, UCFHomeListHeaderSectionViewDelegate, UCFHomeListCellDelegate, UCFHomeInvestCellDelegate, UCFGoldFlexibleCellDelegate, UCFNewUserCellDelegate>
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) UCFHomeListPresenter *presenter;
 @end
@@ -87,12 +88,15 @@
         cell.indexPath = indexPath;
         return cell;
     }
-    else if (cellPresenter.modelType == UCFHomeListCellModelTypeOneImageTransfer || cellPresenter.modelType == UCFHomeListCellModelTypeOneImageBatchCycle || cellPresenter.modelType == UCFHomeListCellModelTypeOneImageBatchLending) {
-        static NSString *cellId = @"homeListCell2";
-        UCFHomeListNo2Cell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+    else if (cellPresenter.modelType == UCFHomeListCellModelTypeNewUser) {
+        static NSString *cellId = @"newusercell";
+        UCFNewUserCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
         if (nil == cell) {
-            cell = (UCFHomeListNo2Cell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeListNo2Cell" owner:self options:nil] lastObject];
+            cell = (UCFNewUserCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFNewUserCell" owner:self options:nil] lastObject];
+            cell.delegate = self;
+            cell.tableview = tableView;
         }
+        cell.indexPath = indexPath;
         cell.presenter = cellPresenter;
         return cell;
     }
@@ -164,11 +168,11 @@
     if (!group.prdlist) {
         return 0.001;
     }
-    else if ([group.type isEqualToString:@""]) {
-        return 100;
+    else if ([group.type isEqualToString:@"13"]) {
+        return 140;
     }
     else
-        return 32;
+        return 39;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
