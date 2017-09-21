@@ -68,7 +68,7 @@ static NSString * const kAppSecret = @"10dddec2bf7d3be794eda13b0df0a7d9";
     [super viewDidLoad];
     self.view.backgroundColor = UIColorWithRGB(0xd8d8d8);
     self.navigationController.navigationBar.translucent = NO;
-//    [self addLeftButton];
+    [self addLeftButton];
     [self initUI];
     self.navigationController.fd_prefersNavigationBarHidden = YES;
 
