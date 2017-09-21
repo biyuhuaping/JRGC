@@ -262,6 +262,7 @@
 #pragma mark - addUI 添加界面
 - (void)addUI {
     self.homeListVC.tableView.frame = CGRectMake(0, 0, SCREEN_WIDTH, ScreenHeight-49);
+    self.homeListVC.tableView.tableFooterView.frame = CGRectMake(0, 0, ScreenWidth, 140);
     CGFloat cycleImageViewHeight = [UCFCycleImageViewController viewHeight];
     self.cycleImageVC.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, cycleImageViewHeight);
     self.homeListVC.tableView.tableHeaderView = self.cycleImageVC.view;

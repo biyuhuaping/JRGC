@@ -15,7 +15,7 @@
 @interface UCFGoldFlexibleCell ()
 @property (weak, nonatomic) IBOutlet NZLabel *goldFlexibleRateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *minInvestLabel;
-@property (weak, nonatomic) IBOutlet UILabel *completeLabel;
+@property (weak, nonatomic) IBOutlet NZLabel *completeLabel;
 @property (weak, nonatomic) IBOutlet UIButton *buyButton;
 @property (weak, nonatomic) IBOutlet UILabel *proSignLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *buyButtonW;
@@ -34,6 +34,7 @@
 {
     [super layoutSubviews];
     [self.goldFlexibleRateLabel setFont:[UIFont systemFontOfSize:12] string:@"%"];
+    [self.completeLabel setFontColor:UIColorWithRGB(0x555555) string:@"已售"];
 }
 
 - (void)setPresenter:(UCFHomeListCellPresenter *)presenter

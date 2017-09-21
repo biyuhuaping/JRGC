@@ -20,10 +20,12 @@
 #import "UCFHomeListHeaderSectionView.h"
 #import "UCFLoginViewController.h"
 #import "AppDelegate.h"
+#import "UCFHomeListFooterView.h"
 
 @interface UCFHomeListViewController () <UITableViewDelegate, UITableViewDataSource, HomeListViewPresenterCallBack, UCFHomeListHeaderSectionViewDelegate, UCFHomeListCellDelegate, UCFHomeInvestCellDelegate, UCFGoldFlexibleCellDelegate, UCFNewUserCellDelegate>
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) UCFHomeListPresenter *presenter;
+@property (weak, nonatomic) UCFHomeListFooterView *footerView;
 @end
 
 @implementation UCFHomeListViewController
@@ -45,19 +47,16 @@
         self.presenter = presenter;
         self.presenter.view = self;//将V和P进行绑定(这里因为V是系统的TableView 无法简单的声明一个view属性 所以就绑定到TableView的持有者上面)
         
-        UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 50)];
+        UCFHomeListFooterView *footerView = (UCFHomeListFooterView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeListFooterView" owner:self options:nil] lastObject];
+        
         self.tableView.tableFooterView = footerView;
-        UILabel *tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 15, SCREEN_WIDTH, 20)];
-        tipLabel.font = [UIFont systemFontOfSize:12];
-        tipLabel.text = @"市场有风险  投资需谨慎";
-        tipLabel.textColor = UIColorWithRGB(0x999999);
-        tipLabel.textAlignment = NSTextAlignmentCenter;
-        [footerView addSubview:tipLabel];
+//        self.footerView = footerView;
         
         [self.tableView addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(refreshData)];
     }
     return self;
 }
+
 
 #pragma mark - tableDataSource方法
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
