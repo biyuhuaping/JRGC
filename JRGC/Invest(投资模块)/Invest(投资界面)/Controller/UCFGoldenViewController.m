@@ -188,6 +188,7 @@
     if (nil == view) {
         view = (UCFHomeListHeaderSectionView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeListHeaderSectionView" owner:self options:nil] lastObject];
     }
+    view.downView.hidden = YES;
     [view.contentView setBackgroundColor:UIColorWithRGB(0xf9f9f9)];
     [view.upLine setBackgroundColor:UIColorWithRGB(0xebebee)];
     view.frame = CGRectMake(0, 0, ScreenWidth, 30);

@@ -12,7 +12,7 @@
 
 @interface UCFHomeListHeaderSectionView  ()
 @property (weak, nonatomic) IBOutlet UIView *up;
-@property (weak, nonatomic) IBOutlet UIView *downView;
+
 @property (weak, nonatomic) IBOutlet UIImageView *imageFirst;
 @property (weak, nonatomic) IBOutlet UILabel *valueLabelFirst;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabelFirst;

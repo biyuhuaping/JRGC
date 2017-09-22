@@ -130,7 +130,9 @@
     [view.contentView setBackgroundColor:UIColorWithRGB(0xf9f9f9)];
     [view.upLine setBackgroundColor:UIColorWithRGB(0xebebee)];
     view.homeListHeaderMoreButton.hidden = YES;
+    view.downView.hidden = YES;
     view.frame = CGRectMake(0, 0, ScreenWidth, 30);
+    
     if (self.dataArray.count == 1) {
         view.headerTitleLabel.text =@"尊享优选";
          view.headerImageView.image = [UIImage imageNamed:@"mine_icon_enjoy"];

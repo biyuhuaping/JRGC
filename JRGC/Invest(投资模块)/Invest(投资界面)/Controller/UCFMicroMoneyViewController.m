@@ -120,6 +120,7 @@
     if (nil == view) {
         view = (UCFHomeListHeaderSectionView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeListHeaderSectionView" owner:self options:nil] lastObject];
     }
+    view.downView.hidden = YES;
     UCFMicroMoneyGroup *group = [self.dataArray objectAtIndex:section];
     view.headerTitleLabel.text = group.title;
     if (group.desc) {
@@ -206,7 +207,7 @@
 {
     UCFMicroMoneyGroup *group = [self.dataArray objectAtIndex:indexPath.section];
     if (group.type.intValue == 16) {
-        return 75;
+        return 170;
     }
     return 95;
 }

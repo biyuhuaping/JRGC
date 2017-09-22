@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *honerLineImageView;
 @property (weak, nonatomic) IBOutlet UILabel *honerLabel;
 @property (weak, nonatomic) IBOutlet UIView *segView;
+@property (weak, nonatomic) IBOutlet UIView *downView;
 @property (strong, nonatomic) UCFHomeListGroupPresenter *presenter;
 @property (weak, nonatomic) id<UCFHomeListHeaderSectionViewDelegate> delegate;
 @end
