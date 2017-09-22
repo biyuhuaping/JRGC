@@ -874,13 +874,13 @@
 //     || [UcfWalletSDK handleApplication:application openUrl:url]
 }
 
-//- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
-//{
-//    if ([Growing handleUrl:url]) {
-//        return [Growing handleUrl:url];
-//    }else
-//        return [[UMSocialManager defaultManager] handleOpenURL:url];
-//}
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    if ([Growing handleUrl:url]) {
+        return [Growing handleUrl:url];
+    }else
+        return [[UMSocialManager defaultManager] handleOpenURL:url];
+}
 
 #pragma mark- --------------------极光推送---------------------------
 

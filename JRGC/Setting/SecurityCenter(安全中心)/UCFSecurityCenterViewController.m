@@ -506,16 +506,14 @@
             //关闭手势密码
             BlockUIAlertView *alert = [[BlockUIAlertView alloc] initWithTitle:@"取消设置手势密码会增加账户信息安全风险，确认关闭吗？" message:@"" cancelButtonTitle:@"确定" clickButton:^(NSInteger index){
                 if (index == 0) {
-                    //不做任何操作 并设置开启状态
-                    [securityCell.switchView setOn:YES animated:YES];
-                }
-                else{
                     //关闭手势密码
-                    
                     UCFVerifyLoginViewController *controller = [[UCFVerifyLoginViewController alloc] init];
                     controller.sourceVC = @"securityCenter";
                     [self.navigationController pushViewController:controller animated:YES];
-                    //[LLLockPassword saveLockPassword:nil];
+                }
+                else{
+                    //不做任何操作 并设置开启状态
+                    [securityCell.switchView setOn:YES animated:YES];
                 }
             } otherButtonTitles:@"取消"];
             [alert show];
