@@ -10,6 +10,7 @@
 #import "NZLabel.h"
 #import "FullWebViewController.h"
 #import "UCFOldUserGuideViewController.h"
+#import "AppDelegate.h"
 @interface UCFBankDepositoryAccountViewController ()
 {
     BOOL isFirstLaunch;
@@ -156,8 +157,16 @@
             break;
     }
 }
--(void)popViewController{
-    [self.navigationController popViewControllerAnimated:YES];
+-(void)popViewController
+{
+//    [self.navigationController popViewControllerAnimated:YES];
+    
+    AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+    [appDelegate.tabBarController dismissViewControllerAnimated:NO completion:^{
+        NSUInteger selectedIndex = appDelegate.tabBarController.selectedIndex;
+        UINavigationController *nav = [appDelegate.tabBarController.viewControllers objectAtIndex:selectedIndex];
+        [nav popToRootViewControllerAnimated:NO];
+    }];
 }
 - (void)errorPost:(NSError *)err tag:(NSNumber *)tag
 {

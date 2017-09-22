@@ -351,7 +351,7 @@
                if([cardModel.cardStateStr isEqualToString:@"去开户"] || [cardModel.cardStateStr isEqualToString:@"去绑卡"])
                {
                    HSHelper *helper = [HSHelper new];
-                   [helper pushOpenHSType:SelectAccoutTypeP2P Step:[UserInfoSingle sharedManager].openStatus nav:self.navigationController];
+                   [helper pushOpenHSType:SelectAccoutTypeP2P Step:[UserInfoSingle sharedManager].openStatus nav:self.navigationController isPresentView:YES];
                }
                else
                {
@@ -369,7 +369,7 @@
                if([cardModel.cardStateStr isEqualToString:@"去开户"] || [cardModel.cardStateStr isEqualToString:@"去绑卡"])
                {
                    HSHelper *helper = [HSHelper new];
-                   [helper pushOpenHSType:SelectAccoutTypeHoner Step:[UserInfoSingle sharedManager].enjoyOpenStatus nav:self.navigationController];
+                   [helper pushOpenHSType:SelectAccoutTypeHoner Step:[UserInfoSingle sharedManager].enjoyOpenStatus nav:self.navigationController isPresentView:YES];
                }
                else
                {
@@ -387,12 +387,12 @@
                if([cardModel.cardStateStr isEqualToString:@"去开户"])//去尊享开户
                {
                    HSHelper *helper = [HSHelper new];
-                   [helper pushOpenHSType:SelectAccoutTypeHoner Step:[UserInfoSingle sharedManager].enjoyOpenStatus nav:self.navigationController];
+                   [helper pushOpenHSType:SelectAccoutTypeHoner Step:[UserInfoSingle sharedManager].enjoyOpenStatus nav:self.navigationController isPresentView:YES];
                }
                else if([cardModel.cardStateStr isEqualToString:@"去授权"])//去黄金授权页面
                {
                    HSHelper *helper = [HSHelper new];
-                   [helper pushGoldAuthorizationType:SelectAccoutTypeGold nav:self.navigationController];
+                   [helper pushGoldAuthorizationType:SelectAccoutTypeGold nav:self.navigationController sourceVC:@"UCFRechargeOrCashVC"];
                }
                else {//去黄金充值页面
                    //去充值页面
@@ -488,12 +488,12 @@
     if (alertView.tag == 8000) {
         if (buttonIndex == 1) {
             HSHelper *helper = [HSHelper new];
-            [helper pushOpenHSType:SelectAccoutTypeP2P Step:[UserInfoSingle sharedManager].openStatus nav:self.navigationController];
+            [helper pushOpenHSType:SelectAccoutTypeP2P Step:[UserInfoSingle sharedManager].openStatus nav:self.navigationController isPresentView:YES];
         }
     }else if (alertView.tag == 8010) {
         if (buttonIndex == 1) {
             HSHelper *helper = [HSHelper new];
-            [helper pushOpenHSType:SelectAccoutTypeHoner Step:[UserInfoSingle sharedManager].enjoyOpenStatus nav:self.navigationController];
+            [helper pushOpenHSType:SelectAccoutTypeHoner Step:[UserInfoSingle sharedManager].enjoyOpenStatus nav:self.navigationController isPresentView:YES];
         }
     }
 }

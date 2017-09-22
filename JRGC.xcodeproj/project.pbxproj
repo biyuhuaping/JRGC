@@ -5374,7 +5374,7 @@
 				83FCCA641F17114E002921C5 /* myGoldInvest(已购黄金) */,
 				835B887E1E821F5700C8F0AB /* P2PAndHonerAccout(P2P和尊享账户) */,
 				747BE9C91D5B0D15007DEF32 /* UCFHuiBuniessDetailViewController(徽商资金流水) */,
-				847103B61D59ACB200935B19 /* BankDepositoryAccount(微商银行存管专题页面) */,
+				847103B61D59ACB200935B19 /* BankDepositoryAccount(尊享和黄金授权页面) */,
 				74DBAC751D58645800F6F6B1 /* HuiBuinessBank(徽商银行) */,
 				E3A96B051CBF830400E8884F /* workpoints（工分） */,
 				840A793B1C2A7C160059A946 /* MessageCenter(消息中心) */,
@@ -6466,7 +6466,7 @@
 			path = MessageCenter;
 			sourceTree = "<group>";
 		};
-		847103B61D59ACB200935B19 /* BankDepositoryAccount(微商银行存管专题页面) */ = {
+		847103B61D59ACB200935B19 /* BankDepositoryAccount(尊享和黄金授权页面) */ = {
 			isa = PBXGroup;
 			children = (
 				83DAEFBF1F166A3B00D7948F /* UCFGoldAuthorizationViewController.h */,
@@ -6476,7 +6476,7 @@
 				847103B81D59AD7500935B19 /* UCFBankDepositoryAccountViewController.m */,
 				847103B91D59AD7500935B19 /* UCFBankDepositoryAccountViewController.xib */,
 			);
-			name = "BankDepositoryAccount(微商银行存管专题页面)";
+			name = "BankDepositoryAccount(尊享和黄金授权页面)";
 			path = BankDepositoryAccount;
 			sourceTree = "<group>";
 		};

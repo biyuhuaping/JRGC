@@ -18,4 +18,6 @@
 - (void)pushGoldAuthorizationType:(SelectAccoutType)type nav:(UINavigationController *)nav;//黄金授权
 - (void)pushGoldAuthorizationType:(SelectAccoutType)type nav:(UINavigationController *)nav sourceVC:(NSString *)soucreFrom;
 - (void)pushOpenHSType:(SelectAccoutType)type Step:(NSInteger)step nav:(UINavigationController *)nav;
+//isPrensentView 视图是否是模态出来的 默认是NO 
+- (void)pushOpenHSType:(SelectAccoutType)type Step:(NSInteger)step nav:(UINavigationController *)nav isPresentView:(BOOL)isPresent;
 @end

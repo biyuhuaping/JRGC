@@ -9,6 +9,7 @@
 #import "UCFGoldAuthorizationViewController.h"
 #import "UCFGoldRechargeViewController.h"
 #import "NSString+CJString.h"
+#import "AppDelegate.h"
 @interface UCFGoldAuthorizationViewController ()
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 - (IBAction)clickGoldAuthorizationBtn:(id)sender;
@@ -64,7 +65,18 @@
             [UserInfoSingle sharedManager].goldAuthorization = YES;
             [[NSUserDefaults standardUserDefaults] setBool:YES  forKey:GOldAUTHORIZATION];
             [[NSUserDefaults standardUserDefaults] synchronize];
-            if (![_sourceVc isEqualToString:@"GoldPurchaseVC"]) {
+            if ([_sourceVc isEqualToString:@"GoldPurchaseVC"]) {
+                [AuxiliaryFunc showToastMessage:@"授权成功" withView:self.view];
+                [self performSelector:@selector(popViewController) withObject:nil afterDelay:2.0f];
+
+            } else if([_sourceVc isEqualToString:@"UCFRechargeOrCashVC"])
+            {
+                [AuxiliaryFunc showToastMessage:@"授权成功" withView:self.view];
+                [self performSelector:@selector(popMineViewController) withObject:nil afterDelay:2.0f];
+            }
+            else //
+            {
+                
                 UCFGoldRechargeViewController *goldRecharge = [[UCFGoldRechargeViewController alloc] initWithNibName:@"UCFGoldRechargeViewController" bundle:nil];
                 goldRecharge.baseTitleText = @"充值";
                 goldRecharge.needToRechareStr = self.sourceVc;
@@ -75,11 +87,6 @@
                 NSMutableArray *navVCArray = [[NSMutableArray alloc] initWithArray:self.navigationController.viewControllers];
                 [navVCArray removeObjectAtIndex:navVCArray.count-2];
                 [self.navigationController setViewControllers:navVCArray animated:NO];
-            }
-            else //
-            {
-                [AuxiliaryFunc showToastMessage:@"授权成功" withView:self.view];
-                [self performSelector:@selector(popViewController) withObject:nil afterDelay:2.0f];
             }
             
         } else {
@@ -95,6 +102,15 @@
 }
 -(void)popViewController{
     [self.navigationController popViewControllerAnimated:YES];
+}
+-(void)popMineViewController
+{
+    AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+    [appDelegate.tabBarController dismissViewControllerAnimated:NO completion:^{
+        NSUInteger selectedIndex = appDelegate.tabBarController.selectedIndex;
+        UINavigationController *nav = [appDelegate.tabBarController.viewControllers objectAtIndex:selectedIndex];
+        [nav popToRootViewControllerAnimated:NO];
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

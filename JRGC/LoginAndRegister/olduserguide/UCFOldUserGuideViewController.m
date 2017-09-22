@@ -15,7 +15,7 @@
 #import "TradePasswordVC.h"     //设置交易密码
 #import "AccountWebView.h"      //开户成功web页
 #import "UINavigationController+FDFullscreenPopGesture.h"
-
+#import "AppDelegate.h"
 #define TITLEHEIGHT 44
 #define TITLEWIDTH  SCREEN_WIDTH/3
 #define IMAGEVIEWWIDTH 15
@@ -128,7 +128,14 @@
             
             if (self.isPresentViewController) {
                 //视图是弹出来的，那么要
-                [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+//                [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+                
+                AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+                [appDelegate.tabBarController dismissViewControllerAnimated:NO completion:^{
+                    NSUInteger selectedIndex = appDelegate.tabBarController.selectedIndex;
+                    UINavigationController *nav = [appDelegate.tabBarController.viewControllers objectAtIndex:selectedIndex];
+                    [nav popToRootViewControllerAnimated:NO];
+                }];
             }
             else {
                 [self.navigationController popViewControllerAnimated:YES];
