@@ -44,7 +44,7 @@
         version.subtitle = [NSString stringWithFormat:@"V%@", currentVersion];
         
         UCFSettingItem *netAddress = [UCFSettingArrowItem itemWithIcon:nil title:@"官方网站" destVcClass:nil];
-        netAddress.subtitle = @"www.9888keji.cn";
+        netAddress.subtitle = @"www.9888keji.com";
         
 //        UCFSettingItem *weixinNo = [UCFSettingArrowItem itemWithIcon:nil title:@"微信公众号" destVcClass:nil];
 //        weixinNo.subtitle = @"jrgc_p2p";
