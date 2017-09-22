@@ -38,6 +38,7 @@
 #import "MD5Util.h"
 #import "JPUSHService.h"//极光推送
 #import "MongoliaLayerCenter.h"
+#import "UCFInvestViewController.h"
 // iOS10注册APNs所需头文件
 #ifdef NSFoundationVersionNumber_iOS_9_x_Max
 #import <UserNotifications/UserNotifications.h>
@@ -156,10 +157,6 @@
         } else {
             _isShowAdversement = NO;
             self.advertisementView = nil;
-
-//            if (!self.lockVc) {
-//                [[MongoliaLayerCenter sharedManager] showLogic];
-//            }
         }
         //显示广告
         if (_isShowAdversement) {
@@ -816,11 +813,58 @@
         exit(0);
     }];
 }
+
 #pragma mark - 分享
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url options:(nonnull NSDictionary<NSString *, id> *) options {
+    NSString *urlStr = url.absoluteString;
+    if ([urlStr rangeOfString:@"jrgc://jrgc.com"].location != NSNotFound) {
+        NSString *selectedType = @"";
+        if ([urlStr rangeOfString:@"view=p2p"].location != NSNotFound) {
+            selectedType = @"P2P";
+            [self msgSkipToView:selectedType];
+        } else if ([urlStr rangeOfString:@"view=zx"].location != NSNotFound) {
+            selectedType = @"ZX";
+            [self msgSkipToView:selectedType];
+        } else if ([urlStr rangeOfString:@"view=gold"].location != NSNotFound) {
+            selectedType = @"Gold";
+            [self msgSkipToView:selectedType];
+        } else if ([urlStr rangeOfString:@"view=coupon"].location != NSNotFound) {
+            if ([UserInfoSingle sharedManager].userId) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"msgSkipToNativeAPP" object:@{@"type":@"coupon"}];
+            }
+        } else if ([urlStr rangeOfString:@"view=web&url="].location != NSNotFound) {
+            if ([UserInfoSingle sharedManager].userId) {
+                NSString *url1 = [Common paramValueOfUrl:urlStr withParam:@"url"];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"msgSkipToNativeAPP" object:
+                 @{@"type":@"webUrl",@"value":url1}];
+            }
+        }else if ([urlStr rangeOfString:@"view=reserve&id="].location != NSNotFound) {
+            if ([UserInfoSingle sharedManager].userId) {
+                NSString *bidID = [Common paramValueOfUrl:urlStr withParam:@"id"];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"msgSkipToNativeAPP" object: @{@"type":@"bidID",@"value":bidID}];
+            }
+        }
+    }
     return [UcfWalletSDK handleApplication:application openUrl:url options:options];
 }
+- (void)msgSkipToView:(NSString *)targetStr
+{
+    if ([targetStr isEqualToString:@"P2P"] || [targetStr isEqualToString:@"ZX"] || [targetStr isEqualToString:@"Gold"] ) {
+        if ([self.tabBarController.childViewControllers count] >1) {
+            UCFInvestViewController *invest = (UCFInvestViewController *)[[self.tabBarController.childViewControllers objectAtIndex:1].childViewControllers firstObject];
+            invest.selectedType = targetStr;
+            if ([invest isViewLoaded]) {
+                [invest changeView];
+            }
+            UINavigationController *nav = self.tabBarController.selectedViewController;
+            [nav popToRootViewControllerAnimated:NO];
+            [self.tabBarController setSelectedIndex:1];
+        }
+    } else {
+        
+    }
 
+}
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
 {
     if ([[UMSocialManager defaultManager] handleOpenURL:url]) {
@@ -830,13 +874,13 @@
 //     || [UcfWalletSDK handleApplication:application openUrl:url]
 }
 
-//- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
-//{
-//    if ([Growing handleUrl:url]) {
-//        return [Growing handleUrl:url];
-//    }else
-//        return [[UMSocialManager defaultManager] handleOpenURL:url];
-//}
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    if ([Growing handleUrl:url]) {
+        return [Growing handleUrl:url];
+    }else
+        return [[UMSocialManager defaultManager] handleOpenURL:url];
+}
 
 #pragma mark- --------------------极光推送---------------------------
 

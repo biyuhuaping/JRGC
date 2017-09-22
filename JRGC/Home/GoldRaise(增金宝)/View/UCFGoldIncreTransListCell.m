@@ -90,34 +90,40 @@
         self.contractButton.hidden = YES;
         if (self.indexPath.row == 1) {
             self.secondLabel.text = self.model.tradeTime;
-            if ([self.model.orderTypeName isEqualToString:@"购买活期"]) {
+            if ([self.model.orderTypeCode isEqualToString:@"01"]) {
                 self.firstLabel.text = @"成交日期";
             }
-            else if ([self.model.orderTypeName isEqualToString:@"定期转活期"]) {
-                self.firstLabel.text = @"转存日期";
+            else if ([self.model.orderTypeCode isEqualToString:@"02"]) {
+                self.firstLabel.text = @"购买日期";
             }
-            else {
+            else if ([self.model.orderTypeCode isEqualToString:@"03"]){
+                self.firstLabel.text = @"转入日期";
+            }
+            else if ([self.model.orderTypeCode isEqualToString:@"04"]){
                 self.firstLabel.text = @"返金日期";
             }
         }
         else if (self.indexPath.row == 2) {
             self.secondLabel.text = [NSString stringWithFormat:@"%@元/克", self.model.dealGoldPrice];
-            if ([self.model.orderTypeName isEqualToString:@"购买活期"]) {
+            if ([self.model.orderTypeCode isEqualToString:@"01"]) {
                 self.firstLabel.text = @"成交金价";
-            }
-            else {
+            } else if ([self.model.orderTypeCode isEqualToString:@"02"]) {
+                self.firstLabel.text = @"购买金价";
+            } else if ([self.model.orderTypeCode isEqualToString:@"03"]) {
+                self.firstLabel.text = @"转入金价";
+            } else {
                 self.firstLabel.text = @"转入金价";
             }
         }
         else if (self.indexPath.row == 3) {
             self.secondLabel.text = [NSString stringWithFormat:@"%@克", self.model.tradeAmount];
-            if ([self.model.orderTypeName isEqualToString:@"购买活期"]) {
+            if ([self.model.orderTypeCode isEqualToString:@"01"]) {
                 self.firstLabel.text = @"购买克重";
-            }
-            else if ([self.model.orderTypeName isEqualToString:@"定期转活期"]) {
-                self.firstLabel.text = @"转存克重";
-            }
-            else {
+            } else if ([self.model.orderTypeCode isEqualToString:@"02"]) {
+                self.firstLabel.text = @"购买克重";
+            } else if ([self.model.orderTypeCode isEqualToString:@"03"]) {
+                self.firstLabel.text = @"转入克重";
+            } else {
                 self.firstLabel.text = @"返金克重";
             }
         }

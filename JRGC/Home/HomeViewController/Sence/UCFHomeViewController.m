@@ -108,6 +108,8 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(responds3DTouchClick) name:@"responds3DTouchClick" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setDefaultState:) name:@"setDefaultViewData" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUI:) name:@"refreshUserState" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(msgSkipToNativeAPP:) name:@"msgSkipToNativeAPP" object:nil];
+
     }
     return self;
 }
@@ -230,13 +232,43 @@
     }
 
 }
+
+- (void)msgSkipToNativeAPP:(NSNotification *)noti
+{
+    NSDictionary *dic = (NSDictionary *)noti.object;
+    if ([dic[@"type"] isEqualToString:@"coupon"]) {
+        UCFCouponViewController *coupon = [[UCFCouponViewController alloc] initWithNibName:@"UCFCouponViewController" bundle:nil];
+        AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        UINavigationController *nav = app.tabBarController.selectedViewController;
+        [nav pushViewController:coupon animated:YES];
+    } else if ([dic[@"type"] isEqualToString:@"webUrl"]){
+        UCFWebViewJavascriptBridgeMallDetails *web = [[UCFWebViewJavascriptBridgeMallDetails alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMallDetails" bundle:nil];
+        NSString *decodeURL = [dic[@"value"] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        web.url = decodeURL;
+        web.isHidenNavigationbar = YES;
+        AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        UINavigationController *nav = app.tabBarController.selectedViewController;
+        [nav pushViewController:web animated:YES];
+    } else if ([dic[@"type"] isEqualToString:@"bidID"]){
+        if ([UserInfoSingle sharedManager].openStatus > 3) {
+            UCFFacReservedViewController *facReservedWeb = [[UCFFacReservedViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
+            facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@", PRERESERVE_URL, dic[@"value"]];
+            facReservedWeb.navTitle = @"工场预约";
+            AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+            UINavigationController *nav = app.tabBarController.selectedViewController;
+            [nav pushViewController:facReservedWeb animated:YES];
+        }
+
+    }
+}
 #pragma mark -----------------------------------
 
 #pragma mark - configuration 设置
 - (void)configuration
 {
     self.navigationController.navigationBar.hidden = YES;
-    
+
+
     UCFHomeListNavView *navView = [[UCFHomeListNavView alloc] initWithFrame:CGRectZero];
     navView.delegate = self;
     [self.view addSubview:navView];
@@ -277,6 +309,13 @@
     }
     self.navView.frame = CGRectMake(0, 0, self.view.width, 64);
     [self.view bringSubviewToFront:self.navView];
+#ifdef __IPHONE_11_0
+    if (@available(iOS 11.0, *)) {
+        self.homeListVC.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    } else {
+        // Fallback on earlier versions
+    }
+#endif
 }
 
 #pragma mark - homelistVC的代理方法
