@@ -7,7 +7,7 @@
 //  开户成功web页
 
 #import "AccountWebView.h"
-
+#import "AppDelegate.h"
 @interface AccountWebView ()
 
 @end
@@ -39,7 +39,13 @@
 {
     if (self.isPresentViewController)
     {
-        [self dismissViewControllerAnimated:YES completion:nil];
+//        [self dismissViewControllerAnimated:YES completion:nil];
+        AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+        [appDelegate.tabBarController dismissViewControllerAnimated:NO completion:^{
+            NSUInteger selectedIndex = appDelegate.tabBarController.selectedIndex;
+            UINavigationController *nav = [appDelegate.tabBarController.viewControllers objectAtIndex:selectedIndex];
+            [nav popToRootViewControllerAnimated:NO];
+        }];
     }
     else
     {
