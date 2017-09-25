@@ -192,11 +192,12 @@
                 [self.selectedDayDatas addObject:group];
             }
             if (self.selectedDayDatas.count == 0) {
-                UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
-                UCFNoDataView *noDataView = [[UCFNoDataView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 200) errorTitle:@"本日无回款项目"];
+                UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 200)];
+                UCFNoDataView *noDataView = [[UCFNoDataView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 200) errorTitle:@"暂无数据"];
+                [footView addSubview:noDataView];
                 self.tableview.tableFooterView = footView;
             } else {
-                
+                self.tableview.tableFooterView = nil;
             }
             [self.tableview reloadData];
         }

@@ -58,7 +58,7 @@
 @property (assign, nonatomic) BOOL isCompanyAgent;//是否是机构用户
 
 @property (nonatomic,assign)int sex;//性别
-
+@property (nonatomic, copy) NSString *userCenterTicket;
 @end
 
 @implementation UCFSecurityCenterViewController
@@ -119,12 +119,25 @@
     [self reloadUI];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 }
-
+- (void)addRightButtonWithName:(NSString *)rightButtonName
+{
+    UIButton *rightbutton = [UIButton buttonWithType:UIButtonTypeCustom];
+    rightbutton.frame = CGRectMake(0, 0, 66, 44);
+    rightbutton.backgroundColor = [UIColor clearColor];
+    [rightbutton setTitle:rightButtonName forState:UIControlStateNormal];
+    rightbutton.titleLabel.font = [UIFont systemFontOfSize:15.0];
+    [rightbutton addTarget:self action:@selector(clickRightBtn) forControlEvents:UIControlEventTouchUpInside];
+    [rightbutton setTitleColor:UIColorWithRGB(0x333333) forState:UIControlStateNormal];
+    [rightbutton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
+    
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightbutton];
+    self.navigationItem.rightBarButtonItem = rightItem;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self addLeftButton];
-    [self addRightButtonWithImage:[UIImage imageNamed:@"ic_step_one"]];
+    [self addRightButtonWithName:@"每日签到"];
 
     baseTitleLabel.text =  [[NSUserDefaults standardUserDefaults] boolForKey: @"isCompanyAgentType" ]  ? @"企业信息" : @"个人信息";
     self.tableview.contentInset = UIEdgeInsetsMake(10, 0, 0, 0);
@@ -173,9 +186,9 @@
 }
 - (void)clickRightBtn
 {
-//    if ([[NSUserDefaults standardUserDefaults] objectForKey:UUID]) {
-//        [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":userId, @"apptzticket":token} tag:kSXTagSingMenthod owner:self signature:YES Type:SelectAccoutDefault];
-//    }
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:UUID]) {
+        [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":[[NSUserDefaults standardUserDefaults] objectForKey:UUID], @"apptzticket":self.userCenterTicket} tag:kSXTagSingMenthod owner:self signature:YES Type:SelectAccoutDefault];
+    }
 }
 #pragma mark alertViewDelegate
 
@@ -277,6 +290,7 @@
         
         if (ret) {
             NSDictionary *result = dic[@"data"][@"data"];
+            self.userCenterTicket = dic[@"data"][@"userCenterTicket"];
             UCFSettingGroup *group = [self.itemsData firstObject];
             NSString *memberLever = [result objectSafeForKey:@"memberLever"];
             NSString *authId = [result objectSafeForKey:@"state"];
@@ -365,7 +379,7 @@
             [self.tableview reloadData];
         }
     } else if (tag.intValue == kSXTagSingMenthod) {
-        if (dic[@"ret"]) {
+        if ([dic[@"ret"] boolValue]) {
             NSDictionary *data = [dic objectForKey:@"data"];
             UCFSignModel *signModel = [UCFSignModel signWithDict:data];
             MjAlertView *alert = [[MjAlertView alloc] initRedBagAlertViewWithBlock:^(id blockContent) {
