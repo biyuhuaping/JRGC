@@ -31,7 +31,7 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Bhc-vb-crQ">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="list_icon_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="Bhc-vb-crQ">
                         <rect key="frame" x="297" y="21.5" width="8" height="15"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="15" id="gFW-wl-Z7m"/>
@@ -72,6 +72,15 @@
                     <constraint firstItem="y6a-p6-tbn" firstAttribute="leading" secondItem="9Sp-iq-SAD" secondAttribute="trailing" constant="4" id="zuD-ba-gLh"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="describeLabel" destination="wR3-6A-72i" id="OIj-RE-5wb"/>
+                <outlet property="iconImageView" destination="N2E-vW-8nt" id="3UZ-EV-nbN"/>
+                <outlet property="titleDesLabel" destination="CKv-91-G47" id="vnm-4a-VET"/>
+                <outlet property="valueLabel" destination="y6a-p6-tbn" id="BOA-bh-fW4"/>
+            </connections>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="list_icon_arrow" width="8" height="13"/>
+    </resources>
 </document>

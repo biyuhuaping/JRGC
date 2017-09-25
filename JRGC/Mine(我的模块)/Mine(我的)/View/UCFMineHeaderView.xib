@@ -18,7 +18,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fN5-l9-Wfa">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="140"/>
                     <subviews>
-                        <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SLE-EJ-K6v">
+                        <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user_bg" translatesAutoresizingMaskIntoConstraints="NO" id="SLE-EJ-K6v">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="140"/>
                         </imageView>
                         <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="password_icon_head" translatesAutoresizingMaskIntoConstraints="NO" id="AP8-6p-eqr">
@@ -37,8 +37,8 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LMW-Os-8EJ">
                             <rect key="frame" x="106" y="35.5" width="32" height="14"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VIP1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o32-qT-sib">
-                                    <rect key="frame" x="5" y="2" width="22" height="10"/>
+                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VIP1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o32-qT-sib">
+                                    <rect key="frame" x="4" y="2" width="24" height="10"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
@@ -47,8 +47,8 @@
                             <color key="backgroundColor" red="1" green="0.6588235294117647" blue="0.066666666666666666" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="bottom" secondItem="o32-qT-sib" secondAttribute="bottom" constant="2" id="4Lh-go-Ib5"/>
-                                <constraint firstAttribute="trailing" secondItem="o32-qT-sib" secondAttribute="trailing" constant="5" id="K0j-7W-d8R"/>
-                                <constraint firstItem="o32-qT-sib" firstAttribute="leading" secondItem="LMW-Os-8EJ" secondAttribute="leading" constant="5" id="dPX-ug-Fov"/>
+                                <constraint firstAttribute="trailing" secondItem="o32-qT-sib" secondAttribute="trailing" constant="4" id="K0j-7W-d8R"/>
+                                <constraint firstItem="o32-qT-sib" firstAttribute="leading" secondItem="LMW-Os-8EJ" secondAttribute="leading" constant="4" id="dPX-ug-Fov"/>
                                 <constraint firstAttribute="height" constant="14" id="fYd-e3-OKG"/>
                                 <constraint firstAttribute="width" constant="32" id="iqE-jW-fMo"/>
                                 <constraint firstItem="o32-qT-sib" firstAttribute="top" secondItem="LMW-Os-8EJ" secondAttribute="top" constant="2" id="nb8-oD-9nZ"/>
@@ -68,13 +68,17 @@
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EeI-2B-fjS">
-                                    <rect key="frame" x="63" y="19" width="30" height="30"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EeI-2B-fjS">
+                                    <rect key="frame" x="63" y="19.5" width="30" height="30"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="30" id="1Lb-Ab-6nl"/>
                                         <constraint firstAttribute="height" constant="30" id="m5W-if-ERd"/>
                                     </constraints>
-                                    <state key="normal" title="Button"/>
+                                    <state key="normal" image="account_invisible"/>
+                                    <state key="selected" image="account_visible"/>
+                                    <connections>
+                                        <action selector="visible:" destination="iN0-l3-epB" eventType="touchUpInside" id="L9c-pZ-x7D"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -114,14 +118,27 @@
                                 <constraint firstItem="QwP-hd-S6Q" firstAttribute="leading" secondItem="f6f-4Y-HYP" secondAttribute="leading" constant="15" id="zcJ-sb-iz8"/>
                             </constraints>
                         </view>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oj3-cp-N6C">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oj3-cp-N6C">
                             <rect key="frame" x="335" y="30.5" width="25" height="25"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="25" id="HQv-YO-aSw"/>
                                 <constraint firstAttribute="width" constant="25" id="mgs-eu-9Bd"/>
                             </constraints>
-                            <state key="normal" title="B"/>
+                            <state key="normal" image="uesr_icon_message"/>
                         </button>
+                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6aV-C1-P2a">
+                            <rect key="frame" x="356" y="30.5" width="8" height="8"/>
+                            <color key="backgroundColor" red="0.99215686274509807" green="0.30196078431372547" blue="0.29803921568627451" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="8" id="SNn-uN-RMO"/>
+                                <constraint firstAttribute="width" constant="8" id="kQF-jK-aLm"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="4"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
@@ -141,7 +158,9 @@
                         <constraint firstAttribute="trailing" secondItem="Oj3-cp-N6C" secondAttribute="trailing" constant="15" id="Q8F-8p-nbD"/>
                         <constraint firstItem="AP8-6p-eqr" firstAttribute="leading" secondItem="fN5-l9-Wfa" secondAttribute="leading" constant="14" id="Zsr-fP-KFw"/>
                         <constraint firstItem="f6f-4Y-HYP" firstAttribute="height" secondItem="oqc-dA-H4c" secondAttribute="height" id="dUa-g4-XLZ"/>
+                        <constraint firstItem="6aV-C1-P2a" firstAttribute="top" secondItem="Oj3-cp-N6C" secondAttribute="top" id="fcJ-uX-bNq"/>
                         <constraint firstAttribute="trailing" secondItem="SLE-EJ-K6v" secondAttribute="trailing" id="h5n-9Y-dm2"/>
+                        <constraint firstItem="6aV-C1-P2a" firstAttribute="trailing" secondItem="Oj3-cp-N6C" secondAttribute="trailing" constant="4" id="hkA-s9-6Ph"/>
                         <constraint firstAttribute="bottom" secondItem="f6f-4Y-HYP" secondAttribute="bottom" id="kMj-Fl-RTK"/>
                         <constraint firstItem="oqc-dA-H4c" firstAttribute="leading" secondItem="fN5-l9-Wfa" secondAttribute="leading" id="nEg-Ak-PDf"/>
                         <constraint firstItem="f6f-4Y-HYP" firstAttribute="leading" secondItem="oqc-dA-H4c" secondAttribute="trailing" id="peK-RH-LvF"/>
@@ -245,12 +264,24 @@
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="addedProfitLabel" destination="4o0-1M-7kA" id="HSy-9w-UoU"/>
+                <outlet property="memberLevelView" destination="LMW-Os-8EJ" id="29I-SO-MV4"/>
+                <outlet property="messageDotView" destination="6aV-C1-P2a" id="tAm-MJ-7Kf"/>
+                <outlet property="totalAssetLabel" destination="qhF-TW-Gp4" id="CqI-Bh-fC9"/>
+                <outlet property="totalBalanceLabel" destination="3YV-6Q-jZV" id="zZf-bm-Ynb"/>
                 <outlet property="userIconImageView" destination="AP8-6p-eqr" id="Tnc-t2-hFl"/>
+                <outlet property="userLevelLabel" destination="o32-qT-sib" id="qyB-7q-oCJ"/>
+                <outlet property="userNameLabel" destination="w0g-QB-oaQ" id="nJD-X8-AV9"/>
+                <outlet property="visibleButton" destination="EeI-2B-fjS" id="nya-mL-abU"/>
             </connections>
             <point key="canvasLocation" x="37.5" y="127"/>
         </view>
     </objects>
     <resources>
+        <image name="account_invisible" width="25" height="25"/>
+        <image name="account_visible" width="25" height="25"/>
         <image name="password_icon_head" width="80" height="80"/>
+        <image name="uesr_icon_message" width="25" height="25"/>
+        <image name="user_bg" width="375" height="135"/>
     </resources>
 </document>
