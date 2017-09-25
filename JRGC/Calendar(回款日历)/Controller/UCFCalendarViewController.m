@@ -19,6 +19,8 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (strong, nonatomic) NSMutableArray *selectedDayDatas;
 @property (weak, nonatomic) UCFPickView *pickerView;
+@property (copy, nonatomic) NSString *currentDay;
+@property (strong, nonatomic)UCFCalendarDetailHeaderView * headerView;
 @end
 
 @implementation UCFCalendarViewController
@@ -36,7 +38,11 @@
 //  初始化界面
     [self createUI];
 }
-
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    self.tableview.tableHeaderView.frame =  CGRectMake(0, 0, ScreenWidth, [UCFCalendarHeaderView viewHeight]);
+}
 #pragma mark - 初始化界面
 - (void)createUI {
     baseTitleLabel.text = @"回款日历";
@@ -50,6 +56,7 @@
     calendarHeaderView.accoutType = self.accoutType;
     calendarHeaderView.delegate = self;
     self.calendarHeader = calendarHeaderView;
+
     
     UCFPickView *pickerView = (UCFPickView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFPickView" owner:self options:nil] lastObject];
     pickerView.frame = self.view.bounds;
@@ -63,28 +70,30 @@
 #pragma mark - tableView的数据源方法
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    if (!self.selectedDayDatas.count && self.calendarHeader.currentDayLabel.text.length>0) {
-        return 1;
-    }
-    else
-        return self.selectedDayDatas.count;
+//    if (!self.selectedDayDatas.count && self.calendarHeader.currentDayLabel.text.length>0) {
+//        return 1;
+//    }
+//    else
+//        return self.selectedDayDatas.count;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (!self.selectedDayDatas.count) {
-        return 0;
-    }
-    UCFCalendarGroup *group = [self.selectedDayDatas objectAtIndex:section];
-    if (group.isOpened) {
-        if ([group.status intValue] == 0) {
-            return 2;
-        }
-        else
-            return 3;
-    }
-    else
-        return 0;
+//    if (!self.selectedDayDatas.count) {
+//        return 0;
+//    }
+//    UCFCalendarGroup *group = [self.selectedDayDatas objectAtIndex:section];
+//    if (group.isOpened) {
+//        if ([group.status intValue] == 0) {
+//            return 2;
+//        }
+//        else
+//            return 3;
+//    }
+//    else
+//        return 0;
+    return self.selectedDayDatas.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -95,47 +104,44 @@
         cell = (UCFCalendarDayCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFCalendarDayCell" owner:self options:nil] lastObject];
         cell.tableview = tableView;
     }
-    cell.indexPath = indexPath;
-    cell.group = [self.selectedDayDatas objectAtIndex:indexPath.section];
+//    cell.indexPath = indexPath;
+//    cell.group = [self.selectedDayDatas objectAtIndex:indexPath.section];
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 27;
+    return 154;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    if (!self.selectedDayDatas.count) {
-        return 200;
-    }
-    return 73;
+//    if (!self.selectedDayDatas.count) {
+//        return 200;
+//    }
+//    return 73;
+    return 54;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    return 10;
+    return 0.01;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UCFCalendarDetailHeaderView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"calendarDetailHeader"];
-    if (nil == headerView) {
-        headerView = (UCFCalendarDetailHeaderView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFCalendarDetailHeaderView" owner:self options:nil] lastObject];
-        headerView.contentView.backgroundColor = [UIColor whiteColor];
-        headerView.delegate = self;
+//    UCFCalendarDetailHeaderView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"calendarDetailHeader"];
+    if (!_headerView) {
+        self.headerView = (UCFCalendarDetailHeaderView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFCalendarDetailHeaderView" owner:self options:nil] lastObject];
+        _headerView.delegate = self;
+        [_headerView setSelectButtonIndex:0];
     }
-    if (self.selectedDayDatas.count>0) {
-        headerView.group = [self.selectedDayDatas objectAtIndex:section];
-    }
-    
-    return headerView;
+    return _headerView;
 }
 
 - (void)calendarDetailHeaderView:(UCFCalendarDetailHeaderView *)calendarDetailHeader didClicked:(UIButton *)button
 {
-    [self.tableview reloadData];
+    [self getCurrentDayInfoFromNetWithDay:self.currentDay];
 }
 
 #pragma mark - 网络请求
@@ -171,6 +177,9 @@
             for (NSDictionary *dic in dataList) {
                 UCFCalendarGroup *group = [UCFCalendarGroup groupWithDict:dic];
                 [self.selectedDayDatas addObject:group];
+            }
+            if (self.selectedDayDatas.count == 0) {
+                
             }
             [self.tableview reloadData];
         }
@@ -208,6 +217,7 @@
 #pragma mark - 请求当前日的信息
 - (void)getCurrentDayInfoFromNetWithDay:(NSString *)day
 {
+    self.currentDay = day;
     NSString *userId = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
     NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys:userId, @"userId", day, @"day", @"20", @"rows", @"1", @"page",  nil];
     [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagCurrentDayInfo owner:self signature:YES Type:self.accoutType];
