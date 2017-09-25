@@ -26,7 +26,7 @@
 #import "UILabel+Misc.h"
 #import "UCFFeedBackViewController.h"
 #import "UCFGoldRaiseViewController.h"
-
+#import "UCFInvestViewController.h"
 
 @interface UCFGoldAccountViewController ()<UITableViewDelegate,UITableViewDataSource, GoldAccountFirstCellDeleage,UCFGoldAccountHeadViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *baseTableView;
@@ -303,7 +303,14 @@
     NSString *showStr = @"";
     if ([title isEqualToString:@"买金"]) {
         [self.navigationController popToRootViewControllerAnimated:NO];
-        [_homeView skipToOtherPage:UCFHomeListTypeGlodMore];
+//        [_homeView skipToOtherPage:UCFHomeListTypeGlodMore];
+        AppDelegate *appdel = (AppDelegate *)[UIApplication sharedApplication].delegate;
+        UCFInvestViewController *invest = (UCFInvestViewController *)[[appdel.tabBarController.childViewControllers objectAtIndex:1].childViewControllers firstObject];
+        invest.selectedType = @"Gold";
+        if ([invest isViewLoaded]) {
+            [invest changeView];
+        }
+        [appdel.tabBarController setSelectedIndex:1];
         return;
     } else if ([title isEqualToString:@"变现"]) {
 //        showStr = @"暂时没有可变现的黄金";

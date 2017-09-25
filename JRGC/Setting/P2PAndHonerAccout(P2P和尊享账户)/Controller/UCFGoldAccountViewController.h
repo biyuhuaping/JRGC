@@ -7,8 +7,8 @@
 //
 
 #import "UCFBaseViewController.h"
-#import "UCFHomeViewController.h"
+#import "UCFMineViewController.h"
 
 @interface UCFGoldAccountViewController : UCFBaseViewController
-@property (nonatomic, assign) UCFHomeViewController *homeView;
+@property (nonatomic, assign) UCFMineViewController *homeView;
 @end

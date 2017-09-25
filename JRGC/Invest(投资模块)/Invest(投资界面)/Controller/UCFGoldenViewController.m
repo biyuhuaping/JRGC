@@ -139,9 +139,9 @@
     } else  {
         
         NSString *tipStr1 = ZXTIP1;
-        //        NSInteger openStatus = [UserInfoSingle sharedManager].openStatus ;
+        NSInteger openStatus = [UserInfoSingle sharedManager].openStatus ;
         NSInteger enjoyOpenStatus = [UserInfoSingle sharedManager].enjoyOpenStatus;
-        if (  enjoyOpenStatus < 3 ) {
+        if (  enjoyOpenStatus < 3  && openStatus < 3) {
             [self showHSAlert:tipStr1];
             return;
         }
@@ -235,20 +235,7 @@
         if (indexPath.section == 0) {//活期详情
             [self getGoldCurrentPrdClaimInfoHttpRequest:self.fliexGoldModel];
         }else{
-            
-            UCFRechargeOrCashViewController * rechargeCashVC = [[UCFRechargeOrCashViewController alloc]initWithNibName:@"UCFRechargeOrCashViewController" bundle:nil];
-            
-            UINavigationController *rechargeCashNavController = [[UINavigationController alloc] initWithRootViewController:rechargeCashVC];
-            AppDelegate * app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-            //    rechargeCashVC.view.center = app.window.center;
-            rechargeCashNavController.view.frame = app.window.bounds;
-            [app.window addSubview:rechargeCashNavController.view];
-            
-            return;
-            
-            
-            
-        
+
         UCFGoldModel *goldModel = [self.dataArray objectAtIndex:indexPath.row];
         
         NSString *nmProClaimIdStr = goldModel.nmPrdClaimId;
@@ -269,9 +256,9 @@
     } else  {
         
         NSString *tipStr1 = ZXTIP1;
-//        NSInteger openStatus = [UserInfoSingle sharedManager].openStatus ;
+        NSInteger openStatus = [UserInfoSingle sharedManager].openStatus ;
         NSInteger enjoyOpenStatus = [UserInfoSingle sharedManager].enjoyOpenStatus;
-        if (enjoyOpenStatus < 3 ) {//去开户页面
+        if (enjoyOpenStatus < 3 && openStatus < 3) {//去开户页面
             [self showHSAlert:tipStr1];
             return;
         }
@@ -290,55 +277,23 @@
 #pragma mark -活期详情页面数据请求
 -(void)getGoldCurrentPrdClaimInfoHttpRequest:(UCFGoldModel *)goldModel
 {
-    NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId",nil];
     
-    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagGetAccountBalanceList owner:self signature:YES Type:SelectAccoutDefault];
+    NSString *nmProClaimIdStr = goldModel.nmPrdClaimId;
     
+    NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId",nmProClaimIdStr, @"nmPrdClaimId",nil];
     
-//    UCFAccountPieCharViewController * accoutPieChartVC = [[UCFAccountPieCharViewController alloc]initWithNibName:@"UCFAccountPieCharViewController" bundle:nil];
-//    accoutPieChartVC.selectedSegmentIndex = 0 ;
-//    
-//    [self.navigationController pushViewController:accoutPieChartVC animated:YES];
-    
-    return;
-    
-//    NSString *nmProClaimIdStr = goldModel.nmPrdClaimId;
-//    
-//    NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId",nmProClaimIdStr, @"nmPrdClaimId",nil];
-//    
-//    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagGoldCurrentPrdClaimInfo owner:self signature:YES Type:SelectAccoutTypeGold];
+    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagGoldCurrentPrdClaimInfo owner:self signature:YES Type:SelectAccoutTypeGold];
 
 }
 #pragma mark -活期投资页面数据请求
 -(void)getGoldCurrentProClaimDetailHttpRequest:(UCFGoldModel *)goldModel
 {
     
-    NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId",nil];
+    NSString *nmProClaimIdStr = goldModel.nmPrdClaimId;
     
-    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagGetBindingBankCardList owner:self signature:YES Type:SelectAccoutDefault];
+    NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId",nmProClaimIdStr, @"nmPrdClaimId",nil];
     
-    
-//
-    
-    
-    
-    
-    
-    
-//    UINavigationController *rechargeCashNavController = [[UINavigationController alloc] initWithRootViewController:rechargeCashVC];
-//    AppDelegate * app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-//    //    rechargeCashVC.view.center = app.window.center;
-//    rechargeCashNavController.view.frame = app.window.bounds;
-//    [app.window addSubview:rechargeCashNavController.view];
-    
-    return;
-    
-    
-//    NSString *nmProClaimIdStr = goldModel.nmPrdClaimId;
-//    
-//    NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId",nmProClaimIdStr, @"nmPrdClaimId",nil];
-//    
-//    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagGoldCurrentProClaimDetail owner:self signature:YES Type:SelectAccoutTypeGold];
+    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagGoldCurrentProClaimDetail owner:self signature:YES Type:SelectAccoutTypeGold];
     
 }
 #pragma mark -去登录页面
@@ -513,49 +468,6 @@
                 [AuxiliaryFunc showAlertViewWithMessage:rsttext];
             }
             
-        }
-    }else if (tag.integerValue == kSXTagGetBindingBankCardList){//充值页面数据
-        
-        NSMutableDictionary *dic = [result objectFromJSONString];
-        NSString *rsttext = dic[@"message"];
-        NSDictionary *dataDict = [dic objectSafeDictionaryForKey:@"data"];
-        if ( [dic[@"ret"] boolValue])
-        {
-            UCFRechargeOrCashViewController * rechargeCashVC = [[UCFRechargeOrCashViewController alloc]initWithNibName:@"UCFRechargeOrCashViewController" bundle:nil];
-            rechargeCashVC.dataDict = dataDict;
-            rechargeCashVC.isRechargeOrCash = NO;
-                  UINavigationController *rechargeCashNavController = [[UINavigationController alloc] initWithRootViewController:rechargeCashVC];
-            rechargeCashNavController.modalPresentationStyle = UIModalPresentationOverFullScreen;
-            
-            [self presentViewController:rechargeCashNavController animated:NO completion:^{
-                }];
-        }
-        else
-        {
-            [AuxiliaryFunc showAlertViewWithMessage:rsttext];
-        }
-    }else if (tag.integerValue == kSXTagGetAccountBalanceList){//提现页面数据
-        
-        NSMutableDictionary *dic = [result objectFromJSONString];
-        NSString *rsttext = dic[@"message"];
-        NSDictionary *dataDict = [dic objectSafeDictionaryForKey:@"data"];
-        if ( [dic[@"ret"] boolValue])
-        {
-            UCFRechargeOrCashViewController * rechargeCashVC = [[UCFRechargeOrCashViewController alloc]initWithNibName:@"UCFRechargeOrCashViewController" bundle:nil];
-            rechargeCashVC.dataDict = dataDict;
-            rechargeCashVC.isRechargeOrCash = YES;
-            UINavigationController *rechargeCashNavController = [[UINavigationController alloc] initWithRootViewController:rechargeCashVC];
-            rechargeCashNavController.modalPresentationStyle = UIModalPresentationOverFullScreen;
-            
-            [self presentViewController:rechargeCashNavController animated:NO completion:^{
-                
-                
-            }];
-        }
-        else
-        {
-            
-            [AuxiliaryFunc showAlertViewWithMessage:rsttext];
         }
     }
     if ([self.tableview.header isRefreshing]) {
