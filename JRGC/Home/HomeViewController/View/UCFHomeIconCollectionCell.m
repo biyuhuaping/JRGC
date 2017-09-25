@@ -8,6 +8,7 @@
 
 #import "UCFHomeIconCollectionCell.h"
 #import "UCFHomeIconPresenter.h"
+#import "UIImageView+WebCache.h"
 
 @interface UCFHomeIconCollectionCell ()
 @property (weak, nonatomic) IBOutlet UIImageView *iconImageView;
@@ -26,6 +27,7 @@
 {
     _iconPresenter = iconPresenter;
     self.iconTitleLabel.text = iconPresenter.productName;
+    [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:iconPresenter.icon] placeholderImage:nil];
     
 }
 

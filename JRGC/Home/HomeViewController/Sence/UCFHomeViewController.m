@@ -49,6 +49,7 @@
 #import "UCFFacReservedViewController.h"
 #import "UCFBatchInvestmentViewController.h"
 #import "UCFGoldCashViewController.h"
+#import "UCFHomeIconPresenter.h"
 
 @interface UCFHomeViewController () <UCFHomeListViewControllerDelegate, UCFHomeListNavViewDelegate, UCFCycleImageViewControllerDelegate,BJGridItemDelegate, UIAlertViewDelegate>
 @property (strong, nonatomic) UCFCycleImageViewController *cycleImageVC;
@@ -867,13 +868,7 @@
 //    }];
     
     [self.homeListVC.presenter fetchHomeIconListDataWithCompletionHandler:^(NSError *error, id result) {
-        
-    }];
-    
-    [self.homeListVC.presenter fetchHomeListDataWithCompletionHandler:^(NSError *error, id result) {
-        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];//上层交互逻辑
-        if ([result isKindOfClass:[NSDictionary class]]) {
-            //请求成功
+        //请求成功
             if ([UserInfoSingle sharedManager].userId) {
                 NSString *siteNotice = [result objectForKey:@"siteNotice"];
                 NSString *originSiteNotice = [[NSUserDefaults standardUserDefaults] stringForKey:@"originSiteNotice"];
@@ -883,9 +878,9 @@
                         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isShowNotice"];
                         [[NSUserDefaults standardUserDefaults] synchronize];
                     }
-                    
+
                     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                        weakSelf.userInfoVC.noticeStr = siteNotice;
+                        weakSelf.cycleImageVC.noticeStr = siteNotice;
                         [weakSelf refreshNotice];
                     });
                 }
@@ -895,6 +890,12 @@
                     [weakSelf refreshNotice];
                 }
             }
+    }];
+    
+    [self.homeListVC.presenter fetchHomeListDataWithCompletionHandler:^(NSError *error, id result) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];//上层交互逻辑
+        if ([result isKindOfClass:[NSDictionary class]]) {
+            
         }
         else if ([result isKindOfClass:[NSString class]]) {
             [AuxiliaryFunc showToastMessage:result withView:weakSelf.view];
@@ -906,16 +907,16 @@
 - (void)refreshNotice
 {
     BOOL isShowNotice = [[NSUserDefaults standardUserDefaults] boolForKey:@"isShowNotice"];
-    CGFloat userInfoViewHeight = [UCFUserInformationViewController viewHeight];
+    CGFloat userInfoViewHeight = [UCFCycleImageViewController viewHeight];
     if (isShowNotice) {
-        self.userInfoVC.view.frame = CGRectMake(0, 0, ScreenWidth, userInfoViewHeight+35);
-        [self.userInfoVC refreshNotice];
+        self.cycleImageVC.view.frame = CGRectMake(0, 0, ScreenWidth, userInfoViewHeight+45);
+        [self.cycleImageVC refreshNotice];
     }
     else {
-        self.userInfoVC.view.frame = CGRectMake(0, 0, ScreenWidth, userInfoViewHeight);
-        [self.userInfoVC refreshNotice];
+        self.cycleImageVC.view.frame = CGRectMake(0, 0, ScreenWidth, userInfoViewHeight);
+        [self.cycleImageVC refreshNotice];
     }
-    self.homeListVC.tableView.tableHeaderView = self.userInfoVC.view;
+    self.homeListVC.tableView.tableHeaderView = self.cycleImageVC.view;
 }
 
 #pragma mark - userInfoVC 的代理方法
@@ -947,7 +948,28 @@
 
 - (void)cycleImageVC:(UCFCycleImageViewController *)cycleImageVC didClickedIconWithIconPresenter:(UCFHomeIconPresenter *)iconPresenter
 {
-    
+    AppDelegate *appdel = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    UCFInvestViewController *invest = (UCFInvestViewController *)[[appdel.tabBarController.childViewControllers objectAtIndex:1].childViewControllers firstObject];
+    switch (iconPresenter.type) {
+            
+        case 1:
+            invest.selectedType = @"P2P";
+            break;
+        case 2:
+            invest.selectedType = @"ZX";
+            break;
+        case 3:
+            invest.selectedType = @"Gold";
+            break;
+        case 4:
+            invest.selectedType = @"Trans";
+            break;
+            
+    }
+    if ([invest isViewLoaded]) {
+        [invest changeView];
+    }
+    [appdel.tabBarController setSelectedIndex:1];
 }
 
 //- (void)userInfoClickAssetDetailButton:(UIButton *)button withInfomation:(id)infomation

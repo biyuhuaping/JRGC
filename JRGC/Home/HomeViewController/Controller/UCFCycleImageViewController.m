@@ -22,8 +22,8 @@
 @property (weak, nonatomic) IBOutlet UIView *homeIconBackView;
 @property (weak, nonatomic) IBOutlet UIView *noticeBackView;
 @property (weak, nonatomic) UCFNoticeView *noticeView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *noticeBackviewH;
 @property (weak, nonatomic) IBOutlet UICollectionView *iconCollectionView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *noticeBackViewHeight;
 
 @end
 
@@ -54,6 +54,11 @@ static NSString *cellId = @"iconCell";
     [self.iconCollectionView registerNib:[UINib nibWithNibName:@"UCFHomeIconCollectionCell" bundle:nil] forCellWithReuseIdentifier:cellId];
     
     [self getNormalBannerData];
+}
+
+- (void)noticeView:(UCFNoticeView *)noticeView didClickedNotice:(NSString *)noticeStr
+{
+    
 }
 
 #pragma mark ---- UICollectionViewDataSource
@@ -184,6 +189,19 @@ static NSString *cellId = @"iconCell";
             [weakSelf.cycleImageView refreshImage];
         });
     });
+}
+
+- (void)setNoticeStr:(NSString *)noticeStr
+{
+    _noticeStr = noticeStr;
+    _noticeView.noticeLabell.text = noticeStr;
+}
+
+#pragma mark - 刷新公告
+- (void)refreshNotice
+{
+    BOOL isShowNotice = [[NSUserDefaults standardUserDefaults] boolForKey:@"isShowNotice"];
+    self.noticeBackViewHeight.constant = isShowNotice ? 45 : 0;
 }
 
 @end
