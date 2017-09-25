@@ -150,6 +150,12 @@
     [self addDragBtn];
 }
 
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+//    self.cycleImageVC.view.frame = CGRectMake(0, 0, ScreenWidth, 260);
+}
+
 #pragma mark Dragbtn
 - (void)addDragBtn
 {
@@ -273,10 +279,6 @@
     navView.delegate = self;
     [self.view addSubview:navView];
     self.navView = navView;
-    
-//    UCFUserPresenter *userPresenter = [UCFUserPresenter presenter];
-    
-    
     
     UCFHomeListPresenter *listViewPresenter = [UCFHomeListPresenter presenter];
     self.cycleImageVC = [UCFCycleImageViewController instanceWithPresenter:listViewPresenter];

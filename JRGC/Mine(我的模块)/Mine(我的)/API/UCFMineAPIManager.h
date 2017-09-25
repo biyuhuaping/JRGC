@@ -11,7 +11,10 @@
 @class UCFMineAPIManager;
 @protocol UCFMineAPIManagerDelegate <NSObject>
 
-- (void)investApiManager:(UCFMineAPIManager *)apiManager didSuccessedReturnAssetResult:(id)result withTag:(NSUInteger)tag;
+- (void)mineApiManager:(UCFMineAPIManager *)apiManager didSuccessedReturnAssetResult:(id)result withTag:(NSUInteger)tag;
+
+
+- (void)mineApiManager:(UCFMineAPIManager *)apiManager didSuccessedReturnBenefitResult:(id)result withTag:(NSUInteger)tag;
 
 @end
 
@@ -19,4 +22,5 @@
 @property (weak, nonatomic) id<UCFMineAPIManagerDelegate> delegate;
 
 - (void)getAssetFromNet;
+- (void)getBenefitFromNet;
 @end

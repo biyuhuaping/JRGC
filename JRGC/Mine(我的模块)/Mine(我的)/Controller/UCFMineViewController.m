@@ -14,10 +14,18 @@
 #import "UCFSecurityCenterViewController.h"
 #import "UCFLoginBaseView.h"
 #import "UCFCalendarViewController.h"
-@interface UCFMineViewController () <UITableViewDelegate, UITableViewDataSource, UCFMineHeaderViewDelegate, UCFMineFuncCellDelegate>
+#import "UCFMineAPIManager.h"
+#import "UCFUserAssetModel.h"
+#import "UCFUserBenefitModel.h"
+
+@interface UCFMineViewController () <UITableViewDelegate, UITableViewDataSource, UCFMineHeaderViewDelegate, UCFMineFuncCellDelegate, UCFMineAPIManagerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) UCFMineHeaderView   *mineHeaderView;
 @property (strong, nonatomic) UCFLoginBaseView  *loginView;
+@property (strong, nonatomic) UCFMineAPIManager *apiManager;
+
+@property (strong, nonatomic) UCFUserBenefitModel *benefitModel;
+@property (strong, nonatomic) UCFUserAssetModel *assetModel;
 @end
 
 @implementation UCFMineViewController
@@ -48,6 +56,10 @@
     [super viewDidLoad];
     
     [self createUI];
+    
+    [self configure];
+    
+    [self.tableView addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(refreshData)];
 }
 
 - (void)viewDidLayoutSubviews
@@ -63,12 +75,57 @@
     mineHeader.delegate = self;
     self.tableView.tableHeaderView = mineHeader;
     self.mineHeaderView = mineHeader;
+    
+    
+}
+
+- (void)refreshData {
+    [self.apiManager getAssetFromNet];
+    [self.apiManager getBenefitFromNet];
+}
+
+- (void)configure {
+    UCFMineAPIManager *apiManager = [[UCFMineAPIManager alloc] init];
+    apiManager.delegate = self;
+    self.apiManager = apiManager;
+    [self.apiManager getAssetFromNet];
+    [self.apiManager getBenefitFromNet];
+}
+
+- (void)mineApiManager:(UCFMineAPIManager *)apiManager didSuccessedReturnAssetResult:(id)result withTag:(NSUInteger)tag
+{
+    [self.tableView.header endRefreshing];
+    if ([result isKindOfClass:[UCFUserAssetModel class]]) {
+        self.assetModel = result;
+        [self.tableView reloadData];
+        self.mineHeaderView.userAssetModel = result;
+    }
+}
+
+- (void)mineApiManager:(UCFMineAPIManager *)apiManager didSuccessedReturnBenefitResult:(id)result withTag:(NSUInteger)tag
+{
+    [self.tableView.header endRefreshing];
+    if ([result isKindOfClass:[UCFUserBenefitModel class]]) {
+        self.benefitModel = result;
+        [self.tableView reloadData];
+        self.mineHeaderView.userBenefitModel = result;
+    }
 }
 
 #pragma mark - tableView 的代理方法
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 3;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 0.001;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 10.f;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -94,6 +151,24 @@
         if (nil == cell) {
             cell = (UCFMineCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFMineCell" owner:self options:nil] lastObject];
         }
+        if (indexPath.row == 0) {
+            cell.iconImageView.image = [UIImage imageNamed:@"uesr_icon_wj"];
+            cell.titleDesLabel.text = @"微金账户";
+            cell.valueLabel.text = self.assetModel.p2pCashBalance.length > 0 ? [NSString stringWithFormat:@"¥%@", self.assetModel.p2pCashBalance] : [NSString stringWithFormat:@"¥0.00"];
+            cell.describeLabel.text = self.benefitModel.repayPerDateWJ.length > 0 ? [NSString stringWithFormat:@"最近回款日%@", self.benefitModel.repayPerDateWJ] : @"最近无回款";
+        }
+        else if (indexPath.row == 1) {
+            cell.iconImageView.image = [UIImage imageNamed:@"uesr_icon_zx"];
+            cell.titleDesLabel.text = @"尊享账户";
+            cell.valueLabel.text = self.assetModel.zxCashBalance.length > 0 ? [NSString stringWithFormat:@"¥%@", self.assetModel.zxCashBalance] : [NSString stringWithFormat:@"¥0.00"];
+            cell.describeLabel.text = self.benefitModel.repayPerDateZX.length > 0 ? [NSString stringWithFormat:@"最近回款日%@", self.benefitModel.repayPerDateZX] : @"最近无回款";
+        }
+        else if (indexPath.row == 2) {
+            cell.iconImageView.image = [UIImage imageNamed:@"uesr_icon_gold"];
+            cell.titleDesLabel.text = @"黄金账户";
+            cell.valueLabel.text = self.assetModel.nmCashBalance.length > 0 ? [NSString stringWithFormat:@"¥%@", self.assetModel.nmCashBalance] : [NSString stringWithFormat:@"¥0.00"];
+            cell.describeLabel.text = self.benefitModel.repayPerDateNM.length > 0 ? [NSString stringWithFormat:@"最近回款日%@", self.benefitModel.repayPerDateNM] : @"最近无回款";
+        }
         return cell;
     }
     else if (indexPath.section == 1) {
@@ -110,6 +185,22 @@
         UCFMineFuncSecCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
         if (nil == cell) {
             cell = (UCFMineFuncSecCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFMineFuncSecCell" owner:self options:nil] lastObject];
+        }
+        if (indexPath.row == 0) {
+            cell.iconImageView.image = [UIImage imageNamed:@"uesr_icon_bean"];
+            cell.icon2ImageView.image = [UIImage imageNamed:@"uesr_icon_coupon"];
+            cell.titleDesLabel.text = @"工豆";
+            cell.title2DesLabel.text = @"优惠券";
+            cell.valueLabel.text = [NSString stringWithFormat:@"¥%@", self.benefitModel.beanAmount];
+            cell.value2Label.text = [NSString stringWithFormat:@"%@张可用", self.benefitModel.couponNumber];
+        }
+        else if (indexPath.row == 1) {
+            cell.iconImageView.image = [UIImage imageNamed:@"uesr_icon_score"];
+            cell.icon2ImageView.image = [UIImage imageNamed:@"uesr_icon_rebate"];
+            cell.titleDesLabel.text = @"工分";
+            cell.valueLabel.text = [NSString stringWithFormat:@"¥%@", self.benefitModel.score];
+            cell.title2DesLabel.text = @"邀请返利";
+            cell.value2Label.text = self.benefitModel.promotionCode.length > 0 ? [NSString stringWithFormat:@"工场码%@", self.benefitModel.promotionCode] : @"";
         }
         return cell;
     }
@@ -138,6 +229,11 @@
 }
 
 - (void)mineHeaderView:(UCFMineHeaderView *)mineHeaderView didClikedCashButton:(UIButton *)cashButton
+{
+    
+}
+
+- (void)mineHeaderView:(UCFMineHeaderView *)mineHeaderView tappedMememberLevelView:(UIView *)memberLevelView
 {
     
 }
