@@ -14,7 +14,7 @@
                 <outlet property="homeIconBackView" destination="KD0-LM-3Ly" id="V9i-OH-3jA"/>
                 <outlet property="iconCollectionView" destination="eMC-0m-Xq3" id="fwg-0A-C6O"/>
                 <outlet property="noticeBackView" destination="S0K-ne-KG7" id="Nmn-Pg-qX1"/>
-                <outlet property="noticeBackviewH" destination="zBa-cq-iMJ" id="gxQ-oN-3qa"/>
+                <outlet property="noticeBackViewHeight" destination="zBa-cq-iMJ" id="z9g-04-o7k"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -24,11 +24,11 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KD0-LM-3Ly">
-                    <rect key="frame" x="0.0" y="172" width="375" height="80"/>
+                    <rect key="frame" x="0.0" y="127" width="375" height="80"/>
                     <subviews>
                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="eMC-0m-Xq3">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="1" green="0.6588235294" blue="0.066666666669999999" alpha="1" colorSpace="calibratedRGB"/>
                             <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="F7l-0L-MSX">
                                 <size key="itemSize" width="50" height="50"/>
                                 <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -40,21 +40,31 @@
                                 <outlet property="delegate" destination="-1" id="bwF-J8-2AT"/>
                             </connections>
                         </collectionView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7zb-Tv-u3k">
+                            <rect key="frame" x="0.0" y="79.5" width="375" height="0.5"/>
+                            <color key="backgroundColor" red="0.84705882352941175" green="0.84705882352941175" blue="0.84705882352941175" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="0.5" id="uLV-0d-EuH"/>
+                            </constraints>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
+                        <constraint firstItem="7zb-Tv-u3k" firstAttribute="leading" secondItem="KD0-LM-3Ly" secondAttribute="leading" id="8eQ-r4-MD2"/>
                         <constraint firstAttribute="bottom" secondItem="eMC-0m-Xq3" secondAttribute="bottom" id="OPc-EG-mkY"/>
+                        <constraint firstAttribute="bottom" secondItem="7zb-Tv-u3k" secondAttribute="bottom" id="P2h-hr-fRH"/>
                         <constraint firstAttribute="height" constant="80" id="ZGf-Wj-0tO"/>
+                        <constraint firstAttribute="trailing" secondItem="7zb-Tv-u3k" secondAttribute="trailing" id="a4F-Yx-WZE"/>
                         <constraint firstItem="eMC-0m-Xq3" firstAttribute="leading" secondItem="KD0-LM-3Ly" secondAttribute="leading" id="cCj-ep-yGE"/>
                         <constraint firstItem="eMC-0m-Xq3" firstAttribute="top" secondItem="KD0-LM-3Ly" secondAttribute="top" id="eBE-cK-1ib"/>
                         <constraint firstAttribute="trailing" secondItem="eMC-0m-Xq3" secondAttribute="trailing" id="l2c-oh-abW"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S0K-ne-KG7">
-                    <rect key="frame" x="0.0" y="252" width="375" height="0.0"/>
+                    <rect key="frame" x="0.0" y="207" width="375" height="45"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" id="zBa-cq-iMJ"/>
+                        <constraint firstAttribute="height" constant="45" id="zBa-cq-iMJ"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gjw-uk-0G3">
@@ -62,7 +72,7 @@
                     <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JDv-4L-kWb">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="172"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="127"/>
                     <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
             </subviews>
@@ -85,7 +95,7 @@
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="-61.5" y="69"/>
+            <point key="canvasLocation" x="-60.5" y="93"/>
         </view>
     </objects>
 </document>

@@ -11,11 +11,12 @@
 @class UCFNoticeView;
 @protocol UCFNoticeViewDelegate <NSObject>
 
-- (void)noticeView:(UCFNoticeView *)noticeView didClickedCloseButton:(UIButton *)closeBtn;
+- (void)noticeView:(UCFNoticeView *)noticeView didClickedNotice:(NSString *)noticeStr;
 
 @end
 
 @interface UCFNoticeView : UIView
+@property (weak, nonatomic) IBOutlet UILabel *noticeLabell;
 @property (strong, nonatomic) NSMutableArray *noticeArray;
 @property (weak, nonatomic) id<UCFNoticeViewDelegate> delegate;
 @end

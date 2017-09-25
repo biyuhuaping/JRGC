@@ -19,6 +19,8 @@
 @interface UCFCycleImageViewController : UIViewController
 @property (weak, nonatomic) id<UCFCycleImageViewControllerDelegate> delegate;
 
+@property (copy, nonatomic) NSString *noticeStr;
+
 #pragma mark - 根据所对应的presenter生成当前controller
 + (instancetype)instanceWithPresenter:(UCFHomeListPresenter *)presenter;
 #pragma mark - 计算轮播图模块的高度
@@ -27,4 +29,7 @@
 - (UCFHomeListPresenter *)presenter;
 #pragma mark - 获取正式环境的banner图
 - (void)getNormalBannerData;
+
+#pragma mark - 刷新公告
+- (void)refreshNotice;
 @end
