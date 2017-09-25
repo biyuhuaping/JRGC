@@ -13,7 +13,7 @@
 #import "UCFCalendarDetailHeaderView.h"
 #import "UCFCalendarDayCell.h"
 #import "UCFPickView.h"
-
+#import "UCFNoDataView.h"
 @interface UCFCalendarViewController () <UITableViewDataSource, UITableViewDelegate, UCFCalendarHeaderViewDelegate, UCFCalendarDetailHeaderViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UCFPickViewDelegate>
 @property (weak, nonatomic) UCFCalendarHeaderView *calendarHeader;
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
@@ -105,13 +105,24 @@
         cell.tableview = tableView;
     }
 //    cell.indexPath = indexPath;
-//    cell.group = [self.selectedDayDatas objectAtIndex:indexPath.section];
+    cell.group = [self.selectedDayDatas objectAtIndex:indexPath.row];
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 154;
+    UCFCalendarGroup *group = [self.selectedDayDatas objectAtIndex:indexPath.row];
+    if (group.isOpen) {
+        if ([group.status intValue] == 0) {
+            return 154 - 27;
+        }
+        else {
+            return 154;
+        }
+    }
+    else {
+        return 154 - 27 * 3;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -134,6 +145,7 @@
     if (!_headerView) {
         self.headerView = (UCFCalendarDetailHeaderView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFCalendarDetailHeaderView" owner:self options:nil] lastObject];
         _headerView.delegate = self;
+        self.accoutType = SelectAccoutTypeP2P;
         [_headerView setSelectButtonIndex:0];
     }
     return _headerView;
@@ -141,6 +153,8 @@
 
 - (void)calendarDetailHeaderView:(UCFCalendarDetailHeaderView *)calendarDetailHeader didClicked:(UIButton *)button
 {
+    NSString *title = [button titleForState:UIControlStateNormal];
+    self.accoutType = ([title isEqualToString:@"微金回款"] ? SelectAccoutTypeP2P :SelectAccoutTypeHoner);
     [self getCurrentDayInfoFromNetWithDay:self.currentDay];
 }
 
@@ -167,7 +181,6 @@
         if (tag.intValue == kSXTagCalendarHeader) {
             self.calendarHeader.calendarHeaderInfo = [dictotal objectSafeDictionaryForKey:@"data"];
             self.pickerView.dataArray = [[dictotal objectSafeDictionaryForKey:@"data"] objectSafeArrayForKey:@"months"];
-//            [self.pickerView reloadAllComponents];
         }
         else if (tag.intValue == kSXTagCurrentDayInfo) {
             NSArray *dataList = [[[dictotal objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"pageData"] objectSafeArrayForKey:@"result"];
@@ -179,6 +192,10 @@
                 [self.selectedDayDatas addObject:group];
             }
             if (self.selectedDayDatas.count == 0) {
+                UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
+                UCFNoDataView *noDataView = [[UCFNoDataView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 200) errorTitle:@"本日无回款项目"];
+                self.tableview.tableFooterView = footView;
+            } else {
                 
             }
             [self.tableview reloadData];
@@ -219,7 +236,7 @@
 {
     self.currentDay = day;
     NSString *userId = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
-    NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys:userId, @"userId", day, @"day", @"20", @"rows", @"1", @"page",  nil];
+    NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys:userId, @"userId", day, @"day", @"40", @"rows", @"1", @"page",  nil];
     [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagCurrentDayInfo owner:self signature:YES Type:self.accoutType];
 }
 
