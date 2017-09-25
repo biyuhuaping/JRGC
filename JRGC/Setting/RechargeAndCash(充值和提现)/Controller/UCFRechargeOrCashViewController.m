@@ -112,20 +112,27 @@
     honerCardModel.cardLogoImageName = @"card_logo_zx";
     honerCardModel.cardBgImageName = @"card_bg_red";
     honerCardModel.accoutBalanceStr = @"";
-    if ([UserInfoSingle sharedManager].enjoyOpenStatus == 1) {
-        honerCardModel.cardDetialStr = @"未开户";
-        honerCardModel.cardNumberStr = @"";
-        honerCardModel.cardStateStr = @"去开户";
-    }else if ([UserInfoSingle sharedManager].enjoyOpenStatus == 2)  {
-        honerCardModel.cardDetialStr = @"未绑卡";
-        honerCardModel.cardNumberStr = @"";
-        honerCardModel.cardStateStr = @"去绑卡";
+    if([UserInfoSingle sharedManager].zxAuthorization){
+        if ([UserInfoSingle sharedManager].enjoyOpenStatus == 1) {
+            honerCardModel.cardDetialStr = @"未开户";
+            honerCardModel.cardNumberStr = @"";
+            honerCardModel.cardStateStr = @"去开户";
+        }else if ([UserInfoSingle sharedManager].enjoyOpenStatus == 2)  {
+            honerCardModel.cardDetialStr = @"未绑卡";
+            honerCardModel.cardNumberStr = @"";
+            honerCardModel.cardStateStr = @"去绑卡";
+        }else{
+            honerCardModel.cardDetialStr = @"尊享徽商存管账户";
+            honerCardModel.cardNumberStr = [_dataDict objectSafeForKey:@"zxCardNum"];;
+            honerCardModel.cardStateStr = @"";
+        }
+ 
     }else{
-        honerCardModel.cardDetialStr = @"尊享徽商存管账户";
-        honerCardModel.cardNumberStr = [_dataDict objectSafeForKey:@"zxCardNum"];;
-        honerCardModel.cardStateStr = @"";
+        honerCardModel.cardDetialStr = @"未授权";
+        honerCardModel.cardNumberStr = @"";
+        honerCardModel.cardStateStr = @"去授权";
     }
-
+    
     UCFAccoutCardModel *goldCardModel  = [[UCFAccoutCardModel alloc]init];
     goldCardModel.cardTitleStr = @"充值至黄金账户";
     goldCardModel.isRechargeOrCash = _isRechargeOrCash;
@@ -315,7 +322,7 @@
 
 -(void)clickRechargeAndCashView:(UCFRechargeAndCashView *)cardView WithTag:(NSInteger)tag WithModel:(UCFAccoutCardModel *)cardModel  
 {
-   if(cardModel.isRechargeOrCash)
+   if(cardModel.isRechargeOrCash)//提现
    {
        NSString *cardTitleStr = cardModel.cardTitleStr;
        if ([cardTitleStr hasPrefix:@"微金"])//微金提现
@@ -366,7 +373,11 @@
                break;
            case 102://尊享充值
            {
-               if([cardModel.cardStateStr isEqualToString:@"去开户"] || [cardModel.cardStateStr isEqualToString:@"去绑卡"])
+               if([cardModel.cardStateStr isEqualToString:@"去授权"])
+               {
+                   [[HSHelper new] pushP2POrWJAuthorizationType:SelectAccoutTypeHoner nav:self.navigationController];
+               }
+               else if([cardModel.cardStateStr isEqualToString:@"去开户"] || [cardModel.cardStateStr isEqualToString:@"去绑卡"])
                {
                    HSHelper *helper = [HSHelper new];
                    [helper pushOpenHSType:SelectAccoutTypeHoner Step:[UserInfoSingle sharedManager].enjoyOpenStatus nav:self.navigationController isPresentView:YES];

@@ -159,14 +159,25 @@
 }
 -(void)popViewController
 {
-//    [self.navigationController popViewControllerAnimated:YES];
+   
     
-    AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
-    [appDelegate.tabBarController dismissViewControllerAnimated:NO completion:^{
-        NSUInteger selectedIndex = appDelegate.tabBarController.selectedIndex;
-        UINavigationController *nav = [appDelegate.tabBarController.viewControllers objectAtIndex:selectedIndex];
-        [nav popToRootViewControllerAnimated:NO];
-    }];
+    
+    UCFBaseViewController *rootBaseVC = [self.navigationController.viewControllers firstObject];
+    NSString *className = [NSString stringWithUTF8String:object_getClassName(rootBaseVC)];
+    if ([className hasSuffix:@"UCFRechargeOrCashViewController"])
+    {
+        AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+
+        [appDelegate.tabBarController dismissViewControllerAnimated:NO completion:^{
+                    NSUInteger selectedIndex = appDelegate.tabBarController.selectedIndex;
+                    UINavigationController *nav = [appDelegate.tabBarController.viewControllers objectAtIndex:selectedIndex];
+                    [nav popToRootViewControllerAnimated:NO];
+        }];
+    }
+    else
+    {
+         [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 - (void)errorPost:(NSError *)err tag:(NSNumber *)tag
 {

@@ -37,11 +37,34 @@
     }
     [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":userId} tag:kSXTagMySimpleInfo owner:self signature:YES Type:SelectAccoutDefault];
 }
-
+//提现请求
+- (void)getCashAccoutBalanceNet
+{
+    NSString *userId = [UserInfoSingle sharedManager].userId;
+    if (!userId) {
+        return;
+    }
+    [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":userId} tag:kSXTagGetAccountBalanceList owner:self signature:YES Type:SelectAccoutDefault];
+}
+//充值请求
+- (void)getRecharngeBindingBankCardNet
+{
+    NSString *userId = [UserInfoSingle sharedManager].userId;
+    if (!userId) {
+        return;
+    }
+    [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":userId} tag:kSXTagGetBindingBankCardList owner:self signature:YES Type:SelectAccoutDefault];
+}
 - (void)beginPost:(kSXTag)tag
 {
     UIViewController *vc = (UIViewController *)self.delegate;
-    [MBProgressHUD showHUDAddedTo:vc.view animated:YES];
+    if(tag == kSXTagGetAccountBalanceList || tag ==  kSXTagGetBindingBankCardList)
+    {
+        
+    }else{
+            [MBProgressHUD showHUDAddedTo:vc.view animated:YES];
+    }
+
 }
 
 - (void)endPost:(id)result tag:(NSNumber *)tag
@@ -88,6 +111,31 @@
             [AuxiliaryFunc showToastMessage:rsttext withView:vc.view];
         }
     }
+    else if (tag.intValue == kSXTagGetAccountBalanceList) {
+        UIViewController *vc = (UIViewController *)self.delegate;
+        [MBProgressHUD hideAllHUDsForView:vc.view animated:YES];
+        if ([rstcode intValue] == 1) {
+            NSDictionary *resultData = [dic objectSafeDictionaryForKey:@"data"];
+            if ([self.delegate respondsToSelector:@selector(mineApiManager:didSuccessedCashAccoutBalanceResult:withTag:)]) {
+                [self.delegate mineApiManager:self didSuccessedCashAccoutBalanceResult:resultData withTag:[tag integerValue]];
+            }
+        }else {
+            
+            [AuxiliaryFunc showToastMessage:rsttext withView:vc.view];
+        }
+    }else if (tag.intValue == kSXTagGetBindingBankCardList) {
+        UIViewController *vc = (UIViewController *)self.delegate;
+        [MBProgressHUD hideAllHUDsForView:vc.view animated:YES];
+        if ([rstcode intValue] == 1) {
+            NSDictionary *resultData = [dic objectSafeDictionaryForKey:@"data"];
+            if ([self.delegate respondsToSelector:@selector(mineApiManager:didSuccessedRechargeBindingBankCardResult:withTag:)]) {
+                [self.delegate mineApiManager:self didSuccessedRechargeBindingBankCardResult:resultData withTag:[tag integerValue]];
+            }
+        }else {
+            
+            [AuxiliaryFunc showToastMessage:rsttext withView:vc.view];
+        }
+    }
 }
 
 - (void)errorPost:(NSError *)err tag:(NSNumber *)tag
@@ -100,6 +148,14 @@
     else if (tag.integerValue == kSXTagMySimpleInfo) {
         if ([self.delegate respondsToSelector:@selector(mineApiManager:didSuccessedReturnBenefitResult:withTag:)]) {
             [self.delegate mineApiManager:self didSuccessedReturnBenefitResult:err withTag:[tag integerValue]];
+        }
+    }else if (tag.integerValue == kSXTagGetAccountBalanceList) {
+        if ([self.delegate respondsToSelector:@selector(mineApiManager:didSuccessedCashAccoutBalanceResult:withTag:)]) {
+            [MBProgressHUD displayHudError:err.userInfo[@"NSLocalizedDescription"]];
+        }
+    }else if (tag.integerValue == kSXTagGetBindingBankCardList) {
+        if ([self.delegate respondsToSelector:@selector(mineApiManager:didSuccessedRechargeBindingBankCardResult:withTag:)]) {
+            [MBProgressHUD displayHudError:err.userInfo[@"NSLocalizedDescription"]];
         }
     }
 }

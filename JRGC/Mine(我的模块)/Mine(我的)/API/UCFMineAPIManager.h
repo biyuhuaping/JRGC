@@ -15,7 +15,8 @@
 
 
 - (void)mineApiManager:(UCFMineAPIManager *)apiManager didSuccessedReturnBenefitResult:(id)result withTag:(NSUInteger)tag;
-
+- (void)mineApiManager:(UCFMineAPIManager *)apiManager didSuccessedCashAccoutBalanceResult:(id)result withTag:(NSUInteger)tag;
+- (void)mineApiManager:(UCFMineAPIManager *)apiManager didSuccessedRechargeBindingBankCardResult:(id)result withTag:(NSUInteger)tag;
 @end
 
 @interface UCFMineAPIManager : NSObject
@@ -23,4 +24,6 @@
 
 - (void)getAssetFromNet;
 - (void)getBenefitFromNet;
+- (void)getCashAccoutBalanceNet;
+- (void)getRecharngeBindingBankCardNet;
 @end

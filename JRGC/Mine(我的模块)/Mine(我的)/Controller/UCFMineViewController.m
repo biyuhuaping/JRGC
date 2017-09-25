@@ -17,7 +17,11 @@
 #import "UCFMineAPIManager.h"
 #import "UCFUserAssetModel.h"
 #import "UCFUserBenefitModel.h"
-
+#import "UCFRechargeOrCashViewController.h"
+#import "UCFGoldAccountViewController.h"
+#import "UCFP2POrHonerAccoutViewController.h"
+#import "HSHelper.h"
+#import "UCFAccountPieCharViewController.h"
 @interface UCFMineViewController () <UITableViewDelegate, UITableViewDataSource, UCFMineHeaderViewDelegate, UCFMineFuncCellDelegate, UCFMineAPIManagerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) UCFMineHeaderView   *mineHeaderView;
@@ -75,8 +79,6 @@
     mineHeader.delegate = self;
     self.tableView.tableHeaderView = mineHeader;
     self.mineHeaderView = mineHeader;
-    
-    
 }
 
 - (void)refreshData {
@@ -215,6 +217,35 @@
     return 60;
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (indexPath.section == 0) {
+        UCFMineCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        __weak typeof(self) weakSelf = self;
+        if ([cell.titleDesLabel.text hasPrefix:@"微金"])
+        {
+            self.accoutType =  SelectAccoutTypeP2P;
+        }
+        else if([cell.titleDesLabel.text hasPrefix:@"尊享"]){
+            self.accoutType = SelectAccoutTypeHoner;
+        }
+        else if([cell.titleDesLabel.text hasPrefix:@"黄金"]){
+            UCFGoldAccountViewController *subVC = [[UCFGoldAccountViewController alloc] initWithNibName:@"UCFGoldAccountViewController" bundle:nil];
+            subVC.homeView = weakSelf;
+            [self.navigationController pushViewController:subVC animated:YES];
+            return;
+            
+        }
+        if ([self checkUserCanInvestIsDetail:YES type:self.accoutType]) {
+            UCFP2POrHonerAccoutViewController *subVC = [[UCFP2POrHonerAccoutViewController alloc] initWithNibName:@"UCFP2POrHonerAccoutViewController" bundle:nil];
+            subVC.accoutType = self.accoutType;
+            [self.navigationController pushViewController:subVC animated:YES];
+        }
+
+    }
+}
 #pragma mark - 我的页面的头部视图代理方法
 - (void)mineHeaderViewDidClikedUserInfoWithCurrentVC:(UCFMineHeaderView *)mineHeaderView
 {
@@ -222,20 +253,86 @@
     personMessageVC.title = @"个人信息";
     [self.navigationController pushViewController:personMessageVC animated:YES];
 }
-
+#pragma mark -饼图点击事件
+-(void)gotoAccountPieCharView{
+        UCFAccountPieCharViewController * accoutPieChartVC = [[UCFAccountPieCharViewController alloc]initWithNibName:@"UCFAccountPieCharViewController" bundle:nil];
+        accoutPieChartVC.selectedSegmentIndex = 0 ;
+    
+        [self.navigationController pushViewController:accoutPieChartVC animated:YES];
+}
 - (void)mineHeaderView:(UCFMineHeaderView *)mineHeaderView didClikedTopUpButton:(UIButton *)rechargeButton
 {
-    
+    //获取充值绑卡页面数据
+    [self.apiManager getRecharngeBindingBankCardNet];
 }
 
 - (void)mineHeaderView:(UCFMineHeaderView *)mineHeaderView didClikedCashButton:(UIButton *)cashButton
 {
-    
+    //获取提现绑卡页面数据
+    if([UserInfoSingle sharedManager].openStatus < 3 && [UserInfoSingle sharedManager].enjoyOpenStatus < 3 && ![UserInfoSingle sharedManager].goldAuthorization)//微金未开通账户
+    {
+        [AuxiliaryFunc showToastMessage:@"没有可提现的账户" withView:self.view];
+        return;
+    }
+    [self.apiManager getCashAccoutBalanceNet];
 }
 
 - (void)mineHeaderView:(UCFMineHeaderView *)mineHeaderView tappedMememberLevelView:(UIView *)memberLevelView
 {
     
+}
+- (BOOL)checkUserCanInvestIsDetail:(BOOL)isDetail type:(SelectAccoutType)accout;
+{
+    
+    NSString *tipStr1 = accout == SelectAccoutTypeP2P ? P2PTIP1:ZXTIP1;
+    NSString *tipStr2 = accout == SelectAccoutTypeP2P ? P2PTIP2:ZXTIP2;
+    
+    NSInteger openStatus = accout == SelectAccoutTypeP2P ? [UserInfoSingle sharedManager].openStatus :[UserInfoSingle sharedManager].enjoyOpenStatus;
+    
+    switch (openStatus)
+    {// ***hqy添加
+        case 1://未开户-->>>新用户开户
+        case 2://已开户 --->>>老用户(白名单)开户
+        {
+            [self showHSAlert:tipStr1];
+            return NO;
+            break;
+        }
+        case 3://已绑卡-->>>去设置交易密码页面
+        {
+            if (isDetail) {
+                return YES;
+            }else
+            {
+                [self showHSAlert:tipStr2];
+                return NO;
+            }
+        }
+            break;
+        default:
+            return YES;
+            break;
+    }
+}
+- (void)showHSAlert:(NSString *)alertMessage
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:alertMessage delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
+    alert.tag =  self.accoutType == SelectAccoutTypeP2P ? 8000 :8010;
+    [alert show];
+}
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    if (alertView.tag == 8000) {
+        if (buttonIndex == 1) {
+            HSHelper *helper = [HSHelper new];
+            [helper pushOpenHSType:SelectAccoutTypeP2P Step:[UserInfoSingle sharedManager].openStatus nav:self.navigationController];
+        }
+    }else if (alertView.tag == 8010) {
+        if (buttonIndex == 1) {
+            HSHelper *helper = [HSHelper new];
+            [helper pushOpenHSType:SelectAccoutTypeHoner Step:[UserInfoSingle sharedManager].enjoyOpenStatus nav:self.navigationController];
+        }
+    }
 }
 
 #pragma mark - UCFMineFuncCell的代理方法
@@ -252,5 +349,28 @@
 {
     
 }
+- (void)mineApiManager:(UCFMineAPIManager *)apiManager didSuccessedCashAccoutBalanceResult:(id)result withTag:(NSUInteger)tag
+{
+    NSDictionary *dataDict = (NSDictionary *)result;
+    UCFRechargeOrCashViewController * rechargeCashVC = [[UCFRechargeOrCashViewController alloc]initWithNibName:@"UCFRechargeOrCashViewController" bundle:nil];
+    rechargeCashVC.dataDict = dataDict;
+    rechargeCashVC.isRechargeOrCash = YES;//提现
+    UINavigationController *rechargeCashNavController = [[UINavigationController alloc] initWithRootViewController:rechargeCashVC];
+    rechargeCashNavController.modalPresentationStyle = UIModalPresentationOverFullScreen;
+    [self presentViewController:rechargeCashNavController animated:NO completion:^{
+    }];
 
+}
+-(void)mineApiManager:(UCFMineAPIManager *)apiManager didSuccessedRechargeBindingBankCardResult:(id)result withTag:(NSUInteger)tag
+{
+    NSDictionary *dataDict = (NSDictionary *)result;
+    UCFRechargeOrCashViewController * rechargeCashVC = [[UCFRechargeOrCashViewController alloc]initWithNibName:@"UCFRechargeOrCashViewController" bundle:nil];
+    rechargeCashVC.dataDict = dataDict;
+    rechargeCashVC.isRechargeOrCash = NO;//充值
+    UINavigationController *rechargeCashNavController = [[UINavigationController alloc] initWithRootViewController:rechargeCashVC];
+    rechargeCashNavController.modalPresentationStyle = UIModalPresentationOverFullScreen;
+    [self presentViewController:rechargeCashNavController animated:NO completion:^{
+    }];
+
+}
 @end

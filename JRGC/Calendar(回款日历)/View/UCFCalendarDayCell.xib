@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="17A360a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -75,7 +75,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f05-OR-FED">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="73"/>
                                 <connections>
-                                    <action selector="button:" destination="T7a-3g-q0o" eventType="touchUpInside" id="yi9-Bv-LWf"/>
+                                    <action selector="openDetailPayBack:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="owf-XD-Zvx"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fjA-go-dc0">
@@ -240,10 +240,19 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="arrowImageView" destination="Z5t-Qt-KgW" id="8Ql-kh-fHr"/>
+                <outlet property="bidNameLab" destination="muH-go-sSg" id="Nur-z1-0Mi"/>
                 <outlet property="downLine" destination="sJM-CF-s8N" id="JX8-I9-XzH"/>
                 <outlet property="downLineLeftSpace" destination="RPw-RR-FED" id="xqJ-Sw-fRH"/>
+                <outlet property="numLab" destination="3SZ-1q-Tbb" id="ugH-G5-ILF"/>
+                <outlet property="payBackMoeny" destination="V7V-Na-y2m" id="Ug6-u3-xZE"/>
+                <outlet property="payBackStyle" destination="Qt0-B2-JdN" id="mjc-Yy-fzL"/>
+                <outlet property="planPayBackDate" destination="KUf-js-dtV" id="phG-QY-G2v"/>
                 <outlet property="upLine" destination="h2A-3H-fZK" id="7QP-IT-BUV"/>
                 <outlet property="upLineLeftSpace" destination="b6g-1b-fvT" id="CGb-3o-gXm"/>
+                <outlet property="value1" destination="bgI-Yt-0DV" id="JDs-sj-jvi"/>
+                <outlet property="value2" destination="HcA-gq-bQg" id="lvK-Pp-7sN"/>
+                <outlet property="value3" destination="GYt-zy-hiW" id="w4k-92-Azj"/>
             </connections>
             <point key="canvasLocation" x="-45" y="10"/>
         </tableViewCell>
