@@ -228,7 +228,8 @@
 
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isShowHornor"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    
+    [self getLoginImage];
+
     return YES;
 }
 
@@ -955,7 +956,38 @@
 
 
 #pragma mark -
-
+- (void)getLoginImage
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSString *URL = [NSString stringWithFormat:@"https://fore.9888.cn/cms/api/appbanner.php?key=0ca175b9c0f726a831d895e&id=52"];
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+        [request setURL:[NSURL URLWithString:URL]];
+        [request setHTTPMethod:@"GET"];
+        NSHTTPURLResponse *urlResponse = nil;
+        NSError *error = nil;
+        NSData *recervedData = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&error];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (!recervedData) {
+                return ;
+            }
+            NSString *imageStr=[[NSMutableString alloc] initWithData:recervedData encoding:NSUTF8StringEncoding];
+            NSArray *arr = [imageStr objectFromJSONString];
+            if (ScreenHeight < 961) {
+                
+            }
+            NSString *LoginURL = ScreenHeight > 961 ? [arr objectAtIndex:0][@"thumb"] : [arr objectAtIndex:1][@"thumb"];
+            [[NSUserDefaults standardUserDefaults] setValue:LoginURL forKey:@"LoginImageUrl"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            
+            SDImageCache *cache = [[SDImageCache alloc] init];
+            NSURL * url = [NSURL URLWithString:LoginURL];
+            BOOL hasImage = [cache diskImageExistsWithKey:LoginURL];
+            if (!hasImage) {
+                [Common storeImage:url];
+            }
+        });
+    });
+}
 - (void)getAdversementImageStyle:(int)style
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -984,8 +1016,6 @@
             if (!hasImage) {
                 [Common storeImage:url];
             }
-            
-//            [_advertisementView sd_setImageWithURL:[NSURL URLWithString:imageStr] placeholderImage:nil];
         });
     });
 }

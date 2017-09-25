@@ -27,7 +27,8 @@
         _baseImageView = [[UIImageView alloc] initWithFrame:frame];
         _baseImageView.backgroundColor = [UIColor whiteColor];
         _baseImageView.userInteractionEnabled = YES;
-        _baseImageView.image = [UIImage imageNamed:@"登录页标注.jpg"];
+        NSString *imageURL = [[NSUserDefaults standardUserDefaults] valueForKey:@"LoginImageUrl"];
+        [_baseImageView sd_setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:[UIImage imageNamed:@"banner_default.png"]];
         [self addSubview:_baseImageView];
         
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(login:)];
@@ -35,7 +36,7 @@
         
         _registButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _registButton.frame = CGRectMake((ScreenWidth - [self getRegistBtnSizeWidth])/2.0f, [self getRegistBtnOrginY] ,[self getRegistBtnSizeWidth], [self getRegistBtnSizeHeight]);
-        _registButton.backgroundColor = [UIColor lightGrayColor];
+        _registButton.backgroundColor = [UIColor clearColor];
         _registButton.alpha = 0.5;
         [_registButton addTarget:self action:@selector(registBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [_baseImageView addSubview:_registButton];
