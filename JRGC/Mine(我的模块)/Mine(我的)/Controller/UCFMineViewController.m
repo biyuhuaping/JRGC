@@ -113,8 +113,8 @@
     [self.tableView.header endRefreshing];
     if ([result isKindOfClass:[UCFUserAssetModel class]]) {
         self.assetModel = result;
-        [self.tableView reloadData];
         self.mineHeaderView.userAssetModel = result;
+        [self.tableView reloadData];
     }
 }
 
@@ -123,8 +123,8 @@
     [self.tableView.header endRefreshing];
     if ([result isKindOfClass:[UCFUserBenefitModel class]]) {
         self.benefitModel = result;
-        [self.tableView reloadData];
         self.mineHeaderView.userBenefitModel = result;
+        [self.tableView reloadData];
     }
 }
 

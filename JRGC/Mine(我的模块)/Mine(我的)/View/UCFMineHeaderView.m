@@ -54,6 +54,11 @@
     sender.selected = !sender.selected;
 }
 
+- (IBAction)message:(UIButton *)sender {
+    if ([self.delegate respondsToSelector:@selector(mineHeaderView:didClikedMessageButton:)]) {
+        [self.delegate mineHeaderView:self didClikedMessageButton:sender];
+    }
+}
 //充值
 - (IBAction)topUp:(UIButton *)sender {
     if ([self.delegate respondsToSelector:@selector(mineHeaderView:didClikedTopUpButton:)]) {
@@ -90,31 +95,7 @@
 - (void)setUserAssetModel:(UCFUserAssetModel *)userAssetModel
 {
     _userAssetModel = userAssetModel;
-    [self setNeedsLayout];
-    
-}
-
-- (void)setUserBenefitModel:(UCFUserBenefitModel *)userBenefitModel
-{
-    _userBenefitModel = userBenefitModel;
-    [self setNeedsLayout];
-    
-}
-
-- (void)layoutSubviews
-{
-    [super layoutSubviews];
-    if ([self.userBenefitModel.sex integerValue] == 1) {
-        self.userIconImageView.image = [UIImage imageNamed:@"user_icon_head_male"];
-    }
-    else if ([self.userBenefitModel.sex integerValue] == 2) {
-        self.userIconImageView.image = [UIImage imageNamed:@"user_icon_head_female"];
-    }
-    else {
-        self.userIconImageView.image = [UIImage imageNamed:@"password_icon_head"];
-    }
-    self.userNameLabel.text = [UserInfoSingle sharedManager].realName;
-    self.userLevelLabel.text = [NSString stringWithFormat:@"VIP%@", self.userBenefitModel.memberLever];
+//    [self setNeedsLayout];
     if (self.visibleButton.selected) {
         self.totalAssetLabel.text = @"***";
         self.addedProfitLabel.text = @"***";
@@ -125,12 +106,40 @@
         self.addedProfitLabel.text = self.userAssetModel.interests.length > 0 ? [NSString stringWithFormat:@"¥%@", self.userAssetModel.interests] : @"¥0.00";
         self.totalBalanceLabel.text = self.userAssetModel.cashBalance.length > 0 ? [NSString stringWithFormat:@"¥%@", self.userAssetModel.cashBalance] : @"¥0.00";
     }
-    if (self.userBenefitModel.unReadMsgCount.integerValue > 0) {
+    
+}
+
+- (void)setUserBenefitModel:(UCFUserBenefitModel *)userBenefitModel
+{
+    _userBenefitModel = userBenefitModel;
+    if ([userBenefitModel.sex integerValue] == 1) {
+        self.userIconImageView.image = [UIImage imageNamed:@"user_icon_head_male"];
+    }
+    else if ([self.userBenefitModel.sex integerValue] == 2) {
+        self.userIconImageView.image = [UIImage imageNamed:@"user_icon_head_female"];
+    }
+    else {
+        self.userIconImageView.image = [UIImage imageNamed:@"password_icon_head"];
+    }
+    self.userLevelLabel.text = [NSString stringWithFormat:@"VIP%@", userBenefitModel.memberLever];
+    if (userBenefitModel.unReadMsgCount.integerValue > 0) {
         self.messageDotView.hidden = NO;
     }
     else {
         self.messageDotView.hidden = YES;
     }
+//    [self setNeedsLayout];
+    
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    self.userNameLabel.text = [UserInfoSingle sharedManager].realName;
+    
+    
+    
 }
 
 @end
