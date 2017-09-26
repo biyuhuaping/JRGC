@@ -35,7 +35,7 @@
 - (instancetype)init {
     self = [super init];
     if(self) {
-        self.timer = [NSTimer scheduledTimerWithTimeInterval:60 * 5 target:self selector:@selector(getGoldPrice) userInfo:nil repeats:YES];
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:2 * 5 target:self selector:@selector(getGoldPrice) userInfo:nil repeats:YES];
         
         [_timer setFireDate:[NSDate distantPast]];
     }
