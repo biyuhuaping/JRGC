@@ -192,7 +192,12 @@
             NSMutableDictionary *tempResult = [[NSMutableDictionary alloc] init];
             NSMutableArray *tempArray = [[NSMutableArray alloc] init];
             NSDictionary *resultDict = [dic objectSafeDictionaryForKey:@"data"];
-            UCFPicADModel *picADModel = [UCFPicADModel picADWithDict:[resultDict objectSafeDictionaryForKey:@"picAD"]];
+            NSDictionary *adDic = [[resultDict objectSafeForKey:@"picAD"] objectAtIndex:0];
+            if (adDic) {
+                [[NSUserDefaults standardUserDefaults] setValue:adDic forKey:@"AD_ACTIViTY_DIC"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+            }
+            UCFPicADModel *picADModel = [UCFPicADModel picADWithDict:adDic];
             [tempResult setObject:[resultDict objectSafeForKey:@"siteNotice"] forKey:@"siteNotice"];
             NSArray *productMap = [resultDict objectSafeArrayForKey:@"productMap"];
             for (NSDictionary *dict in productMap) {

@@ -56,9 +56,6 @@
         return;
     }
     
-//    MjAlertView *alertView = [[MjAlertView alloc] initADViewAlertWithDelegate:self];
-//    alertView.delegate = self;
-//    [alertView show];
 
     //不登录就需要查看的
     NSDate *lastFirstLoginTime = [[NSUserDefaults standardUserDefaults] objectForKey:FirstAlertViewShowTime];

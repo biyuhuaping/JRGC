@@ -85,6 +85,13 @@
     mineHeader.delegate = self;
     self.tableView.tableHeaderView = mineHeader;
     self.mineHeaderView = mineHeader;
+#ifdef __IPHONE_11_0
+    if (@available(iOS 11.0, *)) {
+        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    } else {
+        // Fallback on earlier versions
+    }
+#endif
 }
 
 - (void)refreshData {
