@@ -80,6 +80,14 @@
                                         <action selector="visible:" destination="iN0-l3-epB" eventType="touchUpInside" id="L9c-pZ-x7D"/>
                                     </connections>
                                 </button>
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Rf-rr-ahR">
+                                    <rect key="frame" x="63" y="46" width="46" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <state key="normal" title="Button"/>
+                                    <connections>
+                                        <action selector="totalAssetInstruction:" destination="iN0-l3-epB" eventType="touchUpInside" id="cBb-1s-0AW"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
@@ -234,6 +242,14 @@
                             </userDefinedRuntimeAttributes>
                             <connections>
                                 <action selector="topUp:" destination="iN0-l3-epB" eventType="touchUpInside" id="joO-Ay-2cf"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PuQ-Ni-oBb">
+                            <rect key="frame" x="84" y="22" width="46" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="Button"/>
+                            <connections>
+                                <action selector="totalBalanceInstruction:" destination="iN0-l3-epB" eventType="touchUpInside" id="HDU-pJ-Xnq"/>
                             </connections>
                         </button>
                     </subviews>

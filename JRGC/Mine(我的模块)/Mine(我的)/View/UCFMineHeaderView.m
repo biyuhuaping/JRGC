@@ -61,6 +61,15 @@
     }
 }
 
+- (IBAction)totalAssetInstruction:(UIButton *)sender {
+    
+}
+
+
+- (IBAction)totalBalanceInstruction:(UIButton *)sender {
+    
+}
+
 //提现
 - (IBAction)cash:(UIButton *)sender {
     if ([self.delegate respondsToSelector:@selector(mineHeaderView:didClikedCashButton:)]) {

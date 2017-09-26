@@ -12,7 +12,7 @@
 @property (weak, nonatomic) UILabel *titleLabel;
 @property (weak, nonatomic) UIImageView *backView;
 @property (weak, nonatomic) UIView *bottmLine;
-@property (weak, nonatomic) UIButton *giftButton;
+
 @end
 
 @implementation UCFHomeListNavView
@@ -58,14 +58,11 @@
     [self setLoginAndRegisterButtonWithState:NO];
     
     UIButton *button1 = [UIButton buttonWithType:UIButtonTypeCustom];
-    [button1 setTitle:@"礼物" forState:UIControlStateNormal];
-    [button1 setBackgroundColor:[UIColor greenColor]];
-    [button1 setContentEdgeInsets:UIEdgeInsetsMake(5, 8, 5, 8)];
+    [button1 setImage:[UIImage imageNamed:@"mine_icon_ad"] forState:UIControlStateNormal];
     button1.titleLabel.font = [UIFont systemFontOfSize:14];
     [button1 addTarget:self action:@selector(giftClicked:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:button1];
     self.giftButton = button1;
-    button1.hidden = YES;
     
     UIView *bottomLine = [[UIView alloc] initWithFrame:CGRectZero];
     bottomLine.backgroundColor = UIColorWithRGB(0xd8d8d8);
@@ -84,6 +81,15 @@
     self.loginAndRegisterButton.frame = CGRectMake(ScreenWidth - 95, 20+19*0.5, 80, 25);
     self.loginAndRegisterButton.layer.cornerRadius = 25*0.5;
     self.loginAndRegisterButton.clipsToBounds = YES;
+    
+    self.giftButton.frame = CGRectMake(ScreenWidth - 45, 27, 30, 30);
+    NSString *userId = [UserInfoSingle sharedManager].userId;
+    if (userId) {
+        self.giftButton.alpha = 0.7;
+    }
+    else {
+        self.giftButton.alpha = 0.0;
+    }
     
     self.backView.frame = self.bounds;
     
@@ -118,7 +124,9 @@
 
 - (void)giftClicked:(UIButton *)button
 {
-    
+    if ([self.delegate respondsToSelector:@selector(homeListNavView:didClickedGiftButton:)]) {
+        [self.delegate homeListNavView:self didClickedGiftButton:button];
+    }
 }
 
 - (void)setOffset:(CGFloat)offset
@@ -137,7 +145,7 @@
     
     if (offset <= 0) {
         if ([UserInfoSingle sharedManager].userId) {
-            self.hidden = YES;
+            self.hidden = NO;
         }
         else {
             self.hidden = NO;
@@ -172,7 +180,6 @@
             }];
         }
     }
-    
     
 }
 
