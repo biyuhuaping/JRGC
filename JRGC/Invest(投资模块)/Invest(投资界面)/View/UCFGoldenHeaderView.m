@@ -11,7 +11,7 @@
 #import "RotationButton.h"
 #import "SDCycleScrollView.h"
 #import "UCFCycleModel.h"
-
+#import "UCFInvestViewController.h"
 @interface UCFGoldenHeaderView ()
 @property (weak, nonatomic) IBOutlet UILabel *realGoldPriceLabel;
 @property (assign, nonatomic) BOOL isStopTrans; //是否停止旋转
@@ -68,7 +68,7 @@
 }
 - (void)beginGetGoldPrice
 {
-    if ([[Common getCurrentVC] isKindOfClass:[self.hostVc class]]) {
+    if ([[Common getCurrentVC] isKindOfClass:[UCFInvestViewController class]]) {
         if (self.refreshBtn.userInteractionEnabled) {
             [self refreshRealGoldPrice:nil];
         }
