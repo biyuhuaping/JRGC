@@ -27,7 +27,7 @@
 #import "UCFMessageCenterViewController.h"
 #import "UCFMyFacBeanViewController.h"
 #import "UCFInvitationRebateViewController.h"
-@interface UCFMineViewController () <UITableViewDelegate, UITableViewDataSource, UCFMineHeaderViewDelegate, UCFMineFuncCellDelegate, UCFMineAPIManagerDelegate>
+@interface UCFMineViewController () <UITableViewDelegate, UITableViewDataSource, UCFMineHeaderViewDelegate, UCFMineFuncCellDelegate, UCFMineAPIManagerDelegate, UCFMineFuncSecCellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) UCFMineHeaderView   *mineHeaderView;
 @property (strong, nonatomic) UCFLoginBaseView  *loginView;
@@ -174,7 +174,7 @@
             cell.iconImageView.image = [UIImage imageNamed:@"uesr_icon_gold"];
             cell.titleDesLabel.text = @"黄金账户";
             cell.valueLabel.text = self.assetModel.nmCashBalance.length > 0 ? [NSString stringWithFormat:@"¥%@", self.assetModel.nmCashBalance] : [NSString stringWithFormat:@"¥0.00"];
-            cell.describeLabel.text = self.benefitModel.repayPerDateNM.length > 0 ? [NSString stringWithFormat:@"最近回款日%@", self.benefitModel.repayPerDateNM] : @"最近无回款";
+            cell.describeLabel.text = self.benefitModel.repayPerDateNM;
         }
         return cell;
     }
@@ -192,6 +192,7 @@
         UCFMineFuncSecCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
         if (nil == cell) {
             cell = (UCFMineFuncSecCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFMineFuncSecCell" owner:self options:nil] lastObject];
+            cell.delegate = self;
         }
         if (indexPath.row == 0) {
             cell.iconImageView.image = [UIImage imageNamed:@"uesr_icon_bean"];
@@ -200,6 +201,18 @@
             cell.title2DesLabel.text = @"优惠券";
             cell.valueLabel.text = [NSString stringWithFormat:@"¥%@", self.benefitModel.beanAmount];
             cell.value2Label.text = [NSString stringWithFormat:@"%@张可用", self.benefitModel.couponNumber];
+            if (self.benefitModel.beanExpiring.integerValue > 0) {
+                cell.signView.hidden = NO;
+            }
+            else {
+                cell.signView.hidden = YES;
+            }
+            if (self.benefitModel.couponExpringNum.integerValue > 0) {
+                cell.sign2View.hidden = NO;
+            }
+            else {
+                cell.sign2View.hidden = YES;
+            }
         }
         else if (indexPath.row == 1) {
             cell.iconImageView.image = [UIImage imageNamed:@"uesr_icon_score"];
@@ -208,6 +221,8 @@
             cell.valueLabel.text = [NSString stringWithFormat:@"¥%@", self.benefitModel.score];
             cell.title2DesLabel.text = @"邀请返利";
             cell.value2Label.text = self.benefitModel.promotionCode.length > 0 ? [NSString stringWithFormat:@"工场码%@", self.benefitModel.promotionCode] : @"";
+            cell.signView.hidden = YES;
+            cell.sign2View.hidden = YES;
         }
         return cell;
     }
@@ -394,6 +409,12 @@
 {
     
 }
+
+- (void)mineFuncSecCell:(UCFMineFuncSecCell *)funcSecCell didClickedButtonWithTitle:(NSString *)title
+{
+    
+}
+
 - (void)mineApiManager:(UCFMineAPIManager *)apiManager didSuccessedCashAccoutBalanceResult:(id)result withTag:(NSUInteger)tag
 {
     NSDictionary *dataDict = (NSDictionary *)result;

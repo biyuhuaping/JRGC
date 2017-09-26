@@ -48,9 +48,6 @@ static NSString *cellId = @"iconCell";
     [self.noticeBackView addSubview:noticeView];
     self.noticeView = noticeView;
     
-    
-    
-    
     [self.iconCollectionView registerNib:[UINib nibWithNibName:@"UCFHomeIconCollectionCell" bundle:nil] forCellWithReuseIdentifier:cellId];
     
     [self getNormalBannerData];
@@ -202,6 +199,16 @@ static NSString *cellId = @"iconCell";
 {
     BOOL isShowNotice = [[NSUserDefaults standardUserDefaults] boolForKey:@"isShowNotice"];
     self.noticeBackViewHeight.constant = isShowNotice ? 45 : 0;
+    if (isShowNotice) {
+        for (UIView *view in self.noticeView.subviews) {
+            view.hidden = YES;
+        }
+    }
+    else {
+        for (UIView *view in self.noticeView.subviews) {
+            view.hidden = NO;
+        }
+    }
 }
 
 @end

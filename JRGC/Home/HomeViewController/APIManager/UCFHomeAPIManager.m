@@ -177,7 +177,7 @@
             
             UCFHomeListCellModel *homelistModel = [UCFHomeListCellModel homeListCellWithDict:result];
             [tempResult setObject:homelistModel forKey:@"listInfo"];
-            [tempResult setObject:[result objectSafeForKey:@"siteNotice"] forKey:@"siteNotice"];
+//            [tempResult setObject:[result objectSafeForKey:@"siteNotice"] forKey:@"siteNotice"];
             [[UCFSession sharedManager] transformBackgroundWithUserInfo:@{} withState:UCFSessionStateUserRefresh];
             complete(nil, tempResult);
         }
