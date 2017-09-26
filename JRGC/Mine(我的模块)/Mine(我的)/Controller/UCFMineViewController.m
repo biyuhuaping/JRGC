@@ -114,7 +114,10 @@
     if ([result isKindOfClass:[UCFUserAssetModel class]]) {
         self.assetModel = result;
         self.mineHeaderView.userAssetModel = result;
-        [self.tableView reloadData];
+        __weak typeof(self) weakSelf = self;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [weakSelf.tableView reloadData];
+        });
     }
 }
 
@@ -124,7 +127,10 @@
     if ([result isKindOfClass:[UCFUserBenefitModel class]]) {
         self.benefitModel = result;
         self.mineHeaderView.userBenefitModel = result;
-        [self.tableView reloadData];
+        __weak typeof(self) weakSelf = self;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [weakSelf.tableView reloadData];
+        });
     }
 }
 

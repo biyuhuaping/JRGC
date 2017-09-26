@@ -885,24 +885,41 @@
     [self.homeListVC.presenter fetchHomeIconListDataWithCompletionHandler:^(NSError *error, id result) {
         //请求成功
         NSString *siteNotice = [result objectForKey:@"siteNotice"];
-        NSString *originSiteNotice = [[NSUserDefaults standardUserDefaults] stringForKey:@"originSiteNotice"];
         if (siteNotice.length > 0) {
-            if (![originSiteNotice isEqualToString:siteNotice] ) {
-                [[NSUserDefaults standardUserDefaults] setValue:siteNotice forKey:@"originSiteNotice"];
+//            if (![originSiteNotice isEqualToString:siteNotice] ) {
+//                [[NSUserDefaults standardUserDefaults] setValue:siteNotice forKey:@"originSiteNotice"];
                 [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isShowNotice"];
-                [[NSUserDefaults standardUserDefaults] synchronize];
-            }
+//                [[NSUserDefaults standardUserDefaults] synchronize];
+//            }
             
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 weakSelf.cycleImageVC.noticeStr = siteNotice;
-                [weakSelf refreshNotice];
+                [weakSelf refreshNoticeWithShow:YES];
             });
         }
         else{
             [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isShowNotice"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-            [weakSelf refreshNotice];
+//            [[NSUserDefaults standardUserDefaults] synchronize];
+            [weakSelf refreshNoticeWithShow:NO];
         }
+//        NSString *originSiteNotice = [[NSUserDefaults standardUserDefaults] stringForKey:@"originSiteNotice"];
+//        if (siteNotice.length > 0) {
+//            if (![originSiteNotice isEqualToString:siteNotice] ) {
+//                [[NSUserDefaults standardUserDefaults] setValue:siteNotice forKey:@"originSiteNotice"];
+//                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isShowNotice"];
+//                [[NSUserDefaults standardUserDefaults] synchronize];
+//            }
+//            
+//            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//                weakSelf.cycleImageVC.noticeStr = siteNotice;
+//                [weakSelf refreshNotice];
+//            });
+//        }
+//        else{
+//            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isShowNotice"];
+//            [[NSUserDefaults standardUserDefaults] synchronize];
+//            [weakSelf refreshNotice];
+//        }
     }];
     
     [self.homeListVC.presenter fetchHomeListDataWithCompletionHandler:^(NSError *error, id result) {
@@ -917,11 +934,11 @@
 }
 
 #pragma mark - 刷新公告
-- (void)refreshNotice
+- (void)refreshNoticeWithShow:(BOOL)show
 {
-    BOOL isShowNotice = [[NSUserDefaults standardUserDefaults] boolForKey:@"isShowNotice"];
+//    BOOL isShowNotice = [[NSUserDefaults standardUserDefaults] boolForKey:@"isShowNotice"];
     CGFloat userInfoViewHeight = [UCFCycleImageViewController viewHeight];
-    if (isShowNotice) {
+    if (show) {
         self.cycleImageVC.view.frame = CGRectMake(0, 0, ScreenWidth, userInfoViewHeight+45);
         [self.cycleImageVC refreshNotice];
     }
@@ -1049,7 +1066,7 @@
 
 - (void)closeNotice
 {
-    [self refreshNotice];
+//    [self refreshNotice];
 }
 
 - (void)showHSAlert:(NSString *)alertMessage

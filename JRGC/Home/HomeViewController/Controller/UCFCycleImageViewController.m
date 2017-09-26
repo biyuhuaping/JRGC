@@ -201,12 +201,12 @@ static NSString *cellId = @"iconCell";
     self.noticeBackViewHeight.constant = isShowNotice ? 45 : 0;
     if (isShowNotice) {
         for (UIView *view in self.noticeView.subviews) {
-            view.hidden = YES;
+            view.hidden = NO;
         }
     }
     else {
         for (UIView *view in self.noticeView.subviews) {
-            view.hidden = NO;
+            view.hidden = YES;
         }
     }
 }
