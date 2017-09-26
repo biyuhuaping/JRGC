@@ -17,6 +17,8 @@
 - (void)mineHeaderView:(UCFMineHeaderView *)mineHeaderView didClikedCashButton:(UIButton*)cashButton;
 
 - (void)mineHeaderView:(UCFMineHeaderView *)mineHeaderView tappedMememberLevelView:(UIView *)memberLevelView;
+- (void)mineHeaderView:(UCFMineHeaderView *)mineHeaderView didClikedTotalAssetButton:(UIButton*)totalAssetButton;
+- (void)mineHeaderView:(UCFMineHeaderView *)mineHeaderView didClikedAddedProfitButton:(UIButton*)totalProfitButton;
 
 @end
 

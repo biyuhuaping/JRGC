@@ -61,6 +61,19 @@
     }
 }
 
+- (IBAction)totalAssetInstruction:(UIButton *)sender {
+    if ([self.delegate respondsToSelector:@selector(mineHeaderView:didClikedTotalAssetButton:)]) {
+        [self.delegate mineHeaderView:self didClikedTotalAssetButton:sender];
+    }
+}
+
+
+- (IBAction)addedProfitInstruction:(UIButton *)sender {
+    if ([self.delegate respondsToSelector:@selector(mineHeaderView:didClikedAddedProfitButton:)]) {
+        [self.delegate mineHeaderView:self didClikedAddedProfitButton:sender];
+    }
+}
+
 //提现
 - (IBAction)cash:(UIButton *)sender {
     if ([self.delegate respondsToSelector:@selector(mineHeaderView:didClikedCashButton:)]) {

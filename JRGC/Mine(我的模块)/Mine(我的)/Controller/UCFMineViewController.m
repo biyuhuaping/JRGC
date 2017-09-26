@@ -305,6 +305,16 @@
     [self.apiManager getCashAccoutBalanceNet];
 }
 
+- (void)mineHeaderView:(UCFMineHeaderView *)mineHeaderView didClikedTotalAssetButton:(UIButton *)totalAssetButton
+{
+    
+}
+
+- (void)mineHeaderView:(UCFMineHeaderView *)mineHeaderView didClikedAddedProfitButton:(UIButton *)totalProfitButton
+{
+    
+}
+
 - (void)mineHeaderView:(UCFMineHeaderView *)mineHeaderView tappedMememberLevelView:(UIView *)memberLevelView
 {
     

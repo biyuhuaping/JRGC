@@ -303,11 +303,13 @@
     self.homeListVC.tableView.tableHeaderView = self.cycleImageVC.view;
     NSString *userId = [UserInfoSingle sharedManager].userId;
     if (userId) {
-        self.navView.hidden = YES;
+//        self.navView.hidden = YES;
+        self.navView.giftButton.hidden = NO;
         self.navView.loginAndRegisterButton.hidden = YES;
     }
     else {
-        self.navView.hidden = NO;
+//        self.navView.hidden = NO;
+        self.navView.giftButton.hidden = YES;
         self.navView.loginAndRegisterButton.hidden = NO;
     }
     self.navView.frame = CGRectMake(0, 0, self.view.width, 64);
@@ -830,6 +832,11 @@
     UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
     UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
     [self presentViewController:loginNaviController animated:YES completion:nil];
+}
+
+- (void)homeListNavView:(UCFHomeListNavView *)navView didClickedGiftButton:(UIButton *)giftButton
+{
+    
 }
 
 #pragma mark - 刷新界面
