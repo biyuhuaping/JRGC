@@ -16,6 +16,8 @@
 #import "UCFSignModel.h"
 #import "UCFSession.h"
 #import "MongoliaLayerCenter.h"
+#import "UCFPicADModel.h"
+
 #define HOMELIST @"homeList"
 #define HOMEICON @"homeIcon"
 #define USERINFOONE @"userInfoOne"
@@ -173,11 +175,8 @@
             }
             [tempResult setObject:tempArray forKey:@"homelistContent"];
             
-
-            
             UCFHomeListCellModel *homelistModel = [UCFHomeListCellModel homeListCellWithDict:result];
             [tempResult setObject:homelistModel forKey:@"listInfo"];
-//            [tempResult setObject:[result objectSafeForKey:@"siteNotice"] forKey:@"siteNotice"];
             [[UCFSession sharedManager] transformBackgroundWithUserInfo:@{} withState:UCFSessionStateUserRefresh];
             complete(nil, tempResult);
         }
@@ -193,6 +192,12 @@
             NSMutableDictionary *tempResult = [[NSMutableDictionary alloc] init];
             NSMutableArray *tempArray = [[NSMutableArray alloc] init];
             NSDictionary *resultDict = [dic objectSafeDictionaryForKey:@"data"];
+            NSDictionary *adDic = [[resultDict objectSafeForKey:@"picAD"] objectAtIndex:0];
+            if (adDic) {
+                [[NSUserDefaults standardUserDefaults] setValue:adDic forKey:@"AD_ACTIViTY_DIC"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+            }
+            UCFPicADModel *picADModel = [UCFPicADModel picADWithDict:adDic];
             [tempResult setObject:[resultDict objectSafeForKey:@"siteNotice"] forKey:@"siteNotice"];
             NSArray *productMap = [resultDict objectSafeArrayForKey:@"productMap"];
             for (NSDictionary *dict in productMap) {
@@ -200,12 +205,13 @@
                 [tempArray addObject:iconModel];
             }
             [tempResult setObject:tempArray forKey:@"productMap"];
+            [tempResult setObject:picADModel forKey:@"picAD"];
             complete(nil, tempResult);
         }
         else {
             complete(nil, rsttext);
         }
-        [self.requestDict removeObjectForKey:USERINFOONE];
+        [self.requestDict removeObjectForKey:HOMEICON];
     }
     else if (tag.intValue == kSXTagMySimpleInfo) {
         NetworkCompletionHandler complete = [self.requestDict objectForKey:USERINFOTWO];

@@ -1,17 +1,16 @@
 //
-//  UCFHomeIconModel.m
+//  UCFPicADModel.m
 //  JRGC
 //
-//  Created by njw on 2017/9/15.
-//  Copyright © 2017年 qinwei. All rights reserved.
+//  Created by njw on 2017/9/26.
+//  Copyright © 2017年 JRGC. All rights reserved.
 //
 
-#import "UCFHomeIconModel.h"
+#import "UCFPicADModel.h"
 #import <objc/runtime.h>
 
-@implementation UCFHomeIconModel
-
-+ (instancetype)homeIconListWithDict:(NSDictionary *)dict
+@implementation UCFPicADModel
++ (instancetype)picADWithDict:(NSDictionary *)dict
 {
     return [[self alloc] initWithDictionary:dict];
 }
@@ -46,18 +45,10 @@
 {
     for (NSString *key in [self propertyKeys]) {
         id propertyValue = [dataSource valueForKey:key];
-        if ([key isEqualToString:@"desction"]) {
-            propertyValue = [dataSource valueForKey:@"description"];
-        }
         if (![propertyValue isKindOfClass:[NSNull class]] && propertyValue != nil) {
             [self setValue:propertyValue forKey:key];
         } else {
-            if ([key isEqualToString:@"type"]) {
-                [self setValue:propertyValue forKey:key];
-            }
-            else {
-                [self setValue:@"" forKey:key];
-            }
+            [self setValue:@"" forKey:key];
         }
     }
 }

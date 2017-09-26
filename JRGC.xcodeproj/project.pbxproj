@@ -432,6 +432,7 @@
 		74BDA99C1F09F8340054403F /* UCFCalendarCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74BDA99B1F09F8340054403F /* UCFCalendarCollectionViewCell.m */; };
 		74BDA99F1F09F8780054403F /* DIYCalendarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74BDA99E1F09F8780054403F /* DIYCalendarCell.m */; };
 		74BDA9A21F0A7B990054403F /* UCFCalendarGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 74BDA9A11F0A7B990054403F /* UCFCalendarGroup.m */; };
+		74C230231F7A24310022D02B /* UCFPicADModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 74C230221F7A24310022D02B /* UCFPicADModel.m */; };
 		74CE8B831F21B60600512B15 /* UCFAssetTipView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74CE8B821F21B60600512B15 /* UCFAssetTipView.xib */; };
 		74CE8B861F220C7500512B15 /* UCFContractModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 74CE8B851F220C7500512B15 /* UCFContractModel.m */; };
 		74D6578E1F2EFFFF00177EB7 /* UCFHomeListNo2Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74D6578C1F2EFFFF00177EB7 /* UCFHomeListNo2Cell.m */; };
@@ -1783,6 +1784,8 @@
 		74BDA99E1F09F8780054403F /* DIYCalendarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DIYCalendarCell.m; sourceTree = "<group>"; };
 		74BDA9A01F0A7B990054403F /* UCFCalendarGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFCalendarGroup.h; sourceTree = "<group>"; };
 		74BDA9A11F0A7B990054403F /* UCFCalendarGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFCalendarGroup.m; sourceTree = "<group>"; };
+		74C230211F7A24310022D02B /* UCFPicADModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFPicADModel.h; sourceTree = "<group>"; };
+		74C230221F7A24310022D02B /* UCFPicADModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFPicADModel.m; sourceTree = "<group>"; };
 		74CE8B821F21B60600512B15 /* UCFAssetTipView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFAssetTipView.xib; sourceTree = "<group>"; };
 		74CE8B841F220C7500512B15 /* UCFContractModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFContractModel.h; sourceTree = "<group>"; };
 		74CE8B851F220C7500512B15 /* UCFContractModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFContractModel.m; sourceTree = "<group>"; };
@@ -3567,6 +3570,8 @@
 				74270C6F1EC58F6800F9419B /* UCFUserInfoModel.m */,
 				744BE8501F6BBCA200107FAA /* UCFHomeIconModel.h */,
 				744BE8511F6BBCA200107FAA /* UCFHomeIconModel.m */,
+				74C230211F7A24310022D02B /* UCFPicADModel.h */,
+				74C230221F7A24310022D02B /* UCFPicADModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -7895,6 +7900,7 @@
 				FBE9B7EF1ADCC3FB0060FC4D /* InvestmentCell.m in Sources */,
 				74F291071AE0DB72003E0E86 /* UCFBackMoneyDetailViewController.m in Sources */,
 				74931A321B1326FE00143424 /* OHParagraphStyle.m in Sources */,
+				74C230231F7A24310022D02B /* UCFPicADModel.m in Sources */,
 				4A9016831AFB12FE0049A9E0 /* MASLayoutConstraint.m in Sources */,
 				7BA6E4B81AD6731900FE8C37 /* MKAnnotationView+WebCache.m in Sources */,
 				74F6493A1F47159A00328235 /* UCFGoldCashSucessController.m in Sources */,

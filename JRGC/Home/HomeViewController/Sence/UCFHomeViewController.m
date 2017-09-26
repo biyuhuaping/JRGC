@@ -50,14 +50,12 @@
 #import "UCFBatchInvestmentViewController.h"
 #import "UCFGoldCashViewController.h"
 #import "UCFHomeIconPresenter.h"
-
-@interface UCFHomeViewController () <UCFHomeListViewControllerDelegate, UCFHomeListNavViewDelegate, UCFCycleImageViewControllerDelegate,BJGridItemDelegate, UIAlertViewDelegate>
+@interface UCFHomeViewController () <UCFHomeListViewControllerDelegate, UCFHomeListNavViewDelegate, UCFCycleImageViewControllerDelegate,BJGridItemDelegate, UIAlertViewDelegate,MjAlertViewDelegate>
 @property (strong, nonatomic) UCFCycleImageViewController *cycleImageVC;
 @property (strong, nonatomic) UCFUserInformationViewController *userInfoVC;
 @property (strong, nonatomic) UCFHomeListViewController *homeListVC;
 
 @property (strong, nonatomic) NSMutableDictionary *stateDict;
-
 @property (weak, nonatomic) UCFHomeListNavView *navView;
 @property (strong, nonatomic)BJGridItem *dragBtn;
 @property (strong,nonatomic) NSString *intoVCStr;
@@ -836,9 +834,19 @@
 
 - (void)homeListNavView:(UCFHomeListNavView *)navView didClickedGiftButton:(UIButton *)giftButton
 {
+    MjAlertView *alertView = [[MjAlertView alloc] initADViewAlertWithDelegate:self];
+    alertView.delegate = self;
+    [alertView show];
+}
+- (void)mjalertView:(MjAlertView *)alertview withObject:(NSDictionary *)dic
+{
+    UCFWebViewJavascriptBridgeMallDetails *web = [[UCFWebViewJavascriptBridgeMallDetails alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMallDetails" bundle:nil];
+    web.url = dic[@"url"];
+    web.navTitle = dic[@"title"];
+    web.isHidenNavigationbar = YES;
+    [self.navigationController pushViewController:web animated:YES];
     
 }
-
 #pragma mark - 刷新界面
 - (void)refreshUI:(NSNotification *)noty
 {

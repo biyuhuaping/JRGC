@@ -35,7 +35,7 @@ typedef enum : NSUInteger {
 
 @optional
 - (void)mjalertView:(MjAlertView *)alertview didClickedButton:(UIButton *)clickedButton andClickedIndex:(NSInteger)index;
-
+- (void)mjalertView:(MjAlertView *)alertview withObject:(NSDictionary *)dic;
 @end
 
 @interface MjAlertView : UIView
