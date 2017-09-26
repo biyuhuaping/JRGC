@@ -62,6 +62,16 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oqc-dA-H4c">
                             <rect key="frame" x="0.0" y="64" width="187.5" height="76"/>
                             <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Rf-rr-ahR">
+                                    <rect key="frame" x="8" y="13" width="179.5" height="57"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="57" id="hlG-q8-M73"/>
+                                    </constraints>
+                                    <state key="normal" title="Button"/>
+                                    <connections>
+                                        <action selector="totalAssetInstruction:" destination="iN0-l3-epB" eventType="touchUpInside" id="cBb-1s-0AW"/>
+                                    </connections>
+                                </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¥0.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qhF-TW-Gp4">
                                     <rect key="frame" x="15" y="25" width="40.5" height="18"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -80,20 +90,15 @@
                                         <action selector="visible:" destination="iN0-l3-epB" eventType="touchUpInside" id="L9c-pZ-x7D"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Rf-rr-ahR">
-                                    <rect key="frame" x="63" y="46" width="46" height="30"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <state key="normal" title="Button"/>
-                                    <connections>
-                                        <action selector="totalAssetInstruction:" destination="iN0-l3-epB" eventType="touchUpInside" id="cBb-1s-0AW"/>
-                                    </connections>
-                                </button>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstItem="EeI-2B-fjS" firstAttribute="centerY" secondItem="qhF-TW-Gp4" secondAttribute="centerY" id="2VH-BP-AwP"/>
+                                <constraint firstItem="3Rf-rr-ahR" firstAttribute="leading" secondItem="oqc-dA-H4c" secondAttribute="leading" constant="8" id="4pP-74-rig"/>
                                 <constraint firstItem="EeI-2B-fjS" firstAttribute="leading" secondItem="qhF-TW-Gp4" secondAttribute="trailing" constant="7.5" id="TkL-fC-Bc8"/>
+                                <constraint firstAttribute="trailing" secondItem="3Rf-rr-ahR" secondAttribute="trailing" id="d5y-Qu-IIG"/>
                                 <constraint firstItem="qhF-TW-Gp4" firstAttribute="leading" secondItem="oqc-dA-H4c" secondAttribute="leading" constant="15" id="jnc-L1-TyG"/>
+                                <constraint firstAttribute="bottom" secondItem="3Rf-rr-ahR" secondAttribute="bottom" constant="6" id="rgK-h7-uAU"/>
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="总资产" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WLA-gs-wse">
@@ -105,6 +110,16 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f6f-4Y-HYP">
                             <rect key="frame" x="187.5" y="64" width="187.5" height="76"/>
                             <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uZt-Qz-ZPv">
+                                    <rect key="frame" x="8" y="18" width="179.5" height="58"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="58" id="bzk-7b-8rm"/>
+                                    </constraints>
+                                    <state key="normal" title="Button"/>
+                                    <connections>
+                                        <action selector="addedProfitInstruction:" destination="iN0-l3-epB" eventType="touchUpInside" id="nCl-wR-mHz"/>
+                                    </connections>
+                                </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¥0.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4o0-1M-7kA">
                                     <rect key="frame" x="15" y="25" width="40.5" height="18"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -120,8 +135,11 @@
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
+                                <constraint firstAttribute="bottom" secondItem="uZt-Qz-ZPv" secondAttribute="bottom" id="HRg-7q-ZpB"/>
                                 <constraint firstItem="4o0-1M-7kA" firstAttribute="leading" secondItem="f6f-4Y-HYP" secondAttribute="leading" constant="15" id="JMn-U6-n4h"/>
                                 <constraint firstAttribute="bottom" secondItem="QwP-hd-S6Q" secondAttribute="bottom" constant="10" id="hUG-AS-JRp"/>
+                                <constraint firstItem="uZt-Qz-ZPv" firstAttribute="leading" secondItem="f6f-4Y-HYP" secondAttribute="leading" constant="8" id="kJA-Of-9BS"/>
+                                <constraint firstAttribute="trailing" secondItem="uZt-Qz-ZPv" secondAttribute="trailing" id="uzD-iJ-e14"/>
                                 <constraint firstItem="QwP-hd-S6Q" firstAttribute="top" secondItem="4o0-1M-7kA" secondAttribute="bottom" constant="8" id="vgB-Oz-TSP"/>
                                 <constraint firstItem="QwP-hd-S6Q" firstAttribute="leading" secondItem="f6f-4Y-HYP" secondAttribute="leading" constant="15" id="zcJ-sb-iz8"/>
                             </constraints>
@@ -242,14 +260,6 @@
                             </userDefinedRuntimeAttributes>
                             <connections>
                                 <action selector="topUp:" destination="iN0-l3-epB" eventType="touchUpInside" id="joO-Ay-2cf"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PuQ-Ni-oBb">
-                            <rect key="frame" x="84" y="22" width="46" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" title="Button"/>
-                            <connections>
-                                <action selector="totalBalanceInstruction:" destination="iN0-l3-epB" eventType="touchUpInside" id="HDU-pJ-Xnq"/>
                             </connections>
                         </button>
                     </subviews>
