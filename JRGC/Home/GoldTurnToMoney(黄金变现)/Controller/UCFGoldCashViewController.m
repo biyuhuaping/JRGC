@@ -443,5 +443,8 @@
     NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:userId, @"userId", self.liquidateToken, @"liquidateToken", self.amoutCell.textField.text, @"goldAmount", self.goldAveragePrice, @"money",  nil];
     [[NetworkModule sharedNetworkModule] newPostReq:param tag:kSXTagGoldChangeCash owner:self signature:YES Type:SelectAccoutDefault];
 }
-
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 @end
