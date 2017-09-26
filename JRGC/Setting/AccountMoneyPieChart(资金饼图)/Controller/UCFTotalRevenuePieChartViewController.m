@@ -8,6 +8,7 @@
 
 #import "UCFTotalRevenuePieChartViewController.h"
 #import "UCFCustomPieViewCell.h"
+#import "UCFToolsMehod.h"
 @interface UCFTotalRevenuePieChartViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UILabel *totalRevenueLabel;
@@ -90,7 +91,7 @@
             NSString *usedBean = [dataDict objectSafeForKey:@"usedBean"];
             NSString *usedReturnCash = [dataDict objectSafeForKey:@"usedReturnCash"];
             NSString *zxEarnings = [dataDict objectSafeForKey:@"zxEarnings"];
-        
+            self.totalRevenueLabel.text =  [NSString stringWithFormat:@"¥%@",[UCFToolsMehod AddComma:totalEarnings]];
             UCFCustomPieChartModel *pieChatModel1 = [[UCFCustomPieChartModel alloc]init];
             pieChatModel1.pieChartTitle = @"按账户类型";
             pieChatModel1.pieChartDataArray = [[NSMutableArray alloc]initWithArray:@[p2pEarnings,zxEarnings,goldEarnings]];
@@ -102,7 +103,8 @@
             pieChatModel2.pieChartDataArray = [[NSMutableArray alloc]initWithArray:@[receivedInterest,uncollectedInterest,usedReturnCash,usedBean,balanceInterest,goldProfitAndLoss]];
 //            pieChatModel2.pieChartDataArray = [[NSMutableArray alloc]initWithArray:@[@"2000.00",@"3000.00",@"4000.00",@"6000.00",@"9000.00", @"3000.00"]];
             pieChatModel2.pieChartTitleArray = [[NSMutableArray alloc]initWithArray:@[@"按收益类型",@"已收利息",@"待收利息",@"已用返现券",@"已用工豆",@"余额利息", @"黄金余额盈亏"]];
-            self.totalRevenueLabel.text = [NSString stringWithFormat:@"¥%@",totalEarnings];
+          
+           
             self.dataArray = @[pieChatModel1,pieChatModel2];
             
             [self.tableView reloadData];

@@ -10,7 +10,7 @@
 
 #import "CustomPieView.h"
 #import "CustomShapeLayer.h"
-
+#import "UCFToolsMehod.h"
 typedef void(^ClickBlock)(NSInteger clickIndex);
 
 @interface CustomPieView ()
@@ -290,6 +290,20 @@ typedef void(^ClickBlock)(NSInteger clickIndex);
     
     self.finalTextArray = [NSMutableArray array];
     
+    
+    if (totalValue == 0) {
+        NSString *titleString = @"其他";
+        for ( int i = 0 ;i < self.segmentDataArray.count;i++)
+        {
+            if (i < self.segmentTitleArray.count) {
+                titleString = self.segmentTitleArray[i];
+            }
+            NSString *finalString = [NSString stringWithFormat:@" %@:¥0.00",titleString];
+            [self.finalTextArray addObject:finalString];
+        }
+        return;
+    }
+    
     for ( int i = 0 ;i < self.segmentDataArray.count;i++) {
         
         //数据文本
@@ -299,7 +313,8 @@ typedef void(^ClickBlock)(NSInteger clickIndex);
         CGFloat value = [valueString floatValue];
         
         //当前数值的占比
-        CGFloat rate = value/totalValue;
+     
+//        CGFloat rate = value/totalValue;
         
         
         NSString *titleString = @"其他";
@@ -309,18 +324,11 @@ typedef void(^ClickBlock)(NSInteger clickIndex);
             titleString = self.segmentTitleArray[i];
         }
         
-        
-        NSString *finalString = [NSString stringWithFormat:@" %@:¥%.2f %.1f％",titleString,value,rate*100];
-        
-        
+        NSString *valueStr = [NSString stringWithFormat:@"%.2f",value];
+        NSString *finalString = [NSString stringWithFormat:@" %@:¥%@",titleString,[UCFToolsMehod AddComma:valueStr]];
         [self.finalTextArray addObject:finalString];
         
     }
-    
-    
-    
-    
-    
 }
 
 #pragma mark - 计算右侧显示文本的frame
@@ -626,72 +634,128 @@ typedef void(^ClickBlock)(NSInteger clickIndex);
         totalValue += [valueString floatValue];
     }
     
+    
+    
     CGFloat offset = [self preferGetUserSetValue:self.clickOffsetSpace withDefaultValue:15];
     CGFloat innerWhiteRadius = [self preferGetUserSetInnerRadiusValue:self.innerCircleR withDefaultValue:pieR/3];
     UIColor *innerColor = [self preferGetUserSetColor:self.innerColor withDefaultColor:[UIColor whiteColor]];
-    
-    for ( int i = 0 ;i < self.segmentDataArray.count;i++) {
-        
-        //数据文本
-        NSString *valueString = self.segmentDataArray[i];
-        
-        //数据值
-        CGFloat value = [valueString floatValue];
-        
-        //根据当前数值的占比，计算得到当前的弧度
-        CGFloat radian = [self loadPercentRadianWithCurrent:value withTotalValue:totalValue];
-        
-        //弧度结束值 初始值＋当前弧度
-        CGFloat endAngle = currentRadian+radian;
-        
-        
-        //贝塞尔曲线
-        UIBezierPath *path = [UIBezierPath bezierPath];
-        [path moveToPoint:pieCenter];
-        //圆弧 默认最右端为0，YES时为顺时针。NO时为逆时针。
-        [path addArcWithCenter:pieCenter radius:pieR startAngle:currentRadian endAngle:endAngle clockwise:YES];
-        [path addArcWithCenter:pieCenter radius:innerWhiteRadius startAngle:endAngle endAngle:currentRadian clockwise:NO];
-        
-        //添加到圆心直线
-        [path addLineToPoint:pieCenter];
-        //路径闭合
-        [path closePath];
-        
-        //初始化Layer
-        CustomShapeLayer *radiusLayer = [CustomShapeLayer layer];
-        //设置layer的路径
-        radiusLayer.centerPoint = pieCenter;
-        radiusLayer.startAngle = currentRadian;
-        radiusLayer.endAngle = endAngle;
-        radiusLayer.radius = pieR;
-        radiusLayer.innerColor = innerColor;
-        radiusLayer.innerRadius = innerWhiteRadius;
-        radiusLayer.path = path.CGPath;
-        
-        //下一个弧度开始位置为当前弧度的结束位置
-        currentRadian = endAngle;
-        
-        
-        //默认cyan颜色
-        UIColor *currentColor = [UIColor cyanColor];
-        
-        if (i < self.segmentColorArray.count) {
+    if (totalValue == 0) {
+        for ( int i = 0 ;i < self.segmentDataArray.count;i++) {
             
-            currentColor = self.segmentColorArray[i];
+            //数据文本
+//            NSString *valueString = self.segmentDataArray[i];
+            
+            //数据值
+//            CGFloat value = [valueString floatValue];
+            
+            //根据当前数值的占比，计算得到当前的弧度
+             CGFloat radian = 0;
+            if (i == self.segmentDataArray.count - 1) {
+                radian = M_PI * 2;
+            }
+//            CGFloat radian = [self loadPercentRadianWithCurrent:value withTotalValue:totalValue];
+            
+            //弧度结束值 初始值＋当前弧度
+            CGFloat endAngle = currentRadian+radian;
+            
+            
+            //贝塞尔曲线
+            UIBezierPath *path = [UIBezierPath bezierPath];
+            [path moveToPoint:pieCenter];
+            //圆弧 默认最右端为0，YES时为顺时针。NO时为逆时针。
+            [path addArcWithCenter:pieCenter radius:pieR startAngle:currentRadian endAngle:endAngle clockwise:YES];
+            [path addArcWithCenter:pieCenter radius:innerWhiteRadius startAngle:endAngle endAngle:currentRadian clockwise:NO];
+            
+            //添加到圆心直线
+            [path addLineToPoint:pieCenter];
+            //路径闭合
+            [path closePath];
+            
+            //初始化Layer
+            CustomShapeLayer *radiusLayer = [CustomShapeLayer layer];
+            //设置layer的路径
+            radiusLayer.centerPoint = pieCenter;
+            radiusLayer.startAngle = currentRadian;
+            radiusLayer.endAngle = endAngle;
+            radiusLayer.radius = pieR;
+            radiusLayer.innerColor = innerColor;
+            radiusLayer.innerRadius = innerWhiteRadius;
+            radiusLayer.path = path.CGPath;
+            
+            //下一个弧度开始位置为当前弧度的结束位置
+            currentRadian = endAngle;
+            
+            
+            //默认cyan颜色
+            UIColor *currentColor = [UIColor cyanColor];
+            
+            if (i == self.segmentDataArray.count - 1) {
+                currentColor = UIColorWithRGB(0xcccccc);
+            }
+            radiusLayer.fillColor = CGColorCreateCopyWithAlpha(currentColor.CGColor, 1.0);
+            [pieShapeLayerArray addObject:radiusLayer];
+            
+            [backgroundLayer addSublayer:radiusLayer];
+            
         }
-        
-        radiusLayer.fillColor = CGColorCreateCopyWithAlpha(currentColor.CGColor, 1.0);
-        [pieShapeLayerArray addObject:radiusLayer];
-        
-        [backgroundLayer addSublayer:radiusLayer];
-        
+    }else{
+        for ( int i = 0 ;i < self.segmentDataArray.count;i++) {
+            
+            //数据文本
+            NSString *valueString = self.segmentDataArray[i];
+            
+            //数据值
+            CGFloat value = [valueString floatValue];
+            
+            //根据当前数值的占比，计算得到当前的弧度
+            CGFloat radian = [self loadPercentRadianWithCurrent:value withTotalValue:totalValue];
+            
+            //弧度结束值 初始值＋当前弧度
+            CGFloat endAngle = currentRadian+radian;
+            
+            
+            //贝塞尔曲线
+            UIBezierPath *path = [UIBezierPath bezierPath];
+            [path moveToPoint:pieCenter];
+            //圆弧 默认最右端为0，YES时为顺时针。NO时为逆时针。
+            [path addArcWithCenter:pieCenter radius:pieR startAngle:currentRadian endAngle:endAngle clockwise:YES];
+            [path addArcWithCenter:pieCenter radius:innerWhiteRadius startAngle:endAngle endAngle:currentRadian clockwise:NO];
+            
+            //添加到圆心直线
+            [path addLineToPoint:pieCenter];
+            //路径闭合
+            [path closePath];
+            
+            //初始化Layer
+            CustomShapeLayer *radiusLayer = [CustomShapeLayer layer];
+            //设置layer的路径
+            radiusLayer.centerPoint = pieCenter;
+            radiusLayer.startAngle = currentRadian;
+            radiusLayer.endAngle = endAngle;
+            radiusLayer.radius = pieR;
+            radiusLayer.innerColor = innerColor;
+            radiusLayer.innerRadius = innerWhiteRadius;
+            radiusLayer.path = path.CGPath;
+            
+            //下一个弧度开始位置为当前弧度的结束位置
+            currentRadian = endAngle;
+            
+            
+            //默认cyan颜色
+            UIColor *currentColor = [UIColor cyanColor];
+            
+            if (i < self.segmentColorArray.count) {
+                
+                currentColor = self.segmentColorArray[i];
+            }
+            
+            radiusLayer.fillColor = CGColorCreateCopyWithAlpha(currentColor.CGColor, 1.0);
+            [pieShapeLayerArray addObject:radiusLayer];
+            
+            [backgroundLayer addSublayer:radiusLayer];
+            
+        }
     }
-    
-    
-    
-    
-    
-    
     //    CGFloat offset = [self preferGetUserSetValue:self.clickOffsetSpace withDefaultValue:15];
     
     //贝塞尔曲线
