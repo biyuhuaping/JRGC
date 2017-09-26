@@ -37,7 +37,11 @@
     self.isRechargeOrCash = accoutCardModel.isRechargeOrCash;
     self.cardtitleLabel.text = accoutCardModel.cardTitleStr;
     
-    [self.cardLogoImage  sd_setImageWithURL:[NSURL URLWithString:accoutCardModel.cardLogoImageName]]; //[] [UIImage imageNamed:accoutCardModel.cardLogoImageName];
+    if (accoutCardModel.isRechargeOrCash) {
+      [self.cardLogoImage  sd_setImageWithURL:[NSURL URLWithString:accoutCardModel.cardLogoImageName] placeholderImage:[UIImage imageNamed:@"bank_default"]];
+    }else{
+      self.cardLogoImage.image = [UIImage imageNamed:accoutCardModel.cardLogoImageName];
+    }
     self.cardDetialLabel.text = accoutCardModel.cardDetialStr;
     self.cardBgImageView.image = [UIImage imageNamed:accoutCardModel.cardBgImageName];
     self.cardStateLabel.text = accoutCardModel.cardStateStr;

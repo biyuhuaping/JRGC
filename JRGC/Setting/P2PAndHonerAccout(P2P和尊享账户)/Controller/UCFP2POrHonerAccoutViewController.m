@@ -66,6 +66,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+     [self.navigationController setNavigationBarHidden:NO animated:NO];
     if ([self.fromIntoVCStr isEqualToString:@"riskAssessmentVC"]) {
         [self getP2POrHonerAccoutHttpRequest];
     }
