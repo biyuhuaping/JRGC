@@ -54,10 +54,10 @@
     _chartView.centerType = PieCenterTypeMiddleRight;
     
     //是否动画
-    _chartView.needAnimation = YES;
+    _chartView.needAnimation = [self checkPieCharData:pieChartModel.pieChartDataArray];
     
     //动画类型，全部只有一个动画；各个部分都有动画
-    _chartView.type = PieAnimationTypeTogether;
+    _chartView.type = PieAnimationTypeOne;
     
     //圆心，相对于饼状图的位置
     _chartView.centerXPosition = ScreenWidth - 20 - 55;
@@ -102,6 +102,14 @@
     
     //设置默认选中的index，如不需要该属性，可注释
     //[chartView setSelectedIndex:2];
+}
+-(BOOL)checkPieCharData:(NSMutableArray *)array
+{
+    double total = 0;
+    for (NSString *dataStr in array) {
+        total += [dataStr doubleValue];
+    }
+    return total != 0;
 }
 - (void)awakeFromNib {
     [super awakeFromNib];

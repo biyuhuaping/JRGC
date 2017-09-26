@@ -10,7 +10,7 @@
 #import "NZLabel.h"
 #import "AppDelegate.h"
 #import "MongoliaLayerCenter.h"
-
+#import "UIImageView+WebCache.h"
 #define SCREEN_WIDTH_5 ([UIScreen mainScreen].bounds.size.width == 320)
 #define SCREEN_WIDTH_6 ([UIScreen mainScreen].bounds.size.width == 375)
 #define SCREEN_WIDTH_6P ([UIScreen mainScreen].bounds.size.width == 414)
@@ -397,7 +397,11 @@
         UIButton *closeBtn = [baseView viewWithTag:1000];
         [closeBtn addTarget:self action:@selector(closeBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
         
-        UIButton *adImageView = [baseView viewWithTag:999];
+        UIImageView *adImageView = [baseView viewWithTag:999];
+        adImageView.layer.cornerRadius = 4.0f;
+        adImageView.clipsToBounds = YES;
+        NSDictionary *adDic = [[NSUserDefaults standardUserDefaults] valueForKey:@"AD_ACTIViTY_DIC"];
+        [adImageView sd_setImageWithURL:[NSURL URLWithString:[adDic valueForKey:@"pic"]] placeholderImage:nil];
         
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goToAdDetailContent)];
         [adImageView addGestureRecognizer:tap];
@@ -406,8 +410,9 @@
 }
 - (void)goToAdDetailContent
 {
-    if ([self.delegate respondsToSelector:@selector(mjalertView:didClickedButton:andClickedIndex:)]) {
-        [self.delegate mjalertView:self didClickedButton:nil andClickedIndex:0];
+    if ([self.delegate respondsToSelector:@selector(mjalertView:withObject:)]) {
+        NSDictionary *adDic = [[NSUserDefaults standardUserDefaults] valueForKey:@"AD_ACTIViTY_DIC"];
+        [self.delegate mjalertView:self withObject:adDic];
         [self hide];
     }
 }

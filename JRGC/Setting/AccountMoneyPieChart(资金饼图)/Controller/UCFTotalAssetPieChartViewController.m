@@ -9,6 +9,7 @@
 #import "UCFTotalAssetPieChartViewController.h"
 #import "UCFCustomPieViewCell.h"
 #import "UCFCustomPieChartModel.h"
+#import "UCFToolsMehod.h"
 @interface UCFTotalAssetPieChartViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UILabel *totalAssetLabel;
@@ -83,7 +84,7 @@
             NSString * totalAssets = [dataDict objectSafeForKey:@"totalAssets"];
             NSString * uncollectedPAndD = [dataDict objectSafeForKey:@"uncollectedPAndD"];
             NSString * zxAssets = [dataDict objectSafeForKey:@"zxAssets"];
-            self.totalAssetLabel.text = [NSString stringWithFormat:@"¥%@",totalAssets];
+            self.totalAssetLabel.text = [NSString stringWithFormat:@"¥%@",[UCFToolsMehod AddComma:totalAssets]];
             UCFCustomPieChartModel *pieChatModel1 = [[UCFCustomPieChartModel alloc]init];
             pieChatModel1.pieChartTitle = @"按账户类型";
             pieChatModel1.pieChartDataArray = [[NSMutableArray alloc]initWithArray:@[p2pAssets,goldAssets,zxAssets]];
@@ -104,6 +105,7 @@
         }
     }
 }
+
 -(void)errorPost:(NSError *)err tag:(NSNumber *)tag
 {
     [MBProgressHUD displayHudError:err.userInfo[@"NSLocalizedDescription"]];

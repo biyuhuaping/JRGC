@@ -27,6 +27,7 @@
 #import "UCFMessageCenterViewController.h"
 #import "UCFMyFacBeanViewController.h"
 #import "UCFInvitationRebateViewController.h"
+#import "UCFMyReservedViewController.h"
 @interface UCFMineViewController () <UITableViewDelegate, UITableViewDataSource, UCFMineHeaderViewDelegate, UCFMineFuncCellDelegate, UCFMineAPIManagerDelegate, UCFMineFuncSecCellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) UCFMineHeaderView   *mineHeaderView;
@@ -85,6 +86,13 @@
     mineHeader.delegate = self;
     self.tableView.tableHeaderView = mineHeader;
     self.mineHeaderView = mineHeader;
+#ifdef __IPHONE_11_0
+    if (@available(iOS 11.0, *)) {
+        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    } else {
+        // Fallback on earlier versions
+    }
+#endif
 }
 
 - (void)refreshData {
@@ -282,9 +290,9 @@
     [self.navigationController pushViewController:personMessageVC animated:YES];
 }
 #pragma mark -饼图点击事件
--(void)gotoAccountPieCharView{
+-(void)gotoAccountPieCharView:(NSInteger )selectedIndex{
         UCFAccountPieCharViewController * accoutPieChartVC = [[UCFAccountPieCharViewController alloc]initWithNibName:@"UCFAccountPieCharViewController" bundle:nil];
-        accoutPieChartVC.selectedSegmentIndex = 0 ;
+        accoutPieChartVC.selectedSegmentIndex = selectedIndex ;
     
         [self.navigationController pushViewController:accoutPieChartVC animated:YES];
 }
@@ -307,12 +315,12 @@
 
 - (void)mineHeaderView:(UCFMineHeaderView *)mineHeaderView didClikedTotalAssetButton:(UIButton *)totalAssetButton
 {
-    
+    [self gotoAccountPieCharView:0];
 }
 
 - (void)mineHeaderView:(UCFMineHeaderView *)mineHeaderView didClikedAddedProfitButton:(UIButton *)totalProfitButton
 {
-    
+    [self gotoAccountPieCharView:1];
 }
 
 - (void)mineHeaderView:(UCFMineHeaderView *)mineHeaderView tappedMememberLevelView:(UIView *)memberLevelView
@@ -391,7 +399,10 @@
 
 - (void)mineFuncCell:(UCFMineFuncCell *)mineFuncCell didClickedMyReservedButton:(UIButton *)button
 {
-    
+    UCFMyReservedViewController *myserved = [[UCFMyReservedViewController alloc] initWithNibName:@"UCFMyReservedViewController" bundle:nil];
+    myserved.url = [NSString stringWithFormat:@"https://m.9888.cn/static/wap/invest/index.html#/reserve/records"];
+    myserved.navTitle = @"我的预约";
+    [self.navigationController pushViewController:myserved animated:YES];
 }
 
 - (void)mineFuncSecCell:(UCFMineFuncSecCell *)funcSecCell didClickedButtonWithTitle:(NSString *)title
