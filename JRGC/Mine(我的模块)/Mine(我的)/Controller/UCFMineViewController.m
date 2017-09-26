@@ -319,6 +319,12 @@
 {
     
 }
+
+- (void)mineHeaderView:(UCFMineHeaderView *)mineHeaderView didClikedMessageButton:(UIButton *)totalProfitButton
+{
+    
+}
+
 - (BOOL)checkUserCanInvestIsDetail:(BOOL)isDetail type:(SelectAccoutType)accout;
 {
     

@@ -16,14 +16,17 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imageFirst;
 @property (weak, nonatomic) IBOutlet UILabel *valueLabelFirst;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabelFirst;
+@property (weak, nonatomic) IBOutlet UILabel *title1LabelFirst;
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageSecond;
 @property (weak, nonatomic) IBOutlet UILabel *valueLabelSecond;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabelSecond;
+@property (weak, nonatomic) IBOutlet UILabel *title1LabelSecond;
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageThird;
 @property (weak, nonatomic) IBOutlet UILabel *valueLabelThird;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabelThird;
+@property (weak, nonatomic) IBOutlet UILabel *title1LabelThird;
 
 @property (weak, nonatomic) IBOutlet UIView *segFirstView;
 @property (weak, nonatomic) IBOutlet UIView *segSecondView;
@@ -73,14 +76,17 @@
         UCFAttachModel *attachFirst = [_presenter.attach firstObject];
         UCFAttachModel *attachSecond = [_presenter.attach objectAtIndex:1];
         UCFAttachModel *attachThird = [_presenter.attach lastObject];
-        self.titleLabelFirst.text = attachFirst.statusTxt;
-        self.valueLabelFirst.text = attachFirst.content;
+        self.title1LabelFirst.text = attachFirst.statusTxt;
+        self.valueLabelFirst.text = attachFirst.giftNum;
+        self.titleLabelFirst.text = attachFirst.giftName;
         
-        self.titleLabelSecond.text = attachSecond.statusTxt;
-        self.valueLabelSecond.text = attachSecond.content;
+        self.title1LabelSecond.text = attachSecond.statusTxt;
+        self.valueLabelSecond.text = attachSecond.giftNum;
+        self.titleLabelSecond.text = attachSecond.giftName;
         
-        self.titleLabelThird.text = attachThird.statusTxt;
-        self.valueLabelThird.text = attachThird.content;
+        self.title1LabelThird.text = attachThird.statusTxt;
+        self.valueLabelThird.text = attachThird.giftNum;
+        self.titleLabelThird.text = attachThird.giftName;
         
         if (attachFirst.status.integerValue == 1) {
             self.imageFirst.image = [UIImage imageNamed:@"mission_icon_1"];
