@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface UCFAttachModel : NSObject
+@property (copy, nonatomic) NSString *giftName;
+@property (copy, nonatomic) NSString *giftNum;
 @property (copy, nonatomic) NSString *content;
 @property (copy, nonatomic) NSString *statusTxt;
 @property (copy, nonatomic) NSString *status;

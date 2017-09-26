@@ -21,4 +21,17 @@
     // Configure the view for the selected state
 }
 
+- (IBAction)leftButtonClicked:(UIButton *)sender {
+    if ([self.delegate respondsToSelector:@selector(mineFuncSecCell:didClickedButtonWithTitle:)]) {
+        [self.delegate mineFuncSecCell:self didClickedButtonWithTitle:self.titleDesLabel.text];
+    }
+}
+
+- (IBAction)rightButtonClicked:(UIButton *)sender {
+    if ([self.delegate respondsToSelector:@selector(mineFuncSecCell:didClickedButtonWithTitle:)]) {
+        [self.delegate mineFuncSecCell:self didClickedButtonWithTitle:self.title2DesLabel.text];
+    }
+}
+
+
 @end

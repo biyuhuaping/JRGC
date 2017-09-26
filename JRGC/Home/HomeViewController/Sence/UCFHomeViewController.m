@@ -950,6 +950,9 @@
 {
     AppDelegate *appdel = (AppDelegate *)[UIApplication sharedApplication].delegate;
     UCFInvestViewController *invest = (UCFInvestViewController *)[[appdel.tabBarController.childViewControllers objectAtIndex:1].childViewControllers firstObject];
+//    if (iconPresenter.productName) {
+//        <#statements#>
+//    }
     switch (iconPresenter.type) {
             
         case 1:
@@ -964,6 +967,17 @@
         case 4:
             invest.selectedType = @"Trans";
             break;
+            
+        case 5: {
+            self.accoutType = SelectAccoutTypeP2P;
+            if ([self checkUserCanInvestIsDetail:NO type:self.accoutType]) {
+                UCFFacReservedViewController *facReservedWeb = [[UCFFacReservedViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
+//                facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@", PRERESERVE_URL, model.Id];
+                facReservedWeb.navTitle = @"工场预约";
+                [self.navigationController pushViewController:facReservedWeb animated:YES];
+                return;
+            }
+        }
             
     }
     if ([invest isViewLoaded]) {

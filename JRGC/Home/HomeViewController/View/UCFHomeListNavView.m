@@ -12,6 +12,7 @@
 @property (weak, nonatomic) UILabel *titleLabel;
 @property (weak, nonatomic) UIImageView *backView;
 @property (weak, nonatomic) UIView *bottmLine;
+@property (weak, nonatomic) UIButton *giftButton;
 @end
 
 @implementation UCFHomeListNavView
@@ -55,6 +56,16 @@
     [self addSubview:button];
     self.loginAndRegisterButton = button;
     [self setLoginAndRegisterButtonWithState:NO];
+    
+    UIButton *button1 = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button1 setTitle:@"礼物" forState:UIControlStateNormal];
+    [button1 setBackgroundColor:[UIColor greenColor]];
+    [button1 setContentEdgeInsets:UIEdgeInsetsMake(5, 8, 5, 8)];
+    button1.titleLabel.font = [UIFont systemFontOfSize:14];
+    [button1 addTarget:self action:@selector(giftClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:button1];
+    self.giftButton = button1;
+    button1.hidden = YES;
     
     UIView *bottomLine = [[UIView alloc] initWithFrame:CGRectZero];
     bottomLine.backgroundColor = UIColorWithRGB(0xd8d8d8);
@@ -105,6 +116,11 @@
     }
 }
 
+- (void)giftClicked:(UIButton *)button
+{
+    
+}
+
 - (void)setOffset:(CGFloat)offset
 {
     DBLOG(@"%f", offset);
@@ -141,10 +157,8 @@
             }];
         }
         else {
-            [UIView animateWithDuration:0.25 animations:^{
-                self.backView.alpha = 0.9;
-                self.bottmLine.alpha = 0.9;
-            }];
+            self.backView.alpha = 0.9;
+            self.bottmLine.alpha = 0.9;
         }
         if (self.backView.alpha > 0.3) {
             [UIView animateWithDuration:0.25 animations:^{

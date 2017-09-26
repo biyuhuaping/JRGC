@@ -11,6 +11,8 @@
 @interface UCFUserBenefitModel : NSObject
 @property (nonatomic, copy) NSString *beanAmount;
 @property (nonatomic, copy) NSString *couponNumber;
+@property (nonatomic, copy) NSString *beanExpiring;
+@property (nonatomic, copy) NSString *couponExpringNum;
 @property (nonatomic, copy) NSString *hurl;
 @property (nonatomic, copy) NSString *memberLever;
 @property (nonatomic, copy) NSString *promotionCode;
