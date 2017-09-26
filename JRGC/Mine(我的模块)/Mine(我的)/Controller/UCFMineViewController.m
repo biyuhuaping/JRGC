@@ -28,6 +28,7 @@
 #import "UCFMyFacBeanViewController.h"
 #import "UCFInvitationRebateViewController.h"
 #import "UCFMyReservedViewController.h"
+#import "UCFWebViewJavascriptBridgeLevel.h"
 @interface UCFMineViewController () <UITableViewDelegate, UITableViewDataSource, UCFMineHeaderViewDelegate, UCFMineFuncCellDelegate, UCFMineAPIManagerDelegate, UCFMineFuncSecCellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) UCFMineHeaderView   *mineHeaderView;
@@ -331,12 +332,17 @@
 
 - (void)mineHeaderView:(UCFMineHeaderView *)mineHeaderView tappedMememberLevelView:(UIView *)memberLevelView
 {
-    
+    //跳转到会员等级
+    UCFWebViewJavascriptBridgeLevel*vc = [[UCFWebViewJavascriptBridgeLevel alloc] initWithNibName:@"UCFWebViewJavascriptBridgeLevel" bundle:nil];
+    vc.url = LEVELURL;
+    vc.navTitle = @"会员等级";
+    [self.navigationController pushViewController:vc animated:YES];
+
 }
 
 - (void)mineHeaderView:(UCFMineHeaderView *)mineHeaderView didClikedMessageButton:(UIButton *)totalProfitButton
 {
-    
+    [self gotoMessageCenterViewController];
 }
 
 - (BOOL)checkUserCanInvestIsDetail:(BOOL)isDetail type:(SelectAccoutType)accout;
