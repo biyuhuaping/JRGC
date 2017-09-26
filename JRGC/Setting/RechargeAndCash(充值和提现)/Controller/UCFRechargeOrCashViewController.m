@@ -169,8 +169,8 @@
     UCFAccoutCardModel *p2pCardModel  = [[UCFAccoutCardModel alloc]init];
     p2pCardModel.cardTitleStr = @"微金账户余额";
     p2pCardModel.isRechargeOrCash = _isRechargeOrCash;
-    p2pCardModel.cardLogoImageName = @"card_logo_wj";
-    p2pCardModel.cardBgImageName = @"card_bg_blue";
+    p2pCardModel.cardLogoImageName = [_dataDict objectSafeForKey:@"p2pCardLogoUrl"];
+    p2pCardModel.cardBgImageName =[_dataDict objectSafeForKey:@"p2pCardBgColor"];
     p2pCardModel.accoutBalanceStr = [NSString stringWithFormat:@"¥%@",[UCFToolsMehod AddComma:[_dataDict objectSafeForKey:@"p2pBalance"]]];
     if ([UserInfoSingle sharedManager].openStatus == 3)  {
         p2pCardModel.cardDetialStr = @"未设置交易密码";
@@ -185,8 +185,8 @@
     UCFAccoutCardModel *honerCardModel  = [[UCFAccoutCardModel alloc]init];
     honerCardModel.cardTitleStr = @"尊享账户余额";
     honerCardModel.isRechargeOrCash = _isRechargeOrCash;
-    honerCardModel.cardLogoImageName = @"card_logo_zx";
-    honerCardModel.cardBgImageName = @"card_bg_red";
+    honerCardModel.cardLogoImageName = [_dataDict objectSafeForKey:@"honerCardLogoUrl"];// @"card_logo_zx";
+    honerCardModel.cardBgImageName =[_dataDict objectSafeForKey:@"p2pCardBgColor"]; // @"card_bg_red";
     honerCardModel.accoutBalanceStr = [NSString stringWithFormat:@"¥%@",[UCFToolsMehod AddComma:[_dataDict objectSafeForKey:@"zxBalance"]]];
     if ([UserInfoSingle sharedManager].enjoyOpenStatus == 3)  {
         honerCardModel.cardDetialStr = @"未设置交易密码";
@@ -201,8 +201,8 @@
     UCFAccoutCardModel *goldCardModel  = [[UCFAccoutCardModel alloc]init];
     goldCardModel.cardTitleStr = @"黄金账户余额";
     goldCardModel.isRechargeOrCash = _isRechargeOrCash;
-    goldCardModel.cardLogoImageName = @"card_logo_gold";
-    goldCardModel.cardBgImageName = @"card_bg_yellow";
+    goldCardModel.cardLogoImageName = [_dataDict objectSafeForKey:@"goldCardLogoUrl"]; //@"card_logo_gold";
+    goldCardModel.cardBgImageName =[_dataDict objectSafeForKey:@"godlCardBgColor"]; // @"card_bg_yellow";
     goldCardModel.accoutBalanceStr = [NSString stringWithFormat:@"¥%@",[UCFToolsMehod AddComma:[_dataDict objectSafeForKey:@"goldBalance"]]];
     goldCardModel.cardDetialStr = [_dataDict objectSafeForKey:@"goldCardName"];
     goldCardModel.cardNumberStr = [_dataDict objectSafeForKey:@"goldCardNum"];

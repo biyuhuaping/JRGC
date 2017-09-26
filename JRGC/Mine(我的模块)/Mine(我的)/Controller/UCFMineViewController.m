@@ -22,6 +22,11 @@
 #import "UCFP2POrHonerAccoutViewController.h"
 #import "HSHelper.h"
 #import "UCFAccountPieCharViewController.h"
+#import "UCFCouponViewController.h"
+#import "UCFWorkPointsViewController.h"
+#import "UCFMessageCenterViewController.h"
+#import "UCFMyFacBeanViewController.h"
+#import "UCFInvitationRebateViewController.h"
 @interface UCFMineViewController () <UITableViewDelegate, UITableViewDataSource, UCFMineHeaderViewDelegate, UCFMineFuncCellDelegate, UCFMineAPIManagerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) UCFMineHeaderView   *mineHeaderView;
@@ -245,6 +250,46 @@
         }
 
     }
+    
+    
+    if(indexPath.section == 2)
+    {
+          UCFMineFuncSecCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        if ([cell.titleDesLabel.text isEqualToString:@"工豆"]) {
+            UCFMyFacBeanViewController *bean = [[UCFMyFacBeanViewController alloc] initWithNibName:@"UCFMyFacBeanViewController" bundle:nil];
+            bean.title = @"我的工豆";
+            [self.navigationController pushViewController:bean animated:YES];
+
+        }
+        else{
+            //跳转到工分
+            UCFWorkPointsViewController *subVC = [[UCFWorkPointsViewController alloc]initWithNibName:@"UCFWorkPointsViewController" bundle:nil];
+            subVC.title = @"我的工分";
+            [self.navigationController pushViewController:subVC animated:YES];
+
+        }
+        
+        if ([cell.title2DesLabel.text isEqualToString:@"优惠券"]) {
+            
+            UCFCouponViewController *coupon = [[UCFCouponViewController alloc] initWithNibName:@"UCFCouponViewController" bundle:nil];
+//            AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+//            UINavigationController *nav = app.tabBarController.selectedViewController;
+            [self.navigationController pushViewController:coupon animated:YES];
+            
+        }else{//邀请返利
+            UCFInvitationRebateViewController *feedBackVC = [[UCFInvitationRebateViewController alloc] initWithNibName:@"UCFInvitationRebateViewController" bundle:nil];
+            feedBackVC.title = @"邀请获利";
+            [self.navigationController pushViewController:feedBackVC animated:YES];
+        }
+        
+    }
+}
+#pragma mark -去消息中心
+-(void)gotoMessageCenterViewController
+{
+    UCFMessageCenterViewController *messagecenterVC = [[UCFMessageCenterViewController alloc]initWithNibName:@"UCFMessageCenterViewController" bundle:nil];
+    messagecenterVC.title =@"消息中心";
+    [self.navigationController pushViewController:messagecenterVC animated:YES];
 }
 #pragma mark - 我的页面的头部视图代理方法
 - (void)mineHeaderViewDidClikedUserInfoWithCurrentVC:(UCFMineHeaderView *)mineHeaderView

@@ -7,6 +7,7 @@
 //
 
 #import "UCFRechargeAndCashView.h"
+#import "UIImageView+WebCache.h"
 @interface UCFRechargeAndCashView()
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *upViewHight;
 
@@ -35,7 +36,8 @@
     _accoutCardModel = accoutCardModel;
     self.isRechargeOrCash = accoutCardModel.isRechargeOrCash;
     self.cardtitleLabel.text = accoutCardModel.cardTitleStr;
-    self.cardLogoImage.image = [UIImage imageNamed:accoutCardModel.cardLogoImageName];
+    
+    [self.cardLogoImage  sd_setImageWithURL:[NSURL URLWithString:accoutCardModel.cardLogoImageName]]; //[] [UIImage imageNamed:accoutCardModel.cardLogoImageName];
     self.cardDetialLabel.text = accoutCardModel.cardDetialStr;
     self.cardBgImageView.image = [UIImage imageNamed:accoutCardModel.cardBgImageName];
     self.cardStateLabel.text = accoutCardModel.cardStateStr;
