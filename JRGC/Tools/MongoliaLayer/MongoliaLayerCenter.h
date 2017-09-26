@@ -14,7 +14,7 @@
 @property (nonatomic, strong) NSMutableDictionary *mongoliaLayerDic;
 @property (nonatomic, assign) BOOL lockViewDisappear; //默认为NO
 @property (nonatomic, weak)   UITableView   *tableView;
-@property (nonatomic, assign) BOOL honerAlert;        //默认为NO
+//@property (nonatomic, assign) BOOL honerAlert;        //默认为NO
 
 + (MongoliaLayerCenter *)sharedManager;
 - (void)showLogic;
