@@ -42,7 +42,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.navigationController.navigationBarHidden = YES;
+//    self.navigationController.navigationBarHidden = YES;
+     [self.navigationController setNavigationBarHidden:YES animated:NO];
     if ([[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
         if (_loginView) {
             [_loginView removeFromSuperview];
@@ -265,39 +266,6 @@
         }
 
     }
-    
-    
-    if(indexPath.section == 2)
-    {
-          UCFMineFuncSecCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-        if ([cell.titleDesLabel.text isEqualToString:@"工豆"]) {
-            UCFMyFacBeanViewController *bean = [[UCFMyFacBeanViewController alloc] initWithNibName:@"UCFMyFacBeanViewController" bundle:nil];
-            bean.title = @"我的工豆";
-            [self.navigationController pushViewController:bean animated:YES];
-
-        }
-        else{
-            //跳转到工分
-            UCFWorkPointsViewController *subVC = [[UCFWorkPointsViewController alloc]initWithNibName:@"UCFWorkPointsViewController" bundle:nil];
-            subVC.title = @"我的工分";
-            [self.navigationController pushViewController:subVC animated:YES];
-
-        }
-        
-        if ([cell.title2DesLabel.text isEqualToString:@"优惠券"]) {
-            
-            UCFCouponViewController *coupon = [[UCFCouponViewController alloc] initWithNibName:@"UCFCouponViewController" bundle:nil];
-//            AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-//            UINavigationController *nav = app.tabBarController.selectedViewController;
-            [self.navigationController pushViewController:coupon animated:YES];
-            
-        }else{//邀请返利
-            UCFInvitationRebateViewController *feedBackVC = [[UCFInvitationRebateViewController alloc] initWithNibName:@"UCFInvitationRebateViewController" bundle:nil];
-            feedBackVC.title = @"邀请获利";
-            [self.navigationController pushViewController:feedBackVC animated:YES];
-        }
-        
-    }
 }
 #pragma mark -去消息中心
 -(void)gotoMessageCenterViewController
@@ -422,7 +390,31 @@
 
 - (void)mineFuncSecCell:(UCFMineFuncSecCell *)funcSecCell didClickedButtonWithTitle:(NSString *)title
 {
-    
+    if ([title isEqualToString:@"工豆"]) {
+        UCFMyFacBeanViewController *bean = [[UCFMyFacBeanViewController alloc] initWithNibName:@"UCFMyFacBeanViewController" bundle:nil];
+        bean.title = @"我的工豆";
+        [self.navigationController pushViewController:bean animated:YES];
+        
+    }
+    else if ([title isEqualToString:@"工分"]){
+        //跳转到工分
+        UCFWorkPointsViewController *subVC = [[UCFWorkPointsViewController alloc]initWithNibName:@"UCFWorkPointsViewController" bundle:nil];
+        subVC.title = @"我的工分";
+        [self.navigationController pushViewController:subVC animated:YES];
+        
+    }
+    else   if ([title isEqualToString:@"优惠券"]){
+        
+        UCFCouponViewController *coupon = [[UCFCouponViewController alloc] initWithNibName:@"UCFCouponViewController" bundle:nil];
+        [self.navigationController pushViewController:coupon animated:YES];
+        
+    }
+    else  if ([title isEqualToString:@"邀请返利"]){//邀请返利
+        UCFInvitationRebateViewController *feedBackVC = [[UCFInvitationRebateViewController alloc] initWithNibName:@"UCFInvitationRebateViewController" bundle:nil];
+        feedBackVC.title = @"邀请获利";
+        [self.navigationController pushViewController:feedBackVC animated:YES];
+    }
+
 }
 
 - (void)mineApiManager:(UCFMineAPIManager *)apiManager didSuccessedCashAccoutBalanceResult:(id)result withTag:(NSUInteger)tag

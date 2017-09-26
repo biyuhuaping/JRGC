@@ -202,7 +202,7 @@
     goldCardModel.cardTitleStr = @"黄金账户余额";
     goldCardModel.isRechargeOrCash = _isRechargeOrCash;
     goldCardModel.cardLogoImageName = [_dataDict objectSafeForKey:@"goldCardLogoUrl"]; //@"card_logo_gold";
-    goldCardModel.cardBgImageName =[_dataDict objectSafeForKey:@"godlCardBgColor"]; // @"card_bg_yellow";
+    goldCardModel.cardBgImageName = [_dataDict objectSafeForKey:@"goldCardBgColor"]; // @"card_bg_yellow";
     goldCardModel.accoutBalanceStr = [NSString stringWithFormat:@"¥%@",[UCFToolsMehod AddComma:[_dataDict objectSafeForKey:@"goldBalance"]]];
     goldCardModel.cardDetialStr = [_dataDict objectSafeForKey:@"goldCardName"];
     goldCardModel.cardNumberStr = [_dataDict objectSafeForKey:@"goldCardNum"];
