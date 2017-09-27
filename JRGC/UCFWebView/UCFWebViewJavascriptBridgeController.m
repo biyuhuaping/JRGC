@@ -37,7 +37,8 @@
 #import "TradePasswordVC.h"
 
 #import "UserInfoSingle.h"
-
+#import <QuickLook/QuickLook.h>
+#import "QLHeaderViewController.h"
 #define MALLTIME  12.0
 #define SIGNATURETIME 30.0
 
@@ -222,6 +223,13 @@
     
     _webView.backgroundColor=[UIColor clearColor];
     _webView.scalesPageToFit = YES;
+#ifdef __IPHONE_11_0
+    if (@available(iOS 11.0, *)) {
+        _webView.scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    } else {
+        // Fallback on earlier versions
+    }
+#endif
     self.webView.delegate = self;
 //    self.webView.scrollView.delegate  = self; //在类中去实现该代理
     for (UIView *subView in [_webView subviews])
@@ -414,6 +422,9 @@
             [weakSelf.navigationController setNavigationBarHidden:YES animated:NO];
             weakSelf.topConSpace.constant = 0;
 
+        }else if ([nativeData[@"action"] isEqualToString:@"reserve_protocol"]) {
+            NSString *value = [nativeData objectSafeForKey:@"value"];
+            [weakSelf getContractContent:value];
         }
         
         //----------------------------------------------------------------------------------------------------qyy
@@ -424,7 +435,15 @@
         }*/
     }];
 }
-
+- (void)getContractContent:(NSString *)value
+{
+    NSArray *arr = [value componentsSeparatedByString:@","];
+    if (arr.count == 2) {
+        NSString *strParameters = [NSString stringWithFormat:@"userId=%@&prdOrderId=%@&contractType=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],[arr objectAtIndex:0],[arr objectAtIndex:1]];
+        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagContractDownLoad owner:self Type:self.accoutType];
+    }
+    
+}
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
 {
     if (!error) {
@@ -480,6 +499,10 @@
                 DBLOG(@".......");
             }];
         }
+    } else if (tag.integerValue == kSXTagContractDownLoad) {
+        QLHeaderViewController *vc = [[QLHeaderViewController alloc] init];
+        vc.localFilePath = result;
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 
