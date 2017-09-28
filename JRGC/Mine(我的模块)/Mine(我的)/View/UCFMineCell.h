@@ -13,5 +13,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleDesLabel;
 @property (weak, nonatomic) IBOutlet UILabel *valueLabel;
 @property (weak, nonatomic) IBOutlet UILabel *describeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *descriLabel;
 
 @end
