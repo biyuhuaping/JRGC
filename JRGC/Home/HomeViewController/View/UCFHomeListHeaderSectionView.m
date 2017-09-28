@@ -93,6 +93,7 @@
         }
         else if (attachFirst.status.integerValue == 2) {
             self.imageFirst.image = [UIImage imageNamed:@"mission_icon_1"];
+            
         }
         else if (attachFirst.status.integerValue == 3) {
             self.imageFirst.image = [UIImage imageNamed:@"mission_icon_complete"];
@@ -105,10 +106,14 @@
         else if (attachSecond.status.integerValue == 2) {
             self.imageSecond.image = [UIImage imageNamed:@"mission_icon_2"];
             self.segFirstView.backgroundColor = UIColorWithRGB(0xfd4d4c);
+            self.valueLabelSecond.textColor = UIColorWithRGB(0xfd4d4c);
+            self.titleLabelSecond.textColor = UIColorWithRGB(0xfd4d4c);
         }
         else if (attachSecond.status.integerValue == 3) {
             self.imageSecond.image = [UIImage imageNamed:@"mission_icon_complete"];
             self.segFirstView.backgroundColor = UIColorWithRGB(0xfd4d4c);
+            self.valueLabelSecond.textColor = UIColorWithRGB(0xfd4d4c);
+            self.titleLabelSecond.textColor = UIColorWithRGB(0xfd4d4c);
         }
         
         if (attachThird.status.integerValue == 1) {
@@ -118,10 +123,14 @@
         else if (attachThird.status.integerValue == 2) {
             self.imageThird.image = [UIImage imageNamed:@"mission_icon_3"];
             self.segSecondView.backgroundColor = UIColorWithRGB(0xfd4d4c);
+            self.valueLabelThird.textColor = UIColorWithRGB(0xfd4d4c);
+            self.titleLabelThird.textColor = UIColorWithRGB(0xfd4d4c);
         }
         else if (attachThird.status.integerValue == 3) {
             self.imageThird.image = [UIImage imageNamed:@"mission_icon_complete"];
             self.segSecondView.backgroundColor = UIColorWithRGB(0xfd4d4c);
+            self.valueLabelThird.textColor = UIColorWithRGB(0xfd4d4c);
+            self.titleLabelThird.textColor = UIColorWithRGB(0xfd4d4c);
         }
     }
 }

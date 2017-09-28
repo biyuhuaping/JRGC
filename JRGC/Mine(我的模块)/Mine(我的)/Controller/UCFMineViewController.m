@@ -177,20 +177,38 @@
         if (indexPath.row == 0) {
             cell.iconImageView.image = [UIImage imageNamed:@"uesr_icon_wj"];
             cell.titleDesLabel.text = @"微金账户";
-            cell.valueLabel.text = self.assetModel.p2pCashBalance.length > 0 ? [NSString stringWithFormat:@"¥%@", self.assetModel.p2pCashBalance] : [NSString stringWithFormat:@"¥0.00"];
-            cell.describeLabel.text = self.benefitModel.repayPerDateWJ.length > 0 ? [NSString stringWithFormat:@"最近回款日%@", self.benefitModel.repayPerDateWJ] : @"最近无回款";
+            if ([UserInfoSingle sharedManager].openStatus > 3) {
+                cell.valueLabel.text = self.assetModel.p2pCashBalance.length > 0 ? [NSString stringWithFormat:@"¥%@", self.assetModel.p2pCashBalance] : [NSString stringWithFormat:@"¥0.00"];
+                cell.describeLabel.text = self.benefitModel.repayPerDateWJ.length > 0 ? [NSString stringWithFormat:@"最近回款日%@", self.benefitModel.repayPerDateWJ] : @"最近无回款";
+            }
+            else {
+                cell.valueLabel.text = @"未开户";
+                cell.describeLabel.text = @"";
+            }
         }
         else if (indexPath.row == 1) {
             cell.iconImageView.image = [UIImage imageNamed:@"uesr_icon_zx"];
             cell.titleDesLabel.text = @"尊享账户";
-            cell.valueLabel.text = self.assetModel.zxCashBalance.length > 0 ? [NSString stringWithFormat:@"¥%@", self.assetModel.zxCashBalance] : [NSString stringWithFormat:@"¥0.00"];
-            cell.describeLabel.text = self.benefitModel.repayPerDateZX.length > 0 ? [NSString stringWithFormat:@"最近回款日%@", self.benefitModel.repayPerDateZX] : @"最近无回款";
+            if ([UserInfoSingle sharedManager].enjoyOpenStatus > 3) {
+                cell.valueLabel.text = self.assetModel.zxCashBalance.length > 0 ? [NSString stringWithFormat:@"¥%@", self.assetModel.zxCashBalance] : [NSString stringWithFormat:@"¥0.00"];
+                cell.describeLabel.text = self.benefitModel.repayPerDateZX.length > 0 ? [NSString stringWithFormat:@"最近回款日%@", self.benefitModel.repayPerDateZX] : @"最近无回款";
+            }
+            else {
+                cell.valueLabel.text = @"未开户";
+                cell.describeLabel.text = @"";
+            }
         }
         else if (indexPath.row == 2) {
             cell.iconImageView.image = [UIImage imageNamed:@"uesr_icon_gold"];
             cell.titleDesLabel.text = @"黄金账户";
-            cell.valueLabel.text = self.assetModel.nmCashBalance.length > 0 ? [NSString stringWithFormat:@"¥%@", self.assetModel.nmCashBalance] : [NSString stringWithFormat:@"¥0.00"];
-            cell.describeLabel.text = self.benefitModel.repayPerDateNM;
+            if ([UserInfoSingle sharedManager].enjoyOpenStatus > 3) {
+                cell.valueLabel.text = self.assetModel.nmCashBalance.length > 0 ? [NSString stringWithFormat:@"¥%@", self.assetModel.nmCashBalance] : [NSString stringWithFormat:@"¥0.00"];
+                cell.describeLabel.text = self.benefitModel.repayPerDateNM;
+            }
+            else {
+                cell.valueLabel.text = @"未开户";
+                cell.describeLabel.text = @"";
+            }
         }
         return cell;
     }
@@ -234,7 +252,7 @@
             cell.iconImageView.image = [UIImage imageNamed:@"uesr_icon_score"];
             cell.icon2ImageView.image = [UIImage imageNamed:@"uesr_icon_rebate"];
             cell.titleDesLabel.text = @"工分";
-            cell.valueLabel.text = [NSString stringWithFormat:@"¥%@", self.benefitModel.score];
+            cell.valueLabel.text = [NSString stringWithFormat:@"%@", self.benefitModel.score];
             cell.title2DesLabel.text = @"邀请返利";
             cell.value2Label.text = self.benefitModel.promotionCode.length > 0 ? [NSString stringWithFormat:@"工场码%@", self.benefitModel.promotionCode] : @"";
             cell.signView.hidden = YES;

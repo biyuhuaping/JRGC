@@ -39,7 +39,7 @@
     
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     titleLabel.textColor = UIColorWithRGB(0x333333);
-    titleLabel.text = @"我的";
+    titleLabel.text = @"首页";
     titleLabel.font = [UIFont systemFontOfSize:18];
     titleLabel.textAlignment = NSTextAlignmentCenter;
     [self.backView addSubview:titleLabel];
