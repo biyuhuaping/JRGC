@@ -755,9 +755,9 @@
         if ([dic[@"ret"] boolValue]) {
             NSString *unReadMsgCount = [dic[@"data"] objectSafeForKey:@"unReadMsgCount"];
             if ([unReadMsgCount intValue] > 0) {
-                [self.tabBarController.tabBar showBadgeOnItemIndex:0];
+                [self.tabBarController.tabBar showBadgeOnItemIndex:4];
             } else {
-                [self.tabBarController.tabBar hideBadgeOnItemIndex:0];
+                [self.tabBarController.tabBar hideBadgeOnItemIndex:4];
             }
         }else{
             [self.tabBarController.tabBar hideBadgeOnItemIndex:0];
