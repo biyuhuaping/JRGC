@@ -11,7 +11,11 @@
 @interface UCFRechargeAndCashView()
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *upViewHight;
 
-
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *cardLogoBgHeight;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *cardLogoBgWidth;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *cardLogoImageHeight;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *cardLogoImageWidth;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *cardStateTriling;
 - (IBAction)clickRechargeOrCashBtn:(id)sender;
 
 
@@ -21,7 +25,6 @@
 {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        self.upViewHight.constant =  [Common calculateNewSizeBaseMachine:30];
     }
     
     return self;
@@ -30,6 +33,11 @@
 {
     [super layoutSubviews];
     self.upViewHight.constant =  [Common calculateNewSizeBaseMachine:30];
+    self.cardLogoBgWidth.constant = [Common calculateNewSizeBaseMachine:33];
+    self.cardLogoBgHeight.constant = [Common calculateNewSizeBaseMachine:33];
+    self.cardLogoImageHeight.constant = [Common calculateNewSizeBaseMachine:25];
+    self.cardLogoImageWidth.constant = [Common calculateNewSizeBaseMachine:25];
+    self.cardStateTriling.constant = [Common calculateNewSizeBaseMachine:55];
 }
 -(void)setAccoutCardModel:(UCFAccoutCardModel *)accoutCardModel
 {

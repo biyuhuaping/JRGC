@@ -52,30 +52,26 @@
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="card_logo_bg" translatesAutoresizingMaskIntoConstraints="NO" id="e2n-eW-CF6">
                                     <rect key="frame" x="0.0" y="0.0" width="33" height="33"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="33" id="Ads-b7-m9u"/>
-                                        <constraint firstAttribute="width" constant="33" id="seC-6j-TGk"/>
+                                        <constraint firstAttribute="height" constant="33" id="0RL-kp-wPJ"/>
+                                        <constraint firstAttribute="width" constant="33" id="Bik-gz-kYi"/>
                                     </constraints>
                                 </imageView>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="card_logo_zx" translatesAutoresizingMaskIntoConstraints="NO" id="HJY-mU-LuO">
                                     <rect key="frame" x="4" y="4" width="25" height="25"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="25" id="6JK-WX-680"/>
-                                        <constraint firstAttribute="width" constant="25" id="SuJ-AO-ZLy"/>
+                                        <constraint firstAttribute="height" constant="25" id="AAC-8t-4kh"/>
+                                        <constraint firstAttribute="width" constant="25" id="xZ9-k2-joO"/>
                                     </constraints>
                                 </imageView>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="33" id="52e-XL-h6A"/>
-                                <constraint firstAttribute="bottom" secondItem="e2n-eW-CF6" secondAttribute="bottom" id="TPH-Je-qsJ"/>
+                                <constraint firstItem="e2n-eW-CF6" firstAttribute="centerY" secondItem="GoC-oK-bvT" secondAttribute="centerY" id="AV5-Gk-0pM"/>
+                                <constraint firstItem="e2n-eW-CF6" firstAttribute="centerX" secondItem="GoC-oK-bvT" secondAttribute="centerX" id="Lba-8T-5J4"/>
                                 <constraint firstAttribute="height" constant="33" id="ThE-uu-7mZ"/>
-                                <constraint firstAttribute="trailing" secondItem="HJY-mU-LuO" secondAttribute="trailing" constant="4" id="dTr-ei-Eyp"/>
-                                <constraint firstItem="e2n-eW-CF6" firstAttribute="leading" secondItem="GoC-oK-bvT" secondAttribute="leading" id="jBl-IJ-qOk"/>
-                                <constraint firstItem="HJY-mU-LuO" firstAttribute="top" secondItem="GoC-oK-bvT" secondAttribute="top" constant="4" id="n77-bm-jzU"/>
-                                <constraint firstItem="HJY-mU-LuO" firstAttribute="leading" secondItem="GoC-oK-bvT" secondAttribute="leading" constant="4" id="ot8-PG-3qY"/>
-                                <constraint firstAttribute="bottom" secondItem="HJY-mU-LuO" secondAttribute="bottom" constant="4" id="piz-7F-zUb"/>
-                                <constraint firstItem="e2n-eW-CF6" firstAttribute="top" secondItem="GoC-oK-bvT" secondAttribute="top" id="tTK-9P-Ndr"/>
-                                <constraint firstAttribute="trailing" secondItem="e2n-eW-CF6" secondAttribute="trailing" id="yPN-OZ-FwZ"/>
+                                <constraint firstItem="HJY-mU-LuO" firstAttribute="centerY" secondItem="GoC-oK-bvT" secondAttribute="centerY" id="dvn-93-HNl"/>
+                                <constraint firstItem="HJY-mU-LuO" firstAttribute="centerX" secondItem="GoC-oK-bvT" secondAttribute="centerX" id="gEk-VG-dNw"/>
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="微金存款账户" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xKI-p5-uRs">
@@ -140,9 +136,14 @@
                 <outlet property="accoutBalanceLabel" destination="Qbe-gF-Cfp" id="PQH-0g-W7G"/>
                 <outlet property="cardBgImageView" destination="rYl-6l-bSd" id="Zde-Eo-vzs"/>
                 <outlet property="cardDetialLabel" destination="xKI-p5-uRs" id="l1f-a4-0kq"/>
+                <outlet property="cardLogoBgHeight" destination="0RL-kp-wPJ" id="0Dn-Iu-UHB"/>
+                <outlet property="cardLogoBgWidth" destination="Bik-gz-kYi" id="W9p-RP-hXU"/>
                 <outlet property="cardLogoImage" destination="HJY-mU-LuO" id="Mcz-Pn-Csx"/>
+                <outlet property="cardLogoImageHeight" destination="AAC-8t-4kh" id="PKa-jB-LA6"/>
+                <outlet property="cardLogoImageWidth" destination="xZ9-k2-joO" id="0G4-O8-WSu"/>
                 <outlet property="cardNumberLabel" destination="XVx-wN-LNF" id="ddJ-rt-0fv"/>
                 <outlet property="cardStateLabel" destination="B6b-Vh-4o8" id="ohf-xP-8mI"/>
+                <outlet property="cardStateTriling" destination="uYQ-jr-QFs" id="HtB-IO-Zk7"/>
                 <outlet property="cardtitleLabel" destination="j9S-YW-OVk" id="xkz-64-rSl"/>
                 <outlet property="upViewHight" destination="VYW-zF-ADR" id="Zrl-0p-6L2"/>
             </connections>
