@@ -45,7 +45,7 @@
 {
     [super viewWillAppear:animated];
 //    self.navigationController.navigationBarHidden = YES;
-     [self.navigationController setNavigationBarHidden:YES animated:NO];
+     [self.navigationController setNavigationBarHidden:YES animated:YES];
     if ([[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
         if (_loginView) {
             [_loginView removeFromSuperview];

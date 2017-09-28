@@ -422,7 +422,7 @@
             [weakSelf.navigationController setNavigationBarHidden:YES animated:NO];
             weakSelf.topConSpace.constant = 0;
 
-        }else if ([nativeData[@"action"] isEqualToString:@"reserve_protocol"]) {
+        }else if ([nativeData[@"action"] isEqualToString:@"reserve_contract"]) {
             NSString *value = [nativeData objectSafeForKey:@"value"];
             [weakSelf getContractContent:value];
         }
