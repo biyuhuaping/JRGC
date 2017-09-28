@@ -95,7 +95,7 @@
             pieChatModel2.pieChartTitle = @"按金额类型";
             pieChatModel2.pieChartDataArray = [[NSMutableArray alloc]initWithArray:@[uncollectedPAndD,accountBalance]];
 //             pieChatModel2.pieChartDataArray = [[NSMutableArray alloc]initWithArray:@[@"6000.00",@"12000.00"]];
-            pieChatModel2.pieChartTitleArray = [[NSMutableArray alloc]initWithArray:@[@"待收资产",@"账户余额"]];
+            pieChatModel2.pieChartTitleArray = [[NSMutableArray alloc]initWithArray:@[@"待收本息",@"账户余额"]];
 
             self.dataArray = @[pieChatModel1,pieChatModel2];
             

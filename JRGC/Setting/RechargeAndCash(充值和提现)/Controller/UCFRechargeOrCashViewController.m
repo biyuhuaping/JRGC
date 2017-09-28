@@ -92,19 +92,23 @@
     p2pCardModel.cardLogoImageName = @"card_logo_wj";
     p2pCardModel.cardBgImageName = @"card_bg_blue";
     p2pCardModel.accoutBalanceStr = @"";
-    if ([UserInfoSingle sharedManager].openStatus == 1) {
-        p2pCardModel.cardDetialStr = @"未开户";
-        p2pCardModel.cardNumberStr = @"";
-        p2pCardModel.cardStateStr = @"去开户";
-    }else if ([UserInfoSingle sharedManager].openStatus == 2)  {
-        p2pCardModel.cardDetialStr = @"未绑卡";
-        p2pCardModel.cardNumberStr = @"";
-        p2pCardModel.cardStateStr = @"去绑卡";
-    }else{
-        p2pCardModel.cardDetialStr = @"微金徽商存管账户";
-        p2pCardModel.cardNumberStr = [_dataDict objectSafeForKey:@"p2pCardNum"];
-        p2pCardModel.cardStateStr = @"";
-    }
+    NSString *p2pCardName  = [_dataDict objectSafeForKey:@"p2pCardName"];
+    p2pCardModel.cardDetialStr = p2pCardName;
+    p2pCardModel.cardStateStr = [_dataDict objectSafeForKey:@"p2pCardState"];;
+    p2pCardModel.cardNumberStr = [_dataDict objectSafeForKey:@"p2pCardNum"];
+//    if ([UserInfoSingle sharedManager].openStatus == 1) {
+//        p2pCardModel.cardDetialStr = @"未开户";
+//        p2pCardModel.cardNumberStr = @"";
+//        p2pCardModel.cardStateStr = @"去开户";
+//    }else if ([UserInfoSingle sharedManager].openStatus == 2)  {
+//        p2pCardModel.cardDetialStr = @"未绑卡";
+//        p2pCardModel.cardNumberStr = @"";
+//        p2pCardModel.cardStateStr = @"去绑卡";
+//    }else{
+//        p2pCardModel.cardDetialStr = @"微金徽商存管账户";
+//       
+//        p2pCardModel.cardStateStr = @"";
+//    }
     
     UCFAccoutCardModel *honerCardModel  = [[UCFAccoutCardModel alloc]init];
     honerCardModel.cardTitleStr = @"充值至尊享账户";
@@ -112,26 +116,30 @@
     honerCardModel.cardLogoImageName = @"card_logo_zx";
     honerCardModel.cardBgImageName = @"card_bg_red";
     honerCardModel.accoutBalanceStr = @"";
-    if([UserInfoSingle sharedManager].zxAuthorization){
-        if ([UserInfoSingle sharedManager].enjoyOpenStatus == 1) {
-            honerCardModel.cardDetialStr = @"未开户";
-            honerCardModel.cardNumberStr = @"";
-            honerCardModel.cardStateStr = @"去开户";
-        }else if ([UserInfoSingle sharedManager].enjoyOpenStatus == 2)  {
-            honerCardModel.cardDetialStr = @"未绑卡";
-            honerCardModel.cardNumberStr = @"";
-            honerCardModel.cardStateStr = @"去绑卡";
-        }else{
-            honerCardModel.cardDetialStr = @"尊享徽商存管账户";
-            honerCardModel.cardNumberStr = [_dataDict objectSafeForKey:@"zxCardNum"];;
-            honerCardModel.cardStateStr = @"";
-        }
- 
-    }else{
-        honerCardModel.cardDetialStr = @"未授权";
-        honerCardModel.cardNumberStr = @"";
-        honerCardModel.cardStateStr = @"去授权";
-    }
+    NSString *honerCardName  = [_dataDict objectSafeForKey:@"zxCardName"];
+    honerCardModel.cardDetialStr = honerCardName;
+    honerCardModel.cardStateStr = [_dataDict objectSafeForKey:@"zxCardState"];
+    honerCardModel.cardNumberStr = [_dataDict objectSafeForKey:@"zxCardNum"];
+//    if([UserInfoSingle sharedManager].zxAuthorization){
+//        if ([UserInfoSingle sharedManager].enjoyOpenStatus == 1) {
+//            honerCardModel.cardDetialStr = @"未开户";
+//            honerCardModel.cardNumberStr = @"";
+//            honerCardModel.cardStateStr = @"去开户";
+//        }else if ([UserInfoSingle sharedManager].enjoyOpenStatus == 2)  {
+//            honerCardModel.cardDetialStr = @"未绑卡";
+//            honerCardModel.cardNumberStr = @"";
+//            honerCardModel.cardStateStr = @"去绑卡";
+//        }else{
+//            honerCardModel.cardDetialStr = @"尊享徽商存管账户";
+//            honerCardModel.cardNumberStr = [_dataDict objectSafeForKey:@"zxCardNum"];;
+//            honerCardModel.cardStateStr = @"";
+//        }
+// 
+//    }else{
+//        honerCardModel.cardDetialStr = @"未授权";
+//        honerCardModel.cardNumberStr = @"";
+//        honerCardModel.cardStateStr = @"去授权";
+//    }
     
     UCFAccoutCardModel *goldCardModel  = [[UCFAccoutCardModel alloc]init];
     goldCardModel.cardTitleStr = @"充值至黄金账户";
@@ -139,21 +147,25 @@
     goldCardModel.cardLogoImageName = @"card_logo_gold";
     goldCardModel.cardBgImageName = @"card_bg_yellow";
     goldCardModel.accoutBalanceStr = @"";
-    if ([UserInfoSingle sharedManager].openStatus < 3 &&  [UserInfoSingle sharedManager].enjoyOpenStatus < 3) {
-        goldCardModel.cardDetialStr = @"未开户";
-        goldCardModel.cardNumberStr = @"";
-        goldCardModel.cardStateStr = @"去开户";
-    }else {
-        if (![UserInfoSingle sharedManager].goldAuthorization ){
-            goldCardModel.cardDetialStr = @"未授权";
-            goldCardModel.cardNumberStr = @"";
-            goldCardModel.cardStateStr = @"去授权";
-        }else{
-            goldCardModel.cardDetialStr = @"工场黄金账户";
-            goldCardModel.cardNumberStr = [_dataDict objectSafeForKey:@"goldCardNum"];
-            goldCardModel.cardStateStr = @"";
-        }
-    }
+    goldCardModel.cardNumberStr = [_dataDict objectSafeForKey:@"goldCardNum"];
+    goldCardModel.cardDetialStr = [_dataDict objectSafeForKey:@"goldCardName"];
+    goldCardModel.cardStateStr = [_dataDict objectSafeForKey:@"goldCardState"];;
+    
+//    if ([UserInfoSingle sharedManager].openStatus < 3 &&  [UserInfoSingle sharedManager].enjoyOpenStatus < 3) {
+//        goldCardModel.cardDetialStr = @"未开户";
+//        goldCardModel.cardNumberStr = @"";
+//        goldCardModel.cardStateStr = @"去开户";
+//    }else {
+//        if (![UserInfoSingle sharedManager].goldAuthorization ){
+//            goldCardModel.cardDetialStr = @"未授权";
+//            goldCardModel.cardNumberStr = @"";
+//            goldCardModel.cardStateStr = @"去授权";
+//        }else{
+//            goldCardModel.cardDetialStr = @"工场黄金账户";
+//            goldCardModel.cardNumberStr =
+//            goldCardModel.cardStateStr = @"";
+//        }
+//    }
     _p2PAccoutCardView.accoutCardModel = p2pCardModel;
     _honerAccoutCardView.accoutCardModel = honerCardModel;
     _goldAccoutCardView.accoutCardModel = goldCardModel;
@@ -355,7 +367,7 @@
        switch (tag) {
            case 1001://微金充值
            {
-               if([cardModel.cardStateStr isEqualToString:@"去开户"] || [cardModel.cardStateStr isEqualToString:@"去绑卡"])
+               if([cardModel.cardDetialStr  hasSuffix:@"开户"] || [cardModel.cardStateStr hasSuffix:@"开户"]  || [cardModel.cardDetialStr hasSuffix:@"绑卡"] || [cardModel.cardStateStr hasSuffix:@"绑卡"])
                {
                    HSHelper *helper = [HSHelper new];
                    [helper pushOpenHSType:SelectAccoutTypeP2P Step:[UserInfoSingle sharedManager].openStatus nav:self.navigationController isPresentView:YES];
@@ -373,11 +385,11 @@
                break;
            case 102://尊享充值
            {
-               if([cardModel.cardStateStr isEqualToString:@"去授权"])
+               if([cardModel.cardDetialStr  hasSuffix:@"授权"] || [cardModel.cardStateStr hasSuffix:@"授权"])
                {
                    [[HSHelper new] pushP2POrWJAuthorizationType:SelectAccoutTypeHoner nav:self.navigationController];
                }
-               else if([cardModel.cardStateStr isEqualToString:@"去开户"] || [cardModel.cardStateStr isEqualToString:@"去绑卡"])
+               else if([cardModel.cardDetialStr  hasSuffix:@"开户"] || [cardModel.cardStateStr hasSuffix:@"开户"]  || [cardModel.cardDetialStr hasSuffix:@"绑卡"] || [cardModel.cardStateStr hasSuffix:@"绑卡"])
                {
                    HSHelper *helper = [HSHelper new];
                    [helper pushOpenHSType:SelectAccoutTypeHoner Step:[UserInfoSingle sharedManager].enjoyOpenStatus nav:self.navigationController isPresentView:YES];
@@ -395,12 +407,12 @@
                break;
            case 103://黄金充值
            {
-               if([cardModel.cardStateStr isEqualToString:@"去开户"])//去尊享开户
+               if([cardModel.cardDetialStr  hasSuffix:@"开户"] || [cardModel.cardStateStr hasSuffix:@"开户"]  )//去尊享开户
                {
                    HSHelper *helper = [HSHelper new];
                    [helper pushOpenHSType:SelectAccoutTypeHoner Step:[UserInfoSingle sharedManager].enjoyOpenStatus nav:self.navigationController isPresentView:YES];
                }
-               else if([cardModel.cardStateStr isEqualToString:@"去授权"])//去黄金授权页面
+               else if([cardModel.cardDetialStr  hasSuffix:@"授权"] || [cardModel.cardStateStr hasSuffix:@"授权"])//去黄金授权页面
                {
                    HSHelper *helper = [HSHelper new];
                    [helper pushGoldAuthorizationType:SelectAccoutTypeGold nav:self.navigationController sourceVC:@"UCFRechargeOrCashVC"];
