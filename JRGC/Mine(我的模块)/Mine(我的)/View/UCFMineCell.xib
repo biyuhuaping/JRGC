@@ -73,6 +73,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="descriLabel" destination="9Sp-iq-SAD" id="AoD-ZW-TSA"/>
                 <outlet property="describeLabel" destination="wR3-6A-72i" id="OIj-RE-5wb"/>
                 <outlet property="iconImageView" destination="N2E-vW-8nt" id="3UZ-EV-nbN"/>
                 <outlet property="titleDesLabel" destination="CKv-91-G47" id="vnm-4a-VET"/>

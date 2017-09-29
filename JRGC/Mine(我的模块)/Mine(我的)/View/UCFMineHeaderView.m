@@ -50,7 +50,17 @@
 }
 
 - (IBAction)visible:(UIButton *)sender {
-    [self setNeedsLayout];
+//    [self setNeedsLayout];
+    if (self.visibleButton.selected) {
+        self.totalAssetLabel.text = self.userAssetModel.total.length > 0 ? [NSString stringWithFormat:@"¥%@", self.userAssetModel.total] : @"¥0.00";
+        self.addedProfitLabel.text = self.userAssetModel.interests.length > 0 ? [NSString stringWithFormat:@"¥%@", self.userAssetModel.interests] : @"¥0.00";
+        self.totalBalanceLabel.text = self.userAssetModel.cashBalance.length > 0 ? [NSString stringWithFormat:@"¥%@", self.userAssetModel.cashBalance] : @"¥0.00";
+    }
+    else {
+        self.totalAssetLabel.text = @"***";
+        self.addedProfitLabel.text = @"***";
+        self.totalBalanceLabel.text = @"***";
+    }
     sender.selected = !sender.selected;
 }
 
@@ -106,21 +116,24 @@
         self.addedProfitLabel.text = self.userAssetModel.interests.length > 0 ? [NSString stringWithFormat:@"¥%@", self.userAssetModel.interests] : @"¥0.00";
         self.totalBalanceLabel.text = self.userAssetModel.cashBalance.length > 0 ? [NSString stringWithFormat:@"¥%@", self.userAssetModel.cashBalance] : @"¥0.00";
     }
-    
 }
 
 - (void)setUserBenefitModel:(UCFUserBenefitModel *)userBenefitModel
 {
     _userBenefitModel = userBenefitModel;
-    if ([userBenefitModel.sex integerValue] == 1) {
-        self.userIconImageView.image = [UIImage imageNamed:@"user_icon_head_male"];
-    }
-    else if ([self.userBenefitModel.sex integerValue] == 2) {
+    if ([self.userBenefitModel.sex integerValue] == 0) {
         self.userIconImageView.image = [UIImage imageNamed:@"user_icon_head_female"];
+        self.userNameLabel.text = [UserInfoSingle sharedManager].realName;
+    }
+    else if ([self.userBenefitModel.sex integerValue] == 1) {
+        self.userIconImageView.image = [UIImage imageNamed:@"user_icon_head_male"];
+        self.userNameLabel.text = [UserInfoSingle sharedManager].realName;
     }
     else {
         self.userIconImageView.image = [UIImage imageNamed:@"password_icon_head"];
+        self.userNameLabel.text = @"未认证";
     }
+    
     self.userLevelLabel.text = [NSString stringWithFormat:@"VIP%@", userBenefitModel.memberLever];
     if (userBenefitModel.unReadMsgCount.integerValue > 0) {
         self.messageDotView.hidden = NO;
@@ -136,7 +149,7 @@
 {
     [super layoutSubviews];
     
-    self.userNameLabel.text = [UserInfoSingle sharedManager].realName;
+//    self.userNameLabel.text = [UserInfoSingle sharedManager].realName;
     
     
     
