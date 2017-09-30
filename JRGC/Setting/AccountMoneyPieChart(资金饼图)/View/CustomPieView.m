@@ -298,7 +298,7 @@ typedef void(^ClickBlock)(NSInteger clickIndex);
             if (i < self.segmentTitleArray.count) {
                 titleString = self.segmentTitleArray[i];
             }
-            NSString *finalString = [NSString stringWithFormat:@" %@:¥0.00",titleString];
+            NSString *finalString = [NSString stringWithFormat:@" %@: ¥0.00",titleString];
             [self.finalTextArray addObject:finalString];
         }
         return;
@@ -325,7 +325,7 @@ typedef void(^ClickBlock)(NSInteger clickIndex);
         }
         
         NSString *valueStr = [NSString stringWithFormat:@"%.2f",value];
-        NSString *finalString = [NSString stringWithFormat:@" %@:¥%@",titleString,[UCFToolsMehod AddComma:valueStr]];
+        NSString *finalString = [NSString stringWithFormat:@" %@: ¥%@",titleString,[UCFToolsMehod AddComma:valueStr]];
         [self.finalTextArray addObject:finalString];
         
     }

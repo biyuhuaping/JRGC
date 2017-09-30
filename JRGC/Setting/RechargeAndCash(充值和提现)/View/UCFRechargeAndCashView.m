@@ -10,12 +10,13 @@
 #import "UIImageView+WebCache.h"
 @interface UCFRechargeAndCashView()
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *upViewHight;
-
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *upViewLabelLeft;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *cardLogoBgHeight;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *cardLogoBgWidth;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *cardLogoImageHeight;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *cardLogoImageWidth;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *cardStateTriling;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *downCardLogoViewLeft;
 - (IBAction)clickRechargeOrCashBtn:(id)sender;
 
 
@@ -32,12 +33,14 @@
 -(void)layoutSubviews
 {
     [super layoutSubviews];
+    self.upViewLabelLeft.constant =  [Common calculateNewSizeBaseMachine:20];
     self.upViewHight.constant =  [Common calculateNewSizeBaseMachine:30];
     self.cardLogoBgWidth.constant = [Common calculateNewSizeBaseMachine:33];
     self.cardLogoBgHeight.constant = [Common calculateNewSizeBaseMachine:33];
     self.cardLogoImageHeight.constant = [Common calculateNewSizeBaseMachine:25];
     self.cardLogoImageWidth.constant = [Common calculateNewSizeBaseMachine:25];
     self.cardStateTriling.constant = [Common calculateNewSizeBaseMachine:55];
+    self.downCardLogoViewLeft.constant =  [Common calculateNewSizeBaseMachine:20];
 }
 -(void)setAccoutCardModel:(UCFAccoutCardModel *)accoutCardModel
 {
