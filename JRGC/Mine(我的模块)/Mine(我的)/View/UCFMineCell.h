@@ -15,4 +15,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *describeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *descriLabel;
 
+@property (weak, nonatomic) UITableView *tableview;
+@property (strong, nonatomic) NSIndexPath *indexPath;
 @end

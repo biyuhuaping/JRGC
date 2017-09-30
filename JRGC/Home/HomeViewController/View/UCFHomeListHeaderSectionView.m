@@ -30,7 +30,12 @@
 
 @property (weak, nonatomic) IBOutlet UIView *segFirstView;
 @property (weak, nonatomic) IBOutlet UIView *segSecondView;
+@property (weak, nonatomic) IBOutlet UILabel *signLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *signImageView;
 
+@property (weak, nonatomic) IBOutlet UIView *goldSignView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *goldSignViewW;
+@property (weak, nonatomic) IBOutlet UILabel *goldSignLabel;
 @end
 
 @implementation UCFHomeListHeaderSectionView
@@ -42,6 +47,20 @@
     [self.contentView setBackgroundColor:UIColorWithRGB(0xf9f9f9)];
     [self.upLine setBackgroundColor:UIColorWithRGB(0xebebee)];
     [self.homeListHeaderMoreButton setTitleColor:UIColorWithRGB(0x4aa1f9) forState:UIControlStateNormal];
+    self.title1LabelFirst.textColor = UIColorWithRGB(0x555555);
+    self.title1LabelSecond.textColor = UIColorWithRGB(0x555555);
+    self.title1LabelThird.textColor = UIColorWithRGB(0x555555);
+    
+    self.titleLabelFirst.textColor = UIColorWithRGB(0xfd4d4c);
+    self.titleLabelSecond.textColor = UIColorWithRGB(0x555555);
+    self.titleLabelThird.textColor = UIColorWithRGB(0x555555);
+    
+    self.valueLabelFirst.textColor = UIColorWithRGB(0xfd4d4c);
+    self.valueLabelSecond.textColor = UIColorWithRGB(0x555555);
+    self.valueLabelThird.textColor = UIColorWithRGB(0x555555);
+    
+    self.goldSignView.backgroundColor = UIColorWithRGB(0xffecc5);
+    self.goldSignLabel.textColor = UIColorWithRGB(0xffa550);
 }
 
 - (void)setPresenter:(UCFHomeListGroupPresenter *)presenter {
@@ -63,13 +82,22 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    if (self.presenter.type == 16) {
-        _honerLabel.hidden = NO;
-        self.segView.hidden = NO;
+    if ([self.presenter.headerTitle isEqualToString:@"预约宝"]) {
+        self.signLabel.hidden = NO;
+        self.signLabel.textColor = UIColorWithRGB(0x4aa1f9);
+        self.signImageView.hidden = NO;
     }
     else {
-        _honerLabel.hidden = YES;
-        self.segView.hidden = YES;
+        self.signLabel.hidden = YES;
+        self.signImageView.hidden = YES;
+    }
+    if (self.presenter.type == 17) {
+        self.goldSignView.hidden = NO;
+//        self.segView.hidden = NO;
+    }
+    else {
+        self.goldSignView.hidden = YES;
+//        self.segView.hidden = YES;
     }
     
     if (_presenter.attach.count > 0) {
@@ -101,7 +129,7 @@
         
         if (attachSecond.status.integerValue == 1) {
             self.imageSecond.image = [UIImage imageNamed:@"mission_icon_2gray"];
-            self.segFirstView.backgroundColor = [UIColor lightGrayColor];
+            self.segFirstView.backgroundColor = UIColorWithRGB(0xcccccc);
         }
         else if (attachSecond.status.integerValue == 2) {
             self.imageSecond.image = [UIImage imageNamed:@"mission_icon_2"];
@@ -118,7 +146,7 @@
         
         if (attachThird.status.integerValue == 1) {
             self.imageThird.image = [UIImage imageNamed:@"mission_icon_3gray"];
-            self.segSecondView.backgroundColor = [UIColor lightGrayColor];
+            self.segSecondView.backgroundColor = UIColorWithRGB(0xcccccc);
         }
         else if (attachThird.status.integerValue == 2) {
             self.imageThird.image = [UIImage imageNamed:@"mission_icon_3"];

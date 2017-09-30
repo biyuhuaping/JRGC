@@ -63,14 +63,33 @@
                             <action selector="myReserved:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="hvk-XX-Zl9"/>
                         </connections>
                     </button>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bzs-Px-OYA">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="0.5"/>
+                        <color key="backgroundColor" red="0.8901960784313725" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="0.5" id="QZC-dX-wmS"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yzj-kj-nI7">
+                        <rect key="frame" x="0.0" y="49" width="320" height="0.5"/>
+                        <color key="backgroundColor" red="0.8901960784313725" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="0.5" id="8Ul-HB-oI6"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="Bzs-Px-OYA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="3DI-Nk-OYM"/>
                     <constraint firstItem="OTu-kO-pxf" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="7Te-d1-rQr"/>
                     <constraint firstItem="OTu-kO-pxf" firstAttribute="leading" secondItem="xuD-06-5HS" secondAttribute="trailing" constant="8" id="BxI-90-a6j"/>
+                    <constraint firstItem="Yzj-kj-nI7" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="EVg-TR-y8t"/>
                     <constraint firstAttribute="bottom" secondItem="Nhr-xL-s10" secondAttribute="bottom" id="Fwh-qC-X8U"/>
                     <constraint firstItem="0a9-DN-l69" firstAttribute="centerY" secondItem="TYK-JK-dHU" secondAttribute="centerY" id="Go5-am-eTP"/>
                     <constraint firstAttribute="bottom" secondItem="p0e-et-6C9" secondAttribute="bottom" id="Oqo-oE-MQS"/>
+                    <constraint firstItem="Bzs-Px-OYA" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="RqC-ef-evn"/>
+                    <constraint firstAttribute="bottom" secondItem="Yzj-kj-nI7" secondAttribute="bottom" id="XWY-XK-eyf"/>
                     <constraint firstItem="xuD-06-5HS" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="ZYg-7Z-Rcs"/>
+                    <constraint firstAttribute="trailing" secondItem="Yzj-kj-nI7" secondAttribute="trailing" id="aFa-FL-K5S"/>
                     <constraint firstAttribute="bottom" secondItem="Gfc-Nz-GRd" secondAttribute="bottom" id="aff-CG-cze"/>
                     <constraint firstItem="Gfc-Nz-GRd" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="cWC-sz-MOp"/>
                     <constraint firstItem="0a9-DN-l69" firstAttribute="leading" secondItem="TYK-JK-dHU" secondAttribute="trailing" constant="5" id="f0S-Ni-4yg"/>
@@ -78,6 +97,7 @@
                     <constraint firstAttribute="trailing" secondItem="p0e-et-6C9" secondAttribute="trailing" id="gB6-ob-lWd"/>
                     <constraint firstItem="Gfc-Nz-GRd" firstAttribute="leading" secondItem="Nhr-xL-s10" secondAttribute="trailing" id="jFG-L3-My5"/>
                     <constraint firstItem="Nhr-xL-s10" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="nga-1P-CNb"/>
+                    <constraint firstAttribute="trailing" secondItem="Bzs-Px-OYA" secondAttribute="trailing" id="qOj-tz-AFt"/>
                     <constraint firstItem="Gfc-Nz-GRd" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="ry1-Sn-Hfh"/>
                     <constraint firstItem="TYK-JK-dHU" firstAttribute="leading" secondItem="Gfc-Nz-GRd" secondAttribute="trailing" constant="13" id="tFf-hr-Bku"/>
                     <constraint firstItem="Nhr-xL-s10" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="tPO-K5-JVI"/>

@@ -119,7 +119,7 @@
 
 - (UCFHomeListGroupPresenter *)homeListGroupPresenterWithGroup:(UCFHomeListGroup *)group
 {
-    if ([group.type intValue] == 13 || [group.type intValue] == 16) {
+    if ([group.type intValue] == 13 || [group.type intValue] == 16 || [group.type intValue] == 17) {
         group.showMore = NO;
     }
     else {

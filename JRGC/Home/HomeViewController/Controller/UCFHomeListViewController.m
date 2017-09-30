@@ -50,7 +50,7 @@
         UCFHomeListFooterView *footerView = (UCFHomeListFooterView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeListFooterView" owner:self options:nil] lastObject];
         
         self.tableView.tableFooterView = footerView;
-//        self.footerView = footerView;
+        self.footerView = footerView;
         
         [self.tableView addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(refreshData)];
     }
@@ -95,8 +95,8 @@
             cell.delegate = self;
             cell.tableview = tableView;
         }
-        cell.indexPath = indexPath;
         cell.presenter = cellPresenter;
+        cell.indexPath = indexPath;
         return cell;
     }
     else if (cellPresenter.modelType == UCFHomeListCellModelTypeReserved) {
@@ -106,8 +106,8 @@
             cell = (UCFHomeInvestCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeInvestCell" owner:self options:nil] lastObject];
             cell.delegate = self;
         }
-        cell.indexPath = indexPath;
         cell.presenter = cellPresenter;
+        cell.indexPath = indexPath;
         return cell;
     }
     else if (cellPresenter.modelType == UCFHomeListCellModelTypeGoldFixed) {
@@ -116,8 +116,8 @@
         if (nil == cell) {
             cell = (UCFGoldFlexibleCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFGoldFlexibleCell" owner:self options:nil] lastObject];
         }
-        cell.indexPath = indexPath;
         cell.presenter = cellPresenter;
+        cell.indexPath = indexPath;
         cell.delegate = self;
         return cell;
     }
@@ -132,7 +132,7 @@
         view = (UCFHomeListHeaderSectionView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeListHeaderSectionView" owner:self options:nil] lastObject];
     }
     view.delegate = self;
-    view.frame = CGRectMake(0, 0, ScreenWidth, 30);
+    view.frame = CGRectMake(0, 0, ScreenWidth, 39);
     UCFHomeListGroupPresenter *groupPresenter = [self.presenter.allDatas objectAtIndex:section];
     UCFHomeListGroup *group = groupPresenter.group;
     if (!group.prdlist) {
@@ -147,7 +147,7 @@
     static NSString* viewId = @"homeListFooter";
     UITableViewHeaderFooterView *view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:viewId];
     if (nil == view) {
-        view = [[UITableViewHeaderFooterView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 10)];
+        view = [[UITableViewHeaderFooterView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 8)];
     }
     view.contentView.backgroundColor = UIColorWithRGB(0xebebee);
     return view;

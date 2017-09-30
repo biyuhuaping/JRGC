@@ -64,7 +64,7 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    [self.anurateLabel setFont:[UIFont systemFontOfSize:12] string:@"%"];
+    [self.anurateLabel setFont:[UIFont boldSystemFontOfSize:15] string:@"%"];
 }
 
 @end

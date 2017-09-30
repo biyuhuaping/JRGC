@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UCFCycleImageViewController">
             <connections>
+                <outlet property="downView" destination="Gjw-uk-0G3" id="tx7-sb-DAg"/>
                 <outlet property="homeIconBackView" destination="KD0-LM-3Ly" id="V9i-OH-3jA"/>
                 <outlet property="iconCollectionView" destination="eMC-0m-Xq3" id="fwg-0A-C6O"/>
                 <outlet property="noticeBackView" destination="S0K-ne-KG7" id="Nmn-Pg-qX1"/>
@@ -27,7 +28,7 @@
                     <rect key="frame" x="0.0" y="172" width="375" height="80"/>
                     <subviews>
                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="eMC-0m-Xq3">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
+                            <rect key="frame" x="10" y="0.0" width="355" height="80"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="F7l-0L-MSX">
                                 <size key="itemSize" width="50" height="50"/>
@@ -40,24 +41,14 @@
                                 <outlet property="delegate" destination="-1" id="bwF-J8-2AT"/>
                             </connections>
                         </collectionView>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7zb-Tv-u3k">
-                            <rect key="frame" x="0.0" y="79.5" width="375" height="0.5"/>
-                            <color key="backgroundColor" red="0.84705882352941175" green="0.84705882352941175" blue="0.84705882352941175" alpha="1" colorSpace="calibratedRGB"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="0.5" id="uLV-0d-EuH"/>
-                            </constraints>
-                        </view>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="7zb-Tv-u3k" firstAttribute="leading" secondItem="KD0-LM-3Ly" secondAttribute="leading" id="8eQ-r4-MD2"/>
                         <constraint firstAttribute="bottom" secondItem="eMC-0m-Xq3" secondAttribute="bottom" id="OPc-EG-mkY"/>
-                        <constraint firstAttribute="bottom" secondItem="7zb-Tv-u3k" secondAttribute="bottom" id="P2h-hr-fRH"/>
                         <constraint firstAttribute="height" constant="80" id="ZGf-Wj-0tO"/>
-                        <constraint firstAttribute="trailing" secondItem="7zb-Tv-u3k" secondAttribute="trailing" id="a4F-Yx-WZE"/>
-                        <constraint firstItem="eMC-0m-Xq3" firstAttribute="leading" secondItem="KD0-LM-3Ly" secondAttribute="leading" id="cCj-ep-yGE"/>
+                        <constraint firstItem="eMC-0m-Xq3" firstAttribute="leading" secondItem="KD0-LM-3Ly" secondAttribute="leading" constant="10" id="cCj-ep-yGE"/>
                         <constraint firstItem="eMC-0m-Xq3" firstAttribute="top" secondItem="KD0-LM-3Ly" secondAttribute="top" id="eBE-cK-1ib"/>
-                        <constraint firstAttribute="trailing" secondItem="eMC-0m-Xq3" secondAttribute="trailing" id="l2c-oh-abW"/>
+                        <constraint firstAttribute="trailing" secondItem="eMC-0m-Xq3" secondAttribute="trailing" constant="10" id="l2c-oh-abW"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S0K-ne-KG7">

@@ -17,4 +17,6 @@
 
 @interface UCFMineFuncCell : UITableViewCell
 @property (weak, nonatomic) id<UCFMineFuncCellDelegate> delegate;
+@property (weak, nonatomic) UITableView *tableview;
+@property (strong, nonatomic) NSIndexPath *indexPath;
 @end

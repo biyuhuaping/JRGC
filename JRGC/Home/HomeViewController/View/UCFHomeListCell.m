@@ -40,6 +40,9 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *upLineLeftSpace;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *downLineLeftSpace;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *annurateLabelW;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *startMoneyWidth;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *start1MoneyWidth;
+
 
 @end
 
@@ -51,7 +54,7 @@
     self.proName.textColor = UIColorWithRGB(0x555555);
     self.timeLabel.textColor = UIColorWithRGB(0x555555);
     self.repayModelLabel.textColor = UIColorWithRGB(0x555555);
-    self.startMoneyLabel.textColor = UIColorWithRGB(0x999999);
+    self.startMoneyLabel.textColor = UIColorWithRGB(0x555555);
     self.remainLabel.textColor = UIColorWithRGB(0x999999);
     self.circleProgressView.animationModel = CircleIncreaseSameTime;
     self.circleProgressView.showProgressText = YES;
@@ -70,10 +73,10 @@
         self.proName.text = presenter.proTitle;
         self.rateLabel.text = presenter.annualRate;
         if ([presenter.item.type isEqualToString:@"3"]) {
-            self.rateLabel.font = [UIFont boldSystemFontOfSize:15];
+            self.rateLabel.font = [UIFont boldSystemFontOfSize:22];
         }
         else {
-            self.rateLabel.font = [UIFont boldSystemFontOfSize:20];
+            self.rateLabel.font = [UIFont boldSystemFontOfSize:25];
         }
         if (presenter.holdTime.length > 0) {
             self.timeLabel.text = [NSString stringWithFormat:@"%@~%@", presenter.holdTime, presenter.repayPeriodtext];
@@ -129,9 +132,12 @@
                 //            self.progressView.progressLabel.textColor = UIColorWithRGB(0x909dae);
             }
             self.startMoneyLabel.text = @"年化收益克重";
+            self.startMoneyWidth.constant = -40;
+            self.start1MoneyWidth.constant = -20;
         }
         else{
-//            self.goldTtileThird.hidden = YES;
+            self.startMoneyWidth.constant = 0;
+            self.start1MoneyWidth.constant = 0;
             self.timeLabel.font = [UIFont systemFontOfSize:12];
             self.repayModelLabel.font = [UIFont systemFontOfSize:12];
             //控制进度视图显示
@@ -201,26 +207,32 @@
     NSInteger totalRows = [self.tableView numberOfRowsInSection:indexPath.section];
     
     if (totalRows == 1) { // 这组只有1行
-        self.downSegLine.hidden = NO;
-        self.upSegLine.hidden = NO;
+        self.downSegLine.hidden = YES;
+        self.upSegLine.hidden = YES;
         self.upSegLine.backgroundColor = UIColorWithRGB(0xe3e5ea);
         self.downSegLine.backgroundColor = UIColorWithRGB(0xd8d8d8);
         self.upLineLeftSpace.constant = 0;
         self.downLineLeftSpace.constant = 0;
     } else if (indexPath.row == 0) { // 这组的首行(第0行)
-        self.upSegLine.hidden = NO;
+        if (_presenter.modelType == UCFHomeListCellModelTypeDefault
+            ) {
+            self.upSegLine.hidden = NO;
+        }
+        else {
+            self.upSegLine.hidden = YES;
+        }
         self.downSegLine.hidden = YES;
         self.upSegLine.backgroundColor = UIColorWithRGB(0xe3e5ea);
         self.downSegLine.backgroundColor = UIColorWithRGB(0xe3e5ea);
-        self.upLineLeftSpace.constant = 0;
+        self.upLineLeftSpace.constant = 25;
         self.downLineLeftSpace.constant = 25;
     } else if (indexPath.row == totalRows - 1) { // 这组的末行(最后1行)
         self.upSegLine.hidden = NO;
-        self.downSegLine.hidden = NO;
+        self.downSegLine.hidden = YES;
         self.upSegLine.backgroundColor = UIColorWithRGB(0xe3e5ea);
         self.downSegLine.backgroundColor = UIColorWithRGB(0xd8d8d8);
         self.upLineLeftSpace.constant = 25;
-        self.downLineLeftSpace.constant = 0;
+        self.downLineLeftSpace.constant = 25;
     } else {
         self.upSegLine.hidden = NO;
         self.downSegLine.hidden = YES;
@@ -234,36 +246,6 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    if (self.presenter) {
-        if (_presenter.platformSubsidyExpense.length > 0) {//贴
-            _image1W.constant = 18;
-            self.proImageView1.image = [UIImage imageNamed:@"invest_icon_buletie"];
-        }
-        else {
-            _image1W.constant = 0;
-        }
-        if (_presenter.guaranteeCompany.length > 0) {//贴
-            _image2W.constant = 18;
-            self.proImageView2.image = [UIImage imageNamed:@"particular_icon_guarantee_dark"];
-        }
-        else {
-            _image2W.constant = 0;
-        }
-        if (_presenter.fixedDate.length > 0) {//贴
-            _image3W.constant = 18;
-            self.proImageView3.image = [UIImage imageNamed:@"invest_icon_redgu-1"];
-        }
-        else {
-            _image3W.constant = 0;
-        }
-        if (_presenter.holdTime.length > 0) {//贴
-            _image4W.constant = 18;
-            self.proImageView4.image = [UIImage imageNamed:@"invest_icon_ling"];
-        }
-        else {
-            _image4W.constant = 0;
-        }
-    }
     
     if (_presenter.item.prdLabelsList.count > 0 || self.goldModel.prdLabelsList.count > 0) {
         UCFProjectLabel *projectLabel = [_presenter.item.prdLabelsList firstObject];
@@ -288,16 +270,18 @@
     
     if (self.presenter.modelType == UCFHomeListCellModelTypeDefault) {
         if ([self.presenter.type isEqualToString:@"3"] || self.goldModel) {
-            [self.rateLabel setFont:[UIFont systemFontOfSize:10] string:@"克/100克"];
-            self.annurateLabelW.constant = 45;
+            [self.rateLabel setFont:[UIFont boldSystemFontOfSize:12] string:@"克/100克"];
+//            self.annurateLabelW.constant = 45;
             self.rateLabel.textColor = UIColorWithRGB(0xfc8f0e);
-            self.proSignBackView.backgroundColor = UIColorWithRGB(0xffc027);
+            self.proSignBackView.backgroundColor = UIColorWithRGB(0xffecc5);
+            self.proSignLabel.textColor = UIColorWithRGB(0xffa550);
         }
         else {
-            [self.rateLabel setFont:[UIFont systemFontOfSize:12] string:@"%"];
+            [self.rateLabel setFont:[UIFont boldSystemFontOfSize:15] string:@"%"];
             self.annurateLabelW.constant = 0;
             self.rateLabel.textColor = UIColorWithRGB(0xfd4d4c);
-            self.proSignBackView.backgroundColor = UIColorWithRGB(0xfd4d4c);
+            self.proSignBackView.backgroundColor = UIColorWithRGB(0xffdfdf);
+            self.proSignLabel.textColor = UIColorWithRGB(0xff7d7d);
         }
     }
 }

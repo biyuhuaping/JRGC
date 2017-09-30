@@ -15,6 +15,10 @@
 @property (weak, nonatomic) IBOutlet UIView *downSegLine;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *upLineLeftSpace;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *downLineLeftSpace;
+@property (weak, nonatomic) IBOutlet UIButton *okButton;
+@property (weak, nonatomic) IBOutlet UILabel *desc1Label;
+@property (weak, nonatomic) IBOutlet UILabel *desc2Label;
+@property (weak, nonatomic) IBOutlet UILabel *desc3Label;
 
 @property (weak, nonatomic) IBOutlet NZLabel *rateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *limitLabel;
@@ -25,7 +29,13 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+    self.okButton.backgroundColor = UIColorWithRGB(0xfd4d4c);
+    self.rateLabel.textColor = UIColorWithRGB(0xfd4d4c);
+    self.limitLabel.textColor = UIColorWithRGB(0x555555);
+    self.backModeLabel.textColor = UIColorWithRGB(0x555555);
+    self.desc1Label.textColor = UIColorWithRGB(0x999999);
+    self.desc2Label.textColor = UIColorWithRGB(0x999999);
+    self.desc3Label.textColor = UIColorWithRGB(0x999999);
 }
 
 - (IBAction)register:(UIButton *)sender {
@@ -40,7 +50,7 @@
     NSInteger totalRows = [self.tableview numberOfRowsInSection:indexPath.section];
     
     if (totalRows == 1) { // 这组只有1行
-        self.downSegLine.hidden = NO;
+        self.downSegLine.hidden = YES;
         self.upSegLine.hidden = NO;
         self.upSegLine.backgroundColor = UIColorWithRGB(0xe3e5ea);
         self.downSegLine.backgroundColor = UIColorWithRGB(0xd8d8d8);
@@ -86,7 +96,7 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    [self.rateLabel setFont:[UIFont systemFontOfSize:11] string:@"%"];
+    [self.rateLabel setFont:[UIFont boldSystemFontOfSize:15] string:@"%"];
 }
 
 @end

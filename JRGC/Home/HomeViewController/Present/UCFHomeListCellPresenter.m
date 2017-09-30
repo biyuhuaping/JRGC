@@ -140,7 +140,7 @@
         return 100.0;
     }
     else if (self.item.moedelType == UCFHomeListCellModelTypeReserved || self.item.moedelType == UCFHomeListCellModelTypeGoldFixed) {
-        return 170.0;
+        return 136;
     }
     else if (self.item.moedelType == UCFHomeListCellModelTypeNewUser) {
         return 125.0;

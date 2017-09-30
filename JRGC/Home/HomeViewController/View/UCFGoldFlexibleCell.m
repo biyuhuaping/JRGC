@@ -28,12 +28,14 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    self.proSignBackView.backgroundColor = UIColorWithRGB(0xffecc5);
+    self.proSignLabel.textColor = UIColorWithRGB(0xffa550);
 }
 
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    [self.goldFlexibleRateLabel setFont:[UIFont systemFontOfSize:12] string:@"%"];
+    [self.goldFlexibleRateLabel setFont:[UIFont boldSystemFontOfSize:15] string:@"%"];
     [self.completeLabel setFontColor:UIColorWithRGB(0x555555) string:@"已售"];
 }
 

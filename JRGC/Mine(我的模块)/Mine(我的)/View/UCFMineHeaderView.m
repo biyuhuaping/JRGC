@@ -28,6 +28,9 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
+    
+    self.messageDotView.backgroundColor = UIColorWithRGB(0xfd4d4c);
+    
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedUserIcon:)];
     [self.userIconImageView addGestureRecognizer:tap];
     

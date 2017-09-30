@@ -28,7 +28,7 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="微金账户" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CKv-91-G47">
                         <rect key="frame" x="46" y="20.5" width="61.5" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <nil key="textColor"/>
+                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="list_icon_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="Bhc-vb-crQ">
@@ -56,18 +56,38 @@
                         <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A5Y-rE-mVA">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="0.5"/>
+                        <color key="backgroundColor" red="0.8901960784313725" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="0.5" id="WxG-xD-Thx"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eGk-1h-TWA">
+                        <rect key="frame" x="0.0" y="59.5" width="320" height="0.5"/>
+                        <color key="backgroundColor" red="0.8901960784313725" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="0.5" id="Ecs-w4-OF4"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="9Sp-iq-SAD" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="228-I8-TWC"/>
                     <constraint firstItem="CKv-91-G47" firstAttribute="centerY" secondItem="N2E-vW-8nt" secondAttribute="centerY" id="3UW-Th-DQO"/>
                     <constraint firstItem="Bhc-vb-crQ" firstAttribute="leading" secondItem="y6a-p6-tbn" secondAttribute="trailing" constant="5" id="5l5-67-3G7"/>
+                    <constraint firstItem="eGk-1h-TWA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="6fc-Lc-Eaj"/>
+                    <constraint firstAttribute="trailing" secondItem="A5Y-rE-mVA" secondAttribute="trailing" id="AIX-xg-Hg5"/>
+                    <constraint firstAttribute="trailing" secondItem="eGk-1h-TWA" secondAttribute="trailing" id="Bah-91-vfe"/>
                     <constraint firstAttribute="bottom" secondItem="wR3-6A-72i" secondAttribute="bottom" constant="8" id="CEA-3e-3UH"/>
                     <constraint firstItem="Bhc-vb-crQ" firstAttribute="leading" secondItem="wR3-6A-72i" secondAttribute="trailing" constant="5" id="K8W-nf-BPS"/>
+                    <constraint firstItem="A5Y-rE-mVA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="LZR-qE-fpS"/>
                     <constraint firstItem="Bhc-vb-crQ" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="RuU-11-a4o"/>
                     <constraint firstItem="N2E-vW-8nt" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="13" id="azj-YU-gpN"/>
                     <constraint firstItem="N2E-vW-8nt" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="bu6-yU-gPf"/>
                     <constraint firstItem="CKv-91-G47" firstAttribute="leading" secondItem="N2E-vW-8nt" secondAttribute="trailing" constant="8" id="iQT-UM-KtO"/>
                     <constraint firstAttribute="trailing" secondItem="Bhc-vb-crQ" secondAttribute="trailing" constant="15" id="mOL-1E-ydi"/>
+                    <constraint firstAttribute="bottom" secondItem="eGk-1h-TWA" secondAttribute="bottom" id="oHv-bF-KOk"/>
+                    <constraint firstItem="A5Y-rE-mVA" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="pB7-El-vAR"/>
                     <constraint firstItem="y6a-p6-tbn" firstAttribute="centerY" secondItem="Bhc-vb-crQ" secondAttribute="centerY" id="t2j-le-qpO"/>
                     <constraint firstItem="y6a-p6-tbn" firstAttribute="leading" secondItem="9Sp-iq-SAD" secondAttribute="trailing" constant="4" id="zuD-ba-gLh"/>
                 </constraints>
@@ -75,8 +95,12 @@
             <connections>
                 <outlet property="descriLabel" destination="9Sp-iq-SAD" id="AoD-ZW-TSA"/>
                 <outlet property="describeLabel" destination="wR3-6A-72i" id="OIj-RE-5wb"/>
+                <outlet property="downSegLeftSpace" destination="6fc-Lc-Eaj" id="X0H-Oq-ar6"/>
+                <outlet property="downSegLine" destination="eGk-1h-TWA" id="3Ac-vo-Yev"/>
                 <outlet property="iconImageView" destination="N2E-vW-8nt" id="3UZ-EV-nbN"/>
                 <outlet property="titleDesLabel" destination="CKv-91-G47" id="vnm-4a-VET"/>
+                <outlet property="upSegLeftSpace" destination="LZR-qE-fpS" id="QXE-sa-8tw"/>
+                <outlet property="upSegLine" destination="A5Y-rE-mVA" id="PiN-Ki-vT2"/>
                 <outlet property="valueLabel" destination="y6a-p6-tbn" id="BOA-bh-fW4"/>
             </connections>
         </tableViewCell>

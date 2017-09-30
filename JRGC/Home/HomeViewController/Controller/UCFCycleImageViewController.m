@@ -24,6 +24,7 @@
 @property (weak, nonatomic) UCFNoticeView *noticeView;
 @property (weak, nonatomic) IBOutlet UICollectionView *iconCollectionView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *noticeBackViewHeight;
+@property (weak, nonatomic) IBOutlet UIView *downView;
 
 @end
 
@@ -35,6 +36,9 @@ static NSString *cellId = @"iconCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
 //    self.navigationController.navigationBar.hidden = YES;
+    
+    self.view.backgroundColor = UIColorWithRGB(0xebebee);
+    self.downView.backgroundColor = UIColorWithRGB(0xebebee);
     
     NSArray *images = @[[UIImage imageNamed:@"banner_unlogin_default"]];
     SDCycleScrollView *cycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectZero imagesGroup:images];
@@ -80,13 +84,13 @@ static NSString *cellId = @"iconCell";
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return (CGSize){ScreenWidth / 5, 80};
+    return (CGSize){(ScreenWidth-20) / 5, 80};
 }
 
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    return UIEdgeInsetsMake(0, 0, 0, 0);
+    return UIEdgeInsetsMake(10, 0, 0, 0);
 }
 
 

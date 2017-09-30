@@ -26,4 +26,6 @@
 @property (weak, nonatomic) IBOutlet UIView *sign2View;
 @property (weak, nonatomic) id<UCFMineFuncSecCellDelegate> delegate;
 
+@property (weak, nonatomic) UITableView *tableview;
+@property (strong, nonatomic) NSIndexPath *indexPath;
 @end

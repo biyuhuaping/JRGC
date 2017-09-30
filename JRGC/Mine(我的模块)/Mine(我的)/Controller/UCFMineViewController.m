@@ -44,6 +44,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 //    self.navigationController.navigationBarHidden = YES;
      [self.navigationController setNavigationBarHidden:YES animated:YES];
     if ([[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
@@ -57,6 +58,13 @@
         }
     }
 }
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+}
+
 - (UCFLoginBaseView *)loginView
 {
     if (!_loginView) {
@@ -173,7 +181,10 @@
         UCFMineCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
         if (nil == cell) {
             cell = (UCFMineCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFMineCell" owner:self options:nil] lastObject];
+            cell.tableview = tableView;
+            cell.valueLabel.textColor = UIColorWithRGB(0xfd4d4c);
         }
+        cell.indexPath = indexPath;
         if (indexPath.row == 0) {
             cell.iconImageView.image = [UIImage imageNamed:@"uesr_icon_wj"];
             cell.titleDesLabel.text = @"微金账户";
@@ -204,6 +215,7 @@
         }
         else if (indexPath.row == 2) {
             cell.iconImageView.image = [UIImage imageNamed:@"uesr_icon_gold"];
+            cell.valueLabel.textColor = UIColorWithRGB(0xffa811);
             cell.titleDesLabel.text = @"黄金账户";
             if ([UserInfoSingle sharedManager].enjoyOpenStatus > 2) {
                 cell.valueLabel.text = self.assetModel.nmCashBalance.length > 0 ? [NSString stringWithFormat:@"¥%@", self.assetModel.nmCashBalance] : [NSString stringWithFormat:@"¥0.00"];
@@ -224,6 +236,7 @@
         if (nil == cell) {
             cell = (UCFMineFuncCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFMineFuncCell" owner:self options:nil] lastObject];
             cell.delegate = self;
+            cell.tableview = tableView;
         }
         return cell;
     }
@@ -233,7 +246,9 @@
         if (nil == cell) {
             cell = (UCFMineFuncSecCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFMineFuncSecCell" owner:self options:nil] lastObject];
             cell.delegate = self;
+            cell.tableview = tableView;
         }
+        cell.indexPath = indexPath;
         if (indexPath.row == 0) {
             cell.iconImageView.image = [UIImage imageNamed:@"uesr_icon_bean"];
             cell.icon2ImageView.image = [UIImage imageNamed:@"uesr_icon_coupon"];
