@@ -17,6 +17,7 @@
 #import "UCFSession.h"
 #import "MongoliaLayerCenter.h"
 #import "UCFPicADModel.h"
+#import "UCFNoticeModel.h"
 
 #define HOMELIST @"homeList"
 #define HOMEICON @"homeIcon"
@@ -193,12 +194,14 @@
             NSMutableArray *tempArray = [[NSMutableArray alloc] init];
             NSDictionary *resultDict = [dic objectSafeDictionaryForKey:@"data"];
             NSDictionary *adDic = [[resultDict objectSafeForKey:@"picAD"] objectAtIndex:0];
+            NSDictionary *siteNotice = [resultDict objectSafeDictionaryForKey:@"siteNoticeMap"];
             if (adDic) {
                 [[NSUserDefaults standardUserDefaults] setValue:adDic forKey:@"AD_ACTIViTY_DIC"];
                 [[NSUserDefaults standardUserDefaults] synchronize];
             }
+            UCFNoticeModel *noticeModel = [UCFNoticeModel noticeWithDict:siteNotice];
             UCFPicADModel *picADModel = [UCFPicADModel picADWithDict:adDic];
-            [tempResult setObject:[resultDict objectSafeForKey:@"siteNotice"] forKey:@"siteNotice"];
+            [tempResult setObject:noticeModel forKey:@"siteNotice"];
             NSArray *productMap = [resultDict objectSafeArrayForKey:@"productMap"];
             for (NSDictionary *dict in productMap) {
                 UCFHomeIconModel *iconModel = [UCFHomeIconModel homeIconListWithDict:dict];
@@ -280,16 +283,16 @@
         complete(err, nil);
         [self.requestDict removeObjectForKey:HOMELIST];
     }
-    else if (tag.intValue == kSXTagMyReceipt) {
-        NetworkCompletionHandler complete = [self.requestDict objectForKey:USERINFOONE];
+    else if (tag.intValue == kSXTagHomeIconList) {
+        NetworkCompletionHandler complete = [self.requestDict objectForKey:HOMEICON];
         complete(err, nil);
-        [self.requestDict removeObjectForKey:USERINFOONE];
+        [self.requestDict removeObjectForKey:HOMEICON];
     }
-    else if (tag.intValue == kSXTagMySimpleInfo) {
-        NetworkCompletionHandler complete = [self.requestDict objectForKey:USERINFOTWO];
-        complete(err, nil);
-        [self.requestDict removeObjectForKey:USERINFOTWO];
-    }
+//    else if (tag.intValue == kSXTagMySimpleInfo) {
+//        NetworkCompletionHandler complete = [self.requestDict objectForKey:USERINFOTWO];
+//        complete(err, nil);
+//        [self.requestDict removeObjectForKey:USERINFOTWO];
+//    }
     else if (tag.intValue == kSXTagSingMenthod) {
         NetworkCompletionHandler complete = [self.requestDict objectForKey:SIGN];
         complete(err, nil);

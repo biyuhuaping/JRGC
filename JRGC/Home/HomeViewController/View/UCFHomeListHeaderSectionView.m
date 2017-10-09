@@ -82,7 +82,7 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    if ([self.presenter.headerTitle isEqualToString:@"预约宝"]) {
+    if ([self.presenter.headerTitle isEqualToString:@"预约宝"] || [self.headerTitleLabel.text isEqualToString:@"预约宝"]) {
         self.signLabel.hidden = NO;
         self.signLabel.textColor = UIColorWithRGB(0x4aa1f9);
         self.signImageView.hidden = NO;

@@ -109,7 +109,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 32;
+    return 39;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -131,7 +131,7 @@
     [view.upLine setBackgroundColor:UIColorWithRGB(0xebebee)];
     view.homeListHeaderMoreButton.hidden = YES;
     view.downView.hidden = YES;
-    view.frame = CGRectMake(0, 0, ScreenWidth, 30);
+    view.frame = CGRectMake(0, 0, ScreenWidth, 39);
     
     if (self.dataArray.count == 1) {
         view.headerTitleLabel.text =@"尊享优选";
@@ -158,7 +158,7 @@
     static NSString* viewId = @"homeListFooter";
     UITableViewHeaderFooterView *view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:viewId];
     if (nil == view) {
-        view = [[UITableViewHeaderFooterView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 10)];
+        view = [[UITableViewHeaderFooterView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 8)];
     }
     view.contentView.backgroundColor = UIColorWithRGB(0xebebee);
     return view;

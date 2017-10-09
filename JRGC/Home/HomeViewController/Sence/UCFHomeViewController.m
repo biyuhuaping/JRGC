@@ -50,6 +50,7 @@
 #import "UCFBatchInvestmentViewController.h"
 #import "UCFGoldCashViewController.h"
 #import "UCFHomeIconPresenter.h"
+#import "UCFNoticeModel.h"
 @interface UCFHomeViewController () <UCFHomeListViewControllerDelegate, UCFHomeListNavViewDelegate, UCFCycleImageViewControllerDelegate,BJGridItemDelegate, UIAlertViewDelegate,MjAlertViewDelegate>
 @property (strong, nonatomic) UCFCycleImageViewController *cycleImageVC;
 @property (strong, nonatomic) UCFUserInformationViewController *userInfoVC;
@@ -884,42 +885,21 @@
     
     [self.homeListVC.presenter fetchHomeIconListDataWithCompletionHandler:^(NSError *error, id result) {
         //请求成功
-        NSString *siteNotice = [result objectForKey:@"siteNotice"];
-        if (siteNotice.length > 0) {
-//            if (![originSiteNotice isEqualToString:siteNotice] ) {
-//                [[NSUserDefaults standardUserDefaults] setValue:siteNotice forKey:@"originSiteNotice"];
+        UCFNoticeModel *notice = [result objectForKey:@"siteNotice"];
+        if (notice.siteNotice.length > 0) {
                 [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isShowNotice"];
-//                [[NSUserDefaults standardUserDefaults] synchronize];
-//            }
-            
+                [[NSUserDefaults standardUserDefaults] synchronize];
+        
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                weakSelf.cycleImageVC.noticeStr = siteNotice;
+                weakSelf.cycleImageVC.noticeStr = notice.siteNotice;
                 [weakSelf refreshNoticeWithShow:YES];
             });
         }
         else{
             [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isShowNotice"];
-//            [[NSUserDefaults standardUserDefaults] synchronize];
+            [[NSUserDefaults standardUserDefaults] synchronize];
             [weakSelf refreshNoticeWithShow:NO];
         }
-//        NSString *originSiteNotice = [[NSUserDefaults standardUserDefaults] stringForKey:@"originSiteNotice"];
-//        if (siteNotice.length > 0) {
-//            if (![originSiteNotice isEqualToString:siteNotice] ) {
-//                [[NSUserDefaults standardUserDefaults] setValue:siteNotice forKey:@"originSiteNotice"];
-//                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isShowNotice"];
-//                [[NSUserDefaults standardUserDefaults] synchronize];
-//            }
-//            
-//            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//                weakSelf.cycleImageVC.noticeStr = siteNotice;
-//                [weakSelf refreshNotice];
-//            });
-//        }
-//        else{
-//            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isShowNotice"];
-//            [[NSUserDefaults standardUserDefaults] synchronize];
-//            [weakSelf refreshNotice];
-//        }
     }];
     
     [self.homeListVC.presenter fetchHomeListDataWithCompletionHandler:^(NSError *error, id result) {

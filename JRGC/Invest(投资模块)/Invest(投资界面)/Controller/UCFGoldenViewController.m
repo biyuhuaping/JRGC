@@ -95,7 +95,7 @@
 {
     if (indexPath.section == 0) {
         if (self.fliexGoldModel.nmPrdClaimName.length>0) {
-            return 185.0;
+            return 136.0;
         }
         return 0;
     }
@@ -155,13 +155,13 @@
 {
     if (section == 0) {
         if (self.fliexGoldModel.nmPrdClaimName.length > 0) {
-            return 32;
+            return 39;
         }
         else return 0.001;
     }
     else {
         if (self.dataArray.count>0) {
-            return 32;
+            return 39;
         }
     }
     return 0.001;
@@ -191,7 +191,7 @@
     view.downView.hidden = YES;
     [view.contentView setBackgroundColor:UIColorWithRGB(0xf9f9f9)];
     [view.upLine setBackgroundColor:UIColorWithRGB(0xebebee)];
-    view.frame = CGRectMake(0, 0, ScreenWidth, 30);
+    view.frame = CGRectMake(0, 0, ScreenWidth, 39);
     if (section == 0) {
         if (self.fliexGoldModel.nmPrdClaimName.length > 0) {
             view.homeListHeaderMoreButton.hidden = YES;

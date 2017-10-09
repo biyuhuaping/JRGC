@@ -102,7 +102,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 32;
+    return 39;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -122,22 +122,14 @@
     }
     view.downView.hidden = YES;
     UCFMicroMoneyGroup *group = [self.dataArray objectAtIndex:section];
-    view.headerTitleLabel.text = group.title;
-    if (group.desc) {
-        view.honerLabel.hidden = NO;
-        view.honerLabel.text = group.desc;
-        view.honerLineImageView.hidden = NO;
-    }else{
-        view.honerLabel.hidden = YES;
-        view.honerLineImageView.hidden = YES;
-    }
     [view.headerImageView sd_setImageWithURL:[NSURL URLWithString:group.iconUrl]];
     view.homeListHeaderMoreButton.hidden = !group.showMore;
     [view.contentView setBackgroundColor:UIColorWithRGB(0xf9f9f9)];
     [view.upLine setBackgroundColor:UIColorWithRGB(0xebebee)];
     [view.homeListHeaderMoreButton setTitleColor:UIColorWithRGB(0x4aa1f9) forState:UIControlStateNormal];
     view.delegate = self;
-    view.frame = CGRectMake(0, 0, ScreenWidth, 30);
+    view.frame = CGRectMake(0, 0, ScreenWidth, 39);
+    view.headerTitleLabel.text = group.title;
     return view;
 }
 
@@ -146,7 +138,7 @@
     static NSString* viewId = @"homeListFooter";
     UITableViewHeaderFooterView *view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:viewId];
     if (nil == view) {
-        view = [[UITableViewHeaderFooterView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 10)];
+        view = [[UITableViewHeaderFooterView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 8)];
     }
     view.contentView.backgroundColor = UIColorWithRGB(0xebebee);
     return view;
@@ -207,9 +199,9 @@
 {
     UCFMicroMoneyGroup *group = [self.dataArray objectAtIndex:indexPath.section];
     if (group.type.intValue == 16) {
-        return 170;
+        return 136;
     }
-    return 95;
+    return 100;
 }
 
 #pragma mark - 预约按钮的点击代理方法
