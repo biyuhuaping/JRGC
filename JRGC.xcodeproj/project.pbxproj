@@ -308,7 +308,6 @@
 		7470EC021B033080006DDCEF /* NSString+FormatForThousand.m in Sources */ = {isa = PBXBuildFile; fileRef = 7470EC011B033080006DDCEF /* NSString+FormatForThousand.m */; };
 		7470EC081B036B71006DDCEF /* PrintView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7470EC051B036B71006DDCEF /* PrintView.m */; };
 		7470EC091B036B71006DDCEF /* UIImage+zhang.m in Sources */ = {isa = PBXBuildFile; fileRef = 7470EC071B036B71006DDCEF /* UIImage+zhang.m */; };
-		7472A8591DCC5FD10051F9BE /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83F2D4EB1DCB3F950041F913 /* Interface.storyboard */; };
 		7477BF911AFAFED900914BFB /* UCFRedEnvelopeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7477BF901AFAFED900914BFB /* UCFRedEnvelopeTableViewCell.xib */; };
 		7477BF951AFB0F4C00914BFB /* UCFRedEnvelopeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7477BF931AFB0F4C00914BFB /* UCFRedEnvelopeTableViewCell.m */; };
 		7477BF9A1AFB19B200914BFB /* UCFNormalRedEnvelopeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7477BF981AFB19B200914BFB /* UCFNormalRedEnvelopeTableViewCell.m */; };
@@ -741,40 +740,9 @@
 		83E780731F38004400A400CE /* UCFGoldCouponCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83E780711F38004400A400CE /* UCFGoldCouponCell.xib */; };
 		83EB21E21D758EE50069EF95 /* UCFCashRecordListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83EB21E01D758EE50069EF95 /* UCFCashRecordListViewController.m */; };
 		83EB21E31D758EE50069EF95 /* UCFCashRecordListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83EB21E11D758EE50069EF95 /* UCFCashRecordListViewController.xib */; };
-		83F2D4ED1DCB3F950041F913 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83F2D4EB1DCB3F950041F913 /* Interface.storyboard */; };
-		83F2D4EF1DCB3F950041F913 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83F2D4EE1DCB3F950041F913 /* Assets.xcassets */; };
-		83F2D4F61DCB3F950041F913 /* JRGCWatch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 83F2D4F51DCB3F950041F913 /* JRGCWatch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		83F2D5061DCB3F950041F913 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83F2D5051DCB3F950041F913 /* Assets.xcassets */; };
-		83F2D50A1DCB3F950041F913 /* JRGCWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 83F2D4E91DCB3F940041F913 /* JRGCWatch.app */; };
-		83F2D5731DCB4A780041F913 /* UCFAssetListfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F2D5191DCB4A780041F913 /* UCFAssetListfaceController.m */; };
-		83F2D5741DCB4A780041F913 /* UCFAssetListRowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F2D51D1DCB4A780041F913 /* UCFAssetListRowCell.m */; };
-		83F2D5751DCB4A780041F913 /* UCFBackMoneyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F2D5211DCB4A780041F913 /* UCFBackMoneyController.m */; };
-		83F2D5761DCB4A780041F913 /* UCFBackMoneyRowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F2D5251DCB4A780041F913 /* UCFBackMoneyRowCell.m */; };
-		83F2D5771DCB4A780041F913 /* NotificationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F2D5291DCB4A780041F913 /* NotificationController.m */; };
-		83F2D5781DCB4A780041F913 /* UCFFactoryCodefaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F2D52F1DCB4A780041F913 /* UCFFactoryCodefaceController.m */; };
-		83F2D5791DCB4A780041F913 /* UCFHomefaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F2D5351DCB4A780041F913 /* UCFHomefaceController.m */; };
-		83F2D57A1DCB4A780041F913 /* UCFLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F2D53B1DCB4A780041F913 /* UCFLoginController.m */; };
-		83F2D57B1DCB4A780041F913 /* UCFAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F2D53E1DCB4A780041F913 /* UCFAccount.m */; };
-		83F2D57C1DCB4A780041F913 /* UCFSignfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F2D5431DCB4A780041F913 /* UCFSignfaceController.m */; };
-		83F2D57D1DCB4A780041F913 /* NSData+AES.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F2D5491DCB4A780041F913 /* NSData+AES.m */; };
-		83F2D57E1DCB4A780041F913 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F2D54B1DCB4A780041F913 /* NSData+Base64.m */; };
-		83F2D57F1DCB4A780041F913 /* NSString+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F2D54D1DCB4A780041F913 /* NSString+Base64.m */; };
-		83F2D5801DCB4A780041F913 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F2D5501DCB4A780041F913 /* AFHTTPSessionManager.m */; };
-		83F2D5811DCB4A780041F913 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F2D5531DCB4A780041F913 /* AFNetworkReachabilityManager.m */; };
-		83F2D5821DCB4A780041F913 /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F2D5551DCB4A780041F913 /* AFSecurityPolicy.m */; };
-		83F2D5831DCB4A780041F913 /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F2D5571DCB4A780041F913 /* AFURLRequestSerialization.m */; };
-		83F2D5841DCB4A780041F913 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F2D5591DCB4A780041F913 /* AFURLResponseSerialization.m */; };
-		83F2D5851DCB4A780041F913 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F2D55B1DCB4A780041F913 /* AFURLSessionManager.m */; };
-		83F2D5861DCB4A780041F913 /* ExtensionDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F2D5601DCB4A780041F913 /* ExtensionDelegate.m */; };
-		83F2D5871DCB4A780041F913 /* UCFBasefaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F2D5621DCB4A780041F913 /* UCFBasefaceController.m */; };
-		83F2D5881DCB4A780041F913 /* UCFTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F2D5671DCB4A780041F913 /* UCFTool.m */; };
-		83F2D5891DCB4A780041F913 /* UCFNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F2D56C1DCB4A780041F913 /* UCFNetwork.m */; };
-		83F2D58A1DCB4A780041F913 /* UCFAccountTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F2D56F1DCB4A780041F913 /* UCFAccountTool.m */; };
-		83F2D58B1DCB4A780041F913 /* UCFSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F2D5721DCB4A780041F913 /* UCFSession.m */; };
 		83F2D59D1DCB508F0041F913 /* UCFAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F2D5981DCB508F0041F913 /* UCFAccount.m */; };
 		83F2D59E1DCB508F0041F913 /* UCFAccountTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F2D59A1DCB508F0041F913 /* UCFAccountTool.m */; };
 		83F2D59F1DCB508F0041F913 /* UCFSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F2D59C1DCB508F0041F913 /* UCFSession.m */; };
-		83F2D5A11DCB57CA0041F913 /* WatchConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83F2D5A01DCB57CA0041F913 /* WatchConnectivity.framework */; };
 		83F4DAF51D9561EC00A0632E /* UCFPrdTransferBIdWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F4DAF31D9561EC00A0632E /* UCFPrdTransferBIdWebView.m */; };
 		83F4DAF61D9561EC00A0632E /* UCFPrdTransferBIdWebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83F4DAF41D9561EC00A0632E /* UCFPrdTransferBIdWebView.xib */; };
 		83F82E861EBC5DD200B79E02 /* UCFProductListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F82E851EBC5DD200B79E02 /* UCFProductListModel.m */; };
@@ -1019,41 +987,15 @@
 			remoteGlobalIDString = 7BFE3E7F1AC55C98002A53A2;
 			remoteInfo = JRGC;
 		};
-		83F2D4F71DCB3F950041F913 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7BFE3E781AC55C98002A53A2 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 83F2D4F41DCB3F950041F913;
-			remoteInfo = "JRGCWatch Extension";
-		};
-		83F2D5081DCB3F950041F913 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7BFE3E781AC55C98002A53A2 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 83F2D4E81DCB3F940041F913;
-			remoteInfo = JRGCWatch;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		83F2D50E1DCB3F950041F913 /* Embed App Extensions */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 13;
-			files = (
-				83F2D4F61DCB3F950041F913 /* JRGCWatch Extension.appex in Embed App Extensions */,
-			);
-			name = "Embed App Extensions";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		83F2D5121DCB3F950041F913 /* Embed Watch Content */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
 			dstSubfolderSpec = 16;
 			files = (
-				83F2D50A1DCB3F950041F913 /* JRGCWatch.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2312,76 +2254,12 @@
 		83EB21DF1D758EE50069EF95 /* UCFCashRecordListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFCashRecordListViewController.h; sourceTree = "<group>"; };
 		83EB21E01D758EE50069EF95 /* UCFCashRecordListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFCashRecordListViewController.m; sourceTree = "<group>"; };
 		83EB21E11D758EE50069EF95 /* UCFCashRecordListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFCashRecordListViewController.xib; sourceTree = "<group>"; };
-		83F2D4E91DCB3F940041F913 /* JRGCWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JRGCWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		83F2D4EC1DCB3F950041F913 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
-		83F2D4EE1DCB3F950041F913 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		83F2D4F01DCB3F950041F913 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		83F2D4F51DCB3F950041F913 /* JRGCWatch Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "JRGCWatch Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
-		83F2D4FB1DCB3F950041F913 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
-		83F2D5051DCB3F950041F913 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		83F2D5071DCB3F950041F913 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		83F2D5131DCB44230041F913 /* JRGCWatch Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "JRGCWatch Extension.entitlements"; sourceTree = "<group>"; };
-		83F2D5141DCB44330041F913 /* JRGCWatch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JRGCWatch.entitlements; sourceTree = "<group>"; };
-		83F2D5181DCB4A780041F913 /* UCFAssetListfaceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFAssetListfaceController.h; sourceTree = "<group>"; };
-		83F2D5191DCB4A780041F913 /* UCFAssetListfaceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFAssetListfaceController.m; sourceTree = "<group>"; };
-		83F2D51C1DCB4A780041F913 /* UCFAssetListRowCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFAssetListRowCell.h; sourceTree = "<group>"; };
-		83F2D51D1DCB4A780041F913 /* UCFAssetListRowCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFAssetListRowCell.m; sourceTree = "<group>"; };
-		83F2D5201DCB4A780041F913 /* UCFBackMoneyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFBackMoneyController.h; sourceTree = "<group>"; };
-		83F2D5211DCB4A780041F913 /* UCFBackMoneyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFBackMoneyController.m; sourceTree = "<group>"; };
-		83F2D5241DCB4A780041F913 /* UCFBackMoneyRowCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFBackMoneyRowCell.h; sourceTree = "<group>"; };
-		83F2D5251DCB4A780041F913 /* UCFBackMoneyRowCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFBackMoneyRowCell.m; sourceTree = "<group>"; };
-		83F2D5281DCB4A780041F913 /* NotificationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationController.h; sourceTree = "<group>"; };
-		83F2D5291DCB4A780041F913 /* NotificationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationController.m; sourceTree = "<group>"; };
-		83F2D52E1DCB4A780041F913 /* UCFFactoryCodefaceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFFactoryCodefaceController.h; sourceTree = "<group>"; };
-		83F2D52F1DCB4A780041F913 /* UCFFactoryCodefaceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFFactoryCodefaceController.m; sourceTree = "<group>"; };
-		83F2D5341DCB4A780041F913 /* UCFHomefaceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFHomefaceController.h; sourceTree = "<group>"; };
-		83F2D5351DCB4A780041F913 /* UCFHomefaceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFHomefaceController.m; sourceTree = "<group>"; };
-		83F2D53A1DCB4A780041F913 /* UCFLoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFLoginController.h; sourceTree = "<group>"; };
-		83F2D53B1DCB4A780041F913 /* UCFLoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFLoginController.m; sourceTree = "<group>"; };
-		83F2D53D1DCB4A780041F913 /* UCFAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFAccount.h; sourceTree = "<group>"; };
-		83F2D53E1DCB4A780041F913 /* UCFAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFAccount.m; sourceTree = "<group>"; };
-		83F2D5421DCB4A780041F913 /* UCFSignfaceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFSignfaceController.h; sourceTree = "<group>"; };
-		83F2D5431DCB4A780041F913 /* UCFSignfaceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFSignfaceController.m; sourceTree = "<group>"; };
-		83F2D5481DCB4A780041F913 /* NSData+AES.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+AES.h"; sourceTree = "<group>"; };
-		83F2D5491DCB4A780041F913 /* NSData+AES.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+AES.m"; sourceTree = "<group>"; };
-		83F2D54A1DCB4A780041F913 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
-		83F2D54B1DCB4A780041F913 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
-		83F2D54C1DCB4A780041F913 /* NSString+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Base64.h"; sourceTree = "<group>"; };
-		83F2D54D1DCB4A780041F913 /* NSString+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Base64.m"; sourceTree = "<group>"; };
-		83F2D54F1DCB4A780041F913 /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
-		83F2D5501DCB4A780041F913 /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPSessionManager.m; sourceTree = "<group>"; };
-		83F2D5511DCB4A780041F913 /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
-		83F2D5521DCB4A780041F913 /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
-		83F2D5531DCB4A780041F913 /* AFNetworkReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetworkReachabilityManager.m; sourceTree = "<group>"; };
-		83F2D5541DCB4A780041F913 /* AFSecurityPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSecurityPolicy.h; sourceTree = "<group>"; };
-		83F2D5551DCB4A780041F913 /* AFSecurityPolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSecurityPolicy.m; sourceTree = "<group>"; };
-		83F2D5561DCB4A780041F913 /* AFURLRequestSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLRequestSerialization.h; sourceTree = "<group>"; };
-		83F2D5571DCB4A780041F913 /* AFURLRequestSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLRequestSerialization.m; sourceTree = "<group>"; };
-		83F2D5581DCB4A780041F913 /* AFURLResponseSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLResponseSerialization.h; sourceTree = "<group>"; };
-		83F2D5591DCB4A780041F913 /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLResponseSerialization.m; sourceTree = "<group>"; };
-		83F2D55A1DCB4A780041F913 /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
-		83F2D55B1DCB4A780041F913 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
-		83F2D55F1DCB4A780041F913 /* ExtensionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtensionDelegate.h; sourceTree = "<group>"; };
-		83F2D5601DCB4A780041F913 /* ExtensionDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtensionDelegate.m; sourceTree = "<group>"; };
-		83F2D5611DCB4A780041F913 /* UCFBasefaceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFBasefaceController.h; sourceTree = "<group>"; };
-		83F2D5621DCB4A780041F913 /* UCFBasefaceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFBasefaceController.m; sourceTree = "<group>"; };
-		83F2D5661DCB4A780041F913 /* UCFTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFTool.h; sourceTree = "<group>"; };
-		83F2D5671DCB4A780041F913 /* UCFTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFTool.m; sourceTree = "<group>"; };
-		83F2D5691DCB4A780041F913 /* CommonSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonSetting.h; sourceTree = "<group>"; };
-		83F2D56A1DCB4A780041F913 /* NetworkSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkSetting.h; sourceTree = "<group>"; };
-		83F2D56B1DCB4A780041F913 /* UCFNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFNetwork.h; sourceTree = "<group>"; };
-		83F2D56C1DCB4A780041F913 /* UCFNetwork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFNetwork.m; sourceTree = "<group>"; };
-		83F2D56E1DCB4A780041F913 /* UCFAccountTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFAccountTool.h; sourceTree = "<group>"; };
-		83F2D56F1DCB4A780041F913 /* UCFAccountTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFAccountTool.m; sourceTree = "<group>"; };
-		83F2D5711DCB4A780041F913 /* UCFSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFSession.h; sourceTree = "<group>"; };
-		83F2D5721DCB4A780041F913 /* UCFSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFSession.m; sourceTree = "<group>"; };
 		83F2D5971DCB508F0041F913 /* UCFAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFAccount.h; sourceTree = "<group>"; };
 		83F2D5981DCB508F0041F913 /* UCFAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFAccount.m; sourceTree = "<group>"; };
 		83F2D5991DCB508F0041F913 /* UCFAccountTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFAccountTool.h; sourceTree = "<group>"; };
 		83F2D59A1DCB508F0041F913 /* UCFAccountTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFAccountTool.m; sourceTree = "<group>"; };
 		83F2D59B1DCB508F0041F913 /* UCFSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFSession.h; sourceTree = "<group>"; };
 		83F2D59C1DCB508F0041F913 /* UCFSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFSession.m; sourceTree = "<group>"; };
-		83F2D5A01DCB57CA0041F913 /* WatchConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchConnectivity.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS3.0.sdk/System/Library/Frameworks/WatchConnectivity.framework; sourceTree = DEVELOPER_DIR; };
 		83F4DAF21D9561EC00A0632E /* UCFPrdTransferBIdWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFPrdTransferBIdWebView.h; sourceTree = "<group>"; };
 		83F4DAF31D9561EC00A0632E /* UCFPrdTransferBIdWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFPrdTransferBIdWebView.m; sourceTree = "<group>"; };
 		83F4DAF41D9561EC00A0632E /* UCFPrdTransferBIdWebView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFPrdTransferBIdWebView.xib; sourceTree = "<group>"; };
@@ -2889,14 +2767,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		83F2D4F21DCB3F950041F913 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				83F2D5A11DCB57CA0041F913 /* WatchConnectivity.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5303,7 +5173,6 @@
 				A85A2EBE1F431CEF004BF4C1 /* QuickLook.framework */,
 				4ABED3AA1E2FB28E006B3F62 /* libresolv.tbd */,
 				4ABED3A81E2FACE3006B3F62 /* UserNotifications.framework */,
-				83F2D5A01DCB57CA0041F913 /* WatchConnectivity.framework */,
 				2517E56F1D61961900EAA05F /* libCloudwalkFaceSDK.a */,
 				2517E56B1D618FAA00EAA05F /* CoreMedia.framework */,
 				FB7A903E1D48A924005D64A1 /* libsqlite3.tbd */,
@@ -5502,8 +5371,6 @@
 			children = (
 				7BFE3E821AC55C98002A53A2 /* JRGC */,
 				7BFE3E9F1AC55C98002A53A2 /* JRGCTests */,
-				83F2D4EA1DCB3F950041F913 /* JRGCWatch */,
-				83F2D4F91DCB3F950041F913 /* JRGCWatch Extension */,
 				7BCE02651AC91CBE0084C15C /* Frameworks */,
 				7BFE3E811AC55C98002A53A2 /* Products */,
 			);
@@ -5514,8 +5381,6 @@
 			children = (
 				7BFE3E801AC55C98002A53A2 /* JRGC.app */,
 				7BFE3E9C1AC55C98002A53A2 /* JRGCTests.xctest */,
-				83F2D4E91DCB3F940041F913 /* JRGCWatch.app */,
-				83F2D4F51DCB3F950041F913 /* JRGCWatch Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -5907,417 +5772,6 @@
 				83CD84271F13A50800227704 /* UCFProjectListCell.xib */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		83F2D4EA1DCB3F950041F913 /* JRGCWatch */ = {
-			isa = PBXGroup;
-			children = (
-				83F2D5141DCB44330041F913 /* JRGCWatch.entitlements */,
-				83F2D4EB1DCB3F950041F913 /* Interface.storyboard */,
-				83F2D4EE1DCB3F950041F913 /* Assets.xcassets */,
-				83F2D4F01DCB3F950041F913 /* Info.plist */,
-			);
-			path = JRGCWatch;
-			sourceTree = "<group>";
-		};
-		83F2D4F91DCB3F950041F913 /* JRGCWatch Extension */ = {
-			isa = PBXGroup;
-			children = (
-				83F2D5151DCB4A780041F913 /* class */,
-				83F2D5461DCB4A780041F913 /* Lib */,
-				83F2D55C1DCB4A780041F913 /* Other */,
-				83F2D5641DCB4A780041F913 /* Tool */,
-				83F2D5131DCB44230041F913 /* JRGCWatch Extension.entitlements */,
-				83F2D5051DCB3F950041F913 /* Assets.xcassets */,
-				83F2D5071DCB3F950041F913 /* Info.plist */,
-				83F2D4FA1DCB3F950041F913 /* Supporting Files */,
-			);
-			path = "JRGCWatch Extension";
-			sourceTree = "<group>";
-		};
-		83F2D4FA1DCB3F950041F913 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				83F2D4FB1DCB3F950041F913 /* PushNotificationPayload.apns */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		83F2D5151DCB4A780041F913 /* class */ = {
-			isa = PBXGroup;
-			children = (
-				83F2D5161DCB4A780041F913 /* AssetList */,
-				83F2D51E1DCB4A780041F913 /* BackMoney */,
-				83F2D5261DCB4A780041F913 /* Common */,
-				83F2D52C1DCB4A780041F913 /* FactoryCode */,
-				83F2D5321DCB4A780041F913 /* Home */,
-				83F2D5381DCB4A780041F913 /* Login */,
-				83F2D5401DCB4A780041F913 /* Sign */,
-			);
-			path = class;
-			sourceTree = "<group>";
-		};
-		83F2D5161DCB4A780041F913 /* AssetList */ = {
-			isa = PBXGroup;
-			children = (
-				83F2D5171DCB4A780041F913 /* Controller */,
-				83F2D51A1DCB4A780041F913 /* Model */,
-				83F2D51B1DCB4A780041F913 /* View */,
-			);
-			path = AssetList;
-			sourceTree = "<group>";
-		};
-		83F2D5171DCB4A780041F913 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				83F2D5181DCB4A780041F913 /* UCFAssetListfaceController.h */,
-				83F2D5191DCB4A780041F913 /* UCFAssetListfaceController.m */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		83F2D51A1DCB4A780041F913 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		83F2D51B1DCB4A780041F913 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				83F2D51C1DCB4A780041F913 /* UCFAssetListRowCell.h */,
-				83F2D51D1DCB4A780041F913 /* UCFAssetListRowCell.m */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		83F2D51E1DCB4A780041F913 /* BackMoney */ = {
-			isa = PBXGroup;
-			children = (
-				83F2D51F1DCB4A780041F913 /* Controller */,
-				83F2D5221DCB4A780041F913 /* Model */,
-				83F2D5231DCB4A780041F913 /* View */,
-			);
-			path = BackMoney;
-			sourceTree = "<group>";
-		};
-		83F2D51F1DCB4A780041F913 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				83F2D5201DCB4A780041F913 /* UCFBackMoneyController.h */,
-				83F2D5211DCB4A780041F913 /* UCFBackMoneyController.m */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		83F2D5221DCB4A780041F913 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		83F2D5231DCB4A780041F913 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				83F2D5241DCB4A780041F913 /* UCFBackMoneyRowCell.h */,
-				83F2D5251DCB4A780041F913 /* UCFBackMoneyRowCell.m */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		83F2D5261DCB4A780041F913 /* Common */ = {
-			isa = PBXGroup;
-			children = (
-				83F2D5271DCB4A780041F913 /* Controller */,
-				83F2D52A1DCB4A780041F913 /* Model */,
-				83F2D52B1DCB4A780041F913 /* View */,
-			);
-			path = Common;
-			sourceTree = "<group>";
-		};
-		83F2D5271DCB4A780041F913 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				83F2D5281DCB4A780041F913 /* NotificationController.h */,
-				83F2D5291DCB4A780041F913 /* NotificationController.m */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		83F2D52A1DCB4A780041F913 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		83F2D52B1DCB4A780041F913 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		83F2D52C1DCB4A780041F913 /* FactoryCode */ = {
-			isa = PBXGroup;
-			children = (
-				83F2D52D1DCB4A780041F913 /* Controller */,
-				83F2D5301DCB4A780041F913 /* Model */,
-				83F2D5311DCB4A780041F913 /* View */,
-			);
-			path = FactoryCode;
-			sourceTree = "<group>";
-		};
-		83F2D52D1DCB4A780041F913 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				83F2D52E1DCB4A780041F913 /* UCFFactoryCodefaceController.h */,
-				83F2D52F1DCB4A780041F913 /* UCFFactoryCodefaceController.m */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		83F2D5301DCB4A780041F913 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		83F2D5311DCB4A780041F913 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		83F2D5321DCB4A780041F913 /* Home */ = {
-			isa = PBXGroup;
-			children = (
-				83F2D5331DCB4A780041F913 /* Controller */,
-				83F2D5361DCB4A780041F913 /* Model */,
-				83F2D5371DCB4A780041F913 /* View */,
-			);
-			path = Home;
-			sourceTree = "<group>";
-		};
-		83F2D5331DCB4A780041F913 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				83F2D5341DCB4A780041F913 /* UCFHomefaceController.h */,
-				83F2D5351DCB4A780041F913 /* UCFHomefaceController.m */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		83F2D5361DCB4A780041F913 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		83F2D5371DCB4A780041F913 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		83F2D5381DCB4A780041F913 /* Login */ = {
-			isa = PBXGroup;
-			children = (
-				83F2D5391DCB4A780041F913 /* Controller */,
-				83F2D53C1DCB4A780041F913 /* Model */,
-				83F2D53F1DCB4A780041F913 /* View */,
-			);
-			path = Login;
-			sourceTree = "<group>";
-		};
-		83F2D5391DCB4A780041F913 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				83F2D53A1DCB4A780041F913 /* UCFLoginController.h */,
-				83F2D53B1DCB4A780041F913 /* UCFLoginController.m */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		83F2D53C1DCB4A780041F913 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				83F2D53D1DCB4A780041F913 /* UCFAccount.h */,
-				83F2D53E1DCB4A780041F913 /* UCFAccount.m */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		83F2D53F1DCB4A780041F913 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		83F2D5401DCB4A780041F913 /* Sign */ = {
-			isa = PBXGroup;
-			children = (
-				83F2D5411DCB4A780041F913 /* Controller */,
-				83F2D5441DCB4A780041F913 /* Model */,
-				83F2D5451DCB4A780041F913 /* View */,
-			);
-			path = Sign;
-			sourceTree = "<group>";
-		};
-		83F2D5411DCB4A780041F913 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				83F2D5421DCB4A780041F913 /* UCFSignfaceController.h */,
-				83F2D5431DCB4A780041F913 /* UCFSignfaceController.m */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		83F2D5441DCB4A780041F913 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		83F2D5451DCB4A780041F913 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		83F2D5461DCB4A780041F913 /* Lib */ = {
-			isa = PBXGroup;
-			children = (
-				83F2D5471DCB4A780041F913 /* AESCrypt-ObjC-master */,
-				83F2D54E1DCB4A780041F913 /* AFNetworking */,
-			);
-			path = Lib;
-			sourceTree = "<group>";
-		};
-		83F2D5471DCB4A780041F913 /* AESCrypt-ObjC-master */ = {
-			isa = PBXGroup;
-			children = (
-				83F2D5481DCB4A780041F913 /* NSData+AES.h */,
-				83F2D5491DCB4A780041F913 /* NSData+AES.m */,
-				83F2D54A1DCB4A780041F913 /* NSData+Base64.h */,
-				83F2D54B1DCB4A780041F913 /* NSData+Base64.m */,
-				83F2D54C1DCB4A780041F913 /* NSString+Base64.h */,
-				83F2D54D1DCB4A780041F913 /* NSString+Base64.m */,
-			);
-			path = "AESCrypt-ObjC-master";
-			sourceTree = "<group>";
-		};
-		83F2D54E1DCB4A780041F913 /* AFNetworking */ = {
-			isa = PBXGroup;
-			children = (
-				83F2D54F1DCB4A780041F913 /* AFHTTPSessionManager.h */,
-				83F2D5501DCB4A780041F913 /* AFHTTPSessionManager.m */,
-				83F2D5511DCB4A780041F913 /* AFNetworking.h */,
-				83F2D5521DCB4A780041F913 /* AFNetworkReachabilityManager.h */,
-				83F2D5531DCB4A780041F913 /* AFNetworkReachabilityManager.m */,
-				83F2D5541DCB4A780041F913 /* AFSecurityPolicy.h */,
-				83F2D5551DCB4A780041F913 /* AFSecurityPolicy.m */,
-				83F2D5561DCB4A780041F913 /* AFURLRequestSerialization.h */,
-				83F2D5571DCB4A780041F913 /* AFURLRequestSerialization.m */,
-				83F2D5581DCB4A780041F913 /* AFURLResponseSerialization.h */,
-				83F2D5591DCB4A780041F913 /* AFURLResponseSerialization.m */,
-				83F2D55A1DCB4A780041F913 /* AFURLSessionManager.h */,
-				83F2D55B1DCB4A780041F913 /* AFURLSessionManager.m */,
-			);
-			path = AFNetworking;
-			sourceTree = "<group>";
-		};
-		83F2D55C1DCB4A780041F913 /* Other */ = {
-			isa = PBXGroup;
-			children = (
-				83F2D55D1DCB4A780041F913 /* AnimateTip */,
-				83F2D55E1DCB4A780041F913 /* Base */,
-				83F2D5631DCB4A780041F913 /* UCFAccount */,
-			);
-			path = Other;
-			sourceTree = "<group>";
-		};
-		83F2D55D1DCB4A780041F913 /* AnimateTip */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = AnimateTip;
-			sourceTree = "<group>";
-		};
-		83F2D55E1DCB4A780041F913 /* Base */ = {
-			isa = PBXGroup;
-			children = (
-				83F2D55F1DCB4A780041F913 /* ExtensionDelegate.h */,
-				83F2D5601DCB4A780041F913 /* ExtensionDelegate.m */,
-				83F2D5611DCB4A780041F913 /* UCFBasefaceController.h */,
-				83F2D5621DCB4A780041F913 /* UCFBasefaceController.m */,
-			);
-			path = Base;
-			sourceTree = "<group>";
-		};
-		83F2D5631DCB4A780041F913 /* UCFAccount */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = UCFAccount;
-			sourceTree = "<group>";
-		};
-		83F2D5641DCB4A780041F913 /* Tool */ = {
-			isa = PBXGroup;
-			children = (
-				83F2D5651DCB4A780041F913 /* first */,
-				83F2D5681DCB4A780041F913 /* Network */,
-				83F2D56D1DCB4A780041F913 /* UCFAccountTool */,
-				83F2D5701DCB4A780041F913 /* UCFSession */,
-			);
-			path = Tool;
-			sourceTree = "<group>";
-		};
-		83F2D5651DCB4A780041F913 /* first */ = {
-			isa = PBXGroup;
-			children = (
-				83F2D5661DCB4A780041F913 /* UCFTool.h */,
-				83F2D5671DCB4A780041F913 /* UCFTool.m */,
-			);
-			path = first;
-			sourceTree = "<group>";
-		};
-		83F2D5681DCB4A780041F913 /* Network */ = {
-			isa = PBXGroup;
-			children = (
-				83F2D5691DCB4A780041F913 /* CommonSetting.h */,
-				83F2D56A1DCB4A780041F913 /* NetworkSetting.h */,
-				83F2D56B1DCB4A780041F913 /* UCFNetwork.h */,
-				83F2D56C1DCB4A780041F913 /* UCFNetwork.m */,
-			);
-			path = Network;
-			sourceTree = "<group>";
-		};
-		83F2D56D1DCB4A780041F913 /* UCFAccountTool */ = {
-			isa = PBXGroup;
-			children = (
-				83F2D56E1DCB4A780041F913 /* UCFAccountTool.h */,
-				83F2D56F1DCB4A780041F913 /* UCFAccountTool.m */,
-			);
-			path = UCFAccountTool;
-			sourceTree = "<group>";
-		};
-		83F2D5701DCB4A780041F913 /* UCFSession */ = {
-			isa = PBXGroup;
-			children = (
-				83F2D5711DCB4A780041F913 /* UCFSession.h */,
-				83F2D5721DCB4A780041F913 /* UCFSession.m */,
-			);
-			path = UCFSession;
 			sourceTree = "<group>";
 		};
 		83F2D5961DCB508F0041F913 /* iWatchTool */ = {
@@ -7209,7 +6663,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				83F2D5091DCB3F950041F913 /* PBXTargetDependency */,
 			);
 			name = JRGC;
 			productName = JRGC;
@@ -7233,40 +6686,6 @@
 			productName = JRGCTests;
 			productReference = 7BFE3E9C1AC55C98002A53A2 /* JRGCTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		83F2D4E81DCB3F940041F913 /* JRGCWatch */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 83F2D50F1DCB3F950041F913 /* Build configuration list for PBXNativeTarget "JRGCWatch" */;
-			buildPhases = (
-				83F2D4E71DCB3F940041F913 /* Resources */,
-				83F2D50E1DCB3F950041F913 /* Embed App Extensions */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				83F2D4F81DCB3F950041F913 /* PBXTargetDependency */,
-			);
-			name = JRGCWatch;
-			productName = JRGCWatch;
-			productReference = 83F2D4E91DCB3F940041F913 /* JRGCWatch.app */;
-			productType = "com.apple.product-type.application.watchapp2";
-		};
-		83F2D4F41DCB3F950041F913 /* JRGCWatch Extension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 83F2D50B1DCB3F950041F913 /* Build configuration list for PBXNativeTarget "JRGCWatch Extension" */;
-			buildPhases = (
-				83F2D4F11DCB3F950041F913 /* Sources */,
-				83F2D4F21DCB3F950041F913 /* Frameworks */,
-				83F2D4F31DCB3F950041F913 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "JRGCWatch Extension";
-			productName = "JRGCWatch Extension";
-			productReference = 83F2D4F51DCB3F950041F913 /* JRGCWatch Extension.appex */;
-			productType = "com.apple.product-type.watchkit2-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -7302,32 +6721,6 @@
 						ProvisioningStyle = Manual;
 						TestTargetID = 7BFE3E7F1AC55C98002A53A2;
 					};
-					83F2D4E81DCB3F940041F913 = {
-						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = EZRWM7P5C6;
-						ProvisioningStyle = Automatic;
-						SystemCapabilities = {
-							com.apple.ApplicationGroups.iOS = {
-								enabled = 1;
-							};
-							com.apple.BackgroundModes.watchos.app = {
-								enabled = 1;
-							};
-						};
-					};
-					83F2D4F41DCB3F950041F913 = {
-						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = EZRWM7P5C6;
-						ProvisioningStyle = Automatic;
-						SystemCapabilities = {
-							com.apple.ApplicationGroups.iOS = {
-								enabled = 1;
-							};
-							com.apple.Push = {
-								enabled = 1;
-							};
-						};
-					};
 				};
 			};
 			buildConfigurationList = 7BFE3E7B1AC55C98002A53A2 /* Build configuration list for PBXProject "JRGC" */;
@@ -7346,8 +6739,6 @@
 			targets = (
 				7BFE3E7F1AC55C98002A53A2 /* JRGC */,
 				7BFE3E9B1AC55C98002A53A2 /* JRGCTests */,
-				83F2D4E81DCB3F940041F913 /* JRGCWatch */,
-				83F2D4F41DCB3F950041F913 /* JRGCWatch Extension */,
 			);
 		};
 /* End PBXProject section */
@@ -7660,24 +7051,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		83F2D4E71DCB3F940041F913 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				83F2D4EF1DCB3F950041F913 /* Assets.xcassets in Resources */,
-				83F2D4ED1DCB3F950041F913 /* Interface.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		83F2D4F31DCB3F950041F913 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7472A8591DCC5FD10051F9BE /* Interface.storyboard in Resources */,
-				83F2D5061DCB3F950041F913 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -8311,38 +7684,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		83F2D4F11DCB3F950041F913 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				83F2D57D1DCB4A780041F913 /* NSData+AES.m in Sources */,
-				83F2D5751DCB4A780041F913 /* UCFBackMoneyController.m in Sources */,
-				83F2D57E1DCB4A780041F913 /* NSData+Base64.m in Sources */,
-				83F2D5761DCB4A780041F913 /* UCFBackMoneyRowCell.m in Sources */,
-				83F2D57F1DCB4A780041F913 /* NSString+Base64.m in Sources */,
-				83F2D5731DCB4A780041F913 /* UCFAssetListfaceController.m in Sources */,
-				83F2D5891DCB4A780041F913 /* UCFNetwork.m in Sources */,
-				83F2D5831DCB4A780041F913 /* AFURLRequestSerialization.m in Sources */,
-				83F2D5781DCB4A780041F913 /* UCFFactoryCodefaceController.m in Sources */,
-				83F2D5821DCB4A780041F913 /* AFSecurityPolicy.m in Sources */,
-				83F2D57A1DCB4A780041F913 /* UCFLoginController.m in Sources */,
-				83F2D5811DCB4A780041F913 /* AFNetworkReachabilityManager.m in Sources */,
-				83F2D57C1DCB4A780041F913 /* UCFSignfaceController.m in Sources */,
-				83F2D5871DCB4A780041F913 /* UCFBasefaceController.m in Sources */,
-				83F2D5741DCB4A780041F913 /* UCFAssetListRowCell.m in Sources */,
-				83F2D58B1DCB4A780041F913 /* UCFSession.m in Sources */,
-				83F2D5851DCB4A780041F913 /* AFURLSessionManager.m in Sources */,
-				83F2D58A1DCB4A780041F913 /* UCFAccountTool.m in Sources */,
-				83F2D5771DCB4A780041F913 /* NotificationController.m in Sources */,
-				83F2D5791DCB4A780041F913 /* UCFHomefaceController.m in Sources */,
-				83F2D57B1DCB4A780041F913 /* UCFAccount.m in Sources */,
-				83F2D5881DCB4A780041F913 /* UCFTool.m in Sources */,
-				83F2D5801DCB4A780041F913 /* AFHTTPSessionManager.m in Sources */,
-				83F2D5841DCB4A780041F913 /* AFURLResponseSerialization.m in Sources */,
-				83F2D5861DCB4A780041F913 /* ExtensionDelegate.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -8351,28 +7692,7 @@
 			target = 7BFE3E7F1AC55C98002A53A2 /* JRGC */;
 			targetProxy = 7BFE3E9D1AC55C98002A53A2 /* PBXContainerItemProxy */;
 		};
-		83F2D4F81DCB3F950041F913 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 83F2D4F41DCB3F950041F913 /* JRGCWatch Extension */;
-			targetProxy = 83F2D4F71DCB3F950041F913 /* PBXContainerItemProxy */;
-		};
-		83F2D5091DCB3F950041F913 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 83F2D4E81DCB3F940041F913 /* JRGCWatch */;
-			targetProxy = 83F2D5081DCB3F950041F913 /* PBXContainerItemProxy */;
-		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		83F2D4EB1DCB3F950041F913 /* Interface.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				83F2D4EC1DCB3F950041F913 /* Base */,
-			);
-			name = Interface.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		7BFE3EA41AC55C98002A53A2 /* Debug */ = {
@@ -8649,125 +7969,6 @@
 			};
 			name = Release;
 		};
-		83F2D50C1DCB3F950041F913 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_SUSPICIOUS_MOVES = YES;
-				CODE_SIGN_ENTITLEMENTS = "JRGCWatch Extension/JRGCWatch Extension.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Phoenix Credit Management CO., Ltd.";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing Phoenix Credit Management CO., Ltd.";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = EZRWM7P5C6;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "JRGCWatch Extension/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp299.watchkitapp.watchkitextension;
-				PRODUCT_NAME = "${TARGET_NAME}";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = 4;
-				VALID_ARCHS = "armv7k i386";
-				WATCHOS_DEPLOYMENT_TARGET = 2.0;
-			};
-			name = Debug;
-		};
-		83F2D50D1DCB3F950041F913 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_SUSPICIOUS_MOVES = YES;
-				CODE_SIGN_ENTITLEMENTS = "JRGCWatch Extension/JRGCWatch Extension.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Phoenix Credit Management CO., Ltd.";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = EZRWM7P5C6;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "JRGCWatch Extension/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp299.watchkitapp.watchkitextension;
-				PRODUCT_NAME = "${TARGET_NAME}";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = 4;
-				VALID_ARCHS = "armv7k i386";
-				WATCHOS_DEPLOYMENT_TARGET = 2.0;
-			};
-			name = Release;
-		};
-		83F2D5101DCB3F950041F913 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_SUSPICIOUS_MOVES = YES;
-				CODE_SIGN_ENTITLEMENTS = JRGCWatch/JRGCWatch.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Phoenix Credit Management CO., Ltd.";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing Phoenix Credit Management CO., Ltd.";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = EZRWM7P5C6;
-				GCC_NO_COMMON_BLOCKS = YES;
-				IBSC_MODULE = JRGCWatch_Extension;
-				INFOPLIST_FILE = JRGCWatch/Info.plist;
-				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp299.watchkitapp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 2.0;
-			};
-			name = Debug;
-		};
-		83F2D5111DCB3F950041F913 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_SUSPICIOUS_MOVES = YES;
-				CODE_SIGN_ENTITLEMENTS = JRGCWatch/JRGCWatch.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Phoenix Credit Management CO., Ltd.";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing Phoenix Credit Management CO., Ltd.";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = EZRWM7P5C6;
-				GCC_NO_COMMON_BLOCKS = YES;
-				IBSC_MODULE = JRGCWatch_Extension;
-				INFOPLIST_FILE = JRGCWatch/Info.plist;
-				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp299.watchkitapp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 2.0;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -8794,24 +7995,6 @@
 			buildConfigurations = (
 				7BFE3EAA1AC55C98002A53A2 /* Debug */,
 				7BFE3EAB1AC55C98002A53A2 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		83F2D50B1DCB3F950041F913 /* Build configuration list for PBXNativeTarget "JRGCWatch Extension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				83F2D50C1DCB3F950041F913 /* Debug */,
-				83F2D50D1DCB3F950041F913 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		83F2D50F1DCB3F950041F913 /* Build configuration list for PBXNativeTarget "JRGCWatch" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				83F2D5101DCB3F950041F913 /* Debug */,
-				83F2D5111DCB3F950041F913 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
