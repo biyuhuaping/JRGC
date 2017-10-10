@@ -2455,6 +2455,8 @@
 		A8E02DB11F0E0A7800FC2260 /* GoldTransactionRecordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GoldTransactionRecordViewController.xib; sourceTree = "<group>"; };
 		A8F742B01F18939800EF001A /* UCFGoldTradeListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFGoldTradeListModel.h; sourceTree = "<group>"; };
 		A8F742B11F18939800EF001A /* UCFGoldTradeListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFGoldTradeListModel.m; sourceTree = "<group>"; };
+		A8F783001F8CAD4A00685B4D /* login_bg_phone4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = login_bg_phone4.jpg; path = Images/login_bg_phone4.jpg; sourceTree = "<group>"; };
+		A8F783011F8CAD4A00685B4D /* login_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = login_bg.jpg; path = Images/login_bg.jpg; sourceTree = "<group>"; };
 		A8FF32E11F1666A600066A80 /* UCFGoldBidSuccessViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFGoldBidSuccessViewController.h; sourceTree = "<group>"; };
 		A8FF32E21F1666A600066A80 /* UCFGoldBidSuccessViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFGoldBidSuccessViewController.xib; sourceTree = "<group>"; };
 		A8FF32E31F1666A600066A80 /* UCFGoldBidSuccessViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFGoldBidSuccessViewController.m; sourceTree = "<group>"; };
@@ -5456,6 +5458,8 @@
 		7BFE3EB01AC56356002A53A2 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				A8F783001F8CAD4A00685B4D /* login_bg_phone4.jpg */,
+				A8F783011F8CAD4A00685B4D /* login_bg.jpg */,
 				FB51491B1D64403000C26E7B /* gif@3x.gif */,
 				FB5149321D64403100C26E7B /* touch_id@2x.gif */,
 				FB5149331D64403100C26E7B /* touch_id@3x.gif */,

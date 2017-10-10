@@ -270,7 +270,7 @@
             
         } else if (buttonIndex == 1) {
            NSString *className = [NSString stringWithUTF8String:object_getClassName(_uperViewController)];
-            if ([className hasSuffix:@"UCFPurchaseBidViewController"] || [className hasSuffix:@"UCFPurchaseTranBidViewController"] || [className hasSuffix:@"UCFSelectPayBackController"]) {
+            if ([className hasSuffix:@"UCFPurchaseBidViewController"] || [className hasSuffix:@"UCFPurchaseTranBidViewController"] || [className hasSuffix:@"UCFSelectPayBackController"] || [className hasSuffix:@"UCFFacReservedViewController"]) {
                 [self.navigationController popToViewController:_uperViewController animated:YES];
             }
             else if([className hasSuffix:@"UCFRechargeOrCashViewController"])
