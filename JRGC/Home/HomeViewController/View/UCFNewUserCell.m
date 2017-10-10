@@ -38,7 +38,7 @@
     self.desc3Label.textColor = UIColorWithRGB(0x999999);
 }
 
-- (IBAction)register:(UIButton *)sender {
+- (IBAction)registerButtonClicked:(UIButton *)sender {
     if ([self.delegate respondsToSelector:@selector(newUserCell:didClickedRegisterButton:)]) {
         [self.delegate newUserCell:self didClickedRegisterButton:sender];
     }

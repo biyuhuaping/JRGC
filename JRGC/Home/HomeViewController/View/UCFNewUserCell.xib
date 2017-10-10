@@ -41,7 +41,7 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                         <connections>
-                            <action selector="register:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="nsw-JF-GYr"/>
+                            <action selector="registerButtonClicked:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="gg3-ko-eGf"/>
                         </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="期限" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DIU-Xb-NuL">

@@ -133,7 +133,7 @@
         self.userNameLabel.text = [UserInfoSingle sharedManager].realName;
     }
     else {
-        self.userIconImageView.image = [UIImage imageNamed:@"password_icon_head"];
+        self.userIconImageView.image = [UIImage imageNamed:@"user_icon_head_male"];
         self.userNameLabel.text = @"未认证";
     }
     

@@ -250,7 +250,7 @@
 - (void)homeListHeader:(UCFHomeListHeaderSectionView *)homeListHeader didClickedMoreWithType:(NSString *)type
 {
     if ([self.delegate respondsToSelector:@selector(homeList:tableView:didClickedWithModel:withType:)]) {
-        if ([type isEqualToString:@"11"]) {
+        if ([type isEqualToString:@"18"]) {
             [self.delegate homeList:self tableView:self.tableView didClickedWithModel:nil withType:UCFHomeListTypeP2PMore];
         }
         else if ([type isEqualToString:@"12"]) {
@@ -282,6 +282,11 @@
     if ([self.delegate respondsToSelector:@selector(homeList:didClickReservedWithModel:)]) {
         [self.delegate homeList:self didClickReservedWithModel:cellPresenter.item];
     }
+}
+
+- (void)newUserCell:(UCFNewUserCell *)newUserCell didClickedRegisterButton:(UIButton *)button
+{
+    
 }
 
 #pragma mark -  黄金活期购买
