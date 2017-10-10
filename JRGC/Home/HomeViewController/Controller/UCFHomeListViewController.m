@@ -19,6 +19,7 @@
 #import "UCFNewUserCell.h"
 #import "UCFHomeListHeaderSectionView.h"
 #import "UCFLoginViewController.h"
+#import "UCFRegisterStepOneViewController.h"
 #import "AppDelegate.h"
 #import "UCFHomeListFooterView.h"
 
@@ -206,7 +207,7 @@
     UCFHomeListGroupPresenter *groupPresenter = [self.presenter.allDatas objectAtIndex:indexPath.section];
     UCFHomeListCellPresenter *presenter = [groupPresenter.group.prdlist objectAtIndex:indexPath.row];
     NSString *userId = [UserInfoSingle sharedManager].userId;
-    if (nil == userId && presenter.item.moedelType != UCFHomeListCellModelTypeOneImageTransfer) {
+    if (nil == userId) {
         UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
         UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
         AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
@@ -284,9 +285,21 @@
     }
 }
 
-- (void)newUserCell:(UCFNewUserCell *)newUserCell didClickedRegisterButton:(UIButton *)button
+- (void)newUserCell:(UCFNewUserCell *)newUserCell didClickedRegisterButton:(UIButton *)button withModel:(UCFHomeListCellModel *)model
 {
-    
+    NSString *userId = [UserInfoSingle sharedManager].userId;
+    if (nil == userId) {
+        UCFRegisterStepOneViewController *registerControler = [[UCFRegisterStepOneViewController alloc] init];
+        registerControler.sourceVC = @"fromPersonCenter";
+        UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:registerControler] ;
+        AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+        UINavigationController *nav = app.tabBarController.selectedViewController ;
+        [nav presentViewController:loginNaviController animated:YES completion:nil];
+        return;
+    }
+    else {
+        
+    }
 }
 
 #pragma mark -  黄金活期购买

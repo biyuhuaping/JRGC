@@ -20,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *totalBalanceLabel;
 @property (weak, nonatomic) IBOutlet UIButton *visibleButton;
 @property (weak, nonatomic) IBOutlet UIView *messageDotView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *userLevelW;
 
 @end
 
@@ -124,20 +125,26 @@
 - (void)setUserBenefitModel:(UCFUserBenefitModel *)userBenefitModel
 {
     _userBenefitModel = userBenefitModel;
+    self.userNameLabel.text = userBenefitModel.realName.length > 0 ? userBenefitModel.realName : @"未认证";
     if ([self.userBenefitModel.sex integerValue] == 0) {
         self.userIconImageView.image = [UIImage imageNamed:@"user_icon_head_female"];
-        self.userNameLabel.text = [UserInfoSingle sharedManager].realName;
     }
     else if ([self.userBenefitModel.sex integerValue] == 1) {
         self.userIconImageView.image = [UIImage imageNamed:@"user_icon_head_male"];
-        self.userNameLabel.text = [UserInfoSingle sharedManager].realName;
     }
     else {
         self.userIconImageView.image = [UIImage imageNamed:@"user_icon_head_male"];
-        self.userNameLabel.text = @"未认证";
+    }
+    NSInteger  memLevel = userBenefitModel.memberLever.integerValue - 1;
+    if (memLevel > 0) {
+        self.userLevelLabel.text = [NSString stringWithFormat:@"VIP%ld", (long)memLevel];
+        self.userLevelW.constant = 32.0;
+    }
+    else {
+        self.userLevelLabel.text = @"普通会员";
+        self.userLevelW.constant = 49.0;
     }
     
-    self.userLevelLabel.text = [NSString stringWithFormat:@"VIP%@", userBenefitModel.memberLever];
     if (userBenefitModel.unReadMsgCount.integerValue > 0) {
         self.messageDotView.hidden = NO;
     }

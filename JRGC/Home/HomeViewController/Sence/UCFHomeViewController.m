@@ -390,6 +390,7 @@
                 if (self.accoutType == SelectAccoutTypeGold) {
                     
                     [self gotoGoldDetailVC:model];
+                    
                 }else{
                     
                     HSHelper *helper = [HSHelper new];
@@ -426,7 +427,7 @@
                             return;
                         }
                     }
-                    if([self.userInfoVC.presenter checkIDAAndBankBlindState:self.accoutType]){//           在这里需要 判断授权 以及开户,需要重新梳理
+                    if([self.cycleImageVC.presenter checkIDAAndBankBlindState:self.accoutType]){//           在这里需要 判断授权 以及开户,需要重新梳理
                         NSInteger isOrder = [model.isOrder integerValue];
                         if ([model.status intValue ] != 2){
                             if (isOrder > 0) {

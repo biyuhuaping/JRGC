@@ -35,10 +35,10 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LMW-Os-8EJ">
-                            <rect key="frame" x="106" y="35.5" width="32" height="14"/>
+                            <rect key="frame" x="106" y="35.5" width="49" height="14"/>
                             <subviews>
-                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VIP1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o32-qT-sib">
-                                    <rect key="frame" x="4" y="2" width="24" height="10"/>
+                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="普通会员" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o32-qT-sib">
+                                    <rect key="frame" x="4" y="2" width="41" height="10"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
@@ -50,7 +50,7 @@
                                 <constraint firstAttribute="trailing" secondItem="o32-qT-sib" secondAttribute="trailing" constant="4" id="K0j-7W-d8R"/>
                                 <constraint firstItem="o32-qT-sib" firstAttribute="leading" secondItem="LMW-Os-8EJ" secondAttribute="leading" constant="4" id="dPX-ug-Fov"/>
                                 <constraint firstAttribute="height" constant="14" id="fYd-e3-OKG"/>
-                                <constraint firstAttribute="width" constant="32" id="iqE-jW-fMo"/>
+                                <constraint firstAttribute="width" constant="49" id="iqE-jW-fMo"/>
                                 <constraint firstItem="o32-qT-sib" firstAttribute="top" secondItem="LMW-Os-8EJ" secondAttribute="top" constant="2" id="nb8-oD-9nZ"/>
                             </constraints>
                             <userDefinedRuntimeAttributes>
@@ -294,6 +294,7 @@
                 <outlet property="totalBalanceLabel" destination="3YV-6Q-jZV" id="zZf-bm-Ynb"/>
                 <outlet property="userIconImageView" destination="AP8-6p-eqr" id="Tnc-t2-hFl"/>
                 <outlet property="userLevelLabel" destination="o32-qT-sib" id="qyB-7q-oCJ"/>
+                <outlet property="userLevelW" destination="iqE-jW-fMo" id="j8J-S6-zQi"/>
                 <outlet property="userNameLabel" destination="w0g-QB-oaQ" id="nJD-X8-AV9"/>
                 <outlet property="visibleButton" destination="EeI-2B-fjS" id="nya-mL-abU"/>
             </connections>

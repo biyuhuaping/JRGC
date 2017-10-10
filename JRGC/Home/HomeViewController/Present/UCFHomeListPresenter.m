@@ -13,6 +13,7 @@
 #import "UCFHomeListCellPresenter.h"
 #import "UCFHomeIconModel.h"
 #import "UCFHomeIconPresenter.h"
+#import "HSHelper.h"
 
 @interface UCFHomeListPresenter ()
 @property (strong, nonatomic) UCFHomeAPIManager *apiManager;
@@ -150,4 +151,29 @@
 - (void)resetData {
     [self.homeListCells removeAllObjects];
 }
+
+#pragma mark - 无奈的代码
+- (BOOL)checkIDAAndBankBlindState:(SelectAccoutType)type {
+    
+    //    [UserInfoSingle sharedManager].openStatus = [listInfo.openStatus integerValue];
+    //    [UserInfoSingle sharedManager].enjoyOpenStatus
+    NSUInteger openStatus = (type == SelectAccoutTypeP2P ? [UserInfoSingle sharedManager].openStatus  : [UserInfoSingle sharedManager].enjoyOpenStatus );
+    __weak typeof(self) weakSelf = self;
+    if (openStatus == 1 || openStatus == 2) {
+        NSString *message = (type == SelectAccoutTypeP2P ? P2PTIP1 : ZXTIP1);
+        NSInteger step = (type == SelectAccoutTypeP2P ? [UserInfoSingle sharedManager].openStatus  : [UserInfoSingle sharedManager].enjoyOpenStatus);
+        BlockUIAlertView *alert = [[BlockUIAlertView alloc] initWithTitle:@"提示" message:message cancelButtonTitle:@"取消" clickButton:^(NSInteger index){
+            if (index == 1) {
+                HSHelper *helper = [HSHelper new];
+                UIViewController *VC = (UIViewController *)weakSelf.view;
+                [helper pushOpenHSType:type Step:step nav:VC.parentViewController.navigationController];
+            }
+        } otherButtonTitles:@"确认"];
+        [alert show];
+        return NO;
+    }
+    return YES;
+}
+
+
 @end

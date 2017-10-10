@@ -39,8 +39,8 @@
 }
 
 - (IBAction)registerButtonClicked:(UIButton *)sender {
-    if ([self.delegate respondsToSelector:@selector(newUserCell:didClickedRegisterButton:)]) {
-        [self.delegate newUserCell:self didClickedRegisterButton:sender];
+    if ([self.delegate respondsToSelector:@selector(newUserCell:didClickedRegisterButton:withModel:)]) {
+        [self.delegate newUserCell:self didClickedRegisterButton:sender withModel:self.presenter.item];
     }
 }
 

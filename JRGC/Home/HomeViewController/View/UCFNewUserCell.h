@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@class UCFNewUserCell, UCFHomeListCellPresenter;
+@class UCFNewUserCell, UCFHomeListCellPresenter, UCFHomeListCellModel;
 @protocol UCFNewUserCellDelegate <NSObject>
 
-- (void)newUserCell:(UCFNewUserCell *)newUserCell didClickedRegisterButton:(UIButton *)button;
+- (void)newUserCell:(UCFNewUserCell *)newUserCell didClickedRegisterButton:(UIButton *)button withModel:(UCFHomeListCellModel *)model;
 
 @end
 

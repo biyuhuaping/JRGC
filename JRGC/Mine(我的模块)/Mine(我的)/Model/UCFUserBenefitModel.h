@@ -23,6 +23,7 @@
 @property (nonatomic, copy) NSString *sex;
 @property (nonatomic, copy) NSString *unReadMsgCount;
 @property (nonatomic, copy) NSString *userCenterTicket;
+@property (nonatomic, copy) NSString *realName;
 
 + (instancetype)userBenefitWithDict:(NSDictionary *)dict;
 @end

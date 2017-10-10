@@ -34,6 +34,8 @@
 
 - (BOOL)authorization;
 
+- (BOOL)checkIDAAndBankBlindState:(SelectAccoutType)type;
+
 - (void)fetchHomeListDataWithCompletionHandler:(NetworkCompletionHandler)completionHander;
 
 - (void)fetchHomeIconListDataWithCompletionHandler:(NetworkCompletionHandler)completionHander;
