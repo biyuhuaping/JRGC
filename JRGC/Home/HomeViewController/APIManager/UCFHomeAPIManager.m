@@ -197,14 +197,17 @@
             NSMutableDictionary *tempResult = [[NSMutableDictionary alloc] init];
             NSMutableArray *tempArray = [[NSMutableArray alloc] init];
             NSDictionary *resultDict = [dic objectSafeDictionaryForKey:@"data"];
-            NSDictionary *adDic = [[resultDict objectSafeForKey:@"picAD"] objectAtIndex:0];
-            NSDictionary *siteNotice = [resultDict objectSafeDictionaryForKey:@"siteNoticeMap"];
-            if (adDic) {
-                [[NSUserDefaults standardUserDefaults] setValue:adDic forKey:@"AD_ACTIViTY_DIC"];
-                [[NSUserDefaults standardUserDefaults] synchronize];
+            if ([[resultDict objectSafeForKey:@"picAD"] count] > 0) {
+                NSDictionary *adDic = [[resultDict objectSafeForKey:@"picAD"] objectAtIndex:0];
+                if (adDic) {
+                    [[NSUserDefaults standardUserDefaults] setValue:adDic forKey:@"AD_ACTIViTY_DIC"];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                }
             }
+            NSDictionary *siteNotice = [resultDict objectSafeDictionaryForKey:@"siteNoticeMap"];
+       
             UCFNoticeModel *noticeModel = [UCFNoticeModel noticeWithDict:siteNotice];
-            UCFPicADModel *picADModel = [UCFPicADModel picADWithDict:adDic];
+//            UCFPicADModel *picADModel = [UCFPicADModel picADWithDict:adDic];
             [tempResult setObject:noticeModel forKey:@"siteNotice"];
             NSArray *productMap = [resultDict objectSafeArrayForKey:@"productMap"];
             for (NSDictionary *dict in productMap) {
@@ -212,7 +215,7 @@
                 [tempArray addObject:iconModel];
             }
             [tempResult setObject:tempArray forKey:@"productMap"];
-            [tempResult setObject:picADModel forKey:@"picAD"];
+//            [tempResult setObject:picADModel forKey:@"picAD"];
             complete(nil, tempResult);
         }
         else {
