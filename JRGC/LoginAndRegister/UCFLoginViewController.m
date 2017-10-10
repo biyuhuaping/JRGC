@@ -217,7 +217,7 @@
             if (lastName != nil) {
                 if (![lastName isEqualToString:[Common deleteStrHeadAndTailSpace:_loginView.userNameFieldText]]) {
                     AppDelegate *del = (AppDelegate *) [[UIApplication sharedApplication] delegate];
-                    [del.tabBarController setSelectedIndex:0];
+                    [del.tabBarController setSelectedIndex:4];
                     UINavigationController *contoller = (UINavigationController*)del.tabBarController.selectedViewController;
                     [contoller popToRootViewControllerAnimated:YES];
                     //切换用户重新请求放心花页面

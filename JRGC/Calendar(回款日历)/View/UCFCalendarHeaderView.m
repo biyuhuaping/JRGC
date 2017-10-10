@@ -308,7 +308,7 @@ static NSString *const cellId = @"cellId";
     self.waitPrincipalLabel.text = [calendarHeaderInfo objectSafeForKey:@"waitPrincipal"];
     self.waitInterestLabel.text = [calendarHeaderInfo objectSafeForKey:@"waitInterest"];
     self.currentDay = [calendarHeaderInfo objectSafeForKey:@"today"];
-    
+    [self setCurrentDayWithDate:self.currentDay];
     [self.months removeAllObjects];
     [self.months addObjectsFromArray:[calendarHeaderInfo objectSafeForKey:@"months"]];
     [self.calendar reloadData];
