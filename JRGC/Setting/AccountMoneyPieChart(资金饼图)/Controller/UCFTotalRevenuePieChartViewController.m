@@ -91,7 +91,12 @@
             NSString *usedBean = [dataDict objectSafeForKey:@"usedBean"];
             NSString *usedReturnCash = [dataDict objectSafeForKey:@"usedReturnCash"];
             NSString *zxEarnings = [dataDict objectSafeForKey:@"zxEarnings"];
-            self.totalRevenueLabel.text =  [NSString stringWithFormat:@"¥%@",[UCFToolsMehod AddComma:totalEarnings]];
+            if ([totalEarnings doubleValue] < 0) {
+                totalEarnings = [NSString stringWithFormat:@"%.2lf",-[totalEarnings doubleValue]];
+                self.totalRevenueLabel.text = [NSString stringWithFormat:@"¥-%@",[UCFToolsMehod AddComma:totalEarnings]];
+            }else{
+                self.totalRevenueLabel.text = [NSString stringWithFormat:@"¥%@",[UCFToolsMehod AddComma:totalEarnings]];
+            }
             UCFCustomPieChartModel *pieChatModel1 = [[UCFCustomPieChartModel alloc]init];
             pieChatModel1.pieChartTitle = @"按账户类型";
             pieChatModel1.pieChartDataArray = [[NSMutableArray alloc]initWithArray:@[p2pEarnings,zxEarnings,goldEarnings]];

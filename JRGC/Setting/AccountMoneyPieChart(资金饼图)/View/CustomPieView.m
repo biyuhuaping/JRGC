@@ -326,6 +326,11 @@ typedef void(^ClickBlock)(NSInteger clickIndex);
         
         NSString *valueStr = [NSString stringWithFormat:@"%.2f",value];
         NSString *finalString = [NSString stringWithFormat:@" %@: ¥%@",titleString,[UCFToolsMehod AddComma:valueStr]];
+        if (value < 0)
+        {
+           valueStr = [NSString stringWithFormat:@"%.2f",-value];
+           finalString = [NSString stringWithFormat:@" %@: ¥-%@",titleString,[UCFToolsMehod AddComma:valueStr]];
+        }
         [self.finalTextArray addObject:finalString];
         
     }
@@ -630,8 +635,11 @@ typedef void(^ClickBlock)(NSInteger clickIndex);
     CGFloat currentRadian = -M_PI/2;
     
     for (NSString *valueString in self.segmentDataArray) {
-        
-        totalValue += [valueString floatValue];
+        CGFloat  value  = [valueString floatValue];
+        if (value < 0) {
+            value = 0;
+        }
+        totalValue += value;
     }
     
     
@@ -706,7 +714,9 @@ typedef void(^ClickBlock)(NSInteger clickIndex);
             
             //数据值
             CGFloat value = [valueString floatValue];
-            
+            if (value < 0) {//黄金累计收益为0的情况
+                value = 0;
+            }
             //根据当前数值的占比，计算得到当前的弧度
             CGFloat radian = [self loadPercentRadianWithCurrent:value withTotalValue:totalValue];
             
