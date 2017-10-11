@@ -247,10 +247,18 @@
 {
     [super layoutSubviews];
     
-    if (_presenter.item.prdLabelsList.count > 0 || self.goldModel.prdLabelsList.count > 0) {
+    if (_presenter.item.prdLabelsList.count > 0 || self.goldModel.prdLabelsList.count > 0 || self.microMoneyModel.prdLabelsList.count > 0 || self.honerListModel.prdLabelsList.count > 0) {
         UCFProjectLabel *projectLabel = [_presenter.item.prdLabelsList firstObject];
         if (projectLabel == nil) {
-            projectLabel = [self.goldModel.prdLabelsList firstObject];
+            if (self.microMoneyModel.prdLabelsList.count > 0) {
+                projectLabel = [self.microMoneyModel.prdLabelsList firstObject];
+            }
+            else if (self.honerListModel.prdLabelsList.count > 0) {
+                projectLabel = [self.honerListModel.prdLabelsList firstObject];
+            }
+            else if (self.goldModel.prdLabelsList.count > 0) {
+                projectLabel = [self.goldModel.prdLabelsList firstObject];
+            }
         }
         if ([projectLabel.labelPriority integerValue] == 1) {
             self.proSignBackView.hidden = NO;
