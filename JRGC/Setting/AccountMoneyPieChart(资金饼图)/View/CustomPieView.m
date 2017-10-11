@@ -310,7 +310,7 @@ typedef void(^ClickBlock)(NSInteger clickIndex);
         NSString *valueString = self.segmentDataArray[i];
         
         //数据值
-        CGFloat value = [valueString floatValue];
+        double value = [valueString doubleValue];
         
         //当前数值的占比
      
@@ -324,7 +324,7 @@ typedef void(^ClickBlock)(NSInteger clickIndex);
             titleString = self.segmentTitleArray[i];
         }
         
-        NSString *valueStr = [NSString stringWithFormat:@"%.2f",value];
+        NSString *valueStr = [NSString stringWithFormat:@"%.2lf",value];
         NSString *finalString = [NSString stringWithFormat:@" %@: ¥%@",titleString,[UCFToolsMehod AddComma:valueStr]];
         if (value < 0)
         {

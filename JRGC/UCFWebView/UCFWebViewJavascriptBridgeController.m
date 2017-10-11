@@ -439,7 +439,7 @@
 {
     NSArray *arr = [value componentsSeparatedByString:@","];
     if (arr.count == 2) {
-        NSString *strParameters = [NSString stringWithFormat:@"userId=%@&prdOrderId=%@&contractType=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],[arr objectAtIndex:0],[arr objectAtIndex:1]];
+        NSString *strParameters = [NSString stringWithFormat:@"userId=%@&prdOrderId=%@&contractType=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],[arr objectAtIndex:1],[arr objectAtIndex:0]];
         [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagContractDownLoad owner:self Type:self.accoutType];
     }
     
