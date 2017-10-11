@@ -24,4 +24,5 @@
 + (CGFloat)viewHeight;
 - (void)getClendarInfoWithMonth:(NSString *)month;
 - (void)headerViewInitUI;
+- (void)setCurrentLabText:(NSString *)day;
 @end

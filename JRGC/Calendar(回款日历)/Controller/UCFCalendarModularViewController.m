@@ -66,7 +66,7 @@
 #pragma mark - tableView的数据源方法
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    if (!self.selectedDayDatas.count && self.calendarHeader.currentDayLabel.text.length>0) {
+    if (self.selectedDayDatas.count == 0) {
         return 1;
     }
     else
@@ -146,7 +146,7 @@
 {
     NSString *userId = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
     NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys:userId, @"userId", nil];
-    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagCalendarHeader owner:self signature:YES Type:self.accoutType];
+    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagOldCalendarHeader owner:self signature:YES Type:self.accoutType];
 }
 
 - (void)beginPost:(kSXTag)tag
@@ -161,12 +161,18 @@
     NSString *rsttext = [dictotal objectSafeForKey:@"message"];
     
     if ([rstcode intValue] == 1) {
-        if (tag.intValue == kSXTagCalendarHeader) {
+        if (tag.intValue == kSXTagOldCalendarHeader) {
             self.calendarHeader.calendarHeaderInfo = [dictotal objectSafeDictionaryForKey:@"data"];
             self.pickerView.dataArray = [[dictotal objectSafeDictionaryForKey:@"data"] objectSafeArrayForKey:@"months"];
+            NSArray *monthArr = [[dictotal objectSafeDictionaryForKey:@"data"] objectSafeForKey:@"months"];
+            NSString *currentDay = [[dictotal objectSafeDictionaryForKey:@"data"] objectSafeForKey:@"today"];
+            NSString *currentMonth = [currentDay substringToIndex:7];
+            if ([monthArr containsObject:currentMonth]) {
+                [self getCurrentDayInfoFromNetWithDay:currentDay];
+            }
             //            [self.pickerView reloadAllComponents];
         }
-        else if (tag.intValue == kSXTagCurrentDayInfo) {
+        else if (tag.intValue == kSXTagOldCalendarInfo) {
             NSArray *dataList = [[[dictotal objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"pageData"] objectSafeArrayForKey:@"result"];
             if (self.selectedDayDatas.count > 0) {
                 [self.selectedDayDatas removeAllObjects];
@@ -175,7 +181,7 @@
                 UCFCalendarGroup *group = [UCFCalendarGroup groupWithDict:dic];
                 [self.selectedDayDatas addObject:group];
             }
-            [self.tableview reloadData];
+            [self.tableview performSelector:@selector(reloadData) withObject:nil afterDelay:0.25];
         }
     }else{
         [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
@@ -211,9 +217,10 @@
 #pragma mark - 请求当前日的信息
 - (void)getCurrentDayInfoFromNetWithDay:(NSString *)day
 {
+    [self.calendarHeader setCurrentLabText:day];
     NSString *userId = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
     NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys:userId, @"userId", day, @"day", @"20", @"rows", @"1", @"page",  nil];
-    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagCurrentDayInfo owner:self signature:YES Type:self.accoutType];
+    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagOldCalendarInfo owner:self signature:YES Type:self.accoutType];
 }
 
 - (void)calendar:(UCFCalendarModularHeaderView *)calendar didClickedHeader:(UIButton *)headerBtn

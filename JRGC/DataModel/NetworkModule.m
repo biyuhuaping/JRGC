@@ -1088,8 +1088,14 @@ static NetworkModule *gInstance = NULL;
         case kSXTagCalendarHeader:
             parameter = [NEW_SERVER_IP stringByAppendingString:CALENDARHEADER];
             break;
+        case kSXTagOldCalendarHeader:
+            parameter = [NEW_SERVER_IP stringByAppendingString:CALENDARHEADER_OLD];
+            break;
         case kSXTagCalendarInfo:
             parameter = [NEW_SERVER_IP stringByAppendingString:CALENDARINFO];
+            break;
+        case kSXTagOldCalendarInfo:
+            parameter = [NEW_SERVER_IP stringByAppendingString:CALENDARINFO_OLD];
             break;
         case kSXTagCurrentDayInfo:
             parameter = [NEW_SERVER_IP stringByAppendingString:CURRENTDAYINFO];

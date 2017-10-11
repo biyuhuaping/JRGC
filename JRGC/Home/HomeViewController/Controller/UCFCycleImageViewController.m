@@ -15,6 +15,7 @@
 #import "UCFNoticeView.h"
 #import "UCFHomeIconCollectionCell.h"
 #import "UCFHomeIconPresenter.h"
+#import "UCFNoticeViewController.h"
 
 @interface UCFCycleImageViewController () <HomeIconListViewPresenterCallBack, SDCycleScrollViewDelegate, UCFNoticeViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource>
 @property (strong, nonatomic) UCFHomeListPresenter *presenter;
@@ -59,7 +60,11 @@ static NSString *cellId = @"iconCell";
 
 - (void)noticeView:(UCFNoticeView *)noticeView didClickedNotice:(NSString *)noticeStr
 {
-    
+    UCFNoticeViewController *noticeWeb = [[UCFNoticeViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
+    noticeWeb.url      = @"https://www.baidu.com";//请求地址;
+    noticeWeb.navTitle = @"公告";
+    UCFBaseViewController *baseVc = (UCFBaseViewController *)self.delegate;
+    [baseVc.navigationController pushViewController:noticeWeb animated:YES];
 }
 
 #pragma mark ---- UICollectionViewDataSource

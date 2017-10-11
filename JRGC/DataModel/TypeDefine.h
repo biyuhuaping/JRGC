@@ -261,7 +261,11 @@
 #define PRDCLAIMSWJSHOWURL  @"api/prdClaims/v2/wjShow.json"//工场微金列表
 #define PRDTRANSEFERLIST    @"api/prdClaims/v2/transferShow.json" //混合债转列表
 #define CALENDARHEADER      @"api/myPayment/v2/myPaymentInfoNew.json" //日历的月份和头部信息
+#define CALENDARHEADER_OLD      @"api/myPayment/v2/myPaymentInfo.json" //日历的月份和头部信息
+
 #define CALENDARINFO        @"api/myPayment/v2/myPaymentDayNew.json"  //日历的当前月信息
+#define CALENDARINFO_OLD        @"api/myPayment/v2/myPaymentDay.json"  //日历的当前月信息
+
 #define CURRENTDAYINFO      @"api/myPayment/v2/myPaymentDetail.json" //当前日的回款信息
 #define GOLDACCOUNT         @"api/nmAccount/v2/getNmAccountInfo.json" //获取黄金账户信息
 #define CURRENTGOLDPRICE    @"api/nmCommon/v2/getRealTimePrice.json" //获取当前黄金价格
@@ -479,7 +483,9 @@ enum kSXTag
     kSXTagPrdClaimsWJShow,              //工场微金列表
     kSXTagPrdTransferList,              //混合债转列表
     kSXTagCalendarHeader,               //日历的月份和头部信息
+    kSXTagOldCalendarHeader,               //日历的月份和头部信息
     kSXTagCalendarInfo,                 //日历的月信息
+    kSXTagOldCalendarInfo,                 //日历的月信息
     kSXTagCurrentDayInfo,               //当前日的回款信息
     kSXTagGoldAccount,                   //黄金账户信息
     ksxTagGoldCurrentPrice,              //当前黄金价格

@@ -308,7 +308,6 @@ static NSString *const cellId = @"cellId";
     self.waitPrincipalLabel.text = [calendarHeaderInfo objectSafeForKey:@"waitPrincipal"];
     self.waitInterestLabel.text = [calendarHeaderInfo objectSafeForKey:@"waitInterest"];
     self.currentDay = [calendarHeaderInfo objectSafeForKey:@"today"];
-    
     [self.months removeAllObjects];
     [self.months addObjectsFromArray:[calendarHeaderInfo objectSafeForKey:@"months"]];
     [self.calendar reloadData];
@@ -423,7 +422,10 @@ static NSString *const cellId = @"cellId";
     comps = [calendar components:unitFlags fromDate:currentDate];
     return [NSString stringWithFormat:@"%ld年%ld月",(long)[comps year], (long)[comps month]];
 }
-
+- (void)setCurrentLabText:(NSString *)day
+{
+    [self setCurrentDayWithDate:day];
+}
 - (void)setCurrentDayWithDate:(NSString *)date
 {
     NSDate *currentDate = [self.dateFormatter dateFromString:date];

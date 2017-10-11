@@ -127,6 +127,9 @@
     if ([self.item.type isEqualToString:@"6"]) {
         return [NSString stringWithFormat:@"已售%.3f克", [self.item.completeLoan doubleValue]];
     }
+    else if ([self.item.type isEqualToString:@"0"]) {
+        return [NSString stringWithFormat:@"%@亿元", self.item.totleBookAmt];
+    }
     return [NSString stringWithFormat:@"%@", self.item.completeLoan];
 }
 

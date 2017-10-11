@@ -181,6 +181,15 @@
         if (tag.intValue == kSXTagCalendarHeader) {
             self.calendarHeader.calendarHeaderInfo = [dictotal objectSafeDictionaryForKey:@"data"];
             self.pickerView.dataArray = [[dictotal objectSafeDictionaryForKey:@"data"] objectSafeArrayForKey:@"months"];
+            
+            
+            NSArray *monthArr = [[dictotal objectSafeDictionaryForKey:@"data"] objectSafeForKey:@"months"];
+            self.currentDay = [[dictotal objectSafeDictionaryForKey:@"data"] objectSafeForKey:@"today"];
+            NSString *currentMonth = [self.currentDay substringToIndex:7];
+            if ([monthArr containsObject:currentMonth]) {
+                [self getCurrentDayInfoFromNetWithDay:self.currentDay];
+            }
+            
         }
         else if (tag.intValue == kSXTagCurrentDayInfo) {
             NSArray *dataList = [[[dictotal objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"pageData"] objectSafeArrayForKey:@"result"];
