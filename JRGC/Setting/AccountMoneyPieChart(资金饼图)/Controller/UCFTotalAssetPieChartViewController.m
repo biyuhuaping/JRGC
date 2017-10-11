@@ -93,7 +93,7 @@
             }
             UCFCustomPieChartModel *pieChatModel1 = [[UCFCustomPieChartModel alloc]init];
             pieChatModel1.pieChartTitle = @"按账户类型";
-            pieChatModel1.pieChartDataArray = [[NSMutableArray alloc]initWithArray:@[p2pAssets,goldAssets,zxAssets]];
+            pieChatModel1.pieChartDataArray = [[NSMutableArray alloc]initWithArray:@[p2pAssets,zxAssets,goldAssets]];
 //             pieChatModel1.pieChartDataArray = [[NSMutableArray alloc]initWithArray:@[@"1000.00",@"5000.00",@"12000.00"]];
             pieChatModel1.pieChartTitleArray = [[NSMutableArray alloc]initWithArray:@[@"微金资产",@"尊享资产",@"黄金资产"]];
             
