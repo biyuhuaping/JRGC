@@ -237,4 +237,8 @@ typedef NS_ENUM(NSInteger, PicType) {
 + (NSMutableAttributedString*) changeLabelWithAllStr:(NSString *)allStr Text:(NSString*)needText Font:(CGFloat)font;
 //获取URL的指定参数对应值
 + (NSString *) paramValueOfUrl:(NSString *)url withParam:(NSString *) param;
+
++(NSString *)getNewBankNumWitOldBankNum:(NSString *)bankNum;
+
+
 @end
