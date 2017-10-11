@@ -28,8 +28,9 @@
         _baseImageView.backgroundColor = [UIColor whiteColor];
         _baseImageView.userInteractionEnabled = YES;
         NSString *imageURL = [[NSUserDefaults standardUserDefaults] valueForKey:@"LoginImageUrl"];
-        NSString *imageName = ScreenHeight < 481 ? @"login_bg_phone4.jpg" : @"login_bg.jpg";
-        [_baseImageView sd_setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:[UIImage imageNamed:imageName]];
+        NSString *imageName = ScreenHeight < 481 ? @"login_bg_phone4_default.png" : @"login_bg_default.png";
+        UIImage *imageData = [UIImage imageNamed:imageName];
+        [_baseImageView sd_setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:imageData];
         [self addSubview:_baseImageView];
         
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(login:)];

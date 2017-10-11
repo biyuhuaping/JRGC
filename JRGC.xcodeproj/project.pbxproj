@@ -794,6 +794,8 @@
 		A83048D71F67E4120007FB4F /* UTDID.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A83048CF1F67D9A70007FB4F /* UTDID.framework */; };
 		A83048D81F67E4380007FB4F /* AlicloudUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A83048D01F67D9A70007FB4F /* AlicloudUtils.framework */; };
 		A83048D91F67E4380007FB4F /* BCConnectorBundle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A83048D11F67D9A70007FB4F /* BCConnectorBundle.framework */; };
+		A8386E3E1F8CCDE800E26002 /* login_bg_default.png in Resources */ = {isa = PBXBuildFile; fileRef = A8F783021F8CCB8500685B4D /* login_bg_default.png */; };
+		A8386E3F1F8CCDF200E26002 /* login_bg_phone4_default.png in Resources */ = {isa = PBXBuildFile; fileRef = A8F783031F8CCB8500685B4D /* login_bg_phone4_default.png */; };
 		A851F3481F132713003DE8B8 /* UCFGoldTransactionHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = A851F3471F132713003DE8B8 /* UCFGoldTransactionHeadView.m */; };
 		A851F34A1F132739003DE8B8 /* UCFGoldTransactionHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A851F3491F132739003DE8B8 /* UCFGoldTransactionHeadView.xib */; };
 		A851F34E1F132D2C003DE8B8 /* UCFGoldTransCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A851F34C1F132D2C003DE8B8 /* UCFGoldTransCell.m */; };
@@ -2453,8 +2455,8 @@
 		A8E02DB11F0E0A7800FC2260 /* GoldTransactionRecordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GoldTransactionRecordViewController.xib; sourceTree = "<group>"; };
 		A8F742B01F18939800EF001A /* UCFGoldTradeListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFGoldTradeListModel.h; sourceTree = "<group>"; };
 		A8F742B11F18939800EF001A /* UCFGoldTradeListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFGoldTradeListModel.m; sourceTree = "<group>"; };
-		A8F783001F8CAD4A00685B4D /* login_bg_phone4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = login_bg_phone4.jpg; path = Images/login_bg_phone4.jpg; sourceTree = "<group>"; };
-		A8F783011F8CAD4A00685B4D /* login_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = login_bg.jpg; path = Images/login_bg.jpg; sourceTree = "<group>"; };
+		A8F783021F8CCB8500685B4D /* login_bg_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = login_bg_default.png; path = Images/login_bg_default.png; sourceTree = "<group>"; };
+		A8F783031F8CCB8500685B4D /* login_bg_phone4_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = login_bg_phone4_default.png; path = Images/login_bg_phone4_default.png; sourceTree = "<group>"; };
 		A8FF32E11F1666A600066A80 /* UCFGoldBidSuccessViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFGoldBidSuccessViewController.h; sourceTree = "<group>"; };
 		A8FF32E21F1666A600066A80 /* UCFGoldBidSuccessViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFGoldBidSuccessViewController.xib; sourceTree = "<group>"; };
 		A8FF32E31F1666A600066A80 /* UCFGoldBidSuccessViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFGoldBidSuccessViewController.m; sourceTree = "<group>"; };
@@ -5455,8 +5457,8 @@
 		7BFE3EB01AC56356002A53A2 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				A8F783001F8CAD4A00685B4D /* login_bg_phone4.jpg */,
-				A8F783011F8CAD4A00685B4D /* login_bg.jpg */,
+				A8F783021F8CCB8500685B4D /* login_bg_default.png */,
+				A8F783031F8CCB8500685B4D /* login_bg_phone4_default.png */,
 				FB51491B1D64403000C26E7B /* gif@3x.gif */,
 				FB5149321D64403100C26E7B /* touch_id@2x.gif */,
 				FB5149331D64403100C26E7B /* touch_id@3x.gif */,
@@ -6749,6 +6751,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A8386E3F1F8CCDF200E26002 /* login_bg_phone4_default.png in Resources */,
+				A8386E3E1F8CCDE800E26002 /* login_bg_default.png in Resources */,
 				A8FF32E51F1666DC00066A80 /* UCFGoldBidSuccessViewController.xib in Resources */,
 				744B9ED61F0B8AC100440FBA /* UCFCalendarDetailHeaderView.xib in Resources */,
 				83CD84331F13A50800227704 /* UCFP2PTransferViewController.xib in Resources */,
