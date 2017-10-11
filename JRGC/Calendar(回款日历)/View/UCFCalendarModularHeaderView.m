@@ -346,7 +346,7 @@ static NSString *const cellId = @"cellId";
     self.calendar.userInteractionEnabled = NO;
     NSString *userId = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
     NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys:userId, @"userId", month, @"month", nil];
-    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagCalendarInfo owner:self signature:YES Type:self.accoutType];
+    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagOldCalendarInfo owner:self signature:YES Type:self.accoutType];
 }
 
 - (void)beginPost:(kSXTag)tag
@@ -361,7 +361,7 @@ static NSString *const cellId = @"cellId";
     //    NSString *rsttext = [dictotal objectSafeForKey:@"message"];
     
     if ([rstcode intValue] == 1) {
-        if (tag.intValue == kSXTagCalendarInfo) {
+        if (tag.intValue == kSXTagOldCalendarInfo) {
             NSDictionary *data = [dictotal objectSafeDictionaryForKey:@"data"];
             self.repayMoneyLabel.text = [data objectSafeForKey:@"repayMoney"];
             self.paidMoneyLabel.text = [data objectSafeForKey:@"paidMoney"];
