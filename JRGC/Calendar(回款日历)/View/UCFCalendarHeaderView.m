@@ -305,8 +305,8 @@ static NSString *const cellId = @"cellId";
     _calendarHeaderInfo = calendarHeaderInfo;
     
     self.myPaymentLabel.text = [calendarHeaderInfo objectSafeForKey:@"myPayment"];
-    self.waitPrincipalLabel.text = [calendarHeaderInfo objectSafeForKey:@"waitPrincipal"];
-    self.waitInterestLabel.text = [calendarHeaderInfo objectSafeForKey:@"waitInterest"];
+    self.waitPrincipalLabel.text = [NSString stringWithFormat:@"待收本金%@",[calendarHeaderInfo objectSafeForKey:@"waitPrincipal"]];
+    self.waitInterestLabel.text = [NSString stringWithFormat:@"待收利息%@",[calendarHeaderInfo objectSafeForKey:@"waitInterest"]];
     self.currentDay = [calendarHeaderInfo objectSafeForKey:@"today"];
     [self setCurrentDayWithDate:self.currentDay];
     [self.months removeAllObjects];
