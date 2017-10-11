@@ -56,7 +56,7 @@
     self.cardDetialLabel.text = accoutCardModel.cardDetialStr;
     self.cardBgImageView.image = [UIImage imageNamed:accoutCardModel.cardBgImageName];
     self.cardStateLabel.text = accoutCardModel.cardStateStr;
-    self.cardNumberLabel.text = accoutCardModel.cardNumberStr;
+    self.cardNumberLabel.text =  [Common getNewBankNumWitOldBankNum:accoutCardModel.cardNumberStr];
     self.accoutBalanceLabel.text = accoutCardModel.accoutBalanceStr;
 }
 /*
