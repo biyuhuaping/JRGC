@@ -32,10 +32,6 @@
 @property (weak, nonatomic) IBOutlet UIView *segSecondView;
 @property (weak, nonatomic) IBOutlet UILabel *signLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *signImageView;
-
-@property (weak, nonatomic) IBOutlet UIView *goldSignView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *goldSignViewW;
-@property (weak, nonatomic) IBOutlet UILabel *goldSignLabel;
 @end
 
 @implementation UCFHomeListHeaderSectionView
@@ -70,11 +66,26 @@
     _honerLabel.text = _presenter.desc;
     self.homeListHeaderMoreButton.hidden = !presenter.showMore;
     
-    if ([presenter.group.title isEqualToString:@"资金周转"]) {
-        self.headerImageView.image = [UIImage imageNamed:presenter.group.headerImage];
+//    if ([presenter.group.title isEqualToString:@"资金周转"]) {
+//        self.headerImageView.image = [UIImage imageNamed:presenter.group.headerImage];
+//    }
+//    else {
+//        [self.headerImageView sd_setImageWithURL:[NSURL URLWithString:presenter.iconUrl]];
+//    }
+    
+    if (self.presenter.type == 17) {
+        if (self.presenter.desc.length > 0) {
+            self.goldSignView.hidden = NO;
+            self.goldSignLabel.text = self.presenter.desc;
+            CGSize size = [self.goldSignLabel.text boundingRectWithSize:CGSizeMake(MAXFLOAT, 18) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12.0f]} context:nil].size;
+            self.goldSignViewW.constant = size.width + 11;
+        }
+        else {
+            self.goldSignView.hidden = YES;
+        }
     }
     else {
-        [self.headerImageView sd_setImageWithURL:[NSURL URLWithString:presenter.iconUrl]];
+        self.goldSignView.hidden = YES;
     }
     
     self.downView.hidden = presenter.attach.count > 0 ? NO : YES;
@@ -91,14 +102,7 @@
         self.signLabel.hidden = YES;
         self.signImageView.hidden = YES;
     }
-    if (self.presenter.type == 17) {
-        self.goldSignView.hidden = NO;
-//        self.segView.hidden = NO;
-    }
-    else {
-        self.goldSignView.hidden = YES;
-//        self.segView.hidden = YES;
-    }
+    
     
     if (_presenter.attach.count > 0) {
         UCFAttachModel *attachFirst = [_presenter.attach firstObject];

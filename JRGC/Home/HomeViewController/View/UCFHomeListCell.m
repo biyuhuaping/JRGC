@@ -264,7 +264,7 @@
         if ([projectLabel.labelPriority integerValue] == 1) {
             self.proSignBackView.hidden = NO;
             self.proSignLabel.text = [NSString stringWithFormat:@"%@", projectLabel.labelName];
-            CGSize size = [projectLabel.labelName boundingRectWithSize:CGSizeMake(MAXFLOAT, 15) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:10.0f]} context:nil].size;
+            CGSize size = [self.proSignLabel.text boundingRectWithSize:CGSizeMake(MAXFLOAT, 15) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:10.0f]} context:nil].size;
             _proSignBackViewWidth.constant = size.width + 11;
         }
         else {
@@ -501,6 +501,8 @@
     self.timeLabel.text = goldModel.periodTerm;
 //    self.repayModelLabel.text =
     self.startMoneyLabel.text = @"年化收益克重";
+    self.startMoneyWidth.constant = -40;
+    self.start1MoneyWidth.constant = -20;
 //    [NSString stringWithFormat:@"%@克起", goldModel.minPurchaseAmount];
     self.repayModelLabel.text = goldModel.paymentType;
     self.remainLabel.text = [NSString stringWithFormat:@"剩%@克", goldModel.remainAmount];
@@ -538,8 +540,8 @@
         if ([projectLabel.labelPriority integerValue] == 1) {
             self.proSignBackView.hidden = NO;
             self.proSignLabel.text = [NSString stringWithFormat:@"%@", projectLabel.labelName];
-            CGSize size = [projectLabel.labelName boundingRectWithSize:CGSizeMake(MAXFLOAT, 15) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:10.0f]} context:nil].size;
-            self.proSignBackViewWidth.constant = size.width + 11;
+//            CGSize size = [projectLabel.labelName boundingRectWithSize:CGSizeMake(MAXFLOAT, 15) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:10.0f]} context:nil].size;
+//            self.proSignBackViewWidth.constant = size.width + 11;
         }
         else {
             self.proSignBackView.hidden = YES;

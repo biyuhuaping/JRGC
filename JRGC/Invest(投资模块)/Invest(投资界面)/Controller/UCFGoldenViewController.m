@@ -22,6 +22,7 @@
 #import "UCFAccountPieCharViewController.h"
 #import "UCFRechargeOrCashViewController.h"
 #import "AppDelegate.h"
+#import "UCFProjectLabel.h"
 @interface UCFGoldenViewController () <UITableViewDelegate, UITableViewDataSource, UCFHomeListCellHonorDelegate,UIAlertViewDelegate, UCFGoldFlexibleCellDelegate>
 @property (weak, nonatomic) UCFGoldenHeaderView *goldenHeader;
 @property (strong, nonatomic) NSMutableArray *dataArray;
@@ -197,8 +198,23 @@
             view.homeListHeaderMoreButton.hidden = YES;
             view.headerTitleLabel.text = @"增金宝";
             view.headerImageView.image = [UIImage imageNamed:@"mine_icon_gold_current"];
-//            view.honerLabel.text = @"实物黄金赚收益";
-//            view.honerLabel.hidden = NO;
+            
+            if (_fliexGoldModel.prdLabelsList.count > 0) {
+                UCFProjectLabel *projectLabel = [_fliexGoldModel.prdLabelsList firstObject];
+                if ([projectLabel.labelPriority integerValue] == 1) {
+                    view.goldSignView.hidden = NO;
+                    view.goldSignLabel.text = [NSString stringWithFormat:@"%@", projectLabel.labelName];
+                    CGSize size = [view.goldSignLabel.text boundingRectWithSize:CGSizeMake(MAXFLOAT, 18) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12.0f]} context:nil].size;
+                    view.goldSignViewW.constant = size.width + 11;
+                }
+                else {
+                    view.goldSignView.hidden = YES;
+                }
+            }
+            else {
+                view.goldSignView.hidden = YES;
+            }
+            
             [view.homeListHeaderMoreButton setTitleColor:UIColorWithRGB(0x4aa1f9) forState:UIControlStateNormal];
             return view;
         }

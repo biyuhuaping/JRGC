@@ -85,7 +85,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="优质资产" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uxe-Dg-dNT">
                                 <rect key="frame" x="5" y="0.0" width="41" height="15"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                <color key="textColor" red="1" green="0.4823529411764706" blue="0.49019607843137253" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="1" green="0.4823529412" blue="0.49019607840000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -136,6 +136,7 @@
                 <outlet property="downLineLeftSpace" destination="Z07-qH-eW1" id="4vi-pT-vEc"/>
                 <outlet property="downSegLine" destination="fZ3-9O-1cd" id="cMu-MR-CgB"/>
                 <outlet property="proSignBackView" destination="lIX-jc-TGV" id="6zd-ka-amL"/>
+                <outlet property="proSignBackViewWidth" destination="JBf-h8-hjA" id="rc2-PD-G3w"/>
                 <outlet property="proSignLabel" destination="uxe-Dg-dNT" id="DW2-Mp-5wq"/>
                 <outlet property="rateLabel" destination="5Yd-U8-tN8" id="Nzy-20-8us"/>
                 <outlet property="remainLabel" destination="hi6-3M-t9V" id="C2e-za-5Gr"/>
