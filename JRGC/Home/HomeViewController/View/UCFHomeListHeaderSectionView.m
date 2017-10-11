@@ -66,12 +66,7 @@
     _honerLabel.text = _presenter.desc;
     self.homeListHeaderMoreButton.hidden = !presenter.showMore;
     
-//    if ([presenter.group.title isEqualToString:@"资金周转"]) {
-//        self.headerImageView.image = [UIImage imageNamed:presenter.group.headerImage];
-//    }
-//    else {
-//        [self.headerImageView sd_setImageWithURL:[NSURL URLWithString:presenter.iconUrl]];
-//    }
+    [self.headerImageView sd_setImageWithURL:[NSURL URLWithString:presenter.iconUrl]];
     
     if (self.presenter.type == 17) {
         if (self.presenter.desc.length > 0) {
