@@ -28,7 +28,8 @@
 #import "UCFInvitationRebateViewController.h"
 #import "UCFSession.h"
 #import "MjAlertView.h"
-#import "UCFCalendarViewController.h"
+//#import "UCFCalendarViewController.h"
+#import "UCFCalendarModularViewController.h"
 #import "UCFMyReservedViewController.h"
 
 @interface UCFP2POrHonerAccoutViewController ()<UITableViewDelegate,UITableViewDataSource,UCFP2POrHornerTabHeaderViewDelete,UIAlertViewDelegate,MjAlertViewDelegate>
@@ -170,7 +171,7 @@
     if (_cellItemsData == nil) {
         
         UCFSettingItem *myInVest = [UCFSettingArrowItem itemWithIcon:nil title:@"我的出借" destVcClass:[MyViewController class]];
-        UCFSettingItem *backMoneyDetail = [UCFSettingArrowItem itemWithIcon:nil title:@"回款日历" destVcClass:[UCFCalendarViewController class]];
+        UCFSettingItem *backMoneyDetail = [UCFSettingArrowItem itemWithIcon:nil title:@"回款日历" destVcClass:[UCFCalendarModularViewController class]];
         UCFSettingItem *feedBackVC = [UCFSettingArrowItem itemWithIcon:nil title:@"邀请获利" destVcClass:[UCFInvitationRebateViewController class]];
         
         
@@ -351,8 +352,7 @@
         [self.navigationController pushViewController:myInvestVC animated:YES];
     }
     else if ([titleStr isEqualToString:@"回款日历"]) {
-        UCFCalendarViewController *backMoneyCalendarVC = [[UCFCalendarViewController alloc] initWithNibName:@"UCFCalendarViewController" bundle:nil];
-//        backMoneyDetailVC.superViewController = self;
+        UCFCalendarModularViewController *backMoneyCalendarVC = [[UCFCalendarModularViewController alloc] initWithNibName:@"UCFCalendarModularViewController" bundle:nil];
         backMoneyCalendarVC.accoutType = self.accoutType;
         [self.navigationController pushViewController:backMoneyCalendarVC animated:YES];
     }else if ([titleStr isEqualToString:@"邀请获利"]){
