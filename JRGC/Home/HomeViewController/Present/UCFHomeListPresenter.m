@@ -175,5 +175,20 @@
     return YES;
 }
 
+- (void)fetchProDetailDataWithParameter:(NSDictionary *)parameter completionHandler:(NetworkCompletionHandler)completionHander
+{
+    UCFBaseViewController *baseVC = (UCFBaseViewController *)self.iconDelegate;
+    [MBProgressHUD showHUDAddedTo:baseVC.parentViewController.view animated:YES];
+    __weak typeof(self) weakSelf = self;
+    NSString *type = [parameter objectForKey:@"type"];
+    [self.apiManager fetchProDetailInfoWithParameter:parameter completionHandler:^(NSError *error, id result) {
+        if (type.intValue == 4) {
+//            if ([weakSelf.iconDelegate respondsToSelector:@selector(userInfoPresenter:didReturnPrdClaimsDealBidWithResult:error:)]) {
+//                [weakSelf.userInfoViewDelegate userInfoPresenter:self didReturnPrdClaimsDealBidWithResult:result error:error];
+//            }
+        }
+        !completionHander ?: completionHander(error, result);
+    }];
+}
 
 @end

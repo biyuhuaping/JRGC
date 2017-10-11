@@ -432,7 +432,7 @@
                         if ([model.status intValue ] != 2){
                             if (isOrder > 0) {
                                 NSDictionary *parameter = @{@"Id": model.Id, @"userId": [UserInfoSingle sharedManager].userId, @"proType": model.type,@"type":@"3"};
-                                [self.userInfoVC.presenter fetchProDetailDataWithParameter:parameter completionHandler:^(NSError *error, id result) {
+                                [self.cycleImageVC.presenter fetchProDetailDataWithParameter:parameter completionHandler:^(NSError *error, id result) {
                                     
                                     NSDictionary *dic = (NSDictionary *)result;
                                     [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
@@ -460,7 +460,7 @@
                         else{
                             {
                                 NSDictionary *parameter = @{@"Id": model.Id, @"userId": [UserInfoSingle sharedManager].userId, @"proType": model.type,@"type":@"3"};
-                                [self.userInfoVC.presenter fetchProDetailDataWithParameter:parameter completionHandler:^(NSError *error, id result) {
+                                [self.cycleImageVC.presenter fetchProDetailDataWithParameter:parameter completionHandler:^(NSError *error, id result) {
                                     NSDictionary *dic = (NSDictionary *)result;
                                     [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
                                     

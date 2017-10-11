@@ -40,5 +40,7 @@
 
 - (void)fetchHomeIconListDataWithCompletionHandler:(NetworkCompletionHandler)completionHander;
 
+- (void)fetchProDetailDataWithParameter:(NSDictionary *)parameter completionHandler:(NetworkCompletionHandler)completionHander;
+
 - (void)resetData;
 @end

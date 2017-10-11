@@ -300,7 +300,7 @@
             cell.iconImageView.image = [UIImage imageNamed:@"uesr_icon_score"];
             cell.icon2ImageView.image = [UIImage imageNamed:@"uesr_icon_rebate"];
             cell.titleDesLabel.text = @"工分";
-            cell.valueLabel.text = [NSString stringWithFormat:@"%@", self.benefitModel.score];
+            cell.valueLabel.text = [NSString stringWithFormat:@"%@分", self.benefitModel.score];
             cell.title2DesLabel.text = @"邀请返利";
             cell.value2Label.text = self.benefitModel.promotionCode.length > 0 ? [NSString stringWithFormat:@"工场码%@", self.benefitModel.promotionCode] : @"";
             cell.signView.hidden = YES;
