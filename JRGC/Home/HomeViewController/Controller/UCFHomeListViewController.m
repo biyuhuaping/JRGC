@@ -298,7 +298,9 @@
         return;
     }
     else {
-        
+        if ([self.delegate respondsToSelector:@selector(homeList:tableView:didClickedWithModel:withType:)]) {
+            [self.delegate homeList:self tableView:self.tableView didClickedWithModel:model withType:UCFHomeListTypeInvest];
+        }
     }
 }
 

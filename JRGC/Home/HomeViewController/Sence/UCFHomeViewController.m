@@ -380,7 +380,7 @@
     }
     NSString *noPermissionTitleStr = self.accoutType == SelectAccoutTypeP2P ? @"目前标的详情只对出借人开放":@"目前标的详情只对认购人开放";
     if (type == UCFHomeListTypeDetail) {
-        if (model.moedelType == UCFHomeListCellModelTypeDefault) {
+        if (model.moedelType == UCFHomeListCellModelTypeDefault || model.moedelType == UCFHomeListCellModelTypeNewUser) {
         
             if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
                 //如果未登录，展示登录页面
@@ -488,46 +488,46 @@
                }
             }
           }
-        else if (model.moedelType == UCFHomeListCellModelTypeOneImageBatchLending) {
-            
-            UCFBatchBidController *batchBidVc = [[UCFBatchBidController alloc]initWithNibName:@"UCFBatchBidController" bundle:nil];
-            batchBidVc.accoutType = SelectAccoutTypeP2P;
-            [self.navigationController pushViewController:batchBidVc animated:YES];
-
-        }
-        else if (model.moedelType == UCFHomeListCellModelTypeOneImageTransfer) {
-            // 债券转让
-            AppDelegate *appdel = (AppDelegate *)[UIApplication sharedApplication].delegate;
-            UCFInvestViewController *invest = (UCFInvestViewController *)[[appdel.tabBarController.childViewControllers objectAtIndex:1].childViewControllers firstObject];
-            invest.selectedType = @"Trans";
-            if ([invest isViewLoaded]) {
-                [invest changeView];
-            }
-            [appdel.tabBarController setSelectedIndex:1];
-        }
-        else if (model.moedelType == UCFHomeListCellModelTypeOneImageTransfer) {
-            // 尊享转让
-            UCFHonerViewController *horner = [[UCFHonerViewController alloc] initWithNibName:@"UCFHonerViewController" bundle:nil];
-            horner.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight - 64);
-            horner.baseTitleText = @"工场尊享";
-            horner.viewType = @"2";
-            horner.accoutType = SelectAccoutTypeHoner;
-            [horner setCurrentViewForHornerTransferVC];
-            [self.navigationController pushViewController:horner animated:YES];
-        }
-        else if (model.moedelType == UCFHomeListCellModelTypeOneImageBatchCycle) {
-            NSString *userId = [UserInfoSingle sharedManager].userId;
-            if (userId) {
-                AppDelegate *appDel = (AppDelegate *)[UIApplication sharedApplication].delegate;
-                [appDel.tabBarController setSelectedIndex:2];
-            }
-            else {
-                UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
-                BaseNavigationViewController *loginNaviController = [[BaseNavigationViewController alloc] initWithRootViewController:loginViewController];
-                loginViewController.sourceVC = @"homePage";
-                [self presentViewController:loginNaviController animated:YES completion:nil];
-            }
-        }
+//        else if (model.moedelType == UCFHomeListCellModelTypeOneImageBatchLending) {
+//            
+//            UCFBatchBidController *batchBidVc = [[UCFBatchBidController alloc]initWithNibName:@"UCFBatchBidController" bundle:nil];
+//            batchBidVc.accoutType = SelectAccoutTypeP2P;
+//            [self.navigationController pushViewController:batchBidVc animated:YES];
+//
+//        }
+//        else if (model.moedelType == UCFHomeListCellModelTypeOneImageTransfer) {
+//            // 债券转让
+//            AppDelegate *appdel = (AppDelegate *)[UIApplication sharedApplication].delegate;
+//            UCFInvestViewController *invest = (UCFInvestViewController *)[[appdel.tabBarController.childViewControllers objectAtIndex:1].childViewControllers firstObject];
+//            invest.selectedType = @"Trans";
+//            if ([invest isViewLoaded]) {
+//                [invest changeView];
+//            }
+//            [appdel.tabBarController setSelectedIndex:1];
+//        }
+//        else if (model.moedelType == UCFHomeListCellModelTypeOneImageTransfer) {
+//            // 尊享转让
+//            UCFHonerViewController *horner = [[UCFHonerViewController alloc] initWithNibName:@"UCFHonerViewController" bundle:nil];
+//            horner.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight - 64);
+//            horner.baseTitleText = @"工场尊享";
+//            horner.viewType = @"2";
+//            horner.accoutType = SelectAccoutTypeHoner;
+//            [horner setCurrentViewForHornerTransferVC];
+//            [self.navigationController pushViewController:horner animated:YES];
+//        }
+//        else if (model.moedelType == UCFHomeListCellModelTypeOneImageBatchCycle) {
+//            NSString *userId = [UserInfoSingle sharedManager].userId;
+//            if (userId) {
+//                AppDelegate *appDel = (AppDelegate *)[UIApplication sharedApplication].delegate;
+//                [appDel.tabBarController setSelectedIndex:2];
+//            }
+//            else {
+//                UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
+//                BaseNavigationViewController *loginNaviController = [[BaseNavigationViewController alloc] initWithRootViewController:loginViewController];
+//                loginViewController.sourceVC = @"homePage";
+//                [self presentViewController:loginNaviController animated:YES completion:nil];
+//            }
+//        }
         else if (model.moedelType == UCFHomeListCellModelTypeReserved) {
             self.accoutType = SelectAccoutTypeP2P;
             if ([self checkUserCanInvestIsDetail:NO type:self.accoutType]) {
@@ -539,7 +539,7 @@
         }
     }
     else if (type == UCFHomeListTypeInvest) {
-        if (model.moedelType == UCFHomeListCellModelTypeDefault) {
+        if (model.moedelType == UCFHomeListCellModelTypeDefault || model.moedelType == UCFHomeListCellModelTypeNewUser) {
             
             if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
                 //如果未登录，展示登录页面
@@ -572,7 +572,7 @@
                     }
                     if([self checkUserCanInvestIsDetail:NO type:self.accoutType]){//
                         NSDictionary *parameter = @{@"Id": model.Id, @"userId": [UserInfoSingle sharedManager].userId, @"proType": model.type,@"type":@"4"};
-                        [self.userInfoVC.presenter fetchProDetailDataWithParameter:parameter completionHandler:^(NSError *error, id result) {
+                        [self.cycleImageVC.presenter fetchProDetailDataWithParameter:parameter completionHandler:^(NSError *error, id result) {
                             NSString *rstcode = [result objectForKey:@"status"];
                             [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
                             if ([rstcode intValue] == 1) {
@@ -653,6 +653,10 @@
     [self.navigationController pushViewController:facReservedWeb animated:YES];
 }
 
+//- (void)homeList:(UCFHomeListViewController *)homeList didClickNewUserWithModel:(UCFHomeListCellModel *)model
+//{
+//    
+//}
 
 -(void)gotoGoldInvestVC:(UCFHomeListCellModel *)model{
     
@@ -670,7 +674,7 @@
         NSString *nmProClaimIdStr = [NSString stringWithFormat:@"%@",model.Id];
         NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId",nmProClaimIdStr, @"nmPrdClaimId",@"8",@"type",nil];
         
-        [self.userInfoVC.presenter fetchProDetailDataWithParameter:strParameters completionHandler:^(NSError *error, id result) {
+        [self.cycleImageVC.presenter fetchProDetailDataWithParameter:strParameters completionHandler:^(NSError *error, id result) {
             NSDictionary *dic = (NSDictionary *)result;
             [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
             NSString *rsttext = [dic objectSafeForKey:@"message"];
@@ -695,7 +699,7 @@
         NSString *nmProClaimIdStr = [NSString stringWithFormat:@"%@",model.Id];
         NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId",nmProClaimIdStr, @"nmPrdClaimId",@"6",@"type",nil];
         
-        [self.userInfoVC.presenter fetchProDetailDataWithParameter:strParameters completionHandler:^(NSError *error, id result) {
+        [self.cycleImageVC.presenter fetchProDetailDataWithParameter:strParameters completionHandler:^(NSError *error, id result) {
             NSDictionary *dic = (NSDictionary *)result;
             [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
             NSString *rsttext = [dic objectSafeForKey:@"message"];
@@ -734,7 +738,7 @@
         NSString *nmProClaimIdStr = [NSString stringWithFormat:@"%@",model.Id];
         NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId",nmProClaimIdStr, @"nmPrdClaimId",@"7",@"type",nil];
         
-        [self.userInfoVC.presenter fetchProDetailDataWithParameter:strParameters completionHandler:^(NSError *error, id result) {
+        [self.cycleImageVC.presenter fetchProDetailDataWithParameter:strParameters completionHandler:^(NSError *error, id result) {
             NSDictionary *dic = (NSDictionary *)result;
             [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
             
@@ -765,7 +769,7 @@
         NSString *nmProClaimIdStr = [NSString stringWithFormat:@"%@",model.Id];
         NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId",nmProClaimIdStr, @"nmPrdClaimId",@"5",@"type",nil];
         
-        [self.userInfoVC.presenter fetchProDetailDataWithParameter:strParameters completionHandler:^(NSError *error, id result) {
+        [self.cycleImageVC.presenter fetchProDetailDataWithParameter:strParameters completionHandler:^(NSError *error, id result) {
             NSDictionary *dic = (NSDictionary *)result;
             [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
             
