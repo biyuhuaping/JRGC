@@ -794,6 +794,14 @@
 		A83048D71F67E4120007FB4F /* UTDID.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A83048CF1F67D9A70007FB4F /* UTDID.framework */; };
 		A83048D81F67E4380007FB4F /* AlicloudUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A83048D01F67D9A70007FB4F /* AlicloudUtils.framework */; };
 		A83048D91F67E4380007FB4F /* BCConnectorBundle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A83048D11F67D9A70007FB4F /* BCConnectorBundle.framework */; };
+		A830DE751F8DC8E9003855B9 /* UCFCalendarModularViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A830DE741F8DC8E9003855B9 /* UCFCalendarModularViewController.m */; };
+		A830DE7F1F8DC91A003855B9 /* UCFCalendarModularDetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A830DE761F8DC916003855B9 /* UCFCalendarModularDetailHeaderView.m */; };
+		A830DE801F8DC91A003855B9 /* UCFCalendarModularHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A830DE7A1F8DC918003855B9 /* UCFCalendarModularHeaderView.m */; };
+		A830DE811F8DC91A003855B9 /* UCFCalendarModularDayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A830DE7E1F8DC919003855B9 /* UCFCalendarModularDayCell.m */; };
+		A830DE821F8DD9F7003855B9 /* UCFCalendarModularViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A830DE721F8DC8E7003855B9 /* UCFCalendarModularViewController.xib */; };
+		A830DE831F8DDA6A003855B9 /* UCFCalendarModularHeaderView.xib in Sources */ = {isa = PBXBuildFile; fileRef = A830DE7D1F8DC919003855B9 /* UCFCalendarModularHeaderView.xib */; };
+		A830DE841F8DDAF1003855B9 /* UCFCalendarModularDetailHeaderView.xib in Sources */ = {isa = PBXBuildFile; fileRef = A830DE7B1F8DC918003855B9 /* UCFCalendarModularDetailHeaderView.xib */; };
+		A830DE851F8DDB0D003855B9 /* UCFCalendarModularDayCell.xib in Sources */ = {isa = PBXBuildFile; fileRef = A830DE7C1F8DC919003855B9 /* UCFCalendarModularDayCell.xib */; };
 		A8386E3E1F8CCDE800E26002 /* login_bg_default.png in Resources */ = {isa = PBXBuildFile; fileRef = A8F783021F8CCB8500685B4D /* login_bg_default.png */; };
 		A8386E3F1F8CCDF200E26002 /* login_bg_phone4_default.png in Resources */ = {isa = PBXBuildFile; fileRef = A8F783031F8CCB8500685B4D /* login_bg_phone4_default.png */; };
 		A851F3481F132713003DE8B8 /* UCFGoldTransactionHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = A851F3471F132713003DE8B8 /* UCFGoldTransactionHeadView.m */; };
@@ -2339,6 +2347,18 @@
 		A83048D11F67D9A70007FB4F /* BCConnectorBundle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BCConnectorBundle.framework; sourceTree = "<group>"; };
 		A83048D21F67D9A70007FB4F /* UTMini.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UTMini.framework; sourceTree = "<group>"; };
 		A83048D31F67D9A70007FB4F /* YWFeedbackBundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = YWFeedbackBundle.bundle; sourceTree = "<group>"; };
+		A830DE721F8DC8E7003855B9 /* UCFCalendarModularViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFCalendarModularViewController.xib; sourceTree = "<group>"; };
+		A830DE731F8DC8E8003855B9 /* UCFCalendarModularViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFCalendarModularViewController.h; sourceTree = "<group>"; };
+		A830DE741F8DC8E9003855B9 /* UCFCalendarModularViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFCalendarModularViewController.m; sourceTree = "<group>"; };
+		A830DE761F8DC916003855B9 /* UCFCalendarModularDetailHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFCalendarModularDetailHeaderView.m; sourceTree = "<group>"; };
+		A830DE771F8DC916003855B9 /* UCFCalendarModularHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFCalendarModularHeaderView.h; sourceTree = "<group>"; };
+		A830DE781F8DC917003855B9 /* UCFCalendarModularDetailHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFCalendarModularDetailHeaderView.h; sourceTree = "<group>"; };
+		A830DE791F8DC917003855B9 /* UCFCalendarModularDayCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFCalendarModularDayCell.h; sourceTree = "<group>"; };
+		A830DE7A1F8DC918003855B9 /* UCFCalendarModularHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFCalendarModularHeaderView.m; sourceTree = "<group>"; };
+		A830DE7B1F8DC918003855B9 /* UCFCalendarModularDetailHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFCalendarModularDetailHeaderView.xib; sourceTree = "<group>"; };
+		A830DE7C1F8DC919003855B9 /* UCFCalendarModularDayCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFCalendarModularDayCell.xib; sourceTree = "<group>"; };
+		A830DE7D1F8DC919003855B9 /* UCFCalendarModularHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFCalendarModularHeaderView.xib; sourceTree = "<group>"; };
+		A830DE7E1F8DC919003855B9 /* UCFCalendarModularDayCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFCalendarModularDayCell.m; sourceTree = "<group>"; };
 		A851F3461F132713003DE8B8 /* UCFGoldTransactionHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFGoldTransactionHeadView.h; sourceTree = "<group>"; };
 		A851F3471F132713003DE8B8 /* UCFGoldTransactionHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFGoldTransactionHeadView.m; sourceTree = "<group>"; };
 		A851F3491F132739003DE8B8 /* UCFGoldTransactionHeadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFGoldTransactionHeadView.xib; sourceTree = "<group>"; };
@@ -4349,6 +4369,9 @@
 				74BDA95D1F09EE3B0054403F /* UCFCalendarViewController.h */,
 				74BDA95E1F09EE3B0054403F /* UCFCalendarViewController.m */,
 				74BDA95F1F09EE3B0054403F /* UCFCalendarViewController.xib */,
+				A830DE731F8DC8E8003855B9 /* UCFCalendarModularViewController.h */,
+				A830DE741F8DC8E9003855B9 /* UCFCalendarModularViewController.m */,
+				A830DE721F8DC8E7003855B9 /* UCFCalendarModularViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -4367,6 +4390,15 @@
 		74BDA95C1F09EE260054403F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A830DE791F8DC917003855B9 /* UCFCalendarModularDayCell.h */,
+				A830DE7E1F8DC919003855B9 /* UCFCalendarModularDayCell.m */,
+				A830DE7C1F8DC919003855B9 /* UCFCalendarModularDayCell.xib */,
+				A830DE781F8DC917003855B9 /* UCFCalendarModularDetailHeaderView.h */,
+				A830DE761F8DC916003855B9 /* UCFCalendarModularDetailHeaderView.m */,
+				A830DE7B1F8DC918003855B9 /* UCFCalendarModularDetailHeaderView.xib */,
+				A830DE771F8DC916003855B9 /* UCFCalendarModularHeaderView.h */,
+				A830DE7A1F8DC918003855B9 /* UCFCalendarModularHeaderView.m */,
+				A830DE7D1F8DC919003855B9 /* UCFCalendarModularHeaderView.xib */,
 				744B9ED21F0B8AC100440FBA /* UCFCalendarDetailHeaderView.h */,
 				744B9ED31F0B8AC100440FBA /* UCFCalendarDetailHeaderView.m */,
 				744B9ED41F0B8AC100440FBA /* UCFCalendarDetailHeaderView.xib */,
@@ -6751,6 +6783,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A830DE821F8DD9F7003855B9 /* UCFCalendarModularViewController.xib in Resources */,
 				A8386E3F1F8CCDF200E26002 /* login_bg_phone4_default.png in Resources */,
 				A8386E3E1F8CCDE800E26002 /* login_bg_default.png in Resources */,
 				A8FF32E51F1666DC00066A80 /* UCFGoldBidSuccessViewController.xib in Resources */,
@@ -7065,6 +7098,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A830DE851F8DDB0D003855B9 /* UCFCalendarModularDayCell.xib in Sources */,
+				A830DE841F8DDAF1003855B9 /* UCFCalendarModularDetailHeaderView.xib in Sources */,
+				A830DE831F8DDA6A003855B9 /* UCFCalendarModularHeaderView.xib in Sources */,
 				A8FF32E41F1666D000066A80 /* UCFGoldBidSuccessViewController.m in Sources */,
 				742D50F21F75146900951AE2 /* UCFUserBenefitModel.m in Sources */,
 				83FCCA6B1F1711A6002921C5 /* UCFMyGoldInvestInfoViewController.m in Sources */,
@@ -7282,6 +7318,7 @@
 				74F490EE1E5B2AAA0057AC62 /* UCFCollectionBidCell.m in Sources */,
 				FBE9B7EF1ADCC3FB0060FC4D /* InvestmentCell.m in Sources */,
 				74F291071AE0DB72003E0E86 /* UCFBackMoneyDetailViewController.m in Sources */,
+				A830DE751F8DC8E9003855B9 /* UCFCalendarModularViewController.m in Sources */,
 				74931A321B1326FE00143424 /* OHParagraphStyle.m in Sources */,
 				74C230231F7A24310022D02B /* UCFPicADModel.m in Sources */,
 				4A9016831AFB12FE0049A9E0 /* MASLayoutConstraint.m in Sources */,
@@ -7352,6 +7389,7 @@
 				7477BF9A1AFB19B200914BFB /* UCFNormalRedEnvelopeTableViewCell.m in Sources */,
 				83CD84301F13A50800227704 /* UCFOrdinaryBidController.m in Sources */,
 				8346B2751F71246800219D41 /* UCFAccoutCardModel.m in Sources */,
+				A830DE811F8DC91A003855B9 /* UCFCalendarModularDayCell.m in Sources */,
 				4A6678C11D61C2E900469826 /* UINavigationController+FDFullscreenPopGesture.m in Sources */,
 				E3C117AE1D40D2F90053A052 /* UCFWebViewJavascriptBridgeController.m in Sources */,
 				7BCA21141AEE1DB0001CD258 /* UCFVerifyLoginViewController.m in Sources */,
@@ -7444,6 +7482,7 @@
 				7BD2BFD61B5DF9CC0046687C /* UCFGuaPopViewController.m in Sources */,
 				4A9016821AFB12FE0049A9E0 /* MASConstraintMaker.m in Sources */,
 				74BDA98E1F09F6C60054403F /* FSCalendarExtensions.m in Sources */,
+				A830DE7F1F8DC91A003855B9 /* UCFCalendarModularDetailHeaderView.m in Sources */,
 				FB1E7F801D8E4230009CBE2C /* UCFInvestmentView.m in Sources */,
 				4AFAA8A71B0D76AB005C9BEC /* UCFSelectPayBackController.m in Sources */,
 				7BA6E4C31AD6731900FE8C37 /* UIImage+MultiFormat.m in Sources */,
@@ -7602,6 +7641,7 @@
 				74BDA9861F09F6C60054403F /* FSCalendarAppearance.m in Sources */,
 				74E535ED1AE5FD6400DAABFC /* UCFAboutUsViewController.m in Sources */,
 				A81F40061F4E86F80018B673 /* UCFRebateGoldCell.m in Sources */,
+				A830DE801F8DC91A003855B9 /* UCFCalendarModularHeaderView.m in Sources */,
 				744F8BEE1F3327AF005FF01B /* UCFMyReservedViewController.m in Sources */,
 				832D521F1D8FE5EA0060F1F7 /* UCFWithdrawCashResultWebView.m in Sources */,
 				747A91211B01B11100FE2334 /* UCFConstractModel.m in Sources */,

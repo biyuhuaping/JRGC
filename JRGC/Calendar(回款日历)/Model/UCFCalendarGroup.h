@@ -20,6 +20,7 @@
 @property (copy, nonatomic) NSString *status;
 @property (copy, nonatomic) NSString *totalMoney;
 @property (assign, nonatomic) BOOL isOpen;
+@property (assign, nonatomic) BOOL isOpened;
 /**
  *  数组中装的都是Funds模型
  */

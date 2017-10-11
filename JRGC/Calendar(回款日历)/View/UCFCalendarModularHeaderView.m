@@ -1,12 +1,12 @@
 //
-//  UCFCalendarHeaderView.m
-//  TestCalenar
+//  UCFCalendarModularHeaderView.m
+//  JRGC
 //
-//  Created by njw on 2017/6/23.
-//  Copyright © 2017年 njw. All rights reserved.
+//  Created by 张瑞超 on 2017/10/11.
+//  Copyright © 2017年 qinwei. All rights reserved.
 //
 
-#import "UCFCalendarHeaderView.h"
+#import "UCFCalendarModularHeaderView.h"
 #import "UCFCalendarCollectionViewCell.h"
 #import "UIDic+Safe.h"
 #import <Foundation/Foundation.h>
@@ -15,7 +15,7 @@
 #import "JSONKit.h"
 #import "UCFCalendarDayInfo.h"
 
-@interface UCFCalendarHeaderView () <UICollectionViewDataSource, UICollectionViewDelegate, NetworkModuleDelegate, UCFCalendarCollectionViewCellDelegate>
+@interface UCFCalendarModularHeaderView ()<UICollectionViewDataSource, UICollectionViewDelegate, NetworkModuleDelegate, UCFCalendarCollectionViewCellDelegate>
 @property (weak, nonatomic) IBOutlet UIView *calendarView;
 
 @property (weak, nonatomic) IBOutlet UILabel *myPaymentLabel;
@@ -42,7 +42,7 @@
 @property (strong, nonatomic) NSDateFormatter *dateFormatter1;
 @end
 
-@implementation UCFCalendarHeaderView
+@implementation UCFCalendarModularHeaderView
 
 - (NSMutableArray *)months
 {
@@ -99,7 +99,7 @@ static NSString *const cellId = @"cellId";
 
 + (CGFloat)viewHeight
 {
-    return 564;
+    return 638;
 }
 
 - (void)awakeFromNib
@@ -201,11 +201,11 @@ static NSString *const cellId = @"cellId";
 
 - (void)headerButtonClicked:(UIButton *)button
 {
-//    if (self.headerButton.selected) {
-//        self.headerButton.imageView.transform = CGAffineTransformMakeRotation(0);
-//    } else {
-//        self.headerButton.imageView.transform = CGAffineTransformMakeRotation(M_PI);
-//    }
+    //    if (self.headerButton.selected) {
+    //        self.headerButton.imageView.transform = CGAffineTransformMakeRotation(0);
+    //    } else {
+    //        self.headerButton.imageView.transform = CGAffineTransformMakeRotation(M_PI);
+    //    }
     button.selected = !button.selected;
     
     if ([self.delegate respondsToSelector:@selector(calendar:didClickedHeader:)]) {
@@ -219,8 +219,8 @@ static NSString *const cellId = @"cellId";
     self.calendar.frame = self.calendarView.bounds;
     CGRect frame = self.frame;
     frame.size.height = CGRectGetMaxY(_currentDayView.frame);
-//    self.frame = frame;
-//
+    //    self.frame = frame;
+    //
     self.preButton.frame = CGRectMake(0, _calendarView.y, 80, 44);
     [self.preButton setImageEdgeInsets:UIEdgeInsetsMake(0, 20, 0, _preButton.width - 20- _preButton.imageView.width)];
     self.nextButton.frame = CGRectMake(self.width - 80, _calendarView.y, 80, 44);
@@ -305,10 +305,10 @@ static NSString *const cellId = @"cellId";
     _calendarHeaderInfo = calendarHeaderInfo;
     
     self.myPaymentLabel.text = [calendarHeaderInfo objectSafeForKey:@"myPayment"];
-    self.waitPrincipalLabel.text = [NSString stringWithFormat:@"待收本金%@",[calendarHeaderInfo objectSafeForKey:@"waitPrincipal"]];
-    self.waitInterestLabel.text = [NSString stringWithFormat:@"待收利息%@",[calendarHeaderInfo objectSafeForKey:@"waitInterest"]];
+    self.waitPrincipalLabel.text = [calendarHeaderInfo objectSafeForKey:@"waitPrincipal"];
+    self.waitInterestLabel.text = [calendarHeaderInfo objectSafeForKey:@"waitInterest"];
     self.currentDay = [calendarHeaderInfo objectSafeForKey:@"today"];
-    [self setCurrentDayWithDate:self.currentDay];
+    
     [self.months removeAllObjects];
     [self.months addObjectsFromArray:[calendarHeaderInfo objectSafeForKey:@"months"]];
     [self.calendar reloadData];
@@ -359,7 +359,7 @@ static NSString *const cellId = @"cellId";
 {
     NSDictionary *dictotal = [result objectFromJSONString];
     NSString *rstcode = [dictotal objectSafeForKey:@"ret"];
-//    NSString *rsttext = [dictotal objectSafeForKey:@"message"];
+    //    NSString *rsttext = [dictotal objectSafeForKey:@"message"];
     
     if ([rstcode intValue] == 1) {
         if (tag.intValue == kSXTagCalendarInfo) {
@@ -379,7 +379,7 @@ static NSString *const cellId = @"cellId";
         }
     }
     else{
-//        [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
+        //        [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
     }
     self.calendar.scrollEnabled = YES;
     self.calendar.pagingEnabled = YES;
@@ -437,7 +437,8 @@ static NSString *const cellId = @"cellId";
 - (void)headerViewInitUI {
     self.headerButton.selected = NO;
     self.headerButton.imageView.transform = CGAffineTransformIdentity;
-//    [self headerButtonClicked:self.headerButton];
+    //    [self headerButtonClicked:self.headerButton];
 }
+
 
 @end
