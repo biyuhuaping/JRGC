@@ -172,7 +172,7 @@
             }
             //            [self.pickerView reloadAllComponents];
         }
-        else if (tag.intValue == kSXTagOldCalendarInfo) {
+        else if (tag.intValue == kSXTagCurrentDayInfo) {
             NSArray *dataList = [[[dictotal objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"pageData"] objectSafeArrayForKey:@"result"];
             if (self.selectedDayDatas.count > 0) {
                 [self.selectedDayDatas removeAllObjects];
@@ -220,7 +220,7 @@
     [self.calendarHeader setCurrentLabText:day];
     NSString *userId = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
     NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys:userId, @"userId", day, @"day", @"20", @"rows", @"1", @"page",  nil];
-    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagOldCalendarInfo owner:self signature:YES Type:self.accoutType];
+    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagCurrentDayInfo owner:self signature:YES Type:self.accoutType];
 }
 
 - (void)calendar:(UCFCalendarModularHeaderView *)calendar didClickedHeader:(UIButton *)headerBtn

@@ -61,7 +61,7 @@
                                 <constraint firstAttribute="width" constant="86" id="O0T-Fg-71a"/>
                             </constraints>
                         </view>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vYf-3f-gFn">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="particular_tabline" translatesAutoresizingMaskIntoConstraints="NO" id="vYf-3f-gFn">
                             <rect key="frame" x="187" y="10" width="1" height="24"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="1" id="cMi-Tq-3aY"/>
@@ -106,4 +106,7 @@
             <point key="canvasLocation" x="-55" y="-131"/>
         </view>
     </objects>
+    <resources>
+        <image name="particular_tabline" width="1" height="12"/>
+    </resources>
 </document>

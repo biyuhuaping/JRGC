@@ -276,7 +276,7 @@
     _totallBalanceLabel = [[UILabel alloc]initWithFrame:CGRectMake([Common calculateNewSizeBaseMachine:15], ScreenHeight - [Common calculateNewSizeBaseMachine:110] * cashAccoutCount - 15 - [Common calculateNewSizeBaseMachine:16], 200,  [Common calculateNewSizeBaseMachine:16])];
     _totallBalanceLabel.backgroundColor = [UIColor clearColor];
     _totallBalanceLabel.textAlignment = NSTextAlignmentLeft;
-    _totallBalanceLabel.text = [NSString stringWithFormat:@"可用总余额¥%@",[UCFToolsMehod AddComma:[_dataDict objectSafeForKey:@"goldBalance"]]];
+    _totallBalanceLabel.text = [NSString stringWithFormat:@"可用总余额¥%@",[UCFToolsMehod AddComma:[_dataDict objectSafeForKey:@"totalBalance"]]];
     _totallBalanceLabel.font = [UIFont systemFontOfSize:13];
     _totallBalanceLabel.textColor = [UIColor whiteColor];
     _totallBalanceLabel.hidden = YES;
