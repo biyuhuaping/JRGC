@@ -28,4 +28,5 @@
 @property (strong, nonatomic) UCFUserAssetModel *userAssetModel;
 @property (weak, nonatomic) id<UCFMineHeaderViewDelegate> delegate;
 + (CGFloat)viewHeight;
+- (void)setDefaultState;
 @end

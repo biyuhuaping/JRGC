@@ -89,7 +89,8 @@
 
 - (void)setDefaultState:(NSNotification *)noti
 {
-    
+    [self.mineHeaderView setDefaultState];
+    [self.tableView reloadData];
 }
 
 - (UCFLoginBaseView *)loginView
@@ -117,6 +118,7 @@
 
 #pragma mark - 设置界面
 - (void)createUI {
+    lineViewAA.hidden = YES;
     
     UCFMineHeaderView *mineHeader = (UCFMineHeaderView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFMineHeaderView" owner:self options:nil] lastObject];
     mineHeader.delegate = self;
@@ -281,8 +283,8 @@
             cell.icon2ImageView.image = [UIImage imageNamed:@"uesr_icon_coupon"];
             cell.titleDesLabel.text = @"工豆";
             cell.title2DesLabel.text = @"优惠券";
-            cell.valueLabel.text = [NSString stringWithFormat:@"¥%@", self.benefitModel.beanAmount];
-            cell.value2Label.text = [NSString stringWithFormat:@"%@张可用", self.benefitModel.couponNumber];
+            cell.valueLabel.text = self.benefitModel.beanAmount ? [NSString stringWithFormat:@"¥%@", self.benefitModel.beanAmount] : @"¥0.00";
+            cell.value2Label.text = self.benefitModel.couponNumber ? [NSString stringWithFormat:@"%@张可用", self.benefitModel.couponNumber] : @"0张可用";
             if (self.benefitModel.beanExpiring.integerValue > 0) {
                 cell.signView.hidden = NO;
             }
@@ -300,7 +302,7 @@
             cell.iconImageView.image = [UIImage imageNamed:@"uesr_icon_score"];
             cell.icon2ImageView.image = [UIImage imageNamed:@"uesr_icon_rebate"];
             cell.titleDesLabel.text = @"工分";
-            cell.valueLabel.text = [NSString stringWithFormat:@"%@分", self.benefitModel.score];
+            cell.valueLabel.text = self.benefitModel.score ? [NSString stringWithFormat:@"%@分", self.benefitModel.score] : @"0分";
             cell.title2DesLabel.text = @"邀请返利";
             cell.value2Label.text = self.benefitModel.promotionCode.length > 0 ? [NSString stringWithFormat:@"工场码%@", self.benefitModel.promotionCode] : @"";
             cell.signView.hidden = YES;

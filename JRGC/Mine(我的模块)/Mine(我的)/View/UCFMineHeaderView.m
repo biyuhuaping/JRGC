@@ -151,18 +151,23 @@
     else {
         self.messageDotView.hidden = YES;
     }
-//    [self setNeedsLayout];
-    
 }
 
-- (void)layoutSubviews
-{
-    [super layoutSubviews];
-    
-//    self.userNameLabel.text = [UserInfoSingle sharedManager].realName;
-    
-    
-    
+- (void)setDefaultState {
+    self.userIconImageView.image = [UIImage imageNamed:@"user_icon_head_male"];
+    self.userNameLabel.text = @"未认证";
+    self.userLevelLabel.text = @"普通会员";
+    self.userLevelW.constant = 49.0;
+    if (self.visibleButton.selected) {
+        self.totalAssetLabel.text = @"***";
+        self.addedProfitLabel.text = @"***";
+        self.totalBalanceLabel.text = @"***";
+    }
+    else {
+        self.totalAssetLabel.text = @"¥0.00";
+        self.addedProfitLabel.text = @"¥0.00";
+        self.totalBalanceLabel.text = @"¥0.00";
+    }
 }
 
 @end

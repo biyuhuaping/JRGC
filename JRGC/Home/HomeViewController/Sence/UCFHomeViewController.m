@@ -150,11 +150,6 @@
     [self addDragBtn];
 }
 
-- (void)viewDidLayoutSubviews
-{
-    [super viewDidLayoutSubviews];
-//    self.cycleImageVC.view.frame = CGRectMake(0, 0, ScreenWidth, 260);
-}
 
 #pragma mark Dragbtn
 - (void)addDragBtn
@@ -264,17 +259,14 @@
             UINavigationController *nav = app.tabBarController.selectedViewController;
             [nav pushViewController:facReservedWeb animated:YES];
         }
-
     }
 }
-#pragma mark -----------------------------------
 
 #pragma mark - configuration 设置
 - (void)configuration
 {
     self.navigationController.navigationBar.hidden = YES;
-
-
+    
     UCFHomeListNavView *navView = [[UCFHomeListNavView alloc] initWithFrame:CGRectZero];
     navView.delegate = self;
     [self.view addSubview:navView];
@@ -284,13 +276,11 @@
     self.cycleImageVC = [UCFCycleImageViewController instanceWithPresenter:listViewPresenter];
     self.cycleImageVC.delegate = self;
     
-    
     self.homeListVC = [UCFHomeListViewController instanceWithPresenter:listViewPresenter];
     self.homeListVC.delegate = self; //HomeListViewController走的是Protocol绑定方式
     [self.view addSubview:self.homeListVC.tableView];
 
     [self addChildViewController:self.cycleImageVC];
-//    [self addChildViewController:self.userInfoVC];
 }
 
 #pragma mark - addUI 添加界面
@@ -302,12 +292,11 @@
     self.homeListVC.tableView.tableHeaderView = self.cycleImageVC.view;
     NSString *userId = [UserInfoSingle sharedManager].userId;
     if (userId) {
-//        self.navView.hidden = YES;
         self.navView.giftButton.hidden = NO;
+        self.navView.giftButton.alpha = 0.7;
         self.navView.loginAndRegisterButton.hidden = YES;
     }
     else {
-//        self.navView.hidden = NO;
         self.navView.giftButton.hidden = YES;
         self.navView.loginAndRegisterButton.hidden = NO;
     }
@@ -488,46 +477,6 @@
                }
             }
           }
-//        else if (model.moedelType == UCFHomeListCellModelTypeOneImageBatchLending) {
-//            
-//            UCFBatchBidController *batchBidVc = [[UCFBatchBidController alloc]initWithNibName:@"UCFBatchBidController" bundle:nil];
-//            batchBidVc.accoutType = SelectAccoutTypeP2P;
-//            [self.navigationController pushViewController:batchBidVc animated:YES];
-//
-//        }
-//        else if (model.moedelType == UCFHomeListCellModelTypeOneImageTransfer) {
-//            // 债券转让
-//            AppDelegate *appdel = (AppDelegate *)[UIApplication sharedApplication].delegate;
-//            UCFInvestViewController *invest = (UCFInvestViewController *)[[appdel.tabBarController.childViewControllers objectAtIndex:1].childViewControllers firstObject];
-//            invest.selectedType = @"Trans";
-//            if ([invest isViewLoaded]) {
-//                [invest changeView];
-//            }
-//            [appdel.tabBarController setSelectedIndex:1];
-//        }
-//        else if (model.moedelType == UCFHomeListCellModelTypeOneImageTransfer) {
-//            // 尊享转让
-//            UCFHonerViewController *horner = [[UCFHonerViewController alloc] initWithNibName:@"UCFHonerViewController" bundle:nil];
-//            horner.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight - 64);
-//            horner.baseTitleText = @"工场尊享";
-//            horner.viewType = @"2";
-//            horner.accoutType = SelectAccoutTypeHoner;
-//            [horner setCurrentViewForHornerTransferVC];
-//            [self.navigationController pushViewController:horner animated:YES];
-//        }
-//        else if (model.moedelType == UCFHomeListCellModelTypeOneImageBatchCycle) {
-//            NSString *userId = [UserInfoSingle sharedManager].userId;
-//            if (userId) {
-//                AppDelegate *appDel = (AppDelegate *)[UIApplication sharedApplication].delegate;
-//                [appDel.tabBarController setSelectedIndex:2];
-//            }
-//            else {
-//                UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
-//                BaseNavigationViewController *loginNaviController = [[BaseNavigationViewController alloc] initWithRootViewController:loginViewController];
-//                loginViewController.sourceVC = @"homePage";
-//                [self presentViewController:loginNaviController animated:YES completion:nil];
-//            }
-//        }
         else if (model.moedelType == UCFHomeListCellModelTypeReserved) {
             self.accoutType = SelectAccoutTypeP2P;
             if ([self checkUserCanInvestIsDetail:NO type:self.accoutType]) {
@@ -857,7 +806,17 @@
 - (void)refreshUI:(NSNotification *)noty
 {
     __weak typeof(self) weakSelf = self;
-    [self addUI];
+//    [self addUI];
+    NSString *userId = [UserInfoSingle sharedManager].userId;
+    if (userId) {
+        self.navView.giftButton.hidden = NO;
+        self.navView.giftButton.alpha = 0.7;
+        self.navView.loginAndRegisterButton.hidden = YES;
+    }
+    else {
+        self.navView.giftButton.hidden = YES;
+        self.navView.loginAndRegisterButton.hidden = NO;
+    }
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [weakSelf fetchData];
     });
@@ -870,8 +829,18 @@
 - (void)setDefaultState:(NSNotification *)noty
 {
     __weak typeof(self) weakSelf = self;
-    [self.userInfoVC setDefaultState];
-    [self addUI];
+//    [self.userInfoVC setDefaultState];
+//    [self addUI];
+    NSString *userId = [UserInfoSingle sharedManager].userId;
+    if (userId) {
+        self.navView.giftButton.hidden = NO;
+        self.navView.giftButton.alpha = 0.7;
+        self.navView.loginAndRegisterButton.hidden = YES;
+    }
+    else {
+        self.navView.giftButton.hidden = YES;
+        self.navView.loginAndRegisterButton.hidden = NO;
+    }
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [weakSelf fetchData];
     });
@@ -896,8 +865,9 @@
                 [[NSUserDefaults standardUserDefaults] synchronize];
         
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                weakSelf.cycleImageVC.noticeStr = notice.siteNotice;
+                
                 [weakSelf refreshNoticeWithShow:YES];
+                weakSelf.cycleImageVC.noticeStr = notice.siteNotice;
             });
         }
         else{
