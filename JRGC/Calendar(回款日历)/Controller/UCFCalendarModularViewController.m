@@ -66,7 +66,7 @@
 #pragma mark - tableView的数据源方法
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    if (self.selectedDayDatas.count == 0) {
+    if (self.selectedDayDatas.count == 0 && self.calendarHeader.currentDayLabel.text.length != 0) {
         return 1;
     }
     else
@@ -169,6 +169,8 @@
             NSString *currentMonth = [currentDay substringToIndex:7];
             if ([monthArr containsObject:currentMonth]) {
                 [self getCurrentDayInfoFromNetWithDay:currentDay];
+            } else {
+                
             }
             //            [self.pickerView reloadAllComponents];
         }
