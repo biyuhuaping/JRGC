@@ -14,6 +14,8 @@
 
 - (void)cycleImageVC:(UCFCycleImageViewController *)cycleImageVC didClickedIconWithIconPresenter:(UCFHomeIconPresenter *)iconPresenter;
 
+- (void)proInvestAlert:(UIAlertView *)alertView didClickedWithTag:(NSInteger)tag withIndex:(NSInteger)index;
+
 @end
 
 @interface UCFCycleImageViewController : UIViewController

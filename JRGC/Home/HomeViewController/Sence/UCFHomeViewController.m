@@ -479,7 +479,7 @@
           }
         else if (model.moedelType == UCFHomeListCellModelTypeReserved) {
             self.accoutType = SelectAccoutTypeP2P;
-            if ([self checkUserCanInvestIsDetail:NO type:self.accoutType]) {
+            if ([self checkUserCanInvestIsDetail:YES type:self.accoutType]) {
                 UCFFacReservedViewController *facReservedWeb = [[UCFFacReservedViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
                 facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@", PRERESERVE_URL, model.Id];
                 facReservedWeb.navTitle = @"工场预约";

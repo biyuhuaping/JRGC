@@ -19,6 +19,7 @@
 @protocol HomeIconListViewPresenterCallBack <NSObject>
 
 - (void)homeIconListViewPresenter:(UCFHomeListPresenter *)presenter didRefreshDataWithResult:(id)result error:(NSError *)error;
+- (void)homeIconListPresenter:(UCFHomeListPresenter *)presenter didReturnPrdClaimsDealBidWithResult:(id)result error:(NSError *)error;
 
 @end
 

@@ -183,9 +183,9 @@
     NSString *type = [parameter objectForKey:@"type"];
     [self.apiManager fetchProDetailInfoWithParameter:parameter completionHandler:^(NSError *error, id result) {
         if (type.intValue == 4) {
-//            if ([weakSelf.iconDelegate respondsToSelector:@selector(userInfoPresenter:didReturnPrdClaimsDealBidWithResult:error:)]) {
-//                [weakSelf.userInfoViewDelegate userInfoPresenter:self didReturnPrdClaimsDealBidWithResult:result error:error];
-//            }
+            if ([weakSelf.iconDelegate respondsToSelector:@selector(homeIconListPresenter:didReturnPrdClaimsDealBidWithResult:error:)]) {
+                [weakSelf.iconDelegate homeIconListPresenter:weakSelf didReturnPrdClaimsDealBidWithResult:result error:error];
+            }
         }
         !completionHander ?: completionHander(error, result);
     }];
