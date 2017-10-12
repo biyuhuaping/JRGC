@@ -99,7 +99,7 @@ static NSString *const cellId = @"cellId";
 
 + (CGFloat)viewHeight
 {
-    return 564;
+    return 537;
 }
 
 - (void)awakeFromNib

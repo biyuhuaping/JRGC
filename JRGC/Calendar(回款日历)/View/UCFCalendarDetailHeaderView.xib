@@ -20,7 +20,7 @@
                     <subviews>
                         <button opaque="NO" tag="100" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U5A-46-Zxk">
                             <rect key="frame" x="0.0" y="0.0" width="187.5" height="44"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <state key="normal" title="微金回款">
                                 <color key="titleColor" red="0.15056313569999999" green="0.15055863559999999" blue="0.15056121350000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -34,7 +34,7 @@
                         </button>
                         <button opaque="NO" tag="101" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="24H-e5-nle">
                             <rect key="frame" x="187.5" y="0.0" width="187.5" height="44"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <state key="normal" title="尊享回款">
                                 <color key="titleColor" red="0.15056313569999999" green="0.15055863559999999" blue="0.15056121350000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
