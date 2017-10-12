@@ -191,4 +191,13 @@
     }];
 }
 
+- (void)fetchCollectionDetailDataWithParameter:(NSDictionary *)parameter completionHandler:(NetworkCompletionHandler)completionHander
+{
+    UCFBaseViewController *baseVC = (UCFBaseViewController *)self.iconDelegate;
+    [MBProgressHUD showHUDAddedTo:baseVC.parentViewController.view animated:YES];
+    //    __weak typeof(self) weakSelf = self;
+    [self.apiManager fetchCollectionDetailInfoWithParameter:parameter completionHandler:^(NSError *error, id result) {
+        !completionHander ?: completionHander(error, result);
+    }];
+}
 @end
