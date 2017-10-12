@@ -564,8 +564,9 @@
     imageView1.image = [UIImage imageNamed:@"point.png"];
     
     NSString  *cfcaContractNameStr = [_dataDict objectSafeForKey:@"cfcaContractName"];
-    if(self.accoutType == SelectAccoutTypeP2P){//CFCA数字证书服务协议
-        
+    if(self.accoutType == SelectAccoutTypeP2P || self.accoutType == SelectAccoutTypeHoner)
+    {//CFCA数字证书服务协议
+    
         if (![cfcaContractNameStr isEqualToString:@""]) {
             [footView addSubview:firstProtocolLabel];
             [footView addSubview:imageView];
@@ -579,7 +580,8 @@
             [footView addSubview:riskProtocolLabel];
             [footView addSubview:imageView1];
         }
-    }else{
+   }
+    else{
         footView.frame  = CGRectMake(0, 0, ScreenWidth, 98 - size1.height - 10);
         riskProtocolLabel.frame = CGRectZero;
         imageView1.frame = CGRectZero;
@@ -595,7 +597,7 @@
     
     CGSize size2 = [Common getStrHeightWithStr:totalStr AndStrFont:12 AndWidth:ScreenWidth- 23 - 15 AndlineSpacing:1.0f];
     label1.numberOfLines = 0;
-    if (self.accoutType == SelectAccoutTypeP2P) {
+    if (self.accoutType == SelectAccoutTypeP2P || self.accoutType == SelectAccoutTypeHoner) {
         label1.frame = CGRectMake(23, CGRectGetMaxY(riskProtocolLabel.frame)+10, ScreenWidth-23 - 15, size2.height);
     }else{
         label1.frame = CGRectMake(23, 15, ScreenWidth - 23 -15, size2.height);
@@ -675,7 +677,8 @@
     if ([contractNameStr isEqualToString:@"《网络借贷出借风险提示》"]) {
         [self showContractWebViewUrl:PROTOCOLRISKPROMPT withTitle:@"网络借贷出借风险提示"];
     }else if ([contractNameStr isEqualToString:@"《CFCA数字证书服务协议》"]) {
-        [self showContractWebViewUrl:CFCAURL withTitle:@"CFCA数字证书服务协议"];
+        NSString *urlStr  =[_dataDict objectSafeForKey:@"cfcaContractUrl"];
+        [self showContractWebViewUrl:urlStr withTitle:@"CFCA数字证书服务协议"];
     }
     else{
         

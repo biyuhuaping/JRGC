@@ -897,7 +897,7 @@
     rateLabel.frame = bkFrame;
     
     //设置还款方式和起投金额的内容
-    NSArray *repayModeArr = @[@"按季等额",@"按月等额",@"一次结清",@"月息到期还本",@"一次结清"];
+//    NSArray *repayModeArr = @[@"按季等额",@"按月等额",@"一次结清",@"月息到期还本",@"一次结清"];
     if (_type == PROJECTDETAILTYPEBONDSRRANSFER) {
         NSString *markTimeStr1 = [NSString stringWithFormat:@"%d天",[dic[@"lastDays"] intValue]];
         NSString *bidDate = [[NSUserDefaults standardUserDefaults] valueForKey:@"bidDate"];
@@ -907,11 +907,13 @@
             [[NSUserDefaults standardUserDefaults] synchronize];
         }
         _investmentAmountLabel.text = [NSString stringWithFormat:@"%@元起",dic[@"investAmt"]];
-        _markTypeLabel.text = [repayModeArr objectAtIndex:([dic[@"repayMode"] intValue] - 1)];
+//        _markTypeLabel.text =  [repayModeArr objectAtIndex:([dic[@"repayMode"] intValue] - 1)];
+          _markTypeLabel.text =  [dic objectSafeForKey:@"repayModeText"];//还款方式取服务端的值
         
     } else {
         _investmentAmountLabel.text = [NSString stringWithFormat:@"%d元起",[dic[@"minInvest"] intValue]];
-        _markTypeLabel.text = [repayModeArr objectAtIndex:([dic[@"repayMode"] intValue] - 1)];
+        _markTypeLabel.text =  [dic objectSafeForKey:@"repayModeText"];//还款方式取服务端的值
+//        _markTypeLabel.text = [repayModeArr objectAtIndex:([dic[@"repayMode"] intValue] - 1)];
     }
 }
 
