@@ -759,7 +759,7 @@
     if ([self checkUserCanInvestIsDetail:YES type:self.accoutType]) {
         NSString  *colPrdClaimIdStr = [NSString stringWithFormat:@"%@",model.Id];
         NSDictionary *parameter = [NSDictionary dictionaryWithObjectsAndKeys:uuid,@"userId", colPrdClaimIdStr, @"colPrdClaimId", nil];
-        [self.userInfoVC.presenter fetchCollectionDetailDataWithParameter:parameter completionHandler:^(NSError *error, id result) {
+        [self.cycleImageVC.presenter fetchCollectionDetailDataWithParameter:parameter completionHandler:^(NSError *error, id result) {
             [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
             NSDictionary *dic = (NSDictionary *)result;
             NSString *rstcode = dic[@"ret"];
