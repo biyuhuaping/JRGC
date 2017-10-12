@@ -103,9 +103,11 @@
 }
 - (void)beginGetGoldPrice
 {
-    if ([[Common getCurrentVC] isKindOfClass:[self.deleage class]]) {
-        if (self.updateGoldPriceBtn.userInteractionEnabled) {
-            [self currentTimePriceBtnClicked:self.updateGoldPriceBtn];
+    if (self.deleage) {
+        if ([[Common getCurrentVC] isKindOfClass:[self.deleage class]]) {
+            if (self.updateGoldPriceBtn.userInteractionEnabled) {
+                [self currentTimePriceBtnClicked:self.updateGoldPriceBtn];
+            }
         }
     }
 }
@@ -164,6 +166,7 @@
 }
 - (void)dealloc
 {
+    self.deleage = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 @end

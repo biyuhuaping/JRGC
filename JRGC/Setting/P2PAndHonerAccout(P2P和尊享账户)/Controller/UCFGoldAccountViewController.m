@@ -303,14 +303,16 @@
     NSString *showStr = @"";
     if ([title isEqualToString:@"买金"]) {
         [self.navigationController popToRootViewControllerAnimated:NO];
-//        [_homeView skipToOtherPage:UCFHomeListTypeGlodMore];
-        AppDelegate *appdel = (AppDelegate *)[UIApplication sharedApplication].delegate;
-        UCFInvestViewController *invest = (UCFInvestViewController *)[[appdel.tabBarController.childViewControllers objectAtIndex:1].childViewControllers firstObject];
-        invest.selectedType = @"Gold";
-        if ([invest isViewLoaded]) {
-            [invest changeView];
-        }
-        [appdel.tabBarController setSelectedIndex:1];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            AppDelegate *appdel = (AppDelegate *)[UIApplication sharedApplication].delegate;
+            UCFInvestViewController *invest = (UCFInvestViewController *)[[appdel.tabBarController.childViewControllers objectAtIndex:1].childViewControllers firstObject];
+            invest.selectedType = @"Gold";
+            if ([invest isViewLoaded]) {
+                [invest changeView];
+            }
+            [appdel.tabBarController setSelectedIndex:1];
+        });
+
         return;
     } else if ([title isEqualToString:@"变现"]) {
 //        showStr = @"暂时没有可变现的黄金";
