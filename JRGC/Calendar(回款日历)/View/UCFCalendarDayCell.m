@@ -27,6 +27,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *value1;
 @property (weak, nonatomic) IBOutlet UILabel *value2;
 @property (weak, nonatomic) IBOutlet UILabel *value3;
+@property (weak, nonatomic) IBOutlet UIView *middleLineView;
 
 @end
 
@@ -45,7 +46,9 @@
     _bidNameLab.text = _group.proName;
     _payBackMoeny.text = _group.totalMoney;
     _numLab.text = [NSString stringWithFormat:@"第%@期/共%@期",_group.repayPerNo,_group.count];
+    _middleLineView.hidden = NO;
     if ([self.group.status intValue] == 0) {
+        _middleLineView.hidden = YES;
         self.planPayBackDate.hidden = YES;
         self.payBackStyle.text = @"待回款";
         self.payBackStyle.textColor = UIColorWithRGB(0xfd4d4c);

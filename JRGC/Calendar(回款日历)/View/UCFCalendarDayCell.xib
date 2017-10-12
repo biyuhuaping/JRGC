@@ -127,10 +127,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0JK-XC-Rqk">
-                                <rect key="frame" x="15" y="26" width="305" height="1"/>
+                                <rect key="frame" x="15" y="26" width="305" height="0.5"/>
                                 <color key="backgroundColor" red="0.84705882352941175" green="0.84705882352941175" blue="0.84705882352941175" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="1" id="clW-Nn-T9o"/>
+                                    <constraint firstAttribute="height" constant="0.5" id="clW-Nn-T9o"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -162,10 +162,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zOY-vK-eK8">
-                                <rect key="frame" x="15" y="26" width="305" height="1"/>
+                                <rect key="frame" x="15" y="26" width="305" height="0.5"/>
                                 <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="1" id="Fvr-Ct-SHe"/>
+                                    <constraint firstAttribute="height" constant="0.5" id="Fvr-Ct-SHe"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -196,7 +196,7 @@
                                 <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eAr-7d-2Oy">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eAr-7d-2Oy">
                                 <rect key="frame" x="0.0" y="26" width="320" height="1"/>
                                 <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -244,6 +244,7 @@
                 <outlet property="bidNameLab" destination="muH-go-sSg" id="Nur-z1-0Mi"/>
                 <outlet property="downLine" destination="sJM-CF-s8N" id="JX8-I9-XzH"/>
                 <outlet property="downLineLeftSpace" destination="RPw-RR-FED" id="xqJ-Sw-fRH"/>
+                <outlet property="middleLineView" destination="zOY-vK-eK8" id="4bw-YR-kmm"/>
                 <outlet property="numLab" destination="3SZ-1q-Tbb" id="ugH-G5-ILF"/>
                 <outlet property="payBackMoeny" destination="V7V-Na-y2m" id="Ug6-u3-xZE"/>
                 <outlet property="payBackStyle" destination="Qt0-B2-JdN" id="mjc-Yy-fzL"/>
