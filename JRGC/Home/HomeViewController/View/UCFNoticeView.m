@@ -53,7 +53,7 @@
 //    self.noticeLabel = nil;
 //    [self.noticeArray removeAllObjects];
     if ([self.delegate respondsToSelector:@selector(noticeView:didClickedNotice:)]) {
-        [self.delegate noticeView:self didClickedNotice:self.noticeLabell.text];
+        [self.delegate noticeView:self didClickedNotice:self.noticeModel];
     }
 }
 

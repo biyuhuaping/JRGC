@@ -13,6 +13,7 @@
 #import "UCFCycleModel.h"
 #import "UCFWebViewJavascriptBridgeBanner.h"
 #import "UCFNoticeView.h"
+#import "UCFNoticeModel.h"
 #import "UCFHomeIconCollectionCell.h"
 #import "UCFHomeIconPresenter.h"
 #import "UCFNoticeViewController.h"
@@ -22,7 +23,7 @@
 @property (weak, nonatomic) SDCycleScrollView *cycleImageView;
 @property (weak, nonatomic) IBOutlet UIView *homeIconBackView;
 @property (weak, nonatomic) IBOutlet UIView *noticeBackView;
-@property (weak, nonatomic) UCFNoticeView *noticeView;
+
 @property (weak, nonatomic) IBOutlet UICollectionView *iconCollectionView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *noticeBackViewHeight;
 @property (weak, nonatomic) IBOutlet UIView *downView;
@@ -58,13 +59,15 @@ static NSString *cellId = @"iconCell";
     [self getNormalBannerData];
 }
 
-- (void)noticeView:(UCFNoticeView *)noticeView didClickedNotice:(NSString *)noticeStr
+- (void)noticeView:(UCFNoticeView *)noticeView didClickedNotice:(UCFNoticeModel *)notice
 {
     UCFNoticeViewController *noticeWeb = [[UCFNoticeViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
-    noticeWeb.url      = @"https://www.baidu.com";//请求地址;
+    noticeWeb.url      = notice.noticeUrl;//请求地址;
     noticeWeb.navTitle = @"公告";
     UCFBaseViewController *baseVc = (UCFBaseViewController *)self.delegate;
-    [baseVc.navigationController pushViewController:noticeWeb animated:YES];
+    if (notice.noticeUrl.length > 0) {
+        [baseVc.navigationController pushViewController:noticeWeb animated:YES];
+    }
 }
 
 #pragma mark ---- UICollectionViewDataSource
@@ -207,13 +210,14 @@ static NSString *cellId = @"iconCell";
 - (void)refreshNotice
 {
     BOOL isShowNotice = [[NSUserDefaults standardUserDefaults] boolForKey:@"isShowNotice"];
-    self.noticeBackViewHeight.constant = isShowNotice ? 45 : 0;
     if (isShowNotice) {
+        self.noticeBackViewHeight.constant = 45;
         for (UIView *view in self.noticeView.subviews) {
             view.hidden = NO;
         }
     }
     else {
+        self.noticeBackViewHeight.constant = 0;
         for (UIView *view in self.noticeView.subviews) {
             view.hidden = YES;
         }

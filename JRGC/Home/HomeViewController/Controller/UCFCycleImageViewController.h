@@ -7,6 +7,7 @@
 //
 
 #import "UCFBaseViewController.h"
+#import "UCFNoticeView.h"
 
 @class UCFHomeListPresenter, UCFCycleImageViewController, UCFHomeIconPresenter;
 
@@ -22,6 +23,7 @@
 @property (weak, nonatomic) id<UCFCycleImageViewControllerDelegate> delegate;
 
 @property (copy, nonatomic) NSString *noticeStr;
+@property (weak, nonatomic) UCFNoticeView *noticeView;
 
 #pragma mark - 根据所对应的presenter生成当前controller
 + (instancetype)instanceWithPresenter:(UCFHomeListPresenter *)presenter;
