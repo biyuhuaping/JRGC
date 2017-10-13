@@ -29,6 +29,7 @@
 #import "UCFInvitationRebateViewController.h"
 #import "UCFMyReservedViewController.h"
 #import "UCFWebViewJavascriptBridgeLevel.h"
+#import "AppDelegate.h"
 @interface UCFMineViewController () <UITableViewDelegate, UITableViewDataSource, UCFMineHeaderViewDelegate, UCFMineFuncCellDelegate, UCFMineAPIManagerDelegate, UCFMineFuncSecCellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) UCFMineHeaderView   *mineHeaderView;
@@ -246,15 +247,15 @@
             cell.iconImageView.image = [UIImage imageNamed:@"uesr_icon_gold"];
             cell.valueLabel.textColor = UIColorWithRGB(0xffa811);
             cell.titleDesLabel.text = @"黄金账户";
-            if ([UserInfoSingle sharedManager].enjoyOpenStatus > 2) {
-                cell.valueLabel.text = self.assetModel.nmCashBalance.length > 0 ? [NSString stringWithFormat:@"¥%@", self.assetModel.nmCashBalance] : [NSString stringWithFormat:@"¥0.00"];
-                cell.describeLabel.text = self.benefitModel.repayPerDateNM;
-                cell.descriLabel.hidden = NO;
-            }
-            else {
+            if ([UserInfoSingle sharedManager].enjoyOpenStatus < 3 && [UserInfoSingle sharedManager].enjoyOpenStatus < 3 )
+            {
                 cell.valueLabel.text = @"未开户";
                 cell.describeLabel.text = @"";
                 cell.descriLabel.hidden = YES;
+            }else{
+                cell.valueLabel.text = self.assetModel.nmCashBalance.length > 0 ? [NSString stringWithFormat:@"¥%@", self.assetModel.nmCashBalance] : [NSString stringWithFormat:@"¥0.00"];
+                cell.describeLabel.text = self.benefitModel.repayPerDateNM;
+                cell.descriLabel.hidden = NO;
             }
         }
         return cell;
@@ -336,11 +337,20 @@
             self.accoutType = SelectAccoutTypeHoner;
         }
         else if([cell.titleDesLabel.text hasPrefix:@"黄金"]){
-            UCFGoldAccountViewController *subVC = [[UCFGoldAccountViewController alloc] initWithNibName:@"UCFGoldAccountViewController" bundle:nil];
-            subVC.homeView = weakSelf;
-            [self.navigationController pushViewController:subVC animated:YES];
-            return;
             
+            if ([UserInfoSingle sharedManager].openStatus < 3 && [UserInfoSingle sharedManager].enjoyOpenStatus < 3 )
+            {
+                HSHelper *helper = [HSHelper new];
+                [helper pushOpenHSType:SelectAccoutTypeHoner Step:[UserInfoSingle sharedManager].enjoyOpenStatus nav:self.navigationController];
+        
+            }
+            else
+            {
+                UCFGoldAccountViewController *subVC = [[UCFGoldAccountViewController alloc] initWithNibName:@"UCFGoldAccountViewController" bundle:nil];
+                subVC.homeView = weakSelf;
+                [self.navigationController pushViewController:subVC animated:YES];
+            }
+            return;
         }
         
         HSHelper *helper = [HSHelper new];
@@ -538,7 +548,9 @@
     rechargeCashVC.isRechargeOrCash = YES;//提现
     UINavigationController *rechargeCashNavController = [[UINavigationController alloc] initWithRootViewController:rechargeCashVC];
     rechargeCashNavController.modalPresentationStyle = UIModalPresentationOverFullScreen;
-    [self presentViewController:rechargeCashNavController animated:NO completion:^{
+    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    [app.tabBarController presentViewController:rechargeCashNavController animated:NO completion:^{
     }];
 
 }
@@ -550,7 +562,9 @@
     rechargeCashVC.isRechargeOrCash = NO;//充值
     UINavigationController *rechargeCashNavController = [[UINavigationController alloc] initWithRootViewController:rechargeCashVC];
     rechargeCashNavController.modalPresentationStyle = UIModalPresentationOverFullScreen;
-    [self presentViewController:rechargeCashNavController animated:NO completion:^{
+    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    [app.tabBarController presentViewController:rechargeCashNavController animated:NO completion:^{
     }];
 
 }
