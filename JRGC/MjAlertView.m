@@ -401,6 +401,7 @@
         adImageView.layer.cornerRadius = 4.0f;
         adImageView.clipsToBounds = YES;
         NSDictionary *adDic = [[NSUserDefaults standardUserDefaults] valueForKey:@"AD_ACTIViTY_DIC"];
+        
         [adImageView sd_setImageWithURL:[NSURL URLWithString:[adDic valueForKey:@"pic"]] placeholderImage:[UIImage imageNamed:@"index_tenMonthHunt.jpg"]];
         
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goToAdDetailContent)];
