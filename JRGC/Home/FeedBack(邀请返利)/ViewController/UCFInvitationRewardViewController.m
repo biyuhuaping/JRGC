@@ -100,7 +100,7 @@
         }else {
             [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
         }
-        [[NSNotificationCenter defaultCenter]postNotificationName:REDALERTISHIDE object:@"5"];
+//        [[NSNotificationCenter defaultCenter]postNotificationName:REDALERTISHIDE object:@"5"];
     }
     else if (tag.intValue == kSXTagGetAppSetting){
         //        NSString *rstcode = dic[@"status"];

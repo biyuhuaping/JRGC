@@ -175,7 +175,7 @@
                 }
             }
             [self.sentRedEnvelopeTableView reloadData];
-            [[NSNotificationCenter defaultCenter]postNotificationName:REDALERTISHIDE object:@"3"];
+//            [[NSNotificationCenter defaultCenter]postNotificationName:REDALERTISHIDE object:@"3"];
         }
         else {
             [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
