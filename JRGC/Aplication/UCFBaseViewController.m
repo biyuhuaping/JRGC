@@ -55,7 +55,7 @@
 //        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     } else if ([_baseTitleType isEqualToString:@"list"]) {
         UIImageView *titleImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 183, 24)];
-        titleImage.image = [UIImage imageNamed:@"logo.png"];
+//        titleImage.image = [UIImage imageNamed:@"logo.png"];
         self.navigationItem.titleView = titleImage;
     } else if ([_baseTitleType isEqualToString:@"Transdetail"]) {
         self.navigationItem.titleView = baseTitleLabel;
