@@ -401,7 +401,7 @@
         adImageView.layer.cornerRadius = 4.0f;
         adImageView.clipsToBounds = YES;
         NSDictionary *adDic = [[NSUserDefaults standardUserDefaults] valueForKey:@"AD_ACTIViTY_DIC"];
-        [adImageView sd_setImageWithURL:[NSURL URLWithString:[adDic valueForKey:@"pic"]] placeholderImage:nil];
+        [adImageView sd_setImageWithURL:[NSURL URLWithString:[adDic valueForKey:@"pic"]] placeholderImage:[UIImage imageNamed:@"index_tenMonthHunt.jpg"]];
         
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goToAdDetailContent)];
         [adImageView addGestureRecognizer:tap];
@@ -412,7 +412,9 @@
 {
     if ([self.delegate respondsToSelector:@selector(mjalertView:withObject:)]) {
         NSDictionary *adDic = [[NSUserDefaults standardUserDefaults] valueForKey:@"AD_ACTIViTY_DIC"];
-        [self.delegate mjalertView:self withObject:adDic];
+        if (adDic) {
+            [self.delegate mjalertView:self withObject:adDic];
+        }
         [self hide];
     }
 }

@@ -815,6 +815,12 @@
 		A851F3561F1379E2003DE8B8 /* UCFGoldPriceFloatView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A851F3551F1379E2003DE8B8 /* UCFGoldPriceFloatView.xib */; };
 		A85A2EBF1F431CEF004BF4C1 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A85A2EBE1F431CEF004BF4C1 /* QuickLook.framework */; };
 		A85A2EC21F4321B0004BF4C1 /* QLHeaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A85A2EC11F4321B0004BF4C1 /* QLHeaderViewController.m */; };
+		A85C74D91F90ED9F00DF7D6A /* home_icon_gold.png in Resources */ = {isa = PBXBuildFile; fileRef = A85C74D61F90EA4500DF7D6A /* home_icon_gold.png */; };
+		A85C74E41F90EE2200DF7D6A /* home_icon_weijin.png in Resources */ = {isa = PBXBuildFile; fileRef = A85C74D51F90EA4500DF7D6A /* home_icon_weijin.png */; };
+		A85C74E51F90EE2C00DF7D6A /* home_icon_yuyue.png in Resources */ = {isa = PBXBuildFile; fileRef = A85C74D41F90EA4400DF7D6A /* home_icon_yuyue.png */; };
+		A85C74E61F90EE3500DF7D6A /* home_icon_zhaizhuan.png in Resources */ = {isa = PBXBuildFile; fileRef = A85C74D31F90EA4400DF7D6A /* home_icon_zhaizhuan.png */; };
+		A85C74E71F90EE3F00DF7D6A /* home_icon_zunxiang.png in Resources */ = {isa = PBXBuildFile; fileRef = A85C74D71F90EA4500DF7D6A /* home_icon_zunxiang.png */; };
+		A85C74E81F90EE4700DF7D6A /* index_tenMonthHunt.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A85C74D81F90EA5400DF7D6A /* index_tenMonthHunt.jpg */; };
 		A860F2601F5E3EFE0017495F /* UCFGoldMyRebateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A860F25E1F5E3EFE0017495F /* UCFGoldMyRebateViewController.m */; };
 		A860F2611F5E3EFE0017495F /* UCFGoldMyRebateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A860F25F1F5E3EFE0017495F /* UCFGoldMyRebateViewController.xib */; };
 		A860F2651F5E7DA10017495F /* UCFGoldRebateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A860F2631F5E7DA10017495F /* UCFGoldRebateCell.m */; };
@@ -2377,6 +2383,12 @@
 		A85A2EBE1F431CEF004BF4C1 /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
 		A85A2EC01F4321B0004BF4C1 /* QLHeaderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLHeaderViewController.h; sourceTree = "<group>"; };
 		A85A2EC11F4321B0004BF4C1 /* QLHeaderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLHeaderViewController.m; sourceTree = "<group>"; };
+		A85C74D31F90EA4400DF7D6A /* home_icon_zhaizhuan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = home_icon_zhaizhuan.png; path = Images/home_icon_zhaizhuan.png; sourceTree = "<group>"; };
+		A85C74D41F90EA4400DF7D6A /* home_icon_yuyue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = home_icon_yuyue.png; path = Images/home_icon_yuyue.png; sourceTree = "<group>"; };
+		A85C74D51F90EA4500DF7D6A /* home_icon_weijin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = home_icon_weijin.png; path = Images/home_icon_weijin.png; sourceTree = "<group>"; };
+		A85C74D61F90EA4500DF7D6A /* home_icon_gold.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = home_icon_gold.png; path = Images/home_icon_gold.png; sourceTree = "<group>"; };
+		A85C74D71F90EA4500DF7D6A /* home_icon_zunxiang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = home_icon_zunxiang.png; path = Images/home_icon_zunxiang.png; sourceTree = "<group>"; };
+		A85C74D81F90EA5400DF7D6A /* index_tenMonthHunt.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = index_tenMonthHunt.jpg; path = Images/index_tenMonthHunt.jpg; sourceTree = "<group>"; };
 		A860F25D1F5E3EFE0017495F /* UCFGoldMyRebateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFGoldMyRebateViewController.h; sourceTree = "<group>"; };
 		A860F25E1F5E3EFE0017495F /* UCFGoldMyRebateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFGoldMyRebateViewController.m; sourceTree = "<group>"; };
 		A860F25F1F5E3EFE0017495F /* UCFGoldMyRebateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFGoldMyRebateViewController.xib; sourceTree = "<group>"; };
@@ -5497,6 +5509,12 @@
 		7BFE3EB01AC56356002A53A2 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				A85C74D81F90EA5400DF7D6A /* index_tenMonthHunt.jpg */,
+				A85C74D61F90EA4500DF7D6A /* home_icon_gold.png */,
+				A85C74D51F90EA4500DF7D6A /* home_icon_weijin.png */,
+				A85C74D41F90EA4400DF7D6A /* home_icon_yuyue.png */,
+				A85C74D31F90EA4400DF7D6A /* home_icon_zhaizhuan.png */,
+				A85C74D71F90EA4500DF7D6A /* home_icon_zunxiang.png */,
 				A8F783021F8CCB8500685B4D /* login_bg_default.png */,
 				A8F783031F8CCB8500685B4D /* login_bg_phone4_default.png */,
 				FB51491B1D64403000C26E7B /* gif@3x.gif */,
@@ -6741,12 +6759,12 @@
 				TargetAttributes = {
 					7BFE3E7F1AC55C98002A53A2 = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = EZRWM7P5C6;
+						DevelopmentTeam = MHG97AJ3LK;
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
-								enabled = 1;
+								enabled = 0;
 							};
 							com.apple.HealthKit = {
 								enabled = 0;
@@ -6791,6 +6809,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A85C74E81F90EE4700DF7D6A /* index_tenMonthHunt.jpg in Resources */,
+				A85C74E71F90EE3F00DF7D6A /* home_icon_zunxiang.png in Resources */,
+				A85C74E61F90EE3500DF7D6A /* home_icon_zhaizhuan.png in Resources */,
+				A85C74E51F90EE2C00DF7D6A /* home_icon_yuyue.png in Resources */,
+				A85C74E41F90EE2200DF7D6A /* home_icon_weijin.png in Resources */,
+				A85C74D91F90ED9F00DF7D6A /* home_icon_gold.png in Resources */,
 				A830DE821F8DD9F7003855B9 /* UCFCalendarModularViewController.xib in Resources */,
 				A8386E3F1F8CCDF200E26002 /* login_bg_phone4_default.png in Resources */,
 				A8386E3E1F8CCDE800E26002 /* login_bg_default.png in Resources */,
@@ -7848,7 +7872,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = EZRWM7P5C6;
+				DEVELOPMENT_TEAM = MHG97AJ3LK;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -7898,7 +7922,7 @@
 					"$(PROJECT_DIR)/JRGC/ThirdLibs/p2pWalletSDK/Wechat",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp299;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -7923,7 +7947,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = EZRWM7P5C6;
+				DEVELOPMENT_TEAM = MHG97AJ3LK;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -7973,7 +7997,7 @@
 					"$(PROJECT_DIR)/JRGC/ThirdLibs/p2pWalletSDK/Wechat",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp299;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";

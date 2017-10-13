@@ -795,12 +795,14 @@
 }
 - (void)mjalertView:(MjAlertView *)alertview withObject:(NSDictionary *)dic
 {
-    UCFWebViewJavascriptBridgeMallDetails *web = [[UCFWebViewJavascriptBridgeMallDetails alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMallDetails" bundle:nil];
-    web.url = dic[@"url"];
-    web.navTitle = dic[@"title"];
-    web.isHidenNavigationbar = YES;
-    [self.navigationController pushViewController:web animated:YES];
-    
+    NSString *url = dic[@"url"];
+    if (url.length > 0) {
+        UCFWebViewJavascriptBridgeMallDetails *web = [[UCFWebViewJavascriptBridgeMallDetails alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMallDetails" bundle:nil];
+        web.url = dic[@"url"];
+        web.navTitle = dic[@"title"];
+        web.isHidenNavigationbar = YES;
+        [self.navigationController pushViewController:web animated:YES];
+    }
 }
 #pragma mark - 刷新界面
 - (void)refreshUI:(NSNotification *)noty
@@ -857,25 +859,29 @@
 //    [self.userInfoVC.presenter fetchUserInfoTwoDataWithCompletionHandler:^(NSError *error, id result) {
 //    }];
     
-    [self.homeListVC.presenter fetchHomeIconListDataWithCompletionHandler:^(NSError *error, id result) {
-        //请求成功
-        UCFNoticeModel *notice = [result objectForKey:@"siteNotice"];
-        if (notice.siteNotice.length > 0) {
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.homeListVC.presenter fetchHomeIconListDataWithCompletionHandler:^(NSError *error, id result) {
+            //请求成功
+            UCFNoticeModel *notice = [result objectForKey:@"siteNotice"];
+            if (notice.siteNotice.length > 0) {
                 [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isShowNotice"];
                 [[NSUserDefaults standardUserDefaults] synchronize];
-        
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 
-                [weakSelf refreshNoticeWithShow:YES];
-                weakSelf.cycleImageVC.noticeStr = notice.siteNotice;
-            });
-        }
-        else{
-            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isShowNotice"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-            [weakSelf refreshNoticeWithShow:NO];
-        }
-    }];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    
+                    [weakSelf refreshNoticeWithShow:YES];
+                    weakSelf.cycleImageVC.noticeStr = notice.siteNotice;
+                });
+            }
+            else{
+                [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isShowNotice"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                [weakSelf refreshNoticeWithShow:NO];
+            }
+        }];
+    });
+    
+
     
     [self.homeListVC.presenter fetchHomeListDataWithCompletionHandler:^(NSError *error, id result) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];//上层交互逻辑
