@@ -161,7 +161,7 @@
     
 }
 -(void)showDeleagateView{
-    
+
     NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId",_contractType, @"contractType",nil];
     
     [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagHonerRechangeShowContract owner:self signature:YES Type:SelectAccoutTypeHoner];
@@ -704,8 +704,12 @@
  */
 - (void)getMyBindCardMessage
 {
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSString *uuid = [[NSUserDefaults standardUserDefaults] valueForKey:UUID];
+    if(uuid == nil)
+    {
+        return;
+    }
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSDictionary *dataDict =@{@"userId":uuid};
     [[NetworkModule sharedNetworkModule] newPostReq:dataDict tag:kSXTagBankTopInfo owner:self signature:YES Type:self.accoutType];
 }

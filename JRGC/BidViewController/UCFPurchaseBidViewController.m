@@ -1422,6 +1422,8 @@
     NSDictionary *userOtherMsg = [_dataDict objectForKey:@"userOtherMsg"];
     NSString  *cfcaContractNameSt = [userOtherMsg objectSafeForKey:@"cfcaContractName"];
     
+    if(_isP2P)
+    {
         if (![cfcaContractNameSt isEqualToString:@""]) {
             [footView addSubview:firstProtocolLabel];
             [footView addSubview:imageView];
@@ -1435,12 +1437,18 @@
             [footView addSubview:riskProtocolLabel];
             [footView addSubview:imageView1];
         }
-//    }
-//    else{
-//        footView.frame  = CGRectMake(0, 0, ScreenWidth, 98 - size1.height - 10);
-//        riskProtocolLabel.frame = CGRectZero;
-//        imageView1.frame = CGRectZero;
-//    }
+    }else{
+        riskProtocolLabel.frame = CGRectZero;
+        imageView1.frame = CGRectZero;
+        if (![cfcaContractNameSt isEqualToString:@""]) {
+            [footView addSubview:firstProtocolLabel];
+            [footView addSubview:imageView];
+        }else{
+            firstProtocolLabel.frame =CGRectZero;
+            imageView.frame  = CGRectZero;
+            footView.frame  = CGRectMake(0, 0, ScreenWidth, 98 - size1.height - 10);
+        }
+    }
     NSArray *contractMsgArr = [userOtherMsg valueForKey:@"contractMsg"];
     NSString *totalStr = [NSString stringWithFormat:@"本人已阅读并同意签署"];
     for (int i = 0; i < contractMsgArr.count; i++) {
@@ -1451,12 +1459,20 @@
     label1.font = [UIFont systemFontOfSize:12.0f];
     CGSize size2 = [Common getStrHeightWithStr:totalStr AndStrFont:12 AndWidth:ScreenWidth- 23 -15 AndlineSpacing:1.0f];
     label1.numberOfLines = 0;
-//    if (_isP2P ) {
+    if (_isP2P )
+    {
         label1.frame = CGRectMake(23, CGRectGetMaxY(riskProtocolLabel.frame)+10, ScreenWidth-23 - 15, size2.height);
-//    }
-//    else{
-//        label1.frame = CGRectMake(23, 15, ScreenWidth - 23 -15, size2.height);
-//    }
+    }
+    else{
+        if (![cfcaContractNameSt isEqualToString:@""])
+        {
+            label1.frame = CGRectMake(23, CGRectGetMaxY(firstProtocolLabel.frame) + 10, ScreenWidth - 23 -15, size2.height);
+        }
+        else
+        {
+          label1.frame = CGRectMake(23, 15, ScreenWidth - 23 -15, size2.height);
+        }
+    }
     NSDictionary *dic = [Common getParagraphStyleDictWithStrFont:12 WithlineSpacing:1.0f];
     label1.attributedText = [NSString getNSAttributedString:totalStr labelDict:dic];
     label1.userInteractionEnabled = YES;

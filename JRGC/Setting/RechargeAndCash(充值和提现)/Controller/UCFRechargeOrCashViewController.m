@@ -12,7 +12,7 @@
 #import "UCFCashViewController.h"
 #import "UCFTopUpViewController.h"
 #import "HSHelper.h"
-#import "UCFGoldCashViewController.h"
+#import "UCFGoldCashMoneyViewController.h"
 #import "UCFGoldRechargeViewController.h"
 #import "UCFToolsMehod.h"
 #import "ToolSingleTon.h"
@@ -197,15 +197,15 @@
     UCFAccoutCardModel *honerCardModel  = [[UCFAccoutCardModel alloc]init];
     honerCardModel.cardTitleStr = @"尊享账户余额";
     honerCardModel.isRechargeOrCash = _isRechargeOrCash;
-    honerCardModel.cardLogoImageName = [_dataDict objectSafeForKey:@"honerCardLogoUrl"];// @"card_logo_zx";
-    honerCardModel.cardBgImageName =[_dataDict objectSafeForKey:@"p2pCardBgColor"]; // @"card_bg_red";
+    honerCardModel.cardLogoImageName = [_dataDict objectSafeForKey:@"zxCardLogoUrl"];// @"card_logo_zx";
+    honerCardModel.cardBgImageName =[_dataDict objectSafeForKey:@"zxCardBgColor"]; // @"card_bg_red";
     honerCardModel.accoutBalanceStr = [NSString stringWithFormat:@"¥%@",[UCFToolsMehod AddComma:[_dataDict objectSafeForKey:@"zxBalance"]]];
     if ([UserInfoSingle sharedManager].enjoyOpenStatus == 3)  {
         honerCardModel.cardDetialStr = @"未设置交易密码";
         honerCardModel.cardNumberStr = @"";
         honerCardModel.cardStateStr = @"去设置";
     }else{
-        honerCardModel.cardDetialStr = [_dataDict objectSafeForKey:@"p2pCardName"];
+        honerCardModel.cardDetialStr = [_dataDict objectSafeForKey:@"zxCardName"];
         honerCardModel.cardNumberStr = [_dataDict objectSafeForKey:@"zxCardNum"];;
         honerCardModel.cardStateStr = @"";
     }
@@ -358,10 +358,18 @@
            }
        }else{//黄金提现
            
-           UCFGoldCashViewController *vc1 = [[UCFGoldCashViewController alloc] initWithNibName:@"UCFGoldCashViewController" bundle:nil];
-           vc1.baseTitleText = @"黄金变现";
-           vc1.rootVc = self;
-           [self.navigationController pushViewController:vc1 animated:YES];
+//           UCFGoldCashViewController *vc1 = [[UCFGoldCashViewController alloc] initWithNibName:@"UCFGoldCashViewController" bundle:nil];
+//           vc1.baseTitleText = @"黄金变现";
+//           vc1.rootVc = self;
+//           [self.navigationController pushViewController:vc1 animated:YES];
+           
+           
+           UCFGoldCashMoneyViewController *goldCashMoney = [[UCFGoldCashMoneyViewController alloc] initWithNibName:@"UCFGoldCashMoneyViewController" bundle:nil];
+           goldCashMoney.baseTitleText = @"提现";
+           goldCashMoney.balanceMoney = [[cardModel.accoutBalanceStr substringFromIndex:1] stringByReplacingOccurrencesOfString:@"," withString:@""];
+           goldCashMoney.rootVc = self;
+           [self.navigationController pushViewController:goldCashMoney animated:YES];
+
        }
    }else{
        switch (tag) {

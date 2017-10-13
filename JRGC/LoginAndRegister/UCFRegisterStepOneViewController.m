@@ -195,7 +195,7 @@
 - (void)errorPost:(NSError*)err tag:(NSNumber*)tag
 {
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-    [AuxiliaryFunc showToastMessage:@"当前没有网络，请检查网络！" withView:self.view];
+//    [AuxiliaryFunc showToastMessage:@"当前没有网络，请检查网络！" withView:self.view];
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
