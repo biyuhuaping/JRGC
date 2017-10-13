@@ -290,7 +290,7 @@
     NSString *userId = [UserInfoSingle sharedManager].userId;
     if (nil == userId) {
         UCFRegisterStepOneViewController *registerControler = [[UCFRegisterStepOneViewController alloc] init];
-        registerControler.sourceVC = @"fromPersonCenter";
+        registerControler.sourceVC = @"fromHomeView";
         UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:registerControler] ;
         AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
         UINavigationController *nav = app.tabBarController.selectedViewController ;

@@ -53,6 +53,12 @@
         [appDelegate.tabBarController setSelectedIndex:4];
         [self dismissViewControllerAnimated:YES completion:nil];
     }
+    else if ([_sourceVC isEqualToString:@"fromHomeView"]) {
+        //个人中心跳到登录页
+        AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+        [appDelegate.tabBarController setSelectedIndex:0];
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
     else if ([_sourceVC isEqualToString:@"webView"])
     {
         [self closeViewController];

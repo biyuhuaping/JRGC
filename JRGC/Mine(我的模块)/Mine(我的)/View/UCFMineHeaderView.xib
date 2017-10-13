@@ -21,7 +21,7 @@
                         <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user_bg" translatesAutoresizingMaskIntoConstraints="NO" id="SLE-EJ-K6v">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="140"/>
                         </imageView>
-                        <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="password_icon_head" translatesAutoresizingMaskIntoConstraints="NO" id="AP8-6p-eqr">
+                        <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user_icon_head_male" translatesAutoresizingMaskIntoConstraints="NO" id="AP8-6p-eqr">
                             <rect key="frame" x="14" y="20" width="44" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="44" id="MmO-eX-ae9"/>
@@ -304,8 +304,8 @@
     <resources>
         <image name="account_invisible" width="25" height="25"/>
         <image name="account_visible" width="25" height="25"/>
-        <image name="password_icon_head" width="80" height="80"/>
         <image name="uesr_icon_message" width="25" height="25"/>
         <image name="user_bg" width="375" height="135"/>
+        <image name="user_icon_head_male" width="44" height="44"/>
     </resources>
 </document>
