@@ -247,7 +247,7 @@
             cell.iconImageView.image = [UIImage imageNamed:@"uesr_icon_gold"];
             cell.valueLabel.textColor = UIColorWithRGB(0xffa811);
             cell.titleDesLabel.text = @"黄金账户";
-            if ([UserInfoSingle sharedManager].enjoyOpenStatus < 3 && [UserInfoSingle sharedManager].enjoyOpenStatus < 3 )
+            if ([UserInfoSingle sharedManager].openStatus < 3 && [UserInfoSingle sharedManager].enjoyOpenStatus < 3 )
             {
                 cell.valueLabel.text = @"未开户";
                 cell.describeLabel.text = @"";
@@ -341,6 +341,10 @@
             if ([UserInfoSingle sharedManager].openStatus < 3 && [UserInfoSingle sharedManager].enjoyOpenStatus < 3 )
             {
                 HSHelper *helper = [HSHelper new];
+                if (![helper checkP2POrWJIsAuthorization:SelectAccoutTypeHoner]) {//先授权
+                    [helper pushP2POrWJAuthorizationType:SelectAccoutTypeHoner nav:self.navigationController];
+                    return;
+                }
                 [helper pushOpenHSType:SelectAccoutTypeHoner Step:[UserInfoSingle sharedManager].enjoyOpenStatus nav:self.navigationController];
         
             }

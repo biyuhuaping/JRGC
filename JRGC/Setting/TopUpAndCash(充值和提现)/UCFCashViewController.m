@@ -81,7 +81,6 @@
 
 @implementation UCFCashViewController
 
-
 - (void)leftClicked:(UIButton *)button
 {
     [_timer invalidate];
@@ -195,6 +194,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     self.getMoneyBtn.userInteractionEnabled = YES;
 }
 -(void)viewWillDisappear:(BOOL)animated{

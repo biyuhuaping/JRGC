@@ -356,14 +356,8 @@
                NSDictionary *parametersDict =  @{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"userSatues":userSatues};
                [[NetworkModule sharedNetworkModule] newPostReq:parametersDict tag:kSXTagCashAdvance owner:self signature:YES Type:self.accoutType];
            }
-       }else{//黄金提现
-           
-//           UCFGoldCashViewController *vc1 = [[UCFGoldCashViewController alloc] initWithNibName:@"UCFGoldCashViewController" bundle:nil];
-//           vc1.baseTitleText = @"黄金变现";
-//           vc1.rootVc = self;
-//           [self.navigationController pushViewController:vc1 animated:YES];
-           
-           
+       }
+       else{//黄金提现
            UCFGoldCashMoneyViewController *goldCashMoney = [[UCFGoldCashMoneyViewController alloc] initWithNibName:@"UCFGoldCashMoneyViewController" bundle:nil];
            goldCashMoney.baseTitleText = @"提现";
            goldCashMoney.balanceMoney = [[cardModel.accoutBalanceStr substringFromIndex:1] stringByReplacingOccurrencesOfString:@"," withString:@""];
@@ -422,8 +416,14 @@
                }
                else if([cardModel.cardDetialStr  hasSuffix:@"授权"] || [cardModel.cardStateStr hasSuffix:@"授权"])//去黄金授权页面
                {
-                   HSHelper *helper = [HSHelper new];
-                   [helper pushGoldAuthorizationType:SelectAccoutTypeGold nav:self.navigationController sourceVC:@"UCFRechargeOrCashVC"];
+                   if ([UserInfoSingle sharedManager].openStatus < 3 && [UserInfoSingle sharedManager].enjoyOpenStatus < 3 )
+                   {
+                      [[HSHelper new] pushP2POrWJAuthorizationType:SelectAccoutTypeHoner nav:self.navigationController];
+                   }
+                   else{
+                       HSHelper *helper = [HSHelper new];
+                       [helper pushGoldAuthorizationType:SelectAccoutTypeGold nav:self.navigationController sourceVC:@"UCFRechargeOrCashVC"];
+                   }
                }
                else {//去黄金充值页面
                    //去充值页面
