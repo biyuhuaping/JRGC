@@ -30,6 +30,7 @@
 #import "UCFMyReservedViewController.h"
 #import "UCFWebViewJavascriptBridgeLevel.h"
 #import "AppDelegate.h"
+#import "UITabBar+TabBarBadge.h"
 @interface UCFMineViewController () <UITableViewDelegate, UITableViewDataSource, UCFMineHeaderViewDelegate, UCFMineFuncCellDelegate, UCFMineAPIManagerDelegate, UCFMineFuncSecCellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) UCFMineHeaderView   *mineHeaderView;
@@ -166,6 +167,12 @@
     if ([result isKindOfClass:[UCFUserBenefitModel class]]) {
         self.benefitModel = result;
         self.mineHeaderView.userBenefitModel = result;
+        
+        if ([self.mineHeaderView.userBenefitModel.unReadMsgCount intValue] == 0) {
+            [self.tabBarController.tabBar hideBadgeOnItemIndex:4];
+        } else {
+            [self.tabBarController.tabBar showBadgeOnItemIndex:4];
+        }
         __weak typeof(self) weakSelf = self;
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [weakSelf.tableView reloadData];
@@ -539,6 +546,7 @@
     else  if ([title isEqualToString:@"邀请返利"]){//邀请返利
         UCFInvitationRebateViewController *feedBackVC = [[UCFInvitationRebateViewController alloc] initWithNibName:@"UCFInvitationRebateViewController" bundle:nil];
         feedBackVC.title = @"邀请获利";
+        feedBackVC.accoutType = SelectAccoutTypeP2P;
         [self.navigationController pushViewController:feedBackVC animated:YES];
     }
 

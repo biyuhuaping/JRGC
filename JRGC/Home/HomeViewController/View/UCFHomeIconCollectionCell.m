@@ -27,7 +27,22 @@
 {
     _iconPresenter = iconPresenter;
     self.iconTitleLabel.text = iconPresenter.productName;
-    [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:iconPresenter.icon] placeholderImage:nil];
+    
+    NSString *localImage = @"";
+    NSString *productName = iconPresenter.productName;
+    if ([productName isEqualToString:@"微金"]) {
+        localImage = @"home_icon_weijin.png";
+    } else if ([productName isEqualToString:@"尊享"]) {
+        localImage = @"home_icon_zunxiang.png";
+    } else if ([productName isEqualToString:@"黄金"] ) {
+        localImage = @"home_icon_gold.png";
+    } else if ([productName isEqualToString:@"预约"]) {
+        localImage = @"home_icon_yuyue.png";
+    } else if ([productName isEqualToString:@"债转"]) {
+        localImage = @"home_icon_zhaizhuan.png";
+    }
+    UIImage *imageData = [UIImage imageNamed:localImage];
+    [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:iconPresenter.icon] placeholderImage:imageData];
     
 }
 
