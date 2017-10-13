@@ -229,7 +229,7 @@
             [AuxiliaryFunc showToastMessage:dic[@"message"] withView:self.view];
         }
     }
-    [[NSNotificationCenter defaultCenter]postNotificationName:REDALERTISHIDE object:@"6"];
+//    [[NSNotificationCenter defaultCenter]postNotificationName:REDALERTISHIDE object:@"6"];
 }
 
 //请求失败
