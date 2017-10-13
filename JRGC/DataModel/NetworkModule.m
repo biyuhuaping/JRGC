@@ -734,21 +734,22 @@ static NetworkModule *gInstance = NULL;
     loginViewController.isForce = YES;
     UINavigationController *loginNaviController = [[[UINavigationController alloc] initWithRootViewController:loginViewController] autorelease];
     AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
-    if (app.tabBarController.selectedIndex == 4)
+    UINavigationController *nav = app.tabBarController.selectedViewController ;
+    if (app.tabBarController.presentedViewController)
     {
-//        UINavigationController *nav = [app.tabBarController.viewControllers objectAtIndex:4];
-//        UCFBaseViewController *baseVC1 = (UCFBaseViewController *) nav.visibleViewController;
-//        UCFBaseViewController *baseVC2 = (UCFBaseViewController *)nav.topViewController;
-//        if ([nav.visibleViewController isKindOfClass:[UCFHomeViewController class]]) {
-////            [[MongoliaLayerCenter sharedManager] showLogic];
-//        }
+        NSString *className =  [NSString stringWithUTF8String:object_getClassName(app.tabBarController.presentedViewController)];
+        if ([className hasSuffix:@"UINavigationController"]) {
+            [app.tabBarController dismissViewControllerAnimated:NO completion:^{
+                [nav popToRootViewControllerAnimated:NO];
+                [app.tabBarController setSelectedIndex:0];
+            }];
+        }
     }
-      UINavigationController *nav = app.tabBarController.selectedViewController ;
-//        [app.tabBarController dismissViewControllerAnimated:NO completion:^{
-//
-//    }];
-    [nav popToRootViewControllerAnimated:NO];
-    [app.tabBarController setSelectedIndex:0];
+    else
+    {
+        [nav popToRootViewControllerAnimated:NO];
+        [app.tabBarController setSelectedIndex:0];
+    }
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
     [app.tabBarController presentViewController:loginNaviController animated:YES completion:nil];
 
@@ -773,13 +774,24 @@ static NetworkModule *gInstance = NULL;
         if (buttonIndex == 0) {
             NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"4000322988"];
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
-            AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
-            NSUInteger selectedIndex = appDelegate.tabBarController.selectedIndex;
-            UINavigationController *nav = [appDelegate.tabBarController.viewControllers objectAtIndex:selectedIndex];
-            [appDelegate.tabBarController dismissViewControllerAnimated:NO completion:^{
+            AppDelegate *app = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+            NSUInteger selectedIndex = app.tabBarController.selectedIndex;
+            UINavigationController *nav = [app.tabBarController.viewControllers objectAtIndex:selectedIndex];
+            if (app.tabBarController.presentedViewController)
+            {
+                NSString *className =  [NSString stringWithUTF8String:object_getClassName(app.tabBarController.presentedViewController)];
+                if ([className hasSuffix:@"UINavigationController"]) {
+                    [app.tabBarController dismissViewControllerAnimated:NO completion:^{
+                        [nav popToRootViewControllerAnimated:NO];
+                        [app.tabBarController setSelectedIndex:0];
+                    }];
+                }
+            }
+            else
+            {
                 [nav popToRootViewControllerAnimated:NO];
-                [appDelegate.tabBarController setSelectedIndex:0];
-            }];
+                [app.tabBarController setSelectedIndex:0];
+            }
         }
         else {
             [self shouLoginView];
