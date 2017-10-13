@@ -168,7 +168,7 @@
     if (!group.prdlist) {
         return 0.001;
     }
-    else if ([group.type isEqualToString:@"13"]) {
+    else if ([group.type isEqualToString:@"13"] && group.attach.count > 0) {
         return 140;
     }
     else

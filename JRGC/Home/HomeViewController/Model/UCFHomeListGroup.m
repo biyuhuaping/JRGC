@@ -73,6 +73,9 @@
             if ([key isEqualToString:@"showMore"]) {
                 [self setShowMore:[propertyValue boolValue]];
             }
+            else if ([key isEqualToString:@"attach"]) {
+                [self setAttach:[NSArray array]];
+            }
             else
                 [self setValue:@"" forKey:key];
             DLog(@"%@",[NSString stringWithFormat:@"字段值%@读取异常(字段不存在或者值为空)",key]);
