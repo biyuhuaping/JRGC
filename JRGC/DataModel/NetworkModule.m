@@ -734,15 +734,21 @@ static NetworkModule *gInstance = NULL;
     loginViewController.isForce = YES;
     UINavigationController *loginNaviController = [[[UINavigationController alloc] initWithRootViewController:loginViewController] autorelease];
     AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
-//    if (app.tabBarController.selectedIndex == 4) {
+    if (app.tabBarController.selectedIndex == 4)
+    {
+//        UINavigationController *nav = [app.tabBarController.viewControllers objectAtIndex:4];
+//        UCFBaseViewController *baseVC1 = (UCFBaseViewController *) nav.visibleViewController;
+//        UCFBaseViewController *baseVC2 = (UCFBaseViewController *)nav.topViewController;
+//        if ([nav.visibleViewController isKindOfClass:[UCFHomeViewController class]]) {
+////            [[MongoliaLayerCenter sharedManager] showLogic];
+//        }
+    }
       UINavigationController *nav = app.tabBarController.selectedViewController ;
-    [app.tabBarController dismissViewControllerAnimated:NO completion:^{
-        [nav popToRootViewControllerAnimated:NO];
-        [app.tabBarController setSelectedIndex:0];
-    }];
-
-    
-    
+//        [app.tabBarController dismissViewControllerAnimated:NO completion:^{
+//
+//    }];
+    [nav popToRootViewControllerAnimated:NO];
+    [app.tabBarController setSelectedIndex:0];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
     [app.tabBarController presentViewController:loginNaviController animated:YES completion:nil];
 
