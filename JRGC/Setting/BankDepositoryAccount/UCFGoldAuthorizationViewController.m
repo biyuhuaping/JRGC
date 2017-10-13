@@ -25,6 +25,9 @@
 @implementation UCFGoldAuthorizationViewController
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+
+    [self.navigationController setNavigationBarHidden:NO animated:animated];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     self.scrollView.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight - 64);
     self.upViewWidth.constant = ScreenWidth;
     
