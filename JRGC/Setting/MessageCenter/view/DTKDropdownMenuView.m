@@ -94,13 +94,17 @@ UITableViewDataSource
 
 + (instancetype)dropdownMenuViewWithType:(DTKDropDownType)dropDownType frame:(CGRect)frame dropdownItems:(NSArray *)dropdownItems icon:(NSString *)icon
 {
-    DTKDropdownMenuView *menuView = [[DTKDropdownMenuView alloc]initWithFrame:frame];
+    DTKDropdownMenuView *menuView = [[DTKDropdownMenuView alloc] initWithFrame:frame];
     menuView.dropDownType = dropDownType;
     [menuView updateMainConstraints];
     menuView.items = dropdownItems;
     menuView.isMenuShow = NO;
     menuView.selectedIndex = 0;
     menuView.icon = icon;
+    [menuView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(frame.size.width, frame.size.height));
+
+    }];
     return menuView;
 }
 
@@ -199,7 +203,13 @@ UITableViewDataSource
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.separatorColor = self.cellSeparatorColor;
     _tableView.alpha = self.cellBackgroundAlpha;
-
+//#ifdef __IPHONE_11_0
+//    if (@available(iOS 11.0, *)) {
+//        _tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+//    } else {
+//        // Fallback on earlier versions
+//    }
+//#endif
     [self.wrapperView addSubview:self.tableView];
     menuWeakSelf(menuWeakSelf)
     
