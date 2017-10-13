@@ -186,7 +186,7 @@
     p2pCardModel.accoutBalanceStr = [NSString stringWithFormat:@"¥%@",[UCFToolsMehod AddComma:[_dataDict objectSafeForKey:@"p2pBalance"]]];
     if ([UserInfoSingle sharedManager].openStatus == 3)  {
         p2pCardModel.cardDetialStr = @"未设置交易密码";
-        p2pCardModel.cardNumberStr = @"";
+        p2pCardModel.cardNumberStr = [_dataDict objectSafeForKey:@"p2pCardNum"];;
         p2pCardModel.cardStateStr = @"去设置";
     }else{
         p2pCardModel.cardDetialStr = [_dataDict objectSafeForKey:@"p2pCardName"];
@@ -202,7 +202,7 @@
     honerCardModel.accoutBalanceStr = [NSString stringWithFormat:@"¥%@",[UCFToolsMehod AddComma:[_dataDict objectSafeForKey:@"zxBalance"]]];
     if ([UserInfoSingle sharedManager].enjoyOpenStatus == 3)  {
         honerCardModel.cardDetialStr = @"未设置交易密码";
-        honerCardModel.cardNumberStr = @"";
+        honerCardModel.cardNumberStr = [_dataDict objectSafeForKey:@"zxCardNum"];;
         honerCardModel.cardStateStr = @"去设置";
     }else{
         honerCardModel.cardDetialStr = [_dataDict objectSafeForKey:@"zxCardName"];
