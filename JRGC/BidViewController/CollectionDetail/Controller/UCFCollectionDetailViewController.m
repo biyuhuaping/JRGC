@@ -100,7 +100,7 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
 
     [super viewDidLoad];
     self.navigationController.fd_prefersNavigationBarHidden = YES;
-
+    lineViewAA.hidden = YES;
     [self progressAnimiation];
     [self drawTopView];
     if([self.souceVC isEqualToString:@"P2PVC"]){

@@ -61,14 +61,11 @@
     if(tag == kSXTagGetAccountBalanceList || tag ==  kSXTagGetBindingBankCardList)
     {
         
+        [MBProgressHUD showOriginHUDAddedTo:vc.view animated:YES];
     }else{
             [MBProgressHUD showHUDAddedTo:vc.view animated:YES];
     }
-
 }
-
-
-
 - (void)endPost:(id)result tag:(NSNumber *)tag
 {
     NSMutableDictionary *dic = [result objectFromJSONString];
@@ -115,35 +112,41 @@
     }
     else if (tag.intValue == kSXTagGetAccountBalanceList) {
         UIViewController *vc = (UIViewController *)self.delegate;
-        [MBProgressHUD hideAllHUDsForView:vc.view animated:YES];
+        [MBProgressHUD hideOriginAllHUDsForView:vc.view animated:YES];
         if ([rstcode intValue] == 1) {
             NSDictionary *resultData = [dic objectSafeDictionaryForKey:@"data"];
             if ([self.delegate respondsToSelector:@selector(mineApiManager:didSuccessedCashAccoutBalanceResult:withTag:)]) {
-                [self.delegate mineApiManager:self didSuccessedCashAccoutBalanceResult:resultData withTag:[tag integerValue]];
+                [self.delegate mineApiManager:self didSuccessedCashAccoutBalanceResult:resultData withTag:1];
             }
         }else {
-            [self.delegate mineApiManager:self didSuccessedCashAccoutBalanceResult:rsttext withTag:[tag integerValue]];
-            [AuxiliaryFunc showToastMessage:rsttext withView:vc.view];
+            [self.delegate mineApiManager:self didSuccessedCashAccoutBalanceResult:rsttext withTag:2];
         }
     }else if (tag.intValue == kSXTagGetBindingBankCardList) {
         UIViewController *vc = (UIViewController *)self.delegate;
-        [MBProgressHUD hideAllHUDsForView:vc.view animated:YES];
+        [MBProgressHUD hideOriginAllHUDsForView:vc.view animated:YES];
         if ([rstcode intValue] == 1) {
             NSDictionary *resultData = [dic objectSafeDictionaryForKey:@"data"];
             if ([self.delegate respondsToSelector:@selector(mineApiManager:didSuccessedRechargeBindingBankCardResult:withTag:)]) {
-                [self.delegate mineApiManager:self didSuccessedRechargeBindingBankCardResult:resultData withTag:[tag integerValue]];
+                [self.delegate mineApiManager:self didSuccessedRechargeBindingBankCardResult:resultData withTag:1];
             }
         }else {
             if ([self.delegate respondsToSelector:@selector(mineApiManager:didSuccessedRechargeBindingBankCardResult:withTag:)]) {
-                [self.delegate mineApiManager:self didSuccessedRechargeBindingBankCardResult:rsttext withTag:[tag integerValue]];
+                [self.delegate mineApiManager:self didSuccessedRechargeBindingBankCardResult:rsttext withTag:2];
             }
-            [AuxiliaryFunc showToastMessage:rsttext withView:vc.view];
         }
     }
 }
 
 - (void)errorPost:(NSError *)err tag:(NSNumber *)tag
 {
+    UIViewController *vc = (UIViewController *)self.delegate;
+    if(tag.integerValue == kSXTagGetAccountBalanceList || tag.integerValue ==  kSXTagGetBindingBankCardList)
+    {
+        
+        [MBProgressHUD hideOriginAllHUDsForView:vc.view animated:YES];
+    }else{
+        [MBProgressHUD hideAllHUDsForView:vc.view animated:YES];
+    }
     if (tag.integerValue == kSXTagMyReceipt) {
         if ([self.delegate respondsToSelector:@selector(mineApiManager:didSuccessedReturnAssetResult:withTag:)]) {
             [self.delegate mineApiManager:self didSuccessedReturnAssetResult:err withTag:[tag integerValue]];
@@ -155,11 +158,12 @@
         }
     }else if (tag.integerValue == kSXTagGetAccountBalanceList) {
         if ([self.delegate respondsToSelector:@selector(mineApiManager:didSuccessedCashAccoutBalanceResult:withTag:)]) {
-            [MBProgressHUD displayHudError:err.userInfo[@"NSLocalizedDescription"]];
+             [self.delegate mineApiManager:self didSuccessedCashAccoutBalanceResult:err.userInfo[@"NSLocalizedDescription"] withTag:0];
         }
     }else if (tag.integerValue == kSXTagGetBindingBankCardList) {
         if ([self.delegate respondsToSelector:@selector(mineApiManager:didSuccessedRechargeBindingBankCardResult:withTag:)]) {
-            [MBProgressHUD displayHudError:err.userInfo[@"NSLocalizedDescription"]];
+            [self.delegate mineApiManager:self didSuccessedRechargeBindingBankCardResult:err.userInfo[@"NSLocalizedDescription"] withTag:0];
+          
         }
     }
 }

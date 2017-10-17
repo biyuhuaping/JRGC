@@ -975,7 +975,7 @@
             if (ScreenHeight < 961) {
                 
             }
-            NSString *LoginURL = ScreenHeight > 961 ? [arr objectAtIndex:0][@"thumb"] : [arr objectAtIndex:1][@"thumb"];
+            NSString *LoginURL = ScreenHeight > 481 ? [arr objectAtIndex:0][@"thumb"] : [arr objectAtIndex:1][@"thumb"];
             [[NSUserDefaults standardUserDefaults] setValue:LoginURL forKey:@"LoginImageUrl"];
             [[NSUserDefaults standardUserDefaults] synchronize];
             

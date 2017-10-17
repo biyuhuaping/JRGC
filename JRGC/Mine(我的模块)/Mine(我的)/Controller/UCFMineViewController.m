@@ -555,31 +555,72 @@
 - (void)mineApiManager:(UCFMineAPIManager *)apiManager didSuccessedCashAccoutBalanceResult:(id)result withTag:(NSUInteger)tag
 {
     self.mineHeaderView.cashButton.enabled = YES;
-    NSDictionary *dataDict = (NSDictionary *)result;
-    UCFRechargeOrCashViewController * rechargeCashVC = [[UCFRechargeOrCashViewController alloc]initWithNibName:@"UCFRechargeOrCashViewController" bundle:nil];
-    rechargeCashVC.dataDict = dataDict;
-    rechargeCashVC.isRechargeOrCash = YES;//提现
-    UINavigationController *rechargeCashNavController = [[UINavigationController alloc] initWithRootViewController:rechargeCashVC];
-    rechargeCashNavController.modalPresentationStyle = UIModalPresentationOverFullScreen;
-    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    switch (tag) {
+        case 0://网络异常情况
+        {
+             [MBProgressHUD displayHudError:result];
+        }
+            break;
+        case 1://返回数据失败
+        {
+            NSDictionary *dataDict = (NSDictionary *)result;
+            UCFRechargeOrCashViewController * rechargeCashVC = [[UCFRechargeOrCashViewController alloc]initWithNibName:@"UCFRechargeOrCashViewController" bundle:nil];
+            rechargeCashVC.dataDict = dataDict;
+            rechargeCashVC.isRechargeOrCash = YES;//提现
+            UINavigationController *rechargeCashNavController = [[UINavigationController alloc] initWithRootViewController:rechargeCashVC];
+            rechargeCashNavController.modalPresentationStyle = UIModalPresentationOverFullScreen;
+            AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+            
+            [app.tabBarController presentViewController:rechargeCashNavController animated:NO completion:^{
+            }];
+        }
+            break;
+        case 2://返回数据失败
+        {
+             [AuxiliaryFunc showToastMessage:result withView:self.view];
+        }
+            break;
+            
+        default:
+            break;
+    }
     
-    [app.tabBarController presentViewController:rechargeCashNavController animated:NO completion:^{
-    }];
 
 }
 -(void)mineApiManager:(UCFMineAPIManager *)apiManager didSuccessedRechargeBindingBankCardResult:(id)result withTag:(NSUInteger)tag
 {
     self.mineHeaderView.rechargeButton.enabled = YES;
-    NSDictionary *dataDict = (NSDictionary *)result;
-    UCFRechargeOrCashViewController * rechargeCashVC = [[UCFRechargeOrCashViewController alloc]initWithNibName:@"UCFRechargeOrCashViewController" bundle:nil];
-    rechargeCashVC.dataDict = dataDict;
-    rechargeCashVC.isRechargeOrCash = NO;//充值
-    UINavigationController *rechargeCashNavController = [[UINavigationController alloc] initWithRootViewController:rechargeCashVC];
-    rechargeCashNavController.modalPresentationStyle = UIModalPresentationOverFullScreen;
-    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    
-    [app.tabBarController presentViewController:rechargeCashNavController animated:NO completion:^{
-    }];
+    switch (tag) {
+        case 0://网络异常情况
+        {
+            [MBProgressHUD displayHudError:result];
+        }
+            break;
+        case 1://返回数据成功
+        {
+
+            NSDictionary *dataDict = (NSDictionary *)result;
+            UCFRechargeOrCashViewController * rechargeCashVC = [[UCFRechargeOrCashViewController alloc]initWithNibName:@"UCFRechargeOrCashViewController" bundle:nil];
+            rechargeCashVC.dataDict = dataDict;
+            rechargeCashVC.isRechargeOrCash = NO;//充值
+            UINavigationController *rechargeCashNavController = [[UINavigationController alloc] initWithRootViewController:rechargeCashVC];
+            rechargeCashNavController.modalPresentationStyle = UIModalPresentationOverFullScreen;
+            AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+            
+            [app.tabBarController presentViewController:rechargeCashNavController animated:NO completion:^{
+            }];
+        }
+            break;
+        case 2://返回数据失败
+        {
+            [AuxiliaryFunc showToastMessage:result withView:self.view];
+        }
+            break;
+            
+        default:
+            break;
+    }
+
 
 }
 @end

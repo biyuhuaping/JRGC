@@ -148,7 +148,8 @@ typedef void (^MBProgressHUDCompletionBlock)();
  * @see animationType
  */
 + (NSUInteger)hideAllHUDsForView:(UIView *)view animated:(BOOL)animated;
-
++ (MB_INSTANCETYPE)showOriginHUDAddedTo:(UIView *)view animated:(BOOL)animated;
++ (NSUInteger)hideOriginAllHUDsForView:(UIView *)view animated:(BOOL)animated;
 /**
  * Finds the top-most HUD subview and returns it. 
  *
