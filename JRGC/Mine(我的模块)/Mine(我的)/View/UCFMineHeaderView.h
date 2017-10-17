@@ -27,6 +27,8 @@
 @property (strong, nonatomic) UCFUserBenefitModel *userBenefitModel;
 @property (strong, nonatomic) UCFUserAssetModel *userAssetModel;
 @property (weak, nonatomic) id<UCFMineHeaderViewDelegate> delegate;
+@property (weak, nonatomic) IBOutlet UIButton *rechargeButton;
+@property (weak, nonatomic) IBOutlet UIButton *cashButton;
 + (CGFloat)viewHeight;
 - (void)setDefaultState;
 @end

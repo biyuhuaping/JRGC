@@ -554,6 +554,7 @@
 
 - (void)mineApiManager:(UCFMineAPIManager *)apiManager didSuccessedCashAccoutBalanceResult:(id)result withTag:(NSUInteger)tag
 {
+    self.mineHeaderView.cashButton.enabled = YES;
     NSDictionary *dataDict = (NSDictionary *)result;
     UCFRechargeOrCashViewController * rechargeCashVC = [[UCFRechargeOrCashViewController alloc]initWithNibName:@"UCFRechargeOrCashViewController" bundle:nil];
     rechargeCashVC.dataDict = dataDict;
@@ -568,6 +569,7 @@
 }
 -(void)mineApiManager:(UCFMineAPIManager *)apiManager didSuccessedRechargeBindingBankCardResult:(id)result withTag:(NSUInteger)tag
 {
+    self.mineHeaderView.rechargeButton.enabled = YES;
     NSDictionary *dataDict = (NSDictionary *)result;
     UCFRechargeOrCashViewController * rechargeCashVC = [[UCFRechargeOrCashViewController alloc]initWithNibName:@"UCFRechargeOrCashViewController" bundle:nil];
     rechargeCashVC.dataDict = dataDict;

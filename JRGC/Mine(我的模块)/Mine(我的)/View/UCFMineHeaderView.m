@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *visibleButton;
 @property (weak, nonatomic) IBOutlet UIView *messageDotView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *userLevelW;
+@property (weak, nonatomic) IBOutlet UIView *downView;
 
 @end
 
@@ -31,6 +32,11 @@
     [super awakeFromNib];
     
     self.messageDotView.backgroundColor = UIColorWithRGB(0xfd4d4c);
+    self.downView.backgroundColor = UIColorWithRGB(0x1D0D34);
+    [self.rechargeButton setBackgroundColor:UIColorWithRGB(0x342649)];
+    [self.cashButton setBackgroundColor:UIColorWithRGB(0x342649)];
+    self.rechargeButton.layer.borderColor = UIColorWithRGB(0xA8A2C1).CGColor;
+    self.cashButton.layer.borderColor = UIColorWithRGB(0xA8A2C1).CGColor;
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedUserIcon:)];
     [self.userIconImageView addGestureRecognizer:tap];
@@ -76,6 +82,7 @@
 //充值
 - (IBAction)topUp:(UIButton *)sender {
     if ([self.delegate respondsToSelector:@selector(mineHeaderView:didClikedTopUpButton:)]) {
+        sender.enabled = NO;
         [self.delegate mineHeaderView:self didClikedTopUpButton:sender];
     }
 }
@@ -96,6 +103,7 @@
 //提现
 - (IBAction)cash:(UIButton *)sender {
     if ([self.delegate respondsToSelector:@selector(mineHeaderView:didClikedCashButton:)]) {
+        sender.enabled = NO;
         [self.delegate mineHeaderView:self didClikedCashButton:sender];
     }
 }

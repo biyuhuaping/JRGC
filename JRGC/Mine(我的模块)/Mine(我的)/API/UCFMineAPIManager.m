@@ -122,7 +122,7 @@
                 [self.delegate mineApiManager:self didSuccessedCashAccoutBalanceResult:resultData withTag:[tag integerValue]];
             }
         }else {
-            
+            [self.delegate mineApiManager:self didSuccessedCashAccoutBalanceResult:rsttext withTag:[tag integerValue]];
             [AuxiliaryFunc showToastMessage:rsttext withView:vc.view];
         }
     }else if (tag.intValue == kSXTagGetBindingBankCardList) {
@@ -134,7 +134,9 @@
                 [self.delegate mineApiManager:self didSuccessedRechargeBindingBankCardResult:resultData withTag:[tag integerValue]];
             }
         }else {
-            
+            if ([self.delegate respondsToSelector:@selector(mineApiManager:didSuccessedRechargeBindingBankCardResult:withTag:)]) {
+                [self.delegate mineApiManager:self didSuccessedRechargeBindingBankCardResult:rsttext withTag:[tag integerValue]];
+            }
             [AuxiliaryFunc showToastMessage:rsttext withView:vc.view];
         }
     }
