@@ -65,8 +65,8 @@
     else {
         self.limitLabel.text = [NSString stringWithFormat:@"期限%@", microModel.repayPeriodtext];
     }
-    self.addedTransLabel.text = [NSString stringWithFormat:@"%@", microModel.completeLoan];
-    self.minLabel.text = [NSString stringWithFormat:@"%@", microModel.minInvest];
+    self.addedTransLabel.text = [NSString stringWithFormat:@"%@亿元", microModel.totleBookAmt];
+    self.minLabel.text = [NSString stringWithFormat:@"%@元起", microModel.minInvest];
 }
 
 - (void)layoutSubviews
