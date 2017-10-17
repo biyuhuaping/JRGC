@@ -21,6 +21,7 @@ typedef enum : NSUInteger {
     MjAlertViewTypeTypeHoner,
     MjGoldAlertViewTypeFloat, //浮动盈亏
     MjGoldAlertViewTypeAverage, //买入均价
+    MjAlertViewTypeGift
 } MjAlertViewType;
 
 
