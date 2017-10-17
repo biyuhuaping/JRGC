@@ -389,15 +389,23 @@
     if (self) {
         UIView *baseView = nil;
         baseView = [[NSBundle mainBundle] loadNibNamed:@"AD_View" owner:nil options:nil][0];
-        baseView.frame = CGRectMake(0, 0, 270, 460);
-        [self.showView  setFrame:CGRectMake((ScreenWidth - 270)/2.0f, (ScreenHeight - 460)/2.0f, 270, 460)];
+        CGSize size = CGSizeMake(270, 405);
+        if (ScreenHeight > 569) {
+            size.width = ScreenWidth/320.0f * 270;
+            size.height = size.width * 3 / 2;
+        }
+        
+        baseView.frame = CGRectMake(0, 0, size.width, size.height + 55);
+        
+        [self.showView  setFrame:CGRectMake((ScreenWidth - CGRectGetWidth(baseView.frame))/2.0f, (ScreenHeight - size.height)/2.0f - 55, CGRectGetWidth(baseView.frame), CGRectGetHeight(baseView.frame))];
         self.delegate = delegate;
         [self.showView addSubview:baseView];
-        
+        self.alertviewType = MjAlertViewTypeGift;
         UIButton *closeBtn = [baseView viewWithTag:1000];
         [closeBtn addTarget:self action:@selector(closeBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
         
         UIImageView *adImageView = [baseView viewWithTag:999];
+        adImageView.frame = CGRectMake(0, 55, size.width, size.height);
         adImageView.layer.cornerRadius = 4.0f;
         adImageView.clipsToBounds = YES;
         NSDictionary *adDic = [[NSUserDefaults standardUserDefaults] valueForKey:@"AD_ACTIViTY_DIC"];
@@ -774,6 +782,9 @@
             break;
         case MjAlertViewTypeTypeHoner:{
             self.showView.center = self.center;
+        }
+            break;
+        case MjAlertViewTypeGift:{
         }
             break;
         default:

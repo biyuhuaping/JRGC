@@ -17,10 +17,6 @@
             <subviews>
                 <imageView tag="999" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="C5e-eK-7Ad">
                     <rect key="frame" x="0.0" y="55" width="270" height="405"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="270" id="ZIQ-bg-QOC"/>
-                        <constraint firstAttribute="height" constant="405" id="p6l-dj-2E4"/>
-                    </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                             <real key="value" value="4"/>
@@ -39,11 +35,12 @@
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="C5e-eK-7Ad" secondAttribute="bottom" id="2LX-05-h7a"/>
                 <constraint firstAttribute="trailing" secondItem="C5e-eK-7Ad" secondAttribute="trailing" id="4tm-YG-bDT"/>
+                <constraint firstItem="U5y-US-1wh" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="6ns-RB-jEt"/>
+                <constraint firstItem="C5e-eK-7Ad" firstAttribute="top" secondItem="U5y-US-1wh" secondAttribute="bottom" id="BvR-0f-T7c"/>
                 <constraint firstAttribute="trailing" secondItem="U5y-US-1wh" secondAttribute="trailing" id="OkE-rU-JdH"/>
-                <constraint firstItem="C5e-eK-7Ad" firstAttribute="top" secondItem="U5y-US-1wh" secondAttribute="bottom" id="c75-tm-nrO"/>
                 <constraint firstItem="C5e-eK-7Ad" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="hM3-7P-9K0"/>
+                <constraint firstAttribute="bottom" secondItem="C5e-eK-7Ad" secondAttribute="bottom" id="zAa-g8-Mg5"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
