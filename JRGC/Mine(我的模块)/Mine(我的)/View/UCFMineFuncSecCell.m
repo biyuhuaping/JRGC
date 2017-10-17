@@ -26,6 +26,8 @@
     self.sign1Label.textColor = UIColorWithRGB(0x8baeff);
     self.sign2View.backgroundColor = UIColorWithRGB(0xdbe6ff);
     self.sign2Label.textColor = UIColorWithRGB(0x8baeff);
+    self.valueLabel.textColor = UIColorWithRGB(0x4aa1f9);
+    self.value2Label.textColor = UIColorWithRGB(0x4aa1f9);
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
