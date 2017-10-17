@@ -284,6 +284,7 @@
                     NSUInteger selectedIndex = appDelegate.tabBarController.selectedIndex;
                     UINavigationController *nav = [appDelegate.tabBarController.viewControllers objectAtIndex:selectedIndex];
                     [nav popToRootViewControllerAnimated:NO];
+                    [appDelegate.tabBarController setSelectedIndex:0];
                 }];
             }
             else{
