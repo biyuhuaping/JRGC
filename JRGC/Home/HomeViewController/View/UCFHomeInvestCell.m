@@ -59,6 +59,14 @@
 {
     _microModel = microModel;
     self.anurateLabel.text = microModel.annualRate ? [NSString stringWithFormat:@"%@%%",microModel.annualRate] : @"0.0%";
+    if (microModel.holdTime.length > 0) {
+        self.limitLabel.text = [NSString stringWithFormat:@"期限%@~%@", microModel.holdTime, microModel.repayPeriodtext];
+    }
+    else {
+        self.limitLabel.text = [NSString stringWithFormat:@"期限%@", microModel.repayPeriodtext];
+    }
+    self.addedTransLabel.text = [NSString stringWithFormat:@"%@亿元", microModel.totleBookAmt];
+    self.minLabel.text = [NSString stringWithFormat:@"%@元起", microModel.minInvest];
 }
 
 - (void)layoutSubviews
