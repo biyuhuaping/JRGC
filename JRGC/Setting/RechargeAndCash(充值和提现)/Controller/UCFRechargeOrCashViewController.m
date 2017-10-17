@@ -39,6 +39,8 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    lineViewAA.hidden = YES;
      [self.navigationController.navigationBar setHidden:YES];
     _titleLabel = [[UILabel alloc]initWithFrame:CGRectMake([Common calculateNewSizeBaseMachine:15], ScreenHeight - [Common calculateNewSizeBaseMachine:110] * 3 - 15 - [Common calculateNewSizeBaseMachine:20], 150,  [Common calculateNewSizeBaseMachine:20])];
     _titleLabel.backgroundColor = [UIColor clearColor];
