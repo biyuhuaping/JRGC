@@ -10,7 +10,7 @@
 #import "NZLabel.h"
 #import "AppDelegate.h"
 #import "MongoliaLayerCenter.h"
-
+#import "UIImageView+WebCache.h"
 #define SCREEN_WIDTH_5 ([UIScreen mainScreen].bounds.size.width == 320)
 #define SCREEN_WIDTH_6 ([UIScreen mainScreen].bounds.size.width == 375)
 #define SCREEN_WIDTH_6P ([UIScreen mainScreen].bounds.size.width == 414)
@@ -382,6 +382,51 @@
     }
     return self;
 }
+#pragma 广告页弹框
+-(instancetype)initADViewAlertWithDelegate:(id)delegate
+{
+    self = [self init];
+    if (self) {
+        UIView *baseView = nil;
+        baseView = [[NSBundle mainBundle] loadNibNamed:@"AD_View" owner:nil options:nil][0];
+        CGSize size = CGSizeMake(270, 405);
+        if (ScreenHeight > 569) {
+            size.width = ScreenWidth/320.0f * 270;
+            size.height = size.width * 3 / 2;
+        }
+        
+        baseView.frame = CGRectMake(0, 0, size.width, size.height + 55);
+        
+        [self.showView  setFrame:CGRectMake((ScreenWidth - CGRectGetWidth(baseView.frame))/2.0f, (ScreenHeight - size.height)/2.0f - 55, CGRectGetWidth(baseView.frame), CGRectGetHeight(baseView.frame))];
+        self.delegate = delegate;
+        [self.showView addSubview:baseView];
+        self.alertviewType = MjAlertViewTypeGift;
+        UIButton *closeBtn = [baseView viewWithTag:1000];
+        [closeBtn addTarget:self action:@selector(closeBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+        
+        UIImageView *adImageView = [baseView viewWithTag:999];
+        adImageView.frame = CGRectMake(0, 55, size.width, size.height);
+        adImageView.layer.cornerRadius = 4.0f;
+        adImageView.clipsToBounds = YES;
+        NSDictionary *adDic = [[NSUserDefaults standardUserDefaults] valueForKey:@"AD_ACTIViTY_DIC"];
+        
+        [adImageView sd_setImageWithURL:[NSURL URLWithString:[adDic valueForKey:@"pic"]] placeholderImage:[UIImage imageNamed:@"index_tenMonthHunt.jpg"]];
+        
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goToAdDetailContent)];
+        [adImageView addGestureRecognizer:tap];
+    }
+    return self;
+}
+- (void)goToAdDetailContent
+{
+    if ([self.delegate respondsToSelector:@selector(mjalertView:withObject:)]) {
+        NSDictionary *adDic = [[NSUserDefaults standardUserDefaults] valueForKey:@"AD_ACTIViTY_DIC"];
+        if (adDic) {
+            [self.delegate mjalertView:self withObject:adDic];
+        }
+        [self hide];
+    }
+}
 #pragma 黄金自定义弹窗
 -(instancetype)initGoldAlertType:(MjAlertViewType)type delegate:(id)delegate
 {
@@ -737,6 +782,9 @@
             break;
         case MjAlertViewTypeTypeHoner:{
             self.showView.center = self.center;
+        }
+            break;
+        case MjAlertViewTypeGift:{
         }
             break;
         default:

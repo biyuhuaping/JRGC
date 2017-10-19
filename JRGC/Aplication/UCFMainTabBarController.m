@@ -24,6 +24,7 @@
 #import "P2PWalletHelper.h"
 #import "BlockUIAlertView.h"
 #import "UCFInvestViewController.h"
+#import "UCFMineViewController.h"
 
 @interface UCFMainTabBarController ()
 
@@ -53,10 +54,6 @@
     self.tabBar.clipsToBounds = NO;
     [self.tabBar addSubview:imaview];
     [[UITabBar appearance] setShadowImage:tabImag];
-    
-    
-    
-    
 }
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -71,23 +68,23 @@
 - (void)initAllTabbarItems
 {
     NSMutableArray *vcArray = [NSMutableArray array];
-    NSArray *tabbarTitleArray = @[@"我的",
+    NSArray *tabbarTitleArray = @[@"首页",
                                   @"投资",
                                   @"发现",
                                   @"生活",
-                                  @"更多"];
+                                  @"我的"];
     
-    NSArray *tabbarNormalArray = @[@"tabbar_icon_user_normal",
+    NSArray *tabbarNormalArray = @[@"tabbar_icon_homepage_normal",
                                    @"tabbar_icon_project_normal",
                                    @"tabbar_icon_find_normal",
                                    @"tabbar_icon_life_normal",
-                                   @"tabbar_icon_more_normal"];
+                                   @"tabbar_icon_user_normal"];
 
-    NSArray *tabbarHighlightArray = @[@"tabbar_icon_user_highlight",
+    NSArray *tabbarHighlightArray = @[@"tabbar_icon_homepage_highlight",
                                       @"tabbar_icon_project_highlight",
                                       @"tabbar_icon_find_highlight",
                                       @"tabbar_icon_life_highlight",
-                                      @"tabbar_icon_more_highlight"];
+                                      @"tabbar_icon_user_highlight"];
     UIViewController *controller = nil;
     for (int i=0; i<5; i++) {
         switch (i) {
@@ -116,9 +113,8 @@
             }
                 break;
             case 4:{
-                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"UCFMoreViewController" bundle:nil];
-                UCFMoreViewController *moreView =  [storyboard instantiateViewControllerWithIdentifier:@"more_main"];
-                controller = moreView;
+                UCFMineViewController *mine = [[UCFMineViewController alloc] initWithNibName:@"UCFMineViewController" bundle:nil];
+                controller = mine;
             }
                 break;
             default:

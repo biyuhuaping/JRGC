@@ -81,7 +81,6 @@
 
 @implementation UCFCashViewController
 
-
 - (void)leftClicked:(UIButton *)button
 {
     [_timer invalidate];
@@ -195,6 +194,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     self.getMoneyBtn.userInteractionEnabled = YES;
 }
 -(void)viewWillDisappear:(BOOL)animated{
@@ -544,7 +544,7 @@
     }else{
         realTimeCashStr = [NSString stringWithFormat:@"单笔金额≤%@万，单日≤%@万，7*24小时实时到账。\n%@",_criticalValueStr,_perDayRealTimeAmountLimit,_perDayRealTimeTipStr];
     }
-    NSString *largeCashStr = [NSString stringWithFormat:@"工作日%@受理，最快30分钟之内到账。",_doTime];
+    NSString *largeCashStr = [NSString stringWithFormat:@"工作日%@受理，预计2小时内到账。",_doTime];
 
     if(_isCompanyAgent || _isSpecial){//如果是机构用户 或 特殊用户
         
@@ -688,6 +688,7 @@
             webVC.navTitle = @"即将跳转";
             webVC.url = urlStr;
             webVC.accoutType = self.accoutType;
+            webVC.rootVc = self.rootVc;
             [self.navigationController pushViewController:webVC animated:YES];
         }
         else{

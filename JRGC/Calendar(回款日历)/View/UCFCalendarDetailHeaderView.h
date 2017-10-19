@@ -18,4 +18,5 @@
 @interface UCFCalendarDetailHeaderView : UITableViewHeaderFooterView
 @property (weak, nonatomic) id<UCFCalendarDetailHeaderViewDelegate> delegate;
 @property (strong, nonatomic) UCFCalendarGroup *group;
+- (void)setSelectButtonIndex:(NSInteger)index;
 @end

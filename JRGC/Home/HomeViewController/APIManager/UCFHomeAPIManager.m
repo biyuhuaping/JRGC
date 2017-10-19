@@ -12,10 +12,15 @@
 #import "UIDic+Safe.h"
 #import "UCFHomeListGroup.h"
 #import "UCFUserInfoModel.h"
+#import "UCFHomeIconModel.h"
 #import "UCFSignModel.h"
 #import "UCFSession.h"
 #import "MongoliaLayerCenter.h"
+#import "UCFPicADModel.h"
+#import "UCFNoticeModel.h"
+
 #define HOMELIST @"homeList"
+#define HOMEICON @"homeIcon"
 #define USERINFOONE @"userInfoOne"
 #define USERINFOTWO @"userInfoTwo"
 #define SIGN @"sign"
@@ -43,6 +48,13 @@
 {
     [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":userId} tag:kSXTagPrdClaimsNewVersion owner:self signature:YES Type:SelectAccoutDefault];
     [self.requestDict setObject:completionHandler forKey:HOMELIST];
+}
+
+- (void)fetchHomeIconListWithUserId:(NSString *)userId completionHandler:(NetworkCompletionHandler)completionHandler
+{
+    
+    [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":userId} tag:kSXTagHomeIconList owner:self signature:YES Type:SelectAccoutDefault];
+    [self.requestDict setObject:completionHandler forKey:HOMEICON];
 }
 
 - (void)fetchUserInfoOneWithUserId:(NSString *)userId completionHandler:(NetworkCompletionHandler)completionHandler
@@ -163,60 +175,18 @@
                 [tempArray addObject:tempG];
             }
             [tempResult setObject:tempArray forKey:@"homelistContent"];
-            if ([[result allKeys] containsObject:@"authorization"]) {
-                NSString *sDateStr = [result objectSafeForKey:@"sdate"];
-                BOOL authorization =  [[result objectSafeForKey:@"authorization"] boolValue];
-                if (authorization) {
-                    [[MongoliaLayerCenter sharedManager].mongoliaLayerDic setValue:[NSNumber numberWithInt:1] forKey:@"authorization"];
-                    [[MongoliaLayerCenter sharedManager].mongoliaLayerDic setValue:sDateStr forKey:@"authorizationDate"];
-                }else{
-                    [[MongoliaLayerCenter sharedManager].mongoliaLayerDic setValue:[NSNumber numberWithInt:0] forKey:@"authorization"];
-                    [[MongoliaLayerCenter sharedManager].mongoliaLayerDic setValue:sDateStr forKey:@"authorizationDate"];
-                }
-            }
-//<<<<<<< HEAD
-//            if ([[result allKeys] containsObject:@"appointInvest"]) {
-//                NSDictionary *investDict = [result objectSafeDictionaryForKey:@"appointInvest"];
-//                UCFHomeListGroup * tempInvestG = [[UCFHomeListGroup alloc] init];
-//                tempInvestG.title = [investDict objectSafeForKey:@"title"];
-//                tempInvestG.desc = [investDict objectSafeForKey:@"desc"];
-//                tempInvestG.iconUrl = [investDict objectSafeForKey:@"iconUrl"];
-//                UCFHomeListCellModel *investModel = [[UCFHomeListCellModel alloc] init];
-//                investModel.Id = [investDict objectSafeForKey:@"id"];
-//                investModel.annualRate = [investDict objectSafeForKey:@"annualRate"];
-//                investModel.repayPeriod = [investDict objectSafeForKey:@"repayPeriod"];
-//                investModel.url = [investDict objectSafeForKey:@"url"];
-//                tempInvestG.prdlist = [NSArray arrayWithObjects:investModel, nil];
-//                [tempResult setObject:tempInvestG forKey:@"appointInvest"];
-//            }
-//=======
-            if ([[result allKeys] containsObject:@"nmGoldAuthorization"]) {
-                BOOL nmGoldAuthorization =  [[result objectSafeForKey:@"nmGoldAuthorization"] boolValue];
-                [UserInfoSingle sharedManager].goldAuthorization = nmGoldAuthorization;
-                [[NSUserDefaults standardUserDefaults] setBool:nmGoldAuthorization  forKey:GOldAUTHORIZATION];
-                [[NSUserDefaults standardUserDefaults] synchronize];
-            }
-//            if ([[result allKeys] containsObject:@"appointInvest"]) {
-//                NSDictionary *investDict = [result objectSafeDictionaryForKey:@"appointInvest"];
-//                UCFHomeListGroup * tempInvestG = [[UCFHomeListGroup alloc] init];
-//                tempInvestG.title = [investDict objectSafeForKey:@"title"];
-//                tempInvestG.desc = [investDict objectSafeForKey:@"desc"];
-//                tempInvestG.iconUrl = [investDict objectSafeForKey:@"iconUrl"];
-//                UCFHomeListCellModel *investModel = [[UCFHomeListCellModel alloc] init];
-//                investModel.Id = [investDict objectSafeForKey:@"id"];
-//                investModel.annualRate = [investDict objectSafeForKey:@"annualRate"];
-//                investModel.repayPeriod = [investDict objectSafeForKey:@"repayPeriod"];
-//                investModel.url = [investDict objectSafeForKey:@"url"];
-//                tempInvestG.prdlist = [NSArray arrayWithObjects:investModel, nil];
-//                [tempResult setObject:tempInvestG forKey:@"appointInvest"];
-//            }
-//>>>>>>> JRGC-3.1.21
+            
             [UserInfoSingle sharedManager].companyAgent = [[result objectSafeForKey:@"isCompanyAgent"] boolValue];
             [UserInfoSingle sharedManager].isRisk = [[result objectSafeForKey:@"isRisk"] boolValue];
             [UserInfoSingle sharedManager].isAutoBid = [[result objectSafeForKey:@"isAutoBid"] boolValue];
+            [UserInfoSingle sharedManager].p2pAuthorization = [[result objectSafeForKey:@"p2pAuthorization"] boolValue];
+            [UserInfoSingle sharedManager].zxAuthorization = [[result objectSafeForKey:@"zxAuthorization"] boolValue];
+            [UserInfoSingle sharedManager].goldAuthorization = [[result objectSafeForKey:@"nmGoldAuthorization"] boolValue];
+            [UserInfoSingle sharedManager].openStatus = [[result objectSafeForKey:@"openStatus"] integerValue];
+            [UserInfoSingle sharedManager].enjoyOpenStatus = [[result objectSafeForKey:@"zxOpenStatus"] integerValue];
+            
             UCFHomeListCellModel *homelistModel = [UCFHomeListCellModel homeListCellWithDict:result];
             [tempResult setObject:homelistModel forKey:@"listInfo"];
-            [tempResult setObject:[result objectSafeForKey:@"siteNotice"] forKey:@"siteNotice"];
             [[UCFSession sharedManager] transformBackgroundWithUserInfo:@{} withState:UCFSessionStateUserRefresh];
             complete(nil, tempResult);
         }
@@ -226,17 +196,37 @@
         
         [self.requestDict removeObjectForKey:HOMELIST];
     }
-    else if (tag.intValue == kSXTagMyReceipt) {
-        NetworkCompletionHandler complete = [self.requestDict objectForKey:USERINFOONE];
+    else if (tag.intValue == kSXTagHomeIconList) {
+        NetworkCompletionHandler complete = [self.requestDict objectForKey:HOMEICON];
         if ([rstcode boolValue]) {
-            NSDictionary *userInfoOne = [dic objectSafeDictionaryForKey:@"data"];
-            UCFUserInfoModel *userInfoModel = [UCFUserInfoModel userInfomationWithDict:userInfoOne];
-            complete(nil, userInfoModel);
+            NSMutableDictionary *tempResult = [[NSMutableDictionary alloc] init];
+            NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+            NSDictionary *resultDict = [dic objectSafeDictionaryForKey:@"data"];
+            if ([[resultDict objectSafeForKey:@"picAD"] count] > 0) {
+                NSDictionary *adDic = [[resultDict objectSafeForKey:@"picAD"] objectAtIndex:0];
+                if (adDic) {
+                    [[NSUserDefaults standardUserDefaults] setValue:adDic forKey:@"AD_ACTIViTY_DIC"];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                }
+            }
+            NSDictionary *siteNotice = [resultDict objectSafeDictionaryForKey:@"siteNoticeMap"];
+       
+            UCFNoticeModel *noticeModel = [UCFNoticeModel noticeWithDict:siteNotice];
+//            UCFPicADModel *picADModel = [UCFPicADModel picADWithDict:adDic];
+            [tempResult setObject:noticeModel forKey:@"siteNotice"];
+            NSArray *productMap = [resultDict objectSafeArrayForKey:@"productMap"];
+            for (NSDictionary *dict in productMap) {
+                UCFHomeIconModel *iconModel = [UCFHomeIconModel homeIconListWithDict:dict];
+                [tempArray addObject:iconModel];
+            }
+            [tempResult setObject:tempArray forKey:@"productMap"];
+//            [tempResult setObject:picADModel forKey:@"picAD"];
+            complete(nil, tempResult);
         }
         else {
             complete(nil, rsttext);
         }
-        [self.requestDict removeObjectForKey:USERINFOONE];
+        [self.requestDict removeObjectForKey:HOMEICON];
     }
     else if (tag.intValue == kSXTagMySimpleInfo) {
         NetworkCompletionHandler complete = [self.requestDict objectForKey:USERINFOTWO];
@@ -305,16 +295,16 @@
         complete(err, nil);
         [self.requestDict removeObjectForKey:HOMELIST];
     }
-    else if (tag.intValue == kSXTagMyReceipt) {
-        NetworkCompletionHandler complete = [self.requestDict objectForKey:USERINFOONE];
+    else if (tag.intValue == kSXTagHomeIconList) {
+        NetworkCompletionHandler complete = [self.requestDict objectForKey:HOMEICON];
         complete(err, nil);
-        [self.requestDict removeObjectForKey:USERINFOONE];
+        [self.requestDict removeObjectForKey:HOMEICON];
     }
-    else if (tag.intValue == kSXTagMySimpleInfo) {
-        NetworkCompletionHandler complete = [self.requestDict objectForKey:USERINFOTWO];
-        complete(err, nil);
-        [self.requestDict removeObjectForKey:USERINFOTWO];
-    }
+//    else if (tag.intValue == kSXTagMySimpleInfo) {
+//        NetworkCompletionHandler complete = [self.requestDict objectForKey:USERINFOTWO];
+//        complete(err, nil);
+//        [self.requestDict removeObjectForKey:USERINFOTWO];
+//    }
     else if (tag.intValue == kSXTagSingMenthod) {
         NetworkCompletionHandler complete = [self.requestDict objectForKey:SIGN];
         complete(err, nil);

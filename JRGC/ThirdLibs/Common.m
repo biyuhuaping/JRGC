@@ -822,33 +822,42 @@
  */
 + (UIViewController *)getCurrentVC
 {
-    UIViewController *result = nil;
+    UIViewController *rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
     
-    UIWindow * window = [[UIApplication sharedApplication] keyWindow];
-    if (window.windowLevel != UIWindowLevelNormal)
-    {
-        NSArray *windows = [[UIApplication sharedApplication] windows];
-        for(UIWindow * tmpWin in windows)
-        {
-            if (tmpWin.windowLevel == UIWindowLevelNormal)
-            {
-                window = tmpWin;
-                break;
-            }
-        }
-    }
+    UIViewController *currentVC = [self getCurrentVCFrom:rootViewController];
     
-    UIView *frontView = [[window subviews] objectAtIndex:0];
-    id nextResponder = [frontView nextResponder];
+    return currentVC;
     
-    if ([nextResponder isKindOfClass:[UIViewController class]])
-        result = nextResponder;
-    else
-        result = window.rootViewController;
-    
-    return result;
 }
 
++ (UIViewController *)getCurrentVCFrom:(UIViewController *)rootVC
+{
+    UIViewController *currentVC;
+    
+    if ([rootVC presentedViewController]) {
+        // 视图是被presented出来的
+        
+        rootVC = [rootVC presentedViewController];
+    }
+    
+    if ([rootVC isKindOfClass:[UITabBarController class]]) {
+        // 根视图为UITabBarController
+        
+        currentVC = [self getCurrentVCFrom:[(UITabBarController *)rootVC selectedViewController]];
+        
+    } else if ([rootVC isKindOfClass:[UINavigationController class]]){
+        // 根视图为UINavigationController
+        
+        currentVC = [self getCurrentVCFrom:[(UINavigationController *)rootVC visibleViewController]];
+        
+    } else {
+        // 根视图为非导航类
+        
+        currentVC = rootVC;
+    }
+    
+    return currentVC;
+}
 
 + (NSString *) getSinatureWithPar:(NSString *) par
 {
@@ -1208,4 +1217,53 @@
     [noteStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:font] range:redRangeTwo];
     return noteStr;
 }
+
++ (NSString *) paramValueOfUrl:(NSString *)url withParam:(NSString *) param{
+    
+    NSError *error;
+    NSString *regTags=[[NSString alloc] initWithFormat:@"(^|&|\\?)+%@=+([^&]*)(&|$)",param];
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:regTags
+                                                                           options:NSRegularExpressionCaseInsensitive
+                                                                             error:&error];
+    
+    // 执行匹配的过程
+    NSArray *matches = [regex matchesInString:url
+                                      options:0
+                                        range:NSMakeRange(0, [url length])];
+    for (NSTextCheckingResult *match in matches) {
+        NSString *tagValue = [url substringWithRange:[match rangeAtIndex:2]];  // 分组2所对应的串
+        return tagValue;
+    }
+    return nil;
+}
+//银行卡号每四位 添加空格
++(NSString *)getNewBankNumWitOldBankNum:(NSString *)bankNum;
+{
+    NSMutableString *mutableStr;
+    if (bankNum.length) {
+        mutableStr = [NSMutableString stringWithString:bankNum];
+//        for (int i = 0 ; i < mutableStr.length; i ++) {
+//            if (i>2&&i<mutableStr.length - 3) {
+//                [mutableStr replaceCharactersInRange:NSMakeRange(i, 1) withString:@"*"];
+//            }
+//        }
+        NSString *text = mutableStr;
+        NSCharacterSet *characterSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789\b"];
+        text = [text stringByReplacingOccurrencesOfString:@" " withString:@""];
+        NSString *newString = @"";
+        while (text.length > 0) {
+            NSString *subString = [text substringToIndex:MIN(text.length, 4)];
+            newString = [newString stringByAppendingString:subString];
+            if (subString.length == 4) {
+                newString = [newString stringByAppendingString:@" "];
+            }
+            text = [text substringFromIndex:MIN(text.length, 4)];
+        }
+        newString = [newString stringByTrimmingCharactersInSet:[characterSet invertedSet]];
+        return newString;
+    }
+    return bankNum;
+}
+
+
 @end

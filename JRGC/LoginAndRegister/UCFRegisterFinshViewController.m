@@ -112,7 +112,7 @@
 
             //restype：A 券 B公分 1:工豆
            
-            NSDictionary *tempDic = @{@"A":@"返现券", @"B":@"返息券",@"C":@"公分",@"1":@"工豆"};
+            NSDictionary *tempDic = @{@"A":@"返现券", @"B":@"返息券",@"C":@"公分",@"1":@"工豆",@"G":@"返金券"};
             NSArray *registResult =[[dic objectForKey:@"data"] objectForKey:@"registResult"];
             NSMutableAttributedString *rsultStr = [[NSMutableAttributedString alloc] init];
             
@@ -151,6 +151,13 @@
 //                    [tempStr appendFormat:@"%@个%@",resvalue,[tempDic objectForKey:restype]];
                     [rsultStr appendAttributedString:[self setAttributedStringValue:resvalue andColor:[UIColor redColor] andFont:[UIFont systemFontOfSize:14]]];
                     [rsultStr appendAttributedString:[self setAttributedStringValue:[NSString stringWithFormat:@"个%@",[tempDic objectForKey:restype]] andColor:UIColorWithRGB(0xA9B1B5) andFont:[UIFont systemFontOfSize:14]]];
+                }
+                else if ([restype isEqualToString:@"G"])
+                {
+                    //                    tempStr = [NSString stringWithFormat:@"%@个",resvalue];
+                    //                    [tempStr appendFormat:@"%@个%@",resvalue,[tempDic objectForKey:restype]];
+                    [rsultStr appendAttributedString:[self setAttributedStringValue:resvalue andColor:[UIColor redColor] andFont:[UIFont systemFontOfSize:14]]];
+                    [rsultStr appendAttributedString:[self setAttributedStringValue:[NSString stringWithFormat:@"克%@",[tempDic objectForKey:restype]] andColor:UIColorWithRGB(0xA9B1B5) andFont:[UIFont systemFontOfSize:14]]];
                 }
 
                 if (i +1 != registResult.count) {

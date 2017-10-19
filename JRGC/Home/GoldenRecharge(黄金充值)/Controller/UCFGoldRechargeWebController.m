@@ -7,7 +7,7 @@
 //
 
 #import "UCFGoldRechargeWebController.h"
-
+#import "AppDelegate.h"
 #define SIGNATURETIME 30.0
 
 @interface UCFGoldRechargeWebController () <UIWebViewDelegate>
@@ -115,7 +115,18 @@
 }
 - (void)goBackToGoldAccount
 {
-    [self.navigationController popToViewController:self.rootVc animated:YES];
+    NSString *className = [NSString stringWithUTF8String:object_getClassName(self.rootVc)];
+    if([className hasSuffix:@"UCFRechargeOrCashViewController"])
+    {
+        AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+        [appDelegate.tabBarController dismissViewControllerAnimated:NO completion:^{
+            NSUInteger selectedIndex = appDelegate.tabBarController.selectedIndex;
+            UINavigationController *nav = [appDelegate.tabBarController.viewControllers objectAtIndex:selectedIndex];
+            [nav popToRootViewControllerAnimated:NO];
+        }];
+    }else{
+        [self.navigationController popToViewController:self.rootVc animated:YES];
+    }
 }
 -(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error{
     

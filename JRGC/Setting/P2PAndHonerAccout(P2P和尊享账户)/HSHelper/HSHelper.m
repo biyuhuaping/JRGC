@@ -74,6 +74,11 @@
 
 - (void)pushOpenHSType:(SelectAccoutType)type Step:(NSInteger)step nav:(UINavigationController *)nav;
 {
+    [self pushOpenHSType:type Step:step nav:nav isPresentView:NO];
+}
+//isPrensentView 视图是否是模态出来的 默认是NO
+- (void)pushOpenHSType:(SelectAccoutType)type Step:(NSInteger)step nav:(UINavigationController *)nav isPresentView:(BOOL)isPresent
+{
     _accoutType = type;
     tmpNav = nav;
     tmpStep = step;
@@ -81,17 +86,19 @@
         if (step == 1) {
             step = 2;
         }
-            UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:step];
-            vc.accoutType = SelectAccoutTypeHoner;
-            [nav pushViewController:vc animated:YES];
+        UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:step];
+        vc.accoutType = SelectAccoutTypeHoner;
+        vc.isPresentViewController = isPresent;
+        [nav pushViewController:vc animated:YES];
     } else {
         if (step == 1 ) {
             step = 2;
         }
-            UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:step];
-            vc.accoutType = SelectAccoutTypeP2P;
-            [nav pushViewController:vc animated:YES];
-        }
+        UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:step];
+        vc.accoutType = SelectAccoutTypeP2P;
+        vc.isPresentViewController = isPresent;
+        [nav pushViewController:vc animated:YES];
+    }
 }
 - (void)endPost:(id)result tag:(NSNumber *)tag
 {

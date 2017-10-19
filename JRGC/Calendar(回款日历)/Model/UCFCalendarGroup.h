@@ -19,16 +19,13 @@
 @property (strong, nonatomic) NSNumber *repayPerNo;
 @property (copy, nonatomic) NSString *status;
 @property (copy, nonatomic) NSString *totalMoney;
-
+@property (assign, nonatomic) BOOL isOpen;
+@property (assign, nonatomic) BOOL isOpened;
 /**
  *  数组中装的都是Funds模型
  */
 @property (nonatomic, strong) NSArray *datalist;
 
-/**
- *  标识这组是否需要展开,  YES : 展开 ,  NO : 关闭
- */
-@property (nonatomic, assign, getter = isOpened) BOOL opened;
 
 + (instancetype)groupWithDict:(NSDictionary *)dict;
 - (instancetype)initWithDict:(NSDictionary *)dict;

@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" id="iN0-l3-epB" customClass="UCFRechargeAndCashView">
+            <rect key="frame" x="0.0" y="0.0" width="290" height="110"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="card_bg_red" translatesAutoresizingMaskIntoConstraints="NO" id="rYl-6l-bSd">
+                    <rect key="frame" x="0.0" y="0.0" width="290" height="110"/>
+                </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CfE-O2-b6f">
+                    <rect key="frame" x="0.0" y="0.0" width="290" height="30"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="充值至微金账户" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j9S-YW-OVk">
+                            <rect key="frame" x="20" y="7" width="93" height="16"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¥0.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qbe-gF-Cfp">
+                            <rect key="frame" x="226" y="6" width="44" height="18"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="Qbe-gF-Cfp" firstAttribute="centerY" secondItem="CfE-O2-b6f" secondAttribute="centerY" id="9rA-LG-jcr"/>
+                        <constraint firstItem="j9S-YW-OVk" firstAttribute="centerY" secondItem="CfE-O2-b6f" secondAttribute="centerY" id="Dir-ij-Ajm"/>
+                        <constraint firstAttribute="trailing" secondItem="Qbe-gF-Cfp" secondAttribute="trailing" constant="20" id="GMC-X9-KkW"/>
+                        <constraint firstItem="j9S-YW-OVk" firstAttribute="leading" secondItem="CfE-O2-b6f" secondAttribute="leading" constant="20" id="Gx1-Zh-Ttz"/>
+                        <constraint firstAttribute="height" constant="30" id="VYW-zF-ADR"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NX4-Wf-0oh">
+                    <rect key="frame" x="0.0" y="30" width="290" height="80"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GoC-oK-bvT">
+                            <rect key="frame" x="20" y="23" width="33" height="33"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="card_logo_bg" translatesAutoresizingMaskIntoConstraints="NO" id="e2n-eW-CF6">
+                                    <rect key="frame" x="0.0" y="0.0" width="33" height="33"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="33" id="0RL-kp-wPJ"/>
+                                        <constraint firstAttribute="width" constant="33" id="Bik-gz-kYi"/>
+                                    </constraints>
+                                </imageView>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="card_logo_zx" translatesAutoresizingMaskIntoConstraints="NO" id="HJY-mU-LuO">
+                                    <rect key="frame" x="4" y="4" width="25" height="25"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="25" id="AAC-8t-4kh"/>
+                                        <constraint firstAttribute="width" constant="25" id="xZ9-k2-joO"/>
+                                    </constraints>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="33" id="52e-XL-h6A"/>
+                                <constraint firstItem="e2n-eW-CF6" firstAttribute="centerY" secondItem="GoC-oK-bvT" secondAttribute="centerY" id="AV5-Gk-0pM"/>
+                                <constraint firstItem="e2n-eW-CF6" firstAttribute="centerX" secondItem="GoC-oK-bvT" secondAttribute="centerX" id="Lba-8T-5J4"/>
+                                <constraint firstAttribute="height" constant="33" id="ThE-uu-7mZ"/>
+                                <constraint firstItem="HJY-mU-LuO" firstAttribute="centerY" secondItem="GoC-oK-bvT" secondAttribute="centerY" id="dvn-93-HNl"/>
+                                <constraint firstItem="HJY-mU-LuO" firstAttribute="centerX" secondItem="GoC-oK-bvT" secondAttribute="centerX" id="gEk-VG-dNw"/>
+                            </constraints>
+                        </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="微金存款账户" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xKI-p5-uRs">
+                            <rect key="frame" x="63" y="27" width="86" height="17"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" white="1" alpha="0.69999999999999996" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0000 0000 0000 0000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XVx-wN-LNF">
+                            <rect key="frame" x="63" y="49" width="131.5" height="14.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <color key="textColor" white="1" alpha="0.69999999999999996" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B6b-Vh-4o8">
+                            <rect key="frame" x="235" y="40.5" width="0.0" height="0.0"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="GoC-oK-bvT" firstAttribute="centerY" secondItem="NX4-Wf-0oh" secondAttribute="centerY" id="7f0-If-yaV"/>
+                        <constraint firstItem="xKI-p5-uRs" firstAttribute="centerY" secondItem="GoC-oK-bvT" secondAttribute="centerY" constant="-4" id="98A-Vc-V6W"/>
+                        <constraint firstItem="XVx-wN-LNF" firstAttribute="leading" secondItem="GoC-oK-bvT" secondAttribute="trailing" constant="10" id="D3J-KM-lFy"/>
+                        <constraint firstItem="XVx-wN-LNF" firstAttribute="top" secondItem="xKI-p5-uRs" secondAttribute="bottom" constant="5" id="HvM-iW-EQ3"/>
+                        <constraint firstItem="B6b-Vh-4o8" firstAttribute="centerY" secondItem="NX4-Wf-0oh" secondAttribute="centerY" id="J8I-qt-irS"/>
+                        <constraint firstItem="xKI-p5-uRs" firstAttribute="leading" secondItem="GoC-oK-bvT" secondAttribute="trailing" constant="10" id="LE1-Zk-lrd"/>
+                        <constraint firstItem="GoC-oK-bvT" firstAttribute="leading" secondItem="NX4-Wf-0oh" secondAttribute="leading" constant="20" id="rqn-z1-5ng"/>
+                        <constraint firstAttribute="trailing" secondItem="B6b-Vh-4o8" secondAttribute="trailing" constant="55" id="uYQ-jr-QFs"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kC2-f7-Tv8">
+                    <rect key="frame" x="0.0" y="0.0" width="290" height="110"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <action selector="clickRechargeOrCashBtn:" destination="iN0-l3-epB" eventType="touchUpInside" id="ocH-do-KrZ"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="rYl-6l-bSd" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="6q0-QX-VpL"/>
+                <constraint firstAttribute="trailing" secondItem="CfE-O2-b6f" secondAttribute="trailing" id="At7-QB-tXu"/>
+                <constraint firstAttribute="trailing" secondItem="NX4-Wf-0oh" secondAttribute="trailing" id="DNC-lr-bpd"/>
+                <constraint firstAttribute="trailing" secondItem="kC2-f7-Tv8" secondAttribute="trailing" id="GHy-Is-0iS"/>
+                <constraint firstItem="NX4-Wf-0oh" firstAttribute="top" secondItem="CfE-O2-b6f" secondAttribute="bottom" id="L47-s2-sSC"/>
+                <constraint firstItem="kC2-f7-Tv8" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Nws-BH-Osq"/>
+                <constraint firstItem="rYl-6l-bSd" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="V92-3T-Iym"/>
+                <constraint firstAttribute="bottom" secondItem="kC2-f7-Tv8" secondAttribute="bottom" id="VE4-j7-XMH"/>
+                <constraint firstAttribute="bottom" secondItem="rYl-6l-bSd" secondAttribute="bottom" id="Wze-kY-Yz9"/>
+                <constraint firstItem="NX4-Wf-0oh" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="bVE-Zk-llf"/>
+                <constraint firstAttribute="trailing" secondItem="rYl-6l-bSd" secondAttribute="trailing" id="cux-b2-cco"/>
+                <constraint firstItem="kC2-f7-Tv8" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="jRr-AT-ZV8"/>
+                <constraint firstAttribute="bottom" secondItem="NX4-Wf-0oh" secondAttribute="bottom" id="n6e-d4-zzl"/>
+                <constraint firstItem="CfE-O2-b6f" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="t0X-tc-4Yj"/>
+                <constraint firstItem="CfE-O2-b6f" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="wIi-S1-RV9"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="accoutBalanceLabel" destination="Qbe-gF-Cfp" id="PQH-0g-W7G"/>
+                <outlet property="cardBgImageView" destination="rYl-6l-bSd" id="Zde-Eo-vzs"/>
+                <outlet property="cardDetialLabel" destination="xKI-p5-uRs" id="l1f-a4-0kq"/>
+                <outlet property="cardLogoBgHeight" destination="0RL-kp-wPJ" id="0Dn-Iu-UHB"/>
+                <outlet property="cardLogoBgWidth" destination="Bik-gz-kYi" id="W9p-RP-hXU"/>
+                <outlet property="cardLogoImage" destination="HJY-mU-LuO" id="Mcz-Pn-Csx"/>
+                <outlet property="cardLogoImageHeight" destination="AAC-8t-4kh" id="PKa-jB-LA6"/>
+                <outlet property="cardLogoImageWidth" destination="xZ9-k2-joO" id="0G4-O8-WSu"/>
+                <outlet property="cardNumberLabel" destination="XVx-wN-LNF" id="ddJ-rt-0fv"/>
+                <outlet property="cardStateLabel" destination="B6b-Vh-4o8" id="ohf-xP-8mI"/>
+                <outlet property="cardStateTriling" destination="uYQ-jr-QFs" id="HtB-IO-Zk7"/>
+                <outlet property="cardtitleLabel" destination="j9S-YW-OVk" id="xkz-64-rSl"/>
+                <outlet property="downCardLogoViewLeft" destination="rqn-z1-5ng" id="eeR-g1-wir"/>
+                <outlet property="upViewHight" destination="VYW-zF-ADR" id="Zrl-0p-6L2"/>
+                <outlet property="upViewLabelLeft" destination="Gx1-Zh-Ttz" id="j3e-51-kZ8"/>
+            </connections>
+            <point key="canvasLocation" x="-398" y="-305"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="card_bg_red" width="290" height="110"/>
+        <image name="card_logo_bg" width="33" height="33"/>
+        <image name="card_logo_zx" width="25" height="25"/>
+    </resources>
+</document>

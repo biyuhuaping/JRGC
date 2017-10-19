@@ -13,8 +13,10 @@
 
 @interface UCFHomeInvestCell ()
 @property (weak, nonatomic) IBOutlet NZLabel *anurateLabel;
-@property (weak, nonatomic) IBOutlet NZLabel *repayPeroid;
 @property (weak, nonatomic) IBOutlet UIButton *reserveButton;
+@property (weak, nonatomic) IBOutlet UILabel *minLabel;
+@property (weak, nonatomic) IBOutlet UILabel *limitLabel;
+@property (weak, nonatomic) IBOutlet UILabel *addedTransLabel;
 
 @end
 
@@ -30,7 +32,14 @@
 {
     _presenter = presenter;
     self.anurateLabel.text = presenter.annualRate;
-    self.repayPeroid.text = presenter.repayPeriodtext;
+    if (presenter.holdTime.length > 0) {
+        self.limitLabel.text = [NSString stringWithFormat:@"期限%@~%@", presenter.holdTime, presenter.repayPeriodtext];
+    }
+    else {
+        self.limitLabel.text = [NSString stringWithFormat:@"期限%@", presenter.repayPeriodtext];
+    }
+    self.addedTransLabel.text = [NSString stringWithFormat:@"%@", presenter.completeLoan];
+    self.minLabel.text = [NSString stringWithFormat:@"%@", presenter.minInvest];
 }
 
 - (IBAction)reserveForSomeone:(UIButton *)sender {
@@ -50,14 +59,20 @@
 {
     _microModel = microModel;
     self.anurateLabel.text = microModel.annualRate ? [NSString stringWithFormat:@"%@%%",microModel.annualRate] : @"0.0%";
-    self.repayPeroid.text = microModel.repayPeriodtext;
+    if (microModel.holdTime.length > 0) {
+        self.limitLabel.text = [NSString stringWithFormat:@"期限%@~%@", microModel.holdTime, microModel.repayPeriodtext];
+    }
+    else {
+        self.limitLabel.text = [NSString stringWithFormat:@"期限%@", microModel.repayPeriodtext];
+    }
+    self.addedTransLabel.text = [NSString stringWithFormat:@"%@亿元", microModel.totleBookAmt];
+    self.minLabel.text = [NSString stringWithFormat:@"%@元起", microModel.minInvest];
 }
 
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    [self.anurateLabel setFont:[UIFont systemFontOfSize:12] string:@"%"];
-    [self.repayPeroid setFont:[UIFont systemFontOfSize:12] string:@"天"];
+    [self.anurateLabel setFont:[UIFont boldSystemFontOfSize:15] string:@"%"];
 }
 
 @end

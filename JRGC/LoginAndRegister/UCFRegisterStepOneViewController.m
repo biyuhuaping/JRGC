@@ -53,6 +53,12 @@
         [appDelegate.tabBarController setSelectedIndex:4];
         [self dismissViewControllerAnimated:YES completion:nil];
     }
+    else if ([_sourceVC isEqualToString:@"fromHomeView"]) {
+        //个人中心跳到登录页
+        AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+        [appDelegate.tabBarController setSelectedIndex:0];
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
     else if ([_sourceVC isEqualToString:@"webView"])
     {
         [self closeViewController];
@@ -189,7 +195,7 @@
 - (void)errorPost:(NSError*)err tag:(NSNumber*)tag
 {
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-    [AuxiliaryFunc showToastMessage:@"当前没有网络，请检查网络！" withView:self.view];
+//    [AuxiliaryFunc showToastMessage:@"当前没有网络，请检查网络！" withView:self.view];
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex

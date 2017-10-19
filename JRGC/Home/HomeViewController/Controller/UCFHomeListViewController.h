@@ -30,6 +30,8 @@ typedef enum : NSUInteger {
 - (void)homeList:(UCFHomeListViewController *)homeList tableView:(UITableView *)tableView didClickedBuyGoldWithModel:(UCFHomeListCellModel *)model;
 
 - (void)homeList:(UCFHomeListViewController *)homeList didClickReservedWithModel:(UCFHomeListCellModel *)model;
+
+//- (void)homeList:(UCFHomeListViewController *)homeList didClickNewUserWithModel:(UCFHomeListCellModel *)model;
 @end
 
 @interface UCFHomeListViewController : NSObject

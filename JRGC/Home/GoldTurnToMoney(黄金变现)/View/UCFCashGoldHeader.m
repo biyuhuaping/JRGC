@@ -49,9 +49,11 @@
 
 - (void)beginGetGoldPrice
 {
-    if ([[Common getCurrentVC] isKindOfClass:[self.hostVc class]]) {
-        if (self.refreshGoldPricebtn.userInteractionEnabled) {
-            [self refreshRealGoldPrice:nil];
+    if (self.hostVc) {
+        if ([[Common getCurrentVC] isKindOfClass:[self.hostVc class]]) {
+            if (self.refreshGoldPricebtn.userInteractionEnabled) {
+                [self refreshRealGoldPrice:nil];
+            }
         }
     }
 }
@@ -70,5 +72,9 @@
 {
     self.goldCurrentPriceLabel.text = [NSString stringWithFormat:@"%.2f", [ToolSingleTon sharedManager].readTimePrice];
 }
-
+- (void)dealloc
+{
+    self.hostVc = nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 @end

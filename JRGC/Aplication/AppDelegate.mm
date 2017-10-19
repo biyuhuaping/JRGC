@@ -38,6 +38,7 @@
 #import "MD5Util.h"
 #import "JPUSHService.h"//极光推送
 #import "MongoliaLayerCenter.h"
+#import "UCFInvestViewController.h"
 // iOS10注册APNs所需头文件
 #ifdef NSFoundationVersionNumber_iOS_9_x_Max
 #import <UserNotifications/UserNotifications.h>
@@ -156,10 +157,6 @@
         } else {
             _isShowAdversement = NO;
             self.advertisementView = nil;
-
-//            if (!self.lockVc) {
-//                [[MongoliaLayerCenter sharedManager] showLogic];
-//            }
         }
         //显示广告
         if (_isShowAdversement) {
@@ -231,7 +228,8 @@
 
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isShowHornor"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    
+    [self getLoginImage];
+
     return YES;
 }
 
@@ -757,9 +755,9 @@
         if ([dic[@"ret"] boolValue]) {
             NSString *unReadMsgCount = [dic[@"data"] objectSafeForKey:@"unReadMsgCount"];
             if ([unReadMsgCount intValue] > 0) {
-                [self.tabBarController.tabBar showBadgeOnItemIndex:0];
+                [self.tabBarController.tabBar showBadgeOnItemIndex:4];
             } else {
-                [self.tabBarController.tabBar hideBadgeOnItemIndex:0];
+                [self.tabBarController.tabBar hideBadgeOnItemIndex:4];
             }
         }else{
             [self.tabBarController.tabBar hideBadgeOnItemIndex:0];
@@ -816,11 +814,58 @@
         exit(0);
     }];
 }
+
 #pragma mark - 分享
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url options:(nonnull NSDictionary<NSString *, id> *) options {
+    NSString *urlStr = url.absoluteString;
+    if ([urlStr rangeOfString:@"jrgc://jrgc.com"].location != NSNotFound) {
+        NSString *selectedType = @"";
+        if ([urlStr rangeOfString:@"view=p2p"].location != NSNotFound) {
+            selectedType = @"P2P";
+            [self msgSkipToView:selectedType];
+        } else if ([urlStr rangeOfString:@"view=zx"].location != NSNotFound) {
+            selectedType = @"ZX";
+            [self msgSkipToView:selectedType];
+        } else if ([urlStr rangeOfString:@"view=gold"].location != NSNotFound) {
+            selectedType = @"Gold";
+            [self msgSkipToView:selectedType];
+        } else if ([urlStr rangeOfString:@"view=coupon"].location != NSNotFound) {
+            if ([UserInfoSingle sharedManager].userId) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"msgSkipToNativeAPP" object:@{@"type":@"coupon"}];
+            }
+        } else if ([urlStr rangeOfString:@"view=web&url="].location != NSNotFound) {
+            if ([UserInfoSingle sharedManager].userId) {
+                NSString *url1 = [Common paramValueOfUrl:urlStr withParam:@"url"];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"msgSkipToNativeAPP" object:
+                 @{@"type":@"webUrl",@"value":url1}];
+            }
+        }else if ([urlStr rangeOfString:@"view=reserve&id="].location != NSNotFound) {
+            if ([UserInfoSingle sharedManager].userId) {
+                NSString *bidID = [Common paramValueOfUrl:urlStr withParam:@"id"];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"msgSkipToNativeAPP" object: @{@"type":@"bidID",@"value":bidID}];
+            }
+        }
+    }
     return [UcfWalletSDK handleApplication:application openUrl:url options:options];
 }
+- (void)msgSkipToView:(NSString *)targetStr
+{
+    if ([targetStr isEqualToString:@"P2P"] || [targetStr isEqualToString:@"ZX"] || [targetStr isEqualToString:@"Gold"] ) {
+        if ([self.tabBarController.childViewControllers count] >1) {
+            UCFInvestViewController *invest = (UCFInvestViewController *)[[self.tabBarController.childViewControllers objectAtIndex:1].childViewControllers firstObject];
+            invest.selectedType = targetStr;
+            if ([invest isViewLoaded]) {
+                [invest changeView];
+            }
+            UINavigationController *nav = self.tabBarController.selectedViewController;
+            [nav popToRootViewControllerAnimated:NO];
+            [self.tabBarController setSelectedIndex:1];
+        }
+    } else {
+        
+    }
 
+}
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
 {
     if ([[UMSocialManager defaultManager] handleOpenURL:url]) {
@@ -830,13 +875,13 @@
 //     || [UcfWalletSDK handleApplication:application openUrl:url]
 }
 
-//- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
-//{
-//    if ([Growing handleUrl:url]) {
-//        return [Growing handleUrl:url];
-//    }else
-//        return [[UMSocialManager defaultManager] handleOpenURL:url];
-//}
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    if ([Growing handleUrl:url]) {
+        return [Growing handleUrl:url];
+    }else
+        return [[UMSocialManager defaultManager] handleOpenURL:url];
+}
 
 #pragma mark- --------------------极光推送---------------------------
 
@@ -911,7 +956,38 @@
 
 
 #pragma mark -
-
+- (void)getLoginImage
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSString *URL = [NSString stringWithFormat:@"https://fore.9888.cn/cms/api/appbanner.php?key=0ca175b9c0f726a831d895e&id=52"];
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+        [request setURL:[NSURL URLWithString:URL]];
+        [request setHTTPMethod:@"GET"];
+        NSHTTPURLResponse *urlResponse = nil;
+        NSError *error = nil;
+        NSData *recervedData = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&error];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (!recervedData) {
+                return ;
+            }
+            NSString *imageStr=[[NSMutableString alloc] initWithData:recervedData encoding:NSUTF8StringEncoding];
+            NSArray *arr = [imageStr objectFromJSONString];
+            if (ScreenHeight < 961) {
+                
+            }
+            NSString *LoginURL = ScreenHeight > 481 ? [arr objectAtIndex:0][@"thumb"] : [arr objectAtIndex:1][@"thumb"];
+            [[NSUserDefaults standardUserDefaults] setValue:LoginURL forKey:@"LoginImageUrl"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            
+            SDImageCache *cache = [[SDImageCache alloc] init];
+            NSURL * url = [NSURL URLWithString:LoginURL];
+            BOOL hasImage = [cache diskImageExistsWithKey:LoginURL];
+            if (!hasImage) {
+                [Common storeImage:url];
+            }
+        });
+    });
+}
 - (void)getAdversementImageStyle:(int)style
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -940,8 +1016,6 @@
             if (!hasImage) {
                 [Common storeImage:url];
             }
-            
-//            [_advertisementView sd_setImageWithURL:[NSURL URLWithString:imageStr] placeholderImage:nil];
         });
     });
 }

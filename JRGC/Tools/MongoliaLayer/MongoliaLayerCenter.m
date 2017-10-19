@@ -46,25 +46,17 @@
 {
     return (viewController.isViewLoaded && viewController.view.window);
 }
+
 - (void)showLogic
 {
-
+ /*
     AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     UINavigationController *nav = app.tabBarController.selectedViewController;
     if (app.advertisementView || [self isCurrentViewControllerVisible:app.lockVc] || ![nav.visibleViewController isKindOfClass:[UCFHomeViewController class]]) {
         return;
     }
     
-//    FestivalActivitiesWebView *festivalView = [[FestivalActivitiesWebView alloc] initWithNibName:@"FestivalActivitiesWebView" bundle:nil];
-//    festivalView.url = @"https://m.9888.cn/static/wap/topic-invite/index.html";
-//    festivalView.isHideNavigationBar = YES;
-//    festivalView.definesPresentationContext = YES;
-//    festivalView.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-//    if (kIS_IOS8) {
-//        festivalView.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-//    }
-//    [nav presentViewController:festivalView animated:NO completion:nil];
-    
+
     //不登录就需要查看的
     NSDate *lastFirstLoginTime = [[NSUserDefaults standardUserDefaults] objectForKey:FirstAlertViewShowTime];
     BOOL isBelongToToday = [NSDate isBelongToTodayWithDate:lastFirstLoginTime]; //是不是同一天
@@ -84,14 +76,7 @@
     if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
         return;
     }
-    //是否弹用户引导蒙层 *****3.0.30需求去掉引导遮罩
-//    if (![[NSUserDefaults standardUserDefaults] boolForKey:CHECK_ISSHOW_MASKVIEW]) {
-//        //发送弹蒙层通知
-//        MaskView *view = [MaskView makeViewWithMask:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
-//        view.delegate = self;
-//        [view show];
-//        return;
-//    }
+
     //是否弹平台升级调整公告
     if (![[self.mongoliaLayerDic valueForKey:@"authorization"] boolValue]) {
         NSString *authorizationDate = [self.mongoliaLayerDic valueForKey:@"authorizationDate"];
@@ -107,6 +92,8 @@
         _honerAlert = YES;
         [alertView show];
     }
+    
+   */
 }
 - (void)viewWillRemove:(MaskView *)view
 {

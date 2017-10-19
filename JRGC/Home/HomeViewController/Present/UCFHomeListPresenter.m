@@ -11,29 +11,21 @@
 #import "UCFHomeListGroupPresenter.h"
 #import "UCFHomeListGroup.h"
 #import "UCFHomeListCellPresenter.h"
+#import "UCFHomeIconModel.h"
+#import "UCFHomeIconPresenter.h"
+#import "HSHelper.h"
 
 @interface UCFHomeListPresenter ()
 @property (strong, nonatomic) UCFHomeAPIManager *apiManager;
 @property (copy, nonatomic) NSString *userId;
 @property (strong, nonatomic) NSMutableArray *homeListCells;
+@property (strong, nonatomic) NSMutableArray *homeIconList;
 @property (assign, nonatomic) BOOL authorization;
 
-@property (strong, nonatomic) UCFHomeListGroupPresenter *groupTransferPresenter;
+//@property (strong, nonatomic) UCFHomeListGroupPresenter *groupTransferPresenter;
 @end
 
 @implementation UCFHomeListPresenter
-
-- (UCFHomeListGroupPresenter *)groupTransferPresenter
-{
-    if (!_groupTransferPresenter) {
-        UCFHomeListGroup *group4 = [[UCFHomeListGroup alloc] init];
-        group4.title = @"资金周转";
-        group4.showMore = NO;
-        group4.headerImage = @"mine_icon_transfer";
-        _groupTransferPresenter = [UCFHomeListGroupPresenter presenterWithGroup:group4];
-    }
-    return _groupTransferPresenter;
-}
 
 - (NSString *)userId
 {
@@ -53,7 +45,8 @@
     if (self = [super init]) {
         self.apiManager = [UCFHomeAPIManager new];
         self.homeListCells = [[NSMutableArray alloc] init];
-        [self initData];
+        self.homeIconList = [[NSMutableArray alloc] init];
+//        [self initData];
     }
     return self;
 }
@@ -64,35 +57,42 @@
     return self.homeListCells;
 }
 
-#pragma mark - 初始化数据
-- (void)initData
-{
-    NSMutableArray *temp4 = [[NSMutableArray alloc] init];
-    NSArray *imageArr = @[@"home_bg_2", @"home_bg_4"];
-    NSArray *titleArr = @[@"转让专区", @""];
-    NSArray *typeArr = @[@"自由转让，灵活变现", @""];
-    for (int i=0; i<2; i++) {
-        UCFHomeListCellModel *model = [[UCFHomeListCellModel alloc] init];
-        if (i==0) {
-            model.moedelType = UCFHomeListCellModelTypeOneImageTransfer;
-        }
-        else if (i==1) {
-            model.moedelType = UCFHomeListCellModelTypeOneImageBatchCycle;
-        }
-        model.prdName = [titleArr objectAtIndex:i];
-        model.type = [typeArr objectAtIndex:i];
-        model.backImage = [imageArr objectAtIndex:i];
-        UCFHomeListCellPresenter *cellPresenter = [UCFHomeListCellPresenter presenterWithItem:model];
-        [temp4 addObject:cellPresenter];
-    }
-    self.groupTransferPresenter.group.prdlist = temp4;
-    [self.homeListCells addObject:self.groupTransferPresenter];
+- (NSArray *)allHomeIcons {
+    return self.homeIconList;
+}
 
+#pragma mark - 请求首页列表数据
+
+- (void)fetchHomeIconListDataWithCompletionHandler:(NetworkCompletionHandler)completionHander
+{
+    __weak typeof(self) weakSelf = self;
+    [self.apiManager fetchHomeIconListWithUserId:self.userId completionHandler:^(NSError *error, id result) {
+        if ([result isKindOfClass:[NSDictionary class]]) {
+            [weakSelf.homeIconList removeAllObjects];
+            weakSelf.canReservedClicked = YES;
+            NSDictionary *resultDict = result;
+            NSArray *iconList = [resultDict objectForKey:@"productMap"];
+            NSMutableArray *temp = [[NSMutableArray alloc] init];
+            for (UCFHomeIconModel *homeIconModel in iconList) {
+                UCFHomeIconPresenter *iconPresenter = [UCFHomeIconPresenter presenterWithItem:homeIconModel];
+                [temp addObject:iconPresenter];
+            }
+            weakSelf.homeIconList = temp;
+        }
+        else if ([result isKindOfClass:[NSString class]]) {
+            
+        }
+        if ([weakSelf.iconDelegate respondsToSelector:@selector(homeIconListViewPresenter:didRefreshDataWithResult:error:)]) {
+            [self.iconDelegate homeIconListViewPresenter:weakSelf didRefreshDataWithResult:result error:error];
+        }
+        
+        !completionHander ?: completionHander(error, result);
+    }];
 }
 
 - (void)fetchHomeListDataWithCompletionHandler:(NetworkCompletionHandler)completionHander {
     __weak typeof(self) weakSelf = self;
-    self.canReservedClicked = NO;
+    self.canReservedClicked = YES;
     [self.apiManager fetchHomeListWithUserId:self.userId completionHandler:^(NSError *error, id result) {
         if ([result isKindOfClass:[NSDictionary class]]) {
             [weakSelf resetData];
@@ -106,30 +106,6 @@
             }
             [temp addObjectsFromArray:weakSelf.homeListCells];
             weakSelf.homeListCells = temp;
-            
-            UCFHomeListCellModel *listInfo = [resultDict objectForKey:@"listInfo"];
-            
-            UCFHomeListCellPresenter *temp40 = [self.groupTransferPresenter.group.prdlist firstObject];
-            temp40.item.transferNum = listInfo.transferNum;
-            
-            UCFHomeListCellPresenter *temp41 = [self.groupTransferPresenter.group.prdlist objectAtIndex:1];
-            temp41.item.zxTransferNum = listInfo.zxTransferNum;
-            [UserInfoSingle sharedManager].p2pAuthorization = listInfo.p2pAuthorization;
-            [UserInfoSingle sharedManager].zxAuthorization = listInfo.zxAuthorization;
-            [UserInfoSingle sharedManager].openStatus = [listInfo.openStatus integerValue];
-            [UserInfoSingle sharedManager].enjoyOpenStatus = [listInfo.zxOpenStatus integerValue];
-//            UCFHomeListGroup *investGroup = [resultDict objectForKey:@"appointInvest"];
-//            if (investGroup) {
-//                NSArray *investModels = investGroup.prdlist;
-//                UCFHomeListCellModel *investModel = [investModels firstObject];
-//                investModel.moedelType = UCFHomeListCellModelTypeReserved;
-//                UCFHomeListCellPresenter *cellPresenter = [UCFHomeListCellPresenter presenterWithItem:investModel];
-//                weakSelf.groupPresenter5.group.type = investGroup.type;
-//                weakSelf.groupPresenter5.group.title = investGroup.title;
-//                weakSelf.groupPresenter5.group.desc = investGroup.desc;
-//                weakSelf.groupPresenter5.group.iconUrl = investGroup.iconUrl;
-//                weakSelf.groupPresenter5.group.prdlist = [NSArray arrayWithObjects:cellPresenter, nil];
-//            }
         }
         else if ([result isKindOfClass:[NSString class]]) {
             
@@ -144,11 +120,7 @@
 
 - (UCFHomeListGroupPresenter *)homeListGroupPresenterWithGroup:(UCFHomeListGroup *)group
 {
-//    UCFHomeListGroup *tempGroup = [[UCFHomeListGroup alloc] init];
-//    tempGroup.title = group.title;
-//    tempGroup.iconUrl = group.iconUrl;
-//    tempGroup.type = group.type;
-    if ([group.type intValue] == 13 || [group.type intValue] == 16) {
+    if ([group.type intValue] == 13 || [group.type intValue] == 16 || [group.type intValue] == 17) {
         group.showMore = NO;
     }
     else {
@@ -161,6 +133,9 @@
         }
         else if ([model.type isEqualToString:@"0"]) {
             model.moedelType = UCFHomeListCellModelTypeReserved;
+        }
+        else if ([group.type isEqualToString:@"13"]) {
+            model.moedelType = UCFHomeListCellModelTypeNewUser;
         }
         else {
             model.moedelType = UCFHomeListCellModelTypeDefault;
@@ -175,7 +150,54 @@
 #pragma mark - 重制数据
 - (void)resetData {
     [self.homeListCells removeAllObjects];
-    self.groupTransferPresenter = nil;
-    [self initData];
+}
+
+#pragma mark - 无奈的代码
+- (BOOL)checkIDAAndBankBlindState:(SelectAccoutType)type {
+    
+    //    [UserInfoSingle sharedManager].openStatus = [listInfo.openStatus integerValue];
+    //    [UserInfoSingle sharedManager].enjoyOpenStatus
+    NSUInteger openStatus = (type == SelectAccoutTypeP2P ? [UserInfoSingle sharedManager].openStatus  : [UserInfoSingle sharedManager].enjoyOpenStatus );
+    __weak typeof(self) weakSelf = self;
+    if (openStatus == 1 || openStatus == 2) {
+        NSString *message = (type == SelectAccoutTypeP2P ? P2PTIP1 : ZXTIP1);
+        NSInteger step = (type == SelectAccoutTypeP2P ? [UserInfoSingle sharedManager].openStatus  : [UserInfoSingle sharedManager].enjoyOpenStatus);
+        BlockUIAlertView *alert = [[BlockUIAlertView alloc] initWithTitle:@"提示" message:message cancelButtonTitle:@"取消" clickButton:^(NSInteger index){
+            if (index == 1) {
+                HSHelper *helper = [HSHelper new];
+                UIViewController *VC = (UIViewController *)weakSelf.view;
+                [helper pushOpenHSType:type Step:step nav:VC.parentViewController.navigationController];
+            }
+        } otherButtonTitles:@"确认"];
+        [alert show];
+        return NO;
+    }
+    return YES;
+}
+
+- (void)fetchProDetailDataWithParameter:(NSDictionary *)parameter completionHandler:(NetworkCompletionHandler)completionHander
+{
+    UCFBaseViewController *baseVC = (UCFBaseViewController *)self.iconDelegate;
+    [MBProgressHUD showHUDAddedTo:baseVC.parentViewController.view animated:YES];
+    __weak typeof(self) weakSelf = self;
+    NSString *type = [parameter objectForKey:@"type"];
+    [self.apiManager fetchProDetailInfoWithParameter:parameter completionHandler:^(NSError *error, id result) {
+        if (type.intValue == 4) {
+            if ([weakSelf.iconDelegate respondsToSelector:@selector(homeIconListPresenter:didReturnPrdClaimsDealBidWithResult:error:)]) {
+                [weakSelf.iconDelegate homeIconListPresenter:weakSelf didReturnPrdClaimsDealBidWithResult:result error:error];
+            }
+        }
+        !completionHander ?: completionHander(error, result);
+    }];
+}
+
+- (void)fetchCollectionDetailDataWithParameter:(NSDictionary *)parameter completionHandler:(NetworkCompletionHandler)completionHander
+{
+    UCFBaseViewController *baseVC = (UCFBaseViewController *)self.iconDelegate;
+    [MBProgressHUD showHUDAddedTo:baseVC.parentViewController.view animated:YES];
+    //    __weak typeof(self) weakSelf = self;
+    [self.apiManager fetchCollectionDetailInfoWithParameter:parameter completionHandler:^(NSError *error, id result) {
+        !completionHander ?: completionHander(error, result);
+    }];
 }
 @end

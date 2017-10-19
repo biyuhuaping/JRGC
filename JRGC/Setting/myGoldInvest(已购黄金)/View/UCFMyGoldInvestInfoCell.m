@@ -72,8 +72,10 @@
     self.expiredDateLabel.text = [NSString stringWithFormat:@"%@",[self checkStr:[dataDict objectSafeForKey:@"expiredDate"]]];
     
     if ([orderStatusName isEqualToString:@"已到期"]) {
+        self.expiredDateStrLabel.text  = @"到期日";
         self.orderStatusNameLabel.textColor  = UIColorWithRGB(0x999999);
     }else{
+         self.expiredDateStrLabel.text  = @"预计到期日";
         self.orderStatusNameLabel.textColor  = UIColorWithRGB(0x4aa1f9);
     }
 }

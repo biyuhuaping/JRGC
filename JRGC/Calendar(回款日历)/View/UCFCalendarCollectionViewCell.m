@@ -284,7 +284,6 @@
     }
     else
         _calendar.today = nil;
-    
 }
 
 - (void)setDays:(NSMutableArray *)days

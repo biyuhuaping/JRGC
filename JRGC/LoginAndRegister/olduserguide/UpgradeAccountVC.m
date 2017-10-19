@@ -81,23 +81,9 @@
     if (self.accoutType == SelectAccoutTypeP2P) {
         
         NSString *showStr = @"开通即视为本人已阅读并同意《资金存管三方协议》";
-        BOOL isShow = NO;
-        if (isShow) {
-            showStr = @"开通即视为本人已阅读并同意《CFCA数字证书服务协议》《资金存管三方协议》";
-        }
          _customLabel2.text = showStr;
         __weak typeof(self) weakSelf = self;
-        if (isShow) {
-            [_customLabel2 setFontColor:UIColorWithRGB(0x4aa1f9) string:@"《CFCA数字证书服务协议》《资金存管三方协议》"];
-            [_customLabel2 addLinkString:@"《CFCA数字证书服务协议》" block:^(ZBLinkLabelModel *linkModel) {
-                FullWebViewController *webController = [[FullWebViewController alloc] initWithWebUrl:CFCAURL title:@"CFCA数字证书服务协议"];
-                webController.baseTitleType = @"specialUser";
-                [weakSelf.navigationController pushViewController:webController animated:YES];
-            }];
-        } else {
-            [_customLabel2 setFontColor:UIColorWithRGB(0x4aa1f9) string:@"《资金存管三方协议》"];
-        }
-        
+        [_customLabel2 setFontColor:UIColorWithRGB(0x4aa1f9) string:@"《资金存管三方协议》"];
         [_customLabel2 addLinkString:@"《资金存管三方协议》" block:^(ZBLinkLabelModel *linkModel) {
             FullWebViewController *webController = [[FullWebViewController alloc] initWithWebUrl:TRUSTEESHIP title:@"资金存管三方协议"];
             webController.baseTitleType = @"specialUser";
@@ -596,12 +582,13 @@
         if ([ret boolValue]) {
             DBLOG(@"%@",dic[@"data"]);
             NSString *cfcaContractNameStr = [dic[@"data"] objectSafeForKey:@"cfcaContractName"];
+            NSString *cfcaContractUrlStr = [dic[@"data"] objectSafeForKey:@"cfcaContractUrl"];
             if(![cfcaContractNameStr isEqualToString:@""]){
                 _customLabel2.text = @"开通即视为本人已阅读并同意《CFCA数字证书服务协议》《资金存管三方协议》";
                 __weak typeof(self) weakSelf = self;
                 [_customLabel2 setFontColor:UIColorWithRGB(0x4aa1f9) string:@"《CFCA数字证书服务协议》《资金存管三方协议》"];
                 [_customLabel2 addLinkString:@"《CFCA数字证书服务协议》" block:^(ZBLinkLabelModel *linkModel) {
-                    FullWebViewController *webController = [[FullWebViewController alloc] initWithWebUrl:CFCAURL title:@"CFCA数字证书服务协议"];
+                    FullWebViewController *webController = [[FullWebViewController alloc] initWithWebUrl:cfcaContractUrlStr title:@"CFCA数字证书服务协议"];
                     webController.baseTitleType = @"specialUser";
                     [weakSelf.navigationController pushViewController:webController animated:YES];
                 }];

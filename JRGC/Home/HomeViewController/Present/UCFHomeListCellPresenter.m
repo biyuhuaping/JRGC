@@ -70,12 +70,13 @@
 - (NSString *)availBorrowAmount
 {
     if ([self.item.type isEqualToString:@"3"]) {
-        if (self.item.remainAmount.doubleValue > 0) {
-            return [NSString stringWithFormat:@"%@克", self.item.remainAmount];
-        }
-        else {
-            return [NSString stringWithFormat:@"%.3f克", [self.item.borrowAmount doubleValue]];
-        }
+        return [NSString stringWithFormat:@"剩%@克", self.item.remainAmount];
+//        if (self.item.remainAmount.doubleValue > 0) {
+//            
+//        }
+//        else {
+//            return [NSString stringWithFormat:@"%.3f克", [self.item.borrowAmount doubleValue]];
+//        }
     }
     NSString *temp = [NSString stringWithFormat:@"%lf",[self.item.borrowAmount doubleValue]-[self.item.completeLoan doubleValue]];
     return [self moneywithRemaining:temp total:self.item.borrowAmount];
@@ -126,6 +127,9 @@
     if ([self.item.type isEqualToString:@"6"]) {
         return [NSString stringWithFormat:@"已售%.3f克", [self.item.completeLoan doubleValue]];
     }
+    else if ([self.item.type isEqualToString:@"0"]) {
+        return [NSString stringWithFormat:@"%@亿元", self.item.totleBookAmt];
+    }
     return [NSString stringWithFormat:@"%@", self.item.completeLoan];
 }
 
@@ -137,13 +141,13 @@
 - (CGFloat)cellHeight
 {
     if (self.item.moedelType == UCFHomeListCellModelTypeDefault) {
-        return 95.0;
+        return 100.0;
     }
-    else if (self.item.moedelType == UCFHomeListCellModelTypeReserved) {
-        return 73.0;
+    else if (self.item.moedelType == UCFHomeListCellModelTypeReserved || self.item.moedelType == UCFHomeListCellModelTypeGoldFixed) {
+        return 136;
     }
-    else if (self.item.moedelType == UCFHomeListCellModelTypeGoldFixed) {
-        return 175.0;
+    else if (self.item.moedelType == UCFHomeListCellModelTypeNewUser) {
+        return 125.0;
     }
     else {
         return (ScreenWidth - 20) / CELLRATE + 15;

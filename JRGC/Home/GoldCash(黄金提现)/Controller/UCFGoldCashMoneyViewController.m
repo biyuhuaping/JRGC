@@ -16,6 +16,7 @@
 #import "UCFToolsMehod.h"
 #import "MjAlertView.h"
 #import "UCFCashTipView.h"
+#import "AppDelegate.h"
 @interface UCFGoldCashMoneyViewController () <UITableViewDataSource, UITableViewDelegate, UCFGoldCashThreeCellDelegate, UIAlertViewDelegate, UCFGoldRechargeCellDelegate, UCFCashTipViewDelegate, MjAlertViewDelegate>
 @property (strong, nonatomic) NSMutableArray *dataArray;
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
@@ -28,7 +29,11 @@
 @end
 
 @implementation UCFGoldCashMoneyViewController
-
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+}
 - (NSMutableArray *)dataArray
 {
     if (nil == _dataArray) {
@@ -270,7 +275,24 @@
 - (void)mjalertView:(MjAlertView *)alertview didClickedButton:(UIButton *)clickedButton andClickedIndex:(NSInteger)index
 {
     if (alertview.tag == 100) {
-        [self.navigationController popViewControllerAnimated:YES];
+        
+        NSString *className = [NSString stringWithUTF8String:object_getClassName(self.rootVc)];
+        if([className hasSuffix:@"UCFRechargeOrCashViewController"])
+        {
+            AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+            [appDelegate.tabBarController dismissViewControllerAnimated:NO completion:^{
+                NSUInteger selectedIndex = appDelegate.tabBarController.selectedIndex;
+                UINavigationController *nav = [appDelegate.tabBarController.viewControllers objectAtIndex:selectedIndex];
+                [nav popToRootViewControllerAnimated:NO];
+            }];
+        }else
+        {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+        
+        
+        
+        
     }
 }
 

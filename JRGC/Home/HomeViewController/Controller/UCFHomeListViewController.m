@@ -16,13 +16,17 @@
 #import "UCFHomeListNo2Cell.h"
 #import "UCFHomeInvestCell.h"
 #import "UCFGoldFlexibleCell.h"
+#import "UCFNewUserCell.h"
 #import "UCFHomeListHeaderSectionView.h"
 #import "UCFLoginViewController.h"
+#import "UCFRegisterStepOneViewController.h"
 #import "AppDelegate.h"
+#import "UCFHomeListFooterView.h"
 
-@interface UCFHomeListViewController () <UITableViewDelegate, UITableViewDataSource, HomeListViewPresenterCallBack, UCFHomeListHeaderSectionViewDelegate, UCFHomeListCellDelegate, UCFHomeInvestCellDelegate, UCFGoldFlexibleCellDelegate>
+@interface UCFHomeListViewController () <UITableViewDelegate, UITableViewDataSource, HomeListViewPresenterCallBack, UCFHomeListHeaderSectionViewDelegate, UCFHomeListCellDelegate, UCFHomeInvestCellDelegate, UCFGoldFlexibleCellDelegate, UCFNewUserCellDelegate>
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) UCFHomeListPresenter *presenter;
+@property (weak, nonatomic) UCFHomeListFooterView *footerView;
 @end
 
 @implementation UCFHomeListViewController
@@ -44,19 +48,16 @@
         self.presenter = presenter;
         self.presenter.view = self;//将V和P进行绑定(这里因为V是系统的TableView 无法简单的声明一个view属性 所以就绑定到TableView的持有者上面)
         
-        UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 50)];
+        UCFHomeListFooterView *footerView = (UCFHomeListFooterView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeListFooterView" owner:self options:nil] lastObject];
+        
         self.tableView.tableFooterView = footerView;
-        UILabel *tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 15, SCREEN_WIDTH, 20)];
-        tipLabel.font = [UIFont systemFontOfSize:12];
-        tipLabel.text = @"市场有风险  投资需谨慎";
-        tipLabel.textColor = UIColorWithRGB(0x999999);
-        tipLabel.textAlignment = NSTextAlignmentCenter;
-        [footerView addSubview:tipLabel];
+        self.footerView = footerView;
         
         [self.tableView addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(refreshData)];
     }
     return self;
 }
+
 
 #pragma mark - tableDataSource方法
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -87,13 +88,16 @@
         cell.indexPath = indexPath;
         return cell;
     }
-    else if (cellPresenter.modelType == UCFHomeListCellModelTypeOneImageTransfer || cellPresenter.modelType == UCFHomeListCellModelTypeOneImageBatchCycle || cellPresenter.modelType == UCFHomeListCellModelTypeOneImageBatchLending) {
-        static NSString *cellId = @"homeListCell2";
-        UCFHomeListNo2Cell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+    else if (cellPresenter.modelType == UCFHomeListCellModelTypeNewUser) {
+        static NSString *cellId = @"newusercell";
+        UCFNewUserCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
         if (nil == cell) {
-            cell = (UCFHomeListNo2Cell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeListNo2Cell" owner:self options:nil] lastObject];
+            cell = (UCFNewUserCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFNewUserCell" owner:self options:nil] lastObject];
+            cell.delegate = self;
+            cell.tableview = tableView;
         }
         cell.presenter = cellPresenter;
+        cell.indexPath = indexPath;
         return cell;
     }
     else if (cellPresenter.modelType == UCFHomeListCellModelTypeReserved) {
@@ -103,8 +107,8 @@
             cell = (UCFHomeInvestCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeInvestCell" owner:self options:nil] lastObject];
             cell.delegate = self;
         }
-        cell.indexPath = indexPath;
         cell.presenter = cellPresenter;
+        cell.indexPath = indexPath;
         return cell;
     }
     else if (cellPresenter.modelType == UCFHomeListCellModelTypeGoldFixed) {
@@ -113,8 +117,8 @@
         if (nil == cell) {
             cell = (UCFGoldFlexibleCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFGoldFlexibleCell" owner:self options:nil] lastObject];
         }
-        cell.indexPath = indexPath;
         cell.presenter = cellPresenter;
+        cell.indexPath = indexPath;
         cell.delegate = self;
         return cell;
     }
@@ -129,7 +133,7 @@
         view = (UCFHomeListHeaderSectionView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeListHeaderSectionView" owner:self options:nil] lastObject];
     }
     view.delegate = self;
-    view.frame = CGRectMake(0, 0, ScreenWidth, 30);
+    view.frame = CGRectMake(0, 0, ScreenWidth, 39);
     UCFHomeListGroupPresenter *groupPresenter = [self.presenter.allDatas objectAtIndex:section];
     UCFHomeListGroup *group = groupPresenter.group;
     if (!group.prdlist) {
@@ -144,7 +148,7 @@
     static NSString* viewId = @"homeListFooter";
     UITableViewHeaderFooterView *view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:viewId];
     if (nil == view) {
-        view = [[UITableViewHeaderFooterView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 10)];
+        view = [[UITableViewHeaderFooterView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 8)];
     }
     view.contentView.backgroundColor = UIColorWithRGB(0xebebee);
     return view;
@@ -164,8 +168,11 @@
     if (!group.prdlist) {
         return 0.001;
     }
+    else if ([group.type isEqualToString:@"13"] && group.attach.count > 0) {
+        return 140;
+    }
     else
-        return 32;
+        return 39;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -200,7 +207,7 @@
     UCFHomeListGroupPresenter *groupPresenter = [self.presenter.allDatas objectAtIndex:indexPath.section];
     UCFHomeListCellPresenter *presenter = [groupPresenter.group.prdlist objectAtIndex:indexPath.row];
     NSString *userId = [UserInfoSingle sharedManager].userId;
-    if (nil == userId && presenter.item.moedelType != UCFHomeListCellModelTypeOneImageTransfer) {
+    if (nil == userId) {
         UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
         UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
         AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
@@ -244,7 +251,7 @@
 - (void)homeListHeader:(UCFHomeListHeaderSectionView *)homeListHeader didClickedMoreWithType:(NSString *)type
 {
     if ([self.delegate respondsToSelector:@selector(homeList:tableView:didClickedWithModel:withType:)]) {
-        if ([type isEqualToString:@"11"]) {
+        if ([type isEqualToString:@"18"]) {
             [self.delegate homeList:self tableView:self.tableView didClickedWithModel:nil withType:UCFHomeListTypeP2PMore];
         }
         else if ([type isEqualToString:@"12"]) {
@@ -275,6 +282,25 @@
     UCFHomeListCellPresenter *cellPresenter =  [groupPresenter.group.prdlist objectAtIndex:indexPath.row];
     if ([self.delegate respondsToSelector:@selector(homeList:didClickReservedWithModel:)]) {
         [self.delegate homeList:self didClickReservedWithModel:cellPresenter.item];
+    }
+}
+
+- (void)newUserCell:(UCFNewUserCell *)newUserCell didClickedRegisterButton:(UIButton *)button withModel:(UCFHomeListCellModel *)model
+{
+    NSString *userId = [UserInfoSingle sharedManager].userId;
+    if (nil == userId) {
+        UCFRegisterStepOneViewController *registerControler = [[UCFRegisterStepOneViewController alloc] init];
+        registerControler.sourceVC = @"fromHomeView";
+        UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:registerControler] ;
+        AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+        UINavigationController *nav = app.tabBarController.selectedViewController ;
+        [nav presentViewController:loginNaviController animated:YES completion:nil];
+        return;
+    }
+    else {
+        if ([self.delegate respondsToSelector:@selector(homeList:tableView:didClickedWithModel:withType:)]) {
+            [self.delegate homeList:self tableView:self.tableView didClickedWithModel:model withType:UCFHomeListTypeInvest];
+        }
     }
 }
 

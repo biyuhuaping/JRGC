@@ -12,6 +12,7 @@
 @property (weak, nonatomic) UILabel *titleLabel;
 @property (weak, nonatomic) UIImageView *backView;
 @property (weak, nonatomic) UIView *bottmLine;
+
 @end
 
 @implementation UCFHomeListNavView
@@ -38,7 +39,7 @@
     
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     titleLabel.textColor = UIColorWithRGB(0x333333);
-    titleLabel.text = @"我的";
+    titleLabel.text = @"首页";
     titleLabel.font = [UIFont systemFontOfSize:18];
     titleLabel.textAlignment = NSTextAlignmentCenter;
     [self.backView addSubview:titleLabel];
@@ -55,6 +56,13 @@
     [self addSubview:button];
     self.loginAndRegisterButton = button;
     [self setLoginAndRegisterButtonWithState:NO];
+    
+    UIButton *button1 = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button1 setImage:[UIImage imageNamed:@"mine_icon_ad"] forState:UIControlStateNormal];
+    button1.titleLabel.font = [UIFont systemFontOfSize:14];
+    [button1 addTarget:self action:@selector(giftClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:button1];
+    self.giftButton = button1;
     
     UIView *bottomLine = [[UIView alloc] initWithFrame:CGRectZero];
     bottomLine.backgroundColor = UIColorWithRGB(0xd8d8d8);
@@ -73,6 +81,15 @@
     self.loginAndRegisterButton.frame = CGRectMake(ScreenWidth - 95, 20+19*0.5, 80, 25);
     self.loginAndRegisterButton.layer.cornerRadius = 25*0.5;
     self.loginAndRegisterButton.clipsToBounds = YES;
+    
+    self.giftButton.frame = CGRectMake(ScreenWidth - 45, 27, 30, 30);
+    NSString *userId = [UserInfoSingle sharedManager].userId;
+    if (userId) {
+        self.giftButton.alpha = 0.7;
+    }
+    else {
+        self.giftButton.alpha = 0.0;
+    }
     
     self.backView.frame = self.bounds;
     
@@ -105,6 +122,13 @@
     }
 }
 
+- (void)giftClicked:(UIButton *)button
+{
+    if ([self.delegate respondsToSelector:@selector(homeListNavView:didClickedGiftButton:)]) {
+        [self.delegate homeListNavView:self didClickedGiftButton:button];
+    }
+}
+
 - (void)setOffset:(CGFloat)offset
 {
     DBLOG(@"%f", offset);
@@ -121,7 +145,7 @@
     
     if (offset <= 0) {
         if ([UserInfoSingle sharedManager].userId) {
-            self.hidden = YES;
+            self.hidden = NO;
         }
         else {
             self.hidden = NO;
@@ -141,10 +165,8 @@
             }];
         }
         else {
-            [UIView animateWithDuration:0.25 animations:^{
-                self.backView.alpha = 0.9;
-                self.bottmLine.alpha = 0.9;
-            }];
+            self.backView.alpha = 0.9;
+            self.bottmLine.alpha = 0.9;
         }
         if (self.backView.alpha > 0.3) {
             [UIView animateWithDuration:0.25 animations:^{
@@ -158,7 +180,6 @@
             }];
         }
     }
-    
     
 }
 

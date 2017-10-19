@@ -110,7 +110,7 @@
         if ([rstcode intValue] == 1) {
             NSDictionary *dict = [dic objectSafeDictionaryForKey:@"data"];
             self.availableGoldAmount = [dict objectSafeForKey:@"availableGoldAmount"];
-            self.isTradeDay = [dict objectSafeForKey:@"isTradeDay"];
+            self.isTradeDay = [[dict objectSafeForKey:@"isTradeDay"] boolValue];
             self.cashServiceRate = [dict objectSafeForKey:@"cashServiceRate"];
             self.liquidateToken = [dict objectSafeForKey:@"liquidateToken"];
             NSString *tipStr = [[dict objectSafeForKey:@"pageContent"] stringByReplacingOccurrencesOfString:@"•" withString:@""];
@@ -443,5 +443,8 @@
     NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:userId, @"userId", self.liquidateToken, @"liquidateToken", self.amoutCell.textField.text, @"goldAmount", self.goldAveragePrice, @"money",  nil];
     [[NetworkModule sharedNetworkModule] newPostReq:param tag:kSXTagGoldChangeCash owner:self signature:YES Type:SelectAccoutDefault];
 }
-
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 @end

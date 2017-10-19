@@ -78,6 +78,10 @@
 - (void)getTipInfoFromNet
 {
     NSString *userId = [UserInfoSingle sharedManager].userId;
+    if (userId == nil)
+    {
+        return;
+    }
     NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:userId, @"userId", nil];
     [[NetworkModule sharedNetworkModule] newPostReq:param tag:kSXTagGoldRechargeInfo owner:self signature:YES Type:SelectAccoutDefault];
 }

@@ -12,11 +12,12 @@
 @protocol UCFHomeListNavViewDelegate <NSObject>
 
 - (void)homeListNavView:(UCFHomeListNavView *)navView didClicked:(UIButton *)loginAndRegister;
-
+- (void)homeListNavView:(UCFHomeListNavView *)navView didClickedGiftButton:(UIButton *)giftButton;
 @end
 
 @interface UCFHomeListNavView : UIView
 @property (weak, nonatomic) UIButton *loginAndRegisterButton;
+@property (weak, nonatomic) UIButton *giftButton;
 @property (assign, nonatomic) CGFloat offset;
 @property (weak, nonatomic) id<UCFHomeListNavViewDelegate> delegate;
 @end

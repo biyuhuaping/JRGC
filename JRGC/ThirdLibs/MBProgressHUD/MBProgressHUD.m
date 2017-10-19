@@ -182,7 +182,21 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 
 //	return [huds count];
 }
-
++ (MB_INSTANCETYPE)showOriginHUDAddedTo:(UIView *)view animated:(BOOL)animated {
+    MBProgressHUD *hud = [[self alloc] initWithView:view];
+    hud.removeFromSuperViewOnHide = YES;
+    [view addSubview:hud];
+    [hud show:animated];
+    return MB_AUTORELEASE(hud);
+}
++ (NSUInteger)hideOriginAllHUDsForView:(UIView *)view animated:(BOOL)animated {
+    NSArray *huds = [MBProgressHUD allHUDsForView:view];
+    for (MBProgressHUD *hud in huds) {
+        hud.removeFromSuperViewOnHide = YES;
+        [hud hide:animated];
+    }
+    return [huds count];
+}
 + (MB_INSTANCETYPE)HUDForView:(UIView *)view {
 	NSEnumerator *subviewsEnum = [view.subviews reverseObjectEnumerator];
 	for (UIView *subview in subviewsEnum) {

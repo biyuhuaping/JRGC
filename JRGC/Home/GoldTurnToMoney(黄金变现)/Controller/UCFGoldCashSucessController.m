@@ -116,7 +116,7 @@
     investmentButton.layer.cornerRadius = 2.0;
     investmentButton.layer.masksToBounds = YES;
     
-    NSString *buttonTitle = _isPurchaseSuccess ? @"完成" :@"重新提现";
+    NSString *buttonTitle = _isPurchaseSuccess ? @"完成" :@"重新变现";
     [investmentButton setTitle:buttonTitle forState:UIControlStateNormal];
     [investmentButton addTarget:self action:@selector(gotoMainView) forControlEvents:UIControlEventTouchUpInside];
     [investBaseView addSubview:investmentButton];
@@ -128,14 +128,19 @@
     //    [investBaseView addSubview:shadowView];
 }
 -(void)gotoMainView{
-    //    if(_isPurchaseSuccess){//购买成功返回主页面
     [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
-//    [self.navigationController popToRootViewControllerAnimated:YES];
-    [self.navigationController popToViewController:self.rootVc animated:YES];
-    //    }
-    //    else{//购买失败返回上一级页面
-    //        [self.navigationController popViewControllerAnimated:YES];
-    //    }
+    NSString *className = [NSString stringWithUTF8String:object_getClassName(self.rootVc)];
+    if([className hasSuffix:@"UCFRechargeOrCashViewController"])
+    {
+        AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+        [appDelegate.tabBarController dismissViewControllerAnimated:NO completion:^{
+            NSUInteger selectedIndex = appDelegate.tabBarController.selectedIndex;
+            UINavigationController *nav = [appDelegate.tabBarController.viewControllers objectAtIndex:selectedIndex];
+            [nav popToRootViewControllerAnimated:NO];
+        }];
+    }else{
+        [self.navigationController popToViewController:self.rootVc animated:YES];
+    }
 }
 
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section

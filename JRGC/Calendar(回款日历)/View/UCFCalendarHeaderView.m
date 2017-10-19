@@ -99,7 +99,7 @@ static NSString *const cellId = @"cellId";
 
 + (CGFloat)viewHeight
 {
-    return 638;
+    return 537;
 }
 
 - (void)awakeFromNib
@@ -305,16 +305,17 @@ static NSString *const cellId = @"cellId";
     _calendarHeaderInfo = calendarHeaderInfo;
     
     self.myPaymentLabel.text = [calendarHeaderInfo objectSafeForKey:@"myPayment"];
-    self.waitPrincipalLabel.text = [calendarHeaderInfo objectSafeForKey:@"waitPrincipal"];
-    self.waitInterestLabel.text = [calendarHeaderInfo objectSafeForKey:@"waitInterest"];
+    self.waitPrincipalLabel.text = [NSString stringWithFormat:@"待收本金:%@",[calendarHeaderInfo objectSafeForKey:@"waitPrincipal"]];
+    self.waitInterestLabel.text = [NSString stringWithFormat:@"待收利息:%@",[calendarHeaderInfo objectSafeForKey:@"waitInterest"]];
     self.currentDay = [calendarHeaderInfo objectSafeForKey:@"today"];
-    
+    [self setCurrentDayWithDate:self.currentDay];
     [self.months removeAllObjects];
     [self.months addObjectsFromArray:[calendarHeaderInfo objectSafeForKey:@"months"]];
     [self.calendar reloadData];
     if (_months.count > 0) {
         [self setNeedsDisplay];
     }
+
 }
 
 - (void)drawRect:(CGRect)rect
@@ -376,6 +377,7 @@ static NSString *const cellId = @"cellId";
             }
             UCFCalendarCollectionViewCell *cell = [[self.calendar visibleCells] lastObject];
             cell.days = self.days;
+            
         }
     }
     else{

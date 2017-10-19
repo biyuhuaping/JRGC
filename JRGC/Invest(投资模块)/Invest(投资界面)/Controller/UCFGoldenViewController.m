@@ -20,9 +20,11 @@
 #import "UCFNoPermissionViewController.h"
 #import "UCFGoldFlexibleCell.h"
 #import "UCFInvestMicroMoneyCell.h"
-
-
-@interface UCFGoldenViewController () <UITableViewDelegate, UITableViewDataSource, UCFInvestMicroMoneyCellDelegate,UIAlertViewDelegate, UCFGoldFlexibleCellDelegate>
+#import "UCFAccountPieCharViewController.h"
+#import "UCFRechargeOrCashViewController.h"
+#import "AppDelegate.h"
+#import "UCFProjectLabel.h"
+@interface UCFGoldenViewController () <UITableViewDelegate, UITableViewDataSource, UCFHomeListCellHonorDelegate,UIAlertViewDelegate, UCFGoldFlexibleCellDelegate>
 @property (weak, nonatomic) UCFGoldenHeaderView *goldenHeader;
 @property (strong, nonatomic) NSMutableArray *dataArray;
 @property (assign, nonatomic) NSUInteger currentPage;
@@ -96,7 +98,7 @@
 {
     if (indexPath.section == 0) {
         if (self.fliexGoldModel.nmPrdClaimName.length>0) {
-            return 185.0;
+            return 136.0;
         }
         return 0;
     }
@@ -140,9 +142,9 @@
     } else  {
         
         NSString *tipStr1 = ZXTIP1;
-        //        NSInteger openStatus = [UserInfoSingle sharedManager].openStatus ;
+        NSInteger openStatus = [UserInfoSingle sharedManager].openStatus ;
         NSInteger enjoyOpenStatus = [UserInfoSingle sharedManager].enjoyOpenStatus;
-        if (  enjoyOpenStatus < 3 ) {
+        if (  enjoyOpenStatus < 3  && openStatus < 3) {
             [self showHSAlert:tipStr1];
             return;
         }
@@ -156,13 +158,13 @@
 {
     if (section == 0) {
         if (self.fliexGoldModel.nmPrdClaimName.length > 0) {
-            return 32;
+            return 39;
         }
         else return 0.001;
     }
     else {
         if (self.dataArray.count>0) {
-            return 32;
+            return 39;
         }
     }
     return 0.001;
@@ -189,16 +191,32 @@
     if (nil == view) {
         view = (UCFHomeListHeaderSectionView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeListHeaderSectionView" owner:self options:nil] lastObject];
     }
+    view.downView.hidden = YES;
     [view.contentView setBackgroundColor:UIColorWithRGB(0xf9f9f9)];
     [view.upLine setBackgroundColor:UIColorWithRGB(0xebebee)];
-    view.frame = CGRectMake(0, 0, ScreenWidth, 30);
+    view.frame = CGRectMake(0, 0, ScreenWidth, 39);
     if (section == 0) {
         if (self.fliexGoldModel.nmPrdClaimName.length > 0) {
             view.homeListHeaderMoreButton.hidden = YES;
             view.headerTitleLabel.text = @"增金宝";
             view.headerImageView.image = [UIImage imageNamed:@"mine_icon_gold_current"];
-//            view.honerLabel.text = @"实物黄金赚收益";
-//            view.honerLabel.hidden = NO;
+            
+            if (_fliexGoldModel.prdLabelsList.count > 0) {
+                UCFProjectLabel *projectLabel = [_fliexGoldModel.prdLabelsList firstObject];
+                if ([projectLabel.labelPriority integerValue] == 1) {
+                    view.goldSignView.hidden = NO;
+                    view.goldSignLabel.text = [NSString stringWithFormat:@"%@", projectLabel.labelName];
+                    CGSize size = [view.goldSignLabel.text boundingRectWithSize:CGSizeMake(MAXFLOAT, 18) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12.0f]} context:nil].size;
+                    view.goldSignViewW.constant = size.width + 11;
+                }
+                else {
+                    view.goldSignView.hidden = YES;
+                }
+            }
+            else {
+                view.goldSignView.hidden = YES;
+            }
+            
             [view.homeListHeaderMoreButton setTitleColor:UIColorWithRGB(0x4aa1f9) forState:UIControlStateNormal];
             return view;
         }
@@ -235,8 +253,7 @@
         if (indexPath.section == 0) {//活期详情
             [self getGoldCurrentPrdClaimInfoHttpRequest:self.fliexGoldModel];
         }else{
-            
-        
+
         UCFGoldModel *goldModel = [self.dataArray objectAtIndex:indexPath.row];
         
         NSString *nmProClaimIdStr = goldModel.nmPrdClaimId;
@@ -257,9 +274,9 @@
     } else  {
         
         NSString *tipStr1 = ZXTIP1;
-//        NSInteger openStatus = [UserInfoSingle sharedManager].openStatus ;
+        NSInteger openStatus = [UserInfoSingle sharedManager].openStatus ;
         NSInteger enjoyOpenStatus = [UserInfoSingle sharedManager].enjoyOpenStatus;
-        if (enjoyOpenStatus < 3 ) {//去开户页面
+        if (enjoyOpenStatus < 3 && openStatus < 3) {//去开户页面
             [self showHSAlert:tipStr1];
             return;
         }
@@ -431,7 +448,6 @@
             }else{
                 [AuxiliaryFunc showAlertViewWithMessage:rsttext];
             }
-
         }
     }else if (tag.integerValue == kSXTagGoldCurrentProClaimDetail){//活期投资页面
         

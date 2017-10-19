@@ -101,7 +101,11 @@
 @end
 
 @implementation UCFTopUpViewController
-
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -161,7 +165,7 @@
     
 }
 -(void)showDeleagateView{
-    
+
     NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId",_contractType, @"contractType",nil];
     
     [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagHonerRechangeShowContract owner:self signature:YES Type:SelectAccoutTypeHoner];
@@ -270,9 +274,20 @@
             
         } else if (buttonIndex == 1) {
            NSString *className = [NSString stringWithUTF8String:object_getClassName(_uperViewController)];
-            if ([className hasSuffix:@"UCFPurchaseBidViewController"] || [className hasSuffix:@"UCFPurchaseTranBidViewController"] || [className hasSuffix:@"UCFSelectPayBackController"]) {
+            if ([className hasSuffix:@"UCFPurchaseBidViewController"] || [className hasSuffix:@"UCFPurchaseTranBidViewController"] || [className hasSuffix:@"UCFSelectPayBackController"] || [className hasSuffix:@"UCFFacReservedViewController"]) {
                 [self.navigationController popToViewController:_uperViewController animated:YES];
-            } else {
+            }
+            else if([className hasSuffix:@"UCFRechargeOrCashViewController"])
+            {
+                AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+                [appDelegate.tabBarController dismissViewControllerAnimated:NO completion:^{
+                    NSUInteger selectedIndex = appDelegate.tabBarController.selectedIndex;
+                    UINavigationController *nav = [appDelegate.tabBarController.viewControllers objectAtIndex:selectedIndex];
+                    [nav popToRootViewControllerAnimated:NO];
+                    [appDelegate.tabBarController setSelectedIndex:0];
+                }];
+            }
+            else{
                 [self.navigationController popToRootViewControllerAnimated:NO];
                 AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
                 [appDelegate.tabBarController setSelectedIndex:0];
@@ -694,8 +709,12 @@
  */
 - (void)getMyBindCardMessage
 {
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSString *uuid = [[NSUserDefaults standardUserDefaults] valueForKey:UUID];
+    if(uuid == nil)
+    {
+        return;
+    }
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSDictionary *dataDict =@{@"userId":uuid};
     [[NetworkModule sharedNetworkModule] newPostReq:dataDict tag:kSXTagBankTopInfo owner:self signature:YES Type:self.accoutType];
 }

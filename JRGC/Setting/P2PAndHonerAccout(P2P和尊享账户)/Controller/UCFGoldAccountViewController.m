@@ -26,7 +26,7 @@
 #import "UILabel+Misc.h"
 #import "UCFFeedBackViewController.h"
 #import "UCFGoldRaiseViewController.h"
-
+#import "UCFInvestViewController.h"
 
 @interface UCFGoldAccountViewController ()<UITableViewDelegate,UITableViewDataSource, GoldAccountFirstCellDeleage,UCFGoldAccountHeadViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *baseTableView;
@@ -126,7 +126,7 @@
             [cell.contentView addSubview:titleLabel];
             
             UILabel *desLabel = [[UILabel alloc] initWithFrame: CGRectMake(ScreenWidth/2, 0, ScreenWidth/2 - 30, model.cellHeight)];
-            desLabel.textColor = UIColorWithRGB(0xfa4d4c);
+            desLabel.textColor = UIColorWithRGB(0x555555);
             desLabel.tag = 1020;
             desLabel.textAlignment = NSTextAlignmentRight;
             desLabel.font = [UIFont systemFontOfSize:14.0f];
@@ -303,7 +303,16 @@
     NSString *showStr = @"";
     if ([title isEqualToString:@"买金"]) {
         [self.navigationController popToRootViewControllerAnimated:NO];
-        [_homeView skipToOtherPage:UCFHomeListTypeGlodMore];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            AppDelegate *appdel = (AppDelegate *)[UIApplication sharedApplication].delegate;
+            UCFInvestViewController *invest = (UCFInvestViewController *)[[appdel.tabBarController.childViewControllers objectAtIndex:1].childViewControllers firstObject];
+            invest.selectedType = @"Gold";
+            if ([invest isViewLoaded]) {
+                [invest changeView];
+            }
+            [appdel.tabBarController setSelectedIndex:1];
+        });
+
         return;
     } else if ([title isEqualToString:@"变现"]) {
 //        showStr = @"暂时没有可变现的黄金";
@@ -313,9 +322,9 @@
             return;
         }
         NSString *tipStr1 = ZXTIP1;
-        //    NSInteger openStatus = [UserInfoSingle sharedManager].openStatus ;
+        NSInteger openStatus = [UserInfoSingle sharedManager].openStatus ;
         NSInteger enjoyOpenStatus = [UserInfoSingle sharedManager].enjoyOpenStatus;
-        if ( enjoyOpenStatus < 3 ) {//去开户页面
+        if ( enjoyOpenStatus < 3  && openStatus < 3) {//去开户页面
             [self showHSAlert:tipStr1];
             return;
         }
@@ -325,7 +334,7 @@
                 [helper pushGoldAuthorizationType:SelectAccoutTypeGold nav:self.navigationController];
                 return;
             }else{
-                //去充值页面
+              
                 UCFGoldCashViewController *vc1 = [[UCFGoldCashViewController alloc] initWithNibName:@"UCFGoldCashViewController" bundle:nil];
                 vc1.baseTitleText = @"黄金变现";
                 vc1.rootVc = self;
@@ -407,6 +416,6 @@
 }
 - (void)dealloc
 {
-    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 @end

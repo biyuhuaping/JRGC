@@ -12,6 +12,7 @@ typedef enum : NSUInteger {
     UCFHomeListCellModelTypeDefault,
     UCFHomeListCellModelTypeReserved,
     UCFHomeListCellModelTypeGoldFixed,
+    UCFHomeListCellModelTypeNewUser,
     UCFHomeListCellModelTypeOneImageBatchLending,
     UCFHomeListCellModelTypeOneImageTransfer,
     UCFHomeListCellModelTypeOneImageBatchCycle,
@@ -43,6 +44,7 @@ typedef enum : NSUInteger {
 @property (nonatomic, copy) NSString *totalCount;
 @property (nonatomic, copy) NSString *zxTransferNum;
 @property (nonatomic, copy) NSString *transferNum;
+@property (nonatomic, copy) NSString *totleBookAmt;
 @property (nonatomic, copy) NSString *remainAmount; //剩余黄金克数
 @property (nonatomic, assign) UCFHomeListCellModelType moedelType;
 @property (nonatomic, copy) NSString *backImage;

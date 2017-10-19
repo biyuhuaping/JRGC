@@ -236,6 +236,7 @@
 #define USERGETZUNXIANGAGREE @"api/userInfo/v2/zxAuthorization.json"
 #define USERZUNXIANGSTATE    @"api/userInfo/v2/zxIsAuthorization.json"
 #define USERPRODUTLIST        @"api/prdClaims/v2/productList.json" //产品列表
+#define HOMEICONLIST        @"api/prdClaims/v2/productNum.json" //首页图标的列表
 #define MYSIMLEINFOURL      @"api/prdClaims/v2/mySimpleInfo.json"  //首页-查询用户工豆,工分,等信息
 #define MYRECEIPTURL        @"api/prdClaims/v2/myReceipt.json"     //首页-用户余额,累计收益,总资产
 #define USERINFOADJUSTMENT              @"api/userInfo/v2/adjustment.json" //公告确认
@@ -259,8 +260,12 @@
 
 #define PRDCLAIMSWJSHOWURL  @"api/prdClaims/v2/wjShow.json"//工场微金列表
 #define PRDTRANSEFERLIST    @"api/prdClaims/v2/transferShow.json" //混合债转列表
-#define CALENDARHEADER      @"api/myPayment/v2/myPaymentInfo.json" //日历的月份和头部信息
-#define CALENDARINFO        @"api/myPayment/v2/myPaymentDay.json"  //日历的当前月信息
+#define CALENDARHEADER      @"api/myPayment/v2/myPaymentInfoNew.json" //日历的月份和头部信息
+#define CALENDARHEADER_OLD      @"api/myPayment/v2/myPaymentInfo.json" //日历的月份和头部信息
+
+#define CALENDARINFO        @"api/myPayment/v2/myPaymentDayNew.json"  //日历的当前月信息
+#define CALENDARINFO_OLD        @"api/myPayment/v2/myPaymentDay.json"  //日历的当前月信息
+
 #define CURRENTDAYINFO      @"api/myPayment/v2/myPaymentDetail.json" //当前日的回款信息
 #define GOLDACCOUNT         @"api/nmAccount/v2/getNmAccountInfo.json" //获取黄金账户信息
 #define CURRENTGOLDPRICE    @"api/nmCommon/v2/getRealTimePrice.json" //获取当前黄金价格
@@ -305,6 +310,14 @@
 #define PRERESERVE_URL          @"https://m.9888.cn/static/wap/invest/index.html#/reserve/info" //预约的url
 
 #define HONERRECHANGESHOWCONT @"/api/contract/v2/showContractMess.json"//尊享充值委托划款协议合同预览
+#define TOTALASSTSOVERVIEWURL @"api/userAccount/v2/assetsOverview.json"//总资产接口
+#define TOTALEARINGSOVERVIEW  @"/api/userAccount/v2/earningsOverview.json" //累计收益
+#define MYACCOUNTBINFINGBANKCARD @"/api/userAccount/v2/getBindingBankCardList.json"//我的-->>充值接口
+#define MYACCOUNTBlANCELIST @"/api/userAccount/v2/getAccountBalanceList.json"//我的-->>充值接口
+
+
+
+
 enum kPostStatus{
     kPostStatusNone=0,
     kPostStatusBeging=1,
@@ -470,7 +483,9 @@ enum kSXTag
     kSXTagPrdClaimsWJShow,              //工场微金列表
     kSXTagPrdTransferList,              //混合债转列表
     kSXTagCalendarHeader,               //日历的月份和头部信息
+    kSXTagOldCalendarHeader,               //日历的月份和头部信息
     kSXTagCalendarInfo,                 //日历的月信息
+    kSXTagOldCalendarInfo,                 //日历的月信息
     kSXTagCurrentDayInfo,               //当前日的回款信息
     kSXTagGoldAccount,                   //黄金账户信息
     ksxTagGoldCurrentPrice,              //当前黄金价格
@@ -506,6 +521,11 @@ enum kSXTag
     kSXTagGlixedGoldConstract,          //活期合同接口
     kSXTagHonerRechangeShowContract,   //尊享充值划款授权协议
     kSXTagUserStatusInfo,               //用户状态信息
+    kSXTagHomeIconList,                 //首页图标列表
+    kSXTagTotalAssetsOverView,          //总资产
+    kSXTagTotalEarningsOverview,        //累计收益
+    kSXTagGetBindingBankCardList,        //我的-->>充值接口
+    kSXTagGetAccountBalanceList,         //我的-->>提现接口
 };
 
 typedef enum kSXTag kSXTag;

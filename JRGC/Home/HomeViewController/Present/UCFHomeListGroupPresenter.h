@@ -19,4 +19,5 @@
 - (BOOL)showMore;
 - (int)type;
 - (NSString *)desc;
+- (NSArray *)attach;
 @end

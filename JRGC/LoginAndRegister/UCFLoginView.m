@@ -166,11 +166,13 @@
     _describeLabel.userInteractionEnabled = YES;
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.bounds = CGRectMake(0, 0, 197, 23);
     button.center = CGPointMake(ScreenWidth/2, ScreenHeight- NavigationBarHeight - 25 - 23/2);
     [button setBackgroundImage:[UIImage imageNamed:@"sign_down"] forState:UIControlStateNormal];
-    [button setTitle:@"金融工场专业互联网金融机构" forState:UIControlStateNormal];
+    [button setTitle:@"金融工场专业互联网金融信息服务机构" forState:UIControlStateNormal];
     button.titleLabel.font = [UIFont systemFontOfSize:13];
+    NSDictionary *attrs = @{NSFontAttributeName : [UIFont systemFontOfSize:13]};
+    CGSize nameSize = [button.titleLabel.text boundingRectWithSize:CGSizeMake(MAXFLOAT, 23) options:NSStringDrawingUsesLineFragmentOrigin attributes:attrs context:nil].size;
+    [button setBounds:CGRectMake(0, 0, nameSize.width + 28, 23)];
     button.titleLabel.textColor = [UIColor whiteColor];
     button.userInteractionEnabled = NO;
     [self addSubview:button];

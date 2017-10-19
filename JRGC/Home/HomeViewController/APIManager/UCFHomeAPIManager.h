@@ -13,9 +13,11 @@ typedef void(^NetworkCompletionHandler)(NSError *error, id result);
 @interface UCFHomeAPIManager : NSObject
 - (void)fetchHomeListWithUserId:(NSString *)userId completionHandler:(NetworkCompletionHandler)completionHandler;
 
-- (void)fetchUserInfoOneWithUserId:(NSString *)userId completionHandler:(NetworkCompletionHandler)completionHandler;
+- (void)fetchHomeIconListWithUserId:(NSString *)userId completionHandler:(NetworkCompletionHandler)completionHandler;
 
-- (void)fetchUserInfoTwoWithUserId:(NSString *)userId completionHandler:(NetworkCompletionHandler)completionHandler;
+//- (void)fetchUserInfoOneWithUserId:(NSString *)userId completionHandler:(NetworkCompletionHandler)completionHandler;
+//
+//- (void)fetchUserInfoTwoWithUserId:(NSString *)userId completionHandler:(NetworkCompletionHandler)completionHandler;
 
 - (void)fetchSignInfo:(NSString *)userId token:(NSString *)token completionHandler:(NetworkCompletionHandler)completionHandler;
 

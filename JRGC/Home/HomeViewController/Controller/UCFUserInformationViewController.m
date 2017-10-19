@@ -447,9 +447,9 @@
             }
             if ([userInfo.unReadMsgCount intValue] == 0) {
                 
-                [self.tabBarController.tabBar hideBadgeOnItemIndex:0];
+                [self.tabBarController.tabBar hideBadgeOnItemIndex:4];
             } else {
-                [self.tabBarController.tabBar showBadgeOnItemIndex:0];
+                [self.tabBarController.tabBar showBadgeOnItemIndex:4];
             }
             [self refreshUI];
         }
