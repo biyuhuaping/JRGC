@@ -138,8 +138,8 @@
     if (self.dataArray.count == 1) {
         view.headerTitleLabel.text =@"尊享优选";
          view.headerImageView.image = [UIImage imageNamed:@"mine_icon_enjoy"];
-        view.honerLabel.hidden = NO;
-        view.honerLineImageView.hidden = NO;
+//        view.honerLabel.hidden = NO;
+//        view.honerLineImageView.hidden = NO;
     }else{
         if(section == 0)
         {
@@ -148,8 +148,8 @@
         }else{
             view.headerTitleLabel.text =@"尊享优选";
             view.headerImageView.image = [UIImage imageNamed:@"mine_icon_enjoy"];
-            view.honerLabel.hidden = NO;
-            view.honerLineImageView.hidden = NO;
+//            view.honerLabel.hidden = NO;
+//            view.honerLineImageView.hidden = NO;
         }
     }
     return view;

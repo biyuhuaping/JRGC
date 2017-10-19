@@ -46,7 +46,7 @@
 
 - (NSString *)repayModeText
 {
-    return self.item.repayModeText;
+    return self.item.repayModeText.length > 0 ? self.item.repayModeText : @"";
 }
 
 - (NSString *)repayPeriodtext
@@ -65,6 +65,11 @@
         return self.item.minInvest ? [NSString stringWithFormat:@"%.3f克起购", [self.item.minInvest doubleValue]] : @"";
     }
     return self.item.minInvest ? [NSString stringWithFormat:@"%@元起", self.item.minInvest] : @"";
+}
+
+- (NSString *)maxInvest
+{
+    return [NSString stringWithFormat:@"%.1f", self.item.maxInvest.doubleValue];
 }
 
 - (NSString *)availBorrowAmount
@@ -143,8 +148,11 @@
     if (self.item.moedelType == UCFHomeListCellModelTypeDefault) {
         return 100.0;
     }
-    else if (self.item.moedelType == UCFHomeListCellModelTypeReserved || self.item.moedelType == UCFHomeListCellModelTypeGoldFixed) {
+    else if (self.item.moedelType == UCFHomeListCellModelTypeGoldFixed) {
         return 136;
+    }
+    else if (self.item.moedelType == UCFHomeListCellModelTypeReserved) {
+        return 160;
     }
     else if (self.item.moedelType == UCFHomeListCellModelTypeNewUser) {
         return 125.0;

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -19,7 +19,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8.0%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QNh-e5-35E" customClass="NZLabel">
-                        <rect key="frame" x="25" y="15.5" width="54" height="26.5"/>
+                        <rect key="frame" x="25" y="15.5" width="55.5" height="26.5"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                         <color key="textColor" red="0.99215686270000003" green="0.30196078430000001" blue="0.29803921570000003" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -92,6 +92,7 @@
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="B0y-aK-3Gw" secondAttribute="bottom" constant="20" id="3wW-ge-Hb6"/>
                     <constraint firstItem="MHm-O7-Kha" firstAttribute="leading" secondItem="OO9-ZZ-01p" secondAttribute="leading" id="5m7-0x-1jt"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="MHm-O7-Kha" secondAttribute="trailing" constant="15" id="61e-n2-C82"/>
                     <constraint firstItem="DIU-Xb-NuL" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="99h-I1-fLA"/>
                     <constraint firstItem="B0y-aK-3Gw" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="KeL-KB-S7S"/>
                     <constraint firstItem="RK9-1Y-6fb" firstAttribute="leading" secondItem="QNh-e5-35E" secondAttribute="leading" id="ND8-sC-ohf"/>
@@ -125,7 +126,7 @@
                 <outlet property="upLineLeftSpace" destination="lFL-Vi-xw2" id="Ahq-pO-Ocy"/>
                 <outlet property="upSegLine" destination="TiZ-ws-Y7D" id="aq1-Y7-UvI"/>
             </connections>
-            <point key="canvasLocation" x="-258" y="-62.5"/>
+            <point key="canvasLocation" x="-391" y="-70"/>
         </tableViewCell>
     </objects>
 </document>

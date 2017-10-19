@@ -103,6 +103,10 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
+    UCFMicroMoneyGroup *group = [self.dataArray objectAtIndex:section];
+    if ([group.type isEqualToString:@"13"]) {
+        return 140;
+    }
     return 39;
 }
 
@@ -121,8 +125,14 @@
     if (nil == view) {
         view = (UCFHomeListHeaderSectionView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeListHeaderSectionView" owner:self options:nil] lastObject];
     }
-    view.downView.hidden = YES;
+    
     UCFMicroMoneyGroup *group = [self.dataArray objectAtIndex:section];
+    if ([group.type isEqualToString:@"13"]) {
+        view.downView.hidden = NO;
+    }
+    else {
+        view.downView.hidden = YES;
+    }
     [view.headerImageView sd_setImageWithURL:[NSURL URLWithString:group.iconUrl]];
     view.homeListHeaderMoreButton.hidden = !group.showMore;
     [view.contentView setBackgroundColor:UIColorWithRGB(0xf9f9f9)];
@@ -200,7 +210,10 @@
 {
     UCFMicroMoneyGroup *group = [self.dataArray objectAtIndex:indexPath.section];
     if (group.type.intValue == 16) {
-        return 136;
+        return 160;
+    }
+    else if (group.type.intValue == 13) {
+        return 125;
     }
     return 100;
 }

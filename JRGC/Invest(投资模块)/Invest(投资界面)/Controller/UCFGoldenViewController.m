@@ -226,8 +226,8 @@
             view.homeListHeaderMoreButton.hidden = YES;
             view.headerTitleLabel.text = @"尊享金";
             view.headerImageView.image = [UIImage imageNamed:@"mine_icon_gold"];
-            view.honerLabel.text = @"实物黄金赚收益";
-            view.honerLabel.hidden = NO;
+//            view.honerLabel.text = @"实物黄金赚收益";
+//            view.honerLabel.hidden = NO;
             [view.homeListHeaderMoreButton setTitleColor:UIColorWithRGB(0x4aa1f9) forState:UIControlStateNormal];
             return view;
         }

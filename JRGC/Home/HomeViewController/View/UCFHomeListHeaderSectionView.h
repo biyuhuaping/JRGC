@@ -21,13 +21,11 @@
 @property (weak, nonatomic) IBOutlet UIImageView *headerImageView;
 @property (weak, nonatomic) IBOutlet UILabel *headerTitleLabel;
 @property (weak, nonatomic) IBOutlet UIButton *homeListHeaderMoreButton;
-@property (weak, nonatomic) IBOutlet UIImageView *honerLineImageView;
-@property (weak, nonatomic) IBOutlet UILabel *honerLabel;
-@property (weak, nonatomic) IBOutlet UIView *segView;
 @property (weak, nonatomic) IBOutlet UIView *downView;
 @property (weak, nonatomic) IBOutlet UIView *goldSignView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *goldSignViewW;
 @property (weak, nonatomic) IBOutlet UILabel *goldSignLabel;
+@property (weak, nonatomic) NSString *des;
 @property (strong, nonatomic) UCFHomeListGroupPresenter *presenter;
 @property (weak, nonatomic) id<UCFHomeListHeaderSectionViewDelegate> delegate;
 @end

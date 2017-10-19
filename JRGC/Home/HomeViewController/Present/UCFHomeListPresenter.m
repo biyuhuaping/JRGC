@@ -120,7 +120,7 @@
 
 - (UCFHomeListGroupPresenter *)homeListGroupPresenterWithGroup:(UCFHomeListGroup *)group
 {
-    if ([group.type intValue] == 13 || [group.type intValue] == 16 || [group.type intValue] == 17) {
+    if ([group.type intValue] == 13 || [group.type intValue] == 17) {
         group.showMore = NO;
     }
     else {
@@ -131,7 +131,7 @@
         if ([model.type isEqualToString:@"6"]) {
             model.moedelType = UCFHomeListCellModelTypeGoldFixed;
         }
-        else if ([model.type isEqualToString:@"0"]) {
+        else if ([model.type isEqualToString:@"0"] && ![group.type isEqualToString:@"13"]) {
             model.moedelType = UCFHomeListCellModelTypeReserved;
         }
         else if ([group.type isEqualToString:@"13"]) {
@@ -154,9 +154,6 @@
 
 #pragma mark - 无奈的代码
 - (BOOL)checkIDAAndBankBlindState:(SelectAccoutType)type {
-    
-    //    [UserInfoSingle sharedManager].openStatus = [listInfo.openStatus integerValue];
-    //    [UserInfoSingle sharedManager].enjoyOpenStatus
     NSUInteger openStatus = (type == SelectAccoutTypeP2P ? [UserInfoSingle sharedManager].openStatus  : [UserInfoSingle sharedManager].enjoyOpenStatus );
     __weak typeof(self) weakSelf = self;
     if (openStatus == 1 || openStatus == 2) {

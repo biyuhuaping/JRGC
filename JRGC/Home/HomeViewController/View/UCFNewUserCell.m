@@ -83,7 +83,12 @@
 - (void)setPresenter:(UCFHomeListCellPresenter *)presenter
 {
     _presenter = presenter;
-    self.rateLabel.text = presenter.annualRate;
+    if (presenter.platformSubsidyExpense.doubleValue > 0) {
+        self.rateLabel.text = [NSString stringWithFormat:@"%@+%@%%", presenter.annualRate, presenter.platformSubsidyExpense] ;
+    }
+    else {
+        self.rateLabel.text = presenter.annualRate;
+    }
     if (presenter.holdTime.length > 0) {
         self.limitLabel.text = [NSString stringWithFormat:@"%@~%@", presenter.holdTime, presenter.repayPeriodtext];
     }
@@ -96,7 +101,11 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    [self.rateLabel setFont:[UIFont boldSystemFontOfSize:15] string:@"%"];
+    if (self.presenter.platformSubsidyExpense.doubleValue > 0) {
+        [self.rateLabel setFont:[UIFont boldSystemFontOfSize:15] string:@"%+"];
+    }
+    [self.rateLabel setFont:[UIFont boldSystemFontOfSize:15] range:NSMakeRange(self.rateLabel.text.length - 1, 1)];
+    
 }
 
 @end
