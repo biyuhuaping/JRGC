@@ -31,6 +31,8 @@
 #import "UCFWebViewJavascriptBridgeLevel.h"
 #import "AppDelegate.h"
 #import "UITabBar+TabBarBadge.h"
+#import "Touch3DSingle.h"
+#import "UCFFacCodeViewController.h"
 @interface UCFMineViewController () <UITableViewDelegate, UITableViewDataSource, UCFMineHeaderViewDelegate, UCFMineFuncCellDelegate, UCFMineAPIManagerDelegate, UCFMineFuncSecCellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) UCFMineHeaderView   *mineHeaderView;
@@ -48,13 +50,38 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUI:) name:@"getPersonalCenterNetData" object:nil];
-//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(responds3DTouchClick) name:@"responds3DTouchClick" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(responds3DTouchClick) name:@"responds3DTouchClick" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setDefaultState:) name:@"setDefaultViewData" object:nil];
 //        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUI:) name:@"refreshUserState" object:nil];
 //        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(msgSkipToNativeAPP:) name:@"msgSkipToNativeAPP" object:nil];
         
     }
     return self;
+}
+
+- (void)responds3DTouchClick
+{
+    if ([Touch3DSingle sharedTouch3DSingle].isLoad) {
+        [Touch3DSingle sharedTouch3DSingle].isLoad = NO;
+    }else
+        return;
+    int type = [[Touch3DSingle sharedTouch3DSingle].type intValue];
+    [self.navigationController popToRootViewControllerAnimated:NO];
+    switch (type) {
+        case 0:{//工场码
+            UCFFacCodeViewController *subVC = [[UCFFacCodeViewController alloc] initWithNibName:@"UCFFacCodeViewController" bundle:nil];
+            subVC.urlStr = [NSString stringWithFormat:@"https://m.9888.cn/mpwap/mycode.jsp?pcode=%@&sex=%d",[[NSUserDefaults standardUserDefaults] objectForKey:@"gcmCode"], [[UserInfoSingle sharedManager].gender intValue]];
+            [self.navigationController pushViewController:subVC animated:YES];
+        }
+            break;
+        case 1:{//签到
+            if ([UserInfoSingle sharedManager].userId) {
+//                [self.userInfoVC signForRedBag];
+            }
+        }
+            break;
+    }
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -254,15 +281,15 @@
             cell.iconImageView.image = [UIImage imageNamed:@"uesr_icon_gold"];
             cell.valueLabel.textColor = UIColorWithRGB(0xffa811);
             cell.titleDesLabel.text = @"黄金账户";
-            if ([UserInfoSingle sharedManager].openStatus < 3 && [UserInfoSingle sharedManager].enjoyOpenStatus < 3 )
+            if ([UserInfoSingle sharedManager].goldAuthorization)
             {
-                cell.valueLabel.text = @"未开户";
-                cell.describeLabel.text = @"";
-                cell.descriLabel.hidden = YES;
-            }else{
                 cell.valueLabel.text = self.assetModel.nmCashBalance.length > 0 ? [NSString stringWithFormat:@"¥%@", self.assetModel.nmCashBalance] : [NSString stringWithFormat:@"¥0.00"];
                 cell.describeLabel.text = self.benefitModel.repayPerDateNM;
                 cell.descriLabel.hidden = NO;
+            }else{
+                cell.valueLabel.text = @"未开户";
+                cell.describeLabel.text = @"";
+                cell.descriLabel.hidden = YES;
             }
         }
         return cell;
@@ -345,21 +372,28 @@
         }
         else if([cell.titleDesLabel.text hasPrefix:@"黄金"]){
             
-            if ([UserInfoSingle sharedManager].openStatus < 3 && [UserInfoSingle sharedManager].enjoyOpenStatus < 3 )
-            {
-                HSHelper *helper = [HSHelper new];
-                if (![helper checkP2POrWJIsAuthorization:SelectAccoutTypeHoner]) {//先授权
-                    [helper pushP2POrWJAuthorizationType:SelectAccoutTypeHoner nav:self.navigationController];
-                    return;
-                }
-                [helper pushOpenHSType:SelectAccoutTypeHoner Step:[UserInfoSingle sharedManager].enjoyOpenStatus nav:self.navigationController];
-        
-            }
-            else
+            if([UserInfoSingle sharedManager].goldAuthorization)
             {
                 UCFGoldAccountViewController *subVC = [[UCFGoldAccountViewController alloc] initWithNibName:@"UCFGoldAccountViewController" bundle:nil];
                 subVC.homeView = weakSelf;
                 [self.navigationController pushViewController:subVC animated:YES];
+            }
+            else
+            {
+                    HSHelper *helper = [HSHelper new];
+                    if ([UserInfoSingle sharedManager].openStatus < 3 && [UserInfoSingle sharedManager].enjoyOpenStatus < 3 )
+                    {
+                       
+                        if (![helper checkP2POrWJIsAuthorization:SelectAccoutTypeHoner]) {//先授权
+                            [helper pushP2POrWJAuthorizationType:SelectAccoutTypeHoner nav:self.navigationController];
+                            return;
+                        }
+                        [helper pushOpenHSType:SelectAccoutTypeHoner Step:[UserInfoSingle sharedManager].enjoyOpenStatus nav:self.navigationController];
+                    }
+                    else
+                    {
+                        [helper pushGoldAuthorizationType:SelectAccoutTypeGold nav:self.navigationController sourceVC:@"MinViewController"];
+                    }
             }
             return;
         }
