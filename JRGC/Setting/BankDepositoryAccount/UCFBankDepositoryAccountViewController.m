@@ -28,7 +28,11 @@
 {
     [super viewWillAppear:animated];
 //    self.btnButtom.constant = 30;
-    if (!isFirstLaunch) {
+    
+    if (ScreenWidth == 320)
+    {
+        _whiteBaseHeight.constant = CGRectGetMaxY(_bottomLab.frame) + 20;
+    }else{
         _whiteBaseHeight.constant = CGRectGetMaxY(_bottomLab.frame) + 10;
     }
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
