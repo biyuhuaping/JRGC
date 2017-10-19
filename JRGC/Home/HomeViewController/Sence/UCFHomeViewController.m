@@ -105,7 +105,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUI:) name:@"getPersonalCenterNetData" object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(responds3DTouchClick) name:@"responds3DTouchClick" object:nil];
+//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(responds3DTouchClick) name:@"responds3DTouchClick" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setDefaultState:) name:@"setDefaultViewData" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUI:) name:@"refreshUserState" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(msgSkipToNativeAPP:) name:@"msgSkipToNativeAPP" object:nil];
@@ -114,30 +114,6 @@
     return self;
 }
 
-- (void)responds3DTouchClick
-{
-    if ([Touch3DSingle sharedTouch3DSingle].isLoad) {
-        [Touch3DSingle sharedTouch3DSingle].isLoad = NO;
-    }else
-        return;
-    int type = [[Touch3DSingle sharedTouch3DSingle].type intValue];
-    [self.navigationController popToRootViewControllerAnimated:NO];
-    switch (type) {
-        case 0:{//工场码
-            UCFFacCodeViewController *subVC = [[UCFFacCodeViewController alloc] initWithNibName:@"UCFFacCodeViewController" bundle:nil];
-            subVC.urlStr = [NSString stringWithFormat:@"https://m.9888.cn/mpwap/mycode.jsp?pcode=%@&sex=%d",[[NSUserDefaults standardUserDefaults] objectForKey:@"gcmCode"], [[UserInfoSingle sharedManager].gender intValue]];
-            [self.navigationController pushViewController:subVC animated:YES];
-        }
-            break;
-        case 1:{//签到
-            if ([UserInfoSingle sharedManager].userId) {
-                [self.userInfoVC signForRedBag];
-            }
-        }
-            break;
-    }
-    
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
