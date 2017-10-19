@@ -183,7 +183,7 @@
         UCFSettingItem *p2pOrHonerAccout = nil;
         UCFSettingItem *riskAssessment = nil;
         if (self.accoutType == SelectAccoutTypeHoner) {
-              myInVest.title  = @"我的投资";
+              myInVest.title  = @"我的认购";
               p2pOrHonerAccout = [UCFSettingArrowItem itemWithIcon:nil title:@"尊享徽商银行存管账户" destVcClass:nil];
               riskAssessment= [UCFSettingArrowItem itemWithIcon:nil title:@"尊享风险承担能力" destVcClass:[RiskAssessmentViewController class]];
         }else{
@@ -345,7 +345,7 @@
     
     NSString *titleStr = item.title;
 //    && [NSStringFromClass(item.destVcClass) isEqualToString:@"MyViewController"]
-    if ([titleStr isEqualToString:@"我的出借"]  || [titleStr isEqualToString:@"我的投资"] ) {
+    if ([titleStr isEqualToString:@"我的出借"]  || [titleStr isEqualToString:@"我的认购"] ) {
         MyViewController *myInvestVC = [[MyViewController alloc] initWithNibName:@"MyViewController" bundle:nil];
         myInvestVC.selectedSegmentIndex = 0;
         myInvestVC.accoutType = self.accoutType;

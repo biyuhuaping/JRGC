@@ -68,10 +68,10 @@
             [UserInfoSingle sharedManager].goldAuthorization = YES;
             [[NSUserDefaults standardUserDefaults] setBool:YES  forKey:GOldAUTHORIZATION];
             [[NSUserDefaults standardUserDefaults] synchronize];
-            if ([_sourceVc isEqualToString:@"GoldPurchaseVC"]) {
+            if ([_sourceVc isEqualToString:@"GoldPurchaseVC"] || [_sourceVc isEqualToString:@"MinViewController"])
+            {
                 [AuxiliaryFunc showToastMessage:@"授权成功" withView:self.view];
                 [self performSelector:@selector(popViewController) withObject:nil afterDelay:2.0f];
-
             } else if([_sourceVc isEqualToString:@"UCFRechargeOrCashVC"])
             {
                 [AuxiliaryFunc showToastMessage:@"授权成功" withView:self.view];
@@ -103,8 +103,13 @@
     [MBProgressHUD displayHudError:[err.userInfo objectForKey:@"NSLocalizedDescription"]];
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
 }
--(void)popViewController{
+-(void)popViewController
+{
     [self.navigationController popViewControllerAnimated:YES];
+    if ([_sourceVc isEqualToString:@"MinViewController"])//刷新我的页面数据
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
+    }
 }
 -(void)popMineViewController
 {

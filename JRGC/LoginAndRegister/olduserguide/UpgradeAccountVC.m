@@ -92,12 +92,12 @@
 
         
     } else {
-        _customLabel2.text = @"开通即视为本人已阅读并同意《资金账户服务三方协议》";
+        _customLabel2.text = @"开通即视为本人已阅读并同意《资金存管三方协议》";
         [_customLabel2 setFontColor:UIColorWithRGB(0x4aa1f9) string:@"《资金账户服务三方协议》"];
 
         __weak typeof(self) weakSelf = self;
-        [_customLabel2 addLinkString:@"《资金账户服务三方协议》" block:^(ZBLinkLabelModel *linkModel) {
-            FullWebViewController *webController = [[FullWebViewController alloc] initWithWebUrl:ZXTRUSTEESHIP title:@"《资金账户服务三方协议》"];
+        [_customLabel2 addLinkString:@"《资金存管三方协议》" block:^(ZBLinkLabelModel *linkModel) {
+            FullWebViewController *webController = [[FullWebViewController alloc] initWithWebUrl:ZXTRUSTEESHIP title:@"《资金存管三方协议》"];
             webController.baseTitleType = @"specialUser";
             [weakSelf.navigationController pushViewController:webController animated:YES];
         }];
