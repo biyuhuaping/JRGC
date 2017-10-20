@@ -31,8 +31,9 @@
 #import "UCFBatchBidController.h"
 #import "UCFOrdinaryBidController.h"
 #import "UCFGoldDetailViewController.h"
-#import "HSHelper.h"
-@interface UCFMicroMoneyViewController () <UITableViewDataSource, UITableViewDelegate, UCFInvestAPIWithMicroMoneyManagerDelegate, UCFInvestMicroMoneyCellDelegate,UCFHomeListHeaderSectionViewDelegate, UCFHomeInvestCellDelegate>
+#import "UCFNewUserCell.h"
+#import "UCFRegisterStepOneViewController.h"
+@interface UCFMicroMoneyViewController () <UITableViewDataSource, UITableViewDelegate, UCFInvestAPIWithMicroMoneyManagerDelegate, UCFInvestMicroMoneyCellDelegate,UCFHomeListHeaderSectionViewDelegate, UCFHomeInvestCellDelegate,UCFNewUserCellDelegate>
 
 @property (strong, nonatomic) UCFMicroMoneyHeaderView *microMoneyHeaderView;
 @property (strong, nonatomic) UCFInvestAPIManager *apiManager;
@@ -103,10 +104,10 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    UCFMicroMoneyGroup *group = [self.dataArray objectAtIndex:section];
-    if ([group.type isEqualToString:@"13"]) {
-        return 140;
-    }
+//    UCFMicroMoneyGroup *group = [self.dataArray objectAtIndex:section];
+//    if ([group.type isEqualToString:@"13"]) {
+//        return 140;
+//    }
     return 39;
 }
 
@@ -127,12 +128,8 @@
     }
     
     UCFMicroMoneyGroup *group = [self.dataArray objectAtIndex:section];
-    if ([group.type isEqualToString:@"13"]) {
-        view.downView.hidden = NO;
-    }
-    else {
-        view.downView.hidden = YES;
-    }
+    view.downView.hidden = YES;
+    view.des = group.desc;
     [view.headerImageView sd_setImageWithURL:[NSURL URLWithString:group.iconUrl]];
     view.homeListHeaderMoreButton.hidden = !group.showMore;
     [view.contentView setBackgroundColor:UIColorWithRGB(0xf9f9f9)];
@@ -171,7 +168,19 @@
 {
     UCFMicroMoneyGroup *group = [self.dataArray objectAtIndex:indexPath.section];
     UCFMicroMoneyModel *model = [group.prdlist objectAtIndex:indexPath.row];
-    if (group.type.intValue == 16) {
+    if (group.type.intValue == 13) {
+        static NSString *cellId = @"newusercell";
+        UCFNewUserCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+        if (nil == cell) {
+            cell = (UCFNewUserCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFNewUserCell" owner:self options:nil] lastObject];
+            cell.delegate = self;
+            cell.tableview = tableView;
+        }
+        cell.microMoneyModel = model;
+        cell.indexPath = indexPath;
+        return cell;
+    }
+    else if (group.type.intValue == 16) {
         static NSString *cellId1 = @"homeListInvestCell";
         UCFHomeInvestCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId1];
         if (nil == cell) {
@@ -576,5 +585,23 @@
     }
 }
 
+- (void)newUserCell:(UCFNewUserCell *)newUserCell didClickedRegisterButton:(UIButton *)button withModel:(UCFHomeListCellModel *)model
+{
+    NSString *userId = [UserInfoSingle sharedManager].userId;
+    if (nil == userId) {
+        UCFRegisterStepOneViewController *registerControler = [[UCFRegisterStepOneViewController alloc] init];
+        registerControler.sourceVC = @"fromHomeView";
+        UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:registerControler] ;
+        AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+        UINavigationController *nav = app.tabBarController.selectedViewController ;
+        [nav presentViewController:loginNaviController animated:YES completion:nil];
+        return;
+    }
+    else {
+//        if ([self.delegate respondsToSelector:@selector(homeList:tableView:didClickedWithModel:withType:)]) {
+//            [self.delegate homeList:self tableView:self.tableView didClickedWithModel:model withType:UCFHomeListTypeInvest];
+//        }
+    }
+}
 
 @end

@@ -132,6 +132,7 @@
     if (nil == view) {
         view = (UCFHomeListHeaderSectionView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeListHeaderSectionView" owner:self options:nil] lastObject];
     }
+    view.section = section;
     view.delegate = self;
     view.frame = CGRectMake(0, 0, ScreenWidth, 39);
     UCFHomeListGroupPresenter *groupPresenter = [self.presenter.allDatas objectAtIndex:section];
@@ -259,6 +260,11 @@
         }
         else if ([type isEqualToString:@"15"]) {
             [self.delegate homeList:self tableView:self.tableView didClickedWithModel:nil withType:UCFHomeListTypeGlodMore];
+        }
+        else if ([type isEqualToString:@"16"]) {
+            UCFHomeListGroupPresenter *groupP = [self.presenter.allDatas objectAtIndex:homeListHeader.section];
+            UCFHomeListCellPresenter *cellP = [groupP.group.prdlist firstObject];
+            [self.delegate homeList:self tableView:self.tableView didClickedWithModel:cellP.item withType:UCFHomeListTypeDetail];
         }
     }
 }

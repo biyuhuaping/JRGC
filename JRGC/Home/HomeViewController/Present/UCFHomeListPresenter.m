@@ -162,7 +162,7 @@
         BlockUIAlertView *alert = [[BlockUIAlertView alloc] initWithTitle:@"提示" message:message cancelButtonTitle:@"取消" clickButton:^(NSInteger index){
             if (index == 1) {
                 HSHelper *helper = [HSHelper new];
-                UIViewController *VC = (UIViewController *)weakSelf.view;
+                UIViewController *VC = (UIViewController *)weakSelf.iconDelegate;
                 [helper pushOpenHSType:type Step:step nav:VC.parentViewController.navigationController];
             }
         } otherButtonTitles:@"确认"];

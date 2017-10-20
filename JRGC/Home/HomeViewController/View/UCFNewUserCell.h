@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class UCFNewUserCell, UCFHomeListCellPresenter, UCFHomeListCellModel;
+@class UCFNewUserCell, UCFHomeListCellPresenter, UCFHomeListCellModel, UCFMicroMoneyModel;
 @protocol UCFNewUserCellDelegate <NSObject>
 
 - (void)newUserCell:(UCFNewUserCell *)newUserCell didClickedRegisterButton:(UIButton *)button withModel:(UCFHomeListCellModel *)model;
@@ -19,5 +19,6 @@
 @property (weak, nonatomic) id<UCFNewUserCellDelegate> delegate;
 @property (weak, nonatomic) UITableView *tableview;
 @property (strong, nonatomic) NSIndexPath *indexPath;
+@property (strong, nonatomic) UCFMicroMoneyModel *microMoneyModel;
 @property (strong, nonatomic) UCFHomeListCellPresenter *presenter;
 @end

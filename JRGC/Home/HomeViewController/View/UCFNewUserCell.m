@@ -9,6 +9,8 @@
 #import "UCFNewUserCell.h"
 #import "UCFHomeListCellPresenter.h"
 #import "NZLabel.h"
+#import "UCFMicroMoneyModel.h"
+#import "UserInfoSingle.h"
 
 @interface UCFNewUserCell ()
 @property (weak, nonatomic) IBOutlet UIView *upSegLine;
@@ -98,9 +100,36 @@
     self.backModeLabel.text = presenter.repayModeText;
 }
 
+- (void)setMicroMoneyModel:(UCFMicroMoneyModel *)microMoneyModel
+{
+    _microMoneyModel = microMoneyModel;
+    if (microMoneyModel.platformSubsidyExpense.doubleValue > 0) {
+        self.rateLabel.text = [NSString stringWithFormat:@"%@%%+%@%%", microMoneyModel.annualRate, microMoneyModel.platformSubsidyExpense] ;
+    }
+    else {
+        self.rateLabel.text = [NSString stringWithFormat:@"%@%%", microMoneyModel.annualRate];
+    }
+    if (microMoneyModel.holdTime.length > 0) {
+        self.limitLabel.text = [NSString stringWithFormat:@"%@~%@", microMoneyModel.holdTime, microMoneyModel.repayPeriodtext];
+    }
+    else {
+        self.limitLabel.text = [NSString stringWithFormat:@"%@", microMoneyModel.repayPeriodtext];
+    }
+    self.backModeLabel.text = microMoneyModel.repayModeText;
+}
+
 - (void)layoutSubviews
 {
     [super layoutSubviews];
+    
+    NSString *userId = [UserInfoSingle sharedManager].userId;
+    if (userId) {
+        [self.okButton setTitle:@"新手享收益" forState:UIControlStateNormal];
+    }
+    else {
+        [self.okButton setTitle:@"注册享收益" forState:UIControlStateNormal];
+    }
+    
     if (self.presenter.platformSubsidyExpense.doubleValue > 0) {
         [self.rateLabel setFont:[UIFont boldSystemFontOfSize:15] string:@"%+"];
     }

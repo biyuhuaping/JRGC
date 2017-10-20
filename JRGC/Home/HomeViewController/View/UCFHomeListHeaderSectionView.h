@@ -26,6 +26,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *goldSignViewW;
 @property (weak, nonatomic) IBOutlet UILabel *goldSignLabel;
 @property (weak, nonatomic) NSString *des;
+@property (assign, nonatomic) NSInteger section;
 @property (strong, nonatomic) UCFHomeListGroupPresenter *presenter;
 @property (weak, nonatomic) id<UCFHomeListHeaderSectionViewDelegate> delegate;
 @end
