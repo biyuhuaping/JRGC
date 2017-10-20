@@ -257,10 +257,9 @@
 //    self.pickerView.hidden = !self.pickerView.hidden;
     if (headerBtn.selected) {
         [self.pickerView show];
-//        if (<#condition#>) {
-//            <#statements#>
-//        }
-//        [self.pickerView scrollToThisMonth:[]];
+        if (self.currentDay.length > 7) {
+            [self.pickerView scrollToThisMonth:[self.currentDay substringToIndex:7]];
+        }
 //        [UIView animateWithDuration:0.25 animations:^{
 //            self.pickerView.y = self.view.height - 100;
 //        }];
