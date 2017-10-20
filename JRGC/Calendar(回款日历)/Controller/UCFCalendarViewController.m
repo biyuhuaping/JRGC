@@ -259,6 +259,7 @@
         [self.pickerView show];
         if (self.currentDay.length > 7) {
             NSArray *arr = self.calendarHeader.calendar.indexPathsForVisibleItems;
+            NSIndexPath *indexPath = arr[0];
             [self.pickerView scrollToThisMonth:[self.currentDay substringToIndex:7]];
         }
 //        [UIView animateWithDuration:0.25 animations:^{
