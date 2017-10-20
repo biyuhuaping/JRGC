@@ -233,9 +233,7 @@
         NSArray *arr = self.calendarHeader.calendar.indexPathsForVisibleItems;
         NSIndexPath *indexPath = arr[0];
         [self.pickerView scrollToThisMonth:indexPath.row];
-        //        [UIView animateWithDuration:0.25 animations:^{
-        //            self.pickerView.y = self.view.height - 100;
-        //        }];
+
     }
     else {
         [self.pickerView hidden];
