@@ -27,6 +27,7 @@
 {
     [UIView animateWithDuration:0.25 animations:^{
         self.hidden = NO;
+
     } completion:^(BOOL finished) {
         [UIView animateWithDuration:0.5 animations:^{
             self.bottomViewBottomSpace.constant = 0;
