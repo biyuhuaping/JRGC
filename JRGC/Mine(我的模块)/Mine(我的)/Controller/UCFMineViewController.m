@@ -61,6 +61,7 @@
 
 - (void)responds3DTouchClick
 {
+    
     if ([Touch3DSingle sharedTouch3DSingle].isLoad) {
         [Touch3DSingle sharedTouch3DSingle].isLoad = NO;
     }else
