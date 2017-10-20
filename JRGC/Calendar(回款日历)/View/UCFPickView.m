@@ -56,7 +56,7 @@
     if ([self.dataArray containsObject:month]) {
         [_monthPickerView selectRow:[self.dataArray indexOfObject:month] inComponent:0 animated:YES];
     } else {
-        
+        [_monthPickerView selectRow:[self.dataArray count] -1 inComponent:0 animated:YES];
     }
 }
 #pragma mark - pickerView的代理方法
