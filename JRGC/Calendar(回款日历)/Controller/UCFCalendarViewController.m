@@ -257,6 +257,10 @@
 //    self.pickerView.hidden = !self.pickerView.hidden;
     if (headerBtn.selected) {
         [self.pickerView show];
+//        if (<#condition#>) {
+//            <#statements#>
+//        }
+//        [self.pickerView scrollToThisMonth:[]];
 //        [UIView animateWithDuration:0.25 animations:^{
 //            self.pickerView.y = self.view.height - 100;
 //        }];
