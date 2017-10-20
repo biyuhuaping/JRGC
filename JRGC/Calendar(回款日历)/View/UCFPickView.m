@@ -51,13 +51,11 @@
     _dataArray = dataArray;
     [_monthPickerView reloadAllComponents];
 }
-- (void)scrollToThisMonth:(NSString *)month
+- (void)scrollToThisMonth:(NSInteger)index
 {
-    if ([self.dataArray containsObject:month]) {
-        [_monthPickerView selectRow:[self.dataArray indexOfObject:month] inComponent:0 animated:YES];
-    } else {
-        [_monthPickerView selectRow:[self.dataArray count] -1 inComponent:0 animated:YES];
-    }
+
+    [_monthPickerView selectRow:index inComponent:0 animated:YES];
+    
 }
 #pragma mark - pickerView的代理方法
 //UIPickerViewDataSource中定义的方法，该方法的返回值决定该控件包含的列数
