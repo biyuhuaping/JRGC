@@ -16,7 +16,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *reserveButton;
 @property (weak, nonatomic) IBOutlet UILabel *minLabel;
 @property (weak, nonatomic) IBOutlet UILabel *limitLabel;
-@property (weak, nonatomic) IBOutlet UILabel *addedTransLabel;
+@property (weak, nonatomic) IBOutlet NZLabel *addedTransLabel;
 
 @end
 
@@ -31,15 +31,15 @@
 - (void)setPresenter:(UCFHomeListCellPresenter *)presenter
 {
     _presenter = presenter;
-    self.anurateLabel.text = presenter.annualRate;
-    if (presenter.holdTime.length > 0) {
-        self.limitLabel.text = [NSString stringWithFormat:@"期限%@~%@", presenter.holdTime, presenter.repayPeriodtext];
+    if (presenter.platformSubsidyExpense.length > 0) {
+        self.anurateLabel.text = [NSString stringWithFormat:@"%@~%@%%",presenter.annualRate, presenter.platformSubsidyExpense];
     }
     else {
-        self.limitLabel.text = [NSString stringWithFormat:@"期限%@", presenter.repayPeriodtext];
+        self.anurateLabel.text = [NSString stringWithFormat:@"%@",presenter.annualRate];
     }
-    self.addedTransLabel.text = [NSString stringWithFormat:@"%@", presenter.completeLoan];
-    self.minLabel.text = [NSString stringWithFormat:@"%@", presenter.minInvest];
+    
+    self.limitLabel.text = [NSString stringWithFormat:@"%@", presenter.holdTime];
+    self.addedTransLabel.text = [NSString stringWithFormat:@"累计交易%@", presenter.completeLoan];
 }
 
 - (IBAction)reserveForSomeone:(UIButton *)sender {
@@ -58,21 +58,26 @@
 - (void)setMicroModel:(UCFMicroMoneyModel *)microModel
 {
     _microModel = microModel;
-    self.anurateLabel.text = microModel.annualRate ? [NSString stringWithFormat:@"%@%%",microModel.annualRate] : @"0.0%";
-    if (microModel.holdTime.length > 0) {
-        self.limitLabel.text = [NSString stringWithFormat:@"期限%@~%@", microModel.holdTime, microModel.repayPeriodtext];
+    if (microModel.platformSubsidyExpense.length > 0) {
+        self.anurateLabel.text = [NSString stringWithFormat:@"%@~%@%%",microModel.annualRate, microModel.platformSubsidyExpense];
     }
     else {
-        self.limitLabel.text = [NSString stringWithFormat:@"期限%@", microModel.repayPeriodtext];
+        self.anurateLabel.text = microModel.annualRate ? [NSString stringWithFormat:@"%@%%",microModel.annualRate] : @"0.0%";
     }
-    self.addedTransLabel.text = [NSString stringWithFormat:@"%@亿元", microModel.totleBookAmt];
-    self.minLabel.text = [NSString stringWithFormat:@"%@元起", microModel.minInvest];
+    
+    self.limitLabel.text = [NSString stringWithFormat:@"%@", microModel.holdTime];
+    self.addedTransLabel.text = [NSString stringWithFormat:@"累计交易%@亿元", microModel.totleBookAmt];
 }
 
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    [self.anurateLabel setFont:[UIFont boldSystemFontOfSize:15] string:@"%"];
+    if (self.presenter.platformSubsidyExpense.length > 0) {
+        [self.anurateLabel setFont:[UIFont boldSystemFontOfSize:15] string:@"%~"];
+    }
+    [self.anurateLabel setFont:[UIFont boldSystemFontOfSize:15] range:NSMakeRange(self.anurateLabel.text.length - 1, 1)];
+    
+    [self.addedTransLabel setFontColor:UIColorWithRGB(0x555555) string:@"累计交易"];
 }
 
 @end

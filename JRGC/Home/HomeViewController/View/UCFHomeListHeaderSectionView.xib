@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -47,19 +47,6 @@
                                 <action selector="moreClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="0jK-Gt-yqB"/>
                             </connections>
                         </button>
-                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="最快2分钟起息" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P0O-3l-8F2">
-                            <rect key="frame" x="279" y="11" width="81" height="14.5"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                            <color key="textColor" red="0.29019607843137252" green="0.63137254901960782" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_icon_rocket" translatesAutoresizingMaskIntoConstraints="NO" id="N8v-vs-Y5P">
-                            <rect key="frame" x="262" y="10" width="17" height="17"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="17" id="bE0-fa-yhJ"/>
-                                <constraint firstAttribute="width" constant="17" id="bcy-y7-czG"/>
-                            </constraints>
-                        </imageView>
                         <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P5R-M6-kkF">
                             <rect key="frame" x="90.5" y="9" width="58" height="18"/>
                             <subviews>
@@ -67,11 +54,11 @@
                                     <rect key="frame" x="5" y="0.0" width="48" height="18"/>
                                     <edgeInsets key="layoutMargins" top="20" left="20" bottom="20" right="20"/>
                                     <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="12"/>
-                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="textColor" red="1" green="0.52156862745098043" blue="0.52549019607843139" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
-                            <color key="backgroundColor" red="1" green="0.75294117650000003" blue="0.1529411765" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="1" green="0.87450980392156863" blue="0.87450980392156863" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="trailing" secondItem="nxq-yL-jsK" secondAttribute="trailing" constant="5" id="61w-B4-Ao7"/>
                                 <constraint firstAttribute="width" constant="58" id="S0j-PK-ZKu"/>
@@ -92,12 +79,8 @@
                         <constraint firstAttribute="trailing" secondItem="END-za-lfi" secondAttribute="trailing" constant="15" id="7G5-oX-4wy"/>
                         <constraint firstItem="P5R-M6-kkF" firstAttribute="centerY" secondItem="DpL-ou-yAE" secondAttribute="centerY" id="7ph-eD-d3v"/>
                         <constraint firstItem="P5R-M6-kkF" firstAttribute="leading" secondItem="DpL-ou-yAE" secondAttribute="trailing" constant="5" id="H3P-YG-QCi"/>
-                        <constraint firstItem="P0O-3l-8F2" firstAttribute="centerY" secondItem="DpL-ou-yAE" secondAttribute="centerY" id="Qh1-Po-p2d"/>
-                        <constraint firstAttribute="trailing" secondItem="P0O-3l-8F2" secondAttribute="trailing" constant="15" id="clf-f4-81Y"/>
                         <constraint firstAttribute="height" constant="37" id="f9u-V9-ow8"/>
-                        <constraint firstItem="P0O-3l-8F2" firstAttribute="leading" secondItem="N8v-vs-Y5P" secondAttribute="trailing" id="ggL-An-XfE"/>
                         <constraint firstItem="DpL-ou-yAE" firstAttribute="centerY" secondItem="zXX-Nc-JUK" secondAttribute="centerY" id="m18-gx-D3d"/>
-                        <constraint firstItem="N8v-vs-Y5P" firstAttribute="centerY" secondItem="P0O-3l-8F2" secondAttribute="centerY" id="qpr-FK-Smp"/>
                         <constraint firstItem="END-za-lfi" firstAttribute="centerY" secondItem="zXX-Nc-JUK" secondAttribute="centerY" id="u19-sx-1CS"/>
                     </constraints>
                 </view>
@@ -277,8 +260,6 @@
                 <outlet property="imageThird" destination="BT4-z5-sif" id="ZBD-8F-vty"/>
                 <outlet property="segFirstView" destination="GCn-8t-Vuj" id="5lc-qY-ctC"/>
                 <outlet property="segSecondView" destination="80Z-es-pAP" id="xsx-D3-dvD"/>
-                <outlet property="signImageView" destination="N8v-vs-Y5P" id="Gyf-KM-NWH"/>
-                <outlet property="signLabel" destination="P0O-3l-8F2" id="m0N-xn-PbM"/>
                 <outlet property="title1LabelFirst" destination="MXJ-y9-az3" id="fwg-0H-dvf"/>
                 <outlet property="title1LabelSecond" destination="Lcd-OT-twW" id="imk-rR-fwy"/>
                 <outlet property="title1LabelThird" destination="4Pl-9k-BA1" id="Ki0-qy-eRB"/>
@@ -295,7 +276,6 @@
     </objects>
     <resources>
         <image name="home_arrow_blue" width="7" height="12"/>
-        <image name="home_icon_rocket" width="17" height="17"/>
         <image name="mission_icon_1" width="20" height="20"/>
         <image name="mission_icon_2gray" width="20" height="20"/>
         <image name="mission_icon_3gray" width="20" height="20"/>

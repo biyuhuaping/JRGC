@@ -19,6 +19,7 @@
 #import "ToolSingleTon.h"
 #import "UCFNoPermissionViewController.h"
 #import "UCFGoldFlexibleCell.h"
+#import "UCFInvestMicroMoneyCell.h"
 #import "UCFAccountPieCharViewController.h"
 #import "UCFRechargeOrCashViewController.h"
 #import "AppDelegate.h"
@@ -52,19 +53,20 @@
     [self.tableview.header beginRefreshing];
 }
 
-- (void)viewDidLayoutSubviews
-{
-    [super viewDidLayoutSubviews];
-    self.goldenHeader.frame = CGRectMake(0, 0, ScreenWidth, ScreenWidth/16*5+101);
-}
+//- (void)viewDidLayoutSubviews
+//{
+//    [super viewDidLayoutSubviews];
+//    self.goldenHeader.frame = CGRectMake(0, 0, ScreenWidth, ScreenWidth/16*5+101);
+//}
 
 #pragma mark - 初始化UI
 - (void)createUI {
 //    CGFloat height = [UCFGoldenHeaderView viewHeight];
-    UCFGoldenHeaderView *goldenHeader = (UCFGoldenHeaderView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFGoldenHeaderView" owner:self options:nil] lastObject];
-    self.tableview.tableHeaderView = goldenHeader;
-    self.goldenHeader = goldenHeader;
-    goldenHeader.hostVc = self;
+//    UCFGoldenHeaderView *goldenHeader = (UCFGoldenHeaderView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFGoldenHeaderView" owner:self options:nil] lastObject];
+//    goldenHeader.frame = CGRectMake(0, 0, ScreenWidth, ScreenWidth/16.0 *5 + 101);
+//    self.tableview.tableHeaderView = goldenHeader;
+//    self.goldenHeader = goldenHeader;
+//    goldenHeader.hostVc = self;
     
     [self.tableview addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(refreshData)];
     __weak typeof(self) weakSelf = self;
@@ -118,11 +120,11 @@
         return cell;
     }
     else if (indexPath.section == 1) {
-        static NSString *cellId = @"homeListCell";
-        UCFHomeListCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+        static NSString *cellId = @"investmicromoney";
+        UCFInvestMicroMoneyCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
         if (nil == cell) {
-            cell = (UCFHomeListCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeListCell" owner:self options:nil] lastObject];
-            cell.honorDelegate = self;
+            cell = (UCFInvestMicroMoneyCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFInvestMicroMoneyCell" owner:self options:nil] lastObject];
+            cell.delegate = self;
         }
         cell.tableView = tableView;
         cell.indexPath = indexPath;
@@ -224,8 +226,8 @@
             view.homeListHeaderMoreButton.hidden = YES;
             view.headerTitleLabel.text = @"尊享金";
             view.headerImageView.image = [UIImage imageNamed:@"mine_icon_gold"];
-            view.honerLabel.text = @"实物黄金赚收益";
-            view.honerLabel.hidden = NO;
+//            view.honerLabel.text = @"实物黄金赚收益";
+//            view.honerLabel.hidden = NO;
             [view.homeListHeaderMoreButton setTitleColor:UIColorWithRGB(0x4aa1f9) forState:UIControlStateNormal];
             return view;
         }
@@ -264,7 +266,7 @@
     
 }
 
-- (void)homelistCell:(UCFHomeListCell *)homelistCell didClickedProgressViewAtIndexPath:(NSIndexPath *)indexPath
+- (void)homelistCell:(UCFInvestMicroMoneyCell *)homelistCell didClickedProgressViewAtIndexPath:(NSIndexPath *)indexPath
 {
     if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
         //如果未登录，展示登录页面
@@ -342,11 +344,11 @@
 - (void)refreshData {
     [self.goldenHeader getNormalBannerData];
     self.currentPage = 1;
-    [self getGoldProFromNetWithPage:[NSString stringWithFormat:@"%lu", self.currentPage]];
+    [self getGoldProFromNetWithPage:[NSString stringWithFormat:@"%lu", (unsigned long)self.currentPage]];
 }
 
 - (void)loadNetData {
-    [self getGoldProFromNetWithPage:[NSString stringWithFormat:@"%lu", self.currentPage]];
+    [self getGoldProFromNetWithPage:[NSString stringWithFormat:@"%lu", (unsigned long)self.currentPage]];
 }
 
 - (void)getGoldProFromNetWithPage:(NSString *)page

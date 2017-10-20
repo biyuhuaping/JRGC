@@ -63,17 +63,25 @@
     _presenter = presenter;
     
     self.headerTitleLabel.text = presenter.headerTitle;
-    _honerLabel.text = _presenter.desc;
+//    _honerLabel.text = _presenter.desc;
     self.homeListHeaderMoreButton.hidden = !presenter.showMore;
     
     [self.headerImageView sd_setImageWithURL:[NSURL URLWithString:presenter.iconUrl]];
     
-    if (self.presenter.type == 17) {
+    if (self.presenter.type == 17 || self.presenter.type == 16) {
         if (self.presenter.desc.length > 0) {
             self.goldSignView.hidden = NO;
             self.goldSignLabel.text = self.presenter.desc;
             CGSize size = [self.goldSignLabel.text boundingRectWithSize:CGSizeMake(MAXFLOAT, 18) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12.0f]} context:nil].size;
             self.goldSignViewW.constant = size.width + 11;
+            if (self.presenter.type == 17) {
+                self.goldSignView.backgroundColor = UIColorWithRGB(0xffecc5);
+                self.goldSignLabel.textColor = UIColorWithRGB(0xffa550);
+            }
+            else if (self.presenter.type == 16) {
+                self.goldSignView.backgroundColor = UIColorWithRGB(0xffdfdf);
+                self.goldSignLabel.textColor = UIColorWithRGB(0xff8586);
+            }
         }
         else {
             self.goldSignView.hidden = YES;
@@ -88,14 +96,18 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    if ([self.presenter.headerTitle isEqualToString:@"预约宝"] || [self.headerTitleLabel.text isEqualToString:@"预约宝"]) {
-        self.signLabel.hidden = NO;
-        self.signLabel.textColor = UIColorWithRGB(0x4aa1f9);
-        self.signImageView.hidden = NO;
+    if (self.des.length > 0 || self.presenter.desc.length > 0) {
+        if (self.des.length > 0) {
+            self.goldSignView.hidden = NO;
+            self.goldSignLabel.text = self.des;
+            CGSize size = [self.des boundingRectWithSize:CGSizeMake(MAXFLOAT, 18) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12.0f]} context:nil].size;
+            self.goldSignViewW.constant = size.width + 11;
+            self.goldSignView.backgroundColor = UIColorWithRGB(0xffdfdf);
+            self.goldSignLabel.textColor = UIColorWithRGB(0xff8586);
+        }
     }
     else {
-        self.signLabel.hidden = YES;
-        self.signImageView.hidden = YES;
+        self.goldSignView.hidden = YES;
     }
     
     

@@ -13,6 +13,7 @@
 
 #import "UCFHomeListHeaderSectionView.h"
 #import "UCFHomeListCell.h"
+#import "UCFInvestMicroMoneyCell.h"
 #import "UCFHomeInvestCell.h"
 #import "AppDelegate.h"
 
@@ -30,8 +31,9 @@
 #import "UCFBatchBidController.h"
 #import "UCFOrdinaryBidController.h"
 #import "UCFGoldDetailViewController.h"
-#import "HSHelper.h"
-@interface UCFMicroMoneyViewController () <UITableViewDataSource, UITableViewDelegate, UCFInvestAPIWithMicroMoneyManagerDelegate, UCFHomeListCellHonorDelegate,UCFHomeListHeaderSectionViewDelegate, UCFHomeInvestCellDelegate>
+#import "UCFNewUserCell.h"
+#import "UCFRegisterStepOneViewController.h"
+@interface UCFMicroMoneyViewController () <UITableViewDataSource, UITableViewDelegate, UCFInvestAPIWithMicroMoneyManagerDelegate, UCFInvestMicroMoneyCellDelegate,UCFHomeListHeaderSectionViewDelegate, UCFHomeInvestCellDelegate,UCFNewUserCellDelegate>
 
 @property (strong, nonatomic) UCFMicroMoneyHeaderView *microMoneyHeaderView;
 @property (strong, nonatomic) UCFInvestAPIManager *apiManager;
@@ -102,6 +104,10 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
+//    UCFMicroMoneyGroup *group = [self.dataArray objectAtIndex:section];
+//    if ([group.type isEqualToString:@"13"]) {
+//        return 140;
+//    }
     return 39;
 }
 
@@ -120,8 +126,10 @@
     if (nil == view) {
         view = (UCFHomeListHeaderSectionView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeListHeaderSectionView" owner:self options:nil] lastObject];
     }
-    view.downView.hidden = YES;
+    
     UCFMicroMoneyGroup *group = [self.dataArray objectAtIndex:section];
+    view.downView.hidden = YES;
+    view.des = group.desc;
     [view.headerImageView sd_setImageWithURL:[NSURL URLWithString:group.iconUrl]];
     view.homeListHeaderMoreButton.hidden = !group.showMore;
     [view.contentView setBackgroundColor:UIColorWithRGB(0xf9f9f9)];
@@ -160,9 +168,21 @@
 {
     UCFMicroMoneyGroup *group = [self.dataArray objectAtIndex:indexPath.section];
     UCFMicroMoneyModel *model = [group.prdlist objectAtIndex:indexPath.row];
-    if (group.type.intValue == 16) {
-        static NSString *cellId = @"homeListInvestCell";
-        UCFHomeInvestCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+    if (group.type.intValue == 13) {
+        static NSString *cellId = @"newusercell";
+        UCFNewUserCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+        if (nil == cell) {
+            cell = (UCFNewUserCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFNewUserCell" owner:self options:nil] lastObject];
+            cell.delegate = self;
+            cell.tableview = tableView;
+        }
+        cell.microMoneyModel = model;
+        cell.indexPath = indexPath;
+        return cell;
+    }
+    else if (group.type.intValue == 16) {
+        static NSString *cellId1 = @"homeListInvestCell";
+        UCFHomeInvestCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId1];
         if (nil == cell) {
             cell = (UCFHomeInvestCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeInvestCell" owner:self options:nil] lastObject];
             cell.delegate = self;
@@ -171,12 +191,12 @@
         return cell;
     }
     else {
-        static NSString *cellId = @"homeListCell";
-        UCFHomeListCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+        static NSString *cellId2 = @"investmicromoney";
+        UCFInvestMicroMoneyCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId2];
         if (nil == cell) {
-            cell = (UCFHomeListCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeListCell" owner:self options:nil] lastObject];
+            cell = (UCFInvestMicroMoneyCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFInvestMicroMoneyCell" owner:self options:nil] lastObject];
             cell.tableView = tableView;
-            cell.honorDelegate = self;
+            cell.delegate = self;
         }
         cell.indexPath = indexPath;
         
@@ -199,7 +219,10 @@
 {
     UCFMicroMoneyGroup *group = [self.dataArray objectAtIndex:indexPath.section];
     if (group.type.intValue == 16) {
-        return 136;
+        return 160;
+    }
+    else if (group.type.intValue == 13) {
+        return 125;
     }
     return 100;
 }
@@ -407,7 +430,7 @@
 
 #pragma mark - cell的代理
 
-- (void)homelistCell:(UCFHomeListCell *)homelistCell didClickedProgressViewAtIndexPath:(NSIndexPath *)indexPath
+- (void)homelistCell:(UCFInvestMicroMoneyCell *)homelistCell didClickedProgressViewAtIndexPath:(NSIndexPath *)indexPath
 {
     UCFMicroMoneyGroup *group = [self.dataArray objectAtIndex:indexPath.section];
     UCFMicroMoneyModel *model = [group.prdlist objectAtIndex:indexPath.row];
@@ -562,5 +585,23 @@
     }
 }
 
+- (void)newUserCell:(UCFNewUserCell *)newUserCell didClickedRegisterButton:(UIButton *)button withModel:(UCFHomeListCellModel *)model
+{
+    NSString *userId = [UserInfoSingle sharedManager].userId;
+    if (nil == userId) {
+        UCFRegisterStepOneViewController *registerControler = [[UCFRegisterStepOneViewController alloc] init];
+        registerControler.sourceVC = @"fromHomeView";
+        UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:registerControler] ;
+        AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+        UINavigationController *nav = app.tabBarController.selectedViewController ;
+        [nav presentViewController:loginNaviController animated:YES completion:nil];
+        return;
+    }
+    else {
+//        if ([self.delegate respondsToSelector:@selector(homeList:tableView:didClickedWithModel:withType:)]) {
+//            [self.delegate homeList:self tableView:self.tableView didClickedWithModel:model withType:UCFHomeListTypeInvest];
+//        }
+    }
+}
 
 @end

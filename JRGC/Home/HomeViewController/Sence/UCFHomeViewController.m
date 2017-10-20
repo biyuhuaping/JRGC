@@ -229,7 +229,7 @@
     } else if ([dic[@"type"] isEqualToString:@"bidID"]){
         if ([UserInfoSingle sharedManager].openStatus > 3) {
             UCFFacReservedViewController *facReservedWeb = [[UCFFacReservedViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
-            facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@", PRERESERVE_URL, dic[@"value"]];
+//            facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@", PRERESERVE_URL, dic[@"value"]];
             facReservedWeb.navTitle = @"工场预约";
             AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
             UINavigationController *nav = app.tabBarController.selectedViewController;
@@ -327,6 +327,7 @@
 {
      __weak typeof(self) weakSelf = self;
     switch ([model.type intValue]) {
+        case 0:
         case 1:
             self.accoutType = SelectAccoutTypeP2P;
             break;
@@ -345,7 +346,7 @@
     }
     NSString *noPermissionTitleStr = self.accoutType == SelectAccoutTypeP2P ? @"目前标的详情只对出借人开放":@"目前标的详情只对认购人开放";
     if (type == UCFHomeListTypeDetail) {
-        if (model.moedelType == UCFHomeListCellModelTypeDefault || model.moedelType == UCFHomeListCellModelTypeNewUser) {
+        if (model.moedelType == UCFHomeListCellModelTypeDefault) {
         
             if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
                 //如果未登录，展示登录页面
@@ -453,19 +454,23 @@
                }
             }
           }
-        else if (model.moedelType == UCFHomeListCellModelTypeReserved) {
+        else if (model.moedelType == UCFHomeListCellModelTypeReserved  || model.moedelType == UCFHomeListCellModelTypeNewUser) {
             self.accoutType = SelectAccoutTypeP2P;
             if ([self checkUserCanInvestIsDetail:YES type:self.accoutType]) {
                 UCFFacReservedViewController *facReservedWeb = [[UCFFacReservedViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
-                facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@", PRERESERVE_URL, model.Id];
-                facReservedWeb.navTitle = @"工场预约";
+                if (model.moedelType == UCFHomeListCellModelTypeNewUser) {
+                    facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@", NEWUSER_PRODUCTS_URL, model.Id];
+                }
+                else if (model.moedelType == UCFHomeListCellModelTypeReserved) {
+                    facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@", PRERESERVE_PRODUCTS_URL, model.Id];
+                }
+//                facReservedWeb.navTitle = @"工场预约";
                 [self.navigationController pushViewController:facReservedWeb animated:YES];
             }
         }
     }
     else if (type == UCFHomeListTypeInvest) {
-        if (model.moedelType == UCFHomeListCellModelTypeDefault || model.moedelType == UCFHomeListCellModelTypeNewUser) {
-            
+        if (model.moedelType == UCFHomeListCellModelTypeDefault) {
             if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
                 //如果未登录，展示登录页面
                 [self showLoginView];
@@ -496,6 +501,7 @@
                         }
                     }
                     if([self checkUserCanInvestIsDetail:NO type:self.accoutType]){//
+
                         NSDictionary *parameter = @{@"Id": model.Id, @"userId": [UserInfoSingle sharedManager].userId, @"proType": model.type,@"type":@"4"};
                         [self.cycleImageVC.presenter fetchProDetailDataWithParameter:parameter completionHandler:^(NSError *error, id result) {
                             NSString *rstcode = [result objectForKey:@"status"];
@@ -515,6 +521,21 @@
                     }
                   }
                 }
+            }
+            
+        }
+        else if (model.moedelType == UCFHomeListCellModelTypeReserved  || model.moedelType == UCFHomeListCellModelTypeNewUser) {
+            self.accoutType = SelectAccoutTypeP2P;
+            if ([self checkUserCanInvestIsDetail:NO type:self.accoutType]) {
+                UCFFacReservedViewController *facReservedWeb = [[UCFFacReservedViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
+                if (model.moedelType == UCFHomeListCellModelTypeNewUser) {
+                    facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@", NEWUSER_APPLY_URL, model.Id];
+                }
+                else if (model.moedelType == UCFHomeListCellModelTypeReserved) {
+                    facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@", PRERESERVE_APPLY_URL, model.Id];
+                }
+//                facReservedWeb.navTitle = @"工场预约";
+                [self.navigationController pushViewController:facReservedWeb animated:YES];
             }
         }
     }
@@ -572,8 +593,8 @@
         return;
     }
     UCFFacReservedViewController *facReservedWeb = [[UCFFacReservedViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
-    NSString *url = [PRERESERVE_URL stringByReplacingOccurrencesOfString:@"/info" withString:@"/apply"];
-    facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@", url, model.Id];
+//    NSString *url = [PRERESERVE_URL stringByReplacingOccurrencesOfString:@"/info" withString:@"/apply"];
+//    facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@", url, model.Id];
     facReservedWeb.navTitle = @"工场预约";
     [self.navigationController pushViewController:facReservedWeb animated:YES];
 }
@@ -918,11 +939,7 @@
 {
     AppDelegate *appdel = (AppDelegate *)[UIApplication sharedApplication].delegate;
     UCFInvestViewController *invest = (UCFInvestViewController *)[[appdel.tabBarController.childViewControllers objectAtIndex:1].childViewControllers firstObject];
-//    if (iconPresenter.productName) {
-//        <#statements#>
-//    }
     switch (iconPresenter.type) {
-            
         case 1:
             invest.selectedType = @"P2P";
             break;
