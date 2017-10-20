@@ -306,8 +306,11 @@
 #define GOLDCHANGECASH          @"api/nmAccount/v2/liquidateGold.json"    //黄金变现
 #define USERSTATUSINFO          @"api/prdClaims/v2/statusInfo.json"    //个人状态信息
 
-
-#define PRERESERVE_URL          @"https://m.9888.cn/static/wap/invest/index.html#/reserve/info" //预约的url
+//预约的url
+#define NEWUSER_PRODUCTS_URL          @"https://m.9888.cn/static/wap/p2p/index.html#/novice-bid/info"
+#define NEWUSER_APPLY_URL          @"https://m.9888.cn/static/wap/p2p/index.html#/novice-bid/apply"
+#define PRERESERVE_PRODUCTS_URL          @"https://m.9888.cn/static/wap/p2p/index.html#/reserve-bid/products"
+#define PRERESERVE_APPLY_URL          @"https://m.9888.cn/static/wap/p2p/index.html#/reserve-bid/apply"
 
 #define HONERRECHANGESHOWCONT @"/api/contract/v2/showContractMess.json"//尊享充值委托划款协议合同预览
 #define TOTALASSTSOVERVIEWURL @"api/userAccount/v2/assetsOverview.json"//总资产接口
