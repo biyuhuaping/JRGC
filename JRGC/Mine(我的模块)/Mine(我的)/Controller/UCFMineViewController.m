@@ -552,7 +552,7 @@
 - (void)mineFuncCell:(UCFMineFuncCell *)mineFuncCell didClickedMyReservedButton:(UIButton *)button
 {
     UCFMyReservedViewController *myserved = [[UCFMyReservedViewController alloc] initWithNibName:@"UCFMyReservedViewController" bundle:nil];
-    myserved.url = [NSString stringWithFormat:@"https://m.9888.cn/static/wap/invest/index.html#/reserve/records"];
+    myserved.url = [NSString stringWithFormat:@"https://m.9888.cn/static/wap/p2p/index.html#/reserve-bid/records"];
     myserved.navTitle = @"我的预约";
     [self.navigationController pushViewController:myserved animated:YES];
 }
