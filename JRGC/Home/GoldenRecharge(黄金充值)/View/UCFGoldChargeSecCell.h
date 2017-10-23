@@ -11,6 +11,8 @@
 @class UCFGoldChargeSecCell;
 @protocol UCFGoldChargeSecCellDelegate <NSObject>
 - (void)goldRechargeSecCell:(UCFGoldChargeSecCell *)goldRechargeSecCell didClickedConstractWithId:(NSString *)constractId;
+
+- (void)goldRechargeSecCell:(UCFGoldChargeSecCell *)goldRechargeSecCell withConstractName:(NSString *)constractName withConstractUrl:(NSString *)url;
 @end
 
 @interface UCFGoldChargeSecCell : UITableViewCell

@@ -31,6 +31,8 @@
     NSString *fee;                  //提现费率
     NSString *_contractName;          //合同名称（存在则展示合同不存在则不展示)
     NSString *_contractType;          //合同类型
+    NSString *_cfcaContractName;          //CFCA合同名称（存在则展示合同不存在则不展示)
+    NSString *_cfcaContractUrl;          //CFCA合同类型
     MjAlertView         *mjalert; //修改预留手机号弹框
     UITextField         *telTextField;
     UITextField         *codeTextField;
@@ -164,8 +166,17 @@
     
     
 }
--(void)showDeleagateView{
-
+    
+-(void)showDeleagateView:(ZBLinkLabelModel *)linkModel
+{
+    NSString *contractNameStr = linkModel.linkString;
+    
+    if ([contractNameStr hasPrefix:@"《CFCA"])
+    {
+        [self showContractWebViewUrl:_cfcaContractUrl withTitle:_cfcaContractName];
+        return;
+    }
+    
     NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId",_contractType, @"contractType",nil];
     
     [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagHonerRechangeShowContract owner:self signature:YES Type:SelectAccoutTypeHoner];
@@ -213,28 +224,42 @@
     [self.telServiceLabel setFontColor:UIColorWithRGB(0x4aa1f9) string:@"拨打客服"];
     
     
-
-    if (![_contractName isEqualToString:@""]) {//合同名称存在就展示
-        self.deleageteLabelBottom.constant = 12;
-          NSString *tmpStr = [NSString stringWithFormat:@"《%@》",_contractName];
-        self.deleagateLabel.text = [NSString stringWithFormat:@"我已阅读并同意%@",tmpStr];
-        self.deleagateLabel.textColor = UIColorWithRGB(0x999999);
-        [self.deleagateLabel addLinkString:tmpStr block:^(ZBLinkLabelModel *linkModel) {
-            [weakSelf showDeleagateView];
-        }];
-        [self.deleagateLabel setFontColor:UIColorWithRGB(0x4aa1f9) string:tmpStr];
-    }else{
+    
+    NSArray *conTractArr = @[_cfcaContractName,_contractName];
+    
+    
+    if ([_cfcaContractName isEqualToString:@""] && [_contractName isEqualToString:@""] ) {
         self.deleageteLabelBottom.constant = 0;
         self.deleagateLabel.text = @"";
     }
-
-//    _serviceLabel.text =[NSString stringWithFormat:@"如果您绑定的银行卡暂不支持手机一键支付请联系客服%@",telNum];
-//    [_serviceLabel addLinkString:telNum block:^(ZBLinkLabelModel *linkModel){
-//        [weakSelf telServiceNo];
-//    }];
-//    
-//    [_serviceLabel setFontColor:UIColorWithRGB(0x4aa1f9) string:telNum];
-    
+    else
+    {
+        self.deleageteLabelBottom.constant = 12;
+        self.deleagateLabel.text = @"我已阅读并同意";
+        self.deleagateLabel.textColor = UIColorWithRGB(0x999999);
+        self.deleagateLabel.numberOfLines =  0;
+        for (int i = 0; i < conTractArr.count; i++)
+        {
+            NSString *nameStr = [conTractArr objectAtIndex:i];
+            if ([nameStr isEqualToString:@""])
+            {
+                continue;
+            }
+            NSString *tmpStr = [NSString stringWithFormat:@"《%@》",nameStr];
+             self.deleagateLabel.text = [NSString stringWithFormat:@"%@%@",self.deleagateLabel.text,tmpStr];
+            NSDictionary *dic = [Common getParagraphStyleDictWithStrFont:12 WithlineSpacing:1.0f];
+            self.deleagateLabel.attributedText = [NSString getNSAttributedString:self.deleagateLabel.text labelDict:dic];
+        }
+        for (int i = 0; i < conTractArr.count; i++)
+        {
+            NSString *nameStr = [conTractArr objectAtIndex:i];
+            NSString *tmpStr = [NSString stringWithFormat:@"《%@》",nameStr];
+            [self.deleagateLabel addLinkString:tmpStr block:^(ZBLinkLabelModel *linkModel) {
+                [weakSelf showDeleagateView:linkModel];
+            }];
+            [self.deleagateLabel setFontColor:UIColorWithRGB(0x4aa1f9) string:tmpStr];
+        }
+    }
     _topUpLabelTextField.placeholder = [NSString stringWithFormat:@"输入充值金额,最低%@元",minRecharge];
     //设置ScrollView总高度
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -244,6 +269,13 @@
     });
 
 
+}
+#pragma mark H5URl加载方式
+-(void)showContractWebViewUrl:(NSString *)urlStr withTitle:(NSString *)title
+{
+    FullWebViewController *controller = [[FullWebViewController alloc] initWithWebUrl:urlStr    title:title];
+    controller.baseTitleType = @"detail_heTong";
+    [self.navigationController pushViewController:controller animated:YES];
 }
 - (void)telServiceNo
 {
@@ -819,6 +851,8 @@
             
              _contractType = [NSString stringWithFormat:@"%@",[dic[@"data"]objectSafeForKey:@"contractType"]];
             _contractName = [dic[@"data"] objectSafeForKey:@"contractName"];
+            _cfcaContractName = [dic[@"data"] objectSafeForKey:@"cfcaContractName"];
+            _cfcaContractUrl = [dic[@"data"] objectSafeForKey:@"cfcaContractUrl"];
             [self controldesLabel];
         } else {
             [MBProgressHUD displayHudError:dic[@"message"]];

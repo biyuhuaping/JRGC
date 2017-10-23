@@ -38,12 +38,16 @@
         [contractsStr appendString:@"《"];
         [contractsStr appendString:contract.contractName];
         [contractsStr appendString:@"》"];
+        if ([contract.contractName hasPrefix:@"CFCA"])
+        {
+            
+        }
     }
     
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:contractsStr];
     for (UCFContractModel *contract in constracts) {
         NSString *str = [NSString stringWithFormat:@"《%@》", contract.contractName];
-        NSString *strV = [NSString stringWithFormat:@"weituohuakuan%lu://", (unsigned long)[constracts indexOfObject:contract]];
+        NSString *strV = [NSString stringWithFormat:@"%lu",[self.constracts indexOfObject:contract]];
         [attributedString addAttribute:NSLinkAttributeName
                                  value:strV
                                  range:[[attributedString string] rangeOfString:str]];
@@ -76,15 +80,44 @@
     _textView.scrollEnabled = NO;
 }
 
-- (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange {
-    if ([[URL scheme] isEqualToString:@"weituohuakuan0"]) {
-        UCFContractModel *contract = [self.constracts firstObject];
-        NSLog(@"委托协议---------------");
-        if ([self.delegate respondsToSelector:@selector(goldRechargeSecCell:didClickedConstractWithId:)]) {
-            [self.delegate goldRechargeSecCell:self didClickedConstractWithId:contract.Id];
+- (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange
+{
+    NSString *urlStr = [URL absoluteString];
+    UCFContractModel *contractModel = [self.constracts objectAtIndex:[urlStr  integerValue]];
+    if ([contractModel.contractName hasPrefix:@"CFCA"])
+    {
+        if ([self.delegate respondsToSelector:@selector(goldRechargeSecCell:withConstractName:withConstractUrl:)])
+        {
+            [self.delegate goldRechargeSecCell:self withConstractName:contractModel.contractName withConstractUrl:contractModel.cfcaContractUrl];
         }
-        return NO;
+       
     }
+    else
+    {
+        if ([self.delegate respondsToSelector:@selector(goldRechargeSecCell:didClickedConstractWithId:)])
+           {
+             [self.delegate goldRechargeSecCell:self didClickedConstractWithId:contractModel.Id];
+           }
+    }
+        return NO;
+    
+//    if ([[URL scheme] isEqualToString:@"weituohuakuan0"])
+//    {
+//        UCFContractModel *contract = [self.constracts lastObject];
+//        NSLog(@"委托协议---------------");
+//        if ([self.delegate respondsToSelector:@selector(goldRechargeSecCell:didClickedConstractWithId:)]) {
+//            [self.delegate goldRechargeSecCell:self didClickedConstractWithId:contract.Id];
+//        }
+//        return NO;
+//    }
+//    else if ([[URL scheme] hasPrefix:@"CFCA"]) {
+//        UCFContractModel *contract = [self.constracts firstObject];
+//        NSLog(@"委托协议---------------");
+//        if ([self.delegate respondsToSelector:@selector(goldRechargeSecCell:withConstractName:withConstractUrl:)]) {
+//            [self.delegate goldRechargeSecCell:self withConstractName:contract.contractName withConstractUrl:contract.cfcaContractUrl];
+//        }
+//        return NO;
+//    }
     //    else if ([[URL scheme] isEqualToString:@"checkbox"]) {
     //        self.isSelect = !self.isSelect;
     //        [self protocolIsSelect:self.isSelect];
