@@ -40,6 +40,7 @@ typedef enum : NSUInteger {
 @property (nonatomic, copy) NSString *status;
 @property (nonatomic, copy) NSString *type;
 @property (nonatomic, copy) NSString *totleBookAmt;
+@property (nonatomic, copy) NSString *appointPeriod;
 @property (nonatomic, assign) UCFMicroMoneyModelType modelType;
 
 + (instancetype)microMoneyModelWithDict:(NSDictionary *)dict;
