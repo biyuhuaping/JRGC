@@ -138,6 +138,11 @@
     return [NSString stringWithFormat:@"%@", self.item.completeLoan];
 }
 
+- (NSString *)appointPeriod
+{
+    return self.item.appointPeriod;
+}
+
 - (int)status
 {
     return self.item.status.intValue;
@@ -190,5 +195,6 @@
     }
     return [NSString stringWithFormat:@"剩%@",str1];
 }
+
 
 @end

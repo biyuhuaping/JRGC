@@ -33,6 +33,7 @@
 - (NSString *)zxTransferNum;
 - (NSString *)transferNum;
 - (NSString *)completeLoan;
+- (NSString *)appointPeriod;
 - (int)status;
 
 - (CGFloat)cellHeight;
