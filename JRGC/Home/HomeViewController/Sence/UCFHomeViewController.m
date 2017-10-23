@@ -594,7 +594,7 @@
     }
     UCFFacReservedViewController *facReservedWeb = [[UCFFacReservedViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
 //    NSString *url = [PRERESERVE_URL stringByReplacingOccurrencesOfString:@"/info" withString:@"/apply"];
-//    facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@", url, model.Id];
+    facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@", PRERESERVE_APPLY_URL, model.Id];
     facReservedWeb.navTitle = @"工场预约";
     [self.navigationController pushViewController:facReservedWeb animated:YES];
 }
