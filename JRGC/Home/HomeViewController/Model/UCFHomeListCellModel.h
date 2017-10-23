@@ -27,6 +27,7 @@ typedef enum : NSUInteger {
 @property (nonatomic, copy) NSString *guaranteeCompany;
 @property (nonatomic, copy) NSString *holdTime;
 @property (nonatomic, copy) NSString *Id;
+@property (nonatomic, copy) NSString *appointPeriod;
 //invitationSite = "<null>";
 @property (nonatomic, strong) NSNumber *isOrder;
 @property (nonatomic, strong) NSNumber *maxInvest;

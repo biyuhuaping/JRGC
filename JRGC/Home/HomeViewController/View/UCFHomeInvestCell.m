@@ -38,7 +38,7 @@
         self.anurateLabel.text = [NSString stringWithFormat:@"%@",presenter.annualRate];
     }
     
-    self.limitLabel.text = [NSString stringWithFormat:@"%@", presenter.holdTime];
+    self.limitLabel.text = [NSString stringWithFormat:@"%@", presenter.appointPeriod];
     self.addedTransLabel.text = [NSString stringWithFormat:@"累计交易%@", presenter.completeLoan];
 }
 
@@ -65,7 +65,7 @@
         self.anurateLabel.text = microModel.annualRate ? [NSString stringWithFormat:@"%@%%",microModel.annualRate] : @"0.0%";
     }
     
-    self.limitLabel.text = [NSString stringWithFormat:@"%@", microModel.holdTime];
+    self.limitLabel.text = [NSString stringWithFormat:@"%@", microModel.appointPeriod];
     self.addedTransLabel.text = [NSString stringWithFormat:@"累计交易%@亿元", microModel.totleBookAmt];
 }
 
