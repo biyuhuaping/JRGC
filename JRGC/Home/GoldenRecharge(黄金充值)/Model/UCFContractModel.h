@@ -13,4 +13,6 @@
 @property (copy, nonatomic) NSString *contractContent;
 @property (copy, nonatomic) NSString *contractName;
 @property (copy, nonatomic) NSString *icoUrl;
+@property (copy, nonatomic) NSString *cfcaContractName;
+@property (copy, nonatomic) NSString *cfcaContractUrl;
 @end

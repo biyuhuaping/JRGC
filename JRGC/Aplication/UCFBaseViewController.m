@@ -31,11 +31,11 @@
     baseTitleLabel.text = _baseTitleText;
     [self setNavigationTitleView];
     
-//    if (!_isHideNavigationBar){
-//        lineViewAA = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 0.5)];
-//        lineViewAA.backgroundColor = UIColorWithRGB(0xd8d8d8);
-//        [self.view addSubview:lineViewAA];
-//    }
+    if (!_isHideNavigationBar){
+        lineViewAA = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 0.5)];
+        lineViewAA.backgroundColor = UIColorWithRGB(0xd8d8d8);
+        [self.view addSubview:lineViewAA];
+    }
     [self.navigationController.navigationBar setHidden:_isHideNavigationBar];
 
     //self.view.backgroundColor = [UIColor colorWithHexString:@"eeeeee"];

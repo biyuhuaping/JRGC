@@ -756,6 +756,13 @@
     NSDictionary *userOtherMsg = [self.dataDic objectForKey:@"nmPrdClaimInfo"];
     NSArray *contractMsgArr = [userOtherMsg valueForKey:@"contractList"];
     NSString *totalStr = [NSString stringWithFormat:@"本人已阅读并同意签署"];
+    
+    NSString *cfcaContractName = [self.dataDic objectSafeForKey:@"cfcaContractName"];
+    NSString *cfcaContractUrl = [self.dataDic objectSafeForKey:@"cfcaContractUrl"];
+    if (![cfcaContractName isEqualToString:@""])
+    {
+        totalStr = [NSString stringWithFormat:@"%@《%@》",totalStr,cfcaContractName];
+    }
     for (int i = 0; i < contractMsgArr.count; i++) {
         NSString *tmpStr = [[contractMsgArr objectAtIndex:i] valueForKey:@"contractName"];
         totalStr = [totalStr stringByAppendingString:[NSString stringWithFormat:@"《%@》",tmpStr]];
@@ -778,6 +785,15 @@
         [label1 setFontColor:UIColorWithRGB(0x4aa1f9) string:tmpStr];
     }
     [footView addSubview:label1];
+    
+    if (![cfcaContractName isEqualToString:@""])
+    {
+        NSString *tmpStr = [NSString stringWithFormat:@"《%@》",cfcaContractName];
+        [label1 addLinkString:tmpStr block:^(ZBLinkLabelModel *linkModel) {
+            [weakSelf showContractWebViewUrl:cfcaContractUrl withTitle:cfcaContractName];
+        }];
+        [label1 setFontColor:UIColorWithRGB(0x4aa1f9) string:tmpStr];
+    }
     
     UIImageView * imageView2 = [[UIImageView alloc] init];
     imageView2.frame = CGRectMake(CGRectGetMinX(label1.frame) - 7, CGRectGetMinY(label1.frame) + 6, 5, 5);
@@ -809,7 +825,13 @@
     
     [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagGetGoldContractInfo owner:self signature:YES Type:SelectAccoutTypeGold];
 }
-
+#pragma mark H5URl加载方式
+-(void)showContractWebViewUrl:(NSString *)urlStr withTitle:(NSString *)title
+{
+    FullWebViewController *controller = [[FullWebViewController alloc] initWithWebUrl:urlStr    title:title];
+    controller.baseTitleType = @"detail_heTong";
+    [self.navigationController pushViewController:controller animated:YES];
+}
 #pragma mark - UCFGoldMoneyBoadCellDelegate
 #pragma mark 显示计算器
 -(void)showGoldCalculatorView
