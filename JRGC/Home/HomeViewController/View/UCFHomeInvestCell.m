@@ -29,7 +29,7 @@
 }
 
 - (void)setPresenter:(UCFHomeListCellPresenter *)presenter
-{
+{ 
     _presenter = presenter;
     if (presenter.platformSubsidyExpense.length > 0) {
         self.anurateLabel.text = [NSString stringWithFormat:@"%@~%@%%",presenter.annualRate, presenter.platformSubsidyExpense];
