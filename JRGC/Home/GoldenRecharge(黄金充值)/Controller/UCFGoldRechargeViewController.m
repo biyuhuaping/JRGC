@@ -133,7 +133,7 @@
         return 20;
     }
     else if (section == 4) {
-        return 25;
+        return 20;
     }
     else
         return 0.001;
@@ -275,7 +275,7 @@
         return 37;
     }
     else if (indexPath.section == 3) {
-        return 26;
+        return 45;
     }
     else if (indexPath.section == 4) {
         return 37;
