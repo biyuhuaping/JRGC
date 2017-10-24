@@ -275,7 +275,7 @@
         return 37;
     }
     else if (indexPath.section == 3) {
-        return 21;
+        return 26;
     }
     else if (indexPath.section == 4) {
         return 37;
@@ -319,7 +319,17 @@
     NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:self.bankUrl, @"backUrl", inputMoney, @"rechargeAmt", userId, @"userId",  nil];
     [[NetworkModule sharedNetworkModule] newPostReq:param tag:kSXTagGoldRecharge owner:self signature:YES Type:SelectAccoutDefault];
 }
-
+- (void)goldRechargeSecCell:(UCFGoldChargeSecCell *)goldRechargeSecCell withConstractName:(NSString *)constractName withConstractUrl:(NSString *)url;
+{
+    [self showContractWebViewUrl:url withTitle:constractName];
+}
+#pragma mark H5URl加载方式
+-(void)showContractWebViewUrl:(NSString *)urlStr withTitle:(NSString *)title
+{
+    FullWebViewController *controller = [[FullWebViewController alloc] initWithWebUrl:urlStr    title:title];
+    controller.baseTitleType = @"detail_heTong";
+    [self.navigationController pushViewController:controller animated:YES];
+}
 - (void)goldRechargeSecCell:(UCFGoldChargeSecCell *)goldRechargeSecCell didClickedConstractWithId:(NSString *)constractId
 {
     NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId", [NSString stringWithFormat:@"%@", constractId], @"contractTemplateId", nil];
@@ -365,12 +375,24 @@
             NSDictionary *data = [dic objectSafeDictionaryForKey:@"data"];
             NSArray *contractInfo = [data objectSafeDictionaryForKey:@"contractList"];
             NSMutableArray *temp = [NSMutableArray array];
-            for (NSDictionary *contractDict in contractInfo) {
+            NSString *cfcaContractName = [data objectSafeForKey:@"cfcaContractName"];
+            if (![cfcaContractName isEqualToString:@""])
+            {
+                UCFContractModel *contract = [[UCFContractModel alloc] init];
+                contract.cfcaContractUrl = [data objectSafeForKey:@"cfcaContractUrl"];;
+                contract.contractName = cfcaContractName;
+                [temp addObject:contract];
+            }
+            for (NSDictionary *contractDict in contractInfo)
+            {
                 UCFContractModel *contract = [[UCFContractModel alloc] init];
                 contract.Id = [contractDict objectSafeForKey:@"id"];
                 contract.contractName = [contractDict objectSafeForKey:@"contractName"];
                 [temp addObject:contract];
             }
+            
+            
+            
             self.constracts = temp;
             NSString *tipContent = [data objectSafeForKey:@"pageContent"];
             NSString *tipStr = [tipContent stringByReplacingOccurrencesOfString:@"• " withString:@""];

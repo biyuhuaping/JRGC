@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -79,7 +79,7 @@
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="xxxx********xxxx" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j7L-yk-EJB">
-                                                        <rect key="frame" x="19" y="232" width="134" height="30"/>
+                                                        <rect key="frame" x="19" y="232" width="128" height="30"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                         <color key="textColor" red="0.26379796862602234" green="0.2637900710105896" blue="0.26379451155662537" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -138,7 +138,7 @@
                                                 </connections>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J4u-PG-E6x">
-                                                <rect key="frame" x="15" y="470" width="570" height="37"/>
+                                                <rect key="frame" x="15" y="469.33333333333331" width="570" height="37"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="37" id="qQQ-6d-kkb"/>
                                                 </constraints>
@@ -194,14 +194,14 @@
                                                 </connections>
                                             </textField>
                                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pjy-KO-TDY" customClass="NZLabel">
-                                                <rect key="frame" x="15" y="559.5" width="570" height="57.5"/>
+                                                <rect key="frame" x="15" y="559" width="570" height="57.333333333333371"/>
                                                 <string key="text">● 使用快捷支付充值最低金额应大于等于1元；\n● 对充值后未出借的提现，由第三方平台收取%0.4的手续费；\n● 充值/提现必须为银行借记卡，不支持存折、信用卡充值；\n● 充值需开通银行卡网上支付功能，如有疑问请咨询开户行客服；\n● 单笔充值不可超过该银行充值限额；\n● 如果充值金额没有及时到账，请拨打客服查询。</string>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="如果长时间未收到验证码，倒数时间结束后可选择语音验证码获取" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xDS-5s-7iQ">
-                                                <rect key="frame" x="15" y="450" width="570" height="15"/>
+                                                <rect key="frame" x="15" y="450" width="570" height="14.333333333333314"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -222,19 +222,19 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="温馨提示" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bpi-wJ-Pw0">
-                                                <rect key="frame" x="15" y="537" width="49.5" height="14.5"/>
+                                                <rect key="frame" x="14.999999999999996" y="536.33333333333337" width="49.666666666666657" height="14.666666666666629"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="● 如果充值金额没有及时到账，请拨打客服查询。" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gaU-xC-cLx" customClass="NZLabel">
-                                                <rect key="frame" x="15" y="617" width="570" height="14.5"/>
+                                                <rect key="frame" x="15" y="616.33333333333337" width="570" height="14.333333333333371"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wad-W4-54X" customClass="NZLabel">
-                                                <rect key="frame" x="15" y="470" width="0.0" height="0.0"/>
+                                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wad-W4-54X" customClass="NZLabel">
+                                                <rect key="frame" x="15" y="469.33333333333331" width="570" height="0.0"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -277,6 +277,7 @@
                                             <constraint firstItem="eH6-HZ-56c" firstAttribute="top" secondItem="c6N-dH-Mq1" secondAttribute="top" constant="20" id="lHP-z3-2Yl"/>
                                             <constraint firstItem="0sc-69-t03" firstAttribute="top" secondItem="eH6-HZ-56c" secondAttribute="bottom" id="mRo-LT-gdW"/>
                                             <constraint firstItem="J4u-PG-E6x" firstAttribute="top" secondItem="wad-W4-54X" secondAttribute="bottom" id="oId-7f-E0D"/>
+                                            <constraint firstAttribute="trailing" secondItem="wad-W4-54X" secondAttribute="trailing" constant="15" id="rLt-ge-eEw"/>
                                             <constraint firstItem="vCL-KA-Eou" firstAttribute="leading" secondItem="c6N-dH-Mq1" secondAttribute="leading" constant="15" id="rMV-m7-PIl"/>
                                             <constraint firstItem="IY4-fl-7io" firstAttribute="top" secondItem="0sc-69-t03" secondAttribute="bottom" constant="15" id="tZ6-2K-eQN"/>
                                             <constraint firstAttribute="trailing" secondItem="L8V-I9-pur" secondAttribute="trailing" constant="25" id="ttT-0K-gWH"/>

@@ -304,11 +304,15 @@
             [self showContractHtmlStr:constract.contractContent withTitle:constract.contracttitle];
             return;
         }
-        
         _contractTitle = constract.contracttitle;
-        NSString *strParameters = [NSString stringWithFormat:@"userId=%@&prdOrderId=%@&contractType=%@&prdType=0",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],self.billId,constract.contractType];
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetContractMsg owner:self Type:self.accoutType];
+        NSString *strParameters = [NSString stringWithFormat:@"userId=%@&prdOrderId=%@&contractType=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],self.billId,constract.contractType];
+        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagContractDownLoad owner:self Type:self.accoutType];
+        return;
+        
+//        _contractTitle = constract.contracttitle;
+//        NSString *strParameters = [NSString stringWithFormat:@"userId=%@&prdOrderId=%@&contractType=%@&prdType=0",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],self.billId,constract.contractType];
+//        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetContractMsg owner:self Type:self.accoutType];
         
     }
 }
