@@ -61,7 +61,7 @@
 
 #pragma mark - 初始化UI
 - (void)createUI {
-//    CGFloat height = [UCFGoldenHeaderView viewHeight];
+    CGFloat height = [UCFGoldenHeaderView viewHeight];
 //    UCFGoldenHeaderView *goldenHeader = (UCFGoldenHeaderView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFGoldenHeaderView" owner:self options:nil] lastObject];
 //    goldenHeader.frame = CGRectMake(0, 0, ScreenWidth, ScreenWidth/16.0 *5 + 101);
 //    self.tableview.tableHeaderView = goldenHeader;
