@@ -53,20 +53,20 @@
     [self.tableview.header beginRefreshing];
 }
 
-//- (void)viewDidLayoutSubviews
-//{
-//    [super viewDidLayoutSubviews];
-//    self.goldenHeader.frame = CGRectMake(0, 0, ScreenWidth, ScreenWidth/16*5+101);
-//}
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    self.goldenHeader.frame = CGRectMake(0, 0, ScreenWidth, ScreenWidth/16*5+101);
+}
 
 #pragma mark - 初始化UI
 - (void)createUI {
 //    CGFloat height = [UCFGoldenHeaderView viewHeight];
-//    UCFGoldenHeaderView *goldenHeader = (UCFGoldenHeaderView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFGoldenHeaderView" owner:self options:nil] lastObject];
+    UCFGoldenHeaderView *goldenHeader = (UCFGoldenHeaderView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFGoldenHeaderView" owner:self options:nil] lastObject];
 //    goldenHeader.frame = CGRectMake(0, 0, ScreenWidth, ScreenWidth/16.0 *5 + 101);
-//    self.tableview.tableHeaderView = goldenHeader;
-//    self.goldenHeader = goldenHeader;
-//    goldenHeader.hostVc = self;
+    self.tableview.tableHeaderView = goldenHeader;
+    self.goldenHeader = goldenHeader;
+    goldenHeader.hostVc = self;
     
     [self.tableview addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(refreshData)];
     __weak typeof(self) weakSelf = self;
