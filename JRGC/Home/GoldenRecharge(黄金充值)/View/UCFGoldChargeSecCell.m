@@ -77,7 +77,7 @@
     _textView.backgroundColor = UIColorWithRGB(0xebebee);
     _textView.delegate = self;
     _textView.editable = NO; //必须禁止输入，否则点击将弹出输入键盘
-    _textView.scrollEnabled = NO;
+//    _textView.scrollEnabled = NO;
 }
 
 - (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange

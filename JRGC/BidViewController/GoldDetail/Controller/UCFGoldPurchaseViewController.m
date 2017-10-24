@@ -75,7 +75,7 @@
      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloatGoldPurchaseData) name:Reload_Gold_Purchase_Data object:nil];
     
     self.tableView.tableFooterView = [self createFootView];
-    self.tableView.contentInset =  UIEdgeInsetsMake(10, 0, 0, 0);
+    self.tableView.contentInset =  UIEdgeInsetsMake(10, 0, 25, 0);
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     UITapGestureRecognizer *frade = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardDown)];
     frade.delegate = self;
@@ -412,7 +412,7 @@
     switch (section) {
         case 0:
         {
-             return 0;
+             return 0.01;
         }
             break;
         case 1:
@@ -452,11 +452,11 @@
         default:
             break;
     }
-    return 0;
+    return 0.01;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     
-    return 0.1;
+    return 0.01;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
