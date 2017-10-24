@@ -334,6 +334,10 @@
     self.startMoneyLabel.text = @"年化收益克重";
     //    [NSString stringWithFormat:@"%@克起", goldModel.minPurchaseAmount];
     self.remainLabel.text = @"期限";
+
+    self.annurateLabelW.constant = -45;
+    self.rateLabel.textColor = UIColorWithRGB(0xfc8f0e);
+    self.proSignBackView.backgroundColor = UIColorWithRGB(0xffc027);
     
     NSInteger status = [goldModel.status integerValue];
     

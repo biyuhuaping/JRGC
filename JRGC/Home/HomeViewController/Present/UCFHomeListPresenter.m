@@ -104,7 +104,6 @@
                 UCFHomeListGroupPresenter *groupPresenter = [weakSelf homeListGroupPresenterWithGroup:group];
                 [temp addObject:groupPresenter];
             }
-            [temp addObjectsFromArray:weakSelf.homeListCells];
             weakSelf.homeListCells = temp;
         }
         else if ([result isKindOfClass:[NSString class]]) {

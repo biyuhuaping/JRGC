@@ -262,9 +262,19 @@
             [self.delegate homeList:self tableView:self.tableView didClickedWithModel:nil withType:UCFHomeListTypeGlodMore];
         }
         else if ([type isEqualToString:@"16"]) {
-            UCFHomeListGroupPresenter *groupP = [self.presenter.allDatas objectAtIndex:homeListHeader.section];
-            UCFHomeListCellPresenter *cellP = [groupP.group.prdlist firstObject];
-            [self.delegate homeList:self tableView:self.tableView didClickedWithModel:cellP.item withType:UCFHomeListTypeDetail];
+            NSString *userId = [UserInfoSingle sharedManager].userId;
+            if (nil == userId) {
+                UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
+                UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
+                AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+                [app.tabBarController presentViewController:loginNaviController animated:YES completion:nil];
+                return;
+            }
+            else {
+                UCFHomeListGroupPresenter *groupP = [self.presenter.allDatas objectAtIndex:homeListHeader.section];
+                UCFHomeListCellPresenter *cellP = [groupP.group.prdlist firstObject];
+                [self.delegate homeList:self tableView:self.tableView didClickedWithModel:cellP.item withType:UCFHomeListTypeDetail];
+            }
         }
     }
 }
