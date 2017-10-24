@@ -235,36 +235,50 @@
 {
     [super layoutSubviews];
     if (self.presenter) {
-        if (_presenter.platformSubsidyExpense.length > 0) {//贴
-            _image1W.constant = 18;
-            self.proImageView1.image = [UIImage imageNamed:@"invest_icon_buletie"];
-        }
-        else {
+        if (self.presenter.type.intValue == 3) {
             _image1W.constant = 0;
-        }
-        if (_presenter.guaranteeCompany.length > 0) {//贴
-            _image2W.constant = 18;
-            self.proImageView2.image = [UIImage imageNamed:@"particular_icon_guarantee_dark"];
-        }
-        else {
             _image2W.constant = 0;
-        }
-        if (_presenter.fixedDate.length > 0) {//贴
-            _image3W.constant = 18;
-            self.proImageView3.image = [UIImage imageNamed:@"invest_icon_redgu-1"];
-        }
-        else {
             _image3W.constant = 0;
-        }
-        if (_presenter.holdTime.length > 0) {//贴
-            _image4W.constant = 18;
-            self.proImageView4.image = [UIImage imageNamed:@"invest_icon_ling"];
-        }
-        else {
             _image4W.constant = 0;
         }
+        else {
+            if (_presenter.platformSubsidyExpense.length > 0) {//贴
+                _image1W.constant = 18;
+                self.proImageView1.image = [UIImage imageNamed:@"invest_icon_buletie"];
+            }
+            else {
+                _image1W.constant = 0;
+            }
+            if (_presenter.guaranteeCompany.length > 0) {//贴
+                _image2W.constant = 18;
+                self.proImageView2.image = [UIImage imageNamed:@"particular_icon_guarantee_dark"];
+            }
+            else {
+                _image2W.constant = 0;
+            }
+            if (_presenter.fixedDate.length > 0) {//贴
+                _image3W.constant = 18;
+                self.proImageView3.image = [UIImage imageNamed:@"invest_icon_redgu-1"];
+            }
+            else {
+                _image3W.constant = 0;
+            }
+            if (_presenter.holdTime.length > 0) {//贴
+                _image4W.constant = 18;
+                self.proImageView4.image = [UIImage imageNamed:@"invest_icon_ling"];
+            }
+            else {
+                _image4W.constant = 0;
+            }
+        }
     }
-    
+    else {
+        _image1W.constant = 0;
+        _image2W.constant = 0;
+        _image3W.constant = 0;
+        _image4W.constant = 0;
+    }
+
     if (_presenter.item.prdLabelsList.count > 0 || self.goldModel.prdLabelsList.count > 0) {
         UCFProjectLabel *projectLabel = [_presenter.item.prdLabelsList firstObject];
         if (projectLabel == nil) {
