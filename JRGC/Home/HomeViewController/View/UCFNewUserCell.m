@@ -130,7 +130,7 @@
         [self.okButton setTitle:@"注册享收益" forState:UIControlStateNormal];
     }
     
-    if (self.presenter.platformSubsidyExpense.doubleValue > 0) {
+    if (self.presenter.platformSubsidyExpense.doubleValue > 0 || self.microMoneyModel.platformSubsidyExpense.doubleValue > 0) {
         [self.rateLabel setFont:[UIFont boldSystemFontOfSize:15] string:@"%+"];
     }
     [self.rateLabel setFont:[UIFont boldSystemFontOfSize:15] range:NSMakeRange(self.rateLabel.text.length - 1, 1)];

@@ -104,11 +104,11 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-//    UCFMicroMoneyGroup *group = [self.dataArray objectAtIndex:section];
-//    if ([group.type isEqualToString:@"13"]) {
-//        return 140;
-//    }
-    return 39;
+    UCFMicroMoneyGroup *group = [self.dataArray objectAtIndex:section];
+    if (group.prdlist.count > 0) {
+        return 39;
+    }
+    return 0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -136,7 +136,12 @@
     [view.upLine setBackgroundColor:UIColorWithRGB(0xebebee)];
     [view.homeListHeaderMoreButton setTitleColor:UIColorWithRGB(0x4aa1f9) forState:UIControlStateNormal];
     view.delegate = self;
-    view.frame = CGRectMake(0, 0, ScreenWidth, 39);
+    if (group.prdlist.count > 0) {
+        view.frame = CGRectMake(0, 0, ScreenWidth, 39);
+    }
+    else {
+        view.frame = CGRectZero;
+    }
     view.headerTitleLabel.text = group.title;
     return view;
 }
