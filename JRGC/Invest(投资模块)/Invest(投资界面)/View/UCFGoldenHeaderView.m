@@ -30,12 +30,12 @@
      
     NSArray *images = @[[UIImage imageNamed:@"banner_unlogin_default"]];
     SDCycleScrollView *cycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectZero imagesGroup:images];
-    //    cycleScrollView.delegate = self;
+        cycleScrollView.delegate = self;
     cycleScrollView.autoScrollTimeInterval = 7.0;
     [self.headCycleBackView addSubview:cycleScrollView];
     self.cycleView = cycleScrollView;
     self.backgroundColor = UIColorWithRGB(0xebebee);
-//    [self getNormalBannerData];
+    [self getNormalBannerData];
 }
 
 + (CGFloat)viewHeight
@@ -46,9 +46,9 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-//    self.cycleView.frame = self.headCycleBackView.bounds;
-//    CGFloat bottom = _goldValueBackView.bottom;
-//    self.height = bottom + 10;
+    self.cycleView.frame = self.headCycleBackView.bounds;
+    CGFloat bottom = _goldValueBackView.bottom;
+    self.height = bottom + 10;
     self.realGoldPriceLabel.text = [NSString stringWithFormat:@"%.2f", [ToolSingleTon sharedManager].readTimePrice];
 }
 - (IBAction)refreshRealGoldPrice:(id)sender {
@@ -114,7 +114,7 @@
             model.thumb = imageStr;
             weakSelf.cycleView.imagesGroup = @[model];
             [weakSelf.cycleView refreshImage];
-            //            [self sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"banner_default"]];
+//            [self sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"banner_default"]];
         });
     });
 }
