@@ -195,6 +195,7 @@
 
 - (void) gridItemDidClicked:(BJGridItem *) gridItem
 {
+    
 //    FullWebViewController *webView = [[FullWebViewController alloc] initWithWebUrl:HOMEINVITATIONURL title:@"邀请返利"];
 //    webView.flageHaveShareBut = @"分享";
 //    webView.sourceVc = @"UCFLatestProjectViewController";
@@ -456,17 +457,33 @@
           }
         else if (model.moedelType == UCFHomeListCellModelTypeReserved  || model.moedelType == UCFHomeListCellModelTypeNewUser) {
             self.accoutType = SelectAccoutTypeP2P;
-            if ([self checkUserCanInvestIsDetail:YES type:self.accoutType]) {
-                UCFFacReservedViewController *facReservedWeb = [[UCFFacReservedViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
-                if (model.moedelType == UCFHomeListCellModelTypeNewUser) {
-                    facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@", NEWUSER_PRODUCTS_URL, model.Id];
-                }
-                else if (model.moedelType == UCFHomeListCellModelTypeReserved) {
-                    facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@", PRERESERVE_PRODUCTS_URL, model.Id];
-                }
-//                facReservedWeb.navTitle = @"工场预约";
-                [self.navigationController pushViewController:facReservedWeb animated:YES];
+            BOOL b = [self checkUserCanInvestIsDetail:YES type:self.accoutType];
+            if (!b) {
+                return;
             }
+            if (![UserInfoSingle sharedManager].isRisk) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"您还没进行风险评估" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
+                self.accoutType = SelectAccoutTypeP2P;
+                alert.tag =  9000;
+                [alert show];
+                return;
+            }
+            if (![UserInfoSingle sharedManager].isAutoBid) {
+                UCFBatchInvestmentViewController *batchInvestment = [[UCFBatchInvestmentViewController alloc] init];
+                batchInvestment.isStep = 1;
+                batchInvestment.accoutType = SelectAccoutTypeP2P;
+                [self.navigationController pushViewController:batchInvestment animated:YES];
+                return;
+            }
+            
+            UCFFacReservedViewController *facReservedWeb = [[UCFFacReservedViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
+            if (model.moedelType == UCFHomeListCellModelTypeNewUser) {
+                facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@", NEWUSER_PRODUCTS_URL, model.Id];
+            }
+            else if (model.moedelType == UCFHomeListCellModelTypeReserved) {
+                facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@", PRERESERVE_PRODUCTS_URL, model.Id];
+            }
+            [self.navigationController pushViewController:facReservedWeb animated:YES];
         }
     }
     else if (type == UCFHomeListTypeInvest) {
@@ -526,17 +543,33 @@
         }
         else if (model.moedelType == UCFHomeListCellModelTypeReserved  || model.moedelType == UCFHomeListCellModelTypeNewUser) {
             self.accoutType = SelectAccoutTypeP2P;
-            if ([self checkUserCanInvestIsDetail:NO type:self.accoutType]) {
-                UCFFacReservedViewController *facReservedWeb = [[UCFFacReservedViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
-                if (model.moedelType == UCFHomeListCellModelTypeNewUser) {
-                    facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@", NEWUSER_APPLY_URL, model.Id];
-                }
-                else if (model.moedelType == UCFHomeListCellModelTypeReserved) {
-                    facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@", PRERESERVE_APPLY_URL, model.Id];
-                }
-//                facReservedWeb.navTitle = @"工场预约";
-                [self.navigationController pushViewController:facReservedWeb animated:YES];
+            BOOL b = [self checkUserCanInvestIsDetail:NO type:self.accoutType];
+            if (!b) {
+                return;
             }
+            if (![UserInfoSingle sharedManager].isRisk) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"您还没进行风险评估" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
+                self.accoutType = SelectAccoutTypeP2P;
+                alert.tag =  9000;
+                [alert show];
+                return;
+            }
+            if (![UserInfoSingle sharedManager].isAutoBid) {
+                UCFBatchInvestmentViewController *batchInvestment = [[UCFBatchInvestmentViewController alloc] init];
+                batchInvestment.isStep = 1;
+                batchInvestment.accoutType = SelectAccoutTypeP2P;
+                [self.navigationController pushViewController:batchInvestment animated:YES];
+                return;
+            }
+            
+            UCFFacReservedViewController *facReservedWeb = [[UCFFacReservedViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
+            if (model.moedelType == UCFHomeListCellModelTypeNewUser) {
+                facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@", NEWUSER_APPLY_URL, model.Id];
+            }
+            else if (model.moedelType == UCFHomeListCellModelTypeReserved) {
+                facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@", PRERESERVE_APPLY_URL, model.Id];
+            }
+            [self.navigationController pushViewController:facReservedWeb animated:YES];
         }
     }
     else if (type == UCFHomeListTypeP2PMore)
@@ -955,13 +988,30 @@
             
         case 5: {
             self.accoutType = SelectAccoutTypeP2P;
-            if ([self checkUserCanInvestIsDetail:NO type:self.accoutType]) {
-                UCFFacReservedViewController *facReservedWeb = [[UCFFacReservedViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
-//                facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@", PRERESERVE_URL, model.Id];
-                facReservedWeb.navTitle = @"工场预约";
-                [self.navigationController pushViewController:facReservedWeb animated:YES];
+            BOOL b = [self checkUserCanInvestIsDetail:YES type:self.accoutType];
+            if (!b) {
                 return;
             }
+            if (![UserInfoSingle sharedManager].isRisk) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"您还没进行风险评估" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
+                self.accoutType = SelectAccoutTypeP2P;
+                alert.tag =  9000;
+                [alert show];
+                return;
+            }
+            if (![UserInfoSingle sharedManager].isAutoBid) {
+                UCFBatchInvestmentViewController *batchInvestment = [[UCFBatchInvestmentViewController alloc] init];
+                batchInvestment.isStep = 1;
+                batchInvestment.accoutType = SelectAccoutTypeP2P;
+                [self.navigationController pushViewController:batchInvestment animated:YES];
+                return;
+            }
+            UCFFacReservedViewController *facReservedWeb = [[UCFFacReservedViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
+            //    NSString *url = [PRERESERVE_URL stringByReplacingOccurrencesOfString:@"/info" withString:@"/apply"];
+            facReservedWeb.url = [NSString stringWithFormat:@"%@", iconPresenter.url];
+//            facReservedWeb.navTitle = @"工场预约";
+            [self.navigationController pushViewController:facReservedWeb animated:YES];
+            return;
         }
             
     }
