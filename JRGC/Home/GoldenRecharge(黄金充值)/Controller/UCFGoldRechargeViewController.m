@@ -133,7 +133,7 @@
         return 20;
     }
     else if (section == 4) {
-        return 20;
+        return 15;
     }
     else
         return 0.001;
