@@ -11,6 +11,7 @@
 #import "UCFGoldInvestDetailCell.h"
 #import "UILabel+Misc.h"
 #import "UCFGoldDetailViewController.h"
+#import "QLHeaderViewController.h"
 @interface UCFGoldInvestmentDetailViewController ()<UITableViewDataSource,UITableViewDelegate,UCFGoldInvestDetailCellDelegate>
 {
     NSString *_contractnameStr;
@@ -230,11 +231,15 @@
     if (self.nmContractListArray.count > 0 && indexPath.section == 2) {
         
         NSDictionary *dataDict  = [self.nmContractListArray objectAtIndex:indexPath.row];
-        NSString *contractTemplateIdStr = [NSString stringWithFormat:@"%@",[dataDict objectSafeForKey:@"id"]];
+        NSString *prdOrderIdStr = [NSString stringWithFormat:@"%@",[self.dataDict objectSafeForKey:@"orderId"]];
+        NSString *contractTypeStr = [NSString stringWithFormat:@"%@",[dataDict objectSafeForKey:@"contractType"]];
         _contractnameStr = [dataDict objectSafeForKey:@"contractName"];
-        NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId",@"1", @"purchaseType",contractTemplateIdStr,@"contractTemplateId",nil];
+//        NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId",@"1", @"purchaseType",contractTemplateIdStr,@"contractTemplateId",nil];
         
-        [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagGetGoldContractInfo owner:self signature:YES Type:SelectAccoutTypeGold];
+//        [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagGetGoldContractInfo owner:self signature:YES Type:SelectAccoutTypeGold];
+        
+        NSString *strParameters = [NSString stringWithFormat:@"userId=%@&prdOrderId=%@&contractType=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],prdOrderIdStr,contractTypeStr];
+        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagContractDownLoad owner:self Type:SelectAccoutTypeHoner];//**加载PDF格式合同 和尊享合同 共用一个链接
     }
 }
 #pragma 去标详情页面
@@ -306,6 +311,17 @@
         {
             [AuxiliaryFunc showAlertViewWithMessage:rsttext];
         }
+    }else if (tag.intValue == kSXTagContractDownLoad) {
+        
+        QLHeaderViewController *vc = [[QLHeaderViewController alloc] init];
+        vc.localFilePath = result;
+        [self.navigationController pushViewController:vc animated:YES];
+        //        self.localFilePath = result;
+        //        QLPreviewController *QLPVC = [[QLPreviewController alloc] init];
+        //        QLPVC.delegate = self;
+        //        QLPVC.dataSource = self;
+        //        QLPVC.title = @"合同";
+        //        [self presentViewController:QLPVC animated:YES completion:nil];
     }
 }
 
