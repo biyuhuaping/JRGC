@@ -300,7 +300,7 @@
     }
     UCFFacReservedViewController *facReservedWeb = [[UCFFacReservedViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
     NSString *url = PRERESERVE_APPLY_URL;
-    facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@", url, model.Id];
+    facReservedWeb.url = [NSString stringWithFormat:@"%@", url];
     [self.navigationController pushViewController:facReservedWeb animated:YES];
 }
 

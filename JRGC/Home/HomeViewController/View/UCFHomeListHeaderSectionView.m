@@ -96,18 +96,18 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    if (self.des.length > 0 || self.presenter.desc.length > 0) {
-        if (self.des.length > 0) {
-            self.goldSignView.hidden = NO;
-            self.goldSignLabel.text = self.des;
-            CGSize size = [self.des boundingRectWithSize:CGSizeMake(MAXFLOAT, 18) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12.0f]} context:nil].size;
-            self.goldSignViewW.constant = size.width + 11;
-            self.goldSignView.backgroundColor = UIColorWithRGB(0xffdfdf);
-            self.goldSignLabel.textColor = UIColorWithRGB(0xff8586);
+    if (_des.length > 0 || _presenter.desc.length > 0) {
+        if (_des.length > 0) {
+            _goldSignView.hidden = NO;
+            _goldSignLabel.text = _des;
+            CGSize size = [_des boundingRectWithSize:CGSizeMake(MAXFLOAT, 18) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12.0f]} context:nil].size;
+            _goldSignViewW.constant = size.width + 11;
+            _goldSignView.backgroundColor = UIColorWithRGB(0xffdfdf);
+            _goldSignLabel.textColor = UIColorWithRGB(0xff8586);
         }
     }
     else {
-        self.goldSignView.hidden = YES;
+        _goldSignView.hidden = YES;
     }
     
     
@@ -118,26 +118,26 @@
         self.title1LabelFirst.text = attachFirst.statusTxt;
         self.valueLabelFirst.text = attachFirst.giftNum;
         self.titleLabelFirst.text = attachFirst.giftName;
-        
+
         self.title1LabelSecond.text = attachSecond.statusTxt;
         self.valueLabelSecond.text = attachSecond.giftNum;
         self.titleLabelSecond.text = attachSecond.giftName;
-        
+
         self.title1LabelThird.text = attachThird.statusTxt;
         self.valueLabelThird.text = attachThird.giftNum;
         self.titleLabelThird.text = attachThird.giftName;
-        
+
         if (attachFirst.status.integerValue == 1) {
             self.imageFirst.image = [UIImage imageNamed:@"mission_icon_1"];
         }
         else if (attachFirst.status.integerValue == 2) {
             self.imageFirst.image = [UIImage imageNamed:@"mission_icon_1"];
-            
+
         }
         else if (attachFirst.status.integerValue == 3) {
             self.imageFirst.image = [UIImage imageNamed:@"mission_icon_complete"];
         }
-        
+
         if (attachSecond.status.integerValue == 1) {
             self.imageSecond.image = [UIImage imageNamed:@"mission_icon_2gray"];
             self.segFirstView.backgroundColor = UIColorWithRGB(0xcccccc);
@@ -154,7 +154,7 @@
             self.valueLabelSecond.textColor = UIColorWithRGB(0xfd4d4c);
             self.titleLabelSecond.textColor = UIColorWithRGB(0xfd4d4c);
         }
-        
+
         if (attachThird.status.integerValue == 1) {
             self.imageThird.image = [UIImage imageNamed:@"mission_icon_3gray"];
             self.segSecondView.backgroundColor = UIColorWithRGB(0xcccccc);
