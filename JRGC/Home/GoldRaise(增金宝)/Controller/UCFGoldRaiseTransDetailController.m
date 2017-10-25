@@ -12,7 +12,7 @@
 #import "UCFGoldIncreTransListModel.h"
 #import "UCFGoldIncreTransListCell.h"
 #import "UCFGoldIncreContractModel.h"
-
+#import "QLHeaderViewController.h"
 @interface UCFGoldRaiseTransDetailController () <UITableViewDelegate, UITableViewDataSource, UCFGoldIncreTransListCellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (strong, nonatomic) NSMutableArray *dataArray;
@@ -107,9 +107,15 @@
 #pragma mark - 合同的代理方法
 - (void)goldIncreTransListCellDidClickedConstractWithModel:(UCFGoldIncreContractModel *)model
 {
-    NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId", [NSString stringWithFormat:@"%@", model.contractType], @"contractType", [NSString stringWithFormat:@"%@", model.orderId], @"orderId", nil];
+//    NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId", [NSString stringWithFormat:@"%@", model.contractType], @"contractType", [NSString stringWithFormat:@"%@", model.orderId], @"orderId", nil];
+//    
+//    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagGlixedGoldConstract owner:self signature:YES Type:SelectAccoutTypeGold];
     
-    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagGlixedGoldConstract owner:self signature:YES Type:SelectAccoutTypeGold];
+    NSString *prdOrderIdStr = [NSString stringWithFormat:@"%@", model.orderId];;
+    NSString *contractTypeStr = [NSString stringWithFormat:@"%@", model.contractType];
+    
+    NSString *strParameters = [NSString stringWithFormat:@"userId=%@&prdOrderId=%@&contractType=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],prdOrderIdStr,contractTypeStr];
+    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagContractDownLoad owner:self Type:SelectAccoutTypeHoner];//**加载PDF格式合同 和尊享合同 共用一个链接
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -198,6 +204,11 @@
             controller.baseTitleType = @"detail_heTong";
             [self.navigationController pushViewController:controller animated:YES];
         }
+    }else if (tag.intValue == kSXTagContractDownLoad) {
+        
+        QLHeaderViewController *vc = [[QLHeaderViewController alloc] init];
+        vc.localFilePath = result;
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 
