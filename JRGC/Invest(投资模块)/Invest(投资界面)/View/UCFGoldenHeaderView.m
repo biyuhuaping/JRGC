@@ -40,7 +40,7 @@
 
 + (CGFloat)viewHeight
 {
-    return 236;
+    return 216;
 }
 
 - (void)layoutSubviews

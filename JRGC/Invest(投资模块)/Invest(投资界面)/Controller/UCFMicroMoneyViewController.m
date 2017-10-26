@@ -67,7 +67,7 @@
 - (void)createUI {
     self.accoutType = SelectAccoutTypeP2P;
     UCFMicroMoneyHeaderView *microMoneyHeaderView = (UCFMicroMoneyHeaderView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFMicroMoneyHeaderView" owner:self options:nil] lastObject];
-    microMoneyHeaderView.frame = CGRectMake(0, 0, ScreenWidth, ScreenWidth/16*5+20);
+    microMoneyHeaderView.frame = CGRectMake(0, 0, ScreenWidth, ScreenWidth/16*5+10);
     self.tableview.tableHeaderView = microMoneyHeaderView;
     self.microMoneyHeaderView = microMoneyHeaderView;
     

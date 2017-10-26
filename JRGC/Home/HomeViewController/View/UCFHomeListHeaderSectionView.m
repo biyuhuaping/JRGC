@@ -109,8 +109,8 @@
     else {
         _goldSignView.hidden = YES;
     }
-    
-    
+
+
     if (_presenter.attach.count > 0) {
         UCFAttachModel *attachFirst = [_presenter.attach firstObject];
         UCFAttachModel *attachSecond = [_presenter.attach objectAtIndex:1];
