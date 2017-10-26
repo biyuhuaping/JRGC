@@ -67,8 +67,12 @@
     if (kIS_IOS8) {
         self.tableview.tableHeaderView = goldenHeader;
     } else {
-        UIView *headView = [[UIView alloc]initWithFrame:self.goldenHeader.frame];
+        UIView *headView = [[UIView alloc]init];
+        _goldenHeader.frame = CGRectMake(0, 0, ScreenWidth, ScreenWidth/16*5+101);
+        headView.frame = CGRectMake(0, 0, ScreenWidth, ScreenWidth/16*5+101);
+//        [headView addSubview:_goldenHeader];
         headView.backgroundColor = [UIColor clearColor];
+
         self.tableview.tableHeaderView = headView;
     }
     goldenHeader.hostVc = self;

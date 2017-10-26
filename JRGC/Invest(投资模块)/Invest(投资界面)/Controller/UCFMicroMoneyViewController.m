@@ -158,7 +158,7 @@
         [view.homeListHeaderMoreButton setTitleColor:UIColorWithRGB(0x4aa1f9) forState:UIControlStateNormal];
         view.delegate = self;
         if (group.prdlist.count > 0) {
-            view.frame = CGRectMake(0, 0, ScreenWidth, 39);
+//            view.frame = CGRectMake(0, 0, ScreenWidth, 39);
         }
         else {
             view.frame = CGRectZero;
