@@ -127,21 +127,40 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    static NSString* viewId = @"homeListHeader";
-    UCFHomeListHeaderSectionView *view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:viewId];
-    if (nil == view) {
-        view = (UCFHomeListHeaderSectionView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeListHeaderSectionView" owner:self options:nil] lastObject];
+    if (!kIS_IOS8) {
+        UCFHomeListHeaderSectionView *view = (UCFHomeListHeaderSectionView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeListHeaderSectionView" owner:self options:nil] lastObject];
+        view.frame = CGRectMake(0, 0, ScreenWidth, 39);
+        view.section = section;
+        view.delegate = self;
+        UCFHomeListGroupPresenter *groupPresenter = [self.presenter.allDatas objectAtIndex:section];
+        UCFHomeListGroup *group = groupPresenter.group;
+        if (!group.prdlist) {
+            return nil;
+        }
+        view.presenter = groupPresenter;
+        
+        UIView *baseView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 39)];
+        baseView.backgroundColor = [UIColor clearColor];
+        [baseView addSubview:view];
+        return baseView;
+    } else {
+        static NSString* viewId = @"homeListHeader";
+        UCFHomeListHeaderSectionView *view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:viewId];
+        if (nil == view) {
+            view = (UCFHomeListHeaderSectionView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeListHeaderSectionView" owner:self options:nil] lastObject];
+        }
+        view.frame = CGRectMake(0, 0, ScreenWidth, 39);
+        view.section = section;
+        view.delegate = self;
+        UCFHomeListGroupPresenter *groupPresenter = [self.presenter.allDatas objectAtIndex:section];
+        UCFHomeListGroup *group = groupPresenter.group;
+        if (!group.prdlist) {
+            return nil;
+        }
+        view.presenter = groupPresenter;
+        return view;
     }
-    view.section = section;
-    view.delegate = self;
-    view.frame = CGRectMake(0, 0, ScreenWidth, 39);
-    UCFHomeListGroupPresenter *groupPresenter = [self.presenter.allDatas objectAtIndex:section];
-    UCFHomeListGroup *group = groupPresenter.group;
-    if (!group.prdlist) {
-        return nil;
-    }
-    view.presenter = groupPresenter;
-    return view;
+
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section

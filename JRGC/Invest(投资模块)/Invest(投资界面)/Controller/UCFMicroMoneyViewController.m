@@ -121,29 +121,55 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    static NSString* viewId = @"homeListHeader";
-    UCFHomeListHeaderSectionView *view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:viewId];
-    if (nil == view) {
-        view = (UCFHomeListHeaderSectionView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeListHeaderSectionView" owner:self options:nil] lastObject];
+    if (kIS_IOS8) {
+        static NSString* viewId = @"homeListHeader";
+        UCFHomeListHeaderSectionView *view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:viewId];
+        if (nil == view) {
+            view = (UCFHomeListHeaderSectionView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeListHeaderSectionView" owner:self options:nil] lastObject];
+        }
+        view.section = section;
+        UCFMicroMoneyGroup *group = [self.dataArray objectAtIndex:section];
+        view.downView.hidden = YES;
+        view.des = group.desc;
+        [view.headerImageView sd_setImageWithURL:[NSURL URLWithString:group.iconUrl]];
+        view.homeListHeaderMoreButton.hidden = !group.showMore;
+        [view.contentView setBackgroundColor:UIColorWithRGB(0xf9f9f9)];
+        [view.upLine setBackgroundColor:UIColorWithRGB(0xebebee)];
+        [view.homeListHeaderMoreButton setTitleColor:UIColorWithRGB(0x4aa1f9) forState:UIControlStateNormal];
+        view.delegate = self;
+        if (group.prdlist.count > 0) {
+            view.frame = CGRectMake(0, 0, ScreenWidth, 39);
+        }
+        else {
+            view.frame = CGRectZero;
+        }
+        view.headerTitleLabel.text = group.title;
+        return view;
+    } else {
+        UCFHomeListHeaderSectionView *view = (UCFHomeListHeaderSectionView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeListHeaderSectionView" owner:self options:nil] lastObject];
+        view.section = section;
+        UCFMicroMoneyGroup *group = [self.dataArray objectAtIndex:section];
+        view.downView.hidden = YES;
+        view.des = group.desc;
+        [view.headerImageView sd_setImageWithURL:[NSURL URLWithString:group.iconUrl]];
+        view.homeListHeaderMoreButton.hidden = !group.showMore;
+        [view.contentView setBackgroundColor:UIColorWithRGB(0xf9f9f9)];
+        [view.upLine setBackgroundColor:UIColorWithRGB(0xebebee)];
+        [view.homeListHeaderMoreButton setTitleColor:UIColorWithRGB(0x4aa1f9) forState:UIControlStateNormal];
+        view.delegate = self;
+        if (group.prdlist.count > 0) {
+//            view.frame = CGRectMake(0, 0, ScreenWidth, 39);
+        }
+        else {
+            view.frame = CGRectZero;
+        }
+        view.headerTitleLabel.text = group.title;
+        UIView *baseView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 39)];
+        baseView.backgroundColor = [UIColor clearColor];
+        [baseView addSubview:view];
+        return baseView;
     }
-    view.section = section;
-    UCFMicroMoneyGroup *group = [self.dataArray objectAtIndex:section];
-    view.downView.hidden = YES;
-    view.des = group.desc;
-    [view.headerImageView sd_setImageWithURL:[NSURL URLWithString:group.iconUrl]];
-    view.homeListHeaderMoreButton.hidden = !group.showMore;
-    [view.contentView setBackgroundColor:UIColorWithRGB(0xf9f9f9)];
-    [view.upLine setBackgroundColor:UIColorWithRGB(0xebebee)];
-    [view.homeListHeaderMoreButton setTitleColor:UIColorWithRGB(0x4aa1f9) forState:UIControlStateNormal];
-    view.delegate = self;
-    if (group.prdlist.count > 0) {
-        view.frame = CGRectMake(0, 0, ScreenWidth, 39);
-    }
-    else {
-        view.frame = CGRectZero;
-    }
-    view.headerTitleLabel.text = group.title;
-    return view;
+
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section

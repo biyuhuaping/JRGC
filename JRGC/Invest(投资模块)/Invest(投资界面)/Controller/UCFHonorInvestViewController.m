@@ -124,35 +124,66 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    static NSString* viewId = @"homeListHeader";
-    UCFHomeListHeaderSectionView *view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:viewId];
-    if (nil == view) {
-        view = (UCFHomeListHeaderSectionView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeListHeaderSectionView" owner:self options:nil] lastObject];
-    }
-    [view.contentView setBackgroundColor:UIColorWithRGB(0xf9f9f9)];
-    [view.upLine setBackgroundColor:UIColorWithRGB(0xebebee)];
-    view.homeListHeaderMoreButton.hidden = YES;
-    view.downView.hidden = YES;
-    view.frame = CGRectMake(0, 0, ScreenWidth, 39);
-    
-    if (self.dataArray.count == 1) {
-        view.headerTitleLabel.text =@"尊享优选";
-         view.headerImageView.image = [UIImage imageNamed:@"mine_icon_enjoy"];
-//        view.honerLabel.hidden = NO;
-//        view.honerLineImageView.hidden = NO;
-    }else{
-        if(section == 0)
-        {
-            view.headerTitleLabel.text =@"新手专享";
-            view.headerImageView.image = [UIImage imageNamed:@"mine_icon_new"];
-        }else{
+    if (kIS_IOS8) {
+        static NSString* viewId = @"homeListHeader";
+        UCFHomeListHeaderSectionView *view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:viewId];
+        if (nil == view) {
+            view = (UCFHomeListHeaderSectionView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeListHeaderSectionView" owner:self options:nil] lastObject];
+        }
+        [view.contentView setBackgroundColor:UIColorWithRGB(0xf9f9f9)];
+        [view.upLine setBackgroundColor:UIColorWithRGB(0xebebee)];
+        view.homeListHeaderMoreButton.hidden = YES;
+        view.downView.hidden = YES;
+        view.frame = CGRectMake(0, 0, ScreenWidth, 39);
+        
+        if (self.dataArray.count == 1) {
             view.headerTitleLabel.text =@"尊享优选";
             view.headerImageView.image = [UIImage imageNamed:@"mine_icon_enjoy"];
-//            view.honerLabel.hidden = NO;
-//            view.honerLineImageView.hidden = NO;
+            //        view.honerLabel.hidden = NO;
+            //        view.honerLineImageView.hidden = NO;
+        }else{
+            if(section == 0)
+            {
+                view.headerTitleLabel.text =@"新手专享";
+                view.headerImageView.image = [UIImage imageNamed:@"mine_icon_new"];
+            }else{
+                view.headerTitleLabel.text =@"尊享优选";
+                view.headerImageView.image = [UIImage imageNamed:@"mine_icon_enjoy"];
+                //            view.honerLabel.hidden = NO;
+                //            view.honerLineImageView.hidden = NO;
+            }
         }
+        return view;
+    } else {
+        UCFHomeListHeaderSectionView *view = (UCFHomeListHeaderSectionView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeListHeaderSectionView" owner:self options:nil] lastObject];
+        [view.contentView setBackgroundColor:UIColorWithRGB(0xf9f9f9)];
+        [view.upLine setBackgroundColor:UIColorWithRGB(0xebebee)];
+        view.homeListHeaderMoreButton.hidden = YES;
+        view.downView.hidden = YES;
+        view.frame = CGRectMake(0, 0, ScreenWidth, 39);
+        
+        if (self.dataArray.count == 1) {
+            view.headerTitleLabel.text =@"尊享优选";
+            view.headerImageView.image = [UIImage imageNamed:@"mine_icon_enjoy"];
+            //        view.honerLabel.hidden = NO;
+            //        view.honerLineImageView.hidden = NO;
+        }else{
+            if(section == 0)
+            {
+                view.headerTitleLabel.text =@"新手专享";
+                view.headerImageView.image = [UIImage imageNamed:@"mine_icon_new"];
+            }else{
+                view.headerTitleLabel.text =@"尊享优选";
+                view.headerImageView.image = [UIImage imageNamed:@"mine_icon_enjoy"];
+                //            view.honerLabel.hidden = NO;
+                //            view.honerLineImageView.hidden = NO;
+            }
+        }
+        UIView *baseView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 39)];
+        baseView.backgroundColor = [UIColor clearColor];
+        [baseView addSubview:view];
+        return baseView;
     }
-    return view;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
