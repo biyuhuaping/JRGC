@@ -16,7 +16,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qUQ-hh-q8v">
-                    <rect key="frame" x="0.0" y="10" width="320" height="100"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="120"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OU6-vG-3DJ">
@@ -63,10 +63,10 @@
                 <constraint firstAttribute="bottom" secondItem="OU6-vG-3DJ" secondAttribute="bottom" constant="10" id="Imk-Mn-8Ru"/>
                 <constraint firstAttribute="trailing" secondItem="qUQ-hh-q8v" secondAttribute="trailing" id="OG3-gZ-bVp"/>
                 <constraint firstAttribute="trailing" secondItem="OU6-vG-3DJ" secondAttribute="trailing" id="VqK-Kj-VQ5"/>
-                <constraint firstItem="OU6-vG-3DJ" firstAttribute="top" secondItem="qUQ-hh-q8v" secondAttribute="bottom" constant="10" id="XwO-zH-Ldy"/>
+                <constraint firstItem="OU6-vG-3DJ" firstAttribute="top" secondItem="qUQ-hh-q8v" secondAttribute="bottom" id="XwO-zH-Ldy"/>
                 <constraint firstItem="OU6-vG-3DJ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="hRM-fl-0I3"/>
                 <constraint firstItem="qUQ-hh-q8v" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="rlS-L8-TBF"/>
-                <constraint firstItem="qUQ-hh-q8v" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="veN-E7-6sR"/>
+                <constraint firstItem="qUQ-hh-q8v" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="veN-E7-6sR"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

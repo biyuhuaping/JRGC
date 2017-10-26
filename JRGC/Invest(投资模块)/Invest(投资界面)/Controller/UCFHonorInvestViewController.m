@@ -50,7 +50,7 @@
 - (void)createUI {
     self.accoutType = SelectAccoutTypeHoner;
     UCFHonorHeaderView *honorHeaderView = (UCFHonorHeaderView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHonorHeaderView" owner:self options:nil] lastObject];
-    honorHeaderView.frame = CGRectMake(0, 0, ScreenWidth, ScreenWidth/16*5+20);
+    honorHeaderView.frame = CGRectMake(0, 0, ScreenWidth, ScreenWidth/16*5+10);
     self.honorHeaderView = honorHeaderView;
     self.tableView.tableHeaderView = honorHeaderView;
     

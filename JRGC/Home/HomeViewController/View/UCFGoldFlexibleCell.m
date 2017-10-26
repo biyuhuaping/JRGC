@@ -30,6 +30,8 @@
     [super awakeFromNib];
     self.proSignBackView.backgroundColor = UIColorWithRGB(0xffecc5);
     self.proSignLabel.textColor = UIColorWithRGB(0xffa550);
+    self.completeLabel.textColor = UIColorWithRGB(0xfc8f0e);
+    self.goldFlexibleRateLabel.textColor = UIColorWithRGB(0xfc8f0e);
 }
 
 - (void)layoutSubviews
