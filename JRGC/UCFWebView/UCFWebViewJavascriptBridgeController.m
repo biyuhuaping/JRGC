@@ -426,6 +426,9 @@
             NSString *value = [nativeData objectSafeForKey:@"value"];
             [weakSelf getContractContent:value];
         }
+        else if ([nativeData[@"action"] isEqualToString:@"home_refresh"]) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
+        }
         
         //----------------------------------------------------------------------------------------------------qyy
         
