@@ -114,7 +114,7 @@
     NSString *prdOrderIdStr = [NSString stringWithFormat:@"%@", model.orderId];;
     NSString *contractTypeStr = [NSString stringWithFormat:@"%@", model.contractType];
     
-    NSString *strParameters = [NSString stringWithFormat:@"userId=%@&prdOrderId=%@&contractType=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],prdOrderIdStr,contractTypeStr];
+    NSString *strParameters = [NSString stringWithFormat:@"userId=%@&prdOrderId=%@&contractType=%@&prdType=1",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],prdOrderIdStr,contractTypeStr];
     [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagContractDownLoad owner:self Type:SelectAccoutTypeHoner];//**加载PDF格式合同 和尊享合同 共用一个链接
 }
 
