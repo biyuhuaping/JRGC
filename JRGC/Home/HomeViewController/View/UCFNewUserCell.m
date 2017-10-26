@@ -42,7 +42,12 @@
 
 - (IBAction)registerButtonClicked:(UIButton *)sender {
     if ([self.delegate respondsToSelector:@selector(newUserCell:didClickedRegisterButton:withModel:)]) {
-        [self.delegate newUserCell:self didClickedRegisterButton:sender withModel:self.presenter.item];
+        if ([NSStringFromClass([self.delegate class]) isEqualToString:@"UCFMicroMoneyViewController"]) {
+            [self.delegate newUserCell:self didClickedRegisterButton:sender withModel:(UCFHomeListCellModel *)self.microMoneyModel];
+        }
+        else {
+            [self.delegate newUserCell:self didClickedRegisterButton:sender withModel:self.presenter.item];
+        }
     }
 }
 

@@ -17,6 +17,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *minLabel;
 @property (weak, nonatomic) IBOutlet UILabel *limitLabel;
 @property (weak, nonatomic) IBOutlet NZLabel *addedTransLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *leftCetnerSpace;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *rightCenterSpace;
 
 @end
 
@@ -26,6 +28,9 @@
     [super awakeFromNib];
     // Initialization code
     self.reserveButton.backgroundColor = UIColorWithRGB(0xfd4d4c);
+    self.anurateLabel.textColor = UIColorWithRGB(0xfd4d4c);
+    self.leftCetnerSpace.constant = -(ScreenWidth / 5);
+    self.rightCenterSpace.constant = ScreenWidth / 4;
 }
 
 - (void)setPresenter:(UCFHomeListCellPresenter *)presenter

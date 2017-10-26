@@ -45,7 +45,7 @@
                         </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="期限" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DIU-Xb-NuL">
-                        <rect key="frame" x="149" y="46" width="22.5" height="13.5"/>
+                        <rect key="frame" x="143" y="46" width="22.5" height="13.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -93,7 +93,7 @@
                     <constraint firstAttribute="bottom" secondItem="B0y-aK-3Gw" secondAttribute="bottom" constant="20" id="3wW-ge-Hb6"/>
                     <constraint firstItem="MHm-O7-Kha" firstAttribute="leading" secondItem="OO9-ZZ-01p" secondAttribute="leading" id="5m7-0x-1jt"/>
                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="MHm-O7-Kha" secondAttribute="trailing" constant="15" id="61e-n2-C82"/>
-                    <constraint firstItem="DIU-Xb-NuL" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="99h-I1-fLA"/>
+                    <constraint firstItem="DIU-Xb-NuL" firstAttribute="leading" secondItem="8WN-wA-XTI" secondAttribute="leading" id="Ivv-Wi-qci"/>
                     <constraint firstItem="B0y-aK-3Gw" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="KeL-KB-S7S"/>
                     <constraint firstItem="RK9-1Y-6fb" firstAttribute="leading" secondItem="QNh-e5-35E" secondAttribute="leading" id="ND8-sC-ohf"/>
                     <constraint firstItem="RK9-1Y-6fb" firstAttribute="top" secondItem="QNh-e5-35E" secondAttribute="bottom" constant="4" id="Qdc-9h-N6A"/>
