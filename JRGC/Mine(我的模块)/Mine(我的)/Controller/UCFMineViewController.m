@@ -76,9 +76,13 @@
         }
             break;
         case 1:{//签到
-            if ([UserInfoSingle sharedManager].userId) {
-//                [self.userInfoVC signForRedBag];
-            }
+//            if ([UserInfoSingle sharedManager].userId) {
+////                [self.userInfoVC signForRedBag];
+//            }
+            UCFInvitationRebateViewController *feedBackVC = [[UCFInvitationRebateViewController alloc] initWithNibName:@"UCFInvitationRebateViewController" bundle:nil];
+            feedBackVC.title = @"邀请获利";
+            feedBackVC.accoutType = SelectAccoutTypeP2P;
+            [self.navigationController pushViewController:feedBackVC animated:YES];
         }
             break;
     }
