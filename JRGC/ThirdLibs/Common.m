@@ -126,6 +126,8 @@
         deviceType = @"6";
     } else if (ScreenWidth == 414.0f && ScreenHeight == 736.0f) {
         deviceType = @"6Plus";
+    } else if (ScreenHeight == 812) {
+        deviceType = @"8";
     }
     return deviceType;
 }

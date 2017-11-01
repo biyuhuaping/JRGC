@@ -54,6 +54,9 @@
     int version = 7;
     if(ScreenHeight == 480){
         version = 6;
+    } else if (ScreenHeight == 812) {
+        version = 8;  //iphonex
+
     }
     for (int i = 0; i < 4; i++) {
         UIImageView *adImageView = [[UIImageView alloc] initWithFrame:CGRectMake(ScreenWidth * i, 0, ScreenWidth,ScreenHeight)];
@@ -63,9 +66,11 @@
             UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
             if (ScreenHeight == 480 ) {
                 button.frame = CGRectMake((ScreenWidth - 210)/2, ScreenHeight - 49 - 38, 210, 38);
-            } else {
+            } else if (ScreenHeight == 812) {
+                button.frame = CGRectMake((ScreenWidth - 210)/2, ScreenHeight - 130 - 38, 210, 38);
+            }
+            else {
                 button.frame = CGRectMake((ScreenWidth - 210)/2, ScreenHeight - 85 - 38, 210, 38);
-
             }
             button.backgroundColor = [UIColor clearColor];
             [button setBackgroundImage:[UIImage imageNamed:@"page_btn.png"] forState:UIControlStateNormal];

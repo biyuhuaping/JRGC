@@ -28,7 +28,15 @@
         _baseImageView.backgroundColor = [UIColor whiteColor];
         _baseImageView.userInteractionEnabled = YES;
         NSString *imageURL = [[NSUserDefaults standardUserDefaults] valueForKey:@"LoginImageUrl"];
-        NSString *imageName = ScreenHeight < 481 ? @"login_bg_phone4_default.png" : @"login_bg_default.png";
+        NSString *imageName = @"";
+        if (ScreenHeight == 480) {
+            imageName = @"login_bg_phone4_default.png";
+        } else if (ScreenHeight == 812) {
+            imageName = @"login_bg_iphoneX.png";
+        } else {
+            imageName = @"login_bg_default.png";
+        }
+
         UIImage *imageData = [UIImage imageNamed:imageName];
         [_baseImageView sd_setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:imageData];
         [self addSubview:_baseImageView];
