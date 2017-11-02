@@ -416,7 +416,9 @@
     }
     else if ([titleStr hasPrefix:@"我的预约"]) {
         UCFMyReservedViewController *myserved = [[UCFMyReservedViewController alloc] initWithNibName:@"UCFMyReservedViewController" bundle:nil];
-        myserved.url = [NSString stringWithFormat:@"https://m.9888.cn/static/wap/invest/index.html#/reserve/records"];
+//        myserved.url = [NSString stringWithFormat:@"https://m.9888.cn/static/wap/invest/index.html#/reserve/records"];
+        myserved.url = [NSString stringWithFormat:@"https://m.9888.cn/static/wap/p2p/index.html#/reserve-bid/records"];
+        
         myserved.navTitle = titleStr;
         [self.navigationController pushViewController:myserved animated:YES];
     }

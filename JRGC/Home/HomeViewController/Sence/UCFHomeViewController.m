@@ -627,8 +627,7 @@
     }
     UCFFacReservedViewController *facReservedWeb = [[UCFFacReservedViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
 //    NSString *url = [PRERESERVE_URL stringByReplacingOccurrencesOfString:@"/info" withString:@"/apply"];
-    facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@", PRERESERVE_APPLY_URL, model.Id];
-    facReservedWeb.navTitle = @"工场预约";
+    facReservedWeb.url = [NSString stringWithFormat:@"%@", PRERESERVE_APPLY_URL];
     [self.navigationController pushViewController:facReservedWeb animated:YES];
 }
 
@@ -987,6 +986,14 @@
             break;
             
         case 5: {
+            NSString *userId = [UserInfoSingle sharedManager].userId;
+            if (nil == userId) {
+                UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
+                UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
+                AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+                [app.tabBarController presentViewController:loginNaviController animated:YES completion:nil];
+                return;
+            }
             self.accoutType = SelectAccoutTypeP2P;
             BOOL b = [self checkUserCanInvestIsDetail:YES type:self.accoutType];
             if (!b) {
@@ -1007,9 +1014,7 @@
                 return;
             }
             UCFFacReservedViewController *facReservedWeb = [[UCFFacReservedViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
-            //    NSString *url = [PRERESERVE_URL stringByReplacingOccurrencesOfString:@"/info" withString:@"/apply"];
             facReservedWeb.url = [NSString stringWithFormat:@"%@", iconPresenter.url];
-//            facReservedWeb.navTitle = @"工场预约";
             [self.navigationController pushViewController:facReservedWeb animated:YES];
             return;
         }

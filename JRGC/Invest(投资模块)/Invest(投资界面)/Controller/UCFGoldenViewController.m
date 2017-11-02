@@ -56,16 +56,25 @@
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-    self.goldenHeader.frame = CGRectMake(0, 0, ScreenWidth, ScreenWidth/16*5+101);
+    self.goldenHeader.frame = CGRectMake(0, 0, ScreenWidth, ScreenWidth/16*5+81);
 }
 
 #pragma mark - 初始化UI
 - (void)createUI {
 //    CGFloat height = [UCFGoldenHeaderView viewHeight];
     UCFGoldenHeaderView *goldenHeader = (UCFGoldenHeaderView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFGoldenHeaderView" owner:self options:nil] lastObject];
-//    goldenHeader.frame = CGRectMake(0, 0, ScreenWidth, ScreenWidth/16.0 *5 + 101);
-    self.tableview.tableHeaderView = goldenHeader;
     self.goldenHeader = goldenHeader;
+    if (kIS_IOS8) {
+        self.tableview.tableHeaderView = goldenHeader;
+    } else {
+        UIView *headView = [[UIView alloc]init];
+        _goldenHeader.frame = CGRectMake(0, 0, ScreenWidth, ScreenWidth/16*5+101);
+        headView.frame = CGRectMake(0, 0, ScreenWidth, ScreenWidth/16*5+101);
+//        [headView addSubview:_goldenHeader];
+        headView.backgroundColor = [UIColor clearColor];
+
+        self.tableview.tableHeaderView = headView;
+    }
     goldenHeader.hostVc = self;
     
     [self.tableview addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(refreshData)];
@@ -185,54 +194,105 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    
-    static NSString* viewId = @"homeListHeader";
-    UCFHomeListHeaderSectionView *view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:viewId];
-    if (nil == view) {
-        view = (UCFHomeListHeaderSectionView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeListHeaderSectionView" owner:self options:nil] lastObject];
-    }
-    view.downView.hidden = YES;
-    [view.contentView setBackgroundColor:UIColorWithRGB(0xf9f9f9)];
-    [view.upLine setBackgroundColor:UIColorWithRGB(0xebebee)];
-    view.frame = CGRectMake(0, 0, ScreenWidth, 39);
-    if (section == 0) {
-        if (self.fliexGoldModel.nmPrdClaimName.length > 0) {
-            view.homeListHeaderMoreButton.hidden = YES;
-            view.headerTitleLabel.text = @"增金宝";
-            view.headerImageView.image = [UIImage imageNamed:@"mine_icon_gold_current"];
-            
-            if (_fliexGoldModel.prdLabelsList.count > 0) {
-                UCFProjectLabel *projectLabel = [_fliexGoldModel.prdLabelsList firstObject];
-                if ([projectLabel.labelPriority integerValue] == 1) {
-                    view.goldSignView.hidden = NO;
-                    view.goldSignLabel.text = [NSString stringWithFormat:@"%@", projectLabel.labelName];
-                    CGSize size = [view.goldSignLabel.text boundingRectWithSize:CGSizeMake(MAXFLOAT, 18) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12.0f]} context:nil].size;
-                    view.goldSignViewW.constant = size.width + 11;
+    if (kIS_IOS8) {
+        static NSString* viewId = @"homeListHeader";
+        UCFHomeListHeaderSectionView *view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:viewId];
+        if (nil == view) {
+            view = (UCFHomeListHeaderSectionView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeListHeaderSectionView" owner:self options:nil] lastObject];
+        }
+        view.downView.hidden = YES;
+        [view.contentView setBackgroundColor:UIColorWithRGB(0xf9f9f9)];
+        [view.upLine setBackgroundColor:UIColorWithRGB(0xebebee)];
+        view.frame = CGRectMake(0, 0, ScreenWidth, 39);
+        if (section == 0) {
+            if (self.fliexGoldModel.nmPrdClaimName.length > 0) {
+                view.homeListHeaderMoreButton.hidden = YES;
+                view.headerTitleLabel.text = @"增金宝";
+                view.headerImageView.image = [UIImage imageNamed:@"mine_icon_gold_current"];
+                
+                if (_fliexGoldModel.prdLabelsList.count > 0) {
+                    UCFProjectLabel *projectLabel = [_fliexGoldModel.prdLabelsList firstObject];
+                    if ([projectLabel.labelPriority integerValue] == 1) {
+                        view.goldSignView.hidden = NO;
+                        view.goldSignLabel.text = [NSString stringWithFormat:@"%@", projectLabel.labelName];
+                        CGSize size = [view.goldSignLabel.text boundingRectWithSize:CGSizeMake(MAXFLOAT, 18) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12.0f]} context:nil].size;
+                        view.goldSignViewW.constant = size.width + 11;
+                    }
+                    else {
+                        view.goldSignView.hidden = YES;
+                    }
                 }
                 else {
                     view.goldSignView.hidden = YES;
                 }
+                
+                [view.homeListHeaderMoreButton setTitleColor:UIColorWithRGB(0x4aa1f9) forState:UIControlStateNormal];
+                return view;
             }
-            else {
-                view.goldSignView.hidden = YES;
+        }
+        else if (section == 1) {
+            if (self.dataArray.count > 0) {
+                view.homeListHeaderMoreButton.hidden = YES;
+                view.headerTitleLabel.text = @"尊享金";
+                view.headerImageView.image = [UIImage imageNamed:@"mine_icon_gold"];
+                [view.homeListHeaderMoreButton setTitleColor:UIColorWithRGB(0x4aa1f9) forState:UIControlStateNormal];
+                return view;
             }
-            
-            [view.homeListHeaderMoreButton setTitleColor:UIColorWithRGB(0x4aa1f9) forState:UIControlStateNormal];
-            return view;
         }
-    }
-    else if (section == 1) {
-        if (self.dataArray.count > 0) {
-            view.homeListHeaderMoreButton.hidden = YES;
-            view.headerTitleLabel.text = @"尊享金";
-            view.headerImageView.image = [UIImage imageNamed:@"mine_icon_gold"];
-//            view.honerLabel.text = @"实物黄金赚收益";
-//            view.honerLabel.hidden = NO;
-            [view.homeListHeaderMoreButton setTitleColor:UIColorWithRGB(0x4aa1f9) forState:UIControlStateNormal];
-            return view;
+        return nil;
+    } else {
+        UCFHomeListHeaderSectionView *view = (UCFHomeListHeaderSectionView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeListHeaderSectionView" owner:self options:nil] lastObject];
+
+        view.downView.hidden = YES;
+        [view.contentView setBackgroundColor:UIColorWithRGB(0xf9f9f9)];
+        [view.upLine setBackgroundColor:UIColorWithRGB(0xebebee)];
+        view.frame = CGRectMake(0, 0, ScreenWidth, 39);
+        if (section == 0) {
+            if (self.fliexGoldModel.nmPrdClaimName.length > 0) {
+                view.homeListHeaderMoreButton.hidden = YES;
+                view.headerTitleLabel.text = @"增金宝";
+                view.headerImageView.image = [UIImage imageNamed:@"mine_icon_gold_current"];
+                
+                if (_fliexGoldModel.prdLabelsList.count > 0) {
+                    UCFProjectLabel *projectLabel = [_fliexGoldModel.prdLabelsList firstObject];
+                    if ([projectLabel.labelPriority integerValue] == 1) {
+                        view.goldSignView.hidden = NO;
+                        view.goldSignLabel.text = [NSString stringWithFormat:@"%@", projectLabel.labelName];
+                        CGSize size = [view.goldSignLabel.text boundingRectWithSize:CGSizeMake(MAXFLOAT, 18) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12.0f]} context:nil].size;
+                        view.goldSignViewW.constant = size.width + 11;
+                    }
+                    else {
+                        view.goldSignView.hidden = YES;
+                    }
+                }
+                else {
+                    view.goldSignView.hidden = YES;
+                }
+                
+                [view.homeListHeaderMoreButton setTitleColor:UIColorWithRGB(0x4aa1f9) forState:UIControlStateNormal];
+                UIView *baseView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 39)];
+                baseView.backgroundColor = [UIColor clearColor];
+                [baseView addSubview:view];
+                return baseView;
+            }
         }
+        else if (section == 1) {
+            if (self.dataArray.count > 0) {
+                view.homeListHeaderMoreButton.hidden = YES;
+                view.headerTitleLabel.text = @"尊享金";
+                view.headerImageView.image = [UIImage imageNamed:@"mine_icon_gold"];
+                [view.homeListHeaderMoreButton setTitleColor:UIColorWithRGB(0x4aa1f9) forState:UIControlStateNormal];
+                UIView *baseView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 39)];
+                baseView.backgroundColor = [UIColor clearColor];
+                [baseView addSubview:view];
+                return baseView;
+            }
+        }
+        return nil;
+        
+        
     }
-    return nil;
+
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {

@@ -272,6 +272,7 @@
         
         UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 10)];
         footView.backgroundColor = UIColorWithRGB(0xebebee);
+        footView.backgroundColor = [UIColor clearColor];
         self.baseTableView.tableFooterView = footView;
     }
     [self.baseTableView addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(getNetData)];

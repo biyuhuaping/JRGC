@@ -52,7 +52,7 @@
 //初始化
 - (void)initRegisterView
 {
-    _headImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 100)];
+    _headImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenWidth*5/16)];
     _headImageView.image = [UIImage imageNamed:@"banner_default"];
     _headImageView.contentMode = UIViewContentModeScaleToFill;
     [_headImageView getBannerImageStyle:UserRegistration];

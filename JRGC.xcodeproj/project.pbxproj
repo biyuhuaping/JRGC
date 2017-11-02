@@ -827,6 +827,11 @@
 		A860F2651F5E7DA10017495F /* UCFGoldRebateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A860F2631F5E7DA10017495F /* UCFGoldRebateCell.m */; };
 		A860F2661F5E7DA10017495F /* UCFGoldRebateCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A860F2641F5E7DA10017495F /* UCFGoldRebateCell.xib */; };
 		A86FC5791F6A2A7200A18182 /* AD_View.xib in Resources */ = {isa = PBXBuildFile; fileRef = A86FC5781F6A2A7200A18182 /* AD_View.xib */; };
+		A88490491FA72353004B6E71 /* guideImage8_4.png in Resources */ = {isa = PBXBuildFile; fileRef = A88490451FA72352004B6E71 /* guideImage8_4.png */; };
+		A884904A1FA72353004B6E71 /* guideImage8_1.png in Resources */ = {isa = PBXBuildFile; fileRef = A88490461FA72352004B6E71 /* guideImage8_1.png */; };
+		A884904D1FA72442004B6E71 /* login_bg_iphoneX.png in Resources */ = {isa = PBXBuildFile; fileRef = A884904C1FA72442004B6E71 /* login_bg_iphoneX.png */; };
+		A88490501FA72586004B6E71 /* guideImage8_3.png in Resources */ = {isa = PBXBuildFile; fileRef = A884904E1FA72585004B6E71 /* guideImage8_3.png */; };
+		A88490511FA72586004B6E71 /* guideImage8_2.png in Resources */ = {isa = PBXBuildFile; fileRef = A884904F1FA72586004B6E71 /* guideImage8_2.png */; };
 		A8A3A57F1EE95BDA00D9C06D /* UCFInvestAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A8A3A57E1EE95BDA00D9C06D /* UCFInvestAPIManager.m */; };
 		A8AD2E3E1EB979760013DB7C /* MongoliaLayerCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = A8AD2E3D1EB979760013DB7C /* MongoliaLayerCenter.m */; };
 		A8AD6F851EFA6BDE000AF323 /* PagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = A8AD6F841EFA6BDE000AF323 /* PagerView.m */; };
@@ -2398,6 +2403,11 @@
 		A860F2631F5E7DA10017495F /* UCFGoldRebateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFGoldRebateCell.m; sourceTree = "<group>"; };
 		A860F2641F5E7DA10017495F /* UCFGoldRebateCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFGoldRebateCell.xib; sourceTree = "<group>"; };
 		A86FC5781F6A2A7200A18182 /* AD_View.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AD_View.xib; sourceTree = "<group>"; };
+		A88490451FA72352004B6E71 /* guideImage8_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guideImage8_4.png; sourceTree = "<group>"; };
+		A88490461FA72352004B6E71 /* guideImage8_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guideImage8_1.png; sourceTree = "<group>"; };
+		A884904C1FA72442004B6E71 /* login_bg_iphoneX.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = login_bg_iphoneX.png; path = Images/login_bg_iphoneX.png; sourceTree = "<group>"; };
+		A884904E1FA72585004B6E71 /* guideImage8_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guideImage8_3.png; sourceTree = "<group>"; };
+		A884904F1FA72586004B6E71 /* guideImage8_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guideImage8_2.png; sourceTree = "<group>"; };
 		A8A3A57D1EE95BDA00D9C06D /* UCFInvestAPIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFInvestAPIManager.h; sourceTree = "<group>"; };
 		A8A3A57E1EE95BDA00D9C06D /* UCFInvestAPIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFInvestAPIManager.m; sourceTree = "<group>"; };
 		A8AD2E3C1EB979760013DB7C /* MongoliaLayerCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MongoliaLayerCenter.h; sourceTree = "<group>"; };
@@ -5520,6 +5530,7 @@
 				A85C74D41F90EA4400DF7D6A /* home_icon_yuyue.png */,
 				A85C74D31F90EA4400DF7D6A /* home_icon_zhaizhuan.png */,
 				A85C74D71F90EA4500DF7D6A /* home_icon_zunxiang.png */,
+				A884904C1FA72442004B6E71 /* login_bg_iphoneX.png */,
 				A8F783021F8CCB8500685B4D /* login_bg_default.png */,
 				A8F783031F8CCB8500685B4D /* login_bg_phone4_default.png */,
 				FB51491B1D64403000C26E7B /* gif@3x.gif */,
@@ -6465,6 +6476,10 @@
 		FB51494B1D64441F00C26E7B /* guiviewImage */ = {
 			isa = PBXGroup;
 			children = (
+				A88490461FA72352004B6E71 /* guideImage8_1.png */,
+				A884904F1FA72586004B6E71 /* guideImage8_2.png */,
+				A884904E1FA72585004B6E71 /* guideImage8_3.png */,
+				A88490451FA72352004B6E71 /* guideImage8_4.png */,
 				FB51494C1D64441F00C26E7B /* guideImage6_1.png */,
 				FB51494D1D64441F00C26E7B /* guideImage6_2.png */,
 				FB51494E1D64441F00C26E7B /* guideImage6_3.png */,
@@ -6764,7 +6779,7 @@
 						CreatedOnToolsVersion = 6.1;
 						DevelopmentTeam = EZRWM7P5C6;
 						LastSwiftMigration = 0800;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 0;
@@ -6773,7 +6788,7 @@
 								enabled = 0;
 							};
 							com.apple.Push = {
-								enabled = 0;
+								enabled = 1;
 							};
 							com.apple.VPNLite = {
 								enabled = 0;
@@ -6812,6 +6827,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A884904A1FA72353004B6E71 /* guideImage8_1.png in Resources */,
 				A85C74E81F90EE4700DF7D6A /* index_tenMonthHunt.jpg in Resources */,
 				A85C74E71F90EE3F00DF7D6A /* home_icon_zunxiang.png in Resources */,
 				A85C74E61F90EE3500DF7D6A /* home_icon_zhaizhuan.png in Resources */,
@@ -6932,6 +6948,7 @@
 				74F490EF1E5B2AAA0057AC62 /* UCFCollectionBidCell.xib in Resources */,
 				740586C81F41A06600E2DE01 /* UCFGoldRaiseView.xib in Resources */,
 				FB51491A1D6438A700C26E7B /* Images.xcassets in Resources */,
+				A88490491FA72353004B6E71 /* guideImage8_4.png in Resources */,
 				847103BB1D59AD7500935B19 /* UCFBankDepositoryAccountViewController.xib in Resources */,
 				4A04F8351F0B6DDC00ADE9D8 /* UCFGoldAccountHeadView.xib in Resources */,
 				833A6EAE1E55466B00C8A494 /* UCFCollectionListViewController.xib in Resources */,
@@ -6951,6 +6968,7 @@
 				74270D351EC595FA00F9419B /* UCFModifyProportion.xib in Resources */,
 				74AFB12C1EE8F072007DBAFC /* UCFMicroMoneyHeaderView.xib in Resources */,
 				743985431F175EB800F2EDB8 /* UCFGoldRechargeCell.xib in Resources */,
+				A884904D1FA72442004B6E71 /* login_bg_iphoneX.png in Resources */,
 				FB4F9E741D62A6F800CCB492 /* TradePasswordVC.xib in Resources */,
 				741CA7A81E724C64006056A8 /* UCFDiscoveryViewController.xib in Resources */,
 				74270C9C1EC58F6800F9419B /* UCFHomeViewController.xib in Resources */,
@@ -7048,6 +7066,7 @@
 				74270D211EC595ED00F9419B /* UCFRebateCell1.xib in Resources */,
 				740DAEC21E56E2D100CD7C8F /* UCFBatchProjectController.xib in Resources */,
 				25BAE2B21D804E6B001B6E01 /* JRGCViewForCWRresult.xib in Resources */,
+				A88490501FA72586004B6E71 /* guideImage8_3.png in Resources */,
 				4AA2AA811E5B17B7006E83F8 /* UCFBatchSetNumWebViewController.xib in Resources */,
 				FB5149561D64441F00C26E7B /* guideImage7_2.png in Resources */,
 				746BBEAC1AF8E93E00EBA0E7 /* UCFCouponUseCell.xib in Resources */,
@@ -7091,6 +7110,7 @@
 				2510E3E91D6F1560006BB5F8 /* alertViewCS.xib in Resources */,
 				83AB496A1F6A772400C4231F /* UCFTotalRevenuePieChartViewController.xib in Resources */,
 				74FBC1BE1B84721400B8DD7E /* UCFBindCardTwoTableViewCell.xib in Resources */,
+				A88490511FA72586004B6E71 /* guideImage8_2.png in Resources */,
 				74B98C9B1F70FF5F00CB6A9F /* UCFMineCell.xib in Resources */,
 				746748E11F3C595A0067294D /* UCFGoldBankLimitCell.xib in Resources */,
 				FBAEDA021C191AFE000C0AA1 /* PushConfig.plist in Resources */,
@@ -7870,9 +7890,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = JRGC/JRGC.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = EZRWM7P5C6;
@@ -7927,8 +7948,8 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp299;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "420d87cd-3e5a-44f4-bf9b-6f0f38307664";
+				PROVISIONING_PROFILE_SPECIFIER = JenkinsProfile;
 				SWIFT_OBJC_BRIDGING_HEADER = "JRGC/JRGC-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -7945,9 +7966,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = JRGC/JRGC.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = EZRWM7P5C6;
 				ENABLE_BITCODE = NO;
@@ -8001,8 +8023,8 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp299;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "420d87cd-3e5a-44f4-bf9b-6f0f38307664";
+				PROVISIONING_PROFILE_SPECIFIER = JenkinsProfile;
 				SWIFT_OBJC_BRIDGING_HEADER = "JRGC/JRGC-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;

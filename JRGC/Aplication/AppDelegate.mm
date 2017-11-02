@@ -123,8 +123,10 @@
     
     //获取广告地址
     if ([[Common machineName] isEqualToString:@"4"]) {
+        [self getAdversementImageStyle:1];
+    } else if ([[Common machineName] isEqualToString:@"8"])
         [self getAdversementImageStyle:4];
-    } else {
+    else {
         [self getAdversementImageStyle:3];
     }
     
@@ -191,19 +193,13 @@
     //TODO:------------------启动GrowingIO--------------------
     [Growing startWithAccountId:@"b9ed2e92ac9b1c59"];
     // 其他配置
-    // 开启Growing调试日志 可以开启日志
-//    [Growing setEnableLog:NO];
     
     JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
     entity.types = JPAuthorizationOptionAlert|JPAuthorizationOptionBadge|JPAuthorizationOptionSound;
     if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
-        // 可以添加自定义categories
-//         NSSet<UNNotificationCategory *> *categories for iOS10 or later
-//         NSSet<UIUserNotificationCategory *> *categories for iOS8 and iOS9
+
     }
     [JPUSHService registerForRemoteNotificationConfig:entity delegate:self];
-
-
     [JPUSHService setupWithOption:launchOptions appKey:JPUSHKEY channel:nil apsForProduction:YES];
     [JPUSHService setAlias:[[NSUserDefaults standardUserDefaults] objectForKey:UUID] callbackSelector:@selector(tagsAliasCallback:tags:alias:) object:self];
     [JPUSHService setBadge:0];
@@ -304,9 +300,9 @@
 - (void) createItem {
     //自定义icon 的初始化方法
     UIApplicationShortcutIcon *icon0 = [UIApplicationShortcutIcon iconWithTemplateImageName:@"工场码"];
-    UIApplicationShortcutIcon *icon1 = [UIApplicationShortcutIcon iconWithTemplateImageName:@"签到"];
+    UIApplicationShortcutIcon *icon1 = [UIApplicationShortcutIcon iconWithTemplateImageName:@"邀请返利"];
     UIMutableApplicationShortcutItem *item2 = [[UIMutableApplicationShortcutItem alloc]initWithType:@"0" localizedTitle:@"我的工场码" localizedSubtitle:nil icon:icon0 userInfo:nil];
-    UIMutableApplicationShortcutItem *item3 = [[UIMutableApplicationShortcutItem alloc]initWithType:@"1" localizedTitle:@"签到抽红包" localizedSubtitle:nil icon:icon1 userInfo:nil];
+    UIMutableApplicationShortcutItem *item3 = [[UIMutableApplicationShortcutItem alloc]initWithType:@"1" localizedTitle:@"邀请返利" localizedSubtitle:nil icon:icon1 userInfo:nil];
     [UIApplication sharedApplication].shortcutItems = @[item2,item3];
 }
 
@@ -972,10 +968,16 @@
             }
             NSString *imageStr=[[NSMutableString alloc] initWithData:recervedData encoding:NSUTF8StringEncoding];
             NSArray *arr = [imageStr objectFromJSONString];
-            if (ScreenHeight < 961) {
-                
+            NSString *LoginURL = @"";
+            if (ScreenHeight == 480) {
+                LoginURL = [arr objectAtIndex:1][@"thumb"];
+            } else if (ScreenHeight == 812) {
+                LoginURL = [arr objectAtIndex:4][@"thumb"];
             }
-            NSString *LoginURL = ScreenHeight > 481 ? [arr objectAtIndex:0][@"thumb"] : [arr objectAtIndex:1][@"thumb"];
+            else{
+                LoginURL = [arr objectAtIndex:0][@"thumb"];
+            }
+
             [[NSUserDefaults standardUserDefaults] setValue:LoginURL forKey:@"LoginImageUrl"];
             [[NSUserDefaults standardUserDefaults] synchronize];
             
