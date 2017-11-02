@@ -10,10 +10,11 @@
 #import "UCFMessageCenterCell.h"
 #import "UCFMessageSettingViewController.h"
 #import "UCFMessageDetailViewController.h"
-#import "DTKDropdownMenuView.h"
 #import "UCFMessageCenterModel.h"
 #import "UCFNoDataView.h"
-@interface UCFMessageCenterViewController ()<UITableViewDataSource,UITableViewDelegate,MGSwipeTableCellDelegate,DropdownMenuViewDelegate>
+#import "MLMOptionSelectView.h"//***下拉弹框
+#import "JRGCCustomGroupCell.h"
+@interface UCFMessageCenterViewController ()<UITableViewDataSource,UITableViewDelegate,MGSwipeTableCellDelegate>
 
 @property (strong, nonatomic)  UIImageView *tableBaseShadowView;    //删除deleteBaseView上面的阴影
 @property (strong, nonatomic) UITableView *messageTableView;
@@ -26,9 +27,13 @@
 @property (nonatomic,strong) NSIndexPath * setMessageReadedIndexPath;     //设置标记已读的数据对应的indexPath
 @property (nonatomic,strong) NSIndexPath * setMessageDeleteIndexPath;     //设置单个删除数据对应的indexPath
 @property (nonatomic,strong) UIButton * canleBtn;                         //量批删除取消按钮
-@property (nonatomic,strong) DTKDropdownMenuView *menuView;                //下拉菜单view
+@property (nonatomic,strong) MLMOptionSelectView *selectMenuView;          //下拉菜单view
+@property (nonatomic,strong)NSMutableArray *selectMenuDataArray;            //消息中心列表数据数组
 @property (nonatomic,assign) BOOL isSingleDelete;                        // 是否是通过侧滑删除的
 @property (nonatomic,assign) BOOL isCellSwipe;                        // 检测cell 是否有左滑 yes 有， no 没有
+
+@property (nonatomic,assign) BOOL isFirstClick; ///// 下拉菜单 第一个cell 是否可点 Yes 可以点击状态 NO 不可点击状态
+@property (nonatomic,assign) BOOL isSecondClick;/// 下拉菜单 第二个cell 是否可点
 @property (strong, nonatomic)  UIView *deleteBaseView;             //辅助视图(上面放的是删除按钮)
 @property (strong, nonatomic)  UIButton *allChooseBtn;           //全选按钮
 @property (strong, nonatomic)  UIButton *deleteMessageBtn;       //删除按钮
@@ -50,7 +55,6 @@
 #pragma mark view将要消失 加载个人中心页面
 -(void)viewWillDisappear:(BOOL)animated{
    [super viewWillDisappear:animated];
-   [self hideMenuView];
    [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
 }
 - (void)viewDidLoad {
@@ -58,8 +62,8 @@
     baseTitleLabel.text = @"消息中心";
     [self addLeftButton];
     [self createUI];//初始化页面
-    [self addRightItem];//初始化下拉菜单
-    [self hideMenuView];
+    //初始化下拉菜单
+    [self addRightButtonWithImage:[UIImage imageNamed:@"message_btn_setting"]];
 }
 #pragma mark 初始化页面
 -(void)createUI
@@ -130,7 +134,6 @@
 //    [self.rightButton removeFromSuperview];
        //404页面
     _noDataView = [[UCFNoDataView alloc] initWithFrame:CGRectMake(0,0,ScreenWidth, ScreenHeight-NavigationBarHeight) errorTitle:@"暂无数据"];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideMenuView) name:@"hideMenuView" object:nil];
     
     //量批删除取消按钮
     
@@ -150,48 +153,108 @@
     _canleBtn.userInteractionEnabled = YES;
     [_canleBtn addTarget:self action:@selector(cancelMutableDelete:) forControlEvents:UIControlEventTouchUpInside];
     _rightCanleItem = [[UIBarButtonItem alloc]initWithCustomView:_canleBtn];
+    
+    self.selectMenuDataArray = [[NSMutableArray alloc]initWithObjects:@"全部设为已读",@"批量删除",@"消息设置",nil];
+    _selectMenuView = [[MLMOptionSelectView alloc] initOptionView];//***初始化下拉弹框
+    
+    __weak typeof(self) weakSelfList = self;
+    //***下拉弹框点击事件
+    _selectMenuView.selectedOption = ^(NSIndexPath* idexnum){
+        [weakSelfList performSelector:@selector(selectMenuIndex:) withObject:idexnum afterDelay:0.3];//***下拉弹框点击后消失，在执行跳转操作
+    };
+    
 }
 -(void)reloadTableViewData{
     if (!_isTableViewEdit) {
          [self.messageTableView reloadData];
     }
 }
-#pragma mark 初始化下拉菜单
-- (void)addRightItem
+#pragma mark 下拉弹框的点击相应事件
+- (void)selectMenuIndex:(NSIndexPath *)idexnum
 {
-    __weak typeof(self) weakSelf = self;
-    DTKDropdownItem *item0 = [DTKDropdownItem itemWithTitle:@"全部设为已读" iconName:@"" callBack:^(NSUInteger index, id info) {
-        [weakSelf setAllMessageReadedHttpRequest];
-    }];
-    DTKDropdownItem *item1 = [DTKDropdownItem itemWithTitle:@"批量删除" iconName:@"" callBack:^(NSUInteger index, id info) {
-        weakSelf.navigationItem.rightBarButtonItem = weakSelf.rightCanleItem;
-        [weakSelf updateChooseCells:weakSelf.deleteDataArray];
-        [weakSelf.messageTableView reloadData];
-        [weakSelf startEditTableView];
-    }];
-    DTKDropdownItem *item2 = [DTKDropdownItem itemWithTitle:@"消息设置" iconName:@"" callBack:^(NSUInteger index, id info) {
-        [weakSelf performSelector:@selector(gotoMessageSettingVC) withObject:nil afterDelay:0.2];
-    }];
-    _menuView = [DTKDropdownMenuView dropdownMenuViewWithType:dropDownTypeRightItem frame:CGRectMake(ScreenWidth - 60, 20 , 44.f, 44.f) dropdownItems:@[item0,item1,item2] icon:@"message_btn_setting"];
-    _menuView.dropWidth = 107.f;
-    _menuView.textFont = [UIFont systemFontOfSize:12.f];
-    _menuView.textColor = [UIColor whiteColor];
-    _menuView.cellSeparatorColor = UIColorWithRGB(0x8190bf);
-    _menuView.cellColor =  UIColorWithRGB(0x5b6993);
-    _menuView.animationDuration = 0.2f;
-    _menuView.cellBackgroundAlpha = 0.95;
-    _menuView.cellHeight = 38;
-    _menuView.delegate = self;
-    _menuViewItem = [[UIBarButtonItem alloc]initWithCustomView:_menuView];
-    self.navigationItem.rightBarButtonItem = _menuViewItem;
+    switch (idexnum.row) {
+        case 0:
+        {
+            if (self.isFirstClick)//可以点击状态
+            {
+              [self setAllMessageReadedHttpRequest];
+            }
+           
+        }
+            break;
+        case 1:
+        {
+            if (self.isSecondClick)//可以点击状态
+            {
+                self.navigationItem.rightBarButtonItem = self.rightCanleItem;
+                [self updateChooseCells:self.deleteDataArray];
+                [self.messageTableView reloadData];
+                [self startEditTableView];
+            }
+           
+        }
+            break;
+        case 2:
+        {
+            [self performSelector:@selector(gotoMessageSettingVC) withObject:nil afterDelay:0.2];
+        }
+            break;
+            
+        default:
+            break;
+    }
+    
 }
-#pragma mark 隐藏下拉菜单
--(void)isShowMenuView{
-    [self.messageTableView reloadData];
-    _menuView.isMenuShow = !_menuView.isMenuShow;
+#pragma mark - 右边设置按钮点击
+- (void)clickRightBtn{
+    [self customCell];
+    _selectMenuView.arrow_offset = 0.9;
+    _selectMenuView.vhShow = NO;
+    _selectMenuView.hightIMAGThanTABLE = 4;
+    _selectMenuView.tablviewBGname = @"messageCenter_option_bg";
+    
+    _selectMenuView.optionType = MLMOptionSelectViewTypeCustom;
+    [_selectMenuView setBackColor:[UIColor clearColor]];
+    _selectMenuView.maxLine = 3;
+    
+    
+    [_selectMenuView showViewFromPoint:CGPointMake(SCREEN_WIDTH - 122, 64 - 7) viewWidth:107 targetView:nil direction:MLMOptionSelectViewBottom];
 }
--(void)hideMenuView{
-    _menuView.isMenuShow = NO;
+
+#pragma mark 设置下拉弹框中的自定义cell
+- (void)customCell {
+    WEAK(weaklistArray, self.selectMenuDataArray);
+    WEAK(weakSelf, self);
+    _selectMenuView.canEdit = NO;
+    [_selectMenuView registerNib:[UINib nibWithNibName:@"JRGCCustomGroupCell" bundle:nil] forCellReuseIdentifier:@"CustomCell"];
+    _selectMenuView.cell = ^(NSIndexPath *indexPath){
+        JRGCCustomGroupCell *cell = [weakSelf.selectMenuView dequeueReusableCellWithIdentifier:@"CustomCell"];
+          cell.lineUp.hidden = YES;
+        cell.label1.text = weaklistArray[indexPath.row];
+        if ([indexPath row] == 0 && !weakSelf.isFirstClick)
+        {
+           cell.label1.textColor = UIColorWithRGB(0x7c8ab0);
+        } else if([indexPath row] == 1 && !weakSelf.isSecondClick){
+            cell.label1.textColor = UIColorWithRGB(0x7c8ab0);
+        }else{
+            cell.label1.textColor = [UIColor whiteColor];
+        }
+        cell.label1.font = [UIFont systemFontOfSize:12.f];
+
+        return cell;
+    };
+    _selectMenuView.optionCellHeight = ^{
+        return 38.f;
+    };
+    _selectMenuView.rowNumber = ^(){
+        return (NSInteger)weaklistArray.count;
+    };
+    _selectMenuView.removeOption = ^(NSIndexPath *indexPath){
+        [weaklistArray removeObjectAtIndex:indexPath.row];
+        if (weaklistArray.count == 0) {
+            [weakSelf.selectMenuView dismiss];
+        }
+    };
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -323,7 +386,7 @@
 -(void)cancelMutableDelete:(UIButton *)cancelButton{
     [self cancelEditTableView];
     
-    self.navigationItem.rightBarButtonItem = _menuViewItem;
+    [self addRightButtonWithImage:[UIImage imageNamed:@"message_btn_setting"]];
     self.messageTableView.header.hidden = NO;
     self.deleteBaseView.hidden = YES;
 }
@@ -504,30 +567,24 @@
         if(![dic isExistenceforKey:@"data"]){
             [self endRefreshing];
             [self setNoDataView];
-            _menuView.isFirstClick = YES;
-            _menuView.isSecondClick = YES;
-            [_menuView.tableView reloadData];
+            self.isFirstClick = NO;
+            self.isSecondClick = NO;
             return;
         }
         NSDictionary *pageDataDic = [[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"pageData"];
         
         NSString *unReadMsgCount = [[dic objectSafeDictionaryForKey:@"data"]  objectSafeForKey:@"unReadMsgCount"];
-        if ([unReadMsgCount intValue] == 0) {
-            _menuView.isFirstClick = YES;
-        }else{
-           _menuView.isFirstClick = NO;
-        }
-        _menuView.isSecondClick = NO;
-        [_menuView.tableView reloadData];
+        self.isFirstClick = !([unReadMsgCount intValue] == 0);
         if(rstcode){
 //            NSDictionary *tMsgListDic = [dic objectSafeDictionaryForKey:@"data"];
             NSDictionary *paginationDic = [pageDataDic objectSafeForKey:@"pagination"];
             int totalPage = [[paginationDic objectSafeForKey:@"totalPage"] intValue];//总页数
-            NSArray *resultArr = [pageDataDic objectSafeForKey:@"result"];
+            NSArray *resultArr = [pageDataDic objectSafeArrayForKey:@"result"];
             self.messageTableView.footer.hidden = NO;
             if(_pageNumber == 1)
             {
                 [self.messageDataArray removeAllObjects];
+               
             }
             if(_pageNumber < totalPage)
             {
@@ -544,8 +601,11 @@
             if (_messageDataArray.count > _deleteDataArray.count) {
                 [self updateChooseCells:_deleteDataArray];
             }
+             self.isSecondClick = !(_messageDataArray.count == 0);
             [self.messageTableView reloadData];
         }else {
+            self.isSecondClick = NO;
+            self.isFirstClick = NO;
             [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
         }
         [self setNoDataView];
@@ -586,6 +646,8 @@
 - (void)errorPost:(NSError*)err tag:(NSNumber*)tag
 {
     [self endRefreshing];
+    self.isSecondClick = NO;
+    self.isFirstClick = NO;
     [MBProgressHUD displayHudError:err.userInfo[@"NSLocalizedDescription"]];
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     [self setNoDataView];
@@ -610,6 +672,5 @@
 #pragma mark 删除通知
 -(void)dealloc{
 
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"hideMenuView" object:nil];
 }
 @end

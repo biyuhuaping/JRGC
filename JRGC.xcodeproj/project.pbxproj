@@ -781,7 +781,6 @@
 		847103BA1D59AD7500935B19 /* UCFBankDepositoryAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 847103B81D59AD7500935B19 /* UCFBankDepositoryAccountViewController.m */; };
 		847103BB1D59AD7500935B19 /* UCFBankDepositoryAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 847103B91D59AD7500935B19 /* UCFBankDepositoryAccountViewController.xib */; };
 		84F4E44E1B736C15008378ED /* MjAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F4E44D1B736C15008378ED /* MjAlertView.m */; };
-		84F851CD1C7D812F00D19A7D /* DTKDropdownMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F851CB1C7D812F00D19A7D /* DTKDropdownMenuView.m */; };
 		84FAB60C1C7C575300D0942F /* MGSwipeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FAB6091C7C575300D0942F /* MGSwipeButton.m */; };
 		84FAB60D1C7C575300D0942F /* MGSwipeTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FAB60B1C7C575300D0942F /* MGSwipeTableCell.m */; };
 		84FFA5301C7EAA9200ACD835 /* UIScrollView+TouchScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FFA52F1C7EAA9200ACD835 /* UIScrollView+TouchScrollView.m */; };
@@ -2338,8 +2337,6 @@
 		847103B91D59AD7500935B19 /* UCFBankDepositoryAccountViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFBankDepositoryAccountViewController.xib; sourceTree = "<group>"; };
 		84F4E44C1B736C15008378ED /* MjAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MjAlertView.h; sourceTree = "<group>"; };
 		84F4E44D1B736C15008378ED /* MjAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MjAlertView.m; sourceTree = "<group>"; };
-		84F851CB1C7D812F00D19A7D /* DTKDropdownMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTKDropdownMenuView.m; sourceTree = "<group>"; };
-		84F851CC1C7D812F00D19A7D /* DTKDropdownMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTKDropdownMenuView.h; sourceTree = "<group>"; };
 		84FAB6081C7C575300D0942F /* MGSwipeButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGSwipeButton.h; sourceTree = "<group>"; };
 		84FAB6091C7C575300D0942F /* MGSwipeButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSwipeButton.m; sourceTree = "<group>"; };
 		84FAB60A1C7C575300D0942F /* MGSwipeTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGSwipeTableCell.h; sourceTree = "<group>"; };
@@ -5991,8 +5988,6 @@
 		840A793F1C2A7C160059A946 /* view */ = {
 			isa = PBXGroup;
 			children = (
-				84F851CC1C7D812F00D19A7D /* DTKDropdownMenuView.h */,
-				84F851CB1C7D812F00D19A7D /* DTKDropdownMenuView.m */,
 				840A79401C2A7C160059A946 /* UCFMessageCenterCell.h */,
 				840A79411C2A7C160059A946 /* UCFMessageCenterCell.m */,
 				840A79421C2A7C160059A946 /* UCFMessageCenterCell.xib */,
@@ -7547,7 +7542,6 @@
 				7BDD8FC81AE0DD67007A5CE8 /* MDRadialProgressTheme.m in Sources */,
 				25F445C31D66E276006813BB /* UCFChoseBankViewController.m in Sources */,
 				748D77A41ADE6D5A00910FF7 /* UCFSettingArrowItem.m in Sources */,
-				84F851CD1C7D812F00D19A7D /* DTKDropdownMenuView.m in Sources */,
 				748A3D081AF219BD00D7FAF1 /* FundsDetailGroup.m in Sources */,
 				74E140491F1C575200B17A96 /* UCFGoldCashHistoryController.m in Sources */,
 				7BDD8FCF1AE0E72A007A5CE8 /* UCFAccountDetailViewController.m in Sources */,
