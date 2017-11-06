@@ -679,6 +679,8 @@
 		8346B2701F71032100219D41 /* UCFRechargeAndCashView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8346B26F1F71032100219D41 /* UCFRechargeAndCashView.m */; };
 		8346B2721F71033000219D41 /* UCFRechargeAndCashView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8346B2711F71033000219D41 /* UCFRechargeAndCashView.xib */; };
 		8346B2751F71246800219D41 /* UCFAccoutCardModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8346B2741F71246800219D41 /* UCFAccoutCardModel.m */; };
+		8347A6CA1FAFFFB500E68DFD /* UCFExtractViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8347A6C81FAFFFB500E68DFD /* UCFExtractViewCell.m */; };
+		8347A6CB1FAFFFB500E68DFD /* UCFExtractViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8347A6C91FAFFFB500E68DFD /* UCFExtractViewCell.xib */; };
 		835B88851E8220CC00C8F0AB /* UCFP2POrHonerAccoutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 835B88831E8220CC00C8F0AB /* UCFP2POrHonerAccoutViewController.m */; };
 		835B88861E8220CC00C8F0AB /* UCFP2POrHonerAccoutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 835B88841E8220CC00C8F0AB /* UCFP2POrHonerAccoutViewController.xib */; };
 		835B88891E8222CC00C8F0AB /* UCFP2POrHornerTabHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 835B88881E8222CC00C8F0AB /* UCFP2POrHornerTabHeaderView.m */; };
@@ -739,6 +741,8 @@
 		83DAEFBE1F166A3000D7948F /* UCFContractTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83DAEFBC1F166A3000D7948F /* UCFContractTableCell.xib */; };
 		83DAEFC21F166A3B00D7948F /* UCFGoldAuthorizationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DAEFC01F166A3B00D7948F /* UCFGoldAuthorizationViewController.m */; };
 		83DAEFC31F166A3B00D7948F /* UCFGoldAuthorizationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83DAEFC11F166A3B00D7948F /* UCFGoldAuthorizationViewController.xib */; };
+		83DFC9461FB0102A002999CA /* UCFDrawGoldViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DFC9441FB0102A002999CA /* UCFDrawGoldViewController.m */; };
+		83DFC9471FB0102A002999CA /* UCFDrawGoldViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83DFC9451FB0102A002999CA /* UCFDrawGoldViewController.xib */; };
 		83E3F7A51F3C35C500286550 /* jrgcuserxieyi.docx in Resources */ = {isa = PBXBuildFile; fileRef = 83E3F7A41F3C35C500286550 /* jrgcuserxieyi.docx */; };
 		83E780721F38004400A400CE /* UCFGoldCouponCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E780701F38004400A400CE /* UCFGoldCouponCell.m */; };
 		83E780731F38004400A400CE /* UCFGoldCouponCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83E780711F38004400A400CE /* UCFGoldCouponCell.xib */; };
@@ -2183,6 +2187,9 @@
 		8346B2711F71033000219D41 /* UCFRechargeAndCashView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFRechargeAndCashView.xib; sourceTree = "<group>"; };
 		8346B2731F71246800219D41 /* UCFAccoutCardModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFAccoutCardModel.h; sourceTree = "<group>"; };
 		8346B2741F71246800219D41 /* UCFAccoutCardModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFAccoutCardModel.m; sourceTree = "<group>"; };
+		8347A6C71FAFFFB500E68DFD /* UCFExtractViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFExtractViewCell.h; sourceTree = "<group>"; };
+		8347A6C81FAFFFB500E68DFD /* UCFExtractViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFExtractViewCell.m; sourceTree = "<group>"; };
+		8347A6C91FAFFFB500E68DFD /* UCFExtractViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFExtractViewCell.xib; sourceTree = "<group>"; };
 		835B88821E8220CC00C8F0AB /* UCFP2POrHonerAccoutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFP2POrHonerAccoutViewController.h; sourceTree = "<group>"; };
 		835B88831E8220CC00C8F0AB /* UCFP2POrHonerAccoutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFP2POrHonerAccoutViewController.m; sourceTree = "<group>"; };
 		835B88841E8220CC00C8F0AB /* UCFP2POrHonerAccoutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFP2POrHonerAccoutViewController.xib; sourceTree = "<group>"; };
@@ -2276,6 +2283,9 @@
 		83DAEFBF1F166A3B00D7948F /* UCFGoldAuthorizationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFGoldAuthorizationViewController.h; sourceTree = "<group>"; };
 		83DAEFC01F166A3B00D7948F /* UCFGoldAuthorizationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFGoldAuthorizationViewController.m; sourceTree = "<group>"; };
 		83DAEFC11F166A3B00D7948F /* UCFGoldAuthorizationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFGoldAuthorizationViewController.xib; sourceTree = "<group>"; };
+		83DFC9431FB0102A002999CA /* UCFDrawGoldViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFDrawGoldViewController.h; sourceTree = "<group>"; };
+		83DFC9441FB0102A002999CA /* UCFDrawGoldViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFDrawGoldViewController.m; sourceTree = "<group>"; };
+		83DFC9451FB0102A002999CA /* UCFDrawGoldViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFDrawGoldViewController.xib; sourceTree = "<group>"; };
 		83E3F7A41F3C35C500286550 /* jrgcuserxieyi.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = jrgcuserxieyi.docx; sourceTree = "<group>"; };
 		83E7806F1F38004400A400CE /* UCFGoldCouponCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFGoldCouponCell.h; sourceTree = "<group>"; };
 		83E780701F38004400A400CE /* UCFGoldCouponCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFGoldCouponCell.m; sourceTree = "<group>"; };
@@ -5327,6 +5337,7 @@
 		7BCE028E1AC948710084C15C /* Setting */ = {
 			isa = PBXGroup;
 			children = (
+				8315591A1FAC7C6900285100 /* ExtractGold(提金) */,
 				8346B2651F70F25400219D41 /* RechargeAndCash(充值和提现) */,
 				83AB49581F6A754100C4231F /* AccountMoneyPieChart(资金饼图) */,
 				83FCCA641F17114E002921C5 /* myGoldInvest(已购黄金) */,
@@ -5588,6 +5599,43 @@
 				E38039641DE5682100C031FF /* JRGC-Bridging-Header.h */,
 			);
 			name = ThirdLibs;
+			sourceTree = "<group>";
+		};
+		8315591A1FAC7C6900285100 /* ExtractGold(提金) */ = {
+			isa = PBXGroup;
+			children = (
+				8315591B1FAC7C6900285100 /* Controller */,
+				8315591C1FAC7C6900285100 /* Model */,
+				8315591D1FAC7C6900285100 /* View */,
+			);
+			path = "ExtractGold(提金)";
+			sourceTree = "<group>";
+		};
+		8315591B1FAC7C6900285100 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				83DFC9431FB0102A002999CA /* UCFDrawGoldViewController.h */,
+				83DFC9441FB0102A002999CA /* UCFDrawGoldViewController.m */,
+				83DFC9451FB0102A002999CA /* UCFDrawGoldViewController.xib */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		8315591C1FAC7C6900285100 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8315591D1FAC7C6900285100 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8347A6C71FAFFFB500E68DFD /* UCFExtractViewCell.h */,
+				8347A6C81FAFFFB500E68DFD /* UCFExtractViewCell.m */,
+				8347A6C91FAFFFB500E68DFD /* UCFExtractViewCell.xib */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		833A6EA11E55466B00C8A494 /* CollectionDetail */ = {
@@ -6779,7 +6827,7 @@
 						CreatedOnToolsVersion = 6.1;
 						DevelopmentTeam = EZRWM7P5C6;
 						LastSwiftMigration = 0800;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 0;
@@ -6893,6 +6941,7 @@
 				74F998C31F3024C400A6E607 /* UCFFacReservedViewController.xib in Resources */,
 				74A2C0DB1F4306A000EDF0FA /* UCFGoldCashTipCell.xib in Resources */,
 				83A6FEA91EBC2DDF000BC48C /* UCFProductListCell.xib in Resources */,
+				83DFC9471FB0102A002999CA /* UCFDrawGoldViewController.xib in Resources */,
 				74BDA9611F09EE3B0054403F /* UCFCalendarViewController.xib in Resources */,
 				FBB685801AE4A76800F222B6 /* MJRefresh.bundle in Resources */,
 				83FCCA761F1745A2002921C5 /* UCFGoldInvestmentDetailViewController.xib in Resources */,
@@ -7017,6 +7066,7 @@
 				83FEDB771EFBB56000CFE0EF /* UCFCompanyNoOpenViewController.xib in Resources */,
 				A8E02DB31F0E0A7800FC2260 /* GoldTransactionRecordViewController.xib in Resources */,
 				4ACB399B1E1216DD00E9BA8C /* FestivalActivitiesWebView.xib in Resources */,
+				8347A6CB1FAFFFB500E68DFD /* UCFExtractViewCell.xib in Resources */,
 				83DAEFB51F16113400D7948F /* UCFGoldCalculatorView.xib in Resources */,
 				740586D21F41B10900E2DE01 /* UCFGoldRaiseCell.xib in Resources */,
 				4AE1E96B1E1CDB9900587CE6 /* README.txt in Resources */,
@@ -7362,6 +7412,7 @@
 				835B88891E8222CC00C8F0AB /* UCFP2POrHornerTabHeaderView.m in Sources */,
 				E37086C71D61E3030041D293 /* UCFOldUserGuideViewController.m in Sources */,
 				8366BFB91E151745008D027F /* UCFCashRecordCell.m in Sources */,
+				83DFC9461FB0102A002999CA /* UCFDrawGoldViewController.m in Sources */,
 				7BCE02141AC9025A0084C15C /* Common.m in Sources */,
 				7482A5911F4C0622006A9964 /* UCFGoldIncreTransListModel.m in Sources */,
 				2526ADDA1DD08CB800114D9A /* MLMOptionSelectView.m in Sources */,
@@ -7592,6 +7643,7 @@
 				74270D171EC595ED00F9419B /* UCFDataStaticsCell.m in Sources */,
 				74270D341EC595FA00F9419B /* UCFModifyProportion.m in Sources */,
 				7BC304871ACBC22D007767F1 /* UITableView+Misc.m in Sources */,
+				8347A6CA1FAFFFB500E68DFD /* UCFExtractViewCell.m in Sources */,
 				FBBF48781C58C46C006AB777 /* UIView+Border.m in Sources */,
 				7BCE023C1AC915A80084C15C /* SFHFKeychainUtils.m in Sources */,
 				7BCA210E1AEDCE67001CD258 /* InvestmentDetailTableViewCell.m in Sources */,
@@ -7892,8 +7944,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = JRGC/JRGC.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = EZRWM7P5C6;
@@ -7921,7 +7973,7 @@
 					"$(PROJECT_DIR)/JRGC/ThirdLibs/OneSDK/**",
 				);
 				INFOPLIST_FILE = JRGC/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -7948,8 +8000,8 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp299;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "420d87cd-3e5a-44f4-bf9b-6f0f38307664";
-				PROVISIONING_PROFILE_SPECIFIER = JenkinsProfile;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "JRGC/JRGC-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -7968,8 +8020,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = JRGC/JRGC.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = EZRWM7P5C6;
 				ENABLE_BITCODE = NO;
@@ -7996,7 +8048,7 @@
 					"$(PROJECT_DIR)/JRGC/ThirdLibs/OneSDK/**",
 				);
 				INFOPLIST_FILE = JRGC/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -8023,8 +8075,8 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp299;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "420d87cd-3e5a-44f4-bf9b-6f0f38307664";
-				PROVISIONING_PROFILE_SPECIFIER = JenkinsProfile;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "JRGC/JRGC-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;

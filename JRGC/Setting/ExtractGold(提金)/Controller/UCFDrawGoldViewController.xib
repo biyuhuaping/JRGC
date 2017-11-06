@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment version="2304" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UCFDrawGoldViewController">
+            <connections>
+                <outlet property="gotoNextButton" destination="zIS-TP-MKA" id="bJf-QN-aWI"/>
+                <outlet property="tableView" destination="ogP-4p-W4q" id="tRV-lh-9sQ"/>
+                <outlet property="tipLabel" destination="9Ee-Q7-yhC" id="llt-B5-frW"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mIb-LX-wBO">
+                    <rect key="frame" x="0.0" y="578" width="375" height="89"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="X5Z-aB-7Gc">
+                            <rect key="frame" x="0.0" y="-10" width="375" height="10"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zIS-TP-MKA">
+                            <rect key="frame" x="15" y="37" width="345" height="37"/>
+                            <color key="backgroundColor" red="0.98823529409999999" green="0.75294117647058822" blue="0.15294117647058825" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="37" id="Vjb-WO-Lao"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <state key="normal" title="下一步">
+                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已选提金克重 500克；提金手续费 50.00元" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Ee-Q7-yhC">
+                            <rect key="frame" x="15" y="8" width="345" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="9Ee-Q7-yhC" firstAttribute="top" secondItem="mIb-LX-wBO" secondAttribute="top" constant="8" id="E8l-kd-BxT"/>
+                        <constraint firstItem="zIS-TP-MKA" firstAttribute="top" secondItem="9Ee-Q7-yhC" secondAttribute="bottom" constant="8" id="Kuy-G2-eFC"/>
+                        <constraint firstAttribute="bottom" secondItem="zIS-TP-MKA" secondAttribute="bottom" constant="15" id="e8B-nm-sQk"/>
+                        <constraint firstAttribute="trailing" secondItem="zIS-TP-MKA" secondAttribute="trailing" constant="15" id="ekd-hQ-Iih"/>
+                        <constraint firstItem="zIS-TP-MKA" firstAttribute="leading" secondItem="mIb-LX-wBO" secondAttribute="leading" constant="15" id="mbg-qK-BYC"/>
+                        <constraint firstAttribute="trailing" secondItem="9Ee-Q7-yhC" secondAttribute="trailing" constant="15" id="qhp-sQ-hOS"/>
+                        <constraint firstAttribute="height" constant="89" id="vVp-gi-U9p"/>
+                        <constraint firstItem="9Ee-Q7-yhC" firstAttribute="leading" secondItem="mIb-LX-wBO" secondAttribute="leading" constant="15" id="yCq-b2-1Wv"/>
+                    </constraints>
+                </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ogP-4p-W4q">
+                    <rect key="frame" x="0.0" y="12" width="375" height="558"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="nEq-mM-lWE"/>
+                        <outlet property="delegate" destination="-1" id="XaR-91-Fwb"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="mIb-LX-wBO" firstAttribute="bottom" secondItem="Q5M-cg-NOt" secondAttribute="bottom" id="HwK-4E-Xa2"/>
+                <constraint firstItem="mIb-LX-wBO" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="Kyh-so-kxG"/>
+                <constraint firstItem="ogP-4p-W4q" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="a5y-yy-zSb"/>
+                <constraint firstItem="ogP-4p-W4q" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" id="dN8-Sh-PPg"/>
+                <constraint firstItem="ogP-4p-W4q" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="inD-vp-loW"/>
+                <constraint firstItem="mIb-LX-wBO" firstAttribute="top" secondItem="ogP-4p-W4q" secondAttribute="bottom" id="ioJ-QW-0nV"/>
+                <constraint firstItem="mIb-LX-wBO" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="mjQ-4h-jCQ"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
+            <point key="canvasLocation" x="24.5" y="52.5"/>
+        </view>
+    </objects>
+</document>
