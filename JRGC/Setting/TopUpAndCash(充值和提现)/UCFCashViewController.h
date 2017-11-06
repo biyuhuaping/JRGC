@@ -9,7 +9,9 @@
 #import "UCFBaseViewController.h"
 #import "FMDeviceManager.h"
 
-@interface UCFCashViewController : UCFBaseViewController<FMDeviceManagerDelegate>
+//@interface UCFCashViewController : UCFBaseViewController<FMDeviceManagerDelegate>
+#warning 同盾修改
+@interface UCFCashViewController : UCFBaseViewController
 @property (nonatomic, strong)NSMutableDictionary    *cashInfoDic;
 @property (nonatomic,assign) BOOL isCompanyAgent;
 @end
