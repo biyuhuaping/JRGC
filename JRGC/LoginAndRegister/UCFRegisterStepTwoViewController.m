@@ -128,7 +128,11 @@
         // 获取设备管理器实例
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         FMDeviceManager_t *manager = [FMDeviceManager sharedManager];
-        manager->getDeviceInfoAsync(nil, self);
+//        manager->getDeviceInfoAsync(nil, self);
+//#warning 同盾修改
+        NSString *blackBox = manager->getDeviceInfo();
+//        NSLog(@"同盾设备指纹数据: %@", blackBox);
+        [self didReceiveDeviceBlackBox:blackBox];
     }
 }
 
@@ -162,7 +166,11 @@
             //同盾
             // 获取设备管理器实例
             FMDeviceManager_t *manager = [FMDeviceManager sharedManager];
-            manager->getDeviceInfoAsync(nil, self);
+//            manager->getDeviceInfoAsync(nil, self);
+//#warning 同盾修改
+            NSString *blackBox = manager->getDeviceInfo();
+//            DBLOG(@"同盾设备指纹数据: %@", blackBox);
+            [self didReceiveDeviceBlackBox:blackBox];
         } else {
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:rsttext delegate:nil cancelButtonTitle:@"重新输入" otherButtonTitles:nil, nil];
             [alertView show];

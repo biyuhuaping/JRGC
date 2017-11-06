@@ -10,7 +10,9 @@
 #import "UCFRegisterTwoView.h"
 #import "FMDeviceManager.h"
 
-@interface UCFRegisterStepTwoViewController : UCFBaseViewController<RegisterTwoViewDelegate,UIAlertViewDelegate,FMDeviceManagerDelegate>
+//@interface UCFRegisterStepTwoViewController : UCFBaseViewController<RegisterTwoViewDelegate,UIAlertViewDelegate,FMDeviceManagerDelegate>
+//#warning 同盾修改
+@interface UCFRegisterStepTwoViewController : UCFBaseViewController<RegisterTwoViewDelegate,UIAlertViewDelegate>
 @property(nonatomic,strong) NSString *registerTokenStr;
 @property(nonatomic,assign) BOOL      isLimitFactoryCode; //是否隐藏工场码
 - (id)initWithPhoneNumber:(NSString*)phoneNum;

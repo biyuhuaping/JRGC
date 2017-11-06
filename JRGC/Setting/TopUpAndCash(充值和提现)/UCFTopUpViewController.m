@@ -22,7 +22,9 @@
 #import "UCFHuiShangBankViewController.h"
 #import "FMDeviceManager.h"
 #import "UCFModifyReservedBankNumberViewController.h"
-@interface UCFTopUpViewController () <UITextFieldDelegate,FMDeviceManagerDelegate,UCFModifyReservedBankNumberDelegate>
+//#warning 同盾修改
+//@interface UCFTopUpViewController () <UITextFieldDelegate,FMDeviceManagerDelegate,UCFModifyReservedBankNumberDelegate>
+@interface UCFTopUpViewController () <UITextFieldDelegate,UCFModifyReservedBankNumberDelegate>
 {
     NSString *curCodeType;          //当前验证码的状态
     NSString *rechargeLimiteUrl;    //产看银行限额的地址
@@ -483,7 +485,11 @@
     if ([self checkOrderIsLegitimate]) {
         [self.view endEditing:YES];
         FMDeviceManager_t *manager = [FMDeviceManager sharedManager];
-        manager->getDeviceInfoAsync(nil, self);
+//#warning 同盾修改
+//        manager->getDeviceInfoAsync(nil, self);
+        NSString *blackBox = manager->getDeviceInfo();
+//        NSLog(@"同盾设备指纹数据: %@", blackBox);
+        [self didReceiveDeviceBlackBox:blackBox];
     }
 }
 //获取短信验证码
