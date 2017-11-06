@@ -22,7 +22,7 @@
 #import "UCFHuiShangBankViewController.h"
 #import "FMDeviceManager.h"
 #import "UCFModifyReservedBankNumberViewController.h"
-#warning 同盾修改
+//#warning 同盾修改
 //@interface UCFTopUpViewController () <UITextFieldDelegate,FMDeviceManagerDelegate,UCFModifyReservedBankNumberDelegate>
 @interface UCFTopUpViewController () <UITextFieldDelegate,UCFModifyReservedBankNumberDelegate>
 {
@@ -485,7 +485,7 @@
     if ([self checkOrderIsLegitimate]) {
         [self.view endEditing:YES];
         FMDeviceManager_t *manager = [FMDeviceManager sharedManager];
-#warning 同盾修改
+//#warning 同盾修改
 //        manager->getDeviceInfoAsync(nil, self);
         NSString *blackBox = manager->getDeviceInfo();
 //        NSLog(@"同盾设备指纹数据: %@", blackBox);

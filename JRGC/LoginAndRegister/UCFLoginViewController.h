@@ -12,7 +12,7 @@
 #import "FMDeviceManager.h"
 
 //@interface UCFLoginViewController : UCFBaseViewController<UCFLoginViewDelegate,FMDeviceManagerDelegate>
-#warning 同盾修改
+//#warning 同盾修改
 @interface UCFLoginViewController : UCFBaseViewController<UCFLoginViewDelegate>
 
 //从哪儿来到得登录界面

@@ -175,7 +175,7 @@
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     FMDeviceManager_t *manager = [FMDeviceManager sharedManager];
 //    manager->getDeviceInfoAsync(nil, self);
-#warning 同盾修改
+//#warning 同盾修改
     NSString *blackBox = manager->getDeviceInfo();
 //    NSLog(@"同盾设备指纹数据: %@", blackBox);
     [self didReceiveDeviceBlackBox:blackBox];
