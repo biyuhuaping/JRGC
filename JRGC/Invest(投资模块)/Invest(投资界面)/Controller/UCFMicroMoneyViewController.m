@@ -286,10 +286,10 @@
 {
     UCFMicroMoneyGroup *group = [self.dataArray objectAtIndex:indexPath.section];
     if (group.type.intValue == 16) {
-        return 160;
+        return 150;
     }
     else if (group.type.intValue == 13) {
-        return 125;
+        return 130;
     }
     return 100;
 }

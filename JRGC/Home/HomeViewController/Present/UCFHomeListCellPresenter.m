@@ -154,13 +154,13 @@
         return 100.0;
     }
     else if (self.item.moedelType == UCFHomeListCellModelTypeGoldFixed) {
-        return 136;
+        return 143.0;
     }
     else if (self.item.moedelType == UCFHomeListCellModelTypeReserved) {
-        return 160;
+        return 150;
     }
     else if (self.item.moedelType == UCFHomeListCellModelTypeNewUser) {
-        return 125.0;
+        return 130.0;
     }
     else {
         return (ScreenWidth - 20) / CELLRATE + 15;

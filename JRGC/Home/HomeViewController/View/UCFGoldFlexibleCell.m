@@ -50,12 +50,12 @@
     
     if (presenter.status == 1) {
         self.buyButton.enabled = YES;
-        self.buyButtonW.constant = 60;
+        self.buyButtonW.constant = 70;
         [self.buyButton setBackgroundColor:UIColorWithRGB(0xffc027)];
     }
     else {
         self.buyButton.enabled = NO;
-        self.buyButtonW.constant = 100;
+        self.buyButtonW.constant = 110;
         [self.buyButton setBackgroundColor:UIColorWithRGB(0xcccccc)];
     }
     
