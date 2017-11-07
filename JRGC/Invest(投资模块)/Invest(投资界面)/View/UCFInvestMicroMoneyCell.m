@@ -337,7 +337,9 @@
 
     self.annurateLabelW.constant = -45;
     self.rateLabel.textColor = UIColorWithRGB(0xfc8f0e);
-    self.proSignBackView.backgroundColor = UIColorWithRGB(0xffc027);
+//    self.proSignBackView.backgroundColor = UIColorWithRGB(0xffc027);
+    self.proSignBackView.backgroundColor = UIColorWithRGB(0xffecc5);
+    self.proSignLabel.textColor = UIColorWithRGB(0xffad5f);
     
     NSInteger status = [goldModel.status integerValue];
     

@@ -64,7 +64,7 @@
 {
     _microModel = microModel;
     if (microModel.platformSubsidyExpense.length > 0) {
-        self.anurateLabel.text = [NSString stringWithFormat:@"%@~%@%%",microModel.annualRate, microModel.platformSubsidyExpense];
+        self.anurateLabel.text = [NSString stringWithFormat:@"%@%%~%@%%",microModel.annualRate, microModel.platformSubsidyExpense];
     }
     else {
         self.anurateLabel.text = microModel.annualRate ? [NSString stringWithFormat:@"%@%%",microModel.annualRate] : @"0.0%";
@@ -77,7 +77,7 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    if (self.presenter.platformSubsidyExpense.length > 0) {
+    if (self.presenter.platformSubsidyExpense.length > 0 || self.microModel) {
         [self.anurateLabel setFont:[UIFont boldSystemFontOfSize:15] string:@"%~"];
     }
     [self.anurateLabel setFont:[UIFont boldSystemFontOfSize:15] range:NSMakeRange(self.anurateLabel.text.length - 1, 1)];

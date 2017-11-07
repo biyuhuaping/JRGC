@@ -8,7 +8,6 @@
 
 #import "UCFHomeViewController.h"
 #import "UCFCycleImageViewController.h"
-#import "UCFUserInformationViewController.h"
 #import "UCFLoginViewController.h"
 #import "UCFSecurityCenterViewController.h"
 #import "UCFMessageCenterViewController.h"
@@ -53,7 +52,6 @@
 #import "UCFNoticeModel.h"
 @interface UCFHomeViewController () <UCFHomeListViewControllerDelegate, UCFHomeListNavViewDelegate, UCFCycleImageViewControllerDelegate,BJGridItemDelegate, UIAlertViewDelegate,MjAlertViewDelegate>
 @property (strong, nonatomic) UCFCycleImageViewController *cycleImageVC;
-@property (strong, nonatomic) UCFUserInformationViewController *userInfoVC;
 @property (strong, nonatomic) UCFHomeListViewController *homeListVC;
 
 @property (strong, nonatomic) NSMutableDictionary *stateDict;

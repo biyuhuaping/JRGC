@@ -289,6 +289,14 @@
             self.proSignLabel.text = [NSString stringWithFormat:@"%@", projectLabel.labelName];
             CGSize size = [projectLabel.labelName boundingRectWithSize:CGSizeMake(MAXFLOAT, 15) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:10.0f]} context:nil].size;
             _proSignBackViewWidth.constant = size.width + 11;
+//            if (self.goldModel) {
+//                self.proSignBackView.backgroundColor = UIColorWithRGB(0xffecc5);
+//                self.proSignLabel.textColor = UIColorWithRGB(0xffad5f);
+//            }
+//            else {
+//                self.proSignLabel.textColor = UIColorWithRGB(0xff8586);
+//                self.proSignBackView.backgroundColor = UIColorWithRGB(0xffdfdf);
+//            }
         }
         else {
             _proSignBackView.hidden = YES;
@@ -305,13 +313,15 @@
             [self.rateLabel setFont:[UIFont systemFontOfSize:10] string:@"克/100克"];
             self.annurateLabelW.constant = 45;
             self.rateLabel.textColor = UIColorWithRGB(0xfc8f0e);
-            self.proSignBackView.backgroundColor = UIColorWithRGB(0xffc027);
+            self.proSignBackView.backgroundColor = UIColorWithRGB(0xffecc5);
+            self.proSignLabel.textColor = UIColorWithRGB(0xffad5f);
         }
         else {
             [self.rateLabel setFont:[UIFont systemFontOfSize:12] string:@"%"];
             self.annurateLabelW.constant = 0;
             self.rateLabel.textColor = UIColorWithRGB(0xfd4d4c);
-            self.proSignBackView.backgroundColor = UIColorWithRGB(0xfd4d4c);
+            self.proSignLabel.textColor = UIColorWithRGB(0xff8586);
+            self.proSignBackView.backgroundColor = UIColorWithRGB(0xffdfdf);
         }
     }
 }
