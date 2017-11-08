@@ -516,7 +516,7 @@
         NSString *projectId = [[_dataDic objectForKey:@"prdClaims"] objectForKey:@"id"];
         strParameters = [NSString stringWithFormat:@"userId=%@&prdClaimId=%@&contractType=%@&prdType=0",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],projectId,contractTypeStr];
     }
-     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+     [MBProgressHUD showOriginHUDAddedTo:self.view animated:YES];
      [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetContractMsg owner:self Type:self.accoutType];
 }
 
@@ -560,7 +560,7 @@
                 [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagDealTransferBid owner:self Type:self.accoutType];
             } else {
                 //普通表
-                [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                [MBProgressHUD showOriginHUDAddedTo:self.view animated:YES];
                 NSString *projectId = [[_dataDic objectForKey:@"prdClaims"] objectForKey:@"id"];
                 NSString *strParameters = nil;
                 strParameters = [NSString stringWithFormat:@"userId=%@&id=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],projectId];//101943
@@ -608,7 +608,7 @@
 }
 -(void)endPost:(id)result tag:(NSNumber*)tag
 {
-    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    [MBProgressHUD hideOriginAllHUDsForView:self.view animated:YES];
     if(tag.intValue == kSXTagPrdClaimsDealBid)
     {
         NSString *Data = (NSString *)result;

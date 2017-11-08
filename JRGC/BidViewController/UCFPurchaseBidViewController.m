@@ -219,14 +219,16 @@
     _bidTableView.tableFooterView =[self createFootView];
     [self.view addSubview:_bidTableView];
     [_bidTableView reloadData];
-    [self cretateInvestmentView];
     UITapGestureRecognizer *frade = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(fadeKeyboard)];
     [_bidTableView addGestureRecognizer:frade];
     orginalHeight = _bidTableView.contentSize.height;
     _bidTableView.backgroundColor = UIColorWithRGB(0xebebee);
 
 }
-
+- (void)viewDidLayoutSubviews
+{
+    [self cretateInvestmentView];
+}
 - (void)updateYouHuiCell:(NSNotification *)noti
 {
     MoneyBoardCell *cell = (MoneyBoardCell *)[_bidTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
@@ -264,7 +266,9 @@
         [preView removeFromSuperview];
     }
     
-    UIView *investBaseView = [[UIView alloc] initWithFrame:CGRectMake(0, ScreenHeight -NavigationBarHeight - 67, ScreenWidth, 67)];
+    
+    
+    UIView *investBaseView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.view.frame) - 67, ScreenWidth, 67)];
     investBaseView.backgroundColor = [UIColor clearColor];
     investBaseView.tag = 9000;
     [self.view addSubview:investBaseView];

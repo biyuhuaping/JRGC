@@ -430,12 +430,13 @@
 {
     if(tag != kSXTagGoldList)
     {
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [MBProgressHUD showOriginHUDAddedTo:self.view animated:YES];
+        
     }
 }
 - (void)endPost:(id)result tag:(NSNumber *)tag
 {
-    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    [MBProgressHUD hideOriginAllHUDsForView:self.view animated:YES];
     NSMutableDictionary *dic = [result objectFromJSONString];
     NSString *rstcode = dic[@"ret"];
     NSString *rsttext = dic[@"message"];
@@ -560,7 +561,7 @@
 - (void)errorPost:(NSError *)err tag:(NSNumber *)tag
 {
     [MBProgressHUD displayHudError:err.userInfo[@"NSLocalizedDescription"]];
-    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    [MBProgressHUD hideOriginAllHUDsForView:self.view animated:YES];
     if ([self.tableview.header isRefreshing]) {
         [self.tableview.header endRefreshing];
     }
