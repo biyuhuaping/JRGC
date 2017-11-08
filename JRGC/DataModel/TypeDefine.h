@@ -305,6 +305,7 @@
 #define GOLDCHANGECASHINFO      @"api/nmAccount/v2/getLiquidatePageInfo.json"  //黄金变现界面信息
 #define GOLDCHANGECASH          @"api/nmAccount/v2/liquidateGold.json"    //黄金变现
 #define USERSTATUSINFO          @"api/prdClaims/v2/statusInfo.json"    //个人状态信息
+#define EXTRACTGOLDLIST         @"api/nmTrade/v2/pickUpGoldList.json"  //提金订单列表
 
 //预约的url
 #define NEWUSER_PRODUCTS_URL          @"https://m.9888.cn/static/wap/p2p/index.html#/novice-bid/info"
@@ -529,6 +530,7 @@ enum kSXTag
     kSXTagTotalEarningsOverview,        //累计收益
     kSXTagGetBindingBankCardList,        //我的-->>充值接口
     kSXTagGetAccountBalanceList,         //我的-->>提现接口
+    kSXTagExtractGoldList,              //提金订单列表
 };
 
 typedef enum kSXTag kSXTag;

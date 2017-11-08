@@ -137,7 +137,7 @@
     [super viewDidLoad];
     
     [self addLeftButton];
-    [self addRightButtonWithName:@"每日签到"];
+//    [self addRightButtonWithName:@"每日签到"];
 
     baseTitleLabel.text =  [[NSUserDefaults standardUserDefaults] boolForKey: @"isCompanyAgentType" ]  ? @"企业信息" : @"个人信息";
     self.tableview.contentInset = UIEdgeInsetsMake(10, 0, 0, 0);
