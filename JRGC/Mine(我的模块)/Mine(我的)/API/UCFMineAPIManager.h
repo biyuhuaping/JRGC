@@ -12,8 +12,6 @@
 @protocol UCFMineAPIManagerDelegate <NSObject>
 
 - (void)mineApiManager:(UCFMineAPIManager *)apiManager didSuccessedReturnAssetResult:(id)result withTag:(NSUInteger)tag;
-
-
 - (void)mineApiManager:(UCFMineAPIManager *)apiManager didSuccessedReturnBenefitResult:(id)result withTag:(NSUInteger)tag;
 - (void)mineApiManager:(UCFMineAPIManager *)apiManager didSuccessedCashAccoutBalanceResult:(id)result withTag:(NSUInteger)tag;
 - (void)mineApiManager:(UCFMineAPIManager *)apiManager didSuccessedRechargeBindingBankCardResult:(id)result withTag:(NSUInteger)tag;
@@ -26,4 +24,5 @@
 - (void)getBenefitFromNet;
 - (void)getCashAccoutBalanceNet;
 - (void)getRecharngeBindingBankCardNet;
+- (void)signWithToken:(NSString *)token;
 @end
