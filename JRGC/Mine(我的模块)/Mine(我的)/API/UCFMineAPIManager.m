@@ -90,7 +90,7 @@
     NSString *rsttext = dic[@"message"];
     if (tag.intValue == kSXTagMyReceipt) {
         UIViewController *vc = (UIViewController *)self.delegate;
-        [MBProgressHUD hideAllHUDsForView:vc.view animated:YES];
+        [MBProgressHUD hideOriginAllHUDsForView:vc.view animated:YES];
         if ([rstcode intValue] == 1) {
             
             NSDictionary *resultData = [dic objectSafeDictionaryForKey:@"data"];
@@ -115,7 +115,7 @@
     }
     else if (tag.intValue == kSXTagMySimpleInfo) {
         UIViewController *vc = (UIViewController *)self.delegate;
-        [MBProgressHUD hideAllHUDsForView:vc.view animated:YES];
+        [MBProgressHUD hideOriginAllHUDsForView:vc.view animated:YES];
         if ([rstcode intValue] == 1) {
             NSDictionary *resultData = [dic objectSafeDictionaryForKey:@"data"];
             UCFUserBenefitModel *benefit = [UCFUserBenefitModel userBenefitWithDict:resultData];
@@ -181,7 +181,7 @@
         
         [MBProgressHUD hideOriginAllHUDsForView:vc.view animated:YES];
     }else{
-        [MBProgressHUD hideAllHUDsForView:vc.view animated:YES];
+        [MBProgressHUD hideOriginAllHUDsForView:vc.view animated:YES];
     }
     if (tag.integerValue == kSXTagMyReceipt) {
         if ([self.delegate respondsToSelector:@selector(mineApiManager:didSuccessedReturnAssetResult:withTag:)]) {

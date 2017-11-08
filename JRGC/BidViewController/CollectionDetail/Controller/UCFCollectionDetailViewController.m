@@ -610,7 +610,7 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
         
         if (status != 2) {
             if (isOrder == 1) {//0不可看,1可看
-                [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                [MBProgressHUD showOriginHUDAddedTo:self.view animated:YES];
                 [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self Type:SelectAccoutDefault];
             } else {
                 UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前标的详情只对出借人开放"];
@@ -620,7 +620,7 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
             }
         }
         else {
-            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            [MBProgressHUD showOriginHUDAddedTo:self.view animated:YES];
             [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self Type:SelectAccoutDefault];
         }
 }
@@ -684,7 +684,7 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
 //    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 }
 -(void)endPost:(id)result tag:(NSNumber *)tag{
-    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    [MBProgressHUD hideOriginAllHUDsForView:self.view animated:YES];
     //    DBLOG(@"首页获取最新项目列表：%@",data);
     
     NSMutableDictionary *dic = [result objectFromJSONString];
@@ -797,7 +797,7 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
 }
 -(void)errorPost:(NSError *)err tag:(NSNumber *)tag{
     [MBProgressHUD displayHudError:err.userInfo[@"NSLocalizedDescription"]];
-    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    [MBProgressHUD hideOriginAllHUDsForView:self.view animated:YES];
     if ([self.listTableView.header isRefreshing]) {
         [self.listTableView.header endRefreshing];
     }
@@ -820,7 +820,7 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
     
     if ([sender.currentTitle  isEqualToString:@"批量出借"]) {
         
-         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+         [MBProgressHUD showOriginHUDAddedTo:self.view animated:YES];
          NSDictionary *dataDict = @{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"tenderId":_colPrdClaimId};
          [[NetworkModule sharedNetworkModule] newPostReq:dataDict tag:kSXTagColIntoDealBatch owner:self signature:YES Type:self.accoutType];
     }else{
