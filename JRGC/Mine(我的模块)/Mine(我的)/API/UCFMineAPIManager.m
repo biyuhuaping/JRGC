@@ -71,26 +71,25 @@
 - (void)beginPost:(kSXTag)tag
 {
     UIViewController *vc = (UIViewController *)self.delegate;
-    if(tag == kSXTagGetAccountBalanceList || tag ==  kSXTagGetBindingBankCardList)
-    {
-        
-        [MBProgressHUD showOriginHUDAddedTo:vc.view animated:YES];
-    }
-    else if (tag == kSXTagSingMenthod) {
-        
-    }
-    else{
-            [MBProgressHUD showHUDAddedTo:vc.view animated:YES];
-    }
+    [MBProgressHUD showOriginHUDAddedTo:vc.view animated:YES];
+//    if(tag == kSXTagGetAccountBalanceList || tag ==  kSXTagGetBindingBankCardList)
+//    {
+//        [MBProgressHUD showOriginHUDAddedTo:vc.view animated:YES];
+//    }
+//    else if (tag == kSXTagSingMenthod) {
+//    }
+//    else{
+//    }
 }
 - (void)endPost:(id)result tag:(NSNumber *)tag
 {
+    UIViewController *vc = (UIViewController *)self.delegate;
+    [MBProgressHUD hideOriginAllHUDsForView:vc.view animated:YES];
     NSMutableDictionary *dic = [result objectFromJSONString];
     NSString *rstcode = dic[@"ret"];
     NSString *rsttext = dic[@"message"];
     if (tag.intValue == kSXTagMyReceipt) {
-        UIViewController *vc = (UIViewController *)self.delegate;
-        [MBProgressHUD hideOriginAllHUDsForView:vc.view animated:YES];
+        
         if ([rstcode intValue] == 1) {
             
             NSDictionary *resultData = [dic objectSafeDictionaryForKey:@"data"];
@@ -114,8 +113,6 @@
         }
     }
     else if (tag.intValue == kSXTagMySimpleInfo) {
-        UIViewController *vc = (UIViewController *)self.delegate;
-        [MBProgressHUD hideOriginAllHUDsForView:vc.view animated:YES];
         if ([rstcode intValue] == 1) {
             NSDictionary *resultData = [dic objectSafeDictionaryForKey:@"data"];
             UCFUserBenefitModel *benefit = [UCFUserBenefitModel userBenefitWithDict:resultData];
@@ -128,8 +125,6 @@
         }
     }
     else if (tag.intValue == kSXTagGetAccountBalanceList) {
-        UIViewController *vc = (UIViewController *)self.delegate;
-        [MBProgressHUD hideOriginAllHUDsForView:vc.view animated:YES];
         if ([rstcode intValue] == 1) {
             NSDictionary *resultData = [dic objectSafeDictionaryForKey:@"data"];
             if ([self.delegate respondsToSelector:@selector(mineApiManager:didSuccessedCashAccoutBalanceResult:withTag:)]) {
@@ -139,8 +134,6 @@
             [self.delegate mineApiManager:self didSuccessedCashAccoutBalanceResult:rsttext withTag:2];
         }
     }else if (tag.intValue == kSXTagGetBindingBankCardList) {
-        UIViewController *vc = (UIViewController *)self.delegate;
-        [MBProgressHUD hideOriginAllHUDsForView:vc.view animated:YES];
         if ([rstcode intValue] == 1) {
             NSDictionary *resultData = [dic objectSafeDictionaryForKey:@"data"];
             if ([self.delegate respondsToSelector:@selector(mineApiManager:didSuccessedRechargeBindingBankCardResult:withTag:)]) {
