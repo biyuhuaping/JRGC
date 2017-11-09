@@ -251,8 +251,10 @@
         self.startMoneyLabel.text = [NSString stringWithFormat:@"共%.2f万", [microMoneyModel.borrowAmount doubleValue]/10000.0];
         self.circleProgressView.progressText = @"已售罄";
         self.circleProgressView.textColor = UIColorWithRGB(0x909dae);
+        self.remainLabel.hidden = YES;
     }
     else {
+        self.remainLabel.hidden = NO;
         self.circleProgressView.textColor = UIColorWithRGB(0x555555);
         self.circleProgressView.progressText = statusArr[status];
     }

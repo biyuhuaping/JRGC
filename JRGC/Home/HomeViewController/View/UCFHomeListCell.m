@@ -166,6 +166,12 @@
             if (status>2) {
                 self.circleProgressView.progressText = @"已售罄";
                 self.circleProgressView.textColor = UIColorWithRGB(0x909dae);
+                if ([presenter.type isEqualToString:@"2"]) {
+                    self.remainLabel.hidden = YES;
+                }
+                else {
+                    self.remainLabel.hidden = NO;
+                }
             }
             else {
                 self.circleProgressView.textColor = UIColorWithRGB(0x555555);
