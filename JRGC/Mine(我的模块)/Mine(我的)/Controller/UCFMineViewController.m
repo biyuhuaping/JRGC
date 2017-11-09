@@ -349,8 +349,8 @@
             cell.sign2View.hidden = YES;
         }
         else if (indexPath.row == 2) {
-            cell.iconImageView.image = [UIImage imageNamed:@"uesr_icon_score"];
-            cell.icon2ImageView.image = [UIImage imageNamed:@"uesr_icon_rebate"];
+            cell.iconImageView.image = [UIImage imageNamed:@"uesr_icon_checkin"];
+            cell.icon2ImageView.image = [UIImage imageNamed:@"uesr_icon_contact"];
             cell.titleDesLabel.text = @"签到";
             cell.valueLabel.text = @"签到送工分";
             cell.title2DesLabel.text = @"联系我们";
