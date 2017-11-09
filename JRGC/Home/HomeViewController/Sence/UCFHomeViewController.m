@@ -984,8 +984,15 @@
         case 4:
             invest.selectedType = @"Trans";
             break;
-            
         case 5: {
+            UCFFacReservedViewController *facReservedWeb = [[UCFFacReservedViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
+            facReservedWeb.baseTitleText = iconPresenter.productName;
+            facReservedWeb.url = [NSString stringWithFormat:@"%@", iconPresenter.url];
+            [self.navigationController pushViewController:facReservedWeb animated:YES];
+        }
+            break;
+            
+        case 6: {
             NSString *userId = [UserInfoSingle sharedManager].userId;
             if (nil == userId) {
                 UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
