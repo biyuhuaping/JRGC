@@ -64,6 +64,10 @@
     if ([self.item.type isEqualToString:@"3"] || [self.item.type isEqualToString:@"6"]) {
         return self.item.minInvest ? [NSString stringWithFormat:@"%.3f克起购", [self.item.minInvest doubleValue]] : @"";
     }
+    else if ([self.item.type isEqualToString:@"2"] && self.item.status.intValue != 2) {
+        double totalAmount = [self.item.borrowAmount doubleValue] / 10000.0;
+        return [NSString stringWithFormat:@"共%.2f万", totalAmount];
+    }
     return self.item.minInvest ? [NSString stringWithFormat:@"%@元起", self.item.minInvest] : @"";
 }
 
