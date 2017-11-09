@@ -248,6 +248,7 @@
     NSInteger status = [microMoneyModel.status integerValue];
     NSArray *statusArr = @[@"未审核",@"等待确认",@"认购",@"流标",@"满标",@"回款中",@"已回款"];
     if (status>2) {
+        self.startMoneyLabel.text = [NSString stringWithFormat:@"共%.2f万", [microMoneyModel.borrowAmount doubleValue]/10000.0];
         self.circleProgressView.progressText = @"已售罄";
         self.circleProgressView.textColor = UIColorWithRGB(0x909dae);
     }
