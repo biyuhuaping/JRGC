@@ -33,7 +33,7 @@
 #import "UITabBar+TabBarBadge.h"
 #import "Touch3DSingle.h"
 #import "UCFFacCodeViewController.h"
-@interface UCFMineViewController () <UITableViewDelegate, UITableViewDataSource, UCFMineHeaderViewDelegate, UCFMineFuncCellDelegate, UCFMineAPIManagerDelegate, UCFMineFuncSecCellDelegate>
+@interface UCFMineViewController () <UITableViewDelegate, UITableViewDataSource, UCFMineHeaderViewDelegate, UCFMineFuncCellDelegate, UCFMineAPIManagerDelegate, UCFMineFuncSecCellDelegate, UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) UCFMineHeaderView   *mineHeaderView;
 @property (strong, nonatomic) UCFLoginBaseView  *loginView;
@@ -238,7 +238,7 @@
             return 1;
         
         case 2:
-            return 2;
+            return 3;
     }
     return 0;
 }
@@ -345,6 +345,16 @@
             cell.valueLabel.text = self.benefitModel.score ? [NSString stringWithFormat:@"%@分", self.benefitModel.score] : @"0分";
             cell.title2DesLabel.text = @"邀请返利";
             cell.value2Label.text = self.benefitModel.promotionCode.length > 0 ? [NSString stringWithFormat:@"工场码%@", self.benefitModel.promotionCode] : @"";
+            cell.signView.hidden = YES;
+            cell.sign2View.hidden = YES;
+        }
+        else if (indexPath.row == 2) {
+            cell.iconImageView.image = [UIImage imageNamed:@"uesr_icon_checkin"];
+            cell.icon2ImageView.image = [UIImage imageNamed:@"uesr_icon_contact"];
+            cell.titleDesLabel.text = @"签到";
+            cell.valueLabel.text = @"签到送工分";
+            cell.title2DesLabel.text = @"联系我们";
+            cell.value2Label.text = @"400-0322-988";
             cell.signView.hidden = YES;
             cell.sign2View.hidden = YES;
         }
@@ -541,6 +551,12 @@
             [helper pushOpenHSType:SelectAccoutTypeHoner Step:[UserInfoSingle sharedManager].enjoyOpenStatus nav:self.navigationController];
         }
     }
+    else if (alertView.tag == 9000) {
+        if (buttonIndex == 1) {
+            NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"4000322988"];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+        }
+    }
 }
 
 #pragma mark - UCFMineFuncCell的代理方法
@@ -588,7 +604,14 @@
         feedBackVC.accoutType = SelectAccoutTypeP2P;
         [self.navigationController pushViewController:feedBackVC animated:YES];
     }
-
+    else   if ([title isEqualToString:@"签到"]){
+        [self.apiManager signWithToken:self.benefitModel.userCenterTicket];
+    }
+    else  if ([title isEqualToString:@"联系我们"]){//邀请返利
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"联系客服" message:@"呼叫400-0322-988" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"立即拨打", nil];
+        alert.tag = 9000;
+        [alert show];
+    }
 }
 
 - (void)mineApiManager:(UCFMineAPIManager *)apiManager didSuccessedCashAccoutBalanceResult:(id)result withTag:(NSUInteger)tag

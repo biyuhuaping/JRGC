@@ -708,7 +708,11 @@
             //同盾
             // 获取设备管理器实例
             FMDeviceManager_t *manager = [FMDeviceManager sharedManager];
-            manager->getDeviceInfoAsync(nil, self);
+//            manager->getDeviceInfoAsync(nil, self);
+//#warning 同盾修改
+            NSString *blackBox = manager->getDeviceInfo();
+//            NSLog(@"同盾设备指纹数据: %@", blackBox);
+            [self didReceiveDeviceBlackBox:blackBox];
         }
         else{
             self.getMoneyBtn.userInteractionEnabled = YES;

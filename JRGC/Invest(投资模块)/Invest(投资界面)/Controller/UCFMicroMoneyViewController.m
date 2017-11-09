@@ -286,10 +286,10 @@
 {
     UCFMicroMoneyGroup *group = [self.dataArray objectAtIndex:indexPath.section];
     if (group.type.intValue == 16) {
-        return 160;
+        return 150;
     }
     else if (group.type.intValue == 13) {
-        return 125;
+        return 130;
     }
     return 100;
 }
@@ -414,11 +414,11 @@
                     if ([self checkUserCanInvestIsDetail:YES type:self.accoutType]) {
                         if ([model.status intValue ] != 2) {
                             if (isOrder > 0) {
-                                [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                                [MBProgressHUD showOriginHUDAddedTo:self.view animated:YES];
                                 [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self Type:SelectAccoutTypeP2P];
                             }
                         }else {
-                            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                            [MBProgressHUD showOriginHUDAddedTo:self.view animated:YES];
                             [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self Type:SelectAccoutTypeP2P];
                     }
                    }
@@ -565,7 +565,7 @@
             }
             if ([self checkUserCanInvestIsDetail:NO type:self.accoutType]) {
                 
-                [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                [MBProgressHUD showOriginHUDAddedTo:self.view animated:YES];
                 NSString *userid = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
                 NSString *strParameters = [NSString stringWithFormat:@"id=%@&userId=%@", model.Id,userid];
                 [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDealBid owner:self Type:self.accoutType];
@@ -581,7 +581,7 @@
 //请求成功及结果
 - (void)endPost:(id)result tag:(NSNumber *)tag
 {
-    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    [MBProgressHUD hideOriginAllHUDsForView:self.view animated:YES];
     //    DBLOG(@"首页获取最新项目列表：%@",data);
     
     NSMutableDictionary *dic = [result objectFromJSONString];
@@ -673,7 +673,7 @@
 - (void)errorPost:(NSError*)err tag:(NSNumber*)tag
 {
     [MBProgressHUD displayHudError:err.userInfo[@"NSLocalizedDescription"]];
-    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    [MBProgressHUD hideOriginAllHUDsForView:self.view animated:YES];
     if ([self.tableview.header isRefreshing]) {
         [self.tableview.header endRefreshing];
     }

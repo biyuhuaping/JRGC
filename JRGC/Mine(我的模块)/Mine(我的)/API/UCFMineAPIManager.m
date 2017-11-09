@@ -14,6 +14,9 @@
 #import "UIDic+Safe.h"
 #import "UCFUserAssetModel.h"
 #import "UCFUserBenefitModel.h"
+#import "UCFSignModel.h"
+#import "UCFSignView.h"
+#import "MjAlertView.h"
 
 @interface UCFMineAPIManager () <NetworkModuleDelegate>
 
@@ -55,25 +58,38 @@
     }
     [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":userId} tag:kSXTagGetBindingBankCardList owner:self signature:YES Type:SelectAccoutDefault];
 }
+
+- (void)signWithToken:(NSString *)token
+{
+    NSString *userId = [UserInfoSingle sharedManager].userId;
+    if (!userId) {
+        return;
+    }
+    [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":[[NSUserDefaults standardUserDefaults] objectForKey:UUID], @"apptzticket":token} tag:kSXTagSingMenthod owner:self signature:YES Type:SelectAccoutDefault];
+}
+
 - (void)beginPost:(kSXTag)tag
 {
     UIViewController *vc = (UIViewController *)self.delegate;
-    if(tag == kSXTagGetAccountBalanceList || tag ==  kSXTagGetBindingBankCardList)
-    {
-        
-        [MBProgressHUD showOriginHUDAddedTo:vc.view animated:YES];
-    }else{
-            [MBProgressHUD showHUDAddedTo:vc.view animated:YES];
-    }
+    [MBProgressHUD showOriginHUDAddedTo:vc.view animated:YES];
+//    if(tag == kSXTagGetAccountBalanceList || tag ==  kSXTagGetBindingBankCardList)
+//    {
+//        [MBProgressHUD showOriginHUDAddedTo:vc.view animated:YES];
+//    }
+//    else if (tag == kSXTagSingMenthod) {
+//    }
+//    else{
+//    }
 }
 - (void)endPost:(id)result tag:(NSNumber *)tag
 {
+    UIViewController *vc = (UIViewController *)self.delegate;
+    [MBProgressHUD hideOriginAllHUDsForView:vc.view animated:YES];
     NSMutableDictionary *dic = [result objectFromJSONString];
     NSString *rstcode = dic[@"ret"];
     NSString *rsttext = dic[@"message"];
     if (tag.intValue == kSXTagMyReceipt) {
-        UIViewController *vc = (UIViewController *)self.delegate;
-        [MBProgressHUD hideAllHUDsForView:vc.view animated:YES];
+        
         if ([rstcode intValue] == 1) {
             
             NSDictionary *resultData = [dic objectSafeDictionaryForKey:@"data"];
@@ -97,8 +113,6 @@
         }
     }
     else if (tag.intValue == kSXTagMySimpleInfo) {
-        UIViewController *vc = (UIViewController *)self.delegate;
-        [MBProgressHUD hideAllHUDsForView:vc.view animated:YES];
         if ([rstcode intValue] == 1) {
             NSDictionary *resultData = [dic objectSafeDictionaryForKey:@"data"];
             UCFUserBenefitModel *benefit = [UCFUserBenefitModel userBenefitWithDict:resultData];
@@ -111,8 +125,6 @@
         }
     }
     else if (tag.intValue == kSXTagGetAccountBalanceList) {
-        UIViewController *vc = (UIViewController *)self.delegate;
-        [MBProgressHUD hideOriginAllHUDsForView:vc.view animated:YES];
         if ([rstcode intValue] == 1) {
             NSDictionary *resultData = [dic objectSafeDictionaryForKey:@"data"];
             if ([self.delegate respondsToSelector:@selector(mineApiManager:didSuccessedCashAccoutBalanceResult:withTag:)]) {
@@ -122,8 +134,6 @@
             [self.delegate mineApiManager:self didSuccessedCashAccoutBalanceResult:rsttext withTag:2];
         }
     }else if (tag.intValue == kSXTagGetBindingBankCardList) {
-        UIViewController *vc = (UIViewController *)self.delegate;
-        [MBProgressHUD hideOriginAllHUDsForView:vc.view animated:YES];
         if ([rstcode intValue] == 1) {
             NSDictionary *resultData = [dic objectSafeDictionaryForKey:@"data"];
             if ([self.delegate respondsToSelector:@selector(mineApiManager:didSuccessedRechargeBindingBankCardResult:withTag:)]) {
@@ -133,6 +143,25 @@
             if ([self.delegate respondsToSelector:@selector(mineApiManager:didSuccessedRechargeBindingBankCardResult:withTag:)]) {
                 [self.delegate mineApiManager:self didSuccessedRechargeBindingBankCardResult:rsttext withTag:2];
             }
+        }
+    }
+    else if (tag.intValue == kSXTagSingMenthod) {
+        if ([dic[@"ret"] boolValue]) {
+            NSDictionary *data = [dic objectForKey:@"data"];
+            UCFSignModel *signModel = [UCFSignModel signWithDict:data];
+            MjAlertView *alert = [[MjAlertView alloc] initRedBagAlertViewWithBlock:^(id blockContent) {
+                UIView *view = (UIView *)blockContent;
+                view.center = CGPointMake(ScreenWidth * 0.5, ScreenHeight * 0.5);
+                UCFSignView *signView = [[UCFSignView alloc] initWithFrame:view.bounds];
+                [view addSubview:signView];
+                [view sendSubviewToBack:signView];
+                signView.signModel = signModel;
+            } delegate:self cancelButtonTitle:@"关闭"];
+            alert.showViewbackImage = [UIImage imageNamed:@"checkin_bg"];
+            [alert show];
+        } else {
+            UIViewController *vc = (UIViewController *)self.delegate;
+            [AuxiliaryFunc showToastMessage:dic[@"message"] withView:vc.view];
         }
     }
 }
@@ -145,7 +174,7 @@
         
         [MBProgressHUD hideOriginAllHUDsForView:vc.view animated:YES];
     }else{
-        [MBProgressHUD hideAllHUDsForView:vc.view animated:YES];
+        [MBProgressHUD hideOriginAllHUDsForView:vc.view animated:YES];
     }
     if (tag.integerValue == kSXTagMyReceipt) {
         if ([self.delegate respondsToSelector:@selector(mineApiManager:didSuccessedReturnAssetResult:withTag:)]) {

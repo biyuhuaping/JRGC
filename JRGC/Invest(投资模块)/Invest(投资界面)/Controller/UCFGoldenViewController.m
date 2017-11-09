@@ -107,7 +107,7 @@
 {
     if (indexPath.section == 0) {
         if (self.fliexGoldModel.nmPrdClaimName.length>0) {
-            return 136.0;
+            return 145.0;
         }
         return 0;
     }
@@ -296,6 +296,7 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
         //如果未登录，展示登录页面
         [self showLoginView];
@@ -429,12 +430,13 @@
 {
     if(tag != kSXTagGoldList)
     {
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [MBProgressHUD showOriginHUDAddedTo:self.view animated:YES];
+        
     }
 }
 - (void)endPost:(id)result tag:(NSNumber *)tag
 {
-    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    [MBProgressHUD hideOriginAllHUDsForView:self.view animated:YES];
     NSMutableDictionary *dic = [result objectFromJSONString];
     NSString *rstcode = dic[@"ret"];
     NSString *rsttext = dic[@"message"];
@@ -559,7 +561,7 @@
 - (void)errorPost:(NSError *)err tag:(NSNumber *)tag
 {
     [MBProgressHUD displayHudError:err.userInfo[@"NSLocalizedDescription"]];
-    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    [MBProgressHUD hideOriginAllHUDsForView:self.view animated:YES];
     if ([self.tableview.header isRefreshing]) {
         [self.tableview.header endRefreshing];
     }

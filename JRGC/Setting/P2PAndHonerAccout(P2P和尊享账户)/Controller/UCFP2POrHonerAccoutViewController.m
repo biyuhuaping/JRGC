@@ -485,7 +485,7 @@
 - (IBAction)clickCashBtn:(UIButton *)sender {
     
     if( [self checkIDAAndBankBlindState:self.accoutType]){ //判断是否设置交易密码
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [MBProgressHUD showOriginHUDAddedTo:self.view animated:YES];
         NSString *userSatues = [NSString stringWithFormat:@"%ld",(long)[UserInfoSingle sharedManager].openStatus];
         NSDictionary *parametersDict =  @{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"userSatues":userSatues};
         [[NetworkModule sharedNetworkModule] newPostReq:parametersDict tag:kSXTagCashAdvance owner:self signature:YES Type:self.accoutType];
@@ -521,13 +521,13 @@
 #pragma mark - 网络请求结果
 -(void)beginPost:(kSXTag)tag{
     
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [MBProgressHUD showOriginHUDAddedTo:self.view animated:YES];
 }
 
 
 -(void)endPost:(id)result tag:(NSNumber *)tag{
     
-    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    [MBProgressHUD hideOriginAllHUDsForView:self.view animated:YES];
     NSString *data = (NSString *)result;
     NSMutableDictionary *dic = [data objectFromJSONString];
     DBLOG(@"UCFP2POrHonerAccoutViewController : %@",dic);
@@ -654,7 +654,7 @@
 }
 -(void)errorPost:(NSError *)err tag:(NSNumber *)tag{
     [MBProgressHUD displayHudError:err.userInfo[@"NSLocalizedDescription"]];
-    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    [MBProgressHUD hideOriginAllHUDsForView:self.view animated:YES];
     if (self.tableView.header.isRefreshing){
         [self.tableView.header endRefreshing];
     }

@@ -1253,6 +1253,9 @@ static NetworkModule *gInstance = NULL;
         case kSXTagGetAccountBalanceList: //我的-->>提现接口
             parameter = [NEW_SERVER_IP stringByAppendingString:MYACCOUNTBlANCELIST];
             break;
+        case kSXTagExtractGoldList:
+            parameter = [NEW_SERVER_IP stringByAppendingString:EXTRACTGOLDLIST];
+            break;
     }
     //给原有参数字典添加公共参数
     if (!data) {

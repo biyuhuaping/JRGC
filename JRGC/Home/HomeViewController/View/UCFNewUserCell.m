@@ -20,11 +20,11 @@
 @property (weak, nonatomic) IBOutlet UIButton *okButton;
 @property (weak, nonatomic) IBOutlet UILabel *desc1Label;
 @property (weak, nonatomic) IBOutlet UILabel *desc2Label;
-@property (weak, nonatomic) IBOutlet UILabel *desc3Label;
 
 @property (weak, nonatomic) IBOutlet NZLabel *rateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *limitLabel;
-@property (weak, nonatomic) IBOutlet UILabel *backModeLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *leftCenterSpace;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *rightCenterSpace;
 @end
 
 @implementation UCFNewUserCell
@@ -34,10 +34,10 @@
     self.okButton.backgroundColor = UIColorWithRGB(0xfd4d4c);
     self.rateLabel.textColor = UIColorWithRGB(0xfd4d4c);
     self.limitLabel.textColor = UIColorWithRGB(0x555555);
-    self.backModeLabel.textColor = UIColorWithRGB(0x555555);
     self.desc1Label.textColor = UIColorWithRGB(0x999999);
     self.desc2Label.textColor = UIColorWithRGB(0x999999);
-    self.desc3Label.textColor = UIColorWithRGB(0x999999);
+    self.leftCenterSpace.constant = -(ScreenWidth * 0.2);
+    self.rightCenterSpace.constant = ScreenWidth * 0.25;
 }
 
 - (IBAction)registerButtonClicked:(UIButton *)sender {
@@ -102,7 +102,6 @@
     else {
         self.limitLabel.text = [NSString stringWithFormat:@"%@", presenter.repayPeriodtext];
     }
-    self.backModeLabel.text = presenter.repayModeText;
 }
 
 - (void)setMicroMoneyModel:(UCFMicroMoneyModel *)microMoneyModel
@@ -120,7 +119,6 @@
     else {
         self.limitLabel.text = [NSString stringWithFormat:@"%@", microMoneyModel.repayPeriodtext];
     }
-    self.backModeLabel.text = microMoneyModel.repayModeText;
 }
 
 - (void)layoutSubviews

@@ -137,7 +137,7 @@
     [super viewDidLoad];
     
     [self addLeftButton];
-    [self addRightButtonWithName:@"每日签到"];
+//    [self addRightButtonWithName:@"每日签到"];
 
     baseTitleLabel.text =  [[NSUserDefaults standardUserDefaults] boolForKey: @"isCompanyAgentType" ]  ? @"企业信息" : @"个人信息";
     self.tableview.contentInset = UIEdgeInsetsMake(10, 0, 0, 0);
@@ -505,7 +505,27 @@
     } else if ([securityCell.itemNameLabel.text isEqualToString:@"启用刷脸登录"]) {
         [self validFaceLogin:gestureState WithCell:securityCell];
     } else if (([securityCell.itemNameLabel.text isEqualToString:@"启用指纹解锁"])) {
-        [self touchIDVerificationSwitchState:gestureState WithCell:securityCell];
+        
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        if ([defaults boolForKey:@"useLockView"]) {
+            [self touchIDVerificationSwitchState:gestureState WithCell:securityCell];
+        } else {
+            //关闭手势密码
+            BlockUIAlertView *alert = [[BlockUIAlertView alloc] initWithTitle:@"提示" message:@"启用指纹解锁前需先启用手势密码" cancelButtonTitle:@"确定" clickButton:^(NSInteger index){
+                if (index == 0) {
+//                    //关闭手势密码
+                    UCFVerifyLoginViewController *controller = [[UCFVerifyLoginViewController alloc] init];
+                    controller.sourceVC = @"securityCenter";
+                    [self.navigationController pushViewController:controller animated:YES];
+                }
+                else{
+                    //不做任何操作 并设置开启状态
+                    [securityCell.switchView setOn:NO animated:YES];
+                }
+            } otherButtonTitles:@"取消"];
+            [alert show];
+            
+        }
     }
 }
 

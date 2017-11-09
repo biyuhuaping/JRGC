@@ -8,7 +8,6 @@
 
 #import "UCFHomeViewController.h"
 #import "UCFCycleImageViewController.h"
-#import "UCFUserInformationViewController.h"
 #import "UCFLoginViewController.h"
 #import "UCFSecurityCenterViewController.h"
 #import "UCFMessageCenterViewController.h"
@@ -53,13 +52,13 @@
 #import "UCFNoticeModel.h"
 @interface UCFHomeViewController () <UCFHomeListViewControllerDelegate, UCFHomeListNavViewDelegate, UCFCycleImageViewControllerDelegate,BJGridItemDelegate, UIAlertViewDelegate,MjAlertViewDelegate>
 @property (strong, nonatomic) UCFCycleImageViewController *cycleImageVC;
-@property (strong, nonatomic) UCFUserInformationViewController *userInfoVC;
 @property (strong, nonatomic) UCFHomeListViewController *homeListVC;
 
 @property (strong, nonatomic) NSMutableDictionary *stateDict;
 @property (weak, nonatomic) UCFHomeListNavView *navView;
 @property (strong, nonatomic)BJGridItem *dragBtn;
 @property (strong,nonatomic) NSString *intoVCStr;
+//@property (strong, nonatomic)UIDocumentInteractionController *documentController;
 @end
 
 @implementation UCFHomeViewController
@@ -192,10 +191,29 @@
 {
     
 }
+//- (void)presentOptionsMenu:(UIDocumentInteractionController *)documentController
+//{
+//    // display third-party apps as well as actions, such as Copy, Print, Save Image, Quick Look
+//    [_documentController presentOptionsMenuFromRect:self.view.bounds inView:self.view animated:YES];
+//}
+#pragma mark UIDocumentInteractionControllerDelegate
 
+//- (UIViewController *)documentInteractionControllerViewControllerForPreview:(UIDocumentInteractionController *)controller
+//{
+//    return self;
+//}
 - (void) gridItemDidClicked:(BJGridItem *) gridItem
 {
-    
+//    NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+//    NSString *imagePath = [documentPath stringByAppendingString:@"/11.pdf"];
+//    NSURL *pathUrl = [NSURL fileURLWithPath:imagePath];
+//    self.documentController = [UIDocumentInteractionController interactionControllerWithURL:pathUrl];
+//    _documentController.delegate = self;
+//
+//    //    [self presentOpenInMenu];
+//
+//    [self presentOptionsMenu:_documentController];
+//    return;
 //    FullWebViewController *webView = [[FullWebViewController alloc] initWithWebUrl:HOMEINVITATIONURL title:@"邀请返利"];
 //    webView.flageHaveShareBut = @"分享";
 //    webView.sourceVc = @"UCFLatestProjectViewController";
@@ -402,7 +420,7 @@
                                 [self.cycleImageVC.presenter fetchProDetailDataWithParameter:parameter completionHandler:^(NSError *error, id result) {
                                     
                                     NSDictionary *dic = (NSDictionary *)result;
-                                    [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+                                    [MBProgressHUD hideOriginAllHUDsForView:weakSelf.view animated:YES];
                                     
                                     NSString *rstcode = dic[@"status"];
                                     NSString *rsttext = dic[@"statusdes"];
@@ -429,7 +447,7 @@
                                 NSDictionary *parameter = @{@"Id": model.Id, @"userId": [UserInfoSingle sharedManager].userId, @"proType": model.type,@"type":@"3"};
                                 [self.cycleImageVC.presenter fetchProDetailDataWithParameter:parameter completionHandler:^(NSError *error, id result) {
                                     NSDictionary *dic = (NSDictionary *)result;
-                                    [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+                                    [MBProgressHUD hideOriginAllHUDsForView:weakSelf.view animated:YES];
                                     
                                     NSString *rstcode = dic[@"status"];
                                     NSString *rsttext = dic[@"statusdes"];
@@ -522,7 +540,7 @@
                         NSDictionary *parameter = @{@"Id": model.Id, @"userId": [UserInfoSingle sharedManager].userId, @"proType": model.type,@"type":@"4"};
                         [self.cycleImageVC.presenter fetchProDetailDataWithParameter:parameter completionHandler:^(NSError *error, id result) {
                             NSString *rstcode = [result objectForKey:@"status"];
-                            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+                            [MBProgressHUD hideOriginAllHUDsForView:weakSelf.view animated:YES];
                             if ([rstcode intValue] == 1) {
                                 UCFPurchaseBidViewController *purchaseViewController = [[UCFPurchaseBidViewController alloc] initWithNibName:@"UCFPurchaseBidViewController" bundle:nil];
                                 purchaseViewController.dataDict = result;
@@ -654,7 +672,7 @@
         
         [self.cycleImageVC.presenter fetchProDetailDataWithParameter:strParameters completionHandler:^(NSError *error, id result) {
             NSDictionary *dic = (NSDictionary *)result;
-            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+            [MBProgressHUD hideOriginAllHUDsForView:weakSelf.view animated:YES];
             NSString *rsttext = [dic objectSafeForKey:@"message"];
             NSDictionary *dataDict = [dic objectSafeDictionaryForKey:@"data"];
             if ( [dic[@"ret"] boolValue]) {
@@ -679,7 +697,7 @@
         
         [self.cycleImageVC.presenter fetchProDetailDataWithParameter:strParameters completionHandler:^(NSError *error, id result) {
             NSDictionary *dic = (NSDictionary *)result;
-            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+            [MBProgressHUD hideOriginAllHUDsForView:weakSelf.view animated:YES];
             NSString *rsttext = [dic objectSafeForKey:@"message"];
             NSDictionary *dataDict = [dic objectSafeDictionaryForKey:@"data"];
             if ( [dic[@"ret"] boolValue]) {
@@ -718,7 +736,7 @@
         
         [self.cycleImageVC.presenter fetchProDetailDataWithParameter:strParameters completionHandler:^(NSError *error, id result) {
             NSDictionary *dic = (NSDictionary *)result;
-            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+            [MBProgressHUD hideOriginAllHUDsForView:weakSelf.view animated:YES];
             
             NSString *rsttext = dic[@"message"];
             NSDictionary *dataDict = [dic objectSafeDictionaryForKey:@"data"];
@@ -749,7 +767,7 @@
         
         [self.cycleImageVC.presenter fetchProDetailDataWithParameter:strParameters completionHandler:^(NSError *error, id result) {
             NSDictionary *dic = (NSDictionary *)result;
-            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+            [MBProgressHUD hideOriginAllHUDsForView:weakSelf.view animated:YES];
             
             NSString *rsttext = dic[@"message"];
             NSDictionary *dataDict = [dic objectSafeDictionaryForKey:@"data"];
@@ -789,7 +807,7 @@
         NSString  *colPrdClaimIdStr = [NSString stringWithFormat:@"%@",model.Id];
         NSDictionary *parameter = [NSDictionary dictionaryWithObjectsAndKeys:uuid,@"userId", colPrdClaimIdStr, @"colPrdClaimId", nil];
         [self.cycleImageVC.presenter fetchCollectionDetailDataWithParameter:parameter completionHandler:^(NSError *error, id result) {
-            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+            [MBProgressHUD hideOriginAllHUDsForView:weakSelf.view animated:YES];
             NSDictionary *dic = (NSDictionary *)result;
             NSString *rstcode = dic[@"ret"];
             NSString *rsttext = dic[@"message"];
@@ -914,7 +932,7 @@
 
     
     [self.homeListVC.presenter fetchHomeListDataWithCompletionHandler:^(NSError *error, id result) {
-        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];//上层交互逻辑
+        [MBProgressHUD hideOriginAllHUDsForView:weakSelf.view animated:YES];//上层交互逻辑
         if ([result isKindOfClass:[NSDictionary class]]) {
             
         }

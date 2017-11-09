@@ -245,7 +245,7 @@
         [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:KSXTagMyInviteRebateinfo owner:self signature:YES Type:self.accoutType];
     }
 
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [MBProgressHUD showOriginHUDAddedTo:self.view animated:YES];
 }
 
 //获取分享各种信息
@@ -265,7 +265,7 @@
 - (void)endPost:(id)result tag:(NSNumber *)tag
 {
     [GiFHUD dismiss];
-    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    [MBProgressHUD hideOriginAllHUDsForView:self.view animated:YES];
     NSMutableDictionary *dic = [result objectFromJSONString];
     
     //    _totalCountLab.text = [NSString stringWithFormat:@"共%@笔回款记录",dic[@"pageData"][@"pagination"][@"totalCount"]];
@@ -392,7 +392,7 @@
     if (tag.intValue == kSXtagInviteRebate) {
         [MBProgressHUD displayHudError:err.userInfo[@"NSLocalizedDescription"]];
     }
-    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    [MBProgressHUD hideOriginAllHUDsForView:self.view animated:YES];
 }
 
 - (void)dealloc{

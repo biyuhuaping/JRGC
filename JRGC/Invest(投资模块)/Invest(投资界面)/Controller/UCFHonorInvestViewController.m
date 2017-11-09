@@ -261,14 +261,14 @@
             if ([model.status intValue ] != 2) {
                 NSInteger isOrder = [model.isOrder integerValue];
                 if (isOrder > 0) {
-                    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                    [MBProgressHUD showOriginHUDAddedTo:self.view animated:YES];
                     [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self Type:self.accoutType];
                 } else {
                     UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前标的详情只对认购人开放"];
                     [self.navigationController pushViewController:controller animated:YES];
                 }
             } else {
-                [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                [MBProgressHUD showOriginHUDAddedTo:self.view animated:YES];
                 [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self Type:self.accoutType];
             }
         }
@@ -308,7 +308,7 @@
             }
         }
         if ([self checkUserCanInvestIsDetail:NO]) {
-            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            [MBProgressHUD showOriginHUDAddedTo:self.view animated:YES];
             self.honerListModel= model;
             NSString *strParameters = [NSString stringWithFormat:@"userId=%@&id=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],model.Id];//101943
             [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDealBid owner:self Type:self.accoutType];
@@ -382,7 +382,7 @@
 //请求成功及结果
 - (void)endPost:(id)result tag:(NSNumber *)tag
 {
-    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    [MBProgressHUD hideOriginAllHUDsForView:self.view animated:YES];
     //    DBLOG(@"首页获取最新项目列表：%@",data);
     
     NSMutableDictionary *dic = [result objectFromJSONString];
@@ -537,7 +537,7 @@
 - (void)errorPost:(NSError*)err tag:(NSNumber*)tag
 {
     [MBProgressHUD displayHudError:err.userInfo[@"NSLocalizedDescription"]];
-    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    [MBProgressHUD hideOriginAllHUDsForView:self.view animated:YES];
     if ([self.tableView.header isRefreshing]) {
         [self.tableView.header endRefreshing];
     }
