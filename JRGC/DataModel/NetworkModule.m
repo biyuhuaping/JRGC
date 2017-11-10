@@ -1256,6 +1256,12 @@ static NetworkModule *gInstance = NULL;
         case kSXTagExtractGoldList:
             parameter = [NEW_SERVER_IP stringByAppendingString:EXTRACTGOLDLIST];
             break;
+        case  kSXTagGetNmDrawGoldGoodsInfo: //提金页面数据接口
+            parameter = [NEW_SERVER_IP stringByAppendingString:GETNMGOLGGOODSINFOURL];
+            break;
+        case  kSXTagDrawGoldGoodsInfoSubmit: //提金黄金提交接口
+            parameter = [NEW_SERVER_IP stringByAppendingString:SUBMITNMGOLGGOODSINFOURL];
+            break; 
     }
     //给原有参数字典添加公共参数
     if (!data) {
