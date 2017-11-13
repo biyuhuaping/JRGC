@@ -17,4 +17,6 @@
 @property (copy, nonatomic) NSString *status;
 @property (copy, nonatomic) NSString *statusName;
 @property (copy, nonatomic) NSString *remark;
+
++ (instancetype)extractGoldWithDict:(NSDictionary *)dict;
 @end

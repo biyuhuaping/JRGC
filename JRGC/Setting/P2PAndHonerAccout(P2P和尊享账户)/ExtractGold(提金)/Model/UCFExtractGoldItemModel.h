@@ -14,4 +14,6 @@
 @property (copy, nonatomic) NSString *goldGoodsName;
 @property (strong, nonatomic) NSNumber *goldGoodsNum;
 @property (copy, nonatomic) NSString *remark;
+
++ (instancetype)extractGoldItemWithDict:(NSDictionary *)dict;
 @end
