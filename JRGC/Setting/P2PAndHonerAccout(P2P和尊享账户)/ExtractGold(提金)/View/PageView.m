@@ -28,7 +28,7 @@
         self.controllers = [NSMutableArray arrayWithArray:controllers];
         self.selectedIndex = 0;
         [self createUI];
-        [self createCurrentControllerView];
+//        [self createCurrentControllerView];
         [self.topSegmentedControl addTarget:self action:@selector(topSegmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
     }
     return self;
@@ -82,6 +82,7 @@
 {
     _selectedIndex = seg.selectedSegmentIndex;
     [self.mainScrollView setContentOffset:CGPointMake(seg.selectedSegmentIndex * self.mainScrollView.bounds.size.width, 0)];
+    [self createCurrentControllerView];
 }
 
 - (HMSegmentedControl *)topSegmentedControl
