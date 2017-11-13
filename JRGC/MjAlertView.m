@@ -408,9 +408,9 @@
         adImageView.frame = CGRectMake(0, 55, size.width, size.height);
         adImageView.layer.cornerRadius = 4.0f;
         adImageView.clipsToBounds = YES;
-        NSDictionary *adDic = [[NSUserDefaults standardUserDefaults] valueForKey:@"AD_ACTIViTY_DIC"];
+        NSDictionary *adDic = [[NSUserDefaults standardUserDefaults] valueForKey:@"AD_ACTIViTY_DIC_NEW"];
         
-        [adImageView sd_setImageWithURL:[NSURL URLWithString:[adDic valueForKey:@"pic"]] placeholderImage:[UIImage imageNamed:@"index_tenMonthHunt.jpg"]];
+        [adImageView sd_setImageWithURL:[NSURL URLWithString:[adDic valueForKey:@"thumb"]] placeholderImage:[UIImage imageNamed:@"index_tenMonthHunt.jpg"]];
         
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goToAdDetailContent)];
         [adImageView addGestureRecognizer:tap];
@@ -420,7 +420,7 @@
 - (void)goToAdDetailContent
 {
     if ([self.delegate respondsToSelector:@selector(mjalertView:withObject:)]) {
-        NSDictionary *adDic = [[NSUserDefaults standardUserDefaults] valueForKey:@"AD_ACTIViTY_DIC"];
+        NSDictionary *adDic = [[NSUserDefaults standardUserDefaults] valueForKey:@"AD_ACTIViTY_DIC_NEW"];
         if (adDic) {
             [self.delegate mjalertView:self withObject:adDic];
         }

@@ -225,6 +225,7 @@
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isShowHornor"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     [self getLoginImage];
+    [self getAdversementLift];
 
     return YES;
 }
@@ -1018,6 +1019,32 @@
             if (!hasImage) {
                 [Common storeImage:url];
             }
+        });
+    });
+}
+- (void)getAdversementLift
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSString *URL = [NSString stringWithFormat:@"https://fore.9888.cn/cms/api/appbanner.php?key=0ca175b9c0f726a831d895e&id=54"];
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+        [request setURL:[NSURL URLWithString:URL]];
+        [request setHTTPMethod:@"GET"];
+        NSHTTPURLResponse *urlResponse = nil;
+        NSError *error = nil;
+        NSData *recervedData = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&error];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (!recervedData) {
+                return ;
+            }
+            NSString *imageStr=[[NSMutableString alloc] initWithData:recervedData encoding:NSUTF8StringEncoding];
+            NSArray *arr = [imageStr objectFromJSONString];
+            if (arr.count > 0) {
+                NSDictionary *dataDic = arr[0];
+                [[NSUserDefaults standardUserDefaults] setObject:dataDic forKey:@"AD_ACTIViTY_DIC_NEW"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+
+            }
+            
         });
     });
 }
