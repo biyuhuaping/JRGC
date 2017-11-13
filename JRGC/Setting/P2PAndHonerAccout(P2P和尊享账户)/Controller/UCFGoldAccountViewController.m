@@ -27,7 +27,7 @@
 #import "UCFFeedBackViewController.h"
 #import "UCFGoldRaiseViewController.h"
 #import "UCFInvestViewController.h"
-
+#import "UCFDrawGoldViewController.h"
 @interface UCFGoldAccountViewController ()<UITableViewDelegate,UITableViewDataSource, GoldAccountFirstCellDeleage,UCFGoldAccountHeadViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *baseTableView;
 @property (weak, nonatomic) IBOutlet UIButton *buyGoldBtn;
@@ -343,10 +343,13 @@
             }
         }
     } else if ([title isEqualToString:@"提金"]) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"提金页面正在奋力优化中\n如需提金，请拨打客服电话400-0322-988" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"联系客服", nil];
-        alert.tag = 7000;
-        [alert show];
-    
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"提金页面正在奋力优化中\n如需提金，请拨打客服电话400-0322-988" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"联系客服", nil];
+//        alert.tag = 7000;
+//        [alert show];
+        UCFDrawGoldViewController *vc1 = [[UCFDrawGoldViewController alloc] initWithNibName:@"UCFDrawGoldViewController" bundle:nil];
+        vc1.baseTitleText = @"提金";
+        vc1.rootVc = self;
+        [self.navigationController pushViewController:vc1 animated:YES];
     }
     [MBProgressHUD displayHudError:showStr];
 }

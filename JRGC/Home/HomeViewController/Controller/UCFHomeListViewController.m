@@ -92,7 +92,7 @@
         static NSString *cellId = @"newusercell";
         UCFNewUserCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
         if (nil == cell) {
-            cell = (UCFNewUserCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFNewUserCell" owner:self options:nil] lastObject];
+            cell = (UCFNewUserCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFNewUserCell" owner:nil options:nil] firstObject];
             cell.delegate = self;
             cell.tableview = tableView;
         }

@@ -20,7 +20,6 @@
 @implementation UCFMessageSettingViewController
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"hideMenuView" object:nil];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
