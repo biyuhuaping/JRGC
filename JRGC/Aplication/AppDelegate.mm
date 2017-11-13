@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "UCFSession.h"
+//#import "UCFSession.h"
 #import "UCFLoginViewController.h"
 #import "LLLockPassword.h"
 #import "JSONKit.h"
@@ -43,7 +43,7 @@
 #ifdef NSFoundationVersionNumber_iOS_9_x_Max
 #import <UserNotifications/UserNotifications.h>
 #endif
-@interface AppDelegate () <UCFSessionDelegate,JPUSHRegisterDelegate>
+@interface AppDelegate () <JPUSHRegisterDelegate>
 
 @property (assign, nonatomic) UIBackgroundTaskIdentifier backgroundUpdateTask;
 //@property (strong, nonatomic) UIImageView *advertisementView;
@@ -67,7 +67,7 @@
     [[ToolSingleTon sharedManager] getGoldPrice]; //获取实时金价
 
     [self setWebViewUserAgent];
-    [UCFSession sharedManager].delegate = self;
+//    [UCFSession sharedManager].delegate = self;
     [self checkNovicePoliceOnOff];//监测2017新手奖励政策开关。
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -413,7 +413,7 @@
     NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys:useridstr,@"userId",nil];
     [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagUserLogout owner:self signature:YES Type:SelectAccoutDefault];
     
-    [[UCFSession sharedManager] transformBackgroundWithUserInfo:nil withState:UCFSessionStateUserLogout];
+//    [[UCFSession sharedManager] transformBackgroundWithUserInfo:nil withState:UCFSessionStateUserLogout];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"setDefaultViewData" object:nil];
     [[UserInfoSingle sharedManager] removeUserInfo];
     [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"changScale"];
@@ -1148,20 +1148,20 @@
     [Common addTestCookies];
 }
 
-- (void)session:(UCFSession *)session didUCFSessionReceiveUserInfo:(id)userInfo
-{
-    
-    if ([UserInfoSingle sharedManager].userId) {
-        
-       NSString *gcmcode = [[NSUserDefaults standardUserDefaults] objectForKey:@"gcmCode"];
-        NSData *data = [Common createImageCode:gcmcode];
-        NSUserDefaults *signatureStr =[[NSUserDefaults standardUserDefaults] valueForKey:SIGNATUREAPP];
-        NSDictionary *loginSuccessDic = @{@"userId":[UserInfoSingle sharedManager].userId, @"source_type":@"1",@"imei":[Common getKeychain],@"version":[Common getIOSVersion],@"signature":signatureStr,@"imageData":data,@"isSubmitAppStoreAndTestTime":@(self.isSubmitAppStoreTestTime).stringValue};
-//        [[UCFSession sharedManager] transformInactionWithInfo:loginSuccessDic withState:UCFSessionStateUserLogin];
-        [session.session updateApplicationContext:loginSuccessDic error:nil];
-    }
-
-}
+//- (void)session:(UCFSession *)session didUCFSessionReceiveUserInfo:(id)userInfo
+//{
+//
+//    if ([UserInfoSingle sharedManager].userId) {
+//
+//       NSString *gcmcode = [[NSUserDefaults standardUserDefaults] objectForKey:@"gcmCode"];
+//        NSData *data = [Common createImageCode:gcmcode];
+//        NSUserDefaults *signatureStr =[[NSUserDefaults standardUserDefaults] valueForKey:SIGNATUREAPP];
+//        NSDictionary *loginSuccessDic = @{@"userId":[UserInfoSingle sharedManager].userId, @"source_type":@"1",@"imei":[Common getKeychain],@"version":[Common getIOSVersion],@"signature":signatureStr,@"imageData":data,@"isSubmitAppStoreAndTestTime":@(self.isSubmitAppStoreTestTime).stringValue};
+////        [[UCFSession sharedManager] transformInactionWithInfo:loginSuccessDic withState:UCFSessionStateUserLogin];
+//        [session.session updateApplicationContext:loginSuccessDic error:nil];
+//    }
+//
+//}
 
 @end
 // iOS10.2 之后如果info.plist里面的ATS 为YES 的情况下，也需要加这个

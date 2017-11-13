@@ -66,7 +66,9 @@
 
 - (void)bottomButton:(UIButton *)button ClickedWithModel:(UCFExtractGoldModel *)extractGoldModel
 {
-    
+    NSString *userId = [UserInfoSingle sharedManager].userId;
+    NSDictionary *param = @{@"orderId": extractGoldModel.takeRecordOrderId, @"userId": userId};
+    [[NetworkModule sharedNetworkModule] newPostReq:param tag:kSXTagExtractSubmit owner:self signature:YES Type:SelectAccoutTypeGold];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -141,6 +143,15 @@
         }
     }
     else if (tag.integerValue == kSXTagExtractGoldDetail) {
+        if ([dic[@"ret"] boolValue] == 1) {
+            NSDictionary *data = [dic objectSafeDictionaryForKey:@"data"];
+            UCFExtractGoldDetailController *extractGoldDetailWeb = [[UCFExtractGoldDetailController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
+            extractGoldDetailWeb.url = [data objectSafeForKey:@"url"];
+            UCFBaseViewController *baseVc = self.rootVc;
+            [baseVc.navigationController pushViewController:extractGoldDetailWeb animated:YES];
+        }
+    }
+    else if (tag.integerValue == kSXTagExtractSubmit) {
         if ([dic[@"ret"] boolValue] == 1) {
             NSDictionary *data = [dic objectSafeDictionaryForKey:@"data"];
             UCFExtractGoldDetailController *extractGoldDetailWeb = [[UCFExtractGoldDetailController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];

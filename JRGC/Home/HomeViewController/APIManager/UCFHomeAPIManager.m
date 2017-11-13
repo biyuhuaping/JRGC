@@ -14,7 +14,7 @@
 #import "UCFUserInfoModel.h"
 #import "UCFHomeIconModel.h"
 #import "UCFSignModel.h"
-#import "UCFSession.h"
+//#import "UCFSession.h"
 #import "MongoliaLayerCenter.h"
 #import "UCFPicADModel.h"
 #import "UCFNoticeModel.h"
@@ -187,7 +187,7 @@
             
             UCFHomeListCellModel *homelistModel = [UCFHomeListCellModel homeListCellWithDict:result];
             [tempResult setObject:homelistModel forKey:@"listInfo"];
-            [[UCFSession sharedManager] transformBackgroundWithUserInfo:@{} withState:UCFSessionStateUserRefresh];
+//            [[UCFSession sharedManager] transformBackgroundWithUserInfo:@{} withState:UCFSessionStateUserRefresh];
             complete(nil, tempResult);
         }
         else {
