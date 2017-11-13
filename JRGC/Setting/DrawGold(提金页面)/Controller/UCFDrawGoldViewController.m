@@ -15,6 +15,7 @@
 #import "MjAlertView.h"
 #import "UCFGoldRechargeViewController.h"
 #import "UCFNoDataView.h"
+#import "UCFExtractGoldDetailController.h"
 @interface UCFDrawGoldViewController ()<UITableViewDataSource,UITableViewDelegate,UCFExtractViewCellDelegate,UCFDrawGoldHeaderViewDelegate,MjAlertViewDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UIButton *gotoNextButton;
@@ -354,9 +355,9 @@
             {
                 NSDictionary *dataDict = [dic objectSafeDictionaryForKey:@"data"];
                 NSString *urlStr = [dataDict objectSafeForKey:@"url"];
-                FullWebViewController *webView = [[FullWebViewController alloc] initWithWebUrl:urlStr title:@"提交订单"];
-                  webView.baseTitleType = @"specialUser";
-                [self.navigationController pushViewController:webView animated:YES];
+                UCFExtractGoldDetailController *extractGoldDetailWeb = [[UCFExtractGoldDetailController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
+                extractGoldDetailWeb.url = urlStr;
+                [self.navigationController pushViewController:extractGoldDetailWeb animated:YES];
             }
             else{
                 
