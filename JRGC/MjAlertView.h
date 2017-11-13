@@ -21,7 +21,8 @@ typedef enum : NSUInteger {
     MjAlertViewTypeTypeHoner,
     MjGoldAlertViewTypeFloat, //浮动盈亏
     MjGoldAlertViewTypeAverage, //买入均价
-    MjAlertViewTypeGift
+    MjAlertViewTypeGift,
+    MjAlertViewTypeDrawGoldRechane//提金时余额不足时弹框
 } MjAlertViewType;
 
 
@@ -80,6 +81,8 @@ typedef enum : NSUInteger {
 - (instancetype)initGoldAlertTitle:(NSString *)title Message:(NSString *)message delegate:(id)delegate;
 //广告页弹框
 -(instancetype)initADViewAlertWithDelegate:(id)delegate;
+//提金时余额不足时弹框提示
+-(instancetype)initDrawGoldRechangeAlertType:(MjAlertViewType)type withMessage:(NSString *)message delegate:(id)delegate;
 #pragma mark - 显示
 - (void)show;
 #pragma mark - 隐藏

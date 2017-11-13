@@ -480,6 +480,35 @@
     }
     return self;
 }
+#pragma 黄金自定义弹窗
+-(instancetype)initDrawGoldRechangeAlertType:(MjAlertViewType)type withMessage:(NSString *)message delegate:(id)delegate
+{
+    self = [self init];
+    if (self) {
+        UIView *baseView = nil;
+        baseView = [[NSBundle mainBundle] loadNibNamed:@"UCFDrawGoldRechangAlertView" owner:nil options:nil][0];
+        baseView.frame = CGRectMake(0, 0, 265, 196);
+        [self.showView  setFrame:CGRectMake((ScreenWidth - 265)/2.0f, (ScreenHeight - 220)/2.0f, 265, 220)];
+        self.delegate = delegate;
+        [self.showView addSubview:baseView];
+        
+        UILabel *titleLab = [baseView viewWithTag:98];
+        UILabel *msgLab = [baseView viewWithTag:99];
+        if (type == MjGoldAlertViewTypeFloat)
+        {
+            titleLab.text = @"余额不足";
+            msgLab.text = message;
+        }
+        UIButton *closeBtn1 = [baseView viewWithTag:100];
+        UIButton *closeBtn2 = [baseView viewWithTag:102];
+
+        UIButton *rechangeBtn = [baseView viewWithTag:101];
+        [closeBtn1 addTarget:self action:@selector(closeBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [closeBtn2 addTarget:self action:@selector(closeBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [rechangeBtn addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return self;
+}
 #pragma  跳转尊享页面弹框
 -(instancetype)initSkipToMoneySwitchHonerAccout:(id)delegate{
     self = [self init];
