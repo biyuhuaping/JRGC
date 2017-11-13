@@ -1261,7 +1261,10 @@ static NetworkModule *gInstance = NULL;
             break;
         case  kSXTagDrawGoldGoodsInfoSubmit: //提金黄金提交接口
             parameter = [NEW_SERVER_IP stringByAppendingString:SUBMITNMGOLGGOODSINFOURL];
-            break; 
+            break;
+        case kSXTagExtractGoldDetail:
+            parameter = [NEW_SERVER_IP stringByAppendingString:EXTRACTGOLDDETAIL];
+            break;
     }
     //给原有参数字典添加公共参数
     if (!data) {

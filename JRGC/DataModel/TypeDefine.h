@@ -318,6 +318,7 @@
 #define TOTALEARINGSOVERVIEW  @"/api/userAccount/v2/earningsOverview.json" //累计收益
 #define MYACCOUNTBINFINGBANKCARD @"/api/userAccount/v2/getBindingBankCardList.json"//我的-->>充值接口
 #define MYACCOUNTBlANCELIST @"/api/userAccount/v2/getAccountBalanceList.json"//我的-->>充值接口
+#define EXTRACTGOLDDETAIL   @"api/nmTrade/v2/takeRecordDetail.json" //提金订单详情
 
 #define GETNMGOLGGOODSINFOURL @"api/nmPrdClaim/v2/getNmGoldGoodsInfo.json"//提取黄金页面
 #define SUBMITNMGOLGGOODSINFOURL @"api/nmPrdClaim/v2/submitNmGoldGoodsInfo.json"//提金黄金提交接口
@@ -533,6 +534,7 @@ enum kSXTag
     kSXTagExtractGoldList,              //提金订单列表
     kSXTagGetNmDrawGoldGoodsInfo ,      //提金页面数据接口
     kSXTagDrawGoldGoodsInfoSubmit,      //提金黄金提交接口
+    kSXTagExtractGoldDetail,            //提金订单详情
 };
 
 typedef enum kSXTag kSXTag;
