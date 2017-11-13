@@ -57,6 +57,7 @@
     BOOL _isP2P;//是否是P2P标
     NSString *_p2pOrHonerType;// 1为微金，2位普通尊享，3为委托尊享标
     MinuteCountDownView *_minuteCountDownView;//倒计时View
+    int  _status;//标状态
 }
 
 @end
@@ -81,6 +82,7 @@
         _prdLabelsList = prdList;
         _dic = dic;
         _isP2P = isP2P;
+        _status =[[[dic objectSafeDictionaryForKey:@"prdClaims"] objectSafeForKey:@"status"] intValue];
         [self initViews];
     }
     return self;
@@ -416,7 +418,7 @@
         view_y = 0 + [Common calculateNewSizeBaseMachine:HeadBkHeight] + bottomViewYPos;
     }
     
-    if (_type == PROJECTDETAILTYPEBONDSRRANSFER &&  [_p2pOrHonerType intValue] == 2){//债权转让
+    if ((_type == PROJECTDETAILTYPEBONDSRRANSFER &&  [_p2pOrHonerType intValue] == 2) ||(!_isP2P  && _status !=  2)){//债权转让
         row --;
     }
     bottomBkView = [[UIView alloc] initWithFrame:CGRectMake(0, view_y, ScreenWidth, 44*row)];
@@ -473,7 +475,7 @@
     [bottomBkView addSubview:line2];
     //****************分隔线**************
 
-    if (_type == PROJECTDETAILTYPEBONDSRRANSFER && [_p2pOrHonerType intValue] == 2){//债权转让 并且是普通尊享标
+    if ((_type == PROJECTDETAILTYPEBONDSRRANSFER &&  [_p2pOrHonerType intValue] == 2) ||(!_isP2P  && _status !=  2)){//债权转让 并且是普通尊享标
         if (row == 3) {
             UIImageView *qitouImageV = [[UIImageView alloc] initWithFrame:CGRectMake(IconXPos,44*2 + IconYPos, 22, 22)];
             qitouImageV.image = [UIImage imageNamed:@"particular_icon_guarantee.png"];
@@ -532,7 +534,7 @@
     }else{
         bottomBeginYPos = 0 + [Common calculateNewSizeBaseMachine:HeadBkHeight] + bottomViewYPos;
     }
-    if (_type == PROJECTDETAILTYPEBONDSRRANSFER &&  [_p2pOrHonerType intValue] == 2 ){ //为了隐藏尊享债转100起一栏
+    if ((_type == PROJECTDETAILTYPEBONDSRRANSFER &&  [_p2pOrHonerType intValue] == 2) || (!_isP2P  && _status !=  2)){ //为了隐藏尊享债转100起一栏  尊尊享标已售罄的状态 1000起一栏
         row --;
     }
     bottomBkView = [[UIView alloc] initWithFrame:CGRectMake(0,bottomBeginYPos, ScreenWidth, 44*row)];
@@ -562,7 +564,7 @@
     line2.backgroundColor = UIColorWithRGB(0xe3e5ea);
     [bottomBkView addSubview:line2];
     //****************分隔线*************    
-    if (_type == PROJECTDETAILTYPEBONDSRRANSFER &&  [_p2pOrHonerType intValue] == 2 ) {
+    if ((_type == PROJECTDETAILTYPEBONDSRRANSFER &&  [_p2pOrHonerType intValue] == 2) || (!_isP2P  && _status !=  2)) {
         if (row == 2) {
             //起投金额
             UIImageView *qitouImageV = [[UIImageView alloc] initWithFrame:CGRectMake(IconXPos,44*1 + IconYPos, 22, 22)];

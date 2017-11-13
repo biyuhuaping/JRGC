@@ -202,13 +202,13 @@
             NSMutableDictionary *tempResult = [[NSMutableDictionary alloc] init];
             NSMutableArray *tempArray = [[NSMutableArray alloc] init];
             NSDictionary *resultDict = [dic objectSafeDictionaryForKey:@"data"];
-            if ([[resultDict objectSafeForKey:@"picAD"] count] > 0) {
-                NSDictionary *adDic = [[resultDict objectSafeForKey:@"picAD"] objectAtIndex:0];
-                if (adDic) {
-                    [[NSUserDefaults standardUserDefaults] setValue:adDic forKey:@"AD_ACTIViTY_DIC"];
-                    [[NSUserDefaults standardUserDefaults] synchronize];
-                }
-            }
+//            if ([[resultDict objectSafeForKey:@"picAD"] count] > 0) {
+//                NSDictionary *adDic = [[resultDict objectSafeForKey:@"picAD"] objectAtIndex:0];
+//                if (adDic) {
+//                    [[NSUserDefaults standardUserDefaults] setValue:adDic forKey:@"AD_ACTIViTY_DIC"];
+//                    [[NSUserDefaults standardUserDefaults] synchronize];
+//                }
+//            }
             NSDictionary *siteNotice = [resultDict objectSafeDictionaryForKey:@"siteNoticeMap"];
        
             UCFNoticeModel *noticeModel = [UCFNoticeModel noticeWithDict:siteNotice];
