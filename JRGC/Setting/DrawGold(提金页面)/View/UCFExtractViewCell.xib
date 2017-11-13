@@ -25,10 +25,15 @@
                             <constraint firstAttribute="width" constant="55" id="lUF-Vd-Q0f"/>
                             <constraint firstAttribute="height" constant="55" id="mK4-bb-fGV"/>
                         </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="3"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30克投资金条" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n0C-X0-hVj">
-                        <rect key="frame" x="80" y="32" width="107.5" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <rect key="frame" x="80" y="36" width="76.5" height="14.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -72,14 +77,23 @@
                         <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kPR-DE-fIT">
+                        <rect key="frame" x="0.0" y="0.0" width="214" height="73.5"/>
+                        <connections>
+                            <action selector="clickGoldGoodsDetail" destination="KGk-i7-Jjw" eventType="touchUpInside" id="0b5-iW-CKb"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="kPR-DE-fIT" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="3zi-RI-zXl"/>
                     <constraint firstItem="bLY-1c-Xbh" firstAttribute="centerY" secondItem="2Um-7u-xbJ" secondAttribute="centerY" id="F8U-PU-aTI"/>
                     <constraint firstItem="n0C-X0-hVj" firstAttribute="centerY" secondItem="ghl-x9-mCN" secondAttribute="centerY" id="G4h-Vo-839"/>
+                    <constraint firstAttribute="bottom" secondItem="kPR-DE-fIT" secondAttribute="bottom" id="HDR-7g-QT5"/>
                     <constraint firstItem="1oU-v0-5rj" firstAttribute="leading" secondItem="2Um-7u-xbJ" secondAttribute="trailing" id="I9k-tt-KIT"/>
                     <constraint firstAttribute="trailing" secondItem="bLY-1c-Xbh" secondAttribute="trailing" constant="15" id="LAo-2b-FkZ"/>
                     <constraint firstItem="ghl-x9-mCN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="NwD-tG-1wF"/>
                     <constraint firstItem="OiT-zP-KYM" firstAttribute="leading" secondItem="2Um-7u-xbJ" secondAttribute="trailing" id="Pxb-P3-yKt"/>
+                    <constraint firstItem="2Um-7u-xbJ" firstAttribute="leading" secondItem="kPR-DE-fIT" secondAttribute="trailing" constant="5" id="QdK-ar-nWX"/>
                     <constraint firstItem="OiT-zP-KYM" firstAttribute="leading" secondItem="2Um-7u-xbJ" secondAttribute="trailing" id="Slj-dN-5Y5"/>
                     <constraint firstItem="bLY-1c-Xbh" firstAttribute="leading" secondItem="OiT-zP-KYM" secondAttribute="trailing" id="Uhp-Kc-F9q"/>
                     <constraint firstItem="2Um-7u-xbJ" firstAttribute="centerY" secondItem="n0C-X0-hVj" secondAttribute="centerY" id="YP8-HU-Wc7"/>
@@ -89,6 +103,7 @@
                     <constraint firstItem="OiT-zP-KYM" firstAttribute="centerY" secondItem="2Um-7u-xbJ" secondAttribute="centerY" id="dnQ-Ib-W4Q"/>
                     <constraint firstItem="bLY-1c-Xbh" firstAttribute="leading" secondItem="OiT-zP-KYM" secondAttribute="trailing" id="e1b-rj-gBb"/>
                     <constraint firstItem="bLY-1c-Xbh" firstAttribute="leading" secondItem="1oU-v0-5rj" secondAttribute="trailing" id="eiG-Sn-9hY"/>
+                    <constraint firstItem="kPR-DE-fIT" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="p1I-nb-goY"/>
                     <constraint firstItem="ghl-x9-mCN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="pPu-3B-Z5U"/>
                 </constraints>
             </tableViewCellContentView>
@@ -101,7 +116,7 @@
                 <outlet property="numberBgBtn" destination="1oU-v0-5rj" id="NlC-uy-5eY"/>
                 <outlet property="subtractBtn" destination="2Um-7u-xbJ" id="0sK-Fr-iYf"/>
             </connections>
-            <point key="canvasLocation" x="-44" y="26"/>
+            <point key="canvasLocation" x="-259" y="10"/>
         </tableViewCell>
     </objects>
     <resources>

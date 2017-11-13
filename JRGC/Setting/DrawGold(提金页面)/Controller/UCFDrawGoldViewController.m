@@ -12,7 +12,10 @@
 #import "UCFDrawGoldModel.h"
 #import "FullWebViewController.h"
 #import "UCFDrawGoldHeaderView.h"
-@interface UCFDrawGoldViewController ()<UITableViewDataSource,UITableViewDelegate,UCFExtractViewCellDelegate,UCFDrawGoldHeaderViewDelegate>
+#import "MjAlertView.h"
+#import "UCFGoldRechargeViewController.h"
+#import "UCFNoDataView.h"
+@interface UCFDrawGoldViewController ()<UITableViewDataSource,UITableViewDelegate,UCFExtractViewCellDelegate,UCFDrawGoldHeaderViewDelegate,MjAlertViewDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UIButton *gotoNextButton;
 @property (strong, nonatomic) IBOutlet UILabel *tipLabel1;
@@ -24,6 +27,9 @@
 @property (strong ,nonatomic)NSString *rate;//提金费率
 @property (strong ,nonatomic)NSString *goodsDetailUrl;
 @property (strong ,nonatomic)UCFDrawGoldHeaderView *headerView;
+@property (strong ,nonatomic)MjAlertView *alertView;
+@property (strong ,nonatomic)NSString *needAmountStr;//提金是余额不足时需要充值的金额
+@property (nonatomic, strong) UCFNoDataView *noDataView;                 // 无数据界面
 - (IBAction)gotoNextBtn:(id)sender;
 
 @end
@@ -49,10 +55,21 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.tableHeaderView = [self createHeaderView];
     self.tableView.tableFooterView = [self createFooterView];
+    _tipLabel1.text = [NSString stringWithFormat:@"已选提金克重0.000克；"];
+    [_tipLabel1 setFontColor:UIColorWithRGB(0xffc027) string:@"0.000"];
+    _tipLabel2.text = [NSString stringWithFormat:@"提金手续费0.00元"];
+    [_tipLabel2 setFontColor:UIColorWithRGB(0x333333) string:@"0.00"];
+    _gotoNextButton.backgroundColor = UIColorWithRGB(0xcccccc);
+    _gotoNextButton.userInteractionEnabled = NO;
     [self getGoldGoodsInfoHttpRequest];
     
     UIImage *bgShadowImage= [UIImage imageNamed:@"tabbar_shadow.png"];
     self.shaowImageView.image = [bgShadowImage resizableImageWithCapInsets:UIEdgeInsetsMake(2, 1, 2, 1) resizingMode:UIImageResizingModeTile];
+    
+
+    _noDataView = [[UCFNoDataView alloc] initWithFrame:CGRectMake(0,0,ScreenWidth, ScreenHeight-NavigationBarHeight) errorTitle:@"暂无数据"];
+    _noDataView.hidden = YES;
+    [self.tableView addSubview:_noDataView];
 }
 
 -(UIView *)createHeaderView
@@ -135,7 +152,7 @@
     UIView  *footView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth,30)];
     footView.backgroundColor =UIColorWithRGB(0xebebee);
     UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(15, 5, ScreenWidth-30, 15)];
-    titleLabel.textColor = UIColorWithRGB(0x333333);
+    titleLabel.textColor = UIColorWithRGB(0x999999);
     titleLabel.font = [UIFont systemFontOfSize:12];
     titleLabel.numberOfLines = 0;
     titleLabel.textAlignment = NSTextAlignmentCenter;
@@ -178,7 +195,6 @@
     if (!cell)
     {
         cell = [[[NSBundle mainBundle]loadNibNamed:@"UCFExtractViewCell" owner:nil options:nil]firstObject];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     cell.delegate = self;
     if (indexPath.row < _dataArray.count)
@@ -189,11 +205,23 @@
     
     return cell;
 }
+-(void)clickGoldGoodsDetailBtn:(UCFExtractViewCell *)cell
+{
+ 
+//    [self clickGoldGoodsDetail];
+    NSString *webUrlStr = cell.goldModel.introductionPageUrl;
+    NSString *title = cell.goldModel.goldGoodsName;
+    DLog(@"webUrlStr--->>>>%@   %@",webUrlStr,title);
+    FullWebViewController *webView = [[FullWebViewController alloc] initWithWebUrl:webUrlStr title:title];
+    webView.baseTitleType = @"specialUser";
+    [self.navigationController pushViewController:webView animated:YES];
+}
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
      UCFDrawGoldModel *goldModel = [_dataArray objectAtIndex:indexPath.row];
      FullWebViewController *webView = [[FullWebViewController alloc] initWithWebUrl:goldModel.introductionPageUrl title:goldModel.goldGoodsName];
+        webView.baseTitleType = @"specialUser";
     [self.navigationController pushViewController:webView animated:YES];
     
 }
@@ -274,7 +302,7 @@
     [MBProgressHUD hideOriginAllHUDsForView:self.view animated:YES];
     NSMutableDictionary *dic = [result objectFromJSONString];
     NSString *rstcode = dic[@"ret"];
-    NSString *rsttext = dic[@"message"];
+    NSString *rsttext = [dic objectSafeForKey:@"message"];
     int code = [[dic objectSafeForKey:@"code"]intValue];
     if (tag.integerValue == kSXTagGetNmDrawGoldGoodsInfo) {
         if ([rstcode intValue] == 1)
@@ -299,13 +327,11 @@
                 goldModel.goodsNumber = @"0";
                 [_dataArray addObject:goldModel];
             }
-            _tipLabel1.text = [NSString stringWithFormat:@"已选提金克重0.000克；"];
-            [_tipLabel1 setFontColor:UIColorWithRGB(0xffc027) string:@"0.000"];
-            _tipLabel2.text = [NSString stringWithFormat:@"提金手续费0.00元"];
-            [_tipLabel2 setFontColor:UIColorWithRGB(0x333333) string:@"0.00"];
-            _gotoNextButton.backgroundColor = UIColorWithRGB(0xcccccc);
-            _gotoNextButton.userInteractionEnabled = NO;
             [self.tableView reloadData];
+        }
+        else{
+            _noDataView.hidden = NO;
+             [MBProgressHUD displayHudError:rsttext];
         }
     }
     else if (tag.integerValue == kSXTagDrawGoldGoodsInfoSubmit) {
@@ -340,8 +366,10 @@
                 }
                 else if (code == -103)//"您的账户余额不足以支付提取黄金手续费,请充值"  bbbbbbbbbbbbb
                 {
-                    
-                    
+                    NSDictionary *dataDict = [dic objectSafeDictionaryForKey:@"data"];
+                    self.needAmountStr = [dataDict objectSafeForKey:@"needAmount"];
+                     _alertView = [[MjAlertView alloc]initDrawGoldRechangeAlertType:MjAlertViewTypeDrawGoldRechane withMessage:rsttext delegate:self];
+                    [_alertView show];
                 }
             }
         }
@@ -357,6 +385,12 @@
     if ([self.tableView.footer isRefreshing]) {
         [self.tableView.footer endRefreshing];
     }
+    if (tag.integerValue == kSXTagGetNmDrawGoldGoodsInfo)
+    {
+        _noDataView.hidden = NO;
+    }
+
+    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -396,5 +430,17 @@
     }
     NSDictionary *strParameters  = @{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"goodsAmount":goodsAmountStr,@"goodsId":goodsIdsArryStr,@"goodsNum":goodsNumsArryStr};
     [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagDrawGoldGoodsInfoSubmit owner:self signature:YES Type:SelectAccoutTypeGold];
+}
+- (void)mjalertView:(MjAlertView *)alertview didClickedButton:(UIButton *)clickedButton andClickedIndex:(NSInteger)index;
+{
+    //去充值页面
+    if (index== 101)
+    {
+        UCFGoldRechargeViewController *goldRecharge = [[UCFGoldRechargeViewController alloc] initWithNibName:@"UCFGoldRechargeViewController" bundle:nil];
+        goldRecharge.baseTitleText = @"充值";
+        goldRecharge.needToRechareStr =self.needAmountStr;
+        goldRecharge.rootVc = self;
+        [self.navigationController pushViewController:goldRecharge animated:YES];
+    }
 }
 @end

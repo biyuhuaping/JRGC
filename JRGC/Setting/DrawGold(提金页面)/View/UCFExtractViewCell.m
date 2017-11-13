@@ -19,6 +19,7 @@
 
 - (IBAction)clickSubtractBtn:(UIButton *)sender;
 - (IBAction)clickAddBtn:(UIButton *)sender;
+- (IBAction)clickGoldGoodsDetail;
 @end
 @implementation UCFExtractViewCell
 
@@ -59,5 +60,10 @@
         [self.delegate clickAddBtnCell:self withgoldModel:self.goldModel];
     }
 }
-
+- (IBAction)clickGoldGoodsDetail
+{
+    if ([self.delegate respondsToSelector:@selector(clickGoldGoodsDetailBtn:)]) {
+        [self.delegate clickGoldGoodsDetailBtn:self];
+    }
+}
 @end

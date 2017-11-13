@@ -753,6 +753,8 @@
 		83DAEFBE1F166A3000D7948F /* UCFContractTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83DAEFBC1F166A3000D7948F /* UCFContractTableCell.xib */; };
 		83DAEFC21F166A3B00D7948F /* UCFGoldAuthorizationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DAEFC01F166A3B00D7948F /* UCFGoldAuthorizationViewController.m */; };
 		83DAEFC31F166A3B00D7948F /* UCFGoldAuthorizationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83DAEFC11F166A3B00D7948F /* UCFGoldAuthorizationViewController.xib */; };
+		83DD084D1FB971C600B0688F /* UCFDrawGoldRechangAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83DD084A1FB971C500B0688F /* UCFDrawGoldRechangAlertView.xib */; };
+		83DD084E1FB971C600B0688F /* UCFDrawGoldRechangAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DD084B1FB971C500B0688F /* UCFDrawGoldRechangAlertView.m */; };
 		83DFC9461FB0102A002999CA /* UCFDrawGoldViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DFC9441FB0102A002999CA /* UCFDrawGoldViewController.m */; };
 		83DFC9471FB0102A002999CA /* UCFDrawGoldViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83DFC9451FB0102A002999CA /* UCFDrawGoldViewController.xib */; };
 		83E3F7A51F3C35C500286550 /* jrgcuserxieyi.docx in Resources */ = {isa = PBXBuildFile; fileRef = 83E3F7A41F3C35C500286550 /* jrgcuserxieyi.docx */; };
@@ -2314,6 +2316,9 @@
 		83DAEFBF1F166A3B00D7948F /* UCFGoldAuthorizationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFGoldAuthorizationViewController.h; sourceTree = "<group>"; };
 		83DAEFC01F166A3B00D7948F /* UCFGoldAuthorizationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFGoldAuthorizationViewController.m; sourceTree = "<group>"; };
 		83DAEFC11F166A3B00D7948F /* UCFGoldAuthorizationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFGoldAuthorizationViewController.xib; sourceTree = "<group>"; };
+		83DD084A1FB971C500B0688F /* UCFDrawGoldRechangAlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFDrawGoldRechangAlertView.xib; sourceTree = "<group>"; };
+		83DD084B1FB971C500B0688F /* UCFDrawGoldRechangAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFDrawGoldRechangAlertView.m; sourceTree = "<group>"; };
+		83DD084C1FB971C500B0688F /* UCFDrawGoldRechangAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFDrawGoldRechangAlertView.h; sourceTree = "<group>"; };
 		83DFC9431FB0102A002999CA /* UCFDrawGoldViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFDrawGoldViewController.h; sourceTree = "<group>"; };
 		83DFC9441FB0102A002999CA /* UCFDrawGoldViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFDrawGoldViewController.m; sourceTree = "<group>"; };
 		83DFC9451FB0102A002999CA /* UCFDrawGoldViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFDrawGoldViewController.xib; sourceTree = "<group>"; };
@@ -5715,6 +5720,9 @@
 				83881D2D1FB589E0004CB2AF /* UCFDrawGoldHeaderView.h */,
 				83881D2E1FB589E0004CB2AF /* UCFDrawGoldHeaderView.m */,
 				83881D301FB58A01004CB2AF /* UCFDrawGoldHeaderView.xib */,
+				83DD084C1FB971C500B0688F /* UCFDrawGoldRechangAlertView.h */,
+				83DD084B1FB971C500B0688F /* UCFDrawGoldRechangAlertView.m */,
+				83DD084A1FB971C500B0688F /* UCFDrawGoldRechangAlertView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -7009,6 +7017,7 @@
 				744EB7F91EE7E858003C57C4 /* UCFMicroMoneyViewController.xib in Resources */,
 				74FC22861BA6AC9200D1660A /* UCFRedEnvelopeViewController.xib in Resources */,
 				840A79441C2A7C160059A946 /* UCFMessageCenterViewController.xib in Resources */,
+				83DD084D1FB971C600B0688F /* UCFDrawGoldRechangAlertView.xib in Resources */,
 				74270D521EC5A00400F9419B /* UCFInvitationRewardHeaderView.xib in Resources */,
 				E37086B61D61A6CD0041D293 /* UCFHuiShangChooseBankViewController.xib in Resources */,
 				74067A461F5038C800747888 /* UCFAveragePriceDetailView.xib in Resources */,
@@ -7601,6 +7610,7 @@
 				FBE5A0531AE8BEDD0095B2ED /* UCFMyInvestViewCell.m in Sources */,
 				7BA6E4B91AD6731900FE8C37 /* NSData+ImageContentType.m in Sources */,
 				7BCE01F91AC8FC260084C15C /* ASIFormDataRequest.m in Sources */,
+				83DD084E1FB971C600B0688F /* UCFDrawGoldRechangAlertView.m in Sources */,
 				7BC304841ACBC22D007767F1 /* UIImage+Misc.m in Sources */,
 				746748D11F3C53310067294D /* UCFBankLimitViewController.m in Sources */,
 				2510E3E71D6F1524006BB5F8 /* alertViewCS.m in Sources */,

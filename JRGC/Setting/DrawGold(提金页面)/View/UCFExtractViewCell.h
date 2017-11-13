@@ -14,6 +14,7 @@
 @protocol UCFExtractViewCellDelegate <NSObject> 
 - (void)clickSubtractBtnCell:(UCFExtractViewCell *)cell withgoldModel:(UCFDrawGoldModel *)goldModel;
 - (void)clickAddBtnCell:(UCFExtractViewCell *)cell withgoldModel:(UCFDrawGoldModel *)goldModel;
+- (void)clickGoldGoodsDetailBtn:(UCFExtractViewCell *)cell;
 @end
 
 @interface UCFExtractViewCell : UITableViewCell
