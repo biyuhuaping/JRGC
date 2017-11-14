@@ -12,12 +12,15 @@
 #import "UCFExtractGoldFrameModel.h"
 #import "UCFExtractGoldCell.h"
 #import "UCFExtractGoldDetailController.h"
+#import "MjAlertView.h"
+#import "UCFGoldRechargeViewController.h"
 
 @interface UCFHandingInViewController () <UITableViewDelegate, UITableViewDataSource, UCFExtractGoldCellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (assign, nonatomic) NSInteger currentPage;
 @property (strong, nonatomic) UCFNoDataView *noDataView;
 @property (strong, nonatomic) NSMutableArray *dataArray;
+@property (copy, nonatomic) NSString *needAmountStr;
 @end
 
 @implementation UCFHandingInViewController
@@ -108,7 +111,8 @@
     UCFBaseViewController *vc = self.rootVc;
     [MBProgressHUD hideHUDForView:vc.view animated:YES];
     NSMutableDictionary *dic = [result objectFromJSONString];
-    NSString *rsttext = dic[@"statusdes"];
+    NSString *rsttext = dic[@"message"];
+    NSString *rstcode = [dic objectSafeForKey:@"code"];
     if (tag.integerValue == kSXTagExtractGoldList) {
         if ([dic[@"ret"] boolValue] == 1) {
             self.tableview.footer.hidden = NO;
@@ -159,12 +163,33 @@
             UCFBaseViewController *baseVc = self.rootVc;
             [baseVc.navigationController pushViewController:extractGoldDetailWeb animated:YES];
         }
+        else {
+            if (rstcode.integerValue == -102) {
+                [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
+            }
+            else if (rstcode.integerValue == -103) {
+                self.needAmountStr = [[dic objectSafeDictionaryForKey:@"data"] objectSafeForKey:@"needAmount"];
+                MjAlertView *alertView = [[MjAlertView alloc]initDrawGoldRechangeAlertType:MjAlertViewTypeDrawGoldRechane withMessage:rsttext delegate:self];
+                [alertView show];
+            }
+        }
     }
     if ([self.tableview.header isRefreshing]) {
         [self.tableview.header endRefreshing];
     }
     else if ([self.tableview.footer isRefreshing]) {
         [self.tableview.footer endRefreshing];
+    }
+}
+
+- (void)mjalertView:(MjAlertView *)alertview didClickedButton:(UIButton *)clickedButton andClickedIndex:(NSInteger)index
+{
+    if (index == 101) {
+        UCFGoldRechargeViewController *goldRecharge = [[UCFGoldRechargeViewController alloc] initWithNibName:@"UCFGoldRechargeViewController" bundle:nil];
+        goldRecharge.baseTitleText = @"充值";
+        goldRecharge.needToRechareStr =self.needAmountStr;
+        goldRecharge.rootVc = self;
+        [self.navigationController pushViewController:goldRecharge animated:YES];
     }
 }
 
