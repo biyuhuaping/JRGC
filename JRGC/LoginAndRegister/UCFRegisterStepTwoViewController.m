@@ -14,7 +14,7 @@
 #import "Common.h"
 #import "UCFToolsMehod.h"
 #import "MD5Util.h"
-#import "UCFSession.h"
+//#import "UCFSession.h"
 #import "P2PWalletHelper.h"
 @interface UCFRegisterStepTwoViewController ()
 {
@@ -259,7 +259,7 @@
     NSData *data = [Common createImageCode:gcm];
     AppDelegate *del = (AppDelegate *) [[UIApplication sharedApplication] delegate];
     NSDictionary *loginSuccessDic = @{@"userId":[UserInfoSingle sharedManager].userId, @"source_type":@"1",@"imei":[Common getKeychain],@"version":[Common getIOSVersion],@"signature":signatureStr,@"imageData":data,@"isSubmitAppStoreAndTestTime":@(del.isSubmitAppStoreTestTime).stringValue};
-    [[UCFSession sharedManager] transformBackgroundWithUserInfo:loginSuccessDic withState:UCFSessionStateUserLogin];
+//    [[UCFSession sharedManager] transformBackgroundWithUserInfo:loginSuccessDic withState:UCFSessionStateUserLogin];
 }
 
 - (void)saveInfoDic:(NSDictionary *)dict

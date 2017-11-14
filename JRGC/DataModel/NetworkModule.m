@@ -1265,6 +1265,12 @@ static NetworkModule *gInstance = NULL;
         case kSXTagExtractGoldDetail:
             parameter = [NEW_SERVER_IP stringByAppendingString:EXTRACTGOLDDETAIL];
             break;
+        case ksXTagLogisticsInfo:
+            parameter = [NEW_SERVER_IP stringByAppendingString:EXTRACTGOLDLOGISTICS];
+            break;
+        case kSXTagExtractSubmit:
+            parameter = [NEW_SERVER_IP stringByAppendingString:EXTRACTGOLDSUBMIT];
+            break;
     }
     //给原有参数字典添加公共参数
     if (!data) {

@@ -66,7 +66,16 @@
 
 - (void)bottomButton:(UIButton *)button ClickedWithModel:(UCFExtractGoldModel *)extractGoldModel
 {
-    
+    if ([button.titleLabel.text isEqualToString:@"提交订单"]) {
+        NSString *userId = [UserInfoSingle sharedManager].userId;
+        NSDictionary *param = @{@"orderId": extractGoldModel.takeRecordOrderId, @"userId": userId};
+        [[NetworkModule sharedNetworkModule] newPostReq:param tag:kSXTagExtractSubmit owner:self signature:YES Type:SelectAccoutTypeGold];
+    }
+    else if ([button.titleLabel.text isEqualToString:@"查看物流"]) {
+        NSString *userId = [UserInfoSingle sharedManager].userId;
+        NSDictionary *param = @{@"takeRecordOrderId": extractGoldModel.takeRecordOrderId, @"userId": userId};
+        [[NetworkModule sharedNetworkModule] newPostReq:param tag:ksXTagLogisticsInfo owner:self signature:YES Type:SelectAccoutTypeGold];
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -141,6 +150,24 @@
         }
     }
     else if (tag.integerValue == kSXTagExtractGoldDetail) {
+        if ([dic[@"ret"] boolValue] == 1) {
+            NSDictionary *data = [dic objectSafeDictionaryForKey:@"data"];
+            UCFExtractGoldDetailController *extractGoldDetailWeb = [[UCFExtractGoldDetailController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
+            extractGoldDetailWeb.url = [data objectSafeForKey:@"url"];
+            UCFBaseViewController *baseVc = self.rootVc;
+            [baseVc.navigationController pushViewController:extractGoldDetailWeb animated:YES];
+        }
+    }
+    else if (tag.integerValue == ksXTagLogisticsInfo) {
+        if ([dic[@"ret"] boolValue] == 1) {
+            NSDictionary *data = [dic objectSafeDictionaryForKey:@"data"];
+            UCFExtractGoldDetailController *extractGoldDetailWeb = [[UCFExtractGoldDetailController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
+            extractGoldDetailWeb.url = [data objectSafeForKey:@"url"];
+            UCFBaseViewController *baseVc = self.rootVc;
+            [baseVc.navigationController pushViewController:extractGoldDetailWeb animated:YES];
+        }
+    }
+    else if (tag.integerValue == kSXTagExtractSubmit) {
         if ([dic[@"ret"] boolValue] == 1) {
             NSDictionary *data = [dic objectSafeDictionaryForKey:@"data"];
             UCFExtractGoldDetailController *extractGoldDetailWeb = [[UCFExtractGoldDetailController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
