@@ -121,7 +121,7 @@ NSString * const ID = @"cycleCell";
             [view removeFromSuperview];
         }
     }
-    if (self.imagesGroup.count > 1) {
+    if (self.imagesGroup.count > 0) {
         TAPageControl *pageControl = [[TAPageControl alloc] init];
         pageControl.dotImage = [UIImage imageNamed:@"dot_icon_02"];
         pageControl.currentDotImage = [UIImage imageNamed:@"dot_icon_01"];
