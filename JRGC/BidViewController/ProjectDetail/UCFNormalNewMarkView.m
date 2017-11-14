@@ -19,7 +19,7 @@
 #import "UIDic+Safe.h"
 #import "UIImageView+WebCache.h"
 #import "NSString+CJString.h"
-@interface UCFNormalNewMarkView ()
+@interface UCFNormalNewMarkView ()<UIWebViewDelegate>
 {
     UIView *_headerView;
     NSArray *_titleArray;//segment array
@@ -63,7 +63,8 @@
     NSString *_overdueCount;	//逾期次数
     NSString *_overdueInvest;	//逾期金额
 }
-
+@property (strong ,nonatomic)   UIWebView *webView;
+@property (assign ,nonatomic)   float webViewHight;//项目详情webView高度
 @end
 
 @implementation UCFNormalNewMarkView
@@ -232,6 +233,16 @@
     }else{
         _isHideBusinessLicense =  _auditRecordArray.count == 4 ? YES :NO;
     }
+    _webView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 1)];
+    [_webView setScalesPageToFit:YES];
+    _webView.delegate  = self;
+    _webView.userInteractionEnabled = NO;
+    _webView.scrollView.showsVerticalScrollIndicator = NO;
+    _webView.scrollView.showsHorizontalScrollIndicator = NO;
+    NSString *idStr = [[_dataDic objectSafeDictionaryForKey:@"prdClaims"] objectSafeForKey:@"id"];
+    NSString *urlStr = [NSString stringWithFormat:@"https://static.9888.cn/pages/wap/bid-describe/index.html?id=%@&fromSite=%@",idStr,_isP2P ?@"1":@"2"];
+    [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlStr]]];
+    
     _twoTableview = [[UITableView alloc] initWithFrame:CGRectMake(0, ScreenHeight, ScreenWidth, ScreenHeight - 64) style:UITableViewStylePlain];
     _twoTableview.backgroundColor = [UIColor clearColor];
     //_tableView.separatorColor = UIColorWithRGB(0xeff0f3);
@@ -695,13 +706,14 @@
         {
             return 44;
         }  else if([indexPath section] == 2) {
-            NSString *str = [[_dataDic objectForKey:@"prdClaims"] objectForKey:@"remark"];
-            str = [UCFToolsMehod isNullOrNilWithString:str];
-            if ([str isEqualToString:@""]) {
-                return 0;
-            }
-            CGSize size =  [Common getStrHeightWithStr:str AndStrFont:12 AndWidth:ScreenWidth - 30 AndlineSpacing:3];
-            return  size.height + 28;
+//            NSString *str = [[_dataDic objectForKey:@"prdClaims"] objectForKey:@"remark"];
+//            str = [UCFToolsMehod isNullOrNilWithString:str];
+//            if ([str isEqualToString:@""]) {
+//                return 0;
+//            }
+//            CGSize size =  [Common getStrHeightWithStr:str AndStrFont:12 AndWidth:ScreenWidth - 30 AndlineSpacing:3];
+//            return  size.height + 28;
+            return _webViewHight;
         } else if([indexPath section] == 3 && !_isHideBorrowerInformation) {
             if ([indexPath row] == 0 || [indexPath row] == [_borrowerInfo[0] count] - 1) {
                 return 27 + 8;
@@ -955,25 +967,25 @@
                 cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellindifier];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 
-                UILabel *textLabel = [UILabel labelWithFrame:CGRectZero text:@"12个月" textColor:UIColorWithRGB(0x555555) font:[UIFont systemFontOfSize:12]];
-                textLabel.tag = 100;
-                textLabel.lineBreakMode = NSLineBreakByWordWrapping;
-                textLabel.textAlignment = NSTextAlignmentLeft;
-                [textLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
-                [cell.contentView addSubview:textLabel];
-                
-                NSDictionary *views = NSDictionaryOfVariableBindings(textLabel);
-                NSDictionary *metrics = @{@"vPadding":@1,@"hPadding":@15};
-                NSString *vfl1 = @"V:|-vPadding-[textLabel]-vPadding-|";
-                NSString *vfl2 = @"|-hPadding-[textLabel]-hPadding-|";
-                [cell.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:vfl1 options:0 metrics:metrics views:views]];
-                [cell.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:vfl2 options:0 metrics:metrics views:views]];
+//                UILabel *textLabel = [UILabel labelWithFrame:CGRectZero text:@"12个月" textColor:UIColorWithRGB(0x555555) font:[UIFont systemFontOfSize:12]];
+//                textLabel.tag = 100;
+//                textLabel.lineBreakMode = NSLineBreakByWordWrapping;
+//                textLabel.textAlignment = NSTextAlignmentLeft;
+//                [textLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
+//                [cell.contentView addSubview:textLabel];
+//
+//                NSDictionary *views = NSDictionaryOfVariableBindings(textLabel);
+//                NSDictionary *metrics = @{@"vPadding":@1,@"hPadding":@15};
+//                NSString *vfl1 = @"V:|-vPadding-[textLabel]-vPadding-|";
+//                NSString *vfl2 = @"|-hPadding-[textLabel]-hPadding-|";
+//                [cell.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:vfl1 options:0 metrics:metrics views:views]];
+//                [cell.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:vfl2 options:0 metrics:metrics views:views]];
+                [cell.contentView addSubview:_webView];
             }
-            UILabel *lbl = (UILabel*)[cell.contentView viewWithTag:100];
-            NSDictionary *dic = [Common getParagraphStyleDictWithStrFont:12.0f WithlineSpacing:3.0];
-            NSString *remarkStr = [UCFToolsMehod isNullOrNilWithString:[[_dataDic objectForKey:@"prdClaims"] objectForKey:@"remark"]];
-            lbl.attributedText = [NSString getNSAttributedString:remarkStr labelDict:dic];
-            
+//            UILabel *lbl = (UILabel*)[cell.contentView viewWithTag:100];
+//            NSDictionary *dic = [Common getParagraphStyleDictWithStrFont:12.0f WithlineSpacing:3.0];
+//            NSString *remarkStr = [UCFToolsMehod isNullOrNilWithString:[[_dataDic objectForKey:@"prdClaims"] objectForKey:@"remark"]];
+//            lbl.attributedText = [NSString getNSAttributedString:remarkStr labelDict:dic];
             return cell;
         } else if ([indexPath section] == 3  && !_isHideBorrowerInformation) { //如果不隐藏就显示该cell
             NSString *cellindifier = @"thirdSectionCell";
@@ -1079,10 +1091,11 @@
             nameLbl.text = [_auditRecordArray objectAtIndex:[indexPath row]];
             if(indexPath.row == 0)
             {
+                placehoderLabel.text = @"";
                 if (!_isHideBusinessLicense) {
                     imageView.hidden = NO;
                     renzhengLabel.text = @"已认证";
-                    placehoderLabel.text = _isP2P ?_licenseNumberStr : @"";
+//                    placehoderLabel.text = _isP2P ?_licenseNumberStr : @"";
                 }else{
                         if([[_dataDic objectForKey:@"orderUser"] objectForKey:@"joboauth"])
                         {
@@ -1095,14 +1108,14 @@
                             {
                                 imageView.hidden = NO;
                                 renzhengLabel.text = @"已认证";
-                                NSString *name = [[_dataDic objectForKey:@"orderUser"] objectForKey:@"realName"];
-                                NSString *idCardNum = [[_dataDic objectForKey:@"orderUser"] objectForKey:@"idno"];
-                                //                        idCardNum = [idCardNum stringByReplacingCharactersInRange:NSMakeRange(3, 13) withString:@"*************"];
-                                if(_isP2P){
-                                    placehoderLabel.text = [NSString stringWithFormat:@"%@ %@",name,idCardNum];
-                                }else{
-                                     placehoderLabel.text = @"";
-                                }
+//                                NSString *name = [[_dataDic objectForKey:@"orderUser"] objectForKey:@"realName"];
+//                                NSString *idCardNum = [[_dataDic objectForKey:@"orderUser"] objectForKey:@"idno"];
+//                                //                        idCardNum = [idCardNum stringByReplacingCharactersInRange:NSMakeRange(3, 13) withString:@"*************"];
+//                                if(_isP2P){
+//                                    placehoderLabel.text = [NSString stringWithFormat:@"%@ %@",name,idCardNum];
+//                                }else{
+//                                     placehoderLabel.text = @"";
+//                                }
                                
                             }
                         }
@@ -1197,7 +1210,25 @@
 //    }
     return reCell;
 }
-
+- (void)webViewDidFinishLoad:(UIWebView*)webView
+{
+    //字体大小
+    [_webView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('body')[0].style.webkitTextSizeAdjust= '100%'"];
+    //字体颜色
+    //        [webView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('body')[0].style.webkitTextFillColor= '#555555'"];
+    //页面背景色
+    [_webView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('body')[0].style.background='#FFFFF'"];
+    __weak typeof(self) weakSelf = self;
+    dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.25 * NSEC_PER_SEC));
+    dispatch_after(delayTime, dispatch_get_main_queue(), ^{
+        weakSelf.webViewHight =  weakSelf.webView.scrollView.contentSize.height;
+        weakSelf.webView.frame = CGRectMake(0,0,ScreenWidth, weakSelf.webViewHight);
+        if (weakSelf.webViewHight != 0 )
+        {
+            [_twoTableview reloadData];
+        }
+    });
+}
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
