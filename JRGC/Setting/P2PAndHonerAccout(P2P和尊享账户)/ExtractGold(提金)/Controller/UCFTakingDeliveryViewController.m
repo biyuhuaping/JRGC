@@ -66,7 +66,10 @@
 
 - (void)bottomButton:(UIButton *)button ClickedWithModel:(UCFExtractGoldModel *)extractGoldModel
 {
-    
+    NSString *userId = [UserInfoSingle sharedManager].userId;
+    NSDictionary *param = @{@"takeRecordOrderId": extractGoldModel.takeRecordOrderId, @"userId": userId};
+    [[NetworkModule sharedNetworkModule] newPostReq:param tag:ksXTagLogisticsInfo owner:self signature:YES Type:SelectAccoutTypeGold];
+
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -106,7 +109,8 @@
     UCFBaseViewController *vc = self.rootVc;
     [MBProgressHUD hideHUDForView:vc.view animated:YES];
     NSMutableDictionary *dic = [result objectFromJSONString];
-    NSString *rsttext = dic[@"statusdes"];
+    NSString *rsttext = dic[@"message"];
+    NSString *rstcode = [dic objectSafeForKey:@"code"];
     if (tag.integerValue == kSXTagExtractGoldList) {
         if ([dic[@"ret"] boolValue] == 1) {
             self.tableview.footer.hidden = NO;
@@ -141,6 +145,15 @@
         }
     }
     else if (tag.integerValue == kSXTagExtractGoldDetail) {
+        if ([dic[@"ret"] boolValue] == 1) {
+            NSDictionary *data = [dic objectSafeDictionaryForKey:@"data"];
+            UCFExtractGoldDetailController *extractGoldDetailWeb = [[UCFExtractGoldDetailController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
+            extractGoldDetailWeb.url = [data objectSafeForKey:@"url"];
+            UCFBaseViewController *baseVc = self.rootVc;
+            [baseVc.navigationController pushViewController:extractGoldDetailWeb animated:YES];
+        }
+    }
+    else if (tag.integerValue == ksXTagLogisticsInfo) {
         if ([dic[@"ret"] boolValue] == 1) {
             NSDictionary *data = [dic objectSafeDictionaryForKey:@"data"];
             UCFExtractGoldDetailController *extractGoldDetailWeb = [[UCFExtractGoldDetailController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];

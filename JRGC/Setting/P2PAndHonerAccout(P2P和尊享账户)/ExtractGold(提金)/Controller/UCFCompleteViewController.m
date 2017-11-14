@@ -100,7 +100,8 @@
     UCFBaseViewController *vc = self.rootVc;
     [MBProgressHUD hideHUDForView:vc.view animated:YES];
     NSMutableDictionary *dic = [result objectFromJSONString];
-    NSString *rsttext = dic[@"statusdes"];
+    NSString *rsttext = dic[@"message"];
+    NSString *rstcode = [dic objectSafeForKey:@"code"];
     if (tag.integerValue == kSXTagExtractGoldList) {
         if ([dic[@"ret"] boolValue] == 1) {
             self.tableview.footer.hidden = NO;
