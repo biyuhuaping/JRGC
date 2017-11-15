@@ -1125,10 +1125,11 @@
                 nameLbl.text = [_auditRecordArray objectAtIndex:[indexPath row]];
                 if(indexPath.row == 0)
                 {
+                     placehoderLabel.text = @"";
                     if (!_isHideBusinessLicense) {
                         imageView.hidden = NO;
                         renzhengLabel.text = @"已认证";
-                        placehoderLabel.text = _isP2P ?_licenseNumberStr : @"";
+//                        placehoderLabel.text = _isP2P ?_licenseNumberStr : @"";
                     }else{
                         if([[_dataDic objectForKey:@"orderUser"] objectForKey:@"joboauth"])
                         {
@@ -1141,15 +1142,15 @@
                             {
                                 imageView.hidden = NO;
                                 renzhengLabel.text = @"已认证";
-                                NSString *name = [[_dataDic objectForKey:@"orderUser"] objectForKey:@"realName"];
-                                NSString *idCardNum = [[_dataDic objectForKey:@"orderUser"] objectForKey:@"idno"];
-                                //                            idCardNum = [idCardNum stringByReplacingCharactersInRange:NSMakeRange(3, 13) withString:@"*************"];
-                                if(_isP2P){
-                                    placehoderLabel.text = [NSString stringWithFormat:@"%@ %@",name,idCardNum];
-                                }else
-                                {
-                                    placehoderLabel.text = @"";
-                                }
+//                                NSString *name = [[_dataDic objectForKey:@"orderUser"] objectForKey:@"realName"];
+//                                NSString *idCardNum = [[_dataDic objectForKey:@"orderUser"] objectForKey:@"idno"];
+//                                //                            idCardNum = [idCardNum stringByReplacingCharactersInRange:NSMakeRange(3, 13) withString:@"*************"];
+//                                if(_isP2P){
+//                                    placehoderLabel.text = [NSString stringWithFormat:@"%@ %@",name,idCardNum];
+//                                }else
+//                                {
+//                                    placehoderLabel.text = @"";
+//                                }
                                 
                             }
                         }
