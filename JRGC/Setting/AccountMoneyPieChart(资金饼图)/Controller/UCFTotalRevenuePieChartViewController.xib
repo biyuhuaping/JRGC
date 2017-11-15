@@ -57,12 +57,9 @@
                         <constraint firstAttribute="bottom" secondItem="fMU-74-YVW" secondAttribute="bottom" id="mPX-vU-6Qr"/>
                     </constraints>
                 </view>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oGr-EX-h0Z">
-                    <rect key="frame" x="0.0" y="85" width="375" height="576"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oGr-EX-h0Z">
+                    <rect key="frame" x="0.0" y="85" width="375" height="582"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="576" id="8VG-ZW-Htz"/>
-                    </constraints>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="2hA-9V-iov"/>
                         <outlet property="delegate" destination="-1" id="5bh-Xn-6Jf"/>
@@ -74,6 +71,7 @@
                 <constraint firstAttribute="trailing" secondItem="4zi-qh-ObC" secondAttribute="trailing" id="Bn0-hk-kKB"/>
                 <constraint firstItem="4zi-qh-ObC" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="EOz-YR-LyA"/>
                 <constraint firstAttribute="trailing" secondItem="oGr-EX-h0Z" secondAttribute="trailing" id="UHC-XU-WPD"/>
+                <constraint firstAttribute="bottom" secondItem="oGr-EX-h0Z" secondAttribute="bottom" id="Vn8-1Y-CNH"/>
                 <constraint firstItem="4zi-qh-ObC" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="azs-aF-fU9"/>
                 <constraint firstItem="oGr-EX-h0Z" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="emu-NW-R6e"/>
                 <constraint firstItem="oGr-EX-h0Z" firstAttribute="top" secondItem="4zi-qh-ObC" secondAttribute="bottom" id="kjE-m9-ELT"/>

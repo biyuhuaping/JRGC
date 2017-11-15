@@ -209,13 +209,13 @@
 -(void)clickGoldGoodsDetailBtn:(UCFExtractViewCell *)cell
 {
  
-//    [self clickGoldGoodsDetail];
-    NSString *webUrlStr = cell.goldModel.introductionPageUrl;
-    NSString *title = cell.goldModel.goldGoodsName;
-    DLog(@"webUrlStr--->>>>%@   %@",webUrlStr,title);
-    FullWebViewController *webView = [[FullWebViewController alloc] initWithWebUrl:webUrlStr title:title];
-    webView.baseTitleType = @"specialUser";
-    [self.navigationController pushViewController:webView animated:YES];
+    [self clickGoldGoodsDetail];
+//    NSString *webUrlStr = cell.goldModel.introductionPageUrl;
+//    NSString *title = cell.goldModel.goldGoodsName;
+//    DLog(@"webUrlStr--->>>>%@   %@",webUrlStr,title);
+//    FullWebViewController *webView = [[FullWebViewController alloc] initWithWebUrl:webUrlStr title:title];
+//    webView.baseTitleType = @"specialUser";
+//    [self.navigationController pushViewController:webView animated:YES];
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
