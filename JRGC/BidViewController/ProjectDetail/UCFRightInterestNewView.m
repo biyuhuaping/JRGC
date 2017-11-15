@@ -231,8 +231,9 @@
     
     if (_isP2P) {
         _titleArray = [[NSArray alloc] initWithObjects:@"基础详情", @"安全保障",@"出借记录", nil];
-        NSString *tradeMarkStr = [[_dataDic objectSafeDictionaryForKey:@"prdClaims"] objectSafeForKey: @"tradeMark"];
-        _isHideBorrowerInformation = [tradeMarkStr intValue] == 20 ? YES :NO;
+//        NSString *tradeMarkStr = [[_dataDic objectSafeDictionaryForKey:@"prdClaims"] objectSafeForKey: @"tradeMark"];
+//        _isHideBorrowerInformation = [tradeMarkStr intValue] == 20 ? YES :NO;
+        _isHideBorrowerInformation = ![agencyCodeStr isEqualToString:@""];
     }else{
         _isHideBorrowerInformation = YES; //如果是尊享标 则隐藏借款人信息
         _titleArray = [[NSArray alloc] initWithObjects:@"基础详情", @"安全保障",@"认购记录", nil];
