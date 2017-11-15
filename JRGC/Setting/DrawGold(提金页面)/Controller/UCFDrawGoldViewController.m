@@ -286,6 +286,7 @@
     _gotoNextButton.backgroundColor = buyedGoldGoodsAmount == 0 ? UIColorWithRGB(0xcccccc) : UIColorWithRGB(0xffc027);
     _gotoNextButton.userInteractionEnabled = buyedGoldGoodsAmount != 0;
     [self.tableView reloadData];
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:[_dataArray indexOfObject:goldGoodsModel] inSection:0] atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
 }
 #pragma mark -活期详情页面数据请求
 -(void)getGoldGoodsInfoHttpRequest
