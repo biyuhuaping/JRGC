@@ -22,7 +22,7 @@
 #import "UCFLoginFaceView.h"
 #import "CWLivessViewController.h"//---qyy0815
 #import "MD5Util.h"
-#import "UCFSession.h"
+//#import "UCFSession.h"
 #import "P2PWalletHelper.h"
 #import "UCFCompanyNoOpenViewController.h"
 @interface UCFLoginViewController ()<UCFLoginFaceViewDelegate,cwIntegrationLivessDelegate>////---qyy0815
@@ -306,7 +306,7 @@
     NSData *data = [Common createImageCode:gcm];
     AppDelegate *del = (AppDelegate *) [[UIApplication sharedApplication] delegate];
     NSDictionary *loginSuccessDic = @{@"userId":[UserInfoSingle sharedManager].userId, @"source_type":@"1",@"imei":[Common getKeychain],@"version":[Common getIOSVersion],@"signature":signatureStr,@"imageData":data,@"isSubmitAppStoreAndTestTime":@(del.isSubmitAppStoreTestTime).stringValue,@"jg_nyscclnjsygjr":[UserInfoSingle sharedManager].jg_ckie};
-    [[UCFSession sharedManager] transformBackgroundWithUserInfo:loginSuccessDic withState:UCFSessionStateUserLogin];
+//    [[UCFSession sharedManager] transformBackgroundWithUserInfo:loginSuccessDic withState:UCFSessionStateUserLogin];
 }
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {

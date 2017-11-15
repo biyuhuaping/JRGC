@@ -31,7 +31,7 @@
 #import "TradePasswordVC.h"
 #import "UCFBankDepositoryAccountViewController.h"
 #import "FullWebViewController.h"
-#import "UCFSession.h"
+//#import "UCFSession.h"
 #import "UCFWebViewJavascriptBridgeMall.h"
 #import "RiskAssessmentViewController.h"
 #import "UCFBatchInvestmentViewController.h"
@@ -200,7 +200,7 @@
             NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys:useridstr,@"userId",nil];
             [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagUserLogout owner:self signature:YES Type:SelectAccoutDefault];
             
-            [[UCFSession sharedManager] transformBackgroundWithUserInfo:nil withState:UCFSessionStateUserLogout];
+//            [[UCFSession sharedManager] transformBackgroundWithUserInfo:nil withState:UCFSessionStateUserLogout];
             [[UserInfoSingle sharedManager] removeUserInfo];
             [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"changScale"];
             [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isVisible"];

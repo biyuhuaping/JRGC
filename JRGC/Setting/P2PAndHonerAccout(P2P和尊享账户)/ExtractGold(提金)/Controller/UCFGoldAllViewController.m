@@ -12,12 +12,15 @@
 #import "UCFExtractGoldFrameModel.h"
 #import "UCFExtractGoldCell.h"
 #import "UCFExtractGoldDetailController.h"
+#import "MjAlertView.h"
+#import "UCFGoldRechargeViewController.h"
 
-@interface UCFGoldAllViewController () <UITableViewDelegate, UITableViewDataSource, UCFExtractGoldCellDelegate>
+@interface UCFGoldAllViewController () <UITableViewDelegate, UITableViewDataSource, UCFExtractGoldCellDelegate, MjAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (assign, nonatomic) NSInteger currentPage;
 @property (strong, nonatomic) UCFNoDataView *noDataView;
 @property (strong, nonatomic) NSMutableArray *dataArray;
+@property (copy, nonatomic) NSString *needAmountStr;
 @end
 
 @implementation UCFGoldAllViewController
@@ -66,7 +69,16 @@
 
 - (void)bottomButton:(UIButton *)button ClickedWithModel:(UCFExtractGoldModel *)extractGoldModel
 {
-    
+    if ([button.titleLabel.text isEqualToString:@"提交订单"]) {
+        NSString *userId = [UserInfoSingle sharedManager].userId;
+        NSDictionary *param = @{@"orderId": extractGoldModel.takeRecordOrderId, @"userId": userId};
+        [[NetworkModule sharedNetworkModule] newPostReq:param tag:kSXTagExtractSubmit owner:self signature:YES Type:SelectAccoutTypeGold];
+    }
+    else if ([button.titleLabel.text isEqualToString:@"查看物流"]) {
+        NSString *userId = [UserInfoSingle sharedManager].userId;
+        NSDictionary *param = @{@"takeRecordOrderId": extractGoldModel.takeRecordOrderId, @"userId": userId};
+        [[NetworkModule sharedNetworkModule] newPostReq:param tag:ksXTagLogisticsInfo owner:self signature:YES Type:SelectAccoutTypeGold];
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -106,7 +118,8 @@
     UCFBaseViewController *vc = self.rootVc;
     [MBProgressHUD hideHUDForView:vc.view animated:YES];
     NSMutableDictionary *dic = [result objectFromJSONString];
-    NSString *rsttext = dic[@"statusdes"];
+    NSString *rsttext = dic[@"message"];
+    NSString *rstcode = [dic objectSafeForKey:@"code"];
     if (tag.integerValue == kSXTagExtractGoldList) {
         if ([dic[@"ret"] boolValue] == 1) {
             self.tableview.footer.hidden = NO;
@@ -149,11 +162,50 @@
             [baseVc.navigationController pushViewController:extractGoldDetailWeb animated:YES];
         }
     }
+    else if (tag.integerValue == ksXTagLogisticsInfo) {
+        if ([dic[@"ret"] boolValue] == 1) {
+            NSDictionary *data = [dic objectSafeDictionaryForKey:@"data"];
+            UCFExtractGoldDetailController *extractGoldDetailWeb = [[UCFExtractGoldDetailController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
+            extractGoldDetailWeb.url = [data objectSafeForKey:@"url"];
+            UCFBaseViewController *baseVc = self.rootVc;
+            [baseVc.navigationController pushViewController:extractGoldDetailWeb animated:YES];
+        }
+    }
+    else if (tag.integerValue == kSXTagExtractSubmit) {
+        if ([dic[@"ret"] boolValue] == 1) {
+            NSDictionary *data = [dic objectSafeDictionaryForKey:@"data"];
+            UCFExtractGoldDetailController *extractGoldDetailWeb = [[UCFExtractGoldDetailController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
+            extractGoldDetailWeb.url = [data objectSafeForKey:@"url"];
+            UCFBaseViewController *baseVc = self.rootVc;
+            [baseVc.navigationController pushViewController:extractGoldDetailWeb animated:YES];
+        }
+        else {
+            if (rstcode.integerValue == -102) {
+                [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
+            }
+            else if (rstcode.integerValue == -103) {
+                self.needAmountStr = [[dic objectSafeDictionaryForKey:@"data"] objectSafeForKey:@"needAmount"];
+                MjAlertView *alertView = [[MjAlertView alloc]initDrawGoldRechangeAlertType:MjAlertViewTypeDrawGoldRechane withMessage:rsttext delegate:self];
+                [alertView show];
+            }
+        }
+    }
     if ([self.tableview.header isRefreshing]) {
         [self.tableview.header endRefreshing];
     }
     else if ([self.tableview.footer isRefreshing]) {
         [self.tableview.footer endRefreshing];
+    }
+}
+
+- (void)mjalertView:(MjAlertView *)alertview didClickedButton:(UIButton *)clickedButton andClickedIndex:(NSInteger)index
+{
+    if (index == 101) {
+        UCFGoldRechargeViewController *goldRecharge = [[UCFGoldRechargeViewController alloc] initWithNibName:@"UCFGoldRechargeViewController" bundle:nil];
+        goldRecharge.baseTitleText = @"充值";
+        goldRecharge.needToRechareStr =self.needAmountStr;
+        goldRecharge.rootVc = self;
+        [self.navigationController pushViewController:goldRecharge animated:YES];
     }
 }
 

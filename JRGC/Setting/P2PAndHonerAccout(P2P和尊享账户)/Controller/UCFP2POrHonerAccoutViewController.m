@@ -26,7 +26,7 @@
 #import "UILabel+Misc.h"
 #import "HSHelper.h"
 #import "UCFInvitationRebateViewController.h"
-#import "UCFSession.h"
+//#import "UCFSession.h"
 #import "MjAlertView.h"
 //#import "UCFCalendarViewController.h"
 #import "UCFCalendarModularViewController.h"
@@ -557,9 +557,9 @@
             NSDictionary *dataDict = [dic objectSafeDictionaryForKey:@"data"];
             if (ret)
             {
-                if(self.accoutType == SelectAccoutTypeP2P){
-                    [[UCFSession sharedManager] transformBackgroundWithUserInfo:@{} withState:UCFSessionStateUserRefresh];
-                }
+//                if(self.accoutType == SelectAccoutTypeP2P){
+//                    [[UCFSession sharedManager] transformBackgroundWithUserInfo:@{} withState:UCFSessionStateUserRefresh];
+//                }
                 _dataDict = dataDict;
                 _otherNum = [[dataDict objectSafeForKey:@"otherNum"] intValue];
                 _openState = [[dataDict objectSafeForKey:@"openState"] intValue];

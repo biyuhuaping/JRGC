@@ -325,6 +325,7 @@
 
 - (void)homeListRefreshDataWithHomelist:(UCFHomeListViewController *)homelist
 {
+    [self.cycleImageVC getNormalBannerData];
     [self fetchData];
 }
 - (void)skipToOtherPage:(UCFHomeListType)type

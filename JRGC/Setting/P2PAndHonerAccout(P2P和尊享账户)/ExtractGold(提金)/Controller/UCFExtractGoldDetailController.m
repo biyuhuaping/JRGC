@@ -39,6 +39,15 @@
     [self addRefresh];
 }
 
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    [super webViewDidFinishLoad:webView];
+    NSString *titleHtmlInfo = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+    baseTitleLabel.text = titleHtmlInfo;
+
+}
+
+
 /*
 #pragma mark - Navigation
 
