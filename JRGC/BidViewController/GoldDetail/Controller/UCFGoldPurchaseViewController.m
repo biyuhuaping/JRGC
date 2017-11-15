@@ -1190,7 +1190,7 @@
             
             self.nmPurchaseTokenStr = [resultDict objectSafeForKey:@"nmPurchaseToken"];
             self.purchaseMoneyStr = [resultDict objectSafeForKey:@"realTimePurchaseAmt"];
-            NSString *showStr = [NSString stringWithFormat:@"由于金价实时波动，成交时金价增至%.2lf元/元，是否继续购买？",self.goldPrice];
+            NSString *showStr = [NSString stringWithFormat:@"由于金价实时波动，成交时金价增至%.2lf元/克，是否继续购买？",self.goldPrice];
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:showStr delegate:self cancelButtonTitle:@"放弃购买" otherButtonTitles:@"继续购买", nil];
             alert.tag = 43068;
             [alert show]; //11114
@@ -1248,7 +1248,7 @@
             
             self.nmPurchaseTokenStr = [resultDict objectSafeForKey:@"nmPurchaseToken"];
             self.purchaseMoneyStr = [resultDict objectSafeForKey:@"realTimePurchaseAmt"];
-            NSString *showStr = [NSString stringWithFormat:@"由于金价实时波动，成交时金价增至%.2lf元/元，是否继续购买？",self.goldPrice];
+            NSString *showStr = [NSString stringWithFormat:@"由于金价实时波动，成交时金价增至%.2lf元/克，是否继续购买？",self.goldPrice];
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:showStr delegate:self cancelButtonTitle:@"放弃购买" otherButtonTitles:@"继续购买", nil];
             alert.tag = 43068;
             [alert show];

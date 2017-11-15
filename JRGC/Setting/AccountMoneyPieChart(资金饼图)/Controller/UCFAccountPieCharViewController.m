@@ -29,7 +29,7 @@
     [self addLeftButton];
 
 
-    _segmentedCtrl = [[UISegmentedControl alloc]initWithItems:@[@"总资产", @"累计收益"]];
+    _segmentedCtrl = [[UISegmentedControl alloc]initWithItems:@[@"总资产", @"总收益"]];
 
     DBLOG(@"%@",NSStringFromCGRect(self.view.frame));
     _segmentedCtrl.frame = CGRectMake(0, 0, ScreenWidth*0.5, 30);

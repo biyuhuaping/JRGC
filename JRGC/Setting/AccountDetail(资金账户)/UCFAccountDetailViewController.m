@@ -176,7 +176,7 @@
         int isSucess = [dic[@"status"] intValue];
         if (isSucess == 1) {
             NSDictionary *result = dic[@"data"];
-            NSDictionary *dict0 = @{@"name": @"累计收益", @"opened": @(YES),
+            NSDictionary *dict0 = @{@"name": @"总收益", @"opened": @(YES),
                                     @"content":result[@"interests"],
                                     @"fundlist":
         @[

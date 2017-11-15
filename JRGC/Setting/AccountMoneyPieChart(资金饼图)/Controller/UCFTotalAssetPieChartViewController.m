@@ -18,7 +18,8 @@
 
 @implementation UCFTotalAssetPieChartViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -95,13 +96,13 @@
             pieChatModel1.pieChartTitle = @"按账户类型";
             pieChatModel1.pieChartDataArray = [[NSMutableArray alloc]initWithArray:@[p2pAssets,zxAssets,goldAssets]];
 //             pieChatModel1.pieChartDataArray = [[NSMutableArray alloc]initWithArray:@[@"1000.00",@"5000.00",@"12000.00"]];
-            pieChatModel1.pieChartTitleArray = [[NSMutableArray alloc]initWithArray:@[@"微金资产",@"尊享资产",@"黄金资产"]];
+            pieChatModel1.pieChartTitleArray = [[NSMutableArray alloc]initWithArray:@[@"微金资产(元)",@"尊享资产(元)",@"黄金资产(元)"]];
             
             UCFCustomPieChartModel *pieChatModel2 = [[UCFCustomPieChartModel alloc]init];
             pieChatModel2.pieChartTitle = @"按金额类型";
             pieChatModel2.pieChartDataArray = [[NSMutableArray alloc]initWithArray:@[uncollectedPAndD,accountBalance]];
 //             pieChatModel2.pieChartDataArray = [[NSMutableArray alloc]initWithArray:@[@"6000.00",@"12000.00"]];
-            pieChatModel2.pieChartTitleArray = [[NSMutableArray alloc]initWithArray:@[@"待收本息",@"账户余额"]];
+            pieChatModel2.pieChartTitleArray = [[NSMutableArray alloc]initWithArray:@[@"待收本息(元)",@"账户余额(元)"]];
 
             self.dataArray = @[pieChatModel1,pieChatModel2];
             
