@@ -25,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet UILabel    *realtimeGoldPrice;
 @property (weak, nonatomic) IBOutlet UILabel    *dealGoldPrice;
 @property (weak, nonatomic) IBOutlet UILabel    *currentGoldTotalPrice;
+@property (weak, nonatomic) IBOutlet UILabel    *frozenGoldLabel;
 
 @property (weak, nonatomic) IBOutlet UIView *upBaseView;
 @property (weak, nonatomic) IBOutlet RotationButton *updateGoldPriceBtn;
@@ -131,6 +132,8 @@
     NSString *available = [UCFToolsMehod AddComma:goldValue];
     self.currentGoldTotalPrice.text = [NSString stringWithFormat:@"(当前市值约%@元)",available];
     NSString *availeStr = [NSString stringWithFormat:@"%@克",[dataDic objectSafeForKey:@"availableGoldAmount"]];
+    NSString *frozenGold = [NSString stringWithFormat:@"%@克", [dataDic objectSafeForKey:@"frozenGoldAmount"]];
+    self.frozenGoldLabel.text = frozenGold;
     self.availableGoldNum.text = availeStr;
     self.realtimeGoldPrice.text = [NSString stringWithFormat:@"%.2f元/克",[ToolSingleTon sharedManager].readTimePrice];
     self.totalRecoveryGold.text = [NSString stringWithFormat:@"%@克",[dataDic objectSafeForKey:@"collectGoldAmount"]];

@@ -50,6 +50,7 @@ typedef enum : NSUInteger {
 @property (nonatomic, assign) UCFHomeListCellModelType moedelType;
 @property (nonatomic, copy) NSString *backImage;
 @property (nonatomic, copy) NSString *url;
+@property (nonatomic, copy) NSString *minInvestTxt;
 
 @property (nonatomic, assign) BOOL p2pAuthorization;
 @property (nonatomic, assign) BOOL zxAuthorization;
