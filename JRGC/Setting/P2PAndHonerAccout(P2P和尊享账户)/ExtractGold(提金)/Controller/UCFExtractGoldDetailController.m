@@ -7,8 +7,8 @@
 //
 
 #import "UCFExtractGoldDetailController.h"
-
-@interface UCFExtractGoldDetailController ()
+#import "MjAlertView.h"
+@interface UCFExtractGoldDetailController ()<MjAlertViewDelegate>
 
 @end
 
@@ -38,7 +38,31 @@
     self.webView.scrollView.bounces = NO;
     [self addRefresh];
 }
-
+#pragma mark - 添加返回按钮
+- (void)getToBack
+{
+    
+    if (self.webView.canGoBack)
+    {
+        [self.webView goBack];
+    }
+    else {
+      MjAlertView *alertView = [[MjAlertView alloc]initDrawGoldRechangeAlertType:MjAlertViewTypeDrawGoldSubmitOrderCancel withMessage:@"订单信息尚未填写完成，是否放弃提交？未提交的订单将在30分钟之后自动取消。如需继续填写，请前往我的黄金-提交订单。" delegate:self];
+        [alertView show];
+    }
+}
+- (void)mjalertView:(MjAlertView *)alertview didClickedButton:(UIButton *)clickedButton andClickedIndex:(NSInteger)index;
+{
+    if (index== 100 )//返回上一页
+    {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    //继续填写
+    else if (index== 101 || index== 102)
+    {
+       
+    }
+}
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     [super webViewDidFinishLoad:webView];

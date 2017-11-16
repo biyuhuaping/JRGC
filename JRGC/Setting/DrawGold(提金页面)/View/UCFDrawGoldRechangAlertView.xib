@@ -90,7 +90,7 @@
                         <constraint firstAttribute="trailing" secondItem="Abc-Cf-4Xw" secondAttribute="trailing" id="ECw-fZ-PCs"/>
                         <constraint firstAttribute="trailing" secondItem="4OH-34-2Br" secondAttribute="trailing" constant="15" id="ERm-hh-ZPA"/>
                         <constraint firstItem="OCn-BR-rhJ" firstAttribute="top" secondItem="4OH-34-2Br" secondAttribute="bottom" constant="15" id="NjL-Rs-0xe"/>
-                        <constraint firstAttribute="height" constant="146" id="P3C-sR-7gA"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="146" id="P3C-sR-7gA"/>
                         <constraint firstItem="YHc-Qp-Pdj" firstAttribute="top" secondItem="4OH-34-2Br" secondAttribute="bottom" constant="15" id="Q22-ZJ-T6L"/>
                         <constraint firstItem="4OH-34-2Br" firstAttribute="top" secondItem="Abc-Cf-4Xw" secondAttribute="bottom" constant="10" id="Ueg-oY-z96"/>
                         <constraint firstItem="4OH-34-2Br" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="W20-cg-QoS"/>
@@ -146,7 +146,7 @@
                     <real key="value" value="5"/>
                 </userDefinedRuntimeAttribute>
             </userDefinedRuntimeAttributes>
-            <point key="canvasLocation" x="-301" y="-35"/>
+            <point key="canvasLocation" x="-480" y="-31"/>
         </view>
     </objects>
     <resources>
