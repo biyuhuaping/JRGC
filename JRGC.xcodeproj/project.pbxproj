@@ -850,12 +850,14 @@
 		A860F2611F5E3EFE0017495F /* UCFGoldMyRebateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A860F25F1F5E3EFE0017495F /* UCFGoldMyRebateViewController.xib */; };
 		A860F2651F5E7DA10017495F /* UCFGoldRebateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A860F2631F5E7DA10017495F /* UCFGoldRebateCell.m */; };
 		A860F2661F5E7DA10017495F /* UCFGoldRebateCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A860F2641F5E7DA10017495F /* UCFGoldRebateCell.xib */; };
+		A86F80EE1FBC3A7D0029FC1A /* ServiceChargeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A86F80ED1FBC3A7D0029FC1A /* ServiceChargeView.xib */; };
 		A86FC5791F6A2A7200A18182 /* AD_View.xib in Resources */ = {isa = PBXBuildFile; fileRef = A86FC5781F6A2A7200A18182 /* AD_View.xib */; };
 		A88490491FA72353004B6E71 /* guideImage8_4.png in Resources */ = {isa = PBXBuildFile; fileRef = A88490451FA72352004B6E71 /* guideImage8_4.png */; };
 		A884904A1FA72353004B6E71 /* guideImage8_1.png in Resources */ = {isa = PBXBuildFile; fileRef = A88490461FA72352004B6E71 /* guideImage8_1.png */; };
 		A884904D1FA72442004B6E71 /* login_bg_iphoneX.png in Resources */ = {isa = PBXBuildFile; fileRef = A884904C1FA72442004B6E71 /* login_bg_iphoneX.png */; };
 		A88490501FA72586004B6E71 /* guideImage8_3.png in Resources */ = {isa = PBXBuildFile; fileRef = A884904E1FA72585004B6E71 /* guideImage8_3.png */; };
 		A88490511FA72586004B6E71 /* guideImage8_2.png in Resources */ = {isa = PBXBuildFile; fileRef = A884904F1FA72586004B6E71 /* guideImage8_2.png */; };
+		A8898DC41FBD32500064494B /* ServiceChargeView1.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8898DC31FBD32500064494B /* ServiceChargeView1.xib */; };
 		A8A3A57F1EE95BDA00D9C06D /* UCFInvestAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A8A3A57E1EE95BDA00D9C06D /* UCFInvestAPIManager.m */; };
 		A8AD2E3E1EB979760013DB7C /* MongoliaLayerCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = A8AD2E3D1EB979760013DB7C /* MongoliaLayerCenter.m */; };
 		A8AD6F851EFA6BDE000AF323 /* PagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = A8AD6F841EFA6BDE000AF323 /* PagerView.m */; };
@@ -2465,12 +2467,14 @@
 		A860F2621F5E7DA10017495F /* UCFGoldRebateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFGoldRebateCell.h; sourceTree = "<group>"; };
 		A860F2631F5E7DA10017495F /* UCFGoldRebateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFGoldRebateCell.m; sourceTree = "<group>"; };
 		A860F2641F5E7DA10017495F /* UCFGoldRebateCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFGoldRebateCell.xib; sourceTree = "<group>"; };
+		A86F80ED1FBC3A7D0029FC1A /* ServiceChargeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ServiceChargeView.xib; sourceTree = "<group>"; };
 		A86FC5781F6A2A7200A18182 /* AD_View.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AD_View.xib; sourceTree = "<group>"; };
 		A88490451FA72352004B6E71 /* guideImage8_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guideImage8_4.png; sourceTree = "<group>"; };
 		A88490461FA72352004B6E71 /* guideImage8_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guideImage8_1.png; sourceTree = "<group>"; };
 		A884904C1FA72442004B6E71 /* login_bg_iphoneX.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = login_bg_iphoneX.png; path = Images/login_bg_iphoneX.png; sourceTree = "<group>"; };
 		A884904E1FA72585004B6E71 /* guideImage8_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guideImage8_3.png; sourceTree = "<group>"; };
 		A884904F1FA72586004B6E71 /* guideImage8_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guideImage8_2.png; sourceTree = "<group>"; };
+		A8898DC31FBD32500064494B /* ServiceChargeView1.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ServiceChargeView1.xib; sourceTree = "<group>"; };
 		A8A3A57D1EE95BDA00D9C06D /* UCFInvestAPIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFInvestAPIManager.h; sourceTree = "<group>"; };
 		A8A3A57E1EE95BDA00D9C06D /* UCFInvestAPIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFInvestAPIManager.m; sourceTree = "<group>"; };
 		A8AD2E3C1EB979760013DB7C /* MongoliaLayerCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MongoliaLayerCenter.h; sourceTree = "<group>"; };
@@ -5894,6 +5898,8 @@
 				A851F34B1F132D2C003DE8B8 /* UCFGoldTransCell.h */,
 				A851F34C1F132D2C003DE8B8 /* UCFGoldTransCell.m */,
 				A851F34D1F132D2C003DE8B8 /* UCFGoldTransCell.xib */,
+				A86F80ED1FBC3A7D0029FC1A /* ServiceChargeView.xib */,
+				A8898DC31FBD32500064494B /* ServiceChargeView1.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -7103,6 +7109,7 @@
 				7443C73D1F1F3E7D009669C0 /* UCFGoldCashRecordCell.xib in Resources */,
 				FBEDF1E01CB5171500116E12 /* MyViewController.xib in Resources */,
 				A851F34A1F132739003DE8B8 /* UCFGoldTransactionHeadView.xib in Resources */,
+				A8898DC41FBD32500064494B /* ServiceChargeView1.xib in Resources */,
 				840A794B1C2A80B60059A946 /* UCFMessageSettingViewController.xib in Resources */,
 				83C3E7E31F346188007BE065 /* UCFGoldCouponViewController.xib in Resources */,
 				A860F2661F5E7DA10017495F /* UCFGoldRebateCell.xib in Resources */,
@@ -7176,6 +7183,7 @@
 				FB21731A1AF20DFC00649AA0 /* UCFBackMoneyCell.xib in Resources */,
 				25950EC11D7FB6EC00E4CCBA /* CWLivessViewController.xib in Resources */,
 				83F4DAF61D9561EC00A0632E /* UCFPrdTransferBIdWebView.xib in Resources */,
+				A86F80EE1FBC3A7D0029FC1A /* ServiceChargeView.xib in Resources */,
 				4A1DA7D11BF9FEB30003E446 /* BeansFamilyStoryboard.storyboard in Resources */,
 				835B88861E8220CC00C8F0AB /* UCFP2POrHonerAccoutViewController.xib in Resources */,
 				744EB8031EE80401003C57C4 /* UCFHonorHeaderView.xib in Resources */,

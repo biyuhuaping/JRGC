@@ -25,7 +25,7 @@
     // Initialization code
     self.bottomLine.backgroundColor = UIColorWithRGB(0xe3e5ea);
     self.dealType.textColor = UIColorWithRGB(0x555555);
-    self.trailToEndSpace.constant = ScreenWidth/320.0f * 140.f;
+//    self.trailToEndSpace.constant = ScreenWidth/320.0f * 140.f;
 }
 - (void)layoutSubviews
 {
@@ -45,7 +45,7 @@
         
     }
     self.dealType.text = _model.tradeTypeName;
-    self.dealMoney.hidden = NO;
+    self.dealMoney.hidden = YES;
     if ([_model.tradeTypeCode isEqualToString:@"99"]) { //买金
         self.turnoverLab.textColor = UIColorWithRGB(0xfd4d4c);
         self.dealMoney.textColor = UIColorWithRGB(0xfd4d4c);
@@ -61,7 +61,7 @@
     } else if ([_model.tradeTypeCode isEqualToString:@"111"]) {//收益克重
         self.turnoverLab.textColor = UIColorWithRGB(0xfd4d4c);
         self.dealMoney.textColor = UIColorWithRGB(0xfd4d4c);
-        self.dealMoney.hidden = YES;
+//        self.dealMoney.hidden = YES;
     }
 
     self.dealMoney.text = [NSString stringWithFormat:@"%@",_model.tradeMoney];

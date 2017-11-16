@@ -83,10 +83,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    UCFExtractGoldFrameModel *frameModel = [self.dataArray objectAtIndex:indexPath.row];
     NSString *userId = [UserInfoSingle sharedManager].userId;
-    NSDictionary *param = @{@"takeRecordOrderId": frameModel.item.takeRecordOrderId, @"userId": userId};
-    [[NetworkModule sharedNetworkModule] newPostReq:param tag:kSXTagExtractGoldDetail owner:self signature:YES Type:SelectAccoutTypeGold];
+    UCFExtractGoldFrameModel *frameModel = [self.dataArray objectAtIndex:indexPath.row];
+    NSDictionary *param = @{@"orderId": frameModel.item.takeRecordOrderId, @"userId": userId};
+    [[NetworkModule sharedNetworkModule] newPostReq:param tag:kSXTagExtractSubmit owner:self signature:YES Type:SelectAccoutTypeGold];
 }
 
 - (void)getExtractGoldListHandingInFromNet
