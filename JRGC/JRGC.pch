@@ -185,6 +185,8 @@ return shared##className; \
 #define RELOADP2PORHONERACCOTDATA  @"ReloadP2POrHonerAccoutData" //刷新p2p或尊享账户数据
 #define Reload_Gold_Purchase_Data  @"ReloadGoldPucrchaseData" //刷新黄金购买投资页面数据
 
+#define LastActivityTpyeName @"LastActivityTpyeName" //首页弹框活动的名称标识
+
 #define BBSURL          @"https://bbs.9888.cn/appaction.php"
 #define MALLURL         @"https://m.dougemall.com"
 #define GRADELURL       @"https://m.9888.cn/static/wap/user-evaluate-zx/index.html" //尊享评估

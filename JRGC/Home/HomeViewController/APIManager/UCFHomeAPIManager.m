@@ -202,6 +202,12 @@
             NSMutableDictionary *tempResult = [[NSMutableDictionary alloc] init];
             NSMutableArray *tempArray = [[NSMutableArray alloc] init];
             NSDictionary *resultDict = [dic objectSafeDictionaryForKey:@"data"];
+            NSArray *picADArray = [resultDict objectSafeArrayForKey:@"picAD"];
+            NSString *activityTypeStr  = [[picADArray firstObject] objectSafeForKey:@"activityType"];
+            [MongoliaLayerCenter sharedManager].activityType = activityTypeStr;
+            BOOL  switchFlag =  [[[picADArray firstObject] objectSafeForKey:@"switchFlag"] boolValue];
+            [MongoliaLayerCenter sharedManager].switchFlag = switchFlag;
+            
 //            if ([[resultDict objectSafeForKey:@"picAD"] count] > 0) {
 //                NSDictionary *adDic = [[resultDict objectSafeForKey:@"picAD"] objectAtIndex:0];
 //                if (adDic) {
