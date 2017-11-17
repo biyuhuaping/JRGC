@@ -37,6 +37,7 @@
     [self gotoURL:self.url];
     self.webView.scrollView.bounces = NO;
     [self addRefresh];
+    
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
@@ -44,18 +45,29 @@
     [super webViewDidFinishLoad:webView];
     NSString *titleHtmlInfo = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
     baseTitleLabel.text = titleHtmlInfo;
-
 }
 
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    NSString *requestString = [[[request URL]  absoluteString] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding ];
+    if ([requestString isEqualToString:@"firstp2p://api?type=closeallpage"]) {
+        UCFBaseViewController *baseVc = self.rootVc;
+        UCFBaseViewController *desVc = baseVc.rootVc;
+        [self.navigationController popToViewController:desVc animated:YES];
+        return NO;
+    }
+    else if ([requestString isEqualToString:@"firstp2p://api?method=updatebacktype&param=3"]) {
+        [self hideLeftButton];
+        return NO;
+    }
+    return YES;
 }
-*/
+
+- (void)getToBack
+{
+    if ([baseTitleLabel.text isEqualToString:@"提金订单"]) {
+        
+    }
+}
 
 @end
