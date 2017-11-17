@@ -29,6 +29,8 @@
     [super viewDidLoad];
     
     self.tableview.backgroundColor = UIColorWithRGB(0xebebee);
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getExtractGoldListAllFromNet) name:UPDATE_EXTRACTGOLD_LIST object:nil];
     //=========  下拉刷新、上拉加载更多  =========
     __weak typeof(self) weakSelf = self;
     
@@ -212,5 +214,10 @@
         _dataArray = [[NSMutableArray alloc] init];
     }
     return _dataArray;
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 @end

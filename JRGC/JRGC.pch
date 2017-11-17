@@ -175,6 +175,7 @@ return shared##className; \
 #define IS_RELOADE_REQUEST @"isReloadRequest"  //是否重新加载因验签失效造成失败的接口
 #define CHECK_COUPON_CENTER @"conponCenterMsg"
 #define UPDATE_GOLD_ACCOUNT @"updateGoldAccount"
+#define UPDATE_EXTRACTGOLD_LIST @"updateExtractGoldList"
 // 每天首次弹出邀请返利开关
 #define FirstAlertViewShowTime     @"InviteFriendsEveryday"
 // 新手政策开关（0：关，1：开）

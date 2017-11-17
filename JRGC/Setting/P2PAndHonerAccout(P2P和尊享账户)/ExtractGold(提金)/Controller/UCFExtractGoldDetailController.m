@@ -81,8 +81,14 @@
     NSString *requestString = [[[request URL]  absoluteString] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding ];
     if ([requestString isEqualToString:@"firstp2p://api?type=closeallpage"]) {
         UCFBaseViewController *baseVc = self.rootVc;
-        UCFBaseViewController *desVc = baseVc.rootVc;
-        [self.navigationController popToViewController:desVc animated:YES];
+        if ([NSStringFromClass([baseVc class])isEqualToString:@"UCFDrawGoldViewController"]) {
+            [self.navigationController popToViewController:baseVc.rootVc animated:YES];
+            [[NSNotificationCenter defaultCenter] postNotificationName:UPDATE_GOLD_ACCOUNT object:nil];
+        }
+        else {
+            [self.navigationController popToViewController:baseVc animated:YES];
+            [[NSNotificationCenter defaultCenter] postNotificationName:UPDATE_EXTRACTGOLD_LIST object:nil];
+        }
         return NO;
     }
     else if ([requestString isEqualToString:@"firstp2p://api?method=updatebacktype&param=3"]) {
