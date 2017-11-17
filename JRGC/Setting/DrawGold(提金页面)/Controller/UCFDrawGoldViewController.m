@@ -344,6 +344,7 @@
                 NSString *urlStr = [dataDict objectSafeForKey:@"url"];
                 UCFExtractGoldDetailController *extractGoldDetailWeb = [[UCFExtractGoldDetailController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
                 extractGoldDetailWeb.url = urlStr;
+                extractGoldDetailWeb.rootVc = self;
                 [self.navigationController pushViewController:extractGoldDetailWeb animated:YES];
             }
             else{
