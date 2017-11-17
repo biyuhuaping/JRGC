@@ -22,7 +22,8 @@ typedef enum : NSUInteger {
     MjGoldAlertViewTypeFloat, //浮动盈亏
     MjGoldAlertViewTypeAverage, //买入均价
     MjAlertViewTypeGift,
-    MjAlertViewTypeDrawGoldRechane//提金时余额不足时弹框
+    MjAlertViewTypeDrawGoldRechane,//提金时余额不足时弹框
+    MjAlertViewTypeDrawGoldSubmitOrderCancel,//提金订单取消时
 } MjAlertViewType;
 
 

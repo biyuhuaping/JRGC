@@ -494,15 +494,27 @@
         
         UILabel *titleLab = [baseView viewWithTag:98];
         UILabel *msgLab = [baseView viewWithTag:99];
+        UIButton *closeBtn1 = [baseView viewWithTag:100];
+        UIButton *closeBtn2 = [baseView viewWithTag:102];
+        
+        UIButton *rechangeBtn = [baseView viewWithTag:101];
         if (type == MjGoldAlertViewTypeFloat)
         {
             titleLab.text = @"余额不足";
             msgLab.text = message;
+            [closeBtn1 setTitle:@"返回" forState:UIControlStateNormal];
+            [rechangeBtn setTitle:@"继续填写" forState:UIControlStateNormal];
         }
-        UIButton *closeBtn1 = [baseView viewWithTag:100];
-        UIButton *closeBtn2 = [baseView viewWithTag:102];
-
-        UIButton *rechangeBtn = [baseView viewWithTag:101];
+        else if (type == MjAlertViewTypeDrawGoldSubmitOrderCancel)
+        {
+            titleLab.text = @"订单未提交";
+            msgLab.text = message;
+            [closeBtn1 setTitle:@"返回" forState:UIControlStateNormal];
+            [rechangeBtn setTitle:@"继续填写" forState:UIControlStateNormal];
+            baseView.frame = CGRectMake(0, 0, 265, 215);
+            [self.showView  setFrame:CGRectMake((ScreenWidth - 265)/2.0f, (ScreenHeight - 255)/2.0f, 265, 255)];
+        }
+       
         [closeBtn1 addTarget:self action:@selector(closeBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
         [closeBtn2 addTarget:self action:@selector(closeBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
         [rechangeBtn addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];
