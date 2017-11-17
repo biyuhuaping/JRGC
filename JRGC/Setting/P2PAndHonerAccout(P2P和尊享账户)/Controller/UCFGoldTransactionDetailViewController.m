@@ -26,13 +26,13 @@
     [super viewDidLoad];
     [self addLeftButton];
     baseTitleLabel.text = @"交易详情";
+    self.baseView.width = ScreenWidth;
     [self initNewUI];
 
 }
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
@@ -44,6 +44,7 @@
     [super viewDidAppear:animated];
     self.section_view1.frame = CGRectMake(0, 136, ScreenWidth, 93);
     self.section_view2.frame = CGRectMake(0, CGRectGetMaxY(_section_view1.frame), ScreenWidth, 93);
+    
 }
 - (void)initNewUI
 {
@@ -241,9 +242,7 @@
     [attrString addAttribute:NSFontAttributeName value:font range:[totalStr rangeOfString:needText]];
     return attrString;
 }
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
+
 
 /*
 #pragma mark - Navigation
