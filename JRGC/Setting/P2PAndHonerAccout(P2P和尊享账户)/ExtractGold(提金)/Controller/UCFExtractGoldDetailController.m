@@ -48,8 +48,13 @@
         [self.webView goBack];
     }
     else {
-      MjAlertView *alertView = [[MjAlertView alloc]initDrawGoldRechangeAlertType:MjAlertViewTypeDrawGoldSubmitOrderCancel withMessage:@"订单信息尚未填写完成，是否放弃提交？未提交的订单将在30分钟之后自动取消。如需继续填写，请前往我的黄金-提交订单。" delegate:self];
-        [alertView show];
+        if ([baseTitleLabel.text isEqualToString:@"提交订单"]) {
+            MjAlertView *alertView = [[MjAlertView alloc]initDrawGoldRechangeAlertType:MjAlertViewTypeDrawGoldSubmitOrderCancel withMessage:@"订单信息尚未填写完成，是否放弃提交？未提交的订单将在30分钟之后自动取消。如需继续填写，请前往我的黄金-提交订单。" delegate:self];
+            [alertView show];
+        }
+        else {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
     }
 }
 - (void)mjalertView:(MjAlertView *)alertview didClickedButton:(UIButton *)clickedButton andClickedIndex:(NSInteger)index;
@@ -87,11 +92,5 @@
     return YES;
 }
 
-- (void)getToBack
-{
-    if ([baseTitleLabel.text isEqualToString:@"提金订单"]) {
-        
-    }
-}
 
 @end
