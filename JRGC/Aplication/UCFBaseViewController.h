@@ -52,6 +52,6 @@
 -(void)getToBack;
 
 //- (void)clickRightBtn;
-
+- (void)hideLeftButton;
 @end
 

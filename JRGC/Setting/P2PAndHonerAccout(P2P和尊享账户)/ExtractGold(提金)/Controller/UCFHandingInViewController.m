@@ -160,6 +160,7 @@
             NSDictionary *data = [dic objectSafeDictionaryForKey:@"data"];
             UCFExtractGoldDetailController *extractGoldDetailWeb = [[UCFExtractGoldDetailController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
             extractGoldDetailWeb.url = [data objectSafeForKey:@"url"];
+            extractGoldDetailWeb.rootVc = self.rootVc;
             UCFBaseViewController *baseVc = self.rootVc;
             [baseVc.navigationController pushViewController:extractGoldDetailWeb animated:YES];
         }

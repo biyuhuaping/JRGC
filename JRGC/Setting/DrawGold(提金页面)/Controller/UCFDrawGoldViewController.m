@@ -426,7 +426,7 @@
     {
         UCFGoldRechargeViewController *goldRecharge = [[UCFGoldRechargeViewController alloc] initWithNibName:@"UCFGoldRechargeViewController" bundle:nil];
         goldRecharge.baseTitleText = @"充值";
-        goldRecharge.needToRechareStr =self.needAmountStr;
+        goldRecharge.needToRechareStr = [NSString stringWithFormat:@"%@", self.needAmountStr];
         goldRecharge.rootVc = self;
         [self.navigationController pushViewController:goldRecharge animated:YES];
     }

@@ -215,6 +215,7 @@
         [self gotoGoldInvestInfoVC];
     } else if ([model.leftTitle isEqualToString:@"提金订单"]) {
         UCFExtractGoldViewController *vc1 = [[UCFExtractGoldViewController alloc] initWithNibName:@"UCFExtractGoldViewController" bundle:nil];
+        vc1.rootVc = self;
         [self.navigationController pushViewController:vc1 animated:YES];
     } else if ([model.leftTitle isEqualToString:@"邀请返利"]) {
         UCFFeedBackViewController *feedBackVC = [[UCFFeedBackViewController alloc]initWithNibName:@"UCFFeedBackViewController" bundle:nil];
