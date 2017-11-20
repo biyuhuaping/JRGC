@@ -15,6 +15,7 @@
 #import "HSHelper.h"
 #import "FestivalActivitiesWebView.h"
 #import "FullWebViewController.h"
+#import "UCFWebViewJavascriptBridgeMallDetails.h"
 @interface MongoliaLayerCenter ()<MaskViewDelegate>
 {
     NSInteger num;
@@ -49,6 +50,35 @@
 
 - (void)showLogic
 {
+    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    UINavigationController *nav = app.tabBarController.selectedViewController;
+    if (app.advertisementView || [self isCurrentViewControllerVisible:app.lockVc] || ![nav.visibleViewController isKindOfClass:[UCFHomeViewController class]]) {
+        return;
+    }
+    
+    //下面是需要登录后查看的
+    if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
+        return;
+    }
+    
+    NSString * lastActivityTpyeName = [[NSUserDefaults standardUserDefaults] objectForKey:LastActivityTpyeName]; 
+    
+    if (![self.activityType isEqualToString:lastActivityTpyeName] && !self.switchFlag) {
+        //通知弹窗显示新手政策
+        
+        [[NSUserDefaults standardUserDefaults] setObject:self.activityType forKey:LastActivityTpyeName];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        [self.tableView setContentOffset:CGPointMake(0, 0)];
+        MjAlertView *alertView = [[MjAlertView alloc] initADViewAlertWithDelegate:self];
+        alertView.tag = 2001;
+        [alertView show];
+        return;
+    }
+    
+    
+    
+    
+    
  /*
     AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     UINavigationController *nav = app.tabBarController.selectedViewController;
@@ -94,6 +124,8 @@
     }
     
    */
+    
+    
 }
 - (void)viewWillRemove:(MaskView *)view
 {
@@ -120,6 +152,21 @@
             [helper pushP2POrWJAuthorizationType:SelectAccoutTypeHoner nav:nav];
         } else {
             [helper pushOpenHSType:SelectAccoutTypeHoner Step:[UserInfoSingle sharedManager].enjoyOpenStatus nav:nav];
+        }
+    }
+}
+- (void)mjalertView:(MjAlertView *)alertview withObject:(NSDictionary *)dic
+{
+    if (alertview.tag == 2001) {
+        AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        UINavigationController *nav = app.tabBarController.selectedViewController;
+        NSString *url = dic[@"url"];
+        if (url.length > 0) {
+            UCFWebViewJavascriptBridgeMallDetails *web = [[UCFWebViewJavascriptBridgeMallDetails alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMallDetails" bundle:nil];
+            web.url = dic[@"url"];
+            web.navTitle = dic[@"title"];
+            web.isHidenNavigationbar = YES;
+            [nav pushViewController:web animated:YES];
         }
     }
 }

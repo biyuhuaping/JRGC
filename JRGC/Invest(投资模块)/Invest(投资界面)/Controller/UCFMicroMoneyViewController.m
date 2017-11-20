@@ -335,6 +335,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     UCFMicroMoneyGroup *group = [self.dataArray objectAtIndex:indexPath.section];
     UCFMicroMoneyModel *model = [group.prdlist objectAtIndex:indexPath.row];
     

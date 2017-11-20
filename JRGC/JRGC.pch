@@ -175,6 +175,7 @@ return shared##className; \
 #define IS_RELOADE_REQUEST @"isReloadRequest"  //是否重新加载因验签失效造成失败的接口
 #define CHECK_COUPON_CENTER @"conponCenterMsg"
 #define UPDATE_GOLD_ACCOUNT @"updateGoldAccount"
+#define UPDATE_EXTRACTGOLD_LIST @"updateExtractGoldList"
 // 每天首次弹出邀请返利开关
 #define FirstAlertViewShowTime     @"InviteFriendsEveryday"
 // 新手政策开关（0：关，1：开）
@@ -183,6 +184,8 @@ return shared##className; \
 
 #define RELOADP2PORHONERACCOTDATA  @"ReloadP2POrHonerAccoutData" //刷新p2p或尊享账户数据
 #define Reload_Gold_Purchase_Data  @"ReloadGoldPucrchaseData" //刷新黄金购买投资页面数据
+
+#define LastActivityTpyeName @"LastActivityTpyeName" //首页弹框活动的名称标识
 
 #define BBSURL          @"https://bbs.9888.cn/appaction.php"
 #define MALLURL         @"https://m.dougemall.com"

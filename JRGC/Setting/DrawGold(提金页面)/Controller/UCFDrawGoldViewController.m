@@ -45,7 +45,7 @@
 {
     [super viewDidLoad];
     [self addLeftButton];
-    baseTitleLabel.text = @"提金";
+    baseTitleLabel.text = @"提取实物黄金";
 //    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedCancel)];
 //     tapGesture.delegate = self;
 //    [self.tableView addGestureRecognizer:tapGesture];
@@ -208,14 +208,11 @@
 }
 -(void)clickGoldGoodsDetailBtn:(UCFExtractViewCell *)cell
 {
- 
-    [self clickGoldGoodsDetail];
-//    NSString *webUrlStr = cell.goldModel.introductionPageUrl;
-//    NSString *title = cell.goldModel.goldGoodsName;
-//    DLog(@"webUrlStr--->>>>%@   %@",webUrlStr,title);
-//    FullWebViewController *webView = [[FullWebViewController alloc] initWithWebUrl:webUrlStr title:title];
-//    webView.baseTitleType = @"specialUser";
-//    [self.navigationController pushViewController:webView animated:YES];
+    NSString *webUrlStr = [NSString stringWithFormat:@"%@",cell.goldModel.introductionPageUrl];
+    NSString *title = cell.goldModel.goldGoodsName;
+    FullWebViewController *webView = [[FullWebViewController alloc] initWithWebUrl:webUrlStr title:title];
+        webView.baseTitleType = @"specialUser";
+    [self.navigationController pushViewController:webView animated:YES];
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -225,17 +222,6 @@
         webView.baseTitleType = @"specialUser";
     [self.navigationController pushViewController:webView animated:YES];
     
-}
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
-{
-    // 输出点击的view的类名
-    NSLog(@"%@", NSStringFromClass([touch.view class]));
-    
-    // 若为UITableViewCellContentView（即点击了tableViewCell），则不截获Touch事件
-    if ([NSStringFromClass([touch.view class]) isEqualToString:@"UITableViewCellContentView"]) {
-        return NO;
-    }
-    return  YES;
 }
 - (void)clickSubtractBtnCell:(UCFExtractViewCell *)cell withgoldModel:(UCFDrawGoldModel *)goldModel;
 {
@@ -286,6 +272,7 @@
     _gotoNextButton.backgroundColor = buyedGoldGoodsAmount == 0 ? UIColorWithRGB(0xcccccc) : UIColorWithRGB(0xffc027);
     _gotoNextButton.userInteractionEnabled = buyedGoldGoodsAmount != 0;
     [self.tableView reloadData];
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:[_dataArray indexOfObject:goldGoodsModel] inSection:0] atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
 }
 #pragma mark -活期详情页面数据请求
 -(void)getGoldGoodsInfoHttpRequest
@@ -357,6 +344,7 @@
                 NSString *urlStr = [dataDict objectSafeForKey:@"url"];
                 UCFExtractGoldDetailController *extractGoldDetailWeb = [[UCFExtractGoldDetailController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
                 extractGoldDetailWeb.url = urlStr;
+                extractGoldDetailWeb.rootVc = self;
                 [self.navigationController pushViewController:extractGoldDetailWeb animated:YES];
             }
             else{
@@ -439,7 +427,7 @@
     {
         UCFGoldRechargeViewController *goldRecharge = [[UCFGoldRechargeViewController alloc] initWithNibName:@"UCFGoldRechargeViewController" bundle:nil];
         goldRecharge.baseTitleText = @"充值";
-        goldRecharge.needToRechareStr =self.needAmountStr;
+        goldRecharge.needToRechareStr = [NSString stringWithFormat:@"%@", self.needAmountStr];
         goldRecharge.rootVc = self;
         [self.navigationController pushViewController:goldRecharge animated:YES];
     }

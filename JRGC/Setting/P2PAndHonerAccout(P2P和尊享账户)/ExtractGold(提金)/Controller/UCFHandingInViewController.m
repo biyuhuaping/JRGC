@@ -29,6 +29,8 @@
     [super viewDidLoad];
     
     self.tableview.backgroundColor = UIColorWithRGB(0xebebee);
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getExtractGoldListAllFromNet) name:UPDATE_EXTRACTGOLD_LIST object:nil];
     //=========  下拉刷新、上拉加载更多  =========
     __weak typeof(self) weakSelf = self;
     
@@ -160,6 +162,7 @@
             NSDictionary *data = [dic objectSafeDictionaryForKey:@"data"];
             UCFExtractGoldDetailController *extractGoldDetailWeb = [[UCFExtractGoldDetailController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
             extractGoldDetailWeb.url = [data objectSafeForKey:@"url"];
+            extractGoldDetailWeb.rootVc = self.rootVc;
             UCFBaseViewController *baseVc = self.rootVc;
             [baseVc.navigationController pushViewController:extractGoldDetailWeb animated:YES];
         }
@@ -211,5 +214,10 @@
         _dataArray = [[NSMutableArray alloc] init];
     }
     return _dataArray;
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 @end

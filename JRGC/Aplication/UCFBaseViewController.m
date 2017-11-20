@@ -99,6 +99,14 @@
     self.navigationItem.leftBarButtonItem = leftItem;
 }
 
+- (void)hideLeftButton
+{
+    self.navigationItem.leftBarButtonItem = nil;
+    [self.navigationController.navigationItem setHidesBackButton:YES];
+    [self.navigationItem setHidesBackButton:YES];
+    [self.navigationController.navigationBar.backItem setHidesBackButton:YES];
+}
+
 - (void)addLeftButtons
 {
     UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];

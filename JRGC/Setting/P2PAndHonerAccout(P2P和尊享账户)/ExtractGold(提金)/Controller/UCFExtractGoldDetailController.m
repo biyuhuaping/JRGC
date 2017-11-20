@@ -7,8 +7,8 @@
 //
 
 #import "UCFExtractGoldDetailController.h"
-
-@interface UCFExtractGoldDetailController ()
+#import "MjAlertView.h"
+@interface UCFExtractGoldDetailController ()<MjAlertViewDelegate>
 
 @end
 
@@ -37,25 +37,66 @@
     [self gotoURL:self.url];
     self.webView.scrollView.bounces = NO;
     [self addRefresh];
+    
 }
-
+#pragma mark - 添加返回按钮
+- (void)getToBack
+{
+    
+    if (self.webView.canGoBack)
+    {
+        [self.webView goBack];
+    }
+    else {
+        if ([baseTitleLabel.text isEqualToString:@"提交订单"]) {
+            MjAlertView *alertView = [[MjAlertView alloc]initDrawGoldRechangeAlertType:MjAlertViewTypeDrawGoldSubmitOrderCancel withMessage:@"订单信息尚未填写完成，是否放弃提交？未提交的订单将在30分钟之后自动取消。如需继续填写，请前往我的黄金-提交订单。" delegate:self];
+            [alertView show];
+        }
+        else {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    }
+}
+- (void)mjalertView:(MjAlertView *)alertview didClickedButton:(UIButton *)clickedButton andClickedIndex:(NSInteger)index;
+{
+    if (index== 100 )//返回上一页
+    {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    //继续填写
+    else if (index== 101 || index== 102)
+    {
+       
+    }
+}
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     [super webViewDidFinishLoad:webView];
     NSString *titleHtmlInfo = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
     baseTitleLabel.text = titleHtmlInfo;
-
 }
 
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    NSString *requestString = [[[request URL]  absoluteString] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding ];
+    if ([requestString isEqualToString:@"firstp2p://api?type=closeallpage"]) {
+        UCFBaseViewController *baseVc = self.rootVc;
+        if ([NSStringFromClass([baseVc class])isEqualToString:@"UCFDrawGoldViewController"]) {
+            [self.navigationController popToViewController:baseVc.rootVc animated:YES];
+            [[NSNotificationCenter defaultCenter] postNotificationName:UPDATE_GOLD_ACCOUNT object:nil];
+        }
+        else {
+            [self.navigationController popToViewController:baseVc animated:YES];
+            [[NSNotificationCenter defaultCenter] postNotificationName:UPDATE_EXTRACTGOLD_LIST object:nil];
+        }
+        return NO;
+    }
+    else if ([requestString isEqualToString:@"firstp2p://api?method=updatebacktype&param=3"]) {
+        [self hideLeftButton];
+        return NO;
+    }
+    return YES;
 }
-*/
+
 
 @end
