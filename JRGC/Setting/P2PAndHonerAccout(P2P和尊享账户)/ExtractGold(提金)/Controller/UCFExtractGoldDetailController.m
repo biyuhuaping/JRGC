@@ -86,7 +86,7 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:UPDATE_GOLD_ACCOUNT object:nil];
         }
         else {
-            [self.navigationController popToViewController:baseVc animated:YES];
+            [self.navigationController popToViewController:baseVc.rootVc animated:YES];
             [[NSNotificationCenter defaultCenter] postNotificationName:UPDATE_EXTRACTGOLD_LIST object:nil];
         }
         return NO;
