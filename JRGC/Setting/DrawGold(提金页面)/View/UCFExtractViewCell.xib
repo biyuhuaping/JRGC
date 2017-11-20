@@ -12,33 +12,33 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="UCFExtractViewCell" rowHeight="74" id="KGk-i7-Jjw" customClass="UCFExtractViewCell">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="74"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="UCFExtractViewCell" rowHeight="75" id="KGk-i7-Jjw" customClass="UCFExtractViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="75"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="73.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="74.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ghl-x9-mCN">
-                        <rect key="frame" x="15" y="15" width="55" height="55"/>
+                        <rect key="frame" x="15" y="10" width="55" height="55"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="55" id="lUF-Vd-Q0f"/>
                             <constraint firstAttribute="height" constant="55" id="mK4-bb-fGV"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                <real key="value" value="3"/>
+                                <real key="value" value="5"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30克投资金条" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n0C-X0-hVj">
-                        <rect key="frame" x="80" y="36" width="76.5" height="14.5"/>
+                        <rect key="frame" x="80" y="31" width="76.5" height="14.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Um-7u-xbJ">
-                        <rect key="frame" x="219" y="29" width="27" height="27"/>
+                        <rect key="frame" x="219" y="24" width="27" height="27"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="27" id="1PJ-AC-66o"/>
                             <constraint firstAttribute="width" constant="27" id="VBO-dB-I50"/>
@@ -49,7 +49,7 @@
                         </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bLY-1c-Xbh">
-                        <rect key="frame" x="278" y="29" width="27" height="27"/>
+                        <rect key="frame" x="278" y="24" width="27" height="27"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="27" id="Ob5-Cl-rdI"/>
                             <constraint firstAttribute="height" constant="27" id="tmt-G6-uS5"/>
@@ -60,7 +60,7 @@
                         </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1oU-v0-5rj">
-                        <rect key="frame" x="246" y="29" width="32" height="27"/>
+                        <rect key="frame" x="246" y="24" width="32" height="27"/>
                         <constraints>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="27" id="G8A-QA-BRy"/>
                             <constraint firstAttribute="height" constant="27" id="vL1-zB-oKg"/>
@@ -68,7 +68,7 @@
                         <state key="normal" image="bg_number_disabled"/>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OiT-zP-KYM">
-                        <rect key="frame" x="246" y="29" width="32" height="27"/>
+                        <rect key="frame" x="246" y="24" width="32" height="27"/>
                         <constraints>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="27" id="4eY-lJ-w3Q"/>
                             <constraint firstAttribute="height" constant="27" id="LM9-qD-a2d"/>
@@ -78,7 +78,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kPR-DE-fIT">
-                        <rect key="frame" x="0.0" y="0.0" width="214" height="73.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="214" height="74.5"/>
                         <connections>
                             <action selector="clickGoldGoodsDetail" destination="KGk-i7-Jjw" eventType="touchUpInside" id="0b5-iW-CKb"/>
                         </connections>
@@ -91,7 +91,7 @@
                     <constraint firstAttribute="bottom" secondItem="kPR-DE-fIT" secondAttribute="bottom" id="HDR-7g-QT5"/>
                     <constraint firstItem="1oU-v0-5rj" firstAttribute="leading" secondItem="2Um-7u-xbJ" secondAttribute="trailing" id="I9k-tt-KIT"/>
                     <constraint firstAttribute="trailing" secondItem="bLY-1c-Xbh" secondAttribute="trailing" constant="15" id="LAo-2b-FkZ"/>
-                    <constraint firstItem="ghl-x9-mCN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="NwD-tG-1wF"/>
+                    <constraint firstItem="ghl-x9-mCN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="NwD-tG-1wF"/>
                     <constraint firstItem="OiT-zP-KYM" firstAttribute="leading" secondItem="2Um-7u-xbJ" secondAttribute="trailing" id="Pxb-P3-yKt"/>
                     <constraint firstItem="2Um-7u-xbJ" firstAttribute="leading" secondItem="kPR-DE-fIT" secondAttribute="trailing" constant="5" id="QdK-ar-nWX"/>
                     <constraint firstItem="OiT-zP-KYM" firstAttribute="leading" secondItem="2Um-7u-xbJ" secondAttribute="trailing" id="Slj-dN-5Y5"/>
@@ -116,7 +116,7 @@
                 <outlet property="numberBgBtn" destination="1oU-v0-5rj" id="NlC-uy-5eY"/>
                 <outlet property="subtractBtn" destination="2Um-7u-xbJ" id="0sK-Fr-iYf"/>
             </connections>
-            <point key="canvasLocation" x="-259" y="10"/>
+            <point key="canvasLocation" x="-364" y="-19"/>
         </tableViewCell>
     </objects>
     <resources>

@@ -340,9 +340,16 @@
         _isHideBusinessLicense =  _auditRecordArray.count == 4 ? YES :NO;
     }
     if (_isP2P) {
-//        NSString *tradeMarkStr = [[_dataDic objectSafeDictionaryForKey:@"prdTransferFore"] objectSafeForKey: @"tradeMark"];
-//        _isHideBorrowerInformation = [tradeMarkStr intValue] == 20 ? YES :NO;
-        _isHideBorrowerInformation = ![agencyCodeStr isEqualToString:@""];
+        NSString *tradeMarkStr = [[_dataDic objectSafeDictionaryForKey:@"prdTransferFore"] objectSafeForKey: @"tradeMark"];
+        BOOL prdDesType = [[_dataDic objectSafeForKey:@"prdDesType"]boolValue];
+        if (prdDesType)//老项目
+        {
+            _isHideBorrowerInformation = [tradeMarkStr intValue] == 20 ? YES :NO;
+        }
+        else //新项目
+        {
+            _isHideBorrowerInformation = ![agencyCodeStr isEqualToString:@""];
+        }
         if ([_detailType isEqualToString:@"1"] && ![agencyCodeStr isEqualToString:@""]) {
             arrayJiBen= @[@"机构名称",@"营业执照",@"法定代理人",@"联系人",@"机构地址",@"邮编"];
             [self setAgencyInfoDetailValue];

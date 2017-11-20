@@ -75,7 +75,7 @@
 
 -(UIView *)createHeaderView
 {
-    UIView  *headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth,125 + 47)];
+    UIView  *headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth,125 + 47+15)];
     headerView.backgroundColor= [UIColor whiteColor];
     UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(15, 40, ScreenWidth-30, 15)];
     titleLabel.textColor = UIColorWithRGB(0x555555);
@@ -129,6 +129,13 @@
     UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 47, ScreenWidth, 0.5)];
     lineView.backgroundColor = UIColorWithRGB(0xe3e5ea);
     [downView addSubview:lineView];
+    
+    
+    UIView *lineView1 =[[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(downView.frame), ScreenWidth, 15.0f)];
+    lineView1.backgroundColor = [UIColor whiteColor];
+    
+    [headerView addSubview:lineView1];
+    
     [headerView addSubview:downView];
     return headerView;
 }
@@ -150,9 +157,11 @@
 }
 -(UIView *)createFooterView
 {
-    UIView  *footView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth,30)];
+    UIView  *footView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth,45)];
     footView.backgroundColor =UIColorWithRGB(0xebebee);
-    UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(15, 5, ScreenWidth-30, 15)];
+
+    
+    UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(15, 15, ScreenWidth-30, 15)];
     titleLabel.textColor = UIColorWithRGB(0x999999);
     titleLabel.font = [UIFont systemFontOfSize:12];
     titleLabel.numberOfLines = 0;
@@ -185,7 +194,7 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 74;
+    return  indexPath.row < _dataArray.count - 1 ? 75 : 90;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -209,8 +218,7 @@
 -(void)clickGoldGoodsDetailBtn:(UCFExtractViewCell *)cell
 {
     NSString *webUrlStr = [NSString stringWithFormat:@"%@",cell.goldModel.introductionPageUrl];
-    NSString *title = cell.goldModel.goldGoodsName;
-    FullWebViewController *webView = [[FullWebViewController alloc] initWithWebUrl:webUrlStr title:title];
+    FullWebViewController *webView = [[FullWebViewController alloc] initWithWebUrl:webUrlStr title:@"详情"];
         webView.baseTitleType = @"specialUser";
     [self.navigationController pushViewController:webView animated:YES];
 }
@@ -271,8 +279,13 @@
     [_tipLabel2 setFontColor:UIColorWithRGB(0x333333) string:feeStrGoldGoodsAmount];
     _gotoNextButton.backgroundColor = buyedGoldGoodsAmount == 0 ? UIColorWithRGB(0xcccccc) : UIColorWithRGB(0xffc027);
     _gotoNextButton.userInteractionEnabled = buyedGoldGoodsAmount != 0;
-    [self.tableView reloadData];
-    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:[_dataArray indexOfObject:goldGoodsModel] inSection:0] atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
+    __weak typeof(self) weakSelf = self;
+    dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC));
+    dispatch_after(delayTime, dispatch_get_main_queue(), ^{
+        CGPoint oldOffset = weakSelf.tableView.contentOffset;
+        [weakSelf.tableView reloadData];
+        weakSelf.tableView.contentOffset = oldOffset;
+    });    
 }
 #pragma mark -活期详情页面数据请求
 -(void)getGoldGoodsInfoHttpRequest

@@ -480,15 +480,15 @@
     }
     return self;
 }
-#pragma 黄金自定义弹窗
+#pragma 黄金自定义弹窗--- 余额不足 订单未提交
 -(instancetype)initDrawGoldRechangeAlertType:(MjAlertViewType)type withMessage:(NSString *)message delegate:(id)delegate
 {
     self = [self init];
     if (self) {
         UIView *baseView = nil;
         baseView = [[NSBundle mainBundle] loadNibNamed:@"UCFDrawGoldRechangAlertView" owner:nil options:nil][0];
-        baseView.frame = CGRectMake(0, 0, 265, 196);
-        [self.showView  setFrame:CGRectMake((ScreenWidth - 265)/2.0f, (ScreenHeight - 220)/2.0f, 265, 220)];
+        baseView.frame = CGRectMake(0, 0, 265, 201);
+        [self.showView  setFrame:CGRectMake((ScreenWidth - 265)/2.0f, (ScreenHeight - 225)/2.0f, 265, 225)];
         self.delegate = delegate;
         [self.showView addSubview:baseView];
         
@@ -512,7 +512,7 @@
             [closeBtn1 setTitle:@"返回" forState:UIControlStateNormal];
             [rechangeBtn setTitle:@"继续填写" forState:UIControlStateNormal];
             baseView.frame = CGRectMake(0, 0, 265, 215);
-            [self.showView  setFrame:CGRectMake((ScreenWidth - 265)/2.0f, (ScreenHeight - 255)/2.0f, 265, 255)];
+            [self.showView  setFrame:CGRectMake((ScreenWidth - 265)/2.0f, (ScreenHeight - 260)/2.0f, 265, 260)];
         }
        
         [closeBtn1 addTarget:self action:@selector(closeBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
