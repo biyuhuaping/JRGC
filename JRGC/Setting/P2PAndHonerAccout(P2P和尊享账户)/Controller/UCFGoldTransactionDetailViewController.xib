@@ -11,7 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UCFGoldTransactionDetailViewController">
             <connections>
-                <outlet property="baseView" destination="eeQ-e3-t7N" id="aT1-bT-ypd"/>
+                <outlet property="baseView" destination="zQb-dJ-wfa" id="x1L-HK-tWV"/>
                 <outlet property="dealGoldNum" destination="ewU-SJ-rbZ" id="NiI-2k-8zj"/>
                 <outlet property="tradeTypeNameLab" destination="0ET-rc-nEI" id="Vaq-3O-Qo6"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>

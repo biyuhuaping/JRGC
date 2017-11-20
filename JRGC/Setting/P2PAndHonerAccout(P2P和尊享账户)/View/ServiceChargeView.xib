@@ -12,11 +12,11 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="37"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="37"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="txD-dp-7Er">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="12"/>
+                <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="txD-dp-7Er">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="12"/>
                     <subviews>
                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="snB-vy-0yW">
                             <rect key="frame" x="0.0" y="11" width="375" height="1"/>
@@ -24,7 +24,7 @@
                             <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PN1-vP-SAC">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
                             <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="1" id="IzX-4R-0a7"/>
@@ -33,7 +33,6 @@
                     </subviews>
                     <color key="backgroundColor" red="0.92156862750000001" green="0.92156862750000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="12" id="Gw8-4O-i3k"/>
                         <constraint firstAttribute="height" constant="12" id="Ik5-dK-Toj"/>
                         <constraint firstItem="PN1-vP-SAC" firstAttribute="leading" secondItem="txD-dp-7Er" secondAttribute="leading" id="gMo-C2-NrX"/>
                         <constraint firstItem="PN1-vP-SAC" firstAttribute="top" secondItem="txD-dp-7Er" secondAttribute="top" id="ox6-zo-gPY"/>
@@ -46,8 +45,9 @@
                     <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" tag="100" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¥100.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AJS-xs-Jk2">
-                    <rect key="frame" x="307.5" y="12" width="52.5" height="25"/>
+                <label opaque="NO" userInteractionEnabled="NO" tag="100" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="¥100.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AJS-xs-Jk2">
+                    <rect key="frame" x="252.5" y="12" width="52.5" height="25"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="12.5"/>
                     <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
@@ -56,17 +56,14 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="Qce-b2-aAZ" firstAttribute="top" secondItem="txD-dp-7Er" secondAttribute="bottom" id="4vB-gQ-Ibw"/>
-                <constraint firstAttribute="trailing" secondItem="AJS-xs-Jk2" secondAttribute="trailing" constant="15" id="CHY-zp-hKf"/>
                 <constraint firstItem="txD-dp-7Er" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="DcQ-cB-MwJ"/>
                 <constraint firstItem="txD-dp-7Er" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="JId-8i-9ln"/>
                 <constraint firstAttribute="bottom" secondItem="Qce-b2-aAZ" secondAttribute="bottom" id="WaY-8g-6vz"/>
-                <constraint firstAttribute="bottom" secondItem="AJS-xs-Jk2" secondAttribute="bottom" id="Ya7-5O-ZTY"/>
                 <constraint firstItem="Qce-b2-aAZ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="m32-2N-Mqy"/>
-                <constraint firstItem="AJS-xs-Jk2" firstAttribute="top" secondItem="txD-dp-7Er" secondAttribute="bottom" id="rMQ-3e-KZ6"/>
                 <constraint firstAttribute="trailing" secondItem="txD-dp-7Er" secondAttribute="trailing" id="xuV-Hb-X1d"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="505" y="38"/>
+            <point key="canvasLocation" x="443" y="23"/>
         </view>
         <view contentMode="scaleToFill" id="NJ2-7P-ah3">
             <rect key="frame" x="0.0" y="0.0" width="375" height="93"/>

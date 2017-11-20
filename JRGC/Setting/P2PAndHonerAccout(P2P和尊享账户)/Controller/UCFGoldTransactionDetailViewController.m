@@ -8,12 +8,12 @@
 
 #import "UCFGoldTransactionDetailViewController.h"
 #import "UCFGoldTransCell.h"
-
+#import "ServiceChargeView2.h"
 @interface UCFGoldTransactionDetailViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *tradeTypeNameLab;
 @property (weak, nonatomic) IBOutlet UILabel *dealGoldNum;
 
-@property (weak, nonatomic) IBOutlet UIView *baseView;
+@property (weak, nonatomic) IBOutlet UIScrollView *baseView;
 @property (strong, nonatomic)UIView *section_view0;
 @property (strong, nonatomic)UIView *section_view1;
 @property (strong, nonatomic)UIView *section_view2;
@@ -32,7 +32,6 @@
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
@@ -42,8 +41,8 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    self.section_view1.frame = CGRectMake(0, 136, ScreenWidth, 93);
-    self.section_view2.frame = CGRectMake(0, CGRectGetMaxY(_section_view1.frame), ScreenWidth, 93);
+//    self.section_view1.frame = CGRectMake(0, 136, ScreenWidth, 93);
+//    self.section_view2.frame = CGRectMake(0, CGRectGetMaxY(_section_view1.frame), ScreenWidth, 93);
 }
 - (void)initNewUI
 {
@@ -69,13 +68,19 @@
         lab2.text = _model.tradeTime;
         lab3.text = _model.tradeRemark;
     } else if ([_model.tradeTypeCode isEqualToString:@"112"] || [_model.tradeTypeCode isEqualToString:@"113"] || [_model.tradeTypeCode isEqualToString:@"122"]) {
-        UIView *view0 = [[NSBundle mainBundle]loadNibNamed:@"ServiceChargeView" owner:nil options:nil][0];
+        ServiceChargeView2 *view0 = [[NSBundle mainBundle] loadNibNamed:@"ServiceChargeView2" owner:nil options:nil][0];
         view0.frame = CGRectMake(0, 136, ScreenWidth, 37);
+        self.section_view0 = view0;
+        [_baseView addSubview:view0];
+
         UIView *view2 = [[NSBundle mainBundle]loadNibNamed:@"ServiceChargeView" owner:nil options:nil][1];
         view2.frame = CGRectMake(0, CGRectGetMaxY(view0.frame), ScreenWidth, 93);
-        [_baseView addSubview:view0];
         [_baseView addSubview:view2];
-        UILabel *lab0 = (UILabel *)[view0 viewWithTag:100];
+        UILabel *lab0 = view0.moneyLal;
+        //兼容5c显示
+//        lab0.frame = CGRectMake(ScreenWidth - 215, 12, 200, 25);
+//        lab0.backgroundColor = [UIColor whiteColor];
+//        lab0.textAlignment = NSTextAlignmentRight;
         UILabel *lab1 = (UILabel *)[view2 viewWithTag:100];
         UILabel *lab2 = (UILabel *)[view2 viewWithTag:200];
         UILabel *lab3 = (UILabel *)[view2 viewWithTag:300];

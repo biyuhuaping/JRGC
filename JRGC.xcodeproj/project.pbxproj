@@ -808,6 +808,8 @@
 		84FAB60C1C7C575300D0942F /* MGSwipeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FAB6091C7C575300D0942F /* MGSwipeButton.m */; };
 		84FAB60D1C7C575300D0942F /* MGSwipeTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FAB60B1C7C575300D0942F /* MGSwipeTableCell.m */; };
 		84FFA5301C7EAA9200ACD835 /* UIScrollView+TouchScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FFA52F1C7EAA9200ACD835 /* UIScrollView+TouchScrollView.m */; };
+		A81A6F571FBD910000BDCE50 /* ServiceChargeView2.xib in Resources */ = {isa = PBXBuildFile; fileRef = A81A6F561FBD910000BDCE50 /* ServiceChargeView2.xib */; };
+		A81A6F5A1FBD92CD00BDCE50 /* ServiceChargeView2.m in Sources */ = {isa = PBXBuildFile; fileRef = A81A6F591FBD92CD00BDCE50 /* ServiceChargeView2.m */; };
 		A81F40061F4E86F80018B673 /* UCFRebateGoldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A81F40041F4E86F80018B673 /* UCFRebateGoldCell.m */; };
 		A81F40071F4E86F90018B673 /* UCFRebateGoldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A81F40051F4E86F80018B673 /* UCFRebateGoldCell.xib */; };
 		A828D6B31F1F30C200662266 /* UCFExtractGoldViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A828D6B11F1F30C200662266 /* UCFExtractGoldViewController.m */; };
@@ -2413,6 +2415,9 @@
 		84FAB60B1C7C575300D0942F /* MGSwipeTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSwipeTableCell.m; sourceTree = "<group>"; };
 		84FFA52E1C7EAA9200ACD835 /* UIScrollView+TouchScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+TouchScrollView.h"; sourceTree = "<group>"; };
 		84FFA52F1C7EAA9200ACD835 /* UIScrollView+TouchScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+TouchScrollView.m"; sourceTree = "<group>"; };
+		A81A6F561FBD910000BDCE50 /* ServiceChargeView2.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ServiceChargeView2.xib; sourceTree = "<group>"; };
+		A81A6F581FBD92CD00BDCE50 /* ServiceChargeView2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ServiceChargeView2.h; sourceTree = "<group>"; };
+		A81A6F591FBD92CD00BDCE50 /* ServiceChargeView2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ServiceChargeView2.m; sourceTree = "<group>"; };
 		A81F40031F4E86F80018B673 /* UCFRebateGoldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFRebateGoldCell.h; sourceTree = "<group>"; };
 		A81F40041F4E86F80018B673 /* UCFRebateGoldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFRebateGoldCell.m; sourceTree = "<group>"; };
 		A81F40051F4E86F80018B673 /* UCFRebateGoldCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFRebateGoldCell.xib; sourceTree = "<group>"; };
@@ -5900,6 +5905,9 @@
 				A851F34D1F132D2C003DE8B8 /* UCFGoldTransCell.xib */,
 				A86F80ED1FBC3A7D0029FC1A /* ServiceChargeView.xib */,
 				A8898DC31FBD32500064494B /* ServiceChargeView1.xib */,
+				A81A6F561FBD910000BDCE50 /* ServiceChargeView2.xib */,
+				A81A6F581FBD92CD00BDCE50 /* ServiceChargeView2.h */,
+				A81A6F591FBD92CD00BDCE50 /* ServiceChargeView2.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -7046,6 +7054,7 @@
 				E37086C81D61E3030041D293 /* UCFOldUserGuideViewController.xib in Resources */,
 				74B98C961F70C9E100CB6A9F /* UCFMineHeaderView.xib in Resources */,
 				FB572C0D1C7C3000000031F1 /* UCFCouponInterest.xib in Resources */,
+				A81A6F571FBD910000BDCE50 /* ServiceChargeView2.xib in Resources */,
 				4AB3EF241E287CD6007A6AF8 /* RiskAssessmentViewController.xib in Resources */,
 				83881D311FB58A01004CB2AF /* UCFDrawGoldHeaderView.xib in Resources */,
 				744EB7F91EE7E858003C57C4 /* UCFMicroMoneyViewController.xib in Resources */,
@@ -7713,6 +7722,7 @@
 				74D7FCD51AE8F75000653B8F /* UCFHeadrView.m in Sources */,
 				74AFB12F1EE8F848007DBAFC /* UCFTransferHeaderView.m in Sources */,
 				7456D3C71E82700500207349 /* UIView+Extension.m in Sources */,
+				A81A6F5A1FBD92CD00BDCE50 /* ServiceChargeView2.m in Sources */,
 				E311A66D1D90E85B00C5483E /* UCFWebViewJavascriptBridgeLevel.m in Sources */,
 				74D7FCCC1AE8F72700653B8F /* FundAccountGroup.m in Sources */,
 				83CD843C1F13A50800227704 /* UCFTransferModel.m in Sources */,
