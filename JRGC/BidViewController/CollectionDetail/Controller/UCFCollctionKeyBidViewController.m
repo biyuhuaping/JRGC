@@ -1154,8 +1154,6 @@
 // 是否第一次投资(普通标)
 - (BOOL)checkIsFirstInvest
 {
-    return YES;
-    
     NSString *recommendCode = [_dataDict objectForKey:@"recomendFactoryCode"];
     BOOL isLimit = [[_dataDict objectSafeForKey:@"isLimit"] boolValue];
     if ([recommendCode isEqualToString:@""] && !isLimit) {
