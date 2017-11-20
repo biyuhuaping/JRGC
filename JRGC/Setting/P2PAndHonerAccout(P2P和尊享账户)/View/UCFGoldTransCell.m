@@ -62,6 +62,9 @@
         self.turnoverLab.textColor = UIColorWithRGB(0xfd4d4c);
         self.dealMoney.textColor = UIColorWithRGB(0xfd4d4c);
 //        self.dealMoney.hidden = YES;
+    } else if ([_model.tradeTypeCode isEqualToString:@"112"]) {//变现
+        self.turnoverLab.textColor = UIColorWithRGB(0x4db94f);
+        self.dealMoney.textColor = UIColorWithRGB(0x4db94f);
     }
 
     self.dealMoney.text = [NSString stringWithFormat:@"%@",_model.tradeMoney];

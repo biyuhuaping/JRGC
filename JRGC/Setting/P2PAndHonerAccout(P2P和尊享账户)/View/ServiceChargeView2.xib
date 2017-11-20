@@ -80,6 +80,9 @@
                 <constraint firstAttribute="trailing" secondItem="niY-cl-kCr" secondAttribute="trailing" id="xaB-tz-lyv"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="moneyLal" destination="l6D-mU-7w3" id="sgT-ZQ-BBr"/>
+            </connections>
             <point key="canvasLocation" x="177.5" y="311.5"/>
         </view>
     </objects>

@@ -84,14 +84,15 @@
         lab2.text = _model.tradeTime;
         lab3.text = _model.tradeRemark;
         lab0.text = [NSString stringWithFormat:@"¥%@",_model.poundage];
+        self.dealGoldNum.textColor = UIColorWithRGB(0x999999);
         if ([_model.tradeTypeCode isEqualToString:@"112"]) {
+            self.dealGoldNum.textColor = UIColorWithRGB(0x4db94f);
             self.tradeTypeNameLab.text = @"提金克重";
         } else if ([_model.tradeTypeCode isEqualToString:@"122"]) {
             self.tradeTypeNameLab.text = @"失败解冻";
         } else {
             self.tradeTypeNameLab.text = @"冻结克重";
         }
-        self.dealGoldNum.textColor = UIColorWithRGB(0x999999);
         NSString *totalStr =  [NSString stringWithFormat:@"%@克",_model.purchaseAmount];
         self.dealGoldNum.attributedText = [self changeLabelWithText:@"克" withTotalStr:totalStr];
     } else if([_model.tradeTypeCode isEqualToString:@"99"]){
