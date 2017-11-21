@@ -61,6 +61,7 @@
     NSString *_overdueCount;	//逾期次数
     NSString *_overdueInvest;	//逾期金额
 }
+@property (assign ,nonatomic)  BOOL prdDesType;//新老项目标识
 @property (strong ,nonatomic)   UIWebView *webView;
 @property (assign ,nonatomic)   float webViewHight;//项目详情webView高度
 @end
@@ -232,8 +233,8 @@
     if (_isP2P) {
         _titleArray = [[NSArray alloc] initWithObjects:@"基础详情", @"安全保障",@"出借记录", nil];
         NSString *tradeMarkStr = [[_dataDic objectSafeDictionaryForKey:@"prdClaims"] objectSafeForKey: @"tradeMark"];
-        BOOL prdDesType = [[[_dataDic objectSafeDictionaryForKey:@"prdClaims"] objectSafeForKey: @"prdDesType"] boolValue];
-        if (prdDesType)//老项目
+        _prdDesType = [[[_dataDic objectSafeDictionaryForKey:@"prdClaims"] objectSafeForKey: @"prdDesType"] boolValue];
+        if (_prdDesType)//老项目
         {
             _isHideBorrowerInformation = [tradeMarkStr intValue] == 20 ? YES :NO;
         }
@@ -965,8 +966,7 @@
                    if (!_isHideBusinessLicense) { //如果不隐藏  才显示 营业执照认证
                        imageView.hidden = NO;
                        renzhengLabel.text = @"已认证";
-//                       placehoderLabel.text = _isP2P ?_licenseNumberStr : @"";
-                       placehoderLabel.text =  @"";
+                       placehoderLabel.text = _prdDesType ? _isP2P ?_licenseNumberStr : @"" : @"";
                    }else{
                        if([[_dataDic objectForKey:@"orderUser"] objectForKey:@"joboauth"])
                        {
@@ -979,13 +979,13 @@
                            {
                                imageView.hidden = NO;
                                renzhengLabel.text = @"已认证";
-//                               NSString *name = [[_dataDic objectForKey:@"orderUser"] objectForKey:@"realName"];
-//                               NSString *idCardNum = [[_dataDic objectForKey:@"orderUser"] objectForKey:@"idno"];
-//                               if (_isP2P) {
-//                                   placehoderLabel.text = [NSString stringWithFormat:@"%@ %@",name,idCardNum];
-//                               }else{
+                               NSString *name = [[_dataDic objectForKey:@"orderUser"] objectForKey:@"realName"];
+                               NSString *idCardNum = [[_dataDic objectForKey:@"orderUser"] objectForKey:@"idno"];
+                               if (_isP2P) {
+                                   placehoderLabel.text = _prdDesType ? [NSString stringWithFormat:@"%@ %@",name,idCardNum] : @"";
+                               }else{
                                    placehoderLabel.text = @"";
-//                               }
+                               }
                                
                            }
                        }

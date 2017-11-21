@@ -61,6 +61,7 @@
     NSString *_overdueCount;	//逾期次数
     NSString *_overdueInvest;	//逾期金额
 }
+@property (assign ,nonatomic)  BOOL prdDesType;//新老项目标识
 @property (strong ,nonatomic)   UIWebView *webView;
 @property (assign ,nonatomic)   float webViewHight;//项目详情webView高度
 @end
@@ -341,8 +342,8 @@
     }
     if (_isP2P) {
         NSString *tradeMarkStr = [[_dataDic objectSafeDictionaryForKey:@"prdTransferFore"] objectSafeForKey: @"tradeMark"];
-        BOOL prdDesType = [[_dataDic objectSafeForKey:@"prdDesType"]boolValue];
-        if (prdDesType)//老项目
+        _prdDesType = [[_dataDic objectSafeForKey:@"prdDesType"]boolValue];
+        if (_prdDesType)//老项目
         {
             _isHideBorrowerInformation = [tradeMarkStr intValue] == 20 ? YES :NO;
         }
@@ -1133,11 +1134,11 @@
                 nameLbl.text = [_auditRecordArray objectAtIndex:[indexPath row]];
                 if(indexPath.row == 0)
                 {
-                     placehoderLabel.text = @"";
+                    
                     if (!_isHideBusinessLicense) {
                         imageView.hidden = NO;
                         renzhengLabel.text = @"已认证";
-//                        placehoderLabel.text = _isP2P ?_licenseNumberStr : @"";
+                        placehoderLabel.text = _prdDesType ? _isP2P ?_licenseNumberStr : @"" : @"";
                     }else{
                         if([[_dataDic objectForKey:@"orderUser"] objectForKey:@"joboauth"])
                         {
@@ -1150,15 +1151,14 @@
                             {
                                 imageView.hidden = NO;
                                 renzhengLabel.text = @"已认证";
-//                                NSString *name = [[_dataDic objectForKey:@"orderUser"] objectForKey:@"realName"];
-//                                NSString *idCardNum = [[_dataDic objectForKey:@"orderUser"] objectForKey:@"idno"];
-//                                //                            idCardNum = [idCardNum stringByReplacingCharactersInRange:NSMakeRange(3, 13) withString:@"*************"];
-//                                if(_isP2P){
-//                                    placehoderLabel.text = [NSString stringWithFormat:@"%@ %@",name,idCardNum];
-//                                }else
-//                                {
-//                                    placehoderLabel.text = @"";
-//                                }
+                                NSString *name = [[_dataDic objectForKey:@"orderUser"] objectForKey:@"realName"];
+                                NSString *idCardNum = [[_dataDic objectForKey:@"orderUser"] objectForKey:@"idno"];
+                                if(_isP2P){
+                                    placehoderLabel.text = _prdDesType ? [NSString stringWithFormat:@"%@ %@",name,idCardNum] : @"";
+                                }else
+                                {
+                                    placehoderLabel.text = @"";
+                                }
                                 
                             }
                         }
@@ -1406,8 +1406,7 @@
                     if (!_isHideBusinessLicense) {
                         imageView.hidden = NO;
                         renzhengLabel.text = @"已认证";
-//                        placehoderLabel.text = _isP2P ?_licenseNumberStr : @"";
-                        placehoderLabel.text =  @"";
+                        placehoderLabel.text = _prdDesType ?  _isP2P ?_licenseNumberStr : @"" : @"";
                     }else{
                         if([[_dataDic objectForKey:@"orderUser"] objectForKey:@"joboauth"])
                         {
@@ -1421,10 +1420,10 @@
                                 imageView.hidden = NO;
                                 renzhengLabel.text = @"已认证";
                                 placehoderLabel.text =  @"";
-//                                NSString *name = [[_dataDic objectForKey:@"orderUser"] objectForKey:@"realName"];
-//                                NSString *idCardNum = [[_dataDic objectForKey:@"orderUser"] objectForKey:@"idno"];
-//                                idCardNum = [idCardNum stringByReplacingCharactersInRange:NSMakeRange(3, 13) withString:@"*************"];
-//                                placehoderLabel.text = [NSString stringWithFormat:@"%@ %@",name,idCardNum];
+                                NSString *name = [[_dataDic objectForKey:@"orderUser"] objectForKey:@"realName"];
+                                NSString *idCardNum = [[_dataDic objectForKey:@"orderUser"] objectForKey:@"idno"];
+                                idCardNum = [idCardNum stringByReplacingCharactersInRange:NSMakeRange(3, 13) withString:@"*************"];
+                                placehoderLabel.text = _prdDesType ?  [NSString stringWithFormat:@"%@ %@",name,idCardNum] : @"";
                             }
                         }
 
