@@ -206,7 +206,7 @@
             NSString *activityTypeStr  = [[picADArray firstObject] objectSafeForKey:@"activityType"];
             [MongoliaLayerCenter sharedManager].activityType = activityTypeStr;
             BOOL  switchFlag =  [[[picADArray firstObject] objectSafeForKey:@"switchFlag"] boolValue];
-            [MongoliaLayerCenter sharedManager].switchFlag = switchFlag;
+            [MongoliaLayerCenter sharedManager].switchFlag = [[picADArray firstObject] isExistenceforKey:@"switchFlag"] ?  switchFlag : YES;
             
 //            if ([[resultDict objectSafeForKey:@"picAD"] count] > 0) {
 //                NSDictionary *adDic = [[resultDict objectSafeForKey:@"picAD"] objectAtIndex:0];
