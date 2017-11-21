@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="265" height="220"/>
+            <rect key="frame" x="0.0" y="0.0" width="265" height="240"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uRf-Zp-cRx">
-                    <rect key="frame" x="0.0" y="0.0" width="265" height="170"/>
+                    <rect key="frame" x="0.0" y="0.0" width="265" height="190"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" tag="199" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="累计盈亏" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c03-GM-RFP">
                             <rect key="frame" x="100" y="15" width="66" height="20"/>
@@ -56,7 +56,7 @@
                         <constraint firstItem="c03-GM-RFP" firstAttribute="centerX" secondItem="uRf-Zp-cRx" secondAttribute="centerX" id="4vB-SK-hmT"/>
                         <constraint firstItem="Rdw-VB-1yP" firstAttribute="leading" secondItem="uRf-Zp-cRx" secondAttribute="leading" constant="25" id="D8f-9q-cl4"/>
                         <constraint firstItem="vw0-XN-23a" firstAttribute="leading" secondItem="uRf-Zp-cRx" secondAttribute="leading" constant="25" id="HsK-mW-2BX"/>
-                        <constraint firstAttribute="height" constant="170" id="Jvm-IU-q6Y"/>
+                        <constraint firstAttribute="height" constant="190" id="Jvm-IU-q6Y"/>
                         <constraint firstItem="69Q-bV-wP3" firstAttribute="leading" secondItem="uRf-Zp-cRx" secondAttribute="leading" constant="25" id="QJC-tA-I8X"/>
                         <constraint firstItem="GN7-Ga-cPF" firstAttribute="leading" secondItem="uRf-Zp-cRx" secondAttribute="leading" constant="25" id="QvQ-L5-BA8"/>
                         <constraint firstItem="vw0-XN-23a" firstAttribute="top" secondItem="c03-GM-RFP" secondAttribute="bottom" constant="11" id="alM-f8-KfN"/>
@@ -74,7 +74,7 @@
                     </userDefinedRuntimeAttributes>
                 </view>
                 <button opaque="NO" tag="1000" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o9f-WI-Ori">
-                    <rect key="frame" x="117" y="189.5" width="30.5" height="30.5"/>
+                    <rect key="frame" x="117" y="209.5" width="30.5" height="30.5"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30.5" id="fkO-9c-4OB"/>
                         <constraint firstAttribute="width" constant="30.5" id="w3x-I9-diT"/>
@@ -82,7 +82,7 @@
                     <state key="normal" image="honorable_bj_close"/>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6ml-HO-I7j">
-                    <rect key="frame" x="132" y="170" width="1" height="19.5"/>
+                    <rect key="frame" x="132" y="190" width="1" height="19.5"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="1" id="uVx-tr-Tea"/>

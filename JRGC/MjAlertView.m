@@ -434,8 +434,8 @@
     if (self) {
         UIView *baseView = nil;
         baseView = [[NSBundle mainBundle] loadNibNamed:@"UCFGoldPriceFloatView" owner:nil options:nil][0];
-        baseView.frame = CGRectMake(0, 0, 265, 220);
-        [self.showView  setFrame:CGRectMake((ScreenWidth - 265)/2.0f, (ScreenHeight - 220)/2.0f, 265, 220)];
+        baseView.frame = CGRectMake(0, 0, 265, 240);
+        [self.showView  setFrame:CGRectMake((ScreenWidth - 265)/2.0f, (ScreenHeight - 240)/2.0f, 265, 240)];
         self.delegate = delegate;
         [self.showView addSubview:baseView];
         
@@ -446,7 +446,7 @@
         if (type == MjGoldAlertViewTypeFloat) {
             titleLab.text = @"累计盈亏";
             midLab.text = @"累计盈亏指消费者在尊享金的累计盈利或亏损";
-            msgLab.text = @"消费者总盈亏=(消费者持有黄金市值+消费者变现总金额+消费者提取金条市值+活期累计收益)-消费者实际购买总金额";
+            msgLab.text = @"消费者总盈亏=(消费者持有黄金市值+消费者变现总金额+消费者提取金条市值+优金宝累计收益)-消费者实际购买总金额-消费者提金手续费总金额";
         } else if (type == MjGoldAlertViewTypeAverage) {
             titleLab.text = @"买入均价";
             midLab.text= @"买入均价指消费者购买黄金的加权平均价";
