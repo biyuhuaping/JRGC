@@ -61,6 +61,8 @@
     self.circleProgressView.pathBackColor = UIColorWithRGB(0xcfd5d7);
     self.circleProgressView.pathFillColor = UIColorWithRGB(0xfa4d4c);
     self.circleProgressView.strokeWidth = 3;
+    self.proSignLabel.textColor = UIColorWithRGB(0xff8586);
+    self.proSignBackView.backgroundColor = UIColorWithRGB(0xffdfdf);
 }
 
 - (void)setMicroMoneyModel:(UCFMicroMoneyModel *)microMoneyModel
