@@ -23,6 +23,6 @@
 @property (nonatomic, copy) NSString *allGiveGoldAmount;
 @property (nonatomic, copy) NSString *cashBalance;
 @property (nonatomic, copy) NSString *zxInterests;
-
+@property (nonatomic, copy) NSString *historyInterests;
 + (instancetype)userAssetWithDict:(NSDictionary *)dict;
 @end

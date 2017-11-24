@@ -63,7 +63,7 @@
 //    [self setNeedsLayout];
     if (self.visibleButton.selected) {
         self.totalAssetLabel.text = self.userAssetModel.total.length > 0 ? [NSString stringWithFormat:@"¥%@", self.userAssetModel.total] : @"¥0.00";
-        self.addedProfitLabel.text = self.userAssetModel.interests.length > 0 ? [NSString stringWithFormat:@"¥%@", self.userAssetModel.interests] : @"¥0.00";
+        self.addedProfitLabel.text = self.userAssetModel.historyInterests.length > 0 ? [NSString stringWithFormat:@"¥%@", self.userAssetModel.historyInterests] : @"¥0.00";
         self.totalBalanceLabel.text = self.userAssetModel.cashBalance.length > 0 ? [NSString stringWithFormat:@"¥%@", self.userAssetModel.cashBalance] : @"¥0.00";
     }
     else {
@@ -125,7 +125,7 @@
     }
     else {
         self.totalAssetLabel.text = self.userAssetModel.total.length > 0 ? [NSString stringWithFormat:@"¥%@", self.userAssetModel.total] : @"¥0.00";
-        self.addedProfitLabel.text = self.userAssetModel.interests.length > 0 ? [NSString stringWithFormat:@"¥%@", self.userAssetModel.interests] : @"¥0.00";
+        self.addedProfitLabel.text = self.userAssetModel.historyInterests.length > 0 ? [NSString stringWithFormat:@"¥%@", self.userAssetModel.historyInterests] : @"¥0.00";
         self.totalBalanceLabel.text = self.userAssetModel.cashBalance.length > 0 ? [NSString stringWithFormat:@"¥%@", self.userAssetModel.cashBalance] : @"¥0.00";
     }
 }
