@@ -372,6 +372,9 @@
                     self.needAmountStr = [dataDict objectSafeForKey:@"needAmount"];
                      _alertView = [[MjAlertView alloc]initDrawGoldRechangeAlertType:MjAlertViewTypeDrawGoldRechane withMessage:rsttext delegate:self];
                     [_alertView show];
+                }else
+                {
+                     [MBProgressHUD displayHudError:rsttext];
                 }
             }
         }
