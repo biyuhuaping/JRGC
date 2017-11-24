@@ -228,7 +228,11 @@
         }
         else //新项目
         {
-            _isHideBorrowerInformation = ![agencyCodeStr isEqualToString:@""];
+            if ([agencyCodeStr isEqualToString:@""] ) { //个人标
+                _isHideBorrowerInformation = [tradeMarkStr intValue] == 20 ? YES :NO;
+            }else{ //机构标
+                 _isHideBorrowerInformation = YES; //隐藏借款人信息
+            }
         }
     }else{
         _isHideBorrowerInformation = YES; //如果是尊享标 则隐藏借款人信息
