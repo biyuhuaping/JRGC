@@ -151,7 +151,7 @@
 -(void)clickGoldGoodsDetail
 {
 
-    FullWebViewController *webView = [[FullWebViewController alloc] initWithWebUrl:self.goodsDetailUrl title:@"详情"];
+    FullWebViewController *webView = [[FullWebViewController alloc] initWithWebUrl:self.goodsDetailUrl title:@"黄金详情"];
     webView.baseTitleType = @"specialUser";
     [self.navigationController pushViewController:webView animated:YES];
 }
@@ -218,7 +218,7 @@
 -(void)clickGoldGoodsDetailBtn:(UCFExtractViewCell *)cell
 {
     NSString *webUrlStr = [NSString stringWithFormat:@"%@",cell.goldModel.introductionPageUrl];
-    FullWebViewController *webView = [[FullWebViewController alloc] initWithWebUrl:webUrlStr title:@"详情"];
+    FullWebViewController *webView = [[FullWebViewController alloc] initWithWebUrl:webUrlStr title:@"黄金详情"];
         webView.baseTitleType = @"specialUser";
     [self.navigationController pushViewController:webView animated:YES];
 }
