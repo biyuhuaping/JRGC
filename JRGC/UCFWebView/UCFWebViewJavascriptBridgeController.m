@@ -16,7 +16,7 @@
 #import "UCFInvestmentDetailViewController.h"
 #import "UCFLoginViewController.h"
 #import "UCFMyFacBeanViewController.h"
-#import "UCFRedEnvelopeViewController.h"
+//#import "UCFRedEnvelopeViewController.h"
 #import "UCFRegisterStepOneViewController.h"
 #import "UCFToolsMehod.h"
 #import "UCFTopUpViewController.h"
@@ -970,10 +970,10 @@
     else if ([controllerName isEqualToString:@"app_red_package"])
     {
         //跳转到红包
-        UCFRedEnvelopeViewController *subVC = [[UCFRedEnvelopeViewController alloc] initWithNibName:@"UCFRedEnvelopeViewController" bundle:nil];
-        subVC.title = @"我的红包";
-//        subVC.isGoBackShowNavBar = YES;
-        [self.navigationController pushViewController:subVC animated:YES];
+//        UCFRedEnvelopeViewController *subVC = [[UCFRedEnvelopeViewController alloc] initWithNibName:@"UCFRedEnvelopeViewController" bundle:nil];
+//        subVC.title = @"我的红包";
+////        subVC.isGoBackShowNavBar = YES;
+//        [self.navigationController pushViewController:subVC animated:YES];
     }
     else if ([controllerName isEqualToString:@"app_vip_level"])
     {

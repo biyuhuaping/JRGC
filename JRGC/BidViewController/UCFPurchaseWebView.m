@@ -8,7 +8,7 @@
 
 #import "UCFPurchaseWebView.h"
 #import "UCFInvestmentDetailViewController.h"
-#import "UCFRedEnvelopeViewController.h"
+//#import "UCFRedEnvelopeViewController.h"
 #import "UINavigationController+FDFullscreenPopGesture.h"
 
 @interface UCFPurchaseWebView ()
