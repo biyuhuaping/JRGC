@@ -516,8 +516,9 @@
             cell.lab2.text = _dataArr3[indexPath.section][indexPath.row][@"phone"];//手机号
             cell.planLabel.text = @"计划回金日";
             cell.lab3.text = _dataArr3[indexPath.section][indexPath.row][@"refundPerDate"] ;//计划回款日
+            cell.lab4.text = _dataArr3[indexPath.section][indexPath.row][@"actualRefundTime"];  //实际回款日
             NSString *refundAmtStr = _dataArr3[indexPath.section][indexPath.row][@"planRefundAmount"];
-            cell.lab4.text = [refundAmtStr hasPrefix:@"*"] ? refundAmtStr : [NSString stringWithFormat:@"%@克",refundAmtStr];//回款金额
+            cell.lab5.text = [refundAmtStr hasPrefix:@"*"] ? refundAmtStr : [NSString stringWithFormat:@"%@克",refundAmtStr];//回款金额
         
         return cell;
     }
