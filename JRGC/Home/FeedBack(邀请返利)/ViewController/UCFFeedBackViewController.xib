@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -51,7 +51,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RBT-Dm-i7z">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="607"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9rF-VV-aID">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -649,15 +649,47 @@
                         </mask>
                     </variation>
                 </scrollView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ATa-p5-aae">
+                    <rect key="frame" x="0.0" y="607" width="375" height="60"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yy9-pq-1b8">
+                            <rect key="frame" x="80" y="15" width="62" height="30"/>
+                            <state key="normal" title="邀友链接"/>
+                            <connections>
+                                <action selector="gotoShareLinkBtn" destination="-1" eventType="touchUpInside" id="nX8-Bx-wpg"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JhN-ez-OEB">
+                            <rect key="frame" x="233" y="15" width="62" height="30"/>
+                            <state key="normal" title="邀友图片"/>
+                            <connections>
+                                <action selector="gotoSharePictureBtn" destination="-1" eventType="touchUpInside" id="MrV-jb-zos"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="2A3-el-QMt"/>
+                        <constraint firstItem="Yy9-pq-1b8" firstAttribute="leading" secondItem="ATa-p5-aae" secondAttribute="leading" constant="80" id="AC7-id-M71"/>
+                        <constraint firstAttribute="bottom" secondItem="Yy9-pq-1b8" secondAttribute="bottom" constant="15" id="FNK-0a-mKa"/>
+                        <constraint firstAttribute="trailing" secondItem="JhN-ez-OEB" secondAttribute="trailing" constant="80" id="bR7-RR-fAe"/>
+                        <constraint firstItem="JhN-ez-OEB" firstAttribute="top" secondItem="ATa-p5-aae" secondAttribute="top" constant="15" id="eym-Yn-3Yv"/>
+                        <constraint firstItem="Yy9-pq-1b8" firstAttribute="top" secondItem="ATa-p5-aae" secondAttribute="top" constant="15" id="pEL-lH-RwL"/>
+                        <constraint firstAttribute="bottom" secondItem="JhN-ez-OEB" secondAttribute="bottom" constant="15" id="ux3-St-xOd"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="RBT-Dm-i7z" secondAttribute="bottom" id="P2m-hw-EAR"/>
+                <constraint firstAttribute="bottom" secondItem="ATa-p5-aae" secondAttribute="bottom" id="1uw-O8-akJ"/>
+                <constraint firstItem="ATa-p5-aae" firstAttribute="leading" secondItem="YvA-0F-Ft3" secondAttribute="leading" id="JuB-Ep-w2a"/>
+                <constraint firstAttribute="bottom" secondItem="RBT-Dm-i7z" secondAttribute="bottom" constant="60" id="P2m-hw-EAR"/>
+                <constraint firstAttribute="trailing" secondItem="ATa-p5-aae" secondAttribute="trailing" id="alU-X3-hLn"/>
                 <constraint firstAttribute="trailing" secondItem="RBT-Dm-i7z" secondAttribute="trailing" id="mAN-3t-85I"/>
                 <constraint firstItem="RBT-Dm-i7z" firstAttribute="leading" secondItem="YvA-0F-Ft3" secondAttribute="leading" id="trV-fq-ARl"/>
                 <constraint firstItem="RBT-Dm-i7z" firstAttribute="top" secondItem="YvA-0F-Ft3" secondAttribute="top" id="veT-bz-Eye"/>
             </constraints>
-            <point key="canvasLocation" x="-945" y="-151"/>
+            <point key="canvasLocation" x="-945.5" y="-151.5"/>
         </view>
     </objects>
     <resources>

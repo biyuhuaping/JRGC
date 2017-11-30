@@ -13,6 +13,7 @@
 #import <UShareUI/UShareUI.h>
 #import "UCFToolsMehod.h"
 #import "UCFRegistrationRecord.h"
+#import "UCFSharePictureViewController.h"
 @interface UCFInvitationRewardViewController () <UITableViewDelegate, UITableViewDataSource, UCFInvitationRewardCell2Delegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 
@@ -33,6 +34,9 @@
 @property (strong, nonatomic) NSString *beansCount;	//奖励工豆金额	string
 - (IBAction)gotoInvitationRecordVC:(UIControl *)sender;
 @property (strong, nonatomic) NSString *userRecommendCount;//	邀友数	number
+
+- (IBAction)gotoShareLinkBtn;
+- (IBAction)gotoSharePictureBtn;
 @end
 
 @implementation UCFInvitationRewardViewController
@@ -240,6 +244,17 @@
     pasteboard.string = _shareUrl;
     [AuxiliaryFunc showToastMessage:@"已复制到剪切板" withView:self.view];
 
+}
+- (IBAction)gotoShareLinkBtn
+{
+    [self invitationRewardCell:nil didClickedShareBtn:nil];
+}
+- (IBAction)gotoSharePictureBtn
+{
+    UCFSharePictureViewController * sharePictrureVC= [[UCFSharePictureViewController alloc]initWithNibName:@"UCFSharePictureViewController" bundle:nil];
+    [self presentViewController:sharePictrureVC animated:YES completion:^{
+        
+    }];
 }
 
 - (void)invitationRewardCell:(UCFInvitationRewardCell2 *)rewardCell didClickedShareBtn:(UIButton *)button

@@ -17,7 +17,9 @@
 #import "UCFWebViewJavascriptBridgeLevel.h"
 #import "UCFRegistrationRecord.h"
 #import "UCFMyRebateViewCtrl.h"
-@interface UCFFeedBackViewController ()<UMSocialPlatformProvider>
+#import "UCFShareBaseView.h"
+#import "UCFSharePictureViewController.h"
+@interface UCFFeedBackViewController ()<UMSocialPlatformProvider,UCFShareBaseViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UILabel *sumCommLab;//我的返利
 @property (strong, nonatomic) IBOutlet NZLabel *userRecommendCountLab;//邀请投资人数
@@ -76,6 +78,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *feedBackRegistLab;
 
 @property (strong, nonatomic) NSDictionary    *feedBackDictionary;
+- (IBAction)gotoShareLinkBtn;
+- (IBAction)gotoSharePictureBtn;
+
+
+@property (strong, nonatomic)  UCFShareBaseView  *shareBaseView;
 @end
 
 @implementation UCFFeedBackViewController
@@ -113,6 +120,14 @@
     self.secondView_lineView.backgroundColor = UIColorWithRGB(0xd8d8d8);
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(getMyInvestDataList) name:@"getMyInvestDataList" object:nil];
     _CheckInstructionBtn.hidden = YES;
+    
+    
+//    _shareBaseView = [[[NSBundle mainBundle] loadNibNamed:@"UCFShareBaseView" owner:nil options:nil] firstObject];
+//    _shareBaseView.deleagate = self;
+//    _shareBaseView.frame = CGRectMake(0,150, ScreenWidth, 60);
+//    _shareBaseView.backgroundColor = [UIColor redColor];
+//    [self.view addSubview:_shareBaseView];
+    
 
     [self getMyInvestDataList];
     [self getAppSetting];
@@ -123,6 +138,20 @@
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
     pasteboard.string = _shareUrl;
     [AuxiliaryFunc showToastMessage:@"已复制到剪切板" withView:self.view];
+}
+#pragma mark  --UCFShareBaseViewDelegate
+#pragma mark  邀友链接分享
+- (void)gotoShareLinkBtn
+{
+    [self shareBtn:nil];
+}
+#pragma mark  邀友图片分享
+- (void)gotoSharePictureBtn
+{
+    UCFSharePictureViewController * sharePictrureVC= [[UCFSharePictureViewController alloc]initWithNibName:@"UCFSharePictureViewController" bundle:nil];
+    [self presentViewController:sharePictrureVC animated:YES completion:^{
+        
+    }];
 }
 
 //分享到
@@ -430,5 +459,10 @@
 //        weakSelf.userRecommendCountLab.text = [NSString stringWithFormat:@"邀请注册人数:%@人",dic[@"userRecommendCount"]];//邀请注册人数
 //    };
     [self.navigationController pushViewController:mv animated:YES];
+}
+- (IBAction)click1:(id)sender {
+}
+
+- (IBAction)click2:(id)sender {
 }
 @end
