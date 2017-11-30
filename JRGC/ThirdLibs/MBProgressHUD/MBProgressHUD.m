@@ -138,9 +138,9 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 }
 
 + (MB_INSTANCETYPE)showHUDAddedTo:(UIView *)view animated:(BOOL)animated {
-    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    app.loadingBaseView.hidden = NO;
-    return nil;
+//    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+//    app.loadingBaseView.hidden = NO;
+//    return nil;
 //	MBProgressHUD *hud = [[self alloc] initWithView:[UIApplication sharedApplication].keyWindow];
 //    hud.mode = MBProgressHUDModeCustomView;
 //    UIImageView *view1 = [[[UIImageView alloc] initWithFrame:CGRectMake(0,0, 91, 95.5)] autorelease];
@@ -154,10 +154,16 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 //	[view addSubview:hud];
 //	[hud show:animated];
 //	return MB_AUTORELEASE(hud);
+    
+    MBProgressHUD *hud = [[self alloc] initWithView:view];
+    hud.removeFromSuperViewOnHide = YES;
+    [view addSubview:hud];
+    [hud show:animated];
+    return MB_AUTORELEASE(hud);
 }
 
 + (BOOL)hideHUDForView:(UIView *)view animated:(BOOL)animated {
-    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+//    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
 //	MBProgressHUD *hud = [self HUDForView:app.loadingBaseView];
 //	if (hud != nil) {
 //		hud.removeFromSuperViewOnHide = YES;
@@ -165,14 +171,20 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 //        app.loadingBaseView.hidden = YES;
 //		return YES;
 //	}
-    app.loadingBaseView.hidden = YES;
-	return NO;
+//    app.loadingBaseView.hidden = YES;
+    NSArray *huds = [MBProgressHUD allHUDsForView:view];
+    for (MBProgressHUD *hud in huds) {
+        hud.removeFromSuperViewOnHide = YES;
+        [hud hide:animated];
+    }
+    return [huds count];
+    return NO;
 }
 
 + (NSUInteger)hideAllHUDsForView:(UIView *)view animated:(BOOL)animated {
-    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    app.loadingBaseView.hidden = YES;
-    return 0;
+//    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+//    app.loadingBaseView.hidden = YES;
+//    return 0;
 //    animated = NO;
 //	NSArray *huds = [MBProgressHUD allHUDsForView:app.loadingBaseView];
 //	for (MBProgressHUD *hud in huds) {
@@ -181,6 +193,12 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 //	}
 
 //	return [huds count];
+    NSArray *huds = [MBProgressHUD allHUDsForView:view];
+    for (MBProgressHUD *hud in huds) {
+        hud.removeFromSuperViewOnHide = YES;
+        [hud hide:animated];
+    }
+    return [huds count];
 }
 + (MB_INSTANCETYPE)showOriginHUDAddedTo:(UIView *)view animated:(BOOL)animated {
     MBProgressHUD *hud = [[self alloc] initWithView:view];
