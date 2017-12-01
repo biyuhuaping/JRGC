@@ -147,6 +147,48 @@
 
 }
 
+- (id<UIViewControllerAnimatedTransitioning>)tabBarController:(UITabBarController *)tabBarController animationControllerForTransitionFromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC
+{
+    if ([self.viewControllers indexOfObject:toVC] == 4) {
+        [self checkAppVersion];
+    }
+    return nil;
+}
+
+- (void)checkAppVersion {
+    NSString *currentVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    NSString *preVersion = [[NSUserDefaults standardUserDefaults] stringForKey:@"preVersion"];
+    if (![preVersion isEqualToString:currentVersion]) {
+        [[NSUserDefaults standardUserDefaults] setValue:currentVersion forKey:@"preVersion"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        [self setZeroForTapMineNum];
+        [self checkTapMineNum];
+    }
+    else {
+        [self checkTapMineNum];
+    }
+}
+
+- (void)checkTapMineNum {
+    NSString *userId = [UserInfoSingle sharedManager].userId;
+    if(nil != userId) {
+        NSInteger index = [[NSUserDefaults standardUserDefaults] integerForKey:@"tapMineNum"];
+        if (index <= 3) {
+            index ++;
+            [[NSUserDefaults standardUserDefaults] setInteger:index forKey:@"tapMineNum"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
+    }
+    else {
+        [self setZeroForTapMineNum];
+    }
+}
+
+- (void)setZeroForTapMineNum {
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"tapMineNum"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 - (void)gestureRecognizerHandle:(UITapGestureRecognizer *)sender{
     CGPoint p = [sender locationInView:self.tabBar];
     int index = p.x/(ScreenWidth/4);
@@ -202,6 +244,7 @@
         } else {
            return [[P2PWalletHelper sharedManager] checkUserHSStateCanOpenWallet];
         }
+        
         return YES;
     }
     return YES;

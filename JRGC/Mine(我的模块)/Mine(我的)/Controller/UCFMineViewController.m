@@ -95,6 +95,18 @@
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 //    self.navigationController.navigationBarHidden = YES;
      [self.navigationController setNavigationBarHidden:YES animated:YES];
+    NSInteger index = [[NSUserDefaults standardUserDefaults] integerForKey:@"tapMineNum"];
+    if (index == 3) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"警告" message:@"天王盖地虎" preferredStyle:UIAlertControllerStyleAlert];
+        
+        [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            
+        }]];
+        
+        [self presentViewController:alert animated:YES completion:^{
+            
+        }];
+    }
     if ([[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
         if (_loginView) {
             [_loginView removeFromSuperview];
@@ -238,7 +250,7 @@
             return 1;
         
         case 2:
-            return 3;
+            return 4;
     }
     return 0;
 }
@@ -355,6 +367,16 @@
             cell.valueLabel.text = @"签到送工分";
             cell.title2DesLabel.text = @"联系我们";
             cell.value2Label.text = @"400-0322-988";
+            cell.signView.hidden = YES;
+            cell.sign2View.hidden = YES;
+        }
+        else if (indexPath.row == 3) {
+            cell.iconImageView.image = [UIImage imageNamed:@"uesr_icon_checkin"];
+            cell.icon2ImageView.image = [UIImage imageNamed:@"uesr_icon_contact"];
+            cell.titleDesLabel.text = @"资产证明";
+            cell.valueLabel.text = @"一句话描述";
+            cell.title2DesLabel.text = @"投资计算器";
+            cell.value2Label.text = @"键计算收益";
             cell.signView.hidden = YES;
             cell.sign2View.hidden = YES;
         }
@@ -611,6 +633,12 @@
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"联系客服" message:@"呼叫400-0322-988" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"立即拨打", nil];
         alert.tag = 9000;
         [alert show];
+    }
+    else  if ([title isEqualToString:@"资产证明"]){//资产证明
+        
+    }
+    else  if ([title isEqualToString:@"投资计算器"]){//投资计算器
+        
     }
 }
 

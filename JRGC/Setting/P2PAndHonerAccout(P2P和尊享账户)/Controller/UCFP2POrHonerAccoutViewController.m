@@ -171,7 +171,16 @@
     if (_cellItemsData == nil) {
         
         UCFSettingItem *myInVest = [UCFSettingArrowItem itemWithIcon:nil title:@"我的出借" destVcClass:[MyViewController class]];
-        UCFSettingItem *backMoneyDetail = [UCFSettingArrowItem itemWithIcon:nil title:@"回款日历" destVcClass:[UCFCalendarModularViewController class]];
+        
+        NSString *calendarStr = nil;
+        if (self.accoutType == SelectAccoutTypeP2P) {
+            calendarStr = @"微金回款日历";
+        }
+        else if (self.accoutType == SelectAccoutTypeHoner) {
+            calendarStr = @"尊享回款日历";
+        }
+        
+        UCFSettingItem *backMoneyDetail = [UCFSettingArrowItem itemWithIcon:nil title:calendarStr destVcClass:[UCFCalendarModularViewController class]];
         UCFSettingItem *feedBackVC = [UCFSettingArrowItem itemWithIcon:nil title:@"邀请获利" destVcClass:[UCFInvitationRebateViewController class]];
         
         
@@ -351,9 +360,10 @@
         myInvestVC.accoutType = self.accoutType;
         [self.navigationController pushViewController:myInvestVC animated:YES];
     }
-    else if ([titleStr isEqualToString:@"回款日历"]) {
+    else if ([titleStr hasSuffix:@"回款日历"]) {
         UCFCalendarModularViewController *backMoneyCalendarVC = [[UCFCalendarModularViewController alloc] initWithNibName:@"UCFCalendarModularViewController" bundle:nil];
         backMoneyCalendarVC.accoutType = self.accoutType;
+        backMoneyCalendarVC.baseTitleText = titleStr;
         [self.navigationController pushViewController:backMoneyCalendarVC animated:YES];
     }else if ([titleStr isEqualToString:@"邀请获利"]){
         
