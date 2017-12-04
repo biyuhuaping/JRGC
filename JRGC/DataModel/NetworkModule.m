@@ -1271,6 +1271,15 @@ static NetworkModule *gInstance = NULL;
         case kSXTagExtractSubmit:
             parameter = [NEW_SERVER_IP stringByAppendingString:EXTRACTGOLDSUBMIT];
             break;
+        case kSXTagAssetProofList:      //资产证明列表:
+            parameter = [NEW_SERVER_IP stringByAppendingString:ASSETPROODLISTURL];
+            break;
+        case kSXTagApplyAssetProof:      //资产证明申请
+            parameter = [NEW_SERVER_IP stringByAppendingString:APPLYASSETPROOfURL];
+            break;
+        case kSXTagAssetProofCheckIdno: //资产证明验证身份证号
+            parameter = [NEW_SERVER_IP stringByAppendingString:ASSETPROOFCHENCKIDNO];
+            break;  
     }
     //给原有参数字典添加公共参数
     if (!data) {

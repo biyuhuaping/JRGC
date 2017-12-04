@@ -325,6 +325,9 @@
 #define GETNMGOLGGOODSINFOURL @"api/nmPrdClaim/v2/getNmGoldGoodsInfo.json"//提取黄金页面
 #define SUBMITNMGOLGGOODSINFOURL @"api/nmPrdClaim/v2/submitNmGoldGoodsInfo.json"//提金黄金提交接口
 
+#define ASSETPROODLISTURL  @"api/userInfo/v2/assetProofList.json" //资产证明列表
+#define APPLYASSETPROOfURL   @"api/userInfo/v2/applyAssetProof.json"//资产证明申请
+#define ASSETPROOFCHENCKIDNO   @"api/userInfo/v2/checkIdno.json"//资产证明验证身份证号
 enum kPostStatus{
     kPostStatusNone=0,
     kPostStatusBeging=1,
@@ -539,6 +542,9 @@ enum kSXTag
     kSXTagExtractGoldDetail,            //提金订单详情
     ksXTagLogisticsInfo,                //提金订单物流查询
     kSXTagExtractSubmit,                //提金订单确认提金
+    kSXTagAssetProofList,               //资产证明列表
+    kSXTagApplyAssetProof,              //资产证明申请
+    kSXTagAssetProofCheckIdno,          //资产证明验证身份证号
 };
 
 typedef enum kSXTag kSXTag;
