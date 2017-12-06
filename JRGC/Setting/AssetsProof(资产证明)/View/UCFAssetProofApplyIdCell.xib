@@ -11,15 +11,15 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UCFAssetProofApplyIdCell" rowHeight="128" id="KGk-i7-Jjw" customClass="UCFAssetProofApplyIdCell">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="128"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UCFAssetProofApplyIdCell" rowHeight="118" id="KGk-i7-Jjw" customClass="UCFAssetProofApplyIdCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="118"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="127.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="117.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cWr-k4-804">
-                        <rect key="frame" x="0.0" y="10" width="320" height="30"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="30"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="填写证件号码完成身份验证" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eY2-ac-Ylv">
                                 <rect key="frame" x="15" y="7" width="160" height="16"/>
@@ -36,7 +36,7 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DC0-K6-zsA">
-                        <rect key="frame" x="0.0" y="40" width="320" height="44"/>
+                        <rect key="frame" x="0.0" y="30" width="320" height="44"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HgH-n7-8o9">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
@@ -81,7 +81,7 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="81V-ya-JTp">
-                        <rect key="frame" x="0.0" y="84" width="320" height="44"/>
+                        <rect key="frame" x="0.0" y="74" width="320" height="44"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="身份证号" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FNw-3l-Loz">
                                 <rect key="frame" x="15" y="14" width="54" height="16"/>
@@ -107,6 +107,11 @@
                             <constraint firstAttribute="height" constant="44" id="h27-c9-CSD"/>
                             <constraint firstAttribute="trailing" secondItem="b4K-Fv-Iao" secondAttribute="trailing" constant="15" id="uTg-Pg-gYx"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="h27-c9-CSD"/>
+                            </mask>
+                        </variation>
                     </view>
                 </subviews>
                 <constraints>
@@ -118,7 +123,7 @@
                     <constraint firstItem="DC0-K6-zsA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Q9L-ue-Bs2"/>
                     <constraint firstAttribute="bottom" secondItem="81V-ya-JTp" secondAttribute="bottom" constant="-0.5" id="cwA-7x-OIn"/>
                     <constraint firstItem="81V-ya-JTp" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="jF5-Ec-VGh"/>
-                    <constraint firstItem="cWr-k4-804" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="mk9-dF-AP0"/>
+                    <constraint firstItem="cWr-k4-804" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="mk9-dF-AP0"/>
                     <constraint firstAttribute="trailing" secondItem="81V-ya-JTp" secondAttribute="trailing" id="uBs-MX-hGx"/>
                 </constraints>
             </tableViewCellContentView>
@@ -126,17 +131,17 @@
                 <outlet property="userIdNumberTextField" destination="b4K-Fv-Iao" id="oba-tP-KrN"/>
                 <outlet property="userNameLabel" destination="xaK-zm-d5y" id="sNG-3w-TLN"/>
             </connections>
-            <point key="canvasLocation" x="72" y="-473"/>
+            <point key="canvasLocation" x="-108" y="-474"/>
         </tableViewCell>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UCFAssetProofApplyCodeCell" rowHeight="81" id="4K6-HP-thy" customClass="UCFAssetProofApplyCodeCell">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="81"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UCFAssetProofApplyCodeCell" rowHeight="70" id="4K6-HP-thy" customClass="UCFAssetProofApplyCodeCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4K6-HP-thy" id="Dqe-Ql-9gY">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="80.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="69.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LJp-T4-PR1">
-                        <rect key="frame" x="0.0" y="10" width="320" height="30"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="30"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="输入手机验证码，完成身份验证" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OZY-Tm-LCg">
                                 <rect key="frame" x="15" y="7" width="186" height="16"/>
@@ -153,7 +158,7 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sJo-OL-LMf">
-                        <rect key="frame" x="0.0" y="40" width="320" height="44"/>
+                        <rect key="frame" x="0.0" y="30" width="320" height="44"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rw8-Jg-SUw">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
@@ -199,7 +204,7 @@
                     <constraint firstItem="LJp-T4-PR1" firstAttribute="leading" secondItem="Dqe-Ql-9gY" secondAttribute="leading" id="8kG-qo-xVE"/>
                     <constraint firstAttribute="trailing" secondItem="LJp-T4-PR1" secondAttribute="trailing" id="CAN-cz-6JB"/>
                     <constraint firstItem="sJo-OL-LMf" firstAttribute="top" secondItem="LJp-T4-PR1" secondAttribute="bottom" id="IPF-wq-ic6"/>
-                    <constraint firstItem="LJp-T4-PR1" firstAttribute="top" secondItem="Dqe-Ql-9gY" secondAttribute="top" constant="10" id="OLv-2K-fcE"/>
+                    <constraint firstItem="LJp-T4-PR1" firstAttribute="top" secondItem="Dqe-Ql-9gY" secondAttribute="top" id="OLv-2K-fcE"/>
                     <constraint firstAttribute="trailing" secondItem="sJo-OL-LMf" secondAttribute="trailing" id="lDz-6i-gzg"/>
                 </constraints>
             </tableViewCellContentView>
@@ -208,7 +213,7 @@
                 <outlet property="MessageCodeBtn" destination="ZfR-rH-8KF" id="Fdf-I3-AKC"/>
                 <outlet property="messageCodeTextField" destination="GuN-f7-QvV" id="zET-bn-sPk"/>
             </connections>
-            <point key="canvasLocation" x="72" y="-181.5"/>
+            <point key="canvasLocation" x="-108" y="-208"/>
         </tableViewCell>
     </objects>
 </document>

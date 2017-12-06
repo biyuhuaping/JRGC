@@ -11,11 +11,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UCFAssetProofApplyFirstCell" rowHeight="350" id="KGk-i7-Jjw" customClass="UCFAssetProofApplyFirstCell">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="350"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UCFAssetProofApplyFirstCell" rowHeight="344" id="KGk-i7-Jjw" customClass="UCFAssetProofApplyFirstCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="344"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="349.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="343.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RCX-CZ-24p">
@@ -98,21 +98,28 @@
                             <constraint firstItem="IAU-G5-MTf" firstAttribute="top" secondItem="RCX-CZ-24p" secondAttribute="top" constant="30" id="tyu-Qd-4FC"/>
                         </constraints>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="资产证明常作为出国签证、银行贷款、财产纠纷、诉讼、税务稽查等事务的证明材料。资产证明的法律效力以有关机关实际判断为准。" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d91-YZ-f4o">
-                        <rect key="frame" x="15" y="185" width="290" height="43"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d91-YZ-f4o">
+                        <rect key="frame" x="15" y="185" width="290" height="36"/>
+                        <attributedString key="attributedText">
+                            <fragment content="资产证明常作为出国签证、银行贷款、财产纠纷、诉讼、税务稽查等事务的证明材料。资产证明的法律效力以有关机关实际判断为准。">
+                                <attributes>
+                                    <color key="NSColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                    <font key="NSFont" size="12" name=".PingFangSC-Regular"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                </attributes>
+                            </fragment>
+                        </attributedString>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YE0-ZS-vEI">
-                        <rect key="frame" x="0.0" y="238" width="320" height="10"/>
+                        <rect key="frame" x="0.0" y="231" width="320" height="10"/>
                         <color key="backgroundColor" red="0.8901960784313725" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="10" id="5je-Q6-wLj"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E1P-qt-SPL">
-                        <rect key="frame" x="0.0" y="248" width="320" height="103"/>
+                        <rect key="frame" x="0.0" y="241" width="320" height="103"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ydP-yZ-8gJ">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="30"/>
@@ -131,12 +138,68 @@
                                     <constraint firstAttribute="height" constant="30" id="Y9V-j4-Kwh"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6BN-Bw-5ts">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6BN-Bw-5ts">
                                 <rect key="frame" x="15" y="45" width="290" height="43"/>
-                                <string key="text">1、仅保留最近15天内，最近6条申请记录
-2、点击下载打开文件后，您可以通过微信、邮件等方式分享给自己，并保存资产证明。</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="• ">
+                                        <attributes>
+                                            <color key="NSColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" metaFont="cellTitle"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="仅保留最近">
+                                        <attributes>
+                                            <color key="NSColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="12" name=".PingFangSC-Regular"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="15">
+                                        <attributes>
+                                            <color key="NSColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" metaFont="cellTitle"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="天内，最近">
+                                        <attributes>
+                                            <color key="NSColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="12" name=".PingFangSC-Regular"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="6">
+                                        <attributes>
+                                            <color key="NSColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" metaFont="cellTitle"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="条申请记录">
+                                        <attributes>
+                                            <color key="NSColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="12" name=".PingFangSC-Regular"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+• </string>
+                                        <attributes>
+                                            <color key="NSColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" metaFont="cellTitle"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="点击下载打开文件后，您可以通过微信、邮件等方式分享给自己，并保存资产证明。">
+                                        <attributes>
+                                            <color key="NSColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="12" name=".PingFangSC-Regular"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -170,7 +233,7 @@
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-            <point key="canvasLocation" x="-393" y="-419"/>
+            <point key="canvasLocation" x="-394" y="-442"/>
         </tableViewCell>
         <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UCFAssetProofApplySecondCell" rowHeight="75" id="wk7-lL-Fbz" customClass="UCFAssetProofApplySecondCell">
             <rect key="frame" x="0.0" y="0.0" width="320" height="75"/>

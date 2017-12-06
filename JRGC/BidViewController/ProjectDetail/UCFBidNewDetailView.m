@@ -17,11 +17,15 @@
 #import "NSDateManager.h"
 #import "UIDic+Safe.h"
 #import "MinuteCountDownView.h"
+#import "SecurityCell.h"
+#import "UCFSettingArrowItem.h"
+#import "UCFSettingGroup.h"
 #define shadeSpacingHeight 18 //遮罩label的上下间距
 #define shadeHeight 70 //遮罩高度
 
 #define MinuteDownViewHeight 37 //遮罩高度
-@interface UCFBidNewDetailView () {
+@interface UCFBidNewDetailView ()<UITableViewDelegate,UITableViewDataSource>
+{
     UIImageView *_headBkView;
     MDRadialProgressView *_circleProgress;
     SDLoopProgressView *proressView;
@@ -58,8 +62,9 @@
     NSString *_p2pOrHonerType;// 1为微金，2位普通尊享，3为委托尊享标
     MinuteCountDownView *_minuteCountDownView;//倒计时View
     int  _status;//标状态
+    UITableView *_twoTableview;
 }
-
+@property(nonatomic,assign)NSMutableArray *dataArray;
 @end
 
 @implementation UCFBidNewDetailView
@@ -619,15 +624,42 @@
 //上拉view
 - (void)drawPullingView
 {
-    UIView *pullingBkView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(bottomBkView.frame), ScreenWidth, 42)];
-    [self addSubview:pullingBkView];
-    pullingBkView.backgroundColor = [UIColor clearColor];
+    _twoTableview = [[UITableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(bottomBkView.frame) + 10, ScreenWidth, 44*3) style:UITableViewStylePlain];
+    _twoTableview.backgroundColor = [UIColor clearColor];
+    _twoTableview.separatorColor = UIColorWithRGB(0xeff0f3);
+    _twoTableview.delegate = self;
+    _twoTableview.dataSource = self;
+    _twoTableview.showsVerticalScrollIndicator = NO;
+    _twoTableview.tag = 1002;
+    [_twoTableview setSeparatorInset:UIEdgeInsetsMake(0,15,0,0)];
+    _twoTableview.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     
-    UILabel *buyCueDesTipLabel = [[UILabel alloc]initWithFrame:CGRectZero];
-    buyCueDesTipLabel.textColor = UIColorWithRGB(0x999999);
-    buyCueDesTipLabel.textAlignment = NSTextAlignmentLeft;
-    buyCueDesTipLabel.backgroundColor = [UIColor clearColor];
-    buyCueDesTipLabel.font = [UIFont systemFontOfSize:12];
+    
+    UCFSettingItem *basicBetailItem = [UCFSettingArrowItem itemWithIcon:@"safecenter_icon_id" title:@"基础详情" destVcClass:nil];
+    UCFSettingItem *safetyGuaranteeItem = [UCFSettingArrowItem itemWithIcon:@"login_icon_phone" title:@"安全保障" destVcClass:nil];
+    UCFSettingItem *investmentecordItem = [UCFSettingArrowItem itemWithIcon:@"safecenter_icon_code" title:@"出借记录"  destVcClass:nil];
+    
+    if (_type == PROJECTDETAILTYPEBONDSRRANSFER)//债转标
+    {
+        basicBetailItem.title = @"原标详情";
+        investmentecordItem.title  = @"转让记录";
+     }
+     else //普通标
+    {
+        investmentecordItem.title  = _isP2P ? @"出借记录" :@"认购记录";
+     }
+    self.dataArray = [NSMutableArray arrayWithObjects:basicBetailItem,safetyGuaranteeItem,investmentecordItem, nil];
+     [self addSubview:_twoTableview];
+    [_twoTableview reloadData];
+//    UIView *pullingBkView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(bottomBkView.frame), ScreenWidth, 42)];
+//    [self addSubview:pullingBkView];
+//    pullingBkView.backgroundColor = [UIColor clearColor];
+//
+//    UILabel *buyCueDesTipLabel = [[UILabel alloc]initWithFrame:CGRectZero];
+//    buyCueDesTipLabel.textColor = UIColorWithRGB(0x999999);
+//    buyCueDesTipLabel.textAlignment = NSTextAlignmentLeft;
+//    buyCueDesTipLabel.backgroundColor = [UIColor clearColor];
+//    buyCueDesTipLabel.font = [UIFont systemFontOfSize:12];
 //    NSString *buyCueDesStr =[_dic objectSafeForKey: @"buyCueDes"];
 //    if (_type == PROJECTDETAILTYPEBONDSRRANSFER && !_isP2P && ![buyCueDesStr isEqualToString:@""] ) {
 //        pullingBkView.frame = CGRectMake(0, CGRectGetMaxY(bottomBkView.frame), ScreenWidth, 42 + 20);
@@ -636,20 +668,51 @@
 //    }else{
 //        buyCueDesTipLabel.frame = CGRectZero;
 //    }
-    UIImageView *iconView = [[UIImageView alloc] initWithFrame:CGRectMake((ScreenWidth - 15) / 2, CGRectGetMaxY(buyCueDesTipLabel.frame)+10, 15, 15)];
-    iconView.image = [UIImage imageNamed:@"particular_icon_up.png"];
-    [pullingBkView addSubview:iconView];
-    
-    UILabel *pullingLabel = [UILabel labelWithFrame:CGRectMake(0, CGRectGetMaxY(iconView.frame) + 5, ScreenWidth, 12) text:@"向上滑动，查看详情" textColor:UIColorWithRGB(0x999999) font:[UIFont systemFontOfSize:12]];
-    [pullingBkView addSubview:pullingLabel];
-
-    UIButton *bottomBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [bottomBtn addTarget:self action:@selector(bottomBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-    bottomBtn.frame = CGRectMake(0, 0, ScreenWidth, 42);
-    [pullingBkView addSubview:bottomBtn];
-    [pullingBkView setUserInteractionEnabled:YES];
+//    UIImageView *iconView = [[UIImageView alloc] initWithFrame:CGRectMake((ScreenWidth - 15) / 2, CGRectGetMaxY(buyCueDesTipLabel.frame)+10, 15, 15)];
+//    iconView.image = [UIImage imageNamed:@"particular_icon_up.png"];
+//    [pullingBkView addSubview:iconView];
+//
+//    UILabel *pullingLabel = [UILabel labelWithFrame:CGRectMake(0, CGRectGetMaxY(iconView.frame) + 5, ScreenWidth, 12) text:@"向上滑动，查看详情" textColor:UIColorWithRGB(0x999999) font:[UIFont systemFontOfSize:12]];
+//    [pullingBkView addSubview:pullingLabel];
+//
+//    UIButton *bottomBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [bottomBtn addTarget:self action:@selector(bottomBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+//    bottomBtn.frame = CGRectMake(0, 0, ScreenWidth, 42);
+//    [pullingBkView addSubview:bottomBtn];
+//    [pullingBkView setUserInteractionEnabled:YES];
 }
-
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 3;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 44;
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    SecurityCell *cell = [SecurityCell cellWithTableView:tableView];
+    if(indexPath.row == 0) {
+        UIView *topLine = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 0.5)];
+        topLine.backgroundColor = UIColorWithRGB(0xd8d8d8);
+        [cell.contentView addSubview:topLine];
+    }
+    if (indexPath.row == self.dataArray.count-1) {
+        UIView *bottomLine = [[UIView alloc] initWithFrame:CGRectMake(0,43.5, ScreenWidth, 0.5)];
+        bottomLine.backgroundColor = UIColorWithRGB(0xd8d8d8);
+        [cell.contentView addSubview:bottomLine];
+    }
+    cell.item = self.dataArray[indexPath.row];
+    cell.itemSubTitleLabel.text = @"";
+    return cell;
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    if ([self.delegate respondsToSelector:@selector(tableView:didSelectBidNewRowAtIndexPath:)]) {
+        [self.delegate tableView:tableView didSelectBidNewRowAtIndexPath:indexPath];
+    }
+}
 - (void)bottomBtnClicked:(id)sender
 {
     [_delegate bottomBtnClicked:sender];

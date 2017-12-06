@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UCFAssetProofApplyViewController">
             <connections>
+                <outlet property="assetProofApplyBaseView" destination="zxG-Ge-hFF" id="PkL-Mr-dve"/>
                 <outlet property="nextBtn" destination="ffb-2g-ajC" id="phe-41-0f9"/>
                 <outlet property="tableView" destination="dd1-K6-aoI" id="YtS-4q-sXz"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -30,6 +31,39 @@
                         <outlet property="delegate" destination="-1" id="CCR-Sm-Zox"/>
                     </connections>
                 </tableView>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zxG-Ge-hFF">
+                    <rect key="frame" x="0.0" y="20" width="375" height="590"/>
+                    <subviews>
+                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="applyProofSuccess" translatesAutoresizingMaskIntoConstraints="NO" id="Zoa-Me-a8x">
+                            <rect key="frame" x="67" y="130" width="241.5" height="150"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="150" id="OpY-Hg-bIu"/>
+                                <constraint firstAttribute="width" constant="241.5" id="zvP-u3-cge"/>
+                            </constraints>
+                        </imageView>
+                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="资产证明申请成功" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sfb-ev-Zbe">
+                            <rect key="frame" x="106.5" y="310" width="163.5" height="24"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                            <color key="textColor" red="0.2901960784" green="0.63137254899999995" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请稍候在申请记录中查看下载" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FQa-Lm-U5T">
+                            <rect key="frame" x="101.5" y="344" width="172.5" height="16"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="Sfb-ev-Zbe" firstAttribute="top" secondItem="Zoa-Me-a8x" secondAttribute="bottom" constant="30" id="1JH-QB-ROj"/>
+                        <constraint firstItem="FQa-Lm-U5T" firstAttribute="centerX" secondItem="zxG-Ge-hFF" secondAttribute="centerX" id="CUs-u0-Zbl"/>
+                        <constraint firstItem="FQa-Lm-U5T" firstAttribute="top" secondItem="Sfb-ev-Zbe" secondAttribute="bottom" constant="10" id="cAl-hK-rfY"/>
+                        <constraint firstItem="Zoa-Me-a8x" firstAttribute="centerX" secondItem="zxG-Ge-hFF" secondAttribute="centerX" id="fv4-w6-VRW"/>
+                        <constraint firstItem="Sfb-ev-Zbe" firstAttribute="centerX" secondItem="zxG-Ge-hFF" secondAttribute="centerX" id="geJ-eh-5yB"/>
+                        <constraint firstItem="Zoa-Me-a8x" firstAttribute="top" secondItem="zxG-Ge-hFF" secondAttribute="top" constant="130" id="yB8-B2-Os8"/>
+                    </constraints>
+                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hh5-IS-Maz">
                     <rect key="frame" x="0.0" y="610" width="375" height="57"/>
                     <subviews>
@@ -66,14 +100,21 @@
             <constraints>
                 <constraint firstItem="dd1-K6-aoI" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" id="1kj-Un-7DO"/>
                 <constraint firstItem="hh5-IS-Maz" firstAttribute="bottom" secondItem="Q5M-cg-NOt" secondAttribute="bottom" id="7E4-Ug-4yv"/>
+                <constraint firstItem="zxG-Ge-hFF" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="Mcv-he-xyW"/>
                 <constraint firstItem="hh5-IS-Maz" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="Vh7-4a-MUO"/>
                 <constraint firstItem="dd1-K6-aoI" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="XPK-cs-bl9"/>
+                <constraint firstItem="zxG-Ge-hFF" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="Yo9-k0-v1C"/>
                 <constraint firstItem="hh5-IS-Maz" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="aqD-7a-lTu"/>
                 <constraint firstItem="hh5-IS-Maz" firstAttribute="top" secondItem="dd1-K6-aoI" secondAttribute="bottom" id="cDI-sJ-gts"/>
+                <constraint firstItem="zxG-Ge-hFF" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" id="dWp-zs-k4V"/>
+                <constraint firstItem="hh5-IS-Maz" firstAttribute="top" secondItem="zxG-Ge-hFF" secondAttribute="bottom" id="kVO-tf-R9q"/>
                 <constraint firstItem="dd1-K6-aoI" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="vgl-Lp-oLy"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
-            <point key="canvasLocation" x="-380" y="-157"/>
+            <point key="canvasLocation" x="-568.5" y="-190.5"/>
         </view>
     </objects>
+    <resources>
+        <image name="applyProofSuccess" width="161" height="99"/>
+    </resources>
 </document>

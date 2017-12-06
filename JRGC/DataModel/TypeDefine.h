@@ -328,6 +328,9 @@
 #define ASSETPROODLISTURL  @"api/userInfo/v2/assetProofList.json" //资产证明列表
 #define APPLYASSETPROOfURL   @"api/userInfo/v2/applyAssetProof.json"//资产证明申请
 #define ASSETPROOFCHENCKIDNO   @"api/userInfo/v2/checkIdno.json"//资产证明验证身份证号
+
+#define DOWNLOADASSERTPROOF @"newprdOrder/downloadAssertProof"//资产证明下载（尊享老服务接口）
+
 enum kPostStatus{
     kPostStatusNone=0,
     kPostStatusBeging=1,
@@ -545,6 +548,7 @@ enum kSXTag
     kSXTagAssetProofList,               //资产证明列表
     kSXTagApplyAssetProof,              //资产证明申请
     kSXTagAssetProofCheckIdno,          //资产证明验证身份证号
+    kSXTagDownloadAssertProof,          //资产证明下载（尊享老服务接口）
 };
 
 typedef enum kSXTag kSXTag;

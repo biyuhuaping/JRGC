@@ -63,6 +63,12 @@
             NSString *imagePath = [documentPath stringByAppendingString:@"/11.pdf"];
             [data writeToFile:imagePath atomically:YES];
             return imagePath;
+        }else if(_tag == kSXTagDownloadAssertProof)
+        {
+            NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+            NSString *imagePath = [documentPath stringByAppendingString:@"/资产证明.pdf"];
+            [data writeToFile:imagePath atomically:YES];
+            return imagePath;
         }
         NSString *string = [[[NSString alloc] initWithData:data encoding:_enc] autorelease];
         DBLog(@"请求返回数据:%@",string);

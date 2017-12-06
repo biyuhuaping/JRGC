@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -25,13 +25,13 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="85"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="总资产" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4qF-Du-V3W">
-                            <rect key="frame" x="169" y="23" width="37" height="14.5"/>
+                            <rect key="frame" x="15" y="23" width="37" height="14.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¥0.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LZ2-rT-g2K">
-                            <rect key="frame" x="160.5" y="39" width="55" height="24"/>
+                            <rect key="frame" x="15" y="39" width="55" height="24"/>
                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -43,15 +43,27 @@
                                 <constraint firstAttribute="height" constant="0.5" id="UOG-Ty-74a"/>
                             </constraints>
                         </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cyF-UK-RaK">
+                            <rect key="frame" x="276" y="26.5" width="84" height="32"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <state key="normal" title="资产证明  &gt;">
+                                <color key="titleColor" red="0.2901960784" green="0.63137254899999995" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="gotoAssetProofVC:" destination="-1" eventType="touchUpInside" id="9Ji-bA-nSR"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="LZ2-rT-g2K" secondAttribute="bottom" constant="22" id="0y5-GE-ciI"/>
-                        <constraint firstItem="LZ2-rT-g2K" firstAttribute="centerX" secondItem="BmK-UB-nLG" secondAttribute="centerX" id="Kx7-pw-uT7"/>
+                        <constraint firstItem="cyF-UK-RaK" firstAttribute="centerY" secondItem="BmK-UB-nLG" secondAttribute="centerY" id="2y7-IY-r8c"/>
+                        <constraint firstItem="4qF-Du-V3W" firstAttribute="leading" secondItem="BmK-UB-nLG" secondAttribute="leading" constant="15" id="4ns-za-3OQ"/>
+                        <constraint firstAttribute="trailing" secondItem="cyF-UK-RaK" secondAttribute="trailing" constant="15" id="8Rb-6k-c8w"/>
                         <constraint firstAttribute="height" constant="85" id="LCe-gn-mOK"/>
                         <constraint firstAttribute="trailing" secondItem="0EW-g6-o6P" secondAttribute="trailing" constant="20" id="QYN-Lf-Kdi"/>
-                        <constraint firstItem="4qF-Du-V3W" firstAttribute="centerX" secondItem="BmK-UB-nLG" secondAttribute="centerX" id="Xjd-y4-8kK"/>
                         <constraint firstAttribute="bottom" secondItem="0EW-g6-o6P" secondAttribute="bottom" id="Xoy-Ph-Y26"/>
+                        <constraint firstItem="LZ2-rT-g2K" firstAttribute="leading" secondItem="BmK-UB-nLG" secondAttribute="leading" constant="15" id="Z7A-VX-Mam"/>
                         <constraint firstItem="0EW-g6-o6P" firstAttribute="leading" secondItem="BmK-UB-nLG" secondAttribute="leading" constant="20" id="c6Y-GL-Icp"/>
                         <constraint firstItem="4qF-Du-V3W" firstAttribute="top" secondItem="BmK-UB-nLG" secondAttribute="top" constant="23" id="vQw-sq-kuf"/>
                     </constraints>

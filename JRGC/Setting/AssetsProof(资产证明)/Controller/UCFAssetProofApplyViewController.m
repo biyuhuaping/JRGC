@@ -13,8 +13,10 @@
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UIButton *nextBtn;
 @property (weak, nonatomic)  UIButton *sendCodeBtn;
+@property (weak, nonatomic)  UITextField *idNumberField;
 @property (weak, nonatomic)  UITextField *codeTextField;
 @property (strong, nonatomic)NSTimer *timer;
+@property (strong, nonatomic) IBOutlet UIView *assetProofApplyBaseView;
 
 @property (strong, nonatomic)NSString *checkToken;
 @property (assign, nonatomic) int counter;
@@ -29,9 +31,15 @@
     [super viewDidLoad];
     baseTitleLabel.text = @"身份验证";
     [self addLeftButton];
+    self.tableView.contentInset = UIEdgeInsetsMake(10, 0, 0, 0);
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
+    [self.tableView addGestureRecognizer:tap];
 }
-
+- (void)tapped:(UIGestureRecognizer *)tap
+{
+    [self.view endEditing:YES];
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return 1;
@@ -40,9 +48,9 @@
 {
     if(self.assetProofApplyStep == 1)
     {
-          return 128;
+          return 118;
     }else{
-        return 44+30;
+        return 70;
     }
   
 }
@@ -57,6 +65,7 @@
             cell = [[[NSBundle mainBundle]loadNibNamed:@"UCFAssetProofApplyIdCell" owner:nil options:nil]firstObject];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
+        self.idNumberField =  cell.userIdNumberTextField;
         return cell;
     }else{
         NSString *cellindifier = @"UCFAssetProofApplyCodeCell";
@@ -128,7 +137,7 @@
 //开始请求
 - (void)beginPost:(kSXTag)tag
 {
-//       [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+       [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 }
 
 //请求成功及结果
@@ -152,10 +161,12 @@
             _timer = nil;
             self.assetProofApplyStep = 3;
              baseTitleLabel.text = @"发送申请";
+            self.tableView.hidden = YES;
+            for (UIView *view in self.assetProofApplyBaseView.subviews) {
+                view.hidden = NO;;
+            }
+            self.assetProofApplyBaseView.hidden = NO;
             [self.nextBtn setTitle:@"去下载" forState:UIControlStateNormal];
-//            [self.tableVi]
-            
-//            [self.tableView reloadData];
         }else {
             [AuxiliaryFunc showToastMessage:dic[@"message"] withView:self.view];
         }
@@ -203,7 +214,13 @@
     switch (self.assetProofApplyStep) {
         case 1:
         {
-            [self checkUserIdNumberHttpRequset];//验证用户ID
+            if (self.idNumberField.text)
+            {
+                  [self checkUserIdNumberHttpRequset];//验证用户ID
+            }else{
+                [AuxiliaryFunc showToastMessage:@"请输入身份证号" withView:self.view];
+            }
+          
         }
             break;
         case 2:
@@ -211,6 +228,8 @@
             if(self.codeTextField.text)
             {
                 [self applyAssetProofCheckCodeHttpRequset];
+            }else{
+                [AuxiliaryFunc showToastMessage:@"请输入验证码" withView:self.view];
             }
      
         }
@@ -225,5 +244,9 @@
             break;
     }
     
+}
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self.view endEditing:YES];
 }
 @end

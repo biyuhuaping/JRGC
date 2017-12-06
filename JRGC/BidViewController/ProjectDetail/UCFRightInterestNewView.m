@@ -88,7 +88,7 @@
 - (void)initMainView
 {
     [self initOneScrollView];
-    [self initTableViews];
+    [self initTableViews]; // 3.3.3改版去掉下面的 下拉tabView
     [self cretateInvestmentView];
     //[self bringSubviewToFront:_investmentView];
 }
@@ -205,6 +205,83 @@
     _infoDetailArray = [NSMutableArray arrayWithCapacity:[arr count]];
     _infoDetailArray = [NSMutableArray arrayWithArray:arr];
 }
+- (void)initTableViews1111
+{
+    //是否隐藏借款人信息一栏
+    _isHideBorrowerInformation = YES; //默认不隐藏
+    _borrowerInformationStr = @"借款人信息";
+    _auditRecordArray = [NSMutableArray arrayWithArray:@[@"身份认证",@"手机认证",@"工作认证",@"信用认证"]];
+    NSString *agencyCodeStr = [[_dataDic objectSafeDictionaryForKey:@"orderUser"] objectSafeForKey:@"agencyCode"];
+    NSArray *arrayJiBen = [NSArray arrayWithObjects:@"姓名／所在地",@"基本信息",@"入学年份",@"户口所在地",@"公司行业",@"公司规模",@"职位",@"工作收入",@"现单位工作时间",@"有无购房",@"有无房贷",@"有无购车",@"有无车贷", nil];
+    if (![agencyCodeStr isEqualToString:@""]) {
+        _borrowerInformationStr = @"机构信息";
+        _auditRecordArray =[NSMutableArray arrayWithArray:@[@"营业执照",@"手机认证",@"信用认证"]];
+        arrayJiBen= @[@"机构名称",@"营业执照",@"法定代理人",@"联系人",@"机构地址",@"邮编"];
+//        [self setAgencyInfoDetailValue];
+    }else{
+        [self setinfoDetailValue];
+    }
+    _borrowerInfo = [[NSArray alloc] initWithObjects:arrayJiBen, nil];
+    
+    if (_isP2P) {
+        _titleArray = [[NSArray alloc] initWithObjects:@"基础详情", @"安全保障",@"出借记录", nil];
+        NSString *tradeMarkStr = [[_dataDic objectSafeDictionaryForKey:@"prdClaims"] objectSafeForKey: @"tradeMark"];
+        _prdDesType= [[[_dataDic objectSafeDictionaryForKey:@"prdClaims"] objectSafeForKey: @"prdDesType"] boolValue];
+        if (_prdDesType)//老项目
+        {
+            _isHideBorrowerInformation = [tradeMarkStr intValue] == 20 ? YES :NO;
+        }
+        else //新项目
+        {
+            if ([agencyCodeStr isEqualToString:@""] ) { //个人标
+                _isHideBorrowerInformation = [tradeMarkStr intValue] == 20 ? YES :NO;
+            }else{ //机构标
+                _isHideBorrowerInformation = YES; //隐藏借款人信息
+            }
+        }
+    }else{
+        _isHideBorrowerInformation = YES; //如果是尊享标 则隐藏借款人信息
+        _titleArray = [[NSArray alloc] initWithObjects:@"基础详情", @"安全保障",@"认购记录", nil];
+    }
+    if (_isShow) {
+        _overdueCount = [NSString stringWithFormat:@"%@次",[_dataDic objectSafeForKey:@"overdueCount"]];
+        _overdueInvest = [NSString stringWithFormat:@"%@元",[_dataDic objectSafeForKey:@"overdueInvest"]];
+        [_auditRecordArray addObjectsFromArray:@[@"平台逾期次数",@"平台逾期总金额"]];
+        _isHideBusinessLicense =  _auditRecordArray.count == 6 ? YES :NO;
+    }else{
+        _isHideBusinessLicense =  _auditRecordArray.count == 4 ? YES :NO;
+    }
+    _webView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 1)];
+    [_webView setScalesPageToFit:YES];
+    _webView.delegate  = self;
+    _webView.userInteractionEnabled = NO;
+    _webView.scrollView.showsVerticalScrollIndicator = NO;
+    _webView.scrollView.showsHorizontalScrollIndicator = NO;
+    NSString *idStr = [[_dataDic objectSafeDictionaryForKey:@"prdClaims"] objectSafeForKey:@"id"];
+    NSString *urlStr = [NSString stringWithFormat:@"https://static.9888.cn/pages/wap/bid-describe/index.html?id=%@&fromSite=%@",idStr,_isP2P ?@"1":@"2"];
+    [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlStr]]];
+    
+    _twoTableview = [[UITableView alloc] initWithFrame:CGRectMake(0, ScreenHeight, ScreenWidth, ScreenHeight - 64) style:UITableViewStylePlain];
+    _twoTableview.backgroundColor = [UIColor clearColor];
+    //_tableView.separatorColor = UIColorWithRGB(0xeff0f3);
+    _twoTableview.delegate = self;
+    _twoTableview.dataSource = self;
+    _twoTableview.showsVerticalScrollIndicator = NO;
+    _twoTableview.tag = 1002;
+    if (kIS_IOS7) {
+        [_twoTableview setSeparatorInset:UIEdgeInsetsMake(0,0,0,0)];
+        _twoTableview.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    }else{
+        _twoTableview.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    }
+    [self addSubview:_twoTableview];
+    _twoTableview.contentInset = UIEdgeInsetsMake(0, 0, 10, 0);
+    //    _twoTableview.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
+    
+    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 0.5)];
+    lineView.backgroundColor = UIColorWithRGB(0xd8d8d8);
+    _twoTableview.tableFooterView = lineView;
+}
 - (void)initTableViews
 {
     //是否隐藏转让方和原始债权两栏
@@ -284,32 +361,32 @@
     _twoTableview.tableFooterView = lineView;
     
     //下拉view
-    topView = [[UIView alloc] initWithFrame:CGRectMake(0, - 40, ScreenWidth, 40)];
-    topView.backgroundColor = [UIColor clearColor];
-    [_twoTableview addSubview:topView];
-    
-    UIView *topBkView = [[UIView alloc] initWithFrame:CGRectZero];
-    topBkView.center = topView.center;
-    [topView addSubview:topBkView];
-    
-    UIImageView *iconView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 15, 15)];
-    UIImage *iconImg = [UIImage imageNamed:@"particular_icon_up.png"];
-    iconView.image = [UIImage image:iconImg rotation:UIImageOrientationDown] ;
-    [topBkView addSubview:iconView];
-    
-    _topLabel = [UILabel labelWithFrame:CGRectMake(CGRectGetMaxX(iconView.frame) + 5,0,ScreenWidth, 15) text:@"下拉，回到顶部" textColor:UIColorWithRGB(0x999999) font:[UIFont systemFontOfSize:12]];
-    [topBkView addSubview:_topLabel];
-    CGFloat stringWidth = [@"下拉，回到顶部" sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12]}].width;
-    CGRect labelFrame = _topLabel.frame;
-    labelFrame.size.width = stringWidth;
-    _topLabel.frame = labelFrame;
-    
-    CGRect bkFrame = topBkView.frame;
-    bkFrame.size.width = 15 + 5 + stringWidth;
-    bkFrame.size.height = 15;
-    bkFrame.origin.x = (ScreenWidth - bkFrame.size.width) / 2;
-    bkFrame.origin.y = 12;
-    topBkView.frame = bkFrame;
+//    topView = [[UIView alloc] initWithFrame:CGRectMake(0, - 40, ScreenWidth, 40)];
+//    topView.backgroundColor = [UIColor clearColor];
+//    [_twoTableview addSubview:topView];
+//
+//    UIView *topBkView = [[UIView alloc] initWithFrame:CGRectZero];
+//    topBkView.center = topView.center;
+//    [topView addSubview:topBkView];
+//
+//    UIImageView *iconView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 15, 15)];
+//    UIImage *iconImg = [UIImage imageNamed:@"particular_icon_up.png"];
+//    iconView.image = [UIImage image:iconImg rotation:UIImageOrientationDown] ;
+//    [topBkView addSubview:iconView];
+//
+//    _topLabel = [UILabel labelWithFrame:CGRectMake(CGRectGetMaxX(iconView.frame) + 5,0,ScreenWidth, 15) text:@"下拉，回到顶部" textColor:UIColorWithRGB(0x999999) font:[UIFont systemFontOfSize:12]];
+//    [topBkView addSubview:_topLabel];
+//    CGFloat stringWidth = [@"下拉，回到顶部" sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12]}].width;
+//    CGRect labelFrame = _topLabel.frame;
+//    labelFrame.size.width = stringWidth;
+//    _topLabel.frame = labelFrame;
+//
+//    CGRect bkFrame = topBkView.frame;
+//    bkFrame.size.width = 15 + 5 + stringWidth;
+//    bkFrame.size.height = 15;
+//    bkFrame.origin.x = (ScreenWidth - bkFrame.size.width) / 2;
+//    bkFrame.origin.y = 12;
+//    topBkView.frame = bkFrame;
 }
 
 -(float)secondHeaderHeight:(NSInteger)section{
@@ -829,30 +906,30 @@
                 cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellindifier];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 [cell.contentView addSubview:_webView];
-//                UILabel *textLabel = [UILabel labelWithFrame:CGRectZero text:@"12个月" textColor:UIColorWithRGB(0x555555) font:[UIFont systemFontOfSize:12]];
-//                textLabel.tag = 100;
-//                textLabel.lineBreakMode = NSLineBreakByWordWrapping;
-//                textLabel.textAlignment = NSTextAlignmentLeft;
-//                [textLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
-//                [cell.contentView addSubview:textLabel];
-//                
-//                NSDictionary *views = NSDictionaryOfVariableBindings(textLabel);
-//                NSDictionary *metrics = @{@"vPadding":@1,@"hPadding":@15};
-//                NSString *vfl1 = @"V:|-vPadding-[textLabel]-vPadding-|";
-//                NSString *vfl2 = @"|-hPadding-[textLabel]-hPadding-|";
-//                [cell.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:vfl1 options:0 metrics:metrics views:views]];
-//                [cell.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:vfl2 options:0 metrics:metrics views:views]];
+                //                UILabel *textLabel = [UILabel labelWithFrame:CGRectZero text:@"12个月" textColor:UIColorWithRGB(0x555555) font:[UIFont systemFontOfSize:12]];
+                //                textLabel.tag = 100;
+                //                textLabel.lineBreakMode = NSLineBreakByWordWrapping;
+                //                textLabel.textAlignment = NSTextAlignmentLeft;
+                //                [textLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
+                //                [cell.contentView addSubview:textLabel];
+                //
+                //                NSDictionary *views = NSDictionaryOfVariableBindings(textLabel);
+                //                NSDictionary *metrics = @{@"vPadding":@1,@"hPadding":@15};
+                //                NSString *vfl1 = @"V:|-vPadding-[textLabel]-vPadding-|";
+                //                NSString *vfl2 = @"|-hPadding-[textLabel]-hPadding-|";
+                //                [cell.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:vfl1 options:0 metrics:metrics views:views]];
+                //                [cell.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:vfl2 options:0 metrics:metrics views:views]];
             }
-//            UILabel *lbl = (UILabel*)[cell.contentView viewWithTag:100];
-//
-//            if ([indexPath section] == 3 && !_isHideBorrowerInformation) {
-//                lbl.text = [UCFToolsMehod isNullOrNilWithString:[[_dataDic objectForKey:@"prdClaimsReveal"] objectForKey:@"transferorInfo"]];
-//            } else {
-//                lbl.text = [UCFToolsMehod isNullOrNilWithString:[[_dataDic objectForKey:@"prdClaims"] objectForKey:@"remark"]];
-//            }
-//
-//            NSDictionary *dic = [Common getParagraphStyleDictWithStrFont:12.0f WithlineSpacing:3.0];
-//            lbl.attributedText = [NSString getNSAttributedString:lbl.text labelDict:dic];
+            //            UILabel *lbl = (UILabel*)[cell.contentView viewWithTag:100];
+            //
+            //            if ([indexPath section] == 3 && !_isHideBorrowerInformation) {
+            //                lbl.text = [UCFToolsMehod isNullOrNilWithString:[[_dataDic objectForKey:@"prdClaimsReveal"] objectForKey:@"transferorInfo"]];
+            //            } else {
+            //                lbl.text = [UCFToolsMehod isNullOrNilWithString:[[_dataDic objectForKey:@"prdClaims"] objectForKey:@"remark"]];
+            //            }
+            //
+            //            NSDictionary *dic = [Common getParagraphStyleDictWithStrFont:12.0f WithlineSpacing:3.0];
+            //            lbl.attributedText = [NSString getNSAttributedString:lbl.text labelDict:dic];
             return cell;
         } /*else if ([indexPath section] == 3) {
            NSString *cellindifier = @"threeSectionCell";
@@ -963,7 +1040,7 @@
                UILabel *renzhengLabel = (UILabel*)[cell.contentView viewWithTag:103];
                UIImageView *imageView = (UIImageView*)[cell.contentView viewWithTag:104];
                UILabel *placehoderLabel = (UILabel*)[cell.contentView viewWithTag:105];
-//               NSArray *titleArr = @[@"身份认证",@"手机认证",@"工作认证",@"信用认证"];
+               //               NSArray *titleArr = @[@"身份认证",@"手机认证",@"工作认证",@"信用认证"];
                nameLbl.text = [_auditRecordArray objectAtIndex:[indexPath row]];
                if(indexPath.row == 0)
                {
@@ -993,9 +1070,9 @@
                                
                            }
                        }
-
+                       
                    }
-                } else if(indexPath.row == 1) {
+               } else if(indexPath.row == 1) {
                    
                    if([UCFToolsMehod isNullOrNilWithString:[[_dataDic objectForKey:@"orderUser"] objectForKey:@"mobile"]].length == 0)
                    {
@@ -1058,7 +1135,7 @@
                    renzhengLabel.frame = CGRectMake(ScreenWidth - XPOS - 150, 6, 150, 15);
                    renzhengLabel.text = _overdueInvest;
                }
-
+               
                
                return cell;
            }
@@ -1114,74 +1191,74 @@
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
-    CGFloat offsetFloat;
-    if (kIS_Iphone4) {
-        offsetFloat = 64;
-    } else {
-        offsetFloat = 94;
-    }
-    NSInteger tag = scrollView.tag;
-    if (tag == 1002) {
-        if (scrollView.contentOffset.y < -50) {
-            [_oneScroll setContentOffset:CGPointMake(0, 0) animated:YES];
-            [_delegate toUpView];
-            [self removeTopSegment];
-            //_investmentView.frame = CGRectMake(0, ScreenHeight - 67, ScreenWidth, 67);
-            [UIView animateWithDuration:0.3 animations:^{
-                _oneScroll.frame = CGRectMake(0, 0, ScreenWidth, BidDetailScrollViewHeight);
-                _twoTableview.frame = CGRectMake(0, ScreenHeight, ScreenWidth, BidDetailScrollViewHeight);
-            } completion:^(BOOL finished) {
-                [bottomView setHidden:NO];
-                _oneScrollPull = NO;
-                if (_oneScroll.frame.origin.y == 0) {
-                    [self removeTopSegment];
-                }
-            }];
-        }
-        _topLabel.text = @"下拉，回到顶部";
-    } else if (tag == 1001) {
-        if (scrollView.contentOffset.y > offsetFloat) {
-            if (!_oneScrollPull) {
-                [self addTopSegment];
-                [_delegate toDownView];
-                [UIView animateWithDuration:0.3 animations:^{
-                    _oneScroll.frame = CGRectMake(0, -ScreenHeight - 64, ScreenWidth, BidDetailScrollViewHeight);
-                    _twoTableview.frame = CGRectMake(0,0, ScreenWidth, BidDetailScrollViewHeight);
-                } completion:^(BOOL finished) {
-                    [bottomView setHidden:YES];
-                    [self hideAllTopSegment:NO];
-                    _oneScrollPull = YES;
-                }];
-            }
-        }
-    }
+//    CGFloat offsetFloat;
+//    if (kIS_Iphone4) {
+//        offsetFloat = 64;
+//    } else {
+//        offsetFloat = 94;
+//    }
+//    NSInteger tag = scrollView.tag;
+//    if (tag == 1002) {
+//        if (scrollView.contentOffset.y < -50) {
+//            [_oneScroll setContentOffset:CGPointMake(0, 0) animated:YES];
+//            [_delegate toUpView];
+//            [self removeTopSegment];
+//            //_investmentView.frame = CGRectMake(0, ScreenHeight - 67, ScreenWidth, 67);
+//            [UIView animateWithDuration:0.3 animations:^{
+//                _oneScroll.frame = CGRectMake(0, 0, ScreenWidth, BidDetailScrollViewHeight);
+//                _twoTableview.frame = CGRectMake(0, ScreenHeight, ScreenWidth, BidDetailScrollViewHeight);
+//            } completion:^(BOOL finished) {
+//                [bottomView setHidden:NO];
+//                _oneScrollPull = NO;
+//                if (_oneScroll.frame.origin.y == 0) {
+//                    [self removeTopSegment];
+//                }
+//            }];
+//        }
+//        _topLabel.text = @"下拉，回到顶部";
+//    } else if (tag == 1001) {
+//        if (scrollView.contentOffset.y > offsetFloat) {
+//            if (!_oneScrollPull) {
+//                [self addTopSegment];
+//                [_delegate toDownView];
+//                [UIView animateWithDuration:0.3 animations:^{
+//                    _oneScroll.frame = CGRectMake(0, -ScreenHeight - 64, ScreenWidth, BidDetailScrollViewHeight);
+//                    _twoTableview.frame = CGRectMake(0,0, ScreenWidth, BidDetailScrollViewHeight);
+//                } completion:^(BOOL finished) {
+//                    [bottomView setHidden:YES];
+//                    [self hideAllTopSegment:NO];
+//                    _oneScrollPull = YES;
+//                }];
+//            }
+//        }
+//    }
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    NSInteger tag = scrollView.tag;
-    if (tag == 1002) {
-        if (scrollView.contentOffset.y >= 0) {
-            [self hideAllTopSegment:NO];
-            CGFloat sectionHeaderHeight = 44;
-            if (scrollView.contentOffset.y<=sectionHeaderHeight&&scrollView.contentOffset.y>=0) {
-                scrollView.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, 0, 0);
-            } else if (scrollView.contentOffset.y>=sectionHeaderHeight) {
-                scrollView.contentInset = UIEdgeInsetsMake(-sectionHeaderHeight, 0, 0, 0);
-            }
-        } else {
-            [self hideAllTopSegment:YES];
-        }
-        if (scrollView.contentOffset.y < -50) {
-            _topLabel.text = @"释放，回到顶部";
-        }
-    } else if (tag == 1001) {
-        if (scrollView.contentOffset.y < 0) {
-            scrollView.contentOffset = CGPointMake(0, 0);
-        } else {
-            
-        }
-    }
+//    NSInteger tag = scrollView.tag;
+//    if (tag == 1002) {
+//        if (scrollView.contentOffset.y >= 0) {
+//            [self hideAllTopSegment:NO];
+//            CGFloat sectionHeaderHeight = 44;
+//            if (scrollView.contentOffset.y<=sectionHeaderHeight&&scrollView.contentOffset.y>=0) {
+//                scrollView.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, 0, 0);
+//            } else if (scrollView.contentOffset.y>=sectionHeaderHeight) {
+//                scrollView.contentInset = UIEdgeInsetsMake(-sectionHeaderHeight, 0, 0, 0);
+//            }
+//        } else {
+//            [self hideAllTopSegment:YES];
+//        }
+//        if (scrollView.contentOffset.y < -50) {
+//            _topLabel.text = @"释放，回到顶部";
+//        }
+//    } else if (tag == 1001) {
+//        if (scrollView.contentOffset.y < 0) {
+//            scrollView.contentOffset = CGPointMake(0, 0);
+//        } else {
+//
+//        }
+//    }
 }
 
 - (void)hideAllTopSegment:(BOOL)isHide
@@ -1217,5 +1294,10 @@
         [self hideAllTopSegment:NO];
     }];
 }
+- (void)tableView:(UITableView *)tableView didSelectBidNewRowAtIndexPath:(NSIndexPath *)indexPath;
+{
+    [_delegate tableView:tableView didSelectNormalMarkOfRightRowAtIndexPath:indexPath];
+}
+
 
 @end

@@ -9,6 +9,7 @@
 #import "UCFSharePictureViewController.h"
 #import <UShareUI/UShareUI.h>
 #import <UMSocialCore/UMSocialCore.h>
+#import "SDWebImageManager.h"
 @interface UCFSharePictureViewController ()<UIScrollViewDelegate>
 - (IBAction)ClicksharePictureBtn:(UIButton *)sender;
 @property (weak, nonatomic) IBOutlet UIButton *leftBtn;
@@ -25,17 +26,35 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.scrollView.contentSize = CGSizeMake((ScreenWidth - 80 * 2) * 4,0);
+    self.scrollView.contentSize = CGSizeMake(270 * 4,0);
     self.scrollView.showsHorizontalScrollIndicator = NO;
     self.scrollView.showsVerticalScrollIndicator = NO;
     self.scrollView.pagingEnabled = YES;
     self.scrollView.delegate = self;
     self.scrollView.bounces = NO;
-    
-    for (int i = 0; i < 4; i++)
+   /*
     {
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake((ScreenWidth - 80 * 2) * i, 0, ScreenWidth - 80 * 2,ScreenHeight - 64 - 60 )];
-        imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"guideImage7_%d",i + 1]];
+    desc = "";
+    "down_time" = "";
+    dumps = "";
+    "publish_time" = "";
+    thumb = "https://fore.9888.cn/cms/uploadfile/2017/1207/20171207022019449.jpg";
+    title = "\U56fe\U724704";
+    url = "www.9888.cn";
+    }
+    
+    */
+    [[NSUserDefaults standardUserDefaults] synchronize];
+   NSArray *pictureArray =  [[NSUserDefaults standardUserDefaults]  objectForKey:@"SharePictureAdversementLink"];
+    for (int i = 0; i < pictureArray.count; i++)
+    {
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(270 * i, 0, 270, 405 )];
+        NSString *thumbUrl = [pictureArray[i] objectForKey:@"thumb"];
+        [imageView sd_setImageWithURL:[NSURL URLWithString:thumbUrl]];
+        
+        //添加二维码图片
+        
+        
         [self.scrollView addSubview:imageView];
    }
  [self changeScrollLeftOrRightBtnState:self.scrollView.contentOffset.x];
@@ -46,7 +65,7 @@
 }
 -(void)changeScrollLeftOrRightBtnState:(float)offsetX
 {
-    int  pageNumber = offsetX/(  ScreenWidth  - 80 * 2);
+    int  pageNumber = offsetX/270;
     if (pageNumber == 0) {
         self.leftBtn.hidden = YES;
         self.rightBtn.hidden = NO;
@@ -170,10 +189,10 @@
 
 - (IBAction)clickRightBtn:(id)sender
 {
-    self.scrollView.contentOffset = CGPointMake(self.scrollView.contentOffset.x + (ScreenWidth - 80 * 2), 0) ;
-    if (self.scrollView.contentOffset.x/(ScreenWidth - 80 * 2) >=3)
+    self.scrollView.contentOffset = CGPointMake(self.scrollView.contentOffset.x + 270, 0) ;
+    if (self.scrollView.contentOffset.x/270 >=3)
     {
-        self.scrollView.contentOffset = CGPointMake((ScreenWidth - 80 * 2) * 3, 0) ;
+        self.scrollView.contentOffset = CGPointMake(270 * 3, 0) ;
     }
     [self  changeScrollLeftOrRightBtnState:self.scrollView.contentOffset.x];
 }

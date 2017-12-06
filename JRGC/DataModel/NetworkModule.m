@@ -259,6 +259,9 @@ static NetworkModule *gInstance = NULL;
         case kSXTagContractDownLoad:
             parameter = [serverIP stringByAppendingString:DOWNLOADCONTRACT];
             break;
+        case kSXTagDownloadAssertProof:
+            parameter = [serverIP stringByAppendingString:DOWNLOADASSERTPROOF];
+            break;
 
     }
 

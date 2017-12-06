@@ -10,9 +10,11 @@
 #import "UCFAssetProofApplyFirstCell.h"
 #import "UCFAssetProofApplyViewController.h"
 #import "UCFAssetProofListModel.h"
-@interface UCFAccountAssetsProofViewController ()<UITableViewDataSource,UITableViewDelegate,UCFAssetProofApplyFirstCellDelegate>
+#import "QLHeaderViewController.h"
+@interface UCFAccountAssetsProofViewController ()<UITableViewDataSource,UITableViewDelegate,UCFAssetProofApplyFirstCellDelegate,UIDocumentInteractionControllerDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic)  NSMutableArray *dataArray;
+@property (strong,nonatomic)UIDocumentInteractionController *documentPickerViewController;
 @end
 
 @implementation UCFAccountAssetsProofViewController
@@ -22,6 +24,7 @@
     [super viewDidLoad];
     baseTitleLabel.text = @"资产证明";
     [self addLeftButton];
+    self.tableView.contentInset = UIEdgeInsetsMake(10, 0, 0, 0);
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.dataArray = [NSMutableArray arrayWithCapacity:0];
     [self assetProofListHttpRequset];
@@ -51,7 +54,7 @@
 {
     if(indexPath.section == 0)
     {
-        return  348;
+        return  358;
     }
     return 75;
 }
@@ -67,32 +70,70 @@
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
         cell.delegate = self;
-        
-        
         return cell;
     }
     else if(indexPath.section == 1)
     {
-        NSString *cellindifier = @"UCFAssetProofApplyFirstCell";
-        UCFAssetProofApplySecondCell *cell = [tableView dequeueReusableCellWithIdentifier:cellindifier];
-        if (!cell)
+        if(_dataArray.count == 0)
         {
-            cell = [[[NSBundle mainBundle]loadNibNamed:@"UCFAssetProofApplyFirstCell" owner:nil options:nil]lastObject];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            NSString *cellindifier = @"secondIndexPath";
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellindifier];
+            if (!cell) {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellindifier];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                cell.textLabel.textColor = UIColorWithRGB(0x555555);
+                cell.detailTextLabel.textColor = UIColorWithRGB(0x555555);
+                cell.textLabel.font = [UIFont systemFontOfSize:14];
+                cell.detailTextLabel.font = [UIFont systemFontOfSize:14];
+            }
+            CGSize size =  [Common getStrHeightWithStr:@"暂无数据" AndStrFont:12 AndWidth:ScreenWidth - 30 AndlineSpacing:2];
+            UILabel *errorLabel = [[UILabel alloc]initWithFrame:CGRectMake(15, 10, ScreenWidth-30, size.height)];
+            errorLabel.textColor = UIColorWithRGB(0x555555);
+            errorLabel.font = [UIFont systemFontOfSize:12];
+            errorLabel.numberOfLines = 0;
+            errorLabel.textAlignment = NSTextAlignmentCenter;
+            [cell.contentView addSubview:errorLabel];
+            errorLabel.text = @"暂无数据";//购买错误信息
+            return cell;
+        }else{
+            NSString *cellindifier = @"UCFAssetProofApplyFirstCell";
+            UCFAssetProofApplySecondCell *cell = [tableView dequeueReusableCellWithIdentifier:cellindifier];
+            if (!cell)
+            {
+                cell = [[[NSBundle mainBundle]loadNibNamed:@"UCFAssetProofApplyFirstCell" owner:nil options:nil]lastObject];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            }
+            if (indexPath.row < _dataArray.count)
+            {
+                cell.assetProofModel = _dataArray[indexPath.row];
+            }
+            return cell;
         }
-        if (indexPath.row < _dataArray.count)
-        {
-            cell.assetProofModel = _dataArray[indexPath.row];
-        }
-        return cell;
+        
     }
     return nil;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    
+    if(indexPath.section == 1)
+    {
+        UCFAssetProofListModel *assetProofModel= _dataArray[indexPath.row];
+        
+        if([assetProofModel.applyStatus intValue] == 1)//申请成功的可以下载
+        {
+            NSString *applyNoStr =   [NSString stringWithFormat:@"%@", assetProofModel.applyNo];;
+            
+            NSString *strParameters = [NSString stringWithFormat:@"userId=%@&applyNo=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],applyNoStr];
+            [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagDownloadAssertProof owner:self Type:SelectAccoutTypeHoner];//
+        }
+    }
 }
+- (UIViewController *)documentInteractionControllerViewControllerForPreview:(UIDocumentInteractionController *)controller {
+    
+    //注意：此处要求的控制器，必须是它的页面view，已经显示在window之上了
+    return self.navigationController;
+}
+
 -(void)assetProofListHttpRequset
 {
     NSString *userId = [[NSUserDefaults standardUserDefaults] valueForKey:UUID];
@@ -117,10 +158,9 @@
     if (tag.intValue == kSXTagAssetProofList) {
         if ([ret boolValue])
         {
-            
             NSDictionary *dataDic  = [dic objectSafeDictionaryForKey:@"data"];
             NSArray *resultListArr = [[dataDic objectSafeDictionaryForKey:@"pageData"] objectSafeArrayForKey:@"result"];
-            BOOL hasNextP = [[[[dataDic objectSafeDictionaryForKey:@"pageData"] objectSafeDictionaryForKey:@"pagination"] objectSafeForKey:@"hasNextPage"] boolValue];
+//            BOOL hasNextP = [[[[dataDic objectSafeDictionaryForKey:@"pageData"] objectSafeDictionaryForKey:@"pagination"] objectSafeForKey:@"hasNextPage"] boolValue];
             for (NSDictionary *data in resultListArr)
             {
                 UCFAssetProofListModel *listModel = [UCFAssetProofListModel assetProofListModelWithDict:data];
@@ -130,7 +170,23 @@
             [self.tableView reloadData];
         }else {
             [AuxiliaryFunc showToastMessage:dic[@"message"] withView:self.view];
+            [self.tableView reloadData];
         }
+    }
+    else if (tag.intValue == kSXTagDownloadAssertProof)
+    {
+//        QLHeaderViewController *vc = [[QLHeaderViewController alloc] init];
+//        vc.localFilePath = result;
+//        vc.rootVc = @"AccountAssetsProofVC";
+//        [self.navigationController pushViewController:vc animated:YES];
+        
+         NSURL *url= [NSURL fileURLWithPath:result];
+        _documentPickerViewController = [UIDocumentInteractionController interactionControllerWithURL:url];
+        [_documentPickerViewController setDelegate:self];
+        
+        //当前APP打开  需实现协议方法才可以完成预览功能
+        [_documentPickerViewController presentPreviewAnimated:YES];
+        
     }
 }
 //请求失败
