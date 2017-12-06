@@ -33,6 +33,7 @@
 #import "UITabBar+TabBarBadge.h"
 #import "Touch3DSingle.h"
 #import "UCFFacCodeViewController.h"
+#import "KTAlertController.h"
 @interface UCFMineViewController () <UITableViewDelegate, UITableViewDataSource, UCFMineHeaderViewDelegate, UCFMineFuncCellDelegate, UCFMineAPIManagerDelegate, UCFMineFuncSecCellDelegate, UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) UCFMineHeaderView   *mineHeaderView;
@@ -638,7 +639,11 @@
         
     }
     else  if ([title isEqualToString:@"投资计算器"]){//投资计算器
-        
+        KTAlertController *alert = [KTAlertController alertControllerWithTitle:@"这是一个alert" description:@"又如何？" cancel:@"取消" button:@"好的" action:^{
+//            NSLog(@"tap button");
+        }];
+        alert.animationType = KTAlertControllerAnimationTypeCenterShow;
+        [self presentViewController:alert animated:YES completion:nil];
     }
 }
 

@@ -448,6 +448,10 @@
 		74D7FCCD1AE8F72700653B8F /* FundAccountItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 74D7FCCB1AE8F72700653B8F /* FundAccountItem.m */; };
 		74D7FCD51AE8F75000653B8F /* UCFHeadrView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74D7FCD21AE8F75000653B8F /* UCFHeadrView.m */; };
 		74D7FCD71AE8F77200653B8F /* hotCityList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 74D7FCD61AE8F77200653B8F /* hotCityList.plist */; };
+		74D9B8531FD793650076F733 /* KTAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74D9B84D1FD793640076F733 /* KTAlertController.m */; };
+		74D9B8541FD793650076F733 /* KTUpDownAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74D9B8501FD793640076F733 /* KTUpDownAnimationController.m */; };
+		74D9B8551FD793650076F733 /* KTAlertController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74D9B8511FD793640076F733 /* KTAlertController.xib */; };
+		74D9B8561FD793650076F733 /* KTCenterAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74D9B8521FD793650076F733 /* KTCenterAnimationController.m */; };
 		74DBAC741D585FFD00F6F6B1 /* UCFTipButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 74DBAC731D585FFD00F6F6B1 /* UCFTipButton.m */; };
 		74DBAC791D5864C200F6F6B1 /* UCFHuiShangBankViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74DBAC771D5864C200F6F6B1 /* UCFHuiShangBankViewController.m */; };
 		74DBAC7A1D5864C200F6F6B1 /* UCFHuiShangBankViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74DBAC781D5864C200F6F6B1 /* UCFHuiShangBankViewController.xib */; };
@@ -1789,6 +1793,13 @@
 		74D7FCD11AE8F75000653B8F /* UCFHeadrView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFHeadrView.h; sourceTree = "<group>"; };
 		74D7FCD21AE8F75000653B8F /* UCFHeadrView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFHeadrView.m; sourceTree = "<group>"; };
 		74D7FCD61AE8F77200653B8F /* hotCityList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = hotCityList.plist; sourceTree = "<group>"; };
+		74D9B84C1FD793640076F733 /* KTUpDownAnimationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTUpDownAnimationController.h; sourceTree = "<group>"; };
+		74D9B84D1FD793640076F733 /* KTAlertController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTAlertController.m; sourceTree = "<group>"; };
+		74D9B84E1FD793640076F733 /* KTAlertController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTAlertController.h; sourceTree = "<group>"; };
+		74D9B84F1FD793640076F733 /* KTCenterAnimationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTCenterAnimationController.h; sourceTree = "<group>"; };
+		74D9B8501FD793640076F733 /* KTUpDownAnimationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTUpDownAnimationController.m; sourceTree = "<group>"; };
+		74D9B8511FD793640076F733 /* KTAlertController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KTAlertController.xib; sourceTree = "<group>"; };
+		74D9B8521FD793650076F733 /* KTCenterAnimationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTCenterAnimationController.m; sourceTree = "<group>"; };
 		74DBAC721D585FFD00F6F6B1 /* UCFTipButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFTipButton.h; sourceTree = "<group>"; };
 		74DBAC731D585FFD00F6F6B1 /* UCFTipButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFTipButton.m; sourceTree = "<group>"; };
 		74DBAC761D5864C200F6F6B1 /* UCFHuiShangBankViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFHuiShangBankViewController.h; sourceTree = "<group>"; };
@@ -4299,6 +4310,7 @@
 		74B98C871F70C1F500CB6A9F /* Mine(我的模块) */ = {
 			isa = PBXGroup;
 			children = (
+				74D9B8481FD7931A0076F733 /* Calculator(收益计算器) */,
 				74B98C881F70C1F500CB6A9F /* Mine(我的) */,
 			);
 			path = "Mine(我的模块)";
@@ -4499,6 +4511,44 @@
 				748A3D071AF219BD00D7FAF1 /* FundsDetailGroup.m */,
 			);
 			path = AccountDetailModel;
+			sourceTree = "<group>";
+		};
+		74D9B8481FD7931A0076F733 /* Calculator(收益计算器) */ = {
+			isa = PBXGroup;
+			children = (
+				74D9B8491FD7931A0076F733 /* Controller */,
+				74D9B84A1FD7931A0076F733 /* Model */,
+				74D9B84B1FD7931A0076F733 /* View */,
+			);
+			path = "Calculator(收益计算器)";
+			sourceTree = "<group>";
+		};
+		74D9B8491FD7931A0076F733 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				74D9B84E1FD793640076F733 /* KTAlertController.h */,
+				74D9B84D1FD793640076F733 /* KTAlertController.m */,
+				74D9B8511FD793640076F733 /* KTAlertController.xib */,
+				74D9B84F1FD793640076F733 /* KTCenterAnimationController.h */,
+				74D9B8521FD793650076F733 /* KTCenterAnimationController.m */,
+				74D9B84C1FD793640076F733 /* KTUpDownAnimationController.h */,
+				74D9B8501FD793640076F733 /* KTUpDownAnimationController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		74D9B84A1FD7931A0076F733 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		74D9B84B1FD7931A0076F733 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		74DBAC751D58645800F6F6B1 /* HuiBuinessBank(徽商银行) */ = {
@@ -6912,6 +6962,7 @@
 				A830DE821F8DD9F7003855B9 /* UCFCalendarModularViewController.xib in Resources */,
 				A8386E3F1F8CCDF200E26002 /* login_bg_phone4_default.png in Resources */,
 				A8386E3E1F8CCDE800E26002 /* login_bg_default.png in Resources */,
+				74D9B8551FD793650076F733 /* KTAlertController.xib in Resources */,
 				A8FF32E51F1666DC00066A80 /* UCFGoldBidSuccessViewController.xib in Resources */,
 				744B9ED61F0B8AC100440FBA /* UCFCalendarDetailHeaderView.xib in Resources */,
 				83CD84331F13A50800227704 /* UCFP2PTransferViewController.xib in Resources */,
@@ -7410,6 +7461,7 @@
 				745D37D51F3AE98800897F1A /* UCFGoldChargeSecCell.m in Sources */,
 				74BDA9981F09F6F10054403F /* UCFCalendarHeaderView.m in Sources */,
 				7491820E1EC166F000AC1ECE /* TAPageControl.m in Sources */,
+				74D9B8531FD793650076F733 /* KTAlertController.m in Sources */,
 				74270D1E1EC595ED00F9419B /* UCFRebateCell.m in Sources */,
 				74EB306F1B0E004900D27BA9 /* UCFBankModel.m in Sources */,
 				840A794A1C2A80B60059A946 /* UCFMessageSettingViewController.m in Sources */,
@@ -7612,6 +7664,7 @@
 				74AFB12F1EE8F848007DBAFC /* UCFTransferHeaderView.m in Sources */,
 				7456D3C71E82700500207349 /* UIView+Extension.m in Sources */,
 				A81A6F5A1FBD92CD00BDCE50 /* ServiceChargeView2.m in Sources */,
+				74D9B8561FD793650076F733 /* KTCenterAnimationController.m in Sources */,
 				E311A66D1D90E85B00C5483E /* UCFWebViewJavascriptBridgeLevel.m in Sources */,
 				74D7FCCC1AE8F72700653B8F /* FundAccountGroup.m in Sources */,
 				83CD843C1F13A50800227704 /* UCFTransferModel.m in Sources */,
@@ -7737,6 +7790,7 @@
 				7BD35A991AD61E4200389D6B /* LLLockView.m in Sources */,
 				FBB685861AE4A76800F222B6 /* MJRefreshHeader.m in Sources */,
 				84FAB60C1C7C575300D0942F /* MGSwipeButton.m in Sources */,
+				74D9B8541FD793650076F733 /* KTUpDownAnimationController.m in Sources */,
 				74270D5B1EC5AE8700F9419B /* UCFInvitationRewardCell2.m in Sources */,
 				A8D2DE781EB9E1CF00D61AD0 /* MaskView.m in Sources */,
 				7BCE02381AC915720084C15C /* NSString+Base64.m in Sources */,
