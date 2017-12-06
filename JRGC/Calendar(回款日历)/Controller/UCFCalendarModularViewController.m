@@ -42,7 +42,7 @@
 }
 #pragma mark - 初始化界面
 - (void)createUI {
-    baseTitleLabel.text = @"回款日历";
+//    baseTitleLabel.text = @"回款日历";
     
     [self addLeftButton];
     

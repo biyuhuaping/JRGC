@@ -15,7 +15,7 @@
 @property (nonatomic, assign) BOOL lockViewDisappear; //默认为NO
 @property (nonatomic, weak)   UITableView   *tableView;
 //@property (nonatomic, assign) BOOL honerAlert;        //默认为NO
-@property (nonatomic, assign)   BOOL  switchFlag;//   开关标识：0:弹出 1:不弹出    string;
+@property (nonatomic, assign)   BOOL  switchFlag;//   开关标识：1:弹出 0:不弹出    string; zrc fixed
 @property (nonatomic,strong)NSString  *activityType;//  活动类型标识：新的活动标识（判断和之前活动是否相同）
 
 + (MongoliaLayerCenter *)sharedManager;
