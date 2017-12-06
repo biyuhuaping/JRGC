@@ -366,7 +366,7 @@
     }
     NSString *noPermissionTitleStr = self.accoutType == SelectAccoutTypeP2P ? @"目前标的详情只对出借人开放":@"目前标的详情只对认购人开放";
     if (type == UCFHomeListTypeDetail) {
-        if (model.moedelType == UCFHomeListCellModelTypeDefault) {
+        if (model.moedelType == UCFHomeListCellModelTypeDefault || (model.moedelType == UCFHomeListCellModelTypeNewUser && ![model.type isEqualToString:@"0"])) {
         
             if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
                 //如果未登录，展示登录页面
@@ -474,7 +474,7 @@
                }
             }
           }
-        else if (model.moedelType == UCFHomeListCellModelTypeReserved  || model.moedelType == UCFHomeListCellModelTypeNewUser) {
+        else if (model.moedelType == UCFHomeListCellModelTypeReserved || (model.moedelType == UCFHomeListCellModelTypeNewUser && [model.type isEqualToString:@"0"])) {
             self.accoutType = SelectAccoutTypeP2P;
             BOOL b = [self checkUserCanInvestIsDetail:YES type:self.accoutType];
             if (!b) {
@@ -506,7 +506,7 @@
         }
     }
     else if (type == UCFHomeListTypeInvest) {
-        if (model.moedelType == UCFHomeListCellModelTypeDefault) {
+        if (model.moedelType == UCFHomeListCellModelTypeDefault  || (model.moedelType == UCFHomeListCellModelTypeNewUser && ![model.type isEqualToString:@"0"])) {
             if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
                 //如果未登录，展示登录页面
                 [self showLoginView];
@@ -560,7 +560,7 @@
             }
             
         }
-        else if (model.moedelType == UCFHomeListCellModelTypeReserved  || model.moedelType == UCFHomeListCellModelTypeNewUser) {
+        else if (model.moedelType == UCFHomeListCellModelTypeReserved || (model.moedelType == UCFHomeListCellModelTypeNewUser && [model.type isEqualToString:@"0"])) {
             self.accoutType = SelectAccoutTypeP2P;
             BOOL b = [self checkUserCanInvestIsDetail:NO type:self.accoutType];
             if (!b) {
