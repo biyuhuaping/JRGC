@@ -662,9 +662,12 @@
 		832C3C111F443AD200ECAA4A /* UCFGoldCouponReturn.m in Sources */ = {isa = PBXBuildFile; fileRef = 832C3C0F1F443AD200ECAA4A /* UCFGoldCouponReturn.m */; };
 		832C3C121F443AD200ECAA4A /* UCFGoldCouponReturn.xib in Resources */ = {isa = PBXBuildFile; fileRef = 832C3C101F443AD200ECAA4A /* UCFGoldCouponReturn.xib */; };
 		832D521F1D8FE5EA0060F1F7 /* UCFWithdrawCashResultWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 832D521E1D8FE5EA0060F1F7 /* UCFWithdrawCashResultWebView.m */; };
+		8330C9B81FD79C4B00EB56A9 /* UCFProjectSafetyGuaranteeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8330C9B61FD79C4B00EB56A9 /* UCFProjectSafetyGuaranteeViewController.m */; };
+		8330C9B91FD79C4B00EB56A9 /* UCFProjectSafetyGuaranteeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8330C9B71FD79C4B00EB56A9 /* UCFProjectSafetyGuaranteeViewController.xib */; };
 		833345721F1F82BF00A0F30D /* UCFGoldInvestmentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 833345701F1F82BF00A0F30D /* UCFGoldInvestmentCell.m */; };
 		833345731F1F82BF00A0F30D /* UCFGoldInvestmentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 833345711F1F82BF00A0F30D /* UCFGoldInvestmentCell.xib */; };
 		833603CE1D928F9200C3E435 /* UCFWithdrawCashResultWebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 833603CD1D928F9200C3E435 /* UCFWithdrawCashResultWebView.xib */; };
+		83382C1A1FD52EFD001BBF90 /* UCFAssetProofListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 83382C191FD52EFD001BBF90 /* UCFAssetProofListModel.m */; };
 		833A6EAB1E55466B00C8A494 /* UCFCollectionDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 833A6EA41E55466B00C8A494 /* UCFCollectionDetailViewController.m */; };
 		833A6EAC1E55466B00C8A494 /* UCFCollectionDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 833A6EA51E55466B00C8A494 /* UCFCollectionDetailViewController.xib */; };
 		833A6EAD1E55466B00C8A494 /* UCFCollectionListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 833A6EA71E55466B00C8A494 /* UCFCollectionListViewController.m */; };
@@ -673,6 +676,12 @@
 		833A6EB81E554B8700C8A494 /* UCFCollectionDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 833A6EB61E554B8700C8A494 /* UCFCollectionDetailCell.xib */; };
 		833A6EBC1E55902A00C8A494 /* UCFCollectionListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 833A6EBA1E55902A00C8A494 /* UCFCollectionListCell.m */; };
 		833A6EBD1E55902A00C8A494 /* UCFCollectionListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 833A6EBB1E55902A00C8A494 /* UCFCollectionListCell.xib */; };
+		833CC9EF1FD6A7B2006BF624 /* UCFProjectBasicDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 833CC9ED1FD6A7B2006BF624 /* UCFProjectBasicDetailViewController.m */; };
+		833CC9F01FD6A7B2006BF624 /* UCFProjectBasicDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 833CC9EE1FD6A7B2006BF624 /* UCFProjectBasicDetailViewController.xib */; };
+		833CC9F91FD6A83D006BF624 /* UCFProjectInvestmentRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 833CC9F71FD6A83D006BF624 /* UCFProjectInvestmentRecordViewController.m */; };
+		833CC9FA1FD6A83D006BF624 /* UCFProjectInvestmentRecordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 833CC9F81FD6A83D006BF624 /* UCFProjectInvestmentRecordViewController.xib */; };
+		833FBE021FD010B2002D6F80 /* UCFAccountAssetsProofViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 833FBE001FD010B2002D6F80 /* UCFAccountAssetsProofViewController.m */; };
+		833FBE031FD010B2002D6F80 /* UCFAccountAssetsProofViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 833FBE011FD010B2002D6F80 /* UCFAccountAssetsProofViewController.xib */; };
 		8346B26C1F70F2B400219D41 /* UCFRechargeOrCashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8346B26A1F70F2B400219D41 /* UCFRechargeOrCashViewController.m */; };
 		8346B26D1F70F2B400219D41 /* UCFRechargeOrCashViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8346B26B1F70F2B400219D41 /* UCFRechargeOrCashViewController.xib */; };
 		8346B2701F71032100219D41 /* UCFRechargeAndCashView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8346B26F1F71032100219D41 /* UCFRechargeAndCashView.m */; };
@@ -733,6 +742,10 @@
 		83CD843E1F13A50800227704 /* UCFLoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83CD84241F13A50800227704 /* UCFLoadingView.xib */; };
 		83CD843F1F13A50800227704 /* UCFProjectListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CD84261F13A50800227704 /* UCFProjectListCell.m */; };
 		83CD84401F13A50800227704 /* UCFProjectListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83CD84271F13A50800227704 /* UCFProjectListCell.xib */; };
+		83D42A8C1FCE6175004C96EF /* UCFShareBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D42A8B1FCE6175004C96EF /* UCFShareBaseView.m */; };
+		83D42A8E1FCE619D004C96EF /* UCFShareBaseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83D42A8D1FCE619D004C96EF /* UCFShareBaseView.xib */; };
+		83D42A921FCEAF07004C96EF /* UCFSharePictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D42A901FCEAF07004C96EF /* UCFSharePictureViewController.m */; };
+		83D42A931FCEAF07004C96EF /* UCFSharePictureViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83D42A911FCEAF07004C96EF /* UCFSharePictureViewController.xib */; };
 		83D64F5E1F1C9C6E00A839F2 /* UCFGoldBidSuccessHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D64F5C1F1C9C6E00A839F2 /* UCFGoldBidSuccessHeaderView.m */; };
 		83D64F5F1F1C9C6E00A839F2 /* UCFGoldBidSuccessHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83D64F5D1F1C9C6E00A839F2 /* UCFGoldBidSuccessHeaderView.xib */; };
 		83D64F631F1CB8AE00A839F2 /* UCFGoldPurchaseRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D64F611F1CB8AE00A839F2 /* UCFGoldPurchaseRecordCell.m */; };
@@ -757,6 +770,10 @@
 		83F2D59F1DCB508F0041F913 /* UCFSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F2D59C1DCB508F0041F913 /* UCFSession.m */; };
 		83F4DAF51D9561EC00A0632E /* UCFPrdTransferBIdWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F4DAF31D9561EC00A0632E /* UCFPrdTransferBIdWebView.m */; };
 		83F4DAF61D9561EC00A0632E /* UCFPrdTransferBIdWebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83F4DAF41D9561EC00A0632E /* UCFPrdTransferBIdWebView.xib */; };
+		83F669F61FD14B7E00ABCA57 /* UCFAssetProofApplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F669F41FD14B7E00ABCA57 /* UCFAssetProofApplyViewController.m */; };
+		83F669F71FD14B7E00ABCA57 /* UCFAssetProofApplyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83F669F51FD14B7E00ABCA57 /* UCFAssetProofApplyViewController.xib */; };
+		83F669FB1FD14D2500ABCA57 /* UCFAssetProofApplyIdCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F669F91FD14D2500ABCA57 /* UCFAssetProofApplyIdCell.m */; };
+		83F669FC1FD14D2500ABCA57 /* UCFAssetProofApplyIdCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83F669FA1FD14D2500ABCA57 /* UCFAssetProofApplyIdCell.xib */; };
 		83F82E861EBC5DD200B79E02 /* UCFProductListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F82E851EBC5DD200B79E02 /* UCFProductListModel.m */; };
 		83FB3F5E1E5C4D2A0094C9BA /* UCFBatchBidWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FB3F5C1E5C4D2A0094C9BA /* UCFBatchBidWebViewController.m */; };
 		83FB3F5F1E5C4D2A0094C9BA /* UCFBatchBidWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83FB3F5D1E5C4D2A0094C9BA /* UCFBatchBidWebViewController.xib */; };
@@ -769,6 +786,8 @@
 		83FCCA761F1745A2002921C5 /* UCFGoldInvestmentDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83FCCA741F1745A2002921C5 /* UCFGoldInvestmentDetailViewController.xib */; };
 		83FCCA7A1F174B05002921C5 /* UCFGoldInvestDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCCA781F174B05002921C5 /* UCFGoldInvestDetailCell.m */; };
 		83FCCA7B1F174B05002921C5 /* UCFGoldInvestDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83FCCA791F174B05002921C5 /* UCFGoldInvestDetailCell.xib */; };
+		83FD5FFC1FD0FBA500C57E53 /* UCFAssetProofApplyFirstCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FD5FFA1FD0FBA500C57E53 /* UCFAssetProofApplyFirstCell.m */; };
+		83FD5FFD1FD0FBA500C57E53 /* UCFAssetProofApplyFirstCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83FD5FFB1FD0FBA500C57E53 /* UCFAssetProofApplyFirstCell.xib */; };
 		83FEDB761EFBB56000CFE0EF /* UCFCompanyNoOpenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FEDB741EFBB56000CFE0EF /* UCFCompanyNoOpenViewController.m */; };
 		83FEDB771EFBB56000CFE0EF /* UCFCompanyNoOpenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83FEDB751EFBB56000CFE0EF /* UCFCompanyNoOpenViewController.xib */; };
 		83FF205C1F0BAF0500F21119 /* UCFGoldDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FF20551F0BAF0500F21119 /* UCFGoldDetailViewController.m */; };
@@ -2169,10 +2188,15 @@
 		832C3C101F443AD200ECAA4A /* UCFGoldCouponReturn.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFGoldCouponReturn.xib; sourceTree = "<group>"; };
 		832D521D1D8FE5EA0060F1F7 /* UCFWithdrawCashResultWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFWithdrawCashResultWebView.h; sourceTree = "<group>"; };
 		832D521E1D8FE5EA0060F1F7 /* UCFWithdrawCashResultWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFWithdrawCashResultWebView.m; sourceTree = "<group>"; };
+		8330C9B51FD79C4B00EB56A9 /* UCFProjectSafetyGuaranteeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFProjectSafetyGuaranteeViewController.h; sourceTree = "<group>"; };
+		8330C9B61FD79C4B00EB56A9 /* UCFProjectSafetyGuaranteeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFProjectSafetyGuaranteeViewController.m; sourceTree = "<group>"; };
+		8330C9B71FD79C4B00EB56A9 /* UCFProjectSafetyGuaranteeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFProjectSafetyGuaranteeViewController.xib; sourceTree = "<group>"; };
 		8333456F1F1F82BF00A0F30D /* UCFGoldInvestmentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFGoldInvestmentCell.h; sourceTree = "<group>"; };
 		833345701F1F82BF00A0F30D /* UCFGoldInvestmentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFGoldInvestmentCell.m; sourceTree = "<group>"; };
 		833345711F1F82BF00A0F30D /* UCFGoldInvestmentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFGoldInvestmentCell.xib; sourceTree = "<group>"; };
 		833603CD1D928F9200C3E435 /* UCFWithdrawCashResultWebView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFWithdrawCashResultWebView.xib; sourceTree = "<group>"; };
+		83382C181FD52EFD001BBF90 /* UCFAssetProofListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFAssetProofListModel.h; sourceTree = "<group>"; };
+		83382C191FD52EFD001BBF90 /* UCFAssetProofListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFAssetProofListModel.m; sourceTree = "<group>"; };
 		833A6EA31E55466B00C8A494 /* UCFCollectionDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFCollectionDetailViewController.h; sourceTree = "<group>"; };
 		833A6EA41E55466B00C8A494 /* UCFCollectionDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFCollectionDetailViewController.m; sourceTree = "<group>"; };
 		833A6EA51E55466B00C8A494 /* UCFCollectionDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFCollectionDetailViewController.xib; sourceTree = "<group>"; };
@@ -2185,6 +2209,15 @@
 		833A6EB91E55902A00C8A494 /* UCFCollectionListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFCollectionListCell.h; sourceTree = "<group>"; };
 		833A6EBA1E55902A00C8A494 /* UCFCollectionListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFCollectionListCell.m; sourceTree = "<group>"; };
 		833A6EBB1E55902A00C8A494 /* UCFCollectionListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFCollectionListCell.xib; sourceTree = "<group>"; };
+		833CC9EC1FD6A7B2006BF624 /* UCFProjectBasicDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFProjectBasicDetailViewController.h; sourceTree = "<group>"; };
+		833CC9ED1FD6A7B2006BF624 /* UCFProjectBasicDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFProjectBasicDetailViewController.m; sourceTree = "<group>"; };
+		833CC9EE1FD6A7B2006BF624 /* UCFProjectBasicDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFProjectBasicDetailViewController.xib; sourceTree = "<group>"; };
+		833CC9F61FD6A83D006BF624 /* UCFProjectInvestmentRecordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFProjectInvestmentRecordViewController.h; sourceTree = "<group>"; };
+		833CC9F71FD6A83D006BF624 /* UCFProjectInvestmentRecordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFProjectInvestmentRecordViewController.m; sourceTree = "<group>"; };
+		833CC9F81FD6A83D006BF624 /* UCFProjectInvestmentRecordViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFProjectInvestmentRecordViewController.xib; sourceTree = "<group>"; };
+		833FBDFF1FD010B2002D6F80 /* UCFAccountAssetsProofViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFAccountAssetsProofViewController.h; sourceTree = "<group>"; };
+		833FBE001FD010B2002D6F80 /* UCFAccountAssetsProofViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFAccountAssetsProofViewController.m; sourceTree = "<group>"; };
+		833FBE011FD010B2002D6F80 /* UCFAccountAssetsProofViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFAccountAssetsProofViewController.xib; sourceTree = "<group>"; };
 		8346B2691F70F2B400219D41 /* UCFRechargeOrCashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFRechargeOrCashViewController.h; sourceTree = "<group>"; };
 		8346B26A1F70F2B400219D41 /* UCFRechargeOrCashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFRechargeOrCashViewController.m; sourceTree = "<group>"; };
 		8346B26B1F70F2B400219D41 /* UCFRechargeOrCashViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFRechargeOrCashViewController.xib; sourceTree = "<group>"; };
@@ -2279,6 +2312,12 @@
 		83CD84251F13A50800227704 /* UCFProjectListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFProjectListCell.h; sourceTree = "<group>"; };
 		83CD84261F13A50800227704 /* UCFProjectListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFProjectListCell.m; sourceTree = "<group>"; };
 		83CD84271F13A50800227704 /* UCFProjectListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFProjectListCell.xib; sourceTree = "<group>"; };
+		83D42A8A1FCE6175004C96EF /* UCFShareBaseView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFShareBaseView.h; sourceTree = "<group>"; };
+		83D42A8B1FCE6175004C96EF /* UCFShareBaseView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFShareBaseView.m; sourceTree = "<group>"; };
+		83D42A8D1FCE619D004C96EF /* UCFShareBaseView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFShareBaseView.xib; sourceTree = "<group>"; };
+		83D42A8F1FCEAF07004C96EF /* UCFSharePictureViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFSharePictureViewController.h; sourceTree = "<group>"; };
+		83D42A901FCEAF07004C96EF /* UCFSharePictureViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFSharePictureViewController.m; sourceTree = "<group>"; };
+		83D42A911FCEAF07004C96EF /* UCFSharePictureViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFSharePictureViewController.xib; sourceTree = "<group>"; };
 		83D64F5B1F1C9C6E00A839F2 /* UCFGoldBidSuccessHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFGoldBidSuccessHeaderView.h; sourceTree = "<group>"; };
 		83D64F5C1F1C9C6E00A839F2 /* UCFGoldBidSuccessHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFGoldBidSuccessHeaderView.m; sourceTree = "<group>"; };
 		83D64F5D1F1C9C6E00A839F2 /* UCFGoldBidSuccessHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFGoldBidSuccessHeaderView.xib; sourceTree = "<group>"; };
@@ -2316,6 +2355,12 @@
 		83F4DAF21D9561EC00A0632E /* UCFPrdTransferBIdWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFPrdTransferBIdWebView.h; sourceTree = "<group>"; };
 		83F4DAF31D9561EC00A0632E /* UCFPrdTransferBIdWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFPrdTransferBIdWebView.m; sourceTree = "<group>"; };
 		83F4DAF41D9561EC00A0632E /* UCFPrdTransferBIdWebView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFPrdTransferBIdWebView.xib; sourceTree = "<group>"; };
+		83F669F31FD14B7E00ABCA57 /* UCFAssetProofApplyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFAssetProofApplyViewController.h; sourceTree = "<group>"; };
+		83F669F41FD14B7E00ABCA57 /* UCFAssetProofApplyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFAssetProofApplyViewController.m; sourceTree = "<group>"; };
+		83F669F51FD14B7E00ABCA57 /* UCFAssetProofApplyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFAssetProofApplyViewController.xib; sourceTree = "<group>"; };
+		83F669F81FD14D2500ABCA57 /* UCFAssetProofApplyIdCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFAssetProofApplyIdCell.h; sourceTree = "<group>"; };
+		83F669F91FD14D2500ABCA57 /* UCFAssetProofApplyIdCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFAssetProofApplyIdCell.m; sourceTree = "<group>"; };
+		83F669FA1FD14D2500ABCA57 /* UCFAssetProofApplyIdCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFAssetProofApplyIdCell.xib; sourceTree = "<group>"; };
 		83F82E841EBC5DD200B79E02 /* UCFProductListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UCFProductListModel.h; path = JRGC/LatestProject/UCFProductListModel.h; sourceTree = SOURCE_ROOT; };
 		83F82E851EBC5DD200B79E02 /* UCFProductListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UCFProductListModel.m; path = JRGC/LatestProject/UCFProductListModel.m; sourceTree = SOURCE_ROOT; };
 		83FB3F5B1E5C4D2A0094C9BA /* UCFBatchBidWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFBatchBidWebViewController.h; sourceTree = "<group>"; };
@@ -2335,6 +2380,9 @@
 		83FCCA771F174B05002921C5 /* UCFGoldInvestDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFGoldInvestDetailCell.h; sourceTree = "<group>"; };
 		83FCCA781F174B05002921C5 /* UCFGoldInvestDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFGoldInvestDetailCell.m; sourceTree = "<group>"; };
 		83FCCA791F174B05002921C5 /* UCFGoldInvestDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFGoldInvestDetailCell.xib; sourceTree = "<group>"; };
+		83FD5FF91FD0FBA500C57E53 /* UCFAssetProofApplyFirstCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFAssetProofApplyFirstCell.h; sourceTree = "<group>"; };
+		83FD5FFA1FD0FBA500C57E53 /* UCFAssetProofApplyFirstCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFAssetProofApplyFirstCell.m; sourceTree = "<group>"; };
+		83FD5FFB1FD0FBA500C57E53 /* UCFAssetProofApplyFirstCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFAssetProofApplyFirstCell.xib; sourceTree = "<group>"; };
 		83FEDB731EFBB56000CFE0EF /* UCFCompanyNoOpenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFCompanyNoOpenViewController.h; sourceTree = "<group>"; };
 		83FEDB741EFBB56000CFE0EF /* UCFCompanyNoOpenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFCompanyNoOpenViewController.m; sourceTree = "<group>"; };
 		83FEDB751EFBB56000CFE0EF /* UCFCompanyNoOpenViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFCompanyNoOpenViewController.xib; sourceTree = "<group>"; };
@@ -3125,6 +3173,7 @@
 		4AB126071AEF8EA400E915F1 /* BidViewController */ = {
 			isa = PBXGroup;
 			children = (
+				833CC9E81FD69D8C006BF624 /* ProjectDetailNew */,
 				83FF20521F0BAF0500F21119 /* GoldDetail(黄金详情) */,
 				833A6EA11E55466B00C8A494 /* CollectionDetail */,
 				FB1E7F721D8E4230009CBE2C /* ProjectDetail */,
@@ -3562,6 +3611,9 @@
 				A860F2621F5E7DA10017495F /* UCFGoldRebateCell.h */,
 				A860F2631F5E7DA10017495F /* UCFGoldRebateCell.m */,
 				A860F2641F5E7DA10017495F /* UCFGoldRebateCell.xib */,
+				83D42A8A1FCE6175004C96EF /* UCFShareBaseView.h */,
+				83D42A8B1FCE6175004C96EF /* UCFShareBaseView.m */,
+				83D42A8D1FCE619D004C96EF /* UCFShareBaseView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3593,6 +3645,9 @@
 				A860F25D1F5E3EFE0017495F /* UCFGoldMyRebateViewController.h */,
 				A860F25E1F5E3EFE0017495F /* UCFGoldMyRebateViewController.m */,
 				A860F25F1F5E3EFE0017495F /* UCFGoldMyRebateViewController.xib */,
+				83D42A8F1FCEAF07004C96EF /* UCFSharePictureViewController.h */,
+				83D42A901FCEAF07004C96EF /* UCFSharePictureViewController.m */,
+				83D42A911FCEAF07004C96EF /* UCFSharePictureViewController.xib */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -5303,6 +5358,7 @@
 		7BCE028E1AC948710084C15C /* Setting */ = {
 			isa = PBXGroup;
 			children = (
+				833FBDFB1FD01088002D6F80 /* AssetsProof(资产证明) */,
 				8315591A1FAC7C6900285100 /* DrawGold(提金页面) */,
 				8346B2651F70F25400219D41 /* RechargeAndCash(充值和提现) */,
 				83AB49581F6A754100C4231F /* AccountMoneyPieChart(资金饼图) */,
@@ -5656,6 +5712,91 @@
 				833A6EB91E55902A00C8A494 /* UCFCollectionListCell.h */,
 				833A6EBA1E55902A00C8A494 /* UCFCollectionListCell.m */,
 				833A6EBB1E55902A00C8A494 /* UCFCollectionListCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		833CC9E81FD69D8C006BF624 /* ProjectDetailNew */ = {
+			isa = PBXGroup;
+			children = (
+				833CC9E91FD69D8C006BF624 /* Controller */,
+				833CC9EA1FD69D8C006BF624 /* Model */,
+				833CC9EB1FD69D8C006BF624 /* View */,
+			);
+			path = ProjectDetailNew;
+			sourceTree = "<group>";
+		};
+		833CC9E91FD69D8C006BF624 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				833CC9EC1FD6A7B2006BF624 /* UCFProjectBasicDetailViewController.h */,
+				833CC9ED1FD6A7B2006BF624 /* UCFProjectBasicDetailViewController.m */,
+				833CC9EE1FD6A7B2006BF624 /* UCFProjectBasicDetailViewController.xib */,
+				8330C9B51FD79C4B00EB56A9 /* UCFProjectSafetyGuaranteeViewController.h */,
+				8330C9B61FD79C4B00EB56A9 /* UCFProjectSafetyGuaranteeViewController.m */,
+				8330C9B71FD79C4B00EB56A9 /* UCFProjectSafetyGuaranteeViewController.xib */,
+				833CC9F61FD6A83D006BF624 /* UCFProjectInvestmentRecordViewController.h */,
+				833CC9F71FD6A83D006BF624 /* UCFProjectInvestmentRecordViewController.m */,
+				833CC9F81FD6A83D006BF624 /* UCFProjectInvestmentRecordViewController.xib */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		833CC9EA1FD69D8C006BF624 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		833CC9EB1FD69D8C006BF624 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		833FBDFB1FD01088002D6F80 /* AssetsProof(资产证明) */ = {
+			isa = PBXGroup;
+			children = (
+				833FBDFC1FD01088002D6F80 /* Controller */,
+				833FBDFD1FD01088002D6F80 /* Model */,
+				833FBDFE1FD01088002D6F80 /* View */,
+			);
+			path = "AssetsProof(资产证明)";
+			sourceTree = "<group>";
+		};
+		833FBDFC1FD01088002D6F80 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				833FBDFF1FD010B2002D6F80 /* UCFAccountAssetsProofViewController.h */,
+				833FBE001FD010B2002D6F80 /* UCFAccountAssetsProofViewController.m */,
+				833FBE011FD010B2002D6F80 /* UCFAccountAssetsProofViewController.xib */,
+				83F669F31FD14B7E00ABCA57 /* UCFAssetProofApplyViewController.h */,
+				83F669F41FD14B7E00ABCA57 /* UCFAssetProofApplyViewController.m */,
+				83F669F51FD14B7E00ABCA57 /* UCFAssetProofApplyViewController.xib */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		833FBDFD1FD01088002D6F80 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				83382C181FD52EFD001BBF90 /* UCFAssetProofListModel.h */,
+				83382C191FD52EFD001BBF90 /* UCFAssetProofListModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		833FBDFE1FD01088002D6F80 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				83FD5FF91FD0FBA500C57E53 /* UCFAssetProofApplyFirstCell.h */,
+				83FD5FFA1FD0FBA500C57E53 /* UCFAssetProofApplyFirstCell.m */,
+				83FD5FFB1FD0FBA500C57E53 /* UCFAssetProofApplyFirstCell.xib */,
+				83F669F81FD14D2500ABCA57 /* UCFAssetProofApplyIdCell.h */,
+				83F669F91FD14D2500ABCA57 /* UCFAssetProofApplyIdCell.m */,
+				83F669FA1FD14D2500ABCA57 /* UCFAssetProofApplyIdCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -6916,6 +7057,7 @@
 				744B9ED61F0B8AC100440FBA /* UCFCalendarDetailHeaderView.xib in Resources */,
 				83CD84331F13A50800227704 /* UCFP2PTransferViewController.xib in Resources */,
 				7BC7890A1B04569300D50494 /* jianjie.docx in Resources */,
+				83F669F71FD14B7E00ABCA57 /* UCFAssetProofApplyViewController.xib in Resources */,
 				83FB3F5F1E5C4D2A0094C9BA /* UCFBatchBidWebViewController.xib in Resources */,
 				74E1404A1F1C575200B17A96 /* UCFGoldCashHistoryController.xib in Resources */,
 				74270D1C1EC595ED00F9419B /* UCFFriendRecCell1.xib in Resources */,
@@ -6960,10 +7102,12 @@
 				74067A461F5038C800747888 /* UCFAveragePriceDetailView.xib in Resources */,
 				74270D1F1EC595ED00F9419B /* UCFRebateCell.xib in Resources */,
 				FB5149551D64441F00C26E7B /* guideImage7_1.png in Resources */,
+				83D42A931FCEAF07004C96EF /* UCFSharePictureViewController.xib in Resources */,
 				74EAF5BE1B0F18CB00807C1C /* UCFBankCardInfoExplainView.xib in Resources */,
 				25B38EFC1D5884EE00FB09F1 /* UCFBankCardChoseListInfo.xib in Resources */,
 				A8B6B6821EC9AA0900D4E86F /* WalletBankView.xib in Resources */,
 				7436F2D91F3C38AE003B77CA /* UCFGoldRechargeBankCell.xib in Resources */,
+				8330C9B91FD79C4B00EB56A9 /* UCFProjectSafetyGuaranteeViewController.xib in Resources */,
 				E3C117AF1D40D2F90053A052 /* UCFWebViewJavascriptBridgeController.xib in Resources */,
 				74956EB31D66E87F00D68B61 /* UCFModifyPhoneViewController.xib in Resources */,
 				83AB49651F6A76CA00C4231F /* UCFTotalAssetPieChartViewController.xib in Resources */,
@@ -6981,7 +7125,9 @@
 				745D37DB1F3AE9B200897F1A /* UCFColdChargeThirdCell.xib in Resources */,
 				83E3F7A51F3C35C500286550 /* jrgcuserxieyi.docx in Resources */,
 				74956EB11D66E2BC00D68B61 /* BindPhoneNumViewController.xib in Resources */,
+				83FD5FFD1FD0FBA500C57E53 /* UCFAssetProofApplyFirstCell.xib in Resources */,
 				74EAF5B61B0ED78700807C1C /* UCFSelectedBankTableViewCell.xib in Resources */,
+				833CC9FA1FD6A83D006BF624 /* UCFProjectInvestmentRecordViewController.xib in Resources */,
 				744EB7FE1EE7E871003C57C4 /* UCFInvestTransferViewController.xib in Resources */,
 				744EB7EF1EE7DD15003C57C4 /* UCFInvestViewController.xib in Resources */,
 				740586D71F41B16800E2DE01 /* UCFGoldRaiseSectionHeaderView.xib in Resources */,
@@ -7023,6 +7169,7 @@
 				74956EB51D66F33D00D68B61 /* UCFAccountDetailViewController.xib in Resources */,
 				4A90167F1AFB12FE0049A9E0 /* LICENSE in Resources */,
 				744A5FAB1E79512C008921F9 /* UCFWebViewJavascriptBridgeLoanDetails.xib in Resources */,
+				83F669FC1FD14D2500ABCA57 /* UCFAssetProofApplyIdCell.xib in Resources */,
 				74F490EF1E5B2AAA0057AC62 /* UCFCollectionBidCell.xib in Resources */,
 				740586C81F41A06600E2DE01 /* UCFGoldRaiseView.xib in Resources */,
 				FB51491A1D6438A700C26E7B /* Images.xcassets in Resources */,
@@ -7076,12 +7223,14 @@
 				83FF3E4B1E12159C00DFB99C /* UCFCashTableViewCell.xib in Resources */,
 				7412323E1F14BB250061408A /* UCFPickView.xib in Resources */,
 				74F6493B1F47159A00328235 /* UCFGoldCashSucessController.xib in Resources */,
+				833FBE031FD010B2002D6F80 /* UCFAccountAssetsProofViewController.xib in Resources */,
 				A824BFCE1FCD499200E32F39 /* UMSocialSDKPromptResources.bundle in Resources */,
 				833345731F1F82BF00A0F30D /* UCFGoldInvestmentCell.xib in Resources */,
 				74BDA9941F09F6C60054403F /* Info.plist in Resources */,
 				7477BF911AFAFED900914BFB /* UCFRedEnvelopeTableViewCell.xib in Resources */,
 				83DAEFC31F166A3B00D7948F /* UCFGoldAuthorizationViewController.xib in Resources */,
 				8366BFBA1E151745008D027F /* UCFCashRecordCell.xib in Resources */,
+				833CC9F01FD6A7B2006BF624 /* UCFProjectBasicDetailViewController.xib in Resources */,
 				FB21731A1AF20DFC00649AA0 /* UCFBackMoneyCell.xib in Resources */,
 				25950EC11D7FB6EC00E4CCBA /* CWLivessViewController.xib in Resources */,
 				83F4DAF61D9561EC00A0632E /* UCFPrdTransferBIdWebView.xib in Resources */,
@@ -7098,6 +7247,7 @@
 				4ACB399B1E1216DD00E9BA8C /* FestivalActivitiesWebView.xib in Resources */,
 				8347A6CB1FAFFFB500E68DFD /* UCFExtractViewCell.xib in Resources */,
 				83DAEFB51F16113400D7948F /* UCFGoldCalculatorView.xib in Resources */,
+				83D42A8E1FCE619D004C96EF /* UCFShareBaseView.xib in Resources */,
 				740586D21F41B10900E2DE01 /* UCFGoldRaiseCell.xib in Resources */,
 				83CD84351F13A50800227704 /* UCFP2PViewController.xib in Resources */,
 				74702BC01FB5599700CBB655 /* UCFExtractGoldCell.xib in Resources */,
@@ -7268,6 +7418,7 @@
 				EDEC8C021CB3BAB300815228 /* NSMutableString+TagReplace.m in Sources */,
 				743B27621F3D9BD40098DC1B /* UCFGoldLimitedBankModel.m in Sources */,
 				740586C21F419D0100E2DE01 /* UCFGoldRaiseViewController.m in Sources */,
+				83FD5FFC1FD0FBA500C57E53 /* UCFAssetProofApplyFirstCell.m in Sources */,
 				7491FBD61AFC5D5400CD0720 /* UCFModifyIdAuthViewController.m in Sources */,
 				7BCE01F61AC8FC260084C15C /* ASIDataCompressor.m in Sources */,
 				A860F2651F5E7DA10017495F /* UCFGoldRebateCell.m in Sources */,
@@ -7280,6 +7431,7 @@
 				4A3904441CFBF375004347D0 /* Reachability.m in Sources */,
 				74E535F61AE6262F00DAABFC /* UCFOverDueListViewController.m in Sources */,
 				7470EC081B036B71006DDCEF /* PrintView.m in Sources */,
+				83F669FB1FD14D2500ABCA57 /* UCFAssetProofApplyIdCell.m in Sources */,
 				74EB80DA1AE4EDB80071621E /* UCFSettingSwitchItem.m in Sources */,
 				7BE51D8C1ADE1B8F007600AB /* UCFInvestmentDetailView.m in Sources */,
 				744EB7F81EE7E858003C57C4 /* UCFMicroMoneyViewController.m in Sources */,
@@ -7402,6 +7554,7 @@
 				E31141601D92769E00FF880A /* UCFWebViewJavascriptBridgeBBS.m in Sources */,
 				FB2173191AF20DFC00649AA0 /* UCFBackMoneyCell.m in Sources */,
 				A851F3481F132713003DE8B8 /* UCFGoldTransactionHeadView.m in Sources */,
+				833CC9EF1FD6A7B2006BF624 /* UCFProjectBasicDetailViewController.m in Sources */,
 				FB4F9E4F1D62A6D600CCB492 /* AccountSuccessVC.m in Sources */,
 				74F291131AE0DBB4003E0E86 /* UCFFacCodeViewController.m in Sources */,
 				74EC8D251AF089A4000CAF35 /* UCFPersonalInfoModel.m in Sources */,
@@ -7495,6 +7648,7 @@
 				A851F3531F1361D8003DE8B8 /* UCFGoldTransactionDetailViewController.m in Sources */,
 				74B98C9A1F70FF5F00CB6A9F /* UCFMineCell.m in Sources */,
 				833A6EAB1E55466B00C8A494 /* UCFCollectionDetailViewController.m in Sources */,
+				83382C1A1FD52EFD001BBF90 /* UCFAssetProofListModel.m in Sources */,
 				83FF3E4A1E12159B00DFB99C /* UCFCashTableViewCell.m in Sources */,
 				FB7EDE3E1D6BFCD700C3E924 /* AppDelegate.mm in Sources */,
 				7443C7371F1F3E64009669C0 /* UCFGoldRechargeRecordCell.m in Sources */,
@@ -7617,12 +7771,14 @@
 				83CD843C1F13A50800227704 /* UCFTransferModel.m in Sources */,
 				7485EFD01B0492CE0044DE48 /* UCFRedEnvelopeModel.m in Sources */,
 				83F82E861EBC5DD200B79E02 /* UCFProductListModel.m in Sources */,
+				83D42A8C1FCE6175004C96EF /* UCFShareBaseView.m in Sources */,
 				74877CBA1FB2A95200F32428 /* PageView.m in Sources */,
 				74931A331B1326FE00143424 /* OHTouchesGestureRecognizer.m in Sources */,
 				74270C991EC58F6800F9419B /* UCFHomeListPresenter.m in Sources */,
 				A82FBA6A1F4FD40900FD79BC /* CoustomLab.m in Sources */,
 				4AF9C5E91B0B419600E3BE7D /* RechargeListCell.m in Sources */,
 				7404CA011FB44EA7002811E0 /* UCFExtractGoldModel.m in Sources */,
+				83D42A921FCEAF07004C96EF /* UCFSharePictureViewController.m in Sources */,
 				7470EC091B036B71006DDCEF /* UIImage+zhang.m in Sources */,
 				747B103B1F15F82200CECB2C /* UCFGoldenHeaderView.m in Sources */,
 				744BE8521F6BBCA200107FAA /* UCFHomeIconModel.m in Sources */,
@@ -7720,7 +7876,10 @@
 				A85A2EC21F4321B0004BF4C1 /* QLHeaderViewController.m in Sources */,
 				7BCCA8B31ACA97C20089DAAC /* UCFLoginViewController.m in Sources */,
 				741EB18A1D59829E006C885F /* UCFTableCellTwo.m in Sources */,
+				833FBE021FD010B2002D6F80 /* UCFAccountAssetsProofViewController.m in Sources */,
+				8330C9B81FD79C4B00EB56A9 /* UCFProjectSafetyGuaranteeViewController.m in Sources */,
 				EDEC8C031CB3BAB300815228 /* NSString+WPAttributedMarkup.m in Sources */,
+				833CC9F91FD6A83D006BF624 /* UCFProjectInvestmentRecordViewController.m in Sources */,
 				83F4DAF51D9561EC00A0632E /* UCFPrdTransferBIdWebView.m in Sources */,
 				7BA6E4BA1AD6731900FE8C37 /* SDImageCache.m in Sources */,
 				744B9EDA1F0B8E9A00440FBA /* UCFCalendarDayCell.m in Sources */,
@@ -7871,6 +8030,7 @@
 				744B9EDE1F0BA64600440FBA /* UCFCalendarDayInfo.m in Sources */,
 				74BDA9871F09F6C60054403F /* FSCalendarCalculator.m in Sources */,
 				74270D151EC595ED00F9419B /* ReturnedMoneyCell.m in Sources */,
+				83F669F61FD14B7E00ABCA57 /* UCFAssetProofApplyViewController.m in Sources */,
 				74677C661F165022003768EB /* UCFGoldRechargeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

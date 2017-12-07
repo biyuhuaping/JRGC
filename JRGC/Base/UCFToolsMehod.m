@@ -210,7 +210,13 @@
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setLocale:[[[NSLocale alloc] initWithLocaleIdentifier:@"zh-CN"] autorelease]];
     formatter.dateFormat = @"yyyy-MM-dd hh:mm:ss";
-    NSDate *dt = [NSDate dateWithTimeIntervalSince1970:tInterval];
+    NSDate *dt = nil;
+    NSString *tIntervalStr = [NSString stringWithFormat:@"%.0lf",tInterval];
+    if([tIntervalStr length]==13){//时间戳有10位和13位的分开判断
+        dt = [NSDate dateWithTimeIntervalSince1970:tInterval  / 1000];
+    }else{
+        dt = [NSDate dateWithTimeIntervalSince1970:tInterval];
+    }
     str = [formatter stringFromDate:dt];
     [formatter release];
     return str;
