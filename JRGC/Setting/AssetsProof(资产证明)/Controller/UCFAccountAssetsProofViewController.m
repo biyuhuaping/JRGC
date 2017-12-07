@@ -11,6 +11,7 @@
 #import "UCFAssetProofApplyViewController.h"
 #import "UCFAssetProofListModel.h"
 #import "QLHeaderViewController.h"
+#import "YWFilePreviewController.h"
 @interface UCFAccountAssetsProofViewController ()<UITableViewDataSource,UITableViewDelegate,UCFAssetProofApplyFirstCellDelegate,UIDocumentInteractionControllerDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic)  NSMutableArray *dataArray;
@@ -40,7 +41,10 @@
 #pragma 查看资产证明模板页面
 - (void)seeAssetProofModel
 {
-    
+    NSString *filePath1 = [[NSBundle mainBundle] pathForResource:@"assets.png" ofType:nil ];
+    NSArray *filePathArr = @[filePath1];
+    YWFilePreviewController *_filePreview = [[YWFilePreviewController alloc] init];
+    [_filePreview previewFileWithPaths:filePathArr on:self jump:YWJumpPresentAnimat];
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
