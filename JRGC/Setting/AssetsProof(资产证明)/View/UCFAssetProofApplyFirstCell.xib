@@ -21,7 +21,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RCX-CZ-24p">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="170"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="IAU-G5-MTf">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="assets.png" translatesAutoresizingMaskIntoConstraints="NO" id="IAU-G5-MTf">
                                 <rect key="frame" x="74" y="30" width="76" height="107"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="107" id="TTR-SW-dAo"/>
@@ -233,7 +233,7 @@
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-            <point key="canvasLocation" x="-394" y="-442"/>
+            <point key="canvasLocation" x="-573" y="-461"/>
         </tableViewCell>
         <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UCFAssetProofApplySecondCell" rowHeight="75" id="wk7-lL-Fbz" customClass="UCFAssetProofApplySecondCell">
             <rect key="frame" x="0.0" y="0.0" width="320" height="75"/>
@@ -315,4 +315,7 @@
             <point key="canvasLocation" x="-202" y="196.5"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="assets.png" width="2480" height="3508"/>
+    </resources>
 </document>

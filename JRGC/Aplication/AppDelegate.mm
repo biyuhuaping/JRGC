@@ -59,6 +59,7 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+
     //设置公告展示标志位
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isShowNotice"];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -67,7 +68,6 @@
     [[ToolSingleTon sharedManager] getGoldPrice]; //获取实时金价
 
     [self setWebViewUserAgent];
-//    [UCFSession sharedManager].delegate = self;
     [self checkNovicePoliceOnOff];//监测2017新手奖励政策开关。
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -96,14 +96,14 @@
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkInitiaLogin) name:CheckIsInitiaLogin object:nil];
     
-    [IPDetector getWANIPAddressWithCompletion:^(NSString *IPAddress) {
-        NSString *curWanIp = IPAddress;
-        if (![curWanIp isEqualToString:@""] && curWanIp) {
-            curWanIp = [AuxiliaryFunc deleteHuanHang:[NSMutableString stringWithString:curWanIp]];
-        }
-        [[NSUserDefaults standardUserDefaults] setValue:curWanIp forKey:@"curWanIp"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    }];
+//    [IPDetector getWANIPAddressWithCompletion:^(NSString *IPAddress) {
+//        NSString *curWanIp = IPAddress;
+//        if (![curWanIp isEqualToString:@""] && curWanIp) {
+//            curWanIp = [AuxiliaryFunc deleteHuanHang:[NSMutableString stringWithString:curWanIp]];
+//        }
+//        [[NSUserDefaults standardUserDefaults] setValue:curWanIp forKey:@"curWanIp"];
+//        [[NSUserDefaults standardUserDefaults] synchronize];
+//    }];
     
     //去掉navigationbar 下面默认的白线
     [[UINavigationBar appearance] setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];

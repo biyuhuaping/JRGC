@@ -390,12 +390,12 @@
 #pragma mark - 同盾
 - (void) didReceiveDeviceBlackBox: (NSString *) blackBox {
     NSString *blockId = blackBox;
-    NSString *wanip = [[NSUserDefaults standardUserDefaults] valueForKey:@"curWanIp"];
+//    NSString *wanip = [[NSUserDefaults standardUserDefaults] valueForKey:@"curWanIp"];
     NSMutableDictionary *parDic = [NSMutableDictionary dictionary];
     [parDic setValue:_loginView.userNameFieldText forKey:@"username"];
     [parDic setValue:[MD5Util MD5Pwd:_loginView.passwordFieldText] forKey:@"pwd"];
     [parDic setValue:blockId forKey:@"token_id"];
-    [parDic setValue:wanip forKey:@"ip"];
+//    [parDic setValue:wanip forKey:@"ip"];
     NSString *isCompanyStr = self.selectTag == 0 ? @"false" : @"true";
     [parDic setValue:isCompanyStr forKey:@"isCompany"];
     [[NetworkModule sharedNetworkModule] newPostReq:parDic tag:kSXTagLogin owner:self signature:NO Type:SelectAccoutDefault];
