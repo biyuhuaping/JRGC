@@ -47,11 +47,13 @@
     BOOL _isShow;//是否显示逾期信息    string    0不显示,1显示
     NSString *_overdueCount;    //逾期次数
     NSString *_overdueInvest;    //逾期金额
+    BOOL _isOpenWebViewOpen;//是否展开webView
 }
 @property (assign ,nonatomic)  BOOL prdDesType;//新老项目标识
 @property (strong ,nonatomic)   UIWebView *webView;
 @property (assign ,nonatomic)   float webViewHight;//项目详情webView高度
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (assign ,nonatomic)   float sectionViewHight;//项目详情webView高度
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @property (strong ,nonatomic)  NSString *contractTitle;
 
@@ -67,9 +69,11 @@
 {
     [super viewDidLoad];
     [self addLeftButton];
+    self.tableView.contentInset = UIEdgeInsetsMake( 0, 0, 10, 0);
     baseTitleLabel.text = @"基础详情";
-//    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    _isOpenWebViewOpen = NO;
+    _sectionViewHight = 137;
     _isP2P = self.accoutType == SelectAccoutTypeP2P ;
    if(_detailType == PROJECTDETAILTYPENORMAL) //普通标
     {
@@ -87,10 +91,11 @@
          baseTitleLabel.text = @"原标详情";
         [self initMarkOfBondsRransferTableViews];
     }
-    self.tableView.separatorInset = UIEdgeInsetsMake(0, 15, 0, 0);
-    self.tableView.separatorColor = UIColorWithRGB(0xe3e5ea);
+//    self.tableView.separatorInset = UIEdgeInsetsMake(0, 15, 0, 0);
+//    self.tableView.separatorColor = UIColorWithRGB(0xe3e5ea);
     [_tableView reloadData];
 }
+
 - (void)initTableViews
 {
     //是否隐藏借款人信息一栏
@@ -132,7 +137,7 @@
         _overdueInvest = [NSString stringWithFormat:@"%@元",[_dataDic objectSafeForKey:@"overdueInvest"]];
         [_auditRecordArray addObjectsFromArray:@[@"平台逾期次数",@"平台逾期总金额"]];
         _isHideBusinessLicense =  _auditRecordArray.count == 6 ? YES :NO;
-    }else{
+    }else{ 
         _isHideBusinessLicense =  _auditRecordArray.count == 4 ? YES :NO;
     }
     _webView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 1)];
@@ -260,8 +265,6 @@
     NSString *idStr = [[_dataDic objectSafeDictionaryForKey:@"prdTransferFore"] objectSafeForKey:@"prdClaimsId"];
     NSString *urlStr = [NSString stringWithFormat:@"https://static.9888.cn/pages/wap/bid-describe/index.html?id=%@&fromSite=%@",idStr,_isP2P ?@"1":@"2"];
     [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlStr]]];
-    [_tableView setSeparatorInset:UIEdgeInsetsMake(0,0,10,0)];
-    _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     
     [self makeContractMsg:[_dataDic objectForKey:@"contractMsg"]];
     
@@ -353,38 +356,13 @@
     
     // 项目详情
     if (_detailType == PROJECTDETAILTYPENORMAL) {
-        if(section == 2 && !_isHideBorrowerInformation) {//如果不隐藏 显示该一栏
-            UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 50)];
-            headView.backgroundColor = UIColorWithRGB(0xebebee);
-            UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 10, ScreenWidth, 40)];
-            view.backgroundColor = UIColorWithRGB(0xf9f9f9);
-            UILabel *labelTitle = [[UILabel alloc] initWithFrame:CGRectMake(25/2.0, 12, ScreenWidth/2, 16)];
-            labelTitle.text =  _borrowerInformationStr;
-            labelTitle.textColor = UIColorWithRGB(0x333333);
-            labelTitle.backgroundColor = [UIColor clearColor];
-            labelTitle.font = [UIFont systemFontOfSize:14];
-            [view addSubview:labelTitle];
-            [headView addSubview:view];
-            [self viewAddLine:headView Up:YES];
-            [self viewAddLine:headView Up:NO];
-            [self viewAddLine:view Up:YES];
-            return headView;
-        } else if((section == 2 && _isHideBorrowerInformation) || (section == 3 && !_isHideBorrowerInformation)) {//
-            UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 50)];
-            headView.backgroundColor = UIColorWithRGB(0xebebee);
-            UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 10, ScreenWidth, 40)];
-            view.backgroundColor = UIColorWithRGB(0xf9f9f9);
-            UILabel *labelTitle = [[UILabel alloc] initWithFrame:CGRectMake(25/2.0, 12, ScreenWidth/2, 16)];
-            labelTitle.text = @"审核记录";
-            labelTitle.textColor = UIColorWithRGB(0x333333);
-            labelTitle.backgroundColor = [UIColor clearColor];
-            labelTitle.font = [UIFont systemFontOfSize:14];
-            [view addSubview:labelTitle];
-            [headView addSubview:view];
-            [self viewAddLine:headView Up:YES];
-            [self viewAddLine:headView Up:NO];
-            [self viewAddLine:view Up:YES];
-            return headView;
+        if(section == 2 && !_isHideBorrowerInformation)
+        {//如果不隐藏 显示该一栏
+            return [self createTableViewHeaderView:_borrowerInformationStr];
+        }
+        else if((section == 2 && _isHideBorrowerInformation) || (section == 3 && !_isHideBorrowerInformation))
+        {//
+            return [self createTableViewHeaderView:@"审核记录"];;
         } else {
             if (section != 0) {
                 UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 10)];
@@ -399,54 +377,17 @@
         }
     }
     else if (_detailType == PROJECTDETAILTYPERIGHTINTEREST){
-         if(section == 3 && !_isHideBorrowerInformation) {
-            UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 50)];
-            headView.backgroundColor = UIColorWithRGB(0xebebee);
-            UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 10, ScreenWidth, 40)];
-            view.backgroundColor = UIColorWithRGB(0xf7f7f7);
-            UILabel *labelTitle = [[UILabel alloc] initWithFrame:CGRectMake(25/2.0, 12, ScreenWidth/2, 16)];
-            labelTitle.text = @"原始债权";
-            labelTitle.textColor = UIColorWithRGB(0x333333);
-            labelTitle.backgroundColor = [UIColor clearColor];
-            labelTitle.font = [UIFont systemFontOfSize:14];
-            [view addSubview:labelTitle];
-            [headView addSubview:view];
-            [self viewAddLine:headView Up:YES];
-            [self viewAddLine:headView Up:NO];
-            [self viewAddLine:view Up:YES];
-            return headView;
-        } else if(section == 2 && !_isHideBorrowerInformation) {
-            UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 50)];
-            headView.backgroundColor = UIColorWithRGB(0xebebee);
-            UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 10, ScreenWidth, 40)];
-            view.backgroundColor = UIColorWithRGB(0xf7f7f7);
-            UILabel *labelTitle = [[UILabel alloc] initWithFrame:CGRectMake(25/2.0, 12, ScreenWidth/2, 16)];
-            labelTitle.text = @"转让方";
-            labelTitle.textColor = UIColorWithRGB(0x333333);
-            labelTitle.backgroundColor = [UIColor clearColor];
-            labelTitle.font = [UIFont systemFontOfSize:14];
-            [view addSubview:labelTitle];
-            [headView addSubview:view];
-            [self viewAddLine:headView Up:YES];
-            [self viewAddLine:headView Up:NO];
-            [self viewAddLine:view Up:YES];
-            return headView;
-        } else if((section == 4 && !_isHideBorrowerInformation) || (section == 2 && _isHideBorrowerInformation)) { //该区 如果隐藏 section 为2 如果不隐藏 section 为4
-            UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 50)];
-            headView.backgroundColor = UIColorWithRGB(0xebebee);
-            UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 10, ScreenWidth, 40)];
-            view.backgroundColor = UIColorWithRGB(0xf7f7f7);
-            UILabel *labelTitle = [[UILabel alloc] initWithFrame:CGRectMake(25/2.0, 12, ScreenWidth/2, 16)];
-            labelTitle.text = @"审核记录";
-            labelTitle.textColor = UIColorWithRGB(0x333333);
-            labelTitle.backgroundColor = [UIColor clearColor];
-            labelTitle.font = [UIFont systemFontOfSize:14];
-            [view addSubview:labelTitle];
-            [headView addSubview:view];
-            [self viewAddLine:headView Up:YES];
-            [self viewAddLine:headView Up:NO];
-            [self viewAddLine:view Up:YES];
-            return headView;
+         if(section == 3 && !_isHideBorrowerInformation)
+         {
+            return [self createTableViewHeaderView:@"原始债权"];
+         }
+         else if(section == 2 && !_isHideBorrowerInformation)
+         {
+      
+            return [self createTableViewHeaderView:@"转让方"];
+         } else if((section == 4 && !_isHideBorrowerInformation) || (section == 2 && _isHideBorrowerInformation))
+         { //该区 如果隐藏 section 为2 如果不隐藏 section 为4
+            return [self createTableViewHeaderView:@"审核记录"];
         } else {
             UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 10)];
             headView.backgroundColor = UIColorWithRGB(0xebebee);
@@ -458,6 +399,24 @@
         }
     }
     return nil;
+}
+-(UIView *)createTableViewHeaderView:(NSString *)titleStr
+{
+    UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 50)];
+    headView.backgroundColor = UIColorWithRGB(0xebebee);
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 10, ScreenWidth, 40)];
+    view.backgroundColor = UIColorWithRGB(0xf7f7f7);
+    UILabel *labelTitle = [[UILabel alloc] initWithFrame:CGRectMake(25/2.0, 12, ScreenWidth/2, 17)];
+    labelTitle.text = titleStr;
+    labelTitle.textColor = UIColorWithRGB(0x333333);
+    labelTitle.backgroundColor = [UIColor clearColor];
+    labelTitle.font = [UIFont systemFontOfSize:14];
+    [view addSubview:labelTitle];
+    [headView addSubview:view];
+    [self viewAddLine:headView Up:YES];
+    [self viewAddLine:headView Up:NO];
+    [self viewAddLine:view Up:YES];
+    return headView;
 }
 - (void)viewAddLine:(UIView *)view Up:(BOOL)up
 {
@@ -510,7 +469,7 @@
         }
         else if([indexPath section] == 0)
         {
-            return _webViewHight;
+            return _sectionViewHight;
         } else if([indexPath section] == 2 && !_isHideBorrowerInformation) {
             if ([indexPath row] == 0 || [indexPath row] == [_borrowerInfo[0] count] - 1) {
                 return 27 + 8;
@@ -613,41 +572,89 @@
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-   if(_detailType == PROJECTDETAILTYPENORMAL) {
-        if ([indexPath section] == 1) {//合同列表
-            NSString *cellindifier = @"firstSectionCell";
-            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellindifier];
-            if (!cell) {
-                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellindifier];
-                [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
-                cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                UIImageView *inconImageView = [[UIImageView alloc]initWithFrame:CGRectMake(13, 13, 18, 18)];
-                inconImageView.tag = 11;
-                UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(inconImageView.frame)+5, 13, 200, 18)];
-                titleLabel.tag = 12;
-                titleLabel.font = [UIFont systemFontOfSize:13];
-                titleLabel.textColor = UIColorWithRGB(0x555555);
-                [cell.contentView addSubview:inconImageView];
-                [cell.contentView addSubview:titleLabel];
-                
-            }
-            UIImageView  *inconImageView = (UIImageView*)[cell.contentView viewWithTag:11];
-            UILabel *titleLabel = (UILabel*)[cell.contentView viewWithTag:12];
-            NSDictionary *dict = [_firstSectionArray objectAtIndex:indexPath.row];
-            NSString * imageUrlStr = [dict objectSafeForKey:@"iconUrl"];
-            [inconImageView  sd_setImageWithURL:[NSURL URLWithString:imageUrlStr]];
-            titleLabel.text = [dict objectSafeForKey:@"contractName"];
-            return cell;
-        } else if ([indexPath section] == 0) {//详情列表
-            NSString *cellindifier = @"twoSectionCell";
-            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellindifier];
-            if (!cell) {
-                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellindifier];
-                cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                [cell.contentView addSubview:_webView];
-            }
-            return cell;
-        } else if ([indexPath section] == 2  && !_isHideBorrowerInformation) { //如果不隐藏就显示该cell
+    
+    if ([indexPath section] == 1) {//合同列表
+        NSString *cellindifier = @"firstSectionCell";
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellindifier];
+        if (!cell) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellindifier];
+            [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            UIImageView *inconImageView = [[UIImageView alloc]initWithFrame:CGRectMake(13, 13, 18, 18)];
+            inconImageView.tag = 11;
+            UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(inconImageView.frame)+5, 13, 200, 18)];
+            titleLabel.tag = 12;
+            titleLabel.font = [UIFont systemFontOfSize:13];
+            titleLabel.textColor = UIColorWithRGB(0x555555);
+            [cell.contentView addSubview:inconImageView];
+            [cell.contentView addSubview:titleLabel];
+            UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(15, 44 - 0.5, ScreenWidth - 15 , 0.5)];
+            lineView.tag = 13;
+            lineView.backgroundColor = UIColorWithRGB(0xeff0f3);
+            [cell.contentView addSubview:lineView];
+            
+            UIButton*button = [UIButton buttonWithType:UIButtonTypeCustom];
+            button.frame = CGRectMake(0, 0 ,ScreenWidth ,44);
+            button.tag = 14;
+            button.backgroundColor = [UIColor clearColor];
+            [cell.contentView addSubview:button];
+            
+        }
+        UIImageView  *inconImageView = (UIImageView*)[cell.contentView viewWithTag:11];
+        UILabel *titleLabel = (UILabel*)[cell.contentView viewWithTag:12];
+        UIView *lineView = (UIView *)[cell.contentView viewWithTag:13];
+        UIButton *button = (UIButton*)[cell.contentView viewWithTag:14];
+        NSDictionary *dict = [_firstSectionArray objectAtIndex:indexPath.row];
+        NSString * imageUrlStr = [dict objectSafeForKey:@"iconUrl"];
+        [inconImageView  sd_setImageWithURL:[NSURL URLWithString:imageUrlStr]];
+        titleLabel.text = [dict objectSafeForKey:@"contractName"];
+        lineView.hidden = indexPath.row == _firstSectionArray.count - 1;
+        button.tag = 100+indexPath.row;
+        [button addTarget:self action:@selector(getContractMsgDetail:) forControlEvents:UIControlEventTouchUpInside];
+        return cell;
+    } else if ([indexPath section] == 0) {//详情列表
+        NSString *cellindifier = @"twoSectionCell";
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellindifier];
+        if (!cell) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellindifier];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            [cell.contentView addSubview:_webView];
+            
+            UIButton*button = [UIButton buttonWithType:UIButtonTypeCustom];
+            button.frame = CGRectMake(0, 0 ,ScreenWidth ,37);
+            button.tag = 14;
+            button.backgroundColor = [UIColor clearColor];
+            
+            UIImageView * imageView = [[UIImageView alloc] init];
+            imageView.image = [UIImage imageNamed:@"particular_icon_security.png"];
+            imageView.bounds = CGRectMake(0, 0, 11, 7);
+            UILabel *placehoderLabel = [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth/2 - 60 , 11,60 ,16)];
+            placehoderLabel.font = [UIFont systemFontOfSize:12];
+            placehoderLabel.textColor = UIColorWithRGB(0x4aa1f9);
+            placehoderLabel.textAlignment = NSTextAlignmentCenter;
+            placehoderLabel.numberOfLines = 0;
+            placehoderLabel.backgroundColor = [UIColor clearColor];
+            placehoderLabel.text = @"显示更多";
+            UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 100, ScreenWidth,37)];
+            view.backgroundColor = [UIColor whiteColor];
+            imageView.center = CGPointMake( ScreenWidth/2 + 30,CGRectGetHeight(view.frame)/2);
+            [view addSubview:imageView];
+            [view addSubview:placehoderLabel];
+            [view addSubview:button];
+            [button addTarget:self action:@selector(OpenWebViewDetail) forControlEvents:UIControlEventTouchUpInside];
+            [cell.contentView addSubview:view];
+        }
+        
+        
+        
+        
+        return cell;
+    }
+    
+    
+   if(_detailType == PROJECTDETAILTYPENORMAL)
+   {
+         if ([indexPath section] == 2  && !_isHideBorrowerInformation) { //如果不隐藏就显示该cell
             NSString *cellindifier = @"thirdSectionCell";
             UITableViewCell *cell = nil;
             if (!cell) {
@@ -791,7 +798,6 @@
                     imageView.hidden = NO;
                     renzhengLabel.text = @"已认证";
                     NSString *phoneNum = [[_dataDic objectForKey:@"orderUser"] objectForKey:@"mobile"];
-                    //                    phoneNum = [phoneNum stringByReplacingCharactersInRange:NSMakeRange(3, 5) withString:@"*****"];
                     if (_isP2P) {
                         placehoderLabel.text = phoneNum;
                     }else{
@@ -804,14 +810,6 @@
                     imageView.hidden = NO;
                     renzhengLabel.text = @"已认证";
                     NSString *office = [[_dataDic objectForKey:@"orderUser"] objectForKey:@"office"];
-                    //                    NSInteger len = [office length];
-                    //                    if ([office length] > 6) {
-                    //                        office = [office stringByReplacingCharactersInRange:NSMakeRange(2, len-4) withString:@"*****"];
-                    //                    } else if ([office length] > 3 && [office length] <= 6) {
-                    //                        office = [office stringByReplacingCharactersInRange:NSMakeRange(1, len-2) withString:@"**"];
-                    //                    } else if ([office length] > 1 && [office length] <= 3) {
-                    //                        office = [office stringByReplacingCharactersInRange:NSMakeRange(1, 1) withString:@"*"];
-                    //                    }
                     if (_isP2P) {
                         placehoderLabel.text = office;
                     }else{
@@ -846,42 +844,10 @@
             
             return cell;
         }
-    }else if (_detailType == PROJECTDETAILTYPERIGHTINTEREST)
-        {
-            if ([indexPath section] == 1) {
-                NSString *cellindifier = @"firstSectionCell";
-                UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellindifier];
-                if (!cell) {
-                    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellindifier];
-                    [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
-                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                    UIImageView *inconImageView = [[UIImageView alloc]initWithFrame:CGRectMake(13, 13, 18, 18)];
-                    inconImageView.tag = 11;
-                    UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(inconImageView.frame)+5, 13, 200, 18)];
-                    titleLabel.tag = 12;
-                    titleLabel.font = [UIFont systemFontOfSize:13];
-                    titleLabel.textColor = UIColorWithRGB(0x555555);
-                    [cell.contentView addSubview:inconImageView];
-                    [cell.contentView addSubview:titleLabel];
-                    
-                }
-                UIImageView  *inconImageView = (UIImageView*)[cell.contentView viewWithTag:11];
-                UILabel *titleLabel = (UILabel*)[cell.contentView viewWithTag:12];
-                NSDictionary *dict = [_firstSectionArray objectAtIndex:indexPath.row];
-                NSString * imageUrlStr = [dict objectSafeForKey:@"iconUrl"];
-                [inconImageView  sd_setImageWithURL:[NSURL URLWithString:imageUrlStr]];
-                titleLabel.text = [dict objectSafeForKey:@"contractName"];
-                return cell;
-            } else if ([indexPath section] == 0 ) {
-                NSString *cellindifier = @"twoSectionCell";
-                UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellindifier];
-                if (!cell) {
-                    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellindifier];
-                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                    [cell.contentView addSubview:_webView];
-                }
-                return cell;
-            } else if ([indexPath section] == 3 && !_isHideBorrowerInformation) {
+    }
+   else if (_detailType == PROJECTDETAILTYPERIGHTINTEREST)
+    {
+            if ([indexPath section] == 3 && !_isHideBorrowerInformation) {
                    NSString *cellindifier = @"forthSectionCell";
                    UITableViewCell *cell = nil;
                    if (!cell) {
@@ -1069,6 +1035,18 @@
     }
     return nil;
 }
+-(void)OpenWebViewDetail
+{
+    
+    _isOpenWebViewOpen = YES;
+    _sectionViewHight =  _webViewHight;
+    _webView.frame = CGRectMake(0,0,ScreenWidth, _webViewHight);
+    [_tableView reloadData];
+}
+-(void)webViewDidStartLoad:(UIWebView *)webView
+{
+    
+}
 - (void)webViewDidFinishLoad:(UIWebView*)webView
 {
     //字体大小
@@ -1081,22 +1059,22 @@
     dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.25 * NSEC_PER_SEC));
     dispatch_after(delayTime, dispatch_get_main_queue(), ^{
         weakSelf.webViewHight =  weakSelf.webView.scrollView.contentSize.height;
-        weakSelf.webView.frame = CGRectMake(0,0,ScreenWidth, weakSelf.webViewHight);
-        if (weakSelf.webViewHight != 0 )
+       
+        if (_isOpenWebViewOpen )
         {
+            weakSelf.webView.frame = CGRectMake(0,0,ScreenWidth, weakSelf.webViewHight);
             [_tableView reloadData];
+        }else{
+            weakSelf.webView.frame = CGRectMake(0,0,ScreenWidth, 100);
         }
     });
 }
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+-(void)getContractMsgDetail:(UIButton *)btn
 {
-    [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    if (indexPath.section == 1)
-    {
-        [self getContractMsgHttpRequest:indexPath.row];
-    }
+    [self getContractMsgHttpRequest:btn.tag - 100];
 }
--(void)getContractMsgHttpRequest:(NSInteger)row{
+-(void)getContractMsgHttpRequest:(NSInteger)row
+{
     
     NSString * strParameters= @"";
     NSDictionary *contractDict = [_firstSectionArray objectAtIndex:row];
@@ -1159,5 +1137,4 @@
     float labelHeight = [Common getStrHeightWithStr:titleStr AndStrFont:14 AndWidth:titlelableWidth].height;
     return labelHeight;
 }
-
 @end
