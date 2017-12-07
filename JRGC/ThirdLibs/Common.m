@@ -600,10 +600,10 @@
     return NO;
 }
 
-+ (NSString *)getIPAddress
-{
-    return [[NSUserDefaults standardUserDefaults] valueForKey:@"curWanIp"];
-}
+//+ (NSString *)getIPAddress
+//{
+//    return [[NSUserDefaults standardUserDefaults] valueForKey:@"curWanIp"];
+//}
 
 
 + (BOOL)isPureNumandCharacters:(NSString *)string
