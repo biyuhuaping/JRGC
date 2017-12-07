@@ -20,6 +20,11 @@
 #import "UCFOldUserGuideViewController.h"
 #import "RiskAssessmentViewController.h"
 #import "HSHelper.h"
+
+#import "UCFProjectBasicDetailViewController.h"
+#import "UCFProjectSafetyGuaranteeViewController.h"
+#import "UCFProjectInvestmentRecordViewController.h"
+
 @interface UCFProjectDetailViewController ()
 {
     UCFNormalNewMarkView *_normalMarkView;// 普通标
@@ -488,9 +493,48 @@
 #pragma mark -viewDelegate
 - (void)tableView:(UITableView *)tableView didSelectNormalMarkRowAtIndexPath:(NSIndexPath *)indexPath
 {
-        if ([indexPath section] == 1) {
-            [self getContractMsgHttpRequest:indexPath.row];
+//        if ([indexPath section] == 1) {
+//            [self getContractMsgHttpRequest:indexPath.row];
+//        }
+    [self gotoProjectDetailNewVC:indexPath];
+}
+
+
+-(void)gotoProjectDetailNewVC:(NSIndexPath *)indexPath
+{
+    switch (indexPath.row) {
+        case 0:
+        {
+            UCFProjectBasicDetailViewController *basicDetailVC = [[UCFProjectBasicDetailViewController alloc]initWithNibName:@"UCFProjectBasicDetailViewController" bundle:nil];
+            basicDetailVC.dataDic = _dataDic;
+            basicDetailVC.detailType = _detailType;
+            basicDetailVC.accoutType = self.accoutType;
+            [self.navigationController  pushViewController:basicDetailVC animated:YES];
         }
+            break;
+        case 1:
+        {
+            UCFProjectSafetyGuaranteeViewController *basicDetailVC = [[UCFProjectSafetyGuaranteeViewController alloc]initWithNibName:@"UCFProjectSafetyGuaranteeViewController" bundle:nil];
+            basicDetailVC.dataDic = _dataDic;
+            basicDetailVC.accoutType = self.accoutType;
+            [self.navigationController  pushViewController:basicDetailVC animated:YES];
+            
+        }
+            break;
+        case 2:
+        {
+            UCFProjectInvestmentRecordViewController *investmentRecordVC = [[UCFProjectInvestmentRecordViewController alloc]initWithNibName:@"UCFProjectInvestmentRecordViewController" bundle:nil];
+            investmentRecordVC.dataDic = _dataDic;
+            investmentRecordVC.accoutType = self.accoutType;
+            investmentRecordVC.detailType = _detailType;
+            [self.navigationController  pushViewController:investmentRecordVC animated:YES];
+            
+        }
+            break;
+            
+        default:
+            break;
+    }
 }
 -(void)getContractMsgHttpRequest:(NSInteger)row{
     
@@ -522,7 +566,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectNormalMarkOfRightRowAtIndexPath:(NSIndexPath *)indexPat
 {
-    if ([indexPat section] == 1) {
+//    if ([indexPat section] == 1) {
 //        if ([[_contractMsgArray objectAtIndex:[indexPat row]] objectForKey:@"content"]) {
 //            NSString *title = [[_contractMsgArray objectAtIndex:[indexPat row]] objectForKey:@"title"];
 //            FullWebViewController *controller = [[FullWebViewController alloc] initWithHtmlStr:[[_contractMsgArray objectAtIndex:[indexPat row]] objectForKey:@"content"] title:title];
@@ -531,15 +575,18 @@
 //        } else {
 //            [self showHTAlertdidFinishGetUMSocialDataResponse];
 //        }
-        [self getContractMsgHttpRequest:indexPat.row];
-    }
+//        [self getContractMsgHttpRequest:indexPat.row];
+//    }
+    [self gotoProjectDetailNewVC:indexPat];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectMarkOfBondsRransferViewRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([indexPath section] == 1) {
-          [self getContractMsgHttpRequest:indexPath.row];
-    }
+//    if ([indexPath section] == 1) {
+//          [self getContractMsgHttpRequest:indexPath.row];
+//    }
+    
+     [self gotoProjectDetailNewVC:indexPath];
 }
 
 #pragma mark MarkOfBondsRransferViewDelegate

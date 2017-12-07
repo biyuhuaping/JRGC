@@ -817,6 +817,27 @@
     NSString *timeString = [NSString stringWithFormat:@"%0.f", interval];
     return timeString;
 }
+
+//获取当前系统时间戳
+-(NSString*)cutDate:(id)_date
+{
+    NSString*timeYouGet = [NSString stringWithFormat:@"%@",_date];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateStyle:NSDateFormatterMediumStyle];
+    [formatter setTimeStyle:NSDateFormatterShortStyle];
+    [formatter setDateFormat:@"YYYY-MM-dd"]; // ----------设置你想要的格式,hh与HH的区别:分别表示12小时制,24小时制
+    NSDate *updatetimestamp = nil;
+    if([timeYouGet length]==13){//时间戳有10位和13位的分开判断
+        updatetimestamp = [NSDate dateWithTimeIntervalSince1970:[timeYouGet doubleValue] / 1000];
+    }else{
+        updatetimestamp = [NSDate dateWithTimeIntervalSince1970:[timeYouGet doubleValue]];
+    }
+    
+    
+    NSString *confromTimespStr = [formatter stringFromDate:updatetimestamp];
+    NSString *strByCut = [confromTimespStr substringToIndex:10];
+    return strByCut;
+}
 /**
  *  获取当前展示的viewController
  *

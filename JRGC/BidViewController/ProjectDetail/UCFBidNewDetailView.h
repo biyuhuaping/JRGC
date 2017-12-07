@@ -12,6 +12,7 @@
 
 - (void)bottomBtnClicked:(id)sender;
 - (void)styleGetToBack;
+- (void)tableView:(UITableView *)tableView didSelectBidNewRowAtIndexPath:(NSIndexPath *)indexPath;
 
 @end
 

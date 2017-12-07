@@ -63,6 +63,7 @@
     
     NSString * lastActivityTpyeName = [[NSUserDefaults standardUserDefaults] objectForKey:LastActivityTpyeName]; 
     if (self.activityType && ![self.activityType isEqualToString:lastActivityTpyeName] && self.switchFlag) {
+
         //通知弹窗显示新手政策
         
         [[NSUserDefaults standardUserDefaults] setObject:self.activityType forKey:LastActivityTpyeName];

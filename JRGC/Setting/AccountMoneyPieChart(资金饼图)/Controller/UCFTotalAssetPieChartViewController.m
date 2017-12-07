@@ -10,9 +10,11 @@
 #import "UCFCustomPieViewCell.h"
 #import "UCFCustomPieChartModel.h"
 #import "UCFToolsMehod.h"
+#import "UCFAccountAssetsProofViewController.h"
 @interface UCFTotalAssetPieChartViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UILabel *totalAssetLabel;
+- (IBAction)gotoAssetProofVC:(UIButton *)sender;
 @property (nonatomic,strong)NSArray *dataArray;
 @end
 
@@ -132,4 +134,9 @@
 }
 */
 
+- (IBAction)gotoAssetProofVC:(UIButton *)sender
+{
+    UCFAccountAssetsProofViewController * assetProofVC = [[UCFAccountAssetsProofViewController alloc]initWithNibName:@"UCFAccountAssetsProofViewController" bundle:nil];
+    [self.navigationController pushViewController:assetProofVC animated:YES];
+}
 @end
