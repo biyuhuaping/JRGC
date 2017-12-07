@@ -372,8 +372,8 @@
             cell.sign2View.hidden = YES;
         }
         else if (indexPath.row == 3) {
-            cell.iconImageView.image = [UIImage imageNamed:@"uesr_icon_checkin"];
-            cell.icon2ImageView.image = [UIImage imageNamed:@"uesr_icon_contact"];
+            cell.iconImageView.image = [UIImage imageNamed:@"uesr_icon_assets"];
+            cell.icon2ImageView.image = [UIImage imageNamed:@"uesr_icon_calculator"];
             cell.titleDesLabel.text = @"资产证明";
             cell.valueLabel.text = @"一句话描述";
             cell.title2DesLabel.text = @"投资计算器";

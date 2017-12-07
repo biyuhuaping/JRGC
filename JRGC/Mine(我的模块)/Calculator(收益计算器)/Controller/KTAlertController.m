@@ -24,6 +24,8 @@ typedef enum : NSUInteger {
 #define CalculateResultViewHeightForMiddle 100
 #define CalculateResultViewHeightForLow 80
 
+#define NumAndDot @"^[0-9]{0}([0-9]|[.])+$"
+
 @interface KTAlertController ()<UIViewControllerTransitioningDelegate, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
 @property (nonatomic, copy) void (^buttonAction)();
 @property (nonatomic, strong) NSMutableArray *dataArray;
@@ -270,6 +272,19 @@ typedef enum : NSUInteger {
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     
+    NSString *toString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    if (toString.length > 0) {
+        NSString *stringRegex = @"(\\+|\\-)?(([0]|(0[.]\\d{0,2}))|([1-9]\\d{0,4}(([.]\\d{0,2})?)))?";
+        NSPredicate *phoneTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", stringRegex];
+        BOOL flag = [phoneTest evaluateWithObject:toString];
+        if (!flag) {
+            return NO;
+        }
+    }
+    
+    return YES;
+    
+    return [self validateFormatByRegexForString:textField.text];
     return YES;
 }
 
@@ -278,9 +293,9 @@ typedef enum : NSUInteger {
     BOOL isValid = YES;
     NSUInteger len = string.length;
     if (len > 0) {
-        NSString *numberRegex = @"^[a-zA-Z0-9\u4e00-\u9fa5]{2,12}$";
-        NSPredicate *numberPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", numberRegex];
-        isValid = [numberPredicate evaluateWithObject:string];
+        NSString *phoneRegex = @"^[0-9]+(.[0-9]{2})?$";
+        NSPredicate *phoneTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",phoneRegex];
+        return [phoneTest evaluateWithObject:string];
     }
     return isValid;
 }
