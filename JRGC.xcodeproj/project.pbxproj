@@ -143,6 +143,8 @@
 		740E2E961ECD8884006FA335 /* UCFNoticeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 740E2E951ECD8884006FA335 /* UCFNoticeView.xib */; };
 		7412323C1F14BB150061408A /* UCFPickView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7412323B1F14BB150061408A /* UCFPickView.m */; };
 		7412323E1F14BB250061408A /* UCFPickView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7412323D1F14BB250061408A /* UCFPickView.xib */; };
+		7418FEF41FDA686500CD8C87 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCE023F1AC91A5E0084C15C /* SystemConfiguration.framework */; };
+		7418FEF51FDA689700CD8C87 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7418FEF31FDA680B00CD8C87 /* StoreKit.framework */; };
 		741CA7A21E724C44006056A8 /* UCFLoanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 741CA7A01E724C44006056A8 /* UCFLoanViewController.m */; };
 		741CA7A31E724C44006056A8 /* UCFLoanViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 741CA7A11E724C44006056A8 /* UCFLoanViewController.xib */; };
 		741CA7A71E724C64006056A8 /* UCFDiscoveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 741CA7A51E724C64006056A8 /* UCFDiscoveryViewController.m */; };
@@ -374,6 +376,7 @@
 		74956EB51D66F33D00D68B61 /* UCFAccountDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74956EB41D66F33D00D68B61 /* UCFAccountDetailViewController.xib */; };
 		749D6C901F28406A00AAD0C4 /* UCFCashTipView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 749D6C8F1F28406A00AAD0C4 /* UCFCashTipView.xib */; };
 		749D6C931F2840A100AAD0C4 /* UCFCashTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 749D6C921F2840A100AAD0C4 /* UCFCashTipView.m */; };
+		749FC15A1FD9477600BA2E6E /* UCFShareAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 749FC1591FD9477600BA2E6E /* UCFShareAnimationController.m */; };
 		74A0AF0F1EC341DD009E5A57 /* NSTimer+timerBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 74A0AF0B1EC341DD009E5A57 /* NSTimer+timerBlock.m */; };
 		74A0AF101EC341DD009E5A57 /* ZZCircleProgress.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 74A0AF0C1EC341DD009E5A57 /* ZZCircleProgress.bundle */; };
 		74A0AF111EC341DD009E5A57 /* ZZCircleProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = 74A0AF0E1EC341DD009E5A57 /* ZZCircleProgress.m */; };
@@ -617,7 +620,6 @@
 		7BCE02381AC915720084C15C /* NSString+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCE02351AC915720084C15C /* NSString+Base64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		7BCE023C1AC915A80084C15C /* SFHFKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCE023B1AC915A80084C15C /* SFHFKeychainUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		7BCE023E1AC91A050084C15C /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCE023D1AC91A050084C15C /* libxml2.dylib */; };
-		7BCE02401AC91A5E0084C15C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCE023F1AC91A5E0084C15C /* SystemConfiguration.framework */; };
 		7BCE02401B833B7000F9D73F /* IPDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCE023F1B833B7000F9D73F /* IPDetector.m */; };
 		7BCE02421AC91A680084C15C /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCE02411AC91A680084C15C /* MobileCoreServices.framework */; };
 		7BCE02441AC91A720084C15C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCE02431AC91A720084C15C /* CoreGraphics.framework */; };
@@ -1300,6 +1302,7 @@
 		7412323A1F14BB150061408A /* UCFPickView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFPickView.h; sourceTree = "<group>"; };
 		7412323B1F14BB150061408A /* UCFPickView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFPickView.m; sourceTree = "<group>"; };
 		7412323D1F14BB250061408A /* UCFPickView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFPickView.xib; sourceTree = "<group>"; };
+		7418FEF31FDA680B00CD8C87 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		741CA79F1E724C44006056A8 /* UCFLoanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFLoanViewController.h; sourceTree = "<group>"; };
 		741CA7A01E724C44006056A8 /* UCFLoanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFLoanViewController.m; sourceTree = "<group>"; };
 		741CA7A11E724C44006056A8 /* UCFLoanViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFLoanViewController.xib; sourceTree = "<group>"; };
@@ -1687,6 +1690,8 @@
 		749D6C8F1F28406A00AAD0C4 /* UCFCashTipView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFCashTipView.xib; sourceTree = "<group>"; };
 		749D6C911F2840A100AAD0C4 /* UCFCashTipView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFCashTipView.h; sourceTree = "<group>"; };
 		749D6C921F2840A100AAD0C4 /* UCFCashTipView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFCashTipView.m; sourceTree = "<group>"; };
+		749FC1581FD9477600BA2E6E /* UCFShareAnimationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFShareAnimationController.h; sourceTree = "<group>"; };
+		749FC1591FD9477600BA2E6E /* UCFShareAnimationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFShareAnimationController.m; sourceTree = "<group>"; };
 		74A0AF0A1EC341DD009E5A57 /* NSTimer+timerBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+timerBlock.h"; sourceTree = "<group>"; };
 		74A0AF0B1EC341DD009E5A57 /* NSTimer+timerBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+timerBlock.m"; sourceTree = "<group>"; };
 		74A0AF0C1EC341DD009E5A57 /* ZZCircleProgress.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ZZCircleProgress.bundle; sourceTree = "<group>"; };
@@ -2827,6 +2832,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7418FEF51FDA689700CD8C87 /* StoreKit.framework in Frameworks */,
+				7418FEF41FDA686500CD8C87 /* SystemConfiguration.framework in Frameworks */,
 				A83048D81F67E4380007FB4F /* AlicloudUtils.framework in Frameworks */,
 				A83048D91F67E4380007FB4F /* BCConnectorBundle.framework in Frameworks */,
 				A83048D71F67E4120007FB4F /* UTDID.framework in Frameworks */,
@@ -2886,7 +2893,6 @@
 				7BCE02441AC91A720084C15C /* CoreGraphics.framework in Frameworks */,
 				A824BFCC1FCD499200E32F39 /* UShareUI.framework in Frameworks */,
 				7BCE02421AC91A680084C15C /* MobileCoreServices.framework in Frameworks */,
-				7BCE02401AC91A5E0084C15C /* SystemConfiguration.framework in Frameworks */,
 				7BCE023E1AC91A050084C15C /* libxml2.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3659,6 +3665,8 @@
 				83D42A8F1FCEAF07004C96EF /* UCFSharePictureViewController.h */,
 				83D42A901FCEAF07004C96EF /* UCFSharePictureViewController.m */,
 				83D42A911FCEAF07004C96EF /* UCFSharePictureViewController.xib */,
+				749FC1581FD9477600BA2E6E /* UCFShareAnimationController.h */,
+				749FC1591FD9477600BA2E6E /* UCFShareAnimationController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -5320,6 +5328,7 @@
 		7BCE02651AC91CBE0084C15C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7418FEF31FDA680B00CD8C87 /* StoreKit.framework */,
 				A85A2EBE1F431CEF004BF4C1 /* QuickLook.framework */,
 				4ABED3AA1E2FB28E006B3F62 /* libresolv.tbd */,
 				4ABED3A81E2FACE3006B3F62 /* UserNotifications.framework */,
@@ -7685,6 +7694,7 @@
 				741CA7A71E724C64006056A8 /* UCFDiscoveryViewController.m in Sources */,
 				74EE331E1AF7209600BDE197 /* UCFFundDetialTableViewCell.m in Sources */,
 				748A3CD31AF1FE9800D7FAF1 /* FundsDetailFrame.m in Sources */,
+				749FC15A1FD9477600BA2E6E /* UCFShareAnimationController.m in Sources */,
 				74AFB1421EE93543007DBAFC /* UCFHonorInvestModel.m in Sources */,
 				7BA6E4BF1AD6731900FE8C37 /* SDWebImageManager.m in Sources */,
 				74270C981EC58F6800F9419B /* UCFHomeListGroupPresenter.m in Sources */,

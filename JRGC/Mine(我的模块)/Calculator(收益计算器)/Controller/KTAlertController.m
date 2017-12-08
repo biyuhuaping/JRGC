@@ -130,12 +130,17 @@ typedef enum : NSUInteger {
 {
     [super touchesEnded:touches withEvent:event];
     [self.view endEditing:YES];
+    if (self.calculateType.frame.size.height > 0) {
+        [UIView animateWithDuration:30 animations:^{
+            self.calculateTableHeight.constant = 0;
+        }];
+    }
 }
 
 - (NSMutableArray *)dataArray
 {
     if (nil == _dataArray) {
-        _dataArray = [[NSMutableArray alloc] initWithObjects:@"按季等额还款", @"按月等额还款", @"按月付息到期还本", @"按月付息到期还本", @"按天一次性还本付息", nil];
+        _dataArray = [[NSMutableArray alloc] initWithObjects:@"按季等额还款", @"按月等额还款", @"一次性还本付息", @"按月付息到期还本", @"按天一次性还本付息", nil];
     }
     return _dataArray;
 }
@@ -271,29 +276,49 @@ typedef enum : NSUInteger {
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    
-    NSString *toString = [textField.text stringByReplacingCharactersInRange:range withString:string];
-    if (toString.length > 0) {
-        NSString *stringRegex = @"(\\+|\\-)?(([0]|(0[.]\\d{0,2}))|([1-9]\\d{0,4}(([.]\\d{0,2})?)))?";
+    if (textField == self.investAmountTextField) {
+        return [self validateMoneyFormatByString:[textField.text stringByReplacingCharactersInRange:range withString:string]];
+    }
+    else if (textField == self.annualRateTextField) {
+        return [self validateRateFormatByString:[textField.text stringByReplacingCharactersInRange:range withString:string]];
+    }
+    else if (textField == self.investTermTextField) {
+        return [self validateFormatByRegexForString:[textField.text stringByReplacingCharactersInRange:range withString:string]];
+    }
+    return YES;
+}
+
+// 判断字符串内容是否合法：金额的格式
+- (BOOL)validateMoneyFormatByString:(NSString *)string {
+    if (string.length > 0) {
+        NSString *stringRegex = @"(\\+|\\-)?(([0]|(0[.]\\d{0,2}))|([1-9]\\d{0,6}(([.]\\d{0,2})?)))?";
         NSPredicate *phoneTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", stringRegex];
-        BOOL flag = [phoneTest evaluateWithObject:toString];
+        BOOL flag = [phoneTest evaluateWithObject:string];
         if (!flag) {
             return NO;
         }
     }
-    
-    return YES;
-    
-    return [self validateFormatByRegexForString:textField.text];
     return YES;
 }
 
-// 判断字符串内容是否合法：2-12位汉字、字母、数字
+- (BOOL)validateRateFormatByString:(NSString *)string {
+    if (string.length > 0) {
+        NSString *stringRegex = @"(\\+|\\-)?(([0]|(0[.]\\d{0,2}))|([1-9]\\d{0,1}(([.]\\d{0,2})?)))?";
+        NSPredicate *phoneTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", stringRegex];
+        BOOL flag = [phoneTest evaluateWithObject:string];
+        if (!flag) {
+            return NO;
+        }
+    }
+    return YES;
+}
+
+// 判断字符串内容是否合法：数字
 - (BOOL)validateFormatByRegexForString:(NSString *)string {
     BOOL isValid = YES;
     NSUInteger len = string.length;
     if (len > 0) {
-        NSString *phoneRegex = @"^[0-9]+(.[0-9]{2})?$";
+        NSString *phoneRegex = @"^\\+?[1-9][0-9]*$";
         NSPredicate *phoneTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",phoneRegex];
         return [phoneTest evaluateWithObject:string];
     }

@@ -50,6 +50,7 @@
 #import "UCFGoldCashViewController.h"
 #import "UCFHomeIconPresenter.h"
 #import "UCFNoticeModel.h"
+
 @interface UCFHomeViewController () <UCFHomeListViewControllerDelegate, UCFHomeListNavViewDelegate, UCFCycleImageViewControllerDelegate,BJGridItemDelegate, UIAlertViewDelegate,MjAlertViewDelegate>
 @property (strong, nonatomic) UCFCycleImageViewController *cycleImageVC;
 @property (strong, nonatomic) UCFHomeListViewController *homeListVC;

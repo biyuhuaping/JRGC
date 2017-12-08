@@ -7,10 +7,13 @@
 //
 
 #import "UCFSharePictureViewController.h"
+#import "UCFShareAnimationController.h"
 #import <UShareUI/UShareUI.h>
 #import <UMSocialCore/UMSocialCore.h>
 #import "SDWebImageManager.h"
-@interface UCFSharePictureViewController ()<UIScrollViewDelegate>
+#import "HWWeakTimer.h"
+
+@interface UCFSharePictureViewController ()<UIScrollViewDelegate, UIViewControllerTransitioningDelegate>
 - (IBAction)ClicksharePictureBtn:(UIButton *)sender;
 @property (weak, nonatomic) IBOutlet UIButton *leftBtn;
 @property (weak, nonatomic) IBOutlet UIButton *rightBtn;
@@ -19,19 +22,49 @@
 - (IBAction)clickRightBtn:(id)sender;
 
 - (IBAction)closeView:(id)sender;
+@property (nonatomic, strong) NSMutableArray *imagesArray;
 
+@property (nonatomic, assign) NSInteger currentIndex;
+
+@property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
 @end
 
 @implementation UCFSharePictureViewController
 
+- (NSMutableArray *)imagesArray
+{
+    if (nil == _imagesArray) {
+        _imagesArray = [[NSMutableArray alloc] init];
+    }
+    return _imagesArray;
+}
+
++ (instancetype)showSharePictureViewController
+{
+    UCFSharePictureViewController *showSharePicture = [[UCFSharePictureViewController alloc] init];
+    showSharePicture.transitioningDelegate = showSharePicture;
+    showSharePicture.modalPresentationStyle = UIModalPresentationCustom;
+    
+    return showSharePicture;
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [super touchesBegan:touches withEvent:event];
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+    }];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.scrollView.contentSize = CGSizeMake(270 * 4,0);
+    self.scrollView.contentSize = CGSizeMake((ScreenWidth - 50) * 4,0);
     self.scrollView.showsHorizontalScrollIndicator = NO;
     self.scrollView.showsVerticalScrollIndicator = NO;
     self.scrollView.pagingEnabled = YES;
     self.scrollView.delegate = self;
     self.scrollView.bounces = NO;
+    self.currentIndex = 0;
    /*
     {
     desc = "";
@@ -44,28 +77,48 @@
     }
     
     */
+    
+    
     [[NSUserDefaults standardUserDefaults] synchronize];
    NSArray *pictureArray =  [[NSUserDefaults standardUserDefaults]  objectForKey:@"SharePictureAdversementLink"];
+    pictureArray = [[NSArray alloc] initWithObjects:@"picture_1", @"picture_2", @"picture_3", @"picture_4", nil];
+    if (self.imagesArray.count > 0) {
+        [self.imagesArray removeAllObjects];
+    }
+    self.pageControl.numberOfPages = pictureArray.count;
     for (int i = 0; i < pictureArray.count; i++)
     {
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(270 * i, 0, 270, 405 )];
-        NSString *thumbUrl = [pictureArray[i] objectForKey:@"thumb"];
-        [imageView sd_setImageWithURL:[NSURL URLWithString:thumbUrl]];
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake((ScreenWidth-50) * i, 0, (ScreenWidth-50), (ScreenWidth-50)/2*3.0 )];
+//        NSString *thumbUrl = [pictureArray[i] objectForKey:@"thumb"];
+//        [imageView sd_setImageWithURL:[NSURL URLWithString:thumbUrl]];
+        UIImage *backImage = [UIImage imageNamed:pictureArray[i]];
         
         //添加二维码图片
-        
+        NSString *facCode = [[NSUserDefaults standardUserDefaults] objectForKey:@"gcmCode"];
+        UIImage *imageCode = [Common createImageCode:facCode withWith:155];
+        imageView.image = [Common composeImageCodeWithBackgroungImage:backImage withCodeImage:imageCode];
+        [self.imagesArray addObject:imageView.image];
         
         [self.scrollView addSubview:imageView];
    }
  [self changeScrollLeftOrRightBtnState:self.scrollView.contentOffset.x];
 }
+- (void)showView
+{
+    self.view.backgroundColor = UIColorWithRGBA(0, 0, 0, 0.5);
+    self.view.frame = [UIScreen mainScreen].bounds;
+    [[UIApplication sharedApplication].keyWindow addSubview:self.view];
+}
+//+(UIImage *)createImageCode:(NSString *)gcmStr withWith:(CGFloat)width
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     [self changeScrollLeftOrRightBtnState: scrollView.contentOffset.x];
+    self.pageControl.currentPage = scrollView.contentOffset.x / (ScreenWidth - 50);
 }
 -(void)changeScrollLeftOrRightBtnState:(float)offsetX
 {
-    int  pageNumber = offsetX/270;
+    int  pageNumber = offsetX/(ScreenWidth - 50);
+    self.currentIndex = pageNumber;
     if (pageNumber == 0) {
         self.leftBtn.hidden = YES;
         self.rightBtn.hidden = NO;
@@ -95,7 +148,7 @@
     //如果有缩略图，则设置缩略图
     shareObject.thumbImage = @"https://mobile.umeng.com/images/pic/home/social/img-1.png";
     
-    [shareObject setShareImage:@"https://mobile.umeng.com/images/pic/home/social/img-1.png"];
+    [shareObject setShareImage:[self.imagesArray objectAtIndex:self.currentIndex]];
     
     //分享消息对象设置分享内容对象
     messageObject.shareObject = shareObject;
@@ -197,10 +250,48 @@
     [self  changeScrollLeftOrRightBtnState:self.scrollView.contentOffset.x];
 }
 
-- (IBAction)closeView:(id)sender
+//- (IBAction)closeView:(id)sender
+//{
+//    [self dismissViewControllerAnimated:YES completion:^{
+//
+//    }];
+//}
+
+#pragma mark -- UIViewControllerTransitioningDelegate --
+
+- (nullable id <UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source
 {
-    [self dismissViewControllerAnimated:YES completion:^{
-        
-    }];
+    return [[UCFShareAnimationController alloc] init];
+//    switch (self.animationType) {
+//
+//        case KTAlertControllerAnimationTypeCenterShow:
+//            return [[UCFShareAnimationController alloc] init];
+//            break;
+//
+//        case KTAlertControllerAnimationTypeUpDown:
+//            return [[UCFShareAnimationController alloc] init];
+//            break;
+//
+//        default:
+//            break;
+//    }
 }
+
+- (nullable id <UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed
+{
+    return [[UCFShareAnimationController alloc] init];
+//    switch (self.animationType) {
+//        case KTAlertControllerAnimationTypeCenterShow:
+//            return [[KTCenterAnimationController alloc] init];
+//            break;
+//
+//        case KTAlertControllerAnimationTypeUpDown:
+//            return [[KTUpDownAnimationController alloc] init];
+//            break;
+//
+//        default:
+//            break;
+//    }
+}
+
 @end

@@ -224,6 +224,10 @@ typedef NS_ENUM(NSInteger, PicType) {
 + (UIImage *)getTheLaunchImage;
 //创建工场二维码图片
 +(NSData *)createImageCode:(NSString *)gcmStr;
+//创建工场二维码图片
++(UIImage *)createImageCode:(NSString *)gcmStr withWith:(CGFloat)width;
+//合成图片
++ (UIImage *)composeImageCodeWithBackgroungImage:(UIImage *)backgroundImage withCodeImage:(UIImage *)codeImage;
 // 获取网络图片
 +(UIImage *) getImageFromURL:(NSString *)fileURL;
 

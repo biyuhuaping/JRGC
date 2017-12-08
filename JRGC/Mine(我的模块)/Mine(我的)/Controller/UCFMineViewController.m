@@ -34,7 +34,9 @@
 #import "Touch3DSingle.h"
 #import "UCFFacCodeViewController.h"
 #import "KTAlertController.h"
-@interface UCFMineViewController () <UITableViewDelegate, UITableViewDataSource, UCFMineHeaderViewDelegate, UCFMineFuncCellDelegate, UCFMineAPIManagerDelegate, UCFMineFuncSecCellDelegate, UIAlertViewDelegate>
+#import <StoreKit/StoreKit.h>
+
+@interface UCFMineViewController () <UITableViewDelegate, UITableViewDataSource, UCFMineHeaderViewDelegate, UCFMineFuncCellDelegate, UCFMineAPIManagerDelegate, UCFMineFuncSecCellDelegate, UIAlertViewDelegate, SKStoreProductViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) UCFMineHeaderView   *mineHeaderView;
 @property (strong, nonatomic) UCFLoginBaseView  *loginView;
@@ -97,15 +99,21 @@
 //    self.navigationController.navigationBarHidden = YES;
      [self.navigationController setNavigationBarHidden:YES animated:YES];
     NSInteger index = [[NSUserDefaults standardUserDefaults] integerForKey:@"tapMineNum"];
+    
     if (index == 3) {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"警告" message:@"天王盖地虎" preferredStyle:UIAlertControllerStyleAlert];
-        
-        [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-            
-        }]];
-        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:@"亲爱的工友，喜欢就去给个好评吧！" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"冷漠拒绝" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            [alert dismissViewControllerAnimated:YES completion:^{
+
+            }];
+        }];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"表白金融工场" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:APP_RATING_URL]];
+        }];
+        [alert addAction:cancelAction];
+        [alert addAction:okAction];
         [self presentViewController:alert animated:YES completion:^{
-            
+
         }];
     }
     if ([[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
@@ -118,6 +126,13 @@
             [self.view addSubview:self.loginView];
         }
     }
+}
+
+//取消按钮监听方法
+- (void)productViewControllerDidFinish:(SKStoreProductViewController *)viewController{
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+    }];
 }
 
 - (void)viewDidDisappear:(BOOL)animated

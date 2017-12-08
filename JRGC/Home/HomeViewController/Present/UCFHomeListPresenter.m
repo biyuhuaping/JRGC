@@ -130,11 +130,14 @@
         if ([model.type isEqualToString:@"6"]) {
             model.moedelType = UCFHomeListCellModelTypeGoldFixed;
         }
+        else if ([group.type isEqualToString:@"13"]) {
+            if ([model.type isEqualToString:@"0"]) {
+                model.moedelType = UCFHomeListCellModelTypeReserved;
+            }
+            model.moedelType = UCFHomeListCellModelTypeNewUser;
+        }
         else if ([model.type isEqualToString:@"0"]) {
             model.moedelType = UCFHomeListCellModelTypeReserved;
-        }
-        else if ([group.type isEqualToString:@"13"]) {
-            model.moedelType = UCFHomeListCellModelTypeNewUser;
         }
         else {
             model.moedelType = UCFHomeListCellModelTypeDefault;
