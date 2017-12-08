@@ -12,7 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UCFProjectBasicDetailViewController">
             <connections>
-                <outlet property="tableView" destination="993-bp-wde" id="eiE-WY-ISB"/>
+                <outlet property="tableView" destination="993-bp-wde" id="NAW-jt-duo"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -23,14 +23,14 @@
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="993-bp-wde">
                     <rect key="frame" x="0.0" y="20" width="375" height="647"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <connections>
-                        <outlet property="dataSource" destination="-1" id="NRt-bW-Zza"/>
-                        <outlet property="delegate" destination="-1" id="NSI-qI-d6Z"/>
+                        <outlet property="dataSource" destination="-1" id="FS4-KF-Bzt"/>
+                        <outlet property="delegate" destination="-1" id="iVy-Ws-CwJ"/>
                     </connections>
                 </tableView>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="993-bp-wde" firstAttribute="bottom" secondItem="Q5M-cg-NOt" secondAttribute="bottom" id="7sH-Uj-872"/>
                 <constraint firstItem="993-bp-wde" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" id="HeP-3u-xU4"/>

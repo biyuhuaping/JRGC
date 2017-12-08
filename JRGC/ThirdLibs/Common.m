@@ -1147,9 +1147,22 @@
     CIImage *outputImage = [filter outputImage];
     
     //   根据CIImage生成指定大小的UIImage
-    return [self createNonInterpolatedUIImageFormCIImage:outputImage withSize:width];
+//    return [self createNonInterpolatedUIImageFormCIImage:outputImage withSize:width * 2];
+    UIImage *image = [self createNonInterpolatedUIImageFormCIImage:outputImage withSize:width * 2];
+    // 开启绘图, 获取图片 上下文<图片大小>
+    UIGraphicsBeginImageContext(image.size);
+    // 将二维码图片画上去
+    [image drawInRect:CGRectMake(0, 0, image.size.width, image.size.height)];
+    // 将小图片画上去
+    UIImage *smallImage = [UIImage imageNamed:@"gong_logo.png"];
+    float  smallImageWight =  width*0.2 *2;
+    [smallImage drawInRect:CGRectMake((image.size.width - smallImageWight) / 2 , (image.size.width - smallImageWight) / 2 , smallImageWight, smallImageWight)];
+    // 获取最终的图片
+    UIImage *finalImage = UIGraphicsGetImageFromCurrentImageContext();
+    // 关闭上下文
+    UIGraphicsEndImageContext();
+    return finalImage;
 }
-
 //合成图片
 + (UIImage *)composeImageCodeWithBackgroungImage:(UIImage *)backgroundImage withCodeImage:(UIImage *)codeImage {
     //要绘制的实际image

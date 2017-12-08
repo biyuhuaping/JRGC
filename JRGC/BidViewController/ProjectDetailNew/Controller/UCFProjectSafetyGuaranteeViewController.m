@@ -36,14 +36,14 @@
 
 - (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-        UIImageView * imageView = [[UIImageView alloc] init];
-        imageView.bounds = CGRectMake(0, 0, 17, 17);
-        imageView.image = [UIImage imageNamed:@"particular_icon_security.png"];
-        NSString *titleStr = [UCFToolsMehod isNullOrNilWithString:[[[[_dataDic objectForKey:@"prdClaimsReveal"] objectForKey:@"safetySecurityList"] objectAtIndex:(section - 1)] objectForKey:@"title"]];
+//        UIImageView * imageView = [[UIImageView alloc] init];
+//        imageView.bounds = CGRectMake(0, 0, 17, 17);
+//        imageView.image = [UIImage imageNamed:@"particular_icon_security.png"];
+        NSString *titleStr = [UCFToolsMehod isNullOrNilWithString:[[[[_dataDic objectForKey:@"prdClaimsReveal"] objectForKey:@"safetySecurityList"] objectAtIndex:section] objectForKey:@"title"]];
         titleStr = [titleStr stringByReplacingOccurrencesOfString:@"\t" withString:@""];
         titleStr = [titleStr stringByReplacingOccurrencesOfString:@"\n" withString:@""];
-        float titlelableWidth = ScreenWidth - 30 - 4- 15;
-        UILabel *placehoderLabel = [[UILabel alloc] initWithFrame:CGRectMake(34,8 , titlelableWidth, [self secondHeaderHeight:section])];
+    float titlelableWidth = ScreenWidth -30;
+        UILabel *placehoderLabel = [[UILabel alloc] initWithFrame:CGRectMake(15,8 , titlelableWidth, [self secondHeaderHeight:section])];
         placehoderLabel.font = [UIFont systemFontOfSize:14];
         placehoderLabel.textColor = UIColorWithRGB(0x333333);
         placehoderLabel.textAlignment = NSTextAlignmentLeft;
@@ -53,11 +53,11 @@
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 10, ScreenWidth, CGRectGetHeight(placehoderLabel.frame) + 8*2)];
         view.backgroundColor = UIColorWithRGB(0xf9f9f9);
         [self viewAddLine:view Up:YES];
-        imageView.center = CGPointMake(13+8.5, CGRectGetHeight(view.frame)/2);
+//        imageView.center = CGPointMake(13+8.5, CGRectGetHeight(view.frame)/2);
         UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, view.frame.size.height - 0.5, ScreenWidth, 0.5)];
         lineView.backgroundColor = UIColorWithRGB(0xeff0f3);
         [view addSubview:lineView];
-        [view addSubview:imageView];
+//        [view addSubview:imageView];
         [view addSubview:placehoderLabel];
         UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, CGRectGetHeight(view.frame)+10)];
         headView.backgroundColor = UIColorWithRGB(0xebebee);
@@ -84,7 +84,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
-        NSString *str = [[[[_dataDic objectForKey:@"prdClaimsReveal"] objectForKey:@"safetySecurityList"] objectAtIndex:([indexPath section] - 1)] objectForKey:@"content"];
+        NSString *str = [[[[_dataDic objectForKey:@"prdClaimsReveal"] objectForKey:@"safetySecurityList"] objectAtIndex:[indexPath section]] objectForKey:@"content"];
         str = [UCFToolsMehod isNullOrNilWithString:str];
         CGSize size =  [Common getStrHeightWithStr:str AndStrFont:12 AndWidth:ScreenWidth - 30 AndlineSpacing:3];
     
@@ -139,17 +139,17 @@
         UILabel *lbl = (UILabel*)[cell.contentView viewWithTag:101];
         
         NSDictionary *dic = [Common getParagraphStyleDictWithStrFont:12.0f WithlineSpacing:3.0];
-        NSString *remarkStr = [UCFToolsMehod isNullOrNilWithString:[[[[_dataDic objectForKey:@"prdClaimsReveal"] objectForKey:@"safetySecurityList"] objectAtIndex:([indexPath section] - 1)] objectForKey:@"content"]];
+        NSString *remarkStr = [UCFToolsMehod isNullOrNilWithString:[[[[_dataDic objectForKey:@"prdClaimsReveal"] objectForKey:@"safetySecurityList"] objectAtIndex:[indexPath section]] objectForKey:@"content"]];
                 lbl.attributedText = [NSString getNSAttributedString:remarkStr labelDict:dic];
     return cell;
 }
 
 -(float)secondHeaderHeight:(NSInteger)section
 {
-    NSString *titleStr = [UCFToolsMehod isNullOrNilWithString:[[[[_dataDic objectForKey:@"prdClaimsReveal"] objectForKey:@"safetySecurityList"] objectAtIndex:(section - 1)] objectForKey:@"title"]];
+    NSString *titleStr = [UCFToolsMehod isNullOrNilWithString:[[[[_dataDic objectForKey:@"prdClaimsReveal"] objectForKey:@"safetySecurityList"] objectAtIndex:section ] objectForKey:@"title"]];
     titleStr = [titleStr stringByReplacingOccurrencesOfString:@"\t" withString:@""];
     titleStr = [titleStr stringByReplacingOccurrencesOfString:@"\n" withString:@""];
-    float titlelableWidth = ScreenWidth - 30 - 4 - 15;
+    float titlelableWidth = ScreenWidth - 30;
     float labelHeight = [Common getStrHeightWithStr:titleStr AndStrFont:14 AndWidth:titlelableWidth].height;
     return labelHeight;
 }

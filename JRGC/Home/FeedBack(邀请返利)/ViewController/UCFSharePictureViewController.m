@@ -18,10 +18,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *leftBtn;
 @property (weak, nonatomic) IBOutlet UIButton *rightBtn;
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
-- (IBAction)clickLeftBtn:(UIButton *)sender;
-- (IBAction)clickRightBtn:(id)sender;
 
-- (IBAction)closeView:(id)sender;
 @property (nonatomic, strong) NSMutableArray *imagesArray;
 
 @property (nonatomic, assign) NSInteger currentIndex;
@@ -119,19 +116,6 @@
 {
     int  pageNumber = offsetX/(ScreenWidth - 50);
     self.currentIndex = pageNumber;
-    if (pageNumber == 0) {
-        self.leftBtn.hidden = YES;
-        self.rightBtn.hidden = NO;
-    }
-    else if(pageNumber == 3)
-    {
-        self.leftBtn.hidden = NO;
-        self.rightBtn.hidden = YES;
-    }else
-    {
-        self.leftBtn.hidden = NO;
-        self.rightBtn.hidden = NO;
-    }
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -230,32 +214,7 @@
      [self dismissViewControllerAnimated:YES completion:^{
     }];
 }
-- (IBAction)clickLeftBtn:(UIButton *)sender
-{
-    self.scrollView.contentOffset = CGPointMake(self.scrollView.contentOffset.x - (ScreenWidth - 80 * 2), 0) ;
-    if (self.scrollView.contentOffset.x <= 0)
-    {
-      self.scrollView.contentOffset = CGPointZero;
-    }
-    [self  changeScrollLeftOrRightBtnState:self.scrollView.contentOffset.x];
-}
 
-- (IBAction)clickRightBtn:(id)sender
-{
-    self.scrollView.contentOffset = CGPointMake(self.scrollView.contentOffset.x + 270, 0) ;
-    if (self.scrollView.contentOffset.x/270 >=3)
-    {
-        self.scrollView.contentOffset = CGPointMake(270 * 3, 0) ;
-    }
-    [self  changeScrollLeftOrRightBtnState:self.scrollView.contentOffset.x];
-}
-
-//- (IBAction)closeView:(id)sender
-//{
-//    [self dismissViewControllerAnimated:YES completion:^{
-//
-//    }];
-//}
 
 #pragma mark -- UIViewControllerTransitioningDelegate --
 

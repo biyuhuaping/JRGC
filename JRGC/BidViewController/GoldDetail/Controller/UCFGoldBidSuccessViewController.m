@@ -12,7 +12,9 @@
 #import "UCFInvestViewController.h"
 #import "UINavigationController+FDFullscreenPopGesture.h"
 #import "UCFSettingItem.h"
-@interface UCFGoldBidSuccessViewController ()<UITableViewDelegate,UITableViewDataSource>
+#import "MjAlertView.h"
+#import "UCFNoticeViewController.h"
+@interface UCFGoldBidSuccessViewController ()<UITableViewDelegate,UITableViewDataSource,MjAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (strong,nonatomic) NSArray *dataArray;
@@ -62,6 +64,27 @@
     else
     {
          self.dataArray = @[item1,item2,item3,item4,item5];
+    }
+    
+    if (_isPurchaseSuccess)
+    {
+        MjAlertView *alertView = [[MjAlertView alloc] initInvestmentSuccesseViewAlertWithDelegate:self];
+        alertView.tag = 2001;
+        [alertView show];
+    }
+    
+}
+
+- (void)mjalertView:(MjAlertView *)alertview didClickedButton:(UIButton *)clickedButton andClickedIndex:(NSInteger)index
+{
+    if (index == 1001) //点击邀请
+    {
+        UCFNoticeViewController *noticeWeb = [[UCFNoticeViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
+        noticeWeb.url      = @"https://m.9888.cn/static/wap/invest/index.html#/topic/invite";//请求地址;
+        noticeWeb.navTitle = @"邀请好友";
+        [self.navigationController pushViewController:noticeWeb animated:YES];
+    }else{
+        
     }
 }
 -(UIView *)createHeaderView{

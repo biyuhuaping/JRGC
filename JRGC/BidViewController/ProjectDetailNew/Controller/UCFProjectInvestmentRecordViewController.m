@@ -190,7 +190,7 @@
         NSArray *prdOrders = [_dataDic objectForKey:@"prdOrders"];
         NSInteger path = [indexPath row];
         NSString *titleStr = [[prdOrders objectAtIndex:path]objectForKey:@"leftRealName"];
-        //            titleStr = [titleStr stringByReplacingCharactersInRange:NSMakeRange(3, 2) withString:@"**"];
+
         titleLabel.text = titleStr;
         NSString *investAmt = [[prdOrders objectAtIndex:path] objectForKey:@"investAmt"];
         investAmt = [UCFToolsMehod dealmoneyFormart:investAmt];
@@ -217,12 +217,7 @@
         }
     }
     
-    
-    
-    
-    
-    
-        return cell;
+    return cell;
 }
 
 @end
