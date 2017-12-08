@@ -303,9 +303,9 @@
 #pragma mark  登录成功之后向iOS发送数据 验签串 和工场码Data
 -(void)sendiWatchData:(NSString *)signatureStr withGcm:(NSString *)gcm{
     
-    NSData *data = [Common createImageCode:gcm];
-    AppDelegate *del = (AppDelegate *) [[UIApplication sharedApplication] delegate];
-    NSDictionary *loginSuccessDic = @{@"userId":[UserInfoSingle sharedManager].userId, @"source_type":@"1",@"imei":[Common getKeychain],@"version":[Common getIOSVersion],@"signature":signatureStr,@"imageData":data,@"isSubmitAppStoreAndTestTime":@(del.isSubmitAppStoreTestTime).stringValue,@"jg_nyscclnjsygjr":[UserInfoSingle sharedManager].jg_ckie};
+//    NSData *data = [Common createImageCode:gcm];
+//    AppDelegate *del = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+//    NSDictionary *loginSuccessDic = @{@"userId":[UserInfoSingle sharedManager].userId, @"source_type":@"1",@"imei":[Common getKeychain],@"version":[Common getIOSVersion],@"signature":signatureStr,@"imageData":data,@"isSubmitAppStoreAndTestTime":@(del.isSubmitAppStoreTestTime).stringValue,@"jg_nyscclnjsygjr":[UserInfoSingle sharedManager].jg_ckie};
 //    [[UCFSession sharedManager] transformBackgroundWithUserInfo:loginSuccessDic withState:UCFSessionStateUserLogin];
 }
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
