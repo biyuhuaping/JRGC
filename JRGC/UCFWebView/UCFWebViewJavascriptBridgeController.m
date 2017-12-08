@@ -39,6 +39,7 @@
 #import "UserInfoSingle.h"
 #import <QuickLook/QuickLook.h>
 #import "QLHeaderViewController.h"
+#import "UCFSharePictureViewController.h"
 #define MALLTIME  12.0
 #define SIGNATURETIME 30.0
 
@@ -475,7 +476,11 @@
 -(void)goToShareImage:(NSDictionary *)nativeData
 {
     
-    
+    UCFSharePictureViewController * sharePictrureVC= [UCFSharePictureViewController showSharePictureViewController];
+    sharePictrureVC.animationType = KTAlertControllerAnimationTypeCenterShow;
+    [self presentViewController:sharePictrureVC animated:YES completion:^{
+        
+    }];
 }
 //分享链接
 - (void)goToShare:(NSDictionary *)nativeData;

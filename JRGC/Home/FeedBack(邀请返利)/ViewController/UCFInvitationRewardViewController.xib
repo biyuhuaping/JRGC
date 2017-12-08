@@ -126,7 +126,7 @@
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="邀友链接" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0MC-7T-Zk2">
                                     <rect key="frame" x="77" y="32" width="45" height="14"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                    <nil key="textColor"/>
+                                    <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="link" translatesAutoresizingMaskIntoConstraints="NO" id="zkE-t3-mUq">
@@ -159,13 +159,13 @@
                                         <action selector="gotoSharePictureBtn" destination="-1" eventType="touchUpInside" id="p5M-JK-BQI"/>
                                     </connections>
                                 </button>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="邀友链接" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vK6-tj-QoZ">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="邀友图片" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vK6-tj-QoZ">
                                     <rect key="frame" x="66" y="32" width="45" height="14"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                    <nil key="textColor"/>
+                                    <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="link" translatesAutoresizingMaskIntoConstraints="NO" id="fJP-zW-Xjy">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="picture" translatesAutoresizingMaskIntoConstraints="NO" id="fJP-zW-Xjy">
                                     <rect key="frame" x="75" y="4" width="26" height="26"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="26" id="4uz-dG-tZu"/>
@@ -219,12 +219,13 @@
                 <constraint firstItem="OUS-PE-bYb" firstAttribute="top" secondItem="cvm-Oe-jTL" secondAttribute="bottom" id="igd-Ug-GDt"/>
                 <constraint firstAttribute="bottom" secondItem="SAq-Tr-YgA" secondAttribute="bottom" id="mgs-lW-GnD"/>
             </constraints>
-            <point key="canvasLocation" x="-540" y="-81"/>
+            <point key="canvasLocation" x="-605" y="-927"/>
         </view>
     </objects>
     <resources>
         <image name="homepage_message_arrow" width="7" height="12"/>
         <image name="link" width="26" height="26"/>
+        <image name="picture" width="26" height="26"/>
         <image name="user_icon_arrow" width="12" height="21"/>
     </resources>
 </document>

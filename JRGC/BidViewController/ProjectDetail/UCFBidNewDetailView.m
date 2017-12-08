@@ -485,7 +485,7 @@
 //            UIImageView *qitouImageV = [[UIImageView alloc] initWithFrame:CGRectMake(IconXPos,44*2 + IconYPos, 22, 22)];
 //            qitouImageV.image = [UIImage imageNamed:@"particular_icon_guarantee.png"];
 //            [bottomBkView addSubview:qitouImageV];
-            UILabel *qitouLabel = [UILabel labelWithFrame:CGRectMake(15, 26*2 +  12  + 5    , 100 , 16) text:@"担保机构" textColor:UIColorWithRGB(0x555555) font:[UIFont systemFontOfSize:12]];
+            UILabel *qitouLabel = [UILabel labelWithFrame:CGRectMake(15, 26*2 +  12  + 5    , 100 , 16) text:@"担保方" textColor:UIColorWithRGB(0x555555) font:[UIFont systemFontOfSize:12]];
             qitouLabel.textAlignment = NSTextAlignmentLeft;
             [bottomBkView addSubview:qitouLabel];
             _insNameLabel = [UILabel labelWithFrame:CGRectMake(CGRectGetMaxX(qitouLabel.frame) + 5, CGRectGetMinY(qitouLabel.frame), ScreenWidth -CGRectGetMaxX(qitouLabel.frame) - 5 - 15, 16) text:insName textColor:UIColorWithRGB(0x333333) font:[UIFont boldSystemFontOfSize:12]];
@@ -515,7 +515,7 @@
 //            UIImageView *qitouImageV = [[UIImageView alloc] initWithFrame:CGRectMake(IconXPos,44*3 + IconYPos, 22, 22)];
 //            qitouImageV.image = [UIImage imageNamed:@"particular_icon_guarantee.png"];
 //            [bottomBkView addSubview:qitouImageV];
-            UILabel *qitouLabel = [UILabel labelWithFrame:CGRectMake(15, 26*3 + 12 + 5, 100 , 16) text:@"担保机构" textColor:UIColorWithRGB(0x555555) font:[UIFont systemFontOfSize:12]];
+            UILabel *qitouLabel = [UILabel labelWithFrame:CGRectMake(15, 26*3 + 12 + 5, 100 , 16) text:@"担保方" textColor:UIColorWithRGB(0x555555) font:[UIFont systemFontOfSize:12]];
             qitouLabel.textAlignment = NSTextAlignmentLeft;
             [bottomBkView addSubview:qitouLabel];
             _insNameLabel = [UILabel labelWithFrame:CGRectMake(CGRectGetMaxX(qitouLabel.frame) + 5, CGRectGetMinY(qitouLabel.frame), ScreenWidth -CGRectGetMaxX(qitouLabel.frame) - 5 - 15, 16) text:insName textColor:UIColorWithRGB(0x333333) font:[UIFont boldSystemFontOfSize:12]];
@@ -575,7 +575,7 @@
 //            UIImageView *qitouImageV = [[UIImageView alloc] initWithFrame:CGRectMake(IconXPos,26*1 + IconYPos, 22, 16)];
 //            qitouImageV.image = [UIImage imageNamed:@"particular_icon_guarantee.png"];
 //            [bottomBkView addSubview:qitouImageV];
-            UILabel *qitouLabel = [UILabel labelWithFrame:CGRectMake(XPOS, 26*1 + 12 + 5, 100 , 22) text:@"担保机构" textColor:UIColorWithRGB(0x555555) font:[UIFont systemFontOfSize:12]];
+            UILabel *qitouLabel = [UILabel labelWithFrame:CGRectMake(XPOS, 26*1 + 12 + 5, 100 , 22) text:@"担保方" textColor:UIColorWithRGB(0x555555) font:[UIFont systemFontOfSize:12]];
             qitouLabel.textAlignment = NSTextAlignmentLeft;
             [bottomBkView addSubview:qitouLabel];
             
@@ -609,7 +609,7 @@
 //            UIImageView *qitouImageV = [[UIImageView alloc] initWithFrame:CGRectMake(IconXPos,44*2 + IconYPos, 22, 22)];
 //            qitouImageV.image = [UIImage imageNamed:@"particular_icon_guarantee.png"];
 //            [bottomBkView addSubview:qitouImageV];
-            UILabel *qitouLabel = [UILabel labelWithFrame:CGRectMake(XPOS, 26*2 +12 + 5, 100 , 16) text:@"担保机构" textColor:UIColorWithRGB(0x555555) font:[UIFont systemFontOfSize:12]];
+            UILabel *qitouLabel = [UILabel labelWithFrame:CGRectMake(XPOS, 26*2 +12 + 5, 100 , 16) text:@"担保方" textColor:UIColorWithRGB(0x555555) font:[UIFont systemFontOfSize:12]];
             qitouLabel.textAlignment = NSTextAlignmentLeft;
             [bottomBkView addSubview:qitouLabel];
             
