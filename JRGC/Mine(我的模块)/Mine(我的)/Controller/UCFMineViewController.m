@@ -33,7 +33,10 @@
 #import "UITabBar+TabBarBadge.h"
 #import "Touch3DSingle.h"
 #import "UCFFacCodeViewController.h"
-@interface UCFMineViewController () <UITableViewDelegate, UITableViewDataSource, UCFMineHeaderViewDelegate, UCFMineFuncCellDelegate, UCFMineAPIManagerDelegate, UCFMineFuncSecCellDelegate, UIAlertViewDelegate>
+#import "KTAlertController.h"
+#import <StoreKit/StoreKit.h>
+
+@interface UCFMineViewController () <UITableViewDelegate, UITableViewDataSource, UCFMineHeaderViewDelegate, UCFMineFuncCellDelegate, UCFMineAPIManagerDelegate, UCFMineFuncSecCellDelegate, UIAlertViewDelegate, SKStoreProductViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) UCFMineHeaderView   *mineHeaderView;
 @property (strong, nonatomic) UCFLoginBaseView  *loginView;
@@ -96,15 +99,21 @@
 //    self.navigationController.navigationBarHidden = YES;
      [self.navigationController setNavigationBarHidden:YES animated:YES];
     NSInteger index = [[NSUserDefaults standardUserDefaults] integerForKey:@"tapMineNum"];
+    
     if (index == 3) {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"警告" message:@"天王盖地虎" preferredStyle:UIAlertControllerStyleAlert];
-        
-        [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-            
-        }]];
-        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:@"亲爱的工友，喜欢就去给个好评吧！" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"冷漠拒绝" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            [alert dismissViewControllerAnimated:YES completion:^{
+
+            }];
+        }];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"表白金融工场" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:APP_RATING_URL]];
+        }];
+        [alert addAction:cancelAction];
+        [alert addAction:okAction];
         [self presentViewController:alert animated:YES completion:^{
-            
+
         }];
     }
     if ([[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
@@ -117,6 +126,13 @@
             [self.view addSubview:self.loginView];
         }
     }
+}
+
+//取消按钮监听方法
+- (void)productViewControllerDidFinish:(SKStoreProductViewController *)viewController{
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+    }];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -371,8 +387,8 @@
             cell.sign2View.hidden = YES;
         }
         else if (indexPath.row == 3) {
-            cell.iconImageView.image = [UIImage imageNamed:@"uesr_icon_checkin"];
-            cell.icon2ImageView.image = [UIImage imageNamed:@"uesr_icon_contact"];
+            cell.iconImageView.image = [UIImage imageNamed:@"uesr_icon_assets"];
+            cell.icon2ImageView.image = [UIImage imageNamed:@"uesr_icon_calculator"];
             cell.titleDesLabel.text = @"资产证明";
             cell.valueLabel.text = @"一句话描述";
             cell.title2DesLabel.text = @"投资计算器";
@@ -638,7 +654,11 @@
         
     }
     else  if ([title isEqualToString:@"投资计算器"]){//投资计算器
-        
+        KTAlertController *alert = [KTAlertController alertControllerWithTitle:@"这是一个alert" description:@"又如何？" cancel:@"取消" button:@"好的" action:^{
+//            NSLog(@"tap button");
+        }];
+        alert.animationType = KTAlertControllerAnimationTypeCenterShow;
+        [self presentViewController:alert animated:YES completion:nil];
     }
 }
 

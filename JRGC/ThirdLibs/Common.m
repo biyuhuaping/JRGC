@@ -1132,6 +1132,45 @@
     DLog(@"NSData-->>>%@",UIImagePNGRepresentation(image));
     return UIImagePNGRepresentation(image);
 }
+
+//创建工场二维码图片
++(UIImage *)createImageCode:(NSString *)gcmStr withWith:(CGFloat)width {
+    CIFilter *filter = [CIFilter filterWithName:@"CIQRCodeGenerator"];
+    // 2.恢复默认
+    [filter setDefaults];
+    // 3.给过滤器添加数据
+    NSString *dataString = [NSString stringWithFormat:@"https://m.9888.cn/mpwap/orderuser/toRegister.shtml?gcm=%@",gcmStr];
+    NSData *data = [dataString dataUsingEncoding:NSUTF8StringEncoding];
+    // 4.通过KVO设置滤镜inputMessage数据
+    [filter setValue:data forKeyPath:@"inputMessage"];
+    // 4.获取输出的二维码
+    CIImage *outputImage = [filter outputImage];
+    
+    //   根据CIImage生成指定大小的UIImage
+    return [self createNonInterpolatedUIImageFormCIImage:outputImage withSize:width];
+}
+
+//合成图片
++ (UIImage *)composeImageCodeWithBackgroungImage:(UIImage *)backgroundImage withCodeImage:(UIImage *)codeImage {
+    //要绘制的实际image
+    UIImage *mergeImage = backgroundImage;
+    UIGraphicsBeginImageContext(mergeImage.size);
+//    CGContextRef context = UIGraphicsGetCurrentContext();
+    /*
+     *背景image绘制到上下文中
+     */
+    [mergeImage drawInRect:(CGRect){0, 0, mergeImage.size.width, mergeImage.size.height}];
+    
+    UIImage *drawImage = codeImage;
+    CGFloat x = (mergeImage.size.width - drawImage.size.width) * 0.5;
+    CGFloat y = mergeImage.size.height * 0.91 - drawImage.size.height;
+    [drawImage drawInRect:(CGRect){x, y, drawImage.size.width, drawImage.size.height}];
+
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+}
+
 /**
  *  根据CIImage生成指定大小的UIImage
  *

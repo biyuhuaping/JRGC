@@ -44,7 +44,7 @@
     NSString *filePath1 = [[NSBundle mainBundle] pathForResource:@"assets.png" ofType:nil ];
     NSArray *filePathArr = @[filePath1];
     YWFilePreviewController *_filePreview = [[YWFilePreviewController alloc] init];
-    [_filePreview previewFileWithPaths:filePathArr on:self jump:YWJumpPresentAnimat];
+    [_filePreview previewFileWithPaths:filePathArr on: self jump:YWJumpPresentAnimat];
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {

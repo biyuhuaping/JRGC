@@ -1,55 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" restorationIdentifier="invitationRewardCell2" selectionStyle="none" indentationWidth="10" rowHeight="124" id="KGk-i7-Jjw" customClass="UCFInvitationRewardCell2">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="112"/>
+        <tableViewCell contentMode="scaleToFill" restorationIdentifier="invitationRewardCell2" selectionStyle="none" indentationWidth="10" rowHeight="75" id="KGk-i7-Jjw" customClass="UCFInvitationRewardCell2">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="111.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="59.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="发送链接邀请好友注册，两人同时获得奖励，奖励以网站活动详情为准" textAlignment="natural" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c9M-LU-6uD">
-                        <rect key="frame" x="15" y="15" width="290" height="29.5"/>
+                        <rect key="frame" x="15" y="15" width="290" height="29"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4MZ-Gf-Zes">
-                        <rect key="frame" x="15" y="59.5" width="137.5" height="37"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="37" id="jMu-yL-04m"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                        <state key="normal" title="复制链接"/>
-                        <connections>
-                            <action selector="copy:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="T1N-x1-k7p"/>
-                        </connections>
-                    </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ifJ-mS-4YD">
-                        <rect key="frame" x="167.5" y="59.5" width="137.5" height="37"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="37" id="try-XS-zi9"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                        <state key="normal" title="分享到">
-                            <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        </state>
-                        <connections>
-                            <action selector="share:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="vKS-DK-sKN"/>
-                        </connections>
-                    </button>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fhF-eS-Oea">
-                        <rect key="frame" x="0.0" y="111" width="320" height="0.5"/>
+                        <rect key="frame" x="0.0" y="59" width="320" height="0.5"/>
                         <color key="backgroundColor" red="0.84705882352941175" green="0.84705882352941175" blue="0.84705882352941175" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="0.5" id="BaX-Xn-mlD"/>
@@ -58,25 +34,14 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="c9M-LU-6uD" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="0n5-an-CCK"/>
-                    <constraint firstAttribute="trailing" secondItem="ifJ-mS-4YD" secondAttribute="trailing" constant="15" id="3NH-WX-dF9"/>
                     <constraint firstItem="c9M-LU-6uD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="5WZ-32-y64"/>
-                    <constraint firstItem="ifJ-mS-4YD" firstAttribute="width" secondItem="4MZ-Gf-Zes" secondAttribute="width" id="E1a-QQ-HwC"/>
-                    <constraint firstItem="ifJ-mS-4YD" firstAttribute="top" secondItem="c9M-LU-6uD" secondAttribute="bottom" constant="15" id="J9N-Wo-QwB"/>
-                    <constraint firstItem="ifJ-mS-4YD" firstAttribute="leading" secondItem="4MZ-Gf-Zes" secondAttribute="trailing" constant="15" id="Kdg-cp-X9M"/>
                     <constraint firstItem="fhF-eS-Oea" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="LJJ-eR-xzw"/>
                     <constraint firstAttribute="bottom" secondItem="fhF-eS-Oea" secondAttribute="bottom" id="OV8-Uw-gvy"/>
-                    <constraint firstItem="4MZ-Gf-Zes" firstAttribute="top" secondItem="c9M-LU-6uD" secondAttribute="bottom" constant="15" id="akQ-Gg-zLf"/>
                     <constraint firstAttribute="trailing" secondItem="fhF-eS-Oea" secondAttribute="trailing" id="fm6-Tr-ibc"/>
-                    <constraint firstAttribute="bottom" secondItem="4MZ-Gf-Zes" secondAttribute="bottom" constant="15" id="lMe-hb-aDc"/>
-                    <constraint firstItem="4MZ-Gf-Zes" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="qcc-8d-Axl"/>
                     <constraint firstAttribute="trailing" secondItem="c9M-LU-6uD" secondAttribute="trailing" constant="15" id="seg-lU-LBg"/>
                 </constraints>
             </tableViewCellContentView>
-            <connections>
-                <outlet property="copBtn" destination="4MZ-Gf-Zes" id="lot-Lv-Uc7"/>
-                <outlet property="shareBtn" destination="ifJ-mS-4YD" id="lkJ-V8-oI8"/>
-            </connections>
-            <point key="canvasLocation" x="25" y="92"/>
+            <point key="canvasLocation" x="25" y="67.5"/>
         </tableViewCell>
     </objects>
 </document>

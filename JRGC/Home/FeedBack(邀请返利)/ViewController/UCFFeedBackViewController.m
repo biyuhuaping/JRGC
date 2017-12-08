@@ -148,7 +148,8 @@
 #pragma mark  邀友图片分享
 - (void)gotoSharePictureBtn
 {
-    UCFSharePictureViewController * sharePictrureVC= [[UCFSharePictureViewController alloc]initWithNibName:@"UCFSharePictureViewController" bundle:nil];
+    UCFSharePictureViewController * sharePictrureVC= [UCFSharePictureViewController showSharePictureViewController];
+    sharePictrureVC.animationType = KTAlertControllerAnimationTypeCenterShow;
     [self presentViewController:sharePictrureVC animated:YES completion:^{
         
     }];
