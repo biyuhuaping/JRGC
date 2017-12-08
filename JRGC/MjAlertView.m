@@ -241,8 +241,6 @@
         // 默认显示动画类型
         self.alertAnimateType = MjAlertViewAnimateTypeNone;
     }
-    
-    
     return self;
     
 }
@@ -658,6 +656,46 @@
         
     }
     return self;
+}
+
+//投资成功页弹框
+-(instancetype)initInvestmentSuccesseViewAlertWithDelegate:(id)delegate;
+{
+    self = [self init];
+    if (self) {
+        UIView *baseView = nil;
+        baseView = [[[NSBundle mainBundle] loadNibNamed:@"UCFInvestmentSuccesseAlaterView" owner:nil options:nil]firstObject ];
+        CGSize size = CGSizeMake(270, 405);
+        if (ScreenHeight > 569) {
+            size.width = ScreenWidth/320.0f * 270;
+            size.height = size.width * 3 / 2;
+        }
+        
+        baseView.frame = CGRectMake(0, 0, size.width, size.height + 55);
+        
+        [self.showView  setFrame:CGRectMake((ScreenWidth - CGRectGetWidth(baseView.frame))/2.0f, (ScreenHeight - size.height)/2.0f - 55, CGRectGetWidth(baseView.frame), CGRectGetHeight(baseView.frame))];
+        self.delegate = delegate;
+        [self.showView addSubview:baseView];
+        self.alertviewType = MjAlertViewTypeGift;
+        UIButton *closeBtn = [baseView viewWithTag:1000];
+        [closeBtn addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];
+        self.cancelButton = closeBtn;
+        UIButton *shareBtn = [baseView viewWithTag:1001];
+        [shareBtn addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];
+        
+        UIImageView *adImageView = [baseView viewWithTag:999];
+        adImageView.frame = CGRectMake(0, 55, size.width, size.height);
+        adImageView.layer.cornerRadius = 4.0f;
+        adImageView.clipsToBounds = YES;
+        NSDictionary *adDic = [[NSUserDefaults standardUserDefaults] valueForKey:@"InvestmentSuccesseLift"];
+        
+        [adImageView sd_setImageWithURL:[NSURL URLWithString:[adDic valueForKey:@"thumb"]] placeholderImage:[UIImage imageNamed:@"investmentSuccesseAlert.png"]];
+        
+//        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goToAdDetailContent)];
+//        [adImageView addGestureRecognizer:tap];
+    }
+    return self;
+    
 }
 - (void)webViewDidFinishLoad:(UIWebView*)webView{
     //字体大小

@@ -429,6 +429,14 @@
         else if ([nativeData[@"action"] isEqualToString:@"home_refresh"]) {
             [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
         }
+        else if ([nativeData[@"action"] isEqualToString:@"shareLink"])//shareLink 分享链接
+        {//
+            [weakSelf goToShare:nativeData];
+        }
+        else if ([nativeData[@"action"] isEqualToString:@"shareImage"]) {// shareImage 分享图片
+             [weakSelf goToShareImage:nativeData];
+        }
+        
         
         //----------------------------------------------------------------------------------------------------qyy
         
@@ -463,6 +471,13 @@
         }];
     }
 }
+//分享图片
+-(void)goToShareImage:(NSDictionary *)nativeData
+{
+    
+    
+}
+//分享链接
 - (void)goToShare:(NSDictionary *)nativeData;
 {
     NSDictionary *dic = [nativeData[@"value"] objectFromJSONString];

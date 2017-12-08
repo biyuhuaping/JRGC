@@ -56,6 +56,8 @@
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @property (strong ,nonatomic)  NSString *contractTitle;
+@property (strong ,nonatomic)  NSString *prdType;//合同类型 1为债转 0为普通标
+@property (strong ,nonatomic)  NSString *projectId;//标Id
 
 @end
 
@@ -79,20 +81,24 @@
     {
          [self initTableViews];
          baseTitleLabel.text = @"基础详情";
+        self.prdType = @"0";
+         self.projectId = [[_dataDic objectForKey:@"prdClaims"] objectForKey:@"id"];
     }
     else if(_detailType == PROJECTDETAILTYPERIGHTINTEREST) //普通标
     {
          baseTitleLabel.text = @"基础详情";
+        self.prdType = @"0";
+        self.projectId = [[_dataDic objectForKey:@"prdClaims"] objectForKey:@"id"];
         [self initRightInterestNewTableViews];
         
     }
     else
     {//债转标
          baseTitleLabel.text = @"原标详情";
+        self.prdType = @"1";
+        self.projectId = [[_dataDic objectForKey:@"prdTransferFore"] objectForKey:@"id"];
         [self initMarkOfBondsRransferTableViews];
     }
-//    self.tableView.separatorInset = UIEdgeInsetsMake(0, 15, 0, 0);
-//    self.tableView.separatorColor = UIColorWithRGB(0xe3e5ea);
     [_tableView reloadData];
 }
 
@@ -413,9 +419,9 @@
     labelTitle.font = [UIFont systemFontOfSize:14];
     [view addSubview:labelTitle];
     [headView addSubview:view];
-    [self viewAddLine:headView Up:YES];
+//    [self viewAddLine:headView Up:YES];
     [self viewAddLine:headView Up:NO];
-    [self viewAddLine:view Up:YES];
+//    [self viewAddLine:view Up:YES];
     return headView;
 }
 - (void)viewAddLine:(UIView *)view Up:(BOOL)up
@@ -626,9 +632,10 @@
             button.backgroundColor = [UIColor clearColor];
             
             UIImageView * imageView = [[UIImageView alloc] init];
-            imageView.image = [UIImage imageNamed:@"particular_icon_security.png"];
-            imageView.bounds = CGRectMake(0, 0, 11, 7);
-            UILabel *placehoderLabel = [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth/2 - 60 , 11,60 ,16)];
+            imageView.image = [UIImage imageNamed:@"loading_arrow_blue.png"];
+            imageView.bounds = CGRectMake(0, 0, 12, 7);
+           
+            UILabel *placehoderLabel = [[UILabel alloc] initWithFrame:CGRectMake((ScreenWidth -  50)/2 , 11,50 ,15)];
             placehoderLabel.font = [UIFont systemFontOfSize:12];
             placehoderLabel.textColor = UIColorWithRGB(0x4aa1f9);
             placehoderLabel.textAlignment = NSTextAlignmentCenter;
@@ -637,17 +644,20 @@
             placehoderLabel.text = @"显示更多";
             UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 100, ScreenWidth,37)];
             view.backgroundColor = [UIColor whiteColor];
-            imageView.center = CGPointMake( ScreenWidth/2 + 30,CGRectGetHeight(view.frame)/2);
+            view.tag = 1001;
+            imageView.center = CGPointMake( ScreenWidth/2 + 35,CGRectGetHeight(view.frame)/2);
             [view addSubview:imageView];
             [view addSubview:placehoderLabel];
             [view addSubview:button];
             [button addTarget:self action:@selector(OpenWebViewDetail) forControlEvents:UIControlEventTouchUpInside];
             [cell.contentView addSubview:view];
         }
-        
-        
-        
-        
+        UIView *view = (UIView*)[cell.contentView viewWithTag:1001];
+        view.hidden = _isOpenWebViewOpen;
+        cell.textLabel.text = _webViewHight == 0 ? @"加载中...." :@"";
+        cell.textLabel.textColor = UIColorWithRGB(0x999999);
+        cell.textLabel.font = [UIFont systemFontOfSize:12];
+        cell.textLabel.textAlignment = NSTextAlignmentCenter;
         return cell;
     }
     
@@ -1037,11 +1047,14 @@
 }
 -(void)OpenWebViewDetail
 {
-    
-    _isOpenWebViewOpen = YES;
-    _sectionViewHight =  _webViewHight;
-    _webView.frame = CGRectMake(0,0,ScreenWidth, _webViewHight);
-    [_tableView reloadData];
+    if (_webViewHight != 0) {
+        _isOpenWebViewOpen = YES;
+        _sectionViewHight =  _webViewHight;
+        _webView.frame = CGRectMake(0,0,ScreenWidth, _webViewHight);
+        [_tableView reloadData];
+    }else{
+          [AuxiliaryFunc showToastMessage:@"加载中" withView:self.view];
+    }
 }
 -(void)webViewDidStartLoad:(UIWebView *)webView
 {
@@ -1066,6 +1079,7 @@
             [_tableView reloadData];
         }else{
             weakSelf.webView.frame = CGRectMake(0,0,ScreenWidth, 100);
+            [_tableView reloadData];
         }
     });
 }
@@ -1088,16 +1102,17 @@
         [self.navigationController pushViewController:controller animated:YES];
         return;
     }
-    if (_detailType == PROJECTDETAILTYPEBONDSRRANSFER) {
-        //转让标
-        NSString *projectId = [[_dataDic objectForKey:@"prdTransferFore"] objectForKey:@"id"];
-        strParameters = [NSString stringWithFormat:@"userId=%@&prdClaimId=%@&contractType=%@&prdType=1",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],projectId,contractTypeStr];//101943
-        
-    } else {
-        //普通标
-        NSString *projectId = [[_dataDic objectForKey:@"prdClaims"] objectForKey:@"id"];
-        strParameters = [NSString stringWithFormat:@"userId=%@&prdClaimId=%@&contractType=%@&prdType=0",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],projectId,contractTypeStr];
-    }
+//    if (_detailType == PROJECTDETAILTYPEBONDSRRANSFER) {
+//        //转让标
+//        NSString *projectId = [[_dataDic objectForKey:@"prdTransferFore"] objectForKey:@"id"];
+//        strParameters = [NSString stringWithFormat:@"userId=%@&prdClaimId=%@&contractType=%@&prdType=1",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],projectId,contractTypeStr];//101943
+//
+//    } else {
+//        //普通标
+//        NSString *projectId = [[_dataDic objectForKey:@"prdClaims"] objectForKey:@"id"];
+//        strParameters = [NSString stringWithFormat:@"userId=%@&prdClaimId=%@&contractType=%@&prdType=0",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],projectId,contractTypeStr];
+//    }
+     strParameters = [NSString stringWithFormat:@"userId=%@&prdClaimId=%@&contractType=%@&prdType=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],_projectId,contractTypeStr,_prdType];
     [MBProgressHUD showOriginHUDAddedTo:self.view animated:YES];
     [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetContractMsg owner:self Type:self.accoutType];
 }

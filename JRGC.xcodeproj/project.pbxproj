@@ -775,6 +775,8 @@
 		83F669FB1FD14D2500ABCA57 /* UCFAssetProofApplyIdCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F669F91FD14D2500ABCA57 /* UCFAssetProofApplyIdCell.m */; };
 		83F669FC1FD14D2500ABCA57 /* UCFAssetProofApplyIdCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83F669FA1FD14D2500ABCA57 /* UCFAssetProofApplyIdCell.xib */; };
 		83F82E861EBC5DD200B79E02 /* UCFProductListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F82E851EBC5DD200B79E02 /* UCFProductListModel.m */; };
+		83F9B6C71FDA64F9001EEAC6 /* UCFInvestmentSuccesseAlaterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F9B6C61FDA64F9001EEAC6 /* UCFInvestmentSuccesseAlaterView.m */; };
+		83F9B6C91FDA6519001EEAC6 /* UCFInvestmentSuccesseAlaterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83F9B6C81FDA6519001EEAC6 /* UCFInvestmentSuccesseAlaterView.xib */; };
 		83FB3F5E1E5C4D2A0094C9BA /* UCFBatchBidWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FB3F5C1E5C4D2A0094C9BA /* UCFBatchBidWebViewController.m */; };
 		83FB3F5F1E5C4D2A0094C9BA /* UCFBatchBidWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83FB3F5D1E5C4D2A0094C9BA /* UCFBatchBidWebViewController.xib */; };
 		83FB3F621E5C68150094C9BA /* UCFCollctionKeyBidViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FB3F611E5C68150094C9BA /* UCFCollctionKeyBidViewController.m */; };
@@ -2367,6 +2369,9 @@
 		83F669FA1FD14D2500ABCA57 /* UCFAssetProofApplyIdCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFAssetProofApplyIdCell.xib; sourceTree = "<group>"; };
 		83F82E841EBC5DD200B79E02 /* UCFProductListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UCFProductListModel.h; path = JRGC/LatestProject/UCFProductListModel.h; sourceTree = SOURCE_ROOT; };
 		83F82E851EBC5DD200B79E02 /* UCFProductListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UCFProductListModel.m; path = JRGC/LatestProject/UCFProductListModel.m; sourceTree = SOURCE_ROOT; };
+		83F9B6C51FDA64F9001EEAC6 /* UCFInvestmentSuccesseAlaterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFInvestmentSuccesseAlaterView.h; sourceTree = "<group>"; };
+		83F9B6C61FDA64F9001EEAC6 /* UCFInvestmentSuccesseAlaterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFInvestmentSuccesseAlaterView.m; sourceTree = "<group>"; };
+		83F9B6C81FDA6519001EEAC6 /* UCFInvestmentSuccesseAlaterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFInvestmentSuccesseAlaterView.xib; sourceTree = "<group>"; };
 		83FB3F5B1E5C4D2A0094C9BA /* UCFBatchBidWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFBatchBidWebViewController.h; sourceTree = "<group>"; };
 		83FB3F5C1E5C4D2A0094C9BA /* UCFBatchBidWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFBatchBidWebViewController.m; sourceTree = "<group>"; };
 		83FB3F5D1E5C4D2A0094C9BA /* UCFBatchBidWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFBatchBidWebViewController.xib; sourceTree = "<group>"; };
@@ -4923,6 +4928,9 @@
 				7BE51D921ADE61DB007600AB /* CustomAlertView.m */,
 				7BCE02181AC902FD0084C15C /* BaseAlertView.h */,
 				7BCE02191AC902FD0084C15C /* BaseAlertView.m */,
+				83F9B6C51FDA64F9001EEAC6 /* UCFInvestmentSuccesseAlaterView.h */,
+				83F9B6C61FDA64F9001EEAC6 /* UCFInvestmentSuccesseAlaterView.m */,
+				83F9B6C81FDA6519001EEAC6 /* UCFInvestmentSuccesseAlaterView.xib */,
 			);
 			name = BaseAlertView;
 			sourceTree = "<group>";
@@ -7251,6 +7259,7 @@
 				7412323E1F14BB250061408A /* UCFPickView.xib in Resources */,
 				74F6493B1F47159A00328235 /* UCFGoldCashSucessController.xib in Resources */,
 				833FBE031FD010B2002D6F80 /* UCFAccountAssetsProofViewController.xib in Resources */,
+				83F9B6C91FDA6519001EEAC6 /* UCFInvestmentSuccesseAlaterView.xib in Resources */,
 				A824BFCE1FCD499200E32F39 /* UMSocialSDKPromptResources.bundle in Resources */,
 				833345731F1F82BF00A0F30D /* UCFGoldInvestmentCell.xib in Resources */,
 				74BDA9941F09F6C60054403F /* Info.plist in Resources */,
@@ -7473,6 +7482,7 @@
 				83E780721F38004400A400CE /* UCFGoldCouponCell.m in Sources */,
 				EDF01E2A1C7C0A5B005BDBED /* UCFValidFaceLoginViewController.m in Sources */,
 				4A9230451B68B2D800E5844C /* UIImageView+NetImageView.m in Sources */,
+				83F9B6C71FDA64F9001EEAC6 /* UCFInvestmentSuccesseAlaterView.m in Sources */,
 				FB1E7F881D8E43A0009CBE2C /* BlockUIAlertView.m in Sources */,
 				74931A2F1B1326FE00143424 /* NSAttributedString+Attributes.m in Sources */,
 				2526ADE11DD08D5F00114D9A /* JRGCCustomGroupCell.m in Sources */,
