@@ -9,15 +9,10 @@
 #import "KTAlertController.h"
 #import "KTCenterAnimationController.h"
 #import "KTUpDownAnimationController.h"
-
-typedef enum : NSUInteger {
-    CalulateTypeNone = 0,
-    CalulateTypeEqualRepaymentBySeason,
-    CalulateTypeEqualRepaymentByMonth,
-    CalulateTypeOnceRepaymentAndInterest,
-    CalulateTypeRepaymentOnlyCapital,
-    CalulateTypeOnceRepaymentByDay,
-} CalulateType;
+#import "NetworkModule.h"
+#import "MBProgressHUD.h"
+#import "JSONKit.h"
+#import "AuxiliaryFunc.h"
 
 #define ContentViewHeight 383
 #define CalculateResultViewHeightForHigh 138
@@ -26,7 +21,7 @@ typedef enum : NSUInteger {
 
 #define NumAndDot @"^[0-9]{0}([0-9]|[.])+$"
 
-@interface KTAlertController ()<UIViewControllerTransitioningDelegate, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
+@interface KTAlertController ()<UIViewControllerTransitioningDelegate, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, NetworkModuleDelegate>
 @property (nonatomic, copy) void (^buttonAction)();
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (weak, nonatomic) IBOutlet UITableView *calculateType;
@@ -45,7 +40,12 @@ typedef enum : NSUInteger {
 @property (weak, nonatomic) IBOutlet UITextField *investAmountTextField;
 @property (weak, nonatomic) IBOutlet UITextField *annualRateTextField;
 @property (weak, nonatomic) IBOutlet UITextField *investTermTextField;
-
+@property (weak, nonatomic) IBOutlet UIImageView *calculateTypeSignImage;
+@property (weak, nonatomic) IBOutlet UILabel *investTermLabel;
+@property (weak, nonatomic) IBOutlet UIView *SegLineFirst;
+@property (weak, nonatomic) IBOutlet UIView *segLineSecond;
+@property (weak, nonatomic) IBOutlet UIView *SegLineThird;
+@property (weak, nonatomic) IBOutlet UIView *segLineFourth;
 @end
 
 @implementation KTAlertController
@@ -130,6 +130,7 @@ typedef enum : NSUInteger {
 {
     [super touchesEnded:touches withEvent:event];
     [self.view endEditing:YES];
+    self.calculateTypeSignImage.transform=CGAffineTransformIdentity;
     if (self.calculateType.frame.size.height > 0) {
         [UIView animateWithDuration:30 animations:^{
             self.calculateTableHeight.constant = 0;
@@ -171,19 +172,57 @@ typedef enum : NSUInteger {
     }
     
     [self setCalculateResultViewWithState:self.calculateTypeSign];
+    
+//    investAmt
+//    payType
+//    rate
+//    term
+//    NSDictionary *param = @{@"investAmt":[NSNumber numberWithDouble:[self.investAmont doubleValue]], @"payType":[NSNumber numberWithInteger:self.calculateTypeSign], @"rate":[NSNumber numberWithDouble:[self.annualInterestRate doubleValue]], @"term":[NSNumber numberWithInteger:[self.investTerm integerValue]]};
+    NSDictionary *param = @{@"investAmt":self.investAmont, @"payType":[NSString stringWithFormat:@"%lu", (unsigned long)self.calculateTypeSign], @"rate":self.annualInterestRate, @"term":self.investTerm};
+    
+    [[NetworkModule sharedNetworkModule] newPostReq:param tag:kSXTagProfitCalculator owner:self signature:YES Type:SelectAccoutDefault];
+    
+}
+
+- (void)beginPost:(kSXTag)tag
+{
+    [MBProgressHUD showHUDAddedTo:self.calculateResultView animated:YES];
+}
+
+- (void)endPost:(id)result tag:(NSNumber *)tag
+{
+    [MBProgressHUD hideHUDForView:self.calculateResultView animated:YES];
+    NSMutableDictionary *dic = [result objectFromJSONString];
+    NSString *rstcode = dic[@"ret"];
+    NSString *rsttext = dic[@"message"];
+    if (tag.intValue == kSXTagProfitCalculator) {
+        
+        if ([rstcode intValue] == 1) {
+            
+        }else {
+            [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
+        }
+    }
+}
+
+- (void)errorPost:(NSError *)err tag:(NSNumber *)tag
+{
+    [MBProgressHUD hideHUDForView:self.calculateResultView animated:YES];
 }
 
 - (IBAction)calculateTypeSelected:(UIButton *)sender {
     [self.view endEditing:YES];
     if (self.calculateType.frame.size.height > 0) {
+        self.calculateTypeSignImage.transform=CGAffineTransformIdentity;
         [UIView animateWithDuration:30 animations:^{
             self.calculateTableHeight.constant = 0;
             [self.contentView sendSubviewToBack:self.calculateType];
         }];
     }
     else {
+        self.calculateTypeSignImage.transform=CGAffineTransformMakeRotation(M_PI);
         [UIView animateWithDuration:30 animations:^{
-            self.calculateTableHeight.constant = 200;
+            self.calculateTableHeight.constant = 120;
             [self.contentView bringSubviewToFront:self.calculateType];
         }];
     }
@@ -203,7 +242,14 @@ typedef enum : NSUInteger {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
     }
     cell.textLabel.text = [NSString stringWithFormat:@"%@", [self.dataArray objectAtIndex:indexPath.row]];
+    cell.textLabel.font = [UIFont systemFontOfSize:12];
+    cell.textLabel.textColor = [UIColor blackColor];
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 24;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -211,24 +257,34 @@ typedef enum : NSUInteger {
     [self.calulateTypeSelected setTitle:[self.dataArray objectAtIndex:indexPath.row] forState:UIControlStateNormal];
     [self calculateTypeSelected:nil];
     switch (indexPath.row) {
-        case 0:
+        case 0: {
+            self.investTermLabel.text = @"投资期限(月)";
             self.calculateTypeSign = CalulateTypeEqualRepaymentBySeason;
+        }
             break;
         
-        case 1:
+        case 1: {
+            self.investTermLabel.text = @"投资期限(月)";
             self.calculateTypeSign = CalulateTypeEqualRepaymentByMonth;
+        }
             break;
             
-        case 2:
+        case 2: {
+            self.investTermLabel.text = @"投资期限(月)";
             self.calculateTypeSign = CalulateTypeOnceRepaymentAndInterest;
+        }
             break;
         
-        case 3:
+        case 3: {
+            self.investTermLabel.text = @"投资期限(月)";
             self.calculateTypeSign = CalulateTypeRepaymentOnlyCapital;
+        }
             break;
             
-        case 4:
+        case 4: {
             self.calculateTypeSign = CalulateTypeOnceRepaymentByDay;
+            self.investTermLabel.text = @"投资期限(天)";
+        }
             break;
     }
     [self checkConditionChangeStateForCalculate];
@@ -272,7 +328,19 @@ typedef enum : NSUInteger {
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    
+    if (self.calculateTableHeight.constant >0) {
+        self.calculateTableHeight.constant = 0;
+        self.calculateTypeSignImage.transform=CGAffineTransformIdentity;
+    }
+    if (textField == self.investAmountTextField) {
+        self.SegLineFirst.backgroundColor = UIColorWithRGB(0xfd4d4c);
+    }
+    else if (textField == self.annualRateTextField) {
+        self.segLineSecond.backgroundColor = UIColorWithRGB(0xfd4d4c);
+    }
+    else if (textField == self.investTermTextField) {
+        self.segLineFourth.backgroundColor = UIColorWithRGB(0xfd4d4c);
+    }
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
@@ -328,6 +396,7 @@ typedef enum : NSUInteger {
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
     if (textField == self.investAmountTextField) {
+        self.SegLineFirst.backgroundColor = [UIColor lightGrayColor];
         if (textField.text.length > 0) {
             if (![textField.text isEqualToString:self.investAmont]) {
                 self.investAmont = textField.text;
@@ -338,6 +407,7 @@ typedef enum : NSUInteger {
         }
     }
     else if (textField == self.annualRateTextField) {
+        self.segLineSecond.backgroundColor = [UIColor lightGrayColor];
         if (textField.text.length > 0) {
             if (![textField.text isEqualToString:self.annualInterestRate]) {
                 self.annualInterestRate = textField.text;
@@ -348,6 +418,7 @@ typedef enum : NSUInteger {
         }
     }
     else if (textField == self.investTermTextField) {
+        self.segLineFourth.backgroundColor = [UIColor lightGrayColor];
         if (textField.text.length > 0) {
             if (![textField.text isEqualToString:self.investTerm]) {
                 self.investTerm = textField.text;

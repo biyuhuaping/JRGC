@@ -1282,7 +1282,10 @@ static NetworkModule *gInstance = NULL;
             break;
         case kSXTagAssetProofCheckIdno: //资产证明验证身份证号
             parameter = [NEW_SERVER_IP stringByAppendingString:ASSETPROOFCHENCKIDNO];
-            break;  
+            break;
+        case kSXTagProfitCalculator: //收益计算器
+            parameter = [NEW_SERVER_IP stringByAppendingString:PROFITCALCULATOR];
+            break;
     }
     //给原有参数字典添加公共参数
     if (!data) {
