@@ -14,6 +14,15 @@ typedef NS_ENUM(NSUInteger, KTAlertControllerAnimationType)
     KTAlertControllerAnimationTypeUpDown            // 从上往下掉
 };
 
+typedef enum : NSUInteger {
+    CalulateTypeNone = 0,
+    CalulateTypeEqualRepaymentBySeason,
+    CalulateTypeEqualRepaymentByMonth,
+    CalulateTypeOnceRepaymentAndInterest,
+    CalulateTypeRepaymentOnlyCapital,
+    CalulateTypeOnceRepaymentByDay,
+} CalulateType;
+
 @interface KTAlertController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UIView *backView;

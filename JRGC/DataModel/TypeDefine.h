@@ -328,6 +328,7 @@
 #define ASSETPROODLISTURL  @"api/userInfo/v2/assetProofList.json" //资产证明列表
 #define APPLYASSETPROOfURL   @"api/userInfo/v2/applyAssetProof.json"//资产证明申请
 #define ASSETPROOFCHENCKIDNO   @"api/userInfo/v2/checkIdno.json"//资产证明验证身份证号
+#define PROFITCALCULATOR      @"api/userInfo/v2/calcInvest.json" //收益计算器
 
 #define DOWNLOADASSERTPROOF @"newprdOrder/downloadAssertProof"//资产证明下载（尊享老服务接口）
 
@@ -549,6 +550,7 @@ enum kSXTag
     kSXTagApplyAssetProof,              //资产证明申请
     kSXTagAssetProofCheckIdno,          //资产证明验证身份证号
     kSXTagDownloadAssertProof,          //资产证明下载（尊享老服务接口）
+    kSXTagProfitCalculator,                   //收益计算器
 };
 
 typedef enum kSXTag kSXTag;
