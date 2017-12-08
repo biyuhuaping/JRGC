@@ -141,6 +141,8 @@
 		740E2E961ECD8884006FA335 /* UCFNoticeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 740E2E951ECD8884006FA335 /* UCFNoticeView.xib */; };
 		7412323C1F14BB150061408A /* UCFPickView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7412323B1F14BB150061408A /* UCFPickView.m */; };
 		7412323E1F14BB250061408A /* UCFPickView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7412323D1F14BB250061408A /* UCFPickView.xib */; };
+		7418FEF41FDA686500CD8C87 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCE023F1AC91A5E0084C15C /* SystemConfiguration.framework */; };
+		7418FEF51FDA689700CD8C87 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7418FEF31FDA680B00CD8C87 /* StoreKit.framework */; };
 		741CA7A21E724C44006056A8 /* UCFLoanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 741CA7A01E724C44006056A8 /* UCFLoanViewController.m */; };
 		741CA7A31E724C44006056A8 /* UCFLoanViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 741CA7A11E724C44006056A8 /* UCFLoanViewController.xib */; };
 		741CA7A71E724C64006056A8 /* UCFDiscoveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 741CA7A51E724C64006056A8 /* UCFDiscoveryViewController.m */; };
@@ -372,6 +374,7 @@
 		74956EB51D66F33D00D68B61 /* UCFAccountDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74956EB41D66F33D00D68B61 /* UCFAccountDetailViewController.xib */; };
 		749D6C901F28406A00AAD0C4 /* UCFCashTipView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 749D6C8F1F28406A00AAD0C4 /* UCFCashTipView.xib */; };
 		749D6C931F2840A100AAD0C4 /* UCFCashTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 749D6C921F2840A100AAD0C4 /* UCFCashTipView.m */; };
+		749FC15A1FD9477600BA2E6E /* UCFShareAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 749FC1591FD9477600BA2E6E /* UCFShareAnimationController.m */; };
 		74A0AF0F1EC341DD009E5A57 /* NSTimer+timerBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 74A0AF0B1EC341DD009E5A57 /* NSTimer+timerBlock.m */; };
 		74A0AF101EC341DD009E5A57 /* ZZCircleProgress.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 74A0AF0C1EC341DD009E5A57 /* ZZCircleProgress.bundle */; };
 		74A0AF111EC341DD009E5A57 /* ZZCircleProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = 74A0AF0E1EC341DD009E5A57 /* ZZCircleProgress.m */; };
@@ -446,6 +449,10 @@
 		74D7FCCD1AE8F72700653B8F /* FundAccountItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 74D7FCCB1AE8F72700653B8F /* FundAccountItem.m */; };
 		74D7FCD51AE8F75000653B8F /* UCFHeadrView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74D7FCD21AE8F75000653B8F /* UCFHeadrView.m */; };
 		74D7FCD71AE8F77200653B8F /* hotCityList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 74D7FCD61AE8F77200653B8F /* hotCityList.plist */; };
+		74D9B8531FD793650076F733 /* KTAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74D9B84D1FD793640076F733 /* KTAlertController.m */; };
+		74D9B8541FD793650076F733 /* KTUpDownAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74D9B8501FD793640076F733 /* KTUpDownAnimationController.m */; };
+		74D9B8551FD793650076F733 /* KTAlertController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74D9B8511FD793640076F733 /* KTAlertController.xib */; };
+		74D9B8561FD793650076F733 /* KTCenterAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74D9B8521FD793650076F733 /* KTCenterAnimationController.m */; };
 		74DBAC741D585FFD00F6F6B1 /* UCFTipButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 74DBAC731D585FFD00F6F6B1 /* UCFTipButton.m */; };
 		74DBAC791D5864C200F6F6B1 /* UCFHuiShangBankViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74DBAC771D5864C200F6F6B1 /* UCFHuiShangBankViewController.m */; };
 		74DBAC7A1D5864C200F6F6B1 /* UCFHuiShangBankViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74DBAC781D5864C200F6F6B1 /* UCFHuiShangBankViewController.xib */; };
@@ -611,7 +618,6 @@
 		7BCE02381AC915720084C15C /* NSString+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCE02351AC915720084C15C /* NSString+Base64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		7BCE023C1AC915A80084C15C /* SFHFKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCE023B1AC915A80084C15C /* SFHFKeychainUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		7BCE023E1AC91A050084C15C /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCE023D1AC91A050084C15C /* libxml2.dylib */; };
-		7BCE02401AC91A5E0084C15C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCE023F1AC91A5E0084C15C /* SystemConfiguration.framework */; };
 		7BCE02401B833B7000F9D73F /* IPDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCE023F1B833B7000F9D73F /* IPDetector.m */; };
 		7BCE02421AC91A680084C15C /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCE02411AC91A680084C15C /* MobileCoreServices.framework */; };
 		7BCE02441AC91A720084C15C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCE02431AC91A720084C15C /* CoreGraphics.framework */; };
@@ -1297,6 +1303,7 @@
 		7412323A1F14BB150061408A /* UCFPickView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFPickView.h; sourceTree = "<group>"; };
 		7412323B1F14BB150061408A /* UCFPickView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFPickView.m; sourceTree = "<group>"; };
 		7412323D1F14BB250061408A /* UCFPickView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFPickView.xib; sourceTree = "<group>"; };
+		7418FEF31FDA680B00CD8C87 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		741CA79F1E724C44006056A8 /* UCFLoanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFLoanViewController.h; sourceTree = "<group>"; };
 		741CA7A01E724C44006056A8 /* UCFLoanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFLoanViewController.m; sourceTree = "<group>"; };
 		741CA7A11E724C44006056A8 /* UCFLoanViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFLoanViewController.xib; sourceTree = "<group>"; };
@@ -1684,6 +1691,8 @@
 		749D6C8F1F28406A00AAD0C4 /* UCFCashTipView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFCashTipView.xib; sourceTree = "<group>"; };
 		749D6C911F2840A100AAD0C4 /* UCFCashTipView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFCashTipView.h; sourceTree = "<group>"; };
 		749D6C921F2840A100AAD0C4 /* UCFCashTipView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFCashTipView.m; sourceTree = "<group>"; };
+		749FC1581FD9477600BA2E6E /* UCFShareAnimationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFShareAnimationController.h; sourceTree = "<group>"; };
+		749FC1591FD9477600BA2E6E /* UCFShareAnimationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFShareAnimationController.m; sourceTree = "<group>"; };
 		74A0AF0A1EC341DD009E5A57 /* NSTimer+timerBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+timerBlock.h"; sourceTree = "<group>"; };
 		74A0AF0B1EC341DD009E5A57 /* NSTimer+timerBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+timerBlock.m"; sourceTree = "<group>"; };
 		74A0AF0C1EC341DD009E5A57 /* ZZCircleProgress.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ZZCircleProgress.bundle; sourceTree = "<group>"; };
@@ -1809,6 +1818,13 @@
 		74D7FCD11AE8F75000653B8F /* UCFHeadrView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFHeadrView.h; sourceTree = "<group>"; };
 		74D7FCD21AE8F75000653B8F /* UCFHeadrView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFHeadrView.m; sourceTree = "<group>"; };
 		74D7FCD61AE8F77200653B8F /* hotCityList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = hotCityList.plist; sourceTree = "<group>"; };
+		74D9B84C1FD793640076F733 /* KTUpDownAnimationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTUpDownAnimationController.h; sourceTree = "<group>"; };
+		74D9B84D1FD793640076F733 /* KTAlertController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTAlertController.m; sourceTree = "<group>"; };
+		74D9B84E1FD793640076F733 /* KTAlertController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTAlertController.h; sourceTree = "<group>"; };
+		74D9B84F1FD793640076F733 /* KTCenterAnimationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTCenterAnimationController.h; sourceTree = "<group>"; };
+		74D9B8501FD793640076F733 /* KTUpDownAnimationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTUpDownAnimationController.m; sourceTree = "<group>"; };
+		74D9B8511FD793640076F733 /* KTAlertController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KTAlertController.xib; sourceTree = "<group>"; };
+		74D9B8521FD793650076F733 /* KTCenterAnimationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTCenterAnimationController.m; sourceTree = "<group>"; };
 		74DBAC721D585FFD00F6F6B1 /* UCFTipButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFTipButton.h; sourceTree = "<group>"; };
 		74DBAC731D585FFD00F6F6B1 /* UCFTipButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFTipButton.m; sourceTree = "<group>"; };
 		74DBAC761D5864C200F6F6B1 /* UCFHuiShangBankViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFHuiShangBankViewController.h; sourceTree = "<group>"; };
@@ -2826,6 +2842,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7418FEF51FDA689700CD8C87 /* StoreKit.framework in Frameworks */,
+				7418FEF41FDA686500CD8C87 /* SystemConfiguration.framework in Frameworks */,
 				A83048D81F67E4380007FB4F /* AlicloudUtils.framework in Frameworks */,
 				A83048D91F67E4380007FB4F /* BCConnectorBundle.framework in Frameworks */,
 				A83048D71F67E4120007FB4F /* UTDID.framework in Frameworks */,
@@ -2885,7 +2903,6 @@
 				7BCE02441AC91A720084C15C /* CoreGraphics.framework in Frameworks */,
 				A824BFCC1FCD499200E32F39 /* UShareUI.framework in Frameworks */,
 				7BCE02421AC91A680084C15C /* MobileCoreServices.framework in Frameworks */,
-				7BCE02401AC91A5E0084C15C /* SystemConfiguration.framework in Frameworks */,
 				7BCE023E1AC91A050084C15C /* libxml2.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3658,6 +3675,8 @@
 				83D42A8F1FCEAF07004C96EF /* UCFSharePictureViewController.h */,
 				83D42A901FCEAF07004C96EF /* UCFSharePictureViewController.m */,
 				83D42A911FCEAF07004C96EF /* UCFSharePictureViewController.xib */,
+				749FC1581FD9477600BA2E6E /* UCFShareAnimationController.h */,
+				749FC1591FD9477600BA2E6E /* UCFShareAnimationController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -4364,6 +4383,7 @@
 		74B98C871F70C1F500CB6A9F /* Mine(我的模块) */ = {
 			isa = PBXGroup;
 			children = (
+				74D9B8481FD7931A0076F733 /* Calculator(收益计算器) */,
 				74B98C881F70C1F500CB6A9F /* Mine(我的) */,
 			);
 			path = "Mine(我的模块)";
@@ -4564,6 +4584,44 @@
 				748A3D071AF219BD00D7FAF1 /* FundsDetailGroup.m */,
 			);
 			path = AccountDetailModel;
+			sourceTree = "<group>";
+		};
+		74D9B8481FD7931A0076F733 /* Calculator(收益计算器) */ = {
+			isa = PBXGroup;
+			children = (
+				74D9B8491FD7931A0076F733 /* Controller */,
+				74D9B84A1FD7931A0076F733 /* Model */,
+				74D9B84B1FD7931A0076F733 /* View */,
+			);
+			path = "Calculator(收益计算器)";
+			sourceTree = "<group>";
+		};
+		74D9B8491FD7931A0076F733 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				74D9B84E1FD793640076F733 /* KTAlertController.h */,
+				74D9B84D1FD793640076F733 /* KTAlertController.m */,
+				74D9B8511FD793640076F733 /* KTAlertController.xib */,
+				74D9B84F1FD793640076F733 /* KTCenterAnimationController.h */,
+				74D9B8521FD793650076F733 /* KTCenterAnimationController.m */,
+				74D9B84C1FD793640076F733 /* KTUpDownAnimationController.h */,
+				74D9B8501FD793640076F733 /* KTUpDownAnimationController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		74D9B84A1FD7931A0076F733 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		74D9B84B1FD7931A0076F733 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		74DBAC751D58645800F6F6B1 /* HuiBuinessBank(徽商银行) */ = {
@@ -5280,6 +5338,7 @@
 		7BCE02651AC91CBE0084C15C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7418FEF31FDA680B00CD8C87 /* StoreKit.framework */,
 				A85A2EBE1F431CEF004BF4C1 /* QuickLook.framework */,
 				4ABED3AA1E2FB28E006B3F62 /* libresolv.tbd */,
 				4ABED3A81E2FACE3006B3F62 /* UserNotifications.framework */,
@@ -7078,6 +7137,7 @@
 				A830DE821F8DD9F7003855B9 /* UCFCalendarModularViewController.xib in Resources */,
 				A8386E3F1F8CCDF200E26002 /* login_bg_phone4_default.png in Resources */,
 				A8386E3E1F8CCDE800E26002 /* login_bg_default.png in Resources */,
+				74D9B8551FD793650076F733 /* KTAlertController.xib in Resources */,
 				A8FF32E51F1666DC00066A80 /* UCFGoldBidSuccessViewController.xib in Resources */,
 				744B9ED61F0B8AC100440FBA /* UCFCalendarDetailHeaderView.xib in Resources */,
 				83CD84331F13A50800227704 /* UCFP2PTransferViewController.xib in Resources */,
@@ -7591,6 +7651,7 @@
 				745D37D51F3AE98800897F1A /* UCFGoldChargeSecCell.m in Sources */,
 				74BDA9981F09F6F10054403F /* UCFCalendarHeaderView.m in Sources */,
 				7491820E1EC166F000AC1ECE /* TAPageControl.m in Sources */,
+				74D9B8531FD793650076F733 /* KTAlertController.m in Sources */,
 				74270D1E1EC595ED00F9419B /* UCFRebateCell.m in Sources */,
 				74EB306F1B0E004900D27BA9 /* UCFBankModel.m in Sources */,
 				840A794A1C2A80B60059A946 /* UCFMessageSettingViewController.m in Sources */,
@@ -7661,6 +7722,7 @@
 				741CA7A71E724C64006056A8 /* UCFDiscoveryViewController.m in Sources */,
 				74EE331E1AF7209600BDE197 /* UCFFundDetialTableViewCell.m in Sources */,
 				748A3CD31AF1FE9800D7FAF1 /* FundsDetailFrame.m in Sources */,
+				749FC15A1FD9477600BA2E6E /* UCFShareAnimationController.m in Sources */,
 				74AFB1421EE93543007DBAFC /* UCFHonorInvestModel.m in Sources */,
 				7BA6E4BF1AD6731900FE8C37 /* SDWebImageManager.m in Sources */,
 				74270C981EC58F6800F9419B /* UCFHomeListGroupPresenter.m in Sources */,
@@ -7795,6 +7857,7 @@
 				74AFB12F1EE8F848007DBAFC /* UCFTransferHeaderView.m in Sources */,
 				7456D3C71E82700500207349 /* UIView+Extension.m in Sources */,
 				A81A6F5A1FBD92CD00BDCE50 /* ServiceChargeView2.m in Sources */,
+				74D9B8561FD793650076F733 /* KTCenterAnimationController.m in Sources */,
 				E311A66D1D90E85B00C5483E /* UCFWebViewJavascriptBridgeLevel.m in Sources */,
 				74D7FCCC1AE8F72700653B8F /* FundAccountGroup.m in Sources */,
 				83CD843C1F13A50800227704 /* UCFTransferModel.m in Sources */,
@@ -7925,6 +7988,7 @@
 				7BD35A991AD61E4200389D6B /* LLLockView.m in Sources */,
 				FBB685861AE4A76800F222B6 /* MJRefreshHeader.m in Sources */,
 				84FAB60C1C7C575300D0942F /* MGSwipeButton.m in Sources */,
+				74D9B8541FD793650076F733 /* KTUpDownAnimationController.m in Sources */,
 				74270D5B1EC5AE8700F9419B /* UCFInvitationRewardCell2.m in Sources */,
 				A8D2DE781EB9E1CF00D61AD0 /* MaskView.m in Sources */,
 				7BCE02381AC915720084C15C /* NSString+Base64.m in Sources */,

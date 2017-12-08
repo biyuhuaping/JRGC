@@ -176,7 +176,7 @@
     }
     else if (indexPath.section == 1) {
         CGFloat h = [self computeHeightWithContent:@"发送链接邀请好友注册，两人同时获得奖励，奖励以网站活动详情为准"];
-        h += (45 + 37);
+        h += 30;
         return h + 1;
     }
     return 0;
@@ -251,7 +251,7 @@
 }
 - (IBAction)gotoSharePictureBtn
 {
-    UCFSharePictureViewController * sharePictrureVC= [[UCFSharePictureViewController alloc]initWithNibName:@"UCFSharePictureViewController" bundle:nil];
+    UCFSharePictureViewController * sharePictrureVC= [UCFSharePictureViewController showSharePictureViewController];
     [self presentViewController:sharePictrureVC animated:YES completion:^{
         
     }];
