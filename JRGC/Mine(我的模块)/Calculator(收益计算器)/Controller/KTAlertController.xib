@@ -106,7 +106,7 @@
                                     <rect key="frame" x="25" y="64.5" width="275" height="21.5"/>
                                     <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                    <textInputTraits key="textInputTraits"/>
+                                    <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                     <connections>
                                         <outlet property="delegate" destination="-1" id="nmj-Vf-tR5"/>
                                     </connections>
@@ -121,7 +121,7 @@
                                     <rect key="frame" x="25" y="118.5" width="275" height="24.5"/>
                                     <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits"/>
+                                    <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                     <connections>
                                         <outlet property="delegate" destination="-1" id="rwB-KD-d92"/>
                                     </connections>
@@ -155,7 +155,7 @@
                                     <rect key="frame" x="25" y="232.5" width="275" height="25.5"/>
                                     <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits"/>
+                                    <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                     <connections>
                                         <outlet property="delegate" destination="-1" id="jJc-fd-fXK"/>
                                     </connections>

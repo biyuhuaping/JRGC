@@ -13,11 +13,14 @@
 #import "MBProgressHUD.h"
 #import "JSONKit.h"
 #import "AuxiliaryFunc.h"
+#import "UCFCalculateResultView.h"
+#import "UCFProfitCalculateResult.h"
+#import "UIDic+Safe.h"
 
 #define ContentViewHeight 383
 #define CalculateResultViewHeightForHigh 138
-#define CalculateResultViewHeightForMiddle 100
-#define CalculateResultViewHeightForLow 80
+#define CalculateResultViewHeightForMiddle 118
+#define CalculateResultViewHeightForLow 98
 
 #define NumAndDot @"^[0-9]{0}([0-9]|[.])+$"
 
@@ -46,6 +49,8 @@
 @property (weak, nonatomic) IBOutlet UIView *segLineSecond;
 @property (weak, nonatomic) IBOutlet UIView *SegLineThird;
 @property (weak, nonatomic) IBOutlet UIView *segLineFourth;
+@property (weak, nonatomic) UCFCalculateResultView *calculateShowview;
+
 @end
 
 @implementation KTAlertController
@@ -80,6 +85,11 @@
     calculateResultView.layer.cornerRadius = 8;
     calculateResultView.clipsToBounds = YES;
     self.calculateResultView = calculateResultView;
+    
+    UCFCalculateResultView *resultShowview = (UCFCalculateResultView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFCalculateResultView" owner:self options:nil] lastObject];
+    resultShowview.frame = calculateResultView.bounds;
+    [calculateResultView addSubview:resultShowview];
+    self.calculateShowview = resultShowview;
     
 }
 
@@ -117,6 +127,9 @@
         }
             break;
     }
+    self.calculateShowview.calculateType = calculateType;
+//    [self.calculateShowview setNeedsDisplay];
+    self.calculateShowview.frame = self.calculateResultView.bounds;
     if (self.calculateResultView.height > 0 && CGRectGetMinY(self.calculateResultView.frame) < CGRectGetMaxY(self.calculatorView.frame)) {
         [UIView animateWithDuration:0.25 animations:^{
             self.calculateResultView.y = CGRectGetMaxY(self.calculatorView.frame) + 10;
@@ -198,6 +211,8 @@
     if (tag.intValue == kSXTagProfitCalculator) {
         
         if ([rstcode intValue] == 1) {
+            UCFProfitCalculateResult *calculteRes = [UCFProfitCalculateResult profitCalcultateResultWithDict:[dic objectSafeDictionaryForKey:@"data"]];
+            self.calculateShowview.calculateRes = calculteRes;
             
         }else {
             [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
@@ -259,29 +274,48 @@
     switch (indexPath.row) {
         case 0: {
             self.investTermLabel.text = @"投资期限(月)";
-            self.calculateTypeSign = CalulateTypeEqualRepaymentBySeason;
+            if (self.calculateTypeSign != CalulateTypeEqualRepaymentBySeason) {
+                self.calculateTypeSign = CalulateTypeEqualRepaymentBySeason;
+                [self.calculateShowview resetData];
+            }
         }
             break;
         
         case 1: {
             self.investTermLabel.text = @"投资期限(月)";
+            if (self.calculateTypeSign != CalulateTypeEqualRepaymentByMonth) {
+                self.calculateTypeSign = CalulateTypeEqualRepaymentByMonth;
+                [self.calculateShowview resetData];
+            }
             self.calculateTypeSign = CalulateTypeEqualRepaymentByMonth;
         }
             break;
             
         case 2: {
             self.investTermLabel.text = @"投资期限(月)";
+            if (self.calculateTypeSign != CalulateTypeOnceRepaymentAndInterest) {
+                self.calculateTypeSign = CalulateTypeOnceRepaymentAndInterest;
+                [self.calculateShowview resetData];
+            }
             self.calculateTypeSign = CalulateTypeOnceRepaymentAndInterest;
         }
             break;
         
         case 3: {
             self.investTermLabel.text = @"投资期限(月)";
+            if (self.calculateTypeSign != CalulateTypeRepaymentOnlyCapital) {
+                self.calculateTypeSign = CalulateTypeRepaymentOnlyCapital;
+                [self.calculateShowview resetData];
+            }
             self.calculateTypeSign = CalulateTypeRepaymentOnlyCapital;
         }
             break;
             
         case 4: {
+            if (self.calculateTypeSign != CalulateTypeOnceRepaymentByDay) {
+                self.calculateTypeSign = CalulateTypeOnceRepaymentByDay;
+                [self.calculateShowview resetData];
+            }
             self.calculateTypeSign = CalulateTypeOnceRepaymentByDay;
             self.investTermLabel.text = @"投资期限(天)";
         }
@@ -400,6 +434,7 @@
         if (textField.text.length > 0) {
             if (![textField.text isEqualToString:self.investAmont]) {
                 self.investAmont = textField.text;
+                [self.calculateShowview resetData];
             }
         }
         else {
@@ -411,6 +446,7 @@
         if (textField.text.length > 0) {
             if (![textField.text isEqualToString:self.annualInterestRate]) {
                 self.annualInterestRate = textField.text;
+                [self.calculateShowview resetData];
             }
         }
         else {
@@ -422,6 +458,7 @@
         if (textField.text.length > 0) {
             if (![textField.text isEqualToString:self.investTerm]) {
                 self.investTerm = textField.text;
+                [self.calculateShowview resetData];
             }
         }
         else {

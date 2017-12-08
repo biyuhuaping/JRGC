@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class UCFProfitCalculateResult;
 @interface UCFCalculateResultView : UIView
 @property (assign, nonatomic) NSInteger calculateType;
+@property (nonatomic, strong) UCFProfitCalculateResult *calculateRes;
+
+- (void)resetData;
 @end
