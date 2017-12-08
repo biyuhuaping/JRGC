@@ -15,7 +15,7 @@
 @property (nonatomic, copy) void(^didDismissBlock)();
 @property (nonatomic, copy) BOOL(^shouldOpenUrlBlock)(NSURL *url, id <QLPreviewItem>item);
 @property (nonatomic, strong) NSArray *filePathArr;
-
+@property (nonatomic, strong) UIToolbar *qlToolBar;
 @end
 
 @implementation YWFilePreviewController
@@ -29,8 +29,46 @@
     }
     return self;
 }
-- (void)hideRightButton{
-    [[self navigationItem] setRightBarButtonItem:nil animated:NO];
+//- (UIToolbar *)getToolBarFromView:(UIView *)view {
+//    // Find the QL ToolBar
+//    for (UIView *v in view.subviews) {
+//        if ([v isKindOfClass:[UIToolbar class]]) {
+//            return (UIToolbar *)v;
+//        } else {
+//            UIToolbar *toolBar = [self getToolBarFromView:v];
+//            if (toolBar) {
+//                return toolBar;
+//            }
+//        }
+//    }
+//    return nil;
+//}
+//- (void)viewDidAppear:(BOOL)animated{
+//    
+//    [super viewDidAppear:animated];
+//    // Get the ToolBar
+//    self.qlToolBar = [self getToolBarFromView:self.view];
+//    
+//    self.qlToolBar.hidden = true;
+//    if (self.qlToolBar) {
+//        [self.qlToolBar addObserver:self forKeyPath:@"hidden" options:NSKeyValueObservingOptionPrior context:nil];
+//    }
+//}
+//
+//- (void)viewWillDisappear:(BOOL)animated{
+//    
+//    [super viewWillDisappear:animated];
+//    [self.navigationController removeObserver:self forKeyPath:@"hidden"];
+//}
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    
+    BOOL isToolBarHidden = self.qlToolBar.hidden;
+    // If the ToolBar is not hidden
+    if (!isToolBarHidden) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.qlToolBar.hidden = true;
+        });
+    }
 }
 #pragma mark - private methods
 - (void)jumpWith:(YWJumpMode)jump on:(UIViewController *)vc{
@@ -62,11 +100,7 @@
     NSURL *url = [NSURL fileURLWithPath:self.filePathArr[index]];
     return  url;
 }
-- (CGRect)previewController:(QLPreviewController *)controller frameForPreviewItem:(id <QLPreviewItem>)item inSourceView:(UIView * _Nullable * __nonnull)view
-{
-    //提供变焦的开始rect，扩展到全屏
-    return  CGRectMake(110, 190, 100, 100);
-}
+
 #pragma mark - QLPreviewControllerDelegate
 /*!
  * @abstract Invoked before the preview controller is closed.
