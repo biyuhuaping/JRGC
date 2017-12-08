@@ -88,7 +88,7 @@ typedef NS_ENUM(NSInteger, PicType) {
  *
  *  @return ip地址
  */
-+ (NSString *)getIPAddress;
+//+ (NSString *)getIPAddress;
 
 //判断是否为纯数字
 + (BOOL)isPureNumandCharacters:(NSString *)string;

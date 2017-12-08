@@ -10,12 +10,15 @@
 #import "UCFLoginViewController.h"
 #import "AppDelegate.h"
 #import "UCFRegisterStepOneViewController.h"
+#import "UCFMoreViewController.h"
 @interface UCFLoginBaseView ()
 {
     
 }
 @property (nonatomic, strong) UIImageView *baseImageView;
 @property (nonatomic, strong) UIButton    *registButton;
+@property (nonatomic, strong) UIButton    *moreButton;
+@property (nonatomic, strong) UIButton    *loginButton;
 @end
 
 @implementation UCFLoginBaseView
@@ -41,25 +44,40 @@
         [_baseImageView sd_setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:imageData];
         [self addSubview:_baseImageView];
         
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(login:)];
-        [_baseImageView addGestureRecognizer:tap];
+//        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(login:)];
+//        [_baseImageView addGestureRecognizer:tap];
+        
+        _moreButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _moreButton.frame = CGRectMake(0, [self getMoreBtnOrginY] ,ScreenWidth, [self getMoreBtnSizeHeight]);
+        _moreButton.backgroundColor = [UIColor clearColor];
+//        _moreButton.backgroundColor = [UIColor redColor];
+        [_moreButton addTarget:self action:@selector(showMoreView) forControlEvents:UIControlEventTouchUpInside];
+        [_baseImageView addSubview:_moreButton];
         
         _registButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _registButton.frame = CGRectMake((ScreenWidth - [self getRegistBtnSizeWidth])/2.0f, [self getRegistBtnOrginY] ,[self getRegistBtnSizeWidth], [self getRegistBtnSizeHeight]);
+        _registButton.frame = CGRectMake(0, 0 ,ScreenWidth/2.0f, CGRectGetMinY(_moreButton.frame));
         _registButton.backgroundColor = [UIColor clearColor];
-        _registButton.alpha = 0.5;
         [_registButton addTarget:self action:@selector(registBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+//        _registButton.backgroundColor = [UIColor blueColor];
         [_baseImageView addSubview:_registButton];
+        
+        _loginButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _loginButton.frame = CGRectMake(ScreenWidth/2.0f, 0 ,ScreenWidth/2.0f, CGRectGetMinY(_moreButton.frame));
+        _loginButton.backgroundColor = [UIColor clearColor];
+        [_loginButton addTarget:self action:@selector(shouLoginView) forControlEvents:UIControlEventTouchUpInside];
+//        _loginButton.backgroundColor = [UIColor yellowColor];
+        [_baseImageView addSubview:_loginButton];
+        
     }
     return self;
 }
-- (CGFloat)getRegistBtnOrginY
+- (CGFloat)getMoreBtnOrginY
 {
     //iphone5 高度568以下
     if (ScreenHeight < 569) {
-        return ScreenHeight - (55 + [self getRegistBtnSizeHeight]);
+        return ScreenHeight - (55 + [self getMoreBtnSizeHeight]);
     } else {
-        return ScreenHeight -  (55 * ScreenHeight /568.0f + [self getRegistBtnSizeHeight]);
+        return ScreenHeight -  (55 * ScreenHeight /568.0f + [self getMoreBtnSizeHeight]);
     }
 }
 - (CGFloat)getRegistBtnSizeWidth
@@ -71,7 +89,7 @@
         return (150 * ScreenHeight /568.0f);
     }
 }
-- (CGFloat)getRegistBtnSizeHeight
+- (CGFloat)getMoreBtnSizeHeight
 {
     //iphone5 高度以下
     if (ScreenHeight < 569) {
@@ -104,5 +122,15 @@
     AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
     UINavigationController *nav = app.tabBarController.selectedViewController ;
     [nav presentViewController:loginNaviController animated:YES completion:nil];
+}
+- (void)showMoreView
+{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"UCFMoreViewController" bundle:nil];
+    UCFMoreViewController *moreVC = [storyboard instantiateViewControllerWithIdentifier:@"more_main"];
+    moreVC.title = @"更多";
+    moreVC.sourceVC = @"UCFSecurityCenterViewController";
+    AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    UINavigationController *nav = app.tabBarController.selectedViewController;
+    [nav pushViewController:moreVC  animated:YES];
 }
 @end

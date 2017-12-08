@@ -99,8 +99,6 @@
 		4AB1260C1AEF8EA400E915F1 /* UCFPurchaseBidViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AB1260A1AEF8EA400E915F1 /* UCFPurchaseBidViewController.xib */; };
 		4AB3EF231E287CD6007A6AF8 /* RiskAssessmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB3EF211E287CD6007A6AF8 /* RiskAssessmentViewController.m */; };
 		4AB3EF241E287CD6007A6AF8 /* RiskAssessmentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AB3EF221E287CD6007A6AF8 /* RiskAssessmentViewController.xib */; };
-		4ABED3A61E2FABAF006B3F62 /* jcore-ios-1.1.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ABED3A31E2FABAF006B3F62 /* jcore-ios-1.1.0.a */; };
-		4ABED3A71E2FABAF006B3F62 /* jpush-ios-3.0.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ABED3A41E2FABAF006B3F62 /* jpush-ios-3.0.1.a */; };
 		4ABED3A91E2FACE3006B3F62 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ABED3A81E2FACE3006B3F62 /* UserNotifications.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		4ABED3AB1E2FB28E006B3F62 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ABED3AA1E2FB28E006B3F62 /* libresolv.tbd */; };
 		4AC08B471B09BE4000DF8075 /* CalculatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC08B461B09BE4000DF8075 /* CalculatorView.m */; };
@@ -862,6 +860,8 @@
 		A851F3531F1361D8003DE8B8 /* UCFGoldTransactionDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A851F3511F1361D8003DE8B8 /* UCFGoldTransactionDetailViewController.m */; };
 		A851F3541F1361D8003DE8B8 /* UCFGoldTransactionDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A851F3521F1361D8003DE8B8 /* UCFGoldTransactionDetailViewController.xib */; };
 		A851F3561F1379E2003DE8B8 /* UCFGoldPriceFloatView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A851F3551F1379E2003DE8B8 /* UCFGoldPriceFloatView.xib */; };
+		A85510821FDA30CB0007F2F6 /* jpush-ios-3.0.7.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A855107D1FDA30C90007F2F6 /* jpush-ios-3.0.7.a */; };
+		A85510831FDA30CB0007F2F6 /* jcore-ios-1.1.6.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A855107F1FDA30CA0007F2F6 /* jcore-ios-1.1.6.a */; };
 		A85A2EBF1F431CEF004BF4C1 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A85A2EBE1F431CEF004BF4C1 /* QuickLook.framework */; };
 		A85A2EC21F4321B0004BF4C1 /* QLHeaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A85A2EC11F4321B0004BF4C1 /* QLHeaderViewController.m */; };
 		A85C74D91F90ED9F00DF7D6A /* home_icon_gold.png in Resources */ = {isa = PBXBuildFile; fileRef = A85C74D61F90EA4500DF7D6A /* home_icon_gold.png */; };
@@ -892,6 +892,10 @@
 		A8CE17731EC44BF8009BD954 /* UCFWalletSelectBankCarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8CE17711EC44BF8009BD954 /* UCFWalletSelectBankCarViewController.m */; };
 		A8CE17741EC44BF8009BD954 /* UCFWalletSelectBankCarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8CE17721EC44BF8009BD954 /* UCFWalletSelectBankCarViewController.xib */; };
 		A8D2DE781EB9E1CF00D61AD0 /* MaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = A8D2DE771EB9E1CF00D61AD0 /* MaskView.m */; };
+		A8DAEAD01FD929890088AF70 /* assets.png in Resources */ = {isa = PBXBuildFile; fileRef = A8DAEACF1FD929880088AF70 /* assets.png */; };
+		A8DAEAD71FD92E1A0088AF70 /* YWFilePreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8DAEAD41FD92E1A0088AF70 /* YWFilePreviewController.m */; };
+		A8DAEAD81FD92E1A0088AF70 /* YWFilePreviewView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8DAEAD51FD92E1A0088AF70 /* YWFilePreviewView.xib */; };
+		A8DAEAD91FD92E1A0088AF70 /* YWFilePreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = A8DAEAD61FD92E1A0088AF70 /* YWFilePreviewView.m */; };
 		A8DE852E1EC30159004B3533 /* P2PWalletHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A8DE852D1EC30159004B3533 /* P2PWalletHelper.m */; };
 		A8E01A801EEA4C6F003E3BDC /* UCFTransfeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A8E01A7E1EEA4C6F003E3BDC /* UCFTransfeTableViewCell.m */; };
 		A8E01A811EEA4C6F003E3BDC /* UCFTransfeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8E01A7F1EEA4C6F003E3BDC /* UCFTransfeTableViewCell.xib */; };
@@ -1232,9 +1236,6 @@
 		4AB3EF201E287CD6007A6AF8 /* RiskAssessmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RiskAssessmentViewController.h; sourceTree = "<group>"; };
 		4AB3EF211E287CD6007A6AF8 /* RiskAssessmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RiskAssessmentViewController.m; sourceTree = "<group>"; };
 		4AB3EF221E287CD6007A6AF8 /* RiskAssessmentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RiskAssessmentViewController.xib; sourceTree = "<group>"; };
-		4ABED3A31E2FABAF006B3F62 /* jcore-ios-1.1.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jcore-ios-1.1.0.a"; sourceTree = "<group>"; };
-		4ABED3A41E2FABAF006B3F62 /* jpush-ios-3.0.1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jpush-ios-3.0.1.a"; sourceTree = "<group>"; };
-		4ABED3A51E2FABAF006B3F62 /* JPUSHService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPUSHService.h; sourceTree = "<group>"; };
 		4ABED3A81E2FACE3006B3F62 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		4ABED3AA1E2FB28E006B3F62 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
 		4AC08B451B09BE4000DF8075 /* CalculatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalculatorView.h; sourceTree = "<group>"; };
@@ -2533,6 +2534,9 @@
 		A851F3511F1361D8003DE8B8 /* UCFGoldTransactionDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFGoldTransactionDetailViewController.m; sourceTree = "<group>"; };
 		A851F3521F1361D8003DE8B8 /* UCFGoldTransactionDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFGoldTransactionDetailViewController.xib; sourceTree = "<group>"; };
 		A851F3551F1379E2003DE8B8 /* UCFGoldPriceFloatView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFGoldPriceFloatView.xib; sourceTree = "<group>"; };
+		A855107D1FDA30C90007F2F6 /* jpush-ios-3.0.7.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jpush-ios-3.0.7.a"; sourceTree = "<group>"; };
+		A855107E1FDA30C90007F2F6 /* JPUSHService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPUSHService.h; sourceTree = "<group>"; };
+		A855107F1FDA30CA0007F2F6 /* jcore-ios-1.1.6.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jcore-ios-1.1.6.a"; sourceTree = "<group>"; };
 		A85A2EBE1F431CEF004BF4C1 /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
 		A85A2EC01F4321B0004BF4C1 /* QLHeaderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLHeaderViewController.h; sourceTree = "<group>"; };
 		A85A2EC11F4321B0004BF4C1 /* QLHeaderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLHeaderViewController.m; sourceTree = "<group>"; };
@@ -2574,6 +2578,12 @@
 		A8CE17721EC44BF8009BD954 /* UCFWalletSelectBankCarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFWalletSelectBankCarViewController.xib; sourceTree = "<group>"; };
 		A8D2DE761EB9E1CF00D61AD0 /* MaskView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaskView.h; sourceTree = "<group>"; };
 		A8D2DE771EB9E1CF00D61AD0 /* MaskView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MaskView.m; sourceTree = "<group>"; };
+		A8DAEACF1FD929880088AF70 /* assets.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = assets.png; path = Images/assets.png; sourceTree = "<group>"; };
+		A8DAEAD21FD92E1A0088AF70 /* YWFilePreviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWFilePreviewController.h; sourceTree = "<group>"; };
+		A8DAEAD31FD92E1A0088AF70 /* YWFilePreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWFilePreviewView.h; sourceTree = "<group>"; };
+		A8DAEAD41FD92E1A0088AF70 /* YWFilePreviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWFilePreviewController.m; sourceTree = "<group>"; };
+		A8DAEAD51FD92E1A0088AF70 /* YWFilePreviewView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YWFilePreviewView.xib; sourceTree = "<group>"; };
+		A8DAEAD61FD92E1A0088AF70 /* YWFilePreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWFilePreviewView.m; sourceTree = "<group>"; };
 		A8DE852C1EC30159004B3533 /* P2PWalletHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = P2PWalletHelper.h; sourceTree = "<group>"; };
 		A8DE852D1EC30159004B3533 /* P2PWalletHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = P2PWalletHelper.m; sourceTree = "<group>"; };
 		A8E01A7D1EEA4C6F003E3BDC /* UCFTransfeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFTransfeTableViewCell.h; sourceTree = "<group>"; };
@@ -2844,6 +2854,7 @@
 				A85A2EBF1F431CEF004BF4C1 /* QuickLook.framework in Frameworks */,
 				4ABED3AB1E2FB28E006B3F62 /* libresolv.tbd in Frameworks */,
 				A824BFCF1FCD499200E32F39 /* UMSocialCore.framework in Frameworks */,
+				A85510831FDA30CB0007F2F6 /* jcore-ios-1.1.6.a in Frameworks */,
 				4ABED3A91E2FACE3006B3F62 /* UserNotifications.framework in Frameworks */,
 				25950EC61D7FB6EC00E4CCBA /* libCloudwalkFaceSDK.a in Frameworks */,
 				2517E56C1D618FAA00EAA05F /* CoreMedia.framework in Frameworks */,
@@ -2855,7 +2866,6 @@
 				ED0647FB1C7ABF7300311AA1 /* AssetsLibrary.framework in Frameworks */,
 				ED0647F91C7ABE1E00311AA1 /* libc++.tbd in Frameworks */,
 				FBAEDA001C191A08000C0AA1 /* CoreFoundation.framework in Frameworks */,
-				4ABED3A71E2FABAF006B3F62 /* jpush-ios-3.0.1.a in Frameworks */,
 				A824BFD31FCD499200E32F39 /* libUMSocialLog.a in Frameworks */,
 				A824BFD21FCD499200E32F39 /* libSocialQQ.a in Frameworks */,
 				4A8E10001B9FE09D00ABBD4F /* LocalAuthentication.framework in Frameworks */,
@@ -2871,7 +2881,6 @@
 				7BC304991ACBC4FD007767F1 /* QuartzCore.framework in Frameworks */,
 				7BCE02641AC91C760084C15C /* libicucore.dylib in Frameworks */,
 				7BCE02621AC91C5D0084C15C /* libiconv.dylib in Frameworks */,
-				4ABED3A61E2FABAF006B3F62 /* jcore-ios-1.1.0.a in Frameworks */,
 				A824C0201FCD54D700E32F39 /* libUcfLib.a in Frameworks */,
 				7BCE70F01B79D03000F9DD14 /* libFMDeviceManager_without_IDFA.a in Frameworks */,
 				7BCE02601AC91C550084C15C /* libsqlite3.dylib in Frameworks */,
@@ -2889,6 +2898,7 @@
 				7BCE024C1AC91B4A0084C15C /* AudioToolbox.framework in Frameworks */,
 				7BCE024A1AC91B430084C15C /* AddressBook.framework in Frameworks */,
 				7BCE02481AC91A860084C15C /* libz.1.2.5.dylib in Frameworks */,
+				A85510821FDA30CB0007F2F6 /* jpush-ios-3.0.7.a in Frameworks */,
 				7BCE02461AC91A780084C15C /* CFNetwork.framework in Frameworks */,
 				7BCE02441AC91A720084C15C /* CoreGraphics.framework in Frameworks */,
 				A824BFCC1FCD499200E32F39 /* UShareUI.framework in Frameworks */,
@@ -5616,6 +5626,7 @@
 		7BFE3EB01AC56356002A53A2 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				A8DAEACF1FD929880088AF70 /* assets.png */,
 				A85C74D81F90EA5400DF7D6A /* index_tenMonthHunt.jpg */,
 				A85C74D61F90EA4500DF7D6A /* home_icon_gold.png */,
 				A85C74D51F90EA4500DF7D6A /* home_icon_weijin.png */,
@@ -5637,6 +5648,7 @@
 		7BFE3EB11AC5635E002A53A2 /* ThirdLibs */ = {
 			isa = PBXGroup;
 			children = (
+				A8DAEAD11FD92E1A0088AF70 /* YWFilePreview */,
 				A824BFD91FCD54D700E32F39 /* p2pWalletSDK */,
 				A824BFB61FCD499200E32F39 /* umeng_ios_social_sdk_6.4-2.6_arm64_custom */,
 				A83048CC1F67D9A70007FB4F /* OneSDK */,
@@ -6509,6 +6521,19 @@
 			path = Tools/RotationButton;
 			sourceTree = "<group>";
 		};
+		A8DAEAD11FD92E1A0088AF70 /* YWFilePreview */ = {
+			isa = PBXGroup;
+			children = (
+				A8DAEAD21FD92E1A0088AF70 /* YWFilePreviewController.h */,
+				A8DAEAD31FD92E1A0088AF70 /* YWFilePreviewView.h */,
+				A8DAEAD41FD92E1A0088AF70 /* YWFilePreviewController.m */,
+				A8DAEAD51FD92E1A0088AF70 /* YWFilePreviewView.xib */,
+				A8DAEAD61FD92E1A0088AF70 /* YWFilePreviewView.m */,
+			);
+			name = YWFilePreview;
+			path = ThirdLibs/YWFilePreview;
+			sourceTree = "<group>";
+		};
 		A8DE852B1EC3012B004B3533 /* WalletHelper */ = {
 			isa = PBXGroup;
 			children = (
@@ -6882,9 +6907,9 @@
 		FBA0A2FC1C183B0F000E1C7A /* JPush_lib */ = {
 			isa = PBXGroup;
 			children = (
-				4ABED3A31E2FABAF006B3F62 /* jcore-ios-1.1.0.a */,
-				4ABED3A41E2FABAF006B3F62 /* jpush-ios-3.0.1.a */,
-				4ABED3A51E2FABAF006B3F62 /* JPUSHService.h */,
+				A855107F1FDA30CA0007F2F6 /* jcore-ios-1.1.6.a */,
+				A855107D1FDA30C90007F2F6 /* jpush-ios-3.0.7.a */,
+				A855107E1FDA30C90007F2F6 /* JPUSHService.h */,
 			);
 			name = JPush_lib;
 			path = ThirdLibs/JPush_lib;
@@ -7052,7 +7077,7 @@
 				TargetAttributes = {
 					7BFE3E7F1AC55C98002A53A2 = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = EZRWM7P5C6;
+						DevelopmentTeam = MHG97AJ3LK;
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -7151,6 +7176,7 @@
 				E37086C81D61E3030041D293 /* UCFOldUserGuideViewController.xib in Resources */,
 				74B98C961F70C9E100CB6A9F /* UCFMineHeaderView.xib in Resources */,
 				FB572C0D1C7C3000000031F1 /* UCFCouponInterest.xib in Resources */,
+				A8DAEAD01FD929890088AF70 /* assets.png in Resources */,
 				A81A6F571FBD910000BDCE50 /* ServiceChargeView2.xib in Resources */,
 				4AB3EF241E287CD6007A6AF8 /* RiskAssessmentViewController.xib in Resources */,
 				83881D311FB58A01004CB2AF /* UCFDrawGoldHeaderView.xib in Resources */,
@@ -7186,6 +7212,7 @@
 				83E3F7A51F3C35C500286550 /* jrgcuserxieyi.docx in Resources */,
 				74956EB11D66E2BC00D68B61 /* BindPhoneNumViewController.xib in Resources */,
 				83FD5FFD1FD0FBA500C57E53 /* UCFAssetProofApplyFirstCell.xib in Resources */,
+				A8DAEAD81FD92E1A0088AF70 /* YWFilePreviewView.xib in Resources */,
 				74EAF5B61B0ED78700807C1C /* UCFSelectedBankTableViewCell.xib in Resources */,
 				833CC9FA1FD6A83D006BF624 /* UCFProjectInvestmentRecordViewController.xib in Resources */,
 				744EB7FE1EE7E871003C57C4 /* UCFInvestTransferViewController.xib in Resources */,
@@ -7521,6 +7548,7 @@
 				83AB49691F6A772400C4231F /* UCFTotalRevenuePieChartViewController.m in Sources */,
 				FBB6858B1AE4A76800F222B6 /* UIView+MJExtension.m in Sources */,
 				74270C9B1EC58F6800F9419B /* UCFHomeViewController.m in Sources */,
+				A8DAEAD71FD92E1A0088AF70 /* YWFilePreviewController.m in Sources */,
 				FB1E7F831D8E4230009CBE2C /* UCFProjectDetailViewController.m in Sources */,
 				7BCE01FD1AC8FC260084C15C /* ASINSStringAdditions.m in Sources */,
 				74270C961EC58F6800F9419B /* UCFUserInfoModel.m in Sources */,
@@ -7795,6 +7823,7 @@
 				7BCBF1231ADB613C00C874FC /* UCFRegisterStepTwoViewController.m in Sources */,
 				FB1E7F7F1D8E4230009CBE2C /* UCFBidNewDetailView.m in Sources */,
 				74931A361B1326FE00143424 /* OHASMarkupParserBase.m in Sources */,
+				A8DAEAD91FD92E1A0088AF70 /* YWFilePreviewView.m in Sources */,
 				74D6578E1F2EFFFF00177EB7 /* UCFHomeListNo2Cell.m in Sources */,
 				83D64F5E1F1C9C6E00A839F2 /* UCFGoldBidSuccessHeaderView.m in Sources */,
 				7443C7311F1F3881009669C0 /* UCFGoldRecordHeaderFooterView.m in Sources */,
@@ -8217,7 +8246,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = EZRWM7P5C6;
+				DEVELOPMENT_TEAM = MHG97AJ3LK;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -8259,7 +8288,7 @@
 					"$(PROJECT_DIR)/JRGC/umeng_ios_social_sdk_6.4-2.6_arm64_custom/UMSocial/UMSocialSDKPlugin",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp299;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -8284,7 +8313,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = EZRWM7P5C6;
+				DEVELOPMENT_TEAM = MHG97AJ3LK;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -8326,7 +8355,7 @@
 					"$(PROJECT_DIR)/JRGC/umeng_ios_social_sdk_6.4-2.6_arm64_custom/UMSocial/UMSocialSDKPlugin",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp299;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
