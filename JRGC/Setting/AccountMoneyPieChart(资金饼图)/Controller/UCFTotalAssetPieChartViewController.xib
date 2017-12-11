@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UCFTotalAssetPieChartViewController">
             <connections>
+                <outlet property="assetProofBtn" destination="cyF-UK-RaK" id="hM3-Xr-D4P"/>
                 <outlet property="tableView" destination="XgF-GJ-dxa" id="QGw-K4-fVh"/>
                 <outlet property="totalAssetLabel" destination="LZ2-rT-g2K" id="GEl-zA-6Gx"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -56,14 +57,14 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="bottom" secondItem="LZ2-rT-g2K" secondAttribute="bottom" constant="22" id="0y5-GE-ciI"/>
                         <constraint firstItem="cyF-UK-RaK" firstAttribute="centerY" secondItem="BmK-UB-nLG" secondAttribute="centerY" id="2y7-IY-r8c"/>
                         <constraint firstItem="4qF-Du-V3W" firstAttribute="leading" secondItem="BmK-UB-nLG" secondAttribute="leading" constant="15" id="4ns-za-3OQ"/>
                         <constraint firstAttribute="trailing" secondItem="cyF-UK-RaK" secondAttribute="trailing" constant="15" id="8Rb-6k-c8w"/>
+                        <constraint firstItem="LZ2-rT-g2K" firstAttribute="leading" secondItem="BmK-UB-nLG" secondAttribute="leading" constant="15" id="HSp-EU-AFb"/>
+                        <constraint firstItem="LZ2-rT-g2K" firstAttribute="top" secondItem="4qF-Du-V3W" secondAttribute="bottom" constant="2" id="K7o-4F-ZWq"/>
                         <constraint firstAttribute="height" constant="85" id="LCe-gn-mOK"/>
                         <constraint firstAttribute="trailing" secondItem="0EW-g6-o6P" secondAttribute="trailing" constant="20" id="QYN-Lf-Kdi"/>
                         <constraint firstAttribute="bottom" secondItem="0EW-g6-o6P" secondAttribute="bottom" id="Xoy-Ph-Y26"/>
-                        <constraint firstItem="LZ2-rT-g2K" firstAttribute="leading" secondItem="BmK-UB-nLG" secondAttribute="leading" constant="15" id="Z7A-VX-Mam"/>
                         <constraint firstItem="0EW-g6-o6P" firstAttribute="leading" secondItem="BmK-UB-nLG" secondAttribute="leading" constant="20" id="c6Y-GL-Icp"/>
                         <constraint firstItem="4qF-Du-V3W" firstAttribute="top" secondItem="BmK-UB-nLG" secondAttribute="top" constant="23" id="vQw-sq-kuf"/>
                     </constraints>
@@ -87,7 +88,7 @@
                 <constraint firstAttribute="trailing" secondItem="XgF-GJ-dxa" secondAttribute="trailing" id="ndW-6A-rei"/>
                 <constraint firstItem="BmK-UB-nLG" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="ydy-Tf-Wb8"/>
             </constraints>
-            <point key="canvasLocation" x="-91.5" y="-108.5"/>
+            <point key="canvasLocation" x="-229" y="-113"/>
         </view>
     </objects>
 </document>

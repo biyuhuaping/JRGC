@@ -12,10 +12,13 @@
 #import "UCFAssetProofListModel.h"
 #import "QLHeaderViewController.h"
 #import "YWFilePreviewController.h"
+#import "Common.h"
 @interface UCFAccountAssetsProofViewController ()<UITableViewDataSource,UITableViewDelegate,UCFAssetProofApplyFirstCellDelegate,UIDocumentInteractionControllerDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic)  NSMutableArray *dataArray;
 @property (strong,nonatomic)UIDocumentInteractionController *documentPickerViewController;
+@property (weak, nonatomic)  UILabel *tipLabel1;
+@property (weak, nonatomic)  UILabel *tipLabel2;
 @end
 
 @implementation UCFAccountAssetsProofViewController
@@ -53,15 +56,25 @@
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return section == 0 ? 1 : self.dataArray.count;
+    if (section == 0)
+    {
+        return 1;
+    }else {
+        return  self.dataArray.count;//  == 0 ? 1: self.dataArray.count;
+    }
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if(indexPath.section == 0)
     {
-        return  358;
+        return  169+[self getTipLabelHeight:self.tipLabel1.text] + 15* 2 + 10 + 30 + [self  getTipLabelHeight:self.tipLabel2.text] +  15 * 2;
     }
     return 75;
+}
+-(float)getTipLabelHeight:(NSString *)tipStr
+{
+    CGSize size1 =  [Common getStrHeightWithStr:tipStr AndStrFont:12 AndWidth:ScreenWidth - 30 AndlineSpacing:3];
+    return size1.height ;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -74,33 +87,35 @@
             cell = [[[NSBundle mainBundle]loadNibNamed:@"UCFAssetProofApplyFirstCell" owner:nil options:nil]firstObject];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
+        self.tipLabel1 = cell.tipLabel1;
+        self.tipLabel2 = cell.tipLabel2;
         cell.delegate = self;
         return cell;
     }
     else if(indexPath.section == 1)
     {
-        if(_dataArray.count == 0)
-        {
-            NSString *cellindifier = @"secondIndexPath";
-            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellindifier];
-            if (!cell) {
-                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellindifier];
-                cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                cell.textLabel.textColor = UIColorWithRGB(0x555555);
-                cell.detailTextLabel.textColor = UIColorWithRGB(0x555555);
-                cell.textLabel.font = [UIFont systemFontOfSize:14];
-                cell.detailTextLabel.font = [UIFont systemFontOfSize:14];
-            }
-            CGSize size =  [Common getStrHeightWithStr:@"暂无数据" AndStrFont:12 AndWidth:ScreenWidth - 30 AndlineSpacing:2];
-            UILabel *errorLabel = [[UILabel alloc]initWithFrame:CGRectMake(15, 10, ScreenWidth-30, size.height)];
-            errorLabel.textColor = UIColorWithRGB(0x555555);
-            errorLabel.font = [UIFont systemFontOfSize:12];
-            errorLabel.numberOfLines = 0;
-            errorLabel.textAlignment = NSTextAlignmentCenter;
-            [cell.contentView addSubview:errorLabel];
-            errorLabel.text = @"暂无数据";//购买错误信息
-            return cell;
-        }else{
+//        if(_dataArray.count == 0)
+//        {
+//            NSString *cellindifier = @"secondIndexPath";
+//            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellindifier];
+//            if (!cell) {
+//                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellindifier];
+//                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//                cell.textLabel.textColor = UIColorWithRGB(0x555555);
+//                cell.detailTextLabel.textColor = UIColorWithRGB(0x555555);
+//                cell.textLabel.font = [UIFont systemFontOfSize:14];
+//                cell.detailTextLabel.font = [UIFont systemFontOfSize:14];
+//            }
+//            CGSize size =  [Common getStrHeightWithStr:@"暂无数据" AndStrFont:12 AndWidth:ScreenWidth - 30 AndlineSpacing:2];
+//            UILabel *errorLabel = [[UILabel alloc]initWithFrame:CGRectMake(15, 10, ScreenWidth-30, size.height)];
+//            errorLabel.textColor = UIColorWithRGB(0x555555);
+//            errorLabel.font = [UIFont systemFontOfSize:12];
+//            errorLabel.numberOfLines = 0;
+//            errorLabel.textAlignment = NSTextAlignmentCenter;
+//            [cell.contentView addSubview:errorLabel];
+//            errorLabel.text = @"暂无数据";
+//            return cell;
+//        }else{
             NSString *cellindifier = @"UCFAssetProofApplyFirstCell";
             UCFAssetProofApplySecondCell *cell = [tableView dequeueReusableCellWithIdentifier:cellindifier];
             if (!cell)
@@ -113,7 +128,7 @@
                 cell.assetProofModel = _dataArray[indexPath.row];
             }
             return cell;
-        }
+//        }
         
     }
     return nil;

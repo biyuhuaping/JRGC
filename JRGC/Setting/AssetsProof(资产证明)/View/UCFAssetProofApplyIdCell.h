@@ -16,5 +16,6 @@
 @interface UCFAssetProofApplyCodeCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet UITextField *messageCodeTextField;
 @property (strong, nonatomic) IBOutlet UIButton *MessageCodeBtn;
+@property (strong, nonatomic) IBOutlet UILabel *mobileNumberLabel;
 
 @end
