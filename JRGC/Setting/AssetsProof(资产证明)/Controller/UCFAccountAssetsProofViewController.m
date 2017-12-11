@@ -60,7 +60,7 @@
     {
         return 1;
     }else {
-        return  self.dataArray.count;//  == 0 ? 1: self.dataArray.count;
+        return  self.dataArray.count == 0 ? 1: self.dataArray.count;
     }
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -69,7 +69,7 @@
     {
         return  169+[self getTipLabelHeight:self.tipLabel1.text] + 15* 2 + 10 + 30 + [self  getTipLabelHeight:self.tipLabel2.text] +  15 * 2;
     }
-    return 75;
+    return  self.dataArray.count == 0 ? 50 : 75;
 }
 -(float)getTipLabelHeight:(NSString *)tipStr
 {
@@ -94,28 +94,22 @@
     }
     else if(indexPath.section == 1)
     {
-//        if(_dataArray.count == 0)
-//        {
-//            NSString *cellindifier = @"secondIndexPath";
-//            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellindifier];
-//            if (!cell) {
-//                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellindifier];
-//                cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//                cell.textLabel.textColor = UIColorWithRGB(0x555555);
-//                cell.detailTextLabel.textColor = UIColorWithRGB(0x555555);
-//                cell.textLabel.font = [UIFont systemFontOfSize:14];
-//                cell.detailTextLabel.font = [UIFont systemFontOfSize:14];
-//            }
-//            CGSize size =  [Common getStrHeightWithStr:@"暂无数据" AndStrFont:12 AndWidth:ScreenWidth - 30 AndlineSpacing:2];
-//            UILabel *errorLabel = [[UILabel alloc]initWithFrame:CGRectMake(15, 10, ScreenWidth-30, size.height)];
-//            errorLabel.textColor = UIColorWithRGB(0x555555);
-//            errorLabel.font = [UIFont systemFontOfSize:12];
-//            errorLabel.numberOfLines = 0;
-//            errorLabel.textAlignment = NSTextAlignmentCenter;
-//            [cell.contentView addSubview:errorLabel];
-//            errorLabel.text = @"暂无数据";
-//            return cell;
-//        }else{
+        if(_dataArray.count == 0)
+        {
+            NSString *cellindifier = @"secondIndexPath";
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellindifier];
+            if (!cell) {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellindifier];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                
+            }
+            cell.contentView.backgroundColor = UIColorWithRGB(0xebebee);
+            cell.textLabel.text = @"暂无数据";
+            cell.textLabel.textColor = UIColorWithRGB(0x999999);
+            cell.textLabel.font = [UIFont systemFontOfSize:14];
+            cell.textLabel.textAlignment = NSTextAlignmentCenter;
+            return cell;
+        }else{
             NSString *cellindifier = @"UCFAssetProofApplyFirstCell";
             UCFAssetProofApplySecondCell *cell = [tableView dequeueReusableCellWithIdentifier:cellindifier];
             if (!cell)
@@ -128,14 +122,14 @@
                 cell.assetProofModel = _dataArray[indexPath.row];
             }
             return cell;
-//        }
+        }
         
     }
     return nil;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(indexPath.section == 1)
+    if(indexPath.section == 1 && _dataArray.count > 0)
     {
         UCFAssetProofListModel *assetProofModel= _dataArray[indexPath.row];
         
@@ -159,7 +153,7 @@
     NSString *userId = [[NSUserDefaults standardUserDefaults] valueForKey:UUID];
     NSDictionary *dic = @{@"userId":userId,
                           @"page":@"1",
-                          @"pageSize":@"20"
+                          @"pageSize":@"6"
                           };
     [[NetworkModule sharedNetworkModule] newPostReq:dic tag:kSXTagAssetProofList owner:self signature:YES Type:self.accoutType];
 }
