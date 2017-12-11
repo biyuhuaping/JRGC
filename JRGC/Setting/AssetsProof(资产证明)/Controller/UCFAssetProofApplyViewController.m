@@ -66,6 +66,7 @@
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
         self.idNumberField =  cell.userIdNumberTextField;
+        cell.userNameLabel.text = [UserInfoSingle sharedManager].realName;
         return cell;
     }else{
         NSString *cellindifier = @"UCFAssetProofApplyCodeCell";
@@ -237,6 +238,7 @@
             
         case 3:
         {
+            [[NSNotificationCenter defaultCenter]   postNotificationName:@"GetAssetProofListHttpRequset" object:nil];
             [self.navigationController  popViewControllerAnimated:YES];
         }
             break;

@@ -35,7 +35,7 @@
 #import "UCFFacCodeViewController.h"
 #import "KTAlertController.h"
 #import <StoreKit/StoreKit.h>
-
+#import "UCFAccountAssetsProofViewController.h"
 @interface UCFMineViewController () <UITableViewDelegate, UITableViewDataSource, UCFMineHeaderViewDelegate, UCFMineFuncCellDelegate, UCFMineAPIManagerDelegate, UCFMineFuncSecCellDelegate, UIAlertViewDelegate, SKStoreProductViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) UCFMineHeaderView   *mineHeaderView;
@@ -651,7 +651,9 @@
         [alert show];
     }
     else  if ([title isEqualToString:@"资产证明"]){//资产证明
-        
+
+            UCFAccountAssetsProofViewController * assetProofVC = [[UCFAccountAssetsProofViewController alloc]initWithNibName:@"UCFAccountAssetsProofViewController" bundle:nil];
+            [self.navigationController pushViewController:assetProofVC animated:YES];
     }
     else  if ([title isEqualToString:@"投资计算器"]){//投资计算器
         KTAlertController *alert = [KTAlertController alertControllerWithTitle:@"这是一个alert" description:@"又如何？" cancel:@"取消" button:@"好的" action:^{

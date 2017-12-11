@@ -29,6 +29,7 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.dataArray = [NSMutableArray arrayWithCapacity:0];
     [self assetProofListHttpRequset];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(assetProofListHttpRequset) name:@"GetAssetProofListHttpRequset" object:nil];
 }
 #pragma  去资产身份申请页面
 - (void)gotoAssetProofApplyVC
@@ -165,6 +166,7 @@
             NSDictionary *dataDic  = [dic objectSafeDictionaryForKey:@"data"];
             NSArray *resultListArr = [[dataDic objectSafeDictionaryForKey:@"pageData"] objectSafeArrayForKey:@"result"];
 //            BOOL hasNextP = [[[[dataDic objectSafeDictionaryForKey:@"pageData"] objectSafeDictionaryForKey:@"pagination"] objectSafeForKey:@"hasNextPage"] boolValue];
+            [_dataArray removeAllObjects];
             for (NSDictionary *data in resultListArr)
             {
                 UCFAssetProofListModel *listModel = [UCFAssetProofListModel assetProofListModelWithDict:data];
