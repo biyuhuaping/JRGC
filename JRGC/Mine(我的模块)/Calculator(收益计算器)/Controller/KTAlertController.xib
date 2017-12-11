@@ -89,7 +89,6 @@
                                 </view>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NcM-Si-p33">
                                     <rect key="frame" x="87" y="281" width="150" height="32"/>
-                                    <color key="backgroundColor" red="0.99215686274509807" green="0.30196078431372547" blue="0.29803921568627451" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="150" id="hlP-Z2-i3c"/>
                                         <constraint firstAttribute="height" constant="32" id="xx6-Yo-x9a"/>
@@ -98,6 +97,7 @@
                                     <state key="normal" title="计算收益">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
+                                    <state key="disabled" backgroundImage="btn_disable"/>
                                     <connections>
                                         <action selector="calculate:" destination="-1" eventType="touchUpInside" id="x56-eK-vgc"/>
                                     </connections>
@@ -161,10 +161,10 @@
                                     </connections>
                                 </textField>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="list_icon_downarrow" translatesAutoresizingMaskIntoConstraints="NO" id="4fQ-Gi-L42">
-                                    <rect key="frame" x="287" y="184.5" width="13" height="8"/>
+                                    <rect key="frame" x="278" y="180.5" width="22" height="16"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="8" id="9q6-Yf-68n"/>
-                                        <constraint firstAttribute="width" constant="13" id="hI4-Bh-wNc"/>
+                                        <constraint firstAttribute="height" constant="16" id="9q6-Yf-68n"/>
+                                        <constraint firstAttribute="width" constant="22" id="hI4-Bh-wNc"/>
                                     </constraints>
                                 </imageView>
                             </subviews>
@@ -293,6 +293,7 @@
         </view>
     </objects>
     <resources>
+        <image name="btn_disable" width="5" height="5"/>
         <image name="calculator_icon_close" width="25" height="25"/>
         <image name="list_icon_downarrow" width="25" height="25"/>
     </resources>

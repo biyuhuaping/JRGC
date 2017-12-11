@@ -392,7 +392,7 @@
             cell.titleDesLabel.text = @"资产证明";
             cell.valueLabel.text = @"一句话描述";
             cell.title2DesLabel.text = @"投资计算器";
-            cell.value2Label.text = @"键计算收益";
+            cell.value2Label.text = @"一键计算收益";
             cell.signView.hidden = YES;
             cell.sign2View.hidden = YES;
         }

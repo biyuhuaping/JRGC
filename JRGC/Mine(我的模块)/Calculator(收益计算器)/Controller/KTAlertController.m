@@ -75,7 +75,12 @@
     self.calculateButton.enabled = NO;
     self.calculateTypeSign = CalulateTypeNone;
     self.calculateResultViewShow = NO;
-    [self.calculateButton setTitleColor:[UIColor blackColor] forState:UIControlStateDisabled];
+    UIImage *imageDisable = [UIImage imageNamed:@"btn_disable"];
+    UIImage *imageAble = [UIImage imageNamed:@"btn_red"];
+    [self.calculateButton setBackgroundImage:[imageAble stretchableImageWithLeftCapWidth:4 topCapHeight:4] forState:UIControlStateNormal];
+    [self.calculateButton setBackgroundImage:[imageDisable stretchableImageWithLeftCapWidth:4 topCapHeight:4] forState:UIControlStateDisabled];
+    self.calculateButton.layer.cornerRadius = self.calculateButton.height * 0.55;
+    self.calculateButton.clipsToBounds = YES;
     
     UIView *calculateResultView = [[UIView alloc] initWithFrame:CGRectZero];
     calculateResultView.backgroundColor = [UIColor whiteColor];
@@ -90,7 +95,6 @@
     resultShowview.frame = calculateResultView.bounds;
     [calculateResultView addSubview:resultShowview];
     self.calculateShowview = resultShowview;
-    
 }
 
 - (void)setCalculateResultViewWithState:(CalulateType) calculateType
@@ -167,7 +171,7 @@
 }
 
 - (void)checkConditionChangeStateForCalculate {
-    if (self.calculateTypeSign != CalulateTypeNone && self.investAmont.length > 0 && self.investTerm.length > 0 && self.annualInterestRate.length > 0) {
+    if (self.calculateTypeSign != CalulateTypeNone && self.investAmountTextField.text.length > 0 && self.annualRateTextField.text.length > 0 && self.investTermTextField.text.length > 0) {
         self.calculateButton.enabled = YES;
     }
     else {
@@ -378,6 +382,30 @@
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    DBLOG(@"%@, %@ %@", textField.text, string, NSStringFromRange(range));
+    if (string.length == 0) {
+        if (textField.text.length-1 < 1) {
+            self.calculateButton.enabled = NO;
+        }
+    }
+    else if (string.length > 0 && self.calculateTypeSign != CalulateTypeNone) {
+        if (self.investTermTextField == textField) {
+            if (self.investAmountTextField.text.length > 0 && self.annualRateTextField.text.length > 0) {
+                self.calculateButton.enabled = YES;
+            }
+        }
+        else if (self.investAmountTextField == textField) {
+            if (self.investTermTextField.text.length > 0 && self.annualRateTextField.text.length > 0) {
+                self.calculateButton.enabled = YES;
+            }
+        }
+        else if (self.annualRateTextField == textField) {
+            if (self.investAmountTextField.text.length > 0 && self.investTermTextField.text.length > 0) {
+                self.calculateButton.enabled = YES;
+            }
+        }
+    }
+    
     if (textField == self.investAmountTextField) {
         return [self validateMoneyFormatByString:[textField.text stringByReplacingCharactersInRange:range withString:string]];
     }
@@ -393,7 +421,7 @@
 // 判断字符串内容是否合法：金额的格式
 - (BOOL)validateMoneyFormatByString:(NSString *)string {
     if (string.length > 0) {
-        NSString *stringRegex = @"(\\+|\\-)?(([0]|(0[.]\\d{0,2}))|([1-9]\\d{0,6}(([.]\\d{0,2})?)))?";
+        NSString *stringRegex = @"(\\+|\\-)?(([0]|(0[.]\\d{0,2}))|([1-9]\\d{0,7}(([.]\\d{0,2})?)))?";
         NSPredicate *phoneTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", stringRegex];
         BOOL flag = [phoneTest evaluateWithObject:string];
         if (!flag) {
@@ -438,6 +466,7 @@
             }
         }
         else {
+            [self.calculateShowview resetData];
             self.investAmont = nil;
         }
     }
@@ -450,6 +479,7 @@
             }
         }
         else {
+            [self.calculateShowview resetData];
             self.annualInterestRate = nil;
         }
     }
@@ -462,6 +492,7 @@
             }
         }
         else {
+            [self.calculateShowview resetData];
             self.investTerm = nil;
         }
     }
