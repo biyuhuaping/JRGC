@@ -8,7 +8,8 @@
 
 #import "UCFAssetProofApplyFirstCell.h"
 #import "UCFToolsMehod.h"
-
+#import "Common.h"
+#import "NSString+CJString.h"
 @interface UCFAssetProofApplyFirstCell ()
 - (IBAction)gotoAssetProofApplyVC:(id)sender;
 
@@ -42,6 +43,21 @@
         [self.delegate seeAssetProofModel];
     }
 }
+-(void)layoutSubviews
+{
+    [super layoutSubviews];
+    NSDictionary *dic = [Common getParagraphStyleDictWithStrFont:12.0f WithlineSpacing:3.0];
+
+    self.tipLabel1.attributedText = [NSString getNSAttributedString:self.tipLabel1.text labelDict:dic];
+    CGSize size1 =  [Common getStrHeightWithStr:self.tipLabel1.text AndStrFont:12 AndWidth:ScreenWidth - 30 AndlineSpacing:3];
+    self.tipLabel1Height.constant = size1.height ;
+
+    NSDictionary *dic1 = [Common getParagraphStyleDictWithStrFont:12.0f WithlineSpacing:3.0];
+    self.tipLabel2.attributedText = [NSString getNSAttributedString:self.tipLabel2.text labelDict:dic1];
+    CGSize size2 =  [Common getStrHeightWithStr:self.tipLabel2.text AndStrFont:12 AndWidth:ScreenWidth - 30 AndlineSpacing:3];
+    self.tipLabel2Height.constant = size2.height;
+}
+
 @end
 
 @implementation UCFAssetProofApplySecondCell

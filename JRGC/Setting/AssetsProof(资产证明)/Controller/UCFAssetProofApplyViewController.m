@@ -50,7 +50,7 @@
     {
           return 118;
     }else{
-        return 70;
+        return 118;
     }
   
 }
@@ -66,6 +66,7 @@
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
         self.idNumberField =  cell.userIdNumberTextField;
+        cell.userNameLabel.text = [UserInfoSingle sharedManager].realName;
         return cell;
     }else{
         NSString *cellindifier = @"UCFAssetProofApplyCodeCell";
@@ -77,7 +78,8 @@
         }
         self.codeTextField = cell.messageCodeTextField;
         self.sendCodeBtn = cell.MessageCodeBtn;
-        [cell.MessageCodeBtn addTarget:self action:@selector(getCodeBtn:) forControlEvents:UIControlEventTouchUpInside];
+        cell.mobileNumberLabel.text = [UserInfoSingle sharedManager].mobile;
+        [cell.MessageCodeBtn addTarget:self action:@selector(getMeassgeCode:) forControlEvents:UIControlEventTouchUpInside];
         return cell;
     }
 }
@@ -106,7 +108,7 @@
 }
 
 //点击获取短信验证码
-- (void)getCodeBtn:(id)sender {
+- (void)getMeassgeCode:(id)sender {
     
     [self.view endEditing:YES];
     
@@ -121,7 +123,7 @@
 {
     NSString *userId = [[NSUserDefaults standardUserDefaults] valueForKey:UUID];
     //type: 1:提现    2:注册    3:修改绑定银行卡   5:设置交易密码    6:开户    7:换卡
-    NSDictionary *dic = @{@"destPhoneNo":@"18500950060",@"isVms":codeType,@"type":@"11",@"userId":userId};
+    NSDictionary *dic = @{@"isVms":codeType,@"type":@"11",@"userId":userId};
 //    self.currentMSGRoute = isVms;
     [[NetworkModule sharedNetworkModule] newPostReq:dic tag:kSXTagIdentifyCode owner:self signature:YES Type:self.accoutType];
 }
@@ -237,6 +239,7 @@
             
         case 3:
         {
+            [[NSNotificationCenter defaultCenter]   postNotificationName:@"GetAssetProofListHttpRequset" object:nil];
             [self.navigationController  popViewControllerAnimated:YES];
         }
             break;

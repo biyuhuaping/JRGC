@@ -15,6 +15,7 @@
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UILabel *totalAssetLabel;
 - (IBAction)gotoAssetProofVC:(UIButton *)sender;
+@property (strong, nonatomic) IBOutlet UIButton *assetProofBtn;
 @property (nonatomic,strong)NSArray *dataArray;
 @end
 
@@ -94,6 +95,7 @@
             }else{
               self.totalAssetLabel.text = [NSString stringWithFormat:@"¥%@",[UCFToolsMehod AddComma:totalAssets]];
             }
+            self.assetProofBtn.hidden = [totalAssets doubleValue] <= 0;
             UCFCustomPieChartModel *pieChatModel1 = [[UCFCustomPieChartModel alloc]init];
             pieChatModel1.pieChartTitle = @"按账户类型";
             pieChatModel1.pieChartDataArray = [[NSMutableArray alloc]initWithArray:@[p2pAssets,zxAssets,goldAssets]];
