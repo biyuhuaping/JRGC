@@ -667,7 +667,9 @@
         [alert show];
     }
     else  if ([title isEqualToString:@"资产证明"]){//资产证明
-
+        if (!self.assetProofCanClick) {
+            return;
+        }
             UCFAccountAssetsProofViewController * assetProofVC = [[UCFAccountAssetsProofViewController alloc]initWithNibName:@"UCFAccountAssetsProofViewController" bundle:nil];
             [self.navigationController pushViewController:assetProofVC animated:YES];
     }
