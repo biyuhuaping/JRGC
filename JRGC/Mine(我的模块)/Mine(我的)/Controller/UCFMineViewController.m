@@ -398,6 +398,7 @@
                 cell.valueLabel.text = @"一键计算收益";
                 cell.signView.hidden = YES;
                 cell.sign2View.hidden = YES;
+                cell.view2.hidden = NO;
                 cell.view2.backgroundColor = UIColorWithRGB(0xebebee);
             }
             else {
@@ -407,9 +408,10 @@
                 cell.valueLabel.text = @"一句话描述";
                 cell.title2DesLabel.text = @"投资计算器";
                 cell.value2Label.text = @"一键计算收益";
+                cell.view2.hidden = YES;
                 cell.signView.hidden = YES;
                 cell.sign2View.hidden = YES;
-                cell.view2.backgroundColor = [UIColor clearColor];
+//                cell.view2.backgroundColor = [UIColor clearColor];
             }
         }
         return cell;
