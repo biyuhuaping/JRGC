@@ -44,6 +44,7 @@
 
 @property (strong, nonatomic) UCFUserBenefitModel *benefitModel;
 @property (strong, nonatomic) UCFUserAssetModel *assetModel;
+@property (assign, nonatomic) BOOL assetProofCanClick;
 @end
 
 @implementation UCFMineViewController
@@ -185,6 +186,7 @@
     UCFMineHeaderView *mineHeader = (UCFMineHeaderView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFMineHeaderView" owner:self options:nil] lastObject];
     mineHeader.delegate = self;
     self.tableView.tableHeaderView = mineHeader;
+    self.tableView.backgroundColor = UIColorWithRGB(0xebebee);
     self.mineHeaderView = mineHeader;
 #ifdef __IPHONE_11_0
     if (@available(iOS 11.0, *)) {
@@ -196,6 +198,7 @@
 }
 
 - (void)refreshData {
+    self.assetProofCanClick = NO;
     [self.apiManager getAssetFromNet];
     [self.apiManager getBenefitFromNet];
 }
@@ -204,12 +207,14 @@
     UCFMineAPIManager *apiManager = [[UCFMineAPIManager alloc] init];
     apiManager.delegate = self;
     self.apiManager = apiManager;
+    self.assetProofCanClick = NO;
     [self.apiManager getAssetFromNet];
     [self.apiManager getBenefitFromNet];
 }
 
 - (void)mineApiManager:(UCFMineAPIManager *)apiManager didSuccessedReturnAssetResult:(id)result withTag:(NSUInteger)tag
 {
+    self.assetProofCanClick = YES;
     [self.tableView.header endRefreshing];
     if ([result isKindOfClass:[UCFUserAssetModel class]]) {
         self.assetModel = result;
@@ -387,14 +392,25 @@
             cell.sign2View.hidden = YES;
         }
         else if (indexPath.row == 3) {
-            cell.iconImageView.image = [UIImage imageNamed:@"uesr_icon_assets"];
-            cell.icon2ImageView.image = [UIImage imageNamed:@"uesr_icon_calculator"];
-            cell.titleDesLabel.text = @"资产证明";
-            cell.valueLabel.text = @"一句话描述";
-            cell.title2DesLabel.text = @"投资计算器";
-            cell.value2Label.text = @"一键计算收益";
-            cell.signView.hidden = YES;
-            cell.sign2View.hidden = YES;
+            if ([UserInfoSingle sharedManager].companyAgent) {
+                cell.iconImageView.image = [UIImage imageNamed:@"uesr_icon_calculator"];
+                cell.titleDesLabel.text = @"投资计算器";
+                cell.valueLabel.text = @"一键计算收益";
+                cell.signView.hidden = YES;
+                cell.sign2View.hidden = YES;
+                cell.view2.backgroundColor = UIColorWithRGB(0xebebee);
+            }
+            else {
+                cell.iconImageView.image = [UIImage imageNamed:@"uesr_icon_assets"];
+                cell.icon2ImageView.image = [UIImage imageNamed:@"uesr_icon_calculator"];
+                cell.titleDesLabel.text = @"资产证明";
+                cell.valueLabel.text = @"一句话描述";
+                cell.title2DesLabel.text = @"投资计算器";
+                cell.value2Label.text = @"一键计算收益";
+                cell.signView.hidden = YES;
+                cell.sign2View.hidden = YES;
+                cell.view2.backgroundColor = [UIColor clearColor];
+            }
         }
         return cell;
     }

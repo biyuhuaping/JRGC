@@ -277,7 +277,7 @@
     [self calculateTypeSelected:nil];
     switch (indexPath.row) {
         case 0: {
-            self.investTermLabel.text = @"投资期限(月)";
+            self.investTermLabel.text = @"投资期限(季)";
             if (self.calculateTypeSign != CalulateTypeEqualRepaymentBySeason) {
                 self.calculateTypeSign = CalulateTypeEqualRepaymentBySeason;
                 [self.calculateShowview resetData];
