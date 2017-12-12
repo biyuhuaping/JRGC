@@ -151,6 +151,7 @@
 		741EB1871D596EF2006C885F /* UCFTableCellOne.xib in Resources */ = {isa = PBXBuildFile; fileRef = 741EB1851D596EF2006C885F /* UCFTableCellOne.xib */; };
 		741EB18A1D59829E006C885F /* UCFTableCellTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = 741EB1891D59829E006C885F /* UCFTableCellTwo.m */; };
 		7420DF061B159E81003CAE38 /* UCFMoreCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7420DF051B159E81003CAE38 /* UCFMoreCell.m */; };
+		7421DFCF1FDFC69000E758C1 /* UCFInputTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 7421DFCE1FDFC69000E758C1 /* UCFInputTextField.m */; };
 		7422DF2F1B6218B400DCFA40 /* NSDate+IsBelongToToday.m in Sources */ = {isa = PBXBuildFile; fileRef = 7422DF2E1B6218B400DCFA40 /* NSDate+IsBelongToToday.m */; };
 		74270C8C1EC58F6800F9419B /* UCFCycleImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74270C5C1EC58F6800F9419B /* UCFCycleImageViewController.m */; };
 		74270C8D1EC58F6800F9419B /* UCFCycleImageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74270C5D1EC58F6800F9419B /* UCFCycleImageViewController.xib */; };
@@ -1322,6 +1323,8 @@
 		741EB1891D59829E006C885F /* UCFTableCellTwo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFTableCellTwo.m; sourceTree = "<group>"; };
 		7420DF041B159E81003CAE38 /* UCFMoreCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFMoreCell.h; sourceTree = "<group>"; };
 		7420DF051B159E81003CAE38 /* UCFMoreCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFMoreCell.m; sourceTree = "<group>"; };
+		7421DFCD1FDFC69000E758C1 /* UCFInputTextField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFInputTextField.h; sourceTree = "<group>"; };
+		7421DFCE1FDFC69000E758C1 /* UCFInputTextField.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFInputTextField.m; sourceTree = "<group>"; };
 		7422DF2D1B6218B400DCFA40 /* NSDate+IsBelongToToday.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+IsBelongToToday.h"; sourceTree = "<group>"; };
 		7422DF2E1B6218B400DCFA40 /* NSDate+IsBelongToToday.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+IsBelongToToday.m"; sourceTree = "<group>"; };
 		74270C5B1EC58F6800F9419B /* UCFCycleImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFCycleImageViewController.h; sourceTree = "<group>"; };
@@ -4638,6 +4641,8 @@
 				74ED02061FDA84E200CAFED3 /* UCFCalculateResultView.h */,
 				74ED02071FDA84E200CAFED3 /* UCFCalculateResultView.m */,
 				74ED02091FDA84F000CAFED3 /* UCFCalculateResultView.xib */,
+				7421DFCD1FDFC69000E758C1 /* UCFInputTextField.h */,
+				7421DFCE1FDFC69000E758C1 /* UCFInputTextField.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -7719,6 +7724,7 @@
 				7BCE02141AC9025A0084C15C /* Common.m in Sources */,
 				7482A5911F4C0622006A9964 /* UCFGoldIncreTransListModel.m in Sources */,
 				2526ADDA1DD08CB800114D9A /* MLMOptionSelectView.m in Sources */,
+				7421DFCF1FDFC69000E758C1 /* UCFInputTextField.m in Sources */,
 				7BC789091B04555F00D50494 /* UCFXieYiViewController.m in Sources */,
 				74931A2D1B1326FE00143424 /* CoreTextUtils.m in Sources */,
 				833345721F1F82BF00A0F30D /* UCFGoldInvestmentCell.m in Sources */,
