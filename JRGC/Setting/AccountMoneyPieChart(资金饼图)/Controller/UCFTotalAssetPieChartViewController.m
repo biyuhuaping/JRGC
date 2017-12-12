@@ -17,6 +17,7 @@
 - (IBAction)gotoAssetProofVC:(UIButton *)sender;
 @property (strong, nonatomic) IBOutlet UIButton *assetProofBtn;
 @property (nonatomic,strong)NSArray *dataArray;
+@property (nonatomic,strong)NSString * totalAssets;
 @end
 
 @implementation UCFTotalAssetPieChartViewController
@@ -25,6 +26,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.assetProofBtn.hidden = [UserInfoSingle sharedManager].companyAgent;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self getHeaderInfoRequest];
 }
@@ -85,17 +87,16 @@
             NSString * accountBalance = [dataDict objectSafeForKey:@"accountBalance"];
             NSString * goldAssets = [dataDict objectSafeForKey:@"goldAssets"];
             NSString * p2pAssets = [dataDict objectSafeForKey:@"p2pAssets"];
-            NSString * totalAssets = [dataDict objectSafeForKey:@"totalAssets"];
+            self.totalAssets = [dataDict objectSafeForKey:@"totalAssets"];
             NSString * uncollectedPAndD = [dataDict objectSafeForKey:@"uncollectedPAndD"];
             NSString * zxAssets = [dataDict objectSafeForKey:@"zxAssets"];
             
-            if ([totalAssets doubleValue] < 0) {
-                totalAssets = [NSString stringWithFormat:@"%.2lf",-[totalAssets doubleValue]];
-                 self.totalAssetLabel.text = [NSString stringWithFormat:@"¥-%@",[UCFToolsMehod AddComma:totalAssets]];
+            if ([self.totalAssets doubleValue] < 0) {
+                self.totalAssets = [NSString stringWithFormat:@"%.2lf",-[self.totalAssets doubleValue]];
+                 self.totalAssetLabel.text = [NSString stringWithFormat:@"¥-%@",[UCFToolsMehod AddComma:self.totalAssets]];
             }else{
-              self.totalAssetLabel.text = [NSString stringWithFormat:@"¥%@",[UCFToolsMehod AddComma:totalAssets]];
+              self.totalAssetLabel.text = [NSString stringWithFormat:@"¥%@",[UCFToolsMehod AddComma:self.totalAssets]];
             }
-            self.assetProofBtn.hidden = [totalAssets doubleValue] <= 0;
             UCFCustomPieChartModel *pieChatModel1 = [[UCFCustomPieChartModel alloc]init];
             pieChatModel1.pieChartTitle = @"按账户类型";
             pieChatModel1.pieChartDataArray = [[NSMutableArray alloc]initWithArray:@[p2pAssets,zxAssets,goldAssets]];
@@ -139,6 +140,7 @@
 - (IBAction)gotoAssetProofVC:(UIButton *)sender
 {
     UCFAccountAssetsProofViewController * assetProofVC = [[UCFAccountAssetsProofViewController alloc]initWithNibName:@"UCFAccountAssetsProofViewController" bundle:nil];
+    assetProofVC.totalAssetStr = self.totalAssets;
     [self.navigationController pushViewController:assetProofVC animated:YES];
 }
 @end
