@@ -199,6 +199,7 @@
 //    rate
 //    term
 //    NSDictionary *param = @{@"investAmt":[NSNumber numberWithDouble:[self.investAmont doubleValue]], @"payType":[NSNumber numberWithInteger:self.calculateTypeSign], @"rate":[NSNumber numberWithDouble:[self.annualInterestRate doubleValue]], @"term":[NSNumber numberWithInteger:[self.investTerm integerValue]]};
+    
     NSDictionary *param = @{@"investAmt":self.investAmont, @"payType":[NSString stringWithFormat:@"%lu", (unsigned long)self.calculateTypeSign], @"rate":self.annualInterestRate, @"term":self.investTerm};
     
     [[NetworkModule sharedNetworkModule] newPostReq:param tag:kSXTagProfitCalculator owner:self signature:YES Type:SelectAccoutDefault];
@@ -508,5 +509,10 @@
     [self checkConditionChangeStateForCalculate];
 }
 
+- (BOOL)textFieldShouldClear:(UITextField *)textField
+{
+    self.calculateButton.enabled = NO;
+    return YES;
+}
 
 @end
