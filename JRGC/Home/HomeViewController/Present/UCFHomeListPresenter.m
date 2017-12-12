@@ -130,7 +130,7 @@
         if ([model.type isEqualToString:@"6"]) {
             model.moedelType = UCFHomeListCellModelTypeGoldFixed;
         }
-        else if ([model.type isEqualToString:@"0"] && ![group.type isEqualToString:@"13"]) {
+        else if ([model.type isEqualToString:@"0"]) {
             model.moedelType = UCFHomeListCellModelTypeReserved;
         }
         else if ([group.type isEqualToString:@"13"]) {
