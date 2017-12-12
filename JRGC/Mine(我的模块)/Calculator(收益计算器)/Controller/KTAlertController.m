@@ -16,6 +16,7 @@
 #import "UCFCalculateResultView.h"
 #import "UCFProfitCalculateResult.h"
 #import "UIDic+Safe.h"
+#import "UCFInputTextField.h"
 
 #define ContentViewHeight 383
 #define CalculateResultViewHeightForHigh 138
@@ -40,9 +41,9 @@
 @property (weak, nonatomic) UIView *calculateResultView;
 @property (assign, nonatomic) BOOL calculateResultViewShow;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentViewHeight;
-@property (weak, nonatomic) IBOutlet UITextField *investAmountTextField;
-@property (weak, nonatomic) IBOutlet UITextField *annualRateTextField;
-@property (weak, nonatomic) IBOutlet UITextField *investTermTextField;
+@property (weak, nonatomic) IBOutlet UCFInputTextField *investAmountTextField;
+@property (weak, nonatomic) IBOutlet UCFInputTextField *annualRateTextField;
+@property (weak, nonatomic) IBOutlet UCFInputTextField *investTermTextField;
 @property (weak, nonatomic) IBOutlet UIImageView *calculateTypeSignImage;
 @property (weak, nonatomic) IBOutlet UILabel *investTermLabel;
 @property (weak, nonatomic) IBOutlet UIView *SegLineFirst;
