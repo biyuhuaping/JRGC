@@ -89,6 +89,17 @@
         }
         self.tipLabel1 = cell.tipLabel1;
         self.tipLabel2 = cell.tipLabel2;
+//        if ([self.totalAssetStr floatValue] <= 0.00)
+//        {
+//            cell.noPermissionLabel.hidden = NO;
+//            cell.noPermissionTipLabel.hidden = NO;
+//            cell.PermissonBtn.hidden = YES;
+//        }
+//        else{
+            cell.noPermissionLabel.hidden = YES;
+            cell.noPermissionTipLabel.hidden = YES;
+            cell.PermissonBtn.hidden = NO;
+//        }
         cell.delegate = self;
         return cell;
     }

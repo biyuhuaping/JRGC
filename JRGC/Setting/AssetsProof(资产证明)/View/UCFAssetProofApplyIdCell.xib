@@ -89,7 +89,7 @@
                                 <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入证件号码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="b4K-Fv-Iao">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入证件号码" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="b4K-Fv-Iao">
                                 <rect key="frame" x="145" y="14" width="160" height="16"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="160" id="5Mr-0a-MOK"/>
@@ -162,7 +162,7 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="626-cb-00F">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="0.5"/>
-                                <color key="backgroundColor" red="0.89019607840000003" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.93725490196078431" green="0.94117647058823528" blue="0.95294117647058818" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="0.5" id="nBw-tg-jte"/>
                                 </constraints>
@@ -258,7 +258,7 @@
                 <outlet property="messageCodeTextField" destination="GuN-f7-QvV" id="zET-bn-sPk"/>
                 <outlet property="mobileNumberLabel" destination="Kzk-hH-ytu" id="s5a-z9-AI1"/>
             </connections>
-            <point key="canvasLocation" x="-319" y="-136"/>
+            <point key="canvasLocation" x="-355" y="-208"/>
         </tableViewCell>
     </objects>
 </document>

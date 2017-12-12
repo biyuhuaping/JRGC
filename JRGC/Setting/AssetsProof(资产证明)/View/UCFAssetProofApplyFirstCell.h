@@ -19,6 +19,9 @@
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *tipLabel2Height;
 @property (strong, nonatomic) IBOutlet UILabel *tipLabel1;
 @property (strong, nonatomic) IBOutlet UILabel *tipLabel2;
+@property (weak, nonatomic) IBOutlet UILabel *noPermissionLabel;
+@property (weak, nonatomic) IBOutlet UIButton *PermissonBtn;
+@property (weak, nonatomic) IBOutlet UILabel *noPermissionTipLabel;
 @property (nonatomic,assign) id<UCFAssetProofApplyFirstCellDelegate> delegate;
 @end
 @interface UCFAssetProofApplySecondCell : UITableViewCell
