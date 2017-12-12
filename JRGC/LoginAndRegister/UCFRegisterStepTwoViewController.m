@@ -344,7 +344,7 @@
 
 #pragma mark - 同盾
 - (void) didReceiveDeviceBlackBox: (NSString *) blackBox {
-    NSString *wanip = [[NSUserDefaults standardUserDefaults] valueForKey:@"curWanIp"];
+//    NSString *wanip = [[NSUserDefaults standardUserDefaults] valueForKey:@"curWanIp"];
     NSString *blockId = blackBox;
     NSMutableDictionary *parDic = [NSMutableDictionary dictionary];
     //[parDic setValue:_registerTwoView.getUserName forKey:@"username"];
@@ -355,7 +355,7 @@
     [parDic setValue:_registerTwoView.getRefereesCode forKey:@"factoryCode"];
     [parDic setValue:@"1" forKey:@"sourceType"];
     [parDic setValue:blockId forKey:@"token_id"];
-    [parDic setValue:wanip forKey:@"ip"];
+//    [parDic setValue:wanip forKey:@"ip"];
     [parDic setValue:_registerTokenStr forKey:@"registTicket"];
     [parDic setValue:@"1" forKey:@"userId"];
     if (![QDCODE isEqualToString:@""]) {

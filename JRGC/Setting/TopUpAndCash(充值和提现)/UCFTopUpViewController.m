@@ -466,7 +466,7 @@
 - (void) didReceiveDeviceBlackBox: (NSString *) blackBox {
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    NSString *wanip = [[NSUserDefaults standardUserDefaults] valueForKey:@"curWanIp"];
+//    NSString *wanip = [[NSUserDefaults standardUserDefaults] valueForKey:@"curWanIp"];
     NSString *inputMoney = [Common deleteStrHeadAndTailSpace:_topUpLabelTextField.text];
     NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
     [paraDict setValue:inputMoney forKey:@"payAmount"];
@@ -475,7 +475,7 @@
     [paraDict setValue:[[NSUserDefaults standardUserDefaults] valueForKey:UUID] forKey:@"userId"];
     [paraDict setValue:self.smsSerialNo forKey:@"validateNo"];
     [paraDict setValue:blackBox forKey:@"token_id"];
-    [paraDict setValue:wanip forKey:@"ip"];
+//    [paraDict setValue:wanip forKey:@"ip"];
     [paraDict setValue:_RechargeTokenStr forKey:@"rechargeToken"];
     [[NetworkModule sharedNetworkModule] newPostReq:paraDict tag:kSxTagHSPayMobile owner:self signature:YES Type:self.accoutType];
 }
