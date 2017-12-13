@@ -13,6 +13,7 @@
             <connections>
                 <outlet property="assetProofBtn" destination="cyF-UK-RaK" id="hM3-Xr-D4P"/>
                 <outlet property="tableView" destination="XgF-GJ-dxa" id="QGw-K4-fVh"/>
+                <outlet property="titleLabel" destination="4qF-Du-V3W" id="YKY-yz-YVP"/>
                 <outlet property="totalAssetLabel" destination="LZ2-rT-g2K" id="GEl-zA-6Gx"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -26,13 +27,13 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="85"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="总资产" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4qF-Du-V3W">
-                            <rect key="frame" x="15" y="23" width="37" height="14.5"/>
+                            <rect key="frame" x="15" y="23" width="345" height="15"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¥0.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LZ2-rT-g2K">
-                            <rect key="frame" x="15" y="39" width="55" height="24"/>
+                            <rect key="frame" x="15" y="40" width="345" height="24"/>
                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -57,17 +58,27 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
+                        <constraint firstAttribute="trailing" secondItem="LZ2-rT-g2K" secondAttribute="trailing" constant="15" id="2l2-VZ-IAn"/>
                         <constraint firstItem="cyF-UK-RaK" firstAttribute="centerY" secondItem="BmK-UB-nLG" secondAttribute="centerY" id="2y7-IY-r8c"/>
                         <constraint firstItem="4qF-Du-V3W" firstAttribute="leading" secondItem="BmK-UB-nLG" secondAttribute="leading" constant="15" id="4ns-za-3OQ"/>
                         <constraint firstAttribute="trailing" secondItem="cyF-UK-RaK" secondAttribute="trailing" constant="15" id="8Rb-6k-c8w"/>
                         <constraint firstItem="LZ2-rT-g2K" firstAttribute="leading" secondItem="BmK-UB-nLG" secondAttribute="leading" constant="15" id="HSp-EU-AFb"/>
                         <constraint firstItem="LZ2-rT-g2K" firstAttribute="top" secondItem="4qF-Du-V3W" secondAttribute="bottom" constant="2" id="K7o-4F-ZWq"/>
                         <constraint firstAttribute="height" constant="85" id="LCe-gn-mOK"/>
+                        <constraint firstAttribute="trailing" secondItem="4qF-Du-V3W" secondAttribute="trailing" constant="15" id="Nlg-Nx-gvr"/>
+                        <constraint firstItem="cyF-UK-RaK" firstAttribute="leading" secondItem="4qF-Du-V3W" secondAttribute="trailing" constant="15" id="OOK-uK-9J5"/>
                         <constraint firstAttribute="trailing" secondItem="0EW-g6-o6P" secondAttribute="trailing" constant="20" id="QYN-Lf-Kdi"/>
                         <constraint firstAttribute="bottom" secondItem="0EW-g6-o6P" secondAttribute="bottom" id="Xoy-Ph-Y26"/>
                         <constraint firstItem="0EW-g6-o6P" firstAttribute="leading" secondItem="BmK-UB-nLG" secondAttribute="leading" constant="20" id="c6Y-GL-Icp"/>
+                        <constraint firstItem="cyF-UK-RaK" firstAttribute="leading" secondItem="4qF-Du-V3W" secondAttribute="trailing" constant="15" id="ihx-9k-EP4"/>
                         <constraint firstItem="4qF-Du-V3W" firstAttribute="top" secondItem="BmK-UB-nLG" secondAttribute="top" constant="23" id="vQw-sq-kuf"/>
                     </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="OOK-uK-9J5"/>
+                            <exclude reference="ihx-9k-EP4"/>
+                        </mask>
+                    </variation>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XgF-GJ-dxa">
                     <rect key="frame" x="0.0" y="85" width="375" height="582"/>
@@ -88,7 +99,7 @@
                 <constraint firstAttribute="trailing" secondItem="XgF-GJ-dxa" secondAttribute="trailing" id="ndW-6A-rei"/>
                 <constraint firstItem="BmK-UB-nLG" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="ydy-Tf-Wb8"/>
             </constraints>
-            <point key="canvasLocation" x="-229" y="-113"/>
+            <point key="canvasLocation" x="-229.5" y="-113.5"/>
         </view>
     </objects>
 </document>

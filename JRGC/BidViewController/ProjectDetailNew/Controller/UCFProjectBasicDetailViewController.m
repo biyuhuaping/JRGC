@@ -75,7 +75,7 @@
     baseTitleLabel.text = @"基础详情";
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _isOpenWebViewOpen = NO;
-    _sectionViewHight = 137;
+    _sectionViewHight = 194;
     _isP2P = self.accoutType == SelectAccoutTypeP2P ;
    if(_detailType == PROJECTDETAILTYPENORMAL) //普通标
     {
@@ -370,13 +370,10 @@
         {//
             return [self createTableViewHeaderView:@"审核记录"];;
         } else {
-            if (section != 0) {
+            if (section != 0)
+            {
                 UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 10)];
                 headView.backgroundColor = UIColorWithRGB(0xebebee);
-                //[self viewAddLine:headView Up:YES];
-                UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, headView.frame.size.height - 0.5, ScreenWidth, 0.5)];
-                lineView.backgroundColor = UIColorWithRGB(0xd8d8d8);
-                [headView addSubview:lineView];
                 return headView;
             }
             return nil;
@@ -408,19 +405,19 @@
 }
 -(UIView *)createTableViewHeaderView:(NSString *)titleStr
 {
-    UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 50)];
+    UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 42)];
     headView.backgroundColor = UIColorWithRGB(0xebebee);
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 10, ScreenWidth, 40)];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 10, ScreenWidth, 32)];
     view.backgroundColor = UIColorWithRGB(0xf7f7f7);
-    UILabel *labelTitle = [[UILabel alloc] initWithFrame:CGRectMake(25/2.0, 12, ScreenWidth/2, 17)];
+    UILabel *labelTitle = [[UILabel alloc] initWithFrame:CGRectMake(15, 9, ScreenWidth/2, 16)];
     labelTitle.text = titleStr;
     labelTitle.textColor = UIColorWithRGB(0x333333);
     labelTitle.backgroundColor = [UIColor clearColor];
-    labelTitle.font = [UIFont systemFontOfSize:14];
+    labelTitle.font = [UIFont systemFontOfSize:13];
     [view addSubview:labelTitle];
     [headView addSubview:view];
 //    [self viewAddLine:headView Up:YES];
-    [self viewAddLine:headView Up:NO];
+//    [self viewAddLine:headView Up:NO];
 //    [self viewAddLine:view Up:YES];
     return headView;
 }
@@ -448,9 +445,9 @@
         }
         else if(_isHideBorrowerInformation)
         {
-                return section == 3 ? 10 :50;
+                return section == 3 ? 10 :42;
             }else{
-                return section == 4 ? 10 :50;
+                return section == 4 ? 10 :42;
             }
     }
     else if(_detailType == PROJECTDETAILTYPERIGHTINTEREST)
@@ -460,7 +457,7 @@
         }else if(section == 0) {
             return 0;
         }
-        return 50;
+        return 42;
     }
     return 0;
 }
@@ -496,7 +493,7 @@
            return 44;
        }
        else if([indexPath section] == 0 ) {
-           return _webViewHight;
+           return _sectionViewHight;
        } else if([indexPath section] == 3 && !_isHideBorrowerInformation) {
            if ([indexPath row] == 0 || [indexPath row] == [_infoDetailArray count] - 1) {
                return 27 + 8;
@@ -579,7 +576,48 @@
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    if ([indexPath section] == 1) {//合同列表
+    if ([indexPath section] == 0) {//详情列表
+        NSString *cellindifier = @"twoSectionCell";
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellindifier];
+        if (!cell) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellindifier];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            [cell.contentView addSubview:_webView];
+            
+            UIButton*button = [UIButton buttonWithType:UIButtonTypeCustom];
+            button.frame = CGRectMake(0, 0 ,ScreenWidth ,37);
+            button.tag = 14;
+            button.backgroundColor = [UIColor clearColor];
+            
+            UIImageView * imageView = [[UIImageView alloc] init];
+            imageView.image = [UIImage imageNamed:@"loading_arrow_blue.png"];
+            imageView.bounds = CGRectMake(0, 0, 12, 7);
+            
+            UILabel *placehoderLabel = [[UILabel alloc] initWithFrame:CGRectMake((ScreenWidth -  50)/2 , 15,50 ,15)];
+            placehoderLabel.font = [UIFont systemFontOfSize:12];
+            placehoderLabel.textColor = UIColorWithRGB(0x4aa1f9);
+            placehoderLabel.textAlignment = NSTextAlignmentCenter;
+            placehoderLabel.numberOfLines = 0;
+            placehoderLabel.backgroundColor = [UIColor clearColor];
+            placehoderLabel.text = @"显示更多";
+            UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 150, ScreenWidth,44)];
+            view.backgroundColor = [UIColor whiteColor];
+            view.tag = 1001;
+            imageView.center = CGPointMake( ScreenWidth/2 + 35,CGRectGetHeight(view.frame)/2);
+            [view addSubview:imageView];
+            [view addSubview:placehoderLabel];
+            [view addSubview:button];
+            [button addTarget:self action:@selector(OpenWebViewDetail) forControlEvents:UIControlEventTouchUpInside];
+            [cell.contentView addSubview:view];
+        }
+        UIView *view = (UIView*)[cell.contentView viewWithTag:1001];
+        view.hidden = _isOpenWebViewOpen;
+        cell.textLabel.text = _webViewHight == 0 ? @"加载中...." :@"";
+        cell.textLabel.textColor = UIColorWithRGB(0x999999);
+        cell.textLabel.font = [UIFont systemFontOfSize:12];
+        cell.textLabel.textAlignment = NSTextAlignmentCenter;
+        return cell;
+    }else if ([indexPath section] == 1) {//合同列表
         NSString *cellindifier = @"firstSectionCell";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellindifier];
         if (!cell) {
@@ -617,47 +655,6 @@
         lineView.hidden = indexPath.row == _firstSectionArray.count - 1;
         button.tag = 100+indexPath.row;
         [button addTarget:self action:@selector(getContractMsgDetail:) forControlEvents:UIControlEventTouchUpInside];
-        return cell;
-    } else if ([indexPath section] == 0) {//详情列表
-        NSString *cellindifier = @"twoSectionCell";
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellindifier];
-        if (!cell) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellindifier];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            [cell.contentView addSubview:_webView];
-            
-            UIButton*button = [UIButton buttonWithType:UIButtonTypeCustom];
-            button.frame = CGRectMake(0, 0 ,ScreenWidth ,37);
-            button.tag = 14;
-            button.backgroundColor = [UIColor clearColor];
-            
-            UIImageView * imageView = [[UIImageView alloc] init];
-            imageView.image = [UIImage imageNamed:@"loading_arrow_blue.png"];
-            imageView.bounds = CGRectMake(0, 0, 12, 7);
-           
-            UILabel *placehoderLabel = [[UILabel alloc] initWithFrame:CGRectMake((ScreenWidth -  50)/2 , 11,50 ,15)];
-            placehoderLabel.font = [UIFont systemFontOfSize:12];
-            placehoderLabel.textColor = UIColorWithRGB(0x4aa1f9);
-            placehoderLabel.textAlignment = NSTextAlignmentCenter;
-            placehoderLabel.numberOfLines = 0;
-            placehoderLabel.backgroundColor = [UIColor clearColor];
-            placehoderLabel.text = @"显示更多";
-            UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 100, ScreenWidth,37)];
-            view.backgroundColor = [UIColor whiteColor];
-            view.tag = 1001;
-            imageView.center = CGPointMake( ScreenWidth/2 + 35,CGRectGetHeight(view.frame)/2);
-            [view addSubview:imageView];
-            [view addSubview:placehoderLabel];
-            [view addSubview:button];
-            [button addTarget:self action:@selector(OpenWebViewDetail) forControlEvents:UIControlEventTouchUpInside];
-            [cell.contentView addSubview:view];
-        }
-        UIView *view = (UIView*)[cell.contentView viewWithTag:1001];
-        view.hidden = _isOpenWebViewOpen;
-        cell.textLabel.text = _webViewHight == 0 ? @"加载中...." :@"";
-        cell.textLabel.textColor = UIColorWithRGB(0x999999);
-        cell.textLabel.font = [UIFont systemFontOfSize:12];
-        cell.textLabel.textAlignment = NSTextAlignmentCenter;
         return cell;
     }
     
@@ -1078,7 +1075,7 @@
             weakSelf.webView.frame = CGRectMake(0,0,ScreenWidth, weakSelf.webViewHight);
             [_tableView reloadData];
         }else{
-            weakSelf.webView.frame = CGRectMake(0,0,ScreenWidth, 100);
+            weakSelf.webView.frame = CGRectMake(0,0,ScreenWidth, 150);
             [_tableView reloadData];
         }
     });
