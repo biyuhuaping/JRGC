@@ -35,6 +35,11 @@
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="qhJ-cM-Pi0" secondAttribute="height" multiplier="2:3" id="IGc-Ef-XbJ"/>
                             </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="5"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
                         </scrollView>
                         <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="YTQ-GY-ftz">
                             <rect key="frame" x="168" y="569.5" width="39" height="37"/>

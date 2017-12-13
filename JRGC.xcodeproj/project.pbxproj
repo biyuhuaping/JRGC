@@ -440,6 +440,8 @@
 		74BDA99F1F09F8780054403F /* DIYCalendarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74BDA99E1F09F8780054403F /* DIYCalendarCell.m */; };
 		74BDA9A21F0A7B990054403F /* UCFCalendarGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 74BDA9A11F0A7B990054403F /* UCFCalendarGroup.m */; };
 		74C230231F7A24310022D02B /* UCFPicADModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 74C230221F7A24310022D02B /* UCFPicADModel.m */; };
+		74C7A0D41FE10A8C00217ABB /* UCFCalculateTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74C7A0D21FE10A8C00217ABB /* UCFCalculateTypeCell.m */; };
+		74C7A0D51FE10A8C00217ABB /* UCFCalculateTypeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74C7A0D31FE10A8C00217ABB /* UCFCalculateTypeCell.xib */; };
 		74CE8B831F21B60600512B15 /* UCFAssetTipView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74CE8B821F21B60600512B15 /* UCFAssetTipView.xib */; };
 		74CE8B861F220C7500512B15 /* UCFContractModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 74CE8B851F220C7500512B15 /* UCFContractModel.m */; };
 		74D6578E1F2EFFFF00177EB7 /* UCFHomeListNo2Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74D6578C1F2EFFFF00177EB7 /* UCFHomeListNo2Cell.m */; };
@@ -1810,6 +1812,9 @@
 		74BDA9A11F0A7B990054403F /* UCFCalendarGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFCalendarGroup.m; sourceTree = "<group>"; };
 		74C230211F7A24310022D02B /* UCFPicADModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFPicADModel.h; sourceTree = "<group>"; };
 		74C230221F7A24310022D02B /* UCFPicADModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFPicADModel.m; sourceTree = "<group>"; };
+		74C7A0D11FE10A8C00217ABB /* UCFCalculateTypeCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFCalculateTypeCell.h; sourceTree = "<group>"; };
+		74C7A0D21FE10A8C00217ABB /* UCFCalculateTypeCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFCalculateTypeCell.m; sourceTree = "<group>"; };
+		74C7A0D31FE10A8C00217ABB /* UCFCalculateTypeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFCalculateTypeCell.xib; sourceTree = "<group>"; };
 		74CE8B821F21B60600512B15 /* UCFAssetTipView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFAssetTipView.xib; sourceTree = "<group>"; };
 		74CE8B841F220C7500512B15 /* UCFContractModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFContractModel.h; sourceTree = "<group>"; };
 		74CE8B851F220C7500512B15 /* UCFContractModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFContractModel.m; sourceTree = "<group>"; };
@@ -4643,6 +4648,9 @@
 				74ED02091FDA84F000CAFED3 /* UCFCalculateResultView.xib */,
 				7421DFCD1FDFC69000E758C1 /* UCFInputTextField.h */,
 				7421DFCE1FDFC69000E758C1 /* UCFInputTextField.m */,
+				74C7A0D11FE10A8C00217ABB /* UCFCalculateTypeCell.h */,
+				74C7A0D21FE10A8C00217ABB /* UCFCalculateTypeCell.m */,
+				74C7A0D31FE10A8C00217ABB /* UCFCalculateTypeCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -7210,6 +7218,7 @@
 				744EB7F91EE7E858003C57C4 /* UCFMicroMoneyViewController.xib in Resources */,
 				840A79441C2A7C160059A946 /* UCFMessageCenterViewController.xib in Resources */,
 				83DD084D1FB971C600B0688F /* UCFDrawGoldRechangAlertView.xib in Resources */,
+				74C7A0D51FE10A8C00217ABB /* UCFCalculateTypeCell.xib in Resources */,
 				74270D521EC5A00400F9419B /* UCFInvitationRewardHeaderView.xib in Resources */,
 				E37086B61D61A6CD0041D293 /* UCFHuiShangChooseBankViewController.xib in Resources */,
 				74067A461F5038C800747888 /* UCFAveragePriceDetailView.xib in Resources */,
@@ -7661,6 +7670,7 @@
 				745B8A561FB5ADC7007BFF05 /* UCFExtractGoldDetailController.m in Sources */,
 				A851F34E1F132D2C003DE8B8 /* UCFGoldTransCell.m in Sources */,
 				74A0AF111EC341DD009E5A57 /* ZZCircleProgress.m in Sources */,
+				74C7A0D41FE10A8C00217ABB /* UCFCalculateTypeCell.m in Sources */,
 				EDEC8BFA1CB3BA6300815228 /* WPAttributedStyleAction.m in Sources */,
 				749D6C931F2840A100AAD0C4 /* UCFCashTipView.m in Sources */,
 				A8E02DAD1F0DDC5000FC2260 /* GoldAccountFirstCell.m in Sources */,
