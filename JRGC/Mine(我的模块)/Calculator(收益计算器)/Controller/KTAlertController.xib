@@ -14,11 +14,13 @@
                 <outlet property="SegLineFirst" destination="WTQ-ak-5WI" id="JPm-yx-iuo"/>
                 <outlet property="SegLineThird" destination="O1c-OK-hjt" id="9L5-0b-KUM"/>
                 <outlet property="annualRateTextField" destination="cMg-Ii-9th" id="aAE-yB-s5f"/>
+                <outlet property="annualRateTitleLabel" destination="mpC-T7-txP" id="Qa0-Kh-6Y2"/>
                 <outlet property="backView" destination="xUe-ki-785" id="hM7-j0-h8k"/>
                 <outlet property="calculateButton" destination="NcM-Si-p33" id="BfD-ur-Pcp"/>
                 <outlet property="calculateTableHeight" destination="Vb7-62-4Mw" id="tiG-sw-YdJ"/>
                 <outlet property="calculateType" destination="bXg-r4-X6r" id="5oC-Jl-0h6"/>
                 <outlet property="calculateTypeSignImage" destination="4fQ-Gi-L42" id="0V0-GW-TMq"/>
+                <outlet property="calculatorTitleLabel" destination="XGI-ct-UH7" id="p1K-93-k2d"/>
                 <outlet property="calculatorView" destination="p1m-bc-205" id="WUU-Qo-YxB"/>
                 <outlet property="calulateTypeSelected" destination="IxP-BM-0GZ" id="fth-bw-vAI"/>
                 <outlet property="cancelButton" destination="FZj-Vf-KlL" id="urQ-dS-yJI"/>
@@ -27,6 +29,8 @@
                 <outlet property="investAmountTextField" destination="bA6-U6-piy" id="14u-Cq-QRA"/>
                 <outlet property="investTermLabel" destination="sTq-TT-rTk" id="b6T-GD-e4i"/>
                 <outlet property="investTermTextField" destination="IIo-dm-tzv" id="lUn-Id-09K"/>
+                <outlet property="investTitleLabel" destination="DrB-a2-l81" id="Yaa-BT-bHb"/>
+                <outlet property="repayModelTitleLabel" destination="hhY-RT-grk" id="Kf0-nZ-46a"/>
                 <outlet property="segLineFourth" destination="lay-H2-w6F" id="sMw-H4-ZgA"/>
                 <outlet property="segLineSecond" destination="61c-YG-BMY" id="bUb-vQ-DM3"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -63,28 +67,28 @@
                                     <rect key="frame" x="25" y="88" width="275" height="1"/>
                                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="1" id="P8O-uR-JwD"/>
+                                        <constraint firstAttribute="height" constant="0.5" id="P8O-uR-JwD"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="61c-YG-BMY">
-                                    <rect key="frame" x="25" y="145" width="275" height="1"/>
+                                    <rect key="frame" x="25" y="145" width="275" height="0.0"/>
                                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="1" id="aP2-3j-zJP"/>
+                                        <constraint firstAttribute="height" constant="0.5" id="aP2-3j-zJP"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O1c-OK-hjt">
                                     <rect key="frame" x="25" y="202" width="275" height="1"/>
                                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="1" id="n3S-Ut-qKK"/>
+                                        <constraint firstAttribute="height" constant="0.5" id="n3S-Ut-qKK"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lay-H2-w6F">
                                     <rect key="frame" x="25" y="260" width="275" height="1"/>
                                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="1" id="m97-gl-nPK"/>
+                                        <constraint firstAttribute="height" constant="0.5" id="m97-gl-nPK"/>
                                     </constraints>
                                 </view>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NcM-Si-p33">
@@ -102,10 +106,10 @@
                                         <action selector="calculate:" destination="-1" eventType="touchUpInside" id="x56-eK-vgc"/>
                                     </connections>
                                 </button>
-                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入投资金额" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="bA6-U6-piy" customClass="UCFInputTextField">
-                                    <rect key="frame" x="25" y="64.5" width="275" height="21.5"/>
+                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入投资金额" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="bA6-U6-piy" customClass="UCFInputTextField">
+                                    <rect key="frame" x="25" y="65.5" width="275" height="22.5"/>
                                     <nil key="textColor"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                     <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                     <connections>
                                         <outlet property="delegate" destination="-1" id="nmj-Vf-tR5"/>
@@ -117,8 +121,8 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入年化利率" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cMg-Ii-9th" customClass="UCFInputTextField">
-                                    <rect key="frame" x="25" y="118.5" width="275" height="24.5"/>
+                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入年化利率" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="cMg-Ii-9th" customClass="UCFInputTextField">
+                                    <rect key="frame" x="25" y="119.5" width="275" height="25.5"/>
                                     <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
@@ -127,17 +131,17 @@
                                     </connections>
                                 </textField>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="还款方式" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hhY-RT-grk">
-                                    <rect key="frame" x="25" y="161" width="49.5" height="14.5"/>
+                                    <rect key="frame" x="25" y="160" width="49.5" height="14.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IxP-BM-0GZ">
-                                    <rect key="frame" x="25" y="177" width="275" height="23"/>
+                                    <rect key="frame" x="25" y="178" width="275" height="23"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="23" id="QG8-Kv-Znz"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <state key="normal" title="请选择还款方式">
                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
@@ -152,7 +156,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入投资期限" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IIo-dm-tzv" customClass="UCFInputTextField">
-                                    <rect key="frame" x="25" y="232.5" width="275" height="25.5"/>
+                                    <rect key="frame" x="25" y="233.5" width="275" height="26.5"/>
                                     <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
@@ -161,7 +165,7 @@
                                     </connections>
                                 </textField>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="list_icon_downarrow" translatesAutoresizingMaskIntoConstraints="NO" id="4fQ-Gi-L42">
-                                    <rect key="frame" x="278" y="180.5" width="22" height="16"/>
+                                    <rect key="frame" x="278" y="181.5" width="22" height="16"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="16" id="9q6-Yf-68n"/>
                                         <constraint firstAttribute="width" constant="22" id="hI4-Bh-wNc"/>
@@ -172,25 +176,25 @@
                             <constraints>
                                 <constraint firstItem="hhY-RT-grk" firstAttribute="top" secondItem="61c-YG-BMY" secondAttribute="bottom" constant="15" id="0pi-0k-BpP"/>
                                 <constraint firstItem="bA6-U6-piy" firstAttribute="leading" secondItem="p1m-bc-205" secondAttribute="leading" constant="25" id="15q-Il-vkh"/>
-                                <constraint firstItem="O1c-OK-hjt" firstAttribute="top" secondItem="IxP-BM-0GZ" secondAttribute="bottom" constant="2" id="2yL-2R-gzy"/>
+                                <constraint firstItem="O1c-OK-hjt" firstAttribute="top" secondItem="IxP-BM-0GZ" secondAttribute="bottom" constant="1" id="2yL-2R-gzy"/>
                                 <constraint firstAttribute="trailing" secondItem="O1c-OK-hjt" secondAttribute="trailing" constant="25" id="4j7-Zw-Mfo"/>
                                 <constraint firstAttribute="bottom" secondItem="NcM-Si-p33" secondAttribute="bottom" constant="20" id="5aB-Mf-pkn"/>
                                 <constraint firstItem="61c-YG-BMY" firstAttribute="top" secondItem="p1m-bc-205" secondAttribute="top" constant="145" id="C1f-Da-eQI"/>
                                 <constraint firstItem="O1c-OK-hjt" firstAttribute="leading" secondItem="p1m-bc-205" secondAttribute="leading" constant="25" id="Dlk-zf-Y5z"/>
                                 <constraint firstItem="61c-YG-BMY" firstAttribute="leading" secondItem="p1m-bc-205" secondAttribute="leading" constant="25" id="EXe-n7-HBf"/>
-                                <constraint firstItem="61c-YG-BMY" firstAttribute="top" secondItem="cMg-Ii-9th" secondAttribute="bottom" constant="2" id="EYy-n7-fj0"/>
+                                <constraint firstItem="61c-YG-BMY" firstAttribute="top" secondItem="cMg-Ii-9th" secondAttribute="bottom" id="EYy-n7-fj0"/>
                                 <constraint firstItem="mpC-T7-txP" firstAttribute="leading" secondItem="p1m-bc-205" secondAttribute="leading" constant="25" id="HLf-Kf-f0N"/>
                                 <constraint firstItem="sTq-TT-rTk" firstAttribute="top" secondItem="O1c-OK-hjt" secondAttribute="bottom" constant="15" id="IDn-OM-nwO"/>
                                 <constraint firstItem="WTQ-ak-5WI" firstAttribute="leading" secondItem="p1m-bc-205" secondAttribute="leading" constant="25" id="JmF-E1-bqd"/>
                                 <constraint firstAttribute="trailing" secondItem="bA6-U6-piy" secondAttribute="trailing" constant="25" id="K0l-WB-vii"/>
                                 <constraint firstAttribute="trailing" secondItem="IxP-BM-0GZ" secondAttribute="trailing" constant="25" id="KsY-zg-MZf"/>
-                                <constraint firstItem="IIo-dm-tzv" firstAttribute="top" secondItem="sTq-TT-rTk" secondAttribute="bottom" id="Lt5-ei-DeY"/>
+                                <constraint firstItem="IIo-dm-tzv" firstAttribute="top" secondItem="sTq-TT-rTk" secondAttribute="bottom" constant="1" id="Lt5-ei-DeY"/>
                                 <constraint firstItem="sTq-TT-rTk" firstAttribute="leading" secondItem="p1m-bc-205" secondAttribute="leading" constant="25" id="ND7-3E-l1Y"/>
                                 <constraint firstItem="XGI-ct-UH7" firstAttribute="centerX" secondItem="p1m-bc-205" secondAttribute="centerX" id="NOB-gQ-6gO"/>
                                 <constraint firstItem="WTQ-ak-5WI" firstAttribute="top" secondItem="p1m-bc-205" secondAttribute="top" constant="88" id="PcN-1D-7TX"/>
-                                <constraint firstItem="lay-H2-w6F" firstAttribute="top" secondItem="IIo-dm-tzv" secondAttribute="bottom" constant="2" id="QdG-5z-i4q"/>
+                                <constraint firstItem="lay-H2-w6F" firstAttribute="top" secondItem="IIo-dm-tzv" secondAttribute="bottom" id="QdG-5z-i4q"/>
                                 <constraint firstItem="lay-H2-w6F" firstAttribute="top" secondItem="p1m-bc-205" secondAttribute="top" constant="260" id="Syh-90-xdt"/>
-                                <constraint firstItem="WTQ-ak-5WI" firstAttribute="top" secondItem="bA6-U6-piy" secondAttribute="bottom" constant="2" id="Tfk-9p-DwC"/>
+                                <constraint firstItem="WTQ-ak-5WI" firstAttribute="top" secondItem="bA6-U6-piy" secondAttribute="bottom" id="Tfk-9p-DwC"/>
                                 <constraint firstItem="mpC-T7-txP" firstAttribute="top" secondItem="WTQ-ak-5WI" secondAttribute="bottom" constant="15" id="URV-Oz-K9i"/>
                                 <constraint firstItem="cMg-Ii-9th" firstAttribute="leading" secondItem="p1m-bc-205" secondAttribute="leading" constant="25" id="Wn0-jO-3cu"/>
                                 <constraint firstAttribute="trailing" secondItem="lay-H2-w6F" secondAttribute="trailing" constant="25" id="X49-UB-g5s"/>
@@ -205,12 +209,12 @@
                                 <constraint firstItem="NcM-Si-p33" firstAttribute="top" secondItem="lay-H2-w6F" secondAttribute="bottom" constant="20" id="hOE-mS-xvW"/>
                                 <constraint firstItem="XGI-ct-UH7" firstAttribute="top" secondItem="p1m-bc-205" secondAttribute="top" constant="15" id="luq-gV-6TW"/>
                                 <constraint firstAttribute="trailing" secondItem="IIo-dm-tzv" secondAttribute="trailing" constant="25" id="mVa-zy-c1m"/>
-                                <constraint firstItem="cMg-Ii-9th" firstAttribute="top" secondItem="mpC-T7-txP" secondAttribute="bottom" id="rkt-gF-fxy"/>
+                                <constraint firstItem="cMg-Ii-9th" firstAttribute="top" secondItem="mpC-T7-txP" secondAttribute="bottom" constant="1" id="rkt-gF-fxy"/>
                                 <constraint firstItem="hhY-RT-grk" firstAttribute="leading" secondItem="p1m-bc-205" secondAttribute="leading" constant="25" id="srn-Nc-okr"/>
                                 <constraint firstItem="IxP-BM-0GZ" firstAttribute="leading" secondItem="p1m-bc-205" secondAttribute="leading" constant="25" id="tuQ-gx-Aap"/>
                                 <constraint firstItem="lay-H2-w6F" firstAttribute="leading" secondItem="p1m-bc-205" secondAttribute="leading" constant="25" id="u3Q-Lq-K5z"/>
                                 <constraint firstItem="O1c-OK-hjt" firstAttribute="top" secondItem="p1m-bc-205" secondAttribute="top" constant="202" id="vxI-oZ-2K9"/>
-                                <constraint firstItem="bA6-U6-piy" firstAttribute="top" secondItem="DrB-a2-l81" secondAttribute="bottom" id="wj8-Af-reA"/>
+                                <constraint firstItem="bA6-U6-piy" firstAttribute="top" secondItem="DrB-a2-l81" secondAttribute="bottom" constant="1" id="wj8-Af-reA"/>
                                 <constraint firstItem="IIo-dm-tzv" firstAttribute="leading" secondItem="p1m-bc-205" secondAttribute="leading" constant="25" id="yhm-KX-Hcv"/>
                             </constraints>
                             <userDefinedRuntimeAttributes>
@@ -220,7 +224,7 @@
                                 <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                             </userDefinedRuntimeAttributes>
                         </view>
-                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bXg-r4-X6r">
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bXg-r4-X6r">
                             <rect key="frame" x="25" y="202.5" width="275" height="0.0"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
@@ -266,7 +270,7 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="p1m-bc-205" firstAttribute="top" secondItem="wqf-X4-gk5" secondAttribute="top" id="0O3-f5-9DE"/>
-                        <constraint firstItem="bXg-r4-X6r" firstAttribute="top" secondItem="O1c-OK-hjt" secondAttribute="bottom" id="ARg-bR-bZu"/>
+                        <constraint firstItem="bXg-r4-X6r" firstAttribute="top" secondItem="O1c-OK-hjt" secondAttribute="bottom" constant="0.5" id="ARg-bR-bZu"/>
                         <constraint firstItem="bXg-r4-X6r" firstAttribute="leading" secondItem="wqf-X4-gk5" secondAttribute="leading" constant="25" id="PPy-yl-SUs"/>
                         <constraint firstItem="p1m-bc-205" firstAttribute="leading" secondItem="wqf-X4-gk5" secondAttribute="leading" id="QDr-rw-Ovg"/>
                         <constraint firstAttribute="trailing" secondItem="iZT-RM-mDe" secondAttribute="trailing" id="ace-yD-8Na"/>

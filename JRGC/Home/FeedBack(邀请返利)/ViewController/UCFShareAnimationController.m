@@ -16,7 +16,7 @@
     UIViewController *toVC = (UCFSharePictureViewController *)[transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
     UIViewController *fromVC = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
     if (toVC.isBeingPresented) {
-        return 0.3;
+        return 0.7;
     }
     else if (fromVC.isBeingDismissed) {
         return 0.1;
@@ -43,7 +43,7 @@
 //        toVC.contentView.transform = CGAffineTransformScale(oldTransform, 0.3, 0.3);
 //        toVC.contentView.center = containerView.center;
         [UIView animateWithDuration:0.0 animations:^{
-            toVC.backView.alpha = 0.3;
+            toVC.backView.alpha = 0.7;
 //            toVC.contentView.transform = oldTransform;
         } completion:^(BOOL finished) {
             [transitionContext completeTransition:![transitionContext transitionWasCancelled]];

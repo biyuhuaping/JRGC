@@ -349,6 +349,7 @@
             cell = (UCFMineFuncSecCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFMineFuncSecCell" owner:self options:nil] lastObject];
             cell.delegate = self;
             cell.tableview = tableView;
+            cell.view2.hidden = YES;
         }
         cell.indexPath = indexPath;
         if (indexPath.row == 0) {
