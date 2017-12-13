@@ -182,15 +182,14 @@
             _timer = [HWWeakTimer scheduledTimerWithTimeInterval:(1.0) target:self selector:@selector(updateLabel) userInfo:nil repeats:YES];
             _counter = 59;
             
-//            _customLabel1.text = [NSString stringWithFormat:@"已向手机%@发送短信验证码，若收不到，请点击这里获取语音验证码。",[UserInfoSingle sharedManager].mobile];
-//            [_customLabel1 setFontColor:UIColorWithRGB(0x4aa1f9) string:@"点击这里"];
-//            _customLabel1.hidden = NO;
-//            _customLabel1.userInteractionEnabled = YES;
-//            if ([self.currentMSGRoute isEqualToString:@"VMS"]) {
-//                [AuxiliaryFunc showToastMessage:@"系统正在准备外呼，请保持手机信号畅通" withView:self.view];
-//            } else {
-//
-//            }
+            NSString   *isInThreeNum = [[dic objectSafeDictionaryForKey:@"data"] objectSafeForKey:@"surplus"];
+            if ([isInThreeNum intValue] <= 3){//验证码次数剩下最后三次
+                NSString *messageStr = @"";
+                UIAlertView *alerView = [[UIAlertView alloc]initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                [alerView show];
+            }else{
+                [MBProgressHUD displayHudError:@"已发送，请等待接收，60秒后可再次获取。"];
+            }
         }else {
 //            _isSendVoiceMessage = NO;
 //            _customLabel1.userInteractionEnabled = YES;

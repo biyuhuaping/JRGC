@@ -9,5 +9,5 @@
 #import "UCFBaseViewController.h"
 
 @interface UCFAccountAssetsProofViewController : UCFBaseViewController
-
+@property (nonatomic,strong) NSString *totalAssetStr;
 @end

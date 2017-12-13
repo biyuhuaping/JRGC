@@ -28,7 +28,8 @@
     [super viewDidLoad];
     baseTitleLabel.text = @"资产证明";
     [self addLeftButton];
-    self.tableView.contentInset = UIEdgeInsetsMake(10, 0, 0, 0);
+    self.totalAssetStr = [[self.totalAssetStr stringByReplacingOccurrencesOfString:@"," withString:@""] stringByReplacingOccurrencesOfString:@"¥" withString:@""];
+    self.tableView.contentInset = UIEdgeInsetsMake(10, 0, 10, 0);
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.dataArray = [NSMutableArray arrayWithCapacity:0];
     [self assetProofListHttpRequset];
@@ -89,6 +90,18 @@
         }
         self.tipLabel1 = cell.tipLabel1;
         self.tipLabel2 = cell.tipLabel2;
+        if ([self.totalAssetStr floatValue] <= 0.00)
+        {
+            cell.noPermissionLabel.hidden = NO;
+            cell.noPermissionTipLabel.hidden = NO;
+            cell.PermissonBtn.hidden = YES;
+        }
+        else
+        {
+            cell.noPermissionLabel.hidden = YES;
+            cell.noPermissionTipLabel.hidden = YES;
+            cell.PermissonBtn.hidden = NO;
+        }
         cell.delegate = self;
         return cell;
     }
