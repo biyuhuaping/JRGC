@@ -30,6 +30,7 @@
 @property (strong, nonatomic) NSString *shareTitle;
 @property (strong, nonatomic) NSString *shareContent;
 @property (strong, nonatomic) NSString *shareUrl;
+@property (weak, nonatomic) IBOutlet UIImageView *baseimageView;
 
 @property (strong, nonatomic) NSString *beansCount;	//奖励工豆金额	string
 - (IBAction)gotoInvitationRecordVC:(UIControl *)sender;
@@ -44,7 +45,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tableview.contentInset = UIEdgeInsetsMake(10, 0, 10, 0);
-    
+    UIImage *bgShadowImage= [UIImage imageNamed:@"tabbar_shadow.png"];
+    self.baseimageView.image = [bgShadowImage resizableImageWithCapInsets:UIEdgeInsetsMake(2, 1, 2, 1) resizingMode:UIImageResizingModeTile];
     [self getMyInvestDataList];
     [self getAppSetting];
 }

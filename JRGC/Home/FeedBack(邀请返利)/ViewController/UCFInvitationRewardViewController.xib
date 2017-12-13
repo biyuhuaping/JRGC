@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UCFInvitationRewardViewController">
             <connections>
+                <outlet property="baseimageView" destination="0Yt-Rg-S4o" id="bCV-zk-m8p"/>
                 <outlet property="beansCountLabel" destination="PhW-Cc-SCy" id="Jvy-wf-OUI"/>
                 <outlet property="tableview" destination="Dhy-F3-MrA" id="gPx-uq-21c"/>
                 <outlet property="userRecommendLabel" destination="SRm-6c-2eP" id="Oyw-xQ-jes"/>
@@ -114,6 +115,12 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SAq-Tr-YgA">
                     <rect key="frame" x="0.0" y="618" width="375" height="49"/>
                     <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0Yt-Rg-S4o">
+                            <rect key="frame" x="0.0" y="-10" width="375" height="10"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="10" id="fVd-lQ-6er"/>
+                            </constraints>
+                        </imageView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ytW-Jb-RcK">
                             <rect key="frame" x="0.0" y="0.0" width="199" height="49"/>
                             <subviews>
@@ -195,10 +202,13 @@
                         <constraint firstItem="lU8-VL-ynN" firstAttribute="leading" secondItem="ytW-Jb-RcK" secondAttribute="trailing" id="Eph-og-O47"/>
                         <constraint firstAttribute="bottom" secondItem="lU8-VL-ynN" secondAttribute="bottom" id="HBv-7o-L0b"/>
                         <constraint firstAttribute="trailing" secondItem="lU8-VL-ynN" secondAttribute="trailing" id="Hv0-hG-qsF"/>
+                        <constraint firstAttribute="trailing" secondItem="0Yt-Rg-S4o" secondAttribute="trailing" id="IBU-6k-5jW"/>
                         <constraint firstItem="lU8-VL-ynN" firstAttribute="top" secondItem="SAq-Tr-YgA" secondAttribute="top" id="LFw-Vd-Mt3"/>
                         <constraint firstAttribute="height" constant="49" id="PBC-a8-DEZ"/>
                         <constraint firstAttribute="bottom" secondItem="ytW-Jb-RcK" secondAttribute="bottom" id="QQb-4a-kn5"/>
                         <constraint firstItem="lU8-VL-ynN" firstAttribute="leading" secondItem="ytW-Jb-RcK" secondAttribute="trailing" id="Y8F-vx-9TI"/>
+                        <constraint firstItem="0Yt-Rg-S4o" firstAttribute="top" secondItem="SAq-Tr-YgA" secondAttribute="top" constant="-10" id="iTA-a9-8ak"/>
+                        <constraint firstItem="0Yt-Rg-S4o" firstAttribute="leading" secondItem="SAq-Tr-YgA" secondAttribute="leading" id="wtS-q6-oDO"/>
                     </constraints>
                 </view>
             </subviews>

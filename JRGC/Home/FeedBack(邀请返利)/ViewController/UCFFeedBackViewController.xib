@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UCFFeedBackViewController">
             <connections>
+                <outlet property="baseImage" destination="ARG-aD-H7c" id="ADF-Uc-O98"/>
                 <outlet property="feedBackLabYCenter" destination="XpZ-x9-kMk" id="NrU-qF-eE2"/>
                 <outlet property="feedBackRegistLab" destination="Xho-2e-cTX" id="vgV-if-sZP"/>
                 <outlet property="friendLab3" destination="1qH-Wh-VrH" id="5Sf-Rl-9Jv"/>
@@ -529,8 +530,8 @@
                                                     <color key="textColor" red="0.97724676132202148" green="0.20183229446411133" blue="0.23505187034606934" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="发送链接邀请好友注册，两人同时获得奖励，奖励以网站活动详情为准" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u8T-Kd-KwJ">
-                                                    <rect key="frame" x="15" y="55" width="345" height="29"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="邀请好友注册，两人同时获得奖励，奖励以网站活动详情为准" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u8T-Kd-KwJ">
+                                                    <rect key="frame" x="15" y="55" width="345" height="14.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -618,6 +619,12 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ATa-p5-aae">
                     <rect key="frame" x="0.0" y="618" width="375" height="49"/>
                     <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ARG-aD-H7c">
+                            <rect key="frame" x="0.0" y="-10" width="375" height="10"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="10" id="Dam-R4-y2U"/>
+                            </constraints>
+                        </imageView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mvi-5J-aij">
                             <rect key="frame" x="0.0" y="0.0" width="187.5" height="49"/>
                             <subviews>
@@ -688,7 +695,9 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
+                        <constraint firstItem="ARG-aD-H7c" firstAttribute="leading" secondItem="ATa-p5-aae" secondAttribute="leading" id="1X7-hI-dAV"/>
                         <constraint firstAttribute="trailing" secondItem="yVp-y9-vA7" secondAttribute="trailing" id="47Y-pr-iHW"/>
+                        <constraint firstAttribute="trailing" secondItem="ARG-aD-H7c" secondAttribute="trailing" id="489-fb-jKA"/>
                         <constraint firstAttribute="height" constant="49" id="9Lp-Jf-mgh"/>
                         <constraint firstAttribute="bottom" secondItem="mvi-5J-aij" secondAttribute="bottom" id="M6Z-c7-GZr"/>
                         <constraint firstItem="yVp-y9-vA7" firstAttribute="leading" secondItem="mvi-5J-aij" secondAttribute="trailing" id="UcB-pf-zp4"/>
@@ -697,6 +706,7 @@
                         <constraint firstItem="mvi-5J-aij" firstAttribute="leading" secondItem="ATa-p5-aae" secondAttribute="leading" id="o4g-3U-Yh7"/>
                         <constraint firstAttribute="bottom" secondItem="yVp-y9-vA7" secondAttribute="bottom" id="oD6-Jh-JlJ"/>
                         <constraint firstItem="mvi-5J-aij" firstAttribute="width" secondItem="yVp-y9-vA7" secondAttribute="width" id="pCq-hq-MfK"/>
+                        <constraint firstItem="ARG-aD-H7c" firstAttribute="top" secondItem="ATa-p5-aae" secondAttribute="top" constant="-10" id="sjs-qp-VYy"/>
                     </constraints>
                 </view>
             </subviews>

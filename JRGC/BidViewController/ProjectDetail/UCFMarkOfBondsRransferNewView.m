@@ -1529,69 +1529,69 @@
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
-//    NSInteger tag = scrollView.tag;
-//    if (tag == 1002) {
-//        if (scrollView.contentOffset.y < -50) {
-//            [_oneScroll setContentOffset:CGPointMake(0, 0) animated:YES];
-//            [_delegate toUpView];
-//            [self removeTopSegment];
-//            //_investmentView.frame = CGRectMake(0, ScreenHeight - 67, ScreenWidth, 67);
-//            [UIView animateWithDuration:0.3 animations:^{
-//                _oneScroll.frame = CGRectMake(0, 0, ScreenWidth, BidDetailScrollViewHeight);
-//                _twoTableview.frame = CGRectMake(0, ScreenHeight, ScreenWidth, BidDetailScrollViewHeight);
-//            } completion:^(BOOL finished) {
-//                _oneScrollPull = NO;
-//                [bottomView setHidden:NO];
-//                if (_oneScroll.frame.origin.y == 0) {
-//                    [self removeTopSegment];
-//                }
-//            }];
-//        }
-//    } else if (tag == 1001) {
-//        if (scrollView.contentOffset.y > 64) {
-//            if (!_oneScrollPull) {
-//                [self addTopSegment];
-//                [_delegate toDownView];
-//                [UIView animateWithDuration:0.4 animations:^{
-//                    _oneScroll.frame = CGRectMake(0, -ScreenHeight - 64, ScreenWidth, BidDetailScrollViewHeight);
-//                    _twoTableview.frame = CGRectMake(0, 0, ScreenWidth, BidDetailScrollViewHeight);
-//                } completion:^(BOOL finished) {
-//                    _oneScrollPull = YES;
-//                    [bottomView setHidden:YES];
-//                    [self hideAllTopSegment:NO];
-//                }];
-//            }
-//        }
-//    }
-//
-//    _topLabel.text = @"下拉，回到顶部";
+    NSInteger tag = scrollView.tag;
+    if (tag == 1002) {
+        if (scrollView.contentOffset.y < -50) {
+            [_oneScroll setContentOffset:CGPointMake(0, 0) animated:YES];
+            [_delegate toUpView];
+            [self removeTopSegment];
+            //_investmentView.frame = CGRectMake(0, ScreenHeight - 67, ScreenWidth, 67);
+            [UIView animateWithDuration:0.3 animations:^{
+                _oneScroll.frame = CGRectMake(0, 0, ScreenWidth, BidDetailScrollViewHeight);
+                _twoTableview.frame = CGRectMake(0, ScreenHeight, ScreenWidth, BidDetailScrollViewHeight);
+            } completion:^(BOOL finished) {
+                _oneScrollPull = NO;
+                [bottomView setHidden:NO];
+                if (_oneScroll.frame.origin.y == 0) {
+                    [self removeTopSegment];
+                }
+            }];
+        }
+    } else if (tag == 1001) {
+        if (scrollView.contentOffset.y > 64) {
+            if (!_oneScrollPull) {
+                [self addTopSegment];
+                [_delegate toDownView];
+                [UIView animateWithDuration:0.4 animations:^{
+                    _oneScroll.frame = CGRectMake(0, -ScreenHeight - 64, ScreenWidth, BidDetailScrollViewHeight);
+                    _twoTableview.frame = CGRectMake(0, 0, ScreenWidth, BidDetailScrollViewHeight);
+                } completion:^(BOOL finished) {
+                    _oneScrollPull = YES;
+                    [bottomView setHidden:YES];
+                    [self hideAllTopSegment:NO];
+                }];
+            }
+        }
+    }
+
+    _topLabel.text = @"下拉，回到顶部";
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-//    NSInteger tag = scrollView.tag;
-//    if (tag == 1002) {
-//        if (scrollView.contentOffset.y >= 0) {
-//            [self hideAllTopSegment:NO];
-//            CGFloat sectionHeaderHeight = 44;
-//            if (scrollView.contentOffset.y<=sectionHeaderHeight&&scrollView.contentOffset.y>=0) {
-//                scrollView.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, 0, 0);
-//            } else if (scrollView.contentOffset.y>=sectionHeaderHeight) {
-//                scrollView.contentInset = UIEdgeInsetsMake(-sectionHeaderHeight, 0, 0, 0);
-//            }
-//        } else {
-//            [self hideAllTopSegment:YES];
-//        }
-//        if (scrollView.contentOffset.y < -50) {
-//            _topLabel.text = @"释放，回到顶部";
-//        }
-//    } else if (tag == 1001) {
-//        if (scrollView.contentOffset.y < 0) {
-//            scrollView.contentOffset = CGPointMake(0, 0);
-//        } else {
-//
-//        }
-//    }
+    NSInteger tag = scrollView.tag;
+    if (tag == 1002) {
+        if (scrollView.contentOffset.y >= 0) {
+            [self hideAllTopSegment:NO];
+            CGFloat sectionHeaderHeight = 44;
+            if (scrollView.contentOffset.y<=sectionHeaderHeight&&scrollView.contentOffset.y>=0) {
+                scrollView.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, 0, 0);
+            } else if (scrollView.contentOffset.y>=sectionHeaderHeight) {
+                scrollView.contentInset = UIEdgeInsetsMake(-sectionHeaderHeight, 0, 0, 0);
+            }
+        } else {
+            [self hideAllTopSegment:YES];
+        }
+        if (scrollView.contentOffset.y < -50) {
+            _topLabel.text = @"释放，回到顶部";
+        }
+    } else if (tag == 1001) {
+        if (scrollView.contentOffset.y < 0) {
+            scrollView.contentOffset = CGPointMake(0, 0);
+        } else {
+
+        }
+    }
 }
 
 - (void)bottomBtnClicked:(id)sender

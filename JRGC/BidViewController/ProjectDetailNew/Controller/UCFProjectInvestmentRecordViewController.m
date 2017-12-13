@@ -22,7 +22,7 @@
     [super viewDidLoad];
     [self addLeftButton];
    
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+//    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     if(_detailType == PROJECTDETAILTYPEBONDSRRANSFER) //普通标
     {
@@ -48,9 +48,9 @@
     headView.backgroundColor = UIColorWithRGB(0xf9f9f9);
     //[self viewAddLine:headView Up:YES];
     [self viewAddLine:headView Up:NO];
-    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, headView.frame.size.height - 0.5, ScreenWidth, 0.5)];
-    lineView.backgroundColor = UIColorWithRGB(0xeff0f3);
-    [headView addSubview:lineView];
+//    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, headView.frame.size.height - 0.5, ScreenWidth, 0.5)];
+//    lineView.backgroundColor = UIColorWithRGB(0xe3e5ea);
+//    [headView addSubview:lineView];
     
     UILabel *placehoderLabel = [[UILabel alloc] initWithFrame:CGRectMake(XPOS,9 , ScreenWidth - XPOS * 2, 12)];
     placehoderLabel.font = [UIFont boldSystemFontOfSize:12];
