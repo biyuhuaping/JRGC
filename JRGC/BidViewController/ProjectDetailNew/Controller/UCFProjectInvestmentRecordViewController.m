@@ -22,7 +22,7 @@
     [super viewDidLoad];
     [self addLeftButton];
    
-//    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     if(_detailType == PROJECTDETAILTYPEBONDSRRANSFER) //普通标
     {
@@ -149,13 +149,16 @@
             [cell.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:vfl4 options:0 metrics:metrics views:views]];
             [cell.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:vfl5 options:0 metrics:metrics views:views]];
             [cell.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:vfl6 options:0 metrics:metrics views:views]];
+            
         }
         tableView.separatorColor = UIColorWithRGB(0xe3e5ea);
         UILabel *titleLabel = (UILabel*)[cell.contentView viewWithTag:101];
         UILabel *placoHolderLabel = (UILabel*)[cell.contentView viewWithTag:102];
         UILabel *countLabel = (UILabel*)[cell.contentView viewWithTag:103];
         UIImageView *phoneImageView = (UIImageView*)[cell.contentView viewWithTag:104];
-    
+        UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(15, 52 - 0.5, ScreenWidth, 0.5)];
+        lineView.backgroundColor = UIColorWithRGB(0xe3e5ea);
+        [cell.contentView addSubview:lineView];
     
     if (_detailType == PROJECTDETAILTYPEBONDSRRANSFER) {
         NSString *titleStr = [UCFToolsMehod isNullOrNilWithString:[[[_dataDic objectForKey:@"prdOrders"] objectAtIndex:[indexPath row]]objectForKey:@"acceptName"]];
