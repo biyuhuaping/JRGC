@@ -136,24 +136,17 @@
 - (void)initOneScrollView
 {
     _oneScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, BidDetailScrollViewHeight)];
-    if (kIS_Iphone4) {
+    if (kIS_Iphone4)
+    {
         [_oneScroll setContentSize:CGSizeMake(ScreenWidth, ScreenHeight)];
     } else {
-        NSString *fixUpdate = [[_dataDic objectForKey:@"prdClaims"]objectForKey:@"fixedDate"];
-        //如果没有固定起息日
-        if ([fixUpdate isEqual:[NSNull null]] || [fixUpdate isEqualToString:@""] || !fixUpdate) {
-            [_oneScroll setContentSize:CGSizeMake(ScreenWidth, scrollViewHeight4S - 44)];
-        } else {
-            [_oneScroll setContentSize:CGSizeMake(ScreenWidth, scrollViewHeight4S)];
-        }
+        [_oneScroll setContentSize:CGSizeMake(ScreenWidth, scrollViewHeight4S)];
     }
-    //_oneScroll.bounces = NO;
     _oneScroll.delegate = self;
     _oneScroll.tag = 1001;
     _oneScroll.showsVerticalScrollIndicator = NO;
     [_oneScroll setBackgroundColor:UIColorWithRGB(0xebebee)];
-    
-    detailView = [[UCFBidNewDetailView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, BidDetailScrollViewHeight) WithProjectType:PROJECTDETAILTYPERIGHTINTEREST prdList:_prdLabelsList dataDic:_dataDic isP2P:_isP2P];
+    detailView = [[UCFBidNewDetailView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, BidDetailScrollViewHeight + 60) WithProjectType:PROJECTDETAILTYPERIGHTINTEREST prdList:_prdLabelsList dataDic:_dataDic isP2P:_isP2P];
     detailView.delegate = self;
     [self addSubview:_oneScroll];
     [_oneScroll addSubview:detailView];
@@ -1191,74 +1184,74 @@
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
-    CGFloat offsetFloat;
-    if (kIS_Iphone4) {
-        offsetFloat = 64;
-    } else {
-        offsetFloat = 94;
-    }
-    NSInteger tag = scrollView.tag;
-    if (tag == 1002) {
-        if (scrollView.contentOffset.y < -50) {
-            [_oneScroll setContentOffset:CGPointMake(0, 0) animated:YES];
-            [_delegate toUpView];
-            [self removeTopSegment];
-            //_investmentView.frame = CGRectMake(0, ScreenHeight - 67, ScreenWidth, 67);
-            [UIView animateWithDuration:0.3 animations:^{
-                _oneScroll.frame = CGRectMake(0, 0, ScreenWidth, BidDetailScrollViewHeight);
-                _twoTableview.frame = CGRectMake(0, ScreenHeight, ScreenWidth, BidDetailScrollViewHeight);
-            } completion:^(BOOL finished) {
-                [bottomView setHidden:NO];
-                _oneScrollPull = NO;
-                if (_oneScroll.frame.origin.y == 0) {
-                    [self removeTopSegment];
-                }
-            }];
-        }
-        _topLabel.text = @"下拉，回到顶部";
-    } else if (tag == 1001) {
-        if (scrollView.contentOffset.y > offsetFloat) {
-            if (!_oneScrollPull) {
-                [self addTopSegment];
-                [_delegate toDownView];
-                [UIView animateWithDuration:0.3 animations:^{
-                    _oneScroll.frame = CGRectMake(0, -ScreenHeight - 64, ScreenWidth, BidDetailScrollViewHeight);
-                    _twoTableview.frame = CGRectMake(0,0, ScreenWidth, BidDetailScrollViewHeight);
-                } completion:^(BOOL finished) {
-                    [bottomView setHidden:YES];
-                    [self hideAllTopSegment:NO];
-                    _oneScrollPull = YES;
-                }];
-            }
-        }
-    }
+//    CGFloat offsetFloat;
+//    if (kIS_Iphone4) {
+//        offsetFloat = 64;
+//    } else {
+//        offsetFloat = 94;
+//    }
+//    NSInteger tag = scrollView.tag;
+//    if (tag == 1002) {
+//        if (scrollView.contentOffset.y < -50) {
+//            [_oneScroll setContentOffset:CGPointMake(0, 0) animated:YES];
+//            [_delegate toUpView];
+//            [self removeTopSegment];
+//            //_investmentView.frame = CGRectMake(0, ScreenHeight - 67, ScreenWidth, 67);
+//            [UIView animateWithDuration:0.3 animations:^{
+//                _oneScroll.frame = CGRectMake(0, 0, ScreenWidth, BidDetailScrollViewHeight);
+//                _twoTableview.frame = CGRectMake(0, ScreenHeight, ScreenWidth, BidDetailScrollViewHeight);
+//            } completion:^(BOOL finished) {
+//                [bottomView setHidden:NO];
+//                _oneScrollPull = NO;
+//                if (_oneScroll.frame.origin.y == 0) {
+//                    [self removeTopSegment];
+//                }
+//            }];
+//        }
+//        _topLabel.text = @"下拉，回到顶部";
+//    } else if (tag == 1001) {
+//        if (scrollView.contentOffset.y > offsetFloat) {
+//            if (!_oneScrollPull) {
+//                [self addTopSegment];
+//                [_delegate toDownView];
+//                [UIView animateWithDuration:0.3 animations:^{
+//                    _oneScroll.frame = CGRectMake(0, -ScreenHeight - 64, ScreenWidth, BidDetailScrollViewHeight);
+//                    _twoTableview.frame = CGRectMake(0,0, ScreenWidth, BidDetailScrollViewHeight);
+//                } completion:^(BOOL finished) {
+//                    [bottomView setHidden:YES];
+//                    [self hideAllTopSegment:NO];
+//                    _oneScrollPull = YES;
+//                }];
+//            }
+//        }
+//    }
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    NSInteger tag = scrollView.tag;
-    if (tag == 1002) {
-        if (scrollView.contentOffset.y >= 0) {
-            [self hideAllTopSegment:NO];
-            CGFloat sectionHeaderHeight = 44;
-            if (scrollView.contentOffset.y<=sectionHeaderHeight&&scrollView.contentOffset.y>=0) {
-                scrollView.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, 0, 0);
-            } else if (scrollView.contentOffset.y>=sectionHeaderHeight) {
-                scrollView.contentInset = UIEdgeInsetsMake(-sectionHeaderHeight, 0, 0, 0);
-            }
-        } else {
-            [self hideAllTopSegment:YES];
-        }
-        if (scrollView.contentOffset.y < -50) {
-            _topLabel.text = @"释放，回到顶部";
-        }
-    } else if (tag == 1001) {
-        if (scrollView.contentOffset.y < 0) {
-            scrollView.contentOffset = CGPointMake(0, 0);
-        } else {
-
-        }
-    }
+//    NSInteger tag = scrollView.tag;
+//    if (tag == 1002) {
+//        if (scrollView.contentOffset.y >= 0) {
+//            [self hideAllTopSegment:NO];
+//            CGFloat sectionHeaderHeight = 44;
+//            if (scrollView.contentOffset.y<=sectionHeaderHeight&&scrollView.contentOffset.y>=0) {
+//                scrollView.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, 0, 0);
+//            } else if (scrollView.contentOffset.y>=sectionHeaderHeight) {
+//                scrollView.contentInset = UIEdgeInsetsMake(-sectionHeaderHeight, 0, 0, 0);
+//            }
+//        } else {
+//            [self hideAllTopSegment:YES];
+//        }
+//        if (scrollView.contentOffset.y < -50) {
+//            _topLabel.text = @"释放，回到顶部";
+//        }
+//    } else if (tag == 1001) {
+//        if (scrollView.contentOffset.y < 0) {
+//            scrollView.contentOffset = CGPointMake(0, 0);
+//        } else {
+//
+//        }
+//    }
 }
 
 - (void)hideAllTopSegment:(BOOL)isHide

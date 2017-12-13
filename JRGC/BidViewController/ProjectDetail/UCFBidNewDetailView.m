@@ -625,7 +625,6 @@
 - (void)drawPullingView
 {
     _twoTableview = [[UITableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(bottomBkView.frame) + 10, ScreenWidth, 44*3) style:UITableViewStylePlain];
-    _twoTableview.backgroundColor = [UIColor clearColor];
     _twoTableview.separatorColor = UIColorWithRGB(0xe3e5ea);
     _twoTableview.delegate = self;
     _twoTableview.dataSource = self;

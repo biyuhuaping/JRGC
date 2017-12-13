@@ -138,23 +138,17 @@
 - (void)initOneScrollView
 {
     _oneScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, BidDetailScrollViewHeight)];
+
     if (kIS_Iphone4) {
         [_oneScroll setContentSize:CGSizeMake(ScreenWidth, ScreenHeight)];
     } else {
-        NSString *fixUpdate = [[_dataDic objectForKey:@"prdClaims"]objectForKey:@"fixedDate"];
-        //如果没有固定起息日
-        if ([fixUpdate isEqual:[NSNull null]] || [fixUpdate isEqualToString:@""] || !fixUpdate) {
-            [_oneScroll setContentSize:CGSizeMake(ScreenWidth, scrollViewHeight4S - 44)];
-        } else {
-            [_oneScroll setContentSize:CGSizeMake(ScreenWidth, scrollViewHeight4S)];
-        }
+        [_oneScroll setContentSize:CGSizeMake(ScreenWidth, scrollViewHeight4S)];
     }
     _oneScroll.delegate = self;
     _oneScroll.tag = 1001;
     _oneScroll.showsVerticalScrollIndicator = NO;
     [_oneScroll setBackgroundColor:UIColorWithRGB(0xebebee)];
-    
-    detailView = [[UCFBidNewDetailView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, BidDetailScrollViewHeight) WithProjectType:PROJECTDETAILTYPENORMAL prdList:_prdLabelsList dataDic:_dataDic isP2P:_isP2P];
+    detailView = [[UCFBidNewDetailView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, BidDetailScrollViewHeight + 60) WithProjectType:PROJECTDETAILTYPENORMAL prdList:_prdLabelsList dataDic:_dataDic isP2P:_isP2P];
     detailView.delegate = self;
     [self addSubview:_oneScroll];
     [_oneScroll addSubview:detailView];
