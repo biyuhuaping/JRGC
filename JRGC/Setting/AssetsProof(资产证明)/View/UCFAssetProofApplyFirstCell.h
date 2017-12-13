@@ -12,7 +12,7 @@
 @protocol UCFAssetProofApplyFirstCellDelegate <NSObject>
 
 - (void)gotoAssetProofApplyVC;
-- (void)seeAssetProofModel;
+- (void)seeAssetProofModel:(UITapGestureRecognizer *)tap;
 @end
 @interface UCFAssetProofApplyFirstCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *tipLabel1Height;
@@ -23,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *PermissonBtn;
 @property (weak, nonatomic) IBOutlet UILabel *noPermissionTipLabel;
 @property (nonatomic,assign) id<UCFAssetProofApplyFirstCellDelegate> delegate;
+@property (weak, nonatomic) IBOutlet UIImageView *thumbnailImageView;
 @end
 @interface UCFAssetProofApplySecondCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *applyTimeLabel ;//申请时间
