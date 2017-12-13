@@ -10,6 +10,7 @@
 #import "UCFToolsMehod.h"
 #import "Common.h"
 #import "NSString+CJString.h"
+#import "CLAmplifyView.h"
 @interface UCFAssetProofApplyFirstCell ()
 - (IBAction)gotoAssetProofApplyVC:(id)sender;
 
@@ -21,7 +22,8 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+    _thumbnailImageView.userInteractionEnabled = YES;
+    [_thumbnailImageView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickImageView:)]];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -36,12 +38,18 @@
         [self.delegate gotoAssetProofApplyVC];
     }
 }
+- (void)clickImageView:(UITapGestureRecognizer *)tap
+{
+    if ([self.delegate respondsToSelector:@selector(seeAssetProofModel:)]) {
+        [self.delegate seeAssetProofModel:tap];
+    }
 
+}
 - (IBAction)seeAssetProofModel:(id)sender
 {
-    if ([self.delegate respondsToSelector:@selector(seeAssetProofModel)]) {
-        [self.delegate seeAssetProofModel];
-    }
+//    if ([self.delegate respondsToSelector:@selector(seeAssetProofModel:)]) {
+//        [self.delegate seeAssetProofModel:(UIButton *)sender];
+//    }
 }
 -(void)layoutSubviews
 {

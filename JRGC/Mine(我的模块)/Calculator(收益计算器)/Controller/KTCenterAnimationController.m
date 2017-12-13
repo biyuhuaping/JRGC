@@ -23,7 +23,7 @@
         return 0.1;
     }
     
-    return 0.3;
+    return 0.7;
 }
 
 - (void)animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext
@@ -44,7 +44,7 @@
         toVC.contentView.transform = CGAffineTransformScale(oldTransform, 0.3, 0.3);
         toVC.contentView.center = containerView.center;
         [UIView animateWithDuration:duration animations:^{
-            toVC.backView.alpha = 0.3;
+            toVC.backView.alpha = 0.7;
             toVC.contentView.transform = oldTransform;
         } completion:^(BOOL finished) {
             [transitionContext completeTransition:![transitionContext transitionWasCancelled]];

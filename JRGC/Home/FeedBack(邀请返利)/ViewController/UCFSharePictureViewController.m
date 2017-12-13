@@ -75,6 +75,8 @@
     
     */
     
+    lineViewAA.hidden = YES;
+    
     
     [[NSUserDefaults standardUserDefaults] synchronize];
    NSArray *cmsPictureArray =  [[NSUserDefaults standardUserDefaults]  objectForKey:@"SharePictureAdversementLink"];

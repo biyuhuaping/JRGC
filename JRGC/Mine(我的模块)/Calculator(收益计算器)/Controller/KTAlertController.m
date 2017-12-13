@@ -16,6 +16,8 @@
 #import "UCFCalculateResultView.h"
 #import "UCFProfitCalculateResult.h"
 #import "UIDic+Safe.h"
+#import "UCFInputTextField.h"
+#import "UCFCalculateTypeCell.h"
 
 #define ContentViewHeight 383
 #define CalculateResultViewHeightForHigh 138
@@ -40,9 +42,9 @@
 @property (weak, nonatomic) UIView *calculateResultView;
 @property (assign, nonatomic) BOOL calculateResultViewShow;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentViewHeight;
-@property (weak, nonatomic) IBOutlet UITextField *investAmountTextField;
-@property (weak, nonatomic) IBOutlet UITextField *annualRateTextField;
-@property (weak, nonatomic) IBOutlet UITextField *investTermTextField;
+@property (weak, nonatomic) IBOutlet UCFInputTextField *investAmountTextField;
+@property (weak, nonatomic) IBOutlet UCFInputTextField *annualRateTextField;
+@property (weak, nonatomic) IBOutlet UCFInputTextField *investTermTextField;
 @property (weak, nonatomic) IBOutlet UIImageView *calculateTypeSignImage;
 @property (weak, nonatomic) IBOutlet UILabel *investTermLabel;
 @property (weak, nonatomic) IBOutlet UIView *SegLineFirst;
@@ -50,6 +52,10 @@
 @property (weak, nonatomic) IBOutlet UIView *SegLineThird;
 @property (weak, nonatomic) IBOutlet UIView *segLineFourth;
 @property (weak, nonatomic) UCFCalculateResultView *calculateShowview;
+@property (weak, nonatomic) IBOutlet UILabel *investTitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *annualRateTitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *repayModelTitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *calculatorTitleLabel;
 
 @end
 
@@ -75,10 +81,32 @@
     self.calculateButton.enabled = NO;
     self.calculateTypeSign = CalulateTypeNone;
     self.calculateResultViewShow = NO;
+    self.investTitleLabel.textColor = UIColorWithRGB(0x999999);
+    self.annualRateTitleLabel.textColor = UIColorWithRGB(0x999999);
+    self.repayModelTitleLabel.textColor = UIColorWithRGB(0x999999);
+    self.investTermLabel.textColor = UIColorWithRGB(0x999999);
+    self.calculatorTitleLabel.textColor = UIColorWithRGB(0x333333);
+    self.calculateType.backgroundColor = UIColorWithRGB(0xf9f9f9);
+    
+    [self.calulateTypeSelected setTitleColor:UIColorWithRGB(0x999999) forState:UIControlStateNormal];
+    
+    self.SegLineFirst.backgroundColor = UIColorWithRGB(0xe3e5ea);
+    self.SegLineFirst.height = 0.5;
+    self.segLineSecond.backgroundColor = UIColorWithRGB(0xe3e5ea);
+    self.segLineSecond.height = 0.5;
+    self.SegLineThird.backgroundColor = UIColorWithRGB(0xe3e5ea);
+    self.SegLineThird.height = 0.5;
+    self.segLineFourth.backgroundColor = UIColorWithRGB(0xe3e5ea);
+    self.segLineFourth.height = 0.5;
+    
+    self.investAmountTextField.font = [UIFont systemFontOfSize:14];
+    self.annualRateTextField.font = [UIFont systemFontOfSize:14];
+    self.investTermTextField.font = [UIFont systemFontOfSize:14];
+    
     UIImage *imageDisable = [UIImage imageNamed:@"btn_disable"];
     UIImage *imageAble = [UIImage imageNamed:@"btn_red"];
-    [self.calculateButton setBackgroundImage:[imageAble stretchableImageWithLeftCapWidth:4 topCapHeight:4] forState:UIControlStateNormal];
-    [self.calculateButton setBackgroundImage:[imageDisable stretchableImageWithLeftCapWidth:4 topCapHeight:4] forState:UIControlStateDisabled];
+    [self.calculateButton setBackgroundImage:[imageAble stretchableImageWithLeftCapWidth:2 topCapHeight:2] forState:UIControlStateNormal];
+    [self.calculateButton setBackgroundImage:[imageDisable stretchableImageWithLeftCapWidth:2 topCapHeight:2] forState:UIControlStateDisabled];
     self.calculateButton.layer.cornerRadius = self.calculateButton.height * 0.55;
     self.calculateButton.clipsToBounds = YES;
     
@@ -149,6 +177,8 @@
     [self.view endEditing:YES];
     self.calculateTypeSignImage.transform=CGAffineTransformIdentity;
     if (self.calculateType.frame.size.height > 0) {
+        [self.SegLineThird setBackgroundColor:UIColorWithRGB(0xe3e5ea)];
+        self.SegLineThird.height = 0.5;
         [UIView animateWithDuration:30 animations:^{
             self.calculateTableHeight.constant = 0;
         }];
@@ -183,8 +213,11 @@
     [self.view endEditing:YES];
     
     if (self.calculateType.frame.size.height > 0) {
+        [self.SegLineThird setBackgroundColor:UIColorWithRGB(0xe3e5ea)];
+        self.SegLineThird.height = 0.5;
         [UIView animateWithDuration:30 animations:^{
             self.calculateTableHeight.constant = 0;
+            
         }];
     }
     
@@ -195,6 +228,7 @@
 //    rate
 //    term
 //    NSDictionary *param = @{@"investAmt":[NSNumber numberWithDouble:[self.investAmont doubleValue]], @"payType":[NSNumber numberWithInteger:self.calculateTypeSign], @"rate":[NSNumber numberWithDouble:[self.annualInterestRate doubleValue]], @"term":[NSNumber numberWithInteger:[self.investTerm integerValue]]};
+    
     NSDictionary *param = @{@"investAmt":self.investAmont, @"payType":[NSString stringWithFormat:@"%lu", (unsigned long)self.calculateTypeSign], @"rate":self.annualInterestRate, @"term":self.investTerm};
     
     [[NetworkModule sharedNetworkModule] newPostReq:param tag:kSXTagProfitCalculator owner:self signature:YES Type:SelectAccoutDefault];
@@ -232,17 +266,23 @@
 - (IBAction)calculateTypeSelected:(UIButton *)sender {
     [self.view endEditing:YES];
     if (self.calculateType.frame.size.height > 0) {
+        [self.SegLineThird setBackgroundColor:UIColorWithRGB(0xe3e5ea)];
+        self.SegLineThird.height = 0.5;
         self.calculateTypeSignImage.transform=CGAffineTransformIdentity;
         [UIView animateWithDuration:30 animations:^{
             self.calculateTableHeight.constant = 0;
             [self.contentView sendSubviewToBack:self.calculateType];
+            
         }];
     }
     else {
+        [self.SegLineThird setBackgroundColor:UIColorWithRGB(0xfd4d4c)];
+        self.SegLineThird.height = 1;
         self.calculateTypeSignImage.transform=CGAffineTransformMakeRotation(M_PI);
         [UIView animateWithDuration:30 animations:^{
             self.calculateTableHeight.constant = 120;
             [self.contentView bringSubviewToFront:self.calculateType];
+            
         }];
     }
 }
@@ -255,10 +295,10 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *cellId = @"cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+    static NSString *cellId = @"calculatetypecell";
+    UCFCalculateTypeCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     if (nil == cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
+        cell = (UCFCalculateTypeCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFCalculateTypeCell" owner:self options:nil] lastObject];
     }
     cell.textLabel.text = [NSString stringWithFormat:@"%@", [self.dataArray objectAtIndex:indexPath.row]];
     cell.textLabel.font = [UIFont systemFontOfSize:12];
@@ -268,16 +308,23 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 24;
+    return 35;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     [self.calulateTypeSelected setTitle:[self.dataArray objectAtIndex:indexPath.row] forState:UIControlStateNormal];
+    if ([self.calculateButton.titleLabel.text isEqualToString:@"请选择还款方式"]) {
+        [self.calulateTypeSelected setTitleColor:UIColorWithRGB(0x999999) forState:UIControlStateNormal];
+    }
+    else {
+        [self.calulateTypeSelected setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    }
     [self calculateTypeSelected:nil];
     switch (indexPath.row) {
         case 0: {
-            self.investTermLabel.text = @"投资期限(月)";
+            self.investTermLabel.text = @"投资期限(季)";
             if (self.calculateTypeSign != CalulateTypeEqualRepaymentBySeason) {
                 self.calculateTypeSign = CalulateTypeEqualRepaymentBySeason;
                 [self.calculateShowview resetData];
@@ -366,42 +413,53 @@
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
+    [self.SegLineThird setBackgroundColor:UIColorWithRGB(0xe3e5ea)];
+    self.SegLineThird.height = 0.5;
     if (self.calculateTableHeight.constant >0) {
         self.calculateTableHeight.constant = 0;
         self.calculateTypeSignImage.transform=CGAffineTransformIdentity;
     }
     if (textField == self.investAmountTextField) {
         self.SegLineFirst.backgroundColor = UIColorWithRGB(0xfd4d4c);
+        self.SegLineFirst.height = 1;
     }
     else if (textField == self.annualRateTextField) {
         self.segLineSecond.backgroundColor = UIColorWithRGB(0xfd4d4c);
+        self.segLineSecond.height = 1;
     }
     else if (textField == self.investTermTextField) {
         self.segLineFourth.backgroundColor = UIColorWithRGB(0xfd4d4c);
+        self.segLineFourth.height = 1;
     }
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     DBLOG(@"%@, %@ %@", textField.text, string, NSStringFromRange(range));
-    if (string.length == 0) {
+    if (string.length <= 0) {
         if (textField.text.length-1 < 1) {
             self.calculateButton.enabled = NO;
         }
+        if (textField.text.length <= 1) {
+            textField.font = [UIFont systemFontOfSize:14];
+        }
     }
-    else if (string.length > 0 && self.calculateTypeSign != CalulateTypeNone) {
-        if (self.investTermTextField == textField) {
-            if (self.investAmountTextField.text.length > 0 && self.annualRateTextField.text.length > 0) {
-                self.calculateButton.enabled = YES;
+    else if (string.length > 0) {
+        textField.font = [UIFont systemFontOfSize:16];
+        if (self.calculateTypeSign != CalulateTypeNone && ![[textField.text stringByAppendingFormat:@"%@", string] isEqualToString:@"."]) {
+            if (self.investTermTextField == textField) {
+                if (self.investAmountTextField.text.length > 0 && self.annualRateTextField.text.length > 0) {
+                    self.calculateButton.enabled = YES;
+                }
             }
-        }
-        else if (self.investAmountTextField == textField) {
-            if (self.investTermTextField.text.length > 0 && self.annualRateTextField.text.length > 0) {
-                self.calculateButton.enabled = YES;
+            else if (self.investAmountTextField == textField) {
+                if (self.investTermTextField.text.length > 0 && self.annualRateTextField.text.length > 0) {
+                    self.calculateButton.enabled = YES;
+                }
             }
-        }
-        else if (self.annualRateTextField == textField) {
-            if (self.investAmountTextField.text.length > 0 && self.investTermTextField.text.length > 0) {
-                self.calculateButton.enabled = YES;
+            else if (self.annualRateTextField == textField) {
+                if (self.investAmountTextField.text.length > 0 && self.investTermTextField.text.length > 0) {
+                    self.calculateButton.enabled = YES;
+                }
             }
         }
     }
@@ -421,7 +479,7 @@
 // 判断字符串内容是否合法：金额的格式
 - (BOOL)validateMoneyFormatByString:(NSString *)string {
     if (string.length > 0) {
-        NSString *stringRegex = @"(\\+|\\-)?(([0]|(0[.]\\d{0,2}))|([1-9]\\d{0,7}(([.]\\d{0,2})?)))?";
+        NSString *stringRegex = @"(\\+|\\-)?(([0]|(0[.]\\d{0,2}))|([1-9]\\d{0,8}(([.]\\d{0,2})?)))?";
         NSPredicate *phoneTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", stringRegex];
         BOOL flag = [phoneTest evaluateWithObject:string];
         if (!flag) {
@@ -448,7 +506,8 @@
     BOOL isValid = YES;
     NSUInteger len = string.length;
     if (len > 0) {
-        NSString *phoneRegex = @"^\\+?[1-9][0-9]*$";
+        NSString *phoneRegex = @"(\\+|\\-)?(([0]|(0[.]\\d{0,2}))|([1-9]\\d{0,2}))?";
+//        NSString *phoneRegex = @"^\\+?[1-9][0-9]*$";
         NSPredicate *phoneTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",phoneRegex];
         return [phoneTest evaluateWithObject:string];
     }
@@ -458,7 +517,8 @@
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
     if (textField == self.investAmountTextField) {
-        self.SegLineFirst.backgroundColor = [UIColor lightGrayColor];
+        self.SegLineFirst.backgroundColor = UIColorWithRGB(0xe3e5ea);
+        self.SegLineFirst.height = 0.5;
         if (textField.text.length > 0) {
             if (![textField.text isEqualToString:self.investAmont]) {
                 self.investAmont = textField.text;
@@ -471,7 +531,8 @@
         }
     }
     else if (textField == self.annualRateTextField) {
-        self.segLineSecond.backgroundColor = [UIColor lightGrayColor];
+        self.segLineSecond.backgroundColor = UIColorWithRGB(0xe3e5ea);
+        self.segLineSecond.height = 0.5;
         if (textField.text.length > 0) {
             if (![textField.text isEqualToString:self.annualInterestRate]) {
                 self.annualInterestRate = textField.text;
@@ -484,7 +545,8 @@
         }
     }
     else if (textField == self.investTermTextField) {
-        self.segLineFourth.backgroundColor = [UIColor lightGrayColor];
+        self.segLineFourth.backgroundColor = UIColorWithRGB(0xe3e5ea);
+        self.segLineFourth.height = 0.5;
         if (textField.text.length > 0) {
             if (![textField.text isEqualToString:self.investTerm]) {
                 self.investTerm = textField.text;
@@ -497,6 +559,12 @@
         }
     }
     [self checkConditionChangeStateForCalculate];
+}
+
+- (BOOL)textFieldShouldClear:(UITextField *)textField
+{
+    self.calculateButton.enabled = NO;
+    return YES;
 }
 
 @end

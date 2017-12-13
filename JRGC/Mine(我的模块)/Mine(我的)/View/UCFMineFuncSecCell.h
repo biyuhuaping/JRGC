@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *title2DesLabel;
 @property (weak, nonatomic) IBOutlet UILabel *value2Label;
 @property (weak, nonatomic) IBOutlet UIView *sign2View;
+@property (weak, nonatomic) IBOutlet UIView *view2;
 @property (weak, nonatomic) id<UCFMineFuncSecCellDelegate> delegate;
 
 @property (weak, nonatomic) UITableView *tableview;

@@ -11,7 +11,7 @@
 #import "UCFAssetProofApplyViewController.h"
 #import "UCFAssetProofListModel.h"
 #import "QLHeaderViewController.h"
-#import "YWFilePreviewController.h"
+#import "CLAmplifyView.h"
 #import "Common.h"
 @interface UCFAccountAssetsProofViewController ()<UITableViewDataSource,UITableViewDelegate,UCFAssetProofApplyFirstCellDelegate,UIDocumentInteractionControllerDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
@@ -44,12 +44,17 @@
     
 }
 #pragma 查看资产证明模板页面
-- (void)seeAssetProofModel
+- (void)seeAssetProofModel:(UITapGestureRecognizer *)tap
 {
-    NSString *filePath1 = [[NSBundle mainBundle] pathForResource:@"assets.png" ofType:nil ];
-    NSArray *filePathArr = @[filePath1];
-    YWFilePreviewController *_filePreview = [[YWFilePreviewController alloc] init];
-    [_filePreview previewFileWithPaths:filePathArr on: self jump:YWJumpPresentAnimat];
+    
+    CLAmplifyView *amplifyView = [[CLAmplifyView alloc] initWithFrame:self.view.bounds andGesture:tap andSuperView:self.view];
+    [[UIApplication sharedApplication].keyWindow addSubview:amplifyView];
+    
+    
+//    CLAmplifyView *amplifyView = [[CLAmplifyView alloc] initWithFrame:self.view.bounds andButtonView:button andSuperView:button.superview];
+//    [[UIApplication sharedApplication].keyWindow addSubview:amplifyView];
+    
+//    - (instancetype)initWithFrame:(CGRect)frame andButtonView:(UIButton *)button andSuperView:(UIView *)superView
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {

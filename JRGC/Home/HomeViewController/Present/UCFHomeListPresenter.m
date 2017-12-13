@@ -134,7 +134,8 @@
             if ([model.type isEqualToString:@"0"]) {
                 model.moedelType = UCFHomeListCellModelTypeReserved;
             }
-            model.moedelType = UCFHomeListCellModelTypeNewUser;
+            else
+                model.moedelType = UCFHomeListCellModelTypeNewUser;
         }
         else if ([model.type isEqualToString:@"0"]) {
             model.moedelType = UCFHomeListCellModelTypeReserved;
