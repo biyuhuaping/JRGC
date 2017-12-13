@@ -674,6 +674,7 @@
             return;
         }
             UCFAccountAssetsProofViewController * assetProofVC = [[UCFAccountAssetsProofViewController alloc]initWithNibName:@"UCFAccountAssetsProofViewController" bundle:nil];
+        assetProofVC.totalAssetStr = self.assetModel.total;
             [self.navigationController pushViewController:assetProofVC animated:YES];
     }
     else  if ([title isEqualToString:@"投资计算器"]){//投资计算器
