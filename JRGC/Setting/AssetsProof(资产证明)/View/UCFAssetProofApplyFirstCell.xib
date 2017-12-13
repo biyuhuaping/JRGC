@@ -79,13 +79,6 @@
                                     <action selector="seeAssetProofModel:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="nbH-YW-G5s"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w0d-7J-I8g">
-                                <rect key="frame" x="74" y="30" width="76" height="107"/>
-                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
-                                <connections>
-                                    <action selector="seeAssetProofModel:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="lwk-kp-dkk"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="暂无开具权限" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kSk-vE-fBx">
                                 <rect key="frame" x="170" y="81" width="98" height="19.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -104,7 +97,6 @@
                             <constraint firstItem="D02-W8-AJW" firstAttribute="bottom" secondItem="IAU-G5-MTf" secondAttribute="bottom" id="4cX-Py-UeJ"/>
                             <constraint firstItem="D02-W8-AJW" firstAttribute="top" secondItem="N9S-UC-Ixl" secondAttribute="bottom" constant="49" id="5Ma-ag-iyK"/>
                             <constraint firstItem="kSk-vE-fBx" firstAttribute="leading" secondItem="IAU-G5-MTf" secondAttribute="trailing" constant="20" id="6YC-13-DQ9"/>
-                            <constraint firstItem="w0d-7J-I8g" firstAttribute="width" secondItem="IAU-G5-MTf" secondAttribute="width" id="7EQ-p6-lTg"/>
                             <constraint firstAttribute="trailing" secondItem="FIC-Hm-kRY" secondAttribute="trailing" constant="15" id="Bch-eM-YSx"/>
                             <constraint firstItem="IAU-G5-MTf" firstAttribute="centerX" secondItem="RCX-CZ-24p" secondAttribute="centerX" constant="-48.5" id="Ddz-Hf-dk8"/>
                             <constraint firstItem="kSk-vE-fBx" firstAttribute="top" secondItem="N9S-UC-Ixl" secondAttribute="bottom" constant="30" id="Gyw-Zp-7zx"/>
@@ -113,17 +105,14 @@
                             <constraint firstItem="NUu-9Z-w5e" firstAttribute="leading" secondItem="IAU-G5-MTf" secondAttribute="trailing" constant="20" id="JmY-y8-CCO"/>
                             <constraint firstItem="aDE-Cr-BTm" firstAttribute="top" secondItem="IAU-G5-MTf" secondAttribute="bottom" constant="5" id="M8Y-U3-p28"/>
                             <constraint firstAttribute="height" constant="170" id="N4L-R0-Bze"/>
-                            <constraint firstItem="w0d-7J-I8g" firstAttribute="height" secondItem="IAU-G5-MTf" secondAttribute="height" id="NOK-zj-Jhh"/>
                             <constraint firstItem="D02-W8-AJW" firstAttribute="leading" secondItem="IAU-G5-MTf" secondAttribute="trailing" constant="20" id="SVl-eK-NsW"/>
                             <constraint firstAttribute="trailing" secondItem="NUu-9Z-w5e" secondAttribute="trailing" constant="15" id="boY-hq-ZxY"/>
                             <constraint firstItem="N9S-UC-Ixl" firstAttribute="top" secondItem="RCX-CZ-24p" secondAttribute="top" constant="35" id="f04-b0-Puk"/>
                             <constraint firstItem="NUu-9Z-w5e" firstAttribute="top" secondItem="kSk-vE-fBx" secondAttribute="bottom" constant="4" id="gK8-bs-sUN"/>
                             <constraint firstItem="N9S-UC-Ixl" firstAttribute="leading" secondItem="IAU-G5-MTf" secondAttribute="trailing" constant="20" id="iGv-2A-KRS"/>
                             <constraint firstItem="FIC-Hm-kRY" firstAttribute="top" secondItem="aDE-Cr-BTm" secondAttribute="bottom" constant="10" id="kNW-fM-DvH"/>
-                            <constraint firstItem="w0d-7J-I8g" firstAttribute="top" secondItem="IAU-G5-MTf" secondAttribute="top" id="oGf-PB-ca2"/>
                             <constraint firstAttribute="bottom" secondItem="FIC-Hm-kRY" secondAttribute="bottom" id="trd-Yf-AUn"/>
                             <constraint firstItem="IAU-G5-MTf" firstAttribute="top" secondItem="RCX-CZ-24p" secondAttribute="top" constant="30" id="tyu-Qd-4FC"/>
-                            <constraint firstItem="w0d-7J-I8g" firstAttribute="leading" secondItem="IAU-G5-MTf" secondAttribute="leading" id="zOx-hv-NR0"/>
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d91-YZ-f4o">
@@ -272,12 +261,13 @@ Cg
                 <outlet property="PermissonBtn" destination="D02-W8-AJW" id="jnN-70-Uo6"/>
                 <outlet property="noPermissionLabel" destination="kSk-vE-fBx" id="ctp-0N-HaF"/>
                 <outlet property="noPermissionTipLabel" destination="NUu-9Z-w5e" id="Ycx-4g-O4K"/>
+                <outlet property="thumbnailImageView" destination="IAU-G5-MTf" id="VOT-DQ-1SI"/>
                 <outlet property="tipLabel1" destination="d91-YZ-f4o" id="8yX-aA-q0c"/>
                 <outlet property="tipLabel1Height" destination="lMY-cJ-jnJ" id="h8H-34-qB5"/>
                 <outlet property="tipLabel2" destination="6BN-Bw-5ts" id="e1P-ya-ICr"/>
                 <outlet property="tipLabel2Height" destination="i80-D9-6y0" id="mIk-Ca-xCz"/>
             </connections>
-            <point key="canvasLocation" x="-1195" y="-539"/>
+            <point key="canvasLocation" x="-1549" y="-615"/>
         </tableViewCell>
         <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UCFAssetProofApplySecondCell" rowHeight="75" id="wk7-lL-Fbz" customClass="UCFAssetProofApplySecondCell">
             <rect key="frame" x="0.0" y="0.0" width="320" height="75"/>
