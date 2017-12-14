@@ -14,7 +14,9 @@
             <connections>
                 <outlet property="backView" destination="koS-dA-vDQ" id="mh8-Cu-rnD"/>
                 <outlet property="pageControl" destination="YTQ-GY-ftz" id="Zdp-mq-NNO"/>
+                <outlet property="scorllViewRight" destination="7UP-ON-ReW" id="TWu-hZ-Tpv"/>
                 <outlet property="scrollView" destination="qhJ-cM-Pi0" id="aNf-Tm-jGL"/>
+                <outlet property="scrollViewLeft" destination="K4m-9D-8tb" id="chX-4B-KSM"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -31,7 +33,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                     <subviews>
                         <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qhJ-cM-Pi0">
-                            <rect key="frame" x="25" y="82" width="325" height="487.5"/>
+                            <rect key="frame" x="25" y="65.5" width="325" height="487.5"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="qhJ-cM-Pi0" secondAttribute="height" multiplier="2:3" id="IGc-Ef-XbJ"/>
                             </constraints>
@@ -41,22 +43,38 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </scrollView>
-                        <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="YTQ-GY-ftz">
-                            <rect key="frame" x="168" y="569.5" width="39" height="37"/>
-                        </pageControl>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c7j-6G-Bai">
+                            <rect key="frame" x="0.0" y="553" width="375" height="65"/>
+                            <subviews>
+                                <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="YTQ-GY-ftz">
+                                    <rect key="frame" x="168" y="22.5" width="39" height="20"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="20" id="hv4-lf-TT6"/>
+                                    </constraints>
+                                </pageControl>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="YTQ-GY-ftz" firstAttribute="centerY" secondItem="c7j-6G-Bai" secondAttribute="centerY" id="30I-Ie-Haj"/>
+                                <constraint firstItem="YTQ-GY-ftz" firstAttribute="centerX" secondItem="c7j-6G-Bai" secondAttribute="centerX" id="OeX-Xi-I05"/>
+                            </constraints>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="bottom" secondItem="qhJ-cM-Pi0" secondAttribute="bottom" constant="70" id="69I-q4-iQ2"/>
                         <constraint firstAttribute="trailing" secondItem="qhJ-cM-Pi0" secondAttribute="trailing" constant="25" id="7UP-ON-ReW"/>
+                        <constraint firstAttribute="bottom" secondItem="c7j-6G-Bai" secondAttribute="bottom" id="BHd-pU-yFe"/>
+                        <constraint firstItem="c7j-6G-Bai" firstAttribute="top" secondItem="qhJ-cM-Pi0" secondAttribute="bottom" id="BwQ-GS-3hY"/>
+                        <constraint firstItem="c7j-6G-Bai" firstAttribute="leading" secondItem="TeY-gf-ZMw" secondAttribute="leading" id="G4k-qY-Ebo"/>
                         <constraint firstItem="qhJ-cM-Pi0" firstAttribute="leading" secondItem="TeY-gf-ZMw" secondAttribute="leading" constant="25" id="K4m-9D-8tb"/>
-                        <constraint firstItem="YTQ-GY-ftz" firstAttribute="top" secondItem="qhJ-cM-Pi0" secondAttribute="bottom" id="Kc2-9L-3cn"/>
-                        <constraint firstItem="qhJ-cM-Pi0" firstAttribute="top" secondItem="TeY-gf-ZMw" secondAttribute="top" constant="82" id="mZP-uv-1jS"/>
-                        <constraint firstItem="YTQ-GY-ftz" firstAttribute="centerX" secondItem="TeY-gf-ZMw" secondAttribute="centerX" id="mwR-6n-Dg1"/>
+                        <constraint firstAttribute="trailing" secondItem="c7j-6G-Bai" secondAttribute="trailing" id="i12-2c-8sO"/>
+                        <constraint firstItem="qhJ-cM-Pi0" firstAttribute="top" secondItem="TeY-gf-ZMw" secondAttribute="top" constant="40" id="mZP-uv-1jS"/>
+                        <constraint firstItem="qhJ-cM-Pi0" firstAttribute="centerY" secondItem="TeY-gf-ZMw" secondAttribute="centerY" id="nIX-Dn-R6q"/>
+                        <constraint firstItem="qhJ-cM-Pi0" firstAttribute="centerX" secondItem="TeY-gf-ZMw" secondAttribute="centerX" id="oN4-i4-KG1"/>
                     </constraints>
                     <variation key="default">
                         <mask key="constraints">
-                            <exclude reference="69I-q4-iQ2"/>
+                            <exclude reference="mZP-uv-1jS"/>
                         </mask>
                     </variation>
                 </view>

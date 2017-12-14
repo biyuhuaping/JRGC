@@ -126,7 +126,7 @@
     [_closeBtn setBackgroundImage:[[UIImage imageNamed:@"btn_red_highlight"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:2.5] forState:UIControlStateHighlighted];
     
     
-    NSString *gcmCode = [[NSUserDefaults standardUserDefaults] objectForKey:@"gcmCode"];
+    NSString *gcmCode = [[NSUserDefaults standardUserDefaults] objectForKey:GCMCODE];
     if ([gcmCode hasPrefix:@"A"]) {
 //        [self addRightButton];
     }

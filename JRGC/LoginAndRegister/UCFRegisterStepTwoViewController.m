@@ -199,7 +199,7 @@
             NSString *signatureStr  = [UCFToolsMehod md5:yanQian];
             NSString *gcmCode = [dic objectSafeForKey: @"promotionCode"]; //用户工场码
             [[NSUserDefaults standardUserDefaults] setObject:signatureStr forKey:SIGNATUREAPP];
-            [[NSUserDefaults standardUserDefaults] setValue:gcmCode forKey:@"gcmCode"];
+            [[NSUserDefaults standardUserDefaults] setValue:gcmCode forKey:GCMCODE];
             [[NSUserDefaults standardUserDefaults] synchronize];
             // 注册成功之后向iOS发送数据 验签串 和工场码Data
             [self sendiWatchSignature:signatureStr withGcm:gcmCode];

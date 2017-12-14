@@ -115,7 +115,7 @@
     
     //  GrowingIO添加字段
     [Growing setCS1Value:dict[@"userId"] forKey:@"user_Id"];
-    [Growing setCS2Value:[[NSUserDefaults standardUserDefaults] objectForKey:@"gcmCode"] forKey:@"user_gcm"];
+    [Growing setCS2Value:[[NSUserDefaults standardUserDefaults] objectForKey:GCMCODE] forKey:@"user_gcm"];
     if (dict[@"realName"] == nil || [dict[@"realName"] isEqualToString:@""]) {
         [Growing setCS3Value:@"" forKey:@"user_name"];
     }
@@ -144,6 +144,7 @@
     [[NSUserDefaults standardUserDefaults] setValue:nil forKey:COMPANYAGENT];
     [[NSUserDefaults standardUserDefaults] setValue:nil forKey:USER_LEVEL];
     [[NSUserDefaults standardUserDefaults] setValue:nil forKey:GOldAUTHORIZATION];
+    [[NSUserDefaults standardUserDefaults] setValue:@"" forKey:GCMCODE];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     //  GrowingIO删除字段

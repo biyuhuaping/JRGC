@@ -465,7 +465,7 @@
 }
 - (void)goTofactoryCode
 {
-    NSString *gcmCode = [[NSUserDefaults standardUserDefaults] objectForKey:@"gcmCode"];
+    NSString *gcmCode = [[NSUserDefaults standardUserDefaults] objectForKey:GCMCODE];
     if(gcmCode){ //返回数据 工场码
         [_bridge callHandler:@"jsHandler" data:@{@"type": @"factory_code",@"value":gcmCode} responseCallback:^(id responseData) {
             DBLOG(@"工场码返回成功");
@@ -488,7 +488,8 @@
     NSDictionary *dic = [nativeData[@"value"] objectFromJSONString];
     self.dicForShare = [UCFCycleModel  getCycleModelByDataDict:dic];
     self.dicForShare.thumb = [dic objectSafeForKey:@"image"];
-    self.dicForShare.url = [dic objectSafeForKey:@"link"];
+    NSString *gcmCode = [[NSUserDefaults standardUserDefaults] objectForKey:GCMCODE];
+    self.dicForShare.url =  [NSString stringWithFormat:@"%@?gcm=%@", [dic objectSafeForKey:@"link"],gcmCode];
     [self clickRightBtn]; //放心花中的分享
 }
 - (void)getTokenId
