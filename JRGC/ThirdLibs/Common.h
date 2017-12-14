@@ -244,5 +244,11 @@ typedef NS_ENUM(NSInteger, PicType) {
 
 +(NSString *)getNewBankNumWitOldBankNum:(NSString *)bankNum;
 
+/**
+ 获取bundleID
+
+ @return bundleID
+ */
++(NSString*)getBundleID;
 
 @end

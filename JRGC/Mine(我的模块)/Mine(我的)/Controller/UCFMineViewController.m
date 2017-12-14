@@ -100,15 +100,28 @@
 //    self.navigationController.navigationBarHidden = YES;
      [self.navigationController setNavigationBarHidden:YES animated:YES];
     NSInteger index = [[NSUserDefaults standardUserDefaults] integerForKey:@"tapMineNum"];
+    if (index == 0 && [UserInfoSingle sharedManager].userId != nil) {
+        index += 1;
+        [[NSUserDefaults standardUserDefaults] setInteger:index forKey:@"tapMineNum"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
     
     if (index == 3) {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:@"亲爱的工友，喜欢就去给个好评吧！" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"冷漠拒绝" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            NSInteger index = [[NSUserDefaults standardUserDefaults] integerForKey:@"tapMineNum"];
+            index += 1;
+            [[NSUserDefaults standardUserDefaults] setInteger:index forKey:@"tapMineNum"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
             [alert dismissViewControllerAnimated:YES completion:^{
-
+                
             }];
         }];
         UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"表白金融工场" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            NSInteger index = [[NSUserDefaults standardUserDefaults] integerForKey:@"tapMineNum"];
+            index += 1;
+            [[NSUserDefaults standardUserDefaults] setInteger:index forKey:@"tapMineNum"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:APP_RATING_URL]];
         }];
         [alert addAction:cancelAction];

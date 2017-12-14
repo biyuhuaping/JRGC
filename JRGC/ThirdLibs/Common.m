@@ -1340,5 +1340,8 @@
     return bankNum;
 }
 
-
++(NSString*)getBundleID
+{
+    return [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"];
+}
 @end
