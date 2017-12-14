@@ -346,7 +346,7 @@
                         break;
                     case 3:
                     {
-                        userItem.subtitle = [[NSUserDefaults standardUserDefaults] objectForKey:@"gcmCode"];
+                        userItem.subtitle = [[NSUserDefaults standardUserDefaults] objectForKey:GCMCODE];
                     }
                         break;
                     default:
@@ -779,7 +779,7 @@
             case 3:
                 {
                     UCFFacCodeViewController *subVC = [[UCFFacCodeViewController alloc] initWithNibName:@"UCFFacCodeViewController" bundle:nil];
-                    subVC.urlStr = [NSString stringWithFormat:@"https://m.9888.cn/mpwap/mycode.jsp?pcode=%@&sex=%d",[[NSUserDefaults standardUserDefaults] objectForKey:@"gcmCode"],self.sex];
+                    subVC.urlStr = [NSString stringWithFormat:@"https://m.9888.cn/mpwap/mycode.jsp?pcode=%@&sex=%d",[[NSUserDefaults standardUserDefaults] objectForKey:GCMCODE],self.sex];
                     vc = subVC;
                 }
                 break;

@@ -75,7 +75,7 @@
     switch (type) {
         case 0:{//工场码
             UCFFacCodeViewController *subVC = [[UCFFacCodeViewController alloc] initWithNibName:@"UCFFacCodeViewController" bundle:nil];
-            subVC.urlStr = [NSString stringWithFormat:@"https://m.9888.cn/mpwap/mycode.jsp?pcode=%@&sex=%d",[[NSUserDefaults standardUserDefaults] objectForKey:@"gcmCode"], [[UserInfoSingle sharedManager].gender intValue]];
+            subVC.urlStr = [NSString stringWithFormat:@"https://m.9888.cn/mpwap/mycode.jsp?pcode=%@&sex=%d",[[NSUserDefaults standardUserDefaults] objectForKey:GCMCODE], [[UserInfoSingle sharedManager].gender intValue]];
             [self.navigationController pushViewController:subVC animated:YES];
         }
             break;

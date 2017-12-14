@@ -31,7 +31,7 @@
     [self createUI];
     
     if (self.accoutType != SelectAccoutTypeGold) {
-        NSString *gcm = [[NSUserDefaults standardUserDefaults] objectForKey:@"gcmCode"];
+        NSString *gcm = [[NSUserDefaults standardUserDefaults] objectForKey:GCMCODE];
         if ([gcm hasPrefix:@"A"]) { //A码用户显示 饼图
             [self addRightButtonWithImage:[UIImage imageNamed:@"icon_data"]];
         }

@@ -247,7 +247,7 @@
             [UserInfoSingle sharedManager].isSpecial = [[(NSDictionary *)dic[@"data"][@"userInfo"] objectSafeForKey: @"isSpecial"] boolValue];
             NSString *signatureStr  = [UCFToolsMehod md5:yanQian];
             [[NSUserDefaults standardUserDefaults] setObject:signatureStr forKey:SIGNATUREAPP];
-            [[NSUserDefaults standardUserDefaults] setValue:gcmCode forKey:@"gcmCode"];
+            [[NSUserDefaults standardUserDefaults] setValue:gcmCode forKey:GCMCODE];
             [[NSUserDefaults standardUserDefaults] setBool:isCompanyAgent forKey:@"isCompanyAgentType" ];
             [[NSUserDefaults standardUserDefaults] setInteger:self.selectTag forKey:@"selectTag"];
             [[NSUserDefaults standardUserDefaults] synchronize];

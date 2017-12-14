@@ -120,6 +120,7 @@ return shared##className; \
 #define OPENSTATUS      @"openStatus"
 #define COMPANYAGENT    @"companyAgent" //是否是机构用户
 #define GOldAUTHORIZATION    @"GoldAuthorization" //是否是机构用户
+#define GCMCODE         @"gcmCode" //用户工场码
 #define SEX             @"sex"//性别
 #define YeeBayTopSwitch @"yeepayflag"
 #define YeeBayPersonalSwitch @"yeepayflag_A"

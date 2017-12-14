@@ -18,12 +18,16 @@
 @property (weak, nonatomic) IBOutlet UIButton *leftBtn;
 @property (weak, nonatomic) IBOutlet UIButton *rightBtn;
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *scrollViewLeft;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *scorllViewRight;
 
 @property (nonatomic, strong) NSMutableArray *imagesArray;
 
 @property (nonatomic, assign) NSInteger currentIndex;
 
 @property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
+
+@property (nonatomic, assign) float   scrollViewWidth;
 @end
 
 @implementation UCFSharePictureViewController
@@ -55,7 +59,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.scrollView.contentSize = CGSizeMake((ScreenWidth - 50) * 4,0);
+    
+    NSArray *cmsPictureArray =  [[NSUserDefaults standardUserDefaults]  objectForKey:@"SharePictureAdversementLink"];
+  
+    if(ScreenWidth == 320 && ScreenHeight == 480)
+    {
+        self.scrollViewLeft.constant = 40;
+        self.scorllViewRight.constant = 40;
+        _scrollViewWidth = ScreenWidth  - 80;
+    }else{
+        self.scrollViewLeft.constant = 25;
+        self.scorllViewRight.constant = 25;
+        _scrollViewWidth = ScreenWidth - 50;
+    }
+    self.scrollView.contentSize = CGSizeMake(_scrollViewWidth * cmsPictureArray.count,0);
     self.scrollView.showsHorizontalScrollIndicator = NO;
     self.scrollView.showsVerticalScrollIndicator = NO;
     self.scrollView.pagingEnabled = YES;
@@ -79,18 +96,20 @@
     
     
     [[NSUserDefaults standardUserDefaults] synchronize];
-   NSArray *cmsPictureArray =  [[NSUserDefaults standardUserDefaults]  objectForKey:@"SharePictureAdversementLink"];
+
    NSArray *pictureArray = [[NSArray alloc] initWithObjects:@"picture_1", @"picture_2", @"picture_3", @"picture_4", nil];
-    if (self.imagesArray.count > 0) {
+    if (self.imagesArray.count > 0)
+    {
         [self.imagesArray removeAllObjects];
     }
-    self.pageControl.numberOfPages = pictureArray.count;
+    self.pageControl.numberOfPages = cmsPictureArray.count;
     //生成二维码图片
-    NSString *facCode = [[NSUserDefaults standardUserDefaults] objectForKey:@"gcmCode"];
+    NSString *facCode = [[NSUserDefaults standardUserDefaults] objectForKey:GCMCODE];
     UIImage *imageCode = [Common createImageCode:facCode withWith:155];
     for (int i = 0; i < cmsPictureArray.count; i++)
     {
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake((ScreenWidth-50) * i, 0, (ScreenWidth-50), (ScreenWidth-50)/2*3.0 )];
+        float  imageViewHight = _scrollViewWidth/2*3.0;
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(_scrollViewWidth * i, 0,_scrollViewWidth, imageViewHight )];
         NSString *thumbUrl = [cmsPictureArray[i] objectForKey:@"thumb"];
         UIImage *cmsImage = [self getCMSImage:thumbUrl];
         if (cmsImage == nil)
@@ -138,11 +157,11 @@
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     [self changeScrollLeftOrRightBtnState: scrollView.contentOffset.x];
-    self.pageControl.currentPage = scrollView.contentOffset.x / (ScreenWidth - 50);
+    self.pageControl.currentPage = scrollView.contentOffset.x / _scrollViewWidth;
 }
 -(void)changeScrollLeftOrRightBtnState:(float)offsetX
 {
-    int  pageNumber = offsetX/(ScreenWidth - 50);
+    int  pageNumber = offsetX/_scrollViewWidth;
     self.currentIndex = pageNumber;
 }
 - (void)didReceiveMemoryWarning {
