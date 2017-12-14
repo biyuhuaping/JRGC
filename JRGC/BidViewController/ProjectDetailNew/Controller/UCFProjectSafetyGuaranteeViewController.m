@@ -36,9 +36,6 @@
 
 - (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-//        UIImageView * imageView = [[UIImageView alloc] init];
-//        imageView.bounds = CGRectMake(0, 0, 17, 17);
-//        imageView.image = [UIImage imageNamed:@"particular_icon_security.png"];
         NSString *titleStr = [UCFToolsMehod isNullOrNilWithString:[[[[_dataDic objectForKey:@"prdClaimsReveal"] objectForKey:@"safetySecurityList"] objectAtIndex:section] objectForKey:@"title"]];
         titleStr = [titleStr stringByReplacingOccurrencesOfString:@"\t" withString:@""];
         titleStr = [titleStr stringByReplacingOccurrencesOfString:@"\n" withString:@""];
@@ -52,29 +49,11 @@
         placehoderLabel.text = titleStr;
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 10, ScreenWidth, CGRectGetHeight(placehoderLabel.frame) + 8*2)];
         view.backgroundColor = UIColorWithRGB(0xf9f9f9);
-        [self viewAddLine:view Up:YES];
-//        imageView.center = CGPointMake(13+8.5, CGRectGetHeight(view.frame)/2);
-        UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, view.frame.size.height - 0.5, ScreenWidth, 0.5)];
-        lineView.backgroundColor = UIColorWithRGB(0xeff0f3);
-        [view addSubview:lineView];
-//        [view addSubview:imageView];
         [view addSubview:placehoderLabel];
         UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, CGRectGetHeight(view.frame)+10)];
         headView.backgroundColor = UIColorWithRGB(0xebebee);
         [headView addSubview:view];
         return headView;
-}
-- (void)viewAddLine:(UIView *)view Up:(BOOL)up
-{
-    if (up) {
-        UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 0.5)];
-        lineView.backgroundColor = UIColorWithRGB(0xd8d8d8);
-        [view addSubview:lineView];
-    }else{
-        UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, view.frame.size.height - 0.5, ScreenWidth, 0.5)];
-        lineView.backgroundColor = UIColorWithRGB(0xeff0f3);
-        [view addSubview:lineView];
-    }
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
@@ -153,14 +132,5 @@
     float labelHeight = [Common getStrHeightWithStr:titleStr AndStrFont:14 AndWidth:titlelableWidth].height;
     return labelHeight;
 }
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

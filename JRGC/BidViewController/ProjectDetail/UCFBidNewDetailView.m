@@ -152,7 +152,7 @@
     _subsidizedInterestLabel.textAlignment = NSTextAlignmentLeft;
     [_headBkView addSubview:_subsidizedInterestLabel];
     
-    
+    CGFloat stringWidth1 = [@"出借期限" sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:11]}].width;
     
     UILabel *markLabel = [UILabel labelWithFrame:CGRectMake([Common calculateNewSizeBaseMachine:15],0 + [Common calculateNewSizeBaseMachine:155]-[Common calculateNewSizeBaseMachine:45] - 11,0,11) text:@"出借期限" textColor:[UIColor whiteColor] font:[UIFont systemFontOfSize:11]];
     [_headBkView addSubview:markLabel];
@@ -164,7 +164,7 @@
     }
     markLabel.textAlignment = NSTextAlignmentLeft;
     CGRect markLabelFrame = markLabel.frame;
-    markLabelFrame.size.width = stringWidth;
+    markLabelFrame.size.width = stringWidth1;
     markLabel.frame = markLabelFrame;
     
     _markTimeLabel = [UILabel labelWithFrame:CGRectMake(CGRectGetMaxX(markLabel.frame) + 10,0 + [Common calculateNewSizeBaseMachine:155]-[Common calculateNewSizeBaseMachine:45] - 25,170,30) text:@"" textColor:[UIColor whiteColor] font:[UIFont systemFontOfSize:12]];
@@ -182,7 +182,7 @@
     UILabel *remainLabel = [UILabel labelWithFrame:CGRectMake([Common calculateNewSizeBaseMachine:15],bottomBk.frame.origin.y + [Common calculateNewSizeBaseMachine:shadeSpacingHeight],0,12) text:@"可投金额" textColor:[UIColor whiteColor] font:[UIFont systemFontOfSize:11]];
     [_headBkView addSubview:remainLabel];
     CGRect remainLabelFrame = remainLabel.frame;
-    remainLabelFrame.size.width = stringWidth;
+    remainLabelFrame.size.width = stringWidth1;
     remainLabel.frame = remainLabelFrame;
     remainLabel.textAlignment = NSTextAlignmentLeft;
     if (_type == PROJECTDETAILTYPEBONDSRRANSFER) {
@@ -206,7 +206,7 @@
     } else {
         totalLabel.text = @"总计金额";
         CGRect totalLabelFrame = totalLabel.frame;
-        totalLabelFrame.size.width = stringWidth;
+        totalLabelFrame.size.width = stringWidth1;
         totalLabel.frame = totalLabelFrame;
     }
     [_headBkView addSubview:totalLabel];
@@ -374,8 +374,8 @@
     _minuteCountDownView.frame = CGRectMake(0, y_pos, ScreenWidth, MinuteDownViewHeight);
     _minuteCountDownView.sourceVC = @"UCFProjectDetailVC";//标详情页面
     
-    [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:_minuteCountDownView isTop:YES];
-    [Common addLineViewColor:UIColorWithRGB(0xe3e5ea) With:_minuteCountDownView isTop:NO];
+//    [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:_minuteCountDownView isTop:YES];
+//    [Common addLineViewColor:UIColorWithRGB(0xe3e5ea) With:_minuteCountDownView isTop:NO];
 //    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 //    
 //    [formatter setDateStyle:NSDateFormatterMediumStyle];
@@ -430,10 +430,10 @@
     bottomBkView.backgroundColor = [UIColor whiteColor];
     [self addSubview:bottomBkView];
     
-    if (!_isP2P) {
-        [UCFToolsMehod viewAddLine:bottomBkView Up:YES];
-    }
-    [UCFToolsMehod viewAddLine:bottomBkView Up:NO];
+//    if (!_isP2P) {
+//        [UCFToolsMehod viewAddLine:bottomBkView Up:YES];
+//    }
+//    [UCFToolsMehod viewAddLine:bottomBkView Up:NO];
     
 //    //固定起息日
 //    UIImageView *guImageV = [[UIImageView alloc] initWithFrame:CGRectMake(IconXPos, IconYPos, 22, 22)];
@@ -546,10 +546,10 @@
     bottomBkView.backgroundColor = [UIColor whiteColor];
     [self addSubview:bottomBkView];
     
-    if (!_isP2P) {
-       [UCFToolsMehod viewAddLine:bottomBkView Up:YES];
-    }
-    [UCFToolsMehod viewAddLine:bottomBkView Up:NO];
+//    if (!_isP2P) {
+//       [UCFToolsMehod viewAddLine:bottomBkView Up:YES];
+//    }
+//    [UCFToolsMehod viewAddLine:bottomBkView Up:NO];
     
 //    //还款方式
 //    UIImageView *huankuanImageV = [[UIImageView alloc] initWithFrame:CGRectMake(IconXPos,IconYPos, 22, 22)];
@@ -625,8 +625,7 @@
 - (void)drawPullingView
 {
     _twoTableview = [[UITableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(bottomBkView.frame) + 10, ScreenWidth, 44*3) style:UITableViewStylePlain];
-    _twoTableview.backgroundColor = [UIColor clearColor];
-    _twoTableview.separatorColor = UIColorWithRGB(0xeff0f3);
+    _twoTableview.separatorColor = UIColorWithRGB(0xe3e5ea);
     _twoTableview.delegate = self;
     _twoTableview.dataSource = self;
     _twoTableview.showsVerticalScrollIndicator = NO;
@@ -683,7 +682,7 @@
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 3;
+    return self.dataArray.count;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -692,16 +691,6 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     SecurityCell *cell = [SecurityCell cellWithTableView:tableView];
-    if(indexPath.row == 0) {
-        UIView *topLine = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 0.5)];
-        topLine.backgroundColor = UIColorWithRGB(0xd8d8d8);
-        [cell.contentView addSubview:topLine];
-    }
-    if (indexPath.row == self.dataArray.count-1) {
-        UIView *bottomLine = [[UIView alloc] initWithFrame:CGRectMake(0,43.5, ScreenWidth, 0.5)];
-        bottomLine.backgroundColor = UIColorWithRGB(0xd8d8d8);
-        [cell.contentView addSubview:bottomLine];
-    }
     cell.item = self.dataArray[indexPath.row];
     cell.itemSubTitleLabel.text = @"";
     return cell;

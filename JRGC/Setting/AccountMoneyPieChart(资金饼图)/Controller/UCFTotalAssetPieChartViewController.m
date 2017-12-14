@@ -12,6 +12,7 @@
 #import "UCFToolsMehod.h"
 #import "UCFAccountAssetsProofViewController.h"
 @interface UCFTotalAssetPieChartViewController ()<UITableViewDelegate,UITableViewDataSource>
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UILabel *totalAssetLabel;
 - (IBAction)gotoAssetProofVC:(UIButton *)sender;
@@ -26,7 +27,17 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.assetProofBtn.hidden = [UserInfoSingle sharedManager].companyAgent;
+    if([UserInfoSingle sharedManager].companyAgent)
+    {
+        self.assetProofBtn.hidden = YES;
+        self.totalAssetLabel.textAlignment = NSTextAlignmentCenter;
+        self.titleLabel.textAlignment =NSTextAlignmentCenter;
+    }else{
+        self.assetProofBtn.hidden = NO;
+        self.totalAssetLabel.textAlignment = NSTextAlignmentLeft;
+        self.titleLabel.textAlignment = NSTextAlignmentLeft;
+    }
+    
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self getHeaderInfoRequest];
 }

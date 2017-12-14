@@ -29,11 +29,17 @@
     baseTitleLabel.text = @"资产证明";
     [self addLeftButton];
     self.totalAssetStr = [[self.totalAssetStr stringByReplacingOccurrencesOfString:@"," withString:@""] stringByReplacingOccurrencesOfString:@"¥" withString:@""];
-    self.tableView.contentInset = UIEdgeInsetsMake(10, 0, 10, 0);
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 10, 0);
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.dataArray = [NSMutableArray arrayWithCapacity:0];
-    [self assetProofListHttpRequset];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(assetProofListHttpRequset) name:@"GetAssetProofListHttpRequset" object:nil];
+    [self.tableView addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(assetProofListHttpRequset)];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(beginRefreshingTabelView) name:@"GetAssetProofListHttpRequset" object:nil];
+    [self beginRefreshingTabelView];
+}
+-(void)beginRefreshingTabelView
+{
+    [self.tableView.header beginRefreshing];
+    
 }
 #pragma  去资产身份申请页面
 - (void)gotoAssetProofApplyVC
@@ -43,6 +49,7 @@
     [self.navigationController pushViewController:assetProofApplyVC animated:YES];
     
 }
+
 #pragma 查看资产证明模板页面
 - (void)seeAssetProofModel:(UITapGestureRecognizer *)tap
 {
@@ -178,13 +185,14 @@
 //开始请求
 - (void)beginPost:(kSXTag)tag
 {
-    //       [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 }
 
 //请求成功及结果
 - (void)endPost:(id)result tag:(NSNumber *)tag
 {
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    [self.tableView.header endRefreshing];
     NSMutableDictionary *dic = [result objectFromJSONString];
     id ret = dic[@"ret"];
     if (tag.intValue == kSXTagAssetProofList) {
@@ -225,6 +233,7 @@
 //请求失败
 - (void)errorPost:(NSError*)err tag:(NSNumber*)tag
 {
+     [self.tableView.header endRefreshing];
     [AuxiliaryFunc showToastMessage:err.userInfo[@"NSLocalizedDescription"] withView:self.view];
 }
 

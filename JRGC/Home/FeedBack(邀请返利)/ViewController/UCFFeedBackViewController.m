@@ -43,6 +43,7 @@
 
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *heightView;
 @property (strong, nonatomic) IBOutlet UIView *lingView;
+@property (weak, nonatomic) IBOutlet UIImageView *baseImage;
 
 //***************qyy
 @property (strong, nonatomic) IBOutlet UILabel *yearLab1;//基础年化返利 标题 lab
@@ -121,12 +122,9 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(getMyInvestDataList) name:@"getMyInvestDataList" object:nil];
     _CheckInstructionBtn.hidden = YES;
     
-    
-//    _shareBaseView = [[[NSBundle mainBundle] loadNibNamed:@"UCFShareBaseView" owner:nil options:nil] firstObject];
-//    _shareBaseView.deleagate = self;
-//    _shareBaseView.frame = CGRectMake(0,150, ScreenWidth, 60);
-//    _shareBaseView.backgroundColor = [UIColor redColor];
-//    [self.view addSubview:_shareBaseView];
+    UIImage *bgShadowImage= [UIImage imageNamed:@"tabbar_shadow.png"];
+    self.baseImage.image = [bgShadowImage resizableImageWithCapInsets:UIEdgeInsetsMake(2, 1, 2, 1) resizingMode:UIImageResizingModeTile];
+
     
 
     [self getMyInvestDataList];

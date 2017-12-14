@@ -66,7 +66,8 @@
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
         self.idNumberField =  cell.userIdNumberTextField;
-        cell.userNameLabel.text = [UserInfoSingle sharedManager].realName;
+       
+        cell.userNameLabel.text = [self changeUserName:[UserInfoSingle sharedManager].realName];
         return cell;
     }else{
         NSString *cellindifier = @"UCFAssetProofApplyCodeCell";
@@ -82,6 +83,24 @@
         [cell.MessageCodeBtn addTarget:self action:@selector(getMeassgeCode:) forControlEvents:UIControlEventTouchUpInside];
         return cell;
     }
+}
+-(NSString *)changeUserName:(NSString *)nameStr
+{
+    NSString *changeUserNameStr = @"";
+    if(nameStr.length == 2)
+    {
+        changeUserNameStr =   [nameStr stringByReplacingCharactersInRange:NSMakeRange(0, 1)  withString:@"*"];
+    }
+    else
+    {
+        NSMutableString *str2 = [[NSMutableString alloc]initWithString:@""];
+        for (int i = 0; i< nameStr.length - 1; i++)
+        {
+            [str2 appendString:@"*"];
+        }
+       changeUserNameStr =  [nameStr stringByReplacingCharactersInRange:NSMakeRange(0, nameStr.length - 2)  withString:str2];
+    }
+    return changeUserNameStr;
 }
 - (void)checkUserIdNumberHttpRequset
 {
@@ -183,8 +202,8 @@
             _counter = 59;
             
             NSString   *isInThreeNum = [[dic objectSafeDictionaryForKey:@"data"] objectSafeForKey:@"surplus"];
-            if ([isInThreeNum intValue] <= 3){//验证码次数剩下最后三次
-                NSString *messageStr = @"";
+            if ([isInThreeNum intValue] <= 3 && [isInThreeNum intValue] >=0 ){//验证码次数剩下最后三次
+                NSString *messageStr = [NSString stringWithFormat:@"当日获取手机验证码次数还剩%@次",isInThreeNum];
                 UIAlertView *alerView = [[UIAlertView alloc]initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
                 [alerView show];
             }else{

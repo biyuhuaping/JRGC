@@ -79,29 +79,55 @@
     
     
     [[NSUserDefaults standardUserDefaults] synchronize];
-   NSArray *pictureArray =  [[NSUserDefaults standardUserDefaults]  objectForKey:@"SharePictureAdversementLink"];
-    pictureArray = [[NSArray alloc] initWithObjects:@"picture_1", @"picture_2", @"picture_3", @"picture_4", nil];
+   NSArray *cmsPictureArray =  [[NSUserDefaults standardUserDefaults]  objectForKey:@"SharePictureAdversementLink"];
+   NSArray *pictureArray = [[NSArray alloc] initWithObjects:@"picture_1", @"picture_2", @"picture_3", @"picture_4", nil];
     if (self.imagesArray.count > 0) {
         [self.imagesArray removeAllObjects];
     }
     self.pageControl.numberOfPages = pictureArray.count;
-    for (int i = 0; i < pictureArray.count; i++)
+    //生成二维码图片
+    NSString *facCode = [[NSUserDefaults standardUserDefaults] objectForKey:@"gcmCode"];
+    UIImage *imageCode = [Common createImageCode:facCode withWith:155];
+    for (int i = 0; i < cmsPictureArray.count; i++)
     {
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake((ScreenWidth-50) * i, 0, (ScreenWidth-50), (ScreenWidth-50)/2*3.0 )];
-//        NSString *thumbUrl = [pictureArray[i] objectForKey:@"thumb"];
-//        [imageView sd_setImageWithURL:[NSURL URLWithString:thumbUrl]];
-        UIImage *backImage = [UIImage imageNamed:pictureArray[i]];
-        
-        //添加二维码图片
-        NSString *facCode = [[NSUserDefaults standardUserDefaults] objectForKey:@"gcmCode"];
-        UIImage *imageCode = [Common createImageCode:facCode withWith:155];
-        imageView.image = [Common composeImageCodeWithBackgroungImage:backImage withCodeImage:imageCode];
-        [self.imagesArray addObject:imageView.image];
-        
+        NSString *thumbUrl = [cmsPictureArray[i] objectForKey:@"thumb"];
+        UIImage *cmsImage = [self getCMSImage:thumbUrl];
+        if (cmsImage == nil)
+        {
+            UIImage *backImage = [UIImage imageNamed:pictureArray[i]];
+            imageView.image = [Common composeImageCodeWithBackgroungImage:backImage withCodeImage:imageCode];
+            [self.imagesArray addObject:imageView.image];
+        }
+        else
+        {
+             UIImage *cmsCodeImage = [Common composeImageCodeWithBackgroungImage:cmsImage withCodeImage:imageCode];
+             imageView.image = cmsCodeImage;
+             [self.imagesArray addObject:imageView.image];
+        }
         [self.scrollView addSubview:imageView];
    }
- [self changeScrollLeftOrRightBtnState:self.scrollView.contentOffset.x];
+   [self changeScrollLeftOrRightBtnState:self.scrollView.contentOffset.x];
 }
+-(UIImage *)getCMSImage:(NSString*)url
+{
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSString *URL = [NSString stringWithFormat:@"%@", url];
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+        [request setURL:[NSURL URLWithString:URL]];
+        [request setHTTPMethod:@"GET"];
+        NSHTTPURLResponse *urlResponse = nil;
+        NSError *error = nil;
+        NSData *recervedData = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&error];
+        if (!recervedData) {
+            return  nil;
+        }
+        UIImage* cmsImage = [UIImage imageWithData: recervedData];
+        return cmsImage;
+
+//    });
+}
+
 - (void)showView
 {
     self.view.backgroundColor = UIColorWithRGBA(0, 0, 0, 0.5);
@@ -132,7 +158,7 @@
     //创建图片内容对象
     UMShareImageObject *shareObject = [[UMShareImageObject alloc] init];
     //如果有缩略图，则设置缩略图
-    shareObject.thumbImage = @"https://mobile.umeng.com/images/pic/home/social/img-1.png";
+//    shareObject.thumbImage = @"https://mobile.umeng.com/images/pic/home/social/img-1.png";
     
     [shareObject setShareImage:[self.imagesArray objectAtIndex:self.currentIndex]];
     
