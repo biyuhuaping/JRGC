@@ -94,7 +94,7 @@
     else
     {
         NSMutableString *str2 = [[NSMutableString alloc]initWithString:@""];
-        for (int i = 0; i< nameStr.length - 1; i++)
+        for (int i = 0; i< nameStr.length - 2; i++)
         {
             [str2 appendString:@"*"];
         }
