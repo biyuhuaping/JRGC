@@ -44,7 +44,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.tableview.contentInset = UIEdgeInsetsMake(10, 0, 10, 0);
+    self.tableview.contentInset = UIEdgeInsetsMake(10, 0, 0, 0);
     UIImage *bgShadowImage= [UIImage imageNamed:@"tabbar_shadow.png"];
     self.baseimageView.image = [bgShadowImage resizableImageWithCapInsets:UIEdgeInsetsMake(2, 1, 2, 1) resizingMode:UIImageResizingModeTile];
     [self getMyInvestDataList];
