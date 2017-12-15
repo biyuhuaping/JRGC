@@ -419,7 +419,7 @@
                 cell.iconImageView.image = [UIImage imageNamed:@"uesr_icon_assets"];
                 cell.icon2ImageView.image = [UIImage imageNamed:@"uesr_icon_calculator"];
                 cell.titleDesLabel.text = @"资产证明";
-                cell.valueLabel.text = @"一句话描述";
+                cell.valueLabel.text = @"随时申请开具";
                 cell.title2DesLabel.text = @"投资计算器";
                 cell.value2Label.text = @"一键计算收益";
                 cell.view2.hidden = YES;
