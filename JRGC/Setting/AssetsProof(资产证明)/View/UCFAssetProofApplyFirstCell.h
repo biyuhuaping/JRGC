@@ -12,7 +12,7 @@
 @protocol UCFAssetProofApplyFirstCellDelegate <NSObject>
 
 - (void)gotoAssetProofApplyVC;
-- (void)seeAssetProofModel:(UITapGestureRecognizer *)tap;
+- (void)seeAssetProofModel:(UIImageView *)tap;
 @end
 @interface UCFAssetProofApplyFirstCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *tipLabel1Height;

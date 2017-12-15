@@ -51,10 +51,10 @@
 }
 
 #pragma 查看资产证明模板页面
-- (void)seeAssetProofModel:(UITapGestureRecognizer *)tap
+- (void)seeAssetProofModel:(UIImageView*)tap
 {
     
-    CLAmplifyView *amplifyView = [[CLAmplifyView alloc] initWithFrame:self.view.bounds andGesture:tap andSuperView:self.view];
+    CLAmplifyView *amplifyView = [[CLAmplifyView alloc] initWithFrame:self.view.bounds andGestureView:tap  andSuperView:self.view];
     [[UIApplication sharedApplication].keyWindow addSubview:amplifyView];
     
     
