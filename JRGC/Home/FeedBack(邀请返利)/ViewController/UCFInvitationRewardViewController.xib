@@ -104,8 +104,8 @@
                         </mask>
                     </variation>
                 </view>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Dhy-F3-MrA">
-                    <rect key="frame" x="0.0" y="95" width="375" height="512"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="Dhy-F3-MrA">
+                    <rect key="frame" x="0.0" y="95" width="375" height="523"/>
                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="uax-Mb-XhR"/>
@@ -215,13 +215,13 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="SAq-Tr-YgA" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="4Zu-5W-CYE"/>
-                <constraint firstAttribute="bottom" secondItem="Dhy-F3-MrA" secondAttribute="bottom" constant="60" id="8Y1-xF-oGX"/>
                 <constraint firstItem="cvm-Oe-jTL" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="B6Q-H2-1qc"/>
                 <constraint firstItem="Dhy-F3-MrA" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="DqK-Qd-DVT"/>
                 <constraint firstItem="Dhy-F3-MrA" firstAttribute="top" secondItem="OUS-PE-bYb" secondAttribute="bottom" id="EQO-DA-hRW"/>
                 <constraint firstItem="OUS-PE-bYb" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="L4q-lq-E24"/>
                 <constraint firstAttribute="trailing" secondItem="SAq-Tr-YgA" secondAttribute="trailing" id="MTi-PJ-zWe"/>
                 <constraint firstAttribute="trailing" secondItem="OUS-PE-bYb" secondAttribute="trailing" id="Mlr-7z-PaL"/>
+                <constraint firstItem="SAq-Tr-YgA" firstAttribute="top" secondItem="Dhy-F3-MrA" secondAttribute="bottom" id="P9p-cI-z1a"/>
                 <constraint firstItem="OUS-PE-bYb" firstAttribute="top" secondItem="cvm-Oe-jTL" secondAttribute="bottom" id="XZE-yX-B9H"/>
                 <constraint firstAttribute="trailing" secondItem="cvm-Oe-jTL" secondAttribute="trailing" id="aGV-df-C7i"/>
                 <constraint firstItem="cvm-Oe-jTL" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="hDe-XG-OJS"/>

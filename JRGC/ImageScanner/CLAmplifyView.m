@@ -56,7 +56,7 @@
     }
     return self;
 }
-- (instancetype)initWithFrame:(CGRect)frame andButtonView:(UIButton *)button andSuperView:(UIView *)superView
+- (instancetype)initWithFrame:(CGRect)frame andGestureView:(UIImageView *)tapView andSuperView:(UIView *)superView
 {
     if (self=[super initWithFrame:frame]) {
         //scrollView作为背景
@@ -66,10 +66,10 @@
         UITapGestureRecognizer *tapBg = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapBgView:)];
         [bgView addGestureRecognizer:tapBg];
         
-        UIButton *picView = button;
+        UIImageView *picView = tapView;
         
         UIImageView *imageView = [[UIImageView alloc] init];
-        imageView.image = [picView backgroundImageForState:UIControlStateNormal];
+        imageView.image = picView.image;
         imageView.frame = [bgView convertRect:picView.frame fromView:self];
         [bgView addSubview:imageView];
         [self addSubview:bgView];
@@ -85,17 +85,16 @@
         [UIView animateWithDuration:0.5 animations:^{
             CGRect frame = imageView.frame;
             frame.size.width = bgView.frame.size.width;
-            CGFloat frameHeight = frame.size.width * (imageView.image.size.height/imageView.image.size.width);
-            frame.size.height = frameHeight;
+            frame.size.height = frame.size.width * (imageView.image.size.height / imageView.image.size.width);
             frame.origin.x = 0;
-            CGFloat originFrameY = (bgView.frame.size.height - frame.size.height) * 0.5;
-            frame.origin.y = originFrameY;
+            frame.origin.y = (bgView.frame.size.height - frame.size.height) * 0.5;
             imageView.frame = frame;
         }];
         
     }
     return self;
 }
+
 -(void)tapBgView:(UITapGestureRecognizer *)tapBgRecognizer
 {
     self.scrollView.contentOffset = CGPointZero;

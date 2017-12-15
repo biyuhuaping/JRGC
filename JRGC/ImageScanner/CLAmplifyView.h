@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface CLAmplifyView : UIView
+- (instancetype)initWithFrame:(CGRect)frame andGestureView:(UIImageView *)tapView andSuperView:(UIView *)superView;
 - (instancetype)initWithFrame:(CGRect)frame andGesture:(UITapGestureRecognizer *)tap andSuperView:(UIView *)superView;
-- (instancetype)initWithFrame:(CGRect)frame andButtonView:(UIButton *)button andSuperView:(UIView *)superView;
 @end
