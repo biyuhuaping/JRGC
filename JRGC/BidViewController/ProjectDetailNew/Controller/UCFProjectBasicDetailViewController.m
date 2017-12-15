@@ -394,10 +394,10 @@
         } else {
             UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 10)];
             headView.backgroundColor = UIColorWithRGB(0xebebee);
-            //[self viewAddLine:headView Up:YES];
-            UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, headView.frame.size.height - 0.5, ScreenWidth, 0.5)];
-            lineView.backgroundColor = UIColorWithRGB(0xd8d8d8);
-            [headView addSubview:lineView];
+//            //[self viewAddLine:headView Up:YES];
+//            UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, headView.frame.size.height - 0.5, ScreenWidth, 0.5)];
+//            lineView.backgroundColor = UIColorWithRGB(0xd8d8d8);
+//            [headView addSubview:lineView];
             return headView;
         }
     }

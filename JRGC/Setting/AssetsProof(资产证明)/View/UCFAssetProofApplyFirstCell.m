@@ -41,15 +41,15 @@
 - (void)clickImageView:(UITapGestureRecognizer *)tap
 {
     if ([self.delegate respondsToSelector:@selector(seeAssetProofModel:)]) {
-        [self.delegate seeAssetProofModel:tap];
+        [self.delegate seeAssetProofModel:_thumbnailImageView];
     }
 
 }
 - (IBAction)seeAssetProofModel:(id)sender
 {
-//    if ([self.delegate respondsToSelector:@selector(seeAssetProofModel:)]) {
-//        [self.delegate seeAssetProofModel:(UIButton *)sender];
-//    }
+    if ([self.delegate respondsToSelector:@selector(seeAssetProofModel:)]) {
+        [self.delegate seeAssetProofModel:_thumbnailImageView];
+    }
 }
 -(void)layoutSubviews
 {
