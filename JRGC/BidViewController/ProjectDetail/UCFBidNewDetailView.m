@@ -87,7 +87,14 @@
         _prdLabelsList = prdList;
         _dic = dic;
         _isP2P = isP2P;
-        _status =[[[dic objectSafeDictionaryForKey:@"prdClaims"] objectSafeForKey:@"status"] intValue];
+        if(type == PROJECTDETAILTYPEBONDSRRANSFER)
+        {
+            _status = [[[dic objectSafeDictionaryForKey:@"prdTransferFore"] objectSafeForKey:@"status"] intValue];
+        }
+        else
+        {
+           _status =[[[dic objectSafeDictionaryForKey:@"prdClaims"] objectSafeForKey:@"status"] intValue];
+        }
         [self initViews];
     }
     return self;
@@ -422,8 +429,9 @@
     }else{
         view_y = 0 + [Common calculateNewSizeBaseMachine:HeadBkHeight] + bottomViewYPos;
     }
-    
-    if ((_type == PROJECTDETAILTYPEBONDSRRANSFER &&  [_p2pOrHonerType intValue] == 2) ||(!_isP2P  && _status !=  2)){//债权转让
+    //为了隐藏尊享起投  尊尊享标已售罄的状态 1000起一栏
+    if (_type != PROJECTDETAILTYPEBONDSRRANSFER && !_isP2P  && _status !=  2)
+    {
         row --;
     }
     bottomBkView = [[UIView alloc] initWithFrame:CGRectMake(0, view_y, ScreenWidth, 26*row + 12 * 2)];
@@ -479,8 +487,8 @@
 //    line2.backgroundColor = UIColorWithRGB(0xe3e5ea);
 //    [bottomBkView addSubview:line2];
 //    //****************分隔线**************
-
-    if ((_type == PROJECTDETAILTYPEBONDSRRANSFER &&  [_p2pOrHonerType intValue] == 2) ||(!_isP2P  && _status !=  2)){//债权转让 并且是普通尊享标
+    //为了隐藏尊享起投  尊尊享标已售罄的状态
+    if (_type != PROJECTDETAILTYPEBONDSRRANSFER && !_isP2P  && _status !=  2){
         if (row == 3) {
 //            UIImageView *qitouImageV = [[UIImageView alloc] initWithFrame:CGRectMake(IconXPos,44*2 + IconYPos, 22, 22)];
 //            qitouImageV.image = [UIImage imageNamed:@"particular_icon_guarantee.png"];
@@ -539,7 +547,8 @@
     }else{
         bottomBeginYPos = 0 + [Common calculateNewSizeBaseMachine:HeadBkHeight] + bottomViewYPos;
     }
-    if ((_type == PROJECTDETAILTYPEBONDSRRANSFER &&  [_p2pOrHonerType intValue] == 2) || (!_isP2P  && _status !=  2)){ //为了隐藏尊享债转100起一栏  尊尊享标已售罄的状态 1000起一栏
+    //为了隐藏尊享起投  尊尊享标已售罄的状态 1000起一栏
+    if (_type != PROJECTDETAILTYPEBONDSRRANSFER && !_isP2P  && _status !=  2){
         row --;
     }
     bottomBkView = [[UIView alloc] initWithFrame:CGRectMake(0,bottomBeginYPos, ScreenWidth, 26 *row + 12 * 2)];
@@ -569,7 +578,9 @@
 //    line2.backgroundColor = UIColorWithRGB(0xe3e5ea);
 //    [bottomBkView addSubview:line2];
 //    //****************分隔线*************
-    if ((_type == PROJECTDETAILTYPEBONDSRRANSFER &&  [_p2pOrHonerType intValue] == 2) || (!_isP2P  && _status !=  2)) {
+    //为了隐藏尊享起投  尊尊享标已售罄的状态 1000起一栏
+    if (_type != PROJECTDETAILTYPEBONDSRRANSFER && !_isP2P  && _status !=  2)
+    {
         if (row == 2) {
 //            //起投金额
 //            UIImageView *qitouImageV = [[UIImageView alloc] initWithFrame:CGRectMake(IconXPos,26*1 + IconYPos, 22, 16)];
