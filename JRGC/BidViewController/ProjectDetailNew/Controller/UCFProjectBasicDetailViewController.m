@@ -636,25 +636,23 @@
             lineView.tag = 13;
             lineView.backgroundColor = UIColorWithRGB(0xeff0f3);
             [cell.contentView addSubview:lineView];
-            
-            UIButton*button = [UIButton buttonWithType:UIButtonTypeCustom];
-            button.frame = CGRectMake(0, 0 ,ScreenWidth ,44);
-            button.tag = 14;
-            button.backgroundColor = [UIColor clearColor];
-            [cell.contentView addSubview:button];
-            
         }
         UIImageView  *inconImageView = (UIImageView*)[cell.contentView viewWithTag:11];
         UILabel *titleLabel = (UILabel*)[cell.contentView viewWithTag:12];
         UIView *lineView = (UIView *)[cell.contentView viewWithTag:13];
-        UIButton *button = (UIButton*)[cell.contentView viewWithTag:14];
         NSDictionary *dict = [_firstSectionArray objectAtIndex:indexPath.row];
         NSString * imageUrlStr = [dict objectSafeForKey:@"iconUrl"];
         [inconImageView  sd_setImageWithURL:[NSURL URLWithString:imageUrlStr]];
         titleLabel.text = [dict objectSafeForKey:@"contractName"];
         lineView.hidden = indexPath.row == _firstSectionArray.count - 1;
+        
+        
+        UIButton*button = [UIButton buttonWithType:UIButtonTypeCustom];
+        button.frame = CGRectMake(0, 0 ,ScreenWidth ,44);
+        button.backgroundColor = [UIColor clearColor];
         button.tag = 100+indexPath.row;
         [button addTarget:self action:@selector(getContractMsgDetail:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.contentView addSubview:button];
         return cell;
     }
     
@@ -1041,6 +1039,11 @@
         }
     }
     return nil;
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+
+    
 }
 -(void)OpenWebViewDetail
 {
