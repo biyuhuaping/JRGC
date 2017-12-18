@@ -70,7 +70,7 @@
             return [NSString stringWithFormat:@"共%.2f万", totalAmount];
         }
         else {
-            return self.item.minInvestTxt ? [NSString stringWithFormat:@"%@元起", self.item.minInvestTxt] : @"";
+            return self.item.minInvestTxt ? [NSString stringWithFormat:@"%@", self.item.minInvestTxt] : @"";
         }
     }
     return self.item.minInvest ? [NSString stringWithFormat:@"%@元起", self.item.minInvest] : @"";

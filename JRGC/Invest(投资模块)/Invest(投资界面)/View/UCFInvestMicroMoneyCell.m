@@ -243,7 +243,7 @@
     }
     //    self.timeLabel.text = microMoneyModel.repayPeriodtext;
     self.repayModelLabel.text = microMoneyModel.repayModeText;
-    self.startMoneyLabel.text = [NSString stringWithFormat:@"%@元起", microMoneyModel.minInvestTxt];
+    self.startMoneyLabel.text = [NSString stringWithFormat:@"%@", microMoneyModel.minInvestTxt];
     NSString *temp = [NSString stringWithFormat:@"%lf",[microMoneyModel.borrowAmount doubleValue]-[microMoneyModel.completeLoan doubleValue]];
     self.remainLabel.text = [self moneywithRemaining:temp total:microMoneyModel.borrowAmount];
     
