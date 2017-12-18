@@ -45,9 +45,9 @@
             self.labelFourthHeight.constant = 0;
             self.thirdDownSpace.constant = 0;
             if (self.calculateType == 1) {
-                self.labelThird.text = @"每季应收利息";
+                self.labelThird.text = @"每季应收本息";
             }else {
-                self.labelThird.text = @"每月应收利息";
+                self.labelThird.text = @"每月应收本息";
             }
         }
             break;
