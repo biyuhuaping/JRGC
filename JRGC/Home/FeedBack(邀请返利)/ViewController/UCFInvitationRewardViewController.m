@@ -217,9 +217,8 @@
         default:
             break;
     }
-    
-    [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:view isTop:YES];
-    [Common addLineViewColor:UIColorWithRGB(0xe3e5ea) With:view isTop:NO];
+    [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) WithView:view isTop:YES];
+    [Common addLineViewColor:UIColorWithRGB(0xe3e5ea) WithView:view isTop:NO];
     return view;
 }
 
