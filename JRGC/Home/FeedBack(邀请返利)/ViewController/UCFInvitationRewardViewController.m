@@ -177,7 +177,7 @@
         return h + 1;
     }
     else if (indexPath.section == 1) {
-        CGFloat h = [self computeHeightWithContent:@"发送链接邀请好友注册，两人同时获得奖励，奖励以网站活动详情为准"];
+        CGFloat h = [self computeHeightWithContent:@"邀请好友注册，两人同时获得奖励，奖励以网站活动详情为准"];
         h += 30;
         return h + 1;
     }
@@ -217,9 +217,8 @@
         default:
             break;
     }
-    
-    [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:view isTop:YES];
-    [Common addLineViewColor:UIColorWithRGB(0xe3e5ea) With:view isTop:NO];
+    [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) WithView:view isTop:YES];
+    [Common addLineViewColor:UIColorWithRGB(0xe3e5ea) WithView:view isTop:NO];
     return view;
 }
 

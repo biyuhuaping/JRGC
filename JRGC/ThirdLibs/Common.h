@@ -151,6 +151,8 @@ typedef NS_ENUM(NSInteger, PicType) {
 + (NSString *)filePathWithFileName:(NSString *)fileName;
 //给视图加上制定颜色的水平分割线，top YES 给上边加，NO 给下方加
 + (void)addLineViewColor:(UIColor *)color With:(UIView *)view isTop:(BOOL)top;
+//给视图加上制定颜色的水平分割线，top YES 给上边加，NO 给下方加 ***备注 宽度为屏幕的宽度
++ (void)addLineViewColor:(UIColor *)color WithView:(UIView *)view isTop:(BOOL)top;
 + (UIView *)addSepateViewWithRect:(CGRect)rect WithColor:(UIColor *)color;
 //验证身份证号
 + (BOOL)isIdentityCard: (NSString *)identityCard;
