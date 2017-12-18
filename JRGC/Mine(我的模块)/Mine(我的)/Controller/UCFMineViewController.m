@@ -106,7 +106,7 @@
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
     
-    if (index == 3) {
+    if (index == 5) {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:@"亲爱的工友，喜欢就去给个好评吧！" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"冷漠拒绝" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
             NSInteger index = [[NSUserDefaults standardUserDefaults] integerForKey:@"tapMineNum"];
