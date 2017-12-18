@@ -173,15 +173,15 @@
     NSString *userId = [UserInfoSingle sharedManager].userId;
     if(nil != userId) {
         NSInteger index = [[NSUserDefaults standardUserDefaults] integerForKey:@"tapMineNum"];
-        if (index <= 3) {
+        if (index <= 5) {
             index ++;
             [[NSUserDefaults standardUserDefaults] setInteger:index forKey:@"tapMineNum"];
             [[NSUserDefaults standardUserDefaults] synchronize];
         }
     }
-    else {
-        [self setZeroForTapMineNum];
-    }
+//    else {
+//        [self setZeroForTapMineNum];
+//    }
 }
 
 - (void)setZeroForTapMineNum {
