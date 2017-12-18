@@ -957,7 +957,7 @@
 - (void)getLoginImage
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSString *URL = [NSString stringWithFormat:@"https://fore.9888.cn/cms/api/appbanner.php?key=0ca175b9c0f726a831d895e&id=52"];
+        NSString *URL = [NSString stringWithFormat:@"https://fore.9888.cn/cms/api/appbanner.php?key=0ca175b9c0f726a831d895e&id=57"];
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
         [request setURL:[NSURL URLWithString:URL]];
         [request setHTTPMethod:@"GET"];
