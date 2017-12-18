@@ -694,6 +694,16 @@
     lineView.backgroundColor = color;
     [view addSubview:lineView];
 }
++ (void)addLineViewColor:(UIColor *)color WithView:(UIView *)view isTop:(BOOL)top
+{
+    CGFloat height = 0.0f;
+    if (!top) {
+        height = CGRectGetHeight(view.frame);
+    }
+    UIView *lineView = [[[UIView alloc] initWithFrame:CGRectMake(0, height - 0.5, ScreenWidth, 0.5)] autorelease];
+    lineView.backgroundColor = color;
+    [view addSubview:lineView];
+}
 + (UIView *)addSepateViewWithRect:(CGRect)rect WithColor:(UIColor *)color
 {
     UIView *view = [[[UIView alloc] initWithFrame:rect] autorelease];
