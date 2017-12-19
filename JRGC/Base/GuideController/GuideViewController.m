@@ -35,21 +35,7 @@
     guideScrollView.bounces = NO;
     [self.view addSubview:guideScrollView];
     
-//    int pagesCount =3;
-//    pageControl = [[UIPageControl alloc] init];
-//    pageControl.numberOfPages = pagesCount;
-//    pageControl.currentPage = 0;
-//    pageControl.currentPageIndicatorTintColor = UIColorWithRGB(0xfdb14d);
-//    pageControl.pageIndicatorTintColor = [UIColor whiteColor];
-//    if (ScreenHeight == 480) {
-//        pageControl.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height-12); // 设置pageControl的位置
-//    } else {
-//        pageControl.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height-25); // 设置pageControl的位置
-//    }
-//    [pageControl setBounds:CGRectMake(0,0,18*(pagesCount-1)+18,18)]; //页面控件上的圆点间距基本在16左右。
-//    [pageControl.layer setCornerRadius:9]; // 圆角层
-//    [pageControl setBackgroundColor:[UIColor clearColor]];
-//    [self.view addSubview:pageControl];
+
     
     int version = 7;
     if(ScreenHeight == 480){
@@ -81,37 +67,35 @@
     }
     guideScrollView.contentSize = CGSizeMake(ScreenWidth * 4, ScreenHeight);
 }
-//- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-//{
-//    CGFloat x = scrollView.contentOffset.x;
-//    if (x/ScreenWidth == 0) {
-//        pageControl.currentPage = 0;
-//    } else if(x/ScreenWidth == 1) {
-//        pageControl.currentPage = 1;
-//    } else if(x/ScreenWidth == 2){
-//        pageControl.currentPage = 2;
-//    }
-//}
+
 - (void)skipToMainWorkView
 {
     if (delegate && [delegate respondsToSelector:@selector(changeRootView)])  {
         [delegate changeRootView];
     }
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
++ (BOOL)isShow
+{
+    // 读取版本信息
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    NSString *localVersion = [user objectForKey:@"currentversion"];
+    NSString *currentVersion =[[NSBundle mainBundle].infoDictionary objectForKey:@"CFBundleShortVersionString"];
+    if (localVersion == nil || ![currentVersion isEqualToString:localVersion]) {
+        [self saveCurrentVersion];
+        return YES;
+    }else
+    {
+        return NO;
+    }
+}
+// 保存版本信息
++ (void)saveCurrentVersion
+{
+    NSString *version =[[NSBundle mainBundle].infoDictionary objectForKey:@"CFBundleShortVersionString"];
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    [user setObject:version forKey:@"currentversion"];
+    [user synchronize];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
