@@ -219,4 +219,6 @@
     [super didReceiveMemoryWarning];
 }
 
+- (void)refresh
+{ }
 @end

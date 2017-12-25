@@ -39,7 +39,8 @@
 
 //只要是豆哥商城的都去掉导航栏，在此需要显示
 - (void)viewWillAppear:(BOOL)animated {
-    [self.navigationController setNavigationBarHidden:NO animated:animated];
+    [self.navigationController setNavigationBarHidden:self.isHideNativeNav animated:animated];
 }
+
 
 @end

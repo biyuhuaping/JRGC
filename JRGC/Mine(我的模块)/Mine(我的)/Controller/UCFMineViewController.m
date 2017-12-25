@@ -196,6 +196,11 @@
     self.mineFooterView.height = 240;
 }
 
+- (void)refresh
+{
+    [self.tableView.header beginRefreshing];
+}
+
 #pragma mark - 设置界面
 - (void)createUI {
     lineViewAA.hidden = YES;

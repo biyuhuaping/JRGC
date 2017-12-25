@@ -11,4 +11,6 @@
 @class UCFSettingArrowItem;
 @interface UCFMIneFuncCollectCell : UICollectionViewCell
 @property (strong, nonatomic) UCFSettingArrowItem *setItem;
+@property (strong, nonatomic) NSIndexPath *indexPath;
+@property (strong, nonatomic) UICollectionView *collectView;
 @end

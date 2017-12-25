@@ -14,6 +14,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *valueLabel;
 @property (weak, nonatomic) IBOutlet UIView *signView;
+@property (weak, nonatomic) IBOutlet UIView *segLineRight;
+@property (weak, nonatomic) IBOutlet UIView *segLineBottom;
 
 @end
 
@@ -22,6 +24,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    self.signView.hidden = YES;
 }
 
 - (void)layoutSubviews
@@ -31,6 +34,19 @@
     self.titleLabel.text = self.setItem.title;
     self.signView.hidden = !self.setItem.isShowOrHide;
     self.valueLabel.text = self.setItem.subtitle;
+}
+
+- (void)setIndexPath:(NSIndexPath *)indexPath
+{
+    _indexPath = indexPath;
+    NSInteger total = [self.collectView numberOfItemsInSection:indexPath.section];
+    NSInteger currentNo = indexPath.row / 2;
+    if (currentNo != total/2) {
+        self.segLineBottom.hidden = NO;
+    }
+    else {
+        self.segLineBottom.hidden = YES;
+    }
 }
 
 @end

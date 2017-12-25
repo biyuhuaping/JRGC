@@ -61,20 +61,42 @@
                         <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X4C-eZ-pJU">
+                        <rect key="frame" x="159.5" y="0.0" width="0.5" height="60"/>
+                        <color key="backgroundColor" red="0.8901960784313725" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="0.5" id="adK-Ue-edZ"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tj3-US-eG2">
+                        <rect key="frame" x="0.0" y="59.5" width="160" height="0.5"/>
+                        <color key="backgroundColor" red="0.8901960784313725" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="0.5" id="GcZ-BU-Ty4"/>
+                        </constraints>
+                    </view>
                 </subviews>
             </view>
             <constraints>
                 <constraint firstItem="AYh-RX-6le" firstAttribute="leading" secondItem="jms-nQ-oyc" secondAttribute="trailing" constant="5" id="FaZ-JI-Nym"/>
+                <constraint firstAttribute="bottom" secondItem="X4C-eZ-pJU" secondAttribute="bottom" id="FrE-yH-Uye"/>
                 <constraint firstItem="jms-nQ-oyc" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="GJd-q8-GQg"/>
+                <constraint firstAttribute="bottom" secondItem="tj3-US-eG2" secondAttribute="bottom" id="QXE-h9-hyh"/>
                 <constraint firstItem="TFB-yg-B6I" firstAttribute="centerY" secondItem="AYh-RX-6le" secondAttribute="centerY" id="Vhf-Np-zqd"/>
                 <constraint firstItem="AYh-RX-6le" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="13" id="a8K-gy-8Hc"/>
                 <constraint firstAttribute="bottom" secondItem="gAm-6I-CTA" secondAttribute="bottom" constant="11" id="e00-3Z-LXs"/>
                 <constraint firstItem="jms-nQ-oyc" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="13" id="hP0-tX-bPJ"/>
+                <constraint firstItem="X4C-eZ-pJU" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="hrK-NB-iPR"/>
+                <constraint firstItem="tj3-US-eG2" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="jq6-kO-KQX"/>
+                <constraint firstAttribute="trailing" secondItem="tj3-US-eG2" secondAttribute="trailing" id="k4Z-32-9YX"/>
+                <constraint firstAttribute="trailing" secondItem="X4C-eZ-pJU" secondAttribute="trailing" id="nQg-sQ-0Wn"/>
                 <constraint firstItem="TFB-yg-B6I" firstAttribute="leading" secondItem="AYh-RX-6le" secondAttribute="trailing" constant="5" id="uZv-FQ-uRO"/>
                 <constraint firstItem="gAm-6I-CTA" firstAttribute="leading" secondItem="jms-nQ-oyc" secondAttribute="trailing" constant="5" id="v3W-2d-DDf"/>
             </constraints>
             <connections>
                 <outlet property="imageview" destination="jms-nQ-oyc" id="BFn-Wm-8F1"/>
+                <outlet property="segLineBottom" destination="tj3-US-eG2" id="j0y-J5-rNu"/>
+                <outlet property="segLineRight" destination="X4C-eZ-pJU" id="Ctk-mP-3wj"/>
                 <outlet property="signView" destination="TFB-yg-B6I" id="Yb9-qF-jo3"/>
                 <outlet property="titleLabel" destination="AYh-RX-6le" id="tpm-ST-OeF"/>
                 <outlet property="valueLabel" destination="gAm-6I-CTA" id="7Nb-aD-f0R"/>
