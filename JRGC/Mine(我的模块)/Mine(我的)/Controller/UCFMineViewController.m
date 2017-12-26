@@ -10,7 +10,7 @@
 #import "UCFMineHeaderView.h"
 #import "UCFMineCell.h"
 #import "UCFMineFuncCell.h"
-#import "UCFMineFuncSecCell.h"
+//#import "UCFMineFuncSecCell.h"
 #import "UCFSecurityCenterViewController.h"
 #import "UCFLoginBaseView.h"
 #import "UCFCalendarViewController.h"
@@ -36,9 +36,12 @@
 #import "KTAlertController.h"
 #import <StoreKit/StoreKit.h>
 #import "UCFAccountAssetsProofViewController.h"
-@interface UCFMineViewController () <UITableViewDelegate, UITableViewDataSource, UCFMineHeaderViewDelegate, UCFMineFuncCellDelegate, UCFMineAPIManagerDelegate, UCFMineFuncSecCellDelegate, UIAlertViewDelegate, SKStoreProductViewControllerDelegate>
+#import "UCFMineFuncView.h"
+
+@interface UCFMineViewController () <UITableViewDelegate, UITableViewDataSource, UCFMineHeaderViewDelegate, UCFMineFuncCellDelegate, UCFMineAPIManagerDelegate, UCFMineFuncViewDelegate, UIAlertViewDelegate, SKStoreProductViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) UCFMineHeaderView   *mineHeaderView;
+@property (weak, nonatomic) UCFMineFuncView   *mineFooterView;
 @property (strong, nonatomic) UCFLoginBaseView  *loginView;
 @property (strong, nonatomic) UCFMineAPIManager *apiManager;
 
@@ -190,6 +193,12 @@
 {
     [super viewDidLayoutSubviews];
     self.mineHeaderView.frame = CGRectMake(0, 0, ScreenWidth, 195);
+    self.mineFooterView.height = 240;
+}
+
+- (void)refresh
+{
+    [self.tableView.header beginRefreshing];
 }
 
 #pragma mark - 设置界面
@@ -201,6 +210,14 @@
     self.tableView.tableHeaderView = mineHeader;
     self.tableView.backgroundColor = UIColorWithRGB(0xebebee);
     self.mineHeaderView = mineHeader;
+    
+    UCFMineFuncView *mineFooter = (UCFMineFuncView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFMineFuncView" owner:self options:nil] lastObject];
+    mineFooter.isCompanyAgent = [UserInfoSingle sharedManager].companyAgent;
+    mineFooter.delegate = self;
+//    mineFooter.frame = CGRectMake(0, 0, ScreenWidth, mineFooter.height);
+    self.tableView.tableFooterView = mineFooter;
+    self.mineFooterView = mineFooter;
+    
 #ifdef __IPHONE_11_0
     if (@available(iOS 11.0, *)) {
         self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
@@ -244,6 +261,7 @@
     [self.tableView.header endRefreshing];
     if ([result isKindOfClass:[UCFUserBenefitModel class]]) {
         self.benefitModel = result;
+        self.mineFooterView.benefit = result;
         self.mineHeaderView.userBenefitModel = result;
         
         if ([self.mineHeaderView.userBenefitModel.unReadMsgCount intValue] == 0) {
@@ -261,7 +279,7 @@
 #pragma mark - tableView 的代理方法
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 3;
+    return 2;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -282,9 +300,6 @@
         
         case 1:
             return 1;
-        
-        case 2:
-            return 4;
     }
     return 0;
 }
@@ -352,81 +367,6 @@
             cell = (UCFMineFuncCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFMineFuncCell" owner:self options:nil] lastObject];
             cell.delegate = self;
             cell.tableview = tableView;
-        }
-        return cell;
-    }
-    else if (indexPath.section == 2) {
-        static NSString *cellId = @"minefuncseccell";
-        UCFMineFuncSecCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
-        if (nil == cell) {
-            cell = (UCFMineFuncSecCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFMineFuncSecCell" owner:self options:nil] lastObject];
-            cell.delegate = self;
-            cell.tableview = tableView;
-            cell.view2.hidden = YES;
-        }
-        cell.indexPath = indexPath;
-        if (indexPath.row == 0) {
-            cell.iconImageView.image = [UIImage imageNamed:@"uesr_icon_bean"];
-            cell.icon2ImageView.image = [UIImage imageNamed:@"uesr_icon_coupon"];
-            cell.titleDesLabel.text = @"工豆";
-            cell.title2DesLabel.text = @"优惠券";
-            cell.valueLabel.text = self.benefitModel.beanAmount ? [NSString stringWithFormat:@"¥%@", self.benefitModel.beanAmount] : @"¥0.00";
-            cell.value2Label.text = self.benefitModel.couponNumber ? [NSString stringWithFormat:@"%@张可用", self.benefitModel.couponNumber] : @"0张可用";
-            if (self.benefitModel.beanExpiring.integerValue > 0) {
-                cell.signView.hidden = NO;
-            }
-            else {
-                cell.signView.hidden = YES;
-            }
-            if (self.benefitModel.couponExpringNum.integerValue > 0) {
-                cell.sign2View.hidden = NO;
-            }
-            else {
-                cell.sign2View.hidden = YES;
-            }
-        }
-        else if (indexPath.row == 1) {
-            cell.iconImageView.image = [UIImage imageNamed:@"uesr_icon_score"];
-            cell.icon2ImageView.image = [UIImage imageNamed:@"uesr_icon_rebate"];
-            cell.titleDesLabel.text = @"工分";
-            cell.valueLabel.text = self.benefitModel.score ? [NSString stringWithFormat:@"%@分", self.benefitModel.score] : @"0分";
-            cell.title2DesLabel.text = @"邀请返利";
-            cell.value2Label.text = self.benefitModel.promotionCode.length > 0 ? [NSString stringWithFormat:@"工场码%@", self.benefitModel.promotionCode] : @"";
-            cell.signView.hidden = YES;
-            cell.sign2View.hidden = YES;
-        }
-        else if (indexPath.row == 2) {
-            cell.iconImageView.image = [UIImage imageNamed:@"uesr_icon_checkin"];
-            cell.icon2ImageView.image = [UIImage imageNamed:@"uesr_icon_contact"];
-            cell.titleDesLabel.text = @"签到";
-            cell.valueLabel.text = @"签到送工分";
-            cell.title2DesLabel.text = @"联系我们";
-            cell.value2Label.text = @"400-0322-988";
-            cell.signView.hidden = YES;
-            cell.sign2View.hidden = YES;
-        }
-        else if (indexPath.row == 3) {
-            if ([UserInfoSingle sharedManager].companyAgent) {
-                cell.iconImageView.image = [UIImage imageNamed:@"uesr_icon_calculator"];
-                cell.titleDesLabel.text = @"投资计算器";
-                cell.valueLabel.text = @"一键计算收益";
-                cell.signView.hidden = YES;
-                cell.sign2View.hidden = YES;
-                cell.view2.hidden = NO;
-                cell.view2.backgroundColor = UIColorWithRGB(0xebebee);
-            }
-            else {
-                cell.iconImageView.image = [UIImage imageNamed:@"uesr_icon_assets"];
-                cell.icon2ImageView.image = [UIImage imageNamed:@"uesr_icon_calculator"];
-                cell.titleDesLabel.text = @"资产证明";
-                cell.valueLabel.text = @"随时申请开具";
-                cell.title2DesLabel.text = @"投资计算器";
-                cell.value2Label.text = @"一键计算收益";
-                cell.view2.hidden = YES;
-                cell.signView.hidden = YES;
-                cell.sign2View.hidden = YES;
-//                cell.view2.backgroundColor = [UIColor clearColor];
-            }
         }
         return cell;
     }
@@ -647,26 +587,26 @@
     [self.navigationController pushViewController:myserved animated:YES];
 }
 
-- (void)mineFuncSecCell:(UCFMineFuncSecCell *)funcSecCell didClickedButtonWithTitle:(NSString *)title
+- (void)mineFuncView:(UCFMineFuncView *)funcView didClickItemWithTitle:(NSString *)title
 {
     if ([title isEqualToString:@"工豆"]) {
         UCFMyFacBeanViewController *bean = [[UCFMyFacBeanViewController alloc] initWithNibName:@"UCFMyFacBeanViewController" bundle:nil];
         bean.title = @"我的工豆";
         [self.navigationController pushViewController:bean animated:YES];
-        
+
     }
     else if ([title isEqualToString:@"工分"]){
         //跳转到工分
         UCFWorkPointsViewController *subVC = [[UCFWorkPointsViewController alloc]initWithNibName:@"UCFWorkPointsViewController" bundle:nil];
         subVC.title = @"我的工分";
         [self.navigationController pushViewController:subVC animated:YES];
-        
+
     }
     else   if ([title isEqualToString:@"优惠券"]){
-        
+
         UCFCouponViewController *coupon = [[UCFCouponViewController alloc] initWithNibName:@"UCFCouponViewController" bundle:nil];
         [self.navigationController pushViewController:coupon animated:YES];
-        
+
     }
     else  if ([title isEqualToString:@"邀请返利"]){//邀请返利
         UCFInvitationRebateViewController *feedBackVC = [[UCFInvitationRebateViewController alloc] initWithNibName:@"UCFInvitationRebateViewController" bundle:nil];

@@ -87,12 +87,6 @@
                         <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KFc-yV-Wtc">
-                        <rect key="frame" x="0.0" y="0.0" width="160" height="60"/>
-                        <connections>
-                            <action selector="leftButtonClicked:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="VpY-e5-Frf"/>
-                        </connections>
-                    </button>
                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EPe-en-2Ut">
                         <rect key="frame" x="254.5" y="13" width="55" height="18"/>
                         <subviews>
@@ -152,7 +146,6 @@
                     <constraint firstAttribute="trailing" secondItem="gFf-hy-UOV" secondAttribute="trailing" id="7Hf-yK-3ll"/>
                     <constraint firstItem="ctP-ja-Dvy" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="7cV-Fh-6E7"/>
                     <constraint firstItem="aH5-Ml-6se" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="8dg-Ud-P2X"/>
-                    <constraint firstAttribute="bottom" secondItem="KFc-yV-Wtc" secondAttribute="bottom" id="B11-SZ-qPT"/>
                     <constraint firstItem="EPe-en-2Ut" firstAttribute="leading" secondItem="Lpr-Jr-rsp" secondAttribute="trailing" constant="5" id="CaP-RM-C27"/>
                     <constraint firstItem="mnu-1w-hCF" firstAttribute="leading" secondItem="BoC-ik-9xM" secondAttribute="trailing" constant="5" id="Fgr-dm-9A6"/>
                     <constraint firstAttribute="bottom" secondItem="0yF-Bu-V2R" secondAttribute="bottom" constant="11" id="Gbj-64-zte"/>
@@ -175,11 +168,8 @@
                     <constraint firstAttribute="trailing" secondItem="HMC-mm-4fU" secondAttribute="trailing" id="lZ9-Nt-JqT"/>
                     <constraint firstItem="mnu-1w-hCF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="13" id="nMR-PR-gJ2"/>
                     <constraint firstAttribute="bottom" secondItem="rJL-qa-6kx" secondAttribute="bottom" id="oeQ-fL-wis"/>
-                    <constraint firstItem="KFc-yV-Wtc" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="poE-QM-E7N"/>
                     <constraint firstItem="bTx-Yt-ci8" firstAttribute="leading" secondItem="ctP-ja-Dvy" secondAttribute="trailing" constant="5" id="qO8-BT-BAl"/>
-                    <constraint firstItem="KFc-yV-Wtc" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="saG-vV-Fo9"/>
                     <constraint firstAttribute="bottom" secondItem="iwQ-lg-iJ7" secondAttribute="bottom" id="vNf-GK-nlQ"/>
-                    <constraint firstItem="iwQ-lg-iJ7" firstAttribute="leading" secondItem="KFc-yV-Wtc" secondAttribute="trailing" id="zcR-HC-coh"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

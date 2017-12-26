@@ -220,6 +220,10 @@
             
         }];
     }
+    if (self.investAmont.doubleValue <= 0 || self.annualInterestRate.doubleValue <= 0 || self.investTerm.integerValue <= 0) {
+        [AuxiliaryFunc showToastMessage:@"输入数值不可为0" withView:self.view];
+        return;
+    }
     
     [self setCalculateResultViewWithState:self.calculateTypeSign];
     

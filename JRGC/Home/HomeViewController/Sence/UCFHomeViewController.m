@@ -94,6 +94,11 @@
 
 }
 
+- (void)refresh {
+    [self.cycleImageVC getNormalBannerData];
+    [self.homeListVC.tableView.header beginRefreshing];
+}
+
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];

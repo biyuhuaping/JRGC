@@ -44,6 +44,11 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentControllerUpdate) name:@"reloadP2PTransferData" object:nil];
     
 }
+
+- (void)refresh {
+    [self currentControllerUpdate];
+}
+
 - (void)currentControllerUpdate
 {
     if ([_pagerView.selectIndexStr isEqualToString:@"0"]) {

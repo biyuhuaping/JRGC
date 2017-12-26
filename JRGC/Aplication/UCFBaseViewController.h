@@ -53,5 +53,6 @@
 
 //- (void)clickRightBtn;
 - (void)hideLeftButton;
+- (void)refresh;
 @end
 
