@@ -54,12 +54,8 @@
     UCFSettingItem *contactUs = [UCFSettingArrowItem itemWithIcon:@"uesr_icon_contact" title:@"联系我们" destVcClass:nil];
     contactUs.subtitle = @"400-0322-988";
     
-    if (_isCompanyAgent) {
-        _dataArray = [[NSMutableArray alloc] initWithArray:@[facBean, coupon, facPoint, profitInvest, sign, addProfitCalculator, contactUs]];
-    }
-    else {
-        _dataArray = [[NSMutableArray alloc] initWithArray:@[facBean, coupon, facPoint, profitInvest, sign, addProfitCalculator, assetProof, contactUs]];
-    }
+    _dataArray = [[NSMutableArray alloc] initWithArray:@[facBean, coupon, facPoint, profitInvest, sign, addProfitCalculator, assetProof, contactUs]];
+    
      
     return _dataArray;
 }
@@ -91,8 +87,8 @@
     static NSString *const cellId = @"cellId";
     UCFMIneFuncCollectCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellId forIndexPath:indexPath];
     cell.setItem = [self.dataArray objectAtIndex:indexPath.row];
-    cell.indexPath = indexPath;
     cell.collectView = collectionView;
+    cell.indexPath = indexPath;
     return cell;
 }
 

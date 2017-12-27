@@ -212,11 +212,12 @@
     self.mineHeaderView = mineHeader;
     
     UCFMineFuncView *mineFooter = (UCFMineFuncView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFMineFuncView" owner:self options:nil] lastObject];
-    mineFooter.isCompanyAgent = [UserInfoSingle sharedManager].companyAgent;
     mineFooter.delegate = self;
 //    mineFooter.frame = CGRectMake(0, 0, ScreenWidth, mineFooter.height);
     self.tableView.tableFooterView = mineFooter;
     self.mineFooterView = mineFooter;
+    
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 10, 0);
     
 #ifdef __IPHONE_11_0
     if (@available(iOS 11.0, *)) {
@@ -624,6 +625,10 @@
     }
     else  if ([title isEqualToString:@"资产证明"]){//资产证明
         if (!self.assetProofCanClick) {
+            return;
+        }
+        if ([UserInfoSingle sharedManager].companyAgent) {
+            [AuxiliaryFunc showToastMessage:@"资产证明开具只针对个人用户开放" withView:self.view];
             return;
         }
             UCFAccountAssetsProofViewController * assetProofVC = [[UCFAccountAssetsProofViewController alloc]initWithNibName:@"UCFAccountAssetsProofViewController" bundle:nil];

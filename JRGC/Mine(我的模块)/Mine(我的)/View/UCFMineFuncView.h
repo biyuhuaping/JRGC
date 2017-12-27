@@ -16,6 +16,5 @@
 @interface UCFMineFuncView : UIView
 @property (strong, nonatomic) UCFUserBenefitModel *benefit;
 @property (weak, nonatomic) id<UCFMineFuncViewDelegate> delegate;
-@property (assign, nonatomic) BOOL isCompanyAgent;
 - (CGFloat)height;
 @end

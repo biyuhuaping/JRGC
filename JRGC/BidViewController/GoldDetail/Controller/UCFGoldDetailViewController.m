@@ -828,7 +828,7 @@
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
     if (section == 1) {
-        if(_selectIndex == 1 && self.isGoldCurrentAccout && _purchaseRecordListArray.count >= 20) {
+        if(_selectIndex == 1 && _purchaseRecordListArray.count >= 20) {
             UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 30)];
             footerView.backgroundColor = [UIColor clearColor];
             UILabel *placehoderLabel = [[UILabel alloc] initWithFrame:CGRectMake(XPOS,9 , ScreenWidth - XPOS * 2, 12)];
@@ -870,7 +870,7 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     if (section == 1) {
-        if(_selectIndex == 1 && self.isGoldCurrentAccout) {
+        if(_selectIndex == 1) {
            return _purchaseRecordListArray.count >= 20 ? 30 : 10;
         }
     }else if(section == 2)
