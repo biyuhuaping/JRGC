@@ -73,7 +73,7 @@
             return self.item.minInvestTxt ? [NSString stringWithFormat:@"%@", self.item.minInvestTxt] : @"";
         }
     }
-    return self.item.minInvest ? [NSString stringWithFormat:@"%@元起", self.item.minInvest] : @"";
+    return self.item.minInvestTxt ? [NSString stringWithFormat:@"%@", self.item.minInvestTxt] : @"";
 }
 
 - (NSString *)maxInvest

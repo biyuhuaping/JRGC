@@ -130,10 +130,9 @@
         [self getAdversementImageStyle:3];
     }
     
-    BOOL islaunch= [[NSUserDefaults standardUserDefaults] boolForKey:@"islaunch"];
-    if (!islaunch ) {
+    BOOL islaunch= [GuideViewController isShow];
+    if (islaunch) {
         [self showGuidePageController];
-//        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"useLockView"];
         NSString *strParameters = nil;
         strParameters = [NSString stringWithFormat:@"equipment=%@&remark=%@&serialNumber=%@&sourceType=%@",[Common platformString],@"1",[Common getKeychain],@"1"];
         //统计用户数量

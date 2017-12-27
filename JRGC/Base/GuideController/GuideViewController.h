@@ -15,4 +15,5 @@
 
 @interface GuideViewController : UIViewController
 @property (assign, nonatomic) id <GuideViewContlerDelegate>delegate;
++ (BOOL)isShow;
 @end

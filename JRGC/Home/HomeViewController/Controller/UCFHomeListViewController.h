@@ -40,4 +40,5 @@ typedef enum : NSUInteger {
 + (instancetype)instanceWithPresenter:(UCFHomeListPresenter *)presenter;
 - (UITableView *)tableView;
 - (UCFHomeListPresenter *)presenter;
+
 @end

@@ -278,6 +278,10 @@
 		745D37DA1F3AE9B200897F1A /* UCFColdChargeThirdCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 745D37D81F3AE9B200897F1A /* UCFColdChargeThirdCell.m */; };
 		745D37DB1F3AE9B200897F1A /* UCFColdChargeThirdCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 745D37D91F3AE9B200897F1A /* UCFColdChargeThirdCell.xib */; };
 		7462CB921F8B4F0200F96831 /* UCFNoticeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7462CB911F8B4F0200F96831 /* UCFNoticeModel.m */; };
+		74673BC01FEB8C1400AF3727 /* UCFMineFuncView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74673BBF1FEB8C1400AF3727 /* UCFMineFuncView.m */; };
+		74673BC21FEB8C2200AF3727 /* UCFMineFuncView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74673BC11FEB8C2200AF3727 /* UCFMineFuncView.xib */; };
+		74673BC61FEB923A00AF3727 /* UCFMIneFuncCollectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74673BC41FEB923A00AF3727 /* UCFMIneFuncCollectCell.m */; };
+		74673BC71FEB923A00AF3727 /* UCFMIneFuncCollectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74673BC51FEB923A00AF3727 /* UCFMIneFuncCollectCell.xib */; };
 		746748D11F3C53310067294D /* UCFBankLimitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 746748CF1F3C53310067294D /* UCFBankLimitViewController.m */; };
 		746748D21F3C53310067294D /* UCFBankLimitViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 746748D01F3C53310067294D /* UCFBankLimitViewController.xib */; };
 		746748DA1F3C561A0067294D /* UCFGoldBankLimitHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 746748D91F3C561A0067294D /* UCFGoldBankLimitHeader.m */; };
@@ -1532,6 +1536,12 @@
 		745D37D91F3AE9B200897F1A /* UCFColdChargeThirdCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFColdChargeThirdCell.xib; sourceTree = "<group>"; };
 		7462CB901F8B4F0200F96831 /* UCFNoticeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFNoticeModel.h; sourceTree = "<group>"; };
 		7462CB911F8B4F0200F96831 /* UCFNoticeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFNoticeModel.m; sourceTree = "<group>"; };
+		74673BBE1FEB8C1400AF3727 /* UCFMineFuncView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMineFuncView.h; sourceTree = "<group>"; };
+		74673BBF1FEB8C1400AF3727 /* UCFMineFuncView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMineFuncView.m; sourceTree = "<group>"; };
+		74673BC11FEB8C2200AF3727 /* UCFMineFuncView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFMineFuncView.xib; sourceTree = "<group>"; };
+		74673BC31FEB923A00AF3727 /* UCFMIneFuncCollectCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMIneFuncCollectCell.h; sourceTree = "<group>"; };
+		74673BC41FEB923A00AF3727 /* UCFMIneFuncCollectCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMIneFuncCollectCell.m; sourceTree = "<group>"; };
+		74673BC51FEB923A00AF3727 /* UCFMIneFuncCollectCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFMIneFuncCollectCell.xib; sourceTree = "<group>"; };
 		746748CE1F3C53310067294D /* UCFBankLimitViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFBankLimitViewController.h; sourceTree = "<group>"; };
 		746748CF1F3C53310067294D /* UCFBankLimitViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFBankLimitViewController.m; sourceTree = "<group>"; };
 		746748D01F3C53310067294D /* UCFBankLimitViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFBankLimitViewController.xib; sourceTree = "<group>"; };
@@ -4461,6 +4471,12 @@
 				74B98CA11F711D7500CB6A9F /* UCFMineFuncSecCell.h */,
 				74B98CA21F711D7500CB6A9F /* UCFMineFuncSecCell.m */,
 				74B98CA31F711D7500CB6A9F /* UCFMineFuncSecCell.xib */,
+				74673BBE1FEB8C1400AF3727 /* UCFMineFuncView.h */,
+				74673BBF1FEB8C1400AF3727 /* UCFMineFuncView.m */,
+				74673BC11FEB8C2200AF3727 /* UCFMineFuncView.xib */,
+				74673BC31FEB923A00AF3727 /* UCFMIneFuncCollectCell.h */,
+				74673BC41FEB923A00AF3727 /* UCFMIneFuncCollectCell.m */,
+				74673BC51FEB923A00AF3727 /* UCFMIneFuncCollectCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -7364,6 +7380,7 @@
 				83D42A8E1FCE619D004C96EF /* UCFShareBaseView.xib in Resources */,
 				740586D21F41B10900E2DE01 /* UCFGoldRaiseCell.xib in Resources */,
 				83CD84351F13A50800227704 /* UCFP2PViewController.xib in Resources */,
+				74673BC71FEB923A00AF3727 /* UCFMIneFuncCollectCell.xib in Resources */,
 				74702BC01FB5599700CBB655 /* UCFExtractGoldCell.xib in Resources */,
 				833603CE1D928F9200C3E435 /* UCFWithdrawCashResultWebView.xib in Resources */,
 				746748D21F3C53310067294D /* UCFBankLimitViewController.xib in Resources */,
@@ -7386,6 +7403,7 @@
 				A8CE17741EC44BF8009BD954 /* UCFWalletSelectBankCarViewController.xib in Resources */,
 				74A2C0D71F4306A000EDF0FA /* UCFGoldCashSecondCell.xib in Resources */,
 				74270C9E1EC58F6800F9419B /* UCFHomeListCell.xib in Resources */,
+				74673BC21FEB8C2200AF3727 /* UCFMineFuncView.xib in Resources */,
 				74FA211A1F4C0BA100037991 /* UCFGoldIncreTransListCell.xib in Resources */,
 				747BE9D31D5B0F48007DEF32 /* UCFHuiBuinessDetailViewController.xib in Resources */,
 				74270D311EC595FA00F9419B /* UCFDataStatisticsViewController.xib in Resources */,
@@ -7521,6 +7539,7 @@
 				74BDA9881F09F6C60054403F /* FSCalendarCell.m in Sources */,
 				742D50EF1F74FAE600951AE2 /* UCFUserAssetModel.m in Sources */,
 				7477BF951AFB0F4C00914BFB /* UCFRedEnvelopeTableViewCell.m in Sources */,
+				74673BC61FEB923A00AF3727 /* UCFMIneFuncCollectCell.m in Sources */,
 				744EB8011EE803F4003C57C4 /* UCFHonorHeaderView.m in Sources */,
 				7443C7401F1F6CBB009669C0 /* UCFGoldRechargeHistoryModel.m in Sources */,
 				740E2E941ECD4D55006FA335 /* UCFNoticeView.m in Sources */,
@@ -7847,6 +7866,7 @@
 				7BCE01F71AC8FC260084C15C /* ASIDataDecompressor.m in Sources */,
 				74B3AD871ED2C31B00653F8B /* YFRollingLabel.m in Sources */,
 				749319C11B12B6DF00143424 /* UCFProvinceModel.m in Sources */,
+				74673BC01FEB8C1400AF3727 /* UCFMineFuncView.m in Sources */,
 				E311A6751D90EBBE00C5483E /* UCFWebViewJavascriptBridgeBanner.m in Sources */,
 				4A9016841AFB12FE0049A9E0 /* MASViewAttribute.m in Sources */,
 				7BC304851ACBC22D007767F1 /* UIImage+Translation.m in Sources */,

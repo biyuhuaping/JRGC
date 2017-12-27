@@ -180,10 +180,10 @@
 }
 -(void)beginPost:(kSXTag)tag
 {
-    if(tag !=kSXTagGelectALLGoldCoupon)
-    {
+//    if(tag != kSXTagGelectALLGoldCoupon)
+//    {
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    }
+//    }
 }
 
 

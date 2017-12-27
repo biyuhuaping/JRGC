@@ -17,7 +17,7 @@
 @interface UCFGoldBidSuccessViewController ()<UITableViewDelegate,UITableViewDataSource,MjAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
-@property (strong,nonatomic) NSArray *dataArray;
+@property (strong,nonatomic) NSMutableArray *dataArray;
 @end
 
 @implementation UCFGoldBidSuccessViewController
@@ -55,17 +55,34 @@
      NSString *purchaseMoneyStr = [NSString stringWithFormat:@"¥%@",[_dataDict objectSafeForKey:@"purchaseMoney"]];
     UCFSettingItem *item5 = [UCFSettingItem itemWithTitle:@"支付金额" withSubtitle:purchaseMoneyStr];
     
+
+    
     NSString *returnGoldStr = [NSString stringWithFormat:@"%@克",[_dataDict objectSafeForKey:@"returnGold"]];
     if([returnGoldStr doubleValue] > 0)
     {
          UCFSettingItem *item6 = [UCFSettingItem itemWithTitle:@"获得返金" withSubtitle:returnGoldStr];
-         self.dataArray = @[item1,item2,item3,item4,item5,item6];
+         self.dataArray = [NSMutableArray arrayWithArray:@[item1,item2,item3,item4,item5,item6]];
     }
     else
     {
-         self.dataArray = @[item1,item2,item3,item4,item5];
+       self.dataArray = [NSMutableArray arrayWithArray:@[item1,item2,item3,item4,item5]];
     }
     
+    /*
+    NSString *winningNum =  [_dataDict objectSafeForKey:@"huojiangcishu"];
+    if ([winningNum integerValue] > 0) {
+        UCFSettingItem *item7 = [UCFSettingItem itemWithTitle:@"获取抽奖次数" withSubtitle:winningNum];
+        [self.dataArray addObject:item7];
+    } else {
+        UCFSettingItem *item7 = [UCFSettingItem itemWithTitle:@"获取抽奖次数" withSubtitle:winningNum];
+        [self.dataArray addObject:item7];
+    }
+     */
+
+    NSString *winningNum = @"3次";
+    UCFSettingItem *item7 = [UCFSettingItem itemWithTitle:@"获取抽奖次数" withSubtitle:winningNum];
+    [self.dataArray addObject:item7];
+
     if (_isPurchaseSuccess)
     {
         MjAlertView *alertView = [[MjAlertView alloc] initInvestmentSuccesseViewAlertWithDelegate:self];
@@ -196,19 +213,12 @@
     }
     return cell;
 }
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    if ([cell.textLabel.text isEqualToString:@"获取抽奖次数"]) {
+        
+    }
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

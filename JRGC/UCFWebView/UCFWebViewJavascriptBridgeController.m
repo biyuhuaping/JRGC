@@ -259,7 +259,7 @@
     [_bridge registerHandler:@"nativeCallback" handler:^(id data, WVJBResponseCallback responseCallback) {
         
         DBLOG(@"testObjcCallback called: %@", data);
-        
+        _isHideNativeNav = NO;
         NSDictionary *nativeData = data;
         if (nil == nativeData || [nativeData isKindOfClass:[NSNull class]] || nativeData.count == 0 || !nativeData[@"action"])
         {
@@ -422,6 +422,7 @@
             weakSelf.webView.translatesAutoresizingMaskIntoConstraints = false;
             [weakSelf.navigationController setNavigationBarHidden:YES animated:NO];
             weakSelf.topConSpace.constant = 0;
+            _isHideNativeNav = YES;
 
         }else if ([nativeData[@"action"] isEqualToString:@"reserve_contract"]) {
             NSString *value = [nativeData objectSafeForKey:@"value"];

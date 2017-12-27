@@ -152,7 +152,7 @@
     self.progressLab.text = [NSString stringWithFormat:@"%@%%",model.annualRate];//年化收益率
     [self.progressLab setFont:[UIFont systemFontOfSize:13] string:@"%"];
     
-    _minInvestLab.text = [NSString stringWithFormat:@"%@元起",model.minInvest];//起投金额
+    _minInvestLab.text = [NSString stringWithFormat:@"%@",model.minInvestTxt];//起投金额
 //
     NSString *temp = [NSString stringWithFormat:@"%lf",[model.borrowAmount doubleValue]-[model.completeLoan doubleValue]];
     

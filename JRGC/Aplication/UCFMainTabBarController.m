@@ -30,7 +30,8 @@
 
 
 @property (strong, nonatomic) UCFHomeViewController *LatestView;
-@property (strong, nonatomic) UCFProjectListController *AssignmentView;
+@property (strong, nonatomic) UCFInvestViewController *AssignmentView;
+@property (strong, nonatomic) UCFMineViewController *mineView;
 @end
 
 @implementation UCFMainTabBarController
@@ -55,6 +56,7 @@
     [self.tabBar addSubview:imaview];
     [[UITabBar appearance] setShadowImage:tabImag];
 }
+
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
@@ -97,6 +99,7 @@
             case 1:{
                 UCFInvestViewController *invest = [[UCFInvestViewController alloc] initWithNibName:@"UCFInvestViewController" bundle:nil];
                 controller = invest;
+                _AssignmentView = invest;
             }
                 break;
             case 2:{
@@ -115,6 +118,7 @@
             case 4:{
                 UCFMineViewController *mine = [[UCFMineViewController alloc] initWithNibName:@"UCFMineViewController" bundle:nil];
                 controller = mine;
+                _mineView = mine;
             }
                 break;
             default:
@@ -191,16 +195,24 @@
 
 - (void)gestureRecognizerHandle:(UITapGestureRecognizer *)sender{
     CGPoint p = [sender locationInView:self.tabBar];
-    int index = p.x/(ScreenWidth/4);
+    int index = p.x/(ScreenWidth/5);
     
     switch (index) {
         case 0:{
 #warning 列表刷新
+            [_LatestView refresh];
 //            [_LatestView.tableView.header beginRefreshing];
         }
             break;
         case 1:{
+            [_AssignmentView refresh];
 //            [_AssignmentView.tableView.header beginRefreshing];
+        }
+            break;
+            
+        case 4:{
+            [_mineView refresh];
+            //            [_AssignmentView.tableView.header beginRefreshing];
         }
             break;
     }
