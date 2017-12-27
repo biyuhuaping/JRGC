@@ -257,19 +257,23 @@
         if ([self checkUserCanInvestIsDetail:YES])
         {
             NSString *userid = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
-            NSString *strParameters = [NSString stringWithFormat:@"id=%@&userId=%@", model.Id,userid];
+//            NSString *strParameters = [NSString stringWithFormat:@"id=%@&userId=%@", model.Id,userid];
+            
+            
+            NSString *prdClaimsIdStr = [NSString stringWithFormat:@"%@",model.Id];
+            NSDictionary *praramDic = @{@"userId":userid,@"prdClaimsId":prdClaimsIdStr};
             if ([model.status intValue ] != 2) {
                 NSInteger isOrder = [model.isOrder integerValue];
                 if (isOrder > 0) {
                     [MBProgressHUD showOriginHUDAddedTo:self.view animated:YES];
-                    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self Type:self.accoutType];
+                       [[NetworkModule sharedNetworkModule] newPostReq:praramDic tag: kSXTagPrdClaimsGetPrdBaseDetail owner:self signature:YES Type:self.accoutType];
                 } else {
                     UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前标的详情只对认购人开放"];
                     [self.navigationController pushViewController:controller animated:YES];
                 }
             } else {
                 [MBProgressHUD showOriginHUDAddedTo:self.view animated:YES];
-                [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self Type:self.accoutType];
+                [[NetworkModule sharedNetworkModule] newPostReq:praramDic tag: kSXTagPrdClaimsGetPrdBaseDetail owner:self signature:YES Type:self.accoutType];
             }
         }
     }
@@ -483,16 +487,18 @@
         if ([self.tableView.footer isRefreshing]) {
             [self.tableView.footer endRefreshing];
         }
-    }else if (tag.intValue == kSXTagPrdClaimsDetail){
-        NSString *rstcode = dic[@"status"];
-        NSString *rsttext = dic[@"statusdes"];
-        if ([rstcode intValue] == 1) {
+    }else if (tag.intValue == kSXTagPrdClaimsGetPrdBaseDetail){
+        NSDictionary *dataDic = [dic objectSafeForKey:@"data"];
+        NSString *rstcode = dic[@"ret"];
+        NSString *rsttext = dic[@"message"];
+        if ([rstcode boolValue]) {
             NSArray *prdLabelsListTemp = [NSArray arrayWithArray:(NSArray*)self.honerListModel.prdLabelsList];
-            UCFProjectDetailViewController *controller = [[UCFProjectDetailViewController alloc] initWithDataDic:dic isTransfer:NO withLabelList:prdLabelsListTemp];
+            UCFProjectDetailViewController *controller = [[UCFProjectDetailViewController alloc] initWithDataDic:dataDic isTransfer:NO withLabelList:prdLabelsListTemp];
             CGFloat platformSubsidyExpense = [self.honerListModel.platformSubsidyExpense floatValue];
             controller.accoutType = self.accoutType;
             controller.rootVc = self.rootVc;
             [[NSUserDefaults standardUserDefaults] setValue:[NSString stringWithFormat:@"%.1f",platformSubsidyExpense] forKey:@"platformSubsidyExpense"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
             [self.navigationController pushViewController:controller animated:YES];
         }else {
             [AuxiliaryFunc showAlertViewWithMessage:rsttext];

@@ -10,4 +10,5 @@
 
 @interface UCFProjectSafetyGuaranteeViewController : UCFBaseViewController
 @property (nonatomic,strong)NSDictionary *dataDic;
+@property (strong, nonatomic)NSArray  *dataArray;
 @end

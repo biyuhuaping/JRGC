@@ -172,7 +172,7 @@
 //创建投资button
 -(void)cretateInvestmentView
 {
-    NSString *state = [[_dataDic objectForKey:@"prdClaims"] objectForKey:@"status"];
+    NSString *state = [_dataDic objectForKey:@"status"];
     if (!_investmentView) {
         _investmentView = [[UCFInvestmentView alloc] initWithFrame:CGRectMake(0, ScreenHeight - 67- 64, ScreenWidth, 67) target:self action:@selector(investmentViewClick:) investmentState:state souceVc:_sourceVc isP2P:_isP2P];
         //AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
@@ -201,7 +201,7 @@
 - (void)initTableViews1111
 {
     //是否隐藏借款人信息一栏
-    _isHideBorrowerInformation = YES; //默认不隐藏
+    _isHideBorrowerInformation = YES;//默认不隐藏
     _borrowerInformationStr = @"借款人信息";
     _auditRecordArray = [NSMutableArray arrayWithArray:@[@"身份认证",@"手机认证",@"工作认证",@"信用认证"]];
     NSString *agencyCodeStr = [[_dataDic objectSafeDictionaryForKey:@"orderUser"] objectSafeForKey:@"agencyCode"];

@@ -424,18 +424,17 @@
                                     NSDictionary *dic = (NSDictionary *)result;
                                     [MBProgressHUD hideOriginAllHUDsForView:weakSelf.view animated:YES];
                                     
-                                    NSString *rstcode = dic[@"status"];
-                                    NSString *rsttext = dic[@"statusdes"];
-                                    if ([rstcode intValue] == 1) {
+                                    NSDictionary *dataDic = [dic objectSafeForKey:@"data"];
+                                    NSString *rstcode = dic[@"ret"];
+                                    NSString *rsttext = dic[@"message"];
+                                    if ([rstcode boolValue]) {
                                         NSArray *prdLabelsListTemp = [NSArray arrayWithArray:(NSArray*)model.prdLabelsList];
-                                        UCFProjectDetailViewController *controller = [[UCFProjectDetailViewController alloc] initWithDataDic:dic isTransfer:NO withLabelList:prdLabelsListTemp];
+                                        UCFProjectDetailViewController *controller = [[UCFProjectDetailViewController alloc] initWithDataDic:dataDic isTransfer:NO withLabelList:prdLabelsListTemp];
                                         CGFloat platformSubsidyExpense = [model.platformSubsidyExpense floatValue];
                                         [[NSUserDefaults standardUserDefaults] setValue:[NSString stringWithFormat:@"%.1f",platformSubsidyExpense] forKey:@"platformSubsidyExpense"];
                                         self.intoVCStr = @"ProjectDetailVC";
                                         controller.accoutType = self.accoutType;
                                         controller.rootVc = self;
-                                        
-                                        
                                         [weakSelf.navigationController pushViewController:controller animated:YES];
                                     }else {
                                         [AuxiliaryFunc showAlertViewWithMessage:rsttext];
@@ -451,11 +450,12 @@
                                     NSDictionary *dic = (NSDictionary *)result;
                                     [MBProgressHUD hideOriginAllHUDsForView:weakSelf.view animated:YES];
                                     
-                                    NSString *rstcode = dic[@"status"];
-                                    NSString *rsttext = dic[@"statusdes"];
-                                    if ([rstcode intValue] == 1) {
+                                    NSDictionary *dataDic = [dic objectSafeForKey:@"data"];
+                                    NSString *rstcode = dic[@"ret"];
+                                    NSString *rsttext = dic[@"message"];
+                                    if ([rstcode boolValue]) {
                                         NSArray *prdLabelsListTemp = [NSArray arrayWithArray:(NSArray*)model.prdLabelsList];
-                                        UCFProjectDetailViewController *controller = [[UCFProjectDetailViewController alloc] initWithDataDic:dic isTransfer:NO withLabelList:prdLabelsListTemp];
+                                        UCFProjectDetailViewController *controller = [[UCFProjectDetailViewController alloc] initWithDataDic:dataDic isTransfer:NO withLabelList:prdLabelsListTemp];
                                         CGFloat platformSubsidyExpense = [model.platformSubsidyExpense floatValue];
                                         [[NSUserDefaults standardUserDefaults] setValue:[NSString stringWithFormat:@"%.1f",platformSubsidyExpense] forKey:@"platformSubsidyExpense"];
                                         self.intoVCStr = @"ProjectDetailVC";

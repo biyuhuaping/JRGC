@@ -36,8 +36,7 @@
 }
 - (void)initView:(BOOL)isKeyBid
 {
-//   BOOL isShowLabels =  [[NSUserDefaults standardUserDefaults]boolForKey:@"isShowLabels"];
-//    if (isShowLabels) {
+
         _topView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 10.0f)];
         _topView.backgroundColor = UIColorWithRGB(0xebebee);
         _buyCueDesLabel = [[UILabel alloc] initWithFrame:CGRectZero];
@@ -291,7 +290,6 @@
                     }
                 }
             }
-//              BOOL isShowLabels =  [[NSUserDefaults standardUserDefaults]boolForKey:@"isShowLabels"];
             if (labelPriorityArr.count != 0 ) {
                     [self drawMarkView];
             }
@@ -349,6 +347,7 @@
          }
       }
     } else{
+        
         BOOL bankNumEq = [[_dataDict objectSafeForKey:@"bankNumEq"] boolValue];
         
         _totalKeYongTipLabel.text = bankNumEq ? @"(尊享余额+微金余额)":@"";
@@ -362,6 +361,25 @@
             _topView.frame =  CGRectMake(0, 0, ScreenWidth, 10);
             _buyCueDesLabel.frame = CGRectZero;
             _minuteCountDownView.frame = CGRectZero;
+        }
+        //prdLabelsList 是否存在
+        if ([_dataDict  isExistenceforKey:@"prdLabelsList"])
+        { //如果存在prdLabelsList的数组
+            _prdLabelsList =  [_dataDict  objectSafeArrayForKey:@"prdLabelsList"];
+            NSMutableArray *labelPriorityArr = [NSMutableArray arrayWithCapacity:4];
+            if (![_prdLabelsList isEqual:[NSNull null]]) {
+                for (NSDictionary *dic in _prdLabelsList) {
+                    NSInteger labelPriority = [dic[@"labelPriority"] integerValue];
+                    if (labelPriority > 1) {
+                        if ([dic[@"labelName"] rangeOfString:@"起投"].location == NSNotFound) {
+                            [labelPriorityArr addObject:dic[@"labelName"]];
+                        }
+                    }
+                }
+            }
+            if (labelPriorityArr.count != 0 ) {
+                [self drawMarkView];
+            }
         }
          [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:_topView isTop:NO];
 //           _minuteCountDownView.frame = CGRectMake(0, CGRectGetMaxY(_topView.frame), ScreenWidth, 37);
@@ -403,8 +421,8 @@
 - (void)drawMarkView
 {
     _topView.frame =  CGRectMake(0, 0, ScreenWidth, 30.0f);
-    //标签数组
-    _prdLabelsList = [[_dataDict objectSafeDictionaryForKey:@"data" ] objectSafeArrayForKey:@"prdLabelsList"];
+//    //标签数组
+//    _prdLabelsList = [[_dataDict objectSafeDictionaryForKey:@"data" ] objectSafeArrayForKey:@"prdLabelsList"];
     NSMutableArray *labelPriorityArr = [NSMutableArray arrayWithCapacity:4];
     if (![_prdLabelsList isEqual:[NSNull null]]) {
         for (NSDictionary *dic in _prdLabelsList) {

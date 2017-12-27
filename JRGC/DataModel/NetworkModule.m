@@ -1286,6 +1286,15 @@ static NetworkModule *gInstance = NULL;
         case kSXTagProfitCalculator: //收益计算器
             parameter = [NEW_SERVER_IP stringByAppendingString:PROFITCALCULATOR];
             break;
+        case kSXTagPrdClaimsGetPrdDetailMess: //普通标详情【项目详情】
+            parameter = [NEW_SERVER_IP stringByAppendingString:PRDCLAIMSGETPRDGETDETAILMESS];
+            break;
+        case kSXTagPrdClaimsGetPrdBaseDetail:  //普通标详情【基础标信息】
+            parameter = [NEW_SERVER_IP stringByAppendingString:PRDCLAIMSGETPRDBASEDETAIL];
+            break;
+        case kSXTagPrdClaimsGetInvestOrderRecord://普通标详情【标认购记录】
+            parameter = [NEW_SERVER_IP stringByAppendingString:PRDCLAIMSGETINVESTORDERRECORD];
+            break;
     }
     //给原有参数字典添加公共参数
     if (!data) {

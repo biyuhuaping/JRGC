@@ -10,6 +10,10 @@
 #import "UCFToolsMehod.h"
 @interface UCFProjectInvestmentRecordViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (assign,nonatomic)int  currentPage;
+@property (strong,nonatomic)NSMutableArray *dataArray;
+
+@property (assign,nonatomic)int   totalCount;//记录总个数
 @end
 
 @implementation UCFProjectInvestmentRecordViewController
@@ -26,15 +30,36 @@
     
     if(_detailType == PROJECTDETAILTYPEBONDSRRANSFER) //普通标
     {
-      
       baseTitleLabel.text = @"转让记录";
     }
     else
     {
-         baseTitleLabel.text = self.accoutType == SelectAccoutTypeP2P ?  @"出借记录":@"认购记录";
+      baseTitleLabel.text = self.accoutType == SelectAccoutTypeP2P ?  @"出借记录":@"认购记录";
+        self.dataArray = [NSMutableArray arrayWithCapacity:0];
+        //=========  下拉刷新、上拉加载更多  =========
+        __weak typeof(self) weakSelf = self;
+        // 添加传统的下拉刷新
+        [self.tableView addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(getInvestmentRecordHTTPRequst)];
+        // 添加上拉加载更多
+        [self.tableView addLegendFooterWithRefreshingBlock:^{
+            [weakSelf getInvestmentRecordHTTPRequst];
+        }];
+        
+        self.tableView.footer.hidden = YES;
+        [self.tableView.header beginRefreshing];
     }
 }
-
+-(void)getInvestmentRecordHTTPRequst
+{
+    if ([self.tableView.header isRefreshing]) {
+        self.currentPage = 1;
+        [self.tableView.footer resetNoMoreData];
+    }
+    NSString *userid = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
+    NSString *currentPageStr = [NSString stringWithFormat:@"%d",_currentPage];
+    NSDictionary *praramDic = @{@"userId":userid,@"prdClaimsId":_prdClaimsId,@"page":currentPageStr,@"pageSize":@"20"};
+    [[NetworkModule sharedNetworkModule] newPostReq:praramDic tag: kSXTagPrdClaimsGetInvestOrderRecord owner:self signature:YES Type:self.accoutType];
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -46,12 +71,7 @@
 {
     UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 30)];
     headView.backgroundColor = UIColorWithRGB(0xf9f9f9);
-    //[self viewAddLine:headView Up:YES];
     [self viewAddLine:headView Up:NO];
-//    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, headView.frame.size.height - 0.5, ScreenWidth, 0.5)];
-//    lineView.backgroundColor = UIColorWithRGB(0xe3e5ea);
-//    [headView addSubview:lineView];
-    
     UILabel *placehoderLabel = [[UILabel alloc] initWithFrame:CGRectMake(XPOS,9 , ScreenWidth - XPOS * 2, 12)];
     placehoderLabel.font = [UIFont boldSystemFontOfSize:12];
     placehoderLabel.textColor = UIColorWithRGB(0x333333);
@@ -59,6 +79,13 @@
     placehoderLabel.backgroundColor = [UIColor clearColor];
     NSString *str = baseTitleLabel.text;
     placehoderLabel.text = [NSString stringWithFormat:@"共%lu笔%@",(unsigned long)[[_dataDic objectForKey:@"prdOrders"] count],str];
+    
+    if (_detailType == PROJECTDETAILTYPEBONDSRRANSFER)
+    {
+       placehoderLabel.text = [NSString stringWithFormat:@"共%lu笔%@",(unsigned long)[[_dataDic objectForKey:@"prdOrders"] count],str];
+    }else{
+        placehoderLabel.text = [NSString stringWithFormat:@"共%lu笔%@",_totalCount,str];
+    }
     [headView addSubview:placehoderLabel];
     return headView;
 }
@@ -86,10 +113,13 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[_dataDic objectForKey:@"prdOrders"] count];
+    if (_detailType == PROJECTDETAILTYPEBONDSRRANSFER)
+    {
+            return [[_dataDic objectForKey:@"prdOrders"] count];
+    }else{
+            return _dataArray.count;
+    }
 }
-    
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
@@ -190,7 +220,7 @@
             countLabel.textColor = UIColorWithRGB(0x333333);
         }
     }else {
-        NSArray *prdOrders = [_dataDic objectForKey:@"prdOrders"];
+        NSArray *prdOrders = _dataArray;
         NSInteger path = [indexPath row];
         NSString *titleStr = [[prdOrders objectAtIndex:path]objectForKey:@"leftRealName"];
 
@@ -222,5 +252,68 @@
     
     return cell;
 }
+//开始请求
+- (void)beginPost:(kSXTag)tag
+{
+    [MBProgressHUD showOriginHUDAddedTo:self.view animated:YES];
+}
 
+- (void)endPost:(id)result tag:(NSNumber *)tag
+{
+    [MBProgressHUD hideOriginAllHUDsForView:self.view animated:YES];
+    NSMutableDictionary *dic = [result objectFromJSONString];
+    
+    if (tag.intValue == kSXTagPrdClaimsGetInvestOrderRecord)
+    {
+        NSString *rstcode = dic[@"ret"];
+        NSString *rsttext = dic[@"message"];
+        if ([rstcode boolValue]) {
+            NSArray *list_result = [[[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"pageData"] objectSafeArrayForKey:@"result"];
+            if (_currentPage == 1)
+            {
+                [self.dataArray removeAllObjects];
+            }
+//            for (NSDictionary *dict in list_result) {
+//                UCFTransferModel *model = [UCFTransferModel transferWithDict:dict];
+//                [self.dataArray addObject:model];
+//            }
+            [self.dataArray addObjectsFromArray:list_result];
+            
+            _totalCount =  [[[[[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"pageData"] objectSafeDictionaryForKey:@"pagination"] objectForKey:@"totalCount"] integerValue];
+            BOOL hasNext = [[[[[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"pageData"] objectSafeDictionaryForKey:@"pagination"] objectForKey:@"hasNextPage"] boolValue];
+   
+            
+            if (self.dataArray.count > 0) {
+                self.tableView.footer.hidden = NO;
+                if (!hasNext) {
+                    [self.tableView.footer noticeNoMoreData];
+                } else {
+                    [self.tableView.footer resetNoMoreData];
+                    _currentPage++;
+                }
+            }
+            [self.tableView reloadData];
+        } else {
+            [MBProgressHUD displayHudError:rsttext];
+        }
+    }
+    if ([self.tableView.header isRefreshing]) {
+        [self.tableView.header endRefreshing];
+    }
+    if ([self.tableView.footer isRefreshing]) {
+        [self.tableView.footer endRefreshing];
+    }
+}
+//请求失败
+- (void)errorPost:(NSError*)err tag:(NSNumber*)tag
+{
+    [MBProgressHUD hideOriginAllHUDsForView:self.view animated:YES];
+    [MBProgressHUD displayHudError:err.userInfo[@"NSLocalizedDescription"]];
+    if ([self.tableView.header isRefreshing]) {
+        [self.tableView.header endRefreshing];
+    }
+    if ([self.tableView.footer isRefreshing]) {
+        [self.tableView.footer endRefreshing];
+    }
+}
 @end

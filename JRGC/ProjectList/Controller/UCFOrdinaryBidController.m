@@ -187,12 +187,13 @@
         }else {
             [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
         }
-    }else if (tag.intValue == kSXTagPrdClaimsDetail){
-        NSString *rstcode = dic[@"status"];
-        NSString *rsttext = dic[@"statusdes"];
+    }else if (tag.intValue == kSXTagPrdClaimsGetPrdBaseDetail){
+        NSDictionary *dataDic = [dic objectSafeForKey:@"data"];
+        NSString *rstcode = dic[@"ret"];
+        NSString *rsttext = dic[@"message"];
         if ([rstcode intValue] == 1) {
             NSArray *prdLabelsListTemp = [NSArray arrayWithArray:(NSArray*)_projectListModel.prdLabelsList];
-            UCFProjectDetailViewController *controller = [[UCFProjectDetailViewController alloc] initWithDataDic:dic isTransfer:NO withLabelList:prdLabelsListTemp];
+            UCFProjectDetailViewController *controller = [[UCFProjectDetailViewController alloc] initWithDataDic:dataDic isTransfer:NO withLabelList:prdLabelsListTemp];
             CGFloat platformSubsidyExpense = [_projectListModel.platformSubsidyExpense floatValue];
             [[NSUserDefaults standardUserDefaults] setValue:[NSString stringWithFormat:@"%.1f",platformSubsidyExpense] forKey:@"platformSubsidyExpense"];
             controller.rootVc = self;
@@ -273,8 +274,11 @@
         
         _projectListModel = [self.dataArray objectAtIndex:indexPath.row];
         NSString *userid = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
-        NSString *strParameters = [NSString stringWithFormat:@"id=%@&userId=%@", _projectListModel.Id,userid];
+//        NSString *strParameters = [NSString stringWithFormat:@"id=%@&userId=%@", _projectListModel.Id,userid];
         NSInteger isOrder = [_projectListModel.isOrder integerValue];
+        NSString *prdClaimsIdStr = [NSString stringWithFormat:@"%@",_projectListModel.Id];
+        NSDictionary *praramDic = @{@"userId":userid,@"prdClaimsId":prdClaimsIdStr};
+  
         if ([_projectListModel.status intValue ] != 2) {
             if (isOrder <= 0) {
                 UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前标的详情只对出借人开放"];
@@ -286,11 +290,12 @@
             if ([_projectListModel.status intValue ] != 2) {
                 if (isOrder > 0) {
                     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-                    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self Type:SelectAccoutTypeP2P];
+                    [[NetworkModule sharedNetworkModule] newPostReq:praramDic tag: kSXTagPrdClaimsGetPrdBaseDetail owner:self signature:YES Type:SelectAccoutTypeP2P];
                 }
             }else {
                 [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-                [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self Type:SelectAccoutTypeP2P];
+                [[NetworkModule sharedNetworkModule] newPostReq:praramDic tag: kSXTagPrdClaimsGetPrdBaseDetail owner:self signature:YES Type:SelectAccoutTypeP2P];
+          
             }
         }
     }

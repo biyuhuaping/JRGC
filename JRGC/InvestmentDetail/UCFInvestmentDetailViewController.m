@@ -204,9 +204,13 @@
         else {
             [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
         }
-    }else if (tag.intValue == kSXTagPrdClaimsDetail) {
-        if ([rstcode intValue] == 1) {
-            UCFProjectDetailViewController *controller = [[UCFProjectDetailViewController alloc] initWithDataDic:dic isTransfer:NO withLabelList:nil];
+    }else if (tag.intValue == kSXTagPrdClaimsGetPrdBaseDetail) {
+        NSDictionary *dataDic = [dic objectSafeForKey:@"data"];
+        NSString *rstcode = dic[@"ret"];
+        NSString *rsttext = dic[@"message"];
+        if ([rstcode boolValue])
+        {
+            UCFProjectDetailViewController *controller = [[UCFProjectDetailViewController alloc] initWithDataDic:dataDic isTransfer:NO withLabelList:nil];
             controller.sourceVc = @"investmentDetail";
             controller.accoutType = self.accoutType;
             [self.navigationController pushViewController:controller animated:YES];
@@ -332,9 +336,11 @@
 
 - (void)headBtnClicked:(id)sender selectViewId:(NSString *)uuid state:(NSString *)state
 {
-    if ([_detailType isEqualToString:@"1"]) {
-        NSString *strParameters = [NSString stringWithFormat:@"id=%@&userId=%@",uuid,[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
-        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self Type:self.accoutType];
+    if ([_detailType isEqualToString:@"1"])
+    {
+        NSString *prdClaimsIdStr = [NSString stringWithFormat:@"%@",uuid];
+        NSDictionary *praramDic = @{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"prdClaimsId":prdClaimsIdStr};
+                [[NetworkModule sharedNetworkModule] newPostReq:praramDic tag: kSXTagPrdClaimsGetPrdBaseDetail owner:self signature:YES Type:self.accoutType];
     } else {
         NSString *strParameters = [NSString stringWithFormat:@"tranid=%@&userId=%@",uuid,[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
         [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdTransferDetail owner:self Type:self.accoutType];

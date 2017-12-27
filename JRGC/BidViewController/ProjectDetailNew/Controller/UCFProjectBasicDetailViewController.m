@@ -43,13 +43,18 @@
     
     NSString *_licenseNumberStr;//营业执照Number
     
-    
     BOOL _isShow;//是否显示逾期信息    string    0不显示,1显示
     NSString *_overdueCount;    //逾期次数
     NSString *_overdueInvest;    //逾期金额
+    //
+    NSString *_joboauth;    //工作认证
+    NSString *_idno;    //身份证号
+    NSString *_realName;    //真实姓名
+    NSString *_office;    //办公室
+    NSString *_creditAuth; //信用认证
+    NSString *_mobile;//手机号
     BOOL _isOpenWebViewOpen;//是否展开webView
 }
-@property (assign ,nonatomic)  BOOL prdDesType;//新老项目标识
 @property (strong ,nonatomic)   UIWebView *webView;
 @property (assign ,nonatomic)   float webViewHight;//项目详情webView高度
 @property (assign ,nonatomic)   float sectionViewHight;//项目详情webView高度
@@ -57,7 +62,7 @@
 
 @property (strong ,nonatomic)  NSString *contractTitle;
 @property (strong ,nonatomic)  NSString *prdType;//合同类型 1为债转 0为普通标
-@property (strong ,nonatomic)  NSString *projectId;//标Id
+
 
 @end
 
@@ -77,18 +82,17 @@
     _isOpenWebViewOpen = NO;
     _sectionViewHight = 194;
     _isP2P = self.accoutType == SelectAccoutTypeP2P ;
+    [self orderUserDataInformation];
    if(_detailType == PROJECTDETAILTYPENORMAL) //普通标
     {
          [self initTableViews];
          baseTitleLabel.text = @"基础详情";
         self.prdType = @"0";
-         self.projectId = [[_dataDic objectForKey:@"prdClaims"] objectForKey:@"id"];
     }
-    else if(_detailType == PROJECTDETAILTYPERIGHTINTEREST) //普通标
+    else if(_detailType == PROJECTDETAILTYPERIGHTINTEREST) //权益标
     {
          baseTitleLabel.text = @"基础详情";
         self.prdType = @"0";
-        self.projectId = [[_dataDic objectForKey:@"prdClaims"] objectForKey:@"id"];
         [self initRightInterestNewTableViews];
         
     }
@@ -101,35 +105,53 @@
     }
     [_tableView reloadData];
 }
-
+-(void)orderUserDataInformation
+{
+    NSDictionary *orderUserDict = [_dataDic objectSafeDictionaryForKey:@"orderUser"];
+    if (_detailType == PROJECTDETAILTYPEBONDSRRANSFER)//债转
+    {
+       _joboauth = [orderUserDict objectSafeForKey:@"joboauth"];   //工作认证
+       _idno = [orderUserDict objectSafeForKey:@"idno"];//身份证号
+       _realName = [orderUserDict objectSafeForKey:@"realName"];  //真实姓名
+       _mobile =[orderUserDict objectSafeForKey:@"mobile"];//手机号
+       _office =[orderUserDict objectSafeForKey:@"office"];     //办公室
+       _creditAuth = [orderUserDict objectSafeForKey:@"creditAuth"]; ; //信用认证
+    }else{
+        _joboauth = [orderUserDict objectSafeForKey:@"joboAuthTxt"];   //工作认证
+        _idno = [orderUserDict objectSafeForKey:@"idno"]; ;    //身份证号
+        _realName = [orderUserDict objectSafeForKey:@"realName"];  //真实姓名
+        _mobile =[orderUserDict objectSafeForKey:@"phoneNum"]; ;    //手机号
+        _office =[orderUserDict objectSafeForKey:@"office"];     //办公室
+        _creditAuth = [orderUserDict objectSafeForKey:@"creditAuthTxt"];//信用认证
+    }
+}
 - (void)initTableViews
 {
+    
     //是否隐藏借款人信息一栏
     _isHideBorrowerInformation = YES; //默认不隐藏
     _borrowerInformationStr = @"借款人信息";
     _auditRecordArray = [NSMutableArray arrayWithArray:@[@"身份认证",@"手机认证",@"工作认证",@"信用认证"]];
-    NSString *agencyCodeStr = [[_dataDic objectSafeDictionaryForKey:@"orderUser"] objectSafeForKey:@"agencyCode"];
+    NSString *agencyCodeStr = [[[_dataDic objectSafeDictionaryForKey:@"orderUser"] objectSafeDictionaryForKey:@"enterpriseInfo"] objectSafeForKey:@"enterpriseCode"];
     NSArray *arrayJiBen = [NSArray arrayWithObjects:@"姓名／所在地",@"基本信息",@"入学年份",@"户口所在地",@"公司行业",@"公司规模",@"职位",@"工作收入",@"现单位工作时间",@"有无购房",@"有无房贷",@"有无购车",@"有无车贷", nil];
     if (![agencyCodeStr isEqualToString:@""]) {
         _borrowerInformationStr = @"机构信息";
         _auditRecordArray =[NSMutableArray arrayWithArray:@[@"营业执照",@"手机认证",@"信用认证"]];
         arrayJiBen= @[@"机构名称",@"营业执照",@"法定代理人",@"联系人",@"机构地址",@"邮编"];
-        [self setAgencyInfoDetailValue];
+        [self setAgencyInfoDetailValueNew];
     }else{
         [self setinfoDetailValue];
     }
     _borrowerInfo = [[NSArray alloc] initWithObjects:arrayJiBen, nil];
     if (_isP2P) {
-        NSString *tradeMarkStr = [[_dataDic objectSafeDictionaryForKey:@"prdClaims"] objectSafeForKey: @"tradeMark"];
-        _prdDesType= [[[_dataDic objectSafeDictionaryForKey:@"prdClaims"] objectSafeForKey: @"prdDesType"] boolValue];
         if (_prdDesType)//老项目
         {
-            _isHideBorrowerInformation = [tradeMarkStr intValue] == 20 ? YES :NO;
+            _isHideBorrowerInformation = [_tradeMark intValue] == 20 ? YES :NO;
         }
         else //新项目
         {
             if ([agencyCodeStr isEqualToString:@""] ) { //个人标
-                _isHideBorrowerInformation = [tradeMarkStr intValue] == 20 ? YES :NO;
+                _isHideBorrowerInformation = [_tradeMark intValue] == 20 ? YES :NO;
             }else{ //机构标
                 _isHideBorrowerInformation = YES; //隐藏借款人信息
             }
@@ -152,8 +174,7 @@
     _webView.userInteractionEnabled = NO;
     _webView.scrollView.showsVerticalScrollIndicator = NO;
     _webView.scrollView.showsHorizontalScrollIndicator = NO;
-    NSString *idStr = [[_dataDic objectSafeDictionaryForKey:@"prdClaims"] objectSafeForKey:@"id"];
-    NSString *urlStr = [NSString stringWithFormat:@"https://static.9888.cn/pages/wap/bid-describe/index.html?id=%@&fromSite=%@",idStr,_isP2P ?@"1":@"2"];
+    NSString *urlStr = [NSString stringWithFormat:@"https://static.9888.cn/pages/wap/bid-describe/index.html?id=%@&fromSite=%@",_projectId,_isP2P ?@"1":@"2"];
     [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlStr]]];
     [self makeContractMsg:[_dataDic objectForKey:@"contractMsg"]];
 }
@@ -163,13 +184,13 @@
     _isHideBorrowerInformation = NO; //默认不隐藏
     _borrowerInformationStr = @"借款人信息";
     _auditRecordArray = [[NSMutableArray alloc]initWithArray:@[@"身份认证",@"手机认证",@"工作认证",@"信用认证"]];
-    NSString *agencyCodeStr = [[_dataDic objectSafeDictionaryForKey:@"orderUser"] objectSafeForKey:@"agencyCode"];
+    NSString *agencyCodeStr = [[[_dataDic objectSafeDictionaryForKey:@"orderUser"] objectSafeDictionaryForKey:@"enterpriseInfo"] objectSafeForKey:@"enterpriseCode"];
     NSArray *arrayJiBen = [NSArray arrayWithObjects:@"姓名／所在地",@"基本信息",@"入学年份",@"户口所在地",@"公司行业",@"公司规模",@"职位",@"工作收入",@"现单位工作时间",@"有无购房",@"有无房贷",@"有无购车",@"有无车贷", nil];
     if (![agencyCodeStr isEqualToString:@""]) {//agencyCodeStr 不为空 则为机构标
         _borrowerInformationStr = @"机构信息";
         _auditRecordArray = [[NSMutableArray alloc]initWithArray:@[@"营业执照",@"手机认证",@"信用认证"]];
-        _licenseNumberStr = [[_dataDic objectSafeDictionaryForKey:@"prdGuaranteeMess"]
-                             objectSafeForKey:@"licenseNumber"];
+        _licenseNumberStr = [[[_dataDic objectSafeDictionaryForKey:@"orderUser"] objectSafeDictionaryForKey:@"enterpriseInfo"]
+                             objectSafeForKey:@"socialCreditNumber"];
     }
     [self setRightInterestInfoDetailValue];
     
@@ -185,16 +206,14 @@
     _borrowerInfo = [[NSArray alloc] initWithObjects:arrayJiBen, nil];
     
     if (_isP2P) {
-        NSString *tradeMarkStr = [[_dataDic objectSafeDictionaryForKey:@"prdClaims"] objectSafeForKey: @"tradeMark"];
-        _prdDesType = [[[_dataDic objectSafeDictionaryForKey:@"prdClaims"] objectSafeForKey: @"prdDesType"] boolValue];
         if (_prdDesType)//老项目
         {
-            _isHideBorrowerInformation = [tradeMarkStr intValue] == 20 ? YES :NO;
+            _isHideBorrowerInformation = [_tradeMark intValue] == 20 ? YES :NO;
         }
         else //新项目
         {
             if ([agencyCodeStr isEqualToString:@""] ) { //个人标
-                _isHideBorrowerInformation = [tradeMarkStr intValue] == 20 ? YES :NO;
+                _isHideBorrowerInformation = [_tradeMark intValue] == 20 ? YES :NO;
             }else{ //机构标
                 _isHideBorrowerInformation = YES;
             }
@@ -209,8 +228,7 @@
     _webView.userInteractionEnabled = NO;
     _webView.scrollView.showsVerticalScrollIndicator = NO;
     _webView.scrollView.showsHorizontalScrollIndicator = NO;
-    NSString *idStr = [[_dataDic objectSafeDictionaryForKey:@"prdClaims"] objectSafeForKey:@"id"];
-    NSString *urlStr = [NSString stringWithFormat:@"https://static.9888.cn/pages/wap/bid-describe/index.html?id=%@&fromSite=%@",idStr,_isP2P ?@"1":@"2"];
+    NSString *urlStr = [NSString stringWithFormat:@"https://static.9888.cn/pages/wap/bid-describe/index.html?id=%@&fromSite=%@",_projectId,_isP2P ?@"1":@"2"];
     [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlStr]]];
     [self makeContractMsg:[_dataDic objectForKey:@"contractMsg"]];
 }
@@ -337,6 +355,26 @@
     _infoDetailArray = [NSMutableArray arrayWithCapacity:[array count]];
     _infoDetailArray = [NSMutableArray arrayWithArray:array];
 }
+//微金 和 尊享普通标
+-(void)setAgencyInfoDetailValueNew
+{
+    NSDictionary *prdGuaranteeMessDic = [[_dataDic objectSafeDictionaryForKey:@"orderUser"] objectSafeDictionaryForKey:@"enterpriseInfo"];
+    //    机构名称
+    NSString *insName = [prdGuaranteeMessDic objectSafeForKey:@"companyName"];
+    //    营业执照号
+    _licenseNumberStr = [prdGuaranteeMessDic objectSafeForKey:@"socialCreditNumber"];
+    //    法定代理人
+    NSString *legalRealName = [prdGuaranteeMessDic objectSafeForKey:@"artificialPersonName"];
+    //    联系人
+    NSString *contacts = [prdGuaranteeMessDic objectSafeForKey:@"contacts"];
+    //    机构地址
+    NSString *address = [prdGuaranteeMessDic objectSafeForKey:@"address"];
+    //    邮编
+    NSString *post = [prdGuaranteeMessDic objectSafeForKey:@"post"];
+    NSArray  *array = @[insName,_licenseNumberStr,legalRealName,contacts,address,post];
+    _infoDetailArray = [NSMutableArray arrayWithArray:array];
+}
+//债转标
 -(void)setAgencyInfoDetailValue{
     
     NSDictionary *prdGuaranteeMessDic = [_dataDic objectSafeDictionaryForKey:@"prdGuaranteeMess"];
@@ -769,9 +807,9 @@
                     renzhengLabel.text = @"已认证";
                     placehoderLabel.text = _prdDesType ? _isP2P ?_licenseNumberStr : @"" : @"";
                 }else{
-                    if([[_dataDic objectForKey:@"orderUser"] objectForKey:@"joboauth"])
+                    if([_joboauth integerValue] == 1)
                     {
-                        if([UCFToolsMehod isNullOrNilWithString:[[_dataDic objectForKey:@"orderUser"] objectForKey:@"idno"]].length == 0)
+                        if([UCFToolsMehod isNullOrNilWithString:_idno].length == 0)
                         {
                             imageView.hidden = YES;
                             renzhengLabel.text = @"未认证";
@@ -780,10 +818,10 @@
                         {
                             imageView.hidden = NO;
                             renzhengLabel.text = @"已认证";
-                            NSString *name = [[_dataDic objectForKey:@"orderUser"] objectForKey:@"realName"];
-                            NSString *idCardNum = [[_dataDic objectForKey:@"orderUser"] objectForKey:@"idno"];
+//                            NSString *name = [[_dataDic objectForKey:@"orderUser"] objectForKey:@"realName"];
+//                            NSString *idCardNum = [[_dataDic objectForKey:@"orderUser"] objectForKey:@"idno"];
                             if(_isP2P){
-                                placehoderLabel.text = _prdDesType ?  [NSString stringWithFormat:@"%@ %@",name,idCardNum] : @"";
+                                placehoderLabel.text = _prdDesType ?  [NSString stringWithFormat:@"%@ %@",_realName,_idno] : @"";
                             }else{
                                 placehoderLabel.text = @"";
                             }
@@ -793,7 +831,7 @@
                 }
             } else if(indexPath.row == 1) {
                 
-                if([UCFToolsMehod isNullOrNilWithString:[[_dataDic objectForKey:@"orderUser"] objectForKey:@"mobile"]].length == 0)
+                if([UCFToolsMehod isNullOrNilWithString:_mobile].length == 0)
                 {
                     imageView.hidden = YES;
                     renzhengLabel.text = @"未认证";
@@ -802,21 +840,19 @@
                 {
                     imageView.hidden = NO;
                     renzhengLabel.text = @"已认证";
-                    NSString *phoneNum = [[_dataDic objectForKey:@"orderUser"] objectForKey:@"mobile"];
                     if (_isP2P) {
-                        placehoderLabel.text = phoneNum;
+                        placehoderLabel.text = _mobile;
                     }else{
                         placehoderLabel.text = @"";
                     }
                 }
             } else if(indexPath.row == 2 && _isHideBusinessLicense) {
-                if([[[_dataDic objectForKey:@"orderUser"] objectForKey:@"joboauth"] integerValue] == 1)
+                if([_joboauth integerValue] == 1)
                 {
                     imageView.hidden = NO;
                     renzhengLabel.text = @"已认证";
-                    NSString *office = [[_dataDic objectForKey:@"orderUser"] objectForKey:@"office"];
                     if (_isP2P) {
-                        placehoderLabel.text = office;
+                        placehoderLabel.text = _office;
                     }else{
                         placehoderLabel.text = @"";
                     }
@@ -827,7 +863,7 @@
                     renzhengLabel.text = @"未认证";
                 }
             }else if((indexPath.row == 3 && _isHideBusinessLicense ) || (indexPath.row == 2 && !_isHideBusinessLicense )) {
-                if([[[_dataDic objectForKey:@"orderUser"] objectForKey:@"creditAuth"] integerValue] == 1)
+                if([_creditAuth integerValue] == 1)
                 {
                     imageView.hidden = NO;
                     renzhengLabel.text = @"已认证";
@@ -957,9 +993,9 @@
                            renzhengLabel.text = @"已认证";
                            placehoderLabel.text = _prdDesType ? _isP2P ?_licenseNumberStr : @"" : @"";
                        }else{
-                           if([[_dataDic objectForKey:@"orderUser"] objectForKey:@"joboauth"])
+                           if([_joboauth integerValue] == 1)
                            {
-                               if([UCFToolsMehod isNullOrNilWithString:[[_dataDic objectForKey:@"orderUser"] objectForKey:@"idno"]].length == 0)
+                               if([UCFToolsMehod isNullOrNilWithString:_idno].length == 0)
                                {
                                    imageView.hidden = YES;
                                    renzhengLabel.text = @"未认证";
@@ -968,10 +1004,8 @@
                                {
                                    imageView.hidden = NO;
                                    renzhengLabel.text = @"已认证";
-                                   NSString *name = [[_dataDic objectForKey:@"orderUser"] objectForKey:@"realName"];
-                                   NSString *idCardNum = [[_dataDic objectForKey:@"orderUser"] objectForKey:@"idno"];
                                    if (_isP2P) {
-                                       placehoderLabel.text = _prdDesType ? [NSString stringWithFormat:@"%@ %@",name,idCardNum] : @"";
+                                       placehoderLabel.text = _prdDesType ? [NSString stringWithFormat:@"%@ %@",_realName,_idno] : @"";
                                    }else{
                                        placehoderLabel.text = @"";
                                    }
@@ -982,7 +1016,7 @@
                        }
                    } else if(indexPath.row == 1) {
                        
-                       if([UCFToolsMehod isNullOrNilWithString:[[_dataDic objectForKey:@"orderUser"] objectForKey:@"mobile"]].length == 0)
+                       if([UCFToolsMehod isNullOrNilWithString:_mobile].length == 0)
                        {
                            imageView.hidden = YES;
                            renzhengLabel.text = @"未认证";
@@ -991,22 +1025,20 @@
                        {
                            imageView.hidden = NO;
                            renzhengLabel.text = @"已认证";
-                           NSString *phoneNum = [[_dataDic objectForKey:@"orderUser"] objectForKey:@"mobile"];
                            if (_isP2P) {
-                               placehoderLabel.text = phoneNum;
+                               placehoderLabel.text = _mobile;
                            }else{
                                placehoderLabel.text = @"";
                            }
                            
                        }
                    } else if(indexPath.row == 2 && _isHideBusinessLicense) {
-                       if([[[_dataDic objectForKey:@"orderUser"] objectForKey:@"joboauth"] integerValue] == 1)
+                       if([_joboauth integerValue] == 1)
                        {
                            imageView.hidden = NO;
                            renzhengLabel.text = @"已认证";
-                           NSString *office = [[_dataDic objectForKey:@"orderUser"] objectForKey:@"office"];
                            if (_isP2P) {
-                               placehoderLabel.text = office;
+                               placehoderLabel.text = _office;
                            }else{
                                placehoderLabel.text = @"";
                            }
@@ -1017,7 +1049,7 @@
                            renzhengLabel.text = @"未认证";
                        }
                    }else if((indexPath.row == 3 && _isHideBusinessLicense ) || (indexPath.row == 2 && !_isHideBusinessLicense )) {
-                       if([[[_dataDic objectForKey:@"orderUser"] objectForKey:@"creditAuth"] integerValue] == 1)
+                       if([_creditAuth integerValue] == 1)
                        {
                            imageView.hidden = NO;
                            renzhengLabel.text = @"已认证";
