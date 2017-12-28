@@ -403,8 +403,14 @@
         
                 if ([self checkUserCanInvestIsDetail:YES type:self.accoutType]) {
                     NSString *userid = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
-                    NSString *strParameters = [NSString stringWithFormat:@"id=%@&userId=%@",model.Id,userid];
+//                    NSString *strParameters = [NSString stringWithFormat:@"id=%@&userId=%@",model.Id,userid];
+                    NSString *prdClaimsIdStr = [NSString stringWithFormat:@"%@",model.Id];
+                    NSDictionary *praramDic = @{@"userId":userid,@"prdClaimsId":prdClaimsIdStr};
+                    
+                    
                     NSInteger isOrder = [model.isOrder integerValue];
+                    
+                    
                     if ([model.status intValue ] != 2) {
                         if (isOrder <= 0) {
                             UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前标的详情只对出借人开放"];
@@ -416,11 +422,11 @@
                         if ([model.status intValue ] != 2) {
                             if (isOrder > 0) {
                                 [MBProgressHUD showOriginHUDAddedTo:self.view animated:YES];
-                                [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self Type:SelectAccoutTypeP2P];
+                                [[NetworkModule sharedNetworkModule] newPostReq:praramDic tag: kSXTagPrdClaimsGetPrdBaseDetail owner:self signature:YES Type:SelectAccoutTypeP2P];
                             }
                         }else {
                             [MBProgressHUD showOriginHUDAddedTo:self.view animated:YES];
-                            [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self Type:SelectAccoutTypeP2P];
+                            [[NetworkModule sharedNetworkModule] newPostReq:praramDic tag: kSXTagPrdClaimsGetPrdBaseDetail owner:self signature:YES Type:SelectAccoutTypeP2P];
                     }
                    }
                }
@@ -519,7 +525,7 @@
 - (void)investApiManager:(UCFInvestAPIManager *)apiManager didSuccessedReturnMicroMoneyResult:(id)result withTag:(NSUInteger)tag
 {
     self.dataArray = (NSMutableArray *)result;
-    if ([self.tableview.header isRefreshing]) {
+    if ([self.tableview.header isRefreshing]){
         [self.tableview.header endRefreshing];
     }
 
@@ -587,26 +593,20 @@
     
     NSMutableDictionary *dic = [result objectFromJSONString];
     
-    if (tag.intValue == kSXTagPrdClaimsDetail){
-        NSString *rstcode = dic[@"status"];
-        NSString *rsttext = dic[@"statusdes"];
-        if ([rstcode intValue] == 1) {
+     if (tag.intValue == kSXTagPrdClaimsGetPrdBaseDetail){
+        
+        NSDictionary *dataDic = [dic objectSafeForKey:@"data"];
+        NSString *rstcode = dic[@"ret"];
+        NSString *rsttext = dic[@"message"];
+        if ([rstcode boolValue]) {
             NSArray *prdLabelsListTemp = [NSArray arrayWithArray:(NSArray*)self.model.prdLabelsList];
-            UCFProjectDetailViewController *controller = [[UCFProjectDetailViewController alloc] initWithDataDic:dic isTransfer:NO withLabelList:prdLabelsListTemp];
+            UCFProjectDetailViewController *controller = [[UCFProjectDetailViewController alloc] initWithDataDic:dataDic isTransfer:NO withLabelList:prdLabelsListTemp];
             CGFloat platformSubsidyExpense = [self.model.platformSubsidyExpense floatValue];
             [[NSUserDefaults standardUserDefaults] setValue:[NSString stringWithFormat:@"%.1f",platformSubsidyExpense] forKey:@"platformSubsidyExpense"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
             controller.rootVc = self.rootVc;;
             controller.accoutType = SelectAccoutTypeP2P;
             [self.navigationController pushViewController:controller animated:YES];
-            
-//            NSArray *prdLabelsListTemp = [NSArray arrayWithArray:(NSArray*)self.model.prdLabelsList];
-//            UCFGoldDetailViewController *controller = [[UCFGoldDetailViewController alloc]initWithNibName:@"UCFGoldDetailViewController" bundle:nil];
-//            CGFloat platformSubsidyExpense = [self.model.platformSubsidyExpense floatValue];
-//            [[NSUserDefaults standardUserDefaults] setValue:[NSString stringWithFormat:@"%.1f",platformSubsidyExpense] forKey:@"platformSubsidyExpense"];
-//            controller.rootVc = self.rootVc;;
-//            controller.accoutType = SelectAccoutTypeP2P;
-//            [self.navigationController pushViewController:controller animated:YES];
-
         }else {
             [AuxiliaryFunc showAlertViewWithMessage:rsttext];
         }

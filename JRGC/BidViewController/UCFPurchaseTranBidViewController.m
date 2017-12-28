@@ -101,14 +101,38 @@
         return 109.0f;
     } else if (indexPath.row == 1) {//V2.4.20 去掉倒计时 36变为 0
         NSString *buyCueDesStr =[_dataDict objectSafeForKey:@"buyCueDes"];
+        float height = 201.0f - 43 - 54 + 0 +[self getSectionHight];
         if (![buyCueDesStr isEqualToString:@""]) {
-            return 201.0f - 43 - 54 + 0 + 15 ;
+            return height + 15;
         }
-        return 201.0f - 43 - 54 + 0 ;
+        return height ;
     } else if (indexPath.row == 2) {
         return 30;
     }
     return 0;
+}
+-(float)getSectionHight
+{
+    NSArray *prdLabelsList =  [_dataDict  objectSafeArrayForKey:@"prdLabelsList"];
+    NSMutableArray *labelPriorityArr = [NSMutableArray arrayWithCapacity:4];
+    if (![prdLabelsList isEqual:[NSNull null]]) {
+        for (NSDictionary *dic in prdLabelsList) {
+            NSInteger labelPriority = [dic[@"labelPriority"] integerValue];
+            if (labelPriority > 1) {
+                if ([dic[@"labelName"] rangeOfString:@"起投"].location == NSNotFound) {
+                    [labelPriorityArr addObject:dic[@"labelName"]];
+                }
+            }
+        }
+    }
+    float bottomViewYPos = 0;
+    if ([labelPriorityArr count] == 0)
+    {
+        bottomViewYPos = 0;
+    } else {
+        bottomViewYPos = 20;
+    }
+    return bottomViewYPos;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {

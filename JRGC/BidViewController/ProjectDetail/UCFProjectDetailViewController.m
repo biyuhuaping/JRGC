@@ -60,7 +60,7 @@
         if (isTransfer) {
             self.baseTitleType = @"Transdetail";
         }
-        _prdLabelsList = [[dic objectForKey:@"prdClaims"] objectForKey:@"prdLabelsList"];
+        _prdLabelsList = [dic objectSafeArrayForKey:@"prdLabelsList"];
         self.navigationController.navigationBar.translucent = NO;
     }
     return self;
@@ -94,7 +94,7 @@
     if (_detailType == PROJECTDETAILTYPEBONDSRRANSFER){
         titleStr = [[_dataDic objectForKey:@"prdTransferFore"] objectForKey:@"name"];
     } else {
-        titleStr = [[_dataDic objectForKey:@"prdClaims"] objectForKey:@"prdName"];
+        titleStr = [_dataDic  objectSafeForKey:@"prdName"];
         //取得一级标签
         if (![_prdLabelsList isEqual:[NSNull null]]) {
             for (NSDictionary *dic in _prdLabelsList) {
@@ -182,13 +182,13 @@
         NSString *type = [[_dataDic objectSafeDictionaryForKey:@"prdTransferFore"] objectSafeForKey:@"type"];
         _isP2P = [type isEqualToString:@"1"] ? YES : NO; //  Yes为 p2p债转
     } else {
-        NSInteger busType = [[[_dataDic objectForKey:@"prdClaims"] objectForKey:@"busType"]integerValue];
+        NSInteger busType = [[_dataDic  objectForKey:@"busType"]integerValue];
         if (busType == 1) {
             _detailType = PROJECTDETAILTYPERIGHTINTEREST;
         } else {
             _detailType = PROJECTDETAILTYPENORMAL;
         }
-        NSString *type = [[_dataDic objectSafeDictionaryForKey:@"prdClaims"] objectSafeForKey:@"type"];
+        NSString *type = [_dataDic objectSafeForKey:@"type"];
        _isP2P = [type isEqualToString:@"1"] ? YES : NO; //  Yes为 p2p标
     }
     self.accoutType = _isP2P ? SelectAccoutTypeP2P :SelectAccoutTypeHoner;
@@ -244,8 +244,8 @@
         CGFloat prors = [[[_dataDic objectForKey:@"prdTransferFore"] objectForKey:@"completeRate"] doubleValue] / 100;
         Progress = prors;
     } else {
-        borrowAmount = [[[_dataDic objectForKey:@"prdClaims"] objectForKey:@"borrowAmount"] doubleValue];
-        completeLoan = [[[_dataDic objectForKey:@"prdClaims"] objectForKey:@"completeLoan"] doubleValue];
+        borrowAmount = [[_dataDic  objectSafeForKey:@"borrowAmount"] doubleValue];
+        completeLoan = [[_dataDic objectSafeForKey:@"completeLoan"] doubleValue];
         Progress = completeLoan / borrowAmount;
     }
     if (Progress > 0.98 && Progress < 1.0) {
@@ -503,32 +503,57 @@
 -(void)gotoProjectDetailNewVC:(NSIndexPath *)indexPath
 {
     switch (indexPath.row) {
-        case 0:
+        case 0://基础详情
         {
-            UCFProjectBasicDetailViewController *basicDetailVC = [[UCFProjectBasicDetailViewController alloc]initWithNibName:@"UCFProjectBasicDetailViewController" bundle:nil];
-            basicDetailVC.dataDic = _dataDic;
-            basicDetailVC.detailType = _detailType;
-            basicDetailVC.accoutType = self.accoutType;
-            [self.navigationController  pushViewController:basicDetailVC animated:YES];
+            if(_isTransfer)
+            {
+                UCFProjectBasicDetailViewController *basicDetailVC = [[UCFProjectBasicDetailViewController alloc]initWithNibName:@"UCFProjectBasicDetailViewController" bundle:nil];
+                basicDetailVC.dataDic = _dataDic;
+                basicDetailVC.detailType = _detailType;
+                basicDetailVC.accoutType = self.accoutType;
+                [self.navigationController  pushViewController:basicDetailVC animated:YES];
+            }else
+            {
+                NSString *userid = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
+                NSString *prdClaimsIdStr = [NSString stringWithFormat:@"%@",[_dataDic objectSafeForKey:@"id"]];
+                NSDictionary *praramDic = @{@"userId":userid,@"prdClaimsId":prdClaimsIdStr};
+                [[NetworkModule sharedNetworkModule] newPostReq:praramDic tag: kSXTagPrdClaimsGetPrdDetailMess owner:self signature:YES Type:self.accoutType];
+            }
         }
             break;
-        case 1:
+        case 1://安全保障
         {
             UCFProjectSafetyGuaranteeViewController *basicDetailVC = [[UCFProjectSafetyGuaranteeViewController alloc]initWithNibName:@"UCFProjectSafetyGuaranteeViewController" bundle:nil];
-            basicDetailVC.dataDic = _dataDic;
+            if (_isTransfer)//债转标
+            {
+                basicDetailVC.dataArray  = [[_dataDic objectSafeDictionaryForKey:@"prdClaimsReveal"] objectSafeArrayForKey:@"safetySecurityList"];
+            }else{
+                basicDetailVC.dataArray = [_dataDic objectSafeArrayForKey:@"safetySecurityList"];
+            }
             basicDetailVC.accoutType = self.accoutType;
             [self.navigationController  pushViewController:basicDetailVC animated:YES];
             
         }
             break;
-        case 2:
+        case 2://记录
         {
-            UCFProjectInvestmentRecordViewController *investmentRecordVC = [[UCFProjectInvestmentRecordViewController alloc]initWithNibName:@"UCFProjectInvestmentRecordViewController" bundle:nil];
-            investmentRecordVC.dataDic = _dataDic;
-            investmentRecordVC.accoutType = self.accoutType;
-            investmentRecordVC.detailType = _detailType;
-            [self.navigationController  pushViewController:investmentRecordVC animated:YES];
             
+            if(_isTransfer)
+            {
+                UCFProjectInvestmentRecordViewController *investmentRecordVC = [[UCFProjectInvestmentRecordViewController alloc]initWithNibName:@"UCFProjectInvestmentRecordViewController" bundle:nil];
+                investmentRecordVC.dataDic = _dataDic;
+                investmentRecordVC.accoutType = self.accoutType;
+                investmentRecordVC.detailType = _detailType;
+                [self.navigationController  pushViewController:investmentRecordVC animated:YES];
+            }
+            else
+            {
+                UCFProjectInvestmentRecordViewController *investmentRecordVC = [[UCFProjectInvestmentRecordViewController alloc]initWithNibName:@"UCFProjectInvestmentRecordViewController" bundle:nil];
+                investmentRecordVC.accoutType = self.accoutType;
+                investmentRecordVC.detailType = _detailType;
+                investmentRecordVC.prdClaimsId =[NSString stringWithFormat:@"%@",[_dataDic objectSafeForKey:@"id"]];
+                [self.navigationController  pushViewController:investmentRecordVC animated:YES];
+            }
         }
             break;
             
@@ -602,13 +627,12 @@
             if (_detailType == PROJECTDETAILTYPEBONDSRRANSFER) {
                 //债券转让
                 NSString *projectId = [[_dataDic objectForKey:@"prdTransferFore"] objectForKey:@"id"];
-                NSString *strParameters = nil;
-                strParameters = [NSString stringWithFormat:@"userId=%@&tranId=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],projectId];//101943
+                NSString *strParameters = [NSString stringWithFormat:@"userId=%@&tranId=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],projectId];//101943
                 [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagDealTransferBid owner:self Type:self.accoutType];
             } else {
                 //普通表
                 [MBProgressHUD showOriginHUDAddedTo:self.view animated:YES];
-                NSString *projectId = [[_dataDic objectForKey:@"prdClaims"] objectForKey:@"id"];
+                NSString *projectId = [_dataDic  objectSafeForKey:@"id"];
                 NSString *strParameters = nil;
                 strParameters = [NSString stringWithFormat:@"userId=%@&id=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],projectId];//101943
                 [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDealBid owner:self Type:self.accoutType];
@@ -652,6 +676,11 @@
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:alertMessage delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
     alert.tag = 8000;
     [alert show];
+}
+//开始请求
+- (void)beginPost:(kSXTag)tag
+{
+    [MBProgressHUD showOriginHUDAddedTo:self.view animated:YES];
 }
 -(void)endPost:(id)result tag:(NSNumber*)tag
 {
@@ -742,10 +771,32 @@
         }else{
             [self showHTAlertdidFinishGetUMSocialDataResponse];
         }
+    }else if(tag.intValue == kSXTagPrdClaimsGetPrdDetailMess) {
+        NSDictionary * dic = [(NSString *)result objectFromJSONString];
+        NSDictionary *dataDic = [dic objectSafeForKey:@"data"];
+        NSString *rstcode = dic[@"ret"];
+        NSString *rsttext = dic[@"message"];
+        if ([rstcode boolValue])
+        {
+            UCFProjectBasicDetailViewController *basicDetailVC = [[UCFProjectBasicDetailViewController alloc]initWithNibName:@"UCFProjectBasicDetailViewController" bundle:nil];
+            basicDetailVC.dataDic = dataDic;
+            basicDetailVC.detailType = _detailType;
+            basicDetailVC.accoutType = self.accoutType;
+            basicDetailVC.projectId = [NSString stringWithFormat:@"%@",[_dataDic objectSafeForKey:@"id"]];
+            basicDetailVC.tradeMark = [_dataDic  objectSafeForKey: @"tradeMark"];
+            basicDetailVC.prdDesType= [[_dataDic objectSafeForKey: @"prdDesType"] boolValue];
+            [self.navigationController  pushViewController:basicDetailVC animated:YES];
+        }else{
+           [AuxiliaryFunc showAlertViewWithMessage:rsttext];
+        }
     }
-    
 }
-
+//请求失败
+- (void)errorPost:(NSError*)err tag:(NSNumber*)tag
+{
+    [MBProgressHUD hideOriginAllHUDsForView:self.view animated:YES];
+    [MBProgressHUD displayHudError:err.userInfo[@"NSLocalizedDescription"]];
+}
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (alertView.tag == 7000) {

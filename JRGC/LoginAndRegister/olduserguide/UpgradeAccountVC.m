@@ -179,6 +179,7 @@
     if (_counter < 0) {
         _isSendVoiceMessage = NO;
         [_timer invalidate];
+        _timer = nil;
         [_getCodeBtn setTitle:@"获取短信验证码" forState:UIControlStateNormal];
         _getCodeBtn.userInteractionEnabled = YES;
         [_getCodeBtn setTitleColor:UIColorWithRGB(0x4aa1f9) forState:UIControlStateNormal];

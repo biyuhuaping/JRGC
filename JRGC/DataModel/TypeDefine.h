@@ -332,6 +332,10 @@
 
 #define DOWNLOADASSERTPROOF @"newprdOrder/downloadAssertProof"//资产证明下载（尊享老服务接口）
 
+#define PRDCLAIMSGETPRDGETDETAILMESS @"api/prdClaims/v2/getPrdDetailMess.json" //普通标详情【项目详情】
+#define PRDCLAIMSGETPRDBASEDETAIL @"api/prdClaims/v2/getPrdBaseDetail.json" //普通标详情【基础标信息】
+#define PRDCLAIMSGETINVESTORDERRECORD @"api/prdClaims/v2/getInvestOrderRecord.json" //普通标详情【标认购记录】
+
 enum kPostStatus{
     kPostStatusNone=0,
     kPostStatusBeging=1,
@@ -550,7 +554,10 @@ enum kSXTag
     kSXTagApplyAssetProof,              //资产证明申请
     kSXTagAssetProofCheckIdno,          //资产证明验证身份证号
     kSXTagDownloadAssertProof,          //资产证明下载（尊享老服务接口）
-    kSXTagProfitCalculator,                   //收益计算器
+    kSXTagProfitCalculator,             //收益计算器
+    kSXTagPrdClaimsGetPrdDetailMess,     //普通标详情【项目详情】
+    kSXTagPrdClaimsGetPrdBaseDetail,     //普通标详情【基础标信息】
+    kSXTagPrdClaimsGetInvestOrderRecord, //普通标详情【标认购记录】
 };
 
 typedef enum kSXTag kSXTag;

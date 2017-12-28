@@ -11,4 +11,5 @@
 @interface UCFProjectInvestmentRecordViewController : UCFBaseViewController
 @property (nonatomic,strong)NSDictionary *dataDic;
 @property(nonatomic,assign) PROJECTDETAILTYPE detailType;
+@property (nonatomic,strong)NSString *prdClaimsId;
 @end

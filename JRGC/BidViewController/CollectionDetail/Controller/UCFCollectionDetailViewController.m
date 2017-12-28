@@ -605,13 +605,15 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
     
         NSInteger isOrder = [[dataDict objectSafeForKey:@"isOrder"] integerValue];
         NSInteger status = [[dataDict objectSafeForKey:@"status"] integerValue];
-        NSString *idStr =[dataDict objectSafeForKey:@"childPrdClaimId"];
-        NSString *strParameters = [NSString stringWithFormat:@"id=%@&userId=%@", idStr,[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
+        NSString *idStr = [NSString stringWithFormat:@"%@",[dataDict objectSafeForKey:@"childPrdClaimId"]];
+    
+        NSDictionary *praramDic = @{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"prdClaimsId":idStr};
+
         
         if (status != 2) {
             if (isOrder == 1) {//0不可看,1可看
                 [MBProgressHUD showOriginHUDAddedTo:self.view animated:YES];
-                [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self Type:SelectAccoutDefault];
+                [[NetworkModule sharedNetworkModule] newPostReq:praramDic tag: kSXTagPrdClaimsGetPrdBaseDetail owner:self signature:YES Type:SelectAccoutTypeP2P];
             } else {
                 UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前标的详情只对出借人开放"];
                 self.intoViewControllerStr = @"NoPermissionVC";
@@ -621,7 +623,7 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
         }
         else {
             [MBProgressHUD showOriginHUDAddedTo:self.view animated:YES];
-            [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self Type:SelectAccoutDefault];
+             [[NetworkModule sharedNetworkModule] newPostReq:praramDic tag: kSXTagPrdClaimsGetPrdBaseDetail owner:self signature:YES Type:SelectAccoutTypeP2P];
         }
 }
 
@@ -739,18 +741,16 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
             
             [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
         }
-    }else if (tag.intValue == kSXTagPrdClaimsDetail){
-        NSString *rstcode = dic[@"status"];
-        NSString *rsttext = dic[@"statusdes"];
-        if ([rstcode intValue] == 1) {
-            NSArray *prdLabelsListTemp = [dic objectSafeArrayForKey:@"prdLabelsList"];
-            UCFProjectDetailViewController *controller = [[UCFProjectDetailViewController alloc] initWithDataDic:dic isTransfer:NO withLabelList:prdLabelsListTemp];
-//            CGFloat platformSubsidyExpense = [_projectListModel.platformSubsidyExpense floatValue];
-//            [[NSUserDefaults standardUserDefaults] setValue:[NSString stringWithFormat:@"%.1f",platformSubsidyExpense] forKey:@"platformSubsidyExpense"];
+    }else if (tag.intValue == kSXTagPrdClaimsGetPrdBaseDetail){
+        NSDictionary *dataDic = [dic objectSafeForKey:@"data"];
+        NSString *rstcode = dic[@"ret"];
+        NSString *rsttext = dic[@"message"];
+        if ([rstcode boolValue]) {
+            NSArray *prdLabelsListTemp = [dataDic objectSafeArrayForKey:@"prdLabelsList"];
+            UCFProjectDetailViewController *controller = [[UCFProjectDetailViewController alloc] initWithDataDic:dataDic isTransfer:NO withLabelList:prdLabelsListTemp];
             controller.sourceVc = @"collection";
             self.intoViewControllerStr = @"ProjectDetailVC";
             controller.rootVc = self.rootVc;
-//            controller.isHideNavigationBar = YES;
             [self.navigationController pushViewController:controller animated:YES];
         }else  {
             [AuxiliaryFunc showAlertViewWithMessage:rsttext];

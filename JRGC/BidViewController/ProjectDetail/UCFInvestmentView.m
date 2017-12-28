@@ -32,7 +32,7 @@
     self = [self initWithFrame:frame];
     if(self)
     {
-         _investmentState = state;
+         _investmentState = [NSString stringWithFormat:@"%@",state];
         _sourceVc = source;
         self.backgroundColor = [UIColor clearColor];
         UIView *bkView = [[UIView alloc] initWithFrame:CGRectMake(0, 10, ScreenWidth, 57)];

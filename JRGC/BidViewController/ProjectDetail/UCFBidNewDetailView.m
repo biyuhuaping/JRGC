@@ -93,7 +93,7 @@
         }
         else
         {
-           _status =[[[dic objectSafeDictionaryForKey:@"prdClaims"] objectSafeForKey:@"status"] intValue];
+           _status =[[dic  objectSafeForKey:@"status"] intValue];
         }
         [self initViews];
     }
@@ -107,7 +107,7 @@
     if (_type == PROJECTDETAILTYPEBONDSRRANSFER){
         [self setValeWithDic:[_dic objectForKey:@"prdTransferFore"]];
     } else {
-        [self setValeWithDic:[_dic objectForKey:@"prdClaims"]];
+        [self setValeWithDic:_dic];
     }
 }
 
@@ -126,7 +126,7 @@
     if (_type == PROJECTDETAILTYPEBONDSRRANSFER){
         _p2pOrHonerType = [[_dic objectSafeDictionaryForKey:@"prdTransferFore"] objectSafeForKey:@"type"];
     } else {
-        _p2pOrHonerType = [[_dic objectSafeDictionaryForKey:@"prdClaims"] objectSafeForKey:@"type"];
+        _p2pOrHonerType = [_dic  objectSafeForKey:@"type"];
 
     }
     [self drawHeadView];
@@ -283,7 +283,7 @@
     if (_type == PROJECTDETAILTYPEBONDSRRANSFER){
         titleStr = [[_dic objectForKey:@"prdTransferFore"] objectForKey:@"name"];
     } else {
-        titleStr = [[_dic objectForKey:@"prdClaims"] objectForKey:@"prdName"];
+        titleStr = [_dic objectSafeForKey:@"prdName"];
         //取得一级标签
         if (![_prdLabelsList isEqual:[NSNull null]]) {
             for (NSDictionary *dic in _prdLabelsList) {
@@ -339,31 +339,34 @@
             }
         }
     }
-    [[NSUserDefaults standardUserDefaults]setBool:NO forKey:@"isShowLabels"];
-    if (_type == PROJECTDETAILTYPEBONDSRRANSFER){
-        UIView *markBg = [[UIView alloc] initWithFrame:CGRectMake(0, 0 + [Common calculateNewSizeBaseMachine:HeadBkHeight], ScreenWidth, 10)];
-        [self addSubview:markBg];
-        bottomViewYPos = 10;
-    } else{
+//    if (_type == PROJECTDETAILTYPEBONDSRRANSFER){
+//        UIView *markBg = [[UIView alloc] initWithFrame:CGRectMake(0, 0 + [Common calculateNewSizeBaseMachine:HeadBkHeight], ScreenWidth, 10)];
+//        [self addSubview:markBg];
+//        bottomViewYPos = 10;
+//    } else{
         if ([labelPriorityArr count] == 0) {
             UIView *markBg = [[UIView alloc] initWithFrame:CGRectMake(0, 0 + [Common calculateNewSizeBaseMachine:HeadBkHeight], ScreenWidth, 10)];
             [self addSubview:markBg];
             bottomViewYPos = 10;
         } else {
             bottomViewYPos = 30;
-          [[NSUserDefaults standardUserDefaults]setBool:YES forKey:@"isShowLabels"];
            [self drawMarkView];
         }
-    }
+//    }
     [[NSUserDefaults standardUserDefaults]synchronize];
     
-    NSString *fixUpdate = [[_dic objectForKey:@"prdClaims"]objectForKey:@"fixedDate"];
-    NSString *guaranteeCompanyNameStr = [[_dic objectForKey:@"prdClaims"] objectSafeForKey:@"guaranteeCompanyName"];
-//    NSString *insNameStr = [_dic objectSafeForKey:@"insName"];
+    NSString *fixUpdate = @"";
+    NSString *guaranteeCompanyNameStr  = @"";
+
     if (_type == PROJECTDETAILTYPEBONDSRRANSFER) { //债转不添加 担保机构
       guaranteeCompanyNameStr  = @"";
+      fixUpdate = [[_dic objectForKey:@"prdClaims"] objectForKey:@"fixedDate"];
+    }else{
+       guaranteeCompanyNameStr = [_dic  objectSafeForKey:@"guaranteeCompanyName"];
+       fixUpdate = [_dic objectForKey:@"fixedDate"];
     }
     if(_isP2P && _type != PROJECTDETAILTYPEBONDSRRANSFER){
+
        [self drawMinuteCountDownView];//创建倒计时view
     }
     //如果没有固定起息日
@@ -456,7 +459,11 @@
     _fixedUpDateLabel.textAlignment = NSTextAlignmentRight;
     [bottomBkView addSubview:_fixedUpDateLabel];
     
-    NSString *fixUpdate = [[_dic objectForKey:@"prdClaims"]objectForKey:@"fixedDate"];
+    NSString *fixUpdate = [_dic  objectForKey:@"fixedDate"];
+    if (_type == PROJECTDETAILTYPEBONDSRRANSFER)
+    {
+        fixUpdate = [[_dic objectForKey:@"prdClaims"]objectForKey:@"fixedDate"];
+    }
     NSString *guTitle;
     NSDate *fixDate = [NSDateManager getDateWithDateDes:fixUpdate dateFormatterStr:@"yyyy-MM-dd"];
     guTitle = [NSString stringWithFormat:@"%@",[NSDateManager getDateDesWithDate:fixDate dateFormatterStr:@"yyyy-MM-dd"]];
@@ -972,13 +979,11 @@
             [[NSUserDefaults standardUserDefaults] synchronize];
         }
         _investmentAmountLabel.text = [NSString stringWithFormat:@"%@元起",dic[@"investAmt"]];
-//        _markTypeLabel.text =  [repayModeArr objectAtIndex:([dic[@"repayMode"] intValue] - 1)];
           _markTypeLabel.text =  [dic objectSafeForKey:@"repayModeText"];//还款方式取服务端的值
         
     } else {
         _investmentAmountLabel.text = [NSString stringWithFormat:@"%d元起",[dic[@"minInvest"] intValue]];
         _markTypeLabel.text =  [dic objectSafeForKey:@"repayModeText"];//还款方式取服务端的值
-//        _markTypeLabel.text = [repayModeArr objectAtIndex:([dic[@"repayMode"] intValue] - 1)];
     }
 }
 

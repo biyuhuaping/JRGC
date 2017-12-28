@@ -36,7 +36,7 @@
 
 - (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-        NSString *titleStr = [UCFToolsMehod isNullOrNilWithString:[[[[_dataDic objectForKey:@"prdClaimsReveal"] objectForKey:@"safetySecurityList"] objectAtIndex:section] objectForKey:@"title"]];
+        NSString *titleStr = [UCFToolsMehod isNullOrNilWithString:[[_dataArray objectAtIndex:section] objectSafeForKey:@"title"]];
         titleStr = [titleStr stringByReplacingOccurrencesOfString:@"\t" withString:@""];
         titleStr = [titleStr stringByReplacingOccurrencesOfString:@"\n" withString:@""];
     float titlelableWidth = ScreenWidth -30;
@@ -63,7 +63,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
-        NSString *str = [[[[_dataDic objectForKey:@"prdClaimsReveal"] objectForKey:@"safetySecurityList"] objectAtIndex:[indexPath section]] objectForKey:@"content"];
+        NSString *str = [[_dataArray objectAtIndex:[indexPath section]] objectSafeForKey:@"content"];
         str = [UCFToolsMehod isNullOrNilWithString:str];
         CGSize size =  [Common getStrHeightWithStr:str AndStrFont:12 AndWidth:ScreenWidth - 30 AndlineSpacing:3];
     
@@ -80,21 +80,11 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-
-        if ([[_dataDic objectForKey:@"prdClaimsReveal"] isEqual:[NSNull null]]) {
-            return 1;
-        }
-        //此代码用来解决闪退，如再出现可以打开
-        //        NSInteger sectionCount = 0;
-        //        if (![[[_dataDic objectForKey:@"prdClaimsReveal"] objectForKey:@"safetySecurityList"] isEqual:[NSNull null]] && [[_dataDic objectForKey:@"prdClaimsReveal"] objectForKey:@"safetySecurityList"]) {
-        //            sectionCount = [[[_dataDic objectForKey:@"prdClaimsReveal"] objectForKey:@"safetySecurityList"] count];
-        //        }
-        return [[[_dataDic objectForKey:@"prdClaimsReveal"] objectSafeArrayForKey:@"safetySecurityList"] count];
+    return _dataArray.count;
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
         NSString *cellindifier = @"secondSegmentCell";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellindifier];
         if (!cell) {
@@ -118,14 +108,14 @@
         UILabel *lbl = (UILabel*)[cell.contentView viewWithTag:101];
         
         NSDictionary *dic = [Common getParagraphStyleDictWithStrFont:12.0f WithlineSpacing:3.0];
-        NSString *remarkStr = [UCFToolsMehod isNullOrNilWithString:[[[[_dataDic objectForKey:@"prdClaimsReveal"] objectForKey:@"safetySecurityList"] objectAtIndex:[indexPath section]] objectForKey:@"content"]];
+        NSString *remarkStr = [UCFToolsMehod isNullOrNilWithString:[[_dataArray objectAtIndex:[indexPath section]] objectSafeForKey:@"content"]];
                 lbl.attributedText = [NSString getNSAttributedString:remarkStr labelDict:dic];
     return cell;
 }
 
 -(float)secondHeaderHeight:(NSInteger)section
 {
-    NSString *titleStr = [UCFToolsMehod isNullOrNilWithString:[[[[_dataDic objectForKey:@"prdClaimsReveal"] objectForKey:@"safetySecurityList"] objectAtIndex:section ] objectForKey:@"title"]];
+    NSString *titleStr = [UCFToolsMehod isNullOrNilWithString:[[_dataArray objectAtIndex:section ] objectSafeForKey:@"title"]];
     titleStr = [titleStr stringByReplacingOccurrencesOfString:@"\t" withString:@""];
     titleStr = [titleStr stringByReplacingOccurrencesOfString:@"\n" withString:@""];
     float titlelableWidth = ScreenWidth - 30;

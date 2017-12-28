@@ -88,12 +88,13 @@
         switch ([type intValue]) {
             case 3://微金和尊享标详情请求
             {
-                NSString *strParameters = [NSString stringWithFormat:@"id=%@&userId=%@",Id,userId];
+                NSDictionary *praramDic = @{@"userId":[[NSUserDefaults standardUserDefaults] objectForKey:UUID],@"prdClaimsId":Id};
+                
                 if ([proType isEqualToString:@"1"]) {
-                    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self Type:SelectAccoutTypeP2P];
+                   [[NetworkModule sharedNetworkModule] newPostReq:praramDic tag: kSXTagPrdClaimsGetPrdBaseDetail owner:self signature:YES Type:SelectAccoutTypeP2P];
                 }
                 else if ([proType isEqualToString:@"2"]) {
-                    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDetail owner:self Type:SelectAccoutTypeHoner];
+                   [[NetworkModule sharedNetworkModule] newPostReq:praramDic tag: kSXTagPrdClaimsGetPrdBaseDetail owner:self signature:YES Type:SelectAccoutTypeHoner];
                 }
                 [self.requestDict setObject:completionHandler forKey:PRODETAIL];
             }
@@ -258,7 +259,7 @@
         }
         [self.requestDict removeObjectForKey:SIGN];
     }
-    else if (tag.intValue == kSXTagPrdClaimsDetail) {
+    else if (tag.intValue == kSXTagPrdClaimsGetPrdBaseDetail) {
         NetworkCompletionHandler complete = [self.requestDict objectForKey:PRODETAIL];
         complete(nil, dic);
         [self.requestDict removeObjectForKey:PRODETAIL];
@@ -316,7 +317,7 @@
         complete(err, nil);
         [self.requestDict removeObjectForKey:SIGN];
     }
-    else if (tag.intValue == kSXTagPrdClaimsDetail) {
+    else if (tag.intValue == kSXTagPrdClaimsGetPrdBaseDetail) {
         NetworkCompletionHandler complete = [self.requestDict objectForKey:PRODETAIL];
         complete(err, nil);
         [self.requestDict removeObjectForKey:PRODETAIL];
