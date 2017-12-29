@@ -8,8 +8,8 @@
 
 #import "UCFMarkOfBondsRransferNewView.h"
 #import "UIScrollView+MJRefresh.h"
-#import "MJRefreshGifHeader.h"
-#import "MJRefreshLegendFooter.h"
+//#import "MJRefreshGifHeader.h"
+//#import "MJRefreshLegendFooter.h"
 #import "UILabel+Misc.h"
 #import "UCFToolsMehod.h"
 #import "HMSegmentedControl.h"
