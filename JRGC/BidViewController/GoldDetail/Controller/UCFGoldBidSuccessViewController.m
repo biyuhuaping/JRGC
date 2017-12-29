@@ -14,10 +14,12 @@
 #import "UCFSettingItem.h"
 #import "MjAlertView.h"
 #import "UCFNoticeViewController.h"
-@interface UCFGoldBidSuccessViewController ()<UITableViewDelegate,UITableViewDataSource,MjAlertViewDelegate>
+#import "UCFGoldRewardTableViewCell.h"
+@interface UCFGoldBidSuccessViewController ()<UITableViewDelegate,UITableViewDataSource,MjAlertViewDelegate,UCFGoldRewardTableViewCellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (strong,nonatomic) NSMutableArray *dataArray;
+@property (strong,nonatomic)NSArray *rewardsArray;
 @end
 
 @implementation UCFGoldBidSuccessViewController
@@ -67,21 +69,26 @@
     {
        self.dataArray = [NSMutableArray arrayWithArray:@[item1,item2,item3,item4,item5]];
     }
-    
-    /*
-    NSString *winningNum =  [_dataDict objectSafeForKey:@"huojiangcishu"];
-    if ([winningNum integerValue] > 0) {
-        UCFSettingItem *item7 = [UCFSettingItem itemWithTitle:@"获取抽奖次数" withSubtitle:winningNum];
-        [self.dataArray addObject:item7];
-    } else {
-        UCFSettingItem *item7 = [UCFSettingItem itemWithTitle:@"获取抽奖次数" withSubtitle:winningNum];
+    NSMutableArray *array = [NSMutableArray arrayWithArray:[_dataDict objectSafeArrayForKey:@"rewards"]];
+    //rewardValue == 0的对象 不展示
+    for( int i = 0 ;i < array.count ;i ++)
+    {
+        NSDictionary * rewardDict = [array objectAtIndex:i];
+        int  rewardValue = [[rewardDict objectSafeForKey:@"rewardValue"] intValue];
+        if (rewardValue == 0)
+        {
+            [array removeObject:rewardDict];
+            i--;
+        }
+    }
+    self.rewardsArray = [NSArray arrayWithArray:array];
+    if (self.rewardsArray.count != 0)
+    {
+        UCFSettingItem *item7 = [UCFSettingItem itemWithTitle:@"获取抽奖次数" withSubtitle:@""];
+        item7.isSelect = YES;//这个标识 重要，代表 抽奖次数一栏是否显示的条件 yes 为显示 默认不显示
         [self.dataArray addObject:item7];
     }
-     */
-
-    NSString *winningNum = @"3次";
-    UCFSettingItem *item7 = [UCFSettingItem itemWithTitle:@"获取抽奖次数" withSubtitle:winningNum];
-    [self.dataArray addObject:item7];
+    
 
     if (_isPurchaseSuccess)
     {
@@ -170,8 +177,11 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(_isPurchaseSuccess){
-            return 44.0f;
+    if(_isPurchaseSuccess)
+    {
+        UCFSettingItem *item = self.dataArray[indexPath.row];
+        
+        return item.isSelect ? 120.0f : 44.0f;
     }else{
         CGSize size =  [Common getStrHeightWithStr:self.errorMessageStr AndStrFont:12 AndWidth:ScreenWidth - 30 AndlineSpacing:2];
         return size.height + 20;
@@ -196,10 +206,23 @@
     }
     if (_isPurchaseSuccess) {
      
-        if (indexPath.row < self.dataArray.count) {
-            UCFSettingItem *item = self.dataArray[indexPath.row];
-            cell.textLabel.text = item.title;
-            cell.detailTextLabel.text = item.subtitle;
+        if (indexPath.row < self.dataArray.count)
+        {
+             UCFSettingItem *item = self.dataArray[indexPath.row];
+            if (item.isSelect)
+            {
+                NSString *cellindifier = @"UCFGoldRewardTableViewCell";
+                UCFGoldRewardTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellindifier];
+                if (!cell) {
+                    cell = [[[NSBundle mainBundle]loadNibNamed:@"UCFGoldRewardTableViewCell" owner:nil options:nil]firstObject];
+                }
+                cell.delegate = self;
+                cell.rewardsArray  = self.rewardsArray;
+                return cell;
+            }else{
+                cell.textLabel.text = item.title;
+                cell.detailTextLabel.text = item.subtitle;
+            }
         }
     }else{
         CGSize size =  [Common getStrHeightWithStr:self.errorMessageStr AndStrFont:12 AndWidth:ScreenWidth - 30 AndlineSpacing:2];
@@ -215,10 +238,20 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    if ([cell.textLabel.text isEqualToString:@"获取抽奖次数"]) {
-        
+//    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+//    if ([cell.textLabel.text isEqualToString:@"获取抽奖次数"]) {
+//
+//    }
+}
+-(void)clickGoldRewardCellWithButton:(NSInteger)tag
+{
+    NSString *rewardUrlSrr = [[self.rewardsArray objectAtIndex:tag] objectSafeForKey:@"rewardUrl"];
+    if (rewardUrlSrr.length != 0) //链接不能为空
+    {
+        UCFNoticeViewController *noticeWeb = [[UCFNoticeViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
+        noticeWeb.url      = rewardUrlSrr;//请求地址;
+//        noticeWeb.navTitle = @"邀请好友";
+        [self.navigationController pushViewController:noticeWeb animated:YES];
     }
 }
-
 @end
