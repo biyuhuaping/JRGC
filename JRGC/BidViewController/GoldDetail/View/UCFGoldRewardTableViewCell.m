@@ -39,7 +39,7 @@
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(ViewWidth * i, 0,ViewWidth, imageViewHight )];
         NSString *rewardImageUrl = [self.rewardsArray[i] objectForKey:@"rewardImageUrl"];
         NSString *rewardValue = [self.rewardsArray[i] objectForKey:@"rewardValue"];
-        NSString *rewardType = [self.rewardsArray[i] objectForKey:@"rewardType"];
+//        NSString *rewardType = [self.rewardsArray[i] objectForKey:@"rewardType"];
         UIImageView *imageView = [[UIImageView alloc] init];
         imageView.bounds =  CGRectMake(0, 0,32, 25);
         imageView.center = CGPointMake(ViewWidth /2, imageViewHight/2 - 15);
@@ -49,7 +49,7 @@
         titleLabel.font = [UIFont systemFontOfSize:12];
         titleLabel.textAlignment = NSTextAlignmentCenter;
         titleLabel.textColor = UIColorWithRGB(0x555555);
-        titleLabel.text = [NSString stringWithFormat:@"%@%@\n%@",rewardValue,subArray[i], rewardType];
+        titleLabel.text = [NSString stringWithFormat:@"%@%@\n抽奖机会",rewardValue,subArray[i]];
         [view addSubview:imageView];
         [view addSubview:titleLabel];
         UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
