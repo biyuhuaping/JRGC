@@ -628,7 +628,7 @@
             return;
         }
         if ([UserInfoSingle sharedManager].companyAgent) {
-            [AuxiliaryFunc showToastMessage:@"资产证明开具只针对个人用户开放" withView:self.view];
+            [AuxiliaryFunc showToastMessage:@"企业用户暂不支持开通资产证明，请在个人账户查看" withView:self.view];
             return;
         }
             UCFAccountAssetsProofViewController * assetProofVC = [[UCFAccountAssetsProofViewController alloc]initWithNibName:@"UCFAccountAssetsProofViewController" bundle:nil];
