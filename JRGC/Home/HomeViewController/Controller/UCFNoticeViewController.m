@@ -36,6 +36,26 @@
     [self gotoURL:self.url];
     //    self.webView.scrollView.bounces = NO;
 }
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    self.loadCount --;
+    DBLOG(@"webViewDidFinishLoad");
+    [self.webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitUserSelect='none';"];
+    // Disable callout
+    [self.webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitTouchCallout='none';"];
+    [self.webView.scrollView.header endRefreshing];
+    
+    self.requestLastUrl = [NSString stringWithFormat:@"%@",self.webView.request.URL.absoluteString];
+    
+    DBLOG(@"%@",self.requestLastUrl);
+    
+    if (!self.errorView.hidden) {
+        self.errorView.hidden = YES;
+    }
+    if (baseTitleLabel.text.length == 0) {
+        baseTitleLabel.text = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+    }
+}
 /*
 #pragma mark - Navigation
 
