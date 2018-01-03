@@ -871,6 +871,10 @@
                 web.isHidenNavigationbar = YES;
             }
         }
+        else
+        {
+            web.isHidenNavigationbar = YES;
+        }
         web.url = [dic objectSafeForKey:@"value"];
         [self.navigationController pushViewController:web animated:YES];
         
