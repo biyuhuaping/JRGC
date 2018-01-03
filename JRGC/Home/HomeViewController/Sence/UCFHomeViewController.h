@@ -11,4 +11,5 @@
 
 @interface UCFHomeViewController : UCFBaseViewController
 - (void)skipToOtherPage:(UCFHomeListType)type;
+@property (copy, nonatomic) NSString *desVCStr;
 @end

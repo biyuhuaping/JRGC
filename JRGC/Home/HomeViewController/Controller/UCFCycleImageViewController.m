@@ -161,6 +161,7 @@ static NSString *cellId = @"iconCell";
     if ([model isKindOfClass:[UCFCycleModel class]]) {
         UCFCycleModel *modell = model;
         UCFWebViewJavascriptBridgeBanner *webView = [[UCFWebViewJavascriptBridgeBanner alloc]initWithNibName:@"UCFWebViewJavascriptBridgeBanner" bundle:nil];
+        webView.rootVc = self.parentViewController;
         webView.baseTitleType = @"lunbotuhtml";
         webView.url = modell.url;
         webView.navTitle = modell.title;
