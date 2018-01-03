@@ -59,6 +59,7 @@
 @property (weak, nonatomic) UCFHomeListNavView *navView;
 @property (strong, nonatomic)BJGridItem *dragBtn;
 @property (strong,nonatomic) NSString *intoVCStr;
+
 //@property (strong, nonatomic)UIDocumentInteractionController *documentController;
 @end
 
@@ -77,7 +78,16 @@
 {
     [super viewWillAppear:animated];
 
-    if ([self.intoVCStr isEqualToString:@"ProjectDetailVC"]) {
+//    NSArray *viewS = [self.navigationController viewControllers];
+//    if (viewS.count >= 2) {
+//      UCFBaseViewController *viewC =  [viewS objectAtIndex:1];
+//        if ([viewC isKindOfClass:[UCFWebViewJavascriptBridgeController class]]) {
+//           ((UCFWebViewJavascriptBridgeController *) viewC).isHideNativeNav
+//        }
+//    }
+    
+    if ([self.intoVCStr isEqualToString:@"ProjectDetailVC"] || [self.desVCStr isEqualToString:@"bannar_hide_return"]) {
+//        self.desVCStr = nil;
         [self.navigationController setNavigationBarHidden:YES animated:NO];
     }else{
         [self.navigationController setNavigationBarHidden:YES animated:YES];

@@ -422,7 +422,7 @@
             weakSelf.webView.translatesAutoresizingMaskIntoConstraints = false;
             [weakSelf.navigationController setNavigationBarHidden:YES animated:NO];
             weakSelf.topConSpace.constant = 0;
-            _isHideNativeNav = YES;
+            weakSelf.isHideNativeNav = YES;
 
         }else if ([nativeData[@"action"] isEqualToString:@"reserve_contract"]) {
             NSString *value = [nativeData objectSafeForKey:@"value"];
