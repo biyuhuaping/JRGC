@@ -92,6 +92,7 @@
     _openStatus = [[[NSUserDefaults standardUserDefaults] valueForKey:OPENSTATUS] integerValue];
     self.companyAgent = [[[NSUserDefaults standardUserDefaults] valueForKey:COMPANYAGENT] boolValue];
     self.enjoyOpenStatus = [[[NSUserDefaults standardUserDefaults] valueForKey:EnjoyState] integerValue];
+    self.zxAuthorization = [[[NSUserDefaults standardUserDefaults]valueForKey:HONERAUTHORIZATION] boolValue];
     self.goldAuthorization = [[[NSUserDefaults standardUserDefaults]valueForKey:GOldAUTHORIZATION] boolValue];
 //    self.userLevel = [[NSUserDefaults standardUserDefaults] valueForKey:USER_LEVEL];
     self.isRisk = [[NSUserDefaults standardUserDefaults] boolForKey:@"isRisk"];
@@ -111,6 +112,7 @@
     [[NSUserDefaults standardUserDefaults] setValue:dict[@"isCompanyAgent"] forKey:COMPANYAGENT];
     [[NSUserDefaults standardUserDefaults] setValue:dict[@"enjoyOpenStatus"] forKey:EnjoyState];
     [[NSUserDefaults standardUserDefaults] setValue:dict[@"nmAuthorization"] forKey:GOldAUTHORIZATION];
+    [[NSUserDefaults standardUserDefaults] setValue:dict[@"zxAuthorization"] forKey:HONERAUTHORIZATION];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     //  GrowingIO添加字段
@@ -162,6 +164,7 @@
     self.companyAgent = NO;
     self.isRisk = NO;
     self.isAutoBid = NO;
+    self.zxAuthorization = NO;
 //    self.userLevel = nil;
     [[NSNotificationCenter defaultCenter] postNotificationName:@"userisloginandcheckgrade" object:@(NO)];
 }

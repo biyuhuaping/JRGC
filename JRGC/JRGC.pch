@@ -119,7 +119,8 @@ return shared##className; \
 #define HEADURL         @"headerUrl"
 #define OPENSTATUS      @"openStatus"
 #define COMPANYAGENT    @"companyAgent" //是否是机构用户
-#define GOldAUTHORIZATION    @"GoldAuthorization" //是否是机构用户
+#define HONERAUTHORIZATION    @"zxAuthorization" //尊享是否授权标识
+#define GOldAUTHORIZATION    @"GoldAuthorization" //尊享是否授权标识
 #define GCMCODE         @"gcmCode" //用户工场码
 #define SEX             @"sex"//性别
 #define YeeBayTopSwitch @"yeepayflag"
