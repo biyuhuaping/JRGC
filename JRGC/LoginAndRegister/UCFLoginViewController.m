@@ -243,6 +243,7 @@
             BOOL isCompanyAgent = [[(NSDictionary *)dic[@"data"][@"userInfo"] objectSafeForKey: @"isCompanyAgent"] boolValue];
             
             [UserInfoSingle sharedManager].goldAuthorization = [[(NSDictionary *)dic[@"data"][@"userInfo"] objectSafeForKey: @"nmAuthorization"] boolValue];
+            [UserInfoSingle sharedManager].zxAuthorization = [[(NSDictionary *)dic[@"data"][@"userInfo"] objectSafeForKey: @"zxAuthorization"] boolValue];
             
             [UserInfoSingle sharedManager].isSpecial = [[(NSDictionary *)dic[@"data"][@"userInfo"] objectSafeForKey: @"isSpecial"] boolValue];
             NSString *signatureStr  = [UCFToolsMehod md5:yanQian];
