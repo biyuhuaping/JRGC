@@ -101,6 +101,7 @@
                 <outlet property="titleLabel" destination="AYh-RX-6le" id="tpm-ST-OeF"/>
                 <outlet property="valueLabel" destination="gAm-6I-CTA" id="7Nb-aD-f0R"/>
             </connections>
+            <point key="canvasLocation" x="20" y="83"/>
         </collectionViewCell>
     </objects>
 </document>

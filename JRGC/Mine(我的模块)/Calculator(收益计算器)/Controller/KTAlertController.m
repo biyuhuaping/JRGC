@@ -510,7 +510,7 @@
     BOOL isValid = YES;
     NSUInteger len = string.length;
     if (len > 0) {
-        NSString *phoneRegex = @"(\\+|\\-)?(([0]|(0[.]\\d{0,2}))|([1-9]\\d{0,2}))?";
+        NSString *phoneRegex = @"(\\+|\\-)?([1-9]\\d{0,2})?";
 //        NSString *phoneRegex = @"^\\+?[1-9][0-9]*$";
         NSPredicate *phoneTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",phoneRegex];
         return [phoneTest evaluateWithObject:string];

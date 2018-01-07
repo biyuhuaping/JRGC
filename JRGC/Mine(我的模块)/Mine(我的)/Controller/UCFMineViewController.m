@@ -170,6 +170,7 @@
 {
     [self.mineHeaderView setDefaultState];
     [self.tableView reloadData];
+    [self.mineFooterView clearData];
 }
 
 - (UCFLoginBaseView *)loginView

@@ -17,4 +17,5 @@
 @property (strong, nonatomic) UCFUserBenefitModel *benefit;
 @property (weak, nonatomic) id<UCFMineFuncViewDelegate> delegate;
 - (CGFloat)height;
+- (void)clearData;
 @end
