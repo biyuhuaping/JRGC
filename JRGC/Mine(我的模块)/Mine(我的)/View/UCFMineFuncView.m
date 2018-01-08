@@ -23,7 +23,8 @@
 {
     UCFSettingItem *facBean = [UCFSettingArrowItem itemWithIcon:@"uesr_icon_bean" title:@"工豆" destVcClass:nil];
     facBean.subtitle = self.benefit.beanAmount ? [NSString stringWithFormat:@"¥%@", self.benefit.beanAmount] : @"¥0.00";
-    if (self.benefit.beanExpiring.doubleValue > 0) {
+    NSString *beanExpiring = [NSString stringWithFormat:@"%.2f", [self.benefit.beanExpiring doubleValue]];
+    if ([beanExpiring compare:@"0.00"] > 0) {
         facBean.isShowOrHide = YES;
     }
     else {
@@ -31,7 +32,8 @@
     }
     
     UCFSettingItem *coupon = [UCFSettingArrowItem itemWithIcon:@"uesr_icon_coupon" title:@"优惠券" destVcClass:nil];
-    if (self.benefit.couponExpringNum.doubleValue > 0) {
+    NSString *couponExpringNum = [NSString stringWithFormat:@"%.2f", [self.benefit.couponExpringNum doubleValue]];
+    if ([couponExpringNum compare:@"0.00"] > 0) {
         coupon.isShowOrHide = YES;
     }
     else {
