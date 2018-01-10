@@ -446,6 +446,7 @@
         [self resetGetCodeButtonStuats];
     }
 }
+
 -(void)resetGetCodeButtonStuats{
     [_timer  setFireDate:[NSDate distantFuture]];
     _counter = 60;

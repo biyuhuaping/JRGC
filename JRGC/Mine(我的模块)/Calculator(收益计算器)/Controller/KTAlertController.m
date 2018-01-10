@@ -448,7 +448,17 @@
         }
     }
     else if (string.length > 0) {
-        textField.font = [UIFont systemFontOfSize:16];
+        if (textField == self.investTermTextField) {
+            if ([self validateFormatByRegexForString:[textField.text stringByReplacingCharactersInRange:range withString:string]]) {
+                textField.font = [UIFont systemFontOfSize:16];
+            }
+            else {
+                textField.font = [UIFont systemFontOfSize:14];
+            }
+        }
+        else {
+            textField.font = [UIFont systemFontOfSize:16];
+        }
         if (self.calculateTypeSign != CalulateTypeNone && ![[textField.text stringByAppendingFormat:@"%@", string] isEqualToString:@"."]) {
             if (self.investTermTextField == textField) {
                 if (self.investAmountTextField.text.length > 0 && self.annualRateTextField.text.length > 0) {
