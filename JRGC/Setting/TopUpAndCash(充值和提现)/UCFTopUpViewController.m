@@ -446,6 +446,7 @@
         [self resetGetCodeButtonStuats];
     }
 }
+
 -(void)resetGetCodeButtonStuats{
     [_timer  setFireDate:[NSDate distantFuture]];
     _counter = 60;
@@ -518,6 +519,7 @@
     NSDictionary *dataDict = @{@"phoneNum":[Common deleteStrSpace:telTextField.text],@"validateCode":codeTextField.text,@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID]};
     [[NetworkModule sharedNetworkModule] newPostReq:dataDict tag:kSXTagChangeReserveMobileNumber owner:self signature:YES Type:self.accoutType];
 }
+
 - (void)getPhoneCode
 {
     if ([Common deleteStrSpace:telTextField.text].length != 11) {
@@ -528,9 +530,11 @@
     [[NetworkModule sharedNetworkModule] newPostReq:dic tag:kSXTagIdentifyCode owner:self signature:YES Type:self.accoutType];
 
 }
+
 -(void)modifyReservedBankNumberSuccess:(NSString *)reservedBankNumber{
     _phoneTextField.text = reservedBankNumber;
 }
+
 - (IBAction)clickModiyPhoneButton:(UIButton *)sender {
     [self.view endEditing:YES];
     UCFModifyReservedBankNumberViewController *modifyBankNumberVC = [[UCFModifyReservedBankNumberViewController alloc]initWithNibName:@"UCFModifyReservedBankNumberViewController" bundle:nil];
@@ -664,10 +668,10 @@
         [MBProgressHUD displayHudError:[NSString stringWithFormat:@"单笔充值金额不低于%@元",minRecharge]];
         return;
     }
-//    if (_phoneTextField.text.length != 11) { //服务器校验手机号格式
-//        [MBProgressHUD displayHudError:@"请输入正确手机号"];
-//        return;
-//    }
+    if (_phoneTextField.text.length != 11) { //服务器校验手机号格式
+        [MBProgressHUD displayHudError:@"请输入正确手机号"];
+        return;
+    }
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     _getCodeButton.userInteractionEnabled = NO;
