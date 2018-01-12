@@ -25,28 +25,35 @@
     [super awakeFromNib];
     // Initialization code
     self.signView.hidden = YES;
-}
-
-- (void)layoutSubviews
-{
-    [super layoutSubviews];
-    self.imageview.image = [UIImage imageNamed:self.setItem.icon];
-    self.titleLabel.text = self.setItem.title;
-    self.signView.hidden = !self.setItem.isShowOrHide;
-    self.valueLabel.text = self.setItem.subtitle;
+    self.valueLabel.textColor = UIColorWithRGB(0x4aa1f9);
+    self.segLineBottom.hidden = NO;
 }
 
 - (void)setIndexPath:(NSIndexPath *)indexPath
 {
     _indexPath = indexPath;
-    NSInteger total = [self.collectView numberOfItemsInSection:indexPath.section];
-    NSInteger currentNo = indexPath.row / 2;
-    if (currentNo != total/2) {
+    NSInteger total = [self.collectView numberOfItemsInSection:self.indexPath.section];
+    NSInteger currentNo = (indexPath.row + 1) / 2 + (indexPath.row + 1) % 2;
+    if (currentNo != total/2 + total % 2) {
         self.segLineBottom.hidden = NO;
     }
     else {
         self.segLineBottom.hidden = YES;
     }
+}
+
+//- (void)layoutSubviews
+//{
+//    [super layoutSubviews];
+//}
+
+- (void)setSetItem:(UCFSettingArrowItem *)setItem
+{
+    _setItem = setItem;
+    self.imageview.image = [UIImage imageNamed:self.setItem.icon];
+    self.titleLabel.text = self.setItem.title;
+    self.signView.hidden = !self.setItem.isShowOrHide;
+    self.valueLabel.text = self.setItem.subtitle;
 }
 
 @end

@@ -23,19 +23,21 @@
 {
     UCFSettingItem *facBean = [UCFSettingArrowItem itemWithIcon:@"uesr_icon_bean" title:@"工豆" destVcClass:nil];
     facBean.subtitle = self.benefit.beanAmount ? [NSString stringWithFormat:@"¥%@", self.benefit.beanAmount] : @"¥0.00";
-    if (self.benefit.beanExpiring.integerValue > 0) {
-        facBean.isShowOrHide = NO;
+    NSString *beanExpiring = [NSString stringWithFormat:@"%.2f", [self.benefit.beanExpiring doubleValue]];
+    if ([beanExpiring compare:@"0.00"] > 0) {
+        facBean.isShowOrHide = YES;
     }
     else {
-        facBean.isShowOrHide = YES;
+        facBean.isShowOrHide = NO;
     }
     
     UCFSettingItem *coupon = [UCFSettingArrowItem itemWithIcon:@"uesr_icon_coupon" title:@"优惠券" destVcClass:nil];
-    if (self.benefit.couponExpringNum.integerValue > 0) {
-        coupon.isShowOrHide = NO;
+    NSString *couponExpringNum = [NSString stringWithFormat:@"%.2f", [self.benefit.couponExpringNum doubleValue]];
+    if ([couponExpringNum compare:@"0.00"] > 0) {
+        coupon.isShowOrHide = YES;
     }
     else {
-        coupon.isShowOrHide = YES;
+        coupon.isShowOrHide = NO;
     }
     coupon.subtitle = self.benefit.couponNumber ? [NSString stringWithFormat:@"%@张可用", self.benefit.couponNumber] : @"0张可用";
     
@@ -86,9 +88,9 @@
 {
     static NSString *const cellId = @"cellId";
     UCFMIneFuncCollectCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellId forIndexPath:indexPath];
-    cell.setItem = [self.dataArray objectAtIndex:indexPath.row];
     cell.collectView = collectionView;
     cell.indexPath = indexPath;
+    cell.setItem = [self.dataArray objectAtIndex:indexPath.row];
     return cell;
 }
 
@@ -146,6 +148,11 @@
 {
     _benefit = benefit;
     [_collectionView reloadData];
+}
+
+- (void)clearData {
+    self.benefit = nil;
+    [self.collectionView reloadData];
 }
 
 @end

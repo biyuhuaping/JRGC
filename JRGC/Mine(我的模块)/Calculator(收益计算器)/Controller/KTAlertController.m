@@ -448,7 +448,17 @@
         }
     }
     else if (string.length > 0) {
-        textField.font = [UIFont systemFontOfSize:16];
+        if (textField == self.investTermTextField) {
+            if ([self validateFormatByRegexForString:[textField.text stringByReplacingCharactersInRange:range withString:string]]) {
+                textField.font = [UIFont systemFontOfSize:16];
+            }
+            else {
+                textField.font = [UIFont systemFontOfSize:14];
+            }
+        }
+        else {
+            textField.font = [UIFont systemFontOfSize:16];
+        }
         if (self.calculateTypeSign != CalulateTypeNone && ![[textField.text stringByAppendingFormat:@"%@", string] isEqualToString:@"."]) {
             if (self.investTermTextField == textField) {
                 if (self.investAmountTextField.text.length > 0 && self.annualRateTextField.text.length > 0) {
@@ -510,7 +520,7 @@
     BOOL isValid = YES;
     NSUInteger len = string.length;
     if (len > 0) {
-        NSString *phoneRegex = @"(\\+|\\-)?(([0]|(0[.]\\d{0,2}))|([1-9]\\d{0,2}))?";
+        NSString *phoneRegex = @"(\\+|\\-)?([1-9]\\d{0,2})?";
 //        NSString *phoneRegex = @"^\\+?[1-9][0-9]*$";
         NSPredicate *phoneTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",phoneRegex];
         return [phoneTest evaluateWithObject:string];
