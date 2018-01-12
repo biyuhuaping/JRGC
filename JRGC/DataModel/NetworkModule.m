@@ -1295,6 +1295,9 @@ static NetworkModule *gInstance = NULL;
         case kSXTagPrdClaimsGetInvestOrderRecord://普通标详情【标认购记录】
             parameter = [NEW_SERVER_IP stringByAppendingString:PRDCLAIMSGETINVESTORDERRECORD];
             break;
+        case kSXTagValidBindedPhone:
+            parameter = [NEW_SERVER_IP stringByAppendingString:VALID_BINDED_PHONE];
+            break;
     }
     //给原有参数字典添加公共参数
     if (!data) {

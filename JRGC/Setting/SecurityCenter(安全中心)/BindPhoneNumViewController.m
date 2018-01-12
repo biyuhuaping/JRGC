@@ -9,7 +9,7 @@
 #import "BindPhoneNumViewController.h"
 #import "UCFModifyPhoneViewController.h"
 #import "SharedSingleton.h"
-
+#import "MD5Util.h"
 @interface BindPhoneNumViewController () <UITextFieldDelegate, UIAlertViewDelegate>{
     NSString    *previousTextFieldContent;
     UITextRange *previousSelection;
@@ -247,9 +247,11 @@
 // 获取网络数据
 - (void)getIsValidPhoneNumAndPasswordFromNetData
 {
-    NSString* str = [self.moddifyPhoneTextField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
-    NSDictionary *param = @{@"phone": str, @"pwd": self.loginPwdTextField.text};
-    [[NetworkModule sharedNetworkModule] postReq2:param tag:kSXTagValidBindedPhone owner:self];
+    NSString* phoneNumberStr = [self.moddifyPhoneTextField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
+    NSString *isCompanyStr  = [NSString stringWithFormat:@"%d",[UserInfoSingle sharedManager].companyAgent];
+    NSDictionary *param = @{@"username": phoneNumberStr, @"pwd": [MD5Util MD5Pwd:self.loginPwdTextField.text],@"isCompany":isCompanyStr};
+    [[NetworkModule sharedNetworkModule] newPostReq:param tag:kSXTagValidBindedPhone owner:self signature:YES Type:SelectAccoutTypeP2P ];
 }
 
 //开始请求
@@ -266,11 +268,12 @@
     //    DBLOG(@"首页获取最新项目列表：%@",data);
     
     NSMutableDictionary *dic = [data objectFromJSONString];
-    NSString *rstcode = dic[@"status"];
-    NSString *rsttext = dic[@"statusdes"];
+    NSString *rstcode = dic[@"ret"];
+    NSString *rsttext = dic[@"message"];
     
-    if (tag.intValue == kSXTagValidBindedPhone) {
-        if ([rstcode intValue] == 1) {
+    if (tag.intValue == kSXTagValidBindedPhone)
+    {
+        if ([rstcode boolValue] ) {
             UCFModifyPhoneViewController *modifyPhone = [[UCFModifyPhoneViewController alloc]initWithNibName:@"UCFModifyPhoneViewController" bundle:nil];
             modifyPhone.title = @"修改绑定手机号";
             modifyPhone.rootVc = _uperViewController;

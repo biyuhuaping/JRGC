@@ -28,7 +28,7 @@
 #define MONEY_OVERVIEW      @"newaccount/overview"
 #define FUNDS_DETAIL        @"newaccount/funds"
 #define ACCOUNT_SAFE        @"api/userInfo/v2/personalInfo.json" //个人信息页面
-#define VALID_BINDED_PHONE  @"newuserregist/bindNewPhone" //修改绑定手机号验证一绑定号码
+#define VALID_BINDED_PHONE  @"api/user/v2/validLogin.json" //修改绑定手机号-->>验证用户名密码是否正确
 //#define IDNO_CHECKINFO      @"newsafe/idnoCheckInfo"   // 个人身份证信息
 #define IDNO_CHECKINFO      @"api/userInfo/v2/idnoCheckInfo.json"// 个人身份证信息
 #define FLIXEDGOLDCONSTRACT @"api/nmCommon/v2/getCurrentContractMess.json" //活期合同接口
