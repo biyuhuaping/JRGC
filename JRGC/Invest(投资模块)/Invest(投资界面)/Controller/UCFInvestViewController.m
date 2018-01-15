@@ -72,27 +72,118 @@
 #pragma mark - 设置界面
 - (void)addChildViewControllers
 {
+    if ([UserInfoSingle sharedManager].userId) {
+        if ([UserInfoSingle sharedManager].superviseSwitch) {
+            if ([UserInfoSingle sharedManager].level > 1) {
+                if ([UserInfoSingle sharedManager].goldIsNew && [UserInfoSingle sharedManager].zxIsNew) {
+                    [self addMicroMoney];
+                    [self addTransfer];
+                }
+                else if ([UserInfoSingle sharedManager].goldIsNew && ![UserInfoSingle sharedManager].zxIsNew) {
+                    [self addMicroMoney];
+                    [self addHonor];
+                    [self addTransfer];
+                }
+                else if (![UserInfoSingle sharedManager].goldIsNew && [UserInfoSingle sharedManager].zxIsNew) {
+                    [self addMicroMoney];
+                    [self addGolden];
+                    [self addTransfer];
+                }
+                else if (![UserInfoSingle sharedManager].goldIsNew && ![UserInfoSingle sharedManager].zxIsNew) {
+                    [self addMicroMoney];
+                    [self addHonor];
+                    [self addGolden];
+                    [self addTransfer];
+                }
+            }
+            else {
+                [self addMicroMoney];
+                [self addTransfer];
+            }
+        }
+        else {
+            [self addMicroMoney];
+            [self addHonor];
+            [self addGolden];
+            [self addTransfer];
+        }
+    }
+    else {
+        if ([UserInfoSingle sharedManager].superviseSwitch) {
+            [self addMicroMoney];
+            [self addTransfer];
+        }
+        else {
+            [self addMicroMoney];
+            [self addHonor];
+            [self addGolden];
+            [self addTransfer];
+        }
+    }
+}
+
+- (void)addMicroMoney {
     self.microMoney = [[UCFMicroMoneyViewController alloc]initWithNibName:@"UCFMicroMoneyViewController" bundle:nil];
     self.microMoney.rootVc = self;
     [self addChildViewController:self.microMoney];
-    
+}
+
+- (void)addHonor {
     self.honorInvest = [[UCFHonorInvestViewController alloc]initWithNibName:@"UCFHonorInvestViewController" bundle:nil];
     self.honorInvest.rootVc = self;
     [self addChildViewController:self.honorInvest];
-    
+}
+
+- (void)addGolden {
     self.golden = [[UCFGoldenViewController alloc] initWithNibName:@"UCFGoldenViewController" bundle:nil];
     self.golden.rootVc = self;
     [self addChildViewController:self.golden];
-    
+}
+
+- (void)addTransfer {
     self.investTransfer = [[UCFInvestTransferViewController alloc]initWithNibName:@"UCFInvestTransferViewController" bundle:nil];
     self.investTransfer.rootVc = self;
     [self addChildViewController:self.investTransfer];
-
 }
+
+
 - (void)createUI {
+    NSArray *titleArray = nil;
+    if ([UserInfoSingle sharedManager].userId) {
+        if ([UserInfoSingle sharedManager].superviseSwitch) {
+            if ([UserInfoSingle sharedManager].level > 1) {
+                if ([UserInfoSingle sharedManager].goldIsNew && [UserInfoSingle sharedManager].zxIsNew) {
+                    titleArray = @[@"微金", @"债转"];
+                }
+                else if ([UserInfoSingle sharedManager].goldIsNew && ![UserInfoSingle sharedManager].zxIsNew) {
+                    titleArray = @[@"微金", @"尊享", @"债转"];
+                }
+                else if (![UserInfoSingle sharedManager].goldIsNew && [UserInfoSingle sharedManager].zxIsNew) {
+                    titleArray = @[@"微金", @"黄金", @"债转"];
+                }
+                else if (![UserInfoSingle sharedManager].goldIsNew && ![UserInfoSingle sharedManager].zxIsNew) {
+                    titleArray = @[@"微金", @"尊享", @"黄金", @"债转"];
+                }
+            }
+            else {
+                titleArray = @[@"微金", @"债转"];
+            }
+        }
+        else {
+            titleArray = @[@"微金", @"尊享", @"黄金", @"债转"];
+        }
+    }
+    else {
+        if ([UserInfoSingle sharedManager].superviseSwitch) {
+            titleArray = @[@"微金", @"债转"];
+        }
+        else {
+            titleArray = @[@"微金", @"尊享", @"黄金", @"债转"];
+        }
+    }
     _pagerView = [[PagerView alloc] initWithFrame:CGRectMake(0,20,ScreenWidth,ScreenHeight - 20 - 49)
                                SegmentViewHeight:44
-                                      titleArray:@[@"微金", @"尊享", @"黄金", @"债转"]
+                                      titleArray:titleArray
                                       Controller:self
                                        lineWidth:44
                                       lineHeight:3];
@@ -101,43 +192,43 @@
     
     if ([self.selectedType isEqualToString:@"P2P"]) {
         self.currentViewController = self.microMoney;
-        [_pagerView setSelectIndex:0];
+        [_pagerView setSelectIndex:[self.childViewControllers indexOfObject:self.currentViewController]];
     }
     else if ([self.selectedType isEqualToString:@"ZX"]) {
         self.currentViewController = self.honorInvest;
-        [_pagerView setSelectIndex:1];
+        [_pagerView setSelectIndex:[self.childViewControllers indexOfObject:self.currentViewController]];
         
     }
     else if ([self.selectedType isEqualToString:@"Trans"]) {
         self.currentViewController = self.investTransfer;
-        [_pagerView setSelectIndex:3];
+        [_pagerView setSelectIndex:[self.childViewControllers indexOfObject:self.currentViewController]];
     }
     else if ([self.selectedType isEqualToString:@"Gold"]) {
         self.currentViewController = self.golden;
-        [_pagerView setSelectIndex:2];
+        [_pagerView setSelectIndex:[self.childViewControllers indexOfObject:self.currentViewController]];
     }
     else {
-        self.currentViewController = self.honorInvest;
+        self.currentViewController = self.microMoney;
         [_pagerView setSelectIndex:0];
     }
 }
 
 - (void)changeView {
     if ([self.selectedType isEqualToString:@"P2P"]) {
-        [_pagerView setSelectIndex:0];
         self.currentViewController = self.microMoney;
+        [_pagerView setSelectIndex:[self.childViewControllers indexOfObject:self.currentViewController]];
     }
     else if ([self.selectedType isEqualToString:@"ZX"]) {
-        [_pagerView setSelectIndex:1];
         self.currentViewController = self.honorInvest;
+        [_pagerView setSelectIndex:[self.childViewControllers indexOfObject:self.currentViewController]];
     }
     else if ([self.selectedType isEqualToString:@"Trans"]) {
-        [_pagerView setSelectIndex:3];
         self.currentViewController = self.investTransfer;
+        [_pagerView setSelectIndex:[self.childViewControllers indexOfObject:self.currentViewController]];
     }
     else if ([self.selectedType isEqualToString:@"Gold"]) {
-        [_pagerView setSelectIndex:2];
         self.currentViewController = self.golden;
+        [_pagerView setSelectIndex:[self.childViewControllers indexOfObject:self.currentViewController]];
     }
 }
 

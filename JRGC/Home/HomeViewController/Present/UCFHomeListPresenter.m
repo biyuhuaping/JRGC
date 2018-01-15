@@ -127,15 +127,18 @@
     }
     NSMutableArray *temp = [NSMutableArray new];
     for (UCFHomeListCellModel *model in group.prdlist) {
-        if ([model.type isEqualToString:@"6"]) {
+        if ([group.type isEqualToString:@"19"]) {
+            model.moedelType = UCFHomeListCellModelTypeDebtsTransfer;
+        }
+        else if ([model.type isEqualToString:@"6"]) {
             model.moedelType = UCFHomeListCellModelTypeGoldFixed;
         }
         else if ([group.type isEqualToString:@"13"]) {
-            if ([model.type isEqualToString:@"0"]) {
-                model.moedelType = UCFHomeListCellModelTypeReserved;
-            }
-            else
-                model.moedelType = UCFHomeListCellModelTypeNewUser;
+            model.moedelType = UCFHomeListCellModelTypeNewUser;
+//            if ([model.type isEqualToString:@"0"]) {
+//                model.moedelType = UCFHomeListCellModelTypeReserved;
+//            }
+//            else
         }
         else if ([model.type isEqualToString:@"0"]) {
             model.moedelType = UCFHomeListCellModelTypeReserved;

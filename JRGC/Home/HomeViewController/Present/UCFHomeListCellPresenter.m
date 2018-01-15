@@ -159,7 +159,7 @@
 
 - (CGFloat)cellHeight
 {
-    if (self.item.moedelType == UCFHomeListCellModelTypeDefault) {
+    if (self.item.moedelType == UCFHomeListCellModelTypeDefault || self.item.moedelType == UCFHomeListCellModelTypeDebtsTransfer) {
         return 100.0;
     }
     else if (self.item.moedelType == UCFHomeListCellModelTypeGoldFixed) {

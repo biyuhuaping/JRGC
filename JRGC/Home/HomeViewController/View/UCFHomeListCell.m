@@ -188,7 +188,50 @@
                 }
             }
         }
+    }
+    else if (presenter.modelType == UCFHomeListCellModelTypeDebtsTransfer) {
+        self.proName.text = presenter.proTitle;
+        self.rateLabel.text = presenter.annualRate;
+        if (presenter.holdTime.length > 0) {
+            self.timeLabel.text = [NSString stringWithFormat:@"%@~%@", presenter.holdTime, presenter.repayPeriodtext];
+        }
+        else {
+            self.timeLabel.text = [NSString stringWithFormat:@"%@", presenter.repayPeriodtext];
+        }
+        self.repayModelLabel.text = presenter.repayModeText;
+        self.remainLabel.text = presenter.availBorrowAmount;
+        self.startMoneyLabel.text = presenter.minInvest;
+//        float progress;
+//        progress = [presenter.item.completeLoan floatValue]/[presenter.item.borrowAmount floatValue];
+//        if (progress < 0 || progress > 1) {
+//            progress = 1;
+//        }
+//        else
+//            self.circleProgressView.progress = progress;
         
+        
+        NSInteger status = [presenter.item.status integerValue];
+        DBLOG(@"type : %@", presenter.item.type);
+        //            self.goldTtileThird.hidden = YES;
+        self.timeLabel.font = [UIFont systemFontOfSize:12];
+        self.repayModelLabel.font = [UIFont systemFontOfSize:12];
+        //控制进度视图显示
+        if (status < 3) {
+            self.circleProgressView.pathFillColor = UIColorWithRGB(0xfa4d4c);
+            //            self.progressView.progressLabel.textColor = UIColorWithRGB(0x555555);
+        }else{
+            self.circleProgressView.pathFillColor = UIColorWithRGB(0xe2e2e2);//未绘制的进度条颜色
+            //            self.progressView.progressLabel.textColor = UIColorWithRGB(0x909dae);
+        }
+//        NSArray *statusArr = @[@"未审核",@"等待确认",@"出借",@"流标",@"满标",@"回款中",@"已回款"];
+        if (status == 2) {
+            self.circleProgressView.progressText = @"购买";
+            self.circleProgressView.textColor = UIColorWithRGB(0x555555);
+        }
+        else {
+            self.circleProgressView.progressText = @"已转完";
+            self.circleProgressView.textColor = UIColorWithRGB(0x909dae);
+        }
     }
 }
 
@@ -314,7 +357,7 @@
 //        _proSignBackViewWidth.constant = 0;
     }
     
-    if (self.presenter.modelType == UCFHomeListCellModelTypeDefault) {
+    if (self.presenter.modelType == UCFHomeListCellModelTypeDefault || self.presenter.modelType == UCFHomeListCellModelTypeDebtsTransfer) {
         if ([self.presenter.type isEqualToString:@"3"] || self.goldModel) {
             [self.rateLabel setFont:[UIFont systemFontOfSize:10] string:@"克/100克"];
             self.annurateLabelW.constant = 45;
