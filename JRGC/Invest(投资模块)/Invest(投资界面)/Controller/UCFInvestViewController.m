@@ -51,17 +51,101 @@
 
 - (void)currentControllerUpdate
 {
-    if ([_pagerView.selectIndexStr isEqualToString:@"0"]) {
-        [self.microMoney.tableview.header beginRefreshing];
+    if ([UserInfoSingle sharedManager].userId) {
+        if ([UserInfoSingle sharedManager].superviseSwitch) {
+            if ([UserInfoSingle sharedManager].level > 1) {
+                if ([UserInfoSingle sharedManager].goldIsNew && [UserInfoSingle sharedManager].zxIsNew) {
+                    if ([_pagerView.selectIndexStr isEqualToString:@"0"]) {
+                        [self.microMoney.tableview.header beginRefreshing];
+                    }
+                    else if ([_pagerView.selectIndexStr isEqualToString:@"1"]) {
+                        [self.investTransfer.tableview.header beginRefreshing];
+                    }
+                }
+                else if ([UserInfoSingle sharedManager].goldIsNew && ![UserInfoSingle sharedManager].zxIsNew) {
+                    if ([_pagerView.selectIndexStr isEqualToString:@"0"]) {
+                        [self.microMoney.tableview.header beginRefreshing];
+                    }
+                    else if ([_pagerView.selectIndexStr isEqualToString:@"1"]) {
+                        [self.honorInvest.tableView.header beginRefreshing];
+                    }
+                    else if ([_pagerView.selectIndexStr isEqualToString:@"2"]) {
+                        [self.investTransfer.tableview.header beginRefreshing];
+                    }
+                }
+                else if (![UserInfoSingle sharedManager].goldIsNew && [UserInfoSingle sharedManager].zxIsNew) {
+                    if ([_pagerView.selectIndexStr isEqualToString:@"0"]) {
+                        [self.microMoney.tableview.header beginRefreshing];
+                    }
+                    else if ([_pagerView.selectIndexStr isEqualToString:@"1"]) {
+                        [self.golden.tableview.header beginRefreshing];
+                    }
+                    else if ([_pagerView.selectIndexStr isEqualToString:@"2"]) {
+                        [self.investTransfer.tableview.header beginRefreshing];
+                    }
+                }
+                else if (![UserInfoSingle sharedManager].goldIsNew && ![UserInfoSingle sharedManager].zxIsNew) {
+                    if ([_pagerView.selectIndexStr isEqualToString:@"0"]) {
+                        [self.microMoney.tableview.header beginRefreshing];
+                    }
+                    else if ([_pagerView.selectIndexStr isEqualToString:@"1"]) {
+                        [self.honorInvest.tableView.header beginRefreshing];
+                    }
+                    else if ([_pagerView.selectIndexStr isEqualToString:@"3"]) {
+                        [self.investTransfer.tableview.header beginRefreshing];
+                    }
+                    else if ([_pagerView.selectIndexStr isEqualToString:@"2"]) {
+                        [self.golden.tableview.header beginRefreshing];
+                    }
+                }
+            }
+            else {
+                if ([_pagerView.selectIndexStr isEqualToString:@"0"]) {
+                    [self.microMoney.tableview.header beginRefreshing];
+                }
+                else if ([_pagerView.selectIndexStr isEqualToString:@"1"]) {
+                    [self.investTransfer.tableview.header beginRefreshing];
+                }
+            }
+        }
+        else {
+            if ([_pagerView.selectIndexStr isEqualToString:@"0"]) {
+                [self.microMoney.tableview.header beginRefreshing];
+            }
+            else if ([_pagerView.selectIndexStr isEqualToString:@"1"]) {
+                [self.honorInvest.tableView.header beginRefreshing];
+            }
+            else if ([_pagerView.selectIndexStr isEqualToString:@"3"]) {
+                [self.investTransfer.tableview.header beginRefreshing];
+            }
+            else if ([_pagerView.selectIndexStr isEqualToString:@"2"]) {
+                [self.golden.tableview.header beginRefreshing];
+            }
+        }
     }
-    else if ([_pagerView.selectIndexStr isEqualToString:@"1"]) {
-        [self.honorInvest.tableView.header beginRefreshing];
-    }
-    else if ([_pagerView.selectIndexStr isEqualToString:@"3"]) {
-        [self.investTransfer.tableview.header beginRefreshing];
-    }
-    else if ([_pagerView.selectIndexStr isEqualToString:@"2"]) {
-        [self.golden.tableview.header beginRefreshing];
+    else {
+        if ([UserInfoSingle sharedManager].superviseSwitch) {
+            if ([_pagerView.selectIndexStr isEqualToString:@"0"]) {
+                [self.microMoney.tableview.header beginRefreshing];
+            }
+            else if ([_pagerView.selectIndexStr isEqualToString:@"1"]) {
+                [self.investTransfer.tableview.header beginRefreshing];
+            }
+        }
+        else {
+            if ([_pagerView.selectIndexStr isEqualToString:@"0"]) {
+                [self.microMoney.tableview.header beginRefreshing];
+            }
+            else if ([_pagerView.selectIndexStr isEqualToString:@"1"]) {
+                [self.honorInvest.tableView.header beginRefreshing];
+            }
+            else if ([_pagerView.selectIndexStr isEqualToString:@"3"]) {
+                [self.investTransfer.tableview.header beginRefreshing];
+            }
+            else if ([_pagerView.selectIndexStr isEqualToString:@"2"]) {
+                [self.golden.tableview.header beginRefreshing];
+            }
+        }
     }
 }
 - (void)viewWillLayoutSubviews
