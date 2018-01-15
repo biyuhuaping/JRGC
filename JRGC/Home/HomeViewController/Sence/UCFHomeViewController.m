@@ -637,6 +637,15 @@
         }
         [appdel.tabBarController setSelectedIndex:1];
     }
+    else if (type == UCFHomeListTypeDebtsMore) {
+        AppDelegate *appdel = (AppDelegate *)[UIApplication sharedApplication].delegate;
+        UCFInvestViewController *invest = (UCFInvestViewController *)[[appdel.tabBarController.childViewControllers objectAtIndex:1].childViewControllers firstObject];
+        invest.selectedType = @"Trans";
+        if ([invest isViewLoaded]) {
+            [invest changeView];
+        }
+        [appdel.tabBarController setSelectedIndex:1];
+    }
 }
 
 - (void)homeList:(UCFHomeListViewController *)homeList didClickReservedWithModel:(UCFHomeListCellModel *)model
@@ -922,9 +931,20 @@
 //    
 //    [self.userInfoVC.presenter fetchUserInfoTwoDataWithCompletionHandler:^(NSError *error, id result) {
 //    }];
-    
+
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self.homeListVC.presenter fetchHomeIconListDataWithCompletionHandler:^(NSError *error, id result) {
+            CGFloat userInfoViewHeight = [UCFCycleImageViewController viewHeight];
+            NSArray *homeIcons = [result objectSafeArrayForKey:@"productMap"];
+            if (homeIcons.count > 0) {
+                weakSelf.cycleImageVC.view.frame = CGRectMake(0, 0, ScreenWidth, userInfoViewHeight + 80);
+                weakSelf.cycleImageVC.iconBackViewHeight.constant = 80;
+            }
+            else {
+                weakSelf.cycleImageVC.view.frame = CGRectMake(0, 0, ScreenWidth, userInfoViewHeight);
+                weakSelf.cycleImageVC.iconBackViewHeight.constant = 0;
+            }
+            weakSelf.homeListVC.tableView.tableHeaderView = weakSelf.cycleImageVC.view;
             //请求成功
             UCFNoticeModel *notice = [result objectForKey:@"siteNotice"];
             if (notice.siteNotice.length > 0) {
@@ -963,7 +983,7 @@
 - (void)refreshNoticeWithShow:(BOOL)show
 {
 //    BOOL isShowNotice = [[NSUserDefaults standardUserDefaults] boolForKey:@"isShowNotice"];
-    CGFloat userInfoViewHeight = [UCFCycleImageViewController viewHeight];
+    CGFloat userInfoViewHeight = self.cycleImageVC.view.height;
     if (show) {
         self.cycleImageVC.view.frame = CGRectMake(0, 0, ScreenWidth, userInfoViewHeight+45);
         [self.cycleImageVC refreshNotice];

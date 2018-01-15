@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface UserInfoSingle : NSObject
+@interface UserInfoSingle : NSObject <NetworkModuleDelegate>
 //用户id
 @property(nonatomic, copy) NSString *userId;
 //用户性别
@@ -38,6 +38,11 @@
 @property(nonatomic, assign) BOOL isSpecial;//是否是特殊用户
 @property(nonatomic, assign) BOOL isRisk;       //是否风险评估
 @property(nonatomic, assign) BOOL isAutoBid;    //是否自动投标
+#warning about supervise
+@property(nonatomic, assign) BOOL superviseSwitch; //监管开关
+@property(nonatomic, assign) BOOL goldIsNew; //是否黄金新手
+@property(nonatomic, assign) BOOL zxIsNew; //是否尊享新手
+@property(nonatomic, assign) int level; //用户的等级
 
 //@property(nonatomic, copy) NSString *userLevel;
 //获取用户信息单利对象
@@ -50,4 +55,6 @@
 - (void)updateOpenStatus:(NSInteger)openStatus;
 //清除用户信息
 - (void)removeUserInfo;
+#warning check userinfo on supervise
+- (void)checkUserLevelOnSupervise;
 @end

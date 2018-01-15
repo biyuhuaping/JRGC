@@ -88,6 +88,18 @@
         cell.indexPath = indexPath;
         return cell;
     }
+    else if (cellPresenter.modelType == UCFHomeListCellModelTypeDebtsTransfer) {
+        static NSString *cellId = @"homeListCell";
+        UCFHomeListCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+        if (nil == cell) {
+            cell = (UCFHomeListCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeListCell" owner:self options:nil] lastObject];
+        }
+        cell.tableView = tableView;
+        cell.delegate = self;
+        cell.presenter = cellPresenter;
+        cell.indexPath = indexPath;
+        return cell;
+    }
     else if (cellPresenter.modelType == UCFHomeListCellModelTypeNewUser) {
         static NSString *cellId = @"newusercell";
         UCFNewUserCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
@@ -106,9 +118,10 @@
         if (nil == cell) {
             cell = (UCFHomeInvestCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeInvestCell" owner:self options:nil] lastObject];
             cell.delegate = self;
+            cell.tableview = tableView;
         }
         cell.presenter = cellPresenter;
-        cell.indexPath = indexPath;
+//        cell.indexPath = indexPath;
         return cell;
     }
     else if (cellPresenter.modelType == UCFHomeListCellModelTypeGoldFixed) {
@@ -271,7 +284,7 @@
 - (void)homeListHeader:(UCFHomeListHeaderSectionView *)homeListHeader didClickedMoreWithType:(NSString *)type
 {
     if ([self.delegate respondsToSelector:@selector(homeList:tableView:didClickedWithModel:withType:)]) {
-        if ([type isEqualToString:@"18"]) {
+        if ([type isEqualToString:@"18"] || [type isEqualToString:@"11"]) {
             [self.delegate homeList:self tableView:self.tableView didClickedWithModel:nil withType:UCFHomeListTypeP2PMore];
         }
         else if ([type isEqualToString:@"12"]) {
@@ -279,6 +292,9 @@
         }
         else if ([type isEqualToString:@"15"]) {
             [self.delegate homeList:self tableView:self.tableView didClickedWithModel:nil withType:UCFHomeListTypeGlodMore];
+        }
+        else if ([type isEqualToString:@"19"]) {
+            [self.delegate homeList:self tableView:self.tableView didClickedWithModel:nil withType:UCFHomeListTypeDebtsMore];
         }
         else if ([type isEqualToString:@"16"]) {
             NSString *userId = [UserInfoSingle sharedManager].userId;

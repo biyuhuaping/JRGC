@@ -12,6 +12,7 @@ typedef enum : NSUInteger {
     UCFHomeListTypeP2PMore,
     UCFHomeListTypeZXMore,
     UCFHomeListTypeGlodMore,
+    UCFHomeListTypeDebtsMore,
     UCFHomeListTypeDetail,
     UCFHomeListTypeInvest,
 } UCFHomeListType;

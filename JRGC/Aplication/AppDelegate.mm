@@ -693,6 +693,15 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"userisloginandcheckgrade" object:@(YES)];
 }
+
+#warning about supervise
+- (void)superviseSwitchWithState:(BOOL)state {
+    [UserInfoSingle sharedManager].superviseSwitch = state;
+    if (state) {
+        [[UserInfoSingle sharedManager] checkUserLevelOnSupervise];
+    }
+}
+
 - (void)endPost:(id)result tag:(NSNumber*)tag
 {
     if (tag.integerValue == kSXTagGetInfoForOnOff) {
@@ -703,6 +712,19 @@
             dic = dic[@"data"];
             [self novicecheck:dic];
             [self zxSwitchCheck:dic];
+            
+            NSString *superviseStr = [dic objectForKey:@"compliance"];
+            //监管开关
+            if ([superviseStr isEqualToString:@"1"]) {
+                [self superviseSwitchWithState:NO];
+            }
+            else if ([superviseStr isEqualToString:@"2"]) {
+                [self superviseSwitchWithState:YES];
+            }
+            else {
+                [self superviseSwitchWithState:YES];
+            }
+//
             //以下是升级信息
             NSString *netVersion = [dic objectSafeForKey: @"lastVersion"];
             [LockFlagSingle sharedManager].netVersion = netVersion;
@@ -746,6 +768,10 @@
                 }
             }
         }
+        else {
+#warning about supervise
+            [self superviseSwitchWithState:YES];
+        }
     }else if (tag.intValue == kSXTagCheckPersonRedPoint) {
         NSString *Data = (NSString *)result;
         NSDictionary * dic = [Data objectFromJSONString];
@@ -785,6 +811,8 @@
 - (void)errorPost:(NSError*)err tag:(NSNumber*)tag
 {
     [MBProgressHUD displayHudError:@"网络连接异常"];
+#warning about supervise
+    [self superviseSwitchWithState:YES];
 }
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
