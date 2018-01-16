@@ -40,9 +40,30 @@
     [self addChildViewControllers];
     //设置UI
     [self createUI];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUI:) name:@"getPersonalCenterNetData" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setDefaultView) name:@"setDefaultViewData" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentControllerUpdate) name:@"reloadHonerPlanData" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentControllerUpdate) name:@"reloadP2PTransferData" object:nil];
     
+}
+    
+- (void)refreshUI:(NSNotification *)noti
+{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        for (UIViewController *vc in self.childViewControllers) {
+            [vc removeFromParentViewController];
+        }
+        [self addChildViewControllers];
+        [self createUI];
+    });
+}
+    
+- (void)setDefaultView {
+    for (UIViewController *vc in self.childViewControllers) {
+        [vc removeFromParentViewController];
+    }
+    [self addChildViewControllers];
+    [self createUI];
 }
 
 - (void)refresh {
