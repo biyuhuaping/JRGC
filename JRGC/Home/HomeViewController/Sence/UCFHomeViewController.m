@@ -50,7 +50,7 @@
 #import "UCFGoldCashViewController.h"
 #import "UCFHomeIconPresenter.h"
 #import "UCFNoticeModel.h"
-
+#import "UCFPurchaseTranBidViewController.h"
 @interface UCFHomeViewController () <UCFHomeListViewControllerDelegate, UCFHomeListNavViewDelegate, UCFCycleImageViewControllerDelegate,BJGridItemDelegate, UIAlertViewDelegate,MjAlertViewDelegate>
 @property (strong, nonatomic) UCFCycleImageViewController *cycleImageVC;
 @property (strong, nonatomic) UCFHomeListViewController *homeListVC;
@@ -520,6 +520,59 @@
             }
             [self.navigationController pushViewController:facReservedWeb animated:YES];
         }
+        else if (model.moedelType == UCFHomeListCellModelTypeDebtsTransfer)
+        {
+            if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
+                //如果未登录，展示登录页面
+                [self showLoginView];
+            } else {
+//                if ([model.busType intValue] <= 1) {
+//                    self.accoutType = SelectAccoutTypeP2P;
+//                }else{//type 包括2 3，3为委托尊享标
+//                    self.accoutType = SelectAccoutTypeHoner;
+//                }
+                HSHelper *helper = [HSHelper new];
+                
+                //检查企业老用户是否开户
+                NSString *messageStr =  [helper checkCompanyIsOpen:self.accoutType];
+                if (![messageStr isEqualToString:@""]) {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil];
+                    [alert show];
+                    return;
+                }
+                
+                if (![helper checkP2POrWJIsAuthorization:self.accoutType]) {//先授权
+                    [helper pushP2POrWJAuthorizationType:self.accoutType nav:self.navigationController];
+                    return;
+                }
+                NSString *noPermissionTitleStr = self.accoutType == SelectAccoutTypeP2P ? @"目前标的详情只对出借人开放":@"目前标的详情只对认购人开放";
+                if ([model.status integerValue] == 0 && [model.stopStatus intValue] != 0) {
+                    UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:noPermissionTitleStr];
+                    [self.navigationController pushViewController:controller animated:YES];
+                    return;
+                }
+                
+                if ([self checkUserCanInvestIsDetail:YES type:self.accoutType])
+                {
+                    NSDictionary *parameter = @{@"Id": model.Id, @"userId": [UserInfoSingle sharedManager].userId, @"proType": model.type,@"type":@"9"};
+                    [self.cycleImageVC.presenter fetchProDetailDataWithParameter:parameter completionHandler:^(NSError *error, id result)
+                    {
+                        [MBProgressHUD hideOriginAllHUDsForView:weakSelf.view animated:YES];
+                        NSDictionary *dic = (NSDictionary *)result;
+                        NSString *rstcode = dic[@"status"];
+                        NSString *rsttext = [dic objectSafeForKey:@"statusdes"];
+                        if ([rstcode intValue] == 1) {
+                            UCFProjectDetailViewController *controller = [[UCFProjectDetailViewController alloc] initWithDataDic:dic isTransfer:YES withLabelList:nil];
+                            controller.sourceVc = @"transiBid";
+                            controller.rootVc = self.rootVc;
+                            [weakSelf.navigationController pushViewController:controller animated:YES];
+                        }else {
+                            [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
+                        }
+                    }];
+                }
+            }            
+        }
     }
     else if (type == UCFHomeListTypeInvest) {
         if (model.moedelType == UCFHomeListCellModelTypeDefault  || (model.moedelType == UCFHomeListCellModelTypeNewUser && ![model.type isEqualToString:@"0"])) {
@@ -605,6 +658,48 @@
                 facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@", PRERESERVE_APPLY_URL, model.Id];
             }
             [self.navigationController pushViewController:facReservedWeb animated:YES];
+        }
+        else if (model.moedelType == UCFHomeListCellModelTypeDebtsTransfer)
+        {
+            if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
+                //如果未登录，展示登录页面
+                [self showLoginView];
+            } else {
+                    HSHelper *helper = [HSHelper new];
+                    NSString *messageStr =  [helper checkCompanyIsOpen:self.accoutType];
+                    if (![messageStr isEqualToString:@""]) {
+                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil];
+                        [alert show];
+                        return;
+                    }
+                    if (![helper checkP2POrWJIsAuthorization:self.accoutType]) {
+                        [helper pushP2POrWJAuthorizationType:self.accoutType nav:self.navigationController];
+                        return;
+                    }
+                    NSInteger isOrder = [model.isOrder integerValue];
+                    if ([model.status intValue ] != 2){
+                            if (isOrder <= 0) {
+                                return;
+                            }
+                    }
+                    if([self checkUserCanInvestIsDetail:NO type:self.accoutType]){//
+                            
+                            NSDictionary *parameter = @{@"Id": model.Id, @"userId": [UserInfoSingle sharedManager].userId, @"proType": model.type,@"type":@"10"};
+                            [self.cycleImageVC.presenter fetchProDetailDataWithParameter:parameter completionHandler:^(NSError *error, id result) {
+                                NSString *rstcode = [result objectForKey:@"status"];
+                                [MBProgressHUD hideOriginAllHUDsForView:weakSelf.view animated:YES];
+                                NSDictionary * dic = (NSDictionary *)result;
+                                if([rstcode integerValue] == 1)
+                                {
+                                    UCFPurchaseTranBidViewController *purchaseViewController = [[UCFPurchaseTranBidViewController alloc] initWithNibName:@"UCFPurchaseTranBidViewController" bundle:nil];
+                                    purchaseViewController.dataDict = dic;
+                                    purchaseViewController.accoutType = self.accoutType;
+                                    purchaseViewController.rootVc = self.rootVc;
+                                    [weakSelf.navigationController pushViewController:purchaseViewController animated:YES];
+                                }
+                            }];
+                    }
+            }
         }
     }
     else if (type == UCFHomeListTypeP2PMore)

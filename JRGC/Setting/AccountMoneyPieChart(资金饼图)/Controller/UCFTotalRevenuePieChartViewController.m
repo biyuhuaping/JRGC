@@ -101,23 +101,54 @@
             
             UCFCustomPieChartModel *pieChatModel = [[UCFCustomPieChartModel alloc]init];
             pieChatModel.pieChartTitle = @"按获得类型";
-            pieChatModel.pieChartDataArray = [[NSMutableArray alloc]initWithArray:@[historyInterest,uncollectedInterest]];
-            pieChatModel.pieChartTitleArray = [[NSMutableArray alloc]initWithArray:@[@"历史收益(元)",@"待收收益(元)"]];
+           
             
             
             UCFCustomPieChartModel *pieChatModel1 = [[UCFCustomPieChartModel alloc]init];
             pieChatModel1.pieChartTitle = @"按账户类型";
-            pieChatModel1.pieChartDataArray = [[NSMutableArray alloc]initWithArray:@[p2pEarnings,zxEarnings,goldEarnings]];
-//            pieChatModel1.pieChartDataArray = [[NSMutableArray alloc]initWithArray:@[@"1000.00",@"5000.00",@"30000.00"]];
-            pieChatModel1.pieChartTitleArray = [[NSMutableArray alloc]initWithArray:@[@"微金总收益(元)",@"尊享总收益(元)",@"黄金总收益(元)"]];
+           
             
             UCFCustomPieChartModel *pieChatModel2 = [[UCFCustomPieChartModel alloc]init];
             pieChatModel2.pieChartTitle = @"按历史收益类型";
-            pieChatModel2.pieChartDataArray = [[NSMutableArray alloc]initWithArray:@[receivedInterest,usedReturnCash,usedBean,balanceInterest,goldProfitAndLoss]];
-//            pieChatModel2.pieChartDataArray = [[NSMutableArray alloc]initWithArray:@[@"2000.00",@"3000.00",@"4000.00",@"6000.00",@"9000.00", @"3000.00"]];
-            pieChatModel2.pieChartTitleArray = [[NSMutableArray alloc]initWithArray:@[@"已收利息(元)",@"已用返现券(元)",@"已用工豆(元)",@"余额利息(元)", @"黄金余额盈亏(元)"]];
-            self.dataArray = @[pieChatModel,pieChatModel2,pieChatModel1];
             
+            pieChatModel.pieChartDataArray = [[NSMutableArray alloc]initWithArray:@[historyInterest,uncollectedInterest]];
+            pieChatModel.pieChartTitleArray = [[NSMutableArray alloc]initWithArray:@[@"历史收益(元)",@"待收收益(元)"]];
+            pieChatModel1.pieChartDataArray = [[NSMutableArray alloc]initWithArray:@[p2pEarnings,zxEarnings,goldEarnings]];
+            pieChatModel1.pieChartTitleArray = [[NSMutableArray alloc]initWithArray:@[@"微金总收益(元)",@"尊享总收益(元)",@"黄金总收益(元)"]];
+            pieChatModel2.pieChartDataArray = [[NSMutableArray alloc]initWithArray:@[receivedInterest,usedReturnCash,usedBean,balanceInterest,goldProfitAndLoss]];
+            pieChatModel2.pieChartTitleArray = [[NSMutableArray alloc]initWithArray:@[@"已收利息(元)",@"已用返现券(元)",@"已用工豆(元)",@"余额利息(元)", @"黄金余额盈亏(元)"]];
+            
+            if([UserInfoSingle sharedManager].superviseSwitch)//监管开关打开
+            {
+                if([UserInfoSingle sharedManager].level < 2)
+                {
+                    if(![UserInfoSingle sharedManager].zxIsNew && ![UserInfoSingle sharedManager].goldIsNew)
+                    {
+                        [pieChatModel2.pieChartDataArray removeLastObject];
+                        [pieChatModel2.pieChartTitleArray  removeLastObject];
+                        self.dataArray = @[pieChatModel,pieChatModel2];
+                    }else if([UserInfoSingle sharedManager].zxIsNew && ![UserInfoSingle sharedManager].goldIsNew){
+                        
+                        [pieChatModel1.pieChartDataArray removeLastObject];
+                        [pieChatModel1.pieChartTitleArray  removeLastObject];
+                        [pieChatModel2.pieChartDataArray removeLastObject];
+                        [pieChatModel2.pieChartTitleArray  removeLastObject];
+                        self.dataArray = @[pieChatModel,pieChatModel2,pieChatModel1];
+                    }else if(![UserInfoSingle sharedManager].zxIsNew && [UserInfoSingle sharedManager].goldIsNew){
+                        [pieChatModel1.pieChartDataArray removeObjectAtIndex:1];
+                        [pieChatModel1.pieChartTitleArray  removeObjectAtIndex:1];
+                        self.dataArray = @[pieChatModel,pieChatModel2,pieChatModel1];
+                
+                 }else{
+                   self.dataArray = @[pieChatModel,pieChatModel2,pieChatModel1];
+                 }
+                }else{
+                  self.dataArray = @[pieChatModel,pieChatModel2,pieChatModel1];
+                }
+            }
+            else{
+                self.dataArray = @[pieChatModel,pieChatModel2,pieChatModel1];
+            }
             [self.tableView reloadData];
         }else{
              [AuxiliaryFunc showToastMessage:message withView:self.view];

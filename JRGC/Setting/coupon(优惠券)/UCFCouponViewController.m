@@ -53,8 +53,14 @@
     [self addRightButtonWithName:@"记录"];
     baseTitleLabel.text = @"优惠券";
     _currentSelectedState = 0;
-
-    self.itemSelectView.sectionTitles = @[@"返现券", @"返息券",@"返金券"];
+    
+    if([UserInfoSingle sharedManager].superviseSwitch && [UserInfoSingle sharedManager].level < 2 && [UserInfoSingle sharedManager].goldIsNew)
+    {
+        self.itemSelectView.sectionTitles = @[@"返现券", @"返息券"];
+    }
+    else{
+         self.itemSelectView.sectionTitles = @[@"返现券", @"返息券",@"返金券"];
+    }
     self.itemSelectView.delegate = self;
     
     //下拉选框

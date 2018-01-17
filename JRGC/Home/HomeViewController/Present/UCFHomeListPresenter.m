@@ -185,7 +185,7 @@
     __weak typeof(self) weakSelf = self;
     NSString *type = [parameter objectForKey:@"type"];
     [self.apiManager fetchProDetailInfoWithParameter:parameter completionHandler:^(NSError *error, id result) {
-        if (type.intValue == 4) {
+        if (type.intValue == 4  || type.intValue == 10) {
             if ([weakSelf.iconDelegate respondsToSelector:@selector(homeIconListPresenter:didReturnPrdClaimsDealBidWithResult:error:)]) {
                 [weakSelf.iconDelegate homeIconListPresenter:weakSelf didReturnPrdClaimsDealBidWithResult:result error:error];
             }

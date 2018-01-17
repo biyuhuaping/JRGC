@@ -35,6 +35,9 @@ static NSString * const kAppSecret = @"10dddec2bf7d3be794eda13b0df0a7d9";
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 
 @property (nonatomic, strong) YWFeedbackKit *feedbackKit;
+- (IBAction)gotoAppStore:(UIButton *)sender;
+- (IBAction)gotoFeedbackVC:(UIButton *)sender;
+@property (strong, nonatomic) IBOutlet UILabel *currentVisionLabel;
 
 @end
 
@@ -54,14 +57,23 @@ static NSString * const kAppSecret = @"10dddec2bf7d3be794eda13b0df0a7d9";
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"联系客服" message:@"呼叫400-0322-988" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"立即拨打", nil];
             [alert show];
         };
-        UCFSettingItem *problemFeedback = [UCFSettingArrowItem itemWithIcon:nil title:@"问题反馈" destVcClass:nil];
+//        UCFSettingItem *problemFeedback = [UCFSettingArrowItem itemWithIcon:nil title:@"问题反馈" destVcClass:nil];
         UCFSettingItem *faq = [UCFSettingArrowItem itemWithIcon:nil title:@"帮助中心" destStoryBoardStr:@"UCFMoreViewController" storyIdStr:@"faq"];
+        UCFSettingItem *companyNet = [UCFSettingArrowItem itemWithIcon:nil title:@"公司网址" destVcClass:nil];
+        companyNet.subtitle = @"www.9888keji.com";
         UCFSettingItem *aboutUs = [UCFSettingArrowItem itemWithIcon:nil title:@"关于我们" destStoryBoardStr:@"UCFMoreViewController" storyIdStr:@"aboutus"];
+        
+        UCFSettingItem *weixinNumber = [UCFSettingArrowItem itemWithIcon:nil title:@"微信公众号" destVcClass:nil];
+        weixinNumber.subtitle = @"工场服务中心";
+        
+        
         UCFSettingGroup *group1 = [[UCFSettingGroup alloc] init];
-        group1.items = [[NSMutableArray alloc]initWithArray: @[contactUs, problemFeedback,faq,aboutUs]];
+        group1.items = [[NSMutableArray alloc]initWithArray: @[aboutUs,faq]];
         
+        UCFSettingGroup *group2 = [[UCFSettingGroup alloc] init];
+        group2.items = [[NSMutableArray alloc]initWithArray: @[contactUs,weixinNumber,companyNet]];
         
-        _itemsData = [[NSMutableArray alloc] initWithObjects:group1,nil];
+        _itemsData = [[NSMutableArray alloc] initWithObjects:group1,group2,nil];
     }
     return _itemsData;
 }
@@ -112,6 +124,22 @@ static NSString * const kAppSecret = @"10dddec2bf7d3be794eda13b0df0a7d9";
     }
     return _feedbackKit;
 }
+
+- (IBAction)gotoAppStore:(UIButton *)sender
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [[SDImageCache sharedImageCache] clearDisk];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSURL *url = [NSURL URLWithString:APP_RATING_URL];
+            [[UIApplication sharedApplication] openURL:url];
+        });
+    });
+}
+
+- (IBAction)gotoFeedbackVC:(UIButton *)sender
+{
+    [self openFeedbackViewController];
+}
 - (void)getToBack
 {
     [self.view endEditing:YES];
@@ -152,12 +180,16 @@ static NSString * const kAppSecret = @"10dddec2bf7d3be794eda13b0df0a7d9";
 {
     baseTitleLabel.text = @"更多";
     
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapBanner)];
-    [self.moreBanner addGestureRecognizer:tap];
-    self.moreBanner.image = [UIImage imageNamed:@"banner_default"];
-    self.moreBanner.contentMode = UIViewContentModeScaleToFill;
-    [self.moreBanner getBannerImageStyle:CustomerService];
-    self.moreBannerBgView.frame = CGRectMake(0, 0, ScreenWidth, ScreenWidth * 5.0 / 16.0 + 10.0);
+//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapBanner)];
+//    [self.moreBanner addGestureRecognizer:tap];
+//    self.moreBanner.image = [UIImage imageNamed:@"banner_default"];
+//    self.moreBanner.contentMode = UIViewContentModeScaleToFill;
+//    [self.moreBanner getBannerImageStyle:CustomerService];
+//
+    NSDictionary *infoDic = [[NSBundle mainBundle] infoDictionary];
+    NSString *currentVersion = infoDic[@"CFBundleShortVersionString"];
+    self.currentVisionLabel.text =  [NSString stringWithFormat:@"当前版本V%@",currentVersion];
+    self.moreBannerBgView.frame = CGRectMake(0, 0, ScreenWidth, 220);
     self.tableview.separatorColor = UIColorWithRGB(0xe3e5ea);
     self.tableview.separatorInset = UIEdgeInsetsMake(0,15, 0, 0);
 }
@@ -193,9 +225,9 @@ static NSString * const kAppSecret = @"10dddec2bf7d3be794eda13b0df0a7d9";
     return self.itemsData.count;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 10;
+    return 9;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -257,16 +289,21 @@ static NSString * const kAppSecret = @"10dddec2bf7d3be794eda13b0df0a7d9";
         item.option();
     } else if ([item isKindOfClass:[UCFSettingArrowItem class]]) { // 箭头
         UCFSettingArrowItem *arrowItem = (UCFSettingArrowItem *)item;
-        if (indexPath.section == 0 && indexPath.row == 1) {//用户反馈
+        if (indexPath.section == 1 && indexPath.row != 0) {//微信公众号 和公司网址
             [self openFeedbackViewController];
-        }
-        if (indexPath.section == 1 && indexPath.row == 0) {
-            UCFWebViewJavascriptBridgeBBS *vc = [[UCFWebViewJavascriptBridgeBBS alloc] initWithNibName:@"UCFWebViewJavascriptBridgeBBS" bundle:nil];
-            vc.navTitle = @"工友之家";
-            vc.url      = BBSURL;
-            [self.navigationController pushViewController:vc animated:YES];
+            
+            UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+            [pasteboard setString:item.subtitle];
+            [AuxiliaryFunc showToastMessage:@"已复制到剪切板" withView:self.view];
             return;
         }
+//        if (indexPath.section == 1 && indexPath.row == 0) {
+//            UCFWebViewJavascriptBridgeBBS *vc = [[UCFWebViewJavascriptBridgeBBS alloc] initWithNibName:@"UCFWebViewJavascriptBridgeBBS" bundle:nil];
+//            vc.navTitle = @"工友之家";
+//            vc.url      = BBSURL;
+//            [self.navigationController pushViewController:vc animated:YES];
+//            return;
+//        }
         // 如果没有需要跳转的控制器
         if (arrowItem.mainStoryBoardStr == nil) return;
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:arrowItem.mainStoryBoardStr bundle:nil];

@@ -136,6 +136,30 @@
                 [self.requestDict setObject:completionHandler forKey:GOLDCURRENTPROCLAIMDETAIL];
             }
                 break;
+            case 9://债转项目详情页面请求
+            {
+                NSString *strParameters = [NSString stringWithFormat:@"tranid=%@&userId=%@",Id,userId];
+                if ([proType isEqualToString:@"1"]) {
+                     [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdTransferDetail owner:self Type:SelectAccoutTypeP2P];
+                }
+                else if ([proType isEqualToString:@"2"]) {
+                    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdTransferDetail owner:self Type:SelectAccoutTypeHoner];
+                }
+                [self.requestDict setObject:completionHandler forKey:PRODETAIL];
+            }
+                break;
+            case 10://债转投资页面请求
+            {
+                NSString *strParameters = [NSString stringWithFormat:@"userId=%@&tranId=%@",userId,Id];
+                if ([proType isEqualToString:@"1"]) {
+                    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagDealTransferBid owner:self Type:SelectAccoutTypeP2P];
+                }
+                else if ([proType isEqualToString:@"2"]) {
+                    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagDealTransferBid owner:self Type:SelectAccoutTypeHoner];
+                }
+                [self.requestDict setObject:completionHandler forKey:PRODETAIL];
+            }
+                break;
 
             default:
                 break;
@@ -292,6 +316,15 @@
         NetworkCompletionHandler complete = [self.requestDict objectForKey:GOLDCURRENTPROCLAIMDETAIL];
         complete(nil, dic);
         [self.requestDict removeObjectForKey:GOLDCURRENTPROCLAIMDETAIL];
+    } else if (tag.intValue == kSXTagPrdTransferDetail) {
+        NetworkCompletionHandler complete = [self.requestDict objectForKey:PRODETAIL];
+        complete(nil, dic);
+        [self.requestDict removeObjectForKey:PRODETAIL];
+    }
+    else if (tag.intValue == kSXTagDealTransferBid) {
+        NetworkCompletionHandler complete = [self.requestDict objectForKey:PRODETAIL];
+        complete(nil, dic);
+        [self.requestDict removeObjectForKey:PRODETAIL];
     }
 }
 //请求失败
@@ -350,6 +383,11 @@
         NetworkCompletionHandler complete = [self.requestDict objectForKey:GOLDCURRENTPROCLAIMDETAIL];
         complete(err, nil);
         [self.requestDict removeObjectForKey:GOLDCURRENTPROCLAIMDETAIL];
+    }
+    else if (tag.intValue == kSXTagDealTransferBid) {
+        NetworkCompletionHandler complete = [self.requestDict objectForKey:PRODETAIL];
+        complete(err, nil);
+        [self.requestDict removeObjectForKey:PRODETAIL];
     }
 }
 

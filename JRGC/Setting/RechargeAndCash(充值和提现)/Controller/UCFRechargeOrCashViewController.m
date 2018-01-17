@@ -98,19 +98,7 @@
     p2pCardModel.cardDetialStr = p2pCardName;
     p2pCardModel.cardStateStr = [_dataDict objectSafeForKey:@"p2pCardState"];;
     p2pCardModel.cardNumberStr = [_dataDict objectSafeForKey:@"p2pCardNum"];
-//    if ([UserInfoSingle sharedManager].openStatus == 1) {
-//        p2pCardModel.cardDetialStr = @"未开户";
-//        p2pCardModel.cardNumberStr = @"";
-//        p2pCardModel.cardStateStr = @"去开户";
-//    }else if ([UserInfoSingle sharedManager].openStatus == 2)  {
-//        p2pCardModel.cardDetialStr = @"未绑卡";
-//        p2pCardModel.cardNumberStr = @"";
-//        p2pCardModel.cardStateStr = @"去绑卡";
-//    }else{
-//        p2pCardModel.cardDetialStr = @"微金徽商存管账户";
-//       
-//        p2pCardModel.cardStateStr = @"";
-//    }
+
     
     UCFAccoutCardModel *honerCardModel  = [[UCFAccoutCardModel alloc]init];
     honerCardModel.cardTitleStr = @"充值至尊享账户";
@@ -122,27 +110,7 @@
     honerCardModel.cardDetialStr = honerCardName;
     honerCardModel.cardStateStr = [_dataDict objectSafeForKey:@"zxCardState"];
     honerCardModel.cardNumberStr = [_dataDict objectSafeForKey:@"zxCardNum"];
-//    if([UserInfoSingle sharedManager].zxAuthorization){
-//        if ([UserInfoSingle sharedManager].enjoyOpenStatus == 1) {
-//            honerCardModel.cardDetialStr = @"未开户";
-//            honerCardModel.cardNumberStr = @"";
-//            honerCardModel.cardStateStr = @"去开户";
-//        }else if ([UserInfoSingle sharedManager].enjoyOpenStatus == 2)  {
-//            honerCardModel.cardDetialStr = @"未绑卡";
-//            honerCardModel.cardNumberStr = @"";
-//            honerCardModel.cardStateStr = @"去绑卡";
-//        }else{
-//            honerCardModel.cardDetialStr = @"尊享徽商存管账户";
-//            honerCardModel.cardNumberStr = [_dataDict objectSafeForKey:@"zxCardNum"];;
-//            honerCardModel.cardStateStr = @"";
-//        }
-// 
-//    }else{
-//        honerCardModel.cardDetialStr = @"未授权";
-//        honerCardModel.cardNumberStr = @"";
-//        honerCardModel.cardStateStr = @"去授权";
-//    }
-    
+
     UCFAccoutCardModel *goldCardModel  = [[UCFAccoutCardModel alloc]init];
     goldCardModel.cardTitleStr = @"充值至黄金账户";
     goldCardModel.isRechargeOrCash = _isRechargeOrCash;
@@ -153,28 +121,68 @@
     goldCardModel.cardDetialStr = [_dataDict objectSafeForKey:@"goldCardName"];
     goldCardModel.cardStateStr = [_dataDict objectSafeForKey:@"goldCardState"];;
     
-//    if ([UserInfoSingle sharedManager].openStatus < 3 &&  [UserInfoSingle sharedManager].enjoyOpenStatus < 3) {
-//        goldCardModel.cardDetialStr = @"未开户";
-//        goldCardModel.cardNumberStr = @"";
-//        goldCardModel.cardStateStr = @"去开户";
-//    }else {
-//        if (![UserInfoSingle sharedManager].goldAuthorization ){
-//            goldCardModel.cardDetialStr = @"未授权";
-//            goldCardModel.cardNumberStr = @"";
-//            goldCardModel.cardStateStr = @"去授权";
-//        }else{
-//            goldCardModel.cardDetialStr = @"工场黄金账户";
-//            goldCardModel.cardNumberStr =
-//            goldCardModel.cardStateStr = @"";
-//        }
-//    }
     _p2PAccoutCardView.accoutCardModel = p2pCardModel;
     _honerAccoutCardView.accoutCardModel = honerCardModel;
     _goldAccoutCardView.accoutCardModel = goldCardModel;
     
-    [self moveView:_goldAccoutCardView moveTime:0.25 moveY:[Common calculateNewSizeBaseMachine:110]];
-    [self moveView:_honerAccoutCardView  moveTime:0.4 moveY:[Common calculateNewSizeBaseMachine:110] *2];
-    [self moveView:_p2PAccoutCardView moveTime:0.6 moveY:[Common calculateNewSizeBaseMachine:110] * 3];
+    NSMutableArray *rechargeAccoutArray = [NSMutableArray new];
+    
+    if([UserInfoSingle sharedManager].superviseSwitch)//监管开关打开
+    {
+        if([UserInfoSingle sharedManager].level < 2)
+        {
+            if (![UserInfoSingle sharedManager].zxIsNew &&   ![UserInfoSingle sharedManager].goldIsNew)
+            { // 该情况不存在了
+           
+            }else if( [UserInfoSingle sharedManager].zxIsNew && ![UserInfoSingle sharedManager].goldIsNew)
+            {
+                [rechargeAccoutArray addObject:_honerAccoutCardView];
+                [rechargeAccoutArray addObject:_p2PAccoutCardView];
+            }else if(![UserInfoSingle sharedManager].zxIsNew && [UserInfoSingle sharedManager].goldIsNew)
+            {
+                [rechargeAccoutArray addObject:_goldAccoutCardView];
+                [rechargeAccoutArray addObject:_p2PAccoutCardView];
+            }else {
+                [rechargeAccoutArray addObject:_goldAccoutCardView];
+                [rechargeAccoutArray addObject:_honerAccoutCardView];
+                [rechargeAccoutArray addObject:_p2PAccoutCardView];
+            }
+        }else{
+            [rechargeAccoutArray addObject:_goldAccoutCardView];
+            [rechargeAccoutArray addObject:_honerAccoutCardView];
+            [rechargeAccoutArray addObject:_p2PAccoutCardView];
+        }
+    }
+    else{
+        [rechargeAccoutArray addObject:_goldAccoutCardView];
+        [rechargeAccoutArray addObject:_honerAccoutCardView];
+        [rechargeAccoutArray addObject:_p2PAccoutCardView];
+    }
+    NSUInteger  rechargeAccoutCount =  rechargeAccoutArray.count;
+    _titleLabel.frame =  CGRectMake([Common calculateNewSizeBaseMachine:15], ScreenHeight - [Common calculateNewSizeBaseMachine:110] * rechargeAccoutCount - 15 - [Common calculateNewSizeBaseMachine:20], 150,  [Common calculateNewSizeBaseMachine:20]);
+    
+    
+    
+    
+//    [self moveView:_goldAccoutCardView moveTime:0.25 moveY:[Common calculateNewSizeBaseMachine:110]];
+//    [self moveView:_honerAccoutCardView  moveTime:0.4 moveY:[Common calculateNewSizeBaseMachine:110] *2];
+//    [self moveView:_p2PAccoutCardView moveTime:0.6 moveY:[Common calculateNewSizeBaseMachine:110] * 3];
+    
+    
+    //根据充值账户数组，开始动画
+    for (UCFRechargeAndCashView * accoutView in  rechargeAccoutArray) {
+        NSUInteger  index = [rechargeAccoutArray indexOfObject:accoutView] + 1;
+        if (index  == rechargeAccoutCount) {
+            accoutView.tag = 1001;
+        }
+        float animatTime = 0.25;
+        if (index == 2) {
+            animatTime = 0.45;
+        }else if (index == 3){
+            animatTime = 0.6;
+        }
+        [self moveView:accoutView moveTime:animatTime   moveY:[Common calculateNewSizeBaseMachine:110 * index]];
+    }
 }
 //提现数据以及动画
 -(void)cashInfoData
@@ -272,7 +280,51 @@
             }
         }
     }
+    if([UserInfoSingle sharedManager].superviseSwitch)//监管开关打开
+    {
+        if([UserInfoSingle sharedManager].level < 2)
+        {
+            if (![UserInfoSingle sharedManager].zxIsNew &&   ![UserInfoSingle sharedManager].goldIsNew)
+            { // 该情况已经处理了
+                
+            }else if( [UserInfoSingle sharedManager].zxIsNew && ![UserInfoSingle sharedManager].goldIsNew)
+            {
+                if(![cashAccoutArray containsObject:_p2PAccoutCardView])
+                {
+                    [cashAccoutArray addObject:_p2PAccoutCardView];
+                }
+                if(![cashAccoutArray containsObject:_honerAccoutCardView])
+                {
+                    [cashAccoutArray addObject:_honerAccoutCardView];
+                }
+                if([cashAccoutArray containsObject:_goldAccoutCardView])
+                {
+                    [cashAccoutArray removeObject:_goldAccoutCardView];
+                }
+                
+            }else if(![UserInfoSingle sharedManager].zxIsNew && [UserInfoSingle sharedManager].goldIsNew)
+            {
+                if(![cashAccoutArray containsObject:_p2PAccoutCardView])
+                {
+                    [cashAccoutArray addObject:_p2PAccoutCardView];
+                }
+                if([cashAccoutArray containsObject:_honerAccoutCardView])
+                {
+                    [cashAccoutArray removeObject:_honerAccoutCardView];
+                }
+                if(![cashAccoutArray containsObject:_goldAccoutCardView])
+                {
+                    [cashAccoutArray addObject:_goldAccoutCardView];
+                }
+            }else {
 
+            }
+        }
+    }
+    else{
+
+    }
+    
     NSUInteger cashAccoutCount  = [cashAccoutArray count];
     _titleLabel.text = @"请选择提现账户";
     _totallBalanceLabel = [[UILabel alloc]initWithFrame:CGRectMake([Common calculateNewSizeBaseMachine:15], ScreenHeight - [Common calculateNewSizeBaseMachine:110] * cashAccoutCount - 15 - [Common calculateNewSizeBaseMachine:16], 200,  [Common calculateNewSizeBaseMachine:16])];

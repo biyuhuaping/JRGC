@@ -41,6 +41,7 @@ typedef enum : NSUInteger {
 @property (nonatomic, copy) NSString *repayPeriod;
 @property (nonatomic, copy) NSString *repayPeriodtext;
 @property (nonatomic, copy) NSString *status;
+@property (nonatomic, copy) NSString *stopStatus;
 @property (nonatomic, copy) NSString *type;
 @property (nonatomic, copy) NSString *p2pTransferNum;
 @property (nonatomic, copy) NSString *totalCount;

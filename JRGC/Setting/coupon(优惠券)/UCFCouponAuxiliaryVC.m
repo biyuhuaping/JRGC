@@ -29,8 +29,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self addLeftButton];
- 
-    self.itemSelectView.sectionTitles = @[@"返现券", @"返息券",@"返金券"];
+    
+    if([UserInfoSingle sharedManager].superviseSwitch && [UserInfoSingle sharedManager].level < 2 && [UserInfoSingle sharedManager].goldIsNew)
+    {
+         self.itemSelectView.sectionTitles = @[@"返现券", @"返息券"];
+    }
+    else
+    {
+        self.itemSelectView.sectionTitles = @[@"返现券", @"返息券",@"返金券"];
+    }
     self.itemSelectView.delegate = self;
     self.itemSelectView.segmentedControl.selectedSegmentIndex =_currentSelectedState;
     [self initViewController];
