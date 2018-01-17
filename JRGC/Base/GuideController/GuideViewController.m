@@ -44,11 +44,11 @@
         version = 8;  //iphonex
 
     }
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < 3; i++) {
         UIImageView *adImageView = [[UIImageView alloc] initWithFrame:CGRectMake(ScreenWidth * i, 0, ScreenWidth,ScreenHeight)];
         adImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"guideImage%d_%d",version,i+1]];
         [guideScrollView addSubview:adImageView];
-        if (i == 3) {
+        if (i == 2) {
             UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
             if (ScreenHeight == 480 ) {
                 button.frame = CGRectMake((ScreenWidth - 210)/2, ScreenHeight - 49 - 38, 210, 38);
