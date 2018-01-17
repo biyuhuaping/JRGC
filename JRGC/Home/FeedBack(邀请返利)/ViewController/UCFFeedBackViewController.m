@@ -40,6 +40,8 @@
 @property (strong, nonatomic) NSString *shareTitle;
 @property (strong, nonatomic) NSString *shareContent;
 @property (strong, nonatomic) NSString *shareUrl;
+@property (weak, nonatomic) IBOutlet UIImageView *p2pListArrow;
+@property (weak, nonatomic) IBOutlet UIView *p2p_lineView;
 
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *heightView;
 @property (strong, nonatomic) IBOutlet UIView *lingView;
@@ -56,6 +58,7 @@
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *tipsViewHeight;//提示View的身高
 @property (strong, nonatomic) id recruitStatus;//值为3时，可以点击tipsview
 @property (weak, nonatomic) IBOutlet UIView *secondView_lineView;
+@property (weak, nonatomic) IBOutlet UIView *P2P_secondView;
 @property (weak, nonatomic) IBOutlet UIView *gold_secondView;
 
 @property (strong, nonatomic) IBOutlet UILabel *label_moutheMoney;
@@ -99,6 +102,25 @@
     }else if(self.accoutType == SelectAccoutTypeP2P){
         baseTitleLabel.text = @"微金邀请返利";
         _gold_secondView.hidden = YES;
+        
+        if ([UserInfoSingle sharedManager].superviseSwitch  && [UserInfoSingle sharedManager].level <2 && ![UserInfoSingle sharedManager].zxIsNew)
+        {
+            self.zxInviteFriendsCountLab.hidden  = YES;
+            self.p2pListArrow.hidden = YES;
+            self.zxRebateAmtLab.hidden = YES;
+            self.p2p_lineView.hidden = YES;
+            UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+            button.backgroundColor =[UIColor clearColor];
+            button.frame = self.P2P_secondView.frame;
+            [button addTarget:self action:@selector(gotoWeiJinRebateAmtVC:) forControlEvents:UIControlEventTouchUpInside];
+            [self.P2P_secondView addSubview:button];
+        }
+        else{
+            self.zxInviteFriendsCountLab.hidden  =  NO;
+            self.p2pListArrow.hidden = NO;
+            self.zxRebateAmtLab.hidden = NO;
+             self.p2p_lineView.hidden = NO;
+        }
     } else if (self.accoutType == SelectAccoutTypeGold) {
         baseTitleLabel.text = @"黄金邀请返利";
         _secondViewHeight.constant = 44;
@@ -431,7 +453,7 @@
 
 
 #pragma mark -微金返利页面
-- (IBAction)gotoWeiJinRebateAmtVC:(id)sender {
+- (IBAction)gotoWeiJinRebateAmtVC:(UIButton *)sender {
 
     UCFProfitBackViewController *mv = [[UCFProfitBackViewController alloc]initWithNibName:@"UCFProfitBackViewController" bundle:nil];
     mv.accoutType = SelectAccoutTypeP2P;

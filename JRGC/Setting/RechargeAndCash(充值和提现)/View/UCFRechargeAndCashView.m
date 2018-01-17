@@ -53,6 +53,8 @@
     }else{
       self.cardLogoImage.image = [UIImage imageNamed:accoutCardModel.cardLogoImageName];
     }
+    self.cardLogoImage.layer.cornerRadius = 2;
+    self.cardLogoImage.layer.masksToBounds = YES;
     self.cardDetialLabel.text = accoutCardModel.cardDetialStr;
     self.cardBgImageView.image = [UIImage imageNamed:accoutCardModel.cardBgImageName];
     self.cardStateLabel.text = accoutCardModel.cardStateStr;

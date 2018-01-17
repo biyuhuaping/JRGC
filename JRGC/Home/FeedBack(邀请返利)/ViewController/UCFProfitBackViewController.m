@@ -29,15 +29,19 @@
 - (void)createUI {
     
     [self addLeftButton];
-
-    UISegmentedControl *segmentContrl = [[UISegmentedControl alloc]initWithItems:@[@"微金返利",@"尊享返利"]];;
-    segmentContrl.frame = CGRectMake(0, 0, ScreenWidth*5/8, 30);
-    [segmentContrl setTintColor:UIColorWithRGB(0x5b6993)];
-    segmentContrl.selectedSegmentIndex = 0;
-    [segmentContrl addTarget:self action:@selector(segmentedValueChanged:) forControlEvents:UIControlEventValueChanged];
-    self.segmentedCtrl = segmentContrl;
-    self.navigationItem.titleView = segmentContrl;
-    
+    if([UserInfoSingle sharedManager].superviseSwitch && [UserInfoSingle sharedManager].level < 2   && ![UserInfoSingle sharedManager].zxAuthorization)
+    {
+        baseTitleLabel.text = @"微金返利";
+    }
+    else {
+        UISegmentedControl *segmentContrl = [[UISegmentedControl alloc]initWithItems:@[@"微金返利",@"尊享返利"]];;
+        segmentContrl.frame = CGRectMake(0, 0, ScreenWidth*5/8, 30);
+        [segmentContrl setTintColor:UIColorWithRGB(0x5b6993)];
+        segmentContrl.selectedSegmentIndex = 0;
+        [segmentContrl addTarget:self action:@selector(segmentedValueChanged:) forControlEvents:UIControlEventValueChanged];
+        self.segmentedCtrl = segmentContrl;
+        self.navigationItem.titleView = segmentContrl;
+    }
 }
 
 - (void)segmentedValueChanged:(UISegmentedControl *)segment

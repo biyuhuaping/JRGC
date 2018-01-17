@@ -37,7 +37,9 @@
 #import <StoreKit/StoreKit.h>
 #import "UCFAccountAssetsProofViewController.h"
 #import "UCFMineFuncView.h"
-
+#import "UCFTopUpViewController.h"
+#import "UCFCashViewController.h"
+#import "ToolSingleTon.h"
 @interface UCFMineViewController () <UITableViewDelegate, UITableViewDataSource, UCFMineHeaderViewDelegate, UCFMineFuncCellDelegate, UCFMineAPIManagerDelegate, UCFMineFuncViewDelegate, UIAlertViewDelegate, SKStoreProductViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) UCFMineHeaderView   *mineHeaderView;
@@ -471,21 +473,83 @@
 }
 - (void)mineHeaderView:(UCFMineHeaderView *)mineHeaderView didClikedTopUpButton:(UIButton *)rechargeButton
 {
-    //获取充值绑卡页面数据
-    [self.apiManager getRecharngeBindingBankCardNet];
+    
+    //监管开关 打开时 等级不足VIP1 且未投资过尊享且未投资过黄金项目的用户 直接进入充值页面
+   
+    if([UserInfoSingle sharedManager].superviseSwitch && [UserInfoSingle sharedManager].level < 2 && ![UserInfoSingle sharedManager].zxIsNew && ![UserInfoSingle sharedManager].goldIsNew)
+    {
+        
+        self.accoutType = SelectAccoutTypeP2P;
+        HSHelper *helper = [HSHelper new];
+        //检查企业老用户是否开户
+        NSString *messageStr =  [helper checkCompanyIsOpen:self.accoutType];
+        if (![messageStr isEqualToString:@""]) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil];
+            [alert show];
+            return;
+        }
+        
+        
+        if (![helper checkP2POrWJIsAuthorization:self.accoutType]) {//先授权
+            [helper pushP2POrWJAuthorizationType:self.accoutType nav:self.navigationController];
+            return;
+        }
+        
+        if ([self checkUserCanInvestIsDetail:YES type:self.accoutType]) {
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"RechargeStoryBorard" bundle:nil];
+            UCFTopUpViewController * rechargeVC = [storyboard instantiateViewControllerWithIdentifier:@"topup"];
+            rechargeVC.title = @"充值";
+            rechargeVC.uperViewController = self;
+            rechargeVC.accoutType = SelectAccoutTypeP2P;
+            [self.navigationController pushViewController:rechargeVC animated:YES];
+        }
+    }
+    else{
+        [self.apiManager getRecharngeBindingBankCardNet];//获取充值绑卡页面数据
+    }
 }
 
 - (void)mineHeaderView:(UCFMineHeaderView *)mineHeaderView didClikedCashButton:(UIButton *)cashButton
 {
-    //获取提现绑卡页面数据
-    if([UserInfoSingle sharedManager].openStatus < 3 && [UserInfoSingle sharedManager].enjoyOpenStatus < 3 && ![UserInfoSingle sharedManager].goldAuthorization)//微金未开通账户
+   
+    
+    //监管开关 打开时 等级不足VIP1 且未投资过尊享且未投资过黄金项目的用户 直接进入充值页面
+    
+    if([UserInfoSingle sharedManager].superviseSwitch && [UserInfoSingle sharedManager].level < 2 && ![UserInfoSingle sharedManager].zxIsNew && ![UserInfoSingle sharedManager].goldIsNew)
     {
-        [AuxiliaryFunc showToastMessage:@"没有可提现的账户" withView:self.view];
-        return;
+        if([UserInfoSingle sharedManager].openStatus < 3 )//微金未开通账户
+        {
+            [AuxiliaryFunc showToastMessage:@"没有可提现的账户" withView:self.view];
+            return;
+        }
+        self.accoutType = SelectAccoutTypeP2P;
+        HSHelper *helper = [HSHelper new];
+        //检查企业老用户是否开户
+        NSString *messageStr =  [helper checkCompanyIsOpen:self.accoutType];
+        if (![messageStr isEqualToString:@""]) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil];
+            [alert show];
+            return;
+        }
+        if (![helper checkP2POrWJIsAuthorization:self.accoutType]) {//先授权
+            [helper pushP2POrWJAuthorizationType:self.accoutType nav:self.navigationController];
+            return;
+        }
+        
+        if ([self checkUserCanInvestIsDetail:NO type:self.accoutType])
+        {
+            [self.apiManager getP2PAccoutCashRuqestHTTP];// //获取微金提现页面数据
+        }
     }
-    [self.apiManager getCashAccoutBalanceNet];
+    else{
+        if([UserInfoSingle sharedManager].openStatus < 3 && [UserInfoSingle sharedManager].enjoyOpenStatus < 3 && ![UserInfoSingle sharedManager].goldAuthorization)//微金未开通账户
+        {
+            [AuxiliaryFunc showToastMessage:@"没有可提现的账户" withView:self.view];
+            return;
+        }
+         [self.apiManager getCashAccoutBalanceNet];// //获取提现绑卡页面数据
+    }
 }
-
 - (void)mineHeaderView:(UCFMineHeaderView *)mineHeaderView didClikedTotalAssetButton:(UIButton *)totalAssetButton
 {
     [self gotoAccountPieCharView:0];
@@ -713,7 +777,36 @@
         default:
             break;
     }
-
-
+}
+- (void)mineApiManager:(UCFMineAPIManager *)apiManager didSuccessedP2PAccoutCashBalanceResult:(id)result withTag:(NSUInteger)tag;
+{
+    self.mineHeaderView.cashButton.enabled = YES;
+    switch (tag) {
+        case 0://网络异常情况
+        {
+            [MBProgressHUD displayHudError:result];
+        }
+            break;
+        case 1://返回数据成功
+        {
+            NSDictionary *dataDict = (NSDictionary *)result;
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"TopUpAndCash" bundle:nil];
+            UCFCashViewController *crachViewController  = [storyboard instantiateViewControllerWithIdentifier:@"cash"];
+            [ToolSingleTon sharedManager].apptzticket = dataDict[@"apptzticket"];
+            crachViewController.title = @"提现";
+            crachViewController.cashInfoDic =  [dataDict mutableCopy];
+            crachViewController.accoutType = self.accoutType;
+            [self.navigationController pushViewController:crachViewController animated:YES];
+        }
+            break;
+        case 2://返回数据失败
+        {
+            [AuxiliaryFunc showToastMessage:result withView:self.view];
+        }
+            break;
+        default:
+            break;
+    }
+    
 }
 @end

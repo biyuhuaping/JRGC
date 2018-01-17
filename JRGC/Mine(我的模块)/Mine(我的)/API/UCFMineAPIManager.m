@@ -58,7 +58,17 @@
     }
     [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":userId} tag:kSXTagGetBindingBankCardList owner:self signature:YES Type:SelectAccoutDefault];
 }
-
+//微金P2P提现请求
+- (void)getP2PAccoutCashRuqestHTTP
+{
+    NSString *userId = [UserInfoSingle sharedManager].userId;
+    if (!userId) {
+        return;
+    }
+    NSString *userSatues = [NSString stringWithFormat:@"%ld",(long)[UserInfoSingle sharedManager].openStatus];
+    NSDictionary *parametersDict =  @{@"userId":userId,@"userSatues":userSatues};
+    [[NetworkModule sharedNetworkModule] newPostReq:parametersDict tag:kSXTagCashAdvance owner:self signature:YES Type:SelectAccoutTypeP2P];
+}
 - (void)signWithToken:(NSString *)token
 {
     NSString *userId = [UserInfoSingle sharedManager].userId;
@@ -163,6 +173,17 @@
             UIViewController *vc = (UIViewController *)self.delegate;
             [AuxiliaryFunc showToastMessage:dic[@"message"] withView:vc.view];
         }
+    }else if (tag.intValue == kSXTagCashAdvance) {
+        if ([rstcode intValue] == 1) {
+            NSDictionary *resultData = [dic objectSafeDictionaryForKey:@"data"];
+            if ([self.delegate respondsToSelector:@selector(mineApiManager:didSuccessedP2PAccoutCashBalanceResult:withTag:)]) {
+                [self.delegate mineApiManager:self didSuccessedP2PAccoutCashBalanceResult:resultData withTag:1];
+            }
+        }else {
+            if ([self.delegate respondsToSelector:@selector(mineApiManager:didSuccessedP2PAccoutCashBalanceResult:withTag:)]) {
+                [self.delegate mineApiManager:self didSuccessedP2PAccoutCashBalanceResult:rsttext withTag:2];
+            }
+        }
     }
 }
 
@@ -193,6 +214,11 @@
         if ([self.delegate respondsToSelector:@selector(mineApiManager:didSuccessedRechargeBindingBankCardResult:withTag:)]) {
             [self.delegate mineApiManager:self didSuccessedRechargeBindingBankCardResult:err.userInfo[@"NSLocalizedDescription"] withTag:0];
           
+        }
+    }else if (tag.integerValue == kSXTagCashAdvance) {
+        if ([self.delegate respondsToSelector:@selector(mineApiManager:didSuccessedP2PAccoutCashBalanceResult:withTag:)]) {
+            [self.delegate mineApiManager:self didSuccessedP2PAccoutCashBalanceResult:err.userInfo[@"NSLocalizedDescription"] withTag:0];
+            
         }
     }
 }

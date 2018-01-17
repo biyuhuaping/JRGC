@@ -323,7 +323,6 @@
         if ([rstcode intValue] == 1) {
             UCFProjectDetailViewController *controller = [[UCFProjectDetailViewController alloc] initWithDataDic:dic isTransfer:YES withLabelList:nil];
             controller.sourceVc = @"transiBid";
-            controller.accoutType = SelectAccoutTypeHoner;
             controller.rootVc = self.rootVc;
             [self.navigationController pushViewController:controller animated:YES];
         }else {
