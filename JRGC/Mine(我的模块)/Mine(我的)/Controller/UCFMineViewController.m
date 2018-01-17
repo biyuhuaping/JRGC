@@ -40,6 +40,8 @@
 #import "UCFTopUpViewController.h"
 #import "UCFCashViewController.h"
 #import "ToolSingleTon.h"
+#import "UCFCalendarModularViewController.h"
+
 @interface UCFMineViewController () <UITableViewDelegate, UITableViewDataSource, UCFMineHeaderViewDelegate, UCFMineFuncCellDelegate, UCFMineAPIManagerDelegate, UCFMineFuncViewDelegate, UIAlertViewDelegate, SKStoreProductViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) UCFMineHeaderView   *mineHeaderView;
@@ -162,6 +164,7 @@
 
 - (void)refreshUI:(NSNotification *)noti
 {
+    [[UserInfoSingle sharedManager] checkUserLevelOnSupervise];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self refreshData];
     });
@@ -170,6 +173,7 @@
 
 - (void)setDefaultState:(NSNotification *)noti
 {
+    [[UserInfoSingle sharedManager] checkUserLevelOnSupervise];
     [self.mineHeaderView setDefaultState];
     [self.tableView reloadData];
     [self.mineFooterView clearData];
@@ -299,9 +303,40 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     switch (section) {
-        case 0:
-            return 3;
-        
+        case 0: {
+            if ([UserInfoSingle sharedManager].userId) {
+                if ([UserInfoSingle sharedManager].superviseSwitch) {
+                    if ([UserInfoSingle sharedManager].level > 1) {
+                        if ([UserInfoSingle sharedManager].goldIsNew && [UserInfoSingle sharedManager].zxIsNew) {
+                            return 1;
+                        }
+                        else if ([UserInfoSingle sharedManager].goldIsNew && ![UserInfoSingle sharedManager].zxIsNew) {
+                            return 2;
+                        }
+                        else if (![UserInfoSingle sharedManager].goldIsNew && [UserInfoSingle sharedManager].zxIsNew) {
+                            return 2;
+                        }
+                        else if (![UserInfoSingle sharedManager].goldIsNew && ![UserInfoSingle sharedManager].zxIsNew) {
+                            return 3;
+                        }
+                    }
+                    else {
+                        return 1;
+                    }
+                }
+                else {
+                    return 3;
+                }
+            }
+            else {
+                if ([UserInfoSingle sharedManager].superviseSwitch) {
+                    return 1;
+                }
+                else {
+                    return 3;
+                }
+            }
+        }
         case 1:
             return 1;
     }
@@ -334,17 +369,48 @@
             }
         }
         else if (indexPath.row == 1) {
-            cell.iconImageView.image = [UIImage imageNamed:@"uesr_icon_zx"];
-            cell.titleDesLabel.text = @"尊享账户";
-            if ([UserInfoSingle sharedManager].enjoyOpenStatus > 2) {
-                cell.valueLabel.text = self.assetModel.zxCashBalance.length > 0 ? [NSString stringWithFormat:@"¥%@", self.assetModel.zxCashBalance] : [NSString stringWithFormat:@"¥0.00"];
-                cell.describeLabel.text = self.benefitModel.repayPerDateZX.length > 0 ? [NSString stringWithFormat:@"最近回款日%@", self.benefitModel.repayPerDateZX] : @"最近无回款";
-                cell.descriLabel.hidden = NO;
+            if ([UserInfoSingle sharedManager].goldIsNew && ![UserInfoSingle sharedManager].zxIsNew) {
+                cell.iconImageView.image = [UIImage imageNamed:@"uesr_icon_zx"];
+                cell.titleDesLabel.text = @"尊享账户";
+                if ([UserInfoSingle sharedManager].enjoyOpenStatus > 2) {
+                    cell.valueLabel.text = self.assetModel.zxCashBalance.length > 0 ? [NSString stringWithFormat:@"¥%@", self.assetModel.zxCashBalance] : [NSString stringWithFormat:@"¥0.00"];
+                    cell.describeLabel.text = self.benefitModel.repayPerDateZX.length > 0 ? [NSString stringWithFormat:@"最近回款日%@", self.benefitModel.repayPerDateZX] : @"最近无回款";
+                    cell.descriLabel.hidden = NO;
+                }
+                else {
+                    cell.valueLabel.text = @"未开户";
+                    cell.describeLabel.text = @"";
+                    cell.descriLabel.hidden = YES;
+                }
             }
-            else {
-                cell.valueLabel.text = @"未开户";
-                cell.describeLabel.text = @"";
-                cell.descriLabel.hidden = YES;
+            else if (![UserInfoSingle sharedManager].goldIsNew && [UserInfoSingle sharedManager].zxIsNew) {
+                cell.iconImageView.image = [UIImage imageNamed:@"uesr_icon_gold"];
+                cell.valueLabel.textColor = UIColorWithRGB(0xffa811);
+                cell.titleDesLabel.text = @"黄金账户";
+                if ([UserInfoSingle sharedManager].goldAuthorization)
+                {
+                    cell.valueLabel.text = self.assetModel.nmCashBalance.length > 0 ? [NSString stringWithFormat:@"¥%@", self.assetModel.nmCashBalance] : [NSString stringWithFormat:@"¥0.00"];
+                    cell.describeLabel.text = self.benefitModel.repayPerDateNM;
+                    cell.descriLabel.hidden = NO;
+                }else{
+                    cell.valueLabel.text = @"未开户";
+                    cell.describeLabel.text = @"";
+                    cell.descriLabel.hidden = YES;
+                }
+            }
+            else if (![UserInfoSingle sharedManager].goldIsNew && ![UserInfoSingle sharedManager].zxIsNew) {
+                cell.iconImageView.image = [UIImage imageNamed:@"uesr_icon_zx"];
+                cell.titleDesLabel.text = @"尊享账户";
+                if ([UserInfoSingle sharedManager].enjoyOpenStatus > 2) {
+                    cell.valueLabel.text = self.assetModel.zxCashBalance.length > 0 ? [NSString stringWithFormat:@"¥%@", self.assetModel.zxCashBalance] : [NSString stringWithFormat:@"¥0.00"];
+                    cell.describeLabel.text = self.benefitModel.repayPerDateZX.length > 0 ? [NSString stringWithFormat:@"最近回款日%@", self.benefitModel.repayPerDateZX] : @"最近无回款";
+                    cell.descriLabel.hidden = NO;
+                }
+                else {
+                    cell.valueLabel.text = @"未开户";
+                    cell.describeLabel.text = @"";
+                    cell.descriLabel.hidden = YES;
+                }
             }
         }
         else if (indexPath.row == 2) {
@@ -639,10 +705,29 @@
 
 - (void)mineFuncCell:(UCFMineFuncCell *)mineFuncCell didClickedCalendarButton:(UIButton *)button
 {
-    UCFCalendarViewController *backMoneyCalendarVC = [[UCFCalendarViewController alloc] initWithNibName:@"UCFCalendarViewController" bundle:nil];
-//        backMoneyDetailVC.superViewController = self;
-//    backMoneyCalendarVC.accoutType = self.accoutType;
-    [self.navigationController pushViewController:backMoneyCalendarVC animated:YES];
+    if ([UserInfoSingle sharedManager].superviseSwitch) {
+        if ([UserInfoSingle sharedManager].level > 1 || ![UserInfoSingle sharedManager].goldIsNew || ![UserInfoSingle sharedManager].zxIsNew) {
+            UCFCalendarViewController *backMoneyCalendarVC = [[UCFCalendarViewController alloc] initWithNibName:@"UCFCalendarViewController" bundle:nil];
+            //        backMoneyDetailVC.superViewController = self;
+            //    backMoneyCalendarVC.accoutType = self.accoutType;
+            [self.navigationController pushViewController:backMoneyCalendarVC animated:YES];
+        }
+        else {
+            UCFCalendarModularViewController *backMoneyCalendarVC = [[UCFCalendarModularViewController alloc] initWithNibName:@"UCFCalendarModularViewController" bundle:nil];
+            backMoneyCalendarVC.accoutType = self.accoutType;
+            backMoneyCalendarVC.baseTitleText = @"回款日历";
+            [self.navigationController pushViewController:backMoneyCalendarVC animated:YES];
+        }
+    }
+    else {
+        UCFCalendarViewController *backMoneyCalendarVC = [[UCFCalendarViewController alloc] initWithNibName:@"UCFCalendarViewController" bundle:nil];
+        //        backMoneyDetailVC.superViewController = self;
+        //    backMoneyCalendarVC.accoutType = self.accoutType;
+        [self.navigationController pushViewController:backMoneyCalendarVC animated:YES];
+    }
+    
+    
+    
 }
 
 - (void)mineFuncCell:(UCFMineFuncCell *)mineFuncCell didClickedMyReservedButton:(UIButton *)button
