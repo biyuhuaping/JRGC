@@ -20,6 +20,11 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *leftCetnerSpace;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *rightCenterSpace;
 
+@property (weak, nonatomic) IBOutlet UIView *upSegLine;
+@property (weak, nonatomic) IBOutlet UIView *downSegLine;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *upLineLeftSpace;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *downLineLeftSpace;
+
 @end
 
 @implementation UCFHomeInvestCell
@@ -83,6 +88,42 @@
     [self.anurateLabel setFont:[UIFont boldSystemFontOfSize:15] range:NSMakeRange(self.anurateLabel.text.length - 1, 1)];
     
     [self.addedTransLabel setFontColor:UIColorWithRGB(0x555555) string:@"累计交易"];
+}
+
+- (void)setIndexPath:(NSIndexPath *)indexPath
+{
+    _indexPath = indexPath;
+    NSInteger totalRows = [self.tableview numberOfRowsInSection:indexPath.section];
+    
+    if (totalRows == 1) { // 这组只有1行
+        self.downSegLine.hidden = YES;
+        self.upSegLine.hidden = NO;
+        self.upSegLine.backgroundColor = UIColorWithRGB(0xe3e5ea);
+        self.downSegLine.backgroundColor = UIColorWithRGB(0xd8d8d8);
+        self.upLineLeftSpace.constant = 0;
+        self.downLineLeftSpace.constant = 0;
+    } else if (indexPath.row == 0) { // 这组的首行(第0行)
+        self.upSegLine.hidden = NO;
+        self.downSegLine.hidden = YES;
+        self.upSegLine.backgroundColor = UIColorWithRGB(0xe3e5ea);
+        self.downSegLine.backgroundColor = UIColorWithRGB(0xe3e5ea);
+        self.upLineLeftSpace.constant = 0;
+        self.downLineLeftSpace.constant = 25;
+    } else if (indexPath.row == totalRows - 1) { // 这组的末行(最后1行)
+        self.upSegLine.hidden = NO;
+        self.downSegLine.hidden = NO;
+        self.upSegLine.backgroundColor = UIColorWithRGB(0xe3e5ea);
+        self.downSegLine.backgroundColor = UIColorWithRGB(0xd8d8d8);
+        self.upLineLeftSpace.constant = 25;
+        self.downLineLeftSpace.constant = 0;
+    } else {
+        self.upSegLine.hidden = NO;
+        self.downSegLine.hidden = YES;
+        self.upSegLine.backgroundColor = UIColorWithRGB(0xe3e5ea);
+        self.downSegLine.backgroundColor = UIColorWithRGB(0xe3e5ea);
+        self.upLineLeftSpace.constant = 25;
+        self.downLineLeftSpace.constant = 25;
+    }
 }
 
 @end

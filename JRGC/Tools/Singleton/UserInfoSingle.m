@@ -10,6 +10,8 @@
 #import <objc/runtime.h>
 #import "Growing.h"
 #import "MongoliaLayerCenter.h"
+#import "JSONKit.h"
+#import "UIDic+Safe.h"
 @implementation UserInfoSingle
 
 + (UserInfoSingle *)sharedManager
@@ -217,9 +219,66 @@
 {
     self = [super init];
     if (self) {
-        
+#warning about supervise
+        self.superviseSwitch = YES;
+        self.level = 1;
+        self.goldIsNew = YES;
+        self.zxIsNew = YES;
     }
     return self;
+}
+
+#warning check userinfo on supervise
+- (void)checkUserLevelOnSupervise {
+    if (!self.userId) {
+        return;
+    }
+    [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId": self.userId} tag:kSXTagSuperviseUserInfo owner:self signature:YES Type:SelectAccoutDefault];
+}
+
+- (void)beginPost:(kSXTag)tag
+{
+    
+}
+
+- (void)endPost:(id)result tag:(NSNumber *)tag
+{
+    NSMutableDictionary *dic = [result objectFromJSONString];
+    if (tag.integerValue == kSXTagSuperviseUserInfo) {
+        NSString *rstcode = dic[@"ret"];
+        NSString *rsttext = dic[@"message"];
+        if ([rstcode intValue] == 1) {
+            NSDictionary *res = [dic objectSafeDictionaryForKey:@"data"];
+            NSString *compliance = [res objectSafeForKey:@"compliance"];
+            if ([compliance isEqualToString:@"1"]) {
+                self.superviseSwitch = NO;
+            }
+            else if ([compliance isEqualToString:@"2"]) {
+                self.superviseSwitch = YES;
+            }
+            else {
+                self.superviseSwitch = YES;
+            }
+            self.level = [[res objectSafeForKey:@"level"] intValue];
+            self.goldIsNew = [[res objectSafeForKey:@"goldIsNew"] boolValue];
+            self.zxIsNew = [[res objectSafeForKey:@"zxIsNew"] boolValue];
+        }else {
+            self.superviseSwitch = YES;
+            self.level = 1;
+            self.goldIsNew = YES;
+            self.zxIsNew = YES;
+        }
+    }
+}
+
+- (void)errorPost:(NSError *)err tag:(NSNumber *)tag
+{
+    if (tag.integerValue == kSXTagSuperviseUserInfo) {
+        self.superviseSwitch = YES;
+        self.level = 1;
+        self.goldIsNew = YES;
+        self.zxIsNew = YES;
+    }
 }
 
 @end

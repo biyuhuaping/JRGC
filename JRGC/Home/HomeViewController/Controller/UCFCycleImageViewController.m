@@ -41,6 +41,7 @@ static NSString *cellId = @"iconCell";
     
     self.view.backgroundColor = UIColorWithRGB(0xebebee);
     self.downView.backgroundColor = UIColorWithRGB(0xebebee);
+    self.iconBackViewHeight.constant = 0;
     
     NSArray *images = @[[UIImage imageNamed:@"banner_unlogin_default"]];
     SDCycleScrollView *cycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectZero imagesGroup:images];
@@ -150,7 +151,7 @@ static NSString *cellId = @"iconCell";
 + (CGFloat)viewHeight
 {
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
-    return width * 0.5 + 80;
+    return width * 0.5 + 8;
 }
 
 #pragma mark - SDCycleScrollViewDelegate

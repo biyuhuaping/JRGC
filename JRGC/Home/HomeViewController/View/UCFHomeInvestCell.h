@@ -20,4 +20,5 @@
 @property (strong, nonatomic) NSIndexPath *indexPath;
 @property (weak, nonatomic) id<UCFHomeInvestCellDelegate> delegate;
 @property (strong, nonatomic) UCFMicroMoneyModel *microModel;
+@property (weak, nonatomic) UITableView *tableview;
 @end
