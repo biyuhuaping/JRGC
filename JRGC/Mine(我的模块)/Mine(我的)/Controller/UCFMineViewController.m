@@ -37,6 +37,7 @@
 #import <StoreKit/StoreKit.h>
 #import "UCFAccountAssetsProofViewController.h"
 #import "UCFMineFuncView.h"
+#import "UCFCalendarModularViewController.h"
 
 @interface UCFMineViewController () <UITableViewDelegate, UITableViewDataSource, UCFMineHeaderViewDelegate, UCFMineFuncCellDelegate, UCFMineAPIManagerDelegate, UCFMineFuncViewDelegate, UIAlertViewDelegate, SKStoreProductViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -639,10 +640,29 @@
 
 - (void)mineFuncCell:(UCFMineFuncCell *)mineFuncCell didClickedCalendarButton:(UIButton *)button
 {
-    UCFCalendarViewController *backMoneyCalendarVC = [[UCFCalendarViewController alloc] initWithNibName:@"UCFCalendarViewController" bundle:nil];
-//        backMoneyDetailVC.superViewController = self;
-//    backMoneyCalendarVC.accoutType = self.accoutType;
-    [self.navigationController pushViewController:backMoneyCalendarVC animated:YES];
+    if ([UserInfoSingle sharedManager].superviseSwitch) {
+        if ([UserInfoSingle sharedManager].level > 1 || ![UserInfoSingle sharedManager].goldIsNew || ![UserInfoSingle sharedManager].zxIsNew) {
+            UCFCalendarViewController *backMoneyCalendarVC = [[UCFCalendarViewController alloc] initWithNibName:@"UCFCalendarViewController" bundle:nil];
+            //        backMoneyDetailVC.superViewController = self;
+            //    backMoneyCalendarVC.accoutType = self.accoutType;
+            [self.navigationController pushViewController:backMoneyCalendarVC animated:YES];
+        }
+        else {
+            UCFCalendarModularViewController *backMoneyCalendarVC = [[UCFCalendarModularViewController alloc] initWithNibName:@"UCFCalendarModularViewController" bundle:nil];
+            backMoneyCalendarVC.accoutType = self.accoutType;
+            backMoneyCalendarVC.baseTitleText = @"回款日历";
+            [self.navigationController pushViewController:backMoneyCalendarVC animated:YES];
+        }
+    }
+    else {
+        UCFCalendarViewController *backMoneyCalendarVC = [[UCFCalendarViewController alloc] initWithNibName:@"UCFCalendarViewController" bundle:nil];
+        //        backMoneyDetailVC.superViewController = self;
+        //    backMoneyCalendarVC.accoutType = self.accoutType;
+        [self.navigationController pushViewController:backMoneyCalendarVC animated:YES];
+    }
+    
+    
+    
 }
 
 - (void)mineFuncCell:(UCFMineFuncCell *)mineFuncCell didClickedMyReservedButton:(UIButton *)button
