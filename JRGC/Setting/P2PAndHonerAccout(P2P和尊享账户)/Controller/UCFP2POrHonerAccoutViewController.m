@@ -233,11 +233,23 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     if (section == 0) {
-        if (self.accoutType == SelectAccoutTypeP2P && [UserInfoSingle sharedManager].enjoyOpenStatus < 3) {
-            return 208;
-        } else {
-            return 160;
+        
+        if ([UserInfoSingle sharedManager].superviseSwitch) {
+            if (self.accoutType == SelectAccoutTypeP2P && [UserInfoSingle sharedManager].enjoyOpenStatus < 3 && [UserInfoSingle sharedManager].level > 1) {
+                return 208;
+            } else {
+                return 160;
+            }
         }
+        else {
+            if (self.accoutType == SelectAccoutTypeP2P && [UserInfoSingle sharedManager].enjoyOpenStatus < 3) {
+                return 208;
+            } else {
+                return 160;
+            }
+        }
+        
+
         
     }
     return 10;
