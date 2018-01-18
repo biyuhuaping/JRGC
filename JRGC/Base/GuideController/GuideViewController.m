@@ -65,7 +65,7 @@
             adImageView.userInteractionEnabled = YES;
         }
     }
-    guideScrollView.contentSize = CGSizeMake(ScreenWidth * 4, ScreenHeight);
+    guideScrollView.contentSize = CGSizeMake(ScreenWidth * 3, ScreenHeight);
 }
 
 - (void)skipToMainWorkView
