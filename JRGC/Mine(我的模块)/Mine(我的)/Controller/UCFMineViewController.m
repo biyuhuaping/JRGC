@@ -369,7 +369,7 @@
             }
         }
         else if (indexPath.row == 1) {
-            if ([UserInfoSingle sharedManager].goldIsNew && ![UserInfoSingle sharedManager].zxIsNew) {
+            if (([UserInfoSingle sharedManager].goldIsNew && ![UserInfoSingle sharedManager].zxIsNew) || ![UserInfoSingle sharedManager].superviseSwitch || (![UserInfoSingle sharedManager].goldIsNew && ![UserInfoSingle sharedManager].zxIsNew)) {
                 cell.iconImageView.image = [UIImage imageNamed:@"uesr_icon_zx"];
                 cell.titleDesLabel.text = @"尊享账户";
                 if ([UserInfoSingle sharedManager].enjoyOpenStatus > 2) {
@@ -393,20 +393,6 @@
                     cell.describeLabel.text = self.benefitModel.repayPerDateNM;
                     cell.descriLabel.hidden = NO;
                 }else{
-                    cell.valueLabel.text = @"未开户";
-                    cell.describeLabel.text = @"";
-                    cell.descriLabel.hidden = YES;
-                }
-            }
-            else if (![UserInfoSingle sharedManager].goldIsNew && ![UserInfoSingle sharedManager].zxIsNew) {
-                cell.iconImageView.image = [UIImage imageNamed:@"uesr_icon_zx"];
-                cell.titleDesLabel.text = @"尊享账户";
-                if ([UserInfoSingle sharedManager].enjoyOpenStatus > 2) {
-                    cell.valueLabel.text = self.assetModel.zxCashBalance.length > 0 ? [NSString stringWithFormat:@"¥%@", self.assetModel.zxCashBalance] : [NSString stringWithFormat:@"¥0.00"];
-                    cell.describeLabel.text = self.benefitModel.repayPerDateZX.length > 0 ? [NSString stringWithFormat:@"最近回款日%@", self.benefitModel.repayPerDateZX] : @"最近无回款";
-                    cell.descriLabel.hidden = NO;
-                }
-                else {
                     cell.valueLabel.text = @"未开户";
                     cell.describeLabel.text = @"";
                     cell.descriLabel.hidden = YES;
