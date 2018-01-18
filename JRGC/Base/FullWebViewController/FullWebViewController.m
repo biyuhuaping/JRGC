@@ -60,7 +60,8 @@
     if ([_sourceVc isEqualToString:@"biddetail"]) {
         self.navigationController.navigationBarHidden = NO;
     }
-    if([_sourceVc isEqualToString:@"topUpVC"] || [_sourceVc isEqualToString:@"huishangAccout"] || [_sourceVc isEqualToString:@"feedBackVC"] ||[_sourceVc isEqualToString:@"aboutUsVC"]){//充值页面
+    if([_sourceVc isEqualToString:@"topUpVC"] || [_sourceVc isEqualToString:@"huishangAccout"] || [_sourceVc isEqualToString:@"feedBackVC"] ||[_sourceVc isEqualToString:@"aboutUsVC"] || [_sourceVc isEqualToString:@"UCFMoreVC"])
+    {//充值页面
        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     }
 }

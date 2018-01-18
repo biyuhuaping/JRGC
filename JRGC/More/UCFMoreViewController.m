@@ -25,6 +25,7 @@
 
 #import <YWFeedbackFMWK/YWFeedbackKit.h>
 #import <YWFeedbackFMWK/YWFeedbackViewController.h>
+#import "FullWebViewController.h"
 static NSString * const kAppKey = @"23511571";
 static NSString * const kAppSecret = @"10dddec2bf7d3be794eda13b0df0a7d9";
 @interface UCFMoreViewController () <UITableViewDataSource, UITableViewDelegate,UIActionSheetDelegate>
@@ -48,7 +49,7 @@ static NSString * const kAppSecret = @"10dddec2bf7d3be794eda13b0df0a7d9";
 {
     if (_itemsData == nil) {
         
-        UCFSettingItem *contactUs = [UCFSettingArrowItem itemWithIcon:nil title:@"联系我们" destVcClass:nil];
+        UCFSettingItem *contactUs = [UCFSettingArrowItem itemWithIcon:nil title:@"客服电话" destVcClass:nil];
         contactUs.subtitle = @"400-0322-988";
         contactUs.option = ^{
             
@@ -304,6 +305,15 @@ static NSString * const kAppSecret = @"10dddec2bf7d3be794eda13b0df0a7d9";
 //        }
         // 如果没有需要跳转的控制器
         if (arrowItem.mainStoryBoardStr == nil) return;
+        
+        if([arrowItem.storyId isEqualToString:@"aboutus"])
+        {
+            FullWebViewController *webView = [[FullWebViewController alloc] initWithWebUrl:ABOUTUSURL title:@"关于我们"];
+            webView.sourceVc = @"UCFMoreVC";
+            webView.baseTitleType = @"specialUser";
+            [self.navigationController pushViewController:webView animated:YES];
+            return ;
+        }
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:arrowItem.mainStoryBoardStr bundle:nil];
         UCFBaseViewController *vc = [storyboard instantiateViewControllerWithIdentifier:arrowItem.storyId];
         vc.title = arrowItem.title;
