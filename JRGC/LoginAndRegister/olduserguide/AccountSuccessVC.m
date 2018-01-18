@@ -22,8 +22,16 @@
     // Do any additional setup after loading the view from its nib.
     [_submitDataButton setBackgroundImage:[[UIImage imageNamed:@"btn_red"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:2.5] forState:UIControlStateNormal];
     [_submitDataButton setBackgroundImage:[[UIImage imageNamed:@"btn_red_highlight"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:2.5] forState:UIControlStateHighlighted];
-    _showLabel.text = [_site isEqualToString:@"1"] ? @"微金徽商存管账户":@"尊享徽商存管账户";
-    NSString *imageStr = [_site isEqualToString:@"1"] ? @"account_successful_img":@"account_successful_zunxiang";
+    if ([UserInfoSingle sharedManager].superviseSwitch) {
+        if ([UserInfoSingle sharedManager].zxIsNew) {
+            _showLabel.text = @"徽商银行存管账户";
+        } else {
+           _showLabel.text = @"微金徽商存管账户";
+        }
+    } else {
+        _showLabel.text = self.accoutType == SelectAccoutTypeP2P ? @"微金徽商存管账户":@"尊享徽商存管账户";
+    }
+    NSString *imageStr = self.accoutType == SelectAccoutTypeP2P ? @"account_successful_img":@"account_successful_zunxiang";
     _successTipView.image = [UIImage imageNamed:imageStr];
     if (_fromVC == 1) {
         [_submitDataButton setTitle:@"进入生活频道" forState:UIControlStateNormal];
