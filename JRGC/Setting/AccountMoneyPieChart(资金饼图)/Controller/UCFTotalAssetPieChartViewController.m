@@ -122,25 +122,26 @@
             {
                 if([UserInfoSingle sharedManager].level < 2)
                 {
-                    if (![UserInfoSingle sharedManager].zxIsNew &&   ![UserInfoSingle sharedManager].goldIsNew)
+                    if ([UserInfoSingle sharedManager].zxIsNew &&  [UserInfoSingle sharedManager].goldIsNew)
                     {
                         self.dataArray = @[pieChatModel2];
-                    }else if( [UserInfoSingle sharedManager].zxIsNew && ![UserInfoSingle sharedManager].goldIsNew)
+                    }else if( ![UserInfoSingle sharedManager].zxIsNew && [UserInfoSingle sharedManager].goldIsNew)
                     {
                         
                         [pieChatModel1.pieChartDataArray removeLastObject];
                         [pieChatModel1.pieChartTitleArray removeLastObject];
                         self.dataArray = @[pieChatModel1,pieChatModel2];
-                    }else if(![UserInfoSingle sharedManager].zxIsNew && [UserInfoSingle sharedManager].goldIsNew)
+                    }else if([UserInfoSingle sharedManager].zxIsNew && ![UserInfoSingle sharedManager].goldIsNew)
                     {
                         [pieChatModel1.pieChartDataArray removeObjectAtIndex:1];
                         [pieChatModel1.pieChartTitleArray removeObjectAtIndex:1];
                         self.dataArray = @[pieChatModel1,pieChatModel2];
                     }else {
-        
                     self.dataArray = @[pieChatModel1,pieChatModel2];
-                 }
-              }
+                  }
+                }else{
+                    self.dataArray = @[pieChatModel1,pieChatModel2];
+                }
           }
         else{
             self.dataArray = @[pieChatModel1,pieChatModel2];
