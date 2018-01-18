@@ -59,11 +59,13 @@
 - (void)refreshUI:(NSNotification *)noti
 {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        for (UIViewController *vc in self.childViewControllers) {
-            [vc removeFromParentViewController];
+        if ([self isViewLoaded]) {
+            for (UIViewController *vc in self.childViewControllers) {
+                [vc removeFromParentViewController];
+            }
+            [self addChildViewControllers];
+            [self createUI];
         }
-        [self addChildViewControllers];
-        [self createUI];
     });
 }
     
@@ -86,7 +88,7 @@
 {
     if ([UserInfoSingle sharedManager].userId) {
         if ([UserInfoSingle sharedManager].superviseSwitch) {
-            if ([UserInfoSingle sharedManager].level > 1) {
+            if ([UserInfoSingle sharedManager].level < 2) {
                 if ([UserInfoSingle sharedManager].goldIsNew && [UserInfoSingle sharedManager].zxIsNew) {
                     if ([_pagerView.selectIndexStr isEqualToString:@"0"]) {
                         [self.microMoney.tableview.header beginRefreshing];
@@ -137,7 +139,13 @@
                     [self.microMoney.tableview.header beginRefreshing];
                 }
                 else if ([_pagerView.selectIndexStr isEqualToString:@"1"]) {
+                    [self.honorInvest.tableView.header beginRefreshing];
+                }
+                else if ([_pagerView.selectIndexStr isEqualToString:@"3"]) {
                     [self.investTransfer.tableview.header beginRefreshing];
+                }
+                else if ([_pagerView.selectIndexStr isEqualToString:@"2"]) {
+                    [self.golden.tableview.header beginRefreshing];
                 }
             }
         }
@@ -191,7 +199,7 @@
 {
     if ([UserInfoSingle sharedManager].userId) {
         if ([UserInfoSingle sharedManager].superviseSwitch) {
-            if ([UserInfoSingle sharedManager].level > 1) {
+            if ([UserInfoSingle sharedManager].level < 2) {
                 if ([UserInfoSingle sharedManager].goldIsNew && [UserInfoSingle sharedManager].zxIsNew) {
                     [self addMicroMoney];
                     [self addTransfer];
@@ -215,6 +223,8 @@
             }
             else {
                 [self addMicroMoney];
+                [self addHonor];
+                [self addGolden];
                 [self addTransfer];
             }
         }
@@ -268,7 +278,7 @@
     NSArray *titleArray = nil;
     if ([UserInfoSingle sharedManager].userId) {
         if ([UserInfoSingle sharedManager].superviseSwitch) {
-            if ([UserInfoSingle sharedManager].level > 1) {
+            if ([UserInfoSingle sharedManager].level < 2) {
                 if ([UserInfoSingle sharedManager].goldIsNew && [UserInfoSingle sharedManager].zxIsNew) {
                     titleArray = @[@"微金", @"债转"];
                 }
@@ -283,7 +293,7 @@
                 }
             }
             else {
-                titleArray = @[@"微金", @"债转"];
+                titleArray = @[@"微金", @"尊享", @"黄金", @"债转"];
             }
         }
         else {

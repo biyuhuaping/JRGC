@@ -140,7 +140,10 @@ static NSString *cellId = @"iconCell";
 - (void)homeIconListViewPresenter:(UCFHomeListPresenter *)presenter didRefreshDataWithResult:(id)result error:(NSError *)error
 {
     if (!error) {
-        [self.iconCollectionView reloadData];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self.iconCollectionView reloadData];
+        });
+        
         //        [self.tableView.footer resetNoMoreData];
     } else if (self.presenter.allHomeIcons.count == 0) {
         //        show error view
