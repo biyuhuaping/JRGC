@@ -717,6 +717,7 @@
             //提交信息成功之后，显示开户成功页面
             AccountSuccessVC *acVC = [[AccountSuccessVC alloc]initWithNibName:@"AccountSuccessVC" bundle:nil];
 //            acVC.site = self.site;
+            acVC.accoutType = self.accoutType;
             acVC.fromVC = self.fromVC;
             acVC.view.frame = self.view.bounds;
             acVC.db = self.db;
