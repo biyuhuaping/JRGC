@@ -290,8 +290,6 @@ static NSString * const kAppSecret = @"10dddec2bf7d3be794eda13b0df0a7d9";
     } else if ([item isKindOfClass:[UCFSettingArrowItem class]]) { // 箭头
         UCFSettingArrowItem *arrowItem = (UCFSettingArrowItem *)item;
         if (indexPath.section == 1 && indexPath.row != 0) {//微信公众号 和公司网址
-            [self openFeedbackViewController];
-            
             UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
             [pasteboard setString:item.subtitle];
             [AuxiliaryFunc showToastMessage:@"已复制到剪切板" withView:self.view];

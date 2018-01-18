@@ -58,7 +58,20 @@
             if (index == 1) {
                 UpgradeAccountVC *accountVC = [[UpgradeAccountVC alloc] initWithNibName:@"UpgradeAccountVC" bundle:nil];
                 accountVC.fromVC = 1;
-                accountVC.accoutType = SelectAccoutTypeHoner;
+                if ([UserInfoSingle sharedManager].superviseSwitch) {
+                    if ([UserInfoSingle sharedManager].level > 1) {
+                        accountVC.accoutType = SelectAccoutTypeHoner;
+                    }
+                    else {
+                        if ([UserInfoSingle sharedManager].zxIsNew) {
+                            accountVC.accoutType = SelectAccoutTypeP2P;
+                        } else {
+                            accountVC.accoutType = SelectAccoutTypeHoner;
+                        }
+                    }
+                } else {
+                    accountVC.accoutType = SelectAccoutTypeHoner;
+                }
                 UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:accountVC];
                 [weakSelf presentViewController:loginNaviController animated:YES completion:nil];
             }
