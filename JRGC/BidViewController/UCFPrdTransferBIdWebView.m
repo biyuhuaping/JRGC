@@ -54,7 +54,7 @@
         [self.navigationController popToRootViewControllerAnimated:YES];
 }
 -(void)getToBack{
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshHomeData" object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadHonerTransferData" object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadP2PTransferData" object:nil];
     
