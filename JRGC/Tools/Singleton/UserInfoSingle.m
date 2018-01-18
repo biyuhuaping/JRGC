@@ -263,6 +263,7 @@
             self.goldIsNew = [[res objectSafeForKey:@"goldIsNew"] boolValue];
             self.zxIsNew = [[res objectSafeForKey:@"zxIsNew"] boolValue];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshSuperviseView" object:nil];
+            
         }else {
             self.superviseSwitch = YES;
             self.level = 1;

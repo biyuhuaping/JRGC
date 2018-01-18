@@ -306,7 +306,7 @@
         case 0: {
             if ([UserInfoSingle sharedManager].userId) {
                 if ([UserInfoSingle sharedManager].superviseSwitch) {
-                    if ([UserInfoSingle sharedManager].level > 1) {
+                    if ([UserInfoSingle sharedManager].level < 2) {
                         if ([UserInfoSingle sharedManager].goldIsNew && [UserInfoSingle sharedManager].zxIsNew) {
                             return 1;
                         }
@@ -321,7 +321,7 @@
                         }
                     }
                     else {
-                        return 1;
+                        return 3;
                     }
                 }
                 else {

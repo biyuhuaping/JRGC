@@ -9,10 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "UCFOldUserGuideViewController.h"
 
-@interface AccountSuccessVC : UIViewController
+@interface AccountSuccessVC : UCFBaseViewController
 
 @property (assign, nonatomic) UCFOldUserGuideViewController *db;
-@property (copy, nonatomic) NSString *site;
+//@property (copy, nonatomic) NSString *site;
 @property (assign, nonatomic)NSInteger fromVC;
 
 @end
