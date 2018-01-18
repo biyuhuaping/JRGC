@@ -63,6 +63,10 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUI:) name:@"getPersonalCenterNetData" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(responds3DTouchClick) name:@"responds3DTouchClick" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setDefaultState:) name:@"setDefaultViewData" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData) name:@"reloadP2PData" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData) name:@"reloadP2PTransferData" object:nil];
+//        [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadHonerTransferData" object:nil];
+//        [[NSNotificationCenter defaultCenter] postNotificationName:@"" object:nil];
 //        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUI:) name:@"refreshUserState" object:nil];
 //        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(msgSkipToNativeAPP:) name:@"msgSkipToNativeAPP" object:nil];
         
@@ -369,7 +373,54 @@
             }
         }
         else if (indexPath.row == 1) {
-            if (([UserInfoSingle sharedManager].goldIsNew && ![UserInfoSingle sharedManager].zxIsNew) || ![UserInfoSingle sharedManager].superviseSwitch || (![UserInfoSingle sharedManager].goldIsNew && ![UserInfoSingle sharedManager].zxIsNew)) {
+            if ([UserInfoSingle sharedManager].superviseSwitch) {
+                if ([UserInfoSingle sharedManager].level > 1) {
+                    cell.iconImageView.image = [UIImage imageNamed:@"uesr_icon_zx"];
+                    cell.titleDesLabel.text = @"尊享账户";
+                    if ([UserInfoSingle sharedManager].enjoyOpenStatus > 2) {
+                        cell.valueLabel.text = self.assetModel.zxCashBalance.length > 0 ? [NSString stringWithFormat:@"¥%@", self.assetModel.zxCashBalance] : [NSString stringWithFormat:@"¥0.00"];
+                        cell.describeLabel.text = self.benefitModel.repayPerDateZX.length > 0 ? [NSString stringWithFormat:@"最近回款日%@", self.benefitModel.repayPerDateZX] : @"最近无回款";
+                        cell.descriLabel.hidden = NO;
+                    }
+                    else {
+                        cell.valueLabel.text = @"未开户";
+                        cell.describeLabel.text = @"";
+                        cell.descriLabel.hidden = YES;
+                    }
+                }
+                else {
+                    if (([UserInfoSingle sharedManager].goldIsNew && ![UserInfoSingle sharedManager].zxIsNew)  || (![UserInfoSingle sharedManager].goldIsNew && ![UserInfoSingle sharedManager].zxIsNew)) {
+                        cell.iconImageView.image = [UIImage imageNamed:@"uesr_icon_zx"];
+                        cell.titleDesLabel.text = @"尊享账户";
+                        if ([UserInfoSingle sharedManager].enjoyOpenStatus > 2) {
+                            cell.valueLabel.text = self.assetModel.zxCashBalance.length > 0 ? [NSString stringWithFormat:@"¥%@", self.assetModel.zxCashBalance] : [NSString stringWithFormat:@"¥0.00"];
+                            cell.describeLabel.text = self.benefitModel.repayPerDateZX.length > 0 ? [NSString stringWithFormat:@"最近回款日%@", self.benefitModel.repayPerDateZX] : @"最近无回款";
+                            cell.descriLabel.hidden = NO;
+                        }
+                        else {
+                            cell.valueLabel.text = @"未开户";
+                            cell.describeLabel.text = @"";
+                            cell.descriLabel.hidden = YES;
+                        }
+                    }
+                    else {
+                        cell.iconImageView.image = [UIImage imageNamed:@"uesr_icon_gold"];
+                        cell.valueLabel.textColor = UIColorWithRGB(0xffa811);
+                        cell.titleDesLabel.text = @"黄金账户";
+                        if ([UserInfoSingle sharedManager].goldAuthorization)
+                        {
+                            cell.valueLabel.text = self.assetModel.nmCashBalance.length > 0 ? [NSString stringWithFormat:@"¥%@", self.assetModel.nmCashBalance] : [NSString stringWithFormat:@"¥0.00"];
+                            cell.describeLabel.text = self.benefitModel.repayPerDateNM;
+                            cell.descriLabel.hidden = NO;
+                        }else{
+                            cell.valueLabel.text = @"未开户";
+                            cell.describeLabel.text = @"";
+                            cell.descriLabel.hidden = YES;
+                        }
+                    }
+                }
+            }
+            else {
                 cell.iconImageView.image = [UIImage imageNamed:@"uesr_icon_zx"];
                 cell.titleDesLabel.text = @"尊享账户";
                 if ([UserInfoSingle sharedManager].enjoyOpenStatus > 2) {
@@ -378,21 +429,6 @@
                     cell.descriLabel.hidden = NO;
                 }
                 else {
-                    cell.valueLabel.text = @"未开户";
-                    cell.describeLabel.text = @"";
-                    cell.descriLabel.hidden = YES;
-                }
-            }
-            else if (![UserInfoSingle sharedManager].goldIsNew && [UserInfoSingle sharedManager].zxIsNew) {
-                cell.iconImageView.image = [UIImage imageNamed:@"uesr_icon_gold"];
-                cell.valueLabel.textColor = UIColorWithRGB(0xffa811);
-                cell.titleDesLabel.text = @"黄金账户";
-                if ([UserInfoSingle sharedManager].goldAuthorization)
-                {
-                    cell.valueLabel.text = self.assetModel.nmCashBalance.length > 0 ? [NSString stringWithFormat:@"¥%@", self.assetModel.nmCashBalance] : [NSString stringWithFormat:@"¥0.00"];
-                    cell.describeLabel.text = self.benefitModel.repayPerDateNM;
-                    cell.descriLabel.hidden = NO;
-                }else{
                     cell.valueLabel.text = @"未开户";
                     cell.describeLabel.text = @"";
                     cell.descriLabel.hidden = YES;

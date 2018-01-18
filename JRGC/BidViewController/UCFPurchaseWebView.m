@@ -65,7 +65,8 @@
 }
 - (void)jsClose
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshHomeData" object:nil];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadHonerPlanData" object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadP2PData" object:nil];
 //    [[NSNotificationCenter defaultCenter] postNotificationName:@"LatestProjectUpdate" object:nil];
