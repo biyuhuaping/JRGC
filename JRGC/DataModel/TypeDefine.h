@@ -336,7 +336,7 @@
 #define PRDCLAIMSGETPRDBASEDETAIL @"api/prdClaims/v2/getPrdBaseDetail.json" //普通标详情【基础标信息】
 #define PRDCLAIMSGETINVESTORDERRECORD @"api/prdClaims/v2/getInvestOrderRecord.json" //普通标详情【标认购记录】
 #warning about supervise
-#define SUPERVISEUSERINFO   @"api/prdClaims/v2/complianceStatus.json" //监管用户监管用户信息
+#define SUPERVISEUSERINFO   @"api/prdClaims/v2/complianceStatus.json" //监管用户监管用户信息 
 
 enum kPostStatus{
     kPostStatusNone=0,

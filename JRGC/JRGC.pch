@@ -229,6 +229,8 @@ return shared##className; \
 #define COUPON_CENTER @"https://m.9888.cn/static/wap/invest/index.html#/fa-xian/coupon" //领券中心
 #define CFCAURL  @"https://static.9888.cn/pages/notices/CFCA.htm"//CFCA协议
 
+#define ABOUTUSURL @"https://m.9888.cn/static/wap/invest/index.html#/fa-xian/ourself"  
+
 #define ZXTIP1 @"请先开通尊享徽商存管账户"
 #define ZXTIP2 @"请先设置尊享徽商存管账户交易密码"
 #define P2PTIP1 @"请先开通微金徽商存管账户"
