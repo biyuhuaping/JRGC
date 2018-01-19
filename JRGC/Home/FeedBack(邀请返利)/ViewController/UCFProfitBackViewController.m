@@ -29,12 +29,12 @@
 - (void)createUI {
     
     [self addLeftButton];
-    if([UserInfoSingle sharedManager].superviseSwitch && [UserInfoSingle sharedManager].level < 2   && ![UserInfoSingle sharedManager].zxAuthorization)
+    if([UserInfoSingle sharedManager].superviseSwitch && [UserInfoSingle sharedManager].level < 2   && [UserInfoSingle sharedManager].zxIsNew)
     {
         baseTitleLabel.text = @"微金返利";
     }
     else {
-        UISegmentedControl *segmentContrl = [[UISegmentedControl alloc]initWithItems:@[@"微金返利",@"尊享返利"]];;
+        UISegmentedControl *segmentContrl = [[UISegmentedControl alloc]initWithItems:@[@"微金返利",@"尊享返利"]];
         segmentContrl.frame = CGRectMake(0, 0, ScreenWidth*5/8, 30);
         [segmentContrl setTintColor:UIColorWithRGB(0x5b6993)];
         segmentContrl.selectedSegmentIndex = 0;

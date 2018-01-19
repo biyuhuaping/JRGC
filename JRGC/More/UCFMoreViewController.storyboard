@@ -28,7 +28,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="220"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon29" translatesAutoresizingMaskIntoConstraints="NO" id="D7I-SL-WgD">
+                                        <imageView clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jrgc_icon_logo" translatesAutoresizingMaskIntoConstraints="NO" id="D7I-SL-WgD">
                                             <rect key="frame" x="155" y="35" width="65" height="65"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="65" id="Htt-rL-qD3"/>
@@ -233,17 +233,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a6g-59-2RE">
-                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a6g-59-2RE">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </webView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="a6g-59-2RE" secondAttribute="trailing" id="Y0j-A4-1ZG"/>
-                            <constraint firstItem="JtZ-kD-uV7" firstAttribute="top" secondItem="a6g-59-2RE" secondAttribute="bottom" id="b06-vS-YWS"/>
-                            <constraint firstItem="a6g-59-2RE" firstAttribute="leading" secondItem="L63-Mf-ofw" secondAttribute="leading" id="fal-wb-IXH"/>
-                            <constraint firstItem="a6g-59-2RE" firstAttribute="top" secondItem="L63-Mf-ofw" secondAttribute="top" constant="20" id="lRO-s1-zX7"/>
+                            <constraint firstItem="a6g-59-2RE" firstAttribute="leading" secondItem="L63-Mf-ofw" secondAttribute="leading" id="5AQ-2V-dW9"/>
+                            <constraint firstItem="a6g-59-2RE" firstAttribute="bottom" secondItem="JtZ-kD-uV7" secondAttribute="top" id="85L-hm-n5t"/>
+                            <constraint firstAttribute="trailing" secondItem="a6g-59-2RE" secondAttribute="trailing" id="Ott-xZ-dvC"/>
+                            <constraint firstItem="a6g-59-2RE" firstAttribute="top" secondItem="L63-Mf-ofw" secondAttribute="top" id="uwl-27-PTc"/>
                         </constraints>
                     </view>
                     <connections>
@@ -252,7 +252,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gxx-ti-Wxu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1314" y="59"/>
+            <point key="canvasLocation" x="1313.5" y="58.5"/>
         </scene>
         <!--About Us View Controller-->
         <scene sceneID="eu6-mq-xG2">
@@ -334,7 +334,7 @@
     </scenes>
     <resources>
         <image name="about_icon" width="117" height="42"/>
-        <image name="icon29" width="58" height="58"/>
+        <image name="jrgc_icon_logo" width="65" height="65"/>
         <image name="more_icon_praise" width="30" height="30"/>
         <image name="more_icon_proposal" width="30" height="30"/>
     </resources>

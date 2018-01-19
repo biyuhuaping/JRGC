@@ -131,14 +131,14 @@
     {
         if([UserInfoSingle sharedManager].level < 2)
         {
-            if (![UserInfoSingle sharedManager].zxIsNew &&   ![UserInfoSingle sharedManager].goldIsNew)
-            { // 该情况不存在了
+            if ([UserInfoSingle sharedManager].zxIsNew && [UserInfoSingle sharedManager].goldIsNew)
+            { // 该情况已处理
            
-            }else if( [UserInfoSingle sharedManager].zxIsNew && ![UserInfoSingle sharedManager].goldIsNew)
+            }else if( ![UserInfoSingle sharedManager].zxIsNew && [UserInfoSingle sharedManager].goldIsNew)
             {
                 [rechargeAccoutArray addObject:_honerAccoutCardView];
                 [rechargeAccoutArray addObject:_p2PAccoutCardView];
-            }else if(![UserInfoSingle sharedManager].zxIsNew && [UserInfoSingle sharedManager].goldIsNew)
+            }else if([UserInfoSingle sharedManager].zxIsNew && ![UserInfoSingle sharedManager].goldIsNew)
             {
                 [rechargeAccoutArray addObject:_goldAccoutCardView];
                 [rechargeAccoutArray addObject:_p2PAccoutCardView];
@@ -160,7 +160,7 @@
     }
     NSUInteger  rechargeAccoutCount =  rechargeAccoutArray.count;
     _titleLabel.frame =  CGRectMake([Common calculateNewSizeBaseMachine:15], ScreenHeight - [Common calculateNewSizeBaseMachine:110] * rechargeAccoutCount - 15 - [Common calculateNewSizeBaseMachine:20], 150,  [Common calculateNewSizeBaseMachine:20]);
-    
+     _closeBtn.frame = CGRectMake(ScreenWidth - [Common calculateNewSizeBaseMachine:15] - 30, ScreenHeight - [Common calculateNewSizeBaseMachine:110] * rechargeAccoutCount - 55, 30,55);
     
     
     
@@ -284,40 +284,23 @@
     {
         if([UserInfoSingle sharedManager].level < 2)
         {
-            if (![UserInfoSingle sharedManager].zxIsNew &&   ![UserInfoSingle sharedManager].goldIsNew)
+            if ([UserInfoSingle sharedManager].zxIsNew && [UserInfoSingle sharedManager].goldIsNew)
             { // 该情况已经处理了
                 
-            }else if( [UserInfoSingle sharedManager].zxIsNew && ![UserInfoSingle sharedManager].goldIsNew)
+            }else if( ![UserInfoSingle sharedManager].zxIsNew && [UserInfoSingle sharedManager].goldIsNew)
             {
-                if(![cashAccoutArray containsObject:_p2PAccoutCardView])
-                {
-                    [cashAccoutArray addObject:_p2PAccoutCardView];
-                }
-                if(![cashAccoutArray containsObject:_honerAccoutCardView])
-                {
-                    [cashAccoutArray addObject:_honerAccoutCardView];
-                }
-                if([cashAccoutArray containsObject:_goldAccoutCardView])
-                {
-                    [cashAccoutArray removeObject:_goldAccoutCardView];
-                }
+                [cashAccoutArray removeAllObjects];
+                [cashAccoutArray addObject:_honerAccoutCardView];
+                [cashAccoutArray addObject:_p2PAccoutCardView];
+              
                 
-            }else if(![UserInfoSingle sharedManager].zxIsNew && [UserInfoSingle sharedManager].goldIsNew)
+            }else if([UserInfoSingle sharedManager].zxIsNew && ![UserInfoSingle sharedManager].goldIsNew)
             {
-                if(![cashAccoutArray containsObject:_p2PAccoutCardView])
-                {
-                    [cashAccoutArray addObject:_p2PAccoutCardView];
-                }
-                if([cashAccoutArray containsObject:_honerAccoutCardView])
-                {
-                    [cashAccoutArray removeObject:_honerAccoutCardView];
-                }
-                if(![cashAccoutArray containsObject:_goldAccoutCardView])
-                {
-                    [cashAccoutArray addObject:_goldAccoutCardView];
-                }
+                [cashAccoutArray removeAllObjects];
+                [cashAccoutArray addObject:_goldAccoutCardView];
+                [cashAccoutArray addObject:_p2PAccoutCardView];
             }else {
-
+              
             }
         }
     }
