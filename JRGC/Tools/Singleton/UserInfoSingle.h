@@ -29,6 +29,8 @@
 @property(nonatomic, assign) NSInteger time;
 //html 页面免登陆cookie
 @property(nonatomic, copy) NSString *jg_ckie;
+//工场码
+@property(nonatomic, copy) NSString *gcm_code;
 
 @property(nonatomic, assign) BOOL companyAgent;
 
