@@ -25,6 +25,7 @@
 @property (copy, nonatomic) NSString *noticeStr;
 @property (weak, nonatomic) UCFNoticeView *noticeView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *iconBackViewHeight;
+@property (weak, nonatomic) IBOutlet UICollectionView *iconCollectionView;
 
 #pragma mark - 根据所对应的presenter生成当前controller
 + (instancetype)instanceWithPresenter:(UCFHomeListPresenter *)presenter;

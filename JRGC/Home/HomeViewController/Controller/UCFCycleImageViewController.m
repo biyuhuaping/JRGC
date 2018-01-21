@@ -24,7 +24,6 @@
 @property (weak, nonatomic) IBOutlet UIView *homeIconBackView;
 @property (weak, nonatomic) IBOutlet UIView *noticeBackView;
 
-@property (weak, nonatomic) IBOutlet UICollectionView *iconCollectionView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *noticeBackViewHeight;
 @property (weak, nonatomic) IBOutlet UIView *downView;
 
@@ -75,6 +74,7 @@ static NSString *cellId = @"iconCell";
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
+    [collectionView.collectionViewLayout invalidateLayout];
     return 1;
 }
 
@@ -140,6 +140,15 @@ static NSString *cellId = @"iconCell";
 - (void)homeIconListViewPresenter:(UCFHomeListPresenter *)presenter didRefreshDataWithResult:(id)result error:(NSError *)error
 {
     if (!error) {
+        NSArray *homeIcons = [result objectSafeArrayForKey:@"productMap"];
+        if (homeIcons.count > 0) {
+//            weakSelf.cycleImageVC.view.frame = CGRectMake(0, 0, ScreenWidth, userInfoViewHeight + 80);
+            self.iconBackViewHeight.constant = 80;
+        }
+        else {
+//            weakSelf.cycleImageVC.view.frame = CGRectMake(0, 0, ScreenWidth, userInfoViewHeight);
+            self.iconBackViewHeight.constant = 0;
+        }
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self.iconCollectionView reloadData];
         });

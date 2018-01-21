@@ -273,6 +273,7 @@
     [self.tableView.header endRefreshing];
     if ([result isKindOfClass:[UCFUserBenefitModel class]]) {
         self.benefitModel = result;
+        [UserInfoSingle sharedManager].gcm_code = self.benefitModel.promotionCode;
         self.mineFooterView.benefit = result;
         self.mineHeaderView.userBenefitModel = result;
         
