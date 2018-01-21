@@ -131,7 +131,7 @@
 //        return 200;
 //    }
 //    return 73;
-    return 0.01;
+    return 54;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -142,14 +142,14 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
 //    UCFCalendarDetailHeaderView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"calendarDetailHeader"];
-//    if (!_headerView) {
-//        self.headerView = (UCFCalendarDetailHeaderView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFCalendarDetailHeaderView" owner:self options:nil] lastObject];
-//        _headerView.delegate = self;
-//        self.accoutType = SelectAccoutTypeP2P;
-//        [_headerView setSelectButtonIndex:0];
-//    }
-    return nil;
-//    return _headerView;
+    if (!_headerView) {
+        self.headerView = (UCFCalendarDetailHeaderView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFCalendarDetailHeaderView" owner:self options:nil] lastObject];
+        _headerView.delegate = self;
+        self.accoutType = SelectAccoutTypeP2P;
+        [_headerView setSelectButtonIndex:0];
+    }
+//    return nil;
+    return _headerView;
 }
 
 - (void)calendarDetailHeaderView:(UCFCalendarDetailHeaderView *)calendarDetailHeader didClicked:(UIButton *)button
