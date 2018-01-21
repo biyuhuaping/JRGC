@@ -1035,11 +1035,11 @@
             NSArray *homeIcons = [result objectSafeArrayForKey:@"productMap"];
             if (homeIcons.count > 0) {
                 weakSelf.cycleImageVC.view.frame = CGRectMake(0, 0, ScreenWidth, userInfoViewHeight + 80);
-                weakSelf.cycleImageVC.iconBackViewHeight.constant = 80;
+//                weakSelf.cycleImageVC.iconBackViewHeight.constant = 80;
             }
             else {
                 weakSelf.cycleImageVC.view.frame = CGRectMake(0, 0, ScreenWidth, userInfoViewHeight);
-                weakSelf.cycleImageVC.iconBackViewHeight.constant = 0;
+//                weakSelf.cycleImageVC.iconBackViewHeight.constant = 0;
             }
             weakSelf.homeListVC.tableView.tableHeaderView = weakSelf.cycleImageVC.view;
             //请求成功
@@ -1296,5 +1296,6 @@
         }
     }
 }
+
 
 @end

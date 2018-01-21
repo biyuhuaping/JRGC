@@ -81,6 +81,13 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"userisloginandcheckgrade" object:@(YES)];
 }
 
+- (void)setGcm_code:(NSString *)gcm_code
+{
+    _gcm_code = gcm_code;
+    [[NSUserDefaults standardUserDefaults] setValue:gcm_code forKey:GCMCODE];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 //程序启动的时候 获取用户对象数据
 - (void)getUserData
 {
@@ -101,6 +108,9 @@
     self.isAutoBid = [[NSUserDefaults standardUserDefaults] boolForKey:@"isAutoBid"];
     self.gcm_code = [[NSUserDefaults standardUserDefaults]valueForKey:GCMCODE];
 }
+
+
+
 //存储用户信息
 - (void)storeUserCache:(NSDictionary *)dict
 {
