@@ -776,10 +776,17 @@
             }
                 break;
             case 2:{
-                vc = [[arrowItem.destVcClass alloc] initWithNibName:@"UCFWebViewJavascriptBridgeLevel" bundle:nil];
-                vc.title = arrowItem.title;
-                ((UCFWebViewJavascriptBridgeLevel *)vc).url = LEVELURL;
-                ((UCFWebViewJavascriptBridgeLevel *)vc).navTitle = @"会员等级";
+                if ([UserInfoSingle sharedManager].level > 1) {
+                    vc = [[arrowItem.destVcClass alloc] initWithNibName:@"UCFWebViewJavascriptBridgeLevel" bundle:nil];
+                    vc.title = arrowItem.title;
+                    ((UCFWebViewJavascriptBridgeLevel *)vc).url = LEVELURL;
+                    ((UCFWebViewJavascriptBridgeLevel *)vc).navTitle = @"会员等级";
+                }
+                else {
+                    UCFFacCodeViewController *subVC = [[UCFFacCodeViewController alloc] initWithNibName:@"UCFFacCodeViewController" bundle:nil];
+                    subVC.urlStr = [NSString stringWithFormat:@"https://m.9888.cn/mpwap/mycode.jsp?pcode=%@&sex=%d",[[NSUserDefaults standardUserDefaults] objectForKey:GCMCODE],self.sex];
+                    vc = subVC;
+                }
             }
                 break;
             case 3:

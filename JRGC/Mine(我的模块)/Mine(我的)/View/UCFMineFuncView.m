@@ -44,7 +44,7 @@
     UCFSettingItem *facPoint = [UCFSettingArrowItem itemWithIcon:@"uesr_icon_score" title:@"工分" destVcClass:nil];
     facPoint.subtitle = self.benefit.score ? [NSString stringWithFormat:@"%@分", self.benefit.score] : @"0分";
     UCFSettingItem *profitInvest = [UCFSettingArrowItem itemWithIcon:@"uesr_icon_rebate" title:@"邀请返利" destVcClass:nil];
-    profitInvest.subtitle = self.benefit.promotionCode.length > 0 ? [NSString stringWithFormat:@"工场码%@", self.benefit.promotionCode] : @"";
+    profitInvest.subtitle = [UserInfoSingle sharedManager].gcm_code.length > 0 ? [NSString stringWithFormat:@"工场码%@", [UserInfoSingle sharedManager].gcm_code] : @"";
     
     UCFSettingItem *sign = [UCFSettingArrowItem itemWithIcon:@"uesr_icon_checkin" title:@"签到" destVcClass:nil];
     sign.subtitle = @"签到送工分";

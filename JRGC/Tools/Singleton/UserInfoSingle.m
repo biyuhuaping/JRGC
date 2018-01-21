@@ -99,6 +99,7 @@
 //    self.userLevel = [[NSUserDefaults standardUserDefaults] valueForKey:USER_LEVEL];
     self.isRisk = [[NSUserDefaults standardUserDefaults] boolForKey:@"isRisk"];
     self.isAutoBid = [[NSUserDefaults standardUserDefaults] boolForKey:@"isAutoBid"];
+    self.gcm_code = [[NSUserDefaults standardUserDefaults]valueForKey:GCMCODE];
 }
 //存储用户信息
 - (void)storeUserCache:(NSDictionary *)dict
