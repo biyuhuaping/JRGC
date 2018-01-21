@@ -37,6 +37,7 @@
     [self.cashButton setBackgroundColor:UIColorWithRGB(0x342649)];
     self.rechargeButton.layer.borderColor = UIColorWithRGB(0xA8A2C1).CGColor;
     self.cashButton.layer.borderColor = UIColorWithRGB(0xA8A2C1).CGColor;
+    self.memberLevelView.hidden = YES;
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedUserIcon:)];
     [self.userIconImageView addGestureRecognizer:tap];
@@ -147,10 +148,12 @@
     if (memLevel > 0) {
         self.userLevelLabel.text = [NSString stringWithFormat:@"VIP%ld", (long)memLevel];
         self.userLevelW.constant = 32.0;
+        self.memberLevelView.hidden = NO;
     }
     else {
         self.userLevelLabel.text = @"普通会员";
         self.userLevelW.constant = 49.0;
+        self.memberLevelView.hidden = [UserInfoSingle sharedManager].superviseSwitch ?  YES : NO;
     }
     
     if (userBenefitModel.unReadMsgCount.integerValue > 0) {
@@ -163,6 +166,7 @@
 
 - (void)setDefaultState {
     dispatch_async(dispatch_get_main_queue(), ^{
+        self.memberLevelView.hidden = YES;
         self.userIconImageView.image = [UIImage imageNamed:@"user_icon_head_male"];
         self.userNameLabel.text = @"未认证";
         self.userLevelLabel.text = @"普通会员";

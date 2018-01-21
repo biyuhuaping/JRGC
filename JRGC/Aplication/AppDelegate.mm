@@ -209,7 +209,7 @@
     //调用红点接口，通知服务器红点标示倍查看
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkRedPointShouldHide:) name:REDALERTISHIDE object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkConponCenter) name:CHECK_COUPON_CENTER object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkConponCenter) name:@"setDefaultViewData" object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkConponCenter) name:@"setDefaultViewData" object:nil];
 
     /**
      *  极光推送自定义消息推送
