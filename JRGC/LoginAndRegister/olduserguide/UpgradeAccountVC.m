@@ -60,10 +60,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    if (_fromVC == 1) {
+//    if (_fromVC == 1) {
+    
+    if (self.accoutType == SelectAccoutTypeP2P) {
+        baseTitleLabel.text = @"开通微金徽商存管账户";
+    } else {
         baseTitleLabel.text = @"开通尊享徽商存管账户";
-        [self addLeftButton];
     }
+    
+        [self addLeftButton];
+//    }
     
     _isSendVoiceMessage = NO;
     _height1.constant = 0.5;
