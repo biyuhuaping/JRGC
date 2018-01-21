@@ -569,4 +569,10 @@
         [self.tableview.footer endRefreshing];
     }
 }
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 @end
