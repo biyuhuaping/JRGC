@@ -211,7 +211,6 @@
             [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"changScale"];
             [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isVisible"];
             [[NSUserDefaults standardUserDefaults] synchronize];
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"setDefaultViewData" object:nil];
             //安全退出后去首页
             AppDelegate *delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
             [delegate.tabBarController setSelectedIndex:0];
@@ -224,6 +223,7 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:REGIST_JPUSH object:nil];
             //通知首页隐藏tipView
 //            [[NSNotificationCenter defaultCenter] postNotificationName:@"LatestProjectUpdate" object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"setDefaultViewData" object:nil];
             [[NSNotificationCenter defaultCenter] postNotificationName:CHECK_COUPON_CENTER object:nil];
         }
 
