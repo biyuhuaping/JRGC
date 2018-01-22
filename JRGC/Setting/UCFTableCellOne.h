@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface UCFTableCellOne : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *addedProfitTipLabel;
 @property (weak, nonatomic) IBOutlet UILabel *addedProfit;
 @property (weak, nonatomic) IBOutlet UILabel *availableBalance;
 @property (weak, nonatomic) IBOutlet UILabel *frozenMoney;

@@ -128,7 +128,8 @@
         investmentAmountLabel.attributedText = str;
         NSString *strRate = [NSString stringWithFormat:@"%@",model.annualRate];
         
-        NSMutableAttributedString *str2 = [SharedSingleton getAcolorfulStringWithText1:@"预期收益：" Color1:UIColorWithRGB(0x999999) Text2:[NSString stringWithFormat:@"¥%@", model.taotalIntrest] Color2:UIColorWithRGB(0xfd4d4c) AllText:[NSString stringWithFormat:@"预期收益：¥%@",model.taotalIntrest]];
+        NSString *textStr  = self.accoutType == SelectAccoutTypeP2P ? @"预期利息：" :@"预期收益：";
+        NSMutableAttributedString *str2 = [SharedSingleton getAcolorfulStringWithText1:textStr Color1:UIColorWithRGB(0x999999) Text2:[NSString stringWithFormat:@"¥%@", model.taotalIntrest] Color2:UIColorWithRGB(0xfd4d4c) AllText:[NSString stringWithFormat:@"%@¥%@",textStr,model.taotalIntrest]];
         annualEarningsLabel.attributedText = str2;
         
         NSMutableAttributedString *str3 = [SharedSingleton getAcolorfulStringWithText1:@"预期年化：" Color1:UIColorWithRGB(0x999999) Text2:[NSString stringWithFormat:@"%@%%", [UCFToolsMehod isNullOrNilWithString:strRate]] Color2:UIColorWithRGB(0x555555) AllText:[NSString stringWithFormat:@"预期年化：%@%%",[UCFToolsMehod isNullOrNilWithString:strRate]]];

@@ -141,7 +141,7 @@
     [blueHeadView addSubview:lineView1];
     
     jrgcProfitLab = [[UILabel alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(lineView1.frame) + [Common calculateNewSizeBaseMachine:20], CGRectGetWidth(blueHeadView.frame) - 30, [Common calculateNewSizeBaseMachine:12])];
-    jrgcProfitLab.text = @"预期收益(元)";
+    jrgcProfitLab.text =  self.accoutType == SelectAccoutTypeP2P ? @"预期利息(元)" :@"预期收益(元)";
     jrgcProfitLab.font = [UIFont systemFontOfSize:[Common calculateNewSizeBaseMachine:10.8]];
     jrgcProfitLab.textColor = [UIColor whiteColor];
     jrgcProfitLab.backgroundColor = [UIColor clearColor];
@@ -195,8 +195,9 @@
     calculatorBtn.frame  = CGRectMake([Common calculateNewSizeBaseMachine:15], CGRectGetHeight(baseView.frame) - [Common calculateNewSizeBaseMachine:33 + 15], CGRectGetWidth(baseView.frame) - [Common calculateNewSizeBaseMachine:30], [Common calculateNewSizeBaseMachine:33]);
     calculatorBtn.backgroundColor =  UIColorWithRGB(0xfd4d4c);
     calculatorBtn.layer.cornerRadius = 2.0f;
-    calculatorBtn.titleLabel.font = [UIFont systemFontOfSize:14.0f];
-    [calculatorBtn setTitle:@"计算预期收益" forState:UIControlStateNormal];
+   calculatorBtn.titleLabel.font = [UIFont systemFontOfSize:14.0f];
+    NSString *calculatorBtnStr  =  self.accoutType == SelectAccoutTypeP2P ?@"计算预期利息" :@"计算预期收益";
+    [calculatorBtn setTitle:calculatorBtnStr forState:UIControlStateNormal];
     [calculatorBtn addTarget:self action:@selector(calculateBegin:) forControlEvents:UIControlEventTouchUpInside];
     [baseView addSubview:calculatorBtn];
 }
