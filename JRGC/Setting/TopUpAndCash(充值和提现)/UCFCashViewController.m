@@ -71,6 +71,7 @@
 @property (strong, nonatomic) IBOutlet NZLabel *withdrawDescriptionLab;
 @property (strong, nonatomic) IBOutlet NZLabel *telServiceLabel;//联系客服
 @property (assign, nonatomic) float tableviewCellHeight;//联系客服
+@property (strong, nonatomic) NSString *telServiceNo;
 
 - (IBAction)getMobileCheckCode:(id)sender;
 - (IBAction)sumitBtnClick:(id)sender;
@@ -140,7 +141,7 @@
     UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openURL)];
     tap1.delegate = self;
     [_phoneLabel addGestureRecognizer:tap1];
-    [_phoneLabel setFontColor:UIColorWithRGB(0x4aa1f9) string:@"400-0322-988"];
+    [_phoneLabel setFontColor:UIColorWithRGB(0x4aa1f9) string:_telServiceNo];
     //[_warnSendLabel setHidden:YES];
     
     UITapGestureRecognizer *tapGes = [[UITapGestureRecognizer alloc] init];
@@ -184,7 +185,9 @@
 
 - (void)openURL{
     [self.view endEditing:YES];
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"telprompt://4000322988"]];
+    NSString *telUrl = [NSString stringWithFormat:@"telprompt://%@",_telServiceNo];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:telUrl]];
+   
 }
 
 - (void)fradeTextField
@@ -516,15 +519,16 @@
 //                          NSFontAttributeName:[UIFont systemFontOfSize:13],/*(字体)*/
 //                          NSParagraphStyleAttributeName:paragraph,/*(段落)*/
 //                          };
-    NSString *withdrawDescriptionStr = [NSString stringWithFormat: @"•单笔提现金额不能低于%@元，提现申请成功后不可撤回；\n•对首次充值后无投资的提现，第三方支付平台收取%@%%的手续费；\n•徽电子账户采用原卡进出设置，为了您的资金安全，只能提现至您绑定的银行卡；",[dataDic  objectForKey:@"minAmt"],_fee];
+    NSString *isThreePlatStr = self.accoutType == SelectAccoutTypeP2P ? @"平台方":@"第三方支付平台";
+    NSString *withdrawDescriptionStr = [NSString stringWithFormat: @"•单笔提现金额不能低于%@元，提现申请成功后不可撤回；\n•对首次充值后无投资的提现，%@收取%@%%的手续费；\n•徽电子账户采用原卡进出设置，为了您的资金安全，只能提现至您绑定的银行卡；",[dataDic  objectForKey:@"minAmt"],isThreePlatStr,_fee];
     _withdrawDescriptionLab.text = withdrawDescriptionStr;
-    
     __weak typeof(self) weakSelf = self;
-    self.telServiceLabel.text = @"•如遇问题请与客服联系400-0322-988。";
-    [self.telServiceLabel addLinkString:@"400-0322-988" block:^(ZBLinkLabelModel *linkModel) {
+    self.telServiceNo = [dataDic objectSafeForKey:@"customerServiceNo"];
+    self.telServiceLabel.text = [NSString stringWithFormat:@"•如遇问题请与客服联系%@。",self.telServiceNo];
+    [self.telServiceLabel addLinkString:self.telServiceNo block:^(ZBLinkLabelModel *linkModel) {
         [weakSelf openURL];
     }];
-    [self.telServiceLabel setFontColor:UIColorWithRGB(0x4aa1f9) string:@"400-0322-988"];
+    [self.telServiceLabel setFontColor:UIColorWithRGB(0x4aa1f9) string:self.telServiceNo];
 
    
 }
