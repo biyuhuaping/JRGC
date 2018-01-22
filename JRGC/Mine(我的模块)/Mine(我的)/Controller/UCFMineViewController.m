@@ -904,7 +904,7 @@
             UCFCashViewController *crachViewController  = [storyboard instantiateViewControllerWithIdentifier:@"cash"];
             [ToolSingleTon sharedManager].apptzticket = dataDict[@"apptzticket"];
             crachViewController.title = @"提现";
-            crachViewController.cashInfoDic =  [dataDict mutableCopy];
+            crachViewController.cashInfoDic =  [[NSMutableDictionary alloc] initWithDictionary:@{@"data":dataDict}];
             crachViewController.accoutType = self.accoutType;
             [self.navigationController pushViewController:crachViewController animated:YES];
         }
