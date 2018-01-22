@@ -72,7 +72,7 @@
 - (void)signWithToken:(NSString *)token
 {
     NSString *userId = [UserInfoSingle sharedManager].userId;
-    if (!userId) {
+    if (!userId || !token) {
         return;
     }
     [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":[[NSUserDefaults standardUserDefaults] objectForKey:UUID], @"apptzticket":token} tag:kSXTagSingMenthod owner:self signature:YES Type:SelectAccoutDefault];
