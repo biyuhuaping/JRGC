@@ -78,7 +78,7 @@
     }
     
     if (_accoutTpye == SelectAccoutTypeP2P) {
-        [_moneySwitchBtn setTitle:@"开尊享  赚收益" forState:UIControlStateNormal];
+        [_moneySwitchBtn setTitle:@"开尊享  赚利息" forState:UIControlStateNormal];
     }
     
     cashBalanceStr = [NSString stringWithFormat:@"%.2lf",[[self.dataDict objectSafeForKey:@"cashBalance"] doubleValue]];//可用金额

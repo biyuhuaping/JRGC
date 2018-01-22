@@ -221,6 +221,7 @@
             cell = [[[NSBundle mainBundle] loadNibNamed:@"UCFTableCellOne" owner:self options:nil] lastObject];
         }
         cell.accountInfo = self.accountDic;
+        cell.addedProfitTipLabel.text = self.accoutType ==  SelectAccoutTypeP2P ? @"累计余额利息(元)":@"累计余额收益(元)";
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
@@ -229,12 +230,11 @@
         cell.indexPath = indexPath;
         UCFHuiBuinessListModel *listmodel = [self.dataArray objectAtIndex:indexPath.row];
         cell.listModel = listmodel;
-        cell.isHasData = self.dataArray.count>0 ? YES : NO;
+        cell.isHasData = self.dataArray.count > 0 ? YES : NO;
         return cell;
     }
     else
         return nil;
-    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
