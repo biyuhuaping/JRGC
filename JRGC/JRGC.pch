@@ -223,7 +223,7 @@ return shared##className; \
 
 #define PROTOCOLENDERPROMISE  @"https://m.9888.cn/static/wap/protocol-lender-promise/index.html"//出借人承诺书
 
-#define PROTOCOLENTUSTTRANSFER  @"https://m.9888.cn/static/wap/protocol-entrust-transfer/index.html"//履行反洗钱义务的承诺书
+#define PROTOCOLENTUSTTRANSFER  @"https://m.9888.cn/static/wap/protocol-perform-duty/index.html"//履行反洗钱义务的承诺书
 #define HOMEINVITATIONURL @"https://m.9888.cn/static/wap/topic-invite/index.html" //首页邀请
 
 #define COUPON_CENTER @"https://m.9888.cn/static/wap/invest/index.html#/fa-xian/coupon" //领券中心
