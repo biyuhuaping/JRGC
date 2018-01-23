@@ -121,7 +121,7 @@
             cell.tableview = tableView;
         }
         cell.presenter = cellPresenter;
-//        cell.indexPath = indexPath;
+        cell.indexPath = indexPath;
         return cell;
     }
     else if (cellPresenter.modelType == UCFHomeListCellModelTypeGoldFixed) {
