@@ -188,6 +188,7 @@
             <connections>
                 <outlet property="accountVisibleBtn" destination="MFn-OY-8pr" id="aGx-eQ-QFi"/>
                 <outlet property="accumulatedIncomeLab" destination="AX0-Sj-nAX" id="nga-6P-Dh7"/>
+                <outlet property="allGetInterLab" destination="VdF-Rg-xsB" id="qs7-zR-SaM"/>
                 <outlet property="availableAmountLab" destination="SEf-MS-9Qq" id="ynN-6S-pVI"/>
                 <outlet property="downView" destination="jWm-fQ-WOq" id="VAT-gL-dGN"/>
                 <outlet property="lineView1" destination="KwD-dU-LUg" id="WAR-il-GqG"/>
@@ -197,7 +198,7 @@
                 <outlet property="totalIncomeTitleLab" destination="bYu-nd-nVA" id="3Qy-b9-7xT"/>
                 <outlet property="upView" destination="zU9-P5-x9d" id="MBH-Em-bt2"/>
             </connections>
-            <point key="canvasLocation" x="-1764" y="-556"/>
+            <point key="canvasLocation" x="-1688" y="-553"/>
         </view>
     </objects>
     <resources>
