@@ -720,7 +720,7 @@
     }
     else if (alertView.tag == 9000) {
         if (buttonIndex == 1) {
-            NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"4000322988"];
+            NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"4006766988"];
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
         }
     }
