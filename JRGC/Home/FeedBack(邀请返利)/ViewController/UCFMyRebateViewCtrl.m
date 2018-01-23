@@ -389,7 +389,7 @@
                 commission = [dic objectSafeForKey:@"commission"];
             }
         }
-        right.text = [NSString stringWithFormat:@"本月收益¥%@",commission];
+        right.text = [NSString stringWithFormat:@"本月%@¥%@",self.accoutType == SelectAccoutTypeP2P ? @"利息":@"收益", commission];
         
         
 
@@ -493,8 +493,15 @@
                 cell.title2.text = @"计划回款日";
                 cell.imag.hidden = YES;
             }
-            
-            
+        
+            if(self.accoutType == SelectAccoutTypeP2P)
+            {
+                cell.investMoney.text = @"出借金额";
+                cell.InvestorLab.text = @"出借人";
+            }else{
+                cell.investMoney.text = @"投资金额";
+                cell.InvestorLab.text = @"投资人";
+            }
             UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didSelectReply:)];
             [cell.imag addGestureRecognizer:tap];
             
@@ -579,7 +586,7 @@
             cell.lab3.text = _dataArr2[indexPath.section][indexPath.row][@"repayPerDate"] ;//计划回款日
             NSString *refundAmtStr = _dataArr2[indexPath.section][indexPath.row][@"refundAmt"];
             cell.lab4.text = [refundAmtStr hasPrefix:@"*"] ? refundAmtStr : [NSString stringWithFormat:@"¥%@",refundAmtStr];//回款金额
-        
+           cell.investorLab.text = self.accoutType == SelectAccoutTypeP2P ? @"出借人":@"投资人";
 
             return cell;
     }else if (tableView == _tableView3){//好友已回款列表
@@ -606,7 +613,7 @@
             cell.lab4.text = _dataArr3[indexPath.section][indexPath.row][@"paidTime"];//实际回款日
             NSString *refundAmtStr = _dataArr3[indexPath.section][indexPath.row][@"refundAmt"];//计划回款日
             cell.lab5.text = [refundAmtStr hasPrefix:@"*"] ? refundAmtStr : [NSString stringWithFormat:@"¥%@",refundAmtStr];//回款金额
-        
+            cell.investorLab.text = self.accoutType == SelectAccoutTypeP2P ? @"出借人":@"投资人";
 
         return cell;
     }else if (tableView == _tableView4){//分期回款列表
