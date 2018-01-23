@@ -172,11 +172,13 @@
         if (self.noDataViewOne) {
             [self.noDataViewOne hide];
         }
+        NSString *titleStr = self.accoutType == SelectAccoutTypeP2P ? @"总利息" : @"总收益";
+        
         NSMutableDictionary *dic = [data objectFromJSONString];
         int isSucess = [dic[@"status"] intValue];
         if (isSucess == 1) {
             NSDictionary *result = dic[@"data"];
-            NSDictionary *dict0 = @{@"name": @"总收益", @"opened": @(YES),
+            NSDictionary *dict0 = @{@"name": titleStr, @"opened": @(YES),
                                     @"content":result[@"interests"],
                                     @"fundlist":
         @[
