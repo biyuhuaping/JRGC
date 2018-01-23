@@ -328,7 +328,7 @@
     [self calculateTypeSelected:nil];
     switch (indexPath.row) {
         case 0: {
-            self.investTermLabel.text = @"投资期限(季)";
+            self.investTermLabel.text = @"期限(季)";
             if (self.calculateTypeSign != CalulateTypeEqualRepaymentBySeason) {
                 self.calculateTypeSign = CalulateTypeEqualRepaymentBySeason;
                 [self.calculateShowview resetData];
@@ -337,7 +337,7 @@
             break;
         
         case 1: {
-            self.investTermLabel.text = @"投资期限(月)";
+            self.investTermLabel.text = @"期限(月)";
             if (self.calculateTypeSign != CalulateTypeEqualRepaymentByMonth) {
                 self.calculateTypeSign = CalulateTypeEqualRepaymentByMonth;
                 [self.calculateShowview resetData];
@@ -347,7 +347,7 @@
             break;
             
         case 2: {
-            self.investTermLabel.text = @"投资期限(月)";
+            self.investTermLabel.text = @"期限(月)";
             if (self.calculateTypeSign != CalulateTypeOnceRepaymentAndInterest) {
                 self.calculateTypeSign = CalulateTypeOnceRepaymentAndInterest;
                 [self.calculateShowview resetData];
@@ -357,7 +357,7 @@
             break;
         
         case 3: {
-            self.investTermLabel.text = @"投资期限(月)";
+            self.investTermLabel.text = @"期限(月)";
             if (self.calculateTypeSign != CalulateTypeRepaymentOnlyCapital) {
                 self.calculateTypeSign = CalulateTypeRepaymentOnlyCapital;
                 [self.calculateShowview resetData];
@@ -372,7 +372,7 @@
                 [self.calculateShowview resetData];
             }
             self.calculateTypeSign = CalulateTypeOnceRepaymentByDay;
-            self.investTermLabel.text = @"投资期限(天)";
+            self.investTermLabel.text = @"期限(天)";
         }
             break;
     }

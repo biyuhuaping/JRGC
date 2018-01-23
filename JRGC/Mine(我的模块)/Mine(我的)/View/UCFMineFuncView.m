@@ -48,14 +48,18 @@
     
     UCFSettingItem *sign = [UCFSettingArrowItem itemWithIcon:@"uesr_icon_checkin" title:@"签到" destVcClass:nil];
     sign.subtitle = @"签到送工分";
-    UCFSettingItem *addProfitCalculator = [UCFSettingArrowItem itemWithIcon:@"uesr_icon_calculator" title:@"投资计算器" destVcClass:nil];
-    addProfitCalculator.subtitle = @"一键计算收益";
+    UCFSettingItem *addProfitCalculator = [UCFSettingArrowItem itemWithIcon:@"uesr_icon_calculator" title:@"计算器" destVcClass:nil];
+    addProfitCalculator.subtitle = @"一键计算利息";
     
     UCFSettingItem *assetProof = [UCFSettingArrowItem itemWithIcon:@"uesr_icon_assets" title:@"资产证明" destVcClass:nil];
     assetProof.subtitle = @"随时申请开具";
     UCFSettingItem *contactUs = [UCFSettingArrowItem itemWithIcon:@"uesr_icon_contact" title:@"联系我们" destVcClass:nil];
-    contactUs.subtitle = @"400-0322-988";
-    
+    if ([UserInfoSingle sharedManager].superviseSwitch) {
+        contactUs.subtitle = @"400-6766-988";
+    }
+    else {
+        contactUs.subtitle = @"400-0322-988";
+    }
     _dataArray = [[NSMutableArray alloc] initWithArray:@[facBean, coupon, facPoint, profitInvest, sign, addProfitCalculator, assetProof, contactUs]];
     
      

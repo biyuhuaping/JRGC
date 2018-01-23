@@ -739,6 +739,8 @@
         _sumCommLab.text = [NSString stringWithFormat:@"¥%@",sumComm];//我的返利
         if (self.accoutType == SelectAccoutTypeGold) {
             _friendCountLab.text = [NSString stringWithFormat:@"邀请购买人数:%@人",friendCount];//邀请投资人数
+        } else if (self.accoutType == SelectAccoutTypeP2P) {
+            _friendCountLab.text = [NSString stringWithFormat:@"邀请出借人数:%@人",friendCount];//邀请投资人数
         } else {
             _friendCountLab.text = [NSString stringWithFormat:@"邀请投资人数:%@人",friendCount];//邀请投资人数
         }
