@@ -61,7 +61,9 @@
 }
 - (void)clickRightBtn
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"1.返现券和返息券可在一笔投资中共用\n2.返现券可叠加使用\n3.返息券只能使用一张,不可叠加" delegate:self cancelButtonTitle:@"我知道了" otherButtonTitles: nil];
+    NSString *isP2PTipStr =  self.accoutType == SelectAccoutTypeP2P  ? @"出借":@"投资";
+    NSString *messageStr = [NSString stringWithFormat:@"1.返现券和返息券可在一笔%@中共用\n2.返现券可叠加使用\n3.返息券只能使用一张,不可叠加",isP2PTipStr];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:messageStr  delegate:self cancelButtonTitle:@"我知道了" otherButtonTitles: nil];
     [alert show];
 }
 - (void)viewDidLoad {
