@@ -266,7 +266,8 @@
 // 帮助按钮的点击方法
 - (void)rightClicked:(UIButton *)button
 {
-    FullWebViewController *webController = [[FullWebViewController alloc] initWithWebUrl:HSAccountIllustrationURL title:@"说明"];
+    NSString *urlStr = self.accoutType == SelectAccoutTypeP2P ? P2PHSAccountIllustrationURL:HSAccountIllustrationURL;
+    FullWebViewController *webController = [[FullWebViewController alloc] initWithWebUrl:urlStr title:@"说明"];
     webController.sourceVc = @"huishangAccout";
     webController.baseTitleType = @"specialUser";
     [self.navigationController pushViewController:webController animated:YES];
