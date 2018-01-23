@@ -141,6 +141,7 @@
     UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openURL)];
     tap1.delegate = self;
     [_phoneLabel addGestureRecognizer:tap1];
+    _phoneLabel.text = [NSString stringWithFormat:@"如果您绑定的银行卡暂不支持手机快捷支付请联系客服%@",_telServiceNo];
     [_phoneLabel setFontColor:UIColorWithRGB(0x4aa1f9) string:_telServiceNo];
     //[_warnSendLabel setHidden:YES];
     

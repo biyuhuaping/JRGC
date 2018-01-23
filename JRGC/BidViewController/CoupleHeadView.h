@@ -20,8 +20,11 @@
 @property(nonatomic, strong)UILabel     *keYongTipLabel;
 @property(nonatomic, strong)UILabel     *KeYongMoneyLabel;
 @property(nonatomic, strong)UILabel     *totalKeYongTipLabel;
+@property(nonatomic, strong)UILabel     *needInvestMoney;
 @property(nonatomic, strong)UIView      *inputBaseView;
 @property(nonatomic, strong)UITextField      *inputMoneyTextFieldLable;
 @property(nonatomic, strong)UIButton         *allTouziBtn;
 @property(nonatomic, assign)id<CoupleHeadViewDelegate> delegate;
+
+@property(assign,nonatomic) SelectAccoutType accoutType;//选择的账户 默认是P2P账户 hqy添加
 @end

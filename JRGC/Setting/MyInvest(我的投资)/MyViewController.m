@@ -55,6 +55,7 @@
     }
     else if (self.accoutType == SelectAccoutTypeHoner) {
         _segmentedCtrl = [[UISegmentedControl alloc]initWithItems:@[@"我的项目", titleStr]];
+        self.titleDescribeLabel.text = @"累计收益";
     }
 //    _segmentedCtrl = [[UISegmentedControl alloc]initWithItems:@[@"我的项目",@"批量项目",titleStr]];
     DBLOG(@"%@",NSStringFromCGRect(self.view.frame));
