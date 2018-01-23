@@ -25,14 +25,14 @@
     headBaseView.backgroundColor = UIColorWithRGB(0x5b6993);
     [self addSubview:headBaseView];
     
-    UILabel *needInvestMoney = [[UILabel alloc] init];
-    needInvestMoney.frame = CGRectMake(0, 15, ScreenWidth/2, 14.0f);
-    needInvestMoney.textAlignment = NSTextAlignmentCenter;
-    needInvestMoney.textColor = [UIColor whiteColor];
-    needInvestMoney.font = [UIFont systemFontOfSize:14.0f];
-    needInvestMoney.text = @"需投资金额";
-    needInvestMoney.backgroundColor = [UIColor clearColor];
-    [headBaseView addSubview:needInvestMoney];
+    _needInvestMoney = [[UILabel alloc] init];
+    _needInvestMoney.frame = CGRectMake(0, 15, ScreenWidth/2, 14.0f);
+    _needInvestMoney.textAlignment = NSTextAlignmentCenter;
+    _needInvestMoney.textColor = [UIColor whiteColor];
+    _needInvestMoney.font = [UIFont systemFontOfSize:14.0f];
+    _needInvestMoney.text = _accoutType == SelectAccoutTypeP2P ?@"需出借金额": @"需投资金额";
+    _needInvestMoney.backgroundColor = [UIColor clearColor];
+    [headBaseView addSubview:_needInvestMoney];
     
     UILabel *canInvestMoney = [[UILabel alloc] init];
     canInvestMoney.frame = CGRectMake(ScreenWidth/2, 15, ScreenWidth/2, 14.0f);
@@ -117,6 +117,12 @@
     _allTouziBtn.titleLabel.font = [UIFont boldSystemFontOfSize:15.0f];
     [self addSubview:_allTouziBtn];
 }
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    _needInvestMoney.text = _accoutType == SelectAccoutTypeP2P ? @"需出借金额": @"需投资金额";
+}
+
 - (void)gotoPay:(UIButton *)button
 {
     if (self.delegate && [self.delegate respondsToSelector:@selector(allInvestOrGotoPay:)]) {
