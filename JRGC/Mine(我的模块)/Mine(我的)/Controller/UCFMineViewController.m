@@ -795,9 +795,9 @@
     }
     else  if ([title isEqualToString:@"联系我们"]){//邀请返利
         NSString *teleNo = @"呼叫400-6766-988";
-        if (![UserInfoSingle sharedManager].superviseSwitch) {
-            teleNo = @"呼叫400-0322-988";
-        }
+//        if (![UserInfoSingle sharedManager].superviseSwitch) {
+//            teleNo = @"呼叫400-0322-988";
+//        }
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"联系客服" message:teleNo delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"立即拨打", nil];
         alert.tag = 9000;
         [alert show];
