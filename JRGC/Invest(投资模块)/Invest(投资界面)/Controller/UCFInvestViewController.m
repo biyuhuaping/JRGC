@@ -339,16 +339,31 @@
     }
     else if ([self.selectedType isEqualToString:@"ZX"]) {
         self.currentViewController = self.honorInvest;
-        [_pagerView setSelectIndex:[self.childViewControllers indexOfObject:self.currentViewController]];
+        if ([self.childViewControllers containsObject:self.honorInvest]) {
+            [_pagerView setSelectIndex:[self.childViewControllers indexOfObject:self.currentViewController]];
+        }
+        else {
+            [_pagerView setSelectIndex:0];
+        }
         
     }
     else if ([self.selectedType isEqualToString:@"Trans"]) {
         self.currentViewController = self.investTransfer;
-        [_pagerView setSelectIndex:[self.childViewControllers indexOfObject:self.currentViewController]];
+        if ([self.childViewControllers containsObject:self.investTransfer]) {
+            [_pagerView setSelectIndex:[self.childViewControllers indexOfObject:self.currentViewController]];
+        }
+        else {
+            [_pagerView setSelectIndex:0];
+        }
     }
     else if ([self.selectedType isEqualToString:@"Gold"]) {
         self.currentViewController = self.golden;
-        [_pagerView setSelectIndex:[self.childViewControllers indexOfObject:self.currentViewController]];
+        if ([self.childViewControllers containsObject:self.golden]) {
+            [_pagerView setSelectIndex:[self.childViewControllers indexOfObject:self.currentViewController]];
+        }
+        else {
+            [_pagerView setSelectIndex:0];
+        }
     }
     else {
         self.currentViewController = self.microMoney;
@@ -363,15 +378,30 @@
     }
     else if ([self.selectedType isEqualToString:@"ZX"]) {
         self.currentViewController = self.honorInvest;
-        [_pagerView setSelectIndex:[self.childViewControllers indexOfObject:self.currentViewController]];
+        if ([self.childViewControllers containsObject:self.honorInvest]) {
+            [_pagerView setSelectIndex:[self.childViewControllers indexOfObject:self.currentViewController]];
+        }
+        else {
+            [_pagerView setSelectIndex:0];
+        }
     }
     else if ([self.selectedType isEqualToString:@"Trans"]) {
         self.currentViewController = self.investTransfer;
-        [_pagerView setSelectIndex:[self.childViewControllers indexOfObject:self.currentViewController]];
+        if ([self.childViewControllers containsObject:self.investTransfer]) {
+            [_pagerView setSelectIndex:[self.childViewControllers indexOfObject:self.currentViewController]];
+        }
+        else {
+            [_pagerView setSelectIndex:0];
+        }
     }
     else if ([self.selectedType isEqualToString:@"Gold"]) {
         self.currentViewController = self.golden;
-        [_pagerView setSelectIndex:[self.childViewControllers indexOfObject:self.currentViewController]];
+        if ([self.childViewControllers containsObject:self.golden]) {
+            [_pagerView setSelectIndex:[self.childViewControllers indexOfObject:self.currentViewController]];
+        }
+        else {
+            [_pagerView setSelectIndex:0];
+        }
     }
 }
 
