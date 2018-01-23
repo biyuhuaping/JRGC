@@ -126,6 +126,7 @@
     self.navigationItem.titleView = _segmentedCtrl;
     
     headView = [[CoupleHeadView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 162.0f)];
+    headView.accoutType = self.accoutType; 
     headView.backgroundColor = [UIColor whiteColor];
     headView.delegate = self;
     headView.inputMoneyTextFieldLable.delegate = self;
@@ -189,7 +190,12 @@
 - (void)changeFootViewShow
 {
     if (self.listType == 1) {
+        
         NSString *showStr = @"投资按月/季等额还款项目，最终返息获得工豆需要乘以0.56。0.56为借款方占用投资方自己的使用率";
+        if (self.accoutType == SelectAccoutTypeP2P)
+        {
+            showStr = @"出借按月/季等额还款项目，最终返息获得工豆需要乘以0.56。0.56为借款方占用出借方自己的使用率";
+        }
         CGSize size = [Common getStrHeightWithStr:showStr AndStrFont:13 AndWidth:ScreenWidth - 30];
         slectView.keYongBaseView.frame = CGRectMake(0, 0, ScreenWidth, 40 + size.height);
         self.beansTableView.frame = CGRectMake(ScreenWidth, 0, ScreenWidth, ScreenHeight - 64 - 162 - CGRectGetHeight(slectView.frame));
@@ -201,7 +207,7 @@
 
         slectView.showNumSelectLabe.textAlignment = NSTextAlignmentLeft;
         slectView.showNumSelectLabe.frame = CGRectMake(15, 10, ScreenWidth - 30, 15);
-        slectView.showNumSelectLabe.text = @"投资¥0.00，可返息工豆¥0.00";
+        slectView.showNumSelectLabe.text =  self.accoutType == SelectAccoutTypeP2P ? @"出借¥0.00，可返息工豆¥0.00": @"投资¥0.00，可返息工豆¥0.00";
         slectView.showNumTipLab.frame = CGRectMake(15, CGRectGetMaxY(slectView.showNumSelectLabe.frame) + 5 , ScreenWidth - 30, size.height);
         slectView.showNumTipLab.text = showStr;
         slectView.sureBtn.frame = CGRectMake(15, CGRectGetMaxY(slectView.keYongBaseView.frame) + 10, ScreenWidth - 30, 37);
@@ -327,6 +333,7 @@
 }
 - (BOOL)checkIsLegal
 {
+    NSString *isP2PTipStr =  self.accoutType == SelectAccoutTypeP2P  ? @"出借":@"投资";
     if (self.listType == 1) {
         //投资金额
         NSString *couStr = [NSString stringWithFormat:@"%.2f",self.interestPrdaimSum];
@@ -338,9 +345,9 @@
             headView.needsInvestLabel.textColor = [UIColor whiteColor];
             slectView.showNumSelectLabe.textColor = UIColorWithRGB(0x999999);
             NSString *returnMoney = (self.beansSelectArray.count == 0 ? @"0.00" : [NSString stringWithFormat:@"%.2lf",self.interestSum]);
-            NSString *totalStr = [NSString stringWithFormat:@"投资 ¥%@,可返息工豆 ¥%@",[UCFToolsMehod AddComma:[NSString stringWithFormat:@"%.2lf",self.touZiMoney]],[UCFToolsMehod AddComma:returnMoney]];
+            NSString *totalStr = [NSString stringWithFormat:@"%@ ¥%@,可返息工豆 ¥%@",isP2PTipStr,[UCFToolsMehod AddComma:[NSString stringWithFormat:@"%.2lf",self.touZiMoney]],[UCFToolsMehod AddComma:returnMoney]];
             slectView.showNumSelectLabe.text = totalStr;
-            NSRange range1 = [totalStr rangeOfString:[NSString stringWithFormat:@"投资 ¥%@",[UCFToolsMehod AddComma:[NSString stringWithFormat:@"%.2lf",self.touZiMoney]]]];
+            NSRange range1 = [totalStr rangeOfString:[NSString stringWithFormat:@"%@ ¥%@",isP2PTipStr,[UCFToolsMehod AddComma:[NSString stringWithFormat:@"%.2lf",self.touZiMoney]]]];
             range1.location +=3;
             range1.length -= 3;
             NSRange range2 = [totalStr rangeOfString:[NSString stringWithFormat:@"工豆 ¥%@",[UCFToolsMehod AddComma:returnMoney]]];
@@ -356,7 +363,7 @@
         } else {
             headView.needsInvestLabel.textColor = UIColorWithRGB(0xf03b43);
             slectView.showNumSelectLabe.textColor = UIColorWithRGB(0xf03b43);
-            slectView.showNumSelectLabe.text = [NSString stringWithFormat:@"需投资金额不能大于可投金额!"];
+            slectView.showNumSelectLabe.text = [NSString stringWithFormat:@"需%@金额不能大于可投金额!",isP2PTipStr];
             return YES;
         }
     } else {
@@ -396,7 +403,7 @@
         } else {
             headView.needsInvestLabel.textColor = UIColorWithRGB(0xf03b43);
             slectView.showNumSelectLabe.textColor = UIColorWithRGB(0xf03b43);
-            slectView.showNumSelectLabe.text = [NSString stringWithFormat:@"需投资金额不能大于可投金额!"];
+            slectView.showNumSelectLabe.text = [NSString stringWithFormat:@"需%@金额不能大于可投金额!",isP2PTipStr];
             return YES;
         }
     }
@@ -513,6 +520,7 @@
             cell = [[SelectCoupleCell  alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellStr1];
             cell.selectionStyle = UITableViewCellSelectionStyleBlue;
         }
+        cell.accoutType = self.accoutType;
         cell.listType = 1;
         cell.selectedBtn.tag = indexPath.row;
         NSDictionary *dict = [self.beansArray objectAtIndex:indexPath.row];
@@ -534,6 +542,7 @@
             cell = [[SelectCoupleCell  alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellStr2];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
+        cell.accoutType = self.accoutType;
         cell.listType = 0;
         cell.selectedBtn.tag = indexPath.row;
         NSDictionary *dict = [self.youHuiArray objectAtIndex:indexPath.row];
@@ -585,9 +594,13 @@
         [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXtagSelectBeansInterest owner:self Type:self.accoutType];
     }
 }
+-(void)beginPost:(kSXTag)tag
+{
+     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+}
 - (void)endPost:(id)result tag:(NSNumber *)tag
 {
-//    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     if(tag.intValue == kSXtagSelectBeanRecord)
     {
         [self.youhuiTableView.header endRefreshing];

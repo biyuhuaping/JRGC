@@ -113,6 +113,7 @@
 }
 - (void)layoutSubviews
 {
+    NSString  *titleStr =  self.accoutType == SelectAccoutTypeP2P ? @"出借":@"投资";
     NSInteger statue = [[self.dataDict objectForKey:@"status"]integerValue];
     if (statue == 0 || statue == 2)
     {
@@ -140,7 +141,8 @@
                 } else {
                     _baseImageView.image = [UIImage imageNamed:@"invest_bg_coupon_common.png"];
                 }
-                _investLimitLab.text = [NSString stringWithFormat:@"投资期限≥%ld天可用",(long)inverstPeriod];
+               
+                _investLimitLab.text = [NSString stringWithFormat:@"%@期限≥%ld天可用",titleStr,(long)inverstPeriod];
                 _investLimitLab.textColor = UIColorWithRGB(0x999999);
             }
 
@@ -176,7 +178,7 @@
             _moneyLabel.attributedText = attributeMoneyString;
         }
         NSString *limte = [UCFToolsMehod AddComma:[NSString stringWithFormat:@"%d",[[self.dataDict objectForKey:@"investMultip"] intValue]]];
-        _useLimtLabel.text = [NSString stringWithFormat:@"投资¥%@可用",limte];
+        _useLimtLabel.text = [NSString stringWithFormat:@"%@¥%@可用",titleStr,limte];
         NSString *sourStr =[NSString stringWithFormat:@"%@",[self.dataDict objectForKey:@"remark"]];
         _sourceLabel.text = sourStr;
         NSString *endTime = [NSString stringWithFormat:@"有效期 %@",[self.dataDict objectForKey:@"overdueTime"]];

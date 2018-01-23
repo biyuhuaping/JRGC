@@ -703,6 +703,9 @@
 		8346B2701F71032100219D41 /* UCFRechargeAndCashView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8346B26F1F71032100219D41 /* UCFRechargeAndCashView.m */; };
 		8346B2721F71033000219D41 /* UCFRechargeAndCashView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8346B2711F71033000219D41 /* UCFRechargeAndCashView.xib */; };
 		8346B2751F71246800219D41 /* UCFAccoutCardModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8346B2741F71246800219D41 /* UCFAccoutCardModel.m */; };
+		8346B4F82017145C00544D78 /* guideImage8_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8346B4F52017145B00544D78 /* guideImage8_2.png */; };
+		8346B4F92017145C00544D78 /* guideImage6_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8346B4F62017145C00544D78 /* guideImage6_2.png */; };
+		8346B4FA2017145C00544D78 /* guideImage7_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8346B4F72017145C00544D78 /* guideImage7_2.png */; };
 		8347A6CB1FAFFFB500E68DFD /* UCFExtractViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8347A6C91FAFFFB500E68DFD /* UCFExtractViewCell.xib */; };
 		835B88851E8220CC00C8F0AB /* UCFP2POrHonerAccoutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 835B88831E8220CC00C8F0AB /* UCFP2POrHonerAccoutViewController.m */; };
 		835B88861E8220CC00C8F0AB /* UCFP2POrHonerAccoutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 835B88841E8220CC00C8F0AB /* UCFP2POrHonerAccoutViewController.xib */; };
@@ -892,7 +895,6 @@
 		A884904A1FA72353004B6E71 /* guideImage8_1.png in Resources */ = {isa = PBXBuildFile; fileRef = A88490461FA72352004B6E71 /* guideImage8_1.png */; };
 		A884904D1FA72442004B6E71 /* login_bg_iphoneX.png in Resources */ = {isa = PBXBuildFile; fileRef = A884904C1FA72442004B6E71 /* login_bg_iphoneX.png */; };
 		A88490501FA72586004B6E71 /* guideImage8_3.png in Resources */ = {isa = PBXBuildFile; fileRef = A884904E1FA72585004B6E71 /* guideImage8_3.png */; };
-		A88490511FA72586004B6E71 /* guideImage8_2.png in Resources */ = {isa = PBXBuildFile; fileRef = A884904F1FA72586004B6E71 /* guideImage8_2.png */; };
 		A8898DC41FBD32500064494B /* ServiceChargeView1.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8898DC31FBD32500064494B /* ServiceChargeView1.xib */; };
 		A8A3A57F1EE95BDA00D9C06D /* UCFInvestAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A8A3A57E1EE95BDA00D9C06D /* UCFInvestAPIManager.m */; };
 		A8AD2E3E1EB979760013DB7C /* MongoliaLayerCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = A8AD2E3D1EB979760013DB7C /* MongoliaLayerCenter.m */; };
@@ -1007,10 +1009,8 @@
 		FB5149491D64403100C26E7B /* touch_id@2x.gif in Resources */ = {isa = PBXBuildFile; fileRef = FB5149321D64403100C26E7B /* touch_id@2x.gif */; };
 		FB51494A1D64403100C26E7B /* touch_id@3x.gif in Resources */ = {isa = PBXBuildFile; fileRef = FB5149331D64403100C26E7B /* touch_id@3x.gif */; };
 		FB5149521D64441F00C26E7B /* guideImage6_1.png in Resources */ = {isa = PBXBuildFile; fileRef = FB51494C1D64441F00C26E7B /* guideImage6_1.png */; };
-		FB5149531D64441F00C26E7B /* guideImage6_2.png in Resources */ = {isa = PBXBuildFile; fileRef = FB51494D1D64441F00C26E7B /* guideImage6_2.png */; };
 		FB5149541D64441F00C26E7B /* guideImage6_3.png in Resources */ = {isa = PBXBuildFile; fileRef = FB51494E1D64441F00C26E7B /* guideImage6_3.png */; };
 		FB5149551D64441F00C26E7B /* guideImage7_1.png in Resources */ = {isa = PBXBuildFile; fileRef = FB51494F1D64441F00C26E7B /* guideImage7_1.png */; };
-		FB5149561D64441F00C26E7B /* guideImage7_2.png in Resources */ = {isa = PBXBuildFile; fileRef = FB5149501D64441F00C26E7B /* guideImage7_2.png */; };
 		FB5149571D64441F00C26E7B /* guideImage7_3.png in Resources */ = {isa = PBXBuildFile; fileRef = FB5149511D64441F00C26E7B /* guideImage7_3.png */; };
 		FB5555331BCE37570013894F /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FB5555301BCE37570013894F /* libMobClickLibrary.a */; };
 		FB572C0C1C7C3000000031F1 /* UCFCouponInterest.m in Sources */ = {isa = PBXBuildFile; fileRef = FB572C0A1C7C3000000031F1 /* UCFCouponInterest.m */; };
@@ -2271,6 +2271,9 @@
 		8346B2711F71033000219D41 /* UCFRechargeAndCashView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFRechargeAndCashView.xib; sourceTree = "<group>"; };
 		8346B2731F71246800219D41 /* UCFAccoutCardModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFAccoutCardModel.h; sourceTree = "<group>"; };
 		8346B2741F71246800219D41 /* UCFAccoutCardModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFAccoutCardModel.m; sourceTree = "<group>"; };
+		8346B4F52017145B00544D78 /* guideImage8_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guideImage8_2.png; sourceTree = "<group>"; };
+		8346B4F62017145C00544D78 /* guideImage6_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guideImage6_2.png; sourceTree = "<group>"; };
+		8346B4F72017145C00544D78 /* guideImage7_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guideImage7_2.png; sourceTree = "<group>"; };
 		8347A6C71FAFFFB500E68DFD /* UCFExtractViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFExtractViewCell.h; sourceTree = "<group>"; };
 		8347A6C81FAFFFB500E68DFD /* UCFExtractViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFExtractViewCell.m; sourceTree = "<group>"; };
 		8347A6C91FAFFFB500E68DFD /* UCFExtractViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFExtractViewCell.xib; sourceTree = "<group>"; };
@@ -2588,7 +2591,6 @@
 		A88490461FA72352004B6E71 /* guideImage8_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guideImage8_1.png; sourceTree = "<group>"; };
 		A884904C1FA72442004B6E71 /* login_bg_iphoneX.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = login_bg_iphoneX.png; path = Images/login_bg_iphoneX.png; sourceTree = "<group>"; };
 		A884904E1FA72585004B6E71 /* guideImage8_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guideImage8_3.png; sourceTree = "<group>"; };
-		A884904F1FA72586004B6E71 /* guideImage8_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guideImage8_2.png; sourceTree = "<group>"; };
 		A8898DC31FBD32500064494B /* ServiceChargeView1.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ServiceChargeView1.xib; sourceTree = "<group>"; };
 		A8A3A57D1EE95BDA00D9C06D /* UCFInvestAPIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFInvestAPIManager.h; sourceTree = "<group>"; };
 		A8A3A57E1EE95BDA00D9C06D /* UCFInvestAPIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFInvestAPIManager.m; sourceTree = "<group>"; };
@@ -2777,10 +2779,8 @@
 		FB5149321D64403100C26E7B /* touch_id@2x.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "touch_id@2x.gif"; path = "Images/touch_id@2x.gif"; sourceTree = "<group>"; };
 		FB5149331D64403100C26E7B /* touch_id@3x.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "touch_id@3x.gif"; path = "Images/touch_id@3x.gif"; sourceTree = "<group>"; };
 		FB51494C1D64441F00C26E7B /* guideImage6_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guideImage6_1.png; sourceTree = "<group>"; };
-		FB51494D1D64441F00C26E7B /* guideImage6_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guideImage6_2.png; sourceTree = "<group>"; };
 		FB51494E1D64441F00C26E7B /* guideImage6_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guideImage6_3.png; sourceTree = "<group>"; };
 		FB51494F1D64441F00C26E7B /* guideImage7_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guideImage7_1.png; sourceTree = "<group>"; };
-		FB5149501D64441F00C26E7B /* guideImage7_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guideImage7_2.png; sourceTree = "<group>"; };
 		FB5149511D64441F00C26E7B /* guideImage7_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guideImage7_3.png; sourceTree = "<group>"; };
 		FB5555301BCE37570013894F /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
 		FB5555311BCE37570013894F /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
@@ -6820,13 +6820,13 @@
 			isa = PBXGroup;
 			children = (
 				A88490461FA72352004B6E71 /* guideImage8_1.png */,
-				A884904F1FA72586004B6E71 /* guideImage8_2.png */,
+				8346B4F52017145B00544D78 /* guideImage8_2.png */,
 				A884904E1FA72585004B6E71 /* guideImage8_3.png */,
 				FB51494C1D64441F00C26E7B /* guideImage6_1.png */,
-				FB51494D1D64441F00C26E7B /* guideImage6_2.png */,
+				8346B4F62017145C00544D78 /* guideImage6_2.png */,
 				FB51494E1D64441F00C26E7B /* guideImage6_3.png */,
 				FB51494F1D64441F00C26E7B /* guideImage7_1.png */,
-				FB5149501D64441F00C26E7B /* guideImage7_2.png */,
+				8346B4F72017145C00544D78 /* guideImage7_2.png */,
 				FB5149511D64441F00C26E7B /* guideImage7_3.png */,
 			);
 			name = guiviewImage;
@@ -7173,6 +7173,7 @@
 				A85C74E61F90EE3500DF7D6A /* home_icon_zhaizhuan.png in Resources */,
 				A85C74E51F90EE2C00DF7D6A /* home_icon_yuyue.png in Resources */,
 				A85C74E41F90EE2200DF7D6A /* home_icon_weijin.png in Resources */,
+				8346B4F82017145C00544D78 /* guideImage8_2.png in Resources */,
 				A85C74D91F90ED9F00DF7D6A /* home_icon_gold.png in Resources */,
 				A830DE821F8DD9F7003855B9 /* UCFCalendarModularViewController.xib in Resources */,
 				A8386E3F1F8CCDF200E26002 /* login_bg_phone4_default.png in Resources */,
@@ -7340,7 +7341,6 @@
 				74877CCE1FB2ABCF00F32428 /* UCFDeliveryingViewController.xib in Resources */,
 				FBC375871ADB9C6D009615EC /* HomeStoryboard.storyboard in Resources */,
 				744EB7F41EE7E836003C57C4 /* UCFHonorInvestViewController.xib in Resources */,
-				FB5149531D64441F00C26E7B /* guideImage6_2.png in Resources */,
 				A8E02DAE1F0DDC5000FC2260 /* GoldAccountFirstCell.xib in Resources */,
 				4A42BB2F1C27A7D20084AB08 /* NewCalculator.xib in Resources */,
 				E311A6641D90E7FC00C5483E /* UCFWebViewJavascriptBridgeMall.xib in Resources */,
@@ -7358,6 +7358,7 @@
 				74BDA9941F09F6C60054403F /* Info.plist in Resources */,
 				7477BF911AFAFED900914BFB /* UCFRedEnvelopeTableViewCell.xib in Resources */,
 				83DAEFC31F166A3B00D7948F /* UCFGoldAuthorizationViewController.xib in Resources */,
+				8346B4F92017145C00544D78 /* guideImage6_2.png in Resources */,
 				8366BFBA1E151745008D027F /* UCFCashRecordCell.xib in Resources */,
 				833CC9F01FD6A7B2006BF624 /* UCFProjectBasicDetailViewController.xib in Resources */,
 				FB21731A1AF20DFC00649AA0 /* UCFBackMoneyCell.xib in Resources */,
@@ -7403,6 +7404,7 @@
 				74A2C0D71F4306A000EDF0FA /* UCFGoldCashSecondCell.xib in Resources */,
 				74270C9E1EC58F6800F9419B /* UCFHomeListCell.xib in Resources */,
 				74673BC21FEB8C2200AF3727 /* UCFMineFuncView.xib in Resources */,
+				8346B4FA2017145C00544D78 /* guideImage7_2.png in Resources */,
 				74FA211A1F4C0BA100037991 /* UCFGoldIncreTransListCell.xib in Resources */,
 				747BE9D31D5B0F48007DEF32 /* UCFHuiBuinessDetailViewController.xib in Resources */,
 				74270D311EC595FA00F9419B /* UCFDataStatisticsViewController.xib in Resources */,
@@ -7430,7 +7432,6 @@
 				25BAE2B21D804E6B001B6E01 /* JRGCViewForCWRresult.xib in Resources */,
 				A88490501FA72586004B6E71 /* guideImage8_3.png in Resources */,
 				4AA2AA811E5B17B7006E83F8 /* UCFBatchSetNumWebViewController.xib in Resources */,
-				FB5149561D64441F00C26E7B /* guideImage7_2.png in Resources */,
 				746BBEAC1AF8E93E00EBA0E7 /* UCFCouponUseCell.xib in Resources */,
 				74677C671F165022003768EB /* UCFGoldRechargeViewController.xib in Resources */,
 				74FC22881BA6AE2100D1660A /* UCFFacCodeViewController.xib in Resources */,
@@ -7473,7 +7474,6 @@
 				2510E3E91D6F1560006BB5F8 /* alertViewCS.xib in Resources */,
 				83AB496A1F6A772400C4231F /* UCFTotalRevenuePieChartViewController.xib in Resources */,
 				74FBC1BE1B84721400B8DD7E /* UCFBindCardTwoTableViewCell.xib in Resources */,
-				A88490511FA72586004B6E71 /* guideImage8_2.png in Resources */,
 				74B98C9B1F70FF5F00CB6A9F /* UCFMineCell.xib in Resources */,
 				746748E11F3C595A0067294D /* UCFGoldBankLimitCell.xib in Resources */,
 				FBAEDA021C191AFE000C0AA1 /* PushConfig.plist in Resources */,

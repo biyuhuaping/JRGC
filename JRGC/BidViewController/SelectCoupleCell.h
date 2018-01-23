@@ -26,4 +26,6 @@
 @property(strong, nonatomic)NSDictionary    *dataDict;
 @property (nonatomic, assign)id <SelectCoupleCellDelegate> delegate;
 @property (nonatomic, assign) NSInteger   listType;
+
+@property(assign,nonatomic) SelectAccoutType accoutType;//选择的账户 默认是P2P账户 hqy添加
 @end

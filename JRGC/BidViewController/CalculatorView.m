@@ -201,6 +201,14 @@
     [calculatorBtn addTarget:self action:@selector(calculateBegin:) forControlEvents:UIControlEventTouchUpInside];
     [baseView addSubview:calculatorBtn];
 }
+-(void)layoutSubviews
+{
+    [super layoutSubviews];
+     jrgcProfitLab.text =  _accoutType == SelectAccoutTypeP2P ? @"预期利息(元)" :@"预期收益(元)";
+    calculatorBtn.titleLabel.font = [UIFont systemFontOfSize:14.0f];
+    NSString *calculatorBtnStr  =  _accoutType == SelectAccoutTypeP2P ?@"计算预期利息" :@"计算预期收益";
+    [calculatorBtn setTitle:calculatorBtnStr forState:UIControlStateNormal];
+}
 /**
  *  计算收益按钮触发事件
  *
