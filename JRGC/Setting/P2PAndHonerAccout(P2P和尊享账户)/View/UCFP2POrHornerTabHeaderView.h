@@ -23,6 +23,7 @@
 @property (strong, nonatomic) IBOutlet UIView *upView;//上面的view
 @property (strong, nonatomic) IBOutlet UIView *downView;//下面的view
 @property (strong, nonatomic) IBOutlet UIButton *moneySwitchBtn;//下面的view
+@property (weak, nonatomic) IBOutlet UILabel *allGetInterLab;
 
 
 @property (assign,nonatomic) SelectAccoutType accoutTpye;
