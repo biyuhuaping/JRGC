@@ -794,7 +794,11 @@
         [self.apiManager signWithToken:self.benefitModel.userCenterTicket];
     }
     else  if ([title isEqualToString:@"联系我们"]){//邀请返利
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"联系客服" message:@"呼叫400-0322-988" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"立即拨打", nil];
+        NSString *teleNo = @"呼叫400-6766-988";
+        if (![UserInfoSingle sharedManager].superviseSwitch) {
+            teleNo = @"呼叫400-0322-988";
+        }
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"联系客服" message:teleNo delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"立即拨打", nil];
         alert.tag = 9000;
         [alert show];
     }
@@ -810,7 +814,7 @@
         assetProofVC.totalAssetStr = self.assetModel.total;
             [self.navigationController pushViewController:assetProofVC animated:YES];
     }
-    else  if ([title isEqualToString:@"投资计算器"]){//投资计算器
+    else  if ([title isEqualToString:@"计算器"]){//投资计算器
         KTAlertController *alert = [KTAlertController alertControllerWithTitle:@"这是一个alert" description:@"又如何？" cancel:@"取消" button:@"好的" action:^{
 //            NSLog(@"tap button");
         }];
