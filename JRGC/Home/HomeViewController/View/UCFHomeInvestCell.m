@@ -96,8 +96,8 @@
     NSInteger totalRows = [self.tableview numberOfRowsInSection:indexPath.section];
     
     if (totalRows == 1) { // 这组只有1行
-        self.downSegLine.hidden = YES;
-        self.upSegLine.hidden = NO;
+        self.downSegLine.hidden = NO;
+        self.upSegLine.hidden = YES;
         self.upSegLine.backgroundColor = UIColorWithRGB(0xe3e5ea);
         self.downSegLine.backgroundColor = UIColorWithRGB(0xd8d8d8);
         self.upLineLeftSpace.constant = 0;
