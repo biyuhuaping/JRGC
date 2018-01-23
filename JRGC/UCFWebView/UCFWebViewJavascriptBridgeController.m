@@ -256,10 +256,14 @@
     _bridge = [WebViewJavascriptBridge bridgeForWebView:self.webView];
     [_bridge setWebViewDelegate:self];
     __weak typeof(self) weakSelf = self;
+    
+    
+#warning test
+    
     [_bridge registerHandler:@"nativeCallback" handler:^(id data, WVJBResponseCallback responseCallback) {
         
         DBLOG(@"testObjcCallback called: %@", data);
-        _isHideNativeNav = NO;
+        weakSelf.isHideNativeNav = NO;
         NSDictionary *nativeData = data;
         if (nil == nativeData || [nativeData isKindOfClass:[NSNull class]] || nativeData.count == 0 || !nativeData[@"action"])
         {
@@ -277,6 +281,7 @@
             //带跳转链接直接跳转
             [weakSelf jsLogin:nativeData];
         }
+        
         else if ([nativeData[@"action"] isEqualToString:@"goto"])
         {
             //跳转到指定页面页面
@@ -439,14 +444,15 @@
              [weakSelf goToShareImage:nativeData];
         }
         
-        
         //----------------------------------------------------------------------------------------------------qyy
         
        /* else if ([nativeData[@"action"] isEqualToString:@"app_invest_error"]) //投标成功 跳转到 投资详情
         {
             [weakSelf jsToNativeHomeWithDic:nativeData];//跳入订单详情页面qyy
         }*/
+      
     }];
+    
 }
 - (void)getContractContent:(NSString *)value
 {
