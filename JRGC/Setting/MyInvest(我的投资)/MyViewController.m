@@ -26,6 +26,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *interestsLab;//累计收益
 @property (strong, nonatomic) IBOutlet UILabel *noPrincipalLab;//待收本金
 @property (strong, nonatomic) IBOutlet NZLabel *noInterestsLab;//待收利息
+@property (weak, nonatomic) IBOutlet UILabel *titleDescribeLabel;
 
 @end
 
@@ -50,6 +51,7 @@
     NSString *titleStr = isShowHornor ? @"转入项目":@"我的债权" ;
     if (self.accoutType == SelectAccoutTypeP2P) {
         _segmentedCtrl = [[UISegmentedControl alloc]initWithItems:@[@"我的项目",@"批量项目",titleStr]];
+        self.titleDescribeLabel.text = @"累计利息";
     }
     else if (self.accoutType == SelectAccoutTypeHoner) {
         _segmentedCtrl = [[UISegmentedControl alloc]initWithItems:@[@"我的项目", titleStr]];
