@@ -331,8 +331,8 @@
             _userRecommendCountLab.text = [NSString stringWithFormat:@"邀请人数:%@人",dictemp[@"userRecommendCount"]];//邀请投资人数
             
             
-            NSString *P2PCountStr1 = [NSString stringWithFormat:@"微金返利(%@人投资）",[dictemp objectSafeForKey:@"p2pInviteFriendsCount"]];//微金人数
-            NSString *P2PCountStr2 = [NSString stringWithFormat:@"(%@人投资）",[dictemp objectSafeForKey:@"p2pInviteFriendsCount"]];//微金人数
+            NSString *P2PCountStr1 = [NSString stringWithFormat:@"微金返利(%@人出借）",[dictemp objectSafeForKey:@"p2pInviteFriendsCount"]];//微金人数
+            NSString *P2PCountStr2 = [NSString stringWithFormat:@"(%@人出借）",[dictemp objectSafeForKey:@"p2pInviteFriendsCount"]];//微金人数
             _p2pInviteFriendsCountLab.text = P2PCountStr1;
             [_p2pInviteFriendsCountLab setFont:[UIFont systemFontOfSize:10] string:P2PCountStr2];
             
