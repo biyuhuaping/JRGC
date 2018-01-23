@@ -269,10 +269,13 @@
         _headerView.downView.backgroundColor = [UIColor whiteColor];
         _headerView.delegate = self;
         _headerView.accoutTpye = self.accoutType;
+        
         _headerView.isShowOrHideAccoutMoney = _isShowOrHideAccoutMoney;
         if(self.accoutType == SelectAccoutTypeHoner){
+            _headerView.allGetInterLab.text = @"累计收益";
             _headerView.totalIncomeTitleLab.text = @"尊享总资产";
         }else{
+            _headerView.allGetInterLab.text = @"累计利息";
             _headerView.totalIncomeTitleLab.text = @"微金总资产";
         }
         UIView *lineView1 = [[UIView alloc]initWithFrame:CGRectMake(0,headHeight - 0.5, ScreenWidth, 0.5)];
