@@ -30,7 +30,7 @@
 }
 - (void)clickRightBtn
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"\"自动投标\"是金融工场为方便投资人投资小额项目特推出的，一次可投资多个项目。批量投资后系统会自动匹配，直至完成所有投资为止" delegate:self cancelButtonTitle:@"我知道了" otherButtonTitles: nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"\"自动投标\"是金融工场为方便出借人出借小额项目特推出的，一次可出借多个项目。批量出借后系统会自动匹配，直至完成所有出借为止" delegate:self cancelButtonTitle:@"我知道了" otherButtonTitles: nil];
     [alert show];
 }
 - (void)viewDidLoad {

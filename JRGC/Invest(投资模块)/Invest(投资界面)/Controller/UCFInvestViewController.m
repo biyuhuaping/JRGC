@@ -91,7 +91,9 @@
             if ([UserInfoSingle sharedManager].level < 2) {
                 if ([UserInfoSingle sharedManager].goldIsNew && [UserInfoSingle sharedManager].zxIsNew) {
                     if ([_pagerView.selectIndexStr isEqualToString:@"0"]) {
-                        [self.microMoney.tableview.header beginRefreshing];
+                        if (![self.microMoney.tableview.header isRefreshing]) {
+                            [self.microMoney.tableview.header beginRefreshing];
+                        }
                     }
                     else if ([_pagerView.selectIndexStr isEqualToString:@"1"]) {
                         [self.investTransfer.tableview.header beginRefreshing];
@@ -99,7 +101,9 @@
                 }
                 else if ([UserInfoSingle sharedManager].goldIsNew && ![UserInfoSingle sharedManager].zxIsNew) {
                     if ([_pagerView.selectIndexStr isEqualToString:@"0"]) {
-                        [self.microMoney.tableview.header beginRefreshing];
+                        if (![self.microMoney.tableview.header isRefreshing]) {
+                            [self.microMoney.tableview.header beginRefreshing];
+                        }
                     }
                     else if ([_pagerView.selectIndexStr isEqualToString:@"1"]) {
                         [self.honorInvest.tableView.header beginRefreshing];
@@ -110,7 +114,9 @@
                 }
                 else if (![UserInfoSingle sharedManager].goldIsNew && [UserInfoSingle sharedManager].zxIsNew) {
                     if ([_pagerView.selectIndexStr isEqualToString:@"0"]) {
-                        [self.microMoney.tableview.header beginRefreshing];
+                        if (![self.microMoney.tableview.header isRefreshing]) {
+                            [self.microMoney.tableview.header beginRefreshing];
+                        }
                     }
                     else if ([_pagerView.selectIndexStr isEqualToString:@"1"]) {
                         [self.golden.tableview.header beginRefreshing];
@@ -121,7 +127,9 @@
                 }
                 else if (![UserInfoSingle sharedManager].goldIsNew && ![UserInfoSingle sharedManager].zxIsNew) {
                     if ([_pagerView.selectIndexStr isEqualToString:@"0"]) {
-                        [self.microMoney.tableview.header beginRefreshing];
+                        if (![self.microMoney.tableview.header isRefreshing]) {
+                            [self.microMoney.tableview.header beginRefreshing];
+                        }
                     }
                     else if ([_pagerView.selectIndexStr isEqualToString:@"1"]) {
                         [self.honorInvest.tableView.header beginRefreshing];
@@ -136,7 +144,9 @@
             }
             else {
                 if ([_pagerView.selectIndexStr isEqualToString:@"0"]) {
-                    [self.microMoney.tableview.header beginRefreshing];
+                    if (![self.microMoney.tableview.header isRefreshing]) {
+                        [self.microMoney.tableview.header beginRefreshing];
+                    }
                 }
                 else if ([_pagerView.selectIndexStr isEqualToString:@"1"]) {
                     [self.honorInvest.tableView.header beginRefreshing];
@@ -151,7 +161,9 @@
         }
         else {
             if ([_pagerView.selectIndexStr isEqualToString:@"0"]) {
-                [self.microMoney.tableview.header beginRefreshing];
+                if (![self.microMoney.tableview.header isRefreshing]) {
+                    [self.microMoney.tableview.header beginRefreshing];
+                }
             }
             else if ([_pagerView.selectIndexStr isEqualToString:@"1"]) {
                 [self.honorInvest.tableView.header beginRefreshing];
@@ -167,7 +179,9 @@
     else {
         if ([UserInfoSingle sharedManager].superviseSwitch) {
             if ([_pagerView.selectIndexStr isEqualToString:@"0"]) {
-                [self.microMoney.tableview.header beginRefreshing];
+                if (![self.microMoney.tableview.header isRefreshing]) {
+                    [self.microMoney.tableview.header beginRefreshing];
+                }
             }
             else if ([_pagerView.selectIndexStr isEqualToString:@"1"]) {
                 [self.investTransfer.tableview.header beginRefreshing];
@@ -175,7 +189,9 @@
         }
         else {
             if ([_pagerView.selectIndexStr isEqualToString:@"0"]) {
-                [self.microMoney.tableview.header beginRefreshing];
+                if (![self.microMoney.tableview.header isRefreshing]) {
+                    [self.microMoney.tableview.header beginRefreshing];
+                }
             }
             else if ([_pagerView.selectIndexStr isEqualToString:@"1"]) {
                 [self.honorInvest.tableView.header beginRefreshing];

@@ -54,7 +54,9 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.tableview.header beginRefreshing];
+    if (![self.tableview.header isRefreshing]) {
+        [self.tableview.header beginRefreshing];
+    }
 }
 
 - (void)viewDidLoad {
