@@ -64,6 +64,10 @@
                 [vc removeFromParentViewController];
             }
             [self addChildViewControllers];
+            if (_pagerView) {
+                [_pagerView removeFromSuperview];
+                _pagerView = nil;
+            }
             [self createUI];
         }
     });
