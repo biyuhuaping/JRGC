@@ -498,9 +498,11 @@
             {
                 cell.investMoney.text = @"出借金额";
                 cell.InvestorLab.text = @"出借人";
+                cell.investDate.text = @"出借日期";
             }else{
                 cell.investMoney.text = @"投资金额";
                 cell.InvestorLab.text = @"投资人";
+                cell.investDate.text = @"投资日期";
             }
             UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didSelectReply:)];
             [cell.imag addGestureRecognizer:tap];
