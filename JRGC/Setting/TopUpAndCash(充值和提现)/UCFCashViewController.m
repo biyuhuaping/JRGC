@@ -805,7 +805,8 @@
     NSString *maxAmountStr = [NSString stringWithFormat:@"%.2f",[[self.cashInfoDic[@"data"] objectForKey:@"accountAmount"] doubleValue]];
 //    NSString *maxAmount = [NSString stringWithFormat:@"%.2f",[[self.cashInfoDic[@"data"] objectForKey:@"accountAmount"] doubleValue]];
     if ([Common stringA:getMoney ComparedStringB:maxAmountStr] == 1) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"可转出余额不足，多多投资吧" delegate:self cancelButtonTitle:@"重新输入" otherButtonTitles: nil];
+        NSString *alertStr = [NSString stringWithFormat:@"可转出余额不足，多多%@吧",self.accoutType == SelectAccoutTypeP2P ? @"出借":@"投资"];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:alertStr delegate:self cancelButtonTitle:@"重新输入" otherButtonTitles: nil];
         [alert show];
         return;
     }
