@@ -849,7 +849,7 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
         }
     }else if(alertView.tag == 9001){
         if (buttonIndex == 1) {
-           [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"telprompt://400-0322-988"]];
+           [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"telprompt://400-6766-988"]];
         }
     }
 }

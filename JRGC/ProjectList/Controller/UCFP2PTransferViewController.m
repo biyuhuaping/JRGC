@@ -129,7 +129,7 @@
         _transferModel = [self.dataArray objectAtIndex:[indexPath row]];
         NSInteger status = [_transferModel.status integerValue];
         if (status != 0) {
-            UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前债权转让的详情只对投资人开放"];
+            UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前债权转让的详情只对购买人开放"];
             [self.navigationController pushViewController:controller animated:YES];
             return;
         }
@@ -139,7 +139,7 @@
 
         NSString *strParameters = [NSString stringWithFormat:@"tranid=%@&userId=%@",_transferModel.Id,[UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]]];
         if (status != 0) {
-            UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前债权转让的详情只对投资人开放"];
+            UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前债权转让的详情只对购买人开放"];
             [self.navigationController pushViewController:controller animated:YES];
         } else {
             [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdTransferDetail owner:self Type:SelectAccoutDefault];
@@ -368,7 +368,7 @@
         }
     }else if(alertView.tag == 9001){
         if (buttonIndex == 1) {
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"telprompt://400-0322-988"]];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"telprompt://400-6766-988"]];
         }
     }
 

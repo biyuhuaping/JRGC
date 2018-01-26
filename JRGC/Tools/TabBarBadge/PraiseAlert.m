@@ -49,30 +49,30 @@
 }
 - (void)upalert:(NSString *)upStyle
 {
-    NSString *showStr = @"";
-    if (_showAlertType == PaymentStyle) {
-        if (upStyle != nil && [upStyle isEqualToString:@"1"]) {
-            showStr = @"豆哥给您的收益还满意吗？给个5星好评吧~";
-        } else {
-            showStr = @"我们已把您的本息护送到账,您的评价是我们护送时最大的动力!";
-        }
-    } else if (_showAlertType == SingSevenDays) {
-        showStr = @"连续签到7天有额外的奖励,这个设置您还满意吗~";
-    } else if (_showAlertType == FirstInvestSuceess) {
-        if (upStyle != nil && [upStyle isEqualToString:@"1"]) {
-            showStr = @"投资的过程中我们还有让您不满意的地方吗?";
-        } else {
-            showStr = @"恭喜您在新版中第一次成功投资,您对我们投资的过程有什么不满意的地方吗?";
-
-        }
-    }
-
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:showStr delegate:self cancelButtonTitle:nil otherButtonTitles:@"给个好评",@"我要吐槽",@"残忍的拒绝", nil];
-    [alert show];
-    self.block();
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(55.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [alert dismissWithClickedButtonIndex:0 animated:NO];
-    });
+//    NSString *showStr = @"";
+//    if (_showAlertType == PaymentStyle) {
+//        if (upStyle != nil && [upStyle isEqualToString:@"1"]) {
+//            showStr = @"豆哥给您的收益还满意吗？给个5星好评吧~";
+//        } else {
+//            showStr = @"我们已把您的本息护送到账,您的评价是我们护送时最大的动力!";
+//        }
+//    } else if (_showAlertType == SingSevenDays) {
+//        showStr = @"连续签到7天有额外的奖励,这个设置您还满意吗~";
+//    } else if (_showAlertType == FirstInvestSuceess) {
+//        if (upStyle != nil && [upStyle isEqualToString:@"1"]) {
+//            showStr = @"投资的过程中我们还有让您不满意的地方吗?";
+//        } else {
+//            showStr = @"恭喜您在新版中第一次成功投资,您对我们投资的过程有什么不满意的地方吗?";
+//
+//        }
+//    }
+//
+//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:showStr delegate:self cancelButtonTitle:nil otherButtonTitles:@"给个好评",@"我要吐槽",@"残忍的拒绝", nil];
+//    [alert show];
+//    self.block();
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(55.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        [alert dismissWithClickedButtonIndex:0 animated:NO];
+//    });
 }
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
