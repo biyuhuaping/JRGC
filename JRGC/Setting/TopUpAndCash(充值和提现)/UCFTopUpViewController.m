@@ -461,7 +461,13 @@
 - (void)tappedTelePhone
 {
     [self.view endEditing:YES];
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"telprompt://4000322988"]];
+    if (self.accoutType == SelectAccoutTypeHoner) {
+         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"telprompt://4000322988"]];
+    } else {
+         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"telprompt://4006766988"]];
+    }
+    
+   
 }
 
 #pragma mark - 同盾

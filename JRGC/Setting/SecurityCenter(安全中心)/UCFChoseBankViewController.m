@@ -353,7 +353,7 @@
 #pragma mark - 客服电话
 - (IBAction)buttonCallPress:(id)sender {
     
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"telprompt://400-0322-988"]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"telprompt://400-6766-988"]];
     
 }
 #pragma mark - 判断是否有数据，显示tableview和view_showinformation

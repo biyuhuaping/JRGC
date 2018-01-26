@@ -48,10 +48,11 @@
 
 + (UIAlertView *)showAlertViewdelegate:(id <UIAlertViewDelegate>) delegate
 {
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"您今天还没有签到哦!" message:@"投资多多！好礼送不停！\n签到就有机会抽到红包哦！" delegate:delegate cancelButtonTitle:@"给钱也不想" otherButtonTitles:@"立即签到", nil];
-    [alertView show];
-    [NSTimer scheduledTimerWithTimeInterval:55.0f target:self selector:@selector(performDismiss:) userInfo:alertView repeats:NO];
-    return alertView;
+    return nil;
+//    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"您今天还没有签到哦!" message:@"投资多多！好礼送不停！\n签到就有机会抽到红包哦！" delegate:delegate cancelButtonTitle:@"给钱也不想" otherButtonTitles:@"立即签到", nil];
+//    [alertView show];
+//    [NSTimer scheduledTimerWithTimeInterval:55.0f target:self selector:@selector(performDismiss:) userInfo:alertView repeats:NO];
+//    return alertView;
 }
 + (void) performDismiss:(NSTimer *)timer
 {
