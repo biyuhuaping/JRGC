@@ -67,8 +67,8 @@
                         <action selector="submitDataButton:" destination="-1" eventType="touchUpInside" id="Uu7-rL-U2F"/>
                     </connections>
                 </button>
-                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="开通即视为我已阅读并同意《资金存管三方协议》" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ywl-WY-hPs" customClass="NZLabel">
-                    <rect key="frame" x="15" y="253" width="345" height="16"/>
+                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ywl-WY-hPs" customClass="NZLabel">
+                    <rect key="frame" x="15" y="253" width="345" height="0.0"/>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <color key="textColor" red="0.5296475887298584" green="0.52963173389434814" blue="0.52964073419570923" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>

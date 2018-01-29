@@ -91,15 +91,15 @@
     
     if (self.accoutType == SelectAccoutTypeP2P) {
         
-        NSString *showStr = @"开通即视为本人已阅读并同意《资金存管三方协议》";
-         _customLabel2.text = showStr;
-        __weak typeof(self) weakSelf = self;
-        [_customLabel2 setFontColor:UIColorWithRGB(0x4aa1f9) string:@"《资金存管三方协议》"];
-        [_customLabel2 addLinkString:@"《资金存管三方协议》" block:^(ZBLinkLabelModel *linkModel) {
-            FullWebViewController *webController = [[FullWebViewController alloc] initWithWebUrl:TRUSTEESHIP title:@"资金存管三方协议"];
-            webController.baseTitleType = @"specialUser";
-            [weakSelf.navigationController pushViewController:webController animated:YES];
-        }];
+//        NSString *showStr = @"开通即视为本人已阅读并同意《资金存管三方协议》";
+//         _customLabel2.text = showStr;
+//        __weak typeof(self) weakSelf = self;
+//        [_customLabel2 setFontColor:UIColorWithRGB(0x4aa1f9) string:@"《资金存管三方协议》"];
+//        [_customLabel2 addLinkString:@"《资金存管三方协议》" block:^(ZBLinkLabelModel *linkModel) {
+//            FullWebViewController *webController = [[FullWebViewController alloc] initWithWebUrl:TRUSTEESHIP title:@"资金存管三方协议"];
+//            webController.baseTitleType = @"specialUser";
+//            [weakSelf.navigationController pushViewController:webController animated:YES];
+//        }];
 
         
     } else {
@@ -526,27 +526,9 @@
 }
 
 //徽商绑定银行卡
-- (IBAction)submitDataButton:(id)sender {
-    
-    
-    
-    
-    
-    
+- (IBAction)submitDataButton:(id)sender
+{
     [self.view endEditing:YES];
-    
-//    UCFDiscoveryViewController *discoveryWeb = [[UCFDiscoveryViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
-//    discoveryWeb.url      = @"https://app.gongchangp2p.com//api/staticResource/openAccount/success.html";//请求地址;
-//    discoveryWeb.navTitle = @"发现";
-//    if(self.db){
-//        [self.db.navigationController pushViewController:discoveryWeb animated:YES];
-//    }else{
-//        [self.navigationController pushViewController:discoveryWeb animated:YES];
-//    }
-//
-//    return;
-//
-
     if ([_tempBankId isEqualToString:_bankId]) {
         BlockUIAlertView *alert = [[BlockUIAlertView alloc]initWithTitle:@"提示" message:_notSupportDes cancelButtonTitle:nil clickButton:^(NSInteger index) {} otherButtonTitles:@"确定"];
         [alert show];
@@ -638,9 +620,12 @@
             NSString *cfcaContractNameStr = [dic[@"data"] objectSafeForKey:@"cfcaContractName"];
             NSString *cfcaContractUrlStr = [dic[@"data"] objectSafeForKey:@"cfcaContractUrl"];
             if(![cfcaContractNameStr isEqualToString:@""]){
-                _customLabel2.text = @"开通即视为本人已阅读并同意《CFCA数字证书服务协议》《资金存管三方协议》";
+//                _customLabel2.text = @"开通即视为本人已阅读并同意《CFCA数字证书服务协议》《资金存管三方协议》";
+//                __weak typeof(self) weakSelf = self;
+//                [_customLabel2 setFontColor:UIColorWithRGB(0x4aa1f9) string:@"《CFCA数字证书服务协议》《资金存管三方协议》"];
+                _customLabel2.text = @"开通即视为本人已阅读并同意《CFCA数字证书服务协议》";
                 __weak typeof(self) weakSelf = self;
-                [_customLabel2 setFontColor:UIColorWithRGB(0x4aa1f9) string:@"《CFCA数字证书服务协议》《资金存管三方协议》"];
+                [_customLabel2 setFontColor:UIColorWithRGB(0x4aa1f9) string:@"《CFCA数字证书服务协议》"];
                 [_customLabel2 addLinkString:@"《CFCA数字证书服务协议》" block:^(ZBLinkLabelModel *linkModel) {
                     FullWebViewController *webController = [[FullWebViewController alloc] initWithWebUrl:cfcaContractUrlStr title:@"CFCA数字证书服务协议"];
                     webController.baseTitleType = @"specialUser";
@@ -797,6 +782,7 @@
             AccountWebView *webView = [[AccountWebView alloc] initWithNibName:@"AccountWebView" bundle:nil];
             webView.title = @"即将跳转";
             webView.isPresentViewController = self.db.isPresentViewController;
+            webView.rootVc = @"UpgradeAccountVC";
             webView.url =  dic[@"data"][@"url"];
             NSString *SIGNStr =   dic[@"data"][@"tradeReq"][@"SIGN"];
             NSMutableDictionary *data =  [[NSMutableDictionary alloc]initWithDictionary:@{}];
