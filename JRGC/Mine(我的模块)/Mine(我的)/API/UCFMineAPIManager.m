@@ -218,7 +218,6 @@
     }else if (tag.integerValue == kSXTagCashAdvance) {
         if ([self.delegate respondsToSelector:@selector(mineApiManager:didSuccessedP2PAccoutCashBalanceResult:withTag:)]) {
             [self.delegate mineApiManager:self didSuccessedP2PAccoutCashBalanceResult:err.userInfo[@"NSLocalizedDescription"] withTag:0];
-            
         }
     }
 }

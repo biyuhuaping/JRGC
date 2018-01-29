@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -317,6 +317,7 @@
                         <outlet property="bankNameLabel" destination="Y4a-Pc-COJ" id="YBo-kF-Rx9"/>
                         <outlet property="baseScrollView" destination="1t8-CK-fvw" id="kLy-QO-WLN"/>
                         <outlet property="cardCodeLabel" destination="j7L-yk-EJB" id="b2c-vJ-fOL"/>
+                        <outlet property="codeTextFieldHeight" destination="WzC-Dl-JJh" id="36O-8z-1Iz"/>
                         <outlet property="contentHeight" destination="Xrz-7o-rOI" id="V2F-xi-kLK"/>
                         <outlet property="deleagateLabel" destination="wad-W4-54X" id="Num-Zo-Wz6"/>
                         <outlet property="deleageteLabelBottom" destination="oId-7f-E0D" id="NMs-Cw-erD"/>
@@ -327,6 +328,7 @@
                         <outlet property="msgTipLabel" destination="xDS-5s-7iQ" id="Ewl-SA-mXZ"/>
                         <outlet property="phoneTextField" destination="pB8-9y-hAA" id="VTZ-iN-dZH"/>
                         <outlet property="rechargeTopCo" destination="YiF-Mz-w3Q" id="qA0-ha-Ug5"/>
+                        <outlet property="sendButtonHeight" destination="frZ-0x-KB8" id="hQr-Hf-gh4"/>
                         <outlet property="serviceLabel" destination="0sc-69-t03" id="NIZ-4f-tWf"/>
                         <outlet property="telServiceLabel" destination="gaU-xC-cLx" id="XHg-RR-p8v"/>
                         <outlet property="topUpButton" destination="J4u-PG-E6x" id="imX-TC-abq"/>

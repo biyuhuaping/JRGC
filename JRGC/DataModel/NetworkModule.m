@@ -1297,8 +1297,18 @@ static NetworkModule *gInstance = NULL;
             break;
         case kSXTagValidBindedPhone://我的-->>修改绑定手机号-->>验证登录密码接口
             parameter = [NEW_SERVER_IP stringByAppendingString:VALID_BINDED_PHONE];
+            break;
         case kSXTagSuperviseUserInfo:
             parameter = [NEW_SERVER_IP stringByAppendingString:SUPERVISEUSERINFO];
+            break;
+        case kSXTagOpenAccuntIntoBank://***新徽商绑定银行卡接口
+            parameter = [NEW_SERVER_IP stringByAppendingString:OPENACCOUNTINTOBANKURL];
+            break;
+        case kSXTagAccountSetHsPwdIntoBank://***新徽商绑定银行卡接口
+            parameter = [NEW_SERVER_IP stringByAppendingString:ACCOUTSETHSPWDINTOBANKURL];
+            break;
+        case kSXTagP2PAccountrechargeNew://***新微金充值接口
+            parameter = [NEW_SERVER_IP stringByAppendingString:P2PACCOUTRECHRAGENEWURL];
             break;
     }
     //给原有参数字典添加公共参数

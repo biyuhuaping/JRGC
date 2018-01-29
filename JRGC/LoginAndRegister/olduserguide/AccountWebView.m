@@ -22,11 +22,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    baseTitleLabel.text = @"设置交易密码";
+//    baseTitleLabel.text = @"设置交易密码";
     [self removeRefresh];
     [self gotoURLWithSignature:self.url];
 }
-
+//***无验签跳转页面走该方法
+- (void)jsToNative:(NSString *)controllerName
+{
+    if ([controllerName isEqualToString:@"app_open_account"]) //开户失败 跳转到 开户页面
+    {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    else if ([controllerName isEqualToString:@"app_setHSPwd"]) //开户成功 跳转到 设置交易密码页面
+    {
+      
+    }
+    
+}
 - (void)getToBack {
     [self closeWebView];
 }
