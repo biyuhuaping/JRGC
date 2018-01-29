@@ -464,7 +464,13 @@
 - (void)tappedTelePhone
 {
     [self.view endEditing:YES];
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"telprompt://4000322988"]];
+    if (self.accoutType == SelectAccoutTypeHoner) {
+         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"telprompt://4000322988"]];
+    } else {
+         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"telprompt://4006766988"]];
+    }
+    
+   
 }
 
 #pragma mark - 同盾
@@ -798,7 +804,8 @@
             self.phoneTextField.textColor = UIColorWithRGB(0x999999);
             self.phoneTextField.backgroundColor = UIColorWithRGB(0xf4f4f4);
             self.phoneTextField.userInteractionEnabled = NO;
-            UIAlertView *alert1 = [[UIAlertView alloc] initWithTitle:@"充值成功" message:@""delegate:self cancelButtonTitle:@"继续充值" otherButtonTitles:@"去投资", nil];
+            NSString *str = self.accoutType == SelectAccoutTypeHoner ? @"去认购" : @"去出借";
+            UIAlertView *alert1 = [[UIAlertView alloc] initWithTitle:@"充值成功" message:@""delegate:self cancelButtonTitle:@"继续充值" otherButtonTitles:str, nil];
             alert1.tag = 1000;
             [alert1 show];
         } else {

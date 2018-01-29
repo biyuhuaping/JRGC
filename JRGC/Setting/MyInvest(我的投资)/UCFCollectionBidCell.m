@@ -65,7 +65,7 @@
         [_batchBidButton setTitle:@"满标" forState:UIControlStateNormal];
     }
     else {
-        [_batchBidButton setTitle:@"批量投资" forState:UIControlStateNormal];
+        [_batchBidButton setTitle:@"批量出借" forState:UIControlStateNormal];
     }
     self.leftAmtLabel.text = [self moneywithRemaining:collectionBidModel.canBuyAmt total:collectionBidModel.totalAmt];
     

@@ -319,7 +319,7 @@ static NetworkModule *gInstance = NULL;
 - (void)postData:(NSString*)data tag:(kSXTag)tag owner:(id<NetworkModuleDelegate>)owner url:(NSString*)url
 {
     PostRequest *req = (PostRequest*)[queue objectForKey:[NSNumber numberWithInt:tag]];
-    if (tag == kSXTagMyReceipt || tag == kSXTagGetInfoForOnOff || tag == kSXTagMySimpleInfo) {
+    if (tag == kSXTagMyReceipt || tag == kSXTagGetInfoForOnOff || tag == kSXTagMySimpleInfo || tag == kSXTagSuperviseUserInfo || tag == kSXTagCheckConponCenter) {
         if (req.postStatus == kPostStatusBeging) {
             return;
         }
@@ -775,7 +775,7 @@ static NetworkModule *gInstance = NULL;
         self.isShowSingleAlert = YES;
     } else if (alertView.tag == 0x101) {
         if (buttonIndex == 0) {
-            NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"4000322988"];
+            NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"4006766988"];
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
             AppDelegate *app = (AppDelegate *) [[UIApplication sharedApplication] delegate];
             NSUInteger selectedIndex = app.tabBarController.selectedIndex;

@@ -487,7 +487,7 @@
 //}
 - (void)showHTAlertdidFinishGetUMSocialDataResponse
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请登录www.9888keji.com相关页面查看" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles: nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请登录www.gongchangp2p.com相关页面查看" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles: nil];
     [alert show];
 }
 #pragma mark -viewDelegate
@@ -823,7 +823,7 @@
         }
     }else if(alertView.tag == 9001){
         if (buttonIndex == 1) {
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"telprompt://400-0322-988"]];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"telprompt://400-6766-988"]];
         }
     }
 

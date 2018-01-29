@@ -46,7 +46,7 @@
     if([controllerName isEqualToString:@"batchOrder"])
     {
         MyViewController *subVC = [[MyViewController alloc] initWithNibName:@"MyViewController" bundle:nil];
-        subVC.title = @"我的投资";
+        subVC.title = @"我的出借";
         subVC.selectedSegmentIndex = 1;
         subVC.accoutType = SelectAccoutTypeP2P;
         [self.navigationController pushViewController:subVC animated:YES];

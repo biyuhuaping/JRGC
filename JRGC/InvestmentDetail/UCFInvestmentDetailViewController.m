@@ -262,7 +262,7 @@
 //}
 - (void)showHTAlertdidFinishGetUMSocialDataResponse
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请登录www.9888keji.com相关页面查看" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles: nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请登录www.gongchangp2p.com相关页面查看" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles: nil];
     [alert show];
 }
 //请求失败
