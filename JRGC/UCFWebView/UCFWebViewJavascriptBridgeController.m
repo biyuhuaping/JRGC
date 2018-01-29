@@ -257,9 +257,6 @@
     [_bridge setWebViewDelegate:self];
     __weak typeof(self) weakSelf = self;
     
-    
-#warning test
-    
     [_bridge registerHandler:@"nativeCallback" handler:^(id data, WVJBResponseCallback responseCallback) {
         
         DBLOG(@"testObjcCallback called: %@", data);
@@ -1147,6 +1144,11 @@
 }
 - (void)jsSetTitle:(NSString *)title
 {
+    if ([title isEqualToString:@"充值成功"]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:RELOADP2PORHONERACCOTDATA object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"UPDATEINVESTDATA" object:nil];
+    }
     baseTitleLabel.text = title;
 }
 
