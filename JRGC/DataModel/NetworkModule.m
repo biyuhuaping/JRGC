@@ -1297,6 +1297,7 @@ static NetworkModule *gInstance = NULL;
             break;
         case kSXTagValidBindedPhone://我的-->>修改绑定手机号-->>验证登录密码接口
             parameter = [NEW_SERVER_IP stringByAppendingString:VALID_BINDED_PHONE];
+            break;
         case kSXTagSuperviseUserInfo:
             parameter = [NEW_SERVER_IP stringByAppendingString:SUPERVISEUSERINFO];
             break;

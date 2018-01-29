@@ -106,7 +106,7 @@
         return;
     }
     if (![SharedSingleton isValidatePassWord:_lastPasswordTextField.text]) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"密码格式不正确" message:@"6-16位字符，只能包含字母、数字及标点符号（必须组合），区分大小写" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"密码格式不正确" message:@"6-16位字符，只能包含字母、数字及标点符号（需两两组合），区分大小写" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
         [alert show];
         return;
     }
