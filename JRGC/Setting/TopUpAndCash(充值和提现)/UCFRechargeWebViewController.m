@@ -31,6 +31,31 @@
 }
 - (void)jsToNative:(NSString *)controllerName{
     
+    DBLOG(@"%@", controllerName);
+    if ([controllerName isEqualToString:@"app_recharge"]) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    else if ([controllerName isEqualToString:@"app_invest_immediately"]) {
+        NSString *className = [NSString stringWithUTF8String:object_getClassName(self.rootVc)];
+        if ([className hasSuffix:@"UCFPurchaseBidViewController"] || [className hasSuffix:@"UCFPurchaseTranBidViewController"] || [className hasSuffix:@"UCFSelectPayBackController"] || [className hasSuffix:@"UCFFacReservedViewController"]) {
+            [self.navigationController popToViewController:self.rootVc animated:YES];
+        }
+        else if([className hasSuffix:@"UCFRechargeOrCashViewController"])
+        {
+            AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+            [appDelegate.tabBarController dismissViewControllerAnimated:NO completion:^{
+                NSUInteger selectedIndex = appDelegate.tabBarController.selectedIndex;
+                UINavigationController *nav = [appDelegate.tabBarController.viewControllers objectAtIndex:selectedIndex];
+                [nav popToRootViewControllerAnimated:NO];
+                [appDelegate.tabBarController setSelectedIndex:0];
+            }];
+        }
+        else{
+            [self.navigationController popToRootViewControllerAnimated:NO];
+            AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+            [appDelegate.tabBarController setSelectedIndex:0];
+        }
+    }
 //    if ([controllerName isEqualToString:@"app_withdraw"])//提现成功页面红色按妞
 //    {
 //        [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];

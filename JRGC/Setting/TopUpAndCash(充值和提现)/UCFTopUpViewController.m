@@ -23,6 +23,7 @@
 #import "FMDeviceManager.h"
 #import "UCFModifyReservedBankNumberViewController.h"
 #import "UCFRechargeWebViewController.h"
+#import "NSString+Misc.h"
 //#warning 同盾修改
 //@interface UCFTopUpViewController () <UITextFieldDelegate,FMDeviceManagerDelegate,UCFModifyReservedBankNumberDelegate>
 @interface UCFTopUpViewController () <UITextFieldDelegate,UCFModifyReservedBankNumberDelegate>
@@ -481,7 +482,7 @@
     NSString *inputMoney = [Common deleteStrHeadAndTailSpace:_topUpLabelTextField.text];
     NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
     [paraDict setValue:inputMoney forKey:@"payAmount"];
-    [paraDict setValue:@"13691296876" forKey:@"phoneNo"];
+    [paraDict setValue:_phoneTextField.text forKey:@"phoneNo"];
     if (self.accoutType == SelectAccoutTypeHoner) ///尊享保留原来参数
     {
         [paraDict setValue:self.smsSerialNo forKey:@"validateNo"];
@@ -977,11 +978,15 @@
             NSDictionary  *dataDict = dic[@"data"][@"tradeReq"];
             NSString *urlStr = dic[@"data"][@"url"];
             UCFRechargeWebViewController *rechargeWebVC = [[UCFRechargeWebViewController alloc]initWithNibName:@"UCFRechargeWebViewController" bundle:nil];
-            rechargeWebVC.webDataDic = dataDict;
-            rechargeWebVC.navTitle = @"即将跳转";
+            NSString *SIGNStr =   dataDict[@"SIGN"];
+            NSMutableDictionary *data =  [[NSMutableDictionary alloc]initWithDictionary:@{}];
+            [data setValue: dic[@"data"][@"tradeReq"][@"PARAMS"]  forKey:@"PARAMS"];
+            [data setValue:[NSString  urlEncodeStr:SIGNStr] forKey:@"SIGN"];
+            rechargeWebVC.webDataDic = data;
+//            rechargeWebVC.navTitle = @"即将跳转";
             rechargeWebVC.url = urlStr;
             rechargeWebVC.accoutType = self.accoutType;
-            rechargeWebVC.rootVc = self.rootVc;
+            rechargeWebVC.rootVc = self.uperViewController;
             [self.navigationController pushViewController:rechargeWebVC animated:YES];
         }
         else{
