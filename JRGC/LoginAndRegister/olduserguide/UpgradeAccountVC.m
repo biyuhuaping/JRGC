@@ -688,13 +688,10 @@
                 self.getCodeBtn.enabled = YES;
             }
             
-            //新老用户的提交按钮文字不一样，老用户：同意；新用户：立即开通
-            if (!_isFromeBankCardInfo) {
-                if (idCardNo.length > 0){
-                    [_submitDataButton setTitle:@"同意" forState:UIControlStateNormal];
-                }else{
-                    [_submitDataButton setTitle:@"立即开通" forState:UIControlStateNormal];
-                }
+            //新老用户的提交按钮文字一样 ：立即开通
+            if (!_isFromeBankCardInfo)
+            {
+                 [_submitDataButton setTitle:@"立即开通" forState:UIControlStateNormal];
             }
             
             if (_notSupportDes.length > 0) {
