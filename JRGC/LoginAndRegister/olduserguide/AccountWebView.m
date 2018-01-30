@@ -119,13 +119,20 @@
     }
     else
     {
-        if ([self.rootVc isEqualToString:@"UpgradeAccountVC"])
+        if ([baseTitleLabel.text hasSuffix:@"账户开立"] || [baseTitleLabel.text hasSuffix:@"开户失败"])
         {
-            [self.navigationController popToRootViewControllerAnimated:YES];
-        }else{
             [self.navigationController popViewControllerAnimated:YES];
+        }else{
+            if ([self.rootVc isEqualToString:@"UpgradeAccountVC"]){
+                [self.navigationController popToRootViewControllerAnimated:YES];
+            }else{
+                
+                
+                [self.navigationController popViewControllerAnimated:YES];
+            }
         }
     }
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"getP2PAccountDataMessage" object:nil]; //刷新微金充值页面
     //刷新首页、债券转让、个人中心数据
     [[NSNotificationCenter defaultCenter] postNotificationName:@"LatestProjectUpdate" object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadP2PData" object:nil];

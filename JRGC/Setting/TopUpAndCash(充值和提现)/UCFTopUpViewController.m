@@ -113,6 +113,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+   
+    self.topUpLabelTextField.text = @"";
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 }
 
@@ -120,6 +122,7 @@
     [super viewDidLoad];
     [self createUI];
     [self addControll];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getMyBindCardMessage) name:@"getP2PAccountDataMessage" object:nil];
     [self getMyBindCardMessage];
     [self setTimer];
     [self registKeyBordNoti];
@@ -864,6 +867,10 @@
             telNum = [NSString stringWithFormat:@"%@",dic[@"data"][@"customerServiceNo"]];
             minRecharge = [NSString stringWithFormat:@"%@",dic[@"data"][@"minAmt"]];
             fee = [NSString stringWithFormat:@"%@",dic[@"data"][@"fee"]];
+            if (self.accoutType == SelectAccoutTypeP2P)
+            {
+                [UserInfoSingle sharedManager].openStatus = [[coreDict objectSafeForKey:@"openStatus"] integerValue];
+            }
             NSString *bankPhone =  [dic[@"data"][@"bankInfo"] objectSafeForKey:@"bankPhone"];
             isSpecial = [[dic[@"data"][@"bankInfo"] objectSafeForKey:@"isSpecial"] boolValue];
           BOOL isCompanyAgent  = [[dic[@"data"][@"bankInfo"] objectSafeForKey:@"isCompanyAgent"] boolValue];

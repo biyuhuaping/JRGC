@@ -25,14 +25,13 @@
     self.flagInvestSuc = NO;
     [self gotoURLWithSignature:self.url];
 }
-- (void)jsInvestSuc:(BOOL)isSuc
-{
-    self.flagInvestSuc = isSuc;
-}
 - (void)jsToNative:(NSString *)controllerName{
     
     DBLOG(@"%@", controllerName);
-    if ([controllerName isEqualToString:@"app_recharge"]) {
+    if ([controllerName isEqualToString:@"app_recharge_success"])
+    {
+        self.flagInvestSuc = YES;
+    }else if ([controllerName isEqualToString:@"app_recharge"]) {
         [self.navigationController popViewControllerAnimated:YES];
     }
     else if ([controllerName isEqualToString:@"app_invest_immediately"]) {
