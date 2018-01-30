@@ -721,6 +721,17 @@
     else if (alertView.tag == 9000) {
         if (buttonIndex == 1) {
             NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"4006766988"];
+            if ([UserInfoSingle sharedManager].superviseSwitch) {
+                if ([UserInfoSingle sharedManager].level> 1 || ![UserInfoSingle sharedManager].zxIsNew || ![UserInfoSingle sharedManager].goldIsNew) {
+                    str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"4000322988"];
+                }
+                else {
+                    str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"4006766988"];
+                }
+            }
+            else {
+                str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"40067666988"];
+            }
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
         }
     }
