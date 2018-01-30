@@ -1151,6 +1151,9 @@
 {
 }
 
+- (void)jsRechargeSuccess:(BOOL)isSuc
+{
+}
 /*- (void)pushWebView:(NSString *)url withTitle:(NSString *)title
 {
     UCFWebViewJavascriptBridgeController *vc = [[UCFWebViewJavascriptBridgeController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeController" bundle:nil];
