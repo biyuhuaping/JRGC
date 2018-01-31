@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UpgradeAccountVC">
             <connections>
+                <outlet property="buttonTopConstraint" destination="ojC-mL-qri" id="jtA-eJ-APx"/>
                 <outlet property="customLabel1" destination="wQK-gz-wCU" id="w5d-hp-sYO"/>
                 <outlet property="customLabel2" destination="ywl-WY-hPs" id="Xmc-KF-oQr"/>
                 <outlet property="height1" destination="N8j-Y3-iQn" id="7lI-Gl-bnG"/>
@@ -95,7 +96,7 @@
                 <constraint firstAttribute="trailing" secondItem="fpK-aC-8gl" secondAttribute="trailing" id="wO4-hQ-K7p"/>
                 <constraint firstItem="wQK-gz-wCU" firstAttribute="top" secondItem="gm7-Vb-T9p" secondAttribute="bottom" constant="5" id="xXU-Vx-Sr5"/>
             </constraints>
-            <point key="canvasLocation" x="-3" y="52"/>
+            <point key="canvasLocation" x="-248" y="36"/>
         </view>
     </objects>
 </document>

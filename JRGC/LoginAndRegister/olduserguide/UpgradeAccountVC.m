@@ -51,6 +51,7 @@
 
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *height1;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *height2;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *buttonTopConstraint;
 
 @end
 
@@ -66,10 +67,12 @@
 //    if (_fromVC == 1) {
     
     if (self.accoutType == SelectAccoutTypeP2P) {
+        self.buttonTopConstraint.constant = 15;
         self.tableViewHight.constant = 44*4;
         baseTitleLabel.text = @"开通微金徽商存管账户";
     } else {
         self.tableViewHight.constant = 44*5;
+        self.buttonTopConstraint.constant = 15;
         baseTitleLabel.text = @"开通尊享徽商存管账户";
     }
     
@@ -187,7 +190,8 @@
     
     [_getCodeBtn setTitle:str forState:UIControlStateNormal];
     _counter--;
-    if (_counter < 0) {
+    if (_counter < 0)
+    {
         _isSendVoiceMessage = NO;
         [_timer invalidate];
         _timer = nil;
@@ -705,6 +709,11 @@
     }
     else if (tag.intValue == kSXTagIdentifyCode) {//发送验证码
         if ([ret boolValue]) {
+            
+            __weak typeof(self) weakSelf = self;
+            [UIView animateWithDuration:0.25 animations:^{
+                  weakSelf.buttonTopConstraint.constant = 50;
+            }];
             _isSendVoiceMessage = YES;
             DBLOG(@"%@",dic[@"data"]);
             [_getCodeBtn setTitle:@"60秒后重新获取" forState:UIControlStateNormal];

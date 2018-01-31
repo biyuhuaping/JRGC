@@ -81,7 +81,7 @@
     if (self.flagInvestSuc  || [baseTitleLabel.text isEqualToString:@"充值成功"]) { //提现成功返回个人中心
         [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
         NSString *className = [NSString stringWithUTF8String:object_getClassName(self.rootVc)];
-        if ([className hasSuffix:@"UCFPurchaseBidViewController"] || [className hasSuffix:@"UCFPurchaseTranBidViewController"] || [className hasSuffix:@"UCFSelectPayBackController"] || [className hasSuffix:@"UCFFacReservedViewController"]) {
+        if ([className hasSuffix:@"UCFPurchaseBidViewController"] || [className hasSuffix:@"UCFPurchaseTranBidViewController"] || [className hasSuffix:@"UCFSelectPayBackController"] || [className hasSuffix:@"UCFFacReservedViewController"] ||[className hasSuffix:@"UCFP2POrHonerAccoutViewController"]) {
             [self.navigationController popToViewController:self.rootVc animated:YES];
         }
         else if([className hasSuffix:@"UCFRechargeOrCashViewController"])
