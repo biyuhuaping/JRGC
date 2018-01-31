@@ -513,7 +513,7 @@
 //判断订单状态，提交充值表单
 - (IBAction)gotoPay:(id)sender {
     
-    if ( self.accoutType == SelectAccoutTypeP2P &&  [UserInfoSingle sharedManager].openStatus <= 3 && [self checkOrderIsLegitimate]) {
+    if ( self.accoutType == SelectAccoutTypeP2P &&  [UserInfoSingle sharedManager].openStatus == 3 && [self checkOrderIsLegitimate]) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:P2PTIP2 delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
         alert.tag =  8000;
         [alert show];
