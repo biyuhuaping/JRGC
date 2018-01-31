@@ -489,7 +489,10 @@ static SharedSingleton *_sharedObj = nil;
         return NO;
     }
    
-    NSString *passWordRegex = @"(^(?![^a-zA-Z]+$)(?!\\D+$).{6,16}$)";
+//    NSString *passWordRegex = @"(^(?![^a-zA-Z]+$)(?!\\D+$).{6,16}$)";
+    
+//    NSString *passWordRegex = @"^(?![a-zA-z]+$)(?!\\d+$)(?![!@#$%^&*]+$)[a-zA-Z\\d!@#$%^&*]+$";
+    NSString *passWordRegex = @"^(?![\\d]+$)(?![a-zA-Z]+$)(?![^\\da-zA-Z]+$).{6,20}$";
     NSPredicate *passWordTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", passWordRegex];
     return [passWordTest evaluateWithObject:passWord];
 //    return [passWord isMatchedByRegex:passWordRegex];
