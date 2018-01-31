@@ -857,6 +857,7 @@
                 _bankNameLabel.text = [UCFToolsMehod isNullOrNilWithString:coreDict[@"bankName"]];
             }
             _accountNameLabel.text = [UCFToolsMehod isNullOrNilWithString:coreDict[@"realName"]];
+            [UserInfoSingle sharedManager].realName = [coreDict objectSafeForKey: @"realName"];
             _cardCodeLabel.text = [UCFToolsMehod isNullOrNilWithString:coreDict[@"bankCardNo"]];
             if ([coreDict[@"supportQPass"] boolValue]) {
                 _fastPayImageView.hidden = NO;

@@ -783,7 +783,9 @@
         }
     }
     else if (tag.intValue == kSXTagOpenAccuntIntoBank) {
-        if ([ret boolValue]){
+        if ([ret boolValue])
+        {
+             [UserInfoSingle sharedManager].realName = _textField1.text;
             _counter = 0;
             AccountWebView *webView = [[AccountWebView alloc] initWithNibName:@"AccountWebView" bundle:nil];
             webView.title = @"即将跳转";
