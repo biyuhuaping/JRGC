@@ -730,7 +730,7 @@
                 }
             }
             else {
-                str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"40067666988"];
+                str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"4000322988"];
             }
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
         }
