@@ -593,7 +593,7 @@
         if (self.accoutType == SelectAccoutTypeHoner)
         {
             [encryptParamDic setValue:_textField4.text forKey:@"validateCode"];//手机验证码
-             [[NetworkModule sharedNetworkModule] newPostReq:encryptParamDic tag:kSXTagGetOpenAccountInfo owner:self signature:YES Type:self.accoutType];
+             [[NetworkModule sharedNetworkModule] newPostReq:encryptParamDic tag:kSXTagOpenAccount owner:self signature:YES Type:self.accoutType];
         }else
         {
              [[NetworkModule sharedNetworkModule] newPostReq:encryptParamDic tag:kSXTagOpenAccuntIntoBank owner:self signature:YES Type:self.accoutType];
