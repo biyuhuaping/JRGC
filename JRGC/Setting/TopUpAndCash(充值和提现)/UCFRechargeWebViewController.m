@@ -25,14 +25,13 @@
     self.flagInvestSuc = NO;
     [self gotoURLWithSignature:self.url];
 }
-- (void)jsInvestSuc:(BOOL)isSuc
-{
-    self.flagInvestSuc = isSuc;
-}
 - (void)jsToNative:(NSString *)controllerName{
     
     DBLOG(@"%@", controllerName);
-    if ([controllerName isEqualToString:@"app_recharge"]) {
+    if ([controllerName isEqualToString:@"app_recharge_success"])
+    {
+        self.flagInvestSuc = YES;
+    }else if ([controllerName isEqualToString:@"app_recharge"]) {
         [self.navigationController popViewControllerAnimated:YES];
     }
     else if ([controllerName isEqualToString:@"app_invest_immediately"]) {
@@ -56,57 +55,36 @@
             [appDelegate.tabBarController setSelectedIndex:0];
         }
     }
-//    if ([controllerName isEqualToString:@"app_withdraw"])//提现成功页面红色按妞
-//    {
-//        [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
-//        NSString *className = [NSString stringWithUTF8String:object_getClassName(self.rootVc)];
-//        if([className hasSuffix:@"UCFRechargeOrCashViewController"])
-//        {
-//            AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
-//            [appDelegate.tabBarController dismissViewControllerAnimated:NO completion:^{
-//                NSUInteger selectedIndex = appDelegate.tabBarController.selectedIndex;
-//                UINavigationController *nav = [appDelegate.tabBarController.viewControllers objectAtIndex:selectedIndex];
-//                [nav popToRootViewControllerAnimated:NO];
-//            }];
-//        }else{
-//            [self.navigationController popToRootViewControllerAnimated:YES];
-//        }
-//
-//    }
-//    else if ([controllerName  isEqualToString:@"app_withdraw_recharge"])//提现失败页面
-//    {
-//        [self.navigationController popViewControllerAnimated:YES];
-//    }
-//    else if ([controllerName isEqualToString:@"app_withdraw_suc"]) //提现成功标识
-//    {
-//        self.flagInvestSuc = YES;
-//    }
 }
+-(void)jsClose
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)jsSetTitle:(NSString *)title
+{
+    if ([title isEqualToString:@"充值成功"]) {
+        self.flagInvestSuc  = YES;
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:RELOADP2PORHONERACCOTDATA object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"UPDATEINVESTDATA" object:nil];
+    }
+    baseTitleLabel.text = title;
+}
+
 - (void)addRefresh //去掉页面刷新
 {
-}
--(void)getToBack{
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:RELOADP2PORHONERACCOTDATA object:nil];
-//    if (self.flagInvestSuc) { //提现成功返回个人中心
-//        [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
-//        NSString *className = [NSString stringWithUTF8String:object_getClassName(self.rootVc)];
-//        if([className hasSuffix:@"UCFRechargeOrCashViewController"])
-//        {
-//            AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
-//            [appDelegate.tabBarController dismissViewControllerAnimated:NO completion:^{
-//                NSUInteger selectedIndex = appDelegate.tabBarController.selectedIndex;
-//                UINavigationController *nav = [appDelegate.tabBarController.viewControllers objectAtIndex:selectedIndex];
-//                [nav popToRootViewControllerAnimated:NO];
-//            }];
-//        }else{
-//            [self.navigationController popToRootViewControllerAnimated:YES];
-//        }
-//    }else{
-//        [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
-//        [self.navigationController popViewControllerAnimated:YES];
-//    }
-     [self.navigationController popViewControllerAnimated:YES];
+}
+-(void)getToBack
+{
+    if (self.flagInvestSuc  || [baseTitleLabel.text isEqualToString:@"充值成功"]) { //提现成功返回个人中心
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }else{
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 /*

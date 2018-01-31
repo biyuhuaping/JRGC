@@ -24,6 +24,7 @@
 #import "UCFModifyReservedBankNumberViewController.h"
 #import "UCFRechargeWebViewController.h"
 #import "NSString+Misc.h"
+#import "HSHelper.h"
 //#warning 同盾修改
 //@interface UCFTopUpViewController () <UITextFieldDelegate,FMDeviceManagerDelegate,UCFModifyReservedBankNumberDelegate>
 @interface UCFTopUpViewController () <UITextFieldDelegate,UCFModifyReservedBankNumberDelegate>
@@ -112,6 +113,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+   
+    self.topUpLabelTextField.text = @"";
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 }
 
@@ -119,6 +122,7 @@
     [super viewDidLoad];
     [self createUI];
     [self addControll];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getMyBindCardMessage) name:@"getP2PAccountDataMessage" object:nil];
     [self getMyBindCardMessage];
     [self setTimer];
     [self registKeyBordNoti];
@@ -349,7 +353,12 @@
         if (buttonIndex == 1) {
            [self tappedTelePhone];    //联系客服
         }
-    } else {
+    }else if (alertView.tag == 8000) {
+        if (buttonIndex == 1) {
+            HSHelper *helper = [HSHelper new];
+            [helper pushOpenHSType:self.accoutType Step:[UserInfoSingle sharedManager].openStatus nav:self.navigationController];
+        }
+    }else {
         if (buttonIndex == 1) {
             NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",[telNum  stringByReplacingOccurrencesOfString:@"-" withString:@""]];
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
@@ -503,6 +512,13 @@
 
 //判断订单状态，提交充值表单
 - (IBAction)gotoPay:(id)sender {
+    
+    if ( self.accoutType == SelectAccoutTypeP2P &&  [UserInfoSingle sharedManager].openStatus <= 3 && [self checkOrderIsLegitimate]) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:P2PTIP2 delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        alert.tag =  8000;
+        [alert show];
+        return;
+    }
     if ([self checkOrderIsLegitimate]) {
         [self.view endEditing:YES];
         FMDeviceManager_t *manager = [FMDeviceManager sharedManager];
@@ -851,6 +867,10 @@
             telNum = [NSString stringWithFormat:@"%@",dic[@"data"][@"customerServiceNo"]];
             minRecharge = [NSString stringWithFormat:@"%@",dic[@"data"][@"minAmt"]];
             fee = [NSString stringWithFormat:@"%@",dic[@"data"][@"fee"]];
+            if (self.accoutType == SelectAccoutTypeP2P)
+            {
+                [UserInfoSingle sharedManager].openStatus = [[coreDict objectSafeForKey:@"openStatus"] integerValue];
+            }
             NSString *bankPhone =  [dic[@"data"][@"bankInfo"] objectSafeForKey:@"bankPhone"];
             isSpecial = [[dic[@"data"][@"bankInfo"] objectSafeForKey:@"isSpecial"] boolValue];
           BOOL isCompanyAgent  = [[dic[@"data"][@"bankInfo"] objectSafeForKey:@"isCompanyAgent"] boolValue];
