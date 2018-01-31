@@ -722,11 +722,11 @@
         if (buttonIndex == 1) {
             NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"4006766988"];
             if ([UserInfoSingle sharedManager].superviseSwitch) {
-                if ([UserInfoSingle sharedManager].level> 1 || ![UserInfoSingle sharedManager].zxIsNew || ![UserInfoSingle sharedManager].goldIsNew) {
-                    str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"4000322988"];
+                if ([UserInfoSingle sharedManager].level <= 1 && [UserInfoSingle sharedManager].zxIsNew && [UserInfoSingle sharedManager].goldIsNew) {
+                    str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"4006766988"];
                 }
                 else {
-                    str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"4006766988"];
+                    str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"4000322988"];
                 }
             }
             else {
@@ -807,11 +807,11 @@
     else  if ([title isEqualToString:@"联系我们"]){//邀请返利
         NSString *teleNo = nil;
         if ([UserInfoSingle sharedManager].superviseSwitch) {
-            if ([UserInfoSingle sharedManager].level> 1 || ![UserInfoSingle sharedManager].zxIsNew || ![UserInfoSingle sharedManager].goldIsNew) {
-                teleNo = @"呼叫400-0322-988";
+            if ([UserInfoSingle sharedManager].level <= 1 && [UserInfoSingle sharedManager].zxIsNew && [UserInfoSingle sharedManager].goldIsNew) {
+                teleNo = @"呼叫400-6766-988";
             }
             else {
-                teleNo = @"呼叫400-6766-988";
+                teleNo = @"呼叫400-0322-988";
             }
         }
         else {
