@@ -79,24 +79,7 @@
 {
     [super layoutSubviews];
     self.cycleView.frame = CGRectMake(0, 0, ScreenWidth, self.height-105);
-    if (self.iconArray.count>0) {
-        for (UIView *view in self.buttonBaseView.subviews) {
-            NSInteger index = view.tag - 100;
-            if (index >= 0) {
-                UCFCycleModel *model = [self.iconArray objectAtIndex:index];
-                for (UIView *view1 in view.subviews) {
-                    if ([view1 isKindOfClass:[UIImageView class]]) {
-                        UIImageView *image = (UIImageView *)view1;
-                        [image sd_setImageWithURL:[NSURL URLWithString:model.thumb]];
-                    }
-                    else if ([view1 isKindOfClass:[UILabel class]]) {
-                        UILabel *label = (UILabel *)view1;
-                        label.text = model.title;
-                    }
-                }
-            }
-        }
-    }
+//    [self refreshIcons];
     
 }
 - (void)initData
@@ -224,10 +207,30 @@
                 UCFCycleModel *model = [UCFCycleModel getCycleModelByDataDict:dict];
                 [weakSelf.iconArray addObject:model];
             }
-            
+            [weakSelf refreshIcons];
         });
     });
 }
 
+- (void)refreshIcons {
+    if (self.iconArray.count>0) {
+        for (UIView *view in self.buttonBaseView.subviews) {
+            NSInteger index = view.tag - 100;
+            if (index >= 0) {
+                UCFCycleModel *model = [self.iconArray objectAtIndex:index];
+                for (UIView *view1 in view.subviews) {
+                    if ([view1 isKindOfClass:[UIImageView class]]) {
+                        UIImageView *image = (UIImageView *)view1;
+                        [image sd_setImageWithURL:[NSURL URLWithString:model.thumb]];
+                    }
+                    else if ([view1 isKindOfClass:[UILabel class]]) {
+                        UILabel *label = (UILabel *)view1;
+                        label.text = model.title;
+                    }
+                }
+            }
+        }
+    }
+}
 
 @end
