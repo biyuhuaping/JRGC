@@ -19,6 +19,8 @@
 #import "FullWebViewController.h"
 #import "UCFCashTableViewCell.h"
 #import "UCFSettingItem.h"
+#import "UCFP2PAuthPaymentWebViewController.h"
+#import "NSString+Misc.h"
 #define CASHWAYCELLHIGHT  73.0 //提现方式cell 的高度
 @interface UCFCashViewController ()<UCFChoseBankViewControllerDelegate,MjAlertViewDelegate,UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate,UIAlertViewDelegate>
 {
@@ -38,6 +40,8 @@
     NSString *_perDayRealTimeAmountLimit;//单日最大实时提现金额
     NSArray  *_cashWayArray;//提现方式数组
     NSString *_perDayRealTimeTipStr;//单日提现子标题提示信息
+    
+     NSString  *_isP2PAuthPaymentSucess;   //是否P2P缴费授权成功
 }
 @property (weak, nonatomic) IBOutlet UIScrollView *baseScrollView;
 @property (strong, nonatomic) IBOutlet UIImageView *bankIcon;
@@ -728,6 +732,33 @@
             }
         }
     }
+    else if(tag.intValue == kSXTagP2PCreateAuthPayment)
+    {
+        NSMutableDictionary *dic = [data objectFromJSONString];
+        NSString *rstcode = dic[@"ret"];
+        if([rstcode intValue] == 1)
+        {
+            NSDictionary  *dataDict = dic[@"data"][@"tradeReq"];
+            NSString *urlStr = dic[@"data"][@"url"];
+            UCFP2PAuthPaymentWebViewController *rechargeWebVC = [[UCFP2PAuthPaymentWebViewController alloc]initWithNibName:@"UCFP2PAuthPaymentWebViewController" bundle:nil];
+            NSString *SIGNStr =   dataDict[@"SIGN"];
+            NSMutableDictionary *data =  [[NSMutableDictionary alloc]initWithDictionary:@{}];
+            [data setValue: dataDict[@"PARAMS"]  forKey:@"PARAMS"];
+            [data setValue:[NSString  urlEncodeStr:SIGNStr] forKey:@"SIGN"];
+            rechargeWebVC.webDataDic = data;
+            rechargeWebVC.navTitle = @"P2P缴费授权";
+            rechargeWebVC.url = urlStr;
+            rechargeWebVC.accoutType = self.accoutType;
+//            rechargeWebVC.rootVc = self.uperViewController;
+            [self.navigationController pushViewController:rechargeWebVC animated:YES];
+        }
+        else{
+            NSString *messageStr = [dic objectSafeForKey:@"message"];
+            UIAlertView *alert1 = [[UIAlertView alloc] initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            [alert1 show];
+        }
+        
+    }
 }
 
 - (IBAction)getMobileCheckCode:(id)sender {
@@ -842,23 +873,80 @@
     
     NSString *isFeeEnableStr = [NSString stringWithFormat:@"%@",[self.cashInfoDic[@"data"] objectSafeForKey:@"isFeeEnable"]];
     BOOL isFeeEnable = [isFeeEnableStr boolValue];
+    //是否缴费授权
+    BOOL isAuthPaymentStr = [[self.cashInfoDic[@"data"] objectSafeForKey:@"isAuthPayment"] boolValue];
+    if (_isP2PAuthPaymentSucess)
+    {
+        isAuthPaymentStr = [_isP2PAuthPaymentSucess isEqualToString:@"success"] ? YES :isAuthPaymentStr;
+    }
+    //缴费授权到期日
+    NSString *paymentDeadline = [NSString stringWithFormat:@"%@",[self.cashInfoDic[@"data"] objectSafeForKey:@"paymentDeadline"]];
+    //缴费授权-->>是否过期
+    BOOL afterPaymentDeadline = [[self.cashInfoDic[@"data"] objectSafeForKey:@"afterPaymentDeadline"] boolValue];
+
     if (isFeeEnable) {
-        double cashMoney = [_crachTextField.text doubleValue];
-        double feeMoney = cashMoney * [_fee doubleValue] *0.01;
-        double actualMoney = cashMoney - feeMoney;
-        NSString *cashMoneyStr = [UCFToolsMehod AddComma:[NSString stringWithFormat:@"%.2lf",cashMoney]];
-        NSString *feeMoneyStr = [UCFToolsMehod AddComma:[NSString stringWithFormat:@"%.2lf",feeMoney]];
-        NSString *actualMoneyStr = [UCFToolsMehod AddComma:[NSString stringWithFormat:@"%.2lf",actualMoney]];
-        NSString *cashMoneyStr1 = [NSString stringWithFormat:@"¥%@",cashMoneyStr];
-        NSString *feeMoneyStr1 = [NSString stringWithFormat:@"¥%@",feeMoneyStr];
-        NSString *actualMoneyStr1 = [NSString stringWithFormat:@"¥%@",actualMoneyStr];
-        MjAlertView *alertView =[[MjAlertView alloc] initCashAlertViewWithCashMoney:cashMoneyStr1 ActualAccount:actualMoneyStr1 FeeMoney:feeMoneyStr1 delegate:self cancelButtonTitle:@"取消" withOtherButtonTitle:@"确定"];
-        [alertView show];
+        
+        NSString *messageStr = @"        授权工场微金在交易中，收取合同中约定的费用\n      • 首次充值后未出借的提现             ";
+        if(isAuthPaymentStr) //已经设置过缴费授权 检查是否过期
+        {
+            if (afterPaymentDeadline &&  (![paymentDeadline isEqualToString:@""] || paymentDeadline.length != 0))//已过期的 提醒已过期
+            {
+                NSString *messageStr = [NSString stringWithFormat:@"    授权工场微金在交易中，收取合同中约定的费用          \n        • 首次充值后未出借的提现\n        本次授权过期时间%@",paymentDeadline];
+                [self showAlertViewTitle:@"费用收取授权" WithMessage:messageStr withViewTag:2018];
+            }
+            else {//未过期的 提醒授权手续费
+                double cashMoney = [_crachTextField.text doubleValue];
+                double feeMoney = cashMoney * [_fee doubleValue] *0.01;
+                double actualMoney = cashMoney - feeMoney;
+                NSString *cashMoneyStr = [UCFToolsMehod AddComma:[NSString stringWithFormat:@"%.2lf",cashMoney]];
+                NSString *feeMoneyStr = [UCFToolsMehod AddComma:[NSString stringWithFormat:@"%.2lf",feeMoney]];
+                NSString *actualMoneyStr = [UCFToolsMehod AddComma:[NSString stringWithFormat:@"%.2lf",actualMoney]];
+                NSString *cashMoneyStr1 = [NSString stringWithFormat:@"¥%@",cashMoneyStr];
+                NSString *feeMoneyStr1 = [NSString stringWithFormat:@"¥%@",feeMoneyStr];
+                NSString *actualMoneyStr1 = [NSString stringWithFormat:@"¥%@",actualMoneyStr];
+                MjAlertView *alertView =[[MjAlertView alloc] initCashAlertViewWithCashMoney:cashMoneyStr1 ActualAccount:actualMoneyStr1 FeeMoney:feeMoneyStr1 delegate:self cancelButtonTitle:@"取消" withOtherButtonTitle:@"确定"];
+                [alertView show];
+            }
+        }else{//未设置过缴费授权直接弹框
+            [self showAlertViewTitle:@"费用收取授权" WithMessage:messageStr withViewTag:2018];
+        }
         return;
     }
     sender.userInteractionEnabled = NO;
     [self withdrawalAmountIsExceedsTheLimitHttPRequest];
 }
+-(void)showAlertViewTitle:(NSString *)titile WithMessage:(NSString *)messageStr withViewTag:(NSUInteger)tag
+{
+    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:titile message:messageStr delegate:self cancelButtonTitle:@"取消" otherButtonTitles: @"确定",nil];//@"费用收取授权"
+    alertView.tag = tag;
+    if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1)
+    {
+        CGSize size = [messageStr sizeWithFont:[UIFont systemFontOfSize:15]constrainedToSize:CGSizeMake(240,200) lineBreakMode:NSLineBreakByTruncatingTail];
+        
+        UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, -30 ,240, size.height+30)];
+        textLabel.font = [UIFont systemFontOfSize:13];
+        textLabel.textColor = UIColorWithRGB(0x333333);
+        textLabel.backgroundColor = [UIColor clearColor];
+        textLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        textLabel.numberOfLines = 0;
+        textLabel.textAlignment = NSTextAlignmentLeft;
+        textLabel.text = messageStr;
+        [alertView setValue:textLabel forKey:@"accessoryView"];
+        alertView.message = @"";
+    }
+    [alertView show];
+}
+-(void)isP2PAuthPaymentSuccess:(NSString *)isSuccess
+{
+    _isP2PAuthPaymentSucess = isSuccess;
+}
+#pragma mark-- 用户缴费费用授权网络请求
+-(void)accoutAuthPaymentHttPRequest
+{
+    NSDictionary *dataDic = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"userId",@"1",@"roleType", nil];
+    [[NetworkModule sharedNetworkModule] newPostReq:dataDic tag:kSXTagP2PCreateAuthPayment owner:self signature:YES Type:self.accoutType];
+}
+
 #pragma mark-- 提现金额是否超过限制网络请求
 -(void)withdrawalAmountIsExceedsTheLimitHttPRequest{
     NSString *bankNoStr = @"";
@@ -947,6 +1035,11 @@
             [_crachTextField becomeFirstResponder];
         }else{
            [self realTimeWithdrawalAmount:_crachTextField.text];
+        }
+    }else if (alertView.tag == 2018) {
+        [self.view endEditing:YES];
+        if (buttonIndex == 1) {
+            [self accoutAuthPaymentHttPRequest];
         }
     }
 }
