@@ -672,6 +672,8 @@
 		8300100E1E1356870088C707 /* UCFModifyReservedBankNumberViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8300100C1E1356870088C707 /* UCFModifyReservedBankNumberViewController.xib */; };
 		831B98AB1E728ECC009E46EA /* MinuteCountDownView.m in Sources */ = {isa = PBXBuildFile; fileRef = 831B98A81E728ECC009E46EA /* MinuteCountDownView.m */; };
 		831B98AC1E728ECC009E46EA /* MinuteCountDownView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 831B98AA1E728ECC009E46EA /* MinuteCountDownView.xib */; };
+		831BEC4D20241C31007E1F75 /* UCFP2PAuthPaymentWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 831BEC4B20241C31007E1F75 /* UCFP2PAuthPaymentWebViewController.m */; };
+		831BEC4E20241C31007E1F75 /* UCFP2PAuthPaymentWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 831BEC4C20241C31007E1F75 /* UCFP2PAuthPaymentWebViewController.xib */; };
 		832942CE1F39914E001E34F1 /* UCFGoldCouponModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 832942CD1F39914E001E34F1 /* UCFGoldCouponModel.m */; };
 		832C3C111F443AD200ECAA4A /* UCFGoldCouponReturn.m in Sources */ = {isa = PBXBuildFile; fileRef = 832C3C0F1F443AD200ECAA4A /* UCFGoldCouponReturn.m */; };
 		832C3C121F443AD200ECAA4A /* UCFGoldCouponReturn.xib in Resources */ = {isa = PBXBuildFile; fileRef = 832C3C101F443AD200ECAA4A /* UCFGoldCouponReturn.xib */; };
@@ -2225,6 +2227,9 @@
 		831B98A81E728ECC009E46EA /* MinuteCountDownView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinuteCountDownView.m; sourceTree = "<group>"; };
 		831B98A91E728ECC009E46EA /* MinuteCountDownView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinuteCountDownView.h; sourceTree = "<group>"; };
 		831B98AA1E728ECC009E46EA /* MinuteCountDownView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MinuteCountDownView.xib; sourceTree = "<group>"; };
+		831BEC4A20241C31007E1F75 /* UCFP2PAuthPaymentWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFP2PAuthPaymentWebViewController.h; sourceTree = "<group>"; };
+		831BEC4B20241C31007E1F75 /* UCFP2PAuthPaymentWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFP2PAuthPaymentWebViewController.m; sourceTree = "<group>"; };
+		831BEC4C20241C31007E1F75 /* UCFP2PAuthPaymentWebViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFP2PAuthPaymentWebViewController.xib; sourceTree = "<group>"; };
 		832942CC1F39914E001E34F1 /* UCFGoldCouponModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFGoldCouponModel.h; sourceTree = "<group>"; };
 		832942CD1F39914E001E34F1 /* UCFGoldCouponModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFGoldCouponModel.m; sourceTree = "<group>"; };
 		832C3C0E1F443AD200ECAA4A /* UCFGoldCouponReturn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFGoldCouponReturn.h; sourceTree = "<group>"; };
@@ -3941,6 +3946,9 @@
 				832D521D1D8FE5EA0060F1F7 /* UCFWithdrawCashResultWebView.h */,
 				832D521E1D8FE5EA0060F1F7 /* UCFWithdrawCashResultWebView.m */,
 				833603CD1D928F9200C3E435 /* UCFWithdrawCashResultWebView.xib */,
+				831BEC4A20241C31007E1F75 /* UCFP2PAuthPaymentWebViewController.h */,
+				831BEC4B20241C31007E1F75 /* UCFP2PAuthPaymentWebViewController.m */,
+				831BEC4C20241C31007E1F75 /* UCFP2PAuthPaymentWebViewController.xib */,
 				83EB21DF1D758EE50069EF95 /* UCFCashRecordListViewController.h */,
 				83EB21E01D758EE50069EF95 /* UCFCashRecordListViewController.m */,
 				83EB21E11D758EE50069EF95 /* UCFCashRecordListViewController.xib */,
@@ -7297,6 +7305,7 @@
 				A8898DC41FBD32500064494B /* ServiceChargeView1.xib in Resources */,
 				840A794B1C2A80B60059A946 /* UCFMessageSettingViewController.xib in Resources */,
 				83C3E7E31F346188007BE065 /* UCFGoldCouponViewController.xib in Resources */,
+				831BEC4E20241C31007E1F75 /* UCFP2PAuthPaymentWebViewController.xib in Resources */,
 				A860F2661F5E7DA10017495F /* UCFGoldRebateCell.xib in Resources */,
 				74956EB51D66F33D00D68B61 /* UCFAccountDetailViewController.xib in Resources */,
 				4A90167F1AFB12FE0049A9E0 /* LICENSE in Resources */,
@@ -7897,6 +7906,7 @@
 				7BC304901ACBC26D007767F1 /* EGORefreshTableFooterView.m in Sources */,
 				83CD84281F13A50800227704 /* UCFBatchBidController.m in Sources */,
 				74E140441F1C573000B17A96 /* UCFGoldRechargeHistoryController.m in Sources */,
+				831BEC4D20241C31007E1F75 /* UCFP2PAuthPaymentWebViewController.m in Sources */,
 				74270CA11EC58F6800F9419B /* UCFHomeListNavView.m in Sources */,
 				74F2911F1AE0DBF2003E0E86 /* UCFTopUpViewController.m in Sources */,
 				EDEF5E921CBF761700592B20 /* PromptView.m in Sources */,

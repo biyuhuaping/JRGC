@@ -1310,6 +1310,12 @@ static NetworkModule *gInstance = NULL;
         case kSXTagP2PAccountrechargeNew://***新微金充值接口
             parameter = [NEW_SERVER_IP stringByAppendingString:P2PACCOUTRECHRAGENEWURL];
             break;
+        case kSXTagP2PCreateAuthPayment: //***用户缴费授权
+            parameter = [NEW_SERVER_IP stringByAppendingString:P2PCREATEAUTHPATMENTURL];
+            break;
+        case  KsxTagP2PCancelAuthPayment://***取消用户缴费授权
+            parameter = [NEW_SERVER_IP stringByAppendingString:P2PCANCELAUTHPAYMENTURL];
+            break;
     }
     //给原有参数字典添加公共参数
     if (!data) {
