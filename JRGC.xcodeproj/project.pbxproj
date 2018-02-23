@@ -266,6 +266,9 @@
 		744EB7FE1EE7E871003C57C4 /* UCFInvestTransferViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 744EB7FC1EE7E871003C57C4 /* UCFInvestTransferViewController.xib */; };
 		744EB8011EE803F4003C57C4 /* UCFHonorHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 744EB8001EE803F4003C57C4 /* UCFHonorHeaderView.m */; };
 		744EB8031EE80401003C57C4 /* UCFHonorHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 744EB8021EE80401003C57C4 /* UCFHonorHeaderView.xib */; };
+		744F0F5420301C2B00BA5E97 /* UCFSettingFuncItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 744F0F5320301C2A00BA5E97 /* UCFSettingFuncItem.m */; };
+		744F0F5820301C9D00BA5E97 /* UCFSecurityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 744F0F5520301C9B00BA5E97 /* UCFSecurityCell.xib */; };
+		744F0F5920301C9D00BA5E97 /* UCFSecurityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 744F0F5620301C9B00BA5E97 /* UCFSecurityCell.m */; };
 		744F8BEE1F3327AF005FF01B /* UCFMyReservedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 744F8BEC1F3327AF005FF01B /* UCFMyReservedViewController.m */; };
 		744F8BEF1F3327AF005FF01B /* UCFMyReservedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 744F8BED1F3327AF005FF01B /* UCFMyReservedViewController.xib */; };
 		7456D3C71E82700500207349 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 7456D3C61E82700500207349 /* UIView+Extension.m */; };
@@ -1519,6 +1522,11 @@
 		744EB7FF1EE803F4003C57C4 /* UCFHonorHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFHonorHeaderView.h; sourceTree = "<group>"; };
 		744EB8001EE803F4003C57C4 /* UCFHonorHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFHonorHeaderView.m; sourceTree = "<group>"; };
 		744EB8021EE80401003C57C4 /* UCFHonorHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFHonorHeaderView.xib; sourceTree = "<group>"; };
+		744F0F5220301C2A00BA5E97 /* UCFSettingFuncItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFSettingFuncItem.h; sourceTree = "<group>"; };
+		744F0F5320301C2A00BA5E97 /* UCFSettingFuncItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFSettingFuncItem.m; sourceTree = "<group>"; };
+		744F0F5520301C9B00BA5E97 /* UCFSecurityCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFSecurityCell.xib; sourceTree = "<group>"; };
+		744F0F5620301C9B00BA5E97 /* UCFSecurityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFSecurityCell.m; sourceTree = "<group>"; };
+		744F0F5720301C9C00BA5E97 /* UCFSecurityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFSecurityCell.h; sourceTree = "<group>"; };
 		744F8BEB1F3327AF005FF01B /* UCFMyReservedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFMyReservedViewController.h; sourceTree = "<group>"; };
 		744F8BEC1F3327AF005FF01B /* UCFMyReservedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFMyReservedViewController.m; sourceTree = "<group>"; };
 		744F8BED1F3327AF005FF01B /* UCFMyReservedViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFMyReservedViewController.xib; sourceTree = "<group>"; };
@@ -4181,6 +4189,8 @@
 		748D77641ADE448800910FF7 /* UCFSettingModels */ = {
 			isa = PBXGroup;
 			children = (
+				744F0F5220301C2A00BA5E97 /* UCFSettingFuncItem.h */,
+				744F0F5320301C2A00BA5E97 /* UCFSettingFuncItem.m */,
 				748D77651ADE44D300910FF7 /* UCFSettingItem.h */,
 				748D77661ADE44D300910FF7 /* UCFSettingItem.m */,
 				748D77A21ADE6D5A00910FF7 /* UCFSettingArrowItem.h */,
@@ -4819,6 +4829,9 @@
 		74EB80E91AE4FCA30071621E /* view */ = {
 			isa = PBXGroup;
 			children = (
+				744F0F5720301C9C00BA5E97 /* UCFSecurityCell.h */,
+				744F0F5620301C9B00BA5E97 /* UCFSecurityCell.m */,
+				744F0F5520301C9B00BA5E97 /* UCFSecurityCell.xib */,
 				74EB80EA1AE4FCC40071621E /* SecurityCell.h */,
 				74EB80EB1AE4FCC40071621E /* SecurityCell.m */,
 				74EB80EF1AE500A50071621E /* SecurityCell.xib */,
@@ -7223,6 +7236,7 @@
 				25F445C41D66E276006813BB /* UCFChoseBankViewController.xib in Resources */,
 				83CD842B1F13A50800227704 /* UCFHonerPlanViewController.xib in Resources */,
 				746FFE261B0059BB00FF927F /* UCFBindCardOneTableViewCell.xib in Resources */,
+				744F0F5820301C9D00BA5E97 /* UCFSecurityCell.xib in Resources */,
 				74EB80F01AE500A50071621E /* SecurityCell.xib in Resources */,
 				E3A96B0F1CBF83CE00E8884F /* UCFWorkPointsTableViewCell.xib in Resources */,
 				FB7E51B21ADE5E4000878C9F /* InvestmentCell.xib in Resources */,
@@ -7543,6 +7557,7 @@
 				83FCCA6B1F1711A6002921C5 /* UCFMyGoldInvestInfoViewController.m in Sources */,
 				FBB685891AE4A76800F222B6 /* UIScrollView+MJExtension.m in Sources */,
 				7470C8481E5E7CDE007D52F4 /* UCFCollectionBidModel.m in Sources */,
+				744F0F5420301C2B00BA5E97 /* UCFSettingFuncItem.m in Sources */,
 				74270C9D1EC58F6800F9419B /* UCFHomeListCell.m in Sources */,
 				74270CA41EC58F6800F9419B /* UCFSignView.m in Sources */,
 				83AB495F1F6A766500C4231F /* UCFAccountPieCharViewController.m in Sources */,
@@ -8105,6 +8120,7 @@
 				7BCE01FA1AC8FC260084C15C /* ASIHTTPRequest.m in Sources */,
 				74270D321EC595FA00F9419B /* UCFFeedBackViewController.m in Sources */,
 				7436F2D81F3C38AE003B77CA /* UCFGoldRechargeBankCell.m in Sources */,
+				744F0F5920301C9D00BA5E97 /* UCFSecurityCell.m in Sources */,
 				74270D201EC595ED00F9419B /* UCFRebateCell1.m in Sources */,
 				74931A301B1326FE00143424 /* NSTextCheckingResult+ExtendedURL.m in Sources */,
 				8346B2701F71032100219D41 /* UCFRechargeAndCashView.m in Sources */,

@@ -1316,6 +1316,9 @@ static NetworkModule *gInstance = NULL;
         case  KsxTagP2PCancelAuthPayment://***取消用户缴费授权
             parameter = [NEW_SERVER_IP stringByAppendingString:P2PCANCELAUTHPAYMENTURL];
             break;
+        case kSXTagCancelAContract:
+            parameter = [NEW_SERVER_IP stringByAppendingString:CANCELACONTRACT];
+            break;
     }
     //给原有参数字典添加公共参数
     if (!data) {
