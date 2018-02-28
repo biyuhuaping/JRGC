@@ -95,12 +95,12 @@
                 <constraints>
                     <constraint firstItem="TM6-PQ-zbf" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="3KZ-YK-XkX"/>
                     <constraint firstItem="wKd-x1-iqI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="69V-Rf-tvf"/>
-                    <constraint firstItem="b4t-kL-nes" firstAttribute="leading" secondItem="TM6-PQ-zbf" secondAttribute="trailing" constant="10" id="ByJ-4g-OmU"/>
                     <constraint firstAttribute="bottom" secondItem="wKd-x1-iqI" secondAttribute="bottom" id="IjY-zv-27S"/>
                     <constraint firstItem="Kbb-QR-ziX" firstAttribute="leading" secondItem="TM6-PQ-zbf" secondAttribute="trailing" constant="10" id="KNA-2g-oXk"/>
                     <constraint firstItem="CHr-DH-p9c" firstAttribute="centerY" secondItem="tJJ-wk-T2L" secondAttribute="centerY" id="SXI-5K-4Ti"/>
                     <constraint firstAttribute="trailing" secondItem="tJJ-wk-T2L" secondAttribute="trailing" constant="15" id="Udb-iX-Nte"/>
                     <constraint firstAttribute="trailing" secondItem="wKd-x1-iqI" secondAttribute="trailing" id="Vhz-Zv-WOF"/>
+                    <constraint firstItem="b4t-kL-nes" firstAttribute="leading" secondItem="Kbb-QR-ziX" secondAttribute="leading" id="YmF-i4-r8X"/>
                     <constraint firstItem="Kbb-QR-ziX" firstAttribute="centerY" secondItem="TM6-PQ-zbf" secondAttribute="centerY" constant="-8" id="ePk-43-GP4"/>
                     <constraint firstItem="j7Z-Mz-NY0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="fGF-Up-7LH"/>
                     <constraint firstItem="TM6-PQ-zbf" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="ifI-dS-AGb"/>
@@ -116,9 +116,11 @@
                 <outlet property="button2" destination="tJJ-wk-T2L" id="Sah-Ut-zPJ"/>
                 <outlet property="downSegLeftSpace" destination="69V-Rf-tvf" id="ebT-gW-UTm"/>
                 <outlet property="downSegLine" destination="wKd-x1-iqI" id="B3B-Co-Y40"/>
+                <outlet property="imageW" destination="sUm-aU-2Wa" id="Vke-hf-LSp"/>
                 <outlet property="signImageView" destination="TM6-PQ-zbf" id="uwA-75-h5W"/>
                 <outlet property="subTitleLabel" destination="b4t-kL-nes" id="l7m-uQ-BPK"/>
                 <outlet property="title1Label" destination="Kbb-QR-ziX" id="GPU-2p-CW2"/>
+                <outlet property="titleLeftSpace" destination="KNA-2g-oXk" id="Qsb-kX-mzY"/>
                 <outlet property="upSegLeftSpace" destination="fGF-Up-7LH" id="PLE-p9-cak"/>
                 <outlet property="upSegLine" destination="j7Z-Mz-NY0" id="oX2-Vi-GqN"/>
             </connections>

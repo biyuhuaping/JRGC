@@ -19,6 +19,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *subTitleLabel;
 @property (weak, nonatomic) IBOutlet UIButton *button1;
 @property (weak, nonatomic) IBOutlet UIButton *button2;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageW;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *titleLeftSpace;
 
 @end
 
@@ -29,6 +31,14 @@
     // Initialization code
     self.button1.layer.cornerRadius = self.button1.height * 0.5;
     self.button2.layer.cornerRadius = self.button2.height *0.5;
+    if (!self.isShowImage) {
+        self.imageW.constant = 0;
+        self.titleLeftSpace.constant = 5;
+    }
+    else {
+        self.imageW.constant = 20;
+        self.titleLeftSpace.constant = 10;
+    }
 }
 
 - (void)setFuncItem:(UCFSettingFuncItem *)funcItem
