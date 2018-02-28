@@ -11,6 +11,7 @@
 #import "NZLabel.h"
 #import "UCFBatchSetNumWebViewController.h"
 #import "FullWebViewController.h"
+#import "NSString+Misc.h"
 #define TITLEHEIGHT 44
 #define TITLEWIDTH  SCREEN_WIDTH/3
 #define IMAGEVIEWWIDTH 15
@@ -566,8 +567,12 @@ static NSString *thirdStr = @"批量出借授权已经开启";
                  NSMutableDictionary  *dataDict = [NSMutableDictionary dictionaryWithDictionary:dic[@"data"][@"params"]];
                  NSString *urlStr = dic[@"data"][@"url"];
                  UCFBatchSetNumWebViewController *webView = [[UCFBatchSetNumWebViewController alloc]initWithNibName:@"UCFBatchSetNumWebViewController" bundle:nil];
-                 webView.url = urlStr;
-                 webView.webDataDic =dataDict;
+                 webView.url = urlStr; //**** 此处验签串需要 urlEncode一下，不然会验签失败
+                 NSString *SIGNStr =   dataDict[@"SIGN"];
+                 NSMutableDictionary *data =  [[NSMutableDictionary alloc]initWithDictionary:@{}];
+                 [data setValue: dataDict[@"PARAMS"]  forKey:@"PARAMS"];
+                 [data setValue:[NSString  urlEncodeStr:SIGNStr] forKey:@"SIGN"];
+                 webView.webDataDic = data;
                  webView.navTitle = @"批量出借授权";
                  webView.sourceType = _sourceType;
                  webView.accoutType = self.accoutType;

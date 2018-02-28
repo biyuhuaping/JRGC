@@ -59,7 +59,12 @@
 
 - (void)getToBack
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if(self.isFromeBankCardInfo)
+    {
+        [self.navigationController popViewControllerAnimated:YES];
+    }else{
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 - (void)viewDidLoad {
     [super viewDidLoad];

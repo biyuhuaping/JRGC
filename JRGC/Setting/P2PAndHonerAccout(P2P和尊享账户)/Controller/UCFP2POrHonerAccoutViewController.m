@@ -31,8 +31,9 @@
 //#import "UCFCalendarViewController.h"
 #import "UCFCalendarModularViewController.h"
 #import "UCFMyReservedViewController.h"
-
-@interface UCFP2POrHonerAccoutViewController ()<UITableViewDelegate,UITableViewDataSource,UCFP2POrHornerTabHeaderViewDelete,UIAlertViewDelegate,MjAlertViewDelegate>
+#import "UCFP2PAuthPaymentWebViewController.h"
+#import "NSString+Misc.h"
+@interface UCFP2POrHonerAccoutViewController ()<UITableViewDelegate,UITableViewDataSource,UCFP2POrHornerTabHeaderViewDelete,UIAlertViewDelegate,MjAlertViewDelegate,UCFP2PAuthPaymentWebViewControllerDelegate>
 {
     UCFP2POrHornerTabHeaderView *_headerView;
     BOOL _isShowOrHideAccoutMoney;
@@ -481,7 +482,40 @@
         [self clickCashBtn:nil];
     }
 }
-
+/*、
+-(void)p2pAccoutPaymentAuthInfo:(UCFSettingFuncItem * )funcItem
+{
+    switch (funcItem.paymentAuthType)
+    {
+        case UCFSettingPaymentAuthTypeUnAuth://未授权
+        {
+            [self createAccoutAuthPaymentHttPRequest];
+        }
+            break;
+        case UCFSettingPaymentAuthTypeAuthed://已授权时，取消授权
+        {
+            NSString *messageStr = [NSString stringWithFormat:@"授权工场微金在交易中，收取合同中约定的费用          \n• 首次充值后未出借的提现"];
+            [self showAlertViewTitle:@"已授权内容" WithMessage:messageStr withViewTag:2019 withButtonTitle:@"解除授权"];
+            
+        }
+            break;
+        case UCFSettingPaymentAuthTypeOverAuth://授权过期，再授权
+        {
+            NSString *messageStr = [NSString stringWithFormat:@"授权工场微金在交易中，收取合同中约定的费用          \n• 首次充值后未出借的提现\n 本次授权过期时间%@", self.paymentDeadlineDate];
+            [self showAlertViewTitle:@"费用收取授权" WithMessage:messageStr withViewTag:2018 withButtonTitle:@"授权"];
+        }
+            break;
+        default:
+            break;
+    }
+}
+ */
+-(void)showAlertViewTitle:(NSString *)titile WithMessage:(NSString *)messageStr withViewTag:(NSUInteger)tag withButtonTitle:(NSString *)btnTitle
+{
+    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:titile message:messageStr delegate:self cancelButtonTitle:@"取消" otherButtonTitles: btnTitle,nil];//@"费用收取授权"
+    alertView.tag = tag;
+    [alertView show];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -541,6 +575,26 @@
     NSString *userId = [[NSUserDefaults standardUserDefaults] valueForKey:UUID];
     if(userId){
        [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":userId} tag:kSXTagUserAccountInfo owner:self signature:YES Type:self.accoutType];
+    }
+}
+#pragma mark-- 取消用户缴费费用授权网络请求
+-(void)canleAccoutAuthPaymentHttPRequest
+{
+    NSDictionary *dataDic = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"userId",@"1",@"roleType", nil];
+    [[NetworkModule sharedNetworkModule] newPostReq:dataDic tag:KsxTagP2PCancelAuthPayment owner:self signature:YES Type:self.accoutType];
+}
+#pragma mark-- 用户缴费费用授权网络请求
+-(void)createAccoutAuthPaymentHttPRequest
+{
+    NSDictionary *dataDic = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"userId",@"1",@"roleType", nil];
+    [[NetworkModule sharedNetworkModule] newPostReq:dataDic tag:kSXTagP2PCreateAuthPayment owner:self signature:YES Type:self.accoutType];
+}
+//***授权是否成功
+-(void)isP2PAuthPaymentSuccess:(NSString *)isSuccess;//   @"success" 成功   @"fair" 失败
+{
+    if([isSuccess isEqualToString:@"success"])
+    {
+        [self getP2POrHonerAccoutHttpRequest];
     }
 }
 #pragma mark - 网络请求结果
@@ -667,11 +721,50 @@
             
         }
             break;
-            
+        case kSXTagP2PCreateAuthPayment:
+        {
+                NSMutableDictionary *dic = [data objectFromJSONString];
+                NSString *rstcode = dic[@"ret"];
+                if([rstcode intValue] == 1)
+                {
+                    NSDictionary  *dataDict = dic[@"data"][@"tradeReq"];
+                    NSString *urlStr = dic[@"data"][@"url"];
+                    UCFP2PAuthPaymentWebViewController *P2PAuthPaymentWebVC = [[UCFP2PAuthPaymentWebViewController alloc]initWithNibName:@"UCFP2PAuthPaymentWebViewController" bundle:nil];
+                    NSString *SIGNStr =   dataDict[@"SIGN"];
+                    NSMutableDictionary *data =  [[NSMutableDictionary alloc]initWithDictionary:@{}];
+                    [data setValue: dic[@"data"][@"tradeReq"][@"PARAMS"]  forKey:@"PARAMS"];
+                    [data setValue:[NSString  urlEncodeStr:SIGNStr] forKey:@"SIGN"];
+                    P2PAuthPaymentWebVC.webDataDic = data;
+                    P2PAuthPaymentWebVC.navTitle = @"缴费授权";
+                    P2PAuthPaymentWebVC.url = urlStr;
+                    P2PAuthPaymentWebVC.accoutType = self.accoutType;
+                    P2PAuthPaymentWebVC.delegate = self;
+                    [self.navigationController pushViewController:P2PAuthPaymentWebVC animated:YES];
+                }
+                else{
+                    NSString *messageStr = [dic objectSafeForKey:@"message"];
+                    UIAlertView *alert1 = [[UIAlertView alloc] initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                    [alert1 show];
+                }
+        }
+        break;
+        case  KsxTagP2PCancelAuthPayment:
+        {
+                NSMutableDictionary *dic = [data objectFromJSONString];
+                NSString *rstcode = dic[@"ret"];
+                if([rstcode intValue] == 1)
+                {
+                    [self performSelector:@selector(getP2POrHonerAccoutHttpRequest) withObject:nil afterDelay:0.25];
+                }
+                else{
+                    NSString *messageStr = [dic objectSafeForKey:@"message"];
+                    UIAlertView *alert1 = [[UIAlertView alloc] initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                    [alert1 show];
+                }
+        }
         default:
-            break;
+        break;
     }
-    
     if (self.tableView.header.isRefreshing){
         [self.tableView.header endRefreshing];
     }

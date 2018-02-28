@@ -221,11 +221,11 @@
                           };
     NSString *str = self.accoutType == SelectAccoutTypeHoner ? @"无投资":@"未出借";
     NSString *isThreePlatStr = self.accoutType == SelectAccoutTypeP2P ? @"平台方":@"第三方支付平台";
-    NSString *desStr = [NSString stringWithFormat:@"• 使用快捷支付充值最低金额应大于等于%@元。\n• 对首次充值后%@的提现，%@收取%@%%的手续费。\n• 充值/提现必须为银行借记卡，不支持存折、信用卡充值。\n• 充值需开通银行卡网上支付功能，如有疑问请咨询开户行客服。\n• 单笔充值不可超过该银行充值限额。\n• 如手机快捷支付充值失败，可尝试在电脑上进行网银转账，或使用支付宝进行转账操作。",minRecharge,str,isThreePlatStr,fee];
+    NSString *desStr = [NSString stringWithFormat:@"• 使用快捷支付充值最低金额应大于等于%@元。\n• 对首次充值后%@的提现，%@收取%@%%的手续费。\n• 充值/提现必须为银行借记卡，不支持存折、信用卡充值。\n• 充值需开通银行卡网上支付功能，如有疑问请咨询开户行客服。\n• 单笔充值不可超过该银行充值限额。\n• 如手机快捷支付充值失败，可尝试在电脑上进行网银转账。",minRecharge,str,isThreePlatStr,fee];
     //查看各银行充值限额；
     _desLabel.attributedText = [NSString getNSAttributedString:desStr labelDict:dic];
     [_desLabel setBoldFontToString:@"网银"];
-    [_desLabel setBoldFontToString:@"支付宝"];
+//    [_desLabel setBoldFontToString:@"支付宝"];
 
     __weak typeof(self) weakSelf = self;
     self.telServiceLabel.text = @"• 如果充值金额没有及时到账，请拨打客服查询。";
