@@ -26,26 +26,30 @@
 }
 - (void)jsSetTitle:(NSString *)title
 {
+    baseTitleLabel.text = title;
+}
+-(void)jsClose
+{
     if([baseTitleLabel.text hasSuffix:@"失败"])
     {
-        if ([self respondsToSelector:@selector(isP2PAuthPaymentSuccess:)])
+        if ([self.delegate respondsToSelector:@selector(isP2PAuthPaymentSuccess:)])
         {
             [self.delegate isP2PAuthPaymentSuccess:@"fair"];
         }
     }
-    if ([baseTitleLabel.text hasSuffix:@"成功"]) {
-        if ([self respondsToSelector:@selector(isP2PAuthPaymentSuccess:)])
+    if ([baseTitleLabel.text hasSuffix:@"成功"])
+    {
+        if ([self.delegate respondsToSelector:@selector(isP2PAuthPaymentSuccess:)])
         {
             [self.delegate isP2PAuthPaymentSuccess:@"success"];
         }
     }
-    baseTitleLabel.text = title;
+    [self.navigationController popViewControllerAnimated:YES];
 }
 -(void)getToBack
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self jsClose];
 }
-
 /*
 #pragma mark - Navigation
 

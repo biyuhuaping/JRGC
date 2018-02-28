@@ -800,8 +800,6 @@
     }
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     _getCodeBtn.userInteractionEnabled = NO;
-    
-   
 }
 
 - (IBAction)sumitBtnClick:(UIButton *)sender {
@@ -842,12 +840,12 @@
         return;
     }
     if (_bankBranchViewHeight2.constant == 44) {
-//        if ([self isWorkTimeCash] ||_isHoliday) {
-//            NSString *messageStr = [NSString stringWithFormat:@"大额提现仅在工作日%@间处理，请耐心等待。",_doTime];
-//            UIAlertView *alert1 = [[UIAlertView alloc] initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
-//            [alert1 show];
-//            return;
-//        }
+        if ([self isWorkTimeCash] ||_isHoliday) {
+            NSString *messageStr = [NSString stringWithFormat:@"大额提现仅在工作日%@间处理，请耐心等待。",_doTime];
+            UIAlertView *alert1 = [[UIAlertView alloc] initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+            [alert1 show];
+            return;
+        }
         //临界值判断10万  大额提现时判断联行号是否为空
         if ( [self.bankBrachLabel.text  isEqualToString: @"开户支行"] || [_cashBankNo isEqualToString: @""] || _cashBankNo == nil ) {
             [MBProgressHUD displayHudError:@"请选择开户支行"];
@@ -880,18 +878,26 @@
         isAuthPaymentStr = [_isP2PAuthPaymentSucess isEqualToString:@"success"] ? YES :isAuthPaymentStr;
     }
     //缴费授权到期日
-    NSString *paymentDeadline = [NSString stringWithFormat:@"%@",[self.cashInfoDic[@"data"] objectSafeForKey:@"paymentDeadline"]];
+    //缴费授权到期日
+    NSString *paymentOverTime = [self.cashInfoDic[@"data"] objectSafeForKey:@"paymentOverTime"];
+    //时间戳转化成时间
+    NSDateFormatter *stampFormatter = [[NSDateFormatter alloc] init];
+    [stampFormatter setDateFormat:@"YYYY年MM月dd日HH:mm:ss"];
+    //以 1970/01/01 GMT为基准，然后过了secs秒的时间
+    NSDate *stampDate2 = [NSDate dateWithTimeIntervalSince1970:[paymentOverTime doubleValue]/1000.0];
+    NSLog(@"时间戳转化时间 >>> %@",[stampFormatter stringFromDate:stampDate2]);
+    paymentOverTime = [[stampFormatter stringFromDate:stampDate2] substringToIndex:11];
     //缴费授权-->>是否过期
     BOOL afterPaymentDeadline = [[self.cashInfoDic[@"data"] objectSafeForKey:@"afterPaymentDeadline"] boolValue];
 
     if (isFeeEnable) {
         
-        NSString *messageStr = @"        授权工场微金在交易中，收取合同中约定的费用\n      • 首次充值后未出借的提现             ";
+        NSString *messageStr = [NSString stringWithFormat:@"授权工场微金在交易中，收取合同中约定的费用              \n• 首次充值后未出借的提现\n本次授权过期时间%@",paymentOverTime];
         if(isAuthPaymentStr) //已经设置过缴费授权 检查是否过期
         {
-            if (afterPaymentDeadline &&  (![paymentDeadline isEqualToString:@""] || paymentDeadline.length != 0))//已过期的 提醒已过期
+            if (afterPaymentDeadline &&  (![paymentOverTime isEqualToString:@""] || paymentOverTime.length != 0))//已过期的 提醒已过期
             {
-                NSString *messageStr = [NSString stringWithFormat:@"    授权工场微金在交易中，收取合同中约定的费用          \n        • 首次充值后未出借的提现\n        本次授权过期时间%@",paymentDeadline];
+                
                 [self showAlertViewTitle:@"费用收取授权" WithMessage:messageStr withViewTag:2018];
             }
             else {//未过期的 提醒授权手续费
@@ -917,23 +923,8 @@
 }
 -(void)showAlertViewTitle:(NSString *)titile WithMessage:(NSString *)messageStr withViewTag:(NSUInteger)tag
 {
-    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:titile message:messageStr delegate:self cancelButtonTitle:@"取消" otherButtonTitles: @"确定",nil];//@"费用收取授权"
+    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:titile message:messageStr delegate:self cancelButtonTitle:@"取消" otherButtonTitles: @"授权",nil];
     alertView.tag = tag;
-    if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1)
-    {
-        CGSize size = [messageStr sizeWithFont:[UIFont systemFontOfSize:15]constrainedToSize:CGSizeMake(240,200) lineBreakMode:NSLineBreakByTruncatingTail];
-        
-        UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, -30 ,240, size.height+30)];
-        textLabel.font = [UIFont systemFontOfSize:13];
-        textLabel.textColor = UIColorWithRGB(0x333333);
-        textLabel.backgroundColor = [UIColor clearColor];
-        textLabel.lineBreakMode = NSLineBreakByWordWrapping;
-        textLabel.numberOfLines = 0;
-        textLabel.textAlignment = NSTextAlignmentLeft;
-        textLabel.text = messageStr;
-        [alertView setValue:textLabel forKey:@"accessoryView"];
-        alertView.message = @"";
-    }
     [alertView show];
 }
 -(void)isP2PAuthPaymentSuccess:(NSString *)isSuccess
