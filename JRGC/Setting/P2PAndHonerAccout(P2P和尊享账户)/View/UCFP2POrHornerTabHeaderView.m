@@ -77,9 +77,9 @@
         return;
     }
     
-    if (_accoutTpye == SelectAccoutTypeP2P) {
-        [_moneySwitchBtn setTitle:@"开尊享  赚利息" forState:UIControlStateNormal];
-    }
+//    if (_accoutTpye == SelectAccoutTypeP2P) {//这个3.6.20版本 暂时隐藏 为了监管   韩启元添加
+//        [_moneySwitchBtn setTitle:@"开尊享  赚利息" forState:UIControlStateNormal];
+//    }
     
     cashBalanceStr = [NSString stringWithFormat:@"%.2lf",[[self.dataDict objectSafeForKey:@"cashBalance"] doubleValue]];//可用金额
     interestsStr = [NSString stringWithFormat:@"%.2f",[[self.dataDict  objectSafeForKey:@"interests"] doubleValue]];//累计收益

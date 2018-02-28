@@ -132,7 +132,7 @@
              group3.items =[[NSMutableArray alloc]initWithArray: @[activeGestureCode,activeFaceValid,modifyPassword,moreVc]];
 
         }
-        _itemsData = [[NSMutableArray alloc] initWithObjects:group1,group2,group3,nil];
+        _itemsData = [[NSMutableArray alloc] initWithObjects:group1,group3,nil];
     }
     return _itemsData;
 }
@@ -489,6 +489,7 @@
         UCFSecurityCell *securityCell = [tableView dequeueReusableCellWithIdentifier:@"securitycell2"];
         if (nil == securityCell) {
             securityCell = (UCFSecurityCell*)[[[NSBundle mainBundle] loadNibNamed:@"UCFSecurityCell" owner:self options:nil] lastObject];
+            securityCell.isShowImage = NO;
         }
         securityCell.tableview = tableView;
         securityCell.indexPath = indexPath;

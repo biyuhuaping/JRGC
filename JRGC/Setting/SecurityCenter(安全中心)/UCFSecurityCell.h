@@ -19,4 +19,5 @@
 @property (strong, nonatomic) NSIndexPath *indexPath;
 @property (strong, nonatomic) UCFSettingFuncItem *funcItem;
 @property (weak, nonatomic) id<UCFSecurityCellDelegate> delegate;
+@property (assign, nonatomic) BOOL isShowImage;
 @end
