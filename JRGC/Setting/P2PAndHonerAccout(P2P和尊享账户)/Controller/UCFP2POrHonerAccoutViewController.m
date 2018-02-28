@@ -230,14 +230,14 @@
         }
         
         UCFSettingFuncItem *batchLending = [UCFSettingFuncItem itemWithIcon:@"safecenter_icon_auto" title:@"批量出借" destVcClass:nil];
-        batchLending.subtitle = @"到期日:xxxx-xx-xx";
+//        batchLending.subtitle = @"到期日:xxxx-xx-xx";
         batchLending.batchLendingType = UCFSettingBatchLendingTypeUnopened;
         batchLending.paymentAuthType = UCFSettingPaymentAuthTypeNone;
         //先前是绑卡页面，因为删除绑卡页面，所以暂时用TradePasswordVC这个类替代，整体调试的时候改过来，zrc fixed
         UCFSettingFuncItem *paymentAuth = [UCFSettingFuncItem itemWithIcon:@"safecenter_icon_authorize" title:@"缴费授权" destVcClass:nil];//***qyy
         paymentAuth.batchLendingType = UCFSettingBatchLendingTypeNone;
         paymentAuth.paymentAuthType = UCFSettingPaymentAuthTypeUnAuth;
-        paymentAuth.subtitle = @"到期日:xxxx-xx-xx";
+//        paymentAuth.subtitle = @"到期日:xxxx-xx-xx";
         
         UCFSettingGroup *group3 = [[UCFSettingGroup alloc] init];//第三栏
         group3.items = [[NSMutableArray alloc]initWithArray:@[batchLending, paymentAuth]];
@@ -258,18 +258,18 @@
     if (section == 0) {
         
         if ([UserInfoSingle sharedManager].superviseSwitch) {
-            if (self.accoutType == SelectAccoutTypeP2P && [UserInfoSingle sharedManager].enjoyOpenStatus < 3 && [UserInfoSingle sharedManager].level > 1) {
-                return 208;
-            } else {
+//            if (self.accoutType == SelectAccoutTypeP2P && [UserInfoSingle sharedManager].enjoyOpenStatus < 3 && [UserInfoSingle sharedManager].level > 1) {
+//                return 208;
+//            } else {
                 return 160;
-            }
+//            }
         }
         else {
-            if (self.accoutType == SelectAccoutTypeP2P && [UserInfoSingle sharedManager].enjoyOpenStatus < 3) {
-                return 208;
-            } else {
+//            if (self.accoutType == SelectAccoutTypeP2P && [UserInfoSingle sharedManager].enjoyOpenStatus < 3) {
+//                return 208;
+//            } else {
                 return 160;
-            }
+//            }
         }
         
 
@@ -285,7 +285,8 @@
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     if (section == 0) {
-        CGFloat headHeight = self.accoutType == SelectAccoutTypeP2P ? 208 : 160;
+//        CGFloat headHeight = self.accoutType == SelectAccoutTypeP2P ? 208 : 160;
+        CGFloat headHeight =  160;//这个3.6.20版本 暂时隐藏 为了监管   韩启元添加
         _headerView = [[[NSBundle mainBundle]loadNibNamed:@"UCFP2POrHornerTabHeaderView" owner:nil options:nil] firstObject];
         _headerView.frame = CGRectMake(0, 0, ScreenWidth, headHeight);
         _headerView.upView.backgroundColor = UIColorWithRGB(0x5b6993);
@@ -664,17 +665,20 @@
         vc.accoutType = self.accoutType;
         [self.navigationController pushViewController:vc animated:YES];
     }
-//    else if(alertView.tag == 10005){
-//        if (buttonIndex == 1) {
-//            HSHelper *helper = [HSHelper new];
-//            [helper pushOpenHSType:SelectAccoutTypeP2P Step:[UserInfoSingle sharedManager].openStatus nav:self.navigationController];
-//        }
-//    }else if(alertView.tag == 10003){
-//        if (buttonIndex == 1) {
-//            UCFOldUserGuideViewController *vc = [UCFOldUserGuideViewController createGuideHeadSetp:3];
-//            [self.navigationController pushViewController:vc animated:YES];
-//        }
-//    }
+    else if (alertView.tag == 2018)
+    {
+         if (buttonIndex == 1)
+        {
+            [self createAccoutAuthPaymentHttPRequest];
+        }
+    }
+    else if (alertView.tag == 2019)
+    {
+        if (buttonIndex == 1)
+        {
+            [self canleAccoutAuthPaymentHttPRequest];
+        }
+    }
 }
 #pragma mark -
 #pragma mark  网络请求
@@ -736,7 +740,6 @@
             } else {
                 [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
             }
-
         }
             break;
         case kSXTagUserAccountInfo://账户信息请求
@@ -755,7 +758,7 @@
                 _headerView.accumulatedIncomeLab.text= [NSString stringWithFormat:@"¥%@",[dataDict objectSafeForKey:@"interests"]];//累计收益
                 _headerView.totalIncomeLab.text= [NSString stringWithFormat:@"¥%@",[dataDict objectSafeForKey:@"total"]];//总收益
                 NSString *bankCardNum = [dataDict objectSafeForKey:@"bankCardNum"];
-                NSString *batchMaximum = [dataDict objectSafeForKey:@"batchMaximum"];
+//                NSString *batchMaximum = [dataDict objectSafeForKey:@"batchMaximum"];
                 NSString *prdOrderCount = [dataDict objectSafeForKey:@"prdOrderCount"];
                 NSString *prdOrderCountStr = [NSString stringWithFormat:@"%@笔",[dataDict objectSafeForKey:@"prdOrderCount"] ];
                 prdOrderCountStr = [prdOrderCount intValue] == 0 ? @"":prdOrderCountStr; //我的投
@@ -767,55 +770,56 @@
                 NSString *riskLevel = [dataDict objectSafeForKey:@"riskLevel"];
                 
                 NSString *batchInvestStatus = [NSString stringWithFormat:@"%@",[dataDict objectSafeForKey: @"batchMaximum"]];
-                
-                self.paymentDeadlineDate =  [dataDict objectSafeForKey:@"paymentDeadline"];
-                
-                BOOL afterAutoBidDeadline = [[dataDict objectSafeForKey:@"afterAutoBidDeadline"] boolValue];
-                UCFSettingGroup *settingGroup = [self.cellItemsData objectAtIndex:2];
-                UCFSettingFuncItem *funcItem = [settingGroup.items firstObject];
-                funcItem.paymentAuthType = UCFSettingPaymentAuthTypeNone;
-                if (batchInvestStatus.length>0) {
-                    if (afterAutoBidDeadline) {
-                        funcItem.batchLendingType = UCFSettingBatchLendingTypeOverduring;
-                        funcItem.title = @"批量出借";
-                        //                    funcItem.subtitle = [NSString stringWithFormat:@"到期日:%@", [[dic objectSafeDictionaryForKey:@"data"] objectSafeForKey:@"autoBidDeadline"]];
-                        funcItem.subtitle =  @"到期日：已过期";
-                        
+                if(self.accoutType == SelectAccoutTypeP2P)//只有微金账户有批量出借和缴费授权
+                {
+                    self.paymentDeadlineDate =  [dataDict objectSafeForKey:@"paymentDeadline"];
+                    
+                    BOOL afterAutoBidDeadline = [[dataDict objectSafeForKey:@"afterAutoBidDeadline"] boolValue];
+                    UCFSettingGroup *settingGroup = [self.cellItemsData objectAtIndex:2];
+                    UCFSettingFuncItem *funcItem = [settingGroup.items firstObject];
+                    funcItem.paymentAuthType = UCFSettingPaymentAuthTypeNone;
+                    if (batchInvestStatus.length>0) {
+                        if (afterAutoBidDeadline) {
+                            funcItem.batchLendingType = UCFSettingBatchLendingTypeOverduring;
+                            funcItem.title = @"批量出借";
+                            funcItem.subtitle =  @"到期日：已过期";
+                            
+                        }
+                        else {
+                            funcItem.batchLendingType = UCFSettingBatchLendingTypeOpenned;
+                            funcItem.title = [NSString stringWithFormat:@"批量出借:%@",batchInvestStatus];
+                            funcItem.subtitle = [NSString stringWithFormat:@"到期日:%@", [[dic objectSafeDictionaryForKey:@"data"] objectSafeForKey:@"autoBidDeadline"]];
+                        }
                     }
                     else {
-                        funcItem.batchLendingType = UCFSettingBatchLendingTypeOpenned;
-                        funcItem.title = [NSString stringWithFormat:@"批量出借:%@",batchInvestStatus];
-                        funcItem.subtitle = [NSString stringWithFormat:@"到期日:%@", [[dic objectSafeDictionaryForKey:@"data"] objectSafeForKey:@"autoBidDeadline"]];
+                        funcItem.batchLendingType = UCFSettingBatchLendingTypeUnopened;
+                        funcItem.title = @"批量出借";
+                        funcItem.subtitle = @"";
                     }
-                }
-                else {
-                    funcItem.batchLendingType = UCFSettingBatchLendingTypeUnopened;
-                    funcItem.title = @"批量出借";
-                    funcItem.subtitle = @"";
-                }
-                
-                BOOL isAuthPayment = [[dataDict objectSafeForKey:@"isAuthPayment"] boolValue];
-                BOOL afterPaymentDeadline = [[dataDict objectSafeForKey:@"afterPaymentDeadline"] boolValue];
-                UCFSettingFuncItem *funcItem2 = [settingGroup.items objectAtIndex:1];
-                funcItem2.batchLendingType = UCFSettingBatchLendingTypeNone;
-                if (isAuthPayment) {
-                    if (afterPaymentDeadline) {
-                        funcItem2.paymentAuthType = UCFSettingPaymentAuthTypeOverAuth;
-                        funcItem2.title = @"缴费授权:已过期";
+                    
+                    BOOL isAuthPayment = [[dataDict objectSafeForKey:@"isAuthPayment"] boolValue];
+                    BOOL afterPaymentDeadline = [[dataDict objectSafeForKey:@"afterPaymentDeadline"] boolValue];
+                    UCFSettingFuncItem *funcItem2 = [settingGroup.items objectAtIndex:1];
+                    funcItem2.batchLendingType = UCFSettingBatchLendingTypeNone;
+                    if (isAuthPayment) {
+                        if (afterPaymentDeadline) {
+                            funcItem2.paymentAuthType = UCFSettingPaymentAuthTypeOverAuth;
+                            funcItem2.title = @"缴费授权:已过期";
+                            funcItem2.subtitle = @"";
+                        }
+                        else {
+                            funcItem2.paymentAuthType = UCFSettingPaymentAuthTypeAuthed;
+                            funcItem2.title = @"缴费授权:已授权";
+                            funcItem2.subtitle = [NSString stringWithFormat:@"到期日:%@", self.paymentDeadlineDate];
+                        }
+                    }
+                    else {
+                        funcItem2.paymentAuthType = UCFSettingPaymentAuthTypeUnAuth;
+                        funcItem2.title = @"缴费授权:未授权";
                         funcItem2.subtitle = @"";
                     }
-                    else {
-                        funcItem2.paymentAuthType = UCFSettingPaymentAuthTypeAuthed;
-                        funcItem2.title = @"缴费授权:已授权";
-                        funcItem2.subtitle = [NSString stringWithFormat:@"到期日:%@", self.paymentDeadlineDate];
-                    }
+                    
                 }
-                else {
-                    funcItem2.paymentAuthType = UCFSettingPaymentAuthTypeUnAuth;
-                    funcItem2.title = @"缴费授权:未授权";
-                    funcItem2.subtitle = @"";
-                }
-                
                 for (UCFSettingGroup *group in self.cellItemsData) {
                     NSInteger section =  [self.cellItemsData indexOfObject:group];
                     for (UCFSettingItem *item in group.items) {
@@ -856,11 +860,11 @@
                                       item.subtitle = isRisk == 0 ? @"未评估":riskLevelStr;
                                     }
                                         break;
-                                    case 4:
-                                    {
-                                         item.subtitle = batchMaximum.length == 0 ? @"未开启" : batchMaximum;
-                                         item.title = batchMaximum.length == 0 ? @"批量出借(开通后一次可投多个项目)" : @"批量出借";
-                                    }
+//                                    case 4:
+//                                    {
+//                                         item.subtitle = batchMaximum.length == 0 ? @"未开启" : batchMaximum;
+//                                         item.title = batchMaximum.length == 0 ? @"批量出借(开通后一次可投多个项目)" : @"批量出借";
+//                                    }
                                         break;
                                     default:
                                         break;
@@ -912,7 +916,7 @@
                 NSString *rstcode = dic[@"ret"];
                 if([rstcode intValue] == 1)
                 {
-                    [self performSelector:@selector(getP2POrHonerAccoutHttpRequest) withObject:nil afterDelay:0.25];
+                    [self.tableView.header beginRefreshing];
                 }
                 else{
                     NSString *messageStr = [dic objectSafeForKey:@"message"];
@@ -920,6 +924,7 @@
                     [alert1 show];
                 }
         }
+        break;
         case kSXTagCancelAContract: {
                 [MBProgressHUD displayHudError:dic[@"message"]];
                 [self performSelector:@selector(getP2POrHonerAccoutHttpRequest) withObject:nil afterDelay:0.25];

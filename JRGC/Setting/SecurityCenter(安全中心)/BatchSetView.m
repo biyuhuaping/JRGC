@@ -33,12 +33,12 @@
     [self addSubview:_iconImageView];
     
     
-    _titleLab = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_iconImageView.frame) + 10, CGRectGetMinY(_iconImageView.frame), SCREEN_WIDTH - CGRectGetMaxX(_iconImageView.frame) - 10 - 10,  16)];
+    _titleLab = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_iconImageView.frame) + 10, CGRectGetMinY(_iconImageView.frame) - 10, SCREEN_WIDTH - CGRectGetMaxX(_iconImageView.frame) - 10 - 10,  16)];
     _titleLab.font = [UIFont systemFontOfSize:16.0f];
     _titleLab.textColor = UIColorWithRGB(0x50627a);
     [self addSubview:_titleLab];
     
-    _desLabe = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_iconImageView.frame) + 10, CGRectGetMaxY(_titleLab.frame), CGRectGetWidth(_titleLab.frame), 40)];
+    _desLabe = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_iconImageView.frame) + 10, CGRectGetMaxY(_titleLab.frame) - 10, CGRectGetWidth(_titleLab.frame), 40)];
     _desLabe.font = [UIFont systemFontOfSize:13.0f];
     _desLabe.numberOfLines = 0;
     _desLabe.textColor = [UIColor lightGrayColor];
@@ -51,6 +51,18 @@
     _iconImageView.image = [UIImage imageNamed:_iconName];
     _titleLab.text = _title;
     _desLabe.text = _des;
+    
+    CGFloat titleYhight = CGRectGetMinY(_iconImageView.frame) - 10;
+    titleYhight = titleYhight < 15 ? 15:titleYhight;
+    titleYhight = titleYhight > 20 ? 20:titleYhight;
+    _titleLab.frame = CGRectMake(CGRectGetMaxX(_iconImageView.frame) + 10, titleYhight, SCREEN_WIDTH - CGRectGetMaxX(_iconImageView.frame) - 10 - 10,  16);
+    CGSize size = [Common getStrHeightWithStr:_des AndStrFont:13 AndWidth:CGRectGetWidth(_titleLab.frame) AndlineSpacing:1];
+    CGFloat hight = size.height;
+    if (hight < 40)
+    {
+        hight = 40;
+    }
+    _desLabe.frame = CGRectMake(CGRectGetMaxX(_iconImageView.frame) +10, CGRectGetMaxY(_titleLab.frame), CGRectGetWidth(_titleLab.frame),hight);
 }
 
 /*

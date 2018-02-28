@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UIView *downSegLine;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *upSegLeftSpace;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *downSegLeftSpace;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *TitleLabelCenter;
 @property (weak, nonatomic) IBOutlet UIImageView *signImageView;
 @property (weak, nonatomic) IBOutlet UILabel *title1Label;
 @property (weak, nonatomic) IBOutlet UILabel *subTitleLabel;
@@ -47,18 +48,25 @@
     self.signImageView.image = [UIImage imageNamed:funcItem.icon];
     self.title1Label.text = funcItem.title;
     self.subTitleLabel.text = funcItem.subtitle;
+    self.title1Label.textColor = UIColorWithRGB(0x555555);
+    self.subTitleLabel.textColor = UIColorWithRGB(0x999999);
+    [self.button1 setTitleColor:UIColorWithRGBA(98, 128, 168, 1) forState:UIControlStateNormal];
+    [self.button2 setTitleColor:UIColorWithRGBA(98, 128, 168, 1) forState:UIControlStateNormal];
     if (funcItem.paymentAuthType == UCFSettingPaymentAuthTypeNone) {
         if (funcItem.batchLendingType == UCFSettingBatchLendingTypeOpenned) {
+            self.TitleLabelCenter.constant = -8;
             [self.button1 setTitle:@"调整" forState:UIControlStateNormal];
             [self.button2 setTitle:@"解约" forState:UIControlStateNormal];
             self.button1.hidden = NO;
         }
         else if (funcItem.batchLendingType == UCFSettingBatchLendingTypeUnopened) {
+            self.TitleLabelCenter.constant = 0;
             [self.button1 setTitle:@"调整" forState:UIControlStateNormal];
             [self.button2 setTitle:@"开启" forState:UIControlStateNormal];
             self.button1.hidden = YES;
         }
         else if (funcItem.batchLendingType == UCFSettingBatchLendingTypeOverduring) {
+            self.TitleLabelCenter.constant = - 8;
             [self.button1 setTitle:@"调整" forState:UIControlStateNormal];
             [self.button2 setTitle:@"重新开启" forState:UIControlStateNormal];
             self.button1.hidden = YES;
@@ -67,12 +75,15 @@
     else if (funcItem.batchLendingType == UCFSettingBatchLendingTypeNone) {
         self.button1.hidden = YES;
         if (funcItem.paymentAuthType == UCFSettingPaymentAuthTypeUnAuth) {
+            self.TitleLabelCenter.constant = 0;
             [self.button2 setTitle:@"授权" forState:UIControlStateNormal];
         }
         else if (funcItem.paymentAuthType == UCFSettingPaymentAuthTypeAuthed) {
+            self.TitleLabelCenter.constant = -8;
             [self.button2 setTitle:@"解除授权" forState:UIControlStateNormal];
         }
         else if (funcItem.paymentAuthType == UCFSettingPaymentAuthTypeOverAuth) {
+            self.TitleLabelCenter.constant = -8;
             [self.button2 setTitle:@"重新授权" forState:UIControlStateNormal];
         }
     }

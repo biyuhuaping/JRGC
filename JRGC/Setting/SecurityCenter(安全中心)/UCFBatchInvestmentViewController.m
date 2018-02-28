@@ -19,7 +19,7 @@
 #define WORDCOLORBLUE UIColorWithRGB(0x6280a8)
 #define WORDCOLORGRAY UIColorWithRGB(0x999999)
 #define TITLECOLORGRAY UIColorWithRGB(0xf9f9f9)
-static NSString *firstStr = @"批量出借授权开启后可一次性出借多个小额项目";
+static NSString *firstStr = @"批量出借授权开启后可一次性出借多个小额项目（注：授权有效期1年，1年后需重新授权）";
 static NSString *secondStr = @"为保证您的资金安全，请合理选择";
 static NSString *thirdStr = @"批量出借授权已经开启";
 @interface UCFBatchInvestmentViewController ()
@@ -83,7 +83,8 @@ static NSString *thirdStr = @"批量出借授权已经开启";
     
     _tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, ScreenWidth - 15, 35)];
     _tipLabel.font = [UIFont systemFontOfSize:13.0f];
-    _tipLabel.text = @"批量出借授权开启后可一次性出借多个小额项目";
+    _tipLabel.text = @"批量出借授权开启后可一次性出借多个小额项目（注：授权有效期1年，1年后需重新授权";
+    _tipLabel.numberOfLines = 0;
     _tipLabel.textColor = [UIColor whiteColor];
     [tipView addSubview:_tipLabel];
 
@@ -107,11 +108,11 @@ static NSString *thirdStr = @"批量出借授权已经开启";
 }
 - (void)initFirstSectionView
 {
-    BatchSetView *view1= [[BatchSetView alloc] initWithFrame:CGRectMake(0, 10, SCREEN_WIDTH, 80)];
+    BatchSetView *view1= [[BatchSetView alloc] initWithFrame:CGRectMake(0, 10, SCREEN_WIDTH, 120)];
     view1.backgroundColor = [UIColor whiteColor];
     view1.iconName = @"auto_fast";
     view1.title = @"投标更快捷";
-    view1.des = @"开启批量出借授权，即可在批量投标中使用批量出借功能，快速出借多个小额项目。";
+    view1.des = @"开启批量出借授权，即可在批量出借标中使用批量出借功能，快速出借多个小额项目。开启自动投标授权，即可在使用批量出借及预约宝功能，快速出借多个小额项目。";
     [_baseScrollView addSubview:view1];
     [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:view1 isTop:YES];
     
