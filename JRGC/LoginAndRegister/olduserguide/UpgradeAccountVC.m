@@ -59,16 +59,20 @@
 
 - (void)getToBack
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if (_isFromeBankCardInfo)
+    {
+         [self.navigationController popViewControllerAnimated:YES];
+    }else{
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-//    if (_fromVC == 1) {
-    
-    if (self.accoutType == SelectAccoutTypeP2P) {
+    if (self.accoutType == SelectAccoutTypeP2P ) {
         self.buttonTopConstraint.constant = 15;
-        self.tableViewHight.constant = 44*4;
+        self.tableViewHight.constant = 44*3;
         baseTitleLabel.text = @"开通微金徽商存管账户";
     } else {
         self.tableViewHight.constant = 44*5;
@@ -120,6 +124,7 @@
 
     
     if (_isFromeBankCardInfo) {
+        self.tableViewHight.constant = 44 * 5;
         [_submitDataButton setTitle:@"提交" forState:UIControlStateNormal];
         _customLabel2.hidden = YES;
         self.isQuick = NO;
@@ -375,7 +380,7 @@
     if (self.accoutType == SelectAccoutTypeHoner || _isFromeBankCardInfo) {
         return  5;
     }else{
-        return 4;
+        return 3;
     }
 }
 
@@ -402,11 +407,30 @@
                 [cell.contentView addSubview:_textField2];
             }
                 break;
-            case 2:{//银行卡
-                UIImageView *imgView = [[UIImageView alloc]initWithFrame:CGRectMake(15, 12, 20, 20)];
-                imgView.image = [UIImage imageNamed:@"safecenter_icon_bankcard"];
-                [cell addSubview:imgView];
-                [cell.contentView addSubview:_textField3];
+            case 2:
+            {
+                if (self.accoutType == SelectAccoutTypeHoner || _isFromeBankCardInfo) {
+                    //银行卡
+                    UIImageView *imgView = [[UIImageView alloc]initWithFrame:CGRectMake(15, 12, 20, 20)];
+                    imgView.image = [UIImage imageNamed:@"safecenter_icon_bankcard"];
+                    [cell addSubview:imgView];
+                    [cell.contentView addSubview:_textField3];
+                }else{
+                    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                    cell.textLabel.textColor = UIColorWithRGB(0x555555);
+                    cell.textLabel.font = [UIFont systemFontOfSize:14];
+                    cell.textLabel.text = @"开户银行";
+                    
+                    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(ScreenWidth-225, 0, 160, 44)];
+                    label.textColor = UIColorWithRGB(0x555555);
+                    label.textAlignment = NSTextAlignmentRight;
+                    label.font = [UIFont systemFontOfSize:14];
+                    _bankNameLabel = label;
+                    [cell addSubview:_bankNameLabel];
+                    
+                    _bankLogoView = [[UIImageView alloc]initWithFrame:CGRectMake(ScreenWidth-60, 7, 29, 29)];
+                    [cell addSubview:_bankLogoView];
+                }
             }
                 break;
             case 3:{//开户银行
@@ -455,7 +479,23 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.view endEditing:YES];
-    if (indexPath.row == 3) {
+    BOOL isGotoChooseBankVC = NO;
+    if (_isFromeBankCardInfo) {
+        if(indexPath.row == 3)
+        {
+            isGotoChooseBankVC = YES;
+        }
+    }else{
+        if(self.accoutType == SelectAccoutTypeP2P &&  indexPath.row == 2)
+        {
+            isGotoChooseBankVC = YES;
+        }
+        if(self.accoutType == SelectAccoutTypeHoner &&  indexPath.row == 3)
+        {
+             isGotoChooseBankVC = YES;//c不能充值填写的银行卡不能充值填写的银行卡不能充值填写的银行卡不能充值
+        }
+    }
+    if (isGotoChooseBankVC) {
         UCFHuiShangChooseBankViewController *vc = [[UCFHuiShangChooseBankViewController alloc] initWithNibName:@"UCFHuiShangChooseBankViewController" bundle:nil];
         vc.bankDelegate = self;
 //        vc.site = _site;
@@ -560,7 +600,7 @@
              return;
          }
     }else{
-        if (realName.length == 0 || idCardNo.length == 0 || bankCard.length == 0) {
+        if (realName.length == 0 || idCardNo.length == 0) {
             [AuxiliaryFunc showToastMessage:@"请完善信息之后再提交" withView:self.view];
             return;
         }
@@ -575,7 +615,7 @@
                                           @"bankCard":bankCard,              //银行卡号
                                           @"bankId":_bankId,                 //银行id
                                           @"openStatus":_openStatus,         //获取到的用户信息的状态，对应接口getOpenAccountInfo
-//                                          @"validateCode":_textField4.text,  //手机验证码
+                                          @"validateCode":_textField4.text,  //手机验证码
                                           @"userId":userId,                  //用户id
                                           };
         [self replaceBankCardInformation:encryptParamDic];
@@ -584,7 +624,7 @@
     else{
         NSMutableDictionary *encryptParamDic =[[NSMutableDictionary alloc]initWithDictionary:                       @{@"realName":realName,             //真实姓名
             @"idCardNo":idCardNo,             //身份证号
-            @"bankCardNo":bankCard,           //银行卡号
+//            @"bankCardNo":bankCard,           //银行卡号
             @"bankNo":_bankId,                //银行id
             @"openStatus":_openStatus,        //获取到的用户信息的状态，对应接口getOpenAccountInfo
 //            @"validateCode":_textField4.text, //手机验证码
@@ -592,9 +632,11 @@
             }];
         if (self.accoutType == SelectAccoutTypeHoner)
         {
+            [encryptParamDic setValue:bankCard forKey:@"bankCardNo"];//银行卡号
             [encryptParamDic setValue:_textField4.text forKey:@"validateCode"];//手机验证码
-             [[NetworkModule sharedNetworkModule] newPostReq:encryptParamDic tag:kSXTagOpenAccount owner:self signature:YES Type:self.accoutType];
-        }else
+            [[NetworkModule sharedNetworkModule] newPostReq:encryptParamDic tag:kSXTagOpenAccount owner:self signature:YES Type:self.accoutType];
+        }
+        else
         {
              [[NetworkModule sharedNetworkModule] newPostReq:encryptParamDic tag:kSXTagOpenAccuntIntoBank owner:self signature:YES Type:self.accoutType];
         }

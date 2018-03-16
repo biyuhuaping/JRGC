@@ -28,10 +28,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="gm7-Vb-T9p">
-                    <rect key="frame" x="0.0" y="10" width="375" height="176"/>
+                    <rect key="frame" x="0.0" y="10" width="375" height="132"/>
                     <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="176" id="DSZ-C0-TSp"/>
+                        <constraint firstAttribute="height" constant="132" id="DSZ-C0-TSp"/>
                     </constraints>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="axS-Q9-keG"/>
@@ -46,20 +46,20 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fpK-aC-8gl">
-                    <rect key="frame" x="0.0" y="185" width="375" height="1"/>
+                    <rect key="frame" x="0.0" y="141" width="375" height="1"/>
                     <color key="backgroundColor" red="0.84705882352941175" green="0.84705882352941175" blue="0.84705882352941175" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="uKE-df-ejY"/>
                     </constraints>
                 </view>
                 <label hidden="YES" opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已向手机xx发送短信验证码，若长时间收不到短信，请尝试获取语音验证码" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wQK-gz-wCU" customClass="NZLabel">
-                    <rect key="frame" x="15" y="191" width="345" height="31.5"/>
+                    <rect key="frame" x="15" y="147" width="345" height="31.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <color key="textColor" red="0.5296475887298584" green="0.52963173389434814" blue="0.52964073419570923" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Nc-DQ-nNp">
-                    <rect key="frame" x="15" y="201" width="345" height="37"/>
+                    <rect key="frame" x="15" y="157" width="345" height="37"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="37" id="3G7-gB-vUb"/>
                     </constraints>
@@ -69,7 +69,7 @@
                     </connections>
                 </button>
                 <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ywl-WY-hPs" customClass="NZLabel">
-                    <rect key="frame" x="15" y="253" width="345" height="0.0"/>
+                    <rect key="frame" x="15" y="209" width="345" height="0.0"/>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <color key="textColor" red="0.5296475887298584" green="0.52963173389434814" blue="0.52964073419570923" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
