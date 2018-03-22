@@ -10,67 +10,44 @@
 #import "AppDelegate.h"
 @implementation PostRequest
 
-@synthesize postStatus;
-@synthesize enc=_enc;
-@synthesize url;
-@synthesize sxTag=_tag;
-@synthesize owner;
+//@synthesize postStatus;
+//@synthesize enc=_enc;
+//@synthesize url;
+//@synthesize sxTag=_tag;
+//@synthesize owner;
 
 - (void)cancel{
+    
     if (_request != nil) {
         [_request cancel];   //中断请求
-        [_request release],  //释放请求对象
-        _request = nil;      //指针置空
+        self.request = nil;      //指针置空
     }
 }
 
-- (void)setOwner:(id<NetworkModuleDelegate>)_owner{
-    if (_owner != owner) {
-        [owner release];
-        owner = nil;
-    }
-    owner = [_owner retain];
-}
 
-- (id<NetworkModuleDelegate>)owner{
-    return owner;
-}
 
-- (void)setEnc:(NSStringEncoding)enc{
-    _enc = enc;
-}
 
-- (NSStringEncoding)enc{
-    return _enc;
-}
 
-- (void)setkSXTag:(kSXTag)sxTag{
-    _tag = sxTag;
-}
 
-- (kSXTag)kSXTag
-{
-    return _tag;
-}
 //解压返回的数据
 - (id)result
 {
-    if(postStatus == kPostStatusEnded){
+    if(_postStatus == kPostStatusEnded){
         
         NSData *data = [_request responseData];
-        if (_tag == kSXTagContractDownLoad) {
+        if (_sxTag == kSXTagContractDownLoad) {
             NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
             NSString *imagePath = [documentPath stringByAppendingString:@"/11.pdf"];
             [data writeToFile:imagePath atomically:YES];
             return imagePath;
-        }else if(_tag == kSXTagDownloadAssertProof)
+        }else if(_sxTag == kSXTagDownloadAssertProof)
         {
             NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
             NSString *imagePath = [documentPath stringByAppendingString:@"/资产证明.pdf"];
             [data writeToFile:imagePath atomically:YES];
             return imagePath;
         }
-        NSString *string = [[[NSString alloc] initWithData:data encoding:_enc] autorelease];
+        NSString *string = [[NSString alloc] initWithData:data encoding:_enc];
         DBLog(@"请求返回数据:%@",string);
         return string;
     } else {
@@ -81,7 +58,9 @@
 - (void)postData:(NSString *)data delegate:(id)delegate;
 {
     [self cancel];
-    _request = [[ASIFormDataRequest requestWithURL:[NSURL URLWithString:url]]retain];
+    if (_request) {
+        self.request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:_url]];
+    }
     [_request setAllowCompressedResponse:YES];
     [_request setShouldAttemptPersistentConnection:NO];
     [_request setResponseEncoding:_enc];
@@ -96,12 +75,12 @@
     [_request addRequestHeader:@"Content-Type" value:@"application/x-www-form-urlencoded;charset=UTF-8"];
     DLog(@"post data:%@",data);
     // 重要
-    _request.tag = _tag;
+    _request.tag = _sxTag;
      NSData *sourceData = [data dataUsingEncoding:_enc];
 
     [_request appendPostData:sourceData];
     [_request setDelegate:delegate];
-    postStatus = kPostStatusBeging;
+    _postStatus = kPostStatusBeging;
     if(self.owner)
         [self.owner beginPost:self.sxTag];
     [_request startAsynchronous];
@@ -110,11 +89,11 @@
 
 - (void)dealloc
 {
-    [owner release],owner = nil;
+//    [owner release],owner = nil;
 
     [_request clearDelegatesAndCancel];
-    [_request release];
-    [super dealloc];
+//    [_request release];
+//    [super dealloc];
 }
 
 @end

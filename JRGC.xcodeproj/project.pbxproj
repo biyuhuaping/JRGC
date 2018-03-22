@@ -51,6 +51,8 @@
 		25F445C41D66E276006813BB /* UCFChoseBankViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25F445C21D66E276006813BB /* UCFChoseBankViewController.xib */; };
 		25F538B41D881B0A0039262F /* UCFPurchaseWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25F538B21D881B0A0039262F /* UCFPurchaseWebView.m */; };
 		25F538B51D881B0A0039262F /* UCFPurchaseWebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25F538B31D881B0A0039262F /* UCFPurchaseWebView.xib */; };
+		33D94FA2206360410018F7CB /* ASIHTTPRequest+Owner.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D94FA1206360410018F7CB /* ASIHTTPRequest+Owner.m */; };
+		33D94FCD206381700018F7CB /* OriginalObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D94FCB2063816F0018F7CB /* OriginalObject.m */; };
 		4A04F82F1F0B6B1000ADE9D8 /* UCFGoldAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A04F82D1F0B6B1000ADE9D8 /* UCFGoldAccountViewController.m */; };
 		4A04F8301F0B6B1000ADE9D8 /* UCFGoldAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A04F82E1F0B6B1000ADE9D8 /* UCFGoldAccountViewController.xib */; };
 		4A04F8331F0B6DBB00ADE9D8 /* UCFGoldAccountHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A04F8321F0B6DBB00ADE9D8 /* UCFGoldAccountHeadView.m */; };
@@ -615,8 +617,8 @@
 		7BCE01FC1AC8FC260084C15C /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCE01EF1AC8FC260084C15C /* ASINetworkQueue.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		7BCE01FD1AC8FC260084C15C /* ASINSStringAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCE01F11AC8FC260084C15C /* ASINSStringAdditions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		7BCE02091AC8FDEF0084C15C /* GetRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCE02011AC8FDEF0084C15C /* GetRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		7BCE020A1AC8FDEF0084C15C /* NetworkModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCE02031AC8FDEF0084C15C /* NetworkModule.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		7BCE020B1AC8FDEF0084C15C /* PostRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCE02051AC8FDEF0084C15C /* PostRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		7BCE020A1AC8FDEF0084C15C /* NetworkModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCE02031AC8FDEF0084C15C /* NetworkModule.m */; };
+		7BCE020B1AC8FDEF0084C15C /* PostRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCE02051AC8FDEF0084C15C /* PostRequest.m */; };
 		7BCE02141AC9025A0084C15C /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCE020E1AC9025A0084C15C /* Common.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		7BCE02231AC902FD0084C15C /* BaseAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCE02191AC902FD0084C15C /* BaseAlertView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		7BCE02241AC902FD0084C15C /* SharedSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCE021C1AC902FD0084C15C /* SharedSingleton.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -1156,6 +1158,10 @@
 		25F538B11D881B0A0039262F /* UCFPurchaseWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFPurchaseWebView.h; sourceTree = "<group>"; };
 		25F538B21D881B0A0039262F /* UCFPurchaseWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFPurchaseWebView.m; sourceTree = "<group>"; };
 		25F538B31D881B0A0039262F /* UCFPurchaseWebView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFPurchaseWebView.xib; sourceTree = "<group>"; };
+		33D94FA0206360410018F7CB /* ASIHTTPRequest+Owner.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ASIHTTPRequest+Owner.h"; sourceTree = "<group>"; };
+		33D94FA1206360410018F7CB /* ASIHTTPRequest+Owner.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "ASIHTTPRequest+Owner.m"; sourceTree = "<group>"; };
+		33D94FCB2063816F0018F7CB /* OriginalObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OriginalObject.m; sourceTree = "<group>"; };
+		33D94FCC206381700018F7CB /* OriginalObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OriginalObject.h; sourceTree = "<group>"; };
 		4A04F82C1F0B6B1000ADE9D8 /* UCFGoldAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFGoldAccountViewController.h; sourceTree = "<group>"; };
 		4A04F82D1F0B6B1000ADE9D8 /* UCFGoldAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFGoldAccountViewController.m; sourceTree = "<group>"; };
 		4A04F82E1F0B6B1000ADE9D8 /* UCFGoldAccountViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFGoldAccountViewController.xib; sourceTree = "<group>"; };
@@ -5312,6 +5318,8 @@
 		7BCE01FF1AC8FDEF0084C15C /* Request */ = {
 			isa = PBXGroup;
 			children = (
+				33D94FCC206381700018F7CB /* OriginalObject.h */,
+				33D94FCB2063816F0018F7CB /* OriginalObject.m */,
 				7BCE02001AC8FDEF0084C15C /* GetRequest.h */,
 				7BCE02011AC8FDEF0084C15C /* GetRequest.m */,
 				7BCE02021AC8FDEF0084C15C /* NetworkModule.h */,
@@ -5320,6 +5328,8 @@
 				7BCE02051AC8FDEF0084C15C /* PostRequest.m */,
 				7BCE02061AC8FDEF0084C15C /* TypeDefine.h */,
 				4A131DD41D5343D800748797 /* EnvironmentalFile.h */,
+				33D94FA0206360410018F7CB /* ASIHTTPRequest+Owner.h */,
+				33D94FA1206360410018F7CB /* ASIHTTPRequest+Owner.m */,
 			);
 			name = Request;
 			path = DataModel;
@@ -7676,6 +7686,7 @@
 				745B8A561FB5ADC7007BFF05 /* UCFExtractGoldDetailController.m in Sources */,
 				A851F34E1F132D2C003DE8B8 /* UCFGoldTransCell.m in Sources */,
 				74A0AF111EC341DD009E5A57 /* ZZCircleProgress.m in Sources */,
+				33D94FA2206360410018F7CB /* ASIHTTPRequest+Owner.m in Sources */,
 				74C7A0D41FE10A8C00217ABB /* UCFCalculateTypeCell.m in Sources */,
 				EDEC8BFA1CB3BA6300815228 /* WPAttributedStyleAction.m in Sources */,
 				749D6C931F2840A100AAD0C4 /* UCFCashTipView.m in Sources */,
@@ -7902,6 +7913,7 @@
 				74E892701F46A2A1006A9B6B /* UCFGoldIncreaseAccountInfoModel.m in Sources */,
 				74D7FCD51AE8F75000653B8F /* UCFHeadrView.m in Sources */,
 				74AFB12F1EE8F848007DBAFC /* UCFTransferHeaderView.m in Sources */,
+				33D94FCD206381700018F7CB /* OriginalObject.m in Sources */,
 				7456D3C71E82700500207349 /* UIView+Extension.m in Sources */,
 				A81A6F5A1FBD92CD00BDCE50 /* ServiceChargeView2.m in Sources */,
 				74D9B8561FD793650076F733 /* KTCenterAnimationController.m in Sources */,

@@ -13,11 +13,11 @@
 #import "ASIDataDecompressor.h"
 #import "ASIFormDataRequest.h"
 @interface PostRequest : NSObject{
-    ASIFormDataRequest* _request;
-    id<NetworkModuleDelegate> owner;
+//    ASIFormDataRequest* _request;
+//    id<NetworkModuleDelegate> owner;
 //    ASIFormDataRequest *aRequest;
 }
-
+@property (nonatomic, strong)ASIFormDataRequest* request;
 @property (nonatomic,assign) id<NetworkModuleDelegate> owner;
 @property (nonatomic,retain) NSString* url;
 @property (assign) kPostStatus postStatus;
