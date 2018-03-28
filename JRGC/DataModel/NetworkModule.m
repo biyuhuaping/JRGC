@@ -330,7 +330,7 @@ static NetworkModule *gInstance = NULL;
 
 - (void)afnPostData:(NSDictionary*)dataDict tag:(kSXTag)tag owner:(id<NetworkModuleDelegate>)owner url:(NSString*)url
 {
-    
+    DLog(@"请求地址=%@，参数%@",url,dataDict);
     AppDelegate * app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     if (EnvironmentConfiguration == 2 || (app.isSubmitAppStoreTestTime)) {
         [_manager.requestSerializer setValue:@"1" forHTTPHeaderField:@"jrgc-umark"];
@@ -1186,6 +1186,7 @@ static NetworkModule *gInstance = NULL;
     //对整体参数加密
     NSString *encryptParam  = [Common AESWithKey2:AES_TESTKEY WithDic:dict];
     NSDictionary *parmDict = [NSDictionary dictionaryWithObject:encryptParam forKey:@"encryptParam"];
+ 
     [self afnPostData:parmDict tag:tag owner:owner url:parameter];
 }
 
