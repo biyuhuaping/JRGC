@@ -101,62 +101,39 @@
 #define GongDouExpend                 @"newBeanRecordCon/expendBorrows" //工豆支出
 #define GongDouOverDue                @"newBeanRecordCon/overdueBorrows" //工豆过期
 #define CheckPomoCode                 @"newuserregist/isexitpomocode"
-//#define ChatFriendList                @"accountyouyun/getyouyunfriends"
-//#define CheckChatId                   @"accountyouyun/checkRegYouyun"
-//#define RegistyouYun                  @"accountyouyun/regyouyun"
-//#define GetRedBag                     @"scratchCard/applyByRedBag"
-//#define IsExistSpring                 @"scratchCard/isExist"
-//#define RedPackage                    @"NewBeans/SmallRedList"  /// 抢到的红包
+
 #define MyRedPackage                  @"NewBeans/redPackageList"    /// 我的红包
-//#define ZiJinTuoGuan                  @"sysDataDicItem/dicItemList"
 #define HSPayMobile                  @"api/recharge/v2/recharge.json"
-//#define QueryYeePay                   @"yjpay/queryPay"
 #define PAYRECORD                     @"newactWithdraw/querySevenDayByList"
-//#define PAYSWITCH                     @"yeepay/getyeepayflag"
-//#define QUERYBEANCOUPON               @"beanRecordCon/quereyBeanCouponByUserId"
 #define COUPSELECTBYOWER              @"newBeanRecordCon/CouponSelectedByuser"
 #define BEANSINTEREST                 @"newBeanRecordCon/unUsedFx"
-//#define SELECTINVENTAMYT              @"newBeanRecordCon/CouponSelectedByInventAmt"
-//#define GONDDOUALLBORROW              @"beanRecordCon/allBorrows"
-//#define GOUNGDOISHOURU                @"beanRecordCon/incomeBorrows"
+
 #define GONGDOUZHICHU                 @"beanRecordCon/expendBorrows"
-//#define GONGDOUGUOQI                  @"beanRecordCon/overdueBorrows"
 #define ALLYOUHUIQUANLIST             @"beanRecordCon/quereyBeanRecordIds"
-//#define YIBAOCHECKBANKSTATE           @"yeepay/bankCardCheck"   //易付宝判断银行卡号是否通过
-//#define SingMenthod                   @"singmethod/newsign"//签到
+
 #define SingMenthod                   @"api/homePage/v2/newsign.json"//签到
-//#define MODIFYBANKCARDZONE            @"newbankCard/updateBankZone"  //修改银行卡网点
-//#define REDBAG_ADDRESS                @"NewBeans/redPackageUrl"     //红包地址
+
 #define CHECKMYMONEY                  @"newaccount/getAvailable"    //选择反息券列表查询余额
 #define GetAppSetting                 @"sysDataDicItem/getAppSetting"//获取分享各种信息
 #define TransfersOrder                @"newPrdTransferOrder/transfersOrder"//我的债券列表
-//#define CHECKBETAVER                  @"newPrdCheckBeta/newCheck"       //检测用户是不是beta
 #define SignDaysAndIsSign             @"singmethod/newsignday"     //检测签到天数和是否签到
 #define GUAGUAPOST                    @"happyCard/exchange"//刮刮卡
 #define GongDouOverduing              @"newBeanRecordCon/AppqueryOverDetail"     //即将过期的工豆
 #define RecommendRefund               @"/factoryCode/recommendRefundDataApp"//好友回款
 #define GOLD_RecommendRefund           @"api/inviteRebate/v2/goldRecommendRefund.json"
-//#define CheckCardBelongToBank         @"newbankCard/bankCardCheck" //判断行别
 
 #define GETAppQueryByManyList         @"/newfactoryCodeController/appQueryByManyList"//多期回款明细
 #define CHECKREDPOINTHIDE             @"newaccount/updatePointUpdTime"  //检测工豆 返现券 红包 回款明细
-//#define CHECKPERSONCENTERREDALERT     @"newaccount/isHasPoint"
 #define CHECKPERSONCENTERREDALERT     @"api/messageCenter/v2/unReadMsgCount.json"
-//#define GETIGNORGELOGINTOKEN          @"newWapActivity/wapActGetToken"
-//#define MSGCENTER                     @"tMsgList/queryAllTMsgList"    //消息中心列表
+
 #define MSGCENTER                     @"api/messageCenter/v2/queryAllTMsgList.json"    //消息中心列表
 #define MSGCENTERDETAIL               @"tMsgList/readInms"           //消息详情
 #define USERDISPERMISSIONISOPEN       @"newUserDisPermission/userDisPermissionIsOpen" //消息设置-- 用户是否接收短信通知
 #define VALIDLOGIN                    @"safeCenter/validLogin"
 #define UPDATEUSERDISPERMISSION       @"newUserDisPermission/userDisPermission"//消息设置-- 更新用户是否接收短信通知
-//#define USERCOUPONFXCOUNT             @"newBeanRecordCon/quereyCouponFxCount"
 #define MSGSIGNALLREAD              @"api/messageCenter/v2/signAllRead.json"// 全部设置为已读 @"tMsgList/signAllRead"
-//#define MSGREOMETMSG                  @"tMsgList/removeTMsg" //删除消息
 #define MSGREOMETMSG                  @"api/messageCenter/v2/removeTMsg.json" //删除消息
-//#define MSGSIGNREAD                   @"tMsgList/signRead" //单条消息标记为已读
 #define MSGSIGNREAD                   @"api/messageCenter/v2/signRead.json" //单条消息标记为已读
-//#define GETREDPOINTMDSSAGE            @"newaccount/getRedPointMessage"  //获取所有红点状态
-//#define GETWORKPOINT                  @"userScore/queryScoreList"       //工分请求
 #define GETWORKPOINT                  @"api/userScore/v2/queryScoreList.json"       //工分请求
 #define COUPONLIST                    @"beansMall/couponList"           //兑换券列表
 
