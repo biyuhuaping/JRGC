@@ -81,7 +81,7 @@ static inline CGFloat ZBFlushFactorForTextAlignment(NSTextAlignment textAlignmen
 
 - (void)setFont:(UIFont *)font range:(NSRange)range
 {
-    NSMutableAttributedString *attributed = [[NSMutableAttributedString alloc] initWithAttributedString:self.attributedText];
+    NSMutableAttributedString *attributed = [[[NSMutableAttributedString alloc] initWithAttributedString:self.attributedText] autorelease];
     [attributed addAttribute:NSFontAttributeName value:font range:range];
     
     self.attributedText = attributed;

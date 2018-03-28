@@ -397,7 +397,7 @@
 }
 //获取 添加段落 字号的 字典
 +(NSDictionary *)getParagraphStyleDictWithStrFont:(CGFloat)font WithlineSpacing:(CGFloat )lineSpacing{
-    NSMutableParagraphStyle *paragraph = [[NSMutableParagraphStyle alloc] init];
+    NSMutableParagraphStyle *paragraph = [[[NSMutableParagraphStyle alloc] init] autorelease];
     paragraph.alignment = NSTextAlignmentLeft;
     paragraph.lineSpacing = lineSpacing;
     NSDictionary *dic = @{
@@ -1278,7 +1278,7 @@
 }
 + (NSMutableAttributedString*) changeLabelWithAllStr:(NSString *)allStr Text:(NSString*)needText Font:(CGFloat)font
 {
-    NSMutableAttributedString * noteStr = [[NSMutableAttributedString alloc]initWithString:allStr];
+    NSMutableAttributedString * noteStr = [[[NSMutableAttributedString alloc]initWithString:allStr] autorelease];
     NSRange redRangeTwo = NSMakeRange([[noteStr string] rangeOfString:needText].location, [[noteStr string] rangeOfString:needText].length);
     [noteStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:font] range:redRangeTwo];
     return noteStr;
