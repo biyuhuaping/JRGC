@@ -297,16 +297,11 @@ static NetworkModule *gInstance = NULL;
         if (tag == kSXTagValidLogin) {
             //需要验签 需要AES
             NSString * encryptParam  = [Common  AESWithKey:[Common getKeychain] WithData:data];
-//            NSString * encryptParam1 = [Common AESWithKeyWithNoTranscode:[Common getKeychain] WithData:data];
             data = [NSString stringWithFormat:@"encryptParam=%@",encryptParam];
             data = [data stringByAppendingString:[NSString stringWithFormat:@"&imei=%@&version=%@",[Common getKeychain],[Common getIOSVersion]]];
             data = [data stringByAppendingString:@"&source_type=1"];
             data = [data stringByAppendingString:[NSString stringWithFormat:@"&userId=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID]]];
             NSString *signature = [self getSinatureWithPar:[self getParStr:data]];
-//            data = [NSString stringWithFormat:@"encryptParam=%@",encryptParam];
-//            data = [data stringByAppendingString:[NSString stringWithFormat:@"&imei=%@&version=%@",[Common getKeychain],[Common getIOSVersion]]];
-//            data = [data stringByAppendingString:@"&source_type=1"];
-//            data = [data stringByAppendingString:[NSString stringWithFormat:@"&userId=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID]]];
             data = [data stringByAppendingString:[NSString stringWithFormat:@"&signature=%@",signature]];
         }
         else {
@@ -553,15 +548,14 @@ static NetworkModule *gInstance = NULL;
         for(int i = 0; i < array.count; i++)
         {
             NSString *tmpStr = array[i];
-            if (tmpStr.length > 0) {
-                if ([tmpStr rangeOfString:@"="].location !=NSNotFound) {
-                    NSRange range = [str rangeOfString:@"="];
-                    str = [str substringWithRange:NSMakeRange(range.location + 1, str.length-range.location-1)];
-                    lastStr =[lastStr stringByAppendingString:str];
+            if ([tmpStr rangeOfString:@"="].location !=NSNotFound) {
+               NSArray *tmpArr = [tmpStr componentsSeparatedByString:@"="];
+                NSString *tmpStr = tmpArr[1];
+                if (tmpStr.length > 0) {
+                    lastStr = [lastStr stringByAppendingString:tmpArr[1]];
                 }
             }
         }
-        
         return lastStr;
     }
 }
