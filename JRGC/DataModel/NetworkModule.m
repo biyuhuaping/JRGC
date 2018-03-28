@@ -290,7 +290,11 @@ static NetworkModule *gInstance = NULL;
         //不需要验签，AES 加密
         data = [data stringByAppendingString:[NSString stringWithFormat:@"&imei=%@&version=%@",[Common getKeychain],[Common getIOSVersion]]];
         data = [data stringByAppendingString:@"&source_type=1"];
-        [self postData:data tag:tag owner:owner url:parameter];
+        if ([Common isNullValue:data]) {
+            [self afnPostData:nil tag:tag owner:owner url:parameter];
+        } else {
+            [self afnPostData:[Common transToParmDictWithString:data] tag:tag owner:owner url:parameter];
+        }
     }
     else
     {

@@ -57,7 +57,7 @@
 		333FD808206A43EA00CEA03C /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 333FD800206A43EA00CEA03C /* AFURLRequestSerialization.m */; };
 		333FD809206A43EA00CEA03C /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 333FD802206A43EA00CEA03C /* AFNetworkReachabilityManager.m */; };
 		333FD80A206A43EA00CEA03C /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 333FD803206A43EA00CEA03C /* AFSecurityPolicy.m */; };
-		333FD80D206B39D800CEA03C /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 333FD80C206B39D800CEA03C /* Reachability.m */; };
+		333FD810206B836F00CEA03C /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 333FD80E206B836F00CEA03C /* Reachability.m */; };
 		3348A338206A230C00EACC91 /* NSURLSessionTask+Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = 3348A337206A230C00EACC91 /* NSURLSessionTask+Tag.m */; };
 		4A04F82F1F0B6B1000ADE9D8 /* UCFGoldAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A04F82D1F0B6B1000ADE9D8 /* UCFGoldAccountViewController.m */; };
 		4A04F8301F0B6B1000ADE9D8 /* UCFGoldAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A04F82E1F0B6B1000ADE9D8 /* UCFGoldAccountViewController.xib */; };
@@ -1172,8 +1172,8 @@
 		333FD802206A43EA00CEA03C /* AFNetworkReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetworkReachabilityManager.m; sourceTree = "<group>"; };
 		333FD803206A43EA00CEA03C /* AFSecurityPolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSecurityPolicy.m; sourceTree = "<group>"; };
 		333FD804206A43EA00CEA03C /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
-		333FD80B206B39D700CEA03C /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = JRGC/ASIHTTPRequest/Reachability.h; sourceTree = SOURCE_ROOT; };
-		333FD80C206B39D800CEA03C /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = JRGC/ASIHTTPRequest/Reachability.m; sourceTree = SOURCE_ROOT; };
+		333FD80E206B836F00CEA03C /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		333FD80F206B836F00CEA03C /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		3348A336206A230C00EACC91 /* NSURLSessionTask+Tag.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSURLSessionTask+Tag.h"; sourceTree = "<group>"; };
 		3348A337206A230C00EACC91 /* NSURLSessionTask+Tag.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSURLSessionTask+Tag.m"; sourceTree = "<group>"; };
 		4A04F82C1F0B6B1000ADE9D8 /* UCFGoldAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFGoldAccountViewController.h; sourceTree = "<group>"; };
@@ -5322,8 +5322,8 @@
 				4A131DD41D5343D800748797 /* EnvironmentalFile.h */,
 				3348A336206A230C00EACC91 /* NSURLSessionTask+Tag.h */,
 				3348A337206A230C00EACC91 /* NSURLSessionTask+Tag.m */,
-				333FD80B206B39D700CEA03C /* Reachability.h */,
-				333FD80C206B39D800CEA03C /* Reachability.m */,
+				333FD80F206B836F00CEA03C /* Reachability.h */,
+				333FD80E206B836F00CEA03C /* Reachability.m */,
 			);
 			name = Request;
 			path = DataModel;
@@ -7679,6 +7679,7 @@
 				E3A96B0E1CBF83CE00E8884F /* UCFWorkPointsTableViewCell.m in Sources */,
 				83FEDB761EFBB56000CFE0EF /* UCFCompanyNoOpenViewController.m in Sources */,
 				4AD6B4C61B32D33E00D94140 /* CycleView.m in Sources */,
+				333FD810206B836F00CEA03C /* Reachability.m in Sources */,
 				74A2C0D61F4306A000EDF0FA /* UCFGoldCashSecondCell.m in Sources */,
 				08E9A4E21B845E1200099F30 /* UCFTextField.m in Sources */,
 				7BC8A9F51AD4BFF600BF4660 /* UCFMoreViewController.m in Sources */,
@@ -7714,7 +7715,6 @@
 				840A794A1C2A80B60059A946 /* UCFMessageSettingViewController.m in Sources */,
 				FBB685841AE4A76800F222B6 /* MJRefreshGifFooter.m in Sources */,
 				747A91151B01A46300FE2334 /* UCFInvestDetailModel.m in Sources */,
-				333FD80D206B39D800CEA03C /* Reachability.m in Sources */,
 				74270D451EC5960100F9419B /* UIColor+Hex.m in Sources */,
 				74F291161AE0DBC1003E0E86 /* UCFMyInvestViewController.m in Sources */,
 				7420DF061B159E81003CAE38 /* UCFMoreCell.m in Sources */,
