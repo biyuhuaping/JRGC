@@ -100,8 +100,7 @@ typedef NS_ENUM(NSInteger, PicType) {
  *  @return 磅值
  */
 + (CGFloat)pixelConvertIntoPound:(CGFloat)pixel;
-// 获取UA
-+ (NSString *)getUserAgent;
+
 /**
  *  Label显示不同色值的字体
  *
@@ -252,5 +251,14 @@ typedef NS_ENUM(NSInteger, PicType) {
  @return bundleID
  */
 +(NSString*)getBundleID;
+
+
+/**
+ 将参数字符串转换为参数字典
+
+ @param string 参数字符串
+ @return 参数字典
+ */
++ (NSDictionary *)transToParmDictWithString:(NSString *)string;
 
 @end

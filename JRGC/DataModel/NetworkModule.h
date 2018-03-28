@@ -7,11 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ASIHTTPRequest.h"
 #import "TypeDefine.h"
-#import "PostRequest.h"
+//#import "PostRequest.h"
 
-@interface NetworkModule : NSObject <ASIHTTPRequestDelegate>
+@interface NetworkModule : NSObject 
 {
 //    NSMutableDictionary* queue;
     

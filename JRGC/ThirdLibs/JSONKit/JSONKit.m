@@ -2351,6 +2351,7 @@ exitNow:
 
 - (id)objectFromJSONString
 {
+//    return self;
   return([self objectFromJSONStringWithParseOptions:JKParseOptionStrict error:NULL]);
 }
 
