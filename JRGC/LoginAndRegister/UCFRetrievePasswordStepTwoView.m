@@ -170,9 +170,9 @@
     label2.backgroundColor = [UIColor clearColor];
     [self addSubview:label2];
     
-    NSString *strTitle = @"找回密码遇到问题，请联系客服400-0322-988";
+    NSString *strTitle = @"找回密码遇到问题，请联系客服400-6766-988";
     NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:strTitle];
-    NSRange rang = [strTitle rangeOfString:@"400-0322-988"];
+    NSRange rang = [strTitle rangeOfString:@"400-6766-988"];
     [str setAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"Helvetica" size:13], NSForegroundColorAttributeName:UIColorWithRGB(0x4aa1f9)} range:rang];
     NSRange rang2 = [strTitle rangeOfString:@"找回密码遇到问题，请联系客服"];
     [str setAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"Helvetica" size:13], NSForegroundColorAttributeName:UIColorWithRGB(0x999999)} range:rang2];
@@ -340,7 +340,7 @@
 
 - (void)concactUs:(id)sender
 {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://400-0322-988"]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://400-6766-988"]];
     //[_delegate concactUs:sender];
 }
 

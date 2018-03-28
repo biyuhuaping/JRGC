@@ -724,8 +724,9 @@
     if (statusBarDiffrrent) {
         [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     }
-    [[NSNotificationCenter defaultCenter] postNotificationName:CHECK_COUPON_CENTER object:nil];
-
+    if (self.baseScrollView.contentOffset.x != ScreenWidth) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:CHECK_COUPON_CENTER object:nil];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated

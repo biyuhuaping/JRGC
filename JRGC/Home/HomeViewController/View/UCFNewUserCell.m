@@ -127,10 +127,10 @@
     
     NSString *userId = [UserInfoSingle sharedManager].userId;
     if (userId) {
-        [self.okButton setTitle:@"新手享收益" forState:UIControlStateNormal];
+        [self.okButton setTitle:@"新手享利息" forState:UIControlStateNormal];
     }
     else {
-        [self.okButton setTitle:@"注册享收益" forState:UIControlStateNormal];
+        [self.okButton setTitle:@"注册享利息" forState:UIControlStateNormal];
     }
     
     if (self.presenter.platformSubsidyExpense.doubleValue > 0 || self.microMoneyModel.platformSubsidyExpense.doubleValue > 0) {

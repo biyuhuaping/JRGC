@@ -41,7 +41,10 @@
 #import "UCFSignModel.h"
 #import "MjAlertView.h"
 #import "UCFSignView.h"
-@interface UCFSecurityCenterViewController () <UITableViewDataSource, UITableViewDelegate, SecurityCellDelegate, UCFLockHandleDelegate>
+#import "UCFSettingFuncItem.h"
+#import "UCFSecurityCell.h"
+
+@interface UCFSecurityCenterViewController () <UITableViewDataSource, UITableViewDelegate, SecurityCellDelegate, UCFLockHandleDelegate, UCFSecurityCellDelegate>
 
 // 选项表数据
 @property (nonatomic, strong) NSMutableArray *itemsData;
@@ -89,6 +92,18 @@
        
         self.userLevel = [UCFSettingArrowItem itemWithIcon:@"safecenter_icon_vip" title:@"会员等级" destVcClass:[UCFWebViewJavascriptBridgeLevel class]];//***qyy
         self.userLevel.isShowOrHide = YES;//不显示
+        
+        
+        UCFSettingFuncItem *batchLending = [UCFSettingFuncItem itemWithIcon:@"safecenter_icon_auto" title:@"批量出借" destVcClass:nil];
+        batchLending.subtitle = @"到期日:xxxx-xx-xx";
+        batchLending.batchLendingType = UCFSettingBatchLendingTypeUnopened;
+        batchLending.paymentAuthType = UCFSettingPaymentAuthTypeNone;
+        //先前是绑卡页面，因为删除绑卡页面，所以暂时用TradePasswordVC这个类替代，整体调试的时候改过来，zrc fixed
+        UCFSettingFuncItem *paymentAuth = [UCFSettingFuncItem itemWithIcon:@"safecenter_icon_authorize" title:@"缴费授权" destVcClass:nil];//***qyy
+        paymentAuth.batchLendingType = UCFSettingBatchLendingTypeNone;
+        paymentAuth.paymentAuthType = UCFSettingPaymentAuthTypeUnAuth;
+        paymentAuth.subtitle = @"到期日:xxxx-xx-xx";
+        
 
         UCFSettingItem *activeGestureCode  = [UCFSettingSwitchItem itemWithIcon:@"safecenter_icon_gesture" title:@"启用手势密码"];
         UCFSettingItem *activeFaceValid  = [UCFSettingSwitchItem itemWithIcon:@"uesr_icon_face" title:@"启用刷脸登录" withSwitchType:2];
@@ -97,6 +112,10 @@
         UCFSettingItem *moreVc = [UCFSettingArrowItem itemWithIcon:@"safecenter_icon_more" title:@"更多" destVcClass:[UCFMoreViewController class]];
         UCFSettingGroup *group1 = [[UCFSettingGroup alloc] init];//用户信息
         
+        UCFSettingGroup *group2 = [[UCFSettingGroup alloc] init];
+        group2.headTitle = @"功能授权";
+        group2.items = [[NSMutableArray alloc] initWithArray:@[batchLending, paymentAuth]];
+        
         if ([UserInfoSingle sharedManager].superviseSwitch && [UserInfoSingle sharedManager].level <2) {
             group1.items = [[NSMutableArray alloc]initWithArray: @[idauth, bundlePhoneNum,facCode]];//qyy
         }
@@ -104,16 +123,16 @@
             group1.items = [[NSMutableArray alloc]initWithArray: @[idauth, bundlePhoneNum,self.userLevel,facCode]];//qyy
         }
 
-        UCFSettingGroup *group2 = [[UCFSettingGroup alloc] init];//账户安全
+        UCFSettingGroup *group3 = [[UCFSettingGroup alloc] init];//账户安全
         
         if ([self checkTouchIdIsOpen]) {
             UCFSettingItem *zhiWenSwith  = [UCFSettingSwitchItem itemWithIcon:@"safecenter_icon_touch" title:@"启用指纹解锁" withSwitchType:1];
-             group2.items = [[NSMutableArray alloc]initWithArray:@[activeGestureCode,zhiWenSwith, activeFaceValid,modifyPassword,moreVc]];
+             group3.items = [[NSMutableArray alloc]initWithArray:@[activeGestureCode,zhiWenSwith, activeFaceValid,modifyPassword,moreVc]];
         } else {
-             group2.items =[[NSMutableArray alloc]initWithArray: @[activeGestureCode,activeFaceValid,modifyPassword,moreVc]];
+             group3.items =[[NSMutableArray alloc]initWithArray: @[activeGestureCode,activeFaceValid,modifyPassword,moreVc]];
 
         }
-        _itemsData = [[NSMutableArray alloc] initWithObjects:group1,group2,nil];
+        _itemsData = [[NSMutableArray alloc] initWithObjects:group1,group3,nil];
     }
     return _itemsData;
 }
@@ -402,6 +421,10 @@
             [AuxiliaryFunc showToastMessage:dic[@"message"] withView:self.view];
         }
     }
+    else if (tag.integerValue == kSXTagCancelAContract) {
+        [MBProgressHUD displayHudError:dic[@"message"]];
+        [self performSelector:@selector(getSecurityCenterNetData) withObject:nil afterDelay:0.25];
+    }
 }
 //请求失败
 - (void)errorPost:(NSError*)err tag:(NSNumber*)tag
@@ -439,6 +462,11 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    UCFSettingGroup *group = [self.itemsData objectAtIndex:indexPath.section];
+    UCFSettingItem *item = [group.items objectAtIndex:indexPath.row];
+    if ([item isKindOfClass:[UCFSettingFuncItem class]]) {
+        return 60.f;
+    }
     return 44.0f;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -454,26 +482,98 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    SecurityCell *cell = [SecurityCell cellWithTableView:tableView];
     UCFSettingGroup *group = self.itemsData[indexPath.section];
-    if(indexPath.row == 0) {
-        UIView *topLine = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 0.5)];
-        topLine.backgroundColor = UIColorWithRGB(0xd8d8d8);
-        [cell addSubview:topLine];
+    UCFSettingItem *item = [group.items objectAtIndex:indexPath.row];
+    SecurityCell *cell = [SecurityCell cellWithTableView:tableView];
+    if ([item isKindOfClass:[UCFSettingFuncItem class]]) {
+        UCFSecurityCell *securityCell = [tableView dequeueReusableCellWithIdentifier:@"securitycell2"];
+        if (nil == securityCell) {
+            securityCell = (UCFSecurityCell*)[[[NSBundle mainBundle] loadNibNamed:@"UCFSecurityCell" owner:self options:nil] lastObject];
+            securityCell.isShowImage = NO;
+        }
+        securityCell.tableview = tableView;
+        securityCell.indexPath = indexPath;
+        securityCell.delegate = self;
+        securityCell.funcItem = [group.items objectAtIndex:indexPath.row];
+        return securityCell;
     }
-    if (indexPath.row == group.items.count-1) {
-        UIView *bottomLine = [[UIView alloc] initWithFrame:CGRectMake(0,43.5, ScreenWidth, 0.5)];
-          bottomLine.backgroundColor = UIColorWithRGB(0xd8d8d8);
-        [cell.contentView addSubview:bottomLine];
+    else {
+        if(indexPath.row == 0) {
+            UIView *topLine = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 0.5)];
+            topLine.backgroundColor = UIColorWithRGB(0xd8d8d8);
+            [cell addSubview:topLine];
+        }
+        if (indexPath.row == group.items.count-1) {
+            UIView *bottomLine = [[UIView alloc] initWithFrame:CGRectMake(0,43.5, ScreenWidth, 0.5)];
+            bottomLine.backgroundColor = UIColorWithRGB(0xd8d8d8);
+            [cell.contentView addSubview:bottomLine];
+        }
+        cell.item = group.items[indexPath.row];
+        cell.delegate = self;
+        
+        if ([cell.item.title isEqualToString:@"会员等级"]) {
+            [cell.contentView addSubview:_userLevelImage];
+        }
+        return cell;
     }
-    cell.item = group.items[indexPath.row];
-    cell.delegate = self;
-    
-    if ([cell.item.title isEqualToString:@"会员等级"]) {
-        [cell.contentView addSubview:_userLevelImage];
-    }
-    return cell;
+    return nil;
 }
+
+- (void)securityCell:(UCFSecurityCell *)cell didClickButton:(UIButton *)button
+{
+    NSIndexPath *indexPath = [self.tableview indexPathForCell:cell];
+    
+    if (indexPath.row == 0)
+    {
+        if ([button.titleLabel.text isEqualToString:@"开启"] || [button.titleLabel.text isEqualToString:@"重新开启"]) {
+            if([self checkHSIsLegitimate]) {
+                UCFBatchInvestmentViewController *batchInvestment = [[UCFBatchInvestmentViewController alloc] init];
+                batchInvestment.sourceType = @"personCenter";
+                batchInvestment.isStep = 1;
+                [self.navigationController pushViewController:batchInvestment animated:YES];
+            }
+        }
+        else if ([button.titleLabel.text isEqualToString:@"调整"]) {
+            if([self checkHSIsLegitimate]) {
+                UCFBatchInvestmentViewController *batchInvestment = [[UCFBatchInvestmentViewController alloc] init];
+                batchInvestment.sourceType = @"personCenter";
+                batchInvestment.isStep = 2;
+                [self.navigationController pushViewController:batchInvestment animated:YES];
+            }
+        }
+        else if ([button.titleLabel.text isEqualToString:@"解约"]) {
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"" message:@"解约后将不能再出借批量出借项目" preferredStyle:UIAlertControllerStyleAlert];
+            __weak typeof(self) weakSelf = self;
+            UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            }];
+            
+            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"解约" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                [weakSelf batchLendingCancelContract];
+            }];
+            
+            [alertController addAction:okAction];           // A
+            [alertController addAction:cancelAction];
+            [self presentViewController:alertController animated:YES completion:nil];
+        }
+        
+    }
+    else //
+    {
+//        [self p2pAccoutPaymentAuthInfo:cell.funcItem];
+    }
+    
+}
+
+//批量借款解约
+- (void)batchLendingCancelContract {
+    NSString *userId = [UserInfoSingle sharedManager].userId;
+    if (nil == userId) {
+        return;
+    }
+    NSDictionary *param = @{@"userId": userId};
+    [[NetworkModule sharedNetworkModule] newPostReq:param tag:kSXTagCancelAContract owner:self signature:YES Type:SelectAccoutTypeP2P];
+}
+
 //检查touchiID是否打开
 - (void)checkSystemTouchIdisOpen
 {
@@ -776,16 +876,16 @@
             }
                 break;
             case 2:{
-                if ([UserInfoSingle sharedManager].level > 1) {
+                if ([UserInfoSingle sharedManager].level < 2 && [UserInfoSingle sharedManager].superviseSwitch) {
+                    UCFFacCodeViewController *subVC = [[UCFFacCodeViewController alloc] initWithNibName:@"UCFFacCodeViewController" bundle:nil];
+                    subVC.urlStr = [NSString stringWithFormat:@"https://m.9888.cn/mpwap/mycode.jsp?pcode=%@&sex=%d",[[NSUserDefaults standardUserDefaults] objectForKey:GCMCODE],self.sex];
+                    vc = subVC;
+                }
+                else {
                     vc = [[arrowItem.destVcClass alloc] initWithNibName:@"UCFWebViewJavascriptBridgeLevel" bundle:nil];
                     vc.title = arrowItem.title;
                     ((UCFWebViewJavascriptBridgeLevel *)vc).url = LEVELURL;
                     ((UCFWebViewJavascriptBridgeLevel *)vc).navTitle = @"会员等级";
-                }
-                else {
-                    UCFFacCodeViewController *subVC = [[UCFFacCodeViewController alloc] initWithNibName:@"UCFFacCodeViewController" bundle:nil];
-                    subVC.urlStr = [NSString stringWithFormat:@"https://m.9888.cn/mpwap/mycode.jsp?pcode=%@&sex=%d",[[NSUserDefaults standardUserDefaults] objectForKey:GCMCODE],self.sex];
-                    vc = subVC;
                 }
             }
                 break;

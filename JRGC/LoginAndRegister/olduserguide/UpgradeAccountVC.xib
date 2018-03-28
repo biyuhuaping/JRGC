@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UpgradeAccountVC">
             <connections>
+                <outlet property="buttonTopConstraint" destination="ojC-mL-qri" id="jtA-eJ-APx"/>
                 <outlet property="customLabel1" destination="wQK-gz-wCU" id="w5d-hp-sYO"/>
                 <outlet property="customLabel2" destination="ywl-WY-hPs" id="Xmc-KF-oQr"/>
                 <outlet property="height1" destination="N8j-Y3-iQn" id="7lI-Gl-bnG"/>
                 <outlet property="height2" destination="uKE-df-ejY" id="Uzt-9V-Xdi"/>
                 <outlet property="submitDataButton" destination="6Nc-DQ-nNp" id="kkU-kt-zEi"/>
                 <outlet property="tableView" destination="gm7-Vb-T9p" id="3YT-WA-UXS"/>
+                <outlet property="tableViewHight" destination="DSZ-C0-TSp" id="fhH-c1-Yjy"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -26,10 +28,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="gm7-Vb-T9p">
-                    <rect key="frame" x="0.0" y="10" width="375" height="220"/>
+                    <rect key="frame" x="0.0" y="10" width="375" height="176"/>
                     <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="220" id="DSZ-C0-TSp"/>
+                        <constraint firstAttribute="height" constant="176" id="DSZ-C0-TSp"/>
                     </constraints>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="axS-Q9-keG"/>
@@ -44,20 +46,20 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fpK-aC-8gl">
-                    <rect key="frame" x="0.0" y="229" width="375" height="1"/>
+                    <rect key="frame" x="0.0" y="185" width="375" height="1"/>
                     <color key="backgroundColor" red="0.84705882352941175" green="0.84705882352941175" blue="0.84705882352941175" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="uKE-df-ejY"/>
                     </constraints>
                 </view>
                 <label hidden="YES" opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已向手机xx发送短信验证码，若长时间收不到短信，请尝试获取语音验证码" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wQK-gz-wCU" customClass="NZLabel">
-                    <rect key="frame" x="15" y="235" width="345" height="31.5"/>
+                    <rect key="frame" x="15" y="191" width="345" height="31.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <color key="textColor" red="0.5296475887298584" green="0.52963173389434814" blue="0.52964073419570923" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Nc-DQ-nNp">
-                    <rect key="frame" x="15" y="280" width="345" height="37"/>
+                    <rect key="frame" x="15" y="201" width="345" height="37"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="37" id="3G7-gB-vUb"/>
                     </constraints>
@@ -66,8 +68,8 @@
                         <action selector="submitDataButton:" destination="-1" eventType="touchUpInside" id="Uu7-rL-U2F"/>
                     </connections>
                 </button>
-                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="开通即视为我已阅读并同意《资金存管三方协议》" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ywl-WY-hPs" customClass="NZLabel">
-                    <rect key="frame" x="15" y="332" width="345" height="16"/>
+                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ywl-WY-hPs" customClass="NZLabel">
+                    <rect key="frame" x="15" y="253" width="345" height="0.0"/>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <color key="textColor" red="0.5296475887298584" green="0.52963173389434814" blue="0.52964073419570923" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
@@ -86,7 +88,7 @@
                 <constraint firstItem="gm7-Vb-T9p" firstAttribute="top" secondItem="Bf9-4c-fL8" secondAttribute="top" id="dzp-EP-BpH"/>
                 <constraint firstAttribute="trailing" secondItem="wQK-gz-wCU" secondAttribute="trailing" constant="15" id="n3K-b3-E9B"/>
                 <constraint firstItem="wQK-gz-wCU" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="oNu-wN-8xK"/>
-                <constraint firstItem="6Nc-DQ-nNp" firstAttribute="top" secondItem="gm7-Vb-T9p" secondAttribute="bottom" constant="50" id="ojC-mL-qri"/>
+                <constraint firstItem="6Nc-DQ-nNp" firstAttribute="top" secondItem="gm7-Vb-T9p" secondAttribute="bottom" constant="15" id="ojC-mL-qri"/>
                 <constraint firstItem="ywl-WY-hPs" firstAttribute="top" secondItem="6Nc-DQ-nNp" secondAttribute="bottom" constant="15" id="q7e-vh-flG"/>
                 <constraint firstAttribute="trailing" secondItem="ywl-WY-hPs" secondAttribute="trailing" constant="15" id="qm4-aZ-bNP"/>
                 <constraint firstItem="6Nc-DQ-nNp" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="qo8-kd-XAy"/>
@@ -94,7 +96,7 @@
                 <constraint firstAttribute="trailing" secondItem="fpK-aC-8gl" secondAttribute="trailing" id="wO4-hQ-K7p"/>
                 <constraint firstItem="wQK-gz-wCU" firstAttribute="top" secondItem="gm7-Vb-T9p" secondAttribute="bottom" constant="5" id="xXU-Vx-Sr5"/>
             </constraints>
-            <point key="canvasLocation" x="-3" y="52"/>
+            <point key="canvasLocation" x="-248" y="36"/>
         </view>
     </objects>
 </document>

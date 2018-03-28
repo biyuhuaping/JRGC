@@ -32,7 +32,7 @@
                             <constraint firstAttribute="width" constant="110" id="vZu-4X-dOf"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <state key="normal" title="投资享收益">
+                        <state key="normal" title="投资享利息">
                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                         <userDefinedRuntimeAttributes>

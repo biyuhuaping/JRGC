@@ -15,7 +15,9 @@
 #import "FullWebViewController.h"
 #import "BlockUIAlertView.h"
 #import "UserInfoSingle.h"
-
+#import "AccountWebView.h"
+#import "NSString+Misc.h"
+#import "UCFDiscoveryViewController.h"
 @interface UpgradeAccountVC ()<UITextFieldDelegate,NetworkModuleDelegate,UCFHuiShangChooseBankViewControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
@@ -38,6 +40,7 @@
 @property (strong, nonatomic) NSString *tempBankId;//本地临时存储银行id，用于判断银行id是否变化
 @property (strong, nonatomic) NSString *notSupportDes;
 @property BOOL isQuick;//银行是否支持快捷支付
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *tableViewHight;
 
 @property (strong, nonatomic) NSString *openStatus;//开户状态:1：未开户 2：已开户 3：已绑卡 4：已设交易密码 5：特殊用户
 @property (assign, nonatomic) BOOL isNotFirstCome;//不是第一次进入本页面
@@ -48,6 +51,7 @@
 
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *height1;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *height2;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *buttonTopConstraint;
 
 @end
 
@@ -55,7 +59,12 @@
 
 - (void)getToBack
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if(self.isFromeBankCardInfo)
+    {
+        [self.navigationController popViewControllerAnimated:YES];
+    }else{
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -63,8 +72,12 @@
 //    if (_fromVC == 1) {
     
     if (self.accoutType == SelectAccoutTypeP2P) {
+        self.buttonTopConstraint.constant = 15;
+        self.tableViewHight.constant = 44*4;
         baseTitleLabel.text = @"开通微金徽商存管账户";
     } else {
+        self.tableViewHight.constant = 44*5;
+        self.buttonTopConstraint.constant = 15;
         baseTitleLabel.text = @"开通尊享徽商存管账户";
     }
     
@@ -86,15 +99,15 @@
     
     if (self.accoutType == SelectAccoutTypeP2P) {
         
-        NSString *showStr = @"开通即视为本人已阅读并同意《资金存管三方协议》";
-         _customLabel2.text = showStr;
-        __weak typeof(self) weakSelf = self;
-        [_customLabel2 setFontColor:UIColorWithRGB(0x4aa1f9) string:@"《资金存管三方协议》"];
-        [_customLabel2 addLinkString:@"《资金存管三方协议》" block:^(ZBLinkLabelModel *linkModel) {
-            FullWebViewController *webController = [[FullWebViewController alloc] initWithWebUrl:TRUSTEESHIP title:@"资金存管三方协议"];
-            webController.baseTitleType = @"specialUser";
-            [weakSelf.navigationController pushViewController:webController animated:YES];
-        }];
+//        NSString *showStr = @"开通即视为本人已阅读并同意《资金存管三方协议》";
+//         _customLabel2.text = showStr;
+//        __weak typeof(self) weakSelf = self;
+//        [_customLabel2 setFontColor:UIColorWithRGB(0x4aa1f9) string:@"《资金存管三方协议》"];
+//        [_customLabel2 addLinkString:@"《资金存管三方协议》" block:^(ZBLinkLabelModel *linkModel) {
+//            FullWebViewController *webController = [[FullWebViewController alloc] initWithWebUrl:TRUSTEESHIP title:@"资金存管三方协议"];
+//            webController.baseTitleType = @"specialUser";
+//            [weakSelf.navigationController pushViewController:webController animated:YES];
+//        }];
 
         
     } else {
@@ -182,7 +195,8 @@
     
     [_getCodeBtn setTitle:str forState:UIControlStateNormal];
     _counter--;
-    if (_counter < 0) {
+    if (_counter < 0)
+    {
         _isSendVoiceMessage = NO;
         [_timer invalidate];
         _timer = nil;
@@ -316,7 +330,6 @@
     if (bankCard.length == 0 && ![_textField3.placeholder hasPrefix:@"请输入"]){
         bankCard = _textField3.placeholder;
     }
-    
     if (realName.length != 0 && idCardNo.length != 0 && bankCard.length != 0 && _bankLogoView.image) {
         self.getCodeBtn.enabled = YES;
     }else{
@@ -343,7 +356,8 @@
     }else if (textField == _textField3 && ![Common isValidCardNumber:_textField3.text]){
         [AuxiliaryFunc showToastMessage:@"请输入正确的银行卡号" withView:self.view];
         return;
-    }else if (textField == _textField4) {
+    }
+    else if (textField == _textField4) {
         NSString *machineName = [Common machineName];
         if ([machineName isEqualToString:@"4"] || [machineName isEqualToString:@"5"]) {
             [self.db.scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
@@ -361,8 +375,13 @@
 }
 
 #pragma mark - UITableView
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 5;
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    if (self.accoutType == SelectAccoutTypeHoner || _isFromeBankCardInfo) {
+        return  5;
+    }else{
+        return 4;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -414,7 +433,7 @@
                 break;
             case 4:{//验证码
                 [cell.contentView addSubview:_textField4];
-                
+
                 //获取验证码按钮
                 UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
                 button.frame = CGRectMake(ScreenWidth - 127, 0, 127, 44);
@@ -424,10 +443,10 @@
                 [button setTitleColor:UIColorWithRGB(0x4aa1f9) forState:UIControlStateNormal];
                 button.titleLabel.font = [UIFont  systemFontOfSize:14];
                 _getCodeBtn = button;
-                _getCodeBtn.enabled = NO;
+//                _getCodeBtn.enabled = NO;
                 [_getCodeBtn addTarget:self action:@selector(getCodeBtn:) forControlEvents:UIControlEventTouchUpInside];
                 [cell addSubview:_getCodeBtn];
-                
+
                 //分割线
                 UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(CGRectGetMinX(_getCodeBtn.frame), 12, 1, 20)];
                 lineView.backgroundColor = UIColorWithRGB(0xe3e5ea);
@@ -516,8 +535,9 @@
 }
 
 //徽商绑定银行卡
-- (IBAction)submitDataButton:(id)sender {
-    [self.view endEditing:YES];    
+- (IBAction)submitDataButton:(id)sender
+{
+    [self.view endEditing:YES];
     if ([_tempBankId isEqualToString:_bankId]) {
         BlockUIAlertView *alert = [[BlockUIAlertView alloc]initWithTitle:@"提示" message:_notSupportDes cancelButtonTitle:nil clickButton:^(NSInteger index) {} otherButtonTitles:@"确定"];
         [alert show];
@@ -538,10 +558,19 @@
         bankCard = _textField3.placeholder;
     }
     
-    if (realName.length == 0 || idCardNo.length == 0 || bankCard.length == 0 || _textField4.text.length == 0) {
-        [AuxiliaryFunc showToastMessage:@"请完善信息之后再提交" withView:self.view];
-        return;
+    if(self.accoutType == SelectAccoutTypeHoner || _isFromeBankCardInfo)
+    {
+         if (realName.length == 0 || idCardNo.length == 0 || bankCard.length == 0 || _textField4.text.length == 0) {
+             [AuxiliaryFunc showToastMessage:@"请完善信息之后再提交" withView:self.view];
+             return;
+         }
+    }else{
+        if (realName.length == 0 || idCardNo.length == 0 || bankCard.length == 0) {
+            [AuxiliaryFunc showToastMessage:@"请完善信息之后再提交" withView:self.view];
+            return;
+        }
     }
+
     NSString *userId = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
     bankCard = [bankCard stringByReplacingOccurrencesOfString:@" " withString:@""];
     
@@ -551,30 +580,36 @@
                                           @"bankCard":bankCard,              //银行卡号
                                           @"bankId":_bankId,                 //银行id
                                           @"openStatus":_openStatus,         //获取到的用户信息的状态，对应接口getOpenAccountInfo
-                                          @"validateCode":_textField4.text,  //手机验证码
+//                                          @"validateCode":_textField4.text,  //手机验证码
                                           @"userId":userId,                  //用户id
                                           };
         [self replaceBankCardInformation:encryptParamDic];
-}
+     }
     //升级存管账户接口
     else{
-        NSDictionary *encryptParamDic = @{@"realName":realName,             //真实姓名
-                                          @"idCardNo":idCardNo,             //身份证号
-                                          @"bankCardNo":bankCard,           //银行卡号
-                                          @"bankNo":_bankId,                //银行id
-                                          @"openStatus":_openStatus,        //获取到的用户信息的状态，对应接口getOpenAccountInfo
-                                          @"validateCode":_textField4.text, //手机验证码
-                                          @"userId":userId,                 //用户id
-                                          };
-
-        [[NetworkModule sharedNetworkModule] newPostReq:encryptParamDic tag:kSXTagOpenAccount owner:self signature:YES Type:self.accoutType];
+        NSMutableDictionary *encryptParamDic =[[NSMutableDictionary alloc]initWithDictionary:                       @{@"realName":realName,             //真实姓名
+            @"idCardNo":idCardNo,             //身份证号
+            @"bankCardNo":bankCard,           //银行卡号
+            @"bankNo":_bankId,                //银行id
+            @"openStatus":_openStatus,        //获取到的用户信息的状态，对应接口getOpenAccountInfo
+//            @"validateCode":_textField4.text, //手机验证码
+            @"userId":userId,                 //用户id
+            }];
+        if (self.accoutType == SelectAccoutTypeHoner)
+        {
+            [encryptParamDic setValue:_textField4.text forKey:@"validateCode"];//手机验证码
+             [[NetworkModule sharedNetworkModule] newPostReq:encryptParamDic tag:kSXTagOpenAccount owner:self signature:YES Type:self.accoutType];
+        }else
+        {
+             [[NetworkModule sharedNetworkModule] newPostReq:encryptParamDic tag:kSXTagOpenAccuntIntoBank owner:self signature:YES Type:self.accoutType];
+        }
     }
 }
 
 //开始请求
 - (void)beginPost:(kSXTag)tag
 {
-    if (tag == kSXTagOpenAccount) {//徽商绑定银行卡
+    if (tag == kSXTagOpenAccuntIntoBank) {//徽商绑定银行卡
 //        [GiFHUD show];
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     }
@@ -594,9 +629,12 @@
             NSString *cfcaContractNameStr = [dic[@"data"] objectSafeForKey:@"cfcaContractName"];
             NSString *cfcaContractUrlStr = [dic[@"data"] objectSafeForKey:@"cfcaContractUrl"];
             if(![cfcaContractNameStr isEqualToString:@""]){
-                _customLabel2.text = @"开通即视为本人已阅读并同意《CFCA数字证书服务协议》《资金存管三方协议》";
+//                _customLabel2.text = @"开通即视为本人已阅读并同意《CFCA数字证书服务协议》《资金存管三方协议》";
+//                __weak typeof(self) weakSelf = self;
+//                [_customLabel2 setFontColor:UIColorWithRGB(0x4aa1f9) string:@"《CFCA数字证书服务协议》《资金存管三方协议》"];
+                _customLabel2.text = @"开通即视为本人已阅读并同意《CFCA数字证书服务协议》";
                 __weak typeof(self) weakSelf = self;
-                [_customLabel2 setFontColor:UIColorWithRGB(0x4aa1f9) string:@"《CFCA数字证书服务协议》《资金存管三方协议》"];
+                [_customLabel2 setFontColor:UIColorWithRGB(0x4aa1f9) string:@"《CFCA数字证书服务协议》"];
                 [_customLabel2 addLinkString:@"《CFCA数字证书服务协议》" block:^(ZBLinkLabelModel *linkModel) {
                     FullWebViewController *webController = [[FullWebViewController alloc] initWithWebUrl:cfcaContractUrlStr title:@"CFCA数字证书服务协议"];
                     webController.baseTitleType = @"specialUser";
@@ -659,13 +697,10 @@
                 self.getCodeBtn.enabled = YES;
             }
             
-            //新老用户的提交按钮文字不一样，老用户：同意；新用户：立即开通
-            if (!_isFromeBankCardInfo) {
-                if (idCardNo.length > 0){
-                    [_submitDataButton setTitle:@"同意" forState:UIControlStateNormal];
-                }else{
-                    [_submitDataButton setTitle:@"立即开通" forState:UIControlStateNormal];
-                }
+            //新老用户的提交按钮文字一样 ：立即开通
+            if (!_isFromeBankCardInfo)
+            {
+                 [_submitDataButton setTitle:@"立即开通" forState:UIControlStateNormal];
             }
             
             if (_notSupportDes.length > 0) {
@@ -679,6 +714,11 @@
     }
     else if (tag.intValue == kSXTagIdentifyCode) {//发送验证码
         if ([ret boolValue]) {
+            
+            __weak typeof(self) weakSelf = self;
+            [UIView animateWithDuration:0.25 animations:^{
+                  weakSelf.buttonTopConstraint.constant = 50;
+            }];
             _isSendVoiceMessage = YES;
             DBLOG(@"%@",dic[@"data"]);
             [_getCodeBtn setTitle:@"60秒后重新获取" forState:UIControlStateNormal];
@@ -743,6 +783,33 @@
                 } otherButtonTitles:nil];
                 [alert show];
             }
+        }else {
+            [AuxiliaryFunc showToastMessage:dic[@"message"] withView:self.view];
+        }
+    }
+    else if (tag.intValue == kSXTagOpenAccuntIntoBank) {
+        if ([ret boolValue])
+        {
+             [UserInfoSingle sharedManager].realName = _textField1.text;
+            _counter = 0;
+            AccountWebView *webView = [[AccountWebView alloc] initWithNibName:@"AccountWebView" bundle:nil];
+            webView.title = @"即将跳转";
+            webView.isPresentViewController = self.db.isPresentViewController;
+            webView.rootVc = @"UpgradeAccountVC";
+            webView.url =  dic[@"data"][@"url"];
+            NSString *SIGNStr =   dic[@"data"][@"tradeReq"][@"SIGN"];
+            NSMutableDictionary *data =  [[NSMutableDictionary alloc]initWithDictionary:@{}];
+             [data setValue: dic[@"data"][@"tradeReq"][@"PARAMS"]  forKey:@"PARAMS"];
+            [data setValue:[NSString  urlEncodeStr:SIGNStr] forKey:@"SIGN"];
+            webView.webDataDic = data;
+            if(self.db){
+                [self.db.navigationController pushViewController:webView animated:YES];
+            }else{
+                [self.navigationController pushViewController:webView animated:YES];
+            }
+//            NSMutableArray *navVCArray = [[NSMutableArray alloc] initWithArray:self.navigationController.viewControllers];
+//            [navVCArray removeObjectAtIndex:navVCArray.count-2];//在栈里把上级视图移除
+//            [self.navigationController setViewControllers:navVCArray animated:NO];
         }else {
             [AuxiliaryFunc showToastMessage:dic[@"message"] withView:self.view];
         }

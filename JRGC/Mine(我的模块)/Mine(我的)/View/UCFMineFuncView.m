@@ -54,7 +54,17 @@
     UCFSettingItem *assetProof = [UCFSettingArrowItem itemWithIcon:@"uesr_icon_assets" title:@"资产证明" destVcClass:nil];
     assetProof.subtitle = @"随时申请开具";
     UCFSettingItem *contactUs = [UCFSettingArrowItem itemWithIcon:@"uesr_icon_contact" title:@"联系我们" destVcClass:nil];
-    contactUs.subtitle = @"400-6766-988";
+    if ([UserInfoSingle sharedManager].superviseSwitch) {
+        if ([UserInfoSingle sharedManager].level <= 1 && [UserInfoSingle sharedManager].zxIsNew && [UserInfoSingle sharedManager].goldIsNew) {
+            contactUs.subtitle = @"400-6766-988";
+        }
+        else {
+            contactUs.subtitle = @"400-0322-988";
+        }
+    }
+    else {
+        contactUs.subtitle = @"400-0322-988";
+    }
     _dataArray = [[NSMutableArray alloc] initWithArray:@[facBean, coupon, facPoint, profitInvest, sign, addProfitCalculator, assetProof, contactUs]];
     
      

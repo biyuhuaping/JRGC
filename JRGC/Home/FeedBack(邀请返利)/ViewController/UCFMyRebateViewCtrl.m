@@ -720,7 +720,12 @@
 
     if (tag.intValue == kAppQueryByManyList){
         _nperLab.text = [NSString stringWithFormat:@"第%@期/共%@期",dic[@"datasizepre"],dic[@"datasize"]];//期数
-        _investorsLab.text = [NSString stringWithFormat:@"投资人：%@",dic[@"realname"]];//投资人
+        if (self.accoutType == SelectAccoutTypeP2P) {
+            _investorsLab.text = [NSString stringWithFormat:@"出借人：%@",dic[@"realname"]];//投资人
+        } else {
+            _investorsLab.text = [NSString stringWithFormat:@"投资人：%@",dic[@"realname"]];//投资人
+
+        }
         _dataArr4 = [[NSMutableArray alloc]initWithArray:dic[@"reslist"]];
         [_tableView4 reloadData];
         if (_dataArr4.count <= 3) {

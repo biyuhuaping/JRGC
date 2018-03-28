@@ -22,6 +22,9 @@
 #import "UCFHuiShangBankViewController.h"
 #import "FMDeviceManager.h"
 #import "UCFModifyReservedBankNumberViewController.h"
+#import "UCFRechargeWebViewController.h"
+#import "NSString+Misc.h"
+#import "HSHelper.h"
 //#warning 同盾修改
 //@interface UCFTopUpViewController () <UITextFieldDelegate,FMDeviceManagerDelegate,UCFModifyReservedBankNumberDelegate>
 @interface UCFTopUpViewController () <UITextFieldDelegate,UCFModifyReservedBankNumberDelegate>
@@ -61,6 +64,8 @@
 // 金额输入框
 @property (weak, nonatomic) IBOutlet UITextField *topUpLabelTextField;
 //银行预留手机号输入框
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *codeTextFieldHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *sendButtonHeight;
 @property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
 //验证码输入框
 @property (weak, nonatomic) IBOutlet UITextField *verificationCodeField;
@@ -108,6 +113,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+   
+    self.topUpLabelTextField.text = @"";
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 }
 
@@ -115,6 +122,7 @@
     [super viewDidLoad];
     [self createUI];
     [self addControll];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getMyBindCardMessage) name:@"getP2PAccountDataMessage" object:nil];
     [self getMyBindCardMessage];
     [self setTimer];
     [self registKeyBordNoti];
@@ -124,10 +132,19 @@
 //初始化界面信息
 - (void)createUI
 {
-    if (self.accoutType == SelectAccoutTypeHoner) {
-         baseTitleLabel.text = @"尊享充值";
+    if (self.accoutType == SelectAccoutTypeHoner)
+    {
+        self.codeTextFieldHeight.constant = 37;
+        self.sendButtonHeight.constant = 37;
+        self.getCodeButton.hidden = NO;
+        self.verificationCodeField.hidden = NO;
+        baseTitleLabel.text = @"尊享充值";
     }else{
-       baseTitleLabel.text = @"微金充值";
+        self.codeTextFieldHeight.constant = 0;
+        self.sendButtonHeight.constant = 0;
+        self.getCodeButton.hidden = YES;
+        self.verificationCodeField.hidden = YES;
+        baseTitleLabel.text = @"微金充值";
     }
     [self addLeftButton];
     [self addRightButtonWithName:@"充值记录"];
@@ -149,38 +166,29 @@
     
     [self.topUpButton setBackgroundImage:[[UIImage imageNamed:@"btn_red"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:2.5] forState:UIControlStateNormal];
     [self.topUpButton setBackgroundImage:[[UIImage imageNamed:@"btn_red_highlight"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:2.5] forState:UIControlStateHighlighted];
-    
     NSString *bankUrl = [_dataDict objectForKey:@"url"];
     [_bankBranchImageVIew sd_setImageWithURL:[NSURL URLWithString:bankUrl]];
     _bankNameLabel.text = [UCFToolsMehod isNullOrNilWithString:[_dataDict objectForKey:@"bankName"]];
     _accountNameLabel.text = [UCFToolsMehod isNullOrNilWithString:[_dataDict objectForKey:@"realName"]];
     _cardCodeLabel.text = [UCFToolsMehod isNullOrNilWithString:[_dataDict objectForKey:@"bankCard"]];
-    if ([[_dataDict objectForKey:@"cjflag"] isEqualToString:@"1"]) {
+    if ([[_dataDict objectForKey:@"cjflag"] isEqualToString:@"1"])
+    {
         _fastPayImageView.hidden = NO;
     } else {
         _fastPayImageView.hidden = YES;
     }
-
-    
     _msgTipLabel.userInteractionEnabled = YES;
     _msgTipLabel.text = @"";
-    
-    
-    
 }
-    
 -(void)showDeleagateView:(ZBLinkLabelModel *)linkModel
 {
     NSString *contractNameStr = linkModel.linkString;
-    
     if ([contractNameStr hasPrefix:@"《CFCA"])
     {
         [self showContractWebViewUrl:_cfcaContractUrl withTitle:_cfcaContractName];
         return;
     }
-    
     NSDictionary *strParameters  = [NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] valueForKey:UUID], @"userId",_contractType, @"contractType",nil];
-    
     [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagHonerRechangeShowContract owner:self signature:YES Type:SelectAccoutTypeHoner];
 }
 
@@ -213,11 +221,11 @@
                           };
     NSString *str = self.accoutType == SelectAccoutTypeHoner ? @"无投资":@"未出借";
     NSString *isThreePlatStr = self.accoutType == SelectAccoutTypeP2P ? @"平台方":@"第三方支付平台";
-    NSString *desStr = [NSString stringWithFormat:@"• 使用快捷支付充值最低金额应大于等于%@元。\n• 对首次充值后%@的提现，%@收取%@%%的手续费。\n• 充值/提现必须为银行借记卡，不支持存折、信用卡充值。\n• 充值需开通银行卡网上支付功能，如有疑问请咨询开户行客服。\n• 单笔充值不可超过该银行充值限额。\n• 如手机快捷支付充值失败，可尝试在电脑上进行网银转账，或使用支付宝进行转账操作。",minRecharge,str,isThreePlatStr,fee];
+    NSString *desStr = [NSString stringWithFormat:@"• 使用快捷支付充值最低金额应大于等于%@元。\n• 对首次充值后%@的提现，%@收取%@%%的手续费。\n• 充值/提现必须为银行借记卡，不支持存折、信用卡充值。\n• 充值需开通银行卡网上支付功能，如有疑问请咨询开户行客服。\n• 单笔充值不可超过该银行充值限额。\n• 如手机快捷支付充值失败，可尝试在电脑上进行网银转账。",minRecharge,str,isThreePlatStr,fee];
     //查看各银行充值限额；
     _desLabel.attributedText = [NSString getNSAttributedString:desStr labelDict:dic];
     [_desLabel setBoldFontToString:@"网银"];
-    [_desLabel setBoldFontToString:@"支付宝"];
+//    [_desLabel setBoldFontToString:@"支付宝"];
 
     __weak typeof(self) weakSelf = self;
     self.telServiceLabel.text = @"• 如果充值金额没有及时到账，请拨打客服查询。";
@@ -345,7 +353,12 @@
         if (buttonIndex == 1) {
            [self tappedTelePhone];    //联系客服
         }
-    } else {
+    }else if (alertView.tag == 8000) {
+        if (buttonIndex == 1) {
+            HSHelper *helper = [HSHelper new];
+            [helper pushOpenHSType:self.accoutType Step:[UserInfoSingle sharedManager].openStatus nav:self.navigationController];
+        }
+    }else {
         if (buttonIndex == 1) {
             NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",[telNum  stringByReplacingOccurrencesOfString:@"-" withString:@""]];
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
@@ -461,7 +474,13 @@
 - (void)tappedTelePhone
 {
     [self.view endEditing:YES];
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"telprompt://4000322988"]];
+    if (self.accoutType == SelectAccoutTypeHoner) {
+         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"telprompt://4000322988"]];
+    } else {
+         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"telprompt://4006766988"]];
+    }
+    
+   
 }
 
 #pragma mark - 同盾
@@ -473,17 +492,33 @@
     NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
     [paraDict setValue:inputMoney forKey:@"payAmount"];
     [paraDict setValue:_phoneTextField.text forKey:@"phoneNo"];
-    [paraDict setValue:_verificationCodeField.text forKey:@"smsCode"];
+    if (self.accoutType == SelectAccoutTypeHoner) ///尊享保留原来参数
+    {
+        [paraDict setValue:self.smsSerialNo forKey:@"validateNo"];
+        [paraDict setValue:_verificationCodeField.text forKey:@"smsCode"];
+    }
     [paraDict setValue:[[NSUserDefaults standardUserDefaults] valueForKey:UUID] forKey:@"userId"];
-    [paraDict setValue:self.smsSerialNo forKey:@"validateNo"];
     [paraDict setValue:blackBox forKey:@"token_id"];
 //    [paraDict setValue:wanip forKey:@"ip"];
     [paraDict setValue:_RechargeTokenStr forKey:@"rechargeToken"];
-    [[NetworkModule sharedNetworkModule] newPostReq:paraDict tag:kSxTagHSPayMobile owner:self signature:YES Type:self.accoutType];
+    
+    if (self.accoutType == SelectAccoutTypeHoner)
+    {
+        [[NetworkModule sharedNetworkModule] newPostReq:paraDict tag:kSxTagHSPayMobile owner:self signature:YES Type:self.accoutType];
+    }else{
+        [[NetworkModule sharedNetworkModule] newPostReq:paraDict tag:kSXTagP2PAccountrechargeNew owner:self signature:YES Type:self.accoutType];
+    }
 }
 
 //判断订单状态，提交充值表单
 - (IBAction)gotoPay:(id)sender {
+    
+    if ( self.accoutType == SelectAccoutTypeP2P &&  [UserInfoSingle sharedManager].openStatus == 3 && [self checkOrderIsLegitimate]) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:P2PTIP2 delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        alert.tag =  8000;
+        [alert show];
+        return;
+    }
     if ([self checkOrderIsLegitimate]) {
         [self.view endEditing:YES];
         FMDeviceManager_t *manager = [FMDeviceManager sharedManager];
@@ -708,10 +743,12 @@
         [MBProgressHUD displayHudError:@"请输入正确手机号"];
         return NO;
     }
-    if (![Common deleteStrHeadAndTailSpace:_verificationCodeField.text].length) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"请输入验证码" message:nil delegate:self cancelButtonTitle:@"知道了" otherButtonTitles: nil];
-        [alert show];
-        return NO;
+    if (self.accoutType == SelectAccoutTypeHoner) {
+        if (![Common deleteStrHeadAndTailSpace:_verificationCodeField.text].length) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"请输入验证码" message:nil delegate:self cancelButtonTitle:@"知道了" otherButtonTitles: nil];
+            [alert show];
+            return NO;
+        }
     }
     return YES;
 }
@@ -784,7 +821,8 @@
             self.phoneTextField.textColor = UIColorWithRGB(0x999999);
             self.phoneTextField.backgroundColor = UIColorWithRGB(0xf4f4f4);
             self.phoneTextField.userInteractionEnabled = NO;
-            UIAlertView *alert1 = [[UIAlertView alloc] initWithTitle:@"充值成功" message:@""delegate:self cancelButtonTitle:@"继续充值" otherButtonTitles:@"去投资", nil];
+            NSString *str = self.accoutType == SelectAccoutTypeHoner ? @"去认购" : @"去出借";
+            UIAlertView *alert1 = [[UIAlertView alloc] initWithTitle:@"充值成功" message:@""delegate:self cancelButtonTitle:@"继续充值" otherButtonTitles:str, nil];
             alert1.tag = 1000;
             [alert1 show];
         } else {
@@ -819,6 +857,7 @@
                 _bankNameLabel.text = [UCFToolsMehod isNullOrNilWithString:coreDict[@"bankName"]];
             }
             _accountNameLabel.text = [UCFToolsMehod isNullOrNilWithString:coreDict[@"realName"]];
+            [UserInfoSingle sharedManager].realName = [coreDict objectSafeForKey: @"realName"];
             _cardCodeLabel.text = [UCFToolsMehod isNullOrNilWithString:coreDict[@"bankCardNo"]];
             if ([coreDict[@"supportQPass"] boolValue]) {
                 _fastPayImageView.hidden = NO;
@@ -829,6 +868,10 @@
             telNum = [NSString stringWithFormat:@"%@",dic[@"data"][@"customerServiceNo"]];
             minRecharge = [NSString stringWithFormat:@"%@",dic[@"data"][@"minAmt"]];
             fee = [NSString stringWithFormat:@"%@",dic[@"data"][@"fee"]];
+            if (self.accoutType == SelectAccoutTypeP2P)
+            {
+                [UserInfoSingle sharedManager].openStatus = [[coreDict objectSafeForKey:@"openStatus"] integerValue];
+            }
             NSString *bankPhone =  [dic[@"data"][@"bankInfo"] objectSafeForKey:@"bankPhone"];
             isSpecial = [[dic[@"data"][@"bankInfo"] objectSafeForKey:@"isSpecial"] boolValue];
           BOOL isCompanyAgent  = [[dic[@"data"][@"bankInfo"] objectSafeForKey:@"isCompanyAgent"] boolValue];
@@ -948,9 +991,31 @@
         {
             [AuxiliaryFunc showAlertViewWithMessage:[dic objectSafeForKey:@"message"]];
         }
+    } else if (tag.intValue == kSXTagP2PAccountrechargeNew){
+        NSMutableDictionary *dic = [data objectFromJSONString];
+        NSString *rstcode = dic[@"ret"];
+        if([rstcode intValue] == 1)
+        {
+            NSDictionary  *dataDict = dic[@"data"][@"tradeReq"];
+            NSString *urlStr = dic[@"data"][@"url"];
+            UCFRechargeWebViewController *rechargeWebVC = [[UCFRechargeWebViewController alloc]initWithNibName:@"UCFRechargeWebViewController" bundle:nil];
+            NSString *SIGNStr =   dataDict[@"SIGN"];
+            NSMutableDictionary *data =  [[NSMutableDictionary alloc]initWithDictionary:@{}];
+            [data setValue: dic[@"data"][@"tradeReq"][@"PARAMS"]  forKey:@"PARAMS"];
+            [data setValue:[NSString  urlEncodeStr:SIGNStr] forKey:@"SIGN"];
+            rechargeWebVC.webDataDic = data;
+//            rechargeWebVC.navTitle = @"即将跳转";
+            rechargeWebVC.url = urlStr;
+            rechargeWebVC.accoutType = self.accoutType;
+            rechargeWebVC.rootVc = self.uperViewController;
+            [self.navigationController pushViewController:rechargeWebVC animated:YES];
+        }
+        else{
+            NSString *messageStr = [dic objectSafeForKey:@"message"];
+            UIAlertView *alert1 = [[UIAlertView alloc] initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            [alert1 show];
+        }
     }
-    
-    
 }
 #pragma mark ---------------------------
 

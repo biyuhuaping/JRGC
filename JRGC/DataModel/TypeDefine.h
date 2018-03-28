@@ -336,7 +336,17 @@
 #define PRDCLAIMSGETPRDBASEDETAIL @"api/prdClaims/v2/getPrdBaseDetail.json" //普通标详情【基础标信息】
 #define PRDCLAIMSGETINVESTORDERRECORD @"api/prdClaims/v2/getInvestOrderRecord.json" //普通标详情【标认购记录】
 #warning about supervise
-#define SUPERVISEUSERINFO   @"api/prdClaims/v2/complianceStatus.json" //监管用户监管用户信息 
+#define SUPERVISEUSERINFO   @"api/prdClaims/v2/complianceStatus.json" //监管用户监管用户信息
+#define OPENACCOUNTINTOBANKURL    @"api/userInfo/v2/openAccountIntoBank.json" //***新徽商绑定银行卡接口
+#define ACCOUTSETHSPWDINTOBANKURL  @"/api/userAccount/v2/setHsPwdIntoBank.json"//***新徽商设置交易密码接口
+
+#define P2PACCOUTRECHRAGENEWURL  @"/api/recharge/v2/rechargeNew.json"//***新微金充值接口
+
+
+#define P2PCREATEAUTHPATMENTURL @"api/userAccount/v2/createAuthPayment.json" //***用户缴费授权
+#define P2PCANCELAUTHPAYMENTURL @"api/userAccount/v2/cancelAuthPayment.json" //***取消用户缴费授权
+#define CANCELACONTRACT @"api/userAccount/v2/cancelBatchInvestLimit.json" //批量投资解约
+
 
 enum kPostStatus{
     kPostStatusNone=0,
@@ -561,6 +571,12 @@ enum kSXTag
     kSXTagPrdClaimsGetPrdBaseDetail,     //普通标详情【基础标信息】
     kSXTagPrdClaimsGetInvestOrderRecord, //普通标详情【标认购记录】
     kSXTagSuperviseUserInfo,             //监管用户信息
+    kSXTagOpenAccuntIntoBank,           //***新徽商绑定银行卡接口
+    kSXTagAccountSetHsPwdIntoBank,      //***新徽商设置交易密码接口
+    kSXTagP2PAccountrechargeNew,        //***新微金充值接口
+    kSXTagP2PCreateAuthPayment,          //***用户缴费授权
+    KsxTagP2PCancelAuthPayment,          //***取消用户缴费授权
+    kSXTagCancelAContract,               //取消批量授权
 };
 
 typedef enum kSXTag kSXTag;

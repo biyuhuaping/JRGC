@@ -257,9 +257,6 @@
     [_bridge setWebViewDelegate:self];
     __weak typeof(self) weakSelf = self;
     
-    
-#warning test
-    
     [_bridge registerHandler:@"nativeCallback" handler:^(id data, WVJBResponseCallback responseCallback) {
         
         DBLOG(@"testObjcCallback called: %@", data);
@@ -442,6 +439,9 @@
         }
         else if ([nativeData[@"action"] isEqualToString:@"shareImage"]) {// shareImage 分享图片
              [weakSelf goToShareImage:nativeData];
+        }
+        else if ([nativeData[@"action"] isEqualToString:@"shareImage"]) {// shareImage 分享图片
+            [weakSelf goToShareImage:nativeData];
         }
         
         //----------------------------------------------------------------------------------------------------qyy
@@ -739,7 +739,10 @@
     [self.webView.scrollView.header endRefreshing];
     
     self.requestLastUrl = [NSString stringWithFormat:@"%@",self.webView.request.URL.absoluteString];
-    
+    if (baseTitleLabel.text.length == 0)
+    {
+        baseTitleLabel.text = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+    }
     DBLOG(@"%@",self.requestLastUrl);
     
     if (!self.errorView.hidden) {
@@ -1127,7 +1130,10 @@
         //            batchInvestment.sourceType = @"P2POrHonerAccoutVC";
         [self.navigationController pushViewController:batchInvestment animated:YES];
     }
-    
+    else if ([controllerName isEqualToString:@"app_open_account"]) //开户失败 跳转到 开户页面
+    {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
     //----------------------------------------------------------------------------------------------------qyy
     else
     {
@@ -1145,6 +1151,9 @@
 {
 }
 
+- (void)jsRechargeSuccess:(BOOL)isSuc
+{
+}
 /*- (void)pushWebView:(NSString *)url withTitle:(NSString *)title
 {
     UCFWebViewJavascriptBridgeController *vc = [[UCFWebViewJavascriptBridgeController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeController" bundle:nil];

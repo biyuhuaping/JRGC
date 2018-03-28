@@ -117,7 +117,7 @@
         }
             break;
         case 3:{//已绑卡-->>>去设置交易密码页面
-            messege = self.accoutType == SelectAccoutTypeP2P ? @"未设置微金交易密码不能投标、提现。" : @"未设置尊享交易密码不能投标、提现。";
+            messege = self.accoutType == SelectAccoutTypeP2P ? @"未设置微金交易密码不能投标、提现、充值。" : @"未设置尊享交易密码不能投标、提现。";
         }
             break;
     }
