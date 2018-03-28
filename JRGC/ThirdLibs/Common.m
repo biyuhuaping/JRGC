@@ -9,7 +9,6 @@
 #import "Common.h"
 #import <AdSupport/AdSupport.h>
 #import "sys/utsname.h"
-#import "ASIHTTPRequest.h"
 #import "UCFToolsMehod.h"
 #import "NSData+AES.h"
 #import "NSData+Base64.h"
@@ -299,8 +298,11 @@
 }
 + (NSString*)dictionaryToJson:(NSDictionary *)dic
 {
+    if (!dic) {
+        return @"";
+    }
     NSError *parseError = nil;
-    NSData  *jsonData = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:&parseError];
+    NSData  *jsonData = [NSJSONSerialization dataWithJSONObject:dic options:0 error:&parseError];
     return [[[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding] autorelease];
 }
 
@@ -395,7 +397,7 @@
 }
 //获取 添加段落 字号的 字典
 +(NSDictionary *)getParagraphStyleDictWithStrFont:(CGFloat)font WithlineSpacing:(CGFloat )lineSpacing{
-    NSMutableParagraphStyle *paragraph = [[NSMutableParagraphStyle alloc] init];
+    NSMutableParagraphStyle *paragraph = [[[NSMutableParagraphStyle alloc] init] autorelease];
     paragraph.alignment = NSTextAlignmentLeft;
     paragraph.lineSpacing = lineSpacing;
     NSDictionary *dic = @{
@@ -517,7 +519,6 @@
     NSData *cipherData = [[jsonStr dataUsingEncoding:NSUTF8StringEncoding] AES256EncryptWithKey:pwdKey];
     NSString *base64Text = [cipherData base64EncodedString];
     NSString *finishStr = [NSString stringWithFormat:@"%@",base64Text];
-    finishStr =  [finishStr stringByReplacingOccurrencesOfString:@"+" withString:@"%2B"];
     return finishStr;
 }
 + (NSString *)JieAESWith:(NSString *)key WithData:(NSString *)data
@@ -621,15 +622,7 @@
     CGFloat font = (pixel/96)*72;
     return font;
 }
-+ (NSString *)getUserAgent
-{
-    NSString *UA = [ASIHTTPRequest defaultUserAgentString];
-    const char *c = [UA cStringUsingEncoding:NSISOLatin1StringEncoding];
-    NSString * newTraStr = [[[NSString alloc] initWithCString:c encoding:NSUTF8StringEncoding] autorelease];
-    newTraStr = [newTraStr stringByReplacingOccurrencesOfString:@" " withString:@""];
-    return newTraStr ;
 
-}
 
 + (NSMutableAttributedString *)oneSectionOfLabelShowDifferentColor:(UIColor *)diffColor WithSectionText:(NSString *)sectionText WithTotalString:(NSString *)lastStr
 {
@@ -1224,20 +1217,8 @@
 }
 +(UIImage *) getImageFromURL:(NSString *)fileURL{
     
-    ASIFormDataRequest * innerRequest = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:fileURL]];
-    [innerRequest setRequestMethod:@"GET"];
-    [innerRequest setValidatesSecureCertificate:NO];
-    [innerRequest setDelegate:self];
-    [innerRequest setTimeOutSeconds:20.0];
-    // 开始同步请求
-    [innerRequest startSynchronous];
-    NSError *error = [innerRequest error];
-    UIImage * result;
-    if (!error)
-    {
-        NSData *data=[innerRequest responseData];
-        result = [UIImage imageWithData:data];
-    }
+    NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:fileURL]];
+    UIImage * result = [UIImage imageWithData:data];    
     return result;
     
 }
@@ -1297,7 +1278,7 @@
 }
 + (NSMutableAttributedString*) changeLabelWithAllStr:(NSString *)allStr Text:(NSString*)needText Font:(CGFloat)font
 {
-    NSMutableAttributedString * noteStr = [[NSMutableAttributedString alloc]initWithString:allStr];
+    NSMutableAttributedString * noteStr = [[[NSMutableAttributedString alloc]initWithString:allStr] autorelease];
     NSRange redRangeTwo = NSMakeRange([[noteStr string] rangeOfString:needText].location, [[noteStr string] rangeOfString:needText].length);
     [noteStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:font] range:redRangeTwo];
     return noteStr;
@@ -1353,5 +1334,15 @@
 +(NSString*)getBundleID
 {
     return [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"];
+}
++ (NSDictionary *)transToParmDictWithString:(NSString *)string
+{
+    NSArray *arr = [string componentsSeparatedByString:@"&"];
+    NSMutableDictionary *parmDict = [NSMutableDictionary dictionaryWithCapacity:1];
+    for (NSString *str in arr) {
+        NSArray *arr1 = [str componentsSeparatedByString:@"="];
+        [parmDict setValue:arr1[1] forKey:arr1[0]];
+    }
+    return parmDict;
 }
 @end

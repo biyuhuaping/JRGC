@@ -10,7 +10,6 @@
 //
 
 #import "NetworkModule.h"
-#import "GetRequest.h"
 #import "Common.h"
 #import "Reachability.h"
 #import "BaseAlertView.h"
@@ -22,10 +21,16 @@
 #import "AuxiliaryFunc.h"
 #import "JSONKit.h"
 #import "UCFLoginViewController.h"
+#import "NSURLSessionTask+Tag.h"
+#import "AFNetworking.h"
+
 @interface NetworkModule () <UIAlertViewDelegate>
 @property (nonatomic, assign) BOOL isShowAlert;
 @property (nonatomic, assign) BOOL isShowSingleAlert; //是否已经弹出单设备警告框
 @property (nonatomic, assign) kSXTag loseTag;         //失效的接口标示
+@property (nonatomic, strong)AFHTTPSessionManager *manager;
+
+
 @end
 
 @implementation NetworkModule
@@ -36,13 +41,12 @@ static NetworkModule *gInstance = NULL;
 {
     self = [super init];
     if (self) {
-        queue = [[NSMutableDictionary alloc] init];
         self.isShowAlert = YES;
         self.isShowSingleAlert = YES;
-        
-        
-//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(isReloadNetQuest) name:IS_RELOADE_REQUEST object:nil];
-
+        self.manager =  [AFHTTPSessionManager manager];
+        _manager.requestSerializer.timeoutInterval = 30;
+        _manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+        _manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html",@"text/plain", nil];
     }
     return self;
 }
@@ -293,16 +297,11 @@ static NetworkModule *gInstance = NULL;
         if (tag == kSXTagValidLogin) {
             //需要验签 需要AES
             NSString * encryptParam  = [Common  AESWithKey:[Common getKeychain] WithData:data];
-            NSString * encryptParam1 = [Common AESWithKeyWithNoTranscode:[Common getKeychain] WithData:data];
-            data = [NSString stringWithFormat:@"encryptParam=%@",encryptParam1];
-            data = [data stringByAppendingString:[NSString stringWithFormat:@"&imei=%@&version=%@",[Common getKeychain],[Common getIOSVersion]]];
-            data = [data stringByAppendingString:@"&source_type=1"];
-            data = [data stringByAppendingString:[NSString stringWithFormat:@"&userId=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID]]];
-            NSString *signature = [self getSinatureWithPar:[self getParStr:data]];
             data = [NSString stringWithFormat:@"encryptParam=%@",encryptParam];
             data = [data stringByAppendingString:[NSString stringWithFormat:@"&imei=%@&version=%@",[Common getKeychain],[Common getIOSVersion]]];
             data = [data stringByAppendingString:@"&source_type=1"];
             data = [data stringByAppendingString:[NSString stringWithFormat:@"&userId=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID]]];
+            NSString *signature = [self getSinatureWithPar:[self getParStr:data]];
             data = [data stringByAppendingString:[NSString stringWithFormat:@"&signature=%@",signature]];
         }
         else {
@@ -312,78 +311,184 @@ static NetworkModule *gInstance = NULL;
             NSString *signature = [self getSinatureWithPar:[self getParStr:data]];
             data = [data stringByAppendingString:[NSString stringWithFormat:@"&signature=%@",signature]];
         }
-        [self postData:data tag:tag owner:owner url:parameter];
-    }
-}
-
-- (void)postData:(NSString*)data tag:(kSXTag)tag owner:(id<NetworkModuleDelegate>)owner url:(NSString*)url
-{
-    PostRequest *req = (PostRequest*)[queue objectForKey:[NSNumber numberWithInt:tag]];
-    if (tag == kSXTagMyReceipt || tag == kSXTagGetInfoForOnOff || tag == kSXTagMySimpleInfo || tag == kSXTagSuperviseUserInfo || tag == kSXTagCheckConponCenter) {
-        if (req.postStatus == kPostStatusBeging) {
-            return;
+        
+        if ([Common isNullValue:data]) {
+            [self afnPostData:nil tag:tag owner:owner url:parameter];
+        } else {
+            [self afnPostData:[Common transToParmDictWithString:data] tag:tag owner:owner url:parameter];
         }
     }
-    if (req == nil) {
-        req = [[PostRequest alloc] init];
-    }
-  
-    req.sxTag = tag;
-    req.postStatus = kPostStatusNone;
-    [queue setObject:req forKey:[NSNumber numberWithInt:tag]];
-    req.enc = NSUTF8StringEncoding;
-    req.owner = owner;
-    req.url = url;
-    req.parmData = data;
-    DBLOG(@"%@",url);
-
-    [req postData:data delegate:self];
-
-}
-
-- (void)cancel:(kSXTag)tag
-{
-    PostRequest* req = (PostRequest*)[queue objectForKey:[NSNumber numberWithInt:tag]];
-    if (req && [req isKindOfClass:[PostRequest class]]) {
-        req.owner = nil;
-        [req cancel];
-    }
 }
 
 
-//zhangrc 添加GET请求
-- (void)getReqData:(NSDictionary *)dataDict tag:(kSXTag)tag owner:(id<NetworkModuleDelegate>)owner
+
+- (NSMutableArray *)queueArray
 {
-    NSString *url = nil;
-    switch (tag) {
-        case kSxTagHomeTopScrollView:
-            url = @"http://fore.9888.cn/cms/api/appbanner.php";
-            break;
-        default:
-            break;
+    if (_queueArray) {
+        _queueArray = [NSMutableArray arrayWithCapacity:1];
     }
-    [self getReqData:dataDict tag:tag owner:owner url:url];
+    return _queueArray;
 }
-- (void)getReqData:(NSDictionary *)dataDict tag:(kSXTag)tag owner:(id<NetworkModuleDelegate>)owner url:(NSString *)url
+
+- (void)afnPostData:(NSDictionary*)dataDict tag:(kSXTag)tag owner:(id<NetworkModuleDelegate>)owner url:(NSString*)url
 {
-    GetRequest *req = (GetRequest*)[queue objectForKey:[NSNumber numberWithInt:tag]];
-    if (req == nil) {
-        req = [[GetRequest alloc] init];
+    DLog(@"请求地址=%@，参数%@",url,dataDict);
+    AppDelegate * app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    if (EnvironmentConfiguration == 2 || (app.isSubmitAppStoreTestTime)) {
+        [_manager.requestSerializer setValue:@"1" forHTTPHeaderField:@"jrgc-umark"];
+    } else {
+        [_manager.requestSerializer setValue:@"0" forHTTPHeaderField:@"jrgc-umark"];
     }
-    [queue setObject:req forKey:[NSNumber numberWithInt:tag]];
-    req.owner = owner;
-    req.sxTag = tag;
-    if (dataDict) {
-        url = [NSString stringWithFormat:@"%@?",url];
-        url = [url stringByAppendingString:[self dictTransToString:dataDict]];
+    if(owner) {
+        [owner beginPost:tag];
     }
-    [req getData:url delegate:self];
+    __weak typeof(self) weakSelf = self;
+
+    NSURLSessionDataTask *task = [self.manager POST:url parameters:dataDict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
+        NSLog(@"task == %d",task.ksxTag);
+        if (owner != nil) {
+            SEL sel = @selector(endPost:tag:);
+            if (owner != nil && [owner respondsToSelector:sel]) {
+                //新格式接口
+                if ([[responseObject allKeys] containsObject:@"ret"]) {
+                    [weakSelf skipToNewApiResponseData:responseObject withTask:task andApiOwner:owner];
+                } else {
+                    [weakSelf skipToOldApiResponseData:responseObject withTask:task andApiOwner:owner];
+                }
+            }
+        }
+      [task cancel];
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        if (owner != nil) {
+            SEL sel = @selector(errorPost:tag:);
+            if ([owner respondsToSelector:sel]) {
+                [owner performSelector:sel withObject:error withObject:[NSNumber numberWithInteger: task.ksxTag]];
+            }
+        }
+      [task cancel];
+    }];
+    task.ksxTag = tag;
+
+}
+
+- (void)skipToNewApiResponseData:(id)response withTask:(NSURLSessionDataTask *)task andApiOwner:(id<NetworkModuleDelegate>)owner
+{
+    SEL sel = @selector(endPost:tag:);
+    NSDictionary *dic = (NSDictionary *)response;
+    //临时添加，为了暂时符合业务代码规则
+    NSString *content = [Common dictionaryToJson:dic];
+    if ([[dic valueForKey:@"ret"] boolValue]) {
+        [owner performSelector:sel withObject:content withObject:[NSNumber numberWithInteger:task.ksxTag]];
+    } else {
+        NSInteger rstcode = [dic[@"code"] integerValue];
+        if (rstcode == -1) {
+            SEL sel = @selector(errorPost:tag:);
+            if ([owner respondsToSelector:sel]) {
+                [owner performSelector:sel withObject:nil withObject:[NSNumber numberWithInteger: task.ksxTag]];
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:dic[@"message"] delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil, nil];
+                [alertView show];
+                
+            }
+        } else if (rstcode == -2 || rstcode == -3 || rstcode == -4) {
+            SEL sel = @selector(errorPost:tag:);
+            if ([owner respondsToSelector:sel]) {
+                [owner performSelector:sel withObject:nil withObject:[NSNumber numberWithInteger: task.ksxTag]];
+                //                req.owner = nil;
+            }
+            //清空数据
+            [self cleanData];
+            if (self.isShowSingleAlert) {
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:dic[@"message"] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"重新登录", nil];
+                alertView.tag = 0x100;
+                [alertView show];
+            }
+            self.isShowSingleAlert = NO;
+        } else if (rstcode == -5) {
+            //强制更新
+            if (self.isShowAlert) {
+                self.isShowAlert = NO;
+                [[NSNotificationCenter defaultCenter] postNotificationName:CHECK_NEW_VERSION object:nil];
+            }
+            else return;
+        } else if (rstcode == -6) {
+            SEL sel = @selector(errorPost:tag:);
+            if ([owner respondsToSelector:sel]) {
+                [owner performSelector:sel withObject:nil withObject:[NSNumber numberWithInteger: task.ksxTag]];
+                //                req.owner = nil;
+            }
+            //清空数据
+            [self cleanData];
+            if (self.isShowSingleAlert) {
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:dic[@"message"] delegate:self cancelButtonTitle:@"联系客服" otherButtonTitles:@"重新登录", nil];
+                alertView.tag = 0x101;
+                [alertView show];
+            }
+            self.isShowSingleAlert = NO;
+        }  else {
+            [owner performSelector:sel withObject:content withObject:[NSNumber numberWithInteger: task.ksxTag]];
+        }
+    }
+}
+- (void)skipToOldApiResponseData:(id)response withTask:(NSURLSessionDataTask *)task andApiOwner:(id<NetworkModuleDelegate>)owner
+{
+    NSDictionary *dic = (NSDictionary *)response;
+    //临时添加，为了暂时符合业务代码规则
+    NSString *content = [Common dictionaryToJson:dic];
+        SEL sel = @selector(endPost:tag:);
+        NSInteger rstcode = [dic[@"status"] integerValue];
+        if (rstcode  == 1 || task.ksxTag == kSXTagUserLogout) {
+            [owner performSelector:sel withObject:content withObject:[NSNumber numberWithInteger: task.ksxTag]];
+        } else if (rstcode == -1) {
+            SEL sel = @selector(errorPost:tag:);
+            if ([owner respondsToSelector:sel]) {
+                [owner performSelector:sel withObject:nil withObject:[NSNumber numberWithInteger: task.ksxTag]];
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:dic[@"statusdes"] delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil, nil];
+                [alertView show];
+                
+            }
+        } else if (rstcode == -2 || rstcode == -3 || rstcode == -4) {
+            SEL sel = @selector(errorPost:tag:);
+            if ([owner respondsToSelector:sel]) {
+                [owner performSelector:sel withObject:nil withObject:[NSNumber numberWithInteger: task.ksxTag]];
+            }
+            //清空数据
+            [self cleanData];
+            if (self.isShowSingleAlert) {
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:dic[@"statusdes"] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"重新登录", nil];
+                alertView.tag = 0x100;
+                [alertView show];
+            }
+            self.isShowSingleAlert = NO;
+        }  else if (rstcode == -5) {
+            //强制更新
+            if (self.isShowAlert) {
+                self.isShowAlert = NO;
+                [[NSNotificationCenter defaultCenter] postNotificationName:CHECK_NEW_VERSION object:nil];
+            }
+            else return;
+        } else if (rstcode == -6) {
+            SEL sel = @selector(errorPost:tag:);
+            if ([owner respondsToSelector:sel]) {
+                [owner performSelector:sel withObject:nil withObject:[NSNumber numberWithInteger: task.ksxTag]];
+            }
+            //清空数据
+            [self cleanData];
+            if (self.isShowSingleAlert) {
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:dic[@"statusdes"] delegate:self cancelButtonTitle:@"联系客服" otherButtonTitles:@"重新登录", nil];
+                alertView.tag = 0x101;
+                [alertView show];
+            }
+            self.isShowSingleAlert = NO;
+        }
+        else {
+            [owner performSelector:sel withObject:content withObject:[NSNumber numberWithInteger: task.ksxTag]];
+        }
 }
 - (NSString *)dictTransToString:(NSDictionary *)dict
 {
     if (dict) {
         NSArray *allKeys = [dict allKeys];
-        NSMutableString *urlString = [[[NSMutableString alloc] initWithString:@""] autorelease];
+        NSMutableString *urlString = [[NSMutableString alloc] initWithString:@""];
         for (int i=0; i<allKeys.count;i++) {
             NSString *keyStr = [allKeys objectAtIndex:i];
             if (allKeys.count == 1) {
@@ -404,190 +509,12 @@ static NetworkModule *gInstance = NULL;
     }
     return @"";
 }
-- (void)getReqCancle:(kSXTag)tag
-{
-    GetRequest * req = (GetRequest*)[queue objectForKey:[NSNumber numberWithInt:tag]];
-    if (req && [req isKindOfClass:[GetRequest class]]) {
-        req.owner = nil;
-        [req cancel];
-    }
-    
-}
-// 请求结束，获取 Response 数据
-- (void)requestFinished:(ASIHTTPRequest *)request
-{
-    if ([request.requestMethod isEqualToString:@"GET"]) {
-        GetRequest *req = (GetRequest*)[queue objectForKey:[NSNumber numberWithInteger:request.tag]];
-        SEL sel = @selector(endPost:tag:);
-        NSData *data = [request responseData];
-        NSString *string = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
-        [req.owner performSelector:sel withObject:string withObject:[NSNumber numberWithInt: req.sxTag]];
-        req.owner = nil;
-    }
-    else
-    {
-        PostRequest *req = (PostRequest*)[queue objectForKey:[NSNumber numberWithInteger:request.tag]];
-        req.postStatus = kPostStatusEnded;
-        if (req.owner != nil) {
-            SEL sel = @selector(endPost:tag:);
-            if ([req.owner respondsToSelector:sel]) {
-                NSString *data = req.result;
-//                if (data.length == 0) {
-//                    [MBProgressHUD displayHudError:@"网络异常"];
-//                }
-                NSMutableDictionary *dic = [data objectFromJSONString];
-                //新格式接口
-                if ([[dic allKeys] containsObject:@"ret"]) {
-                    [self skipToNewApiResponseData:req withDataDic:dic];
-                } else {
-                    [self skipToOldApiResponseData:req withDataDic:dic];
-                }
-            }
-        }
-    }
-}
-// 新接口数据处理方式
--(void)skipToNewApiResponseData:(PostRequest *)req withDataDic:(NSDictionary *)dic
-{
-    SEL sel = @selector(endPost:tag:);
-    if ([[dic valueForKey:@"ret"] boolValue]) {
-        [req.owner performSelector:sel withObject:req.result withObject:[NSNumber numberWithInt: req.sxTag]];
-        req.owner = nil;
-    } else {
-        _loseTag = req.sxTag;
-        NSInteger rstcode = [dic[@"code"] integerValue];
-        if (rstcode == -1) {
-            SEL sel = @selector(errorPost:tag:);
-            if ([req.owner respondsToSelector:sel]) {
-                [req.owner performSelector:sel withObject:nil withObject:[NSNumber numberWithInt: req.sxTag]];
-                req.owner = nil;
-                req.parmData = nil;
-                if (req.sxTag == kSXTagGetBanner) {
-                    
-                } else {
-                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:dic[@"message"] delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil, nil];
-                    [alertView show];
-                }
-            }
-        } else if (rstcode == -2 || rstcode == -3 || rstcode == -4) {
-            SEL sel = @selector(errorPost:tag:);
-            if ([req.owner respondsToSelector:sel]) {
-                [req.owner performSelector:sel withObject:nil withObject:[NSNumber numberWithInt: req.sxTag]];
-                req.owner = nil;
-            }
-            //清空数据
-            [self cleanData];
-            if (self.isShowSingleAlert) {
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:dic[@"message"] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"重新登录", nil];
-                alertView.tag = 0x100;
-                [alertView show];
-            }
-            self.isShowSingleAlert = NO;
-        } else if (rstcode == -5) {
-            //强制更新
-            if (self.isShowAlert) {
-                self.isShowAlert = NO;
-                [[NSNotificationCenter defaultCenter] postNotificationName:CHECK_NEW_VERSION object:nil];
-            }
-            else return;
-        } else if (rstcode == -6) {
-            SEL sel = @selector(errorPost:tag:);
-            if ([req.owner respondsToSelector:sel]) {
-                [req.owner performSelector:sel withObject:nil withObject:[NSNumber numberWithInt: req.sxTag]];
-                req.owner = nil;
-            }
-            //清空数据
-            [self cleanData];
-            if (self.isShowSingleAlert) {
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:dic[@"message"] delegate:self cancelButtonTitle:@"联系客服" otherButtonTitles:@"重新登录", nil];
-                alertView.tag = 0x101;
-                [alertView show];
-            }
-            self.isShowSingleAlert = NO;
-        }  else {
-            [req.owner performSelector:sel withObject:req.result withObject:[NSNumber numberWithInt: req.sxTag]];
-            req.owner = nil;
-        }
-    }
-}
-//旧接口数据处理方式
-- (void)skipToOldApiResponseData:(PostRequest *)req withDataDic:(NSDictionary *)dic
-{
-    SEL sel = @selector(endPost:tag:);
-    NSInteger rstcode = [dic[@"status"] integerValue];
-    if (rstcode  == 1 || req.sxTag == kSXTagUserLogout) {
-        [req.owner performSelector:sel withObject:req.result withObject:[NSNumber numberWithInt: req.sxTag]];
-        req.owner = nil;
-        req.parmData = nil;
-        
-    } else if (rstcode == -1) {
-        _loseTag = req.sxTag;
-        SEL sel = @selector(errorPost:tag:);
-        if ([req.owner respondsToSelector:sel]) {
-            [req.owner performSelector:sel withObject:nil withObject:[NSNumber numberWithInt: req.sxTag]];
-            req.owner = nil;
-            if (req.sxTag == kSXTagGetBanner) {
-                
-            } else {
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:dic[@"statusdes"] delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil, nil];
-                [alertView show];
-            }
-        }
-    } else if (rstcode == -2 || rstcode == -3 || rstcode == -4) {
-        _loseTag = req.sxTag;
-        SEL sel = @selector(errorPost:tag:);
-        if ([req.owner respondsToSelector:sel]) {
-            [req.owner performSelector:sel withObject:nil withObject:[NSNumber numberWithInt: req.sxTag]];
-            req.owner = nil;
-        }
-        //清空数据
-        [self cleanData];
-        if (self.isShowSingleAlert) {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:dic[@"statusdes"] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"重新登录", nil];
-            alertView.tag = 0x100;
-            [alertView show];
-        }
-        self.isShowSingleAlert = NO;
-    }  else if (rstcode == -5) {
-        //强制更新
-        if (self.isShowAlert) {
-            self.isShowAlert = NO;
-            [[NSNotificationCenter defaultCenter] postNotificationName:CHECK_NEW_VERSION object:nil];
-        }
-        else return;
-    } else if (rstcode == -6) {
-        _loseTag = req.sxTag;
-        SEL sel = @selector(errorPost:tag:);
-        if ([req.owner respondsToSelector:sel]) {
-            [req.owner performSelector:sel withObject:nil withObject:[NSNumber numberWithInt: req.sxTag]];
-            req.owner = nil;
-        }
-        //清空数据
-        [self cleanData];
-        if (self.isShowSingleAlert) {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:dic[@"statusdes"] delegate:self cancelButtonTitle:@"联系客服" otherButtonTitles:@"重新登录", nil];
-            alertView.tag = 0x101;
-            [alertView show];
-        }
-        self.isShowSingleAlert = NO;
-    }
-    else {
-//        [MBProgressHUD displayHudError:req.result];
-        [req.owner performSelector:sel withObject:req.result withObject:[NSNumber numberWithInt: req.sxTag]];
-        req.owner = nil;
-    }
-}
-
 //清空数据
 - (void)cleanData{
     //退出时清cookis
-    
     [Common deleteCookies];
     [[UserInfoSingle sharedManager] removeUserInfo];
-//    [[NSUserDefaults standardUserDefaults] setValue:nil forKey:UUID];
-//    [[NSUserDefaults standardUserDefaults] setValue:nil forKey:TIME];
-//    [[NSUserDefaults standardUserDefaults] setValue:nil forKey:IDCARD_STATE];
-//    [[NSUserDefaults standardUserDefaults] setValue:nil forKey:BANKCARD_STATE];
+
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:FACESWITCHSTATUS];
     [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"changScale"];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -595,33 +522,7 @@ static NetworkModule *gInstance = NULL;
     [[NSNotificationCenter defaultCenter] postNotificationName:@"setDefaultViewData" object:nil];
 }
 
-// 请求失败，获取 error
-- (void)requestFailed:(ASIHTTPRequest *)request
-{
-    if ([request.requestMethod isEqualToString:@"GET"]) {
-          GetRequest *req = (GetRequest*)[queue objectForKey:[NSNumber numberWithInteger:request.tag]];
-          NSError *error = [request error];
-          if (req.owner != nil) {
-              SEL sel = @selector(errorPost:tag:);
-              if ([req.owner respondsToSelector:sel]) {
-                  [req.owner performSelector:sel withObject:error withObject:[NSNumber numberWithInt: req.sxTag]];
-                  req.owner = nil;
-              }
-          }
-    } else {
-        PostRequest *req = (PostRequest*)[queue objectForKey:[NSNumber numberWithInteger:request.tag]];
-        NSError *error = [request error];
-        req.postStatus = kPostStatusError;
-        if (req.owner != nil) {
-            SEL sel = @selector(errorPost:tag:);
-            if ([req.owner respondsToSelector:sel]) {
-                [req.owner performSelector:sel withObject:error withObject:[NSNumber numberWithInt: req.sxTag]];
-                req.owner = nil;
-            }
-        }
-    }
 
-}
 //新版通过字典获取值拼成的字符串
 - (NSString *)newGetParStr:(NSDictionary *)dataDict
 {
@@ -646,17 +547,17 @@ static NetworkModule *gInstance = NULL;
     else
     {
         NSString *lastStr = @"";
-        for(NSString * str in array)
+        for(int i = 0; i < array.count; i++)
         {
-            if (str.length > 0) {
-                if ([str rangeOfString:@"="].location !=NSNotFound) {
-                    NSRange range = [str rangeOfString:@"="];
-                    str = [str substringWithRange:NSMakeRange(range.location + 1, str.length-range.location-1)];
-                    lastStr =[lastStr stringByAppendingString:str];
+            NSString *tmpStr = array[i];
+            if ([tmpStr rangeOfString:@"="].location !=NSNotFound) {
+               NSArray *tmpArr = [tmpStr componentsSeparatedByString:@"="];
+                NSString *tmpStr = tmpArr[1];
+                if (tmpStr.length > 0) {
+                    lastStr = [lastStr stringByAppendingString:tmpArr[1]];
                 }
             }
         }
-        
         return lastStr;
     }
 }
@@ -683,59 +584,17 @@ static NetworkModule *gInstance = NULL;
 
 
 -(void)dealloc{
-    [queue release];
-    [super dealloc];
+
 }
 
-- (void)postReq2:(NSDictionary*)data tag:(kSXTag)tag owner:(id<NetworkModuleDelegate>)owner
-{
-    NSString *dataStr;
-    NSString *parameter = nil;
-    switch ((int)tag) {
-        case kSXTagValidBindedPhone:
-            parameter = [P2P_SERVER_IP stringByAppendingString:VALID_BINDED_PHONE];
-            break;
-    }
-    
-    NSArray * array = [NSArray arrayWithObjects:@"prdClaims/dataList",@"prdTransfer/dataList",@"newPrdTransfer/getDetail",@"newuser/login",@"newsendmessage",@"newuserregist/isexitpomocode",@"newuserregist/regist",@"userregist/verification",@"newgetSendMessageTicket",@"bankCard/baseBankMess",@"personalSettings/getTRegionList",@"sysDataDicItem/dicItemList",@"sysDataDicItem/allDicItemList",@"scratchCard/isExist",@"newuserregist/modifyUserpwd",@"newprdTransfer/newCompensateInterest", nil];
-    
-    NSArray * strArray = [parameter componentsSeparatedByString:P2P_SERVER_IP];
-    NSString *par = [strArray objectAtIndex:1];
-    
-    if([array containsObject:par])
-    {
-        dataStr = [dataStr stringByAppendingString:[NSString stringWithFormat:@"&imei=%@&version=%@",[Common getKeychain],[Common getIOSVersion]]];
-        dataStr = [dataStr stringByAppendingString:@"&source_type=1"];
-        [self postData:dataStr tag:tag owner:owner url:parameter];
-    }
-    else
-    {
-        if (tag == kSXTagValidBindedPhone) {
-            //空格转换成%2B
-            NSString * encryptParam  = [Common  AESWithKey2:[Common getKeychain] WithDic:data];
-            //空格转换成+
-            NSString * encryptParam1 = [Common AESWithKeyWithNoTranscode2:[Common getKeychain] WithData:data];
-            dataStr = [NSString stringWithFormat:@"encryptParam=%@",encryptParam1];
-            dataStr = [dataStr stringByAppendingString:[NSString stringWithFormat:@"&imei=%@&version=%@",[Common getKeychain],[Common getIOSVersion]]];
-            dataStr = [dataStr stringByAppendingString:@"&source_type=1"];
-            dataStr = [dataStr stringByAppendingString:[NSString stringWithFormat:@"&userId=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID]]];
-            NSString *signature = [self getSinatureWithPar:[self getParStr:dataStr]];
-            dataStr = [NSString stringWithFormat:@"encryptParam=%@",encryptParam];
-            dataStr = [dataStr stringByAppendingString:[NSString stringWithFormat:@"&imei=%@&version=%@",[Common getKeychain],[Common getIOSVersion]]];
-            dataStr = [dataStr stringByAppendingString:@"&source_type=1"];
-            dataStr = [dataStr stringByAppendingString:[NSString stringWithFormat:@"&userId=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID]]];
-            dataStr = [dataStr stringByAppendingString:[NSString stringWithFormat:@"&signature=%@",signature]];
-        }
-        [self postData:dataStr tag:tag owner:owner url:parameter];
-    }
-}
+
 //唤起登陆框
 - (void)shouLoginView
 {
     [MBProgressHUD hideAllHUDsForView:nil animated:NO];
-    UCFLoginViewController *loginViewController = [[[UCFLoginViewController alloc] init] autorelease];
+    UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
     loginViewController.isForce = YES;
-    UINavigationController *loginNaviController = [[[UINavigationController alloc] initWithRootViewController:loginViewController] autorelease];
+    UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController] ;
     AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
     UINavigationController *nav = app.tabBarController.selectedViewController ;
     if (app.tabBarController.presentedViewController)
@@ -1050,11 +909,9 @@ static NetworkModule *gInstance = NULL;
             break;
             
         case kSXTagSingMenthod: {
-//            NSString *url = @"http://10.105.6.203:8080/mpapp/";
             parameter = [NEW_SERVER_IP stringByAppendingString:SingMenthod];
         }
             break;
-            
         case kSXTagUserLogout:
             parameter = [NEW_SERVER_IP stringByAppendingString:USER_LOGOUT];
             break;
@@ -1194,13 +1051,10 @@ static NetworkModule *gInstance = NULL;
             parameter = [NEW_SERVER_IP stringByAppendingString:GOlDOUPONSELEALLURL];
             break;
         case kSXTagGoldFriendList:
-//            //@"http://10.105.6.54:8080/"
             parameter = [NEW_SERVER_IP stringByAppendingString:GOLD_FRIENDS_LIST];
-//            parameter = @"http://10.10.100.112/mockjsdata/13/invite_rebate_detail.json?";
             break;
         case kSXTagGoldRecommendRefund:
             parameter = [SERVER_IP stringByAppendingString:GOLD_RecommendRefund];
-//            parameter = @"http://10.10.100.112/mockjsdata/13/friendslist.json?";
             break;
         case kSXTagGoldLimitedBankList://黄金充值受限的银行列表
             parameter = [NEW_SERVER_IP stringByAppendingString:GOLDLIMITEDBANKLIST];
@@ -1352,21 +1206,10 @@ static NetworkModule *gInstance = NULL;
     
     //对整体参数加密
     NSString *encryptParam  = [Common AESWithKey2:AES_TESTKEY WithDic:dict];
-    NSString *dataStr = [NSString stringWithFormat:@"encryptParam=%@",encryptParam];
-    [self postData:dataStr tag:tag owner:owner url:parameter];
+    NSDictionary *parmDict = [NSDictionary dictionaryWithObject:encryptParam forKey:@"encryptParam"];
+ 
+    [self afnPostData:parmDict tag:tag owner:owner url:parameter];
 }
-- (void)isReloadNetQuest
-{
-    PostRequest *req = (PostRequest*)[queue objectForKey:[NSNumber numberWithInteger:_loseTag]];
-    if (req) {
-        req.postStatus = kPostStatusNone;
-        req.enc = NSUTF8StringEncoding;
-        AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
-        NSUInteger selectedIndex = appDelegate.tabBarController.selectedIndex;
-        UINavigationController *nav = [appDelegate.tabBarController.viewControllers objectAtIndex:selectedIndex];
-        req.owner =(id<NetworkModuleDelegate>)nav.visibleViewController;
-        [req postData:req.parmData delegate:self];
-    }
-}
+
 
 @end

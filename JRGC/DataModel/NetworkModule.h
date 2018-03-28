@@ -7,22 +7,21 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ASIHTTPRequest.h"
 #import "TypeDefine.h"
-#import "PostRequest.h"
+//#import "PostRequest.h"
 
-@interface NetworkModule : NSObject <ASIHTTPRequestDelegate>
+@interface NetworkModule : NSObject 
 {
-    NSMutableDictionary* queue;
+//    NSMutableDictionary* queue;
+    
 }
 + (NetworkModule*)sharedNetworkModule;
 - (void)postReq:(NSString*)data tag:(kSXTag)tag owner:(id<NetworkModuleDelegate>)owner Type:(SelectAccoutType)type;
-- (void)postReq2:(NSDictionary*)data tag:(kSXTag)tag owner:(id<NetworkModuleDelegate>)owner;
 - (void)postData:(NSString*)data tag:(kSXTag)tag owner:(id<NetworkModuleDelegate>)owner url:(NSString*)url;
 - (void)cancel:(kSXTag)tag;
 - (void)getReqData:(NSDictionary *)dataDict tag:(kSXTag)tag owner:(id<NetworkModuleDelegate>)owner;
 
-
+@property(nonatomic, strong)NSMutableArray      *queueArray;
 
 #pragma mark NewPostMethod
 /**
