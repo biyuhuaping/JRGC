@@ -18,8 +18,6 @@
 		2526ADDC1DD08CB800114D9A /* UIView+FrameChange.m in Sources */ = {isa = PBXBuildFile; fileRef = 2526ADD91DD08CB800114D9A /* UIView+FrameChange.m */; };
 		2526ADE01DD08D5F00114D9A /* JRGCCustomGroupCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2526ADDD1DD08D5F00114D9A /* JRGCCustomGroupCell.xib */; };
 		2526ADE11DD08D5F00114D9A /* JRGCCustomGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2526ADDF1DD08D5F00114D9A /* JRGCCustomGroupCell.m */; };
-		25314C0B1D8FD7FA0066F446 /* UCFDirectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 25314C091D8FD7FA0066F446 /* UCFDirectCell.m */; };
-		25314C0C1D8FD7FA0066F446 /* UCFDirectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25314C0A1D8FD7FA0066F446 /* UCFDirectCell.xib */; };
 		258291341DD31F0F00AB1FD2 /* UCFGivingPointCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 258291321DD31F0F00AB1FD2 /* UCFGivingPointCell.m */; };
 		258291351DD31F0F00AB1FD2 /* UCFGivingPointCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 258291331DD31F0F00AB1FD2 /* UCFGivingPointCell.xib */; };
 		25950EB81D7FB6EB00E4CCBA /* CWAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25950E9A1D7FB6EB00E4CCBA /* CWAnimationView.m */; };
@@ -38,8 +36,6 @@
 		25950EC51D7FB6EC00E4CCBA /* FaceRectKeyPointView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25950EB11D7FB6EB00E4CCBA /* FaceRectKeyPointView.m */; };
 		25950EC61D7FB6EC00E4CCBA /* libCloudwalkFaceSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 25950EB51D7FB6EB00E4CCBA /* libCloudwalkFaceSDK.a */; };
 		25950EC71D7FB6EC00E4CCBA /* CWResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 25950EB71D7FB6EB00E4CCBA /* CWResource.bundle */; };
-		25A9CC191D5213EB00209142 /* UCFTipCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A9CC171D5213EB00209142 /* UCFTipCell.m */; };
-		25A9CC1A1D5213EB00209142 /* UCFTipCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25A9CC181D5213EB00209142 /* UCFTipCell.xib */; };
 		25B38EFC1D5884EE00FB09F1 /* UCFBankCardChoseListInfo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25B38EFB1D5884EE00FB09F1 /* UCFBankCardChoseListInfo.xib */; };
 		25BAE2B11D804E6B001B6E01 /* JRGCViewForCWRresult.m in Sources */ = {isa = PBXBuildFile; fileRef = 25BAE2AF1D804E6B001B6E01 /* JRGCViewForCWRresult.m */; };
 		25BAE2B21D804E6B001B6E01 /* JRGCViewForCWRresult.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25BAE2B01D804E6B001B6E01 /* JRGCViewForCWRresult.xib */; };
@@ -60,6 +56,10 @@
 		333FD810206B836F00CEA03C /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 333FD80E206B836F00CEA03C /* Reachability.m */; };
 		3348A338206A230C00EACC91 /* NSURLSessionTask+Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = 3348A337206A230C00EACC91 /* NSURLSessionTask+Tag.m */; };
 		3371776E206C9FD000A6366C /* AllSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3371776D206C9FD000A6366C /* AllSelectView.m */; };
+		33717875206CCB0B00A6366C /* UCFDirectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3371786F206CCB0A00A6366C /* UCFDirectCell.m */; };
+		33717876206CCB0B00A6366C /* UCFDirectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33717870206CCB0A00A6366C /* UCFDirectCell.xib */; };
+		33717877206CCB0B00A6366C /* UCFTipCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33717873206CCB0B00A6366C /* UCFTipCell.m */; };
+		33717878206CCB0B00A6366C /* UCFTipCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33717874206CCB0B00A6366C /* UCFTipCell.xib */; };
 		4A04F82F1F0B6B1000ADE9D8 /* UCFGoldAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A04F82D1F0B6B1000ADE9D8 /* UCFGoldAccountViewController.m */; };
 		4A04F8301F0B6B1000ADE9D8 /* UCFGoldAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A04F82E1F0B6B1000ADE9D8 /* UCFGoldAccountViewController.xib */; };
 		4A04F8331F0B6DBB00ADE9D8 /* UCFGoldAccountHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A04F8321F0B6DBB00ADE9D8 /* UCFGoldAccountHeadView.m */; };
@@ -1106,9 +1106,6 @@
 		2526ADDD1DD08D5F00114D9A /* JRGCCustomGroupCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JRGCCustomGroupCell.xib; sourceTree = "<group>"; };
 		2526ADDE1DD08D5F00114D9A /* JRGCCustomGroupCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRGCCustomGroupCell.h; sourceTree = "<group>"; };
 		2526ADDF1DD08D5F00114D9A /* JRGCCustomGroupCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRGCCustomGroupCell.m; sourceTree = "<group>"; };
-		25314C081D8FD7F90066F446 /* UCFDirectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UCFDirectCell.h; path = TipCell/UCFDirectCell.h; sourceTree = "<group>"; };
-		25314C091D8FD7FA0066F446 /* UCFDirectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UCFDirectCell.m; path = TipCell/UCFDirectCell.m; sourceTree = "<group>"; };
-		25314C0A1D8FD7FA0066F446 /* UCFDirectCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UCFDirectCell.xib; path = TipCell/UCFDirectCell.xib; sourceTree = "<group>"; };
 		258291311DD31F0F00AB1FD2 /* UCFGivingPointCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UCFGivingPointCell.h; path = View/UCFGivingPointCell.h; sourceTree = "<group>"; };
 		258291321DD31F0F00AB1FD2 /* UCFGivingPointCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UCFGivingPointCell.m; path = View/UCFGivingPointCell.m; sourceTree = "<group>"; };
 		258291331DD31F0F00AB1FD2 /* UCFGivingPointCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UCFGivingPointCell.xib; path = View/UCFGivingPointCell.xib; sourceTree = "<group>"; };
@@ -1140,9 +1137,6 @@
 		25950EB31D7FB6EB00E4CCBA /* CloudwalkFaceSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CloudwalkFaceSDK.h; sourceTree = "<group>"; };
 		25950EB51D7FB6EB00E4CCBA /* libCloudwalkFaceSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libCloudwalkFaceSDK.a; sourceTree = "<group>"; };
 		25950EB71D7FB6EB00E4CCBA /* CWResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CWResource.bundle; sourceTree = "<group>"; };
-		25A9CC161D5213EB00209142 /* UCFTipCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UCFTipCell.h; path = TipCell/UCFTipCell.h; sourceTree = "<group>"; };
-		25A9CC171D5213EB00209142 /* UCFTipCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UCFTipCell.m; path = TipCell/UCFTipCell.m; sourceTree = "<group>"; };
-		25A9CC181D5213EB00209142 /* UCFTipCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UCFTipCell.xib; path = TipCell/UCFTipCell.xib; sourceTree = "<group>"; };
 		25B38EFB1D5884EE00FB09F1 /* UCFBankCardChoseListInfo.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFBankCardChoseListInfo.xib; sourceTree = "<group>"; };
 		25BAE2AE1D804E6B001B6E01 /* JRGCViewForCWRresult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRGCViewForCWRresult.h; sourceTree = "<group>"; };
 		25BAE2AF1D804E6B001B6E01 /* JRGCViewForCWRresult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRGCViewForCWRresult.m; sourceTree = "<group>"; };
@@ -1178,6 +1172,12 @@
 		3348A337206A230C00EACC91 /* NSURLSessionTask+Tag.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSURLSessionTask+Tag.m"; sourceTree = "<group>"; };
 		3371776C206C9FCF00A6366C /* AllSelectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllSelectView.h; sourceTree = "<group>"; };
 		3371776D206C9FD000A6366C /* AllSelectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllSelectView.m; sourceTree = "<group>"; };
+		3371786F206CCB0A00A6366C /* UCFDirectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFDirectCell.m; sourceTree = "<group>"; };
+		33717870206CCB0A00A6366C /* UCFDirectCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFDirectCell.xib; sourceTree = "<group>"; };
+		33717871206CCB0A00A6366C /* UCFTipCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFTipCell.h; sourceTree = "<group>"; };
+		33717872206CCB0A00A6366C /* UCFDirectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFDirectCell.h; sourceTree = "<group>"; };
+		33717873206CCB0B00A6366C /* UCFTipCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFTipCell.m; sourceTree = "<group>"; };
+		33717874206CCB0B00A6366C /* UCFTipCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFTipCell.xib; sourceTree = "<group>"; };
 		4A04F82C1F0B6B1000ADE9D8 /* UCFGoldAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFGoldAccountViewController.h; sourceTree = "<group>"; };
 		4A04F82D1F0B6B1000ADE9D8 /* UCFGoldAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFGoldAccountViewController.m; sourceTree = "<group>"; };
 		4A04F82E1F0B6B1000ADE9D8 /* UCFGoldAccountViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFGoldAccountViewController.xib; sourceTree = "<group>"; };
@@ -3051,19 +3051,6 @@
 			path = res;
 			sourceTree = "<group>";
 		};
-		25A9CC151D5213DD00209142 /* TipCell */ = {
-			isa = PBXGroup;
-			children = (
-				25A9CC161D5213EB00209142 /* UCFTipCell.h */,
-				25A9CC171D5213EB00209142 /* UCFTipCell.m */,
-				25A9CC181D5213EB00209142 /* UCFTipCell.xib */,
-				25314C081D8FD7F90066F446 /* UCFDirectCell.h */,
-				25314C091D8FD7FA0066F446 /* UCFDirectCell.m */,
-				25314C0A1D8FD7FA0066F446 /* UCFDirectCell.xib */,
-			);
-			name = TipCell;
-			sourceTree = "<group>";
-		};
 		25BAE2AD1D804E6B001B6E01 /* resualtPage */ = {
 			isa = PBXGroup;
 			children = (
@@ -3238,6 +3225,8 @@
 		3371786A206CC7CC00A6366C /* NewTools */ = {
 			isa = PBXGroup;
 			children = (
+				3371786E206CCAEA00A6366C /* TipCell */,
+				4AD6B4C31B32D33E00D94140 /* CycleView */,
 				3371786D206CC95F00A6366C /* CustomAlert */,
 				3371786C206CC8FC00A6366C /* NetRequest */,
 				3371786B206CC8D400A6366C /* Common */,
@@ -3292,6 +3281,19 @@
 				84F4E44D1B736C15008378ED /* MjAlertView.m */,
 			);
 			path = CustomAlert;
+			sourceTree = "<group>";
+		};
+		3371786E206CCAEA00A6366C /* TipCell */ = {
+			isa = PBXGroup;
+			children = (
+				33717872206CCB0A00A6366C /* UCFDirectCell.h */,
+				3371786F206CCB0A00A6366C /* UCFDirectCell.m */,
+				33717870206CCB0A00A6366C /* UCFDirectCell.xib */,
+				33717871206CCB0A00A6366C /* UCFTipCell.h */,
+				33717873206CCB0B00A6366C /* UCFTipCell.m */,
+				33717874206CCB0B00A6366C /* UCFTipCell.xib */,
+			);
+			path = TipCell;
 			sourceTree = "<group>";
 		};
 		4A0DC7FF1BCF5B1300835E95 /* HWWeakTimer */ = {
@@ -5693,14 +5695,12 @@
 				4A6FAFC01D743CF300AD4DF8 /* CJLabel */,
 				2509C3BB1D6590C400D9F9B5 /* plusLayer */,
 				4A6678BE1D61C2E900469826 /* FDFullscreenPopGesture */,
-				25A9CC151D5213DD00209142 /* TipCell */,
 				FBBF48751C58C46C006AB777 /* UIView+Border(View圆角) */,
 				FBA0A2FC1C183B0F000E1C7A /* JPush_lib */,
 				EDD13F661C196D860088A378 /* SCGifImageView */,
 				FB55552F1BCE37570013894F /* UMAnalytics_Sdk_3.4.6 */,
 				7BCE023E1B833B7000F9D73F /* IPDetector.h */,
 				7BCE023F1B833B7000F9D73F /* IPDetector.m */,
-				4AD6B4C31B32D33E00D94140 /* CycleView */,
 				74931A151B1326FE00143424 /* OHAttributedLabel */,
 				74931A111B1326B400143424 /* FisrtLetterAndOrder */,
 				749319EB1B13267600143424 /* NZLabel */,
@@ -7185,6 +7185,7 @@
 				83CD84391F13A50800227704 /* UCFTransferViewController.xib in Resources */,
 				A828D6B41F1F30C200662266 /* UCFExtractGoldViewController.xib in Resources */,
 				FB82B8CC1DD96A8E0080C099 /* UCFCouponAuxiliaryVC.xib in Resources */,
+				33717878206CCB0B00A6366C /* UCFTipCell.xib in Resources */,
 				A851F34F1F132D2C003DE8B8 /* UCFGoldTransCell.xib in Resources */,
 				74E140591F1CCB3F00B17A96 /* UCFGoldRechargeWebController.xib in Resources */,
 				E3B57DB71DD1BB51001858F9 /* UCFCouponExchangeToFriendTableViewCell.xib in Resources */,
@@ -7298,6 +7299,7 @@
 				FB51491A1D6438A700C26E7B /* Images.xcassets in Resources */,
 				847103BB1D59AD7500935B19 /* UCFBankDepositoryAccountViewController.xib in Resources */,
 				4A04F8351F0B6DDC00ADE9D8 /* UCFGoldAccountHeadView.xib in Resources */,
+				33717876206CCB0B00A6366C /* UCFDirectCell.xib in Resources */,
 				833A6EAE1E55466B00C8A494 /* UCFCollectionListViewController.xib in Resources */,
 				833A6EAC1E55466B00C8A494 /* UCFCollectionDetailViewController.xib in Resources */,
 				A860F2611F5E3EFE0017495F /* UCFGoldMyRebateViewController.xib in Resources */,
@@ -7380,7 +7382,6 @@
 				746748D21F3C53310067294D /* UCFBankLimitViewController.xib in Resources */,
 				7477BF9B1AFB19B200914BFB /* UCFNormalRedEnvelopeTableViewCell.xib in Resources */,
 				74877CD81FB2AC3900F32428 /* UCFCompleteViewController.xib in Resources */,
-				25A9CC1A1D5213EB00209142 /* UCFTipCell.xib in Resources */,
 				FB5149341D64403100C26E7B /* gif@3x.gif in Resources */,
 				7BA6E4C81AD6731900FE8C37 /* Info.plist in Resources */,
 				740586CD1F41AD8300E2DE01 /* UCFGoldRaiseTransDetailController.xib in Resources */,
@@ -7455,7 +7456,6 @@
 				4A675E3F1C5F484400F21DDA /* SelectPayMoneyOrbeansCell.xib in Resources */,
 				74A2C0D91F4306A000EDF0FA /* UCFGoldCashThirdCell.xib in Resources */,
 				74D6578F1F2EFFFF00177EB7 /* UCFHomeListNo2Cell.xib in Resources */,
-				25314C0C1D8FD7FA0066F446 /* UCFDirectCell.xib in Resources */,
 				74270D1A1EC595ED00F9419B /* UCFFriendRecCell.xib in Resources */,
 				746748DC1F3C56290067294D /* UCFGoldBankLimitHeader.xib in Resources */,
 				74DBAC7A1D5864C200F6F6B1 /* UCFHuiShangBankViewController.xib in Resources */,
@@ -7592,7 +7592,6 @@
 				25950EB81D7FB6EB00E4CCBA /* CWAnimationView.m in Sources */,
 				83DAEFC21F166A3B00D7948F /* UCFGoldAuthorizationViewController.m in Sources */,
 				EDD13F691C196D860088A378 /* SCGIFImageView.m in Sources */,
-				25314C0B1D8FD7FA0066F446 /* UCFDirectCell.m in Sources */,
 				A8E01A801EEA4C6F003E3BDC /* UCFTransfeTableViewCell.m in Sources */,
 				83CD72A51FB4449C007138ED /* UCFDrawGoldModel.m in Sources */,
 				74F649311F46EA0400328235 /* UCFCashGoldHeader.m in Sources */,
@@ -7778,9 +7777,9 @@
 				833A6EAB1E55466B00C8A494 /* UCFCollectionDetailViewController.m in Sources */,
 				83382C1A1FD52EFD001BBF90 /* UCFAssetProofListModel.m in Sources */,
 				83FF3E4A1E12159B00DFB99C /* UCFCashTableViewCell.m in Sources */,
+				33717875206CCB0B00A6366C /* UCFDirectCell.m in Sources */,
 				FB7EDE3E1D6BFCD700C3E924 /* AppDelegate.mm in Sources */,
 				7443C7371F1F3E64009669C0 /* UCFGoldRechargeRecordCell.m in Sources */,
-				25A9CC191D5213EB00209142 /* UCFTipCell.m in Sources */,
 				7BA6E46B1AD6691F00FE8C37 /* UCFLockHandleViewController.m in Sources */,
 				74EAF5BC1B0F119D00807C1C /* UCFBankCardInfoViewController.m in Sources */,
 				74270C8C1EC58F6800F9419B /* UCFCycleImageViewController.m in Sources */,
@@ -8052,6 +8051,7 @@
 				4AA2AA801E5B17B7006E83F8 /* UCFBatchSetNumWebViewController.m in Sources */,
 				74270D481EC5967B00F9419B /* UCFRegistrationRecord.m in Sources */,
 				7491820D1EC166F000AC1ECE /* TADotView.m in Sources */,
+				33717877206CCB0B00A6366C /* UCFTipCell.m in Sources */,
 				7BD588031B098E12005091D3 /* UCFNoPermissionViewController.m in Sources */,
 				333FD809206A43EA00CEA03C /* AFNetworkReachabilityManager.m in Sources */,
 				74931A061B13267600143424 /* NZLabel.m in Sources */,
