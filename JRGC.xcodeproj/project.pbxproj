@@ -1541,8 +1541,8 @@
 		744F8BEB1F3327AF005FF01B /* UCFMyReservedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFMyReservedViewController.h; sourceTree = "<group>"; };
 		744F8BEC1F3327AF005FF01B /* UCFMyReservedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFMyReservedViewController.m; sourceTree = "<group>"; };
 		744F8BED1F3327AF005FF01B /* UCFMyReservedViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFMyReservedViewController.xib; sourceTree = "<group>"; };
-		7456D3C51E82700500207349 /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+Extension.h"; path = "Tools/UIView+Extension.h"; sourceTree = "<group>"; };
-		7456D3C61E82700500207349 /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+Extension.m"; path = "Tools/UIView+Extension.m"; sourceTree = "<group>"; };
+		7456D3C51E82700500207349 /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
+		7456D3C61E82700500207349 /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
 		7456EEB31ECAA336002EC5EF /* UCFProjectLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFProjectLabel.h; sourceTree = "<group>"; };
 		7456EEB41ECAA336002EC5EF /* UCFProjectLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFProjectLabel.m; sourceTree = "<group>"; };
 		745B8A531FB5ADC7007BFF05 /* UCFExtractGoldDetailController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFExtractGoldDetailController.h; sourceTree = "<group>"; };
@@ -2129,8 +2129,8 @@
 		7BCE02031AC8FDEF0084C15C /* NetworkModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkModule.m; sourceTree = "<group>"; };
 		7BCE02061AC8FDEF0084C15C /* TypeDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TypeDefine.h; sourceTree = "<group>"; };
 		7BCE020C1AC8FF3A0084C15C /* JRGC.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRGC.pch; sourceTree = "<group>"; };
-		7BCE020D1AC9025A0084C15C /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Common.h; path = ThirdLibs/Common.h; sourceTree = "<group>"; };
-		7BCE020E1AC9025A0084C15C /* Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Common.m; path = ThirdLibs/Common.m; sourceTree = "<group>"; };
+		7BCE020D1AC9025A0084C15C /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
+		7BCE020E1AC9025A0084C15C /* Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Common.m; sourceTree = "<group>"; };
 		7BCE02181AC902FD0084C15C /* BaseAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseAlertView.h; sourceTree = "<group>"; };
 		7BCE02191AC902FD0084C15C /* BaseAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseAlertView.m; sourceTree = "<group>"; };
 		7BCE021B1AC902FD0084C15C /* SharedSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SharedSingleton.h; sourceTree = "<group>"; };
@@ -3235,14 +3235,72 @@
 			path = BidViews;
 			sourceTree = "<group>";
 		};
+		3371786A206CC7CC00A6366C /* NewTools */ = {
+			isa = PBXGroup;
+			children = (
+				3371786D206CC95F00A6366C /* CustomAlert */,
+				3371786C206CC8FC00A6366C /* NetRequest */,
+				3371786B206CC8D400A6366C /* Common */,
+				FB88C9051AF9F92E00D2EE93 /* Category */,
+				4A92303C1B68A8FE00E5844C /* ImageNetClass */,
+				4AEBC5FB1B58DFD20034C9C2 /* Singleton */,
+				4A0DC7FF1BCF5B1300835E95 /* HWWeakTimer */,
+				4A231C4E1BE9B0C500228C88 /* TabBarBadge */,
+				EDEC8BF31CB3BA6300815228 /* wpLabel */,
+				EDEF5E8F1CBF761700592B20 /* guideView */,
+				4A6EDBCF1D5AC61B004D40FF /* MD5Util */,
+				E37086BC1D61BBB10041D293 /* cellConfig */,
+				FB1E7F851D8E43A0009CBE2C /* BlockUIAlertView */,
+				83F2D5961DCB508F0041F913 /* iWatchTool */,
+				A8AD2E381EB979240013DB7C /* MongoliaLayer */,
+				A8DE852B1EC3012B004B3533 /* WalletHelper */,
+				A8C34F301F2734A800926B7F /* RotationButton */,
+				7BC3044C1ACBC22D007767F1 /* Misc */,
+				A82FBA671F4FD3EC00FD79BC /* CoustomLab */,
+			);
+			path = NewTools;
+			sourceTree = "<group>";
+		};
+		3371786B206CC8D400A6366C /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				7BCE020D1AC9025A0084C15C /* Common.h */,
+				7BCE020E1AC9025A0084C15C /* Common.m */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		3371786C206CC8FC00A6366C /* NetRequest */ = {
+			isa = PBXGroup;
+			children = (
+				7BCE02021AC8FDEF0084C15C /* NetworkModule.h */,
+				7BCE02031AC8FDEF0084C15C /* NetworkModule.m */,
+				7BCE02061AC8FDEF0084C15C /* TypeDefine.h */,
+				4A131DD41D5343D800748797 /* EnvironmentalFile.h */,
+				3348A336206A230C00EACC91 /* NSURLSessionTask+Tag.h */,
+				3348A337206A230C00EACC91 /* NSURLSessionTask+Tag.m */,
+				333FD80F206B836F00CEA03C /* Reachability.h */,
+				333FD80E206B836F00CEA03C /* Reachability.m */,
+			);
+			path = NetRequest;
+			sourceTree = "<group>";
+		};
+		3371786D206CC95F00A6366C /* CustomAlert */ = {
+			isa = PBXGroup;
+			children = (
+				84F4E44C1B736C15008378ED /* MjAlertView.h */,
+				84F4E44D1B736C15008378ED /* MjAlertView.m */,
+			);
+			path = CustomAlert;
+			sourceTree = "<group>";
+		};
 		4A0DC7FF1BCF5B1300835E95 /* HWWeakTimer */ = {
 			isa = PBXGroup;
 			children = (
 				4A0DC8001BCF5B1300835E95 /* HWWeakTimer.h */,
 				4A0DC8011BCF5B1300835E95 /* HWWeakTimer.m */,
 			);
-			name = HWWeakTimer;
-			path = Tools/HWWeakTimer;
+			path = HWWeakTimer;
 			sourceTree = "<group>";
 		};
 		4A1DA7C71BF9FBB00003E446 /* beansFamily(工豆之家) */ = {
@@ -3263,8 +3321,7 @@
 				4A29664F1BEC830A001FCD5F /* PraiseAlert.h */,
 				4A2966501BEC830A001FCD5F /* PraiseAlert.m */,
 			);
-			name = TabBarBadge;
-			path = Tools/TabBarBadge;
+			path = TabBarBadge;
 			sourceTree = "<group>";
 		};
 		4A6678BE1D61C2E900469826 /* FDFullscreenPopGesture */ = {
@@ -3282,8 +3339,7 @@
 				4A6EDBD01D5AC650004D40FF /* MD5Util.h */,
 				4A6EDBD11D5AC650004D40FF /* MD5Util.m */,
 			);
-			name = MD5Util;
-			path = Tools/MD5Util;
+			path = MD5Util;
 			sourceTree = "<group>";
 		};
 		4A6FAFC01D743CF300AD4DF8 /* CJLabel */ = {
@@ -3352,8 +3408,7 @@
 				4A9230431B68B2D800E5844C /* UIImageView+NetImageView.h */,
 				4A9230441B68B2D800E5844C /* UIImageView+NetImageView.m */,
 			);
-			name = ImageNetClass;
-			path = Tools/ImageNetClass;
+			path = ImageNetClass;
 			sourceTree = "<group>";
 		};
 		4AB126071AEF8EA400E915F1 /* BidViewController */ = {
@@ -3390,8 +3445,7 @@
 				4A4C792B1D6EA41E007F268E /* UserInfoSingle.h */,
 				4A4C792C1D6EA41E007F268E /* UserInfoSingle.m */,
 			);
-			name = Singleton;
-			path = Tools/Singleton;
+			path = Singleton;
 			sourceTree = "<group>";
 		};
 		740586BB1F4196E600E2DE01 /* GoldRaise(增金宝) */ = {
@@ -5082,34 +5136,7 @@
 		7BC304311ACB9CDB007767F1 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
-				A82FBA671F4FD3EC00FD79BC /* CoustomLab */,
-				A8C34F301F2734A800926B7F /* RotationButton */,
-				A8DE852B1EC3012B004B3533 /* WalletHelper */,
-				A8AD2E381EB979240013DB7C /* MongoliaLayer */,
-				7456D3C51E82700500207349 /* UIView+Extension.h */,
-				7456D3C61E82700500207349 /* UIView+Extension.m */,
-				83F2D5961DCB508F0041F913 /* iWatchTool */,
-				FB1E7F851D8E43A0009CBE2C /* BlockUIAlertView */,
-				E37086BC1D61BBB10041D293 /* cellConfig */,
-				4A6EDBCF1D5AC61B004D40FF /* MD5Util */,
-				EDEF5E8F1CBF761700592B20 /* guideView */,
-				EDEC8BF31CB3BA6300815228 /* wpLabel */,
-				4A231C4E1BE9B0C500228C88 /* TabBarBadge */,
-				4A0DC7FF1BCF5B1300835E95 /* HWWeakTimer */,
 				7BCE70ED1B79D01400F9DD14 /* TongDun */,
-				4A92303C1B68A8FE00E5844C /* ImageNetClass */,
-				4AEBC5FB1B58DFD20034C9C2 /* Singleton */,
-				FB88C9051AF9F92E00D2EE93 /* Category */,
-				7BCE01FF1AC8FDEF0084C15C /* Request */,
-				7BC3044C1ACBC22D007767F1 /* Misc */,
-				7BCE020D1AC9025A0084C15C /* Common.h */,
-				7BCE020E1AC9025A0084C15C /* Common.m */,
-				E3B26F461CA136F9002E87F4 /* DBColor.h */,
-				E3B26F471CA136F9002E87F4 /* DBColor.m */,
-				84F4E44C1B736C15008378ED /* MjAlertView.h */,
-				84F4E44D1B736C15008378ED /* MjAlertView.m */,
-				E3A6A4B11CC71D03003A3FED /* NSString+URL.h */,
-				E3A6A4B21CC71D03003A3FED /* NSString+URL.m */,
 			);
 			name = Tools;
 			sourceTree = "<group>";
@@ -5141,8 +5168,7 @@
 				7470EC001B033080006DDCEF /* NSString+FormatForThousand.h */,
 				7470EC011B033080006DDCEF /* NSString+FormatForThousand.m */,
 			);
-			name = Misc;
-			path = Tools/Misc;
+			path = Misc;
 			sourceTree = "<group>";
 		};
 		7BC304611ACBC22D007767F1 /* UIImage */ = {
@@ -5317,22 +5343,6 @@
 				E32B8F4D1E85188D00B7871F /* UCFRegisterFinshViewController.xib */,
 			);
 			name = Register;
-			sourceTree = "<group>";
-		};
-		7BCE01FF1AC8FDEF0084C15C /* Request */ = {
-			isa = PBXGroup;
-			children = (
-				7BCE02021AC8FDEF0084C15C /* NetworkModule.h */,
-				7BCE02031AC8FDEF0084C15C /* NetworkModule.m */,
-				7BCE02061AC8FDEF0084C15C /* TypeDefine.h */,
-				4A131DD41D5343D800748797 /* EnvironmentalFile.h */,
-				3348A336206A230C00EACC91 /* NSURLSessionTask+Tag.h */,
-				3348A337206A230C00EACC91 /* NSURLSessionTask+Tag.m */,
-				333FD80F206B836F00CEA03C /* Reachability.h */,
-				333FD80E206B836F00CEA03C /* Reachability.m */,
-			);
-			name = Request;
-			path = DataModel;
 			sourceTree = "<group>";
 		};
 		7BCE02171AC902FD0084C15C /* Base */ = {
@@ -5589,6 +5599,7 @@
 			children = (
 				AE43B84F1DD2D8BE001D0BD0 /* JRGC.entitlements */,
 				FB7EDE371D6BFCD700C3E924 /* Aplication */,
+				3371786A206CC7CC00A6366C /* NewTools */,
 				7BC304311ACB9CDB007767F1 /* Tools */,
 				7BFE3EB11AC5635E002A53A2 /* ThirdLibs */,
 				7BFE3EB01AC56356002A53A2 /* Images */,
@@ -6119,8 +6130,7 @@
 				83F2D59B1DCB508F0041F913 /* UCFSession.h */,
 				83F2D59C1DCB508F0041F913 /* UCFSession.m */,
 			);
-			name = iWatchTool;
-			path = Tools/iWatchTool;
+			path = iWatchTool;
 			sourceTree = "<group>";
 		};
 		83FCCA641F17114E002921C5 /* myGoldInvest(已购黄金) */ = {
@@ -6481,8 +6491,7 @@
 				A82FBA681F4FD40900FD79BC /* CoustomLab.h */,
 				A82FBA691F4FD40900FD79BC /* CoustomLab.m */,
 			);
-			name = CoustomLab;
-			path = Tools/CoustomLab;
+			path = CoustomLab;
 			sourceTree = "<group>";
 		};
 		A83048CC1F67D9A70007FB4F /* OneSDK */ = {
@@ -6528,8 +6537,7 @@
 				A851F3551F1379E2003DE8B8 /* UCFGoldPriceFloatView.xib */,
 				A86FC5781F6A2A7200A18182 /* AD_View.xib */,
 			);
-			name = MongoliaLayer;
-			path = Tools/MongoliaLayer;
+			path = MongoliaLayer;
 			sourceTree = "<group>";
 		};
 		A8AD6F821EFA6BDE000AF323 /* PagerView */ = {
@@ -6547,8 +6555,7 @@
 				A8C34F311F2737BA00926B7F /* RotationButton.h */,
 				A8C34F321F2737BA00926B7F /* RotationButton.m */,
 			);
-			name = RotationButton;
-			path = Tools/RotationButton;
+			path = RotationButton;
 			sourceTree = "<group>";
 		};
 		A8DE852B1EC3012B004B3533 /* WalletHelper */ = {
@@ -6563,8 +6570,7 @@
 				A8B6B67F1EC9A9F000D4E86F /* WalletBankView.m */,
 				A8B6B6811EC9AA0900D4E86F /* WalletBankView.xib */,
 			);
-			name = WalletHelper;
-			path = Tools/WalletHelper;
+			path = WalletHelper;
 			sourceTree = "<group>";
 		};
 		A8E02DA31F0DD0A300FC2260 /* Model */ = {
@@ -6596,6 +6602,8 @@
 		E37086BC1D61BBB10041D293 /* cellConfig */ = {
 			isa = PBXGroup;
 			children = (
+				E3B26F461CA136F9002E87F4 /* DBColor.h */,
+				E3B26F471CA136F9002E87F4 /* DBColor.m */,
 				E37086BD1D61BBB10041D293 /* DBCellConfig.h */,
 				E37086BE1D61BBB10041D293 /* DBCellConfig.m */,
 			);
@@ -6693,8 +6701,7 @@
 				EDEC8BF81CB3BA6300815228 /* WPTappableLabel.h */,
 				EDEC8BF91CB3BA6300815228 /* WPTappableLabel.m */,
 			);
-			name = wpLabel;
-			path = Tools/wpLabel;
+			path = wpLabel;
 			sourceTree = "<group>";
 		};
 		EDEC8BFD1CB3BAB300815228 /* WPAttributedMarkup */ = {
@@ -6714,8 +6721,7 @@
 				EDEF5E901CBF761700592B20 /* PromptView.h */,
 				EDEF5E911CBF761700592B20 /* PromptView.m */,
 			);
-			name = guideView;
-			path = Tools/guideView;
+			path = guideView;
 			sourceTree = "<group>";
 		};
 		FB120BAF1ADE462F00023365 /* CircularProgressView */ = {
@@ -6758,8 +6764,7 @@
 				FB1E7F861D8E43A0009CBE2C /* BlockUIAlertView.h */,
 				FB1E7F871D8E43A0009CBE2C /* BlockUIAlertView.m */,
 			);
-			name = BlockUIAlertView;
-			path = Tools/BlockUIAlertView;
+			path = BlockUIAlertView;
 			sourceTree = "<group>";
 		};
 		FB21732C1AF2360D00649AA0 /* UCFBackMoneyModel */ = {
@@ -6905,6 +6910,8 @@
 		FB88C9051AF9F92E00D2EE93 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				E3A6A4B11CC71D03003A3FED /* NSString+URL.h */,
+				E3A6A4B21CC71D03003A3FED /* NSString+URL.m */,
 				08E9A4E01B845E1200099F30 /* UCFTextField.h */,
 				08E9A4E11B845E1200099F30 /* UCFTextField.m */,
 				FB88C9061AF9F92E00D2EE93 /* UIDic+Safe.h */,
@@ -6917,9 +6924,10 @@
 				7422DF2E1B6218B400DCFA40 /* NSDate+IsBelongToToday.m */,
 				84FFA52E1C7EAA9200ACD835 /* UIScrollView+TouchScrollView.h */,
 				84FFA52F1C7EAA9200ACD835 /* UIScrollView+TouchScrollView.m */,
+				7456D3C51E82700500207349 /* UIView+Extension.h */,
+				7456D3C61E82700500207349 /* UIView+Extension.m */,
 			);
-			name = Category;
-			path = Tools/Category;
+			path = Category;
 			sourceTree = "<group>";
 		};
 		FBA0A2FC1C183B0F000E1C7A /* JPush_lib */ = {
