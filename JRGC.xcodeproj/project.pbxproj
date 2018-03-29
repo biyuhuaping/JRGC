@@ -2969,8 +2969,7 @@
 				2526ADD81DD08CB800114D9A /* UIView+FrameChange.h */,
 				2526ADD91DD08CB800114D9A /* UIView+FrameChange.m */,
 			);
-			name = MLMOptionSelectView;
-			path = ThirdLibs/MLMOptionSelectView;
+			path = MLMOptionSelectView;
 			sourceTree = "<group>";
 		};
 		2526ADD31DD08CB800114D9A /* selectView */ = {
@@ -3084,9 +3083,20 @@
 		3343FF25206CCDE7002A2153 /* NewLib */ = {
 			isa = PBXGroup;
 			children = (
+				2526ADD21DD08CB800114D9A /* MLMOptionSelectView */,
+				4A9016641AFB12FE0049A9E0 /* Masonry */,
+				4A6678BE1D61C2E900469826 /* FDFullscreenPopGesture */,
+				4A6FAFC01D743CF300AD4DF8 /* CJLabel */,
+				749181FA1EC166F000AC1ECE /* SDCycleScrollView */,
+				74A0AF091EC341DD009E5A57 /* ZZCircleProgress */,
+				74B3AD841ED2C31B00653F8B /* YFRollingLabel */,
+				A8AD6F821EFA6BDE000AF323 /* PagerView */,
+				74BDA9621F09F6C60054403F /* FSCalendar */,
 				3343FF26206CCE3D002A2153 /* TongDun */,
+				74931A151B1326FE00143424 /* OHAttributedLabel */,
 				A824BFD91FCD54D700E32F39 /* p2pWalletSDK */,
 				A84EC2401FE1081E00B0C46A /* ImageScanner */,
+				74931A111B1326B400143424 /* FisrtLetterAndOrder */,
 				333FD7F7206A43EA00CEA03C /* AFNetworking */,
 			);
 			path = NewLib;
@@ -3113,6 +3123,7 @@
 		33717763206C970D00A6366C /* InvestPage */ = {
 			isa = PBXGroup;
 			children = (
+				7BCA185C1AD780F70077C2A6 /* InvestmentDetail */,
 				4AB126071AEF8EA400E915F1 /* BidViewController */,
 				83CD83FD1F13A50800227704 /* ProjectList */,
 				744EB7E71EE7DCFA003C57C4 /* Invest(投资界面) */,
@@ -3244,6 +3255,9 @@
 		3371786A206CC7CC00A6366C /* NewTools */ = {
 			isa = PBXGroup;
 			children = (
+				7BCE02391AC915A80084C15C /* SFHFKeychainUtils */,
+				7BCE022F1AC915720084C15C /* AESCrypt-ObjC-master */,
+				7BCE02281AC9141A0084C15C /* MBProgressHUD */,
 				3371786E206CCAEA00A6366C /* TipCell */,
 				4AD6B4C31B32D33E00D94140 /* CycleView */,
 				3371786D206CC95F00A6366C /* CustomAlert */,
@@ -3253,6 +3267,7 @@
 				4A92303C1B68A8FE00E5844C /* ImageNetClass */,
 				4AEBC5FB1B58DFD20034C9C2 /* Singleton */,
 				4A0DC7FF1BCF5B1300835E95 /* HWWeakTimer */,
+				EDD13F661C196D860088A378 /* SCGifImageView */,
 				4A231C4E1BE9B0C500228C88 /* TabBarBadge */,
 				EDEC8BF31CB3BA6300815228 /* wpLabel */,
 				EDEF5E8F1CBF761700592B20 /* guideView */,
@@ -3371,8 +3386,7 @@
 				4A6FAFC31D743CF300AD4DF8 /* NSString+CJString.h */,
 				4A6FAFC41D743CF300AD4DF8 /* NSString+CJString.m */,
 			);
-			name = CJLabel;
-			path = ThirdLibs/CJLabel;
+			path = CJLabel;
 			sourceTree = "<group>";
 		};
 		4A87CBA81E8A486000D21AC2 /* HSHelper */ = {
@@ -4369,8 +4383,7 @@
 				749181FB1EC166F000AC1ECE /* PageControl */,
 				749182041EC166F000AC1ECE /* SDCycleScrollView */,
 			);
-			name = SDCycleScrollView;
-			path = ThirdLibs/SDCycleScrollView;
+			path = SDCycleScrollView;
 			sourceTree = "<group>";
 		};
 		749181FB1EC166F000AC1ECE /* PageControl */ = {
@@ -4417,8 +4430,7 @@
 				74931A121B1326B400143424 /* pinyin.c */,
 				74931A131B1326B400143424 /* pinyin.h */,
 			);
-			name = FisrtLetterAndOrder;
-			path = ThirdLibs/FisrtLetterAndOrder;
+			path = FisrtLetterAndOrder;
 			sourceTree = "<group>";
 		};
 		74931A151B1326FE00143424 /* OHAttributedLabel */ = {
@@ -4428,8 +4440,7 @@
 				74931A1B1B1326FE00143424 /* Source */,
 				74931A261B1326FE00143424 /* TagParsers */,
 			);
-			name = OHAttributedLabel;
-			path = ThirdLibs/OHAttributedLabel;
+			path = OHAttributedLabel;
 			sourceTree = "<group>";
 		};
 		74931A161B1326FE00143424 /* PrivateUtils */ = {
@@ -4712,8 +4723,7 @@
 				74BDA9821F09F6C60054403F /* FSCalendarWeekdayView.m */,
 				74BDA9831F09F6C60054403F /* Info.plist */,
 			);
-			name = FSCalendar;
-			path = ThirdLibs/FSCalendar;
+			path = FSCalendar;
 			sourceTree = "<group>";
 		};
 		74D7FCC61AE8F6EE00653B8F /* PersonalCenterModel */ = {
@@ -5154,14 +5164,6 @@
 			path = GuideController;
 			sourceTree = "<group>";
 		};
-		7BC304311ACB9CDB007767F1 /* Tools */ = {
-			isa = PBXGroup;
-			children = (
-				7BCE70ED1B79D01400F9DD14 /* TongDun */,
-			);
-			name = Tools;
-			sourceTree = "<group>";
-		};
 		7BC3044C1ACBC22D007767F1 /* Misc */ = {
 			isa = PBXGroup;
 			children = (
@@ -5301,8 +5303,7 @@
 				A85A2EC01F4321B0004BF4C1 /* QLHeaderViewController.h */,
 				A85A2EC11F4321B0004BF4C1 /* QLHeaderViewController.m */,
 			);
-			name = InvestmentDetail;
-			path = ../InvestmentDetail;
+			path = InvestmentDetail;
 			sourceTree = "<group>";
 		};
 		7BCA210F1AEE1D0E001CD258 /* Login */ = {
@@ -5372,7 +5373,6 @@
 				E32020081CC4BAB80065579C /* webViewJavascripBridge */,
 				7BD587FD1B098DCF005091D3 /* ErrorAndNoPermission */,
 				7BE51D8D1ADE5047007600AB /* FullWebViewController */,
-				7BCA185C1AD780F70077C2A6 /* InvestmentDetail */,
 				7BA6E4681AD668F300FE8C37 /* UCFLockViewController */,
 				7BC001481ACE2B39001D84D0 /* BaseAlertView */,
 				7BC217251ACD4A030086D374 /* GuideController */,
@@ -5393,7 +5393,7 @@
 				7BCE022C1AC9141A0084C15C /* MBProgressHUD.m */,
 			);
 			name = MBProgressHUD;
-			path = JRGC/ThirdLibs/MBProgressHUD;
+			path = JRGC/NewTools/MBProgressHUD;
 			sourceTree = SOURCE_ROOT;
 		};
 		7BCE022F1AC915720084C15C /* AESCrypt-ObjC-master */ = {
@@ -5406,8 +5406,7 @@
 				7BCE02341AC915720084C15C /* NSString+Base64.h */,
 				7BCE02351AC915720084C15C /* NSString+Base64.m */,
 			);
-			name = "AESCrypt-ObjC-master";
-			path = "ThirdLibs/AESCrypt-ObjC-master";
+			path = "AESCrypt-ObjC-master";
 			sourceTree = "<group>";
 		};
 		7BCE02391AC915A80084C15C /* SFHFKeychainUtils */ = {
@@ -5416,8 +5415,7 @@
 				7BCE023A1AC915A80084C15C /* SFHFKeychainUtils.h */,
 				7BCE023B1AC915A80084C15C /* SFHFKeychainUtils.m */,
 			);
-			name = SFHFKeychainUtils;
-			path = ThirdLibs/SFHFKeychainUtils;
+			path = SFHFKeychainUtils;
 			sourceTree = "<group>";
 		};
 		7BCE02651AC91CBE0084C15C /* Frameworks */ = {
@@ -5522,13 +5520,6 @@
 			path = LoginAndRegister;
 			sourceTree = "<group>";
 		};
-		7BCE70ED1B79D01400F9DD14 /* TongDun */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = TongDun;
-			sourceTree = "<group>";
-		};
 		7BD35A8C1AD61E4200389D6B /* LLLockView */ = {
 			isa = PBXGroup;
 			children = (
@@ -5619,7 +5610,6 @@
 				AE43B84F1DD2D8BE001D0BD0 /* JRGC.entitlements */,
 				FB7EDE371D6BFCD700C3E924 /* Aplication */,
 				3371786A206CC7CC00A6366C /* NewTools */,
-				7BC304311ACB9CDB007767F1 /* Tools */,
 				7BFE3EB11AC5635E002A53A2 /* ThirdLibs */,
 				7BFE3EB01AC56356002A53A2 /* Images */,
 				7BC8AA021AD4C74200BF4660 /*  Modles */,
@@ -5698,28 +5688,15 @@
 			children = (
 				A824BFB61FCD499200E32F39 /* umeng_ios_social_sdk_6.4-2.6_arm64_custom */,
 				A83048CC1F67D9A70007FB4F /* OneSDK */,
-				74BDA9621F09F6C60054403F /* FSCalendar */,
-				A8AD6F821EFA6BDE000AF323 /* PagerView */,
-				74B3AD841ED2C31B00653F8B /* YFRollingLabel */,
-				74A0AF091EC341DD009E5A57 /* ZZCircleProgress */,
-				749181FA1EC166F000AC1ECE /* SDCycleScrollView */,
-				2526ADD21DD08CB800114D9A /* MLMOptionSelectView */,
 				FB65C94B1D8294E600476E67 /* GrowingIO-iOS-SDK */,
 				25950E971D7FB6EB00E4CCBA /* CWFaceSDK */,
-				4A6FAFC01D743CF300AD4DF8 /* CJLabel */,
 				2509C3BB1D6590C400D9F9B5 /* plusLayer */,
-				4A6678BE1D61C2E900469826 /* FDFullscreenPopGesture */,
-				FBBF48751C58C46C006AB777 /* UIView+Border(View圆角) */,
 				FBA0A2FC1C183B0F000E1C7A /* JPush_lib */,
-				EDD13F661C196D860088A378 /* SCGifImageView */,
 				FB55552F1BCE37570013894F /* UMAnalytics_Sdk_3.4.6 */,
 				7BCE023E1B833B7000F9D73F /* IPDetector.h */,
 				7BCE023F1B833B7000F9D73F /* IPDetector.m */,
-				74931A151B1326FE00143424 /* OHAttributedLabel */,
-				74931A111B1326B400143424 /* FisrtLetterAndOrder */,
 				749319EB1B13267600143424 /* NZLabel */,
 				FBA5BE991B0EDB0D000CDDC3 /* GiFHUD */,
-				4A9016641AFB12FE0049A9E0 /* Masonry */,
 				FBB685671AE4A76800F222B6 /* MJRefresh */,
 				7BDD8FC01AE0DD67007A5CE8 /* MDRadialProgress */,
 				7BE45C8E1ADF9C4C00B955A6 /* HMSegmentedControl */,
@@ -5729,9 +5706,6 @@
 				7BA6E4B51AD6731900FE8C37 /* WebImage */,
 				7BD35A8C1AD61E4200389D6B /* LLLockView */,
 				7BC3048C1ACBC26D007767F1 /* EgoRefresh */,
-				7BCE02391AC915A80084C15C /* SFHFKeychainUtils */,
-				7BCE022F1AC915720084C15C /* AESCrypt-ObjC-master */,
-				7BCE02281AC9141A0084C15C /* MBProgressHUD */,
 				E38039641DE5682100C031FF /* JRGC-Bridging-Header.h */,
 			);
 			name = ThirdLibs;
@@ -6699,8 +6673,7 @@
 				EDD13F671C196D860088A378 /* SCGIFImageView.h */,
 				EDD13F681C196D860088A378 /* SCGIFImageView.m */,
 			);
-			name = SCGifImageView;
-			path = ThirdLibs/SCGifImageView;
+			path = SCGifImageView;
 			sourceTree = "<group>";
 		};
 		EDEC8BF31CB3BA6300815228 /* wpLabel */ = {
@@ -6924,6 +6897,7 @@
 		FB88C9051AF9F92E00D2EE93 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				FBBF48751C58C46C006AB777 /* UIView+Border(View圆角) */,
 				E3A6A4B11CC71D03003A3FED /* NSString+URL.h */,
 				E3A6A4B21CC71D03003A3FED /* NSString+URL.m */,
 				08E9A4E01B845E1200099F30 /* UCFTextField.h */,
@@ -7023,8 +6997,7 @@
 				FBBF48761C58C46C006AB777 /* UIView+Border.h */,
 				FBBF48771C58C46C006AB777 /* UIView+Border.m */,
 			);
-			name = "UIView+Border(View圆角)";
-			path = "ThirdLibs/UIView+Border(View圆角)";
+			path = "UIView+Border(View圆角)";
 			sourceTree = "<group>";
 		};
 		FBD49C761DD34FD200A9726A /* 返现券、反息券 */ = {
