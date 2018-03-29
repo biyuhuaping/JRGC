@@ -3078,8 +3078,27 @@
 				333FD803206A43EA00CEA03C /* AFSecurityPolicy.m */,
 				333FD804206A43EA00CEA03C /* AFHTTPSessionManager.h */,
 			);
-			name = AFNetworking;
-			path = ThirdLibs/AFNetworking;
+			path = AFNetworking;
+			sourceTree = "<group>";
+		};
+		3343FF25206CCDE7002A2153 /* NewLib */ = {
+			isa = PBXGroup;
+			children = (
+				3343FF26206CCE3D002A2153 /* TongDun */,
+				A824BFD91FCD54D700E32F39 /* p2pWalletSDK */,
+				A84EC2401FE1081E00B0C46A /* ImageScanner */,
+				333FD7F7206A43EA00CEA03C /* AFNetworking */,
+			);
+			path = NewLib;
+			sourceTree = "<group>";
+		};
+		3343FF26206CCE3D002A2153 /* TongDun */ = {
+			isa = PBXGroup;
+			children = (
+				7BCE70EE1B79D03000F9DD14 /* FMDeviceManager.h */,
+				7BCE70EF1B79D03000F9DD14 /* libFMDeviceManager_without_IDFA.a */,
+			);
+			path = TongDun;
 			sourceTree = "<group>";
 		};
 		33717762206C959400A6366C /* HomePage */ = {
@@ -5506,8 +5525,6 @@
 		7BCE70ED1B79D01400F9DD14 /* TongDun */ = {
 			isa = PBXGroup;
 			children = (
-				7BCE70EE1B79D03000F9DD14 /* FMDeviceManager.h */,
-				7BCE70EF1B79D03000F9DD14 /* libFMDeviceManager_without_IDFA.a */,
 			);
 			name = TongDun;
 			sourceTree = "<group>";
@@ -5679,9 +5696,6 @@
 		7BFE3EB11AC5635E002A53A2 /* ThirdLibs */ = {
 			isa = PBXGroup;
 			children = (
-				333FD7F7206A43EA00CEA03C /* AFNetworking */,
-				A84EC2401FE1081E00B0C46A /* ImageScanner */,
-				A824BFD91FCD54D700E32F39 /* p2pWalletSDK */,
 				A824BFB61FCD499200E32F39 /* umeng_ios_social_sdk_6.4-2.6_arm64_custom */,
 				A83048CC1F67D9A70007FB4F /* OneSDK */,
 				74BDA9621F09F6C60054403F /* FSCalendar */,
@@ -6403,8 +6417,7 @@
 				A824C01E1FCD54D700E32F39 /* UcfWalletSDK.bundle */,
 				A824C01F1FCD54D700E32F39 /* libUcfWalletSDK.a */,
 			);
-			name = p2pWalletSDK;
-			path = ThirdLibs/p2pWalletSDK;
+			path = p2pWalletSDK;
 			sourceTree = "<group>";
 		};
 		A824BFDB1FCD54D700E32F39 /* Ucflib */ = {
@@ -6869,10 +6882,6 @@
 		FB7EDE371D6BFCD700C3E924 /* Aplication */ = {
 			isa = PBXGroup;
 			children = (
-				33717765206C9B7C00A6366C /* WebPage */,
-				33717764206C978400A6366C /* MyPage */,
-				33717763206C970D00A6366C /* InvestPage */,
-				33717762206C959400A6366C /* HomePage */,
 				FB7EDE381D6BFCD700C3E924 /* AppDelegate.h */,
 				FB7EDE391D6BFCD700C3E924 /* AppDelegate.mm */,
 				FB72B08B1D74233E00F4DC8E /* BaseNavigationViewController.h */,
@@ -6881,6 +6890,11 @@
 				FB7EDE3D1D6BFCD700C3E924 /* UCFMainTabBarController.m */,
 				FB7EDE3A1D6BFCD700C3E924 /* UCFBaseViewController.h */,
 				FB7EDE3B1D6BFCD700C3E924 /* UCFBaseViewController.m */,
+				33717765206C9B7C00A6366C /* WebPage */,
+				33717764206C978400A6366C /* MyPage */,
+				33717763206C970D00A6366C /* InvestPage */,
+				3343FF25206CCDE7002A2153 /* NewLib */,
+				33717762206C959400A6366C /* HomePage */,
 			);
 			path = Aplication;
 			sourceTree = "<group>";
@@ -8317,19 +8331,19 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/JRGC",
-					"$(PROJECT_DIR)/JRGC/ThirdLibs/UMengFeedback_SDK_2.3.1/UMOpus",
 					"$(PROJECT_DIR)/JRGC/ThirdLibs/UMAnalytics_Sdk_3.4.6",
 					"$(PROJECT_DIR)/JRGC/ThirdLibs/JPush_lib",
 					"$(PROJECT_DIR)/JRGC/ThirdLibs/CWFaceSDK/lib",
 					"$(PROJECT_DIR)/JRGC/ThirdLibs/GrowingIO-iOS-SDK",
-					"$(PROJECT_DIR)/JRGC/ThirdLibs/p2pWalletSDK",
-					"$(PROJECT_DIR)/JRGC/ThirdLibs/p2pWalletSDK/SPaySDK",
-					"$(PROJECT_DIR)/JRGC/ThirdLibs/p2pWalletSDK/Ucflib",
-					"$(PROJECT_DIR)/JRGC/ThirdLibs/p2pWalletSDK/Wechat",
+					"$(PROJECT_DIR)/JRGC/Aplication/NewLib/p2pWalletSDK",
+					"$(PROJECT_DIR)/JRGC/Aplication/NewLib/p2pWalletSDK/SPaySDK",
+					"$(PROJECT_DIR)/JRGC/Aplication/NewLib/p2pWalletSDK/Ucflib",
+					"$(PROJECT_DIR)/JRGC/Aplication/NewLib/p2pWalletSDK/Wechat",
 					"$(PROJECT_DIR)/JRGC/umeng_ios_social_sdk_6.4-2.6_arm64_custom/UMSocial/SocialLibraries/WeChat",
 					"$(PROJECT_DIR)/JRGC/umeng_ios_social_sdk_6.4-2.6_arm64_custom/UMSocial/SocialLibraries/Sina",
 					"$(PROJECT_DIR)/JRGC/umeng_ios_social_sdk_6.4-2.6_arm64_custom/UMSocial/SocialLibraries/QQ",
 					"$(PROJECT_DIR)/JRGC/umeng_ios_social_sdk_6.4-2.6_arm64_custom/UMSocial/UMSocialSDKPlugin",
+					"$(PROJECT_DIR)/JRGC/Aplication/NewLib/TongDun/",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp299;
@@ -8384,19 +8398,19 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/JRGC",
-					"$(PROJECT_DIR)/JRGC/ThirdLibs/UMengFeedback_SDK_2.3.1/UMOpus",
 					"$(PROJECT_DIR)/JRGC/ThirdLibs/UMAnalytics_Sdk_3.4.6",
 					"$(PROJECT_DIR)/JRGC/ThirdLibs/JPush_lib",
 					"$(PROJECT_DIR)/JRGC/ThirdLibs/CWFaceSDK/lib",
 					"$(PROJECT_DIR)/JRGC/ThirdLibs/GrowingIO-iOS-SDK",
-					"$(PROJECT_DIR)/JRGC/ThirdLibs/p2pWalletSDK",
-					"$(PROJECT_DIR)/JRGC/ThirdLibs/p2pWalletSDK/SPaySDK",
-					"$(PROJECT_DIR)/JRGC/ThirdLibs/p2pWalletSDK/Ucflib",
-					"$(PROJECT_DIR)/JRGC/ThirdLibs/p2pWalletSDK/Wechat",
+					"$(PROJECT_DIR)/JRGC/Aplication/NewLib/p2pWalletSDK",
+					"$(PROJECT_DIR)/JRGC/Aplication/NewLib/p2pWalletSDK/SPaySDK",
+					"$(PROJECT_DIR)/JRGC/Aplication/NewLib/p2pWalletSDK/Ucflib",
+					"$(PROJECT_DIR)/JRGC/Aplication/NewLib/p2pWalletSDK/Wechat",
 					"$(PROJECT_DIR)/JRGC/umeng_ios_social_sdk_6.4-2.6_arm64_custom/UMSocial/SocialLibraries/WeChat",
 					"$(PROJECT_DIR)/JRGC/umeng_ios_social_sdk_6.4-2.6_arm64_custom/UMSocial/SocialLibraries/Sina",
 					"$(PROJECT_DIR)/JRGC/umeng_ios_social_sdk_6.4-2.6_arm64_custom/UMSocial/SocialLibraries/QQ",
 					"$(PROJECT_DIR)/JRGC/umeng_ios_social_sdk_6.4-2.6_arm64_custom/UMSocial/UMSocialSDKPlugin",
+					"$(PROJECT_DIR)/JRGC/Aplication/NewLib/TongDun/",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp299;
