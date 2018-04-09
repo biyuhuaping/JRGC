@@ -2678,7 +2678,6 @@
 		E37086C11D61E3030041D293 /* UCFOldUserGuideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFOldUserGuideViewController.h; sourceTree = "<group>"; };
 		E37086C21D61E3030041D293 /* UCFOldUserGuideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFOldUserGuideViewController.m; sourceTree = "<group>"; };
 		E37086C31D61E3030041D293 /* UCFOldUserGuideViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFOldUserGuideViewController.xib; sourceTree = "<group>"; };
-		E38039641DE5682100C031FF /* JRGC-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JRGC-Bridging-Header.h"; sourceTree = "<group>"; };
 		E3A6A4B11CC71D03003A3FED /* NSString+URL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URL.h"; sourceTree = "<group>"; };
 		E3A6A4B21CC71D03003A3FED /* NSString+URL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+URL.m"; sourceTree = "<group>"; };
 		E3A96B061CBF837C00E8884F /* UCFWorkPointsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFWorkPointsViewController.h; sourceTree = "<group>"; };
@@ -2953,8 +2952,7 @@
 				2509C3BC1D6590C400D9F9B5 /* PulsingHaloLayer.h */,
 				2509C3BD1D6590C400D9F9B5 /* PulsingHaloLayer.m */,
 			);
-			name = plusLayer;
-			path = ThirdLibs/plusLayer;
+			path = plusLayer;
 			sourceTree = "<group>";
 		};
 		2526ADD21DD08CB800114D9A /* MLMOptionSelectView */ = {
@@ -3083,6 +3081,9 @@
 		3343FF25206CCDE7002A2153 /* NewLib */ = {
 			isa = PBXGroup;
 			children = (
+				FBA5BE991B0EDB0D000CDDC3 /* GiFHUD */,
+				7BD35A8C1AD61E4200389D6B /* LLLockView */,
+				749319EB1B13267600143424 /* NZLabel */,
 				A824BFB61FCD499200E32F39 /* umeng_ios_social_sdk_6.4-2.6_arm64_custom */,
 				E32020081CC4BAB80065579C /* webViewJavascripBridge */,
 				2526ADD21DD08CB800114D9A /* MLMOptionSelectView */,
@@ -3099,6 +3100,15 @@
 				A824BFD91FCD54D700E32F39 /* p2pWalletSDK */,
 				A84EC2401FE1081E00B0C46A /* ImageScanner */,
 				74931A111B1326B400143424 /* FisrtLetterAndOrder */,
+				2509C3BB1D6590C400D9F9B5 /* plusLayer */,
+				FBB685671AE4A76800F222B6 /* MJRefresh */,
+				7BE45C8E1ADF9C4C00B955A6 /* HMSegmentedControl */,
+				FB120BAF1ADE462F00023365 /* CircularProgressView */,
+				7BA6E4921AD6731900FE8C37 /* SDWebImage */,
+				7BDD8FC01AE0DD67007A5CE8 /* MDRadialProgress */,
+				7BC7C0B51ADCEDB6003799B0 /* JSONKit */,
+				7BA6E4B51AD6731900FE8C37 /* WebImage */,
+				7BC3048C1ACBC26D007767F1 /* EgoRefresh */,
 				333FD7F7206A43EA00CEA03C /* AFNetworking */,
 			);
 			path = NewLib;
@@ -4439,8 +4449,7 @@
 				749319EC1B13267600143424 /* NZLabel.h */,
 				749319ED1B13267600143424 /* NZLabel.m */,
 			);
-			name = NZLabel;
-			path = ThirdLibs/NZLabel;
+			path = NZLabel;
 			sourceTree = "<group>";
 		};
 		74931A111B1326B400143424 /* FisrtLetterAndOrder */ = {
@@ -5146,8 +5155,7 @@
 				7BA6E4B31AD6731900FE8C37 /* UIView+WebCacheOperation.h */,
 				7BA6E4B41AD6731900FE8C37 /* UIView+WebCacheOperation.m */,
 			);
-			name = SDWebImage;
-			path = ThirdLibs/SDWebImage;
+			path = SDWebImage;
 			sourceTree = "<group>";
 		};
 		7BA6E4B51AD6731900FE8C37 /* WebImage */ = {
@@ -5156,8 +5164,7 @@
 				7BA6E4B61AD6731900FE8C37 /* Info.plist */,
 				7BA6E4B71AD6731900FE8C37 /* WebImage.h */,
 			);
-			name = WebImage;
-			path = ThirdLibs/WebImage;
+			path = WebImage;
 			sourceTree = "<group>";
 		};
 		7BC001481ACE2B39001D84D0 /* BaseAlertView */ = {
@@ -5237,8 +5244,7 @@
 				7BC3048E1ACBC26D007767F1 /* EGORefreshTableFooterView.m */,
 				7BC3048F1ACBC26D007767F1 /* EGOViewCommon.h */,
 			);
-			name = EgoRefresh;
-			path = ThirdLibs/EgoRefresh;
+			path = EgoRefresh;
 			sourceTree = "<group>";
 		};
 		7BC789031B04548800D50494 /* docs */ = {
@@ -5260,8 +5266,7 @@
 				7BC7C0B61ADCEDB6003799B0 /* JSONKit.h */,
 				7BC7C0B71ADCEDB6003799B0 /* JSONKit.m */,
 			);
-			name = JSONKit;
-			path = ThirdLibs/JSONKit;
+			path = JSONKit;
 			sourceTree = "<group>";
 		};
 		7BC8AA021AD4C74200BF4660 /*  Modles */ = {
@@ -5527,8 +5532,7 @@
 				7BD35A921AD61E4200389D6B /* LLLockView.h */,
 				7BD35A931AD61E4200389D6B /* LLLockView.m */,
 			);
-			name = LLLockView;
-			path = ThirdLibs/LLLockView;
+			path = LLLockView;
 			sourceTree = "<group>";
 		};
 		7BD587FD1B098DCF005091D3 /* ErrorAndNoPermission */ = {
@@ -5558,8 +5562,7 @@
 				7BDD8FC51AE0DD67007A5CE8 /* MDRadialProgressView.h */,
 				7BDD8FC61AE0DD67007A5CE8 /* MDRadialProgressView.m */,
 			);
-			name = MDRadialProgress;
-			path = ThirdLibs/MDRadialProgress;
+			path = MDRadialProgress;
 			sourceTree = "<group>";
 		};
 		7BE45C8E1ADF9C4C00B955A6 /* HMSegmentedControl */ = {
@@ -5568,8 +5571,7 @@
 				7BE45C8F1ADF9C4C00B955A6 /* HMSegmentedControl.h */,
 				7BE45C901ADF9C4C00B955A6 /* HMSegmentedControl.m */,
 			);
-			name = HMSegmentedControl;
-			path = ThirdLibs/HMSegmentedControl;
+			path = HMSegmentedControl;
 			sourceTree = "<group>";
 		};
 		7BFE3E771AC55C98002A53A2 = {
@@ -5597,8 +5599,8 @@
 				AE43B84F1DD2D8BE001D0BD0 /* JRGC.entitlements */,
 				FB7EDE371D6BFCD700C3E924 /* Aplication */,
 				3343FF25206CCDE7002A2153 /* NewLib */,
-				3371786A206CC7CC00A6366C /* NewTools */,
 				7BFE3EB11AC5635E002A53A2 /* ThirdLibs */,
+				3371786A206CC7CC00A6366C /* NewTools */,
 				7BFE3EB01AC56356002A53A2 /* Images */,
 				7BC8AA021AD4C74200BF4660 /*  Modles */,
 				FB5149191D6438A700C26E7B /* Images.xcassets */,
@@ -5665,23 +5667,10 @@
 				A83048CC1F67D9A70007FB4F /* OneSDK */,
 				FB65C94B1D8294E600476E67 /* GrowingIO-iOS-SDK */,
 				25950E971D7FB6EB00E4CCBA /* CWFaceSDK */,
-				2509C3BB1D6590C400D9F9B5 /* plusLayer */,
 				FBA0A2FC1C183B0F000E1C7A /* JPush_lib */,
 				FB55552F1BCE37570013894F /* UMAnalytics_Sdk_3.4.6 */,
 				7BCE023E1B833B7000F9D73F /* IPDetector.h */,
 				7BCE023F1B833B7000F9D73F /* IPDetector.m */,
-				749319EB1B13267600143424 /* NZLabel */,
-				FBA5BE991B0EDB0D000CDDC3 /* GiFHUD */,
-				FBB685671AE4A76800F222B6 /* MJRefresh */,
-				7BDD8FC01AE0DD67007A5CE8 /* MDRadialProgress */,
-				7BE45C8E1ADF9C4C00B955A6 /* HMSegmentedControl */,
-				FB120BAF1ADE462F00023365 /* CircularProgressView */,
-				7BC7C0B51ADCEDB6003799B0 /* JSONKit */,
-				7BA6E4921AD6731900FE8C37 /* SDWebImage */,
-				7BA6E4B51AD6731900FE8C37 /* WebImage */,
-				7BD35A8C1AD61E4200389D6B /* LLLockView */,
-				7BC3048C1ACBC26D007767F1 /* EgoRefresh */,
-				E38039641DE5682100C031FF /* JRGC-Bridging-Header.h */,
 			);
 			name = ThirdLibs;
 			sourceTree = "<group>";
@@ -6695,8 +6684,7 @@
 				FB120BB21ADE462F00023365 /* CircleShapeLayer.h */,
 				FB120BB31ADE462F00023365 /* CircleShapeLayer.m */,
 			);
-			name = CircularProgressView;
-			path = ThirdLibs/CircularProgressView;
+			path = CircularProgressView;
 			sourceTree = "<group>";
 		};
 		FB1E7F721D8E4230009CBE2C /* ProjectDetail */ = {
@@ -6903,8 +6891,7 @@
 				FBA5BE9A1B0EDB0D000CDDC3 /* GiFHUD.h */,
 				FBA5BE9B1B0EDB0D000CDDC3 /* GiFHUD.m */,
 			);
-			name = GiFHUD;
-			path = ThirdLibs/GiFHUD;
+			path = GiFHUD;
 			sourceTree = "<group>";
 		};
 		FBA80F501AE6472C0066BF99 /* UCFLatestProject */ = {
@@ -6955,8 +6942,7 @@
 				FBB6857E1AE4A76800F222B6 /* UIView+MJExtension.h */,
 				FBB6857F1AE4A76800F222B6 /* UIView+MJExtension.m */,
 			);
-			name = MJRefresh;
-			path = ThirdLibs/MJRefresh;
+			path = MJRefresh;
 			sourceTree = "<group>";
 		};
 		FBBF48751C58C46C006AB777 /* UIView+Border(View圆角) */ = {
