@@ -2988,8 +2988,7 @@
 				25950EB41D7FB6EB00E4CCBA /* lib */,
 				25950EB61D7FB6EB00E4CCBA /* res */,
 			);
-			name = CWFaceSDK;
-			path = ThirdLibs/CWFaceSDK;
+			path = CWFaceSDK;
 			sourceTree = "<group>";
 		};
 		25950E981D7FB6EB00E4CCBA /* CWLivess */ = {
@@ -3110,6 +3109,7 @@
 				7BC7C0B51ADCEDB6003799B0 /* JSONKit */,
 				7BA6E4B51AD6731900FE8C37 /* WebImage */,
 				7BC3048C1ACBC26D007767F1 /* EgoRefresh */,
+				25950E971D7FB6EB00E4CCBA /* CWFaceSDK */,
 				FB65C94B1D8294E600476E67 /* GrowingIO-iOS-SDK */,
 				333FD7F7206A43EA00CEA03C /* AFNetworking */,
 			);
@@ -5666,7 +5666,6 @@
 		7BFE3EB11AC5635E002A53A2 /* ThirdLibs */ = {
 			isa = PBXGroup;
 			children = (
-				25950E971D7FB6EB00E4CCBA /* CWFaceSDK */,
 				FBA0A2FC1C183B0F000E1C7A /* JPush_lib */,
 				FB55552F1BCE37570013894F /* UMAnalytics_Sdk_3.4.6 */,
 				7BCE023E1B833B7000F9D73F /* IPDetector.h */,
@@ -8252,7 +8251,7 @@
 					"$(PROJECT_DIR)/JRGC",
 					"$(PROJECT_DIR)/JRGC/ThirdLibs/UMAnalytics_Sdk_3.4.6",
 					"$(PROJECT_DIR)/JRGC/ThirdLibs/JPush_lib",
-					"$(PROJECT_DIR)/JRGC/ThirdLibs/CWFaceSDK/lib",
+					"$(PROJECT_DIR)/JRGC/NewLib/CWFaceSDK/lib",
 					"$(PROJECT_DIR)/JRGC/NewLib/GrowingIO-iOS-SDK",
 					"$(PROJECT_DIR)/JRGC/NewLib/p2pWalletSDK",
 					"$(PROJECT_DIR)/JRGC/NewLib/p2pWalletSDK/SPaySDK",
@@ -8313,7 +8312,7 @@
 					"$(PROJECT_DIR)/JRGC",
 					"$(PROJECT_DIR)/JRGC/ThirdLibs/UMAnalytics_Sdk_3.4.6",
 					"$(PROJECT_DIR)/JRGC/ThirdLibs/JPush_lib",
-					"$(PROJECT_DIR)/JRGC/ThirdLibs/CWFaceSDK/lib",
+					"$(PROJECT_DIR)/JRGC/NewLib/CWFaceSDK/lib",
 					"$(PROJECT_DIR)/JRGC/NewLib/GrowingIO-iOS-SDK",
 					"$(PROJECT_DIR)/JRGC/NewLib/p2pWalletSDK",
 					"$(PROJECT_DIR)/JRGC/NewLib/p2pWalletSDK/SPaySDK",
