@@ -3083,6 +3083,7 @@
 		3343FF25206CCDE7002A2153 /* NewLib */ = {
 			isa = PBXGroup;
 			children = (
+				E32020081CC4BAB80065579C /* webViewJavascripBridge */,
 				2526ADD21DD08CB800114D9A /* MLMOptionSelectView */,
 				4A9016641AFB12FE0049A9E0 /* Masonry */,
 				4A6678BE1D61C2E900469826 /* FDFullscreenPopGesture */,
@@ -5639,7 +5640,6 @@
 			isa = PBXGroup;
 			children = (
 				7BCE028E1AC948710084C15C /* Setting */,
-				7BCE028C1AC948710084C15C /* More */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -5669,7 +5669,6 @@
 		7BFE3EB11AC5635E002A53A2 /* ThirdLibs */ = {
 			isa = PBXGroup;
 			children = (
-				E32020081CC4BAB80065579C /* webViewJavascripBridge */,
 				A824BFB61FCD499200E32F39 /* umeng_ios_social_sdk_6.4-2.6_arm64_custom */,
 				A83048CC1F67D9A70007FB4F /* OneSDK */,
 				FB65C94B1D8294E600476E67 /* GrowingIO-iOS-SDK */,
@@ -6838,6 +6837,7 @@
 				FB7EDE3D1D6BFCD700C3E924 /* UCFMainTabBarController.m */,
 				FB7EDE3A1D6BFCD700C3E924 /* UCFBaseViewController.h */,
 				FB7EDE3B1D6BFCD700C3E924 /* UCFBaseViewController.m */,
+				7BCE028C1AC948710084C15C /* More */,
 				33717765206C9B7C00A6366C /* WebPage */,
 				33717764206C978400A6366C /* MyPage */,
 				33717763206C970D00A6366C /* InvestPage */,
