@@ -3106,9 +3106,11 @@
 				FB120BAF1ADE462F00023365 /* CircularProgressView */,
 				7BA6E4921AD6731900FE8C37 /* SDWebImage */,
 				7BDD8FC01AE0DD67007A5CE8 /* MDRadialProgress */,
+				A83048CC1F67D9A70007FB4F /* OneSDK */,
 				7BC7C0B51ADCEDB6003799B0 /* JSONKit */,
 				7BA6E4B51AD6731900FE8C37 /* WebImage */,
 				7BC3048C1ACBC26D007767F1 /* EgoRefresh */,
+				FB65C94B1D8294E600476E67 /* GrowingIO-iOS-SDK */,
 				333FD7F7206A43EA00CEA03C /* AFNetworking */,
 			);
 			path = NewLib;
@@ -5664,8 +5666,6 @@
 		7BFE3EB11AC5635E002A53A2 /* ThirdLibs */ = {
 			isa = PBXGroup;
 			children = (
-				A83048CC1F67D9A70007FB4F /* OneSDK */,
-				FB65C94B1D8294E600476E67 /* GrowingIO-iOS-SDK */,
 				25950E971D7FB6EB00E4CCBA /* CWFaceSDK */,
 				FBA0A2FC1C183B0F000E1C7A /* JPush_lib */,
 				FB55552F1BCE37570013894F /* UMAnalytics_Sdk_3.4.6 */,
@@ -6456,8 +6456,7 @@
 				A83048D21F67D9A70007FB4F /* UTMini.framework */,
 				A83048D31F67D9A70007FB4F /* YWFeedbackBundle.bundle */,
 			);
-			name = OneSDK;
-			path = ThirdLibs/OneSDK;
+			path = OneSDK;
 			sourceTree = "<group>";
 		};
 		A84EC2401FE1081E00B0C46A /* ImageScanner */ = {
@@ -6802,8 +6801,7 @@
 				FB65C9521D82995800476E67 /* Growing.h */,
 				FB65C9531D82995800476E67 /* libGrowing.a */,
 			);
-			name = "GrowingIO-iOS-SDK";
-			path = "ThirdLibs/GrowingIO-iOS-SDK";
+			path = "GrowingIO-iOS-SDK";
 			sourceTree = "<group>";
 		};
 		FB7EDE371D6BFCD700C3E924 /* Aplication */ = {
@@ -8235,7 +8233,7 @@
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/JRGC/ThirdLibs/OneSDK",
+					"$(PROJECT_DIR)/JRGC/NewLib/OneSDK",
 					"$(PROJECT_DIR)/JRGC/NewLib/umeng_ios_social_sdk_6.4-2.6_arm64_custom/UMSocial/UMSocialUI",
 					"$(PROJECT_DIR)/JRGC/NewLib/umeng_ios_social_sdk_6.4-2.6_arm64_custom/UMSocial/UMSocialSDK",
 				);
@@ -8244,7 +8242,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SDK_DIR)user/include/libxml2",
-					"$(PROJECT_DIR)/JRGC/ThirdLibs/OneSDK/**",
+					"$(PROJECT_DIR)/JRGC/NewLib/OneSDK/**",
 				);
 				INFOPLIST_FILE = JRGC/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -8255,7 +8253,7 @@
 					"$(PROJECT_DIR)/JRGC/ThirdLibs/UMAnalytics_Sdk_3.4.6",
 					"$(PROJECT_DIR)/JRGC/ThirdLibs/JPush_lib",
 					"$(PROJECT_DIR)/JRGC/ThirdLibs/CWFaceSDK/lib",
-					"$(PROJECT_DIR)/JRGC/ThirdLibs/GrowingIO-iOS-SDK",
+					"$(PROJECT_DIR)/JRGC/NewLib/GrowingIO-iOS-SDK",
 					"$(PROJECT_DIR)/JRGC/NewLib/p2pWalletSDK",
 					"$(PROJECT_DIR)/JRGC/NewLib/p2pWalletSDK/SPaySDK",
 					"$(PROJECT_DIR)/JRGC/NewLib/p2pWalletSDK/Ucflib",
@@ -8296,7 +8294,7 @@
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/JRGC/ThirdLibs/OneSDK",
+					"$(PROJECT_DIR)/JRGC/NewLib/OneSDK",
 					"$(PROJECT_DIR)/JRGC/NewLib/umeng_ios_social_sdk_6.4-2.6_arm64_custom/UMSocial/UMSocialUI",
 					"$(PROJECT_DIR)/JRGC/NewLib/umeng_ios_social_sdk_6.4-2.6_arm64_custom/UMSocial/UMSocialSDK",
 				);
@@ -8305,7 +8303,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SDK_DIR)user/include/libxml2",
-					"$(PROJECT_DIR)/JRGC/ThirdLibs/OneSDK/**",
+					"$(PROJECT_DIR)/JRGC/NewLib/OneSDK/**",
 				);
 				INFOPLIST_FILE = JRGC/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -8316,7 +8314,7 @@
 					"$(PROJECT_DIR)/JRGC/ThirdLibs/UMAnalytics_Sdk_3.4.6",
 					"$(PROJECT_DIR)/JRGC/ThirdLibs/JPush_lib",
 					"$(PROJECT_DIR)/JRGC/ThirdLibs/CWFaceSDK/lib",
-					"$(PROJECT_DIR)/JRGC/ThirdLibs/GrowingIO-iOS-SDK",
+					"$(PROJECT_DIR)/JRGC/NewLib/GrowingIO-iOS-SDK",
 					"$(PROJECT_DIR)/JRGC/NewLib/p2pWalletSDK",
 					"$(PROJECT_DIR)/JRGC/NewLib/p2pWalletSDK/SPaySDK",
 					"$(PROJECT_DIR)/JRGC/NewLib/p2pWalletSDK/Ucflib",
