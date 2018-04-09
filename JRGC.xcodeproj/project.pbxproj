@@ -3083,6 +3083,7 @@
 		3343FF25206CCDE7002A2153 /* NewLib */ = {
 			isa = PBXGroup;
 			children = (
+				A824BFB61FCD499200E32F39 /* umeng_ios_social_sdk_6.4-2.6_arm64_custom */,
 				E32020081CC4BAB80065579C /* webViewJavascripBridge */,
 				2526ADD21DD08CB800114D9A /* MLMOptionSelectView */,
 				4A9016641AFB12FE0049A9E0 /* Masonry */,
@@ -5661,7 +5662,6 @@
 		7BFE3EB11AC5635E002A53A2 /* ThirdLibs */ = {
 			isa = PBXGroup;
 			children = (
-				A824BFB61FCD499200E32F39 /* umeng_ios_social_sdk_6.4-2.6_arm64_custom */,
 				A83048CC1F67D9A70007FB4F /* OneSDK */,
 				FB65C94B1D8294E600476E67 /* GrowingIO-iOS-SDK */,
 				25950E971D7FB6EB00E4CCBA /* CWFaceSDK */,
@@ -8250,8 +8250,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/JRGC/ThirdLibs/OneSDK",
-					"$(PROJECT_DIR)/JRGC/umeng_ios_social_sdk_6.4-2.6_arm64_custom/UMSocial/UMSocialUI",
-					"$(PROJECT_DIR)/JRGC/umeng_ios_social_sdk_6.4-2.6_arm64_custom/UMSocial/UMSocialSDK",
+					"$(PROJECT_DIR)/JRGC/NewLib/umeng_ios_social_sdk_6.4-2.6_arm64_custom/UMSocial/UMSocialUI",
+					"$(PROJECT_DIR)/JRGC/NewLib/umeng_ios_social_sdk_6.4-2.6_arm64_custom/UMSocial/UMSocialSDK",
 				);
 				GCC_INPUT_FILETYPE = sourcecode.c.objc;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/JRGC/JRGC.pch";
@@ -8274,10 +8274,10 @@
 					"$(PROJECT_DIR)/JRGC/NewLib/p2pWalletSDK/SPaySDK",
 					"$(PROJECT_DIR)/JRGC/NewLib/p2pWalletSDK/Ucflib",
 					"$(PROJECT_DIR)/JRGC/NewLib/p2pWalletSDK/Wechat",
-					"$(PROJECT_DIR)/JRGC/umeng_ios_social_sdk_6.4-2.6_arm64_custom/UMSocial/SocialLibraries/WeChat",
-					"$(PROJECT_DIR)/JRGC/umeng_ios_social_sdk_6.4-2.6_arm64_custom/UMSocial/SocialLibraries/Sina",
-					"$(PROJECT_DIR)/JRGC/umeng_ios_social_sdk_6.4-2.6_arm64_custom/UMSocial/SocialLibraries/QQ",
-					"$(PROJECT_DIR)/JRGC/umeng_ios_social_sdk_6.4-2.6_arm64_custom/UMSocial/UMSocialSDKPlugin",
+					"$(PROJECT_DIR)/JRGC/NewLib/umeng_ios_social_sdk_6.4-2.6_arm64_custom/UMSocial/SocialLibraries/WeChat",
+					"$(PROJECT_DIR)/JRGC/NewLib/umeng_ios_social_sdk_6.4-2.6_arm64_custom/UMSocial/SocialLibraries/Sina",
+					"$(PROJECT_DIR)/JRGC/NewLib/umeng_ios_social_sdk_6.4-2.6_arm64_custom/UMSocial/SocialLibraries/QQ",
+					"$(PROJECT_DIR)/JRGC/NewLib/umeng_ios_social_sdk_6.4-2.6_arm64_custom/UMSocial/UMSocialSDKPlugin",
 					"$(PROJECT_DIR)/JRGC/NewLib/TongDun/",
 				);
 				OTHER_LDFLAGS = "-ObjC";
@@ -8311,8 +8311,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/JRGC/ThirdLibs/OneSDK",
-					"$(PROJECT_DIR)/JRGC/umeng_ios_social_sdk_6.4-2.6_arm64_custom/UMSocial/UMSocialUI",
-					"$(PROJECT_DIR)/JRGC/umeng_ios_social_sdk_6.4-2.6_arm64_custom/UMSocial/UMSocialSDK",
+					"$(PROJECT_DIR)/JRGC/NewLib/umeng_ios_social_sdk_6.4-2.6_arm64_custom/UMSocial/UMSocialUI",
+					"$(PROJECT_DIR)/JRGC/NewLib/umeng_ios_social_sdk_6.4-2.6_arm64_custom/UMSocial/UMSocialSDK",
 				);
 				GCC_INPUT_FILETYPE = sourcecode.c.objc;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/JRGC/JRGC.pch";
@@ -8335,10 +8335,10 @@
 					"$(PROJECT_DIR)/JRGC/NewLib/p2pWalletSDK/SPaySDK",
 					"$(PROJECT_DIR)/JRGC/NewLib/p2pWalletSDK/Ucflib",
 					"$(PROJECT_DIR)/JRGC/NewLib/p2pWalletSDK/Wechat",
-					"$(PROJECT_DIR)/JRGC/umeng_ios_social_sdk_6.4-2.6_arm64_custom/UMSocial/SocialLibraries/WeChat",
-					"$(PROJECT_DIR)/JRGC/umeng_ios_social_sdk_6.4-2.6_arm64_custom/UMSocial/SocialLibraries/Sina",
-					"$(PROJECT_DIR)/JRGC/umeng_ios_social_sdk_6.4-2.6_arm64_custom/UMSocial/SocialLibraries/QQ",
-					"$(PROJECT_DIR)/JRGC/umeng_ios_social_sdk_6.4-2.6_arm64_custom/UMSocial/UMSocialSDKPlugin",
+					"$(PROJECT_DIR)/JRGC/NewLib/umeng_ios_social_sdk_6.4-2.6_arm64_custom/UMSocial/SocialLibraries/WeChat",
+					"$(PROJECT_DIR)/JRGC/NewLib/umeng_ios_social_sdk_6.4-2.6_arm64_custom/UMSocial/SocialLibraries/Sina",
+					"$(PROJECT_DIR)/JRGC/NewLib/umeng_ios_social_sdk_6.4-2.6_arm64_custom/UMSocial/SocialLibraries/QQ",
+					"$(PROJECT_DIR)/JRGC/NewLib/umeng_ios_social_sdk_6.4-2.6_arm64_custom/UMSocial/UMSocialSDKPlugin",
 					"$(PROJECT_DIR)/JRGC/NewLib/TongDun/",
 				);
 				OTHER_LDFLAGS = "-ObjC";
