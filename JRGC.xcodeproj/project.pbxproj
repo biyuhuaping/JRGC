@@ -5639,7 +5639,6 @@
 		7BFE3EAE1AC56315002A53A2 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				7BCE028E1AC948710084C15C /* Setting */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -6837,6 +6836,7 @@
 				FB7EDE3D1D6BFCD700C3E924 /* UCFMainTabBarController.m */,
 				FB7EDE3A1D6BFCD700C3E924 /* UCFBaseViewController.h */,
 				FB7EDE3B1D6BFCD700C3E924 /* UCFBaseViewController.m */,
+				7BCE028E1AC948710084C15C /* Setting */,
 				7BCE028C1AC948710084C15C /* More */,
 				33717765206C9B7C00A6366C /* WebPage */,
 				33717764206C978400A6366C /* MyPage */,
