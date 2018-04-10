@@ -1,0 +1,6 @@
+framework module Pods_JRGC {
+  umbrella header "Pods-JRGC-umbrella.h"
+
+  export *
+  module * { export * }
+}
