@@ -214,9 +214,10 @@
                     UCFProjectLabel *projectLabel = [_fliexGoldModel.prdLabelsList firstObject];
                     if ([projectLabel.labelPriority integerValue] == 1) {
                         view.goldSignView.hidden = NO;
-                        view.goldSignLabel.text = [NSString stringWithFormat:@"%@", projectLabel.labelName];
-                        CGSize size = [view.goldSignLabel.text boundingRectWithSize:CGSizeMake(MAXFLOAT, 18) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12.0f]} context:nil].size;
-                        view.goldSignViewW.constant = size.width + 11;
+                        view.des = [NSString stringWithFormat:@"%@", projectLabel.labelName];
+                        //                        view.goldSignLabel.text = [NSString stringWithFormat:@"%@", projectLabel.labelName];
+                        //                        CGSize size = [view.goldSignLabel.text boundingRectWithSize:CGSizeMake(MAXFLOAT, 18) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12.0f]} context:nil].size;
+                        //                        view.goldSignViewW.constant = size.width + 11;
                     }
                     else {
                         view.goldSignView.hidden = YES;

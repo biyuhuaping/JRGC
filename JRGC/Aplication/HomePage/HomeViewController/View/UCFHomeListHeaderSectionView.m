@@ -102,8 +102,8 @@
             _goldSignLabel.text = _des;
             CGSize size = [_des boundingRectWithSize:CGSizeMake(MAXFLOAT, 18) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12.0f]} context:nil].size;
             _goldSignViewW.constant = size.width + 11;
-            _goldSignView.backgroundColor = UIColorWithRGB(0xffdfdf);
-            _goldSignLabel.textColor = UIColorWithRGB(0xff8586);
+//            _goldSignView.backgroundColor = UIColorWithRGB(0xffdfdf);
+//            _goldSignLabel.textColor = UIColorWithRGB(0xff8586);
         }
     }
     else {
