@@ -662,7 +662,6 @@
 		7BE51D931ADE61DB007600AB /* CustomAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BE51D921ADE61DB007600AB /* CustomAlertView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		7BFE3E861AC55C98002A53A2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BFE3E851AC55C98002A53A2 /* main.m */; };
 		7BFE3E8C1AC55C98002A53A2 /* JRGC.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7BFE3E8A1AC55C98002A53A2 /* JRGC.xcdatamodeld */; };
-		7BFE3EA31AC55C98002A53A2 /* JRGCTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BFE3EA21AC55C98002A53A2 /* JRGCTests.m */; };
 		8300100D1E1356870088C707 /* UCFModifyReservedBankNumberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8300100B1E1356870088C707 /* UCFModifyReservedBankNumberViewController.m */; };
 		8300100E1E1356870088C707 /* UCFModifyReservedBankNumberViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8300100C1E1356870088C707 /* UCFModifyReservedBankNumberViewController.xib */; };
 		831B98AB1E728ECC009E46EA /* MinuteCountDownView.m in Sources */ = {isa = PBXBuildFile; fileRef = 831B98A81E728ECC009E46EA /* MinuteCountDownView.m */; };
@@ -1056,16 +1055,6 @@
 		FBEDF1DF1CB5171500116E12 /* MyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBEDF1DD1CB5171500116E12 /* MyViewController.m */; };
 		FBEDF1E01CB5171500116E12 /* MyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBEDF1DE1CB5171500116E12 /* MyViewController.xib */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		7BFE3E9D1AC55C98002A53A2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7BFE3E781AC55C98002A53A2 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 7BFE3E7F1AC55C98002A53A2;
-			remoteInfo = JRGC;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		83F2D5121DCB3F950041F913 /* Embed Watch Content */ = {
@@ -2199,9 +2188,6 @@
 		7BFE3E841AC55C98002A53A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7BFE3E851AC55C98002A53A2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7BFE3E8B1AC55C98002A53A2 /* JRGC.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = JRGC.xcdatamodel; sourceTree = "<group>"; };
-		7BFE3E9C1AC55C98002A53A2 /* JRGCTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JRGCTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		7BFE3EA11AC55C98002A53A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7BFE3EA21AC55C98002A53A2 /* JRGCTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JRGCTests.m; sourceTree = "<group>"; };
 		8300100A1E1356870088C707 /* UCFModifyReservedBankNumberViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFModifyReservedBankNumberViewController.h; sourceTree = "<group>"; };
 		8300100B1E1356870088C707 /* UCFModifyReservedBankNumberViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFModifyReservedBankNumberViewController.m; sourceTree = "<group>"; };
 		8300100C1E1356870088C707 /* UCFModifyReservedBankNumberViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFModifyReservedBankNumberViewController.xib; sourceTree = "<group>"; };
@@ -2918,13 +2904,6 @@
 				7BCE02421AC91A680084C15C /* MobileCoreServices.framework in Frameworks */,
 				7BCE023E1AC91A050084C15C /* libxml2.dylib in Frameworks */,
 				E98D2CEDE3D8D5FC57D3E7A8 /* Pods_JRGC.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7BFE3E991AC55C98002A53A2 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5561,7 +5540,6 @@
 			isa = PBXGroup;
 			children = (
 				7BFE3E821AC55C98002A53A2 /* JRGC */,
-				7BFE3E9F1AC55C98002A53A2 /* JRGCTests */,
 				7BCE02651AC91CBE0084C15C /* Frameworks */,
 				7BFE3E811AC55C98002A53A2 /* Products */,
 				688BCAEFB1C7292725F906F9 /* Pods */,
@@ -5572,7 +5550,6 @@
 			isa = PBXGroup;
 			children = (
 				7BFE3E801AC55C98002A53A2 /* JRGC.app */,
-				7BFE3E9C1AC55C98002A53A2 /* JRGCTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -5601,23 +5578,6 @@
 				7BFE3E841AC55C98002A53A2 /* Info.plist */,
 				7BFE3E851AC55C98002A53A2 /* main.m */,
 				7BCE020C1AC8FF3A0084C15C /* JRGC.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		7BFE3E9F1AC55C98002A53A2 /* JRGCTests */ = {
-			isa = PBXGroup;
-			children = (
-				7BFE3EA21AC55C98002A53A2 /* JRGCTests.m */,
-				7BFE3EA01AC55C98002A53A2 /* Supporting Files */,
-			);
-			path = JRGCTests;
-			sourceTree = "<group>";
-		};
-		7BFE3EA01AC55C98002A53A2 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				7BFE3EA11AC55C98002A53A2 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -6983,24 +6943,6 @@
 			productReference = 7BFE3E801AC55C98002A53A2 /* JRGC.app */;
 			productType = "com.apple.product-type.application";
 		};
-		7BFE3E9B1AC55C98002A53A2 /* JRGCTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 7BFE3EA91AC55C98002A53A2 /* Build configuration list for PBXNativeTarget "JRGCTests" */;
-			buildPhases = (
-				7BFE3E981AC55C98002A53A2 /* Sources */,
-				7BFE3E991AC55C98002A53A2 /* Frameworks */,
-				7BFE3E9A1AC55C98002A53A2 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				7BFE3E9E1AC55C98002A53A2 /* PBXTargetDependency */,
-			);
-			name = JRGCTests;
-			productName = JRGCTests;
-			productReference = 7BFE3E9C1AC55C98002A53A2 /* JRGCTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -7036,11 +6978,6 @@
 							};
 						};
 					};
-					7BFE3E9B1AC55C98002A53A2 = {
-						CreatedOnToolsVersion = 6.1;
-						ProvisioningStyle = Manual;
-						TestTargetID = 7BFE3E7F1AC55C98002A53A2;
-					};
 				};
 			};
 			buildConfigurationList = 7BFE3E7B1AC55C98002A53A2 /* Build configuration list for PBXProject "JRGC" */;
@@ -7058,7 +6995,6 @@
 			projectRoot = "";
 			targets = (
 				7BFE3E7F1AC55C98002A53A2 /* JRGC */,
-				7BFE3E9B1AC55C98002A53A2 /* JRGCTests */,
 			);
 		};
 /* End PBXProject section */
@@ -7403,13 +7339,6 @@
 				83AB49601F6A766500C4231F /* UCFAccountPieCharViewController.xib in Resources */,
 				4A809CD11B40F7A200164EE5 /* SubInvestmentCell.xib in Resources */,
 				74877CD31FB2AC2400F32428 /* UCFTakingDeliveryViewController.xib in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7BFE3E9A1AC55C98002A53A2 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -8129,23 +8058,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7BFE3E981AC55C98002A53A2 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7BFE3EA31AC55C98002A53A2 /* JRGCTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		7BFE3E9E1AC55C98002A53A2 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 7BFE3E7F1AC55C98002A53A2 /* JRGC */;
-			targetProxy = 7BFE3E9D1AC55C98002A53A2 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		7BFE3EA41AC55C98002A53A2 /* Debug */ = {
@@ -8364,44 +8277,6 @@
 			};
 			name = Release;
 		};
-		7BFE3EAA1AC55C98002A53A2 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = "";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = JRGCTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/JRGC.app/JRGC";
-			};
-			name = Debug;
-		};
-		7BFE3EAB1AC55C98002A53A2 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = "";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = JRGCTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/JRGC.app/JRGC";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -8419,15 +8294,6 @@
 			buildConfigurations = (
 				7BFE3EA71AC55C98002A53A2 /* Debug */,
 				7BFE3EA81AC55C98002A53A2 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		7BFE3EA91AC55C98002A53A2 /* Build configuration list for PBXNativeTarget "JRGCTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				7BFE3EAA1AC55C98002A53A2 /* Debug */,
-				7BFE3EAB1AC55C98002A53A2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
