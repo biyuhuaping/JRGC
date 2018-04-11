@@ -47,12 +47,6 @@
 		25F445C41D66E276006813BB /* UCFChoseBankViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25F445C21D66E276006813BB /* UCFChoseBankViewController.xib */; };
 		25F538B41D881B0A0039262F /* UCFPurchaseWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25F538B21D881B0A0039262F /* UCFPurchaseWebView.m */; };
 		25F538B51D881B0A0039262F /* UCFPurchaseWebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25F538B31D881B0A0039262F /* UCFPurchaseWebView.xib */; };
-		333FD805206A43EA00CEA03C /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 333FD7FC206A43EA00CEA03C /* AFURLResponseSerialization.m */; };
-		333FD806206A43EA00CEA03C /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 333FD7FD206A43EA00CEA03C /* AFHTTPSessionManager.m */; };
-		333FD807206A43EA00CEA03C /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 333FD7FF206A43EA00CEA03C /* AFURLSessionManager.m */; };
-		333FD808206A43EA00CEA03C /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 333FD800206A43EA00CEA03C /* AFURLRequestSerialization.m */; };
-		333FD809206A43EA00CEA03C /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 333FD802206A43EA00CEA03C /* AFNetworkReachabilityManager.m */; };
-		333FD80A206A43EA00CEA03C /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 333FD803206A43EA00CEA03C /* AFSecurityPolicy.m */; };
 		333FD810206B836F00CEA03C /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 333FD80E206B836F00CEA03C /* Reachability.m */; };
 		3343FF36206CDECB002A2153 /* UCF404ErrorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3343FF32206CDECA002A2153 /* UCF404ErrorView.m */; };
 		3343FF37206CDECB002A2153 /* UCFNoDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3343FF33206CDECA002A2153 /* UCFNoDataView.m */; };
@@ -837,7 +831,6 @@
 		84FAB60C1C7C575300D0942F /* MGSwipeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FAB6091C7C575300D0942F /* MGSwipeButton.m */; };
 		84FAB60D1C7C575300D0942F /* MGSwipeTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FAB60B1C7C575300D0942F /* MGSwipeTableCell.m */; };
 		84FFA5301C7EAA9200ACD835 /* UIScrollView+TouchScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FFA52F1C7EAA9200ACD835 /* UIScrollView+TouchScrollView.m */; };
-		99BF1818C0339A29E04ED02D /* Pods_JRGCTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB47AF9E416082401511ED8B /* Pods_JRGCTests.framework */; };
 		A81A6F571FBD910000BDCE50 /* ServiceChargeView2.xib in Resources */ = {isa = PBXBuildFile; fileRef = A81A6F561FBD910000BDCE50 /* ServiceChargeView2.xib */; };
 		A81A6F5A1FBD92CD00BDCE50 /* ServiceChargeView2.m in Sources */ = {isa = PBXBuildFile; fileRef = A81A6F591FBD92CD00BDCE50 /* ServiceChargeView2.m */; };
 		A81F40061F4E86F80018B673 /* UCFRebateGoldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A81F40041F4E86F80018B673 /* UCFRebateGoldCell.m */; };
@@ -1157,19 +1150,6 @@
 		25F538B21D881B0A0039262F /* UCFPurchaseWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFPurchaseWebView.m; sourceTree = "<group>"; };
 		25F538B31D881B0A0039262F /* UCFPurchaseWebView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFPurchaseWebView.xib; sourceTree = "<group>"; };
 		32CA3369118CF695601F1379 /* Pods-JRGC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JRGC.release.xcconfig"; path = "Pods/Target Support Files/Pods-JRGC/Pods-JRGC.release.xcconfig"; sourceTree = "<group>"; };
-		333FD7F8206A43EA00CEA03C /* AFSecurityPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSecurityPolicy.h; sourceTree = "<group>"; };
-		333FD7F9206A43EA00CEA03C /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
-		333FD7FA206A43EA00CEA03C /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
-		333FD7FB206A43EA00CEA03C /* AFURLRequestSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLRequestSerialization.h; sourceTree = "<group>"; };
-		333FD7FC206A43EA00CEA03C /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLResponseSerialization.m; sourceTree = "<group>"; };
-		333FD7FD206A43EA00CEA03C /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPSessionManager.m; sourceTree = "<group>"; };
-		333FD7FE206A43EA00CEA03C /* AFURLResponseSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLResponseSerialization.h; sourceTree = "<group>"; };
-		333FD7FF206A43EA00CEA03C /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
-		333FD800206A43EA00CEA03C /* AFURLRequestSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLRequestSerialization.m; sourceTree = "<group>"; };
-		333FD801206A43EA00CEA03C /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
-		333FD802206A43EA00CEA03C /* AFNetworkReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetworkReachabilityManager.m; sourceTree = "<group>"; };
-		333FD803206A43EA00CEA03C /* AFSecurityPolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSecurityPolicy.m; sourceTree = "<group>"; };
-		333FD804206A43EA00CEA03C /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
 		333FD80E206B836F00CEA03C /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		333FD80F206B836F00CEA03C /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		3343FF32206CDECA002A2153 /* UCF404ErrorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCF404ErrorView.m; sourceTree = "<group>"; };
@@ -1309,7 +1289,6 @@
 		4AFAA8A51B0D76AB005C9BEC /* UCFSelectPayBackController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFSelectPayBackController.h; sourceTree = "<group>"; };
 		4AFAA8A61B0D76AB005C9BEC /* UCFSelectPayBackController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFSelectPayBackController.m; sourceTree = "<group>"; };
 		4AFE198C1CA0006200EE6768 /* TopUpAndCash.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TopUpAndCash.storyboard; sourceTree = "<group>"; };
-		6166389982EC90002B8A04B4 /* Pods-JRGCTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JRGCTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-JRGCTests/Pods-JRGCTests.release.xcconfig"; sourceTree = "<group>"; };
 		7404C9FF1FB44EA7002811E0 /* UCFExtractGoldModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFExtractGoldModel.h; sourceTree = "<group>"; };
 		7404CA001FB44EA7002811E0 /* UCFExtractGoldModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFExtractGoldModel.m; sourceTree = "<group>"; };
 		7404CA021FB4502E002811E0 /* UCFExtractGoldItemModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFExtractGoldItemModel.h; sourceTree = "<group>"; };
@@ -2483,7 +2462,6 @@
 		84FAB60B1C7C575300D0942F /* MGSwipeTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSwipeTableCell.m; sourceTree = "<group>"; };
 		84FFA52E1C7EAA9200ACD835 /* UIScrollView+TouchScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+TouchScrollView.h"; sourceTree = "<group>"; };
 		84FFA52F1C7EAA9200ACD835 /* UIScrollView+TouchScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+TouchScrollView.m"; sourceTree = "<group>"; };
-		A4482726158522348AE09C00 /* Pods-JRGCTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JRGCTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JRGCTests/Pods-JRGCTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A81A6F561FBD910000BDCE50 /* ServiceChargeView2.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ServiceChargeView2.xib; sourceTree = "<group>"; };
 		A81A6F581FBD92CD00BDCE50 /* ServiceChargeView2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ServiceChargeView2.h; sourceTree = "<group>"; };
 		A81A6F591FBD92CD00BDCE50 /* ServiceChargeView2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ServiceChargeView2.m; sourceTree = "<group>"; };
@@ -2947,7 +2925,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				99BF1818C0339A29E04ED02D /* Pods_JRGCTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3067,26 +3044,6 @@
 			path = resualtPage;
 			sourceTree = "<group>";
 		};
-		333FD7F7206A43EA00CEA03C /* AFNetworking */ = {
-			isa = PBXGroup;
-			children = (
-				333FD7F8206A43EA00CEA03C /* AFSecurityPolicy.h */,
-				333FD7F9206A43EA00CEA03C /* AFNetworkReachabilityManager.h */,
-				333FD7FA206A43EA00CEA03C /* AFURLSessionManager.h */,
-				333FD7FB206A43EA00CEA03C /* AFURLRequestSerialization.h */,
-				333FD7FC206A43EA00CEA03C /* AFURLResponseSerialization.m */,
-				333FD7FD206A43EA00CEA03C /* AFHTTPSessionManager.m */,
-				333FD7FE206A43EA00CEA03C /* AFURLResponseSerialization.h */,
-				333FD7FF206A43EA00CEA03C /* AFURLSessionManager.m */,
-				333FD800206A43EA00CEA03C /* AFURLRequestSerialization.m */,
-				333FD801206A43EA00CEA03C /* AFNetworking.h */,
-				333FD802206A43EA00CEA03C /* AFNetworkReachabilityManager.m */,
-				333FD803206A43EA00CEA03C /* AFSecurityPolicy.m */,
-				333FD804206A43EA00CEA03C /* AFHTTPSessionManager.h */,
-			);
-			path = AFNetworking;
-			sourceTree = "<group>";
-		};
 		3343FF25206CCDE7002A2153 /* NewLib */ = {
 			isa = PBXGroup;
 			children = (
@@ -3125,7 +3082,6 @@
 				FBA0A2FC1C183B0F000E1C7A /* JPush_lib */,
 				FB65C94B1D8294E600476E67 /* GrowingIO-iOS-SDK */,
 				FB55552F1BCE37570013894F /* UMAnalytics_Sdk_3.4.6 */,
-				333FD7F7206A43EA00CEA03C /* AFNetworking */,
 			);
 			path = NewLib;
 			sourceTree = "<group>";
@@ -3533,8 +3489,6 @@
 			children = (
 				3C3D11AF5BBAC2E558A4FAA0 /* Pods-JRGC.debug.xcconfig */,
 				32CA3369118CF695601F1379 /* Pods-JRGC.release.xcconfig */,
-				A4482726158522348AE09C00 /* Pods-JRGCTests.debug.xcconfig */,
-				6166389982EC90002B8A04B4 /* Pods-JRGCTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -7033,12 +6987,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7BFE3EA91AC55C98002A53A2 /* Build configuration list for PBXNativeTarget "JRGCTests" */;
 			buildPhases = (
-				2539DA60D57F7AD4092F0A39 /* [CP] Check Pods Manifest.lock */,
 				7BFE3E981AC55C98002A53A2 /* Sources */,
 				7BFE3E991AC55C98002A53A2 /* Frameworks */,
 				7BFE3E9A1AC55C98002A53A2 /* Resources */,
-				8D2A30FE0E4495556A5F0B4F /* [CP] Embed Pods Frameworks */,
-				F4CE3868161A8A097BD22366 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -7471,31 +7422,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-JRGC/Pods-JRGC-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-JRGC/Pods-JRGC-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		2539DA60D57F7AD4092F0A39 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-JRGCTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		556CA7935987A546455DE5BA /* [CP] Copy Pods Resources */ = {
@@ -7531,36 +7467,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		8D2A30FE0E4495556A5F0B4F /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-JRGCTests/Pods-JRGCTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F4CE3868161A8A097BD22366 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-JRGCTests/Pods-JRGCTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -7582,7 +7488,6 @@
 				74270C9D1EC58F6800F9419B /* UCFHomeListCell.m in Sources */,
 				74270CA41EC58F6800F9419B /* UCFSignView.m in Sources */,
 				83AB495F1F6A766500C4231F /* UCFAccountPieCharViewController.m in Sources */,
-				333FD808206A43EA00CEA03C /* AFURLRequestSerialization.m in Sources */,
 				FB4F9E731D62A6F800CCB492 /* TradePasswordVC.m in Sources */,
 				7B2E568E1ADBBE5F008B0F9E /* UCFRetrievePasswordStepOneViewController.m in Sources */,
 				83CD843A1F13A50800227704 /* UCFBatchBidModel.m in Sources */,
@@ -7734,7 +7639,6 @@
 				4A0DA1551B26D8C4004E84F6 /* UCFPurchaseBidViewController.m in Sources */,
 				741CA7A21E724C44006056A8 /* UCFLoanViewController.m in Sources */,
 				FB7EDE3F1D6BFCD700C3E924 /* UCFBaseViewController.m in Sources */,
-				333FD806206A43EA00CEA03C /* AFHTTPSessionManager.m in Sources */,
 				4A809CCF1B40F4DF00164EE5 /* SubInvestmentCell.m in Sources */,
 				E31141601D92769E00FF880A /* UCFWebViewJavascriptBridgeBBS.m in Sources */,
 				FB2173191AF20DFC00649AA0 /* UCFBackMoneyCell.m in Sources */,
@@ -8015,7 +7919,6 @@
 				83CD842C1F13A50800227704 /* UCFHonerViewController.m in Sources */,
 				7BA6E4C11AD6731900FE8C37 /* UIButton+WebCache.m in Sources */,
 				840A79431C2A7C160059A946 /* UCFMessageCenterViewController.m in Sources */,
-				333FD807206A43EA00CEA03C /* AFURLSessionManager.m in Sources */,
 				FB120BB41ADE462F00023365 /* CircleProgressView.m in Sources */,
 				744BE8591F6BE01D00107FAA /* UCFHomeIconCollectionCell.m in Sources */,
 				7BDD8FC71AE0DD67007A5CE8 /* MDRadialProgressLabel.m in Sources */,
@@ -8041,7 +7944,6 @@
 				746FFE251B0059BB00FF927F /* UCFBindCardOneTableViewCell.m in Sources */,
 				E37086BA1D61BA5B0041D293 /* UCFHuiShangChooseBankViewCell.m in Sources */,
 				832C3C111F443AD200ECAA4A /* UCFGoldCouponReturn.m in Sources */,
-				333FD80A206A43EA00CEA03C /* AFSecurityPolicy.m in Sources */,
 				83D64F631F1CB8AE00A839F2 /* UCFGoldPurchaseRecordCell.m in Sources */,
 				748ED7A51CC74F3200690215 /* SettingMainButton.m in Sources */,
 				74DBAC791D5864C200F6F6B1 /* UCFHuiShangBankViewController.m in Sources */,
@@ -8109,7 +8011,6 @@
 				7491820D1EC166F000AC1ECE /* TADotView.m in Sources */,
 				33717877206CCB0B00A6366C /* UCFTipCell.m in Sources */,
 				7BD588031B098E12005091D3 /* UCFNoPermissionViewController.m in Sources */,
-				333FD809206A43EA00CEA03C /* AFNetworkReachabilityManager.m in Sources */,
 				3343FF4A206CE37A002A2153 /* FullWebViewController.m in Sources */,
 				3343FF4E206CE4AA002A2153 /* UpgradeAccountVC.m in Sources */,
 				74931A061B13267600143424 /* NZLabel.m in Sources */,
@@ -8147,7 +8048,6 @@
 				74E535ED1AE5FD6400DAABFC /* UCFAboutUsViewController.m in Sources */,
 				A81F40061F4E86F80018B673 /* UCFRebateGoldCell.m in Sources */,
 				A830DE801F8DC91A003855B9 /* UCFCalendarModularHeaderView.m in Sources */,
-				333FD805206A43EA00CEA03C /* AFURLResponseSerialization.m in Sources */,
 				744F8BEE1F3327AF005FF01B /* UCFMyReservedViewController.m in Sources */,
 				832D521F1D8FE5EA0060F1F7 /* UCFWithdrawCashResultWebView.m in Sources */,
 				747A91211B01B11100FE2334 /* UCFConstractModel.m in Sources */,
@@ -8383,7 +8283,10 @@
 					"$(PROJECT_DIR)/JRGC/NewLib/umeng_ios_social_sdk_6.4-2.6_arm64_custom/UMSocial/UMSocialSDKPlugin",
 					"$(PROJECT_DIR)/JRGC/NewLib/TongDun/",
 				);
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"$(inherited)",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp299;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -8445,7 +8348,10 @@
 					"$(PROJECT_DIR)/JRGC/NewLib/umeng_ios_social_sdk_6.4-2.6_arm64_custom/UMSocial/UMSocialSDKPlugin",
 					"$(PROJECT_DIR)/JRGC/NewLib/TongDun/",
 				);
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"$(inherited)",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp299;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -8460,7 +8366,6 @@
 		};
 		7BFE3EAA1AC55C98002A53A2 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A4482726158522348AE09C00 /* Pods-JRGCTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = "";
@@ -8482,7 +8387,6 @@
 		};
 		7BFE3EAB1AC55C98002A53A2 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6166389982EC90002B8A04B4 /* Pods-JRGCTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = "";
