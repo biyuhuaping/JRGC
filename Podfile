@@ -6,6 +6,6 @@ target 'JRGC' do
   use_frameworks!
 
 pod 'AFNetworking', '~> 3.1.0'
-
+pod 'KVOController', '~> 1.2.0'
 
 end
