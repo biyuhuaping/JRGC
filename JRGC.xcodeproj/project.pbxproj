@@ -150,7 +150,6 @@
 		7412323C1F14BB150061408A /* UCFPickView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7412323B1F14BB150061408A /* UCFPickView.m */; };
 		7412323E1F14BB250061408A /* UCFPickView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7412323D1F14BB250061408A /* UCFPickView.xib */; };
 		7418FEF41FDA686500CD8C87 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCE023F1AC91A5E0084C15C /* SystemConfiguration.framework */; };
-		7418FEF51FDA689700CD8C87 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7418FEF31FDA680B00CD8C87 /* StoreKit.framework */; };
 		741CA7A21E724C44006056A8 /* UCFLoanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 741CA7A01E724C44006056A8 /* UCFLoanViewController.m */; };
 		741CA7A31E724C44006056A8 /* UCFLoanViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 741CA7A11E724C44006056A8 /* UCFLoanViewController.xib */; };
 		741CA7A71E724C64006056A8 /* UCFDiscoveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 741CA7A51E724C64006056A8 /* UCFDiscoveryViewController.m */; };
@@ -625,7 +624,6 @@
 		7BCE02381AC915720084C15C /* NSString+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCE02351AC915720084C15C /* NSString+Base64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		7BCE023C1AC915A80084C15C /* SFHFKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCE023B1AC915A80084C15C /* SFHFKeychainUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		7BCE023E1AC91A050084C15C /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCE023D1AC91A050084C15C /* libxml2.dylib */; };
-		7BCE02401B833B7000F9D73F /* IPDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCE023F1B833B7000F9D73F /* IPDetector.m */; };
 		7BCE02421AC91A680084C15C /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCE02411AC91A680084C15C /* MobileCoreServices.framework */; };
 		7BCE02441AC91A720084C15C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCE02431AC91A720084C15C /* CoreGraphics.framework */; };
 		7BCE02461AC91A780084C15C /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCE02451AC91A780084C15C /* CFNetwork.framework */; };
@@ -964,7 +962,6 @@
 		ED0647FB1C7ABF7300311AA1 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED0647FA1C7ABF7300311AA1 /* AssetsLibrary.framework */; };
 		ED0647FD1C7ABFA400311AA1 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED0647FC1C7ABFA400311AA1 /* CoreImage.framework */; };
 		ED70C8791C7C581E00F45AC4 /* ChooseFaceOrGesAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED70C8781C7C581E00F45AC4 /* ChooseFaceOrGesAlertView.m */; };
-		EDD13F691C196D860088A378 /* SCGIFImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = EDD13F681C196D860088A378 /* SCGIFImageView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		EDEAB70C1C7D4BAF00BBF3B1 /* UCFIdNumberTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = EDEAB70B1C7D4BAF00BBF3B1 /* UCFIdNumberTextField.m */; };
 		EDEC8BFA1CB3BA6300815228 /* WPAttributedStyleAction.m in Sources */ = {isa = PBXBuildFile; fileRef = EDEC8BF51CB3BA6300815228 /* WPAttributedStyleAction.m */; };
 		EDEC8BFB1CB3BA6300815228 /* WPHotspotLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = EDEC8BF71CB3BA6300815228 /* WPHotspotLabel.m */; };
@@ -1317,7 +1314,6 @@
 		7412323A1F14BB150061408A /* UCFPickView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFPickView.h; sourceTree = "<group>"; };
 		7412323B1F14BB150061408A /* UCFPickView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFPickView.m; sourceTree = "<group>"; };
 		7412323D1F14BB250061408A /* UCFPickView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFPickView.xib; sourceTree = "<group>"; };
-		7418FEF31FDA680B00CD8C87 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		741CA79F1E724C44006056A8 /* UCFLoanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFLoanViewController.h; sourceTree = "<group>"; };
 		741CA7A01E724C44006056A8 /* UCFLoanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFLoanViewController.m; sourceTree = "<group>"; };
 		741CA7A11E724C44006056A8 /* UCFLoanViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFLoanViewController.xib; sourceTree = "<group>"; };
@@ -2131,9 +2127,7 @@
 		7BCE023A1AC915A80084C15C /* SFHFKeychainUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFHFKeychainUtils.h; sourceTree = "<group>"; };
 		7BCE023B1AC915A80084C15C /* SFHFKeychainUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFHFKeychainUtils.m; sourceTree = "<group>"; };
 		7BCE023D1AC91A050084C15C /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
-		7BCE023E1B833B7000F9D73F /* IPDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPDetector.h; sourceTree = "<group>"; };
 		7BCE023F1AC91A5E0084C15C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		7BCE023F1B833B7000F9D73F /* IPDetector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPDetector.m; sourceTree = "<group>"; };
 		7BCE02411AC91A680084C15C /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		7BCE02431AC91A720084C15C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		7BCE02451AC91A780084C15C /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -2682,8 +2676,6 @@
 		ED0647FC1C7ABFA400311AA1 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		ED70C8771C7C581E00F45AC4 /* ChooseFaceOrGesAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChooseFaceOrGesAlertView.h; path = docs/ChooseFaceOrGesAlertView.h; sourceTree = "<group>"; };
 		ED70C8781C7C581E00F45AC4 /* ChooseFaceOrGesAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChooseFaceOrGesAlertView.m; path = docs/ChooseFaceOrGesAlertView.m; sourceTree = "<group>"; };
-		EDD13F671C196D860088A378 /* SCGIFImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCGIFImageView.h; sourceTree = "<group>"; };
-		EDD13F681C196D860088A378 /* SCGIFImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCGIFImageView.m; sourceTree = "<group>"; };
 		EDEAB70A1C7D4BAF00BBF3B1 /* UCFIdNumberTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFIdNumberTextField.h; sourceTree = "<group>"; };
 		EDEAB70B1C7D4BAF00BBF3B1 /* UCFIdNumberTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFIdNumberTextField.m; sourceTree = "<group>"; };
 		EDEC8BF41CB3BA6300815228 /* WPAttributedStyleAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPAttributedStyleAction.h; sourceTree = "<group>"; };
@@ -2841,7 +2833,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7418FEF51FDA689700CD8C87 /* StoreKit.framework in Frameworks */,
 				7418FEF41FDA686500CD8C87 /* SystemConfiguration.framework in Frameworks */,
 				A83048D81F67E4380007FB4F /* AlicloudUtils.framework in Frameworks */,
 				A83048D91F67E4380007FB4F /* BCConnectorBundle.framework in Frameworks */,
@@ -3026,8 +3017,6 @@
 		3343FF25206CCDE7002A2153 /* NewLib */ = {
 			isa = PBXGroup;
 			children = (
-				7BCE023E1B833B7000F9D73F /* IPDetector.h */,
-				7BCE023F1B833B7000F9D73F /* IPDetector.m */,
 				FBA5BE991B0EDB0D000CDDC3 /* GiFHUD */,
 				7BD35A8C1AD61E4200389D6B /* LLLockView */,
 				749319EB1B13267600143424 /* NZLabel */,
@@ -3220,7 +3209,6 @@
 		3371786A206CC7CC00A6366C /* NewTools */ = {
 			isa = PBXGroup;
 			children = (
-				7BC001481ACE2B39001D84D0 /* BaseAlertView */,
 				7BD587FD1B098DCF005091D3 /* ErrorAndNoPermission */,
 				7BA6E4681AD668F300FE8C37 /* UCFLockViewController */,
 				7BC217251ACD4A030086D374 /* GuideController */,
@@ -3236,7 +3224,6 @@
 				4A92303C1B68A8FE00E5844C /* ImageNetClass */,
 				4AEBC5FB1B58DFD20034C9C2 /* Singleton */,
 				4A0DC7FF1BCF5B1300835E95 /* HWWeakTimer */,
-				EDD13F661C196D860088A378 /* SCGifImageView */,
 				4A231C4E1BE9B0C500228C88 /* TabBarBadge */,
 				EDEC8BF31CB3BA6300815228 /* wpLabel */,
 				EDEF5E8F1CBF761700592B20 /* guideView */,
@@ -3308,6 +3295,21 @@
 				33717874206CCB0B00A6366C /* UCFTipCell.xib */,
 			);
 			path = TipCell;
+			sourceTree = "<group>";
+		};
+		33C08711208086740003DE76 /* V2 */ = {
+			isa = PBXGroup;
+			children = (
+				33C08712208086A50003DE76 /* Function */,
+			);
+			path = V2;
+			sourceTree = "<group>";
+		};
+		33C08712208086A50003DE76 /* Function */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Function;
 			sourceTree = "<group>";
 		};
 		4A0DC7FF1BCF5B1300835E95 /* HWWeakTimer */ = {
@@ -5127,14 +5129,6 @@
 			path = WebImage;
 			sourceTree = "<group>";
 		};
-		7BC001481ACE2B39001D84D0 /* BaseAlertView */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = BaseAlertView;
-			path = Base;
-			sourceTree = "<group>";
-		};
 		7BC217251ACD4A030086D374 /* GuideController */ = {
 			isa = PBXGroup;
 			children = (
@@ -5382,7 +5376,6 @@
 		7BCE02651AC91CBE0084C15C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				7418FEF31FDA680B00CD8C87 /* StoreKit.framework */,
 				A85A2EBE1F431CEF004BF4C1 /* QuickLook.framework */,
 				4ABED3AA1E2FB28E006B3F62 /* libresolv.tbd */,
 				4ABED3A81E2FACE3006B3F62 /* UserNotifications.framework */,
@@ -5557,6 +5550,7 @@
 		7BFE3E821AC55C98002A53A2 /* JRGC */ = {
 			isa = PBXGroup;
 			children = (
+				33C08711208086740003DE76 /* V2 */,
 				AE43B84F1DD2D8BE001D0BD0 /* JRGC.entitlements */,
 				FB7EDE371D6BFCD700C3E924 /* Aplication */,
 				3343FF25206CCDE7002A2153 /* NewLib */,
@@ -6561,15 +6555,6 @@
 			path = UCFWebView;
 			sourceTree = "<group>";
 		};
-		EDD13F661C196D860088A378 /* SCGifImageView */ = {
-			isa = PBXGroup;
-			children = (
-				EDD13F671C196D860088A378 /* SCGIFImageView.h */,
-				EDD13F681C196D860088A378 /* SCGIFImageView.m */,
-			);
-			path = SCGifImageView;
-			sourceTree = "<group>";
-		};
 		EDEC8BF31CB3BA6300815228 /* wpLabel */ = {
 			isa = PBXGroup;
 			children = (
@@ -7486,7 +7471,6 @@
 				74270D421EC5960100F9419B /* UCFDataDetailModel.m in Sources */,
 				25950EB81D7FB6EB00E4CCBA /* CWAnimationView.m in Sources */,
 				83DAEFC21F166A3B00D7948F /* UCFGoldAuthorizationViewController.m in Sources */,
-				EDD13F691C196D860088A378 /* SCGIFImageView.m in Sources */,
 				A8E01A801EEA4C6F003E3BDC /* UCFTransfeTableViewCell.m in Sources */,
 				83CD72A51FB4449C007138ED /* UCFDrawGoldModel.m in Sources */,
 				74F649311F46EA0400328235 /* UCFCashGoldHeader.m in Sources */,
@@ -7679,7 +7663,6 @@
 				E3C1179A1D40CFCC0053A052 /* UCFContributionValueCell.m in Sources */,
 				74BDA9A21F0A7B990054403F /* UCFCalendarGroup.m in Sources */,
 				E3A96B091CBF837C00E8884F /* UCFWorkPointsViewController.m in Sources */,
-				7BCE02401B833B7000F9D73F /* IPDetector.m in Sources */,
 				74AFB14B1EE95895007DBAFC /* UCFHomeAPIManager.m in Sources */,
 				25950EBB1D7FB6EC00E4CCBA /* CWCommon.m in Sources */,
 				7BC8AA1D1AD4C74200BF4660 /* UCFMyArrears.m in Sources */,

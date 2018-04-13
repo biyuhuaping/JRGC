@@ -20,7 +20,7 @@
 #import "Common.h"
 #import "ToolSingleTon.h"
 #import "UMSocialQQHandler.h"
-#import "IPDetector.h"
+
 #import "UIImageView+WebCache.h"
 #import "UIImageView+NetImageView.h"
 #import "UCFSecurityCenterViewController.h"
