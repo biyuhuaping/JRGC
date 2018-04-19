@@ -24,7 +24,6 @@
 // 资金的千位格式化
 #import "NSString+FormatForThousand.h"
 
-#import "GiFHUD.h"
 #import "CoustomLab.h"
 
 @interface UCFBaseViewController : UIViewController<NetworkModuleDelegate,MBProgressHUDDelegate>

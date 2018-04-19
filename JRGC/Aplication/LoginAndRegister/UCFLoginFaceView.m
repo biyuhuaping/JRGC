@@ -27,7 +27,6 @@
 // 资金的千位格式化
 #import "NSString+FormatForThousand.h"
 
-#import "GiFHUD.h"
 
 
 #import "UCFLoginFaceView.h"

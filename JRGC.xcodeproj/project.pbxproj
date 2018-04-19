@@ -1011,7 +1011,6 @@
 		FB88C90C1AF9F92E00D2EE93 /* UIDic+Safe.m in Sources */ = {isa = PBXBuildFile; fileRef = FB88C9071AF9F92E00D2EE93 /* UIDic+Safe.m */; };
 		FB88C90D1AF9F92E00D2EE93 /* YcArray.m in Sources */ = {isa = PBXBuildFile; fileRef = FB88C9091AF9F92E00D2EE93 /* YcArray.m */; };
 		FB88C90E1AF9F92E00D2EE93 /* YcMutableArray.m in Sources */ = {isa = PBXBuildFile; fileRef = FB88C90B1AF9F92E00D2EE93 /* YcMutableArray.m */; };
-		FBA5BE9C1B0EDB0D000CDDC3 /* GiFHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = FBA5BE9B1B0EDB0D000CDDC3 /* GiFHUD.m */; };
 		FBA80F531AE6472C0066BF99 /* InvestmentItemInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = FBA80F521AE6472C0066BF99 /* InvestmentItemInfo.m */; };
 		FBAEDA001C191A08000C0AA1 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBAED9FF1C191A08000C0AA1 /* CoreFoundation.framework */; };
 		FBAEDA021C191AFE000C0AA1 /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = FBAEDA011C191AFE000C0AA1 /* PushConfig.plist */; };
@@ -2738,8 +2737,6 @@
 		FB88C9091AF9F92E00D2EE93 /* YcArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YcArray.m; sourceTree = "<group>"; };
 		FB88C90A1AF9F92E00D2EE93 /* YcMutableArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YcMutableArray.h; sourceTree = "<group>"; };
 		FB88C90B1AF9F92E00D2EE93 /* YcMutableArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YcMutableArray.m; sourceTree = "<group>"; };
-		FBA5BE9A1B0EDB0D000CDDC3 /* GiFHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GiFHUD.h; sourceTree = "<group>"; };
-		FBA5BE9B1B0EDB0D000CDDC3 /* GiFHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GiFHUD.m; sourceTree = "<group>"; };
 		FBA80F511AE6472C0066BF99 /* InvestmentItemInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvestmentItemInfo.h; sourceTree = "<group>"; };
 		FBA80F521AE6472C0066BF99 /* InvestmentItemInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvestmentItemInfo.m; sourceTree = "<group>"; };
 		FBAED9FF1C191A08000C0AA1 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
@@ -2966,7 +2963,6 @@
 		3343FF25206CCDE7002A2153 /* NewLib */ = {
 			isa = PBXGroup;
 			children = (
-				FBA5BE991B0EDB0D000CDDC3 /* GiFHUD */,
 				7BD35A8C1AD61E4200389D6B /* LLLockView */,
 				749319EB1B13267600143424 /* NZLabel */,
 				A824BFB61FCD499200E32F39 /* umeng_ios_social_sdk_6.4-2.6_arm64_custom */,
@@ -3244,19 +3240,67 @@
 			path = TipCell;
 			sourceTree = "<group>";
 		};
+		33B1FCC62088479D009D48DA /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				33B1FCCA208847D9009D48DA /* Singleton */,
+				33B1FCC9208847CE009D48DA /* Macro */,
+				33B1FCC8208847C6009D48DA /* Tool */,
+				33B1FCC7208847BA009D48DA /* Category */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		33B1FCC7208847BA009D48DA /* Category */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		33B1FCC8208847C6009D48DA /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Tool;
+			sourceTree = "<group>";
+		};
+		33B1FCC9208847CE009D48DA /* Macro */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Macro;
+			sourceTree = "<group>";
+		};
+		33B1FCCA208847D9009D48DA /* Singleton */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Singleton;
+			sourceTree = "<group>";
+		};
+		33B1FCCB208847FA009D48DA /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Vendor;
+			sourceTree = "<group>";
+		};
 		33C08711208086740003DE76 /* V2 */ = {
 			isa = PBXGroup;
 			children = (
-				33C08712208086A50003DE76 /* Function */,
+				33B1FCCB208847FA009D48DA /* Vendor */,
+				33B1FCC62088479D009D48DA /* Support */,
+				33C08712208086A50003DE76 /* Class */,
 			);
 			path = V2;
 			sourceTree = "<group>";
 		};
-		33C08712208086A50003DE76 /* Function */ = {
+		33C08712208086A50003DE76 /* Class */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			path = Function;
+			path = Class;
 			sourceTree = "<group>";
 		};
 		4A0DC7FF1BCF5B1300835E95 /* HWWeakTimer */ = {
@@ -6703,15 +6747,6 @@
 			path = JPush_lib;
 			sourceTree = "<group>";
 		};
-		FBA5BE991B0EDB0D000CDDC3 /* GiFHUD */ = {
-			isa = PBXGroup;
-			children = (
-				FBA5BE9A1B0EDB0D000CDDC3 /* GiFHUD.h */,
-				FBA5BE9B1B0EDB0D000CDDC3 /* GiFHUD.m */,
-			);
-			path = GiFHUD;
-			sourceTree = "<group>";
-		};
 		FBA80F501AE6472C0066BF99 /* UCFLatestProject */ = {
 			isa = PBXGroup;
 			children = (
@@ -7415,7 +7450,6 @@
 				4A231C541BE9B18400228C88 /* UITabBar+TabBarBadge.m in Sources */,
 				74270D361EC595FA00F9419B /* UCFMyRebateViewCtrl.m in Sources */,
 				74BDA9901F09F6C60054403F /* FSCalendarScopeHandle.m in Sources */,
-				FBA5BE9C1B0EDB0D000CDDC3 /* GiFHUD.m in Sources */,
 				74F2AF891D616924008C433C /* UCFHuiBuinessListModel.m in Sources */,
 				4ADA3A431B0DCE82000B29FD /* SelectCoupleCell.m in Sources */,
 				7BCE022D1AC9141A0084C15C /* MBProgressHUD+HJ.m in Sources */,

@@ -77,7 +77,6 @@
 //请求成功及结果
 - (void)endPost:(id)result tag:(NSNumber *)tag
 {
-    [GiFHUD dismiss];
     [MBProgressHUD hideOriginAllHUDsForView:self.view animated:YES];
     NSMutableDictionary *dic = [result objectFromJSONString];
     
@@ -127,7 +126,6 @@
 //请求失败
 - (void)errorPost:(NSError*)err tag:(NSNumber*)tag
 {
-    [GiFHUD dismiss];
     if (tag.intValue == kSXtagInviteRebate) {
         [MBProgressHUD displayHudError:err.userInfo[@"NSLocalizedDescription"]];
     }
