@@ -59,6 +59,8 @@
 		33717876206CCB0B00A6366C /* UCFDirectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33717870206CCB0A00A6366C /* UCFDirectCell.xib */; };
 		33717877206CCB0B00A6366C /* UCFTipCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33717873206CCB0B00A6366C /* UCFTipCell.m */; };
 		33717878206CCB0B00A6366C /* UCFTipCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33717874206CCB0B00A6366C /* UCFTipCell.xib */; };
+		33B1FCD120887602009D48DA /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B1FCCE20887602009D48DA /* MBProgressHUD.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		33B1FCD220887602009D48DA /* MBProgressHUD+HJ.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B1FCD020887602009D48DA /* MBProgressHUD+HJ.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4A04F82F1F0B6B1000ADE9D8 /* UCFGoldAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A04F82D1F0B6B1000ADE9D8 /* UCFGoldAccountViewController.m */; };
 		4A04F8301F0B6B1000ADE9D8 /* UCFGoldAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A04F82E1F0B6B1000ADE9D8 /* UCFGoldAccountViewController.xib */; };
 		4A04F8331F0B6DBB00ADE9D8 /* UCFGoldAccountHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A04F8321F0B6DBB00ADE9D8 /* UCFGoldAccountHeadView.m */; };
@@ -569,12 +571,9 @@
 		7BC304841ACBC22D007767F1 /* UIImage+Misc.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BC304651ACBC22D007767F1 /* UIImage+Misc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		7BC304851ACBC22D007767F1 /* UIImage+Translation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BC304671ACBC22D007767F1 /* UIImage+Translation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		7BC304861ACBC22D007767F1 /* UILabel+Misc.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BC304691ACBC22D007767F1 /* UILabel+Misc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		7BC304871ACBC22D007767F1 /* UITableView+Misc.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BC3046C1ACBC22D007767F1 /* UITableView+Misc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		7BC304881ACBC22D007767F1 /* UITableViewFooterPull.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BC3046E1ACBC22D007767F1 /* UITableViewFooterPull.m */; };
 		7BC304891ACBC22D007767F1 /* UITextField+ExtentRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BC304711ACBC22D007767F1 /* UITextField+ExtentRange.m */; };
 		7BC3048A1ACBC22D007767F1 /* UITextFieldFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BC304731ACBC22D007767F1 /* UITextFieldFactory.m */; };
 		7BC3048B1ACBC22D007767F1 /* UIView+AddLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BC304751ACBC22D007767F1 /* UIView+AddLine.m */; };
-		7BC304901ACBC26D007767F1 /* EGORefreshTableFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BC3048E1ACBC26D007767F1 /* EGORefreshTableFooterView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		7BC304991ACBC4FD007767F1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BC304981ACBC4FD007767F1 /* QuartzCore.framework */; };
 		7BC789091B04555F00D50494 /* UCFXieYiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BC789081B04555F00D50494 /* UCFXieYiViewController.m */; };
 		7BC7890A1B04569300D50494 /* jianjie.docx in Resources */ = {isa = PBXBuildFile; fileRef = 7BC789041B04549500D50494 /* jianjie.docx */; };
@@ -605,8 +604,6 @@
 		7BCE020A1AC8FDEF0084C15C /* NetworkModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCE02031AC8FDEF0084C15C /* NetworkModule.m */; };
 		7BCE02141AC9025A0084C15C /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCE020E1AC9025A0084C15C /* Common.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		7BCE02231AC902FD0084C15C /* BaseAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCE02191AC902FD0084C15C /* BaseAlertView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		7BCE022D1AC9141A0084C15C /* MBProgressHUD+HJ.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCE022A1AC9141A0084C15C /* MBProgressHUD+HJ.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		7BCE022E1AC9141A0084C15C /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCE022C1AC9141A0084C15C /* MBProgressHUD.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		7BCE02361AC915720084C15C /* NSData+AES.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCE02311AC915720084C15C /* NSData+AES.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		7BCE02371AC915720084C15C /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCE02331AC915720084C15C /* NSData+Base64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		7BCE02381AC915720084C15C /* NSString+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCE02351AC915720084C15C /* NSString+Base64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -1140,6 +1137,10 @@
 		33717872206CCB0A00A6366C /* UCFDirectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFDirectCell.h; sourceTree = "<group>"; };
 		33717873206CCB0B00A6366C /* UCFTipCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFTipCell.m; sourceTree = "<group>"; };
 		33717874206CCB0B00A6366C /* UCFTipCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFTipCell.xib; sourceTree = "<group>"; };
+		33B1FCCD20887602009D48DA /* MBProgressHUD+HJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+HJ.h"; sourceTree = "<group>"; };
+		33B1FCCE20887602009D48DA /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		33B1FCCF20887602009D48DA /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		33B1FCD020887602009D48DA /* MBProgressHUD+HJ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+HJ.m"; sourceTree = "<group>"; };
 		3C3D11AF5BBAC2E558A4FAA0 /* Pods-JRGC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JRGC.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JRGC/Pods-JRGC.debug.xcconfig"; sourceTree = "<group>"; };
 		4A04F82C1F0B6B1000ADE9D8 /* UCFGoldAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFGoldAccountViewController.h; sourceTree = "<group>"; };
 		4A04F82D1F0B6B1000ADE9D8 /* UCFGoldAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFGoldAccountViewController.m; sourceTree = "<group>"; };
@@ -1997,20 +1998,12 @@
 		7BC304671ACBC22D007767F1 /* UIImage+Translation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Translation.m"; sourceTree = "<group>"; };
 		7BC304681ACBC22D007767F1 /* UILabel+Misc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+Misc.h"; sourceTree = "<group>"; };
 		7BC304691ACBC22D007767F1 /* UILabel+Misc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+Misc.m"; sourceTree = "<group>"; };
-		7BC3046B1ACBC22D007767F1 /* UITableView+Misc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+Misc.h"; sourceTree = "<group>"; };
-		7BC3046C1ACBC22D007767F1 /* UITableView+Misc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+Misc.m"; sourceTree = "<group>"; };
-		7BC3046D1ACBC22D007767F1 /* UITableViewFooterPull.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITableViewFooterPull.h; sourceTree = "<group>"; };
-		7BC3046E1ACBC22D007767F1 /* UITableViewFooterPull.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITableViewFooterPull.m; sourceTree = "<group>"; };
-		7BC3046F1ACBC22D007767F1 /* UITableViewScrollDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITableViewScrollDelegate.h; sourceTree = "<group>"; };
 		7BC304701ACBC22D007767F1 /* UITextField+ExtentRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+ExtentRange.h"; sourceTree = "<group>"; };
 		7BC304711ACBC22D007767F1 /* UITextField+ExtentRange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+ExtentRange.m"; sourceTree = "<group>"; };
 		7BC304721ACBC22D007767F1 /* UITextFieldFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITextFieldFactory.h; sourceTree = "<group>"; };
 		7BC304731ACBC22D007767F1 /* UITextFieldFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITextFieldFactory.m; sourceTree = "<group>"; };
 		7BC304741ACBC22D007767F1 /* UIView+AddLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+AddLine.h"; sourceTree = "<group>"; };
 		7BC304751ACBC22D007767F1 /* UIView+AddLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+AddLine.m"; sourceTree = "<group>"; };
-		7BC3048D1ACBC26D007767F1 /* EGORefreshTableFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGORefreshTableFooterView.h; sourceTree = "<group>"; };
-		7BC3048E1ACBC26D007767F1 /* EGORefreshTableFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGORefreshTableFooterView.m; sourceTree = "<group>"; };
-		7BC3048F1ACBC26D007767F1 /* EGOViewCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGOViewCommon.h; sourceTree = "<group>"; };
 		7BC304981ACBC4FD007767F1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		7BC789041B04549500D50494 /* jianjie.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = jianjie.docx; sourceTree = "<group>"; };
 		7BC789051B04549500D50494 /* xinxizixunxieyi.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = xinxizixunxieyi.docx; sourceTree = "<group>"; };
@@ -2069,10 +2062,6 @@
 		7BCE020E1AC9025A0084C15C /* Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Common.m; sourceTree = "<group>"; };
 		7BCE02181AC902FD0084C15C /* BaseAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseAlertView.h; sourceTree = "<group>"; };
 		7BCE02191AC902FD0084C15C /* BaseAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseAlertView.m; sourceTree = "<group>"; };
-		7BCE02291AC9141A0084C15C /* MBProgressHUD+HJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+HJ.h"; sourceTree = "<group>"; };
-		7BCE022A1AC9141A0084C15C /* MBProgressHUD+HJ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+HJ.m"; sourceTree = "<group>"; };
-		7BCE022B1AC9141A0084C15C /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
-		7BCE022C1AC9141A0084C15C /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		7BCE02301AC915720084C15C /* NSData+AES.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+AES.h"; sourceTree = "<group>"; };
 		7BCE02311AC915720084C15C /* NSData+AES.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+AES.m"; sourceTree = "<group>"; };
 		7BCE02321AC915720084C15C /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
@@ -2951,6 +2940,7 @@
 		3343FF25206CCDE7002A2153 /* NewLib */ = {
 			isa = PBXGroup;
 			children = (
+				33B1FCCC20887601009D48DA /* MBProgressHUD */,
 				7BD35A8C1AD61E4200389D6B /* LLLockView */,
 				749319EB1B13267600143424 /* NZLabel */,
 				A824BFB61FCD499200E32F39 /* umeng_ios_social_sdk_6.4-2.6_arm64_custom */,
@@ -2975,7 +2965,6 @@
 				A83048CC1F67D9A70007FB4F /* OneSDK */,
 				7BC7C0B51ADCEDB6003799B0 /* JSONKit */,
 				7BA6E4B51AD6731900FE8C37 /* WebImage */,
-				7BC3048C1ACBC26D007767F1 /* EgoRefresh */,
 				25950E971D7FB6EB00E4CCBA /* CWFaceSDK */,
 				FBA0A2FC1C183B0F000E1C7A /* JPush_lib */,
 				FB65C94B1D8294E600476E67 /* GrowingIO-iOS-SDK */,
@@ -3144,7 +3133,6 @@
 				7BC217251ACD4A030086D374 /* GuideController */,
 				7BCE02391AC915A80084C15C /* SFHFKeychainUtils */,
 				7BCE022F1AC915720084C15C /* AESCrypt-ObjC-master */,
-				7BCE02281AC9141A0084C15C /* MBProgressHUD */,
 				3371786E206CCAEA00A6366C /* TipCell */,
 				4AD6B4C31B32D33E00D94140 /* CycleView */,
 				3371786D206CC95F00A6366C /* CustomAlert */,
@@ -3271,6 +3259,17 @@
 			children = (
 			);
 			path = Vendor;
+			sourceTree = "<group>";
+		};
+		33B1FCCC20887601009D48DA /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				33B1FCCD20887602009D48DA /* MBProgressHUD+HJ.h */,
+				33B1FCCE20887602009D48DA /* MBProgressHUD.m */,
+				33B1FCCF20887602009D48DA /* MBProgressHUD.h */,
+				33B1FCD020887602009D48DA /* MBProgressHUD+HJ.m */,
+			);
+			path = MBProgressHUD;
 			sourceTree = "<group>";
 		};
 		33C08711208086740003DE76 /* V2 */ = {
@@ -5094,7 +5093,6 @@
 				7BC304611ACBC22D007767F1 /* UIImage */,
 				7BC304681ACBC22D007767F1 /* UILabel+Misc.h */,
 				7BC304691ACBC22D007767F1 /* UILabel+Misc.m */,
-				7BC3046A1ACBC22D007767F1 /* UITableView */,
 				7BC304701ACBC22D007767F1 /* UITextField+ExtentRange.h */,
 				7BC304711ACBC22D007767F1 /* UITextField+ExtentRange.m */,
 				7BC304721ACBC22D007767F1 /* UITextFieldFactory.h */,
@@ -5116,28 +5114,6 @@
 				7BC304671ACBC22D007767F1 /* UIImage+Translation.m */,
 			);
 			path = UIImage;
-			sourceTree = "<group>";
-		};
-		7BC3046A1ACBC22D007767F1 /* UITableView */ = {
-			isa = PBXGroup;
-			children = (
-				7BC3046B1ACBC22D007767F1 /* UITableView+Misc.h */,
-				7BC3046C1ACBC22D007767F1 /* UITableView+Misc.m */,
-				7BC3046D1ACBC22D007767F1 /* UITableViewFooterPull.h */,
-				7BC3046E1ACBC22D007767F1 /* UITableViewFooterPull.m */,
-				7BC3046F1ACBC22D007767F1 /* UITableViewScrollDelegate.h */,
-			);
-			path = UITableView;
-			sourceTree = "<group>";
-		};
-		7BC3048C1ACBC26D007767F1 /* EgoRefresh */ = {
-			isa = PBXGroup;
-			children = (
-				7BC3048D1ACBC26D007767F1 /* EGORefreshTableFooterView.h */,
-				7BC3048E1ACBC26D007767F1 /* EGORefreshTableFooterView.m */,
-				7BC3048F1ACBC26D007767F1 /* EGOViewCommon.h */,
-			);
-			path = EgoRefresh;
 			sourceTree = "<group>";
 		};
 		7BC789031B04548800D50494 /* docs */ = {
@@ -5277,18 +5253,6 @@
 			);
 			name = Register;
 			sourceTree = "<group>";
-		};
-		7BCE02281AC9141A0084C15C /* MBProgressHUD */ = {
-			isa = PBXGroup;
-			children = (
-				7BCE02291AC9141A0084C15C /* MBProgressHUD+HJ.h */,
-				7BCE022A1AC9141A0084C15C /* MBProgressHUD+HJ.m */,
-				7BCE022B1AC9141A0084C15C /* MBProgressHUD.h */,
-				7BCE022C1AC9141A0084C15C /* MBProgressHUD.m */,
-			);
-			name = MBProgressHUD;
-			path = JRGC/NewTools/MBProgressHUD;
-			sourceTree = SOURCE_ROOT;
 		};
 		7BCE022F1AC915720084C15C /* AESCrypt-ObjC-master */ = {
 			isa = PBXGroup;
@@ -7252,11 +7216,13 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-JRGC/Pods-JRGC-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/KVOController/KVOController.framework",
+				"${BUILT_PRODUCTS_DIR}/WebViewJavascriptBridge/WebViewJavascriptBridge.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KVOController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WebViewJavascriptBridge.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -7370,7 +7336,6 @@
 				2526ADE11DD08D5F00114D9A /* JRGCCustomGroupCell.m in Sources */,
 				4A04F8331F0B6DBB00ADE9D8 /* UCFGoldAccountHeadView.m in Sources */,
 				74F998C21F3024C400A6E607 /* UCFFacReservedViewController.m in Sources */,
-				7BC304881ACBC22D007767F1 /* UITableViewFooterPull.m in Sources */,
 				83CD84381F13A50800227704 /* UCFTransferViewController.m in Sources */,
 				FB3A80211CC612B8004B56C3 /* UCFCouponReturn.m in Sources */,
 				840A794F1C2AA4CA0059A946 /* UCFMessageDetailViewController.m in Sources */,
@@ -7423,7 +7388,6 @@
 				74BDA9901F09F6C60054403F /* FSCalendarScopeHandle.m in Sources */,
 				74F2AF891D616924008C433C /* UCFHuiBuinessListModel.m in Sources */,
 				4ADA3A431B0DCE82000B29FD /* SelectCoupleCell.m in Sources */,
-				7BCE022D1AC9141A0084C15C /* MBProgressHUD+HJ.m in Sources */,
 				740D3F9B1F441B270074371F /* UCFGoldCashModel.m in Sources */,
 				746FD82B1D9BB51200C5BEB6 /* UCFMenuTableCell.m in Sources */,
 				74067A441F5038BF00747888 /* UCFAveragePriceDetailView.m in Sources */,
@@ -7618,7 +7582,6 @@
 				25C029BE1D40D7EA00EF75DC /* UCFLoginFaceView.m in Sources */,
 				74270D4C1EC5976100F9419B /* UCFInvitationRewardViewController.m in Sources */,
 				7BC304891ACBC22D007767F1 /* UITextField+ExtentRange.m in Sources */,
-				7BCE022E1AC9141A0084C15C /* MBProgressHUD.m in Sources */,
 				74B98CA41F711D7500CB6A9F /* UCFMineFuncSecCell.m in Sources */,
 				3348A338206A230C00EACC91 /* NSURLSessionTask+Tag.m in Sources */,
 				7BCE02361AC915720084C15C /* NSData+AES.m in Sources */,
@@ -7654,7 +7617,6 @@
 				74D7FCCD1AE8F72700653B8F /* FundAccountItem.m in Sources */,
 				FB4F9E7E1D62A83000CCB492 /* AccountWebView.m in Sources */,
 				74702BBF1FB5599700CBB655 /* UCFExtractGoldCell.m in Sources */,
-				7BC304901ACBC26D007767F1 /* EGORefreshTableFooterView.m in Sources */,
 				83CD84281F13A50800227704 /* UCFBatchBidController.m in Sources */,
 				74E140441F1C573000B17A96 /* UCFGoldRechargeHistoryController.m in Sources */,
 				831BEC4D20241C31007E1F75 /* UCFP2PAuthPaymentWebViewController.m in Sources */,
@@ -7746,7 +7708,6 @@
 				744EB7FD1EE7E871003C57C4 /* UCFInvestTransferViewController.m in Sources */,
 				74270D171EC595ED00F9419B /* UCFDataStaticsCell.m in Sources */,
 				74270D341EC595FA00F9419B /* UCFModifyProportion.m in Sources */,
-				7BC304871ACBC22D007767F1 /* UITableView+Misc.m in Sources */,
 				FBBF48781C58C46C006AB777 /* UIView+Border.m in Sources */,
 				7BCE023C1AC915A80084C15C /* SFHFKeychainUtils.m in Sources */,
 				7BCA210E1AEDCE67001CD258 /* InvestmentDetailTableViewCell.m in Sources */,
@@ -7825,6 +7786,7 @@
 				74270D481EC5967B00F9419B /* UCFRegistrationRecord.m in Sources */,
 				7491820D1EC166F000AC1ECE /* TADotView.m in Sources */,
 				33717877206CCB0B00A6366C /* UCFTipCell.m in Sources */,
+				33B1FCD120887602009D48DA /* MBProgressHUD.m in Sources */,
 				7BD588031B098E12005091D3 /* UCFNoPermissionViewController.m in Sources */,
 				3343FF4A206CE37A002A2153 /* FullWebViewController.m in Sources */,
 				3343FF4E206CE4AA002A2153 /* UpgradeAccountVC.m in Sources */,
@@ -7873,6 +7835,7 @@
 				8335BF081FF5E39C00E62833 /* UCFGoldRewardTableViewCell.m in Sources */,
 				744A5FAA1E79512C008921F9 /* UCFWebViewJavascriptBridgeLoanDetails.m in Sources */,
 				FB82B8CB1DD96A8E0080C099 /* UCFCouponAuxiliaryVC.m in Sources */,
+				33B1FCD220887602009D48DA /* MBProgressHUD+HJ.m in Sources */,
 				25BAE2B11D804E6B001B6E01 /* JRGCViewForCWRresult.m in Sources */,
 				2526ADDC1DD08CB800114D9A /* UIView+FrameChange.m in Sources */,
 				7BC8AA241AD4C74200BF4660 /* UCFTransterBidHeadDetail.m in Sources */,
