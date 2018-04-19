@@ -654,7 +654,7 @@
         [[CloudwalkFaceSDK shareInstance] cwStoptLivess];
    
         dispatch_async(dispatch_get_main_queue(), ^{ //使用GCD防止线程阻塞引起菊花延迟显示
-            [MBProgressHUD showHUDAddedTo:nil animated:YES];
+            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         });
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
             [self stopDetect];

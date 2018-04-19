@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate.h"
-//#import "UCFSession.h"
 #import "UCFLoginViewController.h"
 #import "LLLockPassword.h"
 #import "JSONKit.h"
@@ -96,14 +95,7 @@
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkInitiaLogin) name:CheckIsInitiaLogin object:nil];
     
-//    [IPDetector getWANIPAddressWithCompletion:^(NSString *IPAddress) {
-//        NSString *curWanIp = IPAddress;
-//        if (![curWanIp isEqualToString:@""] && curWanIp) {
-//            curWanIp = [AuxiliaryFunc deleteHuanHang:[NSMutableString stringWithString:curWanIp]];
-//        }
-//        [[NSUserDefaults standardUserDefaults] setValue:curWanIp forKey:@"curWanIp"];
-//        [[NSUserDefaults standardUserDefaults] synchronize];
-//    }];
+
     
     //去掉navigationbar 下面默认的白线
     [[UINavigationBar appearance] setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];

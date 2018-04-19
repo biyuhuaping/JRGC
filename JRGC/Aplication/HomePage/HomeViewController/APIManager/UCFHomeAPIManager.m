@@ -254,7 +254,9 @@
             }
             [tempResult setObject:tempArray forKey:@"productMap"];
 //            [tempResult setObject:picADModel forKey:@"picAD"];
-            complete(nil, tempResult);
+            if (complete) {
+                complete(nil, tempResult);
+            }
         }
         else {
             complete(nil, rsttext);
