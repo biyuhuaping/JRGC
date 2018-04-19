@@ -914,10 +914,6 @@
 		E311A66E1D90E85B00C5483E /* UCFWebViewJavascriptBridgeLevel.xib in Resources */ = {isa = PBXBuildFile; fileRef = E311A66C1D90E85B00C5483E /* UCFWebViewJavascriptBridgeLevel.xib */; };
 		E311A6751D90EBBE00C5483E /* UCFWebViewJavascriptBridgeBanner.m in Sources */ = {isa = PBXBuildFile; fileRef = E311A6731D90EBBE00C5483E /* UCFWebViewJavascriptBridgeBanner.m */; };
 		E311A6761D90EBBE00C5483E /* UCFWebViewJavascriptBridgeBanner.xib in Resources */ = {isa = PBXBuildFile; fileRef = E311A6741D90EBBE00C5483E /* UCFWebViewJavascriptBridgeBanner.xib */; };
-		E320200D1CC4BAD70065579C /* WebViewJavascriptBridge_JS.m in Sources */ = {isa = PBXBuildFile; fileRef = E320200A1CC4BAD70065579C /* WebViewJavascriptBridge_JS.m */; };
-		E320200E1CC4BAD70065579C /* WebViewJavascriptBridgeBase.m in Sources */ = {isa = PBXBuildFile; fileRef = E320200C1CC4BAD70065579C /* WebViewJavascriptBridgeBase.m */; };
-		E32020121CC4BCE60065579C /* WebViewJavascriptBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = E32020111CC4BCE60065579C /* WebViewJavascriptBridge.m */; };
-		E32020151CC4BCEF0065579C /* WKWebViewJavascriptBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = E32020141CC4BCEF0065579C /* WKWebViewJavascriptBridge.m */; };
 		E32B8F4E1E85188D00B7871F /* UCFRegisterFinshViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E32B8F4C1E85188D00B7871F /* UCFRegisterFinshViewController.m */; };
 		E32B8F4F1E85188D00B7871F /* UCFRegisterFinshViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E32B8F4D1E85188D00B7871F /* UCFRegisterFinshViewController.xib */; };
 		E37086B51D61A6CD0041D293 /* UCFHuiShangChooseBankViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E37086B31D61A6CD0041D293 /* UCFHuiShangChooseBankViewController.m */; };
@@ -2580,14 +2576,6 @@
 		E311A6721D90EBBE00C5483E /* UCFWebViewJavascriptBridgeBanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFWebViewJavascriptBridgeBanner.h; sourceTree = "<group>"; };
 		E311A6731D90EBBE00C5483E /* UCFWebViewJavascriptBridgeBanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFWebViewJavascriptBridgeBanner.m; sourceTree = "<group>"; };
 		E311A6741D90EBBE00C5483E /* UCFWebViewJavascriptBridgeBanner.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFWebViewJavascriptBridgeBanner.xib; sourceTree = "<group>"; };
-		E32020091CC4BAD70065579C /* WebViewJavascriptBridge_JS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewJavascriptBridge_JS.h; sourceTree = "<group>"; };
-		E320200A1CC4BAD70065579C /* WebViewJavascriptBridge_JS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewJavascriptBridge_JS.m; sourceTree = "<group>"; };
-		E320200B1CC4BAD70065579C /* WebViewJavascriptBridgeBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewJavascriptBridgeBase.h; sourceTree = "<group>"; };
-		E320200C1CC4BAD70065579C /* WebViewJavascriptBridgeBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewJavascriptBridgeBase.m; sourceTree = "<group>"; };
-		E32020101CC4BCE60065579C /* WebViewJavascriptBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewJavascriptBridge.h; sourceTree = "<group>"; };
-		E32020111CC4BCE60065579C /* WebViewJavascriptBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewJavascriptBridge.m; sourceTree = "<group>"; };
-		E32020131CC4BCEF0065579C /* WKWebViewJavascriptBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKWebViewJavascriptBridge.h; sourceTree = "<group>"; };
-		E32020141CC4BCEF0065579C /* WKWebViewJavascriptBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKWebViewJavascriptBridge.m; sourceTree = "<group>"; };
 		E32B8F4B1E85188D00B7871F /* UCFRegisterFinshViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFRegisterFinshViewController.h; sourceTree = "<group>"; };
 		E32B8F4C1E85188D00B7871F /* UCFRegisterFinshViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFRegisterFinshViewController.m; sourceTree = "<group>"; };
 		E32B8F4D1E85188D00B7871F /* UCFRegisterFinshViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFRegisterFinshViewController.xib; sourceTree = "<group>"; };
@@ -2966,7 +2954,6 @@
 				7BD35A8C1AD61E4200389D6B /* LLLockView */,
 				749319EB1B13267600143424 /* NZLabel */,
 				A824BFB61FCD499200E32F39 /* umeng_ios_social_sdk_6.4-2.6_arm64_custom */,
-				E32020081CC4BAB80065579C /* webViewJavascripBridge */,
 				2526ADD21DD08CB800114D9A /* MLMOptionSelectView */,
 				4A6678BE1D61C2E900469826 /* FDFullscreenPopGesture */,
 				4A6FAFC01D743CF300AD4DF8 /* CJLabel */,
@@ -6409,21 +6396,6 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		E32020081CC4BAB80065579C /* webViewJavascripBridge */ = {
-			isa = PBXGroup;
-			children = (
-				E32020131CC4BCEF0065579C /* WKWebViewJavascriptBridge.h */,
-				E32020141CC4BCEF0065579C /* WKWebViewJavascriptBridge.m */,
-				E32020101CC4BCE60065579C /* WebViewJavascriptBridge.h */,
-				E32020111CC4BCE60065579C /* WebViewJavascriptBridge.m */,
-				E32020091CC4BAD70065579C /* WebViewJavascriptBridge_JS.h */,
-				E320200A1CC4BAD70065579C /* WebViewJavascriptBridge_JS.m */,
-				E320200B1CC4BAD70065579C /* WebViewJavascriptBridgeBase.h */,
-				E320200C1CC4BAD70065579C /* WebViewJavascriptBridgeBase.m */,
-			);
-			path = webViewJavascripBridge;
-			sourceTree = "<group>";
-		};
 		E37086BC1D61BBB10041D293 /* cellConfig */ = {
 			isa = PBXGroup;
 			children = (
@@ -7435,7 +7407,6 @@
 				A84EC2491FE1166200B0C46A /* CLAmplifyView.m in Sources */,
 				74BDA9851F09F6C60054403F /* FSCalendar.m in Sources */,
 				E3C1179C1D40CFCC0053A052 /* UCFContributionValueTypeTowCell.m in Sources */,
-				E32020121CC4BCE60065579C /* WebViewJavascriptBridge.m in Sources */,
 				74EAF5C31B0F293D00807C1C /* UCFBankCard.m in Sources */,
 				74931A341B1326FE00143424 /* OHASBasicHTMLParser.m in Sources */,
 				74F649361F4710D300328235 /* UCFCashGoldResultModel.m in Sources */,
@@ -7927,12 +7898,10 @@
 				7BE51D931ADE61DB007600AB /* CustomAlertView.m in Sources */,
 				FBB685871AE4A76800F222B6 /* MJRefreshLegendFooter.m in Sources */,
 				74DBAC7D1D587AEB00F6F6B1 /* UCFHuiBuinessBankView.m in Sources */,
-				E320200E1CC4BAD70065579C /* WebViewJavascriptBridgeBase.m in Sources */,
 				7BCE02371AC915720084C15C /* NSData+Base64.m in Sources */,
 				8300100D1E1356870088C707 /* UCFModifyReservedBankNumberViewController.m in Sources */,
 				747AAEBB1AEF89F6007A518F /* FundsDetailModel.m in Sources */,
 				7443C7231F1EFF45009669C0 /* UCFGoldCashOneCell.m in Sources */,
-				E320200D1CC4BAD70065579C /* WebViewJavascriptBridge_JS.m in Sources */,
 				7BFE3E861AC55C98002A53A2 /* main.m in Sources */,
 				4AC947D71E5598F600354CF8 /* BatchSetView.m in Sources */,
 				FBB685821AE4A76800F222B6 /* MJRefreshConst.m in Sources */,
@@ -7952,7 +7921,6 @@
 				832942CE1F39914E001E34F1 /* UCFGoldCouponModel.m in Sources */,
 				746FFE2C1B007FA100FF927F /* UCFBindBankCardNormalTableViewCell.m in Sources */,
 				A8B6B6801EC9A9F000D4E86F /* WalletBankView.m in Sources */,
-				E32020151CC4BCEF0065579C /* WKWebViewJavascriptBridge.m in Sources */,
 				7B2E56911ADBBE77008B0F9E /* UCFRetrievePasswordStepTwoViewController.m in Sources */,
 				74EE33181AF707B100BDE197 /* UCFFundsDetailHeader.m in Sources */,
 				740586B91F417ADB00E2DE01 /* UCFGoldFlexibleCell.m in Sources */,

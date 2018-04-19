@@ -6,6 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
+
 #define kCustomProtocolScheme @"wvjbscheme"
 #define kQueueHasMessage      @"__WVJB_QUEUE_MESSAGE__"
 #define kBridgeLoaded         @"__BRIDGE_LOADED__"
@@ -21,7 +22,7 @@ typedef NSDictionary WVJBMessage;
 @interface WebViewJavascriptBridgeBase : NSObject
 
 
-@property (assign) id <WebViewJavascriptBridgeBaseDelegate> delegate;
+@property (weak, nonatomic) id <WebViewJavascriptBridgeBaseDelegate> delegate;
 @property (strong, nonatomic) NSMutableArray* startupMessageQueue;
 @property (strong, nonatomic) NSMutableDictionary* responseCallbacks;
 @property (strong, nonatomic) NSMutableDictionary* messageHandlers;
@@ -39,5 +40,6 @@ typedef NSDictionary WVJBMessage;
 - (void)logUnkownMessage:(NSURL*)url;
 - (NSString *)webViewJavascriptCheckCommand;
 - (NSString *)webViewJavascriptFetchQueyCommand;
+- (void)disableJavscriptAlertBoxSafetyTimeout;
 
 @end

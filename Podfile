@@ -7,5 +7,5 @@ target 'JRGC' do
 
 pod 'AFNetworking', '~> 3.1.0'
 pod 'KVOController', '~> 1.2.0'
-
+pod 'WebViewJavascriptBridge', '~> 5.0'
 end

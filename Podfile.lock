@@ -15,15 +15,18 @@ PODS:
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
   - KVOController (1.2.0)
+  - WebViewJavascriptBridge (5.2.0)
 
 DEPENDENCIES:
   - AFNetworking (~> 3.1.0)
   - KVOController (~> 1.2.0)
+  - WebViewJavascriptBridge (~> 5.0)
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   KVOController: d72ace34afea42468329623b3379ab3cd1d286b6
+  WebViewJavascriptBridge: a00b2d61252aec5207e3263d46fd0fd3cfaf7895
 
-PODFILE CHECKSUM: 496a6c461c757d445166fc24211c42882b835eaa
+PODFILE CHECKSUM: bfc01ee3fb9234a5896ced09aaa0e63fea9bb972
 
 COCOAPODS: 1.4.0
