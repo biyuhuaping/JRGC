@@ -380,7 +380,12 @@
     if (self.accoutType == SelectAccoutTypeHoner || _isFromeBankCardInfo) {
         return  5;
     }else{
-        return 4;
+        if (self.accoutType == SelectAccoutTypeP2P && [UserInfoSingle sharedManager].openStatus == 2) {
+            return 5;
+        } else {
+            return 4;
+
+        }
     }
 }
 
@@ -601,7 +606,13 @@
              [[NetworkModule sharedNetworkModule] newPostReq:encryptParamDic tag:kSXTagOpenAccount owner:self signature:YES Type:self.accoutType];
         }else
         {
-             [[NetworkModule sharedNetworkModule] newPostReq:encryptParamDic tag:kSXTagOpenAccuntIntoBank owner:self signature:YES Type:self.accoutType];
+            if ([UserInfoSingle sharedManager].openStatus == 2) {
+                [encryptParamDic setValue:_textField4.text forKey:@"validateCode"];//手机验证码
+                [[NetworkModule sharedNetworkModule] newPostReq:encryptParamDic tag:kSXTagOpenAccount owner:self signature:YES Type:self.accoutType];
+            } else {
+                [[NetworkModule sharedNetworkModule] newPostReq:encryptParamDic tag:kSXTagOpenAccuntIntoBank owner:self signature:YES Type:self.accoutType];
+            }
+
         }
     }
 }
