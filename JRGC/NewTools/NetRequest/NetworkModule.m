@@ -22,13 +22,13 @@
 #import "JSONKit.h"
 #import "UCFLoginViewController.h"
 #import "NSURLSessionTask+Tag.h"
-#import "AFNetworking.h"
+#import "RequestTool.h"
 
 @interface NetworkModule () <UIAlertViewDelegate>
 @property (nonatomic, assign) BOOL isShowAlert;
 @property (nonatomic, assign) BOOL isShowSingleAlert; //是否已经弹出单设备警告框
 @property (nonatomic, assign) kSXTag loseTag;         //失效的接口标示
-@property (nonatomic, strong)AFHTTPSessionManager *manager;
+
 
 
 @end
@@ -43,10 +43,7 @@ static NetworkModule *gInstance = NULL;
     if (self) {
         self.isShowAlert = YES;
         self.isShowSingleAlert = YES;
-        self.manager =  [AFHTTPSessionManager manager];
-        _manager.requestSerializer.timeoutInterval = 30;
-        _manager.requestSerializer = [AFHTTPRequestSerializer serializer];
-        _manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html",@"text/plain", nil];
+
     }
     return self;
 }
@@ -337,15 +334,31 @@ static NetworkModule *gInstance = NULL;
 - (void)afnPostData:(NSDictionary*)dataDict tag:(kSXTag)tag owner:(id<NetworkModuleDelegate>)owner url:(NSString*)url
 {
     DLog(@"请求地址=%@，参数%@",url,dataDict);
-    AppDelegate * app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    if (EnvironmentConfiguration == 2 || (app.isSubmitAppStoreTestTime)) {
-        [_manager.requestSerializer setValue:@"1" forHTTPHeaderField:@"jrgc-umark"];
-    } else {
-        [_manager.requestSerializer setValue:@"0" forHTTPHeaderField:@"jrgc-umark"];
-    }
+
     if(owner) {
         [owner beginPost:tag];
     }
+    __weak typeof(self) weakSelf = self;
+    RequestTool *request = [[RequestTool alloc] initWithURL:url pramDict:dataDict Owmer:owner Tag:tag FinishedBlock:^(id<NetworkModuleDelegate> owner, kSXTag kSXTag, id responseObject, NSError *error) {
+        if (!error) {
+            //新格式接口
+            if ([[responseObject allKeys] containsObject:@"ret"]) {
+                [weakSelf skipToNewApiResponseData:responseObject withTask:kSXTag andApiOwner:owner];
+            } else {
+                [weakSelf skipToOldApiResponseData:responseObject withTask:kSXTag andApiOwner:owner];
+            }
+        } else {
+            if (owner != nil) {
+                SEL sel = @selector(errorPost:tag:);
+                if ([owner respondsToSelector:sel]) {
+                    [owner performSelector:sel withObject:error withObject:[NSNumber numberWithInteger: kSXTag]];
+                }
+            }
+        }
+    }];
+    [request startPostRequest];
+    
+    /*
     __weak typeof(self) weakSelf = self;
 
     NSURLSessionDataTask *task = [self.manager POST:url parameters:dataDict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
@@ -372,23 +385,23 @@ static NetworkModule *gInstance = NULL;
       [task cancel];
     }];
     task.ksxTag = tag;
-
+*/
 }
 
-- (void)skipToNewApiResponseData:(id)response withTask:(NSURLSessionDataTask *)task andApiOwner:(id<NetworkModuleDelegate>)owner
+- (void)skipToNewApiResponseData:(id)response withTask:(kSXTag)tag andApiOwner:(id<NetworkModuleDelegate>)owner
 {
     SEL sel = @selector(endPost:tag:);
     NSDictionary *dic = (NSDictionary *)response;
     //临时添加，为了暂时符合业务代码规则
     NSString *content = [Common dictionaryToJson:dic];
     if ([[dic valueForKey:@"ret"] boolValue]) {
-        [owner performSelector:sel withObject:content withObject:[NSNumber numberWithInteger:task.ksxTag]];
+        [owner performSelector:sel withObject:content withObject:[NSNumber numberWithInteger:tag]];
     } else {
         NSInteger rstcode = [dic[@"code"] integerValue];
         if (rstcode == -1) {
             SEL sel = @selector(errorPost:tag:);
             if ([owner respondsToSelector:sel]) {
-                [owner performSelector:sel withObject:nil withObject:[NSNumber numberWithInteger: task.ksxTag]];
+                [owner performSelector:sel withObject:nil withObject:[NSNumber numberWithInteger: tag]];
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:dic[@"message"] delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil, nil];
                 [alertView show];
                 
@@ -396,7 +409,7 @@ static NetworkModule *gInstance = NULL;
         } else if (rstcode == -2 || rstcode == -3 || rstcode == -4) {
             SEL sel = @selector(errorPost:tag:);
             if ([owner respondsToSelector:sel]) {
-                [owner performSelector:sel withObject:nil withObject:[NSNumber numberWithInteger: task.ksxTag]];
+                [owner performSelector:sel withObject:nil withObject:[NSNumber numberWithInteger: tag]];
                 //                req.owner = nil;
             }
             //清空数据
@@ -417,7 +430,7 @@ static NetworkModule *gInstance = NULL;
         } else if (rstcode == -6) {
             SEL sel = @selector(errorPost:tag:);
             if ([owner respondsToSelector:sel]) {
-                [owner performSelector:sel withObject:nil withObject:[NSNumber numberWithInteger: task.ksxTag]];
+                [owner performSelector:sel withObject:nil withObject:[NSNumber numberWithInteger: tag]];
                 //                req.owner = nil;
             }
             //清空数据
@@ -429,23 +442,23 @@ static NetworkModule *gInstance = NULL;
             }
             self.isShowSingleAlert = NO;
         }  else {
-            [owner performSelector:sel withObject:content withObject:[NSNumber numberWithInteger: task.ksxTag]];
+            [owner performSelector:sel withObject:content withObject:[NSNumber numberWithInteger: tag]];
         }
     }
 }
-- (void)skipToOldApiResponseData:(id)response withTask:(NSURLSessionDataTask *)task andApiOwner:(id<NetworkModuleDelegate>)owner
+- (void)skipToOldApiResponseData:(id)response withTask:(kSXTag)tag andApiOwner:(id<NetworkModuleDelegate>)owner
 {
     NSDictionary *dic = (NSDictionary *)response;
     //临时添加，为了暂时符合业务代码规则
     NSString *content = [Common dictionaryToJson:dic];
         SEL sel = @selector(endPost:tag:);
         NSInteger rstcode = [dic[@"status"] integerValue];
-        if (rstcode  == 1 || task.ksxTag == kSXTagUserLogout) {
-            [owner performSelector:sel withObject:content withObject:[NSNumber numberWithInteger: task.ksxTag]];
+        if (rstcode  == 1 || tag == kSXTagUserLogout) {
+            [owner performSelector:sel withObject:content withObject:[NSNumber numberWithInteger: tag]];
         } else if (rstcode == -1) {
             SEL sel = @selector(errorPost:tag:);
             if ([owner respondsToSelector:sel]) {
-                [owner performSelector:sel withObject:nil withObject:[NSNumber numberWithInteger: task.ksxTag]];
+                [owner performSelector:sel withObject:nil withObject:[NSNumber numberWithInteger: tag]];
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:dic[@"statusdes"] delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil, nil];
                 [alertView show];
                 
@@ -453,7 +466,7 @@ static NetworkModule *gInstance = NULL;
         } else if (rstcode == -2 || rstcode == -3 || rstcode == -4) {
             SEL sel = @selector(errorPost:tag:);
             if ([owner respondsToSelector:sel]) {
-                [owner performSelector:sel withObject:nil withObject:[NSNumber numberWithInteger: task.ksxTag]];
+                [owner performSelector:sel withObject:nil withObject:[NSNumber numberWithInteger: tag]];
             }
             //清空数据
             [self cleanData];
@@ -473,7 +486,7 @@ static NetworkModule *gInstance = NULL;
         } else if (rstcode == -6) {
             SEL sel = @selector(errorPost:tag:);
             if ([owner respondsToSelector:sel]) {
-                [owner performSelector:sel withObject:nil withObject:[NSNumber numberWithInteger: task.ksxTag]];
+                [owner performSelector:sel withObject:nil withObject:[NSNumber numberWithInteger: tag]];
             }
             //清空数据
             [self cleanData];
@@ -485,7 +498,7 @@ static NetworkModule *gInstance = NULL;
             self.isShowSingleAlert = NO;
         }
         else {
-            [owner performSelector:sel withObject:content withObject:[NSNumber numberWithInteger: task.ksxTag]];
+            [owner performSelector:sel withObject:content withObject:[NSNumber numberWithInteger: tag]];
         }
 }
 - (NSString *)dictTransToString:(NSDictionary *)dict

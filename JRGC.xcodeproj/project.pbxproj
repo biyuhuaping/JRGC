@@ -45,6 +45,7 @@
 		25F445C41D66E276006813BB /* UCFChoseBankViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25F445C21D66E276006813BB /* UCFChoseBankViewController.xib */; };
 		25F538B41D881B0A0039262F /* UCFPurchaseWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25F538B21D881B0A0039262F /* UCFPurchaseWebView.m */; };
 		25F538B51D881B0A0039262F /* UCFPurchaseWebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25F538B31D881B0A0039262F /* UCFPurchaseWebView.xib */; };
+		3338802D20905AEC00A7115B /* RequestTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 3338802C20905AEC00A7115B /* RequestTool.m */; };
 		333FD810206B836F00CEA03C /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 333FD80E206B836F00CEA03C /* Reachability.m */; };
 		3343FF36206CDECB002A2153 /* UCF404ErrorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3343FF32206CDECA002A2153 /* UCF404ErrorView.m */; };
 		3343FF37206CDECB002A2153 /* UCFNoDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3343FF33206CDECA002A2153 /* UCFNoDataView.m */; };
@@ -1112,6 +1113,8 @@
 		25F538B21D881B0A0039262F /* UCFPurchaseWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFPurchaseWebView.m; sourceTree = "<group>"; };
 		25F538B31D881B0A0039262F /* UCFPurchaseWebView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFPurchaseWebView.xib; sourceTree = "<group>"; };
 		32CA3369118CF695601F1379 /* Pods-JRGC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JRGC.release.xcconfig"; path = "Pods/Target Support Files/Pods-JRGC/Pods-JRGC.release.xcconfig"; sourceTree = "<group>"; };
+		3338802B20905AEC00A7115B /* RequestTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RequestTool.h; sourceTree = "<group>"; };
+		3338802C20905AEC00A7115B /* RequestTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RequestTool.m; sourceTree = "<group>"; };
 		333FD80E206B836F00CEA03C /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		333FD80F206B836F00CEA03C /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		3343FF32206CDECA002A2153 /* UCF404ErrorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCF404ErrorView.m; sourceTree = "<group>"; };
@@ -3182,6 +3185,8 @@
 				3348A337206A230C00EACC91 /* NSURLSessionTask+Tag.m */,
 				333FD80F206B836F00CEA03C /* Reachability.h */,
 				333FD80E206B836F00CEA03C /* Reachability.m */,
+				3338802B20905AEC00A7115B /* RequestTool.h */,
+				3338802C20905AEC00A7115B /* RequestTool.m */,
 			);
 			path = NetRequest;
 			sourceTree = "<group>";
@@ -7796,6 +7801,7 @@
 				4A2966511BEC830A001FCD5F /* PraiseAlert.m in Sources */,
 				74EAF5B51B0ED78700807C1C /* UCFSelectedBankTableViewCell.m in Sources */,
 				838EDD681F6B7225008E60EC /* CustomPieView.m in Sources */,
+				3338802D20905AEC00A7115B /* RequestTool.m in Sources */,
 				74270C951EC58F6800F9419B /* UCFUserInfoListItem.m in Sources */,
 				7BA6E4C51AD6731900FE8C37 /* UIImageView+HighlightedWebCache.m in Sources */,
 				A8E02DB21F0E0A7800FC2260 /* GoldTransactionRecordViewController.m in Sources */,
