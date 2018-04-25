@@ -73,7 +73,15 @@
     
     if (self.accoutType == SelectAccoutTypeP2P) {
         self.buttonTopConstraint.constant = 15;
-        self.tableViewHight.constant = 44*4;
+        if (_isFromeBankCardInfo) {
+            self.tableViewHight.constant = 44*5;
+        } else {
+            if ([UserInfoSingle sharedManager].openStatus == 2) {
+                self.tableViewHight.constant = 44*5;
+            } else {
+                self.tableViewHight.constant = 44*4;
+            }
+        }
         baseTitleLabel.text = @"开通微金徽商存管账户";
     } else {
         self.tableViewHight.constant = 44*5;
@@ -378,6 +386,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (self.accoutType == SelectAccoutTypeHoner || _isFromeBankCardInfo) {
+        
         return  5;
     }else{
         if (self.accoutType == SelectAccoutTypeP2P && [UserInfoSingle sharedManager].openStatus == 2) {
@@ -565,6 +574,7 @@
     
     if(self.accoutType == SelectAccoutTypeHoner || _isFromeBankCardInfo)
     {
+        
          if (realName.length == 0 || idCardNo.length == 0 || bankCard.length == 0 || _textField4.text.length == 0) {
              [AuxiliaryFunc showToastMessage:@"请完善信息之后再提交" withView:self.view];
              return;
@@ -654,6 +664,13 @@
             }
             NSDictionary *userInfoDic = dic[@"data"][@"userInfo"];
             _openStatus = dic[@"data"][@"openStatus"];
+
+            if (self.accoutType == SelectAccoutTypeP2P) {
+                [UserInfoSingle sharedManager].openStatus = [_openStatus integerValue];
+            } else {
+                [UserInfoSingle sharedManager].enjoyOpenStatus = [_openStatus integerValue];
+            }
+            
             _bankId = [NSString stringWithFormat:@"%@",userInfoDic[@"bankId"]];//[userInfoDic objectSafeForKey:@"bankId"];//
             NSString *realName = [userInfoDic objectSafeForKey:@"realName"];
             NSString *idCardNo = [userInfoDic objectSafeForKey:@"idCardNo"];
@@ -719,6 +736,7 @@
                 BlockUIAlertView *alert = [[BlockUIAlertView alloc]initWithTitle:@"提示" message:_notSupportDes cancelButtonTitle:nil clickButton:^(NSInteger index) {} otherButtonTitles:@"确定"];
                 [alert show];
             }
+            
         }else {
             [AuxiliaryFunc showToastMessage:dic[@"message"] withView:self.view];
         }
