@@ -595,7 +595,7 @@
                                           @"bankCard":bankCard,              //银行卡号
                                           @"bankId":_bankId,                 //银行id
                                           @"openStatus":_openStatus,         //获取到的用户信息的状态，对应接口getOpenAccountInfo
-//                                          @"validateCode":_textField4.text,  //手机验证码
+                                          @"validateCode":_textField4.text,  //手机验证码
                                           @"userId":userId,                  //用户id
                                           };
         [self replaceBankCardInformation:encryptParamDic];
