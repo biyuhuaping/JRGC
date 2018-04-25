@@ -357,35 +357,6 @@ static NetworkModule *gInstance = NULL;
         }
     }];
     [request startPostRequest];
-    
-    /*
-    __weak typeof(self) weakSelf = self;
-
-    NSURLSessionDataTask *task = [self.manager POST:url parameters:dataDict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
-        NSLog(@"task == %d",task.ksxTag);
-        if (owner != nil) {
-            SEL sel = @selector(endPost:tag:);
-            if (owner != nil && [owner respondsToSelector:sel]) {
-                //新格式接口
-                if ([[responseObject allKeys] containsObject:@"ret"]) {
-                    [weakSelf skipToNewApiResponseData:responseObject withTask:task andApiOwner:owner];
-                } else {
-                    [weakSelf skipToOldApiResponseData:responseObject withTask:task andApiOwner:owner];
-                }
-            }
-        }
-      [task cancel];
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        if (owner != nil) {
-            SEL sel = @selector(errorPost:tag:);
-            if ([owner respondsToSelector:sel]) {
-                [owner performSelector:sel withObject:error withObject:[NSNumber numberWithInteger: task.ksxTag]];
-            }
-        }
-      [task cancel];
-    }];
-    task.ksxTag = tag;
-*/
 }
 
 - (void)skipToNewApiResponseData:(id)response withTask:(kSXTag)tag andApiOwner:(id<NetworkModuleDelegate>)owner
