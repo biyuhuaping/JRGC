@@ -2940,6 +2940,13 @@
 			path = resualtPage;
 			sourceTree = "<group>";
 		};
+		334259852091B056000893CC /* More */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = More;
+			sourceTree = "<group>";
+		};
 		3343FF25206CCDE7002A2153 /* NewLib */ = {
 			isa = PBXGroup;
 			children = (
@@ -3290,6 +3297,7 @@
 		33C08712208086A50003DE76 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				334259852091B056000893CC /* More */,
 			);
 			path = Class;
 			sourceTree = "<group>";
