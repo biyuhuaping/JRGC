@@ -213,6 +213,7 @@
             UCFHomeListCellModel *homelistModel = [UCFHomeListCellModel homeListCellWithDict:result];
             [tempResult setObject:homelistModel forKey:@"listInfo"];
 //            [[UCFSession sharedManager] transformBackgroundWithUserInfo:@{} withState:UCFSessionStateUserRefresh];
+///     这里会有问题，两个请求同时请求，第一个没有返回的情况下，第二个请求会把第一个请求的block块重置掉，这个时候第一个请求的block地址在self.requestDict 里面是什么？野指针！当一个返回的结果调用这个block的时候就会崩溃！！！！
             if (complete) {
                 complete(nil, tempResult);
             }
