@@ -45,6 +45,7 @@
 		25F445C41D66E276006813BB /* UCFChoseBankViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25F445C21D66E276006813BB /* UCFChoseBankViewController.xib */; };
 		25F538B41D881B0A0039262F /* UCFPurchaseWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25F538B21D881B0A0039262F /* UCFPurchaseWebView.m */; };
 		25F538B51D881B0A0039262F /* UCFPurchaseWebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25F538B31D881B0A0039262F /* UCFPurchaseWebView.xib */; };
+		330F8AAC20932542004D4A15 /* NormalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 330F8AAB20932542004D4A15 /* NormalCell.m */; };
 		3338802D20905AEC00A7115B /* RequestTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 3338802C20905AEC00A7115B /* RequestTool.m */; };
 		333FD810206B836F00CEA03C /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 333FD80E206B836F00CEA03C /* Reachability.m */; };
 		3343FF36206CDECB002A2153 /* UCF404ErrorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3343FF32206CDECA002A2153 /* UCF404ErrorView.m */; };
@@ -60,6 +61,12 @@
 		33717876206CCB0B00A6366C /* UCFDirectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33717870206CCB0A00A6366C /* UCFDirectCell.xib */; };
 		33717877206CCB0B00A6366C /* UCFTipCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33717873206CCB0B00A6366C /* UCFTipCell.m */; };
 		33717878206CCB0B00A6366C /* UCFTipCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33717874206CCB0B00A6366C /* UCFTipCell.xib */; };
+		337E54452092D266009DE8C4 /* V2BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 337E54442092D266009DE8C4 /* V2BaseViewController.m */; };
+		337E54482092D37D009DE8C4 /* MoreViewController_V2.m in Sources */ = {isa = PBXBuildFile; fileRef = 337E54472092D37D009DE8C4 /* MoreViewController_V2.m */; };
+		337E544E2092D752009DE8C4 /* MoreHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 337E544D2092D752009DE8C4 /* MoreHeadView.m */; };
+		337E5450209301DC009DE8C4 /* MoreHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 337E544F209301DC009DE8C4 /* MoreHeadView.xib */; };
+		337E545320930BB8009DE8C4 /* MoreViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 337E545220930BB8009DE8C4 /* MoreViewModel.m */; };
+		337E545620930BE4009DE8C4 /* MoreModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 337E545520930BE4009DE8C4 /* MoreModel.m */; };
 		33B1FCD120887602009D48DA /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B1FCCE20887602009D48DA /* MBProgressHUD.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		33B1FCD220887602009D48DA /* MBProgressHUD+HJ.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B1FCD020887602009D48DA /* MBProgressHUD+HJ.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4A04F82F1F0B6B1000ADE9D8 /* UCFGoldAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A04F82D1F0B6B1000ADE9D8 /* UCFGoldAccountViewController.m */; };
@@ -1113,6 +1120,8 @@
 		25F538B21D881B0A0039262F /* UCFPurchaseWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFPurchaseWebView.m; sourceTree = "<group>"; };
 		25F538B31D881B0A0039262F /* UCFPurchaseWebView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFPurchaseWebView.xib; sourceTree = "<group>"; };
 		32CA3369118CF695601F1379 /* Pods-JRGC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JRGC.release.xcconfig"; path = "Pods/Target Support Files/Pods-JRGC/Pods-JRGC.release.xcconfig"; sourceTree = "<group>"; };
+		330F8AAA20932542004D4A15 /* NormalCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NormalCell.h; sourceTree = "<group>"; };
+		330F8AAB20932542004D4A15 /* NormalCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NormalCell.m; sourceTree = "<group>"; };
 		3338802B20905AEC00A7115B /* RequestTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RequestTool.h; sourceTree = "<group>"; };
 		3338802C20905AEC00A7115B /* RequestTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RequestTool.m; sourceTree = "<group>"; };
 		333FD80E206B836F00CEA03C /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
@@ -1140,6 +1149,18 @@
 		33717872206CCB0A00A6366C /* UCFDirectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFDirectCell.h; sourceTree = "<group>"; };
 		33717873206CCB0B00A6366C /* UCFTipCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFTipCell.m; sourceTree = "<group>"; };
 		33717874206CCB0B00A6366C /* UCFTipCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFTipCell.xib; sourceTree = "<group>"; };
+		337E54432092D266009DE8C4 /* V2BaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = V2BaseViewController.h; sourceTree = "<group>"; };
+		337E54442092D266009DE8C4 /* V2BaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = V2BaseViewController.m; sourceTree = "<group>"; };
+		337E54462092D37D009DE8C4 /* MoreViewController_V2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MoreViewController_V2.h; sourceTree = "<group>"; };
+		337E54472092D37D009DE8C4 /* MoreViewController_V2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MoreViewController_V2.m; sourceTree = "<group>"; };
+		337E544C2092D752009DE8C4 /* MoreHeadView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MoreHeadView.h; sourceTree = "<group>"; };
+		337E544D2092D752009DE8C4 /* MoreHeadView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MoreHeadView.m; sourceTree = "<group>"; };
+		337E544F209301DC009DE8C4 /* MoreHeadView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MoreHeadView.xib; sourceTree = "<group>"; };
+		337E545120930BB8009DE8C4 /* MoreViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MoreViewModel.h; sourceTree = "<group>"; };
+		337E545220930BB8009DE8C4 /* MoreViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MoreViewModel.m; sourceTree = "<group>"; };
+		337E545420930BE4009DE8C4 /* MoreModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MoreModel.h; sourceTree = "<group>"; };
+		337E545520930BE4009DE8C4 /* MoreModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MoreModel.m; sourceTree = "<group>"; };
+		337E545A20930FBA009DE8C4 /* GlobalTextFile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlobalTextFile.h; sourceTree = "<group>"; };
 		33B1FCCD20887602009D48DA /* MBProgressHUD+HJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+HJ.h"; sourceTree = "<group>"; };
 		33B1FCCE20887602009D48DA /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		33B1FCCF20887602009D48DA /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
@@ -2940,11 +2961,14 @@
 			path = resualtPage;
 			sourceTree = "<group>";
 		};
-		334259852091B056000893CC /* More */ = {
+		334259852091B056000893CC /* More_V2 */ = {
 			isa = PBXGroup;
 			children = (
+				337E544B2092D398009DE8C4 /* Model */,
+				337E544A2092D392009DE8C4 /* ViewModel */,
+				337E54492092D387009DE8C4 /* Views */,
 			);
-			path = More;
+			path = More_V2;
 			sourceTree = "<group>";
 		};
 		3343FF25206CCDE7002A2153 /* NewLib */ = {
@@ -3227,6 +3251,47 @@
 			path = TipCell;
 			sourceTree = "<group>";
 		};
+		337E54422092D1F4009DE8C4 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				337E54432092D266009DE8C4 /* V2BaseViewController.h */,
+				337E54442092D266009DE8C4 /* V2BaseViewController.m */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		337E54492092D387009DE8C4 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				337E54462092D37D009DE8C4 /* MoreViewController_V2.h */,
+				337E54472092D37D009DE8C4 /* MoreViewController_V2.m */,
+				337E544C2092D752009DE8C4 /* MoreHeadView.h */,
+				337E544D2092D752009DE8C4 /* MoreHeadView.m */,
+				337E544F209301DC009DE8C4 /* MoreHeadView.xib */,
+				330F8AAA20932542004D4A15 /* NormalCell.h */,
+				330F8AAB20932542004D4A15 /* NormalCell.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		337E544A2092D392009DE8C4 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				337E545120930BB8009DE8C4 /* MoreViewModel.h */,
+				337E545220930BB8009DE8C4 /* MoreViewModel.m */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		337E544B2092D398009DE8C4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				337E545420930BE4009DE8C4 /* MoreModel.h */,
+				337E545520930BE4009DE8C4 /* MoreModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		33B1FCC62088479D009D48DA /* Support */ = {
 			isa = PBXGroup;
 			children = (
@@ -3255,6 +3320,7 @@
 		33B1FCC9208847CE009D48DA /* Macro */ = {
 			isa = PBXGroup;
 			children = (
+				337E545A20930FBA009DE8C4 /* GlobalTextFile.h */,
 			);
 			path = Macro;
 			sourceTree = "<group>";
@@ -3287,6 +3353,7 @@
 		33C08711208086740003DE76 /* V2 */ = {
 			isa = PBXGroup;
 			children = (
+				337E54422092D1F4009DE8C4 /* Base */,
 				33B1FCCB208847FA009D48DA /* Vendor */,
 				33B1FCC62088479D009D48DA /* Support */,
 				33C08712208086A50003DE76 /* Class */,
@@ -3297,7 +3364,7 @@
 		33C08712208086A50003DE76 /* Class */ = {
 			isa = PBXGroup;
 			children = (
-				334259852091B056000893CC /* More */,
+				334259852091B056000893CC /* More_V2 */,
 			);
 			path = Class;
 			sourceTree = "<group>";
@@ -7096,6 +7163,7 @@
 				83D42A8E1FCE619D004C96EF /* UCFShareBaseView.xib in Resources */,
 				740586D21F41B10900E2DE01 /* UCFGoldRaiseCell.xib in Resources */,
 				83CD84351F13A50800227704 /* UCFP2PViewController.xib in Resources */,
+				337E5450209301DC009DE8C4 /* MoreHeadView.xib in Resources */,
 				74673BC71FEB923A00AF3727 /* UCFMIneFuncCollectCell.xib in Resources */,
 				74702BC01FB5599700CBB655 /* UCFExtractGoldCell.xib in Resources */,
 				833603CE1D928F9200C3E435 /* UCFWithdrawCashResultWebView.xib in Resources */,
@@ -7229,12 +7297,14 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-JRGC/Pods-JRGC-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/KVOController/KVOController.framework",
+				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
 				"${BUILT_PRODUCTS_DIR}/WebViewJavascriptBridge/WebViewJavascriptBridge.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KVOController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WebViewJavascriptBridge.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -7427,6 +7497,7 @@
 				333FD810206B836F00CEA03C /* Reachability.m in Sources */,
 				74A2C0D61F4306A000EDF0FA /* UCFGoldCashSecondCell.m in Sources */,
 				08E9A4E21B845E1200099F30 /* UCFTextField.m in Sources */,
+				337E545320930BB8009DE8C4 /* MoreViewModel.m in Sources */,
 				7BC8A9F51AD4BFF600BF4660 /* UCFMoreViewController.m in Sources */,
 				7BA6E4C21AD6731900FE8C37 /* UIImage+GIF.m in Sources */,
 				4A6FAFC51D743CF300AD4DF8 /* CJLabel.m in Sources */,
@@ -7454,6 +7525,7 @@
 				74BDA9981F09F6F10054403F /* UCFCalendarHeaderView.m in Sources */,
 				7491820E1EC166F000AC1ECE /* TAPageControl.m in Sources */,
 				74D9B8531FD793650076F733 /* KTAlertController.m in Sources */,
+				337E54452092D266009DE8C4 /* V2BaseViewController.m in Sources */,
 				74270D1E1EC595ED00F9419B /* UCFRebateCell.m in Sources */,
 				74EB306F1B0E004900D27BA9 /* UCFBankModel.m in Sources */,
 				840A794A1C2A80B60059A946 /* UCFMessageSettingViewController.m in Sources */,
@@ -7539,6 +7611,7 @@
 				833A6EAB1E55466B00C8A494 /* UCFCollectionDetailViewController.m in Sources */,
 				83382C1A1FD52EFD001BBF90 /* UCFAssetProofListModel.m in Sources */,
 				83FF3E4A1E12159B00DFB99C /* UCFCashTableViewCell.m in Sources */,
+				337E544E2092D752009DE8C4 /* MoreHeadView.m in Sources */,
 				33717875206CCB0B00A6366C /* UCFDirectCell.m in Sources */,
 				FB7EDE3E1D6BFCD700C3E924 /* AppDelegate.mm in Sources */,
 				7443C7371F1F3E64009669C0 /* UCFGoldRechargeRecordCell.m in Sources */,
@@ -7668,6 +7741,7 @@
 				74270D431EC5960100F9419B /* UCFDataStaticsModel.m in Sources */,
 				83CD843F1F13A50800227704 /* UCFProjectListCell.m in Sources */,
 				749140BA1F18D1EA00E624CE /* UCFGoldCashMoneyViewController.m in Sources */,
+				337E545620930BE4009DE8C4 /* MoreModel.m in Sources */,
 				7BD2BFD61B5DF9CC0046687C /* UCFGuaPopViewController.m in Sources */,
 				74BDA98E1F09F6C60054403F /* FSCalendarExtensions.m in Sources */,
 				A830DE7F1F8DC91A003855B9 /* UCFCalendarModularDetailHeaderView.m in Sources */,
@@ -7794,6 +7868,7 @@
 				744B9ED51F0B8AC100440FBA /* UCFCalendarDetailHeaderView.m in Sources */,
 				74270C9A1EC58F6800F9419B /* UCFUserPresenter.m in Sources */,
 				7443C7431F1F6E6B009669C0 /* UCFGoldCashHistoryModel.m in Sources */,
+				330F8AAC20932542004D4A15 /* NormalCell.m in Sources */,
 				74EB30731B0E0EC900D27BA9 /* UCFBankTableViewCell.m in Sources */,
 				4AA2AA801E5B17B7006E83F8 /* UCFBatchSetNumWebViewController.m in Sources */,
 				74270D481EC5967B00F9419B /* UCFRegistrationRecord.m in Sources */,
@@ -7862,6 +7937,7 @@
 				74931A311B1326FE00143424 /* OHAttributedLabel.m in Sources */,
 				74DBAC741D585FFD00F6F6B1 /* UCFTipButton.m in Sources */,
 				25CCDA9C1DDAE28C002C0F6D /* UCFLatesProjectTableViewCell.m in Sources */,
+				337E54482092D37D009DE8C4 /* MoreViewController_V2.m in Sources */,
 				74270CA21EC58F6800F9419B /* UCFHomeUserInfoCell.m in Sources */,
 				83CD72A61FB451B5007138ED /* UCFExtractViewCell.m in Sources */,
 				74270D1B1EC595ED00F9419B /* UCFFriendRecCell1.m in Sources */,
