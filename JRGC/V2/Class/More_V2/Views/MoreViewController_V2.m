@@ -28,7 +28,17 @@
 - (void)initData
 {
     self.vm = [[MoreViewModel alloc] init];
-    
+    [self.showTableView reloadData];
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return [self.vm getSectionHeight];
+}
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 9)];
+    view.backgroundColor = [UIColor yellowColor];
+    return view;
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -43,9 +53,11 @@
     static NSString *str = @"cellStr";
     NormalCell *cell = [tableView dequeueReusableCellWithIdentifier:str];
     if (!cell) {
-        cell = [[NormalCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:str];
+        cell = [[NormalCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:str];
+        cell.vm = self.vm;
     }
-    cell.model = [self.vm getSectionData:indexPath];
+    cell.indexPath = indexPath;
+    [cell layoutMoreView];
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -71,13 +83,17 @@
     }];
     [self.showTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         if (@available(iOS 11.0, *)) {
-            make.top.equalTo(self.view.mas_safeAreaLayoutGuideBottom);
+            make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop);
         } else {
-            make.top.equalTo(self.view.mas_bottom);
+            make.top.equalTo(self.view.mas_top);
         }
-        make.height.mas_equalTo(self.view);
         make.left.equalTo(self.view);
         make.right.equalTo(self.view);
+        if (@available(iOS 11.0, *)) {
+            make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom);
+        } else {
+            make.bottom.equalTo(self.view.mas_bottom);
+        }
     }];
 }
 

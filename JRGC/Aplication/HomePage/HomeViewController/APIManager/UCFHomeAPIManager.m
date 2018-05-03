@@ -52,7 +52,7 @@
 
 - (void)fetchHomeIconListWithUserId:(NSString *)userId completionHandler:(NetworkCompletionHandler)completionHandler
 {
-    
+    NSLog(@"%@",completionHandler);
     [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":userId} tag:kSXTagHomeIconList owner:self signature:YES Type:SelectAccoutDefault];
     [self.requestDict setObject:completionHandler forKey:HOMEICON];
 }

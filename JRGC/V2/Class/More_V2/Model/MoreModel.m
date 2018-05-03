@@ -9,10 +9,7 @@
 #import "MoreModel.h"
 
 @interface MoreModel()
-@property(nonatomic, copy)NSString  *leftTitle;
-@property(nonatomic, copy)NSString  *rightDesText;
-@property(nonatomic, assign)BOOL    isShowAccess;
-@property(nonatomic, copy)NSString  *targetClassName;
+
 
 @end
 

@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MoreModel.h"
+#import "MoreViewModel.h"
+#import "ColorTheme.h"
 @interface NormalCell : UITableViewCell
-@property(nonatomic,strong)MoreModel *model;
-- (void)setModel:(MoreModel *)model;
+@property(nonatomic,weak)NSIndexPath *indexPath;
+@property(nonatomic,strong)MoreViewModel *vm;
+- (void)layoutMoreView;
 @end

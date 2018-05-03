@@ -11,6 +11,7 @@
 #import "AppDelegate.h"
 #import "UCFRegisterStepOneViewController.h"
 #import "UCFMoreViewController.h"
+#import "MoreViewController_V2.h"
 @interface UCFLoginBaseView ()
 {
     
@@ -125,10 +126,14 @@
 }
 - (void)showMoreView
 {
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"UCFMoreViewController" bundle:nil];
-    UCFMoreViewController *moreVC = [storyboard instantiateViewControllerWithIdentifier:@"more_main"];
-    moreVC.title = @"更多";
-    moreVC.sourceVC = @"UCFSecurityCenterViewController";
+//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"UCFMoreViewController" bundle:nil];
+//    UCFMoreViewController *moreVC = [storyboard instantiateViewControllerWithIdentifier:@"more_main"];
+//    moreVC.title = @"更多";
+//    moreVC.sourceVC = @"UCFSecurityCenterViewController";
+    
+    MoreViewController_V2 *moreVC = [[MoreViewController_V2 alloc] init];
+
+    
     AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
     UINavigationController *nav = app.tabBarController.selectedViewController;
     [nav pushViewController:moreVC  animated:YES];

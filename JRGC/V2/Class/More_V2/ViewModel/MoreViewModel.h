@@ -11,6 +11,12 @@
 @interface MoreViewModel : NSObject
 
 /**
+ 获取行高
+
+ @return 9
+ */
+- (CGFloat) getSectionHeight;
+/**
  获取数组组数
 
  @return 数组组数
@@ -53,5 +59,13 @@
  @param button button
  */
 - (void)vmFeedBackButtonClick:(UIButton *)button;
+
+/**
+ 获取cell所在位置
+
+ @param indexPath cell的位置索引
+ @return -1 代表首行 0代表中间行 1代表最后一行
+ */
+- (int)getCellPostion:(NSIndexPath *)indexPath;
 
 @end

@@ -40,6 +40,12 @@
     [self.listArray_two addObject:model2_1];
     [self.listArray_two addObject:model2_2];
     [self.listArray_two addObject:model2_3];
+    [self.totalArray addObject:self.listArray_one];
+    [self.totalArray addObject:self.listArray_two];
+
+}
+- (CGFloat) getSectionHeight{
+    return 9;
 }
 - (NSInteger) getSectionCount{
     return self.totalArray.count;
@@ -53,6 +59,18 @@
     NSArray *arr = [self.totalArray objectAtIndex:indexpath.section];
     MoreModel *model = [arr objectAtIndex:indexpath.row];
     return model;
+}
+- (int)getCellPostion:(NSIndexPath *)indexPath
+{
+    NSArray *arr = [self.totalArray objectAtIndex:indexPath.section];
+    if (indexPath.row == 0) {
+        return -1;  //第一行
+    } else if (indexPath.row == arr.count - 1) {
+        return 1;   //第二行
+    } else {
+       return 0;    //中间行
+    }
+    
 }
 - (void)cellSelectedClicked:(MoreModel *)model
 {

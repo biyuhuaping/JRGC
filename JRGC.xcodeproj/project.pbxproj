@@ -69,6 +69,7 @@
 		337E545620930BE4009DE8C4 /* MoreModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 337E545520930BE4009DE8C4 /* MoreModel.m */; };
 		33B1FCD120887602009D48DA /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B1FCCE20887602009D48DA /* MBProgressHUD.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		33B1FCD220887602009D48DA /* MBProgressHUD+HJ.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B1FCD020887602009D48DA /* MBProgressHUD+HJ.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		33ED6BD0209B034A00E47334 /* ColorTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 33ED6BCE209B034A00E47334 /* ColorTheme.m */; };
 		4A04F82F1F0B6B1000ADE9D8 /* UCFGoldAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A04F82D1F0B6B1000ADE9D8 /* UCFGoldAccountViewController.m */; };
 		4A04F8301F0B6B1000ADE9D8 /* UCFGoldAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A04F82E1F0B6B1000ADE9D8 /* UCFGoldAccountViewController.xib */; };
 		4A04F8331F0B6DBB00ADE9D8 /* UCFGoldAccountHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A04F8321F0B6DBB00ADE9D8 /* UCFGoldAccountHeadView.m */; };
@@ -1165,6 +1166,8 @@
 		33B1FCCE20887602009D48DA /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		33B1FCCF20887602009D48DA /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		33B1FCD020887602009D48DA /* MBProgressHUD+HJ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+HJ.m"; sourceTree = "<group>"; };
+		33ED6BCE209B034A00E47334 /* ColorTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorTheme.m; sourceTree = "<group>"; };
+		33ED6BCF209B034A00E47334 /* ColorTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorTheme.h; sourceTree = "<group>"; };
 		3C3D11AF5BBAC2E558A4FAA0 /* Pods-JRGC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JRGC.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JRGC/Pods-JRGC.debug.xcconfig"; sourceTree = "<group>"; };
 		4A04F82C1F0B6B1000ADE9D8 /* UCFGoldAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFGoldAccountViewController.h; sourceTree = "<group>"; };
 		4A04F82D1F0B6B1000ADE9D8 /* UCFGoldAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFGoldAccountViewController.m; sourceTree = "<group>"; };
@@ -3320,6 +3323,7 @@
 		33B1FCC9208847CE009D48DA /* Macro */ = {
 			isa = PBXGroup;
 			children = (
+				33ED6BCD209B034A00E47334 /* theme */,
 				337E545A20930FBA009DE8C4 /* GlobalTextFile.h */,
 			);
 			path = Macro;
@@ -3367,6 +3371,15 @@
 				334259852091B056000893CC /* More_V2 */,
 			);
 			path = Class;
+			sourceTree = "<group>";
+		};
+		33ED6BCD209B034A00E47334 /* theme */ = {
+			isa = PBXGroup;
+			children = (
+				33ED6BCE209B034A00E47334 /* ColorTheme.m */,
+				33ED6BCF209B034A00E47334 /* ColorTheme.h */,
+			);
+			path = theme;
 			sourceTree = "<group>";
 		};
 		4A0DC7FF1BCF5B1300835E95 /* HWWeakTimer */ = {
@@ -7913,6 +7926,7 @@
 				74E535ED1AE5FD6400DAABFC /* UCFAboutUsViewController.m in Sources */,
 				A81F40061F4E86F80018B673 /* UCFRebateGoldCell.m in Sources */,
 				A830DE801F8DC91A003855B9 /* UCFCalendarModularHeaderView.m in Sources */,
+				33ED6BD0209B034A00E47334 /* ColorTheme.m in Sources */,
 				744F8BEE1F3327AF005FF01B /* UCFMyReservedViewController.m in Sources */,
 				832D521F1D8FE5EA0060F1F7 /* UCFWithdrawCashResultWebView.m in Sources */,
 				747A91211B01B11100FE2334 /* UCFConstractModel.m in Sources */,
