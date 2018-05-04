@@ -17,6 +17,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.edgesForExtendedLayout = UIRectEdgeNone;
+    self.view.backgroundColor = [UIColor colorWithRed:235/255.0 green:235/255.0 blue:238.0/255.0f alpha:1];
+    
+    self.navigationController.navigationBar.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.navigationController.navigationBar.layer.shadowOpacity = 0.07f;
+    self.navigationController.navigationBar.layer.shadowOffset = CGSizeMake(0,1);
 //    self.view.backgroundColor = [ColorTheme getBGLightGrayColorOne];
 //    [self setNavBackColor:[UIColor whiteColor]];
 }

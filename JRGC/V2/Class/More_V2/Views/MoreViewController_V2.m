@@ -11,6 +11,7 @@
 #import "MoreHeadView.h"
 #import "Masonry.h"
 #import "NormalCell.h"
+#import "UIViewController+Nav.h"
 @interface MoreViewController_V2 ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic, strong)UITableView     *showTableView;
 @property(nonatomic, strong)MoreHeadView    *headView;
@@ -21,14 +22,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self initLayout];
+    [self setLeftBackButton];
+    [self setTitleText:@"更多"];
     [self initData];
-    
+    [self initLayout];
 }
 - (void)initData
 {
     self.vm = [[MoreViewModel alloc] init];
-    [self.showTableView reloadData];
+    self.vm.currentVC = self;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
@@ -37,7 +39,7 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 9)];
-    view.backgroundColor = [UIColor yellowColor];
+    view.backgroundColor = UIColorWithRGB(0xebebee);
     return view;
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -70,6 +72,7 @@
     self.showTableView.delegate = self;
     self.showTableView.dataSource = self;
     self.showTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.showTableView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:_showTableView];
     
     self.headView = [MoreHeadView getView];

@@ -110,9 +110,7 @@
             }
                 break;
             case 3:{
-
                 controller = [[P2PWalletHelper sharedManager] getUCFWalletTargetController];
-
             }
                 break;
             case 4:{

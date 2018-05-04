@@ -92,8 +92,7 @@ static NSString * const kAppSecret = @"10dddec2bf7d3be794eda13b0df0a7d9";
 
 /** 打开用户反馈页面 */
 - (void)openFeedbackViewController {
-    //  初始化方式,或者参考下方的`- (YWFeedbackKit *)feedbackKit`方法。
-//    self.feedbackKit = [[YWFeedbackKit alloc] initWithAppKey:kAppKey];
+
     NSString *userId = [[NSUserDefaults standardUserDefaults] valueForKey:UUID];
     userId = userId?userId:@"";
     NSDictionary *infoDic = [[NSBundle mainBundle] infoDictionary];
@@ -113,9 +112,7 @@ static NSString * const kAppSecret = @"10dddec2bf7d3be794eda13b0df0a7d9";
                 [aParentController dismissViewControllerAnimated:YES completion:nil];
             }];
         } else {
-            /** 使用自定义的方式抛出error时，此部分可以注释掉 */
-//            NSString *title = [error.userInfo objectForKey:@"msg"]?:@"接口调用失败，请保持网络通畅！";
-//            [[TWMessageBarManager sharedInstance] showMessageWithTitle:title description:nil type:TWMessageBarMessageTypeError];
+
         }
     }];
 }

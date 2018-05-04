@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "MoreModel.h"
 @interface MoreViewModel : NSObject
-
+@property(nonatomic,weak)UIViewController *currentVC;
 /**
  获取行高
 

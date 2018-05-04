@@ -32,4 +32,12 @@
  @return 0x999999
  */
 + (UIColor *)textColor_999999;
+/**
+ 字体颜色0x333333
+ 
+ @return 0x333333
+ */
++ (UIColor *)textColor_333333;
+
+
 @end

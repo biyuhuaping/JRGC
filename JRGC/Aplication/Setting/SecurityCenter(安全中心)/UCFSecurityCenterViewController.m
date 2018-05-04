@@ -37,7 +37,7 @@
 #import "UCFBatchInvestmentViewController.h"
 #import "HSHelper.h"
 #import "UCFFacCodeViewController.h"
-#import "UCFMoreViewController.h"
+#import "MoreViewController_V2.h"
 #import "UCFSignModel.h"
 #import "MjAlertView.h"
 #import "UCFSignView.h"
@@ -109,7 +109,7 @@
         UCFSettingItem *activeFaceValid  = [UCFSettingSwitchItem itemWithIcon:@"uesr_icon_face" title:@"启用刷脸登录" withSwitchType:2];
         UCFSettingItem *modifyPassword = [UCFSettingArrowItem itemWithIcon:@"login_icon_password" title:@"修改登录密码" destVcClass:[ModifyPasswordViewController class]];//***qyy
 
-        UCFSettingItem *moreVc = [UCFSettingArrowItem itemWithIcon:@"safecenter_icon_more" title:@"更多" destVcClass:[UCFMoreViewController class]];
+        UCFSettingItem *moreVc = [UCFSettingArrowItem itemWithIcon:@"safecenter_icon_more" title:@"更多" destVcClass:[MoreViewController_V2 class]];
         UCFSettingGroup *group1 = [[UCFSettingGroup alloc] init];//用户信息
         
         UCFSettingGroup *group2 = [[UCFSettingGroup alloc] init];
@@ -921,12 +921,9 @@
                     tradePasswordVC.isCompanyAgent =_isCompanyAgent;
                     [self.navigationController pushViewController:tradePasswordVC  animated:YES];
                 }
-            } else if ([NSStringFromClass(arrowItem.destVcClass)  isEqualToString: @"UCFMoreViewController"]) {
-                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"UCFMoreViewController" bundle:nil];
-                UCFMoreViewController *moreVC = [storyboard instantiateViewControllerWithIdentifier:@"more_main"];
+            } else if ([NSStringFromClass(arrowItem.destVcClass)  isEqualToString: @"MoreViewController_V2"]) {
+                MoreViewController_V2 *moreVC = [[MoreViewController_V2 alloc] init];
                 moreVC.title = @"更多";
-                moreVC.sourceVC = @"UCFSecurityCenterViewController";
-                vc = moreVC;
                 [self.navigationController pushViewController:moreVC  animated:YES];
             }
         }

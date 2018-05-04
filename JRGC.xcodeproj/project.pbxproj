@@ -61,6 +61,9 @@
 		33717876206CCB0B00A6366C /* UCFDirectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33717870206CCB0A00A6366C /* UCFDirectCell.xib */; };
 		33717877206CCB0B00A6366C /* UCFTipCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33717873206CCB0B00A6366C /* UCFTipCell.m */; };
 		33717878206CCB0B00A6366C /* UCFTipCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33717874206CCB0B00A6366C /* UCFTipCell.xib */; };
+		3378DAA2209C39E1000AEB9E /* touming.png in Resources */ = {isa = PBXBuildFile; fileRef = 3378DA9E209C39E0000AEB9E /* touming.png */; };
+		3378DAA3209C39E1000AEB9E /* UINavigationController+Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3378DA9F209C39E0000AEB9E /* UINavigationController+Layout.m */; };
+		3378DAA4209C39E1000AEB9E /* UIViewController+Nav.m in Sources */ = {isa = PBXBuildFile; fileRef = 3378DAA0209C39E0000AEB9E /* UIViewController+Nav.m */; };
 		337E54452092D266009DE8C4 /* V2BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 337E54442092D266009DE8C4 /* V2BaseViewController.m */; };
 		337E54482092D37D009DE8C4 /* MoreViewController_V2.m in Sources */ = {isa = PBXBuildFile; fileRef = 337E54472092D37D009DE8C4 /* MoreViewController_V2.m */; };
 		337E544E2092D752009DE8C4 /* MoreHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 337E544D2092D752009DE8C4 /* MoreHeadView.m */; };
@@ -1150,6 +1153,12 @@
 		33717872206CCB0A00A6366C /* UCFDirectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFDirectCell.h; sourceTree = "<group>"; };
 		33717873206CCB0B00A6366C /* UCFTipCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFTipCell.m; sourceTree = "<group>"; };
 		33717874206CCB0B00A6366C /* UCFTipCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFTipCell.xib; sourceTree = "<group>"; };
+		3378DA9B209C3705000AEB9E /* H5_URLS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = H5_URLS.h; sourceTree = "<group>"; };
+		3378DA9D209C39E0000AEB9E /* UIViewController+Nav.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Nav.h"; sourceTree = "<group>"; };
+		3378DA9E209C39E0000AEB9E /* touming.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = touming.png; sourceTree = "<group>"; };
+		3378DA9F209C39E0000AEB9E /* UINavigationController+Layout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+Layout.m"; sourceTree = "<group>"; };
+		3378DAA0209C39E0000AEB9E /* UIViewController+Nav.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Nav.m"; sourceTree = "<group>"; };
+		3378DAA1209C39E0000AEB9E /* UINavigationController+Layout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+Layout.h"; sourceTree = "<group>"; };
 		337E54432092D266009DE8C4 /* V2BaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = V2BaseViewController.h; sourceTree = "<group>"; };
 		337E54442092D266009DE8C4 /* V2BaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = V2BaseViewController.m; sourceTree = "<group>"; };
 		337E54462092D37D009DE8C4 /* MoreViewController_V2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MoreViewController_V2.h; sourceTree = "<group>"; };
@@ -3254,6 +3263,18 @@
 			path = TipCell;
 			sourceTree = "<group>";
 		};
+		3378DA9C209C39E0000AEB9E /* NavBar */ = {
+			isa = PBXGroup;
+			children = (
+				3378DA9D209C39E0000AEB9E /* UIViewController+Nav.h */,
+				3378DA9E209C39E0000AEB9E /* touming.png */,
+				3378DA9F209C39E0000AEB9E /* UINavigationController+Layout.m */,
+				3378DAA0209C39E0000AEB9E /* UIViewController+Nav.m */,
+				3378DAA1209C39E0000AEB9E /* UINavigationController+Layout.h */,
+			);
+			path = NavBar;
+			sourceTree = "<group>";
+		};
 		337E54422092D1F4009DE8C4 /* Base */ = {
 			isa = PBXGroup;
 			children = (
@@ -3309,6 +3330,7 @@
 		33B1FCC7208847BA009D48DA /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				3378DA9C209C39E0000AEB9E /* NavBar */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -3325,6 +3347,7 @@
 			children = (
 				33ED6BCD209B034A00E47334 /* theme */,
 				337E545A20930FBA009DE8C4 /* GlobalTextFile.h */,
+				3378DA9B209C3705000AEB9E /* H5_URLS.h */,
 			);
 			path = Macro;
 			sourceTree = "<group>";
@@ -7020,6 +7043,7 @@
 				744EB7F91EE7E858003C57C4 /* UCFMicroMoneyViewController.xib in Resources */,
 				840A79441C2A7C160059A946 /* UCFMessageCenterViewController.xib in Resources */,
 				83DD084D1FB971C600B0688F /* UCFDrawGoldRechangAlertView.xib in Resources */,
+				3378DAA2209C39E1000AEB9E /* touming.png in Resources */,
 				74C7A0D51FE10A8C00217ABB /* UCFCalculateTypeCell.xib in Resources */,
 				74270D521EC5A00400F9419B /* UCFInvitationRewardHeaderView.xib in Resources */,
 				E37086B61D61A6CD0041D293 /* UCFHuiShangChooseBankViewController.xib in Resources */,
@@ -7546,6 +7570,7 @@
 				747A91151B01A46300FE2334 /* UCFInvestDetailModel.m in Sources */,
 				74270D451EC5960100F9419B /* UIColor+Hex.m in Sources */,
 				74F291161AE0DBC1003E0E86 /* UCFMyInvestViewController.m in Sources */,
+				3378DAA3209C39E1000AEB9E /* UINavigationController+Layout.m in Sources */,
 				7420DF061B159E81003CAE38 /* UCFMoreCell.m in Sources */,
 				74270D141EC595ED00F9419B /* CircleView.m in Sources */,
 				7BDD8FC91AE0DD67007A5CE8 /* MDRadialProgressView.m in Sources */,
@@ -7671,6 +7696,7 @@
 				74BDA9891F09F6C60054403F /* FSCalendarCollectionView.m in Sources */,
 				74B763DF1F20E08E00E12E51 /* UCFAssetTipView.m in Sources */,
 				FBE5A0531AE8BEDD0095B2ED /* UCFMyInvestViewCell.m in Sources */,
+				3378DAA4209C39E1000AEB9E /* UIViewController+Nav.m in Sources */,
 				7BA6E4B91AD6731900FE8C37 /* NSData+ImageContentType.m in Sources */,
 				83DD084E1FB971C600B0688F /* UCFDrawGoldRechangAlertView.m in Sources */,
 				7BC304841ACBC22D007767F1 /* UIImage+Misc.m in Sources */,

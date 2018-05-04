@@ -25,4 +25,9 @@
 {
     return UIColorWithRGB(0x999999);
 }
++ (UIColor *)textColor_333333
+{
+    return UIColorWithRGB(0x333333);
+
+}
 @end

@@ -162,6 +162,9 @@
                 <constraint firstItem="Lfa-xu-Hch" firstAttribute="top" secondItem="iZ6-WQ-wuF" secondAttribute="top" constant="35" id="uTm-sU-nFg"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="buildVersionLab" destination="BgN-9X-YCh" id="SWp-hw-GHd"/>
+            </connections>
             <point key="canvasLocation" x="122" y="520"/>
         </view>
     </objects>
