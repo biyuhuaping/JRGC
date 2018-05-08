@@ -70,6 +70,11 @@
 		337E5450209301DC009DE8C4 /* MoreHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 337E544F209301DC009DE8C4 /* MoreHeadView.xib */; };
 		337E545320930BB8009DE8C4 /* MoreViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 337E545220930BB8009DE8C4 /* MoreViewModel.m */; };
 		337E545620930BE4009DE8C4 /* MoreModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 337E545520930BE4009DE8C4 /* MoreModel.m */; };
+		3381B44020A179D600E95BD6 /* NetWorkEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 3381B43D20A179D600E95BD6 /* NetWorkEngine.m */; };
+		3381B44420A179F700E95BD6 /* NetWorkingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3381B44320A179F600E95BD6 /* NetWorkingManager.m */; };
+		3381B44720A17B3700E95BD6 /* Encryption.m in Sources */ = {isa = PBXBuildFile; fileRef = 3381B44620A17B3700E95BD6 /* Encryption.m */; };
+		3381B44D20A17BF500E95BD6 /* MD5Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 3381B44920A17BF500E95BD6 /* MD5Util.m */; };
+		3381B44E20A17BF500E95BD6 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 3381B44C20A17BF500E95BD6 /* NSString+MD5.m */; };
 		33B1FCD120887602009D48DA /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B1FCCE20887602009D48DA /* MBProgressHUD.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		33B1FCD220887602009D48DA /* MBProgressHUD+HJ.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B1FCD020887602009D48DA /* MBProgressHUD+HJ.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		33ED6BD0209B034A00E47334 /* ColorTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 33ED6BCE209B034A00E47334 /* ColorTheme.m */; };
@@ -93,7 +98,6 @@
 		4A6678C11D61C2E900469826 /* UINavigationController+FDFullscreenPopGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A6678C01D61C2E900469826 /* UINavigationController+FDFullscreenPopGesture.m */; };
 		4A675E3E1C5F484400F21DDA /* SelectPayMoneyOrbeansCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A675E3C1C5F484400F21DDA /* SelectPayMoneyOrbeansCell.m */; };
 		4A675E3F1C5F484400F21DDA /* SelectPayMoneyOrbeansCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A675E3D1C5F484400F21DDA /* SelectPayMoneyOrbeansCell.xib */; };
-		4A6EDBD21D5AC650004D40FF /* MD5Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A6EDBD11D5AC650004D40FF /* MD5Util.m */; };
 		4A6FAFC51D743CF300AD4DF8 /* CJLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A6FAFC21D743CF300AD4DF8 /* CJLabel.m */; };
 		4A6FAFC61D743CF300AD4DF8 /* NSString+CJString.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A6FAFC41D743CF300AD4DF8 /* NSString+CJString.m */; };
 		4A809CCF1B40F4DF00164EE5 /* SubInvestmentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A809CCE1B40F4DF00164EE5 /* SubInvestmentCell.m */; };
@@ -1171,6 +1175,17 @@
 		337E545420930BE4009DE8C4 /* MoreModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MoreModel.h; sourceTree = "<group>"; };
 		337E545520930BE4009DE8C4 /* MoreModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MoreModel.m; sourceTree = "<group>"; };
 		337E545A20930FBA009DE8C4 /* GlobalTextFile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlobalTextFile.h; sourceTree = "<group>"; };
+		3381B43C20A179D600E95BD6 /* NetWorkEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetWorkEngine.h; sourceTree = "<group>"; };
+		3381B43D20A179D600E95BD6 /* NetWorkEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetWorkEngine.m; sourceTree = "<group>"; };
+		3381B44220A179F600E95BD6 /* NetWorkingManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetWorkingManager.h; sourceTree = "<group>"; };
+		3381B44320A179F600E95BD6 /* NetWorkingManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetWorkingManager.m; sourceTree = "<group>"; };
+		3381B44520A17B3700E95BD6 /* Encryption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Encryption.h; sourceTree = "<group>"; };
+		3381B44620A17B3700E95BD6 /* Encryption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Encryption.m; sourceTree = "<group>"; };
+		3381B44920A17BF500E95BD6 /* MD5Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MD5Util.m; sourceTree = "<group>"; };
+		3381B44A20A17BF500E95BD6 /* NSString+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5.h"; sourceTree = "<group>"; };
+		3381B44B20A17BF500E95BD6 /* MD5Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MD5Util.h; sourceTree = "<group>"; };
+		3381B44C20A17BF500E95BD6 /* NSString+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5.m"; sourceTree = "<group>"; };
+		3381B44F20A17D0200E95BD6 /* API_Container.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = API_Container.h; sourceTree = "<group>"; };
 		33B1FCCD20887602009D48DA /* MBProgressHUD+HJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+HJ.h"; sourceTree = "<group>"; };
 		33B1FCCE20887602009D48DA /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		33B1FCCF20887602009D48DA /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
@@ -1212,8 +1227,6 @@
 		4A675E3B1C5F484400F21DDA /* SelectPayMoneyOrbeansCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectPayMoneyOrbeansCell.h; sourceTree = "<group>"; };
 		4A675E3C1C5F484400F21DDA /* SelectPayMoneyOrbeansCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectPayMoneyOrbeansCell.m; sourceTree = "<group>"; };
 		4A675E3D1C5F484400F21DDA /* SelectPayMoneyOrbeansCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectPayMoneyOrbeansCell.xib; sourceTree = "<group>"; };
-		4A6EDBD01D5AC650004D40FF /* MD5Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MD5Util.h; sourceTree = "<group>"; };
-		4A6EDBD11D5AC650004D40FF /* MD5Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MD5Util.m; sourceTree = "<group>"; };
 		4A6FAFC11D743CF300AD4DF8 /* CJLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJLabel.h; sourceTree = "<group>"; };
 		4A6FAFC21D743CF300AD4DF8 /* CJLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJLabel.m; sourceTree = "<group>"; };
 		4A6FAFC31D743CF300AD4DF8 /* NSString+CJString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CJString.h"; sourceTree = "<group>"; };
@@ -3316,9 +3329,34 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		3381B43A20A179B900E95BD6 /* NetEgine */ = {
+			isa = PBXGroup;
+			children = (
+				3381B44520A17B3700E95BD6 /* Encryption.h */,
+				3381B44620A17B3700E95BD6 /* Encryption.m */,
+				3381B44220A179F600E95BD6 /* NetWorkingManager.h */,
+				3381B44320A179F600E95BD6 /* NetWorkingManager.m */,
+				3381B43C20A179D600E95BD6 /* NetWorkEngine.h */,
+				3381B43D20A179D600E95BD6 /* NetWorkEngine.m */,
+			);
+			path = NetEgine;
+			sourceTree = "<group>";
+		};
+		3381B44820A17BF500E95BD6 /* MD5Util */ = {
+			isa = PBXGroup;
+			children = (
+				3381B44920A17BF500E95BD6 /* MD5Util.m */,
+				3381B44A20A17BF500E95BD6 /* NSString+MD5.h */,
+				3381B44B20A17BF500E95BD6 /* MD5Util.h */,
+				3381B44C20A17BF500E95BD6 /* NSString+MD5.m */,
+			);
+			path = MD5Util;
+			sourceTree = "<group>";
+		};
 		33B1FCC62088479D009D48DA /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				3381B43A20A179B900E95BD6 /* NetEgine */,
 				33B1FCCA208847D9009D48DA /* Singleton */,
 				33B1FCC9208847CE009D48DA /* Macro */,
 				33B1FCC8208847C6009D48DA /* Tool */,
@@ -3330,6 +3368,7 @@
 		33B1FCC7208847BA009D48DA /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				3381B44820A17BF500E95BD6 /* MD5Util */,
 				3378DA9C209C39E0000AEB9E /* NavBar */,
 			);
 			path = Category;
@@ -3348,6 +3387,7 @@
 				33ED6BCD209B034A00E47334 /* theme */,
 				337E545A20930FBA009DE8C4 /* GlobalTextFile.h */,
 				3378DA9B209C3705000AEB9E /* H5_URLS.h */,
+				3381B44F20A17D0200E95BD6 /* API_Container.h */,
 			);
 			path = Macro;
 			sourceTree = "<group>";
@@ -3447,8 +3487,6 @@
 		4A6EDBCF1D5AC61B004D40FF /* MD5Util */ = {
 			isa = PBXGroup;
 			children = (
-				4A6EDBD01D5AC650004D40FF /* MD5Util.h */,
-				4A6EDBD11D5AC650004D40FF /* MD5Util.m */,
 			);
 			path = MD5Util;
 			sourceTree = "<group>";
@@ -7541,6 +7579,7 @@
 				745B8A561FB5ADC7007BFF05 /* UCFExtractGoldDetailController.m in Sources */,
 				A851F34E1F132D2C003DE8B8 /* UCFGoldTransCell.m in Sources */,
 				74A0AF111EC341DD009E5A57 /* ZZCircleProgress.m in Sources */,
+				3381B44D20A17BF500E95BD6 /* MD5Util.m in Sources */,
 				74C7A0D41FE10A8C00217ABB /* UCFCalculateTypeCell.m in Sources */,
 				EDEC8BFA1CB3BA6300815228 /* WPAttributedStyleAction.m in Sources */,
 				749D6C931F2840A100AAD0C4 /* UCFCashTipView.m in Sources */,
@@ -7577,6 +7616,7 @@
 				2526ADDB1DD08CB800114D9A /* UIView+Category.m in Sources */,
 				A8C34F331F2737BA00926B7F /* RotationButton.m in Sources */,
 				4AB3EF231E287CD6007A6AF8 /* RiskAssessmentViewController.m in Sources */,
+				3381B44020A179D600E95BD6 /* NetWorkEngine.m in Sources */,
 				4A04F82F1F0B6B1000ADE9D8 /* UCFGoldAccountViewController.m in Sources */,
 				74270D301EC595FA00F9419B /* UCFDataStatisticsViewController.m in Sources */,
 				25950EB91D7FB6EC00E4CCBA /* CWAudioPlayer.m in Sources */,
@@ -7641,6 +7681,7 @@
 				AEC5EEC31D9B65BA000C0321 /* RechargeFixedTelNumView.m in Sources */,
 				74270C931EC58F6800F9419B /* UCFHomeListGroup.m in Sources */,
 				74B98C901F70C2C100CB6A9F /* UCFMineViewController.m in Sources */,
+				3381B44420A179F700E95BD6 /* NetWorkingManager.m in Sources */,
 				E311A6631D90E7FC00C5483E /* UCFWebViewJavascriptBridgeMall.m in Sources */,
 				FBB685851AE4A76800F222B6 /* MJRefreshGifHeader.m in Sources */,
 				83974FDE1F14B25200C2252F /* UCFGoldMoneyBoadCell.m in Sources */,
@@ -7827,7 +7868,6 @@
 				7BDD8FC71AE0DD67007A5CE8 /* MDRadialProgressLabel.m in Sources */,
 				7422DF2F1B6218B400DCFA40 /* NSDate+IsBelongToToday.m in Sources */,
 				74E804301AE78BA200E7250E /* ModifyPasswordViewController.m in Sources */,
-				4A6EDBD21D5AC650004D40FF /* MD5Util.m in Sources */,
 				7470EC021B033080006DDCEF /* NSString+FormatForThousand.m in Sources */,
 				7436F2D31F3C2EC6003B77CA /* UCFGoldRechargeFourthCell.m in Sources */,
 				7BCE020A1AC8FDEF0084C15C /* NetworkModule.m in Sources */,
@@ -7841,6 +7881,7 @@
 				EDEC8BFC1CB3BA6300815228 /* WPTappableLabel.m in Sources */,
 				E32B8F4E1E85188D00B7871F /* UCFRegisterFinshViewController.m in Sources */,
 				7BA6E4BE1AD6731900FE8C37 /* SDWebImageDownloaderOperation.m in Sources */,
+				3381B44720A17B3700E95BD6 /* Encryption.m in Sources */,
 				74ED02081FDA84E200CAFED3 /* UCFCalculateResultView.m in Sources */,
 				74270D131EC595ED00F9419B /* CircleMapView.m in Sources */,
 				746FFE251B0059BB00FF927F /* UCFBindCardOneTableViewCell.m in Sources */,
@@ -8001,6 +8042,7 @@
 				25950EBA1D7FB6EC00E4CCBA /* CWCamera.m in Sources */,
 				74A2C0D81F4306A000EDF0FA /* UCFGoldCashThirdCell.m in Sources */,
 				7BC8AA221AD4C74200BF4660 /* UCFRepayment.m in Sources */,
+				3381B44E20A17BF500E95BD6 /* NSString+MD5.m in Sources */,
 				74CE8B861F220C7500512B15 /* UCFContractModel.m in Sources */,
 				7BC3048A1ACBC22D007767F1 /* UITextFieldFactory.m in Sources */,
 				743985421F175EB800F2EDB8 /* UCFGoldRechargeCell.m in Sources */,

@@ -24,9 +24,7 @@
         self.owner = owner;
         self.kSXTag = tag;
         self.requetBlock = block;
-
     }
-    
     return self;
 }
 - (void)startPostRequest
@@ -39,15 +37,11 @@
         self.requetBlock(_owner, _kSXTag, nil, error);
         [self clearCompletionBlock];
     }];
-    
-
-    
 }
 - (void)clearCompletionBlock {
     dispatch_async(dispatch_get_main_queue(), ^{
         self.requetBlock = nil;
     });
-    
 }
 - (void)initRequestManger
 {
@@ -67,6 +61,17 @@
     DLog(@"");
 }
 @end
+
+
+
+
+
+
+
+
+
+
+
 
 
 

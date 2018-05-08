@@ -8,7 +8,7 @@
 
 #import "MD5Util.h"
 #import "NSData+Base64.h"
-#import "UCFToolsMehod.h"
+#import "NSString+MD5.h"
 #define appPwdKey @"AEXJIEJSIFKELFDILEKFDI"
 @implementation MD5Util
 + (NSString *)MD5Pwd:(NSString *)originalPwd
@@ -26,10 +26,9 @@
 + (NSString *)MD5Encode:(NSString *)origin
 {
     NSString *resultString = origin;
-    NSString *md5Str = [UCFToolsMehod md5:resultString];
+    NSString *md5Str = [resultString md5];
     md5Str = [md5Str stringByAppendingString:appPwdKey];
-    resultString = [UCFToolsMehod md5:md5Str];
-    DLog(@"%@",md5Str);
+    resultString = [md5Str md5];
     return resultString;
 }
 

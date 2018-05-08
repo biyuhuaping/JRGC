@@ -17,4 +17,7 @@
  *  @return 加密后密码
  */
 + (NSString *)MD5Pwd:(NSString *)originalPwd;
+
+
+
 @end
