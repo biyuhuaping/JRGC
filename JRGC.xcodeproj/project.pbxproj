@@ -507,7 +507,6 @@
 		74EB80DA1AE4EDB80071621E /* UCFSettingSwitchItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 74EB80D91AE4EDB80071621E /* UCFSettingSwitchItem.m */; };
 		74EB80EC1AE4FCC40071621E /* SecurityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74EB80EB1AE4FCC40071621E /* SecurityCell.m */; };
 		74EB80F01AE500A50071621E /* SecurityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74EB80EF1AE500A50071621E /* SecurityCell.xib */; };
-		74EB80F21AE51F660071621E /* UCFMoreViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74EB80F11AE51F660071621E /* UCFMoreViewController.storyboard */; };
 		74EC4B7F1F4AEA6000E4ACB0 /* UCFGoldIncreaseListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 74EC4B7E1F4AEA6000E4ACB0 /* UCFGoldIncreaseListModel.m */; };
 		74EC4B891F4AF5FE00E4ACB0 /* UCFGoldIncreListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74EC4B871F4AF5FE00E4ACB0 /* UCFGoldIncreListCell.m */; };
 		74EC4B8A1F4AF5FE00E4ACB0 /* UCFGoldIncreListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74EC4B881F4AF5FE00E4ACB0 /* UCFGoldIncreListCell.xib */; };
@@ -597,7 +596,6 @@
 		7BC7890C1B04569300D50494 /* zhucexieyi.docx in Resources */ = {isa = PBXBuildFile; fileRef = 7BC789061B04549500D50494 /* zhucexieyi.docx */; };
 		7BC7C0B81ADCEDB6003799B0 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BC7C0B71ADCEDB6003799B0 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		7BC8A8A01AFB4EB0003A8D89 /* RegisterSuccessAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BC8A89F1AFB4EB0003A8D89 /* RegisterSuccessAlert.m */; };
-		7BC8A9F51AD4BFF600BF4660 /* UCFMoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BC8A9F41AD4BFF600BF4660 /* UCFMoreViewController.m */; };
 		7BC8AA1B1AD4C74200BF4660 /* UCFFriendRegisterListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BC8AA071AD4C74200BF4660 /* UCFFriendRegisterListModel.m */; };
 		7BC8AA1C1AD4C74200BF4660 /* UCFGDYouHuiModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BC8AA091AD4C74200BF4660 /* UCFGDYouHuiModel.m */; };
 		7BC8AA1D1AD4C74200BF4660 /* UCFMyArrears.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BC8AA0B1AD4C74200BF4660 /* UCFMyArrears.m */; };
@@ -1907,7 +1905,6 @@
 		74EB80EA1AE4FCC40071621E /* SecurityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecurityCell.h; sourceTree = "<group>"; };
 		74EB80EB1AE4FCC40071621E /* SecurityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecurityCell.m; sourceTree = "<group>"; };
 		74EB80EF1AE500A50071621E /* SecurityCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SecurityCell.xib; sourceTree = "<group>"; };
-		74EB80F11AE51F660071621E /* UCFMoreViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = UCFMoreViewController.storyboard; sourceTree = "<group>"; };
 		74EC4B7D1F4AEA6000E4ACB0 /* UCFGoldIncreaseListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFGoldIncreaseListModel.h; sourceTree = "<group>"; };
 		74EC4B7E1F4AEA6000E4ACB0 /* UCFGoldIncreaseListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFGoldIncreaseListModel.m; sourceTree = "<group>"; };
 		74EC4B861F4AF5FE00E4ACB0 /* UCFGoldIncreListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFGoldIncreListCell.h; sourceTree = "<group>"; };
@@ -2063,8 +2060,6 @@
 		7BC7C0B71ADCEDB6003799B0 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
 		7BC8A89E1AFB4EB0003A8D89 /* RegisterSuccessAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterSuccessAlert.h; sourceTree = "<group>"; };
 		7BC8A89F1AFB4EB0003A8D89 /* RegisterSuccessAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterSuccessAlert.m; sourceTree = "<group>"; };
-		7BC8A9F31AD4BFF600BF4660 /* UCFMoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFMoreViewController.h; sourceTree = "<group>"; };
-		7BC8A9F41AD4BFF600BF4660 /* UCFMoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFMoreViewController.m; sourceTree = "<group>"; };
 		7BC8AA061AD4C74200BF4660 /* UCFFriendRegisterListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFFriendRegisterListModel.h; sourceTree = "<group>"; };
 		7BC8AA071AD4C74200BF4660 /* UCFFriendRegisterListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFFriendRegisterListModel.m; sourceTree = "<group>"; };
 		7BC8AA081AD4C74200BF4660 /* UCFGDYouHuiModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFGDYouHuiModel.h; sourceTree = "<group>"; };
@@ -5487,9 +5482,6 @@
 				7420DF031B159E72003CAE38 /* View */,
 				74E535E81AE5FD3D00DAABFC /* AboutUs（关于我们） */,
 				74E535E91AE5FD3D00DAABFC /* FAQ */,
-				7BC8A9F31AD4BFF600BF4660 /* UCFMoreViewController.h */,
-				7BC8A9F41AD4BFF600BF4660 /* UCFMoreViewController.m */,
-				74EB80F11AE51F660071621E /* UCFMoreViewController.storyboard */,
 			);
 			path = More;
 			sourceTree = "<group>";
@@ -7325,7 +7317,6 @@
 				E3C1179D1D40CFCC0053A052 /* UCFContributionValueTypeTowCell.xib in Resources */,
 				83CD842F1F13A50800227704 /* UCFHornerTransferViewController.xib in Resources */,
 				A824BFCB1FCD499200E32F39 /* UMSocialSDKResources.bundle in Resources */,
-				74EB80F21AE51F660071621E /* UCFMoreViewController.storyboard in Resources */,
 				83CD843E1F13A50800227704 /* UCFLoadingView.xib in Resources */,
 				74B98CA01F7111D100CB6A9F /* UCFMineFuncCell.xib in Resources */,
 				4A3FDBD01D5C5A7D00279CA2 /* RechargeStoryBorard.storyboard in Resources */,
@@ -7573,7 +7564,6 @@
 				74A2C0D61F4306A000EDF0FA /* UCFGoldCashSecondCell.m in Sources */,
 				08E9A4E21B845E1200099F30 /* UCFTextField.m in Sources */,
 				337E545320930BB8009DE8C4 /* MoreViewModel.m in Sources */,
-				7BC8A9F51AD4BFF600BF4660 /* UCFMoreViewController.m in Sources */,
 				7BA6E4C21AD6731900FE8C37 /* UIImage+GIF.m in Sources */,
 				4A6FAFC51D743CF300AD4DF8 /* CJLabel.m in Sources */,
 				745B8A561FB5ADC7007BFF05 /* UCFExtractGoldDetailController.m in Sources */,

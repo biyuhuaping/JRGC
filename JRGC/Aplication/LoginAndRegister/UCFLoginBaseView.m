@@ -10,7 +10,6 @@
 #import "UCFLoginViewController.h"
 #import "AppDelegate.h"
 #import "UCFRegisterStepOneViewController.h"
-#import "UCFMoreViewController.h"
 #import "MoreViewController_V2.h"
 @interface UCFLoginBaseView ()
 {
