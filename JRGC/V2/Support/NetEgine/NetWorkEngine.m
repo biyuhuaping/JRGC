@@ -63,8 +63,6 @@
 
 
 
-
-
 - (void)postRequestByServiceApi:(NSString *)api
                       andParams:(NSDictionary *)params
                     andProgress:(void (^)(float progress))progress
@@ -77,33 +75,18 @@
     }
         
     if ([[params allKeys] containsObject:@"userId"]) {
-  
         NSMutableDictionary *tmpDict = [NSMutableDictionary dictionaryWithDictionary:params];
         [tmpDict removeObjectForKey:@"imgCode"];
         NSString *encryptParam  = [Encryption AESWithKey:AES_TESTKEY WithDic:tmpDict];
         NSMutableDictionary *parmDict = [NSMutableDictionary dictionaryWithDictionary:tmpDict];
         [parmDict setValue:encryptParam forKey:@"encryptParam"];
         [parmDict setValue:params[@"imgCode"] forKey:@"imgCode"];
-
-//        [NetWorkingManager sendPOSTDataWithPath:[NSString stringWithFormat:@"%@%@",SERVER_IP_ONLINE_ONE,api] withParamters:parmDict withProgress:progress success:success failure:failure];
-        
     }
 }
-
-
-
-
-//NSData *fileData0 = UIImageJPEGRepresentation([UserInfoSingle sharedManager].faceImage, 0.6f);
-//NSString *name0 = @"upload";
-//NSString *fileName0 = @"idCardPer.png";
-//NSString *fileType0 = @"image/png";
-//NSDictionary *dict0 = [NSDictionary dictionaryWithObjectsAndKeys:fileData0,@"file",name0,@"name",fileName0,@"fileName",fileType0,@"fileType", nil];
-//[imageDicArr addObject:dict0];
-//}
-//NSString *path = [NSString stringWithFormat:@"%@%@",SERVER_IP_ONLINE_ONE,NET_UPLOAD_IMAGE];
-
-
-
+- (void)cancleRequestApiName:(NSString *)apiName
+{
+    [NetWorkingManager cancelHttpRequestWithType:@"PSOT" WithPath:apiName];
+}
 //新版通过字典获取值拼成的字符串
 - (NSString *)newGetParStr:(NSDictionary *)dataDict
 {

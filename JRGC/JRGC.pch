@@ -18,7 +18,6 @@
 #import "UserInfoSingle.h"
 #import "BlockUIAlertView.h"
 #import "UIView+Extension.h"
-
 #define XPOS 15
 #define YPOS 25
 #define TEXTFIELDHEIGHT 37
@@ -129,8 +128,7 @@ return shared##className; \
 #define APP_UPDATE_URL  @"https://itunes.apple.com/lookup?id=939125881"
 #define SIGNATUREAPP       @"signature"
 #define EnjoyState      @"enjoyState"
-#define JSPATCH_RSA_PUBLICKEY @"-----BEGIN PUBLIC KEY-----\nMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCgdJNm85BAVjIiSXRziumME/Ss\nhTmTyxhB6wjyDrxFXw/nx0zMd3RWU6Z2PrbJrJsAI6QMjdc/YmDae/V6tEnzf6zW\n2hP2SVRUECml1sZ02vBucrHZsMRr+6cYinXdJy4dAyWfY/YC04svuDBS83rY3Q/k\nAm84Fsm2MsLVoFkOQQIDAQAB\n-----END PUBLIC KEY-----"
-#define JSPATCH_APPKEY      @"83b808e7b173b6c0"                                 //JSPatch key
+
 // 修改绑定手机
 #define MODIFYPHONE_SUCCESSED @"modifyphonesuccessed"
 // 修改绑定银行

@@ -45,5 +45,10 @@
                andErrorCallBack:(void (^)(NSError *error))failure;
 
 
+/**
+ 取消网络请求
 
+ @param apiName 完整请求地址
+ */
+- (void)cancleRequestApiName:(NSString *)apiName;
 @end

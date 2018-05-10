@@ -91,6 +91,7 @@
 }
 
 - (void)fetchHomeListDataWithCompletionHandler:(NetworkCompletionHandler)completionHander {
+    NSLog(@"%@",completionHander);
     __weak typeof(self) weakSelf = self;
     self.canReservedClicked = YES;
     [self.apiManager fetchHomeListWithUserId:self.userId completionHandler:^(NSError *error, id result) {
@@ -110,9 +111,9 @@
             
         }
         if ([weakSelf.view respondsToSelector:@selector(homeListViewPresenter:didRefreshDataWithResult:error:)]) {
-            [self.view homeListViewPresenter:weakSelf didRefreshDataWithResult:result error:error];
+            [weakSelf.view homeListViewPresenter:weakSelf didRefreshDataWithResult:result error:error];
         }
-        
+        NSLog(@"%@",completionHander);
         !completionHander ?: completionHander(error, result);
     }];
 }

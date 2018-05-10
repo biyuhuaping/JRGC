@@ -1029,39 +1029,39 @@
 //    [self.userInfoVC.presenter fetchUserInfoTwoDataWithCompletionHandler:^(NSError *error, id result) {
 //    }];
 
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self.homeListVC.presenter fetchHomeIconListDataWithCompletionHandler:^(NSError *error, id result) {
-            CGFloat userInfoViewHeight = [UCFCycleImageViewController viewHeight];
-            NSArray *homeIcons = [result objectSafeArrayForKey:@"productMap"];
-            if (homeIcons.count > 0) {
-                weakSelf.cycleImageVC.view.frame = CGRectMake(0, 0, ScreenWidth, userInfoViewHeight + 80);
-//                weakSelf.cycleImageVC.iconBackViewHeight.constant = 80;
-            }
-            else {
-                weakSelf.cycleImageVC.view.frame = CGRectMake(0, 0, ScreenWidth, userInfoViewHeight);
-//                weakSelf.cycleImageVC.iconBackViewHeight.constant = 0;
-            }
-            weakSelf.homeListVC.tableView.tableHeaderView = weakSelf.cycleImageVC.view;
-            //请求成功
-            UCFNoticeModel *notice = [result objectForKey:@"siteNotice"];
-            if (notice.siteNotice.length > 0) {
-                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isShowNotice"];
-                [[NSUserDefaults standardUserDefaults] synchronize];
-                
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    
-                    [weakSelf refreshNoticeWithShow:YES];
-                    weakSelf.cycleImageVC.noticeView.noticeModel = notice;
-                    weakSelf.cycleImageVC.noticeStr = notice.siteNotice;
-                });
-            }
-            else{
-                [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isShowNotice"];
-                [[NSUserDefaults standardUserDefaults] synchronize];
-                [weakSelf refreshNoticeWithShow:NO];
-            }
-        }];
-    });
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        [self.homeListVC.presenter fetchHomeIconListDataWithCompletionHandler:^(NSError *error, id result) {
+//            CGFloat userInfoViewHeight = [UCFCycleImageViewController viewHeight];
+//            NSArray *homeIcons = [result objectSafeArrayForKey:@"productMap"];
+//            if (homeIcons.count > 0) {
+//                weakSelf.cycleImageVC.view.frame = CGRectMake(0, 0, ScreenWidth, userInfoViewHeight + 80);
+////                weakSelf.cycleImageVC.iconBackViewHeight.constant = 80;
+//            }
+//            else {
+//                weakSelf.cycleImageVC.view.frame = CGRectMake(0, 0, ScreenWidth, userInfoViewHeight);
+////                weakSelf.cycleImageVC.iconBackViewHeight.constant = 0;
+//            }
+//            weakSelf.homeListVC.tableView.tableHeaderView = weakSelf.cycleImageVC.view;
+//            //请求成功
+//            UCFNoticeModel *notice = [result objectForKey:@"siteNotice"];
+//            if (notice.siteNotice.length > 0) {
+//                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isShowNotice"];
+//                [[NSUserDefaults standardUserDefaults] synchronize];
+//                
+//                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//                    
+//                    [weakSelf refreshNoticeWithShow:YES];
+//                    weakSelf.cycleImageVC.noticeView.noticeModel = notice;
+//                    weakSelf.cycleImageVC.noticeStr = notice.siteNotice;
+//                });
+//            }
+//            else{
+//                [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isShowNotice"];
+//                [[NSUserDefaults standardUserDefaults] synchronize];
+//                [weakSelf refreshNoticeWithShow:NO];
+//            }
+//        }];
+//    });
     
 
     

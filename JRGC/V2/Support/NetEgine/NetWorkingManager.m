@@ -66,25 +66,19 @@ static NetWorkingManager * defualt_shareMananger = nil;
                        failure:(void(^) (NSError *error))failure  {
     
     [[NetWorkingManager shareManager] GET:path parameters:paramters progress:^(NSProgress * _Nonnull downloadProgress) {
-        
         NSLog(@"downLoadProcess = %@",downLoadProgress);
         if (downloadProgress) {
-
             downLoadProgress(downloadProgress.completedUnitCount / downloadProgress.totalUnitCount);
         }
-        
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        
         NSLog(@"responseObject = %@",responseObject);
         if (success) {
-            
             success(YES,responseObject);
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
         NSLog(@"error = %@",error);
         if (failure) {
-            
             failure(error);
         }
     }];

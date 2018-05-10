@@ -18,7 +18,7 @@
 #import "MongoliaLayerCenter.h"
 #import "UCFPicADModel.h"
 #import "UCFNoticeModel.h"
-
+#import "NetWorkEngine.h"
 #define HOMELIST @"homeList"
 #define HOMEICON @"homeIcon"
 #define USERINFOONE @"userInfoOne"
@@ -46,8 +46,51 @@
 
 - (void)fetchHomeListWithUserId:(NSString *)userId completionHandler:(NetworkCompletionHandler)completionHandler
 {
-    [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":userId} tag:kSXTagPrdClaimsNewVersion owner:self signature:YES Type:SelectAccoutDefault];
-    [self.requestDict setObject:completionHandler forKey:HOMELIST];
+    NSLog(@"%@", completionHandler);
+    [[NetWorkEngine sharedManager] postRequestByServiceApi:PRDCLAIMS_LISTNEWVERSION andParams:@{@"userId":userId} andIsSinature:YES andType:SelectAccoutDefault andSuccessCallBack:^(BOOL isSuccess, id responseObject) {
+        
+        NSMutableDictionary *dic = responseObject;
+        NSString *rstcode = dic[@"ret"];
+        NSString *rsttext = dic[@"message"];
+        
+        if ([rstcode boolValue]) {
+            NSDictionary *result = [dic objectSafeDictionaryForKey:@"data"];
+            NSMutableDictionary *tempResult = [[NSMutableDictionary alloc] init];
+            NSArray *group = [result objectSafeArrayForKey:@"group"];
+            NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+            for (NSDictionary *dict in group) {
+                UCFHomeListGroup * tempG = [UCFHomeListGroup homeListGroupWithDict:dict];
+                [tempArray addObject:tempG];
+            }
+            [tempResult setObject:tempArray forKey:@"homelistContent"];
+            
+            [UserInfoSingle sharedManager].companyAgent = [[result objectSafeForKey:@"isCompanyAgent"] boolValue];
+            [UserInfoSingle sharedManager].isRisk = [[result objectSafeForKey:@"isRisk"] boolValue];
+            [UserInfoSingle sharedManager].isAutoBid = [[result objectSafeForKey:@"isAutoBid"] boolValue];
+            [UserInfoSingle sharedManager].p2pAuthorization = [[result objectSafeForKey:@"p2pAuthorization"] boolValue];
+            [UserInfoSingle sharedManager].zxAuthorization = [[result objectSafeForKey:@"zxAuthorization"] boolValue];
+            [UserInfoSingle sharedManager].goldAuthorization = [[result objectSafeForKey:@"nmGoldAuthorization"] boolValue];
+            [UserInfoSingle sharedManager].openStatus = [[result objectSafeForKey:@"openStatus"] integerValue];
+            [UserInfoSingle sharedManager].enjoyOpenStatus = [[result objectSafeForKey:@"zxOpenStatus"] integerValue];
+            
+            UCFHomeListCellModel *homelistModel = [UCFHomeListCellModel homeListCellWithDict:result];
+            [tempResult setObject:homelistModel forKey:@"listInfo"];
+            if (completionHandler) {
+                completionHandler(nil, tempResult);
+            }
+        }
+        else {
+            completionHandler(nil, rsttext);
+        }
+        
+    } andErrorCallBack:^(NSError *error) {
+        completionHandler(error,nil);
+    }];
+    
+    
+    
+//    [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":userId} tag:kSXTagPrdClaimsNewVersion owner:self signature:YES Type:SelectAccoutDefault];
+//    [self.requestDict setObject:completionHandler forKey:HOMELIST];
 }
 
 - (void)fetchHomeIconListWithUserId:(NSString *)userId completionHandler:(NetworkCompletionHandler)completionHandler
