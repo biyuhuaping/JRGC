@@ -80,7 +80,7 @@
             weakSelf.homeIconList = temp;
         }
         else if ([result isKindOfClass:[NSString class]]) {
-            
+
         }
         if ([weakSelf.iconDelegate respondsToSelector:@selector(homeIconListViewPresenter:didRefreshDataWithResult:error:)]) {
             [self.iconDelegate homeIconListViewPresenter:weakSelf didRefreshDataWithResult:result error:error];
@@ -108,7 +108,7 @@
             weakSelf.homeListCells = temp;
         }
         else if ([result isKindOfClass:[NSString class]]) {
-            
+
         }
         if ([weakSelf.view respondsToSelector:@selector(homeListViewPresenter:didRefreshDataWithResult:error:)]) {
             [weakSelf.view homeListViewPresenter:weakSelf didRefreshDataWithResult:result error:error];

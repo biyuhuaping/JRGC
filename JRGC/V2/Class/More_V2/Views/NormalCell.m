@@ -52,6 +52,10 @@
     int postion = [self.vm getCellPostion:_indexPath];
     self.textLabel.text = model.leftTitle;
     self.detailTextLabel.text = model.rightDesText;
+    [self layoutLineView:postion];
+}
+- (void)layoutLineView:(int)postion
+{
     if (postion == -1) {
         _topLineView.hidden = NO;
         _bottomLineView.hidden = NO;
@@ -67,7 +71,6 @@
         _bottomLineView.frame = CGRectMake(15, CGRectGetHeight(self.frame) - 0.5, ScreenWidth - 15, 0.5);
     }
 }
-
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 }
