@@ -266,9 +266,7 @@
     
     if (!error) {
         [self.tableView reloadData];
-        //        [self.tableView.footer resetNoMoreData];
     } else if (self.presenter.allDatas.count == 0) {
-        //        show error view
     }
 }
 
