@@ -40,7 +40,7 @@
     pwd =  [pwd stringByReplacingOccurrencesOfString:@"9" withString:@"`"];
     totalStr = [totalStr substringToIndex:totalStr.length - pwd.length];
     totalStr = [totalStr stringByAppendingString:pwd];
-    totalStr = [totalStr md5];
+    totalStr = [totalStr gcmd5];
     return totalStr;
 }
 + (NSString*)dictionaryToJson:(id)dic
@@ -110,7 +110,7 @@
     NSString *str77 = @"]";
     NSString *str88 = [[str66 stringByAppendingString:str55] stringByAppendingString:str77];
     
-    return [str88 md5];
+    return [str88 gcmd5];
 }
 
 @end

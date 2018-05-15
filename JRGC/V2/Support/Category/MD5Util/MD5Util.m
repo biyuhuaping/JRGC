@@ -26,9 +26,9 @@
 + (NSString *)MD5Encode:(NSString *)origin
 {
     NSString *resultString = origin;
-    NSString *md5Str = [resultString md5];
+    NSString *md5Str = [resultString gcmd5];
     md5Str = [md5Str stringByAppendingString:appPwdKey];
-    resultString = [md5Str md5];
+    resultString = [md5Str gcmd5];
     return resultString;
 }
 
