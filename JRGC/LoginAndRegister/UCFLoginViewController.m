@@ -19,20 +19,18 @@
 #import "AuxiliaryFunc.h"
 #import "UIButton+Misc.h"
 #import "UCFValidFaceLoginViewController.h"
-#import "UCFLoginFaceView.h"
-#import "CWLivessViewController.h"//---qyy0815
+//#import "CWLivessViewController.h"//---qyy0815
 #import "MD5Util.h"
 //#import "UCFSession.h"
 #import "P2PWalletHelper.h"
 #import "UCFCompanyNoOpenViewController.h"
-@interface UCFLoginViewController ()<UCFLoginFaceViewDelegate,cwIntegrationLivessDelegate>////---qyy0815
+@interface UCFLoginViewController ()////---qyy0815
 {
     UCFLoginView *_loginView;
-    UCFLoginFaceView *_loginViewFace;
     
     BOOL _sameUser;
 }
-@property (nonatomic,strong) CWLivessViewController *controller;//---qyy0815
+//@property (nonatomic,strong) CWLivessViewController *controller;//---qyy0815
 @property (nonatomic,assign) NSInteger selectTag;//0 为个人登录，1位企业登录
 @end
 
@@ -54,20 +52,8 @@
     _loginView.delegate = self;
     [self.view addSubview:_loginView];
     
-    //-------------------------------人脸登录页面
-    _loginViewFace = [[[NSBundle mainBundle] loadNibNamed:@"UCFLoginFaceView" owner:self options:nil] lastObject];
-    _loginViewFace.frame =CGRectMake(0, 0, ScreenWidth, ScreenHeight - NavigationBarHeight);
-    _loginViewFace.delegate = self;
-    [self.view addSubview:_loginViewFace];
-     BOOL useValidFace = [[NSUserDefaults standardUserDefaults] boolForKey:FACESWITCHSTATUS];//***人脸开关状态
-    if(useValidFace == YES)
-    {
-        _loginViewFace.hidden = NO;
-    }else{
-        _loginViewFace.hidden = YES;
-        if (!_isForce) {
-            [_loginView setFirstResponder];//***弹出键盘
-        }
+    if (!_isForce) {
+        [_loginView setFirstResponder];//***弹出键盘
     }
      //最近一次登录的用户名
     NSString *lastName = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastLoginName"];
@@ -407,21 +393,9 @@
      //***设置用户密码和账户名称 用于验签
     [_loginView setUserNameFieldText:[[NSUserDefaults standardUserDefaults] objectForKey:@"lastLoginName"]];
     [_loginView setPasswordFieldText:@""];
-    [self.controller backToHomeViewController:nil];//---qyy0815
     [self endPost:data tag:kSXTagLogin];
 }
-#pragma mark - 进入刷脸界面
--(void)goToFaceCheaking
-{
-  
-    self.controller = [[CWLivessViewController alloc] initWithNibName:@"CWLivessViewController" bundle:nil];
-    self.controller.delegate = self;
-    self.controller.ForwardPageuserName = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastLoginName"];//最近一次登录的用户名
-    self.controller.flagway = 1;
-   
-    [self.controller setLivessParam:AuthCodeString livessNumber:1 livessLevel:CWLiveDetectLow isShowResultView:YES isFaceCompare:NO];
-    [self.navigationController pushViewController:self.controller animated:YES];//---qyy0815
-}
+
 #pragma mark - 选择密码登陆后-将键盘弹出的回调用
 -(void)setFirstResponder
 {
@@ -440,18 +414,18 @@
  *  @param code          错误码(根据错误码判断是否有攻击)
  */
 
--(void)cwIntergrationLivess:(BOOL)isAlive BestFaceImage:(NSData *)bestFaceData isTheSamePerson:(BOOL)isSame faceScore:(double)faceScore errorCode:(NSInteger)code{
-    
-    //最佳人脸可以直接转换成base64
-    NSString  * baseStr = [bestFaceData base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
-    
-    //检测失败 根据code判断是否是攻击
-    if (code == CW_FACE_LIVENESS_ATTACK_SHAKE || code == CW_FACE_LIVENESS_ATTACK_MOUTH || code == CW_FACE_LIVENESS_ATTACK_RIGHTEYE||code == CW_FACE_LIVENESS_ATTACK_PICTURE || code == CW_FACE_LIVENESS_ATTACK_PAD || code == CW_FACE_LIVENESS_ATTACK_VIDEO ||
-        code == CW_FACE_LIVENESS_PEPOLECHANGED) {
-        
-    }
-    
-    NSLog(@"isAlive=%d  baseStr.length=%ld code=====%ld",isAlive,(unsigned long)baseStr.length,(long)code);
-}
+//-(void)cwIntergrationLivess:(BOOL)isAlive BestFaceImage:(NSData *)bestFaceData isTheSamePerson:(BOOL)isSame faceScore:(double)faceScore errorCode:(NSInteger)code{
+//
+//    //最佳人脸可以直接转换成base64
+//    NSString  * baseStr = [bestFaceData base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
+//
+//    //检测失败 根据code判断是否是攻击
+//    if (code == CW_FACE_LIVENESS_ATTACK_SHAKE || code == CW_FACE_LIVENESS_ATTACK_MOUTH || code == CW_FACE_LIVENESS_ATTACK_RIGHTEYE||code == CW_FACE_LIVENESS_ATTACK_PICTURE || code == CW_FACE_LIVENESS_ATTACK_PAD || code == CW_FACE_LIVENESS_ATTACK_VIDEO ||
+//        code == CW_FACE_LIVENESS_PEPOLECHANGED) {
+//
+//    }
+//
+//    NSLog(@"isAlive=%d  baseStr.length=%ld code=====%ld",isAlive,(unsigned long)baseStr.length,(long)code);
+//}
 
 @end

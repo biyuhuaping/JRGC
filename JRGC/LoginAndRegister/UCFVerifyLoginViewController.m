@@ -17,11 +17,11 @@
 #import "UCFToolsMehod.h"
 #import "AppDelegate.h"
 #import "BaseAlertView.h"
-#import "CloudwalkFaceSDK.h"
+//#import "CloudwalkFaceSDK.h"
 //#import "NewFaceViewController.h"
-#import "CWLivessViewController.h"//---qyy0815
+//#import "CWLivessViewController.h"//---qyy0815
 
-@interface UCFVerifyLoginViewController ()<cwIntegrationLivessDelegate>
+@interface UCFVerifyLoginViewController ()
 {
     UITextField *_userNameTfd;//用户名
     UITextField *_passWordTfd;//密码
@@ -221,12 +221,12 @@
         
         
         
-        CWLivessViewController *nfvctrl = [[CWLivessViewController alloc]initWithNibName:@"CWLivessViewController" bundle:nil];
-         nfvctrl.flagway = 0;
-         nfvctrl.delegate = self;
-        [nfvctrl setLivessParam:AuthCodeString livessNumber:3 livessLevel:CWLiveDetectLow isShowResultView:YES isFaceCompare:NO];
-
-        [self.navigationController pushViewController:nfvctrl animated:YES];//---qyy0815
+//        CWLivessViewController *nfvctrl = [[CWLivessViewController alloc]initWithNibName:@"CWLivessViewController" bundle:nil];
+//         nfvctrl.flagway = 0;
+//         nfvctrl.delegate = self;
+//        [nfvctrl setLivessParam:AuthCodeString livessNumber:3 livessLevel:CWLiveDetectLow isShowResultView:YES isFaceCompare:NO];
+//
+//        [self.navigationController pushViewController:nfvctrl animated:YES];//---qyy0815
         
     } else if ([_sourceVC isEqualToString:@"validFaceSwitchSwip"]) {//刷脸登录开关 由开---->>>关 的密码验证
             [[NSNotificationCenter defaultCenter] postNotificationName:@"updateFaceSwitchSwip" object:nil];
@@ -298,28 +298,28 @@
 //    }
     return YES;
 }
-/**
- *  @brief 活体检测、人脸比对的代理方法
- *
- *  @param isAlive       是否是活体
- *  @param bestFaceData 获取的最佳人脸图片（已压缩过的JPG图片数据）
- *  @param isSame        是否是同一个人
- *  @param faceScore     人脸比对的分数
- *  @param code          错误码(根据错误码判断是否有攻击)
- */
-
--(void)cwIntergrationLivess:(BOOL)isAlive BestFaceImage:(NSData *)bestFaceData isTheSamePerson:(BOOL)isSame faceScore:(double)faceScore errorCode:(NSInteger)code{
-    
-    //最佳人脸可以直接转换成base64
-    NSString  * baseStr = [bestFaceData base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
-    
-    //检测失败 根据code判断是否是攻击
-    if (code == CW_FACE_LIVENESS_ATTACK_SHAKE || code == CW_FACE_LIVENESS_ATTACK_MOUTH || code == CW_FACE_LIVENESS_ATTACK_RIGHTEYE||code == CW_FACE_LIVENESS_ATTACK_PICTURE || code == CW_FACE_LIVENESS_ATTACK_PAD || code == CW_FACE_LIVENESS_ATTACK_VIDEO ||
-        code == CW_FACE_LIVENESS_PEPOLECHANGED) {
-        
-    }
-    
-    NSLog(@"isAlive=%d  baseStr.length=%ld code=====%ld",isAlive,(unsigned long)baseStr.length,(long)code);
-}
+///**
+// *  @brief 活体检测、人脸比对的代理方法
+// *
+// *  @param isAlive       是否是活体
+// *  @param bestFaceData 获取的最佳人脸图片（已压缩过的JPG图片数据）
+// *  @param isSame        是否是同一个人
+// *  @param faceScore     人脸比对的分数
+// *  @param code          错误码(根据错误码判断是否有攻击)
+// */
+//
+//-(void)cwIntergrationLivess:(BOOL)isAlive BestFaceImage:(NSData *)bestFaceData isTheSamePerson:(BOOL)isSame faceScore:(double)faceScore errorCode:(NSInteger)code{
+//    
+//    //最佳人脸可以直接转换成base64
+//    NSString  * baseStr = [bestFaceData base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
+//    
+//    //检测失败 根据code判断是否是攻击
+////    if (code == CW_FACE_LIVENESS_ATTACK_SHAKE || code == CW_FACE_LIVENESS_ATTACK_MOUTH || code == CW_FACE_LIVENESS_ATTACK_RIGHTEYE||code == CW_FACE_LIVENESS_ATTACK_PICTURE || code == CW_FACE_LIVENESS_ATTACK_PAD || code == CW_FACE_LIVENESS_ATTACK_VIDEO ||
+////        code == CW_FACE_LIVENESS_PEPOLECHANGED) {
+////        
+////    }
+//    
+//    NSLog(@"isAlive=%d  baseStr.length=%ld code=====%ld",isAlive,(unsigned long)baseStr.length,(long)code);
+//}
 
 @end

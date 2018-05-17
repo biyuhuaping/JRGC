@@ -226,21 +226,21 @@ static NetworkModule *gInstance = NULL;
         case KSXTagMsgListSignRead:
             parameter = [serverIP stringByAppendingString:MSGSIGNREAD];
             break;
-        case kSXTagFaceInfoCollection:
-            parameter = [serverIP stringByAppendingString:FACEINFOCOLLECTION];
-            break;
-        case kSXTagFaceSwitchStatus:
-            parameter = [serverIP stringByAppendingString:FACESWITCHSTAUS];
-            break;
-        case kSXTagFaceSwitchSwip:
-            parameter = [serverIP stringByAppendingString:FACEUPDATESWITCHSWIP];
-            break;
-        case kSXTagFaceInfoLanding:
-            parameter = [serverIP stringByAppendingString:FACEINFOLANDING];
-            break;
-        case kSXTagFaceInfoStore:
-            parameter = [serverIP stringByAppendingString:FACEINFOSTORE];
-            break;
+//        case kSXTagFaceInfoCollection:
+//            parameter = [serverIP stringByAppendingString:FACEINFOCOLLECTION];
+//            break;
+//        case kSXTagFaceSwitchStatus:
+//            parameter = [serverIP stringByAppendingString:FACESWITCHSTAUS];
+//            break;
+//        case kSXTagFaceSwitchSwip:
+//            parameter = [serverIP stringByAppendingString:FACEUPDATESWITCHSWIP];
+//            break;
+//        case kSXTagFaceInfoLanding:
+//            parameter = [serverIP stringByAppendingString:FACEINFOLANDING];
+//            break;
+//        case kSXTagFaceInfoStore:
+//            parameter = [serverIP stringByAppendingString:FACEINFOSTORE];
+//            break;
         case kSXTagRegistResult:
             parameter = [serverIP stringByAppendingString:REGISTRESULT];
             break;

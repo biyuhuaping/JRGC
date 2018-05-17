@@ -91,7 +91,6 @@
         self.userLevel.isShowOrHide = YES;//不显示
 
         UCFSettingItem *activeGestureCode  = [UCFSettingSwitchItem itemWithIcon:@"safecenter_icon_gesture" title:@"启用手势密码"];
-        UCFSettingItem *activeFaceValid  = [UCFSettingSwitchItem itemWithIcon:@"uesr_icon_face" title:@"启用刷脸登录" withSwitchType:2];
         UCFSettingItem *modifyPassword = [UCFSettingArrowItem itemWithIcon:@"login_icon_password" title:@"修改登录密码" destVcClass:[ModifyPasswordViewController class]];//***qyy
 
         UCFSettingItem *moreVc = [UCFSettingArrowItem itemWithIcon:@"safecenter_icon_more" title:@"更多" destVcClass:[UCFMoreViewController class]];
@@ -108,9 +107,9 @@
         
         if ([self checkTouchIdIsOpen]) {
             UCFSettingItem *zhiWenSwith  = [UCFSettingSwitchItem itemWithIcon:@"safecenter_icon_touch" title:@"启用指纹解锁" withSwitchType:1];
-             group2.items = [[NSMutableArray alloc]initWithArray:@[activeGestureCode,zhiWenSwith, activeFaceValid,modifyPassword,moreVc]];
+             group2.items = [[NSMutableArray alloc]initWithArray:@[activeGestureCode,zhiWenSwith,modifyPassword,moreVc]];
         } else {
-             group2.items =[[NSMutableArray alloc]initWithArray: @[activeGestureCode,activeFaceValid,modifyPassword,moreVc]];
+             group2.items =[[NSMutableArray alloc]initWithArray: @[activeGestureCode,modifyPassword,moreVc]];
 
         }
         _itemsData = [[NSMutableArray alloc] initWithObjects:group1,group2,nil];
@@ -240,19 +239,19 @@
     }
 }
 
-//获取 人脸识别开关状态查询网络请求
--(void)getFaceSwitchStatusNetData
-{
-    NSString *strParameters = [NSString stringWithFormat:@"userId=%@", [[NSUserDefaults standardUserDefaults] objectForKey:UUID]];
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagFaceSwitchStatus owner:self Type:SelectAccoutDefault];
-}
+////获取 人脸识别开关状态查询网络请求
+//-(void)getFaceSwitchStatusNetData
+//{
+//    NSString *strParameters = [NSString stringWithFormat:@"userId=%@", [[NSUserDefaults standardUserDefaults] objectForKey:UUID]];
+//    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagFaceSwitchStatus owner:self Type:SelectAccoutDefault];
+//}
 //更新 人脸识别开关状态查询网络请求 注意更新请求上传 当前刷脸状态
--(void)updateFaceSwitchSwipNetData
-{
-    BOOL faceSwichSwip = ![[NSUserDefaults standardUserDefaults] boolForKey:FACESWITCHSTATUS];
-    NSString *strParameters = [NSString stringWithFormat:@"userId=%@&status=%d", [[NSUserDefaults standardUserDefaults] objectForKey:UUID], faceSwichSwip];
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagFaceSwitchSwip owner:self Type:SelectAccoutDefault];
-}
+//-(void)updateFaceSwitchSwipNetData
+//{
+//    BOOL faceSwichSwip = ![[NSUserDefaults standardUserDefaults] boolForKey:FACESWITCHSTATUS];
+//    NSString *strParameters = [NSString stringWithFormat:@"userId=%@&status=%d", [[NSUserDefaults standardUserDefaults] objectForKey:UUID], faceSwichSwip];
+//    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagFaceSwitchSwip owner:self Type:SelectAccoutDefault];
+//}
 // 获取网络数据
 - (void)getSecurityCenterNetData
 {
@@ -271,9 +270,9 @@
 //开始请求
 - (void)beginPost:(kSXTag)tag
 {
-    if (tag == kSXTagFaceSwitchStatus) {
-        return;
-    }
+//    if (tag == kSXTagFaceSwitchStatus) {
+//        return;
+//    }
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 }
 
@@ -313,11 +312,11 @@
             self.userGradeSwitch = [dic[@"data"][@"isOpen"]  boolValue];
             //保存 刷脸登录开关
           
-            if( [[dic[@"data"] objectSafeForKey:@"faceIsOpen"] isEqualToString:@"0"]){
-                 [[NSUserDefaults standardUserDefaults] setBool:YES forKey:FACESWITCHSTATUS];
-            }else{
-                 [[NSUserDefaults standardUserDefaults] setBool:NO forKey:FACESWITCHSTATUS];
-            }
+//            if( [[dic[@"data"] objectSafeForKey:@"faceIsOpen"] isEqualToString:@"0"]){
+//                 [[NSUserDefaults standardUserDefaults] setBool:YES forKey:FACESWITCHSTATUS];
+//            }else{
+//                 [[NSUserDefaults standardUserDefaults] setBool:NO forKey:FACESWITCHSTATUS];
+//            }
             
             if ([UserInfoSingle sharedManager].openStatus == 4) {
                 _setChangePassword.title = @"修改交易密码";
@@ -364,27 +363,29 @@
             [AuxiliaryFunc showToastMessage:message withView:self.view];
     }  else if (tag.integerValue == kSXTagUserLogout) {
 
-    }else if(tag.integerValue == kSXTagFaceSwitchStatus){//刷脸登录状态开关
-        if ([rstcode intValue] == 1) {
-            NSString * faceIsOpen = [dic objectSafeForKey:@"isOpen"];// 1：关闭 0：开启
-            [self validFaceLogin:faceIsOpen];
-        }else{
-//            [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
-            [self.tableview reloadData];
-        }
-    }else if(tag.integerValue == kSXTagFaceSwitchSwip){//刷脸登录状态更新
-        if ([rstcode intValue] == 1) {
-            [AuxiliaryFunc showToastMessage:@"刷脸登录关闭成功" withView:self.view];
-            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:FACESWITCHSTATUS];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-            [self.tableview reloadData];
-        }else{
-//            [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
-            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:FACESWITCHSTATUS];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-            [self.tableview reloadData];
-        }
-    } else if (tag.intValue == kSXTagSingMenthod) {
+    }
+//    else if(tag.integerValue == kSXTagFaceSwitchStatus){//刷脸登录状态开关
+//        if ([rstcode intValue] == 1) {
+//            NSString * faceIsOpen = [dic objectSafeForKey:@"isOpen"];// 1：关闭 0：开启
+//            [self validFaceLogin:faceIsOpen];
+//        }else{
+////            [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
+//            [self.tableview reloadData];
+//        }
+//    }else if(tag.integerValue == kSXTagFaceSwitchSwip){//刷脸登录状态更新
+//        if ([rstcode intValue] == 1) {
+//            [AuxiliaryFunc showToastMessage:@"刷脸登录关闭成功" withView:self.view];
+//            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:FACESWITCHSTATUS];
+//            [[NSUserDefaults standardUserDefaults] synchronize];
+//            [self.tableview reloadData];
+//        }else{
+////            [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
+//            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:FACESWITCHSTATUS];
+//            [[NSUserDefaults standardUserDefaults] synchronize];
+//            [self.tableview reloadData];
+//        }
+//    }
+    else if (tag.intValue == kSXTagSingMenthod) {
         if ([dic[@"ret"] boolValue]) {
             NSDictionary *data = [dic objectForKey:@"data"];
             UCFSignModel *signModel = [UCFSignModel signWithDict:data];
@@ -538,7 +539,7 @@
 - (void)validFaceLogin:(BOOL)gestureState WithCell:(SecurityCell *)cell
 {
     //修改刷脸登录之前，先去服务器 请求 刷脸登录开关
-    [self getFaceSwitchStatusNetData];
+//    [self getFaceSwitchStatusNetData];
 }
 -(void)validFaceLogin:(NSString *)faceIsOpen{
     if ([faceIsOpen intValue] == 1) {//关闭状态 由关----开
