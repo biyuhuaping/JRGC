@@ -28,7 +28,7 @@
 #import "UCFInvitationRebateViewController.h"
 //#import "UCFSession.h"
 #import "MjAlertView.h"
-//#import "UCFCalendarViewController.h"
+#import "UCFCashAndTopUp.h"
 #import "UCFCalendarModularViewController.h"
 #import "UCFMyReservedViewController.h"
 
@@ -56,6 +56,8 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *loadingLabel2;
 
+@property (weak, nonatomic) IBOutlet UCFCashAndTopUp *bottomView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomConstract;
 
 - (IBAction)clickCashBtn:(UIButton *)sender;
 - (IBAction)clickRechargeBtn:(UIButton *)sender;
@@ -80,23 +82,7 @@
     [self addLeftButton];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getP2POrHonerAccoutHttpRequest) name:RELOADP2PORHONERACCOTDATA object:nil];
-//    if (self.accoutType == SelectAccoutTypeP2P) {
-//        BOOL isFirstStep = [[NSUserDefaults standardUserDefaults] boolForKey:@"ISFirstStepInP2PAccount"];
-//        if (!isFirstStep) {
-//            if ([UserInfoSingle sharedManager].enjoyOpenStatus < 3) {
-//                MjAlertView *alertView = [[MjAlertView alloc] initSkipToHonerAccount:self];
-//                alertView.tag = 1002;
-//                [alertView show];
-//                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"ISFirstStepInP2PAccount"];
-//            } else {
-//                MjAlertView *alertView = [[MjAlertView alloc] initSkipToMoneySwitchHonerAccout:self];
-//                alertView.tag = 1001;
-//                [alertView show];
-//                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"ISFirstStepInP2PAccount"];
-//                [[NSUserDefaults standardUserDefaults] synchronize];
-//            }
-//        }
-//    }
+
 }
 -(void)removeLoadingView
 {
@@ -119,19 +105,11 @@
     self.loadingView.hidden = YES;
     [self.view bringSubviewToFront:self.loadingView];
     [self removeLoadingView];
-//    [self performSelector:@selector(removeLoadingView) withObject:nil afterDelay:0.0f];
     if (self.accoutType ==  SelectAccoutTypeHoner) {
-//        [self.view bringSubviewToFront:self.loadingView];
-//        [self performSelector:@selector(removeLoadingView) withObject:nil afterDelay:0.0f];
-//       self.loadingLabel1.text = @"即将跳转工场尊享";
-//        self.loadingLabel2.text = @"可直接访问www.gongchangzx.com";
+
          _isShowOrHideAccoutMoney = [[NSUserDefaults standardUserDefaults] boolForKey:@"IsShowHonerAccoutMoney"];
     }else{
-//        [self.view sendSubviewToBack:self.loadingView];
-//        self.loadingView.hidden = YES;
-//        [self performSelector:@selector(removeLoadingView) withObject:nil afterDelay:0.0f];
-//        self.loadingLabel1.text = @"即将跳转工场微金";
-//        self.loadingLabel2.text = @"可直接访问www.gongchangp2p.cn";
+
         _isShowOrHideAccoutMoney = [[NSUserDefaults standardUserDefaults] boolForKey:@"IsShowP2PAccoutMoney"];
     }
     //添加阴影图片
@@ -139,9 +117,11 @@
     self.shadowImageView.image = [tabImag resizableImageWithCapInsets:UIEdgeInsetsMake(2, 1, 2, 1) resizingMode:UIImageResizingModeStretch];
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 10, 0);
     self.tableView.separatorColor = [UIColor clearColor];
-//    self.tableView.separatorInset =  UIEdgeInsetsMake(0, 15, 0, 0);
     self.cashButton.backgroundColor = UIColorWithRGB(0x7D9EC5);
     self.rechargeButton.backgroundColor = UIColorWithRGB(0xFA4F4C );
+    
+//    _bottomConstract
+    
 }
 -(void)addRightButton{
     UIButton *rightbutton = [UIButton buttonWithType:UIButtonTypeCustom];

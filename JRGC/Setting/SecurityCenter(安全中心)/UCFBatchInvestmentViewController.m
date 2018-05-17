@@ -493,9 +493,23 @@ static NSString *thirdStr = @"批量出借授权已经开启";
         }
     }
 }
+- (void)viewDidLayoutSubviews
+{
+
+    
+    UIView *investBaseView = [self.view viewWithTag:9000];
+    if (@available(iOS 11.0, *)) {
+        UIEdgeInsets edge = self.view.safeAreaInsets;
+        
+        investBaseView.frame = CGRectMake(0, CGRectGetHeight(self.view.frame) - 67 - edge.bottom, ScreenWidth, 67);
+    } else {
+        investBaseView.frame = CGRectMake(0, CGRectGetHeight(self.view.frame) - 67, ScreenWidth, 67);
+    }
+    [self.view layoutIfNeeded];
+}
 - (void)cretateInvestmentView
 {
-    UIView *investBaseView = [[UIView alloc] initWithFrame:CGRectMake(0, ScreenHeight -NavigationBarHeight - 67, ScreenWidth, 67)];
+    UIView *investBaseView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.view.frame) - 67, ScreenWidth, 67)];
     investBaseView.backgroundColor = [UIColor clearColor];
     investBaseView.tag = 9000;
     [self.view addSubview:investBaseView];
