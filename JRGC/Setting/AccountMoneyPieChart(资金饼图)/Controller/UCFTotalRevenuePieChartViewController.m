@@ -120,31 +120,28 @@
             
             if([UserInfoSingle sharedManager].superviseSwitch)//监管开关打开
             {
-                if([UserInfoSingle sharedManager].level < 2)
+    
+                if([UserInfoSingle sharedManager].zxIsNew && [UserInfoSingle sharedManager].goldIsNew)
                 {
-                    if([UserInfoSingle sharedManager].zxIsNew && [UserInfoSingle sharedManager].goldIsNew)
-                    {
-                        [pieChatModel2.pieChartDataArray removeLastObject];
-                        [pieChatModel2.pieChartTitleArray  removeLastObject];
-                        self.dataArray = @[pieChatModel,pieChatModel2];
-                    }else if(![UserInfoSingle sharedManager].zxIsNew && [UserInfoSingle sharedManager].goldIsNew){
-                        
-                        [pieChatModel1.pieChartDataArray removeLastObject];
-                        [pieChatModel1.pieChartTitleArray  removeLastObject];
-                        [pieChatModel2.pieChartDataArray removeLastObject];
-                        [pieChatModel2.pieChartTitleArray  removeLastObject];
-                        self.dataArray = @[pieChatModel,pieChatModel2,pieChatModel1];
-                    }else if([UserInfoSingle sharedManager].zxIsNew && ![UserInfoSingle sharedManager].goldIsNew){
-                        [pieChatModel1.pieChartDataArray removeObjectAtIndex:1];
-                        [pieChatModel1.pieChartTitleArray  removeObjectAtIndex:1];
-                        self.dataArray = @[pieChatModel,pieChatModel2,pieChatModel1];
-                
-                 }else{
-                   self.dataArray = @[pieChatModel,pieChatModel2,pieChatModel1];
-                 }
-                }else{
-                  self.dataArray = @[pieChatModel,pieChatModel2,pieChatModel1];
-                }
+                    [pieChatModel2.pieChartDataArray removeLastObject];
+                    [pieChatModel2.pieChartTitleArray  removeLastObject];
+                    self.dataArray = @[pieChatModel,pieChatModel2];
+                }else if(![UserInfoSingle sharedManager].zxIsNew && [UserInfoSingle sharedManager].goldIsNew){
+                    
+                    [pieChatModel1.pieChartDataArray removeLastObject];
+                    [pieChatModel1.pieChartTitleArray  removeLastObject];
+                    [pieChatModel2.pieChartDataArray removeLastObject];
+                    [pieChatModel2.pieChartTitleArray  removeLastObject];
+                    self.dataArray = @[pieChatModel,pieChatModel2,pieChatModel1];
+                }else if([UserInfoSingle sharedManager].zxIsNew && ![UserInfoSingle sharedManager].goldIsNew){
+                    [pieChatModel1.pieChartDataArray removeObjectAtIndex:1];
+                    [pieChatModel1.pieChartTitleArray  removeObjectAtIndex:1];
+                    self.dataArray = @[pieChatModel,pieChatModel2,pieChatModel1];
+            
+             }else{
+               self.dataArray = @[pieChatModel,pieChatModel2,pieChatModel1];
+             }
+             
             }
             else{
                 self.dataArray = @[pieChatModel,pieChatModel2,pieChatModel1];

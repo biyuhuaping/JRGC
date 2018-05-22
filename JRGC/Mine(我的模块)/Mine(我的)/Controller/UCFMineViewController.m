@@ -565,7 +565,7 @@
     
     //监管开关 打开时 等级不足VIP1 且未投资过尊享且未投资过黄金项目的用户 直接进入充值页面
    
-    if([UserInfoSingle sharedManager].superviseSwitch && [UserInfoSingle sharedManager].level < 2 && [UserInfoSingle sharedManager].zxIsNew && [UserInfoSingle sharedManager].goldIsNew)
+    if([UserInfoSingle sharedManager].superviseSwitch  && [UserInfoSingle sharedManager].zxIsNew && [UserInfoSingle sharedManager].goldIsNew)
     {
         self.mineHeaderView.rechargeButton.enabled = YES;
         self.accoutType = SelectAccoutTypeP2P;
@@ -604,7 +604,7 @@
    
     
     //监管开关 打开时 等级不足VIP1 且未投资过尊享且未投资过黄金项目的用户 直接进入充值页面
-    if([UserInfoSingle sharedManager].superviseSwitch && [UserInfoSingle sharedManager].level < 2  && [UserInfoSingle sharedManager].zxIsNew && [UserInfoSingle sharedManager].goldIsNew)
+    if([UserInfoSingle sharedManager].superviseSwitch && [UserInfoSingle sharedManager].zxIsNew && [UserInfoSingle sharedManager].goldIsNew)
     {
         self.mineHeaderView.cashButton.enabled = YES;
         if([UserInfoSingle sharedManager].openStatus < 3 )//微金未开通账户

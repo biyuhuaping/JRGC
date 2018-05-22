@@ -120,8 +120,7 @@
             
             if([UserInfoSingle sharedManager].superviseSwitch)//监管开关打开
             {
-                if([UserInfoSingle sharedManager].level < 2)
-                {
+    
                     if ([UserInfoSingle sharedManager].zxIsNew &&  [UserInfoSingle sharedManager].goldIsNew)
                     {
                         self.dataArray = @[pieChatModel2];
@@ -139,9 +138,7 @@
                     }else {
                     self.dataArray = @[pieChatModel1,pieChatModel2];
                   }
-                }else{
-                    self.dataArray = @[pieChatModel1,pieChatModel2];
-                }
+  
           }
         else{
             self.dataArray = @[pieChatModel1,pieChatModel2];

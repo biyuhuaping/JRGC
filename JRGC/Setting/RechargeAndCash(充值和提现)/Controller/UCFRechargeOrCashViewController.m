@@ -129,12 +129,11 @@
     
     if([UserInfoSingle sharedManager].superviseSwitch)//监管开关打开
     {
-        if([UserInfoSingle sharedManager].level < 2)
-        {
+   
             if ([UserInfoSingle sharedManager].zxIsNew && [UserInfoSingle sharedManager].goldIsNew)
             { // 该情况已处理
            
-            }else if( ![UserInfoSingle sharedManager].zxIsNew && [UserInfoSingle sharedManager].goldIsNew)
+            }else if(![UserInfoSingle sharedManager].zxIsNew && [UserInfoSingle sharedManager].goldIsNew)
             {
                 [rechargeAccoutArray addObject:_honerAccoutCardView];
                 [rechargeAccoutArray addObject:_p2PAccoutCardView];
@@ -147,11 +146,7 @@
                 [rechargeAccoutArray addObject:_honerAccoutCardView];
                 [rechargeAccoutArray addObject:_p2PAccoutCardView];
             }
-        }else{
-            [rechargeAccoutArray addObject:_goldAccoutCardView];
-            [rechargeAccoutArray addObject:_honerAccoutCardView];
-            [rechargeAccoutArray addObject:_p2PAccoutCardView];
-        }
+        
     }
     else{
         [rechargeAccoutArray addObject:_goldAccoutCardView];
@@ -282,8 +277,7 @@
     }
     if([UserInfoSingle sharedManager].superviseSwitch)//监管开关打开
     {
-        if([UserInfoSingle sharedManager].level < 2)
-        {
+
             if ([UserInfoSingle sharedManager].zxIsNew && [UserInfoSingle sharedManager].goldIsNew)
             { // 该情况已经处理了
                 
@@ -302,7 +296,7 @@
             }else {
               
             }
-        }
+        
     }
     else{
 
