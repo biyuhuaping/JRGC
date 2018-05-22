@@ -226,21 +226,21 @@ static NetworkModule *gInstance = NULL;
         case KSXTagMsgListSignRead:
             parameter = [serverIP stringByAppendingString:MSGSIGNREAD];
             break;
-        case kSXTagFaceInfoCollection:
-            parameter = [serverIP stringByAppendingString:FACEINFOCOLLECTION];
-            break;
-        case kSXTagFaceSwitchStatus:
-            parameter = [serverIP stringByAppendingString:FACESWITCHSTAUS];
-            break;
-        case kSXTagFaceSwitchSwip:
-            parameter = [serverIP stringByAppendingString:FACEUPDATESWITCHSWIP];
-            break;
-        case kSXTagFaceInfoLanding:
-            parameter = [serverIP stringByAppendingString:FACEINFOLANDING];
-            break;
-        case kSXTagFaceInfoStore:
-            parameter = [serverIP stringByAppendingString:FACEINFOSTORE];
-            break;
+//        case kSXTagFaceInfoCollection:
+//            parameter = [serverIP stringByAppendingString:FACEINFOCOLLECTION];
+//            break;
+//        case kSXTagFaceSwitchStatus:
+//            parameter = [serverIP stringByAppendingString:FACESWITCHSTAUS];
+//            break;
+//        case kSXTagFaceSwitchSwip:
+//            parameter = [serverIP stringByAppendingString:FACEUPDATESWITCHSWIP];
+//            break;
+//        case kSXTagFaceInfoLanding:
+//            parameter = [serverIP stringByAppendingString:FACEINFOLANDING];
+//            break;
+//        case kSXTagFaceInfoStore:
+//            parameter = [serverIP stringByAppendingString:FACEINFOSTORE];
+//            break;
         case kSXTagRegistResult:
             parameter = [serverIP stringByAppendingString:REGISTRESULT];
             break;
@@ -319,11 +319,11 @@ static NetworkModule *gInstance = NULL;
 - (void)postData:(NSString*)data tag:(kSXTag)tag owner:(id<NetworkModuleDelegate>)owner url:(NSString*)url
 {
     PostRequest *req = (PostRequest*)[queue objectForKey:[NSNumber numberWithInt:tag]];
-    if (tag == kSXTagMyReceipt || tag == kSXTagGetInfoForOnOff || tag == kSXTagMySimpleInfo || tag == kSXTagSuperviseUserInfo || tag == kSXTagCheckConponCenter) {
-        if (req.postStatus == kPostStatusBeging) {
-            return;
-        }
+
+    if (req.postStatus == kPostStatusBeging) {
+        return;
     }
+    
     if (req == nil) {
         req = [[PostRequest alloc] init];
     }

@@ -162,11 +162,11 @@
 
 #define GETCONTRIBUTIONVALUEINVOT     @"api/userLevel/v2/contributeSource.json"//投资贡献值
 
-#define FACEINFOCOLLECTION  @"faceRecordInfo/collectFaceMess"//人脸识别-人脸信息录入
-#define FACESWITCHSTAUS               @"faceRecordInfo/showFaceSwitchStatus"//人脸识别开关状态查询
-#define FACEUPDATESWITCHSWIP           @"faceRecordInfo/switchFaceSwip" //人脸开关操作（需要验签）
-#define FACEINFOLANDING     @"faceRecordInfo/faceSwipLogin"//人脸识别-登录
-#define FACEINFOSTORE     @"faceRecordInfo/checkLoginName"//人脸识别-人脸信息是否存在
+//#define FACEINFOCOLLECTION  @"faceRecordInfo/collectFaceMess"//人脸识别-人脸信息录入
+//#define FACESWITCHSTAUS               @"faceRecordInfo/showFaceSwitchStatus"//人脸识别开关状态查询
+//#define FACEUPDATESWITCHSWIP           @"faceRecordInfo/switchFaceSwip" //人脸开关操作（需要验签）
+//#define FACEINFOLANDING     @"faceRecordInfo/faceSwipLogin"//人脸识别-登录
+//#define FACEINFOSTORE     @"faceRecordInfo/checkLoginName"//人脸识别-人脸信息是否存在
 #define CHOSEBRANCHBANK    @"api/withdraw/v2/getBankList.json"//选择支行
 
 #define CHOOSEBANKLIST      @"api/userInfo/v2/getBankList.json"         //查询银行卡银行列表
@@ -430,11 +430,11 @@ enum kSXTag
     KSXTagMsgListSignRead,             //单条消息标记为已读
     kSXTagGetWorkPoint,                //获取工豆积分页面信息
     kSXTagContributionValueInvot,      //贡献值
-    kSXTagFaceInfoCollection,          //人脸识别录入信息
-    kSXTagFaceSwitchStatus,            //人脸识别开关状态查询
-    kSXTagFaceSwitchSwip,              //人脸开关操作（需要验签）
-    kSXTagFaceInfoLanding,             //人脸识登陆
-    kSXTagFaceInfoStore,               //人脸信息是否存在
+//    kSXTagFaceInfoCollection,          //人脸识别录入信息
+//    kSXTagFaceSwitchStatus,            //人脸识别开关状态查询
+//    kSXTagFaceSwitchSwip,              //人脸开关操作（需要验签）
+//    kSXTagFaceInfoLanding,             //人脸识登陆
+//    kSXTagFaceInfoStore,               //人脸信息是否存在
 
     kSXTagChoseBranchBank,             //选择支行
 

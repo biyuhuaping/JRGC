@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UCFP2POrHonerAccoutViewController">
             <connections>
+                <outlet property="bottomConstract" destination="3IE-is-HbT" id="kN1-es-fdi"/>
+                <outlet property="bottomView" destination="D0d-2v-fC4" id="UGQ-AN-zaN"/>
                 <outlet property="cashButton" destination="GOA-kO-k5b" id="8ed-rn-iAv"/>
                 <outlet property="loadingImageView" destination="8C9-Ge-nQq" id="b4k-w2-KAB"/>
                 <outlet property="loadingLabel1" destination="hEU-Jq-muT" id="aeg-eJ-Qyn"/>
@@ -131,7 +134,7 @@
             </subviews>
             <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="D0d-2v-fC4" secondAttribute="bottom" id="3IE-is-HbT"/>
+                <constraint firstAttribute="bottomMargin" secondItem="D0d-2v-fC4" secondAttribute="bottom" id="3IE-is-HbT"/>
                 <constraint firstAttribute="trailing" secondItem="kmQ-Tv-sM9" secondAttribute="trailing" id="8aU-ei-b81"/>
                 <constraint firstItem="kmQ-Tv-sM9" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ARK-pl-DKF"/>
                 <constraint firstItem="D0d-2v-fC4" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="CC7-HV-hcn"/>
@@ -143,7 +146,7 @@
                 <constraint firstAttribute="trailing" secondItem="Yxq-SM-Ka2" secondAttribute="trailing" id="iw1-wT-os3"/>
                 <constraint firstAttribute="bottom" secondItem="kmQ-Tv-sM9" secondAttribute="bottom" id="kgZ-bM-XCf"/>
             </constraints>
-            <point key="canvasLocation" x="-407.5" y="-241.5"/>
+            <point key="canvasLocation" x="-539" y="-258"/>
         </view>
     </objects>
     <resources>
