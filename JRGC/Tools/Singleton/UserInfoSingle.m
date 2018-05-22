@@ -270,6 +270,10 @@
             else {
                 self.superviseSwitch = YES;
             }
+            self.goldIsShow = [[res objectSafeForKey:@"goldIsShow"] boolValue];
+            self.transferIsShow = [[res objectSafeForKey:@"transferIsShow"] boolValue];
+            self.wjIsShow = [[res objectSafeForKey:@"wjIsShow"] boolValue];
+            self.zxIsShow = [[res objectSafeForKey:@"zxIsShow"] boolValue];
             self.level = [[res objectSafeForKey:@"level"] intValue];
             self.goldIsNew = [[res objectSafeForKey:@"goldIsNew"] boolValue];
             self.zxIsNew = [[res objectSafeForKey:@"zxIsNew"] boolValue];
