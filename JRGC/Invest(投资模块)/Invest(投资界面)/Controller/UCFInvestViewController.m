@@ -37,7 +37,7 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUI:) name:@"getPersonalCenterNetData" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setDefaultView) name:@"setDefaultViewData" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUI:) name:@"refreshSuperviseView" object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentControllerUpdate) name:@"reloadHonerPlanData" object:nil];
+//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentControllerUpdate) name:@"reloadHonerPlanData" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentControllerUpdate) name:@"reloadP2PTransferData" object:nil];
     }
     return self;
@@ -90,125 +90,56 @@
 
 - (void)currentControllerUpdate
 {
-    if ([UserInfoSingle sharedManager].userId) {
-        if ([UserInfoSingle sharedManager].superviseSwitch) {
-            if ([UserInfoSingle sharedManager].level < 2) {
-                if ([UserInfoSingle sharedManager].goldIsNew && [UserInfoSingle sharedManager].zxIsNew) {
-                    if ([_pagerView.selectIndexStr isEqualToString:@"0"]) {
-                        if (![self.microMoney.tableview.header isRefreshing]) {
-                            [self.microMoney.tableview.header beginRefreshing];
-                        }
-                    }
-                    else if ([_pagerView.selectIndexStr isEqualToString:@"1"]) {
-                        [self.investTransfer.tableview.header beginRefreshing];
-                    }
-                }
-                else if ([UserInfoSingle sharedManager].goldIsNew && ![UserInfoSingle sharedManager].zxIsNew) {
-                    if ([_pagerView.selectIndexStr isEqualToString:@"0"]) {
-                        if (![self.microMoney.tableview.header isRefreshing]) {
-                            [self.microMoney.tableview.header beginRefreshing];
-                        }
-                    }
-                    else if ([_pagerView.selectIndexStr isEqualToString:@"1"]) {
-                        [self.honorInvest.tableView.header beginRefreshing];
-                    }
-                    else if ([_pagerView.selectIndexStr isEqualToString:@"2"]) {
-                        [self.investTransfer.tableview.header beginRefreshing];
-                    }
-                }
-                else if (![UserInfoSingle sharedManager].goldIsNew && [UserInfoSingle sharedManager].zxIsNew) {
-                    if ([_pagerView.selectIndexStr isEqualToString:@"0"]) {
-                        if (![self.microMoney.tableview.header isRefreshing]) {
-                            [self.microMoney.tableview.header beginRefreshing];
-                        }
-                    }
-                    else if ([_pagerView.selectIndexStr isEqualToString:@"1"]) {
-                        [self.golden.tableview.header beginRefreshing];
-                    }
-                    else if ([_pagerView.selectIndexStr isEqualToString:@"2"]) {
-                        [self.investTransfer.tableview.header beginRefreshing];
-                    }
-                }
-                else if (![UserInfoSingle sharedManager].goldIsNew && ![UserInfoSingle sharedManager].zxIsNew) {
-                    if ([_pagerView.selectIndexStr isEqualToString:@"0"]) {
-                        if (![self.microMoney.tableview.header isRefreshing]) {
-                            [self.microMoney.tableview.header beginRefreshing];
-                        }
-                    }
-                    else if ([_pagerView.selectIndexStr isEqualToString:@"1"]) {
-                        [self.honorInvest.tableView.header beginRefreshing];
-                    }
-                    else if ([_pagerView.selectIndexStr isEqualToString:@"3"]) {
-                        [self.investTransfer.tableview.header beginRefreshing];
-                    }
-                    else if ([_pagerView.selectIndexStr isEqualToString:@"2"]) {
-                        [self.golden.tableview.header beginRefreshing];
-                    }
-                }
-            }
-            else {
-                if ([_pagerView.selectIndexStr isEqualToString:@"0"]) {
-                    if (![self.microMoney.tableview.header isRefreshing]) {
-                        [self.microMoney.tableview.header beginRefreshing];
-                    }
-                }
-                else if ([_pagerView.selectIndexStr isEqualToString:@"1"]) {
-                    [self.honorInvest.tableView.header beginRefreshing];
-                }
-                else if ([_pagerView.selectIndexStr isEqualToString:@"3"]) {
-                    [self.investTransfer.tableview.header beginRefreshing];
-                }
-                else if ([_pagerView.selectIndexStr isEqualToString:@"2"]) {
-                    [self.golden.tableview.header beginRefreshing];
-                }
-            }
-        }
-        else {
-            if ([_pagerView.selectIndexStr isEqualToString:@"0"]) {
-                if (![self.microMoney.tableview.header isRefreshing]) {
-                    [self.microMoney.tableview.header beginRefreshing];
-                }
-            }
-            else if ([_pagerView.selectIndexStr isEqualToString:@"1"]) {
-                [self.honorInvest.tableView.header beginRefreshing];
-            }
-            else if ([_pagerView.selectIndexStr isEqualToString:@"3"]) {
-                [self.investTransfer.tableview.header beginRefreshing];
-            }
-            else if ([_pagerView.selectIndexStr isEqualToString:@"2"]) {
-                [self.golden.tableview.header beginRefreshing];
-            }
+    if ([_pagerView.selectIndexStr isEqualToString:@"0"]) {
+        if (self.childViewControllers.count >= 1) {
+            UCFBaseViewController *baseVc = [self.childViewControllers firstObject];
+            [self updateViewControllerTableWithC:baseVc];
         }
     }
-    else {
-        if ([UserInfoSingle sharedManager].superviseSwitch) {
-            if ([_pagerView.selectIndexStr isEqualToString:@"0"]) {
-                if (![self.microMoney.tableview.header isRefreshing]) {
-                    [self.microMoney.tableview.header beginRefreshing];
-                }
-            }
-            else if ([_pagerView.selectIndexStr isEqualToString:@"1"]) {
-                [self.investTransfer.tableview.header beginRefreshing];
-            }
+    else if ([_pagerView.selectIndexStr isEqualToString:@"1"]) {
+        if (self.childViewControllers.count >= 2) {
+            UCFBaseViewController *baseVc = [self.childViewControllers objectAtIndex:1];
+            [self updateViewControllerTableWithC:baseVc];
         }
-        else {
-            if ([_pagerView.selectIndexStr isEqualToString:@"0"]) {
-                if (![self.microMoney.tableview.header isRefreshing]) {
-                    [self.microMoney.tableview.header beginRefreshing];
-                }
-            }
-            else if ([_pagerView.selectIndexStr isEqualToString:@"1"]) {
-                [self.honorInvest.tableView.header beginRefreshing];
-            }
-            else if ([_pagerView.selectIndexStr isEqualToString:@"3"]) {
-                [self.investTransfer.tableview.header beginRefreshing];
-            }
-            else if ([_pagerView.selectIndexStr isEqualToString:@"2"]) {
-                [self.golden.tableview.header beginRefreshing];
-            }
+    }
+    else if ([_pagerView.selectIndexStr isEqualToString:@"2"]) {
+        if (self.childViewControllers.count >= 3) {
+            UCFBaseViewController *baseVc = [self.childViewControllers objectAtIndex:2];
+            [self updateViewControllerTableWithC:baseVc];
+        }
+    }
+    else if ([_pagerView.selectIndexStr isEqualToString:@"3"]) {
+        if (self.childViewControllers.count >= 4) {
+            UCFBaseViewController *baseVc = [self.childViewControllers lastObject];
+            [self updateViewControllerTableWithC:baseVc];
         }
     }
 }
+
+- (void)updateViewControllerTableWithC:(UCFBaseViewController *)baseVc
+{
+    if ([baseVc isEqual:self.microMoney]) {
+        if (![self.microMoney.tableview.header isRefreshing]) {
+            [self.microMoney.tableview.header beginRefreshing];
+        }
+    }
+    else if ([baseVc isEqual:self.honorInvest]) {
+        if (![self.honorInvest.tableView.header isRefreshing]) {
+            [self.honorInvest.tableView.header beginRefreshing];
+        }
+    }
+    else if ([baseVc isEqual:self.golden]) {
+        if (![self.golden.tableview.header isRefreshing]) {
+            [self.golden.tableview.header beginRefreshing];
+        }
+    }
+    else if ([baseVc isEqual:self.investTransfer]) {
+        if (![self.investTransfer.tableview.header isRefreshing]) {
+            [self.investTransfer.tableview.header beginRefreshing];
+        }
+    }
+}
+
 - (void)viewWillLayoutSubviews
 {
     [super viewWillLayoutSubviews];
@@ -217,55 +148,17 @@
 #pragma mark - 设置界面
 - (void)addChildViewControllers
 {
-    if ([UserInfoSingle sharedManager].userId) {
-        if ([UserInfoSingle sharedManager].superviseSwitch) {
-            if ([UserInfoSingle sharedManager].level < 2) {
-                if ([UserInfoSingle sharedManager].goldIsNew && [UserInfoSingle sharedManager].zxIsNew) {
-                    [self addMicroMoney];
-                    [self addTransfer];
-                }
-                else if ([UserInfoSingle sharedManager].goldIsNew && ![UserInfoSingle sharedManager].zxIsNew) {
-                    [self addMicroMoney];
-                    [self addHonor];
-                    [self addTransfer];
-                }
-                else if (![UserInfoSingle sharedManager].goldIsNew && [UserInfoSingle sharedManager].zxIsNew) {
-                    [self addMicroMoney];
-                    [self addGolden];
-                    [self addTransfer];
-                }
-                else if (![UserInfoSingle sharedManager].goldIsNew && ![UserInfoSingle sharedManager].zxIsNew) {
-                    [self addMicroMoney];
-                    [self addHonor];
-                    [self addGolden];
-                    [self addTransfer];
-                }
-            }
-            else {
-                [self addMicroMoney];
-                [self addHonor];
-                [self addGolden];
-                [self addTransfer];
-            }
-        }
-        else {
-            [self addMicroMoney];
-            [self addHonor];
-            [self addGolden];
-            [self addTransfer];
-        }
+    if ([UserInfoSingle sharedManager].wjIsShow) {
+        [self addMicroMoney];
     }
-    else {
-        if ([UserInfoSingle sharedManager].superviseSwitch) {
-            [self addMicroMoney];
-            [self addTransfer];
-        }
-        else {
-            [self addMicroMoney];
-            [self addHonor];
-            [self addGolden];
-            [self addTransfer];
-        }
+    if ([UserInfoSingle sharedManager].zxIsShow) {
+        [self addHonor];
+    }
+    if ([UserInfoSingle sharedManager].goldIsShow) {
+        [self addGolden];
+    }
+    if ([UserInfoSingle sharedManager].transferIsShow) {
+        [self addTransfer];
     }
 }
 
@@ -295,38 +188,18 @@
 
 
 - (void)createUI {
-    NSArray *titleArray = nil;
-    if ([UserInfoSingle sharedManager].userId) {
-        if ([UserInfoSingle sharedManager].superviseSwitch) {
-            if ([UserInfoSingle sharedManager].level < 2) {
-                if ([UserInfoSingle sharedManager].goldIsNew && [UserInfoSingle sharedManager].zxIsNew) {
-                    titleArray = @[@"微金", @"债转"];
-                }
-                else if ([UserInfoSingle sharedManager].goldIsNew && ![UserInfoSingle sharedManager].zxIsNew) {
-                    titleArray = @[@"微金", @"尊享", @"债转"];
-                }
-                else if (![UserInfoSingle sharedManager].goldIsNew && [UserInfoSingle sharedManager].zxIsNew) {
-                    titleArray = @[@"微金", @"黄金", @"债转"];
-                }
-                else if (![UserInfoSingle sharedManager].goldIsNew && ![UserInfoSingle sharedManager].zxIsNew) {
-                    titleArray = @[@"微金", @"尊享", @"黄金", @"债转"];
-                }
-            }
-            else {
-                titleArray = @[@"微金", @"尊享", @"黄金", @"债转"];
-            }
-        }
-        else {
-            titleArray = @[@"微金", @"尊享", @"黄金", @"债转"];
-        }
+    NSMutableArray *titleArray = [[NSMutableArray alloc] init];
+    if ([UserInfoSingle sharedManager].wjIsShow) {
+        [titleArray addObject:@"微金"];
     }
-    else {
-        if ([UserInfoSingle sharedManager].superviseSwitch) {
-            titleArray = @[@"微金", @"债转"];
-        }
-        else {
-            titleArray = @[@"微金", @"尊享", @"黄金", @"债转"];
-        }
+    if ([UserInfoSingle sharedManager].zxIsShow) {
+        [titleArray addObject:@"尊享"];
+    }
+    if ([UserInfoSingle sharedManager].goldIsShow) {
+        [titleArray addObject:@"黄金"];
+    }
+    if ([UserInfoSingle sharedManager].transferIsShow) {
+        [titleArray addObject:@"债转"];
     }
     _pagerView = [[PagerView alloc] initWithFrame:CGRectMake(0,20,ScreenWidth,ScreenHeight - 20 - 49)
                                SegmentViewHeight:44

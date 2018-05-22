@@ -713,7 +713,10 @@
             dic = dic[@"data"];
             [self novicecheck:dic];
             [self zxSwitchCheck:dic];
-            
+            [UserInfoSingle sharedManager].goldIsShow = [[dic objectSafeForKey:@"goldIsShow"] boolValue];
+            [UserInfoSingle sharedManager].transferIsShow = [[dic objectSafeForKey:@"transferIsShow"] boolValue];
+            [UserInfoSingle sharedManager].wjIsShow = [[dic objectSafeForKey:@"wjIsShow"] boolValue];
+            [UserInfoSingle sharedManager].zxIsShow = [[dic objectSafeForKey:@"zxIsShow"] boolValue];
             NSString *superviseStr = [dic objectForKey:@"compliance"];
             //监管开关
             if ([superviseStr isEqualToString:@"1"]) {

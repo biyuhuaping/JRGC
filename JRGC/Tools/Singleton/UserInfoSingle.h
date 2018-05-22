@@ -46,6 +46,11 @@
 @property(nonatomic, assign) BOOL zxIsNew; //是否尊享新手
 @property(nonatomic, assign) int level; //用户的等级
 
+@property(nonatomic, assign) BOOL goldIsShow;
+@property(nonatomic, assign) BOOL zxIsShow;
+@property(nonatomic, assign) BOOL wjIsShow;
+@property(nonatomic, assign) BOOL transferIsShow;
+
 //@property(nonatomic, copy) NSString *userLevel;
 //获取用户信息单利对象
 + (UserInfoSingle *)sharedManager;
