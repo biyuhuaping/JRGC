@@ -112,6 +112,7 @@
             UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
             button.backgroundColor =[UIColor clearColor];
             button.frame = self.P2P_secondView.frame;
+            button.tag = 3844;
             [button addTarget:self action:@selector(gotoWeiJinRebateAmtVC:) forControlEvents:UIControlEventTouchUpInside];
             [self.P2P_secondView addSubview:button];
         }
@@ -343,7 +344,18 @@
             _zxInviteFriendsCountLab.text = P2PCountStr1;
             [_zxInviteFriendsCountLab setFont:[UIFont systemFontOfSize:10] string:P2PCountStr2];
             _zxRebateAmtLab.text =  [NSString stringWithFormat:@"¥%@",dictemp[@"zxRebateAmt"]];//尊享返利
-
+            
+            if([dictemp[@"zxRebateAmt"] doubleValue] > 0.01) {
+                self.zxInviteFriendsCountLab.hidden  = NO;
+                self.p2pListArrow.hidden = NO;
+                self.zxRebateAmtLab.hidden = NO;
+                self.p2p_lineView.hidden = NO;
+                
+               UIButton *button = (UIButton *)[self.P2P_secondView viewWithTag:3844];
+                [button removeFromSuperview];
+            }
+            
+            
             _gcmLab.text = dictemp[@"promotionCode"];//我的工场码
             _recruitStatus = dictemp[@"recruitStatus"];
             _label_titleone.text = dictemp[@"enjoyAnnualAmountText"];
