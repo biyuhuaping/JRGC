@@ -129,7 +129,7 @@
     
     if([UserInfoSingle sharedManager].superviseSwitch)//监管开关打开
     {
-   
+        
             if ([UserInfoSingle sharedManager].zxIsNew && [UserInfoSingle sharedManager].goldIsNew)
             { // 该情况已处理
            

@@ -118,8 +118,17 @@
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 10, 0);
     self.tableView.separatorColor = [UIColor clearColor];
     self.cashButton.backgroundColor = UIColorWithRGB(0x7D9EC5);
-    self.rechargeButton.backgroundColor = UIColorWithRGB(0xFA4F4C );
-    
+    if ([UserInfoSingle sharedManager].superviseSwitch) {
+        if (self.accoutType == SelectAccoutTypeP2P) {
+            self.rechargeButton.backgroundColor = UIColorWithRGB(0xfd4d4c);
+        } else {
+            self.rechargeButton.backgroundColor = UIColorWithRGB(0xebebee);
+        }
+    } else {
+        self.rechargeButton.backgroundColor = UIColorWithRGB(0xfd4d4c);
+
+    }
+
 //    _bottomConstract
     
 }
@@ -499,13 +508,24 @@
 #pragma mark 充值点击事件
 - (IBAction)clickRechargeBtn:(UIButton *)sender {
     
+    if ([UserInfoSingle sharedManager].superviseSwitch) {
+        if (self.accoutType == SelectAccoutTypeP2P ) {
+            [self skipToTouUpViewController];   
+        } else {
+            [MBProgressHUD displayHudError:@"系统升级中"];
+        }
+    } else {
+        [self skipToTouUpViewController];
+    }
+}
+- (void)skipToTouUpViewController
+{
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"RechargeStoryBorard" bundle:nil];
     UCFTopUpViewController * rechargeVC = [storyboard instantiateViewControllerWithIdentifier:@"topup"];
     rechargeVC.title = @"充值";
     rechargeVC.uperViewController = self;
     rechargeVC.accoutType = self.accoutType;
     [self.navigationController pushViewController:rechargeVC animated:YES];
-
 }
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (alertView.tag == 1010) {

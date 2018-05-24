@@ -20,6 +20,11 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.availableMoenyLab.textColor = UIColorWithRGB(0x555555);
+    if ([UserInfoSingle sharedManager].superviseSwitch) {
+        _rechargeBtn.hidden = YES;
+    } else {
+        _rechargeBtn.hidden = NO;
+    }
 }
 - (void)updateaVailableMoenyLab:(NSString *)availableMoeny
 {
