@@ -344,8 +344,8 @@
             _zxInviteFriendsCountLab.text = P2PCountStr1;
             [_zxInviteFriendsCountLab setFont:[UIFont systemFontOfSize:10] string:P2PCountStr2];
             _zxRebateAmtLab.text =  [NSString stringWithFormat:@"¥%@",dictemp[@"zxRebateAmt"]];//尊享返利
-            
-            if([dictemp[@"zxRebateAmt"] doubleValue] > 0.01) {
+ 
+            if([dictemp[@"zxRebateAmt"] doubleValue] >= 0.01) {
                 self.zxInviteFriendsCountLab.hidden  = NO;
                 self.p2pListArrow.hidden = NO;
                 self.zxRebateAmtLab.hidden = NO;

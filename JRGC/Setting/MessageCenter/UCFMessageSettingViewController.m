@@ -206,8 +206,7 @@
 
         }
         else{
-            NSURL*url=[NSURL URLWithString:@"prefs:root=NOTIFICATIONS_ID"];
-            [[UIApplication sharedApplication] openURL:url];
+            [[UIApplication sharedApplication]openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
         }
     }
 }

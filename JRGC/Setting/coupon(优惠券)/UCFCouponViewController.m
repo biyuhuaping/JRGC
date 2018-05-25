@@ -54,7 +54,7 @@
     baseTitleLabel.text = @"优惠券";
     _currentSelectedState = 0;
     
-    if([UserInfoSingle sharedManager].superviseSwitch &&  [UserInfoSingle sharedManager].goldIsNew)
+    if([UserInfoSingle sharedManager].superviseSwitch)
     {
         self.itemSelectView.sectionTitles = @[@"返现券", @"返息券"];
     }

@@ -30,7 +30,7 @@
     [super viewDidLoad];
     [self addLeftButton];
     
-    if([UserInfoSingle sharedManager].superviseSwitch  && [UserInfoSingle sharedManager].goldIsNew)
+    if([UserInfoSingle sharedManager].superviseSwitch)
     {
          self.itemSelectView.sectionTitles = @[@"返现券", @"返息券"];
     }
