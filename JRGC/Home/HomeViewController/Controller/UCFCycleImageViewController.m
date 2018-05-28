@@ -105,6 +105,12 @@ static NSString *cellId = @"iconCell";
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
+    NSUInteger count = self.presenter.allHomeIcons.count;
+    CGFloat w = (ScreenWidth-20)/5.0;
+    if (count < 5 && count > 1) {
+        CGFloat space = ((ScreenWidth - 20) - w * count)/(count - 1);
+        return space;
+    }
     return 0.f;
 }
 
