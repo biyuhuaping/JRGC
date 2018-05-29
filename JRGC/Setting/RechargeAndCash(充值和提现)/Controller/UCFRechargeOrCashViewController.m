@@ -284,19 +284,23 @@
             }else if( ![UserInfoSingle sharedManager].zxIsNew && [UserInfoSingle sharedManager].goldIsNew)
             {
                 [cashAccoutArray removeAllObjects];
-                [cashAccoutArray addObject:_honerAccoutCardView];
-                [cashAccoutArray addObject:_p2PAccoutCardView];
-              
                 
+                [cashAccoutArray addObject:_honerAccoutCardView];
+                if ([UserInfoSingle sharedManager].openStatus > 3)//微金开户添加到数组里
+                {
+                       [cashAccoutArray addObject:_p2PAccoutCardView];
+                }
             }else if([UserInfoSingle sharedManager].zxIsNew && ![UserInfoSingle sharedManager].goldIsNew)
             {
                 [cashAccoutArray removeAllObjects];
                 [cashAccoutArray addObject:_goldAccoutCardView];
-                [cashAccoutArray addObject:_p2PAccoutCardView];
+                if ([UserInfoSingle sharedManager].openStatus > 3)//微金开户添加到数组里
+                {
+                    [cashAccoutArray addObject:_p2PAccoutCardView];
+                }
             }else {
-              
+                
             }
-        
     }
     else{
 
