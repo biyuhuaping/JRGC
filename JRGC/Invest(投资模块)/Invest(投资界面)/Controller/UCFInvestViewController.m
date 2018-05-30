@@ -162,26 +162,53 @@
     }
 }
 
+- (UCFMicroMoneyViewController *)microMoney
+{
+    if (nil == _microMoney) {
+        _microMoney = [[UCFMicroMoneyViewController alloc]initWithNibName:@"UCFMicroMoneyViewController" bundle:nil];
+    }
+    return _microMoney;
+}
+
+- (UCFHonorInvestViewController *)honorInvest
+{
+    if (nil == _honorInvest) {
+        _honorInvest = [[UCFHonorInvestViewController alloc]initWithNibName:@"UCFHonorInvestViewController" bundle:nil];
+    }
+    return _honorInvest;
+}
+
+- (UCFGoldenViewController *)golden {
+    if (nil == _golden) {
+        _golden = [[UCFGoldenViewController alloc] initWithNibName:@"UCFGoldenViewController" bundle:nil];
+    }
+    return _golden;
+}
+
+- (UCFInvestTransferViewController *)investTransfer
+{
+    if (nil == _investTransfer) {
+        _investTransfer = [[UCFInvestTransferViewController alloc]initWithNibName:@"UCFInvestTransferViewController" bundle:nil];
+    }
+    return _investTransfer;
+}
+
 - (void)addMicroMoney {
-    self.microMoney = [[UCFMicroMoneyViewController alloc]initWithNibName:@"UCFMicroMoneyViewController" bundle:nil];
     self.microMoney.rootVc = self;
     [self addChildViewController:self.microMoney];
 }
 
 - (void)addHonor {
-    self.honorInvest = [[UCFHonorInvestViewController alloc]initWithNibName:@"UCFHonorInvestViewController" bundle:nil];
     self.honorInvest.rootVc = self;
     [self addChildViewController:self.honorInvest];
 }
 
 - (void)addGolden {
-    self.golden = [[UCFGoldenViewController alloc] initWithNibName:@"UCFGoldenViewController" bundle:nil];
     self.golden.rootVc = self;
     [self addChildViewController:self.golden];
 }
 
 - (void)addTransfer {
-    self.investTransfer = [[UCFInvestTransferViewController alloc]initWithNibName:@"UCFInvestTransferViewController" bundle:nil];
     self.investTransfer.rootVc = self;
     [self addChildViewController:self.investTransfer];
 }
