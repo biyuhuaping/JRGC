@@ -53,7 +53,7 @@
 @property (assign, nonatomic) BOOL isComeForceUpdate;
 @property (assign, nonatomic) BOOL isShowAdversement;
 @property (assign, nonatomic) BOOL isAfter;//是否延时（只在3DTouch启动时使用）
-
+@property (nonatomic)BOOL isHuiDuEnv; //如果是灰度的话，请求第二次
 @end
 
 @implementation AppDelegate
@@ -711,44 +711,29 @@
         if([dic[@"ret"] boolValue] == 1)
         {
             dic = dic[@"data"];
-            [self novicecheck:dic];
-            [self zxSwitchCheck:dic];
-            [UserInfoSingle sharedManager].goldIsShow = [[dic objectSafeForKey:@"goldIsShow"] boolValue];
-            [UserInfoSingle sharedManager].transferIsShow = [[dic objectSafeForKey:@"transferIsShow"] boolValue];
-            [UserInfoSingle sharedManager].wjIsShow = [[dic objectSafeForKey:@"wjIsShow"] boolValue];
-            [UserInfoSingle sharedManager].zxIsShow = [[dic objectSafeForKey:@"zxIsShow"] boolValue];
-            NSString *superviseStr = [dic objectForKey:@"compliance"];
-            //监管开关
-            if ([superviseStr isEqualToString:@"1"]) {
-                [self superviseSwitchWithState:NO];
-            }
-            else if ([superviseStr isEqualToString:@"2"]) {
-                [self superviseSwitchWithState:YES];
-            }
-            else {
-                [self superviseSwitchWithState:YES];
-            }
-//
+            
             //以下是升级信息
             NSString *netVersion = [dic objectSafeForKey: @"lastVersion"];
             [LockFlagSingle sharedManager].netVersion = netVersion;
             //是否强制更新 0强制 1随便 2不稳定
             NSInteger versionMark = [[dic objectSafeForKey:@"forceUpdateOnOff"] integerValue];
-      
+            
             NSDictionary *infoDic = [[NSBundle mainBundle] infoDictionary];
             NSString *currentVersion = infoDic[@"CFBundleShortVersionString"];
             NSComparisonResult comparResult = [netVersion compare:currentVersion options:NSNumericSearch];
-            /*
-                注意点
-                1.第一个主要是给苹果测试人员用 ipa 版本号 大于等于 后台配置 版本号 并且version 为2 此时进入灰度环境（注意：使用灰度环境不要用自动上架，有可能客户自动升级了，进入灰度环境）
-                2.上线流程，等app提交审核，就需要要求后台配置升级信息人员，把升级信息挂出来，但是versionMark不能写0 和 1 ，
-                          app 审核完成，需要改写为0和1，
-             */
+            
+            
             if (comparResult == NSOrderedAscending || comparResult == NSOrderedSame) {
                 if (versionMark == 2) {
                     self.isSubmitAppStoreTestTime = YES;
+                    if (!_isHuiDuEnv) {
+                        _isHuiDuEnv = YES;
+                        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                            [self checkNovicePoliceOnOff];
+                        });
+                    }
                 }
-                return;
+//                return;
             } else {
                 NSString *des = dic[@"updateInfo"];
                 if (versionMark == 0) {
@@ -771,6 +756,34 @@
                     DBLog(@"升级期内");
                 }
             }
+            
+            
+            [self novicecheck:dic];
+            [self zxSwitchCheck:dic];
+            [UserInfoSingle sharedManager].goldIsShow = [[dic objectSafeForKey:@"goldIsShow"] boolValue];
+            [UserInfoSingle sharedManager].transferIsShow = [[dic objectSafeForKey:@"transferIsShow"] boolValue];
+            [UserInfoSingle sharedManager].wjIsShow = [[dic objectSafeForKey:@"wjIsShow"] boolValue];
+            [UserInfoSingle sharedManager].zxIsShow = [[dic objectSafeForKey:@"zxIsShow"] boolValue];
+            NSString *superviseStr = [dic objectForKey:@"compliance"];
+            //监管开关
+            if ([superviseStr isEqualToString:@"1"]) {
+                [self superviseSwitchWithState:NO];
+            }
+            else if ([superviseStr isEqualToString:@"2"]) {
+                [self superviseSwitchWithState:YES];
+            }
+            else {
+                [self superviseSwitchWithState:YES];
+            }
+
+
+            /*
+                注意点
+                1.第一个主要是给苹果测试人员用 ipa 版本号 大于等于 后台配置 版本号 并且version 为2 此时进入灰度环境（注意：使用灰度环境不要用自动上架，有可能客户自动升级了，进入灰度环境）
+                2.上线流程，等app提交审核，就需要要求后台配置升级信息人员，把升级信息挂出来，但是versionMark不能写0 和 1 ，
+                          app 审核完成，需要改写为0和1，
+             */
+
         }
         else {
 #warning about supervise
