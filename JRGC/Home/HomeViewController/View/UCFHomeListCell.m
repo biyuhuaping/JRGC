@@ -100,6 +100,7 @@
                 self.circleProgressView.progress = progress;
         }
         else {
+            DBLOG(@"type : %@ %@", presenter.item.type, presenter.item.prdName);
             progress = [presenter.item.completeLoan floatValue]/[presenter.item.borrowAmount floatValue];
             if (progress < 0 || progress > 1) {
                 progress = 1;
@@ -201,13 +202,13 @@
         self.repayModelLabel.text = presenter.repayModeText;
         self.remainLabel.text = presenter.availBorrowAmount;
         self.startMoneyLabel.text = presenter.minInvest;
-//        float progress;
-//        progress = [presenter.item.completeLoan floatValue]/[presenter.item.borrowAmount floatValue];
-//        if (progress < 0 || progress > 1) {
-//            progress = 1;
-//        }
-//        else
-//            self.circleProgressView.progress = progress;
+        float progress;
+        progress = [presenter.item.completeLoan floatValue]/[presenter.item.borrowAmount floatValue];
+        if (progress < 0 || progress > 1) {
+            progress = 1;
+        }
+        else
+            self.circleProgressView.progress = progress;
         
         
         NSInteger status = [presenter.item.status integerValue];
