@@ -171,6 +171,8 @@
     self.jg_ckie = nil;
     self.loginName = nil;
     self.headerUrl = nil;
+    self.wjIsShow = YES;
+    self.transferIsShow = YES;
     _mobile = nil;
     _realName = nil;
     _openStatus = -1;
