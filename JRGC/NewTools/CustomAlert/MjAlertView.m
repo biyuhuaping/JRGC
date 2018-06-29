@@ -567,7 +567,7 @@
     self = [self init];
     if (self) {
         
-
+        
         UIImageView *headerView  = [[UIImageView alloc]initWithFrame:CGRectMake((ScreenWidth - 250.0f)/2.0f, 0, 250, 335)];
         headerView.userInteractionEnabled = YES;
         headerView.image = [UIImage imageNamed:@"honorable_bj"];

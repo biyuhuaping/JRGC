@@ -51,7 +51,7 @@
 #import "UCFHomeIconPresenter.h"
 #import "UCFNoticeModel.h"
 #import "UCFPurchaseTranBidViewController.h"
-
+#import "GCAlertView.h"
 @interface UCFHomeViewController () <UCFHomeListViewControllerDelegate, UCFHomeListNavViewDelegate, UCFCycleImageViewControllerDelegate, BJGridItemDelegate, UIAlertViewDelegate, MjAlertViewDelegate>
 @property (strong, nonatomic) UCFCycleImageViewController *cycleImageVC;
 @property (strong, nonatomic) UCFHomeListViewController *homeListVC;
@@ -236,6 +236,15 @@
 //    webView.flageHaveShareBut = @"分享";
 //    webView.sourceVc = @"UCFLatestProjectViewController";
 //    [self.navigationController pushViewController:webView animated:YES];
+    
+    
+    
+//    GCAlertView *view = [[GCAlertView alloc] initUpdateViewWithTitle:@"升级提醒" message:@"1.升级信息\n2.升级信息\n2.升级信息\n2.升级信息\n2.升级信息\n2.升级信息" cancelButtonTitle:@"暂不升级" otherButtonTitles:@"更新", nil];
+//    [view show];
+//    view.resultIndex = ^(NSInteger index) {
+//        
+//    };
+//    return;
     if ([[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
         UCFWebViewJavascriptBridgeMallDetails *web = [[UCFWebViewJavascriptBridgeMallDetails alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMallDetails" bundle:nil];
         web.url = COUPON_CENTER;

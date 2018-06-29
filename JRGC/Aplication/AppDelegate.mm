@@ -42,6 +42,8 @@
 #ifdef NSFoundationVersionNumber_iOS_9_x_Max
 #import <UserNotifications/UserNotifications.h>
 #endif
+#import "GCAlertView.h"
+#import "GlobalMarkView.h"
 @interface AppDelegate () <JPUSHRegisterDelegate>
 
 @property (assign, nonatomic) UIBackgroundTaskIdentifier backgroundUpdateTask;
@@ -49,7 +51,6 @@
 @property (assign, nonatomic) NSInteger backTime;
 @property (assign, nonatomic) BOOL isComePushNotification;
 @property (assign, nonatomic) BOOL isFirstStart;
-@property (assign, nonatomic) BOOL isComeForceUpdate;
 @property (assign, nonatomic) BOOL isShowAdversement;
 @property (assign, nonatomic) BOOL isAfter;//是否延时（只在3DTouch启动时使用）
 
@@ -58,6 +59,7 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+
 
     //设置公告展示标志位
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isShowNotice"];
@@ -329,7 +331,7 @@
 
 - (void)forceUpdateVersion
 {
-    _isComeForceUpdate = YES;
+//    _isComeForceUpdate = YES;
     [self checkNovicePoliceOnOff];
 }
 // 检测是否首次登录
@@ -741,13 +743,12 @@
             } else {
                 NSString *des = dic[@"updateInfo"];
                 if (versionMark == 0) {
-                    if (_isComeForceUpdate) {
-                        //服务器版本和appstore版本一致
-                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"发现新版本 V%@",netVersion] message:des delegate:self cancelButtonTitle:nil otherButtonTitles:@"更新", nil];
-                        alert.tag = 102;
-                        [alert show];
-                        _isComeForceUpdate = NO;
+                    if (![GlobalMarkView sharedManager].updateAlertView) {
+                         GCAlertView *view = [[GCAlertView alloc] initUpdateViewWithTitle:[NSString stringWithFormat:@"发现新版本 V%@",netVersion] message:des cancelButtonTitle:@"" otherButtonTitles:@"更新", nil];
+                        [GlobalMarkView sharedManager].updateAlertView = view;
                     }
+                    [[GlobalMarkView sharedManager].updateAlertView show];
+
                 } else if (versionMark == 1) {
                     if ([PraiseAlert isShouldWarnUserUpdate:netVersion]) {
                         //可选择性更新

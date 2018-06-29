@@ -46,6 +46,7 @@
 		25F538B41D881B0A0039262F /* UCFPurchaseWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25F538B21D881B0A0039262F /* UCFPurchaseWebView.m */; };
 		25F538B51D881B0A0039262F /* UCFPurchaseWebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25F538B31D881B0A0039262F /* UCFPurchaseWebView.xib */; };
 		330F8AAC20932542004D4A15 /* NormalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 330F8AAB20932542004D4A15 /* NormalCell.m */; };
+		3335687320B3C1E500A86675 /* GlobalMarkView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3335687220B3C1E500A86675 /* GlobalMarkView.m */; };
 		3338802D20905AEC00A7115B /* RequestTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 3338802C20905AEC00A7115B /* RequestTool.m */; };
 		333FD810206B836F00CEA03C /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 333FD80E206B836F00CEA03C /* Reachability.m */; };
 		3343FF36206CDECB002A2153 /* UCF404ErrorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3343FF32206CDECA002A2153 /* UCF404ErrorView.m */; };
@@ -77,6 +78,7 @@
 		3381B44E20A17BF500E95BD6 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 3381B44C20A17BF500E95BD6 /* NSString+MD5.m */; };
 		33B1FCD120887602009D48DA /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B1FCCE20887602009D48DA /* MBProgressHUD.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		33B1FCD220887602009D48DA /* MBProgressHUD+HJ.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B1FCD020887602009D48DA /* MBProgressHUD+HJ.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		33CA884F20AC17D300EBC476 /* GCAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33CA884E20AC17D300EBC476 /* GCAlertView.m */; };
 		33ED6BD0209B034A00E47334 /* ColorTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 33ED6BCE209B034A00E47334 /* ColorTheme.m */; };
 		4A04F82F1F0B6B1000ADE9D8 /* UCFGoldAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A04F82D1F0B6B1000ADE9D8 /* UCFGoldAccountViewController.m */; };
 		4A04F8301F0B6B1000ADE9D8 /* UCFGoldAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A04F82E1F0B6B1000ADE9D8 /* UCFGoldAccountViewController.xib */; };
@@ -1128,6 +1130,8 @@
 		32CA3369118CF695601F1379 /* Pods-JRGC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JRGC.release.xcconfig"; path = "Pods/Target Support Files/Pods-JRGC/Pods-JRGC.release.xcconfig"; sourceTree = "<group>"; };
 		330F8AAA20932542004D4A15 /* NormalCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NormalCell.h; sourceTree = "<group>"; };
 		330F8AAB20932542004D4A15 /* NormalCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NormalCell.m; sourceTree = "<group>"; };
+		3335687120B3C1E400A86675 /* GlobalMarkView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalMarkView.h; sourceTree = "<group>"; };
+		3335687220B3C1E500A86675 /* GlobalMarkView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlobalMarkView.m; sourceTree = "<group>"; };
 		3338802B20905AEC00A7115B /* RequestTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RequestTool.h; sourceTree = "<group>"; };
 		3338802C20905AEC00A7115B /* RequestTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RequestTool.m; sourceTree = "<group>"; };
 		333FD80E206B836F00CEA03C /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
@@ -1188,6 +1192,8 @@
 		33B1FCCE20887602009D48DA /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		33B1FCCF20887602009D48DA /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		33B1FCD020887602009D48DA /* MBProgressHUD+HJ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+HJ.m"; sourceTree = "<group>"; };
+		33CA884D20AC17D300EBC476 /* GCAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GCAlertView.h; sourceTree = "<group>"; };
+		33CA884E20AC17D300EBC476 /* GCAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GCAlertView.m; sourceTree = "<group>"; };
 		33ED6BCE209B034A00E47334 /* ColorTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorTheme.m; sourceTree = "<group>"; };
 		33ED6BCF209B034A00E47334 /* ColorTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorTheme.h; sourceTree = "<group>"; };
 		3C3D11AF5BBAC2E558A4FAA0 /* Pods-JRGC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JRGC.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JRGC/Pods-JRGC.debug.xcconfig"; sourceTree = "<group>"; };
@@ -3036,6 +3042,13 @@
 			path = TongDun;
 			sourceTree = "<group>";
 		};
+		33594E6620B69BE9005C0A20 /* Login_V2 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Login_V2;
+			sourceTree = "<group>";
+		};
 		33717762206C959400A6366C /* HomePage */ = {
 			isa = PBXGroup;
 			children = (
@@ -3390,6 +3403,8 @@
 		33B1FCCA208847D9009D48DA /* Singleton */ = {
 			isa = PBXGroup;
 			children = (
+				3335687120B3C1E400A86675 /* GlobalMarkView.h */,
+				3335687220B3C1E500A86675 /* GlobalMarkView.m */,
 			);
 			path = Singleton;
 			sourceTree = "<group>";
@@ -3415,6 +3430,7 @@
 		33C08711208086740003DE76 /* V2 */ = {
 			isa = PBXGroup;
 			children = (
+				33CA884B20AC174B00EBC476 /* PublicViews */,
 				337E54422092D1F4009DE8C4 /* Base */,
 				33B1FCCB208847FA009D48DA /* Vendor */,
 				33B1FCC62088479D009D48DA /* Support */,
@@ -3426,9 +3442,27 @@
 		33C08712208086A50003DE76 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				33594E6620B69BE9005C0A20 /* Login_V2 */,
 				334259852091B056000893CC /* More_V2 */,
 			);
 			path = Class;
+			sourceTree = "<group>";
+		};
+		33CA884B20AC174B00EBC476 /* PublicViews */ = {
+			isa = PBXGroup;
+			children = (
+				33CA884C20AC176000EBC476 /* alert */,
+			);
+			path = PublicViews;
+			sourceTree = "<group>";
+		};
+		33CA884C20AC176000EBC476 /* alert */ = {
+			isa = PBXGroup;
+			children = (
+				33CA884D20AC17D300EBC476 /* GCAlertView.h */,
+				33CA884E20AC17D300EBC476 /* GCAlertView.m */,
+			);
+			path = alert;
 			sourceTree = "<group>";
 		};
 		33ED6BCD209B034A00E47334 /* theme */ = {
@@ -6942,7 +6976,6 @@
 				7BFE3E7E1AC55C98002A53A2 /* Resources */,
 				83F2D5121DCB3F950041F913 /* Embed Watch Content */,
 				15DD338637BFC12A4735F2F2 /* [CP] Embed Pods Frameworks */,
-				556CA7935987A546455DE5BA /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -7378,21 +7411,6 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-JRGC/Pods-JRGC-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		556CA7935987A546455DE5BA /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-JRGC/Pods-JRGC-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		877969AA66A4E216B892B7CB /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -7558,6 +7576,7 @@
 				EDEAB70C1C7D4BAF00BBF3B1 /* UCFIdNumberTextField.m in Sources */,
 				A828D6B31F1F30C200662266 /* UCFExtractGoldViewController.m in Sources */,
 				E3A96B0E1CBF83CE00E8884F /* UCFWorkPointsTableViewCell.m in Sources */,
+				3335687320B3C1E500A86675 /* GlobalMarkView.m in Sources */,
 				83FEDB761EFBB56000CFE0EF /* UCFCompanyNoOpenViewController.m in Sources */,
 				4AD6B4C61B32D33E00D94140 /* CycleView.m in Sources */,
 				333FD810206B836F00CEA03C /* Reachability.m in Sources */,
@@ -7960,6 +7979,7 @@
 				A8E02DB21F0E0A7800FC2260 /* GoldTransactionRecordViewController.m in Sources */,
 				7BCCA8B61ACA97EB0089DAAC /* UCFLoginView.m in Sources */,
 				743985461F17699600F2EDB8 /* UCFGoldRechargeModel.m in Sources */,
+				33CA884F20AC17D300EBC476 /* GCAlertView.m in Sources */,
 				840A79451C2A7C160059A946 /* UCFMessageCenterCell.m in Sources */,
 				4A9F15BA1B0EC9B1009A7365 /* CoupleHeadView.m in Sources */,
 				7443C72D1F1EFF7C009669C0 /* UCFGoldCashThreeCell.m in Sources */,

@@ -11,7 +11,8 @@
 #import <AVFoundation/AVMediaFormat.h>
 #import <AVFoundation/AVAssetExportSession.h>
 //#import "UIImage+Compression.h"
-
+#import "GCAlertView.h"
+#import "GlobalMarkView.h"
 /**
  * GET：获取资源，不会改动资源
  * POST：创建记录
@@ -115,10 +116,19 @@ static NetWorkingManager * defualt_shareMananger = nil;
             NSDictionary *dataDict = responseObject;
             NSInteger rstcode = [dataDict[@"code"] integerValue];
             if(rstcode == -1 || rstcode == -2 || rstcode == -3 || rstcode == -4 || rstcode == -6) {
+
+                
+                
 //                [[GlobalMarkView sharedManager] switchToLogin:[NSString stringWithFormat:@"登录失效,请重新登录(%ld)",rstcode]];
 //                [RCLoadHUD hideHUD];
             } else if (rstcode == -5) {
 //                [RCLoadHUD hideHUD];
+                
+                
+                if (![GlobalMarkView sharedManager].updateAlertView) {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:CHECK_NEW_VERSION object:nil];
+                }
+                
             } else {
                 success1(YES,responseObject);
             }
