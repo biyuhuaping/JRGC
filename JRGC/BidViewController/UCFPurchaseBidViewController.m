@@ -192,6 +192,11 @@
     }else{
         _isP2P = YES;
         baseTitleLabel.text = @"出借";
+        AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        if (app.isSubmitAppStoreTestTime)
+        {
+            baseTitleLabel.text = @"投资";
+        }
     }
     self.wJOrZxStr = _isP2P ? @"出借":@"认购"; //为了区别微金和尊享，修改提示文案
     
@@ -285,6 +290,11 @@
     investmentButton.layer.masksToBounds = YES;
     
     NSString *buttonTitle = _isP2P ? @"立即出借":@"立即认购";
+    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    if (app.isSubmitAppStoreTestTime)
+    {
+        buttonTitle = _isP2P ? @"立即购买":@"立即认购";
+    }
     [investmentButton setTitle:buttonTitle forState:UIControlStateNormal];
     [investmentButton addTarget:self action:@selector(checkIsCanInvest) forControlEvents:UIControlEventTouchUpInside];
     [investBaseView addSubview:investmentButton];

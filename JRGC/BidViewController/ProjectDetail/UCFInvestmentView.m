@@ -7,7 +7,7 @@
 //
 
 #import "UCFInvestmentView.h"
-
+#import "AppDelegate.h"
 @interface UCFInvestmentView ()
 {
     NSString *_investmentState;
@@ -74,6 +74,11 @@
                     [investmentButton setTitle:buttonTitle forState:UIControlStateNormal];
                 }else {
                     NSString *buttonTitle = isP2P ? @"立即出借":@"立即认购";
+                    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+                    if (app.isSubmitAppStoreTestTime)
+                    {
+                        buttonTitle = isP2P ? @"立即购买":@"立即认购";
+                    }
                     [investmentButton setTitle:buttonTitle forState:UIControlStateNormal];
                 }
                 investmentButton.backgroundColor = UIColorWithRGB(0xfd4d4c);
@@ -103,6 +108,11 @@
                 [investmentButton setTitle:buttonTitle forState:UIControlStateNormal];
             }else {
                 NSString *buttonTitle = isP2P ? @"立即出借":@"立即认购";
+                AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+                if (app.isSubmitAppStoreTestTime)
+                {
+                    buttonTitle = isP2P ? @"立即购买":@"立即认购";
+                }
                 [investmentButton setTitle:buttonTitle forState:UIControlStateNormal];
             }
         }

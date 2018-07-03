@@ -12,7 +12,7 @@
 #import "UCFMicroMoneyModel.h"
 #import "UCFProjectLabel.h"
 #import "UCFGoldModel.h"
-
+#import "AppDelegate.h"
 
 @interface UCFInvestMicroMoneyCell ()
 @property (weak, nonatomic) IBOutlet UILabel *proName;
@@ -84,6 +84,11 @@
     NSInteger status = [microMoneyModel.status integerValue];
     NSArray *statusArr = @[@"未审核",@"等待确认",@"出借",@"流标",@"满标",@"回款中",@"已回款"];
     
+    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    if (app.isSubmitAppStoreTestTime)
+    {
+       statusArr = @[@"未审核",@"等待确认",@"投资",@"流标",@"满标",@"回款中",@"已回款"];
+    }
     
     if (status>2) {
         self.circleProgressView.progressText = @"已售罄";

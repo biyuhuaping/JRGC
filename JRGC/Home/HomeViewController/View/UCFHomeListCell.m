@@ -13,7 +13,7 @@
 #import "UCFMicroMoneyModel.h"
 #import "UCFAngleView.h"
 #import "UCFGoldModel.h"
-
+#import "AppDelegate.h"
 @interface UCFHomeListCell ()
 @property (weak, nonatomic) IBOutlet UILabel *proName;
 @property (weak, nonatomic) IBOutlet UIImageView *proImageView1;
@@ -146,6 +146,11 @@
             self.startMoneyLabel.text = presenter.minInvest;
         }
         NSArray *statusArr = @[@"未审核",@"等待确认",@"出借",@"流标",@"满标",@"回款中",@"已回款"];
+        AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        if (app.isSubmitAppStoreTestTime) {
+            statusArr = @[@"未审核",@"等待确认",@"购买",@"流标",@"满标",@"回款中",@"已回款"];
+        }
+        
         if ([presenter.item.type isEqualToString:@"3"]) {
             if (status == 21) {
                 self.circleProgressView.progressText = @"暂停交易";

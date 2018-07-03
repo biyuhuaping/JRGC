@@ -127,7 +127,6 @@
         _p2pOrHonerType = [[_dic objectSafeDictionaryForKey:@"prdTransferFore"] objectSafeForKey:@"type"];
     } else {
         _p2pOrHonerType = [_dic  objectSafeForKey:@"type"];
-
     }
     [self drawHeadView];
 }
@@ -979,6 +978,7 @@
             [[NSUserDefaults standardUserDefaults] synchronize];
         }
         _investmentAmountLabel.text = [NSString stringWithFormat:@"%@元起",dic[@"investAmt"]];
+//        _investmentAmountLabel.text = [NSString stringWithFormat:@"%@元起",@"126641.84"];
           _markTypeLabel.text =  [dic objectSafeForKey:@"repayModeText"];//还款方式取服务端的值
         
     } else {
