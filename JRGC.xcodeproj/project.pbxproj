@@ -329,6 +329,10 @@
 		748ED7A11CC74B9800690215 /* UCFMenuItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 748ED7A01CC74B9800690215 /* UCFMenuItemModel.m */; };
 		748ED7A51CC74F3200690215 /* SettingMainButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 748ED7A31CC74F3200690215 /* SettingMainButton.m */; };
 		748ED7A61CC74F3200690215 /* SettingMainButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 748ED7A41CC74F3200690215 /* SettingMainButton.xib */; };
+		749023B720F8B026008E3BFE /* UCFCustomPopTransitionAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 749023B120F8B026008E3BFE /* UCFCustomPopTransitionAnimation.m */; };
+		749023B820F8B026008E3BFE /* UCFOpenRedBagButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 749023B220F8B026008E3BFE /* UCFOpenRedBagButton.m */; };
+		749023B920F8B026008E3BFE /* UCFRedBagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 749023B420F8B026008E3BFE /* UCFRedBagViewController.m */; };
+		749023BA20F8B026008E3BFE /* UCFRedBagViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 749023B620F8B026008E3BFE /* UCFRedBagViewController.xib */; };
 		749099AD1F7279B800C2AD6C /* UCFAttachModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 749099AC1F7279B800C2AD6C /* UCFAttachModel.m */; };
 		749140A81F18A92B00E624CE /* UCFGoldModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 749140A71F18A92B00E624CE /* UCFGoldModel.m */; };
 		749140BA1F18D1EA00E624CE /* UCFGoldCashMoneyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 749140B81F18D1EA00E624CE /* UCFGoldCashMoneyViewController.m */; };
@@ -1604,6 +1608,13 @@
 		748ED7A21CC74F3200690215 /* SettingMainButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingMainButton.h; sourceTree = "<group>"; };
 		748ED7A31CC74F3200690215 /* SettingMainButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingMainButton.m; sourceTree = "<group>"; };
 		748ED7A41CC74F3200690215 /* SettingMainButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingMainButton.xib; sourceTree = "<group>"; };
+		749023B020F8B026008E3BFE /* UCFOpenRedBagButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFOpenRedBagButton.h; sourceTree = "<group>"; };
+		749023B120F8B026008E3BFE /* UCFCustomPopTransitionAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFCustomPopTransitionAnimation.m; sourceTree = "<group>"; };
+		749023B220F8B026008E3BFE /* UCFOpenRedBagButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFOpenRedBagButton.m; sourceTree = "<group>"; };
+		749023B320F8B026008E3BFE /* UCFCustomPopTransitionAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFCustomPopTransitionAnimation.h; sourceTree = "<group>"; };
+		749023B420F8B026008E3BFE /* UCFRedBagViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFRedBagViewController.m; sourceTree = "<group>"; };
+		749023B520F8B026008E3BFE /* UCFRedBagViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFRedBagViewController.h; sourceTree = "<group>"; };
+		749023B620F8B026008E3BFE /* UCFRedBagViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFRedBagViewController.xib; sourceTree = "<group>"; };
 		749099AB1F7279B800C2AD6C /* UCFAttachModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFAttachModel.h; sourceTree = "<group>"; };
 		749099AC1F7279B800C2AD6C /* UCFAttachModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFAttachModel.m; sourceTree = "<group>"; };
 		749140A61F18A92B00E624CE /* UCFGoldModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFGoldModel.h; sourceTree = "<group>"; };
@@ -4061,6 +4072,29 @@
 			path = UCFSettingModels;
 			sourceTree = "<group>";
 		};
+		749023AE20F8B026008E3BFE /* RedBag */ = {
+			isa = PBXGroup;
+			children = (
+				749023AF20F8B026008E3BFE /* Transition */,
+				749023B420F8B026008E3BFE /* UCFRedBagViewController.m */,
+				749023B520F8B026008E3BFE /* UCFRedBagViewController.h */,
+				749023B620F8B026008E3BFE /* UCFRedBagViewController.xib */,
+			);
+			name = RedBag;
+			path = ../../Desktop/RedBag;
+			sourceTree = "<group>";
+		};
+		749023AF20F8B026008E3BFE /* Transition */ = {
+			isa = PBXGroup;
+			children = (
+				749023B020F8B026008E3BFE /* UCFOpenRedBagButton.h */,
+				749023B220F8B026008E3BFE /* UCFOpenRedBagButton.m */,
+				749023B320F8B026008E3BFE /* UCFCustomPopTransitionAnimation.h */,
+				749023B120F8B026008E3BFE /* UCFCustomPopTransitionAnimation.m */,
+			);
+			path = Transition;
+			sourceTree = "<group>";
+		};
 		749140A91F18CED500E624CE /* GoldCash(黄金提现) */ = {
 			isa = PBXGroup;
 			children = (
@@ -4923,6 +4957,7 @@
 		7BC304311ACB9CDB007767F1 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				749023AE20F8B026008E3BFE /* RedBag */,
 				A82FBA671F4FD3EC00FD79BC /* CoustomLab */,
 				A8C34F301F2734A800926B7F /* RotationButton */,
 				A8DE852B1EC3012B004B3533 /* WalletHelper */,
@@ -6995,7 +7030,7 @@
 				TargetAttributes = {
 					7BFE3E7F1AC55C98002A53A2 = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = MHG97AJ3LK;
+						DevelopmentTeam = EZRWM7P5C6;
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -7361,6 +7396,7 @@
 				832C3C121F443AD200ECAA4A /* UCFGoldCouponReturn.xib in Resources */,
 				740586C31F419D0100E2DE01 /* UCFGoldRaiseViewController.xib in Resources */,
 				744B9EDB1F0B8E9A00440FBA /* UCFCalendarDayCell.xib in Resources */,
+				749023BA20F8B026008E3BFE /* UCFRedBagViewController.xib in Resources */,
 				74BDA9991F09F6F10054403F /* UCFCalendarHeaderView.xib in Resources */,
 				74FD355C1ADF58710083D52C /* UCFSettingMainCell.xib in Resources */,
 				7443C7291F1EFF61009669C0 /* UCFGoldCashTwoCell.xib in Resources */,
@@ -7404,6 +7440,7 @@
 				83AB495F1F6A766500C4231F /* UCFAccountPieCharViewController.m in Sources */,
 				FB4F9E731D62A6F800CCB492 /* TradePasswordVC.m in Sources */,
 				7B2E568E1ADBBE5F008B0F9E /* UCFRetrievePasswordStepOneViewController.m in Sources */,
+				749023B920F8B026008E3BFE /* UCFRedBagViewController.m in Sources */,
 				83CD843A1F13A50800227704 /* UCFBatchBidModel.m in Sources */,
 				7404CA041FB4502E002811E0 /* UCFExtractGoldItemModel.m in Sources */,
 				4A5552981E54413E00E69DA4 /* UCFBatchInvestmentViewController.m in Sources */,
@@ -7427,6 +7464,7 @@
 				7BCE01F61AC8FC260084C15C /* ASIDataCompressor.m in Sources */,
 				A860F2651F5E7DA10017495F /* UCFGoldRebateCell.m in Sources */,
 				746748E01F3C595A0067294D /* UCFGoldBankLimitCell.m in Sources */,
+				749023B720F8B026008E3BFE /* UCFCustomPopTransitionAnimation.m in Sources */,
 				E3A6A4B31CC71D03003A3FED /* NSString+URL.m in Sources */,
 				4A4C792D1D6EA41E007F268E /* UserInfoSingle.m in Sources */,
 				7BA6E4C01AD6731900FE8C37 /* SDWebImagePrefetcher.m in Sources */,
@@ -7585,6 +7623,7 @@
 				4A04F82F1F0B6B1000ADE9D8 /* UCFGoldAccountViewController.m in Sources */,
 				74270D301EC595FA00F9419B /* UCFDataStatisticsViewController.m in Sources */,
 				74AFB1481EE93B8D007DBAFC /* UCFMicroMoneyModel.m in Sources */,
+				749023B820F8B026008E3BFE /* UCFOpenRedBagButton.m in Sources */,
 				74BDA9921F09F6C60054403F /* FSCalendarTransitionCoordinator.m in Sources */,
 				747A911E1B01B0FB00FE2334 /* UCFRefundDetailModel.m in Sources */,
 				74BDA98F1F09F6C60054403F /* FSCalendarHeaderView.m in Sources */,
@@ -8158,7 +8197,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = MHG97AJ3LK;
+				DEVELOPMENT_TEAM = EZRWM7P5C6;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -8200,7 +8239,7 @@
 					"$(PROJECT_DIR)/JRGC/umeng_ios_social_sdk_6.4-2.6_arm64_custom/UMSocial/UMSocialSDKPlugin",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp299;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -8225,7 +8264,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = MHG97AJ3LK;
+				DEVELOPMENT_TEAM = EZRWM7P5C6;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -8267,7 +8306,7 @@
 					"$(PROJECT_DIR)/JRGC/umeng_ios_social_sdk_6.4-2.6_arm64_custom/UMSocial/UMSocialSDKPlugin",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dzlh.jgrcapp299;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";

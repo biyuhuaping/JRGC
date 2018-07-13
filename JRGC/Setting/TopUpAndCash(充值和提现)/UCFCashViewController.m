@@ -19,6 +19,8 @@
 #import "FullWebViewController.h"
 #import "UCFCashTableViewCell.h"
 #import "UCFSettingItem.h"
+#import "UCFRedBagViewController.h"
+
 #define CASHWAYCELLHIGHT  73.0 //提现方式cell 的高度
 @interface UCFCashViewController ()<UCFChoseBankViewControllerDelegate,MjAlertViewDelegate,UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate,UIAlertViewDelegate>
 {
@@ -985,9 +987,17 @@
 //进入尊享活动页面
 - (IBAction)gotoHonerCashActivityView:(id)sender
 {
+    UCFRedBagViewController *redbag = [[UCFRedBagViewController alloc] initWithNibName:@"UCFRedBagViewController" bundle:nil];
     if (_hasCoupon)
     {//如果已经领取直接进入
-        
+        redbag.fold = NO;
+        [self.navigationController presentViewController:redbag animated:NO completion:nil];
+    }
+    else {
+        redbag.fold = YES;
+        [self.navigationController presentViewController:redbag animated:YES completion:^{
+            
+        }];
     }
 }
 #pragma mark -选择开户支行支行回调函数
