@@ -38,6 +38,8 @@
     NSString *_perDayRealTimeAmountLimit;//单日最大实时提现金额
     NSArray  *_cashWayArray;//提现方式数组
     NSString *_perDayRealTimeTipStr;//单日提现子标题提示信息
+    NSString *_noticeTxt;//显不显示那行字;
+    BOOL _hasCoupon;//hasCoupon为1时进入已领取页,为0时进入领券页
 }
 @property (weak, nonatomic) IBOutlet UIScrollView *baseScrollView;
 @property (strong, nonatomic) IBOutlet UIImageView *bankIcon;
@@ -61,6 +63,10 @@
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *height5;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *height6;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *bankBranchViewHeight1;//开户行view的高度
+@property (strong, nonatomic) IBOutlet UIView *honerCashTipView;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *honerCashTipViewHight;//开户行view
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *honerCashTipViewLeft;//开户行view
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *honerCashTipViewRight;//开户行view
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *cashWayTableViewHeigt;//实时提现View的高度
 @property (strong, nonatomic) IBOutlet UITableView *cashWayTableView;
 @property (strong, nonatomic) IBOutlet UIButton *allCashMoneyBtn;
@@ -76,6 +82,7 @@
 - (IBAction)getMobileCheckCode:(id)sender;
 - (IBAction)sumitBtnClick:(id)sender;
 - (IBAction)clickChooseBankbranchVC:(UIButton *)sender;
+- (IBAction)gotoHonerCashActivityView:(id)sender;
 
 - (IBAction)clickAllCashMoneyBtn:(UIButton *)sender;
 @end
@@ -223,6 +230,10 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillChangeFrameNotification object:nil];
     }
 #endif
+    if(self.accoutType == SelectAccoutTypeHoner)
+    {
+        [self honerCashActivityAnimating];
+    }
 }
 #pragma ----
 - (void)keyboardWillShow:(NSNotification *)notification {
@@ -513,6 +524,8 @@
     _perDayAmountLimit =  [dataDic objectSafeForKey:@"perDayAmountLimit"];
     _perDayRealTimeAmountLimit = [dataDic objectSafeForKey:@"perDayRealTimeAmountLimit"];
     _perDayRealTimeTipStr = [dataDic objectSafeForKey:@"realWithdrawMess"];//实时提现银行维护时间描述
+    _noticeTxt = [dataDic objectSafeForKey:@"noticeTxt"];
+    _hasCoupon = [[dataDic objectSafeForKey:@"hasCoupon"] boolValue];
 //    NSMutableParagraphStyle *paragraph = [[NSMutableParagraphStyle alloc] init];
 //    paragraph.alignment = NSTextAlignmentLeft;
 //    paragraph.lineSpacing = 1;
@@ -588,11 +601,52 @@
             self.baseScrollView.contentSize = CGSizeMake(ScreenWidth, ScreenHeight + 300);
         }
     }
+    
+    if(self.accoutType == SelectAccoutTypeHoner)
+    {
+        self.honerCashTipViewHight.constant= 44.0f;
+//        [self honerCashActivityAnimating];
+    }else{
+        self.honerCashTipViewHight.constant= 0;
+    }
+
     _baseScrollView.contentOffset = CGPointMake(0, 0);
     _cashWayTableView.delegate = self;
     _cashWayTableView.dataSource = self;
     _cashWayTableViewHeigt.constant = _cashWayArray.count * self.tableviewCellHeight;
 }
+#pragma mark -尊享活动view  动画
+-(void)honerCashActivityAnimating
+{
+    
+    __weak typeof(self) weakSelf = self;
+    [UIView animateWithDuration:100 animations:^{
+        weakSelf.honerCashTipViewLeft.constant = 0;
+        weakSelf.honerCashTipViewRight.constant = 0;
+    }];
+}
+#pragma mark --- 初始化提现方式
+/**
+ *  平移
+ */
+- (void)translate {
+    // 创建动画对象
+    CABasicAnimation *anim = [CABasicAnimation animation];
+    
+    // 修改CALayer的position属性的值可以实现平移效果
+    anim.keyPath = @"position";
+    anim.toValue = [NSValue valueWithCGPoint:CGPointMake(200, 200)];
+    
+    anim.duration = 1.0;
+    
+    // 下面两句代码的作用：保持动画执行完毕后的状态(如果不这样设置，动画执行完毕后会回到原状态)
+    anim.removedOnCompletion = NO;
+    anim.fillMode = kCAFillModeForwards;
+    
+    // 添加动画
+//    [self.iconView.layer addAnimation:anim forKey:@"translate"];
+}
+
 #pragma mark --- 点击修改提现金额按钮
 - (IBAction)clickModifyWithdrawCashBtn:(UIButton *)sender{
     _crachTextField.userInteractionEnabled = YES;
@@ -856,11 +910,20 @@
         [alertView show];
         return;
     }
+    if (self.accoutType == SelectAccoutTypeHoner && ![_noticeTxt isEqualToString:@""])
+    {
+        MjAlertView *honerlertView =[[MjAlertView alloc]initHonerCashWithMessage:_noticeTxt  delegate:self];
+        honerlertView.tag = 1009;
+        [honerlertView show];
+        return;
+    }
     sender.userInteractionEnabled = NO;
     [self withdrawalAmountIsExceedsTheLimitHttPRequest];
 }
 #pragma mark-- 提现金额是否超过限制网络请求
--(void)withdrawalAmountIsExceedsTheLimitHttPRequest{
+-(void)withdrawalAmountIsExceedsTheLimitHttPRequest
+{
+    
     NSString *bankNoStr = @"";
     if(_bankBranchViewHeight2.constant != 44){//开户支行未选择的用户 就是实时提现
         bankNoStr = @"";//联行号为空 意味着用户选择的是实时提现 不为空 则为大额提现
@@ -909,15 +972,23 @@
     }
 }
 #pragma mark -选择开户支行
-- (IBAction)clickChooseBankbranchVC:(UIButton *)sender {
-    
-    
+- (IBAction)clickChooseBankbranchVC:(UIButton *)sender
+{
     UCFChoseBankViewController *choseBankVC = [[UCFChoseBankViewController alloc]initWithNibName:@"UCFChoseBankViewController" bundle:nil];
     choseBankVC.delegate = self;
     choseBankVC.bankName = _bankName.text;
     choseBankVC.title = @"选择开户支行";
     choseBankVC.accoutType = self.accoutType;
     [self.navigationController pushViewController:choseBankVC  animated:YES];
+}
+
+//进入尊享活动页面
+- (IBAction)gotoHonerCashActivityView:(id)sender
+{
+    if (_hasCoupon)
+    {//如果已经领取直接进入
+        
+    }
 }
 #pragma mark -选择开户支行支行回调函数
 -(void)chosenBranchBank:(NSDictionary*)_dicBranchBank{
@@ -937,9 +1008,24 @@
     [[NetworkModule sharedNetworkModule] newPostReq:dataDic tag:kSXTagWithdrawSub owner:self signature:YES Type:self.accoutType];
 }
 - (void)mjalertView:(MjAlertView *)alertview didClickedButton:(UIButton *)clickedButton andClickedIndex:(NSInteger)index{
-    if (index == 1) {
-          [self withdrawalAmountIsExceedsTheLimitHttPRequest];
+    if(alertview.tag == 1009)
+    {
+        if (index == 101)
+        {
+            //是否进入尊享提现活动页面
+            [self gotoHonerCashActivityView:nil];
+        }
+        else//去提现
+        {
+             [self withdrawalAmountIsExceedsTheLimitHttPRequest];
+        }
+        
+    }else{
+        if (index == 1) {
+            [self withdrawalAmountIsExceedsTheLimitHttPRequest];
+        }
     }
+   
 }
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (alertView.tag == 1011) {

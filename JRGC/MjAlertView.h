@@ -86,6 +86,10 @@ typedef enum : NSUInteger {
 -(instancetype)initDrawGoldRechangeAlertType:(MjAlertViewType)type withMessage:(NSString *)message delegate:(id)delegate;
 //投资成功页弹框
 -(instancetype)initInvestmentSuccesseViewAlertWithDelegate:(id)delegate;
+
+//尊享活动弹框
+-(instancetype)initHonerCashWithMessage:(NSString *)message delegate:(id)delegate;
+
 #pragma mark - 显示
 - (void)show;
 #pragma mark - 隐藏

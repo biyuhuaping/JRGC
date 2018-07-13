@@ -695,6 +695,8 @@
 		835B888B1E8222F600C8F0AB /* UCFP2POrHornerTabHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 835B888A1E8222F600C8F0AB /* UCFP2POrHornerTabHeaderView.xib */; };
 		8366BFB91E151745008D027F /* UCFCashRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8366BFB71E151745008D027F /* UCFCashRecordCell.m */; };
 		8366BFBA1E151745008D027F /* UCFCashRecordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8366BFB81E151745008D027F /* UCFCashRecordCell.xib */; };
+		83880A8320F753F800E3B888 /* UCFHonerCahTipAlterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 83880A8220F753F800E3B888 /* UCFHonerCahTipAlterView.m */; };
+		83880A8520F7540C00E3B888 /* UCFHonerCahTipAlterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83880A8420F7540C00E3B888 /* UCFHonerCahTipAlterView.xib */; };
 		83881D2F1FB589E0004CB2AF /* UCFDrawGoldHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 83881D2E1FB589E0004CB2AF /* UCFDrawGoldHeaderView.m */; };
 		83881D311FB58A01004CB2AF /* UCFDrawGoldHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83881D301FB58A01004CB2AF /* UCFDrawGoldHeaderView.xib */; };
 		838EDD681F6B7225008E60EC /* CustomPieView.m in Sources */ = {isa = PBXBuildFile; fileRef = 838EDD671F6B7225008E60EC /* CustomPieView.m */; };
@@ -2237,6 +2239,9 @@
 		8366BFB61E151745008D027F /* UCFCashRecordCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFCashRecordCell.h; sourceTree = "<group>"; };
 		8366BFB71E151745008D027F /* UCFCashRecordCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFCashRecordCell.m; sourceTree = "<group>"; };
 		8366BFB81E151745008D027F /* UCFCashRecordCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFCashRecordCell.xib; sourceTree = "<group>"; };
+		83880A8120F753F800E3B888 /* UCFHonerCahTipAlterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFHonerCahTipAlterView.h; sourceTree = "<group>"; };
+		83880A8220F753F800E3B888 /* UCFHonerCahTipAlterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFHonerCahTipAlterView.m; sourceTree = "<group>"; };
+		83880A8420F7540C00E3B888 /* UCFHonerCahTipAlterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFHonerCahTipAlterView.xib; sourceTree = "<group>"; };
 		83881D2D1FB589E0004CB2AF /* UCFDrawGoldHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFDrawGoldHeaderView.h; sourceTree = "<group>"; };
 		83881D2E1FB589E0004CB2AF /* UCFDrawGoldHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFDrawGoldHeaderView.m; sourceTree = "<group>"; };
 		83881D301FB58A01004CB2AF /* UCFDrawGoldHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFDrawGoldHeaderView.xib; sourceTree = "<group>"; };
@@ -3813,6 +3818,9 @@
 				8366BFB61E151745008D027F /* UCFCashRecordCell.h */,
 				8366BFB71E151745008D027F /* UCFCashRecordCell.m */,
 				8366BFB81E151745008D027F /* UCFCashRecordCell.xib */,
+				83880A8120F753F800E3B888 /* UCFHonerCahTipAlterView.h */,
+				83880A8220F753F800E3B888 /* UCFHonerCahTipAlterView.m */,
+				83880A8420F7540C00E3B888 /* UCFHonerCahTipAlterView.xib */,
 				4AFE198C1CA0006200EE6768 /* TopUpAndCash.storyboard */,
 				4A3FDBCF1D5C5A7D00279CA2 /* RechargeStoryBorard.storyboard */,
 			);
@@ -7159,6 +7167,7 @@
 				840A794B1C2A80B60059A946 /* UCFMessageSettingViewController.xib in Resources */,
 				83C3E7E31F346188007BE065 /* UCFGoldCouponViewController.xib in Resources */,
 				A860F2661F5E7DA10017495F /* UCFGoldRebateCell.xib in Resources */,
+				83880A8520F7540C00E3B888 /* UCFHonerCahTipAlterView.xib in Resources */,
 				74956EB51D66F33D00D68B61 /* UCFAccountDetailViewController.xib in Resources */,
 				4A90167F1AFB12FE0049A9E0 /* LICENSE in Resources */,
 				A851F3561F1379E2003DE8B8 /* UCFGoldPriceFloatView.xib in Resources */,
@@ -7848,6 +7857,7 @@
 				74ED02081FDA84E200CAFED3 /* UCFCalculateResultView.m in Sources */,
 				74270D131EC595ED00F9419B /* CircleMapView.m in Sources */,
 				746FFE251B0059BB00FF927F /* UCFBindCardOneTableViewCell.m in Sources */,
+				83880A8320F753F800E3B888 /* UCFHonerCahTipAlterView.m in Sources */,
 				E37086BA1D61BA5B0041D293 /* UCFHuiShangChooseBankViewCell.m in Sources */,
 				832C3C111F443AD200ECAA4A /* UCFGoldCouponReturn.m in Sources */,
 				83D64F631F1CB8AE00A839F2 /* UCFGoldPurchaseRecordCell.m in Sources */,
