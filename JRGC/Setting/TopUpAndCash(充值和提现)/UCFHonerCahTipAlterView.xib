@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment version="2304" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="UCFHonerCahTipAlterView">
+            <rect key="frame" x="0.0" y="0.0" width="265" height="185"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_warn_pre" translatesAutoresizingMaskIntoConstraints="NO" id="YdS-Py-lmo">
+                    <rect key="frame" x="116" y="25" width="33" height="33"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="33" id="K9e-H5-sbI"/>
+                        <constraint firstAttribute="width" constant="33" id="Vmh-Tw-lRS"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我放弃金融工场赠送的额外奖励！" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mvg-n3-tKU">
+                    <rect key="frame" x="54" y="74" width="157" height="49.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" tag="100" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RfM-yG-S1A">
+                    <rect key="frame" x="15" y="142" width="110" height="33"/>
+                    <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="33" id="Iuw-Np-Fst"/>
+                        <constraint firstAttribute="width" constant="110" id="aGU-FA-1PP"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <state key="normal" title="放弃,去提现">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="2"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </button>
+                <button opaque="NO" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="snH-DF-f5U">
+                    <rect key="frame" x="140" y="142" width="110" height="33"/>
+                    <color key="backgroundColor" red="0.99215686274509807" green="0.30196078431372547" blue="0.29803921568627451" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="33" id="94k-QC-TIY"/>
+                        <constraint firstAttribute="width" constant="110" id="FrZ-8o-SRg"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <state key="normal" title="不放弃,去看看 ">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="2"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="RfM-yG-S1A" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="15" id="613-nX-drk"/>
+                <constraint firstItem="Mvg-n3-tKU" firstAttribute="top" secondItem="YdS-Py-lmo" secondAttribute="bottom" constant="16" id="FBH-Nx-PMT"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Mvg-n3-tKU" secondAttribute="trailing" constant="54" id="LBA-jd-MO1"/>
+                <constraint firstItem="RfM-yG-S1A" firstAttribute="top" secondItem="Mvg-n3-tKU" secondAttribute="bottom" constant="18.5" id="LoB-zN-4on"/>
+                <constraint firstItem="Mvg-n3-tKU" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="54" id="MVU-nV-5QT"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="snH-DF-f5U" secondAttribute="trailing" constant="15" id="Way-hV-mRs"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="snH-DF-f5U" secondAttribute="bottom" constant="10" id="ZMQ-24-Crm"/>
+                <constraint firstItem="YdS-Py-lmo" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="25" id="ghF-ed-6P6"/>
+                <constraint firstItem="YdS-Py-lmo" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="gxf-dc-VSM"/>
+                <constraint firstItem="snH-DF-f5U" firstAttribute="leading" secondItem="RfM-yG-S1A" secondAttribute="trailing" constant="15" id="gzM-Q8-oNm"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="YdS-Py-lmo" secondAttribute="bottom" constant="110" id="iEC-Td-GRU"/>
+                <constraint firstItem="Mvg-n3-tKU" firstAttribute="top" secondItem="YdS-Py-lmo" secondAttribute="bottom" constant="10" id="quR-oP-jEp"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="RfM-yG-S1A" secondAttribute="bottom" constant="10" id="r1O-mC-RfW"/>
+                <constraint firstItem="YdS-Py-lmo" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="106" id="zOk-2S-PsX"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                    <real key="value" value="5"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="iEC-Td-GRU"/>
+                    <exclude reference="quR-oP-jEp"/>
+                    <exclude reference="zOk-2S-PsX"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="-376" y="-719"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="img_warn_pre" width="33" height="32"/>
+    </resources>
+</document>

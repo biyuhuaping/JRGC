@@ -519,6 +519,30 @@
     }
     return self;
 }
+#pragma 尊享自定义弹窗--- 余额不足 订单未提交
+-(instancetype)initHonerCashWithMessage:(NSString *)message delegate:(id)delegate
+{
+    self = [self init];
+    if (self) {
+        UIView *baseView = nil;
+        baseView = [[NSBundle mainBundle] loadNibNamed:@"UCFHonerCahTipAlterView" owner:nil options:nil][0];
+        baseView.frame = CGRectMake(0, 0, 265, 185);
+        [self.showView  setFrame:CGRectMake((ScreenWidth - 265)/2.0f, (ScreenHeight - 185)/2.0f, 265, 225)];
+        self.delegate = delegate;
+        [self.showView addSubview:baseView];
+        
+        UILabel *titleLab = [baseView viewWithTag:98];
+        UIButton *closeBtn1 = [baseView viewWithTag:100];
+        UIButton *rechangeBtn = [baseView viewWithTag:101];
+        titleLab.text = message;
+        [closeBtn1 setTitle:@"放弃，去提现" forState:UIControlStateNormal];
+        [rechangeBtn setTitle:@"不放弃，去看看 " forState:UIControlStateNormal];
+       
+        [closeBtn1 addTarget:self action:@selector(closeBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [rechangeBtn addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return self;
+}
 #pragma  跳转尊享页面弹框
 -(instancetype)initSkipToMoneySwitchHonerAccout:(id)delegate{
     self = [self init];
