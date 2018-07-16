@@ -271,6 +271,7 @@
 #define CURRENTGOLDPRICE    @"api/nmCommon/v2/getRealTimePrice.json" //获取当前黄金价格
 #define GOLDTRADELIST       @"api/nmAccount/v2/getTradeFlowList.json"
 #define GOLDENLIST          @"api/nmPrdClaim/v2/getNmPrdClaimList.json" //获取黄金列表
+#define GETREDBAGCONTENT    @"api/discountCoupon/v2/getCoupon.json"  //获取红包（仿微信）
 
 #define GETGOlDPRDCLAIMLIST @"api/nmPrdClaim/v2/getNmPrdClaimList.json"// 获取黄金列表
 #define GETGOlDPRDCLAIMDETAILINFO @"api/nmPrdClaim/v2/getNmPrdClaimInfo.json" //黄金标详情页
@@ -568,6 +569,7 @@ enum kSXTag
     kSXTagOpenAccuntIntoBank,           //***新徽商绑定银行卡接口
     kSXTagAccountSetHsPwdIntoBank,      //***新徽商设置交易密码接口
     kSXTagP2PAccountrechargeNew,        //***新微金充值接口
+    kSXTagGetRedBagContent,             //获取红包内容 （仿微信）
 };
 
 typedef enum kSXTag kSXTag;

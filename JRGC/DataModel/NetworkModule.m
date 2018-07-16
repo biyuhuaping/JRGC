@@ -262,7 +262,7 @@ static NetworkModule *gInstance = NULL;
         case kSXTagDownloadAssertProof:
             parameter = [serverIP stringByAppendingString:DOWNLOADASSERTPROOF];
             break;
-
+            
     }
 
     NSArray * array = [NSArray arrayWithObjects:@"newPrdClaims/dataList",@"newaccount/userLevelIsOpen",@"newprdTransfer/dataList",@"newPrdTransfer/getDetail",@"newuser/login",@"newsendmessage",@"newuserregist/isexitpomocode",@"newuserregist/regist",@"userregist/verification",@"newgetSendMessageTicket",@"bankCard/baseBankMess",@"personalSettings/getTRegionList",@"sysDataDicItem/dicItemList",@"sysDataDicItem/allDicItemList",@"scratchCard/isExist",@"newuserregist/modifyUserpwd",@"newprdTransfer/newCompensateInterest",@"appInstallCount/save",@"newuserregist/checkQdIslimit", nil];
@@ -1309,6 +1309,9 @@ static NetworkModule *gInstance = NULL;
             break;
         case kSXTagP2PAccountrechargeNew://***新微金充值接口
             parameter = [NEW_SERVER_IP stringByAppendingString:P2PACCOUTRECHRAGENEWURL];
+            break;
+        case kSXTagGetRedBagContent:
+            parameter = [NEW_SERVER_IP stringByAppendingString:GETREDBAGCONTENT];
             break;
     }
     //给原有参数字典添加公共参数
