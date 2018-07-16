@@ -4076,8 +4076,8 @@
 			isa = PBXGroup;
 			children = (
 				749023AF20F8B026008E3BFE /* Transition */,
-				749023B420F8B026008E3BFE /* UCFRedBagViewController.m */,
 				749023B520F8B026008E3BFE /* UCFRedBagViewController.h */,
+				749023B420F8B026008E3BFE /* UCFRedBagViewController.m */,
 				749023B620F8B026008E3BFE /* UCFRedBagViewController.xib */,
 			);
 			name = RedBag;
