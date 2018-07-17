@@ -2962,8 +2962,8 @@
 			isa = PBXGroup;
 			children = (
 				33E1A5D720FDC5A8008244BD /* Transition */,
-				33E1A5DC20FDC5A8008244BD /* UCFRedBagViewController.m */,
 				33E1A5DD20FDC5A8008244BD /* UCFRedBagViewController.h */,
+				33E1A5DC20FDC5A8008244BD /* UCFRedBagViewController.m */,
 				33E1A5DE20FDC5A8008244BD /* UCFRedBagViewController.xib */,
 			);
 			path = RedBag;
