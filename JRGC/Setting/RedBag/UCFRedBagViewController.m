@@ -13,6 +13,7 @@
 #import "JSONKit.h"
 #import "AuxiliaryFunc.h"
 #import "UIDic+Safe.h"
+#import "NZLabel.h"
 
 #define Width_RedBag [UIScreen mainScreen].bounds.size.width
 #define Height_RedBag [UIScreen mainScreen].bounds.size.height
@@ -36,10 +37,11 @@
 @property (weak, nonatomic) IBOutlet UIView *resultBackView;
 
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *result4UpSpace;
 @property (weak, nonatomic) IBOutlet UILabel *result1Label;
 @property (weak, nonatomic) IBOutlet UILabel *result2Label;
 @property (weak, nonatomic) IBOutlet UILabel *result3Label;
-@property (weak, nonatomic) IBOutlet UILabel *result4Label;
+@property (weak, nonatomic) IBOutlet NZLabel *result4Label;
 @property (weak, nonatomic) IBOutlet UILabel *result5Label;
 
 @property (strong, nonatomic) NSDate *openStartTime;
@@ -170,10 +172,10 @@
     sendBtn.animationImagesArray = [NSArray arrayWithObjects:[UIImage imageNamed:@"gold_1"],[UIImage imageNamed:@"gold_2"],[UIImage imageNamed:@"gold_3"],[UIImage imageNamed:@"gold_4"],[UIImage imageNamed:@"gold_5"],[UIImage imageNamed:@"gold_6"],nil ];
     
     
-    UIButton *closeBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
-    closeBtn.layer.masksToBounds = YES;
+    UIButton *closeBtn = [[UIButton alloc] initWithFrame:CGRectMake(15, 37, 18, 18)];
+//    closeBtn.layer.masksToBounds = YES;
     closeBtn.layer.zPosition = 2;
-    closeBtn.layer.cornerRadius = sendBtn.bounds.size.height/2;
+//    closeBtn.layer.cornerRadius = sendBtn.bounds.size.height/2;
     [closeBtn setBackgroundImage:[UIImage imageNamed:@"btn-close_pre"] forState:UIControlStateNormal];
     [closeBtn addTarget:self action:@selector(close:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:closeBtn];
@@ -188,6 +190,10 @@
 
 - (void)setUnOpenUIState {
     if (!_fold) {
+        self.result4UpSpace.constant = 30;
+        self.result4Label.font = [UIFont systemFontOfSize:13];
+        self.result4Label.textColor = UIColorWithRGB(0x333333);
+        self.rebTitleLabel.layer.zPosition = 3;
         self.result2Label.hidden = YES;
         self.result3Label.hidden = YES;
         self.rebTitleLabel.layer.zPosition = 3;
@@ -195,7 +201,7 @@
         self.logoImageView.layer.zPosition = 3;
         return;
     }
-    self.rebTitleLabel.layer.zPosition = 3;
+    self.rebTitleLabel.layer.zPosition = -1;
     self.openedCloseButton.layer.zPosition = -1;
     self.logoImageView.layer.zPosition = 3;
     self.logoTileLabel.layer.zPosition = 3;
@@ -206,6 +212,8 @@
 
 - (void)setOpenedUIState {
     if (_fold) {
+        self.result4UpSpace.constant = 19;
+        self.rebTitleLabel.layer.zPosition = 3;
         self.openedCloseButton.layer.zPosition = 3;
         self.logoTileLabel.layer.zPosition = -1;
         self.desCribeLabel.layer.zPosition = -1;
@@ -338,6 +346,7 @@
             self.result2Label.text = [NSString stringWithFormat:@"满¥%@可用", [res objectSafeForKey:@"investMultip"]];
             self.result3Label.text = [NSString stringWithFormat:@"期限：%@", [res objectSafeForKey:@"inverstPeriod"]];
             self.result4Label.text = [NSString stringWithFormat:@"%@元", [res objectSafeForKey:@"couponAmt"]];
+            [self.result4Label setFont:[UIFont systemFontOfSize:12] string:@"元"];
             
             NSTimeInterval timeInterval = [[NSDate date] timeIntervalSinceDate:self.openStartTime];
             if (timeInterval < 60) {
