@@ -13,6 +13,7 @@
 @optional 
 - (void)checkP2POrHonerAccout;
 - (void)changeP2POrHonerAccoutMoneyAlertView;
+- (void)gotoHonerCashActivityView;
 @end
 
 @interface UCFP2POrHornerTabHeaderView : UIView
@@ -22,9 +23,15 @@
 @property (strong, nonatomic) IBOutlet UILabel *availableAmountLab;//累计收益
 @property (strong, nonatomic) IBOutlet UIView *upView;//上面的view
 @property (strong, nonatomic) IBOutlet UIView *downView;//下面的view
-@property (strong, nonatomic) IBOutlet UIButton *moneySwitchBtn;//下面的view
-@property (weak, nonatomic) IBOutlet UILabel *allGetInterLab;
 
+@property (weak, nonatomic) IBOutlet UILabel *allGetInterLab;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *aboutLabelRight;//了解一下 右边距离的高度
+@property (strong, nonatomic) IBOutlet UIView *honerCashTipView;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *honerCashTipViewHight;//开户行view
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *honerCashTipViewLeft;//开户行view
+
+@property (strong, nonatomic) IBOutlet UILabel *aboutLabel;
+- (IBAction)clickHonerCashActivityVC:(id)sender;
 
 @property (assign,nonatomic) SelectAccoutType accoutTpye;
 @property (assign,nonatomic) BOOL isShowOrHideAccoutMoney;

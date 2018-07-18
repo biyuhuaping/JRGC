@@ -38,6 +38,8 @@
     BOOL _isShowOrHideAccoutMoney;
     NSDictionary *_dataDict;
     int _openState;
+    NSString *_noticeTxt;//honer活动 显不显示那行字;
+    BOOL _hasCoupon;//hasCoupon为1时进入已领取页,为0时进入领券页
     
 }
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
@@ -223,23 +225,31 @@
 {
     if (section == 0) {
         
-        if ([UserInfoSingle sharedManager].superviseSwitch) {
-            if (self.accoutType == SelectAccoutTypeP2P && [UserInfoSingle sharedManager].enjoyOpenStatus < 3 && [UserInfoSingle sharedManager].level > 1) {
-                return 208;
-            } else {
-                return 160;
+//        if ([UserInfoSingle sharedManager].superviseSwitch) {
+//            if (self.accoutType == SelectAccoutTypeP2P && [UserInfoSingle sharedManager].enjoyOpenStatus < 3 && [UserInfoSingle sharedManager].level > 1) {
+//                return 208;
+//            } else {
+//                return 160;
+//            }
+//        }
+//        else {
+//            if (self.accoutType == SelectAccoutTypeHoner && [UserInfoSingle sharedManager].enjoyOpenStatus < 3) {
+//                return 208;
+//            } else {
+//                return 160;
+//            }
+//        }
+        if (self.accoutType == SelectAccoutTypeHoner ) {
+            
+            if (self.accoutType == SelectAccoutTypeHoner  && [_noticeTxt isEqualToString:@""])//如果关闭 尊享提现活动的话
+            {
+                return  160;
+            }else{
+                return  204;
             }
+        } else {
+            return 160;
         }
-        else {
-            if (self.accoutType == SelectAccoutTypeP2P && [UserInfoSingle sharedManager].enjoyOpenStatus < 3) {
-                return 208;
-            } else {
-                return 160;
-            }
-        }
-        
-
-        
     }
     return 10;
 }
@@ -251,14 +261,18 @@
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     if (section == 0) {
-        CGFloat headHeight = self.accoutType == SelectAccoutTypeP2P ? 208 : 160;
+        CGFloat headHeight = self.accoutType == SelectAccoutTypeP2P ? 160 : 204;
+        if (self.accoutType == SelectAccoutTypeHoner  && [_noticeTxt isEqualToString:@""])//如果关闭 尊享提现活动的话
+        {
+            headHeight = 160;
+        }
         _headerView = [[[NSBundle mainBundle]loadNibNamed:@"UCFP2POrHornerTabHeaderView" owner:nil options:nil] firstObject];
         _headerView.frame = CGRectMake(0, 0, ScreenWidth, headHeight);
         _headerView.upView.backgroundColor = UIColorWithRGB(0x5b6993);
         _headerView.downView.backgroundColor = [UIColor whiteColor];
         _headerView.delegate = self;
         _headerView.accoutTpye = self.accoutType;
-        
+         _headerView.aboutLabelRight.constant = 15 + ScreenWidth;
         _headerView.isShowOrHideAccoutMoney = _isShowOrHideAccoutMoney;
         if(self.accoutType == SelectAccoutTypeHoner){
             _headerView.allGetInterLab.text = @"累计收益";
@@ -457,6 +471,16 @@
     alertView.tag = 1002;
     [alertView show];
 }
+#pragma  跳转尊享提现活动页面
+-(void)gotoHonerCashActivityView
+{
+    if (_hasCoupon)
+    {//如果已经领取直接进入
+        
+    }
+    
+    
+}
 - (void)mjalertView:(MjAlertView *)alertview didClickedButton:(UIButton *)clickedButton andClickedIndex:(NSInteger)index
 {
     if (alertview.tag == 1002 && [UserInfoSingle sharedManager].enjoyOpenStatus < 3) {
@@ -603,6 +627,9 @@
                 NSString *repayPerDateStr = [NSString stringWithFormat:@"最近回款日%@", repayPerDate];
                 repayPerDateStr = [repayPerDate isEqualToString:@""] ? @"": repayPerDateStr; //回款日期
                 NSString *riskLevel = [dataDict objectSafeForKey:@"riskLevel"];
+                
+                _noticeTxt = [dataDict objectSafeForKey:@"noticeTxt"];
+                _hasCoupon= [[dataDict objectSafeForKey:@"hasCoupon"] boolValue];;//hasCoupon为1时进入已领取页,为0时进入领券页
                 
                 for (UCFSettingGroup *group in self.cellItemsData) {
                     NSInteger section =  [self.cellItemsData indexOfObject:group];
