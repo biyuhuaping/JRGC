@@ -67,11 +67,19 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData) name:@"reloadP2PTransferData" object:nil];
 //        [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadHonerTransferData" object:nil];
 //        [[NSNotificationCenter defaultCenter] postNotificationName:@"" object:nil];
-//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUI:) name:@"refreshUserState" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(redbag_unfold_close:) name:@"UCFRedBagViewController_unfold_close" object:nil];
 //        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(msgSkipToNativeAPP:) name:@"msgSkipToNativeAPP" object:nil];
         
     }
     return self;
+}
+
+- (void)redbag_unfold_close:(NSNotification *)noty {
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self.navigationController dismissViewControllerAnimated:NO completion:^{
+        
+    }];
+    [self refresh];
 }
 
 - (void)responds3DTouchClick

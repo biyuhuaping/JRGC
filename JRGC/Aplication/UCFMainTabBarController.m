@@ -39,6 +39,8 @@
 - (void)viewDidLoad
 {   
     [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(redbag_toLend:) name:@"UCFRedBagViewController_to_lend" object:nil];
+    
     [self initAllTabbarItems];
     
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] init];
@@ -55,6 +57,20 @@
     self.tabBar.clipsToBounds = NO;
     [self.tabBar addSubview:imaview];
     [[UITabBar appearance] setShadowImage:tabImag];
+}
+
+- (void)redbag_toLend:(NSNotification *)noty {
+    if (self.presentedViewController) {
+        [self.presentedViewController dismissViewControllerAnimated:NO completion:^{
+            
+        }];
+    }
+    if (self.AssignmentView) {
+        [self.AssignmentView.navigationController popToRootViewControllerAnimated:NO];
+        self.AssignmentView.selectedType = @"P2P";
+        [self.AssignmentView changeView];
+    }
+    self.selectedIndex = 1;
 }
 
 - (void)viewDidAppear:(BOOL)animated

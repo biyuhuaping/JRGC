@@ -10,4 +10,5 @@
 
 @interface UCFRedBagViewController : UIViewController
 @property (assign, nonatomic) BOOL fold;
+@property (strong, nonatomic) UIViewController *sourceVC;
 @end

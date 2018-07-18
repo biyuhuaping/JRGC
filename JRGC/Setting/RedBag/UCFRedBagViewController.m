@@ -14,6 +14,7 @@
 #import "AuxiliaryFunc.h"
 #import "UIDic+Safe.h"
 #import "NZLabel.h"
+#import "UCFCouponViewController.h"
 
 #define Width_RedBag [UIScreen mainScreen].bounds.size.width
 #define Height_RedBag [UIScreen mainScreen].bounds.size.height
@@ -69,6 +70,10 @@
         [self createFoldedUI];
     }
     [self setUnOpenUIState];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
+    self.result5Label.userInteractionEnabled = YES;
+    [self.result5Label addGestureRecognizer:tap];
 }
 
 - (void)createUnfoldnedUI {
@@ -172,14 +177,22 @@
     sendBtn.animationImagesArray = [NSArray arrayWithObjects:[UIImage imageNamed:@"gold_1"],[UIImage imageNamed:@"gold_2"],[UIImage imageNamed:@"gold_3"],[UIImage imageNamed:@"gold_4"],[UIImage imageNamed:@"gold_5"],[UIImage imageNamed:@"gold_6"],nil ];
     
     
-    UIButton *closeBtn = [[UIButton alloc] initWithFrame:CGRectMake(15, 37, 18, 18)];
+    UIButton *closeBtn = [[UIButton alloc] initWithFrame:CGRectMake(15, 37, 40, 40)];
 //    closeBtn.layer.masksToBounds = YES;
     closeBtn.layer.zPosition = 2;
 //    closeBtn.layer.cornerRadius = sendBtn.bounds.size.height/2;
     [closeBtn setBackgroundImage:[UIImage imageNamed:@"btn-close_pre"] forState:UIControlStateNormal];
+    closeBtn.imageView.frame = CGRectMake(0, 0, 18, 18);
     [closeBtn addTarget:self action:@selector(close:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:closeBtn];
     self.closeBtn = closeBtn;
+}
+
+- (void)tapped:(UIGestureRecognizer *)tap {
+    [self dismissViewControllerAnimated:NO completion:^{
+        UCFCouponViewController *coupon = [[UCFCouponViewController alloc] initWithNibName:@"UCFCouponViewController" bundle:nil];
+        [self.sourceVC.navigationController pushViewController:coupon animated:YES];
+    }];
 }
 
 - (void)moveAnimation:(UIButton *)sender {
@@ -307,15 +320,24 @@
 
 - (void)close:(UIButton *)sender {
     if (self.fold) {
-        [self dismissViewControllerAnimated:YES completion:^{
-            
-        }];
+//        [self dismissViewControllerAnimated:YES completion:^{
+//
+//        }];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"UCFRedBagViewController_unfold_close" object:nil];
     }
     else {
         [self dismissViewControllerAnimated:NO completion:^{
             
         }];
     }
+}
+
+- (IBAction)lendButton:(UIButton *)sender {
+    
+    [self dismissViewControllerAnimated:NO completion:^{
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"UCFRedBagViewController_to_lend" object:nil];
+    }];
+    
 }
 
 #pragma mark - 从网络获取红包

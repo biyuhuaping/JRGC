@@ -849,6 +849,11 @@
 {
     [self.navigationController popToRootViewControllerAnimated:NO];
     AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    if (app.tabBarController.presentedViewController) {
+        [app.tabBarController.presentedViewController dismissViewControllerAnimated:NO completion:^{
+            
+        }];
+    }
     [app.tabBarController setSelectedIndex:1];
 }
 - (void)jsGoto:(NSDictionary *)dic
