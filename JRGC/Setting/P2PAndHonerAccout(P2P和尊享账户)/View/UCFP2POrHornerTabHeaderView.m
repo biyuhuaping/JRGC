@@ -57,6 +57,8 @@
 }
 -(void)layoutSubviews{
     [super layoutSubviews];
+    self.aboutLabel.layer.cornerRadius = 3;
+    self.aboutLabel.layer.masksToBounds = YES;
     self.lineView1.backgroundColor = UIColorWithRGB(0xe3e5ea);
     self.lineView2.backgroundColor = UIColorWithRGB(0xd8d8d8);
     [self dataDict];
@@ -77,9 +79,6 @@
         return;
     }
     
-    if (_accoutTpye == SelectAccoutTypeP2P) {
-        [_moneySwitchBtn setTitle:@"开尊享  赚利息" forState:UIControlStateNormal];
-    }
     
     cashBalanceStr = [NSString stringWithFormat:@"%.2lf",[[self.dataDict objectSafeForKey:@"cashBalance"] doubleValue]];//可用金额
     interestsStr = [NSString stringWithFormat:@"%.2f",[[self.dataDict  objectSafeForKey:@"interests"] doubleValue]];//累计收益
@@ -95,6 +94,20 @@
         self.totalIncomeLab.text = @"****";//总资产
         self.availableAmountLab.text = @"****";//可用金额
     }
+    [self honerCashActivityAnimating];
+}
+#pragma mark -尊享活动view  动画
+-(void)honerCashActivityAnimating
+{
+    
+    __weak typeof(self) weakSelf = self;
+    [UIView animateWithDuration:0.5 delay:1 options: UIViewAnimationOptionCurveEaseIn animations:^{
+        weakSelf.honerCashTipView.frame = CGRectMake(0, weakSelf.honerCashTipView.frame.origin.y, ScreenWidth, 44);
+        
+    } completion:^(BOOL finished) {
+        weakSelf.honerCashTipViewLeft.constant = 0;
+        weakSelf.aboutLabelRight.constant = 15;
+    }];
 }
 -(NSString *)checkNullStr:(NSString *)nullStr
 {
@@ -105,6 +118,16 @@
     }
 }
 - (IBAction)accoutMoneyChangeButton:(id)sender {
-    [self.delegate changeP2POrHonerAccoutMoneyAlertView];
+    if([self.delegate respondsToSelector:@selector(changeP2POrHonerAccoutMoneyAlertView)])
+    {
+       [self.delegate changeP2POrHonerAccoutMoneyAlertView];
+    }
+}
+- (IBAction)clickHonerCashActivityVC:(id)sender {
+    if([self.delegate respondsToSelector:@selector(gotoHonerCashActivityView)])
+    {
+          [self.delegate gotoHonerCashActivityView];
+    }
+    
 }
 @end

@@ -65,6 +65,7 @@
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *height5;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *height6;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *bankBranchViewHeight1;//开户行view的高度
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *aboutLabelRight;//了解一下 右边距离的高度
 @property (strong, nonatomic) IBOutlet UIView *honerCashTipView;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *honerCashTipViewHight;//开户行view
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *honerCashTipViewLeft;//开户行view
@@ -86,6 +87,7 @@
 - (IBAction)clickChooseBankbranchVC:(UIButton *)sender;
 - (IBAction)gotoHonerCashActivityView:(id)sender;
 
+@property (strong, nonatomic) IBOutlet UILabel *aboutLabel;
 - (IBAction)clickAllCashMoneyBtn:(UIButton *)sender;
 @end
 
@@ -607,6 +609,12 @@
     if(self.accoutType == SelectAccoutTypeHoner)
     {
         self.honerCashTipViewHight.constant= 44.0f;
+        
+        self.aboutLabelRight.constant = 15 + ScreenWidth;
+        
+        self.aboutLabel.layer.cornerRadius  = 3;
+        self.aboutLabel.layer.masksToBounds = YES;
+        
 //        [self honerCashActivityAnimating];
     }else{
         self.honerCashTipViewHight.constant= 0;
@@ -622,31 +630,55 @@
 {
     
     __weak typeof(self) weakSelf = self;
-    [UIView animateWithDuration:100 animations:^{
+//    [UIView animateWithDuration:100 animations:^{
+//        weakSelf.honerCashTipViewLeft.constant = 0;
+//        weakSelf.honerCashTipViewRight.constant = - ScreenWidth;
+//    }];
+//
+//    [UIView animateWithDuration:0.5 animations:^{
+//
+//    } completion:^(BOOL finished) {
+//
+//    }];
+    
+    [UIView animateWithDuration:0.8 delay:0.1 options: UIViewAnimationOptionCurveEaseIn animations:^{
+        
+        
+        weakSelf.honerCashTipView.frame = CGRectMake(0, weakSelf.honerCashTipView.frame.origin.y, ScreenWidth, 44);
+        
+    } completion:^(BOOL finished) {
         weakSelf.honerCashTipViewLeft.constant = 0;
         weakSelf.honerCashTipViewRight.constant = 0;
+        weakSelf.aboutLabelRight.constant = 15;
     }];
+    
+//    [UIView beginAnimations:nil context:nil];
+//    [UIView setAnimationDuration:1.0];
+//    CGPoint point =  self.honerCashTipView.center;;
+//    point.x += ScreenWidth;
+//    [self.honerCashTipView setCenter:point];
+//    [UIView commitAnimations];
 }
 #pragma mark --- 初始化提现方式
 /**
  *  平移
  */
-- (void)translate {
+- (void)honerCashActivityTranslate {
     // 创建动画对象
     CABasicAnimation *anim = [CABasicAnimation animation];
     
     // 修改CALayer的position属性的值可以实现平移效果
+    CGPoint honerCashTipViewPoint = self.honerCashTipView.center;
     anim.keyPath = @"position";
-    anim.toValue = [NSValue valueWithCGPoint:CGPointMake(200, 200)];
+    anim.toValue = [NSValue valueWithCGPoint:CGPointMake(honerCashTipViewPoint.x + ScreenWidth, honerCashTipViewPoint.y)];
     
-    anim.duration = 1.0;
+    anim.duration = 1.5;
     
     // 下面两句代码的作用：保持动画执行完毕后的状态(如果不这样设置，动画执行完毕后会回到原状态)
     anim.removedOnCompletion = NO;
     anim.fillMode = kCAFillModeForwards;
-    
     // 添加动画
-//    [self.iconView.layer addAnimation:anim forKey:@"translate"];
+    [self.honerCashTipView.layer addAnimation:anim forKey:@"translate"];
 }
 
 #pragma mark --- 点击修改提现金额按钮

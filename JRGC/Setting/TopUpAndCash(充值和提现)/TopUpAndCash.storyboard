@@ -335,23 +335,38 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="msM-Ky-E98">
-                                                <rect key="frame" x="-375" y="242" width="375" height="44"/>
+                                                <rect key="frame" x="-375" y="242" width="750" height="44"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="尊享用户出借网贷有额外返现奖励" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rmb-VL-oWV">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="尊享用户出借网贷有额外优惠奖励" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rmb-VL-oWV">
                                                         <rect key="frame" x="15" y="13.5" width="214.5" height="17"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <color key="textColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CNq-Db-1nf">
-                                                        <rect key="frame" x="300" y="11" width="60" height="21"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="了解一下" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N6U-Y2-1R2">
+                                                        <rect key="frame" x="300" y="11.5" width="60" height="21"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="60" id="fr9-g9-Qo9"/>
-                                                            <constraint firstAttribute="height" constant="21" id="lPa-NG-ayM"/>
+                                                            <constraint firstAttribute="height" constant="21" id="e8l-5S-Cte"/>
+                                                            <constraint firstAttribute="width" constant="60" id="jzV-kM-DkV"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                        <state key="normal" title="了解一下">
+                                                        <color key="textColor" red="0.35686274509999999" green="0.41176470590000003" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <real key="value" value="3"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CNq-Db-1nf">
+                                                        <rect key="frame" x="0.0" y="0.0" width="750" height="44"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="44" id="haA-hG-j55"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                        <state key="normal">
                                                             <color key="titleColor" red="0.35686274509803922" green="0.41176470588235292" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
                                                         </state>
                                                         <userDefinedRuntimeAttributes>
@@ -359,24 +374,28 @@
                                                                 <real key="value" value="0.5"/>
                                                             </userDefinedRuntimeAttribute>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                <real key="value" value="2"/>
+                                                                <real key="value" value="0.0"/>
                                                             </userDefinedRuntimeAttribute>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
                                                                 <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="gotoHonerCashActivityView:" destination="3AR-Rt-IIC" eventType="touchUpInside" id="oFn-9z-Idl"/>
+                                                            <action selector="gotoHonerCashActivityView:" destination="3AR-Rt-IIC" eventType="touchUpInside" id="W3O-hC-Fxq"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.35686274509803922" green="0.41176470588235292" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
-                                                    <constraint firstItem="CNq-Db-1nf" firstAttribute="centerY" secondItem="msM-Ky-E98" secondAttribute="centerY" id="39y-8Z-tH1"/>
+                                                    <constraint firstItem="CNq-Db-1nf" firstAttribute="leading" secondItem="msM-Ky-E98" secondAttribute="leading" id="4NE-4N-P13"/>
+                                                    <constraint firstItem="N6U-Y2-1R2" firstAttribute="centerY" secondItem="msM-Ky-E98" secondAttribute="centerY" id="5NL-h5-R1w"/>
+                                                    <constraint firstItem="CNq-Db-1nf" firstAttribute="top" secondItem="msM-Ky-E98" secondAttribute="top" id="5Tq-2H-vYA"/>
                                                     <constraint firstAttribute="height" constant="44" id="Eht-uO-JBc"/>
-                                                    <constraint firstAttribute="trailing" secondItem="CNq-Db-1nf" secondAttribute="trailing" constant="15" id="Ve0-pC-v6k"/>
+                                                    <constraint firstAttribute="trailing" secondItem="N6U-Y2-1R2" secondAttribute="trailing" constant="390" id="kXp-aP-a6g"/>
                                                     <constraint firstItem="rmb-VL-oWV" firstAttribute="centerY" secondItem="msM-Ky-E98" secondAttribute="centerY" id="p38-Qe-zjn"/>
+                                                    <constraint firstAttribute="trailing" secondItem="CNq-Db-1nf" secondAttribute="trailing" id="uKI-K4-FA4"/>
                                                     <constraint firstItem="rmb-VL-oWV" firstAttribute="leading" secondItem="msM-Ky-E98" secondAttribute="leading" constant="15" id="upO-Bg-1Qe"/>
+                                                    <constraint firstAttribute="bottom" secondItem="CNq-Db-1nf" secondAttribute="bottom" id="z7O-IQ-hUr"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
@@ -384,7 +403,7 @@
                                         <constraints>
                                             <constraint firstItem="2aF-9T-lnY" firstAttribute="top" secondItem="cVT-qc-WIv" secondAttribute="bottom" constant="15" id="0WZ-sC-0EP"/>
                                             <constraint firstItem="msM-Ky-E98" firstAttribute="top" secondItem="4Wo-gD-hjv" secondAttribute="bottom" id="2Wp-qS-dtk"/>
-                                            <constraint firstAttribute="trailing" secondItem="msM-Ky-E98" secondAttribute="trailing" constant="375" id="2od-z8-WiS"/>
+                                            <constraint firstAttribute="trailing" secondItem="msM-Ky-E98" secondAttribute="trailing" id="2od-z8-WiS"/>
                                             <constraint firstAttribute="trailing" secondItem="Pvx-kl-tRy" secondAttribute="trailing" id="3Uz-du-UjV"/>
                                             <constraint firstItem="eDo-l7-lsE" firstAttribute="top" secondItem="IwO-yI-fVn" secondAttribute="bottom" constant="25" id="4Nr-Td-h76"/>
                                             <constraint firstItem="2aF-9T-lnY" firstAttribute="leading" secondItem="4H4-IL-vcc" secondAttribute="leading" constant="15" id="55a-cU-rqC"/>
@@ -445,6 +464,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="aboutLabel" destination="N6U-Y2-1R2" id="qIj-25-OKy"/>
+                        <outlet property="aboutLabelRight" destination="kXp-aP-a6g" id="Pnm-eK-Irl"/>
                         <outlet property="allCashMoneyBtn" destination="ale-tm-8TD" id="lgf-cB-cHa"/>
                         <outlet property="availableLabel" destination="eDo-l7-lsE" id="TeD-vV-uZn"/>
                         <outlet property="bankBrachLabel" destination="nH3-yM-TU8" id="6xt-1p-FMi"/>
