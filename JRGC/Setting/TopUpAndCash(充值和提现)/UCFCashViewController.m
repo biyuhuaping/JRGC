@@ -57,6 +57,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *warnSendLabel;
 @property (strong, nonatomic) IBOutlet UILabel *bankBrachLabel;
 @property (strong, nonatomic) IBOutlet UILabel *pleasechooseLabel;
+@property (strong, nonatomic) IBOutlet UILabel *honerCashTipLabel;
 
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *height1;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *height2;
@@ -71,6 +72,8 @@
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *honerCashTipViewLeft;//开户行view
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *honerCashTipViewRight;//开户行view
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *cashWayTableViewHeigt;//实时提现View的高度
+
+@property (strong, nonatomic) IBOutlet UIButton *honerTipButton;
 @property (strong, nonatomic) IBOutlet UITableView *cashWayTableView;
 @property (strong, nonatomic) IBOutlet UIButton *allCashMoneyBtn;
 @property (strong, nonatomic) NSTimer *timer;
@@ -234,10 +237,7 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillChangeFrameNotification object:nil];
     }
 #endif
-    if(self.accoutType == SelectAccoutTypeHoner)
-    {
-        [self honerCashActivityAnimating];
-    }
+    
 }
 #pragma ----
 - (void)keyboardWillShow:(NSNotification *)notification {
@@ -530,6 +530,7 @@
     _perDayRealTimeTipStr = [dataDic objectSafeForKey:@"realWithdrawMess"];//实时提现银行维护时间描述
     _noticeTxt = [dataDic objectSafeForKey:@"noticeTxt"];
     _hasCoupon = [[dataDic objectSafeForKey:@"hasCoupon"] boolValue];
+    _honerCashTipLabel.text = _noticeTxt;
 //    NSMutableParagraphStyle *paragraph = [[NSMutableParagraphStyle alloc] init];
 //    paragraph.alignment = NSTextAlignmentLeft;
 //    paragraph.lineSpacing = 1;
@@ -606,18 +607,19 @@
         }
     }
     
-    if(self.accoutType == SelectAccoutTypeHoner)
+    if(self.accoutType == SelectAccoutTypeHoner && ![_noticeTxt isEqualToString:@""])
     {
         self.honerCashTipViewHight.constant= 44.0f;
-        
+        self.honerCashTipViewRight.constant = ScreenWidth;
         self.aboutLabelRight.constant = 15 + ScreenWidth;
-        
+        self.honerTipButton.hidden = YES;
         self.aboutLabel.layer.cornerRadius  = 3;
         self.aboutLabel.layer.masksToBounds = YES;
-        
-//        [self honerCashActivityAnimating];
+        [self honerCashActivityAnimating];
     }else{
         self.honerCashTipViewHight.constant= 0;
+        [self.aboutLabel removeFromSuperview];
+        [self.honerCashTipLabel removeFromSuperview];
     }
 
     _baseScrollView.contentOffset = CGPointMake(0, 0);
@@ -630,57 +632,36 @@
 {
     
     __weak typeof(self) weakSelf = self;
-//    [UIView animateWithDuration:100 animations:^{
+
+    
+//    [UIView animateWithDuration:0.8 delay:0.1 options: UIViewAnimationOptionCurveEaseOut animations:
+//    ^{
+//        weakSelf.honerCashTipView.frame = CGRectMake(0, weakSelf.honerCashTipView.frame.origin.y, ScreenWidth, 44);
+//        weakSelf.honerTipButton.frame = weakSelf.honerCashTipView.frame;
 //        weakSelf.honerCashTipViewLeft.constant = 0;
-//        weakSelf.honerCashTipViewRight.constant = - ScreenWidth;
-//    }];
-//
-//    [UIView animateWithDuration:0.5 animations:^{
-//
+//        weakSelf.honerCashTipViewRight.constant = 0;
+//        weakSelf.aboutLabelRight.constant = 15;
+//        weakSelf.honerTipButton.hidden = NO;
 //    } completion:^(BOOL finished) {
 //
 //    }];
-    
-    [UIView animateWithDuration:0.8 delay:0.1 options: UIViewAnimationOptionCurveEaseIn animations:^{
+    dispatch_queue_t queue= dispatch_get_main_queue();
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.15 * NSEC_PER_SEC)), queue, ^{
+        [UIView animateWithDuration:0.5  delay:0.1 options: UIViewAnimationOptionCurveLinear animations:^{
+            weakSelf.honerCashTipView.frame = CGRectMake(0, weakSelf.honerCashTipView.frame.origin.y, ScreenWidth, 44);
+            weakSelf.honerTipButton.frame = weakSelf.honerCashTipView.frame;
         
-        
-        weakSelf.honerCashTipView.frame = CGRectMake(0, weakSelf.honerCashTipView.frame.origin.y, ScreenWidth, 44);
-        
-    } completion:^(BOOL finished) {
-        weakSelf.honerCashTipViewLeft.constant = 0;
-        weakSelf.honerCashTipViewRight.constant = 0;
-        weakSelf.aboutLabelRight.constant = 15;
-    }];
+            weakSelf.honerCashTipViewRight.constant = 0;
+            weakSelf.honerCashTipViewLeft.constant = 0;
+            weakSelf.aboutLabelRight.constant = 15;
+            
+        } completion:^(BOOL finished) {
+           weakSelf.honerTipButton.hidden = NO;
+        }];
+    });
     
-//    [UIView beginAnimations:nil context:nil];
-//    [UIView setAnimationDuration:1.0];
-//    CGPoint point =  self.honerCashTipView.center;;
-//    point.x += ScreenWidth;
-//    [self.honerCashTipView setCenter:point];
-//    [UIView commitAnimations];
-}
-#pragma mark --- 初始化提现方式
-/**
- *  平移
- */
-- (void)honerCashActivityTranslate {
-    // 创建动画对象
-    CABasicAnimation *anim = [CABasicAnimation animation];
-    
-    // 修改CALayer的position属性的值可以实现平移效果
-    CGPoint honerCashTipViewPoint = self.honerCashTipView.center;
-    anim.keyPath = @"position";
-    anim.toValue = [NSValue valueWithCGPoint:CGPointMake(honerCashTipViewPoint.x + ScreenWidth, honerCashTipViewPoint.y)];
-    
-    anim.duration = 1.5;
-    
-    // 下面两句代码的作用：保持动画执行完毕后的状态(如果不这样设置，动画执行完毕后会回到原状态)
-    anim.removedOnCompletion = NO;
-    anim.fillMode = kCAFillModeForwards;
-    // 添加动画
-    [self.honerCashTipView.layer addAnimation:anim forKey:@"translate"];
-}
 
+}
 #pragma mark --- 点击修改提现金额按钮
 - (IBAction)clickModifyWithdrawCashBtn:(UIButton *)sender{
     _crachTextField.userInteractionEnabled = YES;
@@ -1034,7 +1015,8 @@
     }
 }
 #pragma mark -选择开户支行支行回调函数
--(void)chosenBranchBank:(NSDictionary*)_dicBranchBank{
+-(void)chosenBranchBank:(NSDictionary*)_dicBranchBank
+{
     self.bankBrachLabel.text = _dicBranchBank[@"bankName"];
     self.cashBankNo = _dicBranchBank[@"bankNo"];
 }

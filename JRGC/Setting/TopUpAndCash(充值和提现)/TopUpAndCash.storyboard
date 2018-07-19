@@ -335,7 +335,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="msM-Ky-E98">
-                                                <rect key="frame" x="-375" y="242" width="750" height="44"/>
+                                                <rect key="frame" x="-375" y="242" width="375" height="44"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="尊享用户出借网贷有额外优惠奖励" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rmb-VL-oWV">
                                                         <rect key="frame" x="15" y="13.5" width="214.5" height="17"/>
@@ -360,7 +360,7 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CNq-Db-1nf">
-                                                        <rect key="frame" x="0.0" y="0.0" width="750" height="44"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="44" id="haA-hG-j55"/>
@@ -391,7 +391,7 @@
                                                     <constraint firstItem="N6U-Y2-1R2" firstAttribute="centerY" secondItem="msM-Ky-E98" secondAttribute="centerY" id="5NL-h5-R1w"/>
                                                     <constraint firstItem="CNq-Db-1nf" firstAttribute="top" secondItem="msM-Ky-E98" secondAttribute="top" id="5Tq-2H-vYA"/>
                                                     <constraint firstAttribute="height" constant="44" id="Eht-uO-JBc"/>
-                                                    <constraint firstAttribute="trailing" secondItem="N6U-Y2-1R2" secondAttribute="trailing" constant="390" id="kXp-aP-a6g"/>
+                                                    <constraint firstAttribute="trailing" secondItem="N6U-Y2-1R2" secondAttribute="trailing" constant="15" id="kXp-aP-a6g"/>
                                                     <constraint firstItem="rmb-VL-oWV" firstAttribute="centerY" secondItem="msM-Ky-E98" secondAttribute="centerY" id="p38-Qe-zjn"/>
                                                     <constraint firstAttribute="trailing" secondItem="CNq-Db-1nf" secondAttribute="trailing" id="uKI-K4-FA4"/>
                                                     <constraint firstItem="rmb-VL-oWV" firstAttribute="leading" secondItem="msM-Ky-E98" secondAttribute="leading" constant="15" id="upO-Bg-1Qe"/>
@@ -403,7 +403,7 @@
                                         <constraints>
                                             <constraint firstItem="2aF-9T-lnY" firstAttribute="top" secondItem="cVT-qc-WIv" secondAttribute="bottom" constant="15" id="0WZ-sC-0EP"/>
                                             <constraint firstItem="msM-Ky-E98" firstAttribute="top" secondItem="4Wo-gD-hjv" secondAttribute="bottom" id="2Wp-qS-dtk"/>
-                                            <constraint firstAttribute="trailing" secondItem="msM-Ky-E98" secondAttribute="trailing" id="2od-z8-WiS"/>
+                                            <constraint firstAttribute="trailing" secondItem="msM-Ky-E98" secondAttribute="trailing" constant="375" id="2od-z8-WiS"/>
                                             <constraint firstAttribute="trailing" secondItem="Pvx-kl-tRy" secondAttribute="trailing" id="3Uz-du-UjV"/>
                                             <constraint firstItem="eDo-l7-lsE" firstAttribute="top" secondItem="IwO-yI-fVn" secondAttribute="bottom" constant="25" id="4Nr-Td-h76"/>
                                             <constraint firstItem="2aF-9T-lnY" firstAttribute="leading" secondItem="4H4-IL-vcc" secondAttribute="leading" constant="15" id="55a-cU-rqC"/>
@@ -486,10 +486,12 @@
                         <outlet property="height4" destination="Qay-xi-bPd" id="47J-8V-ndd"/>
                         <outlet property="height5" destination="UoE-eC-rlM" id="gXP-gi-RM5"/>
                         <outlet property="height6" destination="tnn-ND-TUk" id="gzL-vp-Smi"/>
+                        <outlet property="honerCashTipLabel" destination="rmb-VL-oWV" id="WUg-zN-1th"/>
                         <outlet property="honerCashTipView" destination="msM-Ky-E98" id="TWV-Yx-xmf"/>
                         <outlet property="honerCashTipViewHight" destination="Eht-uO-JBc" id="8HK-KX-Klp"/>
                         <outlet property="honerCashTipViewLeft" destination="OWP-1T-IYF" id="fcG-R1-NA2"/>
                         <outlet property="honerCashTipViewRight" destination="2od-z8-WiS" id="9GF-o1-HPo"/>
+                        <outlet property="honerTipButton" destination="CNq-Db-1nf" id="SYj-Vz-SWw"/>
                         <outlet property="phoneLabel" destination="IwO-yI-fVn" id="TXV-8l-5PG"/>
                         <outlet property="pleasechooseLabel" destination="siN-6I-3jj" id="OoS-cm-3Jh"/>
                         <outlet property="telServiceLabel" destination="pDj-fU-5d2" id="G43-Wu-mwP"/>

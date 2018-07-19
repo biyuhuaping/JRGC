@@ -35,7 +35,7 @@
 
 @interface UCFP2POrHonerAccoutViewController ()<UITableViewDelegate,UITableViewDataSource,UCFP2POrHornerTabHeaderViewDelete,UIAlertViewDelegate,MjAlertViewDelegate>
 {
-    UCFP2POrHornerTabHeaderView *_headerView;
+//    UCFP2POrHornerTabHeaderView *_headerView;
     BOOL _isShowOrHideAccoutMoney;
     NSDictionary *_dataDict;
     int _openState;
@@ -61,6 +61,7 @@
 
 @property (weak, nonatomic) IBOutlet UCFCashAndTopUp *bottomView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomConstract;
+@property (strong, nonatomic) UCFP2POrHornerTabHeaderView *headerView;
 
 - (IBAction)clickCashBtn:(UIButton *)sender;
 - (IBAction)clickRechargeBtn:(UIButton *)sender;
@@ -242,11 +243,11 @@
 //        }
         if (self.accoutType == SelectAccoutTypeHoner ) {
             
-            if (self.accoutType == SelectAccoutTypeHoner  && [_noticeTxt isEqualToString:@""])//如果关闭 尊享提现活动的话
+            if (_noticeTxt.length > 0)//如果关闭 尊享提现活动的话
             {
-                return  160;
-            }else{
                 return  204;
+            }else{
+                return  160;
             }
         } else {
             return 160;
@@ -262,17 +263,20 @@
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     if (section == 0) {
-        CGFloat headHeight = self.accoutType == SelectAccoutTypeP2P ? 160 : 204;
-        if (self.accoutType == SelectAccoutTypeHoner  && [_noticeTxt isEqualToString:@""])//如果关闭 尊享提现活动的话
+        CGFloat headHeight = 160;
+        if(self.accoutType == SelectAccoutTypeHoner && _noticeTxt.length > 0)
         {
-            headHeight = 160;
+            headHeight = 204;
         }
-        _headerView = [[[NSBundle mainBundle]loadNibNamed:@"UCFP2POrHornerTabHeaderView" owner:nil options:nil] firstObject];
+    
+        self.headerView = [[[NSBundle mainBundle]loadNibNamed:@"UCFP2POrHornerTabHeaderView" owner:nil options:nil] firstObject];
         _headerView.frame = CGRectMake(0, 0, ScreenWidth, headHeight);
         _headerView.upView.backgroundColor = UIColorWithRGB(0x5b6993);
         _headerView.downView.backgroundColor = [UIColor whiteColor];
         _headerView.delegate = self;
         _headerView.accoutTpye = self.accoutType;
+        _headerView.honerCashTipViewHight = 0;
+        _headerView.honerCashTipViewRight.constant = ScreenWidth;
          _headerView.aboutLabelRight.constant = 15 + ScreenWidth;
         _headerView.isShowOrHideAccoutMoney = _isShowOrHideAccoutMoney;
         if(self.accoutType == SelectAccoutTypeHoner){
@@ -488,8 +492,22 @@
             
         }];
     }
+}
+#pragma mark -尊享活动view  动画
+-(void)honerCashActivityAnimating
+{
     
+    __weak typeof(self) weakSelf = self;
+    [UIView animateWithDuration:0.7 delay:1.2 options: UIViewAnimationOptionCurveEaseIn animations:^{
+        
+        weakSelf.headerView.honerCashTipView.frame = CGRectMake(0,weakSelf.headerView.honerCashTipView.frame.origin.y, ScreenWidth, 44);
+        weakSelf.headerView.honerCashTipViewLeft.constant = 0;
+       weakSelf.headerView.honerCashTipViewRight.constant = 0;
+      weakSelf.headerView.aboutLabelRight.constant = 15;
     
+    } completion:^(BOOL finished) {
+        
+    }];
 }
 - (void)mjalertView:(MjAlertView *)alertview didClickedButton:(UIButton *)clickedButton andClickedIndex:(NSInteger)index
 {
@@ -698,6 +716,11 @@
                     }
                 }
                 [self.tableView reloadData];
+                
+//                if (self.accoutType == SelectAccoutTypeHoner && _noticeTxt.length > 0)
+//                {//执行动画
+//                    [self honerCashActivityAnimating];
+//                }
             } else {
                 [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
             }
