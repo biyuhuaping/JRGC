@@ -153,16 +153,10 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ndk-38-6Uk">
-                    <rect key="frame" x="-320" y="150" width="640" height="44"/>
+                    <rect key="frame" x="-320" y="150" width="320" height="44"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="尊享用户出借网贷有额外优惠奖励" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VeF-uY-iSF">
-                            <rect key="frame" x="15" y="13.666666666666657" width="214.33333333333334" height="17"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <color key="textColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="了解一下" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mjG-PU-TQm">
-                            <rect key="frame" x="249" y="11.666666666666657" width="61" height="21"/>
+                            <rect key="frame" x="244" y="11" width="61" height="21"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="21" id="Bpt-4l-yH3"/>
@@ -177,8 +171,14 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="尊享用户出借网贷有额外优惠奖励" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VeF-uY-iSF">
+                            <rect key="frame" x="15" y="13.666666666666657" width="214.33333333333334" height="17"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                         <button opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ieY-xm-BO8">
-                            <rect key="frame" x="0.0" y="0.0" width="640" height="44"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <state key="normal">
@@ -208,9 +208,9 @@
                         <constraint firstAttribute="trailing" secondItem="ieY-xm-BO8" secondAttribute="trailing" id="DOh-HF-lAU"/>
                         <constraint firstAttribute="bottom" secondItem="ieY-xm-BO8" secondAttribute="bottom" id="HYR-de-cPA"/>
                         <constraint firstItem="ieY-xm-BO8" firstAttribute="leading" secondItem="Ndk-38-6Uk" secondAttribute="leading" id="IeA-UJ-mob"/>
-                        <constraint firstItem="mjG-PU-TQm" firstAttribute="centerY" secondItem="Ndk-38-6Uk" secondAttribute="centerY" id="fog-rt-UTc"/>
-                        <constraint firstAttribute="trailing" secondItem="mjG-PU-TQm" secondAttribute="trailing" constant="330" id="gfD-am-syQ"/>
+                        <constraint firstAttribute="trailing" secondItem="mjG-PU-TQm" secondAttribute="trailing" constant="15" id="fDG-3p-C7J"/>
                         <constraint firstItem="VeF-uY-iSF" firstAttribute="leading" secondItem="Ndk-38-6Uk" secondAttribute="leading" constant="15" id="lNT-FF-UxQ"/>
+                        <constraint firstItem="mjG-PU-TQm" firstAttribute="centerY" secondItem="Ndk-38-6Uk" secondAttribute="centerY" id="vq7-m9-zgM"/>
                     </constraints>
                 </view>
             </subviews>
@@ -218,7 +218,7 @@
             <constraints>
                 <constraint firstItem="zU9-P5-x9d" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Hmu-Rv-3qW"/>
                 <constraint firstItem="Ndk-38-6Uk" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="-320" id="Kzv-RK-CV0"/>
-                <constraint firstAttribute="trailing" secondItem="Ndk-38-6Uk" secondAttribute="trailing" id="Slo-QD-Wld"/>
+                <constraint firstAttribute="trailing" secondItem="Ndk-38-6Uk" secondAttribute="trailing" constant="320" id="Slo-QD-Wld"/>
                 <constraint firstItem="jWm-fQ-WOq" firstAttribute="top" secondItem="zU9-P5-x9d" secondAttribute="bottom" id="Z1D-RW-u1N"/>
                 <constraint firstAttribute="trailing" secondItem="zU9-P5-x9d" secondAttribute="trailing" id="ZX5-0L-JBk"/>
                 <constraint firstItem="jWm-fQ-WOq" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="e83-A3-Mkk"/>
@@ -229,15 +229,17 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="aboutLabel" destination="mjG-PU-TQm" id="jPz-JG-2dW"/>
-                <outlet property="aboutLabelRight" destination="gfD-am-syQ" id="Wxj-La-AkF"/>
                 <outlet property="accountVisibleBtn" destination="MFn-OY-8pr" id="aGx-eQ-QFi"/>
                 <outlet property="accumulatedIncomeLab" destination="AX0-Sj-nAX" id="nga-6P-Dh7"/>
                 <outlet property="allGetInterLab" destination="VdF-Rg-xsB" id="qs7-zR-SaM"/>
                 <outlet property="availableAmountLab" destination="SEf-MS-9Qq" id="ynN-6S-pVI"/>
                 <outlet property="downView" destination="jWm-fQ-WOq" id="VAT-gL-dGN"/>
+                <outlet property="honerCashTipLabel" destination="VeF-uY-iSF" id="goZ-3d-vcu"/>
                 <outlet property="honerCashTipView" destination="Ndk-38-6Uk" id="DS1-Qb-BaP"/>
                 <outlet property="honerCashTipViewHight" destination="0f8-d0-oi9" id="bYA-ew-Uz2"/>
                 <outlet property="honerCashTipViewLeft" destination="Kzv-RK-CV0" id="ajz-wP-iZK"/>
+                <outlet property="honerCashTipViewRight" destination="Slo-QD-Wld" id="iYC-e0-Xbz"/>
+                <outlet property="honerTipButton" destination="ieY-xm-BO8" id="3wL-2U-cwU"/>
                 <outlet property="lineView1" destination="KwD-dU-LUg" id="WAR-il-GqG"/>
                 <outlet property="lineView2" destination="NYd-yJ-N81" id="hKJ-EX-wep"/>
                 <outlet property="totalIncomeLab" destination="v1c-6a-upd" id="hqe-1R-orD"/>

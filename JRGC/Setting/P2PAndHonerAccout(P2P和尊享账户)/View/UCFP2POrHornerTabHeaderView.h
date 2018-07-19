@@ -27,10 +27,15 @@
 @property (weak, nonatomic) IBOutlet UILabel *allGetInterLab;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *aboutLabelRight;//了解一下 右边距离的高度
 @property (strong, nonatomic) IBOutlet UIView *honerCashTipView;
-@property (strong, nonatomic) IBOutlet NSLayoutConstraint *honerCashTipViewHight;//开户行view
-@property (strong, nonatomic) IBOutlet NSLayoutConstraint *honerCashTipViewLeft;//开户行view
-
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *honerCashTipViewHight;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *honerCashTipViewLeft;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *honerCashTipViewRight;
 @property (strong, nonatomic) IBOutlet UILabel *aboutLabel;
+@property (strong, nonatomic) IBOutlet UILabel *honerCashTipLabel;
+
+@property (strong, nonatomic) IBOutlet UIButton *honerTipButton;
+
+
 - (IBAction)clickHonerCashActivityVC:(id)sender;
 
 @property (assign,nonatomic) SelectAccoutType accoutTpye;
