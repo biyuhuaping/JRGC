@@ -31,6 +31,7 @@
 #import "UCFCashAndTopUp.h"
 #import "UCFCalendarModularViewController.h"
 #import "UCFMyReservedViewController.h"
+#import "UCFRedBagViewController.h"
 
 @interface UCFP2POrHonerAccoutViewController ()<UITableViewDelegate,UITableViewDataSource,UCFP2POrHornerTabHeaderViewDelete,UIAlertViewDelegate,MjAlertViewDelegate>
 {
@@ -474,9 +475,18 @@
 #pragma  跳转尊享提现活动页面
 -(void)gotoHonerCashActivityView
 {
+    UCFRedBagViewController *redbag = [[UCFRedBagViewController alloc] initWithNibName:@"UCFRedBagViewController" bundle:nil];
+    redbag.sourceVC = self;
     if (_hasCoupon)
     {//如果已经领取直接进入
-        
+        redbag.fold = NO;
+        [self.navigationController presentViewController:redbag animated:NO completion:nil];
+    }
+    else {
+        redbag.fold = YES;
+        [self.navigationController presentViewController:redbag animated:YES completion:^{
+            
+        }];
     }
     
     
