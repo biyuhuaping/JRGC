@@ -477,6 +477,7 @@
 {
     UCFRedBagViewController *redbag = [[UCFRedBagViewController alloc] initWithNibName:@"UCFRedBagViewController" bundle:nil];
     redbag.sourceVC = self;
+    
     if (_hasCoupon)
     {//如果已经领取直接进入
         redbag.fold = NO;

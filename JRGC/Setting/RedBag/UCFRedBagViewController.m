@@ -315,14 +315,10 @@
 }
 
 - (IBAction)clicked:(id)sender {
-    [self close:nil];
-}
-
-- (void)close:(UIButton *)sender {
     if (self.fold) {
-//        [self dismissViewControllerAnimated:YES completion:^{
-//
-//        }];
+        //        [self dismissViewControllerAnimated:YES completion:^{
+        //
+        //        }];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"UCFRedBagViewController_unfold_close" object:nil];
     }
     else {
@@ -330,6 +326,12 @@
             
         }];
     }
+}
+
+- (void)close:(UIButton *)sender {
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+    }];
 }
 
 - (IBAction)lendButton:(UIButton *)sender {
