@@ -76,9 +76,19 @@
 
 - (void)redbag_unfold_close:(NSNotification *)noty {
     [self.navigationController popToRootViewControllerAnimated:YES];
-    [self.navigationController dismissViewControllerAnimated:NO completion:^{
-        
-    }];
+    if (self.navigationController.presentedViewController) {
+        if (self.navigationController.presentedViewController.presentedViewController) {
+            [self.navigationController.presentedViewController.presentedViewController dismissViewControllerAnimated:YES completion:^{
+                
+            }];
+        }
+        [self.navigationController.presentedViewController dismissViewControllerAnimated:YES completion:^{
+            
+        }];
+    }
+//    [self.navigationController dismissViewControllerAnimated:NO completion:^{
+//
+//    }];
     [self refresh];
 }
 
