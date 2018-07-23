@@ -485,7 +485,9 @@
     if (_hasCoupon)
     {//如果已经领取直接进入
         redbag.fold = NO;
-        [self.navigationController presentViewController:redbag animated:NO completion:nil];
+        [self.navigationController presentViewController:redbag animated:NO completion:^{
+            
+        }];
     }
     else {
         redbag.fold = YES;

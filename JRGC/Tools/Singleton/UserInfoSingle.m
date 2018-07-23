@@ -259,7 +259,7 @@
     NSMutableDictionary *dic = [result objectFromJSONString];
     if (tag.integerValue == kSXTagSuperviseUserInfo) {
         NSString *rstcode = dic[@"ret"];
-        NSString *rsttext = dic[@"message"];
+//        NSString *rsttext = dic[@"message"];
         if ([rstcode intValue] == 1) {
             NSDictionary *res = [dic objectSafeDictionaryForKey:@"data"];
             NSString *compliance = [res objectSafeForKey:@"compliance"];

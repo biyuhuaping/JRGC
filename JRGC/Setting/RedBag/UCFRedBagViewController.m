@@ -78,7 +78,7 @@
 
 - (void)createUnfoldnedUI {
     self.closeBtn.hidden = YES;
-    self.result4Label.text = @"您已成功领取一张返现券\n您使用后，才能再次领取哦!";
+    self.result4Label.text = @"您已成功领取一张优惠券\n您使用后，才能再次领取哦!";
     self.result4Label.textAlignment = NSTextAlignmentCenter;
     self.result4Label.numberOfLines = 0;
     self.result4Label.lineBreakMode = NSLineBreakByWordWrapping;
@@ -323,18 +323,26 @@
     }
     else {
         [self dismissViewControllerAnimated:NO completion:^{
+
+            [self.sourceVC.navigationController popToRootViewControllerAnimated:NO];
             
         }];
     }
 }
 
 - (void)close:(UIButton *)sender {
+
     [self dismissViewControllerAnimated:YES completion:^{
-        
     }];
 }
 
 - (IBAction)lendButton:(UIButton *)sender {
+    
+    if (self.fold) {
+        
+    } else {
+        [self.sourceVC.navigationController popToRootViewControllerAnimated:NO];
+    }
     
     [self dismissViewControllerAnimated:NO completion:^{
         [[NSNotificationCenter defaultCenter] postNotificationName:@"UCFRedBagViewController_to_lend" object:nil];
