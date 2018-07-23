@@ -177,11 +177,12 @@
     sendBtn.animationImagesArray = [NSArray arrayWithObjects:[UIImage imageNamed:@"gold_1"],[UIImage imageNamed:@"gold_2"],[UIImage imageNamed:@"gold_3"],[UIImage imageNamed:@"gold_4"],[UIImage imageNamed:@"gold_5"],[UIImage imageNamed:@"gold_6"],nil ];
     
     
-    UIButton *closeBtn = [[UIButton alloc] initWithFrame:CGRectMake(15, 37, 40, 40)];
+    CGRect rectStatus = [[UIApplication sharedApplication] statusBarFrame];
+    UIButton *closeBtn = [[UIButton alloc] initWithFrame:CGRectMake(15,rectStatus.size.height + 10 , 40, 40)];
 //    closeBtn.layer.masksToBounds = YES;
     closeBtn.layer.zPosition = 2;
 //    closeBtn.layer.cornerRadius = sendBtn.bounds.size.height/2;
-    [closeBtn setBackgroundImage:[UIImage imageNamed:@"btn-close_pre"] forState:UIControlStateNormal];
+    [closeBtn setImage:[UIImage imageNamed:@"btn-close_pre"] forState:UIControlStateNormal];
     closeBtn.imageView.frame = CGRectMake(0, 0, 18, 18);
     [closeBtn addTarget:self action:@selector(close:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:closeBtn];
@@ -370,11 +371,10 @@
     NSString *rstcode = dic[@"ret"];
     NSString *rsttext = dic[@"message"];
     if (tag.intValue == kSXTagGetRedBagContent) {
-        
         if ([rstcode intValue] == 1) {
             
             NSDictionary *res = [dic objectSafeDictionaryForKey:@"data"];
-            self.result1Label.text = [res objectSafeForKey:@"couponName"];
+//            self.result1Label.text = [res objectSafeForKey:@"couponName"];
             self.result2Label.text = [NSString stringWithFormat:@"满¥%@可用", [res objectSafeForKey:@"investMultip"]];
             self.result3Label.text = [NSString stringWithFormat:@"期限：%@", [res objectSafeForKey:@"inverstPeriod"]];
             self.result4Label.text = [NSString stringWithFormat:@"%@元", [res objectSafeForKey:@"couponAmt"]];
