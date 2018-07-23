@@ -190,7 +190,7 @@
 }
 
 - (void)tapped:(UIGestureRecognizer *)tap {
-    [self dismissViewControllerAnimated:NO completion:^{
+    [self dismissViewControllerAnimated:YES completion:^{
         UCFCouponViewController *coupon = [[UCFCouponViewController alloc] initWithNibName:@"UCFCouponViewController" bundle:nil];
         [self.sourceVC.navigationController pushViewController:coupon animated:YES];
     }];
@@ -308,11 +308,20 @@
 
 #pragma mark - UIViewControllerTransitioningDelegate
 - (nullable id <UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
-    return [[UCFCustomPopTransitionAnimation alloc]init];
+    if (_fold) {
+        return [[UCFCustomPopTransitionAnimation alloc]init];
+    }
+    else
+        return nil;
+    
 }
 
 - (nullable id <UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed{
-    return [[UCFCustomPopTransitionAnimation alloc]init];
+    if (_fold) {
+        return [[UCFCustomPopTransitionAnimation alloc]init];
+    }
+    else
+        return nil;
 }
 
 - (IBAction)clicked:(id)sender {
@@ -339,13 +348,14 @@
 
 - (IBAction)lendButton:(UIButton *)sender {
     
-    if (self.fold) {
-        
-    } else {
-        [self.sourceVC.navigationController popToRootViewControllerAnimated:NO];
-    }
+//    if (self.fold) {
+//
+//    } else {
+//        [self.sourceVC.navigationController popToRootViewControllerAnimated:NO];
+//    }
     
-    [self dismissViewControllerAnimated:NO completion:^{
+    
+    [self dismissViewControllerAnimated:YES completion:^{
         [[NSNotificationCenter defaultCenter] postNotificationName:@"UCFRedBagViewController_to_lend" object:nil];
     }];
     

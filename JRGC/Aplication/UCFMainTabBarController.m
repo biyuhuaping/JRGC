@@ -60,6 +60,10 @@
 }
 
 - (void)redbag_toLend:(NSNotification *)noty {
+    if (self.mineView.navigationController.childViewControllers.count > 1) {
+        [self.mineView.navigationController popViewControllerAnimated:NO];
+    }
+    
     if (self.presentedViewController) {
         [self.presentedViewController dismissViewControllerAnimated:NO completion:^{
             
