@@ -207,7 +207,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkPersonCenterRedPoint) name:CHECK_RED_POINT object:nil];
     [self checkPersonCenterRedPoint];
     //调用红点接口，通知服务器红点标示倍查看
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkRedPointShouldHide:) name:REDALERTISHIDE object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkRedPointShouldHide:) name:REDALERTISHIDE object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkConponCenter) name:CHECK_COUPON_CENTER object:nil];
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkConponCenter) name:@"setDefaultViewData" object:nil];
 
@@ -283,12 +283,12 @@
     DLog(@"%@",callbackString);
 }
 // 之所以把这个红点提到这里，是因为启动APP之后，没有点击个人中心页面的话，未初始化这个api，直接投资查看奖励列表，不能通知服务端把这个红点去掉
-- (void)checkRedPointShouldHide:(NSNotification *)noti
-{
-    NSString *upFlag = noti.object;
-    NSString *strParameters = [NSString stringWithFormat:@"userId=%@&updFlag=%@", [[NSUserDefaults standardUserDefaults] objectForKey:UUID],upFlag];
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagRedPointCheck owner:self Type:SelectAccoutDefault];
-}
+//- (void)checkRedPointShouldHide:(NSNotification *)noti
+//{
+//    NSString *upFlag = noti.object;
+//    NSString *strParameters = [NSString stringWithFormat:@"userId=%@&updFlag=%@", [[NSUserDefaults standardUserDefaults] objectForKey:UUID],upFlag];
+//    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagRedPointCheck owner:self Type:SelectAccoutDefault];
+//}
 - (void)checkConponCenter
 {
     NSDictionary *parmDic = nil;
@@ -803,12 +803,12 @@
             [self.tabBarController.tabBar hideBadgeOnItemIndex:0];
         }
     } else if (tag.intValue == kSXTagRedPointCheck) {
-        NSString *Data = (NSString *)result;
-        NSDictionary * dic = [Data objectFromJSONString];
-        if ([dic[@"status"] intValue] == 1) {
-            // 通知个人中心刷新，之所以加这个通知，是因为投标成功页查看我的奖励，跟个人中心都要刷新个人中心数据，保持统一（但会造成一次网络浪费，从投标成功页查看我的奖励列表，点击tab的时候也会请求一次这个接口）
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
-        }
+//        NSString *Data = (NSString *)result;
+//        NSDictionary * dic = [Data objectFromJSONString];
+//        if ([dic[@"status"] intValue] == 1) {
+//            // 通知个人中心刷新，之所以加这个通知，是因为投标成功页查看我的奖励，跟个人中心都要刷新个人中心数据，保持统一（但会造成一次网络浪费，从投标成功页查看我的奖励列表，点击tab的时候也会请求一次这个接口）
+//            [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonalCenterNetData" object:nil];
+//        }
     } else if (tag.intValue == kSXTagCheckConponCenter) {
         NSString *Data = (NSString *)result;
         NSDictionary * dic = [Data objectFromJSONString];
