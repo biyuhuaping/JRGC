@@ -94,7 +94,7 @@
     // 上线Appstore的版本，请记得删除此行，否则将失去防调试防护功能！
     // [options setValue:@"allowd" forKey:@"allowd"];  // TODO
 
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkInitiaLogin) name:CheckIsInitiaLogin object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkInitiaLogin) name:CheckIsInitiaLogin object:nil];
     
 //    [IPDetector getWANIPAddressWithCompletion:^(NSString *IPAddress) {
 //        NSString *curWanIp = IPAddress;
@@ -145,7 +145,7 @@
         if (useLockView == 1) {
             [self showGCode];
         } else {
-            [self checkInitiaLogin];
+//            [self checkInitiaLogin];
         }
         [self addLoadingBaseView];
         //本地存储的广告地址 为空或者不存在 则不显示广告
@@ -341,14 +341,14 @@
     [self checkNovicePoliceOnOff];
 }
 // 检测是否首次登录
-- (void)checkInitiaLogin
-{
-    dispatch_queue_t queue= dispatch_get_main_queue();
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), queue, ^{
-    DBLog(@"主队列--延迟执行------%@",[NSThread currentThread]);
-          [[ToolSingleTon sharedManager] getGoldPrice];
-    });
-}
+//- (void)checkInitiaLogin
+//{
+//    dispatch_queue_t queue= dispatch_get_main_queue();
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), queue, ^{
+//    DBLog(@"主队列--延迟执行------%@",[NSThread currentThread]);
+//          [[ToolSingleTon sharedManager] getGoldPrice];
+//    });
+//}
 #pragma mark - 广告页
 //显示广告
 - (void)showAdvertisement
@@ -493,7 +493,7 @@
         }
     }
     else {
-        [self checkInitiaLogin];
+//        [self checkInitiaLogin];
     }
     [self checkIsGongChaView];
     [self checkIsLockView];

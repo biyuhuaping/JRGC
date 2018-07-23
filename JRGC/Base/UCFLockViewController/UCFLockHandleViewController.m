@@ -1374,7 +1374,7 @@
     if (isClickCgAndCertiBtn) {
         return;
     }
-    [[NSNotificationCenter defaultCenter] postNotificationName:CheckIsInitiaLogin object:nil];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:CheckIsInitiaLogin object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"setindecatorbtnnofication" object:nil];
 }
 

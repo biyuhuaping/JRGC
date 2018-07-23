@@ -137,7 +137,7 @@ return shared##className; \
 #define MODIBANKZONE_SUCCESSED @"modifybankzonesuccessed"
 
 // 检测是否首次登录
-#define CheckIsInitiaLogin      @"InitiaLogin"
+//#define CheckIsInitiaLogin      @"InitiaLogin"
 // 每天首次登录时间
 #define FirstLoginTimeEveryday      @"firstLoginEveryday"
 #define ISHASQIANDAOALERT           @"shifoutankuang"
