@@ -86,7 +86,14 @@
     [self addLeftButton];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getP2POrHonerAccoutHttpRequest) name:RELOADP2PORHONERACCOTDATA object:nil];
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetRegBagHasState) name:@"hasGetRedBag" object:nil];
 
+}
+- (void)resetRegBagHasState
+{
+    _hasCoupon = YES;
 }
 -(void)removeLoadingView
 {
@@ -485,13 +492,11 @@
     {//如果已经领取直接进入
         redbag.fold = NO;
         [self.navigationController presentViewController:redbag animated:YES completion:^{
-            
         }];
     }
     else {
         redbag.fold = YES;
         [self.navigationController presentViewController:redbag animated:YES completion:^{
-            
         }];
     }
 }
@@ -591,7 +596,7 @@
 #pragma mark -
 #pragma mark  网络请求
 -(void)getP2POrHonerAccoutHttpRequest{
-    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSString *userId = [[NSUserDefaults standardUserDefaults] valueForKey:UUID];
     if(userId){
        [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":userId} tag:kSXTagUserAccountInfo owner:self signature:YES Type:self.accoutType];

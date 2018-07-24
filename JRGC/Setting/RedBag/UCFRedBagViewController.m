@@ -382,6 +382,9 @@
     NSString *rsttext = dic[@"message"];
     if (tag.intValue == kSXTagGetRedBagContent) {
         if ([rstcode intValue] == 1) {
+
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"hasGetRedBag" object:nil];
+        
             
             NSDictionary *res = [dic objectSafeDictionaryForKey:@"data"];
 //            self.result1Label.text = [res objectSafeForKey:@"couponName"];

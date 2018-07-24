@@ -225,6 +225,9 @@
     [super viewDidAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetRegBagHasState) name:@"hasGetRedBag" object:nil];
+
+    
     //设置ScrollView总高度
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         float scrollViewHeight = CGRectGetMaxY(_telServiceLabel.frame);
@@ -996,7 +999,10 @@
     choseBankVC.accoutType = self.accoutType;
     [self.navigationController pushViewController:choseBankVC  animated:YES];
 }
-
+- (void)resetRegBagHasState
+{
+    _hasCoupon = YES;
+}
 //进入尊享活动页面
 - (IBAction)gotoHonerCashActivityView:(id)sender
 {
