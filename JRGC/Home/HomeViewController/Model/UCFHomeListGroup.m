@@ -66,9 +66,15 @@
                     }
                     [self setAttach:tmp];
                 }
+            } else if ([key isEqualToString:@"prdClaim"]) {
+                NSMutableArray *temp = [[NSMutableArray alloc] init];
+                UCFHomeListCellModel *model = [UCFHomeListCellModel homeListCellWithDict:propertyValue];
+                [temp addObject:model];
+                self.prdlist = temp;
             }
-            else
+            else {
                 [self setValue:propertyValue forKey:key];
+            }
         } else {
             if ([key isEqualToString:@"showMore"]) {
                 [self setShowMore:[propertyValue boolValue]];

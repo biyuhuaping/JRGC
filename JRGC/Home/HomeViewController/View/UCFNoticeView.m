@@ -27,7 +27,10 @@
 {
     [super awakeFromNib];
 }
-
+- (void)setNoticeModel:(UCFNoticeModel *)noticeModel
+{
+    _noticeModel = noticeModel;
+}
 //- (void)layoutSubviews
 //{
 //    self.noticeLabel.frame = CGRectMake(15, 0, ScreenWidth - 30, self.height);

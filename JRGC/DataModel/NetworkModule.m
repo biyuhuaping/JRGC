@@ -1313,6 +1313,16 @@ static NetworkModule *gInstance = NULL;
         case kSXTagGetRedBagContent:
             parameter = [NEW_SERVER_IP stringByAppendingString:GETREDBAGCONTENT];
             break;
+        case kSXTagGetBannerAndGift:
+            parameter = [NEW_SERVER_IP stringByAppendingString:GETBANERANDGIFTIMAGE];
+            break;
+        case kSXTagGetHomeShowSections:
+            parameter = [NEW_SERVER_IP stringByAppendingString:GETHOMESECTIONS];
+            break;
+        case kSXTagGetHomeNewUserSection:
+            parameter = [NEW_SERVER_IP stringByAppendingString:GETHOMENEWUSERSECTIONS];
+            break;
+            
     }
     //给原有参数字典添加公共参数
     if (!data) {

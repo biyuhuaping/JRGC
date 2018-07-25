@@ -342,7 +342,9 @@
 #define ACCOUTSETHSPWDINTOBANKURL  @"/api/userAccount/v2/setHsPwdIntoBank.json"//***新徽商设置交易密码接口
 
 #define P2PACCOUTRECHRAGENEWURL  @"/api/recharge/v2/rechargeNew.json"//***新微金充值接口
-
+#define GETBANERANDGIFTIMAGE @"/api/homePage/v2/bannerAndNoice.json"
+#define GETHOMESECTIONS      @"/api/homePage/v2/indexDefault.json"   //首页默认接口
+#define GETHOMENEWUSERSECTIONS      @"/api/homePage/v2/noviceModule.json"   //新手磨具爱
 enum kPostStatus{
     kPostStatusNone=0,
     kPostStatusBeging=1,
@@ -570,6 +572,9 @@ enum kSXTag
     kSXTagAccountSetHsPwdIntoBank,      //***新徽商设置交易密码接口
     kSXTagP2PAccountrechargeNew,        //***新微金充值接口
     kSXTagGetRedBagContent,             //获取红包内容 （仿微信）
+    kSXTagGetBannerAndGift,              //banner和公告
+    kSXTagGetHomeShowSections,          //首页默认接口
+    kSXTagGetHomeNewUserSection,         //新手模块
 };
 
 typedef enum kSXTag kSXTag;

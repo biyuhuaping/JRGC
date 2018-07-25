@@ -61,7 +61,6 @@
 @property (strong, nonatomic)BJGridItem *dragBtn;
 @property (strong,nonatomic) NSString *intoVCStr;
 
-//@property (strong, nonatomic)UIDocumentInteractionController *documentController;
 @end
 
 @implementation UCFHomeViewController
@@ -77,18 +76,8 @@
 #pragma mark - 系统方法
 - (void)viewWillAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
-
-//    NSArray *viewS = [self.navigationController viewControllers];
-//    if (viewS.count >= 2) {
-//      UCFBaseViewController *viewC =  [viewS objectAtIndex:1];
-//        if ([viewC isKindOfClass:[UCFWebViewJavascriptBridgeController class]]) {
-//           ((UCFWebViewJavascriptBridgeController *) viewC).isHideNativeNav
-//        }
-//    }
-    
+    [super viewWillAppear:animated];    
     if ([self.intoVCStr isEqualToString:@"ProjectDetailVC"] || [self.desVCStr isEqualToString:@"bannar_hide_return"]) {
-//        self.desVCStr = nil;
         [self.navigationController setNavigationBarHidden:YES animated:NO];
     }else{
         [self.navigationController setNavigationBarHidden:YES animated:YES];
@@ -140,7 +129,7 @@
     [self addUI];
 #pragma mark - 请求数据
     [self fetchData];
-    [self addDragBtn];
+//    [self addDragBtn];
 }
 
 
@@ -1001,8 +990,7 @@
 - (void)setDefaultState:(NSNotification *)noty
 {
     __weak typeof(self) weakSelf = self;
-//    [self.userInfoVC setDefaultState];
-//    [self addUI];
+
     NSString *userId = [UserInfoSingle sharedManager].userId;
     if (userId) {
         self.navView.giftButton.hidden = NO;
@@ -1021,57 +1009,17 @@
 #pragma mark - 请求数据
 - (void)fetchData
 {
-    __weak typeof(self) weakSelf = self;
+//    __weak typeof(self) weakSelf = self;
     
-//    [self.userInfoVC.presenter fetchUserInfoOneDataWithCompletionHandler:^(NSError *error, id result) {
-//    }];
-//    
-//    [self.userInfoVC.presenter fetchUserInfoTwoDataWithCompletionHandler:^(NSError *error, id result) {
-//    }];
-
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self.homeListVC.presenter fetchHomeIconListDataWithCompletionHandler:^(NSError *error, id result) {
-            CGFloat userInfoViewHeight = [UCFCycleImageViewController viewHeight];
-            NSArray *homeIcons = [result objectSafeArrayForKey:@"productMap"];
-            if (homeIcons.count > 0) {
-                weakSelf.cycleImageVC.view.frame = CGRectMake(0, 0, ScreenWidth, userInfoViewHeight + 80);
-//                weakSelf.cycleImageVC.iconBackViewHeight.constant = 80;
-            }
-            else {
-                weakSelf.cycleImageVC.view.frame = CGRectMake(0, 0, ScreenWidth, userInfoViewHeight);
-//                weakSelf.cycleImageVC.iconBackViewHeight.constant = 0;
-            }
-            weakSelf.homeListVC.tableView.tableHeaderView = weakSelf.cycleImageVC.view;
-            //请求成功
-            UCFNoticeModel *notice = [result objectForKey:@"siteNotice"];
-            if (notice.siteNotice.length > 0) {
-                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isShowNotice"];
-                [[NSUserDefaults standardUserDefaults] synchronize];
-                
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    
-                    [weakSelf refreshNoticeWithShow:YES];
-                    weakSelf.cycleImageVC.noticeView.noticeModel = notice;
-                    weakSelf.cycleImageVC.noticeStr = notice.siteNotice;
-                });
-            }
-            else{
-                [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isShowNotice"];
-                [[NSUserDefaults standardUserDefaults] synchronize];
-                [weakSelf refreshNoticeWithShow:NO];
-            }
-        }];
-    });
-    
-
-    
+//    [self.homeListVC.presenter getDefaultShowListSection:nil];
+//    return;
     [self.homeListVC.presenter fetchHomeListDataWithCompletionHandler:^(NSError *error, id result) {
-        [MBProgressHUD hideOriginAllHUDsForView:weakSelf.view animated:YES];//上层交互逻辑
+        [MBProgressHUD hideOriginAllHUDsForView:self.view animated:YES];//上层交互逻辑
         if ([result isKindOfClass:[NSDictionary class]]) {
-            
+
         }
         else if ([result isKindOfClass:[NSString class]]) {
-            [AuxiliaryFunc showToastMessage:result withView:weakSelf.view];
+            [AuxiliaryFunc showToastMessage:result withView:self.view];
         }
     }];
 }
@@ -1079,7 +1027,6 @@
 #pragma mark - 刷新公告
 - (void)refreshNoticeWithShow:(BOOL)show
 {
-//    BOOL isShowNotice = [[NSUserDefaults standardUserDefaults] boolForKey:@"isShowNotice"];
     CGFloat userInfoViewHeight = self.cycleImageVC.view.height;
     if (show) {
         self.cycleImageVC.view.frame = CGRectMake(0, 0, ScreenWidth, userInfoViewHeight+45);

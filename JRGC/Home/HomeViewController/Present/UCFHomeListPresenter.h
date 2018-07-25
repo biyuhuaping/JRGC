@@ -45,5 +45,13 @@
 
 - (void)fetchCollectionDetailDataWithParameter:(NSDictionary *)parameter completionHandler:(NetworkCompletionHandler)completionHander;
 
+/**
+ 获取首页默认数据
+
+ @param parameter 参数
+ */
+- (void)getDefaultShowListSection:(NSDictionary *)parameter;
+
+
 - (void)resetData;
 @end

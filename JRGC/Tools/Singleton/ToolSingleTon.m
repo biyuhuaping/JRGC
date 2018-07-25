@@ -19,7 +19,7 @@
 @property (strong, nonatomic) UIView *alertView;
 @property (strong, nonatomic) UIView *background;
 @property (strong, nonatomic) MjAlertView *alert;
-@property (strong, nonatomic) NSTimer *timer;
+//@property (strong, nonatomic) NSTimer *timer;
 @end
 
 @implementation ToolSingleTon
@@ -35,9 +35,9 @@
 - (instancetype)init {
     self = [super init];
     if(self) {
-        self.timer = [NSTimer scheduledTimerWithTimeInterval:5 * 60 target:self selector:@selector(getGoldPrice) userInfo:nil repeats:YES];
-        
-        [_timer setFireDate:[NSDate distantPast]];
+//        self.timer = [NSTimer scheduledTimerWithTimeInterval:5 * 60 target:self selector:@selector(getGoldPrice) userInfo:nil repeats:YES];
+//
+//        [_timer setFireDate:[NSDate distantPast]];
     }
     return self;
 }
@@ -104,7 +104,7 @@
 
 //获取当前黄金价格
 - (void)getGoldPrice {
-    
+
     [[NSNotificationCenter defaultCenter] postNotificationName:BEHIN_GET_GOLD_PRICE object:nil];
     [[NetworkModule sharedNetworkModule] newPostReq:@{} tag:ksxTagGoldCurrentPrice owner:self signature:NO Type:SelectAccoutDefault];
 }
@@ -196,15 +196,16 @@
                 [self showFestivalActivitiesWebView:dic[@"data"][@"redBagRainAddress"]];
             }
         }
-    } else if (tag.integerValue == ksxTagGoldCurrentPrice) {
-        if ([dic[@"ret"] boolValue]) {
-            self.readTimePrice = [dic[@"data"][@"readTimePrice"] doubleValue];
-        } else {
-//            [MBProgressHUD displayHudError:@"获取金价失败"];
-        }
-        [[NSNotificationCenter defaultCenter] postNotificationName:CURRENT_GOLD_PRICE object:nil];
-
     }
+//    else if (tag.integerValue == ksxTagGoldCurrentPrice) {
+//        if ([dic[@"ret"] boolValue]) {
+//            self.readTimePrice = [dic[@"data"][@"readTimePrice"] doubleValue];
+//        } else {
+////            [MBProgressHUD displayHudError:@"获取金价失败"];
+//        }
+//        [[NSNotificationCenter defaultCenter] postNotificationName:CURRENT_GOLD_PRICE object:nil];
+//
+//    }
 }
 - (void)errorPost:(NSError *)err tag:(NSNumber *)tag
 {
@@ -213,9 +214,10 @@
     }
     else if (tag.intValue == kSXTagSingMenthod) {
         
-    } else if (tag.integerValue == ksxTagGoldCurrentPrice) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:CURRENT_GOLD_PRICE object:nil];
     }
+//    else if (tag.integerValue == ksxTagGoldCurrentPrice) {
+//        [[NSNotificationCenter defaultCenter] postNotificationName:CURRENT_GOLD_PRICE object:nil];
+//    }
 }
 
 
