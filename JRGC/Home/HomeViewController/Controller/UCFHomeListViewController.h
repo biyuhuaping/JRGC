@@ -15,6 +15,8 @@ typedef enum : NSUInteger {
     UCFHomeListTypeDebtsMore,
     UCFHomeListTypeDetail,
     UCFHomeListTypeInvest,
+    UCFHomeListTypeIntelligentLoan,
+     UCFHomeListTypeQualityClaims,
 } UCFHomeListType;
 
 @class UCFHomeListPresenter, UCFHomeListViewController, UCFHomeListCellModel;
@@ -33,6 +35,8 @@ typedef enum : NSUInteger {
 - (void)homeList:(UCFHomeListViewController *)homeList didClickReservedWithModel:(UCFHomeListCellModel *)model;
 
 //- (void)homeList:(UCFHomeListViewController *)homeList didClickNewUserWithModel:(UCFHomeListCellModel *)model;
+
+- (void)homeList:(UCFHomeListViewController *)homeList   withType:(UCFHomeListType)type;//新跳转方法
 @end
 
 @interface UCFHomeListViewController : NSObject

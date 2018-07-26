@@ -731,6 +731,31 @@
     }
 }
 
+- (void)homeList:(UCFHomeListViewController *)homeList   withType:(UCFHomeListType)type
+{
+    if (type == UCFHomeListTypeIntelligentLoan)
+    {
+        AppDelegate *appdel = (AppDelegate *)[UIApplication sharedApplication].delegate;
+        UCFInvestViewController *invest = (UCFInvestViewController *)[[appdel.tabBarController.childViewControllers objectAtIndex:1].childViewControllers firstObject];
+        invest.selectedType = @"IntelligentLoan";
+        if ([invest isViewLoaded]) {
+            [invest changeView];
+        }
+        [appdel.tabBarController setSelectedIndex:1];
+    }
+    else if (type == UCFHomeListTypeQualityClaims)
+    {
+        AppDelegate *appdel = (AppDelegate *)[UIApplication sharedApplication].delegate;
+        UCFInvestViewController *invest = (UCFInvestViewController *)[[appdel.tabBarController.childViewControllers objectAtIndex:1].childViewControllers firstObject];
+        invest.selectedType = @"QualityClaims";
+        if ([invest isViewLoaded]) {
+            [invest changeView];
+        }
+        [appdel.tabBarController setSelectedIndex:1];
+    }
+    
+    
+}
 - (void)homeList:(UCFHomeListViewController *)homeList didClickReservedWithModel:(UCFHomeListCellModel *)model
 {
     self.accoutType = SelectAccoutTypeP2P;

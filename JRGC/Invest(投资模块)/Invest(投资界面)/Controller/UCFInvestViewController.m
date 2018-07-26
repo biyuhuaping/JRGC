@@ -292,18 +292,18 @@
 //    }
 }
 - (void)changeView {
-    if ([self.selectedType isEqualToString:@"P2P"]) {
+    if ([self.selectedType isEqualToString:@"IntelligentLoan"]) {//智能出借
         self.currentViewController = self.microMoney;
         [_pagerView setSelectIndex:[self.childViewControllers indexOfObject:self.currentViewController]];
     }
-    else if ([self.selectedType isEqualToString:@"ZX"]) {
+    else if ([self.selectedType isEqualToString:@"QualityClaims"]) {//优质债权
         self.currentViewController = self.honorInvest;
         if ([self.childViewControllers containsObject:self.honorInvest]) {
             [_pagerView setSelectIndex:[self.childViewControllers indexOfObject:self.currentViewController]];
-        }
-        else {
+        } else {
             [_pagerView setSelectIndex:0];
         }
+       
     }
     else if ([self.selectedType isEqualToString:@"Trans"]) {
         self.currentViewController = self.investTransfer;
