@@ -19,11 +19,12 @@
 #import "UCFOldUserGuideViewController.h"
 #import "HSHelper.h"
 #import "RiskAssessmentViewController.h"
+#import "UCFHonorHeaderView.h"
 @interface UCFOrdinaryBidController () <UITableViewDelegate, UITableViewDataSource, UCFProjectListCellDelegate>
 {
     UCFProjectListModel *_projectListModel;
 }
-@property (weak, nonatomic) IBOutlet UITableView *tableview;
+
 
 @property (nonatomic, strong) NSMutableArray *dataArray;
 
@@ -32,6 +33,8 @@
 
 @property (nonatomic, assign) NSInteger currentPage;
 @property (strong, nonatomic) IBOutlet UIView *loadingView;
+
+@property (strong, nonatomic) UCFHonorHeaderView *ordinaryHeaderView;
 @end
 
 @implementation UCFOrdinaryBidController
@@ -56,6 +59,12 @@
     self.tableview.backgroundColor = UIColorWithRGB(0xebebee);
     self.tableview.contentInset = UIEdgeInsetsMake(5, 0, 5, 0);
     
+    UCFHonorHeaderView *honorHeaderView = (UCFHonorHeaderView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHonorHeaderView" owner:self options:nil] lastObject];
+    honorHeaderView.frame = CGRectMake(0, 0, ScreenWidth, ScreenWidth/16*5+10);
+    self.ordinaryHeaderView = honorHeaderView;
+    self.tableview.tableHeaderView = honorHeaderView;
+
+    
     //=========  下拉刷新、上拉加载更多  =========
     __weak typeof(self) weakSelf = self;
     
@@ -71,22 +80,8 @@
     [self.tableview addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(getNetDataFromNet)];
     self.tableview.footer.hidden = YES;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadP2PData) name:@"reloadP2PData" object:nil];
-    //显示loading页面
-    //    [self.view bringSubviewToFront:_loadingView];
-    //    [self performSelector:@selector(removeLoadingView) withObject:nil afterDelay:LoadingSecond];
     
-    //隐藏loading页面
-    [self.view sendSubviewToBack:_loadingView];
-    _loadingView.hidden = YES;
-    [self performSelector:@selector(removeLoadingView) withObject:nil afterDelay:0];
-}
--(void)removeLoadingView
-{
-    for (UIView *view in self.loadingView.subviews) {
-        [view removeFromSuperview];
-    }
-    [self.loadingView removeFromSuperview];
-    [self.tableview.header beginRefreshing];
+     [self.tableview.header beginRefreshing];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -196,7 +191,7 @@
             UCFProjectDetailViewController *controller = [[UCFProjectDetailViewController alloc] initWithDataDic:dataDic isTransfer:NO withLabelList:prdLabelsListTemp];
             CGFloat platformSubsidyExpense = [_projectListModel.platformSubsidyExpense floatValue];
             [[NSUserDefaults standardUserDefaults] setValue:[NSString stringWithFormat:@"%.1f",platformSubsidyExpense] forKey:@"platformSubsidyExpense"];
-            controller.rootVc = self;
+            controller.rootVc = self.rootVc;
             controller.accoutType = SelectAccoutTypeP2P;
             [self.navigationController pushViewController:controller animated:YES];
         }else {
@@ -209,7 +204,7 @@
         if([dic[@"status"] integerValue] == 1)
         {
             UCFPurchaseBidViewController *purchaseViewController = [[UCFPurchaseBidViewController alloc] initWithNibName:@"UCFPurchaseBidViewController" bundle:nil];
-            purchaseViewController.rootVc = self;
+            purchaseViewController.rootVc = self.rootVc;
             purchaseViewController.dataDict = dic;
             purchaseViewController.bidType = 0;
             purchaseViewController.baseTitleType = @"detail_heTong";

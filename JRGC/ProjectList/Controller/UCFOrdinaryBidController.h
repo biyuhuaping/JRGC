@@ -9,5 +9,5 @@
 #import "UCFBaseViewController.h"
 
 @interface UCFOrdinaryBidController : UCFBaseViewController
-
+@property (weak, nonatomic) IBOutlet UITableView *tableview;
 @end

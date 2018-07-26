@@ -1313,6 +1313,9 @@ static NetworkModule *gInstance = NULL;
         case kSXTagGetRedBagContent:
             parameter = [NEW_SERVER_IP stringByAppendingString:GETREDBAGCONTENT];
             break;
+        case kSXTagP2PAiInvestModule://智能出借模块
+            parameter = [NEW_SERVER_IP stringByAppendingString:P2PINVESTMODULEURL];
+            break;
     }
     //给原有参数字典添加公共参数
     if (!data) {

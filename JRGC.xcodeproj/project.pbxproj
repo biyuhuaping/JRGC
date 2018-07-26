@@ -720,6 +720,8 @@
 		83AB49651F6A76CA00C4231F /* UCFTotalAssetPieChartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83AB49631F6A76CA00C4231F /* UCFTotalAssetPieChartViewController.xib */; };
 		83AB49691F6A772400C4231F /* UCFTotalRevenuePieChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83AB49671F6A772400C4231F /* UCFTotalRevenuePieChartViewController.m */; };
 		83AB496A1F6A772400C4231F /* UCFTotalRevenuePieChartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83AB49681F6A772400C4231F /* UCFTotalRevenuePieChartViewController.xib */; };
+		83BC799F21087C8500A591AA /* UCFMicroMoneyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BC799D21087C8400A591AA /* UCFMicroMoneyCell.m */; };
+		83BC79A021087C8500A591AA /* UCFMicroMoneyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83BC799E21087C8400A591AA /* UCFMicroMoneyCell.xib */; };
 		83C3E7E21F346188007BE065 /* UCFGoldCouponViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C3E7E01F346188007BE065 /* UCFGoldCouponViewController.m */; };
 		83C3E7E31F346188007BE065 /* UCFGoldCouponViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83C3E7E11F346188007BE065 /* UCFGoldCouponViewController.xib */; };
 		83CD72A51FB4449C007138ED /* UCFDrawGoldModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CD72A41FB4449B007138ED /* UCFDrawGoldModel.m */; };
@@ -2283,6 +2285,9 @@
 		83AB49661F6A772400C4231F /* UCFTotalRevenuePieChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFTotalRevenuePieChartViewController.h; sourceTree = "<group>"; };
 		83AB49671F6A772400C4231F /* UCFTotalRevenuePieChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFTotalRevenuePieChartViewController.m; sourceTree = "<group>"; };
 		83AB49681F6A772400C4231F /* UCFTotalRevenuePieChartViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFTotalRevenuePieChartViewController.xib; sourceTree = "<group>"; };
+		83BC799C21087C8400A591AA /* UCFMicroMoneyCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMicroMoneyCell.h; sourceTree = "<group>"; };
+		83BC799D21087C8400A591AA /* UCFMicroMoneyCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMicroMoneyCell.m; sourceTree = "<group>"; };
+		83BC799E21087C8400A591AA /* UCFMicroMoneyCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFMicroMoneyCell.xib; sourceTree = "<group>"; };
 		83C3E7DF1F346188007BE065 /* UCFGoldCouponViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFGoldCouponViewController.h; sourceTree = "<group>"; };
 		83C3E7E01F346188007BE065 /* UCFGoldCouponViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFGoldCouponViewController.m; sourceTree = "<group>"; };
 		83C3E7E11F346188007BE065 /* UCFGoldCouponViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFGoldCouponViewController.xib; sourceTree = "<group>"; };
@@ -3705,6 +3710,9 @@
 				74694AA81F613FB600C4F935 /* UCFInvestMicroMoneyCell.h */,
 				74694AA91F613FB600C4F935 /* UCFInvestMicroMoneyCell.m */,
 				74694AAA1F613FB600C4F935 /* UCFInvestMicroMoneyCell.xib */,
+				83BC799C21087C8400A591AA /* UCFMicroMoneyCell.h */,
+				83BC799D21087C8400A591AA /* UCFMicroMoneyCell.m */,
+				83BC799E21087C8400A591AA /* UCFMicroMoneyCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -7177,6 +7185,7 @@
 				83CD84311F13A50800227704 /* UCFOrdinaryBidController.xib in Resources */,
 				74A0AF101EC341DD009E5A57 /* ZZCircleProgress.bundle in Resources */,
 				A851F3541F1361D8003DE8B8 /* UCFGoldTransactionDetailViewController.xib in Resources */,
+				83BC79A021087C8500A591AA /* UCFMicroMoneyCell.xib in Resources */,
 				83DAEFBE1F166A3000D7948F /* UCFContractTableCell.xib in Resources */,
 				FBE5A0541AE8BEDD0095B2ED /* UCFMyInvestViewCell.xib in Resources */,
 				74270D571EC5AAE500F9419B /* UCFInvitationRewardCell.xib in Resources */,
@@ -7837,6 +7846,7 @@
 				4AFAA8A71B0D76AB005C9BEC /* UCFSelectPayBackController.m in Sources */,
 				7BA6E4C31AD6731900FE8C37 /* UIImage+MultiFormat.m in Sources */,
 				FBE265DA1B26CAB100240A79 /* UCFMyClaimCtrl.m in Sources */,
+				83BC799F21087C8500A591AA /* UCFMicroMoneyCell.m in Sources */,
 				74877CCD1FB2ABCF00F32428 /* UCFDeliveryingViewController.m in Sources */,
 				E3B26F481CA136F9002E87F4 /* DBColor.m in Sources */,
 				74A2C0CE1F4306A000EDF0FA /* UCFGoldCashViewController.m in Sources */,

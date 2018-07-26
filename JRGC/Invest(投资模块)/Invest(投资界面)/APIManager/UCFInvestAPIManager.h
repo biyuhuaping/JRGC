@@ -12,6 +12,7 @@
 @protocol UCFInvestAPIWithMicroMoneyManagerDelegate <NSObject>
 
 - (void)investApiManager:(UCFInvestAPIManager *)apiManager didSuccessedReturnMicroMoneyResult:(id)result withTag:(NSUInteger)tag;
+- (void)investApiManager:(UCFInvestAPIManager *)apiManager didFailedReturnMicroMoneyResult:(id)result withTag:(NSUInteger)tag;
 
 @end
 
@@ -20,4 +21,5 @@
 
 
 - (void)getMicroMoneyFromNet;
+- (void)getNewMicroMoneyFromNet;
 @end

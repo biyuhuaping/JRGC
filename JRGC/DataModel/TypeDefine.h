@@ -343,6 +343,9 @@
 
 #define P2PACCOUTRECHRAGENEWURL  @"/api/recharge/v2/rechargeNew.json"//***新微金充值接口
 
+
+#define P2PINVESTMODULEURL @"api/prdClaims/v2/aiInvestList.json"//智能出借模块
+
 enum kPostStatus{
     kPostStatusNone=0,
     kPostStatusBeging=1,
@@ -570,6 +573,7 @@ enum kSXTag
     kSXTagAccountSetHsPwdIntoBank,      //***新徽商设置交易密码接口
     kSXTagP2PAccountrechargeNew,        //***新微金充值接口
     kSXTagGetRedBagContent,             //获取红包内容 （仿微信）
+    kSXTagP2PAiInvestModule,            //智能出借模块
 };
 
 typedef enum kSXTag kSXTag;

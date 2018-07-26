@@ -28,6 +28,7 @@ typedef enum : NSUInteger {
 @property (nonatomic, copy) NSString *Id;
 //invitationSite = "<null>";
 @property (nonatomic, strong) NSNumber *isOrder;
+@property (nonatomic, strong) NSNumber *isTransfer;
 @property (nonatomic, strong) NSNumber *maxInvest;
 @property (nonatomic, strong) NSNumber *minInvest;
 @property (nonatomic, copy) NSString *platformSubsidyExpense;
