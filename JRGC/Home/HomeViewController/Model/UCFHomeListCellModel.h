@@ -61,4 +61,5 @@ typedef enum : NSUInteger {
 
 
 + (instancetype)homeListCellWithDict:(NSDictionary *)dict;
+-(id)initWithDictionary:(NSDictionary *)dicJson;
 @end

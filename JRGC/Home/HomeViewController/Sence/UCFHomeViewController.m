@@ -1011,8 +1011,8 @@
 {
 //    __weak typeof(self) weakSelf = self;
     
-//    [self.homeListVC.presenter getDefaultShowListSection:nil];
-//    return;
+    [self.homeListVC.presenter getDefaultShowListSection:nil];
+    return;
     [self.homeListVC.presenter fetchHomeListDataWithCompletionHandler:^(NSError *error, id result) {
         [MBProgressHUD hideOriginAllHUDsForView:self.view animated:YES];//上层交互逻辑
         if ([result isKindOfClass:[NSDictionary class]]) {

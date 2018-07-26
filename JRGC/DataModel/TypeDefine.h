@@ -345,6 +345,7 @@
 #define GETBANERANDGIFTIMAGE @"/api/homePage/v2/bannerAndNoice.json"
 #define GETHOMESECTIONS      @"/api/homePage/v2/indexDefault.json"   //首页默认接口
 #define GETHOMENEWUSERSECTIONS      @"/api/homePage/v2/noviceModule.json"   //新手磨具爱
+#define GETHOMEOTHERSECTIONS      @"api/homePage/v2/aiInvestModule.json"   //首页别的模块
 enum kPostStatus{
     kPostStatusNone=0,
     kPostStatusBeging=1,
@@ -575,6 +576,7 @@ enum kSXTag
     kSXTagGetBannerAndGift,              //banner和公告
     kSXTagGetHomeShowSections,          //首页默认接口
     kSXTagGetHomeNewUserSection,         //新手模块
+    kSXTagGetHomeOtherSection
 };
 
 typedef enum kSXTag kSXTag;

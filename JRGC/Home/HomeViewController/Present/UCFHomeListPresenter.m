@@ -22,7 +22,7 @@
 @property (strong, nonatomic) NSMutableArray *homeIconList;
 @property (assign, nonatomic) BOOL authorization;
 @property (strong, nonatomic) NSDictionary  *showSectionsDict;
-
+@property (assign, nonatomic) NSInteger     currentRequestIndex;
 //@property (strong, nonatomic) UCFHomeListGroupPresenter *groupTransferPresenter;
 @end
 
@@ -134,13 +134,13 @@
         else if ([model.type isEqualToString:@"6"]) {
             model.moedelType = UCFHomeListCellModelTypeGoldFixed;
         }
-        else if ([group.type isEqualToString:@"13"]) {
+        else if ([group.type isEqualToString:@"0"]) {
             model.moedelType = UCFHomeListCellModelTypeNewUser;
 
         }
-        else if ([model.type isEqualToString:@"0"]) {
-            model.moedelType = UCFHomeListCellModelTypeReserved;
-        }
+//        else if ([model.type isEqualToString:@"0"]) {
+//            model.moedelType = UCFHomeListCellModelTypeReserved;
+//        }
         else {
             model.moedelType = UCFHomeListCellModelTypeDefault;
         }
@@ -217,7 +217,10 @@
     NSMutableDictionary *dic = [data objectFromJSONString];
     if (tag.intValue == kSXTagGetHomeShowSections) {
         self.showSectionsDict = dic;
-        [self getSectionDeatilData];
+        if ([self.showSectionsDict[@"data"][@"resultData"] count] > 0) {
+            _currentRequestIndex = 0;
+            [self getSectionDeatilData:_currentRequestIndex];
+        }
     } else if (tag.intValue == kSXTagGetHomeNewUserSection) {
         NSDictionary  *dataDict = dic[@"data"];
         UCFHomeListGroup * tempG = [[UCFHomeListGroup alloc] init];
@@ -234,36 +237,40 @@
                     [tmp addObject:attach];
                 }
                 tempG.attach = tmp;
-                
                 NSMutableArray *prdArr = [NSMutableArray arrayWithCapacity:1];
-                
-                UCFHomeListCellModel *model = [UCFHomeListCellModel homeListCellWithDict:dataDict[@"prdClaim"]];
+                UCFHomeListCellModel *model = [[UCFHomeListCellModel alloc] initWithDictionary:dataDict[@"prdClaim"]];
                 [prdArr addObject:model];
-                
                 tempG.prdlist = prdArr;
                 break;
             }
         }
         
-        NSMutableArray *temp = [[NSMutableArray alloc] init];
         UCFHomeListGroupPresenter *groupPresenter = [self homeListGroupPresenterWithGroup:tempG];
-        [temp addObject:groupPresenter];
-        self.homeListCells = temp;
-        
+        for (UCFHomeListGroupPresenter *tmpgroupPresenter in self.homeListCells) {
+            if (groupPresenter.type == 0) {
+                [self.homeListCells removeObject:tmpgroupPresenter];
+                break;
+            }
+        }
+        [self.homeListCells addObject:groupPresenter];
         if ([self.view respondsToSelector:@selector(homeListViewPresenter:didRefreshDataWithResult:error:)]) {
             [self.view homeListViewPresenter:self didRefreshDataWithResult:result error:nil];
         }
+        _currentRequestIndex++;
+        [self getSectionDeatilData:_currentRequestIndex];
 
     }
-    else if ([result isKindOfClass:[NSString class]]) {
-        
+    else if (tag.intValue == kSXTagGetHomeOtherSection) {
+        _currentRequestIndex++;
+        [self getSectionDeatilData:_currentRequestIndex];
     }
 
 }
-- (void)getSectionDeatilData
+- (void)getSectionDeatilData:(NSInteger)index
 {
     NSArray *dataArr = self.showSectionsDict[@"data"][@"resultData"];
-    for (NSDictionary *sectionDict in dataArr) {
+    if (index <= dataArr.count - 1) {
+        NSDictionary *sectionDict = dataArr[index];
         if ([sectionDict[@"type"] intValue] == 0) { //新手专区
             NSDictionary *parmDict = nil;
             NSString *userId = [[NSUserDefaults standardUserDefaults] objectForKey:UUID];
@@ -272,9 +279,13 @@
             }
             [[NetworkModule sharedNetworkModule] newPostReq:parmDict tag:kSXTagGetHomeNewUserSection owner:self signature:NO Type:SelectAccoutDefault];
         } else {
-            
+            NSDictionary *parmDict = nil;
+            parmDict = @{@"type":[NSString stringWithFormat:@"%@",sectionDict[@"type"]]};
+            [[NetworkModule sharedNetworkModule] newPostReq:parmDict tag:kSXTagGetHomeOtherSection owner:self signature:NO Type:SelectAccoutDefault];
         }
     }
+    
+
 }
 - (void)errorPost:(NSError *)err tag:(NSNumber *)tag
 {

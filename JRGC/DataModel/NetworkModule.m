@@ -323,11 +323,9 @@ static NetworkModule *gInstance = NULL;
     if (req.postStatus == kPostStatusBeging) {
         return;
     }
-    
     if (req == nil) {
         req = [[PostRequest alloc] init];
     }
-  
     req.sxTag = tag;
     req.postStatus = kPostStatusNone;
     [queue setObject:req forKey:[NSNumber numberWithInt:tag]];
@@ -1321,6 +1319,9 @@ static NetworkModule *gInstance = NULL;
             break;
         case kSXTagGetHomeNewUserSection:
             parameter = [NEW_SERVER_IP stringByAppendingString:GETHOMENEWUSERSECTIONS];
+            break;
+        case kSXTagGetHomeOtherSection:
+            parameter = [NEW_SERVER_IP stringByAppendingString:GETHOMEOTHERSECTIONS];
             break;
             
     }
