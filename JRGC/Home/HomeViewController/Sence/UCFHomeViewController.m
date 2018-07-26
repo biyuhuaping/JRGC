@@ -361,11 +361,8 @@
         case 2:
             self.accoutType = SelectAccoutTypeHoner;
             break;
-        case 3://黄金定期
-            self.accoutType = SelectAccoutTypeGold;
-            break;
-        case 6://黄金活期
-            self.accoutType = SelectAccoutTypeGold;
+        case 3://智存宝
+            self.accoutType = SelectAccoutTypeP2P;
             break;
         case 14:
             self.accoutType = SelectAccoutTypeP2P;
@@ -1009,19 +1006,9 @@
 #pragma mark - 请求数据
 - (void)fetchData
 {
-//    __weak typeof(self) weakSelf = self;
     
     [self.homeListVC.presenter getDefaultShowListSection:nil];
-    return;
-    [self.homeListVC.presenter fetchHomeListDataWithCompletionHandler:^(NSError *error, id result) {
-        [MBProgressHUD hideOriginAllHUDsForView:self.view animated:YES];//上层交互逻辑
-        if ([result isKindOfClass:[NSDictionary class]]) {
 
-        }
-        else if ([result isKindOfClass:[NSString class]]) {
-            [AuxiliaryFunc showToastMessage:result withView:self.view];
-        }
-    }];
 }
 
 #pragma mark - 刷新公告

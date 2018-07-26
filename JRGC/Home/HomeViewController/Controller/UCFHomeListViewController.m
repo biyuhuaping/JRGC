@@ -76,7 +76,7 @@
 {
     UCFHomeListGroupPresenter *groupPresenter = [self.presenter.allDatas objectAtIndex:indexPath.section];
     UCFHomeListCellPresenter *cellPresenter = [groupPresenter.group.prdlist objectAtIndex:indexPath.row];
-    if (cellPresenter.modelType == UCFHomeListCellModelTypeDefault) {
+    if (cellPresenter.modelType == UCFHomeListCellModelTypeDefault) { //普通类型
         static NSString *cellId = @"homeListCell";
         UCFHomeListCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
         if (nil == cell) {
@@ -88,7 +88,7 @@
         cell.indexPath = indexPath;
         return cell;
     }
-    else if (cellPresenter.modelType == UCFHomeListCellModelTypeDebtsTransfer) {
+    else if (cellPresenter.modelType == UCFHomeListCellModelTypeDebtsTransfer) { //债转
         static NSString *cellId = @"homeListCell";
         UCFHomeListCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
         if (nil == cell) {
@@ -100,7 +100,7 @@
         cell.indexPath = indexPath;
         return cell;
     }
-    else if (cellPresenter.modelType == UCFHomeListCellModelTypeNewUser) {
+    else if (cellPresenter.modelType == UCFHomeListCellModelTypeNewUser) { //新手标类型
         static NSString *cellId = @"newusercell";
         UCFNewUserCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
         if (nil == cell) {
@@ -112,7 +112,7 @@
         cell.indexPath = indexPath;
         return cell;
     }
-    else if (cellPresenter.modelType == UCFHomeListCellModelTypeReserved) {
+    else if (cellPresenter.modelType == UCFHomeListCellModelTypeReserved || cellPresenter.modelType == UCFHomeListCellModelTypeAI|| cellPresenter.modelType == UCFHomeListCellModelTypeBatch) { //预约宝
         static NSString *cellId = @"homeListInvestCell";
         UCFHomeInvestCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
         if (nil == cell) {
@@ -124,7 +124,7 @@
         cell.indexPath = indexPath;
         return cell;
     }
-    else if (cellPresenter.modelType == UCFHomeListCellModelTypeGoldFixed) {
+    else if (cellPresenter.modelType == UCFHomeListCellModelTypeGoldFixed) { //黄金定期
         static NSString *cellId = @"goldflexible";
         UCFGoldFlexibleCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
         if (nil == cell) {
@@ -234,9 +234,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (!self.presenter.canReservedClicked) {
-        return;
-    }
+//    if (!self.presenter.canReservedClicked) {
+//        return;
+//    }
     UCFHomeListGroupPresenter *groupPresenter = [self.presenter.allDatas objectAtIndex:indexPath.section];
     UCFHomeListCellPresenter *presenter = [groupPresenter.group.prdlist objectAtIndex:indexPath.row];
     NSString *userId = [UserInfoSingle sharedManager].userId;
@@ -247,16 +247,16 @@
         [app.tabBarController presentViewController:loginNaviController animated:YES completion:nil];
         return;
     }
-    if ([presenter.type intValue] == 6) {
-        if ([self.delegate respondsToSelector:@selector(homeList:tableView:didClickedGoldIncreaseWithModel:)]) {
-            [self.delegate homeList:self tableView:self.tableView didClickedGoldIncreaseWithModel:presenter.item];
-        }
-    }
-    else {
+//    if ([presenter.type intValue] == 6) {
+//        if ([self.delegate respondsToSelector:@selector(homeList:tableView:didClickedGoldIncreaseWithModel:)]) {
+//            [self.delegate homeList:self tableView:self.tableView didClickedGoldIncreaseWithModel:presenter.item];
+//        }
+//    }
+//    else {
         if ([self.delegate respondsToSelector:@selector(homeList:tableView:didClickedWithModel:withType:)]) {
             [self.delegate homeList:self tableView:self.tableView didClickedWithModel:presenter.item withType:UCFHomeListTypeDetail];
         }
-    }
+//    }
 }
 
 #pragma mark - presenter的代理方法

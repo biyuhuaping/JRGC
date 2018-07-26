@@ -16,7 +16,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *reserveButton;
 @property (weak, nonatomic) IBOutlet UILabel *minLabel;
 @property (weak, nonatomic) IBOutlet UILabel *limitLabel;
-@property (weak, nonatomic) IBOutlet NZLabel *addedTransLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *leftCetnerSpace;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *rightCenterSpace;
 
@@ -24,6 +23,8 @@
 @property (weak, nonatomic) IBOutlet UIView *downSegLine;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *upLineLeftSpace;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *downLineLeftSpace;
+@property (weak, nonatomic) IBOutlet UILabel *productNameLab;
+@property (weak, nonatomic) IBOutlet UILabel *repayStyle;
 
 @end
 
@@ -49,7 +50,7 @@
     }
     
     self.limitLabel.text = [NSString stringWithFormat:@"%@", presenter.appointPeriod];
-    self.addedTransLabel.text = [NSString stringWithFormat:@"累计交易%@", presenter.completeLoan];
+//    self.addedTransLabel.text = [NSString stringWithFormat:@"累计交易%@", presenter.completeLoan];
 }
 
 - (IBAction)reserveForSomeone:(UIButton *)sender {
@@ -76,7 +77,7 @@
     }
     
     self.limitLabel.text = [NSString stringWithFormat:@"%@", microModel.appointPeriod];
-    self.addedTransLabel.text = [NSString stringWithFormat:@"累计交易%@亿元", microModel.totleBookAmt];
+//    self.addedTransLabel.text = [NSString stringWithFormat:@"累计交易%@亿元", microModel.totleBookAmt];
 }
 
 - (void)layoutSubviews
@@ -87,7 +88,7 @@
     }
     [self.anurateLabel setFont:[UIFont boldSystemFontOfSize:15] range:NSMakeRange(self.anurateLabel.text.length - 1, 1)];
     
-    [self.addedTransLabel setFontColor:UIColorWithRGB(0x555555) string:@"累计交易"];
+//    [self.addedTransLabel setFontColor:UIColorWithRGB(0x555555) string:@"累计交易"];
 }
 
 - (void)setIndexPath:(NSIndexPath *)indexPath

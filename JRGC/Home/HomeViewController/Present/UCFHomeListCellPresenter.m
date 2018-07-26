@@ -165,8 +165,8 @@
     else if (self.item.moedelType == UCFHomeListCellModelTypeGoldFixed) {
         return 143.0;
     }
-    else if (self.item.moedelType == UCFHomeListCellModelTypeReserved) {
-        return 150;
+    else if (self.item.moedelType == UCFHomeListCellModelTypeReserved || self.item.moedelType == UCFHomeListCellModelTypeAI || self.item.moedelType == UCFHomeListCellModelTypeBatch) {
+        return 89;
     }
     else if (self.item.moedelType == UCFHomeListCellModelTypeNewUser) {
         return 130.0;
