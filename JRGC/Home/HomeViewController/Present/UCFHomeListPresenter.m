@@ -131,11 +131,8 @@
         
         if ([group.type isEqualToString:@"0"]) {
             model.moedelType = UCFHomeListCellModelTypeNewUser;
-            [temp addObject:model];
-            break;
         } else if ([group.type isEqualToString:@"19"]) {
             model.moedelType = UCFHomeListCellModelTypeDebtsTransfer;
-            [temp addObject:model];
         } else {
             if ([model.type isEqualToString:@"0"]) { //预约
                 model.moedelType = UCFHomeListCellModelTypeReserved;
@@ -146,8 +143,9 @@
             } else if ([model.type isEqualToString:@"14"]) { //批量
                 model.moedelType = UCFHomeListCellModelTypeBatch;
             }
-            [temp addObject:model];
         }
+        UCFHomeListCellPresenter *cellPresenter = [UCFHomeListCellPresenter presenterWithItem:model];
+        [temp addObject:cellPresenter];
     }
     group.prdlist = temp;
     return [UCFHomeListGroupPresenter presenterWithGroup:group];
@@ -207,6 +205,9 @@
 - (void)getDefaultShowListSection:(NSDictionary *)parameter
 {
     [[NetworkModule sharedNetworkModule] newPostReq:parameter tag:kSXTagGetHomeShowSections owner:self signature:NO Type:SelectAccoutDefault];
+    if ([[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
+        [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID]} tag:kSXTagGetUserAllState owner:self signature:YES Type:SelectAccoutDefault];
+    }
 }
 
 - (void)beginPost:(kSXTag)tag
@@ -309,6 +310,19 @@
         }
         _currentRequestIndex++;
         [self performSelector:@selector(getSectionDeatilData) withObject:nil afterDelay:0];
+    } else if (tag.intValue == kSXTagGetUserAllState) {
+        
+        NSDictionary *result = dic[@"data"][@"userSatus"];
+        
+        [UserInfoSingle sharedManager].companyAgent = [[result objectSafeForKey:@"company"] boolValue];
+        [UserInfoSingle sharedManager].isRisk = [[result objectSafeForKey:@"isRisk"] boolValue];
+        [UserInfoSingle sharedManager].isAutoBid = [[result objectSafeForKey:@"isAutoBid"] boolValue];
+        [UserInfoSingle sharedManager].goldAuthorization = [[result objectSafeForKey:@"nmGoldAuthorization"] boolValue];
+        [UserInfoSingle sharedManager].openStatus = [[result objectSafeForKey:@"openStatus"] integerValue];
+        [UserInfoSingle sharedManager].enjoyOpenStatus = [[result objectSafeForKey:@"zxOpenStatus"] integerValue];
+        [UserInfoSingle sharedManager].zxAuthorization = [[result objectSafeForKey:@"zxAuthorization"] boolValue];
+        
+//        [UserInfoSingle sharedManager].p2pAuthorization = [[result objectSafeForKey:@"p2pAuthorization"] boolValue];
     }
 
 }

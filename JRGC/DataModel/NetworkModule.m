@@ -1323,6 +1323,9 @@ static NetworkModule *gInstance = NULL;
         case kSXTagGetHomeOtherSection:
             parameter = [NEW_SERVER_IP stringByAppendingString:GETHOMEOTHERSECTIONS];
             break;
+        case kSXTagGetUserAllState:
+            parameter = [NEW_SERVER_IP stringByAppendingString:GETHOMEUSERSTATE];
+            break;
             
     }
     //给原有参数字典添加公共参数

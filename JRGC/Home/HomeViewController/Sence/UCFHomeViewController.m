@@ -370,7 +370,7 @@
     }
     NSString *noPermissionTitleStr = self.accoutType == SelectAccoutTypeP2P ? @"目前标的详情只对出借人开放":@"目前标的详情只对认购人开放";
     if (type == UCFHomeListTypeDetail) {
-        if (model.moedelType == UCFHomeListCellModelTypeDefault || (model.moedelType == UCFHomeListCellModelTypeNewUser && ![model.type isEqualToString:@"0"])) {
+        if (model.moedelType == UCFHomeListCellModelTypeBatch || model.moedelType == UCFHomeListCellModelTypeDefault || (model.moedelType == UCFHomeListCellModelTypeNewUser && ([model.type isEqualToString:@"1"] || [model.type isEqualToString:@"14"]))) {
         
             if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
                 //如果未登录，展示登录页面
@@ -478,7 +478,7 @@
                }
             }
           }
-        else if (model.moedelType == UCFHomeListCellModelTypeReserved || (model.moedelType == UCFHomeListCellModelTypeNewUser && [model.type isEqualToString:@"0"])) {
+        else if (model.moedelType == UCFHomeListCellModelTypeAI || model.moedelType == UCFHomeListCellModelTypeReserved || (model.moedelType == UCFHomeListCellModelTypeNewUser && ([model.type isEqualToString:@"0"] || [model.type isEqualToString:@"3"]))) {
             self.accoutType = SelectAccoutTypeP2P;
             BOOL b = [self checkUserCanInvestIsDetail:YES type:self.accoutType];
             if (!b) {
@@ -503,7 +503,7 @@
             if (model.moedelType == UCFHomeListCellModelTypeNewUser) {
                 facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@", NEWUSER_PRODUCTS_URL, model.Id];
             }
-            else if (model.moedelType == UCFHomeListCellModelTypeReserved) {
+            else if (model.moedelType == UCFHomeListCellModelTypeReserved || model.moedelType == UCFHomeListCellModelTypeAI) {
                 facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@", PRERESERVE_PRODUCTS_URL, model.Id];
             }
             [self.navigationController pushViewController:facReservedWeb animated:YES];
@@ -563,7 +563,7 @@
         }
     }
     else if (type == UCFHomeListTypeInvest) {
-        if (model.moedelType == UCFHomeListCellModelTypeDefault  || (model.moedelType == UCFHomeListCellModelTypeNewUser && ![model.type isEqualToString:@"0"])) {
+        if (model.moedelType == UCFHomeListCellModelTypeDefault  || (model.moedelType == UCFHomeListCellModelTypeNewUser && ([model.type isEqualToString:@"1"] || [model.type isEqualToString:@"14"]))) {
             if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
                 //如果未登录，展示登录页面
                 [self showLoginView];
@@ -617,7 +617,7 @@
             }
             
         }
-        else if (model.moedelType == UCFHomeListCellModelTypeReserved || (model.moedelType == UCFHomeListCellModelTypeNewUser && [model.type isEqualToString:@"0"])) {
+        else if (model.moedelType == UCFHomeListCellModelTypeAI || model.moedelType == UCFHomeListCellModelTypeReserved || (model.moedelType == UCFHomeListCellModelTypeNewUser && ([model.type isEqualToString:@"0"] || [model.type isEqualToString:@"3"]))) {
             self.accoutType = SelectAccoutTypeP2P;
             BOOL b = [self checkUserCanInvestIsDetail:NO type:self.accoutType];
             if (!b) {
@@ -642,7 +642,7 @@
             if (model.moedelType == UCFHomeListCellModelTypeNewUser) {
                 facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@", NEWUSER_APPLY_URL, model.Id];
             }
-            else if (model.moedelType == UCFHomeListCellModelTypeReserved) {
+            else if (model.moedelType == UCFHomeListCellModelTypeReserved || model.moedelType == UCFHomeListCellModelTypeAI) {
                 facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@", PRERESERVE_APPLY_URL, model.Id];
             }
             [self.navigationController pushViewController:facReservedWeb animated:YES];

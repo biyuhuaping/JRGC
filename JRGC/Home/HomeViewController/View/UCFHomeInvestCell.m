@@ -42,15 +42,36 @@
 - (void)setPresenter:(UCFHomeListCellPresenter *)presenter
 { 
     _presenter = presenter;
-    if (presenter.platformSubsidyExpense.length > 0) {
+    _productNameLab.text = presenter.proTitle;
+    _repayStyle.text = presenter.repayModeText;
+    if ([presenter.platformSubsidyExpense doubleValue] > 0.01) {
         self.anurateLabel.text = [NSString stringWithFormat:@"%@~%@%%",presenter.annualRate, presenter.platformSubsidyExpense];
     }
     else {
         self.anurateLabel.text = [NSString stringWithFormat:@"%@",presenter.annualRate];
     }
-    
-    self.limitLabel.text = [NSString stringWithFormat:@"%@", presenter.appointPeriod];
-//    self.addedTransLabel.text = [NSString stringWithFormat:@"累计交易%@", presenter.completeLoan];
+    self.limitLabel.text = [NSString stringWithFormat:@"%@", presenter.repayPeriodtext];
+    if (presenter.status == 2) {
+        NSString *showStr = @"立即预约";
+        if (presenter.modelType == UCFHomeListCellModelTypeBatch) {
+            showStr = @"一键出借";
+        } else if (presenter.modelType == UCFHomeListCellModelTypeAI) {
+            showStr = @"立即出借";
+        } else if (presenter.modelType == UCFHomeListCellModelTypeReserved) {
+            showStr = @"立即预约";
+        }
+        [_reserveButton setTitle:showStr forState:UIControlStateNormal];
+    } else {
+        NSString *showStr = @"已售罄";
+        if (presenter.modelType == UCFHomeListCellModelTypeBatch) {
+            showStr = @"已售罄";
+        } else if (presenter.modelType == UCFHomeListCellModelTypeAI) {
+            showStr = @"已售罄";
+        } else if (presenter.modelType == UCFHomeListCellModelTypeReserved) {
+            showStr = @"预约已满";
+        }
+        [_reserveButton setTitle:showStr forState:UIControlStateNormal];
+    }
 }
 
 - (IBAction)reserveForSomeone:(UIButton *)sender {
