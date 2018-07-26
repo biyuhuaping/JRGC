@@ -61,7 +61,6 @@
 @property (strong, nonatomic)BJGridItem *dragBtn;
 @property (strong,nonatomic) NSString *intoVCStr;
 
-//@property (strong, nonatomic)UIDocumentInteractionController *documentController;
 @end
 
 @implementation UCFHomeViewController
@@ -77,18 +76,8 @@
 #pragma mark - 系统方法
 - (void)viewWillAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
-
-//    NSArray *viewS = [self.navigationController viewControllers];
-//    if (viewS.count >= 2) {
-//      UCFBaseViewController *viewC =  [viewS objectAtIndex:1];
-//        if ([viewC isKindOfClass:[UCFWebViewJavascriptBridgeController class]]) {
-//           ((UCFWebViewJavascriptBridgeController *) viewC).isHideNativeNav
-//        }
-//    }
-    
+    [super viewWillAppear:animated];    
     if ([self.intoVCStr isEqualToString:@"ProjectDetailVC"] || [self.desVCStr isEqualToString:@"bannar_hide_return"]) {
-//        self.desVCStr = nil;
         [self.navigationController setNavigationBarHidden:YES animated:NO];
     }else{
         [self.navigationController setNavigationBarHidden:YES animated:YES];
@@ -140,7 +129,7 @@
     [self addUI];
 #pragma mark - 请求数据
     [self fetchData];
-    [self addDragBtn];
+//    [self addDragBtn];
 }
 
 
@@ -372,11 +361,8 @@
         case 2:
             self.accoutType = SelectAccoutTypeHoner;
             break;
-        case 3://黄金定期
-            self.accoutType = SelectAccoutTypeGold;
-            break;
-        case 6://黄金活期
-            self.accoutType = SelectAccoutTypeGold;
+        case 3://智存宝
+            self.accoutType = SelectAccoutTypeP2P;
             break;
         case 14:
             self.accoutType = SelectAccoutTypeP2P;
@@ -384,7 +370,7 @@
     }
     NSString *noPermissionTitleStr = self.accoutType == SelectAccoutTypeP2P ? @"目前标的详情只对出借人开放":@"目前标的详情只对认购人开放";
     if (type == UCFHomeListTypeDetail) {
-        if (model.moedelType == UCFHomeListCellModelTypeDefault || (model.moedelType == UCFHomeListCellModelTypeNewUser && ![model.type isEqualToString:@"0"])) {
+        if (model.moedelType == UCFHomeListCellModelTypeBatch || model.moedelType == UCFHomeListCellModelTypeDefault || (model.moedelType == UCFHomeListCellModelTypeNewUser && ([model.type isEqualToString:@"1"] || [model.type isEqualToString:@"14"]))) {
         
             if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
                 //如果未登录，展示登录页面
@@ -492,7 +478,7 @@
                }
             }
           }
-        else if (model.moedelType == UCFHomeListCellModelTypeReserved || (model.moedelType == UCFHomeListCellModelTypeNewUser && [model.type isEqualToString:@"0"])) {
+        else if (model.moedelType == UCFHomeListCellModelTypeAI || model.moedelType == UCFHomeListCellModelTypeReserved || (model.moedelType == UCFHomeListCellModelTypeNewUser && ([model.type isEqualToString:@"0"] || [model.type isEqualToString:@"3"]))) {
             self.accoutType = SelectAccoutTypeP2P;
             BOOL b = [self checkUserCanInvestIsDetail:YES type:self.accoutType];
             if (!b) {
@@ -517,7 +503,7 @@
             if (model.moedelType == UCFHomeListCellModelTypeNewUser) {
                 facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@", NEWUSER_PRODUCTS_URL, model.Id];
             }
-            else if (model.moedelType == UCFHomeListCellModelTypeReserved) {
+            else if (model.moedelType == UCFHomeListCellModelTypeReserved || model.moedelType == UCFHomeListCellModelTypeAI) {
                 facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@", PRERESERVE_PRODUCTS_URL, model.Id];
             }
             [self.navigationController pushViewController:facReservedWeb animated:YES];
@@ -577,7 +563,7 @@
         }
     }
     else if (type == UCFHomeListTypeInvest) {
-        if (model.moedelType == UCFHomeListCellModelTypeDefault  || (model.moedelType == UCFHomeListCellModelTypeNewUser && ![model.type isEqualToString:@"0"])) {
+        if (model.moedelType == UCFHomeListCellModelTypeDefault  || (model.moedelType == UCFHomeListCellModelTypeNewUser && ([model.type isEqualToString:@"1"] || [model.type isEqualToString:@"14"]))) {
             if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
                 //如果未登录，展示登录页面
                 [self showLoginView];
@@ -631,7 +617,7 @@
             }
             
         }
-        else if (model.moedelType == UCFHomeListCellModelTypeReserved || (model.moedelType == UCFHomeListCellModelTypeNewUser && [model.type isEqualToString:@"0"])) {
+        else if (model.moedelType == UCFHomeListCellModelTypeAI || model.moedelType == UCFHomeListCellModelTypeReserved || (model.moedelType == UCFHomeListCellModelTypeNewUser && ([model.type isEqualToString:@"0"] || [model.type isEqualToString:@"3"]))) {
             self.accoutType = SelectAccoutTypeP2P;
             BOOL b = [self checkUserCanInvestIsDetail:NO type:self.accoutType];
             if (!b) {
@@ -656,7 +642,7 @@
             if (model.moedelType == UCFHomeListCellModelTypeNewUser) {
                 facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@", NEWUSER_APPLY_URL, model.Id];
             }
-            else if (model.moedelType == UCFHomeListCellModelTypeReserved) {
+            else if (model.moedelType == UCFHomeListCellModelTypeReserved || model.moedelType == UCFHomeListCellModelTypeAI) {
                 facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@", PRERESERVE_APPLY_URL, model.Id];
             }
             [self.navigationController pushViewController:facReservedWeb animated:YES];
@@ -1001,8 +987,7 @@
 - (void)setDefaultState:(NSNotification *)noty
 {
     __weak typeof(self) weakSelf = self;
-//    [self.userInfoVC setDefaultState];
-//    [self addUI];
+
     NSString *userId = [UserInfoSingle sharedManager].userId;
     if (userId) {
         self.navView.giftButton.hidden = NO;
@@ -1021,65 +1006,14 @@
 #pragma mark - 请求数据
 - (void)fetchData
 {
-    __weak typeof(self) weakSelf = self;
     
-//    [self.userInfoVC.presenter fetchUserInfoOneDataWithCompletionHandler:^(NSError *error, id result) {
-//    }];
-//    
-//    [self.userInfoVC.presenter fetchUserInfoTwoDataWithCompletionHandler:^(NSError *error, id result) {
-//    }];
+    [self.homeListVC.presenter getDefaultShowListSection:nil];
 
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self.homeListVC.presenter fetchHomeIconListDataWithCompletionHandler:^(NSError *error, id result) {
-            CGFloat userInfoViewHeight = [UCFCycleImageViewController viewHeight];
-            NSArray *homeIcons = [result objectSafeArrayForKey:@"productMap"];
-            if (homeIcons.count > 0) {
-                weakSelf.cycleImageVC.view.frame = CGRectMake(0, 0, ScreenWidth, userInfoViewHeight + 80);
-//                weakSelf.cycleImageVC.iconBackViewHeight.constant = 80;
-            }
-            else {
-                weakSelf.cycleImageVC.view.frame = CGRectMake(0, 0, ScreenWidth, userInfoViewHeight);
-//                weakSelf.cycleImageVC.iconBackViewHeight.constant = 0;
-            }
-            weakSelf.homeListVC.tableView.tableHeaderView = weakSelf.cycleImageVC.view;
-            //请求成功
-            UCFNoticeModel *notice = [result objectForKey:@"siteNotice"];
-            if (notice.siteNotice.length > 0) {
-                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isShowNotice"];
-                [[NSUserDefaults standardUserDefaults] synchronize];
-                
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    
-                    [weakSelf refreshNoticeWithShow:YES];
-                    weakSelf.cycleImageVC.noticeView.noticeModel = notice;
-                    weakSelf.cycleImageVC.noticeStr = notice.siteNotice;
-                });
-            }
-            else{
-                [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isShowNotice"];
-                [[NSUserDefaults standardUserDefaults] synchronize];
-                [weakSelf refreshNoticeWithShow:NO];
-            }
-        }];
-    });
-    
-
-    
-    [self.homeListVC.presenter fetchHomeListDataWithCompletionHandler:^(NSError *error, id result) {
-        [MBProgressHUD hideOriginAllHUDsForView:weakSelf.view animated:YES];//上层交互逻辑
-        if ([result isKindOfClass:[NSDictionary class]]) {
-            
-        }
-        else if ([result isKindOfClass:[NSString class]]) {
-            [AuxiliaryFunc showToastMessage:result withView:weakSelf.view];
-        }
-    }];
 }
 
 #pragma mark - 刷新公告
 - (void)refreshNoticeWithShow:(BOOL)show
 {
-//    BOOL isShowNotice = [[NSUserDefaults standardUserDefaults] boolForKey:@"isShowNotice"];
     CGFloat userInfoViewHeight = self.cycleImageVC.view.height;
     if (show) {
         self.cycleImageVC.view.frame = CGRectMake(0, 0, ScreenWidth, userInfoViewHeight+45);

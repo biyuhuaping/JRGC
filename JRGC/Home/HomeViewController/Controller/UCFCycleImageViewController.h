@@ -17,9 +17,10 @@
 
 - (void)proInvestAlert:(UIAlertView *)alertView didClickedWithTag:(NSInteger)tag withIndex:(NSInteger)index;
 
+- (void)refreshNoticeWithShow:(BOOL)isShow;
 @end
 
-@interface UCFCycleImageViewController : UIViewController
+@interface UCFCycleImageViewController : UIViewController<NetworkModuleDelegate>
 @property (weak, nonatomic) id<UCFCycleImageViewControllerDelegate> delegate;
 
 @property (copy, nonatomic) NSString *noticeStr;

@@ -36,7 +36,6 @@ static NSString *cellId = @"iconCell";
 #pragma mark - 系统方法
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    self.navigationController.navigationBar.hidden = YES;
     
     self.view.backgroundColor = UIColorWithRGB(0xebebee);
     self.downView.backgroundColor = UIColorWithRGB(0xebebee);
@@ -192,32 +191,52 @@ static NSString *cellId = @"iconCell";
 #pragma mark - 获取正式环境的banner图
 - (void)getNormalBannerData
 {
-    __weak typeof(self) weakSelf = self;
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-        [request setURL:[NSURL URLWithString:CMS_BANNER_UNLOGIN]];
-        [request setHTTPMethod:@"GET"];
-        AppDelegate * app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-        if (EnvironmentConfiguration == 2 || (app.isSubmitAppStoreTestTime)) {
-            [request setValue:@"1" forHTTPHeaderField:@"jrgc-umark"];
+    [[NetworkModule sharedNetworkModule] newPostReq:nil tag:kSXTagGetBannerAndGift owner:self signature:NO Type:SelectAccoutDefault];
+}
+
+- (void)beginPost:(kSXTag)tag
+{
+    
+}
+- (void)endPost:(id)result tag:(NSNumber *)tag
+{
+    NSString *data = (NSString *)result;
+    NSMutableDictionary *dic = [data objectFromJSONString];
+    if (tag.intValue == kSXTagGetBannerAndGift) {
+        NSDictionary *modelDic = dic[@"data"];
+        NSMutableArray *temp = [NSMutableArray new];
+        for (NSDictionary *dict in modelDic[@"banner"]) {
+            UCFCycleModel *model = [UCFCycleModel getCycleModelByDataDict:dict];
+            [temp addObject:model];
         }
-        NSHTTPURLResponse *urlResponse = nil;
-        NSError *error = nil;
-        NSData *recervedData = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&error];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (!recervedData) {
-                return ;
-            }
-            NSDictionary *modelDic = [NSJSONSerialization JSONObjectWithData:recervedData options:NSJSONReadingMutableContainers error:nil];
-            NSMutableArray *temp = [NSMutableArray new];
-            for (NSDictionary *dict in modelDic[@"banner"]) {
-                UCFCycleModel *model = [UCFCycleModel getCycleModelByDataDict:dict];
-                [temp addObject:model];
-            }
-            weakSelf.cycleImageView.imagesGroup = temp;
-            [weakSelf.cycleImageView refreshImage];
-        });
-    });
+        self.cycleImageView.imagesGroup = temp;
+        [self.cycleImageView refreshImage];
+        
+        UCFNoticeModel *model = [[UCFNoticeModel alloc] init];
+        model.noticeUrl = [Common isNullValue:modelDic[@"siteNoticeMap"][@"noticeUrl"]] ? @"" : modelDic[@"siteNoticeMap"][@"noticeUrl"];
+        model.siteNotice = [Common isNullValue:modelDic[@"siteNoticeMap"][@"siteNotice"]] ? @"" : modelDic[@"siteNoticeMap"][@"siteNotice"];
+
+        
+        self.noticeView.noticeModel = model;
+        self.noticeView.noticeLabell.text = model.siteNotice;
+        if (model.siteNotice.length > 0) {
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isShowNotice"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self.delegate refreshNoticeWithShow:YES];
+            });
+
+        } else {
+            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isShowNotice"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            [self.delegate refreshNoticeWithShow:NO];
+        }
+        
+    }
+}
+- (void)errorPost:(NSError *)err tag:(NSNumber *)tag
+{
+    
 }
 
 - (void)setNoticeStr:(NSString *)noticeStr

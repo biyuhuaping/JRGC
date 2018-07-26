@@ -38,9 +38,9 @@
 
 - (NSString *)annualRate
 {
-    if ([self.item.type isEqualToString:@"3"]) {
-        return self.item.annualRate ? [NSString stringWithFormat:@"%@克/100克", self.item.annualRate] : @"0.000克/100克" ;
-    }
+//    if ([self.item.type isEqualToString:@"3"]) {
+//        return self.item.annualRate ? [NSString stringWithFormat:@"%@克/100克", self.item.annualRate] : @"0.000克/100克" ;
+//    }
     return self.item.annualRate ? [NSString stringWithFormat:@"%@%%",self.item.annualRate] : @"0.0%";
 }
 
@@ -165,8 +165,8 @@
     else if (self.item.moedelType == UCFHomeListCellModelTypeGoldFixed) {
         return 143.0;
     }
-    else if (self.item.moedelType == UCFHomeListCellModelTypeReserved) {
-        return 150;
+    else if (self.item.moedelType == UCFHomeListCellModelTypeReserved || self.item.moedelType == UCFHomeListCellModelTypeAI || self.item.moedelType == UCFHomeListCellModelTypeBatch) {
+        return 89;
     }
     else if (self.item.moedelType == UCFHomeListCellModelTypeNewUser) {
         return 130.0;

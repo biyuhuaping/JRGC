@@ -16,7 +16,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *reserveButton;
 @property (weak, nonatomic) IBOutlet UILabel *minLabel;
 @property (weak, nonatomic) IBOutlet UILabel *limitLabel;
-@property (weak, nonatomic) IBOutlet NZLabel *addedTransLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *leftCetnerSpace;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *rightCenterSpace;
 
@@ -24,6 +23,8 @@
 @property (weak, nonatomic) IBOutlet UIView *downSegLine;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *upLineLeftSpace;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *downLineLeftSpace;
+@property (weak, nonatomic) IBOutlet UILabel *productNameLab;
+@property (weak, nonatomic) IBOutlet UILabel *repayStyle;
 
 @end
 
@@ -41,15 +42,36 @@
 - (void)setPresenter:(UCFHomeListCellPresenter *)presenter
 { 
     _presenter = presenter;
-    if (presenter.platformSubsidyExpense.length > 0) {
+    _productNameLab.text = presenter.proTitle;
+    _repayStyle.text = presenter.repayModeText;
+    if ([presenter.platformSubsidyExpense doubleValue] > 0.01) {
         self.anurateLabel.text = [NSString stringWithFormat:@"%@~%@%%",presenter.annualRate, presenter.platformSubsidyExpense];
     }
     else {
         self.anurateLabel.text = [NSString stringWithFormat:@"%@",presenter.annualRate];
     }
-    
-    self.limitLabel.text = [NSString stringWithFormat:@"%@", presenter.appointPeriod];
-    self.addedTransLabel.text = [NSString stringWithFormat:@"累计交易%@", presenter.completeLoan];
+    self.limitLabel.text = [NSString stringWithFormat:@"%@", presenter.repayPeriodtext];
+    if (presenter.status == 2) {
+        NSString *showStr = @"立即预约";
+        if (presenter.modelType == UCFHomeListCellModelTypeBatch) {
+            showStr = @"一键出借";
+        } else if (presenter.modelType == UCFHomeListCellModelTypeAI) {
+            showStr = @"立即出借";
+        } else if (presenter.modelType == UCFHomeListCellModelTypeReserved) {
+            showStr = @"立即预约";
+        }
+        [_reserveButton setTitle:showStr forState:UIControlStateNormal];
+    } else {
+        NSString *showStr = @"已售罄";
+        if (presenter.modelType == UCFHomeListCellModelTypeBatch) {
+            showStr = @"已售罄";
+        } else if (presenter.modelType == UCFHomeListCellModelTypeAI) {
+            showStr = @"已售罄";
+        } else if (presenter.modelType == UCFHomeListCellModelTypeReserved) {
+            showStr = @"预约已满";
+        }
+        [_reserveButton setTitle:showStr forState:UIControlStateNormal];
+    }
 }
 
 - (IBAction)reserveForSomeone:(UIButton *)sender {
@@ -76,7 +98,7 @@
     }
     
     self.limitLabel.text = [NSString stringWithFormat:@"%@", microModel.appointPeriod];
-    self.addedTransLabel.text = [NSString stringWithFormat:@"累计交易%@亿元", microModel.totleBookAmt];
+//    self.addedTransLabel.text = [NSString stringWithFormat:@"累计交易%@亿元", microModel.totleBookAmt];
 }
 
 - (void)layoutSubviews
@@ -87,7 +109,7 @@
     }
     [self.anurateLabel setFont:[UIFont boldSystemFontOfSize:15] range:NSMakeRange(self.anurateLabel.text.length - 1, 1)];
     
-    [self.addedTransLabel setFontColor:UIColorWithRGB(0x555555) string:@"累计交易"];
+//    [self.addedTransLabel setFontColor:UIColorWithRGB(0x555555) string:@"累计交易"];
 }
 
 - (void)setIndexPath:(NSIndexPath *)indexPath

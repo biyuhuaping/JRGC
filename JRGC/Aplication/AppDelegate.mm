@@ -46,7 +46,6 @@
 @interface AppDelegate () <JPUSHRegisterDelegate>
 
 @property (assign, nonatomic) UIBackgroundTaskIdentifier backgroundUpdateTask;
-//@property (strong, nonatomic) UIImageView *advertisementView;
 @property (assign, nonatomic) NSInteger backTime;
 @property (assign, nonatomic) BOOL isComePushNotification;
 @property (assign, nonatomic) BOOL isFirstStart;
@@ -64,8 +63,6 @@
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isShowNotice"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     [UcfWalletSDK setEnvironment:1];
-    //修改webView标识
-    [[ToolSingleTon sharedManager] getGoldPrice]; //获取实时金价
 
     [self setWebViewUserAgent];
     [self checkNovicePoliceOnOff];//监测2017新手奖励政策开关。
@@ -96,15 +93,6 @@
 
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkInitiaLogin) name:CheckIsInitiaLogin object:nil];
     
-//    [IPDetector getWANIPAddressWithCompletion:^(NSString *IPAddress) {
-//        NSString *curWanIp = IPAddress;
-//        if (![curWanIp isEqualToString:@""] && curWanIp) {
-//            curWanIp = [AuxiliaryFunc deleteHuanHang:[NSMutableString stringWithString:curWanIp]];
-//        }
-//        [[NSUserDefaults standardUserDefaults] setValue:curWanIp forKey:@"curWanIp"];
-//        [[NSUserDefaults standardUserDefaults] synchronize];
-//    }];
-    
     //去掉navigationbar 下面默认的白线
     [[UINavigationBar appearance] setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
     [[UINavigationBar appearance] setShadowImage:[[UIImage alloc] init]];
@@ -117,7 +105,6 @@
     NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     [MobClick setAppVersion:version];
     
-//    [UcfWalletSDK setEnvironment:0];
     //初始化广告view
     _advertisementView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
     
@@ -283,20 +270,13 @@
     DLog(@"%@",callbackString);
 }
 // 之所以把这个红点提到这里，是因为启动APP之后，没有点击个人中心页面的话，未初始化这个api，直接投资查看奖励列表，不能通知服务端把这个红点去掉
-//- (void)checkRedPointShouldHide:(NSNotification *)noti
-//{
-//    NSString *upFlag = noti.object;
-//    NSString *strParameters = [NSString stringWithFormat:@"userId=%@&updFlag=%@", [[NSUserDefaults standardUserDefaults] objectForKey:UUID],upFlag];
-//    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagRedPointCheck owner:self Type:SelectAccoutDefault];
-//}
+
 - (void)checkConponCenter
 {
     NSDictionary *parmDic = nil;
     if ([[NSUserDefaults standardUserDefaults] objectForKey:UUID]) {
         parmDic = [NSDictionary dictionaryWithObject:[[NSUserDefaults standardUserDefaults] objectForKey:UUID] forKey:@"userId"];
     }
-//[[NetworkModule sharedNetworkModule] newPostReq:@{} tag:kSXTagGetInfoForOnOff owner:self signature:NO Type:SelectAccoutDefault];
-//
     [[NetworkModule sharedNetworkModule] newPostReq:parmDic tag:kSXTagCheckConponCenter owner:self signature:YES Type:SelectAccoutDefault];
 }
 - (void) createItem {
@@ -313,7 +293,6 @@
     // react to shortcut item selections
     DBLOG(@"title:%@,type:%@,userInfo:%@",shortcutItem.localizedTitle,shortcutItem.type,shortcutItem.userInfo);
     if ([[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
-//        [[NSNotificationCenter defaultCenter] postNotificationName:@"guaguakaHide" object:nil];//清理一下个人中心刮刮卡的弹出层
         
         [Touch3DSingle sharedTouch3DSingle].isLoad = YES;
         [Touch3DSingle sharedTouch3DSingle].type = shortcutItem.type;
@@ -356,7 +335,6 @@
     UIImage *placehoderImage = [Common getTheLaunchImage];
     _advertisementView.contentMode = UIViewContentModeScaleToFill;
     [_lockVc.view setUserInteractionEnabled:NO];
-    //self.window.userInteractionEnabled = NO;
     [_advertisementView sd_setImageWithURL:[NSURL URLWithString:[[NSUserDefaults standardUserDefaults] valueForKey:@"adversementImageUrl"]] placeholderImage:placehoderImage];
     [_advertisementView setBackgroundColor:[UIColor clearColor]];
     [self.window addSubview:_advertisementView];
@@ -466,7 +444,6 @@
             {
                 // 和上面10分钟后执行的代码一样
                 // ...
-                // if you don't call endBackgroundTask, the OS will exit your app.
                 [application endBackgroundTask:_backgroundUpdateTask];
                 _backgroundUpdateTask = UIBackgroundTaskInvalid;
             }
@@ -659,16 +636,13 @@
 #pragma 新手政策弹框
 - (void)checkNovicePoliceOnOff
 {
-//    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:NOVICEPOLICEONOFF];
-//    [[NSUserDefaults standardUserDefaults] synchronize];
-//    [ToolSingleTon sharedManager].checkIsInviteFriendsAlert = NO;
+
     //请求开关状态
     [[NetworkModule sharedNetworkModule] newPostReq:@{} tag:kSXTagGetInfoForOnOff owner:self signature:NO Type:SelectAccoutDefault];
 }
 
 - (void)checkUpdate
 {
-//    [[NetworkModule sharedNetworkModule] postReq:@"" tag:kSXTagKicItemList owner:self Type:SelectAccoutDefault];
     [[NetworkModule sharedNetworkModule] newPostReq:@{} tag:kSXTagKicItemList owner:self signature:NO Type:SelectAccoutDefault];
 }
 //新手政策弹框
@@ -1069,6 +1043,8 @@
 }
 - (void)getAdversementLift
 {
+
+    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSString *URL = [NSString stringWithFormat:@"https://fore.9888.cn/cms/api/appbanner.php?key=0ca175b9c0f726a831d895e&id=54"];
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
@@ -1089,7 +1065,6 @@
                 [[NSUserDefaults standardUserDefaults] synchronize];
 
             }
-            
         });
     });
 }
@@ -1149,7 +1124,6 @@
             NSString *imageStr=[[NSMutableString alloc] initWithData:recervedData encoding:NSUTF8StringEncoding];
             NSArray *arr = [imageStr objectFromJSONString];
             if (arr.count > 0) {
-//                NSDictionary *dataDic = arr[0];
                 [[NSUserDefaults standardUserDefaults] setObject:arr forKey:@"SharePictureAdversementLink"];
                 [[NSUserDefaults standardUserDefaults] synchronize];
                 
@@ -1158,84 +1132,7 @@
         });
     });
 }
-// 开启指纹解锁页面
-//- (void)openTouchId
-//{
-//    LAContext *lol = [[LAContext alloc] init];
-//    lol.localizedFallbackTitle = @"";
-//    NSError *error = nil;
-//    NSString *showStr = @"通过home键验证已有手机指纹";
-//    //是否存在
-//    if ([lol canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&error]) {
-//        //开始运作
-//        [lol evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics localizedReason:showStr reply:^(BOOL succes, NSError *error)
-//         {
-//             if (succes) {
-//                 DBLog(@"指纹验证成功");
-//                 [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-//                     //                     [self hide];
-//                     [self.lockVc hide];
-//                 }];
-//             }
-//             else
-//             {
-//                 DBLog(@"%@",error.localizedDescription);
-//                 switch (error.code) {
-//                     case LAErrorSystemCancel:
-//                     {
-//                         DBLog(@"Authentication was cancelled by the system");
-//                         //切换到其他APP，系统取消验证Touch ID
-//                         break;
-//                     }
-//                     case LAErrorUserCancel:
-//                     {
-//                         DBLog(@"Authentication was cancelled by the user");
-//                         //用户取消验证Touch ID
-//                         break;
-//                     }
-//                     case LAErrorUserFallback:
-//                     {
-//                         DBLog(@"User selected to enter custom password");
-//                         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-//                             //用户选择输入密码，切换主线程处理
-//                         }];
-//                         break;
-//                     }
-//                     default:
-//                     {
-//                         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-//                             //其他情况，切换主线程处理
-//                         }];
-//                         break;
-//                     }
-//                 }
-//             }
-//         }];
-//        
-//    }
-//    else
-//    {
-//        switch (error.code) {
-//            case LAErrorTouchIDNotEnrolled:
-//            {
-//                DBLog(@"TouchID is not enrolled");
-//                break;
-//            }
-//            case LAErrorPasscodeNotSet:
-//            {
-//                //没有touchID 的报错
-//                DBLog(@"A passcode has not been set");
-//                break;
-//            }
-//            default:
-//            {
-//                DBLog(@"TouchID not available");
-//                break;
-//            }
-//        }
-//    }
-//    
-//}
+
 //检测是否有tab红点
 - (void)checkPersonCenterRedPoint
 {
@@ -1247,6 +1144,8 @@
 
 - (void)setWebViewUserAgent
 {
+    //修改webView标识
+
     UIWebView *webView=[[UIWebView alloc] initWithFrame:CGRectZero];
     NSString *userAgent=[webView stringByEvaluatingJavaScriptFromString:@"navigator.userAgent"];
     
@@ -1257,21 +1156,6 @@
 //    #warning 灰度测试重新加cookies
     [Common addTestCookies];
 }
-
-//- (void)session:(UCFSession *)session didUCFSessionReceiveUserInfo:(id)userInfo
-//{
-//
-//    if ([UserInfoSingle sharedManager].userId) {
-//
-//       NSString *gcmcode = [[NSUserDefaults standardUserDefaults] objectForKey:@"gcmCode"];
-//        NSData *data = [Common createImageCode:gcmcode];
-//        NSUserDefaults *signatureStr =[[NSUserDefaults standardUserDefaults] valueForKey:SIGNATUREAPP];
-//        NSDictionary *loginSuccessDic = @{@"userId":[UserInfoSingle sharedManager].userId, @"source_type":@"1",@"imei":[Common getKeychain],@"version":[Common getIOSVersion],@"signature":signatureStr,@"imageData":data,@"isSubmitAppStoreAndTestTime":@(self.isSubmitAppStoreTestTime).stringValue};
-////        [[UCFSession sharedManager] transformInactionWithInfo:loginSuccessDic withState:UCFSessionStateUserLogin];
-//        [session.session updateApplicationContext:loginSuccessDic error:nil];
-//    }
-//
-//}
 
 @end
 // iOS10.2 之后如果info.plist里面的ATS 为YES 的情况下，也需要加这个

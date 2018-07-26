@@ -14,14 +14,15 @@
 #import "UCFHomeIconModel.h"
 #import "UCFHomeIconPresenter.h"
 #import "HSHelper.h"
-
-@interface UCFHomeListPresenter ()
+#import "UCFAttachModel.h"
+@interface UCFHomeListPresenter ()<NetworkModuleDelegate>
 @property (strong, nonatomic) UCFHomeAPIManager *apiManager;
 @property (copy, nonatomic) NSString *userId;
 @property (strong, nonatomic) NSMutableArray *homeListCells;
 @property (strong, nonatomic) NSMutableArray *homeIconList;
 @property (assign, nonatomic) BOOL authorization;
-
+@property (strong, nonatomic) NSDictionary  *showSectionsDict;
+@property (assign, nonatomic) NSInteger     currentRequestIndex;
 //@property (strong, nonatomic) UCFHomeListGroupPresenter *groupTransferPresenter;
 @end
 
@@ -119,32 +120,29 @@
 
 - (UCFHomeListGroupPresenter *)homeListGroupPresenterWithGroup:(UCFHomeListGroup *)group
 {
-    if ([group.type intValue] == 13 || [group.type intValue] == 17) {
+    if ([group.type intValue] == 0) {
         group.showMore = NO;
     }
     else {
         group.showMore = YES;
     }
-    NSMutableArray *temp = [NSMutableArray new];
+    NSMutableArray *temp = [[NSMutableArray alloc] init];
     for (UCFHomeListCellModel *model in group.prdlist) {
-        if ([group.type isEqualToString:@"19"]) {
-            model.moedelType = UCFHomeListCellModelTypeDebtsTransfer;
-        }
-        else if ([model.type isEqualToString:@"6"]) {
-            model.moedelType = UCFHomeListCellModelTypeGoldFixed;
-        }
-        else if ([group.type isEqualToString:@"13"]) {
+        
+        if ([group.type isEqualToString:@"0"]) {
             model.moedelType = UCFHomeListCellModelTypeNewUser;
-//            if ([model.type isEqualToString:@"0"]) {
-//                model.moedelType = UCFHomeListCellModelTypeReserved;
-//            }
-//            else
-        }
-        else if ([model.type isEqualToString:@"0"]) {
-            model.moedelType = UCFHomeListCellModelTypeReserved;
-        }
-        else {
-            model.moedelType = UCFHomeListCellModelTypeDefault;
+        } else if ([group.type isEqualToString:@"19"]) {
+            model.moedelType = UCFHomeListCellModelTypeDebtsTransfer;
+        } else {
+            if ([model.type isEqualToString:@"0"]) { //预约
+                model.moedelType = UCFHomeListCellModelTypeReserved;
+            } else if ([model.type isEqualToString:@"1"]) { //P2P散标
+                model.moedelType = UCFHomeListCellModelTypeDefault;
+            } else if ([model.type isEqualToString:@"3"]) { //智存宝
+                model.moedelType = UCFHomeListCellModelTypeAI;
+            } else if ([model.type isEqualToString:@"14"]) { //批量
+                model.moedelType = UCFHomeListCellModelTypeBatch;
+            }
         }
         UCFHomeListCellPresenter *cellPresenter = [UCFHomeListCellPresenter presenterWithItem:model];
         [temp addObject:cellPresenter];
@@ -203,4 +201,155 @@
         !completionHander ?: completionHander(error, result);
     }];
 }
+
+- (void)getDefaultShowListSection:(NSDictionary *)parameter
+{
+    [[NetworkModule sharedNetworkModule] newPostReq:parameter tag:kSXTagGetHomeShowSections owner:self signature:NO Type:SelectAccoutDefault];
+    if ([[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
+        [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID]} tag:kSXTagGetUserAllState owner:self signature:YES Type:SelectAccoutDefault];
+    }
+}
+
+- (void)beginPost:(kSXTag)tag
+{
+    
+}
+- (void)endPost:(id)result tag:(NSNumber *)tag
+{
+    NSString *data = (NSString *)result;
+    NSMutableDictionary *dic = [data objectFromJSONString];
+    if (tag.intValue == kSXTagGetHomeShowSections) {
+        self.showSectionsDict = dic;
+        if ([self.showSectionsDict[@"data"][@"resultData"] count] > 0) {
+            
+            NSArray *dataArr = self.showSectionsDict[@"data"][@"resultData"];
+            if (dataArr.count != self.homeListCells.count) {
+                [self.homeListCells removeAllObjects];
+            }
+            _currentRequestIndex = 0;
+            [self getSectionDeatilData];
+        }
+    } else if (tag.intValue == kSXTagGetHomeNewUserSection) {
+        NSDictionary  *dataDict = dic[@"data"];
+        UCFHomeListGroup * tempG = [[UCFHomeListGroup alloc] init];
+        NSArray *dataArr = self.showSectionsDict[@"data"][@"resultData"];
+        for (NSDictionary *sectionDict in dataArr) {
+            if ([sectionDict[@"type"] intValue] == 0) { //新手专区
+                tempG.iconUrl = sectionDict[@"iconUrl"];
+                tempG.showMore = NO;
+                tempG.title = sectionDict[@"title"];
+                tempG.type = [NSString stringWithFormat:@"%@",sectionDict[@"type"]];
+                NSMutableArray *tmp = [[NSMutableArray alloc] init];
+                for (NSDictionary *dd in dataDict[@"attach"]) {
+                    UCFAttachModel *attach = [UCFAttachModel attachListWithDict:dd];
+                    [tmp addObject:attach];
+                }
+                tempG.attach = tmp;
+                NSMutableArray *prdArr = [NSMutableArray arrayWithCapacity:1];
+                UCFHomeListCellModel *model = [[UCFHomeListCellModel alloc] initWithDictionary:dataDict[@"prdClaim"]];
+                [prdArr addObject:model];
+                tempG.prdlist = prdArr;
+                
+                UCFHomeListGroupPresenter *groupPresenter = [self homeListGroupPresenterWithGroup:tempG];
+                BOOL hasCache = NO;
+                for (UCFHomeListGroupPresenter *tmpgroupPresenter in self.homeListCells) {
+                    if (tmpgroupPresenter.type == groupPresenter.type) {
+                        hasCache = YES;
+                        NSInteger index = [self.homeListCells indexOfObject:tmpgroupPresenter];
+                        [self.homeListCells replaceObjectAtIndex:index withObject:groupPresenter];
+                        break;
+                    }
+                }
+                if (!hasCache) {
+                    [self.homeListCells addObject:groupPresenter];
+                }
+                if ([self.view respondsToSelector:@selector(homeListViewPresenter:didRefreshDataWithResult:error:)]) {
+                    [self.view homeListViewPresenter:self didRefreshDataWithResult:result error:nil];
+                }
+                _currentRequestIndex++;
+                [self getSectionDeatilData];
+                
+                break;
+            }
+        }
+    }
+    else if (tag.intValue == kSXTagGetHomeOtherSection) {
+        NSArray *dataArr = self.showSectionsDict[@"data"][@"resultData"];
+        NSDictionary *sectionDict = dataArr[_currentRequestIndex];
+        UCFHomeListGroup * tempG = [[UCFHomeListGroup alloc] init];
+    
+        tempG.iconUrl = sectionDict[@"iconUrl"];
+        tempG.showMore = YES;
+        tempG.title = sectionDict[@"title"];
+        tempG.type = [NSString stringWithFormat:@"%@",sectionDict[@"type"]];
+        
+        NSDictionary *dataDict = dic[@"data"];
+        NSMutableArray *prdArr = [NSMutableArray arrayWithCapacity:1];
+        for (NSDictionary *dd in dataDict[@"resultData"]) {
+            UCFHomeListCellModel *model = [[UCFHomeListCellModel alloc] initWithDictionary:dd];
+            [prdArr addObject:model];
+        }
+        tempG.prdlist = prdArr;
+        BOOL hasCache = NO;
+
+        UCFHomeListGroupPresenter *groupPresenter = [self homeListGroupPresenterWithGroup:tempG];
+        for (UCFHomeListGroupPresenter *tmpgroupPresenter in self.homeListCells) {
+            if (tmpgroupPresenter.type == groupPresenter.type) {
+                hasCache = YES;
+                NSInteger index = [self.homeListCells indexOfObject:tmpgroupPresenter];
+                [self.homeListCells replaceObjectAtIndex:index withObject:groupPresenter];
+                break;
+            }
+        }
+        if (!hasCache) {
+            [self.homeListCells addObject:groupPresenter];
+        }
+        
+        if ([self.view respondsToSelector:@selector(homeListViewPresenter:didRefreshDataWithResult:error:)]) {
+            [self.view homeListViewPresenter:self didRefreshDataWithResult:result error:nil];
+        }
+        _currentRequestIndex++;
+        [self performSelector:@selector(getSectionDeatilData) withObject:nil afterDelay:0];
+    } else if (tag.intValue == kSXTagGetUserAllState) {
+        
+        NSDictionary *result = dic[@"data"][@"userSatus"];
+        
+        [UserInfoSingle sharedManager].companyAgent = [[result objectSafeForKey:@"company"] boolValue];
+        [UserInfoSingle sharedManager].isRisk = [[result objectSafeForKey:@"isRisk"] boolValue];
+        [UserInfoSingle sharedManager].isAutoBid = [[result objectSafeForKey:@"isAutoBid"] boolValue];
+        [UserInfoSingle sharedManager].goldAuthorization = [[result objectSafeForKey:@"nmGoldAuthorization"] boolValue];
+        [UserInfoSingle sharedManager].openStatus = [[result objectSafeForKey:@"openStatus"] integerValue];
+        [UserInfoSingle sharedManager].enjoyOpenStatus = [[result objectSafeForKey:@"zxOpenStatus"] integerValue];
+        [UserInfoSingle sharedManager].zxAuthorization = [[result objectSafeForKey:@"zxAuthorization"] boolValue];
+        
+//        [UserInfoSingle sharedManager].p2pAuthorization = [[result objectSafeForKey:@"p2pAuthorization"] boolValue];
+    }
+
+}
+- (void)getSectionDeatilData
+{
+    NSArray *dataArr = self.showSectionsDict[@"data"][@"resultData"];
+    if (_currentRequestIndex <= dataArr.count - 1) {
+        NSDictionary *sectionDict = dataArr[_currentRequestIndex];
+        if ([sectionDict[@"type"] intValue] == 0) { //新手专区
+            NSDictionary *parmDict = nil;
+            NSString *userId = [[NSUserDefaults standardUserDefaults] objectForKey:UUID];
+            if (userId) {
+                parmDict = @{@"userId":userId};
+            }
+            [[NetworkModule sharedNetworkModule] newPostReq:parmDict tag:kSXTagGetHomeNewUserSection owner:self signature:NO Type:SelectAccoutDefault];
+        } else {
+            NSDictionary *parmDict = nil;
+            parmDict = @{@"type":[NSString stringWithFormat:@"%@",sectionDict[@"type"]]};
+            [[NetworkModule sharedNetworkModule] newPostReq:parmDict tag:kSXTagGetHomeOtherSection owner:self signature:NO Type:SelectAccoutDefault];
+        }
+    }
+    
+
+}
+- (void)errorPost:(NSError *)err tag:(NSNumber *)tag
+{
+    
+}
+
 @end

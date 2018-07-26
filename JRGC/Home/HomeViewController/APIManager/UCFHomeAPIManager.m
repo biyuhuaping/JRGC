@@ -172,7 +172,10 @@
      [[NetworkModule sharedNetworkModule] newPostReq:parameter tag:kSXTagColPrdclaimsDetail owner:self signature:YES Type:SelectAccoutTypeP2P];
     [self.requestDict setObject:completionHandler forKey:COLLECTIONDETAIL];
 }
+- (void)fetchBannerAndGiftImageWithParameter:parameter completionHandler:(NetworkCompletionHandler)completionHandler
+{
 
+}
 //开始请求
 - (void)beginPost:(kSXTag)tag
 {

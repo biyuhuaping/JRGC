@@ -323,11 +323,9 @@ static NetworkModule *gInstance = NULL;
     if (req.postStatus == kPostStatusBeging) {
         return;
     }
-    
     if (req == nil) {
         req = [[PostRequest alloc] init];
     }
-  
     req.sxTag = tag;
     req.postStatus = kPostStatusNone;
     [queue setObject:req forKey:[NSNumber numberWithInt:tag]];
@@ -1315,6 +1313,21 @@ static NetworkModule *gInstance = NULL;
             break;
         case kSXTagP2PAiInvestModule://智能出借模块
             parameter = [NEW_SERVER_IP stringByAppendingString:P2PINVESTMODULEURL];
+            break;
+        case kSXTagGetBannerAndGift:
+            parameter = [NEW_SERVER_IP stringByAppendingString:GETBANERANDGIFTIMAGE];
+            break;
+        case kSXTagGetHomeShowSections:
+            parameter = [NEW_SERVER_IP stringByAppendingString:GETHOMESECTIONS];
+            break;
+        case kSXTagGetHomeNewUserSection:
+            parameter = [NEW_SERVER_IP stringByAppendingString:GETHOMENEWUSERSECTIONS];
+            break;
+        case kSXTagGetHomeOtherSection:
+            parameter = [NEW_SERVER_IP stringByAppendingString:GETHOMEOTHERSECTIONS];
+            break;
+        case kSXTagGetUserAllState:
+            parameter = [NEW_SERVER_IP stringByAppendingString:GETHOMEUSERSTATE];
             break;
     }
     //给原有参数字典添加公共参数
