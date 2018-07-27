@@ -25,6 +25,10 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *downLineLeftSpace;
 @property (weak, nonatomic) IBOutlet UILabel *productNameLab;
 @property (weak, nonatomic) IBOutlet UILabel *repayStyle;
+@property (weak, nonatomic) IBOutlet UIView *additionalRate;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *additionalRateWidth;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *additionalLeftLength;
+@property (weak, nonatomic) IBOutlet UILabel *addutuibakLabel;
 
 @end
 
@@ -33,10 +37,14 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    self.productNameLab.textColor = UIColorWithRGB(0x555555);
+    self.repayStyle.textColor = UIColorWithRGB(0x333333);
     self.reserveButton.backgroundColor = UIColorWithRGB(0xfd4d4c);
     self.anurateLabel.textColor = UIColorWithRGB(0xfd4d4c);
     self.leftCetnerSpace.constant = -(ScreenWidth / 5);
     self.rightCenterSpace.constant = ScreenWidth / 4;
+    self.repayStyle.textColor = UIColorWithRGB(0x555555);
+    self.limitLabel.textColor = UIColorWithRGB(0x555555);
 }
 
 - (void)setPresenter:(UCFHomeListCellPresenter *)presenter
@@ -44,11 +52,17 @@
     _presenter = presenter;
     _productNameLab.text = presenter.proTitle;
     _repayStyle.text = presenter.repayModeText;
+
+    _additionalRate.hidden = YES;
+    self.anurateLabel.text = [NSString stringWithFormat:@"%@",presenter.annualRate];
     if ([presenter.platformSubsidyExpense doubleValue] > 0.01) {
-        self.anurateLabel.text = [NSString stringWithFormat:@"%@~%@%%",presenter.annualRate, presenter.platformSubsidyExpense];
-    }
-    else {
-        self.anurateLabel.text = [NSString stringWithFormat:@"%@",presenter.annualRate];
+       CGSize size = [Common getStrWitdth:self.anurateLabel.text Font:20];
+        self.additionalLeftLength.constant = size.width - 4;
+        NSString *subsidyExpenseStr = [NSString stringWithFormat:@"+%@%%",presenter.platformSubsidyExpense];
+       CGSize size1 = [Common getStrWitdth:subsidyExpenseStr Font:11];
+        self.additionalRateWidth.constant = size1.width + 12;
+        self.addutuibakLabel.text = subsidyExpenseStr;
+        _additionalRate.hidden = NO;
     }
     self.limitLabel.text = [NSString stringWithFormat:@"%@", presenter.repayPeriodtext];
     if (presenter.status == 2) {
@@ -61,7 +75,10 @@
             showStr = @"立即预约";
         }
         [_reserveButton setTitle:showStr forState:UIControlStateNormal];
+        self.reserveButton.backgroundColor = UIColorWithRGB(0xfd4d4c);
     } else {
+        self.reserveButton.backgroundColor = UIColorWithRGB(0xdcdcdc);
+
         NSString *showStr = @"已售罄";
         if (presenter.modelType == UCFHomeListCellModelTypeBatch) {
             showStr = @"已售罄";

@@ -45,6 +45,7 @@
 
 - (void)fetchCollectionDetailDataWithParameter:(NSDictionary *)parameter completionHandler:(NetworkCompletionHandler)completionHander;
 
+- (void)getUserStateData;
 /**
  获取首页默认数据
 
