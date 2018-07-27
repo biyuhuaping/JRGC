@@ -421,7 +421,7 @@
                         NSInteger isOrder = [model.isOrder integerValue];
                         if ([model.status intValue ] != 2){
                             if (isOrder > 0) {
-                                NSDictionary *parameter = @{@"Id": model.Id, @"userId": [UserInfoSingle sharedManager].userId, @"proType": model.type,@"type":@"3"};
+                                NSDictionary *parameter = @{@"Id": model.Id, @"userId": [UserInfoSingle sharedManager].userId, @"proType": model.type,@"type":@"3",@"status":model.status};
                                 [self.cycleImageVC.presenter fetchProDetailDataWithParameter:parameter completionHandler:^(NSError *error, id result) {
                                     
                                     NSDictionary *dic = (NSDictionary *)result;
@@ -448,7 +448,7 @@
                         }
                         else{
                             {
-                                NSDictionary *parameter = @{@"Id": model.Id, @"userId": [UserInfoSingle sharedManager].userId, @"proType": model.type,@"type":@"3"};
+                                NSDictionary *parameter = @{@"Id": model.Id, @"userId": [UserInfoSingle sharedManager].userId, @"proType": model.type,@"type":@"3",@"status":model.status};
                                 [self.cycleImageVC.presenter fetchProDetailDataWithParameter:parameter completionHandler:^(NSError *error, id result) {
                                     NSDictionary *dic = (NSDictionary *)result;
                                     [MBProgressHUD hideOriginAllHUDsForView:weakSelf.view animated:YES];
@@ -501,10 +501,10 @@
             
             UCFFacReservedViewController *facReservedWeb = [[UCFFacReservedViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
             if (model.moedelType == UCFHomeListCellModelTypeNewUser) {
-                facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@", NEWUSER_PRODUCTS_URL, model.Id];
+                facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@&status=%@", NEWUSER_PRODUCTS_URL, model.Id,model.status];
             }
             else if (model.moedelType == UCFHomeListCellModelTypeReserved || model.moedelType == UCFHomeListCellModelTypeAI) {
-                facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@", PRERESERVE_PRODUCTS_URL, model.Id];
+                facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@&status=%@", PRERESERVE_PRODUCTS_URL, model.Id,model.status];
             }
             [self.navigationController pushViewController:facReservedWeb animated:YES];
         }
