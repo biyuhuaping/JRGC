@@ -205,6 +205,10 @@
 - (void)getDefaultShowListSection:(NSDictionary *)parameter
 {
     [[NetworkModule sharedNetworkModule] newPostReq:parameter tag:kSXTagGetHomeShowSections owner:self signature:NO Type:SelectAccoutDefault];
+    [self getUserStateData];
+}
+- (void)getUserStateData
+{
     if ([[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
         [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID]} tag:kSXTagGetUserAllState owner:self signature:YES Type:SelectAccoutDefault];
     }
@@ -230,48 +234,60 @@
             [self getSectionDeatilData];
         }
     } else if (tag.intValue == kSXTagGetHomeNewUserSection) {
-        NSDictionary  *dataDict = dic[@"data"];
-        UCFHomeListGroup * tempG = [[UCFHomeListGroup alloc] init];
-        NSArray *dataArr = self.showSectionsDict[@"data"][@"resultData"];
-        for (NSDictionary *sectionDict in dataArr) {
-            if ([sectionDict[@"type"] intValue] == 0) { //新手专区
-                tempG.iconUrl = sectionDict[@"iconUrl"];
-                tempG.showMore = NO;
-                tempG.title = sectionDict[@"title"];
-                tempG.type = [NSString stringWithFormat:@"%@",sectionDict[@"type"]];
-                NSMutableArray *tmp = [[NSMutableArray alloc] init];
-                for (NSDictionary *dd in dataDict[@"attach"]) {
-                    UCFAttachModel *attach = [UCFAttachModel attachListWithDict:dd];
-                    [tmp addObject:attach];
-                }
-                tempG.attach = tmp;
-                NSMutableArray *prdArr = [NSMutableArray arrayWithCapacity:1];
-                UCFHomeListCellModel *model = [[UCFHomeListCellModel alloc] initWithDictionary:dataDict[@"prdClaim"]];
-                [prdArr addObject:model];
-                tempG.prdlist = prdArr;
-                
-                UCFHomeListGroupPresenter *groupPresenter = [self homeListGroupPresenterWithGroup:tempG];
-                BOOL hasCache = NO;
-                for (UCFHomeListGroupPresenter *tmpgroupPresenter in self.homeListCells) {
-                    if (tmpgroupPresenter.type == groupPresenter.type) {
-                        hasCache = YES;
-                        NSInteger index = [self.homeListCells indexOfObject:tmpgroupPresenter];
-                        [self.homeListCells replaceObjectAtIndex:index withObject:groupPresenter];
-                        break;
+        if ([dic[@"ret"] boolValue]) {
+            NSDictionary  *dataDict = dic[@"data"];
+            UCFHomeListGroup * tempG = [[UCFHomeListGroup alloc] init];
+            NSArray *dataArr = self.showSectionsDict[@"data"][@"resultData"];
+            for (NSDictionary *sectionDict in dataArr) {
+                if ([sectionDict[@"type"] intValue] == 0) { //新手专区
+                    tempG.iconUrl = sectionDict[@"iconUrl"];
+                    tempG.showMore = NO;
+                    tempG.title = sectionDict[@"title"];
+                    tempG.type = [NSString stringWithFormat:@"%@",sectionDict[@"type"]];
+                    //如果新手标签没有
+                    if ([dataDict[@"attach"] count] > 0) {
+                        NSMutableArray *tmp = [[NSMutableArray alloc] init];
+                        for (NSDictionary *dd in dataDict[@"attach"]) {
+                            UCFAttachModel *attach = [UCFAttachModel attachListWithDict:dd];
+                            [tmp addObject:attach];
+                        }
+                        tempG.attach = tmp;
                     }
+                    //如果没有新手标
+                    if (![dataDict[@"prdClaim"] isEqual:[NSNull null]]) {
+                        NSMutableArray *prdArr = [NSMutableArray arrayWithCapacity:1];
+                        UCFHomeListCellModel *model = [[UCFHomeListCellModel alloc] initWithDictionary:dataDict[@"prdClaim"]];
+                        [prdArr addObject:model];
+                        tempG.prdlist = prdArr;
+                    }
+                    UCFHomeListGroupPresenter *groupPresenter = [self homeListGroupPresenterWithGroup:tempG];
+                    BOOL hasCache = NO;
+                    for (UCFHomeListGroupPresenter *tmpgroupPresenter in self.homeListCells) {
+                        if (tmpgroupPresenter.type == groupPresenter.type) {
+                            hasCache = YES;
+                            NSInteger index = [self.homeListCells indexOfObject:tmpgroupPresenter];
+                            [self.homeListCells replaceObjectAtIndex:index withObject:groupPresenter];
+                            break;
+                        }
+                    }
+                    if (!hasCache && ([dataDict[@"attach"] count] != 0 || ![Common isNullValue:dataDict[@"prdClaim"]])) {
+                        [self.homeListCells addObject:groupPresenter];
+                    }
+                    if ( ([dataDict[@"attach"] count] != 0 || ![Common isNullValue:dataDict[@"prdClaim"]])) {
+                        if ([self.view respondsToSelector:@selector(homeListViewPresenter:didRefreshDataWithResult:error:)]) {
+                            [self.view homeListViewPresenter:self didRefreshDataWithResult:result error:nil];
+                        }
+                    }
+                    _currentRequestIndex++;
+                    [self getSectionDeatilData];
+                    
+                    break;
                 }
-                if (!hasCache) {
-                    [self.homeListCells addObject:groupPresenter];
-                }
-                if ([self.view respondsToSelector:@selector(homeListViewPresenter:didRefreshDataWithResult:error:)]) {
-                    [self.view homeListViewPresenter:self didRefreshDataWithResult:result error:nil];
-                }
-                _currentRequestIndex++;
-                [self getSectionDeatilData];
-                
-                break;
             }
+        } else {
+            [MBProgressHUD displayHudError:dic[@"message"]];
         }
+
     }
     else if (tag.intValue == kSXTagGetHomeOtherSection) {
         NSArray *dataArr = self.showSectionsDict[@"data"][@"resultData"];
