@@ -34,7 +34,7 @@
 #import "UCFNewUserCell.h"
 #import "UCFRegisterStepOneViewController.h"
 #import "UCFMicroMoneyCell.h"
-@interface UCFMicroMoneyViewController () <UITableViewDataSource, UITableViewDelegate, UCFInvestAPIWithMicroMoneyManagerDelegate, UCFInvestMicroMoneyCellDelegate,UCFHomeListHeaderSectionViewDelegate, UCFHomeInvestCellDelegate,UCFNewUserCellDelegate>
+@interface UCFMicroMoneyViewController () <UITableViewDataSource, UITableViewDelegate, UCFInvestAPIWithMicroMoneyManagerDelegate, UCFInvestMicroMoneyCellDelegate,UCFHomeListHeaderSectionViewDelegate, UCFHomeInvestCellDelegate,UCFNewUserCellDelegate,UCFInvestMicroMoneyCellDelegate>
 
 @property (strong, nonatomic) UCFMicroMoneyHeaderView *microMoneyHeaderView;
 @property (strong, nonatomic) UCFInvestAPIManager *apiManager;
@@ -265,20 +265,12 @@
         UCFMicroMoneyCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId2];
         if (nil == cell) {
             cell = (UCFMicroMoneyCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFMicroMoneyCell" owner:self options:nil] lastObject];
-//            cell.tableView = tableView;
-//            cell.delegate = self;
+            cell.selectionStyle = UITableViewCellSeparatorStyleNone;
+            cell.delegate = self;
         }
        UCFMicroMoneyModel *model = [self.dataArray objectAtIndex:indexPath.row];
        cell.microModel = model;
-        if ([model.type isEqualToString:@"1"]) {
-            model.modelType = UCFMicroMoneyModelTypeNew;
-        }
-        else if ([model.type isEqualToString:@"14"]) {
-            model.modelType = UCFMicroMoneyModelTypeBatchBid;
-        }
-        else if ([model.type isEqualToString:@"0"]) {
-            model.modelType = UCFMicroMoneyModelTypeNormal;
-        }
+    
         return cell;
 }
 
@@ -297,41 +289,89 @@
 }
 
 #pragma mark - 预约按钮的点击代理方法
-- (void)microMoneyListCell:(UCFHomeInvestCell *)microMoneyCell didClickedInvestButtonWithModel:(UCFMicroMoneyModel *)model
+//- (void)microMoneyListCell:(UCFHomeInvestCell *)microMoneyCell didClickedInvestButtonWithModel:(UCFMicroMoneyModel *)model
+//{
+//    NSString *userId = [UserInfoSingle sharedManager].userId;
+//    if (nil == userId) {
+//        UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
+//        UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
+//        AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+//        [app.tabBarController presentViewController:loginNaviController animated:YES completion:nil];
+//        return;
+//    }
+//    self.accoutType = SelectAccoutTypeP2P;
+//    BOOL b = [self checkUserCanInvestIsDetail:NO type:self.accoutType];
+//    if (!b) {
+//        return;
+//    }
+//    if (![UserInfoSingle sharedManager].isRisk) {
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"您还没进行风险评估" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
+//        self.accoutType = SelectAccoutTypeP2P;
+//        alert.tag =  9000;
+//        [alert show];
+//        return;
+//    }
+//    if (![UserInfoSingle sharedManager].isAutoBid) {
+//        UCFBatchInvestmentViewController *batchInvestment = [[UCFBatchInvestmentViewController alloc] init];
+//        batchInvestment.isStep = 1;
+//        batchInvestment.accoutType = SelectAccoutTypeP2P;
+//        [self.navigationController pushViewController:batchInvestment animated:YES];
+//        return;
+//    }
+//    UCFFacReservedViewController *facReservedWeb = [[UCFFacReservedViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
+//    NSString *url = PRERESERVE_APPLY_URL;
+//    facReservedWeb.url = [NSString stringWithFormat:@"%@", url];
+//    [self.navigationController pushViewController:facReservedWeb animated:YES];
+//}
+-(void)microMoneyListCell:(UCFHomeInvestCell *)microMoneyCell didClickedInvestButtonWithModel:(UCFMicroMoneyModel *)model
 {
-    NSString *userId = [UserInfoSingle sharedManager].userId;
-    if (nil == userId) {
-        UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
-        UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
-        AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
-        [app.tabBarController presentViewController:loginNaviController animated:YES completion:nil];
-        return;
-    }
-    self.accoutType = SelectAccoutTypeP2P;
-    BOOL b = [self checkUserCanInvestIsDetail:NO type:self.accoutType];
-    if (!b) {
-        return;
-    }
-    if (![UserInfoSingle sharedManager].isRisk) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"您还没进行风险评估" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
-        self.accoutType = SelectAccoutTypeP2P;
-        alert.tag =  9000;
-        [alert show];
-        return;
-    }
-    if (![UserInfoSingle sharedManager].isAutoBid) {
-        UCFBatchInvestmentViewController *batchInvestment = [[UCFBatchInvestmentViewController alloc] init];
-        batchInvestment.isStep = 1;
-        batchInvestment.accoutType = SelectAccoutTypeP2P;
-        [self.navigationController pushViewController:batchInvestment animated:YES];
-        return;
-    }
-    UCFFacReservedViewController *facReservedWeb = [[UCFFacReservedViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
-    NSString *url = PRERESERVE_APPLY_URL;
-    facReservedWeb.url = [NSString stringWithFormat:@"%@", url];
-    [self.navigationController pushViewController:facReservedWeb animated:YES];
+    [self gotoReservedVCOrIntelligentBaoVC:model];
 }
 
+-(void)gotoReservedVCOrIntelligentBaoVC:(UCFMicroMoneyModel *)model
+{
+    if (model.modelType == UCFMicroMoneyModelTypeBatchBid ) {//批量出借标
+        [self gotoCollectionDetailViewContoller:model];
+    }
+    else  {//预约宝和智存宝
+        
+        NSString *userId = [UserInfoSingle sharedManager].userId;
+        if (nil == userId) {
+            [self showLoginView];
+            return;
+        }
+        self.accoutType = SelectAccoutTypeP2P;
+        BOOL b = [self checkUserCanInvestIsDetail:NO type:self.accoutType];
+        if (!b) {
+            return;
+        }
+        if (![UserInfoSingle sharedManager].isRisk) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"您还没进行风险评估" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
+            self.accoutType = SelectAccoutTypeP2P;
+            alert.tag =  9000;
+            [alert show];
+            return;
+        }
+        if (![UserInfoSingle sharedManager].isAutoBid) {
+            UCFBatchInvestmentViewController *batchInvestment = [[UCFBatchInvestmentViewController alloc] init];
+            batchInvestment.isStep = 1;
+            batchInvestment.accoutType = SelectAccoutTypeP2P;
+            [self.navigationController pushViewController:batchInvestment animated:YES];
+            return;
+        }
+        UCFFacReservedViewController *facReservedWeb = [[UCFFacReservedViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
+        
+        NSString *url = @"";
+        if (model.modelType  == UCFMicroMoneyModelTypeIntelligent) {//智存宝
+            url = INTELLIGENTDETAIL_APPLY_URL;
+        }
+        else if (model.modelType  == UCFMicroMoneyModelTypeReserve) {//预约宝
+            url = RESERVEDETAIL_APPLY_URL;
+        }
+        facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@", url, model.Id];
+        [self.navigationController pushViewController:facReservedWeb animated:YES];
+    }
+}
 
 #pragma mark - tableview 代理
 
@@ -339,100 +379,98 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
-        //如果未登录，展示登录页面
-        [self showLoginView];
-        return;
-    }
-    
     UCFMicroMoneyModel *model = [self.dataArray objectAtIndex:indexPath.row];
-
-    if (model.modelType == UCFMicroMoneyModelTypeBatchBid ) {//批量出借标
-        [self gotoCollectionDetailViewContoller:model];
-    }
-    else if (model.type.intValue == 0) {
-        self.accoutType = SelectAccoutTypeP2P;
-        if ([self checkUserCanInvestIsDetail:YES type:self.accoutType]) {
-            NSString *userId = [UserInfoSingle sharedManager].userId;
-            if (nil == userId) {
-                UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
-                UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
-                AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
-                [app.tabBarController presentViewController:loginNaviController animated:YES completion:nil];
-                return;
-            }
-            self.accoutType = SelectAccoutTypeP2P;
-            BOOL b = [self checkUserCanInvestIsDetail:NO type:self.accoutType];
-            if (!b) {
-                return;
-            }
-            if (![UserInfoSingle sharedManager].isRisk) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"您还没进行风险评估" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
-                self.accoutType = SelectAccoutTypeP2P;
-                alert.tag =  9000;
-                [alert show];
-                return;
-            }
-            if (![UserInfoSingle sharedManager].isAutoBid) {
-                UCFBatchInvestmentViewController *batchInvestment = [[UCFBatchInvestmentViewController alloc] init];
-                batchInvestment.isStep = 1;
-                batchInvestment.accoutType = SelectAccoutTypeP2P;
-                [self.navigationController pushViewController:batchInvestment animated:YES];
-                return;
-            }
-            UCFFacReservedViewController *facReservedWeb = [[UCFFacReservedViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
-            NSString *url = @"";
-            if ([model.type isEqualToString:@"13"]) {
-                url = NEWUSER_PRODUCTS_URL;
-            }
-            else if ([model.type isEqualToString:@"16"]) {
-                url = PRERESERVE_PRODUCTS_URL;
-            }
-            facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@", url, model.Id];
-            [self.navigationController pushViewController:facReservedWeb animated:YES];
-        }
-    }
-    else {//新手标 或普通标
-                self.model = model;
-                 HSHelper *helper = [HSHelper new];
-                //检查企业老用户是否开户
-                NSString *messageStr =  [helper checkCompanyIsOpen:self.accoutType];
-                if (![messageStr isEqualToString:@""]) {
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil];
-                    [alert show];
-                    return;
-                }
-        
-                if ([self checkUserCanInvestIsDetail:YES type:self.accoutType]) {
-                    NSString *userid = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
-//                    NSString *strParameters = [NSString stringWithFormat:@"id=%@&userId=%@",model.Id,userid];
-                    NSString *prdClaimsIdStr = [NSString stringWithFormat:@"%@",model.Id];
-                    NSDictionary *praramDic = @{@"userId":userid,@"prdClaimsId":prdClaimsIdStr};
-                    
-                    
-                    NSInteger isOrder = [model.isOrder integerValue];
-                    
-                    
-                    if ([model.status intValue ] != 2) {
-                        if (isOrder <= 0) {
-                            UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前标的详情只对出借人开放"];
-                            [self.navigationController pushViewController:controller animated:YES];
-                            return;
-                        }
-                    }
-                    if ([self checkUserCanInvestIsDetail:YES type:self.accoutType]) {
-                        if ([model.status intValue ] != 2) {
-                            if (isOrder > 0) {
-                                [MBProgressHUD showOriginHUDAddedTo:self.view animated:YES];
-                                [[NetworkModule sharedNetworkModule] newPostReq:praramDic tag: kSXTagPrdClaimsGetPrdBaseDetail owner:self signature:YES Type:SelectAccoutTypeP2P];
-                            }
-                        }else {
-                            [MBProgressHUD showOriginHUDAddedTo:self.view animated:YES];
-                            [[NetworkModule sharedNetworkModule] newPostReq:praramDic tag: kSXTagPrdClaimsGetPrdBaseDetail owner:self signature:YES Type:SelectAccoutTypeP2P];
-                    }
-                   }
-               }
-        }
+    [self gotoReservedVCOrIntelligentBaoVC:model];
+    
+    return;
+    
+//    if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
+//        //如果未登录，展示登录页面
+//        [self showLoginView];
+//        return;
+//    }
+//
+//
+//
+//    if (model.modelType == UCFMicroMoneyModelTypeBatchBid ) {//批量出借标
+//        [self gotoCollectionDetailViewContoller:model];
+//    }
+//    else if (model.type.intValue == 0) {
+//        self.accoutType = SelectAccoutTypeP2P;
+//        if ([self checkUserCanInvestIsDetail:YES type:self.accoutType]) {
+//
+//            self.accoutType = SelectAccoutTypeP2P;
+//            BOOL b = [self checkUserCanInvestIsDetail:NO type:self.accoutType];
+//            if (!b) {
+//                return;
+//            }
+//            if (![UserInfoSingle sharedManager].isRisk) {
+//                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"您还没进行风险评估" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
+//                self.accoutType = SelectAccoutTypeP2P;
+//                alert.tag =  9000;
+//                [alert show];
+//                return;
+//            }
+//            if (![UserInfoSingle sharedManager].isAutoBid) {
+//                UCFBatchInvestmentViewController *batchInvestment = [[UCFBatchInvestmentViewController alloc] init];
+//                batchInvestment.isStep = 1;
+//                batchInvestment.accoutType = SelectAccoutTypeP2P;
+//                [self.navigationController pushViewController:batchInvestment animated:YES];
+//                return;
+//            }
+//            UCFFacReservedViewController *facReservedWeb = [[UCFFacReservedViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
+//            NSString *url = @"";
+//            if ([model.type isEqualToString:@"13"]) {
+//                url = NEWUSER_PRODUCTS_URL;
+//            }
+//            else if ([model.type isEqualToString:@"16"]) {
+//                url = PRERESERVE_PRODUCTS_URL;
+//            }
+//            facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@", url, model.Id];
+//            [self.navigationController pushViewController:facReservedWeb animated:YES];
+//        }
+//    }
+//    else {//新手标 或普通标
+//                self.model = model;
+//                 HSHelper *helper = [HSHelper new];
+//                //检查企业老用户是否开户
+//                NSString *messageStr =  [helper checkCompanyIsOpen:self.accoutType];
+//                if (![messageStr isEqualToString:@""]) {
+//                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil];
+//                    [alert show];
+//                    return;
+//                }
+//
+//                if ([self checkUserCanInvestIsDetail:YES type:self.accoutType]) {
+//                    NSString *userid = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
+////                    NSString *strParameters = [NSString stringWithFormat:@"id=%@&userId=%@",model.Id,userid];
+//                    NSString *prdClaimsIdStr = [NSString stringWithFormat:@"%@",model.Id];
+//                    NSDictionary *praramDic = @{@"userId":userid,@"prdClaimsId":prdClaimsIdStr};
+//
+//
+//                    NSInteger isOrder = [model.isOrder integerValue];
+//
+//
+//                    if ([model.status intValue ] != 2) {
+//                        if (isOrder <= 0) {
+//                            UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前标的详情只对出借人开放"];
+//                            [self.navigationController pushViewController:controller animated:YES];
+//                            return;
+//                        }
+//                    }
+//                    if ([self checkUserCanInvestIsDetail:YES type:self.accoutType]) {
+//                        if ([model.status intValue ] != 2) {
+//                            if (isOrder > 0) {
+//                                [MBProgressHUD showOriginHUDAddedTo:self.view animated:YES];
+//                                [[NetworkModule sharedNetworkModule] newPostReq:praramDic tag: kSXTagPrdClaimsGetPrdBaseDetail owner:self signature:YES Type:SelectAccoutTypeP2P];
+//                            }
+//                        }else {
+//                            [MBProgressHUD showOriginHUDAddedTo:self.view animated:YES];
+//                            [[NetworkModule sharedNetworkModule] newPostReq:praramDic tag: kSXTagPrdClaimsGetPrdBaseDetail owner:self signature:YES Type:SelectAccoutTypeP2P];
+//                    }
+//                   }
+//               }
+//        }
 }
 #pragma mark - 去批量投资集合详情
 -(void)gotoCollectionDetailViewContoller:(UCFMicroMoneyModel *)model{
@@ -457,7 +495,8 @@
 {
     UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
     UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
-    [self presentViewController:loginNaviController animated:YES completion:nil];
+    AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    [app.tabBarController presentViewController:loginNaviController animated:YES completion:nil];
 }
 #pragma mark -开户判断
 - (BOOL)checkUserCanInvestIsDetail:(BOOL)isDetail type:(SelectAccoutType)accout;
@@ -527,10 +566,6 @@
 - (void)investApiManager:(UCFInvestAPIManager *)apiManager didSuccessedReturnMicroMoneyResult:(id)result withTag:(NSUInteger)tag
 {
     self.dataArray = (NSMutableArray *)result;
-    
-    
-    
-    
     
     if ([self.tableview.header isRefreshing]){
         [self.tableview.header endRefreshing];

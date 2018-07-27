@@ -37,23 +37,32 @@
     switch (type) {
         case 0://预约
         {
+            _microModel.modelType = UCFMicroMoneyModelTypeReserve;
              [self.reserveButton setTitle:@"一键出借" forState:UIControlStateNormal];
         }
             break;
         case 3://智存宝用3
         {
+              _microModel.modelType = UCFMicroMoneyModelTypeIntelligent;
              [self.reserveButton setTitle:@"一键出借" forState:UIControlStateNormal];
         }
             break;
         case 14://批量出借
         {
+             _microModel.modelType = UCFMicroMoneyModelTypeBatchBid;
             [self.reserveButton setTitle:@"批量出借" forState:UIControlStateNormal];
             
         }
             break;
-            
         default:
             break;
+    }
+}
+- (IBAction)gotoClickReserve:(UIButton *)sender
+{
+    if ([self.delegate respondsToSelector:@selector(microMoneyListCell:didClickedInvestButtonWithModel:)])
+    {
+        [self.delegate microMoneyListCell:self didClickedInvestButtonWithModel:self.microModel];
     }
 }
 @end

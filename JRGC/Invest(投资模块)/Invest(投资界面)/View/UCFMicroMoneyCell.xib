@@ -117,6 +117,9 @@
                                 <real key="value" value="16"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
+                        <connections>
+                            <action selector="gotoClickReserve:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="aeF-WV-gwD"/>
+                        </connections>
                     </button>
                 </subviews>
                 <constraints>

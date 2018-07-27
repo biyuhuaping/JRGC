@@ -314,6 +314,8 @@
 #define PRERESERVE_PRODUCTS_URL          @"https://m.9888.cn/static/wap/p2p/index.html#/reserve-bid/products"
 #define PRERESERVE_APPLY_URL          @"https://m.9888.cn/static/wap/p2p/index.html#/reserve-bid/apply"
 
+#define INTELLIGENTDETAIL_APPLY_URL @"https://m.9888.cn/static/wap/p2p/index.html#/order/info" //智存宝详情
+#define RESERVEDETAIL_APPLY_URL @"https://m.9888.cn/static/wap/p2p/index.html#/reserve-bid/info"//预约宝详情
 #define HONERRECHANGESHOWCONT @"/api/contract/v2/showContractMess.json"//尊享充值委托划款协议合同预览
 #define TOTALASSTSOVERVIEWURL @"api/userAccount/v2/assetsOverview.json"//总资产接口
 #define TOTALEARINGSOVERVIEW  @"/api/userAccount/v2/earningsOverview.json" //累计收益

@@ -15,8 +15,8 @@ typedef enum : NSUInteger {
     UCFHomeListTypeDebtsMore,
     UCFHomeListTypeDetail,
     UCFHomeListTypeInvest,
-    UCFHomeListTypeIntelligentLoan,
-     UCFHomeListTypeQualityClaims,
+    UCFHomeListTypeIntelligentLoan,//智能出借
+    UCFHomeListTypeQualityClaims,//优质债权
 } UCFHomeListType;
 
 @class UCFHomeListPresenter, UCFHomeListViewController, UCFHomeListCellModel;

@@ -503,8 +503,10 @@
             if (model.moedelType == UCFHomeListCellModelTypeNewUser) {
                 facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@", NEWUSER_PRODUCTS_URL, model.Id];
             }
-            else if (model.moedelType == UCFHomeListCellModelTypeReserved || model.moedelType == UCFHomeListCellModelTypeAI) {
-                facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@", PRERESERVE_PRODUCTS_URL, model.Id];
+            else if (model.moedelType == UCFHomeListCellModelTypeReserved) {//预约宝
+                facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@", RESERVEDETAIL_APPLY_URL, model.Id];
+            }else if(model.moedelType == UCFHomeListCellModelTypeAI) {//智存宝
+                facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@", INTELLIGENTDETAIL_APPLY_URL, model.Id];
             }
             [self.navigationController pushViewController:facReservedWeb animated:YES];
         }
@@ -690,45 +692,45 @@
             }
         }
     }
-    else if (type == UCFHomeListTypeP2PMore)
-    {
-        AppDelegate *appdel = (AppDelegate *)[UIApplication sharedApplication].delegate;
-        UCFInvestViewController *invest = (UCFInvestViewController *)[[appdel.tabBarController.childViewControllers objectAtIndex:1].childViewControllers firstObject];
-        invest.selectedType = @"P2P";
-        if ([invest isViewLoaded]) {
-            [invest changeView];
-        }
-        [appdel.tabBarController setSelectedIndex:1];
-    }
-    else if (type == UCFHomeListTypeZXMore)
-    {
-        AppDelegate *appdel = (AppDelegate *)[UIApplication sharedApplication].delegate;
-        UCFInvestViewController *invest = (UCFInvestViewController *)[[appdel.tabBarController.childViewControllers objectAtIndex:1].childViewControllers firstObject];
-        invest.selectedType = @"ZX";
-        if ([invest isViewLoaded]) {
-            [invest changeView];
-        }
-        [appdel.tabBarController setSelectedIndex:1];
-    }
-    else if (type == UCFHomeListTypeGlodMore) {
-    
-        AppDelegate *appdel = (AppDelegate *)[UIApplication sharedApplication].delegate;
-        UCFInvestViewController *invest = (UCFInvestViewController *)[[appdel.tabBarController.childViewControllers objectAtIndex:1].childViewControllers firstObject];
-        invest.selectedType = @"Gold";
-        if ([invest isViewLoaded]) {
-            [invest changeView];
-        }
-        [appdel.tabBarController setSelectedIndex:1];
-    }
-    else if (type == UCFHomeListTypeDebtsMore) {
-        AppDelegate *appdel = (AppDelegate *)[UIApplication sharedApplication].delegate;
-        UCFInvestViewController *invest = (UCFInvestViewController *)[[appdel.tabBarController.childViewControllers objectAtIndex:1].childViewControllers firstObject];
-        invest.selectedType = @"Trans";
-        if ([invest isViewLoaded]) {
-            [invest changeView];
-        }
-        [appdel.tabBarController setSelectedIndex:1];
-    }
+//    else if (type == UCFHomeListTypeP2PMore)
+//    {
+//        AppDelegate *appdel = (AppDelegate *)[UIApplication sharedApplication].delegate;
+//        UCFInvestViewController *invest = (UCFInvestViewController *)[[appdel.tabBarController.childViewControllers objectAtIndex:1].childViewControllers firstObject];
+//        invest.selectedType = @"P2P";
+//        if ([invest isViewLoaded]) {
+//            [invest changeView];
+//        }
+//        [appdel.tabBarController setSelectedIndex:1];
+//    }
+//    else if (type == UCFHomeListTypeZXMore)
+//    {
+//        AppDelegate *appdel = (AppDelegate *)[UIApplication sharedApplication].delegate;
+//        UCFInvestViewController *invest = (UCFInvestViewController *)[[appdel.tabBarController.childViewControllers objectAtIndex:1].childViewControllers firstObject];
+//        invest.selectedType = @"ZX";
+//        if ([invest isViewLoaded]) {
+//            [invest changeView];
+//        }
+//        [appdel.tabBarController setSelectedIndex:1];
+//    }
+//    else if (type == UCFHomeListTypeGlodMore) {
+//
+//        AppDelegate *appdel = (AppDelegate *)[UIApplication sharedApplication].delegate;
+//        UCFInvestViewController *invest = (UCFInvestViewController *)[[appdel.tabBarController.childViewControllers objectAtIndex:1].childViewControllers firstObject];
+//        invest.selectedType = @"Gold";
+//        if ([invest isViewLoaded]) {
+//            [invest changeView];
+//        }
+//        [appdel.tabBarController setSelectedIndex:1];
+//    }
+//    else if (type == UCFHomeListTypeDebtsMore) {
+//        AppDelegate *appdel = (AppDelegate *)[UIApplication sharedApplication].delegate;
+//        UCFInvestViewController *invest = (UCFInvestViewController *)[[appdel.tabBarController.childViewControllers objectAtIndex:1].childViewControllers firstObject];
+//        invest.selectedType = @"Trans";
+//        if ([invest isViewLoaded]) {
+//            [invest changeView];
+//        }
+//        [appdel.tabBarController setSelectedIndex:1];
+//    }
 }
 
 - (void)homeList:(UCFHomeListViewController *)homeList   withType:(UCFHomeListType)type

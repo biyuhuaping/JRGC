@@ -10,10 +10,11 @@
 #import "UCFHonorInvestViewController.h"
 #import "UCFMicroMoneyViewController.h"
 #import "UCFInvestTransferViewController.h"
-#import "UCFGoldenViewController.h"
+//#import "UCFGoldenViewController.h"
 #import "PagerView.h"
 #import "UCFSelectedView.h"
 #import "UCFOrdinaryBidController.h"
+#import "UCFHomeListPresenter.h"
 @interface UCFInvestViewController () <UCFSelectedViewDelegate>
 {
     PagerView *_pagerView;
@@ -24,7 +25,7 @@
 @property (strong, nonatomic) UCFOrdinaryBidController *honorInvest;
 
 @property (strong, nonatomic) UCFMicroMoneyViewController *microMoney;
-@property (strong, nonatomic) UCFGoldenViewController *golden;
+//@property (strong, nonatomic) UCFGoldenViewController *golden;
 @property (strong, nonatomic) UCFInvestTransferViewController *investTransfer;
 
 @property (strong, nonatomic) UCFBaseViewController *currentViewController;
@@ -150,21 +151,12 @@
 #pragma mark - 设置界面
 - (void)addChildViewControllers
 {
-//    if ([UserInfoSingle sharedManager].wjIsShow) {
-//        [self addMicroMoney];
-//    }
-//    if ([UserInfoSingle sharedManager].zxIsShow) {
-//        [self addHonor];
-//    }
-//    if ([UserInfoSingle sharedManager].goldIsShow) {
-//        [self addGolden];
-//    }
-//    if ([UserInfoSingle sharedManager].transferIsShow) {
-//        [self addTransfer];
-//    }
+        UCFHomeListPresenter *homeList = [[UCFHomeListPresenter alloc]init];
+        [homeList getUserStateData];
         [self addHonor];//添加优质债权
         [self addMicroMoney];//添加智能出借
         [self addTransfer];//添加债权转让
+    
 }
 
 - (UCFMicroMoneyViewController *)microMoney
@@ -182,21 +174,6 @@
     return _honorInvest;
     
 }
-
-//- (UCFHonorInvestViewController *)honorInvest
-//{
-//    if (nil == _honorInvest) {
-//        _honorInvest = [[UCFHonorInvestViewController alloc]initWithNibName:@"UCFHonorInvestViewController" bundle:nil];
-//    }
-//    return _honorInvest;
-//}
-
-//- (UCFGoldenViewController *)golden {
-//    if (nil == _golden) {
-//        _golden = [[UCFGoldenViewController alloc] initWithNibName:@"UCFGoldenViewController" bundle:nil];
-//    }
-//    return _golden;
-//}
 
 - (UCFInvestTransferViewController *)investTransfer
 {
@@ -216,10 +193,10 @@
     [self addChildViewController:self.honorInvest];
 }
 
-- (void)addGolden {
-    self.golden.rootVc = self;
-    [self addChildViewController:self.golden];
-}
+//- (void)addGolden {
+//    self.golden.rootVc = self;
+//    [self addChildViewController:self.golden];
+//}
 
 - (void)addTransfer {
     self.investTransfer.rootVc = self;
