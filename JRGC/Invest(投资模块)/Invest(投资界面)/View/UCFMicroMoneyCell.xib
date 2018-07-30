@@ -50,12 +50,20 @@
                                 <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="一键批量投标" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jk3-A4-52v">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="一键批量投标" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jk3-A4-52v">
                                 <rect key="frame" x="88" y="8" width="74" height="15"/>
                                 <color key="backgroundColor" red="1" green="0.87450980392156863" blue="0.87450980392156863" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="74" id="CeU-w6-FgF"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="1" green="0.52156862745098043" blue="0.52549019607843139" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -144,6 +152,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="PrdNameTipLabelWidth" destination="CeU-w6-FgF" id="hGu-cE-EVa"/>
                 <outlet property="addedRateLabel" destination="HA1-mk-Nhj" id="axX-ZS-8GZ"/>
                 <outlet property="anurateLabel" destination="WnY-o4-xQu" id="zUH-C0-2hA"/>
                 <outlet property="limitLabel" destination="q41-Jb-9rX" id="Ybg-qn-RqE"/>

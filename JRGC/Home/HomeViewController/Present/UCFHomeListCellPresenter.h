@@ -25,7 +25,7 @@
 - (NSString *)repayPeriod;
 - (NSString *)availBorrowAmount;
 - (NSString *)platformSubsidyExpense;
-- (NSString *)guaranteeCompany;
+- (NSString *)guaranteeCompanyName;
 - (NSString *)fixedDate;
 - (NSString *)holdTime;
 - (NSString *)totalCount;
