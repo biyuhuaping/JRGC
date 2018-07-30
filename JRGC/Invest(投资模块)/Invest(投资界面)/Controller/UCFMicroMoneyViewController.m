@@ -325,10 +325,10 @@
 //}
 -(void)microMoneyListCell:(UCFHomeInvestCell *)microMoneyCell didClickedInvestButtonWithModel:(UCFMicroMoneyModel *)model
 {
-    [self gotoReservedVCOrIntelligentBaoVC:model];
+    [self gotoReservedVCOrIntelligentBaoVC:model isDetail:NO];
 }
 
--(void)gotoReservedVCOrIntelligentBaoVC:(UCFMicroMoneyModel *)model
+-(void)gotoReservedVCOrIntelligentBaoVC:(UCFMicroMoneyModel *)model isDetail:(BOOL)isDetail
 {
     if (model.modelType == UCFMicroMoneyModelTypeBatchBid ) {//批量出借标
         [self gotoCollectionDetailViewContoller:model];
@@ -363,10 +363,10 @@
         
         NSString *url = @"";
         if (model.modelType  == UCFMicroMoneyModelTypeIntelligent) {//智存宝
-            url = INTELLIGENTDETAIL_APPLY_URL;
+            url = isDetail ?  INTELLIGENTDETAIL_APPLY_URL : INTELLIGENTLOAN_APPLY_URL;
         }
         else if (model.modelType  == UCFMicroMoneyModelTypeReserve) {//预约宝
-            url = RESERVEDETAIL_APPLY_URL;
+            url =  isDetail ?  RESERVEDETAIL_APPLY_URL : RESERVEINVEST_APPLY_URL;
         }
         facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@", url, model.Id];
         [self.navigationController pushViewController:facReservedWeb animated:YES];
@@ -380,7 +380,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     UCFMicroMoneyModel *model = [self.dataArray objectAtIndex:indexPath.row];
-    [self gotoReservedVCOrIntelligentBaoVC:model];
+    [self gotoReservedVCOrIntelligentBaoVC:model isDetail:YES];
     
     return;
     

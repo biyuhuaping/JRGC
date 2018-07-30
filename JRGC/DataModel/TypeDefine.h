@@ -316,6 +316,11 @@
 
 #define INTELLIGENTDETAIL_APPLY_URL @"https://m.9888.cn/static/wap/p2p/index.html#/order/info" //智存宝详情
 #define RESERVEDETAIL_APPLY_URL @"https://m.9888.cn/static/wap/p2p/index.html#/reserve-bid/info"//预约宝详情
+
+
+#define INTELLIGENTLOAN_APPLY_URL   @"https://m.9888.cn/static/wap/p2p/index.html#/order/apply"//智存宝 一键出借
+#define RESERVEINVEST_APPLY_URL  @"https://m.9888.cn/static/wap/p2p/index.html#/reserve-bid/reverve/apply"
+
 #define HONERRECHANGESHOWCONT @"/api/contract/v2/showContractMess.json"//尊享充值委托划款协议合同预览
 #define TOTALASSTSOVERVIEWURL @"api/userAccount/v2/assetsOverview.json"//总资产接口
 #define TOTALEARINGSOVERVIEW  @"/api/userAccount/v2/earningsOverview.json" //累计收益

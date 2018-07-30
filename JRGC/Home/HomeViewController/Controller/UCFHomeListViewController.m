@@ -330,9 +330,9 @@
 #pragma mark - 工厂邀请cell的代理方法
 - (void)homeInvestCell:(UCFHomeInvestCell *)homeInvestCell didClickedInvestButtonAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (!self.presenter.canReservedClicked) {
-        return;
-    }
+//    if (!self.presenter.canReservedClicked) {
+//        return;
+//    }
     NSString *userId = [UserInfoSingle sharedManager].userId;
     if (nil == userId) {
         UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
