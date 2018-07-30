@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *reserveButton;
 @property (weak, nonatomic) IBOutlet UILabel *limitLabel;
 @property (weak, nonatomic) IBOutlet UILabel *addedRateLabel;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *PrdNameTipLabelWidth;
 @property (assign, nonatomic) id<UCFMicroMoneyCellDelegate> delegate;
 - (IBAction)gotoClickReserve:(UIButton *)sender;
 @property (strong, nonatomic) UCFMicroMoneyModel *microModel;

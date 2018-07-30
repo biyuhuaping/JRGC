@@ -27,7 +27,7 @@ typedef enum : NSUInteger {
 @property (nonatomic, copy) NSString *busType;
 @property (nonatomic, strong) NSNumber *completeLoan;
 @property (nonatomic, copy) NSString *fixedDate;
-@property (nonatomic, copy) NSString *guaranteeCompany;
+@property (nonatomic, copy) NSString *guaranteeCompanyName;
 @property (nonatomic, copy) NSString *holdTime;
 @property (nonatomic, copy) NSString *Id;
 @property (nonatomic, copy) NSString *appointPeriod;

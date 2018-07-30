@@ -289,6 +289,39 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
+    if(self.microMoneyModel != nil)
+    {
+        if (_microMoneyModel.platformSubsidyExpense.length > 0) {//贴
+            self.image1W.constant = 18;
+            self.proImageView1.image = [UIImage imageNamed:@"invest_icon_buletie"];
+        }
+        else {
+            self.image1W.constant = 0;
+        }
+        if (_microMoneyModel.guaranteeCompany.length > 0) {//贴
+            self.image2W.constant = 18;
+            self.proImageView2.image = [UIImage imageNamed:@"particular_icon_guarantee_dark"];
+        }
+        else {
+            self.image2W.constant = 0;
+        }
+        if (_microMoneyModel.fixedDate.length > 0) {//贴
+            self.image3W.constant = 18;
+            self.proImageView3.image = [UIImage imageNamed:@"invest_icon_redgu-1"];
+        }
+        else {
+            self.image3W.constant = 0;
+        }
+        if (_microMoneyModel.holdTime.length > 0) {//贴
+            self.image4W.constant = 18;
+            self.proImageView4.image = [UIImage imageNamed:@"invest_icon_ling"];
+        }
+        else {
+            self.image4W.constant = 0;
+        }
+        return;
+    }
+    
     if (self.presenter) {
         if (self.presenter.type.intValue == 3) {
             _image1W.constant = 0;
@@ -304,7 +337,7 @@
             else {
                 _image1W.constant = 0;
             }
-            if (_presenter.guaranteeCompany.length > 0) {//贴
+            if (_presenter.guaranteeCompanyName.length > 0) {//贴
                 _image2W.constant = 18;
                 self.proImageView2.image = [UIImage imageNamed:@"particular_icon_guarantee_dark"];
             }
@@ -492,7 +525,7 @@
     self.remainLabel.text = [self moneywithRemaining:temp total:microMoneyModel.borrowAmount];
     
     NSInteger status = [microMoneyModel.status integerValue];
-    NSArray *statusArr = @[@"未审核",@"等待确认",@"认购",@"流标",@"满标",@"回款中",@"已回款"];
+    NSArray *statusArr = @[@"未审核",@"等待确认",@"出借",@"流标",@"满标",@"回款中",@"已回款"];
     if (status>2) {
         self.circleProgressView.progressText = @"已售罄";
         self.circleProgressView.textColor = UIColorWithRGB(0x909dae);

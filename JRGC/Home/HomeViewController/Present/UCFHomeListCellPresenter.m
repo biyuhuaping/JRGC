@@ -101,9 +101,9 @@
     return self.item.platformSubsidyExpense;
 }
 
-- (NSString *)guaranteeCompany
+- (NSString *)guaranteeCompanyName
 {
-    return self.item.guaranteeCompany;
+    return self.item.guaranteeCompanyName;
 }
 
 - (NSString *)fixedDate

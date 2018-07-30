@@ -11,6 +11,7 @@
 #import "UCFToolsMehod.h"
 #import "UCFProjectListCell.h"
 #import "UCFProjectListModel.h"
+#import "UCFMicroMoneyModel.h"
 #import "UCFNoPermissionViewController.h"
 #import "UCFProjectDetailViewController.h"
 #import "UCFLoginViewController.h"
@@ -20,9 +21,10 @@
 #import "HSHelper.h"
 #import "RiskAssessmentViewController.h"
 #import "UCFHonorHeaderView.h"
-@interface UCFOrdinaryBidController () <UITableViewDelegate, UITableViewDataSource, UCFProjectListCellDelegate>
+#import "UCFHomeListCell.h"
+@interface UCFOrdinaryBidController () <UITableViewDelegate, UITableViewDataSource, UCFProjectListCellDelegate,UCFHomeListCellHonorDelegate>
 {
-    UCFProjectListModel *_projectListModel;
+    UCFMicroMoneyModel *_microMoneyModel;
 }
 
 
@@ -91,21 +93,26 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *cellStr1 = @"projectlist";
-    UCFProjectListCell *cell = [self.tableview dequeueReusableCellWithIdentifier:cellStr1];
-    if (cell == nil) {
-        cell = [[NSBundle mainBundle]loadNibNamed:@"UCFProjectListCell" owner:self options:nil][0];
+
+    
+    static NSString *cellId = @"homeListCell";
+    UCFHomeListCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+    if (nil == cell) {
+        cell = (UCFHomeListCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeListCell" owner:self options:nil] lastObject];
+        
     }
-    UCFProjectListModel *model = [self.dataArray objectAtIndex:indexPath.row];
-    cell.model = model;
-    cell.delegate = self;
-    cell.type = UCFProjectListCellTypeProject;
+    cell.tableView = tableView;
+    cell.indexPath = indexPath;
+    cell.honorDelegate = self;
+    
+    UCFMicroMoneyModel *model = [self.dataArray objectAtIndex:indexPath.row];
+    cell.microMoneyModel = model;
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 98;
+    return 100;
 }
 -(void)reloadP2PData{
     [self.tableview.header beginRefreshing];
@@ -160,8 +167,9 @@
             }
             for (NSDictionary *dict in list_result) {
                 //                DBLOG(@"%@", dict);
-                UCFProjectListModel *model = [UCFProjectListModel projectListWithDict:dict];
-                model.isAnim = YES;
+                UCFMicroMoneyModel *model = [UCFMicroMoneyModel microMoneyModelWithDict:dict];
+//                model.isAnim = YES;
+                model.modelType =  UCFMicroMoneyModelTypeNormal;
                 [self.dataArray addObject:model];
             }
             
@@ -187,9 +195,9 @@
         NSString *rstcode = dic[@"ret"];
         NSString *rsttext = dic[@"message"];
         if ([rstcode intValue] == 1) {
-            NSArray *prdLabelsListTemp = [NSArray arrayWithArray:(NSArray*)_projectListModel.prdLabelsList];
+            NSArray *prdLabelsListTemp = [NSArray arrayWithArray:(NSArray*)_microMoneyModel.prdLabelsList];
             UCFProjectDetailViewController *controller = [[UCFProjectDetailViewController alloc] initWithDataDic:dataDic isTransfer:NO withLabelList:prdLabelsListTemp];
-            CGFloat platformSubsidyExpense = [_projectListModel.platformSubsidyExpense floatValue];
+            CGFloat platformSubsidyExpense = [_microMoneyModel.platformSubsidyExpense floatValue];
             [[NSUserDefaults standardUserDefaults] setValue:[NSString stringWithFormat:@"%.1f",platformSubsidyExpense] forKey:@"platformSubsidyExpense"];
             controller.rootVc = self.rootVc;
             controller.accoutType = SelectAccoutTypeP2P;
@@ -267,14 +275,14 @@
             return;
         }
         
-        _projectListModel = [self.dataArray objectAtIndex:indexPath.row];
+        _microMoneyModel = [self.dataArray objectAtIndex:indexPath.row];
         NSString *userid = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
 //        NSString *strParameters = [NSString stringWithFormat:@"id=%@&userId=%@", _projectListModel.Id,userid];
-        NSInteger isOrder = [_projectListModel.isOrder integerValue];
-        NSString *prdClaimsIdStr = [NSString stringWithFormat:@"%@",_projectListModel.Id];
+        NSInteger isOrder = [_microMoneyModel.isOrder integerValue];
+        NSString *prdClaimsIdStr = [NSString stringWithFormat:@"%@",_microMoneyModel.Id];
         NSDictionary *praramDic = @{@"userId":userid,@"prdClaimsId":prdClaimsIdStr};
   
-        if ([_projectListModel.status intValue ] != 2) {
+        if ([_microMoneyModel.status intValue ] != 2) {
             if (isOrder <= 0) {
                 UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前标的详情只对出借人开放"];
                 [self.navigationController pushViewController:controller animated:YES];
@@ -282,7 +290,7 @@
             }
         }
         if ([self checkUserCanInvestIsDetail:YES]) {
-            if ([_projectListModel.status intValue ] != 2) {
+            if ([_microMoneyModel.status intValue ] != 2) {
                 if (isOrder > 0) {
                     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
                     [[NetworkModule sharedNetworkModule] newPostReq:praramDic tag: kSXTagPrdClaimsGetPrdBaseDetail owner:self signature:YES Type:SelectAccoutTypeP2P];
@@ -295,21 +303,26 @@
         }
     }
 }
-- (void)cell:(UCFProjectListCell *)cell clickInvestBtn:(UIButton *)button withModel:(UCFProjectListModel *)model
+-(void)homelistCell:(UCFHomeListCell *)homelistCell didClickedProgressViewAtIndexPath:(NSIndexPath *)indexPath
+//{
+
+//}
+//- (void)cell:(UCFProjectListCell *)cell clickInvestBtn:(UIButton *)button withModel:(UCFProjectListModel *)model
 {
     if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
         //如果未登录，展示登录页面
         [self showLoginView];
     } else {
+        UCFMicroMoneyModel *model = [self.dataArray objectAtIndex:indexPath.row];
         HSHelper *helper = [HSHelper new];
         if (![helper checkP2POrWJIsAuthorization:self.accoutType]) {//先授权
             [helper pushP2POrWJAuthorizationType:self.accoutType nav:self.navigationController];
             return;
         }
-        _projectListModel = model;
+        _microMoneyModel = model;
   
-        NSInteger isOrder = [_projectListModel.isOrder integerValue];
-        if ([_projectListModel.status intValue ] != 2) {
+        NSInteger isOrder = [_microMoneyModel.isOrder integerValue];
+        if ([_microMoneyModel.status intValue ] != 2) {
             if (isOrder <= 0) {
                 return;
             }
@@ -318,7 +331,7 @@
             
             [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             NSString *userid = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
-            NSString *strParameters = [NSString stringWithFormat:@"id=%@&userId=%@", _projectListModel.Id,userid];
+            NSString *strParameters = [NSString stringWithFormat:@"id=%@&userId=%@", _microMoneyModel.Id,userid];
             [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDealBid owner:self Type:SelectAccoutDefault];
         }
     }
