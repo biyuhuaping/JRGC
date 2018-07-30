@@ -10,19 +10,22 @@
 #import "UCFHonorInvestViewController.h"
 #import "UCFMicroMoneyViewController.h"
 #import "UCFInvestTransferViewController.h"
-#import "UCFGoldenViewController.h"
+//#import "UCFGoldenViewController.h"
 #import "PagerView.h"
 #import "UCFSelectedView.h"
-
+#import "UCFOrdinaryBidController.h"
+#import "UCFHomeListPresenter.h"
 @interface UCFInvestViewController () <UCFSelectedViewDelegate>
 {
     PagerView *_pagerView;
 
 }
 @property (weak, nonatomic) UCFSelectedView *itemSelectedView;
-@property (strong, nonatomic) UCFHonorInvestViewController *honorInvest;
+//@property (strong, nonatomic) UCFHonorInvestViewController *honorInvest;
+@property (strong, nonatomic) UCFOrdinaryBidController *honorInvest;
+
 @property (strong, nonatomic) UCFMicroMoneyViewController *microMoney;
-@property (strong, nonatomic) UCFGoldenViewController *golden;
+//@property (strong, nonatomic) UCFGoldenViewController *golden;
 @property (strong, nonatomic) UCFInvestTransferViewController *investTransfer;
 
 @property (strong, nonatomic) UCFBaseViewController *currentViewController;
@@ -38,7 +41,7 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setDefaultView) name:@"setDefaultViewData" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUI:) name:@"refreshSuperviseView" object:nil];
 //        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentControllerUpdate) name:@"reloadHonerPlanData" object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentControllerUpdate) name:@"reloadP2PTransferData" object:nil];
+//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentControllerUpdate) name:@"reloadP2PTransferData" object:nil];
     }
     return self;
 }
@@ -53,7 +56,7 @@
     [super viewDidLoad];
     [self addChildViewControllers];
     //设置UI
-    [self createUI];
+    [self newCreateUI];
 }
     
 - (void)refreshUI:(NSNotification *)noti
@@ -68,7 +71,7 @@
                 [_pagerView removeFromSuperview];
                 _pagerView = nil;
             }
-            [self createUI];
+            [self newCreateUI];
         }
     });
 }
@@ -81,7 +84,7 @@
         [vc removeFromParentViewController];
     }
     [self addChildViewControllers];
-    [self createUI];
+    [self newCreateUI];
 }
 
 - (void)refresh {
@@ -124,15 +127,15 @@
         }
     }
     else if ([baseVc isEqual:self.honorInvest]) {
-        if (![self.honorInvest.tableView.header isRefreshing]) {
-            [self.honorInvest.tableView.header beginRefreshing];
+        if (![self.honorInvest.tableview.header isRefreshing]) {
+            [self.honorInvest.tableview.header beginRefreshing];
         }
     }
-    else if ([baseVc isEqual:self.golden]) {
-        if (![self.golden.tableview.header isRefreshing]) {
-            [self.golden.tableview.header beginRefreshing];
-        }
-    }
+//    else if ([baseVc isEqual:self.golden]) {
+//        if (![self.golden.tableview.header isRefreshing]) {
+//            [self.golden.tableview.header beginRefreshing];
+//        }
+//    }
     else if ([baseVc isEqual:self.investTransfer]) {
         if (![self.investTransfer.tableview.header isRefreshing]) {
             [self.investTransfer.tableview.header beginRefreshing];
@@ -148,18 +151,12 @@
 #pragma mark - 设置界面
 - (void)addChildViewControllers
 {
-    if ([UserInfoSingle sharedManager].wjIsShow) {
-        [self addMicroMoney];
-    }
-    if ([UserInfoSingle sharedManager].zxIsShow) {
-        [self addHonor];
-    }
-    if ([UserInfoSingle sharedManager].goldIsShow) {
-        [self addGolden];
-    }
-    if ([UserInfoSingle sharedManager].transferIsShow) {
-        [self addTransfer];
-    }
+        UCFHomeListPresenter *homeList = [[UCFHomeListPresenter alloc]init];
+        [homeList getUserStateData];
+        [self addHonor];//添加优质债权
+        [self addMicroMoney];//添加智能出借
+        [self addTransfer];//添加债权转让
+    
 }
 
 - (UCFMicroMoneyViewController *)microMoney
@@ -169,20 +166,13 @@
     }
     return _microMoney;
 }
-
-- (UCFHonorInvestViewController *)honorInvest
+-(UCFOrdinaryBidController *)honorInvest
 {
     if (nil == _honorInvest) {
-        _honorInvest = [[UCFHonorInvestViewController alloc]initWithNibName:@"UCFHonorInvestViewController" bundle:nil];
+        _honorInvest = [[UCFOrdinaryBidController alloc]initWithNibName:@"UCFOrdinaryBidController" bundle:nil];
     }
     return _honorInvest;
-}
-
-- (UCFGoldenViewController *)golden {
-    if (nil == _golden) {
-        _golden = [[UCFGoldenViewController alloc] initWithNibName:@"UCFGoldenViewController" bundle:nil];
-    }
-    return _golden;
+    
 }
 
 - (UCFInvestTransferViewController *)investTransfer
@@ -203,91 +193,94 @@
     [self addChildViewController:self.honorInvest];
 }
 
-- (void)addGolden {
-    self.golden.rootVc = self;
-    [self addChildViewController:self.golden];
-}
+//- (void)addGolden {
+//    self.golden.rootVc = self;
+//    [self addChildViewController:self.golden];
+//}
 
 - (void)addTransfer {
     self.investTransfer.rootVc = self;
     [self addChildViewController:self.investTransfer];
 }
 
-
-- (void)createUI {
+- (void)newCreateUI
+{
     NSMutableArray *titleArray = [[NSMutableArray alloc] init];
-    if ([UserInfoSingle sharedManager].wjIsShow) {
-        [titleArray addObject:@"微金"];
-    }
-    if ([UserInfoSingle sharedManager].zxIsShow) {
-        [titleArray addObject:@"尊享"];
-    }
-    if ([UserInfoSingle sharedManager].goldIsShow) {
-        [titleArray addObject:@"黄金"];
-    }
-    if ([UserInfoSingle sharedManager].transferIsShow) {
-        [titleArray addObject:@"债转"];
-    }
+//    if ([UserInfoSingle sharedManager].wjIsShow) {
+//        [titleArray addObject:@"微金"];
+//    }
+//    if ([UserInfoSingle sharedManager].zxIsShow) {
+//        [titleArray addObject:@"尊享"];
+//    }
+//    if ([UserInfoSingle sharedManager].goldIsShow) {
+//        [titleArray addObject:@"黄金"];
+//    }
+//    if ([UserInfoSingle sharedManager].transferIsShow) {
+//        [titleArray addObject:@"债转"];
+//    }
+     [titleArray addObject:@"优质债权"];
+     [titleArray addObject:@"智能出借"];
+     [titleArray addObject:@"债权转让"];
+    
     _pagerView = [[PagerView alloc] initWithFrame:CGRectMake(0,20,ScreenWidth,ScreenHeight - 20 - 49)
-                               SegmentViewHeight:44
-                                      titleArray:titleArray
-                                      Controller:self
-                                       lineWidth:44
-                                      lineHeight:3];
+                                SegmentViewHeight:44
+                                       titleArray:titleArray
+                                       Controller:self
+                                        lineWidth:70
+                                       lineHeight:3];
     
     [self.view addSubview:_pagerView];
     
-    if ([self.selectedType isEqualToString:@"P2P"]) {
-        self.currentViewController = self.microMoney;
-        [_pagerView setSelectIndex:[self.childViewControllers indexOfObject:self.currentViewController]];
-    }
-    else if ([self.selectedType isEqualToString:@"ZX"]) {
-        self.currentViewController = self.honorInvest;
-        if ([self.childViewControllers containsObject:self.honorInvest]) {
-            [_pagerView setSelectIndex:[self.childViewControllers indexOfObject:self.currentViewController]];
-        }
-        else {
-            [_pagerView setSelectIndex:0];
-        }
-        
-    }
-    else if ([self.selectedType isEqualToString:@"Trans"]) {
-        self.currentViewController = self.investTransfer;
-        if ([self.childViewControllers containsObject:self.investTransfer]) {
-            [_pagerView setSelectIndex:[self.childViewControllers indexOfObject:self.currentViewController]];
-        }
-        else {
-            [_pagerView setSelectIndex:0];
-        }
-    }
-    else if ([self.selectedType isEqualToString:@"Gold"]) {
-        self.currentViewController = self.golden;
-        if ([self.childViewControllers containsObject:self.golden]) {
-            [_pagerView setSelectIndex:[self.childViewControllers indexOfObject:self.currentViewController]];
-        }
-        else {
-            [_pagerView setSelectIndex:0];
-        }
-    }
-    else {
-        self.currentViewController = self.microMoney;
-        [_pagerView setSelectIndex:0];
-    }
+//    if ([self.selectedType isEqualToString:@"P2P"]) {
+//        self.currentViewController = self.microMoney;
+//        [_pagerView setSelectIndex:[self.childViewControllers indexOfObject:self.currentViewController]];
+//    }
+//    else if ([self.selectedType isEqualToString:@"ZX"]) {
+//        self.currentViewController = self.honorInvest;
+//        if ([self.childViewControllers containsObject:self.honorInvest]) {
+//            [_pagerView setSelectIndex:[self.childViewControllers indexOfObject:self.currentViewController]];
+//        }
+//        else {
+//            [_pagerView setSelectIndex:0];
+//        }
+//
+//    }
+//    else if ([self.selectedType isEqualToString:@"Trans"]) {
+//        self.currentViewController = self.investTransfer;
+//        if ([self.childViewControllers containsObject:self.investTransfer]) {
+//            [_pagerView setSelectIndex:[self.childViewControllers indexOfObject:self.currentViewController]];
+//        }
+//        else {
+//            [_pagerView setSelectIndex:0];
+//        }
+//    }
+//    else if ([self.selectedType isEqualToString:@"Gold"]) {
+//        self.currentViewController = self.golden;
+//        if ([self.childViewControllers containsObject:self.golden]) {
+//            [_pagerView setSelectIndex:[self.childViewControllers indexOfObject:self.currentViewController]];
+//        }
+//        else {
+//            [_pagerView setSelectIndex:0];
+//        }
+//    }
+//    else {
+//        self.currentViewController = self.microMoney;
+//        [_pagerView setSelectIndex:0];
+//    }
 }
-
 - (void)changeView {
-    if ([self.selectedType isEqualToString:@"P2P"]) {
+    if ([self.selectedType isEqualToString:@"IntelligentLoan"]) {//智能出借
         self.currentViewController = self.microMoney;
         [_pagerView setSelectIndex:[self.childViewControllers indexOfObject:self.currentViewController]];
     }
-    else if ([self.selectedType isEqualToString:@"ZX"]) {
+    else if ([self.selectedType isEqualToString:@"QualityClaims"]) {//优质债权
         self.currentViewController = self.honorInvest;
         if ([self.childViewControllers containsObject:self.honorInvest]) {
             [_pagerView setSelectIndex:[self.childViewControllers indexOfObject:self.currentViewController]];
-        }
-        else {
+        } else {
             [_pagerView setSelectIndex:0];
         }
+       
     }
     else if ([self.selectedType isEqualToString:@"Trans"]) {
         self.currentViewController = self.investTransfer;
@@ -298,15 +291,15 @@
             [_pagerView setSelectIndex:0];
         }
     }
-    else if ([self.selectedType isEqualToString:@"Gold"]) {
-        self.currentViewController = self.golden;
-        if ([self.childViewControllers containsObject:self.golden]) {
-            [_pagerView setSelectIndex:[self.childViewControllers indexOfObject:self.currentViewController]];
-        }
-        else {
-            [_pagerView setSelectIndex:0];
-        }
-    }
+//    else if ([self.selectedType isEqualToString:@"Gold"]) {
+//        self.currentViewController = self.golden;
+//        if ([self.childViewControllers containsObject:self.golden]) {
+//            [_pagerView setSelectIndex:[self.childViewControllers indexOfObject:self.currentViewController]];
+//        }
+//        else {
+//            [_pagerView setSelectIndex:0];
+//        }
+//    }
 }
 
 - (void)dealloc

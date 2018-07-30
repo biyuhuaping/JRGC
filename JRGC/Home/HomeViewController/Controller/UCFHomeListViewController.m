@@ -283,43 +283,56 @@
 #pragma mark - UCFHomeListHeaderSectionView的代理方法
 - (void)homeListHeader:(UCFHomeListHeaderSectionView *)homeListHeader didClickedMoreWithType:(NSString *)type
 {
-    if ([self.delegate respondsToSelector:@selector(homeList:tableView:didClickedWithModel:withType:)]) {
-        if ([type isEqualToString:@"18"] || [type isEqualToString:@"11"]) {
-            [self.delegate homeList:self tableView:self.tableView didClickedWithModel:nil withType:UCFHomeListTypeP2PMore];
+    if([self.delegate respondsToSelector:@selector(homeList:withType:)])
+    {
+        if ([type isEqualToString:@"1"]) {
+            [self.delegate homeList:self  withType:UCFHomeListTypeIntelligentLoan];
         }
-        else if ([type isEqualToString:@"12"]) {
-            [self.delegate homeList:self tableView:self.tableView didClickedWithModel:nil withType:UCFHomeListTypeZXMore];
-        }
-        else if ([type isEqualToString:@"15"]) {
-            [self.delegate homeList:self tableView:self.tableView didClickedWithModel:nil withType:UCFHomeListTypeGlodMore];
-        }
-        else if ([type isEqualToString:@"19"]) {
-            [self.delegate homeList:self tableView:self.tableView didClickedWithModel:nil withType:UCFHomeListTypeDebtsMore];
-        }
-        else if ([type isEqualToString:@"16"]) {
-            NSString *userId = [UserInfoSingle sharedManager].userId;
-            if (nil == userId) {
-                UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
-                UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
-                AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
-                [app.tabBarController presentViewController:loginNaviController animated:YES completion:nil];
-                return;
-            }
-            else {
-                UCFHomeListGroupPresenter *groupP = [self.presenter.allDatas objectAtIndex:homeListHeader.section];
-                UCFHomeListCellPresenter *cellP = [groupP.group.prdlist firstObject];
-                [self.delegate homeList:self tableView:self.tableView didClickedWithModel:cellP.item withType:UCFHomeListTypeDetail];
-            }
+        else if ([type isEqualToString:@"2"])
+        {
+                [self.delegate homeList:self  withType:UCFHomeListTypeQualityClaims];
         }
     }
+    
+    
+    
+//    if ([self.delegate respondsToSelector:@selector(homeList:tableView:didClickedWithModel:withType:)]) {
+//        if ([type isEqualToString:@"18"] || [type isEqualToString:@"11"]) {
+//            [self.delegate homeList:self tableView:self.tableView didClickedWithModel:nil withType:UCFHomeListTypeP2PMore];
+//        }
+//        else if ([type isEqualToString:@"12"]) {
+//            [self.delegate homeList:self tableView:self.tableView didClickedWithModel:nil withType:UCFHomeListTypeZXMore];
+//        }
+//        else if ([type isEqualToString:@"15"]) {
+//            [self.delegate homeList:self tableView:self.tableView didClickedWithModel:nil withType:UCFHomeListTypeGlodMore];
+//        }
+//        else if ([type isEqualToString:@"19"]) {
+//            [self.delegate homeList:self tableView:self.tableView didClickedWithModel:nil withType:UCFHomeListTypeDebtsMore];
+//        }
+//        else if ([type isEqualToString:@"16"]) {
+//            NSString *userId = [UserInfoSingle sharedManager].userId;
+//            if (nil == userId) {
+//                UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
+//                UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
+//                AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+//                [app.tabBarController presentViewController:loginNaviController animated:YES completion:nil];
+//                return;
+//            }
+//            else {
+//                UCFHomeListGroupPresenter *groupP = [self.presenter.allDatas objectAtIndex:homeListHeader.section];
+//                UCFHomeListCellPresenter *cellP = [groupP.group.prdlist firstObject];
+//                [self.delegate homeList:self tableView:self.tableView didClickedWithModel:cellP.item withType:UCFHomeListTypeDetail];
+//            }
+//        }
+//    }
 }
 
 #pragma mark - 工厂邀请cell的代理方法
 - (void)homeInvestCell:(UCFHomeInvestCell *)homeInvestCell didClickedInvestButtonAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (!self.presenter.canReservedClicked) {
-        return;
-    }
+//    if (!self.presenter.canReservedClicked) {
+//        return;
+//    }
     NSString *userId = [UserInfoSingle sharedManager].userId;
     if (nil == userId) {
         UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];

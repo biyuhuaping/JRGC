@@ -314,6 +314,13 @@
 #define PRERESERVE_PRODUCTS_URL          @"https://m.9888.cn/static/wap/p2p/index.html#/reserve-bid/products"
 #define PRERESERVE_APPLY_URL          @"https://m.9888.cn/static/wap/p2p/index.html#/reserve-bid/apply"
 
+#define INTELLIGENTDETAIL_APPLY_URL @"https://m.9888.cn/static/wap/p2p/index.html#/order/info" //智存宝详情
+#define RESERVEDETAIL_APPLY_URL @"https://m.9888.cn/static/wap/p2p/index.html#/reserve-bid/info"//预约宝详情
+
+
+#define INTELLIGENTLOAN_APPLY_URL   @"https://m.9888.cn/static/wap/p2p/index.html#/order/apply"//智存宝 一键出借
+#define RESERVEINVEST_APPLY_URL  @"https://m.9888.cn/static/wap/p2p/index.html#/reserve-bid/reverve/apply"
+
 #define HONERRECHANGESHOWCONT @"/api/contract/v2/showContractMess.json"//尊享充值委托划款协议合同预览
 #define TOTALASSTSOVERVIEWURL @"api/userAccount/v2/assetsOverview.json"//总资产接口
 #define TOTALEARINGSOVERVIEW  @"/api/userAccount/v2/earningsOverview.json" //累计收益
@@ -342,6 +349,9 @@
 #define ACCOUTSETHSPWDINTOBANKURL  @"/api/userAccount/v2/setHsPwdIntoBank.json"//***新徽商设置交易密码接口
 
 #define P2PACCOUTRECHRAGENEWURL  @"/api/recharge/v2/rechargeNew.json"//***新微金充值接口
+
+#define P2PINVESTMODULEURL @"api/prdClaims/v2/aiInvestList.json"//智能出借列表
+
 #define GETBANERANDGIFTIMAGE @"/api/homePage/v2/bannerAndNoice.json"
 #define GETHOMESECTIONS      @"/api/homePage/v2/indexDefault.json"   //首页默认接口
 #define GETHOMENEWUSERSECTIONS      @"/api/homePage/v2/noviceModule.json"   //新手磨具爱
@@ -574,6 +584,7 @@ enum kSXTag
     kSXTagAccountSetHsPwdIntoBank,      //***新徽商设置交易密码接口
     kSXTagP2PAccountrechargeNew,        //***新微金充值接口
     kSXTagGetRedBagContent,             //获取红包内容 （仿微信）
+    kSXTagP2PAiInvestModule,            //智能出借模块
     kSXTagGetBannerAndGift,              //banner和公告
     kSXTagGetHomeShowSections,          //首页默认接口
     kSXTagGetHomeNewUserSection,         //新手模块

@@ -10,10 +10,12 @@
 
 typedef enum : NSUInteger {
     UCFMicroMoneyModelTypeNew,
-    UCFMicroMoneyModelTypeBatchBid,
+    UCFMicroMoneyModelTypeBatchBid,//批量出借
     UCFMicroMoneyModelTypeNormal,
     UCFMicroMoneyModelTypeHonerNew,
     UCFMicroMoneyModelTypeHonerNormal,
+    UCFMicroMoneyModelTypeIntelligent,//智存宝
+    UCFMicroMoneyModelTypeReserve,//预约
 } UCFMicroMoneyModelType;
 
 @interface UCFMicroMoneyModel : NSObject
@@ -28,6 +30,7 @@ typedef enum : NSUInteger {
 @property (nonatomic, copy) NSString *Id;
 //invitationSite = "<null>";
 @property (nonatomic, strong) NSNumber *isOrder;
+@property (nonatomic, strong) NSNumber *isTransfer;
 @property (nonatomic, strong) NSNumber *maxInvest;
 @property (nonatomic, strong) NSNumber *minInvest;
 @property (nonatomic, copy) NSString *platformSubsidyExpense;

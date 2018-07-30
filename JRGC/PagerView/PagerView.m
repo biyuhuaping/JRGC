@@ -9,7 +9,8 @@
 #import "PagerView.h"
 #define DefalutColor UIColorWithRGB(0x555555)
 #define SelectedColor UIColorWithRGB(0xfd4d4c)
-#define ButtonWidth   60
+#define ButtonWidth   80
+#define Button_OFFX   40 //butoon与左边的距离
 @interface PagerView ()<UIScrollViewDelegate>
 
 @property (strong, nonatomic) NSArray           *nameArray;
@@ -20,6 +21,7 @@
 @property (strong, nonatomic) UIView            *bottomLine;
 @property (strong, nonatomic) UIScrollView      *segmentScrollV;
 @property (strong, nonatomic) UIScrollView      *titleBaseScrollView;
+@property (assign, nonatomic) float      lineSeparation;
 @end
 
 @implementation PagerView
@@ -88,13 +90,15 @@
         self.segmentView.backgroundColor = [UIColor whiteColor];
         [self addSubview:self.segmentView];
         
-        CGFloat offX = (ScreenWidth - ButtonWidth * self.nameArray.count)/2.0f;
+        
+        self.lineSeparation = (ScreenWidth - ButtonWidth * self.nameArray.count- Button_OFFX*2)/(self.nameArray.count-1);
+        
         //添加按钮
         for (int i = 0; i < self.nameArray.count; i++) {
             UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
             button.tag =  100 + i;
-            button.frame = CGRectMake(offX + ButtonWidth * i, 0, ButtonWidth, segmentViewHeight);
-            button.titleLabel.font = [UIFont systemFontOfSize:16];
+            button.frame = CGRectMake(Button_OFFX + (ButtonWidth + self.lineSeparation)  * i, 0, ButtonWidth, segmentViewHeight);
+            button.titleLabel.font = [UIFont systemFontOfSize:15];
             [button setTitle:self.nameArray[i] forState:UIControlStateNormal];
             [button setTitleColor:DefalutColor forState:UIControlStateNormal];
             [button setTitleColor:SelectedColor forState:UIControlStateSelected];
@@ -102,8 +106,7 @@
             [self.segmentView addSubview:button];
             [_buttonArray addObject:button];   //添加顶部按钮
         }
-        
-        self.indicateView = [[UILabel alloc]initWithFrame:CGRectMake(offX + (ButtonWidth - lineW)/2,segmentViewHeight-lineH, lineW, lineH)];
+        self.indicateView = [[UILabel alloc]initWithFrame:CGRectMake(Button_OFFX + (ButtonWidth - lineW)/2,segmentViewHeight-lineH, lineW, lineH)];
         self.indicateView.backgroundColor = SelectedColor;
         [self.segmentView addSubview:self.indicateView];
         
@@ -141,16 +144,36 @@
             [btn setTitleColor:DefalutColor forState:UIControlStateNormal];
         }
     }
-    [self.segmentScrollV setContentOffset:CGPointMake((sender.tag - 100)*self.frame.size.width, 0) animated:YES ];
+    [self.segmentScrollV setContentOffset:CGPointMake((sender.tag - 100) * self.frame.size.width, 0) animated:YES ];
+    
+//    __weak typeof(self) weakSelf = self;
+//    dispatch_queue_t queue= dispatch_get_main_queue();
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.15 * NSEC_PER_SEC)), queue, ^{
+//        [UIView animateWithDuration:0.25  delay:0.1 options: UIViewAnimationOptionCurveLinear animations:^{
+//            CGPoint  frame = weakSelf.indicateView.center;
+//            frame.x = button.center.x;
+//            weakSelf.indicateView.center = frame;
+//
+//        } completion:^(BOOL finished) {
+//        }];
+//    });
+    
+    
 }
 
 #pragma UIScorllerViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     
-    CGPoint  frame = self.indicateView.center;
-    CGFloat offX = (ScreenWidth - ButtonWidth * self.nameArray.count)/2.0f;
-    frame.x = offX + ButtonWidth/2 + ButtonWidth *(self.segmentScrollV.contentOffset.x/self.frame.size.width);
-    self.indicateView.center = frame;
+    __weak typeof(self) weakSelf = self;
+        dispatch_queue_t queue= dispatch_get_main_queue();
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.15 * NSEC_PER_SEC)), queue, ^{
+            [UIView animateWithDuration:0.25  delay:0.1 options: UIViewAnimationOptionCurveLinear animations:^{
+                CGPoint  frame = weakSelf.indicateView.center;
+                frame.x = Button_OFFX + ButtonWidth / 2 + (weakSelf.lineSeparation + ButtonWidth) * (weakSelf.segmentScrollV.contentOffset.x/self.frame.size.width);
+                weakSelf.indicateView.center = frame;
+            } completion:^(BOOL finished) {
+            }];
+        });
 }
 
 
