@@ -78,7 +78,7 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    self.cycleView.frame = CGRectMake(0, 0, ScreenWidth, self.height-105);
+    self.cycleView.frame = CGRectMake(0, 0, ScreenWidth, self.height - 45);
     if (self.iconArray.count>0) {
         for (UIView *view in self.buttonBaseView.subviews) {
             NSInteger index = view.tag - 100;

@@ -23,15 +23,10 @@
 - (void)setMicroModel:(UCFMicroMoneyModel *)microModel
 {
     _microModel = microModel;
-    if (microModel.platformSubsidyExpense.length > 0 && [microModel.platformSubsidyExpense floatValue] != 0)
-    {
-        self.anurateLabel.text = [NSString stringWithFormat:@"%@%%~%@%%",microModel.annualRate, microModel.platformSubsidyExpense];
-    }
-    else {
-        self.anurateLabel.text = microModel.annualRate ? [NSString stringWithFormat:@"%@%%",microModel.annualRate] : @"0.0%";
-    }
-    self.limitLabel.text = [NSString stringWithFormat:@"%@", microModel.repayPeriodtext];
+    self.anurateLabel.text = microModel.annualRate ? [NSString stringWithFormat:@"%@%%",microModel.annualRate] : @"0.0%";
     [self.anurateLabel setFont:[UIFont systemFontOfSize:16] string:@"%"];
+    self.limitLabel.text = [NSString stringWithFormat:@"%@", microModel.repayPeriodtext];
+  
     self.prdNameLabel.text = microModel.prdName;
     NSUInteger type = [microModel.type integerValue];
     switch (type) {
@@ -40,13 +35,13 @@
             _microModel.modelType = UCFMicroMoneyModelTypeReserve;
             if([microModel.status intValue] == 2)
             {
-              [self.reserveButton setTitle:@"一键出借" forState:UIControlStateNormal];
+              [self.reserveButton setTitle:@"立即预约" forState:UIControlStateNormal];
               self.reserveButton.userInteractionEnabled = YES;
               self.reserveButton.backgroundColor = UIColorWithRGB(0xFD4D4C);
             }else{
                 self.reserveButton.userInteractionEnabled = NO;
                 self.reserveButton.backgroundColor = UIColorWithRGB(0xd4d4d4);
-                [self.reserveButton setTitle:@"出借已满" forState:UIControlStateNormal];
+                [self.reserveButton setTitle:@"预约已满" forState:UIControlStateNormal];
             }
             
         }
@@ -58,12 +53,12 @@
             {
                 self.reserveButton.backgroundColor = UIColorWithRGB(0xFD4D4C);
                 self.reserveButton.userInteractionEnabled = YES;
-                [self.reserveButton setTitle:@"一键出借" forState:UIControlStateNormal];
+                [self.reserveButton setTitle:@"立即出借" forState:UIControlStateNormal];
               
             }else{
                 self.reserveButton.userInteractionEnabled = NO;
                 self.reserveButton.backgroundColor = UIColorWithRGB(0xd4d4d4);
-                [self.reserveButton setTitle:@"出借已满" forState:UIControlStateNormal];
+                [self.reserveButton setTitle:@"已售罄" forState:UIControlStateNormal];
                 
             }
         }
@@ -73,15 +68,14 @@
              _microModel.modelType = UCFMicroMoneyModelTypeBatchBid;
             if([microModel.status intValue] == 2)
             {
-                [self.reserveButton setTitle:@"批量出借" forState:UIControlStateNormal];
+                [self.reserveButton setTitle:@"一键出借" forState:UIControlStateNormal];
                 self.reserveButton.backgroundColor = UIColorWithRGB(0xFD4D4C);
                 self.reserveButton.userInteractionEnabled = YES;
             }else{
                 self.reserveButton.userInteractionEnabled = NO;
                 self.reserveButton.backgroundColor = UIColorWithRGB(0xd4d4d4);
-                [self.reserveButton setTitle:@"出借已满" forState:UIControlStateNormal];
+                [self.reserveButton setTitle:@"已售罄" forState:UIControlStateNormal];
             }
-            
         }
             break;
         default:
@@ -107,7 +101,7 @@
         self.PrdNameTipLabelWidth.constant = 0;
     }
     
-    if ([microModel.platformSubsidyExpense floatValue] > 0.00) {//贴
+    if ([microModel.platformSubsidyExpense floatValue] > 0.00) {
         self.addedRateLabel.text = [NSString stringWithFormat:@"+%@%%",microModel.platformSubsidyExpense];
         self.addedRateLabel.hidden = NO;
     }
