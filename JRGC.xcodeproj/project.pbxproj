@@ -882,7 +882,6 @@
 		A86FC5791F6A2A7200A18182 /* AD_View.xib in Resources */ = {isa = PBXBuildFile; fileRef = A86FC5781F6A2A7200A18182 /* AD_View.xib */; };
 		A884904A1FA72353004B6E71 /* guideImage8_1.png in Resources */ = {isa = PBXBuildFile; fileRef = A88490461FA72352004B6E71 /* guideImage8_1.png */; };
 		A884904D1FA72442004B6E71 /* login_bg_iphoneX.png in Resources */ = {isa = PBXBuildFile; fileRef = A884904C1FA72442004B6E71 /* login_bg_iphoneX.png */; };
-		A88490501FA72586004B6E71 /* guideImage8_3.png in Resources */ = {isa = PBXBuildFile; fileRef = A884904E1FA72585004B6E71 /* guideImage8_3.png */; };
 		A8898DC41FBD32500064494B /* ServiceChargeView1.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8898DC31FBD32500064494B /* ServiceChargeView1.xib */; };
 		A8A3A57F1EE95BDA00D9C06D /* UCFInvestAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A8A3A57E1EE95BDA00D9C06D /* UCFInvestAPIManager.m */; };
 		A8AD2E3E1EB979760013DB7C /* MongoliaLayerCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = A8AD2E3D1EB979760013DB7C /* MongoliaLayerCenter.m */; };
@@ -997,9 +996,7 @@
 		FB5149491D64403100C26E7B /* touch_id@2x.gif in Resources */ = {isa = PBXBuildFile; fileRef = FB5149321D64403100C26E7B /* touch_id@2x.gif */; };
 		FB51494A1D64403100C26E7B /* touch_id@3x.gif in Resources */ = {isa = PBXBuildFile; fileRef = FB5149331D64403100C26E7B /* touch_id@3x.gif */; };
 		FB5149521D64441F00C26E7B /* guideImage6_1.png in Resources */ = {isa = PBXBuildFile; fileRef = FB51494C1D64441F00C26E7B /* guideImage6_1.png */; };
-		FB5149541D64441F00C26E7B /* guideImage6_3.png in Resources */ = {isa = PBXBuildFile; fileRef = FB51494E1D64441F00C26E7B /* guideImage6_3.png */; };
 		FB5149551D64441F00C26E7B /* guideImage7_1.png in Resources */ = {isa = PBXBuildFile; fileRef = FB51494F1D64441F00C26E7B /* guideImage7_1.png */; };
-		FB5149571D64441F00C26E7B /* guideImage7_3.png in Resources */ = {isa = PBXBuildFile; fileRef = FB5149511D64441F00C26E7B /* guideImage7_3.png */; };
 		FB5555331BCE37570013894F /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FB5555301BCE37570013894F /* libMobClickLibrary.a */; };
 		FB572C0C1C7C3000000031F1 /* UCFCouponInterest.m in Sources */ = {isa = PBXBuildFile; fileRef = FB572C0A1C7C3000000031F1 /* UCFCouponInterest.m */; };
 		FB572C0D1C7C3000000031F1 /* UCFCouponInterest.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB572C0B1C7C3000000031F1 /* UCFCouponInterest.xib */; };
@@ -2557,7 +2554,6 @@
 		A86FC5781F6A2A7200A18182 /* AD_View.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AD_View.xib; sourceTree = "<group>"; };
 		A88490461FA72352004B6E71 /* guideImage8_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guideImage8_1.png; sourceTree = "<group>"; };
 		A884904C1FA72442004B6E71 /* login_bg_iphoneX.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = login_bg_iphoneX.png; path = Images/login_bg_iphoneX.png; sourceTree = "<group>"; };
-		A884904E1FA72585004B6E71 /* guideImage8_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guideImage8_3.png; sourceTree = "<group>"; };
 		A8898DC31FBD32500064494B /* ServiceChargeView1.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ServiceChargeView1.xib; sourceTree = "<group>"; };
 		A8A3A57D1EE95BDA00D9C06D /* UCFInvestAPIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFInvestAPIManager.h; sourceTree = "<group>"; };
 		A8A3A57E1EE95BDA00D9C06D /* UCFInvestAPIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFInvestAPIManager.m; sourceTree = "<group>"; };
@@ -2746,9 +2742,7 @@
 		FB5149321D64403100C26E7B /* touch_id@2x.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "touch_id@2x.gif"; path = "Images/touch_id@2x.gif"; sourceTree = "<group>"; };
 		FB5149331D64403100C26E7B /* touch_id@3x.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "touch_id@3x.gif"; path = "Images/touch_id@3x.gif"; sourceTree = "<group>"; };
 		FB51494C1D64441F00C26E7B /* guideImage6_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guideImage6_1.png; sourceTree = "<group>"; };
-		FB51494E1D64441F00C26E7B /* guideImage6_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guideImage6_3.png; sourceTree = "<group>"; };
 		FB51494F1D64441F00C26E7B /* guideImage7_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guideImage7_1.png; sourceTree = "<group>"; };
-		FB5149511D64441F00C26E7B /* guideImage7_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guideImage7_3.png; sourceTree = "<group>"; };
 		FB5555301BCE37570013894F /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
 		FB5555311BCE37570013894F /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
 		FB5555321BCE37570013894F /* MobClickSocialAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClickSocialAnalytics.h; sourceTree = "<group>"; };
@@ -5597,7 +5591,6 @@
 				FB5149321D64403100C26E7B /* touch_id@2x.gif */,
 				FB5149331D64403100C26E7B /* touch_id@3x.gif */,
 				FB51494B1D64441F00C26E7B /* guiviewImage */,
-				FB5149271D64403100C26E7B /* PromptView */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -6720,26 +6713,15 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
-		FB5149271D64403100C26E7B /* PromptView */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = PromptView;
-			path = Images/PromptView;
-			sourceTree = "<group>";
-		};
 		FB51494B1D64441F00C26E7B /* guiviewImage */ = {
 			isa = PBXGroup;
 			children = (
 				A88490461FA72352004B6E71 /* guideImage8_1.png */,
 				8346B4F52017145B00544D78 /* guideImage8_2.png */,
-				A884904E1FA72585004B6E71 /* guideImage8_3.png */,
 				FB51494C1D64441F00C26E7B /* guideImage6_1.png */,
 				8346B4F62017145C00544D78 /* guideImage6_2.png */,
-				FB51494E1D64441F00C26E7B /* guideImage6_3.png */,
 				FB51494F1D64441F00C26E7B /* guideImage7_1.png */,
 				8346B4F72017145C00544D78 /* guideImage7_2.png */,
-				FB5149511D64441F00C26E7B /* guideImage7_3.png */,
 			);
 			name = guiviewImage;
 			path = Images/guiviewImage;
@@ -7339,7 +7321,6 @@
 				83CD84401F13A50800227704 /* UCFProjectListCell.xib in Resources */,
 				74270D211EC595ED00F9419B /* UCFRebateCell1.xib in Resources */,
 				740DAEC21E56E2D100CD7C8F /* UCFBatchProjectController.xib in Resources */,
-				A88490501FA72586004B6E71 /* guideImage8_3.png in Resources */,
 				4AA2AA811E5B17B7006E83F8 /* UCFBatchSetNumWebViewController.xib in Resources */,
 				746BBEAC1AF8E93E00EBA0E7 /* UCFCouponUseCell.xib in Resources */,
 				74677C671F165022003768EB /* UCFGoldRechargeViewController.xib in Resources */,
@@ -7351,7 +7332,6 @@
 				74F490EA1E5B0BD70057AC62 /* UCFMyInvestBatchCell.xib in Resources */,
 				E3E05C5D1DD07D710066B65C /* UCFCouponExchangeToFriends.xib in Resources */,
 				E32B8F4F1E85188D00B7871F /* UCFRegisterFinshViewController.xib in Resources */,
-				FB5149571D64441F00C26E7B /* guideImage7_3.png in Resources */,
 				FB2858CC1BAAB07C000EAA71 /* UCFBackMoneyDetailViewController.xib in Resources */,
 				740586BA1F417ADB00E2DE01 /* UCFGoldFlexibleCell.xib in Resources */,
 				74694AAC1F613FB600C4F935 /* UCFInvestMicroMoneyCell.xib in Resources */,
@@ -7401,7 +7381,6 @@
 				7443C7291F1EFF61009669C0 /* UCFGoldCashTwoCell.xib in Resources */,
 				74877CC41FB2A9AB00F32428 /* UCFGoldAllViewController.xib in Resources */,
 				74B98CA51F711D7500CB6A9F /* UCFMineFuncSecCell.xib in Resources */,
-				FB5149541D64441F00C26E7B /* guideImage6_3.png in Resources */,
 				74FC22801BA6A7FA00D1660A /* UCFSecurityCenterViewController.xib in Resources */,
 				83FF205D1F0BAF0500F21119 /* UCFGoldDetailViewController.xib in Resources */,
 				83D64F641F1CB8AE00A839F2 /* UCFGoldPurchaseRecordCell.xib in Resources */,

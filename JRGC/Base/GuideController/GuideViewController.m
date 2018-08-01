@@ -44,11 +44,11 @@
         version = 8;  //iphonex
 
     }
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 2; i++) {
         UIImageView *adImageView = [[UIImageView alloc] initWithFrame:CGRectMake(ScreenWidth * i, 0, ScreenWidth,ScreenHeight)];
         adImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"guideImage%d_%d",version,i+1]];
         [guideScrollView addSubview:adImageView];
-        if (i == 2) {
+        if (i == 1) {
             UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
             if (ScreenHeight == 480 ) {
                 button.frame = CGRectMake((ScreenWidth - 210)/2, ScreenHeight - 49 - 38, 210, 38);
@@ -65,7 +65,7 @@
             adImageView.userInteractionEnabled = YES;
         }
     }
-    guideScrollView.contentSize = CGSizeMake(ScreenWidth * 3, ScreenHeight);
+    guideScrollView.contentSize = CGSizeMake(ScreenWidth * 2, ScreenHeight);
 }
 
 - (void)skipToMainWorkView
