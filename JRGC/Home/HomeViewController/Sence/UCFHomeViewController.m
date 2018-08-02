@@ -504,9 +504,9 @@
                 facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@&status=%@", NEWUSER_PRODUCTS_URL, model.Id,model.status];
             }
             else if (model.moedelType == UCFHomeListCellModelTypeReserved) {//预约宝
-                facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@", RESERVEDETAIL_APPLY_URL, model.Id];
+                facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@&status=%@", RESERVEDETAIL_APPLY_URL, model.Id,model.status];
             }else if(model.moedelType == UCFHomeListCellModelTypeAI) {//智存宝
-                facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@", INTELLIGENTDETAIL_APPLY_URL, model.Id];
+                facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@&status=%@", INTELLIGENTDETAIL_APPLY_URL, model.Id,model.status];
             }
             [self.navigationController pushViewController:facReservedWeb animated:YES];
         }
@@ -597,7 +597,7 @@
                     }
                     if([self checkUserCanInvestIsDetail:NO type:self.accoutType]){//
 
-                        NSDictionary *parameter = @{@"Id": model.Id, @"userId": [UserInfoSingle sharedManager].userId, @"proType": model.type,@"type":@"4"};
+                        NSDictionary *parameter = @{@"Id": model.Id, @"userId": [UserInfoSingle sharedManager].userId, @"proType": model.type,@"type":@"4",@"status":model.status};
                         [self.cycleImageVC.presenter fetchProDetailDataWithParameter:parameter completionHandler:^(NSError *error, id result) {
                             NSString *rstcode = [result objectForKey:@"status"];
                             [MBProgressHUD hideOriginAllHUDsForView:weakSelf.view animated:YES];
@@ -642,10 +642,11 @@
             
             UCFFacReservedViewController *facReservedWeb = [[UCFFacReservedViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
             if (model.moedelType == UCFHomeListCellModelTypeNewUser) {
-                facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@", NEWUSER_APPLY_URL, model.Id];
+              
+                facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@&status=%@", NEWUSER_APPLY_URL, model.Id,model.status];
             }
             else if (model.moedelType == UCFHomeListCellModelTypeReserved || model.moedelType == UCFHomeListCellModelTypeAI) {
-                facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@", PRERESERVE_APPLY_URL, model.Id];
+                facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@&status=%@", PRERESERVE_APPLY_URL, model.Id,model.status];
             }
             [self.navigationController pushViewController:facReservedWeb animated:YES];
         }
