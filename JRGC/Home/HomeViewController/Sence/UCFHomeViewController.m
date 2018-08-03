@@ -396,15 +396,7 @@
                         [helper pushP2POrWJAuthorizationType:self.accoutType nav:self.navigationController];
                         return;
                     }
-                    NSInteger isOrder = [model.isOrder integerValue];
-                    if ([model.status intValue ] != 2){
-                        if (isOrder <= 0) {
-                            UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:noPermissionTitleStr];
-                            [self.navigationController pushViewController:controller animated:YES];
-                            
-                            return;
-                        }
-                    }
+
                 if([model.type intValue] == 14){ //集合标详情
                     [self gotoCollectionDetailViewContoller:model];
                 }else{
@@ -1061,7 +1053,8 @@
 #pragma mark - 刷新公告
 - (void)refreshNoticeWithShow:(BOOL)show
 {
-    CGFloat userInfoViewHeight = self.cycleImageVC.view.height;
+    CGFloat userInfoViewHeight = [UCFCycleImageViewController viewHeight];
+//    CGFloat userInfoViewHeight = self.cycleImageVC.view.height;
     if (show) {
         self.cycleImageVC.view.frame = CGRectMake(0, 0, ScreenWidth, userInfoViewHeight+45);
         [self.cycleImageVC refreshNotice];

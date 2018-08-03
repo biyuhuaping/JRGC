@@ -30,9 +30,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
     [self setErrorViewFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight -NavigationBarHeight-TabBarHeight)];
-    //    [self addErrorViewButton];
     [self addProgressView];//添加进度条
     [self gotoURL:self.url];
     self.webView.scrollView.bounces = NO;
