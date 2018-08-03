@@ -789,9 +789,9 @@
         }
         UCFFacReservedViewController *facReservedWeb = [[UCFFacReservedViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
         if (model.moedelType == UCFHomeListCellModelTypeReserved) {//预约宝 一键出借
-            facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@", RESERVEINVEST_APPLY_URL, model.Id];
+            facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@&status=%@", RESERVEINVEST_APPLY_URL, model.Id,model.status];
         }else if(model.moedelType == UCFHomeListCellModelTypeAI) {//智存宝 一键出借
-            facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@", INTELLIGENTLOAN_APPLY_URL, model.Id];
+            facReservedWeb.url = [NSString stringWithFormat:@"%@?applyInvestClaimId=%@&status=%@", INTELLIGENTLOAN_APPLY_URL, model.Id,model.status];
         }
         [self.navigationController pushViewController:facReservedWeb animated:YES];
     }
