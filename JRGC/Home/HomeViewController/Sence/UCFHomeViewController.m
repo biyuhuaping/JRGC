@@ -397,76 +397,46 @@
                         return;
                     }
 
-                if([model.type intValue] == 14){ //集合标详情
+                if([model.type intValue] == 14)
+                { //集合标详情
                     [self gotoCollectionDetailViewContoller:model];
-                }else{
-                    NSInteger isOrder = [model.isOrder integerValue];
-                    if ([model.status intValue ] != 2){
-                        if (isOrder <= 0) {
-                            UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:noPermissionTitleStr];
-                            [self.navigationController pushViewController:controller animated:YES];
-                            
-                            return;
-                        }
-                    }
-                    if([self.cycleImageVC.presenter checkIDAAndBankBlindState:self.accoutType]){//           在这里需要 判断授权 以及开户,需要重新梳理
-                        NSInteger isOrder = [model.isOrder integerValue];
-                        if ([model.status intValue ] != 2){
-                            if (isOrder > 0) {
-                                NSDictionary *parameter = @{@"Id": model.Id, @"userId": [UserInfoSingle sharedManager].userId, @"proType": model.type,@"type":@"3",@"status":model.status};
-                                [self.cycleImageVC.presenter fetchProDetailDataWithParameter:parameter completionHandler:^(NSError *error, id result) {
-                                    
-                                    NSDictionary *dic = (NSDictionary *)result;
-                                    [MBProgressHUD hideOriginAllHUDsForView:weakSelf.view animated:YES];
-                                    
-                                    NSDictionary *dataDic = [dic objectSafeForKey:@"data"];
-                                    NSString *rstcode = dic[@"ret"];
-                                    NSString *rsttext = dic[@"message"];
-                                    if ([rstcode boolValue]) {
-                                        NSArray *prdLabelsListTemp = [NSArray arrayWithArray:(NSArray*)model.prdLabelsList];
-                                        UCFProjectDetailViewController *controller = [[UCFProjectDetailViewController alloc] initWithDataDic:dataDic isTransfer:NO withLabelList:prdLabelsListTemp];
-                                        CGFloat platformSubsidyExpense = [model.platformSubsidyExpense floatValue];
-                                        [[NSUserDefaults standardUserDefaults] setValue:[NSString stringWithFormat:@"%.1f",platformSubsidyExpense] forKey:@"platformSubsidyExpense"];
-                                        self.intoVCStr = @"ProjectDetailVC";
-                                        controller.accoutType = self.accoutType;
-                                        controller.rootVc = self;
-                                        [weakSelf.navigationController pushViewController:controller animated:YES];
-                                    }else {
-                                        [AuxiliaryFunc showAlertViewWithMessage:rsttext];
-                                    }
-                                    
-                                }];
-                            }
-                        }
-                        else{
-                            {
-                                NSDictionary *parameter = @{@"Id": model.Id, @"userId": [UserInfoSingle sharedManager].userId, @"proType": model.type,@"type":@"3",@"status":model.status};
-                                [self.cycleImageVC.presenter fetchProDetailDataWithParameter:parameter completionHandler:^(NSError *error, id result) {
-                                    NSDictionary *dic = (NSDictionary *)result;
-                                    [MBProgressHUD hideOriginAllHUDsForView:weakSelf.view animated:YES];
-                                    
-                                    NSDictionary *dataDic = [dic objectSafeForKey:@"data"];
-                                    NSString *rstcode = dic[@"ret"];
-                                    NSString *rsttext = dic[@"message"];
-                                    if ([rstcode boolValue]) {
-                                        NSArray *prdLabelsListTemp = [NSArray arrayWithArray:(NSArray*)model.prdLabelsList];
-                                        UCFProjectDetailViewController *controller = [[UCFProjectDetailViewController alloc] initWithDataDic:dataDic isTransfer:NO withLabelList:prdLabelsListTemp];
-                                        CGFloat platformSubsidyExpense = [model.platformSubsidyExpense floatValue];
-                                        [[NSUserDefaults standardUserDefaults] setValue:[NSString stringWithFormat:@"%.1f",platformSubsidyExpense] forKey:@"platformSubsidyExpense"];
-                                        self.intoVCStr = @"ProjectDetailVC";
-                                        controller.accoutType = self.accoutType;
-                                        controller.rootVc = self;
-                                        [weakSelf.navigationController pushViewController:controller animated:YES];
-                                    }else {
-                                        [AuxiliaryFunc showAlertViewWithMessage:rsttext];
-                                    }
-                                }];
-                            }
-                        }
-                    }
                 }
+                else{
                     
-                    
+                    if([self.cycleImageVC.presenter checkIDAAndBankBlindState:self.accoutType]){//           在这里需要 判断授权 以及开户,需要重新梳理
+                                NSDictionary *parameter = @{@"Id": model.Id, @"userId": [UserInfoSingle sharedManager].userId, @"proType": model.type,@"type":@"3",@"status":model.status};
+                                [self.cycleImageVC.presenter fetchProDetailDataWithParameter:parameter completionHandler:^(NSError *error, id result) {
+                                    
+                                    NSDictionary *dic = (NSDictionary *)result;
+                                    [MBProgressHUD hideOriginAllHUDsForView:weakSelf.view animated:YES];
+                                    
+                                    NSDictionary *dataDic = [dic objectSafeForKey:@"data"];
+                                    NSString *rstcode = dic[@"ret"];
+                                    NSString *rsttext = dic[@"message"];
+                                    if ([rstcode boolValue]) {
+                                        NSArray *prdLabelsListTemp = [NSArray arrayWithArray:(NSArray*)model.prdLabelsList];
+                                        UCFProjectDetailViewController *controller = [[UCFProjectDetailViewController alloc] initWithDataDic:dataDic isTransfer:NO withLabelList:prdLabelsListTemp];
+                                        CGFloat platformSubsidyExpense = [model.platformSubsidyExpense floatValue];
+                                        [[NSUserDefaults standardUserDefaults] setValue:[NSString stringWithFormat:@"%.1f",platformSubsidyExpense] forKey:@"platformSubsidyExpense"];
+                                        self.intoVCStr = @"ProjectDetailVC";
+                                        controller.accoutType = self.accoutType;
+                                        controller.rootVc = self;
+                                        [weakSelf.navigationController pushViewController:controller animated:YES];
+                                    }else {
+                                        NSString *code = [dic objectSafeForKey:@"code"];
+                                        if([code intValue] == 2)
+                                        {
+                                            UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:noPermissionTitleStr];
+                                            [self.navigationController pushViewController:controller animated:YES];
+                            
+                                        }else
+                                        {
+                                           [AuxiliaryFunc showAlertViewWithMessage:rsttext];
+                                        }
+                                    }
+                                }];
+                        }
+                  }
                }
             }
           }
