@@ -85,10 +85,12 @@
         NSString *Id = [parameter objectForKey:@"Id"];
         NSString *proType = [parameter objectForKey:@"proType"];
         NSString *type  = [parameter objectForKey:@"type"];
+        NSString *statue = [Common isNullValue:[parameter objectForKey:@"status"]] ?  @"" : [parameter objectForKey:@"status"];
+        
         switch ([type intValue]) {
             case 3://微金和尊享标详情请求
             {
-                NSDictionary *praramDic = @{@"userId":[[NSUserDefaults standardUserDefaults] objectForKey:UUID],@"prdClaimsId":Id};
+                NSDictionary *praramDic = @{@"userId":[[NSUserDefaults standardUserDefaults] objectForKey:UUID],@"prdClaimsId":Id,@"status":statue};
                 
                 if ([proType isEqualToString:@"1"]) {
                    [[NetworkModule sharedNetworkModule] newPostReq:praramDic tag: kSXTagPrdClaimsGetPrdBaseDetail owner:self signature:YES Type:SelectAccoutTypeP2P];
@@ -101,7 +103,7 @@
                 break;
             case 4://微金和尊享投资页面请求
             {
-                NSString *strParameters = [NSString stringWithFormat:@"id=%@&userId=%@",Id,userId];
+                NSString *strParameters = [NSString stringWithFormat:@"id=%@&userId=%@&status=%@",Id,userId,statue];
                 if ([proType isEqualToString:@"1"]) {
                     [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDealBid owner:self Type:SelectAccoutTypeP2P];
                 }

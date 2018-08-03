@@ -516,11 +516,7 @@
                 //如果未登录，展示登录页面
                 [self showLoginView];
             } else {
-//                if ([model.busType intValue] <= 1) {
-//                    self.accoutType = SelectAccoutTypeP2P;
-//                }else{//type 包括2 3，3为委托尊享标
-//                    self.accoutType = SelectAccoutTypeHoner;
-//                }
+
                 HSHelper *helper = [HSHelper new];
                 
                 //检查企业老用户是否开户
