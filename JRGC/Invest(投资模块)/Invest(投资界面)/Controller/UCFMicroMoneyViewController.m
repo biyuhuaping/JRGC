@@ -74,6 +74,8 @@
     self.tableview.tableHeaderView = microMoneyHeaderView;
     self.microMoneyHeaderView = microMoneyHeaderView;
     
+    self.tableview.tableFooterView = [self createFootView];
+    
     self.tableview.backgroundColor = UIColorWithRGB(0xebebee);
     //=========  下拉刷新、上拉加载更多  =========
 //    self.noDataView = [[UCFNoDataView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-64-49) errorTitle:@"敬请期待..."]
@@ -287,7 +289,24 @@
     
     return 188;
 }
-
+- (UIView *)createFootView
+{
+    UIView *footView =[[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 98)];
+    footView.backgroundColor = UIColorWithRGB(0xebebee);
+    
+    UILabel *firstProtocolLabel = [[UILabel alloc] init];
+    firstProtocolLabel.font = [UIFont systemFontOfSize:12.0f];
+    CGSize size = [Common getStrHeightWithStr:@"市场有风险 投资需谨慎" AndStrFont:12 AndWidth:ScreenWidth- 23 -15];
+    firstProtocolLabel.numberOfLines = 0;
+    firstProtocolLabel.textAlignment  = NSTextAlignmentCenter;
+    firstProtocolLabel.frame = CGRectMake(15, 0, ScreenWidth - 15*2, size.height);
+    firstProtocolLabel.text = @"市场有风险 投资需谨慎";
+    firstProtocolLabel.textColor = UIColorWithRGB(0x999999);
+    
+    [footView addSubview:firstProtocolLabel];
+    
+    return footView;
+}
 #pragma mark - 预约按钮的点击代理方法
 //- (void)microMoneyListCell:(UCFHomeInvestCell *)microMoneyCell didClickedInvestButtonWithModel:(UCFMicroMoneyModel *)model
 //{
