@@ -167,7 +167,7 @@
         view.delegate = self;
         UCFHomeListGroupPresenter *groupPresenter = [self.presenter.allDatas objectAtIndex:section];
         UCFHomeListGroup *group = groupPresenter.group;
-        if (!group.prdlist) {
+        if (group.prdlist.count == 0 || group.prdlist == nil) {
             return nil;
         }
         view.presenter = groupPresenter;
@@ -198,7 +198,7 @@
 {
     UCFHomeListGroupPresenter *groupPresenter = [self.presenter.allDatas objectAtIndex:section];
     UCFHomeListGroup *group = groupPresenter.group;
-    if (!group.prdlist) {
+    if (group.prdlist.count == 0 || group.prdlist == nil) {
         return 0.001;
     }
     else if ([group.type isEqualToString:@"0"] && group.attach.count > 0) {
