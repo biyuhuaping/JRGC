@@ -274,8 +274,8 @@
                     if (![dataDict[@"prdClaim"] isEqual:[NSNull null]]) {
                         NSMutableArray *prdArr = [NSMutableArray arrayWithCapacity:1];
                         UCFHomeListCellModel *model = [[UCFHomeListCellModel alloc] initWithDictionary:dataDict[@"prdClaim"]];
-                        [prdArr addObject:model];
                         tempG.prdlist = prdArr;
+                        [prdArr addObject:model];
                     }
                     UCFHomeListGroupPresenter *groupPresenter = [self homeListGroupPresenterWithGroup:tempG];
                     BOOL hasCache = NO;
@@ -288,11 +288,12 @@
                         }
                     }
                     if (!hasCache && ([dataDict[@"attach"] count] != 0 || ![Common isNullValue:dataDict[@"prdClaim"]])) {
-                        [self.homeListCells insertObject:groupPresenter atIndex:_currentRequestIndex];
-//                        [self.homeListCells addObject:groupPresenter];
+//                        [self.homeListCells insertObject:groupPresenter atIndex:_currentRequestIndex];
+                        [self.homeListCells addObject:groupPresenter];
                     }
                     if ( ([dataDict[@"attach"] count] != 0 || ![Common isNullValue:dataDict[@"prdClaim"]])) {
                         if ([self.view respondsToSelector:@selector(homeListViewPresenter:didRefreshDataWithResult:error:)]) {
+                            [self sortIndex]; //将数据进行排序
                             [self.view homeListViewPresenter:self didRefreshDataWithResult:result error:nil];
                         }
                     }
@@ -336,11 +337,11 @@
             }
         }
         if (!hasCache) {
-            [self.homeListCells insertObject:groupPresenter atIndex:_currentRequestIndex];
-//            [self.homeListCells addObject:groupPresenter];
+            [self.homeListCells addObject:groupPresenter];
         }
         
         if ([self.view respondsToSelector:@selector(homeListViewPresenter:didRefreshDataWithResult:error:)]) {
+            [self sortIndex];
             [self.view homeListViewPresenter:self didRefreshDataWithResult:result error:nil];
         }
         _currentRequestIndex++;
@@ -379,8 +380,21 @@
             [[NetworkModule sharedNetworkModule] newPostReq:parmDict tag:kSXTagGetHomeOtherSection owner:self signature:NO Type:SelectAccoutDefault];
         }
     }
-    
-
+}
+- (void)sortIndex
+{
+    NSArray *dataArr = self.showSectionsDict[@"data"][@"resultData"];
+    NSMutableArray *resultArr = [NSMutableArray arrayWithCapacity:3];
+    for (int i = 0; i < dataArr.count; i++) {
+      NSDictionary *sectionDict = dataArr[i];
+      int type = [sectionDict[@"type"] intValue];
+        for (UCFHomeListGroupPresenter *tmpgroupPresenter in self.homeListCells) {
+            if (tmpgroupPresenter.type == type) {
+                [resultArr addObject:tmpgroupPresenter];
+            }
+        }
+    }
+    self.homeListCells = resultArr;
 }
 - (void)errorPost:(NSError *)err tag:(NSNumber *)tag
 {
