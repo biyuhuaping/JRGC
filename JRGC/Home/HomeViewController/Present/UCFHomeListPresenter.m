@@ -225,27 +225,28 @@
     if (tag.intValue == kSXTagGetHomeShowSections) {
         self.showSectionsDict = dic;
         NSArray *dataArr = self.showSectionsDict[@"data"][@"resultData"];
-        
         if ([dataArr count] > 0) {
-//            for (NSDictionary *dic in dataArr) {
-//                int existenceType = [dic[@"type"] intValue]; //最新的type类型
-//                BOOL isExistence = NO;
-//                for (int i = 0; i < self.homeListCells.count; i++) {
-//                    UCFHomeListGroupPresenter *groupPresenter = self.homeListCells[i];
-//                    if (groupPresenter.type == existenceType) {
-//                        isExistence = YES;
-//                    }
-//                }
-//                if (!isExistence) {
-//
-//                }
-//
-//            }
-        
-            
-            if (dataArr.count != self.homeListCells.count) {
-                [self.homeListCells removeAllObjects];
+            NSMutableArray *detleArr = [NSMutableArray arrayWithCapacity:3];
+            for (int i = 0; i < self.homeListCells.count; i++) {
+                UCFHomeListGroupPresenter *groupPresenter = self.homeListCells[i];
+                BOOL isExistence = NO;
+                for (int j = 0; j < dataArr.count; j++) {
+                    NSDictionary *dic = dataArr[j];
+                    int existenceType = [dic[@"type"] intValue]; //最新的type类型
+                    if (groupPresenter.type == existenceType) {
+                        //证明该类型的元素还有
+                        isExistence = YES;
+                    }
+                }
+                if (!isExistence) {
+                    [detleArr addObject:groupPresenter];
+                }
             }
+            
+            for (UCFHomeListGroupPresenter *groupPresenter in detleArr) {
+                [self.homeListCells removeObject:groupPresenter];
+            }
+
             _currentRequestIndex = 0;
             [self getSectionDeatilData];
         }
@@ -287,7 +288,8 @@
                         }
                     }
                     if (!hasCache && ([dataDict[@"attach"] count] != 0 || ![Common isNullValue:dataDict[@"prdClaim"]])) {
-                        [self.homeListCells addObject:groupPresenter];
+                        [self.homeListCells insertObject:groupPresenter atIndex:_currentRequestIndex];
+//                        [self.homeListCells addObject:groupPresenter];
                     }
                     if ( ([dataDict[@"attach"] count] != 0 || ![Common isNullValue:dataDict[@"prdClaim"]])) {
                         if ([self.view respondsToSelector:@selector(homeListViewPresenter:didRefreshDataWithResult:error:)]) {
@@ -334,7 +336,8 @@
             }
         }
         if (!hasCache) {
-            [self.homeListCells addObject:groupPresenter];
+            [self.homeListCells insertObject:groupPresenter atIndex:_currentRequestIndex];
+//            [self.homeListCells addObject:groupPresenter];
         }
         
         if ([self.view respondsToSelector:@selector(homeListViewPresenter:didRefreshDataWithResult:error:)]) {
@@ -381,7 +384,9 @@
 }
 - (void)errorPost:(NSError *)err tag:(NSNumber *)tag
 {
-    
+    if ([self.view respondsToSelector:@selector(homeListViewPresenter:didRefreshDataWithResult:error:)]) {
+        [self.view homeListViewPresenter:self didRefreshDataWithResult:nil error:nil];
+    }
 }
 
 @end
