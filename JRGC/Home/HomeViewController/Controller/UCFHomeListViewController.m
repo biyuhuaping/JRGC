@@ -167,8 +167,13 @@
         view.delegate = self;
         UCFHomeListGroupPresenter *groupPresenter = [self.presenter.allDatas objectAtIndex:section];
         UCFHomeListGroup *group = groupPresenter.group;
-        if (group.prdlist.count == 0 || group.prdlist == nil) {
-            return nil;
+        if (group.attach.count  == 0 && [group.type intValue] == 0)
+        {
+             return nil;
+        }else{
+            if ([group.type intValue] >  0 && group.prdlist.count == 0) {
+                return nil;
+            }
         }
         view.presenter = groupPresenter;
         return view;
@@ -198,22 +203,36 @@
 {
     UCFHomeListGroupPresenter *groupPresenter = [self.presenter.allDatas objectAtIndex:section];
     UCFHomeListGroup *group = groupPresenter.group;
-    if (group.prdlist.count == 0 || group.prdlist == nil) {
-        return 0.001;
-    }
-    else if ([group.type isEqualToString:@"0"] && group.attach.count > 0) {
-        return 140;
-    }
-    else
+    
+    if ([group.type intValue] == 0)//新手专区
+    {
+        if (group.attach.count > 0) {
+            return 140;
+        }else{
+            return 0.01f;
+        }
+    }else if (group.prdlist.count == 0)
+    {
+        return 0.01f;
+    }else {
         return 39;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     UCFHomeListGroupPresenter *groupPresenter = [self.presenter.allDatas objectAtIndex:section];
     UCFHomeListGroup *group = groupPresenter.group;
-    if (!group.prdlist) {
-        return 0.001;
+    if ([group.type intValue] == 0)//新手专区
+    {
+        if (group.attach.count > 0) {
+            return 8;
+        }else{
+            return 0.01f;
+        }
+    }else if (group.prdlist.count == 0)
+    {
+        return 0.01f;
     }
     else {
         if (section == 5) {

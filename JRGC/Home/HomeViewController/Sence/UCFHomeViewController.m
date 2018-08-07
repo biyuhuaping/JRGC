@@ -694,7 +694,7 @@
 
 - (void)homeList:(UCFHomeListViewController *)homeList   withType:(UCFHomeListType)type
 {
-    if (type == UCFHomeListTypeIntelligentLoan)
+    if (type == UCFHomeListTypeIntelligentLoan)//智能出借
     {
         AppDelegate *appdel = (AppDelegate *)[UIApplication sharedApplication].delegate;
         UCFInvestViewController *invest = (UCFInvestViewController *)[[appdel.tabBarController.childViewControllers objectAtIndex:1].childViewControllers firstObject];
@@ -704,7 +704,7 @@
         }
         [appdel.tabBarController setSelectedIndex:1];
     }
-    else if (type == UCFHomeListTypeQualityClaims)
+    else if (type == UCFHomeListTypeQualityClaims)//优质债权
     {
         AppDelegate *appdel = (AppDelegate *)[UIApplication sharedApplication].delegate;
         UCFInvestViewController *invest = (UCFInvestViewController *)[[appdel.tabBarController.childViewControllers objectAtIndex:1].childViewControllers firstObject];
