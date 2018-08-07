@@ -218,13 +218,15 @@
 {
     
 }
+
+
 - (void)endPost:(id)result tag:(NSNumber *)tag
 {
     NSString *data = (NSString *)result;
     NSMutableDictionary *dic = [data objectFromJSONString];
     if (tag.intValue == kSXTagGetHomeShowSections) {
         self.showSectionsDict = dic;
-        NSArray *dataArr = self.showSectionsDict[@"data"][@"resultData"];
+        NSArray *dataArr = self.showSectionsDict[@"data"][@"resultData"];        
         if ([dataArr count] > 0) {
             NSMutableArray *detleArr = [NSMutableArray arrayWithCapacity:3];
             for (int i = 0; i < self.homeListCells.count; i++) {
@@ -288,7 +290,6 @@
                         }
                     }
                     if (!hasCache && ([dataDict[@"attach"] count] != 0 || ![Common isNullValue:dataDict[@"prdClaim"]])) {
-//                        [self.homeListCells insertObject:groupPresenter atIndex:_currentRequestIndex];
                         [self.homeListCells addObject:groupPresenter];
                     }
                     if ( ([dataDict[@"attach"] count] != 0 || ![Common isNullValue:dataDict[@"prdClaim"]])) {
@@ -399,6 +400,7 @@
 - (void)errorPost:(NSError *)err tag:(NSNumber *)tag
 {
     if ([self.view respondsToSelector:@selector(homeListViewPresenter:didRefreshDataWithResult:error:)]) {
+        [self sortIndex];
         [self.view homeListViewPresenter:self didRefreshDataWithResult:nil error:nil];
     }
 }
