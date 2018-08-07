@@ -923,7 +923,7 @@
     __weak typeof(self) weakSelf = self;
     if ([self checkUserCanInvestIsDetail:YES type:self.accoutType]) {
         NSString  *colPrdClaimIdStr = [NSString stringWithFormat:@"%@",model.Id];
-        NSDictionary *parameter = [NSDictionary dictionaryWithObjectsAndKeys:uuid,@"userId", colPrdClaimIdStr, @"colPrdClaimId", nil];
+        NSDictionary *parameter = [NSDictionary dictionaryWithObjectsAndKeys:uuid,@"userId", colPrdClaimIdStr, @"colPrdClaimId",model.status,@"status", nil];
         [self.cycleImageVC.presenter fetchCollectionDetailDataWithParameter:parameter completionHandler:^(NSError *error, id result) {
             [MBProgressHUD hideOriginAllHUDsForView:weakSelf.view animated:YES];
             NSDictionary *dic = (NSDictionary *)result;

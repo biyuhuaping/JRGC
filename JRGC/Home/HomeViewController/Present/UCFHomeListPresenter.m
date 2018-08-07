@@ -224,9 +224,25 @@
     NSMutableDictionary *dic = [data objectFromJSONString];
     if (tag.intValue == kSXTagGetHomeShowSections) {
         self.showSectionsDict = dic;
-        if ([self.showSectionsDict[@"data"][@"resultData"] count] > 0) {
+        NSArray *dataArr = self.showSectionsDict[@"data"][@"resultData"];
+        
+        if ([dataArr count] > 0) {
+//            for (NSDictionary *dic in dataArr) {
+//                int existenceType = [dic[@"type"] intValue]; //最新的type类型
+//                BOOL isExistence = NO;
+//                for (int i = 0; i < self.homeListCells.count; i++) {
+//                    UCFHomeListGroupPresenter *groupPresenter = self.homeListCells[i];
+//                    if (groupPresenter.type == existenceType) {
+//                        isExistence = YES;
+//                    }
+//                }
+//                if (!isExistence) {
+//
+//                }
+//
+//            }
+        
             
-            NSArray *dataArr = self.showSectionsDict[@"data"][@"resultData"];
             if (dataArr.count != self.homeListCells.count) {
                 [self.homeListCells removeAllObjects];
             }
