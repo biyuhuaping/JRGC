@@ -90,7 +90,6 @@
 {
     [self initOneScrollView];
     [self cretateInvestmentView];
-//    [self initTableViews];
     [self bringSubviewToFront:_investmentView];
 }
 

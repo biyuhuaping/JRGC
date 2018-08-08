@@ -130,7 +130,7 @@
     [_navigationStyleBar addSubview:titleBkView];
     titleBkView.center = _navigationStyleBar.center;
     CGRect tempRect = titleBkView.frame;
-    tempRect.origin.y = 28;
+    tempRect.origin.y = [[UIApplication sharedApplication] statusBarFrame].size.height + 8;
     titleBkView.frame = tempRect;
 }
 //自定义navigationbar
@@ -142,12 +142,13 @@
     } else if (ScreenWidth == 414.0f && ScreenHeight == 736.0f) {
         scaleFlot =  1.29375;
     }
-    _navigationStyleBar = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, NavigationBarHeight)];
+    
+    _navigationStyleBar = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, [[UIApplication sharedApplication] statusBarFrame].size.height + 44)];
     _navigationStyleBar.image = [UIImage imageNamed:@"particular_bg_1"];
     [self.view addSubview:_navigationStyleBar];
     
     UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [leftButton setFrame:CGRectMake(0, 16, 44, 44)];
+    [leftButton setFrame:CGRectMake(0,[[UIApplication sharedApplication] statusBarFrame].size.height - 4, 44, 44)];
     [leftButton setBackgroundColor:[UIColor clearColor]];
     [leftButton.titleLabel setFont:[UIFont systemFontOfSize:14]];
     [leftButton setTitleColor:[UIColor colorWithWhite:1 alpha:0.7] forState:UIControlStateHighlighted];
@@ -214,10 +215,8 @@
         case PROJECTDETAILTYPEBONDSRRANSFER://债转标详情  tansType 债权转让原标类型 1 普通标 2 权益标
             if ([[[_dataDic objectForKey:@"prdTransferFore"] objectForKey:@"busType"] isEqualToString:@"1"]) {
                 tansType = @"2";
-//                [self makeContractMsg:[_dataDic objectForKey:@"contractMsg"] tp:@"4"];
                 [self makeContractMsg:[_dataDic objectForKey:@"contractMsg"]];
             } else {
-//                [self makeContractMsg:[_dataDic objectForKey:@"contractMsg"] tp:@"3"];
                 [self makeContractMsg:[_dataDic objectForKey:@"contractMsg"]];
             }
             _markOfBondsRransferView = [[UCFMarkOfBondsRransferNewView alloc] initWithFrame:CGRectMake(0, NavigationBarHeight, ScreenWidth, ScreenHeight - NavigationBarHeight) withDic:_dataDic prdList:_prdLabelsList contractMsg:_contractMsgArray souceVc:_sourceVc type:tansType isP2P:_isP2P];

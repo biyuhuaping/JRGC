@@ -70,7 +70,13 @@
             } else {
                 
                 if ([_sourceVc isEqualToString:@"transiBid"]) {
+        
                     NSString *buttonTitle = isP2P ? @"立即出借":@"立即购买";
+                    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+                    if (app.isSubmitAppStoreTestTime)
+                    {
+                        buttonTitle = @"立即购买";
+                    }
                     [investmentButton setTitle:buttonTitle forState:UIControlStateNormal];
                 }else {
                     NSString *buttonTitle = isP2P ? @"立即出借":@"立即认购";

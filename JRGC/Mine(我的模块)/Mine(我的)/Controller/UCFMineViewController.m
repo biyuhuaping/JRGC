@@ -52,6 +52,7 @@
 @property (strong, nonatomic) UCFUserBenefitModel *benefitModel;
 @property (strong, nonatomic) UCFUserAssetModel *assetModel;
 @property (assign, nonatomic) BOOL assetProofCanClick;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topSapce;
 @end
 
 @implementation UCFMineViewController
@@ -210,7 +211,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     [self createUI];
     
     [self configure];
@@ -223,6 +224,11 @@
     [super viewDidLayoutSubviews];
     self.mineHeaderView.frame = CGRectMake(0, 0, ScreenWidth, 195);
     self.mineFooterView.height = 240;
+    if ([[UIApplication sharedApplication] statusBarFrame].size.height > 21) {
+        
+    } else {
+        self.topSapce.constant = - 20;
+    }
 }
 
 - (void)refresh
@@ -255,6 +261,7 @@
         // Fallback on earlier versions
     }
 #endif
+    self.view.backgroundColor = [UIColor lightGrayColor];
 }
 
 - (void)refreshData {

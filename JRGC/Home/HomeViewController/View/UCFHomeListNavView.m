@@ -75,14 +75,15 @@
 {
     [super layoutSubviews];
     self.titleLabel.frame = CGRectMake(0, 0, 80, 30);
-    CGFloat yCenter = self.center.y + 10;
-    self.titleLabel.center = CGPointMake(ScreenWidth * 0.5, yCenter);
+//    CGFloat yCenter = self.center.y + 10;
     
-    self.loginAndRegisterButton.frame = CGRectMake(ScreenWidth - 95, 20+19*0.5, 80, 25);
+    self.titleLabel.center = CGPointMake(ScreenWidth * 0.5, CGRectGetHeight(self.frame) - 20);
+    
+    self.loginAndRegisterButton.frame = CGRectMake(ScreenWidth - 95, [[UIApplication sharedApplication] statusBarFrame].size.height +19*0.5, 80, 25);
     self.loginAndRegisterButton.layer.cornerRadius = 25*0.5;
     self.loginAndRegisterButton.clipsToBounds = YES;
     
-    self.giftButton.frame = CGRectMake(ScreenWidth - 45, 27, 30, 30);
+    self.giftButton.frame = CGRectMake(ScreenWidth - 45, [[UIApplication sharedApplication] statusBarFrame].size.height + 7, 30, 30);
     NSString *userId = [UserInfoSingle sharedManager].userId;
     if (userId) {
         self.giftButton.alpha = 0.7;
