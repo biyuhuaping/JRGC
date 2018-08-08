@@ -270,14 +270,13 @@
         }
     }
     _topUpLabelTextField.placeholder = [NSString stringWithFormat:@"输入充值金额,最低%@元",minRecharge];
+    _topUpLabelTextField.text = _defaultMoney;
     //设置ScrollView总高度
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         _contentHeight.constant = CGRectGetMaxY(_telServiceLabel.frame);
         self.baseScrollView.contentSize = CGSizeMake(ScreenWidth, _contentHeight.constant + 100);
         DLog(@"%@",self.baseScrollView);
     });
-
-
 }
 #pragma mark H5URl加载方式
 -(void)showContractWebViewUrl:(NSString *)urlStr withTitle:(NSString *)title
