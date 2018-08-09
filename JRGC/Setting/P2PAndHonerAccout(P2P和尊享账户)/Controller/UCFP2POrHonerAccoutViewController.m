@@ -198,7 +198,7 @@
               p2pOrHonerAccout = [UCFSettingArrowItem itemWithIcon:nil title:@"尊享徽商银行存管账户" destVcClass:nil];
               riskAssessment= [UCFSettingArrowItem itemWithIcon:nil title:@"尊享风险承担能力" destVcClass:[RiskAssessmentViewController class]];
         }else{
-            myInVest.title  = @"我的出借";
+            myInVest.title  = [UserInfoSingle sharedManager].isSubmitTime ? @"我的购买": @"我的出借";
             if ([UserInfoSingle sharedManager].openStatus == 4) {
                 setChangePassword.title = @"修改交易密码";
             }else{
@@ -207,7 +207,8 @@
             p2pOrHonerAccout = [UCFSettingArrowItem itemWithIcon:nil title:@"微金徽商银行存管账户" destVcClass:nil];
             riskAssessment = [UCFSettingArrowItem itemWithIcon:nil title:@"微金风险承担能力" destVcClass:[RiskAssessmentViewController class]];
         }
-        UCFSettingItem *batchInvest = [UCFSettingArrowItem itemWithIcon:nil title:@"批量出借" destVcClass:[UCFBatchInvestmentViewController class]];
+        NSString *titleStr11  = [UserInfoSingle sharedManager].isSubmitTime ? @"批量购买": @"批量出借";
+        UCFSettingItem *batchInvest = [UCFSettingArrowItem itemWithIcon:nil title:titleStr11 destVcClass:[UCFBatchInvestmentViewController class]];
         UCFSettingItem *myReserved = [UCFSettingArrowItem itemWithIcon:nil title:@"我的预约" destVcClass:[UCFMyReservedViewController class]];
         
         UCFSettingGroup *group1 = [[UCFSettingGroup alloc] init];//第一栏

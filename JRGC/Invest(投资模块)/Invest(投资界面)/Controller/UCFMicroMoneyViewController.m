@@ -70,7 +70,7 @@
 - (void)createUI {
     self.accoutType = SelectAccoutTypeP2P;
     UCFMicroMoneyHeaderView *microMoneyHeaderView = (UCFMicroMoneyHeaderView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFMicroMoneyHeaderView" owner:self options:nil] lastObject];
-    microMoneyHeaderView.frame = CGRectMake(0, 0, ScreenWidth, ScreenWidth/16*5+10);
+    microMoneyHeaderView.frame = CGRectMake(0, 0, ScreenWidth, ScreenWidth/16*5);
     self.tableview.tableHeaderView = microMoneyHeaderView;
     self.microMoneyHeaderView = microMoneyHeaderView;
     
@@ -121,7 +121,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 8;
+    return 0.01;
 }
 
 //- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -179,13 +179,9 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
-    static NSString* viewId = @"homeListFooter";
-    UITableViewHeaderFooterView *view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:viewId];
-    if (nil == view) {
-        view = [[UITableViewHeaderFooterView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 8)];
-    }
-    view.contentView.backgroundColor = UIColorWithRGB(0xebebee);
-    return view;
+    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 8)];
+    footerView.backgroundColor = UIColorWithRGB(0xebebee);
+    return footerView;
 }
 
 - (void)homeListHeader:(UCFHomeListHeaderSectionView *)homeListHeader didClickedMoreWithType:(NSString *)type{

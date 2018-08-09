@@ -188,45 +188,51 @@
 #pragma mark - 获取正式环境的banner图
 - (void)getNormalBannerData
 {
-    __weak typeof(self) weakSelf = self;
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSString *URL = [NSString stringWithFormat:@"https://fore.9888.cn/cms/api/appbanner_obj.php?key=0ca175b9c0f726a831d895e&bid=51&iid=50"];
-        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-        [request setURL:[NSURL URLWithString:URL]];
-        [request setHTTPMethod:@"GET"];
-        NSHTTPURLResponse *urlResponse = nil;
-        NSError *error = nil;
-        NSData *recervedData = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&error];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (!recervedData) {
-                return ;
-            }
-            NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:recervedData
-                                                                options:NSJSONReadingMutableContainers
-                                                                  error:nil];
-            if (nil == dic) {
-                return;
-            }
-            self.contentMode = UIViewContentModeScaleToFill;
-            
-            NSArray *bannerArr = [dic objectForKey:@"banner"];
-            NSMutableArray *tempBanner = [NSMutableArray array];
-            for (NSDictionary *dic in bannerArr) {
-                UCFCycleModel *model = [UCFCycleModel getCycleModelByDataDict:dic];
-                [tempBanner addObject:model];
-            }
-            weakSelf.cycleView.imagesGroup = tempBanner;
-            [weakSelf.cycleView refreshImage];
-            
-            [weakSelf.iconArray removeAllObjects];
-            NSArray *iconArr = [dic objectForKey:@"icon"];
-            for (NSDictionary *dict in iconArr) {
-                UCFCycleModel *model = [UCFCycleModel getCycleModelByDataDict:dict];
-                [weakSelf.iconArray addObject:model];
-            }
-            
-        });
-    });
+    
+    UCFCycleModel *model = [[UCFCycleModel alloc] init];
+    model.thumb = @"https://app.9888.cn/api/staticResource/img/tranInvestClaim.jpg";
+    self.cycleView.imagesGroup = @[model];
+    [self.cycleView refreshImage];
+    
+//    __weak typeof(self) weakSelf = self;
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//        NSString *URL = [NSString stringWithFormat:@"https://fore.9888.cn/cms/api/appbanner_obj.php?key=0ca175b9c0f726a831d895e&bid=51&iid=50"];
+//        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+//        [request setURL:[NSURL URLWithString:URL]];
+//        [request setHTTPMethod:@"GET"];
+//        NSHTTPURLResponse *urlResponse = nil;
+//        NSError *error = nil;
+//        NSData *recervedData = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&error];
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            if (!recervedData) {
+//                return ;
+//            }
+//            NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:recervedData
+//                                                                options:NSJSONReadingMutableContainers
+//                                                                  error:nil];
+//            if (nil == dic) {
+//                return;
+//            }
+//            self.contentMode = UIViewContentModeScaleToFill;
+//
+//            NSArray *bannerArr = [dic objectForKey:@"banner"];
+//            NSMutableArray *tempBanner = [NSMutableArray array];
+//            for (NSDictionary *dic in bannerArr) {
+//                UCFCycleModel *model = [UCFCycleModel getCycleModelByDataDict:dic];
+//                [tempBanner addObject:model];
+//            }
+//            weakSelf.cycleView.imagesGroup = tempBanner;
+//            [weakSelf.cycleView refreshImage];
+//
+//            [weakSelf.iconArray removeAllObjects];
+//            NSArray *iconArr = [dic objectForKey:@"icon"];
+//            for (NSDictionary *dict in iconArr) {
+//                UCFCycleModel *model = [UCFCycleModel getCycleModelByDataDict:dict];
+//                [weakSelf.iconArray addObject:model];
+//            }
+//
+//        });
+//    });
 }
 
 
