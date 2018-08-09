@@ -10,11 +10,11 @@
 #import "UCFHonorInvestViewController.h"
 #import "UCFMicroMoneyViewController.h"
 #import "UCFInvestTransferViewController.h"
-//#import "UCFGoldenViewController.h"
 #import "PagerView.h"
 #import "UCFSelectedView.h"
 #import "UCFOrdinaryBidController.h"
 #import "UCFHomeListPresenter.h"
+#import "AppDelegate.h"
 @interface UCFInvestViewController () <UCFSelectedViewDelegate>
 {
     PagerView *_pagerView;
@@ -219,10 +219,17 @@
 //        [titleArray addObject:@"债转"];
 //    }
      [titleArray addObject:@"优质债权"];
-     [titleArray addObject:@"智能出借"];
-     [titleArray addObject:@"债权转让"];
+    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+
     
-    _pagerView = [[PagerView alloc] initWithFrame:CGRectMake(0,20,ScreenWidth,ScreenHeight - 20 - 49)
+    if (app.isSubmitAppStoreTestTime) {
+        [titleArray addObject:@"智能购买"];
+    } else {
+        [titleArray addObject:@"智能出借"];
+    }
+     [titleArray addObject:@"债权转让"];
+    CGRect stateFrame = [[UIApplication sharedApplication] statusBarFrame];
+    _pagerView = [[PagerView alloc] initWithFrame:CGRectMake(0,stateFrame.size.height,ScreenWidth,ScreenHeight - 20 - 49)
                                 SegmentViewHeight:44
                                        titleArray:titleArray
                                        Controller:self

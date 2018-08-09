@@ -15,6 +15,7 @@
 #import "UCFHomeIconPresenter.h"
 #import "HSHelper.h"
 #import "UCFAttachModel.h"
+
 @interface UCFHomeListPresenter ()<NetworkModuleDelegate>
 @property (strong, nonatomic) UCFHomeAPIManager *apiManager;
 @property (copy, nonatomic) NSString *userId;
@@ -225,6 +226,7 @@
     NSString *data = (NSString *)result;
     NSMutableDictionary *dic = [data objectFromJSONString];
     if (tag.intValue == kSXTagGetHomeShowSections) {
+        
         self.showSectionsDict = dic;
         NSArray *dataArr = self.showSectionsDict[@"data"][@"resultData"];        
         if ([dataArr count] > 0) {

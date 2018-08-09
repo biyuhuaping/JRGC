@@ -419,6 +419,7 @@ static NetworkModule *gInstance = NULL;
         SEL sel = @selector(endPost:tag:);
         NSData *data = [request responseData];
         NSString *string = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
+        
         [req.owner performSelector:sel withObject:string withObject:[NSNumber numberWithInt: req.sxTag]];
         req.owner = nil;
     }
@@ -449,7 +450,16 @@ static NetworkModule *gInstance = NULL;
 {
     SEL sel = @selector(endPost:tag:);
     if ([[dic valueForKey:@"ret"] boolValue]) {
-        [req.owner performSelector:sel withObject:req.result withObject:[NSNumber numberWithInt: req.sxTag]];
+        
+        AppDelegate *app =  (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        if (app.isSubmitAppStoreTestTime) {
+            NSString *resultStr = req.result;
+            resultStr = [resultStr stringByReplacingOccurrencesOfString:@"出借" withString:@"购买"];
+            id result = resultStr;
+            [req.owner performSelector:sel withObject:result withObject:[NSNumber numberWithInt: req.sxTag]];
+        } else {
+            [req.owner performSelector:sel withObject:req.result withObject:[NSNumber numberWithInt: req.sxTag]];
+        }
         req.owner = nil;
     } else {
         _loseTag = req.sxTag;

@@ -431,7 +431,15 @@
     self.remainLabel.text = [self moneywithRemaining:temp total:microMoneyModel.borrowAmount];
     
     NSInteger status = [microMoneyModel.status integerValue];
-    NSArray *statusArr = @[@"未审核",@"等待确认",@"出借",@"流标",@"满标",@"回款中",@"已回款"];
+    NSString *showStr = @"出借";
+    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    if (app.isSubmitAppStoreTestTime) {
+        showStr = @"购买";
+    } else {
+        showStr = @"出借";
+    }
+    
+    NSArray *statusArr = @[@"未审核",@"等待确认",showStr,@"流标",@"满标",@"回款中",@"已回款"];
     
    
     if (status>2) {
@@ -441,7 +449,13 @@
     else {
         self.circleProgressView.textColor = UIColorWithRGB(0x555555);
         if (microMoneyModel.modelType == UCFMicroMoneyModelTypeBatchBid && status == 2) {
-            self.circleProgressView.progressText = @"批量出借";
+            if (app.isSubmitAppStoreTestTime) {
+               self.circleProgressView.progressText = @"批量购买";
+            } else {
+               self.circleProgressView.progressText = @"批量出借";
+            }
+            
+            
         }
         else {
             self.circleProgressView.progressText = [statusArr objectAtIndex:status];

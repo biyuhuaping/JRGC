@@ -302,7 +302,8 @@
         self.navView.giftButton.hidden = YES;
         self.navView.loginAndRegisterButton.hidden = NO;
     }
-    self.navView.frame = CGRectMake(0, 0, self.view.width, 64);
+//        self.navView.frame = CGRectMake(0, 0, self.view.width,64);
+    self.navView.frame = CGRectMake(0, 0, self.view.width,[[UIApplication sharedApplication] statusBarFrame].size.height +  44);
     [self.view bringSubviewToFront:self.navView];
 #ifdef __IPHONE_11_0
     if (@available(iOS 11.0, *)) {
@@ -346,7 +347,7 @@
         //如果未登录，展示登录页面
         [self showLoginView];
     } else {
-            [self gotoGoldInvestVC:model];
+        [self gotoGoldInvestVC:model];
     }
 }
 
