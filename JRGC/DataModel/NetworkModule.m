@@ -581,8 +581,18 @@ static NetworkModule *gInstance = NULL;
     }
     else {
 //        [MBProgressHUD displayHudError:req.result];
-        [req.owner performSelector:sel withObject:req.result withObject:[NSNumber numberWithInt: req.sxTag]];
-        req.owner = nil;
+        
+        if ([UserInfoSingle sharedManager].isSubmitTime) {
+            NSString *resultStr = (NSString *)req.result;
+            resultStr = [resultStr stringByReplacingOccurrencesOfString:@"出借" withString:@"购买"];
+            id result = resultStr;
+            [req.owner performSelector:sel withObject:result withObject:[NSNumber numberWithInt: req.sxTag]];
+        } else {
+            [req.owner performSelector:sel withObject:req.result withObject:[NSNumber numberWithInt: req.sxTag]];
+        }
+        
+//        [req.owner performSelector:sel withObject:req.result withObject:[NSNumber numberWithInt: req.sxTag]];
+//        req.owner = nil;
     }
 }
 
