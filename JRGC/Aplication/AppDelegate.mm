@@ -789,11 +789,13 @@
         NSString *Data = (NSString *)result;
         NSDictionary * dic = [Data objectFromJSONString];
         if ([dic[@"ret"] boolValue]) {
-            NSString *availableNum = [[dic objectSafeDictionaryForKey:@"data"] objectSafeForKey:@"availableNum"];
-            if ([availableNum integerValue] > 0) {
-                [self.tabBarController.tabBar showBadgeOnItemIndex:2];
-            } else {
-                [self.tabBarController.tabBar hideBadgeOnItemIndex:2];
+            if (!self.isSubmitAppStoreTestTime) {
+                NSString *availableNum = [[dic objectSafeDictionaryForKey:@"data"] objectSafeForKey:@"availableNum"];
+                if ([availableNum integerValue] > 0) {
+                    [self.tabBarController.tabBar showBadgeOnItemIndex:2];
+                } else {
+                    [self.tabBarController.tabBar hideBadgeOnItemIndex:2];
+                }
             }
         } else {
             [self.tabBarController.tabBar hideBadgeOnItemIndex:2];
