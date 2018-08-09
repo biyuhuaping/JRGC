@@ -243,7 +243,8 @@
              _keYongTipLabel.text = @"可用金额";
             BOOL bankNumEq = [[_dataDict objectSafeForKey:@"bankNumEq"] boolValue];
             
-            _totalKeYongTipLabel.text = bankNumEq ? @"(尊享余额+微金余额)"  : @"" ;
+//            _totalKeYongTipLabel.text = bankNumEq ? @"(尊享余额+微金余额)"  : @"" ;
+            _totalKeYongTipLabel.text =  @"" ;
             NSString *minInvestStr = [NSString stringWithFormat:@"%@",[[_dataDict objectForKey:@"colPrdClaimDetail"] objectForKey:@"colMinInvest"]];
       
             NSString *palceText = [NSString stringWithFormat:@"%@元起投", minInvestStr];
@@ -277,7 +278,8 @@
             
             BOOL bankNumEq = [[_dataDict objectSafeForKey:@"bankNumEq"] boolValue];
             
-            _totalKeYongTipLabel.text = bankNumEq ? @"(尊享余额+微金余额+我的工豆)"  : @"(我的余额+我的工豆)" ;
+//            _totalKeYongTipLabel.text = bankNumEq ? @"(尊享余额+微金余额+我的工豆)"  : @"(我的余额+我的工豆)" ;
+            _totalKeYongTipLabel.text = bankNumEq ? @"(我的余额+我的工豆)"  : @"(我的余额+我的工豆)" ;
             _prdLabelsList =  [[_dataDict objectSafeDictionaryForKey:@"data"] objectSafeArrayForKey:@"prdLabelsList"];;
             NSMutableArray *labelPriorityArr = [NSMutableArray arrayWithCapacity:4];
             if (![_prdLabelsList isEqual:[NSNull null]]) {
@@ -350,7 +352,8 @@
         
         BOOL bankNumEq = [[_dataDict objectSafeForKey:@"bankNumEq"] boolValue];
         
-        _totalKeYongTipLabel.text = bankNumEq ? @"(尊享余额+微金余额)":@"";
+//        _totalKeYongTipLabel.text = bankNumEq ? @"(尊享余额+微金余额)":@"";
+          _totalKeYongTipLabel.text = @"";
         _keYongTipLabel.text = @"可用金额";
         NSString *buyCueDeStr = [_dataDict objectSafeForKey:@"buyCueDes"];
         if (![buyCueDeStr isEqualToString:@""]) {
