@@ -17,7 +17,6 @@
 #import "UserInfoSingle.h"
 #import "AccountWebView.h"
 #import "NSString+Misc.h"
-#import "UCFDiscoveryViewController.h"
 @interface UpgradeAccountVC ()<UITextFieldDelegate,NetworkModuleDelegate,UCFHuiShangChooseBankViewControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;

@@ -55,7 +55,7 @@ static NSString *cellId = @"iconCell";
     
     [self.iconCollectionView registerNib:[UINib nibWithNibName:@"UCFHomeIconCollectionCell" bundle:nil] forCellWithReuseIdentifier:cellId];
     
-    [self getNormalBannerData];
+//    [self getNormalBannerData];
 }
 
 - (void)noticeView:(UCFNoticeView *)noticeView didClickedNotice:(UCFNoticeModel *)notice
@@ -192,11 +192,17 @@ static NSString *cellId = @"iconCell";
 - (void)getNormalBannerData
 {
     if ([UserInfoSingle sharedManager].isSubmitTime) {
-        
+        UCFCycleModel *model = [[UCFCycleModel alloc] init];
+        model.thumb = @"https://fore.9888.cn/cms/uploadfile/2017/0524/20170524051010287.jpg";
+        model.title = @"大事记";
+        model.url = @"https://m.9888.cn/static/wap/invest/index.html#/features/big-deal";
+        NSMutableArray *temp = [NSMutableArray new];
+        [temp addObject:model];
+        self.cycleImageView.imagesGroup = temp;
+        [self.cycleImageView refreshImage];
     } else {
         [[NetworkModule sharedNetworkModule] newPostReq:nil tag:kSXTagGetBannerAndGift owner:self signature:NO Type:SelectAccoutDefault];
     }
-            [[NetworkModule sharedNetworkModule] newPostReq:nil tag:kSXTagGetBannerAndGift owner:self signature:NO Type:SelectAccoutDefault];
 }
 
 - (void)beginPost:(kSXTag)tag

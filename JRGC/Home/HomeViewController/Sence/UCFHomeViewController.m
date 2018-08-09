@@ -115,6 +115,8 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setDefaultState:) name:@"setDefaultViewData" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUI:) name:@"refreshUserState" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(msgSkipToNativeAPP:) name:@"msgSkipToNativeAPP" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshCycleImage:) name:@"RefreshCycleImage" object:nil];
+
 
     }
     return self;
@@ -129,7 +131,7 @@
     [self addUI];
 #pragma mark - 请求数据
     [self fetchData];
-//    [self addDragBtn];
+    [self addDragBtn];
 }
 
 
@@ -137,7 +139,6 @@
 - (void)addDragBtn
 {
     _dragBtn = [[BJGridItem alloc] initWithTitle:nil withImageName:@"home_icon_rebate" atIndex:0 editable:NO];
-    
     [_dragBtn setFrame:CGRectMake(ScreenWidth - 62 - 6, ScreenHeight - 49 - 65 - 6, 62, 65)];
     _dragBtn.delegate = self;
     [self.view addSubview: _dragBtn];
@@ -198,33 +199,11 @@
 {
     
 }
-//- (void)presentOptionsMenu:(UIDocumentInteractionController *)documentController
-//{
-//    // display third-party apps as well as actions, such as Copy, Print, Save Image, Quick Look
-//    [_documentController presentOptionsMenuFromRect:self.view.bounds inView:self.view animated:YES];
-//}
+
 #pragma mark UIDocumentInteractionControllerDelegate
 
-//- (UIViewController *)documentInteractionControllerViewControllerForPreview:(UIDocumentInteractionController *)controller
-//{
-//    return self;
-//}
 - (void) gridItemDidClicked:(BJGridItem *) gridItem
 {
-//    NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-//    NSString *imagePath = [documentPath stringByAppendingString:@"/11.pdf"];
-//    NSURL *pathUrl = [NSURL fileURLWithPath:imagePath];
-//    self.documentController = [UIDocumentInteractionController interactionControllerWithURL:pathUrl];
-//    _documentController.delegate = self;
-//
-//    //    [self presentOpenInMenu];
-//
-//    [self presentOptionsMenu:_documentController];
-//    return;
-//    FullWebViewController *webView = [[FullWebViewController alloc] initWithWebUrl:HOMEINVITATIONURL title:@"邀请返利"];
-//    webView.flageHaveShareBut = @"分享";
-//    webView.sourceVc = @"UCFLatestProjectViewController";
-//    [self.navigationController pushViewController:webView animated:YES];
     if ([[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
         UCFWebViewJavascriptBridgeMallDetails *web = [[UCFWebViewJavascriptBridgeMallDetails alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMallDetails" bundle:nil];
         web.url = COUPON_CENTER;
@@ -330,7 +309,10 @@
         [self gotoGoldDetailVC:model];
     }
 }
-
+- (void)refreshCycleImage:(NSNotification *)noti
+{
+    [self.cycleImageVC getNormalBannerData];
+}
 - (void)homeListRefreshDataWithHomelist:(UCFHomeListViewController *)homelist
 {
     [self.cycleImageVC getNormalBannerData];
@@ -974,7 +956,6 @@
 - (void)refreshUI:(NSNotification *)noty
 {
     __weak typeof(self) weakSelf = self;
-//    [self addUI];
     NSString *userId = [UserInfoSingle sharedManager].userId;
     if (userId) {
         self.navView.giftButton.hidden = NO;
@@ -985,13 +966,10 @@
         self.navView.giftButton.hidden = YES;
         self.navView.loginAndRegisterButton.hidden = NO;
     }
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [weakSelf fetchData];
-    });
-//    BOOL hasSign = [self.stateDict objectForKey:@"sign"];
-//    if (hasSign) {
-//        
-//    }
+//    });
+
 }
 
 - (void)setDefaultState:(NSNotification *)noty
@@ -1008,9 +986,9 @@
         self.navView.giftButton.hidden = YES;
         self.navView.loginAndRegisterButton.hidden = NO;
     }
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [weakSelf fetchData];
-    });
+//    });
 }
 
 #pragma mark - 请求数据
