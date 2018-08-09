@@ -104,6 +104,9 @@
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="homeListTipLabel" destination="M7C-tL-yAI" id="zDF-eE-0Sm"/>
+            </connections>
             <point key="canvasLocation" x="-8.5" y="-3"/>
         </view>
     </objects>

@@ -30,7 +30,8 @@
 }
 - (void)clickRightBtn
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"\"自动投标\"是为方便出借人出借小额项目特推出的，一次可出借多个项目。批量出借后系统会自动匹配，直至完成所有出借为止" delegate:self cancelButtonTitle:@"我知道了" otherButtonTitles: nil];
+    NSString * messageStr = [UserInfoSingle sharedManager].isSubmitTime ? @"\"自动投标\"是为方便购买人购买小额项目特推出的，一次可购买多个项目。批量购买后系统会自动匹配，直至完成所有购买为止": @"\"自动投标\"是为方便出借人出借小额项目特推出的，一次可出借多个项目。批量出借后系统会自动匹配，直至完成所有出借为止";
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"我知道了" otherButtonTitles: nil];
     [alert show];
 }
 - (void)viewDidLoad {

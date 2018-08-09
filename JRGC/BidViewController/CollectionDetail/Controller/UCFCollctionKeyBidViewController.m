@@ -187,7 +187,7 @@
     if (self.bidType == 0) {
         _isP2P = YES;
     }
-     baseTitleLabel.text = @"出借";
+     baseTitleLabel.text = [UserInfoSingle sharedManager].isSubmitTime ? @"购买": @"出借";
     double gondDouBalance = [[_dataDict objectForKey:@"beanAmount"] doubleValue];
     if ((int)gondDouBalance > 0) {
         isGongDouSwitch = YES;
@@ -249,7 +249,7 @@
     investmentButton.layer.cornerRadius = 2.0;
     investmentButton.layer.masksToBounds = YES;
     
-    NSString *buttonTitle =  @"批量出借";
+    NSString *buttonTitle = [UserInfoSingle sharedManager].isSubmitTime ? @"批量购买": @"批量出借";
     [investmentButton setTitle:buttonTitle forState:UIControlStateNormal];
     [investmentButton addTarget:self action:@selector(checkIsCanInvest) forControlEvents:UIControlEventTouchUpInside];
     [investBaseView addSubview:investmentButton];
@@ -319,7 +319,9 @@
     }
     investMoney = [NSString stringWithFormat:@"%.2f",[investMoney doubleValue]];
     if ([Common stringA:@"0.01" ComparedStringB:investMoney] == 1) {
-        [MBProgressHUD displayHudError:@"请输入出借金额"];
+        
+        NSString *errorStr =  [UserInfoSingle sharedManager].isSubmitTime ? @"请输入购买金额": @"请输入出借金额";
+        [MBProgressHUD displayHudError:errorStr];
         return;
     }
     
@@ -341,7 +343,8 @@
     
     
     if([Common stringA:minInVestNum ComparedStringB:investMoney] == 1){
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"出借金额不可低于起投金额" delegate:self cancelButtonTitle:@"重新输入" otherButtonTitles: nil];
+        NSString *messageStr =  [UserInfoSingle sharedManager].isSubmitTime ? @"购买金额不可低于起投金额": @"出借金额不可低于起投金额";
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"重新输入" otherButtonTitles: nil];
         alert.tag = 1000;
         [alert show];
         return;

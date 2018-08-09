@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface UCFHomeListFooterView : UIView
+@property (strong, nonatomic) IBOutlet UILabel *homeListTipLabel;
 
 @end

@@ -284,7 +284,8 @@
   
         if ([_microMoneyModel.status intValue ] != 2) {
             if (isOrder <= 0) {
-                UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前标的详情只对出借人开放"];
+                NSString *titleStr = [UserInfoSingle sharedManager].isSubmitTime ? @"目前标的详情只对购买人开放":@"目前标的详情只对出借人开放";
+                UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:titleStr];
                 [self.navigationController pushViewController:controller animated:YES];
                 return;
             }

@@ -182,7 +182,7 @@
             else {
                 self.circleProgressView.textColor = UIColorWithRGB(0x555555);
                 if ([presenter.item.type isEqualToString:@"14"] && status == 2) {
-                    self.circleProgressView.progressText = @"批量出借";
+                    self.circleProgressView.progressText = [UserInfoSingle sharedManager].isSubmitTime ? @"批量购买":@"批量出借";
                 }
                 else
                 {

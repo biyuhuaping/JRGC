@@ -213,7 +213,9 @@
     _borrowerInfo = [[NSArray alloc] initWithObjects:arrayJiBen, nil];
     
     if (_isP2P) {
-        _titleArray = [[NSArray alloc] initWithObjects:@"基础详情", @"安全保障",@"出借记录", nil];
+        
+        NSString * titleStr =   [UserInfoSingle sharedManager].isSubmitTime ? @"购买记录":@"出借记录";
+        _titleArray = [[NSArray alloc] initWithObjects:@"基础详情", @"安全保障",titleStr, nil];
         NSString *tradeMarkStr = [[_dataDic objectSafeDictionaryForKey:@"prdClaims"] objectSafeForKey: @"tradeMark"];
         _prdDesType= [[[_dataDic objectSafeDictionaryForKey:@"prdClaims"] objectSafeForKey: @"prdDesType"] boolValue];
         if (_prdDesType)//老项目
@@ -632,7 +634,7 @@
                 placehoderLabel.textColor = UIColorWithRGB(0x333333);
                 placehoderLabel.textAlignment = NSTextAlignmentLeft;
                 placehoderLabel.backgroundColor = [UIColor clearColor];
-                NSString *str = _isP2P ? @"出借记录" :@"认购记录";
+                NSString *str = _isP2P ?  [UserInfoSingle sharedManager].isSubmitTime ? @"购买记录":@"出借记录" :@"认购记录";
                 placehoderLabel.text = [NSString stringWithFormat:@"共%lu笔%@",(unsigned long)[[_dataDic objectForKey:@"prdOrders"] count],str];
                 [headView addSubview:placehoderLabel];
                 return headView;

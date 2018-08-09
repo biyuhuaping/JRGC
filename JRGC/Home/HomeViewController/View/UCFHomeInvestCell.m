@@ -68,9 +68,9 @@
     if (presenter.status == 2) {
         NSString *showStr = @"立即预约";
         if (presenter.modelType == UCFHomeListCellModelTypeBatch) {
-            showStr = @"一键出借";
+            showStr = [UserInfoSingle sharedManager].isSubmitTime ? @"一键购买": @"一键出借";
         } else if (presenter.modelType == UCFHomeListCellModelTypeAI) {
-            showStr = @"立即出借";
+            showStr = [UserInfoSingle sharedManager].isSubmitTime ? @"立即购买": @"立即出借";
         } else if (presenter.modelType == UCFHomeListCellModelTypeReserved) {
             showStr = @"立即预约";
         }

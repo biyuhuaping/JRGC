@@ -369,7 +369,10 @@
             self.accoutType = SelectAccoutTypeP2P;
             break;
     }
-    NSString *noPermissionTitleStr = self.accoutType == SelectAccoutTypeP2P ? @"目前标的详情只对出借人开放":@"目前标的详情只对认购人开放";
+    
+    
+    NSString *noPermissionTitleStr = self.accoutType == SelectAccoutTypeP2P ? [UserInfoSingle sharedManager].isSubmitTime ? @"目前标的详情只对购买人开放":@"目前标的详情只对出借人开放":@"目前标的详情只对认购人开放";
+    
     if (type == UCFHomeListTypeDetail) {
         if (model.moedelType == UCFHomeListCellModelTypeBatch || model.moedelType == UCFHomeListCellModelTypeDefault || (model.moedelType == UCFHomeListCellModelTypeNewUser && ([model.type isEqualToString:@"1"] || [model.type isEqualToString:@"14"]))) {
         
@@ -494,7 +497,7 @@
                     [helper pushP2POrWJAuthorizationType:self.accoutType nav:self.navigationController];
                     return;
                 }
-                NSString *noPermissionTitleStr = self.accoutType == SelectAccoutTypeP2P ? @"目前标的详情只对出借人开放":@"目前标的详情只对认购人开放";
+                 NSString *noPermissionTitleStr = self.accoutType == SelectAccoutTypeP2P ? [UserInfoSingle sharedManager].isSubmitTime ? @"目前标的详情只对购买人开放":@"目前标的详情只对出借人开放":@"目前标的详情只对认购人开放";
                 if ([model.status integerValue] == 0 && [model.stopStatus intValue] != 0) {
                     UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:noPermissionTitleStr];
                     [self.navigationController pushViewController:controller animated:YES];

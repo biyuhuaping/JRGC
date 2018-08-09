@@ -97,7 +97,7 @@
     else {
         self.circleProgressView.textColor = UIColorWithRGB(0x555555);
         if (microMoneyModel.modelType == UCFMicroMoneyModelTypeBatchBid && status == 2) {
-            self.circleProgressView.progressText = @"批量出借";
+            self.circleProgressView.progressText = [UserInfoSingle sharedManager].isSubmitTime ? @"批量购买": @"批量出借";
         }
         else {
             self.circleProgressView.progressText = [statusArr objectAtIndex:status];

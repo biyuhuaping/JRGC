@@ -65,7 +65,8 @@
         [_batchBidButton setTitle:@"满标" forState:UIControlStateNormal];
     }
     else {
-        [_batchBidButton setTitle:@"批量出借" forState:UIControlStateNormal];
+        NSString *buttonStr = [UserInfoSingle sharedManager].isSubmitTime ? @"批量购买":@"批量出借";
+        [_batchBidButton setTitle:buttonStr forState:UIControlStateNormal];
     }
     self.leftAmtLabel.text = [self moneywithRemaining:collectionBidModel.canBuyAmt total:collectionBidModel.totalAmt];
     

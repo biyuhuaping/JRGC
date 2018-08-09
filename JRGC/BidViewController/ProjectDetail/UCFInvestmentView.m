@@ -71,7 +71,7 @@
                 
                 if ([_sourceVc isEqualToString:@"transiBid"]) {
         
-                    NSString *buttonTitle = isP2P ? @"立即出借":@"立即购买";
+                    NSString *buttonTitle = isP2P ?[UserInfoSingle sharedManager].isSubmitTime ? @"立即购买": @"立即出借":@"立即购买";
                     AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
                     if (app.isSubmitAppStoreTestTime)
                     {
@@ -79,7 +79,7 @@
                     }
                     [investmentButton setTitle:buttonTitle forState:UIControlStateNormal];
                 }else {
-                    NSString *buttonTitle = isP2P ? @"立即出借":@"立即认购";
+                    NSString *buttonTitle = isP2P ? [UserInfoSingle sharedManager].isSubmitTime ? @"立即购买": @"立即出借":@"立即认购";
                     AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
                     if (app.isSubmitAppStoreTestTime)
                     {
@@ -110,7 +110,7 @@
 
         } else {
             if ([_sourceVc isEqualToString:@"transiBid"]) {
-                NSString *buttonTitle = isP2P ? @"立即出借":@"立即购买";
+                NSString *buttonTitle = isP2P ? [UserInfoSingle sharedManager].isSubmitTime ? @"立即购买": @"立即出借":@"立即购买";
                 [investmentButton setTitle:buttonTitle forState:UIControlStateNormal];
             }else {
                 NSString *buttonTitle = isP2P ? @"立即出借":@"立即认购";
