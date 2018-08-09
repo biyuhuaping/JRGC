@@ -43,7 +43,7 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
     
     [self.view addSubview:_listHeaderView];
     UILabel *headerTitleLabel = [[UILabel alloc]initWithFrame:CGRectMake(15, 5, 60, 20)];
-    headerTitleLabel.text = @"出借详情";
+    headerTitleLabel.text = [UserInfoSingle sharedManager].isSubmitTime ? @"购买详情": @"出借详情";
     headerTitleLabel.textColor = UIColorWithRGB(0x333333);
     headerTitleLabel.font = [UIFont systemFontOfSize:13];
     headerTitleLabel.textAlignment = NSTextAlignmentLeft;

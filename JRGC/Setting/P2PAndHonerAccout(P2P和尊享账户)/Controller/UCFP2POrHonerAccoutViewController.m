@@ -170,7 +170,9 @@
 {
     if (_cellItemsData == nil) {
         
-        UCFSettingItem *myInVest = [UCFSettingArrowItem itemWithIcon:nil title:@"我的出借" destVcClass:[MyViewController class]];
+        NSString *titleStr = [UserInfoSingle sharedManager].isSubmitTime ? @"我的购买":@"我的出借";
+        
+        UCFSettingItem *myInVest = [UCFSettingArrowItem itemWithIcon:nil title:titleStr  destVcClass:[MyViewController class]];
         
         NSString *calendarStr = nil;
         if (self.accoutType == SelectAccoutTypeP2P) {
@@ -384,7 +386,7 @@
     
     NSString *titleStr = item.title;
 //    && [NSStringFromClass(item.destVcClass) isEqualToString:@"MyViewController"]
-    if ([titleStr isEqualToString:@"我的出借"]  || [titleStr isEqualToString:@"我的认购"] ) {
+    if ([titleStr isEqualToString:@"我的出借"]  || [titleStr isEqualToString:@"我的认购"] || [titleStr isEqualToString:@"我的购买"] ) {
         MyViewController *myInvestVC = [[MyViewController alloc] initWithNibName:@"MyViewController" bundle:nil];
         myInvestVC.selectedSegmentIndex = 0;
         myInvestVC.accoutType = self.accoutType;
@@ -445,7 +447,7 @@
             }
  
     }
-    else if([titleStr hasPrefix:@"批量出借"]){
+    else if([titleStr hasPrefix:@"批量"]){
         if ([self checkIDAAndBankBlindState:self.accoutType]) {
             UCFBatchInvestmentViewController *batchInvestment = [[UCFBatchInvestmentViewController alloc] init];
             batchInvestment.isStep = [item.subtitle isEqualToString:@"未开启"] ? 1 : 2;
@@ -708,8 +710,10 @@
                                         break;
                                     case 4:
                                     {
-                                         item.subtitle = batchMaximum.length == 0 ? @"未开启" : batchMaximum;
-                                         item.title = batchMaximum.length == 0 ? @"批量出借(开通后一次可投多个项目)" : @"批量出借";
+                                        item.subtitle = batchMaximum.length == 0 ? @"未开启" : batchMaximum;
+                                        NSString *titleStr1 = [UserInfoSingle sharedManager].isSubmitTime ? @"批量购买(开通后一次可投多个项目)":@"批量出借(开通后一次可投多个项目)";
+                                        NSString *titleStr2 = [UserInfoSingle sharedManager].isSubmitTime ? @"批量购买":@"批量出借";
+                                        item.title = batchMaximum.length == 0 ? titleStr1 :titleStr2;
                                     }
                                         break;
                                     default:

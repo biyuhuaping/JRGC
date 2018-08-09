@@ -166,7 +166,9 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
     
     
 //    投资期限
-    UILabel *markLabel = [UILabel labelWithFrame:CGRectMake([Common calculateNewSizeBaseMachine:15],0 + CGRectGetMaxY(annualLabel.frame)+30,0,11) text:@"出借期限" textColor:[UIColor whiteColor] font:[UIFont systemFontOfSize:11]];
+    
+    NSString *buttonStr = [UserInfoSingle sharedManager].isSubmitTime ? @"购买期限":@"出借期限";
+    UILabel *markLabel = [UILabel labelWithFrame:CGRectMake([Common calculateNewSizeBaseMachine:15],0 + CGRectGetMaxY(annualLabel.frame)+30,0,11) text:buttonStr textColor:[UIColor whiteColor] font:[UIFont systemFontOfSize:11]];
     [_headerBgView addSubview:markLabel];
     
     CGRect markLabelFrame = markLabel.frame;
@@ -584,7 +586,7 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
     }else{
         UCFCollectionListCell *cell = [tableView dequeueReusableCellWithIdentifier:ListCellID];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.textLabel.text = @"出借详情";
+        cell.textLabel.text = [UserInfoSingle sharedManager].isSubmitTime ? @"购买详情":@"出借详情";
         return cell;
     }
 }
@@ -615,7 +617,8 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
                 [MBProgressHUD showOriginHUDAddedTo:self.view animated:YES];
                 [[NetworkModule sharedNetworkModule] newPostReq:praramDic tag: kSXTagPrdClaimsGetPrdBaseDetail owner:self signature:YES Type:SelectAccoutTypeP2P];
             } else {
-                UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前标的详情只对出借人开放"];
+              NSString *titleStr = [UserInfoSingle sharedManager].isSubmitTime ? @"目前标的详情只对购买人开放":@"目前标的详情只对出借人开放";
+                UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:titleStr];
                 self.intoViewControllerStr = @"NoPermissionVC";
                 controller.souceVC = @"CollectionDetailVC";
                 [self.navigationController pushViewController:controller animated:YES];
@@ -818,8 +821,8 @@ static NSString * const ListCellID = @"UCFCollectionListCell";
 }
 
 - (IBAction)ClickBatchInvestment:(UIButton *)sender {
-    
-    if ([sender.currentTitle  isEqualToString:@"批量出借"]) {
+    NSString *titleStr =  [UserInfoSingle sharedManager].isSubmitTime ? @"批量购买" :@"批量出借";
+    if ([sender.currentTitle  isEqualToString:titleStr]) {
         
          [MBProgressHUD showOriginHUDAddedTo:self.view animated:YES];
          NSDictionary *dataDict = @{@"userId":[[NSUserDefaults standardUserDefaults] valueForKey:UUID],@"tenderId":_colPrdClaimId};

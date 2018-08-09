@@ -191,14 +191,14 @@
         baseTitleLabel.text = @"认购";
     }else{
         _isP2P = YES;
-        baseTitleLabel.text = @"出借";
+        baseTitleLabel.text = [UserInfoSingle sharedManager].isSubmitTime ? @"购买": @"出借";
         AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
         if (app.isSubmitAppStoreTestTime)
         {
             baseTitleLabel.text = @"投资";
         }
     }
-    self.wJOrZxStr = _isP2P ? @"出借":@"认购"; //为了区别微金和尊享，修改提示文案
+    self.wJOrZxStr = _isP2P ? [UserInfoSingle sharedManager].isSubmitTime ? @"购买": @"出借":@"认购"; //为了区别微金和尊享，修改提示文案
     
     double gondDouBalance = [[[_dataDict objectSafeDictionaryForKey:@"beanUser"] objectForKey:@"availableBalance"] doubleValue];
     if ((int)gondDouBalance > 0) {

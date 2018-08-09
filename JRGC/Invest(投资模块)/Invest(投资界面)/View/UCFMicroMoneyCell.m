@@ -53,7 +53,8 @@
             {
                 self.reserveButton.backgroundColor = UIColorWithRGB(0xFD4D4C);
                 self.reserveButton.userInteractionEnabled = YES;
-                [self.reserveButton setTitle:@"立即出借" forState:UIControlStateNormal];
+                NSString *buttonStr = [UserInfoSingle sharedManager].isSubmitTime ? @"立即购买":@"立即出借";
+                [self.reserveButton setTitle:buttonStr forState:UIControlStateNormal];
               
             }else{
                 self.reserveButton.userInteractionEnabled = NO;
@@ -68,7 +69,8 @@
              _microModel.modelType = UCFMicroMoneyModelTypeBatchBid;
             if([microModel.status intValue] == 2)
             {
-                [self.reserveButton setTitle:@"一键出借" forState:UIControlStateNormal];
+                NSString *buttonStr = [UserInfoSingle sharedManager].isSubmitTime ? @"一键购买":@"一键出借";
+                [self.reserveButton setTitle:buttonStr forState:UIControlStateNormal];
                 self.reserveButton.backgroundColor = UIColorWithRGB(0xFD4D4C);
                 self.reserveButton.userInteractionEnabled = YES;
             }else{

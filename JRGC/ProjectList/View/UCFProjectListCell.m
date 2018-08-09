@@ -49,7 +49,13 @@
 {
     if (!_status) {
 //        _status = [[NSArray alloc] initWithObjects:@"未审核",@"等待确认",@"出借",@"流标",@"满标",@"回款中",@"已回款", nil];
-        _status = [[NSArray alloc] initWithObjects:@"未审核",@"等待确认",@"出借",@"已售罄",@"已售罄",@"已售罄",@"已售罄", nil];
+        
+       if([UserInfoSingle sharedManager].isSubmitTime )
+       {
+            _status = [[NSArray alloc] initWithObjects:@"未审核",@"等待确认",@"购买",@"已售罄",@"已售罄",@"已售罄",@"已售罄", nil];
+       }else{
+         _status = [[NSArray alloc] initWithObjects:@"未审核",@"等待确认",@"出借",@"已售罄",@"已售罄",@"已售罄",@"已售罄", nil];
+       }
     }
     return _status;
 }
@@ -345,7 +351,7 @@
     else {
         self.circleProgressView.tintColor = UIColorWithRGB(0xfa4d4c);
         self.circleProgressView.progressLabel.textColor = UIColorWithRGB(0x555555);
-        self.circleProgressView.textStr = @"批量出借";
+        self.circleProgressView.textStr =  [UserInfoSingle sharedManager].isSubmitTime ? @"批量购买": @"批量出借";
         self.circleProgressView.progressLabel.font = [UIFont systemFontOfSize:12];
         if (batchBidModel.isAnim) {
             [self animateCircle:progress isAnim:YES];

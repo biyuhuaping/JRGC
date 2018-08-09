@@ -18,9 +18,7 @@
 #define WORDCOLORBLUE UIColorWithRGB(0x6280a8)
 #define WORDCOLORGRAY UIColorWithRGB(0x999999)
 #define TITLECOLORGRAY UIColorWithRGB(0xf9f9f9)
-static NSString *firstStr = @"批量出借授权开启后可一次性出借多个小额项目";
-static NSString *secondStr = @"为保证您的资金安全，请合理选择";
-static NSString *thirdStr = @"批量出借授权已经开启";
+
 @interface UCFBatchInvestmentViewController ()
 {
     UIButton *selectButton;
@@ -55,12 +53,13 @@ static NSString *thirdStr = @"批量出借授权已经开启";
 }
 - (void)clickRightBtn
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"\"自动投标\"是为方便出借人出借小额项目特推出的，一次可出借多个项目。批量出借后系统会自动匹配，直至完成所有出借为止" delegate:self cancelButtonTitle:@"我知道了" otherButtonTitles: nil];
+    NSString * messageStr = [UserInfoSingle sharedManager].isSubmitTime ? @"\"自动投标\"是为方便购买人购买小额项目特推出的，一次可购买多个项目。批量购买后系统会自动匹配，直至完成所有购买为止": @"\"自动投标\"是为方便出借人出借小额项目特推出的，一次可出借多个项目。批量出借后系统会自动匹配，直至完成所有出借为止";
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:messageStr delegate:self cancelButtonTitle:@"我知道了" otherButtonTitles: nil];
     [alert show];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    baseTitleLabel.text = @"批量出借授权";
+    baseTitleLabel.text = [UserInfoSingle sharedManager].isSubmitTime ?  @"批量购买授权":@"批量出借授权";
     [self addRightButtonWithImage:[UIImage imageNamed:@"icon_question.png"]];
 
     [self addLeftButton];
@@ -82,7 +81,7 @@ static NSString *thirdStr = @"批量出借授权已经开启";
     
     _tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, ScreenWidth - 15, 35)];
     _tipLabel.font = [UIFont systemFontOfSize:13.0f];
-    _tipLabel.text = @"批量出借授权开启后可一次性出借多个小额项目";
+    _tipLabel.text = [UserInfoSingle sharedManager].isSubmitTime ?   @"批量购买授权开启后可一次性购买多个小额项目": @"批量出借授权开启后可一次性出借多个小额项目";
     _tipLabel.textColor = [UIColor whiteColor];
     [tipView addSubview:_tipLabel];
 
@@ -110,7 +109,7 @@ static NSString *thirdStr = @"批量出借授权已经开启";
     view1.backgroundColor = [UIColor whiteColor];
     view1.iconName = @"auto_fast";
     view1.title = @"投标更快捷";
-    view1.des = @"开启批量出借授权，即可在批量投标中使用批量出借功能，快速出借多个小额项目。";
+    view1.des = [UserInfoSingle sharedManager].isSubmitTime ? @"开启批量购买授权，即可在批量投标中使用批量购买功能，快速购买多个小额项目。" :@"开启批量出借授权，即可在批量投标中使用批量出借功能，快速出借多个小额项目。";
     [_baseScrollView addSubview:view1];
     [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:view1 isTop:YES];
     
@@ -127,30 +126,57 @@ static NSString *thirdStr = @"批量出借授权已经开启";
     [_baseScrollView addSubview:view2];
     [Common addLineViewColor:UIColorWithRGB(0xd8d8d8) With:view2 isTop:NO];
     
-    NSString *totalStr = [NSString stringWithFormat:@"本人同意签署《批量出借咨询与服务协议》"];
-    NZLabel *label1 = [[NZLabel alloc] init];
-    label1.font = [UIFont systemFontOfSize:12.0f];
-    CGSize size = [Common getStrHeightWithStr:totalStr AndStrFont:12 AndWidth:ScreenWidth - 25];
-    label1.numberOfLines = 0;
-    label1.frame = CGRectMake(23, CGRectGetMaxY(view2.frame) + 10, ScreenWidth-25, size.height);
-    label1.text = totalStr;
-    label1.userInteractionEnabled = YES;
-    label1.textColor = UIColorWithRGB(0x999999);
     
-    __weak typeof(self) weakSelf = self;
-    [label1 addLinkString:@"《批量出借咨询与服务协议》" block:^(ZBLinkLabelModel *linkModel) {
-        [weakSelf showHeTong];
-    }];
-    [label1 setFontColor:UIColorWithRGB(0x4aa1f9) string:@"《批量出借咨询与服务协议》"];
-    
-    [_baseScrollView addSubview:label1];
-    
-    UIImageView * imageView1 = [[UIImageView alloc] init];
-    imageView1.frame = CGRectMake(CGRectGetMinX(label1.frame) - 7, CGRectGetMinY(label1.frame) + 5, 5, 5);
-    imageView1.image = [UIImage imageNamed:@"point.png"];
-    [_baseScrollView addSubview:imageView1];
-    
-
+    if([UserInfoSingle sharedManager].isSubmitTime )
+    {
+        NSString *totalStr = [NSString stringWithFormat:@"本人同意签署《批量购买咨询与服务协议》"];
+        NZLabel *label1 = [[NZLabel alloc] init];
+        label1.font = [UIFont systemFontOfSize:12.0f];
+        CGSize size = [Common getStrHeightWithStr:totalStr AndStrFont:12 AndWidth:ScreenWidth - 25];
+        label1.numberOfLines = 0;
+        label1.frame = CGRectMake(23, CGRectGetMaxY(view2.frame) + 10, ScreenWidth-25, size.height);
+        label1.text = totalStr;
+        label1.userInteractionEnabled = YES;
+        label1.textColor = UIColorWithRGB(0x999999);
+        
+        __weak typeof(self) weakSelf = self;
+        [label1 addLinkString:@"《批量购买咨询与服务协议》" block:^(ZBLinkLabelModel *linkModel) {
+            [weakSelf showHeTong];
+        }];
+        [label1 setFontColor:UIColorWithRGB(0x4aa1f9) string:@"《批量购买咨询与服务协议》"];
+        
+        [_baseScrollView addSubview:label1];
+        
+        UIImageView * imageView1 = [[UIImageView alloc] init];
+        imageView1.frame = CGRectMake(CGRectGetMinX(label1.frame) - 7, CGRectGetMinY(label1.frame) + 5, 5, 5);
+        imageView1.image = [UIImage imageNamed:@"point.png"];
+        [_baseScrollView addSubview:imageView1];
+        
+    }else{
+        NSString *totalStr = [NSString stringWithFormat:@"本人同意签署《批量出借咨询与服务协议》"];
+        NZLabel *label1 = [[NZLabel alloc] init];
+        label1.font = [UIFont systemFontOfSize:12.0f];
+        CGSize size = [Common getStrHeightWithStr:totalStr AndStrFont:12 AndWidth:ScreenWidth - 25];
+        label1.numberOfLines = 0;
+        label1.frame = CGRectMake(23, CGRectGetMaxY(view2.frame) + 10, ScreenWidth-25, size.height);
+        label1.text = totalStr;
+        label1.userInteractionEnabled = YES;
+        label1.textColor = UIColorWithRGB(0x999999);
+        
+        __weak typeof(self) weakSelf = self;
+        [label1 addLinkString:@"《批量出借咨询与服务协议》" block:^(ZBLinkLabelModel *linkModel) {
+            [weakSelf showHeTong];
+        }];
+        [label1 setFontColor:UIColorWithRGB(0x4aa1f9) string:@"《批量出借咨询与服务协议》"];
+        
+        [_baseScrollView addSubview:label1];
+        
+        UIImageView * imageView1 = [[UIImageView alloc] init];
+        imageView1.frame = CGRectMake(CGRectGetMinX(label1.frame) - 7, CGRectGetMinY(label1.frame) + 5, 5, 5);
+        imageView1.image = [UIImage imageNamed:@"point.png"];
+        [_baseScrollView addSubview:imageView1];
+        
+    }
 }
 - (void)showHeTong
 {
@@ -327,6 +353,9 @@ static NSString *thirdStr = @"批量出借授权已经开启";
 }
 //初始化标题view
 - (void)initView {
+    NSString *firstStr = [UserInfoSingle sharedManager].isSubmitTime ? @"批量购买授权开启后可一次性出借多个小额项目":  @"批量出借授权开启后可一次性出借多个小额项目";
+     NSString *secondStr =  @"为保证您的资金安全，请合理选择";
+    NSString *thirdStr =  [UserInfoSingle sharedManager].isSubmitTime ?@"批量购买授权已经开启":@"批量出借授权已经开启";
     switch (self.isStep) {
         case 1:{
             _tipLabel.text = firstStr;
@@ -364,7 +393,7 @@ static NSString *thirdStr = @"批量出借授权已经开启";
     }
 }
 - (void)showApplyView {
-    baseTitleLabel.text = @"批量出借授权";
+    baseTitleLabel.text = [UserInfoSingle sharedManager].isSubmitTime ?  @"批量购买授权":@"批量出借授权";
     [self registerView];
     [self saveBeforeView];
     [self passWordBeforeView];
@@ -582,7 +611,7 @@ static NSString *thirdStr = @"批量出借授权已经开启";
                  UCFBatchSetNumWebViewController *webView = [[UCFBatchSetNumWebViewController alloc]initWithNibName:@"UCFBatchSetNumWebViewController" bundle:nil];
                  webView.url = urlStr;
                  webView.webDataDic =dataDict;
-                 webView.navTitle = @"批量出借授权";
+                 webView.navTitle = [UserInfoSingle sharedManager].isSubmitTime ?  @"批量购买授权":@"批量出借授权";
                  webView.sourceType = _sourceType;
                  webView.accoutType = self.accoutType;
                  [self.navigationController pushViewController:webView animated:YES];
@@ -613,7 +642,8 @@ static NSString *thirdStr = @"批量出借授权已经开启";
         NSString *status = [dic objectSafeForKey:@"status"];
         if ([status intValue] == 1) {
             NSString *contractMessStr = [dictionary objectSafeForKey:@"contractMess"];
-            FullWebViewController *controller = [[FullWebViewController alloc] initWithHtmlStr:contractMessStr title:@"批量出借咨询与服务协议"];
+            NSString *titleStr =  [UserInfoSingle sharedManager].isSubmitTime ?  @"批量购买咨询与服务协议":@"批量出借咨询与服务协议";
+            FullWebViewController *controller = [[FullWebViewController alloc] initWithHtmlStr:contractMessStr title:titleStr];
             controller.baseTitleType = @"detail_heTong";
             [self.navigationController pushViewController:controller animated:YES];
         }else{

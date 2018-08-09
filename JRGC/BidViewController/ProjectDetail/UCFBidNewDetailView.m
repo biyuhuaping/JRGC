@@ -160,12 +160,13 @@
     
     CGFloat stringWidth1 = [@"出借期限" sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:11]}].width;
     
+    
     UILabel *markLabel = [UILabel labelWithFrame:CGRectMake([Common calculateNewSizeBaseMachine:15],0 + [Common calculateNewSizeBaseMachine:155]-[Common calculateNewSizeBaseMachine:45] - 11,0,11) text:@"出借期限" textColor:[UIColor whiteColor] font:[UIFont systemFontOfSize:11]];
     [_headBkView addSubview:markLabel];
     if (_type == PROJECTDETAILTYPEBONDSRRANSFER) {
         markLabel.text = @"债权期限";
     } else {
-        NSString *markLabelStr =_isP2P ? @"出借期限" : @"认购期限";
+        NSString *markLabelStr =_isP2P ? [UserInfoSingle sharedManager].isSubmitTime ? @"购买期限": @"出借期限" : @"认购期限";
         markLabel.text = markLabelStr;
     }
     markLabel.textAlignment = NSTextAlignmentLeft;
@@ -651,9 +652,11 @@
     _twoTableview.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     
     
+    NSString *titleSt = [UserInfoSingle sharedManager].isSubmitTime ? @"购买记录":@"出借记录";
+    
     UCFSettingItem *basicBetailItem = [UCFSettingArrowItem itemWithIcon:@"particular_icon_info" title:@"基础详情" destVcClass:nil];
     UCFSettingItem *safetyGuaranteeItem = [UCFSettingArrowItem itemWithIcon:@"particular_icon_security" title:@"安全保障" destVcClass:nil];
-    UCFSettingItem *investmentecordItem = [UCFSettingArrowItem itemWithIcon:@"particular_icon_record" title:@"出借记录"  destVcClass:nil];
+    UCFSettingItem *investmentecordItem = [UCFSettingArrowItem itemWithIcon:@"particular_icon_record" title:titleSt destVcClass:nil];
     
     if (_type == PROJECTDETAILTYPEBONDSRRANSFER)//债转标
     {
@@ -662,7 +665,7 @@
      }
      else //普通标
     {
-        investmentecordItem.title  = _isP2P ? @"出借记录" :@"认购记录";
+        investmentecordItem.title  = _isP2P ? [UserInfoSingle sharedManager].isSubmitTime ? @"购买记录": @"出借记录" :@"认购记录";
      }
     self.dataArray = [NSMutableArray arrayWithObjects:basicBetailItem,safetyGuaranteeItem,investmentecordItem, nil];
      [self addSubview:_twoTableview];

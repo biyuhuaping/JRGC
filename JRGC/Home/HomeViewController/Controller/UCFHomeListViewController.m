@@ -49,7 +49,7 @@
         self.presenter.view = self;//将V和P进行绑定(这里因为V是系统的TableView 无法简单的声明一个view属性 所以就绑定到TableView的持有者上面)
         
         UCFHomeListFooterView *footerView = (UCFHomeListFooterView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeListFooterView" owner:self options:nil] lastObject];
-        
+        footerView.homeListTipLabel.text  = [UserInfoSingle sharedManager].isSubmitTime ? @"市场有风险  购买需谨慎":@"市场有风险  出借需谨慎";
         self.tableView.tableFooterView = footerView;
         self.footerView = footerView;
         

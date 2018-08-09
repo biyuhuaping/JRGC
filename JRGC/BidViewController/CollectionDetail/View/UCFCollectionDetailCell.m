@@ -56,7 +56,7 @@
             statusStr = @"待确认";
             break;
         case 2:
-            statusStr = @"出借";
+            statusStr = [UserInfoSingle sharedManager].isSubmitTime ? @"购买" : @"出借";
             break;
 //        case 3:
 //            statusStr = @"流标";
