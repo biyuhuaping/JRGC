@@ -453,7 +453,7 @@ static NetworkModule *gInstance = NULL;
         
         AppDelegate *app =  (AppDelegate *)[[UIApplication sharedApplication] delegate];
         if (app.isSubmitAppStoreTestTime) {
-            NSString *resultStr = req.result;
+            NSString *resultStr = (NSString *)req.result;
             resultStr = [resultStr stringByReplacingOccurrencesOfString:@"出借" withString:@"购买"];
             id result = resultStr;
             [req.owner performSelector:sel withObject:result withObject:[NSNumber numberWithInt: req.sxTag]];

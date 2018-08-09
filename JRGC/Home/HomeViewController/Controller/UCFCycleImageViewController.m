@@ -191,7 +191,12 @@ static NSString *cellId = @"iconCell";
 #pragma mark - 获取正式环境的banner图
 - (void)getNormalBannerData
 {
-    [[NetworkModule sharedNetworkModule] newPostReq:nil tag:kSXTagGetBannerAndGift owner:self signature:NO Type:SelectAccoutDefault];
+    if ([UserInfoSingle sharedManager].isSubmitTime) {
+        
+    } else {
+        [[NetworkModule sharedNetworkModule] newPostReq:nil tag:kSXTagGetBannerAndGift owner:self signature:NO Type:SelectAccoutDefault];
+    }
+            [[NetworkModule sharedNetworkModule] newPostReq:nil tag:kSXTagGetBannerAndGift owner:self signature:NO Type:SelectAccoutDefault];
 }
 
 - (void)beginPost:(kSXTag)tag

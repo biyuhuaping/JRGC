@@ -700,6 +700,7 @@
             if (comparResult == NSOrderedAscending || comparResult == NSOrderedSame) {
                 if (versionMark == 2) {
                     self.isSubmitAppStoreTestTime = YES;
+                    [UserInfoSingle sharedManager].isSubmitTime = YES;
                     if (!_isHuiDuEnv) {
                         _isHuiDuEnv = YES;
                         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{

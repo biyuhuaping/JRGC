@@ -51,6 +51,9 @@
 @property(nonatomic, assign) BOOL wjIsShow;
 @property(nonatomic, assign) BOOL transferIsShow;
 
+
+@property(nonatomic, assign) BOOL   isSubmitTime;
+
 //@property(nonatomic, copy) NSString *userLevel;
 //获取用户信息单利对象
 + (UserInfoSingle *)sharedManager;
