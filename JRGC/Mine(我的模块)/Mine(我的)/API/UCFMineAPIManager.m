@@ -108,6 +108,8 @@
                 [UserInfoSingle sharedManager].openStatus = [oepnState integerValue];
                 NSString *zxOpenState = [resultData objectSafeForKey:@"zxOpenStatus"];
                 [UserInfoSingle sharedManager].enjoyOpenStatus = [zxOpenState integerValue];
+                NSString *nmGoldAuthorization = [resultData objectSafeForKey:@"nmGoldAuthorization"];
+                [UserInfoSingle sharedManager].goldAuthorization = [nmGoldAuthorization integerValue];
                 BOOL isCompanyAgent = [[resultData objectSafeForKey:@"isCompanyAgent"] boolValue];
                 [UserInfoSingle sharedManager].companyAgent = isCompanyAgent;
             }

@@ -34,7 +34,7 @@
     }
     else
     {
-      baseTitleLabel.text = self.accoutType == SelectAccoutTypeP2P ?  @"出借记录":@"认购记录";
+        baseTitleLabel.text = self.accoutType == SelectAccoutTypeP2P ? [UserInfoSingle sharedManager].isSubmitTime ?@"购买记录": @"出借记录":@"认购记录";
         self.dataArray = [NSMutableArray arrayWithCapacity:0];
         //=========  下拉刷新、上拉加载更多  =========
         __weak typeof(self) weakSelf = self;
