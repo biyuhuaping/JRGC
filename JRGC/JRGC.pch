@@ -74,6 +74,8 @@ typedef NS_ENUM(NSInteger, SelectAccoutType) {
 #define CGRECT_NO_NAV(x,y,w,h)      CGRectMake((x), (y + (kIS_IOS7 ? StatusBarHeight:0)), (w), (h))
 #define CGRECT_HAVE_NAV(x,y,w,h)    CGRectMake((x), (y + (kIS_IOS7 ? (NavigationBarHeight+StatusBarHeight):(NavigationBarHeight+StatusBarHeight))), (w), (h))
 
+#define kIS_IphoneX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) : NO)
+
 
 //颜色
 #define UIColorWithRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
