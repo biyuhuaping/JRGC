@@ -41,7 +41,13 @@
 {
     
     UCFCycleModel *model = [[UCFCycleModel alloc] init];
-    model.thumb = @"https://app.9888.cn/api/staticResource/img/aiInvestClaim.png";
+    if([UserInfoSingle sharedManager].isSubmitTime)
+    {
+       model.thumb = @"https://app.9888.cn/api/staticResource/img/p2pInvestClaim.jpg";
+    }else{
+       model.thumb = @"https://app.9888.cn/api/staticResource/img/aiInvestClaim.png";
+    }
+  
     self.cycleView.imagesGroup = @[model];
     [self.cycleView refreshImage];
 //    __weak typeof(self) weakSelf = self;
