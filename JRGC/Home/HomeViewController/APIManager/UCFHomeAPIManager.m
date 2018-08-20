@@ -29,6 +29,7 @@
 #define GOLDPROCLAIMDETAIL @"GoldProClaimDetail"
 #define COLLECTIONDETAIL  @"CollectionDetail"
 #define GOLDCURRENTPROCLAIMDETAIL @"GoldCurrentProClaimDetail"//黄金活期
+#define USERINTOCOINPAGE   @"UserIntoCoinPage" //用户进入工贝
 
 @interface UCFHomeAPIManager () <NetworkModuleDelegate>
 @property (strong, nonatomic) NSMutableDictionary *requestDict;
@@ -81,11 +82,11 @@
 - (void)fetchProDetailInfoWithParameter:(NSDictionary *)parameter completionHandler:(NetworkCompletionHandler)completionHandler
 {
     if ([[NSUserDefaults standardUserDefaults] objectForKey:UUID]) {
-        NSString *userId = [parameter objectForKey:@"userId"];
-        NSString *Id = [parameter objectForKey:@"Id"];
-        NSString *proType = [parameter objectForKey:@"proType"];
-        NSString *type  = [parameter objectForKey:@"type"];
-        NSString *statue = [Common isNullValue:[parameter objectForKey:@"status"]] ?  @"" : [parameter objectForKey:@"status"];
+        NSString *userId = [parameter objectSafeForKey:@"userId"];
+        NSString *Id = [parameter objectSafeForKey:@"Id"];
+        NSString *proType = [parameter objectSafeForKey:@"proType"];
+        NSString *type  = [parameter objectSafeForKey:@"type"];
+        NSString *statue = [Common isNullValue:[parameter objectSafeForKey:@"status"]] ?  @"" : [parameter objectSafeForKey:@"status"];
         
         switch ([type intValue]) {
             case 3://微金和尊享标详情请求
@@ -160,6 +161,12 @@
                     [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagDealTransferBid owner:self Type:SelectAccoutTypeHoner];
                 }
                 [self.requestDict setObject:completionHandler forKey:PRODETAIL];
+            }
+                break;
+            case 11://工贝开关接口
+            {
+                [[NetworkModule sharedNetworkModule] newPostReq:parameter tag:kSXTagIntoCoinPage owner:self signature:YES Type:SelectAccoutDefault];
+                [self.requestDict setObject:completionHandler forKey:USERINTOCOINPAGE];
             }
                 break;
 
@@ -331,6 +338,11 @@
         complete(nil, dic);
         [self.requestDict removeObjectForKey:PRODETAIL];
     }
+    else if (tag.intValue == kSXTagIntoCoinPage) {
+        NetworkCompletionHandler complete = [self.requestDict objectForKey:USERINTOCOINPAGE];
+        complete(nil, dic);
+        [self.requestDict removeObjectForKey:USERINTOCOINPAGE];
+    }
 }
 //请求失败
 - (void)errorPost:(NSError*)err tag:(NSNumber*)tag
@@ -393,6 +405,10 @@
         NetworkCompletionHandler complete = [self.requestDict objectForKey:PRODETAIL];
         complete(err, nil);
         [self.requestDict removeObjectForKey:PRODETAIL];
+    } else if (tag.intValue == kSXTagIntoCoinPage) {
+        NetworkCompletionHandler complete = [self.requestDict objectForKey:USERINTOCOINPAGE];
+        complete(err, nil);
+        [self.requestDict removeObjectForKey:USERINTOCOINPAGE];
     }
 }
 

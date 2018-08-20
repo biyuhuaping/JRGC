@@ -41,7 +41,8 @@
 #import "UCFCashViewController.h"
 #import "ToolSingleTon.h"
 #import "UCFCalendarModularViewController.h"
-
+#import "UCFWebViewJavascriptBridgeMallDetails.h"
+#import "NSString+Misc.h"
 @interface UCFMineViewController () <UITableViewDelegate, UITableViewDataSource, UCFMineHeaderViewDelegate, UCFMineFuncCellDelegate, UCFMineAPIManagerDelegate, UCFMineFuncViewDelegate, UIAlertViewDelegate, SKStoreProductViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) UCFMineHeaderView   *mineHeaderView;
@@ -787,11 +788,17 @@
 
     }
     else if ([title isEqualToString:@"我的工贝"]){
-        //跳转到工分
-        UCFWorkPointsViewController *subVC = [[UCFWorkPointsViewController alloc]initWithNibName:@"UCFWorkPointsViewController" bundle:nil];
-        subVC.title = @"我的工分";
-        [self.navigationController pushViewController:subVC animated:YES];
-
+        
+        if([UserInfoSingle sharedManager].companyAgent)//如果是机构用户
+        {//吐司：此活动暂时未对企业用户开放
+            [MBProgressHUD displayHudError:@"此活动暂时未对企业用户开放"];
+        }
+        else{
+            if([self checkUserCanInvestIsDetail:YES type:SelectAccoutDefault])//判断是否开户
+            {
+                [self.apiManager getUserIntoGoCoinPageHTTP];
+            }
+        }
     }
     else   if ([title isEqualToString:@"优惠券"]){
 
@@ -845,6 +852,41 @@
         [self presentViewController:alert animated:YES completion:nil];
     }
 }
+-(void)mineApiManager:(UCFMineAPIManager *)apiManager didSuccessedUserIntoGoCoinPageResult:(id)result withTag:(NSUInteger)tag
+{
+     NSDictionary *dataDict = (NSDictionary *)result;
+    switch (tag) {
+        case 0://网络异常情况
+        {
+            [MBProgressHUD displayHudError:result];
+        }
+            break;
+        case 1://返回数据成功
+        {
+            NSDictionary *coinRequestDicData = [dataDict objectSafeDictionaryForKey:@"coinRequest"];
+            UCFWebViewJavascriptBridgeMallDetails *web = [[UCFWebViewJavascriptBridgeMallDetails alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMallDetails" bundle:nil];
+            NSDictionary *paramDict = [coinRequestDicData objectSafeDictionaryForKey:@"param"];
+            NSMutableDictionary *data =  [[NSMutableDictionary alloc]initWithDictionary:@{}];
+            [data setValue:[NSString urlEncodeStr:[paramDict objectSafeForKey:@"encryptParam"]] forKey:@"encryptParam"];
+            [data setObject:[paramDict objectSafeForKey:@"fromApp"] forKey:@"fromApp"];
+            [data setObject:[paramDict objectSafeForKey:@"userId"] forKey:@"userId"];
+            NSString * requestStr = [Common getParameterByDictionary:data];
+            web.url  = [NSString stringWithFormat:@"%@/#/?%@",[coinRequestDicData objectSafeForKey:@"urlPath"],requestStr];
+            web.isHidenNavigationbar = YES;
+            [self.navigationController pushViewController:web animated:YES];
+        }
+            break;
+        case 2://返回数据失败
+        {
+            [AuxiliaryFunc showToastMessage:result withView:self.view];
+        }
+            break;
+            
+        default:
+            break;
+    }
+    
+}
 
 - (void)mineApiManager:(UCFMineAPIManager *)apiManager didSuccessedCashAccoutBalanceResult:(id)result withTag:(NSUInteger)tag
 {
@@ -855,7 +897,7 @@
              [MBProgressHUD displayHudError:result];
         }
             break;
-        case 1://返回数据失败
+        case 1://返回数据成功
         {
             NSDictionary *dataDict = (NSDictionary *)result;
             UCFRechargeOrCashViewController * rechargeCashVC = [[UCFRechargeOrCashViewController alloc]initWithNibName:@"UCFRechargeOrCashViewController" bundle:nil];

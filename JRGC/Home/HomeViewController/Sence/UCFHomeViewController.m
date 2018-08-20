@@ -51,7 +51,7 @@
 #import "UCFHomeIconPresenter.h"
 #import "UCFNoticeModel.h"
 #import "UCFPurchaseTranBidViewController.h"
-
+#import "NSString+Misc.h"
 @interface UCFHomeViewController () <UCFHomeListViewControllerDelegate, UCFHomeListNavViewDelegate, UCFCycleImageViewControllerDelegate, BJGridItemDelegate, UIAlertViewDelegate, MjAlertViewDelegate>
 @property (strong, nonatomic) UCFCycleImageViewController *cycleImageVC;
 @property (strong, nonatomic) UCFHomeListViewController *homeListVC;
@@ -147,6 +147,7 @@
 
     }
     _dragBtn.delegate = self;
+    _dragBtn.hidden = [UserInfoSingle sharedManager].isSubmitTime;
     [self.view addSubview: _dragBtn];
 }
 - (void)gridItemDidMoved:(BJGridItem *)gridItem withLocation:(CGPoint)point moveGestureRecognizer:(UILongPressGestureRecognizer *)recognizer{
@@ -210,15 +211,49 @@
 
 - (void) gridItemDidClicked:(BJGridItem *) gridItem
 {
-    if ([[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
-        UCFWebViewJavascriptBridgeMallDetails *web = [[UCFWebViewJavascriptBridgeMallDetails alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMallDetails" bundle:nil];
-        web.url = COUPON_CENTER;
-        web.isHidenNavigationbar = YES;
-        [self.navigationController pushViewController:web animated:YES];
-    } else {
+    
+    if (![UserInfoSingle sharedManager].userId)
+    {
         [self showLoginView];
     }
-
+    else{
+        if([UserInfoSingle sharedManager].companyAgent)//如果是机构用户
+        {//吐司：此活动暂时未对企业用户开放
+           [MBProgressHUD displayHudError:@"此活动暂时未对企业用户开放"];
+        }
+        else {//普通用户
+            if([self checkUserCanInvestIsDetail:YES type:SelectAccoutTypeP2P])
+            {
+                __weak typeof(self) weakSelf = self;
+                NSDictionary *parameter = @{@"Id": @"", @"userId": [UserInfoSingle sharedManager].userId, @"proType": @"",@"type":@"11",@"status":@""};
+                [self.cycleImageVC.presenter fetchProDetailDataWithParameter:parameter completionHandler:^(NSError *error, id result) {
+                    
+                    NSDictionary *dic = (NSDictionary *)result;
+                    [MBProgressHUD hideOriginAllHUDsForView:weakSelf.view animated:YES];
+                    
+                    NSDictionary *dataDic = [dic objectSafeForKey:@"data"];
+                    NSString *rstcode = dic[@"ret"];
+                    NSString *rsttext = dic[@"message"];
+                    NSDictionary *coinRequestDicData = [dataDic objectSafeDictionaryForKey:@"coinRequest"];
+                    if ([rstcode boolValue])
+                    {
+                        UCFWebViewJavascriptBridgeMallDetails *web = [[UCFWebViewJavascriptBridgeMallDetails alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMallDetails" bundle:nil];
+                        NSDictionary *paramDict = [coinRequestDicData objectSafeDictionaryForKey:@"param"];
+                        NSMutableDictionary *data =  [[NSMutableDictionary alloc]initWithDictionary:@{}];
+                        [data setValue:[NSString urlEncodeStr:[paramDict objectSafeForKey:@"encryptParam"]] forKey:@"encryptParam"];
+                        [data setObject:[paramDict objectSafeForKey:@"fromApp"] forKey:@"fromApp"];
+                        [data setObject:[paramDict objectSafeForKey:@"userId"] forKey:@"userId"];
+                        NSString * requestStr = [Common getParameterByDictionary:data];
+                        web.url  = [NSString stringWithFormat:@"%@/#/?%@",[coinRequestDicData objectSafeForKey:@"urlPath"],requestStr];
+                        web.isHidenNavigationbar = YES;
+                        [self.navigationController pushViewController:web animated:YES];
+                    }else {
+                         [MBProgressHUD displayHudError:rsttext];
+                    }
+                }];
+            }
+        }
+    }
 }
 
 - (void)msgSkipToNativeAPP:(NSNotification *)noti

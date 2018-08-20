@@ -357,6 +357,7 @@
 #define GETHOMENEWUSERSECTIONS      @"/api/homePage/v2/noviceModule.json"   //新手磨具爱
 #define GETHOMEOTHERSECTIONS      @"api/homePage/v2/aiInvestModule.json"   //首页别的模块
 #define GETHOMEUSERSTATE      @"api/homePage/v2/statusInfoForCache.json"   //获取用户状态
+#define INTOCOINPAGEURL  @"api/coin/v2/intoCoinPage.json" // 进入工力佳贝页
 enum kPostStatus{
     kPostStatusNone=0,
     kPostStatusBeging=1,
@@ -590,6 +591,7 @@ enum kSXTag
     kSXTagGetHomeNewUserSection,         //新手模块
     kSXTagGetHomeOtherSection,           //别的模块
     kSXTagGetUserAllState,              //查询用户相关状态
+    kSXTagIntoCoinPage,                 // 进入工力佳贝页
 };
 
 typedef enum kSXTag kSXTag;
