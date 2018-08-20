@@ -93,7 +93,7 @@
     self.lab2.frame = CGRectMake(0, self.height/2.0+10, self.width, 30);
     self.lab2.text = [NSString stringWithFormat:@"今日签到成功！已获得%@工豆",self.signModel.returnAmount];
     if ([self.signModel.isOpen isEqualToString:@"1"]) {
-        self.lab2.text = [NSString stringWithFormat:@"今日签到成功！已获得%@工分",self.signModel.returnAmount];
+        self.lab2.text = [NSString stringWithFormat:@"今日签到成功！已获得%@工力",self.signModel.returnAmount];
     }
     else if ([self.signModel.isOpen isEqualToString:@"0"]) {
         self.lab2.text = [NSString stringWithFormat:@"今日签到成功！已获得%@工豆",self.signModel.returnAmount];
@@ -122,7 +122,7 @@
         self.lab3.textColor = [UIColor darkGrayColor];
         self.lab3.textAlignment = NSTextAlignmentCenter;
         if ([self.signModel.isOpen isEqualToString:@"1"]) {
-            self.lab3.text = [NSString stringWithFormat:@"明日签到奖励%@工分，已连续签到%@天",self.signModel.nextDayBeans,self.signModel.signDays];
+            self.lab3.text = [NSString stringWithFormat:@"明日签到奖励%@工力，已连续签到%@天",self.signModel.nextDayBeans,self.signModel.signDays];
         }
         else if ([self.signModel.isOpen isEqualToString:@"0"]) {
             self.lab3.text = [NSString stringWithFormat:@"明日签到奖励%@工豆，已连续签到%@天",self.signModel.nextDayBeans,self.signModel.signDays];
