@@ -16,6 +16,9 @@
 @property (weak, nonatomic) IBOutlet UIView *signView;
 @property (weak, nonatomic) IBOutlet UIView *segLineRight;
 @property (weak, nonatomic) IBOutlet UIView *segLineBottom;
+@property (weak, nonatomic) IBOutlet UIImageView *hot_ImageView;
+@property (weak, nonatomic) IBOutlet UILabel *hot_Label;
+@property (weak, nonatomic) IBOutlet UIImageView *mine_sign_tip_imageView;
 
 @end
 
@@ -52,8 +55,22 @@
     _setItem = setItem;
     self.imageview.image = [UIImage imageNamed:self.setItem.icon];
     self.titleLabel.text = self.setItem.title;
+
     self.signView.hidden = !self.setItem.isShowOrHide;
     self.valueLabel.text = self.setItem.subtitle;
+    if (self.setItem.isShowHot) {
+        _hot_ImageView.hidden = NO;
+        _hot_Label.hidden = NO;
+    } else {
+        _hot_ImageView.hidden = YES;
+        _hot_Label.hidden = YES;
+    }
+    if (self.setItem.isShowSignTips) {
+        _mine_sign_tip_imageView.hidden = NO;
+    } else {
+        _mine_sign_tip_imageView.hidden = YES;
+
+    }
 }
 
 @end

@@ -21,6 +21,15 @@
 
 - (NSMutableArray *)dataArray
 {
+    //我的工贝
+    UCFSettingItem *facPoint = [UCFSettingArrowItem itemWithIcon:@"uesr_icon_score" title:@"我的工贝" destVcClass:nil];
+    facPoint.isShowHot = YES;
+    facPoint.subtitle = self.benefit.score ? [NSString stringWithFormat:@"%@个", self.benefit.score] : @"0个";
+    //签到
+    UCFSettingItem *sign = [UCFSettingArrowItem itemWithIcon:@"uesr_icon_checkin" title:@"签到" destVcClass:nil];
+    sign.subtitle = @"签到送工力";
+    sign.isShowSignTips = YES;
+    //工豆
     UCFSettingItem *facBean = [UCFSettingArrowItem itemWithIcon:@"uesr_icon_bean" title:@"工豆" destVcClass:nil];
     facBean.subtitle = self.benefit.beanAmount ? [NSString stringWithFormat:@"¥%@", self.benefit.beanAmount] : @"¥0.00";
     NSString *beanExpiring = [NSString stringWithFormat:@"%.2f", [self.benefit.beanExpiring doubleValue]];
@@ -30,7 +39,12 @@
     else {
         facBean.isShowOrHide = NO;
     }
+    //邀请返利
+    UCFSettingItem *profitInvest = [UCFSettingArrowItem itemWithIcon:@"uesr_icon_rebate" title:@"邀请返利" destVcClass:nil];
+    profitInvest.subtitle = [UserInfoSingle sharedManager].gcm_code.length > 0 ? [NSString stringWithFormat:@"工场码%@", [UserInfoSingle sharedManager].gcm_code] : @"";
     
+    
+    //优惠券
     UCFSettingItem *coupon = [UCFSettingArrowItem itemWithIcon:@"uesr_icon_coupon" title:@"优惠券" destVcClass:nil];
     NSString *couponExpringNum = [NSString stringWithFormat:@"%.2f", [self.benefit.couponExpringNum doubleValue]];
     if ([couponExpringNum compare:@"0.00"] > 0) {
@@ -41,18 +55,14 @@
     }
     coupon.subtitle = self.benefit.couponNumber ? [NSString stringWithFormat:@"%@张可用", self.benefit.couponNumber] : @"0张可用";
     
-    UCFSettingItem *facPoint = [UCFSettingArrowItem itemWithIcon:@"uesr_icon_score" title:@"工分" destVcClass:nil];
-    facPoint.subtitle = self.benefit.score ? [NSString stringWithFormat:@"%@分", self.benefit.score] : @"0分";
-    UCFSettingItem *profitInvest = [UCFSettingArrowItem itemWithIcon:@"uesr_icon_rebate" title:@"邀请返利" destVcClass:nil];
-    profitInvest.subtitle = [UserInfoSingle sharedManager].gcm_code.length > 0 ? [NSString stringWithFormat:@"工场码%@", [UserInfoSingle sharedManager].gcm_code] : @"";
-    
-    UCFSettingItem *sign = [UCFSettingArrowItem itemWithIcon:@"uesr_icon_checkin" title:@"签到" destVcClass:nil];
-    sign.subtitle = @"签到送工分";
+    //计算器
     UCFSettingItem *addProfitCalculator = [UCFSettingArrowItem itemWithIcon:@"uesr_icon_calculator" title:@"计算器" destVcClass:nil];
     addProfitCalculator.subtitle = @"一键计算利息";
-    
+    //资产证明
     UCFSettingItem *assetProof = [UCFSettingArrowItem itemWithIcon:@"uesr_icon_assets" title:@"资产证明" destVcClass:nil];
     assetProof.subtitle = @"随时申请开具";
+    
+    //联系我们
     UCFSettingItem *contactUs = [UCFSettingArrowItem itemWithIcon:@"uesr_icon_contact" title:@"联系我们" destVcClass:nil];
     if ([UserInfoSingle sharedManager].superviseSwitch) {
         if ([UserInfoSingle sharedManager].level <= 1 && [UserInfoSingle sharedManager].zxIsNew && [UserInfoSingle sharedManager].goldIsNew) {
@@ -65,7 +75,7 @@
     else {
         contactUs.subtitle = @"400-0322-988";
     }
-    _dataArray = [[NSMutableArray alloc] initWithArray:@[facBean, coupon, facPoint, profitInvest, sign, addProfitCalculator, assetProof, contactUs]];
+    _dataArray = [[NSMutableArray alloc] initWithArray:@[facPoint,sign, facBean,profitInvest, coupon,    addProfitCalculator, assetProof, contactUs]];
     
      
     return _dataArray;

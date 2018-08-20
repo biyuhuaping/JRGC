@@ -43,6 +43,16 @@ typedef void (^UCFSettingItemOption)();
 
 @property (nonatomic,assign) BOOL isShowOrHide; // YES 显示 NO 不显示
 
+/**
+ 是否显示hot标识
+ */
+@property (nonatomic,assign) BOOL isShowHot;
+
+/**
+ 签到结果提醒标识
+ */
+@property (nonatomic,assign) BOOL isShowSignTips;
+
 + (instancetype)itemWithIcon:(NSString *)icon title:(NSString *)title;
 + (instancetype)itemWithTitle:(NSString *)title;
 + (instancetype)itemWithTitle:(NSString *)title withSubtitle:(NSString *)subtitle;

@@ -786,7 +786,7 @@
         [self.navigationController pushViewController:bean animated:YES];
 
     }
-    else if ([title isEqualToString:@"工分"]){
+    else if ([title isEqualToString:@"我的工贝"]){
         //跳转到工分
         UCFWorkPointsViewController *subVC = [[UCFWorkPointsViewController alloc]initWithNibName:@"UCFWorkPointsViewController" bundle:nil];
         subVC.title = @"我的工分";
