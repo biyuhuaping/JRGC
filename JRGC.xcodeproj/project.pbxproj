@@ -31,6 +31,8 @@
 		25F445C41D66E276006813BB /* UCFChoseBankViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25F445C21D66E276006813BB /* UCFChoseBankViewController.xib */; };
 		25F538B41D881B0A0039262F /* UCFPurchaseWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25F538B21D881B0A0039262F /* UCFPurchaseWebView.m */; };
 		25F538B51D881B0A0039262F /* UCFPurchaseWebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25F538B31D881B0A0039262F /* UCFPurchaseWebView.xib */; };
+		330611BD212ABAAB00955BD6 /* UCFLanchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 330611BB212ABAAB00955BD6 /* UCFLanchViewController.m */; };
+		330611BE212ABAAB00955BD6 /* UCFLanchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 330611BC212ABAAB00955BD6 /* UCFLanchViewController.xib */; };
 		33E1A5DF20FDC5A9008244BD /* UCFCustomPopTransitionAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E1A5D920FDC5A8008244BD /* UCFCustomPopTransitionAnimation.m */; };
 		33E1A5E020FDC5A9008244BD /* UCFOpenRedBagButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E1A5DA20FDC5A8008244BD /* UCFOpenRedBagButton.m */; };
 		33E1A5E120FDC5A9008244BD /* UCFRedBagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E1A5DC20FDC5A8008244BD /* UCFRedBagViewController.m */; };
@@ -1109,6 +1111,9 @@
 		25F538B11D881B0A0039262F /* UCFPurchaseWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFPurchaseWebView.h; sourceTree = "<group>"; };
 		25F538B21D881B0A0039262F /* UCFPurchaseWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFPurchaseWebView.m; sourceTree = "<group>"; };
 		25F538B31D881B0A0039262F /* UCFPurchaseWebView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFPurchaseWebView.xib; sourceTree = "<group>"; };
+		330611BA212ABAAB00955BD6 /* UCFLanchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFLanchViewController.h; sourceTree = "<group>"; };
+		330611BB212ABAAB00955BD6 /* UCFLanchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFLanchViewController.m; sourceTree = "<group>"; };
+		330611BC212ABAAB00955BD6 /* UCFLanchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFLanchViewController.xib; sourceTree = "<group>"; };
 		33E1A5D820FDC5A8008244BD /* UCFOpenRedBagButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFOpenRedBagButton.h; sourceTree = "<group>"; };
 		33E1A5D920FDC5A8008244BD /* UCFCustomPopTransitionAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFCustomPopTransitionAnimation.m; sourceTree = "<group>"; };
 		33E1A5DA20FDC5A8008244BD /* UCFOpenRedBagButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFOpenRedBagButton.m; sourceTree = "<group>"; };
@@ -4951,6 +4956,9 @@
 			children = (
 				7BC217261ACD4A030086D374 /* GuideViewController.h */,
 				7BC217271ACD4A030086D374 /* GuideViewController.m */,
+				330611BA212ABAAB00955BD6 /* UCFLanchViewController.h */,
+				330611BB212ABAAB00955BD6 /* UCFLanchViewController.m */,
+				330611BC212ABAAB00955BD6 /* UCFLanchViewController.xib */,
 			);
 			path = GuideController;
 			sourceTree = "<group>";
@@ -7139,6 +7147,7 @@
 				7436F2D91F3C38AE003B77CA /* UCFGoldRechargeBankCell.xib in Resources */,
 				8330C9B91FD79C4B00EB56A9 /* UCFProjectSafetyGuaranteeViewController.xib in Resources */,
 				E3C117AF1D40D2F90053A052 /* UCFWebViewJavascriptBridgeController.xib in Resources */,
+				330611BE212ABAAB00955BD6 /* UCFLanchViewController.xib in Resources */,
 				74956EB31D66E87F00D68B61 /* UCFModifyPhoneViewController.xib in Resources */,
 				83AB49651F6A76CA00C4231F /* UCFTotalAssetPieChartViewController.xib in Resources */,
 				74F998C31F3024C400A6E607 /* UCFFacReservedViewController.xib in Resources */,
@@ -7431,6 +7440,7 @@
 				83CD843A1F13A50800227704 /* UCFBatchBidModel.m in Sources */,
 				7404CA041FB4502E002811E0 /* UCFExtractGoldItemModel.m in Sources */,
 				4A5552981E54413E00E69DA4 /* UCFBatchInvestmentViewController.m in Sources */,
+				330611BD212ABAAB00955BD6 /* UCFLanchViewController.m in Sources */,
 				74BDA9881F09F6C60054403F /* FSCalendarCell.m in Sources */,
 				742D50EF1F74FAE600951AE2 /* UCFUserAssetModel.m in Sources */,
 				7477BF951AFB0F4C00914BFB /* UCFRedEnvelopeTableViewCell.m in Sources */,

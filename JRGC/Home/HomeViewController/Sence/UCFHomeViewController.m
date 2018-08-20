@@ -115,7 +115,6 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setDefaultState:) name:@"setDefaultViewData" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUI:) name:@"refreshUserState" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(msgSkipToNativeAPP:) name:@"msgSkipToNativeAPP" object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshCycleImage:) name:@"RefreshCycleImage" object:nil];
 
 
     }
@@ -315,10 +314,7 @@
         [self gotoGoldDetailVC:model];
     }
 }
-- (void)refreshCycleImage:(NSNotification *)noti
-{
-    [self.cycleImageVC getNormalBannerData];
-}
+
 - (void)homeListRefreshDataWithHomelist:(UCFHomeListViewController *)homelist
 {
     [self.cycleImageVC getNormalBannerData];

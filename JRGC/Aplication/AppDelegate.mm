@@ -43,14 +43,15 @@
 #ifdef NSFoundationVersionNumber_iOS_9_x_Max
 #import <UserNotifications/UserNotifications.h>
 #endif
-@interface AppDelegate () <JPUSHRegisterDelegate>
+#import "UCFLanchViewController.h"
+@interface AppDelegate () <JPUSHRegisterDelegate,LanchViewControllerrDelegate>
 
 @property (assign, nonatomic) UIBackgroundTaskIdentifier backgroundUpdateTask;
 @property (assign, nonatomic) NSInteger backTime;
 @property (assign, nonatomic) BOOL isComePushNotification;
 @property (assign, nonatomic) BOOL isFirstStart;
 @property (assign, nonatomic) BOOL isComeForceUpdate;
-@property (assign, nonatomic) BOOL isShowAdversement;
+//@property (assign, nonatomic) BOOL isShowAdversement;
 @property (assign, nonatomic) BOOL isAfter;//是否延时（只在3DTouch启动时使用）
 @property (nonatomic)BOOL isHuiDuEnv; //如果是灰度的话，请求第二次
 @end
@@ -59,22 +60,124 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
-    //设置公告展示标志位
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isShowNotice"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    [UcfWalletSDK setEnvironment:1];
-
-    [self setWebViewUserAgent];
-    [self checkNovicePoliceOnOff];//监测2017新手奖励政策开关。
+    
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    
+    UCFLanchViewController *lanchVC = [[UCFLanchViewController alloc] initWithNibName:@"UCFLanchViewController" bundle:nil];
+    lanchVC.delegate = self;
+    self.window.rootViewController = lanchVC;
+    
+   
+    return YES;
+}
+#pragma mark LanchViewControllerrDelegate
+- (void)lauchViewShowEnd
+{
+    [self luachNormalCode:nil];
+}
+- (void)lanchViewFetchTheFirstRequestData:(NSDictionary *)dic
+{
+    if([dic[@"ret"] boolValue] == 1)
+    {
+        dic = dic[@"data"];
+        
+        //以下是升级信息
+        NSString *netVersion = [dic objectSafeForKey: @"lastVersion"];
+        [LockFlagSingle sharedManager].netVersion = netVersion;
+        //是否强制更新 0强制 1随便 2不稳定
+        NSInteger versionMark = [[dic objectSafeForKey:@"forceUpdateOnOff"] integerValue];
+        
+        NSDictionary *infoDic = [[NSBundle mainBundle] infoDictionary];
+        NSString *currentVersion = infoDic[@"CFBundleShortVersionString"];
+        NSComparisonResult comparResult = [netVersion compare:currentVersion options:NSNumericSearch];
+        
+        
+        if (comparResult == NSOrderedAscending || comparResult == NSOrderedSame) {
+            if (versionMark == 2) {
+                self.isSubmitAppStoreTestTime = YES;
+                [UserInfoSingle sharedManager].isSubmitTime = YES;
+                if (!_isHuiDuEnv) {
+                    _isHuiDuEnv = YES;
+ 
+                }
+            }
+            
+        } else {
+            
+            NSString *des = dic[@"updateInfo"];
+            if (versionMark == 0) {
+                if (_isComeForceUpdate) {
+                    //服务器版本和appstore版本一致
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"发现新版本 V%@",netVersion] message:des delegate:self cancelButtonTitle:nil otherButtonTitles:@"更新", nil];
+                    alert.tag = 102;
+                    [alert show];
+                    _isComeForceUpdate = NO;
+                }
+            } else if (versionMark == 1) {
+                if ([PraiseAlert isShouldWarnUserUpdate:netVersion]) {
+                    //可选择性更新
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"发现新版本 V%@",netVersion] message:des delegate:self cancelButtonTitle:@"下次再说" otherButtonTitles:@"更新", nil];
+                    alert.tag = 101;
+                    NSLog(@"%lf",alert.window.windowLevel);
+                    [alert show];
+                }
+            } else if (versionMark == 2) {
+                DBLog(@"升级期内");
+            }
+        }
+        
+        
+        [self novicecheck:dic];
+        [self zxSwitchCheck:dic];
+        [UserInfoSingle sharedManager].goldIsShow = [[dic objectSafeForKey:@"goldIsShow"] boolValue];
+        [UserInfoSingle sharedManager].transferIsShow = [[dic objectSafeForKey:@"transferIsShow"] boolValue];
+        [UserInfoSingle sharedManager].wjIsShow = [[dic objectSafeForKey:@"wjIsShow"] boolValue];
+        [UserInfoSingle sharedManager].zxIsShow = [[dic objectSafeForKey:@"zxIsShow"] boolValue];
+        NSString *superviseStr = [dic objectForKey:@"compliance"];
+        //监管开关
+        if ([superviseStr isEqualToString:@"1"]) {
+            [self superviseSwitchWithState:NO];
+        }
+        else if ([superviseStr isEqualToString:@"2"]) {
+            [self superviseSwitchWithState:YES];
+        }
+        else {
+            [self superviseSwitchWithState:YES];
+        }
+        
+        
+        /*
+         注意点
+         1.第一个主要是给苹果测试人员用 ipa 版本号 大于等于 后台配置 版本号 并且version 为2 此时进入灰度环境（注意：使用灰度环境不要用自动上架，有可能客户自动升级了，进入灰度环境）
+         2.上线流程，等app提交审核，就需要要求后台配置升级信息人员，把升级信息挂出来，但是versionMark不能写0 和 1 ，
+         app 审核完成，需要改写为0和1，
+         */
+        
+    }
+    else {
+#warning about supervise
+        [self superviseSwitchWithState:YES];
+    }
+}
+#pragma ------
+- (void)luachNormalCode:(NSDictionary *)launchOptions
+{
+    //设置公告展示标志位
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isShowNotice"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [UcfWalletSDK setEnvironment:1];
+    
+    [self setWebViewUserAgent];
+    
+    
     [[UserInfoSingle sharedManager] getUserData];
-
+    
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(forceUpdateVersion) name:CHECK_NEW_VERSION object:nil];
-   
+    
     // 获取设备管理器实例
     FMDeviceManager_t *manager = [FMDeviceManager sharedManager];
     NSMutableDictionary *options = [NSMutableDictionary dictionary];
@@ -84,14 +187,14 @@
 #endif
     [options setValue:@"jrgc" forKey:@"partner"]; //您的合作方标识
     // [options setValue:@5000 forKey:@"timeout"];  //超时设置，缺省值为10000毫秒，即10秒
-    manager->initWithOptions(options); 				//初始化
+    manager->initWithOptions(options);                 //初始化
     
     // SDK具有防调试功能，当使用xcode运行时，请取消此行注释，开启调试模式
     // 否则使用xcode运行会闪退，(但直接在设备上点APP图标可以正常运行)
     // 上线Appstore的版本，请记得删除此行，否则将失去防调试防护功能！
     // [options setValue:@"allowd" forKey:@"allowd"];  // TODO
-
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkInitiaLogin) name:CheckIsInitiaLogin object:nil];
+    
+    //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkInitiaLogin) name:CheckIsInitiaLogin object:nil];
     
     //去掉navigationbar 下面默认的白线
     [[UINavigationBar appearance] setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
@@ -106,16 +209,8 @@
     [MobClick setAppVersion:version];
     
     //初始化广告view
-    _advertisementView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
     
-    //获取广告地址
-    if ([[Common machineName] isEqualToString:@"4"]) {
-        [self getAdversementImageStyle:1];
-    } else if ([[Common machineName] isEqualToString:@"8"])
-        [self getAdversementImageStyle:4];
-    else {
-        [self getAdversementImageStyle:3];
-    }
+    
     
     BOOL islaunch= [GuideViewController isShow];
     if (islaunch) {
@@ -124,7 +219,6 @@
         strParameters = [NSString stringWithFormat:@"equipment=%@&remark=%@&serialNumber=%@&sourceType=%@",[Common platformString],@"1",[Common getKeychain],@"1"];
         //统计用户数量
         [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagCalulateInstallNum owner:self Type:SelectAccoutDefault];
-        _advertisementView = nil;
     } else {
         [self showTabbarController];
         NSInteger useLockView = [[[NSUserDefaults standardUserDefaults] valueForKey:@"useLockView"] integerValue];
@@ -132,29 +226,13 @@
         if (useLockView == 1) {
             [self showGCode];
         } else {
-//            [self checkInitiaLogin];
+            
         }
         [self addLoadingBaseView];
-        //本地存储的广告地址 为空或者不存在 则不显示广告
-        NSString *imagUrl = [[NSUserDefaults standardUserDefaults] valueForKey:@"adversementImageUrl"];
-        SDImageCache *cache = [[SDImageCache alloc] init];
-        //检查本地是否存在最新的广告图片
-        BOOL hasImage = [cache diskImageExistsWithKey:imagUrl];
-        if (hasImage) {
-            _isShowAdversement = YES;
-        } else {
-            _isShowAdversement = NO;
-            self.advertisementView = nil;
-        }
-        //显示广告
-        if (_isShowAdversement) {
-            [self showAdvertisement];
-        } else {
-            [self.lockVc openTouchidAlert];
-        }
+        
     }
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveLoginOut) name:USER_LOGOUT object:nil];
-
+        /*
     if (launchOptions) {
         NSDictionary* message = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
         if (message) {
@@ -175,6 +253,7 @@
         }
         _isAfter = YES;
     }
+     */
     
     //TODO:------------------启动GrowingIO--------------------
     [Growing startWithAccountId:@"b9ed2e92ac9b1c59"];
@@ -183,21 +262,21 @@
     JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
     entity.types = JPAuthorizationOptionAlert|JPAuthorizationOptionBadge|JPAuthorizationOptionSound;
     if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
-
+        
     }
     [JPUSHService registerForRemoteNotificationConfig:entity delegate:self];
     [JPUSHService setupWithOption:launchOptions appKey:JPUSHKEY channel:nil apsForProduction:YES];
     [JPUSHService setAlias:[[NSUserDefaults standardUserDefaults] objectForKey:UUID] callbackSelector:@selector(tagsAliasCallback:tags:alias:) object:self];
     [JPUSHService setBadge:0];
-
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registJush) name:REGIST_JPUSH object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkPersonCenterRedPoint) name:CHECK_RED_POINT object:nil];
     [self checkPersonCenterRedPoint];
     //调用红点接口，通知服务器红点标示倍查看
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkRedPointShouldHide:) name:REDALERTISHIDE object:nil];
+    //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkRedPointShouldHide:) name:REDALERTISHIDE object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkConponCenter) name:CHECK_COUPON_CENTER object:nil];
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkConponCenter) name:@"setDefaultViewData" object:nil];
-
+    //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkConponCenter) name:@"setDefaultViewData" object:nil];
+    
     /**
      *  极光推送自定义消息推送
      NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
@@ -207,17 +286,15 @@
      name:kJPFNetworkDidLoginNotification
      object:nil];
      */
-
-
+    
+    
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isShowHornor"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     [self getLoginImage];
     [self getAdversementLift];
     [self getSharePictureAdversementLink];
     [self geInvestmentSuccesseLift];
-    return YES;
 }
-
 //友盟
 - (void)setUMData
 {
@@ -279,14 +356,14 @@
     }
     [[NetworkModule sharedNetworkModule] newPostReq:parmDic tag:kSXTagCheckConponCenter owner:self signature:YES Type:SelectAccoutDefault];
 }
-- (void) createItem {
-    //自定义icon 的初始化方法
-    UIApplicationShortcutIcon *icon0 = [UIApplicationShortcutIcon iconWithTemplateImageName:@"工场码"];
-    UIApplicationShortcutIcon *icon1 = [UIApplicationShortcutIcon iconWithTemplateImageName:@"邀请返利"];
-    UIMutableApplicationShortcutItem *item2 = [[UIMutableApplicationShortcutItem alloc]initWithType:@"0" localizedTitle:@"我的工场码" localizedSubtitle:nil icon:icon0 userInfo:nil];
-    UIMutableApplicationShortcutItem *item3 = [[UIMutableApplicationShortcutItem alloc]initWithType:@"1" localizedTitle:@"邀请返利" localizedSubtitle:nil icon:icon1 userInfo:nil];
-    [UIApplication sharedApplication].shortcutItems = @[item2,item3];
-}
+//- (void) createItem {
+//    //自定义icon 的初始化方法
+//    UIApplicationShortcutIcon *icon0 = [UIApplicationShortcutIcon iconWithTemplateImageName:@"工场码"];
+//    UIApplicationShortcutIcon *icon1 = [UIApplicationShortcutIcon iconWithTemplateImageName:@"邀请返利"];
+//    UIMutableApplicationShortcutItem *item2 = [[UIMutableApplicationShortcutItem alloc]initWithType:@"0" localizedTitle:@"我的工场码" localizedSubtitle:nil icon:icon0 userInfo:nil];
+//    UIMutableApplicationShortcutItem *item3 = [[UIMutableApplicationShortcutItem alloc]initWithType:@"1" localizedTitle:@"邀请返利" localizedSubtitle:nil icon:icon1 userInfo:nil];
+//    [UIApplication sharedApplication].shortcutItems = @[item2,item3];
+//}
 
 - (void)application:(UIApplication *)application performActionForShortcutItem:(UIApplicationShortcutItem *)shortcutItem completionHandler:(void (^)(BOOL))completionHandler {
     
@@ -328,59 +405,7 @@
 //          [[ToolSingleTon sharedManager] getGoldPrice];
 //    });
 //}
-#pragma mark - 广告页
-//显示广告
-- (void)showAdvertisement
-{
-    UIImage *placehoderImage = [Common getTheLaunchImage];
-    _advertisementView.contentMode = UIViewContentModeScaleToFill;
-    [_lockVc.view setUserInteractionEnabled:NO];
-    [_advertisementView sd_setImageWithURL:[NSURL URLWithString:[[NSUserDefaults standardUserDefaults] valueForKey:@"adversementImageUrl"]] placeholderImage:placehoderImage];
-    [_advertisementView setBackgroundColor:[UIColor clearColor]];
-    [self.window addSubview:_advertisementView];
-    [self.window bringSubviewToFront:_advertisementView];
-    
-    //跳过按钮
-    [_advertisementView setUserInteractionEnabled:YES];
-    UIButton *runbtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    runbtn.frame = CGRectMake(ScreenWidth - 60, ScreenHeight - 39, 45, 24);
-    [runbtn addTarget:self action:@selector(runbtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [runbtn setBackgroundImage:[UIImage imageNamed:@"skip.png"] forState:UIControlStateNormal];
-    //[runbtn setTitle:@"跳过" forState:UIControlStateNormal];
-    [_advertisementView addSubview:runbtn];
-    
-    [self performSelector:@selector(disapperAdversement) withObject:nil afterDelay:3.0];
-}
 
-- (void)runbtnClicked:(id)sender
-{
-    [self closeAdvertimentView];
-}
-
-- (void)closeAdvertimentView
-{
-    [_advertisementView removeFromSuperview];
-    _advertisementView = nil;
-    [_lockVc.view setUserInteractionEnabled:YES];
-    if (!self.lockVc) {
-        [[MongoliaLayerCenter sharedManager] showLogic];
-    }
-    //添加一个通知 知道广告业退出了 去触发touchid 的事件
-    [self.lockVc openTouchidAlert];
-}
-
-- (void)disapperAdversement
-{
-    __weak typeof(self) weakSelf = self;
-    if (_advertisementView) {
-        [UIView animateWithDuration:1.0 animations:^{
-            _advertisementView.alpha = 0.0;
-        } completion:^(BOOL finished) {
-            [weakSelf closeAdvertimentView];
-        }];
-    }
-}
-#pragma mark ----------
 
 -(void)beginPost:(kSXTag)tag
 {
@@ -636,7 +661,6 @@
 #pragma 新手政策弹框
 - (void)checkNovicePoliceOnOff
 {
-
     //请求开关状态
     [[NetworkModule sharedNetworkModule] newPostReq:@{} tag:kSXTagGetInfoForOnOff owner:self signature:NO Type:SelectAccoutDefault];
 }
@@ -703,15 +727,11 @@
                     [UserInfoSingle sharedManager].isSubmitTime = YES;
                     if (!_isHuiDuEnv) {
                         _isHuiDuEnv = YES;
-                        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                            [self checkNovicePoliceOnOff];
-                        });
+     
                     }
                 }
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"RefreshCycleImage" object:nil];
 
             } else {
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"RefreshCycleImage" object:nil];
 
                 NSString *des = dic[@"updateInfo"];
                 if (versionMark == 0) {
@@ -1016,37 +1036,7 @@
         });
     });
 }
-- (void)getAdversementImageStyle:(int)style
-{
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSString *URL = [NSString stringWithFormat:@"https://fore.9888.cn/cms/api/appbanners.php?key=0ca175b9c0f726a831d895e&id=19&p=%d",style];
-        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-        [request setURL:[NSURL URLWithString:URL]];
-        [request setHTTPMethod:@"GET"];
-        NSHTTPURLResponse *urlResponse = nil;
-        NSError *error = nil;
-        NSData *recervedData = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&error];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (!recervedData) {
-                return ;
-            }
-            NSString *imageStr=[[NSMutableString alloc] initWithData:recervedData encoding:NSUTF8StringEncoding];
-            if (imageStr && ![imageStr isEqualToString:@""]) {
-                imageStr = [imageStr stringByReplacingOccurrencesOfString:@"\\" withString:@""];
-                imageStr = [imageStr stringByReplacingOccurrencesOfString:@"\"" withString:@""];
-            }
-            [[NSUserDefaults standardUserDefaults] setValue:imageStr forKey:@"adversementImageUrl"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-            
-            SDImageCache *cache = [[SDImageCache alloc] init];
-            NSURL * url = [NSURL URLWithString:imageStr];
-            BOOL hasImage = [cache diskImageExistsWithKey:imageStr];
-            if (!hasImage) {
-                [Common storeImage:url];
-            }
-        });
-    });
-}
+
 - (void)getAdversementLift
 {
 
