@@ -130,8 +130,19 @@
 {
     if (_isThreeSecondEnd && _isFetchRequestData) {
         if (self.delegate && [self.delegate respondsToSelector:@selector(lauchViewShowEndIsInSubmitTime:)]) {
+
+            NSString *netVersion = [self.requestDict[@"data"] objectSafeForKey: @"lastVersion"];
             NSInteger versionMark = [[self.requestDict[@"data"] objectSafeForKey:@"forceUpdateOnOff"] integerValue];
-            [self.delegate lauchViewShowEndIsInSubmitTime:versionMark == 2 ? YES : NO];
+            NSDictionary *infoDic = [[NSBundle mainBundle] infoDictionary];
+            NSString *currentVersion = infoDic[@"CFBundleShortVersionString"];
+            NSComparisonResult comparResult = [netVersion compare:currentVersion options:NSNumericSearch];
+            
+            
+            if (comparResult == NSOrderedAscending || comparResult == NSOrderedSame) {
+                [self.delegate lauchViewShowEndIsInSubmitTime:versionMark == 2 ? YES : NO];
+            } else {
+                [self.delegate lauchViewShowEndIsInSubmitTime:NO];
+            }
         }
         if (self.delegate && [self.delegate respondsToSelector:@selector(lanchViewFetchTheFirstRequestData:)]) {
             [self.delegate lanchViewFetchTheFirstRequestData:self.requestDict];
