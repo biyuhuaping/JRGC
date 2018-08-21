@@ -16,6 +16,7 @@
 - (void)mineApiManager:(UCFMineAPIManager *)apiManager didSuccessedCashAccoutBalanceResult:(id)result withTag:(NSUInteger)tag;
 - (void)mineApiManager:(UCFMineAPIManager *)apiManager didSuccessedRechargeBindingBankCardResult:(id)result withTag:(NSUInteger)tag;
 - (void)mineApiManager:(UCFMineAPIManager *)apiManager didSuccessedP2PAccoutCashBalanceResult:(id)result withTag:(NSUInteger)tag;
+- (void)mineApiManager:(UCFMineAPIManager *)apiManager didSuccessedUserIntoGoCoinPageResult:(id)result withTag:(NSUInteger)tag;
 @end
 
 @interface UCFMineAPIManager : NSObject
@@ -28,4 +29,6 @@
 - (void)signWithToken:(NSString *)token;
 //微金P2P提现请求
 - (void)getP2PAccoutCashRuqestHTTP;
+//进入工贝页面的请求
+- (void)getUserIntoGoCoinPageHTTP;
 @end

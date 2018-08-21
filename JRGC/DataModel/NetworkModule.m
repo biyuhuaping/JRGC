@@ -1349,6 +1349,9 @@ static NetworkModule *gInstance = NULL;
         case kSXTagGetUserAllState:
             parameter = [NEW_SERVER_IP stringByAppendingString:GETHOMEUSERSTATE];
             break;
+        case kSXTagIntoCoinPage:
+            parameter = [NEW_SERVER_IP stringByAppendingString:INTOCOINPAGEURL];
+            break;
     }
     //给原有参数字典添加公共参数
     if (!data) {
