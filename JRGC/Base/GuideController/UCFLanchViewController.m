@@ -11,7 +11,9 @@
 @interface UCFLanchViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *advertisementView;
 @property (nonatomic) BOOL    isShowAdversement;
-@property (nonatomic) BOOL    isFetch;
+@property (nonatomic) BOOL    isFetchRequestData; //获取开关接口是否返回
+@property (nonatomic) BOOL    isThreeSecondEnd;   //3秒是否走完
+@property (nonatomic, strong) NSDictionary  *requestDict;
 @end
 
 @implementation UCFLanchViewController
@@ -61,8 +63,9 @@
     if (tag.integerValue == kSXTagGetInfoForOnOff) {
         NSString *Data = (NSString *)result;
         NSDictionary * dic = [Data objectFromJSONString];
-        _isFetch = YES;
-        [self closeAdvertimentView:dic];
+        self.requestDict = dic;
+        _isFetchRequestData = YES;
+        [self closeAdvertimentView];
 
     }
 }
@@ -107,51 +110,37 @@
 
     
     //跳过按钮
-    [_advertisementView setUserInteractionEnabled:YES];
-    UIButton *runbtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    runbtn.frame = CGRectMake(ScreenWidth - 60, ScreenHeight - 39, 45, 24);
-    [runbtn addTarget:self action:@selector(runbtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [runbtn setBackgroundImage:[UIImage imageNamed:@"skip.png"] forState:UIControlStateNormal];
-    [_advertisementView addSubview:runbtn];
+//    [_advertisementView setUserInteractionEnabled:YES];
+//    UIButton *runbtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    runbtn.frame = CGRectMake(ScreenWidth - 60, ScreenHeight - 39, 45, 24);
+//    [runbtn addTarget:self action:@selector(runbtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+//    [runbtn setBackgroundImage:[UIImage imageNamed:@"skip.png"] forState:UIControlStateNormal];
+//    [_advertisementView addSubview:runbtn];
     
     [self performSelector:@selector(disapperAdversement) withObject:nil afterDelay:3.0];
 }
 - (void)disapperAdversement
 {
-    if (_isFetch) {
-        [self closeAdvertimentView];
-    }
-}
-- (void)runbtnClicked:(UIButton *)button
-{
+    _isThreeSecondEnd = YES;
     [self closeAdvertimentView];
 }
-- (void)closeAdvertimentView:(NSDictionary *)dic
-{
-    if (self.delegate && [self.delegate respondsToSelector:@selector(lauchViewShowEnd)]) {
-        [self.delegate lauchViewShowEnd];
-    }
-    if (self.delegate && [self.delegate respondsToSelector:@selector(lanchViewFetchTheFirstRequestData:)]) {
-        [self.delegate lanchViewFetchTheFirstRequestData:dic];
-    }
 
-}
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)closeAdvertimentView
+{
+    if (_isThreeSecondEnd && _isFetchRequestData) {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(lauchViewShowEndIsInSubmitTime:)]) {
+            NSInteger versionMark = [[self.requestDict[@"data"] objectSafeForKey:@"forceUpdateOnOff"] integerValue];
+            [self.delegate lauchViewShowEndIsInSubmitTime:versionMark == 2 ? YES : NO];
+        }
+        if (self.delegate && [self.delegate respondsToSelector:@selector(lanchViewFetchTheFirstRequestData:)]) {
+            [self.delegate lanchViewFetchTheFirstRequestData:self.requestDict];
+        }
+    }
 }
 - (void)dealloc
 {
     
 }
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

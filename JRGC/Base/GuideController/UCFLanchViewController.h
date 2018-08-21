@@ -10,7 +10,7 @@
 
 @protocol LanchViewControllerrDelegate <NSObject>
 
-- (void)lauchViewShowEnd;
+- (void)lauchViewShowEndIsInSubmitTime:(BOOL)isSubmitTime;
 
 - (void)lanchViewFetchTheFirstRequestData:(NSDictionary *)dic;
 

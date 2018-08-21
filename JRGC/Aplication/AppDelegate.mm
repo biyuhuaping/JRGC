@@ -53,7 +53,6 @@
 @property (assign, nonatomic) BOOL isComeForceUpdate;
 //@property (assign, nonatomic) BOOL isShowAdversement;
 @property (assign, nonatomic) BOOL isAfter;//是否延时（只在3DTouch启动时使用）
-@property (nonatomic)BOOL isHuiDuEnv; //如果是灰度的话，请求第二次
 @end
 
 @implementation AppDelegate
@@ -74,8 +73,12 @@
     return YES;
 }
 #pragma mark LanchViewControllerrDelegate
-- (void)lauchViewShowEnd
+- (void)lauchViewShowEndIsInSubmitTime:(BOOL)isSubmitTime
 {
+    if (isSubmitTime) {
+        self.isSubmitAppStoreTestTime = YES;
+        [UserInfoSingle sharedManager].isSubmitTime = YES;
+    }
     [self luachNormalCode:nil];
 }
 - (void)lanchViewFetchTheFirstRequestData:(NSDictionary *)dic
@@ -93,20 +96,12 @@
         NSDictionary *infoDic = [[NSBundle mainBundle] infoDictionary];
         NSString *currentVersion = infoDic[@"CFBundleShortVersionString"];
         NSComparisonResult comparResult = [netVersion compare:currentVersion options:NSNumericSearch];
-        
-        
         if (comparResult == NSOrderedAscending || comparResult == NSOrderedSame) {
             if (versionMark == 2) {
                 self.isSubmitAppStoreTestTime = YES;
                 [UserInfoSingle sharedManager].isSubmitTime = YES;
-                if (!_isHuiDuEnv) {
-                    _isHuiDuEnv = YES;
- 
-                }
             }
-            
         } else {
-            
             NSString *des = dic[@"updateInfo"];
             if (versionMark == 0) {
                 if (_isComeForceUpdate) {
@@ -693,7 +688,7 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"userisloginandcheckgrade" object:@(YES)];
 }
 
-#warning about supervise
+//#warning about supervise
 - (void)superviseSwitchWithState:(BOOL)state {
     [UserInfoSingle sharedManager].superviseSwitch = state;
     if (state) {
@@ -725,10 +720,7 @@
                 if (versionMark == 2) {
                     self.isSubmitAppStoreTestTime = YES;
                     [UserInfoSingle sharedManager].isSubmitTime = YES;
-                    if (!_isHuiDuEnv) {
-                        _isHuiDuEnv = YES;
-     
-                    }
+       
                 }
 
             } else {
