@@ -722,6 +722,10 @@
 		83AB49651F6A76CA00C4231F /* UCFTotalAssetPieChartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83AB49631F6A76CA00C4231F /* UCFTotalAssetPieChartViewController.xib */; };
 		83AB49691F6A772400C4231F /* UCFTotalRevenuePieChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83AB49671F6A772400C4231F /* UCFTotalRevenuePieChartViewController.m */; };
 		83AB496A1F6A772400C4231F /* UCFTotalRevenuePieChartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83AB49681F6A772400C4231F /* UCFTotalRevenuePieChartViewController.xib */; };
+		83BA05C6212BB28B009C2A34 /* UCFAppleMyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BA05C4212BB28B009C2A34 /* UCFAppleMyViewController.m */; };
+		83BA05C7212BB28B009C2A34 /* UCFAppleMyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83BA05C5212BB28B009C2A34 /* UCFAppleMyViewController.xib */; };
+		83BA05CB212BB2B3009C2A34 /* UCFAppleHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BA05C9212BB2B3009C2A34 /* UCFAppleHomeViewController.m */; };
+		83BA05CC212BB2B3009C2A34 /* UCFAppleHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83BA05CA212BB2B3009C2A34 /* UCFAppleHomeViewController.xib */; };
 		83BC799F21087C8500A591AA /* UCFMicroMoneyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BC799D21087C8400A591AA /* UCFMicroMoneyCell.m */; };
 		83BC79A021087C8500A591AA /* UCFMicroMoneyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83BC799E21087C8400A591AA /* UCFMicroMoneyCell.xib */; };
 		83C3E7E21F346188007BE065 /* UCFGoldCouponViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C3E7E01F346188007BE065 /* UCFGoldCouponViewController.m */; };
@@ -2287,6 +2291,12 @@
 		83AB49661F6A772400C4231F /* UCFTotalRevenuePieChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFTotalRevenuePieChartViewController.h; sourceTree = "<group>"; };
 		83AB49671F6A772400C4231F /* UCFTotalRevenuePieChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFTotalRevenuePieChartViewController.m; sourceTree = "<group>"; };
 		83AB49681F6A772400C4231F /* UCFTotalRevenuePieChartViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFTotalRevenuePieChartViewController.xib; sourceTree = "<group>"; };
+		83BA05C3212BB28B009C2A34 /* UCFAppleMyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFAppleMyViewController.h; sourceTree = "<group>"; };
+		83BA05C4212BB28B009C2A34 /* UCFAppleMyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFAppleMyViewController.m; sourceTree = "<group>"; };
+		83BA05C5212BB28B009C2A34 /* UCFAppleMyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFAppleMyViewController.xib; sourceTree = "<group>"; };
+		83BA05C8212BB2B3009C2A34 /* UCFAppleHomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFAppleHomeViewController.h; sourceTree = "<group>"; };
+		83BA05C9212BB2B3009C2A34 /* UCFAppleHomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFAppleHomeViewController.m; sourceTree = "<group>"; };
+		83BA05CA212BB2B3009C2A34 /* UCFAppleHomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFAppleHomeViewController.xib; sourceTree = "<group>"; };
 		83BC799C21087C8400A591AA /* UCFMicroMoneyCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFMicroMoneyCell.h; sourceTree = "<group>"; };
 		83BC799D21087C8400A591AA /* UCFMicroMoneyCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFMicroMoneyCell.m; sourceTree = "<group>"; };
 		83BC799E21087C8400A591AA /* UCFMicroMoneyCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFMicroMoneyCell.xib; sourceTree = "<group>"; };
@@ -5533,6 +5543,7 @@
 				7BFE3EB01AC56356002A53A2 /* Images */,
 				7BC8AA021AD4C74200BF4660 /*  Modles */,
 				7BFE3EAE1AC56315002A53A2 /* ViewControllers */,
+				83BA05BA212BB227009C2A34 /* SubmitViewControllers */,
 				FB5149191D6438A700C26E7B /* Images.xcassets */,
 				7BFE3E8A1AC55C98002A53A2 /* JRGC.xcdatamodeld */,
 				7BFE3E831AC55C98002A53A2 /* Supporting Files */,
@@ -5982,6 +5993,83 @@
 				838EDD6C1F6B7432008E60EC /* UCFCustomPieViewCell.h */,
 				838EDD6D1F6B7432008E60EC /* UCFCustomPieViewCell.m */,
 				838EDD6E1F6B7432008E60EC /* UCFCustomPieViewCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		83BA05BA212BB227009C2A34 /* SubmitViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				83BA05BB212BB227009C2A34 /* HomeView */,
+				83BA05BF212BB227009C2A34 /* MyView */,
+			);
+			path = SubmitViewControllers;
+			sourceTree = "<group>";
+		};
+		83BA05BB212BB227009C2A34 /* HomeView */ = {
+			isa = PBXGroup;
+			children = (
+				83BA05BC212BB227009C2A34 /* Controller */,
+				83BA05BD212BB227009C2A34 /* Model */,
+				83BA05BE212BB227009C2A34 /* View */,
+			);
+			path = HomeView;
+			sourceTree = "<group>";
+		};
+		83BA05BC212BB227009C2A34 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				83BA05C8212BB2B3009C2A34 /* UCFAppleHomeViewController.h */,
+				83BA05C9212BB2B3009C2A34 /* UCFAppleHomeViewController.m */,
+				83BA05CA212BB2B3009C2A34 /* UCFAppleHomeViewController.xib */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		83BA05BD212BB227009C2A34 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		83BA05BE212BB227009C2A34 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		83BA05BF212BB227009C2A34 /* MyView */ = {
+			isa = PBXGroup;
+			children = (
+				83BA05C0212BB227009C2A34 /* Controller */,
+				83BA05C1212BB227009C2A34 /* Model */,
+				83BA05C2212BB227009C2A34 /* View */,
+			);
+			path = MyView;
+			sourceTree = "<group>";
+		};
+		83BA05C0212BB227009C2A34 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				83BA05C3212BB28B009C2A34 /* UCFAppleMyViewController.h */,
+				83BA05C4212BB28B009C2A34 /* UCFAppleMyViewController.m */,
+				83BA05C5212BB28B009C2A34 /* UCFAppleMyViewController.xib */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		83BA05C1212BB227009C2A34 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		83BA05C2212BB227009C2A34 /* View */ = {
+			isa = PBXGroup;
+			children = (
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -7262,6 +7350,7 @@
 				83FCCA6C1F1711A6002921C5 /* UCFMyGoldInvestInfoViewController.xib in Resources */,
 				83FF3E4B1E12159C00DFB99C /* UCFCashTableViewCell.xib in Resources */,
 				7412323E1F14BB250061408A /* UCFPickView.xib in Resources */,
+				83BA05CC212BB2B3009C2A34 /* UCFAppleHomeViewController.xib in Resources */,
 				74F6493B1F47159A00328235 /* UCFGoldCashSucessController.xib in Resources */,
 				833FBE031FD010B2002D6F80 /* UCFAccountAssetsProofViewController.xib in Resources */,
 				83F9B6C91FDA6519001EEAC6 /* UCFInvestmentSuccesseAlaterView.xib in Resources */,
@@ -7282,6 +7371,7 @@
 				74F17C651B3BD52F000FF38B /* UCFMoreCell.xib in Resources */,
 				74FC227E1BA6A5BB00D1660A /* UCFOverDueListViewController.xib in Resources */,
 				4AB1260C1AEF8EA400E915F1 /* UCFPurchaseBidViewController.xib in Resources */,
+				83BA05C7212BB28B009C2A34 /* UCFAppleMyViewController.xib in Resources */,
 				4AFE198D1CA0006200EE6768 /* TopUpAndCash.storyboard in Resources */,
 				83FEDB771EFBB56000CFE0EF /* UCFCompanyNoOpenViewController.xib in Resources */,
 				A8E02DB31F0E0A7800FC2260 /* GoldTransactionRecordViewController.xib in Resources */,
@@ -7596,6 +7686,7 @@
 				833CC9EF1FD6A7B2006BF624 /* UCFProjectBasicDetailViewController.m in Sources */,
 				FB4F9E4F1D62A6D600CCB492 /* AccountSuccessVC.m in Sources */,
 				74F291131AE0DBB4003E0E86 /* UCFFacCodeViewController.m in Sources */,
+				83BA05C6212BB28B009C2A34 /* UCFAppleMyViewController.m in Sources */,
 				74EC8D251AF089A4000CAF35 /* UCFPersonalInfoModel.m in Sources */,
 				838EDD731F6B7915008E60EC /* UCFCustomPieChartModel.m in Sources */,
 				7491820B1EC166F000AC1ECE /* TAAbstractDotView.m in Sources */,
@@ -7980,6 +8071,7 @@
 				A8AD6F851EFA6BDE000AF323 /* PagerView.m in Sources */,
 				7BCA18621AD7813E0077C2A6 /* UCFInvestmentDetailViewController.m in Sources */,
 				FBEDF1DF1CB5171500116E12 /* MyViewController.m in Sources */,
+				83BA05CB212BB2B3009C2A34 /* UCFAppleHomeViewController.m in Sources */,
 				FBC234731B31678800C783A8 /* UCFBackMoneyCell1.m in Sources */,
 				4A8D5F741B0C1DCF0053F045 /* RechargeListViewController.m in Sources */,
 				7BE45C911ADF9C4C00B955A6 /* HMSegmentedControl.m in Sources */,
