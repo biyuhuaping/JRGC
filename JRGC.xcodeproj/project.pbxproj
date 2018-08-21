@@ -33,6 +33,7 @@
 		25F538B51D881B0A0039262F /* UCFPurchaseWebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25F538B31D881B0A0039262F /* UCFPurchaseWebView.xib */; };
 		330611BD212ABAAB00955BD6 /* UCFLanchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 330611BB212ABAAB00955BD6 /* UCFLanchViewController.m */; };
 		330611BE212ABAAB00955BD6 /* UCFLanchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 330611BC212ABAAB00955BD6 /* UCFLanchViewController.xib */; };
+		33E05B58212BB93500E1138F /* UCFAppleTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E05B57212BB93500E1138F /* UCFAppleTabBarViewController.m */; };
 		33E1A5DF20FDC5A9008244BD /* UCFCustomPopTransitionAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E1A5D920FDC5A8008244BD /* UCFCustomPopTransitionAnimation.m */; };
 		33E1A5E020FDC5A9008244BD /* UCFOpenRedBagButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E1A5DA20FDC5A8008244BD /* UCFOpenRedBagButton.m */; };
 		33E1A5E120FDC5A9008244BD /* UCFRedBagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E1A5DC20FDC5A8008244BD /* UCFRedBagViewController.m */; };
@@ -1118,6 +1119,8 @@
 		330611BA212ABAAB00955BD6 /* UCFLanchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFLanchViewController.h; sourceTree = "<group>"; };
 		330611BB212ABAAB00955BD6 /* UCFLanchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFLanchViewController.m; sourceTree = "<group>"; };
 		330611BC212ABAAB00955BD6 /* UCFLanchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFLanchViewController.xib; sourceTree = "<group>"; };
+		33E05B56212BB93500E1138F /* UCFAppleTabBarViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFAppleTabBarViewController.h; sourceTree = "<group>"; };
+		33E05B57212BB93500E1138F /* UCFAppleTabBarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFAppleTabBarViewController.m; sourceTree = "<group>"; };
 		33E1A5D820FDC5A8008244BD /* UCFOpenRedBagButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFOpenRedBagButton.h; sourceTree = "<group>"; };
 		33E1A5D920FDC5A8008244BD /* UCFCustomPopTransitionAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFCustomPopTransitionAnimation.m; sourceTree = "<group>"; };
 		33E1A5DA20FDC5A8008244BD /* UCFOpenRedBagButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFOpenRedBagButton.m; sourceTree = "<group>"; };
@@ -2970,6 +2973,15 @@
 				25314C0A1D8FD7FA0066F446 /* UCFDirectCell.xib */,
 			);
 			name = TipCell;
+			sourceTree = "<group>";
+		};
+		33E05B52212BB86800E1138F /* AppleTabBar */ = {
+			isa = PBXGroup;
+			children = (
+				33E05B56212BB93500E1138F /* UCFAppleTabBarViewController.h */,
+				33E05B57212BB93500E1138F /* UCFAppleTabBarViewController.m */,
+			);
+			path = AppleTabBar;
 			sourceTree = "<group>";
 		};
 		33E1A5D620FDC5A8008244BD /* RedBag */ = {
@@ -5099,6 +5111,7 @@
 		7BC8AA021AD4C74200BF4660 /*  Modles */ = {
 			isa = PBXGroup;
 			children = (
+				7BFE3EAE1AC56315002A53A2 /* ViewControllers */,
 				747A91121B01A44300FE2334 /* UCFInvestDetail */,
 				FB21732C1AF2360D00649AA0 /* UCFBackMoneyModel */,
 				74D7FCC61AE8F6EE00653B8F /* PersonalCenterModel */,
@@ -5542,7 +5555,6 @@
 				7BFE3EB11AC5635E002A53A2 /* ThirdLibs */,
 				7BFE3EB01AC56356002A53A2 /* Images */,
 				7BC8AA021AD4C74200BF4660 /*  Modles */,
-				7BFE3EAE1AC56315002A53A2 /* ViewControllers */,
 				83BA05BA212BB227009C2A34 /* SubmitViewControllers */,
 				FB5149191D6438A700C26E7B /* Images.xcassets */,
 				7BFE3E8A1AC55C98002A53A2 /* JRGC.xcdatamodeld */,
@@ -5599,6 +5611,7 @@
 				7BCE028C1AC948710084C15C /* More */,
 			);
 			name = ViewControllers;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		7BFE3EB01AC56356002A53A2 /* Images */ = {
@@ -6000,6 +6013,7 @@
 		83BA05BA212BB227009C2A34 /* SubmitViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				33E05B52212BB86800E1138F /* AppleTabBar */,
 				83BA05BB212BB227009C2A34 /* HomeView */,
 				83BA05BF212BB227009C2A34 /* MyView */,
 			);
@@ -7828,6 +7842,7 @@
 				74BDA9891F09F6C60054403F /* FSCalendarCollectionView.m in Sources */,
 				4A9016861AFB12FE0049A9E0 /* NSArray+MASAdditions.m in Sources */,
 				74B763DF1F20E08E00E12E51 /* UCFAssetTipView.m in Sources */,
+				33E05B58212BB93500E1138F /* UCFAppleTabBarViewController.m in Sources */,
 				FBE5A0531AE8BEDD0095B2ED /* UCFMyInvestViewCell.m in Sources */,
 				7BA6E4B91AD6731900FE8C37 /* NSData+ImageContentType.m in Sources */,
 				7BCE01F91AC8FC260084C15C /* ASIFormDataRequest.m in Sources */,

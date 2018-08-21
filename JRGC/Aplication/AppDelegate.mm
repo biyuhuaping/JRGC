@@ -44,6 +44,7 @@
 #import <UserNotifications/UserNotifications.h>
 #endif
 #import "UCFLanchViewController.h"
+#import "UCFAppleTabBarViewController.h"
 @interface AppDelegate () <JPUSHRegisterDelegate,LanchViewControllerrDelegate>
 
 @property (assign, nonatomic) UIBackgroundTaskIdentifier backgroundUpdateTask;
@@ -59,8 +60,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
-    
-    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
@@ -69,7 +68,6 @@
     lanchVC.delegate = self;
     self.window.rootViewController = lanchVC;
     
-   
     return YES;
 }
 #pragma mark LanchViewControllerrDelegate
@@ -160,14 +158,12 @@
 #pragma ------
 - (void)luachNormalCode:(NSDictionary *)launchOptions
 {
+    [self setWebViewUserAgent];
     //设置公告展示标志位
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isShowNotice"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     [UcfWalletSDK setEnvironment:1];
-    
-    [self setWebViewUserAgent];
-    
-    
+
     [[UserInfoSingle sharedManager] getUserData];
     
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
@@ -205,26 +201,49 @@
     
     //初始化广告view
     
-    
-    
-    BOOL islaunch= [GuideViewController isShow];
-    if (islaunch) {
-        [self showGuidePageController];
-        NSString *strParameters = nil;
-        strParameters = [NSString stringWithFormat:@"equipment=%@&remark=%@&serialNumber=%@&sourceType=%@",[Common platformString],@"1",[Common getKeychain],@"1"];
-        //统计用户数量
-        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagCalulateInstallNum owner:self Type:SelectAccoutDefault];
+    if (self.isSubmitAppStoreTestTime) {
+        [self showAppleTabbarController];
     } else {
-        [self showTabbarController];
-        NSInteger useLockView = [[[NSUserDefaults standardUserDefaults] valueForKey:@"useLockView"] integerValue];
-        //使用手势密码 显示
-        if (useLockView == 1) {
-            [self showGCode];
+        BOOL islaunch= [GuideViewController isShow];
+        if (islaunch) {
+            [self showGuidePageController];
+            NSString *strParameters = nil;
+            strParameters = [NSString stringWithFormat:@"equipment=%@&remark=%@&serialNumber=%@&sourceType=%@",[Common platformString],@"1",[Common getKeychain],@"1"];
+            //统计用户数量
+            [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagCalulateInstallNum owner:self Type:SelectAccoutDefault];
         } else {
-            
+            [self showTabbarController];
+            NSInteger useLockView = [[[NSUserDefaults standardUserDefaults] valueForKey:@"useLockView"] integerValue];
+            //使用手势密码 显示
+            if (useLockView == 1) {
+                [self showGCode];
+            } else {
+                
+            }
+//            [self addLoadingBaseView];
         }
-        [self addLoadingBaseView];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkPersonCenterRedPoint) name:CHECK_RED_POINT object:nil];
+        [self checkPersonCenterRedPoint];
+        //调用红点接口，通知服务器红点标示倍查看
+        //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkRedPointShouldHide:) name:REDALERTISHIDE object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkConponCenter) name:CHECK_COUPON_CENTER object:nil];
         
+        /**
+         *  极光推送自定义消息推送
+         NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
+         [defaultCenter addObserver:self selector:@selector(networkDidReceiveMessage:) name:kJPFNetworkDidReceiveMessageNotification object:nil];
+         [defaultCenter addObserver:self
+         selector:@selector(networkDidLogin:)
+         name:kJPFNetworkDidLoginNotification
+         object:nil];
+         */
+    
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isShowHornor"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        [self getLoginImage];
+        [self getAdversementLift];
+        [self getSharePictureAdversementLink];
+        [self geInvestmentSuccesseLift];
     }
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveLoginOut) name:USER_LOGOUT object:nil];
         /*
@@ -265,30 +284,8 @@
     [JPUSHService setBadge:0];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registJush) name:REGIST_JPUSH object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkPersonCenterRedPoint) name:CHECK_RED_POINT object:nil];
-    [self checkPersonCenterRedPoint];
-    //调用红点接口，通知服务器红点标示倍查看
-    //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkRedPointShouldHide:) name:REDALERTISHIDE object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkConponCenter) name:CHECK_COUPON_CENTER object:nil];
-    //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkConponCenter) name:@"setDefaultViewData" object:nil];
-    
-    /**
-     *  极光推送自定义消息推送
-     NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
-     [defaultCenter addObserver:self selector:@selector(networkDidReceiveMessage:) name:kJPFNetworkDidReceiveMessageNotification object:nil];
-     [defaultCenter addObserver:self
-     selector:@selector(networkDidLogin:)
-     name:kJPFNetworkDidLoginNotification
-     object:nil];
-     */
-    
-    
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isShowHornor"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    [self getLoginImage];
-    [self getAdversementLift];
-    [self getSharePictureAdversementLink];
-    [self geInvestmentSuccesseLift];
+
+
 }
 //友盟
 - (void)setUMData
@@ -562,7 +559,11 @@
     self.tabBarController = [[UCFMainTabBarController alloc] init];
     self.window.rootViewController = self.tabBarController;
 }
-
+- (void)showAppleTabbarController
+{
+    UCFAppleTabBarViewController *vc = [[UCFAppleTabBarViewController alloc] init];
+    self.window.rootViewController = vc;
+}
 // 展示引导页
 - (void)showGuidePageController
 {
@@ -607,38 +608,38 @@
 }
 
 #pragma mark GuideViewContlerDelegate
-- (void)addLoadingBaseView
-{
-    _loadingBaseView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
-    _loadingBaseView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.7];
-    _loadingBaseView.hidden = YES;
-    [self.window addSubview:_loadingBaseView];
-    UIImageView *view1 = [[UIImageView alloc] initWithFrame:CGRectMake(0,0, 91, 95.5)];
-    NSMutableArray * animateArray = [[NSMutableArray alloc]initWithCapacity:8];
-    for (int i = 1; i <= 8 ; i++) {
-        [animateArray addObject:[UIImage imageNamed:[NSString stringWithFormat:@"loading_%d",i]]];
-    }
-    view1.animationImages = animateArray;
-    view1.animationRepeatCount = 0;
-    view1.animationDuration = 0.8;//设置动画时间
-    view1.center = _loadingBaseView.center;
-    view1.backgroundColor = [UIColor clearColor];
-    [_loadingBaseView addSubview:view1];
-    
-    UILabel *textLab = [[UILabel alloc] init];
-    textLab.text = @"全力加载中";
-    textLab.frame = CGRectMake(CGRectGetMinX(view1.frame), CGRectGetMaxY(view1.frame), CGRectGetWidth(view1.frame), 16);
-    textLab.textAlignment = NSTextAlignmentCenter;
-    textLab.textColor = [UIColor whiteColor];
-    textLab.font = [UIFont systemFontOfSize:14.0f];
-    [_loadingBaseView addSubview:textLab];
-    [view1 startAnimating];
-}
+//- (void)addLoadingBaseView
+//{
+//    _loadingBaseView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
+//    _loadingBaseView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.7];
+//    _loadingBaseView.hidden = YES;
+//    [self.window addSubview:_loadingBaseView];
+//    UIImageView *view1 = [[UIImageView alloc] initWithFrame:CGRectMake(0,0, 91, 95.5)];
+//    NSMutableArray * animateArray = [[NSMutableArray alloc]initWithCapacity:8];
+//    for (int i = 1; i <= 8 ; i++) {
+//        [animateArray addObject:[UIImage imageNamed:[NSString stringWithFormat:@"loading_%d",i]]];
+//    }
+//    view1.animationImages = animateArray;
+//    view1.animationRepeatCount = 0;
+//    view1.animationDuration = 0.8;//设置动画时间
+//    view1.center = _loadingBaseView.center;
+//    view1.backgroundColor = [UIColor clearColor];
+//    [_loadingBaseView addSubview:view1];
+//
+//    UILabel *textLab = [[UILabel alloc] init];
+//    textLab.text = @"全力加载中";
+//    textLab.frame = CGRectMake(CGRectGetMinX(view1.frame), CGRectGetMaxY(view1.frame), CGRectGetWidth(view1.frame), 16);
+//    textLab.textAlignment = NSTextAlignmentCenter;
+//    textLab.textColor = [UIColor whiteColor];
+//    textLab.font = [UIFont systemFontOfSize:14.0f];
+//    [_loadingBaseView addSubview:textLab];
+//    [view1 startAnimating];
+//}
 - (void)changeRootView
 {
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"islaunch"];
     [self showTabbarController];
-    [self addLoadingBaseView];
+//    [self addLoadingBaseView];
     //[self showGCode];
 }
     
@@ -820,7 +821,7 @@
 - (void)errorPost:(NSError*)err tag:(NSNumber*)tag
 {
     [MBProgressHUD displayHudError:@"网络连接异常"];
-#warning about supervise
+//#warning about supervise
     [self superviseSwitchWithState:YES];
 }
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -1031,8 +1032,6 @@
 
 - (void)getAdversementLift
 {
-
-    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSString *URL = [NSString stringWithFormat:@"https://fore.9888.cn/cms/api/appbanner.php?key=0ca175b9c0f726a831d895e&id=54"];
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
