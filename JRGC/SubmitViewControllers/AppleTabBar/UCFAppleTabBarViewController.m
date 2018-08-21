@@ -11,6 +11,8 @@
 #import "UCFAppleHomeViewController.h"
 #import "P2PWalletHelper.h"
 #import "UCFDiscoveryViewController.h"
+#import "BaseNavigationViewController.h"
+#import "UCFLoginViewController.h"
 @interface UCFAppleTabBarViewController ()<UITabBarControllerDelegate>
 @property (strong, nonatomic) UCFAppleHomeViewController *LatestView;
 @property (strong, nonatomic) UCFAppleMyViewController *mineView;
@@ -38,7 +40,7 @@
 {
     NSMutableArray *vcArray = [NSMutableArray array];
     NSArray *tabbarTitleArray = @[@"首页",
-                                  @"发现",
+                                  @"学堂",
                                   @"生活",
                                   @"我的"];
     
@@ -62,8 +64,8 @@
 
             case 1:{
                 UCFDiscoveryViewController *discoveryWeb = [[UCFDiscoveryViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
-                discoveryWeb.url      = DISCOVERYURL;//请求地址;
-                discoveryWeb.navTitle = @"发现";
+                discoveryWeb.url      = @"https://m.9888.cn/static/wap/topic-invest-school/index.html";//请求地址;
+                discoveryWeb.navTitle = @"学堂";
                 controller = discoveryWeb;
             }
                 break;
@@ -84,7 +86,7 @@
                 break;
         }
         if (controller) {
-            [vcArray addObject:[[UINavigationController alloc] initWithRootViewController:controller]];
+            [vcArray addObject:[[BaseNavigationViewController alloc] initWithRootViewController:controller]];
             UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:tabbarTitleArray[i] image:[[UIImage imageNamed:tabbarNormalArray[i]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:[[UIImage imageNamed:tabbarHighlightArray[i]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
             item.tag = i;
             controller.tabBarItem = item;
@@ -103,6 +105,30 @@
         [[UITabBar appearance] setShadowImage:[[UIImage alloc] init]];
     }
 }
+- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
+{
+    BaseNavigationViewController *contrl = (BaseNavigationViewController*)viewController;
+    [[NSUserDefaults standardUserDefaults] setValue:@"0" forKey:@"personCenterClick"];
+    UIViewController *topView = nil;
+    if (contrl.viewControllers.count != 0) {
+        topView = [contrl.viewControllers objectAtIndex:0];
+    }
 
+    if ([self.viewControllers indexOfObject:viewController] == 2) {
+        NSString *userId = [UserInfoSingle sharedManager].userId;
+        if(nil == userId) {
+            UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
+            BaseNavigationViewController *loginNaviController = [[BaseNavigationViewController alloc] initWithRootViewController:loginViewController];
+            loginViewController.sourceVC = @"homePage";
+            [self presentViewController:loginNaviController animated:YES completion:nil];
+            return NO;
+        } else {
+            return [[P2PWalletHelper sharedManager] checkUserHSStateCanOpenWallet];
+        }
+        
+        return YES;
+    }
+    return YES;
+}
 
 @end

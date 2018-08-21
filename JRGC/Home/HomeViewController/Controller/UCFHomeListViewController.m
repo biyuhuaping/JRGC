@@ -51,6 +51,7 @@
         UCFHomeListFooterView *footerView = (UCFHomeListFooterView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFHomeListFooterView" owner:self options:nil] lastObject];
         footerView.homeListTipLabel.text  = [UserInfoSingle sharedManager].isSubmitTime ? @"市场有风险  购买需谨慎":@"市场有风险  出借需谨慎";
         self.tableView.tableFooterView = footerView;
+        self.tableView.tableFooterView.clipsToBounds = YES;
         self.footerView = footerView;
         
         [self.tableView addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(refreshData)];

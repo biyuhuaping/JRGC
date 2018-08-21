@@ -32,6 +32,7 @@
         _isShowAdversement = YES;
     } else {
         _isShowAdversement = NO;
+        _isThreeSecondEnd = YES;
     }
     //显示广告
     if (_isShowAdversement) {
