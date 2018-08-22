@@ -794,7 +794,7 @@
             [MBProgressHUD displayHudError:@"此活动暂时未对企业用户开放"];
         }
         else{
-            if([self checkUserCanInvestIsDetail:YES type:SelectAccoutDefault])//判断是否开户
+            if([self checkUserCanInvestIsDetail:YES type:SelectAccoutTypeP2P])//判断是否开户
             {
                 [self.apiManager getUserIntoGoCoinPageHTTP];
             }
