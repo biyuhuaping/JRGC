@@ -14,6 +14,7 @@
 #import "UCFLoginViewController.h"
 #import "UCFWebViewJavascriptBridgeBanner.h"
 #import "P2PWalletHelper.h"
+#import "UCFWebViewJavascriptBridgeLoanDetails.h"
 @interface UCFAppleHomeViewController ()<UCFHomeListNavViewDelegate,UCFCycleImageViewControllerDelegate,UCFHomeListViewControllerDelegate>
 @property (nonatomic,strong)UCFHomeListNavView *navView;
 @property (nonatomic,strong)UCFCycleImageViewController * cycleImageVC;
@@ -111,7 +112,21 @@
 }
 - (void)homeList:(UCFHomeListViewController *)homeList tableView:(UITableView *)tableView didClickedWithModel:(UCFHomeListCellModel *)model withType:(UCFHomeListType)type
 {
+//    UCFWebViewJavascriptBridgeLoanDetails *loan = [[UCFWebViewJavascriptBridgeLoanDetails alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMallDetails" bundle:nil];
+//    loan.isHidenNavigationbar = YES;
+//    loan.url = @"https://static.gongchangp2p.com/pages/auditing/detail.html";
+//    [self.navigationController pushViewController:loan animated:YES];
     
+    
+    
+    UCFWebViewJavascriptBridgeBanner *webView = [[UCFWebViewJavascriptBridgeBanner alloc]initWithNibName:@"UCFWebViewJavascriptBridgeBanner" bundle:nil];
+    webView.rootVc = self.parentViewController;
+    webView.baseTitleType = @"lunbotuhtml";
+    webView.url = @"https://static.gongchangp2p.com/pages/auditing/detail.html";;
+//    webView.navTitle = modell.title;
+//    webView.dicForShare = modell;
+    [self.navigationController pushViewController:webView animated:YES];
+//
 }
 #pragma mark UCFHomeListNavViewDelegate
 - (void)homeListNavView:(UCFHomeListNavView *)navView didClicked:(UIButton *)loginAndRegister
