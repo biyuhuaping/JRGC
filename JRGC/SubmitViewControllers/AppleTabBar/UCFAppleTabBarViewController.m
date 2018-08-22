@@ -64,7 +64,7 @@
 
             case 1:{
                 UCFDiscoveryViewController *discoveryWeb = [[UCFDiscoveryViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
-                discoveryWeb.url      = @"https://m.9888.cn/static/wap/topic-invest-school/index.html";//请求地址;
+                discoveryWeb.url      = @"https://m.9888.cn/static/wap/invest/index.html#/topic/newSchool";//请求地址;
                 discoveryWeb.navTitle = @"学堂";
                 controller = discoveryWeb;
             }
