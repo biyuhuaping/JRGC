@@ -89,7 +89,7 @@
         return;
     }
     
-    NSArray *arr = [NSArray arrayWithObjects:@".9888.cn",@"m.dougemall.com",@".9888keji.com",@".gongchangp2p.cn",@".gongchangzx.com",@".gongchangp2p.com", nil];
+    NSArray *arr = [NSArray arrayWithObjects:@".9888.cn",@"m.dougemall.com",@".9888keji.com",@".gongchangp2p.cn",@".gongchangzx.com",@".gongchangp2p.com",@"m.jiabeibc.com", nil];
     [self addWebViewCookie:value WithYUArr:arr];
 }
 + (void)addTestCookies
