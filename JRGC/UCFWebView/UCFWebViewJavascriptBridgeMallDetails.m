@@ -8,6 +8,9 @@
 
 #import "UCFWebViewJavascriptBridgeMallDetails.h"
 #import "UCFWebViewJavascriptBridgeMall.h"
+#import "UIDic+Safe.h"
+#import "UCFLoginViewController.h"
+#import "NSString+Misc.h"
 @interface UCFWebViewJavascriptBridgeMallDetails ()
 
 @end
@@ -104,5 +107,58 @@
     }
     self.errorView.hidden = NO;
     
+}
+- (void)jumpLogin
+{
+    UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
+    loginViewController.sourceVC = @"webViewLongin";
+    UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
+    [self presentViewController:loginNaviController animated:YES completion:nil];
+}
+
+-(void)webViewReload
+{
+   
+        NSDictionary *encryptParamDic = @{
+                                          @"userId": [[NSUserDefaults standardUserDefaults] valueForKey:UUID]                 //用户id
+                                          };
+        [[NetworkModule sharedNetworkModule] newPostReq:encryptParamDic tag:kSXTagIntoCoinPage owner:self signature:YES Type:SelectAccoutTypeP2P];
+}
+//开始请求
+- (void)beginPost:(kSXTag)tag
+{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+}
+
+//请求成功及结果
+- (void)endPost:(id)result tag:(NSNumber *)tag
+{
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    NSMutableDictionary *dic = [result objectFromJSONString];
+    id ret = dic[@"ret"];
+    NSString *messageStr = [dic objectSafeForKey:@"message"];
+    if (tag.intValue == kSXTagIntoCoinPage)
+    {
+        if ([ret boolValue])
+        {
+            NSDictionary *coinRequestDicData = [[dic objectSafeDictionaryForKey:@"data"] objectSafeDictionaryForKey:@"coinRequest"];
+            NSDictionary *paramDict = [coinRequestDicData objectSafeDictionaryForKey:@"param"];
+            NSMutableDictionary *data =  [[NSMutableDictionary alloc]initWithDictionary:@{}];
+            [data setValue:[NSString urlEncodeStr:[paramDict objectSafeForKey:@"encryptParam"]] forKey:@"encryptParam"];
+            [data setObject:[paramDict objectSafeForKey:@"fromApp"] forKey:@"fromApp"];
+            [data setObject:[paramDict objectSafeForKey:@"userId"] forKey:@"userId"];
+            NSString * requestStr = [Common getParameterByDictionary:data];
+            NSString *webUrl  = [NSString stringWithFormat:@"%@/#/?%@",[coinRequestDicData objectSafeForKey:@"urlPath"],requestStr];
+            [self gotoURL:webUrl];
+        }else{
+            [AuxiliaryFunc showToastMessage:messageStr withView:self.view];
+        }
+    }
+}
+//请求失败
+- (void)errorPost:(NSError*)err tag:(NSNumber*)tag
+{
+    [MBProgressHUD displayHudError:err.userInfo[@"NSLocalizedDescription"]];
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
 }
 @end

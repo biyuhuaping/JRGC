@@ -63,4 +63,5 @@
 - (void)addErrorViewButton;
 -(void)addProgressView;
 - (void)addRefresh;
+- (void)jumpLogin;
 @end
