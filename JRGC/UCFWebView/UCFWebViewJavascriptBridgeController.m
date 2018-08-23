@@ -443,6 +443,10 @@
         else if ([nativeData[@"action"] isEqualToString:@"shareImage"]) {// shareImage 分享图片
             [weakSelf goToShareImage:nativeData];
         }
+        else if ([nativeData[@"action"] isEqualToString:@"glLogin"])
+        {
+            [self jumpLogin];
+        }
         
         //----------------------------------------------------------------------------------------------------qyy
         

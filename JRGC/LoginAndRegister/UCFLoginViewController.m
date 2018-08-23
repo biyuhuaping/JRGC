@@ -210,8 +210,8 @@
                     [del.tabBarController setSelectedIndex:4];
                     UINavigationController *contoller = (UINavigationController*)del.tabBarController.selectedViewController;
                     [contoller popToRootViewControllerAnimated:YES];
-                    //切换用户重新请求放心花页面
-                    [[NSNotificationCenter defaultCenter] postNotificationName:IS_RELOADE_URL object:nil];
+//                    //切换用户重新请求放心花页面
+//                    [[NSNotificationCenter defaultCenter] postNotificationName:IS_RELOADE_URL object:nil];
                 } else {
                     _sameUser = YES;
                     //同一个用户
@@ -249,7 +249,7 @@
             //登录成功检测一次红点
             [[NSNotificationCenter defaultCenter] postNotificationName:CHECK_RED_POINT object:nil];
             [[NSNotificationCenter defaultCenter] postNotificationName:REGIST_JPUSH object:nil];
-            [self sendiWatchData:signatureStr withGcm:gcmCode];//登录成功之后向iWatch发送数据
+//            [self sendiWatchData:signatureStr withGcm:gcmCode];//登录成功之后向iWatch发送数据
             [Common addTestCookies];//app审核用的灰度
         } else {
             
