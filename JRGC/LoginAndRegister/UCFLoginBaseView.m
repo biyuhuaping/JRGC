@@ -30,19 +30,39 @@
         _baseImageView = [[UIImageView alloc] initWithFrame:frame];
         _baseImageView.backgroundColor = [UIColor whiteColor];
         _baseImageView.userInteractionEnabled = YES;
-        NSString *imageURL = [[NSUserDefaults standardUserDefaults] valueForKey:@"LoginImageUrl"];
-        NSString *imageName = @"";
-        if (ScreenHeight == 480) {
-            imageName = @"login_bg_phone4_default.png";
-        } else if (ScreenHeight == 812) {
-            imageName = @"login_bg_iphoneX.png";
-        } else {
-            imageName = @"login_bg_default.png";
+        
+        
+         NSString *imageName = @"";
+        if ([UserInfoSingle sharedManager].isSubmitTime)
+        {
+            if (ScreenHeight == 480) {
+                imageName = @"appleLogin_bg_iphone4_default.png";
+            } else if (ScreenHeight == 812) {
+                imageName = @"appleLogin_bg_iphoneX.png";
+            } else {
+                imageName = @"appleLogin_bg_default.png";
+            }
+            
+            UIImage *imageData = [UIImage imageNamed:imageName];
+            _baseImageView.image = imageData;
         }
+        else{
+                NSString *imageURL = [[NSUserDefaults standardUserDefaults] valueForKey:@"LoginImageUrl"];
+    
+                if (ScreenHeight == 480) {
+                    imageName = @"login_bg_phone4_default.png";
+                } else if (ScreenHeight == 812) {
+                    imageName = @"login_bg_iphoneX.png";
+                } else {
+                    imageName = @"login_bg_default.png";
+                }
 
-        UIImage *imageData = [UIImage imageNamed:imageName];
-        [_baseImageView sd_setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:imageData];
+                UIImage *imageData = [UIImage imageNamed:imageName];
+                [_baseImageView sd_setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:imageData];
+            
+        }
         [self addSubview:_baseImageView];
+            
         
 //        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(login:)];
 //        [_baseImageView addGestureRecognizer:tap];

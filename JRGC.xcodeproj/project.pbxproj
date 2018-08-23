@@ -781,6 +781,9 @@
 		83DFC9461FB0102A002999CA /* UCFDrawGoldViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DFC9441FB0102A002999CA /* UCFDrawGoldViewController.m */; };
 		83DFC9471FB0102A002999CA /* UCFDrawGoldViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83DFC9451FB0102A002999CA /* UCFDrawGoldViewController.xib */; };
 		83E3F7A51F3C35C500286550 /* jrgcuserxieyi.docx in Resources */ = {isa = PBXBuildFile; fileRef = 83E3F7A41F3C35C500286550 /* jrgcuserxieyi.docx */; };
+		83E68C5F212EC7A7003BA282 /* appleLogin_bg_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 83E68C5C212EC7A4003BA282 /* appleLogin_bg_default.png */; };
+		83E68C60212EC7A7003BA282 /* appleLogin_bg_iphone4_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 83E68C5D212EC7A5003BA282 /* appleLogin_bg_iphone4_default.png */; };
+		83E68C61212EC7A7003BA282 /* appleLogin_bg_iphoneX.png in Resources */ = {isa = PBXBuildFile; fileRef = 83E68C5E212EC7A5003BA282 /* appleLogin_bg_iphoneX.png */; };
 		83E780721F38004400A400CE /* UCFGoldCouponCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E780701F38004400A400CE /* UCFGoldCouponCell.m */; };
 		83E780731F38004400A400CE /* UCFGoldCouponCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83E780711F38004400A400CE /* UCFGoldCouponCell.xib */; };
 		83EB21E21D758EE50069EF95 /* UCFCashRecordListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83EB21E01D758EE50069EF95 /* UCFCashRecordListViewController.m */; };
@@ -2385,6 +2388,9 @@
 		83DFC9441FB0102A002999CA /* UCFDrawGoldViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFDrawGoldViewController.m; sourceTree = "<group>"; };
 		83DFC9451FB0102A002999CA /* UCFDrawGoldViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFDrawGoldViewController.xib; sourceTree = "<group>"; };
 		83E3F7A41F3C35C500286550 /* jrgcuserxieyi.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = jrgcuserxieyi.docx; sourceTree = "<group>"; };
+		83E68C5C212EC7A4003BA282 /* appleLogin_bg_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = appleLogin_bg_default.png; sourceTree = "<group>"; };
+		83E68C5D212EC7A5003BA282 /* appleLogin_bg_iphone4_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = appleLogin_bg_iphone4_default.png; sourceTree = "<group>"; };
+		83E68C5E212EC7A5003BA282 /* appleLogin_bg_iphoneX.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = appleLogin_bg_iphoneX.png; sourceTree = "<group>"; };
 		83E7806F1F38004400A400CE /* UCFGoldCouponCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFGoldCouponCell.h; sourceTree = "<group>"; };
 		83E780701F38004400A400CE /* UCFGoldCouponCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFGoldCouponCell.m; sourceTree = "<group>"; };
 		83E780711F38004400A400CE /* UCFGoldCouponCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFGoldCouponCell.xib; sourceTree = "<group>"; };
@@ -5626,6 +5632,9 @@
 		7BFE3EB01AC56356002A53A2 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				83E68C5C212EC7A4003BA282 /* appleLogin_bg_default.png */,
+				83E68C5D212EC7A5003BA282 /* appleLogin_bg_iphone4_default.png */,
+				83E68C5E212EC7A5003BA282 /* appleLogin_bg_iphoneX.png */,
 				A8DAEACF1FD929880088AF70 /* assets.png */,
 				A85C74D81F90EA5400DF7D6A /* index_tenMonthHunt.jpg */,
 				A85C74D61F90EA4500DF7D6A /* home_icon_gold.png */,
@@ -7315,6 +7324,7 @@
 				7443C73D1F1F3E7D009669C0 /* UCFGoldCashRecordCell.xib in Resources */,
 				83AA72B3212BC68100F7FA10 /* UCFAppleMyViewHeaderView.xib in Resources */,
 				FBEDF1E01CB5171500116E12 /* MyViewController.xib in Resources */,
+				83E68C61212EC7A7003BA282 /* appleLogin_bg_iphoneX.png in Resources */,
 				A851F34A1F132739003DE8B8 /* UCFGoldTransactionHeadView.xib in Resources */,
 				A8898DC41FBD32500064494B /* ServiceChargeView1.xib in Resources */,
 				840A794B1C2A80B60059A946 /* UCFMessageSettingViewController.xib in Resources */,
@@ -7414,6 +7424,7 @@
 				83CD84351F13A50800227704 /* UCFP2PViewController.xib in Resources */,
 				74673BC71FEB923A00AF3727 /* UCFMIneFuncCollectCell.xib in Resources */,
 				74702BC01FB5599700CBB655 /* UCFExtractGoldCell.xib in Resources */,
+				83E68C60212EC7A7003BA282 /* appleLogin_bg_iphone4_default.png in Resources */,
 				833603CE1D928F9200C3E435 /* UCFWithdrawCashResultWebView.xib in Resources */,
 				746748D21F3C53310067294D /* UCFBankLimitViewController.xib in Resources */,
 				7477BF9B1AFB19B200914BFB /* UCFNormalRedEnvelopeTableViewCell.xib in Resources */,
@@ -7516,6 +7527,7 @@
 				744B9EDB1F0B8E9A00440FBA /* UCFCalendarDayCell.xib in Resources */,
 				33E1A5E220FDC5A9008244BD /* UCFRedBagViewController.xib in Resources */,
 				74BDA9991F09F6F10054403F /* UCFCalendarHeaderView.xib in Resources */,
+				83E68C5F212EC7A7003BA282 /* appleLogin_bg_default.png in Resources */,
 				74FD355C1ADF58710083D52C /* UCFSettingMainCell.xib in Resources */,
 				7443C7291F1EFF61009669C0 /* UCFGoldCashTwoCell.xib in Resources */,
 				74877CC41FB2A9AB00F32428 /* UCFGoldAllViewController.xib in Resources */,
