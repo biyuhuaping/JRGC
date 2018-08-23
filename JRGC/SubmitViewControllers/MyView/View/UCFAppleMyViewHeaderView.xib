@@ -160,6 +160,7 @@
                         <constraint firstItem="AP8-6p-eqr" firstAttribute="top" secondItem="fN5-l9-Wfa" secondAttribute="top" constant="20" id="YqK-Lc-ULa"/>
                         <constraint firstItem="LMW-Os-8EJ" firstAttribute="leading" secondItem="w0g-QB-oaQ" secondAttribute="trailing" constant="2" id="ZQQ-R8-iAo"/>
                         <constraint firstItem="WLA-gs-wse" firstAttribute="leading" secondItem="fN5-l9-Wfa" secondAttribute="leading" constant="15" id="b4E-L3-TQM"/>
+                        <constraint firstItem="f6f-4Y-HYP" firstAttribute="top" secondItem="fN5-l9-Wfa" secondAttribute="top" constant="64" id="dct-cd-eyk"/>
                         <constraint firstAttribute="bottom" secondItem="SLE-EJ-K6v" secondAttribute="bottom" id="evI-N1-a2J"/>
                         <constraint firstAttribute="trailing" secondItem="LMW-Os-8EJ" secondAttribute="trailing" constant="220" id="hKO-IQ-xU2"/>
                         <constraint firstAttribute="bottom" secondItem="WLA-gs-wse" secondAttribute="bottom" constant="10" id="sUA-56-n2l"/>
@@ -224,6 +225,6 @@
         <image name="account_invisible" width="25" height="25"/>
         <image name="account_visible" width="25" height="25"/>
         <image name="user_bg" width="375" height="135"/>
-        <image name="user_icon_head_male" width="44" height="44"/>
+        <image name="user_icon_head_male" width="80" height="80"/>
     </resources>
 </document>

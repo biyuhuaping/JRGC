@@ -18,7 +18,7 @@
 #import "MJRefresh.h"
 @interface UCFAppleMyViewController ()<UITableViewDataSource,UITableViewDelegate,UCFMineHeaderViewDelegate,UIAlertViewDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topConstraint;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *topConstraint;
 @property (strong,nonatomic)NSMutableArray *itemsDataArray;
 @property (strong,nonatomic)UCFAppleMyViewHeaderView *myHeaderView;
 @property (strong, nonatomic) UCFLoginBaseView  *loginView;
@@ -58,14 +58,13 @@
 {
 #ifdef __IPHONE_11_0
     if (@available(iOS 11.0, *)) {
-//        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-        self.topConstraint.constant = - 64;
+        
+//        self.topConstraint.constant = -32;
     } else {
         self.topConstraint.constant = - 20;
     }
 #endif
-
-    self.topConstraint.constant = -20;
+    
     UCFSettingItem *P2PAccout = [UCFSettingItem  itemWithIcon:@"uesr_icon_wj" WithTitle:@"微金账户" withSubtitle:@"0.00"];
     
     UCFSettingItem *contactUs = [UCFSettingArrowItem itemWithIcon:nil title:@"客服电话" destVcClass:nil];
@@ -91,10 +90,7 @@
     [self.tableView reloadData];
     
     
-    UCFAppleMyViewHeaderView *myHeaderView = (UCFAppleMyViewHeaderView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFAppleMyViewHeaderView" owner:self options:nil] firstObject];
-    self.tableView.tableHeaderView = myHeaderView;
-    self.tableView.backgroundColor = UIColorWithRGB(0xebebee);
-    self.myHeaderView = myHeaderView;
+   
     
     [self.tableView addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(getAssetFromNet)];
     
@@ -162,7 +158,20 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 0.01;
+    
+    return section == 0 ?  200 : 0.01f;
+}
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    if (section == 0) {
+        UCFAppleMyViewHeaderView *myHeaderView = (UCFAppleMyViewHeaderView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFAppleMyViewHeaderView" owner:self options:nil] firstObject];
+        //    self.tableView.tableHeaderView = myHeaderView;
+        self.tableView.backgroundColor = UIColorWithRGB(0xebebee);
+        self.myHeaderView = myHeaderView;
+        return myHeaderView;
+    }
+    
+    return nil;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
