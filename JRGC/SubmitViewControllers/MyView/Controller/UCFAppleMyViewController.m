@@ -14,8 +14,11 @@
 #import "AppDelegate.h"
 #import "FullWebViewController.h"
 #import "UCFLoginBaseView.h"
+#import "UCFUserAssetModel.h"
+#import "MJRefresh.h"
 @interface UCFAppleMyViewController ()<UITableViewDataSource,UITableViewDelegate,UCFMineHeaderViewDelegate,UIAlertViewDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topConstraint;
 @property (strong,nonatomic)NSMutableArray *itemsDataArray;
 @property (strong,nonatomic)UCFAppleMyViewHeaderView *myHeaderView;
 @property (strong, nonatomic) UCFLoginBaseView  *loginView;
@@ -53,7 +56,17 @@
 
 -(void)infoCreateView
 {
-    UCFSettingItem *P2PAccout = [UCFSettingItem  itemWithIcon:@"uesr_icon_wj" WithTitle:@"微金账户" withSubtitle:@"10.01"];
+#ifdef __IPHONE_11_0
+    if (@available(iOS 11.0, *)) {
+//        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        self.topConstraint.constant = - 64;
+    } else {
+        self.topConstraint.constant = - 20;
+    }
+#endif
+
+    self.topConstraint.constant = -20;
+    UCFSettingItem *P2PAccout = [UCFSettingItem  itemWithIcon:@"uesr_icon_wj" WithTitle:@"微金账户" withSubtitle:@"0.00"];
     
     UCFSettingItem *contactUs = [UCFSettingArrowItem itemWithIcon:nil title:@"客服电话" destVcClass:nil];
     contactUs.subtitle = @"400-6766-988";
@@ -79,10 +92,14 @@
     
     
     UCFAppleMyViewHeaderView *myHeaderView = (UCFAppleMyViewHeaderView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFAppleMyViewHeaderView" owner:self options:nil] firstObject];
-//    mineHeader.delegate = self;
     self.tableView.tableHeaderView = myHeaderView;
     self.tableView.backgroundColor = UIColorWithRGB(0xebebee);
     self.myHeaderView = myHeaderView;
+    
+    [self.tableView addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(getAssetFromNet)];
+    
+    [self.tableView.header beginRefreshing];
+    
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView;
 {
@@ -241,10 +258,10 @@
             [self.navigationController pushViewController:webView animated:YES];
             return ;
         }
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:arrowItem.mainStoryBoardStr bundle:nil];
-        UCFBaseViewController *vc = [storyboard instantiateViewControllerWithIdentifier:arrowItem.storyId];
-        vc.title = arrowItem.title;
-        [self.navigationController pushViewController:vc animated:YES];
+//        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:arrowItem.mainStoryBoardStr bundle:nil];
+//        UCFBaseViewController *vc = [storyboard instantiateViewControllerWithIdentifier:arrowItem.storyId];
+//        vc.title = arrowItem.title;
+//        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 - (void)didReceiveMemoryWarning {
@@ -262,11 +279,7 @@
 {
     if (alertView.tag == 10000) {
         if (buttonIndex == 1) {
-//            NSString *useridstr = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
-//            NSDictionary *strParameters = [NSDictionary dictionaryWithObjectsAndKeys:useridstr,@"userId",nil];
-//            [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagUserLogout owner:self signature:YES Type:SelectAccoutDefault];
-            
-            //            [[UCFSession sharedManager] transformBackgroundWithUserInfo:nil withState:UCFSessionStateUserLogout];
+
             [[UserInfoSingle sharedManager] removeUserInfo];
             [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"changScale"];
             [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isVisible"];
@@ -292,14 +305,64 @@
     }
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)getAssetFromNet
+{
+    NSString *userId = [UserInfoSingle sharedManager].userId;
+    if (!userId) {
+        return;
+    }
+    [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":userId} tag:kSXTagMyReceipt owner:self signature:YES Type:SelectAccoutDefault];
 }
-*/
+
+-(void)beginPost:(kSXTag)tag
+{
+    [MBProgressHUD showOriginHUDAddedTo:self.view animated:YES];
+}
+- (void)endPost:(id)result tag:(NSNumber *)tag
+{
+
+    [MBProgressHUD hideOriginAllHUDsForView:self.view animated:YES];
+    NSMutableDictionary *dic = [result objectFromJSONString];
+    NSString *rstcode = dic[@"ret"];
+    NSString *rsttext = dic[@"message"];
+    if (tag.intValue == kSXTagMyReceipt) {
+        
+        if ([rstcode intValue] == 1) {
+            
+            NSDictionary *resultData = [dic objectSafeDictionaryForKey:@"data"];
+            if ([[NSUserDefaults standardUserDefaults] valueForKey:UUID]) {
+                NSString *oepnState =  [resultData objectSafeForKey:@"openStatus"];
+                [UserInfoSingle sharedManager].openStatus = [oepnState integerValue];
+                NSString *zxOpenState = [resultData objectSafeForKey:@"zxOpenStatus"];
+                [UserInfoSingle sharedManager].enjoyOpenStatus = [zxOpenState integerValue];
+                NSString *nmGoldAuthorization = [resultData objectSafeForKey:@"nmGoldAuthorization"];
+                [UserInfoSingle sharedManager].goldAuthorization = [nmGoldAuthorization integerValue];
+                BOOL isCompanyAgent = [[resultData objectSafeForKey:@"isCompanyAgent"] boolValue];
+                [UserInfoSingle sharedManager].companyAgent = isCompanyAgent;
+            }
+            
+            UCFUserAssetModel *userAsset = [UCFUserAssetModel userAssetWithDict:resultData];
+            
+            self.myHeaderView.userAssetModel = userAsset;
+            UCFSettingGroup *group = [self.itemsDataArray firstObject];
+            UCFSettingItem *item = [group.items firstObject];
+            item.subtitle = userAsset.p2pInterests;
+            [self.tableView reloadData];
+        }else {
+            
+            [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
+        }
+    }
+    if ([self.tableView.header isRefreshing])
+    {
+        [self.tableView.header endRefreshing];
+    }
+}
+-(void)errorPost:(NSError*)err tag:(NSNumber*)tag
+{
+    [MBProgressHUD displayHudError:err.userInfo[@"NSLocalizedDescription"]];
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    
+}
 
 @end

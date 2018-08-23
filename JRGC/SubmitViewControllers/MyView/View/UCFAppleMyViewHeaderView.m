@@ -29,7 +29,7 @@
 
 - (void)awakeFromNib
 {
-//    [super awakeFromNib];
+    [super awakeFromNib];
 //
 //    self.messageDotView.backgroundColor = UIColorWithRGB(0xfd4d4c);
 //    self.downView.backgroundColor = UIColorWithRGB(0x1D0D34);
@@ -129,6 +129,7 @@
         self.addedProfitLabel.text = self.userAssetModel.historyInterests.length > 0 ? [NSString stringWithFormat:@"¥%@", self.userAssetModel.historyInterests] : @"¥0.00";
         self.totalBalanceLabel.text = self.userAssetModel.cashBalance.length > 0 ? [NSString stringWithFormat:@"¥%@", self.userAssetModel.cashBalance] : @"¥0.00";
     }
+     self.userNameLabel.text = [UserInfoSingle sharedManager].realName.length > 0 ? [UserInfoSingle sharedManager].realName : @"未认证";
 }
 
 - (void)setUserBenefitModel:(UCFUserBenefitModel *)userBenefitModel

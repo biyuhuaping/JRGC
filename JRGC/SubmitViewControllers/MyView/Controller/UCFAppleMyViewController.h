@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface UCFAppleMyViewController : UIViewController
+#import "UCFBaseViewController.h"
+@interface UCFAppleMyViewController : UCFBaseViewController
 
 @end
