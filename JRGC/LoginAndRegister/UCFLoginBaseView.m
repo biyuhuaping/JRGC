@@ -129,6 +129,9 @@
     UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:registerControler] ;
     AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
     UINavigationController *nav = app.tabBarController.selectedViewController ;
+    if ([UserInfoSingle sharedManager].isSubmitTime) {
+        nav = (UINavigationController *)app.window.rootViewController;
+    }
     [nav presentViewController:loginNaviController animated:YES completion:nil];
 }
 - (void)login:(UITapGestureRecognizer *)tap
@@ -156,6 +159,11 @@
     moreVC.sourceVC = @"UCFSecurityCenterViewController";
     AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
     UINavigationController *nav = app.tabBarController.selectedViewController;
+    if ([UserInfoSingle sharedManager].isSubmitTime)
+    {
+       UITabBarController *tabBar = (UITabBarController *)app.window.rootViewController;
+       nav= [tabBar.viewControllers objectAtIndex:3];
+    }
     [nav pushViewController:moreVC  animated:YES];
 }
 @end
