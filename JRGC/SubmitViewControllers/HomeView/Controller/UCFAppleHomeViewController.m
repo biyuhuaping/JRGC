@@ -34,7 +34,8 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUI:) name:@"refreshHomeData" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUI:) name:@"getPersonalCenterNetData" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setDefaultState:) name:@"setDefaultViewData" object:nil];
@@ -64,7 +65,11 @@
     
     [self addChildViewController:self.cycleImageVC];
 }
+
 - (void)addUI {
+    
+    
+    
     self.homeListVC.tableView.frame = CGRectMake(0, 0, SCREEN_WIDTH, ScreenHeight-49);
     self.homeListVC.tableView.tableFooterView.frame = CGRectMake(0, 0, ScreenWidth, 0.01);
     CGFloat cycleImageViewHeight = [UCFCycleImageViewController viewHeight];
@@ -80,7 +85,6 @@
         self.navView.giftButton.hidden = YES;
         self.navView.loginAndRegisterButton.hidden = NO;
     }
-    //        self.navView.frame = CGRectMake(0, 0, self.view.width,64);
     self.navView.frame = CGRectMake(0, 0, self.view.width,[[UIApplication sharedApplication] statusBarFrame].size.height +  44);
     [self.view bringSubviewToFront:self.navView];
 #ifdef __IPHONE_11_0
@@ -112,21 +116,12 @@
 }
 - (void)homeList:(UCFHomeListViewController *)homeList tableView:(UITableView *)tableView didClickedWithModel:(UCFHomeListCellModel *)model withType:(UCFHomeListType)type
 {
-//    UCFWebViewJavascriptBridgeLoanDetails *loan = [[UCFWebViewJavascriptBridgeLoanDetails alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMallDetails" bundle:nil];
-//    loan.isHidenNavigationbar = YES;
-//    loan.url = @"https://static.gongchangp2p.com/pages/auditing/detail.html";
-//    [self.navigationController pushViewController:loan animated:YES];
-    
-    
-    
     UCFWebViewJavascriptBridgeBanner *webView = [[UCFWebViewJavascriptBridgeBanner alloc]initWithNibName:@"UCFWebViewJavascriptBridgeBanner" bundle:nil];
     webView.rootVc = self.parentViewController;
     webView.baseTitleType = @"lunbotuhtml";
-    webView.url = @"https://static.gongchangp2p.com/pages/auditing/detail.html";;
-//    webView.navTitle = modell.title;
-//    webView.dicForShare = modell;
+    webView.url = @"https://static.9888.cn/pages/auditing/detail.html";;
     [self.navigationController pushViewController:webView animated:YES];
-//
+    
 }
 #pragma mark UCFHomeListNavViewDelegate
 - (void)homeListNavView:(UCFHomeListNavView *)navView didClicked:(UIButton *)loginAndRegister
