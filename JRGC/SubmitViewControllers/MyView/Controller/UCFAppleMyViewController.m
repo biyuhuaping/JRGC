@@ -16,7 +16,7 @@
 #import "UCFLoginBaseView.h"
 #import "UCFUserAssetModel.h"
 #import "MJRefresh.h"
-@interface UCFAppleMyViewController ()<UITableViewDataSource,UITableViewDelegate,UCFMineHeaderViewDelegate,UIAlertViewDelegate>
+@interface UCFAppleMyViewController ()<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *topConstraint;
 @property (strong,nonatomic)NSMutableArray *itemsDataArray;
@@ -318,6 +318,10 @@
 {
     NSString *userId = [UserInfoSingle sharedManager].userId;
     if (!userId) {
+        if ([self.tableView.header isRefreshing])
+        {
+            [self.tableView.header endRefreshing];
+        }
         return;
     }
     [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":userId} tag:kSXTagMyReceipt owner:self signature:YES Type:SelectAccoutDefault];
@@ -355,7 +359,7 @@
             self.myHeaderView.userAssetModel = userAsset;
             UCFSettingGroup *group = [self.itemsDataArray firstObject];
             UCFSettingItem *item = [group.items firstObject];
-            item.subtitle = userAsset.p2pInterests;
+            item.subtitle = userAsset.p2pCashBalance;
             [self.tableView reloadData];
         }else {
             
@@ -372,6 +376,10 @@
     [MBProgressHUD displayHudError:err.userInfo[@"NSLocalizedDescription"]];
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     
+    if ([self.tableView.header isRefreshing])
+    {
+        [self.tableView.header endRefreshing];
+    }
 }
 
 @end
