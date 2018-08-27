@@ -69,8 +69,12 @@ static NSString * const kAppSecret = @"10dddec2bf7d3be794eda13b0df0a7d9";
         
         
         UCFSettingGroup *group1 = [[UCFSettingGroup alloc] init];
-        group1.items = [[NSMutableArray alloc]initWithArray: @[aboutUs,faq]];
-        
+        if([UserInfoSingle sharedManager].isSubmitTime)
+        {
+           group1.items = [[NSMutableArray alloc]initWithArray: @[aboutUs]];
+        }else{
+           group1.items = [[NSMutableArray alloc]initWithArray: @[aboutUs,faq]];
+        }
         UCFSettingGroup *group2 = [[UCFSettingGroup alloc] init];
         group2.items = [[NSMutableArray alloc]initWithArray: @[contactUs,weixinNumber,companyNet]];
         

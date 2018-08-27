@@ -43,7 +43,7 @@
                         <color key="textColor" red="0.99215686270000003" green="0.30196078430000001" blue="0.29803921570000003" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="list_icon_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="LdL-lf-tvr">
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="list_icon_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="LdL-lf-tvr">
                         <rect key="frame" x="297" y="23" width="8" height="13"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="13" id="WT3-YC-IqZ"/>
