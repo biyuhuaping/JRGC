@@ -813,7 +813,16 @@
         [self.navigationController pushViewController:feedBackVC animated:YES];
     }
     else   if ([title isEqualToString:@"签到"]){
-        [self.apiManager signWithToken:self.benefitModel.userCenterTicket];
+        if([UserInfoSingle sharedManager].companyAgent)//如果是机构用户
+        {//吐司：此活动暂时未对企业用户开放
+            [MBProgressHUD displayHudError:@"此活动暂时未对企业用户开放"];
+        }
+        else{
+            if([self checkUserCanInvestIsDetail:YES type:SelectAccoutTypeP2P])
+            {
+              [self.apiManager signWithToken:self.benefitModel.userCenterTicket];
+            }
+        }
     }
     else  if ([title isEqualToString:@"联系我们"]){//邀请返利
         NSString *teleNo = nil;
