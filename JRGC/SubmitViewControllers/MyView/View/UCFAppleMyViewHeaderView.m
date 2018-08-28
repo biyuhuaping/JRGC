@@ -11,17 +11,17 @@
 #import "UCFUserAssetModel.h"
 
 @interface UCFAppleMyViewHeaderView ()
-@property (weak, nonatomic) IBOutlet UIImageView *userIconImageView;
-@property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
-@property (weak, nonatomic) IBOutlet UIView *memberLevelView;
-@property (weak, nonatomic) IBOutlet UILabel *userLevelLabel;
-@property (weak, nonatomic) IBOutlet UILabel *totalAssetLabel;
-@property (weak, nonatomic) IBOutlet UILabel *addedProfitLabel;
-@property (weak, nonatomic) IBOutlet UILabel *totalBalanceLabel;
-@property (weak, nonatomic) IBOutlet UIButton *visibleButton;
+@property (strong, nonatomic) IBOutlet UIImageView *userIconImageView;
+@property (strong, nonatomic) IBOutlet UILabel *userNameLabel;
+@property (strong, nonatomic) IBOutlet UIView *memberLevelView;
+@property (strong, nonatomic) IBOutlet UILabel *userLevelLabel;
+@property (strong, nonatomic) IBOutlet UILabel *totalAssetLabel;
+@property (strong, nonatomic) IBOutlet UILabel *addedProfitLabel;
+@property (strong, nonatomic) IBOutlet UILabel *totalBalanceLabel;
+@property (strong, nonatomic) IBOutlet UIButton *visibleButton;
 @property (weak, nonatomic) IBOutlet UIView *messageDotView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *userLevelW;
-@property (weak, nonatomic) IBOutlet UIView *downView;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *userLevelW;
+@property (strong, nonatomic) IBOutlet UIView *downView;
 
 @end
 
@@ -118,7 +118,6 @@
 - (void)setUserAssetModel:(UCFUserAssetModel *)userAssetModel
 {
     _userAssetModel = userAssetModel;
-//    [self setNeedsLayout];
     if (self.visibleButton.selected) {
         self.totalAssetLabel.text = @"***";
         self.addedProfitLabel.text = @"***";
@@ -130,6 +129,11 @@
         self.totalBalanceLabel.text = self.userAssetModel.cashBalance.length > 0 ? [NSString stringWithFormat:@"¥%@", self.userAssetModel.cashBalance] : @"¥0.00";
     }
      self.userNameLabel.text = [UserInfoSingle sharedManager].realName.length > 0 ? [UserInfoSingle sharedManager].realName : @"未认证";
+}
+
+-(void)layoutSubviews{
+    [super layoutSubviews];
+    [self setUserAssetModel:self.userAssetModel];
 }
 
 - (void)setUserBenefitModel:(UCFUserBenefitModel *)userBenefitModel
@@ -162,27 +166,6 @@
     }
     else {
         self.messageDotView.hidden = YES;
-    }
-}
-
-- (void)setDefaultState {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        self.memberLevelView.hidden = YES;
-        self.userIconImageView.image = [UIImage imageNamed:@"user_icon_head_male"];
-        self.userNameLabel.text = @"未认证";
-        self.userLevelLabel.text = @"普通会员";
-        self.userLevelW.constant = 49.0;
-    });
-    
-    if (self.visibleButton.selected) {
-        self.totalAssetLabel.text = @"***";
-        self.addedProfitLabel.text = @"***";
-        self.totalBalanceLabel.text = @"***";
-    }
-    else {
-        self.totalAssetLabel.text = @"¥0.00";
-        self.addedProfitLabel.text = @"¥0.00";
-        self.totalBalanceLabel.text = @"¥0.00";
     }
 }
 
