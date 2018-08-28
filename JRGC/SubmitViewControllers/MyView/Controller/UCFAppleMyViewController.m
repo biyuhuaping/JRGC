@@ -22,6 +22,7 @@
 @property (strong,nonatomic)NSMutableArray *itemsDataArray;
 @property (strong,nonatomic)UCFAppleMyViewHeaderView *myHeaderView;
 @property (strong, nonatomic) UCFLoginBaseView  *loginView;
+@property(strong ,nonatomic) UCFUserAssetModel *userAsset;
 
 @end
 
@@ -168,6 +169,7 @@
         //    self.tableView.tableHeaderView = myHeaderView;
         self.tableView.backgroundColor = UIColorWithRGB(0xebebee);
         self.myHeaderView = myHeaderView;
+        myHeaderView.userAssetModel = self.userAsset;
         return myHeaderView;
     }
     
@@ -356,7 +358,7 @@
             
             UCFUserAssetModel *userAsset = [UCFUserAssetModel userAssetWithDict:resultData];
             
-            self.myHeaderView.userAssetModel = userAsset;
+            self.userAsset = userAsset;
             UCFSettingGroup *group = [self.itemsDataArray firstObject];
             UCFSettingItem *item = [group.items firstObject];
             item.subtitle = userAsset.p2pCashBalance;

@@ -15,9 +15,9 @@
 @property (strong, nonatomic) IBOutlet UILabel *userNameLabel;
 @property (strong, nonatomic) IBOutlet UIView *memberLevelView;
 @property (strong, nonatomic) IBOutlet UILabel *userLevelLabel;
-@property (strong, nonatomic) IBOutlet UILabel *totalAssetLabel;
-@property (strong, nonatomic) IBOutlet UILabel *addedProfitLabel;
-@property (strong, nonatomic) IBOutlet UILabel *totalBalanceLabel;
+@property (strong, nonatomic) IBOutlet UILabel *totalAssetLabel1;
+@property (strong, nonatomic) IBOutlet UILabel *addedProfitLabel1;
+@property (strong, nonatomic) IBOutlet UILabel *totalBalanceLabel1;
 @property (strong, nonatomic) IBOutlet UIButton *visibleButton;
 @property (weak, nonatomic) IBOutlet UIView *messageDotView;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *userLevelW;
@@ -45,7 +45,6 @@
     UITapGestureRecognizer *levelTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedMemberLevel:)];
     [self.memberLevelView addGestureRecognizer:levelTap];
 }
-
 #pragma mark - 点击方法
 - (void)tappedUserIcon:(UIGestureRecognizer *)tap {
     if ([self.delegate respondsToSelector:@selector(mineHeaderViewDidClikedUserInfoWithCurrentVC:)]) {
@@ -63,14 +62,14 @@
 - (IBAction)visible:(UIButton *)sender {
 //    [self setNeedsLayout];
     if (self.visibleButton.selected) {
-        self.totalAssetLabel.text = self.userAssetModel.total.length > 0 ? [NSString stringWithFormat:@"¥%@", self.userAssetModel.total] : @"¥0.00";
-        self.addedProfitLabel.text = self.userAssetModel.historyInterests.length > 0 ? [NSString stringWithFormat:@"¥%@", self.userAssetModel.historyInterests] : @"¥0.00";
-        self.totalBalanceLabel.text = self.userAssetModel.cashBalance.length > 0 ? [NSString stringWithFormat:@"¥%@", self.userAssetModel.cashBalance] : @"¥0.00";
+        self.totalAssetLabel1.text = self.userAssetModel.total.length > 0 ? [NSString stringWithFormat:@"¥%@", self.userAssetModel.total] : @"¥0.00";
+        self.addedProfitLabel1.text = self.userAssetModel.historyInterests.length > 0 ? [NSString stringWithFormat:@"¥%@", self.userAssetModel.historyInterests] : @"¥0.00";
+        self.totalBalanceLabel1.text = self.userAssetModel.cashBalance.length > 0 ? [NSString stringWithFormat:@"¥%@", self.userAssetModel.cashBalance] : @"¥0.00";
     }
     else {
-        self.totalAssetLabel.text = @"***";
-        self.addedProfitLabel.text = @"***";
-        self.totalBalanceLabel.text = @"***";
+        self.totalAssetLabel1.text = @"***";
+        self.addedProfitLabel1.text = @"***";
+        self.totalBalanceLabel1.text = @"***";
     }
     sender.selected = !sender.selected;
 }
@@ -119,21 +118,17 @@
 {
     _userAssetModel = userAssetModel;
     if (self.visibleButton.selected) {
-        self.totalAssetLabel.text = @"***";
-        self.addedProfitLabel.text = @"***";
-        self.totalBalanceLabel.text = @"***";
+        self.totalAssetLabel1.text = @"***";
+        self.addedProfitLabel1.text = @"***";
+        self.totalBalanceLabel1.text = @"***";
     }
     else {
-        self.totalAssetLabel.text = self.userAssetModel.total.length > 0 ? [NSString stringWithFormat:@"¥%@", self.userAssetModel.total] : @"¥0.00";
-        self.addedProfitLabel.text = self.userAssetModel.historyInterests.length > 0 ? [NSString stringWithFormat:@"¥%@", self.userAssetModel.historyInterests] : @"¥0.00";
-        self.totalBalanceLabel.text = self.userAssetModel.cashBalance.length > 0 ? [NSString stringWithFormat:@"¥%@", self.userAssetModel.cashBalance] : @"¥0.00";
+        self.totalAssetLabel1.text = self.userAssetModel.total.length > 0 ? [NSString stringWithFormat:@"¥%@", self.userAssetModel.total] : @"¥0.00";
+        self.addedProfitLabel1.text = self.userAssetModel.historyInterests.length > 0 ? [NSString stringWithFormat:@"¥%@", self.userAssetModel.historyInterests] : @"¥0.00";
+        self.totalBalanceLabel1.text = self.userAssetModel.cashBalance.length > 0 ? [NSString stringWithFormat:@"¥%@", self.userAssetModel.cashBalance] : @"¥0.00";
     }
      self.userNameLabel.text = [UserInfoSingle sharedManager].realName.length > 0 ? [UserInfoSingle sharedManager].realName : @"未认证";
-}
-
--(void)layoutSubviews{
-    [super layoutSubviews];
-    [self setUserAssetModel:self.userAssetModel];
+    
 }
 
 - (void)setUserBenefitModel:(UCFUserBenefitModel *)userBenefitModel

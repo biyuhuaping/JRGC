@@ -30,5 +30,4 @@
 @property (weak, nonatomic) IBOutlet UIButton *rechargeButton;
 @property (weak, nonatomic) IBOutlet UIButton *cashButton;
 + (CGFloat)viewHeight;
-- (void)setDefaultState;
 @end

@@ -208,11 +208,11 @@
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="addedProfitLabel" destination="4o0-1M-7kA" id="HSy-9w-UoU"/>
+                <outlet property="addedProfitLabel1" destination="4o0-1M-7kA" id="9j8-OV-eVo"/>
                 <outlet property="downView" destination="T1c-On-aQo" id="9nf-rV-TBd"/>
                 <outlet property="memberLevelView" destination="LMW-Os-8EJ" id="29I-SO-MV4"/>
-                <outlet property="totalAssetLabel" destination="qhF-TW-Gp4" id="CqI-Bh-fC9"/>
-                <outlet property="totalBalanceLabel" destination="3YV-6Q-jZV" id="zZf-bm-Ynb"/>
+                <outlet property="totalAssetLabel1" destination="qhF-TW-Gp4" id="ItY-zC-gWp"/>
+                <outlet property="totalBalanceLabel1" destination="3YV-6Q-jZV" id="Ehi-f0-Q1k"/>
                 <outlet property="userIconImageView" destination="AP8-6p-eqr" id="Tnc-t2-hFl"/>
                 <outlet property="userLevelLabel" destination="o32-qT-sib" id="qyB-7q-oCJ"/>
                 <outlet property="userLevelW" destination="6xI-Fj-id5" id="Wls-qT-pPy"/>
