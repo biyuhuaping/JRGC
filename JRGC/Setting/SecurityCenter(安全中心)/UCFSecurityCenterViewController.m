@@ -41,6 +41,8 @@
 #import "UCFSignModel.h"
 #import "MjAlertView.h"
 #import "UCFSignView.h"
+#import "UCFWebViewJavascriptBridgeMallDetails.h"
+#import "NSString+Misc.h"
 @interface UCFSecurityCenterViewController () <UITableViewDataSource, UITableViewDelegate, SecurityCellDelegate, UCFLockHandleDelegate>
 
 // 选项表数据
@@ -267,6 +269,13 @@
 //    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagAccountSafe owner:self Type:SelectAccoutDefault];
 }
 
+#pragma -- 进入工贝页面的请求
+- (void)getUserIntoGoCoinPageHTTP
+{
+    [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":[[NSUserDefaults standardUserDefaults] objectForKey:UUID]} tag:kSXTagIntoCoinPage owner:self signature:YES Type:SelectAccoutDefault];
+}
+
+
 //开始请求
 - (void)beginPost:(kSXTag)tag
 {
@@ -402,6 +411,28 @@
         } else {
             [AuxiliaryFunc showToastMessage:dic[@"message"] withView:self.view];
         }
+    }else if (tag.intValue == kSXTagIntoCoinPage)
+    {
+        NSDictionary *dataDict = dic[@"data"];
+        BOOL ret = [[dic objectForKey:@"ret"] boolValue];
+        if (ret)
+        {
+                NSDictionary *coinRequestDicData = [dataDict objectSafeDictionaryForKey:@"coinRequest"];
+                UCFWebViewJavascriptBridgeMallDetails *web = [[UCFWebViewJavascriptBridgeMallDetails alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMallDetails" bundle:nil];
+                NSDictionary *paramDict = [coinRequestDicData objectSafeDictionaryForKey:@"param"];
+                NSMutableDictionary *data =  [[NSMutableDictionary alloc]initWithDictionary:@{}];
+                [data setValue:[NSString urlEncodeStr:[paramDict objectSafeForKey:@"encryptParam"]] forKey:@"encryptParam"];
+                [data setObject:[paramDict objectSafeForKey:@"fromApp"] forKey:@"fromApp"];
+                [data setObject:[paramDict objectSafeForKey:@"userId"] forKey:@"userId"];
+                NSString * requestStr = [Common getParameterByDictionary:data];
+                web.url  = [NSString stringWithFormat:@"%@/#/?%@",[coinRequestDicData objectSafeForKey:@"urlPath"],requestStr];
+                web.isHidenNavigationbar = YES;
+                [self.navigationController pushViewController:web animated:YES];
+            }
+             else
+            {
+                [AuxiliaryFunc showToastMessage:[dic objectSafeForKey:@"message"] withView:self.view];
+            }
     }
 }
 //请求失败
@@ -783,10 +814,27 @@
                     vc = subVC;
                 }
                 else {
-                    vc = [[arrowItem.destVcClass alloc] initWithNibName:@"UCFWebViewJavascriptBridgeLevel" bundle:nil];
-                    vc.title = arrowItem.title;
-                    ((UCFWebViewJavascriptBridgeLevel *)vc).url = LEVELURL;
-                    ((UCFWebViewJavascriptBridgeLevel *)vc).navTitle = @"会员等级";
+//                    vc = [[arrowItem.destVcClass alloc] initWithNibName:@"UCFWebViewJavascriptBridgeLevel" bundle:nil];
+//                    vc.title = arrowItem.title;
+//                    ((UCFWebViewJavascriptBridgeLevel *)vc).url = LEVELURL;
+//                    ((UCFWebViewJavascriptBridgeLevel *)vc).navTitle = @"会员等级";
+                    
+                    if([UserInfoSingle sharedManager].companyAgent)//如果是机构用户
+                    {//吐司：此活动暂时未对企业用户开放
+                        [MBProgressHUD displayHudError:@"此活动暂时未对企业用户开放"];
+                    }
+                    else{
+                        
+                        NSInteger openStatus = [UserInfoSingle sharedManager].openStatus;
+                        if(openStatus < 3){
+                            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:P2PTIP1 delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+                            alert.tag = 10005;
+                            [alert show];
+                        }else{
+                            [self getUserIntoGoCoinPageHTTP];
+                        }
+                    }
+                    
                 }
             }
                 break;

@@ -658,12 +658,22 @@
 
 - (void)mineHeaderView:(UCFMineHeaderView *)mineHeaderView tappedMememberLevelView:(UIView *)memberLevelView
 {
-    //跳转到会员等级
-    UCFWebViewJavascriptBridgeLevel*vc = [[UCFWebViewJavascriptBridgeLevel alloc] initWithNibName:@"UCFWebViewJavascriptBridgeLevel" bundle:nil];
-    vc.url = LEVELURL;
-    vc.navTitle = @"会员等级";
-    [self.navigationController pushViewController:vc animated:YES];
-
+//    //跳转到会员等级
+//    UCFWebViewJavascriptBridgeLevel*vc = [[UCFWebViewJavascriptBridgeLevel alloc] initWithNibName:@"UCFWebViewJavascriptBridgeLevel" bundle:nil];
+//    vc.url = LEVELURL;
+//    vc.navTitle = @"会员等级";
+//    [self.navigationController pushViewController:vc animated:YES];
+//
+    if([UserInfoSingle sharedManager].companyAgent)//如果是机构用户
+    {//吐司：此活动暂时未对企业用户开放
+        [MBProgressHUD displayHudError:@"此活动暂时未对企业用户开放"];
+    }
+    else{
+        if([self checkUserCanInvestIsDetail:YES type:SelectAccoutTypeP2P])//判断是否开户
+        {
+            [self.apiManager getUserIntoGoCoinPageHTTP];
+        }
+    }
 }
 
 - (void)mineHeaderView:(UCFMineHeaderView *)mineHeaderView didClikedMessageButton:(UIButton *)totalProfitButton
