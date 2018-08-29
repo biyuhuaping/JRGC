@@ -55,7 +55,7 @@ static NSString *cellId = @"iconCell";
     
     [self.iconCollectionView registerNib:[UINib nibWithNibName:@"UCFHomeIconCollectionCell" bundle:nil] forCellWithReuseIdentifier:cellId];
     
-//    [self getNormalBannerData];
+    [self getNormalBannerData];
 }
 
 - (void)noticeView:(UCFNoticeView *)noticeView didClickedNotice:(UCFNoticeModel *)notice

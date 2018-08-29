@@ -52,7 +52,7 @@
 {
     AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     UINavigationController *nav = app.tabBarController.selectedViewController;
-    if (app.advertisementView || [self isCurrentViewControllerVisible:app.lockVc] || ![nav.visibleViewController isKindOfClass:[UCFHomeViewController class]]) {
+    if ( [self isCurrentViewControllerVisible:app.lockVc] || ![nav.visibleViewController isKindOfClass:[UCFHomeViewController class]]) {
         return;
     }
     

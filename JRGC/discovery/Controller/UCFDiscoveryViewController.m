@@ -33,9 +33,7 @@
     [self setErrorViewFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
     [self addErrorViewButton];
     [self addProgressView];//添加进度条
-    if ([UserInfoSingle sharedManager].isSubmitTime) {
-        self.url = @"https://m.9888.cn/static/wap/invest/index.html#/features/big-deal";
-    }
+
     
     [self gotoURL:self.url];
 //    self.webView.scrollView.bounces = NO;

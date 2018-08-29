@@ -30,19 +30,39 @@
         _baseImageView = [[UIImageView alloc] initWithFrame:frame];
         _baseImageView.backgroundColor = [UIColor whiteColor];
         _baseImageView.userInteractionEnabled = YES;
-        NSString *imageURL = [[NSUserDefaults standardUserDefaults] valueForKey:@"LoginImageUrl"];
-        NSString *imageName = @"";
-        if (ScreenHeight == 480) {
-            imageName = @"login_bg_phone4_default.png";
-        } else if (ScreenHeight == 812) {
-            imageName = @"login_bg_iphoneX.png";
-        } else {
-            imageName = @"login_bg_default.png";
+        
+        
+         NSString *imageName = @"";
+        if ([UserInfoSingle sharedManager].isSubmitTime)
+        {
+            if (ScreenHeight == 480) {
+                imageName = @"appleLogin_bg_iphone4_default.png";
+            } else if (ScreenHeight == 812) {
+                imageName = @"appleLogin_bg_iphoneX.png";
+            } else {
+                imageName = @"appleLogin_bg_default.png";
+            }
+            
+            UIImage *imageData = [UIImage imageNamed:imageName];
+            _baseImageView.image = imageData;
         }
+        else{
+                NSString *imageURL = [[NSUserDefaults standardUserDefaults] valueForKey:@"LoginImageUrl"];
+    
+                if (ScreenHeight == 480) {
+                    imageName = @"login_bg_phone4_default.png";
+                } else if (ScreenHeight == 812) {
+                    imageName = @"login_bg_iphoneX.png";
+                } else {
+                    imageName = @"login_bg_default.png";
+                }
 
-        UIImage *imageData = [UIImage imageNamed:imageName];
-        [_baseImageView sd_setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:imageData];
+                UIImage *imageData = [UIImage imageNamed:imageName];
+                [_baseImageView sd_setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:imageData];
+            
+        }
         [self addSubview:_baseImageView];
+            
         
 //        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(login:)];
 //        [_baseImageView addGestureRecognizer:tap];
@@ -109,6 +129,9 @@
     UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:registerControler] ;
     AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
     UINavigationController *nav = app.tabBarController.selectedViewController ;
+    if ([UserInfoSingle sharedManager].isSubmitTime) {
+        nav = (UINavigationController *)app.window.rootViewController;
+    }
     [nav presentViewController:loginNaviController animated:YES completion:nil];
 }
 - (void)login:(UITapGestureRecognizer *)tap
@@ -119,8 +142,13 @@
 {
     UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
     UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController] ;
+    
     AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
     UINavigationController *nav = app.tabBarController.selectedViewController ;
+    if ([UserInfoSingle sharedManager].isSubmitTime) {
+         nav = (UINavigationController *)app.window.rootViewController;
+    }
+    
     [nav presentViewController:loginNaviController animated:YES completion:nil];
 }
 - (void)showMoreView
@@ -131,6 +159,11 @@
     moreVC.sourceVC = @"UCFSecurityCenterViewController";
     AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
     UINavigationController *nav = app.tabBarController.selectedViewController;
+    if ([UserInfoSingle sharedManager].isSubmitTime)
+    {
+       UITabBarController *tabBar = (UITabBarController *)app.window.rootViewController;
+       nav= [tabBar.viewControllers objectAtIndex:3];
+    }
     [nav pushViewController:moreVC  animated:YES];
 }
 @end
