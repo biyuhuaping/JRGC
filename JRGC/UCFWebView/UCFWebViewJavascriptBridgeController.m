@@ -445,7 +445,10 @@
         }
         else if ([nativeData[@"action"] isEqualToString:@"glLogin"])
         {
-            [self jumpLogin];
+            [weakSelf jumpLogin];
+        }
+        else if ([nativeData[@"action"] isEqualToString:@"shareWeChat"]) {//工力工贝 分享
+            [weakSelf goToShareWeChat:nativeData];
         }
         
         //----------------------------------------------------------------------------------------------------qyy
@@ -494,7 +497,7 @@
     }];
 }
 //分享链接
-- (void)goToShare:(NSDictionary *)nativeData;
+- (void)goToShare:(NSDictionary *)nativeData
 {
     NSDictionary *dic = [nativeData[@"value"] objectFromJSONString];
     self.dicForShare = [UCFCycleModel  getCycleModelByDataDict:dic];
@@ -502,6 +505,35 @@
     NSString *gcmCode = [[NSUserDefaults standardUserDefaults] objectForKey:GCMCODE];
     self.dicForShare.url =  [NSString stringWithFormat:@"%@?gcm=%@", [dic objectSafeForKey:@"link"],gcmCode];
     [self clickRightBtn]; //放心花中的分享
+}
+-(void)goToShareWeChat:(NSDictionary *)nativeData
+{
+    
+    /*
+     {\"title\":\"工力大放送，赢工贝换好礼!\",\"image\":\"https:\/\/static.9888.cn\/images\/rank\/redpacket.png\",\"link\":\"http:\/\/m.jiabeibc.com\/static\/jh\/index.html#\/enterPhone?sendRecordCode=sendRecordCode\",\"desc\":\"工贝天生傲娇,总量有限,永久有效,快来抢工力赢工贝。\"}",
+     
+     
+     */
+    NSDictionary *dic = [nativeData[@"value"] objectFromJSONString];
+    self.dicForShare = [UCFCycleModel  getCycleModelByDataDict:dic];
+    self.dicForShare.thumb = [dic objectSafeForKey:@"image"];
+    self.dicForShare.url =  [NSString stringWithFormat:@"%@", [dic objectSafeForKey:@"link"]];
+    
+    _shareUrl = self.dicForShare.url;
+    
+    _shareImage = [Common getImageFromURL:self.dicForShare.thumb];
+    _shareTitle = self.dicForShare.title;
+    _shareContent = self.dicForShare.desc;
+    
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+    
+    [UMSocialUIManager setPreDefinePlatforms:@[@(UMSocialPlatformType_WechatSession),@(UMSocialPlatformType_WechatTimeLine)]];
+    __weak typeof(self) weakSelf = self;
+    //显示分享面板 （自定义UI可以忽略）
+    [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
+        [weakSelf shareDataWithPlatform:platformType withObject:messageObject];
+    }];
+    
 }
 - (void)getTokenId
 {
