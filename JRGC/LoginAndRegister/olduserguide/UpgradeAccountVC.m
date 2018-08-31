@@ -633,7 +633,7 @@
                 return;
             }
         } else {
-            if (realName.length == 0 || idCardNo.length == 0) {
+            if (realName.length == 0 || idCardNo.length == 0 || _bankId.length == 0) {
                 [AuxiliaryFunc showToastMessage:@"请完善信息之后再提交" withView:self.view];
                 return;
             }
@@ -658,7 +658,7 @@
     //升级存管账户接口
     else{
         NSMutableDictionary *encryptParamDic = nil;
-        if ([UserInfoSingle sharedManager].openStatus == 2) {
+        if (([UserInfoSingle sharedManager].openStatus == 2 && self.accoutType == SelectAccoutTypeP2P) || self.accoutType == SelectAccoutTypeHoner) {
             encryptParamDic =[[NSMutableDictionary alloc]initWithDictionary: @{@"realName":realName,             //真实姓名
                                                                                                     @"idCardNo":idCardNo,             //身份证号
                                                                                                     @"bankCardNo":bankCard,           //银行卡号
@@ -678,12 +678,11 @@
 
         if (self.accoutType == SelectAccoutTypeHoner)
         {
-            [encryptParamDic setValue:_textField4.text forKey:@"validateCode"];//手机验证码
             [[NetworkModule sharedNetworkModule] newPostReq:encryptParamDic tag:kSXTagOpenAccount owner:self signature:YES Type:self.accoutType];
-        }else
+        }
+        else
         {
             if ([UserInfoSingle sharedManager].openStatus == 2) {
-                [encryptParamDic setValue:_textField4.text forKey:@"validateCode"];//手机验证码
                 [[NetworkModule sharedNetworkModule] newPostReq:encryptParamDic tag:kSXTagOpenAccount owner:self signature:YES Type:self.accoutType];
             } else {
                 [[NetworkModule sharedNetworkModule] newPostReq:encryptParamDic tag:kSXTagOpenAccuntIntoBank owner:self signature:YES Type:self.accoutType];
