@@ -604,7 +604,7 @@
     
     NSString *realName = _textField1.text;
     NSString *idCardNo = _textField2.text;
-    NSString *bankCard = _textField3.text;
+    
     
     if (realName.length == 0 && ![_textField1.placeholder hasPrefix:@"请输入"]) {//姓名
         realName = _textField1.placeholder;
@@ -612,10 +612,13 @@
     if (idCardNo.length == 0 && ![_textField2.placeholder hasPrefix:@"请输入"]){//身份证
         idCardNo = _idCardNo;
     }
+    NSString *bankCard = _textField3.text;
     if (bankCard.length == 0 && ![_textField3.placeholder hasPrefix:@"请输入"]){//银行卡
         bankCard = _textField3.placeholder;
     }
-    
+
+
+
     if(self.accoutType == SelectAccoutTypeHoner || _isFromeBankCardInfo)
     {
         
@@ -624,10 +627,18 @@
             return;
         }
     }else{
-        if (realName.length == 0 || idCardNo.length == 0 || bankCard.length == 0) {
-            [AuxiliaryFunc showToastMessage:@"请完善信息之后再提交" withView:self.view];
-            return;
+        if ([UserInfoSingle sharedManager].openStatus == 2) {
+            if (realName.length == 0 || idCardNo.length == 0 || bankCard.length == 0 || _textField4.text.length == 0) {
+                [AuxiliaryFunc showToastMessage:@"请完善信息之后再提交" withView:self.view];
+                return;
+            }
+        } else {
+            if (realName.length == 0 || idCardNo.length == 0) {
+                [AuxiliaryFunc showToastMessage:@"请完善信息之后再提交" withView:self.view];
+                return;
+            }
         }
+
     }
     
     NSString *userId = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
@@ -646,14 +657,25 @@
     }
     //升级存管账户接口
     else{
-        NSMutableDictionary *encryptParamDic =[[NSMutableDictionary alloc]initWithDictionary:                       @{@"realName":realName,             //真实姓名
-                                                                                                                      @"idCardNo":idCardNo,             //身份证号
-                                                                                                                      @"bankCardNo":bankCard,           //银行卡号
-                                                                                                                      @"bankNo":_bankId,                //银行id
-                                                                                                                      @"openStatus":_openStatus,        //获取到的用户信息的状态，对应接口getOpenAccountInfo
-                                                                                                                      @"validateCode":_textField4.text, //手机验证码
-                                                                                                                      @"userId":userId,                 //用户id
-                                                                                                                      }];
+        NSMutableDictionary *encryptParamDic = nil;
+        if ([UserInfoSingle sharedManager].openStatus == 2) {
+            encryptParamDic =[[NSMutableDictionary alloc]initWithDictionary: @{@"realName":realName,             //真实姓名
+                                                                                                    @"idCardNo":idCardNo,             //身份证号
+                                                                                                    @"bankCardNo":bankCard,           //银行卡号
+                                                                                                    @"bankNo":_bankId,                //银行id
+                                                                                                    @"openStatus":_openStatus,        //获取到的用户信息的状态，对应接口getOpenAccountInfo
+                                                                                                    @"validateCode":_textField4.text, //手机验证码
+                                                                                                    @"userId":userId,                 //用户id
+                                                                                                    }];
+        } else {
+            encryptParamDic =[[NSMutableDictionary alloc]initWithDictionary: @{@"realName":realName,             //真实姓名
+                                                                                                    @"idCardNo":idCardNo,             //身份证号
+                                                                                                    @"bankNo":_bankId,                //银行id
+                                                                                                    @"openStatus":_openStatus,        //获取到的用户信息的状态，对应接口
+                                                                                                    @"userId":userId,                 //用户id
+                                                                                                    }];
+        }
+
         if (self.accoutType == SelectAccoutTypeHoner)
         {
             [encryptParamDic setValue:_textField4.text forKey:@"validateCode"];//手机验证码
