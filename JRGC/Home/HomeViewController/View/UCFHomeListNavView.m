@@ -86,7 +86,11 @@
     self.giftButton.frame = CGRectMake(ScreenWidth - 45, [[UIApplication sharedApplication] statusBarFrame].size.height + 7, 30, 30);
     NSString *userId = [UserInfoSingle sharedManager].userId;
     if (userId) {
-        self.giftButton.alpha = 0.7;
+        if ([UserInfoSingle sharedManager].isSubmitTime) {
+            self.giftButton.alpha = 0;
+        } else {
+            self.giftButton.alpha = 0.7;
+        }
     }
     else {
         self.giftButton.alpha = 0.0;

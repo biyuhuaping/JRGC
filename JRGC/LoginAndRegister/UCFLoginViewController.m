@@ -351,6 +351,9 @@
 
 -(void)showGestureCode
 {
+    if ([UserInfoSingle sharedManager].isSubmitTime) {
+        return;
+    }
     NSString *gode = [LLLockPassword loadLockPassword];
     if (gode) {
         //存在手势密码，校验

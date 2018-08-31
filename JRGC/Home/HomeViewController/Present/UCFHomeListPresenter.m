@@ -202,11 +202,26 @@
         !completionHander ?: completionHander(error, result);
     }];
 }
-
+//获取苹果审核期间优质债权项目
+- (void)getAppleSubmitTimeSingleSectionData
+{
+    
+}
 - (void)getDefaultShowListSection:(NSDictionary *)parameter
 {
-    [[NetworkModule sharedNetworkModule] newPostReq:parameter tag:kSXTagGetHomeShowSections owner:self signature:NO Type:SelectAccoutDefault];
-    [self getUserStateData];
+    if ([UserInfoSingle sharedManager].isSubmitTime) {
+        self.showSectionsDict = [NSMutableDictionary dictionaryWithCapacity:5];
+        NSDictionary *parmDict = @{@"title":@"优质债权",@"type":@"2",@"iconUrl":@"https://app.9888.cn/api/staticResource/img/p2p.png"};
+        NSArray *tmpArr = [NSMutableArray arrayWithObject:parmDict];
+        NSDictionary *resultDataDict = @{@"resultData":tmpArr};
+        NSDictionary *dataDict = @{@"data":resultDataDict};
+        self.showSectionsDict = dataDict;
+        _currentRequestIndex = 0;
+        [self getSectionDeatilData];
+    } else {
+        [[NetworkModule sharedNetworkModule] newPostReq:parameter tag:kSXTagGetHomeShowSections owner:self signature:NO Type:SelectAccoutDefault];
+        [self getUserStateData];
+    }
 }
 - (void)getUserStateData
 {
@@ -226,9 +241,8 @@
     NSString *data = (NSString *)result;
     NSMutableDictionary *dic = [data objectFromJSONString];
     if (tag.intValue == kSXTagGetHomeShowSections) {
-        
         self.showSectionsDict = dic;
-        NSArray *dataArr = self.showSectionsDict[@"data"][@"resultData"];        
+        NSArray *dataArr = self.showSectionsDict[@"data"][@"resultData"];
         if ([dataArr count] > 0) {
             NSMutableArray *detleArr = [NSMutableArray arrayWithCapacity:3];
             for (int i = 0; i < self.homeListCells.count; i++) {
@@ -250,10 +264,11 @@
             for (UCFHomeListGroupPresenter *groupPresenter in detleArr) {
                 [self.homeListCells removeObject:groupPresenter];
             }
-
+            
             _currentRequestIndex = 0;
             [self getSectionDeatilData];
         }
+
     } else if (tag.intValue == kSXTagGetHomeNewUserSection) {
         if ([dic[@"ret"] boolValue]) {
             NSDictionary  *dataDict = dic[@"data"];
@@ -315,7 +330,6 @@
         NSArray *dataArr = self.showSectionsDict[@"data"][@"resultData"];
         NSDictionary *sectionDict = dataArr[_currentRequestIndex];
         UCFHomeListGroup * tempG = [[UCFHomeListGroup alloc] init];
-    
         tempG.iconUrl = sectionDict[@"iconUrl"];
         tempG.showMore = YES;
         tempG.title = sectionDict[@"title"];
@@ -331,6 +345,10 @@
         BOOL hasCache = NO;
 
         UCFHomeListGroupPresenter *groupPresenter = [self homeListGroupPresenterWithGroup:tempG];
+        //warn 审核期间把所有的展示更多的隐藏！！！
+        if ([UserInfoSingle sharedManager].isSubmitTime) {
+            tempG.showMore = NO;
+        }
         for (UCFHomeListGroupPresenter *tmpgroupPresenter in self.homeListCells) {
             if (tmpgroupPresenter.type == groupPresenter.type) {
                 hasCache = YES;
