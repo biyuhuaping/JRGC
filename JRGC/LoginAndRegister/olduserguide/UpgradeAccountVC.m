@@ -69,9 +69,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    if (self.accoutType == SelectAccoutTypeP2P ) {
+    if (self.accoutType == SelectAccoutTypeP2P) {
         self.buttonTopConstraint.constant = 15;
-        self.tableViewHight.constant = 44*3;
+        if (_isFromeBankCardInfo) {
+            self.tableViewHight.constant = 44*5;
+        } else {
+            if ([UserInfoSingle sharedManager].openStatus == 2) {
+                self.tableViewHight.constant = 44*5;
+            } else {
+                self.tableViewHight.constant = 44*3;
+            }
+        }
         baseTitleLabel.text = @"开通微金徽商存管账户";
     } else {
         self.tableViewHight.constant = 44*5;
@@ -377,9 +385,15 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (self.accoutType == SelectAccoutTypeHoner || _isFromeBankCardInfo) {
+        
         return  5;
     }else{
-        return 3;
+        if (self.accoutType == SelectAccoutTypeP2P && [UserInfoSingle sharedManager].openStatus == 2) {
+            return 5;
+        } else {
+            return 3;
+            
+        }
     }
 }
 
@@ -415,20 +429,30 @@
                     [cell addSubview:imgView];
                     [cell.contentView addSubview:_textField3];
                 }else{
-                    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-                    cell.textLabel.textColor = UIColorWithRGB(0x555555);
-                    cell.textLabel.font = [UIFont systemFontOfSize:14];
-                    cell.textLabel.text = @"开户银行";
+                    if ([UserInfoSingle sharedManager].openStatus == 2) {
+                        //银行卡
+                        UIImageView *imgView = [[UIImageView alloc]initWithFrame:CGRectMake(15, 12, 20, 20)];
+                        imgView.image = [UIImage imageNamed:@"safecenter_icon_bankcard"];
+                        [cell addSubview:imgView];
+                        [cell.contentView addSubview:_textField3];
+                    } else {
+                        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                        cell.textLabel.textColor = UIColorWithRGB(0x555555);
+                        cell.textLabel.font = [UIFont systemFontOfSize:14];
+                        cell.textLabel.text = @"开户银行";
+                        
+                        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(ScreenWidth-225, 0, 160, 44)];
+                        label.textColor = UIColorWithRGB(0x555555);
+                        label.textAlignment = NSTextAlignmentRight;
+                        label.font = [UIFont systemFontOfSize:14];
+                        _bankNameLabel = label;
+                        [cell addSubview:_bankNameLabel];
+                        
+                        _bankLogoView = [[UIImageView alloc]initWithFrame:CGRectMake(ScreenWidth-60, 7, 29, 29)];
+                        [cell addSubview:_bankLogoView];
+                    }
                     
-                    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(ScreenWidth-225, 0, 160, 44)];
-                    label.textColor = UIColorWithRGB(0x555555);
-                    label.textAlignment = NSTextAlignmentRight;
-                    label.font = [UIFont systemFontOfSize:14];
-                    _bankNameLabel = label;
-                    [cell addSubview:_bankNameLabel];
-                    
-                    _bankLogoView = [[UIImageView alloc]initWithFrame:CGRectMake(ScreenWidth-60, 7, 29, 29)];
-                    [cell addSubview:_bankLogoView];
+          
                 }
             }
                 break;
@@ -548,11 +572,11 @@
         [AuxiliaryFunc showToastMessage:@"请完善信息之后再提交" withView:self.view];
         return;
     }
-//    if (![Common isChinese:realName]) {
-//        [AuxiliaryFunc showToastMessage:@"请输入正确的姓名" withView:self.view];
-//        return;
-//    }else
-        if (![Common isIdentityCard:idCardNo] && [idCardNo rangeOfString:@"*"].location == NSNotFound){
+    //    if (![Common isChinese:realName]) {
+    //        [AuxiliaryFunc showToastMessage:@"请输入正确的姓名" withView:self.view];
+    //        return;
+    //    }else
+    if (![Common isIdentityCard:idCardNo] && [idCardNo rangeOfString:@"*"].location == NSNotFound){
         [AuxiliaryFunc showToastMessage:@"请输入正确的身份证号码" withView:self.view];
         return;
     }else if (![Common isValidCardNumber:bankCard]){
@@ -594,17 +618,18 @@
     
     if(self.accoutType == SelectAccoutTypeHoner || _isFromeBankCardInfo)
     {
-         if (realName.length == 0 || idCardNo.length == 0 || bankCard.length == 0 || _textField4.text.length == 0) {
-             [AuxiliaryFunc showToastMessage:@"请完善信息之后再提交" withView:self.view];
-             return;
-         }
+        
+        if (realName.length == 0 || idCardNo.length == 0 || bankCard.length == 0 || _textField4.text.length == 0) {
+            [AuxiliaryFunc showToastMessage:@"请完善信息之后再提交" withView:self.view];
+            return;
+        }
     }else{
-        if (realName.length == 0 || idCardNo.length == 0) {
+        if (realName.length == 0 || idCardNo.length == 0 || bankCard.length == 0) {
             [AuxiliaryFunc showToastMessage:@"请完善信息之后再提交" withView:self.view];
             return;
         }
     }
-
+    
     NSString *userId = [UCFToolsMehod isNullOrNilWithString:[[NSUserDefaults standardUserDefaults] valueForKey:UUID]];
     bankCard = [bankCard stringByReplacingOccurrencesOfString:@" " withString:@""];
     
@@ -618,26 +643,30 @@
                                           @"userId":userId,                  //用户id
                                           };
         [self replaceBankCardInformation:encryptParamDic];
-     }
+    }
     //升级存管账户接口
     else{
         NSMutableDictionary *encryptParamDic =[[NSMutableDictionary alloc]initWithDictionary:                       @{@"realName":realName,             //真实姓名
-            @"idCardNo":idCardNo,             //身份证号
-//            @"bankCardNo":bankCard,           //银行卡号
-            @"bankNo":_bankId,                //银行id
-            @"openStatus":_openStatus,        //获取到的用户信息的状态，对应接口getOpenAccountInfo
-//            @"validateCode":_textField4.text, //手机验证码
-            @"userId":userId,                 //用户id
-            }];
+                                                                                                                      @"idCardNo":idCardNo,             //身份证号
+                                                                                                                      @"bankCardNo":bankCard,           //银行卡号
+                                                                                                                      @"bankNo":_bankId,                //银行id
+                                                                                                                      @"openStatus":_openStatus,        //获取到的用户信息的状态，对应接口getOpenAccountInfo
+                                                                                                                      @"validateCode":_textField4.text, //手机验证码
+                                                                                                                      @"userId":userId,                 //用户id
+                                                                                                                      }];
         if (self.accoutType == SelectAccoutTypeHoner)
         {
-            [encryptParamDic setValue:bankCard forKey:@"bankCardNo"];//银行卡号
             [encryptParamDic setValue:_textField4.text forKey:@"validateCode"];//手机验证码
             [[NetworkModule sharedNetworkModule] newPostReq:encryptParamDic tag:kSXTagOpenAccount owner:self signature:YES Type:self.accoutType];
-        }
-        else
+        }else
         {
-             [[NetworkModule sharedNetworkModule] newPostReq:encryptParamDic tag:kSXTagOpenAccuntIntoBank owner:self signature:YES Type:self.accoutType];
+            if ([UserInfoSingle sharedManager].openStatus == 2) {
+                [encryptParamDic setValue:_textField4.text forKey:@"validateCode"];//手机验证码
+                [[NetworkModule sharedNetworkModule] newPostReq:encryptParamDic tag:kSXTagOpenAccount owner:self signature:YES Type:self.accoutType];
+            } else {
+                [[NetworkModule sharedNetworkModule] newPostReq:encryptParamDic tag:kSXTagOpenAccuntIntoBank owner:self signature:YES Type:self.accoutType];
+            }
+            
         }
     }
 }
@@ -679,6 +708,11 @@
             }
             NSDictionary *userInfoDic = dic[@"data"][@"userInfo"];
             _openStatus = dic[@"data"][@"openStatus"];
+            if (self.accoutType == SelectAccoutTypeP2P) {
+                [UserInfoSingle sharedManager].openStatus = [_openStatus integerValue];
+            } else {
+                [UserInfoSingle sharedManager].enjoyOpenStatus = [_openStatus integerValue];
+            }
             _bankId = [NSString stringWithFormat:@"%@",userInfoDic[@"bankId"]];//[userInfoDic objectSafeForKey:@"bankId"];//
             NSString *realName = [userInfoDic objectSafeForKey:@"realName"];
             NSString *idCardNo = [userInfoDic objectSafeForKey:@"idCardNo"];
