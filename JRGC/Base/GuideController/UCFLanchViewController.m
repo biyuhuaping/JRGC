@@ -70,6 +70,13 @@
 
     }
 }
+- (void)errorPost:(NSError *)err tag:(NSNumber *)tag
+{
+    if (tag.integerValue == kSXTagGetInfoForOnOff) {
+        _isFetchRequestData = YES;
+        [self.delegate lauchViewShowEndIsInSubmitTime:YES];
+    }
+}
 - (void)getAdversementImageStyle:(int)style
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
