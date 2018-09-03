@@ -64,6 +64,8 @@ typedef NS_ENUM(NSInteger, SelectAccoutType) {
 #define BidDetailScrollViewHeight    [[UIScreen mainScreen] bounds].size.height - 57 - 64
 #define TabBarHeight            49
 #define StatusBarHeight         80
+#define StatusBarHeight1  [[UIApplication sharedApplication] statusBarFrame].size.height
+#define NavigationBarHeight1    (44 + StatusBarHeight1)
 #define NavigationBarHeight     64
 #define TableViewHeight         (ScreenHeight - TabBarHeight - StatusBarHeight - NavigationBarHeight)
 #define kIS_IOS7        ([[[UIDevice currentDevice] systemVersion] intValue]>=7)
