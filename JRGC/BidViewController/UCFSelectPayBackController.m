@@ -176,7 +176,8 @@
 }
 - (void)addFootView
 {
-    slectView = [[AllSelectView alloc] initWithFrame:CGRectMake(0, ScreenHeight - 95 - NavigationBarHeight, ScreenWidth, 95)];
+    
+    slectView = [[AllSelectView alloc] initWithFrame:CGRectMake(0, ScreenHeight - 95 - NavigationBarHeight1, ScreenWidth, 95)];
     slectView.backgroundColor = [UIColor whiteColor];
     slectView.delegate = self;
     UIImageView  *tabbarShadowView1 = [[UIImageView alloc] initWithFrame:CGRectMake(0, -10, ScreenWidth, 10)];
@@ -200,7 +201,7 @@
         }
         CGSize size = [Common getStrHeightWithStr:showStr AndStrFont:13 AndWidth:ScreenWidth - 30];
         slectView.keYongBaseView.frame = CGRectMake(0, 0, ScreenWidth, 40 + size.height);
-        self.beansTableView.frame = CGRectMake(ScreenWidth, 0, ScreenWidth, ScreenHeight - 64 - 162 - CGRectGetHeight(slectView.frame));
+        self.beansTableView.frame = CGRectMake(ScreenWidth, 0, ScreenWidth, ScreenHeight - NavigationBarHeight1 - 162 - CGRectGetHeight(slectView.frame));
         [Common addLineViewColor:UIColorWithRGB(0xeff0f3) With:slectView.keYongBaseView isTop:NO];
 
         slectView.selectedBtn.hidden = YES;
@@ -213,11 +214,11 @@
         slectView.showNumTipLab.frame = CGRectMake(15, CGRectGetMaxY(slectView.showNumSelectLabe.frame) + 5 , ScreenWidth - 30, size.height);
         slectView.showNumTipLab.text = showStr;
         slectView.sureBtn.frame = CGRectMake(15, CGRectGetMaxY(slectView.keYongBaseView.frame) + 10, ScreenWidth - 30, 37);
-        slectView.frame = CGRectMake(0, ScreenHeight - 95 - size.height - NavigationBarHeight, ScreenWidth, CGRectGetMaxY(slectView.sureBtn.frame) + 10);
+        slectView.frame = CGRectMake(0, ScreenHeight - 95 - size.height - NavigationBarHeight1, ScreenWidth, CGRectGetMaxY(slectView.sureBtn.frame) + 10);
         
 
     } else {
-        slectView.frame = CGRectMake(0, ScreenHeight - 95 - NavigationBarHeight, ScreenWidth, 95);
+        slectView.frame = CGRectMake(0, ScreenHeight - 95 - NavigationBarHeight1, ScreenWidth, 95);
         slectView.keYongBaseView.frame = CGRectMake(0, 0, ScreenWidth, 37.5);
         slectView.sureBtn.frame = CGRectMake(15, CGRectGetMaxY(slectView.keYongBaseView.frame) + 10, ScreenWidth - 30, 37);
         
@@ -432,11 +433,9 @@
 {
     self.youHuiArray = [[NSMutableArray alloc] init];
     self.beansArray = [[NSMutableArray alloc] init];
-    CGFloat navHeight = 64.0f;
-    if (!kIS_IOS7) {
-        navHeight -= 20;
-    }
-    self.baseScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 162, ScreenWidth, ScreenHeight - navHeight -162 - 95)];
+    CGFloat navHeight = 44 + StatusBarHeight1;
+
+    self.baseScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 162, ScreenWidth, ScreenHeight - navHeight - 162 - 95)];
     self.baseScrollView.pagingEnabled = YES;
     self.baseScrollView.delegate = self;
     self.baseScrollView.bounces = NO;

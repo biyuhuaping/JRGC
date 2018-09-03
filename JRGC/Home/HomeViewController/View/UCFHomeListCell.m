@@ -148,7 +148,7 @@
         NSArray *statusArr = @[@"未审核",@"等待确认",@"出借",@"流标",@"满标",@"回款中",@"已回款"];
         AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
         if (app.isSubmitAppStoreTestTime) {
-            statusArr = @[@"未审核",@"等待确认",@"购买",@"流标",@"满标",@"回款中",@"已回款"];
+            statusArr = @[@"查看",@"查看",@"查看",@"查看",@"查看",@"查看",@"查看"];
         }
         
         if ([presenter.item.type isEqualToString:@"3"]) {
