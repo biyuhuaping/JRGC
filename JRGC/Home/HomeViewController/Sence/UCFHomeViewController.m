@@ -137,7 +137,7 @@
 #pragma mark Dragbtn
 - (void)addDragBtn
 {
-    _dragBtn = [[BJGridItem alloc] initWithTitle:nil withImageName:@"home_icon_rebate" atIndex:0 editable:NO];
+    _dragBtn = [[BJGridItem alloc] initWithTitle:nil withImageName:@"guafengongbei" atIndex:0 editable:NO];
     if (kIS_IphoneX) {
         [_dragBtn setFrame:CGRectMake(ScreenWidth - 62 - 6, ScreenHeight - 49 - 65 - 6 - 34, 62, 65)];
 
