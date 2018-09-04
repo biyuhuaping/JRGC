@@ -451,6 +451,9 @@
             [weakSelf goToShareWeChat:nativeData];
         }
         
+        else if ([nativeData[@"action"] isEqualToString:@"gotoGB"]) {//工力工贝 分享
+            [weakSelf goToShareWeChat:nativeData];
+        }
         //----------------------------------------------------------------------------------------------------qyy
         
        /* else if ([nativeData[@"action"] isEqualToString:@"app_invest_error"]) //投标成功 跳转到 投资详情
@@ -1173,14 +1176,27 @@
     }
     else if ([controllerName isEqualToString:@"app_open_account"]) //开户失败 跳转到 开户页面
     {
-        [self.navigationController popViewControllerAnimated:YES];
+        if([NSStringFromClass(self.class) isEqualToString:@"UCFDiscoveryViewController"])
+        {
+            [self gotoOpenAccout];
+            
+        }else{
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+      
+    }
+    else if ([controllerName isEqualToString:@"gotoGB"]) //跳转到工贝页面
+    {
+        
     }
     //----------------------------------------------------------------------------------------------------qyy
     else
     {
         DBLOG(@"没有符合的要求");
     }
-    
+}
+-(void)gotoOpenAccout
+{
     
 }
 - (void)jsSetTitle:(NSString *)title
