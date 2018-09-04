@@ -64,4 +64,5 @@
 -(void)addProgressView;
 - (void)addRefresh;
 - (void)jumpLogin;
+-(void)gotoOpenAccout;
 @end

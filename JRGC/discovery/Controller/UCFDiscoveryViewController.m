@@ -7,7 +7,7 @@
 //
 
 #import "UCFDiscoveryViewController.h"
-
+#import "HSHelper.h"
 @interface UCFDiscoveryViewController ()
 
 @end
@@ -37,6 +37,11 @@
     
     [self gotoURL:self.url];
 //    self.webView.scrollView.bounces = NO;
+}
+-(void)gotoOpenAccout
+{
+    HSHelper *helper = [HSHelper new];
+    [helper pushOpenHSType:SelectAccoutTypeP2P Step:[UserInfoSingle sharedManager].openStatus nav:self.navigationController];
 }
 
 - (void)didReceiveMemoryWarning {
