@@ -70,6 +70,15 @@
 
     }
 }
+- (void)errorPost:(NSError *)err tag:(NSNumber *)tag
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提醒" message:@"请检查您的网络状态" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles: nil];
+    [alert show];
+}
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    exit(0);
+}
 - (void)getAdversementImageStyle:(int)style
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
