@@ -328,7 +328,10 @@
     }
     else if (tag.intValue == kSXTagGetHomeOtherSection) {
         NSArray *dataArr = self.showSectionsDict[@"data"][@"resultData"];
-        NSDictionary *sectionDict = dataArr[_currentRequestIndex];
+        NSDictionary *sectionDict = [dataArr objectSafeAtIndex:_currentRequestIndex];
+        if (sectionDict == nil) {
+            return;
+        }
         UCFHomeListGroup * tempG = [[UCFHomeListGroup alloc] init];
         tempG.iconUrl = sectionDict[@"iconUrl"];
         tempG.showMore = YES;
@@ -387,7 +390,10 @@
 {
     NSArray *dataArr = self.showSectionsDict[@"data"][@"resultData"];
     if (_currentRequestIndex <= dataArr.count - 1) {
-        NSDictionary *sectionDict = dataArr[_currentRequestIndex];
+        NSDictionary *sectionDict = [dataArr objectSafeAtIndex:_currentRequestIndex];
+        if (sectionDict == nil) {
+            return;
+        }
         if ([sectionDict[@"type"] intValue] == 0) { //新手专区
             NSDictionary *parmDict = nil;
             NSString *userId = [[NSUserDefaults standardUserDefaults] objectForKey:UUID];
