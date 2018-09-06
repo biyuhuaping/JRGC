@@ -24,7 +24,8 @@
     //我的工贝
     UCFSettingItem *facPoint = [UCFSettingArrowItem itemWithIcon:@"uesr_icon_score" title:@"我的工贝" destVcClass:nil];
     facPoint.isShowHot = YES;
-    facPoint.subtitle = self.benefit.score ? [NSString stringWithFormat:@"%@个", self.benefit.score] : @"0个";
+//    facPoint.subtitle = self.benefit.score ? [NSString stringWithFormat:@"%@个", self.benefit.score] : @"0个";
+    facPoint.subtitle = @"全新玩法";
     //签到
     UCFSettingItem *sign = [UCFSettingArrowItem itemWithIcon:@"uesr_icon_checkin" title:@"签到" destVcClass:nil];
     sign.subtitle = @"签到送工力";

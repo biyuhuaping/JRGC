@@ -272,7 +272,7 @@
 #pragma -- 进入工贝页面的请求
 - (void)getUserIntoGoCoinPageHTTP
 {
-    [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":[[NSUserDefaults standardUserDefaults] objectForKey:UUID]} tag:kSXTagIntoCoinPage owner:self signature:YES Type:SelectAccoutDefault];
+    [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":[[NSUserDefaults standardUserDefaults] objectForKey:UUID],@"pageType":@"vip"} tag:kSXTagIntoCoinPage owner:self signature:YES Type:SelectAccoutDefault];
 }
 
 
@@ -425,8 +425,9 @@
                 [data setObject:[paramDict objectSafeForKey:@"fromApp"] forKey:@"fromApp"];
                 [data setObject:[paramDict objectSafeForKey:@"userId"] forKey:@"userId"];
                 NSString * requestStr = [Common getParameterByDictionary:data];
-                web.url  = [NSString stringWithFormat:@"%@/#/?%@",[coinRequestDicData objectSafeForKey:@"urlPath"],requestStr];
+                web.url  = [NSString stringWithFormat:@"%@?%@",[coinRequestDicData objectSafeForKey:@"urlPath"],requestStr];
                 web.isHidenNavigationbar = YES;
+                web.rootVc = @"UCFSecurityCenterVC";
                 [self.navigationController pushViewController:web animated:YES];
             }
              else
