@@ -532,6 +532,12 @@
     
     [UMSocialUIManager setPreDefinePlatforms:@[@(UMSocialPlatformType_WechatSession),@(UMSocialPlatformType_WechatTimeLine)]];
     __weak typeof(self) weakSelf = self;
+    
+    if(![[UMSocialManager defaultManager] isInstall:UMSocialPlatformType_WechatSession])
+    {
+        [MBProgressHUD displayHudError:@"未安装微信客户端"];
+        return;
+    }
     //显示分享面板 （自定义UI可以忽略）
     [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
         [weakSelf shareDataWithPlatform:platformType withObject:messageObject];
