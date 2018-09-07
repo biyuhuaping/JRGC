@@ -197,15 +197,15 @@
             }
         }
     }
-//    else if (tag.integerValue == ksxTagGoldCurrentPrice) {
-//        if ([dic[@"ret"] boolValue]) {
-//            self.readTimePrice = [dic[@"data"][@"readTimePrice"] doubleValue];
-//        } else {
-////            [MBProgressHUD displayHudError:@"获取金价失败"];
-//        }
-//        [[NSNotificationCenter defaultCenter] postNotificationName:CURRENT_GOLD_PRICE object:nil];
-//
-//    }
+    else if (tag.integerValue == ksxTagGoldCurrentPrice) {
+        if ([dic[@"ret"] boolValue]) {
+            self.readTimePrice = [dic[@"data"][@"readTimePrice"] doubleValue];
+        } else {
+//            [MBProgressHUD displayHudError:@"获取金价失败"];
+        }
+        [[NSNotificationCenter defaultCenter] postNotificationName:CURRENT_GOLD_PRICE object:nil];
+
+    }
 }
 - (void)errorPost:(NSError *)err tag:(NSNumber *)tag
 {
