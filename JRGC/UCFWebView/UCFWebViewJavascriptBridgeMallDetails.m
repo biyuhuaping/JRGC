@@ -33,6 +33,10 @@
      [self addProgressView];//添加进度条
     [self gotoURL:self.url];
      self.webView.scrollView.bounces = NO;
+    if ([self.rootVc isEqualToString:@"UCFSecurityCenterVC"])
+    {
+        self.navigationController.navigationBar.hidden = YES;
+    }
 }
 
 //只要是豆哥商城的都去掉导航栏
