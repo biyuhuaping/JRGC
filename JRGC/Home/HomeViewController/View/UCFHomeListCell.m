@@ -60,6 +60,11 @@
     self.circleProgressView.pathBackColor = UIColorWithRGB(0xcfd5d7);
     self.circleProgressView.pathFillColor = UIColorWithRGB(0xfa4d4c);
     self.circleProgressView.strokeWidth = 3;
+    if ([UserInfoSingle sharedManager].isSubmitTime) {
+        self.circleProgressView.hidden = YES;
+    } else {
+        self.circleProgressView.hidden = NO;
+    }
 }
 
 - (void)setPresenter:(UCFHomeListCellPresenter *)presenter
