@@ -227,6 +227,7 @@
 #ifdef __IPHONE_11_0
     if (@available(iOS 11.0, *)) {
         _webView.scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+  
     } else {
         // Fallback on earlier versions
     }
@@ -423,7 +424,11 @@
         }else if ([nativeData[@"action"] isEqualToString:@"hide_header"]) {
             weakSelf.webView.translatesAutoresizingMaskIntoConstraints = false;
             [weakSelf.navigationController setNavigationBarHidden:YES animated:NO];
-            weakSelf.topConSpace.constant = 0;
+            if (StatusBarHeight1 > 20) {
+                weakSelf.topConSpace.constant = StatusBarHeight1;
+            } else {
+                weakSelf.topConSpace.constant = 0;
+            }
             weakSelf.isHideNativeNav = YES;
 
         }else if ([nativeData[@"action"] isEqualToString:@"reserve_contract"]) {
@@ -748,7 +753,7 @@
     if (!self.errorView.hidden) {
         self.errorView.hidden = YES;
     }
-    
+
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error

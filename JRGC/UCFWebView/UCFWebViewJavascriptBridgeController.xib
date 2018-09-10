@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UCFWebViewJavascriptBridgeController">
             <connections>
+                <outlet property="topConSpace" destination="xsn-Qb-X3a" id="vPz-As-koj"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="webView" destination="HWC-SJ-YkO" id="zmi-NG-eaw"/>
             </connections>
