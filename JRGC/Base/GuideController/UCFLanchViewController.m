@@ -146,7 +146,6 @@
             NSString *currentVersion = infoDic[@"CFBundleShortVersionString"];
             NSComparisonResult comparResult = [netVersion compare:currentVersion options:NSNumericSearch];
             
-            
             if (comparResult == NSOrderedAscending || comparResult == NSOrderedSame) {
                 [self.delegate lauchViewShowEndIsInSubmitTime:versionMark == 2 ? YES : NO];
             } else {

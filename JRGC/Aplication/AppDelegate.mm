@@ -79,8 +79,9 @@
     }
     [self luachNormalCode:nil];
 }
-- (void)lanchViewFetchTheFirstRequestData:(NSDictionary *)dic
+- (void)lanchViewFetchTheFirstRequestData:(NSDictionary *)dict;
 {
+    NSDictionary   *dic = [NSDictionary dictionaryWithDictionary:dict];
     if([dic[@"ret"] boolValue] == 1)
     {
         dic = dic[@"data"];
