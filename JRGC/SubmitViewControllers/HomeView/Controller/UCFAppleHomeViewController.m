@@ -15,7 +15,8 @@
 #import "UCFWebViewJavascriptBridgeBanner.h"
 #import "P2PWalletHelper.h"
 #import "UCFWebViewJavascriptBridgeLoanDetails.h"
-@interface UCFAppleHomeViewController ()<UCFHomeListNavViewDelegate,UCFCycleImageViewControllerDelegate,UCFHomeListViewControllerDelegate>
+#import "UCFZiZHIViewController.h"
+@interface UCFAppleHomeViewController ()<UCFHomeListNavViewDelegate,UCFCycleImageViewControllerDelegate,UCFHomeListViewControllerDelegate,UCFNoticeViewDelegate>
 @property (nonatomic,strong)UCFHomeListNavView *navView;
 @property (nonatomic,strong)UCFCycleImageViewController * cycleImageVC;
 @property (nonatomic,strong)UCFHomeListViewController *homeListVC;
@@ -65,16 +66,31 @@
     
     [self addChildViewController:self.cycleImageVC];
 }
-
+- (void)noticeView:(UCFNoticeView *)noticeView didClickedNotice:(UCFNoticeModel *)notice
+{
+    UCFZiZHIViewController *vc = [[UCFZiZHIViewController alloc] initWithNibName:@"UCFZiZHIViewController" bundle:nil];
+    [self.navigationController pushViewController:vc animated:YES];
+}
 - (void)addUI {
-    
-    
-    
-    self.homeListVC.tableView.frame = CGRectMake(0, 0, SCREEN_WIDTH, ScreenHeight-49);
+    UCFNoticeView *noticeView = (UCFNoticeView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFNoticeView" owner:self options:nil] lastObject];
+    noticeView.delegate = self;
+    for (UIView *view in noticeView.subviews) {
+        view.hidden = NO;
+    }
+    noticeView.noticeLabell.text = @"信息披露";
+    self.homeListVC.tableView.frame = CGRectMake(0, 0, SCREEN_WIDTH, ScreenHeight - 49);
     self.homeListVC.tableView.tableFooterView.frame = CGRectMake(0, 0, ScreenWidth, 0.01);
     CGFloat cycleImageViewHeight = [UCFCycleImageViewController viewHeight];
-    self.cycleImageVC.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, cycleImageViewHeight);
-    self.homeListVC.tableView.tableHeaderView = self.cycleImageVC.view;
+    self.cycleImageVC.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, cycleImageViewHeight + 45);
+    noticeView.frame =CGRectMake(0, cycleImageViewHeight, SCREEN_WIDTH, 45);
+    UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, cycleImageViewHeight + 45)];
+    headView.backgroundColor = [UIColor clearColor];
+
+    [headView addSubview:self.cycleImageVC.view];
+    [headView addSubview:noticeView];
+
+    self.homeListVC.tableView.tableHeaderView = headView;
+
     NSString *userId = [UserInfoSingle sharedManager].userId;
     if (userId) {
         self.navView.giftButton.hidden = NO;
@@ -94,6 +110,22 @@
         // Fallback on earlier versions
     }
 #endif
+    
+//    UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 100)];
+//    footView.backgroundColor = [UIColor lightTextColor];
+//    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+//    button.frame = CGRectMake(0, 0, ScreenWidth, 100);
+//    [button setTitleColor:UIColorWithRGB(0x5A86F4) forState:UIControlStateNormal];
+//    [button setTitle:@"查看公司资质" forState:UIControlStateNormal];
+//    [button addTarget:self action:@selector(checkDetai:) forControlEvents:UIControlEventTouchUpInside];
+//    [footView addSubview:button];
+//    self.homeListVC.tableView.tableFooterView = footView;
+    
+}
+- (void)checkDetai:(UIButton *)button
+{
+    UCFZiZHIViewController *vc = [[UCFZiZHIViewController alloc] initWithNibName:@"UCFZiZHIViewController" bundle:nil];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)fetchData
 {
@@ -119,7 +151,7 @@
     UCFWebViewJavascriptBridgeBanner *webView = [[UCFWebViewJavascriptBridgeBanner alloc]initWithNibName:@"UCFWebViewJavascriptBridgeBanner" bundle:nil];
     webView.rootVc = self.parentViewController;
     webView.baseTitleType = @"lunbotuhtml";
-    webView.url = @"https://static.9888.cn/pages/auditing/detail.html";;
+    webView.url = @"https://static.9888.cn/pages/auditing/detail.html";
     [self.navigationController pushViewController:webView animated:YES];
     
 }

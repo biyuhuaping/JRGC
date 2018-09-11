@@ -33,6 +33,18 @@
 		25F538B51D881B0A0039262F /* UCFPurchaseWebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25F538B31D881B0A0039262F /* UCFPurchaseWebView.xib */; };
 		330611BD212ABAAB00955BD6 /* UCFLanchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 330611BB212ABAAB00955BD6 /* UCFLanchViewController.m */; };
 		330611BE212ABAAB00955BD6 /* UCFLanchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 330611BC212ABAAB00955BD6 /* UCFLanchViewController.xib */; };
+		337B7D7621467940003AFE97 /* UCFZiZHIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 337B7D7421467940003AFE97 /* UCFZiZHIViewController.m */; };
+		337B7D7721467940003AFE97 /* UCFZiZHIViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 337B7D7521467940003AFE97 /* UCFZiZHIViewController.xib */; };
+		337B7D7B21467C5F003AFE97 /* UCFZIZhiWebViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 337B7D7921467C5F003AFE97 /* UCFZIZhiWebViewViewController.m */; };
+		337B7D7C21467C5F003AFE97 /* UCFZIZhiWebViewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 337B7D7A21467C5F003AFE97 /* UCFZIZhiWebViewViewController.xib */; };
+		337B7D8421467D14003AFE97 /* 整改通知书.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 337B7D7D21467D12003AFE97 /* 整改通知书.pdf */; };
+		337B7D8521467D14003AFE97 /* 银行存管证明.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 337B7D7E21467D12003AFE97 /* 银行存管证明.pdf */; };
+		337B7D8621467D14003AFE97 /* 企业信息公示.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 337B7D7F21467D13003AFE97 /* 企业信息公示.pdf */; };
+		337B7D8721467D14003AFE97 /* Loan contract.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 337B7D8021467D13003AFE97 /* Loan contract.pdf */; };
+		337B7D8821467D14003AFE97 /* 营业执照.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 337B7D8121467D13003AFE97 /* 营业执照.pdf */; };
+		337B7D8921467D14003AFE97 /* Contract of guarantee.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 337B7D8221467D14003AFE97 /* Contract of guarantee.pdf */; };
+		337B7D8A21467D14003AFE97 /* 用户服务协议.docx in Resources */ = {isa = PBXBuildFile; fileRef = 337B7D8321467D14003AFE97 /* 用户服务协议.docx */; };
+		337B7D8C214681FB003AFE97 /* ICP证.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 337B7D8B214681FB003AFE97 /* ICP证.pdf */; };
 		33E05B58212BB93500E1138F /* UCFAppleTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E05B57212BB93500E1138F /* UCFAppleTabBarViewController.m */; };
 		33E1A5DF20FDC5A9008244BD /* UCFCustomPopTransitionAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E1A5D920FDC5A8008244BD /* UCFCustomPopTransitionAnimation.m */; };
 		33E1A5E020FDC5A9008244BD /* UCFOpenRedBagButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E1A5DA20FDC5A8008244BD /* UCFOpenRedBagButton.m */; };
@@ -1126,6 +1138,20 @@
 		330611BA212ABAAB00955BD6 /* UCFLanchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFLanchViewController.h; sourceTree = "<group>"; };
 		330611BB212ABAAB00955BD6 /* UCFLanchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFLanchViewController.m; sourceTree = "<group>"; };
 		330611BC212ABAAB00955BD6 /* UCFLanchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFLanchViewController.xib; sourceTree = "<group>"; };
+		337B7D7321467940003AFE97 /* UCFZiZHIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFZiZHIViewController.h; sourceTree = "<group>"; };
+		337B7D7421467940003AFE97 /* UCFZiZHIViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFZiZHIViewController.m; sourceTree = "<group>"; };
+		337B7D7521467940003AFE97 /* UCFZiZHIViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFZiZHIViewController.xib; sourceTree = "<group>"; };
+		337B7D7821467C5F003AFE97 /* UCFZIZhiWebViewViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFZIZhiWebViewViewController.h; sourceTree = "<group>"; };
+		337B7D7921467C5F003AFE97 /* UCFZIZhiWebViewViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFZIZhiWebViewViewController.m; sourceTree = "<group>"; };
+		337B7D7A21467C5F003AFE97 /* UCFZIZhiWebViewViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFZIZhiWebViewViewController.xib; sourceTree = "<group>"; };
+		337B7D7D21467D12003AFE97 /* 整改通知书.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "整改通知书.pdf"; sourceTree = "<group>"; };
+		337B7D7E21467D12003AFE97 /* 银行存管证明.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "银行存管证明.pdf"; sourceTree = "<group>"; };
+		337B7D7F21467D13003AFE97 /* 企业信息公示.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "企业信息公示.pdf"; sourceTree = "<group>"; };
+		337B7D8021467D13003AFE97 /* Loan contract.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Loan contract.pdf"; sourceTree = "<group>"; };
+		337B7D8121467D13003AFE97 /* 营业执照.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "营业执照.pdf"; sourceTree = "<group>"; };
+		337B7D8221467D14003AFE97 /* Contract of guarantee.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Contract of guarantee.pdf"; sourceTree = "<group>"; };
+		337B7D8321467D14003AFE97 /* 用户服务协议.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "用户服务协议.docx"; sourceTree = "<group>"; };
+		337B7D8B214681FB003AFE97 /* ICP证.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "ICP证.pdf"; sourceTree = "<group>"; };
 		33E05B56212BB93500E1138F /* UCFAppleTabBarViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFAppleTabBarViewController.h; sourceTree = "<group>"; };
 		33E05B57212BB93500E1138F /* UCFAppleTabBarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFAppleTabBarViewController.m; sourceTree = "<group>"; };
 		33E1A5D820FDC5A8008244BD /* UCFOpenRedBagButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFOpenRedBagButton.h; sourceTree = "<group>"; };
@@ -6051,9 +6077,23 @@
 		83BA05BC212BB227009C2A34 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				337B7D8221467D14003AFE97 /* Contract of guarantee.pdf */,
+				337B7D8021467D13003AFE97 /* Loan contract.pdf */,
+				337B7D8B214681FB003AFE97 /* ICP证.pdf */,
+				337B7D7F21467D13003AFE97 /* 企业信息公示.pdf */,
+				337B7D8121467D13003AFE97 /* 营业执照.pdf */,
+				337B7D7D21467D12003AFE97 /* 整改通知书.pdf */,
+				337B7D7E21467D12003AFE97 /* 银行存管证明.pdf */,
+				337B7D8321467D14003AFE97 /* 用户服务协议.docx */,
 				83BA05C8212BB2B3009C2A34 /* UCFAppleHomeViewController.h */,
 				83BA05C9212BB2B3009C2A34 /* UCFAppleHomeViewController.m */,
 				83BA05CA212BB2B3009C2A34 /* UCFAppleHomeViewController.xib */,
+				337B7D7321467940003AFE97 /* UCFZiZHIViewController.h */,
+				337B7D7421467940003AFE97 /* UCFZiZHIViewController.m */,
+				337B7D7521467940003AFE97 /* UCFZiZHIViewController.xib */,
+				337B7D7821467C5F003AFE97 /* UCFZIZhiWebViewViewController.h */,
+				337B7D7921467C5F003AFE97 /* UCFZIZhiWebViewViewController.m */,
+				337B7D7A21467C5F003AFE97 /* UCFZIZhiWebViewViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -7211,6 +7251,7 @@
 				A85C74E41F90EE2200DF7D6A /* home_icon_weijin.png in Resources */,
 				8346B4F82017145C00544D78 /* guideImage8_2.png in Resources */,
 				A85C74D91F90ED9F00DF7D6A /* home_icon_gold.png in Resources */,
+				337B7D8A21467D14003AFE97 /* 用户服务协议.docx in Resources */,
 				A830DE821F8DD9F7003855B9 /* UCFCalendarModularViewController.xib in Resources */,
 				A8386E3F1F8CCDF200E26002 /* login_bg_phone4_default.png in Resources */,
 				A8386E3E1F8CCDE800E26002 /* login_bg_default.png in Resources */,
@@ -7218,11 +7259,13 @@
 				A8FF32E51F1666DC00066A80 /* UCFGoldBidSuccessViewController.xib in Resources */,
 				744B9ED61F0B8AC100440FBA /* UCFCalendarDetailHeaderView.xib in Resources */,
 				83CD84331F13A50800227704 /* UCFP2PTransferViewController.xib in Resources */,
+				337B7D8621467D14003AFE97 /* 企业信息公示.pdf in Resources */,
 				7BC7890A1B04569300D50494 /* jianjie.docx in Resources */,
 				83F669F71FD14B7E00ABCA57 /* UCFAssetProofApplyViewController.xib in Resources */,
 				83FB3F5F1E5C4D2A0094C9BA /* UCFBatchBidWebViewController.xib in Resources */,
 				74E1404A1F1C575200B17A96 /* UCFGoldCashHistoryController.xib in Resources */,
 				74270D1C1EC595ED00F9419B /* UCFFriendRecCell1.xib in Resources */,
+				337B7D8921467D14003AFE97 /* Contract of guarantee.pdf in Resources */,
 				7BC7890B1B04569300D50494 /* xinxizixunxieyi.docx in Resources */,
 				7BC7890C1B04569300D50494 /* zhucexieyi.docx in Resources */,
 				833A6EB81E554B8700C8A494 /* UCFCollectionDetailCell.xib in Resources */,
@@ -7371,6 +7414,7 @@
 				74AFB1311EE8F850007DBAFC /* UCFTransferHeaderView.xib in Resources */,
 				747B103D1F15F83500CECB2C /* UCFGoldenHeaderView.xib in Resources */,
 				83EB21E31D758EE50069EF95 /* UCFCashRecordListViewController.xib in Resources */,
+				337B7D8C214681FB003AFE97 /* ICP证.pdf in Resources */,
 				74FC22841BA6AB6700D1660A /* UCFCouponViewController.xib in Resources */,
 				74A2C0D11F4306A000EDF0FA /* UCFGoldCashButtonCell.xib in Resources */,
 				74270D5C1EC5AE8700F9419B /* UCFInvitationRewardCell2.xib in Resources */,
@@ -7412,6 +7456,7 @@
 				74F17C651B3BD52F000FF38B /* UCFMoreCell.xib in Resources */,
 				74FC227E1BA6A5BB00D1660A /* UCFOverDueListViewController.xib in Resources */,
 				4AB1260C1AEF8EA400E915F1 /* UCFPurchaseBidViewController.xib in Resources */,
+				337B7D7C21467C5F003AFE97 /* UCFZIZhiWebViewViewController.xib in Resources */,
 				83BA05C7212BB28B009C2A34 /* UCFAppleMyViewController.xib in Resources */,
 				4AFE198D1CA0006200EE6768 /* TopUpAndCash.storyboard in Resources */,
 				83FEDB771EFBB56000CFE0EF /* UCFCompanyNoOpenViewController.xib in Resources */,
@@ -7421,6 +7466,7 @@
 				83DAEFB51F16113400D7948F /* UCFGoldCalculatorView.xib in Resources */,
 				83D42A8E1FCE619D004C96EF /* UCFShareBaseView.xib in Resources */,
 				740586D21F41B10900E2DE01 /* UCFGoldRaiseCell.xib in Resources */,
+				337B7D8521467D14003AFE97 /* 银行存管证明.pdf in Resources */,
 				83CD84351F13A50800227704 /* UCFP2PViewController.xib in Resources */,
 				74673BC71FEB923A00AF3727 /* UCFMIneFuncCollectCell.xib in Resources */,
 				74702BC01FB5599700CBB655 /* UCFExtractGoldCell.xib in Resources */,
@@ -7429,6 +7475,7 @@
 				746748D21F3C53310067294D /* UCFBankLimitViewController.xib in Resources */,
 				7477BF9B1AFB19B200914BFB /* UCFNormalRedEnvelopeTableViewCell.xib in Resources */,
 				74877CD81FB2AC3900F32428 /* UCFCompleteViewController.xib in Resources */,
+				337B7D8721467D14003AFE97 /* Loan contract.pdf in Resources */,
 				25A9CC1A1D5213EB00209142 /* UCFTipCell.xib in Resources */,
 				FB5149341D64403100C26E7B /* gif@3x.gif in Resources */,
 				7BA6E4C81AD6731900FE8C37 /* Info.plist in Resources */,
@@ -7481,6 +7528,7 @@
 				745D37D61F3AE98800897F1A /* UCFGoldChargeSecCell.xib in Resources */,
 				74F490EA1E5B0BD70057AC62 /* UCFMyInvestBatchCell.xib in Resources */,
 				E3E05C5D1DD07D710066B65C /* UCFCouponExchangeToFriends.xib in Resources */,
+				337B7D7721467940003AFE97 /* UCFZiZHIViewController.xib in Resources */,
 				E32B8F4F1E85188D00B7871F /* UCFRegisterFinshViewController.xib in Resources */,
 				FB2858CC1BAAB07C000EAA71 /* UCFBackMoneyDetailViewController.xib in Resources */,
 				740586BA1F417ADB00E2DE01 /* UCFGoldFlexibleCell.xib in Resources */,
@@ -7528,6 +7576,7 @@
 				33E1A5E220FDC5A9008244BD /* UCFRedBagViewController.xib in Resources */,
 				74BDA9991F09F6F10054403F /* UCFCalendarHeaderView.xib in Resources */,
 				83E68C5F212EC7A7003BA282 /* appleLogin_bg_default.png in Resources */,
+				337B7D8821467D14003AFE97 /* 营业执照.pdf in Resources */,
 				74FD355C1ADF58710083D52C /* UCFSettingMainCell.xib in Resources */,
 				7443C7291F1EFF61009669C0 /* UCFGoldCashTwoCell.xib in Resources */,
 				74877CC41FB2A9AB00F32428 /* UCFGoldAllViewController.xib in Resources */,
@@ -7538,6 +7587,7 @@
 				83AB49601F6A766500C4231F /* UCFAccountPieCharViewController.xib in Resources */,
 				4A809CD11B40F7A200164EE5 /* SubInvestmentCell.xib in Resources */,
 				74877CD31FB2AC2400F32428 /* UCFTakingDeliveryViewController.xib in Resources */,
+				337B7D8421467D14003AFE97 /* 整改通知书.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7785,6 +7835,7 @@
 				833345721F1F82BF00A0F30D /* UCFGoldInvestmentCell.m in Sources */,
 				74F2910A1AE0DB82003E0E86 /* UCFCouponViewController.m in Sources */,
 				83FB3F5E1E5C4D2A0094C9BA /* UCFBatchBidWebViewController.m in Sources */,
+				337B7D7621467940003AFE97 /* UCFZiZHIViewController.m in Sources */,
 				74067A3F1F50341B00747888 /* UCFFloatDetailView.m in Sources */,
 				748ED79B1CC7312000690215 /* UCFCashAndTopUp.m in Sources */,
 				74F490EE1E5B2AAA0057AC62 /* UCFCollectionBidCell.m in Sources */,
@@ -7858,6 +7909,7 @@
 				83F2D59D1DCB508F0041F913 /* UCFAccount.m in Sources */,
 				74A2C0D01F4306A000EDF0FA /* UCFGoldCashButtonCell.m in Sources */,
 				FB1E7F841D8E4230009CBE2C /* UCFRightInterestNewView.m in Sources */,
+				337B7D7B21467C5F003AFE97 /* UCFZIZhiWebViewViewController.m in Sources */,
 				4A6FAFC61D743CF300AD4DF8 /* NSString+CJString.m in Sources */,
 				7477BF9A1AFB19B200914BFB /* UCFNormalRedEnvelopeTableViewCell.m in Sources */,
 				83CD84301F13A50800227704 /* UCFOrdinaryBidController.m in Sources */,
