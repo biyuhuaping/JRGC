@@ -24,8 +24,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-  
-    [self subShar];          //添加导航右侧按钮的分享，目前只有banner图有
+    if (![UserInfoSingle sharedManager].isSubmitTime) {
+        [self subShar];          //添加导航右侧按钮的分享，目前只有banner图有
+    }
     if (![UserInfoSingle sharedManager].isSubmitTime) {
         ((UCFHomeViewController *)self.rootVc).desVCStr = nil;
     }
