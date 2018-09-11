@@ -18,9 +18,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self addLeftButton];
-    baseTitleLabel.text = [[_fileName componentsSeparatedByString:@"."] firstObject];
-    [self loadDocument:_fileName];
-
+    if (_url) {
+        baseTitleLabel.text = @"信息披露";
+        NSURL *url = [NSURL URLWithString:_url];
+        NSURLRequest *request = [NSURLRequest requestWithURL:url];
+        
+        //加载网页
+        [_showWebView loadRequest:request];
+    } else {
+        baseTitleLabel.text = [[_fileName componentsSeparatedByString:@"."] firstObject];
+        [self loadDocument:_fileName];
+    }
 }
 - (void) loadDocument:(NSString *)docName
 {

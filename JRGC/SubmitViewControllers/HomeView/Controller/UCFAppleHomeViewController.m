@@ -77,7 +77,7 @@
     for (UIView *view in noticeView.subviews) {
         view.hidden = NO;
     }
-    noticeView.noticeLabell.text = @"查看公司资质";
+    noticeView.noticeLabell.text = @"信息披露";
     self.homeListVC.tableView.frame = CGRectMake(0, 0, SCREEN_WIDTH, ScreenHeight - 49);
     self.homeListVC.tableView.tableFooterView.frame = CGRectMake(0, 0, ScreenWidth, 0.01);
     CGFloat cycleImageViewHeight = [UCFCycleImageViewController viewHeight];

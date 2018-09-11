@@ -18,9 +18,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.userInteractionEnabled = YES;
+    self.view.backgroundColor = UIColorWithRGB(0xebebee);
     [self addLeftButton];
-    self.showTableview = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - StatusBarHeight1 - 44) style:UITableViewStylePlain];
+    self.showTableview = [[UITableView alloc] initWithFrame:CGRectMake(0, 1, ScreenWidth, ScreenHeight - StatusBarHeight1 - 44) style:UITableViewStylePlain];
+    self.showTableview.backgroundColor = [UIColor clearColor];
     [self.view addSubview:_showTableview];
     baseTitleLabel.text = @"公司资质";
     _showTableview.delegate = self;
@@ -29,6 +30,35 @@
     self.dataArr = @[@"企业信息公示",@"营业执照" ,@"整改通知书",@"银行存管证明",@"ICP证",@"用户服务协议"];
 //    self.typeDataArr = @[@"pdf" ,@"整改通知书",@"银行存管证明",@"ICP证书",@"用户服务协议"];
     
+    
+}
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 40)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, ScreenWidth - 30, 40)];
+    label.text = @"查看更多信息披露";
+    label.textAlignment = NSTextAlignmentRight;
+    label.textColor = UIColorWithRGB(0x5A86F4);
+    label.font = [UIFont systemFontOfSize:14];
+    [footView addSubview:label];
+    
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.frame = CGRectMake(0, 0, ScreenWidth, 40);
+    button.backgroundColor = [UIColor clearColor];
+    [button addTarget:self action:@selector(checkWebSite:) forControlEvents:UIControlEventTouchUpInside];
+    [footView addSubview:button];
+    
+    return footView;
+}
+- (void)checkWebSite:(UIButton *)butt
+{
+    UCFZIZhiWebViewViewController *vc  = [[UCFZIZhiWebViewViewController alloc] initWithNibName:@"UCFZIZhiWebViewViewController" bundle:nil];
+    vc.url = @"https://www.gongchangp2p.com/static/p2p-web/notice-information-disclosure/index.html";
+    [self.navigationController pushViewController:vc animated:YES];
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 40;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -41,7 +71,7 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellStr];
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 43, ScreenWidth, 1)];
-        view.backgroundColor = UIColorWithRGB(0x555555);
+        view.backgroundColor = UIColorWithRGB(0xebebee);
         view.tag = 1000;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         [cell addSubview:view];
@@ -54,7 +84,7 @@
 
     }
     cell.textLabel.textColor = UIColorWithRGB(0x555555);
-    cell.textLabel.font = [UIFont systemFontOfSize:16.0f];
+    cell.textLabel.font = [UIFont systemFontOfSize:14.0f];
     cell.textLabel.text = self.dataArr[indexPath.row];
     return cell;
 }

@@ -10,4 +10,5 @@
 
 @interface UCFZIZhiWebViewViewController : UCFBaseViewController
 @property(nonatomic,copy)NSString *fileName;
+@property(nonatomic,copy) NSString *url;
 @end
