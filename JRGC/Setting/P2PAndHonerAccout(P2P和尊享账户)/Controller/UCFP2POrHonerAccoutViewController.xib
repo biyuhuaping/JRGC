@@ -15,10 +15,6 @@
                 <outlet property="bottomConstract" destination="3IE-is-HbT" id="kN1-es-fdi"/>
                 <outlet property="bottomView" destination="D0d-2v-fC4" id="UGQ-AN-zaN"/>
                 <outlet property="cashButton" destination="GOA-kO-k5b" id="8ed-rn-iAv"/>
-                <outlet property="loadingImageView" destination="8C9-Ge-nQq" id="b4k-w2-KAB"/>
-                <outlet property="loadingLabel1" destination="hEU-Jq-muT" id="aeg-eJ-Qyn"/>
-                <outlet property="loadingLabel2" destination="LAV-sT-0Wu" id="fbP-g1-RfX"/>
-                <outlet property="loadingView" destination="kmQ-Tv-sM9" id="qJh-9F-aFo"/>
                 <outlet property="rechargeButton" destination="Co6-dG-m7q" id="Gde-s5-UJF"/>
                 <outlet property="shadowImageView" destination="eau-GC-3PV" id="Ntd-TQ-b0P"/>
                 <outlet property="tableView" destination="Yxq-SM-Ka2" id="7vq-0G-3d5"/>
@@ -38,41 +34,6 @@
                         <outlet property="delegate" destination="-1" id="3Ub-4X-wtE"/>
                     </connections>
                 </tableView>
-                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kmQ-Tv-sM9">
-                    <rect key="frame" x="0.0" y="-64" width="375" height="731"/>
-                    <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="transform" translatesAutoresizingMaskIntoConstraints="NO" id="8C9-Ge-nQq">
-                            <rect key="frame" x="122.5" y="280.5" width="130" height="170"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="130" id="Bd3-iM-aHg"/>
-                                <constraint firstAttribute="height" constant="170" id="pe7-gn-awW"/>
-                            </constraints>
-                        </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="即将跳转工场尊享" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hEU-Jq-muT">
-                            <rect key="frame" x="114.5" y="462.5" width="147" height="21.5"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                            <color key="textColor" red="0.52156862749999999" green="0.56862745100000001" blue="0.70196078429999997" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="可直接访问www.gongchangzx.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LAV-sT-0Wu">
-                            <rect key="frame" x="74.5" y="489" width="225.5" height="17"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <color key="textColor" red="0.52156862749999999" green="0.56862745100000001" blue="0.70196078429999997" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                    </subviews>
-                    <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstItem="8C9-Ge-nQq" firstAttribute="centerX" secondItem="kmQ-Tv-sM9" secondAttribute="centerX" id="2O2-Tf-wBC"/>
-                        <constraint firstItem="hEU-Jq-muT" firstAttribute="centerX" secondItem="kmQ-Tv-sM9" secondAttribute="centerX" id="3VL-5f-Qc3"/>
-                        <constraint firstItem="8C9-Ge-nQq" firstAttribute="centerY" secondItem="kmQ-Tv-sM9" secondAttribute="centerY" id="LN2-NK-SkJ"/>
-                        <constraint firstItem="hEU-Jq-muT" firstAttribute="top" secondItem="8C9-Ge-nQq" secondAttribute="bottom" constant="12" id="RTm-kZ-Omf"/>
-                        <constraint firstItem="LAV-sT-0Wu" firstAttribute="top" secondItem="hEU-Jq-muT" secondAttribute="bottom" constant="5" id="UhN-Q9-hsx"/>
-                        <constraint firstItem="LAV-sT-0Wu" firstAttribute="centerX" secondItem="kmQ-Tv-sM9" secondAttribute="centerX" id="pyP-ju-zJA"/>
-                    </constraints>
-                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D0d-2v-fC4" customClass="UCFCashAndTopUp">
                     <rect key="frame" x="0.0" y="610" width="375" height="57"/>
                     <subviews>
@@ -135,21 +96,14 @@
             <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="bottomMargin" secondItem="D0d-2v-fC4" secondAttribute="bottom" id="3IE-is-HbT"/>
-                <constraint firstAttribute="trailing" secondItem="kmQ-Tv-sM9" secondAttribute="trailing" id="8aU-ei-b81"/>
-                <constraint firstItem="kmQ-Tv-sM9" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ARK-pl-DKF"/>
                 <constraint firstItem="D0d-2v-fC4" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="CC7-HV-hcn"/>
-                <constraint firstItem="kmQ-Tv-sM9" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="-64" id="CCx-rL-la7"/>
                 <constraint firstItem="Yxq-SM-Ka2" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="L0j-8j-LYB"/>
                 <constraint firstItem="Yxq-SM-Ka2" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Ogp-xj-s89"/>
                 <constraint firstAttribute="trailing" secondItem="D0d-2v-fC4" secondAttribute="trailing" id="dkg-c8-aw4"/>
                 <constraint firstItem="D0d-2v-fC4" firstAttribute="top" secondItem="Yxq-SM-Ka2" secondAttribute="bottom" id="iUg-Wx-P7M"/>
                 <constraint firstAttribute="trailing" secondItem="Yxq-SM-Ka2" secondAttribute="trailing" id="iw1-wT-os3"/>
-                <constraint firstAttribute="bottom" secondItem="kmQ-Tv-sM9" secondAttribute="bottom" id="kgZ-bM-XCf"/>
             </constraints>
             <point key="canvasLocation" x="-539" y="-258"/>
         </view>
     </objects>
-    <resources>
-        <image name="transform" width="130" height="170"/>
-    </resources>
 </document>

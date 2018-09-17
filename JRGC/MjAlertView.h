@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "UCFOpenRedBagButton.h"
 typedef void(^MyBlock)(id blockContent);
 
 //显示类型
@@ -39,6 +39,9 @@ typedef enum : NSUInteger {
 @optional
 - (void)mjalertView:(MjAlertView *)alertview didClickedButton:(UIButton *)clickedButton andClickedIndex:(NSInteger)index;
 - (void)mjalertView:(MjAlertView *)alertview withObject:(NSDictionary *)dic;
+
+
+- (void)mjalertView:(MjAlertView *)alertview didClickedRedBagButton:(UCFOpenRedBagButton *)redBagButton;
 @end
 
 @interface MjAlertView : UIView
@@ -89,6 +92,9 @@ typedef enum : NSUInteger {
 
 //尊享活动弹框
 -(instancetype)initHonerCashWithMessage:(NSString *)message delegate:(id)delegate;
+
+//尊享活动页弹框
+-(instancetype)initHonerActViewAlertWithDelegate:(id)delegate;
 
 #pragma mark - 显示
 - (void)show;

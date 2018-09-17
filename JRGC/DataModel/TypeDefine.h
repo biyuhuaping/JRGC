@@ -357,6 +357,7 @@
 #define GETHOMENEWUSERSECTIONS      @"/api/homePage/v2/noviceModule.json"   //新手磨具爱
 #define GETHOMEOTHERSECTIONS      @"api/homePage/v2/aiInvestModule.json"   //首页别的模块
 #define GETHOMEUSERSTATE      @"api/homePage/v2/statusInfoForCache.json"   //获取用户状态
+#define HOMEPAGERECOMMENDPRDCLAIMURL     @"/api/homePage/v2/recommendPrdClaim.json"//推荐标列表
 enum kPostStatus{
     kPostStatusNone=0,
     kPostStatusBeging=1,
@@ -590,6 +591,7 @@ enum kSXTag
     kSXTagGetHomeNewUserSection,         //新手模块
     kSXTagGetHomeOtherSection,           //别的模块
     kSXTagGetUserAllState,              //查询用户相关状态
+    kSXTagRecommendPrdClaim,            //推荐表列表
 };
 
 typedef enum kSXTag kSXTag;

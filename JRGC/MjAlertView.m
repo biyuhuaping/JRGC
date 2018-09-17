@@ -11,9 +11,14 @@
 #import "AppDelegate.h"
 #import "MongoliaLayerCenter.h"
 #import "UIImageView+WebCache.h"
+#import "UCFOpenRedBagButton.h"
 #define SCREEN_WIDTH_5 ([UIScreen mainScreen].bounds.size.width == 320)
 #define SCREEN_WIDTH_6 ([UIScreen mainScreen].bounds.size.width == 375)
 #define SCREEN_WIDTH_6P ([UIScreen mainScreen].bounds.size.width == 414)
+
+#define Rate_UpTangentLine 0.618f
+#define Rate_UpTangentLine_TangentDot 0.2f
+#define Rate_UpTangentOpen_Line 0.15f
 
 #define CancelButtonTag 0
 @interface MjAlertView ()<UIWebViewDelegate>
@@ -21,9 +26,8 @@
     UIWebView *_webView;
 }
 @property (nonatomic, strong) NSMutableArray *buttonArray;
-
 @property (nonatomic, assign) NSInteger currentSelectSortBtnTag;
-
+@property (nonatomic, strong) UCFOpenRedBagButton *sendBtn;
 @end
 
 @implementation MjAlertView
@@ -721,6 +725,117 @@
     return self;
     
 }
+//尊享活动页弹框
+-(instancetype)initHonerActViewAlertWithDelegate:(id)delegate;
+{
+    self = [self init];
+    if (self) {
+        UIView *baseView = nil;
+        baseView = [[[NSBundle mainBundle] loadNibNamed:@"UCFRedBagAlertView" owner:nil options:nil]firstObject ];
+        CGSize size = CGSizeMake(285, 400);
+        if (ScreenHeight > 569) {
+            size.width = ScreenWidth/320.0f * 270;
+            size.height = size.width * 3 / 2;
+        }
+        
+        baseView.frame = CGRectMake(0, 0, size.width, size.height + 55);
+        [self createFoldedUI:baseView];
+        [self.showView  setFrame:CGRectMake((ScreenWidth - CGRectGetWidth(baseView.frame))/2.0f, (ScreenHeight - size.height)/2.0f - 55, CGRectGetWidth(baseView.frame), CGRectGetHeight(baseView.frame))];
+        self.delegate = delegate;
+        [self.showView addSubview:baseView];
+        self.alertviewType = MjAlertViewTypeGift;
+        
+        
+        for (UIView *view  in baseView.subviews) {
+            view.layer.zPosition = 2;
+        }
+        UIButton *closeBtn = [baseView viewWithTag:1000];
+        [closeBtn addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];
+        self.cancelButton = closeBtn;
+        UIButton *shareBtn = [baseView viewWithTag:1001];
+        [shareBtn addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return self;
+    
+}
+- (void)createFoldedUI:(UIView *)view
+{
+    
+    float redBagHight = view.frame.size.height;
+    float redBagWidth = view.frame.size.width;
+    //深色背景 下部视图
+   CAShapeLayer * redLayer = [[CAShapeLayer alloc] init];
+    UIBezierPath *downPath = [UIBezierPath bezierPath];
+    CGPoint downStartPoint = CGPointMake(0, redBagHight *Rate_UpTangentLine);
+    CGPoint downEndPoint = CGPointMake(redBagWidth , redBagHight *Rate_UpTangentLine);
+    CGPoint downControlPoint = CGPointMake(redBagWidth*0.5, redBagHight *Rate_UpTangentLine + redBagWidth * Rate_UpTangentOpen_Line);
+    //曲线起点
+    
+    [downPath moveToPoint:downStartPoint];
+    //曲线终点和控制基点
+    [downPath addQuadCurveToPoint:downEndPoint controlPoint:downControlPoint];
+    [downPath addLineToPoint:CGPointMake(redBagWidth , redBagHight )];
+    [downPath addLineToPoint:CGPointMake(0, redBagHight )];
+    [downPath closePath];
+    
+    //曲线部分颜色和阴影
+    [redLayer setFillColor:[UIColor colorWithRed:0.7968 green:0.2186 blue:0.204 alpha:1.0].CGColor];//深色背景
+    redLayer.path = downPath.CGPath;
+    redLayer.zPosition = 1;
+    [view.layer addSublayer:redLayer];
+    
+    //浅色红包口
+    redLayer = [[CAShapeLayer alloc] init];
+    UIBezierPath *path = [UIBezierPath bezierPath];
+    [path moveToPoint:CGPointMake(0, 0)];
+    
+    CGPoint startPoint = CGPointMake(0, redBagHight* Rate_UpTangentLine);
+    CGPoint endPoint = CGPointMake(redBagWidth , redBagHight * Rate_UpTangentLine);
+    CGPoint controlPoint = CGPointMake(redBagWidth*0.5, redBagHight *Rate_UpTangentLine + redBagWidth * Rate_UpTangentOpen_Line);
+    //曲线起点
+    [path addLineToPoint:startPoint];
+    //曲线终点和控制基点
+    [path addQuadCurveToPoint:endPoint controlPoint:controlPoint];
+    [path addLineToPoint:CGPointMake(redBagWidth , 0)];
+    [path closePath];
+    
+    //深色背景 下部视图
+    CAShapeLayer *lineLayer = [[CAShapeLayer alloc] init];
+    
+    //曲线部分颜色和阴影
+    [lineLayer setFillColor:[UIColor colorWithRed:0.851 green:0.3216 blue:0.2784 alpha:1.0].CGColor];
+    [lineLayer setStrokeColor:[UIColor colorWithRed:0.9401 green:0.0 blue:0.0247 alpha:0.02].CGColor];
+    [lineLayer setShadowColor:[UIColor blackColor].CGColor];
+    [lineLayer setLineWidth:0.1];
+    [lineLayer setShadowOffset:CGSizeMake(6, 6)];
+    [lineLayer setShadowOpacity:0.2];
+    [lineLayer setShadowOffset:CGSizeMake(1, 1)];
+    lineLayer.path = path.CGPath;
+    lineLayer.zPosition = 1;
+    [view.layer addSublayer:lineLayer];
+    
+    
+    //发红包按钮
+    UCFOpenRedBagButton *sendBtn = [[UCFOpenRedBagButton alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+    sendBtn.layer.masksToBounds = YES;
+    sendBtn.layer.cornerRadius = sendBtn.bounds.size.height/2;
+    [sendBtn setBackgroundImage:[UIImage imageNamed:@"btn_open_pre"] forState:UIControlStateNormal];
+    [sendBtn addTarget:self action:@selector(moveAnimation:) forControlEvents:UIControlEventTouchUpInside];
+    //    [sendBtn setBackgroundColor:[UIColor brownColor]];
+    sendBtn.center = CGPointMake(redBagWidth *0.5, redBagHight*Rate_UpTangentLine + redBagWidth*Rate_UpTangentLine_TangentDot*0.5);
+    sendBtn.layer.zPosition = 2;
+    self.sendBtn = sendBtn;
+    
+    [view addSubview:sendBtn];
+    sendBtn.animationImagesArray = [NSArray arrayWithObjects:[UIImage imageNamed:@"gold_1"],[UIImage imageNamed:@"gold_2"],[UIImage imageNamed:@"gold_3"],[UIImage imageNamed:@"gold_4"],[UIImage imageNamed:@"gold_5"],[UIImage imageNamed:@"gold_6"],nil ];
+    
+    UIButton *closeBtn = [[UIButton alloc] initWithFrame:CGRectMake(10, 10 , 40, 40)];
+    closeBtn.layer.zPosition = 2;
+    [closeBtn setImage:[UIImage imageNamed:@"btn-close_pre"] forState:UIControlStateNormal];
+    closeBtn.imageView.frame = CGRectMake(0, 0, 15, 15);
+    closeBtn.tag = 1000;
+    [view addSubview:closeBtn];
+}
 - (void)webViewDidFinishLoad:(UIWebView*)webView{
     //字体大小
     [_webView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('body')[0].style.webkitTextSizeAdjust= '275%'"];
@@ -998,6 +1113,12 @@
     }
     else if (button == self.cancelButton) {
         [self hide];
+    }
+}
+-(void)moveAnimation:(UCFOpenRedBagButton *)redBagButton
+{
+    if ([self.delegate respondsToSelector:@selector(mjalertView:didClickedRedBagButton:)]) {
+        [self.delegate mjalertView:self didClickedRedBagButton:redBagButton];
     }
 }
 //集合标详情 项目排序弹框 点击确认 按钮 触发该事件

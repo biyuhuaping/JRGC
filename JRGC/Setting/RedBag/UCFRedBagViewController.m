@@ -15,7 +15,12 @@
 #import "UIDic+Safe.h"
 #import "NZLabel.h"
 #import "UCFCouponViewController.h"
-
+#import "UCFInvestMicroMoneyCell.h"
+#import "AppDelegate.h"
+#import "UCFInvestViewController.h"
+#import "UCFMicroMoneyModel.h"
+#import "UCFNoPermissionViewController.h"
+#import "UCFProjectDetailViewController.h"
 #define Width_RedBag [UIScreen mainScreen].bounds.size.width
 #define Height_RedBag [UIScreen mainScreen].bounds.size.height
 #define Rate_UpTangentLine 0.618f
@@ -31,6 +36,7 @@
 @property (nonatomic, strong) CAShapeLayer *lineLayer;
 @property (weak, nonatomic) IBOutlet UILabel *rebTitleLabel;
 @property (weak, nonatomic) IBOutlet UIButton *openedCloseButton;
+@property (weak, nonatomic) IBOutlet UIButton *quanButton;
 @property (weak, nonatomic) IBOutlet UIImageView *logoImageView;
 @property (weak, nonatomic) IBOutlet UILabel *logoTileLabel;
 @property (weak, nonatomic) IBOutlet UILabel *desCribeLabel;
@@ -45,6 +51,10 @@
 @property (weak, nonatomic) IBOutlet NZLabel *result4Label;
 @property (weak, nonatomic) IBOutlet UILabel *result5Label;
 
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) NSMutableArray *dataArray;
+@property (strong, nonatomic) UCFMicroMoneyModel *listModel;
+- (IBAction)gotoQuanCenterVC:(id)sender;
 @property (strong, nonatomic) NSDate *openStartTime;
 @end
 
@@ -56,15 +66,21 @@
     if (self) {
         self.transitioningDelegate = self;
         self.modalPresentationStyle = UIModalPresentationCustom;
+        self.navigationController.navigationBar.hidden  = YES;
         // 没有设置的话确实会造成presentVC被移除，需要dimiss时再添加（即使不添加也没问题只是会有一个淡出的动画），但是我测试的时候如果设置了的话，dismiss结束后presentVC也消失了
     }
     return self;
 }
-
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.hidden  = YES;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     if (!self.fold) {
         [self createUnfoldnedUI];
+        [self getRecommendPrdClaimFromNet];
     }
     else {
         [self createFoldedUI];
@@ -107,6 +123,12 @@
     _lineLayer.path = newPath.CGPath;
     _lineLayer.zPosition = 1;
     [self.view.layer addSublayer:_lineLayer];
+    self.result2Label.text = [NSString stringWithFormat:@"满¥%@可用", [self.data objectSafeForKey:@"investMultip"]];
+    self.result3Label.text = [NSString stringWithFormat:@"期限：%@", [self.data objectSafeForKey:@"inverstPeriod"]];
+    self.result4Label.text = [NSString stringWithFormat:@"%@元", [self.data objectSafeForKey:@"couponAmt"]];
+    [self.result4Label setFont:[UIFont systemFontOfSize:12] string:@"元"];
+    self.result2Label.layer.zPosition = 3;
+    self.result3Label.layer.zPosition = 3;
 }
 
 - (void)createFoldedUI {
@@ -190,9 +212,10 @@
 }
 
 - (void)tapped:(UIGestureRecognizer *)tap {
+     __weak typeof(self) weakSelf = self;
     [self dismissViewControllerAnimated:YES completion:^{
         UCFCouponViewController *coupon = [[UCFCouponViewController alloc] initWithNibName:@"UCFCouponViewController" bundle:nil];
-        [self.sourceVC.navigationController pushViewController:coupon animated:YES];
+        [weakSelf.sourceVC.navigationController pushViewController:coupon animated:YES];
     }];
 }
 
@@ -208,15 +231,17 @@
         self.result4Label.font = [UIFont systemFontOfSize:13];
         self.result4Label.textColor = UIColorWithRGB(0x333333);
         self.rebTitleLabel.layer.zPosition = 3;
-        self.result2Label.hidden = YES;
-        self.result3Label.hidden = YES;
+        self.result2Label.hidden = NO;
+        self.result3Label.hidden = NO;
         self.rebTitleLabel.layer.zPosition = 3;
         self.openedCloseButton.layer.zPosition = 3;
+        self.quanButton.layer.zPosition = 3;
         self.logoImageView.layer.zPosition = 3;
         return;
     }
     self.rebTitleLabel.layer.zPosition = -1;
     self.openedCloseButton.layer.zPosition = -1;
+    self.quanButton.layer.zPosition = -1;
     self.logoImageView.layer.zPosition = 3;
     self.logoTileLabel.layer.zPosition = 3;
     self.desCribeLabel.layer.zPosition = 3;
@@ -229,6 +254,7 @@
         self.result4UpSpace.constant = 19;
         self.rebTitleLabel.layer.zPosition = 3;
         self.openedCloseButton.layer.zPosition = 3;
+        self.quanButton.layer.zPosition = 3;
         self.logoTileLabel.layer.zPosition = -1;
         self.desCribeLabel.layer.zPosition = -1;
         self.header5Label.layer.zPosition = -1;
@@ -237,10 +263,10 @@
 }
 
 - (void)openRedBag {
-    [self.sendBtn removeFromSuperview];
+//    [self.sendBtn removeFromSuperview];
     [self upLineMoveUp];
     [self downLineMoveDown];
-    [self.closeBtn removeFromSuperview];
+//    [self.closeBtn removeFromSuperview];
 }
 
 - (void)coinRotateWithObj:(UIView *)obj {
@@ -348,16 +374,120 @@
 
 - (IBAction)lendButton:(UIButton *)sender {
     
-//    if (self.fold) {
-//
-//    } else {
-//        [self.sourceVC.navigationController popToRootViewControllerAnimated:NO];
-//    }
-    
-    
     [self dismissViewControllerAnimated:YES completion:^{
         [[NSNotificationCenter defaultCenter] postNotificationName:@"UCFRedBagViewController_to_lend" object:nil];
     }];
+    
+}
+#pragma mark -tableviewDelegate
+//  选项表数据源方法
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return self.dataArray.count == 0 ? 0 : 30;
+}
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    if (self.dataArray.count != 0) {
+        UIView * headerView =[[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 30)];
+        headerView.backgroundColor = UIColorWithRGB(0xf9f9f9);
+        UILabel *titleLab = [[UILabel alloc]initWithFrame:CGRectMake(15, 8, 80, 15)];
+        titleLab.font = [UIFont systemFontOfSize:13];
+        titleLab.textColor = UIColorWithRGB(0x333333);
+        titleLab.text = @"推荐出借";
+        [headerView addSubview:titleLab];
+        UILabel *titleLab1 = [[UILabel alloc]initWithFrame:CGRectMake(ScreenWidth - 15 - 8 - 6 - 35, 5, 35, 20)];
+        titleLab1.font = [UIFont systemFontOfSize:13];
+        titleLab1.textColor = UIColorWithRGB(0x4AA1F9);
+        titleLab1.text = @"更多";
+        titleLab1.textAlignment = NSTextAlignmentRight;
+        [headerView addSubview:titleLab1];
+        UIImageView  *image  = [[UIImageView  alloc]initWithFrame:CGRectMake(ScreenWidth - 15 - 8 , 8 , 8, 13)];
+        image.image = [UIImage imageNamed:@"home_arrow_blue"];
+        [headerView addSubview:image];
+        
+        UIButton  *button  = [UIButton buttonWithType:UIButtonTypeSystem];
+        button.backgroundColor = [UIColor clearColor];
+        button.frame = CGRectMake(ScreenWidth - 100, 0 , 100, 30);
+        [button addTarget:self action:@selector(gotoMoreView) forControlEvents:UIControlEventTouchUpInside];
+        [headerView addSubview:button];
+        return headerView;
+    }
+    return nil;
+}
+- (void)gotoMoreView
+{
+    __weak typeof(self) weakSelf = self;
+    [self dismissViewControllerAnimated:NO completion:^{
+        AppDelegate *appdel = (AppDelegate *)[UIApplication sharedApplication].delegate;
+        UCFBaseViewController * base =    [[appdel.tabBarController.childViewControllers objectAtIndex:4].childViewControllers lastObject];
+        [base.navigationController popToRootViewControllerAnimated:NO];
+        UCFInvestViewController *invest = (UCFInvestViewController *)[[appdel.tabBarController.childViewControllers objectAtIndex:1].childViewControllers firstObject];
+        invest.selectedType = @"QualityClaims";
+        if ([invest isViewLoaded]){
+            [invest changeView];
+        }
+        [appdel.tabBarController setSelectedIndex:1];
+    }];
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    return 95.0f;
+}
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.dataArray.count;
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *cellId = @"investmicromoney";
+    UCFInvestMicroMoneyCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+    if (nil == cell) {
+        cell = (UCFInvestMicroMoneyCell *)[[[NSBundle mainBundle] loadNibNamed:@"UCFInvestMicroMoneyCell" owner:self options:nil] lastObject];
+        cell.tableView = tableView;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
+    cell.indexPath = indexPath;
+    UCFMicroMoneyModel *model = [self.dataArray objectAtIndex:indexPath.row];
+    cell.microMoneyModel = model;
+    return cell;
+    
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
+    UCFMicroMoneyModel *model = [self.dataArray objectAtIndex:indexPath.row];
+    self.listModel = model;
+    if ([model.status intValue ] != 2) {
+        NSInteger isOrder = [model.isOrder integerValue];
+        if (isOrder <= 0) {
+            UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前标的详情只对认购人开放"];
+            [self.navigationController pushViewController:controller animated:YES];
+            return;
+        }
+    }
+    
+        NSString *userid =[[NSUserDefaults standardUserDefaults] valueForKey:UUID];
+
+        NSString *prdClaimsIdStr = [NSString stringWithFormat:@"%@",model.Id];
+        NSDictionary *praramDic = @{@"userId":userid,@"prdClaimsId":prdClaimsIdStr};
+        if ([model.status intValue ] != 2) {
+            NSInteger isOrder = [model.isOrder integerValue];
+            if (isOrder > 0) {
+//                [MBProgressHUD showOriginHUDAddedTo:self.view animated:YES];
+                [[NetworkModule sharedNetworkModule] newPostReq:praramDic tag: kSXTagPrdClaimsGetPrdBaseDetail owner:self signature:YES Type:SelectAccoutTypeP2P];
+            } else {
+                UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前标的详情只对认购人开放"];
+                [self.navigationController pushViewController:controller animated:YES];
+            }
+        } else {
+//            [MBProgressHUD showOriginHUDAddedTo:self.view animated:YES];
+            [[NetworkModule sharedNetworkModule] newPostReq:praramDic tag: kSXTagPrdClaimsGetPrdBaseDetail owner:self signature:YES Type:SelectAccoutTypeP2P];
+        }
     
 }
 
@@ -367,6 +497,15 @@
     if (userId) {
         NSDictionary *param = @{@"userId": userId};
         [[NetworkModule sharedNetworkModule] newPostReq:param tag:kSXTagGetRedBagContent owner:self signature:YES Type:SelectAccoutDefault];
+    }
+}
+#pragma mark - 从网络获取推荐标数据
+- (void)getRecommendPrdClaimFromNet
+{
+    NSString *userId = [UserInfoSingle sharedManager].userId;
+    if (userId) {
+        NSDictionary *param = @{@"userId": userId};
+        [[NetworkModule sharedNetworkModule] newPostReq:param tag:kSXTagRecommendPrdClaim owner:self signature:YES Type:SelectAccoutDefault];
     }
 }
 
@@ -384,10 +523,8 @@
         if ([rstcode intValue] == 1) {
 
             [[NSNotificationCenter defaultCenter] postNotificationName:@"hasGetRedBag" object:nil];
-        
             
             NSDictionary *res = [dic objectSafeDictionaryForKey:@"data"];
-//            self.result1Label.text = [res objectSafeForKey:@"couponName"];
             self.result2Label.text = [NSString stringWithFormat:@"满¥%@可用", [res objectSafeForKey:@"investMultip"]];
             self.result3Label.text = [NSString stringWithFormat:@"期限：%@", [res objectSafeForKey:@"inverstPeriod"]];
             self.result4Label.text = [NSString stringWithFormat:@"%@元", [res objectSafeForKey:@"couponAmt"]];
@@ -405,10 +542,42 @@
                 [self openRedBag];
                 [self setOpenedUIState];
             }
-            
         } else {
             [self.sendBtn stopAnimation];
             [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
+        }
+    }
+    else if (tag.intValue == kSXTagRecommendPrdClaim)
+    {
+        if ([rstcode intValue] == 1)
+        {
+            self.tableView.hidden = NO;
+            NSDictionary *res = [dic objectSafeDictionaryForKey:@"data"];
+            NSArray *resultData = [res objectSafeArrayForKey:@"resultData"];
+            UCFMicroMoneyModel *model = [UCFMicroMoneyModel microMoneyModelWithDict:[resultData firstObject]];
+            
+            self.dataArray = [NSMutableArray arrayWithObjects:model, nil];
+            [self.tableView reloadData];
+            
+        }else{
+            self.tableView.hidden = YES;
+        }
+    }else if (tag.intValue == kSXTagPrdClaimsGetPrdBaseDetail){
+        NSDictionary *dataDic = [dic objectSafeForKey:@"data"];
+        NSString *rstcode = dic[@"ret"];
+        NSString *rsttext = dic[@"message"];
+        if ([rstcode boolValue]) {
+            NSArray *prdLabelsListTemp = [NSArray arrayWithArray:(NSArray*)self.listModel.prdLabelsList];
+            UCFProjectDetailViewController *controller = [[UCFProjectDetailViewController alloc] initWithDataDic:dataDic isTransfer:NO withLabelList:prdLabelsListTemp];
+            CGFloat platformSubsidyExpense = [self.listModel.platformSubsidyExpense floatValue];
+            controller.accoutType = SelectAccoutTypeP2P;
+//            controller.rootVc = self.rootVc;
+            [[NSUserDefaults standardUserDefaults] setValue:[NSString stringWithFormat:@"%.1f",platformSubsidyExpense] forKey:@"platformSubsidyExpense"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        
+            [self.navigationController pushViewController:controller animated:YES];
+        }else {
+            [AuxiliaryFunc showAlertViewWithMessage:rsttext];
         }
     }
 }
@@ -417,6 +586,15 @@
 {
     [self.sendBtn stopAnimation];
     [AuxiliaryFunc showToastMessage:err.description withView:self.view];
+    self.tableView.hidden = YES;
 }
 
+- (IBAction)gotoQuanCenterVC:(id)sender
+{
+    __weak typeof(self) weakSelf = self;
+    [self dismissViewControllerAnimated:NO completion:^{
+        UCFCouponViewController *coupon = [[UCFCouponViewController alloc] initWithNibName:@"UCFCouponViewController" bundle:nil];
+        [weakSelf.sourceVC.navigationController pushViewController:coupon animated:YES];
+    }];
+}
 @end

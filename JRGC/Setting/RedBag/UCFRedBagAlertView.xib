@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="285" height="400"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" tag="110" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lmg_head_pre" translatesAutoresizingMaskIntoConstraints="NO" id="7oI-6o-RPw">
+                    <rect key="frame" x="121" y="62" width="42" height="42"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="42" id="6Fu-Re-8HE"/>
+                        <constraint firstAttribute="height" constant="42" id="KJt-Vk-wro"/>
+                        <constraint firstAttribute="width" constant="42" id="S0j-KG-2Cq"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" tag="111" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="金融工场" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wtp-g9-Nl2">
+                    <rect key="frame" x="116" y="111" width="54" height="16"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" red="1" green="0.90980392156862744" blue="0.71764705882352942" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" tag="112" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="给你发了一个红包" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8lY-10-eMJ">
+                    <rect key="frame" x="93" y="133" width="98.5" height="14.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" red="0.86274509803921573" green="0.73725490196078436" blue="0.51372549019607838" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" tag="113" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="恭喜发财 大吉大利" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gmc-CL-XaD">
+                    <rect key="frame" x="71" y="164.5" width="143" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="1" green="0.90980392160000001" blue="0.71764705880000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="7oI-6o-RPw" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="1Te-bz-fHh"/>
+                <constraint firstItem="Gmc-CL-XaD" firstAttribute="top" secondItem="8lY-10-eMJ" secondAttribute="bottom" constant="17" id="4T7-PR-IAn"/>
+                <constraint firstItem="Gmc-CL-XaD" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="AYn-le-934"/>
+                <constraint firstItem="8lY-10-eMJ" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Q6F-le-IB4"/>
+                <constraint firstItem="8lY-10-eMJ" firstAttribute="top" secondItem="Wtp-g9-Nl2" secondAttribute="bottom" constant="6" id="Zeo-3A-NPE"/>
+                <constraint firstItem="7oI-6o-RPw" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="62" id="aBP-45-9r0"/>
+                <constraint firstItem="Wtp-g9-Nl2" firstAttribute="top" secondItem="7oI-6o-RPw" secondAttribute="bottom" constant="7" id="fFk-Od-Lq0"/>
+                <constraint firstItem="Wtp-g9-Nl2" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="uiN-Xq-mKp"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-2.5" y="-234"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="lmg_head_pre" width="60" height="60"/>
+    </resources>
+</document>
