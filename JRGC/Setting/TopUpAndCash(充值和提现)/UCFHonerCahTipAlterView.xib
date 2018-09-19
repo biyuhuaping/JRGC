@@ -23,8 +23,8 @@
                         <constraint firstAttribute="width" constant="33" id="Vmh-Tw-lRS"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我放弃金融工场赠送的额外奖励！" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mvg-n3-tKU">
-                    <rect key="frame" x="54" y="74" width="157" height="49.5"/>
+                <label opaque="NO" userInteractionEnabled="NO" tag="98" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我放弃金融工场赠送的额外奖励！" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mvg-n3-tKU">
+                    <rect key="frame" x="30" y="74" width="205" height="49.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -68,9 +68,9 @@
             <constraints>
                 <constraint firstItem="RfM-yG-S1A" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="15" id="613-nX-drk"/>
                 <constraint firstItem="Mvg-n3-tKU" firstAttribute="top" secondItem="YdS-Py-lmo" secondAttribute="bottom" constant="16" id="FBH-Nx-PMT"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Mvg-n3-tKU" secondAttribute="trailing" constant="54" id="LBA-jd-MO1"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Mvg-n3-tKU" secondAttribute="trailing" constant="30" id="LBA-jd-MO1"/>
                 <constraint firstItem="RfM-yG-S1A" firstAttribute="top" secondItem="Mvg-n3-tKU" secondAttribute="bottom" constant="18.5" id="LoB-zN-4on"/>
-                <constraint firstItem="Mvg-n3-tKU" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="54" id="MVU-nV-5QT"/>
+                <constraint firstItem="Mvg-n3-tKU" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="30" id="MVU-nV-5QT"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="snH-DF-f5U" secondAttribute="trailing" constant="15" id="Way-hV-mRs"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="snH-DF-f5U" secondAttribute="bottom" constant="10" id="ZMQ-24-Crm"/>
                 <constraint firstItem="YdS-Py-lmo" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="25" id="ghF-ed-6P6"/>

@@ -523,7 +523,7 @@
     }
     return self;
 }
-#pragma 尊享自定义弹窗--- 余额不足 订单未提交
+#pragma 尊享提现活动自定义弹窗
 -(instancetype)initHonerCashWithMessage:(NSString *)message delegate:(id)delegate
 {
     self = [self init];
@@ -539,8 +539,8 @@
         UIButton *closeBtn1 = [baseView viewWithTag:100];
         UIButton *rechangeBtn = [baseView viewWithTag:101];
         titleLab.text = message;
-        [closeBtn1 setTitle:@"放弃，去提现" forState:UIControlStateNormal];
-        [rechangeBtn setTitle:@"不放弃，去看看 " forState:UIControlStateNormal];
+        [closeBtn1 setTitle:@"不薅，去提现" forState:UIControlStateNormal];
+        [rechangeBtn setTitle:@"去薅" forState:UIControlStateNormal];
        
         [closeBtn1 addTarget:self action:@selector(closeBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
         [rechangeBtn addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];

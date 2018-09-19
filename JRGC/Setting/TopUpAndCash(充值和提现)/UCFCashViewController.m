@@ -22,6 +22,7 @@
 #import "UCFRedBagViewController.h"
 #import "UCFOpenRedBagButton.h"
 #import "AppDelegate.h"
+#import "UCFInvestViewController.h"
 #define CASHWAYCELLHIGHT  73.0 //提现方式cell 的高度
 @interface UCFCashViewController ()<UCFChoseBankViewControllerDelegate,MjAlertViewDelegate,UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate,UIAlertViewDelegate>
 {
@@ -623,12 +624,7 @@
     _cashWayTableView.dataSource = self;
     _cashWayTableViewHeigt.constant = _cashWayArray.count * self.tableviewCellHeight;
     
-    if(self.accoutType == SelectAccoutTypeHoner && ![_noticeTxt isEqualToString:@""])
-    {
-        _redBagAlertView = [[MjAlertView alloc] initHonerActViewAlertWithDelegate:self];
-        _redBagAlertView.tag = 1000;
-        [_redBagAlertView show];
-    }
+    
 }
 #pragma mark -尊享活动view  动画
 -(void)honerCashActivityAnimating
@@ -952,18 +948,22 @@
         [alertView show];
         return;
     }
-//    if (self.accoutType == SelectAccoutTypeHoner && ![_noticeTxt isEqualToString:@""])
-//    {
-//
-//        _redBagAlertView = [[MjAlertView alloc] initHonerActViewAlertWithDelegate:self];
-//        _redBagAlertView.tag = 1000;
-//        [_redBagAlertView show];
-//        return;
-////        MjAlertView *honerlertView =[[MjAlertView alloc]initHonerCashWithMessage:_noticeTxt  delegate:self];
-////        honerlertView.tag = 1009;
-////        [honerlertView show];
-////        return;
-//    }
+    
+    if(self.accoutType == SelectAccoutTypeHoner && ![_noticeTxt isEqualToString:@""])
+    {
+        if(_hasCoupon)
+        {
+            MjAlertView *honerlertView =[[MjAlertView alloc]initHonerCashWithMessage:@"喂！ \n您还有个红包没薅呢！"  delegate:self];
+            honerlertView.tag = 1009;
+            [honerlertView show];
+            
+        }else{
+            _redBagAlertView = [[MjAlertView alloc] initHonerActViewAlertWithDelegate:self];
+            _redBagAlertView.tag = 1000;
+            [_redBagAlertView show];
+        }
+        return ;
+    }
     sender.userInteractionEnabled = NO;
     [self withdrawalAmountIsExceedsTheLimitHttPRequest];
 }
@@ -1080,8 +1080,35 @@
     {
         if (index == 101)
         {
-            //是否进入尊享提现活动页面
-            [self gotoHonerCashActivityView:nil];
+//            //是否进入尊享提现活动页面
+//            [self gotoHonerCashActivityView:nil];
+            NSString *className = [NSString stringWithUTF8String:object_getClassName(self.rootVc)];
+            if([className hasSuffix:@"UCFRechargeOrCashViewController"])
+            {
+                    AppDelegate *appdel = (AppDelegate *)[UIApplication sharedApplication].delegate;
+                    [appdel.tabBarController dismissViewControllerAnimated:NO completion:^{
+                        UCFBaseViewController * base =    [[appdel.tabBarController.childViewControllers objectAtIndex:4].childViewControllers lastObject];
+                        [base.navigationController popToRootViewControllerAnimated:NO];
+                        UCFInvestViewController *invest = (UCFInvestViewController *)[[appdel.tabBarController.childViewControllers objectAtIndex:1].childViewControllers firstObject];
+                        invest.selectedType = @"QualityClaims";
+                        if ([invest isViewLoaded]){
+                            [invest changeView];
+                        }
+                        [appdel.tabBarController setSelectedIndex:1];
+                    }];
+                
+           }else{
+            
+            AppDelegate *appdel = (AppDelegate *)[UIApplication sharedApplication].delegate;
+            UCFBaseViewController * base =    [[appdel.tabBarController.childViewControllers objectAtIndex:4].childViewControllers lastObject];
+            [base.navigationController popToRootViewControllerAnimated:NO];
+            UCFInvestViewController *invest = (UCFInvestViewController *)[[appdel.tabBarController.childViewControllers objectAtIndex:1].childViewControllers firstObject];
+            invest.selectedType = @"QualityClaims";
+            if ([invest isViewLoaded]){
+                [invest changeView];
+            }
+            [appdel.tabBarController setSelectedIndex:1];
+           }
         }
         else//去提现
         {
