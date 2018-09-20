@@ -29,7 +29,7 @@
 #define Y_TangentDot ((Height_RedBag*Rate_UpTangentLine)+(Width_RedBag*Rate_UpTangentLine_TangentDot))
 #define Y_Open_TangentDot (Y_TangentDot - (Height_RedBag*(Rate_UpTangentLine-Rate_UpTangentOpen_Line)))
 
-@interface UCFRedBagViewController () <UIViewControllerTransitioningDelegate, NetworkModuleDelegate>
+@interface UCFRedBagViewController () <UIViewControllerTransitioningDelegate, NetworkModuleDelegate,UCFInvestMicroMoneyCellDelegate>
 @property (strong, nonatomic) UIButton *closeBtn;
 @property (strong, nonatomic) UCFOpenRedBagButton *sendBtn;
 @property (nonatomic, strong) CAShapeLayer *redLayer;
@@ -213,7 +213,7 @@
 
 - (void)tapped:(UIGestureRecognizer *)tap {
      __weak typeof(self) weakSelf = self;
-    [self dismissViewControllerAnimated:YES completion:^{
+    [self dismissViewControllerAnimated:NO completion:^{
         UCFCouponViewController *coupon = [[UCFCouponViewController alloc] initWithNibName:@"UCFCouponViewController" bundle:nil];
         [weakSelf.sourceVC.navigationController pushViewController:coupon animated:YES];
     }];
@@ -450,6 +450,7 @@
         cell.tableView = tableView;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
+     cell.delegate = self;
     cell.indexPath = indexPath;
     UCFMicroMoneyModel *model = [self.dataArray objectAtIndex:indexPath.row];
     cell.microMoneyModel = model;
@@ -459,9 +460,16 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-
     UCFMicroMoneyModel *model = [self.dataArray objectAtIndex:indexPath.row];
-    self.listModel = model;
+    [self getPrdDetailModel:model];
+    
+}
+- (void)homelistCell:(UCFInvestMicroMoneyCell *)homelistCell didClickedProgressViewAtIndexPath:(NSIndexPath *)indexPath;
+{
+    [self getPrdDetailModel:homelistCell.microMoneyModel];
+}
+-(void)getPrdDetailModel:(UCFMicroMoneyModel *)model
+{
     if ([model.status intValue ] != 2) {
         NSInteger isOrder = [model.isOrder integerValue];
         if (isOrder <= 0) {
@@ -471,26 +479,24 @@
         }
     }
     
-        NSString *userid =[[NSUserDefaults standardUserDefaults] valueForKey:UUID];
-
-        NSString *prdClaimsIdStr = [NSString stringWithFormat:@"%@",model.Id];
-        NSDictionary *praramDic = @{@"userId":userid,@"prdClaimsId":prdClaimsIdStr};
-        if ([model.status intValue ] != 2) {
-            NSInteger isOrder = [model.isOrder integerValue];
-            if (isOrder > 0) {
-//                [MBProgressHUD showOriginHUDAddedTo:self.view animated:YES];
-                [[NetworkModule sharedNetworkModule] newPostReq:praramDic tag: kSXTagPrdClaimsGetPrdBaseDetail owner:self signature:YES Type:SelectAccoutTypeP2P];
-            } else {
-                UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前标的详情只对认购人开放"];
-                [self.navigationController pushViewController:controller animated:YES];
-            }
-        } else {
-//            [MBProgressHUD showOriginHUDAddedTo:self.view animated:YES];
-            [[NetworkModule sharedNetworkModule] newPostReq:praramDic tag: kSXTagPrdClaimsGetPrdBaseDetail owner:self signature:YES Type:SelectAccoutTypeP2P];
-        }
+    NSString *userid =[[NSUserDefaults standardUserDefaults] valueForKey:UUID];
     
+    NSString *prdClaimsIdStr = [NSString stringWithFormat:@"%@",model.Id];
+    NSDictionary *praramDic = @{@"userId":userid,@"prdClaimsId":prdClaimsIdStr};
+    if ([model.status intValue ] != 2) {
+        NSInteger isOrder = [model.isOrder integerValue];
+        if (isOrder > 0) {
+            //                [MBProgressHUD showOriginHUDAddedTo:self.view animated:YES];
+            [[NetworkModule sharedNetworkModule] newPostReq:praramDic tag: kSXTagPrdClaimsGetPrdBaseDetail owner:self signature:YES Type:SelectAccoutTypeP2P];
+        } else {
+            UCFNoPermissionViewController *controller = [[UCFNoPermissionViewController alloc] initWithTitle:@"标的详情" noPermissionTitle:@"目前标的详情只对认购人开放"];
+            [self.navigationController pushViewController:controller animated:YES];
+        }
+    } else {
+        //            [MBProgressHUD showOriginHUDAddedTo:self.view animated:YES];
+        [[NetworkModule sharedNetworkModule] newPostReq:praramDic tag: kSXTagPrdClaimsGetPrdBaseDetail owner:self signature:YES Type:SelectAccoutTypeP2P];
+    }
 }
-
 #pragma mark - 从网络获取红包
 - (void)getRedBagFromNet {
     NSString *userId = [UserInfoSingle sharedManager].userId;
@@ -555,7 +561,6 @@
             NSDictionary *res = [dic objectSafeDictionaryForKey:@"data"];
             NSArray *resultData = [res objectSafeArrayForKey:@"resultData"];
             UCFMicroMoneyModel *model = [UCFMicroMoneyModel microMoneyModelWithDict:[resultData firstObject]];
-            
             self.dataArray = [NSMutableArray arrayWithObjects:model, nil];
             [self.tableView reloadData];
             
@@ -571,11 +576,15 @@
             UCFProjectDetailViewController *controller = [[UCFProjectDetailViewController alloc] initWithDataDic:dataDic isTransfer:NO withLabelList:prdLabelsListTemp];
             CGFloat platformSubsidyExpense = [self.listModel.platformSubsidyExpense floatValue];
             controller.accoutType = SelectAccoutTypeP2P;
-//            controller.rootVc = self.rootVc;
+            controller.rootVc = self.rootVc;
             [[NSUserDefaults standardUserDefaults] setValue:[NSString stringWithFormat:@"%.1f",platformSubsidyExpense] forKey:@"platformSubsidyExpense"];
             [[NSUserDefaults standardUserDefaults] synchronize];
-        
-            [self.navigationController pushViewController:controller animated:YES];
+            
+            __weak typeof(self) weakSelf = self;
+            [self dismissViewControllerAnimated:NO completion:^{
+            
+                [weakSelf.sourceVC.navigationController pushViewController:controller animated:YES];
+            }];
         }else {
             [AuxiliaryFunc showAlertViewWithMessage:rsttext];
         }
