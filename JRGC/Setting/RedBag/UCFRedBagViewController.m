@@ -14,6 +14,7 @@
 #import "AuxiliaryFunc.h"
 #import "UIDic+Safe.h"
 #import "NZLabel.h"
+#import "UILabel+Misc.h"
 #import "UCFCouponViewController.h"
 #import "UCFInvestMicroMoneyCell.h"
 #import "AppDelegate.h"
@@ -48,9 +49,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *result1Label;
 @property (weak, nonatomic) IBOutlet UILabel *result2Label;
 @property (weak, nonatomic) IBOutlet UILabel *result3Label;
-@property (weak, nonatomic) IBOutlet NZLabel *result4Label;
+@property (weak, nonatomic) IBOutlet UILabel *result4Label;
 @property (weak, nonatomic) IBOutlet UILabel *result5Label;
-
+@property (weak, nonatomic) IBOutlet UILabel *result6Label;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *dataArray;
 @property (strong, nonatomic) UCFMicroMoneyModel *listModel;
@@ -125,10 +126,13 @@
     [self.view.layer addSublayer:_lineLayer];
     self.result2Label.text = [NSString stringWithFormat:@"满¥%@可用", [self.data objectSafeForKey:@"investMultip"]];
     self.result3Label.text = [NSString stringWithFormat:@"期限：%@", [self.data objectSafeForKey:@"inverstPeriod"]];
-    self.result4Label.text = [NSString stringWithFormat:@"%@元", [self.data objectSafeForKey:@"couponAmt"]];
-    [self.result4Label setFont:[UIFont systemFontOfSize:12] string:@"元"];
+    self.result4Label.text = [NSString stringWithFormat:@"%@", [self.data objectSafeForKey:@"couponAmt"]];
+//    [self.result4Label setFont:[UIFont systemFontOfSize:12] string:@"元"];
     self.result2Label.layer.zPosition = 3;
     self.result3Label.layer.zPosition = 3;
+    self.result6Label.layer.zPosition = 3;
+    self.result4Label.font = [UIFont systemFontOfSize:43];
+    self.result4Label.textColor = UIColorWithRGB(0x333333);
 }
 
 - (void)createFoldedUI {
@@ -228,8 +232,6 @@
 - (void)setUnOpenUIState {
     if (!_fold) {
         self.result4UpSpace.constant = 30;
-        self.result4Label.font = [UIFont systemFontOfSize:13];
-        self.result4Label.textColor = UIColorWithRGB(0x333333);
         self.rebTitleLabel.layer.zPosition = 3;
         self.result2Label.hidden = NO;
         self.result3Label.hidden = NO;
@@ -358,10 +360,20 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:@"UCFRedBagViewController_unfold_close" object:nil];
     }
     else {
+        __weak typeof(self) weakSelf = self;
         [self dismissViewControllerAnimated:NO completion:^{
 
-            [self.sourceVC.navigationController popToRootViewControllerAnimated:NO];
-            
+            [weakSelf.sourceVC.navigationController popToRootViewControllerAnimated:NO];
+            NSString *className = [NSString stringWithUTF8String:object_getClassName(self.sourceVC)];
+            if([className hasSuffix:@"UCFCashViewController"])
+            {
+                AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+                [appDelegate.tabBarController dismissViewControllerAnimated:NO completion:^{
+                    NSUInteger selectedIndex = appDelegate.tabBarController.selectedIndex;
+                    UINavigationController *nav = [appDelegate.tabBarController.viewControllers objectAtIndex:selectedIndex];
+                    [nav popToRootViewControllerAnimated:NO];
+                }];
+            }
         }];
     }
 }
@@ -374,9 +386,27 @@
 
 - (IBAction)lendButton:(UIButton *)sender {
     
-    [self dismissViewControllerAnimated:YES completion:^{
+//    [self dismissViewControllerAnimated:NO completion:^{
+//        [[NSNotificationCenter defaultCenter] postNotificationName:@"UCFRedBagViewController_to_lend" object:nil];
+//    }];
+    __weak typeof(self) weakSelf = self;
+    [self dismissViewControllerAnimated:NO completion:^{
+        
+        [weakSelf.sourceVC.navigationController popToRootViewControllerAnimated:NO];
+        NSString *className = [NSString stringWithUTF8String:object_getClassName(self.sourceVC)];
+        if([className hasSuffix:@"UCFCashViewController"])
+        {
+            AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+            [appDelegate.tabBarController dismissViewControllerAnimated:NO completion:^{
+                NSUInteger selectedIndex = appDelegate.tabBarController.selectedIndex;
+                UINavigationController *nav = [appDelegate.tabBarController.viewControllers objectAtIndex:selectedIndex];
+                [nav popToRootViewControllerAnimated:NO];
+            }];
+        }
         [[NSNotificationCenter defaultCenter] postNotificationName:@"UCFRedBagViewController_to_lend" object:nil];
+        
     }];
+    
     
 }
 #pragma mark -tableviewDelegate
@@ -387,51 +417,88 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return self.dataArray.count == 0 ? 0 : 30;
+    return self.dataArray.count == 0 ? 0 : 55;
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     if (self.dataArray.count != 0) {
-        UIView * headerView =[[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 30)];
-        headerView.backgroundColor = UIColorWithRGB(0xf9f9f9);
-        UILabel *titleLab = [[UILabel alloc]initWithFrame:CGRectMake(15, 8, 80, 15)];
-        titleLab.font = [UIFont systemFontOfSize:13];
+        
+//        EBEBEE
+        UIView * baseHeaderView =[[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 55)];
+        baseHeaderView.backgroundColor = [UIColor clearColor];
+        
+        UIView * upView =[[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 10)];
+        upView.backgroundColor = UIColorWithRGB(0xEBEBEE);
+        [baseHeaderView addSubview:upView];
+        
+        UIView * headerView =[[UIView alloc]initWithFrame:CGRectMake(0, 10, ScreenWidth, 45)];
+        headerView.backgroundColor = [UIColor whiteColor];
+        
+        [baseHeaderView addSubview:headerView];
+        UILabel *titleLab = [[UILabel alloc]initWithFrame:CGRectMake(15, 12.5, 120, 20)];
+        titleLab.font = [UIFont systemFontOfSize:16];
         titleLab.textColor = UIColorWithRGB(0x333333);
+        titleLab.textAlignment = NSTextAlignmentLeft;
         titleLab.text = @"推荐出借";
         [headerView addSubview:titleLab];
-        UILabel *titleLab1 = [[UILabel alloc]initWithFrame:CGRectMake(ScreenWidth - 15 - 8 - 6 - 35, 5, 35, 20)];
+        UILabel *titleLab1 = [[UILabel alloc]initWithFrame:CGRectMake(ScreenWidth - 15 - 8 - 6 - 35, 12, 35, 25)];
         titleLab1.font = [UIFont systemFontOfSize:13];
         titleLab1.textColor = UIColorWithRGB(0x4AA1F9);
         titleLab1.text = @"更多";
         titleLab1.textAlignment = NSTextAlignmentRight;
         [headerView addSubview:titleLab1];
-        UIImageView  *image  = [[UIImageView  alloc]initWithFrame:CGRectMake(ScreenWidth - 15 - 8 , 8 , 8, 13)];
+        UIImageView  *image  = [[UIImageView  alloc]initWithFrame:CGRectMake(ScreenWidth - 15 - 8 , 18, 8, 13)];
         image.image = [UIImage imageNamed:@"home_arrow_blue"];
         [headerView addSubview:image];
         
         UIButton  *button  = [UIButton buttonWithType:UIButtonTypeSystem];
         button.backgroundColor = [UIColor clearColor];
-        button.frame = CGRectMake(ScreenWidth - 100, 0 , 100, 30);
+        button.frame = CGRectMake(ScreenWidth - 150, 0 , 150, 45);
         [button addTarget:self action:@selector(gotoMoreView) forControlEvents:UIControlEventTouchUpInside];
         [headerView addSubview:button];
-        return headerView;
+        return baseHeaderView;
     }
     return nil;
 }
 - (void)gotoMoreView
 {
+//    __weak typeof(self) weakSelf = self;
+//    [self dismissViewControllerAnimated:NO completion:^{
+//
+//        [weakSelf.sourceVC.navigationController popToRootViewControllerAnimated:NO];
+//
+//        AppDelegate *appdel = (AppDelegate *)[UIApplication sharedApplication].delegate;
+//        NSUInteger selectedIndex = appdel.tabBarController.selectedIndex;
+//        UINavigationController *nav = [appdel.tabBarController.viewControllers objectAtIndex:selectedIndex];
+//        [nav popToRootViewControllerAnimated:NO];
+//        NSString *className = [NSString stringWithUTF8String:object_getClassName(self.sourceVC)];
+//        if([className hasSuffix:@"UCFCashViewController"])
+//        {
+//            [appdel.tabBarController dismissViewControllerAnimated:NO completion:^{
+//            NSUInteger selectedIndex = appdel.tabBarController.selectedIndex;
+//            UINavigationController *nav = [appdel.tabBarController.viewControllers objectAtIndex:selectedIndex];
+//            [nav popToRootViewControllerAnimated:NO];
+//            }];
+//        }
+//     }];
+ 
     __weak typeof(self) weakSelf = self;
     [self dismissViewControllerAnimated:NO completion:^{
-        AppDelegate *appdel = (AppDelegate *)[UIApplication sharedApplication].delegate;
-        UCFBaseViewController * base =    [[appdel.tabBarController.childViewControllers objectAtIndex:4].childViewControllers lastObject];
-        [base.navigationController popToRootViewControllerAnimated:NO];
-        UCFInvestViewController *invest = (UCFInvestViewController *)[[appdel.tabBarController.childViewControllers objectAtIndex:1].childViewControllers firstObject];
-        invest.selectedType = @"QualityClaims";
-        if ([invest isViewLoaded]){
-            [invest changeView];
+        
+        [weakSelf.sourceVC.navigationController popToRootViewControllerAnimated:NO];
+        NSString *className = [NSString stringWithUTF8String:object_getClassName(self.sourceVC)];
+        if([className hasSuffix:@"UCFCashViewController"])
+        {
+            AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+            [appDelegate.tabBarController dismissViewControllerAnimated:NO completion:^{
+                NSUInteger selectedIndex = appDelegate.tabBarController.selectedIndex;
+                UINavigationController *nav = [appDelegate.tabBarController.viewControllers objectAtIndex:selectedIndex];
+                [nav popToRootViewControllerAnimated:NO];
+            }];
         }
-        [appdel.tabBarController setSelectedIndex:1];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"UCFRedBagViewController_to_lend" object:nil];
     }];
+ 
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     

@@ -967,6 +967,25 @@
     sender.userInteractionEnabled = NO;
     [self withdrawalAmountIsExceedsTheLimitHttPRequest];
 }
+
+#pragma mark 红包是否领取
+-(void)isShowRedAlertView{
+    if(self.accoutType == SelectAccoutTypeHoner && ![_noticeTxt isEqualToString:@""])
+    {
+        if(_hasCoupon)
+        {
+            MjAlertView *honerlertView =[[MjAlertView alloc]initHonerCashWithMessage:@"喂！ \n您还有个红包没薅呢！"  delegate:self];
+            honerlertView.tag = 1009;
+            [honerlertView show];
+            
+        }else{
+            _redBagAlertView = [[MjAlertView alloc] initHonerActViewAlertWithDelegate:self];
+            _redBagAlertView.tag = 1000;
+            [_redBagAlertView show];
+        }
+        return ;
+    }
+}
 #pragma mark - 从网络获取红包
 - (void)getRedBagFromNet {
     NSString *userId = [UserInfoSingle sharedManager].userId;
@@ -1117,7 +1136,8 @@
         
     }else{
         if (index == 1) {
-            [self withdrawalAmountIsExceedsTheLimitHttPRequest];
+            [self isShowRedAlertView];
+//            [self withdrawalAmountIsExceedsTheLimitHttPRequest];
         }
     }
    
