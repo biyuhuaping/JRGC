@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -38,7 +38,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100.00%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="3" translatesAutoresizingMaskIntoConstraints="NO" id="NhQ-tP-Y5W" customClass="NZLabel">
-                        <rect key="frame" x="15" y="14" width="86" height="24"/>
+                        <rect key="frame" x="15" y="14" width="87.5" height="24"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                         <color key="textColor" red="0.96266388889999999" green="0.20288120209999999" blue="0.2349735349" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
@@ -68,6 +68,33 @@
                         <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YU1-bv-jav">
+                        <rect key="frame" x="102.5" y="5.5" width="100" height="17"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="zhaizhuan_label" translatesAutoresizingMaskIntoConstraints="NO" id="WyT-bh-kKQ">
+                                <rect key="frame" x="0.0" y="0.0" width="100" height="17"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="额外补贴0%工豆" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q6i-za-lbC">
+                                <rect key="frame" x="0.0" y="0.0" width="100" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                <color key="textColor" red="1" green="0.51764705882352935" blue="0.51764705882352935" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="Q6i-za-lbC" secondAttribute="bottom" constant="1" id="LUi-Mp-0lu"/>
+                            <constraint firstAttribute="trailing" secondItem="Q6i-za-lbC" secondAttribute="trailing" id="Phu-mq-rB4"/>
+                            <constraint firstAttribute="height" constant="17" id="Qg0-Ph-NnX"/>
+                            <constraint firstAttribute="width" constant="100" id="Qke-yS-fT6"/>
+                            <constraint firstItem="WyT-bh-kKQ" firstAttribute="top" secondItem="YU1-bv-jav" secondAttribute="top" id="WAA-nb-aFt"/>
+                            <constraint firstItem="Q6i-za-lbC" firstAttribute="top" secondItem="YU1-bv-jav" secondAttribute="top" id="cge-xA-BGU"/>
+                            <constraint firstItem="WyT-bh-kKQ" firstAttribute="leading" secondItem="YU1-bv-jav" secondAttribute="leading" id="ppp-Td-UJX"/>
+                            <constraint firstAttribute="trailing" secondItem="WyT-bh-kKQ" secondAttribute="trailing" id="tsG-3N-Ikq"/>
+                            <constraint firstItem="Q6i-za-lbC" firstAttribute="leading" secondItem="YU1-bv-jav" secondAttribute="leading" id="yGF-tK-7fB"/>
+                            <constraint firstAttribute="bottom" secondItem="WyT-bh-kKQ" secondAttribute="bottom" id="zjr-Bn-LkU"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="1BW-wY-u5l" firstAttribute="leading" secondItem="NhQ-tP-Y5W" secondAttribute="leading" id="3SQ-ZA-yiu"/>
@@ -81,8 +108,10 @@
                     <constraint firstItem="TzY-Ed-gYz" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="WCI-hp-QNF"/>
                     <constraint firstItem="nsC-bP-Jha" firstAttribute="leading" secondItem="gm0-Bw-LL1" secondAttribute="leading" id="Z9c-aj-9Na"/>
                     <constraint firstItem="79B-g9-rsO" firstAttribute="leading" secondItem="vMd-Ze-HDf" secondAttribute="leading" id="ZWM-FM-EDQ"/>
+                    <constraint firstItem="YU1-bv-jav" firstAttribute="centerY" secondItem="NhQ-tP-Y5W" secondAttribute="centerY" constant="-12" id="bDK-0K-SkQ"/>
                     <constraint firstItem="79B-g9-rsO" firstAttribute="top" secondItem="vMd-Ze-HDf" secondAttribute="bottom" constant="5" id="das-ov-2jV"/>
                     <constraint firstItem="ecn-dB-Hkl" firstAttribute="top" secondItem="79B-g9-rsO" secondAttribute="bottom" constant="16" id="eZa-mU-Fwe"/>
+                    <constraint firstItem="YU1-bv-jav" firstAttribute="leading" secondItem="NhQ-tP-Y5W" secondAttribute="trailing" id="gUy-A4-OFa"/>
                     <constraint firstItem="79B-g9-rsO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="120" id="nz2-TN-LX9"/>
                     <constraint firstAttribute="trailing" secondItem="ecn-dB-Hkl" secondAttribute="trailing" id="sP5-Mn-CWn"/>
                     <constraint firstItem="nsC-bP-Jha" firstAttribute="centerY" secondItem="79B-g9-rsO" secondAttribute="centerY" id="sSy-On-zQ9"/>
@@ -90,17 +119,21 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="ExtraBeansViewWidth" destination="Qke-yS-fT6" id="Guo-YI-qYu"/>
                 <outlet property="bottomLine" destination="ecn-dB-Hkl" id="Iz4-IJ-go0"/>
+                <outlet property="extraBeansBaseView" destination="YU1-bv-jav" id="5xQ-Lh-o0V"/>
+                <outlet property="extraBeansLabel" destination="Q6i-za-lbC" id="xvq-1E-czU"/>
                 <outlet property="moneyLabel" destination="gm0-Bw-LL1" id="bzI-EK-ATb"/>
                 <outlet property="moneyLeadSpace" destination="3uX-X2-1KS" id="0Qq-5m-utH"/>
                 <outlet property="rateLabel" destination="NhQ-tP-Y5W" id="iv9-gm-htT"/>
                 <outlet property="timeLabel" destination="vMd-Ze-HDf" id="xeS-70-MJD"/>
                 <outlet property="timeLeadSpace" destination="nz2-TN-LX9" id="Gtd-Wl-ZQ2"/>
             </connections>
-            <point key="canvasLocation" x="-713" y="13"/>
+            <point key="canvasLocation" x="-713" y="12.5"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="list_icon_arrow" width="8" height="13"/>
+        <image name="zhaizhuan_label" width="38" height="17"/>
     </resources>
 </document>

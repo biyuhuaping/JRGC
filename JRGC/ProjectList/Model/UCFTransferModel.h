@@ -40,6 +40,7 @@
 @property (nonatomic, copy) NSString *transfereeYearRate;
 @property (nonatomic, copy) NSString *validDays;
 @property (nonatomic, copy) NSString *type;
+@property (nonatomic, strong)NSNumber *discountRate;
 
 @property (nonatomic, assign) BOOL isAnim;
 

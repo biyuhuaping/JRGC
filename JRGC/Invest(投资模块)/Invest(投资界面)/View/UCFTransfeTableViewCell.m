@@ -11,6 +11,9 @@
 @interface UCFTransfeTableViewCell ()
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *timeLeadSpace;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *moneyLeadSpace;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *ExtraBeansViewWidth;
+@property (weak, nonatomic) IBOutlet UIView *extraBeansBaseView;
+@property (weak, nonatomic) IBOutlet UILabel *extraBeansLabel;
 
 @end
 
@@ -26,9 +29,21 @@
     
     _timeLeadSpace.constant = (ScreenWidth * 120.0f )/320.0f;
     _moneyLeadSpace.constant = (ScreenWidth * 215.0f )/320.0f;
+    _extraBeansBaseView.hidden = YES;
 }
 - (void)layoutSubviews
 {
+    if ([_model.discountRate floatValue] >= 0.01) {
+        _extraBeansBaseView.hidden = NO;
+        NSString *showStr = [NSString stringWithFormat:@"额外补贴%@%%工豆",_model.discountRate];
+        CGSize size = [Common getStrWitdth:showStr Font:10];
+        _ExtraBeansViewWidth.constant = size.width + 10;
+        _extraBeansLabel.text = showStr;
+        
+    } else {
+        _extraBeansBaseView.hidden = YES;
+    }
+    
     self.rateLabel.text = [NSString stringWithFormat:@"%@%%",_model.transfereeYearRate];
     [self.rateLabel setFont:[UIFont systemFontOfSize:12] string:@"%"];
     self.timeLabel.text = [NSString stringWithFormat:@"%@天",_model.lastDays];
