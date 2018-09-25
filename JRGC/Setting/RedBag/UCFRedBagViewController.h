@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface UCFRedBagViewController : UIViewController
+#import "UCFBaseViewController.h"
+@interface UCFRedBagViewController : UCFBaseViewController
 @property (assign, nonatomic) BOOL fold;
 @property (strong, nonatomic) UIViewController *sourceVC;
 @property (strong, nonatomic)NSDictionary *data;

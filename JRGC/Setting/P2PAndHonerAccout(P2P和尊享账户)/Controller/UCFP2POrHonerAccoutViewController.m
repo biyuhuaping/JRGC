@@ -98,7 +98,6 @@
     [self addLeftButton];
     baseTitleLabel.text =  self.accoutType==SelectAccoutTypeHoner ? @"尊享账户":@"微金账户";
     [self.tableView addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(getP2POrHonerAccoutHttpRequest)];
-    self.tableView.userInteractionEnabled = NO;
     if (self.accoutType ==  SelectAccoutTypeHoner) {
          _isShowOrHideAccoutMoney = [[NSUserDefaults standardUserDefaults] boolForKey:@"IsShowHonerAccoutMoney"];
     }else{
@@ -315,6 +314,10 @@
             return [obj.items count];
     }
     return 0;
+}
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
