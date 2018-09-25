@@ -35,7 +35,7 @@
 {
     if ([_model.discountRate floatValue] >= 0.01) {
         _extraBeansBaseView.hidden = NO;
-        NSString *showStr = [NSString stringWithFormat:@"额外补贴%@%%工豆",_model.discountRate];
+        NSString *showStr = [NSString stringWithFormat:@"奖励债转本金%@%%工豆",_model.discountRate];
         CGSize size = [Common getStrWitdth:showStr Font:10];
         _ExtraBeansViewWidth.constant = size.width + 10;
         _extraBeansLabel.text = showStr;
