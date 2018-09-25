@@ -45,6 +45,7 @@
 		337B7D8921467D14003AFE97 /* Contract of guarantee.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 337B7D8221467D14003AFE97 /* Contract of guarantee.pdf */; };
 		337B7D8A21467D14003AFE97 /* 用户服务协议.docx in Resources */ = {isa = PBXBuildFile; fileRef = 337B7D8321467D14003AFE97 /* 用户服务协议.docx */; };
 		337B7D8C214681FB003AFE97 /* ICP证.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 337B7D8B214681FB003AFE97 /* ICP证.pdf */; };
+		33B17644215A14F5007D1F91 /* LMJScrollTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B17642215A14F4007D1F91 /* LMJScrollTextView.m */; };
 		33E05B58212BB93500E1138F /* UCFAppleTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E05B57212BB93500E1138F /* UCFAppleTabBarViewController.m */; };
 		33E1A5DF20FDC5A9008244BD /* UCFCustomPopTransitionAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E1A5D920FDC5A8008244BD /* UCFCustomPopTransitionAnimation.m */; };
 		33E1A5E020FDC5A9008244BD /* UCFOpenRedBagButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E1A5DA20FDC5A8008244BD /* UCFOpenRedBagButton.m */; };
@@ -1154,6 +1155,8 @@
 		337B7D8221467D14003AFE97 /* Contract of guarantee.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Contract of guarantee.pdf"; sourceTree = "<group>"; };
 		337B7D8321467D14003AFE97 /* 用户服务协议.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "用户服务协议.docx"; sourceTree = "<group>"; };
 		337B7D8B214681FB003AFE97 /* ICP证.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "ICP证.pdf"; sourceTree = "<group>"; };
+		33B17642215A14F4007D1F91 /* LMJScrollTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMJScrollTextView.m; sourceTree = "<group>"; };
+		33B17643215A14F4007D1F91 /* LMJScrollTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMJScrollTextView.h; sourceTree = "<group>"; };
 		33E05B56212BB93500E1138F /* UCFAppleTabBarViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFAppleTabBarViewController.h; sourceTree = "<group>"; };
 		33E05B57212BB93500E1138F /* UCFAppleTabBarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFAppleTabBarViewController.m; sourceTree = "<group>"; };
 		33E1A5D820FDC5A8008244BD /* UCFOpenRedBagButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFOpenRedBagButton.h; sourceTree = "<group>"; };
@@ -3020,6 +3023,16 @@
 				25314C0A1D8FD7FA0066F446 /* UCFDirectCell.xib */,
 			);
 			name = TipCell;
+			sourceTree = "<group>";
+		};
+		33B17641215A14F4007D1F91 /* LMJScrollTextView */ = {
+			isa = PBXGroup;
+			children = (
+				33B17642215A14F4007D1F91 /* LMJScrollTextView.m */,
+				33B17643215A14F4007D1F91 /* LMJScrollTextView.h */,
+			);
+			name = LMJScrollTextView;
+			path = ThirdLibs/LMJScrollTextView;
 			sourceTree = "<group>";
 		};
 		33E05B52212BB86800E1138F /* AppleTabBar */ = {
@@ -5690,6 +5703,7 @@
 		7BFE3EB11AC5635E002A53A2 /* ThirdLibs */ = {
 			isa = PBXGroup;
 			children = (
+				33B17641215A14F4007D1F91 /* LMJScrollTextView */,
 				A84EC2401FE1081E00B0C46A /* ImageScanner */,
 				A824BFD91FCD54D700E32F39 /* p2pWalletSDK */,
 				A824BFB61FCD499200E32F39 /* umeng_ios_social_sdk_6.4-2.6_arm64_custom */,
@@ -8040,6 +8054,7 @@
 				74E8042D1AE78B8F00E7250E /* BindPhoneNumViewController.m in Sources */,
 				74F4B8AE1ECAD20E00785DFC /* UCFProfitBackViewController.m in Sources */,
 				A8AD2E3E1EB979760013DB7C /* MongoliaLayerCenter.m in Sources */,
+				33B17644215A14F5007D1F91 /* LMJScrollTextView.m in Sources */,
 				74931A351B1326FE00143424 /* OHASBasicMarkupParser.m in Sources */,
 				84FFA5301C7EAA9200ACD835 /* UIScrollView+TouchScrollView.m in Sources */,
 				740DAEC11E56E2D100CD7C8F /* UCFBatchProjectController.m in Sources */,
