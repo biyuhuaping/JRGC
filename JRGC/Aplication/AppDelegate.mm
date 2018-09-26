@@ -44,7 +44,6 @@
 #import <UserNotifications/UserNotifications.h>
 #endif
 #import "UCFLanchViewController.h"
-#import "UCFAppleTabBarViewController.h"
 @interface AppDelegate () <JPUSHRegisterDelegate,LanchViewControllerrDelegate>
 
 @property (assign, nonatomic) UIBackgroundTaskIdentifier backgroundUpdateTask;
@@ -63,6 +62,9 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    //请求开关状态
+    [self checkNovicePoliceOnOff];
+    [self luachNormalCode:launchOptions];
     
     UCFLanchViewController *lanchVC = [[UCFLanchViewController alloc] initWithNibName:@"UCFLanchViewController" bundle:nil];
     lanchVC.delegate = self;
@@ -70,92 +72,34 @@
     
     return YES;
 }
+#pragma 新手政策弹框
+- (void)checkNovicePoliceOnOff
+{
+    //请求开关状态
+    [[NetworkModule sharedNetworkModule] newPostReq:@{} tag:kSXTagGetInfoForOnOff owner:self signature:NO Type:SelectAccoutDefault];
+}
 #pragma mark LanchViewControllerrDelegate
-- (void)lauchViewShowEndIsInSubmitTime:(BOOL)isSubmitTime
+- (void)switchRootView
 {
-    if (isSubmitTime) {
-        self.isSubmitAppStoreTestTime = YES;
-        [UserInfoSingle sharedManager].isSubmitTime = YES;
-    }
-    [self luachNormalCode:nil];
-}
-- (void)lanchViewFetchTheFirstRequestData:(NSDictionary *)dict;
-{
-    NSDictionary   *dic = [NSDictionary dictionaryWithDictionary:dict];
-    if([dic[@"ret"] boolValue] == 1)
-    {
-        dic = dic[@"data"];
-        
-        //以下是升级信息
-        NSString *netVersion = [dic objectSafeForKey: @"lastVersion"];
-        [LockFlagSingle sharedManager].netVersion = netVersion;
-        //是否强制更新 0强制 1随便 2不稳定
-        NSInteger versionMark = [[dic objectSafeForKey:@"forceUpdateOnOff"] integerValue];
-        
-        NSDictionary *infoDic = [[NSBundle mainBundle] infoDictionary];
-        NSString *currentVersion = infoDic[@"CFBundleShortVersionString"];
-        NSComparisonResult comparResult = [netVersion compare:currentVersion options:NSNumericSearch];
-        if (comparResult == NSOrderedAscending || comparResult == NSOrderedSame) {
-            if (versionMark == 2) {
-                self.isSubmitAppStoreTestTime = YES;
-                [UserInfoSingle sharedManager].isSubmitTime = YES;
-            }
+    //初始化广告view
+    BOOL islaunch= [GuideViewController isShow];
+    if (islaunch) {
+        [self showGuidePageController];
+        NSString *strParameters = nil;
+        strParameters = [NSString stringWithFormat:@"equipment=%@&remark=%@&serialNumber=%@&sourceType=%@",[Common platformString],@"1",[Common getKeychain],@"1"];
+        //统计用户数量
+        [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagCalulateInstallNum owner:self Type:SelectAccoutDefault];
+    } else {
+        [self showTabbarController];
+        NSInteger useLockView = [[[NSUserDefaults standardUserDefaults] valueForKey:@"useLockView"] integerValue];
+        //使用手势密码 显示
+        if (useLockView == 1) {
+            [self showGCode];
         } else {
-            NSString *des = dic[@"updateInfo"];
-            if (versionMark == 0) {
-                if (_isComeForceUpdate) {
-                    //服务器版本和appstore版本一致
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"发现新版本 V%@",netVersion] message:des delegate:self cancelButtonTitle:nil otherButtonTitles:@"更新", nil];
-                    alert.tag = 102;
-                    [alert show];
-                    _isComeForceUpdate = NO;
-                }
-            } else if (versionMark == 1) {
-                if ([PraiseAlert isShouldWarnUserUpdate:netVersion]) {
-                    //可选择性更新
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"发现新版本 V%@",netVersion] message:des delegate:self cancelButtonTitle:@"下次再说" otherButtonTitles:@"更新", nil];
-                    alert.tag = 101;
-                    NSLog(@"%lf",alert.window.windowLevel);
-                    [alert show];
-                }
-            } else if (versionMark == 2) {
-                DBLog(@"升级期内");
-            }
         }
-        
-        
-        [self novicecheck:dic];
-        [self zxSwitchCheck:dic];
-        [UserInfoSingle sharedManager].goldIsShow = [[dic objectSafeForKey:@"goldIsShow"] boolValue];
-        [UserInfoSingle sharedManager].transferIsShow = [[dic objectSafeForKey:@"transferIsShow"] boolValue];
-        [UserInfoSingle sharedManager].wjIsShow = [[dic objectSafeForKey:@"wjIsShow"] boolValue];
-        [UserInfoSingle sharedManager].zxIsShow = [[dic objectSafeForKey:@"zxIsShow"] boolValue];
-        NSString *superviseStr = [dic objectForKey:@"compliance"];
-        //监管开关
-        if ([superviseStr isEqualToString:@"1"]) {
-            [self superviseSwitchWithState:NO];
-        }
-        else if ([superviseStr isEqualToString:@"2"]) {
-            [self superviseSwitchWithState:YES];
-        }
-        else {
-            [self superviseSwitchWithState:YES];
-        }
-        
-        
-        /*
-         注意点
-         1.第一个主要是给苹果测试人员用 ipa 版本号 大于等于 后台配置 版本号 并且version 为2 此时进入灰度环境（注意：使用灰度环境不要用自动上架，有可能客户自动升级了，进入灰度环境）
-         2.上线流程，等app提交审核，就需要要求后台配置升级信息人员，把升级信息挂出来，但是versionMark不能写0 和 1 ，
-         app 审核完成，需要改写为0和1，
-         */
-        
-    }
-    else {
-#warning about supervise
-        [self superviseSwitchWithState:YES];
     }
 }
+
 #pragma ------
 - (void)luachNormalCode:(NSDictionary *)launchOptions
 {
@@ -200,75 +144,22 @@
     NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     [MobClick setAppVersion:version];
     
-    //初始化广告view
-    
-    if (self.isSubmitAppStoreTestTime) {
-        [self showAppleTabbarController];
-    } else {
-        BOOL islaunch= [GuideViewController isShow];
-        if (islaunch) {
-            [self showGuidePageController];
-            NSString *strParameters = nil;
-            strParameters = [NSString stringWithFormat:@"equipment=%@&remark=%@&serialNumber=%@&sourceType=%@",[Common platformString],@"1",[Common getKeychain],@"1"];
-            //统计用户数量
-            [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagCalulateInstallNum owner:self Type:SelectAccoutDefault];
-        } else {
-            [self showTabbarController];
-            NSInteger useLockView = [[[NSUserDefaults standardUserDefaults] valueForKey:@"useLockView"] integerValue];
-            //使用手势密码 显示
-            if (useLockView == 1) {
-                [self showGCode];
-            } else {
-                
-            }
-//            [self addLoadingBaseView];
-        }
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkPersonCenterRedPoint) name:CHECK_RED_POINT object:nil];
-        [self checkPersonCenterRedPoint];
-        //调用红点接口，通知服务器红点标示倍查看
-        //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkRedPointShouldHide:) name:REDALERTISHIDE object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkConponCenter) name:CHECK_COUPON_CENTER object:nil];
-        
-        /**
-         *  极光推送自定义消息推送
-         NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
-         [defaultCenter addObserver:self selector:@selector(networkDidReceiveMessage:) name:kJPFNetworkDidReceiveMessageNotification object:nil];
-         [defaultCenter addObserver:self
-         selector:@selector(networkDidLogin:)
-         name:kJPFNetworkDidLoginNotification
-         object:nil];
-         */
-    
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isShowHornor"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        [self getLoginImage];
-        [self getAdversementLift];
-        [self getSharePictureAdversementLink];
-        [self geInvestmentSuccesseLift];
-    }
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveLoginOut) name:USER_LOGOUT object:nil];
-        /*
-    if (launchOptions) {
-        NSDictionary* message = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
-        if (message) {
-            _isFirstStart = YES;
-        }
-    } else {
-        _isFirstStart = NO;
-    }
 
-    //TODO:3D Touch-------------------------------------------
-    if (kIS_IOS9) {
-        [self createItem];
-        UIApplicationShortcutItem *item = [launchOptions valueForKey:UIApplicationLaunchOptionsShortcutItemKey];
-        if (item) {
-            DBLog(@"从快捷方式打开项目: %@", item.localizedTitle);
-        } else {
-            DBLog(@"正常启动.");
-        }
-        _isAfter = YES;
-    }
-     */
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkPersonCenterRedPoint) name:CHECK_RED_POINT object:nil];
+    [self checkPersonCenterRedPoint];
+    //调用红点接口，通知服务器红点标示倍查看
+    //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkRedPointShouldHide:) name:REDALERTISHIDE object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkConponCenter) name:CHECK_COUPON_CENTER object:nil];
+
+
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isShowHornor"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [self getLoginImage];
+    [self getAdversementLift];
+    [self getSharePictureAdversementLink];
+    [self geInvestmentSuccesseLift];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveLoginOut) name:USER_LOGOUT object:nil];
     
     //TODO:------------------启动GrowingIO--------------------
     [Growing startWithAccountId:@"b9ed2e92ac9b1c59"];
@@ -560,11 +451,11 @@
     self.tabBarController = [[UCFMainTabBarController alloc] init];
     self.window.rootViewController = self.tabBarController;
 }
-- (void)showAppleTabbarController
-{
-    UCFAppleTabBarViewController *vc = [[UCFAppleTabBarViewController alloc] init];
-    self.window.rootViewController = vc;
-}
+//- (void)showAppleTabbarController
+//{
+//    UCFAppleTabBarViewController *vc = [[UCFAppleTabBarViewController alloc] init];
+//    self.window.rootViewController = vc;
+//}
 // 展示引导页
 - (void)showGuidePageController
 {
@@ -655,12 +546,7 @@
     //请求开关状态
     [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":userId} tag:kSXTagIsShowHornor owner:self signature:YES Type:SelectAccoutDefault];
 }
-#pragma 新手政策弹框
-- (void)checkNovicePoliceOnOff
-{
-    //请求开关状态
-    [[NetworkModule sharedNetworkModule] newPostReq:@{} tag:kSXTagGetInfoForOnOff owner:self signature:NO Type:SelectAccoutDefault];
-}
+
 
 - (void)checkUpdate
 {

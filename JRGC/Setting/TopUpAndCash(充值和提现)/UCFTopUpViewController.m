@@ -200,6 +200,7 @@
         
         _noticeView.noticeModel = model;
         _noticeView.noticeLabell.text = model.siteNotice;
+        _noticeView.noticeLabell.font = [UIFont boldSystemFontOfSize:14];
         for (UIView *view in _noticeView.subviews) {
             view.hidden = NO;
         }
