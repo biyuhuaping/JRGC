@@ -47,7 +47,10 @@
     if (_isShowAdversement) {
         [self showAdvertisement];
     } else {
-        [self disapperAdversement];
+        UIImage *placehoderImage = [Common getTheLaunchImage];
+        _advertisementView.contentMode = UIViewContentModeScaleToFill;
+        _advertisementView.image = placehoderImage;
+        [self performSelector:@selector(disapperAdversement) withObject:nil afterDelay:2];
     }
 
 
