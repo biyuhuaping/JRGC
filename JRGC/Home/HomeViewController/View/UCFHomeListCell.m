@@ -60,11 +60,7 @@
     self.circleProgressView.pathBackColor = UIColorWithRGB(0xcfd5d7);
     self.circleProgressView.pathFillColor = UIColorWithRGB(0xfa4d4c);
     self.circleProgressView.strokeWidth = 3;
-    if ([UserInfoSingle sharedManager].isSubmitTime) {
-        self.circleProgressView.hidden = YES;
-    } else {
-        self.circleProgressView.hidden = NO;
-    }
+
 }
 
 - (void)setPresenter:(UCFHomeListCellPresenter *)presenter
@@ -150,11 +146,14 @@
             }
             self.startMoneyLabel.text = presenter.minInvest;
         }
-        NSArray *statusArr = @[@"未审核",@"等待确认",@"出借",@"流标",@"满标",@"回款中",@"已回款"];
-        AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-        if (app.isSubmitAppStoreTestTime) {
-            statusArr = @[@"查看",@"查看",@"查看",@"查看",@"查看",@"查看",@"查看"];
+        NSArray *statusArr = nil;
+        if ([UserInfoSingle sharedManager].isSubmitTime) {
+            statusArr =  @[@"未审核",@"等待确认",@"购买",@"流标",@"满标",@"回款中",@"已回款"];
+        } else {
+            statusArr =  @[@"未审核",@"等待确认",@"出借",@"流标",@"满标",@"回款中",@"已回款"];
         }
+        
+
         
         if ([presenter.item.type isEqualToString:@"3"]) {
             if (status == 21) {
