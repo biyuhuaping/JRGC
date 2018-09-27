@@ -451,11 +451,7 @@
     self.tabBarController = [[UCFMainTabBarController alloc] init];
     self.window.rootViewController = self.tabBarController;
 }
-//- (void)showAppleTabbarController
-//{
-//    UCFAppleTabBarViewController *vc = [[UCFAppleTabBarViewController alloc] init];
-//    self.window.rootViewController = vc;
-//}
+
 // 展示引导页
 - (void)showGuidePageController
 {
@@ -661,10 +657,8 @@
                 2.上线流程，等app提交审核，就需要要求后台配置升级信息人员，把升级信息挂出来，但是versionMark不能写0 和 1 ，
                           app 审核完成，需要改写为0和1，
              */
-
         }
         else {
-#warning about supervise
             [self superviseSwitchWithState:YES];
         }
     }else if (tag.intValue == kSXTagCheckPersonRedPoint) {
