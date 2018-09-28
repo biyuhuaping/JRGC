@@ -23,7 +23,7 @@
     self.showTableview = [[UITableView alloc] initWithFrame:CGRectMake(0, 1, ScreenWidth, ScreenHeight - StatusBarHeight1 - 44) style:UITableViewStylePlain];
     self.showTableview.backgroundColor = [UIColor clearColor];
     [self.view addSubview:_showTableview];
-    baseTitleLabel.text = @"公司资质";
+    baseTitleLabel.text = @"信息披露";
     _showTableview.delegate = self;
     _showTableview.dataSource = self;
     _showTableview.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -31,6 +31,24 @@
 //    self.typeDataArr = @[@"pdf" ,@"整改通知书",@"银行存管证明",@"ICP证书",@"用户服务协议"];
     
     
+}
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 125)];
+    headView.backgroundColor = [UIColor clearColor];
+    
+    UILabel *lab = [[UILabel alloc] initWithFrame:CGRectMake(0, 15, ScreenWidth, 20)];
+    lab.backgroundColor = [UIColor clearColor];
+    lab.text = @"----合作伙伴----";
+    lab.font = [UIFont systemFontOfSize:14.0f];
+    lab.textAlignment = NSTextAlignmentCenter;
+    [headView addSubview:lab];
+    
+    UIImageView *logoView = [[UIImageView alloc] initWithFrame:CGRectMake((ScreenWidth - (500 * 0.4))/2, CGRectGetMaxY(lab.frame) + 15, 500 *0.4, 150 * 0.4)];
+    logoView.backgroundColor = [UIColor clearColor];
+    logoView.image = [UIImage imageNamed:@"LOGO微金.png"];
+    [headView addSubview:logoView];
+    return headView;
 }
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
@@ -59,6 +77,10 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     return 40;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 125;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {

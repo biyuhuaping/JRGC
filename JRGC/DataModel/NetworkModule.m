@@ -1024,6 +1024,10 @@ static NetworkModule *gInstance = NULL;
             parameter = [NEW_SERVER_IP stringByAppendingString:GETINFOFORONOFF];
         }
             break;
+        case kSXTagGetAppleInfoForOnOff: {
+            parameter = [NEW_SERVER_IP stringByAppendingString:GETINFOFORONOFF];
+        }
+            break;
         case kSXTagGetShareMessage: {
             parameter = [NEW_SERVER_IP stringByAppendingString:GETSHAREMESSAGE];
         }

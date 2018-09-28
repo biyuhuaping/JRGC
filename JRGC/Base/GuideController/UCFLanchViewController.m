@@ -9,6 +9,7 @@
 #import "UCFLanchViewController.h"
 #import "LockFlagSingle.h"
 #import "HWWeakTimer.h"
+#import "AppDelegate.h"
 @interface UCFLanchViewController ()
 {
     NSTimer * fixTelNumTimer;
@@ -50,12 +51,45 @@
         UIImage *placehoderImage = [Common getTheLaunchImage];
         _advertisementView.contentMode = UIViewContentModeScaleToFill;
         _advertisementView.image = placehoderImage;
-        [self performSelector:@selector(disapperAdversement) withObject:nil afterDelay:2];
+        
+        //请求开关状态kSXTagGetAppleInfoForOnOff
+        [[NetworkModule sharedNetworkModule] newPostReq:@{} tag:kSXTagGetAppleInfoForOnOff owner:self signature:NO Type:SelectAccoutDefault];
+        
+//        [self performSelector:@selector(disapperAdversement) withObject:nil afterDelay:2];
     }
 
 
 }
-
+- (void)endPost:(id)result tag:(NSNumber *)tag
+{
+    NSString *Data = (NSString *)result;
+    NSDictionary * dic = [Data objectFromJSONString];
+    if([dic[@"ret"] boolValue] == 1)
+    {
+        dic = dic[@"data"];
+        
+        //以下是升级信息
+        NSString *netVersion = [dic objectSafeForKey: @"lastVersion"];
+        [LockFlagSingle sharedManager].netVersion = netVersion;
+        //是否强制更新 0强制 1随便 2不稳定
+        NSInteger versionMark = [[dic objectSafeForKey:@"forceUpdateOnOff"] integerValue];
+        
+        NSDictionary *infoDic = [[NSBundle mainBundle] infoDictionary];
+        NSString *currentVersion = infoDic[@"CFBundleShortVersionString"];
+        NSComparisonResult comparResult = [netVersion compare:currentVersion options:NSNumericSearch];
+        
+        
+        if (comparResult == NSOrderedAscending || comparResult == NSOrderedSame) {
+            if (versionMark == 2) {
+                AppDelegate *app = (AppDelegate * )[[UIApplication sharedApplication] delegate];
+                app.isSubmitAppStoreTestTime = YES;
+                [UserInfoSingle sharedManager].isSubmitTime = YES;
+                
+            }
+        }
+    }
+    [self disapperAdversement];
+}
 - (void)getAdversementImageStyle:(int)style
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
