@@ -33,20 +33,20 @@
         
         
          NSString *imageName = @"";
-        if ([UserInfoSingle sharedManager].isSubmitTime)
-        {
-            if (ScreenHeight == 480) {
-                imageName = @"appleLogin_bg_iphone4_default.png";
-            } else if (ScreenHeight == 812) {
-                imageName = @"appleLogin_bg_iphoneX.png";
-            } else {
-                imageName = @"appleLogin_bg_default.png";
-            }
-            
-            UIImage *imageData = [UIImage imageNamed:imageName];
-            _baseImageView.image = imageData;
-        }
-        else{
+//        if ([UserInfoSingle sharedManager].isSubmitTime)
+//        {
+//            if (ScreenHeight == 480) {
+//                imageName = @"appleLogin_bg_iphone4_default.png";
+//            } else if (ScreenHeight == 812) {
+//                imageName = @"appleLogin_bg_iphoneX.png";
+//            } else {
+//                imageName = @"appleLogin_bg_default.png";
+//            }
+//
+//            UIImage *imageData = [UIImage imageNamed:imageName];
+//            _baseImageView.image = imageData;
+//        }
+//        else{
                 NSString *imageURL = [[NSUserDefaults standardUserDefaults] valueForKey:@"LoginImageUrl"];
     
                 if (ScreenHeight == 480) {
@@ -60,7 +60,7 @@
                 UIImage *imageData = [UIImage imageNamed:imageName];
                 [_baseImageView sd_setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:imageData];
             
-        }
+//        }
         [self addSubview:_baseImageView];
             
         

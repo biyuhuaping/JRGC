@@ -284,7 +284,7 @@
         [preView removeFromSuperview];
     }
     
-    UIView *investBaseView = [[UIView alloc] initWithFrame:CGRectMake(0, ScreenHeight -NavigationBarHeight - 67, ScreenWidth, 67)];
+    UIView *investBaseView = [[UIView alloc] initWithFrame:CGRectMake(0, ScreenHeight - StatusBarHeight1 - 44 - 67, ScreenWidth, 67)];
     investBaseView.backgroundColor = [UIColor clearColor];
     investBaseView.tag = 9000;
     [self.view addSubview:investBaseView];
