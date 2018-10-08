@@ -166,7 +166,7 @@
     _describeLabel.userInteractionEnabled = YES;
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.center = CGPointMake(ScreenWidth/2, ScreenHeight- NavigationBarHeight - 25 - 23/2);
+    button.center = CGPointMake(ScreenWidth/2, ScreenHeight- NavigationBarHeight1 - 25 - 23/2);
     [button setBackgroundImage:[UIImage imageNamed:@"sign_down"] forState:UIControlStateNormal];
     [button setTitle:@"金融工场专业互联网金融信息服务机构" forState:UIControlStateNormal];
     button.titleLabel.font = [UIFont systemFontOfSize:13];

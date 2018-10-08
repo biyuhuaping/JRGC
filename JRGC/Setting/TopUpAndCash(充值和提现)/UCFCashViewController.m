@@ -20,7 +20,9 @@
 #import "UCFCashTableViewCell.h"
 #import "UCFSettingItem.h"
 #import "UCFRedBagViewController.h"
-
+#import "UCFOpenRedBagButton.h"
+#import "AppDelegate.h"
+#import "UCFInvestViewController.h"
 #define CASHWAYCELLHIGHT  73.0 //提现方式cell 的高度
 @interface UCFCashViewController ()<UCFChoseBankViewControllerDelegate,MjAlertViewDelegate,UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate,UIAlertViewDelegate>
 {
@@ -42,6 +44,7 @@
     NSString *_perDayRealTimeTipStr;//单日提现子标题提示信息
     NSString *_noticeTxt;//显不显示那行字;
     BOOL _hasCoupon;//hasCoupon为1时进入已领取页,为0时进入领券页
+    MjAlertView *_redBagAlertView;
 }
 @property (weak, nonatomic) IBOutlet UIScrollView *baseScrollView;
 @property (strong, nonatomic) IBOutlet UIImageView *bankIcon;
@@ -84,6 +87,7 @@
 @property (strong, nonatomic) IBOutlet NZLabel *telServiceLabel;//联系客服
 @property (assign, nonatomic) float tableviewCellHeight;//联系客服
 @property (strong, nonatomic) NSString *telServiceNo;
+@property (weak, nonatomic) UCFOpenRedBagButton *redRedBagBtn;
 
 - (IBAction)getMobileCheckCode:(id)sender;
 - (IBAction)sumitBtnClick:(id)sender;
@@ -610,25 +614,17 @@
         }
     }
     
-    if(self.accoutType == SelectAccoutTypeHoner && ![_noticeTxt isEqualToString:@""])
-    {
-        self.honerCashTipViewHight.constant= 44.0f;
-        self.honerCashTipViewRight.constant = ScreenWidth;
-        self.aboutLabelRight.constant = 15 + ScreenWidth;
-        self.honerTipButton.hidden = YES;
-        self.aboutLabel.layer.cornerRadius  = 3;
-        self.aboutLabel.layer.masksToBounds = YES;
-        [self honerCashActivityAnimating];
-    }else{
-        self.honerCashTipViewHight.constant= 0;
-        [self.aboutLabel removeFromSuperview];
-        [self.honerCashTipLabel removeFromSuperview];
-    }
+    self.honerCashTipViewHight.constant= 0;
+    [self.aboutLabel removeFromSuperview];
+    [self.honerCashTipLabel removeFromSuperview];
+   
 
     _baseScrollView.contentOffset = CGPointMake(0, 0);
     _cashWayTableView.delegate = self;
     _cashWayTableView.dataSource = self;
     _cashWayTableViewHeigt.constant = _cashWayArray.count * self.tableviewCellHeight;
+    
+    
 }
 #pragma mark -尊享活动view  动画
 -(void)honerCashActivityAnimating
@@ -694,6 +690,11 @@
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     _getCodeBtn.userInteractionEnabled = YES;
     [MBProgressHUD displayHudError:err.userInfo[@"NSLocalizedDescription"]];
+    if(tag.intValue == kSXTagGetRedBagContent)
+    {
+        [self.redRedBagBtn stopAnimation];
+        [_redBagAlertView hide];
+    }
 }
 
 - (void)beginPost:(kSXTag)tag
@@ -798,6 +799,25 @@
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:message delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
                 [alert show];
             }
+        }
+    } else if (tag.intValue == kSXTagGetRedBagContent) {
+        NSMutableDictionary *dic = [data objectFromJSONString];
+        NSString *rstcode = dic[@"ret"];
+        NSString *rsttext = dic[@"message"];
+        if ([rstcode intValue] == 1) {
+             [self.redRedBagBtn stopAnimation];
+             [_redBagAlertView hide];
+            _hasCoupon = YES;//已经进入啦
+            UCFRedBagViewController *redbag = [[UCFRedBagViewController alloc] initWithNibName:@"UCFRedBagViewController" bundle:nil];
+            redbag.sourceVC = self;
+            redbag.fold = NO;
+            redbag.data = [dic objectSafeDictionaryForKey:@"data"];
+            UINavigationController *redbagVCNaviController = [[UINavigationController alloc] initWithRootViewController:redbag];
+            [self presentViewController:redbagVCNaviController animated:NO completion:nil];
+           
+        } else {
+            [self.redRedBagBtn stopAnimation];
+            [AuxiliaryFunc showToastMessage:rsttext withView:self.view];
         }
     }
 }
@@ -928,15 +948,51 @@
         [alertView show];
         return;
     }
-    if (self.accoutType == SelectAccoutTypeHoner && ![_noticeTxt isEqualToString:@""])
+    
+    if(self.accoutType == SelectAccoutTypeHoner && ![_noticeTxt isEqualToString:@""])
     {
-        MjAlertView *honerlertView =[[MjAlertView alloc]initHonerCashWithMessage:_noticeTxt  delegate:self];
-        honerlertView.tag = 1009;
-        [honerlertView show];
-        return;
+        if(_hasCoupon)
+        {
+            MjAlertView *honerlertView =[[MjAlertView alloc]initHonerCashWithMessage:@"喂！ \n您还有个红包没薅呢！"  delegate:self];
+            honerlertView.tag = 1009;
+            [honerlertView show];
+            
+        }else{
+            _redBagAlertView = [[MjAlertView alloc] initHonerActViewAlertWithDelegate:self];
+            _redBagAlertView.tag = 1000;
+            [_redBagAlertView show];
+        }
+        return ;
     }
     sender.userInteractionEnabled = NO;
     [self withdrawalAmountIsExceedsTheLimitHttPRequest];
+}
+
+#pragma mark 红包是否领取
+-(void)isShowRedAlertView{
+    if(self.accoutType == SelectAccoutTypeHoner && ![_noticeTxt isEqualToString:@""])
+    {
+        if(_hasCoupon)
+        {
+            MjAlertView *honerlertView =[[MjAlertView alloc]initHonerCashWithMessage:@"喂！ \n您还有个红包没薅呢！"  delegate:self];
+            honerlertView.tag = 1009;
+            [honerlertView show];
+            
+        }else{
+            _redBagAlertView = [[MjAlertView alloc] initHonerActViewAlertWithDelegate:self];
+            _redBagAlertView.tag = 1000;
+            [_redBagAlertView show];
+        }
+        return ;
+    }
+}
+#pragma mark - 从网络获取红包
+- (void)getRedBagFromNet {
+    NSString *userId = [UserInfoSingle sharedManager].userId;
+    if (userId) {
+        NSDictionary *param = @{@"userId": userId};
+        [[NetworkModule sharedNetworkModule] newPostReq:param tag:kSXTagGetRedBagContent owner:self signature:YES Type:SelectAccoutDefault];
+    }
 }
 #pragma mark-- 提现金额是否超过限制网络请求
 -(void)withdrawalAmountIsExceedsTheLimitHttPRequest
@@ -1043,8 +1099,35 @@
     {
         if (index == 101)
         {
-            //是否进入尊享提现活动页面
-            [self gotoHonerCashActivityView:nil];
+//            //是否进入尊享提现活动页面
+//            [self gotoHonerCashActivityView:nil];
+            NSString *className = [NSString stringWithUTF8String:object_getClassName(self.rootVc)];
+            if([className hasSuffix:@"UCFRechargeOrCashViewController"])
+            {
+                    AppDelegate *appdel = (AppDelegate *)[UIApplication sharedApplication].delegate;
+                    [appdel.tabBarController dismissViewControllerAnimated:NO completion:^{
+                        UCFBaseViewController * base =    [[appdel.tabBarController.childViewControllers objectAtIndex:4].childViewControllers lastObject];
+                        [base.navigationController popToRootViewControllerAnimated:NO];
+                        UCFInvestViewController *invest = (UCFInvestViewController *)[[appdel.tabBarController.childViewControllers objectAtIndex:1].childViewControllers firstObject];
+                        invest.selectedType = @"QualityClaims";
+                        if ([invest isViewLoaded]){
+                            [invest changeView];
+                        }
+                        [appdel.tabBarController setSelectedIndex:1];
+                    }];
+                
+           }else{
+            
+            AppDelegate *appdel = (AppDelegate *)[UIApplication sharedApplication].delegate;
+            UCFBaseViewController * base =    [[appdel.tabBarController.childViewControllers objectAtIndex:4].childViewControllers lastObject];
+            [base.navigationController popToRootViewControllerAnimated:NO];
+            UCFInvestViewController *invest = (UCFInvestViewController *)[[appdel.tabBarController.childViewControllers objectAtIndex:1].childViewControllers firstObject];
+            invest.selectedType = @"QualityClaims";
+            if ([invest isViewLoaded]){
+                [invest changeView];
+            }
+            [appdel.tabBarController setSelectedIndex:1];
+           }
         }
         else//去提现
         {
@@ -1053,10 +1136,17 @@
         
     }else{
         if (index == 1) {
-            [self withdrawalAmountIsExceedsTheLimitHttPRequest];
+            [self isShowRedAlertView];
+//            [self withdrawalAmountIsExceedsTheLimitHttPRequest];
         }
     }
    
+}
+- (void)mjalertView:(MjAlertView *)alertview didClickedRedBagButton:(UCFOpenRedBagButton *)redBagButton;
+{
+    self.redRedBagBtn = redBagButton;
+    [redBagButton startAnimation];
+    [self getRedBagFromNet];
 }
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (alertView.tag == 1011) {

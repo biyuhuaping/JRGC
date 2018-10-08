@@ -25,9 +25,12 @@
 #import "UCFRechargeWebViewController.h"
 #import "NSString+Misc.h"
 #import "HSHelper.h"
+#import "LMJScrollTextView.h"
+#import "UCFNoticeView.h"
+#import "UCFNoticeModel.h"
 //#warning 同盾修改
 //@interface UCFTopUpViewController () <UITextFieldDelegate,FMDeviceManagerDelegate,UCFModifyReservedBankNumberDelegate>
-@interface UCFTopUpViewController () <UITextFieldDelegate,UCFModifyReservedBankNumberDelegate>
+@interface UCFTopUpViewController () <UITextFieldDelegate,UCFModifyReservedBankNumberDelegate,UCFNoticeViewDelegate>
 {
     NSString *curCodeType;          //当前验证码的状态
     NSString *rechargeLimiteUrl;    //产看银行限额的地址
@@ -47,6 +50,7 @@
     BOOL                 isSpecial;//是否是特殊用户
     MjAlertView         *moneylessAlertView; //账户余额不足弹框
     NSString * _RechargeTokenStr;
+    LMJScrollTextView *_scrollTextView1_1;
 }
 //底部滚动视图
 @property (weak, nonatomic) IBOutlet UIScrollView *baseScrollView;
@@ -99,14 +103,17 @@
 - (IBAction)gotoPay:(id)sender;
 - (IBAction)getMsgCode:(id)sender;
 - (IBAction)clickModiyPhoneButton:(UIButton *)sender;
+@property (weak, nonatomic) IBOutlet UIView *topBaseView;
 
 #pragma mark - 调整卡片的约束参数
 
 
 // scrollView 的content高度
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *baseViewTop;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *rechargeTopCo;
+@property (strong, nonatomic)UCFNoticeView *noticeView;
 @end
 
 @implementation UCFTopUpViewController
@@ -117,7 +124,11 @@
     self.topUpLabelTextField.text = @"";
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 }
-
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    _noticeView.frame = CGRectMake(0, 0, ScreenWidth, 45);
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self createUI];
@@ -132,37 +143,74 @@
 //初始化界面信息
 - (void)createUI
 {
+    
+
+    
     if (self.accoutType == SelectAccoutTypeHoner)
     {
+        self.baseViewTop.constant = 0;
+
         self.codeTextFieldHeight.constant = 37;
         self.sendButtonHeight.constant = 37;
         self.getCodeButton.hidden = NO;
         self.verificationCodeField.hidden = NO;
         baseTitleLabel.text = @"尊享充值";
+        
+       
+        
     }else{
         self.codeTextFieldHeight.constant = 0;
         self.sendButtonHeight.constant = 0;
         self.getCodeButton.hidden = YES;
         self.verificationCodeField.hidden = YES;
         baseTitleLabel.text = @"微金充值";
+        
+//        _scrollTextView1_1 = [[LMJScrollTextView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth - 95, 37) textScrollModel:LMJTextScrollFromOutside direction:LMJTextScrollMoveRight];
+//        _scrollTextView1_1.backgroundColor = [UIColor clearColor];
+//        [_topBaseView addSubview:_scrollTextView1_1];
+//
+//        [_scrollTextView1_1 startScrollWithText:@"转账充值调整公告:手机银行、网银或银行人工柜台" textColor:[UIColor whiteColor] font:[UIFont systemFontOfSize:14]];
+        
+//        UILabel *skipLab = [[UILabel alloc] init];
+//        skipLab.frame = CGRectMake(ScreenWidth - 85, 5, 70, 27);
+//        skipLab.backgroundColor = [UIColor whiteColor];
+//        skipLab.font = [UIFont systemFontOfSize:14.0f];
+//        skipLab.text = @"点击查看";
+//        skipLab.textAlignment = NSTextAlignmentCenter;
+//        skipLab.clipsToBounds = YES;
+//        skipLab.layer.cornerRadius = 4.0f;
+//        skipLab.textColor = UIColorWithRGB(0x5b6993);
+//        [_topBaseView addSubview:skipLab];
+        
+//        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(checkWebContent)];
+//        [_topBaseView addGestureRecognizer:tap];
+        
+        self.noticeView = (UCFNoticeView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFNoticeView" owner:self options:nil] lastObject];
+        _noticeView.delegate = self;
+        _noticeView.backgroundColor = [UIColor clearColor];
+        _noticeView.frame = CGRectMake(0, 0, ScreenWidth, 45);
+        [_topBaseView addSubview:_noticeView];
+        
+        
+        
+        UCFNoticeModel *model = [[UCFNoticeModel alloc] init];
+        model.noticeUrl = @"https://static.9888.cn/pages/transferNotice/notice.html";
+        model.siteNotice = @"线下转账充值用户流程调整";
+        
+        
+        _noticeView.noticeModel = model;
+        _noticeView.noticeLabell.text = model.siteNotice;
+        _noticeView.noticeLabell.font = [UIFont boldSystemFontOfSize:14];
+        for (UIView *view in _noticeView.subviews) {
+            view.hidden = NO;
+        }
     }
     [self addLeftButton];
     [self addRightButtonWithName:@"充值记录"];
     _getCodeButton.titleLabel.font = [UIFont systemFontOfSize:15.0f];
-//    [_getCodeButton setBackgroundImage:[[UIImage imageNamed:@"btn_bule"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:2.5] forState:UIControlStateNormal];
-//    [_getCodeButton setBackgroundImage:[[UIImage imageNamed:@"btn_bule_highlight"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:2.5] forState:UIControlStateDisabled];
+
     _getCodeButton.backgroundColor = UIColorWithRGB(0x8296af);
 
-//    if (!isVisible) {
-//        [_verificationCodeBtn setUserInteractionEnabled:NO];
-//        _verificationCodeBtn.backgroundColor = UIColorWithRGB(0xd4d4d4);
-//    } else {
-//        [_verificationCodeBtn setUserInteractionEnabled:YES];
-//        _verificationCodeBtn.backgroundColor = UIColorWithRGB(0x8296af);
-//    }
-//    UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(telServiceNo)];
-//    [_serviceLabel addGestureRecognizer:tap1];
-//    [_serviceLabel setFontColor:UIColorWithRGB(0x4aa1f9) string:@"400-0322-988"];
     
     [self.topUpButton setBackgroundImage:[[UIImage imageNamed:@"btn_red"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:2.5] forState:UIControlStateNormal];
     [self.topUpButton setBackgroundImage:[[UIImage imageNamed:@"btn_red_highlight"] stretchableImageWithLeftCapWidth:2.5 topCapHeight:2.5] forState:UIControlStateHighlighted];
@@ -180,6 +228,13 @@
     _msgTipLabel.userInteractionEnabled = YES;
     _msgTipLabel.text = @"";
 }
+- (void)noticeView:(UCFNoticeView *)noticeView didClickedNotice:(UCFNoticeModel *)notice
+{
+    FullWebViewController *controller = [[FullWebViewController alloc] initWithWebUrl:@"https://static.9888.cn/pages/transferNotice/notice.html"  title:@"转账充值调整公告"];
+    controller.baseTitleType = @"detail_heTong";
+    [self.navigationController pushViewController:controller animated:YES];
+}
+
 -(void)showDeleagateView:(ZBLinkLabelModel *)linkModel
 {
     NSString *contractNameStr = linkModel.linkString;

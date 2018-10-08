@@ -17,7 +17,7 @@
 #import "UCFHomeIconCollectionCell.h"
 #import "UCFHomeIconPresenter.h"
 #import "UCFNoticeViewController.h"
-
+#import "UCFZiZHIViewController.h"
 @interface UCFCycleImageViewController () <HomeIconListViewPresenterCallBack, SDCycleScrollViewDelegate, UCFNoticeViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UIAlertViewDelegate>
 @property (strong, nonatomic) UCFHomeListPresenter *presenter;
 @property (weak, nonatomic) SDCycleScrollView *cycleImageView;
@@ -60,13 +60,21 @@ static NSString *cellId = @"iconCell";
 
 - (void)noticeView:(UCFNoticeView *)noticeView didClickedNotice:(UCFNoticeModel *)notice
 {
-    UCFNoticeViewController *noticeWeb = [[UCFNoticeViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
-    noticeWeb.url      = notice.noticeUrl;//请求地址;
-    noticeWeb.navTitle = @"公告";
-    UCFBaseViewController *baseVc = (UCFBaseViewController *)self.delegate;
-    if (notice.noticeUrl.length > 0) {
-        [baseVc.navigationController pushViewController:noticeWeb animated:YES];
+    if ([notice.noticeUrl isEqualToString:@"xinxipilou"]) {
+        UCFZiZHIViewController *vc = [[UCFZiZHIViewController alloc] initWithNibName:@"UCFZiZHIViewController" bundle:nil];
+        UCFBaseViewController *baseVc = (UCFBaseViewController *)self.delegate;
+        [baseVc.navigationController pushViewController:vc animated:YES];
+
+    } else {
+        UCFNoticeViewController *noticeWeb = [[UCFNoticeViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
+        noticeWeb.url      = notice.noticeUrl;//请求地址;
+        noticeWeb.navTitle = @"公告";
+        UCFBaseViewController *baseVc = (UCFBaseViewController *)self.delegate;
+        if (notice.noticeUrl.length > 0) {
+            [baseVc.navigationController pushViewController:noticeWeb animated:YES];
+        }
     }
+
 }
 
 #pragma mark ---- UICollectionViewDataSource
@@ -200,6 +208,21 @@ static NSString *cellId = @"iconCell";
         [temp addObject:model];
         self.cycleImageView.imagesGroup = temp;
         [self.cycleImageView refreshImage];
+        
+        
+        UCFNoticeModel *noticeModel = [[UCFNoticeModel alloc] init];
+        noticeModel.noticeUrl = @"xinxipilou";
+        noticeModel.siteNotice =@"金融工场信息披露";
+    
+        self.noticeView.noticeModel = noticeModel;
+        self.noticeView.noticeLabell.text = noticeModel.siteNotice;
+        if (noticeModel.siteNotice.length > 0) {
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isShowNotice"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self.delegate refreshNoticeWithShow:YES];
+            });
+        }
     } else {
         [[NetworkModule sharedNetworkModule] newPostReq:nil tag:kSXTagGetBannerAndGift owner:self signature:NO Type:SelectAccoutDefault];
     }

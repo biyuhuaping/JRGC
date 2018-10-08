@@ -23,14 +23,32 @@
     self.showTableview = [[UITableView alloc] initWithFrame:CGRectMake(0, 1, ScreenWidth, ScreenHeight - StatusBarHeight1 - 44) style:UITableViewStylePlain];
     self.showTableview.backgroundColor = [UIColor clearColor];
     [self.view addSubview:_showTableview];
-    baseTitleLabel.text = @"公司资质";
+    baseTitleLabel.text = @"信息披露";
     _showTableview.delegate = self;
     _showTableview.dataSource = self;
     _showTableview.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.dataArr = @[@"企业信息公示",@"营业执照" ,@"整改通知书",@"银行存管证明",@"ICP证",@"用户服务协议"];
+    self.dataArr = @[@"合作协议",@"企业信息公示",@"营业执照" ,@"整改通知书",@"银行存管证明",@"ICP证",@"用户服务协议"];
 //    self.typeDataArr = @[@"pdf" ,@"整改通知书",@"银行存管证明",@"ICP证书",@"用户服务协议"];
     
     
+}
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 125)];
+    headView.backgroundColor = [UIColor clearColor];
+    
+    UILabel *lab = [[UILabel alloc] initWithFrame:CGRectMake(0, 15, ScreenWidth, 20)];
+    lab.backgroundColor = [UIColor clearColor];
+    lab.text = @"----合作伙伴----";
+    lab.font = [UIFont systemFontOfSize:14.0f];
+    lab.textAlignment = NSTextAlignmentCenter;
+    [headView addSubview:lab];
+    
+    UIImageView *logoView = [[UIImageView alloc] initWithFrame:CGRectMake((ScreenWidth - (500 * 0.4))/2, CGRectGetMaxY(lab.frame) + 15, 500 *0.4, 150 * 0.4)];
+    logoView.backgroundColor = [UIColor clearColor];
+    logoView.image = [UIImage imageNamed:@"LOGO微金.png"];
+    [headView addSubview:logoView];
+    return headView;
 }
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
@@ -53,12 +71,16 @@
 - (void)checkWebSite:(UIButton *)butt
 {
     UCFZIZhiWebViewViewController *vc  = [[UCFZIZhiWebViewViewController alloc] initWithNibName:@"UCFZIZhiWebViewViewController" bundle:nil];
-    vc.url = @"https://www.gongchangp2p.com/static/p2p-web/notice-information-disclosure/index.html";
+    vc.url = @"https://www.9888keji.com";
     [self.navigationController pushViewController:vc animated:YES];
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     return 40;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 125;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -90,6 +112,7 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     UCFZIZhiWebViewViewController *vc  = [[UCFZIZhiWebViewViewController alloc] initWithNibName:@"UCFZIZhiWebViewViewController" bundle:nil];
     if (indexPath.row == self.dataArr.count - 1) {
         vc.fileName = [NSString stringWithFormat:@"%@.docx",self.dataArr[indexPath.row]];

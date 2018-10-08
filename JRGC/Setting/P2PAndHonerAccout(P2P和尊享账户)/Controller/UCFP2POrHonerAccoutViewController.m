@@ -44,12 +44,11 @@
     
 }
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) IBOutlet UITableView *loadingView;
+
 @property(strong,nonatomic) NSMutableArray *cellItemsData;
 @property (weak, nonatomic) IBOutlet UIImageView *shadowImageView;
 @property (strong, nonatomic) NSString *fromIntoVCStr;
 
-@property (weak, nonatomic) IBOutlet UIImageView *loadingImageView;
 @property (strong, nonatomic) NSString *isCompanyAgent;//是否是机构用户
 @property (weak, nonatomic) IBOutlet UIButton *cashButton;
 @property (weak, nonatomic) IBOutlet UIButton *rechargeButton;
@@ -95,29 +94,11 @@
 {
     _hasCoupon = YES;
 }
--(void)removeLoadingView
-{
-    for (UIView *view in self.loadingView.subviews) {
-        [view removeFromSuperview];
-    }
-    [self.loadingView removeFromSuperview];
-    [self addRightButton];
-    [self.tableView.header beginRefreshing];
-    self.tableView.userInteractionEnabled = YES;
-    baseTitleLabel.text =  self.accoutType==SelectAccoutTypeHoner ? @"尊享账户":@"微金账户";
-}
 -(void)createUIInfoView{
     [self addLeftButton];
-//     baseTitleLabel.text = @"正在跳转";
     baseTitleLabel.text =  self.accoutType==SelectAccoutTypeHoner ? @"尊享账户":@"微金账户";
     [self.tableView addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(getP2POrHonerAccoutHttpRequest)];
-    self.loadingView.userInteractionEnabled = NO;
-    self.tableView.userInteractionEnabled = NO;
-    self.loadingView.hidden = YES;
-    [self.view bringSubviewToFront:self.loadingView];
-    [self removeLoadingView];
     if (self.accoutType ==  SelectAccoutTypeHoner) {
-
          _isShowOrHideAccoutMoney = [[NSUserDefaults standardUserDefaults] boolForKey:@"IsShowHonerAccoutMoney"];
     }else{
 
@@ -137,11 +118,8 @@
         }
     } else {
         self.rechargeButton.backgroundColor = UIColorWithRGB(0xfd4d4c);
-
     }
-
-//    _bottomConstract
-    
+    [self.tableView.header beginRefreshing];
 }
 -(void)addRightButton{
     UIButton *rightbutton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -251,17 +229,19 @@
 //                return 160;
 //            }
 //        }
-        if (self.accoutType == SelectAccoutTypeHoner ) {
-            
-            if (_noticeTxt.length > 0)//如果关闭 尊享提现活动的话
-            {
-                return  204;
-            }else{
-                return  160;
-            }
-        } else {
-            return 160;
-        }
+//        if (self.accoutType == SelectAccoutTypeHoner ) {
+//
+//            if (_noticeTxt.length > 0)//如果关闭 尊享提现活动的话
+//            {
+//                return  204;
+//            }else{
+//                return  160;
+//            }
+//        } else {
+//            return 160;
+//        }
+        
+        return 160;
     }
     return 10;
 }
@@ -274,10 +254,10 @@
 {
     if (section == 0) {
         CGFloat headHeight = 160;
-        if(self.accoutType == SelectAccoutTypeHoner && _noticeTxt.length > 0)
-        {
-            headHeight = 204;
-        }
+//        if(self.accoutType == SelectAccoutTypeHoner && _noticeTxt.length > 0)
+//        {
+//            headHeight = 204;
+//        }
     
         self.headerView = [[[NSBundle mainBundle]loadNibNamed:@"UCFP2POrHornerTabHeaderView" owner:nil options:nil] firstObject];
         _headerView.frame = CGRectMake(0, 0, ScreenWidth, headHeight);
@@ -334,6 +314,10 @@
             return [obj.items count];
     }
     return 0;
+}
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -507,17 +491,17 @@
 -(void)honerCashActivityAnimating
 {
     
-    __weak typeof(self) weakSelf = self;
-    [UIView animateWithDuration:0.7 delay:1.2 options: UIViewAnimationOptionCurveEaseIn animations:^{
-        
-        weakSelf.headerView.honerCashTipView.frame = CGRectMake(0,weakSelf.headerView.honerCashTipView.frame.origin.y, ScreenWidth, 44);
-        weakSelf.headerView.honerCashTipViewLeft.constant = 0;
-       weakSelf.headerView.honerCashTipViewRight.constant = 0;
-      weakSelf.headerView.aboutLabelRight.constant = 15;
-    
-    } completion:^(BOOL finished) {
-        
-    }];
+//    __weak typeof(self) weakSelf = self;
+//    [UIView animateWithDuration:0.7 delay:1.2 options: UIViewAnimationOptionCurveEaseIn animations:^{
+//        
+//        weakSelf.headerView.honerCashTipView.frame = CGRectMake(0,weakSelf.headerView.honerCashTipView.frame.origin.y, ScreenWidth, 44);
+//        weakSelf.headerView.honerCashTipViewLeft.constant = 0;
+//       weakSelf.headerView.honerCashTipViewRight.constant = 0;
+//      weakSelf.headerView.aboutLabelRight.constant = 15;
+//    
+//    } completion:^(BOOL finished) {
+//        
+//    }];
 }
 - (void)mjalertView:(MjAlertView *)alertview didClickedButton:(UIButton *)clickedButton andClickedIndex:(NSInteger)index
 {

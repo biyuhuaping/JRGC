@@ -1024,6 +1024,10 @@ static NetworkModule *gInstance = NULL;
             parameter = [NEW_SERVER_IP stringByAppendingString:GETINFOFORONOFF];
         }
             break;
+        case kSXTagGetAppleInfoForOnOff: {
+            parameter = [NEW_SERVER_IP stringByAppendingString:GETINFOFORONOFF];
+        }
+            break;
         case kSXTagGetShareMessage: {
             parameter = [NEW_SERVER_IP stringByAppendingString:GETSHAREMESSAGE];
         }
@@ -1349,8 +1353,13 @@ static NetworkModule *gInstance = NULL;
         case kSXTagGetUserAllState:
             parameter = [NEW_SERVER_IP stringByAppendingString:GETHOMEUSERSTATE];
             break;
+
         case kSXTagIntoCoinPage:
             parameter = [NEW_SERVER_IP stringByAppendingString:INTOCOINPAGEURL];
+            break;
+        case kSXTagRecommendPrdClaim:
+            parameter = [NEW_SERVER_IP stringByAppendingString:HOMEPAGERECOMMENDPRDCLAIMURL];
+
             break;
     }
     //给原有参数字典添加公共参数

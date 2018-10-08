@@ -101,39 +101,39 @@
     _noticeTxt = [self.dataDict  objectSafeForKey:@"noticeTxt"];
     _hasCoupon= [[self.dataDict  objectSafeForKey:@"hasCoupon"] boolValue];;//hasCoupon为1时进入已领取页,为0时进入领券页
     
-    if (_accoutTpye == SelectAccoutTypeHoner && ![_noticeTxt isEqualToString:@""])
-    {
-        self.honerCashTipViewHight.constant = 44;
-        self.honerCashTipViewRight.constant = ScreenWidth;
-        self.aboutLabelRight.constant = 15 + ScreenWidth;
-        self.honerCashTipLabel.text = _noticeTxt;
-        self.honerTipButton.hidden = YES;
-        [self honerCashActivityAnimating];
-    }else{
-        self.honerCashTipViewHight.constant = 0;
-        [self.honerCashTipView removeFromSuperview];
-        [self.aboutLabel removeFromSuperview];
-        [self.honerCashTipLabel removeFromSuperview];
-    }
+//    if (_accoutTpye == SelectAccoutTypeHoner && ![_noticeTxt isEqualToString:@""])
+//    {
+//        self.honerCashTipViewHight.constant = 44;
+//        self.honerCashTipViewRight.constant = ScreenWidth;
+//        self.aboutLabelRight.constant = 15 + ScreenWidth;
+//        self.honerCashTipLabel.text = _noticeTxt;
+//        self.honerTipButton.hidden = YES;
+////        [self honerCashActivityAnimating];
+//    }else{
+//        self.honerCashTipViewHight.constant = 0;
+//        [self.honerCashTipView removeFromSuperview];
+//        [self.aboutLabel removeFromSuperview];
+//        [self.honerCashTipLabel removeFromSuperview];
+//    }
 }
 #pragma mark -尊享活动view  动画
 -(void)honerCashActivityAnimating
 {
     
-    __weak typeof(self) weakSelf = self;
-    dispatch_queue_t queue= dispatch_get_main_queue();
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.15 * NSEC_PER_SEC)), queue, ^{
-        [UIView animateWithDuration:0.5 delay:0.1 options: UIViewAnimationOptionCurveLinear  animations:^{
-            weakSelf.honerCashTipView.frame = CGRectMake(0, weakSelf.honerCashTipView.frame.origin.y, ScreenWidth, 44);
-            weakSelf.honerTipButton.frame = weakSelf.honerCashTipView.frame;
-        } completion:^(BOOL finished) {
-            weakSelf.honerCashTipViewLeft.constant = 0;
-            weakSelf.honerCashTipViewRight.constant = 0;
-            weakSelf.aboutLabelRight.constant = 15;
-             weakSelf.honerTipButton.hidden = NO;
-            
-        }];
-    });
+//    __weak typeof(self) weakSelf = self;
+//    dispatch_queue_t queue= dispatch_get_main_queue();
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.15 * NSEC_PER_SEC)), queue, ^{
+//        [UIView animateWithDuration:0.5 delay:0.1 options: UIViewAnimationOptionCurveLinear  animations:^{
+//            weakSelf.honerCashTipView.frame = CGRectMake(0, weakSelf.honerCashTipView.frame.origin.y, ScreenWidth, 44);
+//            weakSelf.honerTipButton.frame = weakSelf.honerCashTipView.frame;
+//        } completion:^(BOOL finished) {
+//            weakSelf.honerCashTipViewLeft.constant = 0;
+//            weakSelf.honerCashTipViewRight.constant = 0;
+//            weakSelf.aboutLabelRight.constant = 15;
+//             weakSelf.honerTipButton.hidden = NO;
+//
+//        }];
+//    });
     
     
 }

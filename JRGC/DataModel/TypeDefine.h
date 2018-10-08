@@ -357,7 +357,11 @@
 #define GETHOMENEWUSERSECTIONS      @"/api/homePage/v2/noviceModule.json"   //新手磨具爱
 #define GETHOMEOTHERSECTIONS      @"api/homePage/v2/aiInvestModule.json"   //首页别的模块
 #define GETHOMEUSERSTATE      @"api/homePage/v2/statusInfoForCache.json"   //获取用户状态
+
 #define INTOCOINPAGEURL  @"api/coin/v2/intoCoinPage.json" // 进入工力佳贝页
+
+#define HOMEPAGERECOMMENDPRDCLAIMURL     @"/api/homePage/v2/recommendPrdClaim.json"//推荐标列表
+
 enum kPostStatus{
     kPostStatusNone=0,
     kPostStatusBeging=1,
@@ -499,6 +503,7 @@ enum kSXTag
     kSXTagColBatchInvestUrl,                //一键投标
     kSXTagMyInvestHeaderInfo,            //我的投资头部数据
     kSXTagGetInfoForOnOff,                 // 新手政策开关（0：关，1：开）
+    kSXTagGetAppleInfoForOnOff,                 // 新手政策开关（0：关，1：开）
     kSXTagProjectHonerPlanList,            //项目列表--尊享计划
     kSXTagHornerTransferList,               //转让列表--尊享转让
     kSXTagGetShareMessage,                  //首页2017新手政策分享注册链接
@@ -591,7 +596,11 @@ enum kSXTag
     kSXTagGetHomeNewUserSection,         //新手模块
     kSXTagGetHomeOtherSection,           //别的模块
     kSXTagGetUserAllState,              //查询用户相关状态
+
     kSXTagIntoCoinPage,                 // 进入工力佳贝页
+
+    kSXTagRecommendPrdClaim,            //推荐表列表
+
 };
 
 typedef enum kSXTag kSXTag;

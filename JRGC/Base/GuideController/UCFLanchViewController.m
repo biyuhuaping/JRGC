@@ -8,21 +8,23 @@
 
 #import "UCFLanchViewController.h"
 #import "LockFlagSingle.h"
+#import "HWWeakTimer.h"
+#import "AppDelegate.h"
 @interface UCFLanchViewController ()
+{
+    NSTimer * fixTelNumTimer;
+}
 @property (weak, nonatomic) IBOutlet UIImageView *advertisementView;
 @property (nonatomic) BOOL    isShowAdversement;
-@property (nonatomic) BOOL    isFetchRequestData; //获取开关接口是否返回
-@property (nonatomic) BOOL    isThreeSecondEnd;   //3秒是否走完
-@property (nonatomic, strong) NSDictionary  *requestDict;
+
+
+
 @end
 
 @implementation UCFLanchViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    [self checkNovicePoliceOnOff];
-
     //本地存储的广告地址 为空或者不存在 则不显示广告
     NSString *imagUrl = [[NSUserDefaults standardUserDefaults] valueForKey:@"adversementImageUrl"];
     SDImageCache *cache = [[SDImageCache alloc] init];
@@ -32,16 +34,8 @@
         _isShowAdversement = YES;
     } else {
         _isShowAdversement = NO;
-        _isThreeSecondEnd = YES;
     }
-    //显示广告
-    if (_isShowAdversement) {
-        [self showAdvertisement];
-    } else {
-        UIImage *placehoderImage = [Common getTheLaunchImage];
-        _advertisementView.contentMode = UIViewContentModeScaleToFill;
-        [_advertisementView setImage:placehoderImage];
-    }
+
     //获取广告地址
     if ([[Common machineName] isEqualToString:@"4"]) {
         [self getAdversementImageStyle:1];
@@ -50,32 +44,51 @@
     else {
         [self getAdversementImageStyle:3];
     }
-    
+    //显示广告
+    if (_isShowAdversement) {
+        [self showAdvertisement];
+    } else {
+        UIImage *placehoderImage = [Common getTheLaunchImage];
+        _advertisementView.contentMode = UIViewContentModeScaleToFill;
+        _advertisementView.image = placehoderImage;
+        
+        //请求开关状态kSXTagGetAppleInfoForOnOff
+        [[NetworkModule sharedNetworkModule] newPostReq:@{} tag:kSXTagGetAppleInfoForOnOff owner:self signature:NO Type:SelectAccoutDefault];
+        
+//        [self performSelector:@selector(disapperAdversement) withObject:nil afterDelay:2];
+    }
+
 
 }
-#pragma 新手政策弹框
-- (void)checkNovicePoliceOnOff
+- (void)endPost:(id)result tag:(NSNumber *)tag
 {
-    //请求开关状态
-    [[NetworkModule sharedNetworkModule] newPostReq:@{} tag:kSXTagGetInfoForOnOff owner:self signature:NO Type:SelectAccoutDefault];
-}
-- (void)endPost:(id)result tag:(NSNumber*)tag
-{
-    if (tag.integerValue == kSXTagGetInfoForOnOff) {
-        NSString *Data = (NSString *)result;
-        NSDictionary * dic = [Data objectFromJSONString];
-        self.requestDict = dic;
-        _isFetchRequestData = YES;
-        [self closeAdvertimentView];
-
+    NSString *Data = (NSString *)result;
+    NSDictionary * dic = [Data objectFromJSONString];
+    if([dic[@"ret"] boolValue] == 1)
+    {
+        dic = dic[@"data"];
+        
+        //以下是升级信息
+        NSString *netVersion = [dic objectSafeForKey: @"lastVersion"];
+        [LockFlagSingle sharedManager].netVersion = netVersion;
+        //是否强制更新 0强制 1随便 2不稳定
+        NSInteger versionMark = [[dic objectSafeForKey:@"forceUpdateOnOff"] integerValue];
+        
+        NSDictionary *infoDic = [[NSBundle mainBundle] infoDictionary];
+        NSString *currentVersion = infoDic[@"CFBundleShortVersionString"];
+        NSComparisonResult comparResult = [netVersion compare:currentVersion options:NSNumericSearch];
+        
+        
+        if (comparResult == NSOrderedAscending || comparResult == NSOrderedSame) {
+            if (versionMark == 2) {
+                AppDelegate *app = (AppDelegate * )[[UIApplication sharedApplication] delegate];
+                app.isSubmitAppStoreTestTime = YES;
+                [UserInfoSingle sharedManager].isSubmitTime = YES;
+                
+            }
+        }
     }
-}
-- (void)errorPost:(NSError *)err tag:(NSNumber *)tag
-{
-    if (tag.integerValue == kSXTagGetInfoForOnOff) {
-        _isFetchRequestData = YES;
-        [self.delegate lauchViewShowEndIsInSubmitTime:YES];
-    }
+    [self disapperAdversement];
 }
 - (void)getAdversementImageStyle:(int)style
 {
@@ -116,43 +129,27 @@
     [_advertisementView sd_setImageWithURL:[NSURL URLWithString:[[NSUserDefaults standardUserDefaults] valueForKey:@"adversementImageUrl"]] placeholderImage:placehoderImage];
     [_advertisementView setBackgroundColor:[UIColor clearColor]];
 
-    
     //跳过按钮
-//    [_advertisementView setUserInteractionEnabled:YES];
-//    UIButton *runbtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    runbtn.frame = CGRectMake(ScreenWidth - 60, ScreenHeight - 39, 45, 24);
-//    [runbtn addTarget:self action:@selector(runbtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-//    [runbtn setBackgroundImage:[UIImage imageNamed:@"skip.png"] forState:UIControlStateNormal];
-//    [_advertisementView addSubview:runbtn];
+    [_advertisementView setUserInteractionEnabled:YES];
+    UIButton *runbtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    runbtn.frame = CGRectMake(ScreenWidth - 60, ScreenHeight - 39, 45, 24);
+    [runbtn addTarget:self action:@selector(runbtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [runbtn setBackgroundImage:[UIImage imageNamed:@"skip.png"] forState:UIControlStateNormal];
+    [_advertisementView addSubview:runbtn];
     
-    [self performSelector:@selector(disapperAdversement) withObject:nil afterDelay:3.0];
+    fixTelNumTimer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(disapperAdversement) userInfo:nil repeats:NO];
+    
+}
+- (void)runbtnClicked:(UIButton *)button
+{
+    [fixTelNumTimer invalidate];
+    fixTelNumTimer = nil;
+    [self disapperAdversement];
 }
 - (void)disapperAdversement
 {
-    _isThreeSecondEnd = YES;
-    [self closeAdvertimentView];
-}
-
-- (void)closeAdvertimentView
-{
-    if (_isThreeSecondEnd && _isFetchRequestData) {
-        if (self.delegate && [self.delegate respondsToSelector:@selector(lauchViewShowEndIsInSubmitTime:)]) {
-
-            NSString *netVersion = [self.requestDict[@"data"] objectSafeForKey: @"lastVersion"];
-            NSInteger versionMark = [[self.requestDict[@"data"] objectSafeForKey:@"forceUpdateOnOff"] integerValue];
-            NSDictionary *infoDic = [[NSBundle mainBundle] infoDictionary];
-            NSString *currentVersion = infoDic[@"CFBundleShortVersionString"];
-            NSComparisonResult comparResult = [netVersion compare:currentVersion options:NSNumericSearch];
-            
-            if (comparResult == NSOrderedAscending || comparResult == NSOrderedSame) {
-                [self.delegate lauchViewShowEndIsInSubmitTime:versionMark == 2 ? YES : NO];
-            } else {
-                [self.delegate lauchViewShowEndIsInSubmitTime:NO];
-            }
-        }
-        if (self.delegate && [self.delegate respondsToSelector:@selector(lanchViewFetchTheFirstRequestData:)]) {
-            [self.delegate lanchViewFetchTheFirstRequestData:self.requestDict];
-        }
+    if (self.delegate && [self.delegate respondsToSelector:@selector(switchRootView)]) {
+        [self.delegate switchRootView];
     }
 }
 - (void)dealloc
