@@ -124,6 +124,8 @@
 	<string>cameraDesciption</string>
 	<key>NSContactsUsageDescription</key>
 	<string>contactsDesciption</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>“金融工场”需要您的同意才能获取FaceID权限</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>microphoneDesciption</string>
 	<key>NSPhotoLibraryUsageDescription</key>
