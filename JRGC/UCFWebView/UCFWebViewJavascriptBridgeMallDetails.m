@@ -120,14 +120,14 @@
     [self presentViewController:loginNaviController animated:YES completion:nil];
 }
 
--(void)webViewReload
-{
-   
-        NSDictionary *encryptParamDic = @{
-                                          @"userId": [[NSUserDefaults standardUserDefaults] valueForKey:UUID]                 //用户id
-                                          };
-        [[NetworkModule sharedNetworkModule] newPostReq:encryptParamDic tag:kSXTagIntoCoinPage owner:self signature:YES Type:SelectAccoutTypeP2P];
-}
+//-(void)webViewReload
+//{
+//   
+//        NSDictionary *encryptParamDic = @{
+//                                          @"userId": [[NSUserDefaults standardUserDefaults] valueForKey:UUID]                 //用户id
+//                                          };
+//        [[NetworkModule sharedNetworkModule] newPostReq:encryptParamDic tag:kSXTagIntoCoinPage owner:self signature:YES Type:SelectAccoutTypeP2P];
+//}
 //开始请求
 - (void)beginPost:(kSXTag)tag
 {
