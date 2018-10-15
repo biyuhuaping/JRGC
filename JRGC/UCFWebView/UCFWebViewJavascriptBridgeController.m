@@ -1274,6 +1274,7 @@
 {
    
     [[NSNotificationCenter defaultCenter] removeObserver:self name:BACK_TO_BANNER object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self endRefresh];
 }
 

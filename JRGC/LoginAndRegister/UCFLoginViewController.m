@@ -133,6 +133,17 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:BACK_TO_LOGIN object:nil];
         }];
     }
+    else if ([_sourceVC isEqualToString:@"webViewLongin"]) {
+
+        [self dismissViewControllerAnimated:YES completion:^{
+            //切换用户跳到登录页
+//            AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+//            UINavigationController *nav = appDelegate.tabBarController.selectedViewController;
+//            [nav popToRootViewControllerAnimated:NO];
+            [[NSNotificationCenter defaultCenter] postNotificationName:BACK_TO_LOGIN object:nil];
+
+        }];
+    }
     else {
         [self dismissViewControllerAnimated:YES completion:nil];
     }
