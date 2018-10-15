@@ -98,7 +98,7 @@
         UCFSettingItem *moreVc = [UCFSettingArrowItem itemWithIcon:@"safecenter_icon_more" title:@"更多" destVcClass:[UCFMoreViewController class]];
         UCFSettingGroup *group1 = [[UCFSettingGroup alloc] init];//用户信息
         
-        if ([UserInfoSingle sharedManager].superviseSwitch && [UserInfoSingle sharedManager].level <2) {
+        if ([UserInfoSingle sharedManager].superviseSwitch && [UserInfoSingle sharedManager].level < 2) {
             group1.items = [[NSMutableArray alloc]initWithArray: @[idauth, bundlePhoneNum,facCode]];//qyy
         }
         else {

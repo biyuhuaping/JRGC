@@ -19,7 +19,9 @@
 #import "MjAlertView.h"
 
 @interface UCFMineAPIManager () <NetworkModuleDelegate>
-
+{
+    BOOL coinPageFlag;
+}
 @end
 
 @implementation UCFMineAPIManager
@@ -78,9 +80,14 @@
     [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":[[NSUserDefaults standardUserDefaults] objectForKey:UUID], @"apptzticket":token} tag:kSXTagSingMenthod owner:self signature:YES Type:SelectAccoutDefault];
 }
 //进入工贝页面的请求
-- (void)getUserIntoGoCoinPageHTTP
+- (void)getUserIntoGoCoinPageHTTP:(BOOL)isCoinPage
 {
-    [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":[[NSUserDefaults standardUserDefaults] objectForKey:UUID]} tag:kSXTagIntoCoinPage owner:self signature:YES Type:SelectAccoutDefault];
+    coinPageFlag = isCoinPage;
+    if (isCoinPage) {
+        [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":[[NSUserDefaults standardUserDefaults] objectForKey:UUID]} tag:kSXTagIntoCoinPage owner:self signature:YES Type:SelectAccoutDefault];
+    } else {
+        [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":[[NSUserDefaults standardUserDefaults] objectForKey:UUID],@"pageType":@"vip"} tag:kSXTagIntoCoinPage owner:self signature:YES Type:SelectAccoutDefault];
+    }
 }
 
 - (void)beginPost:(kSXTag)tag
@@ -195,7 +202,7 @@
         if ([rstcode intValue] == 1) {
             NSDictionary *resultData = [dic objectSafeDictionaryForKey:@"data"];
             if ([self.delegate respondsToSelector:@selector(mineApiManager:didSuccessedUserIntoGoCoinPageResult:withTag:)]) {
-                [self.delegate mineApiManager:self didSuccessedUserIntoGoCoinPageResult:resultData withTag:1];
+                [self.delegate mineApiManager:self didSuccessedUserIntoGoCoinPageResult:resultData withTag:coinPageFlag == YES ? 1 : 3];
             }
         }else {
             if ([self.delegate respondsToSelector:@selector(mineApiManager:didSuccessedUserIntoGoCoinPageResult:withTag:)]) {

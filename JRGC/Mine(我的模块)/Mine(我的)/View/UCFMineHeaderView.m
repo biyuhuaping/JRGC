@@ -145,6 +145,7 @@
         self.userIconImageView.image = [UIImage imageNamed:@"user_icon_head_male"];
     }
     NSInteger  memLevel = userBenefitModel.memberLever.integerValue - 1;
+    [UserInfoSingle sharedManager].level = userBenefitModel.memberLever.intValue;
     if (memLevel > 0) {
         self.userLevelLabel.text = [NSString stringWithFormat:@"VIP%ld", (long)memLevel];
         self.userLevelW.constant = 32.0;

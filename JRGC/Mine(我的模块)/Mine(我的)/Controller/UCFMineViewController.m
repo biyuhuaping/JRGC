@@ -671,7 +671,7 @@
     else{
         if([self checkUserCanInvestIsDetail:YES type:SelectAccoutTypeP2P])//判断是否开户
         {
-            [self.apiManager getUserIntoGoCoinPageHTTP];
+            [self.apiManager getUserIntoGoCoinPageHTTP:NO];
         }
     }
 }
@@ -806,7 +806,7 @@
         else{
             if([self checkUserCanInvestIsDetail:YES type:SelectAccoutTypeP2P])//判断是否开户
             {
-                [self.apiManager getUserIntoGoCoinPageHTTP];
+                [self.apiManager getUserIntoGoCoinPageHTTP:YES];
             }
         }
     }
@@ -898,6 +898,22 @@
         case 2://返回数据失败
         {
             [AuxiliaryFunc showToastMessage:result withView:self.view];
+        }
+            break;
+        case 3://返回数据成功
+        {
+            NSDictionary *coinRequestDicData = [dataDict objectSafeDictionaryForKey:@"coinRequest"];
+            UCFWebViewJavascriptBridgeMallDetails *web = [[UCFWebViewJavascriptBridgeMallDetails alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMallDetails" bundle:nil];
+            NSDictionary *paramDict = [coinRequestDicData objectSafeDictionaryForKey:@"param"];
+            NSMutableDictionary *data =  [[NSMutableDictionary alloc]initWithDictionary:@{}];
+            [data setValue:[NSString urlEncodeStr:[paramDict objectSafeForKey:@"encryptParam"]] forKey:@"encryptParam"];
+            [data setObject:[paramDict objectSafeForKey:@"fromApp"] forKey:@"fromApp"];
+            [data setObject:[paramDict objectSafeForKey:@"userId"] forKey:@"userId"];
+            NSString * requestStr = [Common getParameterByDictionary:data];
+            web.url  = [NSString stringWithFormat:@"%@?%@",[coinRequestDicData objectSafeForKey:@"urlPath"],requestStr];
+            web.isHideNativeNav = YES;
+            web.rootVc = @"UCFSecurityCenterVC";
+            [self.navigationController pushViewController:web animated:YES];
         }
             break;
             

@@ -30,5 +30,5 @@
 //微金P2P提现请求
 - (void)getP2PAccoutCashRuqestHTTP;
 //进入工贝页面的请求
-- (void)getUserIntoGoCoinPageHTTP;
+- (void)getUserIntoGoCoinPageHTTP:(BOOL)isCoinPage;
 @end
