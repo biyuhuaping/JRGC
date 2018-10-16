@@ -178,16 +178,30 @@
         int isSucess = [dic[@"status"] intValue];
         if (isSucess == 1) {
             NSDictionary *result = dic[@"data"];
-            NSDictionary *dict0 = @{@"name": titleStr, @"opened": @(YES),
-                                    @"content":result[@"interests"],
-                                    @"fundlist":
-        @[
-            @{@"ItemName": @"已收利息",@"ItemData":[result[@"interestsDetail"] isKindOfClass:[NSNull class]] ? @"0.00" :result[@"interestsDetail"][@"interestReceived"]},
-            @{@"ItemName": @"待收利息", @"ItemData": [result[@"interestsDetail"] isKindOfClass:[NSNull class]] ? @"0.00" :result[@"interestsDetail"][@"writReceived"] },
-            @{@"ItemName": @"已用返现券", @"ItemData":[result[@"interestsDetail"] isKindOfClass:[NSNull class]] ? @"0.00" :result[@"interestsDetail"][@"beanRecord"]},
-            @{@"ItemName": @"已用工豆", @"ItemData": [result[@"interestsDetail"] isKindOfClass:[NSNull class]] ? @"0.00" :result[@"interestsDetail"][@"bean"]},
-            @{@"ItemName": @"余额利息", @"ItemData": [result[@"interestsDetail"] isKindOfClass:[NSNull class]] ? @"0.00" :result[@"interestsDetail"][@"balanceIncome"]}
-        ]};
+            NSDictionary *dict0 = nil;
+            if ([UserInfoSingle sharedManager].isShowCouple) {
+                dict0 = @{@"name": titleStr, @"opened": @(YES),
+                                        @"content":result[@"interests"],
+                                        @"fundlist":
+                                            @[
+                                                @{@"ItemName": @"已收利息",@"ItemData":[result[@"interestsDetail"] isKindOfClass:[NSNull class]] ? @"0.00" :result[@"interestsDetail"][@"interestReceived"]},
+                                                @{@"ItemName": @"待收利息", @"ItemData": [result[@"interestsDetail"] isKindOfClass:[NSNull class]] ? @"0.00" :result[@"interestsDetail"][@"writReceived"] },
+                                                @{@"ItemName": @"已用返现券", @"ItemData":[result[@"interestsDetail"] isKindOfClass:[NSNull class]] ? @"0.00" :result[@"interestsDetail"][@"beanRecord"]},
+                                                @{@"ItemName": @"已用工豆", @"ItemData": [result[@"interestsDetail"] isKindOfClass:[NSNull class]] ? @"0.00" :result[@"interestsDetail"][@"bean"]},
+                                                @{@"ItemName": @"余额利息", @"ItemData": [result[@"interestsDetail"] isKindOfClass:[NSNull class]] ? @"0.00" :result[@"interestsDetail"][@"balanceIncome"]}
+                                                ]};
+            } else {
+                dict0 = @{@"name": titleStr, @"opened": @(YES),
+                          @"content":result[@"interests"],
+                          @"fundlist":
+                              @[
+                                  @{@"ItemName": @"已收利息",@"ItemData":[result[@"interestsDetail"] isKindOfClass:[NSNull class]] ? @"0.00" :result[@"interestsDetail"][@"interestReceived"]},
+                                  @{@"ItemName": @"待收利息", @"ItemData": [result[@"interestsDetail"] isKindOfClass:[NSNull class]] ? @"0.00" :result[@"interestsDetail"][@"writReceived"] },
+                                  @{@"ItemName": @"已用工豆", @"ItemData": [result[@"interestsDetail"] isKindOfClass:[NSNull class]] ? @"0.00" :result[@"interestsDetail"][@"bean"]},
+                                  @{@"ItemName": @"余额利息", @"ItemData": [result[@"interestsDetail"] isKindOfClass:[NSNull class]] ? @"0.00" :result[@"interestsDetail"][@"balanceIncome"]}
+                                  ]};
+            }
+
             NSDictionary *dict1 = @{@"name": @"总计资产", @"opened": @(NO), @"content": result[@"total"], @"fundlist": @[@{@"ItemName": @"待收本息", @"ItemData": result[@"principalAndInterest"]},@{@"ItemName": @"账户余额", @"ItemData": result[@"cashBalance"]}]};
             NSDictionary *dict2 = @{@"name": @"待收本息", @"opened": @(NO), @"content": result[@"principalAndInterest"], @"fundlist": @[@{@"ItemName": @"待收本金", @"ItemData": result[@"principal"]}, @{@"ItemName": @"待收利息", @"ItemData": result[@"Interest"]}]};
             NSDictionary *dict3 = @{@"name": @"账户余额", @"opened": @(NO), @"content": result[@"cashBalance"], @"fundlist": @[@{@"ItemName": @"我的余额", @"ItemData": result[@"availableBalance"]}, @{@"ItemName": @"冻结资金", @"ItemData": result[@"tradeFrozenAmt"]}]};

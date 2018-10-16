@@ -125,6 +125,10 @@
                 {
                     [pieChatModel2.pieChartDataArray removeLastObject];
                     [pieChatModel2.pieChartTitleArray  removeLastObject];
+                    if (![UserInfoSingle sharedManager].isShowCouple) {
+                        [pieChatModel2.pieChartTitleArray  removeObjectAtIndex:1];
+                        [pieChatModel2.pieChartDataArray removeObjectAtIndex:1];
+                    }
                     self.dataArray = @[pieChatModel,pieChatModel2];
                 }else if(![UserInfoSingle sharedManager].zxIsNew && [UserInfoSingle sharedManager].goldIsNew){
                     

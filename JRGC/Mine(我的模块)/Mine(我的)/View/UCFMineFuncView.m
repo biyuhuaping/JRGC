@@ -76,9 +76,11 @@
     else {
         contactUs.subtitle = @"400-0322-988";
     }
-    _dataArray = [[NSMutableArray alloc] initWithArray:@[facPoint,sign, facBean,profitInvest, coupon,    addProfitCalculator, assetProof, contactUs]];
-    
-     
+    if ([UserInfoSingle sharedManager].isShowCouple) {
+        _dataArray = [[NSMutableArray alloc] initWithArray:@[facPoint,sign, facBean,profitInvest, coupon,    addProfitCalculator, assetProof, contactUs]];
+    } else {
+        _dataArray = [[NSMutableArray alloc] initWithArray:@[facPoint,sign, facBean,profitInvest,addProfitCalculator, assetProof, contactUs]];
+    }
     return _dataArray;
 }
 

@@ -53,6 +53,7 @@
 
 
 @property(nonatomic, assign) BOOL   isSubmitTime;
+@property(nonatomic, assign) BOOL   isShowCouple;//是否可见优惠券
 
 //@property(nonatomic, copy) NSString *userLevel;
 //获取用户信息单利对象
