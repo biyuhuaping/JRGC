@@ -265,6 +265,8 @@
     NSString *annualRate = [[_dataDict objectForKey:@"data"] objectForKey:@"transfereeYearRate"];
     NSString *repayMode = [[_dataDict objectForKey:@"data"] objectForKey:@"repayMode"];
     NSString *repayPeriod = [[_dataDict objectForKey:@"data"] objectForKey:@"lastDays"];
+    NSString *prdClaimsId = [NSString stringWithFormat:@"%@",[[_dataDict objectForKey:@"data"] objectForKey:@"prdClaimsId"]];
+
     MoneyBoardCell *cell = (MoneyBoardCell *)[_bidTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
     NSString *investAmt = cell.inputMoneyTextFieldLable.text;
     if (cell.inputMoneyTextFieldLable.text.length == 0 || [cell.inputMoneyTextFieldLable.text isEqualToString:@"0"] || [cell.inputMoneyTextFieldLable.text isEqualToString:@"0.0"] || [cell.inputMoneyTextFieldLable.text isEqualToString:@"0.00"]) {
@@ -273,7 +275,7 @@
         return;
     }
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    NSString *parmStr = [NSString stringWithFormat:@"annualRate=%@&repayMode=%@&repayPeriod=%@&investAmt=%@",annualRate,repayMode,repayPeriod,investAmt];
+    NSString *parmStr = [NSString stringWithFormat:@"annualRate=%@&repayMode=%@&repayPeriod=%@&investAmt=%@&transferId=%@",annualRate,repayMode,repayPeriod,investAmt,prdClaimsId];
     
     [[NetworkModule sharedNetworkModule] postReq:parmStr tag:kSXTagPrdClaimsComputeIntrest owner:self Type:self.accoutType];
 }
@@ -466,13 +468,14 @@
     if (tag.intValue == kSXTagPrdClaimsComputeIntrest) {
         
         if ([rstcode isEqualToString:@"1"]) {
-            CalculatorView * view = [[CalculatorView alloc] init];
+            NSString *discountRate = [NSString stringWithFormat:@"%@",[[_dataDict objectSafeDictionaryForKey:@"data"] objectSafeForKey:@"discountRate"]];
+            CalculatorView * view = [[CalculatorView alloc] initWithAlertType:[discountRate doubleValue] > 0.01 ? CalculatorViewTranFeedBack : CalculatorViewNormal];
             MoneyBoardCell *cell = (MoneyBoardCell *)[_bidTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
             NSString *taotalIntrest = [NSString stringWithFormat:@"%@",dic[@"taotalIntrest"]];
             view.tag = 173924;
             view.isTransid = YES;
             view.accoutType = self.accoutType;
-            [view reloadViewWithData:_dataDict AndNowMoney:cell.inputMoneyTextFieldLable.text AndPreMoney:taotalIntrest BankMoney:dic[@"bankBaseIntrest"]];
+            [view reloadViewWithData:_dataDict AndNowMoney:cell.inputMoneyTextFieldLable.text AndPreMoney:taotalIntrest BankMoney:dic[@"bankBaseIntrest"] andResultDict:dic];
             AppDelegate * app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
             [app.window addSubview:view];
         } else {

@@ -950,7 +950,7 @@
         [MBProgressHUD displayHudError:@"请输入出借金额"];
         return;
     }
-    CalculatorView * view = [[CalculatorView alloc] init];
+    CalculatorView * view = [[CalculatorView alloc] initWithAlertType:CalculatorViewNormal];
     view.tag = 173924;
     view.accoutType = self.accoutType;
     NSString *prdClaimIdStr = [self.dataDict objectSafeForKey:@"prdClaimId"];

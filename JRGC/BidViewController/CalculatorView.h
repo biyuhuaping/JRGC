@@ -8,11 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import "NetworkModule.h"
-
+typedef NS_ENUM(NSInteger, CalculatorViewType) {
+        CalculatorViewNormal,
+        CalculatorViewTranNormal,
+        CalculatorViewTranFeedBack,
+};
 @interface CalculatorView : UIView<UITextFieldDelegate,NetworkModuleDelegate>
 {
     UILabel *totalMoneyLabel;
     UILabel *preGetMoneyLabel;
+    UILabel *preGetBeansLabel;
     UILabel *bankGetMoneyLabel;
     UITextField *moneyTextField;
     UILabel *minLabel;
@@ -28,7 +33,9 @@
 @property(nonatomic,assign) double    normalMinInvest;
 @property(nonatomic,strong) NSDictionary *tranBidDataDict;
 @property(nonatomic,assign) SelectAccoutType accoutType;
+@property(nonatomic,assign) CalculatorViewType showType;
 - (void)reloadViewWithData:(NSDictionary *)dataDict AndNowMoney:(NSString *)currentMoney;
-- (void)reloadViewWithData:(NSDictionary *)dataDict AndNowMoney:(NSString *)currentMoney AndPreMoney:(NSString *)preMoney BankMoney:(NSString *)bankMoney;
+- (void)reloadViewWithData:(NSDictionary *)dataDict AndNowMoney:(NSString *)currentMoney AndPreMoney:(NSString *)preMoney BankMoney:(NSString *)bankMoney andResultDict:(NSDictionary *)resultDict;
 - (void)reloadViewWithData:(NSDictionary *)dataDict AndNowMoney:(NSString *)currentMoney AndChildPrdClaimId:(NSString *)childPrdClaimId;
+- (instancetype)initWithAlertType:(CalculatorViewType)type;
 @end

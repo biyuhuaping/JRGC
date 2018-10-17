@@ -597,8 +597,7 @@
             NSDictionary *infoDic = [[NSBundle mainBundle] infoDictionary];
             NSString *currentVersion = infoDic[@"CFBundleShortVersionString"];
             NSComparisonResult comparResult = [netVersion compare:currentVersion options:NSNumericSearch];
-            
-            
+            [UserInfoSingle sharedManager].isShowCouple = [dic[@"couponIsShow"] boolValue];
             if (comparResult == NSOrderedAscending || comparResult == NSOrderedSame) {
                 if (versionMark == 2) {
                     self.isSubmitAppStoreTestTime = YES;

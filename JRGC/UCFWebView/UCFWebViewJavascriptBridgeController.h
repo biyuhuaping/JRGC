@@ -54,6 +54,8 @@
 @property (assign, nonatomic) NSInteger preSelectIndex;
 @property (assign, nonatomic) BOOL isHideNativeNav;
 
+@property (assign, nonatomic) BOOL isFromBarMall; //是否从tabbr进入商城
+
 - (void)subShar;
 - (void)gotoURL:(NSString *)url; //加载URL无需验签
 - (void)gotoURLWithSignature:(NSString *)requestUrl;//加载URL无验签

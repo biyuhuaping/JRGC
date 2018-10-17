@@ -867,7 +867,41 @@
 }
 - (void)jsClose
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    if (_isFromBarMall) {
+        [self.view.window.layer addAnimation:[self popAnimation] forKey:nil];
+        [self dismissViewControllerAnimated:NO completion:nil];
+    } else {
+        [self.navigationController popViewControllerAnimated:YES];
+
+    }
+}
+- (CATransition *)popAnimation{
+    
+    CATransition* transition = [CATransition animation];
+    transition.duration = 0.25;
+    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionDefault];
+    
+    /*
+     cube                   立方体效果
+     pageCurl               向上翻一页
+     pageUnCurl             向下翻一页
+     rippleEffect           水滴波动效果
+     suckEffect             变成小布块飞走的感觉
+     oglFlip                上下翻转
+     cameraIrisHollowClose  相机镜头关闭效果
+     cameraIrisHollowOpen   相机镜头打开效果
+     */
+    
+    //    transition.type = @"pageUnCurl";
+    transition.type = kCATransitionPush;
+    
+    //下面四个是系统列举出来的常见的类型
+    //kCATransitionMoveIn, kCATransitionPush, kCATransitionReveal, kCATransitionFade
+    
+    transition.subtype = kCATransitionFromLeft;
+    //kCATransitionFromLeft, kCATransitionFromRight, kCATransitionFromTop, kCATransitionFromBottom
+    
+    return transition;
 }
 - (void)jumpLogin
 {

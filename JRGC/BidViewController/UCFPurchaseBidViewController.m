@@ -1119,7 +1119,7 @@
         [MBProgressHUD displayHudError:[NSString stringWithFormat:@"请输入%@金额",_wJOrZxStr]];
         return;
     }
-    CalculatorView * view = [[CalculatorView alloc] init];
+    CalculatorView * view = [[CalculatorView alloc] initWithAlertType:CalculatorViewNormal];
     view.tag = 173924;
     view.accoutType = self.accoutType;
     [view reloadViewWithData:_dataDict AndNowMoney:investMoney];

@@ -15,6 +15,8 @@
 @implementation CalculatorView
 {
     UILabel     *jrgcProfitLab;
+    UILabel     *jrgcProfitfBeansLab;
+
     UILabel     *bankProfitLab;
     UIView      *jrgcProfitView;
     UIView      *bankProfitView;
@@ -22,6 +24,7 @@
     NSString    *normalBidID;
     NSString    *preInvestMoney;  // 上次的投标金额
     UILabel     *moneyTextTip;
+    UILabel   *orginalLab; //原标
 }
 - (void)dealloc
 {
@@ -35,7 +38,6 @@
         self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.3];
         UITapGestureRecognizer *frade = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(fadeKeyboard)];
         [self addGestureRecognizer:frade];
-        [self makeView];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(calculatorKeyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(calculatorKeyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 #ifdef __IPHONE_5_0
@@ -48,6 +50,16 @@
     return self;
 }
 #pragma ----
+- (instancetype)initWithAlertType:(CalculatorViewType)type
+{
+    self = [self init];
+    if (self) {
+        self.showType = type;
+    }
+    [self makeView];
+
+    return self;
+}
 /**
  *  键盘抬起和消失，调整收益框位置
  *
@@ -103,103 +115,239 @@
  */
 - (void)makeView
 {
-    CGFloat verSpace = [Common calculateNewSizeBaseMachine:10.0f];
-    UIView *baseView = [[UIView alloc] init];
-    baseView.frame = CGRectMake(25, 0, ScreenWidth - 50, [Common calculateNewSizeBaseMachine:234]);
-    baseView.center = self.center;
-    baseView.tag = 999;
-    baseView.layer.cornerRadius = 5.0f;
-    baseView.backgroundColor = [UIColor whiteColor];
-    [self addSubview:baseView];
-    
-    UIView *blueHeadView = [[UIView alloc]init];
-    blueHeadView.backgroundColor = UIColorWithRGBA(92, 106, 145, 1);
-    blueHeadView.tag = 3894;
-    blueHeadView.frame = CGRectMake(0, 0, CGRectGetWidth(baseView.frame), [Common calculateNewSizeBaseMachine:133]);
-    blueHeadView.layer.cornerRadius = 5.0f;
-    [baseView addSubview:blueHeadView];
-    
-    UILabel *headTipLabel = [[UILabel alloc] init];
-    headTipLabel.font = [UIFont systemFontOfSize:[Common calculateNewSizeBaseMachine:15.5f]];
-    headTipLabel.textAlignment = NSTextAlignmentCenter;
-    headTipLabel.textColor = [UIColor whiteColor];
-    headTipLabel.backgroundColor = [UIColor clearColor];
-    headTipLabel.frame = CGRectMake(0, verSpace, CGRectGetWidth(baseView.frame), [Common calculateNewSizeBaseMachine:16.0f]);
-    headTipLabel.text = @"计算器";
-    [blueHeadView addSubview:headTipLabel];
-    
-    UIButton *closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    closeBtn.frame  = CGRectMake(CGRectGetWidth(blueHeadView.frame) - [Common calculateNewSizeBaseMachine:40],[Common calculateNewSizeBaseMachine:5], [Common calculateNewSizeBaseMachine:30], [Common calculateNewSizeBaseMachine:30]);
-    closeBtn.layer.cornerRadius = 2.0f;
-    closeBtn.tag = 1002;
-    [closeBtn setImage:[UIImage imageNamed:@"calculator_close"] forState:UIControlStateNormal];
-    closeBtn.titleLabel.font = [UIFont systemFontOfSize:16.0f];
-    [closeBtn addTarget:self action:@selector(removeBtn) forControlEvents:UIControlEventTouchUpInside];
-    [blueHeadView addSubview:closeBtn];
-    
-    UIView *lineView1 = [Common addSepateViewWithRect:CGRectMake(15, CGRectGetMaxY(headTipLabel.frame) + [Common calculateNewSizeBaseMachine:12], CGRectGetWidth(blueHeadView.frame) - 30 , 1) WithColor:UIColorWithRGBA(101, 115, 152, 1)];
-    [blueHeadView addSubview:lineView1];
-    
-    jrgcProfitLab = [[UILabel alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(lineView1.frame) + [Common calculateNewSizeBaseMachine:20], CGRectGetWidth(blueHeadView.frame) - 30, [Common calculateNewSizeBaseMachine:12])];
-    jrgcProfitLab.text =  self.accoutType == SelectAccoutTypeP2P ? @"预期利息(元)" :@"预期收益(元)";
-    jrgcProfitLab.font = [UIFont systemFontOfSize:[Common calculateNewSizeBaseMachine:10.8]];
-    jrgcProfitLab.textColor = [UIColor whiteColor];
-    jrgcProfitLab.backgroundColor = [UIColor clearColor];
-    jrgcProfitLab.textAlignment = NSTextAlignmentLeft;
-    [blueHeadView addSubview:jrgcProfitLab];
-    
-    preGetMoneyLabel = [[UILabel alloc] init];
-    preGetMoneyLabel.frame = CGRectMake(15, CGRectGetMaxY(jrgcProfitLab.frame) + [Common calculateNewSizeBaseMachine:8] , CGRectGetWidth(blueHeadView.frame) - 30, [Common calculateNewSizeBaseMachine:28]);
-    preGetMoneyLabel.textColor = [UIColor whiteColor];
-    preGetMoneyLabel.text = @"0.00";
-    preGetMoneyLabel.font = [UIFont systemFontOfSize:[Common calculateNewSizeBaseMachine:26.0f]];
-    preGetMoneyLabel.textAlignment = NSTextAlignmentLeft;
-    preGetMoneyLabel.backgroundColor = [UIColor clearColor];
-    [blueHeadView addSubview:preGetMoneyLabel];
-    
-    UIView *bottomBaseView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(blueHeadView.frame) - [Common calculateNewSizeBaseMachine:10], CGRectGetWidth(blueHeadView.frame), [Common calculateNewSizeBaseMachine:10] )];
-//    bottomBaseView.backgroundColor = UIColorWithRGBA(78, 92, 129, 1);
-    bottomBaseView.backgroundColor = [UIColor whiteColor];
-    [blueHeadView addSubview:bottomBaseView];
-    
-    moneyTextTip = [[UILabel alloc] init];
-    moneyTextTip.frame  =CGRectMake([Common calculateNewSizeBaseMachine:15.0f], CGRectGetMaxY(blueHeadView.frame) + [Common calculateNewSizeBaseMachine:14], [Common getStrWitdth:@"出借金额" TextFont:[UIFont systemFontOfSize:[Common calculateNewSizeBaseMachine:14.0f]]].width, [Common calculateNewSizeBaseMachine:14.0f]);
-    if (_isTransid) {
-         moneyTextTip.text = self.accoutType == SelectAccoutTypeHoner ? @"购买金额":@"出借金额";
-    }else{
-         moneyTextTip.text = self.accoutType == SelectAccoutTypeHoner ? @"认购金额":@"出借金额";
+    if (self.showType != CalculatorViewTranFeedBack) {
+        CGFloat verSpace = [Common calculateNewSizeBaseMachine:10.0f];
+        UIView *baseView = [[UIView alloc] init];
+        baseView.frame = CGRectMake(25, 0, ScreenWidth - 50, [Common calculateNewSizeBaseMachine:234]);
+        baseView.center = self.center;
+        baseView.tag = 999;
+        baseView.layer.cornerRadius = 5.0f;
+        baseView.backgroundColor = [UIColor whiteColor];
+        [self addSubview:baseView];
+        
+        UIView *blueHeadView = [[UIView alloc]init];
+        blueHeadView.backgroundColor = UIColorWithRGBA(92, 106, 145, 1);
+        blueHeadView.tag = 3894;
+        blueHeadView.frame = CGRectMake(0, 0, CGRectGetWidth(baseView.frame), [Common calculateNewSizeBaseMachine:133]);
+        blueHeadView.layer.cornerRadius = 5.0f;
+        [baseView addSubview:blueHeadView];
+        
+        UILabel *headTipLabel = [[UILabel alloc] init];
+        headTipLabel.font = [UIFont systemFontOfSize:[Common calculateNewSizeBaseMachine:15.5f]];
+        headTipLabel.textAlignment = NSTextAlignmentCenter;
+        headTipLabel.textColor = [UIColor whiteColor];
+        headTipLabel.backgroundColor = [UIColor clearColor];
+        headTipLabel.frame = CGRectMake(0, verSpace, CGRectGetWidth(baseView.frame), [Common calculateNewSizeBaseMachine:16.0f]);
+        headTipLabel.text = @"计算器";
+        [blueHeadView addSubview:headTipLabel];
+        
+        UIButton *closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        closeBtn.frame  = CGRectMake(CGRectGetWidth(blueHeadView.frame) - [Common calculateNewSizeBaseMachine:40],[Common calculateNewSizeBaseMachine:5], [Common calculateNewSizeBaseMachine:30], [Common calculateNewSizeBaseMachine:30]);
+        closeBtn.layer.cornerRadius = 2.0f;
+        closeBtn.tag = 1002;
+        [closeBtn setImage:[UIImage imageNamed:@"calculator_close"] forState:UIControlStateNormal];
+        closeBtn.titleLabel.font = [UIFont systemFontOfSize:16.0f];
+        [closeBtn addTarget:self action:@selector(removeBtn) forControlEvents:UIControlEventTouchUpInside];
+        [blueHeadView addSubview:closeBtn];
+        
+        UIView *lineView1 = [Common addSepateViewWithRect:CGRectMake(15, CGRectGetMaxY(headTipLabel.frame) + [Common calculateNewSizeBaseMachine:12], CGRectGetWidth(blueHeadView.frame) - 30 , 1) WithColor:UIColorWithRGBA(101, 115, 152, 1)];
+        [blueHeadView addSubview:lineView1];
+        
+        jrgcProfitLab = [[UILabel alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(lineView1.frame) + [Common calculateNewSizeBaseMachine:20], CGRectGetWidth(blueHeadView.frame) - 30, [Common calculateNewSizeBaseMachine:12])];
+        jrgcProfitLab.text =  self.accoutType == SelectAccoutTypeP2P ? @"预期利息(元)" :@"预期收益(元)";
+        jrgcProfitLab.font = [UIFont systemFontOfSize:[Common calculateNewSizeBaseMachine:10.8]];
+        jrgcProfitLab.textColor = [UIColor whiteColor];
+        jrgcProfitLab.backgroundColor = [UIColor clearColor];
+        jrgcProfitLab.textAlignment = NSTextAlignmentLeft;
+        [blueHeadView addSubview:jrgcProfitLab];
+        
+        preGetMoneyLabel = [[UILabel alloc] init];
+        preGetMoneyLabel.frame = CGRectMake(15, CGRectGetMaxY(jrgcProfitLab.frame) + [Common calculateNewSizeBaseMachine:8] , CGRectGetWidth(blueHeadView.frame) - 30, [Common calculateNewSizeBaseMachine:28]);
+        preGetMoneyLabel.textColor = [UIColor whiteColor];
+        preGetMoneyLabel.text = @"0.00";
+        preGetMoneyLabel.font = [UIFont systemFontOfSize:[Common calculateNewSizeBaseMachine:26.0f]];
+        preGetMoneyLabel.textAlignment = NSTextAlignmentLeft;
+        preGetMoneyLabel.backgroundColor = [UIColor clearColor];
+        [blueHeadView addSubview:preGetMoneyLabel];
+        
+        UIView *bottomBaseView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(blueHeadView.frame) - [Common calculateNewSizeBaseMachine:10], CGRectGetWidth(blueHeadView.frame), [Common calculateNewSizeBaseMachine:10] )];
+        //    bottomBaseView.backgroundColor = UIColorWithRGBA(78, 92, 129, 1);
+        bottomBaseView.backgroundColor = [UIColor whiteColor];
+        [blueHeadView addSubview:bottomBaseView];
+        
+        moneyTextTip = [[UILabel alloc] init];
+        moneyTextTip.frame  =CGRectMake([Common calculateNewSizeBaseMachine:15.0f], CGRectGetMaxY(blueHeadView.frame) + [Common calculateNewSizeBaseMachine:14], [Common getStrWitdth:@"出借金额" TextFont:[UIFont systemFontOfSize:[Common calculateNewSizeBaseMachine:14.0f]]].width, [Common calculateNewSizeBaseMachine:14.0f]);
+        if (_isTransid) {
+            moneyTextTip.text = self.accoutType == SelectAccoutTypeHoner ? @"购买金额":@"出借金额";
+        }else{
+            moneyTextTip.text = self.accoutType == SelectAccoutTypeHoner ? @"认购金额":@"出借金额";
+        }
+        moneyTextTip.textColor = UIColorWithRGB(0x333333);
+        moneyTextTip.font = [UIFont systemFontOfSize:[Common calculateNewSizeBaseMachine:14.0f]];
+        [baseView addSubview:moneyTextTip];
+        
+        UIView *textBaseView = [[UIView alloc] init];
+        textBaseView.frame =  CGRectMake(CGRectGetMaxX(moneyTextTip.frame) + [Common calculateNewSizeBaseMachine:6], CGRectGetMinY(moneyTextTip.frame) - [Common calculateNewSizeBaseMachine:9], CGRectGetWidth(baseView.frame) - CGRectGetMaxX(moneyTextTip.frame) - [Common calculateNewSizeBaseMachine:6] - [Common calculateNewSizeBaseMachine:15],CGRectGetHeight(moneyTextTip.frame) + [Common calculateNewSizeBaseMachine:18]);
+        textBaseView.backgroundColor = UIColorWithRGBA(242, 242, 242, 1);
+        textBaseView.layer.borderColor = UIColorWithRGB(0xd8d8d8).CGColor;
+        textBaseView.layer.borderWidth = 0.5f;
+        textBaseView.layer.cornerRadius = 3.0f;
+        [baseView addSubview:textBaseView];
+        
+        moneyTextField = [[UITextField alloc] init];
+        moneyTextField.delegate = self;
+        moneyTextField.frame = CGRectMake([Common calculateNewSizeBaseMachine:9],[Common calculateNewSizeBaseMachine:5],[Common calculateNewSizeBaseMachine: CGRectGetWidth(textBaseView.frame) - 10],CGRectGetHeight(textBaseView.frame) - [Common calculateNewSizeBaseMachine: 10]);
+        moneyTextField.placeholder = @"100起投";
+        [moneyTextField addTarget:self action:@selector(textfieldLength:) forControlEvents:UIControlEventEditingChanged];
+        moneyTextField.keyboardType = UIKeyboardTypeDecimalPad;
+        moneyTextField.font = [UIFont systemFontOfSize:[Common calculateNewSizeBaseMachine:15.0f]];
+        moneyTextField.textColor = UIColorWithRGB(0x333333);
+        [textBaseView addSubview:moneyTextField];
+        
+        calculatorBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        calculatorBtn.frame  = CGRectMake([Common calculateNewSizeBaseMachine:15], CGRectGetHeight(baseView.frame) - [Common calculateNewSizeBaseMachine:33 + 15], CGRectGetWidth(baseView.frame) - [Common calculateNewSizeBaseMachine:30], [Common calculateNewSizeBaseMachine:33]);
+        calculatorBtn.backgroundColor =  UIColorWithRGB(0xfd4d4c);
+        calculatorBtn.layer.cornerRadius = 2.0f;
+        calculatorBtn.titleLabel.font = [UIFont systemFontOfSize:14.0f];
+        NSString *calculatorBtnStr  =  self.accoutType == SelectAccoutTypeP2P ?@"计算预期利息" :@"计算预期收益";
+        [calculatorBtn setTitle:calculatorBtnStr forState:UIControlStateNormal];
+        [calculatorBtn addTarget:self action:@selector(calculateBegin:) forControlEvents:UIControlEventTouchUpInside];
+        [baseView addSubview:calculatorBtn];
+    } else {
+        CGFloat verSpace = [Common calculateNewSizeBaseMachine:10.0f];
+        UIView *baseView = [[UIView alloc] init];
+        baseView.frame = CGRectMake(25, 0, ScreenWidth - 50, [Common calculateNewSizeBaseMachine:274]);
+        baseView.center = self.center;
+        baseView.tag = 999;
+        baseView.layer.cornerRadius = 5.0f;
+        baseView.backgroundColor = [UIColor whiteColor];
+        [self addSubview:baseView];
+        
+        UIView *blueHeadView = [[UIView alloc]init];
+        blueHeadView.backgroundColor = UIColorWithRGBA(92, 106, 165, 1);
+        blueHeadView.tag = 3894;
+        blueHeadView.frame = CGRectMake(0, 0, CGRectGetWidth(baseView.frame), [Common calculateNewSizeBaseMachine:143]);
+        blueHeadView.layer.cornerRadius = 5.0f;
+        [baseView addSubview:blueHeadView];
+        
+        UILabel *headTipLabel = [[UILabel alloc] init];
+        headTipLabel.font = [UIFont systemFontOfSize:[Common calculateNewSizeBaseMachine:15.5f]];
+        headTipLabel.textAlignment = NSTextAlignmentCenter;
+        headTipLabel.textColor = [UIColor whiteColor];
+        headTipLabel.backgroundColor = [UIColor clearColor];
+        headTipLabel.frame = CGRectMake(0, verSpace, CGRectGetWidth(baseView.frame), [Common calculateNewSizeBaseMachine:16.0f]);
+        headTipLabel.text = @"计算器";
+        [blueHeadView addSubview:headTipLabel];
+        
+        UIButton *closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        closeBtn.frame  = CGRectMake(CGRectGetWidth(blueHeadView.frame) - [Common calculateNewSizeBaseMachine:40],[Common calculateNewSizeBaseMachine:5], [Common calculateNewSizeBaseMachine:30], [Common calculateNewSizeBaseMachine:30]);
+        closeBtn.layer.cornerRadius = 2.0f;
+        closeBtn.tag = 1002;
+        [closeBtn setImage:[UIImage imageNamed:@"calculator_close"] forState:UIControlStateNormal];
+        closeBtn.titleLabel.font = [UIFont systemFontOfSize:16.0f];
+        [closeBtn addTarget:self action:@selector(removeBtn) forControlEvents:UIControlEventTouchUpInside];
+        [blueHeadView addSubview:closeBtn];
+        
+        UIView *lineView1 = [Common addSepateViewWithRect:CGRectMake(15, CGRectGetMaxY(headTipLabel.frame) + [Common calculateNewSizeBaseMachine:12], CGRectGetWidth(blueHeadView.frame) - 30 , 1) WithColor:UIColorWithRGBA(101, 115, 152, 1)];
+        [blueHeadView addSubview:lineView1];
+        
+        jrgcProfitLab = [[UILabel alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(lineView1.frame) + [Common calculateNewSizeBaseMachine:10], CGRectGetWidth(blueHeadView.frame) - 30, [Common calculateNewSizeBaseMachine:12])];
+        jrgcProfitLab.text =  self.accoutType == SelectAccoutTypeP2P ? @"预期利息(元)" :@"预期收益(元)";
+        jrgcProfitLab.font = [UIFont systemFontOfSize:[Common calculateNewSizeBaseMachine:10.8]];
+        jrgcProfitLab.textColor = [UIColor whiteColor];
+        jrgcProfitLab.backgroundColor = [UIColor clearColor];
+        jrgcProfitLab.textAlignment = NSTextAlignmentLeft;
+        [blueHeadView addSubview:jrgcProfitLab];
+        
+        preGetMoneyLabel = [[UILabel alloc] init];
+        preGetMoneyLabel.frame = CGRectMake(15, CGRectGetMaxY(jrgcProfitLab.frame) + [Common calculateNewSizeBaseMachine:5] , CGRectGetWidth(blueHeadView.frame) - 30, [Common calculateNewSizeBaseMachine:16]);
+        preGetMoneyLabel.textColor = [UIColor whiteColor];
+        preGetMoneyLabel.text = @"0.00";
+        preGetMoneyLabel.font = [UIFont systemFontOfSize:[Common calculateNewSizeBaseMachine:14.0f]];
+        preGetMoneyLabel.textAlignment = NSTextAlignmentLeft;
+        preGetMoneyLabel.backgroundColor = [UIColor clearColor];
+        [blueHeadView addSubview:preGetMoneyLabel];
+        
+        jrgcProfitfBeansLab = [[UILabel alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(preGetMoneyLabel.frame) + [Common calculateNewSizeBaseMachine:10], CGRectGetWidth(blueHeadView.frame) - 30, [Common calculateNewSizeBaseMachine:12])];
+        jrgcProfitfBeansLab.text =  @"预计额外工豆奖励(个)";
+        jrgcProfitfBeansLab.font = [UIFont systemFontOfSize:[Common calculateNewSizeBaseMachine:10.8]];
+        jrgcProfitfBeansLab.textColor = [UIColor whiteColor];
+        jrgcProfitfBeansLab.backgroundColor = [UIColor clearColor];
+        jrgcProfitfBeansLab.textAlignment = NSTextAlignmentLeft;
+        [blueHeadView addSubview:jrgcProfitfBeansLab];
+        
+        preGetBeansLabel = [[UILabel alloc] init];
+        preGetBeansLabel.frame = CGRectMake(15, CGRectGetMaxY(jrgcProfitfBeansLab.frame) + [Common calculateNewSizeBaseMachine:5] , CGRectGetWidth(blueHeadView.frame) - 30, [Common calculateNewSizeBaseMachine:16]);
+        preGetBeansLabel.textColor = [UIColor whiteColor];
+        preGetBeansLabel.text = @"0";
+        preGetBeansLabel.font = [UIFont systemFontOfSize:[Common calculateNewSizeBaseMachine:14.0f]];
+        preGetBeansLabel.textAlignment = NSTextAlignmentLeft;
+        preGetBeansLabel.backgroundColor = [UIColor clearColor];
+        [blueHeadView addSubview:preGetBeansLabel];
+        
+        
+        UIView *bottomBaseView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(blueHeadView.frame) - [Common calculateNewSizeBaseMachine:10], CGRectGetWidth(blueHeadView.frame), [Common calculateNewSizeBaseMachine:10] )];
+        //    bottomBaseView.backgroundColor = UIColorWithRGBA(78, 92, 129, 1);
+        bottomBaseView.backgroundColor = [UIColor whiteColor];
+        [blueHeadView addSubview:bottomBaseView];
+       
+        moneyTextTip = [[UILabel alloc] init];
+        moneyTextTip.frame  =CGRectMake([Common calculateNewSizeBaseMachine:15.0f], CGRectGetMaxY(blueHeadView.frame) + [Common calculateNewSizeBaseMachine:14], [Common getStrWitdth:@"出借金额" TextFont:[UIFont systemFontOfSize:[Common calculateNewSizeBaseMachine:14.0f]]].width, [Common calculateNewSizeBaseMachine:14.0f]);
+        if (_isTransid) {
+            moneyTextTip.text = self.accoutType == SelectAccoutTypeHoner ? @"购买金额":@"出借金额";
+        }else{
+            moneyTextTip.text = self.accoutType == SelectAccoutTypeHoner ? @"认购金额":@"出借金额";
+        }
+        moneyTextTip.textColor = UIColorWithRGB(0x333333);
+        moneyTextTip.font = [UIFont systemFontOfSize:[Common calculateNewSizeBaseMachine:14.0f]];
+        [baseView addSubview:moneyTextTip];
+        
+        UIView *textBaseView = [[UIView alloc] init];
+        textBaseView.frame =  CGRectMake(CGRectGetMaxX(moneyTextTip.frame) + [Common calculateNewSizeBaseMachine:6], CGRectGetMinY(moneyTextTip.frame) - [Common calculateNewSizeBaseMachine:9], CGRectGetWidth(baseView.frame) - CGRectGetMaxX(moneyTextTip.frame) - [Common calculateNewSizeBaseMachine:6] - [Common calculateNewSizeBaseMachine:15],CGRectGetHeight(moneyTextTip.frame) + [Common calculateNewSizeBaseMachine:18]);
+        textBaseView.backgroundColor = UIColorWithRGBA(242, 242, 242, 1);
+        textBaseView.layer.borderColor = UIColorWithRGB(0xd8d8d8).CGColor;
+        textBaseView.layer.borderWidth = 0.5f;
+        textBaseView.layer.cornerRadius = 3.0f;
+        [baseView addSubview:textBaseView];
+        
+        moneyTextField = [[UITextField alloc] init];
+        moneyTextField.delegate = self;
+        moneyTextField.frame = CGRectMake([Common calculateNewSizeBaseMachine:9],[Common calculateNewSizeBaseMachine:5],[Common calculateNewSizeBaseMachine: CGRectGetWidth(textBaseView.frame) - 10],CGRectGetHeight(textBaseView.frame) - [Common calculateNewSizeBaseMachine: 10]);
+        moneyTextField.placeholder = @"100起投";
+        [moneyTextField addTarget:self action:@selector(textfieldLength:) forControlEvents:UIControlEventEditingChanged];
+        moneyTextField.keyboardType = UIKeyboardTypeDecimalPad;
+        moneyTextField.font = [UIFont systemFontOfSize:[Common calculateNewSizeBaseMachine:15.0f]];
+        moneyTextField.textColor = UIColorWithRGB(0x333333);
+        [textBaseView addSubview:moneyTextField];
+        
+        UILabel *loanTipLab = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMinX(moneyTextTip.frame), CGRectGetMaxY(textBaseView.frame) + [Common calculateNewSizeBaseMachine:8], 200,  [Common calculateNewSizeBaseMachine:12])];
+        loanTipLab.text = @"您的出借金额包括：";
+        loanTipLab.font = [UIFont systemFontOfSize:[Common calculateNewSizeBaseMachine:10.8]];
+        loanTipLab.textColor = UIColorWithRGB(0x555555);
+        loanTipLab.backgroundColor = [UIColor clearColor];
+        loanTipLab.textAlignment = NSTextAlignmentLeft;
+        [baseView addSubview:loanTipLab];
+        
+        orginalLab = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMinX(moneyTextTip.frame), CGRectGetMaxY(loanTipLab.frame) + [Common calculateNewSizeBaseMachine:4], 200,  [Common calculateNewSizeBaseMachine:12])];
+        orginalLab.text = @"原标本金98.00与补偿利息2.00元";
+        orginalLab.font = [UIFont systemFontOfSize:[Common calculateNewSizeBaseMachine:10.8]];
+        orginalLab.textColor = UIColorWithRGB(0x555555);
+        orginalLab.backgroundColor = [UIColor clearColor];
+        orginalLab.textAlignment = NSTextAlignmentLeft;
+        [baseView addSubview:orginalLab];
+        
+        calculatorBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        calculatorBtn.frame  = CGRectMake([Common calculateNewSizeBaseMachine:15], CGRectGetHeight(baseView.frame) - [Common calculateNewSizeBaseMachine:33 + 15], CGRectGetWidth(baseView.frame) - [Common calculateNewSizeBaseMachine:30], [Common calculateNewSizeBaseMachine:33]);
+        calculatorBtn.backgroundColor =  UIColorWithRGB(0xfd4d4c);
+        calculatorBtn.layer.cornerRadius = 2.0f;
+        calculatorBtn.titleLabel.font = [UIFont systemFontOfSize:14.0f];
+        NSString *calculatorBtnStr  =  self.accoutType == SelectAccoutTypeP2P ?@"计算预期利息" :@"计算预期收益";
+        [calculatorBtn setTitle:calculatorBtnStr forState:UIControlStateNormal];
+        [calculatorBtn addTarget:self action:@selector(calculateBegin:) forControlEvents:UIControlEventTouchUpInside];
+        [baseView addSubview:calculatorBtn];
+        
     }
-    moneyTextTip.textColor = UIColorWithRGB(0x333333);
-    moneyTextTip.font = [UIFont systemFontOfSize:[Common calculateNewSizeBaseMachine:14.0f]];
-    [baseView addSubview:moneyTextTip];
-    
-    UIView *textBaseView = [[UIView alloc] init];
-    textBaseView.frame =  CGRectMake(CGRectGetMaxX(moneyTextTip.frame) + [Common calculateNewSizeBaseMachine:6], CGRectGetMinY(moneyTextTip.frame) - [Common calculateNewSizeBaseMachine:9], CGRectGetWidth(baseView.frame) - CGRectGetMaxX(moneyTextTip.frame) - [Common calculateNewSizeBaseMachine:6] - [Common calculateNewSizeBaseMachine:15],CGRectGetHeight(moneyTextTip.frame) + [Common calculateNewSizeBaseMachine:18]);
-    textBaseView.backgroundColor = UIColorWithRGBA(242, 242, 242, 1);
-    textBaseView.layer.borderColor = UIColorWithRGB(0xd8d8d8).CGColor;
-    textBaseView.layer.borderWidth = 0.5f;
-    textBaseView.layer.cornerRadius = 3.0f;
-    [baseView addSubview:textBaseView];
-    
-    moneyTextField = [[UITextField alloc] init];
-    moneyTextField.delegate = self;
-    moneyTextField.frame = CGRectMake([Common calculateNewSizeBaseMachine:9],[Common calculateNewSizeBaseMachine:5],[Common calculateNewSizeBaseMachine: CGRectGetWidth(textBaseView.frame) - 10],CGRectGetHeight(textBaseView.frame) - [Common calculateNewSizeBaseMachine: 10]);
-    moneyTextField.placeholder = @"100起投";
-    [moneyTextField addTarget:self action:@selector(textfieldLength:) forControlEvents:UIControlEventEditingChanged];
-    moneyTextField.keyboardType = UIKeyboardTypeDecimalPad;
-    moneyTextField.font = [UIFont systemFontOfSize:[Common calculateNewSizeBaseMachine:15.0f]];
-    moneyTextField.textColor = UIColorWithRGB(0x333333);
-    [textBaseView addSubview:moneyTextField];
-    
-    calculatorBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    calculatorBtn.frame  = CGRectMake([Common calculateNewSizeBaseMachine:15], CGRectGetHeight(baseView.frame) - [Common calculateNewSizeBaseMachine:33 + 15], CGRectGetWidth(baseView.frame) - [Common calculateNewSizeBaseMachine:30], [Common calculateNewSizeBaseMachine:33]);
-    calculatorBtn.backgroundColor =  UIColorWithRGB(0xfd4d4c);
-    calculatorBtn.layer.cornerRadius = 2.0f;
-   calculatorBtn.titleLabel.font = [UIFont systemFontOfSize:14.0f];
-    NSString *calculatorBtnStr  =  self.accoutType == SelectAccoutTypeP2P ?@"计算预期利息" :@"计算预期收益";
-    [calculatorBtn setTitle:calculatorBtnStr forState:UIControlStateNormal];
-    [calculatorBtn addTarget:self action:@selector(calculateBegin:) forControlEvents:UIControlEventTouchUpInside];
-    [baseView addSubview:calculatorBtn];
+
 }
 -(void)layoutSubviews
 {
@@ -223,6 +371,7 @@
         NSString *repayPeriod = [[self.tranBidDataDict objectForKey:@"data"] objectForKey:@"lastDays"];
         double minInvest = [[[self.tranBidDataDict objectForKey:@"data"] objectForKey:@"investAmt"] doubleValue];
         double nowMoney = [moneyTextField.text doubleValue];
+        NSString *prdClaimsId = [NSString stringWithFormat:@"%@",[[self.tranBidDataDict objectForKey:@"data"] objectForKey:@"prdClaimsId"]];
         moneyTextField.text =  [NSString stringWithFormat:@"%.2f",minInvest > nowMoney ? minInvest : nowMoney];
         NSString *investAmt = moneyTextField.text;
         if (investAmt.length == 0 || [investAmt isEqualToString:@"0"] || [investAmt isEqualToString:@"0.0"] || [investAmt isEqualToString:@"0.00"]) {
@@ -230,7 +379,7 @@
             return;
         }
         [MBProgressHUD showHUDAddedTo:self animated:YES];
-         NSString *parmStr = [NSString stringWithFormat:@"annualRate=%@&repayMode=%@&repayPeriod=%@&investAmt=%@",annualRate,repayMode,repayPeriod,investAmt];
+         NSString *parmStr = [NSString stringWithFormat:@"annualRate=%@&repayMode=%@&repayPeriod=%@&investAmt=%@&transferId=%@",annualRate,repayMode,repayPeriod,investAmt,prdClaimsId];
         [[NetworkModule sharedNetworkModule] postReq:parmStr tag:kSXTagPrdClaimsComputeIntrest owner:self Type:self.accoutType];
     } else {
         
@@ -268,8 +417,13 @@
         NSString *rstcode = dic[@"status"];
         if ([rstcode isEqualToString:@"1"]) {
             NSString *taotalIntrest = [NSString stringWithFormat:@"%@",dic[@"taotalIntrest"]];
+            NSString *extraBeanCount = [NSString stringWithFormat:@"%@",dic[@"extraBeanCount"]];
+            NSString *transferDes = [NSString stringWithFormat:@"%@",dic[@"transferDes"]];
+
 //            NSString *bankIntrest = [NSString stringWithFormat:@"%@",dic[@"bankBaseIntrest"]];
             preGetMoneyLabel.text = [NSString stringWithFormat:@"%@",[UCFToolsMehod isNullOrNilWithString:taotalIntrest]];
+            preGetBeansLabel.text =  [NSString stringWithFormat:@"%@",[UCFToolsMehod isNullOrNilWithString:extraBeanCount]];
+            orginalLab.text = [NSString stringWithFormat:@"%@",[UCFToolsMehod isNullOrNilWithString:transferDes]];
 //            bankGetMoneyLabel.text = [NSString stringWithFormat:@"¥%@",[UCFToolsMehod AddComma:bankIntrest]];
         }
     }
@@ -365,7 +519,7 @@
  *  @param preMoney     金融工场收益
  *  @param bankMoney    银行收益
  */
-- (void)reloadViewWithData:(NSDictionary *)dataDict AndNowMoney:(NSString *)currentMoney AndPreMoney:(NSString *)preMoney BankMoney:(NSString *)bankMoney
+- (void)reloadViewWithData:(NSDictionary *)dataDict AndNowMoney:(NSString *)currentMoney AndPreMoney:(NSString *)preMoney BankMoney:(NSString *)bankMoney andResultDict:(NSDictionary *)resultDict
 {
     if (_isTransid) {
         moneyTextTip.text = self.accoutType == SelectAccoutTypeHoner ? @"购买金额":@"出借金额";
@@ -380,6 +534,8 @@
     preGetMoneyLabel.text = [NSString stringWithFormat:@"%@",[UCFToolsMehod AddComma:preMoney]];
     bankGetMoneyLabel.text = [NSString stringWithFormat:@"¥%@",[UCFToolsMehod AddComma:bankMoney]];
     NSString *typeStr = [[dataDict objectForKey:@"data"] objectForKey:@"type"];
+    preGetBeansLabel.text = [NSString stringWithFormat:@"%@",[UCFToolsMehod isNullOrNilWithString:resultDict[@"extraBeanCount"]]];
+    orginalLab.text = [NSString stringWithFormat:@"%@",[UCFToolsMehod isNullOrNilWithString:resultDict[@"transferDes"]]];
     if(_isTransid){
         moneyTextField.userInteractionEnabled = !(self.accoutType == SelectAccoutTypeHoner && [typeStr intValue] == 2);
     }

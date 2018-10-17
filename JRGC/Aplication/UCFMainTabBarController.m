@@ -92,19 +92,19 @@
     NSArray *tabbarTitleArray = @[@"首页",
                                   @"投资",
                                   @"发现",
-                                  @"生活",
+                                  @"商城",
                                   @"我的"];
     
     NSArray *tabbarNormalArray = @[@"tabbar_icon_homepage_normal",
                                    @"tabbar_icon_project_normal",
                                    @"tabbar_icon_find_normal",
-                                   @"tabbar_icon_life_normal",
+                                   @"tabbar_icon_shop_normal",
                                    @"tabbar_icon_user_normal"];
 
     NSArray *tabbarHighlightArray = @[@"tabbar_icon_homepage_highlight",
                                       @"tabbar_icon_project_highlight",
                                       @"tabbar_icon_find_highlight",
-                                      @"tabbar_icon_life_highlight",
+                                      @"tabbar_icon_shop_highlight",
                                       @"tabbar_icon_user_highlight"];
     UIViewController *controller = nil;
     for (int i=0; i<5; i++) {
@@ -129,10 +129,12 @@
             }
                 break;
             case 3:{
-                UCFWebViewJavascriptBridgeMall *mallController = [[UCFWebViewJavascriptBridgeMall alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
-                mallController.url      = @"https://m.dougemall.com";//请求地址;
-                mallController.navTitle = @"发现";
-                controller = mallController;
+//                UCFWebViewJavascriptBridgeMall *mallController = [[UCFWebViewJavascriptBridgeMall alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
+//                mallController.url      = @"https://m.dougemall.com";//请求地址;
+//                mallController.navTitle = @"商城";
+//                controller = mallController;
+                UIViewController *contro = [[UIViewController alloc] init];
+                controller = contro;
             }
                 break;
             case 4:{
@@ -252,14 +254,46 @@
             [Touch3DSingle sharedTouch3DSingle].isLoad = NO;
             return NO;
         } else {
-            
-            
-            return YES;
+            UCFWebViewJavascriptBridgeMall *mallController = [[UCFWebViewJavascriptBridgeMall alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
+            mallController.url      = @"https://m.dougemall.com";//请求地址;
+            mallController.navTitle = @"商城";
+            mallController.isFromBarMall = YES;
+            [self.view.window.layer addAnimation:[self presentAnimation] forKey:nil];//添加Animation
+            [self presentViewController:mallController animated:NO completion:nil];
+            return NO;
         }
         
         return YES;
     }
     return YES;
+}
+- (CATransition *)presentAnimation{
+    
+    CATransition* transition = [CATransition animation];
+    transition.duration = 0.25;
+    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionDefault];
+    
+    /*私有API
+     cube                   立方体效果
+     pageCurl               向上翻一页
+     pageUnCurl             向下翻一页
+     rippleEffect           水滴波动效果
+     suckEffect             变成小布块飞走的感觉
+     oglFlip                上下翻转
+     cameraIrisHollowClose  相机镜头关闭效果
+     cameraIrisHollowOpen   相机镜头打开效果
+     */
+    
+    //    transition.type = @"cube";
+    transition.type = kCATransitionPush;
+    
+    //下面四个是系统共有的API
+    //kCATransitionMoveIn, kCATransitionPush, kCATransitionReveal, kCATransitionFade
+    
+    transition.subtype = kCATransitionFromRight;
+    //kCATransitionFromLeft, kCATransitionFromRight, kCATransitionFromTop, kCATransitionFromBottom
+    
+    return transition;
 }
 - (void)tabBar:(UITabBar *)tabBar willBeginCustomizingItems:(NSArray *)items
 {
