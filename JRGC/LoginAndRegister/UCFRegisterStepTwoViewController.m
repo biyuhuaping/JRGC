@@ -15,7 +15,7 @@
 #import "UCFToolsMehod.h"
 #import "MD5Util.h"
 //#import "UCFSession.h"
-#import "P2PWalletHelper.h"
+//#import "P2PWalletHelper.h"
 @interface UCFRegisterStepTwoViewController ()
 {
     UCFRegisterTwoView *_registerTwoView;

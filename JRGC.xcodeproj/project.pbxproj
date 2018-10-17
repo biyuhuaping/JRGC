@@ -857,10 +857,6 @@
 		A824BFD11FCD499200E32F39 /* libSocialSina.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A824BFC41FCD499200E32F39 /* libSocialSina.a */; };
 		A824BFD21FCD499200E32F39 /* libSocialQQ.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A824BFC81FCD499200E32F39 /* libSocialQQ.a */; };
 		A824BFD31FCD499200E32F39 /* libUMSocialLog.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A824BFCA1FCD499200E32F39 /* libUMSocialLog.a */; };
-		A824C0201FCD54D700E32F39 /* libUcfLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A824BFDC1FCD54D700E32F39 /* libUcfLib.a */; };
-		A824C0211FCD54D700E32F39 /* UcfLibResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A824BFDD1FCD54D700E32F39 /* UcfLibResources.bundle */; };
-		A824C0241FCD54D700E32F39 /* UcfWalletSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A824C01E1FCD54D700E32F39 /* UcfWalletSDK.bundle */; };
-		A824C0251FCD54D700E32F39 /* libUcfWalletSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A824C01F1FCD54D700E32F39 /* libUcfWalletSDK.a */; };
 		A828D6B31F1F30C200662266 /* UCFExtractGoldViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A828D6B11F1F30C200662266 /* UCFExtractGoldViewController.m */; };
 		A828D6B41F1F30C200662266 /* UCFExtractGoldViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A828D6B21F1F30C200662266 /* UCFExtractGoldViewController.xib */; };
 		A82FBA6A1F4FD40900FD79BC /* CoustomLab.m in Sources */ = {isa = PBXBuildFile; fileRef = A82FBA691F4FD40900FD79BC /* CoustomLab.m */; };
@@ -910,15 +906,10 @@
 		A8A3A57F1EE95BDA00D9C06D /* UCFInvestAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A8A3A57E1EE95BDA00D9C06D /* UCFInvestAPIManager.m */; };
 		A8AD2E3E1EB979760013DB7C /* MongoliaLayerCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = A8AD2E3D1EB979760013DB7C /* MongoliaLayerCenter.m */; };
 		A8AD6F851EFA6BDE000AF323 /* PagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = A8AD6F841EFA6BDE000AF323 /* PagerView.m */; };
-		A8B6B6801EC9A9F000D4E86F /* WalletBankView.m in Sources */ = {isa = PBXBuildFile; fileRef = A8B6B67F1EC9A9F000D4E86F /* WalletBankView.m */; };
-		A8B6B6821EC9AA0900D4E86F /* WalletBankView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8B6B6811EC9AA0900D4E86F /* WalletBankView.xib */; };
 		A8BF2E5C1F739DCB003ABDE7 /* UCFLoginBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = A8BF2E5B1F739DCB003ABDE7 /* UCFLoginBaseView.m */; };
 		A8C34F331F2737BA00926B7F /* RotationButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C34F321F2737BA00926B7F /* RotationButton.m */; };
-		A8CE17731EC44BF8009BD954 /* UCFWalletSelectBankCarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8CE17711EC44BF8009BD954 /* UCFWalletSelectBankCarViewController.m */; };
-		A8CE17741EC44BF8009BD954 /* UCFWalletSelectBankCarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8CE17721EC44BF8009BD954 /* UCFWalletSelectBankCarViewController.xib */; };
 		A8D2DE781EB9E1CF00D61AD0 /* MaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = A8D2DE771EB9E1CF00D61AD0 /* MaskView.m */; };
 		A8DAEAD01FD929890088AF70 /* assets.png in Resources */ = {isa = PBXBuildFile; fileRef = A8DAEACF1FD929880088AF70 /* assets.png */; };
-		A8DE852E1EC30159004B3533 /* P2PWalletHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A8DE852D1EC30159004B3533 /* P2PWalletHelper.m */; };
 		A8E01A801EEA4C6F003E3BDC /* UCFTransfeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A8E01A7E1EEA4C6F003E3BDC /* UCFTransfeTableViewCell.m */; };
 		A8E01A811EEA4C6F003E3BDC /* UCFTransfeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8E01A7F1EEA4C6F003E3BDC /* UCFTransfeTableViewCell.xib */; };
 		A8E02DA91F0DD4BB00FC2260 /* UCFCellStyleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A8E02DA81F0DD4BB00FC2260 /* UCFCellStyleModel.m */; };
@@ -2507,49 +2498,6 @@
 		A824BFC71FCD499200E32F39 /* UMSocialQQHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialQQHandler.h; sourceTree = "<group>"; };
 		A824BFC81FCD499200E32F39 /* libSocialQQ.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSocialQQ.a; sourceTree = "<group>"; };
 		A824BFCA1FCD499200E32F39 /* libUMSocialLog.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMSocialLog.a; sourceTree = "<group>"; };
-		A824BFDA1FCD54D700E32F39 /* UcfWalletSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UcfWalletSDK.h; sourceTree = "<group>"; };
-		A824BFDC1FCD54D700E32F39 /* libUcfLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUcfLib.a; sourceTree = "<group>"; };
-		A824BFDD1FCD54D700E32F39 /* UcfLibResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = UcfLibResources.bundle; sourceTree = "<group>"; };
-		A824BFE01FCD54D700E32F39 /* UcfSystemInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UcfSystemInfo.h; sourceTree = "<group>"; };
-		A824BFE11FCD54D700E32F39 /* UcfHttpRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UcfHttpRequest.h; sourceTree = "<group>"; };
-		A824BFE21FCD54D700E32F39 /* NSObject+UcfLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+UcfLib.h"; sourceTree = "<group>"; };
-		A824BFE31FCD54D700E32F39 /* SystemInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemInfo.h; sourceTree = "<group>"; };
-		A824BFE41FCD54D700E32F39 /* NSData+UcfLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+UcfLib.h"; sourceTree = "<group>"; };
-		A824BFE51FCD54D700E32F39 /* UIButton+UcfLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+UcfLib.h"; sourceTree = "<group>"; };
-		A824BFE61FCD54D700E32F39 /* UIView+UcfLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+UcfLib.h"; sourceTree = "<group>"; };
-		A824BFE71FCD54D700E32F39 /* UcfCardBINModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UcfCardBINModel.h; sourceTree = "<group>"; };
-		A824BFE81FCD54D700E32F39 /* UcfCKeyChainStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UcfCKeyChainStore.h; sourceTree = "<group>"; };
-		A824BFE91FCD54D700E32F39 /* UcfUrlHandler4Php.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UcfUrlHandler4Php.h; sourceTree = "<group>"; };
-		A824BFEA1FCD54D700E32F39 /* KKGestureLockPreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KKGestureLockPreviewView.h; sourceTree = "<group>"; };
-		A824BFEB1FCD54D700E32F39 /* UIColor+UcfLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+UcfLib.h"; sourceTree = "<group>"; };
-		A824BFEC1FCD54D700E32F39 /* Macro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Macro.h; sourceTree = "<group>"; };
-		A824BFED1FCD54D700E32F39 /* UcfCommonAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UcfCommonAlert.h; sourceTree = "<group>"; };
-		A824BFEE1FCD54D700E32F39 /* UcfLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UcfLib.h; sourceTree = "<group>"; };
-		A824BFEF1FCD54D700E32F39 /* UcfCardBinInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UcfCardBinInfo.h; sourceTree = "<group>"; };
-		A824BFF01FCD54D700E32F39 /* UIImage+UcfLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+UcfLib.h"; sourceTree = "<group>"; };
-		A824BFF11FCD54D700E32F39 /* NSBundle+UcfLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+UcfLib.h"; sourceTree = "<group>"; };
-		A824BFF21FCD54D700E32F39 /* UcfTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UcfTextField.h; sourceTree = "<group>"; };
-		A824BFF31FCD54D700E32F39 /* UIImageView+UcfLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+UcfLib.h"; sourceTree = "<group>"; };
-		A824BFF41FCD54D700E32F39 /* UIDevice-Hardware.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice-Hardware.h"; sourceTree = "<group>"; };
-		A824BFF51FCD54D700E32F39 /* UcfUrlHandler4Java.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UcfUrlHandler4Java.h; sourceTree = "<group>"; };
-		A824BFF61FCD54D700E32F39 /* UcfProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UcfProgressHUD.h; sourceTree = "<group>"; };
-		A824BFF71FCD54D700E32F39 /* UcfTouchIDUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UcfTouchIDUtils.h; sourceTree = "<group>"; };
-		A824BFF81FCD54D700E32F39 /* UcfReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UcfReachability.h; sourceTree = "<group>"; };
-		A824BFF91FCD54D700E32F39 /* UICKeyChainStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICKeyChainStore.h; sourceTree = "<group>"; };
-		A824BFFA1FCD54D700E32F39 /* UcfNetworkInspector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UcfNetworkInspector.h; sourceTree = "<group>"; };
-		A824BFFB1FCD54D700E32F39 /* NSMutableDictionary+UcfLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableDictionary+UcfLib.h"; sourceTree = "<group>"; };
-		A824BFFC1FCD54D700E32F39 /* UcfNumKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UcfNumKeyboard.h; sourceTree = "<group>"; };
-		A824BFFD1FCD54D700E32F39 /* UcfAlertManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UcfAlertManager.h; sourceTree = "<group>"; };
-		A824BFFE1FCD54D700E32F39 /* UcfPwdTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UcfPwdTextField.h; sourceTree = "<group>"; };
-		A824BFFF1FCD54D700E32F39 /* UITextField+UcfLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+UcfLib.h"; sourceTree = "<group>"; };
-		A824C0001FCD54D700E32F39 /* NSString+UcfLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+UcfLib.h"; sourceTree = "<group>"; };
-		A824C0011FCD54D700E32F39 /* NSDate+UcfLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+UcfLib.h"; sourceTree = "<group>"; };
-		A824C0021FCD54D700E32F39 /* KKGestureLockView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KKGestureLockView.h; sourceTree = "<group>"; };
-		A824C01B1FCD54D700E32F39 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
-		A824C01C1FCD54D700E32F39 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
-		A824C01D1FCD54D700E32F39 /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
-		A824C01E1FCD54D700E32F39 /* UcfWalletSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = UcfWalletSDK.bundle; sourceTree = "<group>"; };
-		A824C01F1FCD54D700E32F39 /* libUcfWalletSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUcfWalletSDK.a; sourceTree = "<group>"; };
 		A828D6B01F1F30C200662266 /* UCFExtractGoldViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFExtractGoldViewController.h; sourceTree = "<group>"; };
 		A828D6B11F1F30C200662266 /* UCFExtractGoldViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFExtractGoldViewController.m; sourceTree = "<group>"; };
 		A828D6B21F1F30C200662266 /* UCFExtractGoldViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFExtractGoldViewController.xib; sourceTree = "<group>"; };
@@ -2615,21 +2563,13 @@
 		A8AD2E3D1EB979760013DB7C /* MongoliaLayerCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MongoliaLayerCenter.m; sourceTree = "<group>"; };
 		A8AD6F831EFA6BDE000AF323 /* PagerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PagerView.h; sourceTree = "<group>"; };
 		A8AD6F841EFA6BDE000AF323 /* PagerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PagerView.m; sourceTree = "<group>"; };
-		A8B6B67E1EC9A9F000D4E86F /* WalletBankView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletBankView.h; sourceTree = "<group>"; };
-		A8B6B67F1EC9A9F000D4E86F /* WalletBankView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletBankView.m; sourceTree = "<group>"; };
-		A8B6B6811EC9AA0900D4E86F /* WalletBankView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WalletBankView.xib; sourceTree = "<group>"; };
 		A8BF2E5A1F739DCB003ABDE7 /* UCFLoginBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFLoginBaseView.h; sourceTree = "<group>"; };
 		A8BF2E5B1F739DCB003ABDE7 /* UCFLoginBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFLoginBaseView.m; sourceTree = "<group>"; };
 		A8C34F311F2737BA00926B7F /* RotationButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RotationButton.h; sourceTree = "<group>"; };
 		A8C34F321F2737BA00926B7F /* RotationButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RotationButton.m; sourceTree = "<group>"; };
-		A8CE17701EC44BF8009BD954 /* UCFWalletSelectBankCarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFWalletSelectBankCarViewController.h; sourceTree = "<group>"; };
-		A8CE17711EC44BF8009BD954 /* UCFWalletSelectBankCarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFWalletSelectBankCarViewController.m; sourceTree = "<group>"; };
-		A8CE17721EC44BF8009BD954 /* UCFWalletSelectBankCarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFWalletSelectBankCarViewController.xib; sourceTree = "<group>"; };
 		A8D2DE761EB9E1CF00D61AD0 /* MaskView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaskView.h; sourceTree = "<group>"; };
 		A8D2DE771EB9E1CF00D61AD0 /* MaskView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MaskView.m; sourceTree = "<group>"; };
 		A8DAEACF1FD929880088AF70 /* assets.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = assets.png; path = Images/assets.png; sourceTree = "<group>"; };
-		A8DE852C1EC30159004B3533 /* P2PWalletHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = P2PWalletHelper.h; sourceTree = "<group>"; };
-		A8DE852D1EC30159004B3533 /* P2PWalletHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = P2PWalletHelper.m; sourceTree = "<group>"; };
 		A8E01A7D1EEA4C6F003E3BDC /* UCFTransfeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFTransfeTableViewCell.h; sourceTree = "<group>"; };
 		A8E01A7E1EEA4C6F003E3BDC /* UCFTransfeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFTransfeTableViewCell.m; sourceTree = "<group>"; };
 		A8E01A7F1EEA4C6F003E3BDC /* UCFTransfeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFTransfeTableViewCell.xib; sourceTree = "<group>"; };
@@ -2920,7 +2860,6 @@
 				7BC304991ACBC4FD007767F1 /* QuartzCore.framework in Frameworks */,
 				7BCE02641AC91C760084C15C /* libicucore.dylib in Frameworks */,
 				7BCE02621AC91C5D0084C15C /* libiconv.dylib in Frameworks */,
-				A824C0201FCD54D700E32F39 /* libUcfLib.a in Frameworks */,
 				7BCE70F01B79D03000F9DD14 /* libFMDeviceManager_without_IDFA.a in Frameworks */,
 				7BCE02601AC91C550084C15C /* libsqlite3.dylib in Frameworks */,
 				7BCE025E1AC91C400084C15C /* libstdc++.dylib in Frameworks */,
@@ -2932,7 +2871,6 @@
 				7BCE02521AC91B9B0084C15C /* CoreLocation.framework in Frameworks */,
 				A824BFD11FCD499200E32F39 /* libSocialSina.a in Frameworks */,
 				7BCE02501AC91B780084C15C /* CoreData.framework in Frameworks */,
-				A824C0251FCD54D700E32F39 /* libUcfWalletSDK.a in Frameworks */,
 				7BCE024E1AC91B720084C15C /* libbz2.1.0.dylib in Frameworks */,
 				7BCE024C1AC91B4A0084C15C /* AudioToolbox.framework in Frameworks */,
 				7BCE024A1AC91B430084C15C /* AddressBook.framework in Frameworks */,
@@ -5056,7 +4994,6 @@
 			children = (
 				A82FBA671F4FD3EC00FD79BC /* CoustomLab */,
 				A8C34F301F2734A800926B7F /* RotationButton */,
-				A8DE852B1EC3012B004B3533 /* WalletHelper */,
 				A8AD2E381EB979240013DB7C /* MongoliaLayer */,
 				7456D3C51E82700500207349 /* UIView+Extension.h */,
 				7456D3C61E82700500207349 /* UIView+Extension.m */,
@@ -5708,7 +5645,6 @@
 			children = (
 				33B17641215A14F4007D1F91 /* LMJScrollTextView */,
 				A84EC2401FE1081E00B0C46A /* ImageScanner */,
-				A824BFD91FCD54D700E32F39 /* p2pWalletSDK */,
 				A824BFB61FCD499200E32F39 /* umeng_ios_social_sdk_6.4-2.6_arm64_custom */,
 				A83048CC1F67D9A70007FB4F /* OneSDK */,
 				74BDA9621F09F6C60054403F /* FSCalendar */,
@@ -6424,97 +6360,6 @@
 			path = UMSocialSDKPlugin;
 			sourceTree = "<group>";
 		};
-		A824BFD91FCD54D700E32F39 /* p2pWalletSDK */ = {
-			isa = PBXGroup;
-			children = (
-				A824BFDA1FCD54D700E32F39 /* UcfWalletSDK.h */,
-				A824BFDB1FCD54D700E32F39 /* Ucflib */,
-				A824C0191FCD54D700E32F39 /* Wechat */,
-				A824C01E1FCD54D700E32F39 /* UcfWalletSDK.bundle */,
-				A824C01F1FCD54D700E32F39 /* libUcfWalletSDK.a */,
-			);
-			name = p2pWalletSDK;
-			path = ThirdLibs/p2pWalletSDK;
-			sourceTree = "<group>";
-		};
-		A824BFDB1FCD54D700E32F39 /* Ucflib */ = {
-			isa = PBXGroup;
-			children = (
-				A824BFDC1FCD54D700E32F39 /* libUcfLib.a */,
-				A824BFDD1FCD54D700E32F39 /* UcfLibResources.bundle */,
-				A824BFDE1FCD54D700E32F39 /* include */,
-			);
-			path = Ucflib;
-			sourceTree = "<group>";
-		};
-		A824BFDE1FCD54D700E32F39 /* include */ = {
-			isa = PBXGroup;
-			children = (
-				A824BFDF1FCD54D700E32F39 /* UcfLib */,
-			);
-			path = include;
-			sourceTree = "<group>";
-		};
-		A824BFDF1FCD54D700E32F39 /* UcfLib */ = {
-			isa = PBXGroup;
-			children = (
-				A824BFE01FCD54D700E32F39 /* UcfSystemInfo.h */,
-				A824BFE11FCD54D700E32F39 /* UcfHttpRequest.h */,
-				A824BFE21FCD54D700E32F39 /* NSObject+UcfLib.h */,
-				A824BFE31FCD54D700E32F39 /* SystemInfo.h */,
-				A824BFE41FCD54D700E32F39 /* NSData+UcfLib.h */,
-				A824BFE51FCD54D700E32F39 /* UIButton+UcfLib.h */,
-				A824BFE61FCD54D700E32F39 /* UIView+UcfLib.h */,
-				A824BFE71FCD54D700E32F39 /* UcfCardBINModel.h */,
-				A824BFE81FCD54D700E32F39 /* UcfCKeyChainStore.h */,
-				A824BFE91FCD54D700E32F39 /* UcfUrlHandler4Php.h */,
-				A824BFEA1FCD54D700E32F39 /* KKGestureLockPreviewView.h */,
-				A824BFEB1FCD54D700E32F39 /* UIColor+UcfLib.h */,
-				A824BFEC1FCD54D700E32F39 /* Macro.h */,
-				A824BFED1FCD54D700E32F39 /* UcfCommonAlert.h */,
-				A824BFEE1FCD54D700E32F39 /* UcfLib.h */,
-				A824BFEF1FCD54D700E32F39 /* UcfCardBinInfo.h */,
-				A824BFF01FCD54D700E32F39 /* UIImage+UcfLib.h */,
-				A824BFF11FCD54D700E32F39 /* NSBundle+UcfLib.h */,
-				A824BFF21FCD54D700E32F39 /* UcfTextField.h */,
-				A824BFF31FCD54D700E32F39 /* UIImageView+UcfLib.h */,
-				A824BFF41FCD54D700E32F39 /* UIDevice-Hardware.h */,
-				A824BFF51FCD54D700E32F39 /* UcfUrlHandler4Java.h */,
-				A824BFF61FCD54D700E32F39 /* UcfProgressHUD.h */,
-				A824BFF71FCD54D700E32F39 /* UcfTouchIDUtils.h */,
-				A824BFF81FCD54D700E32F39 /* UcfReachability.h */,
-				A824BFF91FCD54D700E32F39 /* UICKeyChainStore.h */,
-				A824BFFA1FCD54D700E32F39 /* UcfNetworkInspector.h */,
-				A824BFFB1FCD54D700E32F39 /* NSMutableDictionary+UcfLib.h */,
-				A824BFFC1FCD54D700E32F39 /* UcfNumKeyboard.h */,
-				A824BFFD1FCD54D700E32F39 /* UcfAlertManager.h */,
-				A824BFFE1FCD54D700E32F39 /* UcfPwdTextField.h */,
-				A824BFFF1FCD54D700E32F39 /* UITextField+UcfLib.h */,
-				A824C0001FCD54D700E32F39 /* NSString+UcfLib.h */,
-				A824C0011FCD54D700E32F39 /* NSDate+UcfLib.h */,
-				A824C0021FCD54D700E32F39 /* KKGestureLockView.h */,
-			);
-			path = UcfLib;
-			sourceTree = "<group>";
-		};
-		A824C0191FCD54D700E32F39 /* Wechat */ = {
-			isa = PBXGroup;
-			children = (
-				A824C01A1FCD54D700E32F39 /* headers */,
-			);
-			path = Wechat;
-			sourceTree = "<group>";
-		};
-		A824C01A1FCD54D700E32F39 /* headers */ = {
-			isa = PBXGroup;
-			children = (
-				A824C01B1FCD54D700E32F39 /* WXApi.h */,
-				A824C01C1FCD54D700E32F39 /* WXApiObject.h */,
-				A824C01D1FCD54D700E32F39 /* WechatAuthSDK.h */,
-			);
-			path = headers;
-			sourceTree = "<group>";
-		};
 		A82FBA671F4FD3EC00FD79BC /* CoustomLab */ = {
 			isa = PBXGroup;
 			children = (
@@ -6589,22 +6434,6 @@
 			);
 			name = RotationButton;
 			path = Tools/RotationButton;
-			sourceTree = "<group>";
-		};
-		A8DE852B1EC3012B004B3533 /* WalletHelper */ = {
-			isa = PBXGroup;
-			children = (
-				A8DE852C1EC30159004B3533 /* P2PWalletHelper.h */,
-				A8DE852D1EC30159004B3533 /* P2PWalletHelper.m */,
-				A8CE17701EC44BF8009BD954 /* UCFWalletSelectBankCarViewController.h */,
-				A8CE17711EC44BF8009BD954 /* UCFWalletSelectBankCarViewController.m */,
-				A8CE17721EC44BF8009BD954 /* UCFWalletSelectBankCarViewController.xib */,
-				A8B6B67E1EC9A9F000D4E86F /* WalletBankView.h */,
-				A8B6B67F1EC9A9F000D4E86F /* WalletBankView.m */,
-				A8B6B6811EC9AA0900D4E86F /* WalletBankView.xib */,
-			);
-			name = WalletHelper;
-			path = Tools/WalletHelper;
 			sourceTree = "<group>";
 		};
 		A8E02DA31F0DD0A300FC2260 /* Model */ = {
@@ -7240,7 +7069,6 @@
 				83D42A931FCEAF07004C96EF /* UCFSharePictureViewController.xib in Resources */,
 				74EAF5BE1B0F18CB00807C1C /* UCFBankCardInfoExplainView.xib in Resources */,
 				25B38EFC1D5884EE00FB09F1 /* UCFBankCardChoseListInfo.xib in Resources */,
-				A8B6B6821EC9AA0900D4E86F /* WalletBankView.xib in Resources */,
 				7436F2D91F3C38AE003B77CA /* UCFGoldRechargeBankCell.xib in Resources */,
 				8330C9B91FD79C4B00EB56A9 /* UCFProjectSafetyGuaranteeViewController.xib in Resources */,
 				E3C117AF1D40D2F90053A052 /* UCFWebViewJavascriptBridgeController.xib in Resources */,
@@ -7411,12 +7239,9 @@
 				FB2858CE1BAAB583000EAA71 /* UCFMyInvestViewController.xib in Resources */,
 				7443C7241F1EFF45009669C0 /* UCFGoldCashOneCell.xib in Resources */,
 				74B1FC581F73960200BACF8A /* UCFNewUserCell.xib in Resources */,
-				A824C0211FCD54D700E32F39 /* UcfLibResources.bundle in Resources */,
 				83348291201B56A5008D32BA /* UCFRechargeWebViewController.xib in Resources */,
-				A824C0241FCD54D700E32F39 /* UcfWalletSDK.bundle in Resources */,
 				74E140451F1C573000B17A96 /* UCFGoldRechargeHistoryController.xib in Resources */,
 				74A2C0CF1F4306A000EDF0FA /* UCFGoldCashViewController.xib in Resources */,
-				A8CE17741EC44BF8009BD954 /* UCFWalletSelectBankCarViewController.xib in Resources */,
 				74A2C0D71F4306A000EDF0FA /* UCFGoldCashSecondCell.xib in Resources */,
 				74270C9E1EC58F6800F9419B /* UCFHomeListCell.xib in Resources */,
 				74673BC21FEB8C2200AF3727 /* UCFMineFuncView.xib in Resources */,
@@ -8060,7 +7885,6 @@
 				7BA6E4C41AD6731900FE8C37 /* UIImage+WebP.m in Sources */,
 				83CD842A1F13A50800227704 /* UCFHonerPlanViewController.m in Sources */,
 				7BCBF1261ADB616D00C874FC /* UCFRegisterOneView.m in Sources */,
-				A8CE17731EC44BF8009BD954 /* UCFWalletSelectBankCarViewController.m in Sources */,
 				83CD84361F13A50800227704 /* UCFProjectListController.m in Sources */,
 				7442E0391F45C7A7001E1D2F /* UCFAddedProfitView.m in Sources */,
 				74BDA9911F09F6C60054403F /* FSCalendarStickyHeader.m in Sources */,
@@ -8168,7 +7992,6 @@
 				FB72B08D1D74233E00F4DC8E /* BaseNavigationViewController.m in Sources */,
 				832942CE1F39914E001E34F1 /* UCFGoldCouponModel.m in Sources */,
 				746FFE2C1B007FA100FF927F /* UCFBindBankCardNormalTableViewCell.m in Sources */,
-				A8B6B6801EC9A9F000D4E86F /* WalletBankView.m in Sources */,
 				7BE51D901ADE5079007600AB /* FullWebViewController.m in Sources */,
 				E32020151CC4BCEF0065579C /* WKWebViewJavascriptBridge.m in Sources */,
 				7B2E56911ADBBE77008B0F9E /* UCFRetrievePasswordStepTwoViewController.m in Sources */,
@@ -8180,7 +8003,6 @@
 				74931A141B1326B400143424 /* pinyin.c in Sources */,
 				7BC8AA211AD4C74200BF4660 /* UCFNormalInvestment.m in Sources */,
 				74BDA9841F09F6C60054403F /* FSCalendar+Deprecated.m in Sources */,
-				A8DE852E1EC30159004B3533 /* P2PWalletHelper.m in Sources */,
 				744B9EDE1F0BA64600440FBA /* UCFCalendarDayInfo.m in Sources */,
 				74BDA9871F09F6C60054403F /* FSCalendarCalculator.m in Sources */,
 				83348290201B56A5008D32BA /* UCFRechargeWebViewController.m in Sources */,

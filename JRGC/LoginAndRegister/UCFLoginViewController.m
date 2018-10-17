@@ -22,7 +22,7 @@
 //#import "CWLivessViewController.h"//---qyy0815
 #import "MD5Util.h"
 //#import "UCFSession.h"
-#import "P2PWalletHelper.h"
+//#import "P2PWalletHelper.h"
 #import "UCFCompanyNoOpenViewController.h"
 @interface UCFLoginViewController ()////---qyy0815
 {

@@ -11,7 +11,7 @@
 #import "UCFHomeViewController.h"
 #import "UCFMoreViewController.h"
 #import "AppDelegate.h"
-#import "P2PWalletHelper.h"
+//#import "P2PWalletHelper.h"
 #import "BaseNavigationViewController.h"
 #import "UITabBar+TabBarBadge.h"
 #import "Touch3DSingle.h"
@@ -21,11 +21,11 @@
 //#import "UCFLoanViewController.h"
 #import "UCFDiscoveryViewController.h"
 #import "UCFWebViewJavascriptBridgeLevel.h"
-#import "P2PWalletHelper.h"
+//#import "P2PWalletHelper.h"
 #import "BlockUIAlertView.h"
 #import "UCFInvestViewController.h"
 #import "UCFMineViewController.h"
-
+#import "UCFWebViewJavascriptBridgeMall.h"
 @interface UCFMainTabBarController ()
 
 
@@ -80,7 +80,6 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [[P2PWalletHelper sharedManager] getUserWalletData:[P2PWalletHelper sharedManager].source];
 }
 - (void)didReceiveMemoryWarning
 {
@@ -124,15 +123,16 @@
                 break;
             case 2:{
                 UCFDiscoveryViewController *discoveryWeb = [[UCFDiscoveryViewController alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
-                discoveryWeb.url      = DISCOVERYURL;//请求地址;
+                discoveryWeb.url = DISCOVERYURL;//请求地址;
                 discoveryWeb.navTitle = @"发现";
                 controller = discoveryWeb;
             }
                 break;
             case 3:{
-
-                controller = [[P2PWalletHelper sharedManager] getUCFWalletTargetController];
-
+                UCFWebViewJavascriptBridgeMall *mallController = [[UCFWebViewJavascriptBridgeMall alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
+                mallController.url      = @"https://m.dougemall.com";//请求地址;
+                mallController.navTitle = @"发现";
+                controller = mallController;
             }
                 break;
             case 4:{
@@ -218,20 +218,16 @@
     
     switch (index) {
         case 0:{
-#warning 列表刷新
             [_LatestView refresh];
-//            [_LatestView.tableView.header beginRefreshing];
         }
             break;
         case 1:{
             [_AssignmentView refresh];
-//            [_AssignmentView.tableView.header beginRefreshing];
         }
             break;
             
         case 4:{
             [_mineView refresh];
-            //            [_AssignmentView.tableView.header beginRefreshing];
         }
             break;
     }
@@ -245,24 +241,7 @@
     if (contrl.viewControllers.count != 0) {
       topView = [contrl.viewControllers objectAtIndex:0];
     }
-//    if ([topView isKindOfClass:[UCFLoanViewController class]]) {
-//        UCFLoanViewController *loan = (UCFLoanViewController *)topView;
-//        bool isLoad = [loan isViewLoaded];
-//        if (isLoad) {
-//            [loan refreshWebContent];
-//        }
-//        NSString *jg_ckie = [UserInfoSingle sharedManager].jg_ckie;
-//        NSString *userId = [UserInfoSingle sharedManager].userId;
-//        if (nil == jg_ckie || nil == userId) {
-//            UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
-//            BaseNavigationViewController *loginNaviController = [[BaseNavigationViewController alloc] initWithRootViewController:loginViewController];
-//            loginViewController.sourceVC = @"homePage";
-//            [self presentViewController:loginNaviController animated:YES completion:nil];
-//            [Touch3DSingle sharedTouch3DSingle].isLoad = NO;
-//            return NO;
-//        }
-//        return YES;
-//    }
+
     if ([self.viewControllers indexOfObject:viewController] == 3) {
         NSString *userId = [UserInfoSingle sharedManager].userId;
         if(nil == userId) {
@@ -273,7 +252,9 @@
             [Touch3DSingle sharedTouch3DSingle].isLoad = NO;
             return NO;
         } else {
-           return [[P2PWalletHelper sharedManager] checkUserHSStateCanOpenWallet];
+            
+            
+            return YES;
         }
         
         return YES;

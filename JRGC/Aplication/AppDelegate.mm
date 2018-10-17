@@ -34,7 +34,6 @@
 #import "UIImage+GIF.h"
 #import "Growing.h"
 #import "UCFHomeViewController.h"
-#import "UcfWalletSDK.h"
 #import "MD5Util.h"
 #import "JPUSHService.h"//极光推送
 #import "MongoliaLayerCenter.h"
@@ -107,7 +106,7 @@
     //设置公告展示标志位
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isShowNotice"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    [UcfWalletSDK setEnvironment:1];
+//    [UcfWalletSDK setEnvironment:1];
 
     [[UserInfoSingle sharedManager] getUserData];
     
@@ -762,7 +761,7 @@
             }
         }
     }
-    return [UcfWalletSDK handleApplication:application openUrl:url options:options];
+    return YES;
 }
 - (void)msgSkipToView:(NSString *)targetStr
 {

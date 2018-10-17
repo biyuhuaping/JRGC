@@ -7,7 +7,7 @@
 //
 
 #import "AccountSuccessVC.h"
-#import "P2PWalletHelper.h"
+
 @interface AccountSuccessVC ()
 
 @property (strong, nonatomic) IBOutlet UIButton *submitDataButton;
@@ -35,10 +35,10 @@
     _successTipView.image = [UIImage imageNamed:imageStr];
     if (_fromVC == 1) {
         [_submitDataButton setTitle:@"进入生活频道" forState:UIControlStateNormal];
-        [[P2PWalletHelper sharedManager] getUserWalletData:GetWalletDataDefault];
+//        [[P2PWalletHelper sharedManager] getUserWalletData:GetWalletDataDefault];
     } else {
         [_submitDataButton setTitle:@"设置交易密码" forState:UIControlStateNormal];
-        [[P2PWalletHelper sharedManager] getUserWalletData:GetWalletDataOpenHS];
+//        [[P2PWalletHelper sharedManager] getUserWalletData:GetWalletDataOpenHS];
     }
 }
 
@@ -50,9 +50,9 @@
 - (IBAction)submitDataButton:(id)sender {
     DBLOG(@"设置交易密码")
     if (_fromVC == 1) {
-        [P2PWalletHelper sharedManager].source = GetWalletDataOpenHS;
+//        [P2PWalletHelper sharedManager].source = GetWalletDataOpenHS;
         [self dismissViewControllerAnimated:YES completion:^{
-            [[P2PWalletHelper sharedManager] changeTabMoveToWalletTabBar];
+//            [[P2PWalletHelper sharedManager] changeTabMoveToWalletTabBar];
         }];
     } else {
         //请求成功后，发通知到 UCFOldUserGuideHeadViewController.m  设置 isFirstComingPassWord 为yes

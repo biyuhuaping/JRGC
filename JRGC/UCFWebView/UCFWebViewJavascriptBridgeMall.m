@@ -48,7 +48,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [self.navigationController setNavigationBarHidden:YES animated:animated];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
-    self.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
+    self.view.frame = CGRectMake(0,StatusBarHeight1 == 20 ? 0 : StatusBarHeight1, ScreenWidth, CGRectGetHeight(self.view.frame));
     
 }
 
