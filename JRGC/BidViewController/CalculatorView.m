@@ -371,7 +371,7 @@
         NSString *repayPeriod = [[self.tranBidDataDict objectForKey:@"data"] objectForKey:@"lastDays"];
         double minInvest = [[[self.tranBidDataDict objectForKey:@"data"] objectForKey:@"investAmt"] doubleValue];
         double nowMoney = [moneyTextField.text doubleValue];
-        NSString *prdClaimsId = [NSString stringWithFormat:@"%@",[[self.tranBidDataDict objectForKey:@"data"] objectForKey:@"prdClaimsId"]];
+        NSString *prdClaimsId = [NSString stringWithFormat:@"%@",[[self.tranBidDataDict objectForKey:@"data"] objectForKey:@"id"]];
         moneyTextField.text =  [NSString stringWithFormat:@"%.2f",minInvest > nowMoney ? minInvest : nowMoney];
         NSString *investAmt = moneyTextField.text;
         if (investAmt.length == 0 || [investAmt isEqualToString:@"0"] || [investAmt isEqualToString:@"0.0"] || [investAmt isEqualToString:@"0.00"]) {
@@ -534,7 +534,7 @@
     preGetMoneyLabel.text = [NSString stringWithFormat:@"%@",[UCFToolsMehod AddComma:preMoney]];
     bankGetMoneyLabel.text = [NSString stringWithFormat:@"¥%@",[UCFToolsMehod AddComma:bankMoney]];
     NSString *typeStr = [[dataDict objectForKey:@"data"] objectForKey:@"type"];
-    preGetBeansLabel.text = [NSString stringWithFormat:@"%@",[UCFToolsMehod isNullOrNilWithString:resultDict[@"extraBeanCount"]]];
+    preGetBeansLabel.text = [NSString stringWithFormat:@"%@",resultDict[@"extraBeanCount"]];
     orginalLab.text = [NSString stringWithFormat:@"%@",[UCFToolsMehod isNullOrNilWithString:resultDict[@"transferDes"]]];
     if(_isTransid){
         moneyTextField.userInteractionEnabled = !(self.accoutType == SelectAccoutTypeHoner && [typeStr intValue] == 2);

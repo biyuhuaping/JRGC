@@ -265,7 +265,7 @@
     NSString *annualRate = [[_dataDict objectForKey:@"data"] objectForKey:@"transfereeYearRate"];
     NSString *repayMode = [[_dataDict objectForKey:@"data"] objectForKey:@"repayMode"];
     NSString *repayPeriod = [[_dataDict objectForKey:@"data"] objectForKey:@"lastDays"];
-    NSString *prdClaimsId = [NSString stringWithFormat:@"%@",[[_dataDict objectForKey:@"data"] objectForKey:@"prdClaimsId"]];
+    NSString *prdClaimsId = [NSString stringWithFormat:@"%@",[[_dataDict objectForKey:@"data"] objectForKey:@"id"]];
 
     MoneyBoardCell *cell = (MoneyBoardCell *)[_bidTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
     NSString *investAmt = cell.inputMoneyTextFieldLable.text;
