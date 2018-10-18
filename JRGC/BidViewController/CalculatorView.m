@@ -253,7 +253,7 @@
         
         jrgcProfitLab = [[UILabel alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(lineView1.frame) + [Common calculateNewSizeBaseMachine:10], CGRectGetWidth(blueHeadView.frame) - 30, [Common calculateNewSizeBaseMachine:12])];
         jrgcProfitLab.text =  self.accoutType == SelectAccoutTypeP2P ? @"预期利息(元)" :@"预期收益(元)";
-        jrgcProfitLab.font = [UIFont systemFontOfSize:[Common calculateNewSizeBaseMachine:10.8]];
+        jrgcProfitLab.font = [UIFont systemFontOfSize:[Common calculateNewSizeBaseMachine:12]];
         jrgcProfitLab.textColor = [UIColor whiteColor];
         jrgcProfitLab.backgroundColor = [UIColor clearColor];
         jrgcProfitLab.textAlignment = NSTextAlignmentLeft;
@@ -263,14 +263,14 @@
         preGetMoneyLabel.frame = CGRectMake(15, CGRectGetMaxY(jrgcProfitLab.frame) + [Common calculateNewSizeBaseMachine:5] , CGRectGetWidth(blueHeadView.frame) - 30, [Common calculateNewSizeBaseMachine:16]);
         preGetMoneyLabel.textColor = [UIColor whiteColor];
         preGetMoneyLabel.text = @"0.00";
-        preGetMoneyLabel.font = [UIFont systemFontOfSize:[Common calculateNewSizeBaseMachine:14.0f]];
+        preGetMoneyLabel.font = [UIFont systemFontOfSize:[Common calculateNewSizeBaseMachine:15]];
         preGetMoneyLabel.textAlignment = NSTextAlignmentLeft;
         preGetMoneyLabel.backgroundColor = [UIColor clearColor];
         [blueHeadView addSubview:preGetMoneyLabel];
         
-        jrgcProfitfBeansLab = [[UILabel alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(preGetMoneyLabel.frame) + [Common calculateNewSizeBaseMachine:10], CGRectGetWidth(blueHeadView.frame) - 30, [Common calculateNewSizeBaseMachine:12])];
+        jrgcProfitfBeansLab = [[UILabel alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(preGetMoneyLabel.frame) + [Common calculateNewSizeBaseMachine:5], CGRectGetWidth(blueHeadView.frame) - 30, [Common calculateNewSizeBaseMachine:12])];
         jrgcProfitfBeansLab.text =  @"预计额外工豆奖励(个)";
-        jrgcProfitfBeansLab.font = [UIFont systemFontOfSize:[Common calculateNewSizeBaseMachine:10.8]];
+        jrgcProfitfBeansLab.font = [UIFont systemFontOfSize:[Common calculateNewSizeBaseMachine:12]];
         jrgcProfitfBeansLab.textColor = [UIColor whiteColor];
         jrgcProfitfBeansLab.backgroundColor = [UIColor clearColor];
         jrgcProfitfBeansLab.textAlignment = NSTextAlignmentLeft;
@@ -280,7 +280,7 @@
         preGetBeansLabel.frame = CGRectMake(15, CGRectGetMaxY(jrgcProfitfBeansLab.frame) + [Common calculateNewSizeBaseMachine:5] , CGRectGetWidth(blueHeadView.frame) - 30, [Common calculateNewSizeBaseMachine:16]);
         preGetBeansLabel.textColor = [UIColor whiteColor];
         preGetBeansLabel.text = @"0";
-        preGetBeansLabel.font = [UIFont systemFontOfSize:[Common calculateNewSizeBaseMachine:14.0f]];
+        preGetBeansLabel.font = [UIFont systemFontOfSize:[Common calculateNewSizeBaseMachine:15]];
         preGetBeansLabel.textAlignment = NSTextAlignmentLeft;
         preGetBeansLabel.backgroundColor = [UIColor clearColor];
         [blueHeadView addSubview:preGetBeansLabel];
