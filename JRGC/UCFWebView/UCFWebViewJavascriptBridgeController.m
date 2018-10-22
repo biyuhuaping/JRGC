@@ -871,7 +871,7 @@
         [self.view.window.layer addAnimation:[self popAnimation] forKey:nil];
         [self dismissViewControllerAnimated:NO completion:nil];
     } else {
-        [self.navigationController popViewControllerAnimated:YES];
+        [self.navigationController popViewControllerAnimated:NO];
 
     }
 }
@@ -908,7 +908,9 @@
     UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
     loginViewController.sourceVC = @"webViewLongin";
     UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
-    [self presentViewController:loginNaviController animated:YES completion:nil];
+    AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+    
+    [appDelegate.tabBarController presentViewController:loginNaviController animated:YES completion:nil];
 }
 //跳转到App 原生界面 规则从哪来回哪去
 -(void)jsGotoAppBackNative{
@@ -1055,7 +1057,7 @@
     
     if (!(![controllerName isEqualToString:@"app_upgrade_strategy"] ||![controllerName isEqualToString:@"app_register"] ||![controllerName isEqualToString:@"app_invest_immediately"] || ![controllerName isEqualToString:@"app_invite_interest"]|| ![controllerName isEqualToString:@"app_contribute_detail"])) //这个页面不需要登录所以需要判断，如果是进这个页面，直接去加载，不再调登录
     {
-        if (! [[NSUserDefaults standardUserDefaults] valueForKey:UUID])
+        if (![[NSUserDefaults standardUserDefaults] valueForKey:UUID])
         {
             //直接调登录
             [self jumpLogin];

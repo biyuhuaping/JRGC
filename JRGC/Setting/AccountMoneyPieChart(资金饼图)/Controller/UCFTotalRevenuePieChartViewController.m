@@ -117,7 +117,9 @@
             pieChatModel1.pieChartTitleArray = [[NSMutableArray alloc]initWithArray:@[@"微金总收益(元)",@"尊享总收益(元)",@"黄金总收益(元)"]];
             pieChatModel2.pieChartDataArray = [[NSMutableArray alloc]initWithArray:@[receivedInterest,usedReturnCash,usedBean,balanceInterest,goldProfitAndLoss]];
             pieChatModel2.pieChartTitleArray = [[NSMutableArray alloc]initWithArray:@[@"已收利息(元)",@"已用返现券(元)",@"已用工豆(元)",@"余额利息(元)", @"黄金余额盈亏(元)"]];
-            
+            if (![UserInfoSingle sharedManager].isShowCouple) {
+                [pieChatModel2.pieChartTitleArray  removeObjectAtIndex:1];
+            }
             if([UserInfoSingle sharedManager].superviseSwitch)//监管开关打开
             {
     
@@ -125,10 +127,7 @@
                 {
                     [pieChatModel2.pieChartDataArray removeLastObject];
                     [pieChatModel2.pieChartTitleArray  removeLastObject];
-                    if (![UserInfoSingle sharedManager].isShowCouple) {
-                        [pieChatModel2.pieChartTitleArray  removeObjectAtIndex:1];
-                        [pieChatModel2.pieChartDataArray removeObjectAtIndex:1];
-                    }
+             
                     self.dataArray = @[pieChatModel,pieChatModel2];
                 }else if(![UserInfoSingle sharedManager].zxIsNew && [UserInfoSingle sharedManager].goldIsNew){
                     
