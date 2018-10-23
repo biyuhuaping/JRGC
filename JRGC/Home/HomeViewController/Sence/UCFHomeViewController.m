@@ -138,8 +138,8 @@
 - (void)addDragBtn
 {
     _dragBtn = [[BJGridItem alloc] initWithTitle:nil withImageName:@"guafengongbei" atIndex:0 editable:NO];
-    if (kIS_IphoneX) {
-        [_dragBtn setFrame:CGRectMake(ScreenWidth - 62 - 6, ScreenHeight - 49 - 65 - 6 - 34, 62, 65)];
+    if (StatusBarHeight1 > 21) {
+        [_dragBtn setFrame:CGRectMake(ScreenWidth - 62 - 6, ScreenHeight - 49 - 65 - 6 - StatusBarHeight1, 62, 65)];
 
     } else {
         [_dragBtn setFrame:CGRectMake(ScreenWidth - 62 - 6, ScreenHeight - 49 - 65 - 6, 62, 65)];

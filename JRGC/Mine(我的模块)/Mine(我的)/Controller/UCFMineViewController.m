@@ -226,9 +226,9 @@
     self.mineHeaderView.frame = CGRectMake(0, 0, ScreenWidth, 195);
     self.mineFooterView.height = 240;
     if ([[UIApplication sharedApplication] statusBarFrame].size.height > 21) {
-        
+        self.topSapce.constant = [[UIApplication sharedApplication] statusBarFrame].size.height;
     } else {
-        self.topSapce.constant = - 20;
+        
     }
 }
 
