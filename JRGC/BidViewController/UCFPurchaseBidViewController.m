@@ -56,6 +56,8 @@
 @property (copy, nonatomic) NSString                    *tmpTextFieldTextValue;     //选中
 @property (copy, nonatomic) NSString                    *wJOrZxStr;//出借还是认购
 @property (copy, nonatomic) NSString                    *type;//尊享标 分为 3 委托协议尊享标  4为丝路金交
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tabViewBottomSpace;
+
 @end
 
 @implementation UCFPurchaseBidViewController
@@ -79,6 +81,7 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillChangeFrameNotification object:nil];
     }
 #endif
+    
     self.tabViewSpace.constant += 0.5;
     
 //    [self.bidTableView addMyGifHeaderWithRefreshingTarget:self refreshingAction:@selector(reloadMainView)];
@@ -272,11 +275,16 @@
     }
     
     
-    
     UIView *investBaseView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.view.frame) - 67, ScreenWidth, 67)];
     investBaseView.backgroundColor = [UIColor clearColor];
     investBaseView.tag = 9000;
     [self.view addSubview:investBaseView];
+    if (@available(iOS 11.0, *)) {
+        UIEdgeInsets ede = self.view.safeAreaInsets;
+        investBaseView.frame = CGRectMake(0, CGRectGetHeight(self.view.frame) - 67 - ede.bottom, ScreenWidth, 67);
+        self.tabViewBottomSpace.constant = 67 + ede.bottom;
+
+    }
     
     UIView *bkView = [[UIView alloc] initWithFrame:CGRectMake(0, 10, ScreenWidth, 57)];
     bkView.backgroundColor = [UIColor whiteColor];

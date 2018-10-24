@@ -171,7 +171,10 @@
 //    [bottomView setUserInteractionEnabled:YES];
 
 }
-
+- (void)updateInvestViewFrame
+{
+    _investmentView.frame =CGRectMake(0, CGRectGetHeight(self.frame) - 67, ScreenWidth, 67);
+}
 //创建投资button
 -(void)cretateInvestmentView
 {

@@ -34,6 +34,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *bidTableView;
 @property (strong, nonatomic) NSString *zxOrP2pStr;//尊享债转 提示语 为购买 P2P 为 投资
 @property (strong, nonatomic) NSString *p2POrHonerType;//// 1为微金，2位普通尊享，3为委托尊享标
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tabViewBottomSpace;
 
 @end
 
@@ -80,10 +81,15 @@
     }
     _bidTableView.tableFooterView = [self createFootView];
     [_bidTableView reloadData];
-    [self cretateInvestmentView];
     UITapGestureRecognizer *frade = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(fadeKeyboard)];
     [_bidTableView addGestureRecognizer:frade];
     [ToolSingleTon sharedManager].apptzticket = [NSString stringWithFormat:@"%@",[_dataDict objectForKey:@"apptzticket"]];
+
+}
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    [self cretateInvestmentView];
 
 }
 - (void)fadeKeyboard
@@ -290,7 +296,12 @@
     investBaseView.backgroundColor = [UIColor clearColor];
     investBaseView.tag = 9000;
     [self.view addSubview:investBaseView];
-    
+    if (@available(iOS 11.0, *)) {
+        UIEdgeInsets ede = self.view.safeAreaInsets;
+        investBaseView.frame = CGRectMake(0, CGRectGetHeight(self.view.frame) - 67 - ede.bottom, ScreenWidth, 67);
+        self.tabViewBottomSpace.constant = 67 + ede.bottom;
+        
+    }
     UIView *bkView = [[UIView alloc] initWithFrame:CGRectMake(0, 10, ScreenWidth, 57)];
     bkView.backgroundColor = [UIColor whiteColor];
     [investBaseView addSubview:bkView];

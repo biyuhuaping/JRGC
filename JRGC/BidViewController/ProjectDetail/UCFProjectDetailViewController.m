@@ -176,17 +176,22 @@
     if (@available(iOS 11.0, *)) {
         UIEdgeInsets ede = self.view.safeAreaInsets;
         CGFloat orginY = StatusBarHeight1 > 21 ? (StatusBarHeight1 + 44) : NavigationBarHeight;
+        
         switch (_detailType) {
             case PROJECTDETAILTYPENORMAL://普通标详情
                 //            [self makeContractMsg:[_dataDic objectForKey:@"contractMsg"] tp:@"1"];
-                _normalMarkView.frame = CGRectMake(0, orginY, ScreenWidth, ScreenHeight - NavigationBarHeight);
+                _normalMarkView.frame = CGRectMake(0, orginY, ScreenWidth, ScreenHeight - orginY - ede.bottom);
+                [_normalMarkView updateInvestViewFrame];
                 break;
             case PROJECTDETAILTYPERIGHTINTEREST://RightInterestNewView 权益表详情
-                _normalMarkOfRightsInterestView.frame = CGRectMake(0, orginY, ScreenWidth, ScreenHeight - NavigationBarHeight);
+                _normalMarkOfRightsInterestView.frame = CGRectMake(0, orginY, ScreenWidth, ScreenHeight - orginY - ede.bottom);
+                [_normalMarkOfRightsInterestView updateInvestViewFrame];
 
                 break;
             case PROJECTDETAILTYPEBONDSRRANSFER://债转标详情  tansType 债权转让原标类型 1 普通标 2 权益标
-                _markOfBondsRransferView.frame = CGRectMake(0, orginY, ScreenWidth, ScreenHeight - NavigationBarHeight);
+                _markOfBondsRransferView.frame = CGRectMake(0, orginY, ScreenWidth, ScreenHeight - orginY - ede.bottom);
+                [_markOfBondsRransferView updateInvestViewFrame];
+
                 break;
             default:
                 break;
@@ -217,7 +222,7 @@
     self.accoutType = _isP2P ? SelectAccoutTypeP2P :SelectAccoutTypeHoner;
     [self addnavigationBar];
     [self setNavTitleView];
-    
+
     NSString *tansType = @"1";
     switch (_detailType) {
         case PROJECTDETAILTYPENORMAL://普通标详情

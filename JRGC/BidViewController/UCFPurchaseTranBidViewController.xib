@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UCFPurchaseTranBidViewController">
             <connections>
                 <outlet property="bidTableView" destination="j6d-2X-JBO" id="VqX-FL-Bem"/>
+                <outlet property="tabViewBottomSpace" destination="yLk-hA-5ZB" id="C1A-E0-Rub"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

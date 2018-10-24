@@ -27,5 +27,6 @@
 - (id)initWithFrame:(CGRect)frame withDic:(NSDictionary*)dataDic prdList:(NSArray *)prdList contractMsg:(NSArray *)msgArr souceVc:(NSString *)source type:(NSString *)type isP2P:(BOOL)isP2PType;
 -(void)cretateInvestmentView;
 - (void)setProcessViewProcess:(CGFloat)process;
+- (void)updateInvestViewFrame;
 
 @end
