@@ -78,6 +78,21 @@
         self.quickPayBottomSpace.constant = 22;
         self.quickPayWidth.constant = 46;
         self.quickPayHeight.constant = 26;
+    } else {
+        self.bankImageViewTopSpace.constant = 10;
+        self.bankImageViewLeftSpace.constant = 24;
+        self.bankImageViewWidth.constant = 43;
+        self.bankImageViewHeight.constant = 43;
+        self.bankImageAndTitleSpace.constant = 6;
+        self.bankTypeTrailSpace.constant = 26;
+        self.bankCardNoLeftSpace.constant = 26;
+        self.bankCardNoBottomSpace.constant = 22;
+        self.bankCardNoTopSpace.constant = 13;
+        self.useNameLeftSpace.constant = self.bankCardNoLeftSpace.constant;
+        self.quickPayTrailSpace.constant = 26;
+        self.quickPayBottomSpace.constant = 22;
+        self.quickPayWidth.constant = 46;
+        self.quickPayHeight.constant = 26;
     }
 }
 //***当银行卡失效的时候页面部分至灰色

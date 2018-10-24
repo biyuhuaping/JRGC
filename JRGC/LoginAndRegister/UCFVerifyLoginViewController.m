@@ -17,6 +17,7 @@
 #import "UCFToolsMehod.h"
 #import "AppDelegate.h"
 #import "BaseAlertView.h"
+#import "MD5Util.h"
 //#import "CloudwalkFaceSDK.h"
 //#import "NewFaceViewController.h"
 //#import "CWLivessViewController.h"//---qyy0815
@@ -146,8 +147,14 @@
         [_passWordTfd becomeFirstResponder];
         return;
     }
-    NSString *strParameters = [NSString stringWithFormat:@"userId=%@&username=%@&pwd=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],[[NSUserDefaults standardUserDefaults] objectForKey:LOGINNAME],_passWordTfd.text];
-    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagValidLogin owner:self Type:SelectAccoutDefault];
+//    NSString *strParameters = [NSString stringWithFormat:@"userId=%@&username=%@&pwd=%@",[[NSUserDefaults standardUserDefaults] valueForKey:UUID],[[NSUserDefaults standardUserDefaults] objectForKey:LOGINNAME],_passWordTfd.text];
+//    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagValidLogin owner:self Type:SelectAccoutDefault];
+    
+    
+    NSString* phoneNumberStr = [_passWordTfd.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSString *isCompanyStr  = [NSString stringWithFormat:@"%d",[UserInfoSingle sharedManager].companyAgent];
+    NSDictionary *param = @{@"username": [[NSUserDefaults standardUserDefaults] objectForKey:LOGINNAME], @"pwd": [MD5Util MD5Pwd:phoneNumberStr],@"isCompany":isCompanyStr};
+    [[NetworkModule sharedNetworkModule] newPostReq:param tag:kSXTagValidBindedPhone owner:self signature:YES Type:SelectAccoutTypeP2P ];
 }
 
 
@@ -161,17 +168,13 @@
 {
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     NSString *data = (NSString *)result;
-    if (tag.intValue == kSXTagValidLogin) {
+    if (tag.intValue == kSXTagValidBindedPhone) {
         NSMutableDictionary *dic = [data objectFromJSONString];
-        DLog(@"log%@",dic);
-//        NSString *uuid = dic[UUID];
-//        NSString *time = dic[TIME];
-        NSString *rstcode = dic[@"resultStatus"];
-        NSString *rsttext = dic[@"statusdes"];
-        if ([rstcode intValue] == 1) {
+        if ([dic[@"ret"] boolValue]) {
             [LLLockPassword saveLockPassword:nil];
             [self loginSuccess:dic];
         } else {
+            NSString *rsttext =  dic[@"message"];
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:rsttext delegate:nil cancelButtonTitle:@"重新输入" otherButtonTitles:nil];
             [alertView show];
         }
@@ -182,7 +185,7 @@
 -(void)errorPost:(NSError*)err tag:(NSNumber*)tag
 {
     
-    if (tag.intValue == kSXTagLogin||tag.intValue == kSXTagValidLogin||tag.intValue == kSXTagUserLogout) {
+    if (tag.intValue == kSXTagLogin||tag.intValue == kSXTagValidBindedPhone||tag.intValue == kSXTagUserLogout) {
         [MBProgressHUD displayHudError:[err.userInfo objectForKey:@"NSLocalizedDescription"]];
     }
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];

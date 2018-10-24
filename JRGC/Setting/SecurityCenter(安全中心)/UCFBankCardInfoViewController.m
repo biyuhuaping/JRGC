@@ -134,10 +134,10 @@
             return 215 + markContentSize.height + 20;
         }
         else if ([machineType isEqualToString:@"6Plus"]) {
-           
+            return 231 + markContentSize.height;
+        } else {
             return 231 + markContentSize.height;
         }
-        
         return 0;
     }
     return 0.01;
@@ -158,6 +158,8 @@
             height = 215 + markContentSize.height +20 ;
         }
         else if ([machineType isEqualToString:@"6Plus"]) {
+            height = 231 + markContentSize.height;
+        } else {
             height = 231 + markContentSize.height;
         }
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, height)];
@@ -223,10 +225,12 @@
 #pragma mark -tableviewdelegate-
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    if(section==([self.itemsData count]-1))
+    if(section==([self.itemsData count]-1)){
         return 115;
-    else
+    } else {
         return 0.01;
+    }
+    
 }
 #pragma mark -tableviewdelegate- 用以定制自定义的section底部视图－Footer
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section

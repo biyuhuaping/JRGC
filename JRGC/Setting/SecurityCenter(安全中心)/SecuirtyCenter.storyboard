@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -233,8 +233,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EMb-Mj-ooV">
-                                <rect key="frame" x="159" y="370" width="283" height="147"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EMb-Mj-ooV">
+                                <rect key="frame" x="46" y="370" width="283" height="147"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="card_bg" translatesAutoresizingMaskIntoConstraints="NO" id="lTd-3D-NO9">
                                         <rect key="frame" x="0.0" y="0.0" width="283" height="147"/>
@@ -252,7 +252,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="身份证号：xxxxxx********xxxx" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ikh-0H-Rsb">
-                                        <rect key="frame" x="42" y="103" width="199" height="17"/>
+                                        <rect key="frame" x="44.5" y="103" width="194" height="17"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" red="0.26379796862602234" green="0.2637900710105896" blue="0.26379451155662537" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -274,8 +274,8 @@
                                     <constraint firstItem="IZX-9C-hez" firstAttribute="top" secondItem="EMb-Mj-ooV" secondAttribute="top" constant="23" id="vwR-U9-azy"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="idcard_pic" translatesAutoresizingMaskIntoConstraints="NO" id="zzi-JU-uR5">
-                                <rect key="frame" x="183" y="103" width="235" height="235"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="idcard_pic" translatesAutoresizingMaskIntoConstraints="NO" id="zzi-JU-uR5">
+                                <rect key="frame" x="70" y="103" width="235" height="235"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="235" id="Reo-9P-ZT3"/>
                                     <constraint firstAttribute="width" constant="235" id="XDa-Jk-tTT"/>
@@ -325,8 +325,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Gxq-eM-CEi">
-                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Gxq-eM-CEi">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <connections>
                                     <outlet property="dataSource" destination="ZPw-id-vL9" id="IXc-ts-CgZ"/>
@@ -336,10 +336,10 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="Yyn-MV-6g9" firstAttribute="top" secondItem="Gxq-eM-CEi" secondAttribute="bottom" id="5UR-S0-siQ"/>
-                            <constraint firstItem="Gxq-eM-CEi" firstAttribute="top" secondItem="s39-CR-E6G" secondAttribute="bottom" id="5Yo-Q9-JM4"/>
-                            <constraint firstAttribute="trailing" secondItem="Gxq-eM-CEi" secondAttribute="trailing" id="FR5-1q-mXR"/>
-                            <constraint firstItem="Gxq-eM-CEi" firstAttribute="leading" secondItem="W9V-Fm-8bf" secondAttribute="leading" id="PBQ-3F-q0b"/>
+                            <constraint firstItem="Gxq-eM-CEi" firstAttribute="leading" secondItem="W9V-Fm-8bf" secondAttribute="leading" id="QC0-oa-xpX"/>
+                            <constraint firstItem="Yyn-MV-6g9" firstAttribute="top" secondItem="Gxq-eM-CEi" secondAttribute="bottom" id="VcH-gh-GQd"/>
+                            <constraint firstItem="Gxq-eM-CEi" firstAttribute="top" secondItem="s39-CR-E6G" secondAttribute="bottom" id="gvs-HH-sy0"/>
+                            <constraint firstAttribute="trailing" secondItem="Gxq-eM-CEi" secondAttribute="trailing" id="jZS-09-vwj"/>
                         </constraints>
                     </view>
                     <connections>
@@ -431,7 +431,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cbi-rx-KaV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1024" y="264"/>
+            <point key="canvasLocation" x="1322" y="167"/>
         </scene>
         <!--Province List View Controller-->
         <scene sceneID="eFW-ci-Kzk">
