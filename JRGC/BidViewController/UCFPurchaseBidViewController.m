@@ -378,6 +378,14 @@
         [alert show];
         return;
     }
+    NSString  *limitAmountMess = [NSString stringWithFormat:@"%@",[_dataDict objectSafeForKey:@"limitAmount"]];
+    if ([limitAmountMess doubleValue] > 0.01) {
+        if ([Common stringA:investMoney ComparedStringB:limitAmountMess] == 1) {
+            [MBProgressHUD displayHudError:[_dataDict objectSafeForKey:@"limitAmountMess"]];
+            return;
+        }
+    }
+    
     NSString *maxIn = [NSString stringWithFormat:@"%@",info1.maxInvest];
     if (maxIn.length != 0) {
         NSString *maxInvest = [NSString stringWithFormat:@"%.2f",[[NSString stringWithFormat:@"%@",info1.maxInvest] doubleValue]];
@@ -1401,14 +1409,33 @@
     footView.backgroundColor = UIColorWithRGB(0xebebee);
     footView.userInteractionEnabled = YES;
     __weak typeof(self) weakSelf = self;
-    //https://m.9888.cn/static/wap/protocol-risk-prompt/index.html
     
-    
+    CGFloat orginY = 0;
+    NSString  *limitAmountMess = [_dataDict objectSafeForKey:@"limitAmountMess"];
+    if (limitAmountMess.length > 0) {
+        NZLabel *limitAmountMessLabel = [[NZLabel alloc] init];
+        limitAmountMessLabel.font = [UIFont systemFontOfSize:12.0f];
+        CGSize size = [Common getStrHeightWithStr:limitAmountMess AndStrFont:12 AndWidth:ScreenWidth- 23 -15];
+        limitAmountMessLabel.numberOfLines = 0;
+        limitAmountMessLabel.text = limitAmountMess;
+        limitAmountMessLabel.frame = CGRectMake(23, 10, ScreenWidth- 23 -15, size.height);
+        limitAmountMessLabel.textColor = UIColorWithRGB(0x999999);
+        
+        UIImageView * imageView = [[UIImageView alloc] init];
+        imageView.frame = CGRectMake(CGRectGetMinX(limitAmountMessLabel.frame) - 7, CGRectGetMinY(limitAmountMessLabel.frame) + 6, 5, 5);
+        imageView.image = [UIImage imageNamed:@"point.png"];
+        
+        [footView addSubview:limitAmountMessLabel];
+        [footView addSubview:imageView];
+        
+        orginY = CGRectGetMaxY(limitAmountMessLabel.frame);
+    }
+ 
     NZLabel *firstProtocolLabel = [[NZLabel alloc] init];
     firstProtocolLabel.font = [UIFont systemFontOfSize:12.0f];
     CGSize size = [Common getStrHeightWithStr:@"本人阅读并同意《CFCA数字证书服务协议》" AndStrFont:12 AndWidth:ScreenWidth- 23 -15];
     firstProtocolLabel.numberOfLines = 0;
-    firstProtocolLabel.frame = CGRectMake(23, 10, ScreenWidth- 23 -15, size.height);
+    firstProtocolLabel.frame = CGRectMake(23, orginY + 10, ScreenWidth- 23 -15, size.height);
     firstProtocolLabel.text = @"本人阅读并同意《CFCA数字证书服务协议》";
     firstProtocolLabel.userInteractionEnabled = YES;
     firstProtocolLabel.textColor = UIColorWithRGB(0x999999);
@@ -1422,12 +1449,12 @@
     imageView.frame = CGRectMake(CGRectGetMinX(firstProtocolLabel.frame) - 7, CGRectGetMinY(firstProtocolLabel.frame) + 6, 5, 5);
     imageView.image = [UIImage imageNamed:@"point.png"];
     
-    
+
     NZLabel *riskProtocolLabel = [[NZLabel alloc] init];
     riskProtocolLabel.font = [UIFont systemFontOfSize:12.0f];
     CGSize size1 = [Common getStrHeightWithStr:@"本人阅读并悉知《网络借贷出借风险提示》中风险" AndStrFont:12 AndWidth:ScreenWidth - 23 - 15];
     riskProtocolLabel.numberOfLines = 0;
-    riskProtocolLabel.frame = CGRectMake(23,CGRectGetMaxY(firstProtocolLabel.frame) + 10, ScreenWidth- 23 -15, size1.height);
+    riskProtocolLabel.frame = CGRectMake(23, CGRectGetMaxY(firstProtocolLabel.frame) + 10, ScreenWidth- 23 -15, size1.height);
     riskProtocolLabel.text = @"本人阅读并悉知《网络借贷出借风险提示》中风险";
     riskProtocolLabel.userInteractionEnabled = YES;
     riskProtocolLabel.textColor = UIColorWithRGB(0x999999);
@@ -1454,7 +1481,7 @@
         }else{
             firstProtocolLabel.frame =CGRectZero;
             imageView1.frame  = CGRectZero;
-            riskProtocolLabel.frame = CGRectMake(23,CGRectGetMaxY(firstProtocolLabel.frame) + 10, ScreenWidth- 23 -15, size1.height);
+            riskProtocolLabel.frame = CGRectMake(23,orginY + 10, ScreenWidth- 23 -15, size1.height);
             imageView1.frame = CGRectMake(CGRectGetMinX(riskProtocolLabel.frame) - 7, CGRectGetMinY(riskProtocolLabel.frame) + 4, 5, 5);
             [footView addSubview:riskProtocolLabel];
             [footView addSubview:imageView1];
