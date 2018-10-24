@@ -158,6 +158,19 @@
     }
     return NO;
 }
+- (void)viewDidLayoutSubviews
+{
+    if (@available(iOS 11.0, *)) {
+        CGRect frame = _bidTableView.frame;
+        UIEdgeInsets ede = self.view.safeAreaInsets;
+        frame.origin.x = self.view.safeAreaInsets.left;
+        frame.size.width = self.view.frame.size.width - self.view.safeAreaInsets.left - self.view.safeAreaInsets.right;
+        frame.size.height = self.view.frame.size.height - self.view.safeAreaInsets.bottom - 67;
+        _bidTableView.frame = frame;
+        UIView *preView = (UIView *)[self.view viewWithTag:9000];
+        preView.frame = CGRectMake(0, CGRectGetMaxY(_bidTableView.frame), ScreenWidth, 67);
+    }
+}
 - (void)makeMainView
 {
     // 初始化优惠券数据
@@ -199,8 +212,10 @@
         isHasOverdueGongDou = NO;
     }
     
-    _bidTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - 64-67) style:UITableViewStylePlain];
+    _bidTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - 64 - 67) style:UITableViewStylePlain];
+
     
+
     _bidTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _bidTableView.delegate = self;
     _bidTableView.dataSource = self;

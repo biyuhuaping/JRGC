@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -25,7 +25,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PW4-3N-a24">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                    <rect key="frame" x="0.0" y="20" width="375" height="64"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="particular_bg_1" translatesAutoresizingMaskIntoConstraints="NO" id="5el-dl-UsO">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
@@ -64,7 +64,7 @@
                     </constraints>
                 </view>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dCg-HU-7Ze">
-                    <rect key="frame" x="0.0" y="64" width="375" height="546"/>
+                    <rect key="frame" x="0.0" y="84" width="375" height="526"/>
                     <color key="backgroundColor" red="0.93725490199999995" green="0.94117647059999998" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
                         <outlet property="delegate" destination="-1" id="X8k-BP-TfH"/>
@@ -110,18 +110,18 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="zGT-9D-Hp8" secondAttribute="trailing" id="6Ew-Nd-xlR"/>
                 <constraint firstItem="dCg-HU-7Ze" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="8DW-wN-dck"/>
                 <constraint firstItem="dCg-HU-7Ze" firstAttribute="top" secondItem="PW4-3N-a24" secondAttribute="bottom" id="Gwx-jn-ihi"/>
                 <constraint firstItem="zGT-9D-Hp8" firstAttribute="top" secondItem="dCg-HU-7Ze" secondAttribute="bottom" id="HVZ-wH-L5f"/>
+                <constraint firstItem="zGT-9D-Hp8" firstAttribute="bottom" secondItem="i5M-Pr-FkT" secondAttribute="bottomMargin" id="ahL-id-vMa"/>
                 <constraint firstAttribute="trailing" secondItem="PW4-3N-a24" secondAttribute="trailing" id="cf6-ZQ-9tR"/>
                 <constraint firstItem="PW4-3N-a24" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="dFm-NA-uCK"/>
                 <constraint firstAttribute="trailing" secondItem="dCg-HU-7Ze" secondAttribute="trailing" id="dQP-le-H3v"/>
                 <constraint firstItem="zGT-9D-Hp8" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="h9Z-2p-aLc"/>
-                <constraint firstItem="PW4-3N-a24" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="ohR-mD-cL6"/>
-                <constraint firstAttribute="bottom" secondItem="zGT-9D-Hp8" secondAttribute="bottom" id="yCR-nt-82M"/>
+                <constraint firstItem="PW4-3N-a24" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="topMargin" id="lo4-R1-nM0"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <point key="canvasLocation" x="-2433" y="-1167"/>

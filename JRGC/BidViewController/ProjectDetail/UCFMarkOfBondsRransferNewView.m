@@ -208,7 +208,8 @@
         state = @"12";
     }
     if (!_investmentView) {
-        _investmentView = [[UCFInvestmentView alloc] initWithFrame:CGRectMake(0, ScreenHeight - 67 - 64, ScreenWidth, 67) target:self action:@selector(investmentViewClick:) investmentState:state souceVc:_sourceVc isP2P:_isP2P];
+        CGFloat orrginY =  CGRectGetHeight(self.frame) - 67;
+        _investmentView = [[UCFInvestmentView alloc] initWithFrame:CGRectMake(0, orrginY, ScreenWidth, 67) target:self action:@selector(investmentViewClick:) investmentState:state souceVc:_sourceVc isP2P:_isP2P];
         //AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
         [self addSubview:_investmentView];
     }

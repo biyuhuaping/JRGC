@@ -71,6 +71,7 @@ typedef NS_ENUM(NSInteger, SelectAccoutType) {
 #define kIS_IOS7        ([[[UIDevice currentDevice] systemVersion] intValue]>=7)
 #define kIS_IOS8        ([[[UIDevice currentDevice] systemVersion] intValue]>=8)
 #define kIS_IOS9        ([[[UIDevice currentDevice] systemVersion] intValue]>=9)
+#define kIS_IOS11        ([[[UIDevice currentDevice] systemVersion] intValue]>=11)
 #define kIS_Iphone5     CGSizeEqualToSize([UIScreen mainScreen].preferredMode.size, CGSizeMake(640, 1136))
 #define kIS_Iphone4     (ScreenHeight > 480)
 #define CGRECT_NO_NAV(x,y,w,h)      CGRectMake((x), (y + (kIS_IOS7 ? StatusBarHeight:0)), (w), (h))
