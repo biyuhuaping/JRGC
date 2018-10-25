@@ -378,13 +378,7 @@
         [alert show];
         return;
     }
-    NSString  *limitAmountMess = [NSString stringWithFormat:@"%@",[_dataDict objectSafeForKey:@"limitAmount"]];
-    if ([limitAmountMess doubleValue] > 0.01) {
-        if ([Common stringA:investMoney ComparedStringB:limitAmountMess] == 1) {
-            [MBProgressHUD displayHudError:[_dataDict objectSafeForKey:@"limitAmountMess"]];
-            return;
-        }
-    }
+
     
     NSString *maxIn = [NSString stringWithFormat:@"%@",info1.maxInvest];
     if (maxIn.length != 0) {
@@ -1413,6 +1407,15 @@
     CGFloat orginY = 0;
     NSString  *limitAmountMess = [_dataDict objectSafeForKey:@"limitAmountMess"];
     if (limitAmountMess.length > 0) {
+        
+        NSString  *limitAmount = [NSString stringWithFormat:@"%@",[_dataDict objectSafeForKey:@"limitAmount"]];
+//        if ([limitAmountMess doubleValue] > 0.01) {
+//            if ([Common stringA:investMoney ComparedStringB:limitAmountMess] == 1) {
+//                [MBProgressHUD displayHudError:[_dataDict objectSafeForKey:@"limitAmountMess"]];
+//                return;
+//            }
+//        }
+        
         NZLabel *limitAmountMessLabel = [[NZLabel alloc] init];
         limitAmountMessLabel.font = [UIFont systemFontOfSize:12.0f];
         CGSize size = [Common getStrHeightWithStr:limitAmountMess AndStrFont:12 AndWidth:ScreenWidth- 23 -15];
@@ -1427,6 +1430,7 @@
         
         [footView addSubview:limitAmountMessLabel];
         [footView addSubview:imageView];
+        [limitAmountMessLabel setFontColor:UIColorWithRGB(0x4aa1f9) string:limitAmount];
         
         orginY = CGRectGetMaxY(limitAmountMessLabel.frame);
     }
