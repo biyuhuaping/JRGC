@@ -1397,6 +1397,12 @@
     }
     return investMoney;
 }
+- (NSString *)getNumberFromStr:(NSString *)str
+{
+    NSCharacterSet *nonDigitCharacterSet = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
+    return[[str componentsSeparatedByCharactersInSet:nonDigitCharacterSet] componentsJoinedByString:@""];
+}
+
 - (UIView *)createFootView
 {
     UIView *footView =[[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 98)];
@@ -1408,13 +1414,8 @@
     NSString  *limitAmountMess = [_dataDict objectSafeForKey:@"limitAmountMess"];
     if (limitAmountMess.length > 0) {
         
-        NSString  *limitAmount = [NSString stringWithFormat:@"%@",[_dataDict objectSafeForKey:@"limitAmount"]];
-//        if ([limitAmountMess doubleValue] > 0.01) {
-//            if ([Common stringA:investMoney ComparedStringB:limitAmountMess] == 1) {
-//                [MBProgressHUD displayHudError:[_dataDict objectSafeForKey:@"limitAmountMess"]];
-//                return;
-//            }
-//        }
+        NSCharacterSet* nonDigits =[[NSCharacterSet decimalDigitCharacterSet] invertedSet];
+        NSString  *limitAmount = [limitAmountMess stringByTrimmingCharactersInSet:nonDigits];
         
         NZLabel *limitAmountMessLabel = [[NZLabel alloc] init];
         limitAmountMessLabel.font = [UIFont systemFontOfSize:12.0f];
@@ -1430,7 +1431,7 @@
         
         [footView addSubview:limitAmountMessLabel];
         [footView addSubview:imageView];
-        [limitAmountMessLabel setFontColor:UIColorWithRGB(0x4aa1f9) string:limitAmount];
+        [limitAmountMessLabel setFontColor:UIColorWithRGB(0xf3ab47) string:limitAmount];
         
         orginY = CGRectGetMaxY(limitAmountMessLabel.frame);
     }
