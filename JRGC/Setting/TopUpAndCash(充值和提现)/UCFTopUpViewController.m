@@ -928,19 +928,7 @@
             isSpecial = [[dic[@"data"][@"bankInfo"] objectSafeForKey:@"isSpecial"] boolValue];
           BOOL isCompanyAgent  = [[dic[@"data"][@"bankInfo"] objectSafeForKey:@"isCompanyAgent"] boolValue];
             if (isSpecial || isCompanyAgent) {
-                //***以下方式为ios8 以上的方法可以用
-//                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"请直接转账至徽商电子账户"  preferredStyle:UIAlertControllerStyleAlert];
-//                UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
-//                    [self.navigationController popViewControllerAnimated:YES];
-//                }];
-//                UIAlertAction *checkAccountAction = [UIAlertAction actionWithTitle:@"查看账户" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-//                    UCFHuiShangBankViewController *subVC = [[UCFHuiShangBankViewController alloc] initWithNibName:@"UCFHuiShangBankViewController" bundle:nil];
-//                    subVC.rootVc = _uperViewController;
-//                    [self.navigationController pushViewController:subVC animated:YES];
-//                }];
-//                [alertController addAction:cancelAction];
-//                [alertController addAction:checkAccountAction];
-//                [self presentViewController:alertController animated:YES completion:nil];
+
                 UIAlertView *alerView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请直接转账至徽商电子账户" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"查看账户", nil];
                 alerView.tag = 1002;
                 [alerView show];
