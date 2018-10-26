@@ -581,6 +581,7 @@
                         NSDictionary *parameter = @{@"Id": model.Id, @"userId": [UserInfoSingle sharedManager].userId, @"proType": model.type,@"type":@"4",@"status":model.status};
                         [self.cycleImageVC.presenter fetchProDetailDataWithParameter:parameter completionHandler:^(NSError *error, id result) {
                             NSString *rstcode = [result objectForKey:@"status"];
+                            NSString *statusdes = [result objectForKey:@"statusdes"];
                             [MBProgressHUD hideOriginAllHUDsForView:weakSelf.view animated:YES];
                             if ([rstcode intValue] == 1) {
                                 UCFPurchaseBidViewController *purchaseViewController = [[UCFPurchaseBidViewController alloc] initWithNibName:@"UCFPurchaseBidViewController" bundle:nil];
@@ -591,6 +592,8 @@
                                 purchaseViewController.accoutType = self.accoutType;
                                 purchaseViewController.rootVc = self;
                                 [weakSelf.navigationController pushViewController:purchaseViewController animated:YES];
+                            } else {
+                                [MBProgressHUD displayHudError:statusdes withShowTimes:3];
                             }
                         }];
                         
