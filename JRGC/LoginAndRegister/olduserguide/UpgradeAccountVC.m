@@ -509,7 +509,8 @@
             isGotoChooseBankVC = YES;
         }
     }else{
-        if(self.accoutType == SelectAccoutTypeP2P &&  indexPath.row == 2)
+
+        if((self.accoutType == SelectAccoutTypeP2P &&  indexPath.row == 2) || ([UserInfoSingle sharedManager].openStatus == 2 && indexPath.row == 3))
         {
             isGotoChooseBankVC = YES;
         }
