@@ -388,4 +388,8 @@
                     }
                     completion:nil];
 }
+- (void)viewWillLayoutSubviews
+{
+    self.tabBar.frame = CGRectMake(0, ScreenHeight - kTabBarHeight, ScreenWidth, kTabBarHeight);
+}
 @end

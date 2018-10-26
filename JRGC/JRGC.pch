@@ -61,6 +61,12 @@ typedef NS_ENUM(NSInteger, SelectAccoutType) {
 
 #define ScreenWidth     [[UIScreen mainScreen] bounds].size.width
 #define ScreenHeight    [[UIScreen mainScreen] bounds].size.height
+
+#define kIs_iphone (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+#define kIs_iPhoneX   ScreenWidth >=375.0f && ScreenHeight >=812.0f&& kIs_iphone
+/*TabBar高度*/
+#define kTabBarHeight (CGFloat)(kIs_iPhoneX?(49.0 + 34.0):(49.0))
+
 #define BidDetailScrollViewHeight    [[UIScreen mainScreen] bounds].size.height - 57 - 64
 #define TabBarHeight            49
 #define StatusBarHeight         80
