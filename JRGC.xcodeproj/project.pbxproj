@@ -706,9 +706,6 @@
 		8346B2701F71032100219D41 /* UCFRechargeAndCashView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8346B26F1F71032100219D41 /* UCFRechargeAndCashView.m */; };
 		8346B2721F71033000219D41 /* UCFRechargeAndCashView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8346B2711F71033000219D41 /* UCFRechargeAndCashView.xib */; };
 		8346B2751F71246800219D41 /* UCFAccoutCardModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8346B2741F71246800219D41 /* UCFAccoutCardModel.m */; };
-		8346B4F82017145C00544D78 /* guideImage8_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8346B4F52017145B00544D78 /* guideImage8_2.png */; };
-		8346B4F92017145C00544D78 /* guideImage6_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8346B4F62017145C00544D78 /* guideImage6_2.png */; };
-		8346B4FA2017145C00544D78 /* guideImage7_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8346B4F72017145C00544D78 /* guideImage7_2.png */; };
 		8347A6CB1FAFFFB500E68DFD /* UCFExtractViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8347A6C91FAFFFB500E68DFD /* UCFExtractViewCell.xib */; };
 		835B88851E8220CC00C8F0AB /* UCFP2POrHonerAccoutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 835B88831E8220CC00C8F0AB /* UCFP2POrHonerAccoutViewController.m */; };
 		835B88861E8220CC00C8F0AB /* UCFP2POrHonerAccoutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 835B88841E8220CC00C8F0AB /* UCFP2POrHonerAccoutViewController.xib */; };
@@ -2268,9 +2265,6 @@
 		8346B2711F71033000219D41 /* UCFRechargeAndCashView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFRechargeAndCashView.xib; sourceTree = "<group>"; };
 		8346B2731F71246800219D41 /* UCFAccoutCardModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFAccoutCardModel.h; sourceTree = "<group>"; };
 		8346B2741F71246800219D41 /* UCFAccoutCardModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFAccoutCardModel.m; sourceTree = "<group>"; };
-		8346B4F52017145B00544D78 /* guideImage8_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guideImage8_2.png; sourceTree = "<group>"; };
-		8346B4F62017145C00544D78 /* guideImage6_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guideImage6_2.png; sourceTree = "<group>"; };
-		8346B4F72017145C00544D78 /* guideImage7_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guideImage7_2.png; sourceTree = "<group>"; };
 		8347A6C71FAFFFB500E68DFD /* UCFExtractViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFExtractViewCell.h; sourceTree = "<group>"; };
 		8347A6C81FAFFFB500E68DFD /* UCFExtractViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFExtractViewCell.m; sourceTree = "<group>"; };
 		8347A6C91FAFFFB500E68DFD /* UCFExtractViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFExtractViewCell.xib; sourceTree = "<group>"; };
@@ -6655,11 +6649,8 @@
 			isa = PBXGroup;
 			children = (
 				A88490461FA72352004B6E71 /* guideImage8_1.png */,
-				8346B4F52017145B00544D78 /* guideImage8_2.png */,
 				FB51494C1D64441F00C26E7B /* guideImage6_1.png */,
-				8346B4F62017145C00544D78 /* guideImage6_2.png */,
 				FB51494F1D64441F00C26E7B /* guideImage7_1.png */,
-				8346B4F72017145C00544D78 /* guideImage7_2.png */,
 			);
 			name = guiviewImage;
 			path = Images/guiviewImage;
@@ -7006,7 +6997,6 @@
 				A85C74E61F90EE3500DF7D6A /* home_icon_zhaizhuan.png in Resources */,
 				A85C74E51F90EE2C00DF7D6A /* home_icon_yuyue.png in Resources */,
 				A85C74E41F90EE2200DF7D6A /* home_icon_weijin.png in Resources */,
-				8346B4F82017145C00544D78 /* guideImage8_2.png in Resources */,
 				A85C74D91F90ED9F00DF7D6A /* home_icon_gold.png in Resources */,
 				A830DE821F8DD9F7003855B9 /* UCFCalendarModularViewController.xib in Resources */,
 				A8386E3F1F8CCDF200E26002 /* login_bg_phone4_default.png in Resources */,
@@ -7201,7 +7191,6 @@
 				74BDA9941F09F6C60054403F /* Info.plist in Resources */,
 				7477BF911AFAFED900914BFB /* UCFRedEnvelopeTableViewCell.xib in Resources */,
 				83DAEFC31F166A3B00D7948F /* UCFGoldAuthorizationViewController.xib in Resources */,
-				8346B4F92017145C00544D78 /* guideImage6_2.png in Resources */,
 				8366BFBA1E151745008D027F /* UCFCashRecordCell.xib in Resources */,
 				833CC9F01FD6A7B2006BF624 /* UCFProjectBasicDetailViewController.xib in Resources */,
 				FB21731A1AF20DFC00649AA0 /* UCFBackMoneyCell.xib in Resources */,
@@ -7245,7 +7234,6 @@
 				74A2C0D71F4306A000EDF0FA /* UCFGoldCashSecondCell.xib in Resources */,
 				74270C9E1EC58F6800F9419B /* UCFHomeListCell.xib in Resources */,
 				74673BC21FEB8C2200AF3727 /* UCFMineFuncView.xib in Resources */,
-				8346B4FA2017145C00544D78 /* guideImage7_2.png in Resources */,
 				74FA211A1F4C0BA100037991 /* UCFGoldIncreTransListCell.xib in Resources */,
 				747BE9D31D5B0F48007DEF32 /* UCFHuiBuinessDetailViewController.xib in Resources */,
 				74270D311EC595FA00F9419B /* UCFDataStatisticsViewController.xib in Resources */,
