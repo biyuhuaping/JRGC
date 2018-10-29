@@ -593,7 +593,6 @@
             [LockFlagSingle sharedManager].netVersion = netVersion;
             //是否强制更新 0强制 1随便 2不稳定
             NSInteger versionMark = [[dic objectSafeForKey:@"forceUpdateOnOff"] integerValue];
-            
             NSDictionary *infoDic = [[NSBundle mainBundle] infoDictionary];
             NSString *currentVersion = infoDic[@"CFBundleShortVersionString"];
             NSComparisonResult comparResult = [netVersion compare:currentVersion options:NSNumericSearch];

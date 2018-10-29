@@ -255,8 +255,11 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if ([UserInfoSingle sharedManager].isSubmitTime) {
+        UCFHomeListGroupPresenter *groupPresenter = [self.presenter.allDatas objectAtIndex:indexPath.section];
+        UCFHomeListCellPresenter *presenter = [groupPresenter.group.prdlist objectAtIndex:indexPath.row];
+//        NSString *userId = [UserInfoSingle sharedManager].userId;
         if ([self.delegate respondsToSelector:@selector(homeList:tableView:didClickedWithModel:withType:)]) {
-            [self.delegate homeList:self tableView:self.tableView didClickedWithModel:nil withType:UCFHomeListTypeDetail];
+            [self.delegate homeList:self tableView:self.tableView didClickedWithModel:presenter.item withType:UCFHomeListTypeDetail];
         }
     } else {
         UCFHomeListGroupPresenter *groupPresenter = [self.presenter.allDatas objectAtIndex:indexPath.section];
