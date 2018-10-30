@@ -124,6 +124,7 @@
         [self getAdversementImageStyle:3];
     }
     
+    
     BOOL islaunch= [GuideViewController isShow];
     if (islaunch) {
         [self showGuidePageController];
