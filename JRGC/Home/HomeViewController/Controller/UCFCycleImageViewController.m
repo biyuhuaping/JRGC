@@ -250,6 +250,11 @@ static NSString *cellId = @"iconCell";
         model.noticeUrl = [Common isNullValue:modelDic[@"siteNoticeMap"][@"noticeUrl"]] ? @"" : modelDic[@"siteNoticeMap"][@"noticeUrl"];
         model.siteNotice = [Common isNullValue:modelDic[@"siteNoticeMap"][@"siteNotice"]] ? @"" : modelDic[@"siteNoticeMap"][@"siteNotice"];
 
+        NSDictionary *giftDict = modelDic[@"giftBanner"][0];
+        if ([giftDict allKeys].count > 0) {
+            [[NSUserDefaults standardUserDefaults] setObject:giftDict forKey:@"AD_ACTIViTY_DIC_NEW"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
         
         self.noticeView.noticeModel = model;
         self.noticeView.noticeLabell.text = model.siteNotice;
