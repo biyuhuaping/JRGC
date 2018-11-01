@@ -280,7 +280,7 @@
     if (alertView.tag == 1001) {
         if (buttonIndex == 1) {
             [alertView dismissWithClickedButtonIndex:0 animated:NO];
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"telprompt://4006766988"]];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"telprompt://4000322988"]];
         }
     }else {
         if (buttonIndex == 0) {

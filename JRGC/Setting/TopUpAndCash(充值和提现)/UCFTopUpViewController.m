@@ -529,7 +529,7 @@
     if (self.accoutType == SelectAccoutTypeHoner) {
          [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"telprompt://4000322988"]];
     } else {
-         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"telprompt://4006766988"]];
+         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"telprompt://4000322988"]];
     }
     
    

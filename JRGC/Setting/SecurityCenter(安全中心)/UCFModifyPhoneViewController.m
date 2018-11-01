@@ -368,7 +368,7 @@
             break;
         case 200: {
             if (buttonIndex == 1) {
-                NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"telprompt://%@",@"4006766988"];
+                NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"telprompt://%@",@"4000322988"];
                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
             }
         }

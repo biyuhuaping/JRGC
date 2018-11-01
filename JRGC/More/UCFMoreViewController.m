@@ -50,12 +50,12 @@ static NSString * const kAppSecret = @"10dddec2bf7d3be794eda13b0df0a7d9";
     if (_itemsData == nil) {
         
         UCFSettingItem *contactUs = [UCFSettingArrowItem itemWithIcon:nil title:@"客服电话" destVcClass:nil];
-        contactUs.subtitle = @"400-6766-988";
+        contactUs.subtitle = @"400-0322-988";
         contactUs.option = ^{
             
 //            UIActionSheet *alert = [[UIActionSheet alloc] initWithTitle:@"请选择客服电话" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"010-65255966",@"400-0322-988", nil];
 //            [alert showInView:self.view];
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"联系客服" message:@"呼叫400-6766-988" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"立即拨打", nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"联系客服" message:@"呼叫400-0322-988" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"立即拨打", nil];
             [alert show];
         };
 //        UCFSettingItem *problemFeedback = [UCFSettingArrowItem itemWithIcon:nil title:@"问题反馈" destVcClass:nil];
@@ -204,13 +204,13 @@ static NSString * const kAppSecret = @"10dddec2bf7d3be794eda13b0df0a7d9";
 {
 //    UIActionSheet *alert = [[UIActionSheet alloc] initWithTitle:@"请选择客服电话" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"010-65255966",@"400-0322-988", nil];
 //    [alert showInView:self.view];
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"联系客服" message:@"呼叫400-6766-988" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"立即拨打", nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"联系客服" message:@"呼叫400-0322-988" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"立即拨打", nil];
     [alert show];
 }
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex == 1) {
-        NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"4006766988"];
+        NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"4000322988"];
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
     }
 }
@@ -220,7 +220,7 @@ static NSString * const kAppSecret = @"10dddec2bf7d3be794eda13b0df0a7d9";
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
     }
     else if (buttonIndex == 1) {
-        NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"4006766988"];
+        NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"4000322988"];
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
     }
 }

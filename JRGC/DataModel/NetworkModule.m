@@ -793,7 +793,7 @@ static NetworkModule *gInstance = NULL;
         self.isShowSingleAlert = YES;
     } else if (alertView.tag == 0x101) {
         if (buttonIndex == 0) {
-            NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"4006766988"];
+            NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"4000322988"];
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
             AppDelegate *app = (AppDelegate *) [[UIApplication sharedApplication] delegate];
             NSUInteger selectedIndex = app.tabBarController.selectedIndex;

@@ -627,7 +627,7 @@
 #pragma mark -方法- 拨打电话
 - (void)tappedTelePhone
 {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"telprompt://400-6766-988"]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"telprompt://400-0322-988"]];
 }
 /**
  *  计算文字尺寸

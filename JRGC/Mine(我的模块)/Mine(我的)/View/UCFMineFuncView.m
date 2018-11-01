@@ -65,17 +65,18 @@
     
     //联系我们
     UCFSettingItem *contactUs = [UCFSettingArrowItem itemWithIcon:@"uesr_icon_contact" title:@"联系我们" destVcClass:nil];
-    if ([UserInfoSingle sharedManager].superviseSwitch) {
-        if ([UserInfoSingle sharedManager].level <= 1 && [UserInfoSingle sharedManager].zxIsNew && [UserInfoSingle sharedManager].goldIsNew) {
-            contactUs.subtitle = @"400-6766-988";
-        }
-        else {
-            contactUs.subtitle = @"400-0322-988";
-        }
-    }
-    else {
-        contactUs.subtitle = @"400-0322-988";
-    }
+//    if ([UserInfoSingle sharedManager].superviseSwitch) {
+//        if ([UserInfoSingle sharedManager].level <= 1 && [UserInfoSingle sharedManager].zxIsNew && [UserInfoSingle sharedManager].goldIsNew) {
+//            contactUs.subtitle = @"400-6766-988";
+//        }
+//        else {
+//            contactUs.subtitle = @"400-0322-988";
+//        }
+//    }
+//    else {
+//        contactUs.subtitle = @"400-0322-988";
+//    }
+    contactUs.subtitle = @"400-0322-988";
     if ([UserInfoSingle sharedManager].isShowCouple) {
         _dataArray = [[NSMutableArray alloc] initWithArray:@[facPoint,sign, facBean,profitInvest, coupon,    addProfitCalculator, assetProof, contactUs]];
     } else {
