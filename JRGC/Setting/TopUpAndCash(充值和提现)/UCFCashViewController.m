@@ -1135,9 +1135,14 @@
         }
         
     }else{
+        
         if (index == 1) {
-            [self isShowRedAlertView];
-//            [self withdrawalAmountIsExceedsTheLimitHttPRequest];
+            if (self.accoutType == SelectAccoutTypeHoner) {
+                [self isShowRedAlertView];
+            } else {
+                [self withdrawalAmountIsExceedsTheLimitHttPRequest];
+            }
+            
         }
     }
    
