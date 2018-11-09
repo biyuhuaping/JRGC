@@ -586,17 +586,17 @@
     
     NZLabel *riskProtocolLabel = [[NZLabel alloc] init];
     riskProtocolLabel.font = [UIFont systemFontOfSize:12.0f];
-    CGSize size1 = [Common getStrHeightWithStr:@"本人阅读并悉知《网络借贷出借风险提示》中风险" AndStrFont:12 AndWidth:ScreenWidth- 23 -15];
+    CGSize size1 = [Common getStrHeightWithStr:@"本人阅读并悉知《网络借贷出借风险及禁止性行为提示》中风险" AndStrFont:12 AndWidth:ScreenWidth- 23 -15];
     riskProtocolLabel.numberOfLines = 0;
     riskProtocolLabel.frame = CGRectMake(23, CGRectGetMaxY(firstProtocolLabel.frame) + 10, ScreenWidth- 23 -15, size1.height);
-    riskProtocolLabel.text = @"本人阅读并悉知《网络借贷出借风险提示》中风险";
+    riskProtocolLabel.text = @"本人阅读并悉知《网络借贷出借风险及禁止性行为提示》中风险";
     riskProtocolLabel.userInteractionEnabled = YES;
     riskProtocolLabel.textColor = UIColorWithRGB(0x999999);
     
-    [riskProtocolLabel addLinkString:@"《网络借贷出借风险提示》" block:^(ZBLinkLabelModel *linkModel) {
+    [riskProtocolLabel addLinkString:@"《网络借贷出借风险及禁止性行为提示》" block:^(ZBLinkLabelModel *linkModel) {
         [weakSelf showHeTong:linkModel];
     }];
-    [riskProtocolLabel setFontColor:UIColorWithRGB(0x4aa1f9) string:@"《网络借贷出借风险提示》"];
+    [riskProtocolLabel setFontColor:UIColorWithRGB(0x4aa1f9) string:@"《网络借贷出借风险及禁止性行为提示》"];
     UIImageView * imageView1 = [[UIImageView alloc] init];
     imageView1.frame = CGRectMake(CGRectGetMinX(riskProtocolLabel.frame) - 7, CGRectGetMinY(riskProtocolLabel.frame) + 4, 5, 5);
     imageView1.image = [UIImage imageNamed:@"point.png"];
@@ -731,8 +731,8 @@
 - (void)showHeTong:(ZBLinkLabelModel *)linkModel
 {
     NSString *contractNameStr = linkModel.linkString;
-    if ([contractNameStr isEqualToString:@"《网络借贷出借风险提示》"]) {
-        [self showContractWebViewUrl:PROTOCOLRISKPROMPT withTitle:@"网络借贷出借风险提示"];
+    if ([contractNameStr isEqualToString:@"《网络借贷出借风险及禁止性行为提示》"]) {
+        [self showContractWebViewUrl:PROTOCOLRISKPROMPT withTitle:@"网络借贷出借风险及禁止性行为提示"];
     }else if ([contractNameStr isEqualToString:@"《CFCA数字证书服务协议》"]) {
         NSString *urlStr  =[_dataDict objectSafeForKey:@"cfcaContractUrl"];
         [self showContractWebViewUrl:urlStr withTitle:@"CFCA数字证书服务协议"];

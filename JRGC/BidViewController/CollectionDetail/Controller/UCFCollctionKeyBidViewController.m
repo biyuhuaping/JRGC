@@ -1272,7 +1272,7 @@
     imageView1.image = [UIImage imageNamed:@"point.png"];
     
     CGFloat height1 = CGRectGetMaxY(label1.frame);
-    NSArray *downContractList = @[@"网络借贷出借风险提示"];
+    NSArray *downContractList = @[@"网络借贷出借风险及禁止性行为提示"];
     NZLabel *label2 = [[NZLabel alloc] init];
     NSString *firstStr = @"本人已阅读并知悉";
     if (downContractList.count > 0) {
@@ -1409,8 +1409,8 @@
 //    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagGetContractMsg owner:self Type:SelectAccoutTypeP2P];
     
     NSString *contractStr = linkModel.linkString;
-    if ([contractStr isEqualToString:@"《网络借贷出借风险提示》"]) {
-        [self showContractWebViewUrl:PROTOCOLRISKPROMPT withTitle:@"网络借贷出借风险提示"];
+    if ([contractStr isEqualToString:@"《网络借贷出借风险及禁止性行为提示》"]) {
+        [self showContractWebViewUrl:PROTOCOLRISKPROMPT withTitle:@"网络借贷出借风险及禁止性行为提示"];
     }else if([contractStr isEqualToString:@"《出借人承诺书》"]){
         [self showContractWebViewUrl:PROTOCOLENDERPROMISE withTitle:@"出借人承诺书"];
     }else if([contractStr isEqualToString:@"《履行反洗钱义务的承诺书》"]){
