@@ -263,7 +263,13 @@
             if (self.gongDouSwitch.on == NO) {
                 gondDouBalance = 0;
             }
-            NSString *totalMoney = [UCFToolsMehod AddComma:[NSString stringWithFormat:@"%.2lf",availableBalance + gondDouBalance/100.0f]];
+            NSString *totalMoney = @"";
+            if ([UserInfoSingle sharedManager].isShowCouple) {
+                totalMoney = [UCFToolsMehod AddComma:[NSString stringWithFormat:@"%.2lf",availableBalance + gondDouBalance/100.0f]];
+            } else {
+                totalMoney = [UCFToolsMehod AddComma:[NSString stringWithFormat:@"%.2lf",availableBalance]];
+            }
+            
             self.KeYongMoneyLabel.text = [NSString stringWithFormat:@"¥%@",totalMoney];
             CGSize size = [Common getStrWitdth:self.KeYongMoneyLabel.text TextFont:_KeYongMoneyLabel.font];
             self.KeYongMoneyLabel.frame = CGRectMake(CGRectGetMinX(self.KeYongMoneyLabel.frame), CGRectGetMinY(self.KeYongMoneyLabel.frame), size.width, CGRectGetHeight(self.KeYongMoneyLabel.frame));
@@ -276,10 +282,11 @@
             }
         }else{
             
-            BOOL bankNumEq = [[_dataDict objectSafeForKey:@"bankNumEq"] boolValue];
+//            BOOL bankNumEq = [[_dataDict objectSafeForKey:@"bankNumEq"] boolValue];
             
 //            _totalKeYongTipLabel.text = bankNumEq ? @"(尊享余额+微金余额+我的工豆)"  : @"(我的余额+我的工豆)" ;
-            _totalKeYongTipLabel.text = bankNumEq ? @"(我的余额+我的工豆)"  : @"(我的余额+我的工豆)" ;
+
+            _totalKeYongTipLabel.text = [UserInfoSingle sharedManager].isShowCouple ? @"(我的余额+我的工豆)"  : @"" ;
             _prdLabelsList =  [[_dataDict objectSafeDictionaryForKey:@"data"] objectSafeArrayForKey:@"prdLabelsList"];;
             NSMutableArray *labelPriorityArr = [NSMutableArray arrayWithCapacity:4];
             if (![_prdLabelsList isEqual:[NSNull null]]) {
@@ -321,7 +328,12 @@
         if (self.gongDouSwitch.on == NO) {
             gondDouBalance = 0;
         }
-        NSString *totalMoney = [UCFToolsMehod AddComma:[NSString stringWithFormat:@"%.2lf",availableBalance + gondDouBalance/100.0f]];
+        NSString *totalMoney = @"";
+        if ([UserInfoSingle sharedManager].isShowCouple) {
+            totalMoney = [UCFToolsMehod AddComma:[NSString stringWithFormat:@"%.2lf",availableBalance + gondDouBalance/100.0f]];
+        } else {
+            totalMoney = [UCFToolsMehod AddComma:[NSString stringWithFormat:@"%.2lf",availableBalance]];
+        }
         self.KeYongMoneyLabel.text = [NSString stringWithFormat:@"¥%@",totalMoney];
         CGSize size = [Common getStrWitdth:self.KeYongMoneyLabel.text TextFont:_KeYongMoneyLabel.font];
             

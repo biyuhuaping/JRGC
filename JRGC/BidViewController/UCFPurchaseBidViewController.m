@@ -165,13 +165,7 @@
 - (void)makeMainView
 {
     // 初始化优惠券数据
-//    youhuiDict = [NSMutableDictionary dictionaryWithCapacity:1];
-//    [youhuiDict setValue: @"请手动勾选优惠券" forKey:@"youHuiShow"];
-//    [youhuiDict setValue:@"0" forKey:@"couponSum"];
-//    [youhuiDict setValue:@"0" forKey:@"couponPrdaimSum"];
-//    [youhuiDict setValue:@"0" forKey:@"couponCount"];
-//    [youhuiDict setValue:@"" forKey:@"showMessage"];
-//    self.beanIds = @"";
+
     //判断是否第一次投资
     isFirstInvest = [self checkIsFirstInvest];
     isHasOverdueGongDou = [self checkOverdueGongDou];
@@ -183,8 +177,6 @@
     //是否有返息券
     isHaveCouponNum = [couponNum isEqualToString:@""] || [couponNum isEqualToString:@"0"]  ? NO : YES;
     isCompanyAgent = [[_dataDict objectForKey:@"isCompanyAgent"] boolValue];
-
-    
     InvestmentItemInfo * info1 = [[InvestmentItemInfo alloc] initWithDictionary:[_dataDict objectForKey:@"data"]];
     self.bidArray = [NSMutableArray array];
     [self.bidArray addObject:info1];
@@ -205,7 +197,13 @@
     
     double gondDouBalance = [[[_dataDict objectSafeDictionaryForKey:@"beanUser"] objectForKey:@"availableBalance"] doubleValue];
     if ((int)gondDouBalance > 0) {
+   
         isGongDouSwitch = YES;
+        if (![UserInfoSingle sharedManager].isShowCouple) {
+            isGongDouSwitch = NO;
+        }
+        
+
     }
 //    if (isCompanyAgent) {如果是企业
 //        isHaveCashNum = NO;
@@ -817,7 +815,7 @@
             return 109.0f;
         } else if (indexPath.row == 1) {
             float height = 201.0f+36.0f+[self getSectionHight];//36为倒计时view的高度
-            if (isCompanyAgent) { //机构用户需要把工豆隐藏
+            if (isCompanyAgent || ![UserInfoSingle sharedManager].isShowCouple) { //机构用户需要把工豆隐藏 或者 
                 height = height - 44.0f;
             }
             if(!_isP2P){
@@ -899,8 +897,13 @@
             cell = [[MoneyBoardCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellStr2 isCollctionKeyBid:!_isP2P];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.delegate = self;
+            
             double gondDouBalance = [[[_dataDict objectSafeDictionaryForKey:@"beanUser"] objectForKey:@"availableBalance"] doubleValue];
+            if (![UserInfoSingle sharedManager].isShowCouple) {
+                gondDouBalance = -1;
+            }
             if (gondDouBalance > 0.0f) {
+
                 cell.gongDouSwitch.on = YES;
             } else {
                 cell.gongDouSwitch.userInteractionEnabled = NO;
@@ -910,7 +913,9 @@
                 cell.minuteCountDownView.timeInterval = [[_dataDict objectSafeForKey:@"intervalMilli"] integerValue];
             }
         }
-        cell.isCompanyAgent = isCompanyAgent;
+        
+        cell.isCompanyAgent = isCompanyAgent || ![UserInfoSingle sharedManager].isShowCouple;
+        
         if (isGongDouSwitch) {
             cell.gongDouAccout.textColor = UIColorWithRGB(0x333333);
             cell.gongDouCountLabel.textColor = UIColorWithRGB(0x333333);
