@@ -154,6 +154,7 @@
         [self prepareTouchID];
         //绘制有touchID的界面
         [self initTouchIDLockView];
+        [self openTouchId:nil];
     } else { 
         [self initLockView];
     }
@@ -181,96 +182,91 @@
 //启动touchID 进行验证
 - (void)openTouchId:(UIButton *)button
 {
-    
+    // 判断系统是否是iOS8.0以上 8.0以上可用
+    if (!([[UIDevice currentDevice]systemVersion].doubleValue >= 8.0)) {
+        NSLog(@"系统不支持");
+        return;
+    }
     LAContext *lol = [[LAContext alloc] init];
     lol.localizedFallbackTitle = @"";
     NSError *error = nil;
     NSString *showStr = @"通过home键验证已有手机指纹";
+    [lol canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&error];
+    if (error.code == LAErrorTouchIDLockout && kIS_IOS9) {
+        [lol evaluatePolicy:LAPolicyDeviceOwnerAuthentication localizedReason:@"重新开启TouchID功能" reply:^(BOOL success, NSError * _Nullable error) {
+            if (success) {
+                [self openTouchId:nil];
+            }
+        }];
+        return;
+    }
     //TODO:TOUCHID是否存在
-    if ([lol canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&error]) {
         //TODO:TOUCHID开始运作
         [lol evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics localizedReason:showStr reply:^(BOOL succes, NSError *error)
          {
-             if (succes) {
-                 NSLog(@"指纹验证成功");
-                 [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+             dispatch_async(dispatch_get_main_queue(), ^{
+                 if (succes) {
+                     NSLog(@"指纹验证成功");
                      [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isUserShowTouchIdLockView"];
                      [[NSUserDefaults standardUserDefaults] synchronize];
                      [self hide];
                      if (_nLockViewType == LLLockViewTypeCreate) {
                          [MBProgressHUD displayHudError:@"您已成功开启指纹解锁" withShowTimes:2];
                      }
-                 }];
-             }
-             else
-             {
-                 NSLog(@"%@",error.localizedDescription);
-                 switch (error.code) {
-                     case LAErrorSystemCancel:
-                     {
-                         NSLog(@"Authentication was cancelled by the system");
-                         //切换到其他APP，系统取消验证Touch ID
-                         break;
-                     }
-                     case LAErrorUserCancel:
-                     {
-                         NSLog(@"Authentication was cancelled by the user");
-                         //用户取消验证Touch ID
-                         if (_nLockViewType == LLLockViewTypeModify || _nLockViewType == LLLockViewTypeCreate) {
-                             [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                                 [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isUserShowTouchIdLockView"];
-                                 [[NSUserDefaults standardUserDefaults] synchronize];
-                                 [self hide];
-                             }];
+          
+                 } else {
+                     if (error) {
+                         switch (error.code) {
+                             case LAErrorUserCancel:
+                                 NSLog(@"Authentication was cancelled by the user");
+                                 //用户取消验证Touch ID
+                                 if (_nLockViewType == LLLockViewTypeModify || _nLockViewType == LLLockViewTypeCreate) {
+                                     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                                         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isUserShowTouchIdLockView"];
+                                         [[NSUserDefaults standardUserDefaults] synchronize];
+                                         [self hide];
+                                     }];
+                                 }
+                                 break;
+                             case LAErrorTouchIDLockout:
+                                 if (kIS_IOS9) {
+                                     [self openTouchId:nil];
+                                 }
+                                 break;
+
+                             case LAErrorAuthenticationFailed:
+                                 NSLog(@"LAErrorAuthenticationFailed");
+                                 break;
+                             case LAErrorUserFallback:
+                                 // 用户点击输入密码按钮
+                                 NSLog(@"1111");
+                                 break;
+                             case LAErrorPasscodeNotSet:
+                                 //没有在设备上设置密码
+                                 NSLog(@"1111");
+                                 break;
+                             case LAErrorTouchIDNotAvailable:
+                                 //设备不支持TouchID
+                                 NSLog(@"1111");
+                                 break;
+                             case LAErrorTouchIDNotEnrolled:
+                                 NSLog(@"1111");
+                                 break;
+                             default:
+                                 if (_nLockViewType == LLLockViewTypeModify || _nLockViewType == LLLockViewTypeCreate) {
+                                     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isUserShowTouchIdLockView"];
+                                     [[NSUserDefaults standardUserDefaults] synchronize];
+                                     [self hide];
+                                 }
+                                 break;
                          }
-                         break;
-                     }
-                     case LAErrorUserFallback:
-                     {
-                         NSLog(@"User selected to enter custom password");
-                         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                             //用户选择输入密码，切换主线程处理
-                         }];
-                         break;
-                     }
-                     default:
-                     {
-                         if (_nLockViewType == LLLockViewTypeModify || _nLockViewType == LLLockViewTypeCreate) {
-                             [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                                [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isUserShowTouchIdLockView"];
-                                [[NSUserDefaults standardUserDefaults] synchronize];
-                                 [self hide];
-                             }];
-                         }
-                         break;
+                         return ;
                      }
                  }
-             }
-         }];
-        
-    }
-    else
-    {
-        switch (error.code) {
-            case LAErrorTouchIDNotEnrolled:
-            {
-                NSLog(@"TouchID is not enrolled");
-                break;
-            }
-            case LAErrorPasscodeNotSet:
-            {
-                //没有touchID 的报错
-                NSLog(@"A passcode has not been set");
-                break;
-            }
-            default:
-            {
-                NSLog(@"TouchID not available");
-                break;
-            }
-        }
-    }
+             });
 
+             
+         }];
 }
 //切换到指纹解锁页面
 - (void)changeScrollViewOffSet:(UIButton *)button
