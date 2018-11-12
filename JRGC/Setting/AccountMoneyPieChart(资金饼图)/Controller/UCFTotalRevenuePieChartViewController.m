@@ -119,6 +119,7 @@
             pieChatModel2.pieChartTitleArray = [[NSMutableArray alloc]initWithArray:@[@"已收利息(元)",@"已用返现券(元)",@"已用工豆(元)",@"余额利息(元)", @"黄金余额盈亏(元)"]];
             if (![UserInfoSingle sharedManager].isShowCouple) {
                 [pieChatModel2.pieChartTitleArray  removeObjectAtIndex:1];
+                [pieChatModel2.pieChartTitleArray  removeObject:@"已用工豆(元)"];
             }
             if([UserInfoSingle sharedManager].superviseSwitch)//监管开关打开
             {
