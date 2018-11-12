@@ -249,8 +249,9 @@ return shared##className; \
 #define P2PTIP2 @"请先设置微金徽商存管账户交易密码"
 //================== 调试宏 ==================
 #ifdef DEBUG
-# define DBLOG(fmt, ...) NSLog((@"\n-—————函数名:%s"  "行号:%d\n-—————" fmt), __FUNCTION__, __LINE__, ##__VA_ARGS__);
-# define DBLog(fmt, ...) NSLog((@"\n-—————函数名:%s"  "行号:%d\n-—————" fmt), __FUNCTION__, __LINE__, ##__VA_ARGS__);
+# define DBLOG(format, ...) printf("\n\n--->********************打印内容******************************\n--->class: %p \n--->文件名: < %s:(行号%d) > \n--->函数名: %s \n--->打印数据:\n%s\n********************打印结束******************************<---\n\n\n", self, [[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String], __LINE__, __PRETTY_FUNCTION__, [[NSString stringWithFormat:(format), ##__VA_ARGS__] UTF8String] );
+
+# define DBLog(format, ...) printf("\n\n--->********************打印内容******************************\n--->class: %p \n--->文件名: < %s:(行号%d) > \n--->函数名: %s \n--->打印数据:\n%s\n********************打印结束******************************<---\n\n", self, [[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String], __LINE__, __PRETTY_FUNCTION__, [[NSString stringWithFormat:(format), ##__VA_ARGS__] UTF8String] );
 #else
 # define DBLOG(...);
 # define DBLog(...);

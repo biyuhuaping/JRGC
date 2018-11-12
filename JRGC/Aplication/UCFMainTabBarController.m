@@ -247,6 +247,9 @@
     if ([self.viewControllers indexOfObject:viewController] == 3) {
         NSString *userId = [UserInfoSingle sharedManager].userId;
         if(nil == userId) {
+            
+
+            
             UCFLoginViewController *loginViewController = [[UCFLoginViewController alloc] init];
             BaseNavigationViewController *loginNaviController = [[BaseNavigationViewController alloc] initWithRootViewController:loginViewController];
             loginViewController.sourceVC = @"homePage";
@@ -254,6 +257,11 @@
             [Touch3DSingle sharedTouch3DSingle].isLoad = NO;
             return NO;
         } else {
+            [[NSURLCache sharedURLCache] removeAllCachedResponses];
+            NSURLCache * cache = [NSURLCache sharedURLCache];
+            [cache removeAllCachedResponses];
+            [cache setDiskCapacity:0];
+            [cache setMemoryCapacity:0];
             UCFWebViewJavascriptBridgeMall *mallController = [[UCFWebViewJavascriptBridgeMall alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
             mallController.url      = @"https://m.dougemall.com";//请求地址;
             mallController.navTitle = @"商城";
