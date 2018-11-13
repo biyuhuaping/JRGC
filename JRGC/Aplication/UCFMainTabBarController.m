@@ -262,12 +262,14 @@
             [cache removeAllCachedResponses];
             [cache setDiskCapacity:0];
             [cache setMemoryCapacity:0];
+            
             UCFWebViewJavascriptBridgeMall *mallController = [[UCFWebViewJavascriptBridgeMall alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
             mallController.url      = @"https://m.dougemall.com";//请求地址;
             mallController.navTitle = @"商城";
             mallController.isFromBarMall = YES;
+            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:mallController];
             [self.view.window.layer addAnimation:[self presentAnimation] forKey:nil];//添加Animation
-            [self presentViewController:mallController animated:NO completion:nil];
+            [self presentViewController:nav animated:NO completion:nil];
             return NO;
         }
         
@@ -278,7 +280,7 @@
 - (CATransition *)presentAnimation{
     
     CATransition* transition = [CATransition animation];
-    transition.duration = 0.25;
+    transition.duration = 0.3;
     transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionDefault];
     
     /*私有API
