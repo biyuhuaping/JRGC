@@ -197,7 +197,6 @@
                               @[
                                   @{@"ItemName": @"已收利息",@"ItemData":[result[@"interestsDetail"] isKindOfClass:[NSNull class]] ? @"0.00" :result[@"interestsDetail"][@"interestReceived"]},
                                   @{@"ItemName": @"待收利息", @"ItemData": [result[@"interestsDetail"] isKindOfClass:[NSNull class]] ? @"0.00" :result[@"interestsDetail"][@"writReceived"] },
-                                  @{@"ItemName": @"已用工豆", @"ItemData": [result[@"interestsDetail"] isKindOfClass:[NSNull class]] ? @"0.00" :result[@"interestsDetail"][@"bean"]},
                                   @{@"ItemName": @"余额利息", @"ItemData": [result[@"interestsDetail"] isKindOfClass:[NSNull class]] ? @"0.00" :result[@"interestsDetail"][@"balanceIncome"]}
                                   ]};
             }

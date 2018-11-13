@@ -80,7 +80,7 @@
     if ([UserInfoSingle sharedManager].isShowCouple) {
         _dataArray = [[NSMutableArray alloc] initWithArray:@[facPoint,sign, facBean,profitInvest, coupon,    addProfitCalculator, assetProof, contactUs]];
     } else {
-        _dataArray = [[NSMutableArray alloc] initWithArray:@[facPoint,sign, facBean,profitInvest,addProfitCalculator, assetProof, contactUs]];
+        _dataArray = [[NSMutableArray alloc] initWithArray:@[facPoint,sign,profitInvest,addProfitCalculator, assetProof, contactUs]];
     }
     return _dataArray;
 }
