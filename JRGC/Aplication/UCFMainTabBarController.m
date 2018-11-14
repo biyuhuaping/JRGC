@@ -132,7 +132,7 @@
 //                UCFWebViewJavascriptBridgeMall *mallController = [[UCFWebViewJavascriptBridgeMall alloc] initWithNibName:@"UCFWebViewJavascriptBridgeMall" bundle:nil];
 //                mallController.url      = @"https://m.dougemall.com";//请求地址;
 //                mallController.navTitle = @"商城";
-//                controller = mallController;
+//                controller = mallController;//
                 UIViewController *contro = [[UIViewController alloc] init];
                 controller = contro;
             }
