@@ -26,11 +26,11 @@
 #import "NSString+Misc.h"
 #import "HSHelper.h"
 #import "LMJScrollTextView.h"
-#import "UCFNoticeView.h"
-#import "UCFNoticeModel.h"
+//#import "UCFNoticeView.h"
+//#import "UCFNoticeModel.h"
 //#warning 同盾修改
 //@interface UCFTopUpViewController () <UITextFieldDelegate,FMDeviceManagerDelegate,UCFModifyReservedBankNumberDelegate>
-@interface UCFTopUpViewController () <UITextFieldDelegate,UCFModifyReservedBankNumberDelegate,UCFNoticeViewDelegate>
+@interface UCFTopUpViewController () <UITextFieldDelegate,UCFModifyReservedBankNumberDelegate>
 {
     NSString *curCodeType;          //当前验证码的状态
     NSString *rechargeLimiteUrl;    //产看银行限额的地址
@@ -113,7 +113,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *baseViewTop;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *rechargeTopCo;
-@property (strong, nonatomic)UCFNoticeView *noticeView;
+//@property (strong, nonatomic)UCFNoticeView *noticeView;
 @end
 
 @implementation UCFTopUpViewController
@@ -127,7 +127,7 @@
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-    _noticeView.frame = CGRectMake(0, 0, ScreenWidth, 45);
+//    _noticeView.frame = CGRectMake(0, 0, ScreenWidth, 45);
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -143,9 +143,6 @@
 //初始化界面信息
 - (void)createUI
 {
-    
-
-    
     if (self.accoutType == SelectAccoutTypeHoner)
     {
         self.baseViewTop.constant = 0;
@@ -185,25 +182,25 @@
 //        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(checkWebContent)];
 //        [_topBaseView addGestureRecognizer:tap];
         
-        self.noticeView = (UCFNoticeView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFNoticeView" owner:self options:nil] lastObject];
-        _noticeView.delegate = self;
-        _noticeView.backgroundColor = [UIColor clearColor];
-        _noticeView.frame = CGRectMake(0, 0, ScreenWidth, 45);
-        [_topBaseView addSubview:_noticeView];
+//        self.noticeView = (UCFNoticeView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFNoticeView" owner:self options:nil] lastObject];
+//        _noticeView.delegate = self;
+//        _noticeView.backgroundColor = [UIColor clearColor];
+//        _noticeView.frame = CGRectMake(0, 0, ScreenWidth, 45);
+//        [_topBaseView addSubview:_noticeView];
         
         
         
-        UCFNoticeModel *model = [[UCFNoticeModel alloc] init];
-        model.noticeUrl = @"https://static.9888.cn/pages/transferNotice/notice.html";
-        model.siteNotice = @"线下转账充值用户流程调整";
-        
-        
-        _noticeView.noticeModel = model;
-        _noticeView.noticeLabell.text = model.siteNotice;
-        _noticeView.noticeLabell.font = [UIFont boldSystemFontOfSize:14];
-        for (UIView *view in _noticeView.subviews) {
-            view.hidden = NO;
-        }
+//        UCFNoticeModel *model = [[UCFNoticeModel alloc] init];
+//        model.noticeUrl = @"https://static.9888.cn/pages/transferNotice/notice.html";
+//        model.siteNotice = @"线下转账充值用户流程调整";
+//
+//
+//        _noticeView.noticeModel = model;
+//        _noticeView.noticeLabell.text = model.siteNotice;
+//        _noticeView.noticeLabell.font = [UIFont boldSystemFontOfSize:14];
+//        for (UIView *view in _noticeView.subviews) {
+//            view.hidden = NO;
+//        }
     }
     [self addLeftButton];
     [self addRightButtonWithName:@"充值记录"];
@@ -228,12 +225,12 @@
     _msgTipLabel.userInteractionEnabled = YES;
     _msgTipLabel.text = @"";
 }
-- (void)noticeView:(UCFNoticeView *)noticeView didClickedNotice:(UCFNoticeModel *)notice
-{
-    FullWebViewController *controller = [[FullWebViewController alloc] initWithWebUrl:@"https://static.9888.cn/pages/transferNotice/notice.html"  title:@"转账充值调整公告"];
-    controller.baseTitleType = @"detail_heTong";
-    [self.navigationController pushViewController:controller animated:YES];
-}
+//- (void)noticeView:(UCFNoticeView *)noticeView didClickedNotice:(UCFNoticeModel *)notice
+//{
+//    FullWebViewController *controller = [[FullWebViewController alloc] initWithWebUrl:@"https://static.9888.cn/pages/transferNotice/notice.html"  title:@"转账充值调整公告"];
+//    controller.baseTitleType = @"detail_heTong";
+//    [self.navigationController pushViewController:controller animated:YES];
+//}
 
 -(void)showDeleagateView:(ZBLinkLabelModel *)linkModel
 {
