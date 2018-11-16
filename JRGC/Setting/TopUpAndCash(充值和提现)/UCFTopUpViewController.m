@@ -110,10 +110,14 @@
 
 // scrollView 的content高度
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentHeight;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *baseViewTop;
+//@property (weak, nonatomic) IBOutlet NSLayoutConstraint *baseViewTop;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *TopViewLeftSpae; //红色线条距离左边距离
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *rechargeTopCo;
-//@property (strong, nonatomic)UCFNoticeView *noticeView;
+
+
+@property (weak, nonatomic) IBOutlet UIScrollView *segeScrollView;
+
 @end
 
 @implementation UCFTopUpViewController
@@ -124,10 +128,15 @@
     self.topUpLabelTextField.text = @"";
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 }
+- (IBAction)topViewButtonClick:(UIButton *)sender {
+    
+    
+}
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-//    _noticeView.frame = CGRectMake(0, 0, ScreenWidth, 45);
+    _segeScrollView.contentSize = CGSizeMake(ScreenWidth * 2,  ScreenHeight - NavigationBarHeight1 - CGRectGetMaxY(_topBaseView.frame));
+
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -143,9 +152,14 @@
 //初始化界面信息
 - (void)createUI
 {
+    _segeScrollView.frame = CGRectMake(0, CGRectGetMaxY(_topBaseView.frame), ScreenWidth, ScreenHeight - NavigationBarHeight1 - CGRectGetMaxY(_topBaseView.frame));
+//    _baseScrollView.frame = CGRectMake(0, 0, ScreenWidth, CGRectGetHeight(_segeScrollView.frame));
+    
+    CGSizeMake(ScreenWidth, CGRectGetHeight(self.view.frame));
+
     if (self.accoutType == SelectAccoutTypeHoner)
     {
-        self.baseViewTop.constant = 0;
+//        self.baseViewTop.constant = 0;
 
         self.codeTextFieldHeight.constant = 37;
         self.sendButtonHeight.constant = 37;
