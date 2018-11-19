@@ -20,4 +20,11 @@
 - (void)setFont:(UIFont *)font range:(NSRange)range;
 - (void)setFont:(UIFont *)font string:(NSString *)string;
 
+/**
+ 设置行间距
+
+ @param space 行间距
+ @param string 文本
+ */
+- (void)setLineSpace:(CGFloat)space string:(NSString *)string;
 @end
