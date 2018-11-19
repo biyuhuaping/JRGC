@@ -58,8 +58,8 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="bankName" destination="S5o-Xb-jVV" id="xKO-t5-fpR"/>
-                <outlet property="content" destination="CXJ-ig-1E0" id="7Xz-TT-HFa"/>
+                <outlet property="bankName" destination="S5o-Xb-jVV" id="bTA-A4-5jF"/>
+                <outlet property="contentNote" destination="CXJ-ig-1E0" id="o3i-07-c5k"/>
                 <outlet property="imgView" destination="bLj-Nt-o8j" id="b9K-cX-xPH"/>
                 <outlet property="isQuick" destination="Zvv-qO-tMP" id="HvH-Wz-ngL"/>
             </connections>

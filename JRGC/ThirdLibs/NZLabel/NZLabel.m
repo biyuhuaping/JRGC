@@ -70,7 +70,45 @@ static inline CGFloat ZBFlushFactorForTextAlignment(NSTextAlignment textAlignmen
     NSRange range = [self.text rangeOfString:string];
     [self setFontColor:color range:range];
 }
-
+- (void)setMoreColor:(UIColor *)color string:(NSString *)string
+{
+    if (self.text == nil) {
+        DBLOG(@"当前内容为空");
+        return;
+    }
+    NSMutableString *strTemp = [[NSMutableString alloc] initWithString:self.text];
+    NSMutableArray *array = [NSMutableArray array];
+    NSRange range;
+    while (1) {
+        range = [strTemp rangeOfString:string];
+        if(range.location == NSNotFound)
+        {
+            break;
+        }
+        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger:range.location],@"location",[NSNumber numberWithInteger:range.length],@"length", nil];
+        //        NSInteger anInteger = [aNumber integerValue];
+        [array addObject:dic];
+        NSRange abc ;
+        abc.length = 1;
+        abc.location = range.location;
+        [strTemp replaceOccurrencesOfString:string withString:@"`" options:NSCaseInsensitiveSearch range:range]; ;
+    }
+    //    [self setFont:font range:range];
+    [self setMoreColor:color rangeArray:array];
+}
+- (void)setMoreColor:(UIColor *)color rangeArray:(NSMutableArray *)range
+{
+    NSMutableAttributedString *attributed = [[NSMutableAttributedString alloc] initWithString:self.text];;
+    
+    for (int i = 0; i < [range count]; i++) {
+        NSDictionary *dic = [range objectAtIndex:i];
+        NSRange rangeTemp ;
+        rangeTemp.location = [[dic objectForKey:@"location"] integerValue];
+        rangeTemp.length = [[dic objectForKey:@"length"] integerValue];
+        [attributed addAttribute:NSForegroundColorAttributeName value:color range:rangeTemp];
+    }
+    self.attributedText = attributed;
+}
 - (void)setFont:(UIFont *)font range:(NSRange)range
 {
     NSMutableAttributedString *attributed = [[NSMutableAttributedString alloc] initWithAttributedString:self.attributedText];
@@ -83,6 +121,40 @@ static inline CGFloat ZBFlushFactorForTextAlignment(NSTextAlignment textAlignmen
 {
     NSRange range = [self.text rangeOfString:string];
     [self setFont:font range:range];
+}
+
+- (void)setMoreFont:(UIFont *)font string:(NSString *)string
+{
+    NSMutableString *strTemp = [[NSMutableString alloc] initWithString:self.text];;
+    NSMutableArray *array = [NSMutableArray array];
+    NSRange range;
+    while (1) {
+        range = [strTemp rangeOfString:string];
+        if(range.location == NSNotFound)
+        {
+            break;
+        }
+        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger:range.location],@"location",[NSNumber numberWithInteger:range.length],@"length", nil];
+        [array addObject:dic];
+        NSRange abc ;
+        abc.length = 1;
+        abc.location = range.location;
+        [strTemp replaceOccurrencesOfString:string withString:@"`" options:NSCaseInsensitiveSearch range:range]; ;
+    }
+    [self setMoreFont:font rangeArray:array];
+}
+- (void)setMoreFont:(UIFont *)font rangeArray:(NSMutableArray *)range
+{
+    NSMutableAttributedString *attributed = [[NSMutableAttributedString alloc] initWithString:self.text];
+    
+    for (int i = 0; i < [range count]; i++) {
+        NSDictionary *dic = [range objectAtIndex:i];
+        NSRange rangeTemp ;
+        rangeTemp.location = [[dic objectForKey:@"location"] integerValue];
+        rangeTemp.length = [[dic objectForKey:@"length"] integerValue];
+        [attributed addAttribute:NSFontAttributeName value:font range:rangeTemp];
+    }
+    self.attributedText = attributed;
 }
 
 - (void)addLinkString:(NSString *)linkString block:(ZBLinkLabelBlock)linkBlock{

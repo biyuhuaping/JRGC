@@ -16,7 +16,7 @@
 @property (strong, nonatomic) IBOutlet UIImageView *imgView;
 @property (strong, nonatomic) IBOutlet UILabel *bankName;
 @property (strong, nonatomic) IBOutlet UIImageView *isQuick;
-@property (weak, nonatomic) IBOutlet NZLabel *content;
+@property (weak, nonatomic) IBOutlet NZLabel *contentNote;
 
 
 - (void)showInfo:(id)data;

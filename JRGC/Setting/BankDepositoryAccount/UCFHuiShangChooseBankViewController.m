@@ -163,7 +163,7 @@
         {
             NSMutableDictionary *dataDic = [NSMutableDictionary dictionaryWithDictionary:[dic objectForKey:@"bankList"][i]];
             [dataDic setObject:@"no" forKey:@"isQuick"];
-            DBCellConfig *cellConfig = [DBCellConfig cellConfigWithClassName:NSStringFromClass([UCFHuiShangChooseBankViewCell class]) title:@"bank" showInfoMethod:@selector(showInfo:) heightOfCell:44];
+            DBCellConfig *cellConfig = [DBCellConfig cellConfigWithClassName:NSStringFromClass([UCFHuiShangChooseBankViewCell class]) title:@"bank" showInfoMethod:@selector(showInfo:) heightOfCell:54];
             
             [dataAry addObject:dataDic];
             [cellAry addObject:cellConfig];
@@ -240,7 +240,7 @@
         else
         {
             //支持快捷支付
-            if (![self.bankList[indexPath.section][indexPath.row][@"isQuick"] boolValue])
+            if ([self.bankList[indexPath.section][indexPath.row][@"isQuick"] boolValue] && ![self.bankList[indexPath.section][indexPath.row][@"isRecommend"] boolValue])
             {
                 //不是推荐的银行,需要进行提示
                 BlockUIAlertView *alert_bankbrach= [[BlockUIAlertView alloc]initWithTitle:@"提示" message:@"该银行快捷充值的额度较低，确认绑定该银行卡吗？" cancelButtonTitle:@"我再想想" clickButton:^(NSInteger index) {
