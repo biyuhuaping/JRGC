@@ -71,7 +71,7 @@
             return imagePath;
         }
         NSString *string = [[[NSString alloc] initWithData:data encoding:_enc] autorelease];
-        DBLog(@"请求返回数据:%@",string);
+        DBLog(@"%@请求返回数据:%@",self.owner, string);
         return string;
     } else {
         return nil;

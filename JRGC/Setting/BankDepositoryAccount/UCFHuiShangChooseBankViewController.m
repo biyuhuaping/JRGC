@@ -145,7 +145,7 @@
         {
             NSMutableDictionary *dataDic = [NSMutableDictionary dictionaryWithDictionary:[dic objectForKey:@"quickBankList"][i]];
             [dataDic setObject:@"yes" forKey:@"isQuick"];
-            DBCellConfig *cellConfig = [DBCellConfig cellConfigWithClassName:NSStringFromClass([UCFHuiShangChooseBankViewCell class]) title:@"quickBank" showInfoMethod:@selector(showInfo:) heightOfCell:46];
+            DBCellConfig *cellConfig = [DBCellConfig cellConfigWithClassName:NSStringFromClass([UCFHuiShangChooseBankViewCell class]) title:@"quickBank" showInfoMethod:@selector(showInfo:) heightOfCell:56];
             
             [dataAry addObject:dataDic];
             [cellAry addObject:cellConfig];
@@ -227,21 +227,34 @@
         if (![self.bankList[indexPath.section][indexPath.row][@"isQuick"] isEqualToString:@"yes"] )
         {
             //不支持快捷
-            BlockUIAlertView *alert_bankbrach= [[BlockUIAlertView alloc]initWithTitle:@"提示" message:@"您填写的银行卡不支持快捷充值，只能用于提现，确认要提交吗？" cancelButtonTitle:@"修改" clickButton:^(NSInteger index) {
+            BlockUIAlertView *alert_bankbrach= [[BlockUIAlertView alloc]initWithTitle:@"提示" message:@"该银行不支持快捷充值，仅支持网银充值或转账的方式进行充值，确认绑定该银行卡吗？" cancelButtonTitle:@"我再想想" clickButton:^(NSInteger index) {
                 if (index == 1) {
                     //支持快捷支付
                     [self.bankDelegate chooseBankData:self.bankList[indexPath.section][indexPath.row]];
                     [self.navigationController popViewControllerAnimated:YES];
                 }
-            } otherButtonTitles:@"确定"];
+            } otherButtonTitles:@"继续绑卡"];
             [alert_bankbrach show];
 
         }
         else
         {
             //支持快捷支付
+            if (![self.bankList[indexPath.section][indexPath.row][@"isQuick"] boolValue])
+            {
+                //不是推荐的银行,需要进行提示
+                BlockUIAlertView *alert_bankbrach= [[BlockUIAlertView alloc]initWithTitle:@"提示" message:@"该银行快捷充值的额度较低，确认绑定该银行卡吗？" cancelButtonTitle:@"我再想想" clickButton:^(NSInteger index) {
+                    if (index == 1) {
+                        //支持快捷支付
+                        [self.bankDelegate chooseBankData:self.bankList[indexPath.section][indexPath.row]];
+                        [self.navigationController popViewControllerAnimated:YES];
+                    }
+                } otherButtonTitles:@"继续绑卡"];
+                [alert_bankbrach show];
+            }
             [self.bankDelegate chooseBankData:self.bankList[indexPath.section][indexPath.row]];
             [self.navigationController popViewControllerAnimated:YES];
+            
         }
     }
 }
@@ -278,7 +291,7 @@
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 30)];
-    view.backgroundColor = [DBColor colorWithHexString:@"f9f9f9" andAlpha:1.0];
+    view.backgroundColor = [DBColor colorWithHexString:@"EBEBEE" andAlpha:1.0];
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, view.frame.size.width, view.frame.size.height)];
     label.backgroundColor = [UIColor clearColor];

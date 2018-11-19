@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "UCFHuiShangChooseBankViewController.h"
-
+#import "NZLabel.h"
 @interface UCFHuiShangChooseBankViewCell : UITableViewCell
 
 @property (nonatomic, assign) UCFHuiShangChooseBankViewController *db;
@@ -16,6 +16,8 @@
 @property (strong, nonatomic) IBOutlet UIImageView *imgView;
 @property (strong, nonatomic) IBOutlet UILabel *bankName;
 @property (strong, nonatomic) IBOutlet UIImageView *isQuick;
+@property (weak, nonatomic) IBOutlet NZLabel *content;
+
 
 - (void)showInfo:(id)data;
 

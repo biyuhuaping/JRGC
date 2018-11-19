@@ -745,8 +745,16 @@
             self.notSupportDes = [userInfoDic objectSafeForKey:@"notSupportDes"];
             
             if (realName.length > 0) {
-                _textField1.placeholder = realName;
-                _textField1.userInteractionEnabled = NO;
+                
+                if ([UserInfoSingle sharedManager].openStatus != 1)
+                {
+                    _textField1.userInteractionEnabled = NO;
+                    _textField1.placeholder = realName;
+                }
+                else
+                {
+                    _textField1.text = realName;
+                }
                 [UserInfoSingle sharedManager].realName = realName;
             }
             if (idCardNo.length > 0){
@@ -755,9 +763,15 @@
                 //打码
                 NSString *asteriskIdCardNo = [self replaceStringWithAsterisk:idCardNo startLocation:3 lenght:idCardNo.length -7];
                 NSString *asteriskMobile = [self replaceStringWithAsterisk:self.phoneNum startLocation:3 lenght:self.phoneNum.length -7];
-                
-                _textField2.placeholder = asteriskIdCardNo;
-                _textField2.userInteractionEnabled = NO;
+                if ([UserInfoSingle sharedManager].openStatus != 1)
+                {
+                    _textField2.userInteractionEnabled = NO;
+                    _textField2.placeholder = realName;
+                }
+                else
+                {
+                    _textField2.text = asteriskIdCardNo;
+                }
                 [UserInfoSingle sharedManager].mobile = asteriskMobile;
             }
             
