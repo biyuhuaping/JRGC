@@ -163,7 +163,7 @@
         {
             NSMutableDictionary *dataDic = [NSMutableDictionary dictionaryWithDictionary:[dic objectForKey:@"bankList"][i]];
             [dataDic setObject:@"no" forKey:@"isQuick"];
-            DBCellConfig *cellConfig = [DBCellConfig cellConfigWithClassName:NSStringFromClass([UCFHuiShangChooseBankViewCell class]) title:@"bank" showInfoMethod:@selector(showInfo:) heightOfCell:44];
+            DBCellConfig *cellConfig = [DBCellConfig cellConfigWithClassName:NSStringFromClass([UCFHuiShangChooseBankViewCell class]) title:@"bank" showInfoMethod:@selector(showInfo:) heightOfCell:54];
             
             [dataAry addObject:dataDic];
             [cellAry addObject:cellConfig];
