@@ -909,8 +909,13 @@
     loginViewController.sourceVC = @"webViewLongin";
     UINavigationController *loginNaviController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
     AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
-    
-    [appDelegate.tabBarController presentViewController:loginNaviController animated:YES completion:nil];
+    if (self.presentingViewController) {
+//        [self dismissViewControllerAnimated:YES completion:nil];
+        [self presentViewController:loginNaviController animated:YES completion:nil];
+    } else {
+//        [self.navigationController popViewControllerAnimated:YES];
+        [appDelegate.tabBarController presentViewController:loginNaviController animated:YES completion:nil];
+    }
 }
 //跳转到App 原生界面 规则从哪来回哪去
 -(void)jsGotoAppBackNative{
