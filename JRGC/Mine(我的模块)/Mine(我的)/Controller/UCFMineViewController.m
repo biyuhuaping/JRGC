@@ -692,6 +692,10 @@
     switch (openStatus)
     {// ***hqy添加
         case 1://未开户-->>>新用户开户
+        {
+            return YES;
+            break;
+        }
         case 2://已开户 --->>>老用户(白名单)开户
         {
             [self showHSAlert:tipStr1];
