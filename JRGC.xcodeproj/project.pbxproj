@@ -73,6 +73,12 @@
 		4A14F68A1BA94A84002BD5DF /* LockFlagSingle.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A14F6891BA94A84002BD5DF /* LockFlagSingle.m */; };
 		4A1DA7D11BF9FEB30003E446 /* BeansFamilyStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A1DA7D01BF9FEB30003E446 /* BeansFamilyStoryboard.storyboard */; };
 		4A231C541BE9B18400228C88 /* UITabBar+TabBarBadge.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A231C531BE9B18400228C88 /* UITabBar+TabBarBadge.m */; };
+		4A2484A821A3A059001B0703 /* UCFNewRechargeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2484A621A3A059001B0703 /* UCFNewRechargeViewController.m */; };
+		4A2484A921A3A059001B0703 /* UCFNewRechargeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A2484A721A3A059001B0703 /* UCFNewRechargeViewController.xib */; };
+		4A2484B321A3AD37001B0703 /* UCFQuickRechargeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2484B121A3AD37001B0703 /* UCFQuickRechargeViewController.m */; };
+		4A2484B421A3AD37001B0703 /* UCFQuickRechargeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A2484B221A3AD37001B0703 /* UCFQuickRechargeViewController.xib */; };
+		4A2484B821A3AD85001B0703 /* UCFTransRechargeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2484B621A3AD85001B0703 /* UCFTransRechargeViewController.m */; };
+		4A2484B921A3AD85001B0703 /* UCFTransRechargeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A2484B721A3AD85001B0703 /* UCFTransRechargeViewController.xib */; };
 		4A2966511BEC830A001FCD5F /* PraiseAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2966501BEC830A001FCD5F /* PraiseAlert.m */; };
 		4A3904441CFBF375004347D0 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A3904431CFBF375004347D0 /* Reachability.m */; };
 		4A3FDBD01D5C5A7D00279CA2 /* RechargeStoryBorard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A3FDBCF1D5C5A7D00279CA2 /* RechargeStoryBorard.storyboard */; };
@@ -1191,6 +1197,15 @@
 		4A1DA7D01BF9FEB30003E446 /* BeansFamilyStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = BeansFamilyStoryboard.storyboard; sourceTree = "<group>"; };
 		4A231C521BE9B18400228C88 /* UITabBar+TabBarBadge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBar+TabBarBadge.h"; sourceTree = "<group>"; };
 		4A231C531BE9B18400228C88 /* UITabBar+TabBarBadge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBar+TabBarBadge.m"; sourceTree = "<group>"; };
+		4A2484A521A3A059001B0703 /* UCFNewRechargeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFNewRechargeViewController.h; sourceTree = "<group>"; };
+		4A2484A621A3A059001B0703 /* UCFNewRechargeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFNewRechargeViewController.m; sourceTree = "<group>"; };
+		4A2484A721A3A059001B0703 /* UCFNewRechargeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFNewRechargeViewController.xib; sourceTree = "<group>"; };
+		4A2484B021A3AD37001B0703 /* UCFQuickRechargeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFQuickRechargeViewController.h; sourceTree = "<group>"; };
+		4A2484B121A3AD37001B0703 /* UCFQuickRechargeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFQuickRechargeViewController.m; sourceTree = "<group>"; };
+		4A2484B221A3AD37001B0703 /* UCFQuickRechargeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFQuickRechargeViewController.xib; sourceTree = "<group>"; };
+		4A2484B521A3AD85001B0703 /* UCFTransRechargeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFTransRechargeViewController.h; sourceTree = "<group>"; };
+		4A2484B621A3AD85001B0703 /* UCFTransRechargeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFTransRechargeViewController.m; sourceTree = "<group>"; };
+		4A2484B721A3AD85001B0703 /* UCFTransRechargeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFTransRechargeViewController.xib; sourceTree = "<group>"; };
 		4A29664F1BEC830A001FCD5F /* PraiseAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PraiseAlert.h; sourceTree = "<group>"; };
 		4A2966501BEC830A001FCD5F /* PraiseAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PraiseAlert.m; sourceTree = "<group>"; };
 		4A3904421CFBF375004347D0 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
@@ -3931,6 +3946,15 @@
 				83880A8420F7540C00E3B888 /* UCFHonerCahTipAlterView.xib */,
 				4AFE198C1CA0006200EE6768 /* TopUpAndCash.storyboard */,
 				4A3FDBCF1D5C5A7D00279CA2 /* RechargeStoryBorard.storyboard */,
+				4A2484A521A3A059001B0703 /* UCFNewRechargeViewController.h */,
+				4A2484A621A3A059001B0703 /* UCFNewRechargeViewController.m */,
+				4A2484A721A3A059001B0703 /* UCFNewRechargeViewController.xib */,
+				4A2484B021A3AD37001B0703 /* UCFQuickRechargeViewController.h */,
+				4A2484B121A3AD37001B0703 /* UCFQuickRechargeViewController.m */,
+				4A2484B221A3AD37001B0703 /* UCFQuickRechargeViewController.xib */,
+				4A2484B521A3AD85001B0703 /* UCFTransRechargeViewController.h */,
+				4A2484B621A3AD85001B0703 /* UCFTransRechargeViewController.m */,
+				4A2484B721A3AD85001B0703 /* UCFTransRechargeViewController.xib */,
 			);
 			path = "TopUpAndCash(充值和提现)";
 			sourceTree = "<group>";
@@ -7132,6 +7156,7 @@
 				74956EB11D66E2BC00D68B61 /* BindPhoneNumViewController.xib in Resources */,
 				83FD5FFD1FD0FBA500C57E53 /* UCFAssetProofApplyFirstCell.xib in Resources */,
 				74EAF5B61B0ED78700807C1C /* UCFSelectedBankTableViewCell.xib in Resources */,
+				4A2484B421A3AD37001B0703 /* UCFQuickRechargeViewController.xib in Resources */,
 				833CC9FA1FD6A83D006BF624 /* UCFProjectInvestmentRecordViewController.xib in Resources */,
 				744EB7FE1EE7E871003C57C4 /* UCFInvestTransferViewController.xib in Resources */,
 				744EB7EF1EE7DD15003C57C4 /* UCFInvestViewController.xib in Resources */,
@@ -7177,6 +7202,7 @@
 				83CD84291F13A50800227704 /* UCFBatchBidController.xib in Resources */,
 				840A794B1C2A80B60059A946 /* UCFMessageSettingViewController.xib in Resources */,
 				74956EB51D66F33D00D68B61 /* UCFAccountDetailViewController.xib in Resources */,
+				4A2484B921A3AD85001B0703 /* UCFTransRechargeViewController.xib in Resources */,
 				4A90167F1AFB12FE0049A9E0 /* LICENSE in Resources */,
 				744A5FAB1E79512C008921F9 /* UCFWebViewJavascriptBridgeLoanDetails.xib in Resources */,
 				83F669FC1FD14D2500ABCA57 /* UCFAssetProofApplyIdCell.xib in Resources */,
@@ -7238,6 +7264,7 @@
 				74F6493B1F47159A00328235 /* UCFGoldCashSucessController.xib in Resources */,
 				833FBE031FD010B2002D6F80 /* UCFAccountAssetsProofViewController.xib in Resources */,
 				83F9B6C91FDA6519001EEAC6 /* UCFInvestmentSuccesseAlaterView.xib in Resources */,
+				4A2484A921A3A059001B0703 /* UCFNewRechargeViewController.xib in Resources */,
 				A824BFCE1FCD499200E32F39 /* UMSocialSDKPromptResources.bundle in Resources */,
 				833345731F1F82BF00A0F30D /* UCFGoldInvestmentCell.xib in Resources */,
 				74BDA9941F09F6C60054403F /* Info.plist in Resources */,
@@ -7534,6 +7561,7 @@
 				74067A441F5038BF00747888 /* UCFAveragePriceDetailView.m in Sources */,
 				83FB3F621E5C68150094C9BA /* UCFCollctionKeyBidViewController.m in Sources */,
 				74270D501EC59FF100F9419B /* UCFInvitationRewardHeaderView.m in Sources */,
+				4A2484B321A3AD37001B0703 /* UCFQuickRechargeViewController.m in Sources */,
 				4ADA3A301B0DBBEF000B29FD /* CoupleHeadCell.m in Sources */,
 				748D935E1E641FF500E229A7 /* UCFLabel.m in Sources */,
 				74E535F01AE5FD7300DAABFC /* UCFFAQViewController.m in Sources */,
@@ -7999,6 +8027,7 @@
 				74931A311B1326FE00143424 /* OHAttributedLabel.m in Sources */,
 				74DBAC741D585FFD00F6F6B1 /* UCFTipButton.m in Sources */,
 				25CCDA9C1DDAE28C002C0F6D /* UCFLatesProjectTableViewCell.m in Sources */,
+				4A2484B821A3AD85001B0703 /* UCFTransRechargeViewController.m in Sources */,
 				74270CA21EC58F6800F9419B /* UCFHomeUserInfoCell.m in Sources */,
 				83CD72A61FB451B5007138ED /* UCFExtractViewCell.m in Sources */,
 				74270D1B1EC595ED00F9419B /* UCFFriendRecCell1.m in Sources */,
@@ -8042,6 +8071,7 @@
 				7B2E56911ADBBE77008B0F9E /* UCFRetrievePasswordStepTwoViewController.m in Sources */,
 				74EE33181AF707B100BDE197 /* UCFFundsDetailHeader.m in Sources */,
 				740586B91F417ADB00E2DE01 /* UCFGoldFlexibleCell.m in Sources */,
+				4A2484A821A3A059001B0703 /* UCFNewRechargeViewController.m in Sources */,
 				4ACB399A1E1216DD00E9BA8C /* FestivalActivitiesWebView.m in Sources */,
 				FB120BB51ADE462F00023365 /* CircleShapeLayer.m in Sources */,
 				7BA6E4C71AD6731900FE8C37 /* UIView+WebCacheOperation.m in Sources */,
