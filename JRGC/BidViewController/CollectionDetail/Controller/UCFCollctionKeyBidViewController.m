@@ -25,6 +25,7 @@
 #import "UCFPurchaseWebView.h"
 #import "UCFBatchInvestmentViewController.h"
 #import "UCFBatchBidWebViewController.h"
+#import "UCFNewRechargeViewController.h"
 @interface UCFCollctionKeyBidViewController ()<UITableViewDataSource,UITableViewDelegate,MoneyBoardCellDelegate>
 {
     BOOL    isFirstInvest;              //是否第一次投资
@@ -295,13 +296,19 @@
             [self getNormalBidNetData];
         }
         if (alertView.tag == 2000) {
-            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"RechargeStoryBorard" bundle:nil];
-            UCFTopUpViewController *topUpView  = [storyboard instantiateViewControllerWithIdentifier:@"topup"];
-            topUpView.defaultMoney = [NSString stringWithFormat:@"%.2f",needToRechare];
-            topUpView.title = @"充值";
-            //topUpView.isGoBackShowNavBar = YES;
-            topUpView.uperViewController = self;
-            [self.navigationController pushViewController:topUpView animated:YES];
+            
+            UCFNewRechargeViewController *vc = [[UCFNewRechargeViewController alloc] initWithNibName:@"UCFNewRechargeViewController" bundle:nil];
+            vc.defaultMoney = [NSString stringWithFormat:@"%.2f",needToRechare];
+            vc.accoutType = SelectAccoutTypeP2P;
+            [self.navigationController pushViewController:vc animated:YES];
+            
+//            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"RechargeStoryBorard" bundle:nil];
+//            UCFTopUpViewController *topUpView  = [storyboard instantiateViewControllerWithIdentifier:@"topup"];
+//            topUpView.defaultMoney = [NSString stringWithFormat:@"%.2f",needToRechare];
+//            topUpView.title = @"充值";
+//            //topUpView.isGoBackShowNavBar = YES;
+//            topUpView.uperViewController = self;
+//            [self.navigationController pushViewController:topUpView animated:YES];
         }
         if (alertView.tag == 4000) {
             MoneyBoardCell *cell = (MoneyBoardCell *)[_bidTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
@@ -992,13 +999,17 @@
         cell.inputMoneyTextFieldLable.text = [self GetDefaultText];
         [self reloadSuperView:cell.inputMoneyTextFieldLable];
     } else if (mark == 501) {
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"RechargeStoryBorard" bundle:nil];
-        UCFTopUpViewController *topUpView  = [storyboard instantiateViewControllerWithIdentifier:@"topup"];
-        //topUpView.isGoBackShowNavBar = YES;
-        topUpView.title = @"充值";
-        topUpView.uperViewController = self;
-        topUpView.accoutType = SelectAccoutTypeP2P;
-        [self.navigationController pushViewController:topUpView animated:YES];
+        UCFNewRechargeViewController *vc = [[UCFNewRechargeViewController alloc] initWithNibName:@"UCFNewRechargeViewController" bundle:nil];
+        vc.defaultMoney = [NSString stringWithFormat:@"%.2f",needToRechare];
+        vc.accoutType = SelectAccoutTypeP2P;
+        [self.navigationController pushViewController:vc animated:YES];
+//        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"RechargeStoryBorard" bundle:nil];
+//        UCFTopUpViewController *topUpView  = [storyboard instantiateViewControllerWithIdentifier:@"topup"];
+//        //topUpView.isGoBackShowNavBar = YES;
+//        topUpView.title = @"充值";
+//        topUpView.uperViewController = self;
+//        topUpView.accoutType = SelectAccoutTypeP2P;
+//        [self.navigationController pushViewController:topUpView animated:YES];
     }
 }
 

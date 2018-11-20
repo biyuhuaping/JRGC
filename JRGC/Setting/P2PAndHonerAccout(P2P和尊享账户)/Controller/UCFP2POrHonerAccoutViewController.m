@@ -32,7 +32,7 @@
 #import "UCFCalendarModularViewController.h"
 #import "UCFMyReservedViewController.h"
 #import "UCFRedBagViewController.h"
-
+#import "UCFNewRechargeViewController.h"
 @interface UCFP2POrHonerAccoutViewController ()<UITableViewDelegate,UITableViewDataSource,UCFP2POrHornerTabHeaderViewDelete,UIAlertViewDelegate,MjAlertViewDelegate>
 {
 //    UCFP2POrHornerTabHeaderView *_headerView;
@@ -566,12 +566,23 @@
 }
 - (void)skipToTouUpViewController
 {
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"RechargeStoryBorard" bundle:nil];
-    UCFTopUpViewController * rechargeVC = [storyboard instantiateViewControllerWithIdentifier:@"topup"];
-    rechargeVC.title = @"充值";
-    rechargeVC.uperViewController = self;
-    rechargeVC.accoutType = self.accoutType;
-    [self.navigationController pushViewController:rechargeVC animated:YES];
+    
+    if (self.accoutType == SelectAccoutTypeP2P) {
+        UCFNewRechargeViewController *vc = [[UCFNewRechargeViewController alloc] initWithNibName:@"UCFNewRechargeViewController" bundle:nil];
+//        vc.defaultMoney = [NSString stringWithFormat:@"%.2f",needToRechare];
+        vc.accoutType = SelectAccoutTypeP2P;
+        [self.navigationController pushViewController:vc animated:YES];
+    } else {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"RechargeStoryBorard" bundle:nil];
+        UCFTopUpViewController * rechargeVC = [storyboard instantiateViewControllerWithIdentifier:@"topup"];
+        rechargeVC.title = @"充值";
+        rechargeVC.uperViewController = self;
+        rechargeVC.accoutType = self.accoutType;
+        [self.navigationController pushViewController:rechargeVC animated:YES];
+    }
+    
+    
+
 }
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (alertView.tag == 1010) {

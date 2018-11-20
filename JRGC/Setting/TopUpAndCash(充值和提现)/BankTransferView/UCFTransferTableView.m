@@ -11,7 +11,7 @@
 #import "BankDetailTableViewCell.h"
 #import "BankLogoSectionTableViewCell.h"
 #import "BankTraIntroduceTableViewCell.h"
-@interface UCFTransferTableView()<UITableViewDelegate,UITableViewDataSource>
+@interface UCFTransferTableView()<UITableViewDelegate,UITableViewDataSource,BankLogoSectionTableViewCellDelegate>
 @property (strong, nonatomic) UITableView *showTableView;
 @end
 
@@ -66,6 +66,7 @@
             cell =  [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([BankLogoSectionTableViewCell class]) owner:self options:nil][0];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
+        cell.delegate = self;
         return cell;
     } else if (indexPath.row == 3) {
         static NSString *cellStr = @"cellStr3";
@@ -78,5 +79,10 @@
     }
     return nil;
 }
-
+- (void)bankLogoSectionTableViewCell:(BankLogoSectionTableViewCell *)cell withClickbutton:(UIButton *)button
+{
+    if (self.delegate) {
+        [self.delegate transferTableView:self withClickbutton:button];
+    }
+}
 @end

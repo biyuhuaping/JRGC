@@ -39,15 +39,22 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aPR-f5-x5N">
                         <rect key="frame" x="25" y="56" width="149" height="40"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_other_pre" translatesAutoresizingMaskIntoConstraints="NO" id="JOG-E3-4At">
+                            <button opaque="NO" tag="100" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4cl-Rn-aMG">
+                                <rect key="frame" x="36" y="0.0" width="97" height="40"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="buttonClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Qsm-SD-hG1"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="建设银行" translatesAutoresizingMaskIntoConstraints="NO" id="JOG-E3-4At">
                                 <rect key="frame" x="10" y="7" width="26" height="26"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="26" id="OKm-lc-Dvd"/>
                                     <constraint firstAttribute="height" constant="26" id="eLD-ef-Dnp"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="其他银行" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9xB-Ni-65J">
-                                <rect key="frame" x="46" y="12.5" width="49.5" height="14.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="建设银行" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9xB-Ni-65J">
+                                <rect key="frame" x="46" y="12.5" width="50" height="15"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -62,12 +69,16 @@
                         </subviews>
                         <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.92156862745098034" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="4cl-Rn-aMG" secondAttribute="bottom" id="2cx-5O-6OK"/>
                             <constraint firstAttribute="trailing" secondItem="Arc-0f-ite" secondAttribute="trailing" constant="8" id="4Mf-tW-1kj"/>
                             <constraint firstItem="Arc-0f-ite" firstAttribute="centerY" secondItem="aPR-f5-x5N" secondAttribute="centerY" id="5oO-z0-px1"/>
                             <constraint firstItem="JOG-E3-4At" firstAttribute="centerY" secondItem="aPR-f5-x5N" secondAttribute="centerY" id="EWN-9S-cBH"/>
+                            <constraint firstItem="4cl-Rn-aMG" firstAttribute="top" secondItem="aPR-f5-x5N" secondAttribute="top" id="MNj-XP-r3t"/>
                             <constraint firstItem="JOG-E3-4At" firstAttribute="leading" secondItem="aPR-f5-x5N" secondAttribute="leading" constant="10" id="OlR-f4-ju8"/>
                             <constraint firstItem="9xB-Ni-65J" firstAttribute="centerY" secondItem="aPR-f5-x5N" secondAttribute="centerY" id="VT4-9R-WJo"/>
                             <constraint firstItem="JOG-E3-4At" firstAttribute="top" secondItem="aPR-f5-x5N" secondAttribute="top" constant="7" id="X0y-vD-wHh"/>
+                            <constraint firstItem="Arc-0f-ite" firstAttribute="leading" secondItem="4cl-Rn-aMG" secondAttribute="trailing" id="hHj-vn-dC0"/>
+                            <constraint firstItem="4cl-Rn-aMG" firstAttribute="leading" secondItem="JOG-E3-4At" secondAttribute="trailing" id="hrc-yx-jem"/>
                             <constraint firstAttribute="width" secondItem="aPR-f5-x5N" secondAttribute="height" multiplier="149:40" id="joM-oq-Zq6"/>
                             <constraint firstItem="9xB-Ni-65J" firstAttribute="leading" secondItem="JOG-E3-4At" secondAttribute="trailing" constant="10" id="tOh-on-6HY"/>
                         </constraints>
@@ -75,15 +86,15 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tTv-Un-LDY">
                         <rect key="frame" x="202" y="56" width="149" height="40"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_other_pre" translatesAutoresizingMaskIntoConstraints="NO" id="2XT-ky-KgJ">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="交通银行" translatesAutoresizingMaskIntoConstraints="NO" id="2XT-ky-KgJ">
                                 <rect key="frame" x="10" y="7" width="26" height="26"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="26" id="Kbi-zO-sid"/>
                                     <constraint firstAttribute="width" constant="26" id="onu-oI-rI8"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="其他银行" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cIz-Tp-81m">
-                                <rect key="frame" x="46" y="12.5" width="49.5" height="14.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="交通银行" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cIz-Tp-81m">
+                                <rect key="frame" x="46" y="12.5" width="50" height="15"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -95,15 +106,26 @@
                                     <constraint firstAttribute="width" constant="8" id="QMd-p7-wRl"/>
                                 </constraints>
                             </imageView>
+                            <button opaque="NO" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wNU-WL-4ze">
+                                <rect key="frame" x="0.0" y="0.0" width="133" height="40"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="buttonClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Cqu-ee-1Lm"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.92156862745098034" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="wNU-WL-4ze" secondAttribute="bottom" id="0lJ-L0-1Ci"/>
                             <constraint firstItem="2XT-ky-KgJ" firstAttribute="top" secondItem="tTv-Un-LDY" secondAttribute="top" constant="7" id="BYn-co-fxz"/>
                             <constraint firstItem="2XT-ky-KgJ" firstAttribute="centerY" secondItem="tTv-Un-LDY" secondAttribute="centerY" id="K8E-gp-hZY"/>
                             <constraint firstItem="2XT-ky-KgJ" firstAttribute="leading" secondItem="tTv-Un-LDY" secondAttribute="leading" constant="10" id="NkA-U8-w9C"/>
+                            <constraint firstItem="Uv7-dO-K5n" firstAttribute="leading" secondItem="wNU-WL-4ze" secondAttribute="trailing" id="SJl-Ci-X0y"/>
                             <constraint firstItem="Uv7-dO-K5n" firstAttribute="centerY" secondItem="tTv-Un-LDY" secondAttribute="centerY" id="T4A-bX-oS7"/>
                             <constraint firstItem="cIz-Tp-81m" firstAttribute="leading" secondItem="2XT-ky-KgJ" secondAttribute="trailing" constant="10" id="V8J-t0-cJZ"/>
+                            <constraint firstItem="wNU-WL-4ze" firstAttribute="top" secondItem="tTv-Un-LDY" secondAttribute="top" id="bg8-wu-AJO"/>
                             <constraint firstAttribute="width" secondItem="tTv-Un-LDY" secondAttribute="height" multiplier="149:40" id="bkd-l3-has"/>
+                            <constraint firstItem="wNU-WL-4ze" firstAttribute="leading" secondItem="tTv-Un-LDY" secondAttribute="leading" id="lfj-xT-bBl"/>
                             <constraint firstItem="cIz-Tp-81m" firstAttribute="centerY" secondItem="tTv-Un-LDY" secondAttribute="centerY" id="ozd-ov-uil"/>
                             <constraint firstAttribute="trailing" secondItem="Uv7-dO-K5n" secondAttribute="trailing" constant="8" id="vQw-Rt-0jp"/>
                         </constraints>
@@ -111,15 +133,22 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VFY-VA-gSg">
                         <rect key="frame" x="25" y="116" width="149" height="40"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_other_pre" translatesAutoresizingMaskIntoConstraints="NO" id="Nhs-Hx-PWe">
+                            <button opaque="NO" tag="102" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kbe-MK-P8e">
+                                <rect key="frame" x="8" y="0.0" width="133" height="40"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="buttonClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="N5Z-Gk-Uwb"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="招商银行" translatesAutoresizingMaskIntoConstraints="NO" id="Nhs-Hx-PWe">
                                 <rect key="frame" x="10" y="7" width="26" height="26"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="26" id="RMz-rq-2xc"/>
                                     <constraint firstAttribute="height" constant="26" id="mIw-gx-x3j"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="其他银行" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xsd-4R-Axq">
-                                <rect key="frame" x="46" y="12.5" width="49.5" height="14.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="招商银行" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xsd-4R-Axq">
+                                <rect key="frame" x="46" y="12.5" width="50" height="15"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -140,13 +169,24 @@
                             <constraint firstAttribute="width" secondItem="VFY-VA-gSg" secondAttribute="height" multiplier="149:40" id="I8Q-WS-obI"/>
                             <constraint firstItem="Nhs-Hx-PWe" firstAttribute="leading" secondItem="VFY-VA-gSg" secondAttribute="leading" constant="10" id="RBs-ml-dkm"/>
                             <constraint firstItem="Kme-en-Ee8" firstAttribute="centerY" secondItem="VFY-VA-gSg" secondAttribute="centerY" id="RXt-yb-Nns"/>
+                            <constraint firstAttribute="trailing" secondItem="Kbe-MK-P8e" secondAttribute="trailing" constant="8" id="SJD-Ni-NK4"/>
+                            <constraint firstItem="Kbe-MK-P8e" firstAttribute="leading" secondItem="VFY-VA-gSg" secondAttribute="leading" constant="8" id="XQV-XP-ico"/>
+                            <constraint firstItem="Kbe-MK-P8e" firstAttribute="top" secondItem="VFY-VA-gSg" secondAttribute="top" id="eqs-sC-QF2"/>
                             <constraint firstItem="Nhs-Hx-PWe" firstAttribute="top" secondItem="VFY-VA-gSg" secondAttribute="top" constant="7" id="im7-l5-32j"/>
+                            <constraint firstAttribute="bottom" secondItem="Kbe-MK-P8e" secondAttribute="bottom" id="kwL-UF-EjL"/>
                             <constraint firstItem="Xsd-4R-Axq" firstAttribute="centerY" secondItem="VFY-VA-gSg" secondAttribute="centerY" id="lGp-au-8iy"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7km-Kg-5rk">
                         <rect key="frame" x="202" y="116" width="149" height="40"/>
                         <subviews>
+                            <button opaque="NO" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CHo-u8-vQ7">
+                                <rect key="frame" x="8" y="0.0" width="133" height="40"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="buttonClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="RSa-1Q-3G3"/>
+                                </connections>
+                            </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_other_pre" translatesAutoresizingMaskIntoConstraints="NO" id="aM1-dR-T7r">
                                 <rect key="frame" x="10" y="7" width="26" height="26"/>
                                 <constraints>
@@ -172,8 +212,12 @@
                         <constraints>
                             <constraint firstItem="aM1-dR-T7r" firstAttribute="centerY" secondItem="7km-Kg-5rk" secondAttribute="centerY" id="4gw-Yi-yMn"/>
                             <constraint firstItem="ged-Y5-WH5" firstAttribute="leading" secondItem="aM1-dR-T7r" secondAttribute="trailing" constant="10" id="Fb4-er-5h4"/>
+                            <constraint firstAttribute="trailing" secondItem="CHo-u8-vQ7" secondAttribute="trailing" constant="8" id="N9L-Xe-VeE"/>
+                            <constraint firstAttribute="bottom" secondItem="CHo-u8-vQ7" secondAttribute="bottom" id="Odp-kc-rQL"/>
                             <constraint firstItem="ged-Y5-WH5" firstAttribute="centerY" secondItem="7km-Kg-5rk" secondAttribute="centerY" id="Pyh-n6-LGg"/>
+                            <constraint firstItem="CHo-u8-vQ7" firstAttribute="leading" secondItem="7km-Kg-5rk" secondAttribute="leading" constant="8" id="WUN-hX-Cr4"/>
                             <constraint firstItem="aM1-dR-T7r" firstAttribute="top" secondItem="7km-Kg-5rk" secondAttribute="top" constant="7" id="cIy-Od-dTs"/>
+                            <constraint firstItem="CHo-u8-vQ7" firstAttribute="top" secondItem="7km-Kg-5rk" secondAttribute="top" id="eWi-y1-HG8"/>
                             <constraint firstItem="aM1-dR-T7r" firstAttribute="leading" secondItem="7km-Kg-5rk" secondAttribute="leading" constant="10" id="jEd-Hd-SNl"/>
                             <constraint firstItem="ne9-In-30M" firstAttribute="centerY" secondItem="7km-Kg-5rk" secondAttribute="centerY" id="rXh-0e-Ahh"/>
                             <constraint firstAttribute="trailing" secondItem="ne9-In-30M" secondAttribute="trailing" constant="8" id="wtp-VN-aKN"/>
@@ -199,11 +243,14 @@
                     <constraint firstItem="7km-Kg-5rk" firstAttribute="top" secondItem="tTv-Un-LDY" secondAttribute="bottom" constant="20" id="sfi-vS-gtf"/>
                 </constraints>
             </tableViewCellContentView>
-            <point key="canvasLocation" x="171.19999999999999" y="199.70014992503749"/>
+            <point key="canvasLocation" x="-96" y="82"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="icon_other_pre" width="26" height="25.5"/>
         <image name="list_icon_arrow" width="8" height="13"/>
+        <image name="交通银行" width="26" height="26"/>
+        <image name="建设银行" width="26" height="26"/>
+        <image name="招商银行" width="26" height="26"/>
     </resources>
 </document>

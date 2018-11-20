@@ -26,12 +26,11 @@
 #import "NSString+Misc.h"
 #import "HSHelper.h"
 #import "LMJScrollTextView.h"
-#import "UCFTransferTableView.h"
-//#import "UCFNoticeView.h"
-//#import "UCFNoticeModel.h"
+#import "UCFNoticeView.h"
+#import "UCFNoticeModel.h"
 //#warning 同盾修改
 //@interface UCFTopUpViewController () <UITextFieldDelegate,FMDeviceManagerDelegate,UCFModifyReservedBankNumberDelegate>
-@interface UCFTopUpViewController () <UITextFieldDelegate,UCFModifyReservedBankNumberDelegate,UIScrollViewDelegate>
+@interface UCFTopUpViewController () <UITextFieldDelegate,UCFModifyReservedBankNumberDelegate,UCFNoticeViewDelegate>
 {
     NSString *curCodeType;          //当前验证码的状态
     NSString *rechargeLimiteUrl;    //产看银行限额的地址
@@ -105,23 +104,16 @@
 - (IBAction)getMsgCode:(id)sender;
 - (IBAction)clickModiyPhoneButton:(UIButton *)sender;
 @property (weak, nonatomic) IBOutlet UIView *topBaseView;
-@property (weak, nonatomic) IBOutlet UIView *topBaseBottomRedView;
-@property (strong, nonatomic)UCFTransferTableView *leftShowView;
 
 #pragma mark - 调整卡片的约束参数
 
 
 // scrollView 的content高度
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentHeight;
-//@property (weak, nonatomic) IBOutlet NSLayoutConstraint *baseViewTop;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *TopViewLeftSpae; //红色线条距离左边距离
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *baseViewTop;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *rechargeTopCo;
-
-
-@property (weak, nonatomic) IBOutlet UIScrollView *segeScrollView;
-
-@property (weak, nonatomic) IBOutlet UIView *rightBaseView;
+@property (strong, nonatomic)UCFNoticeView *noticeView;
 @end
 
 @implementation UCFTopUpViewController
@@ -132,30 +124,10 @@
     self.topUpLabelTextField.text = @"";
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 }
-- (IBAction)topViewButtonClick:(UIButton *)sender {
-    
-    UIButton *button1 = (UIButton *)[_topBaseView viewWithTag:100];
-    button1.selected = NO;
-    UIButton *button2 = (UIButton *)[_topBaseView viewWithTag:101];
-    button2.selected = NO;
-    
-    CGPoint center = sender.center;
-    _topBaseBottomRedView.frame = CGRectMake(center.x - CGRectGetWidth(_topBaseBottomRedView.frame)/2.0f, CGRectGetMinY(_topBaseBottomRedView.frame), CGRectGetWidth(_topBaseBottomRedView.frame), CGRectGetHeight(_topBaseBottomRedView.frame));
-    _segeScrollView.contentOffset = CGPointMake((sender.tag - 100) * ScreenWidth, 0);
-    sender.selected = YES;
-}
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-    _segeScrollView.contentSize = CGSizeMake(ScreenWidth * 2,  ScreenHeight - NavigationBarHeight1 - CGRectGetMaxY(_topBaseView.frame));
-    _baseScrollView.frame = CGRectMake(0, 0, ScreenWidth, CGRectGetHeight(_segeScrollView.frame));
-    _rightBaseView.frame = CGRectMake(ScreenWidth, 0, ScreenWidth,CGRectGetHeight(_segeScrollView.frame));
-    self.leftShowView.frame = CGRectMake(0, 0, ScreenWidth,CGRectGetHeight(_segeScrollView.frame));
-    [self.leftShowView refreshView];
-    UIButton *button1 = (UIButton *)[_topBaseView viewWithTag:100];
-    button1.selected = NO;
-    CGPoint center = button1.center;
-    _topBaseBottomRedView.frame = CGRectMake(center.x - CGRectGetWidth(_topBaseBottomRedView.frame)/2.0f, CGRectGetMinY(_topBaseBottomRedView.frame), CGRectGetWidth(_topBaseBottomRedView.frame), CGRectGetHeight(_topBaseBottomRedView.frame));
+    _noticeView.frame = CGRectMake(0, 0, ScreenWidth, 45);
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -167,53 +139,71 @@
     [self registKeyBordNoti];
 }
 #pragma mark 初始化界面构建
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    if (scrollView == _segeScrollView) {
-        CGFloat x = _segeScrollView.contentOffset.x;
-        DLog(@"%lf",x);
-        UIButton *button1 = (UIButton *)[_topBaseView viewWithTag:100];
-        UIButton *button2 = (UIButton *)[_topBaseView viewWithTag:101];
-        if (x/ScreenWidth > 0.5) {
-            button1.selected = NO;
-            button2.selected = YES;
-            CGPoint center = button2.center;
-            _topBaseBottomRedView.frame = CGRectMake(center.x - CGRectGetWidth(_topBaseBottomRedView.frame)/2.0f, CGRectGetMinY(_topBaseBottomRedView.frame), CGRectGetWidth(_topBaseBottomRedView.frame), CGRectGetHeight(_topBaseBottomRedView.frame));
-        } else {
-            button1.selected = YES;
-            button2.selected = NO;
-            CGPoint center = button1.center;
-            _topBaseBottomRedView.frame = CGRectMake(center.x - CGRectGetWidth(_topBaseBottomRedView.frame)/2.0f, CGRectGetMinY(_topBaseBottomRedView.frame), CGRectGetWidth(_topBaseBottomRedView.frame), CGRectGetHeight(_topBaseBottomRedView.frame));
-        }
-    }
-}
+
 //初始化界面信息
 - (void)createUI
 {
-    _segeScrollView.frame = CGRectMake(0, CGRectGetMaxY(_topBaseView.frame), ScreenWidth, ScreenHeight - NavigationBarHeight1 - CGRectGetMaxY(_topBaseView.frame));
-    _segeScrollView.pagingEnabled = YES;
-    _segeScrollView.delegate = self;
-    _segeScrollView.bounces = NO;
-    _baseScrollView.frame = CGRectMake(0, 0, ScreenWidth, CGRectGetHeight(_segeScrollView.frame));
-    _rightBaseView.frame = CGRectMake(ScreenWidth, 0, ScreenWidth,CGRectGetHeight(_segeScrollView.frame));
-    self.leftShowView = [[UCFTransferTableView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(_rightBaseView.frame), CGRectGetHeight(_rightBaseView.frame))];
-    [_rightBaseView addSubview:self.leftShowView];
-    CGSizeMake(ScreenWidth, CGRectGetHeight(self.view.frame));
+    
 
+    
     if (self.accoutType == SelectAccoutTypeHoner)
     {
+        self.baseViewTop.constant = 0;
+
         self.codeTextFieldHeight.constant = 37;
         self.sendButtonHeight.constant = 37;
         self.getCodeButton.hidden = NO;
         self.verificationCodeField.hidden = NO;
         baseTitleLabel.text = @"尊享充值";
+        
+       
+        
     }else{
         self.codeTextFieldHeight.constant = 0;
         self.sendButtonHeight.constant = 0;
         self.getCodeButton.hidden = YES;
         self.verificationCodeField.hidden = YES;
         baseTitleLabel.text = @"微金充值";
-
+        
+//        _scrollTextView1_1 = [[LMJScrollTextView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth - 95, 37) textScrollModel:LMJTextScrollFromOutside direction:LMJTextScrollMoveRight];
+//        _scrollTextView1_1.backgroundColor = [UIColor clearColor];
+//        [_topBaseView addSubview:_scrollTextView1_1];
+//
+//        [_scrollTextView1_1 startScrollWithText:@"转账充值调整公告:手机银行、网银或银行人工柜台" textColor:[UIColor whiteColor] font:[UIFont systemFontOfSize:14]];
+        
+//        UILabel *skipLab = [[UILabel alloc] init];
+//        skipLab.frame = CGRectMake(ScreenWidth - 85, 5, 70, 27);
+//        skipLab.backgroundColor = [UIColor whiteColor];
+//        skipLab.font = [UIFont systemFontOfSize:14.0f];
+//        skipLab.text = @"点击查看";
+//        skipLab.textAlignment = NSTextAlignmentCenter;
+//        skipLab.clipsToBounds = YES;
+//        skipLab.layer.cornerRadius = 4.0f;
+//        skipLab.textColor = UIColorWithRGB(0x5b6993);
+//        [_topBaseView addSubview:skipLab];
+        
+//        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(checkWebContent)];
+//        [_topBaseView addGestureRecognizer:tap];
+        
+        self.noticeView = (UCFNoticeView *)[[[NSBundle mainBundle] loadNibNamed:@"UCFNoticeView" owner:self options:nil] lastObject];
+        _noticeView.delegate = self;
+        _noticeView.backgroundColor = [UIColor clearColor];
+        _noticeView.frame = CGRectMake(0, 0, ScreenWidth, 45);
+        [_topBaseView addSubview:_noticeView];
+        
+        
+        
+        UCFNoticeModel *model = [[UCFNoticeModel alloc] init];
+        model.noticeUrl = @"https://static.9888.cn/pages/transferNotice/notice.html";
+        model.siteNotice = @"线下转账充值用户流程调整";
+        
+        
+        _noticeView.noticeModel = model;
+        _noticeView.noticeLabell.text = model.siteNotice;
+        _noticeView.noticeLabell.font = [UIFont boldSystemFontOfSize:14];
+        for (UIView *view in _noticeView.subviews) {
+            view.hidden = NO;
+        }
     }
     [self addLeftButton];
     [self addRightButtonWithName:@"充值记录"];
@@ -238,7 +228,12 @@
     _msgTipLabel.userInteractionEnabled = YES;
     _msgTipLabel.text = @"";
 }
-
+- (void)noticeView:(UCFNoticeView *)noticeView didClickedNotice:(UCFNoticeModel *)notice
+{
+    FullWebViewController *controller = [[FullWebViewController alloc] initWithWebUrl:@"https://static.9888.cn/pages/transferNotice/notice.html"  title:@"转账充值调整公告"];
+    controller.baseTitleType = @"detail_heTong";
+    [self.navigationController pushViewController:controller animated:YES];
+}
 
 -(void)showDeleagateView:(ZBLinkLabelModel *)linkModel
 {
@@ -931,7 +926,7 @@
             }
             NSString *bankPhone =  [dic[@"data"][@"bankInfo"] objectSafeForKey:@"bankPhone"];
             isSpecial = [[dic[@"data"][@"bankInfo"] objectSafeForKey:@"isSpecial"] boolValue];
-            BOOL isCompanyAgent  = [[dic[@"data"][@"bankInfo"] objectSafeForKey:@"isCompanyAgent"] boolValue];
+          BOOL isCompanyAgent  = [[dic[@"data"][@"bankInfo"] objectSafeForKey:@"isCompanyAgent"] boolValue];
             if (isSpecial || isCompanyAgent) {
 
                 UIAlertView *alerView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请直接转账至徽商电子账户" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"查看账户", nil];
@@ -1052,7 +1047,7 @@
 //            rechargeWebVC.navTitle = @"即将跳转";
             rechargeWebVC.url = urlStr;
             rechargeWebVC.accoutType = self.accoutType;
-            rechargeWebVC.rootVc = self;
+            rechargeWebVC.rootVc = self.uperViewController;
             [self.navigationController pushViewController:rechargeWebVC animated:YES];
         }
         else{

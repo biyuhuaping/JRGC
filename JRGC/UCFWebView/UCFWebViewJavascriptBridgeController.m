@@ -39,6 +39,7 @@
 #import "UserInfoSingle.h"
 #import <QuickLook/QuickLook.h>
 #import "QLHeaderViewController.h"
+#import "UCFNewRechargeViewController.h"
 #import "UCFSharePictureViewController.h"
 #define MALLTIME  12.0
 #define SIGNATURETIME 30.0
@@ -1119,13 +1120,17 @@
     }
     else if ([controllerName isEqualToString:@"app_recharge"])
     {
-        //跳转到充值
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"RechargeStoryBorard" bundle:nil];
-        UCFTopUpViewController * vc1 = [storyboard instantiateViewControllerWithIdentifier:@"topup"];
-        vc1.title = @"充值";
-        vc1.uperViewController = self;
-        //            vc1.dataDict = dic;
-        [self.navigationController pushViewController:vc1 animated:YES];
+        UCFNewRechargeViewController *vc = [[UCFNewRechargeViewController alloc] initWithNibName:@"UCFNewRechargeViewController" bundle:nil];
+        vc.accoutType = SelectAccoutTypeP2P;
+        [self.navigationController pushViewController:vc animated:YES];
+        
+//        //跳转到充值
+//        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"RechargeStoryBorard" bundle:nil];
+//        UCFTopUpViewController * vc1 = [storyboard instantiateViewControllerWithIdentifier:@"topup"];
+//        vc1.title = @"充值";
+//        vc1.uperViewController = self;
+//        //            vc1.dataDict = dic;
+//        [self.navigationController pushViewController:vc1 animated:YES];
     }
     else if ([controllerName isEqualToString:@"app_factory_barcode"])
     {

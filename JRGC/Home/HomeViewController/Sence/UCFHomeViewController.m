@@ -211,10 +211,6 @@
 
 - (void) gridItemDidClicked:(BJGridItem *) gridItem
 {
-    
-    UCFNewRechargeViewController *vc = [[UCFNewRechargeViewController alloc] initWithNibName:@"UCFNewRechargeViewController" bundle:nil];
-    [self.navigationController pushViewController:vc animated:YES];
-    return;
     if (![UserInfoSingle sharedManager].userId)
     {
         [self showLoginView];

@@ -9,5 +9,5 @@
 #import "UCFBaseViewController.h"
 
 @interface UCFNewRechargeViewController : UCFBaseViewController
-
+@property(nonatomic,copy)NSString *defaultMoney;
 @end

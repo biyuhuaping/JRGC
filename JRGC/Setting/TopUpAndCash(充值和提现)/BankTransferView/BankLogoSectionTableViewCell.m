@@ -14,6 +14,11 @@
     [super awakeFromNib];
     // Initialization code
 }
+- (IBAction)buttonClick:(UIButton *)sender {
+    if (self.delegate) {
+        [self.delegate bankLogoSectionTableViewCell:self withClickbutton:sender];
+    }
+}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

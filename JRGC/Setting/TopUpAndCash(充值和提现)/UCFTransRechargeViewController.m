@@ -8,7 +8,8 @@
 
 #import "UCFTransRechargeViewController.h"
 #import "UCFTransferTableView.h"
-@interface UCFTransRechargeViewController ()
+#import "FullWebViewController.h"
+@interface UCFTransRechargeViewController ()<TransferTableViewDelegate>
 @property(nonatomic, strong)UCFTransferTableView *showView;
 @end
 
@@ -17,7 +18,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _showView = [[UCFTransferTableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight -NavigationBarHeight1 - 40)];
+    _showView.delegate = self;
     [self.view addSubview:_showView];
+}
+- (void)transferTableView:(UCFTransferTableView *)view withClickbutton:(UIButton *)button
+{
+    NSString *rechargeLimiteUrl = @"https://static.9888.cn/pages/transferNotice/other_notice.html";
+    if (button.tag == 100) {
+        rechargeLimiteUrl = @"https://static.9888.cn/pages/transferNotice/jh_notice.html";
+    } else if (button.tag == 101) {
+        rechargeLimiteUrl = @"https://static.9888.cn/pages/transferNotice/jt_notice.html";
+    } else if (button.tag == 102) {
+        rechargeLimiteUrl = @"https://static.9888.cn/pages/transferNotice/zs_notice.html";
+    }
+    FullWebViewController *webController = [[FullWebViewController alloc] initWithWebUrl:rechargeLimiteUrl title:@"银行充值限额"];
+    webController.sourceVc = @"topUpVC";//充值页面
+    webController.baseTitleType = @"specialUser";
+    [((UIViewController *)self.rootVc).navigationController pushViewController:webController animated:YES];
 }
 - (void)viewWillLayoutSubviews
 {

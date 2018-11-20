@@ -43,6 +43,7 @@
 #import "UCFCalendarModularViewController.h"
 #import "UCFWebViewJavascriptBridgeMallDetails.h"
 #import "NSString+Misc.h"
+#import "UCFNewRechargeViewController.h"
 @interface UCFMineViewController () <UITableViewDelegate, UITableViewDataSource, UCFMineHeaderViewDelegate, UCFMineFuncCellDelegate, UCFMineAPIManagerDelegate, UCFMineFuncViewDelegate, UIAlertViewDelegate, SKStoreProductViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) UCFMineHeaderView   *mineHeaderView;
@@ -590,13 +591,17 @@
         }
         
         if ([self checkUserCanInvestIsDetail:YES type:self.accoutType]) {
-         
-            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"RechargeStoryBorard" bundle:nil];
-            UCFTopUpViewController * rechargeVC = [storyboard instantiateViewControllerWithIdentifier:@"topup"];
-            rechargeVC.title = @"充值";
-            rechargeVC.uperViewController = self;
-            rechargeVC.accoutType = SelectAccoutTypeP2P;
-            [self.navigationController pushViewController:rechargeVC animated:YES];
+            
+            UCFNewRechargeViewController *vc = [[UCFNewRechargeViewController alloc] initWithNibName:@"UCFNewRechargeViewController" bundle:nil];
+            vc.accoutType = SelectAccoutTypeP2P;
+            [self.navigationController pushViewController:vc animated:YES];
+            
+//            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"RechargeStoryBorard" bundle:nil];
+//            UCFTopUpViewController * rechargeVC = [storyboard instantiateViewControllerWithIdentifier:@"topup"];
+//            rechargeVC.title = @"充值";
+//            rechargeVC.uperViewController = self;
+//            rechargeVC.accoutType = SelectAccoutTypeP2P;
+//            [self.navigationController pushViewController:rechargeVC animated:YES];
         }
     }
     else{
