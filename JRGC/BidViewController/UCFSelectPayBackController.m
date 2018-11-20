@@ -168,17 +168,16 @@
 {
     if (self.accoutType == SelectAccoutTypeP2P) {
         UCFNewRechargeViewController *vc = [[UCFNewRechargeViewController alloc] initWithNibName:@"UCFNewRechargeViewController" bundle:nil];
-        vc.defaultMoney = [NSString stringWithFormat:@"%.2f",needToRechare];
+//        vc.defaultMoney = [NSString stringWithFormat:@"%.2f",needToRechare];
         vc.accoutType = SelectAccoutTypeP2P;
         [self.navigationController pushViewController:vc animated:YES];
     } else {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"RechargeStoryBorard" bundle:nil];
         UCFTopUpViewController *topUpView  = [storyboard instantiateViewControllerWithIdentifier:@"topup"];
-        topUpView.defaultMoney = [NSString stringWithFormat:@"%.2f",needToRechare];
-        topUpView.title = @"充值";
         //topUpView.isGoBackShowNavBar = YES;
-        topUpView.uperViewController = self;
+        topUpView.title = @"充值";
         topUpView.accoutType = self.accoutType;
+        topUpView.uperViewController = self;
         [self.navigationController pushViewController:topUpView animated:YES];
     }
 }
