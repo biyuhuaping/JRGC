@@ -20,9 +20,13 @@
     [super awakeFromNib];
     [_firstLab setLineSpace:5 string:_firstLab.text];
     [_secondLab setLineSpace:5 string:_secondLab.text];
-    [_secondLab setFontColor:[UIColor blueColor] string:@"尾号(0000)的建设银行"];
+  
 }
-
+- (void)setSecondLabelText:(NSString *)str
+{
+    _secondLab.text = str;
+    [_secondLab setFontColor:UIColorWithRGB(0x4aa1f9) string:[UserInfoSingle sharedManager].bankNumTip];
+}
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

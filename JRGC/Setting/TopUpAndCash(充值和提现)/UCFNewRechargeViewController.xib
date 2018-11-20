@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UCFNewRechargeViewController">
             <connections>
+                <outlet property="bankTransButton" destination="CVp-R0-IXD" id="ad8-PO-bu9"/>
+                <outlet property="bottomRedView" destination="scA-S4-6tr" id="A7o-2Q-rxL"/>
+                <outlet property="quickButton" destination="YSQ-Nf-Fps" id="ZIL-kl-0Zn"/>
+                <outlet property="topSegementView" destination="gzG-OX-JER" id="YBf-F6-alI"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -18,7 +22,77 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gzG-OX-JER">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+                    <subviews>
+                        <button opaque="NO" tag="100" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YSQ-Nf-Fps">
+                            <rect key="frame" x="0.0" y="0.0" width="187.5" height="40"/>
+                            <state key="normal" title="快捷充值">
+                                <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <state key="selected">
+                                <color key="titleColor" red="1" green="0.1513113351" blue="0.29841413449999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="topButtonClick:" destination="-1" eventType="touchUpInside" id="fHU-nJ-vzV"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CVp-R0-IXD">
+                            <rect key="frame" x="187.5" y="0.0" width="187.5" height="40"/>
+                            <state key="normal" title="转账充值">
+                                <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <state key="selected">
+                                <color key="titleColor" red="1" green="0.1513113351" blue="0.29841413449999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="topButtonClick:" destination="-1" eventType="touchUpInside" id="qic-dB-sbk"/>
+                            </connections>
+                        </button>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="scA-S4-6tr">
+                            <rect key="frame" x="100" y="37" width="100" height="3"/>
+                            <color key="backgroundColor" red="1" green="0.1513113351" blue="0.29841413449999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="3" id="5sl-xV-KgY"/>
+                                <constraint firstAttribute="width" constant="100" id="u5n-tV-cM8"/>
+                            </constraints>
+                        </view>
+                        <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qFH-YM-BMu">
+                            <rect key="frame" x="0.0" y="39" width="375" height="1"/>
+                            <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="Kyz-QK-bnZ"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="scA-S4-6tr" firstAttribute="leading" secondItem="gzG-OX-JER" secondAttribute="leading" constant="100" id="3bq-oB-Qgm"/>
+                        <constraint firstAttribute="bottom" secondItem="CVp-R0-IXD" secondAttribute="bottom" id="71T-6K-VJ3"/>
+                        <constraint firstItem="CVp-R0-IXD" firstAttribute="top" secondItem="gzG-OX-JER" secondAttribute="top" id="8eJ-fd-iwy"/>
+                        <constraint firstAttribute="bottom" secondItem="qFH-YM-BMu" secondAttribute="bottom" id="Fhy-zV-MYh"/>
+                        <constraint firstAttribute="bottom" secondItem="YSQ-Nf-Fps" secondAttribute="bottom" id="GGJ-X1-udw"/>
+                        <constraint firstAttribute="bottom" secondItem="scA-S4-6tr" secondAttribute="bottom" id="GJP-Li-hSE"/>
+                        <constraint firstAttribute="height" constant="40" id="N6T-dm-3wJ"/>
+                        <constraint firstItem="CVp-R0-IXD" firstAttribute="leading" secondItem="YSQ-Nf-Fps" secondAttribute="trailing" id="PnZ-E4-Orq"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="VLO-GT-IQ0"/>
+                        <constraint firstItem="qFH-YM-BMu" firstAttribute="leading" secondItem="gzG-OX-JER" secondAttribute="leading" id="diA-90-2hj"/>
+                        <constraint firstItem="YSQ-Nf-Fps" firstAttribute="leading" secondItem="gzG-OX-JER" secondAttribute="leading" id="eHX-bP-ltP"/>
+                        <constraint firstItem="CVp-R0-IXD" firstAttribute="width" secondItem="YSQ-Nf-Fps" secondAttribute="width" id="hRU-bj-nSy"/>
+                        <constraint firstItem="YSQ-Nf-Fps" firstAttribute="top" secondItem="gzG-OX-JER" secondAttribute="top" id="rmD-8M-8Co"/>
+                        <constraint firstAttribute="trailing" secondItem="qFH-YM-BMu" secondAttribute="trailing" id="rqU-4d-4S8"/>
+                        <constraint firstAttribute="trailing" secondItem="CVp-R0-IXD" secondAttribute="trailing" id="wik-cq-9bc"/>
+                    </constraints>
+                </view>
+            </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="gzG-OX-JER" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="2WB-vq-3b8"/>
+                <constraint firstItem="gzG-OX-JER" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="q8n-hv-Z9q"/>
+                <constraint firstAttribute="trailing" secondItem="gzG-OX-JER" secondAttribute="trailing" id="wWS-t1-Onx"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
             <point key="canvasLocation" x="-186" y="-34"/>
         </view>
     </objects>

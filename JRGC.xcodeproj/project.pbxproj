@@ -33,6 +33,10 @@
 		25F538B51D881B0A0039262F /* UCFPurchaseWebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25F538B31D881B0A0039262F /* UCFPurchaseWebView.xib */; };
 		330611BD212ABAAB00955BD6 /* UCFLanchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 330611BB212ABAAB00955BD6 /* UCFLanchViewController.m */; };
 		330611BE212ABAAB00955BD6 /* UCFLanchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 330611BC212ABAAB00955BD6 /* UCFLanchViewController.xib */; };
+		3307E22421A3B147009FFF6D /* QuickRechargeHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3307E22321A3B147009FFF6D /* QuickRechargeHeadView.m */; };
+		3307E22621A3B153009FFF6D /* QuickRechargeHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3307E22521A3B153009FFF6D /* QuickRechargeHeadView.xib */; };
+		3307E22A21A3D7B6009FFF6D /* QuickIntroduceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3307E22821A3D7B6009FFF6D /* QuickIntroduceTableViewCell.m */; };
+		3307E22B21A3D7B6009FFF6D /* QuickIntroduceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3307E22921A3D7B6009FFF6D /* QuickIntroduceTableViewCell.xib */; };
 		334654B6215E08270046A057 /* LOGO微金.png in Resources */ = {isa = PBXBuildFile; fileRef = 334654B5215E08270046A057 /* LOGO微金.png */; };
 		3382D20C21A25BD900104CCD /* UCFTransferTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3382D20B21A25BD900104CCD /* UCFTransferTableView.m */; };
 		3382D21521A267CE00104CCD /* BankTransferTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3382D21321A267CE00104CCD /* BankTransferTableViewCell.m */; };
@@ -1138,6 +1142,12 @@
 		330611BA212ABAAB00955BD6 /* UCFLanchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFLanchViewController.h; sourceTree = "<group>"; };
 		330611BB212ABAAB00955BD6 /* UCFLanchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFLanchViewController.m; sourceTree = "<group>"; };
 		330611BC212ABAAB00955BD6 /* UCFLanchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFLanchViewController.xib; sourceTree = "<group>"; };
+		3307E22221A3B147009FFF6D /* QuickRechargeHeadView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuickRechargeHeadView.h; sourceTree = "<group>"; };
+		3307E22321A3B147009FFF6D /* QuickRechargeHeadView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuickRechargeHeadView.m; sourceTree = "<group>"; };
+		3307E22521A3B153009FFF6D /* QuickRechargeHeadView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QuickRechargeHeadView.xib; sourceTree = "<group>"; };
+		3307E22721A3D7B6009FFF6D /* QuickIntroduceTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuickIntroduceTableViewCell.h; sourceTree = "<group>"; };
+		3307E22821A3D7B6009FFF6D /* QuickIntroduceTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuickIntroduceTableViewCell.m; sourceTree = "<group>"; };
+		3307E22921A3D7B6009FFF6D /* QuickIntroduceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QuickIntroduceTableViewCell.xib; sourceTree = "<group>"; };
 		334654B5215E08270046A057 /* LOGO微金.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LOGO微金.png"; sourceTree = "<group>"; };
 		3382D20A21A25BD900104CCD /* UCFTransferTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFTransferTableView.h; sourceTree = "<group>"; };
 		3382D20B21A25BD900104CCD /* UCFTransferTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFTransferTableView.m; sourceTree = "<group>"; };
@@ -2996,6 +3006,12 @@
 				339930A921A2B0E000C72F54 /* BankTraIntroduceTableViewCell.h */,
 				339930AA21A2B0E000C72F54 /* BankTraIntroduceTableViewCell.m */,
 				339930AB21A2B0E000C72F54 /* BankTraIntroduceTableViewCell.xib */,
+				3307E22221A3B147009FFF6D /* QuickRechargeHeadView.h */,
+				3307E22321A3B147009FFF6D /* QuickRechargeHeadView.m */,
+				3307E22521A3B153009FFF6D /* QuickRechargeHeadView.xib */,
+				3307E22721A3D7B6009FFF6D /* QuickIntroduceTableViewCell.h */,
+				3307E22821A3D7B6009FFF6D /* QuickIntroduceTableViewCell.m */,
+				3307E22921A3D7B6009FFF6D /* QuickIntroduceTableViewCell.xib */,
 			);
 			path = BankTransferView;
 			sourceTree = "<group>";
@@ -7127,6 +7143,7 @@
 				74C7A0D51FE10A8C00217ABB /* UCFCalculateTypeCell.xib in Resources */,
 				74270D521EC5A00400F9419B /* UCFInvitationRewardHeaderView.xib in Resources */,
 				E37086B61D61A6CD0041D293 /* UCFHuiShangChooseBankViewController.xib in Resources */,
+				3307E22621A3B153009FFF6D /* QuickRechargeHeadView.xib in Resources */,
 				74067A461F5038C800747888 /* UCFAveragePriceDetailView.xib in Resources */,
 				74270D1F1EC595ED00F9419B /* UCFRebateCell.xib in Resources */,
 				FB5149551D64441F00C26E7B /* guideImage7_1.png in Resources */,
@@ -7384,6 +7401,7 @@
 				74FBC1BE1B84721400B8DD7E /* UCFBindCardTwoTableViewCell.xib in Resources */,
 				74B98C9B1F70FF5F00CB6A9F /* UCFMineCell.xib in Resources */,
 				746748E11F3C595A0067294D /* UCFGoldBankLimitCell.xib in Resources */,
+				3307E22B21A3D7B6009FFF6D /* QuickIntroduceTableViewCell.xib in Resources */,
 				FBAEDA021C191AFE000C0AA1 /* PushConfig.plist in Resources */,
 				74270CF91EC5943200F9419B /* UCFInvitationRebateViewController.xib in Resources */,
 				FB5149491D64403100C26E7B /* touch_id@2x.gif in Resources */,
@@ -7442,6 +7460,7 @@
 				33E1A5E120FDC5A9008244BD /* UCFRedBagViewController.m in Sources */,
 				83CD843A1F13A50800227704 /* UCFBatchBidModel.m in Sources */,
 				7404CA041FB4502E002811E0 /* UCFExtractGoldItemModel.m in Sources */,
+				3307E22A21A3D7B6009FFF6D /* QuickIntroduceTableViewCell.m in Sources */,
 				4A5552981E54413E00E69DA4 /* UCFBatchInvestmentViewController.m in Sources */,
 				330611BD212ABAAB00955BD6 /* UCFLanchViewController.m in Sources */,
 				74BDA9881F09F6C60054403F /* FSCalendarCell.m in Sources */,
@@ -7545,6 +7564,7 @@
 				4AC08B471B09BE4000DF8075 /* CalculatorView.m in Sources */,
 				740586C61F41A05900E2DE01 /* UCFGoldRaiseView.m in Sources */,
 				7482A5941F4C07AF006A9964 /* UCFGoldIncreContractModel.m in Sources */,
+				3307E22421A3B147009FFF6D /* QuickRechargeHeadView.m in Sources */,
 				7BA6E4BB1AD6731900FE8C37 /* SDWebImageCompat.m in Sources */,
 				FBB685881AE4A76800F222B6 /* MJRefreshLegendHeader.m in Sources */,
 				74270C9F1EC58F6800F9419B /* UCFHomeListHeaderSectionView.m in Sources */,

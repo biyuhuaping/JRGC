@@ -54,8 +54,8 @@
                         <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8888 8888 8888 8888 88" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o0o-W7-P4g">
-                        <rect key="frame" x="10" y="91.5" width="174" height="17"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2310 6010 2100 0030 712" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o0o-W7-P4g">
+                        <rect key="frame" x="10" y="91.5" width="169" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -181,6 +181,11 @@
                     <constraint firstItem="aLe-pX-46G" firstAttribute="top" secondItem="ABg-aS-1kW" secondAttribute="bottom" constant="10" id="ysP-8S-p1y"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="bankLocationLab" destination="DqI-Fc-MMn" id="xjK-bm-wOZ"/>
+                <outlet property="bankNameLab" destination="RJW-qc-7Qf" id="9mI-py-DRa"/>
+                <outlet property="bankNoLab" destination="o0o-W7-P4g" id="UAp-uf-bmM"/>
+            </connections>
             <point key="canvasLocation" x="-161" y="133"/>
         </tableViewCell>
     </objects>

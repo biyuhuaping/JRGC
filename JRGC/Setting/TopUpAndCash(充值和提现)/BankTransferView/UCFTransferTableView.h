@@ -11,6 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UCFTransferTableView : UIView
+@property(nonatomic,copy)NSString *bankStr;
 - (void)refreshView;
 @end
 

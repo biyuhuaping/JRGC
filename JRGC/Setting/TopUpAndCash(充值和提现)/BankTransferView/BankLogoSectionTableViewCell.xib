@@ -171,10 +171,8 @@
                         <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.92156862745098034" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="aM1-dR-T7r" firstAttribute="centerY" secondItem="7km-Kg-5rk" secondAttribute="centerY" id="4gw-Yi-yMn"/>
-                            <constraint firstAttribute="width" secondItem="7km-Kg-5rk" secondAttribute="height" multiplier="149:40" id="DpV-lh-STb"/>
                             <constraint firstItem="ged-Y5-WH5" firstAttribute="leading" secondItem="aM1-dR-T7r" secondAttribute="trailing" constant="10" id="Fb4-er-5h4"/>
                             <constraint firstItem="ged-Y5-WH5" firstAttribute="centerY" secondItem="7km-Kg-5rk" secondAttribute="centerY" id="Pyh-n6-LGg"/>
-                            <constraint firstAttribute="width" secondItem="7km-Kg-5rk" secondAttribute="height" multiplier="149:40" id="QXz-bY-fsZ"/>
                             <constraint firstItem="aM1-dR-T7r" firstAttribute="top" secondItem="7km-Kg-5rk" secondAttribute="top" constant="7" id="cIy-Od-dTs"/>
                             <constraint firstItem="aM1-dR-T7r" firstAttribute="leading" secondItem="7km-Kg-5rk" secondAttribute="leading" constant="10" id="jEd-Hd-SNl"/>
                             <constraint firstItem="ne9-In-30M" firstAttribute="centerY" secondItem="7km-Kg-5rk" secondAttribute="centerY" id="rXh-0e-Ahh"/>

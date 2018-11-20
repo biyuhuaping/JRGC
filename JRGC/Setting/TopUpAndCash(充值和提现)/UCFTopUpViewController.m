@@ -1052,7 +1052,7 @@
 //            rechargeWebVC.navTitle = @"即将跳转";
             rechargeWebVC.url = urlStr;
             rechargeWebVC.accoutType = self.accoutType;
-            rechargeWebVC.rootVc = self.uperViewController;
+            rechargeWebVC.rootVc = self;
             [self.navigationController pushViewController:rechargeWebVC animated:YES];
         }
         else{

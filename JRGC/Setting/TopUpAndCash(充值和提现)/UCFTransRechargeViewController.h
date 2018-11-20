@@ -9,5 +9,5 @@
 #import "UCFBaseViewController.h"
 
 @interface UCFTransRechargeViewController : UCFBaseViewController
-
+@property(nonatomic, copy) NSString *bankStr;
 @end

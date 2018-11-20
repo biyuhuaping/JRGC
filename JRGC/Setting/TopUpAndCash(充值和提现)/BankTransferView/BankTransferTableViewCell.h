@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BankTransferTableViewCell : UITableViewCell
-
+- (void)setSecondLabelText:(NSString *)str;
 @end
 
 NS_ASSUME_NONNULL_END
