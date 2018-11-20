@@ -202,16 +202,11 @@
 
     if (self.accoutType == SelectAccoutTypeHoner)
     {
-//        self.baseViewTop.constant = 0;
-
         self.codeTextFieldHeight.constant = 37;
         self.sendButtonHeight.constant = 37;
         self.getCodeButton.hidden = NO;
         self.verificationCodeField.hidden = NO;
         baseTitleLabel.text = @"尊享充值";
-        
-       
-        
     }else{
         self.codeTextFieldHeight.constant = 0;
         self.sendButtonHeight.constant = 0;
@@ -243,12 +238,7 @@
     _msgTipLabel.userInteractionEnabled = YES;
     _msgTipLabel.text = @"";
 }
-//- (void)noticeView:(UCFNoticeView *)noticeView didClickedNotice:(UCFNoticeModel *)notice
-//{
-//    FullWebViewController *controller = [[FullWebViewController alloc] initWithWebUrl:@"https://static.9888.cn/pages/transferNotice/notice.html"  title:@"转账充值调整公告"];
-//    controller.baseTitleType = @"detail_heTong";
-//    [self.navigationController pushViewController:controller animated:YES];
-//}
+
 
 -(void)showDeleagateView:(ZBLinkLabelModel *)linkModel
 {
@@ -941,7 +931,7 @@
             }
             NSString *bankPhone =  [dic[@"data"][@"bankInfo"] objectSafeForKey:@"bankPhone"];
             isSpecial = [[dic[@"data"][@"bankInfo"] objectSafeForKey:@"isSpecial"] boolValue];
-          BOOL isCompanyAgent  = [[dic[@"data"][@"bankInfo"] objectSafeForKey:@"isCompanyAgent"] boolValue];
+            BOOL isCompanyAgent  = [[dic[@"data"][@"bankInfo"] objectSafeForKey:@"isCompanyAgent"] boolValue];
             if (isSpecial || isCompanyAgent) {
 
                 UIAlertView *alerView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请直接转账至徽商电子账户" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"查看账户", nil];
