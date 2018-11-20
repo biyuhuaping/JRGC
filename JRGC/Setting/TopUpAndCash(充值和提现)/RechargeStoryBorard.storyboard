@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -24,7 +26,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EEF-ec-lfM">
                                 <rect key="frame" x="0.0" y="30" width="600" height="40"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Qj-8k-4C5">
+                                    <button opaque="NO" tag="100" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Qj-8k-4C5">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="40"/>
                                         <state key="normal" title="快捷充值">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -36,7 +38,7 @@
                                             <action selector="topViewButtonClick:" destination="xfW-1X-zxj" eventType="touchUpInside" id="HdR-VT-AYO"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zDg-1C-dqp">
+                                    <button opaque="NO" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zDg-1C-dqp">
                                         <rect key="frame" x="300" y="0.0" width="300" height="40"/>
                                         <state key="normal" title="转账充值">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -56,9 +58,9 @@
                                             <constraint firstAttribute="width" constant="100" id="tzq-wp-EPw"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WJU-RC-o2O">
+                                    <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WJU-RC-o2O">
                                         <rect key="frame" x="0.0" y="39" width="600" height="1"/>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" red="0.84705882352941175" green="0.84705882352941175" blue="0.84705882352941175" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="Mt3-EY-LOA"/>
                                         </constraints>
@@ -88,6 +90,10 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yML-xb-3JI">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="730"/>
                                         <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9NB-I0-g83">
+                                                <rect key="frame" x="0.0" y="0.0" width="600" height="730"/>
+                                                <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
+                                            </view>
                                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1t8-CK-fvw">
                                                 <rect key="frame" x="0.0" y="0.0" width="600" height="730"/>
                                                 <subviews>
@@ -365,23 +371,6 @@
                                                     <constraint firstItem="c6N-dH-Mq1" firstAttribute="top" secondItem="1t8-CK-fvw" secondAttribute="top" id="gII-dq-UVj"/>
                                                 </constraints>
                                             </scrollView>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9NB-I0-g83">
-                                                <rect key="frame" x="0.0" y="0.0" width="600" height="730"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="接徽商银行通知，根据《网络借贷资金存管业务指引》要求，已对通过手机银行、网银或银行人工柜台向存管账户充值的方式做相应调整：" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AjC-7E-IY2">
-                                                        <rect key="frame" x="0.0" y="19.999999999999996" width="600" height="40.666666666666657"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                </subviews>
-                                                <color key="backgroundColor" red="0.99215686270000003" green="0.30196078430000001" blue="0.29803921570000003" alpha="1" colorSpace="calibratedRGB"/>
-                                                <constraints>
-                                                    <constraint firstItem="AjC-7E-IY2" firstAttribute="leading" secondItem="9NB-I0-g83" secondAttribute="leading" id="DdS-zl-0Zg"/>
-                                                    <constraint firstItem="AjC-7E-IY2" firstAttribute="top" secondItem="9NB-I0-g83" secondAttribute="top" constant="20" id="OKn-of-zot"/>
-                                                    <constraint firstAttribute="trailing" secondItem="AjC-7E-IY2" secondAttribute="trailing" id="Xfr-1P-Ott"/>
-                                                </constraints>
-                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -438,10 +427,12 @@
                         <outlet property="msgTipLabel" destination="xDS-5s-7iQ" id="Ewl-SA-mXZ"/>
                         <outlet property="phoneTextField" destination="pB8-9y-hAA" id="VTZ-iN-dZH"/>
                         <outlet property="rechargeTopCo" destination="YiF-Mz-w3Q" id="qA0-ha-Ug5"/>
+                        <outlet property="rightBaseView" destination="9NB-I0-g83" id="h9n-2H-Lbv"/>
                         <outlet property="segeScrollView" destination="EEM-04-mV6" id="i2g-6e-Zry"/>
                         <outlet property="sendButtonHeight" destination="frZ-0x-KB8" id="hQr-Hf-gh4"/>
                         <outlet property="serviceLabel" destination="0sc-69-t03" id="NIZ-4f-tWf"/>
                         <outlet property="telServiceLabel" destination="gaU-xC-cLx" id="XHg-RR-p8v"/>
+                        <outlet property="topBaseBottomRedView" destination="51n-Ee-WXb" id="NRs-On-6Dk"/>
                         <outlet property="topBaseView" destination="EEF-ec-lfM" id="JZB-wG-bEh"/>
                         <outlet property="topUpButton" destination="J4u-PG-E6x" id="imX-TC-abq"/>
                         <outlet property="topUpLabelTextField" destination="IY4-fl-7io" id="wPK-zg-UfF"/>
@@ -450,7 +441,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8ZL-8K-8h5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1087" y="-32"/>
+            <point key="canvasLocation" x="-1377" y="-54"/>
         </scene>
     </scenes>
     <resources>

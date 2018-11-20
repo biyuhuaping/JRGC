@@ -92,4 +92,13 @@ static inline CGFloat ZBFlushFactorForTextAlignment(NSTextAlignment textAlignmen
     NSRange range = [self.text rangeOfString:string];
     [self setFont:font range:range];
 }
+- (void)setLineSpace:(CGFloat)space string:(NSString *)string
+{
+    NSMutableAttributedString * attributedString1 = [[NSMutableAttributedString alloc] initWithString:string];
+    NSMutableParagraphStyle * paragraphStyle1 = [[NSMutableParagraphStyle alloc] init];
+    [paragraphStyle1 setLineSpacing:8];
+    [attributedString1 addAttribute:NSParagraphStyleAttributeName value:paragraphStyle1 range:NSMakeRange(0, [string length])];
+    [self setAttributedText:attributedString1];
+    [self sizeToFit];
+}
 @end

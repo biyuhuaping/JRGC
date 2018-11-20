@@ -34,6 +34,16 @@
 		330611BD212ABAAB00955BD6 /* UCFLanchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 330611BB212ABAAB00955BD6 /* UCFLanchViewController.m */; };
 		330611BE212ABAAB00955BD6 /* UCFLanchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 330611BC212ABAAB00955BD6 /* UCFLanchViewController.xib */; };
 		334654B6215E08270046A057 /* LOGO微金.png in Resources */ = {isa = PBXBuildFile; fileRef = 334654B5215E08270046A057 /* LOGO微金.png */; };
+		3382D20C21A25BD900104CCD /* UCFTransferTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3382D20B21A25BD900104CCD /* UCFTransferTableView.m */; };
+		3382D21521A267CE00104CCD /* BankTransferTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3382D21321A267CE00104CCD /* BankTransferTableViewCell.m */; };
+		3382D21621A267CE00104CCD /* BankTransferTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3382D21421A267CE00104CCD /* BankTransferTableViewCell.xib */; };
+		3382D21A21A2698A00104CCD /* BankDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3382D21821A2698A00104CCD /* BankDetailTableViewCell.m */; };
+		3382D21B21A2698A00104CCD /* BankDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3382D21921A2698A00104CCD /* BankDetailTableViewCell.xib */; };
+		3382D21F21A286F200104CCD /* BankLogoSectionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3382D21D21A286F200104CCD /* BankLogoSectionTableViewCell.m */; };
+		3382D22021A286F200104CCD /* BankLogoSectionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3382D21E21A286F200104CCD /* BankLogoSectionTableViewCell.xib */; };
+		339930A821A29BBF00C72F54 /* UCFTransferTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 339930A721A29BBF00C72F54 /* UCFTransferTableView.xib */; };
+		339930AC21A2B0E000C72F54 /* BankTraIntroduceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 339930AA21A2B0E000C72F54 /* BankTraIntroduceTableViewCell.m */; };
+		339930AD21A2B0E000C72F54 /* BankTraIntroduceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 339930AB21A2B0E000C72F54 /* BankTraIntroduceTableViewCell.xib */; };
 		33B17644215A14F5007D1F91 /* LMJScrollTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B17642215A14F4007D1F91 /* LMJScrollTextView.m */; };
 		33B66151215C7FB70027325F /* UCFZiZHIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B6614E215C7FB60027325F /* UCFZiZHIViewController.m */; };
 		33B66152215C7FB70027325F /* UCFZiZHIViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33B6614F215C7FB60027325F /* UCFZiZHIViewController.xib */; };
@@ -1123,6 +1133,21 @@
 		330611BB212ABAAB00955BD6 /* UCFLanchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFLanchViewController.m; sourceTree = "<group>"; };
 		330611BC212ABAAB00955BD6 /* UCFLanchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UCFLanchViewController.xib; sourceTree = "<group>"; };
 		334654B5215E08270046A057 /* LOGO微金.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LOGO微金.png"; sourceTree = "<group>"; };
+		3382D20A21A25BD900104CCD /* UCFTransferTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFTransferTableView.h; sourceTree = "<group>"; };
+		3382D20B21A25BD900104CCD /* UCFTransferTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFTransferTableView.m; sourceTree = "<group>"; };
+		3382D21221A267CE00104CCD /* BankTransferTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BankTransferTableViewCell.h; sourceTree = "<group>"; };
+		3382D21321A267CE00104CCD /* BankTransferTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BankTransferTableViewCell.m; sourceTree = "<group>"; };
+		3382D21421A267CE00104CCD /* BankTransferTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BankTransferTableViewCell.xib; sourceTree = "<group>"; };
+		3382D21721A2698A00104CCD /* BankDetailTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BankDetailTableViewCell.h; sourceTree = "<group>"; };
+		3382D21821A2698A00104CCD /* BankDetailTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BankDetailTableViewCell.m; sourceTree = "<group>"; };
+		3382D21921A2698A00104CCD /* BankDetailTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BankDetailTableViewCell.xib; sourceTree = "<group>"; };
+		3382D21C21A286F200104CCD /* BankLogoSectionTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BankLogoSectionTableViewCell.h; sourceTree = "<group>"; };
+		3382D21D21A286F200104CCD /* BankLogoSectionTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BankLogoSectionTableViewCell.m; sourceTree = "<group>"; };
+		3382D21E21A286F200104CCD /* BankLogoSectionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BankLogoSectionTableViewCell.xib; sourceTree = "<group>"; };
+		339930A721A29BBF00C72F54 /* UCFTransferTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFTransferTableView.xib; sourceTree = "<group>"; };
+		339930A921A2B0E000C72F54 /* BankTraIntroduceTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BankTraIntroduceTableViewCell.h; sourceTree = "<group>"; };
+		339930AA21A2B0E000C72F54 /* BankTraIntroduceTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BankTraIntroduceTableViewCell.m; sourceTree = "<group>"; };
+		339930AB21A2B0E000C72F54 /* BankTraIntroduceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BankTraIntroduceTableViewCell.xib; sourceTree = "<group>"; };
 		33B17642215A14F4007D1F91 /* LMJScrollTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMJScrollTextView.m; sourceTree = "<group>"; };
 		33B17643215A14F4007D1F91 /* LMJScrollTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMJScrollTextView.h; sourceTree = "<group>"; };
 		33B6614E215C7FB60027325F /* UCFZiZHIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFZiZHIViewController.m; sourceTree = "<group>"; };
@@ -2938,6 +2963,28 @@
 			name = TipCell;
 			sourceTree = "<group>";
 		};
+		3382D20F21A2648C00104CCD /* BankTransferView */ = {
+			isa = PBXGroup;
+			children = (
+				3382D20A21A25BD900104CCD /* UCFTransferTableView.h */,
+				3382D20B21A25BD900104CCD /* UCFTransferTableView.m */,
+				339930A721A29BBF00C72F54 /* UCFTransferTableView.xib */,
+				3382D21221A267CE00104CCD /* BankTransferTableViewCell.h */,
+				3382D21321A267CE00104CCD /* BankTransferTableViewCell.m */,
+				3382D21421A267CE00104CCD /* BankTransferTableViewCell.xib */,
+				3382D21721A2698A00104CCD /* BankDetailTableViewCell.h */,
+				3382D21821A2698A00104CCD /* BankDetailTableViewCell.m */,
+				3382D21921A2698A00104CCD /* BankDetailTableViewCell.xib */,
+				3382D21C21A286F200104CCD /* BankLogoSectionTableViewCell.h */,
+				3382D21D21A286F200104CCD /* BankLogoSectionTableViewCell.m */,
+				3382D21E21A286F200104CCD /* BankLogoSectionTableViewCell.xib */,
+				339930A921A2B0E000C72F54 /* BankTraIntroduceTableViewCell.h */,
+				339930AA21A2B0E000C72F54 /* BankTraIntroduceTableViewCell.m */,
+				339930AB21A2B0E000C72F54 /* BankTraIntroduceTableViewCell.xib */,
+			);
+			path = BankTransferView;
+			sourceTree = "<group>";
+		};
 		33B17641215A14F4007D1F91 /* LMJScrollTextView */ = {
 			isa = PBXGroup;
 			children = (
@@ -3852,6 +3899,7 @@
 		74541C841ADF95ED0009D27D /* TopUpAndCash(充值和提现) */ = {
 			isa = PBXGroup;
 			children = (
+				3382D20F21A2648C00104CCD /* BankTransferView */,
 				4AF9C5E61B0B419600E3BE7D /* RechargeListCell.h */,
 				4AF9C5E71B0B419600E3BE7D /* RechargeListCell.m */,
 				83FF3E471E12159B00DFB99C /* UCFCashTableViewCell.h */,
@@ -7037,10 +7085,12 @@
 				FB7E51B21ADE5E4000878C9F /* InvestmentCell.xib in Resources */,
 				8346B26D1F70F2B400219D41 /* UCFRechargeOrCashViewController.xib in Resources */,
 				FB4F9E4B1D62A6C400CCB492 /* UpgradeAccountVC.xib in Resources */,
+				339930AD21A2B0E000C72F54 /* BankTraIntroduceTableViewCell.xib in Resources */,
 				74B1FC5D1F73C73100BACF8A /* UCFHomeListFooterView.xib in Resources */,
 				74EB30741B0E0EC900D27BA9 /* UCFBankTableViewCell.xib in Resources */,
 				749140BB1F18D1EA00E624CE /* UCFGoldCashMoneyViewController.xib in Resources */,
 				E37086C81D61E3030041D293 /* UCFOldUserGuideViewController.xib in Resources */,
+				3382D22021A286F200104CCD /* BankLogoSectionTableViewCell.xib in Resources */,
 				74B98C961F70C9E100CB6A9F /* UCFMineHeaderView.xib in Resources */,
 				FB572C0D1C7C3000000031F1 /* UCFCouponInterest.xib in Resources */,
 				A8DAEAD01FD929890088AF70 /* assets.png in Resources */,
@@ -7146,6 +7196,7 @@
 				7443C72E1F1EFF7C009669C0 /* UCFGoldCashThreeCell.xib in Resources */,
 				74F649331F46EA0E00328235 /* UCFCashGoldHeader.xib in Resources */,
 				FBE265DB1B26CAB100240A79 /* UCFMyClaimCtrl.xib in Resources */,
+				339930A821A29BBF00C72F54 /* UCFTransferTableView.xib in Resources */,
 				7443C7331F1F3892009669C0 /* UCFGoldRecordHeaderFooterView.xib in Resources */,
 				E31141611D92769E00FF880A /* UCFWebViewJavascriptBridgeBBS.xib in Resources */,
 				33B6616A215C81480027325F /* 合作协议.pdf in Resources */,
@@ -7164,6 +7215,7 @@
 				747B103D1F15F83500CECB2C /* UCFGoldenHeaderView.xib in Resources */,
 				83EB21E31D758EE50069EF95 /* UCFCashRecordListViewController.xib in Resources */,
 				74FC22841BA6AB6700D1660A /* UCFCouponViewController.xib in Resources */,
+				3382D21B21A2698A00104CCD /* BankDetailTableViewCell.xib in Resources */,
 				74A2C0D11F4306A000EDF0FA /* UCFGoldCashButtonCell.xib in Resources */,
 				74270D5C1EC5AE8700F9419B /* UCFInvitationRewardCell2.xib in Resources */,
 				E3C1179F1D40CFCC0053A052 /* UCFContributionValueViewController.xib in Resources */,
@@ -7257,6 +7309,7 @@
 				83CD84401F13A50800227704 /* UCFProjectListCell.xib in Resources */,
 				74270D211EC595ED00F9419B /* UCFRebateCell1.xib in Resources */,
 				740DAEC21E56E2D100CD7C8F /* UCFBatchProjectController.xib in Resources */,
+				3382D21621A267CE00104CCD /* BankTransferTableViewCell.xib in Resources */,
 				4AA2AA811E5B17B7006E83F8 /* UCFBatchSetNumWebViewController.xib in Resources */,
 				746BBEAC1AF8E93E00EBA0E7 /* UCFCouponUseCell.xib in Resources */,
 				74677C671F165022003768EB /* UCFGoldRechargeViewController.xib in Resources */,
@@ -7355,6 +7408,7 @@
 				7470C8481E5E7CDE007D52F4 /* UCFCollectionBidModel.m in Sources */,
 				74270C9D1EC58F6800F9419B /* UCFHomeListCell.m in Sources */,
 				74270CA41EC58F6800F9419B /* UCFSignView.m in Sources */,
+				339930AC21A2B0E000C72F54 /* BankTraIntroduceTableViewCell.m in Sources */,
 				83AB495F1F6A766500C4231F /* UCFAccountPieCharViewController.m in Sources */,
 				FB4F9E731D62A6F800CCB492 /* TradePasswordVC.m in Sources */,
 				7B2E568E1ADBBE5F008B0F9E /* UCFRetrievePasswordStepOneViewController.m in Sources */,
@@ -7446,6 +7500,7 @@
 				74270C971EC58F6800F9419B /* UCFHomeListCellPresenter.m in Sources */,
 				7412323C1F14BB150061408A /* UCFPickView.m in Sources */,
 				FB1A6A961BE8BD1E004C73B8 /* Touch3DSingle.m in Sources */,
+				3382D21A21A2698A00104CCD /* BankDetailTableViewCell.m in Sources */,
 				74EC4B7F1F4AEA6000E4ACB0 /* UCFGoldIncreaseListModel.m in Sources */,
 				833A6EAD1E55466B00C8A494 /* UCFCollectionListViewController.m in Sources */,
 				83CD843D1F13A50800227704 /* UCFLoadingView.m in Sources */,
@@ -7905,6 +7960,7 @@
 				A8AD6F851EFA6BDE000AF323 /* PagerView.m in Sources */,
 				7BCA18621AD7813E0077C2A6 /* UCFInvestmentDetailViewController.m in Sources */,
 				FBEDF1DF1CB5171500116E12 /* MyViewController.m in Sources */,
+				3382D21F21A286F200104CCD /* BankLogoSectionTableViewCell.m in Sources */,
 				FBC234731B31678800C783A8 /* UCFBackMoneyCell1.m in Sources */,
 				4A8D5F741B0C1DCF0053F045 /* RechargeListViewController.m in Sources */,
 				7BE45C911ADF9C4C00B955A6 /* HMSegmentedControl.m in Sources */,
@@ -7966,6 +8022,7 @@
 				7BFE3E861AC55C98002A53A2 /* main.m in Sources */,
 				4AC947D71E5598F600354CF8 /* BatchSetView.m in Sources */,
 				FBB685821AE4A76800F222B6 /* MJRefreshConst.m in Sources */,
+				3382D21521A267CE00104CCD /* BankTransferTableViewCell.m in Sources */,
 				74A2C0D81F4306A000EDF0FA /* UCFGoldCashThirdCell.m in Sources */,
 				7BC8AA221AD4C74200BF4660 /* UCFRepayment.m in Sources */,
 				74CE8B861F220C7500512B15 /* UCFContractModel.m in Sources */,
@@ -7989,6 +8046,7 @@
 				FB120BB51ADE462F00023365 /* CircleShapeLayer.m in Sources */,
 				7BA6E4C71AD6731900FE8C37 /* UIView+WebCacheOperation.m in Sources */,
 				74931A141B1326B400143424 /* pinyin.c in Sources */,
+				3382D20C21A25BD900104CCD /* UCFTransferTableView.m in Sources */,
 				7BC8AA211AD4C74200BF4660 /* UCFNormalInvestment.m in Sources */,
 				74BDA9841F09F6C60054403F /* FSCalendar+Deprecated.m in Sources */,
 				744B9EDE1F0BA64600440FBA /* UCFCalendarDayInfo.m in Sources */,
