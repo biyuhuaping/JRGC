@@ -592,7 +592,10 @@
                                 purchaseViewController.accoutType = self.accoutType;
                                 purchaseViewController.rootVc = self;
                                 [weakSelf.navigationController pushViewController:purchaseViewController animated:YES];
-                            } else {
+                            } else if ([rstcode intValue] == 21){
+                                
+                            }
+                            else {
                                 [MBProgressHUD displayHudError:statusdes withShowTimes:3];
                             }
                         }];

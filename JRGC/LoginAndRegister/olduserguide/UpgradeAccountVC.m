@@ -770,7 +770,7 @@
                 }
                 else
                 {
-                    _textField2.text = asteriskIdCardNo;
+                    _textField2.text = self.idCardNo;
                 }
                 [UserInfoSingle sharedManager].mobile = asteriskMobile;
             }
