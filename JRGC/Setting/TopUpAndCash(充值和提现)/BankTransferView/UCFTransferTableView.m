@@ -76,6 +76,7 @@
             cell =  [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([BankTraIntroduceTableViewCell class]) owner:self options:nil][0];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
+        
         return cell;
     }
     return nil;

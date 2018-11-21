@@ -96,7 +96,7 @@ static inline CGFloat ZBFlushFactorForTextAlignment(NSTextAlignment textAlignmen
 {
     NSMutableAttributedString * attributedString1 = [[NSMutableAttributedString alloc] initWithString:string];
     NSMutableParagraphStyle * paragraphStyle1 = [[NSMutableParagraphStyle alloc] init];
-    [paragraphStyle1 setLineSpacing:8];
+    [paragraphStyle1 setLineSpacing:space];
     [attributedString1 addAttribute:NSParagraphStyleAttributeName value:paragraphStyle1 range:NSMakeRange(0, [string length])];
     [self setAttributedText:attributedString1];
     [self sizeToFit];

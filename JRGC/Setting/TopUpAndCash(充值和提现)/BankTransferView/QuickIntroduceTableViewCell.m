@@ -7,6 +7,7 @@
 //
 
 #import "QuickIntroduceTableViewCell.h"
+
 @interface QuickIntroduceTableViewCell()
 
 @end
@@ -15,6 +16,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     _showLabel.textColor = UIColorWithRGB(0x999999);
+
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

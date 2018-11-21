@@ -296,13 +296,15 @@
             cell =  [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([QuickIntroduceTableViewCell class]) owner:self options:nil][0];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
-        
+
     }
     cell.showLabel.text = self.dataArr[indexPath.row];
-    if ([cell.showLabel.text containsString:@"如果充值金额没有及时到账，请拨打客服查询"]) {
+    [cell.showLabel setLineSpace:3 string:cell.showLabel.text];
 
+    if ([cell.showLabel.text containsString:@"如果充值金额没有及时到账，请拨打客服查询"]) {
         [cell.showLabel setFontColor:UIColorWithRGB(0x4aa1f9) string:@"拨打客服"];
     }
+    
     return cell;
 }
 - (void)telServiceNo
