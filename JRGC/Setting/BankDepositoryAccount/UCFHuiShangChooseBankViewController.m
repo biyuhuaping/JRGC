@@ -252,7 +252,11 @@
                 } otherButtonTitles:@"继续绑卡"];
                 [alert_bankbrach show];
             }
-            [self.bankDelegate chooseBankData:self.bankList[indexPath.section][indexPath.row]];
+            else{
+                [self.bankDelegate chooseBankData:self.bankList[indexPath.section][indexPath.row]];
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+            
             
             
         }
