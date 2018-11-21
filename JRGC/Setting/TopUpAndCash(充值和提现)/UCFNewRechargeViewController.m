@@ -10,7 +10,7 @@
 #import "UCFTransRechargeViewController.h"
 #import "UCFQuickRechargeViewController.h"
 #import "RechargeListViewController.h"
-@interface UCFNewRechargeViewController ()
+@interface UCFNewRechargeViewController ()<UIScrollViewDelegate>
 @property(strong, nonatomic)UIScrollView *baseScroView;
 @property(strong, nonatomic)UCFTransRechargeViewController *transVC;
 @property(strong, nonatomic)UCFQuickRechargeViewController *quickVC;
@@ -105,9 +105,27 @@
         _baseScroView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, CGRectGetHeight(self.view.frame) - 40)];
         _baseScroView.bounces = NO;
         _baseScroView.pagingEnabled = YES;
+        _baseScroView.delegate = self;
         _baseScroView.contentSize = CGSizeMake(ScreenWidth * 2, CGRectGetHeight(self.view.frame) - 40);
     }
     return _baseScroView;
+}
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (scrollView == _baseScroView) {
+        CGFloat x = scrollView.contentOffset.x;
+        _quickButton.selected = NO;
+        _bankTransButton.selected = NO;
+        if (x/ScreenWidth < 0.5) {
+            CGPoint center = _quickButton.center;
+            _bottomRedView.frame = CGRectMake(center.x - CGRectGetWidth(_bottomRedView.frame)/2.0f, CGRectGetMinY(_bottomRedView.frame), CGRectGetWidth(_bottomRedView.frame), CGRectGetHeight(_bottomRedView.frame));
+            _quickButton.selected = YES;
+        } else {
+            CGPoint center = _bankTransButton.center;
+            _bottomRedView.frame = CGRectMake(center.x - CGRectGetWidth(_bottomRedView.frame)/2.0f, CGRectGetMinY(_bottomRedView.frame), CGRectGetWidth(_bottomRedView.frame), CGRectGetHeight(_bottomRedView.frame));
+            _bankTransButton.selected = YES;
+        }
+    }
 }
 - (UCFTransRechargeViewController *)transVC
 {
