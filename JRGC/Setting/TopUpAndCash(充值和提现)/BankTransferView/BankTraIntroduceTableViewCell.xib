@@ -25,7 +25,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="●" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PQm-xI-4wD">
-                        <rect key="frame" x="15" y="44" width="12" height="16"/>
+                        <rect key="frame" x="15" y="43" width="12" height="16"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="12" id="FZU-jb-euE"/>
                         </constraints>
@@ -34,7 +34,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="●" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zU8-Lr-iCF">
-                        <rect key="frame" x="15" y="97" width="12" height="16"/>
+                        <rect key="frame" x="15" y="100" width="12" height="16"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="12" id="GXd-9e-zmb"/>
                         </constraints>
@@ -43,15 +43,15 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="收款账户为2310601021000030712，此账户为徽商存管汇总账户，资金将受徽商银行监管；客户转账时应当填写附言1，即1代表出借人账户，使用非绑定银行账户进行转账充值的，则入账失败。" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P47-un-1hF">
-                        <rect key="frame" x="31" y="96" width="291" height="62.5"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <rect key="frame" x="31" y="101" width="291" height="57.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="付款账户应为客户开立存管账户时绑定的银行账户。(个人客户为Ⅰ类银行卡，对公客户为单位一般结算账户)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vdt-kl-EwJ">
-                        <rect key="frame" x="31" y="44" width="291" height="47"/>
+                        <rect key="frame" x="31" y="44" width="291" height="52"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -59,21 +59,26 @@
                 <constraints>
                     <constraint firstItem="PQm-xI-4wD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="2bV-in-ZMB"/>
                     <constraint firstItem="zU8-Lr-iCF" firstAttribute="leading" secondItem="PQm-xI-4wD" secondAttribute="leading" id="4KW-fA-f1S"/>
-                    <constraint firstItem="PQm-xI-4wD" firstAttribute="top" secondItem="kpB-5x-m7a" secondAttribute="bottom" constant="3" id="C5K-mR-5j2"/>
+                    <constraint firstItem="PQm-xI-4wD" firstAttribute="top" secondItem="kpB-5x-m7a" secondAttribute="bottom" constant="2" id="C5K-mR-5j2"/>
                     <constraint firstAttribute="trailing" secondItem="P47-un-1hF" secondAttribute="trailing" constant="15" id="EnD-rZ-gUB"/>
                     <constraint firstItem="vdt-kl-EwJ" firstAttribute="top" secondItem="kpB-5x-m7a" secondAttribute="bottom" constant="3" id="Jot-8H-uBr"/>
                     <constraint firstAttribute="bottom" secondItem="P47-un-1hF" secondAttribute="bottom" constant="31" id="MhG-si-DE5"/>
                     <constraint firstAttribute="trailing" secondItem="vdt-kl-EwJ" secondAttribute="trailing" constant="15" id="a1h-ap-KOT"/>
                     <constraint firstItem="vdt-kl-EwJ" firstAttribute="leading" secondItem="PQm-xI-4wD" secondAttribute="trailing" constant="4" id="aJK-qh-nzw"/>
                     <constraint firstItem="P47-un-1hF" firstAttribute="top" secondItem="vdt-kl-EwJ" secondAttribute="bottom" constant="5" id="bxc-aj-xpD"/>
-                    <constraint firstItem="zU8-Lr-iCF" firstAttribute="top" secondItem="vdt-kl-EwJ" secondAttribute="bottom" constant="6" id="dz1-V6-rkV"/>
+                    <constraint firstItem="zU8-Lr-iCF" firstAttribute="top" secondItem="vdt-kl-EwJ" secondAttribute="bottom" constant="4" id="dz1-V6-rkV"/>
                     <constraint firstItem="kpB-5x-m7a" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="25" id="ido-9S-lnr"/>
                     <constraint firstItem="P47-un-1hF" firstAttribute="leading" secondItem="vdt-kl-EwJ" secondAttribute="leading" id="npT-FA-MQt"/>
                     <constraint firstItem="kpB-5x-m7a" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="zkN-ZQ-TD0"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
-            <point key="canvasLocation" x="80.799999999999997" y="102.54872563718142"/>
+            <connections>
+                <outlet property="lab1" destination="kpB-5x-m7a" id="onM-pI-BfS"/>
+                <outlet property="lab2" destination="P47-un-1hF" id="UOx-TX-b29"/>
+                <outlet property="lab3" destination="vdt-kl-EwJ" id="Z6N-yC-AaV"/>
+            </connections>
+            <point key="canvasLocation" x="210" y="147"/>
         </tableViewCell>
     </objects>
 </document>

@@ -8,11 +8,18 @@
 
 #import "BankTraIntroduceTableViewCell.h"
 
+@interface BankTraIntroduceTableViewCell ()
+@property (weak, nonatomic) IBOutlet UILabel *lab1;
+@property (weak, nonatomic) IBOutlet UILabel *lab2;
+@property (weak, nonatomic) IBOutlet UILabel *lab3;
+
+@end
+
 @implementation BankTraIntroduceTableViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+    _lab1.textColor = _lab2.textColor =_lab3.textColor = UIColorWithRGB(0x999999);
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
