@@ -98,7 +98,7 @@ static inline CGFloat ZBFlushFactorForTextAlignment(NSTextAlignment textAlignmen
 }
 - (void)setMoreColor:(UIColor *)color rangeArray:(NSMutableArray *)range
 {
-    NSMutableAttributedString *attributed = [[NSMutableAttributedString alloc] initWithString:self.text];;
+    NSMutableAttributedString *attributed = [[NSMutableAttributedString alloc] initWithAttributedString:self.attributedText];
     
     for (int i = 0; i < [range count]; i++) {
         NSDictionary *dic = [range objectAtIndex:i];
