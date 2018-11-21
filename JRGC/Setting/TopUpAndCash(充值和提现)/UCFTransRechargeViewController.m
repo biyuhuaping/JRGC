@@ -21,6 +21,11 @@
     _showView.delegate = self;
     [self.view addSubview:_showView];
 }
+- (void)refreshTableView
+{
+    [_showView refreshView];
+    
+}
 - (void)transferTableView:(UCFTransferTableView *)view withClickbutton:(UIButton *)button
 {
     NSString *rechargeLimiteUrl = @"https://static.9888.cn/pages/transferNotice/other_notice.html";

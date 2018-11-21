@@ -226,12 +226,14 @@
     {
         if (![self.bankList[indexPath.section][indexPath.row][@"isQuick"] isEqualToString:@"yes"] )
         {
+            __weak typeof(self) weakSelf = self;
+
             //不支持快捷
             BlockUIAlertView *alert_bankbrach= [[BlockUIAlertView alloc]initWithTitle:@"提示" message:@"该银行不支持快捷充值，仅支持网银充值或转账的方式进行充值，确认绑定该银行卡吗？" cancelButtonTitle:@"我再想想" clickButton:^(NSInteger index) {
                 if (index == 1) {
                     //支持快捷支付
-                    [self.bankDelegate chooseBankData:self.bankList[indexPath.section][indexPath.row]];
-                    [self.navigationController popViewControllerAnimated:YES];
+                    [weakSelf.bankDelegate chooseBankData:weakSelf.bankList[indexPath.section][indexPath.row]];
+                    [weakSelf.navigationController popViewControllerAnimated:YES];
                 }
             } otherButtonTitles:@"继续绑卡"];
             [alert_bankbrach show];
@@ -242,19 +244,20 @@
             //支持快捷支付
             if ([self.bankList[indexPath.section][indexPath.row][@"isQuick"] boolValue] && ![self.bankList[indexPath.section][indexPath.row][@"isRecommend"] boolValue])
             {
+                __weak typeof(self) weakSelf = self;
                 //不是推荐的银行,需要进行提示
                 BlockUIAlertView *alert_bankbrach= [[BlockUIAlertView alloc]initWithTitle:@"提示" message:@"该银行快捷充值的额度较低，确认绑定该银行卡吗？" cancelButtonTitle:@"我再想想" clickButton:^(NSInteger index) {
                     if (index == 1) {
                         //支持快捷支付
-                        [self.bankDelegate chooseBankData:self.bankList[indexPath.section][indexPath.row]];
-                        [self.navigationController popViewControllerAnimated:YES];
+                        [weakSelf.bankDelegate chooseBankData:weakSelf.bankList[indexPath.section][indexPath.row]];
+                        [weakSelf.navigationController popViewControllerAnimated:YES];
                     }
                 } otherButtonTitles:@"继续绑卡"];
                 [alert_bankbrach show];
+                return;
             }
             [self.bankDelegate chooseBankData:self.bankList[indexPath.section][indexPath.row]];
-            
-            
+            [self.navigationController popViewControllerAnimated:YES];
         }
     }
 }

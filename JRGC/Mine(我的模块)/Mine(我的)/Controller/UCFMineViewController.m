@@ -697,10 +697,6 @@
     switch (openStatus)
     {// ***hqy添加
         case 1://未开户-->>>新用户开户
-        {
-            return YES;
-            break;
-        }
         case 2://已开户 --->>>老用户(白名单)开户
         {
             [self showHSAlert:tipStr1];
@@ -813,10 +809,10 @@
             [MBProgressHUD displayHudError:@"此活动暂时未对企业用户开放"];
         }
         else{
-            if([self checkUserCanInvestIsDetail:YES type:SelectAccoutTypeP2P])//判断是否开户
-            {
+//            if([self checkUserCanInvestIsDetail:YES type:SelectAccoutTypeP2P])//判断是否开户
+//            {
                 [self.apiManager getUserIntoGoCoinPageHTTP:YES];
-            }
+//            }
         }
     }
     else   if ([title isEqualToString:@"优惠券"]){
@@ -837,10 +833,10 @@
             [MBProgressHUD displayHudError:@"此活动暂时未对企业用户开放"];
         }
         else{
-            if([self checkUserCanInvestIsDetail:YES type:SelectAccoutTypeP2P])
-            {
+//            if([self checkUserCanInvestIsDetail:YES type:SelectAccoutTypeP2P])
+//            {
               [self.apiManager signWithToken:self.benefitModel.userCenterTicket];
-            }
+//            }
         }
     }
     else  if ([title isEqualToString:@"联系我们"]){//邀请返利

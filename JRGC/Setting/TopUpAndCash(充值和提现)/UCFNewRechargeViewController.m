@@ -124,6 +124,9 @@
             CGPoint center = _bankTransButton.center;
             _bottomRedView.frame = CGRectMake(center.x - CGRectGetWidth(_bottomRedView.frame)/2.0f, CGRectGetMinY(_bottomRedView.frame), CGRectGetWidth(_bottomRedView.frame), CGRectGetHeight(_bottomRedView.frame));
             _bankTransButton.selected = YES;
+            
+            [self.transVC refreshTableView];
+            
         }
     }
 }

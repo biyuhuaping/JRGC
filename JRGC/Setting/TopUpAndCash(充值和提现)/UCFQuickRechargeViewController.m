@@ -45,6 +45,7 @@
     _showTableView.tableHeaderView = _showHeadView;
 
 }
+
 - (void)fetchData
 {
     [UserInfoSingle sharedManager].bankNumTip = @"88888";
@@ -168,7 +169,7 @@
             _showHeadView.bankName.text = [NSString stringWithFormat:@"%@(尾号%@)",_showHeadView.bankName.text,[UCFToolsMehod isNullOrNilWithString:coreDict[@"bankBehindFour"]]];
             [UserInfoSingle sharedManager].bankNumTip = [NSString stringWithFormat:@"尾号(%@)的%@",[UCFToolsMehod isNullOrNilWithString:coreDict[@"bankBehindFour"]],[UCFToolsMehod isNullOrNilWithString:coreDict[@"bankName"]]];
             
-            _showHeadView.bankRechargeLimitLab.text = [NSString stringWithFormat:@"单笔充值限额%@元，单日充值限额%@元",[NSString stringWithFormat:@"%@",coreDict[@"limitOneTime"]],[NSString stringWithFormat:@"%@",coreDict[@"limitOneDay"]]];
+            _showHeadView.bankRechargeLimitLab.text = coreDict[@"limitMess"];
             
             telNum = [NSString stringWithFormat:@"%@",dic[@"data"][@"customerServiceNo"]];
             minRecharge = [NSString stringWithFormat:@"%@",dic[@"data"][@"minAmt"]];
@@ -226,7 +227,7 @@
             rechargeWebVC.url = urlStr;
             rechargeWebVC.accoutType = self.accoutType;
             rechargeWebVC.rootVc = self;
-            [self.navigationController pushViewController:rechargeWebVC animated:YES];
+            [((UIViewController *)self.rootVc).navigationController pushViewController:rechargeWebVC animated:YES];
         }
         else{
             NSString *messageStr = [dic objectSafeForKey:@"message"];
