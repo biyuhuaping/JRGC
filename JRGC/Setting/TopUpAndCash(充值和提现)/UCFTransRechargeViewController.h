@@ -10,4 +10,6 @@
 
 @interface UCFTransRechargeViewController : UCFBaseViewController
 @property(nonatomic, copy) NSString *bankStr;
+- (void)refreshTableView;
+
 @end
