@@ -253,7 +253,7 @@
                 [alert_bankbrach show];
             }
             [self.bankDelegate chooseBankData:self.bankList[indexPath.section][indexPath.row]];
-            [self.navigationController popViewControllerAnimated:YES];
+            
             
         }
     }
