@@ -88,13 +88,19 @@ static inline CGFloat ZBFlushFactorForTextAlignment(NSTextAlignment textAlignmen
         NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger:range.location],@"location",[NSNumber numberWithInteger:range.length],@"length", nil];
         //        NSInteger anInteger = [aNumber integerValue];
         [array addObject:dic];
-        NSRange abc ;
-        abc.length = 1;
-        abc.location = range.location;
-        [strTemp replaceOccurrencesOfString:string withString:@"`" options:NSCaseInsensitiveSearch range:range]; ;
+        
+        [strTemp replaceOccurrencesOfString:string withString:[self getReplaceOccurrencesOfStringNum:range.length] options:NSCaseInsensitiveSearch range:range]; ;
     }
     //    [self setFont:font range:range];
     [self setMoreColor:color rangeArray:array];
+}
+- (NSString *)getReplaceOccurrencesOfStringNum:(NSInteger )num
+{
+    NSMutableString *strLenst = [NSMutableString new];
+    for (int i = 1; i <= num; i++) {
+        [strLenst appendString:@"`"];
+    }
+    return [strLenst copy];
 }
 - (void)setMoreColor:(UIColor *)color rangeArray:(NSMutableArray *)range
 {
