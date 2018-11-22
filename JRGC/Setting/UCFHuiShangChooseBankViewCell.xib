@@ -27,20 +27,20 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="    " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S5o-Xb-jVV">
-                        <rect key="frame" x="49" y="10" width="16" height="18"/>
+                        <rect key="frame" x="54" y="10" width="16" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Label_Recommend_disabled" translatesAutoresizingMaskIntoConstraints="NO" id="Zvv-qO-tMP">
-                        <rect key="frame" x="70" y="10" width="38" height="18"/>
+                        <rect key="frame" x="75" y="10" width="38" height="18"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="18" id="9xN-Z2-Ikt"/>
                             <constraint firstAttribute="width" constant="38" id="CTd-eA-09a"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CXJ-ig-1E0" userLabel="Content" customClass="NZLabel">
-                        <rect key="frame" x="49" y="73.5" width="0.0" height="0.0"/>
+                        <rect key="frame" x="54" y="73.5" width="0.0" height="0.0"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
@@ -48,7 +48,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="bLj-Nt-o8j" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="14" id="9ub-ch-qYw"/>
-                    <constraint firstItem="S5o-Xb-jVV" firstAttribute="leading" secondItem="bLj-Nt-o8j" secondAttribute="trailing" constant="6" id="DRg-dZ-ihK"/>
+                    <constraint firstItem="S5o-Xb-jVV" firstAttribute="leading" secondItem="bLj-Nt-o8j" secondAttribute="trailing" constant="11" id="DRg-dZ-ihK"/>
                     <constraint firstItem="S5o-Xb-jVV" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="ED8-tT-ibt"/>
                     <constraint firstItem="Zvv-qO-tMP" firstAttribute="leading" secondItem="S5o-Xb-jVV" secondAttribute="trailing" constant="5" id="FvV-eX-3Hk"/>
                     <constraint firstItem="Zvv-qO-tMP" firstAttribute="centerY" secondItem="S5o-Xb-jVV" secondAttribute="centerY" id="abo-R2-6UW"/>
