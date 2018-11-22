@@ -7,8 +7,7 @@
 //
 
 #import "UCFNewRechargeViewController.h"
-#import "UCFTransRechargeViewController.h"
-#import "UCFQuickRechargeViewController.h"
+
 #import "RechargeListViewController.h"
 @interface UCFNewRechargeViewController ()<UIScrollViewDelegate>
 @property(strong, nonatomic)UIScrollView *baseScroView;
@@ -60,6 +59,7 @@
     _bottomRedView.frame = CGRectMake(center.x - CGRectGetWidth(_bottomRedView.frame)/2.0f, CGRectGetMinY(_bottomRedView.frame), CGRectGetWidth(_bottomRedView.frame), CGRectGetHeight(_bottomRedView.frame));
     _baseScroView.contentOffset = CGPointMake((button1.tag - 100) * ScreenWidth, 0);
     button1.selected = YES;
+    _quickVC.uperViewController = self.uperViewController;
 }
 - (void)createUI
 {
@@ -137,6 +137,7 @@
     if (!_transVC) {
         _transVC = [[UCFTransRechargeViewController alloc] initWithNibName:@"UCFTransRechargeViewController" bundle:nil];
         _transVC.view.frame = CGRectMake(ScreenWidth, 40, ScreenWidth, CGRectGetHeight(self.view.frame) - 40);
+        _transVC.accoutType = SelectAccoutTypeP2P;
         _transVC.rootVc = self;
     }
     return _transVC;
@@ -146,10 +147,15 @@
         _quickVC = [[UCFQuickRechargeViewController alloc] initWithNibName:@"UCFQuickRechargeViewController" bundle:nil];
         _quickVC.view.frame = CGRectMake(0, 40, ScreenWidth, CGRectGetHeight(self.view.frame) - 40);
         _quickVC.rootVc = self;
+        _quickVC.accoutType = SelectAccoutTypeP2P;
+        
     }
     return _quickVC;
 }
-
+- (void)setDefaultMoney:(NSString *)defaultMoney
+{
+    self.quickVC.defaultMoney = defaultMoney;
+}
 
 
 

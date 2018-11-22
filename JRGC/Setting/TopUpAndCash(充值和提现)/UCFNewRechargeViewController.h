@@ -7,7 +7,9 @@
 //
 
 #import "UCFBaseViewController.h"
-
+#import "UCFTransRechargeViewController.h"
+#import "UCFQuickRechargeViewController.h"
 @interface UCFNewRechargeViewController : UCFBaseViewController
 @property(nonatomic,copy)NSString *defaultMoney;
+@property(nonatomic, weak)UCFBaseViewController   *uperViewController;
 @end

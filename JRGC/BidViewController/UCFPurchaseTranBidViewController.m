@@ -357,8 +357,9 @@
         if (alertView.tag == 2000) {
             if (self.accoutType == SelectAccoutTypeP2P) {
                 UCFNewRechargeViewController *vc = [[UCFNewRechargeViewController alloc] initWithNibName:@"UCFNewRechargeViewController" bundle:nil];
-                //            vc.defaultMoney = [NSString stringWithFormat:@"%.2f",needToRechare];
+                vc.defaultMoney = [NSString stringWithFormat:@"%.2f",needToRechare];
                 vc.accoutType = SelectAccoutTypeP2P;
+                vc.uperViewController = self;
                 [self.navigationController pushViewController:vc animated:YES];
             } else {
                 UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"RechargeStoryBorard" bundle:nil];
