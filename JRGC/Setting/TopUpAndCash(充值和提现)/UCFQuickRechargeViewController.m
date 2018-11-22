@@ -45,7 +45,13 @@
     _showTableView.tableHeaderView = _showHeadView;
 
 }
-
+- (void)setDefaultMoney:(NSString *)defaultMoney
+{
+    if ([defaultMoney doubleValue] > 0) {
+        _showHeadView.moneyTextField.text = defaultMoney;
+        _defaultMoney = defaultMoney;
+    }
+}
 - (void)fetchData
 {
     [UserInfoSingle sharedManager].bankNumTip = @"88888";
@@ -58,6 +64,7 @@
     [self.dataArr addObject:@"● 单笔充值不可超过该银行充值限额；"];
     [self.dataArr addObject:@"● 如果手机快捷支付充值失败，可使用网银、手机银行转账等其他方式进行充值。"];
     [self.dataArr addObject:@"● 如果充值金额没有及时到账，请拨打客服查询。"];
+
     [self getMyBindCardMessage];
 }
 - (void)quickRechargeHeadView:(QuickRechargeHeadView *)view fixButtonClick:(UIButton *)button
@@ -226,7 +233,7 @@
             //            rechargeWebVC.navTitle = @"即将跳转";
             rechargeWebVC.url = urlStr;
             rechargeWebVC.accoutType = self.accoutType;
-            rechargeWebVC.rootVc = self;
+            rechargeWebVC.rootVc = self.uperViewController;
             [((UIViewController *)self.rootVc).navigationController pushViewController:rechargeWebVC animated:YES];
         }
         else{
@@ -256,7 +263,7 @@
                 }];
             }
             else{
-                [self.navigationController popToRootViewControllerAnimated:NO];
+                [((UIViewController *)self.rootVc).navigationController popToRootViewControllerAnimated:NO];
                 AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
                 [appDelegate.tabBarController setSelectedIndex:0];
             }
@@ -268,7 +275,7 @@
     }else if (alertView.tag == 8000) {
         if (buttonIndex == 1) {
             HSHelper *helper = [HSHelper new];
-            [helper pushOpenHSType:self.accoutType Step:[UserInfoSingle sharedManager].openStatus nav:self.navigationController];
+            [helper pushOpenHSType:self.accoutType Step:[UserInfoSingle sharedManager].openStatus nav: ((UIViewController *)self.rootVc).navigationController];
         }
     }else {
         if (buttonIndex == 1) {
