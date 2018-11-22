@@ -766,7 +766,7 @@
                 if ([UserInfoSingle sharedManager].openStatus != 1)
                 {
                     _textField2.userInteractionEnabled = NO;
-                    _textField2.placeholder = realName;
+                    _textField2.placeholder = asteriskIdCardNo;
                 }
                 else
                 {
