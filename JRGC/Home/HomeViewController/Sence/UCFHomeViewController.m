@@ -592,7 +592,7 @@
                                 purchaseViewController.accoutType = self.accoutType;
                                 purchaseViewController.rootVc = self;
                                 [weakSelf.navigationController pushViewController:purchaseViewController animated:YES];
-                            } else if ([rstcode intValue] == 21){
+                            } else if ([rstcode intValue] == 21 || [rstcode intValue] == 30){
                                 
                             }
                             else {
