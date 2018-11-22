@@ -8,7 +8,18 @@
 
 #import "QuickRechargeHeadView.h"
 
+@interface QuickRechargeHeadView ()
+@property (weak, nonatomic) IBOutlet UIButton *rechargeButton;
+
+@end
+
 @implementation QuickRechargeHeadView
+
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    _rechargeButton.backgroundColor = UIColorWithRGB(0xfd4d4c);
+}
+
 - (IBAction)changeBankBtnClick:(UIButton *)sender {
     if (self.delegate) {
         [self.delegate quickRechargeHeadView:self fixButtonClick:sender];

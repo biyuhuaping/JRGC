@@ -140,10 +140,10 @@
 {
     _dragBtn = [[BJGridItem alloc] initWithTitle:nil withImageName:@"guafengongbei" atIndex:0 editable:NO];
     if (StatusBarHeight1 > 21) {
-        [_dragBtn setFrame:CGRectMake(ScreenWidth - 62 - 6, ScreenHeight - 49 - 65 - 6 - StatusBarHeight1, 62, 65)];
+        [_dragBtn setFrame:CGRectMake(ScreenWidth - 70 - 6, ScreenHeight - 49 - 73 - 6 - StatusBarHeight1, 70, 73)];
 
     } else {
-        [_dragBtn setFrame:CGRectMake(ScreenWidth - 62 - 6, ScreenHeight - 49 - 65 - 6, 62, 65)];
+        [_dragBtn setFrame:CGRectMake(ScreenWidth - 70 - 6, ScreenHeight - 49 - 73 - 6, 70, 73)];
 
     }
     _dragBtn.delegate = self;

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "NZLabel.h"
+#import "UILabel+Misc.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface QuickIntroduceTableViewCell : UITableViewCell

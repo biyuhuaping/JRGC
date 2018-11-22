@@ -20,6 +20,7 @@
 {
     _showTableView.frame = CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame));
     [_showTableView reloadData];
+    [_showTableView updateConstraints];
 }
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -75,6 +76,7 @@
             cell =  [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([BankTraIntroduceTableViewCell class]) owner:self options:nil][0];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
+        
         return cell;
     }
     return nil;
