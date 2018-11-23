@@ -71,7 +71,14 @@
     [self.view addSubview:self.baseScroView];
     [self.baseScroView addSubview:_quickVC.view];
     [self.baseScroView addSubview:_transVC.view];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(fradeboard:)];
+    [self.baseScroView addGestureRecognizer:tap];
 
+}
+- (void)fradeboard:(UITapGestureRecognizer *)tap
+{
+    [self.view endEditing:YES];
 }
 - (void)addRightButtonWithName:(NSString *)rightButtonName;
 {
