@@ -32,7 +32,7 @@
     [self gotoURL:self.url];
     self.webView.scrollView.bounces = NO;
     if (self.isFromBarMall) {
-        [self addLeftPan];
+//        [self addLeftPan];
     }
 //    [[UIApplication sharedApplication]  addObserver:self forKeyPath:@"statusBarStyle" options:NSKeyValueObservingOptionNew context:nil];
 }
