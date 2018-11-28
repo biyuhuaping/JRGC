@@ -962,7 +962,7 @@
         NSMutableArray *arr = [NSMutableArray array];
         for (int j = 0; j < _dataArr_3.count; j++) {
             NSString *dateStr = @"";
-            dateStr = [_dataArr_3[i][@"paidTime"]substringToIndex:7];
+            dateStr = [_dataArr_3[j][@"paidTime"]substringToIndex:7];
 
             if ([_monthDataArr3[i] isEqualToString:dateStr]) {
                 [arr addObject:_dataArr_3[j]];
