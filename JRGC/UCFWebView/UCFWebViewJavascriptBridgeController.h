@@ -21,7 +21,7 @@
 //    WebBank,
 //    WebCash //提现页面
 //}JavascriptBridgeWebType;//枚举名称
-@interface UCFWebViewJavascriptBridgeController : UCFBaseViewController<FourOFourViewDelegate,UIWebViewDelegate>
+@interface UCFWebViewJavascriptBridgeController : UCFBaseViewController<FourOFourViewDelegate,UIWebViewDelegate,UIGestureRecognizerDelegate>
 
 @property (strong, nonatomic) IBOutlet UIWebView *webView;
 
