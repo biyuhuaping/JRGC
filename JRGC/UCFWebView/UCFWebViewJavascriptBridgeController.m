@@ -71,7 +71,7 @@
 
     [self setController];    //初始化当前控制器的一些属性
 //    [self addRefresh];       //添加下拉刷新
-//    [self tableViewAddTouch];//去掉长按手势
+    [self tableViewAddTouch];//去掉长按手势
     [self setWebView];       //初始化webView 并加入js
     [self subErrorView];     //添加404页
 
@@ -155,9 +155,49 @@
 #pragma mark webView去掉长按手势
 - (void)tableViewAddTouch
 {
-    UILongPressGestureRecognizer *longPressReger = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:nil];
-    longPressReger.minimumPressDuration = 0.4;
-    [self.webView addGestureRecognizer:longPressReger];
+    UILongPressGestureRecognizer* longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress
+                                                                                                                         )]; // allocating the UILongPressGestureRecognizer
+    
+    longPress.allowableMovement=100; // Making sure the allowable movement isn't too narrow
+    
+    longPress.minimumPressDuration=0.3; //这里为什么要设置0.4，因为只要大于0.5就无效，我像大概是因为默认的跳出放大镜的手势的长按时间是0.5秒，
+    //
+    //    //如果我们自定义的手势大于或小于0.5秒的话就来不及替换他的默认手势了，这是只是我的猜测。但是最好大于0.2秒，因为有的pdf有一些书签跳转功能，这个值太小的话可能会使这些功能失效。
+    
+    longPress.delegate=self; // //记得在.h文件里加上委托
+    longPress.delaysTouchesBegan=YES;
+    longPress.delaysTouchesEnded=YES;
+    
+    longPress.cancelsTouchesInView=YES; // That's when we tell the gesture recognizer to block the gestures we want
+    
+    [self.webView addGestureRecognizer:longPress]; // Add the gesture recognizer to the view and scroll view then release
+    [[self.webView scrollView] addGestureRecognizer:longPress];
+}
+#pragma mark - GestureRecognizerDelegate
+
+- (void)handleLongPress {
+    
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+
+{
+    DBLOG(@"%@------%@",gestureRecognizer,otherGestureRecognizer);
+    return NO; //这里一定要return NO,至于为什么大家去看看这个方法的文档吧。
+    
+    //还有就是这个委托在你长按的时候会被多次调用，大家可以用nslog输出gestureRecognizer和otherGestureRecognizer
+    
+    //看看都是些什么东西。
+}
+
+- (BOOL)canPerformAction:(SEL)action withSender:(id)sender {
+    if (action == @selector(copy:) ||
+        action == @selector(paste:)||
+        action == @selector(cut:)) {
+        return NO;
+    }
+    
+    return [super canPerformAction:action withSender:sender];
 }
 
 #pragma mark - 下拉刷新部分
@@ -787,6 +827,9 @@
     [self.webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitUserSelect='none';"];
     // Disable callout
     [self.webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitTouchCallout='none';"];
+    
+    NSString *jsCallBack = @"window.getSelection().removeAllRanges();";
+    [webView stringByEvaluatingJavaScriptFromString:jsCallBack];
     [self.webView.scrollView.header endRefreshing];
     
     self.requestLastUrl = [NSString stringWithFormat:@"%@",self.webView.request.URL.absoluteString];
