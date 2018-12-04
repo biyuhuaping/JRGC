@@ -402,4 +402,22 @@
 {
     self.tabBar.frame = CGRectMake(0, ScreenHeight - kTabBarHeight, ScreenWidth, kTabBarHeight);
 }
+//- (void)viewWillLayoutSubviews
+//{
+//    //    self.tabBar.frame = CGRectMake(0, ScreenHeight - kTabBarHeight, ScreenWidth, kTabBarHeight);
+//    [super viewWillLayoutSubviews];
+//    //TODO: adapt tabbar's y value.
+//    if (kIs_iPhoneX) {
+//        CGFloat deltaTabBarY = SCREEN_HEIGHT - CGRectGetHeight(self.tabBar.frame);
+//        self.tabBar.frame = (CGRect){0, deltaTabBarY, self.tabBar.bounds.size};
+//    }
+//}
+//- (void)viewDidLayoutSubviews {
+//    [super viewDidLayoutSubviews];
+//    //TODO: adapt tabbar's y value.
+//    if (kIs_iPhoneX) {
+//        CGFloat deltaTabBarY = SCREEN_HEIGHT - CGRectGetHeight(self.tabBar.frame);
+//        self.tabBar.frame = (CGRect){0, deltaTabBarY, self.tabBar.bounds.size};
+//    }
+//}
 @end
