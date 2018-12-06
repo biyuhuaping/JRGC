@@ -111,7 +111,7 @@
             self.p2p_lineView.hidden = YES;
             UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
             button.backgroundColor =[UIColor clearColor];
-            button.frame = self.P2P_secondView.frame;
+            button.frame = CGRectMake(0, 0, CGRectGetWidth(self.P2P_secondView.frame), CGRectGetHeight(self.P2P_secondView.frame)) ;
             button.tag = 3844;
             [button addTarget:self action:@selector(gotoWeiJinRebateAmtVC:) forControlEvents:UIControlEventTouchUpInside];
             [self.P2P_secondView addSubview:button];
