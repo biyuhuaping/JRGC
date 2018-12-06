@@ -11,6 +11,7 @@
 #import "UIDic+Safe.h"
 #import "UCFLoginViewController.h"
 #import "NSString+Misc.h"
+#import "UINavigationController+FDFullscreenPopGesture.h"
 @interface UCFWebViewJavascriptBridgeMallDetails ()
 
 @end
@@ -37,6 +38,7 @@
     {
         self.navigationController.navigationBar.hidden = YES;
     }
+    self.fd_interactivePopDisabled = YES;
 }
 
 //只要是豆哥商城的都去掉导航栏
