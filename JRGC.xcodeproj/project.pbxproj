@@ -103,16 +103,6 @@
 		4A8884B51BFA039F001A6909 /* BeansFamilyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A8884B41BFA039F001A6909 /* BeansFamilyViewController.m */; };
 		4A8D5F741B0C1DCF0053F045 /* RechargeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A8D5F731B0C1DCF0053F045 /* RechargeListViewController.m */; };
 		4A8E10001B9FE09D00ABBD4F /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A8E0FFF1B9FE09D00ABBD4F /* LocalAuthentication.framework */; };
-		4A90167F1AFB12FE0049A9E0 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 4A9016651AFB12FE0049A9E0 /* LICENSE */; };
-		4A9016801AFB12FE0049A9E0 /* MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A9016681AFB12FE0049A9E0 /* MASCompositeConstraint.m */; };
-		4A9016811AFB12FE0049A9E0 /* MASConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A90166B1AFB12FE0049A9E0 /* MASConstraint.m */; };
-		4A9016821AFB12FE0049A9E0 /* MASConstraintMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A90166D1AFB12FE0049A9E0 /* MASConstraintMaker.m */; };
-		4A9016831AFB12FE0049A9E0 /* MASLayoutConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A90166F1AFB12FE0049A9E0 /* MASLayoutConstraint.m */; };
-		4A9016841AFB12FE0049A9E0 /* MASViewAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A9016731AFB12FE0049A9E0 /* MASViewAttribute.m */; };
-		4A9016851AFB12FE0049A9E0 /* MASViewConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A9016751AFB12FE0049A9E0 /* MASViewConstraint.m */; };
-		4A9016861AFB12FE0049A9E0 /* NSArray+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A9016771AFB12FE0049A9E0 /* NSArray+MASAdditions.m */; };
-		4A9016871AFB12FE0049A9E0 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A90167A1AFB12FE0049A9E0 /* NSLayoutConstraint+MASDebugAdditions.m */; };
-		4A9016881AFB12FE0049A9E0 /* View+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A90167C1AFB12FE0049A9E0 /* View+MASAdditions.m */; };
 		4A9230451B68B2D800E5844C /* UIImageView+NetImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A9230441B68B2D800E5844C /* UIImageView+NetImageView.m */; };
 		4A9F15BA1B0EC9B1009A7365 /* CoupleHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A9F15B91B0EC9B1009A7365 /* CoupleHeadView.m */; };
 		4AA2AA801E5B17B7006E83F8 /* UCFBatchSetNumWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AA2AA7E1E5B17B7006E83F8 /* UCFBatchSetNumWebViewController.m */; };
@@ -1250,30 +1240,6 @@
 		4A8D5F721B0C1DCF0053F045 /* RechargeListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RechargeListViewController.h; sourceTree = "<group>"; };
 		4A8D5F731B0C1DCF0053F045 /* RechargeListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RechargeListViewController.m; sourceTree = "<group>"; };
 		4A8E0FFF1B9FE09D00ABBD4F /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
-		4A9016651AFB12FE0049A9E0 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		4A9016671AFB12FE0049A9E0 /* MASCompositeConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASCompositeConstraint.h; sourceTree = "<group>"; };
-		4A9016681AFB12FE0049A9E0 /* MASCompositeConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASCompositeConstraint.m; sourceTree = "<group>"; };
-		4A9016691AFB12FE0049A9E0 /* MASConstraint+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MASConstraint+Private.h"; sourceTree = "<group>"; };
-		4A90166A1AFB12FE0049A9E0 /* MASConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASConstraint.h; sourceTree = "<group>"; };
-		4A90166B1AFB12FE0049A9E0 /* MASConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASConstraint.m; sourceTree = "<group>"; };
-		4A90166C1AFB12FE0049A9E0 /* MASConstraintMaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASConstraintMaker.h; sourceTree = "<group>"; };
-		4A90166D1AFB12FE0049A9E0 /* MASConstraintMaker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASConstraintMaker.m; sourceTree = "<group>"; };
-		4A90166E1AFB12FE0049A9E0 /* MASLayoutConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASLayoutConstraint.h; sourceTree = "<group>"; };
-		4A90166F1AFB12FE0049A9E0 /* MASLayoutConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASLayoutConstraint.m; sourceTree = "<group>"; };
-		4A9016701AFB12FE0049A9E0 /* Masonry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Masonry.h; sourceTree = "<group>"; };
-		4A9016711AFB12FE0049A9E0 /* MASUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASUtilities.h; sourceTree = "<group>"; };
-		4A9016721AFB12FE0049A9E0 /* MASViewAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASViewAttribute.h; sourceTree = "<group>"; };
-		4A9016731AFB12FE0049A9E0 /* MASViewAttribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASViewAttribute.m; sourceTree = "<group>"; };
-		4A9016741AFB12FE0049A9E0 /* MASViewConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASViewConstraint.h; sourceTree = "<group>"; };
-		4A9016751AFB12FE0049A9E0 /* MASViewConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASViewConstraint.m; sourceTree = "<group>"; };
-		4A9016761AFB12FE0049A9E0 /* NSArray+MASAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+MASAdditions.h"; sourceTree = "<group>"; };
-		4A9016771AFB12FE0049A9E0 /* NSArray+MASAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+MASAdditions.m"; sourceTree = "<group>"; };
-		4A9016781AFB12FE0049A9E0 /* NSArray+MASShorthandAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+MASShorthandAdditions.h"; sourceTree = "<group>"; };
-		4A9016791AFB12FE0049A9E0 /* NSLayoutConstraint+MASDebugAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSLayoutConstraint+MASDebugAdditions.h"; sourceTree = "<group>"; };
-		4A90167A1AFB12FE0049A9E0 /* NSLayoutConstraint+MASDebugAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSLayoutConstraint+MASDebugAdditions.m"; sourceTree = "<group>"; };
-		4A90167B1AFB12FE0049A9E0 /* View+MASAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "View+MASAdditions.h"; sourceTree = "<group>"; };
-		4A90167C1AFB12FE0049A9E0 /* View+MASAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "View+MASAdditions.m"; sourceTree = "<group>"; };
-		4A90167D1AFB12FE0049A9E0 /* View+MASShorthandAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "View+MASShorthandAdditions.h"; sourceTree = "<group>"; };
 		4A9230431B68B2D800E5844C /* UIImageView+NetImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+NetImageView.h"; sourceTree = "<group>"; };
 		4A9230441B68B2D800E5844C /* UIImageView+NetImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+NetImageView.m"; sourceTree = "<group>"; };
 		4A9F15B81B0EC9B1009A7365 /* CoupleHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoupleHeadView.h; sourceTree = "<group>"; };
@@ -3182,45 +3148,6 @@
 				4A87CBAA1E8A48CA00D21AC2 /* HSHelper.m */,
 			);
 			path = HSHelper;
-			sourceTree = "<group>";
-		};
-		4A9016641AFB12FE0049A9E0 /* Masonry */ = {
-			isa = PBXGroup;
-			children = (
-				4A9016651AFB12FE0049A9E0 /* LICENSE */,
-				4A9016661AFB12FE0049A9E0 /* Masonry */,
-			);
-			path = Masonry;
-			sourceTree = "<group>";
-		};
-		4A9016661AFB12FE0049A9E0 /* Masonry */ = {
-			isa = PBXGroup;
-			children = (
-				4A9016671AFB12FE0049A9E0 /* MASCompositeConstraint.h */,
-				4A9016681AFB12FE0049A9E0 /* MASCompositeConstraint.m */,
-				4A9016691AFB12FE0049A9E0 /* MASConstraint+Private.h */,
-				4A90166A1AFB12FE0049A9E0 /* MASConstraint.h */,
-				4A90166B1AFB12FE0049A9E0 /* MASConstraint.m */,
-				4A90166C1AFB12FE0049A9E0 /* MASConstraintMaker.h */,
-				4A90166D1AFB12FE0049A9E0 /* MASConstraintMaker.m */,
-				4A90166E1AFB12FE0049A9E0 /* MASLayoutConstraint.h */,
-				4A90166F1AFB12FE0049A9E0 /* MASLayoutConstraint.m */,
-				4A9016701AFB12FE0049A9E0 /* Masonry.h */,
-				4A9016711AFB12FE0049A9E0 /* MASUtilities.h */,
-				4A9016721AFB12FE0049A9E0 /* MASViewAttribute.h */,
-				4A9016731AFB12FE0049A9E0 /* MASViewAttribute.m */,
-				4A9016741AFB12FE0049A9E0 /* MASViewConstraint.h */,
-				4A9016751AFB12FE0049A9E0 /* MASViewConstraint.m */,
-				4A9016761AFB12FE0049A9E0 /* NSArray+MASAdditions.h */,
-				4A9016771AFB12FE0049A9E0 /* NSArray+MASAdditions.m */,
-				4A9016781AFB12FE0049A9E0 /* NSArray+MASShorthandAdditions.h */,
-				4A9016791AFB12FE0049A9E0 /* NSLayoutConstraint+MASDebugAdditions.h */,
-				4A90167A1AFB12FE0049A9E0 /* NSLayoutConstraint+MASDebugAdditions.m */,
-				4A90167B1AFB12FE0049A9E0 /* View+MASAdditions.h */,
-				4A90167C1AFB12FE0049A9E0 /* View+MASAdditions.m */,
-				4A90167D1AFB12FE0049A9E0 /* View+MASShorthandAdditions.h */,
-			);
-			path = Masonry;
 			sourceTree = "<group>";
 		};
 		4A92303C1B68A8FE00E5844C /* ImageNetClass */ = {
@@ -5751,7 +5678,6 @@
 				74931A111B1326B400143424 /* FisrtLetterAndOrder */,
 				749319EB1B13267600143424 /* NZLabel */,
 				FBA5BE991B0EDB0D000CDDC3 /* GiFHUD */,
-				4A9016641AFB12FE0049A9E0 /* Masonry */,
 				FBB685671AE4A76800F222B6 /* MJRefresh */,
 				7BDD8FC01AE0DD67007A5CE8 /* MDRadialProgress */,
 				7BE45C8E1ADF9C4C00B955A6 /* HMSegmentedControl */,
@@ -7214,13 +7140,11 @@
 				A860F2661F5E7DA10017495F /* UCFGoldRebateCell.xib in Resources */,
 				83880A8520F7540C00E3B888 /* UCFHonerCahTipAlterView.xib in Resources */,
 				74956EB51D66F33D00D68B61 /* UCFAccountDetailViewController.xib in Resources */,
-				4A90167F1AFB12FE0049A9E0 /* LICENSE in Resources */,
 				A851F3561F1379E2003DE8B8 /* UCFGoldPriceFloatView.xib in Resources */,
 				83CD84291F13A50800227704 /* UCFBatchBidController.xib in Resources */,
 				840A794B1C2A80B60059A946 /* UCFMessageSettingViewController.xib in Resources */,
 				74956EB51D66F33D00D68B61 /* UCFAccountDetailViewController.xib in Resources */,
 				4A2484B921A3AD85001B0703 /* UCFTransRechargeViewController.xib in Resources */,
-				4A90167F1AFB12FE0049A9E0 /* LICENSE in Resources */,
 				744A5FAB1E79512C008921F9 /* UCFWebViewJavascriptBridgeLoanDetails.xib in Resources */,
 				83F669FC1FD14D2500ABCA57 /* UCFAssetProofApplyIdCell.xib in Resources */,
 				74F490EF1E5B2AAA0057AC62 /* UCFCollectionBidCell.xib in Resources */,
@@ -7532,7 +7456,6 @@
 				A8E01A801EEA4C6F003E3BDC /* UCFTransfeTableViewCell.m in Sources */,
 				83CD72A51FB4449C007138ED /* UCFDrawGoldModel.m in Sources */,
 				74F649311F46EA0400328235 /* UCFCashGoldHeader.m in Sources */,
-				4A9016851AFB12FE0049A9E0 /* MASViewConstraint.m in Sources */,
 				74F2911C1AE0DBE4003E0E86 /* UCFSecurityCenterViewController.m in Sources */,
 				FB88C90E1AF9F92E00D2EE93 /* YcMutableArray.m in Sources */,
 				74BDA98A1F09F6C60054403F /* FSCalendarCollectionViewLayout.m in Sources */,
@@ -7576,7 +7499,6 @@
 				4ADA3A431B0DCE82000B29FD /* SelectCoupleCell.m in Sources */,
 				7BCE022D1AC9141A0084C15C /* MBProgressHUD+HJ.m in Sources */,
 				740D3F9B1F441B270074371F /* UCFGoldCashModel.m in Sources */,
-				4A9016881AFB12FE0049A9E0 /* View+MASAdditions.m in Sources */,
 				746FD82B1D9BB51200C5BEB6 /* UCFMenuTableCell.m in Sources */,
 				74067A441F5038BF00747888 /* UCFAveragePriceDetailView.m in Sources */,
 				83FB3F621E5C68150094C9BA /* UCFCollctionKeyBidViewController.m in Sources */,
@@ -7687,7 +7609,6 @@
 				A830DE751F8DC8E9003855B9 /* UCFCalendarModularViewController.m in Sources */,
 				74931A321B1326FE00143424 /* OHParagraphStyle.m in Sources */,
 				74C230231F7A24310022D02B /* UCFPicADModel.m in Sources */,
-				4A9016831AFB12FE0049A9E0 /* MASLayoutConstraint.m in Sources */,
 				7BA6E4B81AD6731900FE8C37 /* MKAnnotationView+WebCache.m in Sources */,
 				74F6493A1F47159A00328235 /* UCFGoldCashSucessController.m in Sources */,
 				7B5B8E4A1B141C6E0098042E /* UCF404ErrorView.m in Sources */,
@@ -7763,7 +7684,6 @@
 				744BE8551F6BD8A600107FAA /* UCFHomeIconPresenter.m in Sources */,
 				744EB7EE1EE7DD15003C57C4 /* UCFInvestViewController.m in Sources */,
 				74BDA9891F09F6C60054403F /* FSCalendarCollectionView.m in Sources */,
-				4A9016861AFB12FE0049A9E0 /* NSArray+MASAdditions.m in Sources */,
 				74B763DF1F20E08E00E12E51 /* UCFAssetTipView.m in Sources */,
 				FBE5A0531AE8BEDD0095B2ED /* UCFMyInvestViewCell.m in Sources */,
 				7BA6E4B91AD6731900FE8C37 /* NSData+ImageContentType.m in Sources */,
@@ -7794,7 +7714,6 @@
 				749319C11B12B6DF00143424 /* UCFProvinceModel.m in Sources */,
 				74673BC01FEB8C1400AF3727 /* UCFMineFuncView.m in Sources */,
 				E311A6751D90EBBE00C5483E /* UCFWebViewJavascriptBridgeBanner.m in Sources */,
-				4A9016841AFB12FE0049A9E0 /* MASViewAttribute.m in Sources */,
 				7BC304851ACBC22D007767F1 /* UIImage+Translation.m in Sources */,
 				7BCBF1231ADB613C00C874FC /* UCFRegisterStepTwoViewController.m in Sources */,
 				FB1E7F7F1D8E4230009CBE2C /* UCFBidNewDetailView.m in Sources */,
@@ -7811,7 +7730,6 @@
 				7BC304811ACBC22D007767F1 /* NSString+Misc.m in Sources */,
 				E311A6681D90E83800C5483E /* UCFWebViewJavascriptBridgeMallDetails.m in Sources */,
 				74D7FCCD1AE8F72700653B8F /* FundAccountItem.m in Sources */,
-				4A9016801AFB12FE0049A9E0 /* MASCompositeConstraint.m in Sources */,
 				FB4F9E7E1D62A83000CCB492 /* AccountWebView.m in Sources */,
 				74702BBF1FB5599700CBB655 /* UCFExtractGoldCell.m in Sources */,
 				7BC304901ACBC26D007767F1 /* EGORefreshTableFooterView.m in Sources */,
@@ -7820,7 +7738,6 @@
 				74270CA11EC58F6800F9419B /* UCFHomeListNavView.m in Sources */,
 				74F2911F1AE0DBF2003E0E86 /* UCFTopUpViewController.m in Sources */,
 				EDEF5E921CBF761700592B20 /* PromptView.m in Sources */,
-				4A9016871AFB12FE0049A9E0 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				749140A81F18A92B00E624CE /* UCFGoldModel.m in Sources */,
 				25F538B41D881B0A0039262F /* UCFPurchaseWebView.m in Sources */,
 				8346B26C1F70F2B400219D41 /* UCFRechargeOrCashViewController.m in Sources */,
@@ -7855,7 +7772,6 @@
 				83CD843F1F13A50800227704 /* UCFProjectListCell.m in Sources */,
 				749140BA1F18D1EA00E624CE /* UCFGoldCashMoneyViewController.m in Sources */,
 				7BD2BFD61B5DF9CC0046687C /* UCFGuaPopViewController.m in Sources */,
-				4A9016821AFB12FE0049A9E0 /* MASConstraintMaker.m in Sources */,
 				74BDA98E1F09F6C60054403F /* FSCalendarExtensions.m in Sources */,
 				A830DE7F1F8DC91A003855B9 /* UCFCalendarModularDetailHeaderView.m in Sources */,
 				FB1E7F801D8E4230009CBE2C /* UCFInvestmentView.m in Sources */,
@@ -7997,7 +7913,6 @@
 				74EAF5B51B0ED78700807C1C /* UCFSelectedBankTableViewCell.m in Sources */,
 				838EDD681F6B7225008E60EC /* CustomPieView.m in Sources */,
 				74270C951EC58F6800F9419B /* UCFUserInfoListItem.m in Sources */,
-				4A9016811AFB12FE0049A9E0 /* MASConstraint.m in Sources */,
 				7BA6E4C51AD6731900FE8C37 /* UIImageView+HighlightedWebCache.m in Sources */,
 				A8E02DB21F0E0A7800FC2260 /* GoldTransactionRecordViewController.m in Sources */,
 				7BCCA8B61ACA97EB0089DAAC /* UCFLoginView.m in Sources */,

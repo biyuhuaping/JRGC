@@ -7,7 +7,6 @@
 //
 
 #import "MoneyBoardCell.h"
-#import "Masonry.h"
 #import "Common.h"
 #import "UCFToolsMehod.h"
 #import "UILabel+Misc.h"
