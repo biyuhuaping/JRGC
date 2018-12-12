@@ -38,6 +38,27 @@
 		3307E22A21A3D7B6009FFF6D /* QuickIntroduceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3307E22821A3D7B6009FFF6D /* QuickIntroduceTableViewCell.m */; };
 		3307E22B21A3D7B6009FFF6D /* QuickIntroduceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3307E22921A3D7B6009FFF6D /* QuickIntroduceTableViewCell.xib */; };
 		334654B6215E08270046A057 /* LOGO微金.png in Resources */ = {isa = PBXBuildFile; fileRef = 334654B5215E08270046A057 /* LOGO微金.png */; };
+		33813A2221BFB421004666E5 /* UCFBidInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33813A2121BFB421004666E5 /* UCFBidInfoView.m */; };
+		33813A5021BFB5D6004666E5 /* MyFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 33813A2921BFB5D5004666E5 /* MyFlowLayout.m */; };
+		33813A5121BFB5D6004666E5 /* MyGridNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 33813A2D21BFB5D5004666E5 /* MyGridNode.m */; };
+		33813A5221BFB5D6004666E5 /* MyRelativeLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 33813A2E21BFB5D5004666E5 /* MyRelativeLayout.m */; };
+		33813A5321BFB5D6004666E5 /* MyLayoutSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 33813A2F21BFB5D5004666E5 /* MyLayoutSize.m */; };
+		33813A5421BFB5D6004666E5 /* MyGridLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 33813A3821BFB5D5004666E5 /* MyGridLayout.m */; };
+		33813A5521BFB5D6004666E5 /* MyMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 33813A3921BFB5D5004666E5 /* MyMaker.m */; };
+		33813A5621BFB5D6004666E5 /* MyLayoutMath.m in Sources */ = {isa = PBXBuildFile; fileRef = 33813A3F21BFB5D6004666E5 /* MyLayoutMath.m */; };
+		33813A5721BFB5D6004666E5 /* MyBaseLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 33813A4021BFB5D6004666E5 /* MyBaseLayout.m */; };
+		33813A5821BFB5D6004666E5 /* MyPathLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 33813A4121BFB5D6004666E5 /* MyPathLayout.m */; };
+		33813A5921BFB5D6004666E5 /* MyTableLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 33813A4321BFB5D6004666E5 /* MyTableLayout.m */; };
+		33813A5A21BFB5D6004666E5 /* MyFloatLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 33813A4421BFB5D6004666E5 /* MyFloatLayout.m */; };
+		33813A5B21BFB5D6004666E5 /* MyLayoutDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 33813A4821BFB5D6004666E5 /* MyLayoutDelegate.m */; };
+		33813A5C21BFB5D6004666E5 /* MyDimeScale.m in Sources */ = {isa = PBXBuildFile; fileRef = 33813A4921BFB5D6004666E5 /* MyDimeScale.m */; };
+		33813A5D21BFB5D6004666E5 /* MyFrameLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 33813A4A21BFB5D6004666E5 /* MyFrameLayout.m */; };
+		33813A5E21BFB5D6004666E5 /* MyLinearLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 33813A4B21BFB5D6004666E5 /* MyLinearLayout.m */; };
+		33813A5F21BFB5D6004666E5 /* MyLayoutPos.m in Sources */ = {isa = PBXBuildFile; fileRef = 33813A4C21BFB5D6004666E5 /* MyLayoutPos.m */; };
+		33813A6021BFB5D6004666E5 /* MyBorderline.m in Sources */ = {isa = PBXBuildFile; fileRef = 33813A4D21BFB5D6004666E5 /* MyBorderline.m */; };
+		33813A6121BFB5D6004666E5 /* MyLayoutSizeClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 33813A4E21BFB5D6004666E5 /* MyLayoutSizeClass.m */; };
+		33813A6421BFB66E004666E5 /* NewPurchaseBidController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33813A6321BFB66E004666E5 /* NewPurchaseBidController.m */; };
+		33813A6721BFB723004666E5 /* UCFSectionHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33813A6621BFB723004666E5 /* UCFSectionHeadView.m */; };
 		3382D20C21A25BD900104CCD /* UCFTransferTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3382D20B21A25BD900104CCD /* UCFTransferTableView.m */; };
 		3382D21521A267CE00104CCD /* BankTransferTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3382D21321A267CE00104CCD /* BankTransferTableViewCell.m */; };
 		3382D21621A267CE00104CCD /* BankTransferTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3382D21421A267CE00104CCD /* BankTransferTableViewCell.xib */; };
@@ -1139,6 +1160,54 @@
 		3307E22821A3D7B6009FFF6D /* QuickIntroduceTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuickIntroduceTableViewCell.m; sourceTree = "<group>"; };
 		3307E22921A3D7B6009FFF6D /* QuickIntroduceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QuickIntroduceTableViewCell.xib; sourceTree = "<group>"; };
 		334654B5215E08270046A057 /* LOGO微金.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LOGO微金.png"; sourceTree = "<group>"; };
+		33813A2021BFB421004666E5 /* UCFBidInfoView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFBidInfoView.h; sourceTree = "<group>"; };
+		33813A2121BFB421004666E5 /* UCFBidInfoView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFBidInfoView.m; sourceTree = "<group>"; };
+		33813A2621BFB5D5004666E5 /* MyLayoutSizeInner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyLayoutSizeInner.h; sourceTree = "<group>"; };
+		33813A2721BFB5D5004666E5 /* MyLayoutPosInner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyLayoutPosInner.h; sourceTree = "<group>"; };
+		33813A2821BFB5D5004666E5 /* MyTableLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTableLayout.h; sourceTree = "<group>"; };
+		33813A2921BFB5D5004666E5 /* MyFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyFlowLayout.m; sourceTree = "<group>"; };
+		33813A2A21BFB5D5004666E5 /* MyPathLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyPathLayout.h; sourceTree = "<group>"; };
+		33813A2B21BFB5D5004666E5 /* MyBaseLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyBaseLayout.h; sourceTree = "<group>"; };
+		33813A2C21BFB5D5004666E5 /* MyLayoutMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyLayoutMath.h; sourceTree = "<group>"; };
+		33813A2D21BFB5D5004666E5 /* MyGridNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyGridNode.m; sourceTree = "<group>"; };
+		33813A2E21BFB5D5004666E5 /* MyRelativeLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyRelativeLayout.m; sourceTree = "<group>"; };
+		33813A2F21BFB5D5004666E5 /* MyLayoutSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyLayoutSize.m; sourceTree = "<group>"; };
+		33813A3021BFB5D5004666E5 /* MyFloatLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyFloatLayout.h; sourceTree = "<group>"; };
+		33813A3121BFB5D5004666E5 /* MyLinearLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyLinearLayout.h; sourceTree = "<group>"; };
+		33813A3221BFB5D5004666E5 /* MyFrameLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyFrameLayout.h; sourceTree = "<group>"; };
+		33813A3321BFB5D5004666E5 /* MyGrid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyGrid.h; sourceTree = "<group>"; };
+		33813A3421BFB5D5004666E5 /* MyLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyLayout.h; sourceTree = "<group>"; };
+		33813A3521BFB5D5004666E5 /* MyLayoutDef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyLayoutDef.h; sourceTree = "<group>"; };
+		33813A3621BFB5D5004666E5 /* MyLayoutDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyLayoutDelegate.h; sourceTree = "<group>"; };
+		33813A3721BFB5D5004666E5 /* MyDimeScale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyDimeScale.h; sourceTree = "<group>"; };
+		33813A3821BFB5D5004666E5 /* MyGridLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyGridLayout.m; sourceTree = "<group>"; };
+		33813A3921BFB5D5004666E5 /* MyMaker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMaker.m; sourceTree = "<group>"; };
+		33813A3A21BFB5D6004666E5 /* MyLayoutSizeClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyLayoutSizeClass.h; sourceTree = "<group>"; };
+		33813A3B21BFB5D6004666E5 /* MyLayoutInner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyLayoutInner.h; sourceTree = "<group>"; };
+		33813A3C21BFB5D6004666E5 /* MyBorderline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyBorderline.h; sourceTree = "<group>"; };
+		33813A3D21BFB5D6004666E5 /* MyLayoutPos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyLayoutPos.h; sourceTree = "<group>"; };
+		33813A3E21BFB5D6004666E5 /* MyGridNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyGridNode.h; sourceTree = "<group>"; };
+		33813A3F21BFB5D6004666E5 /* MyLayoutMath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyLayoutMath.m; sourceTree = "<group>"; };
+		33813A4021BFB5D6004666E5 /* MyBaseLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyBaseLayout.m; sourceTree = "<group>"; };
+		33813A4121BFB5D6004666E5 /* MyPathLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyPathLayout.m; sourceTree = "<group>"; };
+		33813A4221BFB5D6004666E5 /* MyFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyFlowLayout.h; sourceTree = "<group>"; };
+		33813A4321BFB5D6004666E5 /* MyTableLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTableLayout.m; sourceTree = "<group>"; };
+		33813A4421BFB5D6004666E5 /* MyFloatLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyFloatLayout.m; sourceTree = "<group>"; };
+		33813A4521BFB5D6004666E5 /* MyLayoutSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyLayoutSize.h; sourceTree = "<group>"; };
+		33813A4621BFB5D6004666E5 /* MyRelativeLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyRelativeLayout.h; sourceTree = "<group>"; };
+		33813A4721BFB5D6004666E5 /* MyGridLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyGridLayout.h; sourceTree = "<group>"; };
+		33813A4821BFB5D6004666E5 /* MyLayoutDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyLayoutDelegate.m; sourceTree = "<group>"; };
+		33813A4921BFB5D6004666E5 /* MyDimeScale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyDimeScale.m; sourceTree = "<group>"; };
+		33813A4A21BFB5D6004666E5 /* MyFrameLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyFrameLayout.m; sourceTree = "<group>"; };
+		33813A4B21BFB5D6004666E5 /* MyLinearLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyLinearLayout.m; sourceTree = "<group>"; };
+		33813A4C21BFB5D6004666E5 /* MyLayoutPos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyLayoutPos.m; sourceTree = "<group>"; };
+		33813A4D21BFB5D6004666E5 /* MyBorderline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyBorderline.m; sourceTree = "<group>"; };
+		33813A4E21BFB5D6004666E5 /* MyLayoutSizeClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyLayoutSizeClass.m; sourceTree = "<group>"; };
+		33813A4F21BFB5D6004666E5 /* MyMaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMaker.h; sourceTree = "<group>"; };
+		33813A6221BFB66E004666E5 /* NewPurchaseBidController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewPurchaseBidController.h; sourceTree = "<group>"; };
+		33813A6321BFB66E004666E5 /* NewPurchaseBidController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewPurchaseBidController.m; sourceTree = "<group>"; };
+		33813A6521BFB723004666E5 /* UCFSectionHeadView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFSectionHeadView.h; sourceTree = "<group>"; };
+		33813A6621BFB723004666E5 /* UCFSectionHeadView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFSectionHeadView.m; sourceTree = "<group>"; };
 		3382D20A21A25BD900104CCD /* UCFTransferTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFTransferTableView.h; sourceTree = "<group>"; };
 		3382D20B21A25BD900104CCD /* UCFTransferTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFTransferTableView.m; sourceTree = "<group>"; };
 		3382D21221A267CE00104CCD /* BankTransferTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BankTransferTableViewCell.h; sourceTree = "<group>"; };
@@ -2952,6 +3021,125 @@
 				25314C0A1D8FD7FA0066F446 /* UCFDirectCell.xib */,
 			);
 			name = TipCell;
+			sourceTree = "<group>";
+		};
+		33813A1521BFB114004666E5 /* NewSection */ = {
+			isa = PBXGroup;
+			children = (
+				33813A6821BFB9FB004666E5 /* tools */,
+				33813A2421BFB495004666E5 /* features */,
+				33813A2321BFB474004666E5 /* lib */,
+			);
+			path = NewSection;
+			sourceTree = "<group>";
+		};
+		33813A1921BFB216004666E5 /* Bid */ = {
+			isa = PBXGroup;
+			children = (
+				33813A1C21BFB24E004666E5 /* Models */,
+				33813A1B21BFB241004666E5 /* Views */,
+				33813A1A21BFB229004666E5 /* Controllers */,
+			);
+			path = Bid;
+			sourceTree = "<group>";
+		};
+		33813A1A21BFB229004666E5 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				33813A6221BFB66E004666E5 /* NewPurchaseBidController.h */,
+				33813A6321BFB66E004666E5 /* NewPurchaseBidController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		33813A1B21BFB241004666E5 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				33813A2021BFB421004666E5 /* UCFBidInfoView.h */,
+				33813A2121BFB421004666E5 /* UCFBidInfoView.m */,
+				33813A6521BFB723004666E5 /* UCFSectionHeadView.h */,
+				33813A6621BFB723004666E5 /* UCFSectionHeadView.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		33813A1C21BFB24E004666E5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		33813A2321BFB474004666E5 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				33813A2521BFB5D5004666E5 /* MyLayout */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		33813A2421BFB495004666E5 /* features */ = {
+			isa = PBXGroup;
+			children = (
+				33813A1921BFB216004666E5 /* Bid */,
+			);
+			path = features;
+			sourceTree = "<group>";
+		};
+		33813A2521BFB5D5004666E5 /* MyLayout */ = {
+			isa = PBXGroup;
+			children = (
+				33813A2621BFB5D5004666E5 /* MyLayoutSizeInner.h */,
+				33813A2721BFB5D5004666E5 /* MyLayoutPosInner.h */,
+				33813A2821BFB5D5004666E5 /* MyTableLayout.h */,
+				33813A2921BFB5D5004666E5 /* MyFlowLayout.m */,
+				33813A2A21BFB5D5004666E5 /* MyPathLayout.h */,
+				33813A2B21BFB5D5004666E5 /* MyBaseLayout.h */,
+				33813A2C21BFB5D5004666E5 /* MyLayoutMath.h */,
+				33813A2D21BFB5D5004666E5 /* MyGridNode.m */,
+				33813A2E21BFB5D5004666E5 /* MyRelativeLayout.m */,
+				33813A2F21BFB5D5004666E5 /* MyLayoutSize.m */,
+				33813A3021BFB5D5004666E5 /* MyFloatLayout.h */,
+				33813A3121BFB5D5004666E5 /* MyLinearLayout.h */,
+				33813A3221BFB5D5004666E5 /* MyFrameLayout.h */,
+				33813A3321BFB5D5004666E5 /* MyGrid.h */,
+				33813A3421BFB5D5004666E5 /* MyLayout.h */,
+				33813A3521BFB5D5004666E5 /* MyLayoutDef.h */,
+				33813A3621BFB5D5004666E5 /* MyLayoutDelegate.h */,
+				33813A3721BFB5D5004666E5 /* MyDimeScale.h */,
+				33813A3821BFB5D5004666E5 /* MyGridLayout.m */,
+				33813A3921BFB5D5004666E5 /* MyMaker.m */,
+				33813A3A21BFB5D6004666E5 /* MyLayoutSizeClass.h */,
+				33813A3B21BFB5D6004666E5 /* MyLayoutInner.h */,
+				33813A3C21BFB5D6004666E5 /* MyBorderline.h */,
+				33813A3D21BFB5D6004666E5 /* MyLayoutPos.h */,
+				33813A3E21BFB5D6004666E5 /* MyGridNode.h */,
+				33813A3F21BFB5D6004666E5 /* MyLayoutMath.m */,
+				33813A4021BFB5D6004666E5 /* MyBaseLayout.m */,
+				33813A4121BFB5D6004666E5 /* MyPathLayout.m */,
+				33813A4221BFB5D6004666E5 /* MyFlowLayout.h */,
+				33813A4321BFB5D6004666E5 /* MyTableLayout.m */,
+				33813A4421BFB5D6004666E5 /* MyFloatLayout.m */,
+				33813A4521BFB5D6004666E5 /* MyLayoutSize.h */,
+				33813A4621BFB5D6004666E5 /* MyRelativeLayout.h */,
+				33813A4721BFB5D6004666E5 /* MyGridLayout.h */,
+				33813A4821BFB5D6004666E5 /* MyLayoutDelegate.m */,
+				33813A4921BFB5D6004666E5 /* MyDimeScale.m */,
+				33813A4A21BFB5D6004666E5 /* MyFrameLayout.m */,
+				33813A4B21BFB5D6004666E5 /* MyLinearLayout.m */,
+				33813A4C21BFB5D6004666E5 /* MyLayoutPos.m */,
+				33813A4D21BFB5D6004666E5 /* MyBorderline.m */,
+				33813A4E21BFB5D6004666E5 /* MyLayoutSizeClass.m */,
+				33813A4F21BFB5D6004666E5 /* MyMaker.h */,
+			);
+			path = MyLayout;
+			sourceTree = "<group>";
+		};
+		33813A6821BFB9FB004666E5 /* tools */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = tools;
 			sourceTree = "<group>";
 		};
 		3382D20F21A2648C00104CCD /* BankTransferView */ = {
@@ -5560,6 +5748,7 @@
 		7BFE3E821AC55C98002A53A2 /* JRGC */ = {
 			isa = PBXGroup;
 			children = (
+				33813A1521BFB114004666E5 /* NewSection */,
 				33B6614D215C7FA70027325F /* apple */,
 				AE43B84F1DD2D8BE001D0BD0 /* JRGC.entitlements */,
 				FB7EDE371D6BFCD700C3E924 /* Aplication */,
@@ -7413,6 +7602,7 @@
 				7BA6E4C01AD6731900FE8C37 /* SDWebImagePrefetcher.m in Sources */,
 				740586CC1F41AD8300E2DE01 /* UCFGoldRaiseTransDetailController.m in Sources */,
 				74F291101AE0DBA0003E0E86 /* UCFMyFacBeanViewController.m in Sources */,
+				33813A5121BFB5D6004666E5 /* MyGridNode.m in Sources */,
 				4A3904441CFBF375004347D0 /* Reachability.m in Sources */,
 				74E535F61AE6262F00DAABFC /* UCFOverDueListViewController.m in Sources */,
 				7470EC081B036B71006DDCEF /* PrintView.m in Sources */,
@@ -7431,6 +7621,7 @@
 				EDF01E2A1C7C0A5B005BDBED /* UCFValidFaceLoginViewController.m in Sources */,
 				4A9230451B68B2D800E5844C /* UIImageView+NetImageView.m in Sources */,
 				83F9B6C71FDA64F9001EEAC6 /* UCFInvestmentSuccesseAlaterView.m in Sources */,
+				33813A5A21BFB5D6004666E5 /* MyFloatLayout.m in Sources */,
 				FB1E7F881D8E43A0009CBE2C /* BlockUIAlertView.m in Sources */,
 				74931A2F1B1326FE00143424 /* NSAttributedString+Attributes.m in Sources */,
 				2526ADE11DD08D5F00114D9A /* JRGCCustomGroupCell.m in Sources */,
@@ -7461,6 +7652,7 @@
 				74BDA98A1F09F6C60054403F /* FSCalendarCollectionViewLayout.m in Sources */,
 				7BCBF1291ADB618100C874FC /* UCFRegisterTwoView.m in Sources */,
 				740586D51F41B15B00E2DE01 /* UCFGoldRaiseSectionHeaderView.m in Sources */,
+				33813A5721BFB5D6004666E5 /* MyBaseLayout.m in Sources */,
 				747A91251B0206DB00FE2334 /* UCFFacBeanModel.m in Sources */,
 				7462CB921F8B4F0200F96831 /* UCFNoticeModel.m in Sources */,
 				83DAEFB31F16112000D7948F /* UCFGoldCalculatorView.m in Sources */,
@@ -7528,6 +7720,7 @@
 				7BA6E4C21AD6731900FE8C37 /* UIImage+GIF.m in Sources */,
 				4A6FAFC51D743CF300AD4DF8 /* CJLabel.m in Sources */,
 				745B8A561FB5ADC7007BFF05 /* UCFExtractGoldDetailController.m in Sources */,
+				33813A5D21BFB5D6004666E5 /* MyFrameLayout.m in Sources */,
 				A851F34E1F132D2C003DE8B8 /* UCFGoldTransCell.m in Sources */,
 				74A0AF111EC341DD009E5A57 /* ZZCircleProgress.m in Sources */,
 				74C7A0D41FE10A8C00217ABB /* UCFCalculateTypeCell.m in Sources */,
@@ -7558,6 +7751,7 @@
 				747A91151B01A46300FE2334 /* UCFInvestDetailModel.m in Sources */,
 				74270D451EC5960100F9419B /* UIColor+Hex.m in Sources */,
 				74F291161AE0DBC1003E0E86 /* UCFMyInvestViewController.m in Sources */,
+				33813A5621BFB5D6004666E5 /* MyLayoutMath.m in Sources */,
 				7420DF061B159E81003CAE38 /* UCFMoreCell.m in Sources */,
 				33B66157215C803A0027325F /* UCFZIZhiWebViewViewController.m in Sources */,
 				4ADA3A461B0DEA89000B29FD /* AllSelectView.m in Sources */,
@@ -7618,6 +7812,7 @@
 				74FD355B1ADF58710083D52C /* UCFSettingMainCell.m in Sources */,
 				FB88C90D1AF9F92E00D2EE93 /* YcArray.m in Sources */,
 				7BA6E4C61AD6731900FE8C37 /* UIImageView+WebCache.m in Sources */,
+				33813A5221BFB5D6004666E5 /* MyRelativeLayout.m in Sources */,
 				7BD35A981AD61E4200389D6B /* LLLockPassword.m in Sources */,
 				741CA7A71E724C64006056A8 /* UCFDiscoveryViewController.m in Sources */,
 				74EE331E1AF7209600BDE197 /* UCFFundDetialTableViewCell.m in Sources */,
@@ -7636,6 +7831,7 @@
 				83974FDE1F14B25200C2252F /* UCFGoldMoneyBoadCell.m in Sources */,
 				7BCE01F51AC8FC260084C15C /* ASIAuthenticationDialog.m in Sources */,
 				A851F3531F1361D8003DE8B8 /* UCFGoldTransactionDetailViewController.m in Sources */,
+				33813A5B21BFB5D6004666E5 /* MyLayoutDelegate.m in Sources */,
 				74B98C9A1F70FF5F00CB6A9F /* UCFMineCell.m in Sources */,
 				833A6EAB1E55466B00C8A494 /* UCFCollectionDetailViewController.m in Sources */,
 				83382C1A1FD52EFD001BBF90 /* UCFAssetProofListModel.m in Sources */,
@@ -7679,6 +7875,8 @@
 				8346B2751F71246800219D41 /* UCFAccoutCardModel.m in Sources */,
 				A830DE811F8DC91A003855B9 /* UCFCalendarModularDayCell.m in Sources */,
 				4A6678C11D61C2E900469826 /* UINavigationController+FDFullscreenPopGesture.m in Sources */,
+				33813A5521BFB5D6004666E5 /* MyMaker.m in Sources */,
+				33813A5321BFB5D6004666E5 /* MyLayoutSize.m in Sources */,
 				E3C117AE1D40D2F90053A052 /* UCFWebViewJavascriptBridgeController.m in Sources */,
 				7BCA21141AEE1DB0001CD258 /* UCFVerifyLoginViewController.m in Sources */,
 				744BE8551F6BD8A600107FAA /* UCFHomeIconPresenter.m in Sources */,
@@ -7695,11 +7893,14 @@
 				7BC8AA231AD4C74200BF4660 /* UCFTransterBid.m in Sources */,
 				83AB49641F6A76CA00C4231F /* UCFTotalAssetPieChartViewController.m in Sources */,
 				74270D4C1EC5976100F9419B /* UCFInvitationRewardViewController.m in Sources */,
+				33813A5021BFB5D6004666E5 /* MyFlowLayout.m in Sources */,
 				7BC304891ACBC22D007767F1 /* UITextField+ExtentRange.m in Sources */,
 				7BCE022E1AC9141A0084C15C /* MBProgressHUD.m in Sources */,
 				74B98CA41F711D7500CB6A9F /* UCFMineFuncSecCell.m in Sources */,
+				33813A5921BFB5D6004666E5 /* MyTableLayout.m in Sources */,
 				7BCE02361AC915720084C15C /* NSData+AES.m in Sources */,
 				838EDD6F1F6B7432008E60EC /* UCFCustomPieViewCell.m in Sources */,
+				33813A5421BFB5D6004666E5 /* MyGridLayout.m in Sources */,
 				74B1FC571F73960200BACF8A /* UCFNewUserCell.m in Sources */,
 				741EB1861D596EF2006C885F /* UCFTableCellOne.m in Sources */,
 				A860F2601F5E3EFE0017495F /* UCFGoldMyRebateViewController.m in Sources */,
@@ -7714,6 +7915,7 @@
 				749319C11B12B6DF00143424 /* UCFProvinceModel.m in Sources */,
 				74673BC01FEB8C1400AF3727 /* UCFMineFuncView.m in Sources */,
 				E311A6751D90EBBE00C5483E /* UCFWebViewJavascriptBridgeBanner.m in Sources */,
+				33813A6021BFB5D6004666E5 /* MyBorderline.m in Sources */,
 				7BC304851ACBC22D007767F1 /* UIImage+Translation.m in Sources */,
 				7BCBF1231ADB613C00C874FC /* UCFRegisterStepTwoViewController.m in Sources */,
 				FB1E7F7F1D8E4230009CBE2C /* UCFBidNewDetailView.m in Sources */,
@@ -7735,9 +7937,11 @@
 				7BC304901ACBC26D007767F1 /* EGORefreshTableFooterView.m in Sources */,
 				83CD84281F13A50800227704 /* UCFBatchBidController.m in Sources */,
 				74E140441F1C573000B17A96 /* UCFGoldRechargeHistoryController.m in Sources */,
+				33813A5F21BFB5D6004666E5 /* MyLayoutPos.m in Sources */,
 				74270CA11EC58F6800F9419B /* UCFHomeListNavView.m in Sources */,
 				74F2911F1AE0DBF2003E0E86 /* UCFTopUpViewController.m in Sources */,
 				EDEF5E921CBF761700592B20 /* PromptView.m in Sources */,
+				33813A6121BFB5D6004666E5 /* MyLayoutSizeClass.m in Sources */,
 				749140A81F18A92B00E624CE /* UCFGoldModel.m in Sources */,
 				25F538B41D881B0A0039262F /* UCFPurchaseWebView.m in Sources */,
 				8346B26C1F70F2B400219D41 /* UCFRechargeOrCashViewController.m in Sources */,
@@ -7821,6 +8025,7 @@
 				7422DF2F1B6218B400DCFA40 /* NSDate+IsBelongToToday.m in Sources */,
 				74E804301AE78BA200E7250E /* ModifyPasswordViewController.m in Sources */,
 				4A6EDBD21D5AC650004D40FF /* MD5Util.m in Sources */,
+				33813A6721BFB723004666E5 /* UCFSectionHeadView.m in Sources */,
 				7470EC021B033080006DDCEF /* NSString+FormatForThousand.m in Sources */,
 				7436F2D31F3C2EC6003B77CA /* UCFGoldRechargeFourthCell.m in Sources */,
 				7BCE020A1AC8FDEF0084C15C /* NetworkModule.m in Sources */,
@@ -7859,6 +8064,7 @@
 				84F4E44E1B736C15008378ED /* MjAlertView.m in Sources */,
 				FB4F9E451D62A6B600CCB492 /* OpeningMerchantsVC.m in Sources */,
 				FBA80F531AE6472C0066BF99 /* InvestmentItemInfo.m in Sources */,
+				33813A5821BFB5D6004666E5 /* MyPathLayout.m in Sources */,
 				74270C941EC58F6800F9419B /* UCFSignModel.m in Sources */,
 				A85A2EC21F4321B0004BF4C1 /* QLHeaderViewController.m in Sources */,
 				7BCCA8B31ACA97C20089DAAC /* UCFLoginViewController.m in Sources */,
@@ -7926,6 +8132,7 @@
 				3382D21F21A286F200104CCD /* BankLogoSectionTableViewCell.m in Sources */,
 				FBC234731B31678800C783A8 /* UCFBackMoneyCell1.m in Sources */,
 				4A8D5F741B0C1DCF0053F045 /* RechargeListViewController.m in Sources */,
+				33813A5C21BFB5D6004666E5 /* MyDimeScale.m in Sources */,
 				7BE45C911ADF9C4C00B955A6 /* HMSegmentedControl.m in Sources */,
 				746BBEA41AF8AEC700EBA0E7 /* UCFSelectedView.m in Sources */,
 				74BDA99F1F09F8780054403F /* DIYCalendarCell.m in Sources */,
@@ -7942,6 +8149,7 @@
 				A81F40061F4E86F80018B673 /* UCFRebateGoldCell.m in Sources */,
 				A830DE801F8DC91A003855B9 /* UCFCalendarModularHeaderView.m in Sources */,
 				744F8BEE1F3327AF005FF01B /* UCFMyReservedViewController.m in Sources */,
+				33813A6421BFB66E004666E5 /* NewPurchaseBidController.m in Sources */,
 				832D521F1D8FE5EA0060F1F7 /* UCFWithdrawCashResultWebView.m in Sources */,
 				747A91211B01B11100FE2334 /* UCFConstractModel.m in Sources */,
 				4A0558DE1BFCA2A20021DF59 /* ToolSingleTon.m in Sources */,
@@ -7972,9 +8180,11 @@
 				7BC8AA201AD4C74200BF4660 /* UCFNormalBid.m in Sources */,
 				7BCE01F81AC8FC260084C15C /* ASIDownloadCache.m in Sources */,
 				74BDA98D1F09F6C60054403F /* FSCalendarDelegationProxy.m in Sources */,
+				33813A2221BFB421004666E5 /* UCFBidInfoView.m in Sources */,
 				83CD843B1F13A50800227704 /* UCFProjectListModel.m in Sources */,
 				74FBC1BD1B84721400B8DD7E /* UCFBindCardTwoTableViewCell.m in Sources */,
 				7BE51D931ADE61DB007600AB /* CustomAlertView.m in Sources */,
+				33813A5E21BFB5D6004666E5 /* MyLinearLayout.m in Sources */,
 				FBB685871AE4A76800F222B6 /* MJRefreshLegendFooter.m in Sources */,
 				74DBAC7D1D587AEB00F6F6B1 /* UCFHuiBuinessBankView.m in Sources */,
 				E320200E1CC4BAD70065579C /* WebViewJavascriptBridgeBase.m in Sources */,

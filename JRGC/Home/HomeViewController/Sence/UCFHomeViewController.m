@@ -52,7 +52,9 @@
 #import "UCFNoticeModel.h"
 #import "UCFPurchaseTranBidViewController.h"
 #import "NSString+Misc.h"
-#import "UCFNewRechargeViewController.h"
+
+
+#import "NewPurchaseBidController.h"
 @interface UCFHomeViewController () <UCFHomeListViewControllerDelegate, UCFHomeListNavViewDelegate, UCFCycleImageViewControllerDelegate, BJGridItemDelegate, UIAlertViewDelegate, MjAlertViewDelegate>
 @property (strong, nonatomic) UCFCycleImageViewController *cycleImageVC;
 @property (strong, nonatomic) UCFHomeListViewController *homeListVC;
@@ -211,6 +213,10 @@
 
 - (void) gridItemDidClicked:(BJGridItem *) gridItem
 {
+    NewPurchaseBidController *vc = [[NewPurchaseBidController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+    
+    return;
     if (![UserInfoSingle sharedManager].userId)
     {
         [self showLoginView];
