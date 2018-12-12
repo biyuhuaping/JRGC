@@ -963,6 +963,18 @@
 		E31BD50921C0BFD500D3651F /* BaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E31BD50721C0BFD500D3651F /* BaseModel.m */; };
 		E31BD51021C0BFE000D3651F /* NSObject+YYModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E31BD50D21C0BFE000D3651F /* NSObject+YYModel.m */; };
 		E31BD51121C0BFE000D3651F /* YYClassInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = E31BD50E21C0BFE000D3651F /* YYClassInfo.m */; };
+		E31BD53121C0C10100D3651F /* TYAlertController+BlurEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = E31BD51A21C0C10100D3651F /* TYAlertController+BlurEffects.m */; };
+		E31BD53221C0C10100D3651F /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = E31BD51B21C0C10100D3651F /* UIImage+ImageEffects.m */; };
+		E31BD53321C0C10100D3651F /* TYAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = E31BD51E21C0C10100D3651F /* TYAlertView.m */; };
+		E31BD53421C0C10100D3651F /* UIView+TYAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = E31BD52221C0C10100D3651F /* UIView+TYAlertView.m */; };
+		E31BD53521C0C10100D3651F /* TYAlertScaleFadeAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = E31BD52321C0C10100D3651F /* TYAlertScaleFadeAnimation.m */; };
+		E31BD53621C0C10100D3651F /* TYAlertFadeAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = E31BD52521C0C10100D3651F /* TYAlertFadeAnimation.m */; };
+		E31BD53721C0C10100D3651F /* TYAlertController+TransitionAnimate.m in Sources */ = {isa = PBXBuildFile; fileRef = E31BD52621C0C10100D3651F /* TYAlertController+TransitionAnimate.m */; };
+		E31BD53821C0C10100D3651F /* UIView+TYAutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = E31BD52821C0C10100D3651F /* UIView+TYAutoLayout.m */; };
+		E31BD53921C0C10100D3651F /* TYAlertDropDownAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = E31BD52921C0C10100D3651F /* TYAlertDropDownAnimation.m */; };
+		E31BD53A21C0C10100D3651F /* TYShowAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = E31BD52C21C0C10100D3651F /* TYShowAlertView.m */; };
+		E31BD53B21C0C10100D3651F /* TYBaseAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = E31BD52D21C0C10100D3651F /* TYBaseAnimation.m */; };
+		E31BD53C21C0C10100D3651F /* TYAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = E31BD52F21C0C10100D3651F /* TYAlertController.m */; };
 		E320200D1CC4BAD70065579C /* WebViewJavascriptBridge_JS.m in Sources */ = {isa = PBXBuildFile; fileRef = E320200A1CC4BAD70065579C /* WebViewJavascriptBridge_JS.m */; };
 		E320200E1CC4BAD70065579C /* WebViewJavascriptBridgeBase.m in Sources */ = {isa = PBXBuildFile; fileRef = E320200C1CC4BAD70065579C /* WebViewJavascriptBridgeBase.m */; };
 		E32020121CC4BCE60065579C /* WebViewJavascriptBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = E32020111CC4BCE60065579C /* WebViewJavascriptBridge.m */; };
@@ -2696,6 +2708,29 @@
 		E31BD50D21C0BFE000D3651F /* NSObject+YYModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+YYModel.m"; sourceTree = "<group>"; };
 		E31BD50E21C0BFE000D3651F /* YYClassInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYClassInfo.m; sourceTree = "<group>"; };
 		E31BD50F21C0BFE000D3651F /* NSObject+YYModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+YYModel.h"; sourceTree = "<group>"; };
+		E31BD51921C0C10100D3651F /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		E31BD51A21C0C10100D3651F /* TYAlertController+BlurEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TYAlertController+BlurEffects.m"; sourceTree = "<group>"; };
+		E31BD51B21C0C10100D3651F /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
+		E31BD51C21C0C10100D3651F /* TYAlertController+BlurEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TYAlertController+BlurEffects.h"; sourceTree = "<group>"; };
+		E31BD51E21C0C10100D3651F /* TYAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYAlertView.m; sourceTree = "<group>"; };
+		E31BD51F21C0C10100D3651F /* TYAlertDropDownAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYAlertDropDownAnimation.h; sourceTree = "<group>"; };
+		E31BD52021C0C10100D3651F /* UIView+TYAutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+TYAutoLayout.h"; sourceTree = "<group>"; };
+		E31BD52121C0C10100D3651F /* TYShowAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYShowAlertView.h; sourceTree = "<group>"; };
+		E31BD52221C0C10100D3651F /* UIView+TYAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+TYAlertView.m"; sourceTree = "<group>"; };
+		E31BD52321C0C10100D3651F /* TYAlertScaleFadeAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYAlertScaleFadeAnimation.m; sourceTree = "<group>"; };
+		E31BD52421C0C10100D3651F /* TYBaseAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYBaseAnimation.h; sourceTree = "<group>"; };
+		E31BD52521C0C10100D3651F /* TYAlertFadeAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYAlertFadeAnimation.m; sourceTree = "<group>"; };
+		E31BD52621C0C10100D3651F /* TYAlertController+TransitionAnimate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TYAlertController+TransitionAnimate.m"; sourceTree = "<group>"; };
+		E31BD52721C0C10100D3651F /* TYAlertController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYAlertController.h; sourceTree = "<group>"; };
+		E31BD52821C0C10100D3651F /* UIView+TYAutoLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+TYAutoLayout.m"; sourceTree = "<group>"; };
+		E31BD52921C0C10100D3651F /* TYAlertDropDownAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYAlertDropDownAnimation.m; sourceTree = "<group>"; };
+		E31BD52A21C0C10100D3651F /* TYAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYAlertView.h; sourceTree = "<group>"; };
+		E31BD52B21C0C10100D3651F /* UIView+TYAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+TYAlertView.h"; sourceTree = "<group>"; };
+		E31BD52C21C0C10100D3651F /* TYShowAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYShowAlertView.m; sourceTree = "<group>"; };
+		E31BD52D21C0C10100D3651F /* TYBaseAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYBaseAnimation.m; sourceTree = "<group>"; };
+		E31BD52E21C0C10100D3651F /* TYAlertScaleFadeAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYAlertScaleFadeAnimation.h; sourceTree = "<group>"; };
+		E31BD52F21C0C10100D3651F /* TYAlertController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYAlertController.m; sourceTree = "<group>"; };
+		E31BD53021C0C10100D3651F /* TYAlertFadeAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYAlertFadeAnimation.h; sourceTree = "<group>"; };
 		E32020091CC4BAD70065579C /* WebViewJavascriptBridge_JS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewJavascriptBridge_JS.h; sourceTree = "<group>"; };
 		E320200A1CC4BAD70065579C /* WebViewJavascriptBridge_JS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewJavascriptBridge_JS.m; sourceTree = "<group>"; };
 		E320200B1CC4BAD70065579C /* WebViewJavascriptBridgeBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewJavascriptBridgeBase.h; sourceTree = "<group>"; };
@@ -3083,6 +3118,7 @@
 		33813A2321BFB474004666E5 /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				E31BD51721C0C10100D3651F /* TYAlertController */,
 				E31BD50A21C0BFE000D3651F /* YYModel */,
 				33813A2521BFB5D5004666E5 /* MyLayout */,
 			);
@@ -6717,6 +6753,52 @@
 			path = Api;
 			sourceTree = "<group>";
 		};
+		E31BD51721C0C10100D3651F /* TYAlertController */ = {
+			isa = PBXGroup;
+			children = (
+				E31BD51821C0C10100D3651F /* Blur Effects */,
+				E31BD51D21C0C10100D3651F /* TYAlertController */,
+			);
+			path = TYAlertController;
+			sourceTree = "<group>";
+		};
+		E31BD51821C0C10100D3651F /* Blur Effects */ = {
+			isa = PBXGroup;
+			children = (
+				E31BD51921C0C10100D3651F /* UIImage+ImageEffects.h */,
+				E31BD51A21C0C10100D3651F /* TYAlertController+BlurEffects.m */,
+				E31BD51B21C0C10100D3651F /* UIImage+ImageEffects.m */,
+				E31BD51C21C0C10100D3651F /* TYAlertController+BlurEffects.h */,
+			);
+			path = "Blur Effects";
+			sourceTree = "<group>";
+		};
+		E31BD51D21C0C10100D3651F /* TYAlertController */ = {
+			isa = PBXGroup;
+			children = (
+				E31BD51E21C0C10100D3651F /* TYAlertView.m */,
+				E31BD51F21C0C10100D3651F /* TYAlertDropDownAnimation.h */,
+				E31BD52021C0C10100D3651F /* UIView+TYAutoLayout.h */,
+				E31BD52121C0C10100D3651F /* TYShowAlertView.h */,
+				E31BD52221C0C10100D3651F /* UIView+TYAlertView.m */,
+				E31BD52321C0C10100D3651F /* TYAlertScaleFadeAnimation.m */,
+				E31BD52421C0C10100D3651F /* TYBaseAnimation.h */,
+				E31BD52521C0C10100D3651F /* TYAlertFadeAnimation.m */,
+				E31BD52621C0C10100D3651F /* TYAlertController+TransitionAnimate.m */,
+				E31BD52721C0C10100D3651F /* TYAlertController.h */,
+				E31BD52821C0C10100D3651F /* UIView+TYAutoLayout.m */,
+				E31BD52921C0C10100D3651F /* TYAlertDropDownAnimation.m */,
+				E31BD52A21C0C10100D3651F /* TYAlertView.h */,
+				E31BD52B21C0C10100D3651F /* UIView+TYAlertView.h */,
+				E31BD52C21C0C10100D3651F /* TYShowAlertView.m */,
+				E31BD52D21C0C10100D3651F /* TYBaseAnimation.m */,
+				E31BD52E21C0C10100D3651F /* TYAlertScaleFadeAnimation.h */,
+				E31BD52F21C0C10100D3651F /* TYAlertController.m */,
+				E31BD53021C0C10100D3651F /* TYAlertFadeAnimation.h */,
+			);
+			path = TYAlertController;
+			sourceTree = "<group>";
+		};
 		E32020081CC4BAB80065579C /* webViewJavascripBridge */ = {
 			isa = PBXGroup;
 			children = (
@@ -7644,6 +7726,7 @@
 				FB4F9E731D62A6F800CCB492 /* TradePasswordVC.m in Sources */,
 				7B2E568E1ADBBE5F008B0F9E /* UCFRetrievePasswordStepOneViewController.m in Sources */,
 				33E1A5E120FDC5A9008244BD /* UCFRedBagViewController.m in Sources */,
+				E31BD53221C0C10100D3651F /* UIImage+ImageEffects.m in Sources */,
 				83CD843A1F13A50800227704 /* UCFBatchBidModel.m in Sources */,
 				7404CA041FB4502E002811E0 /* UCFExtractGoldItemModel.m in Sources */,
 				3307E22A21A3D7B6009FFF6D /* QuickIntroduceTableViewCell.m in Sources */,
@@ -7740,6 +7823,7 @@
 				83CD843D1F13A50800227704 /* UCFLoadingView.m in Sources */,
 				EDEC8BFB1CB3BA6300815228 /* WPHotspotLabel.m in Sources */,
 				A84EC2491FE1166200B0C46A /* CLAmplifyView.m in Sources */,
+				E31BD53B21C0C10100D3651F /* TYBaseAnimation.m in Sources */,
 				74BDA9851F09F6C60054403F /* FSCalendar.m in Sources */,
 				E3C1179C1D40CFCC0053A052 /* UCFContributionValueTypeTowCell.m in Sources */,
 				837C1A09214B8A5D000F1C6F /* UCFRedBagAlertView.m in Sources */,
@@ -7797,6 +7881,7 @@
 				A851F34E1F132D2C003DE8B8 /* UCFGoldTransCell.m in Sources */,
 				74A0AF111EC341DD009E5A57 /* ZZCircleProgress.m in Sources */,
 				74C7A0D41FE10A8C00217ABB /* UCFCalculateTypeCell.m in Sources */,
+				E31BD53621C0C10100D3651F /* TYAlertFadeAnimation.m in Sources */,
 				EDEC8BFA1CB3BA6300815228 /* WPAttributedStyleAction.m in Sources */,
 				749D6C931F2840A100AAD0C4 /* UCFCashTipView.m in Sources */,
 				A8E02DAD1F0DDC5000FC2260 /* GoldAccountFirstCell.m in Sources */,
@@ -7804,6 +7889,7 @@
 				741CA7A21E724C44006056A8 /* UCFLoanViewController.m in Sources */,
 				FB7EDE3F1D6BFCD700C3E924 /* UCFBaseViewController.m in Sources */,
 				4A809CCF1B40F4DF00164EE5 /* SubInvestmentCell.m in Sources */,
+				E31BD53721C0C10100D3651F /* TYAlertController+TransitionAnimate.m in Sources */,
 				E31141601D92769E00FF880A /* UCFWebViewJavascriptBridgeBBS.m in Sources */,
 				FB2173191AF20DFC00649AA0 /* UCFBackMoneyCell.m in Sources */,
 				A851F3481F132713003DE8B8 /* UCFGoldTransactionHeadView.m in Sources */,
@@ -7874,6 +7960,7 @@
 				74F490EE1E5B2AAA0057AC62 /* UCFCollectionBidCell.m in Sources */,
 				FBE9B7EF1ADCC3FB0060FC4D /* InvestmentCell.m in Sources */,
 				74F291071AE0DB72003E0E86 /* UCFBackMoneyDetailViewController.m in Sources */,
+				E31BD53421C0C10100D3651F /* UIView+TYAlertView.m in Sources */,
 				A830DE751F8DC8E9003855B9 /* UCFCalendarModularViewController.m in Sources */,
 				74931A321B1326FE00143424 /* OHParagraphStyle.m in Sources */,
 				74C230231F7A24310022D02B /* UCFPicADModel.m in Sources */,
@@ -7989,6 +8076,7 @@
 				74B3AD871ED2C31B00653F8B /* YFRollingLabel.m in Sources */,
 				749319C11B12B6DF00143424 /* UCFProvinceModel.m in Sources */,
 				74673BC01FEB8C1400AF3727 /* UCFMineFuncView.m in Sources */,
+				E31BD53A21C0C10100D3651F /* TYShowAlertView.m in Sources */,
 				E311A6751D90EBBE00C5483E /* UCFWebViewJavascriptBridgeBanner.m in Sources */,
 				33813A6021BFB5D6004666E5 /* MyBorderline.m in Sources */,
 				7BC304851ACBC22D007767F1 /* UIImage+Translation.m in Sources */,
@@ -8064,6 +8152,7 @@
 				E3B26F481CA136F9002E87F4 /* DBColor.m in Sources */,
 				74A2C0CE1F4306A000EDF0FA /* UCFGoldCashViewController.m in Sources */,
 				74E8042D1AE78B8F00E7250E /* BindPhoneNumViewController.m in Sources */,
+				E31BD53321C0C10100D3651F /* TYAlertView.m in Sources */,
 				74F4B8AE1ECAD20E00785DFC /* UCFProfitBackViewController.m in Sources */,
 				A8AD2E3E1EB979760013DB7C /* MongoliaLayerCenter.m in Sources */,
 				33B17644215A14F5007D1F91 /* LMJScrollTextView.m in Sources */,
@@ -8163,6 +8252,7 @@
 				83FF205E1F0BAF0500F21119 /* UCFGoldDetailHeaderView.m in Sources */,
 				7B2E56941ADBBE97008B0F9E /* UCFRetrievePasswordStepOneView.m in Sources */,
 				7BD35A991AD61E4200389D6B /* LLLockView.m in Sources */,
+				E31BD53121C0C10100D3651F /* TYAlertController+BlurEffects.m in Sources */,
 				FBB685861AE4A76800F222B6 /* MJRefreshHeader.m in Sources */,
 				84FAB60C1C7C575300D0942F /* MGSwipeButton.m in Sources */,
 				74D9B8541FD793650076F733 /* KTUpDownAnimationController.m in Sources */,
@@ -8197,6 +8287,7 @@
 				74270C951EC58F6800F9419B /* UCFUserInfoListItem.m in Sources */,
 				7BA6E4C51AD6731900FE8C37 /* UIImageView+HighlightedWebCache.m in Sources */,
 				A8E02DB21F0E0A7800FC2260 /* GoldTransactionRecordViewController.m in Sources */,
+				E31BD53C21C0C10100D3651F /* TYAlertController.m in Sources */,
 				7BCCA8B61ACA97EB0089DAAC /* UCFLoginView.m in Sources */,
 				743985461F17699600F2EDB8 /* UCFGoldRechargeModel.m in Sources */,
 				840A79451C2A7C160059A946 /* UCFMessageCenterCell.m in Sources */,
@@ -8205,6 +8296,7 @@
 				A8AD6F851EFA6BDE000AF323 /* PagerView.m in Sources */,
 				7BCA18621AD7813E0077C2A6 /* UCFInvestmentDetailViewController.m in Sources */,
 				FBEDF1DF1CB5171500116E12 /* MyViewController.m in Sources */,
+				E31BD53921C0C10100D3651F /* TYAlertDropDownAnimation.m in Sources */,
 				3382D21F21A286F200104CCD /* BankLogoSectionTableViewCell.m in Sources */,
 				FBC234731B31678800C783A8 /* UCFBackMoneyCell1.m in Sources */,
 				4A8D5F741B0C1DCF0053F045 /* RechargeListViewController.m in Sources */,
@@ -8212,6 +8304,7 @@
 				7BE45C911ADF9C4C00B955A6 /* HMSegmentedControl.m in Sources */,
 				746BBEA41AF8AEC700EBA0E7 /* UCFSelectedView.m in Sources */,
 				74BDA99F1F09F8780054403F /* DIYCalendarCell.m in Sources */,
+				E31BD53821C0C10100D3651F /* UIView+TYAutoLayout.m in Sources */,
 				7BCE01FA1AC8FC260084C15C /* ASIHTTPRequest.m in Sources */,
 				74270D321EC595FA00F9419B /* UCFFeedBackViewController.m in Sources */,
 				7436F2D81F3C38AE003B77CA /* UCFGoldRechargeBankCell.m in Sources */,
@@ -8266,6 +8359,7 @@
 				E320200E1CC4BAD70065579C /* WebViewJavascriptBridgeBase.m in Sources */,
 				7BCE02371AC915720084C15C /* NSData+Base64.m in Sources */,
 				8300100D1E1356870088C707 /* UCFModifyReservedBankNumberViewController.m in Sources */,
+				E31BD53521C0C10100D3651F /* TYAlertScaleFadeAnimation.m in Sources */,
 				747AAEBB1AEF89F6007A518F /* FundsDetailModel.m in Sources */,
 				7443C7231F1EFF45009669C0 /* UCFGoldCashOneCell.m in Sources */,
 				E320200D1CC4BAD70065579C /* WebViewJavascriptBridge_JS.m in Sources */,
