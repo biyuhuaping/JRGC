@@ -975,6 +975,9 @@
 		E31BD53A21C0C10100D3651F /* TYShowAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = E31BD52C21C0C10100D3651F /* TYShowAlertView.m */; };
 		E31BD53B21C0C10100D3651F /* TYBaseAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = E31BD52D21C0C10100D3651F /* TYBaseAnimation.m */; };
 		E31BD53C21C0C10100D3651F /* TYAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = E31BD52F21C0C10100D3651F /* TYAlertController.m */; };
+		E31BD54221C0C71500D3651F /* BaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E31BD53E21C0C71500D3651F /* BaseTableViewCell.m */; };
+		E31BD54321C0C71500D3651F /* CellConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = E31BD53F21C0C71500D3651F /* CellConfig.m */; };
+		E31BD54821C0C91400D3651F /* BaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = E31BD54621C0C91400D3651F /* BaseView.m */; };
 		E320200D1CC4BAD70065579C /* WebViewJavascriptBridge_JS.m in Sources */ = {isa = PBXBuildFile; fileRef = E320200A1CC4BAD70065579C /* WebViewJavascriptBridge_JS.m */; };
 		E320200E1CC4BAD70065579C /* WebViewJavascriptBridgeBase.m in Sources */ = {isa = PBXBuildFile; fileRef = E320200C1CC4BAD70065579C /* WebViewJavascriptBridgeBase.m */; };
 		E32020121CC4BCE60065579C /* WebViewJavascriptBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = E32020111CC4BCE60065579C /* WebViewJavascriptBridge.m */; };
@@ -985,7 +988,6 @@
 		E37086B61D61A6CD0041D293 /* UCFHuiShangChooseBankViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E37086B41D61A6CD0041D293 /* UCFHuiShangChooseBankViewController.xib */; };
 		E37086BA1D61BA5B0041D293 /* UCFHuiShangChooseBankViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E37086B81D61BA5B0041D293 /* UCFHuiShangChooseBankViewCell.m */; };
 		E37086BB1D61BA5B0041D293 /* UCFHuiShangChooseBankViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E37086B91D61BA5B0041D293 /* UCFHuiShangChooseBankViewCell.xib */; };
-		E37086BF1D61BBB10041D293 /* DBCellConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = E37086BE1D61BBB10041D293 /* DBCellConfig.m */; };
 		E37086C71D61E3030041D293 /* UCFOldUserGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E37086C21D61E3030041D293 /* UCFOldUserGuideViewController.m */; };
 		E37086C81D61E3030041D293 /* UCFOldUserGuideViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E37086C31D61E3030041D293 /* UCFOldUserGuideViewController.xib */; };
 		E3A6A4B31CC71D03003A3FED /* NSString+URL.m in Sources */ = {isa = PBXBuildFile; fileRef = E3A6A4B21CC71D03003A3FED /* NSString+URL.m */; };
@@ -2731,6 +2733,12 @@
 		E31BD52E21C0C10100D3651F /* TYAlertScaleFadeAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYAlertScaleFadeAnimation.h; sourceTree = "<group>"; };
 		E31BD52F21C0C10100D3651F /* TYAlertController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYAlertController.m; sourceTree = "<group>"; };
 		E31BD53021C0C10100D3651F /* TYAlertFadeAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYAlertFadeAnimation.h; sourceTree = "<group>"; };
+		E31BD53E21C0C71500D3651F /* BaseTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTableViewCell.m; sourceTree = "<group>"; };
+		E31BD53F21C0C71500D3651F /* CellConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellConfig.m; sourceTree = "<group>"; };
+		E31BD54021C0C71500D3651F /* CellConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellConfig.h; sourceTree = "<group>"; };
+		E31BD54121C0C71500D3651F /* BaseTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTableViewCell.h; sourceTree = "<group>"; };
+		E31BD54621C0C91400D3651F /* BaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseView.m; sourceTree = "<group>"; };
+		E31BD54721C0C91400D3651F /* BaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseView.h; sourceTree = "<group>"; };
 		E32020091CC4BAD70065579C /* WebViewJavascriptBridge_JS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewJavascriptBridge_JS.h; sourceTree = "<group>"; };
 		E320200A1CC4BAD70065579C /* WebViewJavascriptBridge_JS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewJavascriptBridge_JS.m; sourceTree = "<group>"; };
 		E320200B1CC4BAD70065579C /* WebViewJavascriptBridgeBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewJavascriptBridgeBase.h; sourceTree = "<group>"; };
@@ -2748,8 +2756,6 @@
 		E37086B71D61BA5B0041D293 /* UCFHuiShangChooseBankViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFHuiShangChooseBankViewCell.h; sourceTree = "<group>"; };
 		E37086B81D61BA5B0041D293 /* UCFHuiShangChooseBankViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFHuiShangChooseBankViewCell.m; sourceTree = "<group>"; };
 		E37086B91D61BA5B0041D293 /* UCFHuiShangChooseBankViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFHuiShangChooseBankViewCell.xib; sourceTree = "<group>"; };
-		E37086BD1D61BBB10041D293 /* DBCellConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBCellConfig.h; sourceTree = "<group>"; };
-		E37086BE1D61BBB10041D293 /* DBCellConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBCellConfig.m; sourceTree = "<group>"; };
 		E37086C11D61E3030041D293 /* UCFOldUserGuideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFOldUserGuideViewController.h; sourceTree = "<group>"; };
 		E37086C21D61E3030041D293 /* UCFOldUserGuideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFOldUserGuideViewController.m; sourceTree = "<group>"; };
 		E37086C31D61E3030041D293 /* UCFOldUserGuideViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFOldUserGuideViewController.xib; sourceTree = "<group>"; };
@@ -6688,6 +6694,8 @@
 		E31BD50521C0BFD500D3651F /* tools */ = {
 			isa = PBXGroup;
 			children = (
+				E31BD54521C0C91400D3651F /* View */,
+				E31BD53D21C0C71500D3651F /* TableView */,
 				E31BD50621C0BFD500D3651F /* BaseModel */,
 			);
 			path = tools;
@@ -6799,6 +6807,26 @@
 			path = TYAlertController;
 			sourceTree = "<group>";
 		};
+		E31BD53D21C0C71500D3651F /* TableView */ = {
+			isa = PBXGroup;
+			children = (
+				E31BD54121C0C71500D3651F /* BaseTableViewCell.h */,
+				E31BD53E21C0C71500D3651F /* BaseTableViewCell.m */,
+				E31BD53F21C0C71500D3651F /* CellConfig.m */,
+				E31BD54021C0C71500D3651F /* CellConfig.h */,
+			);
+			path = TableView;
+			sourceTree = "<group>";
+		};
+		E31BD54521C0C91400D3651F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E31BD54721C0C91400D3651F /* BaseView.h */,
+				E31BD54621C0C91400D3651F /* BaseView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		E32020081CC4BAB80065579C /* webViewJavascripBridge */ = {
 			isa = PBXGroup;
 			children = (
@@ -6817,8 +6845,6 @@
 		E37086BC1D61BBB10041D293 /* cellConfig */ = {
 			isa = PBXGroup;
 			children = (
-				E37086BD1D61BBB10041D293 /* DBCellConfig.h */,
-				E37086BE1D61BBB10041D293 /* DBCellConfig.m */,
 			);
 			path = cellConfig;
 			sourceTree = "<group>";
@@ -7715,11 +7741,13 @@
 				A830DE831F8DDA6A003855B9 /* UCFCalendarModularHeaderView.xib in Sources */,
 				74877CC81FB2AB8900F32428 /* UCFHandingInViewController.m in Sources */,
 				A8FF32E41F1666D000066A80 /* UCFGoldBidSuccessViewController.m in Sources */,
+				E31BD54321C0C71500D3651F /* CellConfig.m in Sources */,
 				742D50F21F75146900951AE2 /* UCFUserBenefitModel.m in Sources */,
 				83FCCA6B1F1711A6002921C5 /* UCFMyGoldInvestInfoViewController.m in Sources */,
 				FBB685891AE4A76800F222B6 /* UIScrollView+MJExtension.m in Sources */,
 				7470C8481E5E7CDE007D52F4 /* UCFCollectionBidModel.m in Sources */,
 				74270C9D1EC58F6800F9419B /* UCFHomeListCell.m in Sources */,
+				E31BD54821C0C91400D3651F /* BaseView.m in Sources */,
 				74270CA41EC58F6800F9419B /* UCFSignView.m in Sources */,
 				339930AC21A2B0E000C72F54 /* BankTraIntroduceTableViewCell.m in Sources */,
 				83AB495F1F6A766500C4231F /* UCFAccountPieCharViewController.m in Sources */,
@@ -8130,6 +8158,7 @@
 				74270C991EC58F6800F9419B /* UCFHomeListPresenter.m in Sources */,
 				A82FBA6A1F4FD40900FD79BC /* CoustomLab.m in Sources */,
 				4AF9C5E91B0B419600E3BE7D /* RechargeListCell.m in Sources */,
+				E31BD54221C0C71500D3651F /* BaseTableViewCell.m in Sources */,
 				7404CA011FB44EA7002811E0 /* UCFExtractGoldModel.m in Sources */,
 				83D42A921FCEAF07004C96EF /* UCFSharePictureViewController.m in Sources */,
 				7470EC091B036B71006DDCEF /* UIImage+zhang.m in Sources */,
@@ -8178,7 +8207,6 @@
 				FB88C90C1AF9F92E00D2EE93 /* UIDic+Safe.m in Sources */,
 				74BDA99C1F09F8340054403F /* UCFCalendarCollectionViewCell.m in Sources */,
 				74BDA98B1F09F6C60054403F /* FSCalendarConstants.m in Sources */,
-				E37086BF1D61BBB10041D293 /* DBCellConfig.m in Sources */,
 				7491820C1EC166F000AC1ECE /* TAAnimatedDotView.m in Sources */,
 				8414490B1CB4B6A6000CD292 /* UCFMessageCenterModel.m in Sources */,
 				83CD842C1F13A50800227704 /* UCFHonerViewController.m in Sources */,

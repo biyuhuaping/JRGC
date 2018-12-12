@@ -8,7 +8,7 @@
 
 #import "UCFHuiShangChooseBankViewController.h"
 #import "UCFHuiShangChooseBankViewCell.h"
-#import "DBCellConfig.h"
+#import "CellConfig.h"
 #import "UCFNoDataView.h"
 #import "BlockUIAlertView.h"
 @interface UCFHuiShangChooseBankViewController ()
@@ -145,7 +145,7 @@
         {
             NSMutableDictionary *dataDic = [NSMutableDictionary dictionaryWithDictionary:[dic objectForKey:@"quickBankList"][i]];
             [dataDic setObject:@"yes" forKey:@"isQuick"];
-            DBCellConfig *cellConfig = [DBCellConfig cellConfigWithClassName:NSStringFromClass([UCFHuiShangChooseBankViewCell class]) title:@"quickBank" showInfoMethod:@selector(showInfo:) heightOfCell:56];
+            CellConfig *cellConfig = [CellConfig cellConfigWithClassName:NSStringFromClass([UCFHuiShangChooseBankViewCell class]) title:@"quickBank" showInfoMethod:@selector(showInfo:) heightOfCell:56];
             
             [dataAry addObject:dataDic];
             [cellAry addObject:cellConfig];
@@ -163,7 +163,7 @@
         {
             NSMutableDictionary *dataDic = [NSMutableDictionary dictionaryWithDictionary:[dic objectForKey:@"bankList"][i]];
             [dataDic setObject:@"no" forKey:@"isQuick"];
-            DBCellConfig *cellConfig = [DBCellConfig cellConfigWithClassName:NSStringFromClass([UCFHuiShangChooseBankViewCell class]) title:@"bank" showInfoMethod:@selector(showInfo:) heightOfCell:54];
+            CellConfig *cellConfig = [CellConfig cellConfigWithClassName:NSStringFromClass([UCFHuiShangChooseBankViewCell class]) title:@"bank" showInfoMethod:@selector(showInfo:) heightOfCell:54];
             
             [dataAry addObject:dataDic];
             [cellAry addObject:cellConfig];
@@ -212,7 +212,7 @@
 #pragma mark - tableView的delegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    DBCellConfig *cellConfig = self.cellList[indexPath.section][indexPath.row];
+    CellConfig *cellConfig = self.cellList[indexPath.section][indexPath.row];
     return cellConfig.heightOfCell;
 }
 
@@ -281,7 +281,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    DBCellConfig *cellConfig = self.cellList[indexPath.section][indexPath.row];
+    CellConfig *cellConfig = self.cellList[indexPath.section][indexPath.row];
     
     // 拿到对应cell并根据模型显示
     NSDictionary *dic = self.bankList[indexPath.section][indexPath.row];
