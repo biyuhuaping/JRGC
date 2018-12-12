@@ -960,6 +960,9 @@
 		E311A66E1D90E85B00C5483E /* UCFWebViewJavascriptBridgeLevel.xib in Resources */ = {isa = PBXBuildFile; fileRef = E311A66C1D90E85B00C5483E /* UCFWebViewJavascriptBridgeLevel.xib */; };
 		E311A6751D90EBBE00C5483E /* UCFWebViewJavascriptBridgeBanner.m in Sources */ = {isa = PBXBuildFile; fileRef = E311A6731D90EBBE00C5483E /* UCFWebViewJavascriptBridgeBanner.m */; };
 		E311A6761D90EBBE00C5483E /* UCFWebViewJavascriptBridgeBanner.xib in Resources */ = {isa = PBXBuildFile; fileRef = E311A6741D90EBBE00C5483E /* UCFWebViewJavascriptBridgeBanner.xib */; };
+		E31BD50921C0BFD500D3651F /* BaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E31BD50721C0BFD500D3651F /* BaseModel.m */; };
+		E31BD51021C0BFE000D3651F /* NSObject+YYModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E31BD50D21C0BFE000D3651F /* NSObject+YYModel.m */; };
+		E31BD51121C0BFE000D3651F /* YYClassInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = E31BD50E21C0BFE000D3651F /* YYClassInfo.m */; };
 		E320200D1CC4BAD70065579C /* WebViewJavascriptBridge_JS.m in Sources */ = {isa = PBXBuildFile; fileRef = E320200A1CC4BAD70065579C /* WebViewJavascriptBridge_JS.m */; };
 		E320200E1CC4BAD70065579C /* WebViewJavascriptBridgeBase.m in Sources */ = {isa = PBXBuildFile; fileRef = E320200C1CC4BAD70065579C /* WebViewJavascriptBridgeBase.m */; };
 		E32020121CC4BCE60065579C /* WebViewJavascriptBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = E32020111CC4BCE60065579C /* WebViewJavascriptBridge.m */; };
@@ -2686,6 +2689,13 @@
 		E311A6721D90EBBE00C5483E /* UCFWebViewJavascriptBridgeBanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFWebViewJavascriptBridgeBanner.h; sourceTree = "<group>"; };
 		E311A6731D90EBBE00C5483E /* UCFWebViewJavascriptBridgeBanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFWebViewJavascriptBridgeBanner.m; sourceTree = "<group>"; };
 		E311A6741D90EBBE00C5483E /* UCFWebViewJavascriptBridgeBanner.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFWebViewJavascriptBridgeBanner.xib; sourceTree = "<group>"; };
+		E31BD50721C0BFD500D3651F /* BaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseModel.m; sourceTree = "<group>"; };
+		E31BD50821C0BFD500D3651F /* BaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseModel.h; sourceTree = "<group>"; };
+		E31BD50B21C0BFE000D3651F /* YYClassInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYClassInfo.h; sourceTree = "<group>"; };
+		E31BD50C21C0BFE000D3651F /* YYModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYModel.h; sourceTree = "<group>"; };
+		E31BD50D21C0BFE000D3651F /* NSObject+YYModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+YYModel.m"; sourceTree = "<group>"; };
+		E31BD50E21C0BFE000D3651F /* YYClassInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYClassInfo.m; sourceTree = "<group>"; };
+		E31BD50F21C0BFE000D3651F /* NSObject+YYModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+YYModel.h"; sourceTree = "<group>"; };
 		E32020091CC4BAD70065579C /* WebViewJavascriptBridge_JS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewJavascriptBridge_JS.h; sourceTree = "<group>"; };
 		E320200A1CC4BAD70065579C /* WebViewJavascriptBridge_JS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewJavascriptBridge_JS.m; sourceTree = "<group>"; };
 		E320200B1CC4BAD70065579C /* WebViewJavascriptBridgeBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewJavascriptBridgeBase.h; sourceTree = "<group>"; };
@@ -3026,7 +3036,7 @@
 		33813A1521BFB114004666E5 /* NewSection */ = {
 			isa = PBXGroup;
 			children = (
-				33813A6821BFB9FB004666E5 /* tools */,
+				E31BD50521C0BFD500D3651F /* tools */,
 				33813A2421BFB495004666E5 /* features */,
 				33813A2321BFB474004666E5 /* lib */,
 			);
@@ -3073,6 +3083,7 @@
 		33813A2321BFB474004666E5 /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				E31BD50A21C0BFE000D3651F /* YYModel */,
 				33813A2521BFB5D5004666E5 /* MyLayout */,
 			);
 			path = lib;
@@ -3081,6 +3092,7 @@
 		33813A2421BFB495004666E5 /* features */ = {
 			isa = PBXGroup;
 			children = (
+				E31BD51221C0C03900D3651F /* CouponPopup(优惠券弹窗) */,
 				33813A1921BFB216004666E5 /* Bid */,
 			);
 			path = features;
@@ -3133,13 +3145,6 @@
 				33813A4F21BFB5D6004666E5 /* MyMaker.h */,
 			);
 			path = MyLayout;
-			sourceTree = "<group>";
-		};
-		33813A6821BFB9FB004666E5 /* tools */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = tools;
 			sourceTree = "<group>";
 		};
 		3382D20F21A2648C00104CCD /* BankTransferView */ = {
@@ -6644,6 +6649,74 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		E31BD50521C0BFD500D3651F /* tools */ = {
+			isa = PBXGroup;
+			children = (
+				E31BD50621C0BFD500D3651F /* BaseModel */,
+			);
+			path = tools;
+			sourceTree = "<group>";
+		};
+		E31BD50621C0BFD500D3651F /* BaseModel */ = {
+			isa = PBXGroup;
+			children = (
+				E31BD50721C0BFD500D3651F /* BaseModel.m */,
+				E31BD50821C0BFD500D3651F /* BaseModel.h */,
+			);
+			path = BaseModel;
+			sourceTree = "<group>";
+		};
+		E31BD50A21C0BFE000D3651F /* YYModel */ = {
+			isa = PBXGroup;
+			children = (
+				E31BD50B21C0BFE000D3651F /* YYClassInfo.h */,
+				E31BD50C21C0BFE000D3651F /* YYModel.h */,
+				E31BD50D21C0BFE000D3651F /* NSObject+YYModel.m */,
+				E31BD50E21C0BFE000D3651F /* YYClassInfo.m */,
+				E31BD50F21C0BFE000D3651F /* NSObject+YYModel.h */,
+			);
+			path = YYModel;
+			sourceTree = "<group>";
+		};
+		E31BD51221C0C03900D3651F /* CouponPopup(优惠券弹窗) */ = {
+			isa = PBXGroup;
+			children = (
+				E31BD51321C0C03900D3651F /* Controller */,
+				E31BD51421C0C03900D3651F /* Model */,
+				E31BD51521C0C03900D3651F /* View */,
+				E31BD51621C0C03900D3651F /* Api */,
+			);
+			path = "CouponPopup(优惠券弹窗)";
+			sourceTree = "<group>";
+		};
+		E31BD51321C0C03900D3651F /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		E31BD51421C0C03900D3651F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E31BD51521C0C03900D3651F /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E31BD51621C0C03900D3651F /* Api */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
 		E32020081CC4BAB80065579C /* webViewJavascripBridge */ = {
 			isa = PBXGroup;
 			children = (
@@ -7744,6 +7817,7 @@
 				74BDA9981F09F6F10054403F /* UCFCalendarHeaderView.m in Sources */,
 				7491820E1EC166F000AC1ECE /* TAPageControl.m in Sources */,
 				74D9B8531FD793650076F733 /* KTAlertController.m in Sources */,
+				E31BD51021C0BFE000D3651F /* NSObject+YYModel.m in Sources */,
 				74270D1E1EC595ED00F9419B /* UCFRebateCell.m in Sources */,
 				74EB306F1B0E004900D27BA9 /* UCFBankModel.m in Sources */,
 				840A794A1C2A80B60059A946 /* UCFMessageSettingViewController.m in Sources */,
@@ -7809,6 +7883,7 @@
 				7443C7281F1EFF61009669C0 /* UCFGoldCashTwoCell.m in Sources */,
 				FB377F841CCE480400F5DAF2 /* UCFExchangeModel.m in Sources */,
 				74F291221AE0DBFC003E0E86 /* UCFCashViewController.m in Sources */,
+				E31BD50921C0BFD500D3651F /* BaseModel.m in Sources */,
 				74FD355B1ADF58710083D52C /* UCFSettingMainCell.m in Sources */,
 				FB88C90D1AF9F92E00D2EE93 /* YcArray.m in Sources */,
 				7BA6E4C61AD6731900FE8C37 /* UIImageView+WebCache.m in Sources */,
@@ -7935,6 +8010,7 @@
 				FB4F9E7E1D62A83000CCB492 /* AccountWebView.m in Sources */,
 				74702BBF1FB5599700CBB655 /* UCFExtractGoldCell.m in Sources */,
 				7BC304901ACBC26D007767F1 /* EGORefreshTableFooterView.m in Sources */,
+				E31BD51121C0BFE000D3651F /* YYClassInfo.m in Sources */,
 				83CD84281F13A50800227704 /* UCFBatchBidController.m in Sources */,
 				74E140441F1C573000B17A96 /* UCFGoldRechargeHistoryController.m in Sources */,
 				33813A5F21BFB5D6004666E5 /* MyLayoutPos.m in Sources */,
