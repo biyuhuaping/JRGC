@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UCFBidInfoView : MyRelativeLayout
-
+- (void)bidLayoutSubViewsFrame;
 @end
 
 NS_ASSUME_NONNULL_END

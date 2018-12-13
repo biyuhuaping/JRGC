@@ -8,10 +8,13 @@
 
 #import "NewPurchaseBidController.h"
 #import "UCFSectionHeadView.h"
-
+#import "UCFBidInfoView.h"
+#import "UCFRemindFlowView.h"
+#import "UCFInvestFundsBoard.h"
 @interface NewPurchaseBidController ()
 @property(nonatomic, strong) MyLinearLayout *contentLayout;
 @property(nonatomic, strong) UCFSectionHeadView *bidInfoHeadSectionView;
+@property(nonatomic, strong) UCFRemindFlowView *remind;
 @end
 
 @implementation NewPurchaseBidController
@@ -28,7 +31,7 @@
     [scrollView addSubview:contentLayout];
     self.contentLayout = contentLayout;
     
-    UCFSectionHeadView *bidHeadView = [[UCFSectionHeadView alloc] init];
+    UCFSectionHeadView *bidHeadView = [UCFSectionHeadView new];
     bidHeadView.myTop = 0;
     bidHeadView.myHorzMargin = 0;
     bidHeadView.myHeight = 27;
@@ -36,15 +39,41 @@
     [bidHeadView setShowLabelText:@"产融通"];
     self.bidInfoHeadSectionView = bidHeadView;
     
+    UCFBidInfoView *bidInfo = [UCFBidInfoView new];
+    bidInfo.myTop = 0;
+    bidInfo.myHorzMargin = 0;
+    bidInfo.myHeight = 61;
+    bidInfo.backgroundColor = [UIColor whiteColor];
+    [self.contentLayout addSubview:bidInfo];
+    [bidInfo bidLayoutSubViewsFrame];
     
-    
+    UCFRemindFlowView *remind = [UCFRemindFlowView new];
+    remind.myTop = 0;
+    remind.myHorzMargin = 0;
+    remind.heightSize.equalTo(@36);
+    remind.backgroundColor = UIColorWithRGB(0xebebee);
+    remind.subviewVSpace = 5;
+    remind.subviewHSpace = 5;
+    [self.contentLayout addSubview:remind];
+    self.remind = remind;
+//    remind.backgroundColor = [UIColor redColor];
+    [_remind  reloadViewContentWithTextArr:@[@"text",@"tex111t",@"tex22212t"]];
+
+    UCFInvestFundsBoard *fundsBoard = [UCFInvestFundsBoard linearLayoutWithOrientation:MyOrientation_Vert];
+    fundsBoard.myHorzMargin = 0;
+    [self.contentLayout addSubview:fundsBoard];
+    [fundsBoard addSubSectionViews];
     
 }
 - (void)viewDidLoad {
 //    [super viewDidLoad];
     [self addLeftButton];
+    
 }
 
-
+- (void)viewDidLayoutSubviews
+{
+    NSLog(@"%@",_remind);
+}
 
 @end

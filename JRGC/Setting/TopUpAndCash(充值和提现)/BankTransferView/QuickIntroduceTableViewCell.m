@@ -18,6 +18,11 @@
     _showLabel.textColor = UIColorWithRGB(0x999999);
 
 }
+- (IBAction)buttonClick:(id)sender {
+    if ([_showLabel.text containsString:@"如果充值金额没有及时到账，请拨打客服查询"]) {
+        [self.delegate quickIntroduceTableViewCell:self withButton:sender];
+    }
+}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

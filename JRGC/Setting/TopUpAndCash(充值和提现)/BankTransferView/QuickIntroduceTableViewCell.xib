@@ -25,12 +25,22 @@
                         <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wqH-gh-1DZ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                        <connections>
+                            <action selector="buttonClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="bPl-M4-Qth"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="g1I-lx-Q91" secondAttribute="bottom" id="1Pf-4T-GTB"/>
                     <constraint firstAttribute="trailing" secondItem="g1I-lx-Q91" secondAttribute="trailing" constant="15" id="8Ko-KV-Aym"/>
+                    <constraint firstAttribute="trailing" secondItem="wqH-gh-1DZ" secondAttribute="trailing" id="B1f-lh-agU"/>
+                    <constraint firstItem="wqH-gh-1DZ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="KEt-Le-aeG"/>
+                    <constraint firstAttribute="bottom" secondItem="wqH-gh-1DZ" secondAttribute="bottom" id="OyB-Dz-ns3"/>
                     <constraint firstItem="g1I-lx-Q91" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="dPx-p0-5r0"/>
                     <constraint firstItem="g1I-lx-Q91" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="qnd-fn-AuM"/>
+                    <constraint firstItem="wqH-gh-1DZ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="yCs-3P-iNZ"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

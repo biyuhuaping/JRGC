@@ -20,7 +20,7 @@
 {
     if (self = [super init]) {
         [self addSubview:self.titleLab];
-        self.backgroundColor = UIColorWithRGB(0xf9f9f9);
+        self.backgroundColor = [UIColor colorWithRed:249/255.0 green:249/255.0 blue:249/255.0 alpha:1.0];
 
     }
     return self;
@@ -39,10 +39,11 @@
     if (!_titleLab) {
         _titleLab = [UILabel new];
         _titleLab.font = [UIFont systemFontOfSize:14.0f];
-        _titleLab.numberOfLines = 0;
         _titleLab.textAlignment = NSTextAlignmentLeft;
         _titleLab.adjustsFontSizeToFitWidth = YES;
+        _titleLab.textColor = UIColorWithRGB(0x333333);
         _titleLab.backgroundColor =  [UIColor clearColor];
+        [_titleLab sizeToFit];
     }
     return _titleLab;
 }
