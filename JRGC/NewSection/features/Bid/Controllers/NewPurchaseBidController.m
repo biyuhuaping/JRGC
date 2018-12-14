@@ -11,6 +11,7 @@
 #import "UCFBidInfoView.h"
 #import "UCFRemindFlowView.h"
 #import "UCFInvestFundsBoard.h"
+#import "UCFCouponBoard.h"
 @interface NewPurchaseBidController ()
 @property(nonatomic, strong) MyLinearLayout *contentLayout;
 @property(nonatomic, strong) UCFSectionHeadView *bidInfoHeadSectionView;
@@ -64,16 +65,35 @@
     [self.contentLayout addSubview:fundsBoard];
     [fundsBoard addSubSectionViews];
     
+    UCFCouponBoard *couponBoard = [UCFCouponBoard linearLayoutWithOrientation:MyOrientation_Vert];
+    couponBoard.myHorzMargin = 0;
+    couponBoard.myTop = 10;
+    [self.contentLayout addSubview:couponBoard];
+    [couponBoard addSubSectionViews];
+
+    [self fetchNetData];
+}
+- (void)fetchNetData
+{
+//    []
+    
 }
 - (void)viewDidLoad {
 //    [super viewDidLoad];
     [self addLeftButton];
     
 }
-
-- (void)viewDidLayoutSubviews
-{
-    NSLog(@"%@",_remind);
+- (void)beginPost:(kSXTag)tag {
+    
 }
+- (void)endPost:(id)result tag:(NSNumber *)tag
+{
+    
+}
+- (void)errorPost:(NSError *)err tag:(NSNumber *)tag
+{
+    
+}
+
 
 @end

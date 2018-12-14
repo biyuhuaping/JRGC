@@ -832,6 +832,9 @@ static NetworkModule *gInstance = NULL;
 {
     NSString *parameter = nil;
     switch ((int)tag) {
+        case kSXTagP2PPrdClaimsDealBid:
+            parameter = [NEW_SERVER_IP stringByAppendingString:NEW_P2P_PRDCLAIMS_DEALBID];
+            break;
         case kSXTagUserRegist:
             parameter = [NEW_SERVER_IP stringByAppendingString:USER_REGIST];
             break;

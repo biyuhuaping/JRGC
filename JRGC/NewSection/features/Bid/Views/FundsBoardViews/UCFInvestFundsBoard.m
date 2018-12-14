@@ -63,7 +63,7 @@
 */
 - (void)addSubSectionViews
 {
-    [self addCountDownView];
+//    [self addCountDownView];
     [self addMoneyBoardSection1];
     [self addMoneyBoardSection2];
     [self addMoneyBoardSection3];
@@ -102,7 +102,7 @@
     topLineView.backgroundColor = UIColorWithRGB(0xd8d8d8);
     topLineView.myTop = 0;
     topLineView.myHorzMargin = 0;
-    topLineView.heightSize.equalTo(@1);
+    topLineView.heightSize.equalTo(@0.5);
     [_totalMoneyBoard addSubview:topLineView];
     
     _keYongTipLabel = [[UILabel alloc] init];
@@ -138,8 +138,9 @@
     UIView *endLineView = [[UIView alloc] init];
     endLineView.backgroundColor = UIColorWithRGB(0xd8d8d8);
     endLineView.myBottom = 0;
-    endLineView.myHorzMargin = 0;
-    endLineView.heightSize.equalTo(@1);
+    endLineView.myLeft = 15;
+    endLineView.myRight = 0;
+    endLineView.heightSize.equalTo(@0.5);
     [_totalMoneyBoard addSubview:endLineView];
 }
 #pragma mark view three
@@ -187,8 +188,10 @@
     UIView *endLineView = [[UIView alloc] init];
     endLineView.backgroundColor = UIColorWithRGB(0xd8d8d8);
     endLineView.myBottom = 0;
-    endLineView.myHorzMargin = 0;
-    endLineView.heightSize.equalTo(@1);
+    endLineView.myRight = 0;
+    endLineView.myLeft = 15;
+//    endLineView.myHorzMargin = 0;
+    endLineView.heightSize.equalTo(@0.5);
     [_balanceBoard addSubview:endLineView];
 }
 - (void)goToRecharge:(UIButton *)button
@@ -235,8 +238,10 @@
     UIView *endLineView = [[UIView alloc] init];
     endLineView.backgroundColor = UIColorWithRGB(0xd8d8d8);
     endLineView.myBottom = 0;
-    endLineView.myHorzMargin = 0;
-    endLineView.heightSize.equalTo(@1);
+    endLineView.myRight = 0;
+    endLineView.myLeft = 15;
+//    endLineView.myHorzMargin = 0;
+    endLineView.heightSize.equalTo(@0.5);
     [_beansBoard addSubview:endLineView];
 }
 - (void)changeSwitchStatue:(UISwitch *)switchView
@@ -258,7 +263,7 @@
     midLineView.topPos.equalTo(@50);
     midLineView.leftPos.equalTo(@15);
     midLineView.rightPos.equalTo(@0);
-    midLineView.heightSize.equalTo(@1);
+    midLineView.heightSize.equalTo(@0.5);
     [_inputMoenyBoard addSubview:midLineView];
 
     UILabel *RMBtipLab = [[UILabel alloc] init];
@@ -276,12 +281,11 @@
     _investMoneyTextfield.rightPos.equalTo(_inputMoenyBoard.rightPos).offset(100);
     _investMoneyTextfield.myHeight = 30;
 //    _investMoneyTextfield.delegate = self;
+    _investMoneyTextfield.font = [UIFont systemFontOfSize:16.0f];
     _investMoneyTextfield.keyboardType = UIKeyboardTypeDecimalPad;
-    _investMoneyTextfield.backgroundColor = [UIColor clearColor];
     [_investMoneyTextfield addTarget:self action:@selector(textfieldLength:) forControlEvents:UIControlEventEditingChanged];
     _investMoneyTextfield.textColor = UIColorWithRGB(0x333333);
     _investMoneyTextfield.placeholder = @"100元起投";
-    //    _inputMoneyTextFieldLable.backgroundColor = [UIColor redColor];
     [_inputMoenyBoard addSubview:_investMoneyTextfield];
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -315,7 +319,7 @@
     _interestNumLab.leftPos.equalTo(expectedInterestLab.rightPos).offset(10);
     _interestNumLab.centerYPos.equalTo(expectedInterestLab.centerYPos);
     _interestNumLab.font = [UIFont systemFontOfSize:12];
-    _investMoneyTextfield.heightSize.equalTo(expectedInterestLab.heightSize);
+    _interestNumLab.heightSize.equalTo(expectedInterestLab.heightSize);
     [_interestNumLab sizeToFit];
     [_inputMoenyBoard addSubview:_interestNumLab];
     
@@ -323,7 +327,7 @@
     endLineView.backgroundColor = UIColorWithRGB(0xd8d8d8);
     endLineView.myBottom = 0;
     endLineView.myHorzMargin = 0;
-    endLineView.heightSize.equalTo(@1);
+    endLineView.heightSize.equalTo(@0.5);
     [_inputMoenyBoard addSubview:endLineView];
     
 }

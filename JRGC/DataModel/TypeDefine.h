@@ -23,6 +23,7 @@
 #define PRDCLAIMS_DETAIL    @"newPrdClaims/getDetailTwo"//普通标详情
 #define PRDTRANSFER_DETAIL  @"newprdTransfer/showDetailTwo"//转让标详情
 #define PRDCLAIMS_DEALBID   @"newPrdClaims/dealBidTwo"
+#define NEW_P2P_PRDCLAIMS_DEALBID   @"api/prdClaims/v2/dealBid.json" //新p2p投标页面
 #define PRDCLAIMS_SAVEDEALS @"api/invest/v2/submitTender.json"
 #define PERSON_CENTER       @"api/homePage/v2/userCenter.json"  // @"newaccount/center" 个人中心
 #define MONEY_OVERVIEW      @"newaccount/overview"
@@ -378,6 +379,8 @@ enum kSXTag
     kSXTagPrdTransferDetail = 4,//债券转让详情
     kSXTagPrdClaimsDealBid = 5,//投资界面
     kSXTagPrdClaimsSaveDeals = 6,//投资
+    kSXTagP2PPrdClaimsDealBid,
+
     kSXTagPersonCenter,//个人中心
     kSXTagMoneyOverview,//资金总览
     kSXTagFundsDetail,//资金流水

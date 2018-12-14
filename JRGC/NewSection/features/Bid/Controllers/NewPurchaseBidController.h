@@ -7,11 +7,11 @@
 //
 
 #import "UCFBaseViewController.h"
-
+#import "UCFBidModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface NewPurchaseBidController : UCFBaseViewController
-
+@property(nonatomic, strong)UCFBidModel *bidDetaiModel;
 @end
 
 NS_ASSUME_NONNULL_END

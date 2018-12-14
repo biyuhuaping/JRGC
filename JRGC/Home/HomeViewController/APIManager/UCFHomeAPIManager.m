@@ -106,7 +106,14 @@
             {
                 NSString *strParameters = [NSString stringWithFormat:@"id=%@&userId=%@&status=%@",Id,userId,statue];
                 if ([proType isEqualToString:@"1"]) {
-                    [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDealBid owner:self Type:SelectAccoutTypeP2P];
+                    NSDictionary *paraDict = @{
+                                               @"id":Id,
+                                               @"userId":userId,
+                                               @"status":statue
+                                               };
+                    [[NetworkModule sharedNetworkModule] newPostReq:paraDict tag:kSXTagP2PPrdClaimsDealBid owner:self signature:YES Type:SelectAccoutTypeP2P];
+                    
+//                    [[NetworkModule sharedNetworkModule] newPostReq:strParameters tag:kSXTagP2PPrdClaimsDealBid owner:self Type:SelectAccoutTypeP2P];
                 }
                 else if ([proType isEqualToString:@"2"]) {
                     [[NetworkModule sharedNetworkModule] postReq:strParameters tag:kSXTagPrdClaimsDealBid owner:self Type:SelectAccoutTypeHoner];
@@ -300,7 +307,7 @@
         complete(nil, dic);
         [self.requestDict removeObjectForKey:PRODETAIL];
     }
-    else if (tag.intValue == kSXTagPrdClaimsDealBid) {
+    else if (tag.intValue == kSXTagPrdClaimsDealBid ||tag.intValue == kSXTagP2PPrdClaimsDealBid) {
         NetworkCompletionHandler complete = [self.requestDict objectForKey:PRODETAIL];
         complete(nil, dic);
         [self.requestDict removeObjectForKey:PRODETAIL];

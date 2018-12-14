@@ -38,6 +38,11 @@
 		3307E22A21A3D7B6009FFF6D /* QuickIntroduceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3307E22821A3D7B6009FFF6D /* QuickIntroduceTableViewCell.m */; };
 		3307E22B21A3D7B6009FFF6D /* QuickIntroduceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3307E22921A3D7B6009FFF6D /* QuickIntroduceTableViewCell.xib */; };
 		3319B6D321C23308007DB14E /* UCFInvestFundsBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 3319B6D221C23308007DB14E /* UCFInvestFundsBoard.m */; };
+		3336D23F21C383AD001644E1 /* UCFCouponBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 3336D23E21C383AD001644E1 /* UCFCouponBoard.m */; };
+		3336D24621C3A029001644E1 /* NSObject+FBKVOController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3336D24321C3A029001644E1 /* NSObject+FBKVOController.m */; };
+		3336D24721C3A029001644E1 /* FBKVOController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3336D24421C3A029001644E1 /* FBKVOController.m */; };
+		3336D24B21C3A481001644E1 /* UCFBidViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3336D24A21C3A481001644E1 /* UCFBidViewModel.m */; };
+		3336D25421C3B0C0001644E1 /* UCFBidModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3336D25321C3B0BF001644E1 /* UCFBidModel.m */; };
 		334654B6215E08270046A057 /* LOGO微金.png in Resources */ = {isa = PBXBuildFile; fileRef = 334654B5215E08270046A057 /* LOGO微金.png */; };
 		3346984121C10C8B001930F0 /* UCFRemindFlowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3346984021C10C8B001930F0 /* UCFRemindFlowView.m */; };
 		33813A2221BFB421004666E5 /* UCFBidInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33813A2121BFB421004666E5 /* UCFBidInfoView.m */; };
@@ -1204,6 +1209,17 @@
 		3307E22921A3D7B6009FFF6D /* QuickIntroduceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QuickIntroduceTableViewCell.xib; sourceTree = "<group>"; };
 		3319B6D121C23308007DB14E /* UCFInvestFundsBoard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFInvestFundsBoard.h; sourceTree = "<group>"; };
 		3319B6D221C23308007DB14E /* UCFInvestFundsBoard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFInvestFundsBoard.m; sourceTree = "<group>"; };
+		3336D23D21C383AD001644E1 /* UCFCouponBoard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFCouponBoard.h; sourceTree = "<group>"; };
+		3336D23E21C383AD001644E1 /* UCFCouponBoard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFCouponBoard.m; sourceTree = "<group>"; };
+		3336D24121C3A029001644E1 /* KVOController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KVOController.h; sourceTree = "<group>"; };
+		3336D24221C3A029001644E1 /* FBKVOController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBKVOController.h; sourceTree = "<group>"; };
+		3336D24321C3A029001644E1 /* NSObject+FBKVOController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+FBKVOController.m"; sourceTree = "<group>"; };
+		3336D24421C3A029001644E1 /* FBKVOController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBKVOController.m; sourceTree = "<group>"; };
+		3336D24521C3A029001644E1 /* NSObject+FBKVOController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+FBKVOController.h"; sourceTree = "<group>"; };
+		3336D24921C3A481001644E1 /* UCFBidViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFBidViewModel.h; sourceTree = "<group>"; };
+		3336D24A21C3A481001644E1 /* UCFBidViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFBidViewModel.m; sourceTree = "<group>"; };
+		3336D25221C3B0BF001644E1 /* UCFBidModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFBidModel.h; sourceTree = "<group>"; };
+		3336D25321C3B0BF001644E1 /* UCFBidModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFBidModel.m; sourceTree = "<group>"; };
 		334654B5215E08270046A057 /* LOGO微金.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LOGO微金.png"; sourceTree = "<group>"; };
 		3346983F21C10C8B001930F0 /* UCFRemindFlowView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFRemindFlowView.h; sourceTree = "<group>"; };
 		3346984021C10C8B001930F0 /* UCFRemindFlowView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFRemindFlowView.m; sourceTree = "<group>"; };
@@ -3158,8 +3174,31 @@
 			children = (
 				3319B6D121C23308007DB14E /* UCFInvestFundsBoard.h */,
 				3319B6D221C23308007DB14E /* UCFInvestFundsBoard.m */,
+				3336D23D21C383AD001644E1 /* UCFCouponBoard.h */,
+				3336D23E21C383AD001644E1 /* UCFCouponBoard.m */,
 			);
 			path = FundsBoardViews;
+			sourceTree = "<group>";
+		};
+		3336D24021C3A029001644E1 /* FBKVOController */ = {
+			isa = PBXGroup;
+			children = (
+				3336D24121C3A029001644E1 /* KVOController.h */,
+				3336D24221C3A029001644E1 /* FBKVOController.h */,
+				3336D24321C3A029001644E1 /* NSObject+FBKVOController.m */,
+				3336D24421C3A029001644E1 /* FBKVOController.m */,
+				3336D24521C3A029001644E1 /* NSObject+FBKVOController.h */,
+			);
+			path = FBKVOController;
+			sourceTree = "<group>";
+		};
+		3336D24821C3A414001644E1 /* VM */ = {
+			isa = PBXGroup;
+			children = (
+				3336D24921C3A481001644E1 /* UCFBidViewModel.h */,
+				3336D24A21C3A481001644E1 /* UCFBidViewModel.m */,
+			);
+			path = VM;
 			sourceTree = "<group>";
 		};
 		33813A1521BFB114004666E5 /* NewSection */ = {
@@ -3175,6 +3214,7 @@
 		33813A1921BFB216004666E5 /* Bid */ = {
 			isa = PBXGroup;
 			children = (
+				3336D24821C3A414001644E1 /* VM */,
 				33813A1C21BFB24E004666E5 /* Models */,
 				33813A1B21BFB241004666E5 /* Views */,
 				33813A1A21BFB229004666E5 /* Controllers */,
@@ -3208,6 +3248,8 @@
 		33813A1C21BFB24E004666E5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				3336D25221C3B0BF001644E1 /* UCFBidModel.h */,
+				3336D25321C3B0BF001644E1 /* UCFBidModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -3215,6 +3257,7 @@
 		33813A2321BFB474004666E5 /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				3336D24021C3A029001644E1 /* FBKVOController */,
 				E31BD54921C0CAA900D3651F /* YYText */,
 				E31BD51721C0C10100D3651F /* TYAlertController */,
 				E31BD50A21C0BFE000D3651F /* YYModel */,
@@ -8008,6 +8051,7 @@
 				A8E01A801EEA4C6F003E3BDC /* UCFTransfeTableViewCell.m in Sources */,
 				83CD72A51FB4449C007138ED /* UCFDrawGoldModel.m in Sources */,
 				74F649311F46EA0400328235 /* UCFCashGoldHeader.m in Sources */,
+				3336D24721C3A029001644E1 /* FBKVOController.m in Sources */,
 				74F2911C1AE0DBE4003E0E86 /* UCFSecurityCenterViewController.m in Sources */,
 				E31BD59521C0CAA900D3651F /* YYTextWeakProxy.m in Sources */,
 				FB88C90E1AF9F92E00D2EE93 /* YcMutableArray.m in Sources */,
@@ -8331,12 +8375,14 @@
 				74E140581F1CCB3F00B17A96 /* UCFGoldRechargeWebController.m in Sources */,
 				74E892701F46A2A1006A9B6B /* UCFGoldIncreaseAccountInfoModel.m in Sources */,
 				74D7FCD51AE8F75000653B8F /* UCFHeadrView.m in Sources */,
+				3336D23F21C383AD001644E1 /* UCFCouponBoard.m in Sources */,
 				74AFB12F1EE8F848007DBAFC /* UCFTransferHeaderView.m in Sources */,
 				7456D3C71E82700500207349 /* UIView+Extension.m in Sources */,
 				A81A6F5A1FBD92CD00BDCE50 /* ServiceChargeView2.m in Sources */,
 				74D9B8561FD793650076F733 /* KTCenterAnimationController.m in Sources */,
 				E311A66D1D90E85B00C5483E /* UCFWebViewJavascriptBridgeLevel.m in Sources */,
 				74D7FCCC1AE8F72700653B8F /* FundAccountGroup.m in Sources */,
+				3336D24B21C3A481001644E1 /* UCFBidViewModel.m in Sources */,
 				83CD843C1F13A50800227704 /* UCFTransferModel.m in Sources */,
 				7485EFD01B0492CE0044DE48 /* UCFRedEnvelopeModel.m in Sources */,
 				83F82E861EBC5DD200B79E02 /* UCFProductListModel.m in Sources */,
@@ -8423,6 +8469,7 @@
 				7BCE01FC1AC8FC260084C15C /* ASINetworkQueue.m in Sources */,
 				E32B8F4E1E85188D00B7871F /* UCFRegisterFinshViewController.m in Sources */,
 				7BA6E4BE1AD6731900FE8C37 /* SDWebImageDownloaderOperation.m in Sources */,
+				3336D24621C3A029001644E1 /* NSObject+FBKVOController.m in Sources */,
 				74ED02081FDA84E200CAFED3 /* UCFCalculateResultView.m in Sources */,
 				74270D131EC595ED00F9419B /* CircleMapView.m in Sources */,
 				746FFE251B0059BB00FF927F /* UCFBindCardOneTableViewCell.m in Sources */,
@@ -8604,6 +8651,7 @@
 				4A0E074A1B218E8C0099AEC3 /* RedAlertView.m in Sources */,
 				749099AD1F7279B800C2AD6C /* UCFAttachModel.m in Sources */,
 				FB72B08D1D74233E00F4DC8E /* BaseNavigationViewController.m in Sources */,
+				3336D25421C3B0C0001644E1 /* UCFBidModel.m in Sources */,
 				832942CE1F39914E001E34F1 /* UCFGoldCouponModel.m in Sources */,
 				746FFE2C1B007FA100FF927F /* UCFBindBankCardNormalTableViewCell.m in Sources */,
 				7BE51D901ADE5079007600AB /* FullWebViewController.m in Sources */,
