@@ -28,7 +28,11 @@
     }
     [self layoutAnimationWithDuration:0];
     self.leftPadding = 15.0f;
-    self.topPadding = 12.0f;
+    if (textArr.count > 3) {
+        self.topPadding = 3.0f;
+    } else {
+        self.topPadding = 12.0f;
+    }
     self.rightPadding = 15.0f;
     
 
@@ -50,5 +54,22 @@
     [tagButton sizeToFit];
     [self addSubview:tagButton];
 }
+- (void)showView:(UCFBidViewModel *)viewModel
+{
+    [self.KVOController observe:viewModel keyPaths:@[@"markList"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+        NSString *keyPath = change[@"FBKVONotificationKeyPathKey"];
+        if ([keyPath isEqualToString:@"markList"]) {
+            NSArray *markList = [change objectSafeArrayForKey:NSKeyValueChangeNewKey];
+            if (markList.count > 0) {
+                [self  reloadViewContentWithTextArr:markList];
+                self.heightSize.equalTo(@36);
+                self.myVisibility = MyVisibility_Visible;
+            } else {
+                self.myVisibility = MyVisibility_Visible;
+                self.heightSize.equalTo(@10);
 
+            }
+         }
+    }];
+}
 @end

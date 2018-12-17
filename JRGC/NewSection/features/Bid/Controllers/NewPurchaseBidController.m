@@ -12,10 +12,14 @@
 #import "UCFRemindFlowView.h"
 #import "UCFInvestFundsBoard.h"
 #import "UCFCouponBoard.h"
+#import "UCFBidViewModel.h"
 @interface NewPurchaseBidController ()
 @property(nonatomic, strong) MyLinearLayout *contentLayout;
 @property(nonatomic, strong) UCFSectionHeadView *bidInfoHeadSectionView;
+@property(nonatomic, strong) UCFSectionHeadView *bidHeadView;
+@property(nonatomic, strong) UCFBidInfoView     *bidInfoDetailView;
 @property(nonatomic, strong) UCFRemindFlowView *remind;
+@property(nonatomic, strong) UCFInvestFundsBoard *fundsBoardView;
 @end
 
 @implementation NewPurchaseBidController
@@ -32,13 +36,13 @@
     [scrollView addSubview:contentLayout];
     self.contentLayout = contentLayout;
     
-    UCFSectionHeadView *bidHeadView = [UCFSectionHeadView new];
-    bidHeadView.myTop = 0;
-    bidHeadView.myHorzMargin = 0;
-    bidHeadView.myHeight = 27;
-    [self.contentLayout addSubview:bidHeadView];
-    [bidHeadView setShowLabelText:@"产融通"];
-    self.bidInfoHeadSectionView = bidHeadView;
+    _bidHeadView = [UCFSectionHeadView new];
+    _bidHeadView.myTop = 0;
+    _bidHeadView.myHorzMargin = 0;
+    _bidHeadView.myHeight = 27;
+    [self.contentLayout addSubview:_bidHeadView];
+    self.bidInfoHeadSectionView = _bidHeadView;
+    [_bidHeadView layoutSubviewFrame];
     
     UCFBidInfoView *bidInfo = [UCFBidInfoView new];
     bidInfo.myTop = 0;
@@ -47,6 +51,7 @@
     bidInfo.backgroundColor = [UIColor whiteColor];
     [self.contentLayout addSubview:bidInfo];
     [bidInfo bidLayoutSubViewsFrame];
+    self.bidInfoDetailView = bidInfo;
     
     UCFRemindFlowView *remind = [UCFRemindFlowView new];
     remind.myTop = 0;
@@ -57,21 +62,18 @@
     remind.subviewHSpace = 5;
     [self.contentLayout addSubview:remind];
     self.remind = remind;
-//    remind.backgroundColor = [UIColor redColor];
-    [_remind  reloadViewContentWithTextArr:@[@"text",@"tex111t",@"tex22212t"]];
 
     UCFInvestFundsBoard *fundsBoard = [UCFInvestFundsBoard linearLayoutWithOrientation:MyOrientation_Vert];
     fundsBoard.myHorzMargin = 0;
     [self.contentLayout addSubview:fundsBoard];
     [fundsBoard addSubSectionViews];
+    self.fundsBoardView = fundsBoard;
     
     UCFCouponBoard *couponBoard = [UCFCouponBoard linearLayoutWithOrientation:MyOrientation_Vert];
     couponBoard.myHorzMargin = 0;
     couponBoard.myTop = 10;
     [self.contentLayout addSubview:couponBoard];
     [couponBoard addSubSectionViews];
-
-    [self fetchNetData];
 }
 - (void)fetchNetData
 {
@@ -81,6 +83,22 @@
 - (void)viewDidLoad {
 //    [super viewDidLoad];
     [self addLeftButton];
+    [self initializationData];
+}
+- (void)initializationData
+{
+    UCFBidViewModel *vm = [UCFBidViewModel new];
+    
+    [self.bidHeadView showView:vm];
+
+    [self.bidInfoDetailView showView:vm];
+    
+    [self.remind showView:vm];
+    
+    [self.fundsBoardView showView:vm];
+    
+    [vm setDataModel:_bidDetaiModel];
+
     
 }
 - (void)beginPost:(kSXTag)tag {

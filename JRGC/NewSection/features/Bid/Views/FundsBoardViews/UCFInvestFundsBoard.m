@@ -10,7 +10,7 @@
 #import "MinuteCountDownView.h"
 
 @interface UCFInvestFundsBoard ()
-
+@property(nonatomic, strong)UCFBidViewModel *myVM;
 /**
  倒计时
  */
@@ -52,15 +52,36 @@
 @end
 
 @implementation UCFInvestFundsBoard
-
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+- (void)showView:(UCFBidViewModel *)viewModel
+{
+    self.myVM = viewModel;
+    [self.KVOController observe:viewModel keyPaths:@[@"totalFunds",@"myFundsNum",@"myBeansNum",@"expectedInterestNum",@"inputViewPlaceStr"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+        NSString *keyPath = change[@"FBKVONotificationKeyPathKey"];
+        if ([keyPath isEqualToString:@"myFundsNum"]) {
+            NSString *funds = [change objectSafeForKey:NSKeyValueChangeNewKey];
+            _mybalanceNumLab.text = funds;
+            [_mybalanceNumLab sizeToFit];
+        } else if ([keyPath isEqualToString:@"totalFunds"]) {
+            NSString *totalFunds = [change objectSafeForKey:NSKeyValueChangeNewKey];
+            _KeYongMoneyLabel.text = totalFunds;
+            [_KeYongMoneyLabel sizeToFit];
+        } else if ([keyPath isEqualToString:@"myBeansNum"]) {
+            NSString *myBeansNum = [change objectSafeForKey:NSKeyValueChangeNewKey];
+            _beanNumLab.text = myBeansNum;
+            [_beanNumLab sizeToFit];
+        } else if ([keyPath isEqualToString:@"inputViewPlaceStr"]) {
+            NSString *inputViewPlaceStr = [change objectSafeForKey:NSKeyValueChangeNewKey];
+            _investMoneyTextfield.placeholder = inputViewPlaceStr;
+            [_investMoneyTextfield sizeToFit];
+        } else if ([keyPath isEqualToString:@"expectedInterestNum"]) {
+            NSString *inputViewPlaceStr = [change objectSafeForKey:NSKeyValueChangeNewKey];
+            _interestNumLab.text = [inputViewPlaceStr isEqualToString:@""] ? @"¥0.00" : inputViewPlaceStr;
+            [_interestNumLab sizeToFit];
+        }
+    }];
 }
-*/
+
+
 - (void)addSubSectionViews
 {
 //    [self addCountDownView];
@@ -69,9 +90,6 @@
     [self addMoneyBoardSection3];
     [self addMoneyBoardSection4];
 }
-
-
-
 
 
 
@@ -87,6 +105,26 @@
     [_minuteCountDownView startTimer];
     _minuteCountDownView.sourceVC = @"UCFPurchaseBidVC";//投资页面
     [self addSubview:self.minuteCountDownView];
+    
+//    NSString *stopStatusStr = [_dic objectSafeForKey:@"stopStatus"];// 0投标中,1满标
+//    _minuteCountDownView.isStopStatus = stopStatusStr;
+//    if ([stopStatusStr intValue] == 0) {
+//        _minuteCountDownView.timeInterval= [[_dic objectSafeForKey:@"intervalMilli"]  integerValue];
+//        //        _minuteCountDownView.timeInterval= timeSp;
+//        [_minuteCountDownView startTimer];
+//        _minuteCountDownView.tipLabel.text = @"距结束";//
+//    }else{
+//        NSString *startTimeStr = [_dic objectSafeForKey:@"startTime"];
+//        NSString *endTimeStr = [_dic objectSafeForKey:@"fullTime"];
+//        if (_type == PROJECTDETAILTYPEBONDSRRANSFER){//债权转让
+//            startTimeStr = [_dic objectSafeForKey:@"putawaytime"];
+//            endTimeStr = [_dic objectSafeForKey:@"soldOutTime"];
+//            _minuteCountDownView.tipLabel.text = [NSString stringWithFormat:@"转让期: %@ 至 %@",startTimeStr,endTimeStr];
+//        }else{
+//            _minuteCountDownView.tipLabel.text = [NSString stringWithFormat:@"筹标期: %@ 至 %@",startTimeStr,endTimeStr];
+//        }
+//    }
+    
 }
 #pragma mark view two
 - (void)addMoneyBoardSection1
@@ -128,7 +166,7 @@
     _totalKeYongTipLabel = [[UILabel alloc] init];
     _totalKeYongTipLabel.font = [UIFont systemFontOfSize:10.0f];
     _totalKeYongTipLabel.textColor = UIColorWithRGB(0x999999);
-    _totalKeYongTipLabel.text = @"(我的余额+我的工豆)";
+    _totalKeYongTipLabel.text = [UserInfoSingle sharedManager].isShowCouple ? @"(我的余额+我的工豆)"  : @"";
     [_totalKeYongTipLabel sizeToFit];
     _totalKeYongTipLabel.leadingPos.equalTo(_KeYongMoneyLabel.rightPos).offset(10);
     _totalKeYongTipLabel.myCenterY = _KeYongMoneyLabel.myCenterY + 2.5;
@@ -232,6 +270,7 @@
     _beanSwitch.rightPos.equalTo(_beansBoard.rightPos).offset(15);
     _beanSwitch.onTintColor = UIColorWithRGB(0xfd4d4c);
     _beanSwitch.centerYPos.equalTo(_beansBoard.centerYPos);
+    _beanSwitch.on = YES;
     [_beanSwitch addTarget:self action:@selector(changeSwitchStatue:) forControlEvents:UIControlEventValueChanged];
     [_beansBoard addSubview:_beanSwitch];
     
@@ -246,7 +285,7 @@
 }
 - (void)changeSwitchStatue:(UISwitch *)switchView
 {
-    
+    [self.myVM dealMyfundsNumWithBeansSwitch:switchView];
 }
 #pragma mark view five
 - (void)addMoneyBoardSection4 {
@@ -315,7 +354,7 @@
     _interestNumLab = [[UILabel alloc] init];
     _interestNumLab.backgroundColor = [UIColor clearColor];
     _interestNumLab.textColor = UIColorWithRGB(0xfd4d4c);
-    _interestNumLab.text = @"¥10000";
+    _interestNumLab.text = @"¥0.00";
     _interestNumLab.leftPos.equalTo(expectedInterestLab.rightPos).offset(10);
     _interestNumLab.centerYPos.equalTo(expectedInterestLab.centerYPos);
     _interestNumLab.font = [UIFont systemFontOfSize:12];
@@ -333,7 +372,8 @@
 }
 - (void)textfieldLength:(UITextField *)textField
 {
-    
+    NSString *currentInputText = textField.text;
+    [self.myVM calculate:currentInputText];
 }
 - (void)allInvestClick:(UIButton *)button
 {

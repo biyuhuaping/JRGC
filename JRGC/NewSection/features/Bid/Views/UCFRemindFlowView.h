@@ -7,11 +7,14 @@
 //
 
 #import "MyFlowLayout.h"
-
+#import "UCFBidViewModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UCFRemindFlowView : MyFlowLayout
 - (void)reloadViewContentWithTextArr:(NSArray *)textArr;
+
+- (void)showView:(UCFBidViewModel *)viewModel;
+
 @end
 
 NS_ASSUME_NONNULL_END

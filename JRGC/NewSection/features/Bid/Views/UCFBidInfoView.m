@@ -36,7 +36,26 @@
     }
     return self;
 }
-
+- (void)showView:(UCFBidViewModel *)viewModel
+{
+    [self.KVOController observe:viewModel keyPaths:@[@"annualRate",@"timeLimitText",@"remainingMoney"] options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+        NSString *keyPath = change[@"FBKVONotificationKeyPathKey"];
+        if ([keyPath isEqualToString:@"annualRate"]) {
+            _rateLab.text =  [change objectSafeForKey:NSKeyValueChangeNewKey];
+        } else if ([keyPath isEqualToString:@"timeLimitText"]) {
+            NSString *markStr = [change objectSafeForKey:NSKeyValueChangeNewKey];
+            if (markStr.length > 0) {
+                _timeLimitLab.text = [change objectSafeForKey:NSKeyValueChangeNewKey];
+            }
+        } else if ([keyPath isEqualToString:@"remainingMoney"]) {
+            NSString *markStr = [change objectSafeForKey:NSKeyValueChangeNewKey];
+            if (markStr.length > 0) {
+                _moneyAmountLab.text = [change objectSafeForKey:NSKeyValueChangeNewKey];
+            }
+        }
+    }];
+    
+}
 - (void)bidLayoutSubViewsFrame
 {
     self.topLine.myHeight = 1;
@@ -46,7 +65,6 @@
     self.rateLab.myLeading = 15;
     self.rateLab.myTop = 10;
     self.rateLab.myHeight = 20;
-//    self.rateLab.backgroundColor = [UIColor blueColor];
     
     self.timeLimitLab.leadingPos.equalTo(self.rateLab.trailingPos);
     self.timeLimitLab.myHeight = 15;
@@ -57,11 +75,7 @@
     self.moneyAmountLab.bottomPos.equalTo(self.rateLab.bottomPos);
     
     self.rateLab.widthSize.equalTo(@[self.timeLimitLab.widthSize, self.moneyAmountLab.widthSize]).add(-30);
-    
-//    self.rateLab.backgroundColor = [UIColor yellowColor];
-//    self.timeLimitLab.backgroundColor = [UIColor yellowColor];
-//    self.moneyAmountLab.backgroundColor = [UIColor yellowColor];
-    
+        
     self.rateTipLab.myLeading = 15;
     self.rateTipLab.topPos.equalTo(self.rateLab.bottomPos).offset(8);
     self.rateTipLab.myHeight = 15;
@@ -95,9 +109,6 @@
     if (!_bottomLineview) {
         _bottomLineview = [[UIView alloc] init];
         _bottomLineview.backgroundColor = UIColorWithRGB(0xeff0f3);
-//        _bottomLineview.backgroundColor = [UIColor redColor];
-
-        
     }
     return _bottomLineview;
 }
@@ -106,7 +117,7 @@
     if (!_rateLab) {
         _rateLab = [[UILabel alloc] init];
         _rateLab.textColor = UIColorWithRGB(0xfd4d4c);
-        _rateLab.font = [UIFont systemFontOfSize:16.0f];
+        _rateLab.font = [UIFont boldSystemFontOfSize:16.0f];
         _rateLab.text = @"0%";
         [_rateLab sizeToFit];
     }

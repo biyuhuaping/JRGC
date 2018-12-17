@@ -7,11 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "UCFBidViewModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UCFSectionHeadView : MyRelativeLayout
-- (void)setShowLabelText:(NSString *)text;
+- (void)layoutSubviewFrame;
+
+
+- (void)showView:(UCFBidViewModel *)viewModel;
 @end
 
 NS_ASSUME_NONNULL_END

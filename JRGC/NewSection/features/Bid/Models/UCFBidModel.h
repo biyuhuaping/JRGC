@@ -28,9 +28,9 @@
 
 @property (nonatomic, strong) PrdclaimModel *prdClaim;
 
-@property (nonatomic, assign) CGFloat calcRate;
+@property (nonatomic, assign) double calcRate;
 
-@property (nonatomic, assign) CGFloat accountAmount;
+@property (nonatomic, assign) double accountAmount;
 
 @property (nonatomic, copy) NSString *cashNum;
 
@@ -70,7 +70,7 @@
 
 @property (nonatomic, copy) NSString *status;
 
-@property (nonatomic, assign) NSInteger completeLoan;
+@property (nonatomic, assign) CGFloat completeLoan;
 
 @property (nonatomic, copy) NSString *annualRate;
 
@@ -96,7 +96,7 @@
 
 @property (nonatomic, copy) NSString *guaranteeCompanyName;
 
-@property (nonatomic, assign) NSInteger borrowAmount;
+@property (nonatomic, assign) CGFloat borrowAmount;
 
 @property (nonatomic, strong) NSArray *prdLabelsList;
 
