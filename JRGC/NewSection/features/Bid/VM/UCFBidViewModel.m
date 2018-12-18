@@ -27,6 +27,10 @@
     [self dealMarkView];
     //我的资金
     [self dealMyFunds];
+    //我的优惠券
+    [self dealMycoupon];
+    //我的合同
+    [self dealMyContract];
 }
 - (void)dealBidHeader
 {
@@ -115,5 +119,42 @@
     }
     self.expectedInterestNum = [NSString stringWithFormat:@"¥%.2f",totalIntersate < 0.01 ? 0.00 : totalIntersate];
 }
-
+- (void)dealMycoupon
+{
+    if ([self.model.data.cashNum integerValue] > 0) {
+        NSString *cashNum = [NSString stringWithFormat:@"%@张可用",self.model.data.cashNum];
+        self.cashNum = cashNum;
+    } else {
+        self.cashIsHide = YES;
+    }
+    
+    if ([self.model.data.couponNum integerValue] > 0) {
+        NSString *couponNum = [NSString stringWithFormat:@"%@张可用",self.model.data.couponNum];
+        self.couponNum = couponNum;
+    } else {
+        self.couponIsHide = YES;
+    }
+    if (self.cashIsHide && self.couponIsHide) {
+        self.headherIsHide = YES;
+    }
+}
+- (void)dealMyContract
+{
+    NSString *limitAmountMess = self.model.data.limitAmountMess;
+    if (limitAmountMess.length > 0) {
+        NSCharacterSet* nonDigits =[[NSCharacterSet decimalDigitCharacterSet] invertedSet];
+        NSString  *limitAmount = [limitAmountMess stringByTrimmingCharactersInSet:nonDigits];
+        self.limitAmountMess = limitAmountMess;
+        self.limitAmountNum = limitAmount;
+    } else {
+        self.limitAmountMess = @"";
+    }
+    NSString *cfcaContractName = self.model.data.cfcaContractName;
+    self.cfcaContractName = cfcaContractName;
+    
+    NSArray *contractMsg = self.model.data.contractMsg;
+    self.contractMsg = contractMsg;
+    
+    
+}
 @end

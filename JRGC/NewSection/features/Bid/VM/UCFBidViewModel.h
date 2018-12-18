@@ -65,8 +65,57 @@ NS_ASSUME_NONNULL_BEGIN
  输入框默认填充
  */
 @property(nonatomic, copy)NSString          *inputViewPlaceStr;
+
+/**
+ 返息券可用张数
+ */
+@property(nonatomic, copy)NSString          *couponNum;
+
+@property(nonatomic, assign)BOOL            couponIsHide;
+
+/**
+ 返息券反的钱数
+ */
+@property(nonatomic, copy)NSString          *repayCoupon;
+/**
+返现券可用张数
+ */
+@property(nonatomic, copy)NSString          *cashNum;
+@property(nonatomic, assign)BOOL            cashIsHide;
+/**
+ 返现券反的钱数
+ */
+@property(nonatomic, copy)NSString          *repayCash;
+
+@property(nonatomic, assign)BOOL          headherIsHide;
+
 - (void)dealMyfundsNumWithBeansSwitch:(UISwitch *)switchView;
 - (void)calculate:(NSString *)investMoney;
+
+
+//******************************************************
+//我的合同
+
+/**
+ 投资限额文本
+ */
+@property(nonatomic,copy)NSString       *limitAmountMess;
+
+/**
+ 限投数字
+ */
+@property(nonatomic,copy)NSString       *limitAmountNum;
+
+/**
+ 是否显示CFCA
+ */
+@property(nonatomic,copy)NSString       *cfcaContractName;
+
+/**
+ 合同内容
+ */
+@property(nonatomic,strong)NSArray       *contractMsg;
+
 @end
 
 NS_ASSUME_NONNULL_END

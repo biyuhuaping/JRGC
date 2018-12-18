@@ -7,11 +7,23 @@
 //
 
 #import "MyLinearLayout.h"
-
+#import "UCFBidViewModel.h"
 NS_ASSUME_NONNULL_BEGIN
+@class UCFCouponBoard;
+@protocol UCFCouponBoardDelegate <NSObject>
+
+- (void)couponBoard:(UCFCouponBoard *)board SelectPayBackButtonClick:(UIButton *)button;
+
+
+@end
+
 
 @interface UCFCouponBoard : MyLinearLayout
+
+@property(weak,nonatomic)id<UCFCouponBoardDelegate>delegate;
+
 - (void)addSubSectionViews;
+- (void)showView:(UCFBidViewModel *)viewModel;
 @end
 
 NS_ASSUME_NONNULL_END

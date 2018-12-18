@@ -13,13 +13,17 @@
 #import "UCFInvestFundsBoard.h"
 #import "UCFCouponBoard.h"
 #import "UCFBidViewModel.h"
-@interface NewPurchaseBidController ()
+#import "UCFBidFootBoardView.h"
+
+@interface NewPurchaseBidController ()<UCFCouponBoardDelegate>
 @property(nonatomic, strong) MyLinearLayout *contentLayout;
 @property(nonatomic, strong) UCFSectionHeadView *bidInfoHeadSectionView;
 @property(nonatomic, strong) UCFSectionHeadView *bidHeadView;
 @property(nonatomic, strong) UCFBidInfoView     *bidInfoDetailView;
 @property(nonatomic, strong) UCFRemindFlowView *remind;
 @property(nonatomic, strong) UCFInvestFundsBoard *fundsBoardView;
+@property(nonatomic, strong) UCFCouponBoard *couponBoard;
+@property(nonatomic, strong) UCFBidFootBoardView    *footView;
 @end
 
 @implementation NewPurchaseBidController
@@ -72,12 +76,23 @@
     UCFCouponBoard *couponBoard = [UCFCouponBoard linearLayoutWithOrientation:MyOrientation_Vert];
     couponBoard.myHorzMargin = 0;
     couponBoard.myTop = 10;
+    couponBoard.delegate = self;
     [self.contentLayout addSubview:couponBoard];
     [couponBoard addSubSectionViews];
+    self.couponBoard = couponBoard;
+    
+    UCFBidFootBoardView *footView = [UCFBidFootBoardView linearLayoutWithOrientation:MyOrientation_Vert];
+    footView.myVertMargin = 10;
+    footView.myHorzMargin = 0;
+    footView.backgroundColor = UIColorWithRGB(0xebebee);
+//    footView.backgroundColor = [UIColor yellowColor];
+    footView.userInteractionEnabled = YES;
+    [self.contentLayout addSubview:footView];
+    self.footView = footView;
+    [footView createAllShowView];
 }
 - (void)fetchNetData
 {
-//    []
     
 }
 - (void)viewDidLoad {
@@ -97,8 +112,17 @@
     
     [self.fundsBoardView showView:vm];
     
+    [self.couponBoard showView:vm];
+    
+    [self.footView showView:vm];
+    
+    
     [vm setDataModel:_bidDetaiModel];
 
+    
+}
+- (void)couponBoard:(UCFCouponBoard *)board SelectPayBackButtonClick:(UIButton *)button
+{
     
 }
 - (void)beginPost:(kSXTag)tag {
