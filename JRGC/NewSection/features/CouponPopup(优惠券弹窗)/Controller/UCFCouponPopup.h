@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UCFCouponPopup : NSObject<NetworkModuleDelegate>
 
+- (void)request;
 + (void)startQueryCouponPopup;
 @end
 

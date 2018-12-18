@@ -16,33 +16,48 @@
 #import "TYAlertController+BlurEffects.h"
 #import "UCFCouponPopupHomeView.h"
 #import "ASIHTTPRequest.h"
+#import "AppDelegate.h"
+#import "UCFHomeViewController.h"
+#import "BaseNavigationViewController.h"
 @implementation UCFCouponPopup
 
 + (void)startQueryCouponPopup
 {
-    UCFCouponPopup *cp = [[UCFCouponPopup alloc] init];
-    [cp request];
+    AppDelegate *delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    BaseNavigationViewController *nav = [delegate.tabBarController.viewControllers objectAtIndex:0];
+    UCFHomeViewController *hc = [nav.viewControllers firstObject];
+    [hc homeCouponPopup];
+//    BaseNavigationViewController *nav = [[BaseNavigationViewController alloc] initWithRootViewController:VC];
+//    [delegate.tabBarController presentViewController:nav animated:YES completion:^{
+//
+//    }];
 }
 - (void)request
 {
-    NSString *userId = [[NSUserDefaults standardUserDefaults] valueForKey:UUID];
-    if (![userId isEqualToString:@""] && userId != nil) {
-        //当前是否有用户登录
-        if ([[NSUserDefaults standardUserDefaults] valueForKey:TIMESTAMP]!=nil && ![[[NSUserDefaults standardUserDefaults] valueForKey:TIMESTAMP] isEqualToString:@""]) //判断是否有时间戳,如果没有,说明是新登录的用户,如果有,说明是已登录的用户
-        {
-            if ([self getTimestamp]) {
-                //已登录的用户,需要计算两次间隔是否够24小时,大于24小时才重新进行请求
-                [self startRequest];
-            }else
+    [self startRequest];
+    return;
+    @synchronized(self) {
+        NSString *userId = [[NSUserDefaults standardUserDefaults] valueForKey:UUID];
+        if (![userId isEqualToString:@""] && userId != nil) {
+            //当前是否有用户登录
+            if ([[NSUserDefaults standardUserDefaults] valueForKey:TIMESTAMP]!=nil && ![[[NSUserDefaults standardUserDefaults] valueForKey:TIMESTAMP] isEqualToString:@""]) //判断是否有时间戳,如果没有,说明是新登录的用户,如果有,说明是已登录的用户
             {
-                //不够24小时不做处理
+                if ([self getTimestamp]) {
+                    //已登录的用户,需要计算两次间隔是否够24小时,大于24小时才重新进行请求
+                    [self startRequest];
+                }else
+                {
+                    //不够24小时不做处理
+                    DBLOG(@"不够24小时");
+                }
             }
-        }else{
-            //新登录的用户直接请求
-            [self startRequest];
+            else
+            {
+                //新登录的用户直接请求
+                [self startRequest];
+            }
         }
-    }
-    
+    }    
 }
 - (void)startRequest
 {
@@ -87,11 +102,12 @@
             
             
             
-            UCFCouponPopupHomeView *fir = [[UCFCouponPopupHomeView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
+            UCFCouponPopupHomeView *fir = [[UCFCouponPopupHomeView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight) withModel:model];
             // use UIView Category
+            
             [fir showInWindow];
             [[NSUserDefaults standardUserDefaults] setObject:[self getNowTimeTimestamp] forKey:TIMESTAMP];
-            
+            [[NSUserDefaults standardUserDefaults] synchronize];
 //            AppDelegate *delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
 //            [delegate.tabBarController dismissViewControllerAnimated:NO completion:^{
 //

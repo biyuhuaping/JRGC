@@ -13,13 +13,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UCFCouponPopupHomeView : BaseView
 
-@property (nonatomic, strong) UIButton *cancelButton; //取消
+//@property (nonatomic, strong) UIButton *cancelButton; //取消
 
-@property (nonatomic, strong) BaseBottomButtonView *tableViewFootView;//查看更多
 
-@property (nonatomic, copy) UCFCouponPopupModel *arryData;//查看更多
 
-- (void)reloadView;
+- (id)initWithFrame:(CGRect)frame withModel:(UCFCouponPopupModel *)model;
 @end
 
 NS_ASSUME_NONNULL_END

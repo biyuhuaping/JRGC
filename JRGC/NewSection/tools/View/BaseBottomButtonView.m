@@ -29,8 +29,8 @@
 }
 - (UIView *)projectionView {
     if (nil == _projectionView) {
-        _projectionView = [UIView new];
-        _projectionView.backgroundColor = UIColorWithRGB(0xd6d6d6);
+        _projectionView = [UIView new]; 
+        _projectionView.backgroundColor = [DBColor colorWithHexString:@"d6d6d6" andAlpha:0.07];
         _projectionView.topPos.equalTo(self.rootLayout.topPos).offset(-13);
         _projectionView.leftPos.equalTo(@0);
         _projectionView.rightPos.equalTo(@0);
@@ -88,7 +88,7 @@
 }
 - (void)setViewBackgroundColor:(UIColor *)BackgroundColor
 {
-    self.projectionView.backgroundColor = BackgroundColor;
+//    self.projectionView.backgroundColor = BackgroundColor;
     self.rootLayout.backgroundColor = BackgroundColor;
 
 }

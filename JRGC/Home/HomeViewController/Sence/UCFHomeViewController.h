@@ -11,5 +11,6 @@
 
 @interface UCFHomeViewController : UCFBaseViewController
 - (void)skipToOtherPage:(UCFHomeListType)type;
+- (void)homeCouponPopup;
 @property (copy, nonatomic) NSString *desVCStr;
 @end

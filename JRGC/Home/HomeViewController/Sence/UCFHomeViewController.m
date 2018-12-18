@@ -63,7 +63,7 @@
 @property (weak, nonatomic) UCFHomeListNavView *navView;
 @property (strong, nonatomic)BJGridItem *dragBtn;
 @property (strong,nonatomic) NSString *intoVCStr;
-
+@property (strong, nonatomic)  UCFCouponPopup *ucfCp;
 @end
 
 @implementation UCFHomeViewController
@@ -92,12 +92,15 @@
         DBLog(@"主队列--延迟执行------%@",[NSThread currentThread]);
         [[MongoliaLayerCenter sharedManager] showLogic];
         [MongoliaLayerCenter sharedManager].tableView = self.homeListVC.tableView;
-        [UCFCouponPopup startQueryCouponPopup];
+        
     });
-    
+    [self homeCouponPopup];
 
 }
-
+- (void)homeCouponPopup
+{
+    [self.ucfCp request];
+}
 - (void)refresh {
     [self.cycleImageVC getNormalBannerData];
     [self.homeListVC.tableView.header beginRefreshing];
@@ -309,6 +312,9 @@
     [self.view addSubview:self.homeListVC.tableView];
 
     [self addChildViewController:self.cycleImageVC];
+    
+    self.ucfCp = [[UCFCouponPopup alloc]init];
+
 }
 
 #pragma mark - addUI 添加界面
