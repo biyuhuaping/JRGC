@@ -11,6 +11,9 @@
 #import "UCFSelectionCouponsCell.h"
 #import "TYAlertController+BlurEffects.h"
 #import "UIView+TYAlertView.h"
+#import "AppDelegate.h"
+#import "BaseNavigationViewController.h"
+#import "UCFCouponViewController.h"
 @interface UCFCouponPopupHomeView()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView *tableView;
@@ -117,7 +120,7 @@
 {
     if (nil == _tableViewFootView) {
         _tableViewFootView = [[BaseBottomButtonView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth*0.8, 57)];
-//        [_tableViewFootView.enterButton addTarget:self action:@selector(logoutButtonClick) forControlEvents:UIControlEventTouchUpInside];
+        [_tableViewFootView.enterButton addTarget:self action:@selector(queryMore) forControlEvents:UIControlEventTouchUpInside];
         _tableViewFootView.topPos.equalTo(self.tableView.bottomPos);
         _tableViewFootView.widthSize.equalTo(self.tableView.widthSize);
         _tableViewFootView.heightSize.equalTo(@57);
@@ -206,7 +209,7 @@
 }
 - (void)cancelhideInWindow
 {
-    [self hideView];
+    [self hideInWindow];
 }
 #pragma mark ---- UITableViewDelegate ----
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView;
@@ -297,6 +300,28 @@
     UIImage *newPic = UIGraphicsGetImageFromCurrentImageContext();
     
     return newPic;
+}
+- (void)queryMore
+{
+//    AppDelegate *delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+//    UCFCouponViewController *coupon = [[UCFCouponViewController alloc] initWithNibName:@"UCFCouponViewController" bundle:nil];
+//    BaseNavigationViewController *nav = [[BaseNavigationViewController alloc] initWithRootViewController:coupon];
+//    [delegate.tabBarController presentViewController:nav animated:YES completion:^{
+//        [self hideInWindow];
+//    }];
+    
+    
+    [UIView animateWithDuration:0.2
+                          delay:0.2
+         usingSpringWithDamping:.5
+          initialSpringVelocity:.5
+                        options:UIViewAnimationOptionRepeat
+                     animations:^{
+                         [self hideInWindow];
+                     } completion:^(BOOL finished) {
+                         AppDelegate *delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+                         [delegate.tabBarController setSelectedIndex:4];
+                     }];
 }
 
 @end

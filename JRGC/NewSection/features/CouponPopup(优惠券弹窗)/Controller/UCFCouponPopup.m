@@ -27,10 +27,7 @@
     BaseNavigationViewController *nav = [delegate.tabBarController.viewControllers objectAtIndex:0];
     UCFHomeViewController *hc = [nav.viewControllers firstObject];
     [hc homeCouponPopup];
-//    BaseNavigationViewController *nav = [[BaseNavigationViewController alloc] initWithRootViewController:VC];
-//    [delegate.tabBarController presentViewController:nav animated:YES completion:^{
-//
-//    }];
+
 }
 - (void)request
 {
