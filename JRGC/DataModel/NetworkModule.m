@@ -1362,6 +1362,8 @@ static NetworkModule *gInstance = NULL;
             break;
         case kSXTagRecommendPrdClaim:
             parameter = [NEW_SERVER_IP stringByAppendingString:HOMEPAGERECOMMENDPRDCLAIMURL];
+        case kSXTagShowCouponTips:
+            parameter = [NEW_SERVER_IP stringByAppendingString:HOMESHOWCOUPONTIPS];
 
             break;
     }

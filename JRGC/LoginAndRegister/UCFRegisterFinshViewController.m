@@ -12,6 +12,7 @@
 #import "AppDelegate.h"
 #import "MongoliaLayerCenter.h"
 #import "BaseNavigationViewController.h"
+#import "UCFCouponPopup.h"
 @interface UCFRegisterFinshViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *openButton;
 @property (weak, nonatomic) IBOutlet NZLabel *customLabel;
@@ -81,7 +82,7 @@
     else {
         [self.navigationController popViewControllerAnimated:YES];
     }
-
+    [UCFCouponPopup startQueryCouponPopup];//去调取首页优惠券弹框
 }
 
 #pragma mark - 请求网络及回调

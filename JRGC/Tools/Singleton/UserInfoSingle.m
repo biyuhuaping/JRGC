@@ -160,6 +160,7 @@
     [[NSUserDefaults standardUserDefaults] setValue:nil forKey:USER_LEVEL];
     [[NSUserDefaults standardUserDefaults] setValue:nil forKey:GOldAUTHORIZATION];
     [[NSUserDefaults standardUserDefaults] setValue:@"" forKey:GCMCODE];
+    [[NSUserDefaults standardUserDefaults] setValue:nil forKey:TIMESTAMP];//时间戳清空
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     //  GrowingIO删除字段

@@ -52,6 +52,8 @@
 #import "UCFNoticeModel.h"
 #import "UCFPurchaseTranBidViewController.h"
 #import "NSString+Misc.h"
+#import "UCFCouponPopup.h"
+
 #import "NewPurchaseBidController.h"
 @interface UCFHomeViewController () <UCFHomeListViewControllerDelegate, UCFHomeListNavViewDelegate, UCFCycleImageViewControllerDelegate, BJGridItemDelegate, UIAlertViewDelegate, MjAlertViewDelegate>
 @property (strong, nonatomic) UCFCycleImageViewController *cycleImageVC;
@@ -61,7 +63,7 @@
 @property (weak, nonatomic) UCFHomeListNavView *navView;
 @property (strong, nonatomic)BJGridItem *dragBtn;
 @property (strong,nonatomic) NSString *intoVCStr;
-
+@property (strong, nonatomic)  UCFCouponPopup *ucfCp;
 @end
 
 @implementation UCFHomeViewController
@@ -90,11 +92,15 @@
         DBLog(@"主队列--延迟执行------%@",[NSThread currentThread]);
         [[MongoliaLayerCenter sharedManager] showLogic];
         [MongoliaLayerCenter sharedManager].tableView = self.homeListVC.tableView;
+        
     });
-    
+    [self homeCouponPopup];
 
 }
-
+- (void)homeCouponPopup
+{
+    [self.ucfCp request];
+}
 - (void)refresh {
     [self.cycleImageVC getNormalBannerData];
     [self.homeListVC.tableView.header beginRefreshing];
@@ -306,6 +312,9 @@
     [self.view addSubview:self.homeListVC.tableView];
 
     [self addChildViewController:self.cycleImageVC];
+    
+    self.ucfCp = [[UCFCouponPopup alloc]init];
+
 }
 
 #pragma mark - addUI 添加界面

@@ -362,6 +362,7 @@
 #define INTOCOINPAGEURL  @"api/coin/v2/intoCoinPage.json" // 进入工力佳贝页
 
 #define HOMEPAGERECOMMENDPRDCLAIMURL     @"/api/homePage/v2/recommendPrdClaim.json"//推荐标列表
+#define HOMESHOWCOUPONTIPS    @"api/discountCoupon/v2/showCouponTips.json"//新券过期券提示接口
 
 enum kPostStatus{
     kPostStatusNone=0,
@@ -603,6 +604,9 @@ enum kSXTag
     kSXTagIntoCoinPage,                 // 进入工力佳贝页
 
     kSXTagRecommendPrdClaim,            //推荐表列表
+    kSXTagShowCouponTips,            //新券过期券提示接口
+    
+    
 
 };
 
