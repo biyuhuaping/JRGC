@@ -27,10 +27,7 @@
     BaseNavigationViewController *nav = [delegate.tabBarController.viewControllers objectAtIndex:0];
     UCFHomeViewController *hc = [nav.viewControllers firstObject];
     [hc homeCouponPopup];
-//    BaseNavigationViewController *nav = [[BaseNavigationViewController alloc] initWithRootViewController:VC];
-//    [delegate.tabBarController presentViewController:nav animated:YES completion:^{
-//
-//    }];
+
 }
 - (void)request
 {
@@ -62,7 +59,10 @@
 - (void)startRequest
 {
     NSString *userId = [[NSUserDefaults standardUserDefaults] valueForKey:UUID];
-    [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":userId} tag:kSXTagShowCouponTips owner:self signature:YES Type:SelectAccoutDefault];
+    if (![userId isEqualToString:@""] && userId != nil) {
+        [[NetworkModule sharedNetworkModule] newPostReq:@{@"userId":userId} tag:kSXTagShowCouponTips owner:self signature:YES Type:SelectAccoutDefault];
+        
+    }
     
 //    NSURL *url = [NSURL URLWithString:@"http://10.105.101.64:3000/mock/11/api/discountCoupon/v2/showCouponTips.json"];
 //    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
