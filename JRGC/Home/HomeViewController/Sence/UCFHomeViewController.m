@@ -587,23 +587,30 @@
 
                         NSDictionary *parameter = @{@"Id": model.Id, @"userId": [UserInfoSingle sharedManager].userId, @"proType": model.type,@"type":@"4",@"status":model.status};
                         [self.cycleImageVC.presenter fetchProDetailDataWithParameter:parameter completionHandler:^(NSError *error, id result) {
-                            NSString *rstcode = [result objectForKey:@"status"];
-                            NSString *statusdes = [result objectForKey:@"statusdes"];
-                            [MBProgressHUD hideOriginAllHUDsForView:weakSelf.view animated:YES];
-                            if ([rstcode intValue] == 1) {
-                                UCFPurchaseBidViewController *purchaseViewController = [[UCFPurchaseBidViewController alloc] initWithNibName:@"UCFPurchaseBidViewController" bundle:nil];
-                                purchaseViewController.dataDict = result;
-                                purchaseViewController.bidType = 0;
-                                purchaseViewController.baseTitleType = @"detail_heTong";
-                                purchaseViewController.accoutType = self.accoutType;
-                                purchaseViewController.accoutType = self.accoutType;
-                                purchaseViewController.rootVc = self;
-                                [weakSelf.navigationController pushViewController:purchaseViewController animated:YES];
-                            } else if ([rstcode intValue] == 21 || [rstcode intValue] == 30){
-                                
-                            }
-                            else {
-                                [MBProgressHUD displayHudError:statusdes withShowTimes:3];
+                            
+                            if ([model.type isEqualToString:@"1"] || [model.type isEqualToString:@"0"]) {
+                                NewPurchaseBidController *vc = [[NewPurchaseBidController alloc] init];
+                                vc.bidDetaiModel = [UCFBidModel yy_modelWithJSON:result];
+                                [self.navigationController pushViewController:vc animated:YES];
+                            } else {
+                                NSString *rstcode = [result objectForKey:@"status"];
+                                NSString *statusdes = [result objectForKey:@"statusdes"];
+                                [MBProgressHUD hideOriginAllHUDsForView:weakSelf.view animated:YES];
+                                if ([rstcode intValue] == 1) {
+                                    UCFPurchaseBidViewController *purchaseViewController = [[UCFPurchaseBidViewController alloc] initWithNibName:@"UCFPurchaseBidViewController" bundle:nil];
+                                    purchaseViewController.dataDict = result;
+                                    purchaseViewController.bidType = 0;
+                                    purchaseViewController.baseTitleType = @"detail_heTong";
+                                    purchaseViewController.accoutType = self.accoutType;
+                                    purchaseViewController.accoutType = self.accoutType;
+                                    purchaseViewController.rootVc = self;
+                                    [weakSelf.navigationController pushViewController:purchaseViewController animated:YES];
+                                } else if ([rstcode intValue] == 21 || [rstcode intValue] == 30){
+                                    
+                                }
+                                else {
+                                    [MBProgressHUD displayHudError:statusdes withShowTimes:3];
+                                }
                             }
                         }];
                         

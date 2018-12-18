@@ -16,7 +16,7 @@
 #import "NSString+Misc.h"
 #import "AppDelegate.h"
 #import "HSHelper.h"
-@interface UCFQuickRechargeViewController ()<QuickRechargeHeadViewDelegate,UITableViewDelegate,UITableViewDataSource,UCFModifyReservedBankNumberDelegate>
+@interface UCFQuickRechargeViewController ()<QuickRechargeHeadViewDelegate,UITableViewDelegate,UITableViewDataSource,UCFModifyReservedBankNumberDelegate,QuickIntroduceTableViewCellDelegate>
 {
     NSString *telNum;
     NSString *minRecharge;
@@ -35,12 +35,16 @@
     [self fetchData];
     _showTableView.delegate = self;
     _showTableView.dataSource = self;
+    _showTableView.delaysContentTouches = NO;
+
     _showTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _showTableView.estimatedRowHeight = 44.0f;//推测高度，必须有，可以随便写多少
     _showTableView.backgroundColor = UIColorWithRGB(0xebebee);
+
     self.showHeadView = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([QuickRechargeHeadView class]) owner:nil options:nil][0];
     _showHeadView.frame = CGRectMake(0, 0, ScreenWidth, 230);
     _showHeadView.backgroundColor = UIColorWithRGB(0xebebee);
+
     _showHeadView.delegate = self;
     _showTableView.tableHeaderView = _showHeadView;
 
@@ -58,7 +62,7 @@
     self.dataArr = [NSMutableArray arrayWithCapacity:7];
     [self.dataArr addObject:@"温馨提示"];
     [self.dataArr addObject:@"● 使用快捷支付充值最低金额应大于等于1元；"];
-    [self.dataArr addObject:@"● 对充值后未出借的提现，由第三方平台收取%0.4的手续费；"];
+    [self.dataArr addObject:@"● 对充值后未出借的提现，由第三方平台收取0.4%的手续费；"];
     [self.dataArr addObject:@"● 充值/提现必须为银行借记卡，不支持存折、信用卡充值；"];
     [self.dataArr addObject:@"● 充值需开通银行卡网上支付功能，如有疑问请咨询开户行客服；"];
     [self.dataArr addObject:@"● 单笔充值不可超过该银行充值限额；"];
@@ -206,14 +210,14 @@
             [self.dataArr removeAllObjects];
             [self.dataArr addObject:@"温馨提示"];
             [self.dataArr addObject:[NSString stringWithFormat:@"● 使用快捷支付充值最低金额应大于等于%@元；",minRecharge]];
-            [self.dataArr addObject:[NSString stringWithFormat:@"● 对充值后未出借的提现，由第三方平台收取%@的手续费；",fee]];
+            [self.dataArr addObject:[NSString stringWithFormat:@"● 对充值后未出借的提现，由第三方平台收取%@%%的手续费；",fee]];
             [self.dataArr addObject:@"● 充值/提现必须为银行借记卡，不支持存折、信用卡充值；"];
             [self.dataArr addObject:@"● 充值需开通银行卡网上支付功能，如有疑问请咨询开户行客服；"];
             [self.dataArr addObject:@"● 单笔充值不可超过该银行充值限额；"];
             [self.dataArr addObject:@"● 如果手机快捷支付充值失败，可使用网银、手机银行转账等其他方式进行充值。"];
             [self.dataArr addObject:@"● 如果充值金额没有及时到账，请拨打客服查询。"];
             
-
+            [_showTableView reloadData];
         } else {
             [MBProgressHUD displayHudError:dic[@"message"]];
         }
@@ -299,17 +303,16 @@
     static NSString *cellStr = @"cee";
     QuickIntroduceTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellStr];
     if (!cell) {
-        if (!cell) {
-            cell =  [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([QuickIntroduceTableViewCell class]) owner:self options:nil][0];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        }
-
+        cell =  [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([QuickIntroduceTableViewCell class]) owner:self options:nil][0];
+        cell.selectionStyle = UITableViewCellSelectionStyleGray;
     }
+    cell.delegate = self;
     cell.showLabel.text = self.dataArr[indexPath.row];
     [cell.showLabel setLineSpace:3 string:cell.showLabel.text];
 
     if ([cell.showLabel.text containsString:@"如果充值金额没有及时到账，请拨打客服查询"]) {
         [cell.showLabel setFontColor:UIColorWithRGB(0x4aa1f9) string:@"拨打客服"];
+    
     }
     
     return cell;
@@ -320,11 +323,15 @@
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"联系客服" message:telStr delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"立即拨打", nil];
     [alert show];
 }
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)quickIntroduceTableViewCell:(QuickIntroduceTableViewCell *)cell withButton:(UIButton *)button
 {
-    NSString *str = self.dataArr[indexPath.row];
-    if ([str containsString:@"如果充值金额没有及时到账，请拨打客服查询"]) {
-        [self telServiceNo];
-    }
+    [self telServiceNo];
 }
+//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    NSString *str = self.dataArr[indexPath.row];
+//    if ([str containsString:@"如果充值金额没有及时到账，请拨打客服查询"]) {
+//        [self telServiceNo];
+//    }
+//}
 @end

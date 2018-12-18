@@ -116,6 +116,7 @@
         _baseScroView.pagingEnabled = YES;
         _baseScroView.delegate = self;
         _baseScroView.contentSize = CGSizeMake(ScreenWidth * 2, CGRectGetHeight(self.view.frame) - 40);
+        
     }
     return _baseScroView;
 }
