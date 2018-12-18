@@ -25,6 +25,7 @@
 #import "ToolSingleTon.h"
 #import "UCFRegisterFinshViewController.h"
 #import "MongoliaLayerCenter.h"
+#import "UCFCouponPopup.h"
 #define kTipColorNormal [UIColor blackColor]
 #define kTipColorError [UIColor redColor]
 @interface UCFLockHandleViewController ()
@@ -433,6 +434,9 @@
 //    if (!_isFromRegister) {
 //        [[MongoliaLayerCenter sharedManager] showLogic];
 //    }
+    if (!_isFromRegister) {
+        [UCFCouponPopup startQueryCouponPopup];
+    }
 }
 // 绘制有touchID 的界面
 - (void)initTouchIDLockView

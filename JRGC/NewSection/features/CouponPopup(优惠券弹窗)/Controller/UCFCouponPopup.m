@@ -34,8 +34,8 @@
 }
 - (void)request
 {
-    [self startRequest];
-    return;
+//    [self startRequest];
+//    return;
     @synchronized(self) {
         NSString *userId = [[NSUserDefaults standardUserDefaults] valueForKey:UUID];
         if (![userId isEqualToString:@""] && userId != nil) {
@@ -99,8 +99,6 @@
     if (model.ret)//&& [dic[@"data"][@"bankList"]count] > 0 && [dic[@"data"][@"quickBankList"]count] > 0
     {
         if (model.data.couponList.count > 0) {
-            
-            
             
             UCFCouponPopupHomeView *fir = [[UCFCouponPopupHomeView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight) withModel:model];
             // use UIView Category

@@ -213,9 +213,9 @@
     [self.remarkLabel sizeToFit];
     self.overdueTimeLabel.text = [NSString stringWithFormat:@"有效期至%@",cpData.overdueTime];
     [self.overdueTimeLabel sizeToFit];
-    self.investMultipLabel.text = [NSString stringWithFormat:@"投资金额≥%ld元可用",cpData.investMultip] ;
+    self.investMultipLabel.text = [NSString stringWithFormat:@"投资金额≥%ld元可用",(long)cpData.investMultip] ;
     [self.investMultipLabel sizeToFit];
-    self.inverstPeriodLabel.text = [NSString stringWithFormat:@"投资期限≥%ld天可用",cpData.inverstPeriod];
+    self.inverstPeriodLabel.text = [NSString stringWithFormat:@"投资期限≥%ld天可用",(long)cpData.inverstPeriod];
     [self.inverstPeriodLabel sizeToFit];
     
 }
