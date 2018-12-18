@@ -154,7 +154,7 @@
     
     NSArray *contractMsg = self.model.data.contractMsg;
     self.contractMsg = contractMsg;
-    
-    
+    //pdf 合同
+//    NSArray *downContractList = self.model.data
 }
 @end

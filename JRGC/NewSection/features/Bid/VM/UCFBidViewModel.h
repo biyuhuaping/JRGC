@@ -116,6 +116,12 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property(nonatomic,strong)NSArray       *contractMsg;
 
+
+/**
+ PDF合同
+ */
+@property(nonatomic,strong)NSArray       *downContractList;
+
 @end
 
 NS_ASSUME_NONNULL_END

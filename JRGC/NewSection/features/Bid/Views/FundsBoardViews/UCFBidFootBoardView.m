@@ -17,6 +17,7 @@
 @property(nonatomic, strong) UIView     *fourSectionView;
 @property(nonatomic, strong) YYLabel    *contractMsgLabel;
 @property(nonatomic, strong) UIView     *fiveSectionView;
+@property(nonatomic, strong) UIView     *sixSectionView;
 @end
 @implementation UCFBidFootBoardView
 - (void)showView:(UCFBidViewModel *)viewModel
@@ -72,9 +73,9 @@
                 }
                 self.contractMsgLabel.text = totalStr;
                 [self.contractMsgLabel sizeToFit];
-                self.fiveSectionView.heightSize.equalTo(self.contractMsgLabel.bottomPos).add(5);
-            
                 self.contractMsgLabel.attributedText = text;
+                _fourSectionView.myVisibility = MyVisibility_Visible;
+          
             } else {
                 _fourSectionView.myVisibility = MyVisibility_Gone;
             }
@@ -89,12 +90,12 @@
     [self createSectionTwo];
     [self createSectionThree];
     [self createSectionFour];
-    [self createSectionfive];
+    [self createSectionsix];
 }
 - (void)createSectionOne
 {
     UIView *view = [MyRelativeLayout new];
-    view.backgroundColor = [UIColor clearColor];
+    view.backgroundColor = [UIColor greenColor];
     view.myTop = 0;
     view.myHeight = 20;
     view.myHorzMargin = 0;
@@ -122,7 +123,7 @@
 - (void)createSectionTwo
 {
     UIView *view = [MyRelativeLayout new];
-    view.backgroundColor = [UIColor clearColor];
+    view.backgroundColor = [UIColor purpleColor];
     view.topPos.equalTo(self.firstSectionView.bottomPos);
     view.myHeight = 20;
     view.myHorzMargin = 0;
@@ -163,7 +164,7 @@
 - (void)createSectionThree
 {
     UIView *view = [MyRelativeLayout new];
-    view.backgroundColor = [UIColor clearColor];
+    view.backgroundColor = [UIColor blueColor];
     view.topPos.equalTo(self.secondSectionView.bottomPos);
     view.wrapContentHeight = YES;
     view.myHorzMargin = 0;
@@ -191,12 +192,7 @@
     limitAmountMessLabel.wrapContentHeight = YES;   //高度自动计算。
     [limitAmountMessLabel sizeToFit];
     [self.thirdSectionView addSubview:limitAmountMessLabel];
-    
-    __weak typeof(view) weakSelf = view;
-    
-    [limitAmountMessLabel setViewLayoutCompleteBlock:^(MyBaseLayout *layout, UIView *v) {
-        weakSelf.heightSize.equalTo(v.bottomPos).add(5);
-    }];
+    limitAmountMessLabel.bottomPos.equalTo(self.bottomPos).offset(5);
     
     NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithString:showStr];
     text.yy_color = UIColorWithRGB(0x999999);
@@ -211,10 +207,10 @@
 - (void)createSectionFour
 {
     UIView *view = [MyRelativeLayout new];
-    view.backgroundColor = [UIColor clearColor];
+    view.backgroundColor = [UIColor redColor];
     view.topPos.equalTo(self.thirdSectionView.bottomPos);
     view.wrapContentHeight = YES;
-    view.myHeight = 20;
+//    view.myHeight = 20;
     view.myHorzMargin = 0;
     [self addSubview:view];
     self.fourSectionView = view;
@@ -235,30 +231,68 @@
     limitAmountMessLabel.topPos.equalTo(@5);
     limitAmountMessLabel.leftPos.equalTo(imageView.leftPos).offset(10);
     limitAmountMessLabel.rightPos.equalTo(self.rightPos).offset(15);
+    limitAmountMessLabel.bottomPos.equalTo(self.bottomPos).offset(5);
     limitAmountMessLabel.textColor = UIColorWithRGB(0x999999);
     limitAmountMessLabel.lineBreakMode = NSLineBreakByCharWrapping;
     limitAmountMessLabel.wrapContentHeight = YES;   //高度自动计算。
     [limitAmountMessLabel sizeToFit];
     self.contractMsgLabel = limitAmountMessLabel;
     [self.fourSectionView addSubview:limitAmountMessLabel];
-    
 }
+
 - (void)createSectionfive
 {
     UIView *view = [MyRelativeLayout new];
     view.backgroundColor = [UIColor clearColor];
-    view.myTop = 0;
-    view.myHeight = 20;
+    view.topPos.equalTo(self.fourSectionView.bottomPos);
+    view.wrapContentHeight = YES;
+    //    view.myHeight = 20;
     view.myHorzMargin = 0;
     [self addSubview:view];
     self.fiveSectionView = view;
     
     UIImageView * imageView = [[UIImageView alloc] init];
     imageView.myLeading = 15;
-    imageView.centerYPos.equalTo(view.centerYPos).offset(1.5);
+    imageView.myTop = 11.5;
     imageView.mySize = CGSizeMake(5, 5);
     imageView.image = [UIImage imageNamed:@"point.png"];
     [self.fiveSectionView addSubview:imageView];
+    
+    NSString *showStr = @"同意并认可";;
+    
+    YYLabel *limitAmountMessLabel = [[YYLabel alloc] init];
+    limitAmountMessLabel.font = [UIFont systemFontOfSize:12.0f];
+    limitAmountMessLabel.numberOfLines = 0;
+    limitAmountMessLabel.text = showStr;
+    limitAmountMessLabel.topPos.equalTo(@5);
+    limitAmountMessLabel.leftPos.equalTo(imageView.leftPos).offset(10);
+    limitAmountMessLabel.rightPos.equalTo(self.rightPos).offset(15);
+    limitAmountMessLabel.bottomPos.equalTo(self.bottomPos).offset(5);
+    limitAmountMessLabel.textColor = UIColorWithRGB(0x999999);
+    limitAmountMessLabel.lineBreakMode = NSLineBreakByCharWrapping;
+    limitAmountMessLabel.wrapContentHeight = YES;   //高度自动计算。
+    [limitAmountMessLabel sizeToFit];
+    self.contractMsgLabel = limitAmountMessLabel;
+    [self.fiveSectionView addSubview:limitAmountMessLabel];
+}
+
+
+- (void)createSectionsix
+{
+    UIView *view = [MyRelativeLayout new];
+    view.backgroundColor = [UIColor yellowColor];
+    view.topPos.equalTo(self.fourSectionView.bottomPos);
+    view.myHeight = 20;
+    view.myHorzMargin = 0;
+    [self addSubview:view];
+    self.sixSectionView = view;
+    
+    UIImageView * imageView = [[UIImageView alloc] init];
+    imageView.myLeading = 15;
+    imageView.centerYPos.equalTo(view.centerYPos).offset(1.5);
+    imageView.mySize = CGSizeMake(5, 5);
+    imageView.image = [UIImage imageNamed:@"point.png"];
+    [self.sixSectionView addSubview:imageView];
     
     YYLabel *limitAmountMessLabel = [[YYLabel alloc] init];
     limitAmountMessLabel.font = [UIFont systemFontOfSize:12.0f];
@@ -268,7 +302,7 @@
     limitAmountMessLabel.textColor = UIColorWithRGB(0x999999);
     limitAmountMessLabel.centerYPos.equalTo(view.centerYPos).offset(1.5);
     limitAmountMessLabel.leftPos.equalTo(imageView.leftPos).offset(10);
-    [self.fiveSectionView addSubview:limitAmountMessLabel];
+    [self.sixSectionView addSubview:limitAmountMessLabel];
     [limitAmountMessLabel sizeToFit];
 }
 @end
