@@ -52,7 +52,7 @@
 #import "UCFNoticeModel.h"
 #import "UCFPurchaseTranBidViewController.h"
 #import "NSString+Misc.h"
-
+#import "UCFCouponPopup.h"
 
 #import "NewPurchaseBidController.h"
 @interface UCFHomeViewController () <UCFHomeListViewControllerDelegate, UCFHomeListNavViewDelegate, UCFCycleImageViewControllerDelegate, BJGridItemDelegate, UIAlertViewDelegate, MjAlertViewDelegate>
@@ -92,6 +92,7 @@
         DBLog(@"主队列--延迟执行------%@",[NSThread currentThread]);
         [[MongoliaLayerCenter sharedManager] showLogic];
         [MongoliaLayerCenter sharedManager].tableView = self.homeListVC.tableView;
+        [UCFCouponPopup startQueryCouponPopup];
     });
     
 

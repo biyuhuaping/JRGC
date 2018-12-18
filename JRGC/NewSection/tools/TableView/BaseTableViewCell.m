@@ -32,13 +32,12 @@
         //        self.rootLayout.widthSize.equalTo(self.contentView.widthSize);
         //        self.rootLayout.heightSize.equalTo(self.contentView.heightSize);
         //        [self.contentView addSubview: self.rootLayout];
-        self.rootLayout.backgroundColor = [UIColor clearColor];
+        self.rootLayout.backgroundColor = [UIColor whiteColor];
         
         self.rootLayout.topPos.equalTo(@0);
         self.rootLayout.bottomPos.equalTo(@0);
         self.rootLayout.leftPos.equalTo(@0);
         self.rootLayout.rightPos.equalTo(@0);
-        self.rootLayout.cacheEstimatedRect = YES;
         [self.contentView addSubview: self.rootLayout];
         
         //        self.rootLayout= [MyRelativeLayout new];
@@ -57,6 +56,9 @@
 
 - (void)refreshCellData:(id)data
 {
+    if (data == nil) {
+        return;
+    }
 }
 
 

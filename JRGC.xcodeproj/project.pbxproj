@@ -1002,6 +1002,10 @@
 		E31BD59321C0CAA900D3651F /* UIView+YYText.m in Sources */ = {isa = PBXBuildFile; fileRef = E31BD57821C0CAA900D3651F /* UIView+YYText.m */; };
 		E31BD59421C0CAA900D3651F /* YYTextAsyncLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = E31BD57B21C0CAA900D3651F /* YYTextAsyncLayer.m */; };
 		E31BD59521C0CAA900D3651F /* YYTextWeakProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = E31BD57C21C0CAA900D3651F /* YYTextWeakProxy.m */; };
+		E31BD59821C0E83D00D3651F /* UCFCouponPopupHomeView.m in Sources */ = {isa = PBXBuildFile; fileRef = E31BD59721C0E83D00D3651F /* UCFCouponPopupHomeView.m */; };
+		E31BD59B21C10FC500D3651F /* BaseBottomButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = E31BD59921C10FC400D3651F /* BaseBottomButtonView.m */; };
+		E31BD59E21C112C200D3651F /* UCFCouponPopupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E31BD59D21C112C200D3651F /* UCFCouponPopupCell.m */; };
+		E31BD5A121C1130A00D3651F /* UCFSelectionCouponsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E31BD5A021C1130A00D3651F /* UCFSelectionCouponsCell.m */; };
 		E320200D1CC4BAD70065579C /* WebViewJavascriptBridge_JS.m in Sources */ = {isa = PBXBuildFile; fileRef = E320200A1CC4BAD70065579C /* WebViewJavascriptBridge_JS.m */; };
 		E320200E1CC4BAD70065579C /* WebViewJavascriptBridgeBase.m in Sources */ = {isa = PBXBuildFile; fileRef = E320200C1CC4BAD70065579C /* WebViewJavascriptBridgeBase.m */; };
 		E32020121CC4BCE60065579C /* WebViewJavascriptBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = E32020111CC4BCE60065579C /* WebViewJavascriptBridge.m */; };
@@ -1014,6 +1018,9 @@
 		E37086BB1D61BA5B0041D293 /* UCFHuiShangChooseBankViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E37086B91D61BA5B0041D293 /* UCFHuiShangChooseBankViewCell.xib */; };
 		E37086C71D61E3030041D293 /* UCFOldUserGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E37086C21D61E3030041D293 /* UCFOldUserGuideViewController.m */; };
 		E37086C81D61E3030041D293 /* UCFOldUserGuideViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E37086C31D61E3030041D293 /* UCFOldUserGuideViewController.xib */; };
+		E37FC7E921C241470019C01D /* UCFCouponPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = E37FC7E821C241470019C01D /* UCFCouponPopup.m */; };
+		E37FC7EC21C259B80019C01D /* UCFCouponPopupModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E37FC7EB21C259B80019C01D /* UCFCouponPopupModel.m */; };
+		E37FC7F021C25BD30019C01D /* ModelTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = E37FC7EE21C25BD30019C01D /* ModelTransition.m */; };
 		E3A6A4B31CC71D03003A3FED /* NSString+URL.m in Sources */ = {isa = PBXBuildFile; fileRef = E3A6A4B21CC71D03003A3FED /* NSString+URL.m */; };
 		E3A96B091CBF837C00E8884F /* UCFWorkPointsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3A96B071CBF837C00E8884F /* UCFWorkPointsViewController.m */; };
 		E3A96B0A1CBF837C00E8884F /* UCFWorkPointsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3A96B081CBF837C00E8884F /* UCFWorkPointsViewController.xib */; };
@@ -2812,6 +2819,14 @@
 		E31BD57B21C0CAA900D3651F /* YYTextAsyncLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYTextAsyncLayer.m; sourceTree = "<group>"; };
 		E31BD57C21C0CAA900D3651F /* YYTextWeakProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYTextWeakProxy.m; sourceTree = "<group>"; };
 		E31BD57D21C0CAA900D3651F /* UIPasteboard+YYText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIPasteboard+YYText.h"; sourceTree = "<group>"; };
+		E31BD59621C0E83D00D3651F /* UCFCouponPopupHomeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFCouponPopupHomeView.h; sourceTree = "<group>"; };
+		E31BD59721C0E83D00D3651F /* UCFCouponPopupHomeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFCouponPopupHomeView.m; sourceTree = "<group>"; };
+		E31BD59921C10FC400D3651F /* BaseBottomButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseBottomButtonView.m; sourceTree = "<group>"; };
+		E31BD59A21C10FC400D3651F /* BaseBottomButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseBottomButtonView.h; sourceTree = "<group>"; };
+		E31BD59C21C112C200D3651F /* UCFCouponPopupCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFCouponPopupCell.h; sourceTree = "<group>"; };
+		E31BD59D21C112C200D3651F /* UCFCouponPopupCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFCouponPopupCell.m; sourceTree = "<group>"; };
+		E31BD59F21C1130A00D3651F /* UCFSelectionCouponsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFSelectionCouponsCell.h; sourceTree = "<group>"; };
+		E31BD5A021C1130A00D3651F /* UCFSelectionCouponsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFSelectionCouponsCell.m; sourceTree = "<group>"; };
 		E32020091CC4BAD70065579C /* WebViewJavascriptBridge_JS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewJavascriptBridge_JS.h; sourceTree = "<group>"; };
 		E320200A1CC4BAD70065579C /* WebViewJavascriptBridge_JS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewJavascriptBridge_JS.m; sourceTree = "<group>"; };
 		E320200B1CC4BAD70065579C /* WebViewJavascriptBridgeBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewJavascriptBridgeBase.h; sourceTree = "<group>"; };
@@ -2832,6 +2847,12 @@
 		E37086C11D61E3030041D293 /* UCFOldUserGuideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFOldUserGuideViewController.h; sourceTree = "<group>"; };
 		E37086C21D61E3030041D293 /* UCFOldUserGuideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFOldUserGuideViewController.m; sourceTree = "<group>"; };
 		E37086C31D61E3030041D293 /* UCFOldUserGuideViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCFOldUserGuideViewController.xib; sourceTree = "<group>"; };
+		E37FC7E721C241470019C01D /* UCFCouponPopup.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFCouponPopup.h; sourceTree = "<group>"; };
+		E37FC7E821C241470019C01D /* UCFCouponPopup.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFCouponPopup.m; sourceTree = "<group>"; };
+		E37FC7EA21C259B80019C01D /* UCFCouponPopupModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCFCouponPopupModel.h; sourceTree = "<group>"; };
+		E37FC7EB21C259B80019C01D /* UCFCouponPopupModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCFCouponPopupModel.m; sourceTree = "<group>"; };
+		E37FC7EE21C25BD30019C01D /* ModelTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelTransition.m; sourceTree = "<group>"; };
+		E37FC7EF21C25BD30019C01D /* ModelTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelTransition.h; sourceTree = "<group>"; };
 		E38039641DE5682100C031FF /* JRGC-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JRGC-Bridging-Header.h"; sourceTree = "<group>"; };
 		E3A6A4B11CC71D03003A3FED /* NSString+URL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URL.h"; sourceTree = "<group>"; };
 		E3A6A4B21CC71D03003A3FED /* NSString+URL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+URL.m"; sourceTree = "<group>"; };
@@ -6768,6 +6789,7 @@
 		E31BD50521C0BFD500D3651F /* tools */ = {
 			isa = PBXGroup;
 			children = (
+				E37FC7ED21C25BD30019C01D /* TransitionModel(转成model的方法) */,
 				E31BD54521C0C91400D3651F /* View */,
 				E31BD53D21C0C71500D3651F /* TableView */,
 				E31BD50621C0BFD500D3651F /* BaseModel */,
@@ -6810,6 +6832,8 @@
 		E31BD51321C0C03900D3651F /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				E37FC7E721C241470019C01D /* UCFCouponPopup.h */,
+				E37FC7E821C241470019C01D /* UCFCouponPopup.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -6817,6 +6841,8 @@
 		E31BD51421C0C03900D3651F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E37FC7EA21C259B80019C01D /* UCFCouponPopupModel.h */,
+				E37FC7EB21C259B80019C01D /* UCFCouponPopupModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -6824,6 +6850,12 @@
 		E31BD51521C0C03900D3651F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E31BD59621C0E83D00D3651F /* UCFCouponPopupHomeView.h */,
+				E31BD59721C0E83D00D3651F /* UCFCouponPopupHomeView.m */,
+				E31BD59C21C112C200D3651F /* UCFCouponPopupCell.h */,
+				E31BD59D21C112C200D3651F /* UCFCouponPopupCell.m */,
+				E31BD59F21C1130A00D3651F /* UCFSelectionCouponsCell.h */,
+				E31BD5A021C1130A00D3651F /* UCFSelectionCouponsCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -6895,6 +6927,8 @@
 		E31BD54521C0C91400D3651F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E31BD59A21C10FC400D3651F /* BaseBottomButtonView.h */,
+				E31BD59921C10FC400D3651F /* BaseBottomButtonView.m */,
 				E31BD54721C0C91400D3651F /* BaseView.h */,
 				E31BD54621C0C91400D3651F /* BaseView.m */,
 			);
@@ -7017,6 +7051,15 @@
 			);
 			name = "徽商开通流程";
 			path = olduserguide;
+			sourceTree = "<group>";
+		};
+		E37FC7ED21C25BD30019C01D /* TransitionModel(转成model的方法) */ = {
+			isa = PBXGroup;
+			children = (
+				E37FC7EE21C25BD30019C01D /* ModelTransition.m */,
+				E37FC7EF21C25BD30019C01D /* ModelTransition.h */,
+			);
+			path = "TransitionModel(转成model的方法)";
 			sourceTree = "<group>";
 		};
 		E3A96B051CBF830400E8884F /* workpoints（工分） */ = {
@@ -7905,6 +7948,7 @@
 				E31BD58F21C0CAA900D3651F /* NSParagraphStyle+YYText.m in Sources */,
 				E31BD54821C0C91400D3651F /* BaseView.m in Sources */,
 				74270CA41EC58F6800F9419B /* UCFSignView.m in Sources */,
+				E31BD59E21C112C200D3651F /* UCFCouponPopupCell.m in Sources */,
 				339930AC21A2B0E000C72F54 /* BankTraIntroduceTableViewCell.m in Sources */,
 				83AB495F1F6A766500C4231F /* UCFAccountPieCharViewController.m in Sources */,
 				FB4F9E731D62A6F800CCB492 /* TradePasswordVC.m in Sources */,
@@ -7935,6 +7979,7 @@
 				83FD5FFC1FD0FBA500C57E53 /* UCFAssetProofApplyFirstCell.m in Sources */,
 				7491FBD61AFC5D5400CD0720 /* UCFModifyIdAuthViewController.m in Sources */,
 				7BCE01F61AC8FC260084C15C /* ASIDataCompressor.m in Sources */,
+				E31BD59821C0E83D00D3651F /* UCFCouponPopupHomeView.m in Sources */,
 				A860F2651F5E7DA10017495F /* UCFGoldRebateCell.m in Sources */,
 				746748E01F3C595A0067294D /* UCFGoldBankLimitCell.m in Sources */,
 				33E1A5DF20FDC5A9008244BD /* UCFCustomPopTransitionAnimation.m in Sources */,
@@ -7982,6 +8027,7 @@
 				74270C9B1EC58F6800F9419B /* UCFHomeViewController.m in Sources */,
 				FB1E7F831D8E4230009CBE2C /* UCFProjectDetailViewController.m in Sources */,
 				7BCE01FD1AC8FC260084C15C /* ASINSStringAdditions.m in Sources */,
+				E37FC7F021C25BD30019C01D /* ModelTransition.m in Sources */,
 				74270C961EC58F6800F9419B /* UCFUserInfoModel.m in Sources */,
 				74270D421EC5960100F9419B /* UCFDataDetailModel.m in Sources */,
 				83DAEFC21F166A3B00D7948F /* UCFGoldAuthorizationViewController.m in Sources */,
@@ -8189,6 +8235,7 @@
 				74B98C9A1F70FF5F00CB6A9F /* UCFMineCell.m in Sources */,
 				833A6EAB1E55466B00C8A494 /* UCFCollectionDetailViewController.m in Sources */,
 				83382C1A1FD52EFD001BBF90 /* UCFAssetProofListModel.m in Sources */,
+				E37FC7E921C241470019C01D /* UCFCouponPopup.m in Sources */,
 				83FF3E4A1E12159B00DFB99C /* UCFCashTableViewCell.m in Sources */,
 				FB7EDE3E1D6BFCD700C3E924 /* AppDelegate.mm in Sources */,
 				7443C7371F1F3E64009669C0 /* UCFGoldRechargeRecordCell.m in Sources */,
@@ -8255,6 +8302,7 @@
 				7BCE022E1AC9141A0084C15C /* MBProgressHUD.m in Sources */,
 				74B98CA41F711D7500CB6A9F /* UCFMineFuncSecCell.m in Sources */,
 				33813A5921BFB5D6004666E5 /* MyTableLayout.m in Sources */,
+				E31BD5A121C1130A00D3651F /* UCFSelectionCouponsCell.m in Sources */,
 				7BCE02361AC915720084C15C /* NSData+AES.m in Sources */,
 				838EDD6F1F6B7432008E60EC /* UCFCustomPieViewCell.m in Sources */,
 				33813A5421BFB5D6004666E5 /* MyGridLayout.m in Sources */,
@@ -8321,6 +8369,7 @@
 				83CD843C1F13A50800227704 /* UCFTransferModel.m in Sources */,
 				7485EFD01B0492CE0044DE48 /* UCFRedEnvelopeModel.m in Sources */,
 				83F82E861EBC5DD200B79E02 /* UCFProductListModel.m in Sources */,
+				E31BD59B21C10FC500D3651F /* BaseBottomButtonView.m in Sources */,
 				83D42A8C1FCE6175004C96EF /* UCFShareBaseView.m in Sources */,
 				74877CBA1FB2A95200F32428 /* PageView.m in Sources */,
 				74931A331B1326FE00143424 /* OHTouchesGestureRecognizer.m in Sources */,
@@ -8354,6 +8403,7 @@
 				74F4B8AE1ECAD20E00785DFC /* UCFProfitBackViewController.m in Sources */,
 				A8AD2E3E1EB979760013DB7C /* MongoliaLayerCenter.m in Sources */,
 				33B17644215A14F5007D1F91 /* LMJScrollTextView.m in Sources */,
+				E37FC7EC21C259B80019C01D /* UCFCouponPopupModel.m in Sources */,
 				74931A351B1326FE00143424 /* OHASBasicMarkupParser.m in Sources */,
 				84FFA5301C7EAA9200ACD835 /* UIScrollView+TouchScrollView.m in Sources */,
 				740DAEC11E56E2D100CD7C8F /* UCFBatchProjectController.m in Sources */,

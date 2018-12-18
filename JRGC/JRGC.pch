@@ -19,6 +19,7 @@
 #import "BlockUIAlertView.h"
 #import "UIView+Extension.h"
 #import "MyLayout.h"
+#import "ModelTransition.h"
 #define XPOS 15
 #define YPOS 25
 #define TEXTFIELDHEIGHT 37
@@ -114,6 +115,7 @@ return shared##className; \
 #define TIME            @"time"
 #define DOPA            @"dopa"
 #define DATADIC         @"dataDic" //数字字典
+#define TIMESTAMP       @"timestamp" //优惠券弹框的时间戳
 #define BACK_TO_PERSON_CENTER   @"backOffNotice"
 //#define SAFE_LOGIN_OUT          @"saveloginout"
 //#define BACK_TO_LOGOUT          @"logoutMyCenter"
